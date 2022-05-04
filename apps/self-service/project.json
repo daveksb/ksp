@@ -1,0 +1,93 @@
+{
+  "projectType": "application",
+  "root": "apps/self-service",
+  "sourceRoot": "apps/self-service/src",
+  "prefix": "ksp",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/self-service",
+        "index": "apps/self-service/src/index.html",
+        "main": "apps/self-service/src/main.ts",
+        "polyfills": "apps/self-service/src/polyfills.ts",
+        "tsConfig": "apps/self-service/tsconfig.app.json",
+        "assets": [
+          "apps/self-service/src/favicon.ico",
+          "apps/self-service/src/assets"
+        ],
+        "styles": ["apps/self-service/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/self-service/src/environments/environment.ts",
+              "with": "apps/self-service/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "self-service:build:production"
+        },
+        "development": {
+          "browserTarget": "self-service:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "self-service:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/self-service/**/*.ts",
+          "apps/self-service/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/self-service"],
+      "options": {
+        "jestConfig": "apps/self-service/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

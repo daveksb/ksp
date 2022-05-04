@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "self-service": "apps/self-service",
+    "self-service-e2e": "apps/self-service-e2e"
+  }
+}
