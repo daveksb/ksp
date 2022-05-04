@@ -1,0 +1,21 @@
+.profile__container {
+  text-align: center;
+}
+
+.btn-upload {
+  font-family: 'KSP Bold';
+  font-size: 20px;
+  background: #3f89fe;
+  border: 1px solid #cccccc;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 4px rgba(102, 108, 139, 0.1);
+  border-radius: 10px;
+  color: #fff;
+  padding: 4px 24px;
+  margin: 14px;
+}
+
+.description__label {
+  font-family: 'KSP Bold';
+  font-size: 14px;
+}

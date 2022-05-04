@@ -1,30 +1,30 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router'; // CLI imports router
+import { Routes, RouterModule } from '@angular/router';
 import { SelfServiceHomeComponent } from '@ksp/self-service/feature/home';
+import {
+  SelfServiceLicenseMainComponent,
+  SelfServiceLicenseRequestComponent,
+} from '@ksp/self-service/feature/license';
 import { SelfServiceThaiLoginComponent } from '@ksp/self-service/feature/login';
+import {
+  PaymentChannelComponent,
+  PaymentHistoryComponent,
+} from '@ksp/self-service/ui/payment';
 
 const routes: Routes = [
   { path: 'home', component: SelfServiceHomeComponent },
   { path: 'login', component: SelfServiceThaiLoginComponent },
-  { path: '**', component: SelfServiceHomeComponent },
-  /*
-  { path: 'home', component: SelfServiceHomeComponent },
-  { path: 'register', component: SelfServiceRegisterComponent },
   {
     path: 'license',
-    component: LicenseRequestMainComponent,
+    component: SelfServiceLicenseMainComponent,
     children: [
       {
-        path: 'home',
-        component: LicenseRequestFormComponent,
-      },
-      {
         path: 'request',
-        component: LicenseRequestFormComponent,
+        component: SelfServiceLicenseRequestComponent,
       },
       {
-        path: 'bank-payment',
-        component: BankPaymentComponent,
+        path: 'payment-channel',
+        component: PaymentChannelComponent,
       },
       {
         path: 'payment-history',
@@ -32,7 +32,7 @@ const routes: Routes = [
       },
     ],
   },
-  */
+  { path: '**', component: SelfServiceHomeComponent },
 ];
 
 @NgModule({

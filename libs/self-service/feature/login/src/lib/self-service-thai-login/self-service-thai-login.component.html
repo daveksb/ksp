@@ -1,1 +1,69 @@
-<p>self-service-thai-login works!</p>
+<div class="container">
+  <div class="header__container">
+    <div class="dropdown">
+      <button
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <img src="/assets/images/thai-flag.png" />THAI
+        <img src="/assets/images/arrow-down.svg" />
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">Action</a>
+      </div>
+    </div>
+  </div>
+  <div class="login__container">
+    <div class="login__container--left"></div>
+    <div class="login__container--right">
+      <div class="header__content">
+        <div><img src="/assets/images/K-logo.png" /></div>
+        <h1>เข้าใช้งานเว็บไซต์</h1>
+        <h3>Selfservice</h3>
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label"
+          >รหัสบัตรประชาชน</label
+        >
+        <input
+          type="email"
+          class="form-control form-control-lg"
+          id="exampleFormControlInput1"
+          placeholder="กรุณากรอกรหัสบัตรประชาชน 13 หลัก"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label"
+          >รหัสผ่าน</label
+        >
+        <input
+          type="email"
+          class="form-control form-control-lg"
+          id="exampleFormControlInput1"
+          placeholder="รหัสผ่าน"
+        />
+      </div>
+      <div class="footer__content">
+        <div class="label__third">ลืมรหัสผ่าน?</div>
+
+        <button
+          (click)="login()"
+          type="button"
+          class="btn btn-primary btn-lg label__button"
+        >
+          เข้าสู่ระบบ
+        </button>
+        <div (click)="register()" class="label__secondary">สมัครสมาชิก</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    ​
+    <div class="footer__label">service support 20-484-3976 hotline 1124</div>
+  </div>
+</div>

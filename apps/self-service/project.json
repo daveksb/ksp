@@ -17,15 +17,18 @@
           "apps/self-service/src/favicon.ico",
           "apps/self-service/src/assets"
         ],
-        "styles": ["apps/self-service/src/styles.css"],
-        "scripts": []
+        "styles": [
+          "apps/self-service/src/styles.css",
+          "node_modules/bootstrap/dist/css/bootstrap.min.css"
+        ],
+        "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"]
       },
       "configurations": {
         "production": {
           "budgets": [
             {
               "type": "initial",
-              "maximumWarning": "500kb",
+              "maximumWarning": "1mb",
               "maximumError": "1mb"
             },
             {
