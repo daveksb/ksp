@@ -15,7 +15,11 @@
         "tsConfig": "apps/self-service/tsconfig.app.json",
         "assets": [
           "apps/self-service/src/favicon.ico",
-          "apps/self-service/src/assets"
+          {
+            "input": "libs/shared/assets/src/assets",
+            "glob": "**/*",
+            "output": "./assets"
+          }
         ],
         "styles": [
           "apps/self-service/src/styles.css",

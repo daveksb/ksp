@@ -34,7 +34,8 @@
       ],
       "@ksp/self-service/ui/tab-container": [
         "libs/self-service/ui/tab-container/src/index.ts"
-      ]
+      ],
+      "@ksp/shared/assets": ["libs/shared/assets/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
