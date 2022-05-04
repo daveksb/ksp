@@ -2,7 +2,6 @@
   "version": 2,
   "projects": {
     "self-service": "apps/self-service",
-    "self-service-e2e": "apps/self-service-e2e",
     "self-service-feature-home": "libs/self-service/feature/home",
     "self-service-feature-license": "libs/self-service/feature/license",
     "self-service-feature-login": "libs/self-service/feature/login",
