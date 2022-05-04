@@ -1,0 +1,57 @@
+.container-fluid {
+  margin: 0;
+  padding: 0;
+  max-width: 1440px;
+  height: 100vh;
+}
+
+.navbar {
+  padding: 15px 10px;
+  background-image: url(/assets/images/header-sidebar.png);
+  background-size: cover;
+  height: 54px;
+  width: 100%;
+}
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: stretch;
+}
+
+#content {
+  max-width: 1440px;
+  padding: 92px;
+  height: 100vh;
+  width: 100%;
+  padding: 0 0 0 12px;
+  min-height: 100vh;
+  transition: all 0.3s;
+}
+
+/* ---------------------------------------------------
+  MEDIAQUERIES
+----------------------------------------------------- */
+@font-face {
+  font-family: 'KSP Regular';
+  src: URL('/assets/font/KSP/ttf/KSP\ Regular\ ver\ 1.00.ttf')
+    format('truetype');
+  font-family: 'KSP Bold';
+  src: URL('/assets/font/KSP/KSP\ Bold\ ver\ 1.00.ttf') format('truetype');
+}
+
+@media only screen and (max-width: 768px) {
+  .navbar-light .navbar-toggler-icon {
+    background-image: url(/assets/images/menu-mobile.png);
+    width: 18px;
+  }
+
+  .navbar {
+    padding: 15px 10px;
+    background-image: url(/assets/images/nav-img.png);
+    background-size: cover;
+    height: 54px;
+    width: 100%;
+  }
+}

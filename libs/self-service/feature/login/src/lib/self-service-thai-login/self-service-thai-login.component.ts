@@ -14,6 +14,6 @@ export class SelfServiceThaiLoginComponent {
   }
 
   login() {
-    this.router.navigate(['/', 'license', 'home']);
+    this.router.navigate(['/', 'license', 'request']);
   }
 }
