@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/self-service/feature/home",
+  "sourceRoot": "libs/self-service/feature/home/src",
+  "prefix": "ksp",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/self-service/feature/home"],
+      "options": {
+        "jestConfig": "libs/self-service/feature/home/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/self-service/feature/home/**/*.ts",
+          "libs/self-service/feature/home/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

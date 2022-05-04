@@ -14,7 +14,28 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@ksp/self-service/feature/home": [
+        "libs/self-service/feature/home/src/index.ts"
+      ],
+      "@ksp/self-service/feature/license": [
+        "libs/self-service/feature/license/src/index.ts"
+      ],
+      "@ksp/self-service/feature/login": [
+        "libs/self-service/feature/login/src/index.ts"
+      ],
+      "@ksp/self-service/feature/register": [
+        "libs/self-service/feature/register/src/index.ts"
+      ],
+      "@ksp/self-service/ui/forms": ["libs/self-service/ui/forms/src/index.ts"],
+      "@ksp/self-service/ui/menu": ["libs/self-service/ui/menu/src/index.ts"],
+      "@ksp/self-service/ui/payment": [
+        "libs/self-service/ui/payment/src/index.ts"
+      ],
+      "@ksp/self-service/ui/tab-container": [
+        "libs/self-service/ui/tab-container/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
