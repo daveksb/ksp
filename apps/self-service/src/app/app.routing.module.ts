@@ -6,6 +6,10 @@ import {
   SelfServiceLicenseRequestComponent,
 } from '@ksp/self-service/feature/license';
 import { SelfServiceThaiLoginComponent } from '@ksp/self-service/feature/login';
+import {
+  PaymentChannelComponent,
+  PaymentHistoryComponent,
+} from '@ksp/self-service/ui/payment';
 
 const routes: Routes = [
   { path: 'home', component: SelfServiceHomeComponent },
@@ -17,6 +21,14 @@ const routes: Routes = [
       {
         path: 'request',
         component: SelfServiceLicenseRequestComponent,
+      },
+      {
+        path: 'payment-channel',
+        component: PaymentChannelComponent,
+      },
+      {
+        path: 'payment-history',
+        component: PaymentHistoryComponent,
       },
     ],
   },

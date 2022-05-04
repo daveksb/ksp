@@ -1,0 +1,163 @@
+.container {
+  max-width: 1440px;
+  padding: 92px;
+  height: 100vh;
+}
+
+.content__container {
+  background: #ffffff;
+  box-shadow: 0px 0px 15px #e2e2e2;
+  border-radius: 20px;
+  padding: 32px 24px;
+}
+
+.header__label {
+  font-family: 'KSP Bold';
+  font-size: 20px;
+  color: #000000;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.content__label {
+  font-family: 'KSP Bold';
+  font-size: 18px;
+  color: #000000;
+  margin-bottom: 4px;
+}
+
+.date__label {
+  color: #3f89fe;
+  padding-left: 8px;
+}
+
+.table {
+  font-family: 'KSP Bold';
+  font-size: 14px;
+  background-color: #edf8ff;
+  border: 1px solid #ecedf3;
+  color: #333333;
+}
+
+.header__container {
+  text-align: center;
+}
+
+.body__table {
+  background-color: #fff;
+  color: #a6a6a6;
+}
+
+.detail__table {
+  text-align: center;
+}
+
+.box__container {
+  display: flex;
+  justify-content: space-between;
+  background-color: #edf8ff;
+  color: #3dabfc;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.box__container--right {
+  display: flex;
+}
+
+.icon__box {
+  padding: 4px 0 4px 12px;
+}
+
+.label__box {
+  font-family: 'KSP Bold';
+  font-size: 22px;
+}
+
+.card__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 42px;
+}
+
+.card__content {
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  grid-column-gap: 12px;
+  padding: 8px 12px;
+  background: #edf8ff;
+  box-sizing: border-box;
+  border-radius: 6px;
+  margin: 24px 0 0 0;
+  height: 66px;
+}
+
+.title__card {
+  font-family: 'KSP Bold';
+  font-size: 20px;
+  color: #000000;
+}
+
+.title__card--secondary {
+  font-family: 'KSP Bold';
+  font-size: 20px;
+  color: #000000;
+  padding-top: 10px;
+}
+
+.label__card {
+  font-family: 'KSP Bold';
+  font-size: 14px;
+  color: #a6a6a6;
+}
+
+.card__img {
+  padding: 4px 0 4px 0px;
+}
+
+.icon__card {
+  padding: 12px 0 12px 12px;
+  text-align: end;
+}
+
+.label__payment {
+  font-family: 'KSP Bold';
+  font-size: 22px;
+  color: #666666;
+  margin-top: 36px;
+}
+
+@font-face {
+  font-family: 'KSP Regular';
+  src: URL('/assets/font/KSP/ttf/KSP\ Regular\ ver\ 1.00.ttf')
+    format('truetype');
+  font-family: 'KSP Bold';
+  src: URL('/assets/font/KSP/KSP\ Bold\ ver\ 1.00.ttf') format('truetype');
+}
+
+@media only screen and (max-width: 768px) {
+  .container {
+    width: 100%;
+    height: 100vh;
+
+    padding: 24px;
+  }
+
+  .label__box {
+    font-family: 'KSP Bold';
+    font-size: 18px;
+  }
+
+  .card__container {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .label__payment {
+    text-align: center;
+  }
+
+  .icon__box {
+    padding: 0 0 0 8px;
+  }
+}
