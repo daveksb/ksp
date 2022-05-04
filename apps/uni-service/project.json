@@ -1,0 +1,93 @@
+{
+  "projectType": "application",
+  "root": "apps/uni-service",
+  "sourceRoot": "apps/uni-service/src",
+  "prefix": "ksp",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/uni-service",
+        "index": "apps/uni-service/src/index.html",
+        "main": "apps/uni-service/src/main.ts",
+        "polyfills": "apps/uni-service/src/polyfills.ts",
+        "tsConfig": "apps/uni-service/tsconfig.app.json",
+        "assets": [
+          "apps/uni-service/src/favicon.ico",
+          "apps/uni-service/src/assets"
+        ],
+        "styles": ["apps/uni-service/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/uni-service/src/environments/environment.ts",
+              "with": "apps/uni-service/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "uni-service:build:production"
+        },
+        "development": {
+          "browserTarget": "uni-service:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "uni-service:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/uni-service/**/*.ts",
+          "apps/uni-service/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/uni-service"],
+      "options": {
+        "jestConfig": "apps/uni-service/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
