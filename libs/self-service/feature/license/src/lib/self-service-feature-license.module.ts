@@ -6,6 +6,7 @@ import { SelfServiceUiMenuModule } from '@ksp/self-service/ui/menu';
 import { SelfServiceLicenseRequestComponent } from './self-service-license-request/self-service-license-request.component';
 import { SelfServiceUiFormsModule } from '@ksp/self-service/ui/forms';
 import { SelfServiceUiTabContainerModule } from '@ksp/self-service/ui/tab-container';
+import { SelfServiceLicenseEditComponent } from './self-service-license-edit/self-service-license-edit.component';
 
 @NgModule({
   imports: [
@@ -18,10 +19,12 @@ import { SelfServiceUiTabContainerModule } from '@ksp/self-service/ui/tab-contai
   declarations: [
     SelfServiceLicenseMainComponent,
     SelfServiceLicenseRequestComponent,
+    SelfServiceLicenseEditComponent,
   ],
   exports: [
     SelfServiceLicenseMainComponent,
     SelfServiceLicenseRequestComponent,
+    SelfServiceLicenseEditComponent,
   ],
 })
 export class SelfServiceFeatureLicenseModule {}
