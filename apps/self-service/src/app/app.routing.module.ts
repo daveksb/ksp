@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SelfServiceHomeComponent } from '@ksp/self-service/feature/home';
 import {
+  SelfServiceLicenseEditComponent,
   SelfServiceLicenseMainComponent,
   SelfServiceLicenseRequestComponent,
 } from '@ksp/self-service/feature/license';
@@ -29,6 +30,10 @@ const routes: Routes = [
       {
         path: 'payment-history',
         component: PaymentHistoryComponent,
+      },
+      {
+        path: 'edit',
+        component: SelfServiceLicenseEditComponent,
       },
     ],
   },
