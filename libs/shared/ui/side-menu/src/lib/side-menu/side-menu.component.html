@@ -14,7 +14,7 @@
   <ul class="list-unstyled components">
     <ng-container *ngFor="let menu of menuConfig">
       <li *ngIf="!menu.subMenu?.length">
-        <a routerLink="{{ menu }}"
+        <a routerLink="{{ menu.path }}"
           ><img src="{{ menu.icon }}" class="icon__sidenav" />{{
             menu.label
           }}</a

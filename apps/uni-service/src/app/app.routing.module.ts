@@ -5,6 +5,7 @@ import { UniServiceContainerPageComponent } from '@ksp/uni-service/feature/conta
 import { UniServiceHomeComponent } from '@ksp/uni-service/feature/home';
 import { UniServiceLoginComponent } from '@ksp/uni-service/feature/login';
 import { UniServiceRegisterComponent } from '@ksp/uni-service/feature/register';
+import { UniServiceRequestDegreeCertComponent } from '@ksp/uni-service/feature/request-degree-cert';
 
 const routes: Routes = [
   { path: 'login', component: UniServiceLoginComponent },
@@ -17,6 +18,10 @@ const routes: Routes = [
       {
         path: 'home',
         component: UniServiceHomeComponent,
+      },
+      {
+        path: 'request',
+        component: UniServiceRequestDegreeCertComponent,
       },
     ],
   },
