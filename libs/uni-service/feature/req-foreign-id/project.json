@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/uni-service/feature/req-foreign-id",
+  "sourceRoot": "libs/uni-service/feature/req-foreign-id/src",
+  "prefix": "ksp",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/uni-service/feature/req-foreign-id"],
+      "options": {
+        "jestConfig": "libs/uni-service/feature/req-foreign-id/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/uni-service/feature/req-foreign-id/**/*.ts",
+          "libs/uni-service/feature/req-foreign-id/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

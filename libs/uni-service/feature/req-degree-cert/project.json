@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/uni-service/feature/req-degree-cert",
+  "sourceRoot": "libs/uni-service/feature/req-degree-cert/src",
+  "prefix": "ksp",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/uni-service/feature/req-degree-cert"],
+      "options": {
+        "jestConfig": "libs/uni-service/feature/req-degree-cert/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/uni-service/feature/req-degree-cert/**/*.ts",
+          "libs/uni-service/feature/req-degree-cert/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
