@@ -1,10 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { UniversitySearchComponent } from '@ksp/shared/ui/university-search';
+import { UniServiceHomeComponent } from '@ksp/uni-service/feature/home';
 import { UniServiceLoginComponent } from '@ksp/uni-service/feature/login';
+import { UniServiceRegisterComponent } from '@ksp/uni-service/feature/register';
 
 const routes: Routes = [
   { path: 'login', component: UniServiceLoginComponent },
-  /* { path: 'login', component: SelfServiceThaiLoginComponent },
+  { path: 'home', component: UniServiceHomeComponent },
+  { path: 'register', component: UniServiceRegisterComponent },
+  { path: 'search-uni', component: UniversitySearchComponent },
+  /*
   {
     path: 'license',
     component: SelfServiceLicenseMainComponent,

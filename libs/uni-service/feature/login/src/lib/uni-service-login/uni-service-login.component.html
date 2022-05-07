@@ -43,12 +43,20 @@
           <div class="label__third">ลืมรหัสผ่าน?</div>
         </div>
         <div class="button__content">
-          <button type="submit" class="btn btn-primary btn-sm label__button">
+          <button
+            (click)="home()"
+            type="submit"
+            class="btn btn-primary btn-sm label__button"
+          >
             เข้าสู่ระบบ
           </button>
           <hr />
           <div class="label__secondary">ยังไม่มีรหัสเข้าใช้งาน</div>
-          <button type="button" class="btn btn-secondary btn-sm label__button">
+          <button
+            (click)="register()"
+            type="button"
+            class="btn btn-secondary btn-sm label__button"
+          >
             ลงทะเบียนขอรับรหัสเข้าใช้งาน
           </button>
         </div>

@@ -1,0 +1,237 @@
+<div class="container">
+  <div class="header__container">
+    <div class="haeder__label">ลงทะเบียนขอรับรหัสเข้าใช้งาน</div>
+  </div>
+
+  <div class="title__label">
+    รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ (ผู้ประสานงาน / ผู้รับผิดชอบ)
+  </div>
+  <div class="content__container">
+    <div class="content__header">
+      <div class="label__content">
+        วันที่ทำรายการ :
+        <span class="label__content--primary">10 ตุลาคม 2565</span>
+      </div>
+      <div class="label__content">
+        เลขใบคำขอ :
+        <span class="label__content--secondary">112234467876543</span>
+      </div>
+    </div>
+
+    <hr />
+    <div class="img__step">
+      <img src="/assets/images/img-uni/stepper.png" />
+    </div>
+    <div class="detail__container">
+      <div class="detail__header">กรุณาเลือกสถาบันที่ท่านสังกัด</div>
+      <div class="detail__content">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >สถาบัน / มหาวิทยาลัย</label
+          >
+          <input
+            (click)="search()"
+            class="form-control form-control-sm"
+            type="search"
+            placeholder="กรุณาเลือก"
+          />
+          <!-- <select
+            class="search__content form-select form-select-sm"
+            aria-label=".form-select-sm example"
+          >
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+          </select> -->
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >สังกัด</label
+          >
+          <input
+            (click)="search()"
+            class="form-control form-control-sm"
+            type="search"
+            placeholder="กรุณาเลือก"
+          />
+          <!--           <select
+            class="search__content form-select form-select-sm"
+            aria-label=".form-select-sm example"
+          >
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+          </select> -->
+        </div>
+      </div>
+    </div>
+    <div class="detail__container">
+      <div class="detail__header">
+        ข้อมูลผู้แต่งตั้งผู้ประสานงาน / ผู้รับผิดชอบ (ที่ระบุไว้ในเอกสารแนบ)
+      </div>
+      <div class="detail__content--secondary">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >คำนำหน้าชื่อภาษาไทย</label
+          >
+          <select
+            class="form-select form-select-sm"
+            aria-label=".form-select-sm example"
+          >
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >ชื่อภาษาไทย</label
+          >
+          <input class="form-control form-control-sm" type="text" />
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >นามสกุลภาษาไทย</label
+          >
+          <input class="form-control form-control-sm" type="text" />
+        </div>
+      </div>
+      <div class="detail__content--secondary">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >คำนำหน้าชื่ออังกฤษ</label
+          >
+          <select
+            class="form-select form-select-sm"
+            aria-label=".form-select-sm example"
+          >
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >ชื่อภาษาอังกฤษ</label
+          >
+          <input class="form-control form-control-sm" type="text" />
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >นามสกุลภาษาอังกฤษ</label
+          >
+          <input class="form-control form-control-sm" type="text" />
+        </div>
+      </div>
+      <div class="detail__content">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >ตำแหน่งทางการบริหาร</label
+          >
+          <input class="form-control form-control-sm" type="text" />
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >สังกัด</label
+          >
+          <input class="form-control form-control-sm" type="text" />
+        </div>
+      </div>
+      <div class="detail__content">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >เบอร์โทรศัพท์ (ที่ทำงาน)</label
+          >
+          <input class="form-control form-control-sm" type="text" />
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >เบอร์โทรศัพท์ (ที่ติดต่อได้)</label
+          >
+          <input class="form-control form-control-sm" type="text" />
+        </div>
+      </div>
+      <div class="detail__content">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">อีเมล</label>
+          <input class="form-control form-control-sm" type="text" />
+        </div>
+      </div>
+    </div>
+    <div class="detail__container">
+      <div class="detail__header">กรุณาแนบหลักฐานเพื่อพิจารณา</div>
+      <div class="table-responsive">
+        <table class="table">
+          <thead class="header__table">
+            <tr>
+              <th scope="col">รายการเอกสาร</th>
+              <th scope="col" class="title__table">จำนวนหน้า</th>
+              <th scope="col" class="title__table">อัพโหลด</th>
+            </tr>
+          </thead>
+          <tbody class="body__table">
+            <tr>
+              <th scope="row">
+                หนังสือแต่ตั้งผู้ประสานงาน
+                <div>
+                  xxxxxxxxxxxxxxxx-xxxxxxxx_xxxxx.pdf<img
+                    src="/assets/images/img-uni/close.svg"
+                  />
+                </div>
+                <div>
+                  xxxxxxxx_xxxxx.pdf<img
+                    src="/assets/images/img-uni/loader.svg"
+                  />
+                </div>
+              </th>
+              <td class="detail__table">
+                <br />
+                <div>2</div>
+                <div>2</div>
+              </td>
+              <td class="detail__table">
+                <button
+                  type="button"
+                  class="btn btn-upload btn-sm label__button"
+                >
+                  + อัพโหลดไฟล์
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">สำเนาบัตรประชาชน</th>
+              <td class="detail__table">-</td>
+              <td class="detail__table">
+                <button
+                  type="button"
+                  class="btn btn-upload btn-sm label__button"
+                >
+                  + อัพโหลดไฟล์
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="footer__container">
+      <div class="footer__content--left">
+        <button type="button" class="btn btn-third btn-sm label__button">
+          ย้อนกลับ
+        </button>
+      </div>
+      <div class="footer__content">
+        <button type="button" class="btn btn-fourth btn-sm label__button">
+          ยกเลิก
+        </button>
+        <button
+          (click)="search()"
+          type="button"
+          class="btn btn-primary btn-sm label__button"
+        >
+          บันทึก
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
