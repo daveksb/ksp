@@ -1,6 +1,9 @@
 <div class="container-fluid">
   <div class="wrapper">
-    <ksp-self-service-side-menu></ksp-self-service-side-menu>
+    <ksp-side-menu
+      [menuConfig]="menuConfig"
+      [showHeader]="true"
+    ></ksp-side-menu>
 
     <div id="content">
       <nav class="navbar navbar-expand-lg navbar-light">
