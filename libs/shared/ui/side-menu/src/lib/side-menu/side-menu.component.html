@@ -2,13 +2,14 @@
   <div class="sidebar-header">
     <div><img src="/assets/images/logo-sidenav.png" /></div>
   </div>
-  <!--   <div class="sidebar-header-profile">
+
+  <div *ngIf="showHeader" class="sidebar-header-profile">
     <div class="profile__img"><img src="/assets/images/profile.png" /></div>
     <div class="profile__content">
       <div>จิราภรณ์ รักไทรทอง</div>
       <div class="label__status">เข้าใช้ล่าสุดวันที่ 1 มกราคม 2565</div>
     </div>
-  </div> -->
+  </div>
 
   <ul class="list-unstyled components">
     <ng-container *ngFor="let menu of menuConfig">

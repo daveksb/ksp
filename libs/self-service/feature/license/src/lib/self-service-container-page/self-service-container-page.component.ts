@@ -34,11 +34,11 @@ export class SelfServiceContainerPageComponent {
           },
           {
             label: 'ขอต่ออายุใบประกอบวิชาชีพ',
-            path: '#',
+            path: '',
           },
           {
             label: 'ขอใบแทนใบอนุญาตประกอบวิชาชีพ',
-            path: '#',
+            path: '',
           },
           {
             label: '##ช่องทางชำระเงิน',

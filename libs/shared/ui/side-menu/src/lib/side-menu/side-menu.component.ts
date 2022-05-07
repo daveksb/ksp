@@ -16,6 +16,7 @@ export interface MenuConfig {
 })
 export class SideMenuComponent {
   @Input() menuConfig: MenuConfig[] = [];
+  @Input() showHeader = false;
 
   /* menuConfig: MenuConfig[] = [
     {
