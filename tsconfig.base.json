@@ -36,6 +36,7 @@
         "libs/self-service/ui/tab-container/src/index.ts"
       ],
       "@ksp/shared/assets": ["libs/shared/assets/src/index.ts"],
+      "@ksp/shared/ui/side-menu": ["libs/shared/ui/side-menu/src/index.ts"],
       "@ksp/shared/ui/university-search": [
         "libs/shared/ui/university-search/src/index.ts"
       ],
