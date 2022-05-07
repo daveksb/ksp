@@ -13,7 +13,7 @@
   <ul class="list-unstyled components">
     <ng-container *ngFor="let menu of menuConfig">
       <li *ngIf="!menu.subMenu?.length">
-        <a
+        <a routerLink="{{ menu }}"
           ><img src="{{ menu.icon }}" class="icon__sidenav" />{{
             menu.label
           }}</a
@@ -23,129 +23,25 @@
         <a
           data-bs-toggle="collapse"
           role="button"
-          href="#homeSubmenu"
+          href="#{{ menu.subMenuName }}"
           aria-expanded="false"
-          aria-controls="homeSubmenu"
           class="dropdown-toggle"
           ><img src="{{ menu.icon }}" class="icon__sidenav" />{{
             menu.label
           }}</a
         >
         <ul
-          class="collapse show list-unstyled list-style-type"
-          id="homeSubmenu"
+          [ngClass]="{ show: menu.isExpanded }"
+          class="collapse list-unstyled list-style-type"
+          id="{{ menu.subMenuName }}"
         >
           <ng-container *ngFor="let subMenu of menu.subMenu">
             <li>
-              <a routerLink="subMenu.url">{{ subMenu.label }}</a>
+              <a routerLink="{{ subMenu.path }}">{{ subMenu.label }}</a>
             </li>
           </ng-container>
         </ul>
       </li>
     </ng-container>
   </ul>
-  <!--
-  <ul class="list-unstyled components">
-    <li>
-      <a href="#"
-        ><img
-          src="/assets/images/icon-sidenav/home.svg "
-          class="icon__sidenav"
-        />หน้าแรก</a
-      >
-    </li>
-    <li>
-      <a href="#"
-        ><img
-          src="/assets/images/icon-sidenav/paper.svg"
-          class="icon__sidenav"
-        />ยื่นใบคำขอ</a
-      >
-    </li>
-
-    <li>
-      <a
-        data-bs-toggle="collapse"
-        role="button"
-        href="#homeSubmenu"
-        aria-expanded="false"
-        aria-controls="homeSubmenu"
-        class="dropdown-toggle"
-        ><img
-          src="/assets/images/icon-sidenav/card.svg"
-          class="icon__sidenav"
-        />ใบอนุญาตประกอบวิชาชีพ</a
-      >
-      <ul class="collapse list-unstyled list-style-type" id="homeSubmenu">
-        <li>
-          <a routerLink="request">ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ</a>
-        </li>
-        <li>
-          <a href="#">ขอต่ออายุใบประกอบวิชาชีพ</a>
-        </li>
-        <li>
-          <a href="#">ขอใบแทนใบอนุญาตประกอบวิชาชีพ</a>
-        </li>
-        <li>
-          <a routerLink="payment-channel">##ช่องทางชำระเงิน##</a>
-        </li>
-        <li>
-          <a routerLink="edit">##แก้ไขใบอนุญาต##</a>
-        </li>
-      </ul>
-    </li>
-    <li>
-      <a href="#"
-        ><img
-          src="/assets/images/icon-sidenav/event.svg"
-          class="icon__sidenav"
-        />กิจกรรมการพัฒนาตัวเอง</a
-      >
-    </li>
-
-    <li>
-      <a href="#"
-        ><img
-          src="/assets/images/icon-sidenav/reward.svg"
-          class="icon__sidenav"
-        />รางวัลของฉัน</a
-      >
-    </li>
-    <li>
-      <a
-        data-bs-toggle="collapse"
-        role="button"
-        href="#myProfile"
-        aria-expanded="false"
-        aria-controls="myProfile"
-        class="dropdown-toggle"
-        ><img
-          src="/assets/images/icon-sidenav/people.svg"
-          class="icon__sidenav"
-        />ข้อมูลของฉัน</a
-      >
-      <ul class="collapse list-unstyled list-style-type" id="myProfile">
-        <li>
-          <a>ข้อมูลส่วนตัว</a>
-        </li>
-        <li>
-          <a>สถานที่ทำงาน</a>
-        </li>
-        <li>
-          <a>ข้อมูลการศึกษา</a>
-        </li>
-        <li>
-          <a>ข้อมูลประสบการณ์วิชาชีพ</a>
-        </li>
-        <li>
-          <a>ข้อมูลผลการประเมินสมรรถนะ</a>
-        </li>
-        <li>
-          <a routerLink="payment-history"
-            >ประวัติการชำระเงินและใบเสร็จรับเงิน</a
-          >
-        </li>
-      </ul>
-    </li>
-  </ul> -->
 </nav>

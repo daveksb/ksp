@@ -1,4 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+export interface MenuConfig {
+  icon?: string;
+  label: string;
+  path: string;
+  subMenu?: MenuConfig[];
+  subMenuName?: string;
+  isExpanded?: boolean;
+}
 
 @Component({
   selector: 'ksp-side-menu',
@@ -6,41 +15,45 @@ import { Component } from '@angular/core';
   styleUrls: ['./side-menu.component.css'],
 })
 export class SideMenuComponent {
-  menuConfig = [
+  @Input() menuConfig: MenuConfig[] = [];
+
+  /* menuConfig: MenuConfig[] = [
     {
       icon: 'assets/images/icon-sidenav/home.svg ',
       label: 'หน้าแรก',
-      subMenu: null,
+      path: '',
     },
     {
       icon: 'assets/images/icon-sidenav/paper.svg',
       label: 'ยื่นใบคำขอ',
+      path: '',
       subMenu: [
         {
-          url: 'home',
+          path: 'home',
           label: 'ขอรับรอง...',
         },
         {
-          url: '',
+          path: '',
           label: 'ขอสร้าง..',
         },
       ],
+      subMenuName: 'license',
       isExpanded: true,
     },
     {
       icon: 'assets/images/icon-sidenav/card.svg',
       label: 'ทะเบียน',
-      subMenu: [],
+      path: '',
     },
     {
       icon: 'assets/images/icon-sidenav/card.svg',
       label: 'รายงาน',
-      subMenu: [],
+      path: '',
     },
     {
       icon: 'assets/images/icon-sidenav/card.svg',
       label: 'ตั้งค่า',
-      subMenu: [],
+      path: '',
     },
-  ];
+  ]; */
 }
