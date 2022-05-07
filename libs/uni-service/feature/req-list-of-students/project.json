@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/uni-service/feature/req-list-of-students",
+  "sourceRoot": "libs/uni-service/feature/req-list-of-students/src",
+  "prefix": "ksp",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/uni-service/feature/req-list-of-students"],
+      "options": {
+        "jestConfig": "libs/uni-service/feature/req-list-of-students/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/uni-service/feature/req-list-of-students/**/*.ts",
+          "libs/uni-service/feature/req-list-of-students/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

@@ -22,7 +22,7 @@ export class UniServiceContainerPageComponent {
         path: '',
         subMenu: [
           {
-            path: 'request',
+            path: 'degree-cert',
             label: 'ขอรับรองปริญญาและประกาศนียบัตร',
           },
           {

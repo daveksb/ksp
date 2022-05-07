@@ -5,14 +5,19 @@ import { UniServiceContainerPageComponent } from '@ksp/uni-service/feature/conta
 import { UniServiceHomeComponent } from '@ksp/uni-service/feature/home';
 import { UniServiceLoginComponent } from '@ksp/uni-service/feature/login';
 import { UniServiceRegisterComponent } from '@ksp/uni-service/feature/register';
-import { UniServiceRequestDegreeCertComponent } from '@ksp/uni-service/feature/request-degree-cert';
+import {
+  ReqDegreeCertHomeComponent,
+  ReqDegreeCertStepOneComponent,
+  ReqDegreeCertStepThreeComponent,
+  ReqDegreeCertStepTwoComponent,
+} from '@ksp/uni-service/feature/req-degree-cert';
 
 const routes: Routes = [
   { path: 'login', component: UniServiceLoginComponent },
   { path: 'register', component: UniServiceRegisterComponent },
-  { path: 'search-uni', component: UniversitySearchComponent },
+  { path: 'search-uni', component: UniversitySearchComponent }, // temp
   {
-    path: 'license',
+    path: 'request',
     component: UniServiceContainerPageComponent,
     children: [
       {
@@ -20,8 +25,20 @@ const routes: Routes = [
         component: UniServiceHomeComponent,
       },
       {
-        path: 'request',
-        component: UniServiceRequestDegreeCertComponent,
+        path: 'degree-cert',
+        component: ReqDegreeCertHomeComponent,
+      },
+      {
+        path: 'degree-cert-1',
+        component: ReqDegreeCertStepOneComponent,
+      },
+      {
+        path: 'degree-cert-2',
+        component: ReqDegreeCertStepTwoComponent,
+      },
+      {
+        path: 'degree-cert-3',
+        component: ReqDegreeCertStepThreeComponent,
       },
     ],
   },
