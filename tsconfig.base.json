@@ -35,7 +35,22 @@
       "@ksp/self-service/ui/tab-container": [
         "libs/self-service/ui/tab-container/src/index.ts"
       ],
-      "@ksp/shared/assets": ["libs/shared/assets/src/index.ts"]
+      "@ksp/shared/assets": ["libs/shared/assets/src/index.ts"],
+      "@ksp/uni-service/feature/home": [
+        "libs/uni-service/feature/home/src/index.ts"
+      ],
+      "@ksp/uni-service/feature/login": [
+        "libs/uni-service/feature/login/src/index.ts"
+      ],
+      "@ksp/uni-service/feature/register": [
+        "libs/uni-service/feature/register/src/index.ts"
+      ],
+      "@ksp/uni-service/feature/request-degree-cert": [
+        "libs/uni-service/feature/request-degree-cert/src/index.ts"
+      ],
+      "@ksp/uni-service/feature/withdraw": [
+        "libs/uni-service/feature/withdraw/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -11,6 +11,11 @@
     "self-service-ui-payment": "libs/self-service/ui/payment",
     "self-service-ui-tab-container": "libs/self-service/ui/tab-container",
     "shared-assets": "libs/shared/assets",
-    "uni-service": "apps/uni-service"
+    "uni-service": "apps/uni-service",
+    "uni-service-feature-home": "libs/uni-service/feature/home",
+    "uni-service-feature-login": "libs/uni-service/feature/login",
+    "uni-service-feature-register": "libs/uni-service/feature/register",
+    "uni-service-feature-request-degree-cert": "libs/uni-service/feature/request-degree-cert",
+    "uni-service-feature-withdraw": "libs/uni-service/feature/withdraw"
   }
 }

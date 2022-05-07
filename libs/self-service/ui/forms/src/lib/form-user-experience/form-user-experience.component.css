@@ -33,6 +33,15 @@
   color: #000000;
 }
 
+input[type='checkbox' i].ksp-checkbox {
+  border-radius: 5em;
+  border: 1px solid #88d2ff !important;
+}
+
+.checkbox-label {
+  margin-left: 5px;
+}
+
 .form-select {
   background-color: #edf8ff;
   background-image: url(/assets/images/arrow-down-icon.png);

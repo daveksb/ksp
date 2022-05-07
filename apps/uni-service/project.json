@@ -15,10 +15,17 @@
         "tsConfig": "apps/uni-service/tsconfig.app.json",
         "assets": [
           "apps/uni-service/src/favicon.ico",
-          "apps/uni-service/src/assets"
+          {
+            "input": "libs/shared/assets/src/assets",
+            "glob": "**/*",
+            "output": "./assets"
+          }
         ],
-        "styles": ["apps/uni-service/src/styles.css"],
-        "scripts": []
+        "styles": [
+          "apps/uni-service/src/styles.css",
+          "node_modules/bootstrap/dist/css/bootstrap.min.css"
+        ],
+        "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"]
       },
       "configurations": {
         "production": {
