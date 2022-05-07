@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'uni-service-feature-withdraw',
+  displayName: 'shared-ui-university-search',
   preset: '../../../../jest.preset.ts',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../../coverage/libs/uni-service/feature/withdraw',
+  coverageDirectory: '../../../../coverage/libs/shared/ui/university-search',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SelfServiceLicenseMainComponent } from './self-service-license-main/self-service-license-main.component';
+import { SelfServiceContainerPageComponent } from './self-service-container-page/self-service-container-page.component';
 import { RouterModule } from '@angular/router';
 import { SelfServiceUiMenuModule } from '@ksp/self-service/ui/menu';
 import { SelfServiceLicenseRequestComponent } from './self-service-license-request/self-service-license-request.component';
@@ -17,12 +17,12 @@ import { SelfServiceLicenseEditComponent } from './self-service-license-edit/sel
     SelfServiceUiTabContainerModule,
   ],
   declarations: [
-    SelfServiceLicenseMainComponent,
+    SelfServiceContainerPageComponent,
     SelfServiceLicenseRequestComponent,
     SelfServiceLicenseEditComponent,
   ],
   exports: [
-    SelfServiceLicenseMainComponent,
+    SelfServiceContainerPageComponent,
     SelfServiceLicenseRequestComponent,
     SelfServiceLicenseEditComponent,
   ],

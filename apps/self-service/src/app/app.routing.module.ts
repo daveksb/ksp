@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SelfServiceHomeComponent } from '@ksp/self-service/feature/home';
 import {
+  SelfServiceContainerPageComponent,
   SelfServiceLicenseEditComponent,
-  SelfServiceLicenseMainComponent,
   SelfServiceLicenseRequestComponent,
 } from '@ksp/self-service/feature/license';
 import { SelfServiceThaiLoginComponent } from '@ksp/self-service/feature/login';
@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'login', component: SelfServiceThaiLoginComponent },
   {
     path: 'license',
-    component: SelfServiceLicenseMainComponent,
+    component: SelfServiceContainerPageComponent,
     children: [
       {
         path: 'request',
