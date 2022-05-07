@@ -39,6 +39,9 @@
       "@ksp/shared/ui/university-search": [
         "libs/shared/ui/university-search/src/index.ts"
       ],
+      "@ksp/uni-service/feature/container-page": [
+        "libs/uni-service/feature/container-page/src/index.ts"
+      ],
       "@ksp/uni-service/feature/home": [
         "libs/uni-service/feature/home/src/index.ts"
       ],

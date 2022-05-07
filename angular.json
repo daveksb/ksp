@@ -13,6 +13,7 @@
     "shared-assets": "libs/shared/assets",
     "shared-ui-university-search": "libs/shared/ui/university-search",
     "uni-service": "apps/uni-service",
+    "uni-service-feature-container-page": "libs/uni-service/feature/container-page",
     "uni-service-feature-home": "libs/uni-service/feature/home",
     "uni-service-feature-login": "libs/uni-service/feature/login",
     "uni-service-feature-register": "libs/uni-service/feature/register",
