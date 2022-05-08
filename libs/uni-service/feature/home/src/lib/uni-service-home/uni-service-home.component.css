@@ -2,7 +2,6 @@
   background-color: #e5e5e5;
   height: 100%;
   width: 100%;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
 }
@@ -28,10 +27,6 @@
   margin-bottom: 20px;
 }
 .box__container {
-  /* background-color: #fff;
-  margin-left: 40px;
-  padding: 20px; */
-
   background-color: #f9f9fa;
   margin: 10px;
 }
@@ -45,6 +40,8 @@
 .title__box__table {
   font-family: 'KSP Bold';
   font-size: 22px;
+  padding-left: 10px;
+  margin-left: 10px;
 }
 
 .detail__container {
@@ -94,19 +91,23 @@
   background-color: #fff;
   border: 1px solid #eceef2;
 }
+
 .table > :not(:first-child) {
   border-top: 0;
 }
+
 .header__table {
   background-color: #edf6ff;
   font-family: 'KSP Bold';
   font-size: 16px;
+  white-space: nowrap;
 }
 
 .body__table {
   font-family: 'KSP Bold';
   font-size: 16px;
   color: #000000;
+  white-space: nowrap;
 }
 
 @font-face {
@@ -115,4 +116,24 @@
     format('truetype');
   font-family: 'KSP Bold';
   src: URL('/assets/font/KSP/KSP\ Bold\ ver\ 1.00.ttf') format('truetype');
+}
+
+@media only screen and (max-width: 768px) {
+  .detail__container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-column-gap: 8px;
+  }
+
+  .detail__container--third {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 0;
+  }
+
+  .detail__action {
+    display: flex;
+    justify-content: flex-ends;
+    margin-left: 50%;
+  }
 }
