@@ -94,6 +94,14 @@
         "jestConfig": "apps/uni-service/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "deploy": {
+      "executor": "@netlify-builder/deploy:deploy",
+      "options": {
+        "outputPath": "dist/apps/uni-service",
+        "siteId": "d1dc849e-2e37-4508-8323-ce8980880a6c",
+        "noBuild": true
+      }
     }
   },
   "tags": []
