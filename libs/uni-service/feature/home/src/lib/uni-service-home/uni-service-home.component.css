@@ -1,4 +1,5 @@
 .main-container {
+  font-family: 'KSP Bold';
   background-color: #e5e5e5;
   height: 100%;
   width: 100%;
@@ -8,12 +9,12 @@
 
 .top-container {
   background-color: white;
-  margin: 10px;
+  margin: 15px;
 }
 
 .bottom-container {
   background-color: white;
-  margin: 10px;
+  margin: 2px 15px;
 }
 
 .bottom-content {
@@ -21,27 +22,25 @@
   margin: 10px;
 }
 
-.box__header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
 .box__container {
   background-color: #f9f9fa;
   margin: 10px;
 }
 
-.title__box {
-  font-family: 'KSP Bold';
+.button__container {
+  padding-bottom: 7px;
+  display: flex;
+  justify-content: end;
+}
+
+.box__title {
   font-size: 22px;
   padding-left: 10px;
 }
 
-.title__box__table {
-  font-family: 'KSP Bold';
+.table__title {
   font-size: 22px;
-  padding-left: 10px;
-  margin-left: 10px;
+  padding-left: 15px;
 }
 
 .detail__container {
@@ -54,8 +53,8 @@
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
 }
+
 .form-label {
-  font-family: 'KSP Bold';
   font-size: 18px;
   color: #656565;
   margin-bottom: 0;
@@ -70,14 +69,12 @@
   margin-left: 82%;
 }
 .btn-primary {
-  font-family: 'KSP Bold';
   font-size: 18px;
   background-color: #0056ff;
   width: 100px;
   border-radius: 4px;
 }
 .btn-fourth {
-  font-family: 'KSP Bold';
   font-size: 18px;
   background-color: white;
   color: #0056ff;
