@@ -11,6 +11,5 @@ export class SelfServiceHomeComponent {
 
   thaiLogin() {
     this.router.navigate(['/', 'login']);
-    //  456
   }
 }

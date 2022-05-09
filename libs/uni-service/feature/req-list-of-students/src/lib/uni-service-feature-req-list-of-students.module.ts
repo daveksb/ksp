@@ -4,4 +4,4 @@ import { CommonModule } from '@angular/common';
 @NgModule({
   imports: [CommonModule],
 })
-export class UniServiceFeatureRequestDegreeCertModule {}
+export class UniServiceFeatureReqListOfStudentsModule {}

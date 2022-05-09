@@ -10,7 +10,7 @@ export class UniServiceLoginComponent {
   constructor(private router: Router) {}
 
   home() {
-    this.router.navigate(['/', 'license', 'home']);
+    this.router.navigate(['/', 'request', 'home']);
   }
 
   register() {
