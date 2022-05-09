@@ -1,0 +1,19 @@
+.tab-container {
+  padding: 20px;
+}
+
+.mat-tab-label {
+  background: #eff1f3;
+  color: #515153;
+  font-family: 'KSP Bold';
+  width: 180px;
+  margin: 0 2px;
+  /*border-bottom: solid 1px black;*/
+}
+
+.mat-tab-label-active {
+  background-color: white;
+  opacity: 1 !important;
+  border-top: solid #0056ff;
+  border-bottom: none;
+}

@@ -41,9 +41,6 @@
       "@ksp/self-service/ui/payment": [
         "libs/self-service/ui/payment/src/index.ts"
       ],
-      "@ksp/self-service/ui/tab-container": [
-        "libs/self-service/ui/tab-container/src/index.ts"
-      ],
       "@ksp/shared/assets": ["libs/shared/assets/src/index.ts"],
       "@ksp/shared/ui/side-menu": ["libs/shared/ui/side-menu/src/index.ts"],
       "@ksp/shared/ui/university-search": [
