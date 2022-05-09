@@ -15,10 +15,17 @@
         "tsConfig": "apps/school-service/tsconfig.app.json",
         "assets": [
           "apps/school-service/src/favicon.ico",
-          "apps/school-service/src/assets"
+          {
+            "input": "libs/shared/assets/src/assets",
+            "glob": "**/*",
+            "output": "./assets"
+          }
         ],
-        "styles": ["apps/school-service/src/styles.css"],
-        "scripts": []
+        "styles": [
+          "apps/school-service/src/styles.css",
+          "node_modules/bootstrap/dist/css/bootstrap.min.css"
+        ],
+        "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"]
       },
       "configurations": {
         "production": {
@@ -86,6 +93,14 @@
       "options": {
         "jestConfig": "apps/school-service/jest.config.ts",
         "passWithNoTests": true
+      }
+    },
+    "deploy": {
+      "executor": "@netlify-builder/deploy:deploy",
+      "options": {
+        "outputPath": "dist/apps/school-service",
+        "siteId": "b3164b84-b992-4605-bc6e-3ec8dd992fe0",
+        "noBuild": false
       }
     }
   },
