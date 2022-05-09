@@ -20,33 +20,17 @@ export class SchoolServiceContainerPageComponent {
         icon: 'assets/images/icon-sidenav/paper.svg',
         label: 'ยื่นใบคำขอ',
         path: '',
-      },
-      {
-        icon: 'assets/images/icon-sidenav/card.svg',
-        label: 'ใบอนุญาตประกอบวิชาชีพ',
-        path: '',
         subMenuName: 'license',
-        isExpanded: false,
+        isExpanded: true,
         subMenu: [
           {
-            label: 'ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ',
+            label:
+              'ขอใบอนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)',
             path: 'request',
           },
           {
             label: 'ขอต่ออายุใบประกอบวิชาชีพ',
             path: '',
-          },
-          {
-            label: 'ขอใบแทนใบอนุญาตประกอบวิชาชีพ',
-            path: '',
-          },
-          {
-            label: '##ช่องทางชำระเงิน',
-            path: 'payment-channel',
-          },
-          {
-            label: '##แก้ไขใบอนุญาต',
-            path: 'edit',
           },
         ],
       },
