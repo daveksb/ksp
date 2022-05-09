@@ -5,9 +5,9 @@ import { RouterModule } from '@angular/router';
 import { SelfServiceUiMenuModule } from '@ksp/self-service/ui/menu';
 import { SelfServiceLicenseRequestComponent } from './self-service-license-request/self-service-license-request.component';
 import { SelfServiceUiFormsModule } from '@ksp/self-service/ui/forms';
-import { SelfServiceUiTabContainerModule } from '@ksp/self-service/ui/tab-container';
 import { SelfServiceLicenseEditComponent } from './self-service-license-edit/self-service-license-edit.component';
 import { SharedUiSideMenuModule } from '@ksp/shared/ui/side-menu';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   imports: [
@@ -15,8 +15,8 @@ import { SharedUiSideMenuModule } from '@ksp/shared/ui/side-menu';
     RouterModule,
     SelfServiceUiMenuModule,
     SelfServiceUiFormsModule,
-    SelfServiceUiTabContainerModule,
     SharedUiSideMenuModule,
+    MatTabsModule,
   ],
   declarations: [
     SelfServiceContainerPageComponent,
