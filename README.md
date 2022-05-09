@@ -10,4 +10,4 @@ Create sh file and put below command
 
 NETLIFY_TOKEN=xxxxxxxxxxxxx ng deploy "$1"
 
-# then run "sh deploy" to deploy
+# then run "sh deploy xxx-service" to deploy

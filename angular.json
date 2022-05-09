@@ -1,6 +1,8 @@
 {
   "version": 2,
   "projects": {
+    "e-service": "apps/e-service",
+    "school-service": "apps/school-service",
     "self-service": "apps/self-service",
     "self-service-feature-home": "libs/self-service/feature/home",
     "self-service-feature-license": "libs/self-service/feature/license",
