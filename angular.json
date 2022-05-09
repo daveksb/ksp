@@ -3,6 +3,7 @@
   "projects": {
     "e-service": "apps/e-service",
     "school-service": "apps/school-service",
+    "school-service-feature-container-page": "libs/school-service/feature/container-page",
     "school-service-feature-login": "libs/school-service/feature/login",
     "school-service-feature-req-temp-license": "libs/school-service/feature/req-temp-license",
     "self-service": "apps/self-service",
