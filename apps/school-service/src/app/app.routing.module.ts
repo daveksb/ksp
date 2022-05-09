@@ -1,23 +1,21 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { SchoolServiceContainerPageComponent } from '@ksp/school-service/feature/container-page';
 import { SchoolServiceLoginComponent } from '@ksp/school-service/feature/login';
+import { ReqTempLicenseHomeComponent } from '@ksp/school-service/feature/req-temp-license';
 
 const routes: Routes = [
   { path: 'login', component: SchoolServiceLoginComponent },
-  /*
-  { path: 'register', component: UniServiceRegisterComponent },
-  { path: 'search-uni', component: UniversitySearchComponent }, // temp
   {
     path: 'request',
-    component: UniServiceContainerPageComponent,
+    component: SchoolServiceContainerPageComponent,
     children: [
       {
         path: 'home',
-        component: UniServiceHomeComponent,
+        component: ReqTempLicenseHomeComponent,
       },
     ],
   },
-  { path: '**', component: UniServiceLoginComponent }, */
   { path: '**', component: SchoolServiceLoginComponent },
 ];
 
