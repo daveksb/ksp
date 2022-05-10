@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ksp-req-degree-cert-home',
@@ -6,8 +7,10 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./req-degree-cert-home.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ReqDegreeCertHomeComponent implements OnInit {
-  constructor() {}
+export class ReqDegreeCertHomeComponent {
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  goToStep1() {
+    this.router.navigate(['/', 'request', 'degree-cert-1']);
+  }
 }
