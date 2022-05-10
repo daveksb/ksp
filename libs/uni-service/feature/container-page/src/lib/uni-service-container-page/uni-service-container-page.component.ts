@@ -27,7 +27,19 @@ export class UniServiceContainerPageComponent {
           },
           {
             path: '',
-            label: 'ขอสร้าง..',
+            label: 'ขอสร้างเลขประจำตัวคุรุสภาสำหรับนักศึกษาชาวต่างชาติ',
+          },
+          {
+            path: '',
+            label: 'ขอยื่นรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
+          },
+          {
+            path: '',
+            label: 'ขอเปลี่ยนแปลงรายละเอียดปริญญาและประกาศนียบัตร',
+          },
+          {
+            path: '',
+            label: 'ขอเปลี่ยนแปลงรายละเอียดรายชื่อผู้เข้าและผู้สำเร็จการศึกษา',
           },
         ],
         subMenuName: 'license',
@@ -35,7 +47,7 @@ export class UniServiceContainerPageComponent {
       },
       {
         icon: 'assets/images/icon-sidenav/card.svg',
-        label: 'ทะเบียน',
+        label: 'ทะเบียนข้อมูล',
         path: '',
       },
       {
