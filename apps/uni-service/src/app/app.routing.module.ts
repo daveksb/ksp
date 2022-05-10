@@ -11,6 +11,9 @@ import {
   ReqDegreeCertStepThreeComponent,
   ReqDegreeCertStepTwoComponent,
 } from '@ksp/uni-service/feature/req-degree-cert';
+import { ReqForeignIdComponent } from '@ksp/uni-service/feature/req-foreign-id';
+import { ReqListOfGraduatesComponent } from '@ksp/uni-service/feature/req-list-of-graduates';
+import { ReqListOfStudentsComponent } from '@ksp/uni-service/feature/req-list-of-students';
 
 const routes: Routes = [
   { path: 'login', component: UniServiceLoginComponent },
@@ -39,6 +42,18 @@ const routes: Routes = [
       {
         path: 'degree-cert-3',
         component: ReqDegreeCertStepThreeComponent,
+      },
+      {
+        path: 'foreign-id',
+        component: ReqForeignIdComponent,
+      },
+      {
+        path: 'list-of-students',
+        component: ReqListOfStudentsComponent,
+      },
+      {
+        path: 'list-of-graduates',
+        component: ReqListOfGraduatesComponent,
       },
     ],
   },
