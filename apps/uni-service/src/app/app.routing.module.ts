@@ -7,6 +7,7 @@ import { UniServiceLoginComponent } from '@ksp/uni-service/feature/login';
 import { UniServiceRegisterComponent } from '@ksp/uni-service/feature/register';
 import {
   ReqDegreeCertHomeComponent,
+  ReqDegreeCertStepFourComponent,
   ReqDegreeCertStepOneComponent,
   ReqDegreeCertStepThreeComponent,
   ReqDegreeCertStepTwoComponent,
@@ -39,6 +40,10 @@ const routes: Routes = [
       {
         path: 'degree-cert-3',
         component: ReqDegreeCertStepThreeComponent,
+      },
+      {
+        path: 'degree-cert-4',
+        component: ReqDegreeCertStepFourComponent,
       },
     ],
   },
