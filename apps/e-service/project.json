@@ -15,10 +15,17 @@
         "tsConfig": "apps/e-service/tsconfig.app.json",
         "assets": [
           "apps/e-service/src/favicon.ico",
-          "apps/e-service/src/assets"
+          {
+            "input": "libs/shared/assets/src/assets",
+            "glob": "**/*",
+            "output": "./assets"
+          }
         ],
-        "styles": ["apps/e-service/src/styles.css"],
-        "scripts": []
+        "styles": [
+          "apps/e-service/src/styles.css",
+          "node_modules/bootstrap/dist/css/bootstrap.min.css"
+        ],
+        "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"]
       },
       "configurations": {
         "production": {
@@ -30,8 +37,8 @@
             },
             {
               "type": "anyComponentStyle",
-              "maximumWarning": "2kb",
-              "maximumError": "4kb"
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
             }
           ],
           "fileReplacements": [
@@ -86,6 +93,14 @@
       "options": {
         "jestConfig": "apps/e-service/jest.config.ts",
         "passWithNoTests": true
+      }
+    },
+    "deploy": {
+      "executor": "@netlify-builder/deploy:deploy",
+      "options": {
+        "outputPath": "dist/apps/e-service",
+        "siteId": "e816803c-b91a-46f9-baf7-679701a9d5c7",
+        "noBuild": false
       }
     }
   },
