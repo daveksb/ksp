@@ -4,4 +4,28 @@
 
 <ksp-form-user-info></ksp-form-user-info>
 
-<ksp-tab-container></ksp-tab-container>
+<div class="tab-container">
+  <mat-tab-group class="tab-group" animationDuration="0ms" dynamicHeight="true">
+    <mat-tab label="ที่อยู่" class="tab-content">
+      <ksp-form-user-address>ที่อยู่ปัจจุบัน</ksp-form-user-address>
+      <ksp-form-user-address>ที่อยู่ทะเบียนบ้าน</ksp-form-user-address></mat-tab
+    >
+    <mat-tab label="สถานที่ทำงาน">
+      <ksp-form-user-workplace></ksp-form-user-workplace>
+    </mat-tab>
+    <mat-tab label="ข้อมูลทางการศึกษา">
+      <ksp-form-user-education></ksp-form-user-education>
+    </mat-tab>
+    <mat-tab label="ข้อมูลประสบการณ์วิชาชีพ"
+      ><ksp-form-user-experience></ksp-form-user-experience
+    ></mat-tab>
+    <mat-tab label="ข้อมูลผลการประเมินสมรรถนะ">
+      <ksp-form-user-performance></ksp-form-user-performance>
+    </mat-tab>
+  </mat-tab-group>
+
+  <div class="footer">
+    <button type="button" class="btn btn-secondary">ย้อนกลับ</button>
+    <button type="button" class="btn btn-primary">ต่อไป</button>
+  </div>
+</div>

@@ -1,0 +1,91 @@
+.container {
+  max-width: 1440px;
+  background-image: url('/assets/images/BG-secondary.png');
+  background-size: cover;
+}
+.login__container {
+  align-items: center;
+  padding: 64px 100px;
+}
+.login__header {
+  text-align: center;
+}
+.img__header {
+  width: 334px;
+}
+.login__content {
+  background: #ffffff;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 25px 32px 10px 32px;
+  margin: 0 400px;
+}
+.detail__content {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'KSP Bold';
+  font-size: 18px;
+  margin: 12px 0 24px 0;
+}
+.btn-primary {
+  font-family: 'KSP Bold';
+  font-size: 20px;
+  background-color: #0056ff;
+  width: 100%;
+  border-radius: 4px;
+}
+.btn-secondary {
+  font-family: 'KSP Bold';
+  font-size: 20px;
+  background-color: #f68b33;
+  width: 100%;
+  border-radius: 4px;
+  border: 0;
+}
+
+.form-label {
+  font-family: 'KSP Bold';
+  font-size: 18px;
+  margin-bottom: 0;
+  margin-top: 10px;
+}
+.form-control {
+  font-family: 'KSP Bold';
+  font-size: 20px;
+  color: #666666;
+}
+
+h1 {
+  font-family: 'KSP Bold';
+  font-size: 50px;
+  color: #333333;
+  margin: 0;
+}
+h3 {
+  font-family: 'KSP Bold';
+  font-size: 36px;
+  color: #f68b33;
+  margin: 40px 0 20px 0;
+}
+
+.label__secondary {
+  color: #000000;
+  font-family: 'KSP Bold';
+  font-size: 18px;
+  margin: 24px 0 10px 0;
+  text-align: center;
+}
+.label__forth {
+  margin-top: 15px;
+  color: #0056ff;
+  display: flex;
+  justify-content: flex-end;
+}
+
+@font-face {
+  font-family: 'KSP Regular';
+  src: URL('/assets/font/KSP/ttf/KSP\ Regular\ ver\ 1.00.ttf')
+    format('truetype');
+  font-family: 'KSP Bold';
+  src: URL('/assets/font/KSP/KSP\ Bold\ ver\ 1.00.ttf') format('truetype');
+}

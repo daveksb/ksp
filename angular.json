@@ -1,6 +1,11 @@
 {
   "version": 2,
   "projects": {
+    "e-service": "apps/e-service",
+    "school-service": "apps/school-service",
+    "school-service-feature-container-page": "libs/school-service/feature/container-page",
+    "school-service-feature-login": "libs/school-service/feature/login",
+    "school-service-feature-req-temp-license": "libs/school-service/feature/req-temp-license",
     "self-service": "apps/self-service",
     "self-service-feature-home": "libs/self-service/feature/home",
     "self-service-feature-license": "libs/self-service/feature/license",
@@ -9,7 +14,6 @@
     "self-service-ui-forms": "libs/self-service/ui/forms",
     "self-service-ui-menu": "libs/self-service/ui/menu",
     "self-service-ui-payment": "libs/self-service/ui/payment",
-    "self-service-ui-tab-container": "libs/self-service/ui/tab-container",
     "shared-assets": "libs/shared/assets",
     "shared-ui-side-menu": "libs/shared/ui/side-menu",
     "shared-ui-university-search": "libs/shared/ui/university-search",

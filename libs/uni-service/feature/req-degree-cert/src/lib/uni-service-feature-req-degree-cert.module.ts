@@ -6,9 +6,10 @@ import { ReqDegreeCertStepTwoComponent } from './req-degree-cert-step-two/req-de
 import { ReqDegreeCertStepThreeComponent } from './req-degree-cert-step-three/req-degree-cert-step-three.component';
 import { ReqDegreeCertStepFourComponent } from './req-degree-cert-step-four/req-degree-cert-step-four.component';
 import { ReqDegreeCertStepFiveComponent } from './req-degree-cert-step-five/req-degree-cert-step-five.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, MatTabsModule],
   declarations: [
     ReqDegreeCertHomeComponent,
     ReqDegreeCertStepOneComponent,
