@@ -1,12 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ksp-req-degree-cert-step-one',
   templateUrl: './req-degree-cert-step-one.component.html',
   styleUrls: ['./req-degree-cert-step-one.component.css'],
 })
-export class ReqDegreeCertStepOneComponent implements OnInit {
-  constructor() {}
+export class ReqDegreeCertStepOneComponent {
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  goToStep2() {
+    this.router.navigate(['/', 'request', 'degree-cert-2']);
+  }
+
 }
