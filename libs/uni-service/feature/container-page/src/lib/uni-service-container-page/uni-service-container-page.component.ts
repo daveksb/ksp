@@ -26,15 +26,15 @@ export class UniServiceContainerPageComponent {
             label: 'ขอรับรองปริญญาและประกาศนียบัตร',
           },
           {
-            path: '',
+            path: 'foreign-id',
             label: 'ขอสร้างเลขประจำตัวคุรุสภาสำหรับนักศึกษาชาวต่างชาติ',
           },
           {
-            path: '',
+            path: 'list-of-students',
             label: 'ขอยื่นรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
           },
           {
-            path: '',
+            path: 'list-of-graduates',
             label: 'ขอเปลี่ยนแปลงรายละเอียดปริญญาและประกาศนียบัตร',
           },
           {
