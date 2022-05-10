@@ -15,6 +15,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@ksp/e-service/feature/container-page": [
+        "libs/e-service/feature/container-page/src/index.ts"
+      ],
+      "@ksp/e-service/feature/login": [
+        "libs/e-service/feature/login/src/index.ts"
+      ],
       "@ksp/school-service/feature/container-page": [
         "libs/school-service/feature/container-page/src/index.ts"
       ],
