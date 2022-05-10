@@ -131,6 +131,7 @@
   padding-bottom: 7px;
   display: flex;
   justify-content: end;
+  padding: 20px;
 }
 
 .btn-fourth {
