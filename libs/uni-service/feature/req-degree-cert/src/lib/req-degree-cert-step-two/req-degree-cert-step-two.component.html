@@ -1,46 +1,100 @@
 <div class="container">
-  <div class="title__label">
-      รายละเอียดใบคำขอรับรองปริญญาและประกาศนียบัตร
-  </div>
+  <div class="title__label">รายละเอียดใบคำขอรับรองปริญญาและประกาศนียบัตร</div>
   <div class="content__container">
-      <div class="content__header">
-          <div class="label__content">
-              วันที่ทำรายการ :
-              <span class="label__content--primary">10 ตุลาคม 2565</span>
-          </div>
-          <div class="label__content">
-              เลขใบคำขอ :
-              <span class="label__content--secondary">112234467876543</span>
-          </div>
+    <div class="content__header">
+      <div class="label__content">
+        วันที่ทำรายการ :
+        <span class="label__content--primary">10 ตุลาคม 2565</span>
       </div>
-      <hr />
-      <div class="img__process">
-          <img src="/assets/images/img-uni/Procees-2.png" />
+      <div class="label__content">
+        เลขใบคำขอ :
+        <span class="label__content--secondary">112234467876543</span>
       </div>
-      <nav>
-          <div class="nav nav-tabs" id="nav-tab" role="tablist">
-              <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
-                  type="button" role="tab" aria-controls="nav-home" aria-selected="true">
-                  <div class="title__tab">โครงสร้างหลักสูตร<div>และแผนการรับนิสิตนักศึกษา</div>
-                  </div>
-              </button>
-              <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
-                  type="button" role="tab" aria-controls="nav-profile" aria-selected="false">
-                  <div class="title__tab">อาจารย์ / ผู้รับผิดชอบ<div>ประจำหลักสูตร</div>
-                  </div>
-              </button>
-              <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
-                  type="button" role="tab" aria-controls="nav-contact" aria-selected="false">
-                  <div class="title__tab">อาจารย์นิเทศก์</div>
-              </button>
-              <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
-                  type="button" role="tab" aria-controls="nav-contact" aria-selected="false">
-                  <div class="title__tab">ที่ปรึกษาวิทยานิพนธ์<div>และการค้นคว้าอิสระ</div>
-                  </div>
-              </button>
+    </div>
+    <hr />
+    <div class="img__process">
+      <img src="/assets/images/img-uni/Procees-2.png" />
+    </div>
+
+    <div class="tab-container">
+      <mat-tab-group
+        class="tab-group"
+        animationDuration="0ms"
+        dynamicHeight="true"
+      >
+        <mat-tab label="ที่อยู่" class="tab-content">
+          <ksp-req-degree-cert-step-two-tab-one></ksp-req-degree-cert-step-two-tab-one
+        ></mat-tab>
+        <mat-tab label="ที่อยู่ของสถานศึกษาที่ขออนุญาต"> Tab Panel 2 </mat-tab>
+        <mat-tab label="ข้อมูลทางการศึกษา"> Tab Panel 3 </mat-tab>
+        <mat-tab label="ข้อมูลการสอบและการจ้าง"> Tab Panel 4 </mat-tab>
+        <mat-tab label="ข้อมูลชี้แจงเหตุผล"> Tab Panel 5 </mat-tab>
+        <mat-tab label="เอกสารหลักฐานประกอบ"> Tab Panel 6 </mat-tab>
+      </mat-tab-group>
+    </div>
+
+    <!-- <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <button
+          class="nav-link active"
+          id="nav-home-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#nav-home"
+          type="button"
+          role="tab"
+          aria-controls="nav-home"
+          aria-selected="true"
+        >
+          <div class="title__tab">
+            โครงสร้างหลักสูตร
+            <div>และแผนการรับนิสิตนักศึกษา</div>
           </div>
-      </nav>
-      <div class="tab-content" id="nav-tabContent">
+        </button>
+        <button
+          class="nav-link"
+          id="nav-profile-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#nav-profile"
+          type="button"
+          role="tab"
+          aria-controls="nav-profile"
+          aria-selected="false"
+        >
+          <div class="title__tab">
+            อาจารย์ / ผู้รับผิดชอบ
+            <div>ประจำหลักสูตร</div>
+          </div>
+        </button>
+        <button
+          class="nav-link"
+          id="nav-contact-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#nav-contact"
+          type="button"
+          role="tab"
+          aria-controls="nav-contact"
+          aria-selected="false"
+        >
+          <div class="title__tab">อาจารย์นิเทศก์</div>
+        </button>
+        <button
+          class="nav-link"
+          id="nav-contact-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#nav-contact"
+          type="button"
+          role="tab"
+          aria-controls="nav-contact"
+          aria-selected="false"
+        >
+          <div class="title__tab">
+            ที่ปรึกษาวิทยานิพนธ์
+            <div>และการค้นคว้าอิสระ</div>
+          </div>
+        </button>
+      </div>
+    </nav> -->
+    <!--<div class="tab-content" id="nav-tabContent">
           <div class="tab-pane fade show active tab__body" id="nav-home" role="tabpanel"
               aria-labelledby="nav-home-tab">
               <div class="tab__content">
@@ -458,15 +512,23 @@
           </div>
           <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
           <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
-      </div>
+      </div> -->
   </div>
 </div>
 
 <div class="button__container">
-  <button (click)="goToStep1()" type="button" class="btn btn-fourth btn-sm label__button">
+  <button
+    (click)="goToStep1()"
+    type="button"
+    class="btn btn-fourth btn-sm label__button"
+  >
     ย้อนกลับ
   </button>
-  <button (click)="goToStep3()" type="button" class="btn btn-fourth btn-sm label__button">
+  <button
+    (click)="goToStep3()"
+    type="button"
+    class="btn btn-fourth btn-sm label__button"
+  >
     ถัดไป
   </button>
 </div>

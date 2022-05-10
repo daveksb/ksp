@@ -72,7 +72,8 @@
       ],
       "@ksp/uni-service/feature/retired": [
         "libs/uni-service/feature/retired/src/index.ts"
-      ]
+      ],
+      "@ksp/uni-service/ui/forms": ["libs/uni-service/ui/forms/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

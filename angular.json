@@ -26,6 +26,7 @@
     "uni-service-feature-req-foreign-id": "libs/uni-service/feature/req-foreign-id",
     "uni-service-feature-req-list-of-graduates": "libs/uni-service/feature/req-list-of-graduates",
     "uni-service-feature-req-list-of-students": "libs/uni-service/feature/req-list-of-students",
-    "uni-service-feature-retired": "libs/uni-service/feature/retired"
+    "uni-service-feature-retired": "libs/uni-service/feature/retired",
+    "uni-service-ui-forms": "libs/uni-service/ui/forms"
   }
 }
