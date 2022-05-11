@@ -2,6 +2,8 @@
   "version": 2,
   "projects": {
     "e-service": "apps/e-service",
+    "e-service-feature-accusation-list": "libs/e-service/feature/accusation-list",
+    "e-service-feature-accusation-record": "libs/e-service/feature/accusation-record",
     "e-service-feature-container-page": "libs/e-service/feature/container-page",
     "e-service-feature-login": "libs/e-service/feature/login",
     "school-service": "apps/school-service",
