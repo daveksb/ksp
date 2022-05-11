@@ -45,6 +45,9 @@
       "@ksp/self-service/feature/login": [
         "libs/self-service/feature/login/src/index.ts"
       ],
+      "@ksp/self-service/feature/master-page": [
+        "libs/self-service/feature/master-page/src/index.ts"
+      ],
       "@ksp/self-service/feature/register": [
         "libs/self-service/feature/register/src/index.ts"
       ],

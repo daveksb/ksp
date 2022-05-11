@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { MenuConfig } from '@ksp/shared/ui/side-menu';
 
 @Component({
-  selector: 'ksp-self-service-container-page',
-  templateUrl: './self-service-container-page.component.html',
-  styleUrls: ['./self-service-container-page.component.css'],
+  selector: 'ksp-self-service-master-page',
+  templateUrl: './self-service-master-page.component.html',
+  styleUrls: ['./self-service-master-page.component.scss'],
 })
-export class SelfServiceContainerPageComponent {
+export class SelfServiceMasterPageComponent {
   menuConfig: MenuConfig[];
 
   constructor() {

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SelfServiceContainerPageComponent } from './self-service-container-page/self-service-container-page.component';
 import { RouterModule } from '@angular/router';
 import { SelfServiceUiMenuModule } from '@ksp/self-service/ui/menu';
 import { SelfServiceLicenseRequestComponent } from './self-service-license-request/self-service-license-request.component';
@@ -21,12 +20,10 @@ import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
     SharedUiTopNavModule,
   ],
   declarations: [
-    SelfServiceContainerPageComponent,
     SelfServiceLicenseRequestComponent,
     SelfServiceLicenseEditComponent,
   ],
   exports: [
-    SelfServiceContainerPageComponent,
     SelfServiceLicenseRequestComponent,
     SelfServiceLicenseEditComponent,
   ],
