@@ -1,11 +1,11 @@
 .content__detail {
-  margin: 12px;
+  margin: 5px 20px;
 }
 
 .title__content {
   font-family: 'KSP Bold';
   font-size: 20px;
-  margin: 16px 0 16px 0;
+  margin: 5px 0;
 }
 
 .box__container {

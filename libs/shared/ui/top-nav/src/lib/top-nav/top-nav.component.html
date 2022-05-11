@@ -1,10 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-light">
   <div class="container-fluid">
     <div class="navigate__label">
-      ยื่นใบคำขอ >
-      <span class="navigate__label--secondary"
-        >ขอใบอนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)</span
+      <ng-content select="[header]"></ng-content>
       >
+      <span class="navigate__label--secondary">
+        <ng-content select="[subHeader]"></ng-content>
+      </span>
     </div>
     <div class="user__info">
       <div class="user__name">จิราภรณ์ รักไทรทอง</div>

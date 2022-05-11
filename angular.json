@@ -14,6 +14,7 @@
     "self-service-feature-home": "libs/self-service/feature/home",
     "self-service-feature-license": "libs/self-service/feature/license",
     "self-service-feature-login": "libs/self-service/feature/login",
+    "self-service-feature-master-page": "libs/self-service/feature/master-page",
     "self-service-feature-register": "libs/self-service/feature/register",
     "self-service-ui-forms": "libs/self-service/ui/forms",
     "self-service-ui-menu": "libs/self-service/ui/menu",

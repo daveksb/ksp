@@ -1,0 +1,16 @@
+.wrapper {
+  padding: 0;
+  display: grid;
+  grid-template-columns: 237px auto;
+}
+
+@media (max-width: 1200px) {
+  .wrapper {
+    display: grid;
+    grid-template-columns: 100%;
+  }
+
+  .side__menu {
+    display: none;
+  }
+}
