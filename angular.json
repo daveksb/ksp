@@ -19,6 +19,7 @@
     "self-service-ui-menu": "libs/self-service/ui/menu",
     "self-service-ui-payment": "libs/self-service/ui/payment",
     "shared-assets": "libs/shared/assets",
+    "shared-ui-bottom-menu": "libs/shared/ui/bottom-menu",
     "shared-ui-side-menu": "libs/shared/ui/side-menu",
     "shared-ui-university-search": "libs/shared/ui/university-search",
     "uni-service": "apps/uni-service",

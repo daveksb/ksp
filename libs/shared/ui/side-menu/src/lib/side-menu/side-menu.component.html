@@ -38,7 +38,9 @@
         >
           <ng-container *ngFor="let subMenu of menu.subMenu">
             <li>
-              <a routerLink="{{ subMenu.path }}">{{ subMenu.label }}</a>
+              <a class="sub-menu" routerLink="{{ subMenu.path }}">{{
+                subMenu.label
+              }}</a>
             </li>
           </ng-container>
         </ul>

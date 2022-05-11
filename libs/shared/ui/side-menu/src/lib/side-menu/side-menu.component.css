@@ -7,8 +7,8 @@ a:focus {
 }
 
 #sidebar {
-  min-width: 220px;
-  max-width: 220px;
+  /* min-width: 220px;
+  max-width: 220px; */
   background: #ffffff;
   color: #a6a6a6;
   transition: all 0.3s;
@@ -57,9 +57,14 @@ a:focus {
 }
 
 #sidebar ul li a {
-  padding: 7px 12px;
-  font-size: 16px;
+  padding: 10px 12px;
+  font-size: 18px;
   display: block;
+}
+
+#sidebar ul li a.sub-menu {
+  padding: 5px 0;
+  font-size: 16px;
 }
 
 #sidebar ul li a:hover {
@@ -92,8 +97,7 @@ ul ul a {
 
 ul ul li {
   list-style: disc outside none;
-  display: list-item;
-  margin-left: 36px;
+  margin-left: 32px;
 }
 
 .icon__sidenav {
