@@ -13,52 +13,56 @@ export class EServiceContainerPageComponent {
     this.menuConfig = [
       {
         icon: 'assets/images/icon-sidenav/home.svg ',
-        label: 'หน้าแรก',
-        path: 'home',
+        label: 'ข้อมูลการกล่าวหา/กล่าวโทษ',
+        path: '',
+        isExpanded: true,
+        subMenuName: 'accusation',
+        subMenu: [
+          {
+            path: 'record',
+            label: 'บันทีกการกล่าวหา/กล่าวโทษ',
+          },
+          {
+            path: 'investigation',
+            label: 'บันทีกการสืบสวนข้อเท็จจริง',
+          },
+          {
+            path: 'inquiry',
+            label: 'บันทีกการสอบสวน',
+          },
+        ],
       },
       {
         icon: 'assets/images/icon-sidenav/paper.svg',
-        label: 'ยื่นใบคำขอ',
+        label: 'ตรวจสอบและเผยแพร่คำวินิจฉัยชี้ขาด',
         path: '',
-        subMenu: [
-          {
-            path: 'degree-cert',
-            label: 'ขอรับรองปริญญาและประกาศนียบัตร',
-          },
-          {
-            path: 'foreign-id',
-            label: 'ขอสร้างเลขประจำตัวคุรุสภาสำหรับนักศึกษาชาวต่างชาติ',
-          },
-          {
-            path: 'list-of-students',
-            label: 'ขอยื่นรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
-          },
-          {
-            path: 'list-of-graduates',
-            label: 'ขอเปลี่ยนแปลงรายละเอียดปริญญาและประกาศนียบัตร',
-          },
-          {
-            path: '',
-            label: 'ขอเปลี่ยนแปลงรายละเอียดรายชื่อผู้เข้าและผู้สำเร็จการศึกษา',
-          },
-        ],
-        subMenuName: 'license',
-        isExpanded: true,
+        subMenuName: 'verdict',
       },
       {
         icon: 'assets/images/icon-sidenav/card.svg',
-        label: 'ทะเบียนข้อมูล',
+        label: 'ข้อมูลทะเบียนใบอนุญาต',
         path: '',
       },
       {
         icon: 'assets/images/icon-sidenav/card.svg',
         label: 'รายงาน',
         path: '',
-      },
-      {
-        icon: 'assets/images/icon-sidenav/card.svg',
-        label: 'ตั้งค่า',
-        path: '',
+        isExpanded: true,
+        subMenuName: 'report',
+        subMenu: [
+          {
+            path: 'record',
+            label: 'รายงานสถิติการกล่าวหา/กล่าวโทษ',
+          },
+          {
+            path: 'investigation',
+            label: 'รายงานสถิติการสืบสวน',
+          },
+          {
+            path: 'inquiry',
+            label: 'รายงานสถิติการสอบสวน',
+          },
+        ],
       },
     ];
   }
