@@ -7,8 +7,6 @@ a:focus {
 }
 
 #sidebar {
-  /* min-width: 220px;
-  max-width: 220px; */
   background: #ffffff;
   color: #a6a6a6;
   transition: all 0.3s;
@@ -23,7 +21,7 @@ a:focus {
 }
 
 #sidebar .sidebar-header {
-  padding: 8px 12px;
+  padding: 1.5px 12px;
   background: #ffdec3;
 }
 
