@@ -1,0 +1,180 @@
+.container {
+  max-width: 1440px;
+  padding: 0;
+  background-color: #f6f6f6;
+}
+.title__label {
+  font-family: "KSP Bold";
+  font-size: 22px;
+  color: #000000;
+  margin: 24px 64px 12px 64px;
+}
+.content__header {
+  display: flex;
+}
+.label__content {
+  font-family: "KSP Bold";
+  font-size: 18px;
+  color: #808080;
+  margin-right: 24px;
+}
+.label__content--primary {
+  color: #f68b33;
+}
+.label__content--secondary {
+  color: #0056ff;
+}
+.content__container {
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 24px;
+  margin: 0px 64px;
+}
+.img__process {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+.detail__container {
+  background-color: #f4faff;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+.detail__container--secondary {
+  background-color: #f9f9fa;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+.detail__header {
+  font-family: "KSP Bold";
+  font-size: 22px;
+  color: #0056ff;
+}
+
+.detail__header--first {
+  font-family: "KSP Bold";
+  font-size: 18px;
+  color: #000000;
+  padding-left: 5px;
+}
+
+.detail__header--secondary {
+  font-family: "KSP Bold";
+  font-size: 22px;
+  color: #000000;
+}
+.detail__content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 18px;
+  margin-bottom: 14px;
+}
+.detail__content--primary {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-bottom: 14px;
+}
+
+.detail__content--first{
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  grid-column-gap: 18px;
+  margin-bottom: 14px;
+
+}
+
+.detail__content--secondary {
+  display: grid;
+  grid-template-columns: 0.75fr 2fr;
+  grid-column-gap: 18px;
+  margin-bottom: 14px;
+}
+.detail__content--third {
+  display: grid;
+  grid-template-columns: 10% 1fr 30%;
+  grid-column-gap: 18px;
+  margin-bottom: 14px;
+}
+.detail__content--fourth {
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.5fr;
+  grid-column-gap: 18px;
+  margin-bottom: 14px;
+}
+.detail__content--fifth {
+  display: grid;
+  grid-template-columns: 0.4fr 1fr 1fr;
+  grid-column-gap: 18px;
+  margin-bottom: 14px;
+}
+.detail__footer {
+  display: flex;
+  justify-content: center;
+}
+
+.detail__footer-2 {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+}
+
+.btn-add {
+  font-family: "KSP Bold";
+  font-size: 18px;
+  color: #f68b33;
+}
+
+.btn-add-2 {
+  font-family: "KSP Bold";
+  font-size: 18px;
+  color: #f68b33;
+}
+
+.icon__add {
+  margin-right: 8px;
+}
+
+.icon__add-2 {
+  color: #0056ff;
+  margin-right: 8px;
+}
+
+.form-label {
+  font-family: "KSP Bold";
+  font-size: 18px;
+  color: #656565;
+}
+.form-control {
+  font-family: "KSP Bold";
+  font-size: 20px;
+  background-color: #fff;
+  text-align: start;
+}
+.form-select {
+  font-family: "KSP Bold";
+  font-size: 20px;
+}
+.label__text {
+  font-family: "KSP Bold";
+  font-size: 16px;
+  margin-left: 8px;
+  color: #f23c51;
+}
+.box__footer {
+  display: flex;
+  justify-content: center;
+}
+
+.checkbox-1 {
+  width: 15px;
+  height: 15px;
+
+}
+
+@font-face {
+  font-family: "KSP Regular";
+  src: URL("/assets/font/KSP/ttf/KSP\ Regular\ ver\ 1.00.ttf")
+    format("truetype");
+  font-family: "KSP Bold";
+  src: URL("/assets/font/KSP/KSP\ Bold\ ver\ 1.00.ttf") format("truetype");
+}
