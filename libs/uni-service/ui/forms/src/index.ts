@@ -9,3 +9,5 @@ export * from './lib/req-degree-cert-step-three-tab-one/req-degree-cert-step-thr
 export * from './lib/req-degree-cert-step-three-tab-two/req-degree-cert-step-three-tab-two.component';
 
 export * from './lib/req-degree-cert-step-two-tab-three/req-degree-cert-step-two-tab-three.component';
+
+export * from './lib/req-degree-cert-step-two-tab-four/req-degree-cert-step-two-tab-four.component';
