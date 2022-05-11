@@ -1,26 +1,18 @@
 <div class="container-fluid">
   <div class="wrapper">
-    <div class="side__menu">
-      <ksp-side-menu
-        [menuConfig]="menuConfig"
-        [showHeader]="false"
-      ></ksp-side-menu>
-    </div>
+    <ksp-side-menu
+      [menuConfig]="menuConfig"
+      [showHeader]="false"
+    ></ksp-side-menu>
 
-    <div id="content">
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="navigate__label">
-          ยื่นใบคำขอ >
-          <span class="navigate__label--secondary"
-            >ขอใบอนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
-            (ชาวไทย)</span
-          >
-        </div>
-      </nav>
+    <div class="main-content">
+      <ksp-top-nav></ksp-top-nav>
 
       <router-outlet></router-outlet>
 
-      <ksp-bottom-menu></ksp-bottom-menu>
+      <div class="bottom__container">
+        <ksp-bottom-menu></ksp-bottom-menu>
+      </div>
     </div>
   </div>
 </div>

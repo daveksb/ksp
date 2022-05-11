@@ -63,7 +63,7 @@ a:focus {
 }
 
 #sidebar ul li a.sub-menu {
-  padding: 5px 0;
+  padding: 5px 3px 5px 0;
   font-size: 16px;
 }
 

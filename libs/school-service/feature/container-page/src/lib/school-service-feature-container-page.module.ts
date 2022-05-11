@@ -4,6 +4,7 @@ import { SchoolServiceContainerPageComponent } from './school-service-container-
 import { RouterModule } from '@angular/router';
 import { SharedUiSideMenuModule } from '@ksp/shared/ui/side-menu';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
+import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 
 @NgModule({
   imports: [
@@ -11,6 +12,7 @@ import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
     SharedUiSideMenuModule,
     SharedUiBottomMenuModule,
     RouterModule,
+    SharedUiTopNavModule,
   ],
   declarations: [SchoolServiceContainerPageComponent],
   exports: [SchoolServiceContainerPageComponent],

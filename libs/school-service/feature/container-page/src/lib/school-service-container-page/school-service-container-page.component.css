@@ -1,50 +1,25 @@
 .container-fluid {
-  margin: 0;
   padding: 0;
-  /*
-  max-width: 1440px;
-  height: 100vh;
- */
-}
-
-.side__menu {
-}
-
-.navbar {
-  padding: 15px 10px;
-  background-image: url(/assets/images/header-sidebar.png);
-  background-size: cover;
-  height: 54px;
-  width: 100%;
 }
 
 .wrapper {
   display: grid;
-  grid-template-columns: 250px 100%;
+  grid-template-columns: 237px auto;
 }
 
-#sidebar ul li.active > a,
-a[aria-expanded='true'] {
-  color: #f68b33;
-}
-
-#content {
-  max-width: 1440px;
+.main-content {
+  /* max-width: 1440px;
   padding: 92px;
   height: 100vh;
   width: 100%;
   padding: 0 0 0 12px;
   min-height: 100vh;
-  transition: all 0.3s;
+  transition: all 0.3s; */
 }
 
-.navigate__label {
-  font-family: 'KSP Bold';
-  font-size: 22px;
-  color: #e87a02;
-}
-.navigate__label--secondary {
-  font-family: 'KSP Bold';
-  font-size: 22px;
-  color: #656565;
+.bottom__container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: aliceblue;
 }
