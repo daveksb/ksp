@@ -32,3 +32,9 @@
 .login__time {
   font-size: 14px;
 }
+
+@media (max-width: 600px) {
+  .user__info {
+    display: none;
+  }
+}
