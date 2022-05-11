@@ -2,6 +2,8 @@
   "version": 2,
   "projects": {
     "e-service": "apps/e-service",
+    "e-service-feature-accusation-list": "libs/e-service/feature/accusation-list",
+    "e-service-feature-accusation-record": "libs/e-service/feature/accusation-record",
     "e-service-feature-container-page": "libs/e-service/feature/container-page",
     "e-service-feature-login": "libs/e-service/feature/login",
     "school-service": "apps/school-service",
@@ -17,7 +19,9 @@
     "self-service-ui-menu": "libs/self-service/ui/menu",
     "self-service-ui-payment": "libs/self-service/ui/payment",
     "shared-assets": "libs/shared/assets",
+    "shared-ui-bottom-menu": "libs/shared/ui/bottom-menu",
     "shared-ui-side-menu": "libs/shared/ui/side-menu",
+    "shared-ui-top-nav": "libs/shared/ui/top-nav",
     "shared-ui-university-search": "libs/shared/ui/university-search",
     "uni-service": "apps/uni-service",
     "uni-service-feature-container-page": "libs/uni-service/feature/container-page",

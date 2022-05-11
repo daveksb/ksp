@@ -15,6 +15,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@ksp/e-service/feature/accusation-list": [
+        "libs/e-service/feature/accusation-list/src/index.ts"
+      ],
+      "@ksp/e-service/feature/accusation-record": [
+        "libs/e-service/feature/accusation-record/src/index.ts"
+      ],
       "@ksp/e-service/feature/container-page": [
         "libs/e-service/feature/container-page/src/index.ts"
       ],
@@ -48,7 +54,9 @@
         "libs/self-service/ui/payment/src/index.ts"
       ],
       "@ksp/shared/assets": ["libs/shared/assets/src/index.ts"],
+      "@ksp/shared/ui/bottom-menu": ["libs/shared/ui/bottom-menu/src/index.ts"],
       "@ksp/shared/ui/side-menu": ["libs/shared/ui/side-menu/src/index.ts"],
+      "@ksp/shared/ui/top-nav": ["libs/shared/ui/top-nav/src/index.ts"],
       "@ksp/shared/ui/university-search": [
         "libs/shared/ui/university-search/src/index.ts"
       ],

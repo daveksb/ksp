@@ -10,6 +10,6 @@ export class EServiceLoginComponent {
   constructor(private router: Router) {}
 
   login() {
-    this.router.navigate(['/', 'request', 'home']);
+    this.router.navigate(['/', 'accusation', 'list']);
   }
 }
