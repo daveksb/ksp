@@ -5,6 +5,7 @@ import { ReqDegreeCertStepTwoTabTwoComponent } from './req-degree-cert-step-two-
 import { ReqDegreeCertStepThreeTabOneComponent } from './req-degree-cert-step-three-tab-one/req-degree-cert-step-three-tab-one.component';
 import { ReqDegreeCertStepThreeTabTwoComponent } from './req-degree-cert-step-three-tab-two/req-degree-cert-step-three-tab-two.component';
 import { ReqDegreeCertStepTwoTabThreeComponent } from './req-degree-cert-step-two-tab-three/req-degree-cert-step-two-tab-three.component';
+import { ReqDegreeCertStepTwoTabFourComponent } from './req-degree-cert-step-two-tab-four/req-degree-cert-step-two-tab-four.component';
 
 @NgModule({
   imports: [CommonModule],
@@ -14,6 +15,7 @@ import { ReqDegreeCertStepTwoTabThreeComponent } from './req-degree-cert-step-tw
     ReqDegreeCertStepThreeTabOneComponent,
     ReqDegreeCertStepThreeTabTwoComponent,
     ReqDegreeCertStepTwoTabThreeComponent,
+    ReqDegreeCertStepTwoTabFourComponent,
   ],
   exports: [
     ReqDegreeCertStepTwoTabOneComponent,
@@ -21,6 +23,7 @@ import { ReqDegreeCertStepTwoTabThreeComponent } from './req-degree-cert-step-tw
     ReqDegreeCertStepThreeTabOneComponent,
     ReqDegreeCertStepThreeTabTwoComponent,
     ReqDegreeCertStepTwoTabThreeComponent,
+    ReqDegreeCertStepTwoTabFourComponent,
   ],
 })
 export class UniServiceUiFormsModule {}
