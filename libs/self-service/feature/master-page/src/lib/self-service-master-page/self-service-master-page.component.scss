@@ -1,41 +1,16 @@
-.container-fluid {
+.wrapper {
   padding: 0;
   display: grid;
   grid-template-columns: 237px auto;
 }
 
-.wrapper {
-  display: grid;
-  grid-template-columns: 237px auto;
-}
-
-@font-face {
-  font-family: 'KSP Regular';
-  src: URL('/assets/font/KSP/ttf/KSP\ Regular\ ver\ 1.00.ttf')
-    format('truetype');
-  font-family: 'KSP Bold';
-  src: URL('/assets/font/KSP/KSP\ Bold\ ver\ 1.00.ttf') format('truetype');
-}
-
-@media only screen and (max-width: 1200px) {
+@media (max-width: 1200px) {
   .wrapper {
     display: grid;
     grid-template-columns: 100%;
   }
 
-  .side__container {
-    display: none;
-  }
-}
-
-@media only screen and (max-width: 980px) {
-  .side__container {
-    display: none;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .side__container {
+  .side__menu {
     display: none;
   }
 }
