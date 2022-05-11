@@ -1,4 +1,18 @@
-<div class="container-fluid">
+<div class="container-fluid wrapper">
+  <div class="side__container">
+    <ksp-side-menu
+      [menuConfig]="menuConfig"
+      [showHeader]="false"
+    ></ksp-side-menu>
+  </div>
+
+  <div class="main__container">
+    <ksp-top-nav></ksp-top-nav>
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<!-- <div class="container-fluid">
   <div class="wrapper">
     <ksp-side-menu
       [menuConfig]="menuConfig"
@@ -19,3 +33,4 @@
     </div>
   </div>
 </div>
+ -->
