@@ -3,27 +3,7 @@
   margin-bottom: 20px;
 }
 
-.mat-tab-label {
-  background: #eff1f3;
-  color: #515153;
-  font-family: 'KSP Bold';
-  width: 180px;
-  margin: 0 2px;
-}
-
-.mat-tab-label-active {
-  background-color: white;
-  opacity: 1 !important;
-  border-top: solid #0056ff;
-  border-bottom: none;
-}
-
-.mat-tab-body-content {
-  padding: 25px;
-}
-
 .btn-primary {
-  font-family: 'KSP Bold';
   font-size: 14px;
   background: #3f89fe;
   border: 1px solid #cccccc;
@@ -37,7 +17,6 @@
 }
 
 .btn-secondary {
-  font-family: 'KSP Bold';
   font-size: 14px;
   background: #e8e8e8;
   border: 1px solid #cccccc;
