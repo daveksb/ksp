@@ -4,9 +4,9 @@
   padding: 18px 36px;
   background-size: cover;
   height: 100vh;
+  font-family: 'KSP Bold';
 }
 .btn-secondary {
-  font-family: 'KSP Bold';
   font-size: 20px;
   background-color: #ffaa65;
   color: #000000;
@@ -19,7 +19,6 @@
   display: none;
 }
 .form-label {
-  font-family: 'KSP Bold';
   font-size: 24px;
 }
 .form-control {
@@ -50,23 +49,19 @@
   padding: 0 42px;
 }
 .label__button {
-  font-family: 'KSP Bold';
   font-size: 24px;
 }
 h1 {
-  font-family: 'KSP Bold';
   font-size: 50px;
   color: #222222;
   margin: 0;
 }
 h3 {
-  font-family: 'KSP Bold';
   font-size: 30px;
   color: #666666;
   margin: 0 0 46px 0;
 }
 .label__input {
-  font-family: 'KSP Bold';
   font-size: 24px;
   color: #222222;
 }
@@ -88,16 +83,8 @@ h3 {
   justify-content: flex-end;
 }
 .footer__label {
-  font-family: 'KSP Bold';
   font-size: 20px;
   color: #222222;
-}
-@font-face {
-  font-family: 'KSP Regular';
-  src: URL('/assets/font/KSP/ttf/KSP\ Regular\ ver\ 1.00.ttf')
-    format('truetype');
-  font-family: 'KSP Bold';
-  src: URL('/assets/font/KSP/KSP\ Bold\ ver\ 1.00.ttf') format('truetype');
 }
 
 /* device  responsive*/
@@ -123,7 +110,6 @@ h3 {
     padding: 24px 32px;
   }
   .btn-secondary {
-    font-family: 'KSP Bold';
     font-size: 20px;
     background-color: #fff;
     color: #000000;

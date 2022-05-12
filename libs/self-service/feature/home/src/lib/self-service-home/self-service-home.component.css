@@ -6,7 +6,6 @@
   height: 100vh;
 }
 .btn-secondary {
-  font-family: 'KSP Bold';
   font-size: 20px;
   background-color: #fff;
   color: #000000;
@@ -15,15 +14,12 @@
   height: 46px;
   border-radius: 10px;
 }
-.dropdown-toggle::after {
-  display: none;
-}
+
 .login__container {
   text-align: center;
   padding: 82px 0px;
 }
 h3 {
-  font-family: 'KSP Bold';
   font-size: 30px;
   color: #666666;
   margin: 0 0 36px 0;
@@ -43,7 +39,6 @@ h3 {
   cursor: pointer;
 }
 .label__content {
-  font-family: 'KSP Bold';
   font-size: 50px;
   color: #222222;
   margin: 0 0 46px 0;
@@ -53,17 +48,10 @@ h3 {
   justify-content: flex-end;
 }
 .footer__label {
-  font-family: 'KSP Bold';
   font-size: 20px;
   color: #222222;
 }
-@font-face {
-  font-family: 'KSP Regular';
-  src: URL('/assets/font/KSP/ttf/KSP\ Regular\ ver\ 1.00.ttf')
-    format('truetype');
-  font-family: 'KSP Bold';
-  src: URL('/assets/font/KSP/KSP\ Bold\ ver\ 1.00.ttf') format('truetype');
-}
+
 /* device  responsive*/
 @media only screen and (max-width: 980px) {
   .container {
