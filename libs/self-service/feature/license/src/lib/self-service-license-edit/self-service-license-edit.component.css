@@ -33,7 +33,6 @@
 }
 
 .form-label {
-  font-family: 'KSP Bold';
   font-size: 16px;
   color: #656565;
 }
@@ -43,13 +42,11 @@
 }
 
 .form-control-sm {
-  font-family: 'KSP Bold';
   font-size: 16px;
   color: #000000;
 }
 
 .form-select-sm {
-  font-family: 'KSP Bold';
   font-size: 16px;
   color: #000000;
 }
@@ -61,14 +58,12 @@
 }
 
 .checkbox-label {
-  font-family: 'KSP Bold';
   font-size: 16px;
   color: #656565;
   margin-left: 10px;
 }
 
 .table {
-  font-family: 'KSP Bold';
   font-size: 14px;
   background-color: #edf8ff;
   border: 1px solid #ecedf3;
@@ -103,7 +98,6 @@
 }
 
 .btn-upload {
-  font-family: 'KSP Bold';
   font-size: 14px;
   background: #3f89fe;
   border: 1px solid #cccccc;
@@ -116,31 +110,18 @@
 }
 
 .table-label-head {
-  font-family: 'KSP Bold';
   color: black;
   font-size: 20px;
   margin-bottom: 7px;
 }
 
 .table-label-warn {
-  font-family: 'KSP Bold';
   color: red;
 }
 
 .checkbox-1 {
   width: 15px;
   height: 15px;
-}
-
-/* ---------------------------------------------------
-    MEDIAQUERIES
-  ----------------------------------------------------- */
-@font-face {
-  font-family: 'KSP Regular';
-  src: URL('/assets/font/KSP/ttf/KSP\ Regular\ ver\ 1.00.ttf')
-    format('truetype');
-  font-family: 'KSP Bold';
-  src: URL('/assets/font/KSP/KSP\ Bold\ ver\ 1.00.ttf') format('truetype');
 }
 
 @media only screen and (max-width: 768px) {
@@ -167,5 +148,4 @@
   .center-label {
     margin: 0;
   }
-
 }
