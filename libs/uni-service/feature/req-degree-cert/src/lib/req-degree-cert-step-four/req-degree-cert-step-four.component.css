@@ -4,7 +4,6 @@
   background-color: #f6f6f6;
 }
 .title__label {
-  font-family: 'KSP Bold';
   font-size: 22px;
   color: #000000;
   margin: 0 64px 12px 64px;
@@ -15,7 +14,6 @@
   display: flex;
 }
 .label__content {
-  font-family: 'KSP Bold';
   font-size: 18px;
   color: #808080;
   margin-right: 24px;
@@ -44,22 +42,14 @@
   margin-top: 16px;
 }
 .detail__header {
-  font-family: 'KSP Bold';
   font-size: 22px;
   color: #000000;
 }
 .detail__header--secondary {
-  font-family: 'KSP Bold';
   font-size: 18px;
   color: #000000;
 }
-.form-control {
-  font-family: 'KSP Bold';
-  font-size: 20px;
-  background-color: #fff;
-  text-align: center;
-  color: #b8bcc3;
-}
+
 .table {
   margin-top: 16px;
   background-color: #fff;
@@ -70,7 +60,6 @@
 }
 .header__table {
   background-color: #edf6ff;
-  font-family: 'KSP Bold';
   font-size: 16px;
 }
 .table > :not(caption) > * > * {
@@ -80,11 +69,9 @@
   border-top: 0;
 }
 .label__table {
-  font-family: 'KSP Bold';
   font-size: 16px;
 }
 .label__table--secondary {
-  font-family: 'KSP Bold';
   font-size: 16px;
   color: #808080;
 }
@@ -96,7 +83,6 @@
 }
 
 .btn-upload {
-  font-family: 'KSP Bold';
   font-size: 16px;
   background-color: #0056ff;
   color: #fff;
@@ -106,7 +92,6 @@
 }
 
 .label__text {
-  font-family: 'KSP Bold';
   font-size: 16px;
   margin-left: 8px;
   color: #f23c51;
@@ -120,13 +105,14 @@
   border-radius: 4px;
   border: 1px solid #f68b33;
   margin: 20px;
+  margin-left: 0px;
 }
 
 .button__container-2 {
   padding-bottom: 7px;
   display: grid;
   grid-template-columns: 1.25fr 2fr;
-  padding: 20px;
+  padding: 0 65px;
 }
 
 .btn-save {
@@ -147,12 +133,4 @@
   border-radius: 4px;
   border: 1px solid #0056ff;
   margin: 20px 10px;
-}
-
-@font-face {
-  font-family: 'KSP Regular';
-  src: URL('/assets/font/KSP/ttf/KSP\ Regular\ ver\ 1.00.ttf')
-    format('truetype');
-  font-family: 'KSP Bold';
-  src: URL('/assets/font/KSP/KSP\ Bold\ ver\ 1.00.ttf') format('truetype');
 }
