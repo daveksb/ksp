@@ -9,7 +9,7 @@
 
 .top-container {
   background-color: white;
-  margin: 20px;
+  margin: 15px;
 }
 
 .bottom-container {
@@ -25,6 +25,7 @@
 .box__title {
   font-size: 22px;
   padding-left: 15px;
+  padding-top: 15px;
 }
 
 .detail__container {
@@ -45,7 +46,6 @@
 .detail__container--second {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 20px;
 }
 
 .detail__container--first {
@@ -54,7 +54,7 @@
 }
 
 .button__container {
-  padding-bottom: 7px;
+  padding: 10px 0;
   display: flex;
   justify-content: end;
 }
@@ -80,11 +80,11 @@
 .table {
   background-color: #fff;
   border: 1px solid #eceef2;
+
 }
 
 .table-responsive {
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
   margin: 10px;
 }
 
@@ -107,7 +107,7 @@
 }
 
 .btn-upload {
-  font-size: 14px;
+  font-size: 16px;
   background: #fff;
   border: 1px solid #0056ff;
   box-sizing: border-box;

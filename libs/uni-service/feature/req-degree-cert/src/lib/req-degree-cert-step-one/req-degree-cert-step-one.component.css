@@ -7,7 +7,8 @@
   font-family: "KSP Bold";
   font-size: 22px;
   color: #000000;
-  margin: 24px 64px 12px 64px;
+  margin: 0 64px 12px 64px;
+  padding-top: 12px;
 }
 .content__header {
   display: flex;
@@ -86,7 +87,7 @@
 }
 .detail__content--fifth {
   display: grid;
-  grid-template-columns: 10% 1fr 1fr;
+  grid-template-columns: 15% 1fr 1fr;
   grid-column-gap: 18px;
   margin-bottom: 14px;
 }
