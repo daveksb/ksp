@@ -1,7 +1,7 @@
 .container {
-  max-width: 1440px;
+  max-width: 100%;
   padding: 0;
-  background-color: #f6f6f6;
+  background-color: #e5e5e5;
 }
 .title__label {
   font-size: 22px;
