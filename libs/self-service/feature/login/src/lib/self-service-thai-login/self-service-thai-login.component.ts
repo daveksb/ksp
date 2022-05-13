@@ -10,7 +10,7 @@ export class SelfServiceThaiLoginComponent {
   constructor(private router: Router) {}
 
   register() {
-    this.router.navigate(['/', 'register']);
+    this.router.navigate(['/', 'policy']);
   }
 
   login() {

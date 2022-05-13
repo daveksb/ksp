@@ -7,6 +7,7 @@ import {
 } from '@ksp/self-service/feature/license';
 import { SelfServiceThaiLoginComponent } from '@ksp/self-service/feature/login';
 import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master-page';
+import { PrivacyPolicyComponent } from '@ksp/self-service/ui/content';
 import {
   PaymentChannelComponent,
   PaymentHistoryComponent,
@@ -15,6 +16,7 @@ import {
 const routes: Routes = [
   { path: 'home', component: SelfServiceHomeComponent },
   { path: 'login', component: SelfServiceThaiLoginComponent },
+  { path: 'policy', component: PrivacyPolicyComponent },
   {
     path: 'license',
     component: SelfServiceMasterPageComponent,
