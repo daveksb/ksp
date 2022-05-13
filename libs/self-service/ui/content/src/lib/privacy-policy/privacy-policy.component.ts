@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ksp-privacy-policy',
@@ -6,8 +7,10 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./privacy-policy.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PrivacyPolicyComponent implements OnInit {
-  constructor() {}
+export class PrivacyPolicyComponent {
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  register() {
+    this.router.navigate(['/', 'register-1']);
+  }
 }

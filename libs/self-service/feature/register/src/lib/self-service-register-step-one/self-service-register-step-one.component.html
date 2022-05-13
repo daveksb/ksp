@@ -1,0 +1,125 @@
+<div class="container">
+  <div class="form__container">
+    <h3>สมัครสมาชิก</h3>
+    <div><img src="/assets/images/first-step-progress.png" /></div>
+    <div class="form__detail">
+      <div class="detail__container">
+        <div class="detail__container--left">
+          <div class="form-group field__container">
+            <label for="prefixFormControlSelect">คำนำหน้าชื่อภาษาไทย</label>
+            <select class="form-control" id="prefixFormControlSelect">
+              <option>นางสาว</option>
+            </select>
+          </div>
+          <div class="form-group field__container">
+            <label>ชื่อ</label>
+            <input
+              type="text"
+              class="form-control"
+              id="firstnameFormControlInput"
+              placeholder=""
+            />
+          </div>
+        </div>
+        <div class="detail__container--right">
+          <div class="form-group field__container">
+            <label for="lastnameFormControlInput">นามสกุล</label>
+            <input
+              type="text"
+              class="form-control"
+              id="lastnameFormControlInput"
+              placeholder=""
+            />
+          </div>
+        </div>
+      </div>
+      <div class="detail__container">
+        <div class="detail__container--left">
+          <div class="form-group field__container">
+            <label for="prefixFormControlSelect">คำนำหน้าชื่อภาษาอังกฤษ</label>
+            <select class="form-control" id="prefixFormControlSelect">
+              <option>Miss</option>
+            </select>
+          </div>
+          <div class="form-group field__container">
+            <label for="firstnameFormControlInput">ชื่อ</label>
+            <input
+              type="text"
+              class="form-control"
+              id="firstnameFormControlInput"
+              placeholder=""
+            />
+          </div>
+        </div>
+        <div class="detail__container--right">
+          <div class="form-group field__container">
+            <label for="lastnameFormControlInput">นามสกุล</label>
+            <input
+              type="text"
+              class="form-control"
+              id="lastnameFormControlInput"
+              placeholder=""
+            />
+          </div>
+        </div>
+      </div>
+      <div class="detail__container">
+        <div class="form-group field__container">
+          <label for="exampleFormControlInput1">วันเดือนปีเกิด</label>
+          <input
+            type="date"
+            class="form-control"
+            id="dateFormControlInput"
+            placeholder=""
+          />
+        </div>
+        <div class="form-group field__container">
+          <label
+            for="
+          nationalityFormControlSelect"
+            >สัญชาติ</label
+          >
+          <select class="form-control" id="nationalityFormControlSelect">
+            <option>ไทย</option>
+          </select>
+        </div>
+      </div>
+      <div class="detail__container">
+        <div class="form-group field__container">
+          <label for="phoneFormControlInput">เบอร์โทร</label>
+          <input
+            type="text"
+            class="form-control"
+            id="phoneFormControlInput"
+            placeholder=""
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput">อีเมล</label>
+          <input
+            type="email"
+            class="form-control field__container"
+            id="exampleFormControlInput"
+            placeholder="name@example.com"
+          />
+        </div>
+      </div>
+      <div class="address__detail">
+        <div class="form-group">
+          <label for="addressFormControlTextarea">ที่อยู่ปัจจุบัน</label>
+          <textarea
+            class="form-control"
+            id="addressFormControlTextarea"
+            rows="3"
+          ></textarea>
+        </div>
+      </div>
+      <div class="form__footer">
+        <button (click)="nextPage()" type="submit" class="btn btn-primary">
+          ไปต่อ
+        </button>
+        <div (click)="loginPage()" class="label__login">เข้าสู่ระบบ</div>
+      </div>
+    </div>
+  </div>
+</div>
