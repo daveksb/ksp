@@ -7,6 +7,8 @@ import { FormUserExperienceComponent } from './form-user-experience/form-user-ex
 import { FormUserInfoComponent } from './form-user-info/form-user-info.component';
 import { FormUserPerformanceComponent } from './form-user-performance/form-user-performance.component';
 import { FormUserWorkplaceComponent } from './form-user-workplace/form-user-workplace.component';
+import { FormVerifyOtpComponent } from './form-verify-otp/form-verify-otp.component';
+import { FormVerifyPhoneComponent } from './form-verify-phone/form-verify-phone.component';
 
 @NgModule({
   imports: [CommonModule],
@@ -18,6 +20,8 @@ import { FormUserWorkplaceComponent } from './form-user-workplace/form-user-work
     FormUserInfoComponent,
     FormUserPerformanceComponent,
     FormUserWorkplaceComponent,
+    FormVerifyOtpComponent,
+    FormVerifyPhoneComponent,
   ],
   exports: [
     FormUploadImageComponent,
@@ -27,6 +31,8 @@ import { FormUserWorkplaceComponent } from './form-user-workplace/form-user-work
     FormUserInfoComponent,
     FormUserPerformanceComponent,
     FormUserWorkplaceComponent,
+    FormVerifyOtpComponent,
+    FormVerifyPhoneComponent,
   ],
 })
 export class SelfServiceUiFormsModule {}

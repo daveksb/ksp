@@ -13,3 +13,7 @@ export * from './lib/form-user-info/form-user-info.component';
 export * from './lib/form-user-performance/form-user-performance.component';
 
 export * from './lib/form-user-workplace/form-user-workplace.component';
+
+export * from './lib/form-verify-otp/form-verify-otp.component';
+
+export * from './lib/form-verify-phone/form-verify-phone.component';
