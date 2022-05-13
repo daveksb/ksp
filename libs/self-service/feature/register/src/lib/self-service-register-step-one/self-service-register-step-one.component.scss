@@ -1,0 +1,137 @@
+.container {
+  max-width: 1440px;
+  background-image: url('/assets/images/BG-secondary.png');
+  padding: 180px 238px;
+  background-size: cover;
+}
+
+.form__container {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  box-shadow: 0px 4px 10px rgba(63, 137, 254, 0.1);
+  border-radius: 20px;
+  padding: 24px 36px;
+  text-align: center;
+}
+
+.row > * {
+  padding: 0;
+}
+
+.detail__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 8px;
+  margin-bottom: 8px;
+}
+.detail__container--left {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  grid-column-gap: 8px;
+}
+
+h3 {
+  font-family: 'KSP Bold';
+  font-size: 30px;
+  color: #000000;
+  margin-bottom: 36px;
+}
+.field__container {
+  margin-bottom: 8px;
+}
+.form__detail {
+  font-family: 'KSP Bold';
+  font-size: 14px;
+  color: #666666;
+  text-align: left;
+  padding: 24px 0 0 0;
+}
+.address__detail {
+  display: grid;
+  grid-column-gap: 8px;
+  grid-row-gap: 12px;
+  margin-top: 8px;
+}
+.btn-primary {
+  margin-top: 18px;
+  background: #3f89fe;
+  border-radius: 10px;
+  padding: 4px 156px;
+  font-family: 'KSP Bold';
+  font-size: 20px;
+  color: #fff;
+}
+.form__footer {
+  text-align: center;
+}
+.label__login {
+  font-family: 'KSP Bold';
+  font-size: 20px;
+  color: #666666;
+  text-decoration: underline;
+  margin-top: 20px;
+  margin-top: 24px;
+}
+@font-face {
+  font-family: 'KSP Regular';
+  src: URL('/assets/font/KSP/ttf/KSP\ Regular\ ver\ 1.00.ttf')
+    format('truetype');
+  font-family: 'KSP Bold';
+  src: URL('/assets/font/KSP/KSP\ Bold\ ver\ 1.00.ttf') format('truetype');
+}
+/* device  responsive*/
+@media only screen and (max-width: 980px) {
+  .container {
+    background-image: url('/assets/images/BG-secondary.png');
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    padding: 120px;
+  }
+}
+/* mobile */
+@media only screen and (max-width: 768px) {
+  .container {
+    width: 100%;
+    height: 100%;
+    background-image: url('/assets/images/BG-mobile.png');
+    padding: 24px;
+    background-size: cover;
+  }
+  .form__container {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    box-shadow: 0px 4px 10px rgba(63, 137, 254, 0.1);
+    border-radius: 20px;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .detail__container {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 0;
+  }
+  .detail__container--left {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 0;
+  }
+  .field__container {
+    margin-bottom: 8px;
+  }
+  .btn-primary {
+    margin-top: 18px;
+    background: #3f89fe;
+    border-radius: 10px;
+    padding: 4px 24px;
+    font-family: 'KSP Bold';
+    font-size: 20px;
+    color: #fff;
+    width: 100%;
+  }
+}

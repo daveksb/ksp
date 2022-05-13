@@ -16,6 +16,7 @@
     "self-service-feature-login": "libs/self-service/feature/login",
     "self-service-feature-master-page": "libs/self-service/feature/master-page",
     "self-service-feature-register": "libs/self-service/feature/register",
+    "self-service-ui-content": "libs/self-service/ui/content",
     "self-service-ui-forms": "libs/self-service/ui/forms",
     "self-service-ui-menu": "libs/self-service/ui/menu",
     "self-service-ui-payment": "libs/self-service/ui/payment",
