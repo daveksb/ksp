@@ -4,6 +4,7 @@ import { UniServiceContainerPageComponent } from './uni-service-container-page/u
 import { RouterModule } from '@angular/router';
 import { SelfServiceUiMenuModule } from '@ksp/self-service/ui/menu';
 import { SharedUiSideMenuModule } from '@ksp/shared/ui/side-menu';
+import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 
 @NgModule({
   imports: [
@@ -11,6 +12,7 @@ import { SharedUiSideMenuModule } from '@ksp/shared/ui/side-menu';
     RouterModule,
     SelfServiceUiMenuModule,
     SharedUiSideMenuModule,
+    SharedUiTopNavModule,
   ],
   declarations: [UniServiceContainerPageComponent],
   exports: [UniServiceContainerPageComponent],

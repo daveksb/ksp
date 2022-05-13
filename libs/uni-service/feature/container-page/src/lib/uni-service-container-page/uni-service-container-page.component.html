@@ -1,13 +1,15 @@
-<div class="container-fluid">
-  <div class="wrapper">
-    <ksp-side-menu [menuConfig]="menuConfig"></ksp-side-menu>
+<div class="container-fluid wrapper">
+  <ksp-side-menu
+    class="side__menu"
+    [menuConfig]="menuConfig"
+    [showHeader]="true"
+  ></ksp-side-menu>
 
-    <div id="content">
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="navigate__label">หน้าแรก</div>
-      </nav>
-
-      <router-outlet></router-outlet>
-    </div>
+  <div>
+    <ksp-top-nav>
+      <span header>ใบอนุญาตประกอบวิชาชีพ</span>
+      <span subHeader>ขอขึ้นใบอนุญาตประกอบวิชาชีพ</span>
+    </ksp-top-nav>
+    <router-outlet></router-outlet>
   </div>
 </div>
