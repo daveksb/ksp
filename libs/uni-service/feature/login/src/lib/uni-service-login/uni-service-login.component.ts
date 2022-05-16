@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ForgotPasswordPersonIdComponent } from 'libs/uni-service/ui/dialog/src';
 
 @Component({
   selector: 'ksp-uni-service-login',
@@ -7,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./uni-service-login.component.css'],
 })
 export class UniServiceLoginComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router, public dialog: MatDialog) {}
 
   home() {
     this.router.navigate(['/', 'request', 'home']);
@@ -15,5 +17,16 @@ export class UniServiceLoginComponent {
 
   register() {
     this.router.navigate(['/', 'register']);
+  }
+
+  forgotPassword() {
+    const dialogRef = this.dialog.open(ForgotPasswordPersonIdComponent, {
+      height: '400px',
+      width: '600px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }
