@@ -12,7 +12,6 @@ export class UniServiceRegisterRequesterComponent {
   constructor(private router: Router, public dialog: MatDialog) {}
 
   search() {
-    //this.router.navigate(['/', 'search-uni']);
     const dialogRef = this.dialog.open(UniversitySearchComponent, {
       height: '900px',
       width: '1200px',
@@ -21,5 +20,9 @@ export class UniServiceRegisterRequesterComponent {
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
+  }
+
+  nextPage() {
+    this.router.navigate(['/', 'register-coordinator']);
   }
 }

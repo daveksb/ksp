@@ -66,26 +66,14 @@
 
     <ksp-form-register-coordinator-info></ksp-form-register-coordinator-info>
 
-    <ksp-form-register-file-upload></ksp-form-register-file-upload>
-
     <div class="footer__container">
-      <div class="footer__content--left">
-        <button type="button" class="btn btn-third btn-sm label__button">
-          ย้อนกลับ
-        </button>
-      </div>
-      <div class="footer__content">
-        <button type="button" class="btn btn-fourth btn-sm label__button">
-          ยกเลิก
-        </button>
-        <button
-          (click)="search()"
-          type="button"
-          class="btn btn-primary btn-sm label__button"
-        >
-          บันทึก
-        </button>
-      </div>
+      <button
+        (click)="nextPage()"
+        type="button"
+        class="btn btn-third btn-sm label__button"
+      >
+        ถัดไป
+      </button>
     </div>
   </div>
 </div>
