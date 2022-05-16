@@ -9,9 +9,10 @@ import { FormUserPerformanceComponent } from './form-user-performance/form-user-
 import { FormUserWorkplaceComponent } from './form-user-workplace/form-user-workplace.component';
 import { FormVerifyOtpComponent } from './form-verify-otp/form-verify-otp.component';
 import { FormVerifyPhoneComponent } from './form-verify-phone/form-verify-phone.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   declarations: [
     FormUploadImageComponent,
     FormUserAddressComponent,

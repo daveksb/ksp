@@ -1,1 +1,17 @@
-<p>form-verify-otp works!</p>
+<div class="d-flex flex-column">
+  <div>ยืนยันตัวตน OTP</div>
+
+  <div class="input__group">
+    <input type="number" min="0" max="9" step="1" />
+    <input type="number" min="0" max="9" step="1" />
+    <input type="number" min="0" max="9" step="1" />
+    <input type="number" min="0" max="9" step="1" />
+    <input type="number" min="0" max="9" step="1" />
+    <input type="number" min="0" max="9" step="1" />
+  </div>
+
+  <div>
+    <button>ยกเลิก</button>
+    <button (click)="nextStep()">ยืนยัน</button>
+  </div>
+</div>

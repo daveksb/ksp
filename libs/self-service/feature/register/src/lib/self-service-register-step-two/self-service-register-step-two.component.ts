@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { FormVerifyOtpComponent } from '@ksp/self-service/ui/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { FormVerifyPhoneComponent } from '@ksp/self-service/ui/forms';
 
 @Component({
   selector: 'ksp-self-service-register-step-two',
@@ -11,7 +11,7 @@ export class SelfServiceRegisterStepTwoComponent {
   constructor(public dialog: MatDialog) {}
 
   openDialog() {
-    const dialogRef = this.dialog.open(FormVerifyOtpComponent, {
+    const dialogRef = this.dialog.open(FormVerifyPhoneComponent, {
       height: '400px',
       width: '600px',
     });
