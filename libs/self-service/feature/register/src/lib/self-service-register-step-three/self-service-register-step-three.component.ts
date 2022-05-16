@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { RegisterCompletedComponent } from '@ksp/self-service/ui/content';
 
 @Component({
@@ -9,7 +10,7 @@ import { RegisterCompletedComponent } from '@ksp/self-service/ui/content';
 })
 export class SelfServiceRegisterStepThreeComponent {
   //  constructor(public dialog: MatDialog, public selfRef: MatDialogRef<any>) {}
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private router: Router) {}
 
   openDialog() {
     const dialogRef = this.dialog.open(RegisterCompletedComponent, {
@@ -20,5 +21,9 @@ export class SelfServiceRegisterStepThreeComponent {
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
+  }
+
+  loginPage() {
+    this.router.navigate(['/', 'login']);
   }
 }
