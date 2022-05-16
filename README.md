@@ -10,4 +10,8 @@ Create sh file and put below command
 
 NETLIFY_TOKEN=xxxxxxxxxxxxx ng deploy "$1"
 
-# then run "sh deploy xxx-service" to deploy
+then run "sh deploy xxx-service" to deploy
+
+## Global style
+
+All apps will use global style from Self-service app (look in app's project.json)
