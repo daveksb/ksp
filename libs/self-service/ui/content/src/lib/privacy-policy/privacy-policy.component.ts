@@ -13,4 +13,8 @@ export class PrivacyPolicyComponent {
   register() {
     this.router.navigate(['/', 'register-1']);
   }
+
+  loginPage() {
+    this.router.navigate(['/', 'login']);
+  }
 }

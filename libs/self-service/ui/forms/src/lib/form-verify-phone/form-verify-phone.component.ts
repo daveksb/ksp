@@ -9,12 +9,16 @@ import { FormVerifyOtpComponent } from '../form-verify-otp/form-verify-otp.compo
 export class FormVerifyPhoneComponent {
   constructor(
     public dialog: MatDialog,
-    public selfRef: MatDialogRef<FormVerifyPhoneComponent>
+
   ) {}
+
+  closeDialog() {
+    this.dialog.closeAll();
+  }
 
   openDialog() {
     // close current dialog before open the new one
-    this.selfRef.close();
+    this.dialog.closeAll();
 
     const dialogRef = this.dialog.open(FormVerifyOtpComponent, {
       height: '400px',

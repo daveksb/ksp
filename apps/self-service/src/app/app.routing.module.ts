@@ -14,6 +14,7 @@ import {
 } from '@ksp/self-service/feature/register';
 
 import { PrivacyPolicyComponent } from '@ksp/self-service/ui/content';
+
 import {
   PaymentChannelComponent,
   PaymentHistoryComponent,
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'register-1', component: SelfServiceRegisterStepOneComponent },
   { path: 'register-2', component: SelfServiceRegisterStepTwoComponent },
   { path: 'register-3', component: SelfServiceRegisterStepThreeComponent },
+
   {
     path: 'license',
     component: SelfServiceMasterPageComponent,

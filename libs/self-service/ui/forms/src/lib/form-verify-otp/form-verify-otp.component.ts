@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,12 +9,17 @@ import { Router } from '@angular/router';
 export class FormVerifyOtpComponent {
   constructor(
     private router: Router,
-    public selfRef: MatDialogRef<FormVerifyOtpComponent>
+    public dialog: MatDialog,
+
   ) {}
+
+  closeDialog() {
+    this.dialog.closeAll();
+  }
 
   nextStep() {
     // close current dialog before open the new one
-    this.selfRef.close();
+    this.dialog.closeAll();
 
     this.router.navigate(['/', 'register-3']);
   }

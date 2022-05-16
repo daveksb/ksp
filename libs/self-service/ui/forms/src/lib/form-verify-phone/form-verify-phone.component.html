@@ -1,10 +1,14 @@
 <div class="d-flex flex-column">
-  <div>กรุณากรอกรหัสยืนยันตัวตน</div>
+  <div class="header__title">กรุณากรอกรหัสยืนยันตัวตน</div>
 
-  <input type="text" />
+  <div class="form__container">
+    <div class="form__title">รหัสถูกส่งไปที่เบอร์</div>
 
-  <div>
-    <button>ยกเลิก</button>
-    <button (click)="openDialog()">ส่งรหัส OTP</button>
+    <input type="text" class="form-control" />
+  </div>
+
+  <div class="btn__container">
+    <button class="btn__back" (click)="closeDialog()">ยกเลิก</button>
+    <button class="btn__accept" (click)="openDialog()">ส่งรหัส OTP</button>
   </div>
 </div>

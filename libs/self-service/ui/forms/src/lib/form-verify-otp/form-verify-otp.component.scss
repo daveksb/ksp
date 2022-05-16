@@ -1,3 +1,59 @@
 .input__group {
-  display: flex;
+  text-align: center;
+  margin: center;
+}
+
+.input__label {
+  margin: 0 4px;
+  font-size: 20px;
+  /* box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; */
+  border: 1px solid #c4c4c4;
+  border-radius: 10px;
+  padding: 8px 0;
+  text-align: end;
+}
+
+.header__title {
+  text-align: center;
+  margin-bottom: 75px;
+  font-size: 24px;
+  color: #000;
+}
+
+.otp__ref {
+  text-align: center;
+  margin-top: 5px;
+  color: #666666;
+}
+
+.resend__otp {
+  text-align: center;
+  margin-top: 10px;
+  color: #666666;
+
+}
+
+.btn__accept {
+  color: #ffffff;
+  border: 1px solid #3f89fe;
+  border-radius: 10px;
+  background-color: #3f89fe;
+  padding: 5px 55px;
+  margin: 5px 10px;
+  font-size: 18px;
+}
+
+.btn__back {
+  color: #656565;
+  background-color: #fff;
+  border: 1px solid #cccccc;
+  border-radius: 10px;
+  padding: 5px 55px;
+  margin: 5px 10px;
+  font-size: 18px;
+}
+
+.btn__container {
+  margin-top: 75px;
+  text-align: center;
 }
