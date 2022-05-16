@@ -1,7 +1,6 @@
 .container {
   max-width: 1440px;
   padding: 0;
-  background-color: #565656;
 }
 .box__header {
   display: flex;
@@ -9,7 +8,7 @@
 }
 .box__container {
   background-color: #fff;
-  margin-left: 40%;
+  /*margin-left: 40%;*/
   padding: 20px;
 }
 .title__box {
@@ -113,11 +112,4 @@
   font-family: 'KSP Bold';
   font-size: 16px;
   color: #808080;
-}
-@font-face {
-  font-family: 'KSP Regular';
-  src: URL('/assets/font/KSP/ttf/KSP\ Regular\ ver\ 1.00.ttf')
-    format('truetype');
-  font-family: 'KSP Bold';
-  src: URL('/assets/font/KSP/KSP\ Bold\ ver\ 1.00.ttf') format('truetype');
 }

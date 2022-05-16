@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ForgotPasswordPersonIdComponent } from 'libs/uni-service/ui/dialog/src';
+import { ForgotPasswordPersonIdComponent } from '@ksp/uni-service/ui/dialog';
 
 @Component({
   selector: 'ksp-uni-service-login',
