@@ -93,6 +93,7 @@
       "@ksp/uni-service/feature/retired": [
         "libs/uni-service/feature/retired/src/index.ts"
       ],
+      "@ksp/uni-service/ui/dialog": ["libs/uni-service/ui/dialog/src/index.ts"],
       "@ksp/uni-service/ui/forms": ["libs/uni-service/ui/forms/src/index.ts"]
     }
   },

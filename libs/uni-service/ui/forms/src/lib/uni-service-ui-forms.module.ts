@@ -6,6 +6,9 @@ import { ReqDegreeCertStepThreeTabOneComponent } from './req-degree-cert-step-th
 import { ReqDegreeCertStepThreeTabTwoComponent } from './req-degree-cert-step-three-tab-two/req-degree-cert-step-three-tab-two.component';
 import { ReqDegreeCertStepTwoTabThreeComponent } from './req-degree-cert-step-two-tab-three/req-degree-cert-step-two-tab-three.component';
 import { ReqDegreeCertStepTwoTabFourComponent } from './req-degree-cert-step-two-tab-four/req-degree-cert-step-two-tab-four.component';
+import { FormRegisterCoordinatorInfoComponent } from './form-register-coordinator-info/form-register-coordinator-info.component';
+import { FormRegisterRequesterInfoComponent } from './form-register-requester-info/form-register-requester-info.component';
+import { FormRegisterFileUploadComponent } from './form-register-file-upload/form-register-file-upload.component';
 
 @NgModule({
   imports: [CommonModule],
@@ -16,6 +19,9 @@ import { ReqDegreeCertStepTwoTabFourComponent } from './req-degree-cert-step-two
     ReqDegreeCertStepThreeTabTwoComponent,
     ReqDegreeCertStepTwoTabThreeComponent,
     ReqDegreeCertStepTwoTabFourComponent,
+    FormRegisterCoordinatorInfoComponent,
+    FormRegisterRequesterInfoComponent,
+    FormRegisterFileUploadComponent,
   ],
   exports: [
     ReqDegreeCertStepTwoTabOneComponent,
@@ -24,6 +30,9 @@ import { ReqDegreeCertStepTwoTabFourComponent } from './req-degree-cert-step-two
     ReqDegreeCertStepThreeTabTwoComponent,
     ReqDegreeCertStepTwoTabThreeComponent,
     ReqDegreeCertStepTwoTabFourComponent,
+    FormRegisterCoordinatorInfoComponent,
+    FormRegisterRequesterInfoComponent,
+    FormRegisterFileUploadComponent,
   ],
 })
 export class UniServiceUiFormsModule {}

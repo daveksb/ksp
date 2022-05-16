@@ -8,10 +8,10 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterCompletedComponent {
-  constructor(private router: Router, private matDialog: MatDialog) {}
+  constructor(private router: Router, public dialog: MatDialog) {}
 
-  loginPage() {
-    this.matDialog.closeAll();
+  login() {
+    this.dialog.closeAll();
     this.router.navigate(['/', 'login']);
   }
 }
