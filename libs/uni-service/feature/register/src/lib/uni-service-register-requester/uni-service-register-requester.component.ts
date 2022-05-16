@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 import { UniversitySearchComponent } from '@ksp/shared/ui/university-search';
 
 @Component({
-  selector: 'ksp-uni-service-register',
-  templateUrl: './uni-service-register.component.html',
-  styleUrls: ['./uni-service-register.component.css'],
+  selector: 'ksp-uni-service-register-requester',
+  templateUrl: './uni-service-register-requester.component.html',
+  styleUrls: ['./uni-service-register-requester.component.scss'],
 })
-export class UniServiceRegisterComponent {
+export class UniServiceRegisterRequesterComponent {
   constructor(private router: Router, public dialog: MatDialog) {}
 
   search() {

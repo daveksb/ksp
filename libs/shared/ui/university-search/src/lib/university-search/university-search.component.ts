@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
 
 export interface University {
   uniCode: string;
@@ -51,10 +52,14 @@ export const data = [
 })
 export class UniversitySearchComponent implements OnInit {
   data: University[] = [];
-  constructor(private location: Location) {}
+  constructor(private location: Location, private matDialog: MatDialog) {}
 
   ngOnInit(): void {
     this.data = [];
+  }
+
+  closeDialog() {
+    this.matDialog.closeAll();
   }
 
   search() {

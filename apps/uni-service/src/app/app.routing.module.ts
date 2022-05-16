@@ -3,7 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { UniServiceContainerPageComponent } from '@ksp/uni-service/feature/container-page';
 import { UniServiceHomeComponent } from '@ksp/uni-service/feature/home';
 import { UniServiceLoginComponent } from '@ksp/uni-service/feature/login';
-import { UniServiceRegisterComponent } from '@ksp/uni-service/feature/register';
+import {
+  UniServiceRegisterCoordinatorComponent,
+  UniServiceRegisterRequesterComponent,
+} from '@ksp/uni-service/feature/register';
+
 import {
   ReqDegreeCertHomeComponent,
   ReqDegreeCertStepFourComponent,
@@ -17,7 +21,14 @@ import { ReqListOfStudentsComponent } from '@ksp/uni-service/feature/req-list-of
 
 const routes: Routes = [
   { path: 'login', component: UniServiceLoginComponent },
-  { path: 'register', component: UniServiceRegisterComponent },
+  {
+    path: 'register-requester',
+    component: UniServiceRegisterRequesterComponent,
+  },
+  {
+    path: 'register-coordinator',
+    component: UniServiceRegisterCoordinatorComponent,
+  },
   {
     path: 'request',
     component: UniServiceContainerPageComponent,

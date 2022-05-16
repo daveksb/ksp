@@ -16,7 +16,7 @@ export class UniServiceLoginComponent {
   }
 
   register() {
-    this.router.navigate(['/', 'register']);
+    this.router.navigate(['/', 'register-requester']);
   }
 
   forgotPassword() {

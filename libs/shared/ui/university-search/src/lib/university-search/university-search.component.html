@@ -2,7 +2,12 @@
   <div class="box__container">
     <div class="box__header">
       <div class="title__box">ค้นหาหน่วยงาน/สถานศึกษา</div>
-      <div><img src="/assets/images/img-uni/close-page.svg" /></div>
+      <div class="close__dialog">
+        <img
+          (click)="closeDialog()"
+          src="/assets/images/img-uni/close-page.svg"
+        />
+      </div>
     </div>
     <hr />
     <div class="box__detail">

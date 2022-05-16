@@ -1,0 +1,151 @@
+.container {
+  max-width: 1440px;
+  padding: 0;
+  background-color: #f6f6f6;
+}
+.header__container {
+  background-image: url('/assets/images/img-uni/top-bar-img.png');
+  background-size: cover;
+}
+.haeder__label {
+  text-align: center;
+  padding: 14px 0;
+  font-family: 'KSP Bold';
+  font-size: 28px;
+}
+.title__label {
+  font-family: 'KSP Bold';
+  font-size: 22px;
+  color: #000000;
+  margin: 24px 128px 12px 128px;
+}
+.content__container {
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 24px;
+  margin: 0px 128px;
+}
+.content__header {
+  display: flex;
+}
+.img__step {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+.label__content {
+  font-family: 'KSP Bold';
+  font-size: 18px;
+  color: #808080;
+  margin-right: 24px;
+}
+.label__content--primary {
+  color: #f68b33;
+}
+.label__content--secondary {
+  color: #0056ff;
+}
+.detail__container {
+  background-color: #f9f9fa;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+.detail__content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 18px;
+}
+.detail__content--secondary {
+  display: grid;
+  grid-template-columns: 150px 1fr 1fr;
+  grid-column-gap: 18px;
+}
+.form-label {
+  font-family: 'KSP Bold';
+  font-size: 16px;
+  color: #656565;
+}
+.form-control {
+  background-color: #fff;
+}
+.search__content {
+  background-image: url(/assets/images/img-uni/search.svg);
+  background-size: 12px;
+}
+
+.detail__header {
+  font-family: 'KSP Bold';
+  font-size: 22px;
+  color: #0056ff;
+}
+.btn-primary {
+  font-family: 'KSP Bold';
+  font-size: 20px;
+  background-color: #0056ff;
+  width: 100%;
+  border-radius: 4px;
+}
+.btn-third {
+  font-family: 'KSP Bold';
+  font-size: 18px;
+  background-color: white;
+  color: #f68b33;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #f68b33;
+}
+.btn-fourth {
+  font-family: 'KSP Bold';
+  font-size: 18px;
+  background-color: white;
+  color: #0056ff;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #0056ff;
+}
+.btn-upload {
+  font-family: 'KSP Bold';
+  font-size: 16px;
+  background-color: #0056ff;
+  color: #fff;
+  border-radius: 4px;
+  width: 120px;
+  height: 30px;
+}
+.table {
+  background-color: #fff;
+}
+.table > :not(:first-child) {
+  border-top: 0;
+}
+.header__table {
+  background-color: #edf6ff;
+  font-family: 'KSP Bold';
+  font-size: 16px;
+}
+.body__table {
+  font-family: 'KSP Bold';
+  font-size: 16px;
+  color: #808080;
+}
+.title__table {
+  text-align: center;
+}
+.detail__table {
+  text-align: center;
+  vertical-align: middle;
+}
+.footer__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.footer__content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 18px;
+}
+.footer__content--left {
+  display: flex;
+  justify-content: flex-start;
+  margin-right: 200px;
+}
