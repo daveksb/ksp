@@ -1,4 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ksp-register-completed',
@@ -6,8 +8,11 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./register-completed.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegisterCompletedComponent implements OnInit {
-  constructor() {}
+export class RegisterCompletedComponent {
+  constructor(private router: Router, private dialogRef: MatDialog) {}
 
-  ngOnInit(): void {}
+  loginPage() {
+    this.dialogRef.closeAll();
+    this.router.navigate(['/', 'login']);
+  }
 }
