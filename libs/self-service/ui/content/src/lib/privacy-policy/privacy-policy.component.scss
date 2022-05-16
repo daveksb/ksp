@@ -25,3 +25,29 @@
   margin-left: -250px; /* Negative half of width. */
   overflow: auto;
 }
+.content__header {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.button__container {
+  text-align: center;
+  margin-top: 36px;
+}
+
+.btn-primary {
+  background: #3f89fe;
+  border-radius: 10px;
+  padding: 4px 156px;
+  font-size: 20px;
+  color: #fff;
+}
+
+.label__login {
+  font-size: 20px;
+  color: #666666;
+  text-decoration: underline;
+  margin-top: 18px;
+  cursor: pointer;
+}

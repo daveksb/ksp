@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="content__container">
-    <div class="content__header">นโยบายส่วนบุคคล</div>
+    <div class="content__header">นโยบายข้อมูลส่วนบุคคล</div>
     <div class="content__detail">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget
       condimentum mauris. Curabitur faucibus mollis urna. Vestibulum aliquet
@@ -41,8 +41,10 @@
       a porta non, bibendum in sapien. Maecenas luctus urna mauris.
     </div>
     <div class="button__container">
-      <button (click)="register()">ยอมรับ</button>
-      <button (click)="register()">เข้าสู่ระบบ</button>
+      <button (click)="register()" type="submit" class="btn btn-primary">
+        ยอมรับ
+      </button>
+      <div (click)="loginPage()" class="label__login">เข้าสู่ระบบ</div>
     </div>
   </div>
 </div>

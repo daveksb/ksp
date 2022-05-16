@@ -22,3 +22,72 @@
   grid-column-gap: 8px;
   margin-bottom: 8px;
 }
+
+h3 {
+  font-size: 30px;
+  color: #000000;
+  margin-bottom: 36px;
+}
+
+.form__detail {
+  text-align: left;
+  color: #656565;
+}
+
+.container__btn-upload {
+  text-align: center;
+  padding: 75px 0;
+  background-color: #f6f6f6;
+  border: 3px dashed #e5e5e5;
+  border-radius: 10px;
+}
+
+.label-upload-detail {
+  margin-top: 10px;
+  color: #a6a6a6;
+}
+
+.btn-upload {
+  color: #3f89fe;
+  background-color: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  padding: 3px 75px;
+  font-size: 20px;
+}
+
+.btn-accept {
+  color: #ffffff;
+  border: 1px solid #3f89fe;
+  border-radius: 10px;
+  background-color: #3f89fe;
+  padding: 5px 50px;
+  margin: 5px 15px;
+  font-size: 20px;
+}
+
+.btn-back {
+  color: #656565;
+  background-color: #e8e8e8;
+  border: 1px solid #cccccc;
+  border-radius: 10px;
+  padding: 5px 70px;
+  margin: 5px 15px;
+  font-size: 20px;
+}
+
+.form__footer {
+  text-align: center;
+}
+
+.label__login {
+  font-size: 20px;
+  color: #666666;
+  text-decoration: underline;
+  margin-top: 18px;
+  cursor: pointer;
+}
+
+.field__container {
+  padding: 10px 200px;
+}

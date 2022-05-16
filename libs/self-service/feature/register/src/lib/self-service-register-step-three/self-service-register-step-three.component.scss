@@ -16,9 +16,55 @@
   text-align: center;
 }
 
+h3 {
+  font-family: 'KSP Bold';
+  font-size: 30px;
+  color: #000000;
+  margin-bottom: 36px;
+}
+
 .detail__container {
   display: grid;
   grid-template-columns: 1fr;
   grid-column-gap: 8px;
   margin-bottom: 8px;
+}
+
+.form__header {
+  font-size: 28px;
+  text-align: center;
+  margin-top: 75px;
+}
+
+.form__detail {
+  text-align: left;
+  color: #656565;
+}
+
+.field__container {
+  padding: 10px 275px;
+}
+
+.btn-primary {
+  margin-top: 18px;
+  background: #3f89fe;
+  border-radius: 10px;
+  padding: 4px 156px;
+  font-family: 'KSP Bold';
+  font-size: 20px;
+  color: #fff;
+}
+
+.form__footer {
+  text-align: center;
+}
+
+.label__login {
+  font-family: 'KSP Bold';
+  font-size: 20px;
+  color: #666666;
+  text-decoration: underline;
+  margin-top: 20px;
+  margin-top: 24px;
+  cursor: pointer;
 }
