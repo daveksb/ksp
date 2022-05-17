@@ -5,6 +5,10 @@ import { ForgotPasswordSetNewPasswordComponent } from './forgot-password-set-new
 import { ForgotPasswordNotFoundComponent } from './forgot-password-not-found/forgot-password-not-found.component';
 import { RegisterConfirmComponent } from './register-confirm/register-confirm.component';
 import { RegisterCompletedComponent } from './register-completed/register-completed.component';
+import { ReqDegreeCertConfirmComponent } from './req-degree-cert-confirm/req-degree-cert-confirm.component';
+import { ReqDegreeCertCompleteComponent } from './req-degree-cert-complete/req-degree-cert-complete.component';
+import { ReqForeignIdConfirmComponent } from './req-foreign-id-confirm/req-foreign-id-confirm.component';
+import { ReqForeignIdCompleteComponent } from './req-foreign-id-complete/req-foreign-id-complete.component';
 
 @NgModule({
   imports: [CommonModule],
@@ -14,6 +18,10 @@ import { RegisterCompletedComponent } from './register-completed/register-comple
     ForgotPasswordNotFoundComponent,
     RegisterConfirmComponent,
     RegisterCompletedComponent,
+    ReqDegreeCertConfirmComponent,
+    ReqDegreeCertCompleteComponent,
+    ReqForeignIdConfirmComponent,
+    ReqForeignIdCompleteComponent,
   ],
   exports: [
     ForgotPasswordPersonIdComponent,
@@ -21,6 +29,10 @@ import { RegisterCompletedComponent } from './register-completed/register-comple
     ForgotPasswordNotFoundComponent,
     RegisterConfirmComponent,
     RegisterCompletedComponent,
+    ReqDegreeCertConfirmComponent,
+    ReqDegreeCertCompleteComponent,
+    ReqForeignIdConfirmComponent,
+    ReqForeignIdCompleteComponent,
   ],
 })
 export class UniServiceUiDialogModule {}
