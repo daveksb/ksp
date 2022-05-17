@@ -122,16 +122,16 @@
 .button__container {
   padding-bottom: 7px;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   padding: 0 65px;
 }
 
 .btn-fourth {
   font-size: 14px;
   background-color: white;
-  color: #F68B33;
+  color: #f68b33;
   width: 100px;
   border-radius: 4px;
-  border: 1px solid #F68B33;
+  border: 1px solid #f68b33;
   margin-top: 25px;
 }

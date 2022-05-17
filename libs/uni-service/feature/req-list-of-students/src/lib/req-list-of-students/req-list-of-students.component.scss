@@ -30,7 +30,7 @@
   padding-bottom: 15px;
   padding-right: 15px;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .box__title {
@@ -46,7 +46,6 @@
 .detail__container {
   margin-bottom: 16px;
   padding: 0 15px;
-
 }
 
 .detail__container--third {
