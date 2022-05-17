@@ -11,10 +11,10 @@ export class ReqDegreeCertStepTwoComponent {
   constructor(private router: Router) {}
 
   goToStep1() {
-    this.router.navigate(['/', 'request-degree-cert', 'step-1']);
+    this.router.navigate(['/', 'degree-cert', 'step-1']);
   }
 
   goToStep3() {
-    this.router.navigate(['/', 'request-degree-cert', 'step-3']);
+    this.router.navigate(['/', 'degree-cert', 'step-3']);
   }
 }

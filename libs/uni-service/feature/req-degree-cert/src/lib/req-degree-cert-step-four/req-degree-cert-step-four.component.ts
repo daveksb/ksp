@@ -12,11 +12,11 @@ export class ReqDegreeCertStepFourComponent {
   constructor(public dialog: MatDialog, private router: Router) {}
 
   goToStep3() {
-    this.router.navigate(['/', 'request-degree-cert', 'step-3']);
+    this.router.navigate(['/', 'degree-cert', 'step-3']);
   }
 
   cancel() {
-    this.router.navigate(['/', 'request-degree-cert']);
+    this.router.navigate(['/', 'degree-cert']);
   }
 
   openDialog() {

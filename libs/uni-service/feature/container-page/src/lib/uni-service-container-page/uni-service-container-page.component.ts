@@ -22,7 +22,7 @@ export class UniServiceContainerPageComponent {
         path: '',
         subMenu: [
           {
-            path: 'request-degree-cert',
+            path: 'degree-cert',
             label: 'ขอรับรองปริญญาและประกาศนียบัตร',
           },
           {
@@ -30,15 +30,15 @@ export class UniServiceContainerPageComponent {
             label: 'ขอสร้างเลขประจำตัวคุรุสภาสำหรับนักศึกษาชาวต่างชาติ',
           },
           {
-            path: 'list-of-students',
+            path: 'student-list',
             label: 'ขอยื่นรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
           },
           {
-            path: 'list-of-graduates',
+            path: 'change-degree-info',
             label: 'ขอเปลี่ยนแปลงรายละเอียดปริญญาและประกาศนียบัตร',
           },
           {
-            path: 'change-info',
+            path: 'change-student-list',
             label: 'ขอเปลี่ยนแปลงรายละเอียดรายชื่อผู้เข้าและผู้สำเร็จการศึกษา',
           },
         ],
