@@ -17,8 +17,8 @@ export class ForgotPasswordNotFoundComponent {
   nextStep() {
     this.dialog.closeAll();
     const dialogRef = this.dialog.open(ForgotPasswordPersonIdComponent, {
-      height: '400px',
-      width: '600px',
+      height: '350px',
+      width: '350px',
     });
 
     dialogRef.afterClosed().subscribe((result) => {
