@@ -18,8 +18,8 @@ export class ReqForeignIdConfirmComponent {
     this.dialog.closeAll();
 
     this.dialog.open(ReqForeignIdCompleteComponent, {
-      height: '400px',
-      width: '600px',
+      height: '175px',
+      width: '350px',
     });
   }
 }

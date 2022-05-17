@@ -17,8 +17,8 @@ export class ReqDegreeCertConfirmComponent {
     this.dialog.closeAll();
 
     this.dialog.open(ReqDegreeCertCompleteComponent, {
-      height: '200px',
-      width: '300px',
+      height: '275px',
+      width: '350px',
     });
   }
 }

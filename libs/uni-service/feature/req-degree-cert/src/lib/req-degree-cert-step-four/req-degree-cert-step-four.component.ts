@@ -16,13 +16,13 @@ export class ReqDegreeCertStepFourComponent {
   }
 
   cancel() {
-    this.router.navigate(['/', 'request', 'home']);
+    this.router.navigate(['/', 'request', 'degree-cert']);
   }
 
   openDialog() {
     this.dialog.open(ReqDegreeCertConfirmComponent, {
-      height: '400px',
-      width: '600px',
+      height: '200px',
+      width: '350px',
     });
   }
 }
