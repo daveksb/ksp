@@ -9,3 +9,11 @@ export * from './lib/forgot-password-not-found/forgot-password-not-found.compone
 export * from './lib/register-confirm/register-confirm.component';
 
 export * from './lib/register-completed/register-completed.component';
+
+export * from './lib/req-degree-cert-confirm/req-degree-cert-confirm.component';
+
+export * from './lib/req-degree-cert-complete/req-degree-cert-complete.component';
+
+export * from './lib/req-foreign-id-confirm/req-foreign-id-confirm.component';
+
+export * from './lib/req-foreign-id-complete/req-foreign-id-complete.component';

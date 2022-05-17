@@ -178,11 +178,15 @@
   </button>
 
   <div class="button-container-3">
-    <button type="button" class="btn btn-cancel btn-sm label__button">
+    <button type="button" class="btn btn-cancel btn-sm label__button"
+    (click)="cancel()"
+    >
       ยกเลิก
     </button>
 
-    <button type="button" class="btn btn-save btn-sm label__button">
+    <button type="button" class="btn btn-save btn-sm label__button"
+    (click)="openDialog()"
+    >
       บันทึก
     </button>
   </div>
