@@ -23,6 +23,6 @@ export class UniServiceRegisterRequesterComponent {
   }
 
   nextPage() {
-    this.router.navigate(['/', 'register-coordinator']);
+    this.router.navigate(['/', 'register', 'coordinator']);
   }
 }

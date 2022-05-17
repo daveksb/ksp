@@ -25,14 +25,6 @@ const routes: Routes = [
         (m) => m.UniServiceFeatureRegisterModule
       ),
   },
-  /* {
-    path: 'register-requester',
-    component: UniServiceRegisterRequesterComponent,
-  },
-  {
-    path: 'register-coordinator',
-    component: UniServiceRegisterCoordinatorComponent,
-  }, */
   {
     path: 'retired',
     loadChildren: () =>
