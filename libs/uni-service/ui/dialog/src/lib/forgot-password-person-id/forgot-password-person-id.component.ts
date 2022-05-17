@@ -18,7 +18,7 @@ export class ForgotPasswordPersonIdComponent {
     this.dialogRef.closeAll();
     const dialogRef = this.dialog.open(ForgotPasswordSetNewPasswordComponent, {
       height: '400px',
-      width: '600px',
+      width: '350px',
     });
 
     dialogRef.afterClosed().subscribe((result) => {
