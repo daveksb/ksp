@@ -55,7 +55,7 @@
 .button__container {
   padding: 10px 0;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .btn-primary {
@@ -79,7 +79,6 @@
 .table {
   background-color: #fff;
   border: 1px solid #eceef2;
-
 }
 
 .table-responsive {
@@ -96,7 +95,6 @@
   font-size: 16px;
   white-space: nowrap;
   color: #000000;
-
 }
 
 .body__table {
@@ -110,15 +108,14 @@
   background: #fff;
   border: 1px solid #0056ff;
   box-sizing: border-box;
-  box-shadow: 0px 2px 4px rgba(0,0,0,0.5);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   color: #3f89fe;
   padding: 5px 25px;
   margin-right: 10px;
 }
 
-
-/* @media only screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) {
   .detail__container {
     display: grid;
     grid-template-columns: 1fr;
@@ -142,4 +139,4 @@
     grid-template-columns: 1fr;
     grid-gap: 0;
   }
-} */
+}

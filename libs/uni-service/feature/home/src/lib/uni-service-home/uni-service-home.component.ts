@@ -1,7 +1,45 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
-import { FormVerifyOtpComponent } from '@ksp/self-service/ui/forms';
+export interface DegreeInfo {
+  order: number;
+  degreeId: string;
+  uniName: string;
+  course: string;
+  major: string;
+  degreeName: string;
+  educationLevel: string;
+}
+
+export const data: DegreeInfo[] = [
+  {
+    order: 1,
+    degreeId: '069784',
+    uniName: 'มหาวิทยาลัยราชภัฏพระนครศรีอยุธยา',
+    course: 'การศึกษาบัณฑิต สาขาวิชาเคมี หลักสูตรปรับปรุง พ.ศ.2562',
+    major: 'วิทยาศาสตร์พื้นฐาน',
+    degreeName: 'วิทยาศาสตร์บัณฑิต',
+    educationLevel: 'ปริญญาตรีทางการศึกษา (หลักสูตร 4 ปี)',
+  },
+  {
+    order: 2,
+    degreeId: '069784',
+    uniName: 'มหาวิทยาลัยราชภัฏพระนครศรีอยุธยา',
+    course: 'พัฒนาครูโครงงานคุณธรรม',
+    major: 'ศึกษาศาสตร์',
+    degreeName: 'การศึกษาบัณฑิต',
+    educationLevel: 'ปริญญาตรีทางการศึกษา (หลักสูตร 4 ปี)',
+  },
+  {
+    order: 2,
+    degreeId: '069784',
+    uniName: 'มหาวิทยาลัยราชภัฏพระนครศรีอยุธยา',
+    course: 'การออกแบบการจัดการเรียนรู้บนพื้นฐานเทคโนโลยี',
+    major: 'เทคโนโลยีสารสนเทศ',
+    degreeName: 'ศิลปศาสตร์บัณฑิต สาขาวิชาวิทยาการคอมพิวเตอร์',
+    educationLevel: 'ปริญญาตรีทางการศึกษา (หลักสูตร 4 ปี)',
+  },
+];
 
 @Component({
   selector: 'ksp-uni-service-home',
@@ -9,16 +47,14 @@ import { FormVerifyOtpComponent } from '@ksp/self-service/ui/forms';
   styleUrls: ['./uni-service-home.component.css'],
 })
 export class UniServiceHomeComponent {
+  data: DegreeInfo[] = [];
   constructor(public dialog: MatDialog) {}
 
-  openDialog() {
-    const dialogRef = this.dialog.open(FormVerifyOtpComponent, {
-      height: '400px',
-      width: '600px',
-    });
+  search() {
+    this.data = data;
+  }
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    });
+  clear() {
+    this.data = [];
   }
 }

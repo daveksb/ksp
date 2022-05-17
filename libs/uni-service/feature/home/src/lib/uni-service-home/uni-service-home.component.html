@@ -87,11 +87,15 @@
       </div>
 
       <div class="button__container">
-        <button type="button" class="btn btn-fourth btn-sm label__button">
+        <button
+          (click)="clear()"
+          type="button"
+          class="btn btn-fourth btn-sm label__button"
+        >
           ล้างข้อมูล
         </button>
         <button
-          (click)="openDialog()"
+          (click)="search()"
           type="button"
           class="btn btn-primary btn-sm label__button"
         >
@@ -118,44 +122,14 @@
             </tr>
           </thead>
           <tbody class="body__table">
-            <tr>
-              <td class="detail__table">1</td>
-              <td class="detail__table">069784</td>
-              <td class="detail__table">มหาวิทยาลัยราชภัฏพระนครศรีอยุธยา</td>
-              <td class="detail__table">
-                การศึกษาบัณฑิต สาขาวิชาเคมี หลักสูตรปรับปรุง พ.ศ.2562
-              </td>
-              <td class="detail__table">วิทยาศาสตร์พื้นฐาน</td>
-              <td class="detail__table">วิทยาศาสตร์บัณฑิต</td>
-              <td class="detail__table">
-                ปริญญาตรีทางการศึกษา (หลักสูตร 4 ปี)
-              </td>
-            </tr>
-            <tr>
-              <td class="detail__table">2</td>
-              <td class="detail__table">069784</td>
-              <td class="detail__table">มหาวิทยาลัยราชภัฏพระนครศรีอยุธยา</td>
-              <td class="detail__table">พัฒนาครูโครงงานคุณธรรม</td>
-              <td class="detail__table">ศึกษาศาสตร์</td>
-              <td class="detail__table">การศึกษาบัณฑิต</td>
-              <td class="detail__table">
-                ปริญญาตรีทางการศึกษา (หลักสูตร 4 ปี)
-              </td>
-            </tr>
-            <tr>
-              <td class="detail__table">3</td>
-              <td class="detail__table">069784</td>
-              <td class="detail__table">มหาวิทยาลัยราชภัฏพระนครศรีอยุธยา</td>
-              <td class="detail__table">
-                การออกแบบการจัดการเรียนรู้บนพื้นฐานเทคโนโลยี
-              </td>
-              <td class="detail__table">เทคโนโลยีสารสนเทศ</td>
-              <td class="detail__table">
-                ศิลปศาสตร์บัณฑิต สาขาวิชาวิทยาการคอมพิวเตอร์
-              </td>
-              <td class="detail__table">
-                ปริญญาตรีทางการศึกษา (หลักสูตร 4 ปี)
-              </td>
+            <tr *ngFor="let item of data">
+              <td class="detail__table">{{ item.order }}</td>
+              <td class="detail__table">{{ item.degreeId }}</td>
+              <td class="detail__table">{{ item.uniName }}</td>
+              <td class="detail__table">{{ item.course }}</td>
+              <td class="detail__table">{{ item.major }}</td>
+              <td class="detail__table">{{ item.degreeName }}</td>
+              <td class="detail__table">{{ item.educationLevel }}</td>
             </tr>
           </tbody>
         </table>
