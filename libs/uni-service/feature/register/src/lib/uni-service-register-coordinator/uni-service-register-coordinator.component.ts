@@ -40,8 +40,8 @@ export class UniServiceRegisterCoordinatorComponent {
 
   confirm() {
     this.dialog.open(RegisterConfirmComponent, {
-      height: '300px',
-      width: '400px',
+      height: '200px',
+      width: '350px',
     });
   }
 }

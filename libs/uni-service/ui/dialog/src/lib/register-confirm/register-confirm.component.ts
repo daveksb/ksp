@@ -17,8 +17,8 @@ export class RegisterConfirmComponent {
   confirm() {
     this.dialog.closeAll();
     this.dialog.open(RegisterCompletedComponent, {
-      height: '300px',
-      width: '400px',
+      height: '275px',
+      width: '350px',
     });
   }
 }
