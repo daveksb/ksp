@@ -1,0 +1,9 @@
+.button__container {
+  display: grid;
+  grid-template-columns: 30% auto;
+  margin: 20px;
+}
+
+.cancel__button {
+  width: 150px;
+}
