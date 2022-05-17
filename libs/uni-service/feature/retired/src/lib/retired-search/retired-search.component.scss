@@ -1,0 +1,21 @@
+.header {
+  display: flex;
+  justify-content: center;
+}
+
+.form__container {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.button__container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px;
+}
+
+.confirm-button__container {
+  display: flex;
+  justify-content: center;
+}

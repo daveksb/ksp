@@ -6,9 +6,14 @@ import { RetiredAttachmentComponent } from './retired-attachment/retired-attachm
 import { RetiredConfirmComponent } from './retired-confirm/retired-confirm.component';
 import { RetiredCompleteComponent } from './retired-complete/retired-complete.component';
 import { UniServiceFeatureRetiredRoutingModule } from './uni-service-feature-retired-routing.module';
+import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 
 @NgModule({
-  imports: [CommonModule, UniServiceFeatureRetiredRoutingModule],
+  imports: [
+    CommonModule,
+    UniServiceFeatureRetiredRoutingModule,
+    SharedUiTopNavModule,
+  ],
   declarations: [
     RetiredSearchComponent,
     RetiredReasonComponent,
