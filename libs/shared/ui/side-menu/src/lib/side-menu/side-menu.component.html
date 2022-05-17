@@ -15,7 +15,7 @@
     <ng-container *ngFor="let menu of menuConfig">
       <li *ngIf="!menu.subMenu?.length">
         <a
-          routerLink="{{ menu.path }}"
+          routerLink="/{{ menu.path }}"
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="{ exact: true }"
           ><img src="{{ menu.icon }}" class="icon__sidenav" />{{
@@ -42,10 +42,10 @@
           <ng-container *ngFor="let subMenu of menu.subMenu">
             <li>
               <a
+                routerLink="/{{ subMenu.path }}"
                 routerLinkActive="active-link"
-                [routerLinkActiveOptions]="{ exact: true }"
+                [routerLinkActiveOptions]="{ exact: false }"
                 class="sub-menu"
-                routerLink="{{ subMenu.path }}"
                 >{{ subMenu.label }}</a
               >
             </li>

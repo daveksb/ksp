@@ -22,7 +22,7 @@ export class UniServiceContainerPageComponent {
         path: '',
         subMenu: [
           {
-            path: 'degree-cert',
+            path: 'request-degree-cert',
             label: 'ขอรับรองปริญญาและประกาศนียบัตร',
           },
           {
@@ -38,7 +38,7 @@ export class UniServiceContainerPageComponent {
             label: 'ขอเปลี่ยนแปลงรายละเอียดปริญญาและประกาศนียบัตร',
           },
           {
-            path: '',
+            path: 'change-info',
             label: 'ขอเปลี่ยนแปลงรายละเอียดรายชื่อผู้เข้าและผู้สำเร็จการศึกษา',
           },
         ],

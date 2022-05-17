@@ -12,7 +12,7 @@ export class UniServiceLoginComponent {
   constructor(private router: Router, public dialog: MatDialog) {}
 
   home() {
-    this.router.navigate(['/', 'request', 'home']);
+    this.router.navigate(['/', 'home']);
   }
 
   register() {
