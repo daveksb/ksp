@@ -5,11 +5,7 @@ import { ReqDegreeCertStepFourComponent } from './req-degree-cert-step-four/req-
 import { ReqDegreeCertStepOneComponent } from './req-degree-cert-step-one/req-degree-cert-step-one.component';
 import { ReqDegreeCertStepThreeComponent } from './req-degree-cert-step-three/req-degree-cert-step-three.component';
 import { ReqDegreeCertStepTwoComponent } from './req-degree-cert-step-two/req-degree-cert-step-two.component';
-import { ReqForeignIdComponent } from '@ksp/uni-service/feature/req-foreign-id';
-import { ReqListOfGraduatesComponent } from '@ksp/uni-service/feature/req-list-of-graduates';
-import { ReqListOfStudentsComponent } from '@ksp/uni-service/feature/req-list-of-students';
 import { UniServiceContainerPageComponent } from '@ksp/uni-service/feature/container-page';
-import { UniServiceHomeComponent } from '@ksp/uni-service/feature/home';
 
 const routes: Routes = [
   {
@@ -17,40 +13,28 @@ const routes: Routes = [
     component: UniServiceContainerPageComponent,
     children: [
       {
-        path: 'home',
-        component: UniServiceHomeComponent,
-      },
-      {
-        path: 'degree-cert',
+        path: 'list',
         component: ReqDegreeCertHomeComponent,
       },
       {
-        path: 'degree-cert-1',
+        path: 'step-1',
         component: ReqDegreeCertStepOneComponent,
       },
       {
-        path: 'degree-cert-2',
+        path: 'step-2',
         component: ReqDegreeCertStepTwoComponent,
       },
       {
-        path: 'degree-cert-3',
+        path: 'step-3',
         component: ReqDegreeCertStepThreeComponent,
       },
       {
-        path: 'degree-cert-4',
+        path: 'step-4',
         component: ReqDegreeCertStepFourComponent,
       },
       {
-        path: 'foreign-id',
-        component: ReqForeignIdComponent,
-      },
-      {
-        path: 'list-of-students',
-        component: ReqListOfStudentsComponent,
-      },
-      {
-        path: 'list-of-graduates',
-        component: ReqListOfGraduatesComponent,
+        path: '**',
+        component: ReqDegreeCertHomeComponent,
       },
     ],
   },

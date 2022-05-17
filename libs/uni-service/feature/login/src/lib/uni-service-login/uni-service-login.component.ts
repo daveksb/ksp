@@ -12,11 +12,11 @@ export class UniServiceLoginComponent {
   constructor(private router: Router, public dialog: MatDialog) {}
 
   home() {
-    this.router.navigate(['/', 'request', 'home']);
+    this.router.navigate(['/', 'home']);
   }
 
   register() {
-    this.router.navigate(['/', 'register-requester']);
+    this.router.navigate(['/', 'register']);
   }
 
   retired() {

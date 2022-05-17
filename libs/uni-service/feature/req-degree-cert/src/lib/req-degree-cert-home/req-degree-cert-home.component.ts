@@ -10,6 +10,6 @@ export class ReqDegreeCertHomeComponent {
   constructor(private router: Router) {}
 
   goToStep1() {
-    this.router.navigate(['/', 'request', 'degree-cert-1']);
+    this.router.navigate(['/', 'degree-cert', 'step-1']);
   }
 }

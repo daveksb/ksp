@@ -12,6 +12,6 @@ export class ReqDegreeCertCompleteComponent {
   homePage() {
     this.dialog.closeAll();
 
-    this.router.navigate(['/', 'request', 'home']);
+    this.router.navigate(['/', 'degree-cert', 'home']);
   }
 }

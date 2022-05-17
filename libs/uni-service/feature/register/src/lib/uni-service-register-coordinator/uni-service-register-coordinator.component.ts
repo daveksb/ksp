@@ -27,7 +27,7 @@ export class UniServiceRegisterCoordinatorComponent {
   }
 
   prevPage() {
-    this.router.navigate(['/', 'register-requester']);
+    this.router.navigate(['/', 'register', 'requester']);
   }
 
   cancel() {
