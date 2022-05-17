@@ -19,6 +19,10 @@ export class UniServiceLoginComponent {
     this.router.navigate(['/', 'register-requester']);
   }
 
+  retired() {
+    this.router.navigate(['/', 'retired']);
+  }
+
   forgotPassword() {
     const dialogRef = this.dialog.open(ForgotPasswordPersonIdComponent, {
       height: '350px',

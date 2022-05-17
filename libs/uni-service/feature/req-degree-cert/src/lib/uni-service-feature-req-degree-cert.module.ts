@@ -8,9 +8,15 @@ import { ReqDegreeCertStepFourComponent } from './req-degree-cert-step-four/req-
 import { ReqDegreeCertStepFiveComponent } from './req-degree-cert-step-five/req-degree-cert-step-five.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { UniServiceUiFormsModule } from '@ksp/uni-service/ui/forms';
+import { UniServiceFeatureReqDegreeCertRoutingModule } from './uni-service-feature-req-degree-cert-routing.module';
 
 @NgModule({
-  imports: [CommonModule, MatTabsModule, UniServiceUiFormsModule],
+  imports: [
+    CommonModule,
+    UniServiceFeatureReqDegreeCertRoutingModule,
+    MatTabsModule,
+    UniServiceUiFormsModule,
+  ],
   declarations: [
     ReqDegreeCertHomeComponent,
     ReqDegreeCertStepOneComponent,
