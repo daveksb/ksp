@@ -60,7 +60,7 @@ const routes: Routes = [
     ],
   },
 
-  { path: '**', component: UniServiceLoginComponent },
+  { path: '**', component: UniServiceHomeComponent },
 ];
 
 @NgModule({
