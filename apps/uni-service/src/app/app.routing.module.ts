@@ -3,8 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { UniServiceContainerPageComponent } from '@ksp/uni-service/feature/container-page';
 import { UniServiceHomeComponent } from '@ksp/uni-service/feature/home';
 import { UniServiceLoginComponent } from '@ksp/uni-service/feature/login';
-import { ReqForeignIdComponent } from '@ksp/uni-service-feature-foreign-id';
-import { CourseSearchComponent } from '@ksp/uni-service-feature-graduate-list';
 
 const routes: Routes = [
   { path: 'login', component: UniServiceLoginComponent },
@@ -35,34 +33,24 @@ const routes: Routes = [
   {
     path: 'degree-cert',
     loadChildren: () =>
-      import('@ksp/uni-service-feature-degree-cert').then(
+      import('@ksp/uni-service/feature/degree-cert').then(
         (m) => m.UniServiceFeatureDegreeCertModule
       ),
   },
   {
     path: 'graduate-list',
     loadChildren: () =>
-      import('@ksp/uni-service-feature-degree-cert').then(
-        (m) => m.UniServiceFeatureDegreeCertModule
+      import('@ksp/uni-service/feature/graduate-list').then(
+        (m) => m.UniServiceFeatureGraduateListModule
       ),
   },
-  {
+  /* {
     path: 'foreign-id',
     component: UniServiceContainerPageComponent,
     children: [
       {
         path: '**',
-        component: ReqForeignIdComponent,
-      },
-    ],
-  },
-  /*   {
-    path: 'graduate-list',
-    component: UniServiceContainerPageComponent,
-    children: [
-      {
-        path: '**',
-        component: CourseSearchComponent,
+        component: ,
       },
     ],
   }, */
