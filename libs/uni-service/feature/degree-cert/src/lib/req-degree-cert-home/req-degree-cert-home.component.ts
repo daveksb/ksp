@@ -14,8 +14,7 @@ export interface DegreeCertInfo {
   editDate: string;
   verify: string;
   consider: string;
-  edit: string;
-  print: string;
+  
 }
 
 export const data: DegreeCertInfo[] = [
@@ -32,8 +31,7 @@ export const data: DegreeCertInfo[] = [
   editDate: '30 ส.ค. 2564',
   verify: 'ตรวจสอบแล้ว',
   consider: 'ตรวจสอบแล้ว',
-  edit: 'ICON',
-  print: 'ICON',
+
   },
   {
     order: 2,
@@ -48,8 +46,7 @@ export const data: DegreeCertInfo[] = [
     editDate: '30 ส.ค. 2564',
     verify: 'ตรวจสอบแล้ว',
     consider: 'ตรวจสอบแล้ว',
-    edit: 'ICON',
-    print: 'ICON',
+
   },
   {
     order: 3,
@@ -64,8 +61,7 @@ export const data: DegreeCertInfo[] = [
     editDate: '30 ส.ค. 2564',
     verify: 'ตรวจสอบแล้ว',
     consider: 'ตรวจสอบแล้ว',
-    edit: 'ICON',
-    print: 'ICON',
+
   },
 ];
 

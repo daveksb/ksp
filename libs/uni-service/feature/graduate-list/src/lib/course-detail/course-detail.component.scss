@@ -1,0 +1,186 @@
+.container {
+  max-width: 100%;
+  padding: 0;
+  background-color: #f6f6f6;
+}
+.title__label {
+  font-size: 22px;
+  padding: 15px;
+  margin-left: 50px;
+}
+.content__header {
+  display: flex;
+}
+.label__content {
+  font-family: "KSP Bold";
+  font-size: 18px;
+  color: #808080;
+  margin-right: 24px;
+}
+.label__content--primary {
+  color: #f68b33;
+}
+.label__content--secondary {
+  color: #0056ff;
+}
+.content__container {
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 24px;
+  margin: 0px 64px;
+}
+
+.detail__container {
+  background-color: #f9f9fa;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+.detail__header {
+  font-family: "KSP Bold";
+  font-size: 22px;
+  color: #0056ff;
+}
+.detail__header--secondary {
+  font-family: "KSP Bold";
+  font-size: 22px;
+  color: #000000;
+}
+.detail__content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 18px;
+  margin-bottom: 14px;
+}
+.detail__content--primary {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-bottom: 14px;
+}
+.detail__content--secondary {
+  display: grid;
+  grid-template-columns: 1fr 30%;
+  grid-column-gap: 18px;
+  margin-bottom: 14px;
+}
+.detail__content--third {
+  display: grid;
+  grid-template-columns: 10% 1fr 30%;
+  grid-column-gap: 18px;
+  margin-bottom: 14px;
+}
+.detail__content--fourth {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 18px;
+  margin-bottom: 14px;
+}
+.form-label {
+  font-family: "KSP Bold";
+  font-size: 18px;
+  color: #656565;
+}
+.form-control {
+  font-family: "KSP Bold";
+  font-size: 20px;
+  background-color: #fff;
+}
+.form-select {
+  font-family: "KSP Bold";
+  font-size: 20px;
+}
+.label__text {
+  font-family: "KSP Bold";
+  font-size: 16px;
+  margin-left: 8px;
+  color: #f23c51;
+}
+.btn-primary {
+  font-family: "KSP Bold";
+  font-size: 20px;
+  background-color: #0056ff;
+  width: 440px;
+  border-radius: 4px;
+}
+.table {
+
+  background-color: #fff;
+  border: 1px solid #eceef2;
+}
+.header__column {
+  text-align: center;
+}
+.header__column--secondary{
+text-align: start;
+}
+.header__table {
+  background-color: #edf6ff;
+  font-family: "KSP Bold";
+  font-size: 16px;
+}
+.header__column--primary {
+  width: 300px;
+}
+.body__table {
+  background-color: #edf6ff;
+  font-family: "KSP Bold";
+  font-size: 16px;
+}
+.detail__table{
+  text-align: center;
+  font-family: "KSP Bold";
+  font-size: 18px;
+  vertical-align: middle;
+}
+.detail__table--secondary{
+  text-align: start;
+  font-family: "KSP Bold";
+  font-size: 18px;
+}
+.table > :not(caption) > * > * {
+  padding: 14px ;
+}
+.table > :not(:first-child) {
+  border-top: 0;
+}
+.label__table {
+  font-family: "KSP Bold";
+  font-size: 16px;
+  vertical-align: middle;
+}
+.label__table--footer {
+  font-family: "KSP Bold";
+  font-size: 20px;
+  text-align: end;
+}
+.label__edit{
+  color: #0056ff;
+  text-decoration: underline;
+}
+.label__edit--secondary{
+  color: #f68b33;
+  text-decoration: underline;
+}
+.summary__container {
+  text-align: center;
+  background: #eceef2;
+  border-radius: 5px;
+  padding: 8px;
+}
+.table-header{
+  text-align: center;
+  background-color: #EDF6FF;
+  font-family: "KSP Bold";
+  font-size: 16px;
+  border:  1px solid #ededee;
+  border-bottom:  0px ;
+  padding: 14px;
+  margin-top: 16px;
+}
+@font-face {
+  font-family: "KSP Regular";
+  src: URL("/assets/font/KSP/ttf/KSP\ Regular\ ver\ 1.00.ttf")
+    format("truetype");
+  font-family: "KSP Bold";
+  src: URL("/assets/font/KSP/KSP\ Bold\ ver\ 1.00.ttf") format("truetype");
+}

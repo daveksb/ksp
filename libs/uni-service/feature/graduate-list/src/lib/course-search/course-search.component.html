@@ -87,10 +87,18 @@
       </div>
 
       <div class="button__container">
-        <button type="button" class="btn btn-fourth btn-sm label__button">
+        <button
+          (click)="clear()"
+          type="button"
+          class="btn btn-fourth btn-sm label__button"
+        >
           ล้างข้อมูล
         </button>
-        <button type="button" class="btn btn-primary btn-sm label__button">
+        <button
+          (click)="search()"
+          type="button"
+          class="btn btn-primary btn-sm label__button"
+        >
           ค้นหา
         </button>
       </div>
@@ -118,51 +126,22 @@
             </tr>
           </thead>
           <tbody class="body__table">
-            <tr>
-              <td class="detail__table">1</td>
-              <td (click)="nextPage()" class="detail__table">icon</td>
-              <td class="detail__table">12 ส.ค. 2564</td>
-              <td class="detail__table">069784</td>
-              <td class="detail__table">
-                การศึกษาบัณฑิต สาขาวิชาเคมี หลักสูตรปรับปรุง พ.ศ.2562
+            <tr *ngFor="let item of data">
+              <td class="detail__table">{{ item.order }}</td>
+              <td (click)="nextPage()" class="detail__table">
+                <img src="assets/images/edit.png" class="edit__icon" />
               </td>
-              <td class="detail__table">วิทยาศาสตร์</td>
-              <td class="detail__table">วิทยาศาสตร์บัณฑิต</td>
-              <td class="detail__table">'สร้าง'</td>
-              <td class="detail__table">-</td>
-              <td class="detail__table">12 ส.ค. 2564</td>
-              <td class="detail__table">icon</td>
-            </tr>
-            <tr>
-              <td class="detail__table">2</td>
-              <td class="detail__table">icon</td>
-              <td class="detail__table">12 ส.ค. 2564</td>
-              <td class="detail__table">069784</td>
-              <td class="detail__table">พัฒครูโครงงานคุณธรรม</td>
-              <td class="detail__table">ศึกษาศาสตร์</td>
-              <td class="detail__table">การศึกษาบัณฑิต</td>
-              <td class="detail__table">'ยื่นเรียบร้อย'</td>
-              <td class="detail__table">-</td>
-              <td class="detail__table">12 ส.ค. 2564</td>
-              <td class="detail__table">icon</td>
-            </tr>
-
-            <tr>
-              <td class="detail__table">3</td>
-              <td class="detail__table">icon</td>
-              <td class="detail__table">12 ส.ค. 2564</td>
-              <td class="detail__table">069784</td>
+              <td class="detail__table">{{ item.sendDate }}</td>
+              <td class="detail__table">{{ item.major }}</td>
+              <td class="detail__table">{{ item.branch }}</td>
+              <td class="detail__table">{{ item.degreeCode }}</td>
+              <td class="detail__table">{{ item.degreeName }}</td>
+              <td class="detail__table">{{ item.studentStatus }}</td>
+              <td class="detail__table">{{ item.graduateStatus }}</td>
+              <td class="detail__table">{{ item.editDate }}</td>
               <td class="detail__table">
-                การออกแบบการจัดการเรียนรู้บนพื้นฐานเทคโนโลยี
+                <img src="assets/images/print.png" class="edit__icon" />
               </td>
-              <td class="detail__table">วิทยาศาสตร์</td>
-              <td class="detail__table">
-                ศิลปศาสตร์บัณฑิต สาขาวิชาวิทยาการคอมพิวเตอร์
-              </td>
-              <td class="detail__table">'ยื่นเรียบร้อย'</td>
-              <td class="detail__table">-</td>
-              <td class="detail__table">12 ส.ค. 2564</td>
-              <td class="detail__table">icon</td>
             </tr>
           </tbody>
         </table>

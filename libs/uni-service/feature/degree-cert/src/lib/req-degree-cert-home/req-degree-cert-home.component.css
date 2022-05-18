@@ -123,6 +123,11 @@
   margin-right: 10px;
 }
 
+.edit__icon {
+  width: 15px;
+  height: 15px;
+}
+
 @media only screen and (max-width: 768px) {
   .detail__container {
     display: grid;
