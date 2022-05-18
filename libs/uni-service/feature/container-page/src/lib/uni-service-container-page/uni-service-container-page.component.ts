@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MenuConfig } from '@ksp/shared/ui/side-menu';
 
 @Component({
-  selector: 'ksp-uni-service-container-page',
+  selector: 'uni-service-container-page',
   templateUrl: './uni-service-container-page.component.html',
   styleUrls: ['./uni-service-container-page.component.css'],
 })
@@ -30,7 +30,7 @@ export class UniServiceContainerPageComponent {
             label: 'ขอสร้างเลขประจำตัวคุรุสภาสำหรับนักศึกษาชาวต่างชาติ',
           },
           {
-            path: 'student-list',
+            path: 'graduate-list',
             label: 'ขอยื่นรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
           },
           {

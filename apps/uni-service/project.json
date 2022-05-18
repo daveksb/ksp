@@ -2,7 +2,7 @@
   "projectType": "application",
   "root": "apps/uni-service",
   "sourceRoot": "apps/uni-service/src",
-  "prefix": "ksp",
+  "prefix": "uni-service",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",

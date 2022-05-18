@@ -22,20 +22,21 @@
     "self-service-ui-payment": "libs/self-service/ui/payment",
     "shared-assets": "libs/shared/assets",
     "shared-ui-bottom-menu": "libs/shared/ui/bottom-menu",
+    "shared-ui-page-not-found": "libs/shared/ui/page-not-found",
     "shared-ui-side-menu": "libs/shared/ui/side-menu",
     "shared-ui-top-nav": "libs/shared/ui/top-nav",
     "shared-ui-university-search": "libs/shared/ui/university-search",
     "uni-service": "apps/uni-service",
     "uni-service-feature-container-page": "libs/uni-service/feature/container-page",
+    "uni-service-feature-degree-cert": "libs/uni-service/feature/degree-cert",
+    "uni-service-feature-foreign-id": "libs/uni-service/feature/foreign-id",
+    "uni-service-feature-graduate-list": "libs/uni-service/feature/graduate-list",
     "uni-service-feature-home": "libs/uni-service/feature/home",
     "uni-service-feature-login": "libs/uni-service/feature/login",
     "uni-service-feature-register": "libs/uni-service/feature/register",
-    "uni-service-feature-req-degree-cert": "libs/uni-service/feature/req-degree-cert",
-    "uni-service-feature-req-foreign-id": "libs/uni-service/feature/req-foreign-id",
-    "uni-service-feature-req-list-of-graduates": "libs/uni-service/feature/req-list-of-graduates",
-    "uni-service-feature-req-list-of-students": "libs/uni-service/feature/req-list-of-students",
     "uni-service-feature-retired": "libs/uni-service/feature/retired",
     "uni-service-ui-dialog": "libs/uni-service/ui/dialog",
-    "uni-service-ui-forms": "libs/uni-service/ui/forms"
+    "uni-service-ui-forms": "libs/uni-service/ui/forms",
+    "uni-service-ui-nav": "libs/uni-service/ui/nav"
   }
 }

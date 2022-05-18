@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ForgotPasswordPersonIdComponent } from '@ksp/uni-service/ui/dialog';
 
 @Component({
-  selector: 'ksp-uni-service-login',
+  selector: 'uni-service-login',
   templateUrl: './uni-service-login.component.html',
   styleUrls: ['./uni-service-login.component.css'],
 })

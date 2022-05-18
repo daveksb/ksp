@@ -1,0 +1,152 @@
+.main-container {
+  background-color: #e5e5e5;
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.title__label {
+  font-size: 22px;
+  color: #000000;
+  margin-bottom: 15px;
+}
+.content__header {
+  display: flex;
+}
+.label__content {
+  font-size: 18px;
+  color: #808080;
+  margin-right: 24px;
+}
+.label__content--primary {
+  color: #f68b33;
+}
+.label__content--secondary {
+  color: #0056ff;
+}
+.content__container {
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 15px;
+}
+
+.detail__container--secondary {
+  background-color: #f9f9fa;
+  padding: 16px;
+  margin-bottom: 24px;
+  margin-top: 24px;
+}
+
+.detail__header--secondary {
+  font-size: 22px;
+  color: #000000;
+}
+.detail__content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 18px;
+  margin-bottom: 14px;
+}
+.detail__content--primary {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-bottom: 14px;
+}
+
+.detail__content--third {
+  display: grid;
+  grid-template-columns: 1fr 1fr 49%;
+  grid-column-gap: 18px;
+  margin-bottom: 14px;
+}
+
+.detail__content--fifth {
+  display: grid;
+  grid-template-columns: 15% 1fr 1fr 1fr;
+  grid-column-gap: 18px;
+  margin-bottom: 14px;
+}
+
+.form-label {
+  font-size: 18px;
+  color: #656565;
+}
+.form-control {
+  font-size: 20px;
+  background-color: #fff;
+}
+.form-select {
+  font-size: 20px;
+}
+
+.table {
+  font-size: 14px;
+  background-color: #edf8ff;
+  border: 1px solid #ecedf3;
+  color: #333333;
+}
+
+.page__header {
+  text-align: center;
+}
+
+.upload__header {
+  text-align: center;
+}
+
+.header__table {
+  background-color: #fff;
+  color: #a6a6a6;
+}
+
+.number__page {
+  text-align: center;
+}
+
+.upload__detail {
+  text-align: center;
+}
+
+.icon__upload {
+  vertical-align: bottom;
+  padding: 2px;
+}
+
+.btn-upload {
+  font-size: 16px;
+  background-color: #0056ff;
+  width: 100px;
+  border-radius: 4px;
+  color: #fff;
+  border: 1px solid #0056ff;
+}
+
+.btn-primary {
+  font-size: 16px;
+  background-color: #0056ff;
+  width: 125px;
+  border-radius: 4px;
+}
+
+.btn-secondary {
+  font-size: 16px;
+  background-color: white;
+  color: #0056ff;
+  width: 125px;
+  border-radius: 4px;
+  border: 1px solid #0056ff;
+  margin-right: 20px;
+}
+
+.box__title {
+  padding-left: 15px;
+  padding-top: 15px;
+  font-size: 22px;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+}
