@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { UniServiceContainerPageComponent } from '@ksp/uni-service/feature/container-page';
 import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { CourseSearchComponent } from './course-search/course-search.component';
-import { ImportStudentListComponent } from './import-student-list/import-student-list.component';
+import { ImportStudentComponent } from './import-student/import-student.component';
 
 const routes: Routes = [
   {
@@ -20,7 +20,7 @@ const routes: Routes = [
       },
       {
         path: 'import-student',
-        component: ImportStudentListComponent,
+        component: ImportStudentComponent,
       },
       {
         path: '**',

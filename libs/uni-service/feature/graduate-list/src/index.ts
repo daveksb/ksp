@@ -4,4 +4,4 @@ export * from './lib/course-search/course-search.component';
 
 export * from './lib/course-detail/course-detail.component';
 
-export * from './lib/import-student-list/import-student-list.component';
+export * from './lib/import-student/import-student.component';
