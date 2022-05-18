@@ -5,6 +5,7 @@ import { UniServiceUiFormsModule } from '@ksp/uni-service/ui/forms';
 import { UniServiceRegisterRequesterComponent } from './uni-service-register-requester/uni-service-register-requester.component';
 import { UniServiceRegisterCoordinatorComponent } from './uni-service-register-coordinator/uni-service-register-coordinator.component';
 import { UniServiceFeatureRegisterRoutingModule } from './uni-service-feature-register-routing.module';
+import { UniServiceUiNavModule } from '@ksp/uni-service/ui/nav';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { UniServiceFeatureRegisterRoutingModule } from './uni-service-feature-re
     UniServiceFeatureRegisterRoutingModule,
     RouterModule,
     UniServiceUiFormsModule,
+    UniServiceUiNavModule
   ],
   declarations: [
     UniServiceRegisterRequesterComponent,
