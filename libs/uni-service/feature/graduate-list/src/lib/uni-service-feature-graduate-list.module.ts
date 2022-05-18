@@ -7,4 +7,4 @@ import { ReqListOfStudentsComponent } from './req-list-of-students/req-list-of-s
   declarations: [ReqListOfStudentsComponent],
   exports: [ReqListOfStudentsComponent],
 })
-export class UniServiceFeatureReqListOfStudentsModule {}
+export class UniServiceFeatureGraduateListModule {}

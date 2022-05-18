@@ -69,6 +69,12 @@
       "@ksp/shared/ui/university-search": [
         "libs/shared/ui/university-search/src/index.ts"
       ],
+      "@ksp/uni-service-feature-degree-cert": [
+        "libs/uni-service/feature/degree-cert/src/index.ts"
+      ],
+      "@ksp/uni-service-feature-graduate-list": [
+        "libs/uni-service/feature/graduate-list/src/index.ts"
+      ],
       "@ksp/uni-service/feature/container-page": [
         "libs/uni-service/feature/container-page/src/index.ts"
       ],
@@ -81,14 +87,8 @@
       "@ksp/uni-service/feature/register": [
         "libs/uni-service/feature/register/src/index.ts"
       ],
-      "@ksp/uni-service/feature/req-degree-cert": [
-        "libs/uni-service/feature/req-degree-cert/src/index.ts"
-      ],
       "@ksp/uni-service/feature/req-foreign-id": [
         "libs/uni-service/feature/req-foreign-id/src/index.ts"
-      ],
-      "@ksp/uni-service/feature/req-list-of-students": [
-        "libs/uni-service/feature/req-list-of-students/src/index.ts"
       ],
       "@ksp/uni-service/feature/retired": [
         "libs/uni-service/feature/retired/src/index.ts"

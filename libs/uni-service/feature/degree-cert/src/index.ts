@@ -1,4 +1,4 @@
-export * from './lib/uni-service-feature-req-degree-cert.module';
+export * from './lib/uni-service-feature-degree-cert.module';
 export * from './lib/req-degree-cert-home/req-degree-cert-home.component';
 export * from './lib/req-degree-cert-step-one/req-degree-cert-step-one.component';
 export * from './lib/req-degree-cert-step-two/req-degree-cert-step-two.component';

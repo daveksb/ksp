@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'uni-service-feature-req-degree-cert',
+  displayName: 'uni-service-feature-degree-cert',
   preset: '../../../../jest.preset.ts',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -9,7 +9,7 @@ module.exports = {
     },
   },
   coverageDirectory:
-    '../../../../coverage/libs/uni-service/feature/req-degree-cert',
+    '../../../../coverage/libs/uni-service/feature/degree-cert',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

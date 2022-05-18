@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/uni-service/feature/graduate-list",
+  "sourceRoot": "libs/uni-service/feature/graduate-list/src",
+  "prefix": "ksp",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/uni-service/feature/graduate-list"],
+      "options": {
+        "jestConfig": "libs/uni-service/feature/graduate-list/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/uni-service/feature/graduate-list/**/*.ts",
+          "libs/uni-service/feature/graduate-list/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
