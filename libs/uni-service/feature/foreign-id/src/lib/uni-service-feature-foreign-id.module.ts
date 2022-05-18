@@ -7,4 +7,4 @@ import { ReqForeignIdComponent } from './req-foreign-id/req-foreign-id.component
   declarations: [ReqForeignIdComponent],
   exports: [ReqForeignIdComponent],
 })
-export class UniServiceFeatureReqForeignIdModule {}
+export class UniServiceFeatureForeignIdModule {}

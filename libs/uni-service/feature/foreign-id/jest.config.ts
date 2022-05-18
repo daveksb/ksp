@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'uni-service-feature-req-foreign-id',
+  displayName: 'uni-service-feature-foreign-id',
   preset: '../../../../jest.preset.ts',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,8 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory:
-    '../../../../coverage/libs/uni-service/feature/req-foreign-id',
+  coverageDirectory: '../../../../coverage/libs/uni-service/feature/foreign-id',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },
