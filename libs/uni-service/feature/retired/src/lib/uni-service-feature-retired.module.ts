@@ -7,12 +7,15 @@ import { RetiredConfirmComponent } from './retired-confirm/retired-confirm.compo
 import { RetiredCompleteComponent } from './retired-complete/retired-complete.component';
 import { UniServiceFeatureRetiredRoutingModule } from './uni-service-feature-retired-routing.module';
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
+import { UniServiceUiNavModule } from '@ksp/uni-service/ui/nav';
 
 @NgModule({
   imports: [
     CommonModule,
     UniServiceFeatureRetiredRoutingModule,
     SharedUiTopNavModule,
+    UniServiceUiNavModule,
+
   ],
   declarations: [
     RetiredSearchComponent,

@@ -21,21 +21,20 @@
   grid-column-gap: 18px;
 }
 .form-label {
-  font-family: 'KSP Bold';
-  font-size: 16px;
+  font-size: 18px;
   color: #656565;
 }
 .form-control {
   background-color: #fff;
+  font-size: 18px;
 }
-.search__content {
-  background-image: url(/assets/images/img-uni/search.svg);
-  background-size: 12px;
+
+.form-select {
+  background-color: #fff;
+  font-size: 18px;
 }
 
 .detail__header {
-  font-family: 'KSP Bold';
   font-size: 22px;
   color: #0056ff;
 }
-

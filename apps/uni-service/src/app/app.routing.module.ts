@@ -40,6 +40,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'graduate-list',
+    loadChildren: () =>
+      import('@ksp/uni-service-feature-degree-cert').then(
+        (m) => m.UniServiceFeatureDegreeCertModule
+      ),
+  },
+  {
     path: 'foreign-id',
     component: UniServiceContainerPageComponent,
     children: [
@@ -49,7 +56,7 @@ const routes: Routes = [
       },
     ],
   },
-  {
+  /*   {
     path: 'graduate-list',
     component: UniServiceContainerPageComponent,
     children: [
@@ -58,7 +65,7 @@ const routes: Routes = [
         component: CourseSearchComponent,
       },
     ],
-  },
+  }, */
   {
     path: '**',
     redirectTo: 'login',
