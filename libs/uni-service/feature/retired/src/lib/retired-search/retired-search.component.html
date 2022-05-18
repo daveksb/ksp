@@ -76,8 +76,8 @@
       </div>
     </div>
     <div class="button__container">
-      <button class="btn__cancel">ล้างข้อมูล</button>
-      <button class="btn__search">ค้นหา</button>
+      <button (click)="clear()" class="btn__cancel">ล้างข้อมูล</button>
+      <button (click)="search()" class="btn__search">ค้นหา</button>
     </div>
     <hr />
 
@@ -93,22 +93,11 @@
           </tr>
         </thead>
         <tbody class="body__table">
-          <tr>
+          <tr *ngFor="let item of data">
             <td class="detail__table"><input type="checkbox" /></td>
-            <td class="detail__table">
-              เจ้าหน้าที่ประสานงาน (รับรองปริญญาและประกาศนียบัตรทางการศึกษา)
-            </td>
-            <td class="detail__table">นาย พิชัย ชาญชัญ</td>
-            <td class="detail__table">081-9872676</td>
-          </tr>
-
-          <tr>
-            <td class="detail__table"><input type="checkbox" /></td>
-            <td class="detail__table">
-              เจ้าหน้าที่ประสานงาน (รับรองปริญญาและประกาศนียบัตรทางการศึกษา)
-            </td>
-            <td class="detail__table">นาย พิชัย ชาญชัญ</td>
-            <td class="detail__table">081-9872676</td>
+            <td class="detail__table">{{ item.retiredRole }}</td>
+            <td class="detail__table">{{ item.retiredName }}</td>
+            <td class="detail__table">{{ item.retiredPhone }}</td>
           </tr>
         </tbody>
       </table>
