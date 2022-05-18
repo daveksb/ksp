@@ -59,8 +59,11 @@ const routes: Routes = [
       },
     ],
   },
-
-  { path: '**', component: UniServiceHomeComponent },
+  {
+    path: '**',
+    redirectTo: 'home',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
