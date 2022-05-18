@@ -1,1 +1,599 @@
-<p>import-student-list works!</p>
+<div class="container">
+  <div class="title__label">
+    รายละเอียดใบคำขอ > <span>ขอยื่นรายชื่อผู้เข้าศึกษา</span>
+  </div>
+  <div class="content__container">
+    <div class="content__header">
+      <div class="label__content">
+        วันที่ทำรายการ :
+        <span class="label__content--primary">10 ตุลาคม 2565</span>
+      </div>
+      <div class="label__content">
+        เลขใบคำขอ :
+        <span class="label__content--secondary">112234467876543</span>
+      </div>
+    </div>
+    <hr />
+
+    <div class="detail__container">
+      <div class="header__detail">
+        <div class="detail__header">ขอยื่นรายชื่อผู้เข้าศึกษา</div>
+        <div>
+          <button
+            type="button"
+            class="btn btn-upload-secondary btn-sm label__button"
+          >
+            <img src="/assets/images/img-uni/microsoft excel.png" />
+            ดาวน์โหลดแบบฟอร์ม
+          </button>
+          <button type="button" class="btn btn-upload btn-sm label__button">
+            <img src="/assets/images/img-uni/Upload.svg" /> อัพโหลดไฟล์
+          </button>
+        </div>
+      </div>
+
+      <div class="table-outter wrapper">
+        <table class="table">
+          <thead class="header__table">
+            <tr>
+              <th scope="col" class="header__column--primary">ลำดับ</th>
+              <th scope="col" class="header__column--secondary">
+                วันที่รับเข้า
+              </th>
+              <th scope="col" class="header__column--secondary">
+                เลขบัตรประจำตัวประชาชน
+              </th>
+              <th scope="col" class="header__column">ชื่อ-นามสกุล (ภาษาไทย)</th>
+              <th scope="col" class="header__column">
+                ชื่อ-นามสกุล (ภาษาอังกฤษ)
+              </th>
+              <th scope="col" class="header__column--secondary">
+                เบอร์โทรศัพท์มือถือ
+              </th>
+              <th scope="col" class="header__column--secondary">
+                วัน/เดือน/ปีเกิด(พ.ศ.)
+              </th>
+              <th scope="col" class="header__column--secondary">ที่อยู่</th>
+            </tr>
+          </thead>
+          <tbody class="content__table-container">
+            <tr>
+              <th scope="row" class="label__table">1</th>
+              <td>
+                <div class="input-group date" id="datepicker">
+                  <input type="text" class="form-control" />
+                  <span class="input-group-append">
+                    <span class="input-group-text bg-white d-block">
+                      <i class="fa fa-calendar"></i>
+                    </span>
+                  </span>
+                </div>
+              </td>
+              <td>
+                <div>
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="1-2345-67890-12-3"
+                  />
+                </div>
+              </td>
+
+              <td class="detail__table">
+                <div class="column__detail">
+                  <select
+                    class="search__content form-select form-select-sm"
+                    aria-label=".form-select-sm example"
+                  >
+                    <option selected>กรุณาระบุ</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </div>
+                <div class="column__detail">
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="ชื่อ"
+                  />
+                </div>
+                <div class="column__detail">
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="สกุล"
+                  />
+                </div>
+              </td>
+
+              <td class="detail__table2">
+                <div class="column__detail">
+                  <select
+                    class="search__content form-select form-select-sm"
+                    aria-label=".form-select-sm example"
+                  >
+                    <option selected>Choose</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </div>
+                <div class="column__detail">
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="First name"
+                  />
+                </div>
+                <div class="column__detail">
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="Middle name"
+                  />
+                </div>
+                <div class="column__detail">
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="Last name"
+                  />
+                </div>
+              </td>
+
+              <td>
+                <div>
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="090-xxx-xxxx"
+                  />
+                </div>
+              </td>
+              <td>
+                <div class="input-group date" id="datepicker">
+                  <input type="text" class="form-control" />
+                  <span class="input-group-append">
+                    <span class="input-group-text bg-white d-block">
+                      <i class="fa fa-calendar"></i>
+                    </span>
+                  </span>
+                </div>
+              </td>
+              <td>
+                <div>
+                  <a href="url" class="link__label">รายละเอียดที่อยู่</a
+                  ><img src="/assets/images/img-uni/arrow-down.svg" />
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" class="label__table">2</th>
+              <td>
+                <div class="input-group date" id="datepicker">
+                  <input type="text" class="form-control" />
+                  <span class="input-group-append">
+                    <span class="input-group-text bg-white d-block">
+                      <i class="fa fa-calendar"></i>
+                    </span>
+                  </span>
+                </div>
+              </td>
+              <td>
+                <div>
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="1-2345-67890-12-3"
+                  />
+                </div>
+              </td>
+
+              <td class="detail__table">
+                <div class="column__detail">
+                  <select
+                    class="search__content form-select form-select-sm"
+                    aria-label=".form-select-sm example"
+                  >
+                    <option selected>กรุณาระบุ</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </div>
+                <div class="column__detail">
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="ชื่อ"
+                  />
+                </div>
+                <div class="column__detail">
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="สกุล"
+                  />
+                </div>
+              </td>
+
+              <td class="detail__table2">
+                <div class="column__detail">
+                  <select
+                    class="search__content form-select form-select-sm"
+                    aria-label=".form-select-sm example"
+                  >
+                    <option selected>Choose</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </div>
+                <div class="column__detail">
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="First name"
+                  />
+                </div>
+                <div class="column__detail">
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="Middle name"
+                  />
+                </div>
+                <div class="column__detail">
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="Last name"
+                  />
+                </div>
+              </td>
+
+              <td>
+                <div>
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="090-xxx-xxxx"
+                  />
+                </div>
+              </td>
+              <td>
+                <div class="input-group date" id="datepicker">
+                  <input type="text" class="form-control" />
+                  <span class="input-group-append">
+                    <span class="input-group-text bg-white d-block">
+                      <i class="fa fa-calendar"></i>
+                    </span>
+                  </span>
+                </div>
+              </td>
+              <td>
+                <div>
+                  <a href="url" class="link__label">รายละเอียดที่อยู่</a
+                  ><img src="/assets/images/img-uni/arrow-down.svg" />
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" class="label__table">3</th>
+              <td>
+                <div class="input-group date" id="datepicker">
+                  <input type="text" class="form-control" />
+                  <span class="input-group-append">
+                    <span class="input-group-text bg-white d-block">
+                      <i class="fa fa-calendar"></i>
+                    </span>
+                  </span>
+                </div>
+              </td>
+              <td>
+                <div>
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="1-2345-67890-12-3"
+                  />
+                </div>
+              </td>
+
+              <td class="detail__table">
+                <div class="column__detail">
+                  <select
+                    class="search__content form-select form-select-sm"
+                    aria-label=".form-select-sm example"
+                  >
+                    <option selected>กรุณาระบุ</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </div>
+                <div class="column__detail">
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="ชื่อ"
+                  />
+                </div>
+                <div class="column__detail">
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="สกุล"
+                  />
+                </div>
+              </td>
+
+              <td class="detail__table2">
+                <div class="column__detail">
+                  <select
+                    class="search__content form-select form-select-sm"
+                    aria-label=".form-select-sm example"
+                  >
+                    <option selected>Choose</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </div>
+                <div class="column__detail">
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="First name"
+                  />
+                </div>
+                <div class="column__detail">
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="Middle name"
+                  />
+                </div>
+                <div class="column__detail">
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="Last name"
+                  />
+                </div>
+              </td>
+
+              <td>
+                <div>
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="090-xxx-xxxx"
+                  />
+                </div>
+              </td>
+              <td>
+                <div class="input-group date" id="datepicker">
+                  <input type="text" class="form-control" />
+                  <span class="input-group-append">
+                    <span class="input-group-text bg-white d-block">
+                      <i class="fa fa-calendar"></i>
+                    </span>
+                  </span>
+                </div>
+              </td>
+              <td>
+                <div>
+                  <a href="url" class="link__label">รายละเอียดที่อยู่</a
+                  ><img src="/assets/images/img-uni/arrow-down.svg" />
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td colspan="3">
+                <div class="address__title">
+                  ที่อยู่ตามทะเบียนบ้าน (นักศึกษาชาวไทย) หรือที่พักประจำ
+                  (นักศึกษาชาวต่างชาติ)
+                </div>
+                <div>
+                  <label for="exampleFormControlInput1" class="form-label"
+                    >ชื่อมหาวิทยาลัย</label
+                  >
+                  <input class="form-control form-control-sm" type="text" />
+                </div>
+                <div class="address__container">
+                  <div>
+                    <label for="exampleFormControlInput1" class="form-label"
+                      >บ้านเลขที่ *</label
+                    >
+                    <input class="form-control form-control-sm" type="text" />
+                  </div>
+                  <div>
+                    <label for="exampleFormControlInput1" class="form-label"
+                      >หมู่ที่</label
+                    >
+                    <input class="form-control form-control-sm" type="text" />
+                  </div>
+                  <div>
+                    <label for="exampleFormControlInput1" class="form-label"
+                      >ซอย</label
+                    >
+                    <input class="form-control form-control-sm" type="text" />
+                  </div>
+                  <div>
+                    <label for="exampleFormControlInput1" class="form-label"
+                      >ถนน</label
+                    >
+                    <input class="form-control form-control-sm" type="text" />
+                  </div>
+                </div>
+                <div class="address__container--secondary">
+                  <div>
+                    <label for="exampleFormControlInput1" class="form-label"
+                      >รหัสไปรษณีย์ *</label
+                    >
+                    <input class="form-control form-control-sm" type="text" />
+                  </div>
+                  <div>
+                    <label for="exampleFormControlInput1" class="form-label"
+                      >จังหวัด *</label
+                    >
+                    <input class="form-control form-control-sm" type="text" />
+                  </div>
+                  <div>
+                    <label for="exampleFormControlInput1" class="form-label"
+                      >อำเภอ/เขต *</label
+                    >
+                    <input class="form-control form-control-sm" type="text" />
+                  </div>
+                  <div>
+                    <label for="exampleFormControlInput1" class="form-label"
+                      >แขวง/ตำบล *</label
+                    >
+                    <input class="form-control form-control-sm" type="text" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlTextarea1" class="form-label"
+                    >หมายเหตุ</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="exampleFormControlTextarea1"
+                    rows="3"
+                  ></textarea>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" class="label__table">4</th>
+              <td>
+                <div class="input-group date" id="datepicker">
+                  <input type="text" class="form-control" />
+                  <span class="input-group-append">
+                    <span class="input-group-text bg-white d-block">
+                      <i class="fa fa-calendar"></i>
+                    </span>
+                  </span>
+                </div>
+              </td>
+              <td>
+                <div>
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="1-2345-67890-12-3"
+                  />
+                </div>
+              </td>
+
+              <td class="detail__table">
+                <div class="column__detail">
+                  <select
+                    class="search__content form-select form-select-sm"
+                    aria-label=".form-select-sm example"
+                  >
+                    <option selected>กรุณาระบุ</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </div>
+                <div class="column__detail">
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="ชื่อ"
+                  />
+                </div>
+                <div class="column__detail">
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="สกุล"
+                  />
+                </div>
+              </td>
+
+              <td class="detail__table2">
+                <div class="column__detail">
+                  <select
+                    class="search__content form-select form-select-sm"
+                    aria-label=".form-select-sm example"
+                  >
+                    <option selected>Choose</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </div>
+                <div class="column__detail">
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="First name"
+                  />
+                </div>
+                <div class="column__detail">
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="Middle name"
+                  />
+                </div>
+                <div class="column__detail">
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="Last name"
+                  />
+                </div>
+              </td>
+
+              <td>
+                <div>
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="090-xxx-xxxx"
+                  />
+                </div>
+              </td>
+              <td>
+                <div class="input-group date" id="datepicker">
+                  <input type="text" class="form-control" />
+                  <span class="input-group-append">
+                    <span class="input-group-text bg-white d-block">
+                      <i class="fa fa-calendar"></i>
+                    </span>
+                  </span>
+                </div>
+              </td>
+              <td>
+                <div>
+                  <a href="url" class="link__label">รายละเอียดที่อยู่</a
+                  ><img src="/assets/images/img-uni/arrow-down.svg" />
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="detail__footer">
+        <button type="button" class="btn btn-add">
+          <img
+            src="/assets/images/img-uni/add-icon.svg"
+            class="icon__add"
+          />เพิ่มสถานที่เปิดสอน
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $(function () {
+    $('#datepicker').datepicker();
+  });
+</script>
