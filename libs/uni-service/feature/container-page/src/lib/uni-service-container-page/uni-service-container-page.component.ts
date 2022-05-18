@@ -30,7 +30,7 @@ export class UniServiceContainerPageComponent {
             label: 'ขอสร้างเลขประจำตัวคุรุสภาสำหรับนักศึกษาชาวต่างชาติ',
           },
           {
-            path: 'student-list',
+            path: 'graduate-list',
             label: 'ขอยื่นรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
           },
           {

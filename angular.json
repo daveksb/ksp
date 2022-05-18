@@ -33,7 +33,6 @@
     "uni-service-feature-register": "libs/uni-service/feature/register",
     "uni-service-feature-req-degree-cert": "libs/uni-service/feature/req-degree-cert",
     "uni-service-feature-req-foreign-id": "libs/uni-service/feature/req-foreign-id",
-    "uni-service-feature-req-list-of-graduates": "libs/uni-service/feature/req-list-of-graduates",
     "uni-service-feature-req-list-of-students": "libs/uni-service/feature/req-list-of-students",
     "uni-service-feature-retired": "libs/uni-service/feature/retired",
     "uni-service-ui-dialog": "libs/uni-service/ui/dialog",

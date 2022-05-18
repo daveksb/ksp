@@ -50,7 +50,7 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'student-list',
+    path: 'graduate-list',
     component: UniServiceContainerPageComponent,
     children: [
       {
@@ -61,7 +61,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
 ];
