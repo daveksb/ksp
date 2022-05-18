@@ -1,4 +1,4 @@
-<div class="header">ขอถอดถอนผู้ประสานงาน</div>
+<!-- <div class="header">ขอถอดถอนผู้ประสานงาน</div>
 
 <div class="reason">กรุณาแนบหลักฐานเพื่อพิจารณา</div>
 
@@ -9,5 +9,292 @@
   <div>
     <button (click)="cancel()">ยกเลิก</button>
     <button (click)="save()">บันทึก</button>
+  </div>
+</div>
+ -->
+
+<div class="container">
+  <ksp-uni-service-top-nav>ขอถอดถอนผู้ประสานงาน</ksp-uni-service-top-nav>
+  <div class="title__label">
+    รายละเอียดใบคำขอถอดถอน (ผู้ประสานงาน / ผู้รับผิดชอบ)
+  </div>
+
+  <div class="content__container">
+    <div class="content__header">
+      <div class="label__content">
+        วันที่ทำรายการ :
+        <span class="label__content--primary">10 ตุลาคม 2565</span>
+      </div>
+      <div class="label__content">
+        เลขใบคำขอ :
+        <span class="label__content--secondary">112234467876543</span>
+      </div>
+    </div>
+    <hr />
+
+    <!-- <div class="detail__container">
+      <div class="detail__header">สถานที่สังกัด</div>
+
+      <div class="detail__content-2">
+        <div class="detail__label">สถาบัน / มหาวิทยาลัย :</div>
+        <div class="detail__label-2">วิทยาลัยอาชีวศึกษาชลบุรี</div>
+      </div>
+
+      <div class="detail__content-2">
+        <div class="detail__label">สังกัด :</div>
+        <div class="detail__label-2">สำนักงานคณะกรรมการอาชีวศึกษา</div>
+      </div>
+
+      <div class="detail__header-2">
+        ข้อมูลผู้ขอรหัสสำหรับเข้าใช้งานระบบ (ผู้ประสานงาน / ผู้รับผิดชอบ)
+      </div>
+
+      <div class="detail__content-2">
+        <div class="detail__label">สิทธิ์สำหรับการเข้าใช้งาน :</div>
+        <div class="detail__label-2">
+          เจ้าหน้าที่ประสานงาน (รับรองปริญญาและประกาศนียบัตรทางการศึกษา)
+        </div>
+      </div>
+
+      <div class="detail__content-2">
+        <div class="detail__label">หมายเลขบัตรประชาชน :</div>
+        <div class="detail__label-2">1 1234 23456 78 9</div>
+      </div>
+
+      <div class="detail__content-2">
+        <div class="detail__label">ชื่อ-นามสกุลภาษาไทย :</div>
+        <div class="detail__label-2">นางสาว สุภาพร สุขเกษม</div>
+      </div>
+
+      <div class="detail__content-2">
+        <div class="detail__label">ชื่อ-นามสกุลภาษาอังกฤษ :</div>
+        <div class="detail__label-2">MISS SUPAPORN SUKKASAME</div>
+      </div>
+
+      <div class="detail__content-2">
+        <div class="detail__label">ตำแหน่งทางการบริหาร :</div>
+        <div class="detail__label-2">ไม่มี</div>
+      </div>
+
+      <div class="detail__content-2">
+        <div class="detail__label">สังกัด :</div>
+        <div class="detail__label-2">สำนักงานคณะกรรมการอาชีวศึกษา</div>
+      </div>
+
+      <div class="detail__content-2">
+        <div class="detail__label">เบอร์โทรศัพท์ (ที่ทำงาน) :</div>
+        <div class="detail__label-2">038-9087654</div>
+      </div>
+
+      <div class="detail__content-2">
+        <div class="detail__label">เบอร์โทรศัพท์ (ที่ติดต่อได้) :</div>
+        <div class="detail__label-2">081-9872678</div>
+      </div>
+
+      <div class="detail__content-2">
+        <div class="detail__label">อีเมล :</div>
+        <div class="detail__label-2">suoaporn.sss@gmail.com</div>
+      </div>
+    </div>
+
+    <div class="detail__container">
+      <div class="detail__header">เหตุผลการถอดถอน</div>
+      <div class="detail__content--secondary">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >เหตุผลการถอดถอน</label
+          >
+          <select
+            class="form-select form-select-sm"
+            aria-label=".form-select-sm example"
+          >
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+      </div>
+      <textarea
+        class="form-control form-control-sm"
+        rows="3"
+        placeholder="กรุณาระบุ"
+      ></textarea>
+    </div> -->
+
+    <div class="detail__container">
+      <div class="detail__header">
+        ข้อมูลผู้แต่งตั้งผู้ประสานงาน / ผู้รับผิดชอบ (ที่ระบุไว้ในเอกสารแนบ)
+      </div>
+      <div class="detail__content--secondary">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >คำนำหน้าชื่อภาษาไทย</label
+          >
+          <select
+            class="form-select form-select-sm"
+            aria-label=".form-select-sm example"
+          >
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >ชื่อภาษาไทย</label
+          >
+          <input class="form-control form-control-sm" type="text" />
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >นามสกุลภาษาไทย</label
+          >
+          <input class="form-control form-control-sm" type="text" />
+        </div>
+      </div>
+      <div class="detail__content--secondary">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >คำนำหน้าชื่ออังกฤษ</label
+          >
+          <select
+            class="form-select form-select-sm"
+            aria-label=".form-select-sm example"
+          >
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >ชื่อภาษาอังกฤษ</label
+          >
+          <input class="form-control form-control-sm" type="text" />
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >นามสกุลภาษาอังกฤษ</label
+          >
+          <input class="form-control form-control-sm" type="text" />
+        </div>
+      </div>
+      <div class="detail__content">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >ตำแหน่งทางการบริหาร</label
+          >
+          <select
+            class="form-select form-select-sm"
+            aria-label=".form-select-sm example"
+          >
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            ><br
+          /></label>
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            placeholder="อื่นๆ โปรดระบุ"
+          />
+        </div>
+      </div>
+      <div class="detail__content">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >เบอร์โทรศัพท์ (ที่ทำงาน)</label
+          >
+          <input class="form-control form-control-sm" type="text" />
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >เบอร์โทรศัพท์ (ที่ติดต่อได้)</label
+          >
+          <input class="form-control form-control-sm" type="text" />
+        </div>
+      </div>
+      <div class="detail__content">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">อีเมล</label>
+          <input class="form-control form-control-sm" type="text" />
+        </div>
+      </div>
+    </div>
+
+    <div class="detail__container">
+      <div class="detail__header">กรุณาแนบหลักฐานเพื่อพิจารณา</div>
+      <div class="table-responsive">
+        <table class="table">
+          <thead class="header__table">
+            <tr>
+              <th scope="col">รายการเอกสาร</th>
+              <th scope="col" class="title__table">จำนวนหน้า</th>
+              <th scope="col" class="title__table">อัพโหลด</th>
+            </tr>
+          </thead>
+          <tbody class="body__table">
+            <tr>
+              <th scope="row">
+                หนังสือแต่ตั้งผู้ประสานงาน
+                <div>
+                  xxxxxxxxxxxxxxxx-xxxxxxxx_xxxxx.pdf<img
+                    src="/assets/images/img-uni/close.svg"
+                  />
+                </div>
+                <div>
+                  xxxxxxxx_xxxxx.pdf<img
+                    src="/assets/images/img-uni/loader.svg"
+                  />
+                </div>
+              </th>
+              <td class="detail__table">
+                <br />
+                <div>2</div>
+                <div>2</div>
+              </td>
+              <td class="detail__table">
+                <button
+                  type="button"
+                  class="btn btn-upload btn-sm label__button"
+                >
+                  + อัพโหลดไฟล์
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">สำเนาบัตรประชาชน</th>
+              <td class="detail__table">-</td>
+              <td class="detail__table">
+                <button
+                  type="button"
+                  class="btn btn-upload btn-sm label__button"
+                >
+                  + อัพโหลดไฟล์
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="button__container">
+      <div class="button__content--left">
+        <button class="btn-third" (click)="prevPage()">ย้อนกลับ</button>
+      </div>
+      <div class="button__content">
+        <button class="btn-fourth" (click)="cancel()">ยกเลิก</button>
+        <button class="btn-primary" (click)="save()">บันทึก</button>
+      </div>
+    </div>
   </div>
 </div>

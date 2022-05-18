@@ -60,8 +60,13 @@
 }
 .form-control {
   background-color: #fff;
+  font-size: 18px;
 }
 
+.form-select {
+  background-color: #fff;
+  font-size: 18px;
+}
 .btn-primary {
   font-size: 18px;
   background-color: #0056ff;
