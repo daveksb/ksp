@@ -82,10 +82,10 @@
       </div>
 
       <div class="button__container">
-        <button type="button" class="btn btn-fourth btn-sm label__button">
+        <button (click)="clear()" type="button" class="btn btn-fourth btn-sm label__button">
           ล้างข้อมูล
         </button>
-        <button type="button" class="btn btn-primary btn-sm label__button">
+        <button (click)="search()" type="button" class="btn btn-primary btn-sm label__button">
           ค้นหา
         </button>
       </div>
@@ -122,89 +122,21 @@
           </tr>
         </thead>
         <tbody class="body__table">
-          <tr>
-            <td class="detail__table">1</td>
-            <td class="detail__table">UNI_VC_64120009</td>
-            <td class="detail__table">10 ธ.ค. 2564</td>
-            <td class="detail__table">มหาวิทยาลัยภูเก็ต</td>
-            <td class="detail__table">คุรุศาสตร์</td>
-            <td class="detail__table">รับข้อมูล</td>
-            <td class="detail__table">-</td>
-            <td class="detail__table">-</td>
-            <td class="detail__table">-</td>
-            <td class="detail__table">12 ธ.ค. 2564</td>
-            <td class="detail__table">'แก้ไข'</td>
-            <td class="detail__table">'แก้ไข'</td>
-            <td class="detail__table">icon</td>
-            <td class="detail__table">icon</td>
-          </tr>
-
-          <tr>
-            <td class="detail__table">2</td>
-            <td class="detail__table">UNI_VC_64120009</td>
-            <td class="detail__table">12 ต.ค. 2564</td>
-            <td class="detail__table">มหาวิทยาลัยภูเก็ต</td>
-            <td class="detail__table">คุรุศาสตร์</td>
-            <td class="detail__table">อยู่ระหว่างพิจารณา</td>
-            <td class="detail__table">ประเมินสภาพจริง</td>
-            <td class="detail__table">ประเมินสภาพจริง</td>
-            <td class="detail__table">-</td>
-            <td class="detail__table">10 ต.ค. 2564</td>
-            <td class="detail__table">'ตรวจสอบแล้ว'</td>
-            <td class="detail__table">'แก้ไข'</td>
-            <td class="detail__table">icon</td>
-            <td class="detail__table">icon</td>
-          </tr>
-
-          <tr>
-            <td class="detail__table">3</td>
-            <td class="detail__table">UNI_VC_64120009</td>
-            <td class="detail__table">12 ส.ค. 2564</td>
-            <td class="detail__table">มหาวิทยาลัยภูเก็ต</td>
-            <td class="detail__table">คุรุศาสตร์</td>
-            <td class="detail__table">พิจารณา</td>
-            <td class="detail__table">พิจารณา</td>
-            <td class="detail__table">รับรอง</td>
-            <td class="detail__table">30 ส.ค. 2564</td>
-            <td class="detail__table">30 ส.ค. 2564</td>
-            <td class="detail__table">'ตรวจสอบแล้ว'</td>
-            <td class="detail__table">'ตรวจสอบแล้ว'</td>
-            <td class="detail__table">icon</td>
-            <td class="detail__table">icon</td>
-          </tr>
-
-          <tr>
-            <td class="detail__table">4</td>
-            <td class="detail__table">UNI_VC_64120009</td>
-            <td class="detail__table">12 ส.ค. 2564</td>
-            <td class="detail__table">มหาวิทยาลัยภูเก็ต</td>
-            <td class="detail__table">คุรุศาสตร์</td>
-            <td class="detail__table">พิจารณา</td>
-            <td class="detail__table">พิจารณา</td>
-            <td class="detail__table">รับรอง</td>
-            <td class="detail__table">30 ส.ค. 2564</td>
-            <td class="detail__table">30 ส.ค. 2564</td>
-            <td class="detail__table">'ตรวจสอบแล้ว'</td>
-            <td class="detail__table">'ตรวจสอบแล้ว'</td>
-            <td class="detail__table">icon</td>
-            <td class="detail__table">icon</td>
-          </tr>
-
-          <tr>
-            <td class="detail__table">5</td>
-            <td class="detail__table">UNI_VC_64120009</td>
-            <td class="detail__table">12 ส.ค. 2564</td>
-            <td class="detail__table">มหาวิทยาลัยภูเก็ต</td>
-            <td class="detail__table">คุรุศาสตร์</td>
-            <td class="detail__table">พิจารณา</td>
-            <td class="detail__table">พิจารณา</td>
-            <td class="detail__table">รับรอง</td>
-            <td class="detail__table">30 ส.ค. 2564</td>
-            <td class="detail__table">30 ส.ค. 2564</td>
-            <td class="detail__table">'ตรวจสอบแล้ว'</td>
-            <td class="detail__table">'ตรวจสอบแล้ว'</td>
-            <td class="detail__table">icon</td>
-            <td class="detail__table">icon</td>
+          <tr *ngFor="let item of data">
+            <td class="detail__table">{{ item.order }}</td>
+            <td class="detail__table">{{ item.degreeId }}</td>
+            <td class="detail__table">{{ item.date }}</td>
+            <td class="detail__table">{{ item.uni }}</td>
+            <td class="detail__table">{{ item.major }}</td>
+            <td class="detail__table">{{ item.verifyStatus }}</td>
+            <td class="detail__table">{{ item.considerStatus }}</td>
+            <td class="detail__table">{{ item.approveStatus }}</td>
+            <td class="detail__table">{{ item.approveDate }}</td>
+            <td class="detail__table">{{ item.editDate }}</td>
+            <td class="detail__table">{{ item.verify }}</td>
+            <td class="detail__table">{{ item.consider }}</td>
+            <td class="detail__table">{{ item.edit }}</td>
+            <td class="detail__table">{{ item.print }}</td>
           </tr>
         </tbody>
       </table>
