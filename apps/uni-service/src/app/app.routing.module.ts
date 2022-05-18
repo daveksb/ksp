@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ReqListOfStudentsComponent } from '@ksp/uni-service-feature-graduate-list';
 import { UniServiceContainerPageComponent } from '@ksp/uni-service/feature/container-page';
 import { UniServiceHomeComponent } from '@ksp/uni-service/feature/home';
 import { UniServiceLoginComponent } from '@ksp/uni-service/feature/login';
 import { ReqForeignIdComponent } from '@ksp/uni-service-feature-foreign-id';
+import { CourseSearchComponent } from '@ksp/uni-service-feature-graduate-list';
 
 const routes: Routes = [
   { path: 'login', component: UniServiceLoginComponent },
@@ -55,7 +55,7 @@ const routes: Routes = [
     children: [
       {
         path: '**',
-        component: ReqListOfStudentsComponent,
+        component: CourseSearchComponent,
       },
     ],
   },

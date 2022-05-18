@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ksp-form-register-file-upload',
+  selector: 'uni-service-form-register-file-upload',
   templateUrl: './form-register-file-upload.component.html',
   styleUrls: ['./form-register-file-upload.component.scss'],
 })

@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ForgotPasswordSetNewPasswordComponent } from '../forgot-password-set-new-password/forgot-password-set-new-password.component';
 
 @Component({
-  selector: 'ksp-forgot-password-person-id',
   templateUrl: './forgot-password-person-id.component.html',
   styleUrls: ['./forgot-password-person-id.component.scss'],
 })

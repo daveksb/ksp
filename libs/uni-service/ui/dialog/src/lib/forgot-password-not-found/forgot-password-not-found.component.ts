@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ForgotPasswordPersonIdComponent } from '../forgot-password-person-id/forgot-password-person-id.component';
 
 @Component({
-  selector: 'ksp-forgot-password-not-found',
   templateUrl: './forgot-password-not-found.component.html',
   styleUrls: ['./forgot-password-not-found.component.scss'],
 })
