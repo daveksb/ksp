@@ -42,6 +42,14 @@
   color: #656565;
 }
 
+.form-control {
+  font-size: 18px;
+}
+
+.form-select {
+  font-size: 18px;
+}
+
 .detail__container--second {
   display: grid;
   grid-template-columns: 1fr 1fr;
