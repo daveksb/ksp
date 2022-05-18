@@ -42,7 +42,7 @@ export const data: DegreeInfo[] = [
 ];
 
 @Component({
-  selector: 'ksp-uni-service-home',
+  selector: 'uni-service-home',
   templateUrl: './uni-service-home.component.html',
   styleUrls: ['./uni-service-home.component.css'],
 })

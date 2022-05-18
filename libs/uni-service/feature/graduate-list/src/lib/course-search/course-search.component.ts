@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ksp-graduate-list-course-search',
+  selector: 'uni-service-course-search',
   templateUrl: './course-search.component.html',
   styleUrls: ['./course-search.component.scss'],
 })
