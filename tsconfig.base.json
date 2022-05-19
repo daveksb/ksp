@@ -33,8 +33,11 @@
       "@ksp/school-service/feature/login": [
         "libs/school-service/feature/login/src/index.ts"
       ],
-      "@ksp/school-service/feature/req-temp-license": [
-        "libs/school-service/feature/req-temp-license/src/index.ts"
+      "@ksp/school-service/feature/temp-license": [
+        "libs/school-service/feature/temp-license/src/index.ts"
+      ],
+      "@ksp/school-service/ui/form": [
+        "libs/school-service/ui/form/src/index.ts"
       ],
       "@ksp/self-service/feature/home": [
         "libs/self-service/feature/home/src/index.ts"
