@@ -36,7 +36,13 @@
 
 .box__title {
   font-size: 22px;
+  color: #0056ff;
   padding-left: 15px;
+}
+
+.box__title-2 {
+  font-size: 22px;
+  color: #0056ff;
 }
 
 .table__title {
@@ -48,6 +54,10 @@
 
 .detail__container {
   margin-bottom: 16px;
+  padding: 0 15px;
+}
+
+.detail__container-2 {
   padding: 0 15px;
 }
 
@@ -124,6 +134,29 @@
   margin-right: 10px;
 }
 
+.label__content {
+  font-size: 18px;
+  color: #808080;
+  margin-right: 24px;
+}
+.label__content--primary {
+  color: #f68b33;
+}
+.label__content--secondary {
+  color: #0056ff;
+}
+.content__header {
+  display: flex;
+  margin: 10px 20px;
+}
+
+.header {
+  font-size: 22px;
+  color: #000000;
+  padding-top: 15px;
+  padding-left: 15px;
+}
+
 /* @media only screen and (max-width: 768px) {
   .detail__container {
     display: grid;
@@ -157,7 +190,6 @@
   display: flex;
   flex-direction: row-reverse;
   cursor: pointer;
-
 }
 
 .dropdown-content {
@@ -189,4 +221,14 @@
 
 .dropdown:hover .dropbtn {
   background-color: #0056ff;
+}
+
+.mat-menu-trigger {
+  margin-right: 25px;
+  font-size: 18px;
+  color: #fff;
+  background-color: #0056ff;
+  border: #0056ff;
+  width: 100px;
+  border-radius: 4px;
 }

@@ -6,6 +6,7 @@ import { LicenseDetailComponent } from './license-detail/license-detail.componen
 import { SchoolServiceFeatureTempLicenseRoutingModule } from './school-service-feature-temp-license-routing.module';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SharedUiFormModule } from '@ksp/shared/ui/form';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { SharedUiFormModule } from '@ksp/shared/ui/form';
     SchoolServiceFeatureTempLicenseRoutingModule,
     MatTabsModule,
     SharedUiFormModule,
+    MatMenuModule,
   ],
   declarations: [LicenseListComponent, LicenseDetailComponent],
   exports: [LicenseListComponent, LicenseDetailComponent],

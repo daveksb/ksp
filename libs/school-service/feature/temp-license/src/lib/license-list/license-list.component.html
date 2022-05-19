@@ -1,5 +1,22 @@
 <div class="main-container">
+  <div class="header">
+    รายละเอียดใบคำขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
+    (ชาวไทย)
+  </div>
   <div class="top-container">
+    <div class="content__header">
+      <div class="label__content">
+        วันที่ทำรายการ :
+        <span class="label__content--primary">10 ตุลาคม 2565</span>
+      </div>
+      <div class="label__content">
+        เลขใบคำขอ :
+        <span class="label__content--secondary">112234467876543</span>
+      </div>
+    </div>
+
+    <div class="detail__container"><hr /></div>
+
     <div class="box__container">
       <div class="box__title">ค้นหารายการ</div>
       <div class="detail__container--third">
@@ -105,28 +122,32 @@
 
     <div class="detail__container"><hr /></div>
 
-
     <div class="table__title">
-      <div>ยื่นใบคำขอ</div>
-      <div class="dropdown">
-        <button (click)="nextPage()" class="dropbtn">ยื่นใบคำขอ</button>
-        <div class="dropdown-content">
-          <a>ขออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)</a>
-          <a
-            >ขออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ
-            (ผู้บริหารสถานศึกษา)</a
-          >
-          <a
-            >ขออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)</a
-          >
-          <a>ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ</a>
-          <a>ขอหนังสือรับรองคุณวุฒิ</a>
-          <a
-            >ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One Innovation :
-            OSOI)</a
-          >
-        </div>
-      </div>
+      <div class="box__title-2">ยื่นใบคำขอ</div>
+
+      <button mat-button [matMenuTriggerFor]="beforeMenu">ยื่นใบคำขอ</button>
+      <mat-menu #beforeMenu="matMenu" xPosition="before">
+        <button mat-menu-item (click)="nextPage()">
+          ขออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)
+        </button>
+        <button mat-menu-item (click)="nextPage()">
+          ขออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ
+          (ผู้บริหารสถานศึกษา)
+        </button>
+        <button mat-menu-item (click)="nextPage()">
+          ขออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)
+        </button>
+        <button mat-menu-item (click)="nextPage()">
+          ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ
+        </button>
+        <button mat-menu-item (click)="nextPage()">
+          ขอหนังสือรับรองคุณวุฒิ
+        </button>
+        <button mat-menu-item (click)="nextPage()">
+          ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One Innovation :
+          OSOI)
+        </button>
+      </mat-menu>
     </div>
     <div class="bottom-content">
       <div class="table-responsive">
@@ -134,6 +155,7 @@
           <thead class="header__table">
             <tr>
               <th scope="col">ลำดับ</th>
+              <th scope="col">ตรวจสอบ</th>
               <th scope="col">เลขที่ใบคำขอ</th>
               <th scope="col">หมายเลขบัตรประชาชน</th>
               <th scope="col">ชื่อ-นามสกุล</th>
@@ -150,6 +172,7 @@
           <tbody class="body__table">
             <tr *ngFor="let item of data">
               <td class="detail__table">{{ item.order }}</td>
+              <td class="detail__table">ICON</td>
               <td class="detail__table">{{ item.reqCode }}</td>
               <td class="detail__table">{{ item.ssn }}</td>
               <td class="detail__table">{{ item.name }}</td>
@@ -167,4 +190,3 @@
     </div>
   </div>
 </div>
-
