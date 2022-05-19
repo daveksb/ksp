@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'school-service-feature-req-temp-license',
+  displayName: 'school-service-ui-form',
   preset: '../../../../jest.preset.ts',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,8 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory:
-    '../../../../coverage/libs/school-service/feature/req-temp-license',
+  coverageDirectory: '../../../../coverage/libs/school-service/ui/form',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },
