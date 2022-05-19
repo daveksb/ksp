@@ -8,6 +8,7 @@ import { SelfServiceLicenseEditComponent } from './self-service-license-edit/sel
 import { SharedUiSideMenuModule } from '@ksp/shared/ui/side-menu';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
+import { SharedUiFormModule } from '@ksp/shared/ui/form';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
     RouterModule,
     SelfServiceUiMenuModule,
     SelfServiceUiFormsModule,
+    SharedUiFormModule,
     SharedUiSideMenuModule,
     MatTabsModule,
     SharedUiTopNavModule,
