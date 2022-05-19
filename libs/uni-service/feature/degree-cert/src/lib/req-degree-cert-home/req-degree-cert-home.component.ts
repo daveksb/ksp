@@ -14,24 +14,22 @@ export interface DegreeCertInfo {
   editDate: string;
   verify: string;
   consider: string;
-  
 }
 
 export const data: DegreeCertInfo[] = [
   {
-  order: 1,
-  degreeId: 'UNI_VC_64120009',
-  date: '10 ธ.ค. 2564',
-  uni: 'มหาวิทยาลัยภูเก็ต',
-  major: 'คุรุศาสตร์',
-  verifyStatus: 'รับข้อมูล',
-  considerStatus: 'พิจารณา',
-  approveStatus: 'พิจารณา',
-  approveDate: '30 ส.ค. 2564',
-  editDate: '30 ส.ค. 2564',
-  verify: 'ตรวจสอบแล้ว',
-  consider: 'ตรวจสอบแล้ว',
-
+    order: 1,
+    degreeId: 'UNI_VC_64120009',
+    date: '10 ธ.ค. 2564',
+    uni: 'มหาวิทยาลัยภูเก็ต',
+    major: 'คุรุศาสตร์',
+    verifyStatus: 'รับข้อมูล',
+    considerStatus: 'พิจารณา',
+    approveStatus: 'พิจารณา',
+    approveDate: '30 ส.ค. 2564',
+    editDate: '30 ส.ค. 2564',
+    verify: 'ตรวจสอบแล้ว',
+    consider: 'ตรวจสอบแล้ว',
   },
   {
     order: 2,
@@ -46,7 +44,6 @@ export const data: DegreeCertInfo[] = [
     editDate: '30 ส.ค. 2564',
     verify: 'ตรวจสอบแล้ว',
     consider: 'ตรวจสอบแล้ว',
-
   },
   {
     order: 3,
@@ -61,7 +58,6 @@ export const data: DegreeCertInfo[] = [
     editDate: '30 ส.ค. 2564',
     verify: 'ตรวจสอบแล้ว',
     consider: 'ตรวจสอบแล้ว',
-
   },
 ];
 
@@ -85,5 +81,4 @@ export class ReqDegreeCertHomeComponent {
   clear() {
     this.data = [];
   }
-
 }

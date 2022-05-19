@@ -29,53 +29,49 @@ export class SchoolServiceContainerPageComponent {
             path: 'temp-license/list',
           },
           {
-            label: 'ขอต่ออายุใบประกอบวิชาชีพ',
-            path: 'temp-license/renew',
+            label:
+              'ขออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ผู้บริหารสถานศึกษา)',
+            path: 'temp-license/list',
           },
+          {
+            label:
+              'ขออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)',
+            path: 'temp-license/list',
+          },
+          {
+            label:
+              'ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ',
+            path: 'temp-license/list',
+          },
+          {
+            label:
+              'ขอหนังสือรับรองคุณวุฒิ',
+            path: 'temp-license/list',
+          },
+          {
+            label:
+              'ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One Innovation : OSOI)',
+            path: 'temp-license/list',
+          },
+
         ],
       },
       {
         icon: 'assets/images/icon-sidenav/event.svg',
-        label: 'กิจกรรมการพัฒนาตัวเอง',
+        label: 'ทะเบียนบุคลากรภายในหน่วยงาน',
         path: '',
       },
       {
         icon: 'assets/images/icon-sidenav/reward.svg',
-        label: 'รางวัลของฉัน',
+        label: 'ทะเบียนหนังสืออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาต',
         path: '',
       },
       {
-        icon: 'assets/images/icon-sidenav/people.svg',
-        label: 'ข้อมูลของฉัน',
+        icon: 'assets/images/icon-sidenav/reward.svg',
+        label: 'รายงาน',
         path: '',
-        subMenuName: 'myProfile',
-        subMenu: [
-          {
-            label: 'ข้อมูลส่วนตัว',
-            path: '',
-          },
-          {
-            label: 'สถานที่ทำงาน',
-            path: '',
-          },
-          {
-            label: 'ข้อมูลการศึกษา',
-            path: '',
-          },
-          {
-            label: 'ข้อมูลประสบการณ์วิชาชีพ',
-            path: '',
-          },
-          {
-            label: 'ข้อมูลผลการประเมินสมรรถนะ',
-            path: '',
-          },
-          {
-            label: 'ประวัติการชำระเงินและใบเสร็จรับเงิน',
-            path: 'payment-history',
-          },
-        ],
       },
+
     ];
   }
 }
