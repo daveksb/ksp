@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/shared/ui/form",
+  "sourceRoot": "libs/shared/ui/form/src",
+  "prefix": "ksp",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/ui/form"],
+      "options": {
+        "jestConfig": "libs/shared/ui/form/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/ui/form/**/*.ts",
+          "libs/shared/ui/form/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

@@ -13,7 +13,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "schoolService",
+            "prefix": "ksp",
             "style": "camelCase"
           }
         ],
@@ -21,7 +21,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "school-service",
+            "prefix": "ksp",
             "style": "kebab-case"
           }
         ]
