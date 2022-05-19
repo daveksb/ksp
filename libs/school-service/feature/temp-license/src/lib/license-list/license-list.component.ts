@@ -76,7 +76,9 @@ export class LicenseListComponent {
     this.data = [];
   }
 
-  nextPage() {
-    this.router.navigate(['/', 'temp-license', 'detail']);
+  nextPage(requestType: number) {
+    this.router.navigate(['/', 'temp-license', 'detail'], {
+      queryParams: { type: requestType },
+    });
   }
 }

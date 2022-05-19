@@ -26,34 +26,31 @@ export class SchoolServiceContainerPageComponent {
           {
             label:
               'ขอใบอนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)',
-            path: 'temp-license/list',
+            path: 'temp-license/detail?type=1',
           },
           {
             label:
               'ขออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ผู้บริหารสถานศึกษา)',
-            path: 'temp-license/list',
+            path: 'temp-license/detail;type=2',
           },
           {
             label:
               'ขออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)',
-            path: 'temp-license/list',
+            path: 'temp-license/detail;type=3',
           },
           {
-            label:
-              'ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ',
-            path: 'temp-license/list',
+            label: 'ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ',
+            path: 'temp-license/detail;type=4',
           },
           {
-            label:
-              'ขอหนังสือรับรองคุณวุฒิ',
-            path: 'temp-license/list',
+            label: 'ขอหนังสือรับรองคุณวุฒิ',
+            path: 'temp-license/detail;type=5',
           },
           {
             label:
               'ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One Innovation : OSOI)',
-            path: 'temp-license/list',
+            path: 'temp-license/detail;type=6',
           },
-
         ],
       },
       {
@@ -71,7 +68,6 @@ export class SchoolServiceContainerPageComponent {
         label: 'รายงาน',
         path: '',
       },
-
     ];
   }
 }

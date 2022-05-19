@@ -127,23 +127,23 @@
 
       <button mat-button [matMenuTriggerFor]="beforeMenu">ยื่นใบคำขอ</button>
       <mat-menu #beforeMenu="matMenu" xPosition="before">
-        <button mat-menu-item (click)="nextPage()">
+        <button mat-menu-item (click)="nextPage(1)">
           ขออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)
         </button>
-        <button mat-menu-item (click)="nextPage()">
+        <button mat-menu-item (click)="nextPage(2)">
           ขออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ
           (ผู้บริหารสถานศึกษา)
         </button>
-        <button mat-menu-item (click)="nextPage()">
+        <button mat-menu-item (click)="nextPage(3)">
           ขออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)
         </button>
-        <button mat-menu-item (click)="nextPage()">
+        <button mat-menu-item (click)="nextPage(4)">
           ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ
         </button>
-        <button mat-menu-item (click)="nextPage()">
+        <button mat-menu-item (click)="nextPage(5)">
           ขอหนังสือรับรองคุณวุฒิ
         </button>
-        <button mat-menu-item (click)="nextPage()">
+        <button mat-menu-item (click)="nextPage(6)">
           ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One Innovation :
           OSOI)
         </button>
