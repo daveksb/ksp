@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormUploadImageComponent } from './form-upload-image/form-upload-image.component';
-import { FormUserAddressComponent } from './form-user-address/form-user-address.component';
+
 import { FormUserEducationComponent } from './form-user-education/form-user-education.component';
 import { FormUserExperienceComponent } from './form-user-experience/form-user-experience.component';
 import { FormUserInfoComponent } from './form-user-info/form-user-info.component';
@@ -15,7 +15,6 @@ import { RouterModule } from '@angular/router';
   imports: [CommonModule, RouterModule],
   declarations: [
     FormUploadImageComponent,
-    FormUserAddressComponent,
     FormUserEducationComponent,
     FormUserExperienceComponent,
     FormUserInfoComponent,
@@ -26,7 +25,6 @@ import { RouterModule } from '@angular/router';
   ],
   exports: [
     FormUploadImageComponent,
-    FormUserAddressComponent,
     FormUserEducationComponent,
     FormUserExperienceComponent,
     FormUserInfoComponent,

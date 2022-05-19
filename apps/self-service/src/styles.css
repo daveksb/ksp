@@ -9,7 +9,7 @@
   src: URL('/assets/font/KSP/KSP\ Bold\ ver\ 1.00.ttf') format('truetype');
 }
 
-body {
+* {
   font-family: 'KSP Bold' !important;
 }
 

@@ -1,7 +1,5 @@
 export * from './lib/shared-ui-form.module';
 
-export * from './lib/address/address.component';
-
 export * from './lib/form-address/form-address.component';
 
 export * from './lib/form-school-address/form-school-address.component';

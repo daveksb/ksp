@@ -2,8 +2,6 @@ export * from './lib/self-service-ui-forms.module';
 
 export * from './lib/form-upload-image/form-upload-image.component';
 
-export * from './lib/form-user-address/form-user-address.component';
-
 export * from './lib/form-user-education/form-user-education.component';
 
 export * from './lib/form-user-experience/form-user-experience.component';
