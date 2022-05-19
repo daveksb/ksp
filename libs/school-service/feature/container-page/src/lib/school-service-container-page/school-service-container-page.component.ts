@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MenuConfig } from '@ksp/shared/ui/side-menu';
 
 @Component({
-  selector: 'ksp-school-service-container-page',
+  selector: 'school-service-container-page',
   templateUrl: './school-service-container-page.component.html',
   styleUrls: ['./school-service-container-page.component.css'],
 })
@@ -26,11 +26,11 @@ export class SchoolServiceContainerPageComponent {
           {
             label:
               'ขอใบอนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)',
-            path: 'request',
+            path: 'temp-license/list',
           },
           {
             label: 'ขอต่ออายุใบประกอบวิชาชีพ',
-            path: '',
+            path: 'temp-license/renew',
           },
         ],
       },
