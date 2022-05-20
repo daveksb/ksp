@@ -22,6 +22,7 @@
     "self-service-ui-payment": "libs/self-service/ui/payment",
     "shared-assets": "libs/shared/assets",
     "shared-ui-bottom-menu": "libs/shared/ui/bottom-menu",
+    "shared-ui-dialog": "libs/shared/ui/dialog",
     "shared-ui-form": "libs/shared/ui/form",
     "shared-ui-page-not-found": "libs/shared/ui/page-not-found",
     "shared-ui-side-menu": "libs/shared/ui/side-menu",

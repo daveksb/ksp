@@ -61,6 +61,7 @@
       ],
       "@ksp/shared/assets": ["libs/shared/assets/src/index.ts"],
       "@ksp/shared/ui/bottom-menu": ["libs/shared/ui/bottom-menu/src/index.ts"],
+      "@ksp/shared/ui/dialog": ["libs/shared/ui/dialog/src/index.ts"],
       "@ksp/shared/ui/form": ["libs/shared/ui/form/src/index.ts"],
       "@ksp/shared/ui/page-not-found": [
         "libs/shared/ui/page-not-found/src/index.ts"

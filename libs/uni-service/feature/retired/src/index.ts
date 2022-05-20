@@ -6,6 +6,4 @@ export * from './lib/retired-reason/retired-reason.component';
 
 export * from './lib/retired-attachment/retired-attachment.component';
 
-export * from './lib/retired-confirm/retired-confirm.component';
-
 export * from './lib/retired-complete/retired-complete.component';
