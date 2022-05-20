@@ -3,12 +3,6 @@
   background-color: #f9f9fa;
 }
 
-.content__container {
-  display: grid;
-  grid-template-columns: 1fr;
-  margin: 0 20px;
-}
-
 .content__container-2 {
   margin: 0 20px;
   padding-bottom: 20px;
@@ -36,29 +30,9 @@
   background-color: #fff;
 }
 
-.form-select {
-  background-color: #fff;
-}
-
 .form-control-sm {
   font-size: 18px;
   color: #000000;
-}
-
-.form-select-sm {
-  font-size: 18px;
-  color: #000000;
-}
-
-.form-select {
-  background-color: #edf8ff;
-  background-image: url(/assets/images/arrow-down-icon.png);
-  background-size: 12px;
-}
-
-.search__content {
-  background-image: url(/assets/images/search-icon.png) !important;
-  background-size: 12px;
 }
 
 .checkbox__container {
@@ -80,11 +54,4 @@
 
 .textarea__container {
   margin-left: 25px;
-}
-
-@media only screen and (max-width: 768px) {
-  .content__container {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
 }

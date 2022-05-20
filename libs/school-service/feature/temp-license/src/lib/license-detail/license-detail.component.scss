@@ -30,13 +30,6 @@
   background-color: #f6f6f6;
 }
 
-.content__container--third {
-  background: #fff;
-  border-radius: 5px;
-  padding: 24px;
-  max-height: 100%;
-}
-
 .content__container {
   display: grid;
   grid-template-columns: 164px 1fr 1fr;
@@ -160,35 +153,8 @@
   width: 100px;
 }
 
-/* ---------------------------------------------------
-  MEDIAQUERIES
------------------------------------------------------ */
-@font-face {
-  font-family: 'KSP Regular';
-  src: URL('/assets/font/KSP/ttf/KSP\ Regular\ ver\ 1.00.ttf')
-    format('truetype');
-  font-family: 'KSP Bold';
-  src: URL('/assets/font/KSP/KSP\ Bold\ ver\ 1.00.ttf') format('truetype');
-}
-
-@media only screen and (max-width: 768px) {
-  .detail__container {
-    background: #ffffff;
-    box-shadow: 0px 0px 15px #e2e2e2;
-    border-radius: 20px;
-    padding: 24px 20px;
-    margin: 24px;
-  }
-
-  .content__container {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-column-gap: 8px;
-  }
-
-  .content__container--secondary {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-column-gap: 8px;
-  }
+.checkbox__container {
+  display: flex;
+  line-height: 15px;
+  margin-top: 20PX;
 }

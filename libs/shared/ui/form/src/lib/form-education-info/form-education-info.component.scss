@@ -44,19 +44,7 @@
 }
 
 .form-select {
-  background-color: #edf8ff;
+  background-color: #fff;
   background-image: url(/assets/images/arrow-down-icon.png);
   background-size: 12px;
-}
-
-.search__content {
-  background-image: url(/assets/images/search-icon.png) !important;
-  background-size: 12px;
-}
-
-@media only screen and (max-width: 768px) {
-  .content__container {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
 }
