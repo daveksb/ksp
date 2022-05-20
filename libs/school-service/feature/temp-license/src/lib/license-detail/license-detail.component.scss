@@ -30,13 +30,6 @@
   background-color: #f6f6f6;
 }
 
-.content__container--third {
-  background: #fff;
-  border-radius: 5px;
-  padding: 24px;
-  max-height: 100%;
-}
-
 .content__container {
   display: grid;
   grid-template-columns: 164px 1fr 1fr;
@@ -52,8 +45,7 @@
 }
 
 .form-label {
-  font-family: 'KSP Bold';
-  font-size: 16px;
+  font-size: 18px;
   color: #656565;
 }
 
@@ -62,17 +54,14 @@
 }
 
 .form-control-sm {
-  font-family: 'KSP Bold';
   font-size: 16px;
   color: #000000;
 }
 
 .form-select-sm {
-  font-family: 'KSP Bold';
   font-size: 16px;
   color: #000000;
   background-color: #fff;
-
 }
 
 .form-select {
@@ -96,35 +85,76 @@
   display: flex;
 }
 
-/* ---------------------------------------------------
-  MEDIAQUERIES
------------------------------------------------------ */
-@font-face {
-  font-family: 'KSP Regular';
-  src: URL('/assets/font/KSP/ttf/KSP\ Regular\ ver\ 1.00.ttf')
-    format('truetype');
-  font-family: 'KSP Bold';
-  src: URL('/assets/font/KSP/KSP\ Bold\ ver\ 1.00.ttf') format('truetype');
+.checkbox__box {
+  height: 15px;
+  width: 15px;
+  margin-right: 5px;
 }
 
-@media only screen and (max-width: 768px) {
-  .detail__container {
-    background: #ffffff;
-    box-shadow: 0px 0px 15px #e2e2e2;
-    border-radius: 20px;
-    padding: 24px 20px;
-    margin: 24px;
-  }
+.label__warn {
+  color: red;
+  font-size: 18px;
+}
 
-  .content__container {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-column-gap: 8px;
-  }
+.btn__container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 40px;
+}
 
-  .content__container--secondary {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-column-gap: 8px;
-  }
+.btn__container-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 8px;
+}
+
+.btn__back {
+  font-size: 18px;
+  color: #f68b33;
+  background-color: #fff;
+  border: 1px solid #f68b33;
+  border-radius: 2px;
+  width: 100px;
+}
+
+.btn__next {
+  font-size: 18px;
+  color: #f68b33;
+  background-color: #fff;
+  border: 1px solid #f68b33;
+  border-radius: 2px;
+  width: 100px;
+}
+
+.btn__send {
+  font-size: 18px;
+  background-color: #01b27b;
+  color: #fff;
+  border: 1px solid #01b27b;
+  border-radius: 2px;
+  width: 100px;
+}
+
+.btn__save {
+  font-size: 18px;
+  background-color: #01b27b;
+  color: #fff;
+  border: 1px solid #01b27b;
+  border-radius: 2px;
+  width: 100px;
+}
+
+.btn__cancel {
+  font-size: 18px;
+  background-color: #fff;
+  color: #01b27b;
+  border: 1px solid #01b27b;
+  border-radius: 2px;
+  width: 100px;
+}
+
+.checkbox__container {
+  display: flex;
+  line-height: 15px;
+  margin-top: 20PX;
 }
