@@ -27,8 +27,7 @@ export class RetiredAttachmentComponent {
       height: '200px',
       width: '350px',
       data: {
-        title: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ <br />
-      ใช่หรือไม่ 66`,
+        title: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติใช่หรือไม่ `,
         subTitle: 'ccccc',
       },
     });
@@ -46,8 +45,12 @@ export class RetiredAttachmentComponent {
 
   onConfirmed() {
     this.dialog.open(CompleteDialogComponent, {
-      height: '200px',
+      height: '250px',
       width: '350px',
+      data: {
+        content: `xxx `,
+        buttonLabel: 'ok',
+      },
     });
   }
 }

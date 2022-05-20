@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -10,6 +10,12 @@ export class CompleteDialogComponent {
     @Inject(MAT_DIALOG_DATA)
     public data: { content: string; buttonLabel: string }
   ) {}
+
+  @Output() completed = new EventEmitter<boolean>();
+
+  complete() {
+    this.completed.emit(true);
+  }
 
 
 }
