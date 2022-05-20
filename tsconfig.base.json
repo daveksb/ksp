@@ -30,6 +30,9 @@
       "@ksp/school-service/feature/container-page": [
         "libs/school-service/feature/container-page/src/index.ts"
       ],
+      "@ksp/school-service/feature/dialog": [
+        "libs/school-service/feature/dialog/src/index.ts"
+      ],
       "@ksp/school-service/feature/login": [
         "libs/school-service/feature/login/src/index.ts"
       ],

@@ -1,24 +1,18 @@
-import { Component, Input } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { CompleteDialogComponent } from '../complete-dialog/complete-dialog.component';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   templateUrl: './confirm-dialog.component.html',
   styleUrls: ['./confirm-dialog.component.scss'],
 })
 export class ConfirmDialogComponent {
-  @Input() title = 'def title';
-  constructor(private dialog: MatDialog) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { title: string; subTitle: string }
+  ) {}
 
-  cancel() {
-    this.dialog.closeAll();
-  }
+  @Output() confirmed = new EventEmitter<boolean>();
 
   confirm() {
-    this.dialog.closeAll();
-    this.dialog.open(CompleteDialogComponent, {
-      height: '275px',
-      width: '350px',
-    });
+    this.confirmed.emit(true);
   }
 }

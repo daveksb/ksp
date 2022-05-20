@@ -1,15 +1,15 @@
 <div class="d-flex flex-column">
-  <div class="header__title">คุณต้องการยืนยันข้อมูลใช่หรือไม่?</div>
+  <div class="header__title">{{ data.title }}</div>
 
   <div class="detail__title">
-    {{ title }}
+    {{ data.subTitle }}
   </div>
 
   <div class="btn__container">
     <button
-      (click)="cancel()"
       type="button"
       class="btn btn-fourth btn-sm label__button"
+      matDialogClose
     >
       ยกเลิก
     </button>

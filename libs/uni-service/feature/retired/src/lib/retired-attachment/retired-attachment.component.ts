@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ConfirmDialogComponent } from '@ksp/shared/ui/dialog';
+import {
+  CompleteDialogComponent,
+  ConfirmDialogComponent,
+} from '@ksp/shared/ui/dialog';
 
 @Component({
   selector: 'uni-service-retired-attachment',
@@ -26,11 +29,25 @@ export class RetiredAttachmentComponent {
       data: {
         title: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ <br />
       ใช่หรือไม่ 66`,
+        subTitle: 'ccccc',
       },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
+    });
+
+    dialogRef.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.onConfirmed();
+      }
+    });
+  }
+
+  onConfirmed() {
+    this.dialog.open(CompleteDialogComponent, {
+      height: '200px',
+      width: '350px',
     });
   }
 }

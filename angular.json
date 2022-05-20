@@ -8,6 +8,7 @@
     "e-service-feature-login": "libs/e-service/feature/login",
     "school-service": "apps/school-service",
     "school-service-feature-container-page": "libs/school-service/feature/container-page",
+    "school-service-feature-dialog": "libs/school-service/feature/dialog",
     "school-service-feature-login": "libs/school-service/feature/login",
     "school-service-feature-temp-license": "libs/school-service/feature/temp-license",
     "self-service": "apps/self-service",
