@@ -1,0 +1,97 @@
+.form__container {
+  margin-bottom: 30px;
+  background-color: #f9f9fa;
+}
+
+.content__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 16px;
+  margin: 0 20px;
+}
+
+.content__container-3 {
+  margin: 0 20px;
+  padding-bottom: 10px;
+}
+
+.checkbox__container {
+  margin-bottom: 25px;
+  display: flex;
+  line-height: 15px;
+}
+
+.checkbox__form {
+  height: 15px;
+  width: 15px;
+  margin-right: 10px;
+}
+
+.checkbox__label {
+  font-size: 18px;
+  color: #808080;
+}
+
+.form-label {
+  font-size: 18px;
+  color: #656565;
+}
+
+.form-label-2 {
+  font-size: 18px;
+  color: red;
+  margin-left: 5px;
+}
+
+.form__header {
+  font-size: 22px;
+  color: #000000;
+  margin: 0 20px;
+  padding: 10px 0;
+}
+
+.form__header-2 {
+  display: flex;
+  font-size: 20px;
+  color: #000000;
+  margin: 0 20px;
+  padding: 10px 0;
+  line-height: 33px;
+}
+
+.form-control {
+  background-color: #fff;
+}
+
+.form-control-sm {
+  font-size: 16px;
+  color: #000000;
+}
+
+.header__label {
+  font-size: 22px;
+  margin-right: 10px;
+}
+
+.header__label-2 {
+  font-size: 18px;
+  color: red;
+}
+
+.form-select-sm {
+  font-size: 16px;
+  color: #000000;
+}
+
+.form-select {
+  background-color: #edf8ff;
+  background-image: url(/assets/images/arrow-down-icon.png);
+  background-size: 12px;
+}
+
+@media only screen and (max-width: 768px) {
+  .content__container {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}

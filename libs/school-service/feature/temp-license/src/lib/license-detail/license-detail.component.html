@@ -131,20 +131,48 @@
       >
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address>ที่อยู่ทะเบียนบ้าน</ksp-form-address>
-          <ksp-form-address>ที่อยู่ทะเบียนบ้าน</ksp-form-address>
-          <div>*กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ</div>
+          <ksp-form-address
+            >ที่อยู่ทะเบียนบ้าน
+            <div>
+              <input type="checkbox" class="checkbox__box" />
+              <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
+            </div>
+          </ksp-form-address>
+
+          <div class="label__warn">
+            *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
+            โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
+          </div>
         </mat-tab>
-        <mat-tab label="ที่อยู่ของสถานศึกษาที่ขออนุญาต"> </mat-tab>
-        <mat-tab label="ข้อมูลทางการศึกษา"></mat-tab>
-        <mat-tab label="ข้อมูลการสอนและการจ้าง"></mat-tab>
-        <mat-tab label="ข้อมูลชี้แจงเหตุผล"></mat-tab>
-        <mat-tab label="เอกสารหลักฐานประกอบ"></mat-tab>
+        <mat-tab label="ที่อยู่ของสถานศึกษาที่ขออนุญาต">
+          <ksp-form-school-address></ksp-form-school-address>
+        </mat-tab>
+        <mat-tab label="ข้อมูลทางการศึกษา">
+          <ksp-form-education-info></ksp-form-education-info>
+          <ksp-form-attachment></ksp-form-attachment>
+        </mat-tab>
+        <mat-tab label="ข้อมูลการสอนและการจ้าง">
+          <ksp-form-teaching-info></ksp-form-teaching-info>
+          <ksp-form-attachment></ksp-form-attachment>
+        </mat-tab>
+        <mat-tab label="ข้อมูลชี้แจงเหตุผล">
+          <ksp-form-reason-info></ksp-form-reason-info>
+          <ksp-form-attachment></ksp-form-attachment>
+        </mat-tab>
+        <mat-tab label="เอกสารหลักฐานประกอบ">
+          <ksp-form-attachment></ksp-form-attachment>
+        </mat-tab>
       </mat-tab-group>
     </div>
   </div>
 </div>
 
-<div>
-  <button>xxx</button>
-  <button>yyy</button>
+<div class="btn__container">
+  <button class="btn__back">ย้อนกลับ</button>
+  <div class="btn__container-2">
+    <button class="btn__cancel">ยกเลิก</button>
+    <button class="btn__save">บันทึกชั่วคราว</button>
+    <button class="btn__send">บันทึกและยื่น</button>
+  </div>
+  <button class="btn__next">ถัดไป</button>
 </div>
