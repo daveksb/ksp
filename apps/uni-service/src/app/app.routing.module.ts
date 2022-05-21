@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UniServiceContainerPageComponent } from '@ksp/uni-service/feature/container-page';
+import { ReqForeignIdComponent } from '@ksp/uni-service/feature/foreign-id';
 import { UniServiceHomeComponent } from '@ksp/uni-service/feature/home';
 import { UniServiceLoginComponent } from '@ksp/uni-service/feature/login';
 
@@ -44,16 +45,16 @@ const routes: Routes = [
         (m) => m.UniServiceFeatureGraduateListModule
       ),
   },
-  /* {
+   {
     path: 'foreign-id',
     component: UniServiceContainerPageComponent,
     children: [
       {
         path: '**',
-        component: ,
+        component: ReqForeignIdComponent,
       },
     ],
-  }, */
+  },
   {
     path: '**',
     redirectTo: 'login',

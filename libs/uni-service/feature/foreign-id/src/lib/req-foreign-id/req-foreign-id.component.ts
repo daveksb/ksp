@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ReqForeignIdConfirmComponent } from '@ksp/uni-service/ui/dialog';
+import {
+  CompleteDialogComponent,
+  ConfirmDialogComponent,
+} from '@ksp/shared/ui/dialog';
 
 @Component({
-  selector: 'ksp-req-foreign-id',
+  selector: 'uni-service-req-foreign-id',
   templateUrl: './req-foreign-id.component.html',
   styleUrls: ['./req-foreign-id.component.css'],
 })
@@ -16,9 +19,40 @@ export class ReqForeignIdComponent {
   }
 
   openDialog() {
-    this.dialog.open(ReqForeignIdConfirmComponent, {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       height: '175px',
       width: '350px',
+      data: {
+        title: `คุณต้องการยืนยันข้อมูล
+        และส่งใบคำขอ ใช่หรือไม่? `,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+
+    dialogRef.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.onConfirmed();
+      }
+    });
+  }
+
+  onConfirmed() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      height: '175px',
+      width: '350px',
+      data: {
+        header: 'บันทึกข้อมูลสำเร็จ',
+        buttonLabel: 'กลับสู่หน้าหลัก',
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/', 'home']);
+      }
     });
   }
 }

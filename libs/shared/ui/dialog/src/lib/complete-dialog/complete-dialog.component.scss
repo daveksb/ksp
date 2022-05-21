@@ -24,9 +24,17 @@
   font-size: 18px;
   color: #0056ff;
   text-align: center;
+  white-space: pre-line;
 }
 
 .detail__container {
   background-color: #f9f9fa;
-  margin-bottom: 20px;
+}
+
+.detail__title-2 {
+  font-size: 16px;
+  color: #808080;
+  text-align: center;
+  margin: 10px 20px;
+  white-space: pre-line;
 }

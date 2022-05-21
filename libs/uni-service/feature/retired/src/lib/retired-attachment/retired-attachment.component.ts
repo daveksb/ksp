@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -19,7 +19,7 @@ export class RetiredAttachmentComponent {
   }
 
   cancel() {
-    this.router.navigate(['/', 'retired', 'search']);
+    this.router.navigate(['/', 'login']);
   }
 
   save() {
@@ -27,8 +27,9 @@ export class RetiredAttachmentComponent {
       height: '200px',
       width: '350px',
       data: {
-        title: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติใช่หรือไม่ `,
-        subTitle: 'ccccc',
+        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
+        subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
+        ใช่หรือไม่`,
       },
     });
 
@@ -48,8 +49,12 @@ export class RetiredAttachmentComponent {
       height: '250px',
       width: '350px',
       data: {
-        content: `xxx `,
-        buttonLabel: 'ok',
+        header: 'ยืนยันข้อมูลสำเร็จ',
+
+        content: `วันที่ : 10 ตุลาคม 2565
+        เลขที่ใบคำขอ : 12234467876543 `,
+
+        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 
