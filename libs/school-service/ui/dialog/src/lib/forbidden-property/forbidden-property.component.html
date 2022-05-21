@@ -1,1 +1,65 @@
-<p>forbidden-property works!</p>
+<div class="d-flex flex-column">
+  <div class="header__title">
+    ขอรับรองว่าไม่เป็นผู้มีลักษณะต้องห้ามตามที่กำหนดไว้ในมาตรา 44
+    แห่งพระราชบัญญัติสภาครูและบุคลากรทางการศึกษา พ.ศ.2546
+  </div>
+
+  <div class="detail__container">
+    <div class="detail__title">
+      1. เคยเป็นผู้มีความประพฤติเสื่อม หรือบกพร่องในศีลธรรมอันดีหรือไม่
+    </div>
+    <div class="checkbox__container">
+      <div class="checkbox__content">
+        <input class="checkbox" type="radio" />
+        <label class="checkbox__label"> ไม่เคย</label>
+      </div>
+      <div class="checkbox__content">
+        <input class="checkbox" type="radio" />
+        <label class="checkbox__label">เคย</label>
+      </div>
+    </div>
+    <div class="detail__title">
+      2. เป็นผู้ไร้ความสามารถหรือเสมือนไร้ความสามารถ หรือไม่
+    </div>
+    <div class="checkbox__container">
+      <div class="checkbox__content">
+        <input class="checkbox" type="radio" />
+        <label class="checkbox__label">ไม่เคย</label>
+      </div>
+      <div class="checkbox__content">
+        <input class="checkbox" type="radio" />
+        <label class="checkbox__label">เคย</label>
+      </div>
+    </div>
+    <div class="detail__title">
+      3.เคยต้องโทษจำคุกในคดีที่คุรุสภาเห็นว่าอาจนำมาซึ่งความเสื่อมเสียเกียรติศักดิ์แห่งวิชาชีพ
+    </div>
+    <div class="checkbox__container">
+      <div class="checkbox__content">
+        <input class="checkbox" type="radio" />
+        <label class="checkbox__label">ไม่เคย</label>
+      </div>
+      <div class="checkbox__content">
+        <input class="checkbox" type="radio" />
+        <label class="checkbox__label">เคย</label>
+      </div>
+    </div>
+    <div class="checkbox__container">
+      <div></div>
+
+      <input class="form-control form-control-sm" type="text" placeholder="โปรดระบุ"/>
+    </div>
+  </div>
+
+  <div class="btn__container">
+    <button matDialogClose type="button" class="btn btn-primary">ยกเลิก</button>
+    <button
+      matDialogClose
+      (click)="save()"
+      type="button"
+      class="btn btn-fourth"
+    >
+      บันทึก
+    </button>
+  </div>
+</div>

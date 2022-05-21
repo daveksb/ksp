@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   templateUrl: './forbidden-property.component.html',
   styleUrls: ['./forbidden-property.component.scss'],
 })
-export class ForbiddenPropertyComponent implements OnInit {
-  constructor() {}
+export class ForbiddenPropertyComponent {
 
-  ngOnInit(): void {}
+  @Output() confirmed = new EventEmitter<boolean>();
+
+  save() {
+    this.confirmed.emit(true);
+  }
 }
