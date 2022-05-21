@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'school-service-feature-dialog',
+  displayName: 'school-service-ui-dialog',
   preset: '../../../../jest.preset.ts',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../../coverage/libs/school-service/feature/dialog',
+  coverageDirectory: '../../../../coverage/libs/school-service/ui/dialog',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

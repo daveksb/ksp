@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -44,13 +44,19 @@ export class RetiredAttachmentComponent {
   }
 
   onConfirmed() {
-    this.dialog.open(CompleteDialogComponent, {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
       height: '250px',
       width: '350px',
       data: {
         content: `xxx `,
         buttonLabel: 'ok',
       },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/', 'login']);
+      }
     });
   }
 }
