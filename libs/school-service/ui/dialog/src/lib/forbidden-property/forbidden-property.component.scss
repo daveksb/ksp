@@ -2,6 +2,13 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   margin: 10px 0;
+  grid-row-gap: 10px;
+}
+
+.checkbox__container-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 10px 0;
 }
 
 .header__title {
@@ -10,13 +17,13 @@
 }
 
 .detail__title {
-  font-size: 18;
+  font-size: 18px;
   color: #656565;
   margin: 20px 0;
 }
 
 .checkbox__label {
-  font-size: 18;
+  font-size: 18px;
   color: #656565;
 }
 
@@ -38,7 +45,7 @@
 }
 
 .btn__container {
-  margin: 20px 0;
+  margin-top: 40px;
   text-align: center;
 }
 
@@ -48,7 +55,7 @@
 }
 
 .btn-primary {
-  font-size: 16px;
+  font-size: 20px;
   color: #0056ff;
   background-color: #fff;
   border: 1px solid #0056ff;
@@ -57,7 +64,7 @@
   margin: 0 5px;
 }
 
-.btn-fourth {
+.btn-secondary {
   font-size: 16px;
   color: #fff;
   background-color: #0056ff;
@@ -65,4 +72,18 @@
   width: 100px;
   border-radius: 4px;
   margin: 0 5px;
+}
+
+.btn-fourth {
+  font-size: 20px;
+  color: #fff;
+  background-color: #0056ff;
+  border: 1px solid #0056ff;
+  width: 100px;
+  border-radius: 4px;
+  margin: 0 5px;
+}
+
+.form-control {
+  font-size: 16px;
 }

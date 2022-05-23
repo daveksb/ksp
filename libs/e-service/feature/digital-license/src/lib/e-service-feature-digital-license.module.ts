@@ -18,6 +18,10 @@ export const eServiceFeatureDigitalLicenseRoutes: Route[] = [];
             path: 'temp-license',
             component: TempLicenseComponent,
           },
+          {
+            path: '**',
+            component: TempLicenseComponent,
+          },
         ],
       },
 

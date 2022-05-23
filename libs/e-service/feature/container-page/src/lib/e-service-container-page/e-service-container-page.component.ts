@@ -42,7 +42,20 @@ export class EServiceContainerPageComponent {
         icon: 'assets/images/icon-sidenav/card.svg',
         label: 'ข้อมูลทะเบียนใบอนุญาต',
         path: '',
+        isExpanded: true,
+        subMenuName: 'certInfo',
+        subMenu: [
+          {
+            path: 'record',
+            label: 'บันทีกการกล่าวหา/กล่าวโทษ',
+          },
+          {
+            path: 'investigation',
+            label: 'บันทีกการสืบสวนข้อเท็จจริง',
+          },
+        ],
       },
+
       {
         icon: 'assets/images/icon-sidenav/card.svg',
         label: 'รายงาน',
