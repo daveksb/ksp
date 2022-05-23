@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/e-service/feature/ethic",
+  "sourceRoot": "libs/e-service/feature/ethic/src",
+  "prefix": "ksp",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/e-service/feature/ethic"],
+      "options": {
+        "jestConfig": "libs/e-service/feature/ethic/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/e-service/feature/ethic/**/*.ts",
+          "libs/e-service/feature/ethic/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

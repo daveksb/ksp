@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/e-service/feature/digital-license",
+  "sourceRoot": "libs/e-service/feature/digital-license/src",
+  "prefix": "ksp",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/e-service/feature/digital-license"],
+      "options": {
+        "jestConfig": "libs/e-service/feature/digital-license/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/e-service/feature/digital-license/**/*.ts",
+          "libs/e-service/feature/digital-license/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
