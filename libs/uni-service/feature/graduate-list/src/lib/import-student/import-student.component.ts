@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { RegisterConfirmComponent } from '@ksp/uni-service/ui/dialog';
+import { ConfirmDialogComponent } from '@ksp/shared/ui/dialog';
 import { User, UserColumns } from './user';
 import { UserService } from './user.service';
 
@@ -59,7 +59,7 @@ export class ImportStudentComponent implements OnInit {
   removeSelectedRows() {
     const users = this.dataSource.data.filter((u: User) => u.isSelected);
     this.dialog
-      .open(RegisterConfirmComponent)
+      .open(ConfirmDialogComponent)
       .afterClosed()
       .subscribe((confirm) => {
         if (confirm) {
