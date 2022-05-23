@@ -46,12 +46,12 @@ export class EServiceContainerPageComponent {
         subMenuName: 'certInfo',
         subMenu: [
           {
-            path: 'record',
-            label: 'บันทีกการกล่าวหา/กล่าวโทษ',
+            path: 'digital-license',
+            label: 'รายงาน',
           },
           {
             path: 'investigation',
-            label: 'บันทีกการสืบสวนข้อเท็จจริง',
+            label: 'พิจารณา',
           },
         ],
       },
