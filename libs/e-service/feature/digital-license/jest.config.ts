@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'e-service-feature-accusation-record',
+  displayName: 'e-service-feature-digital-license',
   preset: '../../../../jest.preset.ts',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -9,7 +9,7 @@ module.exports = {
     },
   },
   coverageDirectory:
-    '../../../../coverage/libs/e-service/feature/accusation-record',
+    '../../../../coverage/libs/e-service/feature/digital-license',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },
