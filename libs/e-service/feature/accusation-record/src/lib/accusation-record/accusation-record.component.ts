@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'e-service-ethic-accusation-record',
+  selector: 'ksp-accusation-record',
   templateUrl: './accusation-record.component.html',
   styleUrls: ['./accusation-record.component.scss'],
 })
