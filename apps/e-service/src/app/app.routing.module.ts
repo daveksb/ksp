@@ -5,10 +5,10 @@ import { EServiceLoginComponent } from '@ksp/e-service/feature/login';
 const routes: Routes = [
   { path: 'login', component: EServiceLoginComponent },
   {
-    path: 'e-license',
+    path: 'temp-license',
     loadChildren: () =>
-      import('@ksp/e-service/domain/e-license').then(
-        (m) => m.EServiceDomainELicenseModule
+      import('@ksp/e-service/e-license/temp-license').then(
+        (m) => m.EServiceELicenseTempLicenseModule
       ),
   },
   {

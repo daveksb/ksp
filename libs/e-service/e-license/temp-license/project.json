@@ -1,0 +1,18 @@
+{
+  "projectType": "library",
+  "root": "libs/e-service/e-license/temp-license",
+  "sourceRoot": "libs/e-service/e-license/temp-license/src",
+  "prefix": "e-service",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/e-service/e-license/temp-license/**/*.ts",
+          "libs/e-service/e-license/temp-license/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
