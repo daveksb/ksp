@@ -5,13 +5,12 @@ import { EServiceLoginComponent } from '@ksp/e-service/feature/login';
 const routes: Routes = [
   { path: 'login', component: EServiceLoginComponent },
   {
-    path: 'digital-license',
+    path: 'temp-license',
     loadChildren: () =>
-      import('@ksp/e-service/feature/digital-license').then(
-        (m) => m.EServiceFeatureDigitalLicenseModule
+      import('@ksp/e-service/e-license/temp-license').then(
+        (m) => m.EServiceELicenseTempLicenseModule
       ),
   },
-
   {
     path: 'ethic',
     loadChildren: () =>
@@ -19,7 +18,7 @@ const routes: Routes = [
         (m) => m.EServiceFeatureEthicModule
       ),
   },
-  { path: '**', component: EServiceLoginComponent },
+  { path: '', component: EServiceLoginComponent },
 ];
 
 @NgModule({

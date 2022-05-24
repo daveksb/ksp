@@ -46,12 +46,12 @@ export class EServiceContainerPageComponent {
         subMenuName: 'certInfo',
         subMenu: [
           {
-            path: 'digital-license',
-            label: 'รายงาน',
+            path: 'temp-license/list',
+            label: 'ใบคำขออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต (ชาวไทย)',
           },
           {
-            path: 'investigation',
-            label: 'พิจารณา',
+            path: 'foreign-license/list',
+            label: 'ใบคำขออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต (ชาวต่างชาติ)',
           },
         ],
       },
