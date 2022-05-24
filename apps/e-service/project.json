@@ -2,7 +2,7 @@
   "projectType": "application",
   "root": "apps/e-service",
   "sourceRoot": "apps/e-service/src",
-  "prefix": "e-service",
+  "prefix": "ksp",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
