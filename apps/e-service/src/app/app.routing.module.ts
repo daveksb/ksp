@@ -1,33 +1,24 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { EServiceLoginComponent } from '@ksp/e-service/feature/login';
 
 const routes: Routes = [
+  { path: 'login', component: EServiceLoginComponent },
   {
-    path: 'login',
+    path: 'digital-license',
     loadChildren: () =>
-      import('@ksp/e-service/feature/login').then(
-        (m) => m.EServiceFeatureLoginModule
-      ),
-  },
-  {
-    path: 'e-license',
-    loadChildren: () =>
-      import('@ksp/e-service/domain/e-license').then(
-        (m) => m.EServiceDomainELicenseModule
+      import('@ksp/e-service/feature/digital-license').then(
+        (m) => m.EServiceFeatureDigitalLicenseModule
       ),
   },
   {
     path: 'ethic',
     loadChildren: () =>
-      import('@ksp/e-service/domain/ethic').then(
-        (m) => m.eServiceDomainEthicRoutes
+      import('@ksp/e-service/feature/ethic').then(
+        (m) => m.EServiceFeatureEthicModule
       ),
   },
-  {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'login',
-  },
+  { path: '**', component: EServiceLoginComponent },
 ];
 
 @NgModule({

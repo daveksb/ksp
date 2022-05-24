@@ -15,20 +15,20 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ksp/e-service/domain/e-license": [
-        "libs/e-service/domain/e-license/src/index.ts"
-      ],
-      "@ksp/e-service/domain/ethic": [
-        "libs/e-service/domain/ethic/src/index.ts"
-      ],
       "@ksp/e-service/feature/container-page": [
         "libs/e-service/feature/container-page/src/index.ts"
+      ],
+      "@ksp/e-service/feature/digital-license": [
+        "libs/e-service/feature/digital-license/src/index.ts"
       ],
       "@ksp/e-service/feature/ethic": [
         "libs/e-service/feature/ethic/src/index.ts"
       ],
       "@ksp/e-service/feature/login": [
         "libs/e-service/feature/login/src/index.ts"
+      ],
+      "@ksp/e-service/feature/professional-standard": [
+        "libs/e-service/feature/professional-standard/src/index.ts"
       ],
       "@ksp/school-service/feature/container-page": [
         "libs/school-service/feature/container-page/src/index.ts"
