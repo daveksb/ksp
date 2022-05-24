@@ -1,0 +1,76 @@
+<div class="top__container-2">
+  <div class="header-3">ผลการตรวจสอบ</div>
+
+  <div class="content__checkbox">
+    <div class="checkbox__detail">
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value=""
+          id="flexCheckDefault"
+        />
+        <label class="form-check-label" for="flexCheckDefault">
+          ครบถ้วน และถูกต้อง
+        </label>
+      </div>
+    </div>
+
+    <div class="checkbox__detail">
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value=""
+          id="flexCheckDefault"
+        />
+        <label class="form-check-label" for="flexCheckDefault">
+          ไม่ครบถ้วน และไม่ถูกต้อง
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-label-2">หมายเหตุ/เหตุผล</div>
+
+  <div class="checkbox__container">
+    <ng-container *ngFor="let reason of reasons">
+      <div class="mb-3">
+        <input type="checkbox" class="checkbox__box" />
+        <label class="checkbox__label">{{ reason }}</label>
+      </div>
+    </ng-container>
+    <!-- <div class="mb-3">
+      <input type="checkbox" class="checkbox__box" />
+      <label class="checkbox__label">เลขบัตรประชาชนไม่ถูกต้อง</label>
+    </div>
+    <div class="mb-3">
+      <input type="checkbox" class="checkbox__box" />
+      <label class="checkbox__label">คำนำหน้าไม่ถูกต้อง</label>
+    </div>
+    <div class="mb-3">
+      <input type="checkbox" class="checkbox__box" />
+      <label class="checkbox__label">ชื่อภาษาไทยไม่ถูกต้อง</label>
+    </div>
+    <div class="mb-3">
+      <input type="checkbox" class="checkbox__box" />
+      <label class="checkbox__label">ชื่อภาษาอังกฤษไม่ถูกต้อง</label>
+    </div>
+    <div class="mb-3">
+      <input type="checkbox" class="checkbox__box" />
+      <label class="checkbox__label">นามสกุลภาษาไทยไม่ถูกต้อง</label>
+    </div>
+    <div class="mb-3">
+      <input type="checkbox" class="checkbox__box" />
+      <label class="checkbox__label">นามสกุลภาษาอังกฤษไม่ถูกต้อง</label>
+    </div>
+    <div class="mb-3">
+      <input type="checkbox" class="checkbox__box" />
+      <label class="checkbox__label">อื่นๆ (ระบุ)</label>
+    </div> -->
+  </div>
+
+  <div class="textarea__container">
+    <textarea rows="4" class="form-control form-control-sm"></textarea>
+  </div>
+</div>
