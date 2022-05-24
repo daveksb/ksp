@@ -10,6 +10,6 @@ export class EServiceLoginComponent {
   constructor(private router: Router) {}
 
   login() {
-    this.router.navigate(['/', 'license', 'temp']);
+    this.router.navigate(['e-license', 'temp']);
   }
 }

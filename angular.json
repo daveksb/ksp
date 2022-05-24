@@ -2,11 +2,11 @@
   "version": 2,
   "projects": {
     "e-service": "apps/e-service",
+    "e-service-domain-e-license": "libs/e-service/domain/e-license",
+    "e-service-domain-ethic": "libs/e-service/domain/ethic",
     "e-service-feature-container-page": "libs/e-service/feature/container-page",
-    "e-service-feature-digital-license": "libs/e-service/feature/digital-license",
     "e-service-feature-ethic": "libs/e-service/feature/ethic",
     "e-service-feature-login": "libs/e-service/feature/login",
-    "e-service-feature-professional-standard": "libs/e-service/feature/professional-standard",
     "school-service": "apps/school-service",
     "school-service-feature-container-page": "libs/school-service/feature/container-page",
     "school-service-feature-login": "libs/school-service/feature/login",

@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'e-service-feature-digital-license',
+  displayName: 'e-service-domain-ethic',
   preset: '../../../../jest.preset.ts',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,8 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory:
-    '../../../../coverage/libs/e-service/feature/digital-license',
+  coverageDirectory: '../../../../coverage/libs/e-service/domain/ethic',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },
