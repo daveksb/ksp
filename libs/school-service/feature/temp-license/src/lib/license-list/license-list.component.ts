@@ -81,4 +81,9 @@ export class LicenseListComponent {
       queryParams: { type: requestType },
     });
   }
+
+  nextPage2() {
+    this.router.navigate(['/', 'temp-license', 'foreign']);
+  }
+
 }

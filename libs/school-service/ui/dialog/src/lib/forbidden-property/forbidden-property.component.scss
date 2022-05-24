@@ -2,12 +2,12 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   margin: 10px 0;
-  grid-row-gap: 10px;
+  grid-column-gap: 10px;
 }
 
 .checkbox__container-2 {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.5fr 2fr 0.5fr;
   margin: 10px 0;
 }
 
@@ -59,9 +59,9 @@
   color: #0056ff;
   background-color: #fff;
   border: 1px solid #0056ff;
-  width: 100px;
+  width: 125px;
   border-radius: 4px;
-  margin: 0 5px;
+  margin: 0 10px;
 }
 
 .btn-secondary {
@@ -79,9 +79,9 @@
   color: #fff;
   background-color: #0056ff;
   border: 1px solid #0056ff;
-  width: 100px;
+  width: 125px;
   border-radius: 4px;
-  margin: 0 5px;
+  margin: 0 10px;
 }
 
 .form-control {
