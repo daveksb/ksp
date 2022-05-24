@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "e-service": "apps/e-service",
+    "e-service-e-license-foreign-license": "libs/e-service/e-license/foreign-license",
     "e-service-e-license-temp-license": "libs/e-service/e-license/temp-license",
     "e-service-feature-container-page": "libs/e-service/feature/container-page",
     "e-service-feature-ethic": "libs/e-service/feature/ethic",
