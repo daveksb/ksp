@@ -21,7 +21,7 @@ export class LicenseDetailComponent {
 
   next() {
     const dialogRef = this.dialog.open(ForbiddenPropertyComponent, {
-      height: '450px',
+      height: '475px',
       width: '850px',
     });
 

@@ -125,27 +125,6 @@
     <div class="table__title">
       <div class="box__title-2">ยื่นใบคำขอ</div>
 
-      <button mat-button [matMenuTriggerFor]="beforeMenu">ยื่นใบคำขอ</button>
-      <mat-menu class="my-class" #beforeMenu="matMenu" xPosition="before">
-        <button mat-menu-item (click)="nextPage(1)">
-          ขออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)
-        </button>
-        <button mat-menu-item (click)="nextPage(2)">
-          ขออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ
-          (ผู้บริหารสถานศึกษา)
-        </button>
-        <button mat-menu-item (click)="nextPage(3)">
-          ขออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)
-        </button>
-        <button mat-menu-item (click)="nextPage2()">
-          ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ
-        </button>
-        <button mat-menu-item>ขอหนังสือรับรองคุณวุฒิ</button>
-        <button mat-menu-item>
-          ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One Innovation :
-          OSOI)
-        </button>
-      </mat-menu>
     </div>
     <div class="bottom-content">
       <div class="table-responsive">
@@ -170,18 +149,13 @@
           <tbody class="body__table">
             <tr *ngFor="let item of data">
               <td class="detail__table">{{ item.order }}</td>
-              <td class="detail__table">
-                <img src="assets/images/correct.svg" class="correct__icon">
-              </td>
+              <td class="detail__table">ICON</td>
               <td class="detail__table">{{ item.reqCode }}</td>
               <td class="detail__table">{{ item.ssn }}</td>
               <td class="detail__table">{{ item.name }}</td>
               <td class="detail__table">{{ item.professType }}</td>
               <td class="detail__table">{{ item.workStep }}</td>
-              <td class="detail__table">
-                <button class="detail__table-2">
-                {{ item.status }} </button>
-              </td>
+              <td class="detail__table">{{ item.status }}</td>
               <td class="detail__table">{{ item.editDate }}</td>
               <td class="detail__table">{{ item.sendDate }}</td>
               <td class="detail__table">ICON</td>

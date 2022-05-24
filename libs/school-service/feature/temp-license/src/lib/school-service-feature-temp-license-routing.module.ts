@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SchoolServiceContainerPageComponent } from '@ksp/school-service/feature/container-page';
 import { LicenseDetailComponent } from './license-detail/license-detail.component';
+import { LicenseForeignComponent } from './license-foreign/license-foreign.component';
 import { LicenseListComponent } from './license-list/license-list.component';
 
 const routes: Routes = [
@@ -16,6 +17,10 @@ const routes: Routes = [
       {
         path: 'detail',
         component: LicenseDetailComponent,
+      },
+      {
+        path: 'foreign',
+        component: LicenseForeignComponent,
       },
     ],
   },

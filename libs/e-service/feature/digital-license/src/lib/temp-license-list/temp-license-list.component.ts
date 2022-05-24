@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 export interface TempLicenseInfo {
@@ -59,12 +59,13 @@ export const data: TempLicenseInfo[] = [
     sendDate: '1 พ.ค. 2564',
   },
 ];
+
 @Component({
-  selector: 'school-service-license-list',
-  templateUrl: './license-list.component.html',
-  styleUrls: ['./license-list.component.scss'],
+  selector: 'e-service-temp-license-list',
+  templateUrl: './temp-license-list.component.html',
+  styleUrls: ['./temp-license-list.component.scss'],
 })
-export class LicenseListComponent {
+export class TempLicenseListComponent {
   constructor(private router: Router) {}
   data: TempLicenseInfo[] = [];
 
@@ -81,9 +82,4 @@ export class LicenseListComponent {
       queryParams: { type: requestType },
     });
   }
-
-  nextPage2() {
-    this.router.navigate(['/', 'temp-license', 'foreign']);
-  }
-
 }

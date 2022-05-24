@@ -42,7 +42,20 @@ export class EServiceContainerPageComponent {
         icon: 'assets/images/icon-sidenav/card.svg',
         label: 'ข้อมูลทะเบียนใบอนุญาต',
         path: '',
+        isExpanded: true,
+        subMenuName: 'certInfo',
+        subMenu: [
+          {
+            path: 'digital-license',
+            label: 'รายงาน',
+          },
+          {
+            path: 'investigation',
+            label: 'พิจารณา',
+          },
+        ],
       },
+
       {
         icon: 'assets/images/icon-sidenav/card.svg',
         label: 'รายงาน',

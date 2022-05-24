@@ -6,6 +6,7 @@ import { FormEducationInfoComponent } from './form-education-info/form-education
 import { FormTeachingInfoComponent } from './form-teaching-info/form-teaching-info.component';
 import { FormReasonInfoComponent } from './form-reason-info/form-reason-info.component';
 import { FormAttachmentComponent } from './form-attachment/form-attachment.component';
+import { FormUserInfoComponent } from './form-user-info/form-user-info.component';
 
 @NgModule({
   imports: [CommonModule],
@@ -16,6 +17,7 @@ import { FormAttachmentComponent } from './form-attachment/form-attachment.compo
     FormTeachingInfoComponent,
     FormReasonInfoComponent,
     FormAttachmentComponent,
+    FormUserInfoComponent,
   ],
   exports: [
     FormAddressComponent,
@@ -24,6 +26,7 @@ import { FormAttachmentComponent } from './form-attachment/form-attachment.compo
     FormTeachingInfoComponent,
     FormReasonInfoComponent,
     FormAttachmentComponent,
+    FormUserInfoComponent,
   ],
 })
 export class SharedUiFormModule {}

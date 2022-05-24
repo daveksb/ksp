@@ -47,10 +47,16 @@
 .form-label {
   font-size: 18px;
   color: #656565;
+  margin-left: 20px;
+}
+
+.form-label-2 {
+  font-size: 18px;
+  color: #656565;
 }
 
 .form-control {
-  background-color: #fff;
+  background-color: #f6f6f6;
 }
 
 .form-control-sm {
@@ -158,3 +164,4 @@
   line-height: 15px;
   margin-top: 20PX;
 }
+
