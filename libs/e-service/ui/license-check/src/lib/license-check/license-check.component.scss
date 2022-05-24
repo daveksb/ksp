@@ -1,7 +1,7 @@
 .checkbox__container {
   display: flex;
   line-height: 15px;
-  margin: 15px 25px;
+  margin: 0 25px;
   flex-direction: column;
 }
 
@@ -25,11 +25,36 @@
 }
 
 .textarea__container {
-  margin: 20px 40px;
+  margin: 0 45px;
 }
 
 .checkbox__box {
   height: 15px;
   width: 15px;
   margin-right: 5px;
+}
+
+.header-3 {
+  font-size: 22px;
+  color: #0056ff;
+  padding: 20px 0;
+}
+
+.top__container-2 {
+  background-color: #fff;
+}
+
+.form-label-2 {
+  font-size: 18px;
+  color: #656565;
+  margin: 10px 0;
+}
+
+.form-control {
+  background-color: #fff;
+}
+
+.form-control-sm {
+  font-size: 16px;
+  color: #000000;
 }
