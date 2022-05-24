@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/e-service/domain/ethic",
+  "sourceRoot": "libs/e-service/domain/ethic/src",
+  "prefix": "e-service",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/e-service/domain/ethic"],
+      "options": {
+        "jestConfig": "libs/e-service/domain/ethic/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/e-service/domain/ethic/**/*.ts",
+          "libs/e-service/domain/ethic/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
