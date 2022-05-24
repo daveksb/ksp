@@ -8,6 +8,7 @@
     "e-service-feature-digital-license": "libs/e-service/feature/digital-license",
     "e-service-feature-ethic": "libs/e-service/feature/ethic",
     "e-service-feature-login": "libs/e-service/feature/login",
+    "e-service-feature-temp-license": "libs/e-service/feature/temp-license",
     "school-service": "apps/school-service",
     "school-service-feature-container-page": "libs/school-service/feature/container-page",
     "school-service-feature-login": "libs/school-service/feature/login",

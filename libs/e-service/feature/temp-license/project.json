@@ -1,0 +1,18 @@
+{
+  "projectType": "library",
+  "root": "libs/e-service/feature/temp-license",
+  "sourceRoot": "libs/e-service/feature/temp-license/src",
+  "prefix": "ksp",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/e-service/feature/temp-license/**/*.ts",
+          "libs/e-service/feature/temp-license/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

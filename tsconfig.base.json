@@ -33,6 +33,9 @@
       "@ksp/e-service/feature/login": [
         "libs/e-service/feature/login/src/index.ts"
       ],
+      "@ksp/e-service/feature/temp-license": [
+        "libs/e-service/feature/temp-license/src/index.ts"
+      ],
       "@ksp/school-service/feature/container-page": [
         "libs/school-service/feature/container-page/src/index.ts"
       ],
