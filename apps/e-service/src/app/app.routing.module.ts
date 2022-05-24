@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { EServiceLoginComponent } from '@ksp/e-service/feature/login';
 
 const routes: Routes = [
-  { path: 'login', component: EServiceLoginComponent },
-
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('@ksp/e-service/feature/login').then(
+        (m) => m.EServiceFeatureLoginModule
+      ),
+  },
   {
     path: 'e-license',
     loadChildren: () =>
@@ -19,7 +23,11 @@ const routes: Routes = [
         (m) => m.eServiceDomainEthicRoutes
       ),
   },
-  //{ path: '', component: EServiceLoginComponent },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'login',
+  },
 ];
 
 @NgModule({
