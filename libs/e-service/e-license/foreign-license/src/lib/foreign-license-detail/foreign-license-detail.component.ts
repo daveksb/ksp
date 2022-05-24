@@ -1,18 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CompleteDialogComponent, ConfirmDialogComponent } from '@ksp/shared/ui/dialog';
 
 @Component({
-  selector: 'school-service-license-foreign',
-  templateUrl: './license-foreign.component.html',
-  styleUrls: ['./license-foreign.component.scss'],
+  selector: 'ksp-foreign-license-detail',
+  templateUrl: './foreign-license-detail.component.html',
+  styleUrls: ['./foreign-license-detail.component.scss'],
 })
-export class LicenseForeignComponent {
+export class ForeignLicenseDetailComponent {
   constructor(private router: Router, public dialog: MatDialog) {}
 
   cancel() {
-    this.router.navigate(['/', 'login'])
+    this.router.navigate(['/', 'foreign-license', 'list'])
   }
 
   onConfirmed() {
@@ -46,7 +46,7 @@ export class LicenseForeignComponent {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'login']);
+        this.router.navigate(['/', 'foreign-license', 'list']);
       }
     });
   }
