@@ -1,0 +1,18 @@
+{
+  "projectType": "library",
+  "root": "libs/e-service/ui/license-check",
+  "sourceRoot": "libs/e-service/ui/license-check/src",
+  "prefix": "e-service",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/e-service/ui/license-check/**/*.ts",
+          "libs/e-service/ui/license-check/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

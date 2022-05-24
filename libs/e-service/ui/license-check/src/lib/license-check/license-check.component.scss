@@ -1,0 +1,35 @@
+.checkbox__container {
+  display: flex;
+  line-height: 15px;
+  margin: 15px 25px;
+  flex-direction: column;
+}
+
+.checkbox__detail {
+  background: #ffffff;
+  border: 1px solid #dadde1;
+  box-sizing: border-box;
+  border-radius: 5px;
+  height: 40px;
+  padding: 8px;
+}
+
+.content__checkbox {
+  display: grid;
+  grid-template-columns: 0.5fr 0.5fr 1fr 1fr;
+  grid-column-gap: 18px;
+}
+
+.checkbox__label {
+  font-size: 18px;
+}
+
+.textarea__container {
+  margin: 20px 40px;
+}
+
+.checkbox__box {
+  height: 15px;
+  width: 15px;
+  margin-right: 5px;
+}

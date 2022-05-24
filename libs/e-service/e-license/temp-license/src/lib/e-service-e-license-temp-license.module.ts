@@ -6,6 +6,7 @@ import { SharedUiFormModule } from '@ksp/shared/ui/form';
 import { MatTabsModule } from '@angular/material/tabs';
 import { RouterModule, Routes } from '@angular/router';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
+import { EServiceUiLicenseCheckModule } from '@ksp/e-service/ui/license-check';
 
 export const routes: Routes = [
   {
@@ -34,6 +35,7 @@ export const routes: Routes = [
     CommonModule,
     MatTabsModule,
     SharedUiFormModule,
+    EServiceUiLicenseCheckModule,
     RouterModule.forChild(routes),
   ],
   declarations: [TempLicenseListComponent, TempLicenseDetailComponent],

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,8 +6,15 @@ import { Router } from '@angular/router';
   templateUrl: './temp-license-detail.component.html',
   styleUrls: ['./temp-license-detail.component.scss'],
 })
-export class TempLicenseDetailComponent {
+export class TempLicenseDetailComponent implements OnInit {
+  reason: string[][] = [];
+
   constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    this.reason[0] = ['เลขบัตรประชาชนไม่ถูกต้อง', 'gkshgks', 'sgusoguos'];
+    this.reason[1] = ['aaa', 'bbb', 'ccc'];
+  }
 
   next() {
     this.router.navigate(['/', 'forbidden']);
