@@ -4,8 +4,10 @@
   background-size: cover;
 }
 .login__container {
-  align-items: center;
   padding: 64px 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .login__header {
   text-align: center;
@@ -18,24 +20,21 @@
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   padding: 32px;
-  margin: 0 400px;
+  width: 350px;
 }
 .detail__content {
   display: flex;
   justify-content: space-between;
-  font-family: 'KSP Bold';
   font-size: 18px;
   margin: 12px 0 24px 0;
 }
 .btn-primary {
-  font-family: 'KSP Bold';
   font-size: 20px;
   background-color: #0056ff;
   width: 100%;
   border-radius: 4px;
 }
 .btn-secondary {
-  font-family: 'KSP Bold';
   font-size: 20px;
   background-color: #f68b33;
   width: 100%;
@@ -43,7 +42,6 @@
   border: 0;
 }
 .btn-third {
-  font-family: 'KSP Bold';
   font-size: 18px;
   background-color: white;
   color: #f68b33;
@@ -52,7 +50,6 @@
   border: 1px solid #f68b33;
 }
 .btn-fourth {
-  font-family: 'KSP Bold';
   font-size: 18px;
   background-color: white;
   color: #0056ff;
@@ -62,31 +59,15 @@
 }
 
 .form-label {
-  font-family: 'KSP Bold';
   font-size: 18px;
 }
 .form-control {
-  font-family: 'KSP Bold';
   font-size: 20px;
   color: #666666;
 }
 
-h1 {
-  font-family: 'KSP Bold';
-  font-size: 50px;
-  color: #333333;
-  margin: 0;
-}
-h3 {
-  font-family: 'KSP Bold';
-  font-size: 36px;
-  color: #f68b33;
-  margin: 48px 0 36px 0;
-}
-
 .label__secondary {
   color: #000000;
-  font-family: 'KSP Bold';
   font-size: 18px;
   margin: 24px 0 10px 0;
   text-align: center;
@@ -101,10 +82,23 @@ h3 {
   margin: 24px 360px;
 }
 
-@font-face {
-  font-family: 'KSP Regular';
-  src: URL('/assets/font/KSP/ttf/KSP\ Regular\ ver\ 1.00.ttf')
-    format('truetype');
-  font-family: 'KSP Bold';
-  src: URL('/assets/font/KSP/KSP\ Bold\ ver\ 1.00.ttf') format('truetype');
+.header {
+  font-size: 50px;
+  color: #333333;
+  margin: 0;
+}
+.sub__header {
+  font-size: 36px;
+  color: #f68b33;
+  margin: 48px 0 36px 0;
+}
+
+@media only screen and (max-width: 800px) {
+  .header {
+    font-size: 30px;
+  }
+  .sub__header {
+    font-size: 20px;
+    margin: 10px 0 12px 0;
+  }
 }
