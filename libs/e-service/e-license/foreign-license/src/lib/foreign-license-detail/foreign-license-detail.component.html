@@ -1,0 +1,52 @@
+<div class="main-container">
+  <ksp-form-temp-license-foreign></ksp-form-temp-license-foreign>
+
+  <div class="content__container">
+    <div class="top__container-2">
+      <div class="header-3">ผลการตรวจสอบ</div>
+
+      <div class="content__checkbox">
+        <div class="checkbox__detail">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+            />
+            <label class="form-check-label" for="flexCheckDefault">
+              อนุมัติ
+            </label>
+          </div>
+        </div>
+
+        <div class="checkbox__detail">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+            />
+            <label class="form-check-label" for="flexCheckDefault">
+              ไม่อนุมัติ
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="textarea__container-2">
+        <textarea rows="4" class="form-control form-control-sm" placeholder="หมายเหตุ/เหตุผล"></textarea>
+      </div>
+    </div>
+
+    <div class="footer">
+      <button (click)="cancel()" type="button" class="btn btn-secondary">
+        ยกเลิก
+      </button>
+      <button (click)="onConfirmed()" type="button" class="btn btn-primary">
+        บันทึกและยื่นอนุมัติ
+      </button>
+    </div>
+  </div>
+</div>

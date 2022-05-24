@@ -49,9 +49,13 @@ export class EServiceContainerPageComponent {
             path: 'temp-license/list',
             label: 'ใบคำขออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต (ชาวไทย)',
           },
+          /* {
+            path: 'temp-license/detail',
+            label: 'ใบคำขออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต (ชาวต่างชาติ)',
+          }, */
           {
             path: 'foreign-license/list',
-            label: 'ใบคำขออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต (ชาวต่างชาติ)',
+            label: 'ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ',
           },
         ],
       },

@@ -11,6 +11,15 @@ const routes: Routes = [
         (m) => m.EServiceELicenseTempLicenseModule
       ),
   },
+
+  {
+    path: 'foreign-license',
+    loadChildren: () =>
+      import('@ksp/e-service/e-license/foreign-license').then(
+        (m) => m.EServiceELicenseForeignLicenseModule
+      ),
+  },
+
   {
     path: 'ethic',
     loadChildren: () =>

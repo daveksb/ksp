@@ -13,3 +13,5 @@ export * from './lib/form-reason-info/form-reason-info.component';
 export * from './lib/form-attachment/form-attachment.component';
 
 export * from './lib/form-user-info/form-user-info.component';
+
+export * from './lib/form-temp-license-foreign/form-temp-license-foreign.component';
