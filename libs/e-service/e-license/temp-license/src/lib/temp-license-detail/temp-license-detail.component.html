@@ -45,7 +45,11 @@
           </ksp-form-address>
           <hr />
 
-          <div class="top__container-2">
+          <e-service-license-check
+            [reasons]="reason[0]"
+          ></e-service-license-check>
+
+          <!--   <div class="top__container-2">
             <div class="header-3">ผลการตรวจสอบ</div>
 
             <div class="content__checkbox">
@@ -119,7 +123,7 @@
                 class="form-control form-control-sm"
               ></textarea>
             </div>
-          </div>
+          </div> -->
         </mat-tab>
 
         <mat-tab label="ที่อยู่ของสถานศึกษาที่ขออนุญาต">
@@ -173,7 +177,11 @@
           <ksp-form-attachment></ksp-form-attachment>
           <hr />
 
-          <div class="top__container-2">
+          <e-service-license-check
+            [reasons]="reason[1]"
+          ></e-service-license-check>
+
+          <!--  <div class="top__container-2">
             <div class="header-3">ผลการตรวจสอบ</div>
 
             <div class="content__checkbox">
@@ -251,7 +259,7 @@
                 class="form-control form-control-sm"
               ></textarea>
             </div>
-          </div>
+          </div> -->
         </mat-tab>
         <mat-tab label="ข้อมูลการสอนและการจ้าง">
           <ksp-form-teaching-info></ksp-form-teaching-info>
