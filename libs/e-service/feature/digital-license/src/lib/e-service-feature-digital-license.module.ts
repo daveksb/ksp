@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Route } from '@angular/router';
 import { TempLicenseComponent } from './temp-license/temp-license.component';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
+import { TempLicenseListComponent } from './temp-license-list/temp-license-list.component';
 
 export const eServiceFeatureDigitalLicenseRoutes: Route[] = [];
 
@@ -18,17 +19,19 @@ export const eServiceFeatureDigitalLicenseRoutes: Route[] = [];
             path: 'temp-license',
             component: TempLicenseComponent,
           },
+          {
+            path: '**',
+            component: TempLicenseListComponent,
+          },
         ],
       },
-
       {
         path: '**',
-        redirectTo: 'temp-license',
-        pathMatch: 'full',
+        component: TempLicenseListComponent,
       },
     ]),
   ],
-  declarations: [TempLicenseComponent],
-  exports: [TempLicenseComponent],
+  declarations: [TempLicenseComponent, TempLicenseListComponent],
+  exports: [TempLicenseComponent, TempLicenseListComponent],
 })
 export class EServiceFeatureDigitalLicenseModule {}
