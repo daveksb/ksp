@@ -1,0 +1,24 @@
+.container {
+  height: 45em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+  justify-items: center;
+}
+
+button {
+  width: 250px;
+  height: 80px;
+}
+
+@media only screen and (max-width: 760px) {
+  button {
+    width: 150px;
+    height: 150px;
+  }
+}
