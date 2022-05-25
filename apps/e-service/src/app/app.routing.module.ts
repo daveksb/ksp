@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LandingPageComponent } from '@ksp/e-service/feature/landing-page';
 import { EServiceLoginComponent } from '@ksp/e-service/feature/login';
 
 const routes: Routes = [
   { path: 'login', component: EServiceLoginComponent },
+  { path: 'landing', component: LandingPageComponent },
   {
     path: 'temp-license',
     loadChildren: () =>
