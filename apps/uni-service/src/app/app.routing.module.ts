@@ -12,7 +12,7 @@ const routes: Routes = [
     component: UniServiceContainerPageComponent,
     children: [
       {
-        path: '**',
+        path: '',
         component: UniServiceHomeComponent,
       },
     ],
@@ -45,12 +45,12 @@ const routes: Routes = [
         (m) => m.UniServiceFeatureGraduateListModule
       ),
   },
-   {
+  {
     path: 'foreign-id',
     component: UniServiceContainerPageComponent,
     children: [
       {
-        path: '**',
+        path: '',
         component: ReqForeignIdComponent,
       },
     ],
