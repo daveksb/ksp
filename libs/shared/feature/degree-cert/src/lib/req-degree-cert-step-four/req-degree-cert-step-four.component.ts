@@ -7,7 +7,7 @@ import {
 } from '@ksp/shared/ui/dialog';
 
 @Component({
-  selector: 'uni-service-req-degree-cert-step-four',
+  selector: 'ksp-req-degree-cert-step-four',
   templateUrl: './req-degree-cert-step-four.component.html',
   styleUrls: ['./req-degree-cert-step-four.component.css'],
 })

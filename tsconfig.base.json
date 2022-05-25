@@ -71,6 +71,9 @@
       "@ksp/self-service/ui/payment": [
         "libs/self-service/ui/payment/src/index.ts"
       ],
+      "@ksp/shared-feature-degree-cert": [
+        "libs/shared/feature/degree-cert/src/index.ts"
+      ],
       "@ksp/shared/assets": ["libs/shared/assets/src/index.ts"],
       "@ksp/shared/ui/bottom-menu": ["libs/shared/ui/bottom-menu/src/index.ts"],
       "@ksp/shared/ui/dialog": ["libs/shared/ui/dialog/src/index.ts"],

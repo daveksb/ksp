@@ -25,6 +25,7 @@
     "self-service-ui-menu": "libs/self-service/ui/menu",
     "self-service-ui-payment": "libs/self-service/ui/payment",
     "shared-assets": "libs/shared/assets",
+    "shared-feature-degree-cert": "libs/shared/feature/degree-cert",
     "shared-ui-bottom-menu": "libs/shared/ui/bottom-menu",
     "shared-ui-dialog": "libs/shared/ui/dialog",
     "shared-ui-form": "libs/shared/ui/form",

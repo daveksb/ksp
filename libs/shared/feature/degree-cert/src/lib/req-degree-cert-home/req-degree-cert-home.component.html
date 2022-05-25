@@ -82,10 +82,18 @@
       </div>
 
       <div class="button__container">
-        <button (click)="clear()" type="button" class="btn btn-fourth btn-sm label__button">
+        <button
+          (click)="clear()"
+          type="button"
+          class="btn btn-fourth btn-sm label__button"
+        >
           ล้างข้อมูล
         </button>
-        <button (click)="search()" type="button" class="btn btn-primary btn-sm label__button">
+        <button
+          (click)="search()"
+          type="button"
+          class="btn btn-primary btn-sm label__button"
+        >
           ค้นหา
         </button>
       </div>
@@ -135,8 +143,12 @@
             <td class="detail__table">{{ item.editDate }}</td>
             <td class="detail__table">{{ item.verify }}</td>
             <td class="detail__table">{{ item.consider }}</td>
-            <td class="detail__table"><img src="assets/images/edit.png" class="edit__icon" /></td>
-            <td class="detail__table"><img src="assets/images/print.png" class="edit__icon" /></td>
+            <td class="detail__table">
+              <img src="assets/images/edit.png" class="edit__icon" />
+            </td>
+            <td class="detail__table">
+              <img src="assets/images/print.png" class="edit__icon" />
+            </td>
           </tr>
         </tbody>
       </table>

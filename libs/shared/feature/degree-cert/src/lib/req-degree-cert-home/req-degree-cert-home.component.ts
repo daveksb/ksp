@@ -62,7 +62,7 @@ export const data: DegreeCertInfo[] = [
 ];
 
 @Component({
-  selector: 'uni-service-req-degree-cert-home',
+  selector: 'ksp-req-degree-cert-home',
   templateUrl: './req-degree-cert-home.component.html',
   styleUrls: ['./req-degree-cert-home.component.css'],
 })
