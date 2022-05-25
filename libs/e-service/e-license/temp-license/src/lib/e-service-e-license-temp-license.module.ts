@@ -7,6 +7,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { RouterModule, Routes } from '@angular/router';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { EServiceUiLicenseCheckModule } from '@ksp/e-service/ui/license-check';
+import { TempLicenseCheckForbiddenComponent } from './temp-license-check-forbidden/temp-license-check-forbidden.component';
+import { TempLicenseCheckConfirmComponent } from './temp-license-check-confirm/temp-license-check-confirm.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 export const routes: Routes = [
   {
@@ -26,6 +29,14 @@ export const routes: Routes = [
         path: 'detail',
         component: TempLicenseDetailComponent,
       },
+      {
+        path: 'forbidden',
+        component: TempLicenseCheckForbiddenComponent,
+      },
+      {
+        path: 'confirm',
+        component: TempLicenseCheckConfirmComponent,
+      },
     ],
   },
 ];
@@ -34,11 +45,22 @@ export const routes: Routes = [
   imports: [
     CommonModule,
     MatTabsModule,
+    MatDialogModule,
     SharedUiFormModule,
     EServiceUiLicenseCheckModule,
     RouterModule.forChild(routes),
   ],
-  declarations: [TempLicenseListComponent, TempLicenseDetailComponent],
-  exports: [TempLicenseListComponent, TempLicenseDetailComponent],
+  declarations: [
+    TempLicenseListComponent,
+    TempLicenseDetailComponent,
+    TempLicenseCheckForbiddenComponent,
+    TempLicenseCheckConfirmComponent,
+  ],
+  exports: [
+    TempLicenseListComponent,
+    TempLicenseDetailComponent,
+    TempLicenseCheckForbiddenComponent,
+    TempLicenseCheckConfirmComponent,
+  ],
 })
 export class EServiceELicenseTempLicenseModule {}

@@ -47,14 +47,13 @@ export class TempLicenseDetailComponent implements OnInit {
       'ขอเอกสารการพํฒนาตนเองเพิ่ม',
       'อื่นๆ (ระบุ)',
     ];
-    
   }
 
   next() {
-    this.router.navigate(['/', 'forbidden']);
+    this.router.navigate(['/', 'temp-license', 'forbidden']);
   }
 
   back() {
-    this.router.navigate(['/', 'temp-license-list']);
+    this.router.navigate(['/', 'temp-license', 'list']);
   }
 }
