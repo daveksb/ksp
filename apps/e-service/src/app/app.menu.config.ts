@@ -9,15 +9,15 @@ export const ethicsMenu: MenuConfig[] = [
     subMenuName: 'accusation',
     subMenu: [
       {
-        path: 'record',
+        path: 'ethics/accusation',
         label: 'บันทีกการกล่าวหา/กล่าวโทษ',
       },
       {
-        path: 'investigation',
+        path: 'ethics/investigation',
         label: 'บันทีกการสืบสวนข้อเท็จจริง',
       },
       {
-        path: 'inquiry',
+        path: 'ethics/inquiry',
         label: 'บันทีกการสอบสวน',
       },
     ],
@@ -25,7 +25,7 @@ export const ethicsMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ตรวจสอบและเผยแพร่คำวินิจฉัยชี้ขาด',
-    path: '',
+    path: 'ethics/verdict',
     subMenuName: 'verdict',
   },
   {
