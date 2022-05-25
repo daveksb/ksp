@@ -2,12 +2,12 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'ksp-req-degree-cert-step-two',
-  templateUrl: './req-degree-cert-step-two.component.html',
-  styleUrls: ['./req-degree-cert-step-two.component.css'],
+  selector: 'ksp-degree-cert-step-two',
+  templateUrl: './degree-cert-step-two.component.html',
+  styleUrls: ['./degree-cert-step-two.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ReqDegreeCertStepTwoComponent {
+export class DegreeCertStepTwoComponent {
   constructor(private router: Router) {}
 
   goToStep1() {

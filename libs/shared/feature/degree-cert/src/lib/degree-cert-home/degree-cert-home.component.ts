@@ -62,11 +62,11 @@ export const data: DegreeCertInfo[] = [
 ];
 
 @Component({
-  selector: 'ksp-req-degree-cert-home',
-  templateUrl: './req-degree-cert-home.component.html',
-  styleUrls: ['./req-degree-cert-home.component.css'],
+  selector: 'ksp-degree-cert-home',
+  templateUrl: './degree-cert-home.component.html',
+  styleUrls: ['./degree-cert-home.component.css'],
 })
-export class ReqDegreeCertHomeComponent {
+export class DegreeCertHomeComponent {
   data: DegreeCertInfo[] = [];
   constructor(private router: Router) {}
 

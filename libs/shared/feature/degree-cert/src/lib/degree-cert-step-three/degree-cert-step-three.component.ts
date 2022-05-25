@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'ksp-req-degree-cert-step-three',
-  templateUrl: './req-degree-cert-step-three.component.html',
-  styleUrls: ['./req-degree-cert-step-three.component.css'],
+  selector: 'ksp-degree-cert-step-three',
+  templateUrl: './degree-cert-step-three.component.html',
+  styleUrls: ['./degree-cert-step-three.component.css'],
 })
-export class ReqDegreeCertStepThreeComponent {
+export class DegreeCertStepThreeComponent {
   constructor(private router: Router) {}
 
   goToStep2() {

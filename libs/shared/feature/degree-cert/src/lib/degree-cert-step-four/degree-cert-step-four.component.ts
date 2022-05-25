@@ -7,11 +7,11 @@ import {
 } from '@ksp/shared/ui/dialog';
 
 @Component({
-  selector: 'ksp-req-degree-cert-step-four',
-  templateUrl: './req-degree-cert-step-four.component.html',
-  styleUrls: ['./req-degree-cert-step-four.component.css'],
+  selector: 'ksp-degree-cert-step-four',
+  templateUrl: './degree-cert-step-four.component.html',
+  styleUrls: ['./degree-cert-step-four.component.css'],
 })
-export class ReqDegreeCertStepFourComponent {
+export class DegreeCertStepFourComponent {
   constructor(public dialog: MatDialog, private router: Router) {}
 
   back() {
