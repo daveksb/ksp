@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Route, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { ForeignLicenseDetailComponent } from './foreign-license-detail/foreign-license-detail.component';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { ForeignLicenseListComponent } from './foreign-license-list/foreign-license-list.component';

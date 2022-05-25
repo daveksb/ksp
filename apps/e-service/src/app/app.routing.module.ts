@@ -24,8 +24,8 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'ethic',
-    data: { menuConfig: ethicsMenu, headerLabel: 'ระบบจรรยาบรรณ' },
+    path: 'ethics',
+    data: { menuConfig: ethicsMenu, headerLabel: 'ระบบงานจรรยาบรรณ' },
     loadChildren: () =>
       import('@ksp/e-service/feature/ethic').then(
         (m) => m.EServiceFeatureEthicModule

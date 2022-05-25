@@ -18,7 +18,7 @@ export class LandingPageComponent {
   }
 
   ethics() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/', 'ethics', 'accusation']);
   }
 
   praise() {
