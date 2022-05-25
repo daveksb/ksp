@@ -1,13 +1,15 @@
 <div class="container">
   <div class="wrapper">
-    <button (click)="elicense()">
+    <button [disabled]="false" (click)="elicense()">
       ระบบใบอนุญาตประกอบวิชาชีพทางการศึกษา (E-Licensing)
     </button>
-    <button disabled="true">ระบบงานมาตรฐานวิชาชีพ</button>
-    <button disabled="true">ระบบงานจรรยาบรรณวิชาชีพ</button>
+    <button [disabled]="true">ระบบงานมาตรฐานวิชาชีพ</button>
+    <button [disabled]="false" (click)="ethics()">
+      ระบบงานจรรยาบรรณวิชาชีพ
+    </button>
 
-    <button disabled="true">ระบบงานพัฒนาและยกย่องวิชาชีพ</button>
-    <button disabled="true">ระบบงานค่าธรรมเนียม</button>
-    <button disabled="true">ระบบบริหารจัดการผู้ดูแลระบบ</button>
+    <button [disabled]="true">ระบบงานพัฒนาและยกย่องวิชาชีพ</button>
+    <button [disabled]="true">ระบบงานค่าธรรมเนียม</button>
+    <button [disabled]="true">ระบบบริหารจัดการผู้ดูแลระบบ</button>
   </div>
 </div>
