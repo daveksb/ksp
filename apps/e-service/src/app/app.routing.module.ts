@@ -13,7 +13,6 @@ const routes: Routes = [
         (m) => m.EServiceELicenseTempLicenseModule
       ),
   },
-
   {
     path: 'foreign-license',
     loadChildren: () =>
@@ -21,7 +20,6 @@ const routes: Routes = [
         (m) => m.EServiceELicenseForeignLicenseModule
       ),
   },
-
   {
     path: 'ethic',
     loadChildren: () =>

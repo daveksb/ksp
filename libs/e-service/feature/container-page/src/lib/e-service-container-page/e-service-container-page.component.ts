@@ -7,7 +7,7 @@ export const licenseMenu: MenuConfig[] = [
     label: 'ใบคำขออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต (ชาวไทย)',
     path: '',
     isExpanded: true,
-    subMenuName: '',
+    subMenuName: 'temp-thai',
     subMenu: [
       {
         path: 'temp-license/list',
@@ -23,8 +23,8 @@ export const licenseMenu: MenuConfig[] = [
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ใบคำขออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต (ชาวต่างชาติ)',
     path: '',
-    isExpanded: true,
-    subMenuName: '',
+    isExpanded: false,
+    subMenuName: 'temp-foreign',
     subMenu: [
       {
         path: 'bb',
@@ -40,8 +40,8 @@ export const licenseMenu: MenuConfig[] = [
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ)',
     path: '',
-    isExpanded: true,
-    subMenuName: '',
+    isExpanded: false,
+    subMenuName: 'foreign-id',
     subMenu: [
       {
         path: 'bb',
