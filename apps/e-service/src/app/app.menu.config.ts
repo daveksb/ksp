@@ -64,7 +64,7 @@ export const licenseMenu: MenuConfig[] = [
         label: 'รายการใบคำขออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
       },
       {
-        path: 'dd',
+        path: 'temp-license/approve',
         label: 'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
       },
     ],
