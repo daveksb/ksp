@@ -27,7 +27,7 @@
     "shared-assets": "libs/shared/assets",
     "shared-feature-degree-cert": "libs/shared/feature/degree-cert",
     "shared-ui-bottom-menu": "libs/shared/ui/bottom-menu",
-    "shared-ui-degree-cert-step-tab-content": "libs/shared/ui/degree-cert-step-tab-content",
+    "shared-ui-degree-cert-tab-content": "libs/shared/ui/degree-cert-tab-content",
     "shared-ui-dialog": "libs/shared/ui/dialog",
     "shared-ui-form": "libs/shared/ui/form",
     "shared-ui-page-not-found": "libs/shared/ui/page-not-found",

@@ -26,4 +26,4 @@ import { StepThreeTabTwoComponent } from './step-three-tab-two/step-three-tab-tw
     StepThreeTabTwoComponent,
   ],
 })
-export class SharedUiDegreeCertStepTabContentModule {}
+export class SharedUiDegreeCertTabContentModule {}

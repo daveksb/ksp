@@ -1,0 +1,18 @@
+{
+  "projectType": "library",
+  "root": "libs/shared/ui/degree-cert-tap-content",
+  "sourceRoot": "libs/shared/ui/degree-cert-tap-content/src",
+  "prefix": "ksp",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/ui/degree-cert-tab-content/**/*.ts",
+          "libs/shared/ui/degree-cert-tab-content/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
