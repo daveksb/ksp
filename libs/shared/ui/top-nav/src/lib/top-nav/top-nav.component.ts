@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ksp-top-nav',
@@ -6,8 +7,10 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./top-nav.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TopNavComponent implements OnInit {
-  constructor() {}
+export class TopNavComponent {
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  logout() {
+    this.router.navigate(['/']);
+  }
 }
