@@ -80,6 +80,10 @@ a[data-bs-toggle='collapse'] {
   position: relative;
 }
 
+.dropdown-toggle {
+  white-space: normal;
+}
+
 .dropdown-toggle::after {
   display: block;
   position: absolute;
