@@ -1,0 +1,18 @@
+{
+  "projectType": "library",
+  "root": "libs/e-service/feature/landing-page",
+  "sourceRoot": "libs/e-service/feature/landing-page/src",
+  "prefix": "e-service",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/e-service/feature/landing-page/**/*.ts",
+          "libs/e-service/feature/landing-page/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

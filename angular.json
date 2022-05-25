@@ -6,6 +6,7 @@
     "e-service-e-license-temp-license": "libs/e-service/e-license/temp-license",
     "e-service-feature-container-page": "libs/e-service/feature/container-page",
     "e-service-feature-ethic": "libs/e-service/feature/ethic",
+    "e-service-feature-landing-page": "libs/e-service/feature/landing-page",
     "e-service-feature-login": "libs/e-service/feature/login",
     "e-service-ui-license-check": "libs/e-service/ui/license-check",
     "school-service": "apps/school-service",
