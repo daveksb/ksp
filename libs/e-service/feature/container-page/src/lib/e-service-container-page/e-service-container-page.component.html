@@ -2,12 +2,12 @@
   <ksp-side-menu
     class="side__menu"
     [menuConfig]="menuConfig"
-    [showHeader]="true"
+    [showHeader]="false"
   ></ksp-side-menu>
 
   <div>
     <ksp-top-nav>
-      <span header>ระบบงานจรรยาบรรณ</span>
+      <span header>{{ headerLabel }}</span>
     </ksp-top-nav>
     <router-outlet></router-outlet>
   </div>
