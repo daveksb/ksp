@@ -7,10 +7,14 @@ import { ReqDegreeCertStepThreeComponent } from './req-degree-cert-step-three/re
 import { ReqDegreeCertStepFourComponent } from './req-degree-cert-step-four/req-degree-cert-step-four.component';
 import { ReqDegreeCertStepFiveComponent } from './req-degree-cert-step-five/req-degree-cert-step-five.component';
 import { MatTabsModule } from '@angular/material/tabs';
-import { UniServiceUiFormsModule } from '@ksp/uni-service/ui/forms';
+import { SharedUiDegreeCertStepTabContentModule } from '@ksp/shared/ui/degree-cert-step-tab-content';
 
 @NgModule({
-  imports: [CommonModule, MatTabsModule, UniServiceUiFormsModule],
+  imports: [
+    CommonModule,
+    MatTabsModule,
+    SharedUiDegreeCertStepTabContentModule,
+  ],
   declarations: [
     ReqDegreeCertHomeComponent,
     ReqDegreeCertStepOneComponent,
