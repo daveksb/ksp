@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'landing', component: LandingPageComponent },
   {
     path: 'temp-license',
-    data: { menuConfig: ethicsMenu },
+    data: { menuConfig: licenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
     loadChildren: () =>
       import('@ksp/e-service/e-license/temp-license').then(
         (m) => m.EServiceELicenseTempLicenseModule
@@ -17,7 +17,7 @@ const routes: Routes = [
   },
   {
     path: 'foreign-license',
-    data: { menuConfig: licenseMenu },
+    data: { menuConfig: licenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
     loadChildren: () =>
       import('@ksp/e-service/e-license/foreign-license').then(
         (m) => m.EServiceELicenseForeignLicenseModule
@@ -25,7 +25,7 @@ const routes: Routes = [
   },
   {
     path: 'ethic',
-    data: { menuConfig: ethicsMenu },
+    data: { menuConfig: ethicsMenu, headerLabel: 'ระบบจรรยาบรรณ' },
     loadChildren: () =>
       import('@ksp/e-service/feature/ethic').then(
         (m) => m.EServiceFeatureEthicModule
