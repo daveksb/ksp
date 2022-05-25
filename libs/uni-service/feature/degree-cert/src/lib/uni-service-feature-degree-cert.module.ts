@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import {
-  ReqDegreeCertHomeComponent,
-  ReqDegreeCertStepFourComponent,
-  ReqDegreeCertStepOneComponent,
-  ReqDegreeCertStepThreeComponent,
-  ReqDegreeCertStepTwoComponent,
+  DegreeCertHomeComponent,
+  DegreeCertStepFourComponent,
+  DegreeCertStepOneComponent,
+  DegreeCertStepThreeComponent,
+  DegreeCertStepTwoComponent,
 } from '@ksp/shared-feature-degree-cert';
 import { UniServiceContainerPageComponent } from '@ksp/uni-service/feature/container-page';
 
@@ -17,27 +17,27 @@ const routes: Routes = [
     children: [
       {
         path: 'list',
-        component: ReqDegreeCertHomeComponent,
+        component: DegreeCertHomeComponent,
       },
       {
         path: 'step-1',
-        component: ReqDegreeCertStepOneComponent,
+        component: DegreeCertStepOneComponent,
       },
       {
         path: 'step-2',
-        component: ReqDegreeCertStepTwoComponent,
+        component: DegreeCertStepTwoComponent,
       },
       {
         path: 'step-3',
-        component: ReqDegreeCertStepThreeComponent,
+        component: DegreeCertStepThreeComponent,
       },
       {
         path: 'step-4',
-        component: ReqDegreeCertStepFourComponent,
+        component: DegreeCertStepFourComponent,
       },
       {
         path: '**',
-        component: ReqDegreeCertHomeComponent,
+        component: DegreeCertHomeComponent,
       },
     ],
   },
