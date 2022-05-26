@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ksp-search-form',
   templateUrl: './search-form.component.html',
   styleUrls: ['./search-form.component.scss'],
 })
-export class SearchFormComponent implements OnInit {
-  constructor() {}
+export class SearchFormComponent {
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  search() {
+    this.router.navigate(['/', 'landing']);
+  }
 }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Route } from '@angular/router';
 import { DegreeCertListComponent } from './degree-cert-list/degree-cert-list.component';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
+import { SharedUiDegreeCertSearchFormModule } from '@ksp/shared/ui/degree-cert-search-form';
 
 export const routes: Route[] = [
   {
@@ -23,7 +24,7 @@ export const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [CommonModule, RouterModule.forChild(routes),SharedUiDegreeCertSearchFormModule],
   declarations: [DegreeCertListComponent],
   exports: [DegreeCertListComponent],
 })
