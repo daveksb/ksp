@@ -10,6 +10,6 @@ export class SearchFormComponent {
   constructor(private router: Router) {}
 
   search() {
-    this.router.navigate(['/', 'landing']);
+    this.router.navigate(['/', 'degree-cert', 'step-1']);
   }
 }
