@@ -45,16 +45,6 @@
   margin-left: 40px;
 }
 
-.btn-secondary {
-  font-size: 16px;
-  color: #fff;
-  background-color: #0056ff;
-  border: 1px solid #0056ff;
-  width: 100px;
-  border-radius: 4px;
-  margin: 0 5px;
-}
-
 .form-control {
   font-size: 16px;
 }
@@ -76,6 +66,7 @@
   color: #f68b33;
   font-size: 16px;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .label__content {
@@ -124,13 +115,6 @@
   margin: 20px 0;
 }
 
-.btn__container {
-  margin: 20px 40px;
-  display: flex;
-  justify-content: space-between;
-  background-color: #fff;
-}
-
 .btn__back {
   font-size: 18px;
   color: #f68b33;
@@ -147,4 +131,36 @@
   border: 1px solid #f68b33;
   border-radius: 2px;
   width: 100px;
+}
+
+.btn__container {
+  display: flex;
+  background-color: #fff;
+  justify-content: space-between;
+  flex-direction: row;
+  padding: 12px 36px;
+}
+
+.btn__container-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: #fff;
+}
+
+.btn-primary {
+  font-size: 16px;
+  color: #fff;
+  background-color: #0056ff;
+  border: 1px solid #0056ff;
+  width: 100px;
+  margin: 0 5px;
+}
+
+.btn-secondary {
+  font-size: 16px;
+  color: #0056ff;
+  background-color: #fff;
+  border: 1px solid #0056ff;
+  width: 100px;
+  margin: 0 5px;
 }

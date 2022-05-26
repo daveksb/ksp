@@ -5,17 +5,21 @@
   </div>
   <div class="detail__container">
     <div class="content__header">
-      <div class="label__content">
-        วันที่ทำรายการ :
-        <span class="label__content--primary">10 ตุลาคม 2565</span>
+      <div class="content__header">
+        <div class="label__content">
+          วันที่ทำรายการ :
+          <span class="label__content--primary">10 ตุลาคม 2565</span>
+        </div>
+
+        <div class="label__content">
+          เลขใบคำขอ :
+          <span class="label__content--secondary">112234467876543</span>
+        </div>
       </div>
-      <div class="label__content">
-        เลขใบคำขอ :
-        <span class="label__content--secondary">112234467876543</span>
-      </div>
+
       <div class="label__content-2">
         วันที่ตรวจสอบ :
-        <span class="label__content--secondary">10 ตุลาคม 2565</span>
+        <span class="label__content--primary">10 ตุลาคม 2565</span>
       </div>
     </div>
 
@@ -44,13 +48,23 @@
               <td class="detail__table">x</td>
               <td class="detail__table">x</td>
             </tr>
+            <tr>
+              <td class="detail__table">x</td>
+              <td class="detail__table">x</td>
+              <td class="detail__table">x</td>
+              <td class="detail__table">x</td>
+              <td class="detail__table">x</td>
+            </tr>
           </tbody>
         </table>
       </div>
     </div>
 
     <div class="top__container-2">
-      <div class="header-3">ยืนยันผลการตรวจสอบ</div>
+      <div class="header__content">
+        <div class="header-3">ยืนยันผลการตรวจสอบ</div>
+        <div class="warn__label">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
+      </div>
 
       <div class="content__checkbox">
         <div class="checkbox__detail">
@@ -121,8 +135,11 @@
 
       <hr />
 
-      <div class="header-3">
-        ต้องการส่งตรวจสอบลำดับต่อไป หรือส่งเพื่อพิจารณา
+      <div class="header__content">
+        <div class="header-3">
+          ต้องการส่งตรวจสอบลำดับต่อไป หรือส่งเพื่อพิจารณา
+        </div>
+        <div class="warn__label">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
       </div>
 
       <div class="content__checkbox-2">
@@ -194,6 +211,9 @@
 
 <div class="btn__container">
   <button (click)="back()" class="btn__back">ย้อนกลับ</button>
-
+  <div class="btn__container-2">
+    <button class="btn-secondary">ยกเลิก</button>
+    <button class="btn-primary">บันทึก</button>
+  </div>
   <button (click)="next()" class="btn__next">ถัดไป</button>
 </div>

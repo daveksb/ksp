@@ -10,6 +10,7 @@ import { EServiceUiLicenseCheckModule } from '@ksp/e-service/ui/license-check';
 import { TempLicenseCheckForbiddenComponent } from './temp-license-check-forbidden/temp-license-check-forbidden.component';
 import { TempLicenseCheckConfirmComponent } from './temp-license-check-confirm/temp-license-check-confirm.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { TempLicenseApproveComponent } from './temp-license-approve/temp-license-approve.component';
 
 export const routes: Routes = [
   {
@@ -37,6 +38,10 @@ export const routes: Routes = [
         path: 'confirm',
         component: TempLicenseCheckConfirmComponent,
       },
+      {
+        path: 'approve',
+        component: TempLicenseApproveComponent,
+      },
     ],
   },
 ];
@@ -55,12 +60,14 @@ export const routes: Routes = [
     TempLicenseDetailComponent,
     TempLicenseCheckForbiddenComponent,
     TempLicenseCheckConfirmComponent,
+    TempLicenseApproveComponent,
   ],
   exports: [
     TempLicenseListComponent,
     TempLicenseDetailComponent,
     TempLicenseCheckForbiddenComponent,
     TempLicenseCheckConfirmComponent,
+    TempLicenseApproveComponent,
   ],
 })
 export class EServiceELicenseTempLicenseModule {}
