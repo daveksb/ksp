@@ -1,0 +1,18 @@
+{
+  "projectType": "library",
+  "root": "libs/shared/ui/degree-cert-search-form",
+  "sourceRoot": "libs/shared/ui/degree-cert-search-form/src",
+  "prefix": "ksp",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/ui/degree-cert-search-form/**/*.ts",
+          "libs/shared/ui/degree-cert-search-form/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
