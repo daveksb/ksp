@@ -66,15 +66,15 @@ export class DegreeCertListComponent {
   data: DegreeCertInfo[] = [];
   constructor(private router: Router) {}
 
-  clear() {
-    this.data = [];
+  view() {
+    this.router.navigate(['/', 'landing']);
   }
 
-  search() {
+  Search() {
     this.data = data;
   }
 
-  view() {
-    this.router.navigate(['/', 'landing']);
+  clear() {
+    this.data = [];
   }
 }

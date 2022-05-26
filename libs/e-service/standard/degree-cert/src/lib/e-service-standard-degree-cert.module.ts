@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Route } from '@angular/router';
 import { DegreeCertListComponent } from './degree-cert-list/degree-cert-list.component';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
+import { SharedUiDegreeCertSearchFormModule } from '@ksp/shared/ui/degree-cert-search-form';
 import { StepOneComponent } from './step-one/step-one.component';
 import { StepTwoComponent } from './step-two/step-two.component';
 import { StepThreeComponent } from './step-three/step-three.component';
@@ -49,6 +50,7 @@ export const routes: Route[] = [
     SharedFeatureDegreeCertModule,
     SharedUiBottomMenuModule,
     EServiceUiLicenseCheckModule,
+    SharedUiDegreeCertSearchFormModule,
   ],
   declarations: [
     DegreeCertListComponent,
