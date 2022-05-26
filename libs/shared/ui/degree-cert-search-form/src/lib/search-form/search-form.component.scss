@@ -84,50 +84,6 @@
   margin-right: 20px;
 }
 
-.table {
-  background-color: #fff;
-  border: 1px solid #eceef2;
-}
-
-.table-responsive {
-  overflow-x: auto;
-  margin: 10px;
-}
-
-.table > :not(:first-child) {
-  border-top: 0;
-}
-
-.header__table {
-  background-color: #edf6ff;
-  font-size: 16px;
-  white-space: nowrap;
-  color: #000000;
-}
-
-.body__table {
-  font-size: 16px;
-  color: #000000;
-  white-space: nowrap;
-}
-
-.btn-upload {
-  font-size: 16px;
-  background: #fff;
-  border: 1px solid #0056ff;
-  box-sizing: border-box;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-  color: #3f89fe;
-  padding: 5px 25px;
-  margin-right: 10px;
-}
-
-.edit__icon {
-  width: 15px;
-  height: 15px;
-}
-
 @media only screen and (max-width: 768px) {
   .detail__container {
     display: grid;

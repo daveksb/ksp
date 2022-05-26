@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'ksp-search-form',
@@ -7,9 +6,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./search-form.component.scss'],
 })
 export class SearchFormComponent {
-  constructor(private router: Router) {}
-
-  search() {
-    this.router.navigate(['/', 'degree-cert', 'step-1']);
-  }
+  @Output() searched = new EventEmitter<boolean>();
+  @Output() cleared = new EventEmitter<boolean>();
 }

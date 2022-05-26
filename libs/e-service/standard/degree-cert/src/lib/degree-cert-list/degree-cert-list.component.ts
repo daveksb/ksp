@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 export interface DegreeCertInfo {
@@ -66,15 +66,15 @@ export class DegreeCertListComponent {
   data: DegreeCertInfo[] = [];
   constructor(private router: Router) {}
 
-  view() {
-    this.router.navigate(['/', 'landing']);
-  }
-
-  Search() {
+  onSearch() {
     this.data = data;
   }
 
-  clear() {
+  onSelect() {
+    this.router.navigate(['/', 'degree-cert', 'step-1']);
+  }
+
+  onClear() {
     this.data = [];
   }
 }

@@ -1,7 +1,10 @@
 <div class="main-container">
   <div class="box__title">รายการขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา</div>
   <div class="top-container">
-    <ksp-search-form></ksp-search-form>
+    <ksp-search-form
+      (cleared)="onClear()"
+      (searched)="onSearch()"
+    ></ksp-search-form>
 
     <div class="table-responsive">
       <table class="table">
@@ -21,9 +24,11 @@
             <th scope="col"></th>
           </tr>
         </thead>
-        <tbody class="body__table" (click)="view()">
-          <tr *ngFor="let item of data">
-            <td class="detail__table">{{ item.degreeId }}</td>
+        <tbody class="body__table">
+          <tr (click)="onSelect()" *ngFor="let item of data">
+            <td class="detail__table">
+              {{ item.degreeId }}
+            </td>
             <td class="detail__table">{{ item.date }}</td>
             <td class="detail__table">{{ item.uni }}</td>
             <td class="detail__table">{{ item.major }}</td>
