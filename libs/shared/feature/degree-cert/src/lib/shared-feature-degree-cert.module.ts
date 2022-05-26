@@ -10,7 +10,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { SharedUiDegreeCertTabContentModule } from '@ksp/shared/ui/degree-cert-tab-content';
 
 @NgModule({
-  imports: [CommonModule, MatTabsModule, SharedUiDegreeCertTabContentModule],
+  imports: [CommonModule, MatTabsModule, SharedUiDegreeCertTabContentModule, ],
   declarations: [
     DegreeCertHomeComponent,
     DegreeCertStepOneComponent,
@@ -18,6 +18,7 @@ import { SharedUiDegreeCertTabContentModule } from '@ksp/shared/ui/degree-cert-t
     DegreeCertStepThreeComponent,
     DegreeCertStepFourComponent,
     DegreeCertStepFiveComponent,
+
   ],
   exports: [
     DegreeCertHomeComponent,
@@ -26,6 +27,7 @@ import { SharedUiDegreeCertTabContentModule } from '@ksp/shared/ui/degree-cert-t
     DegreeCertStepThreeComponent,
     DegreeCertStepFourComponent,
     DegreeCertStepFiveComponent,
+
   ],
 })
 export class SharedFeatureDegreeCertModule {}

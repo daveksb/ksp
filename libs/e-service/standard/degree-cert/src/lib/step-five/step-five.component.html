@@ -1,1 +1,27 @@
-<p>step-five works!</p>
+<div class="container">
+  <div class="title__label">รายละเอียดใบคำขอ</div>
+  <div class="content__container">
+    <div class="content__header">
+      <div class="label__content">
+        วันที่ทำรายการ :
+        <span class="label__content--primary">10 ตุลาคม 2565</span>
+      </div>
+      <div class="label__content">
+        เลขใบคำขอ :
+        <span class="label__content--secondary">112234467876543</span>
+      </div>
+    </div>
+    <hr />
+    <div class="img__process">
+      <img src="/assets/images/img-uni/Procees-4.png" />
+    </div>
+    <e-service-verify-result></e-service-verify-result>
+
+    <ksp-degree-cert-step-five></ksp-degree-cert-step-five>
+  </div>
+</div>
+
+
+<div class="bottom__container">
+  <ksp-bottom-menu (nextClicked)="save()"></ksp-bottom-menu>
+</div>

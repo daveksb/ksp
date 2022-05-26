@@ -4,7 +4,17 @@
   border-radius: 5px;
   background-color: #3f89fe;
   padding: 5px 100px;
-  margin: 0 5px;
+  margin: 5px;
+  font-size: 20px;
+}
+
+.btn-secondary {
+  color: #3f89fe;
+  border: 1px solid #3f89fe;
+  border-radius: 5px;
+  background-color: #ffffff;
+  padding: 5px 80px;
+  margin: 5px;
   font-size: 20px;
 }
 
@@ -38,4 +48,9 @@
   text-align: center;
   margin: 10px 20px;
   white-space: pre-line;
+}
+
+.print__icon {
+  width: 18px;
+  height: 18px;
 }
