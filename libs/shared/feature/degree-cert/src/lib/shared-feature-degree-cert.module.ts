@@ -19,5 +19,13 @@ import { SharedUiDegreeCertTabContentModule } from '@ksp/shared/ui/degree-cert-t
     DegreeCertStepFourComponent,
     DegreeCertStepFiveComponent,
   ],
+  exports: [
+    DegreeCertHomeComponent,
+    DegreeCertStepOneComponent,
+    DegreeCertStepTwoComponent,
+    DegreeCertStepThreeComponent,
+    DegreeCertStepFourComponent,
+    DegreeCertStepFiveComponent,
+  ],
 })
 export class SharedFeatureDegreeCertModule {}
