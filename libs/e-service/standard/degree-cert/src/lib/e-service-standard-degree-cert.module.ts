@@ -44,6 +44,10 @@ export const routes: Route[] = [
         path: 'step-4',
         component: StepFourComponent,
       },
+      {
+        path: 'step-5',
+        component: StepFiveComponent,
+      },
     ],
   },
 ];
