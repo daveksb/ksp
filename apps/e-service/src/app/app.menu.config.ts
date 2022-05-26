@@ -51,7 +51,66 @@ export const ethicsMenu: MenuConfig[] = [
   },
 ];
 
-export const standardMenu: MenuConfig[] = [];
+export const standardMenu: MenuConfig[] = [
+  {
+    icon: 'assets/images/icon-sidenav/card.svg',
+    label: 'ใบคำขอรับรองปริญญาและประกาศนียบัตร',
+    path: '',
+    isExpanded: true,
+    subMenuName: 'degree-cert',
+    subMenu: [
+      {
+        path: 'aa',
+        label: 'รายการใบคำขอรับรองปริญญาและประกาศนียบัตร',
+      },
+      {
+        path: 'bb',
+        label: 'ประเมินหลักสูตรและโครงสร้างหลักสูตร',
+      },
+      {
+        path: 'cc',
+        label: 'พิจารณาและออกใบรับรองปริญญาและประกาศนียบัตร',
+      },
+    ],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/card.svg',
+    label: 'ใบคำขอส่งรายชื่อผู้เข้าและผู้สำเร็จการศึกษา',
+    path: '',
+    isExpanded: true,
+    subMenuName: 'gradute-list',
+    subMenu: [
+      {
+        path: 'aa',
+        label: 'รายการใบคำขอส่งรายชื่อผู้เข้าศึกษา',
+      },
+      {
+        path: 'bb',
+        label: 'รายการใบคำขอส่งรายชื่อผู้สำเร็จการศึกษา',
+      },
+      {
+        path: 'cc',
+        label: 'พิจารณารับข้อมูลผู้เข้าและผู้สำเร็จการศึกษา',
+      },
+    ],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/card.svg',
+    label: 'ใบคำขอเทียบโอนความรู้',
+    path: '',
+    isExpanded: false,
+    subMenuName: '--',
+    subMenu: [],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/card.svg',
+    label: 'ใบคำขอรับรองคุณวุฒิทางการศึกษา',
+    path: '',
+    isExpanded: false,
+    subMenuName: '--',
+    subMenu: [],
+  },
+];
 
 export const licenseMenu: MenuConfig[] = [
   {
