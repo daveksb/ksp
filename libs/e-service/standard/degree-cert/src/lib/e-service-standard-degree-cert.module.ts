@@ -14,6 +14,7 @@ import { EServiceUiLicenseCheckModule } from '@ksp/e-service/ui/license-check';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { VerifyResultComponent } from './verify-result/verify-result.component';
+import { MatIconModule } from '@angular/material/icon';
 
 export const routes: Route[] = [
   {
@@ -58,6 +59,7 @@ export const routes: Route[] = [
     EServiceUiLicenseCheckModule,
     SharedUiDegreeCertSearchFormModule,
     MatDialogModule,
+    MatIconModule,
   ],
   declarations: [
     DegreeCertListComponent,
