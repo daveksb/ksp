@@ -12,6 +12,7 @@ import { StepFiveComponent } from './step-five/step-five.component';
 import { SharedFeatureDegreeCertModule } from '@ksp/shared-feature-degree-cert';
 import { EServiceUiLicenseCheckModule } from '@ksp/e-service/ui/license-check';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
+import { MatDialogModule } from '@angular/material/dialog';
 
 export const routes: Route[] = [
   {
@@ -39,6 +40,10 @@ export const routes: Route[] = [
         path: 'step-3',
         component: StepThreeComponent,
       },
+      {
+        path: 'step-4',
+        component: StepFourComponent,
+      },
     ],
   },
 ];
@@ -51,6 +56,7 @@ export const routes: Route[] = [
     SharedUiBottomMenuModule,
     EServiceUiLicenseCheckModule,
     SharedUiDegreeCertSearchFormModule,
+    MatDialogModule
   ],
   declarations: [
     DegreeCertListComponent,
