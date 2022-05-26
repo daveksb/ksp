@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './step-one.component.html',
   styleUrls: ['./step-one.component.scss'],
 })
-export class StepOneComponent implements OnInit {
-  constructor() {}
+export class StepOneComponent {
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  nextPage() {
+    this.router.navigate(['./', 'degree-cert', 'step-2']);
+  }
 }

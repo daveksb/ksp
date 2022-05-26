@@ -1,4 +1,16 @@
 <div class="footer">
-  <button type="button" class="btn btn-secondary">ย้อนกลับ</button>
-  <button type="button" class="btn btn-primary">ต่อไป</button>
+  <button
+    (click)="prevClicked.emit(true)"
+    type="button"
+    class="btn btn-secondary"
+  >
+    ย้อนกลับ
+  </button>
+  <button
+    (click)="nextClicked.emit(true)"
+    type="button"
+    class="btn btn-primary"
+  >
+    ต่อไป
+  </button>
 </div>
