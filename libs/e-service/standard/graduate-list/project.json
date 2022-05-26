@@ -1,0 +1,18 @@
+{
+  "projectType": "library",
+  "root": "libs/e-service/standard/graduate-list",
+  "sourceRoot": "libs/e-service/standard/graduate-list/src",
+  "prefix": "e-service",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/e-service/standard/graduate-list/**/*.ts",
+          "libs/e-service/standard/graduate-list/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

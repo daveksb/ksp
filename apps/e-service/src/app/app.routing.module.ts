@@ -8,11 +8,11 @@ const routes: Routes = [
   { path: 'login', component: EServiceLoginComponent },
   { path: 'landing', component: LandingPageComponent },
   {
-    path: 'standard',
+    path: 'degree-cert',
     data: { menuConfig: standardMenu, headerLabel: 'ระบบงานมาตรฐานวิชาชีพ' },
     loadChildren: () =>
-      import('@ksp/e-service/e-license/temp-license').then(
-        (m) => m.EServiceELicenseTempLicenseModule
+      import('@ksp/e-service/standard/degree-cert').then(
+        (m) => m.EServiceStandardDegreeCertModule
       ),
   },
   {
