@@ -11,4 +11,8 @@ export class StepOneComponent {
   nextPage() {
     this.router.navigate(['./', 'degree-cert', 'step-2']);
   }
+
+  prevPage() {
+    this.router.navigate(['./', 'degree-cert', 'list']);
+  }
 }
