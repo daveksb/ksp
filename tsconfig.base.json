@@ -33,6 +33,12 @@
       "@ksp/e-service/feature/login": [
         "libs/e-service/feature/login/src/index.ts"
       ],
+      "@ksp/e-service/standard/degree-cert": [
+        "libs/e-service/standard/degree-cert/src/index.ts"
+      ],
+      "@ksp/e-service/standard/graduate-list": [
+        "libs/e-service/standard/graduate-list/src/index.ts"
+      ],
       "@ksp/e-service/ui/license-check": [
         "libs/e-service/ui/license-check/src/index.ts"
       ],

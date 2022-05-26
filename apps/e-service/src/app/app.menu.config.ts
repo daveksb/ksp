@@ -51,6 +51,8 @@ export const ethicsMenu: MenuConfig[] = [
   },
 ];
 
+export const standardMenu: MenuConfig[] = [];
+
 export const licenseMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/card.svg',

@@ -1,0 +1,18 @@
+{
+  "projectType": "library",
+  "root": "libs/e-service/standard/degree-cert",
+  "sourceRoot": "libs/e-service/standard/degree-cert/src",
+  "prefix": "e-service",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/e-service/standard/degree-cert/**/*.ts",
+          "libs/e-service/standard/degree-cert/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

@@ -8,6 +8,8 @@
     "e-service-feature-ethic": "libs/e-service/feature/ethic",
     "e-service-feature-landing-page": "libs/e-service/feature/landing-page",
     "e-service-feature-login": "libs/e-service/feature/login",
+    "e-service-standard-degree-cert": "libs/e-service/standard/degree-cert",
+    "e-service-standard-graduate-list": "libs/e-service/standard/graduate-list",
     "e-service-ui-license-check": "libs/e-service/ui/license-check",
     "school-service": "apps/school-service",
     "school-service-feature-container-page": "libs/school-service/feature/container-page",

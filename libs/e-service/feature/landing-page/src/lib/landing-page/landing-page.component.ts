@@ -14,7 +14,7 @@ export class LandingPageComponent {
   }
 
   standard() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/', 'standard']);
   }
 
   ethics() {

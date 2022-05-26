@@ -2,11 +2,19 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LandingPageComponent } from '@ksp/e-service/feature/landing-page';
 import { EServiceLoginComponent } from '@ksp/e-service/feature/login';
-import { ethicsMenu, licenseMenu } from './app.menu.config';
+import { ethicsMenu, licenseMenu, standardMenu } from './app.menu.config';
 
 const routes: Routes = [
   { path: 'login', component: EServiceLoginComponent },
   { path: 'landing', component: LandingPageComponent },
+  {
+    path: 'degree-cert',
+    data: { menuConfig: standardMenu, headerLabel: 'ระบบงานมาตรฐานวิชาชีพ' },
+    loadChildren: () =>
+      import('@ksp/e-service/standard/degree-cert').then(
+        (m) => m.EServiceStandardDegreeCertModule
+      ),
+  },
   {
     path: 'temp-license',
     data: { menuConfig: licenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
