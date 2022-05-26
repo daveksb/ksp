@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'ksp-bottom-menu',
@@ -8,4 +8,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class BottomMenuComponent {
   @Output() prevClicked = new EventEmitter<boolean>();
   @Output() nextClicked = new EventEmitter<boolean>();
+  @Output() saveClicked = new EventEmitter<boolean>();
+
+  @Input() isLastPage = false
+  @Input() isFirstPage = false
 }

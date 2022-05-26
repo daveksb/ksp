@@ -15,13 +15,24 @@
     <div class="img__process">
       <img src="/assets/images/img-uni/Procees-4.png" />
     </div>
-    <e-service-verify-result></e-service-verify-result>
+
+    <div class="result__container">
+      <e-service-verify-result [isBasicValid]="true"></e-service-verify-result>
+      <e-service-verify-result
+        [number]="2"
+        [isBasicValid]="true"
+        [isCourseValid]="true"
+      ></e-service-verify-result>
+    </div>
 
     <ksp-degree-cert-step-five></ksp-degree-cert-step-five>
   </div>
 </div>
 
-
 <div class="bottom__container">
-  <ksp-bottom-menu (nextClicked)="save()"></ksp-bottom-menu>
+  <ksp-bottom-menu
+    (prevClicked)="prevPage()"
+    (saveClicked)="save()"
+    [isLastPage]="true"
+  ></ksp-bottom-menu>
 </div>

@@ -13,6 +13,10 @@ import {
 export class StepFiveComponent {
   constructor(public dialog: MatDialog, private router: Router) {}
 
+  prevPage() {
+    this.router.navigate(['./', 'degree-cert', 'step-4']);
+  }
+
   save() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       height: '200px',
