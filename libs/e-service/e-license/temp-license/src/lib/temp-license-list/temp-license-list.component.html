@@ -148,7 +148,13 @@
           <tbody class="body__table">
             <tr *ngFor="let item of data">
               <td class="detail__table">{{ item.order }}</td>
-              <td (click)="nextPage(1)" class="detail__table">ICON</td>
+              <td (click)="nextPage(1)" class="detail__table">
+                <img
+                  src="assets/images/doc-check.png"
+                  width="20px"
+                  height="20px"
+                />
+              </td>
               <td class="detail__table">{{ item.reqCode }}</td>
               <td class="detail__table">{{ item.ssn }}</td>
               <td class="detail__table">{{ item.name }}</td>
@@ -157,8 +163,12 @@
               <td class="detail__table">{{ item.status }}</td>
               <td class="detail__table">{{ item.editDate }}</td>
               <td class="detail__table">{{ item.sendDate }}</td>
-              <td class="detail__table">ICON</td>
-              <td class="detail__table">ICON</td>
+              <td class="detail__table">
+                <img src="assets/images/doc.png" width="20px" height="20px" />
+              </td>
+              <td class="detail__table">
+                <img src="assets/images/doc.png" width="20px" height="20px" />
+              </td>
             </tr>
           </tbody>
         </table>
