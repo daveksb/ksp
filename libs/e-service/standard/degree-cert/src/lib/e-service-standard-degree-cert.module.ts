@@ -31,6 +31,14 @@ export const routes: Route[] = [
         path: 'step-1',
         component: StepOneComponent,
       },
+      {
+        path: 'step-2',
+        component: StepTwoComponent,
+      },
+      {
+        path: 'step-3',
+        component: StepThreeComponent,
+      },
     ],
   },
 ];
