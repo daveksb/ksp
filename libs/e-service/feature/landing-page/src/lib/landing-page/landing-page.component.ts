@@ -14,7 +14,7 @@ export class LandingPageComponent {
   }
 
   standard() {
-    this.router.navigate(['/', 'standard']);
+    this.router.navigate(['/', 'degree-cert']);
   }
 
   ethics() {
