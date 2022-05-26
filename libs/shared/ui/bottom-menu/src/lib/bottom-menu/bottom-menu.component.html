@@ -1,16 +1,34 @@
 <div class="footer">
-  <button
-    (click)="prevClicked.emit(true)"
-    type="button"
-    class="btn btn-secondary"
-  >
-    ย้อนกลับ
-  </button>
-  <button
-    (click)="nextClicked.emit(true)"
-    type="button"
-    class="btn btn-primary"
-  >
-    ต่อไป
-  </button>
+  <div>
+    <button
+      (click)="prevClicked.emit(true)"
+      type="button"
+      class="btn btn-secondary"
+      *ngIf="!isFirstPage"
+    >
+      ย้อนกลับ
+    </button>
+  </div>
+
+  <div class="footer-2">
+    <button type="button" class="btn btn-third">ยกเลิก</button>
+    <button
+      (click)="saveClicked.emit(true)"
+      type="button"
+      class="btn btn-fourth"
+    >
+      บันทึก
+    </button>
+  </div>
+
+  <div class="box3">
+    <button
+      (click)="nextClicked.emit(true)"
+      *ngIf="!isLastPage"
+      type="button"
+      class="btn btn-primary"
+    >
+      ต่อไป
+    </button>
+  </div>
 </div>

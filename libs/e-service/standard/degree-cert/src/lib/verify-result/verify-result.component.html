@@ -8,18 +8,44 @@
   <div class="content__label">โดย นางสาวญาดา ทิ่งทอง</div>
   <hr />
 
-  <div class="content__container-2">
-    <div class="content__label-2">
-      <mat-icon>check_circle_outline</mat-icon> ข้อมูลพิ้นฐาน
-    </div>
-    <div class="content__label-2">
-      <mat-icon>check_circle_outline</mat-icon>ด้านหลักสูตร
-    </div>
-    <div class="content__label-2">
-      <mat-icon>check_circle_outline</mat-icon>ด้านกระบวนการผลิต
-    </div>
-    <div class="content__label-2">
-      <mat-icon>check_circle_outline</mat-icon>เอกสารแนบ
-    </div>
+  <div
+    class="content__base"
+    [ngClass]="{
+      content__valid: isBasicValid,
+      content__invalid: !isBasicValid
+    }"
+  >
+    <mat-icon *ngIf="isBasicValid">check_circle_outline</mat-icon
+    ><mat-icon *ngIf="!isBasicValid">highlight_off</mat-icon> ข้อมูลพิ้นฐาน
+  </div>
+  <div
+    class="content__base"
+    [ngClass]="{
+      content__valid: isCourseValid,
+      content__invalid: !isCourseValid
+    }"
+  >
+    <mat-icon *ngIf="isCourseValid">check_circle_outline</mat-icon
+    ><mat-icon *ngIf="!isCourseValid">highlight_off</mat-icon>ด้านหลักสูตร
+  </div>
+  <div
+    class="content__base"
+    [ngClass]="{
+      content__valid: isProcessValid,
+      content__invalid: !isProcessValid
+    }"
+  >
+    <mat-icon *ngIf="isProcessValid">check_circle_outline</mat-icon
+    ><mat-icon *ngIf="!isProcessValid">highlight_off</mat-icon>ด้านกระบวนการผลิต
+  </div>
+  <div
+    class="content__base"
+    [ngClass]="{
+      content__valid: isAttachmentValid,
+      content__invalid: !isAttachmentValid
+    }"
+  >
+    <mat-icon *ngIf="isAttachmentValid">check_circle_outline</mat-icon
+    ><mat-icon *ngIf="!isAttachmentValid">highlight_off</mat-icon>เอกสารแนบ
   </div>
 </div>
