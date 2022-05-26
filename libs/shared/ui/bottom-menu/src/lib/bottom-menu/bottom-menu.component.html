@@ -16,6 +16,7 @@
       (click)="saveClicked.emit(true)"
       type="button"
       class="btn btn-fourth"
+      [ngClass]="{button__lastpage: !isLastPage}"
     >
       บันทึก
     </button>
