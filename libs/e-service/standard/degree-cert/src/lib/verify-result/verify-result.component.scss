@@ -1,0 +1,29 @@
+.content__container {
+  background-color: #fff;
+  width: fit-content;
+  padding: 10px 20px;
+  border: 1px solid #dadde1;
+}
+
+.header__label {
+  color: #000;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.content__label {
+  color: #808080;
+  font-size: 16px;
+}
+
+.content__label-2 {
+  color: #38ac3d;
+  font-size: 16px;
+  display: flex;
+  line-height: 24px;
+  margin: 10px 0;
+}
+
+.mat-icon {
+  margin-right: 5px;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -38,7 +38,7 @@ export class StepFiveComponent {
   onConfirmed() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       height: '300px',
-      width: '375px',
+      width: '350px',
       data: {
         header: 'ยืนยันข้อมูลสำเร็จ',
 
