@@ -46,7 +46,7 @@ export const routes: Routes = [
         component: StepFiveComponent,
       },
       {
-        path: 'verify',
+        path: 'verify/:type',
         component: VerifyComponent,
       },
       {

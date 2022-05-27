@@ -110,9 +110,9 @@
   </div>
 </div>
 
-<div class="bottom__container">
-  <div class="footer">
-    <div>
+<ng-container *ngIf="processType === 2 || processType === 3">
+  <div class="bottom__container">
+    <div class="footer">
       <button (click)="consider()" class="btn-primary">
         พิจารณาประเมินหลักสูตร (หลายรายการ)
       </button>
@@ -121,4 +121,4 @@
       </button>
     </div>
   </div>
-</div>
+</ng-container>

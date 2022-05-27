@@ -31,6 +31,7 @@ import { EServiceStandardDegreeCertRoutingModule } from './e-service-standard-de
     SharedFeatureDegreeCertModule,
     SharedUiBottomMenuModule,
     SharedUiDegreeCertSearchFormModule,
+    
   ],
   declarations: [
     DegreeCertListComponent,

@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { ConfirmDialogComponent } from '@ksp/shared/ui/dialog';
+import { Router } from '@angular/router';
+import {
+  CompleteDialogComponent,
+  ConfirmDialogComponent,
+} from '@ksp/shared/ui/dialog';
 import { User, UserColumns } from './user';
 import { UserService } from './user.service';
 
@@ -16,7 +20,52 @@ export class ImportStudentComponent implements OnInit {
   dataSource = new MatTableDataSource<User>();
   valid: any = {};
 
-  constructor(public dialog: MatDialog, private userService: UserService) {}
+  constructor(
+    public dialog: MatDialog,
+    private userService: UserService,
+    private router: Router
+  ) {}
+
+  save() {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      height: '200px',
+      width: '350px',
+      data: {
+        title: `คุณต้องการยืนยันข้อมูล
+        และส่งใบคำขอ ใช่หรือไม่? `,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+
+    dialogRef.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.onConfirmed();
+      }
+    });
+  }
+  onConfirmed() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      height: '200px',
+      width: '350px',
+      data: {
+        header: 'บันทึกข้อมูลสำเร็จ',
+        buttonLabel: 'กลับสู่หน้าหลัก',
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/', 'graduate-list']);
+      }
+    });
+  }
+
+  cancel() {
+    this.router.navigate(['./', 'graduate-list']);
+  }
 
   ngOnInit() {
     this.userService.getUsers().subscribe((res: any) => {

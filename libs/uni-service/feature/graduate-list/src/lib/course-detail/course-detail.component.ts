@@ -18,4 +18,8 @@ export class CourseDetailComponent {
   goToGraduateList() {
     this.router.navigate(['./', 'graduate-list', 'import-student']);
   }
+
+  cancel() {
+    this.router.navigate(['./', 'graduate-list']);
+  }
 }
