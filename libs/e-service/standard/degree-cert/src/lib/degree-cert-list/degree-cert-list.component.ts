@@ -87,10 +87,10 @@ export class DegreeCertListComponent implements OnInit {
   }
 
   consider() {
-    this.router.navigate(['./', 'degree-cert', 'verify']);
+    this.router.navigate(['./', 'degree-cert', 'verify', '2']);
   }
   approve() {
-    this.router.navigate(['./', 'degree-cert', 'verify']);
+    this.router.navigate(['./', 'degree-cert', 'verify', '3']);
   }
 
 }

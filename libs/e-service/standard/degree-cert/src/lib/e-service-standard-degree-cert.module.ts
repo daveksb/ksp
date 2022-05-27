@@ -33,6 +33,10 @@ export const routes: Route[] = [
         component: DegreeCertListComponent,
       },
       {
+        path: 'verify/:type',
+        component: VerifyComponent,
+      },
+      {
         path: 'step-1',
         component: StepOneComponent,
       },
@@ -52,10 +56,7 @@ export const routes: Route[] = [
         path: 'step-5',
         component: StepFiveComponent,
       },
-      {
-        path: 'verify',
-        component: VerifyComponent,
-      },
+
       {
         path: 'consider',
         component: ConsiderComponent,
