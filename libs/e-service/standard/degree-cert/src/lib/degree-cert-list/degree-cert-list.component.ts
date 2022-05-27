@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
+import { SelectionModel } from '@angular/cdk/collections';
 
 export interface DegreeCertInfo {
   degreeId: string;
@@ -16,47 +17,19 @@ export interface DegreeCertInfo {
   consider: string;
 }
 
-export const data: DegreeCertInfo[] = [
-  {
-    degreeId: 'UNI_VC_64120009',
-    date: '10 ธ.ค. 2564',
-    uni: 'มหาวิทยาลัยภูเก็ต',
-    major: 'คุรุศาสตร์',
-    verifyStatus: 'รับข้อมูล',
-    considerStatus: 'พิจารณา',
-    approveStatus: 'พิจารณา',
-    approveDate: '30 ส.ค. 2564',
-    editDate: '30 ส.ค. 2564',
-    verify: 'ตรวจสอบแล้ว',
-    consider: 'ตรวจสอบแล้ว',
-  },
-  {
-    degreeId: 'UNI_VC_64120009',
-    date: '10 ธ.ค. 2564',
-    uni: 'มหาวิทยาลัยภูเก็ต',
-    major: 'คุรุศาสตร์',
-    verifyStatus: 'รับข้อมูล',
-    considerStatus: 'พิจารณา',
-    approveStatus: 'พิจารณา',
-    approveDate: '30 ส.ค. 2564',
-    editDate: '30 ส.ค. 2564',
-    verify: 'ตรวจสอบแล้ว',
-    consider: 'ตรวจสอบแล้ว',
-  },
-  {
-    degreeId: 'UNI_VC_64120009',
-    date: '10 ธ.ค. 2564',
-    uni: 'มหาวิทยาลัยภูเก็ต',
-    major: 'คุรุศาสตร์',
-    verifyStatus: 'รับข้อมูล',
-    considerStatus: 'พิจารณา',
-    approveStatus: 'พิจารณา',
-    approveDate: '30 ส.ค. 2564',
-    editDate: '30 ส.ค. 2564',
-    verify: 'ตรวจสอบแล้ว',
-    consider: 'ตรวจสอบแล้ว',
-  },
-];
+export const data: DegreeCertInfo = {
+  degreeId: 'UNI_VC_64120009',
+  date: '10 ธ.ค. 2564',
+  uni: 'มหาวิทยาลัยภูเก็ต',
+  major: 'คุรุศาสตร์',
+  verifyStatus: 'รับข้อมูล',
+  considerStatus: 'พิจารณา',
+  approveStatus: 'พิจารณา',
+  approveDate: '30 ส.ค. 2564',
+  editDate: '30 ส.ค. 2564',
+  verify: 'ตรวจสอบแล้ว',
+  consider: 'ตรวจสอบแล้ว',
+};
 
 @Component({
   selector: 'e-service-degree-cert-list',
@@ -64,10 +37,13 @@ export const data: DegreeCertInfo[] = [
   styleUrls: ['./degree-cert-list.component.scss'],
 })
 export class DegreeCertListComponent implements OnInit {
-  data: DegreeCertInfo[] = [];
   processType = 1;
-  dataSource = new MatTableDataSource(data);
+  data: DegreeCertInfo[] = [data];
+  dataSource = new MatTableDataSource<DegreeCertInfo>();
+  selection = new SelectionModel<DegreeCertInfo>(true, []);
+
   displayedColumns: string[] = [
+    'select',
     'degreeId',
     'date',
     'uni',
@@ -85,12 +61,32 @@ export class DegreeCertListComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe((res) => {
       this.processType = Number(res.get('type'));
-      console.log('process type = ', this.processType);
+      //console.log('process type = ', this.processType);
     });
   }
 
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+
+    this.selection.select(...this.dataSource.data);
+  }
+
   onSearch() {
-    this.data = data;
+    for (let index = 0; index < 50; index++) {
+      this.data = [...this.data, data];
+    }
+    this.dataSource.data = this.data;
   }
 
   onSelect() {
@@ -98,7 +94,7 @@ export class DegreeCertListComponent implements OnInit {
   }
 
   onClear() {
-    this.data = [];
+    this.dataSource.data = [];
   }
 
   consider() {

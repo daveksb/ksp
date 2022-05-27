@@ -18,6 +18,7 @@ import { VerifyComponent } from './verify/verify.component';
 import { ConsiderComponent } from './consider/consider.component';
 import { ApproveComponent } from './approve/approve.component';
 import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 export const routes: Route[] = [
   {
@@ -79,6 +80,7 @@ export const routes: Route[] = [
     SharedUiDegreeCertSearchFormModule,
     MatDialogModule,
     MatTableModule,
+    MatCheckboxModule,
     EServiceUiVerifyResultBoxModule,
   ],
   declarations: [
