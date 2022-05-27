@@ -17,6 +17,7 @@ import { EServiceUiVerifyResultBoxModule } from '@ksp/e-service/ui/verify-result
 import { VerifyComponent } from './verify/verify.component';
 import { ConsiderComponent } from './consider/consider.component';
 import { ApproveComponent } from './approve/approve.component';
+import { MatTableModule } from '@angular/material/table';
 
 export const routes: Route[] = [
   {
@@ -77,6 +78,7 @@ export const routes: Route[] = [
     EServiceUiLicenseCheckModule,
     SharedUiDegreeCertSearchFormModule,
     MatDialogModule,
+    MatTableModule,
     EServiceUiVerifyResultBoxModule,
   ],
   declarations: [

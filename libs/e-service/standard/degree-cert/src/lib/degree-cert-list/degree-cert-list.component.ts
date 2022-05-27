@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
 
 export interface DegreeCertInfo {
   degreeId: string;
@@ -65,6 +66,20 @@ export const data: DegreeCertInfo[] = [
 export class DegreeCertListComponent implements OnInit {
   data: DegreeCertInfo[] = [];
   processType = 1;
+  dataSource = new MatTableDataSource(data);
+  displayedColumns: string[] = [
+    'degreeId',
+    'date',
+    'uni',
+    'major',
+    'verifyStatus',
+    'considerStatus',
+    'approveStatus',
+    'editDate',
+    'verify',
+    'consider',
+  ];
+
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -92,5 +107,4 @@ export class DegreeCertListComponent implements OnInit {
   approve() {
     this.router.navigate(['./', 'degree-cert', 'verify']);
   }
-
 }
