@@ -12,7 +12,6 @@
   display: flex;
 }
 .label__content {
-  font-family: "KSP Bold";
   font-size: 18px;
   color: #808080;
   margin-right: 24px;
@@ -37,12 +36,10 @@
 }
 
 .detail__header {
-  font-family: "KSP Bold";
   font-size: 22px;
   color: #0056ff;
 }
 .detail__header--secondary {
-  font-family: "KSP Bold";
   font-size: 22px;
   color: #000000;
 }
@@ -76,90 +73,69 @@
   margin-bottom: 14px;
 }
 .form-label {
-  font-family: "KSP Bold";
   font-size: 18px;
   color: #656565;
 }
 .form-control {
-  font-family: "KSP Bold";
   font-size: 20px;
   background-color: #fff;
 }
 .form-select {
-  font-family: "KSP Bold";
   font-size: 20px;
 }
 .label__text {
-  font-family: "KSP Bold";
   font-size: 16px;
   margin-left: 8px;
   color: #f23c51;
 }
 .btn-primary {
-  font-family: "KSP Bold";
   font-size: 20px;
   background-color: #0056ff;
   width: 440px;
   border-radius: 4px;
 }
 .table {
-
   background-color: #fff;
   border: 1px solid #eceef2;
 }
 .header__column {
   text-align: center;
 }
-.header__column--secondary{
-text-align: start;
+.header__column--secondary {
+  text-align: start;
 }
 .header__table {
   background-color: #edf6ff;
-  font-family: "KSP Bold";
   font-size: 16px;
 }
-.header__column--primary {
-  width: 300px;
-}
-.body__table {
-  background-color: #edf6ff;
-  font-family: "KSP Bold";
-  font-size: 16px;
-}
-.detail__table{
+.detail__table {
   text-align: center;
-  font-family: "KSP Bold";
+
   font-size: 18px;
   vertical-align: middle;
 }
-.detail__table--secondary{
+.detail__table--secondary {
   text-align: start;
-  font-family: "KSP Bold";
+
   font-size: 18px;
 }
 .table > :not(caption) > * > * {
-  padding: 14px ;
+  padding: 14px;
 }
 .table > :not(:first-child) {
   border-top: 0;
 }
-.label__table {
-  font-family: "KSP Bold";
-  font-size: 16px;
-  vertical-align: middle;
-}
 .label__table--footer {
-  font-family: "KSP Bold";
   font-size: 20px;
   text-align: end;
 }
-.label__edit{
+.label__edit {
   color: #0056ff;
   text-decoration: underline;
+  cursor: pointer;
 }
-.label__edit--secondary{
+.label__edit--secondary {
   color: #f68b33;
-  text-decoration: underline;
 }
 .summary__container {
   text-align: center;
@@ -167,20 +143,12 @@ text-align: start;
   border-radius: 5px;
   padding: 8px;
 }
-.table-header{
+.table-header {
   text-align: center;
-  background-color: #EDF6FF;
-  font-family: "KSP Bold";
+  background-color: #edf6ff;
   font-size: 16px;
-  border:  1px solid #ededee;
-  border-bottom:  0px ;
+  border: 1px solid #ededee;
+  border-bottom: 0px;
   padding: 14px;
   margin-top: 16px;
-}
-@font-face {
-  font-family: "KSP Regular";
-  src: URL("/assets/font/KSP/ttf/KSP\ Regular\ ver\ 1.00.ttf")
-    format("truetype");
-  font-family: "KSP Bold";
-  src: URL("/assets/font/KSP/KSP\ Bold\ ver\ 1.00.ttf") format("truetype");
 }
