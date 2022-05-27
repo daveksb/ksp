@@ -13,7 +13,7 @@ import { EServiceUiLicenseCheckModule } from '@ksp/e-service/ui/license-check';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SharedFeatureDegreeCertModule } from '@ksp/shared-feature-degree-cert';
-import { EServiceUiVerifyResultBoxModule, VerifyResultComponent } from '@ksp/e-service/ui/verify-result-box';
+import { EServiceUiVerifyResultBoxModule } from '@ksp/e-service/ui/verify-result-box';
 import { VerifyComponent } from './verify/verify.component';
 import { ConsiderComponent } from './consider/consider.component';
 import { ApproveComponent } from './approve/approve.component';
@@ -86,7 +86,6 @@ export const routes: Route[] = [
     StepThreeComponent,
     StepFourComponent,
     StepFiveComponent,
-    VerifyResultComponent,
     VerifyComponent,
     ConsiderComponent,
     ApproveComponent,
@@ -98,7 +97,6 @@ export const routes: Route[] = [
     StepThreeComponent,
     StepFourComponent,
     StepFiveComponent,
-    VerifyResultComponent,
     VerifyComponent,
     ConsiderComponent,
     ApproveComponent,
