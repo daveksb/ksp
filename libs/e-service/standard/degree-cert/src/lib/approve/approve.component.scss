@@ -1,0 +1,157 @@
+.container {
+  max-width: 100%;
+  padding-bottom: 80px;
+  background-color: #e5e5e5;
+}
+
+.check__form {
+  margin: 25px 60px;
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 24px;
+}
+
+.bottom__container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 1;
+}
+
+.title__label {
+  font-size: 22px;
+  color: #000000;
+  margin: 0 64px 12px 64px;
+  padding-top: 12px;
+}
+.content__container {
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 24px;
+  margin: 0px 64px;
+}
+
+.detail__header {
+  font-size: 22px;
+  color: #000000;
+  margin: 12px;
+}
+
+.table__container {
+  margin-bottom: 25px;
+}
+
+.table {
+  background-color: #fff;
+  border: 1px solid #eceef2;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  margin: 0 12px;
+}
+
+.table > :not(:first-child) {
+  border-top: 0;
+}
+
+.header__table {
+  background-color: #edf6ff;
+  font-size: 16px;
+  white-space: nowrap;
+  color: #000000;
+}
+
+.body__table {
+  font-size: 16px;
+  color: #000000;
+  white-space: nowrap;
+}
+
+.table__header {
+  margin: 12px;
+  color: #0056ff;
+  font-size: 18px;
+}
+
+.table__header-2 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn__view {
+  background-color: #0056ff;
+  color: #fff;
+  border: 1px solid #0056ff;
+  height: 40px;
+  border-radius: 4px;
+  font-size: 20px;
+}
+
+.btn__upload {
+  background-color: #0056ff;
+  color: #fff;
+  border: 1px solid #0056ff;
+  height: 40px;
+  border-radius: 4px;
+  margin: 0 12px;
+  font-size: 16px;
+}
+
+.content__header {
+  display: flex;
+}
+.label__content {
+  font-size: 18px;
+  color: #808080;
+  margin-right: 24px;
+}
+.label__content--primary {
+  color: #f68b33;
+}
+.label__content--secondary {
+  color: #0056ff;
+}
+
+.result__container {
+  display: flex;
+}
+
+.approve__detail {
+  background-color: #f9f9fa;
+  padding: 16px;
+  margin-top: 24px;
+}
+
+.content__container-1 {
+  display: grid;
+  grid-template-columns: 15% 1fr 1.5fr;
+  grid-column-gap: 18px;
+}
+
+.content__container-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 18px;
+}
+
+.btn__upload-2 {
+  background-color: #0056ff;
+  color: #fff;
+  border: 1px solid #0056ff;
+  width: 100px;
+  margin-bottom: 12px 0;
+}
+
+.upload__label {
+  display: flex;
+}
+
+.form-label-2 {
+  font-size: 16px;
+  color: red;
+  margin-left: 5px;
+  line-height: 28px;
+}
