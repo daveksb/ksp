@@ -77,4 +77,12 @@ export class DegreeCertListComponent {
   onClear() {
     this.data = [];
   }
+
+  consider() {
+    this.router.navigate(['./', 'degree-cert', 'verify']);
+  }
+  approve() {
+    this.router.navigate(['./', 'degree-cert', 'verify']);
+  }
+
 }

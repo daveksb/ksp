@@ -15,6 +15,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { VerifyResultComponent } from './verify-result/verify-result.component';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedFeatureDegreeCertModule } from '@ksp/shared-feature-degree-cert';
+import { VerifyComponent } from './verify/verify.component';
+import { ConsiderComponent } from './consider/consider.component';
+import { ApproveComponent } from './approve/approve.component';
 
 export const routes: Route[] = [
   {
@@ -50,6 +53,18 @@ export const routes: Route[] = [
         path: 'step-5',
         component: StepFiveComponent,
       },
+      {
+        path: 'verify',
+        component: VerifyComponent,
+      },
+      {
+        path: 'consider',
+        component: ConsiderComponent,
+      },
+      {
+        path: 'approve',
+        component: ApproveComponent,
+      },
     ],
   },
 ];
@@ -73,6 +88,9 @@ export const routes: Route[] = [
     StepFourComponent,
     StepFiveComponent,
     VerifyResultComponent,
+    VerifyComponent,
+    ConsiderComponent,
+    ApproveComponent,
   ],
   exports: [
     DegreeCertListComponent,
@@ -82,6 +100,9 @@ export const routes: Route[] = [
     StepFourComponent,
     StepFiveComponent,
     VerifyResultComponent,
+    VerifyComponent,
+    ConsiderComponent,
+    ApproveComponent,
   ],
 })
 export class EServiceStandardDegreeCertModule {}

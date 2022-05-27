@@ -60,15 +60,15 @@ export const standardMenu: MenuConfig[] = [
     subMenuName: 'degree-cert',
     subMenu: [
       {
-        path: 'aa',
+        path: 'degree-cert/list',
         label: 'รายการใบคำขอรับรองปริญญาและประกาศนียบัตร',
       },
       {
-        path: 'bb',
+        path: 'degree-cert/list',
         label: 'ประเมินหลักสูตรและโครงสร้างหลักสูตร',
       },
       {
-        path: 'cc',
+        path: 'degree-cert/list',
         label: 'พิจารณาและออกใบรับรองปริญญาและประกาศนียบัตร',
       },
     ],
