@@ -1,75 +1,134 @@
-<table mat-table [dataSource]="dataSource">
-  <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema">
-    <th mat-header-cell *matHeaderCellDef>
-      {{ col.label }}
-    </th>
-    <td mat-cell *matCellDef="let element">
-      <div [ngSwitch]="col.type" *ngIf="!element.isEdit">
-        <ng-container *ngSwitchCase="'isSelected'">
-          <mat-checkbox
-            (change)="element.isSelected = $event.checked"
-          ></mat-checkbox>
-        </ng-container>
-        <div class="btn-edit" *ngSwitchCase="'isEdit'">
-          <button mat-button (click)="element.isEdit = !element.isEdit">
-            Edit
-          </button>
+<div class="container">
+  <div class="title__label">
+    รายละเอียดใบคำขอ > <span>ขอยื่นรายชื่อผู้เข้าศึกษา</span>
+  </div>
+  <div class="content__container">
+    <div class="content__header">
+      <div class="label__content">
+        วันที่ทำรายการ :
+        <span class="label__content--primary">10 ตุลาคม 2565</span>
+      </div>
+      <div class="label__content">
+        เลขใบคำขอ :
+        <span class="label__content--secondary">112234467876543</span>
+      </div>
+    </div>
+    <hr />
+
+    <div class="detail__container">
+      <div class="header__detail">
+        <div class="detail__header">ขอยื่นรายชื่อผู้เข้าศึกษา</div>
+        <div>
           <button
-            mat-button
-            class="button-remove"
-            (click)="removeRow(element.id)"
+            type="button"
+            class="btn btn-upload-secondary btn-sm label__button"
           >
-            Delete
+            <img src="/assets/images/img-uni/microsoft excel.png" />
+            ดาวน์โหลดแบบฟอร์ม
+          </button>
+          <button type="button" class="btn btn-upload btn-sm label__button">
+            <img src="/assets/images/img-uni/Upload.svg" /> อัพโหลดไฟล์
           </button>
         </div>
-        <span *ngSwitchCase="'date'">
-          {{ element[col.key] | date: 'mediumDate' }}
-        </span>
-        <span *ngSwitchDefault>
-          {{ element[col.key] }}
-        </span>
       </div>
-      <div [ngSwitch]="col.type" *ngIf="element.isEdit">
-        <div *ngSwitchCase="'isSelected'"></div>
-        <div class="btn-edit" *ngSwitchCase="'isEdit'">
-          <button
-            mat-button
-            (click)="editRow(element)"
-            [disabled]="disableSubmit(element.id)"
+
+      <div class="table">
+        <table mat-table [dataSource]="dataSource">
+          <ng-container
+            [matColumnDef]="col.key"
+            *ngFor="let col of columnsSchema"
           >
-            Done
+            <th mat-header-cell *matHeaderCellDef>
+              {{ col.label }}
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <div [ngSwitch]="col.type" *ngIf="!element.isEdit">
+                <ng-container *ngSwitchCase="'isSelected'">
+                  <mat-checkbox
+                    (change)="element.isSelected = $event.checked"
+                  ></mat-checkbox>
+                </ng-container>
+                <div class="btn-edit" *ngSwitchCase="'isEdit'">
+                  <button mat-button (click)="element.isEdit = !element.isEdit">
+                    Edit
+                  </button>
+                  <button
+                    mat-button
+                    class="button-remove"
+                    (click)="removeRow(element.id)"
+                  >
+                    Delete
+                  </button>
+                </div>
+                <span *ngSwitchCase="'date'">
+                  {{ element[col.key] | date: 'mediumDate' }}
+                </span>
+                <span *ngSwitchDefault>
+                  {{ element[col.key] }}
+                </span>
+              </div>
+              <div [ngSwitch]="col.type" *ngIf="element.isEdit">
+                <div *ngSwitchCase="'isSelected'"></div>
+                <div class="btn-edit" *ngSwitchCase="'isEdit'">
+                  <button
+                    mat-button
+                    (click)="editRow(element)"
+                    [disabled]="disableSubmit(element.id)"
+                  >
+                    Done
+                  </button>
+                </div>
+                <mat-form-field
+                  class="form-input"
+                  *ngSwitchCase="'date'"
+                  appearance="fill"
+                >
+                  <mat-label>Choose a date</mat-label>
+                  <input
+                    matInput
+                    [matDatepicker]="picker"
+                    [(ngModel)]="element[col.key]"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class="form-input" *ngSwitchDefault>
+                  <input
+                    matInput
+                    [required]="col.required"
+                    [pattern]="col.pattern"
+                    [type]="col.type"
+                    [(ngModel)]="element[col.key]"
+                    (change)="inputHandler($event, element.id, col.key)"
+                  />
+                </mat-form-field>
+              </div>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <div class="detail__footer">
+          <button type="button" class="btn btn-add">
+            <img
+              src="/assets/images/img-uni/add-icon.svg"
+              class="icon__add"
+            />เพิ่มรายชื่อ
           </button>
         </div>
-        <mat-form-field
-          class="form-input"
-          *ngSwitchCase="'date'"
-          appearance="fill"
-        >
-          <mat-label>Choose a date</mat-label>
-          <input
-            matInput
-            [matDatepicker]="picker"
-            [(ngModel)]="element[col.key]"
-          />
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="picker"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field class="form-input" *ngSwitchDefault>
-          <input
-            matInput
-            [required]="col.required"
-            [pattern]="col.pattern"
-            [type]="col.type"
-            [(ngModel)]="element[col.key]"
-            (change)="inputHandler($event, element.id, col.key)"
-          />
-        </mat-form-field>
       </div>
-    </td>
-  </ng-container>
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
+    </div>
+  </div>
+</div>
+
+<div class="bottom__container">
+  <div class="footer">
+    <button (click)="cancel()" class="btn-primary">ยกเลิก</button>
+    <button class="btn-secondary">บันทึกชั่วคราว</button>
+    <button (click)="save()" class="btn-third">บันทึกและยื่นใบคำขอ</button>
+  </div>
+</div>
