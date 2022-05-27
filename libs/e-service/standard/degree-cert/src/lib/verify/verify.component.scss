@@ -9,13 +9,13 @@
 .content__container {
   background-color: #f9f9fa;
   padding: 24px;
-  margin: 24px;
+  margin: 12px 24px;
 }
 
 .box__title {
   font-size: 22px;
-  padding-left: 15px;
-  padding-top: 15px;
+  padding-left: 24px;
+  padding-top: 12px;
 }
 
 .top-container {
@@ -30,7 +30,7 @@
 
 .table-responsive {
   overflow-x: auto;
-  margin: 10px;
+  margin: 0 12px;
 }
 
 .table > :not(:first-child) {
@@ -76,4 +76,37 @@
   background-color: white;
   margin: 12px 24px;
   padding: 24px;
+}
+
+.form-select {
+  font-size: 20px;
+}
+
+.header {
+  color: #0056ff;
+  font-size: 18px;
+  margin: 12px 24px;
+}
+
+.table__container {
+  margin: 0 12px;
+}
+
+.btn__upload {
+  background-color: #0056ff;
+  color: #fff;
+  border: 1px solid #0056ff;
+  width: 100px;
+  margin-bottom: 12px;
+}
+
+.upload__label {
+  display: flex;
+}
+
+.form-label-2 {
+  font-size: 16px;
+  color: red;
+  margin-left: 5px;
+  line-height: 28px;
 }
