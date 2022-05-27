@@ -8,6 +8,10 @@ import { Router } from '@angular/router';
 export class StepTwoComponent {
   constructor(private router: Router) {}
 
+  cancel() {
+    this.router.navigate(['./', 'degree-cert']);
+  }
+
   nextPage() {
     this.router.navigate(['./', 'degree-cert', 'step-3']);
   }

@@ -9,7 +9,8 @@ export class BottomMenuComponent {
   @Output() prevClicked = new EventEmitter<boolean>();
   @Output() nextClicked = new EventEmitter<boolean>();
   @Output() saveClicked = new EventEmitter<boolean>();
+  @Output() cancelClicked = new EventEmitter<boolean>();
 
-  @Input() isLastPage = false
-  @Input() isFirstPage = false
+  @Input() isLastPage = false;
+  @Input() isFirstPage = false;
 }
