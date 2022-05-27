@@ -1,0 +1,17 @@
+<div class="content__container">
+  <div class="header__label">ครั้งที่ {{ number }}</div>
+
+  <div
+    class="content__base"
+    [ngClass]="{
+      content__valid: isBasicValid,
+      content__invalid: !isBasicValid
+    }"
+  >
+    <mat-icon *ngIf="isBasicValid">check_circle_outline</mat-icon
+    ><mat-icon *ngIf="!isBasicValid">highlight_off</mat-icon> {{ name }}
+  </div>
+
+  <div class="content__label">วันที่ 12 เมษายน 2564</div>
+  <div class="content__label">โดย นางสาวญาดา ทิ่งทอง</div>
+</div>

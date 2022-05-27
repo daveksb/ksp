@@ -8,7 +8,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class VerifyComponent implements OnInit {
   titlesConsider = ['ผ่านการพิจารณา', 'ไม่ผ่านการพิจารณา'];
-  titlesApprove = ['ผ่านการพิจารณา', 'ไม่ผ่านการพิจารณา', 'ให้สถาบันแก้ไข / เพิ่มเติม', 'ส่งคืน', 'ยกเลิกการรับรอง'];
+  titlesApprove = [
+    'ผ่านการพิจารณา',
+    'ไม่ผ่านการพิจารณา',
+    'ให้สถาบันแก้ไข / เพิ่มเติม',
+    'ส่งคืน',
+    'ยกเลิกการรับรอง',
+  ];
   processType = 1;
   constructor(private router: Router, private route: ActivatedRoute) {}
 
@@ -19,6 +25,10 @@ export class VerifyComponent implements OnInit {
     });
   }
 
+  cancel() {
+    this.router.navigate(['./', 'degree-cert', 'list', '2']);
+  }
+
   prev() {
     if (this.processType === 2)
       this.router.navigate(['./', 'degree-cert', 'list', '2']);
@@ -26,7 +36,6 @@ export class VerifyComponent implements OnInit {
     if (this.processType === 3)
       this.router.navigate(['./', 'degree-cert', 'list', '3']);
   }
-
 
   next() {
     if (this.processType === 2)
