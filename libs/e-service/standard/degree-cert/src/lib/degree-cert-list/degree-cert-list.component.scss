@@ -43,3 +43,46 @@
   color: #000000;
   white-space: nowrap;
 }
+
+.footer {
+  display: flex;
+  justify-content: center;
+  margin-left: 237px;
+  padding: 0 60px;
+  border: 1px solid #dadde1;
+}
+
+.bottom__container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 1;
+}
+
+.btn-primary {
+  font-size: 20px;
+  background: #f68b33;
+  border: 1px solid #f68b33;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 4px rgba(102, 108, 139, 0.1);
+  border-radius: 1px;
+  color: #fff;
+  padding: 4px 48px;
+  margin: 14px;
+  width: 350px;
+}
+
+.btn-secondary {
+  font-size: 20px;
+  background: #0056ff;
+  border: 1px solid #0056ff;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 4px rgba(102, 108, 139, 0.1);
+  border-radius: 1px;
+  color: #fff;
+  padding: 4px 48px;
+  margin: 14px;
+  width: 350px;
+}
