@@ -1,0 +1,18 @@
+{
+  "projectType": "library",
+  "root": "libs/e-service/ui/verify-result-box",
+  "sourceRoot": "libs/e-service/ui/verify-result-box/src",
+  "prefix": "ksp",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/e-service/ui/verify-result-box/**/*.ts",
+          "libs/e-service/ui/verify-result-box/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
