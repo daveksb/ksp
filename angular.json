@@ -11,6 +11,7 @@
     "e-service-standard-degree-cert": "libs/e-service/standard/degree-cert",
     "e-service-standard-graduate-list": "libs/e-service/standard/graduate-list",
     "e-service-ui-license-check": "libs/e-service/ui/license-check",
+    "e-service-ui-verify-result-box": "libs/e-service/ui/verify-result-box",
     "school-service": "apps/school-service",
     "school-service-feature-container-page": "libs/school-service/feature/container-page",
     "school-service-feature-login": "libs/school-service/feature/login",

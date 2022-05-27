@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export interface DegreeCertInfo {
   degreeId: string;
@@ -62,9 +62,17 @@ export const data: DegreeCertInfo[] = [
   templateUrl: './degree-cert-list.component.html',
   styleUrls: ['./degree-cert-list.component.scss'],
 })
-export class DegreeCertListComponent {
+export class DegreeCertListComponent implements OnInit {
   data: DegreeCertInfo[] = [];
-  constructor(private router: Router) {}
+  processType = 1;
+  constructor(private router: Router, private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.route.paramMap.subscribe((res) => {
+      this.processType = Number(res.get('type'));
+      console.log('process type = ', this.processType);
+    });
+  }
 
   onSearch() {
     this.data = data;

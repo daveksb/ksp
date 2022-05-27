@@ -12,9 +12,8 @@ import { StepFiveComponent } from './step-five/step-five.component';
 import { EServiceUiLicenseCheckModule } from '@ksp/e-service/ui/license-check';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import { MatDialogModule } from '@angular/material/dialog';
-import { VerifyResultComponent } from './verify-result/verify-result.component';
-import { MatIconModule } from '@angular/material/icon';
 import { SharedFeatureDegreeCertModule } from '@ksp/shared-feature-degree-cert';
+import { EServiceUiVerifyResultBoxModule, VerifyResultComponent } from '@ksp/e-service/ui/verify-result-box';
 import { VerifyComponent } from './verify/verify.component';
 import { ConsiderComponent } from './consider/consider.component';
 import { ApproveComponent } from './approve/approve.component';
@@ -30,7 +29,7 @@ export const routes: Route[] = [
         pathMatch: 'full',
       },
       {
-        path: 'list',
+        path: 'list/:type',
         component: DegreeCertListComponent,
       },
       {
@@ -78,7 +77,7 @@ export const routes: Route[] = [
     EServiceUiLicenseCheckModule,
     SharedUiDegreeCertSearchFormModule,
     MatDialogModule,
-    MatIconModule,
+    EServiceUiVerifyResultBoxModule,
   ],
   declarations: [
     DegreeCertListComponent,
