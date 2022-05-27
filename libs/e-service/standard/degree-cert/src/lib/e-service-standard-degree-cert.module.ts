@@ -26,7 +26,7 @@ export const routes: Route[] = [
         pathMatch: 'full',
       },
       {
-        path: 'list',
+        path: 'list/:type',
         component: DegreeCertListComponent,
       },
       {
