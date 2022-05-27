@@ -54,6 +54,7 @@ export class DegreeCertListComponent implements OnInit {
     'editDate',
     'verify',
     'consider',
+    'print',
   ];
 
   constructor(private router: Router, private route: ActivatedRoute) {}
