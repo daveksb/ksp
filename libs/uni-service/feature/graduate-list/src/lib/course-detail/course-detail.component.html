@@ -313,7 +313,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr *ngFor="let row of rows">
             <th scope="row" class="detail__table--secondary">แผนฯ ปีที่ 1</th>
 
             <td class="detail__table">
@@ -328,7 +328,7 @@
             <td class="detail__table">
               <div>
                 150 / 150
-                <span class="label__edit"
+                <span (click)="goToStudentList()" class="label__edit"
                   ><img src="/assets/images/img-uni/Edit.svg" />
                   รายชื่อนักศึกษา</span
                 >
@@ -337,106 +337,16 @@
             <td class="detail__table">
               <div>
                 100 / 150
-                <span class="label__edit--secondary"
+                <span
+                  (click)="goToGraduateList()"
+                  class="label__edit label__edit--secondary"
                   ><img src="/assets/images/img-uni/Edit-2.svg" />
                   รายชื่อนักศึกษา</span
                 >
               </div>
             </td>
           </tr>
-          <tr>
-            <th scope="row" class="detail__table--secondary">แผนฯ ปีที่ 2</th>
 
-            <td class="detail__table">
-              <div>2565</div>
-            </td>
-            <td class="detail__table">
-              <div>แผน ก</div>
-            </td>
-            <td class="detail__table">
-              <div>150</div>
-            </td>
-            <td class="detail__table">
-              <div>
-                150 / 150
-                <span class="label__edit"
-                  ><img src="/assets/images/img-uni/Edit.svg" />
-                  รายชื่อนักศึกษา</span
-                >
-              </div>
-            </td>
-            <td class="detail__table">
-              <div>
-                0 / 150
-                <span class="label__edit--secondary"
-                  ><img src="/assets/images/img-uni/Edit-2.svg" />
-                  รายชื่อนักศึกษา</span
-                >
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row" class="detail__table--secondary">แผนฯ ปีที่ 3</th>
-
-            <td class="detail__table">
-              <div>2566</div>
-            </td>
-            <td class="detail__table">
-              <div>แผน ก</div>
-            </td>
-            <td class="detail__table">
-              <div>150</div>
-            </td>
-            <td class="detail__table">
-              <div>
-                0 / 150
-                <span class="label__edit"
-                  ><img src="/assets/images/img-uni/Edit.svg" />
-                  รายชื่อนักศึกษา</span
-                >
-              </div>
-            </td>
-            <td class="detail__table">
-              <div>
-                0 / 150
-                <span class="label__edit--secondary"
-                  ><img src="/assets/images/img-uni/Edit-2.svg" />
-                  รายชื่อนักศึกษา</span
-                >
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row" class="detail__table--secondary">แผนฯ ปีที่ 4</th>
-
-            <td class="detail__table">
-              <div>2567</div>
-            </td>
-            <td class="detail__table">
-              <div>แผน ค</div>
-            </td>
-            <td class="detail__table">
-              <div>100</div>
-            </td>
-            <td class="detail__table">
-              <div>
-                0 / 100
-                <span class="label__edit"
-                  ><img src="/assets/images/img-uni/Edit.svg" />
-                  รายชื่อนักศึกษา</span
-                >
-              </div>
-            </td>
-            <td class="detail__table">
-              <div>
-                0 / 100
-                <span class="label__edit--secondary"
-                  ><img src="/assets/images/img-uni/Edit-2.svg" />
-                  รายชื่อนักศึกษา</span
-                >
-              </div>
-            </td>
-          </tr>
           <tr>
             <th scope="row" class="label__table--footer"></th>
             <td class="detail__table"></td>
