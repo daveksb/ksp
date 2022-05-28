@@ -1,15 +1,26 @@
-export interface User {
-  isSelected: boolean;
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
+export interface StudentImport {
+  order: number;
+  startDate: string;
+  personId: string;
+  titleTh: string;
+  firstNameTh: string;
+  lastNameTh: string;
+  titleEn: string;
+  firstNameEn: string;
+  middleNameEn?: string;
+  lastNameEn: string;
+  phone: string;
   birthDate: string;
-  isEdit: boolean;
+  address: string;
+
+  approveTime?: number;
+  graduateDate?: string;
+  approveDate?: string;
+  trainingAddress?: string;
 }
 
 export const UserColumns = [
-  {
+  /* {
     key: 'isSelected',
     type: 'isSelected',
     label: '',
@@ -41,5 +52,71 @@ export const UserColumns = [
     key: 'isEdit',
     type: 'isEdit',
     label: '',
+  }, */
+
+  {
+    key: 'order',
+    type: 'text',
+    label: 'ลำดับ',
+  },
+  {
+    key: 'startDate',
+    type: 'text',
+    label: 'วันที่รับเข้า',
+  },
+  {
+    key: 'personId',
+    type: 'text',
+    label: 'เลขบัตรประจำตัวประชาชน',
+  },
+  {
+    key: 'titleTh',
+    type: 'text',
+    label: 'คำนำหน้าชื่อ(ไทย)',
+  },
+  {
+    key: 'firstNameTh',
+    type: 'text',
+    label: 'ชื่อ(ไทย)',
+  },
+  {
+    key: 'lastNameTh',
+    type: 'text',
+    label: 'นามสกุล(ไทย)',
+  },
+  {
+    key: 'titleEn',
+    type: 'text',
+    label: 'คำนำหน้าชื่อ(อังกฤษ)',
+  },
+  {
+    key: 'firstNameEn',
+    type: 'text',
+    label: 'ชื่อ(อังกฤษ)',
+  },
+  {
+    key: 'middleNameEn?',
+    type: 'text',
+    label: 'ชื่อกลาง(อังกฤษ)',
+  },
+  {
+    key: 'lastNameEn',
+    type: 'text',
+    label: 'นามสกุล(อังกฤษ)',
+  },
+  {
+    key: 'phone',
+    type: 'text',
+    label: 'เบอร์โทรศัพท์',
+  },
+  {
+    key: 'birthDate',
+    type: 'text',
+    label: 'วัน/เดือน/ปีเกิด(พ.ศ.)',
+  },
+  {
+    key: 'address',
+    type: 'text',
+    label: 'ที่อยู่',
   },
 ];

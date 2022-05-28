@@ -6,7 +6,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/ui/dialog';
-import { User, UserColumns } from './user';
+import { StudentImport, UserColumns } from './user';
 import { UserService } from './user.service';
 
 @Component({
@@ -17,7 +17,7 @@ import { UserService } from './user.service';
 export class ImportStudentComponent implements OnInit {
   displayedColumns: string[] = UserColumns.map((col) => col.key);
   columnsSchema: any = UserColumns;
-  dataSource = new MatTableDataSource<User>();
+  dataSource = new MatTableDataSource<StudentImport>();
   valid: any = {};
 
   constructor(
@@ -71,22 +71,23 @@ export class ImportStudentComponent implements OnInit {
     this.userService.getUsers().subscribe((res: any) => {
       //this.dataSource.data = res;
       console.log('res = ', res);
+      this.dataSource.data = res;
     });
   }
 
-  editRow(row: User) {
-    if (row.id === 0) {
-      this.userService.addUser(row).subscribe((newUser: User) => {
+  editRow(row: StudentImport) {
+    /* if (row.id === 0) {
+      this.userService.addUser(row).subscribe((newUser: StudentImport) => {
         row.id = newUser.id;
         row.isEdit = false;
       });
     } else {
       this.userService.updateUser(row).subscribe(() => (row.isEdit = false));
-    }
+    } */
   }
 
   addRow() {
-    const newRow: User = {
+    /* const newRow: StudentImport = {
       id: 0,
       firstName: '',
       lastName: '',
@@ -95,19 +96,21 @@ export class ImportStudentComponent implements OnInit {
       isEdit: true,
       isSelected: false,
     };
-    this.dataSource.data = [newRow, ...this.dataSource.data];
+    this.dataSource.data = [newRow, ...this.dataSource.data]; */
   }
 
   removeRow(id: number) {
-    this.userService.deleteUser(id).subscribe(() => {
+    /*  this.userService.deleteUser(id).subscribe(() => {
       this.dataSource.data = this.dataSource.data.filter(
-        (u: User) => u.id !== id
+        (u: StudentImport) => u.id !== id
       );
-    });
+    }); */
   }
 
   removeSelectedRows() {
-    const users = this.dataSource.data.filter((u: User) => u.isSelected);
+    /* const users = this.dataSource.data.filter(
+      (u: StudentImport) => u.isSelected
+    );
     this.dialog
       .open(ConfirmDialogComponent)
       .afterClosed()
@@ -115,11 +118,11 @@ export class ImportStudentComponent implements OnInit {
         if (confirm) {
           this.userService.deleteUsers(users).subscribe(() => {
             this.dataSource.data = this.dataSource.data.filter(
-              (u: User) => !u.isSelected
+              (u: StudentImport) => !u.isSelected
             );
           });
         }
-      });
+      }); */
   }
 
   inputHandler(e: any, id: number, key: string) {
