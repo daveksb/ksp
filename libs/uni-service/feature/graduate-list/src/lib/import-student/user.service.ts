@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { forkJoin, Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { User } from './user';
 
 export interface StudentImport {
+  id: number;
   order: number;
   startDate: string;
   personId: string;
@@ -25,33 +25,66 @@ export interface StudentImport {
   trainingAddress?: string;
 }
 
-const data: StudentImport = {
-  order: 1,
-  startDate: 'fafafa',
-  personId: 'afafa',
-  titleTh: 'นาย',
-  firstNameTh: 'อดิศร',
-  lastNameTh: 'อัศวิน',
-  titleEn: 'mr',
-  firstNameEn: 'adisorn',
-  lastNameEn: 'assawin',
-  phone: '124547878',
-  birthDate: 'fslgjs',
-  address: 'afafafa',
-};
+const data: StudentImport[] = [
+  {
+    id: 1,
+    order: 1,
+    startDate: 'fafafa',
+    personId: 'afafa',
+    titleTh: 'นาย',
+    firstNameTh: 'อดิศร',
+    lastNameTh: 'อัศวิน',
+    titleEn: 'mr',
+    firstNameEn: 'adisorn',
+    lastNameEn: 'assawin',
+    phone: '124547878',
+    birthDate: 'fslgjs',
+    address: 'afafafa',
+  },
+  {
+    id: 2,
+    order: 1,
+    startDate: 'fafafa',
+    personId: 'afafa',
+    titleTh: 'นาย',
+    firstNameTh: 'อดิศร',
+    lastNameTh: 'อัศวิน',
+    titleEn: 'mr',
+    firstNameEn: 'adisorn',
+    lastNameEn: 'assawin',
+    phone: '124547878',
+    birthDate: 'fslgjs',
+    address: 'afafafa',
+  },
+  {
+    id: 3,
+    order: 1,
+    startDate: 'fafafa',
+    personId: 'afafa',
+    titleTh: 'นาย',
+    firstNameTh: 'อดิศร',
+    lastNameTh: 'อัศวิน',
+    titleEn: 'mr',
+    firstNameEn: 'adisorn',
+    lastNameEn: 'assawin',
+    phone: '124547878',
+    birthDate: 'fslgjs',
+    address: 'afafafa',
+  },
+];
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  students: StudentImport[] = [];
+  //students: StudentImport[] = [];
   private serviceUrl = 'https://dummyjson.com/users';
   constructor(private http: HttpClient) {
-    let temp: StudentImport[] = [];
+    /*     let temp: StudentImport[] = [];
     for (let index = 0; index < 30; index++) {
       temp = [...temp, data];
     }
-    this.students = temp;
+    this.students = temp; */
   }
 
   /* getUsers(): Observable<User[]> {
@@ -62,7 +95,7 @@ export class UserService {
  */
 
   getUsers(): Observable<StudentImport[]> {
-    return of(this.students);
+    return of(data);
   }
 
   updateUser(user: User): Observable<User> {

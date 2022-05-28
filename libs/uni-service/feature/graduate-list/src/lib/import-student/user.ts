@@ -1,15 +1,67 @@
 export interface User {
-  isSelected: boolean;
+  /*   isSelected: boolean;
   id: number;
   firstName: string;
   lastName: string;
   email: string;
   birthDate: string;
+  isEdit: boolean; */
+  id: number;
+  order: number;
+  startDate: string;
+  personId: string;
+  titleTh: string;
+  firstNameTh: string;
+  lastNameTh: string;
+  titleEn: string;
+  firstNameEn: string;
+  middleNameEn?: string;
+  lastNameEn: string;
+  phone: string;
+  birthDate: string;
+  address: string;
+
+  approveTime?: number;
+  graduateDate?: string;
+  approveDate?: string;
+  trainingAddress?: string;
+
   isEdit: boolean;
+  isSelected: boolean;
 }
 
 export const UserColumns = [
   {
+    key: 'isSelected',
+    type: 'isSelected',
+    label: '',
+  },
+  {
+    key: 'titleTh',
+    type: 'text',
+    label: 'titleTh',
+  },
+  {
+    key: 'lastNameTh',
+    type: 'text',
+    label: 'Last Name',
+  },
+  {
+    key: 'firstNameTh',
+    type: 'text',
+    label: 'firstNameTh',
+  },
+  {
+    key: 'phone',
+    type: 'text',
+    label: 'phone',
+  },
+  {
+    key: 'isEdit',
+    type: 'isEdit',
+    label: '',
+  },
+  /*   {
     key: 'isSelected',
     type: 'isSelected',
     label: '',
@@ -41,5 +93,5 @@ export const UserColumns = [
     key: 'isEdit',
     type: 'isEdit',
     label: '',
-  },
+  }, */
 ];

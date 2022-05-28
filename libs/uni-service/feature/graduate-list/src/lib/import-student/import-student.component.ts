@@ -69,24 +69,25 @@ export class ImportStudentComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getUsers().subscribe((res: any) => {
-      //this.dataSource.data = res;
-      console.log('res = ', res);
+      this.dataSource.data = res;
+      //console.log('res = ', res);
     });
   }
 
   editRow(row: User) {
-    if (row.id === 0) {
+    /*     if (row.id === 0) {
       this.userService.addUser(row).subscribe((newUser: User) => {
         row.id = newUser.id;
         row.isEdit = false;
       });
     } else {
       this.userService.updateUser(row).subscribe(() => (row.isEdit = false));
-    }
+    } */
+    row.isEdit = false;
   }
 
   addRow() {
-    const newRow: User = {
+    /*     const newRow: User = {
       id: 0,
       firstName: '',
       lastName: '',
@@ -95,19 +96,19 @@ export class ImportStudentComponent implements OnInit {
       isEdit: true,
       isSelected: false,
     };
-    this.dataSource.data = [newRow, ...this.dataSource.data];
+    this.dataSource.data = [newRow, ...this.dataSource.data]; */
   }
 
   removeRow(id: number) {
-    this.userService.deleteUser(id).subscribe(() => {
+    /*     this.userService.deleteUser(id).subscribe(() => {
       this.dataSource.data = this.dataSource.data.filter(
         (u: User) => u.id !== id
       );
-    });
+    }); */
   }
 
   removeSelectedRows() {
-    const users = this.dataSource.data.filter((u: User) => u.isSelected);
+    /*     const users = this.dataSource.data.filter((u: User) => u.isSelected);
     this.dialog
       .open(ConfirmDialogComponent)
       .afterClosed()
@@ -119,7 +120,7 @@ export class ImportStudentComponent implements OnInit {
             );
           });
         }
-      });
+      }); */
   }
 
   inputHandler(e: any, id: number, key: string) {
