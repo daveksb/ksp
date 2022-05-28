@@ -11,7 +11,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-
+import { TableModule } from 'primeng/table';
 @NgModule({
   imports: [
     CommonModule,
@@ -23,6 +23,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatInputModule,
     MatDatepickerModule,
     MatCheckboxModule,
+    TableModule,
   ],
   declarations: [
     CourseSearchComponent,

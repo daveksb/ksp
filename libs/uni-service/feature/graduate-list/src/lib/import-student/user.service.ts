@@ -3,29 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { forkJoin, Observable, of } from 'rxjs';
 import { User } from './user';
 
-export interface StudentImport {
-  id: number;
-  order: number;
-  startDate: string;
-  personId: string;
-  titleTh: string;
-  firstNameTh: string;
-  lastNameTh: string;
-  titleEn: string;
-  firstNameEn: string;
-  middleNameEn?: string;
-  lastNameEn: string;
-  phone: string;
-  birthDate: string;
-  address: string;
-
-  approveTime?: number;
-  graduateDate?: string;
-  approveDate?: string;
-  trainingAddress?: string;
-}
-
-const data: StudentImport[] = [
+const data: User[] = [
   {
     id: 1,
     order: 1,
@@ -77,7 +55,6 @@ const data: StudentImport[] = [
   providedIn: 'root',
 })
 export class UserService {
-  //students: StudentImport[] = [];
   private serviceUrl = 'https://dummyjson.com/users';
   constructor(private http: HttpClient) {
     /*     let temp: StudentImport[] = [];
@@ -94,7 +71,7 @@ export class UserService {
   }
  */
 
-  getUsers(): Observable<StudentImport[]> {
+  getUsers(): Observable<User[]> {
     return of(data);
   }
 
