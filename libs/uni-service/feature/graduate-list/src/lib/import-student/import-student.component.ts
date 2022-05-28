@@ -69,7 +69,8 @@ export class ImportStudentComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getUsers().subscribe((res: any) => {
-      this.dataSource.data = res;
+      //this.dataSource.data = res;
+      console.log('res = ', res);
     });
   }
 

@@ -1,24 +1,7 @@
-.main-container {
-  background-color: #e5e5e5;
-  height: auto;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
 .top-container {
   background-color: white;
   margin: 15px;
   width: 75%;
-}
-
-.bottom-container {
-  background-color: white;
-  margin: 15px 15px;
-}
-
-.bottom-content {
-  margin: 10px;
 }
 
 .box__container {
@@ -34,13 +17,6 @@
 .box__title {
   font-size: 20px;
   color: #000;
-}
-
-.table__title {
-  font-size: 22px;
-  color: #000;
-  display: flex;
-  justify-content: space-between;
 }
 
 .detail__container {
@@ -73,12 +49,6 @@
   width: 100px;
   border-radius: 4px;
 }
-.btn-secondary {
-  font-size: 16px;
-  background-color: #0056ff;
-  width: auto;
-  border-radius: 4px;
-}
 
 .btn-fourth {
   font-size: 16px;
@@ -90,36 +60,8 @@
   margin-right: 20px;
 }
 
-.table {
-  background-color: #fff;
-  border: 1px solid #eceef2;
-}
-
-.table > :not(:first-child) {
-  border-top: 0;
-}
-
-.header__table {
-  background-color: #edf6ff;
-  font-size: 16px;
-  white-space: nowrap;
-}
-
 .form__header {
   font-size: 16px;
   color: #000;
   padding-left: 15px;
-}
-
-.body__table {
-  font-size: 16px;
-  color: #000000;
-  white-space: nowrap;
-}
-
-.page__title {
-  padding-left: 15px;
-  padding-top: 15px;
-  font-size: 22px;
-  color: #000;
 }
