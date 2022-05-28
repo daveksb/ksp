@@ -30,6 +30,9 @@
       "@ksp/e-service/ethics/investigation": [
         "libs/e-service/ethics/investigation/src/index.ts"
       ],
+      "@ksp/e-service/ethics/publish": [
+        "libs/e-service/ethics/publish/src/index.ts"
+      ],
       "@ksp/e-service/ethics/report": [
         "libs/e-service/ethics/report/src/index.ts"
       ],
@@ -47,6 +50,9 @@
       ],
       "@ksp/e-service/standard/graduate-list": [
         "libs/e-service/standard/graduate-list/src/index.ts"
+      ],
+      "@ksp/e-service/ui/accusation-search": [
+        "libs/e-service/ui/accusation-search/src/index.ts"
       ],
       "@ksp/e-service/ui/license-check": [
         "libs/e-service/ui/license-check/src/index.ts"

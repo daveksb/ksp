@@ -1,0 +1,18 @@
+{
+  "projectType": "library",
+  "root": "libs/e-service/ui/accusation-search",
+  "sourceRoot": "libs/e-service/ui/accusation-search/src",
+  "prefix": "e-service",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/e-service/ui/accusation-search/**/*.ts",
+          "libs/e-service/ui/accusation-search/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
