@@ -46,6 +46,7 @@
           <hr />
 
           <e-service-license-check
+            [titles]="title"
             [reasons]="reason[0]"
           ></e-service-license-check>
         </mat-tab>
@@ -102,6 +103,7 @@
           <hr />
 
           <e-service-license-check
+            [titles]="title"
             [reasons]="reason[1]"
           ></e-service-license-check>
         </mat-tab>
@@ -112,6 +114,7 @@
           <hr />
 
           <e-service-license-check
+            [titles]="title"
             [reasons]="reason[2]"
           ></e-service-license-check>
         </mat-tab>
@@ -122,6 +125,7 @@
           <hr />
 
           <e-service-license-check
+            [titles]="title"
             [reasons]="reason[3]"
           ></e-service-license-check>
         </mat-tab>
@@ -134,11 +138,21 @@
   </div>
 </div>
 
-<div class="btn__container">
+<!-- <div class="btn__container">
   <button (click)="back()" class="btn__back">ย้อนกลับ</button>
   <div class="btn__container-2">
     <button class="btn-secondary">ยกเลิก</button>
     <button class="btn-primary">บันทึก</button>
   </div>
   <button (click)="next()" class="btn__next">ถัดไป</button>
+</div> -->
+
+<div class="bottom__container">
+  <ksp-bottom-menu
+    (cancelClicked)="cancel()"
+    (prevClicked)="prevPage()"
+    (nextClicked)="next()"
+    [showCenterButtons]="true"
+    [isFirstPage]="true"
+  ></ksp-bottom-menu>
 </div>

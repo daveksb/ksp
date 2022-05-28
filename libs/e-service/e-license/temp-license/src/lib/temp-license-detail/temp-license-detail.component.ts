@@ -8,10 +8,16 @@ import { Router } from '@angular/router';
 })
 export class TempLicenseDetailComponent implements OnInit {
   reason: string[][] = [];
+  title: string[] = [];
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
+    this.title = [
+      'ครบถ้วน และถูกต้อง',
+      'ไม่ครบถ้วน และไม่ถูกต้อง'
+    ]
+
     this.reason[0] = [
       'เลขบัตรประชาชนไม่ถูกต้อง',
       'คำนำหน้าไม่ถูกต้อง',
@@ -49,11 +55,15 @@ export class TempLicenseDetailComponent implements OnInit {
     ];
   }
 
+  cancel() {
+    this.router.navigate(['/', 'temp-license']);
+  }
+
   next() {
     this.router.navigate(['/', 'temp-license', 'forbidden']);
   }
 
-  back() {
+  prevPage() {
     this.router.navigate(['/', 'temp-license', 'list']);
   }
 }

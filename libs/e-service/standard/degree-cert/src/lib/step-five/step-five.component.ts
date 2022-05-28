@@ -45,7 +45,7 @@ export class StepFiveComponent {
 
   onConfirmed() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      height: '300px',
+      height: '250px',
       width: '350px',
       data: {
         header: 'ยืนยันข้อมูลสำเร็จ',

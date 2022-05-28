@@ -71,7 +71,7 @@
 
 .content__checkbox-3 {
   display: grid;
-  grid-template-columns: 25% 10% 15% 1fr;
+  grid-template-columns: 25% 12% 15% 1fr;
   grid-column-gap: 18px;
   margin: 10px 0;
 }
@@ -87,6 +87,7 @@
 .form-label {
   font-size: 18px;
   color: #656565;
+  text-align: end;
 }
 
 .top__container-2 {

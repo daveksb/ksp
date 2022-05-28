@@ -1,127 +1,135 @@
 <div class="container">
-  
-  <div class="img__process">
-    <img src="/assets/images/img-uni/Procees.png" />
+  <div class="title__label">รายละเอียดใบคำขอรับรองปริญญาและประกาศนียบัตร</div>
+  <div class="content__container">
+    <div class="content__header">
+      <div class="label__content">
+        วันที่ทำรายการ :
+        <span class="label__content--primary">10 ตุลาคม 2565</span>
+      </div>
+      <div class="label__content">
+        เลขใบคำขอ :
+        <span class="label__content--secondary">112234467876543</span>
+      </div>
+    </div>
+
+    <hr />
+
+    <ksp-degree-cert-step-one [isViewForm]="true"></ksp-degree-cert-step-one>
+
+    <div class="detail__container--secondary">
+      <div class="detail__header--secondary">
+        ผู้ประสานงาน<span class="label__text"
+          >*กรุณาระบุเจ้าหน้าที่ที่สำนักงานเลขาธิการสามารถติดต่อประสานงาน
+          แจ้งข้อมูลต่างๆที่เกี่ยวข้องกับการรับรองปริญญาฯเท่านั้น</span
+        >
+      </div>
+
+      <div class="detail__content--fifth">
+        <div>
+          <label for="exampleFormControlInput1" class="form-label"
+            >คำนำหน้าชื่อภาษาไทย</label
+          >
+          <select
+            class="search__content form-select form-select-sm"
+            aria-label=".form-select-sm example"
+          >
+            <option selected>นางสาว</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div>
+          <label for="exampleFormControlInput1" class="form-label"
+            >ชื่อภาษาไทย
+          </label>
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            placeholder="กรุณากรอก"
+          />
+        </div>
+        <div>
+          <label for="exampleFormControlInput1" class="form-label"
+            >นามสกุลภาษาไทย
+          </label>
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            placeholder="กรุณากรอก"
+          />
+        </div>
+      </div>
+      <div class="detail__content">
+        <div>
+          <label for="exampleFormControlInput1" class="form-label"
+            >ตำแหน่ง</label
+          >
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            placeholder="กรุณากรอก"
+          />
+        </div>
+        <div>
+          <label for="exampleFormControlInput1" class="form-label"
+            >เบอร์โทรศัพท์มือถือ</label
+          >
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            placeholder="กรุณากรอก"
+          />
+        </div>
+      </div>
+      <div class="detail__content">
+        <div>
+          <label for="exampleFormControlInput1" class="form-label"
+            >เบอร์โทรศัพท์สำนักงาน / ที่ทำการ</label
+          >
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            placeholder="กรุณากรอก"
+          />
+        </div>
+        <div>
+          <label for="exampleFormControlInput1" class="form-label"
+            >เบอร์โทรสาร</label
+          >
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            placeholder="กรุณากรอก"
+          />
+        </div>
+      </div>
+      <div class="detail__content">
+        <div>
+          <label for="exampleFormControlInput1" class="form-label"
+            >อีเมล์</label
+          >
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            placeholder="กรุณากรอก"
+          />
+        </div>
+      </div>
+    </div>
   </div>
 
-  <ksp-degree-cert-step-one></ksp-degree-cert-step-one>
-
-  <div class="detail__container--secondary">
-    <div class="detail__header--secondary">
-      ผู้ประสานงาน<span class="label__text"
-        >*กรุณาระบุเจ้าหน้าที่ที่สำนักงานเลขาธิการสามารถติดต่อประสานงาน
-        แจ้งข้อมูลต่างๆที่เกี่ยวข้องกับการรับรองปริญญาฯเท่านั้น</span
-      >
-    </div>
-
-    <div class="detail__content--fifth">
-      <div>
-        <label for="exampleFormControlInput1" class="form-label"
-          >คำนำหน้าชื่อภาษาไทย</label
-        >
-        <select
-          class="search__content form-select form-select-sm"
-          aria-label=".form-select-sm example"
-        >
-          <option selected>นางสาว</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-      </div>
-      <div>
-        <label for="exampleFormControlInput1" class="form-label"
-          >ชื่อภาษาไทย
-        </label>
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="กรุณากรอก"
-        />
-      </div>
-      <div>
-        <label for="exampleFormControlInput1" class="form-label"
-          >นามสกุลภาษาไทย
-        </label>
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="กรุณากรอก"
-        />
-      </div>
-    </div>
-    <div class="detail__content">
-      <div>
-        <label for="exampleFormControlInput1" class="form-label">ตำแหน่ง</label>
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="กรุณากรอก"
-        />
-      </div>
-      <div>
-        <label for="exampleFormControlInput1" class="form-label"
-          >เบอร์โทรศัพท์มือถือ</label
-        >
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="กรุณากรอก"
-        />
-      </div>
-    </div>
-    <div class="detail__content">
-      <div>
-        <label for="exampleFormControlInput1" class="form-label"
-          >เบอร์โทรศัพท์สำนักงาน / ที่ทำการ</label
-        >
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="กรุณากรอก"
-        />
-      </div>
-      <div>
-        <label for="exampleFormControlInput1" class="form-label"
-          >เบอร์โทรสาร</label
-        >
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="กรุณากรอก"
-        />
-      </div>
-    </div>
-    <div class="detail__content">
-      <div>
-        <label for="exampleFormControlInput1" class="form-label">อีเมล์</label>
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="กรุณากรอก"
-        />
-      </div>
-    </div>
+  <div class="check__form">
+    <e-service-license-check [titles]="title"></e-service-license-check>
   </div>
 
-  <div class="box__footer">
-    <span class="label__text"
-      >*กรุณากรอกข้อมูลให้ถูกต้อง
-      เพื่อประโยชน์ของตัวท่านเองโปรดตรวจสอบอีกครั้งก่อนการบันทึกลงระบบ</span
-    >
+  <div class="bottom__container">
+    <ksp-bottom-menu
+      (cancelClicked)="cancel()"
+      [isFirstPage]="true"
+      [showCenterButtons]="true"
+      (prevClicked)="prevPage()"
+      (nextClicked)="nextPage()"
+    ></ksp-bottom-menu>
   </div>
-</div>
--
-
-<div class="check__form">
-  <e-service-license-check></e-service-license-check>
-</div>
-
-<div class="bottom__container">
-  <ksp-bottom-menu
-    (cancelClicked)="cancel()"
-    [isFirstPage]="true"
-    (prevClicked)="prevPage()"
-    (nextClicked)="nextPage()"
-  ></ksp-bottom-menu>
 </div>
