@@ -19,7 +19,7 @@ const routes: Routes = [
         component: CourseDetailComponent,
       },
       {
-        path: 'import-student',
+        path: 'import-student/:type',
         component: ImportStudentComponent,
       },
       {
