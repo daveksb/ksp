@@ -1,0 +1,18 @@
+{
+  "projectType": "library",
+  "root": "libs/e-service/ethics/investigation",
+  "sourceRoot": "libs/e-service/ethics/investigation/src",
+  "prefix": "ksp",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/e-service/ethics/investigation/**/*.ts",
+          "libs/e-service/ethics/investigation/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

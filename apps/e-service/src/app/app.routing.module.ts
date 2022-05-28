@@ -35,8 +35,8 @@ const routes: Routes = [
     path: 'ethics',
     data: { menuConfig: ethicsMenu, headerLabel: 'ระบบงานจรรยาบรรณ' },
     loadChildren: () =>
-      import('@ksp/e-service/feature/ethic').then(
-        (m) => m.EServiceFeatureEthicModule
+      import('@ksp/e-service/ethics/accusation').then(
+        (m) => m.EServiceEthicsAccusationModule
       ),
   },
   { path: '', component: EServiceLoginComponent },

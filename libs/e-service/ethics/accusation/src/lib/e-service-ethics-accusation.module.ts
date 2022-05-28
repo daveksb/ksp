@@ -81,4 +81,4 @@ export const routes: Routes = [
   declarations: [AccusationListComponent, AccusationRecordComponent],
   exports: [AccusationListComponent, AccusationRecordComponent],
 })
-export class EServiceFeatureEthicModule {}
+export class EServiceEthicsAccusationModule {}

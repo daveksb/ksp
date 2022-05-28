@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'e-service-feature-ethic',
+  displayName: 'e-service-ethics-accusation',
   preset: '../../../../jest.preset.ts',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../../coverage/libs/e-service/feature/ethic',
+  coverageDirectory: '../../../../coverage/libs/e-service/ethics/accusation',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },
