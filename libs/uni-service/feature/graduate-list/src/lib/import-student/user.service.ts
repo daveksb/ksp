@@ -1,21 +1,68 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { forkJoin, Observable } from 'rxjs';
+import { forkJoin, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from './user';
+
+export interface StudentImport {
+  order: number;
+  startDate: string;
+  personId: string;
+  titleTh: string;
+  firstNameTh: string;
+  lastNameTh: string;
+  titleEn: string;
+  firstNameEn: string;
+  middleNameEn?: string;
+  lastNameEn: string;
+  phone: string;
+  birthDate: string;
+  address: string;
+
+  approveTime?: number;
+  graduateDate?: string;
+  approveDate?: string;
+  trainingAddress?: string;
+}
+
+const data: StudentImport = {
+  order: 1,
+  startDate: 'fafafa',
+  personId: 'afafa',
+  titleTh: 'นาย',
+  firstNameTh: 'อดิศร',
+  lastNameTh: 'อัศวิน',
+  titleEn: 'mr',
+  firstNameEn: 'adisorn',
+  lastNameEn: 'assawin',
+  phone: '124547878',
+  birthDate: 'fslgjs',
+  address: 'afafafa',
+};
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
+  students: StudentImport[] = [];
   private serviceUrl = 'https://dummyjson.com/users';
+  constructor(private http: HttpClient) {
+    let temp: StudentImport[] = [];
+    for (let index = 0; index < 30; index++) {
+      temp = [...temp, data];
+    }
+    this.students = temp;
+  }
 
-  constructor(private http: HttpClient) {}
-
-  getUsers(): Observable<User[]> {
+  /* getUsers(): Observable<User[]> {
     return this.http
       .get(this.serviceUrl)
       .pipe<User[]>(map((data: any) => data.users));
+  }
+ */
+
+  getUsers(): Observable<StudentImport[]> {
+    return of(this.students);
   }
 
   updateUser(user: User): Observable<User> {
