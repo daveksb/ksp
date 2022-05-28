@@ -29,6 +29,14 @@ export class ImportStudentComponent implements OnInit {
     });
   }
 
+  onRowEditInit(product: User) {
+    //this.clonedProducts[product.id] = { ...product };
+  }
+
+  onRowEditSave(product: User) {}
+
+  onRowEditCancel(product: User, index: number) {}
+
   cancel() {
     this.router.navigate(['./', 'graduate-list']);
   }

@@ -33,17 +33,101 @@
       </div>
 
       <div class="table">
-        <p-table [value]="users" responsiveLayout="scroll">
+        <p-table [value]="users" dataKey="id" editMode="row">
           <ng-template pTemplate="header">
             <tr>
               <th>Id</th>
+              <th>Name</th>
               <th>Phone</th>
+              <th style="width: 8rem"></th>
             </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-user>
-            <tr>
-              <td>{{ user.id }}</td>
-              <td>{{ user.phone }}</td>
+          <ng-template
+            pTemplate="body"
+            let-product
+            let-editing="editing"
+            let-ri="rowIndex"
+          >
+            <tr [pEditableRow]="product">
+              <td pEditableColumn>
+                <p-cellEditor>
+                  <ng-template pTemplate="input">
+                    <input pInputText type="text" [(ngModel)]="product.id" />
+                  </ng-template>
+                  <ng-template pTemplate="output">
+                    {{ product.id }}
+                  </ng-template>
+                </p-cellEditor>
+              </td>
+              <td pEditableColumn>
+                <p-cellEditor>
+                  <ng-template pTemplate="input">
+                    <input
+                      pInputText
+                      type="text"
+                      [(ngModel)]="product.firstNameTh"
+                      required
+                    />
+                  </ng-template>
+                  <ng-template pTemplate="output">
+                    {{ product.firstNameTh }}
+                  </ng-template>
+                </p-cellEditor>
+              </td>
+              <td pEditableColumn>
+                <p-cellEditor>
+                  <ng-template pTemplate="input">
+                    <input
+                      pInputText
+                      type="text"
+                      [(ngModel)]="product.phone"
+                      required
+                    />
+                  </ng-template>
+                  <ng-template pTemplate="output">
+                    {{ product.phone }}
+                  </ng-template>
+                </p-cellEditor>
+              </td>
+
+              <td style="text-align: center">
+                <button
+                  *ngIf="!editing"
+                  pButton
+                  pRipple
+                  type="button"
+                  pInitEditableRow
+                  icon="pi pi-pencil"
+                  (click)="onRowEditInit(product)"
+                  class="p-button-rounded p-button-text"
+                >
+                  edit
+                </button>
+                <button
+                  *ngIf="editing"
+                  pButton
+                  pRipple
+                  type="button"
+                  pSaveEditableRow
+                  icon="pi pi-check"
+                  (click)="onRowEditSave(product)"
+                  class="p-button-rounded p-button-text p-button-success p-mr-2"
+                >
+                  save
+                </button>
+                <button
+                  *ngIf="editing"
+                  pButton
+                  pRipple
+                  type="button"
+                  pCancelEditableRow
+                  icon="pi pi-times"
+                  (click)="onRowEditCancel(product, ri)"
+                  class="p-button-rounded p-button-text p-button-danger"
+                >
+                  cancel
+                </button>
+              </td>
             </tr>
           </ng-template>
         </p-table>
