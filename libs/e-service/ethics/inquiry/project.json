@@ -1,0 +1,18 @@
+{
+  "projectType": "library",
+  "root": "libs/e-service/ethics/inquiry",
+  "sourceRoot": "libs/e-service/ethics/inquiry/src",
+  "prefix": "e-service",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/e-service/ethics/inquiry/**/*.ts",
+          "libs/e-service/ethics/inquiry/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

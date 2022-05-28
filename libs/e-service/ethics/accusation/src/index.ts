@@ -1,4 +1,4 @@
-export * from './lib/e-service-feature-ethic.module';
+export * from './lib/e-service-ethics-accusation.module';
 
 export * from './lib/accusation-list/accusation-list.component';
 
