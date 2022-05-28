@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import {
   DegreeCertHomeComponent,
-  DegreeCertStepFourComponent,
-  DegreeCertStepOneComponent,
-  DegreeCertStepThreeComponent,
-  DegreeCertStepTwoComponent,
+  SharedFeatureDegreeCertModule,
 } from '@ksp/shared-feature-degree-cert';
 import { UniServiceContainerPageComponent } from '@ksp/uni-service/feature/container-page';
+import { StepOneComponent } from './step-one/step-one.component';
+import { StepTwoComponent } from './step-two/step-two.component';
+import { StepThreeComponent } from './step-three/step-three.component';
+import { StepFourComponent } from './step-four/step-four.component';
+import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 
 const routes: Routes = [
   {
@@ -21,19 +23,19 @@ const routes: Routes = [
       },
       {
         path: 'step-1',
-        component: DegreeCertStepOneComponent,
+        component: StepOneComponent,
       },
       {
         path: 'step-2',
-        component: DegreeCertStepTwoComponent,
+        component: StepTwoComponent,
       },
       {
         path: 'step-3',
-        component: DegreeCertStepThreeComponent,
+        component: StepThreeComponent,
       },
       {
         path: 'step-4',
-        component: DegreeCertStepFourComponent,
+        component: StepFourComponent,
       },
       {
         path: '**',
@@ -43,6 +45,17 @@ const routes: Routes = [
   },
 ];
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    SharedFeatureDegreeCertModule,
+    SharedUiBottomMenuModule
+  ],
+  declarations: [
+    StepOneComponent,
+    StepTwoComponent,
+    StepThreeComponent,
+    StepFourComponent,
+  ],
 })
 export class UniServiceFeatureDegreeCertModule {}

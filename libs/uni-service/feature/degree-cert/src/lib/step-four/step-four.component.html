@@ -1,0 +1,14 @@
+<div class="container">
+  <ksp-degree-cert-step-four></ksp-degree-cert-step-four>
+</div>
+
+<div class="bottom__container">
+  <ksp-bottom-menu
+    [showCenterButtons]="true"
+    [isLastPage]="true"
+    (saveClicked)="save()"
+    (prevClicked)="prevPage()"
+    (cancelClicked)="cancel()"
+  >
+  </ksp-bottom-menu>
+</div>
