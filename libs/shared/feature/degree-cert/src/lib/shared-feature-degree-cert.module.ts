@@ -8,9 +8,10 @@ import { DegreeCertStepFourComponent } from './degree-cert-step-four/degree-cert
 import { DegreeCertStepFiveComponent } from './degree-cert-step-five/degree-cert-step-five.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SharedUiDegreeCertTabContentModule } from '@ksp/shared/ui/degree-cert-tab-content';
+import { SharedUiFormModule } from '@ksp/shared/ui/form';
 
 @NgModule({
-  imports: [CommonModule, MatTabsModule, SharedUiDegreeCertTabContentModule, ],
+  imports: [CommonModule, MatTabsModule, SharedUiDegreeCertTabContentModule, SharedUiFormModule],
   declarations: [
     DegreeCertHomeComponent,
     DegreeCertStepOneComponent,
