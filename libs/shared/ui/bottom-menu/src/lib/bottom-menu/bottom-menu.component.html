@@ -10,7 +10,7 @@
     </button>
   </div>
 
-  <div class="footer-2">
+  <div class="footer-2" *ngIf="showCenterButtons">
     <button (click)="cancelClicked.emit(true)" type="button" class="btn btn-third">ยกเลิก</button>
     <button
       (click)="saveClicked.emit(true)"
