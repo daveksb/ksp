@@ -15,7 +15,7 @@ export class StepThreeComponent implements OnInit{
   }
 
   cancel() {
-    this.router.navigate(['./', 'degree-cert']);
+    this.router.navigate(['./', 'degree-cert', 'list', '1']);
   }
 
   nextPage() {

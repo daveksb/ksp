@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -12,6 +12,8 @@ export class CompleteDialogComponent {
   ) {}
 
   @Output() completed = new EventEmitter<boolean>();
+
+  @Input() isCanPrint = false;
 
   complete() {
     this.completed.emit(true);

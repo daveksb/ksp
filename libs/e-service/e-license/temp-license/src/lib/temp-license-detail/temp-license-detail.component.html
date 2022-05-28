@@ -33,6 +33,7 @@
         class="tab-group"
         animationDuration="0ms"
         dynamicHeight="true"
+        (selectedTabChange)="tabChanged($event)"
       >
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address>ที่อยู่ทะเบียนบ้าน</ksp-form-address>
@@ -43,116 +44,48 @@
               <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
             </div>
           </ksp-form-address>
-          <hr />
-
-          <e-service-license-check
-            [titles]="title"
-            [reasons]="reason[0]"
-          ></e-service-license-check>
         </mat-tab>
 
         <mat-tab label="ที่อยู่ของสถานศึกษาที่ขออนุญาต">
           <ksp-form-school-address></ksp-form-school-address>
-          <hr />
-
-          <div class="top__container-2">
-            <div class="header-3">ผลการตรวจสอบ</div>
-
-            <div class="content__checkbox">
-              <div class="checkbox__detail">
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="flexCheckDefault"
-                  />
-                  <label class="form-check-label" for="flexCheckDefault">
-                    ครบถ้วน และถูกต้อง
-                  </label>
-                </div>
-              </div>
-
-              <div class="checkbox__detail">
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="flexCheckDefault"
-                  />
-                  <label class="form-check-label" for="flexCheckDefault">
-                    ไม่ครบถ้วน และไม่ถูกต้อง
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div class="textarea__container-2">
-              <textarea
-                rows="4"
-                class="form-control form-control-sm"
-              ></textarea>
-            </div>
-          </div>
         </mat-tab>
 
         <mat-tab label="ข้อมูลทางการศึกษา">
           <ksp-form-education-info></ksp-form-education-info>
           <ksp-form-attachment></ksp-form-attachment>
-          <hr />
-
-          <e-service-license-check
-            [titles]="title"
-            [reasons]="reason[1]"
-          ></e-service-license-check>
         </mat-tab>
 
         <mat-tab label="ข้อมูลการสอนและการจ้าง">
           <ksp-form-teaching-info></ksp-form-teaching-info>
           <ksp-form-attachment></ksp-form-attachment>
-          <hr />
-
-          <e-service-license-check
-            [titles]="title"
-            [reasons]="reason[2]"
-          ></e-service-license-check>
         </mat-tab>
 
         <mat-tab label="ข้อมูลชี้แจงเหตุผล">
           <ksp-form-reason-info></ksp-form-reason-info>
           <ksp-form-attachment></ksp-form-attachment>
-          <hr />
-
-          <e-service-license-check
-            [titles]="title"
-            [reasons]="reason[3]"
-          ></e-service-license-check>
         </mat-tab>
         <mat-tab label="เอกสารหลักฐานประกอบ">
           <ksp-form-attachment></ksp-form-attachment>
-          <hr />
         </mat-tab>
       </mat-tab-group>
     </div>
   </div>
-</div>
 
-<!-- <div class="btn__container">
-  <button (click)="back()" class="btn__back">ย้อนกลับ</button>
-  <div class="btn__container-2">
-    <button class="btn-secondary">ยกเลิก</button>
-    <button class="btn-primary">บันทึก</button>
+  <div class="detail__container">
+    <e-service-license-check
+      [titles]="title"
+      [reasons]="reason[selectedTabIndex]"
+    ></e-service-license-check>
   </div>
-  <button (click)="next()" class="btn__next">ถัดไป</button>
-</div> -->
 
-<div class="bottom__container">
-  <ksp-bottom-menu
-    (cancelClicked)="cancel()"
-    (prevClicked)="prevPage()"
-    (nextClicked)="next()"
-    [showCenterButtons]="true"
-    [isFirstPage]="true"
-  ></ksp-bottom-menu>
+  <div class="bottom__container">
+    <ksp-bottom-menu
+      (cancelClicked)="cancel()"
+      (prevClicked)="prevPage()"
+      (nextClicked)="next()"
+      [showCenterButtons]="true"
+      [isFirstPage]="true"
+
+    ></ksp-bottom-menu>
+  </div>
 </div>

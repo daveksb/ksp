@@ -34,3 +34,7 @@
 .material-icons {
   font-family: 'Material Icons' !important;
 }
+
+.mat-ink-bar {
+  visibility: hidden !important;
+}

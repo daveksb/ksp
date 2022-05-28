@@ -14,7 +14,7 @@ export class StepFiveComponent {
   constructor(public dialog: MatDialog, private router: Router) {}
 
   cancel() {
-    this.router.navigate(['./', 'degree-cert']);
+    this.router.navigate(['./', 'degree-cert', 'list', '1']);
   }
 
   prevPage() {
@@ -58,7 +58,8 @@ export class StepFiveComponent {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'degree-cert']);
+        
+        this.router.navigate(['/', 'degree-cert', 'list', '1']);
       }
     });
   }

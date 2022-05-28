@@ -15,6 +15,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  padding-bottom: 50px;
 }
 
 .header-3 {
@@ -78,4 +79,13 @@
 
 .form-control {
   font-size: 18px;
+}
+
+.bottom__container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 1;
 }
