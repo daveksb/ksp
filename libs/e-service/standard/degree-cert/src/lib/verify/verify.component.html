@@ -107,16 +107,26 @@
 
   <div class="check__form">
     <ng-container *ngIf="processType === 2">
-      <e-service-license-check [titles]="titlesConsider"></e-service-license-check>
+      <e-service-license-check
+        [titles]="titlesConsider"
+      ></e-service-license-check>
     </ng-container>
 
     <ng-container *ngIf="processType === 3">
-      <e-service-license-check [titles]="titlesApprove"></e-service-license-check>
+      <e-service-license-check
+        [titles]="titlesApprove"
+      ></e-service-license-check>
     </ng-container>
   </div>
 </div>
 
 <div class="bottom__container">
-  <ksp-bottom-menu (nextClicked)="next()" (prevClicked)="prev()" (cancelClicked)="cancel()" [isFirstPage]="true">
+  <ksp-bottom-menu
+    (nextClicked)="next()"
+    (prevClicked)="prev()"
+    (cancelClicked)="cancel()"
+    [isFirstPage]="true"
+    [showCenterButtons]="true"
+  >
   </ksp-bottom-menu>
 </div>

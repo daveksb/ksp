@@ -35,8 +35,8 @@ export class LicenseForeignComponent {
 
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      height: '175px',
-      width: '350px',
+      height: '200px',
+      width: '375px',
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
 

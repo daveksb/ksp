@@ -14,11 +14,15 @@ import {
 export class TempLicenseCheckConfirmComponent {
   constructor(private router: Router, public dialog: MatDialog) {}
 
-  back() {
+  cancel() {
+    this.router.navigate(['/', 'temp-license']);
+  }
+
+  prevPage() {
     this.router.navigate(['/', 'temp-license', 'forbidden']);
   }
 
-  next() {
+  save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       height: '175px',
       width: '350px',
@@ -37,8 +41,8 @@ export class TempLicenseCheckConfirmComponent {
 
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      height: '175px',
-      width: '350px',
+      height: '200px',
+      width: '375px',
       data: {
         header: `บันทึกข้อมูลสำเร็จ`,
         buttonLabel: 'กลับสู่หน้าหลัก',

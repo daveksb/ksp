@@ -1,8 +1,10 @@
 <div class="container">
-  <ksp-degree-cert-step-two></ksp-degree-cert-step-two>
+  <ksp-degree-cert-step-two
+    (tabIndexChanged)="tabChanged($event)"
+  ></ksp-degree-cert-step-two>
 
   <div class="check__form">
-    <e-service-license-check></e-service-license-check>
+    <e-service-license-check [titles]="title"></e-service-license-check>
   </div>
 
   <div class="bottom__container">
@@ -10,6 +12,7 @@
       (cancelClicked)="cancel()"
       (prevClicked)="prevPage()"
       (nextClicked)="nextPage()"
+      [showCenterButtons]="true"
     ></ksp-bottom-menu>
   </div>
 </div>

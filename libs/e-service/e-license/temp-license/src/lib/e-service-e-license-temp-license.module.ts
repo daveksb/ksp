@@ -11,6 +11,7 @@ import { TempLicenseCheckForbiddenComponent } from './temp-license-check-forbidd
 import { TempLicenseCheckConfirmComponent } from './temp-license-check-confirm/temp-license-check-confirm.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TempLicenseApproveComponent } from './temp-license-approve/temp-license-approve.component';
+import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 
 export const routes: Routes = [
   {
@@ -54,6 +55,7 @@ export const routes: Routes = [
     SharedUiFormModule,
     EServiceUiLicenseCheckModule,
     RouterModule.forChild(routes),
+    SharedUiBottomMenuModule
   ],
   declarations: [
     TempLicenseListComponent,

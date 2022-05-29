@@ -8,8 +8,9 @@
   <div class="detail__title-2">{{ data.subContent }}</div>
 
   <div class="btn__container">
-    <!-- <button
+    <button
       matDialogClose
+      *ngIf="isCanPrint"
       (click)="complete()"
       type="button"
       class="btn btn-secondary btn-sm label__button"
@@ -17,7 +18,7 @@
       <img class="print__icon" src="assets/images/print.png" />
 
       พิมพ์แบบรายงาน
-    </button> -->
+    </button>
 
     <button
       matDialogClose

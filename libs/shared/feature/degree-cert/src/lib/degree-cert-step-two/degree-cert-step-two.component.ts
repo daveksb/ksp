@@ -1,4 +1,10 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,6 +14,8 @@ import { Router } from '@angular/router';
   encapsulation: ViewEncapsulation.None,
 })
 export class DegreeCertStepTwoComponent {
+  @Output() tabIndexChanged = new EventEmitter<number>();
+
   constructor(private router: Router) {}
 
   goToStep1() {
@@ -16,5 +24,10 @@ export class DegreeCertStepTwoComponent {
 
   goToStep3() {
     this.router.navigate(['/', 'degree-cert', 'step-3']);
+  }
+
+  tabChanged($event: MatTabChangeEvent) {
+    console.log('tab index = ', $event.index);
+    this.tabIndexChanged.emit($event.index);
   }
 }

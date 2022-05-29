@@ -8,12 +8,16 @@ import { Router } from '@angular/router';
 })
 export class TempLicenseCheckForbiddenComponent {
   constructor(private router: Router) {}
-  
+
+  cancel() {
+    this.router.navigate(['/', 'temp-license']);
+  }
+
   next() {
     this.router.navigate(['/', 'temp-license', 'confirm']);
   }
 
-  back() {
+  prevPage() {
     this.router.navigate(['/', 'temp-license', 'detail']);
   }
 }

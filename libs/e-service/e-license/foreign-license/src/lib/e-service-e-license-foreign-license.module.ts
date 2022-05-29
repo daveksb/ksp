@@ -6,6 +6,8 @@ import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container
 import { ForeignLicenseListComponent } from './foreign-license-list/foreign-license-list.component';
 import { SharedUiFormModule } from '@ksp/shared/ui/form';
 import { MatDialogModule } from '@angular/material/dialog';
+import { EServiceUiLicenseCheckModule } from '@ksp/e-service/ui/license-check';
+import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 
 export const routes: Routes = [
   {
@@ -36,6 +38,8 @@ export const routes: Routes = [
     SharedUiFormModule,
     MatDialogModule,
     RouterModule.forChild(routes),
+    EServiceUiLicenseCheckModule,
+    SharedUiBottomMenuModule
   ],
   declarations: [ForeignLicenseDetailComponent, ForeignLicenseListComponent],
   exports: [ForeignLicenseDetailComponent, ForeignLicenseListComponent],
