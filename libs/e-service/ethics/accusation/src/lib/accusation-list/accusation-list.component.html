@@ -1,7 +1,9 @@
 <div class="main-container">
   <div class="page__title">ข้อมูลการกล่าวหา / กล่าวโทษ</div>
 
-  <e-service-accusation-search></e-service-accusation-search>
+  <e-service-accusation-search
+    (submited)="onSearch($event)"
+  ></e-service-accusation-search>
 
   <div class="bottom-container">
     <div class="bottom-content">
@@ -20,69 +22,40 @@
       <hr />
 
       <div class="table-responsive">
-        <table class="table">
-          <thead class="header__table">
-            <tr>
-              <th scope="col">ลำดับ</th>
-              <th scope="col">เลขที่รายการ</th>
-              <th scope="col">วันที่รับ</th>
-              <th scope="col">หมายเลขคดีดำ</th>
-              <th scope="col">หมายเลขคดีแดง</th>
-              <th scope="col">หมายเลขบัตรประชาชน</th>
-              <th scope="col">ชื่อ-นามสกุล ผู้ถูกกล่าวหา</th>
-              <th scope="col">ขั้นตอน</th>
-              <th scope="col">สถานะ</th>
-              <th scope="col">วันที่รายการล่าสุด</th>
-              <th scope="col">ตรวจสอบ</th>
-              <th scope="col">ดูข้อมูล</th>
-            </tr>
-          </thead>
-          <tbody class="body__table">
-            <tr (click)="next()">
-              <th>1</th>
-              <th>641000001</th>
-              <th>15 มิ.ย. 2654</th>
-              <th>xx/2564</th>
-              <th>xx/2564</th>
-              <th>x-xxxx-xxxx-xx-x</th>
-              <th>นายประหยัด จันทร์อังคาร</th>
-              <th>บันทึกข้อมูลกล่าวหา/กล่าวโทษ</th>
-              <th>อยู่รหว่างดำเนินการ</th>
-              <th>15 มิ.ย. 2569</th>
-              <th><i class="bi bi-eye"></i></th>
-              <th>icon</th>
-            </tr>
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>เลขที่รายการ</th>
+            <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+          </ng-container>
 
-            <tr>
-              <th>2</th>
-              <th>641000001</th>
-              <th>15 มิ.ย. 2654</th>
-              <th>xx/2564</th>
-              <th>xx/2564</th>
-              <th>x-xxxx-xxxx-xx-x</th>
-              <th>นายประหยัด จันทร์อังคาร</th>
-              <th>บันทึกข้อมูลกล่าวหา/กล่าวโทษ</th>
-              <th>อยู่รหว่างดำเนินการ</th>
-              <th>15 มิ.ย. 2569</th>
-              <th>icon</th>
-              <th>icon</th>
-            </tr>
+          <ng-container matColumnDef="receiveDate">
+            <th mat-header-cell *matHeaderCellDef>วันที่รับ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.receiveDate }}
+            </td>
+          </ng-container>
 
-            <tr>
-              <th>3</th>
-              <th>641000001</th>
-              <th>15 มิ.ย. 2654</th>
-              <th>xx/2564</th>
-              <th>xx/2564</th>
-              <th>x-xxxx-xxxx-xx-x</th>
-              <th>นายประหยัด จันทร์อังคาร</th>
-              <th>บันทึกข้อมูลกล่าวหา/กล่าวโทษ</th>
-              <th>อยู่รหว่างดำเนินการ</th>
-              <th>15 มิ.ย. 2569</th>
-              <th>icon</th>
-              <th>icon</th>
-            </tr>
-          </tbody>
+          <ng-container matColumnDef="personId">
+            <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
+            <td mat-cell *matCellDef="let element">{{ element.personId }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+            <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="view">
+            <th mat-header-cell *matHeaderCellDef>ดูข้อมูล</th>
+            <td mat-cell *matCellDef="let row">
+              <mat-icon (click)="next()" class="eye__icon"
+                >remove_red_eye</mat-icon
+              >
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
       </div>
     </div>

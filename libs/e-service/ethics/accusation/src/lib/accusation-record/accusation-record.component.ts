@@ -20,7 +20,7 @@ export class AccusationRecordComponent {
   }
 
   openSearchDialog() {
-    const dialog = this.dialog.open(AccusationSearchComponent, {
+    this.dialog.open(AccusationSearchComponent, {
       height: '750px',
       width: '1250px',
     });

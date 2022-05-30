@@ -101,10 +101,18 @@
     </div>
 
     <div class="button__container">
-      <button type="button" class="btn btn-fourth btn-sm label__button">
+      <button
+        (click)="submited.emit(false)"
+        type="button"
+        class="btn btn-fourth btn-sm label__button"
+      >
         ล้างข้อมูล
       </button>
-      <button type="button" class="btn btn-primary btn-sm label__button">
+      <button
+        (click)="submited.emit(true)"
+        type="button"
+        class="btn btn-primary btn-sm label__button"
+      >
         ค้นหา
       </button>
     </div>
