@@ -8,7 +8,7 @@
 
 .bottom-container {
   background-color: white;
-  margin: 15px 15px;
+  margin: 0 15px 10px 15px;
 }
 
 .bottom-content {
@@ -38,21 +38,13 @@
   border-top: 0;
 }
 
-.header__table {
-  background-color: #edf6ff;
-  font-size: 16px;
-  white-space: nowrap;
-}
-
-.body__table {
-  font-size: 16px;
-  color: #000000;
-  white-space: nowrap;
-}
-
 .page__title {
   padding-left: 15px;
   padding-top: 15px;
   font-size: 22px;
   color: #000;
+}
+
+mat-icon {
+  cursor: pointer;
 }

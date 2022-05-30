@@ -25,8 +25,8 @@ export const ethicsMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ตรวจสอบและเผยแพร่คำวินิจฉัยชี้ขาด',
-    path: 'ethics/verdict',
-    subMenuName: 'verdict',
+    path: 'ethics/publish',
+    subMenuName: 'publish',
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
