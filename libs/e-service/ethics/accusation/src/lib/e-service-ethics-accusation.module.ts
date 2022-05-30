@@ -48,6 +48,21 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'investigation', // สืบสวน
+    component: EServiceContainerPageComponent,
+    children: [
+      {
+        path: 'list',
+        component: AccusationListComponent,
+      },
+      {
+        path: '',
+        redirectTo: 'list',
+        pathMatch: 'full',
+      },
+    ],
+  },
 ];
 
 @NgModule({

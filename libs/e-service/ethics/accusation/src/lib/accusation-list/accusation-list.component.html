@@ -8,6 +8,7 @@
       <div class="table__title">
         รายการการกล่าวหา/กล่าวโทษ
         <button
+          *ngIf="mode === 'accusation'"
           (click)="next()"
           type="button"
           class="btn btn-secondary btn-sm label__button"
@@ -37,7 +38,7 @@
             </tr>
           </thead>
           <tbody class="body__table">
-            <tr>
+            <tr (click)="next()">
               <th>1</th>
               <th>641000001</th>
               <th>15 มิ.ย. 2654</th>
