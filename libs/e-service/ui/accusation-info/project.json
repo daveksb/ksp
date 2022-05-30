@@ -1,0 +1,18 @@
+{
+  "projectType": "library",
+  "root": "libs/e-service/ui/accusation-info",
+  "sourceRoot": "libs/e-service/ui/accusation-info/src",
+  "prefix": "ksp",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/e-service/ui/accusation-info/**/*.ts",
+          "libs/e-service/ui/accusation-info/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
