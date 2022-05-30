@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from '@ksp/shared/ui/page-not-found';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
+import { PublishReviewComponent } from './publish-review/publish-review.component';
 
 export const routes: Routes = [
   {
@@ -19,5 +20,7 @@ export const routes: Routes = [
 
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes)],
+  declarations: [PublishReviewComponent],
+  exports: [PublishReviewComponent],
 })
 export class EServiceEthicsPublishModule {}

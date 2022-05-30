@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-type Mode = 'accusation' | 'investigation' | 'inquiry';
+type Mode = 'accusation' | 'investigation' | 'inquiry' | 'publish';
 
 @Component({
   selector: 'e-service-ethic-accusation-list',
@@ -28,5 +28,8 @@ export class AccusationListComponent implements OnInit {
 
     if (this.mode === 'inquiry')
       this.router.navigate(['/', 'ethics', 'inquiry', 'detail']);
+
+    if (this.mode === 'publish')
+      this.router.navigate(['/', 'ethics', 'publish', 'detail']);
   }
 }
