@@ -51,6 +51,9 @@
       "@ksp/e-service/standard/graduate-list": [
         "libs/e-service/standard/graduate-list/src/index.ts"
       ],
+      "@ksp/e-service/ui/accusation-info": [
+        "libs/e-service/ui/accusation-info/src/index.ts"
+      ],
       "@ksp/e-service/ui/accusation-search": [
         "libs/e-service/ui/accusation-search/src/index.ts"
       ],
