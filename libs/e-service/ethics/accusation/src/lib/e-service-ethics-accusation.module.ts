@@ -7,6 +7,10 @@ import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container
 import { EServiceUiAccusationSearchModule } from '@ksp/e-service/ui/accusation-search';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SharedUiFormModule } from '@ksp/shared/ui/form';
+import {
+  AccusationSearchComponent,
+  EServiceDialogAccusationSearchModule,
+} from '@ksp/e-service/dialog/accusation-search';
 
 export const routes: Routes = [
   {
@@ -20,6 +24,10 @@ export const routes: Routes = [
       {
         path: 'detail',
         component: AccusationRecordComponent,
+      },
+      {
+        path: 'test',
+        component: AccusationSearchComponent,
       },
       {
         path: '',
@@ -36,7 +44,8 @@ export const routes: Routes = [
     EServiceUiAccusationSearchModule,
     RouterModule.forChild(routes),
     MatTabsModule,
-    SharedUiFormModule
+    SharedUiFormModule,
+    EServiceDialogAccusationSearchModule,
   ],
   declarations: [AccusationListComponent, AccusationRecordComponent],
   exports: [AccusationListComponent, AccusationRecordComponent],

@@ -1,0 +1,18 @@
+{
+  "projectType": "library",
+  "root": "libs/e-service/dialog/accusation-search",
+  "sourceRoot": "libs/e-service/dialog/accusation-search/src",
+  "prefix": "ksp",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/e-service/dialog/accusation-search/**/*.ts",
+          "libs/e-service/dialog/accusation-search/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

@@ -1,0 +1,115 @@
+<div>ข้อมูลผู้ถูกกล่าวหา/กล่าวโทษ</div>
+
+<div class="top-container">
+  <div class="box__container">
+    <div class="box__title">ค้นหา</div>
+
+    <div class="row__container row__container--4">
+      <div class="input__container">
+        <label for="exampleFormControlInput1" class="form-label"
+          >หมายเลขบัตรประชาชน
+        </label>
+        <input class="form-control form-control-sm" type="text" />
+      </div>
+
+      <div class="input__container">
+        <label for="exampleFormControlInput1" class="form-label"
+          >คำนำหน้าชื่อ</label
+        >
+        <input class="form-control form-control-sm" type="text" />
+      </div>
+
+      <div class="input__container">
+        <label for="exampleFormControlInput1" class="form-label">ชื่อ</label>
+        <input class="form-control form-control-sm" type="text" />
+      </div>
+
+      <div class="input__container">
+        <label for="exampleFormControlInput1" class="form-label">นามสกุล</label>
+        <input class="form-control form-control-sm" type="text" />
+      </div>
+    </div>
+
+    <div class="row__container row__container--2">
+      <div class="input__container">
+        <label for="exampleFormControlInput1" class="form-label"> สังกัด</label>
+        <input class="form-control form-control-sm" type="text" />
+      </div>
+      <div></div>
+    </div>
+
+    <div class="row__container row__container--2">
+      <div class="input__container">
+        <label for="exampleFormControlInput1" class="form-label">
+          จังหวัด</label
+        >
+        <input class="form-control form-control-sm" type="text" />
+      </div>
+      <div class="input__container">
+        <label for="exampleFormControlInput1" class="form-label"
+          >หน่วยงาน/ สถานศึกษา</label
+        >
+        <input class="form-control form-control-sm" type="text" />
+      </div>
+    </div>
+
+    <div class="button__container">
+      <button type="button" class="btn btn-fourth btn-sm label__button">
+        ล้างข้อมูล
+      </button>
+      <button type="button" class="btn btn-primary btn-sm label__button">
+        ค้นหา
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="table__container">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="personId">
+      <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
+      <td mat-cell *matCellDef="let element">{{ element.personId }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="organization">
+      <th mat-header-cell *matHeaderCellDef>สังกัด</th>
+      <td mat-cell *matCellDef="let element">{{ element.organization }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="school">
+      <th mat-header-cell *matHeaderCellDef>หน่วยงาน/ สถานศึกษา</th>
+      <td mat-cell *matCellDef="let element">{{ element.school }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="province">
+      <th mat-header-cell *matHeaderCellDef>จังหวัด</th>
+      <td mat-cell *matCellDef="let element">{{ element.province }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
+
+<div class="tab__container">
+  <mat-tab-group class="tab-group" animationDuration="0ms" dynamicHeight="true">
+    <mat-tab label="ข้อมูลผู้มีใบอนุญาต" class="tab-content">
+      <ksp-person-info></ksp-person-info>
+    </mat-tab>
+
+    <mat-tab label="ข้อมูลใบอนุญาต">
+      <ksp-license-info></ksp-license-info
+    ></mat-tab>
+
+    <mat-tab label="ที่อยู่"> <ksp-address-info></ksp-address-info></mat-tab>
+
+    <mat-tab label="สถานที่ทำงาน">
+      <ksp-workplace-info></ksp-workplace-info>
+    </mat-tab>
+  </mat-tab-group>
+</div>
