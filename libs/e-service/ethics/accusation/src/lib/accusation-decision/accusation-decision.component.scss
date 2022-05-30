@@ -6,8 +6,8 @@
   flex-direction: column;
 }
 
-.table__container {
-  margin: 20px;
+.header {
+  font-size: 18px;
 }
 
 .box-container {
@@ -16,13 +16,11 @@
   padding: 12px;
 }
 
-.table__title {
-  font-size: 18px;
-  color: #000;
-  display: flex;
-  justify-content: space-between;
+.content__container {
+  margin: 24px 48px;
+  padding: 24px;
+  background-color: #f9f9fa;
 }
-
 .btn-secondary {
   font-size: 16px;
   background-color: #0056ff;
@@ -30,25 +28,58 @@
   border-radius: 4px;
 }
 
-.table {
+.bottom__container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   background-color: #fff;
-  border: 1px solid #eceef2;
+  z-index: 1;
 }
 
-.table > :not(:first-child) {
-  border-top: 0;
+.footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-left: 237px;
+  padding: 0 65px;
+  border: 1px solid #dadde1;
+  height: 50px;
 }
 
-.header__table {
-  background-color: #edf6ff;
-  font-size: 16px;
-  white-space: nowrap;
+.btn-primary {
+  font-size: 20px;
+  background: #fff;
+  border: 1px solid #01b27b;
+  box-sizing: border-box;
+  border-radius: 1px;
+  color: #01b27b;
+  padding: 0 20px;
+  margin: 8px;
+  width: 150px;
 }
 
-.body__table {
-  font-size: 16px;
-  color: #000000;
-  white-space: nowrap;
+.btn-secondary {
+  font-size: 20px;
+  background: #fff;
+  border: 1px solid #f68b33;
+  box-sizing: border-box;
+  border-radius: 1px;
+  color: #f68b33;
+  padding: 0 20px;
+  margin: 8px;
+  width: 150px;
+}
+
+.btn-third {
+  font-size: 20px;
+  background: #01b27b;
+  border: 1px solid #01b27b;
+  box-sizing: border-box;
+  border-radius: 1px;
+  color: #fff;
+  padding: 0 20px;
+  margin: 8px;
+  width: 150px;
 }
 
 .page__title {
@@ -58,36 +89,34 @@
   color: #000;
 }
 
-.tab__container {
-  margin: 25px 0;
-}
-
-.content__container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 18px;
-}
-
 .form__container {
-  padding: 24px;
+  padding-left: 20px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
 }
 
-.form-label {
+.checkbox__label {
   font-size: 16px;
   color: #656565;
-  margin-bottom: 0;
 }
 
-.form-control {
-  background-color: #fff;
+.checkbox {
+  height: 15px;
+  width: 15px;
+  margin-right: 5px;
 }
 
-.form-header {
-  font-size: 18px;
-  color: #000;
+.checkbox__container {
+  display: flex;
+  flex-direction: column;
+  margin: 12px 24px;
 }
 
-.add__list {
-  color: #0056ff;
-  margin: 0 20px;
+.btn__center {
+  display: flex;
+  justify-content: center;
+}
+
+.btn__left {
+  display: flex;
 }

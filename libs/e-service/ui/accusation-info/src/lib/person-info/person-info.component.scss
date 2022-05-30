@@ -1,6 +1,7 @@
 .main__container {
   display: grid;
-  grid-template-columns: 10% 1fr 1fr 8fr;
+  grid-template-columns: 10% 10% auto;
+  grid-column-gap: 32px;
 }
 .img__content {
   height: 150px;

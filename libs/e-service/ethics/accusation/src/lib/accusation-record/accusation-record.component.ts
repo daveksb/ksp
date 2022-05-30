@@ -12,4 +12,8 @@ export class AccusationRecordComponent {
   next() {
     this.router.navigate(['/', 'ethics', 'accusation', 'decision']);
   }
+
+  cancel() {
+    this.router.navigate(['/', 'ethics', 'accusation']);
+  }
 }
