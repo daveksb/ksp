@@ -44,6 +44,21 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'investigation', // สืบสวน
+    component: EServiceContainerPageComponent,
+    children: [
+      {
+        path: 'list',
+        component: AccusationListComponent,
+      },
+      {
+        path: '',
+        redirectTo: 'list',
+        pathMatch: 'full',
+      },
+    ],
+  },
 ];
 
 @NgModule({
@@ -55,7 +70,7 @@ export const routes: Routes = [
     EServiceDialogAccusationSearchModule,
     MatTabsModule,
     EServiceUiAccusationInfoModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   declarations: [AccusationListComponent, AccusationRecordComponent],
   exports: [AccusationListComponent, AccusationRecordComponent],
