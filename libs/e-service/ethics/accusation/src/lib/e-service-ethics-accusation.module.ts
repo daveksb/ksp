@@ -5,13 +5,14 @@ import { AccusationListComponent } from './accusation-list/accusation-list.compo
 import { AccusationRecordComponent } from './accusation-record/accusation-record.component';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { EServiceUiAccusationSearchModule } from '@ksp/e-service/ui/accusation-search';
-import { MatTabsModule } from '@angular/material/tabs';
 import { SharedUiFormModule } from '@ksp/shared/ui/form';
 import {
   AccusationSearchComponent,
   EServiceDialogAccusationSearchModule,
 } from '@ksp/e-service/dialog/accusation-search';
 import { AccusationDecisionComponent } from './accusation-decision/accusation-decision.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-info';
 
 export const routes: Routes = [
   {
@@ -49,9 +50,12 @@ export const routes: Routes = [
     CommonModule,
     EServiceUiAccusationSearchModule,
     RouterModule.forChild(routes),
-    MatTabsModule,
     SharedUiFormModule,
     EServiceDialogAccusationSearchModule,
+    MatTabsModule,
+    EServiceUiAccusationInfoModule,
   ],
+  declarations: [AccusationListComponent, AccusationRecordComponent],
+  exports: [AccusationListComponent, AccusationRecordComponent],
 })
 export class EServiceEthicsAccusationModule {}
