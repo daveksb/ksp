@@ -8,6 +8,7 @@ import { EServiceUiAccusationSearchModule } from '@ksp/e-service/ui/accusation-s
 import { MatTabsModule } from '@angular/material/tabs';
 import { SharedUiFormModule } from '@ksp/shared/ui/form';
 import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-info';
+import { AccusationDecisionComponent } from './accusation-decision/accusation-decision.component';
 
 export const routes: Routes = [
   {
@@ -21,6 +22,10 @@ export const routes: Routes = [
       {
         path: 'detail',
         component: AccusationRecordComponent,
+      },
+      {
+        path: 'decision',
+        component: AccusationDecisionComponent,
       },
       {
         path: '',
@@ -38,9 +43,17 @@ export const routes: Routes = [
     RouterModule.forChild(routes),
     MatTabsModule,
     SharedUiFormModule,
-    EServiceUiAccusationInfoModule
+    EServiceUiAccusationInfoModule,
   ],
-  declarations: [AccusationListComponent, AccusationRecordComponent],
-  exports: [AccusationListComponent, AccusationRecordComponent],
+  declarations: [
+    AccusationListComponent,
+    AccusationRecordComponent,
+    AccusationDecisionComponent,
+  ],
+  exports: [
+    AccusationListComponent,
+    AccusationRecordComponent,
+    AccusationDecisionComponent,
+  ],
 })
 export class EServiceEthicsAccusationModule {}
