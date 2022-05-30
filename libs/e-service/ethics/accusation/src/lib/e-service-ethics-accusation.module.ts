@@ -15,7 +15,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-info';
 import { MatDialogModule } from '@angular/material/dialog';
 import { InvestigationDetailComponent } from '@ksp/e-service/ethics/investigation';
-import { InquiryDetailComponent } from '@ksp/e-service/ethics/inquiry';
+import {
+  InquiryDetailComponent,
+  InquiryResultComponent,
+} from '@ksp/e-service/ethics/inquiry';
 
 export const routes: Routes = [
   {
@@ -78,6 +81,11 @@ export const routes: Routes = [
         path: 'detail',
         component: InquiryDetailComponent,
       },
+      {
+        path: 'result',
+        component: InquiryResultComponent,
+      },
+
       {
         path: '',
         redirectTo: 'list',
