@@ -6,6 +6,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-info';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatTableModule,
     MatCheckboxModule,
     MatTabsModule,
+    MatDialogModule,
     MatIconModule,
     EServiceUiAccusationInfoModule,
   ],
