@@ -39,6 +39,7 @@
               <th>Id</th>
               <th>Name</th>
               <th>Phone</th>
+              <th>Actions</th>
               <th style="width: 8rem"></th>
             </tr>
           </ng-template>
@@ -49,7 +50,7 @@
             let-ri="rowIndex"
           >
             <tr [pEditableRow]="product">
-              <td pEditableColumn>
+              <td>
                 <p-cellEditor>
                   <ng-template pTemplate="input">
                     <input pInputText type="text" [(ngModel)]="product.id" />
@@ -59,7 +60,7 @@
                   </ng-template>
                 </p-cellEditor>
               </td>
-              <td pEditableColumn>
+              <td>
                 <p-cellEditor>
                   <ng-template pTemplate="input">
                     <input
@@ -74,7 +75,7 @@
                   </ng-template>
                 </p-cellEditor>
               </td>
-              <td pEditableColumn>
+              <td>
                 <p-cellEditor>
                   <ng-template pTemplate="input">
                     <input
@@ -89,46 +90,41 @@
                   </ng-template>
                 </p-cellEditor>
               </td>
+              <td>
+                <div [pRowToggler]="product">details</div>
+              </td>
 
               <td style="text-align: center">
                 <button
                   *ngIf="!editing"
-                  pButton
-                  pRipple
                   type="button"
                   pInitEditableRow
-                  icon="pi pi-pencil"
                   (click)="onRowEditInit(product)"
-                  class="p-button-rounded p-button-text"
                 >
                   edit
                 </button>
                 <button
                   *ngIf="editing"
-                  pButton
-                  pRipple
                   type="button"
                   pSaveEditableRow
-                  icon="pi pi-check"
                   (click)="onRowEditSave(product)"
-                  class="p-button-rounded p-button-text p-button-success p-mr-2"
                 >
                   save
                 </button>
                 <button
                   *ngIf="editing"
-                  pButton
-                  pRipple
                   type="button"
                   pCancelEditableRow
-                  icon="pi pi-times"
                   (click)="onRowEditCancel(product, ri)"
-                  class="p-button-rounded p-button-text p-button-danger"
                 >
                   cancel
                 </button>
               </td>
             </tr>
+          </ng-template>
+
+          <ng-template pTemplate="rowexpansion" let-product>
+            <ksp-form-address></ksp-form-address>
           </ng-template>
         </p-table>
 
