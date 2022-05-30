@@ -5,6 +5,8 @@ import { AccusationListComponent } from './accusation-list/accusation-list.compo
 import { AccusationRecordComponent } from './accusation-record/accusation-record.component';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { EServiceUiAccusationSearchModule } from '@ksp/e-service/ui/accusation-search';
+import { MatTabsModule } from '@angular/material/tabs';
+import { SharedUiFormModule } from '@ksp/shared/ui/form';
 
 export const routes: Routes = [
   {
@@ -33,6 +35,8 @@ export const routes: Routes = [
     CommonModule,
     EServiceUiAccusationSearchModule,
     RouterModule.forChild(routes),
+    MatTabsModule,
+    SharedUiFormModule
   ],
   declarations: [AccusationListComponent, AccusationRecordComponent],
   exports: [AccusationListComponent, AccusationRecordComponent],
