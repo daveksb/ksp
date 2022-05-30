@@ -13,6 +13,7 @@ import {
 import { AccusationDecisionComponent } from './accusation-decision/accusation-decision.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-info';
+import { MatDialogModule } from '@angular/material/dialog';
 
 export const routes: Routes = [
   {
@@ -54,6 +55,7 @@ export const routes: Routes = [
     EServiceDialogAccusationSearchModule,
     MatTabsModule,
     EServiceUiAccusationInfoModule,
+    MatDialogModule
   ],
   declarations: [AccusationListComponent, AccusationRecordComponent],
   exports: [AccusationListComponent, AccusationRecordComponent],

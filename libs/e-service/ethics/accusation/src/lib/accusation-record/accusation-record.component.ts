@@ -15,6 +15,10 @@ export class AccusationRecordComponent {
     this.router.navigate(['/', 'ethics', 'accusation', 'decision']);
   }
 
+  cancel() {
+    this.router.navigate(['/', 'ethics', 'accusation']);
+  }
+
   openSearchDialog() {
     const dialog = this.dialog.open(AccusationSearchComponent, {
       height: '750px',
