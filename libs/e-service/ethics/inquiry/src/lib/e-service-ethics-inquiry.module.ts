@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from '@ksp/shared/ui/page-not-found';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { InquiryDetailComponent } from './inquiry-detail/inquiry-detail.component';
+import { InquiryResultComponent } from './inquiry-result/inquiry-result.component';
 
 export const routes: Routes = [
   {
@@ -29,7 +30,7 @@ export const routes: Routes = [
 
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes)],
-  declarations: [InquiryDetailComponent],
-  exports: [InquiryDetailComponent],
+  declarations: [InquiryDetailComponent, InquiryResultComponent],
+  exports: [InquiryDetailComponent, InquiryResultComponent],
 })
 export class EServiceEthicsInquiryModule {}
