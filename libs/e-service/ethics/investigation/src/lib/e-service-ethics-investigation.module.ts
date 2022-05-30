@@ -16,14 +16,9 @@ export const routes: Routes = [
         pathMatch: 'full',
       },
       {
-        path: 'list',
-        component: PageNotFoundComponent,
-      },
-      {
         path: 'detail',
-        component: PageNotFoundComponent,
+        component: InvestigationDetailComponent,
       },
-      
     ],
   },
 ];

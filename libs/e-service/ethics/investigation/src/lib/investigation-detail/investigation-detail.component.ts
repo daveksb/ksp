@@ -50,7 +50,7 @@ export class InvestigationDetailComponent {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'ethics', 'accusation']);
+        this.router.navigate(['/', 'ethics', 'investigation']);
       }
     });
   }
