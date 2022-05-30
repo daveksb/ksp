@@ -150,7 +150,7 @@
   width: 150px;
 }
 
-.btn__search {
+.btn-search {
   font-size: 16px;
   background-color: #0056ff;
   border: 1px solid #0056ff;
@@ -158,4 +158,23 @@
   color: #fff;
   padding: 4px 12px;
   margin: 12px 24px;
+}
+
+.label__content {
+  font-size: 18px;
+  color: #808080;
+  margin-right: 24px;
+}
+
+.label__content--primary {
+  color: #f68b33;
+}
+
+.label__content--secondary {
+  color: #01b27b;
+}
+
+.content__header {
+  display: flex;
+  flex-direction: row;
 }

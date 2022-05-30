@@ -3,8 +3,20 @@
   <img src="" />
 
   <div class="box-container">
-    เลขที่รายการ วันที่ทำรายการ
+    <div class="content__header">
+      <div class="label__content">
+        เลขที่รายการ :
+        <span class="label__content--secondary">112234467876543</span>
+      </div>
+
+      <div class="label__content">
+        วันที่ทำรายการ :
+        <span class="label__content--primary">10 ตุลาคม 2565</span>
+      </div>
+    </div>
+
     <hr />
+
     <div class="table__title">
       <div>ข้อมูลผู้กล่าวหา/กล่าวโทษ</div>
       <div class="add__list">+ เพิ่มรายการ</div>
@@ -41,11 +53,7 @@
 
   <div class="box-container">
     <div class="table__title">ข้อมูลผู้ถูกกล่าวหา/กล่าวโทษ</div>
-    <button
-      (click)="openSearchDialog()"
-      type="button"
-      class="btn btn-search btn-sm label__button"
-    >
+    <button (click)="openSearchDialog()" type="button" class="btn-search">
       ค้นหา/เปลี่ยนแปลง ข้อมูลผู้มีใบอนุญาต
     </button>
 
