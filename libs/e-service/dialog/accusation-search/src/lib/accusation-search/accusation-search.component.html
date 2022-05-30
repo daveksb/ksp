@@ -95,3 +95,21 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 </div>
+
+<div class="tab__container">
+  <mat-tab-group class="tab-group" animationDuration="0ms" dynamicHeight="true">
+    <mat-tab label="ข้อมูลผู้มีใบอนุญาต" class="tab-content">
+      <ksp-person-info></ksp-person-info>
+    </mat-tab>
+
+    <mat-tab label="ข้อมูลใบอนุญาต">
+      <ksp-license-info></ksp-license-info
+    ></mat-tab>
+
+    <mat-tab label="ที่อยู่"> <ksp-address-info></ksp-address-info></mat-tab>
+
+    <mat-tab label="สถานที่ทำงาน">
+      <ksp-workplace-info></ksp-workplace-info>
+    </mat-tab>
+  </mat-tab-group>
+</div>
