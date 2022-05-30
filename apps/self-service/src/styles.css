@@ -38,3 +38,7 @@
 .mat-ink-bar {
   visibility: hidden !important;
 }
+
+table {
+  width: 100%;
+}

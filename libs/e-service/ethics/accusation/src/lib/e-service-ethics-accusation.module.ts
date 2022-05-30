@@ -11,17 +11,21 @@ import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-inf
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { EServiceEthicsAccusationRoutingModule } from './e-service-ethics-accusation-routing.module';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   imports: [
     CommonModule,
+    MatTabsModule,
+    MatTableModule,
+    MatDialogModule,
+    MatIconModule,
+    EServiceUiAccusationInfoModule,
+    EServiceDialogAccusationSearchModule,
     EServiceUiAccusationSearchModule,
     EServiceEthicsAccusationRoutingModule,
     SharedUiFormModule,
-    EServiceDialogAccusationSearchModule,
-    MatTabsModule,
-    EServiceUiAccusationInfoModule,
-    MatDialogModule,
   ],
   declarations: [AccusationListComponent, AccusationRecordComponent],
   exports: [AccusationListComponent, AccusationRecordComponent],
