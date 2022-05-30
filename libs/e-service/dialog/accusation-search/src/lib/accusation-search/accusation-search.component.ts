@@ -35,6 +35,8 @@ export const data = [
 })
 export class AccusationSearchComponent implements OnInit {
   displayedColumns: string[] = [
+    'select',
+    'view',
     'personId',
     'name',
     'organization',

@@ -4,12 +4,16 @@ import { AccusationSearchComponent } from './accusation-search/accusation-search
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-info';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   imports: [
     CommonModule,
     MatTableModule,
+    MatCheckboxModule,
     MatTabsModule,
+    MatIconModule,
     EServiceUiAccusationInfoModule,
   ],
   declarations: [AccusationSearchComponent],

@@ -1,4 +1,4 @@
-<div>ข้อมูลผู้ถูกกล่าวหา/กล่าวโทษ</div>
+<div class="header">ข้อมูลผู้ถูกกล่าวหา/กล่าวโทษ</div>
 
 <div class="top-container">
   <div class="box__container">
@@ -53,8 +53,8 @@
       </div>
     </div>
 
-    <div class="button__container">
-      <button type="button" class="btn btn-fourth btn-sm label__button">
+    <div class="buttons__search">
+      <button type="button" class="btn btn-transparent btn-sm label__button">
         ล้างข้อมูล
       </button>
       <button type="button" class="btn btn-primary btn-sm label__button">
@@ -65,7 +65,23 @@
 </div>
 
 <div class="table__container">
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <div>ผลการค้นหา</div>
+
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>เลือก</th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"> </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="view">
+      <th mat-header-cell *matHeaderCellDef>ดูข้อมูล</th>
+      <td mat-cell *matCellDef="let row">
+        <mat-icon class="eye__icon">remove_red_eye</mat-icon>
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="personId">
       <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
       <td mat-cell *matCellDef="let element">{{ element.personId }}</td>
@@ -94,6 +110,15 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+
+  <div class="buttons__table">
+    <button type="button" class="btn btn-default btn-sm label__button">
+      ยกเลิก
+    </button>
+    <button type="button" class="btn btn-success btn-sm label__button">
+      ตกลง
+    </button>
+  </div>
 </div>
 
 <div class="tab__container">
