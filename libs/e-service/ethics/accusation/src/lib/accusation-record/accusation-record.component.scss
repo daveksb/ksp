@@ -6,6 +6,10 @@
   flex-direction: column;
 }
 
+.table__container {
+  margin: 20px;
+}
+
 .top-container {
   background-color: white;
   margin: 15px;
@@ -14,7 +18,8 @@
 
 .bottom-container {
   background-color: white;
-  margin: 15px 15px;
+  margin: 12px;
+  padding: 12px;
 }
 
 .bottom-content {
@@ -122,4 +127,8 @@
   padding-top: 15px;
   font-size: 22px;
   color: #000;
+}
+
+.tab__container {
+  margin: 25px 0;
 }

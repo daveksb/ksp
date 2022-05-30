@@ -1,1 +1,62 @@
-accu record
+<div class="main-container">
+  <div class="page__title">บันทึกข้อมูลการกล่าวหา/กล่าวโทษ</div>
+
+  <div class="bottom-container">
+    เลขที่รายการ วันที่ทำรายการ
+    <hr />
+    <div class="table__title">ข้อมูลผู้กล่าวหา/กล่าวโทษ</div>
+    <div class="table__container">
+      <div class="table-responsive">
+        <table class="table">
+          <thead class="header__table">
+            <tr>
+              <th scope="col">ลำดับ</th>
+              <th scope="col">เลขที่รายการ</th>
+              <th scope="col">วันที่รับ</th>
+              <th scope="col">หมายเลขคดีดำ</th>
+              <th scope="col">หมายเลขคดีแดง</th>
+              <th scope="col">หมายเลขบัตรประชาชน</th>
+              <th scope="col">ชื่อ-นามสกุล ผู้ถูกกล่าวหา</th>
+            </tr>
+          </thead>
+          <tbody class="body__table">
+            <tr>
+              <th>1</th>
+              <th>641000001</th>
+              <th>15 มิ.ย. 2654</th>
+              <th>xx/2564</th>
+              <th>xx/2564</th>
+              <th>x-xxxx-xxxx-xx-x</th>
+              <th>นายประหยัด จันทร์อังคาร</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-container">
+    <div class="table__title">ข้อมูลผู้ถูกกล่าวหา/กล่าวโทษ</div>
+    <button type="button" class="btn btn-secondary btn-sm label__button">
+      ค้นหา/เปลี่ยนแปลง ข้อมูลผู้มีใบอนุญาต
+    </button>
+
+    <div class="tab__container">
+      <mat-tab-group
+        class="tab-group"
+        animationDuration="0ms"
+        dynamicHeight="true"
+      >
+        <mat-tab label="ข้อมูลผู้มีใบอนุญาต" class="tab-content"> </mat-tab>
+
+        <mat-tab label="ข้อมูลใบอนุญาต"> </mat-tab>
+
+        <mat-tab label="ที่อยู่"> </mat-tab>
+
+        <mat-tab label="สถานที่ทำงาน"> </mat-tab>
+      </mat-tab-group>
+    </div>
+
+    <ksp-form-attachment></ksp-form-attachment>
+  </div>
+</div>
