@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { AccusationSearchComponent } from '@ksp/e-service/dialog/accusation-search';
 
 @Component({
   selector: 'e-service-ethic-accusation-record',
@@ -7,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./accusation-record.component.scss'],
 })
 export class AccusationRecordComponent {
-  constructor(public router: Router) {}
+  constructor(private router: Router, public dialog: MatDialog) {}
 
   next() {
     this.router.navigate(['/', 'ethics', 'accusation', 'decision']);
@@ -15,5 +17,18 @@ export class AccusationRecordComponent {
 
   cancel() {
     this.router.navigate(['/', 'ethics', 'accusation']);
+  }
+
+  openSearchDialog() {
+    const dialog = this.dialog.open(AccusationSearchComponent, {
+      height: '750px',
+      width: '1250px',
+    });
+
+    /* dialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.onCompleted();
+      }
+    }); */
   }
 }

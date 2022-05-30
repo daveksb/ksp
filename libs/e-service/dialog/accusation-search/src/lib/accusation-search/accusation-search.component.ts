@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 
 export interface PersonLicense {
-  id: string;
+  id: number;
   personId: string;
   name: string;
   organization: string;
@@ -9,7 +10,7 @@ export interface PersonLicense {
   province: string;
 }
 
-export const data = [
+export const data: PersonLicense[] = [
   {
     id: 1,
     personId: '110200051214',
@@ -33,17 +34,24 @@ export const data = [
   templateUrl: './accusation-search.component.html',
   styleUrls: ['./accusation-search.component.scss'],
 })
-export class AccusationSearchComponent implements OnInit {
+export class AccusationSearchComponent {
+  personSelected = false;
   displayedColumns: string[] = [
+    'select',
+    'view',
     'personId',
     'name',
     'organization',
     'school',
     'province',
   ];
-  dataSource = data;
+  dataSource = new MatTableDataSource<PersonLicense>();
 
-  constructor() {}
+  search() {
+    this.dataSource.data = data;
+  }
 
-  ngOnInit(): void {}
+  clear() {
+    this.dataSource.data = [];
+  }
 }
