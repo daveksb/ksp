@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,10 +9,14 @@ import { Router } from '@angular/router';
 })
 export class TempLicenseDetailComponent implements OnInit {
   reason: string[][] = [];
+  title: string[] = [];
+  selectedTabIndex = 0;
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
+    this.title = ['ครบถ้วน และถูกต้อง', 'ไม่ครบถ้วน และไม่ถูกต้อง'];
+
     this.reason[0] = [
       'เลขบัตรประชาชนไม่ถูกต้อง',
       'คำนำหน้าไม่ถูกต้อง',
@@ -21,7 +26,7 @@ export class TempLicenseDetailComponent implements OnInit {
       'นามสกุลภาษาอังกฤษไม่ถูกต้อง',
       'อื่นๆ (ระบุ)',
     ];
-    this.reason[1] = [
+    this.reason[2] = [
       'ชื่อปริญญา/หลักสูตรไม่ถูกต้อง',
       'สาขา/วิชาเอกไม่ถูกต้อง',
       'สถาบันการศึกษาไม่ถูกต้อง',
@@ -30,7 +35,7 @@ export class TempLicenseDetailComponent implements OnInit {
       'วันเดือนปี สำเร็จการศึกษาไม่ถูกต้อง',
       'อื่นๆ (ระบุ)',
     ];
-    this.reason[2] = [
+    this.reason[3] = [
       'ระบุชื่อวิชาไม่ตรงกับตารางสอน',
       'ระบุช่วงชั้นที่สอนไม่ตรงกับตารางสอน',
       'ระบุตำแหน่งไม่ถูกต้องตามสัญญาจ้าง',
@@ -41,7 +46,7 @@ export class TempLicenseDetailComponent implements OnInit {
       'ระบุระยะเวลาเดือนที่จ้างไม่ถูกต้อง',
       'อื่นๆ (ระบุ)',
     ];
-    this.reason[3] = [
+    this.reason[4] = [
       'ไม่ชี้แจงเหตุผลความจำเป็นของสถานศึกษาที่ต้องรับผู้ไม่มีใบอนุญาตประกอบวิชาชีพ',
       'ไม่ชี้แจงเหตุผลที่ไม่สามารถพัฒนาตนเองได้ตามระยะเวลาที่คุรุสภากำหนด',
       'ขอเอกสารการพํฒนาตนเองเพิ่ม',
@@ -49,11 +54,20 @@ export class TempLicenseDetailComponent implements OnInit {
     ];
   }
 
+  cancel() {
+    this.router.navigate(['/', 'temp-license']);
+  }
+
   next() {
     this.router.navigate(['/', 'temp-license', 'forbidden']);
   }
 
-  back() {
+  prevPage() {
     this.router.navigate(['/', 'temp-license', 'list']);
+  }
+
+  tabChanged(e: MatTabChangeEvent) {
+    console.log('tab index = ', e.index);
+    this.selectedTabIndex = e.index
   }
 }

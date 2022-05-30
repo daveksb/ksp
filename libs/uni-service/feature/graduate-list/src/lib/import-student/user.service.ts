@@ -75,23 +75,26 @@ export class UserService {
     return of(data);
   }
 
-  updateUser(user: User): Observable<User> {
-    return this.http.patch<User>(`${this.serviceUrl}/${user.id}`, user);
-  }
-
-  addUser(user: User): Observable<User> {
-    return this.http.post<User>(`${this.serviceUrl}/add`, user);
-  }
-
-  deleteUser(id: number): Observable<User> {
-    return this.http.delete<User>(`${this.serviceUrl}/${id}`);
-  }
-
-  deleteUsers(users: User[]): Observable<User[]> {
-    return forkJoin(
-      users.map((user) =>
-        this.http.delete<User>(`${this.serviceUrl}/${user.id}`)
-      )
+  /* updateUser(user: StudentImport): Observable<StudentImport> {
+    return this.http.patch<StudentImport>(
+      `${this.serviceUrl}/${user.id}`,
+      user
     );
   }
+
+  addUser(user: StudentImport): Observable<StudentImport> {
+    return this.http.post<StudentImport>(`${this.serviceUrl}/add`, user);
+  }
+
+  deleteUser(id: number): Observable<StudentImport> {
+    return this.http.delete<StudentImport>(`${this.serviceUrl}/${id}`);
+  }
+
+  deleteUsers(users: StudentImport[]): Observable<StudentImport[]> {
+    return forkJoin(
+      users.map((user) =>
+        this.http.delete<StudentImport>(`${this.serviceUrl}/${user.id}`)
+      )
+    );
+  } */
 }

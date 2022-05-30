@@ -38,6 +38,7 @@
   max-width: 100%;
   padding: 0 0 5px 0;
   background-color: #f6f6f6;
+  padding-bottom: 75px;
 }
 
 .content__container--secondary {
@@ -161,4 +162,13 @@
 
 .textarea__container-2 {
   margin: 20px 0;
+}
+
+.bottom__container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 1;
 }

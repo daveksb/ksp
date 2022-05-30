@@ -99,7 +99,7 @@
         <ng-container matColumnDef="print">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let element">
-            <button>พิมพ์ใบคำขอ</button>
+            <button (click) = "onSelect()">พิมพ์ใบคำขอ</button>
           </td>
         </ng-container>
 

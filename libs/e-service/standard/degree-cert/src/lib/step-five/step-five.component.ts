@@ -14,7 +14,7 @@ export class StepFiveComponent {
   constructor(public dialog: MatDialog, private router: Router) {}
 
   cancel() {
-    this.router.navigate(['./', 'degree-cert']);
+    this.router.navigate(['./', 'degree-cert', 'list', '1']);
   }
 
   prevPage() {
@@ -45,7 +45,7 @@ export class StepFiveComponent {
 
   onConfirmed() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      height: '300px',
+      height: '250px',
       width: '350px',
       data: {
         header: 'ยืนยันข้อมูลสำเร็จ',
@@ -58,7 +58,8 @@ export class StepFiveComponent {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'degree-cert']);
+        
+        this.router.navigate(['/', 'degree-cert', 'list', '1']);
       }
     });
   }
