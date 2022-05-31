@@ -4,6 +4,7 @@ export interface MenuConfig {
   icon?: string;
   label: string;
   path: string;
+  params?: any;
   subMenu?: MenuConfig[];
   subMenuName?: string;
   isExpanded?: boolean;

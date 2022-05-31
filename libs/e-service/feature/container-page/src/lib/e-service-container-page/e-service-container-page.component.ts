@@ -15,7 +15,6 @@ export class EServiceContainerPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
-      //console.log('data = ', data);
       this.menuConfig = data['menuConfig'];
       this.headerLabel = data['headerLabel'];
     });
