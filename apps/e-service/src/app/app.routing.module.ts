@@ -39,6 +39,14 @@ const routes: Routes = [
         (m) => m.EServiceEthicsAccusationModule
       ),
   },
+  {
+    path: 'publish',
+    data: { menuConfig: ethicsMenu, headerLabel: 'ระบบงานจรรยาบรรณ' },
+    loadChildren: () =>
+      import('@ksp/e-service/ethics/publish').then(
+        (m) => m.EServiceEthicsPublishModule
+      ),
+  },
   { path: '', component: EServiceLoginComponent },
 ];
 

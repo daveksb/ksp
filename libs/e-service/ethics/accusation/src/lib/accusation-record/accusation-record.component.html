@@ -1,5 +1,10 @@
-<div class="main-container">
-  <div class="page__title">บันทึกข้อมูลการกล่าวหา/กล่าวโทษ</div>
+<div
+  class="main-container"
+  [ngClass]="{
+    hide__container: hideContainer
+  }"
+>
+  <div class="page__title" *ngIf="!hideTitle">บันทึกข้อมูลการกล่าวหา/กล่าวโทษ</div>
   <img src="" />
 
   <div class="box-container">
@@ -188,7 +193,7 @@
   </div>
 </div>
 
-<div class="bottom__container">
+<!-- <div class="bottom__container">
   <div class="footer">
     <div></div>
 
@@ -201,4 +206,13 @@
       <button (click)="next()" class="btn-secondary">ถัดไป</button>
     </div>
   </div>
+</div> -->
+
+<div class="bottom__container" *ngIf="!hideAllButtons">
+  <ksp-bottom-menu
+    [showCenterButtons]="true"
+    [isFirstPage]="true"
+    (nextClicked)="next()"
+    (cancelClicked)="cancel()"
+  ></ksp-bottom-menu>
 </div>

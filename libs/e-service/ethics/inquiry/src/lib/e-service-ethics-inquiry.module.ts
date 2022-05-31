@@ -5,6 +5,7 @@ import { PageNotFoundComponent } from '@ksp/shared/ui/page-not-found';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { InquiryDetailComponent } from './inquiry-detail/inquiry-detail.component';
 import { InquiryResultComponent } from './inquiry-result/inquiry-result.component';
+import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 
 export const routes: Routes = [
   {
@@ -24,14 +25,14 @@ export const routes: Routes = [
         path: 'detail',
         component: PageNotFoundComponent,
       },
-      
+
 
     ],
   },
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [CommonModule, SharedUiBottomMenuModule ,RouterModule.forChild(routes)],
   declarations: [InquiryDetailComponent, InquiryResultComponent],
   exports: [InquiryDetailComponent, InquiryResultComponent],
 })

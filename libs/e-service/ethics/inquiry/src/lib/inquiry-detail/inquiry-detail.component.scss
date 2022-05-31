@@ -1,4 +1,4 @@
-.main-container {
+.main__container {
   background-color: #e5e5e5;
   height: auto;
   width: 100%;
@@ -70,7 +70,7 @@
 
 .content__container-secondary {
   display: grid;
-  grid-template-columns: 16% 2% 10% 3% 10% auto;
+  grid-template-columns: 17% 2% 10% 3% 10% auto;
   grid-column-gap: 8px;
   margin: 0 20px;
 }
@@ -143,10 +143,10 @@
 .btn-secondary {
   font-size: 20px;
   background: #fff;
-  border: 1px solid #F68B33;
+  border: 1px solid #f68b33;
   box-sizing: border-box;
   border-radius: 1px;
-  color: #F68B33;
+  color: #f68b33;
   padding: 0 20px;
   margin: 8px;
   width: 150px;
@@ -212,4 +212,9 @@
 .header {
   text-align: center;
   color: red;
+}
+
+.hide__container {
+  background-color: #fff;
+  padding-bottom: 0;
 }

@@ -14,4 +14,5 @@ export class BottomMenuComponent {
   @Input() isLastPage = false;
   @Input() isFirstPage = false;
   @Input() showCenterButtons = false;
+  
 }
