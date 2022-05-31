@@ -3,23 +3,13 @@
   padding: 16px;
   margin: 24px;
 }
+
 .detail__content {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 18px;
 }
 
-.detail__content-2 {
-  display: grid;
-  grid-template-columns: 25% 1fr;
-  grid-column-gap: 18px;
-}
-
-.detail__content--secondary {
-  display: grid;
-  grid-template-columns: 150px 1fr 1fr;
-  grid-column-gap: 18px;
-}
 .form-label {
   font-size: 18px;
   color: #656565;
@@ -106,4 +96,18 @@
 .warning__label-2 {
   color: #000000;
   margin: 0 24px;
+}
+
+.btn__next {
+  color: #f68b33;
+  background-color: #fff;
+  border: 1px solid #f68b33;
+  padding: 4px 24px;
+  width: 100px;
+  margin: 0 24px;
+}
+
+.btn__container {
+  display: flex;
+  justify-content: end;
 }

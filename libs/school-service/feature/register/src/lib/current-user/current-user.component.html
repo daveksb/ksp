@@ -22,7 +22,9 @@
 
       <div class="detail__content">
         <div class="mb-3">
-          <label>สังกัด</label>
+          <label for="exampleFormControlInput1" class="form-label"
+            >สังกัด</label
+          >
           <select
             class="form-select form-select-sm"
             aria-label=".form-select-sm example"
@@ -35,23 +37,36 @@
         </div>
 
         <div class="mb-3">
-          <label>โรงเรียน / สถานศึกษา</label>
-          <select
+          <label for="exampleFormControlInput1" class="form-label"
+            >ชื่อหน่วยงาน/สถานศึกษา</label
+          >
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            (click)="openSearchDialog()"
+          />
+        </div>
+
+        <!-- <select
             class="form-select form-select-sm"
             aria-label=".form-select-sm example"
+
           >
             <option selected>กรุณาเลือก</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
-          </select>
-        </div>
+          </select> -->
       </div>
     </div>
 
     <div class="warning__content">
-      <div class="warning__label-1">พบข้อมูลผู้ประสานงานที่ได้รับรหัสเข้าใช้งานในระบบ</div>
-      <div class="warning__label-2">หากท่านทำการยื่นขอรับรหัสเข้าใช้งานใหม่</div>
+      <div class="warning__label-1">
+        พบข้อมูลผู้ประสานงานที่ได้รับรหัสเข้าใช้งานในระบบ
+      </div>
+      <div class="warning__label-2">
+        หากท่านทำการยื่นขอรับรหัสเข้าใช้งานใหม่
+      </div>
     </div>
 
     <div class="detail__container">
@@ -81,6 +96,8 @@
       </div>
     </div>
 
-    <div><button (click)="next()">next</button></div>
+    <div class="btn__container">
+      <button class="btn__next" (click)="next()">ถัดไป</button>
+    </div>
   </div>
 </div>
