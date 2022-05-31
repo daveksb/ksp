@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 export interface University {
@@ -45,14 +44,18 @@ export const data = [
   },
 ];
 
+export type SearchType = 'uni' | 'school';
+
 @Component({
   selector: 'ksp-university-search',
   templateUrl: './university-search.component.html',
   styleUrls: ['./university-search.component.css'],
 })
 export class UniversitySearchComponent implements OnInit {
+  @Input() searchType: SearchType = 'school';
+
   data: University[] = [];
-  constructor(private location: Location, private matDialog: MatDialog) {}
+  constructor(private matDialog: MatDialog) {}
 
   ngOnInit(): void {
     this.data = [];
@@ -64,9 +67,5 @@ export class UniversitySearchComponent implements OnInit {
 
   search() {
     this.data = data;
-  }
-
-  back(): void {
-    this.location.back();
   }
 }
