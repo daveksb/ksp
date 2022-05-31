@@ -34,19 +34,16 @@ const menu: MenuConfig[] = [
       },
       {
         label: 'ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ',
-        path: 'temp-license/detail',
-        params: { type: 4 },
+        path: 'temp-license/foreign',
       },
       {
         label: 'ขอหนังสือรับรองคุณวุฒิ',
-        path: 'temp-license/detail',
-        params: { type: 5 },
+        path: 'temp-license/aa',
       },
       {
         label:
           'ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One Innovation : OSOI)',
-        path: 'temp-license/detail',
-        params: { type: 6 },
+        path: 'temp-license/bb',
       },
     ],
   },
@@ -82,6 +79,7 @@ export class SchoolServiceContainerPageComponent implements OnInit {
     this.menuConfig = menu;
 
     this.route.data.subscribe((data) => {
+      console.log('data = ', data);
       this.header = data['header'];
       this.subHeader = data['subHeader'];
     });
