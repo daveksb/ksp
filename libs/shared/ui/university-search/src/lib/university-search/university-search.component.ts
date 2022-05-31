@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 export interface University {
@@ -53,12 +53,20 @@ export type SearchType = 'uni' | 'school';
 })
 export class UniversitySearchComponent implements OnInit {
   @Input() searchType: SearchType = 'school';
+  @Output() confirmed = new EventEmitter<string>();
+
+  selectedUniversity = '';
 
   data: University[] = [];
   constructor(private matDialog: MatDialog) {}
 
   ngOnInit(): void {
     this.data = [];
+  }
+
+  onItemChange(universityCode: string) {
+    this.selectedUniversity = universityCode;
+    console.log('universityCode = ', universityCode);
   }
 
   closeDialog() {

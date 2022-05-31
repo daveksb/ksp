@@ -16,6 +16,7 @@
       <li *ngIf="!menu.subMenu?.length">
         <a
           routerLink="/{{ menu.path }}"
+          [queryParams]="menu.params"
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="{ exact: true }"
           ><img src="{{ menu.icon }}" class="icon__sidenav" />{{
@@ -43,6 +44,7 @@
             <li>
               <a
                 routerLink="/{{ subMenu.path }}"
+                [queryParams]="subMenu.params"
                 routerLinkActive="active-link"
                 [routerLinkActiveOptions]="{ exact: false }"
                 class="sub-menu"
