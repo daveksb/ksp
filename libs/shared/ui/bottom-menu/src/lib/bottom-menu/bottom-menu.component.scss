@@ -1,57 +1,28 @@
-.btn-primary {
+.btn {
   font-size: 20px;
-  background: #fff;
-  border: 1px solid #f68b33;
-  box-sizing: border-box;
   box-shadow: 0px 2px 4px rgba(102, 108, 139, 0.1);
   border-radius: 1px;
-  color: #f68b33;
-  margin: 7px;
+  box-sizing: border-box;
   width: 100px;
   height: 35px;
   padding: 0;
+  border: 1px solid #3f89fe; //default color
+  margin-right: 7px;
+  background: #fff; //default bg color
 }
 
-.btn-secondary {
-  font-size: 20px;
-  background: #fff;
-  border: 1px solid #f68b33;
-  box-sizing: border-box;
-  box-shadow: 0px 2px 4px rgba(102, 108, 139, 0.1);
-  border-radius: 1px;
+.btn-primary {
+  border-color: #f68b33;
   color: #f68b33;
-  margin: 7px;
-  width: 100px;
-  height: 35px;
-  padding: 0;
 }
 
 .btn-third {
-  font-size: 20px;
-  background: #fff;
-  border: 1px solid #3f89fe;
-  box-sizing: border-box;
-  box-shadow: 0px 2px 4px rgba(102, 108, 139, 0.1);
-  border-radius: 1px;
   color: #3f89fe;
-  margin: 7px;
-  width: 100px;
-  height: 35px;
-  padding: 0;
 }
 
 .btn-fourth {
-  font-size: 20px;
   background: #3f89fe;
-  border: 1px solid #3f89fe;
-  box-sizing: border-box;
-  box-shadow: 0px 2px 4px rgba(102, 108, 139, 0.1);
-  border-radius: 1px;
   color: #fff;
-  margin: 7px;
-  width: 100px;
-  height: 35px;
-  padding: 0;
 }
 
 .footer {
@@ -62,9 +33,10 @@
   padding: 0 65px;
   border: 1px solid #dadde1;
   height: 50px;
+  align-items: center;
 }
 
-.box3 {
+.last__button {
   grid-area: box3;
   justify-self: end;
 }
@@ -72,6 +44,7 @@
 .footer-2 {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 1200px) {
