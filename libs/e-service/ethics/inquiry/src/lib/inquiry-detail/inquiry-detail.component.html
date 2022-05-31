@@ -1,5 +1,10 @@
-<div class="main-container">
-  <div class="page__title">บันทึกข้อมูลการสืบสวนข้อเท็จจริง</div>
+<div
+  class="main__container {"
+  [ngClass]="{
+    hide__container: hideContainer
+  }"
+>
+  <div class="page__title" *ngIf="!hideTitle">บันทึกข้อมูลการสืบสวนข้อเท็จจริง</div>
   <img src="" />
 
   <div class="box-container">

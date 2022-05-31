@@ -10,6 +10,8 @@ export class InquiryDetailComponent {
   constructor(private router: Router) {}
 
   @Input() hideAllButtons = false;
+  @Input() hideContainer = false;
+  @Input() hideTitle = false;
 
   next() {
     this.router.navigate(['/', 'ethics', 'inquiry', 'result']);

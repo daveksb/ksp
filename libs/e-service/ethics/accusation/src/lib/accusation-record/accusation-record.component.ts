@@ -12,6 +12,8 @@ export class AccusationRecordComponent {
   constructor(private router: Router, public dialog: MatDialog) {}
 
   @Input() hideAllButtons = false;
+  @Input() hideContainer = false;
+  @Input() hideTitle = false;
 
   next() {
     this.router.navigate(['/', 'ethics', 'accusation', 'decision']);

@@ -1,5 +1,10 @@
-<div class="main-container">
-  <div class="page__title">บันทึกข้อมูลการสืบสวนข้อเท็จจริง</div>
+<div
+  class="main-container"
+  [ngClass]="{
+    hide__container: hideContainer
+  }"
+>
+  <div class="page__title" *ngIf="!hideTitle">บันทึกข้อมูลการสืบสวนข้อเท็จจริง</div>
   <img src="" />
 
   <div class="box-container">
@@ -145,7 +150,7 @@
     </div>
   </div>
 
- <!--  <div class="bottom__container">
+  <!--  <div class="bottom__container">
     <div class="footer">
       <div class="btn__center">
         <button (click)="cancel()" class="btn-primary">ยกเลิก</button>
@@ -162,6 +167,5 @@
     [isLastPage]="true"
     (saveClicked)="save()"
     (cancelClicked)="cancel()"
-
   ></ksp-bottom-menu>
 </div>

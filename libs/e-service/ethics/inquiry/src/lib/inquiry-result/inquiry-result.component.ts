@@ -15,6 +15,8 @@ export class InquiryResultComponent {
   constructor(private router: Router, public dialog: MatDialog) {}
 
   @Input() hideAllButtons = false;
+  @Input() hideContainer = false;
+  @Input() hideTitle = false;
 
   cancel() {
     this.router.navigate(['/', 'ethics', 'inquiry']);

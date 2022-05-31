@@ -1,5 +1,10 @@
-<div class="main-container">
-  <div class="page__title">บันทึกข้อมูลการกล่าวหา/กล่าวโทษ</div>
+<div
+  class="main-container"
+  [ngClass]="{
+    hide__container: hideContainer
+  }"
+>
+  <div class="page__title" *ngIf="!hideTitle">บันทึกข้อมูลการกล่าวหา/กล่าวโทษ</div>
   <img src="" />
 
   <div class="box-container">
@@ -209,6 +214,5 @@
     [isFirstPage]="true"
     (nextClicked)="next()"
     (cancelClicked)="cancel()"
-
   ></ksp-bottom-menu>
 </div>
