@@ -16,4 +16,8 @@ export class SchoolServiceLoginComponent {
   register() {
     this.router.navigate(['/', 'register', 'current-user']);
   }
+
+  forget() {
+    this.router.navigate(['/', 'forget-password', 'confirm-password']);
+  }
 }

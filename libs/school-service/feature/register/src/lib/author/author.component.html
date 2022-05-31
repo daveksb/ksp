@@ -1,114 +1,19 @@
-<!-- <div class="detail__container">
-  <div class="detail__header">
-    ข้อมูลผู้แต่งตั้งผู้ประสานงาน / ผู้รับผิดชอบ (ที่ระบุไว้ในเอกสารแนบ)
-  </div>
-  <div class="detail__content--secondary">
-    <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label"
-        >คำนำหน้าชื่อภาษาไทย</label
-      >
-      <select
-        class="form-select form-select-sm"
-        aria-label=".form-select-sm example"
-      >
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-    <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label"
-        >ชื่อภาษาไทย</label
-      >
-      <input class="form-control form-control-sm" type="text" />
-    </div>
-    <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label"
-        >นามสกุลภาษาไทย</label
-      >
-      <input class="form-control form-control-sm" type="text" />
-    </div>
-  </div>
-  <div class="detail__content--secondary">
-    <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label"
-        >คำนำหน้าชื่ออังกฤษ</label
-      >
-      <select
-        class="form-select form-select-sm"
-        aria-label=".form-select-sm example"
-      >
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-    <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label"
-        >ชื่อภาษาอังกฤษ</label
-      >
-      <input class="form-control form-control-sm" type="text" />
-    </div>
-    <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label"
-        >นามสกุลภาษาอังกฤษ</label
-      >
-      <input class="form-control form-control-sm" type="text" />
-    </div>
-  </div>
-  <div class="detail__content">
-    <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label"
-        >ตำแหน่งทางการบริหาร</label
-      >
-      <select
-        class="form-select form-select-sm"
-        aria-label=".form-select-sm example"
-      >
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-    <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label"><br /></label>
-      <input
-        class="form-control form-control-sm"
-        type="text"
-        placeholder="อื่นๆ โปรดระบุ"
-      />
-    </div>
-  </div>
-  <div class="detail__content">
-    <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label"
-        >เบอร์โทรศัพท์ (ที่ทำงาน)</label
-      >
-      <input class="form-control form-control-sm" type="text" />
-    </div>
-    <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label"
-        >เบอร์โทรศัพท์ (ที่ติดต่อได้)</label
-      >
-      <input class="form-control form-control-sm" type="text" />
-    </div>
-  </div>
-  <div class="detail__content">
-    <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label">อีเมล</label>
-      <input class="form-control form-control-sm" type="text" />
-    </div>
-  </div>
-</div>
- -->
-
 <uni-service-top-nav>ลงทะเบียนขอรับรหัสเข้าใช้งาน</uni-service-top-nav>
+
 <div class="container">
+  <div class="header">รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ</div>
+
   <div class="content__container">
-    วันที่ทำรายการ
+    <div class="content__header">
+      <div class="label__content">
+        วันที่ทำรายการ :
+        <span class="label__content--primary">10 ตุลาคม 2565</span>
+      </div>
+      <div class="label__content">
+        เลขใบคำขอ :
+        <span class="label__content--secondary">112234467876543</span>
+      </div>
+    </div>
 
     <hr />
 
@@ -146,7 +51,10 @@
       </div>
     </div>
 
-    <div>รหัสเข้าใช้งานคือ</div>
+    <div class="school__code">
+      <div class="detail__header">รหัสเข้าใช้งาน (รหัสโรงเรียน)</div>
+      <div class="header-2">คือ xxxx</div>
+    </div>
 
     <div class="form__container">
       <div class="detail__header">
@@ -223,32 +131,21 @@
             <option value="3">Three</option>
           </select>
         </div>
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label"
-            ><br
-          /></label>
-          <input
-            class="form-control form-control-sm"
-            type="text"
-            placeholder="อื่นๆ โปรดระบุ"
-          />
-        </div>
-      </div>
-      <div class="detail__content">
+
         <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label"
             >เบอร์โทรศัพท์ (ที่ทำงาน)</label
           >
           <input class="form-control form-control-sm" type="text" />
         </div>
+      </div>
+      <div class="detail__content">
         <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label"
             >เบอร์โทรศัพท์ (ที่ติดต่อได้)</label
           >
           <input class="form-control form-control-sm" type="text" />
         </div>
-      </div>
-      <div class="detail__content">
         <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label">อีเมล</label>
           <input class="form-control form-control-sm" type="text" />
@@ -260,6 +157,17 @@
       <ksp-form-attachment></ksp-form-attachment>
     </div>
 
-    <div><button>next</button></div>
+    <div class="footer">
+      <div>
+        <button (click)="back()" type="button" class="btn btn-primary">ย้อนกลับ</button>
+      </div>
+
+      <div class="footer-2">
+        <button (click)="cancel()" type="button" class="btn btn-third">ยกเลิก</button>
+        <button (click)="save()" type="button" class="btn btn-fourth">บันทึก</button>
+      </div>
+
+      <div class="last__button"></div>
+    </div>
   </div>
 </div>

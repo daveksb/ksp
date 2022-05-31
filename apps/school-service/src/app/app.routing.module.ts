@@ -18,6 +18,13 @@ const routes: Routes = [
         (m) => m.SchoolServiceFeatureRegisterModule
       ),
   },
+  {
+    path: 'forget-password',
+    loadChildren: () =>
+      import('@ksp/school-service/feature/forget-password').then(
+        (m) => m.SchoolServiceFeatureForgetPasswordModule
+      ),
+  },
   { path: '**', component: SchoolServiceLoginComponent },
 ];
 
