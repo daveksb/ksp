@@ -14,6 +14,6 @@ export class SchoolServiceLoginComponent {
   }
 
   register() {
-    this.router.navigate(['/', 'register']);
+    this.router.navigate(['/', 'register', 'current-user']);
   }
 }

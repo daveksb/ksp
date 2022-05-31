@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'ksp-register',
+  selector: 'school-service-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent implements OnInit {
-  constructor() {}
+export class RegisterComponent {
+  constructor(public router: Router) {}
 
-  ngOnInit(): void {}
+  next() {
+    this.router.navigate(['/', 'register', 'author']);
+  }
 }
