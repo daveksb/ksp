@@ -3,7 +3,7 @@
     <button
       (click)="prevClicked.emit(true)"
       type="button"
-      class="btn btn-secondary"
+      class="btn btn-primary"
       *ngIf="!isFirstPage"
     >
       ย้อนกลับ
@@ -11,7 +11,13 @@
   </div>
 
   <div class="footer-2" *ngIf="showCenterButtons">
-    <button (click)="cancelClicked.emit(true)" type="button" class="btn btn-third">ยกเลิก</button>
+    <button
+      (click)="cancelClicked.emit(true)"
+      type="button"
+      class="btn btn-third"
+    >
+      ยกเลิก
+    </button>
     <button
       (click)="saveClicked.emit(true)"
       type="button"
@@ -21,7 +27,7 @@
     </button>
   </div>
 
-  <div class="box3">
+  <div class="last__button">
     <button
       (click)="nextClicked.emit(true)"
       *ngIf="!isLastPage"
