@@ -8,6 +8,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { SharedUiFormModule } from '@ksp/shared/ui/form';
 import { MatMenuModule } from '@angular/material/menu';
 import { LicenseForeignComponent } from './license-foreign/license-foreign.component';
+import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { LicenseForeignComponent } from './license-foreign/license-foreign.compo
     MatTabsModule,
     SharedUiFormModule,
     MatMenuModule,
+    SharedUiTopNavModule,
   ],
   declarations: [
     LicenseListComponent,

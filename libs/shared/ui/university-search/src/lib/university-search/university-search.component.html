@@ -107,12 +107,10 @@
                 <div class="form-check">
                   <input
                     class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="flexCheckDefault"
+                    type="radio"
+                    (change)="onItemChange(item.uniCode)"
+                    name="university"
                   />
-                  <label class="form-check-label" for="flexCheckDefault">
-                  </label>
                 </div>
               </th>
               <td class="detail__table">{{ item.uniCode }}</td>
@@ -128,6 +126,8 @@
         <button
           type="button"
           class="btn btn-primary btn-sm label__button confirm__button"
+          (click)="confirmed.emit(selectedUniversity); closeDialog()"
+          [disabled]="!selectedUniversity"
         >
           ยืนยัน
         </button>

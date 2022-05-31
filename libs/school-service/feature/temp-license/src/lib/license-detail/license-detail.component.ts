@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ForbiddenPropertyComponent } from '@ksp/school-service/ui/dialog';
 import {
   CompleteDialogComponent,
@@ -12,8 +12,30 @@ import {
   templateUrl: './license-detail.component.html',
   styleUrls: ['./license-detail.component.scss'],
 })
-export class LicenseDetailComponent {
-  constructor(private router: Router, public dialog: MatDialog) {}
+export class LicenseDetailComponent implements OnInit {
+  requestTypeLabel = '';
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    public dialog: MatDialog
+  ) {}
+
+  ngOnInit(): void {
+    this.updateHeaderLabel();
+  }
+
+  updateHeaderLabel() {
+    this.route.queryParams.subscribe((params) => {
+      //console.log('params[type] = ', params['type']);
+      if (params['type'] == 1) {
+        this.requestTypeLabel = '(ชาวไทย)';
+      } else if (params['type'] == 2) {
+        this.requestTypeLabel = '(ผู้บริหารการศึกษา)';
+      } else if (params['type'] == 3) {
+        this.requestTypeLabel = '(ชาวต่างชาติ)';
+      }
+    });
+  }
 
   back() {
     this.router.navigate(['/', 'temp-license', 'list']);
