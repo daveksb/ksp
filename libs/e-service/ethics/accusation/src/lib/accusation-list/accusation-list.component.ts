@@ -78,9 +78,10 @@ export class AccusationListComponent implements OnInit {
     this.dataSource.data = [];
   }
 
-  onSearch(submitType: boolean) {
-    if (submitType) this.dataSource.data = data;
-    else {
+  onSubmit(submitType: boolean) {
+    if (submitType) {
+      this.dataSource.data = data;
+    } else {
       this.dataSource.data = [];
     }
   }

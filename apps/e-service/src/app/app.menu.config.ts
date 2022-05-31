@@ -32,7 +32,7 @@ export const ethicsMenu: MenuConfig[] = [
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'รายงาน',
     path: '',
-    isExpanded: true,
+    isExpanded: false,
     subMenuName: 'report',
     subMenu: [
       {
