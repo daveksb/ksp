@@ -8,7 +8,7 @@
 }
 .box__container {
   background-color: #fff;
-  padding: 20px;
+  padding: 15px;
 }
 .title__box {
   font-size: 22px;
@@ -20,13 +20,7 @@
 .detail__container {
   margin-bottom: 16px;
 }
-.detail__container--secondary {
-  display: grid;
-  grid-template-columns: 30% 1fr;
-  grid-gap: 20px;
-  margin-bottom: 16px;
-}
-.detail__container--third {
+.detail__container--half {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
@@ -98,14 +92,4 @@
 
 .close__dialog {
   cursor: pointer;
-}
-
-.pagination__container {
-  display: flex;
-}
-.pagination__detail {
-  display: flex;
-  margin-left: 12px;
-  font-size: 16px;
-  color: #808080;
 }
