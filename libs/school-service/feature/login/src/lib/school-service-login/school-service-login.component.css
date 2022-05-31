@@ -84,6 +84,14 @@
   justify-content: flex-end;
 }
 
+.label__third {
+  margin-top: 15px;
+  color: #0056ff;
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 800px) {
   .header {
     font-size: 30px;
