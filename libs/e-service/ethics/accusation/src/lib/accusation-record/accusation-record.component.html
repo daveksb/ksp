@@ -188,7 +188,7 @@
   </div>
 </div>
 
-<div class="bottom__container">
+<!-- <div class="bottom__container">
   <div class="footer">
     <div></div>
 
@@ -201,4 +201,14 @@
       <button (click)="next()" class="btn-secondary">ถัดไป</button>
     </div>
   </div>
+</div> -->
+
+<div class="bottom__container" *ngIf="!hideAllButtons">
+  <ksp-bottom-menu
+    [showCenterButtons]="true"
+    [isFirstPage]="true"
+    (nextClicked)="next()"
+    (cancelClicked)="cancel()"
+
+  ></ksp-bottom-menu>
 </div>

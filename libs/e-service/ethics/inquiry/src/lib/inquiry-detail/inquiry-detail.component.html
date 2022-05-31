@@ -140,9 +140,7 @@
         <button class="btn__upload">+ อัพโหลดไฟล์</button>
       </div>
     </div>
-  </div>
 
-  <div class="box-container">
     <div class="checkbox__container">
       <div class="mb-3">
         <input type="checkbox" class="checkbox" />
@@ -198,10 +196,10 @@
       ></textarea>
     </div>
   </div>
+</div>
 
-  <div class="bottom__container">
+<!--  <div class="bottom__container" >
     <div class="footer">
-      
       <div></div>
 
       <div class="btn__center">
@@ -214,4 +212,13 @@
       </div>
     </div>
   </div>
+</div> -->
+
+<div class="bottom__container" *ngIf="!hideAllButtons">
+  <ksp-bottom-menu
+    [showCenterButtons]="true"
+    [isFirstPage]="true"
+    (nextClicked)="next()"
+    (cancelClicked)="cancel()"
+  ></ksp-bottom-menu>
 </div>

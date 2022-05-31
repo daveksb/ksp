@@ -1,0 +1,59 @@
+.container {
+  background-color: #e5e5e5;
+  height: auto;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.checkbox {
+  height: 15px;
+  width: 15px;
+  margin-right: 5px;
+}
+
+.checkbox__label {
+  font-size: 16px;
+  color: #656565;
+}
+
+.checkbox__container {
+  padding: 12px;
+  background-color: #fff;
+  margin-bottom: 24px;
+}
+
+.header {
+  font-size: 22px;
+  margin: 12px 0;
+}
+
+.button__group {
+  margin: 12px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.btn__save {
+  color: #fff;
+  background-color: #01b27b;
+  border: 1px solid #01b27b;
+  width: 75px;
+  margin: 0 5px;
+  padding: 4px;
+}
+
+.btn__cancel {
+  color: #01b27b;
+  background-color: #fff;
+  border: 1px solid #01b27b;
+  width: 75px;
+  margin: 0 5px;
+  padding: 4px;
+}
+
+.checkbox__content {
+  display: flex;
+  line-height: 15px;
+  margin: 10px 20px;
+}

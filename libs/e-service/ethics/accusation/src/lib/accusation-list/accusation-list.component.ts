@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 
-type Mode = 'accusation' | 'investigation' | 'inquiry' | 'publish';
+type Mode = 'accusation' | 'investigation' | 'inquiry' | 'publish' | null;
 
 export interface AccusationList {
   id: string;
@@ -58,7 +58,7 @@ export const data: AccusationList[] = [
   styleUrls: ['./accusation-list.component.scss'],
 })
 export class AccusationListComponent implements OnInit {
-  mode: Mode = 'accusation';
+  mode: Mode = null;
   dataSource = new MatTableDataSource<AccusationList>();
   displayedColumns: string[] = [
     'id',
@@ -85,17 +85,17 @@ export class AccusationListComponent implements OnInit {
     }
   }
 
+  add() {
+    this.router.navigate(['/', 'ethics', 'accusation', 'detail']);
+  }
+
   next() {
-    if (this.mode === 'accusation')
+    if (this.mode === 'accusation') {
       this.router.navigate(['/', 'ethics', 'accusation', 'detail']);
-
-    if (this.mode === 'investigation')
+    } else if (this.mode === 'investigation') {
       this.router.navigate(['/', 'ethics', 'investigation', 'detail']);
-
-    if (this.mode === 'inquiry')
+    } else if (this.mode === 'inquiry') {
       this.router.navigate(['/', 'ethics', 'inquiry', 'detail']);
-
-    if (this.mode === 'publish')
-      this.router.navigate(['/', 'ethics', 'publish', 'detail']);
+    } else this.router.navigate(['/', 'publish', 'detail']);
   }
 }
