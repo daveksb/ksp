@@ -1,18 +1,30 @@
 <uni-service-top-nav>ลงทะเบียนขอรับรหัสเข้าใช้งาน</uni-service-top-nav>
+
 <div class="container">
+  <div class="header">รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ</div>
+
   <div class="content__container">
-    วันที่ทำรายการ
+    <div class="content__header">
+      <div class="label__content">
+        วันที่ทำรายการ :
+        <span class="label__content--primary">10 ตุลาคม 2565</span>
+      </div>
+      <div class="label__content">
+        เลขใบคำขอ :
+        <span class="label__content--secondary">112234467876543</span>
+      </div>
+    </div>
 
     <hr />
 
     <div class="detail__container">
-      <div class="detail__header">
-        ข้อมูลผู้แต่งตั้งผู้ประสานงาน / ผู้รับผิดชอบ (ที่ระบุไว้ในเอกสารแนบ)
-      </div>
+      <div class="detail__header">กรุณาเลือกสถาบันที่ท่านสังกัด</div>
 
       <div class="detail__content">
         <div class="mb-3">
-          <label>สิทธิสำหรับการเข้าใช้งาน</label>
+          <label for="exampleFormControlInput1" class="form-label"
+            >สังกัด</label
+          >
           <select
             class="form-select form-select-sm"
             aria-label=".form-select-sm example"
@@ -25,49 +37,50 @@
         </div>
 
         <div class="mb-3">
-          <label>สิทธิสำหรับการเข้าใช้งาน</label>
-          <select
-            class="form-select form-select-sm"
-            aria-label=".form-select-sm example"
+          <label for="exampleFormControlInput1" class="form-label"
+            >โรงเรียน/สถานศึกษา</label
           >
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
+          <input class="form-control form-control-sm" type="text" />
         </div>
       </div>
     </div>
 
     <div class="checkbox__container">
       <div class="detail__header">ข้อมูลผู้ขอรหัสสำหรับเข้าใช้งานระบบ</div>
-      สิทธิสำหรับการเข้าใช้งาน
-      <div>
-        <input type="checkbox" />
-        <label>xxx</label>
+      <div class="detail__header-2">สิทธิสำหรับการเข้าใช้งาน</div>
+      <div class="checkbox__content">
+        <input type="checkbox" class="checkbox" />
+        <label class="checkbox__label"
+          >ยื่นแบบคำขออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต</label
+        >
       </div>
-      <div>
-        <input type="checkbox" />
-        <label>xxx</label>
+      <div class="checkbox__content">
+        <input type="checkbox" class="checkbox" />
+        <label class="checkbox__label">ยื่นแบบคำขอหนังสือรับรองคุณวุฒิ</label>
       </div>
-      <div>
-        <input type="checkbox" />
-        <label>xxx</label>
+      <div class="checkbox__content">
+        <input type="checkbox" class="checkbox" />
+        <label class="checkbox__label"
+          >ยื่นแบบคำขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One
+          Innovation : OSOI)</label
+        >
       </div>
-      <div>
-        <input type="checkbox" />
-        <label>xxx</label>
+      <div class="checkbox__content">
+        <input type="checkbox" class="checkbox" />
+        <label class="checkbox__label"
+          >ทะเบียนหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต</label
+        >
       </div>
-      <div>
-        <input type="checkbox" />
-        <label>xxx</label>
+      <div class="checkbox__content">
+        <input type="checkbox" class="checkbox" />
+        <label class="checkbox__label">ทะเบียนข้อมูลครูและผู้บริหารศึกษา</label>
       </div>
     </div>
 
     <div class="form__container">
       <div class="detail__content-2">
         <div class="mb-3">
-          <label>หมายเลขบัตรประชาชน</label>
+          <label class="form-label">หมายเลขบัตรประชาชน</label>
           <input
             class="form-control form-control-sm"
             type="text"
@@ -166,30 +179,12 @@
 
         <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label"
-            ><br
-          /></label>
-          <input
-            class="form-control form-control-sm"
-            type="text"
-            placeholder="อืนๆ โปรดระบุ"
-          />
-        </div>
-      </div>
-      <div class="detail__content">
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label"
-            >สังกัด</label
-          >
-          <input class="form-control form-control-sm" type="text" />
-        </div>
-
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label"
             >เบอร์โทรศัพท์ (ที่ทำงาน)</label
           >
           <input class="form-control form-control-sm" type="text" />
         </div>
       </div>
+
       <div class="detail__content">
         <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label"
@@ -197,6 +192,7 @@
           >
           <input class="form-control form-control-sm" type="text" />
         </div>
+
         <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label">อีเมล</label>
           <input class="form-control form-control-sm" type="text" />
@@ -204,7 +200,8 @@
       </div>
     </div>
 
-    <div><button (click)="next()">next</button></div>
-
+    <div class="btn__container">
+      <button class="btn__next" (click)="next()">ถัดไป</button>
+    </div>
   </div>
 </div>
