@@ -24,6 +24,8 @@ export const routes: Routes = [
         path: 'detail',
         component: PageNotFoundComponent,
       },
+      
+
     ],
   },
 ];

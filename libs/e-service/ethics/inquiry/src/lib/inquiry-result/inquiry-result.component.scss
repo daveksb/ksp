@@ -1,0 +1,164 @@
+.main-container {
+  background-color: #e5e5e5;
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  font-size: 18px;
+}
+
+.box-container {
+  background-color: white;
+  margin: 12px;
+  padding: 12px;
+}
+
+.content__container {
+  margin: 24px 48px;
+  padding: 24px;
+  background-color: #f9f9fa;
+}
+.btn-secondary {
+  font-size: 16px;
+  background-color: #0056ff;
+  width: auto;
+  border-radius: 4px;
+}
+
+.bottom__container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 1;
+}
+
+.footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-left: 237px;
+  padding: 0 65px;
+  border: 1px solid #dadde1;
+  height: 50px;
+}
+
+.btn-primary {
+  font-size: 20px;
+  background: #fff;
+  border: 1px solid #01b27b;
+  box-sizing: border-box;
+  border-radius: 1px;
+  color: #01b27b;
+  padding: 0 20px;
+  margin: 8px;
+  width: 150px;
+}
+
+.btn-secondary {
+  font-size: 20px;
+  background: #fff;
+  border: 1px solid #f68b33;
+  box-sizing: border-box;
+  border-radius: 1px;
+  color: #f68b33;
+  padding: 0 20px;
+  margin: 8px;
+  width: 150px;
+}
+
+.btn-third {
+  font-size: 20px;
+  background: #01b27b;
+  border: 1px solid #01b27b;
+  box-sizing: border-box;
+  border-radius: 1px;
+  color: #fff;
+  padding: 0 20px;
+  margin: 8px;
+  width: 150px;
+}
+
+.page__title {
+  padding-left: 15px;
+  padding-top: 15px;
+  font-size: 22px;
+  color: #000;
+}
+
+.form__container {
+  padding: 0 24px;
+}
+
+.form-label {
+  font-size: 16px;
+  color: #656565;
+  margin-bottom: 0;
+}
+
+.form-control {
+  background-color: #fff;
+}
+
+.form-header {
+  font-size: 18px;
+  color: #000;
+  margin-bottom: 12px;
+}
+
+.btn__center {
+  display: flex;
+  justify-content: center;
+}
+
+.btn__left {
+  display: flex;
+}
+
+.label__content {
+  font-size: 18px;
+  color: #808080;
+  margin-right: 24px;
+}
+
+.label__content--primary {
+  color: #f68b33;
+}
+
+.label__content--secondary {
+  color: #01b27b;
+}
+
+.content__header {
+  display: flex;
+  flex-direction: row;
+}
+
+.content__container-pimary {
+  display: grid;
+  grid-template-columns: 20% auto;
+}
+
+.content__container-secondary {
+  display: grid;
+  grid-template-columns: 20% 20% 10% auto;
+  grid-column-gap: 16px;
+}
+
+.content__container-third {
+  display: grid;
+  grid-template-columns: 20% 10% auto;
+  grid-column-gap: 16px;
+}
+
+.btn__upload {
+  font-size: 16px;
+  background: #0056ff;
+  border: 1px solid #0056ff;
+  color: #fff;
+  padding: 2px 0;
+  width: 125px;
+}

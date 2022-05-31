@@ -1,12 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'e-service-inquiry-detail',
   templateUrl: './inquiry-detail.component.html',
   styleUrls: ['./inquiry-detail.component.scss'],
 })
-export class InquiryDetailComponent implements OnInit {
-  constructor() {}
+export class InquiryDetailComponent {
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  next() {
+    this.router.navigate(['/', 'ethics', 'inquiry', 'result']);
+  }
+
+  cancel() {
+    this.router.navigate(['/', 'ethics', 'inquiry']);
+  }
 }
