@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AccusationSearchComponent } from '@ksp/e-service/dialog/accusation-search';
@@ -10,6 +10,10 @@ import { AccusationSearchComponent } from '@ksp/e-service/dialog/accusation-sear
 })
 export class AccusationRecordComponent {
   constructor(private router: Router, public dialog: MatDialog) {}
+
+  @Input() hideAllButtons = false;
+  @Input() hideContainer = false;
+  @Input() hideTitle = false;
 
   next() {
     this.router.navigate(['/', 'ethics', 'accusation', 'decision']);

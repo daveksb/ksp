@@ -63,7 +63,18 @@
   </div>
 </div>
 
-<div class="bottom__container">
+<div class="bottom__container" *ngIf="!hideAllButtons">
+  <ksp-bottom-menu
+    [showCenterButtons]="true"
+    [isLastPage]="true"
+    (cancelClicked)="cancel()"
+    (prevClicked)="back()"
+    (saveClicked)="save()"
+  ></ksp-bottom-menu>
+</div>
+
+
+<!-- <div class="bottom__container">
   <div class="footer">
     <div class="btn__left">
       <button (click)="back()" class="btn-secondary">ย้อนกลับ</button>
@@ -74,4 +85,4 @@
       <button (click)="save()" class="btn-third">บันทึก</button>
     </div>
   </div>
-</div>
+</div> -->

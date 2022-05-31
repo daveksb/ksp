@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -13,6 +13,10 @@ import {
 })
 export class InvestigationDetailComponent {
   constructor(private router: Router, public dialog: MatDialog) {}
+
+  @Input() hideAllButtons = false;
+  @Input() hideContainer = false;
+  @Input() hideTitle = false;
 
   cancel() {
     this.router.navigate(['/', 'ethics', 'accusation']);

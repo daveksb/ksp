@@ -4,7 +4,10 @@ import { AccusationListComponent } from './accusation-list/accusation-list.compo
 import { AccusationRecordComponent } from './accusation-record/accusation-record.component';
 import { EServiceUiAccusationSearchModule } from '@ksp/e-service/ui/accusation-search';
 import { SharedUiFormModule } from '@ksp/shared/ui/form';
-import { AccusationSearchComponent, EServiceDialogAccusationSearchModule } from '@ksp/e-service/dialog/accusation-search';
+import {
+  AccusationSearchComponent,
+  EServiceDialogAccusationSearchModule,
+} from '@ksp/e-service/dialog/accusation-search';
 
 import { MatTabsModule } from '@angular/material/tabs';
 import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-info';
@@ -96,6 +99,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { AccusationDecisionComponent } from './accusation-decision/accusation-decision.component';
 import { Routes } from '@angular/router';
+import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 
 @NgModule({
   imports: [
@@ -109,8 +113,17 @@ import { Routes } from '@angular/router';
     EServiceUiAccusationSearchModule,
     EServiceEthicsAccusationRoutingModule,
     SharedUiFormModule,
+    SharedUiBottomMenuModule,
   ],
-  declarations: [AccusationListComponent, AccusationRecordComponent],
-  exports: [AccusationListComponent, AccusationRecordComponent],
+  declarations: [
+    AccusationListComponent,
+    AccusationRecordComponent,
+    AccusationDecisionComponent,
+  ],
+  exports: [
+    AccusationListComponent,
+    AccusationRecordComponent,
+    AccusationDecisionComponent,
+  ],
 })
 export class EServiceEthicsAccusationModule {}
