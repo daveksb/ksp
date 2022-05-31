@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { UniversitySearchComponent } from '@ksp/shared/ui/university-search';
 
 @Component({
-  selector: 'ksp-uni-service-register-requester',
+  selector: 'uni-service-register-requester',
   templateUrl: './uni-service-register-requester.component.html',
   styleUrls: ['./uni-service-register-requester.component.scss'],
 })

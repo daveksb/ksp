@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/school-service/feature/forget-password",
+  "sourceRoot": "libs/school-service/feature/forget-password/src",
+  "prefix": "ksp",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/school-service/feature/forget-password"],
+      "options": {
+        "jestConfig": "libs/school-service/feature/forget-password/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/school-service/feature/forget-password/**/*.ts",
+          "libs/school-service/feature/forget-password/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

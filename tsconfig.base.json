@@ -69,8 +69,14 @@
       "@ksp/school-service/feature/container-page": [
         "libs/school-service/feature/container-page/src/index.ts"
       ],
+      "@ksp/school-service/feature/forget-password": [
+        "libs/school-service/feature/forget-password/src/index.ts"
+      ],
       "@ksp/school-service/feature/login": [
         "libs/school-service/feature/login/src/index.ts"
+      ],
+      "@ksp/school-service/feature/register": [
+        "libs/school-service/feature/register/src/index.ts"
       ],
       "@ksp/school-service/feature/temp-license": [
         "libs/school-service/feature/temp-license/src/index.ts"
