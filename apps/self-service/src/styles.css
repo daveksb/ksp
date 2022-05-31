@@ -13,6 +13,14 @@
   font-family: 'KSP Bold' !important;
 }
 
+table {
+  width: 100%;
+}
+
+hr {
+  margin: 4px !important;
+}
+
 .mat-tab-label {
   background: #eff1f3;
   color: #515153;
@@ -37,8 +45,4 @@
 
 .mat-ink-bar {
   visibility: hidden !important;
-}
-
-table {
-  width: 100%;
 }
