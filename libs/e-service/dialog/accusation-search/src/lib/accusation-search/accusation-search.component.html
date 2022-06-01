@@ -138,25 +138,25 @@
   <mat-tab-group class="tab-group" animationDuration="0ms" dynamicHeight="true">
     <mat-tab label="ข้อมูลผู้มีใบอนุญาต" class="tab-content">
       <ng-container *ngIf="dataSource.data.length && personSelected">
-        <ksp-person-info></ksp-person-info>
+        <e-service-person-info></e-service-person-info>
       </ng-container>
     </mat-tab>
 
     <mat-tab label="ข้อมูลใบอนุญาต">
       <ng-container *ngIf="dataSource.data.length && personSelected">
-        <ksp-license-info></ksp-license-info>
+        <e-service-license-info></e-service-license-info>
       </ng-container>
     </mat-tab>
 
     <mat-tab label="ที่อยู่">
       <ng-container *ngIf="dataSource.data.length && personSelected"
-        ><ksp-address-info></ksp-address-info
+        ><e-service-address-info></e-service-address-info
       ></ng-container>
     </mat-tab>
 
     <mat-tab label="สถานที่ทำงาน">
       <ng-container *ngIf="dataSource.data.length && personSelected">
-        <ksp-workplace-info></ksp-workplace-info>
+        <e-service-workplace-info></e-service-workplace-info>
       </ng-container>
     </mat-tab>
   </mat-tab-group>

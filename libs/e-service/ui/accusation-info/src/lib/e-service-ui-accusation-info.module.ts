@@ -4,9 +4,10 @@ import { PersonInfoComponent } from './person-info/person-info.component';
 import { LicenseInfoComponent } from './license-info/license-info.component';
 import { AddressInfoComponent } from './address-info/address-info.component';
 import { WorkplaceInfoComponent } from './workplace-info/workplace-info.component';
+import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, SharedUiLicenseInfoModule],
   declarations: [
     PersonInfoComponent,
     LicenseInfoComponent,

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ksp-license-info',
+  selector: 'e-service-license-info',
   templateUrl: './license-info.component.html',
   styleUrls: ['./license-info.component.scss'],
 })
