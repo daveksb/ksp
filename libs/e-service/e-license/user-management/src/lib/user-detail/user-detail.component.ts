@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import {
+  CompleteDialogComponent,
+  ConfirmDialogComponent,
+} from '@ksp/shared/ui/dialog';
 
 @Component({
   selector: 'ksp-user-detail',
@@ -6,7 +12,50 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-detail.component.scss'],
 })
 export class UserDetailComponent implements OnInit {
-  constructor() {}
+  title: string[] = [];
 
-  ngOnInit(): void {}
+  constructor(private router: Router, public dialog: MatDialog) {}
+
+  ngOnInit(): void {
+    this.title = ['อนุมัติ', 'ไม่อนุมัติ'];
+  }
+
+  cancel() {
+    this.router.navigate(['/', 'temp-license']);
+  }
+
+  save() {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      height: '175px',
+      width: '350px',
+      data: {
+        title: `คุณต้องการบันทึกข้อมูล
+        ใช่หรือไม่? `,
+      },
+    });
+
+    confirmDialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.onCompleted();
+      }
+    });
+  }
+
+  onCompleted() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      height: '200px',
+      width: '350px',
+      data: {
+        header: `บันทึกข้อมูลสำเร็จ`,
+
+        buttonLabel: 'กลับสู่หน้าหลัก',
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/', 'temp-license']);
+      }
+    });
+  }
 }

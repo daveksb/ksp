@@ -4,6 +4,9 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { RouterModule, Routes } from '@angular/router';
+import { SharedUiFormModule } from '@ksp/shared/ui/form';
+import { EServiceUiLicenseCheckModule } from '@ksp/e-service/ui/license-check';
+import { MatDialogModule } from '@angular/material/dialog';
 
 export const routes: Routes = [
   {
@@ -28,7 +31,13 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [
+    CommonModule,
+    SharedUiFormModule,
+    EServiceUiLicenseCheckModule,
+    MatDialogModule,
+    RouterModule.forChild(routes),
+  ],
   declarations: [UserListComponent, UserDetailComponent],
   exports: [UserListComponent, UserDetailComponent],
 })
