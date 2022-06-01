@@ -1,0 +1,18 @@
+{
+  "projectType": "library",
+  "root": "libs/e-service/ui/user-search",
+  "sourceRoot": "libs/e-service/ui/user-search/src",
+  "prefix": "ksp",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/e-service/ui/user-search/**/*.ts",
+          "libs/e-service/ui/user-search/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

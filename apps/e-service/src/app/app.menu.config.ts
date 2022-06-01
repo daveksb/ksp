@@ -166,14 +166,21 @@ export const licenseMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบคำขอรหัสเข้าใช้งาน',
-    path: 'user-management/list',
+    label: 'ใบคำขอรหัสเข้าใช้งานระบบบริหารหน่วยงานทางการศึกษา (School Service)',
+    path: 'user-approvement/list',
     isExpanded: false,
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'บริหารจัดการผู้ใช้งาน',
-    path: 'user-management/list',
-    isExpanded: false,
+    path: '',
+    isExpanded: true,
+    subMenuName: 'user-management',
+    subMenu: [
+      {
+        path: 'user-management/list',
+        label: 'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
+      },
+    ],
   },
 ];
