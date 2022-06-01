@@ -5,6 +5,7 @@
     "e-service-dialog-accusation-search": "libs/e-service/dialog/accusation-search",
     "e-service-e-license-foreign-license": "libs/e-service/e-license/foreign-license",
     "e-service-e-license-temp-license": "libs/e-service/e-license/temp-license",
+    "e-service-e-license-user-management": "libs/e-service/e-license/user-management",
     "e-service-ethics-accusation": "libs/e-service/ethics/accusation",
     "e-service-ethics-inquiry": "libs/e-service/ethics/inquiry",
     "e-service-ethics-investigation": "libs/e-service/ethics/investigation",

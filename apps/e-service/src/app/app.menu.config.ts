@@ -164,4 +164,16 @@ export const licenseMenu: MenuConfig[] = [
       },
     ],
   },
+  {
+    icon: 'assets/images/icon-sidenav/card.svg',
+    label: 'ใบคำขอรหัสเข้าใช้งาน',
+    path: 'user-management/list',
+    isExpanded: false,
+  },
+  {
+    icon: 'assets/images/icon-sidenav/card.svg',
+    label: 'บริหารจัดการผู้ใช้งาน',
+    path: 'user-management/list',
+    isExpanded: false,
+  },
 ];
