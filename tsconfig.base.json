@@ -27,6 +27,9 @@
       "@ksp/e-service/e-license/user-approvement": [
         "libs/e-service/e-license/user-approvement/src/index.ts"
       ],
+      "@ksp/e-service/e-license/user-detail": [
+        "libs/e-service/e-license/user-detail/src/index.ts"
+      ],
       "@ksp/e-service/e-license/user-management": [
         "libs/e-service/e-license/user-management/src/index.ts"
       ],
