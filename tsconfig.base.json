@@ -69,9 +69,6 @@
       "@ksp/e-service/ui/license-check": [
         "libs/e-service/ui/license-check/src/index.ts"
       ],
-      "@ksp/e-service/ui/user-search": [
-        "libs/e-service/ui/user-search/src/index.ts"
-      ],
       "@ksp/e-service/ui/verify-result-box": [
         "libs/e-service/ui/verify-result-box/src/index.ts"
       ],
