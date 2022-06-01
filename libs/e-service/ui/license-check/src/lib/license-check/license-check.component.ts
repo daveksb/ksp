@@ -8,4 +8,5 @@ import { Component, Input } from '@angular/core';
 export class LicenseCheckComponent {
   @Input() reasons: string[] = [];
   @Input() titles: string[] = [];
+  @Input() header = 'ผลการตรวจสอบ';
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -12,12 +12,17 @@ import {
   styleUrls: ['./user-detail.component.scss'],
 })
 export class UserDetailComponent implements OnInit {
-  title: string[] = [];
+  title = ['อนุมัติ', 'ไม่อนุมัติ'];
+  title2 = ['ใช้งาน', 'ไม่ใช้งาน'];
 
-  constructor(private router: Router, public dialog: MatDialog) {}
+  processType = 1;
+  constructor(private router: Router, public dialog: MatDialog, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.title = ['อนุมัติ', 'ไม่อนุมัติ'];
+    this.route.paramMap.subscribe((res) => {
+      this.processType = Number(res.get('type'));
+      console.log('process type = ', this.processType);
+    });
   }
 
   cancel() {
