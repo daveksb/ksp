@@ -1,21 +1,77 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-export const data = [];
+
+export interface userList {
+  id: number;
+  view: string;
+  order: string;
+  name: string;
+  phone: string;
+  authorName: string;
+  school: string;
+  province: string;
+  status: string;
+  date: string;
+}
+
+export const data: userList[] = [
+  {
+    id: 1,
+    view: '',
+    order: '1234xxxxxxxx',
+    name: 'xxx xxxx xxxxxx',
+    phone: '098-xxx-xxxx',
+    authorName: 'xxx xxxx xxxx',
+    school: 'xxxxxx',
+    province: 'xxxxxx',
+    status: 'รอการอนุมัติ',
+    date: 'xx/xx/xxxx',
+  },
+  {
+    id: 2,
+    view: '',
+    order: '1234xxxxxxxx',
+    name: 'xxx xxxx xxxxxx',
+    phone: '098-xxx-xxxx',
+    authorName: 'xxx xxxx xxxx',
+    school: 'xxxxxx',
+    province: 'xxxxxx',
+    status: 'รอการอนุมัติ',
+    date: 'xx/xx/xxxx',
+  },
+];
 
 @Component({
   selector: 'ksp-approvement-user-list',
   templateUrl: './approvement-user-list.component.html',
   styleUrls: ['./approvement-user-list.component.scss'],
 })
-export class ApprovementUserListComponent implements OnInit {
+export class ApprovementUserListComponent {
+  displayedColumns: string[] = [
+    'id',
+    'view',
+    'order',
+    'name',
+    'phone',
+    'authorName',
+    'school',
+    'province',
+    'status',
+    'date',
+  ];
+  dataSource = new MatTableDataSource<userList>();
+
   constructor(private router: Router) {}
 
   selectedUniversity = '';
 
-  data = [];
+  search() {
+    this.dataSource.data = data;
+  }
 
-  ngOnInit(): void {
-    this.data = [];
+  clear() {
+    this.dataSource.data = [];
   }
 
   onItemChange(universityCode: string) {
@@ -23,11 +79,9 @@ export class ApprovementUserListComponent implements OnInit {
     console.log('universityCode = ', universityCode);
   }
 
-  search() {
-    this.data = data;
-  }
-
   goToDetail() {
-    this.router.navigate(['./', 'user-approvement', 'detail']);
+    this.router.navigate(['/user-approvement', 'detail'], {
+      queryParams: { type: 1 },
+    });
   }
 }
