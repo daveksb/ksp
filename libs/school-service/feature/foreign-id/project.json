@@ -1,0 +1,18 @@
+{
+  "projectType": "library",
+  "root": "libs/school-service/feature/foreign-id",
+  "sourceRoot": "libs/school-service/feature/foreign-id/src",
+  "prefix": "ksp",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/school-service/feature/foreign-id/**/*.ts",
+          "libs/school-service/feature/foreign-id/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
