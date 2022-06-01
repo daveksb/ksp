@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/e-service/e-license/user-management",
+  "sourceRoot": "libs/e-service/e-license/user-management/src",
+  "prefix": "ksp",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/e-service/e-license/user-management"],
+      "options": {
+        "jestConfig": "libs/e-service/e-license/user-management/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/e-service/e-license/user-management/**/*.ts",
+          "libs/e-service/e-license/user-management/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

@@ -47,6 +47,15 @@ const routes: Routes = [
         (m) => m.EServiceEthicsPublishModule
       ),
   },
+  {
+    path: 'user-management',
+    data: { menuConfig: licenseMenu, headerLabel: 'ระบบบริหารจัดการผู้ใช้งาน' },
+    loadChildren: () =>
+      import('@ksp/e-service/e-license/user-management').then(
+        (m) => m.EServiceELicenseUserManagementModule
+      ),
+  },
+
   { path: '', component: EServiceLoginComponent },
 ];
 
