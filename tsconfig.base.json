@@ -69,6 +69,9 @@
       "@ksp/school-service/feature/container-page": [
         "libs/school-service/feature/container-page/src/index.ts"
       ],
+      "@ksp/school-service/feature/foreign-id": [
+        "libs/school-service/feature/foreign-id/src/index.ts"
+      ],
       "@ksp/school-service/feature/forget-password": [
         "libs/school-service/feature/forget-password/src/index.ts"
       ],
