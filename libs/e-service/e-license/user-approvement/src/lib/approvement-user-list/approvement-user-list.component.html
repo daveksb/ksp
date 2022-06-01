@@ -1,11 +1,10 @@
 <div class="container">
   <div class="box__container">
     <div class="box__header">
-      <div class="title__box">ค้นหาหน่วยงาน/สถานศึกษา</div>
+      <div class="title__box">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
     </div>
     <hr />
     <div class="box__detail">
-      <div class="detail__header">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
       <div class="detail__container--half">
         <div>
           <label for="exampleFormControlInput1" class="form-label"
@@ -22,34 +21,47 @@
           </select>
         </div>
       </div>
+
       <div class="detail__container--half">
         <div>
-          <label for="exampleFormControlInput1" class="form-label">รหัส</label>
+          <label for="exampleFormControlInput1" class="form-label"
+            >รหัสมหาวิทยาลัย</label
+          >
           <input class="form-control form-control-sm" type="text" />
         </div>
         <div>
-          <label for="exampleFormControlInput1" class="form-label">ชื่อ</label>
+          <label for="exampleFormControlInput1" class="form-label"
+            >ชื่อโรงเรียน/หน่วยงาน</label
+          >
           <input class="form-control form-control-sm" type="text" />
         </div>
       </div>
+
+      <div class="detail__container--half">
+        <div>
+          <label for="exampleFormControlInput1" class="form-label"
+            >เลขที่ใบคำขอ</label
+          >
+          <input class="form-control form-control-sm" type="text" />
+        </div>
+        <div>
+          <label for="exampleFormControlInput1" class="form-label"
+            >ชื่อ-นามสกุล</label
+          >
+          <input class="form-control form-control-sm" type="text" />
+        </div>
+      </div>
+
       <div class="detail__container--half">
         <div class="detail__container">
           <label for="exampleFormControlInput1" class="form-label"
-            >จังหวัด <span class="error__label">*</span>
+            >วันที่ยื่นใบคำขอ
           </label>
-          <select
-            class="form-select form-select-sm"
-            aria-label=".form-select-sm example"
-          >
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
+          <input class="form-control form-control-sm" type="date" />
         </div>
         <div class="detail__container">
           <label for="exampleFormControlInput1" class="form-label"
-            >อำเภอ <span class="error__label">*</span>
+            >สถานะใบคำขอ
           </label>
           <select
             class="form-select form-select-sm"
@@ -74,49 +86,42 @@
           ค้นหา
         </button>
       </div>
-      <hr />
-      <div class="detail__header">ผลการค้นหา</div>
-      <div class="table-responsive">
-        <table class="table">
-          <thead class="header__table">
-            <tr>
-              <th scope="col">เลือก</th>
-              <th scope="col" class="header__column">รหัส</th>
-              <th scope="col">ชื่อ</th>
-              <th scope="col">ที่อยู่</th>
-              <th scope="col">สังกัด</th>
-            </tr>
-          </thead>
-          <tbody class="body__table">
-            <tr *ngFor="let item of data">
-              <th scope="row" class="body__detail">
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    (change)="({})"
-                    name="university"
-                  />
-                </div>
-              </th>
-              <td class="detail__table">xx</td>
-              <td class="detail__table">xx</td>
-              <td class="detail__table">xx</td>
-              <td class="detail__table">xx</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    </div>
+  </div>
 
-      <div class="footer">
-        <button
-          type="button"
-          class="btn btn-primary btn-sm label__button confirm__button"
-          (click)="goToDetail()"
-        >
-          ยืนยัน
-        </button>
-      </div>
+  <div class="table__container">
+    <div class="detail__header">ผลการค้นหา</div>
+    <div class="table-responsive">
+      <table class="table">
+        <thead class="header__table">
+          <tr>
+            <th scope="col" class="header__column">ลำดับ</th>
+            <th scope="col">ดู/ตรวจสอบ</th>
+            <th scope="col">เลขที่ใบคำขอ</th>
+            <th scope="col">ชื่อ-นามสกุล</th>
+            <th scope="col">เบอร์โทรศัพท์</th>
+            <th scope="col">ชื่อ-นามสกุล ผู้แต่งตั้ง</th>
+            <th scope="col">โรงเรียน/หน่วยงาน</th>
+            <th scope="col">จังหวัด</th>
+            <th scope="col">สถานะ</th>
+            <th scope="col">วันที่ยื่น</th>
+          </tr>
+        </thead>
+        <tbody class="body__table">
+          <tr>
+            <td class="detail__table">1</td>
+            <td class="detail__table" (click)="goToDetail()">ICON</td>
+            <td class="detail__table">1234xxxxxxxx</td>
+            <td class="detail__table">xxx xxxx xxxxxx</td>
+            <td class="detail__table">098-xxx-xxxx</td>
+            <td class="detail__table">xxx xxxx xxxx</td>
+            <td class="detail__table">xxxxxx</td>
+            <td class="detail__table">xxxxxx</td>
+            <td class="detail__table">รอการอนุมัติ</td>
+            <td class="detail__table">xx/xx/xxxx</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

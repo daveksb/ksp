@@ -12,12 +12,17 @@ import {
   styleUrls: ['./user-detail.component.scss'],
 })
 export class UserDetailComponent implements OnInit {
-  title = ['อนุมัติ', 'ไม่อนุมัติ'];
-  title2 = ['ใช้งาน', 'ไม่ใช้งาน'];
+  /* title = ['อนุมัติ', 'ไม่อนุมัติ'];
+  title2 = ['ใช้งาน', 'ไม่ใช้งาน']; */
+
+  title = [
+    ['อนุมัติ', 'ไม่อนุมัติ'],
+    ['ใช้งาน', 'ไม่ใช้งาน'],
+  ];
 
   @Input() viewUser = false;
 
-  processType = 1;
+  pageType = 1;
   constructor(
     private router: Router,
     public dialog: MatDialog,
@@ -26,8 +31,9 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((res) => {
-      this.processType = Number(res.get('type'));
-      console.log('process type = ', this.processType);
+      console.log('res = ', res);
+      this.pageType = Number(res.get('type'));
+      console.log('page type = ', this.pageType);
     });
   }
 
@@ -65,7 +71,7 @@ export class UserDetailComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'temp-license']);
+        this.router.navigate(['/', 'user-management']);
       }
     });
   }

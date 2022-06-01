@@ -28,6 +28,8 @@ export class ApprovementUserListComponent implements OnInit {
   }
 
   goToDetail() {
-    this.router.navigate(['./', 'user-approvement', 'detail']);
+    this.router.navigate(['/user-approvement', 'detail'], {
+      queryParams: { type: 1 },
+    });
   }
 }

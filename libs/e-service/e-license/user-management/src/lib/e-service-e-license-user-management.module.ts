@@ -12,17 +12,17 @@ export const routes: Routes = [
     component: EServiceContainerPageComponent,
     children: [
       {
-        path: '',
-        redirectTo: 'list',
-        pathMatch: 'full',
-      },
-      {
         path: 'list',
         component: UserListComponent,
       },
       {
-        path: 'detail',
+        path: 'detail/:type',
         component: UserDetailComponent,
+      },
+      {
+        path: '',
+        redirectTo: 'list',
+        pathMatch: 'full',
       },
     ],
   },

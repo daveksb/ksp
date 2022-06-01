@@ -187,7 +187,7 @@
 
   <div class="content__container-2">
     <e-service-license-check
-      [titles]="title"
+      [titles]="pageType === 1 ? title[0] : title[1]"
     ></e-service-license-check>
   </div>
 </div>

@@ -27,6 +27,6 @@ export class UserListComponent implements OnInit {
   }
 
   goToDetail() {
-    this.router.navigate(['./', 'user-management', 'detail']);
+    this.router.navigate(['/', 'user-management', 'detail', 2]);
   }
 }
