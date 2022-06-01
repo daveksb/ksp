@@ -5,17 +5,13 @@ import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container
 import { RouterModule, Routes } from '@angular/router';
 import { UserDetailComponent } from '@ksp/e-service/e-license/user-detail';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
 
 export const routes: Routes = [
   {
     path: '',
     component: EServiceContainerPageComponent,
     children: [
-      {
-        path: '',
-        redirectTo: 'list',
-        pathMatch: 'full',
-      },
       {
         path: 'list',
         component: UserListComponent,
@@ -24,12 +20,17 @@ export const routes: Routes = [
         path: 'detail',
         component: UserDetailComponent,
       },
+      {
+        path: '',
+        redirectTo: 'list',
+        pathMatch: 'full',
+      },
     ],
   },
 ];
 
 @NgModule({
-  imports: [CommonModule, MatDialogModule, RouterModule.forChild(routes)],
+  imports: [CommonModule, MatDialogModule, MatTableModule ,RouterModule.forChild(routes)],
   declarations: [UserListComponent],
   exports: [UserListComponent],
 })
