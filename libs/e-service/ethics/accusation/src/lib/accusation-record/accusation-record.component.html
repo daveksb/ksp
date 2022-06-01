@@ -65,18 +65,19 @@
     </button>
 
     <div class="tab__container">
-      <mat-tab-group
-        class="tab-group"
-        animationDuration="0ms"
-        dynamicHeight="true"
-      >
+      <mat-tab-group class="tab-group">
         <mat-tab label="ข้อมูลผู้มีใบอนุญาต" class="tab-content"
           ><e-service-person-info></e-service-person-info>
         </mat-tab>
 
         <mat-tab label="ข้อมูลใบอนุญาต">
-          <e-service-license-info></e-service-license-info
-        ></mat-tab>
+          <div class="header">
+            ข้อมูลใบอนุญาตประกอบวิชาชีพทางการศึกษา (ยังไม่หมดอายุ)
+          </div>
+          <ksp-license-type-button-group></ksp-license-type-button-group>
+          <ksp-license-info></ksp-license-info>
+          ></mat-tab
+        >
 
         <mat-tab label="ที่อยู่">
           <e-service-address-info></e-service-address-info>

@@ -144,7 +144,12 @@
 
     <mat-tab label="ข้อมูลใบอนุญาต">
       <ng-container *ngIf="dataSource.data.length && personSelected">
-        <e-service-license-info></e-service-license-info>
+        <!-- <e-service-license-info></e-service-license-info> -->
+        <div class="header">
+          ข้อมูลใบอนุญาตประกอบวิชาชีพทางการศึกษา (ยังไม่หมดอายุ)
+        </div>
+        <ksp-license-type-button-group></ksp-license-type-button-group>
+        <ksp-license-info></ksp-license-info>
       </ng-container>
     </mat-tab>
 
