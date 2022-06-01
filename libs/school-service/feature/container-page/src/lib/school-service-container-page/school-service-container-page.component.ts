@@ -62,6 +62,11 @@ export const menu: MenuConfig[] = [
     label: 'รายงาน',
     path: '',
   },
+  {
+    icon: 'assets/images/icon-sidenav/reward.svg',
+    label: 'Test',
+    path: 'staff-management/add-staff-teaching-info',
+  },
 ];
 
 @Component({
