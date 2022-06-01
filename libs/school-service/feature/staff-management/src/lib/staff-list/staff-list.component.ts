@@ -25,4 +25,8 @@ export class StaffListComponent implements OnInit {
   goToDetail() {
     this.router.navigate(['./', 'staff-management', 'license-search']);
   }
+
+  addStaff() {
+    this.router.navigate(['./', 'staff-management', 'staff-person-info']);
+  }
 }
