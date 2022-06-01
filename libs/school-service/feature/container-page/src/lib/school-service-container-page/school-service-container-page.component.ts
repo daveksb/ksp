@@ -50,7 +50,7 @@ const menu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/event.svg',
     label: 'ทะเบียนบุคลากรภายในหน่วยงาน',
-    path: '',
+    path: 'staff-management',
   },
   {
     icon: 'assets/images/icon-sidenav/reward.svg',

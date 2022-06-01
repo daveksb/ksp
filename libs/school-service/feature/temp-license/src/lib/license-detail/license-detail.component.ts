@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ForbiddenPropertyComponent } from '@ksp/school-service-dialog';
+import { ForbiddenPropertyComponent } from '@ksp/school-service/dialog';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -26,7 +26,6 @@ export class LicenseDetailComponent implements OnInit {
 
   updateHeaderLabel() {
     this.route.queryParams.subscribe((params) => {
-      //console.log('params[type] = ', params['type']);
       if (params['type'] == 1) {
         this.requestTypeLabel = '(ชาวไทย)';
       } else if (params['type'] == 2) {
@@ -84,7 +83,6 @@ export class LicenseDetailComponent implements OnInit {
         header: `ระบบทำการบันทึกเรียบร้อยแล้ว
         สามารถตรวจสอบสถานะภายใน
         3 - 15 วันทำการ`,
-
         buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
