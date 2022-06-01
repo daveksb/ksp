@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -15,8 +15,14 @@ export class UserDetailComponent implements OnInit {
   title = ['อนุมัติ', 'ไม่อนุมัติ'];
   title2 = ['ใช้งาน', 'ไม่ใช้งาน'];
 
+  @Input() viewUser = false;
+
   processType = 1;
-  constructor(private router: Router, public dialog: MatDialog, private route: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((res) => {
