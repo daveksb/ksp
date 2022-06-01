@@ -1,18 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { CompleteDialogComponent, ConfirmDialogComponent } from '@ksp/shared/ui/dialog';
+import {
+  CompleteDialogComponent,
+  ConfirmDialogComponent,
+} from '@ksp/shared/ui/dialog';
 
 @Component({
-  selector: 'school-service-license-foreign',
-  templateUrl: './license-foreign.component.html',
-  styleUrls: ['./license-foreign.component.scss'],
+  selector: 'ksp-foreign-id',
+  templateUrl: './foreign-id.component.html',
+  styleUrls: ['./foreign-id.component.scss'],
 })
-export class LicenseForeignComponent {
+export class ForeignIdComponent {
   constructor(private router: Router, public dialog: MatDialog) {}
 
   cancel() {
-    this.router.navigate(['/', 'login'])
+    this.router.navigate(['/', 'login']);
   }
 
   onConfirmed() {
@@ -22,7 +25,6 @@ export class LicenseForeignComponent {
       data: {
         title: `คุณต้องการยืนยันข้อมูล
         และส่งใบคำขอ ใช่หรือไม่? `,
-
       },
     });
 

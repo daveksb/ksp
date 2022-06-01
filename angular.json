@@ -22,6 +22,7 @@
     "e-service-ui-verify-result-box": "libs/e-service/ui/verify-result-box",
     "school-service": "apps/school-service",
     "school-service-feature-container-page": "libs/school-service/feature/container-page",
+    "school-service-feature-foreign-id": "libs/school-service/feature/foreign-id",
     "school-service-feature-forget-password": "libs/school-service/feature/forget-password",
     "school-service-feature-login": "libs/school-service/feature/login",
     "school-service-feature-register": "libs/school-service/feature/register",

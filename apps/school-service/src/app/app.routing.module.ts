@@ -12,6 +12,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'foreign-id',
+    loadChildren: () =>
+      import('@ksp/school-service/feature/foreign-id').then(
+        (m) => m.SchoolServiceFeatureForeignIdModule
+      ),
+  },
+  {
     path: 'register',
     loadChildren: () =>
       import('@ksp/school-service/feature/register').then(
