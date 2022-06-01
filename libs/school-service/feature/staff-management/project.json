@@ -1,0 +1,18 @@
+{
+  "projectType": "library",
+  "root": "libs/school-service/feature/staff-management",
+  "sourceRoot": "libs/school-service/feature/staff-management/src",
+  "prefix": "school-service",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/school-service/feature/staff-management/**/*.ts",
+          "libs/school-service/feature/staff-management/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

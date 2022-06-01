@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MenuConfig } from '@ksp/shared/ui/side-menu';
 
-const menu: MenuConfig[] = [
+export const menu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/home.svg ',
     label: 'หน้าแรก',
@@ -50,7 +50,7 @@ const menu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/event.svg',
     label: 'ทะเบียนบุคลากรภายในหน่วยงาน',
-    path: '',
+    path: 'staff-management',
   },
   {
     icon: 'assets/images/icon-sidenav/reward.svg',
@@ -63,6 +63,7 @@ const menu: MenuConfig[] = [
     path: '',
   },
 ];
+
 @Component({
   selector: 'school-service-container-page',
   templateUrl: './school-service-container-page.component.html',
@@ -79,7 +80,7 @@ export class SchoolServiceContainerPageComponent implements OnInit {
     this.menuConfig = menu;
 
     this.route.data.subscribe((data) => {
-      console.log('data = ', data);
+      //console.log('data = ', data);
       this.header = data['header'];
       this.subHeader = data['subHeader'];
     });
