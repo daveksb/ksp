@@ -136,6 +136,9 @@
       "@ksp/shared/ui/license-info": [
         "libs/shared/ui/license-info/src/index.ts"
       ],
+      "@ksp/shared/ui/license-type-button-group": [
+        "libs/shared/ui/license-type-button-group/src/index.ts"
+      ],
       "@ksp/shared/ui/page-not-found": [
         "libs/shared/ui/page-not-found/src/index.ts"
       ],

@@ -10,7 +10,7 @@ import { StepFiveComponent } from './step-five/step-five.component';
 import { EServiceUiLicenseCheckModule } from '@ksp/e-service/ui/license-check';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import { MatDialogModule } from '@angular/material/dialog';
-import { SharedFeatureDegreeCertModule } from '@ksp/shared-feature-degree-cert';
+import { SharedFeatureDegreeCertModule } from '@ksp/shared/feature/degree-cert';
 import { EServiceUiVerifyResultBoxModule } from '@ksp/e-service/ui/verify-result-box';
 import { VerifyComponent } from './verify/verify.component';
 import { ConsiderComponent } from './consider/consider.component';
@@ -31,7 +31,6 @@ import { EServiceStandardDegreeCertRoutingModule } from './e-service-standard-de
     SharedFeatureDegreeCertModule,
     SharedUiBottomMenuModule,
     SharedUiDegreeCertSearchFormModule,
-    
   ],
   declarations: [
     DegreeCertListComponent,

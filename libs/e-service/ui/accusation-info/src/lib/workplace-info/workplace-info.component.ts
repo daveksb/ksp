@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ksp-workplace-info',
+  selector: 'e-service-workplace-info',
   templateUrl: './workplace-info.component.html',
   styleUrls: ['./workplace-info.component.scss'],
 })
