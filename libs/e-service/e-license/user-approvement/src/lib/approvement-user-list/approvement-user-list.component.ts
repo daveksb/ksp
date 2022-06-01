@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+export const data = [];
 
 @Component({
   selector: 'ksp-approvement-user-list',
@@ -6,7 +8,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./approvement-user-list.component.scss'],
 })
 export class ApprovementUserListComponent implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  selectedUniversity = '';
+
+  data = [];
+
+  ngOnInit(): void {
+    this.data = [];
+  }
+
+  onItemChange(universityCode: string) {
+    this.selectedUniversity = universityCode;
+    console.log('universityCode = ', universityCode);
+  }
+
+  search() {
+    this.data = data;
+  }
+
+  goToDetail() {
+    this.router.navigate(['./', 'user-approvement', 'detail']);
+  }
 }

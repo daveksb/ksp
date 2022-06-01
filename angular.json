@@ -21,7 +21,6 @@
     "e-service-ui-accusation-info": "libs/e-service/ui/accusation-info",
     "e-service-ui-accusation-search": "libs/e-service/ui/accusation-search",
     "e-service-ui-license-check": "libs/e-service/ui/license-check",
-    "e-service-ui-user-search": "libs/e-service/ui/user-search",
     "e-service-ui-verify-result-box": "libs/e-service/ui/verify-result-box",
     "school-service": "apps/school-service",
     "school-service-feature-container-page": "libs/school-service/feature/container-page",

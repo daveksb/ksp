@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+export const data = [];
 
 @Component({
   selector: 'ksp-user-list',
@@ -6,7 +8,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-list.component.scss'],
 })
 export class UserListComponent implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
+  selectedUniversity = '';
 
-  ngOnInit(): void {}
+  data = [];
+
+  ngOnInit(): void {
+    this.data = [];
+  }
+
+  onItemChange(universityCode: string) {
+    this.selectedUniversity = universityCode;
+    console.log('universityCode = ', universityCode);
+  }
+
+  search() {
+    this.data = data;
+  }
+
+  goToDetail() {
+    this.router.navigate(['./', 'user-management', 'detail']);
+  }
 }
