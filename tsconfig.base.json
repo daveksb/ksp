@@ -75,6 +75,7 @@
       "@ksp/e-service/ui/verify-result-box": [
         "libs/e-service/ui/verify-result-box/src/index.ts"
       ],
+      "@ksp/school-service/dialog": ["libs/school-service/dialog/src/index.ts"],
       "@ksp/school-service/feature/container-page": [
         "libs/school-service/feature/container-page/src/index.ts"
       ],
@@ -90,11 +91,11 @@
       "@ksp/school-service/feature/register": [
         "libs/school-service/feature/register/src/index.ts"
       ],
+      "@ksp/school-service/feature/staff-management": [
+        "libs/school-service/feature/staff-management/src/index.ts"
+      ],
       "@ksp/school-service/feature/temp-license": [
         "libs/school-service/feature/temp-license/src/index.ts"
-      ],
-      "@ksp/school-service/ui/dialog": [
-        "libs/school-service/ui/dialog/src/index.ts"
       ],
       "@ksp/self-service/feature/home": [
         "libs/self-service/feature/home/src/index.ts"
@@ -119,10 +120,10 @@
       "@ksp/self-service/ui/payment": [
         "libs/self-service/ui/payment/src/index.ts"
       ],
-      "@ksp/shared-feature-degree-cert": [
+      "@ksp/shared/assets": ["libs/shared/assets/src/index.ts"],
+      "@ksp/shared/feature/degree-cert": [
         "libs/shared/feature/degree-cert/src/index.ts"
       ],
-      "@ksp/shared/assets": ["libs/shared/assets/src/index.ts"],
       "@ksp/shared/ui/bottom-menu": ["libs/shared/ui/bottom-menu/src/index.ts"],
       "@ksp/shared/ui/degree-cert-search-form": [
         "libs/shared/ui/degree-cert-search-form/src/index.ts"

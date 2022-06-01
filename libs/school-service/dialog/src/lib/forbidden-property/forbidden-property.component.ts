@@ -5,7 +5,6 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./forbidden-property.component.scss'],
 })
 export class ForbiddenPropertyComponent {
-
   @Output() confirmed = new EventEmitter<boolean>();
 
   save() {
