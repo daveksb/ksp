@@ -18,7 +18,6 @@
 .table__container {
   background-color: #fff;
   padding: 15px;
-  max-width: 1440px;
   margin-top: 20px;
 }
 
@@ -119,5 +118,11 @@
 }
 
 .close__dialog {
+  cursor: pointer;
+}
+
+.edit__icon {
+  height: 15px;
+  width: 15px;
   cursor: pointer;
 }

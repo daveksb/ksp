@@ -5,6 +5,7 @@ import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container
 import { RouterModule, Routes } from '@angular/router';
 import { UserDetailComponent } from '@ksp/e-service/e-license/user-detail';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
 
 export const routes: Routes = [
   {
@@ -16,7 +17,7 @@ export const routes: Routes = [
         component: UserListComponent,
       },
       {
-        path: 'detail/:type',
+        path: 'detail',
         component: UserDetailComponent,
       },
       {
@@ -29,7 +30,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, MatDialogModule, RouterModule.forChild(routes)],
+  imports: [CommonModule, MatDialogModule, MatTableModule ,RouterModule.forChild(routes)],
   declarations: [UserListComponent],
   exports: [UserListComponent],
 })

@@ -19,6 +19,7 @@
   font-size: 18px;
   color: #656565;
 }
+
 .form-control {
   background-color: #fff;
   font-size: 18px;
@@ -97,17 +98,17 @@
   width: 100px;
   height: 35px;
   padding: 0;
-  border: 1px solid #3f89fe; //default color
+  border: 1px solid #0056ff; //default color
   margin: 5px;
   background: #fff; //default bg color
 }
 
 .btn-third {
-  color: #3f89fe;
+  color: #0056ff;
 }
 
 .btn-fourth {
-  background: #3f89fe;
+  background: #0056ff;
   color: #fff;
 }
 
@@ -117,7 +118,7 @@
   align-items: center;
 }
 
-.view__lebel{
+.view__lebel {
   display: flex;
   justify-content: end;
   color: #3f89fe;
@@ -125,3 +126,8 @@
   font-size: 18px;
   cursor: pointer;
 }
+
+.disabled {
+  background-color: #ecedf3;
+}
+

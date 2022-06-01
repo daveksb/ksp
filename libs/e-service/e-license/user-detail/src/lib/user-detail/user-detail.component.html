@@ -20,6 +20,7 @@
         <div class="mb-3">
           <label class="form-label">สังกัด</label>
           <select
+            [disabled]="pageType === 2"
             class="form-select form-select-sm"
             aria-label=".form-select-sm example"
           >
@@ -33,6 +34,7 @@
         <div class="mb-3">
           <label class="form-label">หน่วยงาน/สถานศึกษา</label>
           <select
+            [disabled]="pageType === 2"
             class="form-select form-select-sm"
             aria-label=".form-select-sm example"
           >
@@ -47,6 +49,7 @@
       <div class="mb-3">
         <label class="form-label">ที่อยู่</label>
         <select
+          [disabled]="pageType === 2"
           class="form-select form-select-sm"
           aria-label=".form-select-sm example"
         >
@@ -57,7 +60,7 @@
         </select>
       </div>
 
-      <div class="view__lebel" *ngIf="!viewUser">
+      <div class="view__lebel" *ngIf="pageType === 1">
         ดูรายชื่อผู้เข้าใช้งานระบบของหน่วยงาน/สถานศึกษานี้
       </div>
     </div>
@@ -72,7 +75,12 @@
           <label for="exampleFormControlInput1" class="form-label"
             >หมายเลขบัตรประชาชน</label
           >
-          <input class="form-control form-control-sm" type="text" />
+          <input
+            [disabled]="pageType === 2"
+            [ngClass]="{ disabled: pageType === 2 }"
+            class="form-control form-control-sm"
+            type="text"
+          />
         </div>
       </div>
 
@@ -82,6 +90,8 @@
             >คำนำหน้าชื่อภาษาไทย</label
           >
           <select
+            [disabled]="pageType === 2"
+            [ngClass]="{ disabled: pageType === 2 }"
             class="form-select form-select-sm"
             aria-label=".form-select-sm example"
           >
@@ -95,13 +105,23 @@
           <label for="exampleFormControlInput1" class="form-label"
             >ชื่อภาษาไทย</label
           >
-          <input class="form-control form-control-sm" type="text" />
+          <input
+            [disabled]="pageType === 2"
+            [ngClass]="{ disabled: pageType === 2 }"
+            class="form-control form-control-sm"
+            type="text"
+          />
         </div>
         <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label"
             >นามสกุลภาษาไทย</label
           >
-          <input class="form-control form-control-sm" type="text" />
+          <input
+            [disabled]="pageType === 2"
+            [ngClass]="{ disabled: pageType === 2 }"
+            class="form-control form-control-sm"
+            type="text"
+          />
         </div>
       </div>
 
@@ -110,12 +130,22 @@
           <label for="exampleFormControlInput1" class="form-label"
             >เบอร์โทรศัพท์มือถือ</label
           >
-          <input class="form-control form-control-sm" type="text" />
+          <input
+            [disabled]="pageType === 2"
+            [ngClass]="{ disabled: pageType === 2 }"
+            class="form-control form-control-sm"
+            type="text"
+          />
         </div>
 
         <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label">อีเมล</label>
-          <input class="form-control form-control-sm" type="text" />
+          <input
+            [disabled]="pageType === 2"
+            [ngClass]="{ disabled: pageType === 2 }"
+            class="form-control form-control-sm"
+            type="text"
+          />
         </div>
       </div>
 
@@ -124,7 +154,12 @@
           <label for="exampleFormControlInput1" class="form-label"
             >ตำแหน่งงาน</label
           >
-          <input class="form-control form-control-sm" type="text" />
+          <input
+            [disabled]="pageType === 2"
+            [ngClass]="{ disabled: pageType === 2 }"
+            class="form-control form-control-sm"
+            type="text"
+          />
         </div>
       </div>
     </div>
@@ -140,6 +175,8 @@
             >คำนำหน้าชื่อภาษาไทย</label
           >
           <select
+            [disabled]="pageType === 2"
+            [ngClass]="{ disabled: pageType === 2 }"
             class="form-select form-select-sm"
             aria-label=".form-select-sm example"
           >
@@ -149,17 +186,28 @@
             <option value="3">Three</option>
           </select>
         </div>
+
         <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label"
             >ชื่อภาษาไทย</label
           >
-          <input class="form-control form-control-sm" type="text" />
+          <input
+            [disabled]="pageType === 2"
+            [ngClass]="{ disabled: pageType === 2 }"
+            class="form-control form-control-sm"
+            type="text"
+          />
         </div>
         <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label"
             >นามสกุลภาษาไทย</label
           >
-          <input class="form-control form-control-sm" type="text" />
+          <input
+            [disabled]="pageType === 2"
+            [ngClass]="{ disabled: pageType === 2 }"
+            class="form-control form-control-sm"
+            type="text"
+          />
         </div>
       </div>
 
@@ -168,14 +216,24 @@
           <label for="exampleFormControlInput1" class="form-label"
             >ตำแหน่งงาน</label
           >
-          <input class="form-control form-control-sm" type="text" />
+          <input
+            [disabled]="pageType === 2"
+            [ngClass]="{ disabled: pageType === 2 }"
+            class="form-control form-control-sm"
+            type="text"
+          />
         </div>
 
         <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label"
             >เบอร์โทรศัพท์ (ที่ติดต่อได้)</label
           >
-          <input class="form-control form-control-sm" type="text" />
+          <input
+            [disabled]="pageType === 2"
+            [ngClass]="{ disabled: pageType === 2 }"
+            class="form-control form-control-sm"
+            type="text"
+          />
         </div>
       </div>
     </div>
@@ -187,6 +245,7 @@
 
   <div class="content__container-2">
     <e-service-license-check
+      [headerTitle]="pageType === 1 ? 'ผลการตรวจสอบ' : 'สถานะการใช้งาน'"
       [titles]="pageType === 1 ? title[0] : title[1]"
     ></e-service-license-check>
   </div>

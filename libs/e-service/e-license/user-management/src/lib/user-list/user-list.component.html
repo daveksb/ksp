@@ -75,7 +75,11 @@
         </div>
       </div>
       <div class="detail__action">
-        <button type="button" class="btn btn-fourth btn-sm label__button">
+        <button
+          (click)="clear()"
+          type="button"
+          class="btn btn-fourth btn-sm label__button"
+        >
           ล้างข้อมูล
         </button>
         <button
@@ -90,36 +94,58 @@
   </div>
 
   <div class="table__container">
-    <div class="detail__header">ผลการค้นหา</div>
-    <div class="table-responsive">
-      <table class="table">
-        <thead class="header__table">
-          <tr>
-            <th scope="col" class="header__column">ลำดับ</th>
-            <th scope="col">ดู/แก้ไข</th>
-            <th scope="col">หมายเลขบัตรประชาชน</th>
-            <th scope="col">ชื่อ-นามสกุล</th>
-            <th scope="col">โรงเรียน/หน่วยงาน</th>
-            <th scope="col">จังหวัด</th>
-            <th scope="col">สถานะ</th>
-            <th scope="col">วันที่อนุมัติ</th>
-            <th scope="col">วันที่แก้ไข</th>
-          </tr>
-        </thead>
-        <tbody class="body__table">
-          <tr>
-            <td class="detail__table">1</td>
-            <td class="detail__table" (click)="goToDetail()">ICON</td>
-            <td class="detail__table">xxx xxxx xxxxxx</td>
-            <td class="detail__table">xxx xxxx xxxx</td>
-            <td class="detail__table">xxxxxx</td>
-            <td class="detail__table">xxxxxx</td>
-            <td class="detail__table">ใช้งาน</td>
-            <td class="detail__table">xx/xx/xxxx</td>
-            <td class="detail__table">xx/xx/xxxx</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="title__box">รายชื่อผู้เข้าใช้งานระบบ school service</div>
+
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="view">
+        <th mat-header-cell *matHeaderCellDef>ดู/แก้ไข</th>
+        <td mat-cell *matCellDef="let element" (click)="goToDetail()">
+          <img src="assets/images/edit.png" class="edit__icon" />
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ssn">
+        <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
+        <td mat-cell *matCellDef="let element">{{ element.ssn }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="school">
+        <th mat-header-cell *matHeaderCellDef>โรงเรียน/หน่วยงาน</th>
+        <td mat-cell *matCellDef="let element">{{ element.school }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="province">
+        <th mat-header-cell *matHeaderCellDef>จังหวัด</th>
+        <td mat-cell *matCellDef="let element">{{ element.province }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>สถานะ</th>
+        <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="approveDate">
+        <th mat-header-cell *matHeaderCellDef>วันที่อนุมัติ</th>
+        <td mat-cell *matCellDef="let element">{{ element.approveDate }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="editDate">
+        <th mat-header-cell *matHeaderCellDef>วันที่แก้ไข</th>
+        <td mat-cell *matCellDef="let element">{{ element.editDate }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
   </div>
 </div>

@@ -6,6 +6,7 @@ import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container
 import { PageNotFoundComponent } from '@ksp/shared/ui/page-not-found';
 import { UserDetailComponent } from '@ksp/e-service/e-license/user-detail';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
 
 export const routes: Route[] = [
   {
@@ -22,7 +23,7 @@ export const routes: Route[] = [
         component: ApprovementUserListComponent,
       },
       {
-        path: 'detail/:type',
+        path: 'detail',
         component: UserDetailComponent,
       },
     ],
@@ -30,7 +31,7 @@ export const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [CommonModule, MatDialogModule, RouterModule.forChild(routes)],
+  imports: [CommonModule, MatDialogModule, MatTableModule ,RouterModule.forChild(routes)],
   declarations: [ApprovementUserListComponent],
 })
 export class EServiceELicenseUserApprovementModule {}

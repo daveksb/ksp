@@ -19,8 +19,7 @@ export class UserDetailComponent implements OnInit {
     ['อนุมัติ', 'ไม่อนุมัติ'],
     ['ใช้งาน', 'ไม่ใช้งาน'],
   ];
-
-  @Input() viewUser = false;
+  header = ['สถานะการใช้งาน'];
 
   pageType = 1;
   constructor(
@@ -30,15 +29,18 @@ export class UserDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((res) => {
-      console.log('res = ', res);
-      this.pageType = Number(res.get('type'));
-      console.log('page type = ', this.pageType);
+    this.route.queryParams.subscribe((res) => {
+      this.pageType = Number(res['type']);
+      console.log('res = ', this.pageType);
     });
   }
 
   cancel() {
-    this.router.navigate(['/', 'temp-license']);
+    if (this.pageType === 1) {
+      this.router.navigate(['/', 'user-approvement']);
+    } else if (this.pageType === 2) {
+      this.router.navigate(['/', 'user-management']);
+    }
   }
 
   save() {
@@ -71,7 +73,11 @@ export class UserDetailComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'user-management']);
+        if (this.pageType === 1) {
+          this.router.navigate(['/', 'user-approvement']);
+        } else if (this.pageType === 2) {
+          this.router.navigate(['/', 'user-management']);
+        }
       }
     });
   }
