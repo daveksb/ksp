@@ -24,6 +24,9 @@
       "@ksp/e-service/e-license/temp-license": [
         "libs/e-service/e-license/temp-license/src/index.ts"
       ],
+      "@ksp/e-service/e-license/user-approvement": [
+        "libs/e-service/e-license/user-approvement/src/index.ts"
+      ],
       "@ksp/e-service/e-license/user-management": [
         "libs/e-service/e-license/user-management/src/index.ts"
       ],
@@ -65,6 +68,9 @@
       ],
       "@ksp/e-service/ui/license-check": [
         "libs/e-service/ui/license-check/src/index.ts"
+      ],
+      "@ksp/e-service/ui/user-search": [
+        "libs/e-service/ui/user-search/src/index.ts"
       ],
       "@ksp/e-service/ui/verify-result-box": [
         "libs/e-service/ui/verify-result-box/src/index.ts"

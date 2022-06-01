@@ -48,8 +48,23 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'user-approvement',
+    data: {
+      menuConfig: licenseMenu,
+      headerLabel:
+        'ใบคำขอรหัสเข้าใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
+    },
+    loadChildren: () =>
+      import('@ksp/e-service/e-license/user-approvement').then(
+        (m) => m.EServiceELicenseUserApprovementModule
+      ),
+  },
+  {
     path: 'user-management',
-    data: { menuConfig: licenseMenu, headerLabel: 'ระบบบริหารจัดการผู้ใช้งาน' },
+    data: {
+      menuConfig: licenseMenu,
+      headerLabel: 'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา',
+    },
     loadChildren: () =>
       import('@ksp/e-service/e-license/user-management').then(
         (m) => m.EServiceELicenseUserManagementModule
