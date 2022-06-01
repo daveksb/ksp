@@ -7,6 +7,7 @@ import { LicenseSearchComponent } from './license-search/license-search.componen
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 import { AddStaffPersonInfoComponent } from './add-staff-person-info/add-staff-person-info.component';
 import { AddStaffTeachingInfoComponent } from './add-staff-teaching-info/add-staff-teaching-info.component';
+import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
 
 export const routes: Routes = [
   {
@@ -26,7 +27,12 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, SharedUiTopNavModule, RouterModule.forChild(routes)],
+  imports: [
+    CommonModule,
+    SharedUiLicenseInfoModule,
+    SharedUiTopNavModule,
+    RouterModule.forChild(routes),
+  ],
   declarations: [
     StaffListComponent,
     LicenseSearchComponent,

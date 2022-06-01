@@ -48,6 +48,7 @@
     "shared-ui-degree-cert-tab-content": "libs/shared/ui/degree-cert-tab-content",
     "shared-ui-dialog": "libs/shared/ui/dialog",
     "shared-ui-form": "libs/shared/ui/form",
+    "shared-ui-license-info": "libs/shared/ui/license-info",
     "shared-ui-page-not-found": "libs/shared/ui/page-not-found",
     "shared-ui-side-menu": "libs/shared/ui/side-menu",
     "shared-ui-top-nav": "libs/shared/ui/top-nav",
