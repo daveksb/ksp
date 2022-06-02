@@ -106,12 +106,27 @@
   </div>
 </div>
 
-<section class="container-fluid" [formGroup]="toppings">
-  <h4>Select your toppings:</h4>
-  <p><mat-checkbox formControlName="pepperoni">Pepperoni</mat-checkbox></p>
-  <p><mat-checkbox formControlName="extracheese">Extra Cheese</mat-checkbox></p>
-  <p><mat-checkbox formControlName="mushroom">Mushroom</mat-checkbox></p>
-</section>
+<div class="box__detail">
+  <div class="title__box">ช่วงชั้นที่สอน</div>
+  <section class="container-fluid" [formGroup]="levelFormGroup">
+    <ng-container *ngFor="let item of levels | keyvalue">
+      <mat-checkbox formControlName="{{ item.key }}">{{
+        item.key
+      }}</mat-checkbox>
+    </ng-container>
+  </section>
+</div>
+
+<div class="box__detail mb-5">
+  <div class="title__box">ประเภทวิชาที่สอน</div>
+  <section class="container-fluid" [formGroup]="subjectFormGroup">
+    <ng-container *ngFor="let item of subjects | keyvalue">
+      <mat-checkbox formControlName="{{ item.key }}">{{
+        item.key
+      }}</mat-checkbox>
+    </ng-container>
+  </section>
+</div>
 
 <div class="bottom__container">
   <ksp-bottom-menu

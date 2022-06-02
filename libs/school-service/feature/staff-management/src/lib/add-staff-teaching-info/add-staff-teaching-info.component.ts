@@ -12,21 +12,37 @@ import {
   templateUrl: './add-staff-teaching-info.component.html',
   styleUrls: ['./add-staff-teaching-info.component.scss'],
 })
-export class AddStaffTeachingInfoComponent {
-  toppings: FormGroup;
+export class AddStaffTeachingInfoComponent implements OnInit {
+  levelFormGroup: FormGroup;
+  subjectFormGroup: FormGroup;
+
+  levels = {
+    ['อนุบาล']: false,
+    ['ชั้นประถมปีที่ 1-3']: false,
+    ['ชั้นประถมปีที่ 4-6']: false,
+    ['ชั้นมัธยมปีที่ 1-3']: false,
+    ['ชั้นมัธยมปีที่ 4-6']: false,
+  };
+
+  subjects = {
+    ['ภาษาไทย']: false,
+    ['วิทยาศาสตร์']: false,
+    ['คณิตศาสตร์']: false,
+    ['ภาษาต่างประเทศ']: false,
+    ['ปฐมวัย']: false,
+  };
 
   constructor(
-    fb: FormBuilder,
+    private fb: FormBuilder,
     private router: Router,
     public dialog: MatDialog
   ) {
-    this.toppings = fb.group({
-      pepperoni: false,
-      extracheese: false,
-      mushroom: false,
-    });
+    this.levelFormGroup = this.fb.group(this.levels);
+    this.subjectFormGroup = this.fb.group(this.subjects);
+  }
 
-    this.toppings.valueChanges.subscribe((res) => {
+  ngOnInit(): void {
+    this.levelFormGroup.valueChanges.subscribe((res) => {
       console.log('res = ', res);
     });
   }
