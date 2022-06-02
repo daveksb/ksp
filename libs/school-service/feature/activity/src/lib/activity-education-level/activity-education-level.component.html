@@ -31,22 +31,22 @@
           <table class="table">
             <thead class="header__table">
               <tr>
-                <th scope="col">เลือก</th>
-                <th scope="col" class="header__column">รหัส</th>
-                <th scope="col">ชื่อ</th>
-                <th scope="col">ที่อยู่</th>
-                <th scope="col">สังกัด</th>
-                <th scope="col">สังกัด</th>
+                <th scope="col" class="header__column">ลำดับ</th>
+                <th scope="col">เลขที่หนังสืออนุญาต</th>
+                <th scope="col">ชื่อ-นามสกุล</th>
+                <th scope="col">วันที่ออกหนังสือ</th>
+                <th scope="col">วันที่สิ้นสุด</th>
+                <th scope="col">เอกสาร</th>
               </tr>
             </thead>
             <tbody class="body__table">
               <tr>
-                <td class="detail__table">xx</td>
-                <td class="detail__table">xx</td>
-                <td class="detail__table">xx</td>
-                <td class="detail__table">xx</td>
-                <td class="detail__table">xx</td>
-                <td class="detail__table">xx</td>
+                <td class="detail__table">1</td>
+                <td class="detail__table">123xxx</td>
+                <td class="detail__table">นายประวิทย์ งงทุกวัน</td>
+                <td class="detail__table">xx/xx/xxxx</td>
+                <td class="detail__table">xx/xx/xxxx</td>
+                <td class="detail__table">ICON</td>
               </tr>
             </tbody>
           </table>
@@ -107,16 +107,12 @@
   </div>
 </div>
 
-<div>
-  <button (click)="back()">xxx</button>
-  <button (click)="save()">yyy</button>
-</div>
-
-<!-- <div class="bottom__container">
+<div class="bottom__container">
   <ksp-bottom-menu
-    (nextClicked)="next()"
-    [isFirstPage]="true"
-    [showCenterButtons]="false"
+    [isLastPage]="true"
+    [showCenterButtons]="true"
+    (prevClicked)="back()"
+    (saveClicked)="save()"
+    (cancelClicked)="cancel()"
   ></ksp-bottom-menu>
 </div>
- -->
