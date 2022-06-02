@@ -51,7 +51,25 @@
         </mat-tab>
 
         <mat-tab label="ข้อมูลทางการศึกษา">
-          <ksp-form-education-info></ksp-form-education-info>
+          <ksp-form-education-info
+            >วุฒิการศึกษาปริญญาตรี</ksp-form-education-info
+          >
+          <ksp-form-education-info
+            >วุฒิการศึกษาปริญญาโท</ksp-form-education-info
+          >
+          <div class="content__container-2">
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >คุณสมบัติอื่นที่สอดคล้องหรือเป็นประโยชน์ต่อการจัดการเรียนการสอนในกลุ่มสาระหรือรายวิชาที่สอน
+                (พิจารณาเป็นรายกรณี)</label
+              >
+              <textarea
+                class="form-control form-control-sm"
+                rows="4"
+                placeholder="โปรดระบุ"
+              ></textarea>
+            </div>
+          </div>
           <ksp-form-attachment></ksp-form-attachment>
         </mat-tab>
 
@@ -85,7 +103,6 @@
       (nextClicked)="next()"
       [showCenterButtons]="true"
       [isFirstPage]="true"
-
     ></ksp-bottom-menu>
   </div>
 </div>

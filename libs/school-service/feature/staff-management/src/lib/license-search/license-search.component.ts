@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,11 +7,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./license-search.component.scss'],
 })
 export class LicenseSearchComponent {
+  foundItem = false;
   constructor(private router: Router) {}
 
-  onItemChange(universityCode: string) {}
+  search() {
+    this.foundItem = true;
+  }
 
-  search() {}
+  clear() {
+    this.foundItem = false;
+  }
 
   goToDetail() {
     this.router.navigate(['./', 'staff-management', 'license-search']);
