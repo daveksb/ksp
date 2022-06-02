@@ -36,13 +36,13 @@ export const routes: Routes = [
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    SharedUiLicenseInfoModule,
-    SharedUiTopNavModule,
     RouterModule.forChild(routes),
-    MatTabsModule,
     MatCheckboxModule,
+    MatTabsModule,
     SharedUiFormModule,
     SharedUiBottomMenuModule,
+    SharedUiLicenseInfoModule,
+    SharedUiTopNavModule,
     SchoolServiceUiStaffSearchModule,
   ],
   declarations: [

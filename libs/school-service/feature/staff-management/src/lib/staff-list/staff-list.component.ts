@@ -16,7 +16,7 @@ export class StaffListComponent implements OnInit {
     this.data = [];
   }
 
-  onItemChange(universityCode: string) {}
+  //onItemChange(universityCode: string) {}
 
   search() {
     this.data = data;

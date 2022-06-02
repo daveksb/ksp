@@ -6,10 +6,3 @@
   display: grid;
   grid-template-columns: 237px auto;
 }
-
-.bottom__container {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: aliceblue;
-}

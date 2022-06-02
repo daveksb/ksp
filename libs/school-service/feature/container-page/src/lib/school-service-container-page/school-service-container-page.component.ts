@@ -1,6 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { MenuConfig } from '@ksp/shared/ui/side-menu';
+
+@Component({
+  selector: 'school-service-container-page',
+  templateUrl: './school-service-container-page.component.html',
+  styleUrls: ['./school-service-container-page.component.css'],
+})
+export class SchoolServiceContainerPageComponent implements OnInit {
+  menuConfig: MenuConfig[] = [];
+
+  ngOnInit(): void {
+    this.menuConfig = menu;
+  }
+}
 
 export const menu: MenuConfig[] = [
   {
@@ -72,32 +84,4 @@ export const menu: MenuConfig[] = [
     label: 'รายชื่อเจ้าหน้าที่ใช้งาน',
     path: '',
   },
-  {
-    icon: 'assets/images/icon-sidenav/reward.svg',
-    label: 'Test',
-    path: 'staff-management/add-staff-teaching-info',
-  },
 ];
-
-@Component({
-  selector: 'school-service-container-page',
-  templateUrl: './school-service-container-page.component.html',
-  styleUrls: ['./school-service-container-page.component.css'],
-})
-export class SchoolServiceContainerPageComponent implements OnInit {
-  menuConfig: MenuConfig[] = [];
-  header = '';
-  subHeader = '';
-
-  constructor(private route: ActivatedRoute) {}
-
-  ngOnInit(): void {
-    this.menuConfig = menu;
-
-    this.route.data.subscribe((data) => {
-      //console.log('data = ', data);
-      this.header = data['header'];
-      this.subHeader = data['subHeader'];
-    });
-  }
-}

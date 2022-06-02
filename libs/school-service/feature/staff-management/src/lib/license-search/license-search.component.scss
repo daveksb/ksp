@@ -11,7 +11,7 @@
 .box__container {
   background-color: #fff;
   max-width: 1200px;
-  padding: 15px;
+  padding: 10px;
   margin: 0 15px;
 }
 
@@ -23,15 +23,6 @@
 
 .title__box {
   font-size: 22px;
-}
-
-.detail__header {
-  font-size: 20px;
-  color: #0056ff;
-}
-
-.detail__container {
-  margin-bottom: 16px;
 }
 
 .detail__container--half {
@@ -47,18 +38,10 @@
   margin-bottom: 0;
 }
 
-.form-control {
-  background-color: #fff;
-}
-
-.error__label {
-  color: red;
-}
-
-.detail__action {
+.button__group {
   display: flex;
   justify-content: flex-end;
-  margin: 10px 20px;
+  margin: 0 20px;
 }
 
 .btn-primary {

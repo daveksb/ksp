@@ -11,14 +11,14 @@
     <hr />
     <div class="box__detail">
       <div class="detail__container--half">
-        <div class="mb-3">
+        <div class="mb-1">
           <label for="exampleFormControlInput1" class="form-label"
             >หมายเลขบัตรประชาชน</label
           >
           <input class="form-control form-control-sm" type="text" />
         </div>
 
-        <div class="mb-3">
+        <div class="mb-1">
           <label for="exampleFormControlInput1" class="form-label"
             >เลขที่ใบอนุญาต</label
           >
@@ -26,14 +26,14 @@
         </div>
       </div>
       <div class="detail__container--half">
-        <div class="mb-3">
+        <div class="mb-2">
           <label for="exampleFormControlInput1" class="form-label"
             >ชื่อ-นามสกุล
           </label>
           <input class="form-control form-control-sm" type="text" />
         </div>
 
-        <div class="mb-3">
+        <div class="mb-2">
           <label for="exampleFormControlInput1" class="form-label"
             >ประเภทใบอนุญาต
           </label>
@@ -48,8 +48,12 @@
           </select>
         </div>
       </div>
-      <div class="detail__action">
-        <button type="button" class="btn btn-fourth btn-sm label__button">
+      <div class="button__group">
+        <button
+          (click)="clear()"
+          type="button"
+          class="btn btn-fourth btn-sm label__button"
+        >
           ล้างข้อมูล
         </button>
         <button
@@ -66,7 +70,7 @@
   <div class="content__container">
     <div class="title__box">ผลการค้นหา</div>
     <hr />
-    <div class="result">
+    <div *ngIf="foundItem" class="result">
       <div class="result__item">
         <ksp-license-info></ksp-license-info>
       </div>
