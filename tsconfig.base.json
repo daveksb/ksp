@@ -76,6 +76,9 @@
         "libs/e-service/ui/verify-result-box/src/index.ts"
       ],
       "@ksp/school-service/dialog": ["libs/school-service/dialog/src/index.ts"],
+      "@ksp/school-service/feature/activity": [
+        "libs/school-service/feature/activity/src/index.ts"
+      ],
       "@ksp/school-service/feature/container-page": [
         "libs/school-service/feature/container-page/src/index.ts"
       ],
@@ -96,6 +99,9 @@
       ],
       "@ksp/school-service/feature/temp-license": [
         "libs/school-service/feature/temp-license/src/index.ts"
+      ],
+      "@ksp/school-service/ui/staff-search": [
+        "libs/school-service/ui/staff-search/src/index.ts"
       ],
       "@ksp/self-service/feature/home": [
         "libs/self-service/feature/home/src/index.ts"

@@ -39,6 +39,13 @@ const routes: Routes = [
         (m) => m.SchoolServiceFeatureStaffManagementModule
       ),
   },
+  {
+    path: 'activity',
+    loadChildren: () =>
+      import('@ksp/school-service/feature/activity').then(
+        (m) => m.SchoolServiceFeatureActivityModule
+      ),
+  },
 
   { path: '**', component: SchoolServiceLoginComponent },
 ];

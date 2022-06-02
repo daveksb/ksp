@@ -7,12 +7,13 @@ import { LicenseSearchComponent } from './license-search/license-search.componen
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 import { AddStaffPersonInfoComponent } from './add-staff-person-info/add-staff-person-info.component';
 import { AddStaffTeachingInfoComponent } from './add-staff-teaching-info/add-staff-teaching-info.component';
-import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SharedUiFormModule } from '@ksp/shared/ui/form';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
+import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
+import { SchoolServiceUiStaffSearchModule } from '@ksp/school-service/ui/staff-search';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 export const routes: Routes = [
   {
@@ -42,6 +43,7 @@ export const routes: Routes = [
     MatCheckboxModule,
     SharedUiFormModule,
     SharedUiBottomMenuModule,
+    SchoolServiceUiStaffSearchModule,
   ],
   declarations: [
     StaffListComponent,
