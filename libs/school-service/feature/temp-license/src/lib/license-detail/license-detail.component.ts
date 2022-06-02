@@ -40,7 +40,7 @@ export class LicenseDetailComponent implements OnInit {
     this.router.navigate(['/', 'temp-license', 'list']);
   }
 
-  next() {
+  save() {
     const dialogRef = this.dialog.open(ForbiddenPropertyComponent, {
       height: '475px',
       width: '850px',

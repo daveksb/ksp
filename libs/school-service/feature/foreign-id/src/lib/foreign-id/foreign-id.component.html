@@ -7,13 +7,14 @@
 
 <div class="main-container">
   <ksp-form-temp-license-foreign></ksp-form-temp-license-foreign>
+</div>
 
-  <div class="footer">
-    <button (click)="cancel()" type="button" class="btn btn-secondary">
-      ยกเลิก
-    </button>
-    <button (click)="onConfirmed()" type="button" class="btn btn-primary">
-      บันทึกและยื่นอนุมัติ
-    </button>
-  </div>
+<div class="bottom__container">
+  <ksp-bottom-menu
+    [isFirstPage]="true"
+    [isLastPage]="true"
+    [showCenterButtons]="true"
+    (cancelClicked)="cancel()"
+    (saveClicked)="onConfirmed()"
+  ></ksp-bottom-menu>
 </div>
