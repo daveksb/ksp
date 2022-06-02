@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -20,7 +20,6 @@ export class SetNewPasswordComponent {
 
   accept() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      height: '175px',
       width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูล
@@ -37,7 +36,6 @@ export class SetNewPasswordComponent {
 
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      height: '250px',
       width: '350px',
       data: {
         header: `ทำรายการสำเร็จ`,

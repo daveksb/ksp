@@ -28,6 +28,11 @@ hr {
   margin: 0 2px;
 }
 
+.btn {
+  width: 100px;
+  font-size: 20px;
+}
+
 .mat-tab-label-active {
   background-color: white;
   opacity: 1 !important;
@@ -45,4 +50,12 @@ hr {
 
 .mat-ink-bar {
   visibility: hidden !important;
+}
+
+/*
+add asterisk for required feild
+*/
+.required::after {
+  color: red;
+  content: ' *';
 }
