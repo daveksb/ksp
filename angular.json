@@ -24,6 +24,7 @@
     "e-service-ui-verify-result-box": "libs/e-service/ui/verify-result-box",
     "school-service": "apps/school-service",
     "school-service-dialog": "libs/school-service/dialog",
+    "school-service-feature-activity": "libs/school-service/feature/activity",
     "school-service-feature-container-page": "libs/school-service/feature/container-page",
     "school-service-feature-foreign-id": "libs/school-service/feature/foreign-id",
     "school-service-feature-forget-password": "libs/school-service/feature/forget-password",
