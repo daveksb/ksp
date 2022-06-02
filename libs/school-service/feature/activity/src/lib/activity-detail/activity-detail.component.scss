@@ -27,22 +27,6 @@
   margin: 0 15px;
 }
 
-.detail__container--half {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 20px;
-}
-
-.form-label {
-  font-size: 18px;
-  color: #656565;
-  margin-bottom: 0;
-}
-
-.form-control {
-  background-color: #fff;
-}
-
 .result {
   display: flex;
   flex-direction: column;
@@ -50,22 +34,6 @@
 
 .result__item {
   margin: 20px;
-}
-
-.mattab__container {
-  margin: 24px 24px 0 24px;
-}
-
-.not__found {
-  text-align: center;
-  font-size: 16px;
-  margin: 25px 0;
-}
-
-.detail__content--secondary {
-  display: grid;
-  grid-template-columns: 150px 1fr 1fr;
-  grid-column-gap: 18px;
 }
 
 .bottom__container {
@@ -77,20 +45,6 @@
   z-index: 1;
 }
 
-.license__content {
-  display: flex;
-  margin: 10px 40px;
-}
-
-.license__label-1 {
-  color: #656565;
-  margin-right: 25px;
-}
-
-.license__label-2 {
-  color: #000;
-}
-
 .label__content {
   font-size: 18px;
   color: #808080;
@@ -100,3 +54,37 @@
 .label__content--primary {
   color: #f68b33;
 }
+
+.table__container {
+  margin: 0 16px;
+}
+
+.table {
+  margin-top: 16px;
+  background-color: #fff;
+  border: 1px solid #eceef2;
+}
+
+.table > :not(:first-child) {
+  border-top: 0;
+}
+
+.header__table {
+  background-color: #edf6ff;
+  font-size: 16px;
+}
+
+.header__column {
+  width: 110px;
+}
+
+.body__table {
+  font-size: 16px;
+  color: #000000;
+}
+
+.table__title {
+  font-size: 18px;
+  padding-top: 20px;
+}
+

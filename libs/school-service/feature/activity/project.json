@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/school-service/feature/activity",
+  "sourceRoot": "libs/school-service/feature/activity/src",
+  "prefix": "ksp",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/school-service/feature/activity"],
+      "options": {
+        "jestConfig": "libs/school-service/feature/activity/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/school-service/feature/activity/**/*.ts",
+          "libs/school-service/feature/activity/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

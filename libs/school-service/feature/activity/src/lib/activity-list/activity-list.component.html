@@ -9,11 +9,6 @@
     <div class="title__box">ทะเบียนรายชื่อบุคลากรภายในหน่วยงาน</div>
     <hr />
 
-    <div class="btn__container">
-      <button (click)="addStaff()" class="btn__add">+ เพิ่มบุคลากร</button>
-      <button (click)="goToDetail()" class="btn__search">ค้นหาใบอนุญาต</button>
-    </div>
-
     <div class="table-responsive">
       <table class="table">
         <thead class="header__table">
@@ -26,21 +21,12 @@
           </tr>
         </thead>
         <tbody class="body__table">
-          <tr *ngFor="let item of data">
-            <th scope="row" class="body__detail">
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  (change)="({})"
-                  name="university"
-                />
-              </div>
-            </th>
+          <tr>
             <td class="detail__table">xx</td>
             <td class="detail__table">xx</td>
             <td class="detail__table">xx</td>
             <td class="detail__table">xx</td>
+            <td (click)="view()" class="detail__table">ICON</td>
           </tr>
         </tbody>
       </table>

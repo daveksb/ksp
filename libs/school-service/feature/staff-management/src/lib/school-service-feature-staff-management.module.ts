@@ -7,10 +7,11 @@ import { LicenseSearchComponent } from './license-search/license-search.componen
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 import { AddStaffPersonInfoComponent } from './add-staff-person-info/add-staff-person-info.component';
 import { AddStaffTeachingInfoComponent } from './add-staff-teaching-info/add-staff-teaching-info.component';
-import { SharedUiLicenseInfoModule } from 'libs/shared/ui/license-info/src';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SharedUiFormModule } from '@ksp/shared/ui/form';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
+import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
+import { SchoolServiceUiStaffSearchModule } from '@ksp/school-service/ui/staff-search';
 
 export const routes: Routes = [
   {
@@ -37,7 +38,8 @@ export const routes: Routes = [
     RouterModule.forChild(routes),
     MatTabsModule,
     SharedUiFormModule,
-    SharedUiBottomMenuModule
+    SharedUiBottomMenuModule,
+    SchoolServiceUiStaffSearchModule,
   ],
   declarations: [
     StaffListComponent,
