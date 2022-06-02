@@ -1,5 +1,7 @@
-<div class="d-flex flex-column">
-  <div class="header__title">{{ data.title }}</div>
+<div class="main__container">
+  <div class="header__title" [class.header__title--danger]="data.isDanger">
+    {{ data.title }}
+  </div>
 
   <div class="detail__title">
     {{ data.subTitle }}
@@ -14,7 +16,7 @@
       ยกเลิก
     </button>
     <button
-      (click)="confirm()"
+      (click)="confirmed.emit(true)"
       matDialogClose
       type="button"
       class="btn btn-primary btn-sm label__button"

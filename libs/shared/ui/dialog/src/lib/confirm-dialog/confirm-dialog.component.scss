@@ -1,4 +1,10 @@
-.btn-primary {
+.main__container {
+  display: flex;
+  flex-direction: column;
+  justify-items: baseline;
+}
+
+.btn {
   color: #ffffff;
   border: 1px solid #3f89fe;
   border-radius: 5px;
@@ -8,14 +14,14 @@
   font-size: 20px;
 }
 
+.btn-primary {
+  color: #ffffff;
+  background-color: #3f89fe;
+}
+
 .btn-fourth {
   color: #3f89fe;
   background-color: #fff;
-  border: 1px solid #3f89fe;
-  border-radius: 5px;
-  padding: 5px 40px;
-  margin: 0 5px;
-  font-size: 20px;
 }
 
 .btn__container {
@@ -27,6 +33,10 @@
   font-size: 20px;
   color: #000;
   white-space: pre-line;
+}
+
+.header__title--danger {
+  color: red;
 }
 
 .detail__title {

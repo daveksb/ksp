@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/ui/dialog';
@@ -17,10 +17,10 @@ export class ForgetPasswordComponent {
 
   accept() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      height: '150px',
       width: '350px',
       data: {
         title: `ไม่พบข้อมูลของท่านภายในระบบ`,
+        isDanger: true,
       },
     });
 
