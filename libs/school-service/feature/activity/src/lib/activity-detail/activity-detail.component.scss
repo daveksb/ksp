@@ -88,35 +88,3 @@
   padding-top: 20px;
 }
 
-.detail__container--half {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 20px;
-}
-
-.form__container {
-  background-color: #ecedf3;
-  padding: 12px 24px;
-  margin: 10px 20px;
-}
-
-.form-label {
-  color: #656565;
-}
-
-.checkbox {
-  height: 15px;
-  width: 15px;
-  margin-right: 5px;
-}
-
-.checkbox__label {
-  font-size: 18px;
-  line-height: 15px;
-}
-
-.checkbox__container {
-  display: flex;
-  margin: 10px 0;
-  padding-top: 20px;
-}

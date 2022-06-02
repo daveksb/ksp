@@ -8,6 +8,7 @@ import { SchoolServiceContainerPageComponent } from '@ksp/school-service/feature
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
 import { SharedUiFormModule } from '@ksp/shared/ui/form';
+import { SchoolServiceUiStaffSearchModule } from '@ksp/school-service/ui/staff-search';
 
 export const routes: Routes = [
   {
@@ -28,7 +29,8 @@ export const routes: Routes = [
     RouterModule.forChild(routes),
     SharedUiTopNavModule,
     SharedUiLicenseInfoModule,
-    SharedUiFormModule
+    SharedUiFormModule,
+    SchoolServiceUiStaffSearchModule
   ],
   declarations: [
     ActivityListComponent,

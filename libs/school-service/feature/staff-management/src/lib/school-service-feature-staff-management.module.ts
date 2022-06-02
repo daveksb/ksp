@@ -11,6 +11,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { SharedUiFormModule } from '@ksp/shared/ui/form';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
+import { SchoolServiceUiStaffSearchModule } from '@ksp/school-service/ui/staff-search';
 
 export const routes: Routes = [
   {
@@ -37,7 +38,8 @@ export const routes: Routes = [
     RouterModule.forChild(routes),
     MatTabsModule,
     SharedUiFormModule,
-    SharedUiBottomMenuModule
+    SharedUiBottomMenuModule,
+    SchoolServiceUiStaffSearchModule,
   ],
   declarations: [
     StaffListComponent,
