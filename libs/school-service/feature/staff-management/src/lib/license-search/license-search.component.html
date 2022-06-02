@@ -4,57 +4,38 @@
 >
 
 <div class="container">
+  <div class="header">ค้นหาข้อมูลใบอนุญาตประกอบวิชาชีพทางการศึกษา</div>
+
   <div class="box__container">
-    <div class="box__header">
-      <div class="title__box">ค้นหาข้อมูลใบอนุญาตประกอบวิชาชีพทางการศึกษา</div>
-    </div>
+    <div class="title__box">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
     <hr />
     <div class="box__detail">
-      <div class="detail__header">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
       <div class="detail__container--half">
-        <div>
+        <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label"
-            >สังกัด</label
+            >หมายเลขบัตรประชาชน</label
           >
-          <select
-            class="form-select form-select-sm"
-            aria-label=".form-select-sm example"
-          >
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
-      </div>
-      <div class="detail__container--half">
-        <div>
-          <label for="exampleFormControlInput1" class="form-label">รหัส</label>
           <input class="form-control form-control-sm" type="text" />
         </div>
-        <div>
-          <label for="exampleFormControlInput1" class="form-label">ชื่อ</label>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >เลขที่ใบอนุญาต</label
+          >
           <input class="form-control form-control-sm" type="text" />
         </div>
       </div>
       <div class="detail__container--half">
-        <div class="detail__container">
+        <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label"
-            >จังหวัด <span class="error__label">*</span>
+            >ชื่อ-นามสกุล
           </label>
-          <select
-            class="form-select form-select-sm"
-            aria-label=".form-select-sm example"
-          >
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
+          <input class="form-control form-control-sm" type="text" />
         </div>
-        <div class="detail__container">
+
+        <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label"
-            >อำเภอ <span class="error__label">*</span>
+            >ประเภทใบอนุญาต
           </label>
           <select
             class="form-select form-select-sm"
@@ -79,18 +60,23 @@
           ค้นหา
         </button>
       </div>
+    </div>
+  </div>
+
+  <div class="content__container">
+    <div class="title__box">ผลการค้นหา</div>
+    <hr />
+    <div class="result">
+      <div class="result__item">
+        <ksp-license-info></ksp-license-info>
+      </div>
       <hr />
-      <div class="detail__header">ผลการค้นหา</div>
-      <div class="result">
-        <div class="result__item">
-          <ksp-license-info></ksp-license-info>
-        </div>
-        <div class="result__item">
-          <ksp-license-info></ksp-license-info>
-        </div>
-        <div class="result__item">
-          <ksp-license-info></ksp-license-info>
-        </div>
+      <div class="result__item">
+        <ksp-license-info></ksp-license-info>
+      </div>
+      <hr />
+      <div class="result__item">
+        <ksp-license-info></ksp-license-info>
       </div>
     </div>
   </div>

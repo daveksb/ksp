@@ -7,7 +7,10 @@ import { LicenseSearchComponent } from './license-search/license-search.componen
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 import { AddStaffPersonInfoComponent } from './add-staff-person-info/add-staff-person-info.component';
 import { AddStaffTeachingInfoComponent } from './add-staff-teaching-info/add-staff-teaching-info.component';
-import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
+import { SharedUiLicenseInfoModule } from 'libs/shared/ui/license-info/src';
+import { MatTabsModule } from '@angular/material/tabs';
+import { SharedUiFormModule } from '@ksp/shared/ui/form';
+import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 
 export const routes: Routes = [
   {
@@ -17,9 +20,9 @@ export const routes: Routes = [
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: 'list', component: StaffListComponent },
       { path: 'license-search', component: LicenseSearchComponent },
-      { path: 'add-staff-person-info', component: AddStaffPersonInfoComponent },
+      { path: 'staff-person-info', component: AddStaffPersonInfoComponent },
       {
-        path: 'add-staff-teaching-info',
+        path: 'staff-teaching-info',
         component: AddStaffTeachingInfoComponent,
       },
     ],
@@ -32,6 +35,9 @@ export const routes: Routes = [
     SharedUiLicenseInfoModule,
     SharedUiTopNavModule,
     RouterModule.forChild(routes),
+    MatTabsModule,
+    SharedUiFormModule,
+    SharedUiBottomMenuModule
   ],
   declarations: [
     StaffListComponent,
