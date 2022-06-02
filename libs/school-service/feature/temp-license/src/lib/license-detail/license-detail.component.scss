@@ -30,13 +30,6 @@
   background-color: #f6f6f6;
 }
 
-.content__container {
-  display: grid;
-  grid-template-columns: 164px 1fr 1fr;
-  grid-column-gap: 16px;
-  margin: 0 20px;
-}
-
 .content__container--secondary {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -62,18 +55,6 @@
 .form-control-sm {
   font-size: 16px;
   color: #000000;
-}
-
-.form-select-sm {
-  font-size: 16px;
-  color: #000000;
-  background-color: #fff;
-}
-
-.form-select {
-  background-color: #fff;
-  background-image: url(/assets/images/arrow-down-icon.png);
-  background-size: 12px;
 }
 
 .label__content {
@@ -108,12 +89,6 @@
   margin: 20px 40px;
 }
 
-.btn__container-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-column-gap: 8px;
-}
-
 .btn__back {
   font-size: 18px;
   color: #f68b33;
@@ -132,36 +107,15 @@
   width: 100px;
 }
 
-.btn__send {
-  font-size: 18px;
-  background-color: #01b27b;
-  color: #fff;
-  border: 1px solid #01b27b;
-  border-radius: 2px;
-  width: 100px;
-}
-
-.btn__save {
-  font-size: 18px;
-  background-color: #01b27b;
-  color: #fff;
-  border: 1px solid #01b27b;
-  border-radius: 2px;
-  width: 100px;
-}
-
-.btn__cancel {
-  font-size: 18px;
-  background-color: #fff;
-  color: #01b27b;
-  border: 1px solid #01b27b;
-  border-radius: 2px;
-  width: 100px;
-}
-
 .checkbox__container {
   display: flex;
   line-height: 15px;
-  margin-top: 20PX;
+  margin-top: 20px;
 }
 
+.content__container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-column-gap: 16px;
+  margin: 0 20px;
+}
