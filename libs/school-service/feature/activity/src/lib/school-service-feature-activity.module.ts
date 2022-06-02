@@ -9,6 +9,9 @@ import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
 import { SharedUiFormModule } from '@ksp/shared/ui/form';
 import { SchoolServiceUiStaffSearchModule } from '@ksp/school-service/ui/staff-search';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 
 export const routes: Routes = [
   {
@@ -30,7 +33,10 @@ export const routes: Routes = [
     SharedUiTopNavModule,
     SharedUiLicenseInfoModule,
     SharedUiFormModule,
-    SchoolServiceUiStaffSearchModule
+    SchoolServiceUiStaffSearchModule,
+    MatCheckboxModule,
+    ReactiveFormsModule,
+    SharedUiBottomMenuModule
   ],
   declarations: [
     ActivityListComponent,

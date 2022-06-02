@@ -18,6 +18,10 @@ export class ActivityEducationLevelComponent {
     this.router.navigate(['./', 'activity', 'detail']);
   }
 
+  cancel() {
+    this.router.navigate(['./', 'activity']);
+  }
+
   save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       height: '175px',
