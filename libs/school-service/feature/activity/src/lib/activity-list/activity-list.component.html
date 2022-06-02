@@ -3,32 +3,73 @@
 <div class="container">
   <div class="header">ทะเบียนบุคลากรภายในหน่วยงาน</div>
 
-  <school-service-staff-search></school-service-staff-search>
+  <school-service-staff-search
+    (clear)="clear()"
+    (search)="search()"
+  ></school-service-staff-search>
 
   <div class="table__container">
     <div class="title__box">ทะเบียนรายชื่อบุคลากรภายในหน่วยงาน</div>
     <hr />
 
     <div class="table-responsive">
-      <table class="table">
-        <thead class="header__table">
-          <tr>
-            <th scope="col">เลือก</th>
-            <th scope="col" class="header__column">รหัส</th>
-            <th scope="col">ชื่อ</th>
-            <th scope="col">ที่อยู่</th>
-            <th scope="col">สังกัด</th>
-          </tr>
-        </thead>
-        <tbody class="body__table">
-          <tr>
-            <td class="detail__table">xx</td>
-            <td class="detail__table">xx</td>
-            <td class="detail__table">xx</td>
-            <td class="detail__table">xx</td>
-            <td (click)="view()" class="detail__table">ICON</td>
-          </tr>
-        </tbody>
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="order">
+          <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+          <td mat-cell *matCellDef="let element">{{ element.order }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="licenseID">
+          <th mat-header-cell *matHeaderCellDef>เลขที่หนังสืออนุญาต</th>
+          <td mat-cell *matCellDef="let element">{{ element.licenseID }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="ssn">
+          <th mat-header-cell *matHeaderCellDef>
+            หมายเลขบัตรประชาชน/เลขที่หนังสือเดินทาง
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.ssn }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="releaseDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่ออกหนังสือth></th>
+          <td mat-cell *matCellDef="let element">{{ element.releaseDate }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="finishedDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่สิ้นสุด</th>
+          <td mat-cell *matCellDef="let element">{{ element.finishedDate }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="startDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่เข้าปฏิบัติงาน</th>
+          <td mat-cell *matCellDef="let element">{{ element.startDate }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="endDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่หมดสัญญา</th>
+          <td mat-cell *matCellDef="let element">{{ element.endDate }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef>เพิ่ม/แก้ไข</th>
+          <td mat-cell *matCellDef="let element" (click)="view()">
+            <img src="assets/images/edit.png" class="view__icon" />
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="view">
+          <th mat-header-cell *matHeaderCellDef>ดูข้อมูล</th>
+          <td mat-cell *matCellDef="let element">ICON</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
     </div>
   </div>

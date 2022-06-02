@@ -12,6 +12,7 @@ import { SchoolServiceUiStaffSearchModule } from '@ksp/school-service/ui/staff-s
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
+import { MatTableModule } from '@angular/material/table';
 
 export const routes: Routes = [
   {
@@ -36,7 +37,8 @@ export const routes: Routes = [
     SchoolServiceUiStaffSearchModule,
     MatCheckboxModule,
     ReactiveFormsModule,
-    SharedUiBottomMenuModule
+    SharedUiBottomMenuModule,
+    MatTableModule
   ],
   declarations: [
     ActivityListComponent,

@@ -14,6 +14,7 @@ import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
 import { SchoolServiceUiStaffSearchModule } from '@ksp/school-service/ui/staff-search';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTableModule } from '@angular/material/table';
 
 export const routes: Routes = [
   {
@@ -44,6 +45,7 @@ export const routes: Routes = [
     SharedUiLicenseInfoModule,
     SharedUiTopNavModule,
     SchoolServiceUiStaffSearchModule,
+    MatTableModule
   ],
   declarations: [
     StaffListComponent,
