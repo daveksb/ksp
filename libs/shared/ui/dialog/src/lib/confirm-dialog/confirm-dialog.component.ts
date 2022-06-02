@@ -8,7 +8,11 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class ConfirmDialogComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA)
-    public data: { title: string; subTitle: string; isDanger: boolean }
+    public data: {
+      title: string;
+      subTitle: string;
+      isDanger: boolean;
+    }
   ) {}
 
   @Output() confirmed = new EventEmitter<boolean>();

@@ -4,6 +4,7 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { RouterModule, Routes } from '@angular/router';
 import { SetNewPasswordComponent } from './set-new-password/set-new-password.component';
 import { UniServiceUiNavModule } from '@ksp/uni-service/ui/nav';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export const routes: Routes = [
   {
@@ -17,7 +18,12 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, UniServiceUiNavModule ,RouterModule.forChild(routes)],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    UniServiceUiNavModule,
+    RouterModule.forChild(routes),
+  ],
   declarations: [ForgetPasswordComponent, SetNewPasswordComponent],
   exports: [ForgetPasswordComponent, SetNewPasswordComponent],
 })

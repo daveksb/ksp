@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/ui/dialog';
@@ -8,26 +9,40 @@ import { ConfirmDialogComponent } from '@ksp/shared/ui/dialog';
   templateUrl: './forget-password.component.html',
   styleUrls: ['./forget-password.component.scss'],
 })
-export class ForgetPasswordComponent {
-  constructor(private router: Router, public dialog: MatDialog) {}
+export class ForgetPasswordComponent implements OnInit {
+  forgotPasswordForm = this.fb.group({
+    schoolId: ['', Validators.required],
+    personId: ['', Validators.required],
+  });
+
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    public dialog: MatDialog
+  ) {}
+
+  ngOnInit(): void {
+    this.forgotPasswordForm.valueChanges.subscribe((res) => {
+      //console.log('form value = ', res);
+    });
+  }
 
   cancel() {
     this.router.navigate(['/', 'login']);
   }
 
   accept() {
-    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
-      data: {
-        title: `ไม่พบข้อมูลของท่านภายในระบบ`,
-        isDanger: true,
-      },
-    });
+    console.log('form valid = ', this.forgotPasswordForm.valid);
 
-    confirmDialog.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        this.router.navigate(['/', 'forget-password', 'set-password']);
-      }
-    });
+    if (this.forgotPasswordForm.valid) {
+      this.router.navigate(['/', 'forget-password', 'set-password']);
+    } else {
+      this.dialog.open(ConfirmDialogComponent, {
+        data: {
+          title: `ไม่พบข้อมูลของท่านภายในระบบ`,
+          isDanger: true,
+        },
+      });
+    }
   }
 }
