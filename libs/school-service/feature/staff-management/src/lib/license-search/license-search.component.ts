@@ -6,10 +6,8 @@ import { Router } from '@angular/router';
   templateUrl: './license-search.component.html',
   styleUrls: ['./license-search.component.scss'],
 })
-export class LicenseSearchComponent implements OnInit {
+export class LicenseSearchComponent {
   constructor(private router: Router) {}
-
-  ngOnInit(): void {}
 
   onItemChange(universityCode: string) {}
 

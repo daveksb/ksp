@@ -1,6 +1,124 @@
+<ksp-top-nav
+  ><span header>ทะเบียนบุคลากรภายในหน่วยงาน</span
+  ><span subHeader>ค้นหาใบอนุญาต</span></ksp-top-nav
+>
+
+<div class="container">
+  <div class="header">รายละเอียดเพิ่มบุคลากรภายในหน่วยงาน</div>
+
+  <div class="box__container">
+    <div class="label__content">
+      วันที่ทำรายการ :
+      <span class="label__content--primary">10 ตุลาคม 2565</span>
+    </div>
+    <hr />
+
+    <div class="box__detail">
+      <div class="title__box">ตำแหน่งภายในหน่วยงาน</div>
+
+      <div class="detail__container--half">
+        <div>
+          <label for="exampleFormControlInput1" class="form-label"
+            >ประเภทบุคลากร</label
+          >
+          <select
+            class="form-select form-select-sm"
+            aria-label=".form-select-sm example"
+          >
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="detail__container--half">
+        <div>
+          <label for="exampleFormControlInput1" class="form-label"
+            >ตำแหน่งงาน</label
+          >
+          <select
+            class="form-select form-select-sm"
+            aria-label=".form-select-sm example"
+          >
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div>
+          <label for="exampleFormControlInput1" class="form-label"
+            >วิทยฐานะ</label
+          >
+          <select
+            class="form-select form-select-sm"
+            aria-label=".form-select-sm example"
+          >
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="detail__container--half">
+        <div class="detail__container">
+          <label for="exampleFormControlInput1" class="form-label"
+            >วันเดือนปีที่เข้าปฏิบัติงาน
+          </label>
+          <input class="form-control form-control-sm" type="date" />
+        </div>
+        <div class="detail__container">
+          <label for="exampleFormControlInput1" class="form-label"
+            >วันเดือนปีที่หมดสัญญา
+          </label>
+          <input class="form-control form-control-sm" type="date" />
+        </div>
+      </div>
+
+      <div class="form-label">สถานะบุคลากร</div>
+      <div class="checkbox__content">
+        <input type="checkbox" class="checkbox" />
+        <label class="checkbox__label">แจ้งเข้า</label>
+        <input class="form-control form-control-sm" type="date" />
+      </div>
+
+      <div class="checkbox__content">
+        <input type="checkbox" class="checkbox" />
+        <label class="checkbox__label">แจ้งออก</label>
+        <input class="form-control form-control-sm" type="date" />
+      </div>
+
+      <div class="checkbox__content">
+        <input type="checkbox" class="checkbox" />
+        <label class="checkbox__label">ยกเลิกข้อมูล</label>
+        <input class="form-control form-control-sm" type="date" />
+      </div>
+
+      <div class="textarea__container">
+        <div class="textarea__label">ระบุสาเหตุ</div>
+        <textarea class="form-control form-control-sm" rows="4"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
 <section class="container-fluid" [formGroup]="toppings">
   <h4>Select your toppings:</h4>
   <p><mat-checkbox formControlName="pepperoni">Pepperoni</mat-checkbox></p>
   <p><mat-checkbox formControlName="extracheese">Extra Cheese</mat-checkbox></p>
   <p><mat-checkbox formControlName="mushroom">Mushroom</mat-checkbox></p>
 </section>
+
+<div class="bottom__container">
+  <ksp-bottom-menu
+    (prevClicked)="back()"
+    [isLastPage]="true"
+    [showCenterButtons]="true"
+    (saveClicked)="save()"
+    (cancelClicked)="cancel()"
+  ></ksp-bottom-menu>
+</div>

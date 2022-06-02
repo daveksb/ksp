@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'school-service-add-staff-person-info',
   templateUrl: './add-staff-person-info.component.html',
   styleUrls: ['./add-staff-person-info.component.scss'],
 })
-export class AddStaffPersonInfoComponent implements OnInit {
-  constructor() {}
+export class AddStaffPersonInfoComponent {
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  next() {
+    this.router.navigate(['./', 'staff-management', 'staff-teaching-info']);
+  }
 }

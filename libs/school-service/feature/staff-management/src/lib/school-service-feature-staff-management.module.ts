@@ -10,6 +10,9 @@ import { AddStaffTeachingInfoComponent } from './add-staff-teaching-info/add-sta
 import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTabsModule } from '@angular/material/tabs';
+import { SharedUiFormModule } from '@ksp/shared/ui/form';
+import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 
 export const routes: Routes = [
   {
@@ -19,9 +22,9 @@ export const routes: Routes = [
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: 'list', component: StaffListComponent },
       { path: 'license-search', component: LicenseSearchComponent },
-      { path: 'add-staff-person-info', component: AddStaffPersonInfoComponent },
+      { path: 'staff-person-info', component: AddStaffPersonInfoComponent },
       {
-        path: 'add-staff-teaching-info',
+        path: 'staff-teaching-info',
         component: AddStaffTeachingInfoComponent,
       },
     ],
@@ -31,11 +34,14 @@ export const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     SharedUiLicenseInfoModule,
     SharedUiTopNavModule,
     RouterModule.forChild(routes),
-    ReactiveFormsModule,
+    MatTabsModule,
     MatCheckboxModule,
+    SharedUiFormModule,
+    SharedUiBottomMenuModule,
   ],
   declarations: [
     StaffListComponent,

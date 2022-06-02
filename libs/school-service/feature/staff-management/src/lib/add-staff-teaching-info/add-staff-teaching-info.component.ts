@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import {
+  CompleteDialogComponent,
+  ConfirmDialogComponent,
+} from '@ksp/shared/ui/dialog';
 
 @Component({
   selector: 'school-service-add-staff-teaching-info',
@@ -9,7 +15,11 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class AddStaffTeachingInfoComponent {
   toppings: FormGroup;
 
-  constructor(fb: FormBuilder) {
+  constructor(
+    fb: FormBuilder,
+    private router: Router,
+    public dialog: MatDialog
+  ) {
     this.toppings = fb.group({
       pepperoni: false,
       extracheese: false,
@@ -18,6 +28,48 @@ export class AddStaffTeachingInfoComponent {
 
     this.toppings.valueChanges.subscribe((res) => {
       console.log('res = ', res);
+    });
+  }
+
+  back() {
+    this.router.navigate(['./', 'staff-management', 'staff-person-info']);
+  }
+
+  cancel() {
+    this.router.navigate(['./', 'staff-management']);
+  }
+
+  save() {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      height: '175px',
+      width: '350px',
+      data: {
+        title: `คุณต้องการบันทึกข้อมูล
+        ใช่หรือไม่? `,
+      },
+    });
+
+    confirmDialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.onCompleted();
+      }
+    });
+  }
+
+  onCompleted() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      height: '200px',
+      width: '350px',
+      data: {
+        header: `บันทึกข้อมูลสำเร็จ`,
+        buttonLabel: 'กลับสู่หน้าหลัก',
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/', 'staff-management']);
+      }
     });
   }
 }

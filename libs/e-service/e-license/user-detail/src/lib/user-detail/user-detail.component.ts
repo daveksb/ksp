@@ -12,9 +12,6 @@ import {
   styleUrls: ['./user-detail.component.scss'],
 })
 export class UserDetailComponent implements OnInit {
-  /* title = ['อนุมัติ', 'ไม่อนุมัติ'];
-  title2 = ['ใช้งาน', 'ไม่ใช้งาน']; */
-
   title = [
     ['อนุมัติ', 'ไม่อนุมัติ'],
     ['ใช้งาน', 'ไม่ใช้งาน'],
