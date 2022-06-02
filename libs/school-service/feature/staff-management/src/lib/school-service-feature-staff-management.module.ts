@@ -12,6 +12,8 @@ import { SharedUiFormModule } from '@ksp/shared/ui/form';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
 import { SchoolServiceUiStaffSearchModule } from '@ksp/school-service/ui/staff-search';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 export const routes: Routes = [
   {
@@ -33,10 +35,12 @@ export const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     SharedUiLicenseInfoModule,
     SharedUiTopNavModule,
     RouterModule.forChild(routes),
     MatTabsModule,
+    MatCheckboxModule,
     SharedUiFormModule,
     SharedUiBottomMenuModule,
     SchoolServiceUiStaffSearchModule,

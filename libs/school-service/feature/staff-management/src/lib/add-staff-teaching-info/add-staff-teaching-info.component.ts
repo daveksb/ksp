@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -11,8 +12,40 @@ import {
   templateUrl: './add-staff-teaching-info.component.html',
   styleUrls: ['./add-staff-teaching-info.component.scss'],
 })
-export class AddStaffTeachingInfoComponent {
-  constructor(private router: Router, public dialog: MatDialog) {}
+export class AddStaffTeachingInfoComponent implements OnInit {
+  levelFormGroup: FormGroup;
+  subjectFormGroup: FormGroup;
+
+  levels = {
+    ['อนุบาล']: false,
+    ['ชั้นประถมปีที่ 1-3']: false,
+    ['ชั้นประถมปีที่ 4-6']: false,
+    ['ชั้นมัธยมปีที่ 1-3']: false,
+    ['ชั้นมัธยมปีที่ 4-6']: false,
+  };
+
+  subjects = {
+    ['ภาษาไทย']: false,
+    ['วิทยาศาสตร์']: false,
+    ['คณิตศาสตร์']: false,
+    ['ภาษาต่างประเทศ']: false,
+    ['ปฐมวัย']: false,
+  };
+
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    public dialog: MatDialog
+  ) {
+    this.levelFormGroup = this.fb.group(this.levels);
+    this.subjectFormGroup = this.fb.group(this.subjects);
+  }
+
+  ngOnInit(): void {
+    this.levelFormGroup.valueChanges.subscribe((res) => {
+      console.log('res = ', res);
+    });
+  }
 
   back() {
     this.router.navigate(['./', 'staff-management', 'staff-person-info']);
