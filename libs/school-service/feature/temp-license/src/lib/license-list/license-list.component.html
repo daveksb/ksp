@@ -8,7 +8,6 @@
 <div class="main-container">
   <div class="header">
     รายละเอียดใบคำขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
-    (ชาวไทย)
   </div>
   <div class="top-container">
     <div class="content__header">
@@ -128,10 +127,9 @@
     </div>
 
     <div class="detail__container"><hr /></div>
+    <div class="box__title">ยื่นใบคำขอ</div>
 
     <div class="table__title">
-      <div class="box__title-2">ยื่นใบคำขอ</div>
-
       <button mat-button [matMenuTriggerFor]="beforeMenu">ยื่นใบคำขอ</button>
       <mat-menu class="my-class" #beforeMenu="matMenu" xPosition="before">
         <button mat-menu-item (click)="nextPage(1)">
@@ -154,9 +152,88 @@
         </button>
       </mat-menu>
     </div>
+
     <div class="bottom-content">
       <div class="table-responsive">
-        <table class="table">
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="order">
+            <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+            <td mat-cell *matCellDef="let element">{{ element.order }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="reqCode">
+            <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
+            <td mat-cell *matCellDef="let element">{{ element.reqCode }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="ssn">
+            <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
+            <td mat-cell *matCellDef="let element">{{ element.ssn }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+            <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="professType">
+            <th mat-header-cell *matHeaderCellDef>ประเภทวิชาชีพ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.professType }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="workStep">
+            <th mat-header-cell *matHeaderCellDef>ขั้นตอนการดำเนินการ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.workStep }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>สถานะ</th>
+            <td mat-cell *matCellDef="let element">
+              <button
+                class="btn__status"
+                [ngClass]="{
+                  status__valid: isStatusValid,
+                  status__invalid: !isStatusValid
+                }"
+              >
+                {{ element.status }}
+              </button>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="editDate">
+            <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
+            <td mat-cell *matCellDef="let element">{{ element.editDate }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="sendDate">
+            <th mat-header-cell *matHeaderCellDef>วันที่ยื่นใบคำขอ</th>
+            <td mat-cell *matCellDef="let element">{{ element.sendDate }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="requestDoc">
+            <th mat-header-cell *matHeaderCellDef>ใบคำขอ</th>
+            <td mat-cell *matCellDef="let element">
+              <mat-icon class="note">note</mat-icon>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="approveDoc">
+            <th mat-header-cell *matHeaderCellDef>ใบอนุญาต</th>
+            <td mat-cell *matCellDef="let element">
+              <mat-icon class="note">note</mat-icon>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <!--  <table class="table">
           <thead class="header__table">
             <tr>
               <th scope="col">ลำดับ</th>
@@ -196,7 +273,7 @@
               <td class="detail__table">ICON</td>
             </tr>
           </tbody>
-        </table>
+        </table> -->
       </div>
     </div>
   </div>

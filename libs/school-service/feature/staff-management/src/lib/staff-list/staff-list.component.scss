@@ -30,33 +30,15 @@
   border-top: 0;
 }
 
-.header__table {
-  background-color: #edf6ff;
-  font-size: 16px;
+.table-responsive {
+  margin: 10px 20px;
 }
 
-.header__column {
-  width: 110px;
-}
-
-.body__table {
-  font-size: 16px;
-  color: #000000;
-}
-
-.body__detail {
-  vertical-align: middle;
-}
-
-.form-check-input:checked {
-  background-color: #f68b33;
-  border-color: #f68b33;
-}
 
 .btn__container {
   display: flex;
   justify-content: flex-end;
-  margin-top: 8px;
+  margin: 10px 0;
 }
 
 .btn__add {
@@ -79,3 +61,20 @@
   padding: 5px 10px;
   width: 125px;
 }
+
+.check_box {
+  color: #f68b33;
+}
+
+.remove_red_eye {
+  color: #06dea9;
+}
+
+.edit {
+  color: #3f89fe;
+}
+
+tr.mat-header-row {
+  background-color: #edf8ff;
+}
+

@@ -30,8 +30,18 @@
   border-top: 0;
 }
 
-.view__icon {
-  cursor: pointer;
-  height: 20px;
-  width: 20px;
+.table-responsive {
+  margin: 10px 20px;
+}
+
+.remove_red_eye {
+  color: #06dea9;
+}
+
+.edit {
+  color: #3f89fe;
+}
+
+tr.mat-header-row {
+  background-color: #edf8ff;
 }

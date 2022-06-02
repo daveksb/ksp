@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
 export interface TempLicenseInfo {
@@ -8,9 +9,11 @@ export interface TempLicenseInfo {
   name: string;
   professType: string;
   workStep: string;
-  status: string;
+  status: number;
   editDate: string;
   sendDate: string;
+  requestDoc: string;
+  approveDoc: string;
 }
 
 export const data: TempLicenseInfo[] = [
@@ -21,9 +24,11 @@ export const data: TempLicenseInfo[] = [
     name: 'นายประหยัด จันทร์อังคาร',
     professType: 'หนังสืออนุญาตชั่วคราว-ครู',
     workStep: 'ตรวจสอบเอกสาร (2)',
-    status: 'ผ่านการตรวจสอบ',
+    status: 1, //'ผ่านการตรวจสอบ',
     editDate: '10 พ.ค. 2564',
     sendDate: '1 พ.ค. 2564',
+    requestDoc: '',
+    approveDoc: '',
   },
   {
     order: 2,
@@ -32,31 +37,11 @@ export const data: TempLicenseInfo[] = [
     name: 'นายประหยัด จันทร์อังคาร',
     professType: 'หนังสืออนุญาตชั่วคราว-ครู',
     workStep: 'ตรวจสอบเอกสาร (2)',
-    status: 'ปรับแก้ไข/เพิ่มเติม',
+    status: 2, //'ปรับแก้ไข/เพิ่มเติม',
     editDate: '10 พ.ค. 2564',
     sendDate: '1 พ.ค. 2564',
-  },
-  {
-    order: 3,
-    reqCode: 'SF_TR6406000001',
-    ssn: 'x-xxxx-xxxx-xx-x',
-    name: 'นายประหยัด จันทร์อังคาร',
-    professType: 'หนังสืออนุญาตชั่วคราว-ครู',
-    workStep: 'ตรวจสอบเอกสาร (2)',
-    status: 'ผ่านการตรวจสอบ',
-    editDate: '10 พ.ค. 2564',
-    sendDate: '1 พ.ค. 2564',
-  },
-  {
-    order: 4,
-    reqCode: 'SF_TR6406000001',
-    ssn: 'x-xxxx-xxxx-xx-x',
-    name: 'นายประหยัด จันทร์อังคาร',
-    professType: 'หนังสืออนุญาตชั่วคราว-ครู',
-    workStep: 'ตรวจสอบเอกสาร (2)',
-    status: 'ปรับแก้ไข/เพิ่มเติม',
-    editDate: '10 พ.ค. 2564',
-    sendDate: '1 พ.ค. 2564',
+    requestDoc: '',
+    approveDoc: '',
   },
 ];
 @Component({
@@ -65,15 +50,33 @@ export const data: TempLicenseInfo[] = [
   styleUrls: ['./license-list.component.scss'],
 })
 export class LicenseListComponent {
+  @Input() isStatusValid = false;
+
+  personSelected = false;
+  displayedColumns: string[] = [
+    'order',
+    'reqCode',
+    'ssn',
+    'name',
+    'professType',
+    'workStep',
+    'status',
+    'editDate',
+    'sendDate',
+    'requestDoc',
+    'approveDoc',
+  ];
+  dataSource = new MatTableDataSource<TempLicenseInfo>();
+
   constructor(private router: Router) {}
   data: TempLicenseInfo[] = [];
 
   search() {
-    this.data = data;
+    this.dataSource.data = data;
   }
 
   clear() {
-    this.data = [];
+    this.dataSource.data = [];
   }
 
   nextPage(requestType: number) {
@@ -85,5 +88,4 @@ export class LicenseListComponent {
   nextPage2() {
     this.router.navigate(['/', 'temp-license', 'foreign']);
   }
-
 }

@@ -34,24 +34,27 @@
   padding-left: 15px;
 }
 
-.box__title-2 {
-  font-size: 22px;
-  color: #0056ff;
-}
-
 .table__title {
   display: flex;
   font-size: 22px;
   padding-left: 15px;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 
-.detail__table-2 {
-  color: #4caf50;
-  border: 1px solid #4caf50;
+.btn__status {
   background-color: #fff;
   border-radius: 15px;
   pointer-events: none;
+}
+
+.status__valid {
+  color: #4caf50;
+  border: 1px solid #4caf50;
+}
+
+.status__invalid {
+  color: red;
+  border: 1px solid red;
 }
 
 .detail__container {
@@ -156,15 +159,24 @@
 }
 
 .mat-menu-trigger {
-  margin-right: 25px;
+  margin-right: 20px;
   font-size: 18px;
   color: #fff;
   background-color: #0056ff;
   border: #0056ff;
   width: 100px;
   border-radius: 4px;
+  padding: 5px 10px;
 }
 
 ::ng-deep.mat-menu-panel {
   max-width: none !important;
+}
+
+tr.mat-header-row {
+  background-color: #edf8ff;
+}
+
+.note {
+  color: #0056ff;
 }

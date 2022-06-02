@@ -9,7 +9,7 @@
 <div class="container">
   <div class="header">
     รายละเอียดใบคำขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
-    (ชาวไทย)
+    {{ requestTypeLabel }}
   </div>
   <div class="detail__container">
     <div class="content__header">
@@ -67,7 +67,7 @@
           >
           <div class="content__container">
             <div class="mb-3">
-              <label for="exampleFormControlInput1" class="form-label"
+              <label for="exampleFormControlInput1" class="form-label-2"
                 >คุณสมบัติอื่นที่สอดคล้องหรือเป็นประโยชน์ต่อการจัดการเรียนการสอนในกลุ่มสาระหรือรายวิชาที่สอน
                 (พิจารณาเป็นรายกรณี)</label
               >
@@ -97,7 +97,10 @@
   </div>
 </div>
 
-<div class="btn__container">
-  <button (click)="back()" class="btn__back">ย้อนกลับ</button>
-  <button (click)="next()" class="btn__next">ถัดไป</button>
+<div class="bottom__container">
+  <ksp-bottom-menu
+    (prevClicked)="back()"
+    [showCenterButtons]="true"
+    (saveClicked)="save()"
+  ></ksp-bottom-menu>
 </div>
