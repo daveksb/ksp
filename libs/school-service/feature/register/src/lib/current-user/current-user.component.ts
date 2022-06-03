@@ -28,4 +28,8 @@ export class CurrentUserComponent {
   next() {
     this.router.navigate(['/', 'register', 'register']);
   }
+
+  cancel() {
+    this.router.navigate(['/', 'login']);
+  }
 }

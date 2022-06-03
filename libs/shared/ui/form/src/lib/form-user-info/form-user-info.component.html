@@ -5,6 +5,9 @@
         >คำนำหน้าชื่อภาษาไทย</label
       >
       <select
+        [ngClass]="{
+          form__control__white: isInputWhite
+        }"
         class="form-select form-select-sm"
         aria-label=".form-select-sm example"
       >
@@ -16,11 +19,23 @@
     </div>
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label">ชื่อ</label>
-      <input class="form-control form-control-sm" type="text" />
+      <input
+        [ngClass]="{
+          form__control__white: isInputWhite
+        }"
+        class="form-control form-control-sm"
+        type="text"
+      />
     </div>
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label">นามสกุล</label>
-      <input class="form-control form-control-sm" type="text" />
+      <input
+        class="form-control form-control-sm"
+        type="text"
+        [ngClass]="{
+          form__control__white: isInputWhite
+        }"
+      />
     </div>
   </div>
   <div class="content__container">
@@ -29,6 +44,9 @@
         >คำนำหน้าชื่อภาษาอังกฤษ</label
       >
       <select
+        [ngClass]="{
+          form__control__white: isInputWhite
+        }"
         class="form-select form-select-sm"
         aria-label=".form-select-sm example"
       >
@@ -40,17 +58,32 @@
     </div>
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label">ชื่อ</label>
-      <input class="form-control form-control-sm" type="text" />
+      <input
+        class="form-control form-control-sm"
+        type="text"
+        [ngClass]="{
+          form__control__white: isInputWhite
+        }"
+      />
     </div>
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label">นามสกุล</label>
-      <input class="form-control form-control-sm" type="text" />
+      <input
+        class="form-control form-control-sm"
+        type="text"
+        [ngClass]="{
+          form__control__white: isInputWhite
+        }"
+      />
     </div>
   </div>
   <div class="content__container--secondary">
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label">เพศ</label>
       <select
+        [ngClass]="{
+          form__control__white: isInputWhite
+        }"
         class="form-select form-select-sm"
         aria-label=".form-select-sm example"
       >
@@ -64,19 +97,37 @@
       <label for="exampleFormControlInput1" class="form-label"
         >วันเดือนปีเกิด</label
       >
-      <input class="form-control form-control-sm" type="text" />
+      <input
+        class="form-control form-control-sm"
+        type="text"
+        [ngClass]="{
+          form__control__white: isInputWhite
+        }"
+      />
     </div>
   </div>
   <div class="content__container--secondary">
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label">อีเมล</label>
-      <input class="form-control form-control-sm" type="text" />
+      <input
+        class="form-control form-control-sm"
+        type="text"
+        [ngClass]="{
+          form__control__white: isInputWhite
+        }"
+      />
     </div>
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label"
         >เบอร์โทรศัพท์ (ที่ติดต่อได้)</label
       >
-      <input class="form-control form-control-sm" type="text" />
+      <input
+        class="form-control form-control-sm"
+        type="text"
+        [ngClass]="{
+          form__control__white: isInputWhite
+        }"
+      />
     </div>
   </div>
   <div class="content__container--secondary">
@@ -84,7 +135,13 @@
       <label for="exampleFormControlInput1" class="form-label"
         >เบอร์โทรศัพท์ (ที่ทำงาน)</label
       >
-      <input class="form-control form-control-sm" type="text" />
+      <input
+        class="form-control form-control-sm"
+        type="text"
+        [ngClass]="{
+          form__control__white: isInputWhite
+        }"
+      />
     </div>
   </div>
 </div>

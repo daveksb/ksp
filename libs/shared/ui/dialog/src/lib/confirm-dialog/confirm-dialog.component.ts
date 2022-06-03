@@ -12,6 +12,7 @@ export class ConfirmDialogComponent {
       title: string;
       subTitle: string;
       isDanger: boolean;
+      schoolCode: string;
     }
   ) {}
 

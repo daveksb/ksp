@@ -24,7 +24,7 @@ export class ActivityEducationLevelComponent {
 
   save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      height: '175px',
+      height: '200px',
       width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูล
