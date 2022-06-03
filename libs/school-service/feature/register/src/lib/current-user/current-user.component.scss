@@ -14,6 +14,7 @@
   font-size: 18px;
   color: #656565;
 }
+
 .form-control {
   background-color: #fff;
   font-size: 18px;
@@ -33,6 +34,7 @@
   background-color: #e5e5e5;
   max-width: 100%;
   padding: 24px 48px;
+  height: 890px;
 }
 
 .content__container {
@@ -98,16 +100,17 @@
   margin: 0 24px;
 }
 
-.btn__next {
-  color: #f68b33;
-  background-color: #fff;
-  border: 1px solid #f68b33;
-  padding: 4px 24px;
-  width: 100px;
-  margin: 0 24px;
-}
-
 .btn__container {
   display: flex;
   justify-content: space-between;
+}
+
+.btn-next {
+  color: #f68b33;
+  border: 1px solid #f68b33;
+}
+
+.btn-next:hover {
+  background-color: #f68b33;
+  color: #fff;
 }

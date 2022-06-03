@@ -72,7 +72,6 @@ export class AddStaffTeachingInfoComponent implements OnInit {
 
   save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      height: '175px',
       width: '350px',
       data: {
         title: `คุณต้องการบันทึกข้อมูล
@@ -89,7 +88,7 @@ export class AddStaffTeachingInfoComponent implements OnInit {
 
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      height: '200px',
+    
       width: '350px',
       data: {
         header: `บันทึกข้อมูลสำเร็จ`,
