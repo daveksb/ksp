@@ -12,10 +12,10 @@ import { SharedUiFormModule } from '@ksp/shared/ui/form';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
 import { SchoolServiceUiStaffSearchModule } from '@ksp/school-service/ui/staff-search';
-import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export const routes: Routes = [
   {
@@ -37,9 +37,9 @@ export const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    ReactiveFormsModule,
     RouterModule.forChild(routes),
     MatCheckboxModule,
+    ReactiveFormsModule,
     MatTabsModule,
     SharedUiFormModule,
     SharedUiBottomMenuModule,
@@ -47,7 +47,7 @@ export const routes: Routes = [
     SharedUiTopNavModule,
     SchoolServiceUiStaffSearchModule,
     MatTableModule,
-    MatIconModule
+    MatIconModule,
   ],
   declarations: [
     StaffListComponent,

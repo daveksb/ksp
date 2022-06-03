@@ -10,10 +10,10 @@ import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
 import { SharedUiFormModule } from '@ksp/shared/ui/form';
 import { SchoolServiceUiStaffSearchModule } from '@ksp/school-service/ui/staff-search';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { ReactiveFormsModule } from '@angular/forms';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export const routes: Routes = [
   {
@@ -40,7 +40,7 @@ export const routes: Routes = [
     ReactiveFormsModule,
     SharedUiBottomMenuModule,
     MatTableModule,
-    MatIconModule
+    MatIconModule,
   ],
   declarations: [
     ActivityListComponent,

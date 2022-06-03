@@ -59,3 +59,13 @@ add asterisk for required feild
   color: red;
   content: ' *';
 }
+
+.btn-primary {
+  background-color: #3f89fe !important;
+  border-color: #3f89fe !important;
+}
+
+.btn-light {
+  background-color: #e8e8e8 !important;
+  border-color: #e8e8e8 !important;
+}
