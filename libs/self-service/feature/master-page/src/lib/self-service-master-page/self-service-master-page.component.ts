@@ -24,13 +24,7 @@ export const menu: MenuConfig[] = [
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ยื่นใบคำขอ',
     path: '',
-  },
-  {
-    icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบอนุญาตประกอบวิชาชีพ',
-    path: '',
-    subMenuName: 'license',
-    isExpanded: true,
+    subMenuName: 'request',
     subMenu: [
       {
         label: 'ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ',
@@ -77,6 +71,11 @@ export const menu: MenuConfig[] = [
         path: 'license/payment-channel',
       },
     ],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/card.svg',
+    label: 'ใบอนุญาตประกอบวิชาชีพ',
+    path: '',
   },
   {
     icon: 'assets/images/icon-sidenav/event.svg',
