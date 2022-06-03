@@ -4,6 +4,7 @@ import { RouterModule, Route } from '@angular/router';
 import { PaymentHistoryComponent } from './payment-history/payment-history.component';
 import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master-page';
 import { PageNotFoundComponent } from '@ksp/shared/ui/page-not-found';
+import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 
 export const routes: Route[] = [
   {
@@ -28,7 +29,7 @@ export const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [CommonModule, SharedUiTopNavModule, RouterModule.forChild(routes)],
   declarations: [PaymentHistoryComponent],
   exports: [PaymentHistoryComponent],
 })

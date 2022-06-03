@@ -1,12 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'ksp-payment-history',
+  selector: 'self-service-payment-history',
   templateUrl: './payment-history.component.html',
   styleUrls: ['./payment-history.component.css'],
 })
-export class PaymentHistoryComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class PaymentHistoryComponent {}
