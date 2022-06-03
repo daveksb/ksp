@@ -12,7 +12,7 @@
 
 .box__detail-2 {
   background-color: #f9f9fa;
-  padding: 0 24px;
+  padding: 12px 24px;
   margin: 24px;
 }
 
@@ -56,7 +56,7 @@
 }
 
 .table__container {
-  margin: 15px 125px;
+  margin: 15px 125px 0;
 }
 
 .table {
@@ -85,7 +85,6 @@
 
 .table__title {
   font-size: 18px;
-  padding-top: 20px;
 }
 
 .detail__container--half {
@@ -117,7 +116,7 @@
 
 .checkbox__container {
   display: flex;
-  padding: 20px 0;
+  padding: 10px 0;
 }
 
 .remove_red_eye {

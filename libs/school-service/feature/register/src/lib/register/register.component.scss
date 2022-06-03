@@ -104,13 +104,14 @@
   font-size: 22px;
 }
 
-.btn__next {
+.btn-next {
   color: #f68b33;
-  background-color: #fff;
   border: 1px solid #f68b33;
-  padding: 4px 24px;
-  width: 100px;
-  margin: 0 10px;
+}
+
+.btn-next:hover {
+  background-color: #f68b33;
+  color: #fff;
 }
 
 .btn__container {
