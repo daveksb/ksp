@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/shared/ui/license-type-button-group",
   "sourceRoot": "libs/shared/ui/license-type-button-group/src",
   "prefix": "ksp",
   "targets": {

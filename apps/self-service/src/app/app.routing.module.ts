@@ -15,10 +15,7 @@ import {
 
 import { PrivacyPolicyComponent } from '@ksp/self-service/ui/content';
 
-import {
-  PaymentChannelComponent,
-  PaymentHistoryComponent,
-} from '@ksp/self-service/ui/payment';
+import { PaymentChannelComponent } from '@ksp/self-service/ui/payment';
 
 const routes: Routes = [
   { path: 'home', component: SelfServiceHomeComponent },
@@ -27,6 +24,14 @@ const routes: Routes = [
   { path: 'register-1', component: SelfServiceRegisterStepOneComponent },
   { path: 'register-2', component: SelfServiceRegisterStepTwoComponent },
   { path: 'register-3', component: SelfServiceRegisterStepThreeComponent },
+
+  {
+    path: 'my-info',
+    loadChildren: () =>
+      import('@ksp/self-service/feature/my-info').then(
+        (m) => m.SelfServiceFeatureMyInfoModule
+      ),
+  },
 
   {
     path: 'license',
@@ -41,16 +46,12 @@ const routes: Routes = [
         component: PaymentChannelComponent,
       },
       {
-        path: 'payment-history',
-        component: PaymentHistoryComponent,
-      },
-      {
         path: 'edit',
         component: SelfServiceLicenseEditComponent,
       },
     ],
   },
-  { path: '**', component: SelfServiceHomeComponent },
+  /* { path: '**', component: SelfServiceHomeComponent }, */
 ];
 
 @NgModule({

@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/e-service/ui/accusation-search",
   "sourceRoot": "libs/e-service/ui/accusation-search/src",
   "prefix": "e-service",
   "targets": {

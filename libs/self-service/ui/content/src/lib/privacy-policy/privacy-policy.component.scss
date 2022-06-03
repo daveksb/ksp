@@ -1,9 +1,7 @@
 .container-fluid {
   background: url('/assets/images/BG-secondary.png') no-repeat center center;
-
   min-height: 100%;
   min-width: 600px;
-
   position: fixed;
   top: 0;
   left: 0;
@@ -37,11 +35,7 @@
 }
 
 .btn-primary {
-  background: #3f89fe;
-  border-radius: 10px;
-  padding: 4px 156px;
-  font-size: 20px;
-  color: #fff;
+  width: 200px;
 }
 
 .label__login {

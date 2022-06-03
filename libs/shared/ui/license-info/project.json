@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/shared/ui/license-info",
   "sourceRoot": "libs/shared/ui/license-info/src",
   "prefix": "ksp",
   "targets": {

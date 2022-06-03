@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/uni-service/ui/nav",
   "sourceRoot": "libs/uni-service/ui/nav/src",
   "prefix": "ksp",
   "targets": {

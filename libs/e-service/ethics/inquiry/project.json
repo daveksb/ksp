@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/e-service/ethics/inquiry",
   "sourceRoot": "libs/e-service/ethics/inquiry/src",
   "prefix": "e-service",
   "targets": {

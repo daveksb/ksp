@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/e-service/ui/accusation-info",
   "sourceRoot": "libs/e-service/ui/accusation-info/src",
   "prefix": "ksp",
   "targets": {

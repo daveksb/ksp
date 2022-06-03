@@ -1,6 +1,5 @@
 {
   "projectType": "application",
-  "root": "apps/e-service",
   "sourceRoot": "apps/e-service/src",
   "prefix": "ksp",
   "targets": {

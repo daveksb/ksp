@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/shared/ui/degree-cert-tap-content",
   "sourceRoot": "libs/shared/ui/degree-cert-tap-content/src",
   "prefix": "ksp",
   "targets": {

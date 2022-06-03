@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/e-service/dialog/accusation-search",
   "sourceRoot": "libs/e-service/dialog/accusation-search/src",
   "prefix": "ksp",
   "targets": {

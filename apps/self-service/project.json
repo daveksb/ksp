@@ -1,6 +1,5 @@
 {
   "projectType": "application",
-  "root": "apps/self-service",
   "sourceRoot": "apps/self-service/src",
   "prefix": "ksp",
   "targets": {

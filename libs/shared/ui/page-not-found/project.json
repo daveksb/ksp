@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/shared/ui/page-not-found",
   "sourceRoot": "libs/shared/ui/page-not-found/src",
   "prefix": "ksp",
   "targets": {

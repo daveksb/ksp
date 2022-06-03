@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/shared/feature/degree-cert",
   "sourceRoot": "libs/shared/feature/degree-cert/src",
   "prefix": "ksp",
   "targets": {

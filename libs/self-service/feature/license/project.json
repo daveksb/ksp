@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/self-service/feature/license",
   "sourceRoot": "libs/self-service/feature/license/src",
   "prefix": "ksp",
   "targets": {

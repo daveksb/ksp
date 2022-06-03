@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/uni-service/feature/register",
   "sourceRoot": "libs/uni-service/feature/register/src",
   "prefix": "ksp",
   "targets": {

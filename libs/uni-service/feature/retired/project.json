@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/uni-service/feature/retired",
   "sourceRoot": "libs/uni-service/feature/retired/src",
   "prefix": "ksp",
   "targets": {

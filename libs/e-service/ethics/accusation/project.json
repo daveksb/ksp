@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/e-service/ethics/accusation",
   "sourceRoot": "libs/e-service/ethics/accusation/src",
   "prefix": "ksp",
   "targets": {

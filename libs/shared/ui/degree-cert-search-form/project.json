@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/shared/ui/degree-cert-search-form",
   "sourceRoot": "libs/shared/ui/degree-cert-search-form/src",
   "prefix": "ksp",
   "targets": {

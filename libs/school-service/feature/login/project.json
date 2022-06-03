@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/school-service/feature/login",
   "sourceRoot": "libs/school-service/feature/login/src",
   "prefix": "ksp",
   "targets": {

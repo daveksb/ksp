@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/self-service/ui/content",
   "sourceRoot": "libs/self-service/ui/content/src",
   "prefix": "ksp",
   "targets": {

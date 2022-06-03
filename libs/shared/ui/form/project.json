@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/shared/ui/form",
   "sourceRoot": "libs/shared/ui/form/src",
   "prefix": "ksp",
   "targets": {
