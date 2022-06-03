@@ -24,35 +24,58 @@ export const menu: MenuConfig[] = [
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ยื่นใบคำขอ',
     path: '',
+    subMenuName: 'request',
+    subMenu: [
+      {
+        label: 'ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ',
+        path: 'license/request',
+      },
+      {
+        label: 'ขอต่ออายุใบประกอบวิชาชีพ',
+        path: 'license/a',
+      },
+      {
+        label: 'ขอหนังสืออนุญาตชั่วคราว',
+        path: 'license/b',
+      },
+      {
+        label: 'ขอเปลั้ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ',
+        path: 'license/edit',
+      },
+      {
+        label: 'ขอใบแทนใบอนุญาตประกอบวิชาชีพ',
+        path: 'license/d',
+      },
+      {
+        label: 'ขอหนังสืออนุญาตปฎิบัติการสอน',
+        path: 'license/e',
+      },
+      {
+        label: 'ขอหนังสือรับรองความรู้',
+        path: 'license/f',
+      },
+      {
+        label: 'ขอยื่นเทียบเคียงความรู้',
+        path: 'license/g',
+      },
+      {
+        label: 'ขอคืนเงินค่าธรรมเนียม',
+        path: 'license/h',
+      },
+      {
+        label: 'ขอรับรางวัลการยกย่องเชิดชูเกียรติ',
+        path: 'license/i',
+      },
+      {
+        label: '##ช่องทางชำระเงิน##',
+        path: 'license/payment-channel',
+      },
+    ],
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ใบอนุญาตประกอบวิชาชีพ',
     path: '',
-    subMenuName: 'license',
-    isExpanded: false,
-    subMenu: [
-      {
-        label: 'ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ',
-        path: 'request',
-      },
-      {
-        label: 'ขอต่ออายุใบประกอบวิชาชีพ',
-        path: '',
-      },
-      {
-        label: 'ขอใบแทนใบอนุญาตประกอบวิชาชีพ',
-        path: '',
-      },
-      {
-        label: '##ช่องทางชำระเงิน',
-        path: 'payment-channel',
-      },
-      {
-        label: '##แก้ไขใบอนุญาต',
-        path: 'edit',
-      },
-    ],
   },
   {
     icon: 'assets/images/icon-sidenav/event.svg',
