@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/school-service/feature/staff-management",
   "sourceRoot": "libs/school-service/feature/staff-management/src",
   "prefix": "school-service",
   "targets": {

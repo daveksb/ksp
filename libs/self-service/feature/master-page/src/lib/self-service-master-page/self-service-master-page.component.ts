@@ -1,6 +1,19 @@
 import { Component } from '@angular/core';
 import { MenuConfig } from '@ksp/shared/ui/side-menu';
 
+@Component({
+  selector: 'ksp-self-service-master-page',
+  templateUrl: './self-service-master-page.component.html',
+  styleUrls: ['./self-service-master-page.component.scss'],
+})
+export class SelfServiceMasterPageComponent {
+  menuConfig: MenuConfig[];
+
+  constructor() {
+    this.menuConfig = menu;
+  }
+}
+
 export const menu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/home.svg ',
@@ -55,44 +68,32 @@ export const menu: MenuConfig[] = [
     icon: 'assets/images/icon-sidenav/people.svg',
     label: 'ข้อมูลของฉัน',
     path: '',
-    subMenuName: 'myProfile',
+    subMenuName: 'my-info',
     subMenu: [
       {
         label: 'ข้อมูลส่วนตัว',
-        path: '',
+        path: 'my-info/a',
       },
       {
         label: 'สถานที่ทำงาน',
-        path: '',
+        path: 'my-info/b',
       },
       {
         label: 'ข้อมูลการศึกษา',
-        path: '',
+        path: 'my-info/c',
       },
       {
         label: 'ข้อมูลประสบการณ์วิชาชีพ',
-        path: '',
+        path: 'my-info/d',
       },
       {
         label: 'ข้อมูลผลการประเมินสมรรถนะ',
-        path: '',
+        path: 'my-info/e',
       },
       {
         label: 'ประวัติการชำระเงินและใบเสร็จรับเงิน',
-        path: 'payment-history',
+        path: 'my-info/payment-history',
       },
     ],
   },
 ];
-@Component({
-  selector: 'ksp-self-service-master-page',
-  templateUrl: './self-service-master-page.component.html',
-  styleUrls: ['./self-service-master-page.component.scss'],
-})
-export class SelfServiceMasterPageComponent {
-  menuConfig: MenuConfig[];
-
-  constructor() {
-    this.menuConfig = menu;
-  }
-}

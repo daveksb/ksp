@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/self-service/feature/register",
   "sourceRoot": "libs/self-service/feature/register/src",
   "prefix": "ksp",
   "targets": {

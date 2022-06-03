@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/uni-service/feature/degree-cert",
   "sourceRoot": "libs/uni-service/feature/degree-cert/src",
   "prefix": "ksp",
   "targets": {

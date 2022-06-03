@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/self-service/ui/payment",
   "sourceRoot": "libs/self-service/ui/payment/src",
   "prefix": "ksp",
   "targets": {

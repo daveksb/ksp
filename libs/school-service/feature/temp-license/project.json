@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/school-service/feature/temp-license",
   "sourceRoot": "libs/school-service/feature/temp-license/src",
   "prefix": "e-service",
   "targets": {

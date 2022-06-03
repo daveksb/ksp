@@ -1,6 +1,5 @@
 {
   "projectType": "application",
-  "root": "apps/school-service",
   "sourceRoot": "apps/school-service/src",
   "prefix": "ksp",
   "targets": {

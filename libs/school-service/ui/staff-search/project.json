@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/school-service/ui/staff-search",
   "sourceRoot": "libs/school-service/ui/staff-search/src",
   "prefix": "ksp",
   "targets": {

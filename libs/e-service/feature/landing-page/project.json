@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/e-service/feature/landing-page",
   "sourceRoot": "libs/e-service/feature/landing-page/src",
   "prefix": "e-service",
   "targets": {

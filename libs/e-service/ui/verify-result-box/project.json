@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/e-service/ui/verify-result-box",
   "sourceRoot": "libs/e-service/ui/verify-result-box/src",
   "prefix": "ksp",
   "targets": {

@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/school-service/feature/activity",
   "sourceRoot": "libs/school-service/feature/activity/src",
   "prefix": "ksp",
   "targets": {

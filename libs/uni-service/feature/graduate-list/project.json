@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/uni-service/feature/graduate-list",
   "sourceRoot": "libs/uni-service/feature/graduate-list/src",
   "prefix": "ksp",
   "targets": {

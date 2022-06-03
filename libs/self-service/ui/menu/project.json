@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/self-service/ui/menu",
   "sourceRoot": "libs/self-service/ui/menu/src",
   "prefix": "ksp",
   "targets": {
