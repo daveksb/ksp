@@ -15,7 +15,7 @@ export class ForeignIdComponent {
   constructor(private router: Router, public dialog: MatDialog) {}
 
   cancel() {
-    this.router.navigate(['/', 'login']);
+    this.router.navigate(['/', 'temp-license']);
   }
 
   onConfirmed() {
