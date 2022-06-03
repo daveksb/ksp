@@ -98,16 +98,17 @@
   margin: 0 24px;
 }
 
-.btn__next {
-  color: #f68b33;
-  background-color: #fff;
-  border: 1px solid #f68b33;
-  padding: 4px 24px;
-  width: 100px;
-  margin: 0 24px;
-}
-
 .btn__container {
   display: flex;
   justify-content: space-between;
+}
+
+.btn-next {
+  color: #f68b33;
+  border: 1px solid #f68b33;
+}
+
+.btn-next:hover {
+  background-color: #f68b33;
+  color: #fff;
 }

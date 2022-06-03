@@ -44,6 +44,10 @@ hr {
   padding: 25px;
 }
 
+.mat-tab-body-wrapper{
+  border: 1px solid #b8bcc3;
+}
+
 .material-icons {
   font-family: 'Material Icons' !important;
 }
