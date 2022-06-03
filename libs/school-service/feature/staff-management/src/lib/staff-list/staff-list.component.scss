@@ -1,7 +1,7 @@
 .container {
   background-color: #e5e5e5;
   max-width: 100%;
-  padding: 10px;
+  padding: 0 0 5px 0;
 }
 
 .table__container {
@@ -17,7 +17,8 @@
 .header {
   color: #000000;
   font-size: 22px;
-  margin: 0 15px;
+  padding-top: 15px;
+  padding-left: 20px;
 }
 
 .table {
@@ -33,7 +34,6 @@
 .table-responsive {
   margin: 10px 20px;
 }
-
 
 .btn__container {
   display: flex;
@@ -77,4 +77,3 @@
 tr.mat-header-row {
   background-color: #edf8ff;
 }
-
