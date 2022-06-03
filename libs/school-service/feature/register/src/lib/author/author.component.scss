@@ -10,21 +10,17 @@
   grid-column-gap: 18px;
 }
 
-.detail__content-2 {
-  display: grid;
-  grid-template-columns: 25% 1fr;
-  grid-column-gap: 18px;
-}
-
 .detail__content--secondary {
   display: grid;
   grid-template-columns: 150px 1fr 1fr;
   grid-column-gap: 18px;
 }
+
 .form-label {
   font-size: 18px;
   color: #656565;
 }
+
 .form-control {
   background-color: #fff;
   font-size: 18px;
@@ -49,10 +45,6 @@
 .content__container {
   background-color: #fff;
   padding: 12px;
-}
-
-.checkbox__container {
-  margin: 0 24px;
 }
 
 .form__container {
@@ -116,11 +108,11 @@
 }
 
 .btn-third {
-  color: #3f89fe;
+  color: #0056ff;
 }
 
 .btn-fourth {
-  background: #3f89fe;
+  background: #0056ff;
   color: #fff;
 }
 
@@ -142,4 +134,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.img__step {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
 }
