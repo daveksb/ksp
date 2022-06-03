@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/self-service/feature/home",
   "sourceRoot": "libs/self-service/feature/home/src",
   "prefix": "ksp",
   "targets": {

@@ -1,0 +1,17 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/self-service/feature/my-info/src",
+  "prefix": "self-service",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/self-service/feature/my-info/**/*.ts",
+          "libs/self-service/feature/my-info/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/self-service/feature/login",
   "sourceRoot": "libs/self-service/feature/login/src",
   "prefix": "ksp",
   "targets": {

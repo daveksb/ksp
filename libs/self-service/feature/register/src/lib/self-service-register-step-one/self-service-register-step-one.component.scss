@@ -1,23 +1,17 @@
 .container {
   max-width: 1440px;
   background-image: url('/assets/images/BG-secondary.png');
-  padding: 180px 238px;
-  background-size: cover;
+  padding: 100px 238px;
+  background-size: 100% 100%;
 }
 
 .form__container {
   display: grid;
-  width: 100%;
-  height: 100%;
   background: #ffffff;
   box-shadow: 0px 4px 10px rgba(63, 137, 254, 0.1);
   border-radius: 20px;
   padding: 24px 36px;
   text-align: center;
-}
-
-.row > * {
-  padding: 0;
 }
 
 .detail__container {
@@ -26,6 +20,7 @@
   grid-column-gap: 8px;
   margin-bottom: 8px;
 }
+
 .detail__container--left {
   display: grid;
   grid-template-columns: 120px 1fr;
@@ -33,56 +28,52 @@
 }
 
 h3 {
-  font-family: 'KSP Bold';
   font-size: 30px;
   color: #000000;
   margin-bottom: 36px;
 }
+
 .field__container {
   margin-bottom: 8px;
 }
+
 .form__detail {
-  font-family: 'KSP Bold';
   font-size: 14px;
   color: #666666;
   text-align: left;
   padding: 24px 0 0 0;
 }
+
 .address__detail {
   display: grid;
   grid-column-gap: 8px;
   grid-row-gap: 12px;
   margin-top: 8px;
 }
+
 .btn-primary {
-  margin-top: 18px;
-  background: #3f89fe;
-  border-radius: 10px;
-  padding: 4px 156px;
-  font-family: 'KSP Bold';
-  font-size: 20px;
-  color: #fff;
+  width: 220px;
+  font-size: 22px;
 }
+
 .form__footer {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
 }
+
 .label__login {
   font-size: 20px;
   color: #666666;
   text-decoration: underline;
-  margin-top: 20px;
-  margin-top: 24px;
+  margin-top: 12px;
   cursor: pointer;
 }
 
-/* device  responsive*/
-@media only screen and (max-width: 980px) {
+@media screen and (max-height: 640px) {
   .container {
-    background-image: url('/assets/images/BG-secondary.png');
-    background-size: cover;
-    width: 100%;
-    height: 100vh;
-    padding: 120px;
+    padding: 50px 200px;
   }
 }
 /* mobile */
@@ -117,15 +108,5 @@ h3 {
   }
   .field__container {
     margin-bottom: 8px;
-  }
-  .btn-primary {
-    margin-top: 18px;
-    background: #3f89fe;
-    border-radius: 10px;
-    padding: 4px 24px;
-    font-family: 'KSP Bold';
-    font-size: 20px;
-    color: #fff;
-    width: 100%;
   }
 }

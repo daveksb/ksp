@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/e-service/e-license/user-detail",
   "sourceRoot": "libs/e-service/e-license/user-detail/src",
   "prefix": "ksp",
   "targets": {

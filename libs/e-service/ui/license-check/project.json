@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/e-service/ui/license-check",
   "sourceRoot": "libs/e-service/ui/license-check/src",
   "prefix": "e-service",
   "targets": {

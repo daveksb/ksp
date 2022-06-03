@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/shared/ui/dialog",
   "sourceRoot": "libs/shared/ui/dialog/src",
   "prefix": "ksp",
   "targets": {

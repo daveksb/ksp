@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/shared/ui/top-nav",
   "sourceRoot": "libs/shared/ui/top-nav/src",
   "prefix": "ksp",
   "targets": {

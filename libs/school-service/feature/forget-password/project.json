@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/school-service/feature/forget-password",
   "sourceRoot": "libs/school-service/feature/forget-password/src",
   "prefix": "ksp",
   "targets": {

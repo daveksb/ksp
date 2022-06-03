@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/school-service/feature/foreign-id",
   "sourceRoot": "libs/school-service/feature/foreign-id/src",
   "prefix": "ksp",
   "targets": {

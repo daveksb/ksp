@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/school-service/feature/container-page",
   "sourceRoot": "libs/school-service/feature/container-page/src",
   "prefix": "ksp",
   "targets": {

@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/uni-service/feature/login",
   "sourceRoot": "libs/uni-service/feature/login/src",
   "prefix": "ksp",
   "targets": {

@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/e-service/ethics/publish",
   "sourceRoot": "libs/e-service/ethics/publish/src",
   "prefix": "e-service",
   "targets": {

@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/uni-service/feature/container-page",
   "sourceRoot": "libs/uni-service/feature/container-page/src",
   "prefix": "ksp",
   "targets": {

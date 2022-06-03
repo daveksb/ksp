@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/uni-service/ui/forms",
   "sourceRoot": "libs/uni-service/ui/forms/src",
   "prefix": "ksp",
   "targets": {

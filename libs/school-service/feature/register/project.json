@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/school-service/feature/register",
   "sourceRoot": "libs/school-service/feature/register/src",
   "prefix": "ksp",
   "targets": {

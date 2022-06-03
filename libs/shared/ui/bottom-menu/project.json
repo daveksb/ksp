@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/shared/ui/bottom-menu",
   "sourceRoot": "libs/shared/ui/bottom-menu/src",
   "prefix": "ksp",
   "targets": {

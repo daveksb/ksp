@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/school-service/dialog",
   "sourceRoot": "libs/school-service/dialog/src",
   "prefix": "ksp",
   "targets": {

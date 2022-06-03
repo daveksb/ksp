@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/e-service/standard/degree-cert",
   "sourceRoot": "libs/e-service/standard/degree-cert/src",
   "prefix": "e-service",
   "targets": {

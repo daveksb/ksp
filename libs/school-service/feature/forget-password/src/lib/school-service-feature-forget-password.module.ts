@@ -20,8 +20,8 @@ export const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    ReactiveFormsModule,
     UniServiceUiNavModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
   ],
   declarations: [ForgetPasswordComponent, SetNewPasswordComponent],
