@@ -109,22 +109,26 @@
       <section class="container-fluid" [formGroup]="levelFormGroup">
         <div class="checkbox__container">
           <ng-container *ngFor="let item of levels | keyvalue">
-            <mat-checkbox formControlName="{{ item.key }}" class="checkbox__label">{{
-              item.key
-            }}</mat-checkbox>
+            <mat-checkbox
+              formControlName="{{ item.key }}"
+              class="checkbox__label"
+              >{{ item.key }}</mat-checkbox
+            >
           </ng-container>
         </div>
       </section>
     </div>
 
-    <div class="box__detail mb-5">
+    <div class="box__detail">
       <div class="title__box">ประเภทวิชาที่สอน</div>
       <section class="container-fluid" [formGroup]="subjectFormGroup">
         <div class="checkbox__container-2">
           <ng-container *ngFor="let item of subjects | keyvalue">
-            <mat-checkbox formControlName="{{ item.key }}" class="checkbox__label">{{
-              item.key
-            }}</mat-checkbox>
+            <mat-checkbox
+              formControlName="{{ item.key }}"
+              class="checkbox__label"
+              >{{ item.key }}</mat-checkbox
+            >
           </ng-container>
           <input class="form-control form-control-sm check-other" type="text" />
         </div>

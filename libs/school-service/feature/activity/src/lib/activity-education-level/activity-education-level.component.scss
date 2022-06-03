@@ -12,8 +12,8 @@
 
 .box__detail-2 {
   background-color: #f9f9fa;
-  padding: 0 24px 24px 24px;
-  margin: 0 24px 24px 24px;
+  padding: 0 24px;
+  margin: 24px;
 }
 
 .box__container {
@@ -56,11 +56,10 @@
 }
 
 .table__container {
-  margin: 0 16px;
+  margin: 15px 125px;
 }
 
 .table {
-  margin-top: 16px;
   background-color: #fff;
   border: 1px solid #eceef2;
 }
@@ -98,7 +97,7 @@
 .form__container {
   background-color: #ecedf3;
   padding: 12px 24px;
-  margin: 10px 20px;
+  margin: 0 20px;
 }
 
 .form-label {
@@ -118,10 +117,9 @@
 
 .checkbox__container {
   display: flex;
-  margin: 10px 0;
-  padding-top: 20px;
+  padding: 20px 0;
 }
 
 .remove_red_eye {
-  color: #06DEA9;
+  color: #06dea9;
 }
