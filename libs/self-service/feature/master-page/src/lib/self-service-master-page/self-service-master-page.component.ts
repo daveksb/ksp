@@ -30,27 +30,51 @@ export const menu: MenuConfig[] = [
     label: 'ใบอนุญาตประกอบวิชาชีพ',
     path: '',
     subMenuName: 'license',
-    isExpanded: false,
+    isExpanded: true,
     subMenu: [
       {
         label: 'ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ',
-        path: 'request',
+        path: 'license/request',
       },
       {
         label: 'ขอต่ออายุใบประกอบวิชาชีพ',
-        path: '',
+        path: 'license/a',
+      },
+      {
+        label: 'ขอหนังสืออนุญาตชั่วคราว',
+        path: 'license/b',
+      },
+      {
+        label: 'ขอเปลั้ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ',
+        path: 'license/edit',
       },
       {
         label: 'ขอใบแทนใบอนุญาตประกอบวิชาชีพ',
-        path: '',
+        path: 'license/d',
       },
       {
-        label: '##ช่องทางชำระเงิน',
-        path: 'payment-channel',
+        label: 'ขอหนังสืออนุญาตปฎิบัติการสอน',
+        path: 'license/e',
       },
       {
-        label: '##แก้ไขใบอนุญาต',
-        path: 'edit',
+        label: 'ขอหนังสือรับรองความรู้',
+        path: 'license/f',
+      },
+      {
+        label: 'ขอยื่นเทียบเคียงความรู้',
+        path: 'license/g',
+      },
+      {
+        label: 'ขอคืนเงินค่าธรรมเนียม',
+        path: 'license/h',
+      },
+      {
+        label: 'ขอรับรางวัลการยกย่องเชิดชูเกียรติ',
+        path: 'license/i',
+      },
+      {
+        label: '##ช่องทางชำระเงิน##',
+        path: 'license/payment-channel',
       },
     ],
   },

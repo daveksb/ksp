@@ -1,12 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SelfServiceHomeComponent } from '@ksp/self-service/feature/home';
-import {
-  SelfServiceLicenseEditComponent,
-  SelfServiceLicenseRequestComponent,
-} from '@ksp/self-service/feature/license';
+
 import { SelfServiceThaiLoginComponent } from '@ksp/self-service/feature/login';
-import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master-page';
+
 import {
   SelfServiceRegisterStepOneComponent,
   SelfServiceRegisterStepThreeComponent,
@@ -14,8 +11,6 @@ import {
 } from '@ksp/self-service/feature/register';
 
 import { PrivacyPolicyComponent } from '@ksp/self-service/ui/content';
-
-import { PaymentChannelComponent } from '@ksp/self-service/ui/payment';
 
 const routes: Routes = [
   { path: 'home', component: SelfServiceHomeComponent },
@@ -26,6 +21,14 @@ const routes: Routes = [
   { path: 'register-3', component: SelfServiceRegisterStepThreeComponent },
 
   {
+    path: 'license',
+    loadChildren: () =>
+      import('@ksp/self-service/feature/license').then(
+        (m) => m.SelfServiceFeatureLicenseModule
+      ),
+  },
+
+  {
     path: 'my-info',
     loadChildren: () =>
       import('@ksp/self-service/feature/my-info').then(
@@ -33,25 +36,7 @@ const routes: Routes = [
       ),
   },
 
-  {
-    path: 'license',
-    component: SelfServiceMasterPageComponent,
-    children: [
-      {
-        path: 'request',
-        component: SelfServiceLicenseRequestComponent,
-      },
-      {
-        path: 'payment-channel',
-        component: PaymentChannelComponent,
-      },
-      {
-        path: 'edit',
-        component: SelfServiceLicenseEditComponent,
-      },
-    ],
-  },
-  /* { path: '**', component: SelfServiceHomeComponent }, */
+  { path: '**', component: SelfServiceHomeComponent },
 ];
 
 @NgModule({
