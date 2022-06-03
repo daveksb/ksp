@@ -86,6 +86,6 @@ export class LicenseListComponent {
   }
 
   nextPage2() {
-    this.router.navigate(['/', 'temp-license', 'foreign']);
+    this.router.navigate(['/', 'foreign-id']);
   }
 }
