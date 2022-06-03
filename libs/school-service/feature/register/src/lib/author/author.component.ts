@@ -24,12 +24,13 @@ export class AuthorComponent {
 
   save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      height: '200px',
+      height: '250px',
       width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
         subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
         ใช่หรือไม`,
+        schoolCode: 'รหัสเข้าใช้งาน(รหัสโรงเรียน): xxxx',
       },
     });
 
@@ -42,7 +43,7 @@ export class AuthorComponent {
 
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      height: '300px',
+      height: '275px',
       width: '375px',
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,

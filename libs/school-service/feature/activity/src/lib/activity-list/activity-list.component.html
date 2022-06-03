@@ -1,7 +1,9 @@
 <ksp-top-nav><span header>ทะเบียนบุคลากรภายในหน่วยงาน</span></ksp-top-nav>
 
 <div class="container">
-  <div class="header">ทะเบียนบุคลากรภายในหน่วยงาน</div>
+  <div class="header">
+    กิจกรรมพัฒนาตนเอง (หนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต)
+  </div>
 
   <school-service-staff-search
     (clear)="clear()"
@@ -9,8 +11,11 @@
   ></school-service-staff-search>
 
   <div class="table__container">
-    <div class="title__box">ทะเบียนรายชื่อบุคลากรภายในหน่วยงาน</div>
-    <hr />
+    <div class="title__box">
+      รายชื่อผู้มีหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต
+    </div>
+    
+    <hr /><br />
 
     <div class="table-responsive">
       <table mat-table [dataSource]="dataSource">

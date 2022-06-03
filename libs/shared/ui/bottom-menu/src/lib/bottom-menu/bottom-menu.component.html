@@ -19,6 +19,14 @@
       ยกเลิก
     </button>
     <button
+      *ngIf="showTempSaveButton"
+      (click)="tempSaveClicked.emit(true)"
+      type="button"
+      class="btn btn-secondary"
+    >
+      บันทึกชั่วคราว
+    </button>
+    <button
       (click)="saveClicked.emit(true)"
       type="button"
       class="btn btn-fourth"

@@ -1,7 +1,7 @@
 .container {
   background-color: #e5e5e5;
   max-width: 100%;
-  padding: 12px 12px 75px 12px;
+  padding-bottom: 75px;
 }
 
 .box__detail {
@@ -10,21 +10,19 @@
   margin: 24px;
 }
 
-.box__detail-2 {
-  background-color: #f9f9fa;
-  padding: 0 24px 24px 24px;
-  margin: 0 24px 24px 24px;
-}
-
 .box__container {
   background-color: #fff;
   padding: 15px;
   margin: 0 15px;
 }
 
+.header {
+  font-size: 22px;
+  padding: 15px 0 0 15px;
+}
+
 .title__box {
   font-size: 22px;
-  margin: 0 15px;
 }
 
 .detail__container--half {
@@ -112,4 +110,10 @@
 
 .label__content--primary {
   color: #f68b33;
+}
+
+.btn__license-info {
+  display: flex;
+  margin: 10px 20px;
+  justify-content: center;
 }

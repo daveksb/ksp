@@ -15,12 +15,12 @@ export class ForeignIdComponent {
   constructor(private router: Router, public dialog: MatDialog) {}
 
   cancel() {
-    this.router.navigate(['/', 'login']);
+    this.router.navigate(['/', 'temp-license']);
   }
 
   onConfirmed() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      height: '175px',
+      height: '200px',
       width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูล
@@ -37,7 +37,7 @@ export class ForeignIdComponent {
 
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      height: '200px',
+      height: '175px',
       width: '375px',
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,

@@ -14,6 +14,7 @@ import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-info';
 
 export const routes: Routes = [
   {
@@ -41,6 +42,7 @@ export const routes: Routes = [
     SharedUiBottomMenuModule,
     MatTableModule,
     MatIconModule,
+    EServiceUiAccusationInfoModule,
   ],
   declarations: [
     ActivityListComponent,

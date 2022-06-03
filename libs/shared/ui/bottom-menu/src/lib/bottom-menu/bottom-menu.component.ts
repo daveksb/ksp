@@ -10,9 +10,12 @@ export class BottomMenuComponent {
   @Output() nextClicked = new EventEmitter<boolean>();
   @Output() saveClicked = new EventEmitter<boolean>();
   @Output() cancelClicked = new EventEmitter<boolean>();
+  @Output() tempSaveClicked = new EventEmitter<boolean>();
 
   @Input() isLastPage = false;
   @Input() isFirstPage = false;
   @Input() showCenterButtons = false;
-  
+  @Input() showTempSaveButton = false;
+  @Input() changeColorButtons = false;
+
 }

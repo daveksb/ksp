@@ -15,7 +15,6 @@
 }
 
 .form-label {
-  font-family: 'KSP Bold';
   font-size: 16px;
   color: #656565;
 }
@@ -25,13 +24,11 @@
 }
 
 .form-control-sm {
-  font-family: 'KSP Bold';
   font-size: 16px;
   color: #000000;
 }
 
 .form-select-sm {
-  font-family: 'KSP Bold';
   font-size: 16px;
   color: #000000;
 }
@@ -40,4 +37,8 @@
   background-color: #edf8ff;
   background-image: url(/assets/images/arrow-down-icon.png);
   background-size: 12px;
+}
+
+.form__control__white {
+  background-color: #fff;
 }
