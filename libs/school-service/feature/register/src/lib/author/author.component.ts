@@ -31,6 +31,7 @@ export class AuthorComponent {
         subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
         ใช่หรือไม`,
         schoolCode: 'รหัสเข้าใช้งาน(รหัสโรงเรียน): xxxx',
+        btnLabel: 'บันทึก',
       },
     });
 

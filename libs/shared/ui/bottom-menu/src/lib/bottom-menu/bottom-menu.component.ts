@@ -16,6 +16,6 @@ export class BottomMenuComponent {
   @Input() isFirstPage = false;
   @Input() showCenterButtons = false;
   @Input() showTempSaveButton = false;
+  @Input() showSaveButton = false;
   @Input() changeColorButtons = false;
-
 }

@@ -37,7 +37,10 @@
     </div>
 
     <div class="tab-container">
-      <mat-tab-group class="tab-group">
+      <mat-tab-group
+        (selectedIndexChange)="onTabIndexChanged($event)"
+        class="tab-group"
+      >
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address>ที่อยู่ทะเบียนบ้าน</ksp-form-address>
           <ksp-form-address
@@ -78,19 +81,29 @@
               ></textarea>
             </div>
           </div>
-          <ksp-form-attachment></ksp-form-attachment>
+          <ksp-form-attachment
+            [title]="'กรุณาแนบหลักฐานประกอบ'"
+          ></ksp-form-attachment>
         </mat-tab>
 
         <mat-tab label="ข้อมูลการสอนและการจ้าง">
           <ksp-form-teaching-info></ksp-form-teaching-info>
+          <ksp-form-attachment
+            [title]="'กรุณาแนบหลักฐานประกอบ'"
+          ></ksp-form-attachment>
         </mat-tab>
 
         <mat-tab label="ข้อมูลชี้แจงเหตุผล">
           <ksp-form-reason-info></ksp-form-reason-info>
+          <ksp-form-attachment
+            [title]="'กรุณาแนบหลักฐานประกอบ'"
+          ></ksp-form-attachment>
         </mat-tab>
 
         <mat-tab label="เอกสารหลักฐานประกอบ">
-          <ksp-form-attachment></ksp-form-attachment>
+          <ksp-form-attachment
+            [title]="'กรุณาแนบหลักฐานประกอบ'"
+          ></ksp-form-attachment>
         </mat-tab>
       </mat-tab-group>
     </div>
@@ -101,9 +114,11 @@
   <ksp-bottom-menu
     (prevClicked)="back()"
     [showCenterButtons]="true"
+    [isLastPage]="true"
     (saveClicked)="save()"
     (cancelClicked)="cancel()"
     [showTempSaveButton]="true"
+    [showSaveButton]="selectedTabIndex === 5"
     (tempSaveClicked)="back()"
   ></ksp-bottom-menu>
 </div>
