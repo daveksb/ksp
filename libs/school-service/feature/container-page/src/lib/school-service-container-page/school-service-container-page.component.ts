@@ -25,7 +25,7 @@ export const menu: MenuConfig[] = [
     label: 'ยื่นใบคำขอ',
     path: '',
     subMenuName: 'license',
-    isExpanded: true,
+    isExpanded: false,
     subMenu: [
       {
         label: 'ขอใบอนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)',
@@ -79,9 +79,9 @@ export const menu: MenuConfig[] = [
     label: 'รายงาน',
     path: '',
   },
-  {
+  /*   {
     icon: 'assets/images/icon-sidenav/reward.svg',
     label: 'รายชื่อเจ้าหน้าที่ใช้งาน',
     path: '',
-  },
+  }, */
 ];

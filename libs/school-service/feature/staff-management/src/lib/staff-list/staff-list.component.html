@@ -49,21 +49,27 @@
         <ng-container matColumnDef="profession">
           <th mat-header-cell *matHeaderCellDef>ใบอนุญาตประกอบวิชาชีพ</th>
           <td mat-cell *matCellDef="let element">
-            <mat-icon class="check_box">check_box</mat-icon>
+            <mat-icon *ngIf="element.profession" class="check_box"
+              >check_box</mat-icon
+            >
           </td>
         </ng-container>
 
         <ng-container matColumnDef="teaching">
           <th mat-header-cell *matHeaderCellDef>ใบปฏิบัติการสอน</th>
           <td mat-cell *matCellDef="let element">
-            <mat-icon class="check_box">check_box</mat-icon>
+            <mat-icon *ngIf="element.teaching" class="check_box"
+              >check_box</mat-icon
+            >
           </td>
         </ng-container>
 
         <ng-container matColumnDef="tempLicense">
           <th mat-header-cell *matHeaderCellDef>หนังสืออนุญาตชั่วคราว</th>
           <td mat-cell *matCellDef="let element">
-            <mat-icon class="check_box">check_box</mat-icon>
+            <mat-icon *ngIf="element.tempLicense" class="check_box"
+              >check_box</mat-icon
+            >
           </td>
         </ng-container>
 

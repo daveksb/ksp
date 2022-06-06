@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -18,16 +18,16 @@ export class ActivityEducationLevelComponent {
     this.router.navigate(['./', 'activity', 'detail']);
   }
 
-  cancel() {
+  /*   cancel() {
     this.router.navigate(['./', 'activity']);
   }
-
+ */
   save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
-        title: `คุณต้องการยืนยันข้อมูล
-        ใช่หรือไม่? `,
+        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
+        btnLabel: 'ตกลง',
       },
     });
 
