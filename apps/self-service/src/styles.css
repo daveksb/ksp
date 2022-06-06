@@ -1,4 +1,3 @@
-/* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 @font-face {
@@ -40,7 +39,8 @@ hr {
 }
 
 .mat-tab-body-wrapper {
-  border: 1px solid #b8bcc3;
+  border-radius: 0 0 15px 15px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .material-icons {

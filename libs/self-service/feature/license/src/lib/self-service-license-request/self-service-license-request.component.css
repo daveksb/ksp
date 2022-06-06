@@ -1,6 +1,6 @@
 .tab-container {
   padding: 10px 50px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 #next__button {
@@ -10,7 +10,7 @@
 .footer {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .detail__container {
@@ -18,5 +18,5 @@
   box-shadow: 0px 0px 15px #e2e2e2;
   border-radius: 20px;
   padding: 36px;
-  margin: 36px 80px;
+  margin: 36px 55px;
 }
