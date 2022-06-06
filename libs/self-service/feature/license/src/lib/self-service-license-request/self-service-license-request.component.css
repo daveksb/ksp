@@ -1,20 +1,16 @@
 .tab-container {
-  padding: 50px;
-  margin-bottom: 20px;
+  padding: 10px 50px;
+  margin-bottom: 10px;
 }
 
-.btn-light {
-  width: 164px;
-}
-
-.btn-primary {
+#next__button {
   margin-left: 10px;
-  width: 164px;
 }
 
 .footer {
   display: flex;
   justify-content: center;
+  margin-top: 10px;
 }
 
 .detail__container {
