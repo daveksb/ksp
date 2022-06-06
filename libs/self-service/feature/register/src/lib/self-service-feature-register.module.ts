@@ -6,6 +6,7 @@ import { RegisterStepThreeComponent } from './register-step-three/register-step-
 import { SelfServiceUiFormsModule } from '@ksp/self-service/ui/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule, Routes } from '@angular/router';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 export const routes: Routes = [
   {
@@ -13,6 +14,7 @@ export const routes: Routes = [
     pathMatch: 'full',
     redirectTo: 'step-1',
   },
+  { path: 'policy', component: PrivacyPolicyComponent },
   {
     path: 'step-1',
     component: RegisterStepOneComponent,
@@ -38,11 +40,13 @@ export const routes: Routes = [
     RegisterStepOneComponent,
     RegisterStepTwoComponent,
     RegisterStepThreeComponent,
+    PrivacyPolicyComponent,
   ],
   exports: [
     RegisterStepOneComponent,
     RegisterStepTwoComponent,
     RegisterStepThreeComponent,
+    PrivacyPolicyComponent,
   ],
 })
 export class SelfServiceFeatureRegisterModule {}

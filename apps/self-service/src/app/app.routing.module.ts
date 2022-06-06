@@ -2,13 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SelfServiceHomeComponent } from '@ksp/self-service/feature/home';
 import { SelfServiceThaiLoginComponent } from '@ksp/self-service/feature/login';
-import { PrivacyPolicyComponent } from '@ksp/self-service/ui/content';
 
 const routes: Routes = [
   { path: 'home', component: SelfServiceHomeComponent },
   { path: 'login', component: SelfServiceThaiLoginComponent },
-  { path: 'policy', component: PrivacyPolicyComponent },
-
   {
     path: 'register',
     loadChildren: () =>
