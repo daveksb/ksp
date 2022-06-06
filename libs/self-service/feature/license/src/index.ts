@@ -1,5 +1,5 @@
 export * from './lib/self-service-feature-license.module';
 
-export * from './lib/self-service-license-request/self-service-license-request.component';
+export * from './lib/license-request/license-request.component';
 
-export * from './lib/self-service-license-edit/self-service-license-edit.component';
+export * from './lib/license-edit/license-edit.component';

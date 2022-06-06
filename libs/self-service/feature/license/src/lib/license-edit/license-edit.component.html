@@ -1,3 +1,8 @@
+<ksp-top-nav
+  ><span header>ใบอนุญาตประกอบวิชาชีพ </span
+  ><span subHeader>เปลี่ยนแปลง/ แก้ไขใบอนุญาต</span></ksp-top-nav
+>
+
 <div class="head-container">
   <label for="exampleFormControlInput1" class="table-label-head"
     >มีความประสงค์จะขอให้เปลี่ยนแปลงข้อมูลทะเบียนผู้ได้รับใบอนุญาต</label
@@ -190,74 +195,16 @@
     </div>
   </div>
 
-  <div class="file-list">
-    <label for="exampleFormControlInput1" class="table-label-head"
-      >กรุณาแนบหลักฐานประกอบวุฒิทางการศึกษา</label
-    >
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">รายการเอกสาร</th>
-            <th scope="col" class="page__header">จำนวนหน้า</th>
-            <th scope="col" class="upload__header">อัพโหลด</th>
-          </tr>
-        </thead>
-        <tbody class="header__table">
-          <tr>
-            <th scope="row">
-              1.สำเนาหนังสือสำคัญการเปลี่ยนชื่อ / ชื่อสกุล /
-              เปลี่ยนหรือเพิ่มคำนำหน้าชื่อ<br />
-              xxx
-            </th>
-            <td class="number__page"></td>
-            <td class="upload__detail">
-              <button type="button" class="btn btn-upload">
-                <img
-                  src="/assets/images/plus-icon.svg"
-                  class="icon__upload"
-                />อัพโหลด
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">
-              2.สำเนาหลักฐานการสมรส หรือการสิ้นสุดสมรส (ถ้ามี)<br />
-              xxx
-            </th>
-            <td class="number__page"></td>
-            <td class="upload__detail">
-              <button type="button" class="btn btn-upload">
-                <img
-                  src="/assets/images/plus-icon.svg"
-                  class="icon__upload"
-                />อัพโหลด
-              </button>
-            </td>
-          </tr>
+  <ksp-form-attachment
+    [title]="'กรุณาแนบหลักฐานประกอบวุฒิทางการศึกษา'"
+  ></ksp-form-attachment>
 
-          <tr>
-            <th scope="row">
-              3.สำเนาหนังสือรับรองการใช้คำนำหน้านามหญิง (ถ้ามี)<br />
-              xxx
-            </th>
-            <td class="number__page"></td>
-            <td class="upload__detail">
-              <button type="button" class="btn btn-upload">
-                <img
-                  src="/assets/images/plus-icon.svg"
-                  class="icon__upload"
-                />อัพโหลด
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+  <label class="text-danger"
+    >*กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
+    โปรดตรวจสอบอีกครั้งก่อนการบันทึกลงระบบ</label
+  >
 
-      <label for="exampleFormControlInput1" class="table-label-warn"
-        >*กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
-        โปรดตรวจสอบอีกครั้งก่อนการบันทึกลงระบบ</label
-      >
-    </div>
+  <div class="button__container">
+    <button (click)="onConfirm()" class="btn btn-primary">บันทึก</button>
   </div>
 </div>
