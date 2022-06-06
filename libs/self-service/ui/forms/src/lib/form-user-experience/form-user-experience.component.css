@@ -62,6 +62,11 @@ input[type='checkbox' i].ksp-checkbox {
   text-align: center;
 }
 
+#upload__button-container {
+  display: flex;
+  align-items: flex-end;
+}
+
 .icon__upload {
   vertical-align: bottom;
   padding: 2px;
