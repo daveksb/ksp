@@ -22,8 +22,10 @@ export class SetNewPasswordComponent {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
-        title: `คุณต้องการยืนยันข้อมูล
-        และส่งใบคำขอ ใช่หรือไม่? `,
+        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
+        subTitle: `คุณยืนยันข้อมูลใช่หรือไม่? `,
+        btnLabel: `ใช่`,
+        cancelBtnLabel: 'ไม่ใช่',
       },
     });
 

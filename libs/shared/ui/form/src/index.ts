@@ -14,4 +14,4 @@ export * from './lib/form-attachment/form-attachment.component';
 
 export * from './lib/form-user-info/form-user-info.component';
 
-export * from './lib/form-temp-license-foreign/form-temp-license-foreign.component';
+export * from './lib/form-foreign-id/form-foreign-id.component';
