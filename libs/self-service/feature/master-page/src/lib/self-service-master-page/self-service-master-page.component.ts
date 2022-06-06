@@ -39,7 +39,7 @@ export const menu: MenuConfig[] = [
         path: 'license/b',
       },
       {
-        label: 'ขอเปลั้ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ',
+        label: 'ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ',
         path: 'license/edit',
       },
       {

@@ -41,11 +41,9 @@ export class ReqForeignIdComponent {
 
   onConfirmed() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      height: '175px',
       width: '350px',
       data: {
         header: 'บันทึกข้อมูลสำเร็จ',
-        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 

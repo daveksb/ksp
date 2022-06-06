@@ -43,12 +43,9 @@ export class ForeignLicenseDetailComponent implements OnInit {
 
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      height: '200px',
       width: '350px',
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
-
-        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 

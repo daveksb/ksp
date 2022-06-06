@@ -12,18 +12,16 @@
   grid-column-gap: 8px;
 }
 
-.file-list {
-  padding: 10px;
-  margin: 15px -10px;
-}
-
 .head-container {
   margin-left: 24px;
   margin-top: 10px;
 }
 
 .center-label {
-  margin: 40px 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
 }
 
 .content__container--three-columns {
@@ -63,53 +61,21 @@
   margin-left: 10px;
 }
 
-.table {
-  font-size: 14px;
-  background-color: #edf8ff;
-  border: 1px solid #ecedf3;
-  color: #333333;
-  margin-bottom: 0;
-}
-
-.page__header {
-  text-align: center;
-}
-
-.upload__header {
-  text-align: center;
-}
-
-.header__table {
-  background-color: #fff;
-  color: #a6a6a6;
-}
-
-.number__page {
-  text-align: center;
-}
-
-.upload__detail {
-  text-align: center;
-}
-
-.icon__upload {
-  vertical-align: bottom;
-  padding: 2px;
-}
-
 .table-label-head {
   color: black;
   font-size: 20px;
   margin-bottom: 7px;
 }
 
-.table-label-warn {
-  color: red;
-}
-
 .checkbox-1 {
   width: 15px;
   height: 15px;
+}
+
+.button__container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
 }
 
 @media only screen and (max-width: 768px) {

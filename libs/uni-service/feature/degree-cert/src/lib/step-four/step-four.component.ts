@@ -37,15 +37,12 @@ export class StepFourComponent {
   }
   onConfirmed() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      height: '300px',
       width: '375px',
       data: {
-        header: 'บันทึกข้อมูลสำเร็จ',
         content: `วันที่ : 12 มกราคม 2565?
         เลขที่ใบคำขอ : UNIUS 6406000162`,
         subContent: `กรุณาตรวจสอบสถานะใบคำขอหรือรหัสเข้าใช้งาน?
-        เผ่านทางอีเมฃผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
-        buttonLabel: 'กลับสู่หน้าหลัก',
+        ผ่านทางอีเมฃผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },
     });
 

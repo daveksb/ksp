@@ -46,15 +46,11 @@ export class RetiredAttachmentComponent {
 
   onConfirmed() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      height: '250px',
       width: '350px',
       data: {
         header: 'ยืนยันข้อมูลสำเร็จ',
-
         content: `วันที่ : 10 ตุลาคม 2565
         เลขที่ใบคำขอ : 12234467876543 `,
-
-        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 
