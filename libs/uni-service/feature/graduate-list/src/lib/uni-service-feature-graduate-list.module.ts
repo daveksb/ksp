@@ -24,6 +24,7 @@ import { SharedUiFormModule } from '@ksp/shared/ui/form';
     MatCheckboxModule,
     TableModule,
     SharedUiFormModule,
+    
   ],
   declarations: [
     CourseSearchComponent,
