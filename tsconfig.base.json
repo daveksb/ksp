@@ -121,9 +121,6 @@
       "@ksp/self-service/feature/register": [
         "libs/self-service/feature/register/src/index.ts"
       ],
-      "@ksp/self-service/ui/content": [
-        "libs/self-service/ui/content/src/index.ts"
-      ],
       "@ksp/self-service/ui/forms": ["libs/self-service/ui/forms/src/index.ts"],
       "@ksp/self-service/ui/menu": ["libs/self-service/ui/menu/src/index.ts"],
       "@ksp/self-service/ui/payment": [

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { RegisterCompletedComponent } from '@ksp/self-service/ui/content';
+import { RegisterCompletedComponent } from '../register-completed/register-completed.component';
 
 @Component({
   selector: 'self-service-register-step-three',
@@ -12,13 +12,8 @@ export class RegisterStepThreeComponent {
   constructor(public dialog: MatDialog, private router: Router) {}
 
   openDialog() {
-    const dialogRef = this.dialog.open(RegisterCompletedComponent, {
-      height: '400px',
+    this.dialog.open(RegisterCompletedComponent, {
       width: '600px',
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
     });
   }
 

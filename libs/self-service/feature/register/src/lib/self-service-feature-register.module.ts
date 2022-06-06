@@ -7,6 +7,7 @@ import { SelfServiceUiFormsModule } from '@ksp/self-service/ui/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule, Routes } from '@angular/router';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { RegisterCompletedComponent } from './register-completed/register-completed.component';
 
 export const routes: Routes = [
   {
@@ -41,6 +42,7 @@ export const routes: Routes = [
     RegisterStepTwoComponent,
     RegisterStepThreeComponent,
     PrivacyPolicyComponent,
+    RegisterCompletedComponent,
   ],
   exports: [
     RegisterStepOneComponent,
