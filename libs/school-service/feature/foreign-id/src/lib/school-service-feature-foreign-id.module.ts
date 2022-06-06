@@ -26,7 +26,7 @@ export const routes: Route[] = [
     RouterModule.forChild(routes),
     SharedUiTopNavModule,
     SharedUiFormModule,
-    SharedUiBottomMenuModule
+    SharedUiBottomMenuModule,
   ],
   declarations: [ForeignIdComponent],
   exports: [ForeignIdComponent],

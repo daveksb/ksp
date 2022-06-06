@@ -14,6 +14,7 @@ export class ConfirmDialogComponent {
       isDanger: boolean;
       schoolCode: string;
       btnLabel: string;
+      cancelBtnLabel: string;
     }
   ) {}
 

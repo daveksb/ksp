@@ -3,7 +3,7 @@
     <button
       (click)="prevClicked.emit(true)"
       type="button"
-      class="btn btn-primary"
+      class="btn btn-outline-warning"
       *ngIf="!isFirstPage"
     >
       ย้อนกลับ
@@ -12,9 +12,10 @@
 
   <div class="footer-2" *ngIf="showCenterButtons">
     <button
+      *ngIf="showCancelButton"
       (click)="cancelClicked.emit(true)"
       type="button"
-      class="btn btn-third"
+      class="btn btn-outline-success"
     >
       ยกเลิก
     </button>
@@ -22,27 +23,28 @@
       *ngIf="showTempSaveButton"
       (click)="tempSaveClicked.emit(true)"
       type="button"
-      class="btn btn-secondary"
+      class="btn btn-success"
     >
       บันทึกชั่วคราว
     </button>
     <button
+      *ngIf="showSaveButton"
       (click)="saveClicked.emit(true)"
       type="button"
-      class="btn btn-fourth"
+      class="btn btn-success"
     >
       บันทึก
     </button>
   </div>
 
-  <div class="last__button">
+  <div id="last__button">
     <button
       (click)="nextClicked.emit(true)"
       *ngIf="!isLastPage"
       type="button"
-      class="btn btn-primary"
+      class="btn btn-outline-success"
     >
-      ต่อไป
+      ถัดไป
     </button>
   </div>
 </div>

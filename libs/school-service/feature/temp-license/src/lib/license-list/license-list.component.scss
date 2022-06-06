@@ -94,22 +94,6 @@
   background-color: #fff;
   font-size: 18px;
 }
-.btn-primary {
-  font-size: 18px;
-  background-color: #0056ff;
-  width: 100px;
-  border-radius: 4px;
-}
-
-.btn-fourth {
-  font-size: 18px;
-  background-color: white;
-  color: #0056ff;
-  width: 100px;
-  border-radius: 4px;
-  border: 1px solid #0056ff;
-  margin-right: 20px;
-}
 
 .table {
   margin: 0 0;
@@ -162,17 +146,6 @@
   fill: green;
 }
 
-.mat-menu-trigger {
-  margin-right: 20px;
-  font-size: 18px;
-  color: #fff;
-  background-color: #0056ff;
-  border: #0056ff;
-  width: 100px;
-  border-radius: 4px;
-  padding: 5px 10px;
-}
-
 ::ng-deep.mat-menu-panel {
   max-width: none !important;
 }
@@ -183,4 +156,12 @@ tr.mat-header-row {
 
 .note {
   color: #0056ff;
+}
+
+#menu__button {
+  margin-right: 10px;
+}
+
+#search__button {
+  margin-left: 10px;
 }

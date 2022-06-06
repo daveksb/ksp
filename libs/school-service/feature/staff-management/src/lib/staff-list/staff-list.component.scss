@@ -77,3 +77,9 @@
 tr.mat-header-row {
   background-color: #edf8ff;
 }
+
+td.mat-cell,
+th.mat-header-cell {
+  text-align: center;
+  justify-content: center;
+}

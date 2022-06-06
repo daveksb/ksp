@@ -7,7 +7,7 @@ import { FormTeachingInfoComponent } from './form-teaching-info/form-teaching-in
 import { FormReasonInfoComponent } from './form-reason-info/form-reason-info.component';
 import { FormAttachmentComponent } from './form-attachment/form-attachment.component';
 import { FormUserInfoComponent } from './form-user-info/form-user-info.component';
-import { FormTempLicenseForeignComponent } from './form-temp-license-foreign/form-temp-license-foreign.component';
+import { FormForeignIdComponent } from './form-foreign-id/form-foreign-id.component';
 
 @NgModule({
   imports: [CommonModule],
@@ -19,7 +19,7 @@ import { FormTempLicenseForeignComponent } from './form-temp-license-foreign/for
     FormReasonInfoComponent,
     FormAttachmentComponent,
     FormUserInfoComponent,
-    FormTempLicenseForeignComponent,
+    FormForeignIdComponent,
   ],
   exports: [
     FormAddressComponent,
@@ -29,7 +29,7 @@ import { FormTempLicenseForeignComponent } from './form-temp-license-foreign/for
     FormReasonInfoComponent,
     FormAttachmentComponent,
     FormUserInfoComponent,
-    FormTempLicenseForeignComponent,
+    FormForeignIdComponent,
   ],
 })
 export class SharedUiFormModule {}

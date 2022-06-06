@@ -14,6 +14,8 @@ import {
 })
 export class LicenseDetailComponent implements OnInit {
   requestTypeLabel = '';
+  selectedTabIndex = 0;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -22,6 +24,10 @@ export class LicenseDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateHeaderLabel();
+  }
+
+  onTabIndexChanged(tabIndex: number) {
+    this.selectedTabIndex = tabIndex;
   }
 
   updateHeaderLabel() {
@@ -65,6 +71,7 @@ export class LicenseDetailComponent implements OnInit {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
         subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
         ใช่หรือไม่`,
+        btnLabel: 'บันทึก',
       },
     });
 

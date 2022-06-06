@@ -39,7 +39,7 @@ hr {
   padding: 25px;
 }
 
-.mat-tab-body-wrapper{
+.mat-tab-body-wrapper {
   border: 1px solid #b8bcc3;
 }
 
@@ -61,13 +61,13 @@ add asterisk for required feild
 
 .btn {
   font-size: 20px;
-  width: auto;
+  width: 120px;
 }
 
-.btn-primary {
+/* .btn-primary {
   background-color: #3f89fe !important;
   border-color: #3f89fe !important;
-}
+} */
 
 .btn-light {
   background-color: #e8e8e8 !important;

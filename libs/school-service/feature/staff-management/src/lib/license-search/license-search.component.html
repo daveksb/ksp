@@ -49,17 +49,14 @@
         </div>
       </div>
       <div class="button__group">
-        <button
-          (click)="clear()"
-          type="button"
-          class="btn btn-fourth btn-sm label__button"
-        >
+        <button (click)="clear()" type="button" class="btn btn-outline-primary">
           ล้างข้อมูล
         </button>
         <button
+          id="search__button"
           (click)="search()"
           type="button"
-          class="btn btn-primary btn-sm label__button"
+          class="btn btn-primary"
         >
           ค้นหา
         </button>
@@ -73,7 +70,6 @@
     <div *ngIf="foundItem" class="result">
       <div class="result__item">
         <ksp-license-info></ksp-license-info>
-        <div class="cancel__license">ถูกเพิกถอนใบอนุญาต</div>
       </div>
       <hr />
       <div class="result__item">
@@ -82,6 +78,9 @@
       <hr />
       <div class="result__item">
         <ksp-license-info></ksp-license-info>
+        <button disabled class="btn btn-outline-danger">
+          ถูกเพิกถอนใบอนุญาต
+        </button>
       </div>
     </div>
   </div>

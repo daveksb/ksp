@@ -41,7 +41,7 @@ export class ForgetPasswordComponent implements OnInit {
         data: {
           title: `ไม่พบข้อมูลของท่านภายในระบบ`,
           isDanger: true,
-          btnLabel: 'ลองอีกครั้ง',
+          btnLabel: 'ตรวจสอบอีกครั้ง',
         },
       });
     }
