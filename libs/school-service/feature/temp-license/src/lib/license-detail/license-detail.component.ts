@@ -71,6 +71,7 @@ export class LicenseDetailComponent implements OnInit {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
         subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
         ใช่หรือไม่`,
+        btnLabel: 'บันทึก',
       },
     });
 

@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./form-attachment.component.scss'],
 })
 export class FormAttachmentComponent {
-  @Input() title = `กรุณาแนบหลักฐานเพื่อพิจารณา`;
+  @Input() title = `กรุณาแนบหลักฐานประกอบ`;
 }
