@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,20 +6,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./form-verify-otp.component.scss'],
 })
 export class FormVerifyOtpComponent {
-  constructor(
-    private router: Router,
-    public dialog: MatDialog,
-
-  ) {}
-
-  closeDialog() {
-    this.dialog.closeAll();
-  }
+  constructor(private router: Router) {}
 
   nextStep() {
-    // close current dialog before open the new one
-    this.dialog.closeAll();
-
-    this.router.navigate(['/', 'register-3']);
+    this.router.navigate(['/', 'register', 'step-3']);
   }
 }

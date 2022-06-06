@@ -9,9 +9,10 @@ import { FormUserWorkplaceComponent } from './form-user-workplace/form-user-work
 import { FormVerifyOtpComponent } from './form-verify-otp/form-verify-otp.component';
 import { FormVerifyPhoneComponent } from './form-verify-phone/form-verify-phone.component';
 import { RouterModule } from '@angular/router';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, MatDialogModule],
   declarations: [
     FormUploadImageComponent,
     FormUserEducationComponent,

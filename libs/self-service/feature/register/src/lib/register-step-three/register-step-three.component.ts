@@ -4,12 +4,11 @@ import { Router } from '@angular/router';
 import { RegisterCompletedComponent } from '@ksp/self-service/ui/content';
 
 @Component({
-  selector: 'ksp-self-service-register-step-three',
-  templateUrl: './self-service-register-step-three.component.html',
-  styleUrls: ['./self-service-register-step-three.component.scss'],
+  selector: 'self-service-register-step-three',
+  templateUrl: './register-step-three.component.html',
+  styleUrls: ['./register-step-three.component.scss'],
 })
-export class SelfServiceRegisterStepThreeComponent {
-  //  constructor(public dialog: MatDialog, public selfRef: MatDialogRef<any>) {}
+export class RegisterStepThreeComponent {
   constructor(public dialog: MatDialog, private router: Router) {}
 
   openDialog() {
