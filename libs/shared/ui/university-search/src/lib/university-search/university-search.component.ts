@@ -69,10 +69,6 @@ export class UniversitySearchComponent implements OnInit {
     console.log('universityCode = ', universityCode);
   }
 
-  closeDialog() {
-    this.matDialog.closeAll();
-  }
-
   search() {
     this.data = data;
   }

@@ -70,10 +70,10 @@
 
 .detail__third {
   display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr;
-    grid-column-gap: 36px;
-    margin-bottom: 14px;
-    margin-top: 16px;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  grid-column-gap: 36px;
+  margin-bottom: 14px;
+  margin-top: 16px;
 }
 
 .detail__fourth {
@@ -106,7 +106,6 @@
 }
 
 .form-select-sm {
-  font-family: "KSP Bold";
   font-size: 20px;
   color: #656565;
 }
@@ -117,7 +116,7 @@
 }
 
 .btn-add {
-  font-family: "KSP Bold";
+  width: auto;
   font-size: 18px;
   color: #f68b33;
 }
@@ -127,42 +126,7 @@
 }
 
 .label__text {
-  font-family: "KSP Bold";
   font-size: 16px;
   margin-left: 8px;
   color: #f23c51;
 }
-
-.tab__body {
-  padding: 24px;
-  border-bottom: 1px solid #dee2e6;
-  border-left: 1px solid #dee2e6ed;
-  border-right: 1px solid #dee2e6;
-}
-
-/* nav-tab */
-.nav-tabs .nav-link {
-  background-color: #eceef2;
-  color: #8c95a6;
-  margin-bottom: -1px;
-  border: 1px solid transparent;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  margin-right: 2px;
-  width: 230px;
-}
-
-.nav-tabs .nav-link.active {
-  color: #0056ff;
-  background-color: #fff;
-  border-color: #dee2e6 #dee2e6 #fff;
-  border-top: 3px solid #0056ff;
-  border-radius: 0;
-}
-
-.title__tab {
-  font-family: "KSP Bold";
-  font-size: 18px;
-}
-
-

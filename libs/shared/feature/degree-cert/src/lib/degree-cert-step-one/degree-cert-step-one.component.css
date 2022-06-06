@@ -113,6 +113,7 @@
 .btn-add {
   font-size: 18px;
   color: #f68b33;
+  width: auto;
 }
 
 .icon__add {
@@ -139,24 +140,3 @@
   color: #f23c51;
 }
 
-.box__footer {
-  display: flex;
-  justify-content: center;
-}
-
-.button__container {
-  padding-bottom: 7px;
-  display: flex;
-  justify-content: flex-end;
-  padding: 0 65px;
-}
-
-.btn-fourth {
-  font-size: 14px;
-  background-color: white;
-  color: #f68b33;
-  width: 100px;
-  border-radius: 4px;
-  border: 1px solid #f68b33;
-  margin-top: 25px;
-}

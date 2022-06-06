@@ -6,7 +6,6 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/ui/dialog';
-import { UniversitySearchComponent } from '@ksp/shared/ui/university-search';
 import { TrainingAddressComponent } from '@ksp/uni-service/ui/dialog';
 import { SelectItem } from 'primeng/api';
 import { User } from './user';
@@ -19,7 +18,7 @@ import { UserService } from './user.service';
 })
 export class ImportStudentComponent implements OnInit {
   users: User[] = [];
-  sexType: SelectItem[] = [];
+  prefixes: SelectItem[] = [];
   isGraduated = false;
   pageType = 0;
   foundUser = false;
@@ -35,7 +34,7 @@ export class ImportStudentComponent implements OnInit {
     this.userService.getUsers().subscribe((res: any) => {
       this.users = res;
     });
-    this.sexType = [
+    this.prefixes = [
       { label: 'นาย', value: '1' },
       { label: 'นาง', value: '2' },
       { label: 'นางสาว', value: '3' },
@@ -65,11 +64,6 @@ export class ImportStudentComponent implements OnInit {
       height: '900px',
       width: '1200px',
     });
-
-    // on submit
-    /* dialog.componentInstance.confirmed.subscribe((res) => {
-      if (res) this.foundUser = true;
-    }); */
   }
 
   save() {

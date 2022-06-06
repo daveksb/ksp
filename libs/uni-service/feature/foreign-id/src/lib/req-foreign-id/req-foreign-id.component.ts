@@ -15,12 +15,11 @@ export class ReqForeignIdComponent {
   constructor(public dialog: MatDialog, private router: Router) {}
 
   cancel() {
-    this.router.navigate(['/', 'request', 'home']);
+    this.router.navigate(['/', 'home']);
   }
 
-  openDialog() {
+  save() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      height: '175px',
       width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูล

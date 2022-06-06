@@ -4,25 +4,31 @@
   background-color: #f6f6f6;
   height: 100%;
 }
+
 .title__label {
   font-size: 22px;
   padding: 15px;
   margin-left: 50px;
 }
+
 .content__header {
   display: flex;
 }
+
 .label__content {
   font-size: 18px;
   color: #808080;
   margin-right: 24px;
 }
+
 .label__content--primary {
   color: #f68b33;
 }
+
 .label__content--secondary {
   color: #0056ff;
 }
+
 .content__container {
   background: #ffffff;
   border-radius: 5px;
@@ -41,124 +47,134 @@
   font-size: 22px;
   color: #0056ff;
 }
+
 .detail__header--secondary {
   font-size: 22px;
   color: #000000;
 }
+
 .detail__content {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 18px;
   margin-bottom: 14px;
 }
+
 .detail__content--primary {
   display: grid;
   grid-template-columns: 1fr;
   margin-bottom: 14px;
 }
+
 .detail__content--secondary {
   display: grid;
   grid-template-columns: 1fr 30%;
   grid-column-gap: 18px;
   margin-bottom: 14px;
 }
+
 .detail__content--third {
   display: grid;
   grid-template-columns: 10% 1fr 30%;
   grid-column-gap: 18px;
   margin-bottom: 14px;
 }
+
 .detail__content--fourth {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 18px;
   margin-bottom: 14px;
 }
+
 .form-label {
   font-size: 18px;
   color: #656565;
 }
+
 .form-control {
   font-size: 20px;
   background-color: #fff;
 }
+
 .form-select {
   font-size: 20px;
 }
+
 .label__text {
   font-size: 16px;
   margin-left: 8px;
   color: #f23c51;
 }
-.btn-primary {
-  font-size: 20px;
-  background-color: #0056ff;
-  width: 440px;
-  border-radius: 4px;
-}
 
-.btn-secondary {
+.btn-view {
   font-size: 20px;
-  background: #fff;
-  border: 1px solid #0056ff;
-  box-sizing: border-box;
-  box-shadow: 0px 2px 4px rgba(102, 108, 139, 0.1);
-  border-radius: 1px;
-  color: #0056ff;
-  padding: 4px 24px;
-  margin: 14px;
-  width: 200px;
+  width: auto;
+  border-radius: 4px;
+  margin-bottom: 25px;
 }
 
 .table {
   background-color: #fff;
   border: 1px solid #eceef2;
 }
+
 .header__column {
   text-align: center;
 }
+
 .header__column--secondary {
   text-align: start;
 }
+
 .header__table {
   background-color: #edf6ff;
   font-size: 16px;
 }
+
 .detail__table {
   text-align: center;
 
   font-size: 18px;
   vertical-align: middle;
 }
+
 .detail__table--secondary {
   text-align: start;
 
   font-size: 18px;
 }
+
 .table > :not(caption) > * > * {
   padding: 14px;
 }
+
 .table > :not(:first-child) {
   border-top: 0;
 }
+
 .label__table--footer {
   font-size: 20px;
   text-align: end;
 }
+
 .label__edit {
   color: #0056ff;
   text-decoration: underline;
   cursor: pointer;
 }
+
 .label__edit--secondary {
   color: #f68b33;
 }
+
 .summary__container {
   text-align: center;
   background: #eceef2;
   border-radius: 5px;
   padding: 8px;
 }
+
 .table-header {
   text-align: center;
   background-color: #edf6ff;

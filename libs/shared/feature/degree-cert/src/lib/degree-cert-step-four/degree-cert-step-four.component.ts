@@ -24,7 +24,6 @@ export class DegreeCertStepFourComponent {
 
   openDialog() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      height: '200px',
       width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
@@ -46,14 +45,14 @@ export class DegreeCertStepFourComponent {
 
   onConfirmed() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      height: '275px',
       width: '350px',
       data: {
         header: 'ยืนยันข้อมูลสำเร็จ',
         content: `วันที่ : 10 ตุลาคม 2565
         เลขที่ใบคำขอ : 12234467876543 `,
         subContent: `กรุณาตรวจสอบสถานะใบคำขอหรือรหัสเข้าใช้งาน
-          ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วัน`,
+        ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วัน`,
+        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 

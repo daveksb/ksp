@@ -16,7 +16,10 @@
     <div class="detail__header--secondary">
       ข้อมูลขอรับรองปริญญา และประกาศนียบัตรทางการศึกษา
     </div>
-    <div class="detail__container">
+
+    <ksp-degree-cert-step-one [isViewForm]="true"></ksp-degree-cert-step-one>
+
+    <!-- <div class="detail__container">
       <div class="detail__header">ข้อมูลสถาบัน</div>
       <div class="detail__content">
         <div>
@@ -289,10 +292,12 @@
           />
         </div>
       </div>
-    </div>
-    <button type="button" class="btn btn-primary btn-sm label__button">
+    </div> -->
+
+    <button type="button" class="btn btn-primary btn-view">
       กดเพื่อดูใบคำขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา
     </button>
+    <br />
     <hr />
     <div class="detail__header">แผนการรับนิสิต / นักศึกษา</div>
     <div class="table-header">แผนการรับนิสิต / นักศึกษา (ผ่านการรับรอง)</div>
@@ -365,8 +370,17 @@
   </div>
 </div>
 
-<div class="bottom__container">
+<!-- <div class="bottom__container">
   <div class="footer">
     <button (click)="cancel()" class="btn-secondary">ยกเลิก</button>
   </div>
+</div> -->
+
+<div class="bottom__container">
+  <ksp-bottom-menu
+    [isLastPage]="true"
+    [isFirstPage]="true"
+    [showCenterButtons]="true"
+    (cancelClicked)="cancel()"
+  ></ksp-bottom-menu>
 </div>

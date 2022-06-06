@@ -19,14 +19,11 @@
       <div class="header__detail">
         <div class="detail__header">ขอยื่นรายชื่อผู้เข้าศึกษา</div>
         <div>
-          <button
-            type="button"
-            class="btn btn-upload-secondary btn-sm label__button"
-          >
+          <button type="button" class="btn btn-upload-secondary btn-dowload">
             <img src="/assets/images/img-uni/microsoft excel.png" />
             ดาวน์โหลดแบบฟอร์ม
           </button>
-          <button type="button" class="btn btn-upload btn-sm label__button">
+          <button type="button" class="btn btn-upload">
             <img src="/assets/images/img-uni/Upload.svg" /> อัพโหลดไฟล์
           </button>
         </div>
@@ -54,9 +51,15 @@
               <th class="table__header" *ngIf="pageType === 2">
                 สถานที่ปฏิบัติการสอน
               </th>
-              <th class="table__header">วันที่รับเข้า</th>
-              <th class="table__header">
-                เลขบัตรประจำตัวประชาชน/เลขประจำตัวคุรุสภา
+              <th class="table__header" *ngIf="pageType === 1">
+                วันที่รับเข้า
+              </th>
+              <th class="table__header" *ngIf="pageType === 2">
+                วันที่เข้ารับการศึกษา
+              </th>
+              <th class="table__header-2">
+                เลขบัตรประจำตัวประชาชน/<br />
+                เลขประจำตัวคุรุสภา
               </th>
               <th class="table__header">หมายเลขหนังสือเดินทาง</th>
               <th class="table__header">คำนำหน้าชื่อ</th>
@@ -68,7 +71,7 @@
               <th class="table__header">เบอร์โทรศัพท์มือถือ</th>
               <th class="table__header">วัน/เดือน/ปีเกิด(พ.ศ.)</th>
               <th class="table__header">ที่อยู่</th>
-              <th></th>
+              <th class="table__header"></th>
             </tr>
           </ng-template>
           <ng-template
@@ -78,7 +81,7 @@
             let-ri="rowIndex"
           >
             <tr [pEditableRow]="product">
-              <td class="table__order" *ngIf="pageType === 1">
+              <td class="table__detail" *ngIf="pageType === 1">
                 <p-cellEditor>
                   <ng-template pTemplate="input">
                     {{ product.id }}
@@ -88,12 +91,12 @@
                   </ng-template>
                 </p-cellEditor>
               </td>
-              <td class="table__header" *ngIf="pageType === 2">
+              <td class="table__detail" *ngIf="pageType === 2">
                 <p-cellEditor>
                   <ng-template pTemplate="input">
                     <input
                       pInputText
-                      type="text"
+                      type="number"
                       [(ngModel)]="product.approveTime"
                       required
                     />
@@ -103,7 +106,7 @@
                   </ng-template>
                 </p-cellEditor>
               </td>
-              <td class="table__header" *ngIf="pageType === 2">
+              <td class="table__detail" *ngIf="pageType === 2">
                 <p-cellEditor>
                   <ng-template pTemplate="input">
                     <input
@@ -118,7 +121,7 @@
                   </ng-template>
                 </p-cellEditor>
               </td>
-              <td class="table__header" *ngIf="pageType === 2">
+              <td class="table__detail" *ngIf="pageType === 2">
                 <p-cellEditor>
                   <ng-template pTemplate="input">
                     <input
@@ -134,13 +137,13 @@
                 </p-cellEditor>
               </td>
 
-              <td class="table__header" *ngIf="pageType === 2">
-                <div (click)="searchAddress()" class="table__detail">
+              <td class="table__detail" *ngIf="pageType === 2">
+                <div (click)="searchAddress()" class="table__expand">
                   สถานที่ปฏิบัติการสอน
                 </div>
               </td>
 
-              <td class="table__header">
+              <td class="table__detail">
                 <p-cellEditor>
                   <ng-template pTemplate="input">
                     <input
@@ -155,7 +158,7 @@
                   </ng-template>
                 </p-cellEditor>
               </td>
-              <td class="table__header">
+              <td class="table__detail">
                 <p-cellEditor>
                   <ng-template pTemplate="input">
                     <input
@@ -170,7 +173,7 @@
                   </ng-template>
                 </p-cellEditor>
               </td>
-              <td class="table__header">
+              <td class="table__detail">
                 <p-cellEditor>
                   <ng-template pTemplate="input">
                     <input
@@ -185,22 +188,24 @@
                   </ng-template>
                 </p-cellEditor>
               </td>
-              <td class="table__header">
+              <td class="table__detail">
                 <p-cellEditor>
                   <ng-template pTemplate="input">
-                    <input pInputText [(ngModel)]="product.titleTh" required />
-                    <!--  <p-dropdown
-                      [options]="sexType"
-                      [(ngModel)]="product.titleTh"
-                      [style]="{ width: '100%' }"
-                    ></p-dropdown> -->
+                    <mat-select>
+                      <mat-option
+                        *ngFor="let prefix of prefixes"
+                        [value]="prefix.value"
+                      >
+                        {{ prefix.label }}
+                      </mat-option>
+                    </mat-select>
                   </ng-template>
                   <ng-template pTemplate="output">
                     {{ product.titleTh }}
                   </ng-template>
                 </p-cellEditor>
               </td>
-              <td class="table__header">
+              <td class="table__detail">
                 <p-cellEditor>
                   <ng-template pTemplate="input">
                     <input
@@ -215,7 +220,7 @@
                   </ng-template>
                 </p-cellEditor>
               </td>
-              <td class="table__header">
+              <td class="table__detail">
                 <p-cellEditor>
                   <ng-template pTemplate="input">
                     <input
@@ -230,22 +235,24 @@
                   </ng-template>
                 </p-cellEditor>
               </td>
-              <td class="table__header">
+              <td class="table__detail">
                 <p-cellEditor>
                   <ng-template pTemplate="input">
-                    <input
-                      pInputText
-                      type="text"
-                      [(ngModel)]="product.titleEn"
-                      required
-                    />
+                    <mat-select>
+                      <mat-option
+                        *ngFor="let prefix of prefixes"
+                        [value]="prefix.value"
+                      >
+                        {{ prefix.label }}
+                      </mat-option>
+                    </mat-select>
                   </ng-template>
                   <ng-template pTemplate="output">
                     {{ product.titleEn }}
                   </ng-template>
                 </p-cellEditor>
               </td>
-              <td class="table__header">
+              <td class="table__detail">
                 <p-cellEditor>
                   <ng-template pTemplate="input">
                     <input
@@ -260,7 +267,7 @@
                   </ng-template>
                 </p-cellEditor>
               </td>
-              <td class="table__header">
+              <td class="table__detail">
                 <p-cellEditor>
                   <ng-template pTemplate="input">
                     <input
@@ -275,7 +282,7 @@
                   </ng-template>
                 </p-cellEditor>
               </td>
-              <td class="table__header">
+              <td class="table__detail">
                 <p-cellEditor>
                   <ng-template pTemplate="input">
                     <input
@@ -290,7 +297,7 @@
                   </ng-template>
                 </p-cellEditor>
               </td>
-              <td class="table__header">
+              <td class="table__detail">
                 <p-cellEditor>
                   <ng-template pTemplate="input">
                     <input
@@ -306,52 +313,60 @@
                 </p-cellEditor>
               </td>
 
-              <td class="table__header">
-                <div [pRowToggler]="product" class="table__detail">
+              <td class="table__detail">
+                <div [pRowToggler]="product" class="table__expand">
                   รายละเอียดที่อยู่
                 </div>
               </td>
 
-              <td style="text-align: center">
+              <td style="text-align: center" class="btn__container">
                 <button
                   *ngIf="!editing"
                   type="button"
                   pInitEditableRow
                   (click)="onRowEditInit(product)"
+                  class="btn btn-warning btn-edit"
                 >
-                  edit
-                </button>
-                <button
-                  *ngIf="editing"
-                  type="button"
-                  pSaveEditableRow
-                  (click)="onRowEditSave(product)"
-                >
-                  save
+                  แก้ไข
                 </button>
                 <button
                   *ngIf="editing"
                   type="button"
                   pCancelEditableRow
                   (click)="onRowEditCancel(product, ri)"
+                  class="btn btn-outline-primary btn-edit"
                 >
-                  cancel
+                  ยกเลิก
+                </button>
+                <button
+                  *ngIf="editing"
+                  type="button"
+                  pSaveEditableRow
+                  (click)="onRowEditSave(product)"
+                  class="btn btn-primary btn-edit"
+                >
+                  บันทึก
                 </button>
               </td>
             </tr>
           </ng-template>
 
           <ng-template pTemplate="rowexpansion" let-product>
-            <ksp-form-address></ksp-form-address>
+            <tr>
+              <td colspan="4">
+                <ksp-form-address
+                  >ที่อยู่ตามทะเบียนบ้าน (นักศึกษาชาวไทย) หรือที่พักประจำ
+                  (นักศึกษาชาวต่างชาติ)</ksp-form-address
+                >
+              </td>
+            </tr>
           </ng-template>
         </p-table>
 
-        <div class="detail__footer">
+        <div class="detail__footer" *ngIf="pageType === 1">
           <button type="button" class="btn btn-add">
-            <img
-              src="/assets/images/img-uni/add-icon.svg"
-              class="icon__add"
-            />เพิ่มรายชื่อ
+            <img src="/assets/images/img-uni/add-icon.svg" />
+            เพิ่มรายชื่อ
           </button>
         </div>
       </div>
@@ -360,9 +375,13 @@
 </div>
 
 <div class="bottom__container">
-  <div class="footer">
-    <button (click)="cancel()" class="btn-primary">ยกเลิก</button>
-    <button class="btn-secondary">บันทึกชั่วคราว</button>
-    <button (click)="save()" class="btn-third">บันทึกและยื่นใบคำขอ</button>
-  </div>
+  <ksp-bottom-menu
+    [isLastPage]="true"
+    [isFirstPage]="true"
+    [showCenterButtons]="true"
+    [showSaveButton]="true"
+    [showTempSaveButton]="true"
+    (saveClicked)="save()"
+    (cancelClicked)="cancel()"
+  ></ksp-bottom-menu>
 </div>
