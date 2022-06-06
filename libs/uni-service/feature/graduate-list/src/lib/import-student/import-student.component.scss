@@ -4,37 +4,44 @@
   background-color: #f6f6f6;
   height: 100%;
 }
+
 .title__label {
   font-family: 'KSP Bold';
   font-size: 22px;
   color: #000000;
   margin: 24px 64px 12px 64px;
 }
+
 .content__header {
   display: flex;
 }
+
 .header__detail {
   display: flex;
   justify-content: space-between;
   margin-bottom: 15px;
 }
+
 .label__content {
   font-family: 'KSP Bold';
   font-size: 18px;
   color: #808080;
   margin-right: 24px;
 }
+
 .label__content--primary {
   color: #f68b33;
 }
+
 .label__content--secondary {
   color: #0056ff;
 }
+
 .content__container {
   background: #ffffff;
   border-radius: 5px;
-  padding: 24px;
-  margin: 0px 64px;
+  padding: 12px;
+  margin: 0px 32px;
   padding-bottom: 0;
 }
 
@@ -44,6 +51,7 @@
   padding-bottom: 0;
   margin-top: 16px;
 }
+
 .detail__header {
   font-family: 'KSP Bold';
   font-size: 22px;
@@ -63,6 +71,7 @@ table {
 .table > :not(caption) > * > * {
   padding: 14px;
 }
+
 .table > :not(:first-child) {
   border-top: 0;
 }
@@ -74,6 +83,7 @@ table {
   border-radius: 4px;
   margin-left: 15px;
 }
+
 .btn-upload-secondary {
   font-size: 16px;
   background-color: transparent;
@@ -154,4 +164,19 @@ table {
 :host ::ng-deep .p-cell-editing {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
+}
+
+.table__order {
+  width: 50px;
+}
+
+.table__header {
+  white-space: normal;
+  width: auto;
+}
+
+.table__detail {
+  color: #f68b33;
+  cursor: pointer;
+  text-decoration: underline;
 }

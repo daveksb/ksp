@@ -1,8 +1,9 @@
 export interface User {
   id: number;
-  order: number;
+  order?: string;
   startDate: string;
   personId: string;
+  passportId: string;
   titleTh: string;
   firstNameTh: string;
   lastNameTh: string;

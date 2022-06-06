@@ -1,16 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import {
-  DegreeCertHomeComponent,
-  SharedFeatureDegreeCertModule,
-} from '@ksp/shared-feature-degree-cert';
 import { UniServiceContainerPageComponent } from '@ksp/uni-service/feature/container-page';
 import { StepOneComponent } from './step-one/step-one.component';
 import { StepTwoComponent } from './step-two/step-two.component';
 import { StepThreeComponent } from './step-three/step-three.component';
 import { StepFourComponent } from './step-four/step-four.component';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
+import { DegreeCertHomeComponent, SharedFeatureDegreeCertModule } from '@ksp/shared/feature/degree-cert';
 
 const routes: Routes = [
   {
@@ -48,8 +45,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    SharedUiBottomMenuModule,
     SharedFeatureDegreeCertModule,
-    SharedUiBottomMenuModule
   ],
   declarations: [
     StepOneComponent,
