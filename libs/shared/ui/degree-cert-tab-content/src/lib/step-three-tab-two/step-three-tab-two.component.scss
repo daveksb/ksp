@@ -1,77 +1,85 @@
-
 .content__container {
   background: #ffffff;
-  border-radius: 5px;
   padding: 24px;
-  border: 1px solid #eceef2;
   width: 100%;
   margin: 0;
 }
 
 .detail__footer {
-    display: flex;
-    justify-content: center;
-  }
-  .btn-add {
-    font-family: "KSP Bold";
-    font-size: 18px;
-    color: #f68b33;
-    padding: 0px
-  }
-  .icon__add {
-    margin-right: 8px;
-  }
-  .detail__container {
-    background-color: #f9f9fa;
-    padding: 16px;
-    margin-bottom: 24px;
-    margin-top: 16px;
-  }
-  .form-control {
-    font-family: "KSP Bold";
-    font-size: 20px;
-    background-color: #fff;
-    text-align: center;
-    color: #000;
-  }
-  .detail__header {
-    font-family: "KSP Bold";
-    font-size: 20px;
-    color: #000000;
-  }
-  .table {
-    margin-top: 16px;
-    background-color: #fff;
-    border: 1px solid #eceef2;
-  }
-  .header__column {
-    text-align: center;
-  }
-  .header__table {
-    background-color: #edf6ff;
-    font-family: "KSP Bold";
-    font-size: 16px;
-  }
-  .table > :not(caption) > * > * {
-    padding: 14px;
-  }
-  .table > :not(:first-child) {
-    border-top: 0;
-  }
+  display: flex;
+  justify-content: center;
+}
 
-  .label__table--footer {
-    font-family: "KSP Bold";
-    font-size: 20px;
-    text-align: end;
-  }
-  .summary__container {
-    text-align: center;
-    background: #eceef2;
-    border-radius: 5px;
-    padding: 8px;
-  }
+.btn-add {
+  font-family: 'KSP Bold';
+  font-size: 18px;
+  color: #f68b33;
+  padding: 0px;
+}
 
-  /* nav-tab */
+.icon__add {
+  margin-right: 8px;
+}
+
+.detail__container {
+  background-color: #f9f9fa;
+  padding: 16px;
+  margin-bottom: 24px;
+  margin-top: 16px;
+}
+
+.form-control {
+  font-family: 'KSP Bold';
+  font-size: 20px;
+  background-color: #fff;
+  text-align: center;
+  color: #000;
+}
+
+.detail__header {
+  font-family: 'KSP Bold';
+  font-size: 20px;
+  color: #000000;
+}
+
+.table {
+  margin-top: 16px;
+  background-color: #fff;
+  border: 1px solid #eceef2;
+}
+
+.header__column {
+  text-align: center;
+}
+
+.header__table {
+  background-color: #edf6ff;
+  font-family: 'KSP Bold';
+  font-size: 16px;
+}
+
+.table > :not(caption) > * > * {
+  padding: 14px;
+}
+
+.table > :not(:first-child) {
+  border-top: 0;
+}
+
+.label__table--footer {
+  font-family: 'KSP Bold';
+  font-size: 20px;
+  text-align: end;
+}
+
+.summary__container {
+  text-align: center;
+  background: #eceef2;
+  border-radius: 5px;
+  padding: 8px;
+}
+
+/* nav-tab */
 .nav-tabs .nav-link {
   background-color: #eceef2;
   color: #8c95a6;
@@ -82,6 +90,7 @@
   margin-right: 2px;
   width: 230px;
 }
+
 .nav-tabs .nav-link.active {
   color: #0056ff;
   background-color: #fff;
@@ -91,6 +100,6 @@
 }
 
 .title__tab {
-  font-family: "KSP Bold";
+  font-family: 'KSP Bold';
   font-size: 18px;
 }

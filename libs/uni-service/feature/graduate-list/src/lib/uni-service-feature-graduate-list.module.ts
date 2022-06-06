@@ -16,6 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import { SharedFeatureDegreeCertModule } from '@ksp/shared/feature/degree-cert';
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   imports: [
     CommonModule,
@@ -31,7 +32,8 @@ import { SharedFeatureDegreeCertModule } from '@ksp/shared/feature/degree-cert';
     MatSelectModule,
     MatOptionModule,
     SharedUiBottomMenuModule,
-    SharedFeatureDegreeCertModule
+    SharedFeatureDegreeCertModule,
+    MatIconModule
 
   ],
   declarations: [

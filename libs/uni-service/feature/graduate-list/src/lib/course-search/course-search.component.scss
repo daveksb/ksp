@@ -24,6 +24,7 @@
 .box__container {
   background-color: #f9f9fa;
   margin: 10px;
+  max-width: 1200px;
 }
 
 .button__container {
@@ -69,23 +70,6 @@
   font-size: 18px;
 }
 
-.btn-primary {
-  font-size: 18px;
-  background-color: #0056ff;
-  width: 100px;
-  border-radius: 4px;
-}
-
-.btn-fourth {
-  font-size: 18px;
-  background-color: white;
-  color: #0056ff;
-  width: 100px;
-  border-radius: 4px;
-  border: 1px solid #0056ff;
-  margin-right: 20px;
-}
-
 .table {
   margin: 0 0;
   background-color: #fff;
@@ -108,7 +92,16 @@
   white-space: nowrap;
 }
 
-.edit__icon {
-  width: 20px;
-  height: 20px;
+.edit {
+  color: #0056ff;
+  cursor: pointer;
+}
+
+.print {
+  color: #0056ff;
+  cursor: pointer;
+}
+
+.btn-search {
+  margin-left: 10px;
 }

@@ -87,17 +87,13 @@
       </div>
 
       <div class="button__container">
-        <button
-          (click)="clear()"
-          type="button"
-          class="btn btn-fourth btn-sm label__button"
-        >
+        <button (click)="clear()" type="button" class="btn btn-outline-primary">
           ล้างข้อมูล
         </button>
         <button
           (click)="search()"
           type="button"
-          class="btn btn-primary btn-sm label__button"
+          class="btn btn-primary btn-search"
         >
           ค้นหา
         </button>
@@ -129,7 +125,7 @@
             <tr *ngFor="let item of data">
               <td class="detail__table">{{ item.order }}</td>
               <td (click)="nextPage()" class="detail__table">
-                <img src="assets/images/edit.png" class="edit__icon" />
+                <mat-icon class="edit">edit</mat-icon>
               </td>
               <td class="detail__table">{{ item.sendDate }}</td>
               <td class="detail__table">{{ item.major }}</td>
@@ -140,7 +136,7 @@
               <td class="detail__table">{{ item.graduateStatus }}</td>
               <td class="detail__table">{{ item.editDate }}</td>
               <td class="detail__table">
-                <img src="assets/images/print.png" class="edit__icon" />
+                <mat-icon class="print">print</mat-icon>
               </td>
             </tr>
           </tbody>

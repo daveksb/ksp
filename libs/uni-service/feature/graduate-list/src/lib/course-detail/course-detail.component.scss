@@ -107,24 +107,11 @@
   color: #f23c51;
 }
 
-.btn-primary {
+.btn-view {
   font-size: 20px;
-  background-color: #0056ff;
-  width: 440px;
+  width: auto;
   border-radius: 4px;
-}
-
-.btn-secondary {
-  font-size: 20px;
-  background: #fff;
-  border: 1px solid #0056ff;
-  box-sizing: border-box;
-  box-shadow: 0px 2px 4px rgba(102, 108, 139, 0.1);
-  border-radius: 1px;
-  color: #0056ff;
-  padding: 4px 24px;
-  margin: 14px;
-  width: 200px;
+  margin-bottom: 25px;
 }
 
 .table {

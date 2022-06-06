@@ -285,45 +285,19 @@
       </div>
       <br />
       <hr />
-
-      <div class="title__label">กรุณาแนบหลักฐานประกอบการปฏิบัติงาน</div>
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">รายการเอกสาร</th>
-              <th scope="col" class="page__header">จำนวนหน้า</th>
-              <th scope="col" class="upload__header">อัพโหลด</th>
-            </tr>
-          </thead>
-          <tbody class="header__table">
-            <tr>
-              <th scope="row">
-                1.สำเนาหนังสือเดินทาง<br />
-                xxx
-              </th>
-              <td class="number__page"><br />1</td>
-              <td class="upload__detail">
-                <button type="button" class="btn-upload">
-                  <img
-                    src="/assets/images/plus-icon.svg"
-                    class="icon__upload"
-                  />อัพโหลดไฟล์
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="footer">
-      <button (click)="cancel()" type="button" class="btn btn-secondary">
-        ยกเลิก
-      </button>
-      <button (click)="openDialog()" type="button" class="btn btn-primary">
-        บันทึกและยื่นอนุมัติ
-      </button>
+      <ksp-form-attachment></ksp-form-attachment>
     </div>
   </div>
+</div>
+
+<div class="bottom__container">
+  <ksp-bottom-menu
+    [showCenterButtons]="true"
+    [showSaveButton]="true"
+    [isFirstPage]="true"
+    [isLastPage]="true"
+    (saveClicked)="save()"
+    (cancelClicked)="cancel()"
+  >
+  </ksp-bottom-menu>
 </div>
