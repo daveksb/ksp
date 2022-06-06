@@ -47,7 +47,12 @@
         <button (click)="previousPage()" type="submit" class="btn btn-light">
           กลับ
         </button>
-        <button (click)="openDialog()" type="submit" class="btn btn-primary">
+        <button
+          id="confim__button"
+          (click)="openDialog()"
+          type="submit"
+          class="btn btn-primary"
+        >
           ยืนยันตัวตน
         </button>
         <div (click)="loginPage()" class="label__login">เข้าสู่ระบบ</div>

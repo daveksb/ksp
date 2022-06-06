@@ -1,5 +1,4 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,10 +7,9 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterCompletedComponent {
-  constructor(private router: Router, private matDialog: MatDialog) {}
+  constructor(private router: Router) {}
 
   loginPage() {
-    this.matDialog.closeAll();
     this.router.navigate(['/', 'login']);
   }
 }

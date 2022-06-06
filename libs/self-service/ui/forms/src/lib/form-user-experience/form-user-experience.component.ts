@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ksp-form-user-experience',
+  selector: 'self-service-form-user-experience',
   templateUrl: './form-user-experience.component.html',
   styleUrls: ['./form-user-experience.component.css'],
 })

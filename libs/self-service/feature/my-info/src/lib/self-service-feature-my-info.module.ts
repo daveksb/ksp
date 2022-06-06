@@ -5,6 +5,7 @@ import { PaymentHistoryComponent } from './payment-history/payment-history.compo
 import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master-page';
 import { PageNotFoundComponent } from '@ksp/shared/ui/page-not-found';
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
+import { PersonInfoComponent } from './person-info/person-info.component';
 
 export const routes: Route[] = [
   {
@@ -15,6 +16,10 @@ export const routes: Route[] = [
         path: '',
         pathMatch: 'full',
         redirectTo: 'payment-history',
+      },
+      {
+        path: 'person-info',
+        component: PersonInfoComponent,
       },
       {
         path: 'payment-history',
@@ -30,7 +35,7 @@ export const routes: Route[] = [
 
 @NgModule({
   imports: [CommonModule, SharedUiTopNavModule, RouterModule.forChild(routes)],
-  declarations: [PaymentHistoryComponent],
-  exports: [PaymentHistoryComponent],
+  declarations: [PaymentHistoryComponent, PersonInfoComponent],
+  exports: [PaymentHistoryComponent, PersonInfoComponent],
 })
 export class SelfServiceFeatureMyInfoModule {}

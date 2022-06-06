@@ -74,7 +74,6 @@ export class ImportStudentComponent implements OnInit {
 
   save() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      height: '200px',
       width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูล
@@ -91,10 +90,8 @@ export class ImportStudentComponent implements OnInit {
 
   onConfirmed() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      height: '200px',
       width: '350px',
       data: {
-        header: 'บันทึกข้อมูลสำเร็จ',
         buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });

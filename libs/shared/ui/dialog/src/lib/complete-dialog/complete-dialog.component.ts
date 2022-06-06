@@ -8,7 +8,12 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class CompleteDialogComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA)
-    public data: { header: string, content: string; buttonLabel: string, subContent: string }
+    public data: {
+      header: string;
+      content: string;
+      btnLabel: string;
+      subContent: string;
+    }
   ) {}
 
   @Output() completed = new EventEmitter<boolean>();
@@ -18,6 +23,4 @@ export class CompleteDialogComponent {
   complete() {
     this.completed.emit(true);
   }
-
-
 }

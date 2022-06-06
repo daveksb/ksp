@@ -11,7 +11,7 @@ export class PrivacyPolicyComponent {
   constructor(private router: Router) {}
 
   register() {
-    this.router.navigate(['/', 'register-1']);
+    this.router.navigate(['/', 'register']);
   }
 
   loginPage() {
