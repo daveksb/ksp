@@ -24,7 +24,7 @@ const data: User[] = [
     trainingAddress: '',
   },
   {
-    id: 3,
+    id: 2,
     startDate: 'xx/xx/xxxx',
     personId: 'x-xxxx-xxxxx-xx-x',
     passportId: 'ABCxxxxxxxx',
@@ -37,6 +37,10 @@ const data: User[] = [
     phone: '098-xxx-xxxx',
     birthDate: 'xx/xx/xxxx',
     address: '',
+    approveTime: 1,
+    graduateDate: 'xx/xx/xxxx',
+    approveDate: 'xx/xx/xxxx',
+    trainingAddress: '',
   },
   {
     id: 3,
@@ -52,6 +56,10 @@ const data: User[] = [
     phone: '098-xxx-xxxx',
     birthDate: 'xx/xx/xxxx',
     address: '',
+    approveTime: 1,
+    graduateDate: 'xx/xx/xxxx',
+    approveDate: 'xx/xx/xxxx',
+    trainingAddress: '',
   },
 ];
 

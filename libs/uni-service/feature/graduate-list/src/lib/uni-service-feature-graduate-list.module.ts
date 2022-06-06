@@ -12,6 +12,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TableModule } from 'primeng/table';
 import { SharedUiFormModule } from '@ksp/shared/ui/form';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
+import { SharedFeatureDegreeCertModule } from '@ksp/shared/feature/degree-cert';
 @NgModule({
   imports: [
     CommonModule,
@@ -24,7 +28,11 @@ import { SharedUiFormModule } from '@ksp/shared/ui/form';
     MatCheckboxModule,
     TableModule,
     SharedUiFormModule,
-    
+    MatSelectModule,
+    MatOptionModule,
+    SharedUiBottomMenuModule,
+    SharedFeatureDegreeCertModule
+
   ],
   declarations: [
     CourseSearchComponent,

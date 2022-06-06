@@ -3,10 +3,7 @@
     <div class="box__header">
       <div class="title__box">ค้นหาหน่วยงาน/สถานศึกษา</div>
       <div class="close__dialog">
-        <img
-          (click)="closeDialog()"
-          src="/assets/images/img-uni/close-page.svg"
-        />
+        <img matDialogClose src="/assets/images/img-uni/close-page.svg" />
       </div>
     </div>
     <hr />
@@ -124,9 +121,10 @@
 
       <div class="footer">
         <button
+          matDialogClose
           type="button"
           class="btn btn-primary btn-sm label__button confirm__button"
-          (click)="confirmed.emit(selectedUniversity); closeDialog()"
+          (click)="confirmed.emit(selectedUniversity)"
           [disabled]="!selectedUniversity"
         >
           ยืนยัน

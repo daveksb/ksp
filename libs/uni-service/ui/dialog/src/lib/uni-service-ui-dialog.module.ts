@@ -4,9 +4,10 @@ import { ForgotPasswordPersonIdComponent } from './forgot-password-person-id/for
 import { ForgotPasswordSetNewPasswordComponent } from './forgot-password-set-new-password/forgot-password-set-new-password.component';
 import { ForgotPasswordNotFoundComponent } from './forgot-password-not-found/forgot-password-not-found.component';
 import { TrainingAddressComponent } from './training-address/training-address.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, MatDialogModule],
   declarations: [
     ForgotPasswordPersonIdComponent,
     ForgotPasswordSetNewPasswordComponent,

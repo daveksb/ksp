@@ -9,7 +9,7 @@
   font-family: 'KSP Bold';
   font-size: 22px;
   color: #000000;
-  margin: 24px 64px 12px 64px;
+  padding: 24px 32px 0;
 }
 
 .content__header {
@@ -61,7 +61,8 @@
 table {
   width: 100%;
   background-color: #fff;
-  border: 1px solid #eceef2;
+  border: 1px solid #000000;
+  overflow: auto;
 }
 
 .mat-header-cell {
@@ -96,13 +97,12 @@ table {
   display: flex;
   justify-content: center;
 }
+
 .btn-add {
   color: #0056ff;
   font-family: 'KSP Bold';
   font-size: 18px;
-}
-.icon__add {
-  margin-right: 8px;
+  width: auto;
 }
 
 .footer {
@@ -120,32 +120,6 @@ table {
   width: 100%;
   background-color: #fff;
   z-index: 1;
-}
-
-.btn-primary {
-  font-size: 20px;
-  background: #fff;
-  border: 1px solid #0056ff;
-  box-sizing: border-box;
-  box-shadow: 0px 2px 4px rgba(102, 108, 139, 0.1);
-  border-radius: 1px;
-  color: #0056ff;
-  padding: 4px 24px;
-  margin: 14px;
-  width: 200px;
-}
-
-.btn-secondary {
-  font-size: 20px;
-  background: #f68b33;
-  border: 1px solid #f68b33;
-  box-sizing: border-box;
-  box-shadow: 0px 2px 4px rgba(102, 108, 139, 0.1);
-  border-radius: 1px;
-  color: #fff;
-  padding: 4px 24px;
-  margin: 14px;
-  width: 200px;
 }
 
 .btn-third {
@@ -168,15 +142,46 @@ table {
 
 .table__order {
   width: 50px;
+  background-color: #edf6ff;
 }
 
 .table__header {
-  white-space: normal;
+  white-space: nowrap;
   width: auto;
+  background-color: #edf6ff;
+  padding: 20px 10px;
 }
 
 .table__detail {
+  white-space: nowrap;
+  width: auto;
+  padding: 10px;
+}
+
+.table__header-2 {
+  white-space: normal;
+  width: auto;
+  padding: 0 10px;
+  background-color: #edf6ff;
+}
+
+.table__expand {
   color: #f68b33;
   cursor: pointer;
   text-decoration: underline;
+  white-space: nowrap;
+}
+
+.btn__container {
+  display: flex;
+}
+
+.btn-edit {
+  width: auto;
+  font-size: 14px;
+  margin: 5px 1px;
+}
+
+.btn-dowload {
+  width: auto;
 }
