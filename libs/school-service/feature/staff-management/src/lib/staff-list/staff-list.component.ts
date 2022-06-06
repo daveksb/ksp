@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
@@ -8,9 +8,9 @@ export interface staffInfo {
   name: string;
   startDate: string;
   endDate: string;
-  profession: string;
-  teaching: string;
-  tempLicense: string;
+  profession: boolean;
+  teaching: boolean;
+  tempLicense: boolean;
   edit: string;
   view: string;
 }
@@ -22,9 +22,33 @@ export const data: staffInfo[] = [
     name: 'นายธนารักษ์ ใจสะอาด',
     startDate: 'วว/ดด/ปปปป',
     endDate: 'วว/ดด/ปปปป',
-    profession: '',
-    teaching: '',
-    tempLicense: '',
+    profession: true,
+    teaching: false,
+    tempLicense: false,
+    edit: '',
+    view: '',
+  },
+  {
+    order: 2,
+    ssn: 'x-xxxx-xxxx-xx-x',
+    name: 'นายธนารักษ์ ใจสะอาด',
+    startDate: 'วว/ดด/ปปปป',
+    endDate: 'วว/ดด/ปปปป',
+    profession: false,
+    teaching: true,
+    tempLicense: false,
+    edit: '',
+    view: '',
+  },
+  {
+    order: 2,
+    ssn: 'x-xxxx-xxxx-xx-x',
+    name: 'นายธนารักษ์ ใจสะอาด',
+    startDate: 'วว/ดด/ปปปป',
+    endDate: 'วว/ดด/ปปปป',
+    profession: true,
+    teaching: false,
+    tempLicense: true,
     edit: '',
     view: '',
   },
@@ -52,8 +76,6 @@ export class StaffListComponent {
   dataSource = new MatTableDataSource<staffInfo>();
 
   constructor(private router: Router) {}
-
-  //onItemChange(universityCode: string) {}
 
   search() {
     this.dataSource.data = data;

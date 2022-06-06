@@ -1,5 +1,6 @@
 <ksp-top-nav
-  ><span header>กิจกรรมพัฒนาตนเอง (หนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต) </span
+  ><span header
+    >กิจกรรมพัฒนาตนเอง (หนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต) </span
   ><span subHeader>เพิ่มกิจกรรมการพัฒนาตนเอง</span></ksp-top-nav
 >
 
@@ -43,7 +44,7 @@
               <tr>
                 <td class="detail__table">1</td>
                 <td class="detail__table">123xxx</td>
-                <td class="detail__table">นายประวิทย์ งงทุกวัน</td>
+                <td class="detail__table">นายประวิทย์ มาสถาพร</td>
                 <td class="detail__table">xx/xx/xxxx</td>
                 <td class="detail__table">xx/xx/xxxx</td>
                 <td class="detail__table">
@@ -113,8 +114,9 @@
   <ksp-bottom-menu
     [isLastPage]="true"
     [showCenterButtons]="true"
+    [showCancelButton]="false"
+    [showSaveButton]="true"
     (prevClicked)="back()"
     (saveClicked)="save()"
-    (cancelClicked)="cancel()"
   ></ksp-bottom-menu>
 </div>
