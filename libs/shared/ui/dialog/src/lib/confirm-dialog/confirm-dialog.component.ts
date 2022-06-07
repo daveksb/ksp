@@ -19,4 +19,5 @@ export class ConfirmDialogComponent {
   ) {}
 
   @Output() confirmed = new EventEmitter<boolean>();
+  @Output() saved = new EventEmitter<boolean>();
 }

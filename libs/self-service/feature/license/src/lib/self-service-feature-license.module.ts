@@ -10,7 +10,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 import { SharedUiFormModule } from '@ksp/shared/ui/form';
 import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master-page';
-import { PaymentChannelComponent } from '@ksp/self-service/ui/payment';
+import { PaymentChannelComponent, PromptpayComponent } from '@ksp/self-service/ui/payment';
 import { PageNotFoundComponent } from '@ksp/shared/ui/page-not-found';
 
 export const routes: Routes = [
@@ -29,6 +29,10 @@ export const routes: Routes = [
       {
         path: 'payment-channel',
         component: PaymentChannelComponent,
+      },
+      {
+        path: 'payment-promptpay',
+        component: PromptpayComponent,
       },
       {
         path: '**',

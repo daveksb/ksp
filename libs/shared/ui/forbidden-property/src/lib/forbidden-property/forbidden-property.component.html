@@ -50,16 +50,16 @@
         type="text"
         placeholder="โปรดระบุ"
       />
-      <button type="button" class="btn btn-secondary">+ แนบเอกสาร</button>
+      <button id="upload-btn" type="button" class="btn btn-primary">+ แนบเอกสาร</button>
     </div>
   </div>
 
   <div class="btn__container">
-    <button matDialogClose type="button" class="btn btn-secondary">
+    <button matDialogClose type="button" class="btn btn-outline-primary">
       ยกเลิก
     </button>
     <button
-      id="save__button"
+      id="save-button"
       matDialogClose
       (click)="save()"
       type="button"

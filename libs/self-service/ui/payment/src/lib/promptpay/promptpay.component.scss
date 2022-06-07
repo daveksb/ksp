@@ -49,75 +49,22 @@
   text-align: center;
 }
 
-.box__container {
-  display: flex;
-  justify-content: space-between;
+.qrcode__content {
   background-color: #edf8ff;
-  color: #3dabfc;
-  padding: 8px 12px;
-  border-radius: 6px;
+  padding: 24px 48px;
+  width: fit-content;
 }
 
-.box__container--right {
-  display: flex;
-}
-
-.icon__box {
-  padding: 4px 0 4px 12px;
-}
-
-.label__box {
-  font-size: 22px;
-}
-
-.card__container {
+.qrcode__container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 42px;
+  grid-template-columns: 20% auto;
+  grid-column-gap: 100px;
+  justify-content: center;
 }
 
-.card__content {
-  display: grid;
-  grid-template-columns: 40px 1fr 40px;
-  grid-column-gap: 12px;
-  padding: 8px 12px;
-  background: #edf8ff;
-  box-sizing: border-box;
-  border-radius: 6px;
-  margin: 24px 0 0 0;
-  height: 66px;
-  cursor: pointer;
-}
-
-.title__card {
+.qrcode__detail {
   font-size: 20px;
-  color: #000000;
-}
-
-.title__card--secondary {
-  font-size: 20px;
-  color: #000000;
-  padding-top: 10px;
-}
-
-.label__card {
-  font-size: 14px;
-  color: #a6a6a6;
-}
-
-.card__img {
-  padding: 4px 0 4px 0px;
-}
-
-.icon__card {
-  padding: 12px 0 12px 12px;
-  text-align: end;
-}
-
-.label__payment {
-  font-size: 22px;
-  color: #666666;
-  margin-top: 36px;
+  color: #656565;
 }
 
 @media only screen and (max-width: 768px) {

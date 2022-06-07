@@ -125,9 +125,6 @@
       "@ksp/self-service/ui/payment": [
         "libs/self-service/ui/payment/src/index.ts"
       ],
-      "@ksp/shared/ui/forbidden-property": [
-        "libs/shared/ui/forbidden-property/src/index.ts"
-      ],
       "@ksp/shared/assets": ["libs/shared/assets/src/index.ts"],
       "@ksp/shared/feature/degree-cert": [
         "libs/shared/feature/degree-cert/src/index.ts"
@@ -140,6 +137,9 @@
         "libs/shared/ui/degree-cert-tab-content/src/index.ts"
       ],
       "@ksp/shared/ui/dialog": ["libs/shared/ui/dialog/src/index.ts"],
+      "@ksp/shared/ui/forbidden-property": [
+        "libs/shared/ui/forbidden-property/src/index.ts"
+      ],
       "@ksp/shared/ui/form": ["libs/shared/ui/form/src/index.ts"],
       "@ksp/shared/ui/license-info": [
         "libs/shared/ui/license-info/src/index.ts"

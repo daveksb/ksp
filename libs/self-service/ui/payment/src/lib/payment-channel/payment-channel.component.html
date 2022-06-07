@@ -1,3 +1,10 @@
+<ksp-top-nav
+  ><span header>ข้อมูลส่วนตัว</span
+  ><span subHeader>ข้อมูลส่วนตัว</span></ksp-top-nav
+>
+
+<ksp-self-service-box-menu></ksp-self-service-box-menu>
+
 <div class="container">
   <div class="content__container">
     <div class="header__label">รายการค่าธรรมเนียม</div>
@@ -109,8 +116,9 @@
         </div>
       </div>
     </div>
+
     <div class="card__container">
-      <div class="card__content">
+      <div class="card__content" (click)="promptpay()">
         <div class="card__img">
           <img src="/assets/images/pay-chanel/promtpay.png" />
         </div>
@@ -121,6 +129,7 @@
           <img src="/assets/images/arrow-right.svg" />
         </div>
       </div>
+
       <div class="card__content">
         <div class="card__img">
           <img src="/assets/images/pay-chanel/paotang.png" />

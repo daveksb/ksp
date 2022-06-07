@@ -12,7 +12,12 @@
   </div>
 
   <div class="button__container">
-    <button type="button" class="btn btn-outline-primary" matDialogClose>
+    <button
+      (click)="saved.emit(true)"
+      type="button"
+      class="btn btn-outline-primary"
+      matDialogClose
+    >
       {{ data.cancelBtnLabel || 'ยกเลิก' }}
     </button>
     <button
