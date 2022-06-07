@@ -119,4 +119,9 @@ export const menu: MenuConfig[] = [
       },
     ],
   },
+  {
+    icon: 'assets/images/icon-sidenav/reward.svg',
+    label: 'test',
+    path: 'license/test',
+  },
 ];
