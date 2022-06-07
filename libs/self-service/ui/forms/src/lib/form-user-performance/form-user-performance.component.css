@@ -25,7 +25,11 @@
 
 .table__container {
   background-color: #e5e5e5;
-  margin: 20px;
+  margin: 0 20px;
+}
+
+tr.mat-header-row {
+  background-color: #edf8ff;
 }
 
 @media only screen and (max-width: 768px) {

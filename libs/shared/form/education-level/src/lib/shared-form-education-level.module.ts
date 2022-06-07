@@ -4,6 +4,7 @@ import { EducationLevelFormOneComponent } from './education-level-form-one/educa
 import { EducationLevelFormTwoComponent } from './education-level-form-two/education-level-form-two.component';
 import { EducationLevelFormThreeComponent } from './education-level-form-three/education-level-form-three.component';
 import { EducationLevelFormFourComponent } from './education-level-form-four/education-level-form-four.component';
+import { ExperienceFormComponent } from './experience-form/experience-form.component';
 
 @NgModule({
   imports: [CommonModule],
@@ -12,12 +13,14 @@ import { EducationLevelFormFourComponent } from './education-level-form-four/edu
     EducationLevelFormTwoComponent,
     EducationLevelFormThreeComponent,
     EducationLevelFormFourComponent,
+    ExperienceFormComponent,
   ],
   exports: [
     EducationLevelFormOneComponent,
     EducationLevelFormTwoComponent,
     EducationLevelFormThreeComponent,
     EducationLevelFormFourComponent,
+    ExperienceFormComponent,
   ],
 })
 export class SharedFormEducationLevelModule {}
