@@ -44,6 +44,7 @@
     "self-service-ui-payment": "libs/self-service/ui/payment",
     "shared-assets": "libs/shared/assets",
     "shared-feature-degree-cert": "libs/shared/feature/degree-cert",
+    "shared-form-education-level": "libs/shared/form/education-level",
     "shared-ui-bottom-menu": "libs/shared/ui/bottom-menu",
     "shared-ui-degree-cert-search-form": "libs/shared/ui/degree-cert-search-form",
     "shared-ui-degree-cert-tab-content": "libs/shared/ui/degree-cert-tab-content",
