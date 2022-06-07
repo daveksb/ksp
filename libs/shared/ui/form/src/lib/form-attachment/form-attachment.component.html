@@ -12,38 +12,27 @@
         </tr>
       </thead>
       <tbody class="body__table">
-        <tr>
-          <th scope="row">
-            หนังสือแต่ตั้งผู้ประสานงาน
-            <div>
-              xxxxxxxxxxxxxxxx-xxxxxxxx_xxxxx.pdf<img
-                src="/assets/images/img-uni/close.svg"
-              />
-            </div>
-            <div>
-              xxxxxxxx_xxxxx.pdf<img src="/assets/images/img-uni/loader.svg" />
-            </div>
-          </th>
-          <td class="detail__table">
-            <br />
-            <div>2</div>
-            <div>2</div>
-          </td>
-          <td class="detail__table">
-            <button type="button" class="btn btn-upload btn-sm label__button">
-              + อัพโหลดไฟล์
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">สำเนาบัตรประชาชน</th>
-          <td class="detail__table">-</td>
-          <td class="detail__table">
-            <button type="button" class="btn btn-upload btn-sm label__button">
-              + อัพโหลดไฟล์
-            </button>
-          </td>
-        </tr>
+        <ng-container *ngFor="let group of groups; index as i">
+          <tr>
+            <th scope="row">
+              {{ group }}
+              <div>
+                xxxxxxxxxxxxxxxx-xxxxxxxx_xxxxx.pdf<img
+                  src="/assets/images/img-uni/close.svg"
+                />
+              </div>
+              <div>
+                xxxxxxxx_xxxxx.pdf<img
+                  src="/assets/images/img-uni/loader.svg"
+                />
+              </div>
+            </th>
+            <td class="detail__table">-</td>
+            <td class="detail__table">
+              <button type="button" class="btn btn-primary">+ อัพโหลด</button>
+            </td>
+          </tr>
+        </ng-container>
       </tbody>
     </table>
   </div>
