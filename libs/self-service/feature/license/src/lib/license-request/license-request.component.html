@@ -3,11 +3,18 @@
   ><span subHeader>ขอขึ้นใบอนุญาตประกอบวิชาชีพ</span></ksp-top-nav
 >
 
-<ksp-self-service-box-menu></ksp-self-service-box-menu>
-
-<self-service-form-upload-image></self-service-form-upload-image>
-
-<div class="detail__container"><ksp-form-user-info></ksp-form-user-info></div>
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title> แสดง/ซ่อน ข้อมูลผู้ใช้ </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ksp-self-service-box-menu></ksp-self-service-box-menu>
+    <self-service-form-upload-image></self-service-form-upload-image>
+    <div class="detail__container">
+      <ksp-form-user-info></ksp-form-user-info>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
 
 <div class="tab-container">
   <mat-tab-group class="tab-group" animationDuration="0ms" [selectedIndex]="1">

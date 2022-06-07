@@ -1,0 +1,17 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/shared/form/education-level/src",
+  "prefix": "ksp",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/form/education-level/**/*.ts",
+          "libs/shared/form/education-level/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

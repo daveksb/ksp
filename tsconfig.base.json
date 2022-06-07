@@ -129,6 +129,9 @@
       "@ksp/shared/feature/degree-cert": [
         "libs/shared/feature/degree-cert/src/index.ts"
       ],
+      "@ksp/shared/form/education-level": [
+        "libs/shared/form/education-level/src/index.ts"
+      ],
       "@ksp/shared/ui/bottom-menu": ["libs/shared/ui/bottom-menu/src/index.ts"],
       "@ksp/shared/ui/degree-cert-search-form": [
         "libs/shared/ui/degree-cert-search-form/src/index.ts"
