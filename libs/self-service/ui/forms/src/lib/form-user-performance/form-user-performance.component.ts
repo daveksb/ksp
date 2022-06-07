@@ -20,6 +20,13 @@ export const data: performanceInfo[] = [
   {
     id: 2,
     score: '96',
+    result: 'ผ่าน',
+    announceDate: '12/มกราคม/2565',
+    endDate: '31/มกราคม/2565',
+  },
+  {
+    id: 3,
+    score: '96',
     result: 'ไม่ผ่าน',
     announceDate: '12/มกราคม/2565',
     endDate: '31/มกราคม/2565',
@@ -32,7 +39,12 @@ export const data: performanceInfo[] = [
   styleUrls: ['./form-user-performance.component.css'],
 })
 export class FormUserPerformanceComponent implements OnInit {
-  typesOfShoes: string[] = ['วิชาชีพครู', 'วิชาภาษาไทยเพื่อการสื่อสาร', 'วิชาภาษาอังกฤษเพื่อการสื่อสาร', 'วิชาการใช้เทคโนโลยีเพื่อการศึกษา'];
+  typesOfShoes: string[] = [
+    'วิชาชีพครู',
+    'วิชาภาษาไทยเพื่อการสื่อสาร',
+    'วิชาภาษาอังกฤษเพื่อการสื่อสาร',
+    'วิชาการใช้เทคโนโลยีเพื่อการศึกษา',
+  ];
   personSelected = false;
   displayedColumns: string[] = [
     'id',
@@ -44,6 +56,6 @@ export class FormUserPerformanceComponent implements OnInit {
   dataSource = new MatTableDataSource<performanceInfo>();
 
   ngOnInit(): void {
-    this.dataSource.data = data
+    this.dataSource.data = data;
   }
 }
