@@ -1,4 +1,4 @@
-.table {
+/* .table {
   font-size: 14px;
   background-color: #edf8ff;
   border: 1px solid #ecedf3;
@@ -33,16 +33,35 @@
 
 .btn {
   font-size: 13px;
-}
+} */
 
 .container {
-  display: grid;
-  grid-template-columns: 20% auto;
+  margin: 0;
+  max-width: 100%;
 }
 
 .content__container {
+  display: grid;
+  grid-template-columns: 20% auto;
+  grid-column-gap: 16px;
+}
+
+.content__container-2 {
   display: flex;
   flex-direction: column;
+}
+
+.menu__container{
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  height: fit-content;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.table__container{
+  background-color: #e5e5e5;
+  margin: 10px;
 }
 
 @media only screen and (max-width: 768px) {

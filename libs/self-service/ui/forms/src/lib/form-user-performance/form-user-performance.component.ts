@@ -32,6 +32,7 @@ export const data: performanceInfo[] = [
   styleUrls: ['./form-user-performance.component.css'],
 })
 export class FormUserPerformanceComponent implements OnInit {
+  typesOfShoes: string[] = ['วิชาชีพครู', 'วิชาภาษาไทยเพื่อการสื่อสาร', 'วิชาภาษาอังกฤษเพื่อการสื่อสาร', 'วิชาการใช้เทคโนโลยีเพื่อการศึกษา'];
   personSelected = false;
   displayedColumns: string[] = [
     'id',
