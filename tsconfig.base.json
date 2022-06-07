@@ -75,7 +75,6 @@
       "@ksp/e-service/ui/verify-result-box": [
         "libs/e-service/ui/verify-result-box/src/index.ts"
       ],
-      "@ksp/school-service/dialog": ["libs/school-service/dialog/src/index.ts"],
       "@ksp/school-service/feature/activity": [
         "libs/school-service/feature/activity/src/index.ts"
       ],
@@ -125,6 +124,9 @@
       "@ksp/self-service/ui/menu": ["libs/self-service/ui/menu/src/index.ts"],
       "@ksp/self-service/ui/payment": [
         "libs/self-service/ui/payment/src/index.ts"
+      ],
+      "@ksp/shared/ui/forbidden-property": [
+        "libs/shared/ui/forbidden-property/src/index.ts"
       ],
       "@ksp/shared/assets": ["libs/shared/assets/src/index.ts"],
       "@ksp/shared/feature/degree-cert": [

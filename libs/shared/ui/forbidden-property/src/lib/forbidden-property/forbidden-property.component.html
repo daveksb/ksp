@@ -1,7 +1,6 @@
 <div class="d-flex flex-column">
   <div class="header__title">
-    ขอรับรองว่าไม่เป็นผู้มีลักษณะต้องห้ามตามที่กำหนดไว้ในมาตรา 44
-    แห่งพระราชบัญญัติสภาครูและบุคลากรทางการศึกษา พ.ศ.2546
+    {{ title }}
   </div>
 
   <div class="detail__container">
@@ -56,12 +55,15 @@
   </div>
 
   <div class="btn__container">
-    <button matDialogClose type="button" class="btn btn-primary">ยกเลิก</button>
+    <button matDialogClose type="button" class="btn btn-secondary">
+      ยกเลิก
+    </button>
     <button
+      id="save__button"
       matDialogClose
       (click)="save()"
       type="button"
-      class="btn btn-fourth"
+      class="btn btn-primary"
     >
       บันทึก
     </button>

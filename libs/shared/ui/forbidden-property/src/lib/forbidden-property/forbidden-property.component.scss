@@ -1,0 +1,52 @@
+.checkbox__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 10px 0;
+  grid-column-gap: 10px;
+}
+
+.checkbox__container-2 {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr 0.5fr;
+  margin: 10px 0;
+}
+
+.header__title {
+  font-size: 20px;
+  color: #000;
+}
+
+.detail__title {
+  font-size: 18px;
+  color: #656565;
+  margin: 20px 0;
+}
+
+.checkbox__label {
+  font-size: 18px;
+  color: #656565;
+}
+
+.checkbox {
+  height: 15px;
+  width: 15px;
+  margin-right: 10px;
+}
+
+.checkbox__content {
+  display: flex;
+  line-height: 15px;
+}
+
+.btn__container {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.form-control {
+  font-size: 16px;
+}
+
+#save__button {
+  margin-left: 10px;
+}
