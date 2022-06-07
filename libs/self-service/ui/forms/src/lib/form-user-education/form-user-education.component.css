@@ -1,10 +1,3 @@
-.tab-content {
-  padding: 44px 36px;
-  background: #ffffff;
-  box-shadow: 0px 0px 15px #e2e2e2;
-  border-radius: 0px 20px 20px 20px;
-}
-
 .content__container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -14,15 +7,6 @@
 .form-label {
   font-size: 16px;
   color: #656565;
-}
-
-.form-control {
-  background-color: #f6f6f6;
-}
-
-.form-control-sm {
-  font-size: 16px;
-  color: #000000;
 }
 
 .form-select-sm {
@@ -36,78 +20,9 @@
   background-size: 12px;
 }
 
-.search__content {
-  background-image: url(/assets/images/search-icon.png) !important;
-  background-size: 12px;
-}
-
-.document__container {
-  margin-top: 36px;
-}
-
-.title__label {
-  font-size: 20px;
-  margin-bottom: 12px;
-}
-
-.table {
-  font-size: 14px;
-  background-color: #edf8ff;
-  border: 1px solid #ecedf3;
-  color: #333333;
-}
-
-.page__header {
-  text-align: center;
-}
-
-.upload__header {
-  text-align: center;
-}
-
-.header__table {
-  background-color: #fff;
-  color: #a6a6a6;
-}
-
-.number__page {
-  text-align: center;
-}
-
-.upload__detail {
-  text-align: center;
-}
-
-.icon__upload {
-  vertical-align: bottom;
-  padding: 2px;
-}
-
-.btn-upload {
-  font-family: 'KSP Bold';
-  font-size: 14px;
-  background: #3f89fe;
-  border: 1px solid #cccccc;
-  box-sizing: border-box;
-  box-shadow: 0px 2px 4px rgba(102, 108, 139, 0.1);
-  border-radius: 10px;
-  color: #fff;
-  padding: 4px 48px;
-  margin: 14px;
-}
-
 @media only screen and (max-width: 768px) {
-  .tab-content {
-    padding: 14px;
-  }
-
   .content__container {
     display: grid;
     grid-template-columns: 1fr;
-  }
-
-  .btn-upload {
-    padding: 4px 12px;
-    display: flex;
   }
 }

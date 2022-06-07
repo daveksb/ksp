@@ -32,7 +32,7 @@ export class ForgetPasswordComponent implements OnInit {
   }
 
   accept() {
-    console.log('form valid = ', this.forgotPasswordForm.valid);
+    //console.log('form valid = ', this.forgotPasswordForm.valid);
 
     if (this.forgotPasswordForm.valid) {
       this.router.navigate(['/', 'forget-password', 'set-password']);

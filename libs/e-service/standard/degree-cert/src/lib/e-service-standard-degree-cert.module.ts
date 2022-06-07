@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DegreeCertListComponent } from './degree-cert-list/degree-cert-list.component';
-import { SharedUiDegreeCertSearchFormModule } from '@ksp/shared/ui/degree-cert-search-form';
 import { StepOneComponent } from './step-one/step-one.component';
 import { StepTwoComponent } from './step-two/step-two.component';
 import { StepThreeComponent } from './step-three/step-three.component';
@@ -18,6 +17,7 @@ import { ApproveComponent } from './approve/approve.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { EServiceStandardDegreeCertRoutingModule } from './e-service-standard-degree-cert-routing.module';
+import { SharedFormDegreeCertSearchModule } from '@ksp/shared/form/degree-cert-search';
 
 @NgModule({
   imports: [
@@ -30,7 +30,7 @@ import { EServiceStandardDegreeCertRoutingModule } from './e-service-standard-de
     EServiceStandardDegreeCertRoutingModule,
     SharedFeatureDegreeCertModule,
     SharedUiBottomMenuModule,
-    SharedUiDegreeCertSearchFormModule,
+    SharedFormDegreeCertSearchModule,
   ],
   declarations: [
     DegreeCertListComponent,

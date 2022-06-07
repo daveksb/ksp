@@ -13,13 +13,19 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { SharedUiFormModule } from '@ksp/shared/ui/form';
 import { MatListModule } from '@angular/material/list';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatOptionModule } from '@angular/material/core';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
+    ReactiveFormsModule,
     MatDialogModule,
     MatTableModule,
+    MatFormFieldModule,
+    MatOptionModule,
     SharedUiFormModule,
     MatListModule,
   ],

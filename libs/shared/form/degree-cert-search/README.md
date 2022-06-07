@@ -1,3 +1,3 @@
-# shared-ui-degree-cert-search-form
+# shared-form-degree-cert-search
 
 This library was generated with [Nx](https://nx.dev).

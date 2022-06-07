@@ -7,4 +7,4 @@ import { SearchFormComponent } from './search-form/search-form.component';
   declarations: [SearchFormComponent],
   exports: [SearchFormComponent],
 })
-export class SharedUiDegreeCertSearchFormModule {}
+export class SharedFormDegreeCertSearchModule {}
