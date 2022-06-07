@@ -7,8 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class FormAttachmentComponent {
   @Input() title = `กรุณาแนบหลักฐานประกอบ`;
-  @Input() groups: string[] = [
-    'หนังสือแต่งตั้งผู้ประสานงาน',
-    'สำเนาบัตรประชาชน',
-  ];
+  @Input() groups: string[] = [];
 }
