@@ -12,6 +12,19 @@ import { ForbiddenPropertyComponent } from '@ksp/shared/ui/forbidden-property';
 export class LicenseRequestComponent {
   constructor(private router: Router, public dialog: MatDialog) {}
 
+  educationFiles = [
+    'สำเนาใบรายงานผลการศึกษา (Transcript)',
+    'สำเนาปริญญาบัตร หรือสำเนาหนังสือรับรองคุณวุฒิ',
+  ];
+
+  experienceFiles = [
+    'สำเนาหนังสือนำส่งแบบประเมินฉบับจริง',
+    'สำเนาคำสั่งแต่งตั้งคณะผู้ประเมินการปฏิบัติการสอน',
+    'สำเนาตารางสอนรายสัปดาห์',
+    'สำเนาคำสั่งแต่งตั้งปฏิบติหน้าที่',
+    'สำเนาสัญญาจ้างหรือทะเบียนประวัติหรือหลักฐานการขอปฏิบัติการสอน',
+  ];
+
   save() {
     const confirmDialog = this.dialog.open(ForbiddenPropertyComponent, {
       width: '900px',
