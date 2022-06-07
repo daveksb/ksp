@@ -1,4 +1,4 @@
-<div class="table-responsive">
+<!-- <div class="table-responsive">
   <table class="table">
     <thead>
       <tr>
@@ -46,4 +46,43 @@
       </tr>
     </tbody>
   </table>
+</div>
+ -->
+
+<div class="container">
+  <ksp-form-attachment title=""></ksp-form-attachment>
+
+  <div class="content__container">
+    <div class="table__container">
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="score">
+          <th mat-header-cell *matHeaderCellDef>คะแนน</th>
+          <td mat-cell *matCellDef="let element">{{ element.score }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="result">
+          <th mat-header-cell *matHeaderCellDef>ผลประเมิน</th>
+          <td mat-cell *matCellDef="let element">{{ element.result }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="announceDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่ประกาศผล</th>
+          <td mat-cell *matCellDef="let element">{{ element.announceDate }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="endDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่สิ้นสุด</th>
+          <td mat-cell *matCellDef="let element">{{ element.endDate }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  </div>
 </div>
