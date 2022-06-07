@@ -14,6 +14,16 @@ import {
 export class DegreeCertStepFourComponent {
   constructor(public dialog: MatDialog, private router: Router) {}
 
+  degreeCertFiles = [
+    'สำเนาใบอนุญาตปฏิบัติการสอน (transcript)',
+    'สำเนาใบประเมินการปฎิบัติการสอนในสถานศึกษา',
+    'สำเนาหนังสือนำส่งแบบประเมินฉบับจริง',
+    'สำเนาคำสั่งแต่งตั้งคณะผู้ประเมินการปฏิบัติการสอน',
+    'สำเนาตารางสอนรายสัปดาห์',
+    'สำเนาคำสั่งแต่งตั้งปฏิบัติหน้าที่',
+    'สำเนาสัญญาจ้างหรือทะเบียนประวัติหรือหลักฐานการขอปฏิบัติการสอน',
+  ];
+
   back() {
     this.router.navigate(['/', 'degree-cert', 'step-3']);
   }

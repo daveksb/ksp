@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 
 export interface DegreeInfo {
   order: number;
@@ -47,14 +48,24 @@ export const data: DegreeInfo[] = [
   styleUrls: ['./uni-service-home.component.css'],
 })
 export class UniServiceHomeComponent {
-  data: DegreeInfo[] = [];
+  displayedColumns: string[] = [
+    'order',
+    'degreeId',
+    'uniName',
+    'course',
+    'major',
+    'degreeName',
+    'educationLevel',
+  ];
+  dataSource = new MatTableDataSource<DegreeInfo>();
+
   constructor(public dialog: MatDialog) {}
 
   search() {
-    this.data = data;
+    this.dataSource.data = data;
   }
 
   clear() {
-    this.data = [];
+    this.dataSource.data = [];
   }
 }

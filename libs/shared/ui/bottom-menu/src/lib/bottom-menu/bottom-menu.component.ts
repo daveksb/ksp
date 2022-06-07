@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+export type ColorMode = 'green' | 'blue';
+
 @Component({
   selector: 'ksp-bottom-menu',
   templateUrl: './bottom-menu.component.html',
@@ -18,5 +20,5 @@ export class BottomMenuComponent {
   @Input() showCancelButton = true;
   @Input() showTempSaveButton = false;
   @Input() showSaveButton = false;
-  @Input() changeColorButtons = false;
+  @Input() colorMode: ColorMode = 'blue';
 }

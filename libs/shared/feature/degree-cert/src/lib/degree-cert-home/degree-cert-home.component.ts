@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
 export interface DegreeCertInfo {
@@ -14,6 +15,8 @@ export interface DegreeCertInfo {
   editDate: string;
   verify: string;
   consider: string;
+  edit: string;
+  print: string;
 }
 
 export const data: DegreeCertInfo[] = [
@@ -30,6 +33,8 @@ export const data: DegreeCertInfo[] = [
     editDate: '30 ส.ค. 2564',
     verify: 'ตรวจสอบแล้ว',
     consider: 'ตรวจสอบแล้ว',
+    edit: '',
+    print: '',
   },
   {
     order: 2,
@@ -42,8 +47,10 @@ export const data: DegreeCertInfo[] = [
     approveStatus: 'พิจารณา',
     approveDate: '30 ส.ค. 2564',
     editDate: '30 ส.ค. 2564',
-    verify: 'ตรวจสอบแล้ว',
-    consider: 'ตรวจสอบแล้ว',
+    verify: 'แก้ไข',
+    consider: 'แก้ไข',
+    edit: '',
+    print: '',
   },
   {
     order: 3,
@@ -57,7 +64,9 @@ export const data: DegreeCertInfo[] = [
     approveDate: '30 ส.ค. 2564',
     editDate: '30 ส.ค. 2564',
     verify: 'ตรวจสอบแล้ว',
-    consider: 'ตรวจสอบแล้ว',
+    consider: 'แก้ไข',
+    edit: '',
+    print: '',
   },
 ];
 
@@ -67,7 +76,24 @@ export const data: DegreeCertInfo[] = [
   styleUrls: ['./degree-cert-home.component.css'],
 })
 export class DegreeCertHomeComponent {
-  data: DegreeCertInfo[] = [];
+  displayedColumns: string[] = [
+    'order',
+    'degreeId',
+    'date',
+    'uni',
+    'major',
+    'verifyStatus',
+    'considerStatus',
+    'approveStatus',
+    'approveDate',
+    'editDate',
+    'verify',
+    'consider',
+    'edit',
+    'print',
+  ];
+  dataSource = new MatTableDataSource<DegreeCertInfo>();
+
   constructor(private router: Router) {}
 
   goToStep1() {
@@ -75,10 +101,10 @@ export class DegreeCertHomeComponent {
   }
 
   search() {
-    this.data = data;
+    this.dataSource.data = data;
   }
 
   clear() {
-    this.data = [];
+    this.dataSource.data = [];
   }
 }

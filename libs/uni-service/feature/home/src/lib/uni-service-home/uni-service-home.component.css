@@ -70,7 +70,6 @@
   font-size: 18px;
 }
 
-
 .table {
   margin: 0 0;
   background-color: #fff;
@@ -95,4 +94,12 @@
 
 .btn-search {
   margin-left: 10px;
+}
+
+tr.mat-header-row {
+  background-color: aliceblue;
+}
+
+.btn-clear {
+  background-color: #fff;
 }

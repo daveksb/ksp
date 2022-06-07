@@ -41,10 +41,13 @@
     </mat-tab>
     <mat-tab label="ข้อมูลผลการประเมินสมรรถนะ">
       <self-service-form-user-performance></self-service-form-user-performance>
-      <ksp-form-attachment
-        title=""
-        [groups]="['สำเนาผลการทดสอบ']"
-      ></ksp-form-attachment>
+      <div class="content__container">
+        <diV></diV>
+        <ksp-form-attachment
+          title=""
+          [groups]="['สำเนาผลการทดสอบ']"
+        ></ksp-form-attachment>
+      </div>
     </mat-tab>
   </mat-tab-group>
 

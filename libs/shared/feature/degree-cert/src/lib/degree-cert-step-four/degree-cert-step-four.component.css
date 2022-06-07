@@ -57,6 +57,7 @@
 .detail__header--secondary {
   font-size: 18px;
   color: #000000;
+  margin-bottom: 10px;
 }
 
 .table {

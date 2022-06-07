@@ -39,7 +39,7 @@ export const data: performanceInfo[] = [
   styleUrls: ['./form-user-performance.component.css'],
 })
 export class FormUserPerformanceComponent implements OnInit {
-  typesOfShoes: string[] = [
+  typesOfSubject: string[] = [
     'วิชาชีพครู',
     'วิชาภาษาไทยเพื่อการสื่อสาร',
     'วิชาภาษาอังกฤษเพื่อการสื่อสาร',

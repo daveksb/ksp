@@ -82,7 +82,7 @@
       </div>
 
       <div class="button__container">
-        <button (click)="clear()" type="button" class="btn btn-outline-primary">
+        <button (click)="clear()" type="button" class="btn btn-outline-primary btn-clear">
           ล้างข้อมูล
         </button>
         <button
@@ -106,47 +106,87 @@
     </div>
 
     <div class="table-responsive">
-      <table class="table">
-        <thead class="header__table">
-          <tr>
-            <th scope="col">ลำดับ</th>
-            <th scope="col">เลขที่ใบคำขอ</th>
-            <th scope="col">วันที่ส่งคำขอ</th>
-            <th scope="col">สถาบัน / มหาวิทยาลัย</th>
-            <th scope="col">ชื่อปริญญา / สาขาวิชา</th>
-            <th scope="col">สถานะตรวจสอบ</th>
-            <th scope="col">สถานะพิจารณา</th>
-            <th scope="col">สถานะรับรอง</th>
-            <th scope="col">วันที่รับรอง</th>
-            <th scope="col">วันที่แก้ไขล่าสุด</th>
-            <th scope="col">ตรวจสอบ</th>
-            <th scope="col">พิจารณา</th>
-            <th scope="col">แก้ไข</th>
-            <th scope="col">พิมพ์ใบคำขอ</th>
-          </tr>
-        </thead>
-        <tbody class="body__table">
-          <tr *ngFor="let item of data">
-            <td class="detail__table">{{ item.order }}</td>
-            <td class="detail__table">{{ item.degreeId }}</td>
-            <td class="detail__table">{{ item.date }}</td>
-            <td class="detail__table">{{ item.uni }}</td>
-            <td class="detail__table">{{ item.major }}</td>
-            <td class="detail__table">{{ item.verifyStatus }}</td>
-            <td class="detail__table">{{ item.considerStatus }}</td>
-            <td class="detail__table">{{ item.approveStatus }}</td>
-            <td class="detail__table">{{ item.approveDate }}</td>
-            <td class="detail__table">{{ item.editDate }}</td>
-            <td class="detail__table">{{ item.verify }}</td>
-            <td class="detail__table">{{ item.consider }}</td>
-            <td class="detail__table">
-              <img src="assets/images/edit.png" class="edit__icon" />
-            </td>
-            <td class="detail__table">
-              <img src="assets/images/print.png" class="edit__icon" />
-            </td>
-          </tr>
-        </tbody>
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="order">
+          <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+          <td mat-cell *matCellDef="let element">{{ element.order }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="degreeId">
+          <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
+          <td mat-cell *matCellDef="let element">{{ element.degreeId }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>วันที่ยื่นใบคำขอ</th>
+          <td mat-cell *matCellDef="let element">{{ element.date }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="uni">
+          <th mat-header-cell *matHeaderCellDef>สถาบัน/มหาวิทยาลัย</th>
+          <td mat-cell *matCellDef="let element">{{ element.uni }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="major">
+          <th mat-header-cell *matHeaderCellDef>ชื่อปริญญา/สาขาวิชา</th>
+          <td mat-cell *matCellDef="let element">{{ element.major }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="verifyStatus">
+          <th mat-header-cell *matHeaderCellDef>สถานะตรวจสอบ</th>
+          <td mat-cell *matCellDef="let element">{{ element.verifyStatus }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="considerStatus">
+          <th mat-header-cell *matHeaderCellDef>สถานะพิจารณา</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.considerStatus }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="approveStatus">
+          <th mat-header-cell *matHeaderCellDef>สถานะรับรอง</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.approveStatus }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="approveDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่รับรอง</th>
+          <td mat-cell *matCellDef="let element">{{ element.approveDate }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="editDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
+          <td mat-cell *matCellDef="let element">{{ element.editDate }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="verify">
+          <th mat-header-cell *matHeaderCellDef>ตรวจสอบ</th>
+          <td mat-cell *matCellDef="let element">{{ element.verify }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="consider">
+          <th mat-header-cell *matHeaderCellDef>พิจารณา</th>
+          <td mat-cell *matCellDef="let element">{{ element.consider }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef>แก้ไข</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-icon class="edit">edit</mat-icon>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="print">
+          <th mat-header-cell *matHeaderCellDef>พิมพ์ใบคำขอ</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-icon class="print">print</mat-icon>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
     </div>
   </div>

@@ -12,13 +12,20 @@
 }
 
 .form-label {
-  font-family: 'KSP Bold';
   font-size: 16px;
   color: #656565;
 }
 
+.form-control {
+  background-color: #f6f6f6;
+}
+
+.form-control-sm {
+  font-size: 16px;
+  color: #000000;
+}
+
 .form-select-sm {
-  font-family: 'KSP Bold';
   font-size: 16px;
   color: #000000;
 }
@@ -39,13 +46,11 @@
 }
 
 .title__label {
-  font-family: 'KSP Bold';
   font-size: 20px;
   margin-bottom: 12px;
 }
 
 .table {
-  font-family: 'KSP Bold';
   font-size: 14px;
   background-color: #edf8ff;
   border: 1px solid #ecedf3;
@@ -89,14 +94,6 @@
   color: #fff;
   padding: 4px 48px;
   margin: 14px;
-}
-
-@font-face {
-  font-family: 'KSP Regular';
-  src: URL('/assets/font/KSP/ttf/KSP\ Regular\ ver\ 1.00.ttf')
-    format('truetype');
-  font-family: 'KSP Bold';
-  src: URL('/assets/font/KSP/KSP\ Bold\ ver\ 1.00.ttf') format('truetype');
 }
 
 @media only screen and (max-width: 768px) {

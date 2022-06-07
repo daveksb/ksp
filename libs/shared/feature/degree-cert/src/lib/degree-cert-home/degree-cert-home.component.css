@@ -8,7 +8,7 @@
 
 .top-container {
   background-color: white;
-  margin: 15px;
+  margin: 0 15px 15px 15px;
 }
 
 .box__container {
@@ -76,24 +76,11 @@
 
 .table-responsive {
   overflow-x: auto;
-  margin: 10px;
+  margin: 10px 20px;
 }
 
 .table > :not(:first-child) {
   border-top: 0;
-}
-
-.header__table {
-  background-color: #edf6ff;
-  font-size: 16px;
-  white-space: nowrap;
-  color: #000000;
-}
-
-.body__table {
-  font-size: 16px;
-  color: #000000;
-  white-space: nowrap;
 }
 
 .btn-upload {
@@ -103,11 +90,24 @@
   margin-right: 10px;
 }
 
-.edit__icon {
-  width: 15px;
-  height: 15px;
-}
-
 .btn-search {
   margin-left: 10px;
+}
+
+tr.mat-header-row {
+  background-color: aliceblue;
+}
+
+.edit {
+  color: #0056ff;
+  cursor: pointer;
+}
+
+.print {
+  color: #0056ff;
+  cursor: pointer;
+}
+
+.btn-clear {
+  background-color: #fff;
 }
