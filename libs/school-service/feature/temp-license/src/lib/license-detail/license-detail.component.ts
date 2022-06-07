@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ForbiddenPropertyComponent } from '@ksp/school-service/dialog';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/ui/dialog';
+import { ForbiddenPropertyComponent } from '@ksp/shared/ui/forbidden-property';
 
 @Component({
   selector: 'school-service-license-detail',
