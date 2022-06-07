@@ -39,6 +39,7 @@ export class StepFourComponent {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '375px',
       data: {
+        header: 'ยืนยันข้อมูลสำเร็จ',
         content: `วันที่ : 12 มกราคม 2565?
         เลขที่ใบคำขอ : UNIUS 6406000162`,
         subContent: `กรุณาตรวจสอบสถานะใบคำขอหรือรหัสเข้าใช้งาน?

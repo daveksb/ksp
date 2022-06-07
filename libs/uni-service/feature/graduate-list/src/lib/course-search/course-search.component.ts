@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
 export interface StudentInfo {
   order: number;
+  edit: string;
   sendDate: string;
   degreeCode: string;
   major: string;
@@ -11,11 +13,13 @@ export interface StudentInfo {
   studentStatus: string;
   graduateStatus: string;
   editDate: string;
+  print: string;
 }
 
 export const data: StudentInfo[] = [
   {
     order: 1,
+    edit: '',
     sendDate: '12 ส.ค. 2564',
     degreeCode: '069784',
     major: 'การศึกษาบัณฑิต สาขาวิชาเคมี หลักสูตรปรับปรุง พ.ศ.2562',
@@ -24,9 +28,11 @@ export const data: StudentInfo[] = [
     studentStatus: 'สร้าง',
     graduateStatus: '-',
     editDate: '12 ส.ค. 2564',
+    print: '',
   },
   {
     order: 2,
+    edit: '',
     sendDate: '12 ส.ค. 2564',
     degreeCode: '069784',
     major: 'การศึกษาบัณฑิต สาขาวิชาเคมี หลักสูตรปรับปรุง พ.ศ.2562',
@@ -35,9 +41,11 @@ export const data: StudentInfo[] = [
     studentStatus: 'รับข้อมูล',
     graduateStatus: 'สร้าง',
     editDate: '12 ส.ค. 2564',
+    print: '',
   },
   {
     order: 3,
+    edit: '',
     sendDate: '12 ส.ค. 2564',
     degreeCode: '069784',
     major: 'การศึกษาบัณฑิต สาขาวิชาเคมี หลักสูตรปรับปรุง พ.ศ.2562',
@@ -46,6 +54,7 @@ export const data: StudentInfo[] = [
     studentStatus: 'รับข้อมูล',
     graduateStatus: 'รับข้อมูล',
     editDate: '12 ส.ค. 2564',
+    print: '',
   },
 ];
 
@@ -55,7 +64,20 @@ export const data: StudentInfo[] = [
   styleUrls: ['./course-search.component.scss'],
 })
 export class CourseSearchComponent {
-  data: StudentInfo[] = [];
+  displayedColumns: string[] = [
+    'order',
+    'edit',
+    'sendDate',
+    'degreeCode',
+    'major',
+    'branch',
+    'degreeName',
+    'studentStatus',
+    'graduateStatus',
+    'editDate',
+    'print',
+  ];
+  dataSource = new MatTableDataSource<StudentInfo>();
 
   constructor(private router: Router) {}
 
@@ -64,10 +86,10 @@ export class CourseSearchComponent {
   }
 
   search() {
-    this.data = data;
+    this.dataSource.data = data;
   }
 
   clear() {
-    this.data = [];
+    this.dataSource.data = [];
   }
 }

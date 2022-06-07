@@ -20,3 +20,9 @@
   padding: 36px;
   margin: 15px 55px;
 }
+
+.content__container {
+  display: grid;
+  grid-template-columns: 20% auto;
+  grid-column-gap: 16px;
+}

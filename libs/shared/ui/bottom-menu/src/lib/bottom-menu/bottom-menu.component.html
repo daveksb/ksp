@@ -15,7 +15,10 @@
       *ngIf="showCancelButton"
       (click)="cancelClicked.emit(true)"
       type="button"
-      class="btn btn-outline-success"
+      [ngClass]="{
+        'btn btn-outline-success': colorMode === 'green',
+        'btn btn-outline-primary': colorMode === 'blue'
+      }"
     >
       ยกเลิก
     </button>
@@ -31,7 +34,11 @@
       *ngIf="showSaveButton"
       (click)="saveClicked.emit(true)"
       type="button"
-      class="btn btn-success"
+      id="save__button"
+      [ngClass]="{
+        'btn btn-success': colorMode === 'green',
+        'btn btn-primary': colorMode === 'blue'
+      }"
     >
       บันทึก
     </button>
@@ -42,7 +49,7 @@
       (click)="nextClicked.emit(true)"
       *ngIf="!isLastPage"
       type="button"
-      class="btn btn-outline-success"
+      class="btn btn-outline-warning"
     >
       ถัดไป
     </button>

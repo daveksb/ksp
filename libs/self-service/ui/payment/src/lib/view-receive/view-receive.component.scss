@@ -1,0 +1,31 @@
+.recive__content {
+  width: 450px;
+  height: 450px;
+  background-color: #e5e5e5;
+  text-align: center;
+}
+
+.header {
+  font-size: 22px;
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.footer__label {
+  color: #3f89fe;
+}
+
+.icon__box {
+  margin-right: 6px;
+}
+
+.receive__content {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}

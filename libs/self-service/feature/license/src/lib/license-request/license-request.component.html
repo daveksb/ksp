@@ -34,16 +34,24 @@
     </mat-tab>
     <mat-tab label="ข้อมูลผลการประเมินสมรรถนะ">
       <self-service-form-user-performance></self-service-form-user-performance>
-      <ksp-form-attachment
-        title=""
-        [groups]="['สำเนาผลการทดสอบ']"
-      ></ksp-form-attachment>
+      <div class="content__container">
+        <diV></diV>
+        <ksp-form-attachment
+          title=""
+          [groups]="['สำเนาผลการทดสอบ']"
+        ></ksp-form-attachment>
+      </div>
     </mat-tab>
   </mat-tab-group>
 
   <div class="footer">
     <button type="button" class="btn btn-light">ล้างข้อมูล</button>
-    <button (click)="save()" id="next__button" type="button" class="btn btn-primary">
+    <button
+      (click)="save()"
+      id="next__button"
+      type="button"
+      class="btn btn-primary"
+    >
       ต่อไป
     </button>
   </div>

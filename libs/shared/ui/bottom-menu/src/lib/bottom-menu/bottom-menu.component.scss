@@ -14,14 +14,14 @@
   justify-self: end;
 }
 
-.btn-success {
-  margin-left: 10px;
-}
-
 .footer-2 {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#save__button {
+  margin-left: 10px;
 }
 
 @media (max-width: 1200px) {
