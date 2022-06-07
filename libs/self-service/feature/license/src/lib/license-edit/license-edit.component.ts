@@ -11,6 +11,12 @@ import {
   styleUrls: ['./license-edit.component.css'],
 })
 export class LicenseEditComponent {
+  uploadGroups = [
+    'สำเนาหนังสือสำคัญการเปลี่ยนชื่อ/ชื่อสกุล/เปลี่ยนหรือเพิ่มคำนำหน้าชื่อ',
+    'สำเนาหลักฐานการสมรส หรือการสิ้นสุดการสมรส (ถ้ามี)',
+    'สำเนาหนังสือรับรองการใช้คำหน้านามหญิง (ถ้ามี)',
+  ];
+
   constructor(public dialog: MatDialog) {}
 
   onConfirm() {
