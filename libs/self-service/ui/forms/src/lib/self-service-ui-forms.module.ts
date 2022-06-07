@@ -10,9 +10,19 @@ import { FormVerifyOtpComponent } from './form-verify-otp/form-verify-otp.compon
 import { FormVerifyPhoneComponent } from './form-verify-phone/form-verify-phone.component';
 import { RouterModule } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
+import { SharedUiFormModule } from '@ksp/shared/ui/form';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
-  imports: [CommonModule, RouterModule, MatDialogModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatDialogModule,
+    MatTableModule,
+    SharedUiFormModule,
+    MatListModule,
+  ],
   declarations: [
     FormUploadImageComponent,
     FormUserEducationComponent,
