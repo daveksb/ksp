@@ -76,8 +76,6 @@ export const data: DegreeCertInfo[] = [
   styleUrls: ['./degree-cert-home.component.css'],
 })
 export class DegreeCertHomeComponent {
-  constructor(private router: Router) {}
-
   displayedColumns: string[] = [
     'order',
     'degreeId',
@@ -95,6 +93,8 @@ export class DegreeCertHomeComponent {
     'print',
   ];
   dataSource = new MatTableDataSource<DegreeCertInfo>();
+
+  constructor(private router: Router) {}
 
   goToStep1() {
     this.router.navigate(['/', 'degree-cert', 'step-1']);

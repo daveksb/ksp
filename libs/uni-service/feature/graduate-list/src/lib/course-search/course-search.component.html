@@ -105,6 +105,80 @@
   <div class="bottom-container">
     <div class="bottom-content">
       <div class="table-responsive">
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="order">
+            <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+            <td mat-cell *matCellDef="let element">{{ element.order }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef>ยื่น/แก้ไข</th>
+            <td mat-cell *matCellDef="let element">
+              <mat-icon (click)="nextPage()" class="edit">edit</mat-icon>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="sendDate">
+            <th mat-header-cell *matHeaderCellDef>วันที่ยื่นใบคำขอ</th>
+            <td mat-cell *matCellDef="let element">{{ element.sendDate }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="degreeCode">
+            <th mat-header-cell *matHeaderCellDef>รหัสปริญญา</th>
+            <td mat-cell *matCellDef="let element">{{ element.degreeCode }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="major">
+            <th mat-header-cell *matHeaderCellDef>ชื่อหลักสูตร</th>
+            <td mat-cell *matCellDef="let element">{{ element.major }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="branch">
+            <th mat-header-cell *matHeaderCellDef>สาขาวิชา</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.branch }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="degreeName">
+            <th mat-header-cell *matHeaderCellDef>ชื่อปริญญา</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.degreeName }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="studentStatus">
+            <th mat-header-cell *matHeaderCellDef>สถานะรายชื่อผู้เข้า/th></th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.studentStatus }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="graduateStatus">
+            <th mat-header-cell *matHeaderCellDef>สถานะรายชื่อผู้สำเร็จ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.graduateStatus }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="editDate">
+            <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
+            <td mat-cell *matCellDef="let element">{{ element.editDate }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="print">
+            <th mat-header-cell *matHeaderCellDef>พิมพ์ใบคำขอ</th>
+            <td mat-cell *matCellDef="let element">
+              <mat-icon class="print">print</mat-icon>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+
+      <!-- <div class="table-responsive">
         <table class="table">
           <thead class="header__table">
             <tr>
@@ -141,7 +215,7 @@
             </tr>
           </tbody>
         </table>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
