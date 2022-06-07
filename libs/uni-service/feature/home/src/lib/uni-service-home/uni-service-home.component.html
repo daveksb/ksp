@@ -87,10 +87,14 @@
       </div>
 
       <div class="button__container">
-        <button (click)="clear()" type="button" class="btn btn-outline-primary">
+        <button (click)="clear()" type="button" class="btn btn-outline-primary btn-clear">
           ล้างข้อมูล
         </button>
-        <button (click)="search()" type="button" class="btn btn-primary btn-search">
+        <button
+          (click)="search()"
+          type="button"
+          class="btn btn-primary btn-search"
+        >
           ค้นหา
         </button>
       </div>
@@ -101,29 +105,48 @@
   <div class="bottom-container">
     <div class="bottom-content">
       <div class="table-responsive">
-        <table class="table">
-          <thead class="header__table">
-            <tr>
-              <th scope="col">ลำดับ</th>
-              <th scope="col">รหัสปริญญา</th>
-              <th scope="col">รายชื่อมหาวิทยาลัย</th>
-              <th scope="col">ชื่อหลักสูตร</th>
-              <th scope="col">สาขาวิชา</th>
-              <th scope="col">ชื่อปริญญา</th>
-              <th scope="col">ระดับการศึกษาที่ขอรับรอง</th>
-            </tr>
-          </thead>
-          <tbody class="body__table">
-            <tr *ngFor="let item of data">
-              <td class="detail__table">{{ item.order }}</td>
-              <td class="detail__table">{{ item.degreeId }}</td>
-              <td class="detail__table">{{ item.uniName }}</td>
-              <td class="detail__table">{{ item.course }}</td>
-              <td class="detail__table">{{ item.major }}</td>
-              <td class="detail__table">{{ item.degreeName }}</td>
-              <td class="detail__table">{{ item.educationLevel }}</td>
-            </tr>
-          </tbody>
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="order">
+            <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+            <td mat-cell *matCellDef="let element">{{ element.order }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="degreeId">
+            <th mat-header-cell *matHeaderCellDef>รหัสปริญญา</th>
+            <td mat-cell *matCellDef="let element">{{ element.degreeId }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="uniName">
+            <th mat-header-cell *matHeaderCellDef>รายชื่อมหาวิทยาลัย</th>
+            <td mat-cell *matCellDef="let element">{{ element.uniName }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="course">
+            <th mat-header-cell *matHeaderCellDef>ชื่อหลักสูตร</th>
+            <td mat-cell *matCellDef="let element">{{ element.course }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="major">
+            <th mat-header-cell *matHeaderCellDef>สาขาวิชา</th>
+            <td mat-cell *matCellDef="let element">{{ element.major }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="degreeName">
+            <th mat-header-cell *matHeaderCellDef>ชื่อปริญญา</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.degreeName }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="educationLevel">
+            <th mat-header-cell *matHeaderCellDef>ระดับการศึกษาที่ขอรับรอง</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.educationLevel }}
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
       </div>
     </div>
