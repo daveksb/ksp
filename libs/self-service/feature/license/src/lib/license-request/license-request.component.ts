@@ -43,8 +43,8 @@ export class LicenseRequestComponent {
       data: {
         title: `คุณต้องการบันทึกข้อมูล
         ใช่หรือไม่?`,
-        btnLabel: 'บันทึก',
-        cancelBtnLabel: 'ยื่นแบบคำขอ',
+        btnLabel: 'ยื่นแบบคำขอ',
+        cancelBtnLabel: 'บันทึก',
       },
     });
 
