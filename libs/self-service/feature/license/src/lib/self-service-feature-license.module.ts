@@ -10,8 +10,12 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 import { SharedUiFormModule } from '@ksp/shared/ui/form';
 import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master-page';
-import { PaymentChannelComponent, PromptpayComponent } from '@ksp/self-service/ui/payment';
+import {
+  PaymentChannelComponent,
+  PromptpayComponent,
+} from '@ksp/self-service/ui/payment';
 import { PageNotFoundComponent } from '@ksp/shared/ui/page-not-found';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 export const routes: Routes = [
   {
@@ -51,6 +55,7 @@ export const routes: Routes = [
     SharedUiFormModule,
     SharedUiSideMenuModule,
     MatTabsModule,
+    MatExpansionModule,
     SharedUiTopNavModule,
     RouterModule.forChild(routes),
   ],
