@@ -1,12 +1,12 @@
 .button__container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 25px;
 }
 
 .button__content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 18px;
+  display: flex;
+  justify-content: center;
 }
 
 .button__content--left {
@@ -15,27 +15,25 @@
   margin-right: 200px;
 }
 
-.cancel__button {
-  width: 150px;
-}
-
 .container {
-  max-width: 1440px;
-  padding: 0;
+  max-width: 100%;
+  padding-bottom: 25px;
   background-color: #f6f6f6;
 }
 
 .title__label {
   font-size: 22px;
   color: #000000;
-  margin: 24px 128px 12px 128px;
+  padding: 24px 128px 0 128px;
 }
+
 .content__container {
   background: #ffffff;
   border-radius: 5px;
   padding: 24px;
   margin: 0px 128px;
 }
+
 .content__header {
   display: flex;
 }
@@ -45,35 +43,43 @@
   color: #808080;
   margin-right: 24px;
 }
+
 .label__content--primary {
   color: #f68b33;
 }
+
 .label__content--secondary {
   color: #0056ff;
 }
+
 .detail__container {
   background-color: #f9f9fa;
   padding: 16px;
-  margin-bottom: 24px;
+  margin: 24px 0;
 }
+
 .detail__content {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 18px;
 }
+
 .detail__content--secondary {
   display: grid;
   grid-template-columns: 150px 1fr 1fr;
   grid-column-gap: 18px;
 }
+
 .form-label {
   font-size: 18px;
   color: #656565;
 }
+
 .form-control {
   font-size: 18px;
   background-color: #fff;
 }
+
 .form-select {
   font-size: 18px;
 }
@@ -82,54 +88,7 @@
   font-size: 22px;
   color: #0056ff;
 }
-.btn-primary {
-  font-size: 20px;
-  background-color: #0056ff;
-  width: 100%;
-  border-radius: 4px;
-}
-.btn-third {
-  font-size: 18px;
-  background-color: white;
-  color: #f68b33;
-  width: 100%;
-  border-radius: 4px;
-  border: 1px solid #f68b33;
-}
-.btn-fourth {
-  font-size: 18px;
-  background-color: white;
-  color: #0056ff;
-  width: 100%;
-  border-radius: 4px;
-  border: 1px solid #0056ff;
-}
-.btn-upload {
-  font-size: 16px;
-  background-color: #0056ff;
-  color: #fff;
-  border-radius: 4px;
-  width: 120px;
-  height: 30px;
-}
-.table {
-  background-color: #fff;
-}
-.table > :not(:first-child) {
-  border-top: 0;
-}
-.header__table {
-  background-color: #edf6ff;
-  font-size: 16px;
-}
-.body__table {
-  font-size: 16px;
-  color: #808080;
-}
-.title__table {
-  text-align: center;
-}
-.detail__table {
-  text-align: center;
-  vertical-align: middle;
+
+#btn-save {
+  margin-left: 10px;
 }

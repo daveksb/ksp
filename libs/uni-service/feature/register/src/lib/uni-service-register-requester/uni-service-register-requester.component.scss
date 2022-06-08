@@ -1,52 +1,52 @@
 .container {
-  max-width: 1440px;
-  padding: 0;
+  max-width: 100%;
+  padding-bottom: 25px;
   background-color: #f6f6f6;
 }
-.header__container {
-  background-image: url('/assets/images/img-uni/top-bar-img.png');
-  background-size: cover;
-}
-.haeder__label {
-  text-align: center;
-  padding: 14px 0;
-  font-size: 28px;
-}
+
 .title__label {
   font-size: 22px;
   color: #000000;
-  margin: 24px 128px 12px 128px;
+  padding: 24px 128px 0 128px;
 }
+
 .content__container {
   background: #ffffff;
   border-radius: 5px;
   padding: 24px;
   margin: 0px 128px;
 }
+
 .content__header {
   display: flex;
 }
+
 .img__step {
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
+  margin: 30px;
 }
+
 .label__content {
   font-size: 18px;
   color: #808080;
   margin-right: 24px;
 }
+
 .label__content--primary {
   color: #f68b33;
 }
+
 .label__content--secondary {
   color: #0056ff;
 }
+
 .detail__container {
   background-color: #f9f9fa;
   padding: 16px;
   margin-bottom: 24px;
 }
+
 .detail__content {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -54,12 +54,14 @@
 }
 
 .form-label {
-  font-size: 16px;
+  font-size: 18px;
   color: #656565;
 }
 .form-control {
   background-color: #fff;
+  font-size: 18px;
 }
+
 .search__content {
   background-image: url(/assets/images/img-uni/search.svg);
   background-size: 12px;

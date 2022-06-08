@@ -1,5 +1,6 @@
+<uni-service-top-nav>ขอถอดถอนผู้ประสานงาน</uni-service-top-nav>
+
 <div class="container">
-  <ksp-top-nav>ขอถอดถอนผู้ประสานงาน</ksp-top-nav>
   <div class="content__container">
     <div class="header">ค้นหาหน่วยงาน/สถานศึกษา</div>
     <hr />
@@ -76,12 +77,17 @@
       </div>
     </div>
     <div class="button__container">
-      <button (click)="clear()" class="btn__cancel">ล้างข้อมูล</button>
-      <button (click)="search()" class="btn__search">ค้นหา</button>
+      <button (click)="clear()" class="btn btn-outline-primary">
+        ล้างข้อมูล
+      </button>
+      <button (click)="search()" id="btn-search" class="btn btn-primary">
+        ค้นหา
+      </button>
     </div>
+
     <hr />
 
-    <div class="detail__header">ผลการค้นหา</div>
+    <div class="table__header">ผลการค้นหา</div>
     <div class="table-responsive">
       <table class="table">
         <thead class="header__table">
@@ -103,7 +109,7 @@
       </table>
     </div>
 
-    <div class="confirm-button__container">
+    <div class="button__container-2">
       <button class="btn-confirm" (click)="confirm()">ยืนยัน</button>
     </div>
   </div>

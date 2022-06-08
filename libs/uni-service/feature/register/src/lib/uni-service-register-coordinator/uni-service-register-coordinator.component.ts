@@ -15,9 +15,10 @@ import { UniversitySearchComponent } from '@ksp/shared/ui/university-search';
 export class UniServiceRegisterCoordinatorComponent {
   constructor(private router: Router, public dialog: MatDialog) {}
 
+  registerFiles = ['หนังสือแต่งตั้งผู้ประสานงาน', 'สำเนาบัตรประชาชน'];
+
   search() {
     const dialogRef = this.dialog.open(UniversitySearchComponent, {
-      height: '900px',
       width: '1200px',
     });
 
@@ -40,7 +41,6 @@ export class UniServiceRegisterCoordinatorComponent {
 
   confirm() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      height: '200px',
       width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,

@@ -1,6 +1,6 @@
-<div class="container">
-  <uni-service-top-nav>ลงทะเบียนขอรับรหัสเข้าใช้งาน</uni-service-top-nav>
+<uni-service-top-nav>ลงทะเบียนขอรับรหัสเข้าใช้งาน</uni-service-top-nav>
 
+<div class="container">
   <div class="title__label">
     รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ (ผู้ประสานงาน / ผู้รับผิดชอบ)
   </div>
@@ -33,13 +33,6 @@
             type="search"
             placeholder="กรุณาเลือก"
           />
-          <!-- <select
-            class="search__content form-select form-select-sm"
-            aria-label=".form-select-sm example"
-          >
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-          </select> -->
         </div>
         <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label"
@@ -51,27 +44,20 @@
             type="search"
             placeholder="กรุณาเลือก"
           />
-          <!--           <select
-            class="search__content form-select form-select-sm"
-            aria-label=".form-select-sm example"
-          >
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-          </select> -->
         </div>
       </div>
     </div>
 
     <uni-service-form-register-coordinator-info></uni-service-form-register-coordinator-info>
 
-    <uni-service-form-register-file-upload></uni-service-form-register-file-upload>
+    <ksp-form-attachment [groups]="registerFiles"></ksp-form-attachment>
 
     <div class="footer__container">
       <div class="footer__content--left">
         <button
           (click)="prevPage()"
           type="button"
-          class="btn btn-third btn-sm label__button"
+          class="btn btn-outline-warning"
         >
           ย้อนกลับ
         </button>
@@ -80,14 +66,15 @@
         <button
           (click)="cancel()"
           type="button"
-          class="btn btn-fourth btn-sm label__button"
+          class="btn btn-outline-primary"
         >
           ยกเลิก
         </button>
         <button
           (click)="confirm()"
+          id="btn-save"
           type="button"
-          class="btn btn-primary btn-sm label__button"
+          class="btn btn-primary"
         >
           บันทึก
         </button>

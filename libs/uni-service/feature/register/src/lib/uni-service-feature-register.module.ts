@@ -6,6 +6,7 @@ import { UniServiceRegisterRequesterComponent } from './uni-service-register-req
 import { UniServiceRegisterCoordinatorComponent } from './uni-service-register-coordinator/uni-service-register-coordinator.component';
 import { UniServiceFeatureRegisterRoutingModule } from './uni-service-feature-register-routing.module';
 import { UniServiceUiNavModule } from '@ksp/uni-service/ui/nav';
+import { SharedUiFormModule } from '@ksp/shared/ui/form';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { UniServiceUiNavModule } from '@ksp/uni-service/ui/nav';
     UniServiceFeatureRegisterRoutingModule,
     RouterModule,
     UniServiceUiFormsModule,
-    UniServiceUiNavModule
+    UniServiceUiNavModule,
+    SharedUiFormModule
   ],
   declarations: [
     UniServiceRegisterRequesterComponent,
