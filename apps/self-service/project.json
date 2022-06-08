@@ -99,7 +99,7 @@
       "options": {
         "outputPath": "dist/apps/self-service",
         "siteId": "dad36791-c9ee-4b6a-8909-b0519e2f562e",
-        "noBuild": false
+        "noBuild": true
       }
     }
   },
