@@ -11,14 +11,12 @@
   background-color: #f9f9fa;
 }
 
-.detail__header {
+.group__header {
   font-size: 22px;
-  color: #0056ff;
 }
 
-.detail__header--secondary {
-  font-size: 22px;
-  color: #000000;
+.group__header--blue {
+  color: #0056ff;
 }
 
 .detail__content {
