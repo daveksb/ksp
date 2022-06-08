@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatOptionModule } from '@angular/material/core';
 import { SharedDirectiveModule } from '@ksp/shared/directive';
+import { SharedFormEducationLevelModule } from '@ksp/shared/form/education-level';
 
 @NgModule({
   imports: [
@@ -28,6 +29,8 @@ import { SharedDirectiveModule } from '@ksp/shared/directive';
     SharedUiFormModule,
     MatListModule,
     SharedDirectiveModule,
+    ReactiveFormsModule,
+    SharedFormEducationLevelModule
   ],
   declarations: [
     FormUploadImageComponent,
