@@ -1,0 +1,17 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/shared/directive/src",
+  "prefix": "ksp",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/directive/**/*.ts",
+          "libs/shared/directive/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

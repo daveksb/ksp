@@ -2,12 +2,13 @@
 
 ## Build
 
-Run `ng build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `nx run my-app:build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
 ## Deploy
 
 Create sh file and put below command
 
+nx run "$1":build
 NETLIFY_TOKEN=xxxxxxxxxxxxx ng deploy "$1"
 
 then run "sh deploy xxx-service" to deploy

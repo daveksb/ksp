@@ -1,0 +1,17 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/shared/interface/src",
+  "prefix": "ksp",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/interface/**/*.ts",
+          "libs/shared/interface/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

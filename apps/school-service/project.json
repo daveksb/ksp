@@ -99,7 +99,7 @@
       "options": {
         "outputPath": "dist/apps/school-service",
         "siteId": "b3164b84-b992-4605-bc6e-3ec8dd992fe0",
-        "noBuild": false
+        "noBuild": true
       }
     }
   },
