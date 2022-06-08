@@ -1,13 +1,14 @@
-.detail__container {
-  background-color: #f4faff;
+.group__container {
   padding: 16px;
   margin-bottom: 24px;
 }
 
-.detail__container--secondary {
+.group__container--blue {
+  background-color: #f4faff;
+}
+
+.group__container--grey {
   background-color: #f9f9fa;
-  padding: 16px;
-  margin-bottom: 24px;
 }
 
 .detail__header {
