@@ -14,109 +14,11 @@
 
     <hr />
 
-    <ksp-degree-cert-step-one></ksp-degree-cert-step-one>
+    <ksp-degree-cert-step-one
+      (degreeType)="degreeChanged($event)"
+    ></ksp-degree-cert-step-one>
 
-    <div class="detail__container--secondary">
-      <div class="detail__header--secondary">
-        ผู้ประสานงาน<span class="label__text"
-          >*กรุณาระบุเจ้าหน้าที่ที่สำนักงานเลขาธิการสามารถติดต่อประสานงาน
-          แจ้งข้อมูลต่างๆที่เกี่ยวข้องกับการรับรองปริญญาฯเท่านั้น</span
-        >
-      </div>
-
-      <div class="detail__content--fifth">
-        <div>
-          <label for="exampleFormControlInput1" class="form-label"
-            >คำนำหน้าชื่อภาษาไทย</label
-          >
-          <select
-            class="search__content form-select form-select-sm"
-            aria-label=".form-select-sm example"
-          >
-            <option selected>นางสาว</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
-        <div>
-          <label for="exampleFormControlInput1" class="form-label"
-            >ชื่อภาษาไทย
-          </label>
-          <input
-            class="form-control form-control-sm"
-            type="text"
-            placeholder="กรุณากรอก"
-          />
-        </div>
-        <div>
-          <label for="exampleFormControlInput1" class="form-label"
-            >นามสกุลภาษาไทย
-          </label>
-          <input
-            class="form-control form-control-sm"
-            type="text"
-            placeholder="กรุณากรอก"
-          />
-        </div>
-      </div>
-      <div class="detail__content">
-        <div>
-          <label for="exampleFormControlInput1" class="form-label"
-            >ตำแหน่ง</label
-          >
-          <input
-            class="form-control form-control-sm"
-            type="text"
-            placeholder="กรุณากรอก"
-          />
-        </div>
-        <div>
-          <label for="exampleFormControlInput1" class="form-label"
-            >เบอร์โทรศัพท์มือถือ</label
-          >
-          <input
-            class="form-control form-control-sm"
-            type="text"
-            placeholder="กรุณากรอก"
-          />
-        </div>
-      </div>
-      <div class="detail__content">
-        <div>
-          <label for="exampleFormControlInput1" class="form-label"
-            >เบอร์โทรศัพท์สำนักงาน / ที่ทำการ</label
-          >
-          <input
-            class="form-control form-control-sm"
-            type="text"
-            placeholder="กรุณากรอก"
-          />
-        </div>
-        <div>
-          <label for="exampleFormControlInput1" class="form-label"
-            >เบอร์โทรสาร</label
-          >
-          <input
-            class="form-control form-control-sm"
-            type="text"
-            placeholder="กรุณากรอก"
-          />
-        </div>
-      </div>
-      <div class="detail__content">
-        <div>
-          <label for="exampleFormControlInput1" class="form-label"
-            >อีเมล์</label
-          >
-          <input
-            class="form-control form-control-sm"
-            type="text"
-            placeholder="กรุณากรอก"
-          />
-        </div>
-      </div>
-    </div>
+    <uni-service-degree-cert-coordinator></uni-service-degree-cert-coordinator>
 
     <div class="box__footer">
       <span class="label__text"

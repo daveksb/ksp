@@ -7,7 +7,11 @@ import { StepTwoComponent } from './step-two/step-two.component';
 import { StepThreeComponent } from './step-three/step-three.component';
 import { StepFourComponent } from './step-four/step-four.component';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
-import { DegreeCertHomeComponent, SharedFeatureDegreeCertModule } from '@ksp/shared/feature/degree-cert';
+import {
+  DegreeCertHomeComponent,
+  SharedFeatureDegreeCertModule,
+} from '@ksp/shared/feature/degree-cert';
+import { UniServiceUiFormsModule } from '@ksp/uni-service/ui/forms';
 
 const routes: Routes = [
   {
@@ -47,6 +51,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SharedUiBottomMenuModule,
     SharedFeatureDegreeCertModule,
+    UniServiceUiFormsModule,
   ],
   declarations: [
     StepOneComponent,
