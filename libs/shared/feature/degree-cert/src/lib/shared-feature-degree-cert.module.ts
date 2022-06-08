@@ -11,9 +11,20 @@ import { SharedUiDegreeCertTabContentModule } from '@ksp/shared/ui/degree-cert-t
 import { SharedUiFormModule } from '@ksp/shared/ui/form';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SharedDirectiveModule } from '@ksp/shared/directive';
 
 @NgModule({
-  imports: [CommonModule, MatTabsModule, SharedUiDegreeCertTabContentModule, SharedUiFormModule, MatTableModule, MatIconModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatTabsModule,
+    SharedUiDegreeCertTabContentModule,
+    SharedUiFormModule,
+    MatTableModule,
+    MatIconModule,
+    SharedDirectiveModule,
+  ],
   declarations: [
     DegreeCertHomeComponent,
     DegreeCertStepOneComponent,
@@ -21,7 +32,6 @@ import { MatIconModule } from '@angular/material/icon';
     DegreeCertStepThreeComponent,
     DegreeCertStepFourComponent,
     DegreeCertStepFiveComponent,
-
   ],
   exports: [
     DegreeCertHomeComponent,
@@ -30,7 +40,6 @@ import { MatIconModule } from '@angular/material/icon';
     DegreeCertStepThreeComponent,
     DegreeCertStepFourComponent,
     DegreeCertStepFiveComponent,
-
   ],
 })
 export class SharedFeatureDegreeCertModule {}
