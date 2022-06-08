@@ -10,6 +10,8 @@ export class StepOneComponent {
   constructor(private router: Router) {}
 
   nextPage() {
-    this.router.navigate(['./', 'degree-cert', 'step-2']);
+    this.router.navigate(['/', 'degree-cert', 'step-2'], {
+      queryParams: { type: 1 },
+    });
   }
 }

@@ -17,11 +17,14 @@ import { DynamicComponent, ListData } from '@ksp/shared/interface';
 })
 export class DegreeCertStepOneComponent implements OnInit {
   courseTypes: ListData[] = [];
+  degreeTypes: ListData[] = [];
+
   @Input() isViewForm = false;
   @ViewChild(DynamicComponentDirective, { static: true })
   myHost!: DynamicComponentDirective;
 
   step1Form = this.fb.group({
+    degreeType: [''],
     courseType: [''],
   });
 
@@ -29,14 +32,11 @@ export class DegreeCertStepOneComponent implements OnInit {
 
   ngOnInit(): void {
     this.courseTypes = courseTypes;
+    this.degreeTypes = degreeTypes;
 
     this.step1Form.controls['courseType'].valueChanges.subscribe((res) => {
       this.loadComponent(Number(res));
     });
-  }
-
-  goToStep2() {
-    this.router.navigate(['/', 'degree-cert', 'step-2']);
   }
 
   loadComponent(index: number) {
@@ -45,6 +45,41 @@ export class DegreeCertStepOneComponent implements OnInit {
     viewContainerRef.createComponent<DynamicComponent>(componentList[index]);
   }
 }
+
+const degreeTypes: ListData[] = [
+  {
+    value: 0,
+    label: 'ปริญญาตรีทางการศึกษา (หลักสูตร 4 ปี)',
+  },
+  {
+    value: 1,
+    label: 'ปริญญาตรีทางการศึกษา (หลักสูตร 5 ปี)',
+  },
+  {
+    value: 2,
+    label: 'ประกาศนียบัตรบัณฑิตทางการศึกษา (วิชาชีพครู)',
+  },
+  {
+    value: 3,
+    label: 'ประกาศนียบัตรบัณฑิตทางการศึกษา (วิชาชีพบริหาร)',
+  },
+  {
+    value: 4,
+    label: 'ปริญญาโททางการศึกษา (วิชาชีพครู)',
+  },
+  {
+    value: 5,
+    label: 'ปริญญาโททางการศึกษา (วิชาชีพบริหาร)',
+  },
+  {
+    value: 6,
+    label: 'ปริญญาเอกทางการศึกษา (วิชาชีพครู)',
+  },
+  {
+    value: 7,
+    label: 'ปริญญาเอกทางการศึกษา (วิชาชีพบริหาร)',
+  },
+];
 
 const courseTypes: ListData[] = [
   {
