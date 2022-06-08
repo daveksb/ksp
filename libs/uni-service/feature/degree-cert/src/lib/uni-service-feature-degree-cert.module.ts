@@ -30,6 +30,7 @@ const routes: Routes = [
         path: 'step-2',
         component: StepTwoComponent,
       },
+     
       {
         path: 'step-3',
         component: StepThreeComponent,

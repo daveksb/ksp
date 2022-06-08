@@ -26,8 +26,15 @@
         <mat-tab
           label="โครงสร้างหลักสูตรและแผนการรับนิสิตนักศึกษา"
           class="tab-content"
-          ><ksp-step-two-tab-one></ksp-step-two-tab-one
-        ></mat-tab>
+        >
+          <div *ngIf="formType === 1; then thenBlock; else elseBlock"></div>
+          <ng-template #thenBlock
+            ><ksp-step-two-tab-one></ksp-step-two-tab-one
+          ></ng-template>
+          <ng-template #elseBlock
+            ><ksp-step-two-tab-one-second></ksp-step-two-tab-one-second
+          ></ng-template>
+        </mat-tab>
         <mat-tab label="อาจารย์ / ผู้รับผิดชอบประจำหลักสูตร">
           <ksp-step-2-tab-2></ksp-step-2-tab-2>
         </mat-tab>
