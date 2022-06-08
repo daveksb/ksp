@@ -45,10 +45,10 @@ export class FormUserEducationComponent implements OnInit {
 const componentList = [
   EducationLevelFormOneComponent,
   EducationLevelFormTwoComponent,
+  EducationLevelFormOneComponent,
+  EducationLevelFormOneComponent,
   EducationLevelFormThreeComponent,
   EducationLevelFormFourComponent,
-  EducationLevelFormOneComponent,
-  EducationLevelFormTwoComponent,
 ];
 
 const educationTypes = [

@@ -1,13 +1,18 @@
 <div class="content__container">
   <div class="mb-3">
-    <form [formGroup]="educationForm">
-      <div>ลักษณะวุฒิการศึกษา</div>
-      <select formControlName="educationType">
-        <option *ngFor="let edu of educationTypes" [value]="edu.value">
-          {{ edu.label }}
-        </option>
-      </select>
-    </form>
+    <div class="content">
+      <form [formGroup]="educationForm">
+        <div class="form-label">ลักษณะวุฒิการศึกษา</div>
+        <select
+          formControlName="educationType"
+          class="form-select form-select-sm"
+        >
+          <option *ngFor="let edu of educationTypes" [value]="edu.value">
+            {{ edu.label }}
+          </option>
+        </select>
+      </form>
+    </div>
   </div>
 
   <ng-template kspDynamicComponent></ng-template>
