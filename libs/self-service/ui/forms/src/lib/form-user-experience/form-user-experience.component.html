@@ -10,6 +10,11 @@
   </div>
 </div>
 
+<div class="hr-or">
+  <hr />
+  <span class="hr-text">หรือ</span>
+</div>
+
 <div class="content__container">
   <div class="mb-3">
     <label class="form-label">สถานศึกษาที่ปฏิบัติการสอน</label>
@@ -23,7 +28,7 @@
 
   <div id="upload__button-container" class="mb-3">
     <td class="upload__detail">
-      <button type="button" class="btn btn-primary">
+      <button type="button" class="btn btn-primary btn-address" id="btn-address">
         <img
           src="/assets/images/plus-icon.svg"
           class="icon__upload"
@@ -33,17 +38,17 @@
   </div>
 </div>
 
-<div class="content__container">
-  <div class="mb-3">
-    <input
-      type="checkbox"
-      class="ksp-checkbox"
-      id="checkbox1"
-      name="checkbox1"
-      value="have"
-    />
-    <label for="exampleFormControlInput1" class="form-label checkbox-label">
-      ใบอนุญาตประกอบวิชาชีพครูจากต่างประเทศ</label
-    >
-  </div>
+<div class="content__container-2">
+  <form [formGroup]="testForm">
+    <div class="checkbox__content">
+      <input formControlName="selectValue" type="checkbox" class="checkbox" />
+      <label for="exampleFormControlInput1" class="form-label checkbox-label">
+        ใบอนุญาตประกอบวิชาชีพครูจากต่างประเทศ</label
+      >
+    </div>
+  </form>
+
+  <ng-template [ngIf]="testForm.controls['selectValue'].value">
+    <ksp-experience-form></ksp-experience-form>
+  </ng-template>
 </div>

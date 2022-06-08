@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'self-service-form-user-experience',
@@ -6,7 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./form-user-experience.component.css'],
 })
 export class FormUserExperienceComponent implements OnInit {
-  constructor() {}
+  testForm = this.fb.group({
+    selectValue: [''],
+  });
 
-  ngOnInit(): void {}
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.testForm.controls['selectValue'].valueChanges.subscribe((res) => {
+      console.log('res', res);
+    });
+  }
 }

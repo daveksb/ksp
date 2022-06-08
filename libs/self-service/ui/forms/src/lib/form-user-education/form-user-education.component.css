@@ -1,7 +1,6 @@
 .content__container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 8px;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-label {
@@ -18,6 +17,12 @@
   background-color: #edf8ff;
   background-image: url(/assets/images/arrow-down-icon.png);
   background-size: 12px;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 16px;
 }
 
 @media only screen and (max-width: 768px) {
