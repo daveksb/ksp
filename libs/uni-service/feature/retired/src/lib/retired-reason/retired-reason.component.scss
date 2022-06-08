@@ -1,7 +1,7 @@
 .header {
   font-size: 22px;
   color: #000000;
-  margin: 24px 128px 12px 128px;
+  padding: 24px 128px 0 128px;
 }
 
 .button__container {
@@ -10,8 +10,8 @@
 }
 
 .container {
-  max-width: 1440px;
-  padding: 0;
+  max-width: 100%;
+  padding-bottom: 25px;
   background-color: #f6f6f6;
 }
 
@@ -26,7 +26,7 @@
 .detail__container {
   background-color: #f9f9fa;
   padding: 16px;
-  margin-bottom: 24px;
+  margin: 24px 0;
 }
 
 .detail__content--secondary {

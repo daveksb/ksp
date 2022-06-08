@@ -1,20 +1,6 @@
-<!-- <div class="header">ขอถอดถอนผู้ประสานงาน</div>
-
-<div class="reason">กรุณาแนบหลักฐานเพื่อพิจารณา</div>
-
-<input type="text" />
-
-<div class="button__container">
-  <button class="cancel__button" (click)="prevPage()">ย้อนกลับ</button>
-  <div>
-    <button (click)="cancel()">ยกเลิก</button>
-    <button (click)="save()">บันทึก</button>
-  </div>
-</div>
- -->
+<uni-service-top-nav>ขอถอดถอนผู้ประสานงาน</uni-service-top-nav>
 
 <div class="container">
-  <ksp-top-nav>ขอถอดถอนผู้ประสานงาน</ksp-top-nav>
   <div class="title__label">
     รายละเอียดใบคำขอถอดถอน (ผู้ประสานงาน / ผู้รับผิดชอบ)
   </div>
@@ -230,70 +216,15 @@
       </div>
     </div>
 
-    <div class="detail__container">
-      <div class="detail__header">กรุณาแนบหลักฐานเพื่อพิจารณา</div>
-      <div class="table-responsive">
-        <table class="table">
-          <thead class="header__table">
-            <tr>
-              <th scope="col">รายการเอกสาร</th>
-              <th scope="col" class="title__table">จำนวนหน้า</th>
-              <th scope="col" class="title__table">อัพโหลด</th>
-            </tr>
-          </thead>
-          <tbody class="body__table">
-            <tr>
-              <th scope="row">
-                หนังสือแต่ตั้งผู้ประสานงาน
-                <div>
-                  xxxxxxxxxxxxxxxx-xxxxxxxx_xxxxx.pdf<img
-                    src="/assets/images/img-uni/close.svg"
-                  />
-                </div>
-                <div>
-                  xxxxxxxx_xxxxx.pdf<img
-                    src="/assets/images/img-uni/loader.svg"
-                  />
-                </div>
-              </th>
-              <td class="detail__table">
-                <br />
-                <div>2</div>
-                <div>2</div>
-              </td>
-              <td class="detail__table">
-                <button
-                  type="button"
-                  class="btn btn-upload btn-sm label__button"
-                >
-                  + อัพโหลดไฟล์
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">สำเนาบัตรประชาชน</th>
-              <td class="detail__table">-</td>
-              <td class="detail__table">
-                <button
-                  type="button"
-                  class="btn btn-upload btn-sm label__button"
-                >
-                  + อัพโหลดไฟล์
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <ksp-form-attachment [groups]="retiredFiles"></ksp-form-attachment>
 
     <div class="button__container">
       <div class="button__content--left">
-        <button class="btn-third" (click)="prevPage()">ย้อนกลับ</button>
+        <button class="btn btn-outline-warning" (click)="prevPage()">ย้อนกลับ</button>
       </div>
       <div class="button__content">
-        <button class="btn-fourth" (click)="cancel()">ยกเลิก</button>
-        <button class="btn-primary" (click)="save()">บันทึก</button>
+        <button class="btn btn-outline-primary" (click)="cancel()">ยกเลิก</button>
+        <button class="btn btn-primary" id="btn-save" (click)="save()">บันทึก</button>
       </div>
     </div>
   </div>

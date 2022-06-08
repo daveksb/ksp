@@ -14,6 +14,8 @@ import {
 export class RetiredAttachmentComponent {
   constructor(private router: Router, public dialog: MatDialog) {}
 
+  retiredFiles = ['หนังสือแต่งตั้งผู้ประสานงาน', 'สำเนาบัตรประชาชน'];
+
   prevPage() {
     this.router.navigate(['/', 'retired', 'reason']);
   }
