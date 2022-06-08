@@ -7,7 +7,11 @@ import { StepTwoComponent } from './step-two/step-two.component';
 import { StepThreeComponent } from './step-three/step-three.component';
 import { StepFourComponent } from './step-four/step-four.component';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
-import { DegreeCertHomeComponent, SharedFeatureDegreeCertModule } from '@ksp/shared/feature/degree-cert';
+import {
+  DegreeCertHomeComponent,
+  SharedFeatureDegreeCertModule,
+} from '@ksp/shared/feature/degree-cert';
+import { SharedUiDegreeCertTabContentModule, StepTwoTabOneSecondComponent } from '@ksp/shared/ui/degree-cert-tab-content';
 
 const routes: Routes = [
   {
@@ -25,6 +29,10 @@ const routes: Routes = [
       {
         path: 'step-2',
         component: StepTwoComponent,
+      },
+      {
+        path: 'test',
+        component: StepTwoTabOneSecondComponent,
       },
       {
         path: 'step-3',
@@ -47,6 +55,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SharedUiBottomMenuModule,
     SharedFeatureDegreeCertModule,
+    SharedUiDegreeCertTabContentModule
   ],
   declarations: [
     StepOneComponent,
