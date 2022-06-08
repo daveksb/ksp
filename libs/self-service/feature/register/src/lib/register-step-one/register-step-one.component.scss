@@ -52,8 +52,11 @@ h3 {
 }
 
 .btn-primary {
-  width: 220px;
+  width: 350px;
+  height: 40px;
   font-size: 22px;
+  border-radius: 10px;
+  padding: 0;
 }
 
 .form__footer {
@@ -76,6 +79,7 @@ h3 {
     padding: 50px 200px;
   }
 }
+
 /* mobile */
 @media only screen and (max-width: 768px) {
   .container {
