@@ -60,55 +60,6 @@
   margin-bottom: 10px;
 }
 
-.table {
-  margin-top: 16px;
-  background-color: #fff;
-  border: 1px solid #eceef2;
-}
-
-.header__column {
-  text-align: center;
-}
-
-.header__table {
-  background-color: #edf6ff;
-  font-size: 16px;
-}
-
-.table > :not(caption) > * > * {
-  padding: 14px;
-}
-
-.table > :not(:first-child) {
-  border-top: 0;
-}
-
-.label__table {
-  font-size: 16px;
-}
-
-.label__table--secondary {
-  font-size: 16px;
-  color: #808080;
-}
-
-.detail__table {
-  text-align: center;
-}
-
-.button__container {
-  vertical-align: middle;
-}
-
-.btn-upload {
-  font-size: 16px;
-  background-color: #0056ff;
-  color: #fff;
-  border-radius: 4px;
-  width: 120px;
-  height: 30px;
-}
-
 .label__text {
   font-size: 16px;
   margin-left: 8px;

@@ -1,79 +1,41 @@
-.detail__container {
-  background-color: #f4faff;
+.group__container {
   padding: 16px;
   margin-bottom: 24px;
-}
-
-.detail__container--secondary {
   background-color: #f9f9fa;
-  padding: 16px;
-  margin-bottom: 24px;
 }
 
-.detail__header {
+.group__container--blue {
+  background-color: #f4faff;
+}
+
+.group__header {
   font-size: 22px;
+}
+
+.group__header--blue {
   color: #0056ff;
 }
 
-.detail__header--secondary {
-  font-size: 22px;
-  color: #000000;
-}
-
-.detail__content {
+.row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   grid-gap: 18px;
   margin-bottom: 14px;
 }
 
-.detail__content--primary {
-  display: grid;
+.row--half {
+  grid-template-columns: 1fr 1fr;
+}
+
+.row--full {
   grid-template-columns: 1fr;
-  margin-bottom: 14px;
 }
 
-.detail__content--secondary {
-  display: grid;
-  grid-template-columns: 1fr 30%;
-  grid-column-gap: 18px;
-  margin-bottom: 14px;
+.row--1 {
+  grid-template-columns: auto 30%;
 }
 
-.detail__content--third {
-  display: grid;
-  grid-template-columns: 10% 1fr 30%;
-  grid-column-gap: 18px;
-  margin-bottom: 14px;
-}
-
-.detail__content--fourth {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-column-gap: 18px;
-  margin-bottom: 14px;
-}
-
-.detail__content--fifth {
-  display: grid;
-  grid-template-columns: 15% 1fr 1fr;
-  grid-column-gap: 18px;
-  margin-bottom: 14px;
-}
-
-.detail__footer {
-  display: flex;
-  justify-content: center;
-}
-
-.btn-add {
-  font-size: 18px;
-  color: #f68b33;
-  width: auto;
-}
-
-.icon__add {
-  margin-right: 8px;
+.row--2 {
+  grid-template-columns: 15% auto 30%;
 }
 
 .form-label {
@@ -81,18 +43,31 @@
   color: #656565;
 }
 
-.form-control {
-  font-size: 20px;
-  background-color: #fff;
-}
-
+.form-control,
 .form-select {
   font-size: 20px;
 }
 
-.label__text {
+.warn__text {
   font-size: 16px;
   margin-left: 8px;
   color: #f23c51;
 }
 
+.add__icon-container {
+  display: flex;
+  justify-content: center;
+  color: #f68b33;
+  align-items: flex-end;
+}
+
+mat-icon {
+  cursor: pointer;
+  font-size: 21px;
+}
+
+.add__text {
+  font-size: 18px;
+  margin-left: 2px;
+  cursor: pointer;
+}

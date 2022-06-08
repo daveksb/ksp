@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'ksp-course-form-one',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./course-form-one.component.scss'],
 })
 export class CourseFormOneComponent implements OnInit {
-  constructor() {}
+  @Input() data: any;
 
   ngOnInit(): void {}
 }

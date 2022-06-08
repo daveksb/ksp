@@ -38,7 +38,6 @@ export class FormUserEducationComponent implements OnInit {
   loadComponent(index: number) {
     const viewContainerRef = this.myHost.viewContainerRef;
     viewContainerRef.clear();
-
     viewContainerRef.createComponent<DynamicComponent>(componentList[index]);
   }
 }
