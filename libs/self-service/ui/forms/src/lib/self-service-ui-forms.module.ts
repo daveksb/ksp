@@ -16,13 +16,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatOptionModule } from '@angular/material/core';
 import { SharedDirectiveModule } from '@ksp/shared/directive';
-import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterModule,
     MatDialogModule,
     MatTableModule,
     MatFormFieldModule,

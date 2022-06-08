@@ -7,6 +7,7 @@ import {
   EducationLevelFormThreeComponent,
   EducationLevelFormTwoComponent,
 } from '@ksp/shared/form/education-level';
+import { DynamicComponent, ListData } from '@ksp/shared/interface';
 
 @Component({
   selector: 'self-service-form-user-education',
@@ -17,7 +18,7 @@ export class FormUserEducationComponent implements OnInit {
   educationForm = this.fb.group({
     educationType: [''],
   });
-  educationTypes: any[] = [];
+  educationTypes: ListData[] = [];
   @ViewChild(DynamicComponentDirective, { static: true })
   myHost!: DynamicComponentDirective;
 
@@ -37,7 +38,7 @@ export class FormUserEducationComponent implements OnInit {
     const viewContainerRef = this.myHost.viewContainerRef;
     viewContainerRef.clear();
 
-    viewContainerRef.createComponent<any>(componentList[index]);
+    viewContainerRef.createComponent<DynamicComponent>(componentList[index]);
   }
 }
 

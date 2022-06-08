@@ -136,6 +136,7 @@
       "@ksp/shared/form/education-level": [
         "libs/shared/form/education-level/src/index.ts"
       ],
+      "@ksp/shared/interface": ["libs/shared/interface/src/index.ts"],
       "@ksp/shared/ui/bottom-menu": ["libs/shared/ui/bottom-menu/src/index.ts"],
       "@ksp/shared/ui/degree-cert-tab-content": [
         "libs/shared/ui/degree-cert-tab-content/src/index.ts"
