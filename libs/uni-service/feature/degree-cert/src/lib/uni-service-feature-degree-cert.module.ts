@@ -11,7 +11,7 @@ import {
   DegreeCertHomeComponent,
   SharedFeatureDegreeCertModule,
 } from '@ksp/shared/feature/degree-cert';
-import { SharedUiDegreeCertTabContentModule, StepTwoTabOneSecondComponent } from '@ksp/shared/ui/degree-cert-tab-content';
+import { UniServiceUiFormsModule } from '@ksp/uni-service/ui/forms';
 
 const routes: Routes = [
   {
@@ -30,10 +30,7 @@ const routes: Routes = [
         path: 'step-2',
         component: StepTwoComponent,
       },
-      {
-        path: 'test',
-        component: StepTwoTabOneSecondComponent,
-      },
+     
       {
         path: 'step-3',
         component: StepThreeComponent,
@@ -55,7 +52,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SharedUiBottomMenuModule,
     SharedFeatureDegreeCertModule,
-    SharedUiDegreeCertTabContentModule
+    UniServiceUiFormsModule,
   ],
   declarations: [
     StepOneComponent,

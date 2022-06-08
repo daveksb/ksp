@@ -4,17 +4,6 @@
   background-color: #f6f6f6;
 }
 
-.header__container {
-  background-image: url('/assets/images/img-uni/top-bar-img.png');
-  background-size: cover;
-}
-
-.haeder__label {
-  text-align: center;
-  padding: 14px 0;
-  font-size: 28px;
-}
-
 .title__label {
   font-size: 22px;
   color: #000000;
@@ -39,7 +28,6 @@
 }
 
 .label__content {
-  font-family: 'KSP Bold';
   font-size: 18px;
   color: #808080;
   margin-right: 24px;
@@ -73,11 +61,6 @@
 .form-control {
   background-color: #fff;
   font-size: 18px;
-}
-
-.search__content {
-  background-image: url(/assets/images/img-uni/search.svg);
-  background-size: 12px;
 }
 
 .detail__header {

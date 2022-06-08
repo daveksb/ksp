@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
@@ -20,6 +27,7 @@ export class DegreeCertStepOneComponent implements OnInit {
   degreeTypes: ListData[] = [];
 
   @Input() isViewForm = false;
+  @Output() degreeType = new EventEmitter<number>();
   @ViewChild(DynamicComponentDirective, { static: true })
   myHost!: DynamicComponentDirective;
 
@@ -36,6 +44,10 @@ export class DegreeCertStepOneComponent implements OnInit {
 
     this.step1Form.controls['courseType'].valueChanges.subscribe((res) => {
       this.loadComponent(Number(res));
+    });
+
+    this.step1Form.controls['degreeType'].valueChanges.subscribe((res) => {
+      this.degreeType.emit(Number(res));
     });
   }
 

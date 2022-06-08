@@ -1,20 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormRegisterCoordinatorInfoComponent } from './form-register-coordinator-info/form-register-coordinator-info.component';
-import { FormRegisterRequesterInfoComponent } from './form-register-requester-info/form-register-requester-info.component';
-import { FormRegisterFileUploadComponent } from './form-register-file-upload/form-register-file-upload.component';
+import { FormRegisterCoordinatorInfoComponent } from './register-coordinator-info/register-coordinator-info.component';
+import { FormRegisterRequesterInfoComponent } from './register-requester-info/register-requester-info.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DegreeCertCoordinatorComponent } from './degree-cert-coordinator/degree-cert-coordinator.component';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   declarations: [
     FormRegisterCoordinatorInfoComponent,
     FormRegisterRequesterInfoComponent,
-    FormRegisterFileUploadComponent,
+    DegreeCertCoordinatorComponent,
   ],
   exports: [
     FormRegisterCoordinatorInfoComponent,
     FormRegisterRequesterInfoComponent,
-    FormRegisterFileUploadComponent,
+    DegreeCertCoordinatorComponent,
   ],
 })
 export class UniServiceUiFormsModule {}
