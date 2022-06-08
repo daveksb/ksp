@@ -1,6 +1,7 @@
 import {
   Component,
   EventEmitter,
+  Input,
   Output,
   ViewEncapsulation,
 } from '@angular/core';
@@ -15,6 +16,7 @@ import { Router } from '@angular/router';
 })
 export class DegreeCertStepTwoComponent {
   @Output() tabIndexChanged = new EventEmitter<number>();
+  @Input() formType = 0;
 
   constructor(private router: Router) {}
 

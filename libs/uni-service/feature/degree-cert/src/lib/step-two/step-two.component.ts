@@ -6,13 +6,14 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './step-two.component.html',
   styleUrls: ['./step-two.component.scss'],
 })
-export class StepTwoComponent implements OnInit{
+export class StepTwoComponent implements OnInit {
+  formType = 0;
+
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((res) => {
-      //this.pageType = Number(res['type']);
-      console.log('res = ', res);
+      this.formType = Number(res['type']);
     });
   }
 
@@ -23,5 +24,4 @@ export class StepTwoComponent implements OnInit{
   prevPage() {
     this.router.navigate(['./', 'degree-cert', 'step-1']);
   }
-
 }
