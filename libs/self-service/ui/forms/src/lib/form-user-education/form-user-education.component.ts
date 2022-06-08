@@ -14,6 +14,7 @@ import { DynamicComponent, ListData } from '@ksp/shared/interface';
   templateUrl: './form-user-education.component.html',
   styleUrls: ['./form-user-education.component.css'],
 })
+
 export class FormUserEducationComponent implements OnInit {
   educationForm = this.fb.group({
     educationType: [''],
@@ -44,10 +45,10 @@ export class FormUserEducationComponent implements OnInit {
 const componentList = [
   EducationLevelFormOneComponent,
   EducationLevelFormTwoComponent,
+  EducationLevelFormOneComponent,
+  EducationLevelFormOneComponent,
   EducationLevelFormThreeComponent,
   EducationLevelFormFourComponent,
-  EducationLevelFormOneComponent,
-  EducationLevelFormTwoComponent,
 ];
 
 const educationTypes = [

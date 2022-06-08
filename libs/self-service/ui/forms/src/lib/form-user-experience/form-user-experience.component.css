@@ -1,7 +1,12 @@
 .content__container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-column-gap: 8px;
+  grid-column-gap: 16px;
+}
+
+.content__container-2 {
+  display: flex;
+  flex-direction: column;
 }
 
 .form-label {
@@ -12,11 +17,6 @@
 .form-select-sm {
   font-size: 16px;
   color: #000000;
-}
-
-input[type='checkbox' i].ksp-checkbox {
-  border-radius: 5em;
-  border: 1px solid #88d2ff !important;
 }
 
 .checkbox-label {
@@ -32,30 +32,6 @@ input[type='checkbox' i].ksp-checkbox {
 .search__content {
   background-image: url(/assets/images/search-icon.png) !important;
   background-size: 12px;
-}
-
-.table {
-  font-size: 14px;
-  background-color: #edf8ff;
-  border: 1px solid #ecedf3;
-  color: #333333;
-}
-
-.page__header {
-  text-align: center;
-}
-
-.upload__header {
-  text-align: center;
-}
-
-.header__table {
-  background-color: #fff;
-  color: #a6a6a6;
-}
-
-.number__page {
-  text-align: center;
 }
 
 .upload__detail {
@@ -75,6 +51,43 @@ input[type='checkbox' i].ksp-checkbox {
 .btn {
   width: auto;
   font-size: 14px;
+}
+
+.checkbox__content {
+  display: flex;
+  line-height: 15px;
+  margin: 20px 0;
+}
+
+.checkbox {
+  width: 15px;
+  height: 15px;
+}
+
+.hr-or {
+  position: relative;
+  margin: 20px 0;
+  width: 100%;
+  text-align: center;
+  color: #3dabfc;
+}
+
+.hr-or span {
+  position: absolute;
+  top: -11px;
+  padding: 0 5px;
+  margin: 0 -16px;
+  background: #fff;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.hr-text {
+  color: #3dabfc;
+}
+
+#btn-address {
+  border-radius: 10px;
 }
 
 @media only screen and (max-width: 768px) {

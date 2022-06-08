@@ -13,7 +13,6 @@ export class RegisterStepTwoComponent {
 
   openDialog() {
     const dialogRef = this.dialog.open(FormVerifyPhoneComponent, {
-      height: '400px',
       width: '600px',
     });
 

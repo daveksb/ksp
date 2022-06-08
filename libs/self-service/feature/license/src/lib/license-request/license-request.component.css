@@ -24,5 +24,26 @@
 .content__container {
   display: grid;
   grid-template-columns: 15% auto;
-  grid-column-gap: 24px;
+}
+
+.checkbox__container-2 {
+  display: flex;
+  line-height: 15px;
+  margin-top: 20px;
+}
+
+.form-label {
+  font-size: 18px;
+  color: #656565;
+}
+
+.checkbox__box {
+  height: 15px;
+  width: 15px;
+  margin-right: 5px;
+}
+
+.label__warn {
+  color: red;
+  font-size: 16px;
 }
