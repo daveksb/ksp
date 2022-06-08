@@ -12,9 +12,8 @@
   margin: 0px 30px;
 }
 
-.title__label {
+.page__header {
   font-size: 22px;
-  color: #000000;
   margin-left: 30px;
   padding-top: 12px;
 }
@@ -35,16 +34,16 @@
   color: #0056ff;
 }
 
-.label__text {
+.alert__text {
   font-size: 16px;
   margin-left: 8px;
   color: #f23c51;
-  text-align: center;
 }
 
-.box__footer {
+.alert__text-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  margin-top: 5px;
 }
 
 .bottom__container {
