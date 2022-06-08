@@ -6,6 +6,7 @@ import { StepTwoTabThreeComponent } from './step-two-tab-three/step-two-tab-thre
 import { StepTwoTabFourComponent } from './step-two-tab-four/step-two-tab-four.component';
 import { StepThreeTabOneComponent } from './step-three-tab-one/step-three-tab-one.component';
 import { StepThreeTabTwoComponent } from './step-three-tab-two/step-three-tab-two.component';
+import { StepTwoTabOneSecondComponent } from './step-two-tab-one-second/step-two-tab-one-second.component';
 
 @NgModule({
   imports: [CommonModule],
@@ -16,6 +17,7 @@ import { StepThreeTabTwoComponent } from './step-three-tab-two/step-three-tab-tw
     StepTwoTabFourComponent,
     StepThreeTabOneComponent,
     StepThreeTabTwoComponent,
+    StepTwoTabOneSecondComponent,
   ],
   exports: [
     StepTwoTabOneComponent,
@@ -24,6 +26,7 @@ import { StepThreeTabTwoComponent } from './step-three-tab-two/step-three-tab-tw
     StepTwoTabFourComponent,
     StepThreeTabOneComponent,
     StepThreeTabTwoComponent,
+    StepTwoTabOneSecondComponent,
   ],
 })
 export class SharedUiDegreeCertTabContentModule {}
