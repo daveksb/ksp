@@ -47,21 +47,6 @@
   margin-bottom: 14px;
 }
 
-.detail__footer {
-  display: flex;
-  justify-content: center;
-}
-
-.btn-add {
-  font-size: 18px;
-  color: #f68b33;
-  width: auto;
-}
-
-.icon__add {
-  margin-right: 8px;
-}
-
 .form-label {
   font-size: 18px;
   color: #656565;
@@ -80,4 +65,22 @@
   font-size: 16px;
   margin-left: 8px;
   color: #f23c51;
+}
+
+.add__icon-container {
+  display: flex;
+  justify-content: center;
+  color: #f68b33;
+  align-items: flex-end;
+}
+
+mat-icon {
+  cursor: pointer;
+  font-size: 21px;
+}
+
+.add__text {
+  font-size: 18px;
+  margin-left: 2px;
+  cursor: pointer;
 }

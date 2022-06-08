@@ -3,13 +3,8 @@
     <div class="detail__header">ข้อมูลสถาบัน</div>
     <div class="detail__content">
       <div>
-        <label for="exampleFormControlInput1" class="form-label"
-          >กลุ่มสถาบัน</label
-        >
-        <select
-          class="search__content form-select form-select-sm"
-          aria-label=".form-select-sm example"
-        >
+        <label class="form-label">กลุ่มสถาบัน</label>
+        <select class="search__content form-select form-select-sm">
           <option selected>มหาวิทยาลัยของรัฐ / ในกำกับของรัฐ</option>
           <option value="1">One</option>
           <option value="2">Two</option>
@@ -17,13 +12,8 @@
         </select>
       </div>
       <div>
-        <label for="exampleFormControlInput1" class="form-label"
-          >รหัสสถาบัน</label
-        >
-        <select
-          class="search__content form-select form-select-sm"
-          aria-label=".form-select-sm example"
-        >
+        <label class="form-label">รหัสสถาบัน</label>
+        <select class="search__content form-select form-select-sm">
           <option selected>กรุณาเลือก</option>
           <option value="1">One</option>
           <option value="2">Two</option>
@@ -33,9 +23,7 @@
     </div>
     <div class="detail__content">
       <div>
-        <label for="exampleFormControlInput1" class="form-label"
-          >สถาบัน / มหาลัย</label
-        >
+        <label class="form-label">สถาบัน / มหาลัย</label>
         <input
           class="form-control form-control-sm"
           type="text"
@@ -66,10 +54,7 @@
             >*เลือกข้อมูลของท่านได้เพียง 1 ข้อเท่านั้น</span
           ></label
         >
-        <select
-          class="search__content form-select form-select-sm"
-          aria-label=".form-select-sm example"
-        >
+        <select class="search__content form-select form-select-sm">
           <option selected>ปริญญาตรีทางการศึกษา (หลักสูตร 5 ปี)</option>
           <option value="1">One</option>
           <option value="2">Two</option>
@@ -79,13 +64,11 @@
     </div>
     <div class="detail__content--third">
       <div>
-        <label for="exampleFormControlInput1" class="form-label"
-          >ปีของหลักสูตร</label
-        >
+        <label class="form-label">ปีของหลักสูตร</label>
         <input class="form-control form-control-sm" type="text" />
       </div>
       <div>
-        <label for="exampleFormControlInput1" class="form-label"
+        <label class="form-label"
           >ชื่อหลักสูตรที่เสนอขอรับรอง<span class="label__text"
             >*กรุณาระบุชื่อหลักสูตรตามที่ปรากฏบนหน้าปก มคอ.2</span
           ></label
@@ -100,7 +83,7 @@
     <div class="detail__header--secondary">ชื่อปริญญาและสาขาวิชา</div>
     <div class="detail__content--secondary">
       <div>
-        <label for="exampleFormControlInput1" class="form-label"
+        <label class="form-label"
           >ชื่อปริญญาและสาขาวิชา (ภาษาไทย แบบเต็ม)</label
         >
         <input
@@ -110,9 +93,7 @@
         />
       </div>
       <div>
-        <label for="exampleFormControlInput1" class="form-label"
-          >ชื่อปริญญาและสาขาวิชา (ภาษาไทย แบบย่อ)</label
-        >
+        <label class="form-label">ชื่อปริญญาและสาขาวิชา (ภาษาไทย แบบย่อ)</label>
         <input
           class="form-control form-control-sm"
           type="text"
@@ -122,7 +103,7 @@
     </div>
     <div class="detail__content--secondary">
       <div>
-        <label for="exampleFormControlInput1" class="form-label"
+        <label class="form-label"
           >ชื่อปริญญาและสาขาวิชา (ภาษาอังกฤษ แบบเต็ม)</label
         >
         <input
@@ -132,7 +113,7 @@
         />
       </div>
       <div>
-        <label for="exampleFormControlInput1" class="form-label"
+        <label class="form-label"
           >ชื่อปริญญาและสาขาวิชา (ภาษาอังกฤษ แบบย่อ)</label
         >
         <input
@@ -149,7 +130,7 @@
     </div>
     <div class="detail__content--secondary">
       <div>
-        <label for="exampleFormControlInput1" class="form-label"
+        <label class="form-label"
           >กรุณาเลือกประเภทการจัดการหลักสูตร หรือลักษณะหลักสูตร<span
             class="label__text"
             >*เลือกข้อมูลของท่านได้เพียง 1 ข้อเท่านั้น</span
@@ -184,13 +165,9 @@
       </div>
     </div>
 
-    <div class="detail__footer">
-      <button type="button" class="btn btn-add" *ngIf="!isViewForm">
-        <img
-          src="/assets/images/img-uni/Add.svg"
-          class="icon__add"
-        />เพิ่มสถานที่เปิดสอน
-      </button>
+    <div class="add__icon-container" *ngIf="!isViewForm">
+      <mat-icon>add_circle_outline</mat-icon>
+      <div class="add__text">เพิ่มสถานที่เปิดสอน</div>
     </div>
   </div>
   <div class="detail__container--secondary">
@@ -220,13 +197,9 @@
         />
       </div>
     </div>
-    <div class="detail__footer">
-      <button type="button" class="btn btn-add" *ngIf="!isViewForm">
-        <img
-          src="/assets/images/img-uni/Add.svg"
-          class="icon__add"
-        />เพิ่มสถานที่เปิดสอน
-      </button>
+    <div class="add__icon-container" *ngIf="!isViewForm">
+      <mat-icon>add_circle_outline</mat-icon>
+      <div class="add__text">เพิ่มสถานที่เปิดสอน</div>
     </div>
   </div>
   <div class="detail__container--secondary">
@@ -247,13 +220,9 @@
       </div>
     </div>
 
-    <div class="detail__footer">
-      <button type="button" class="btn btn-add" *ngIf="!isViewForm">
-        <img
-          src="/assets/images/img-uni/Add.svg"
-          class="icon__add"
-        />เพิ่มสถานที่เปิดสอน
-      </button>
+    <div class="add__icon-container" *ngIf="!isViewForm">
+      <mat-icon>add_circle_outline</mat-icon>
+      <div class="add__text">เพิ่มสถานที่เปิดสอน</div>
     </div>
   </div>
 </form>
