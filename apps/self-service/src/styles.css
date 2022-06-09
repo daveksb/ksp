@@ -60,14 +60,9 @@ add asterisk for required feild
 }
 
 .btn {
-  font-size: 20px !important;
-  width: 120px !important;
+  font-size: 20px;
+  width: 120px;
 }
-
-/* .btn-primary {
-  background-color: #3f89fe !important;
-  border-color: #3f89fe !important;
-} */
 
 .btn-light {
   background-color: #e8e8e8 !important;

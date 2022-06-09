@@ -20,19 +20,19 @@
       <mat-tab-group
         class="tab-group"
         animationDuration="0ms"
-        dynamicHeight="true"
         (selectedTabChange)="tabChanged($event)"
+        [selectedIndex]="1"
       >
         <mat-tab
           label="โครงสร้างหลักสูตรและแผนการรับนิสิตนักศึกษา"
           class="tab-content"
         >
-          <div *ngIf="formType === 1; then thenBlock; else elseBlock"></div>
-          <ng-template #thenBlock
-            ><ksp-step-two-tab-one></ksp-step-two-tab-one
+          <div *ngIf="formType === 1; then type1; else type2"></div>
+          <ng-template #type1
+            ><ksp-step-2-tab-1></ksp-step-2-tab-1
           ></ng-template>
-          <ng-template #elseBlock
-            ><ksp-step-two-tab-one-second></ksp-step-two-tab-one-second
+          <ng-template #type2
+            ><ksp-step-2-tab-1-second></ksp-step-2-tab-1-second
           ></ng-template>
         </mat-tab>
         <mat-tab label="อาจารย์ / ผู้รับผิดชอบประจำหลักสูตร">
@@ -42,7 +42,7 @@
           <ksp-step-2-tab-3></ksp-step-2-tab-3>
         </mat-tab>
         <mat-tab label="ที่ปรึกษาวิทยานิพนธ์และการค้นคว้าอิสระ">
-          <ksp-step-two-tab-four></ksp-step-two-tab-four>
+          <ksp-step-2-tab-4></ksp-step-2-tab-4>
         </mat-tab>
       </mat-tab-group>
     </div>
