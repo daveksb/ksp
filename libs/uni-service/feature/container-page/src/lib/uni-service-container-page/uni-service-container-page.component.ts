@@ -2,6 +2,29 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MenuConfig } from '@ksp/shared/ui/side-menu';
 
+@Component({
+  selector: 'uni-service-container-page',
+  templateUrl: './uni-service-container-page.component.html',
+  styleUrls: ['./uni-service-container-page.component.css'],
+})
+export class UniServiceContainerPageComponent implements OnInit {
+  menuConfig: MenuConfig[] = [];
+  header = '';
+  subHeader = '';
+
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.menuConfig = menu;
+
+    this.route.data.subscribe((data) => {
+      this.header = data['header'];
+      this.subHeader = data['subHeader'];
+      console.log('test', data);
+    });
+  }
+}
+
 export const menu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/home.svg ',
@@ -54,25 +77,4 @@ export const menu: MenuConfig[] = [
   },
 ];
 
-@Component({
-  selector: 'uni-service-container-page',
-  templateUrl: './uni-service-container-page.component.html',
-  styleUrls: ['./uni-service-container-page.component.css'],
-})
-export class UniServiceContainerPageComponent implements OnInit {
-  menuConfig: MenuConfig[] = [];
-  header = '';
-  subHeader = '';
 
-  constructor(private route: ActivatedRoute) {}
-
-  ngOnInit(): void {
-    this.menuConfig = menu;
-
-    this.route.data.subscribe((data) => {
-      this.header = data['header'];
-      this.subHeader = data['subHeader'];
-      console.log('test', data);
-    });
-  }
-}

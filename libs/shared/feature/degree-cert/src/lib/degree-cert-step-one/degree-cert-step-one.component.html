@@ -152,21 +152,27 @@
   <div class="group__container">
     <div class="group__header">สถานที่ที่เปิดสอน</div>
 
-    <div class="row row--full">
-      <div>
-        <label class="form-label">สถานที่เปิดสอน 1 </label>
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="กรุณาระบุกรอก"
-        />
-      </div>
-    </div>
+    <ng-container formArrayName="locations">
+      <ng-container
+        *ngFor="let locationForm of locations.controls; let i = index"
+      >
+        <div class="row row--ternary" [formGroupName]="i">
+          <div>
+            <label class="form-label">สถานที่เปิดสอน {{ i + 1 }} </label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              formControlName="title"
+            />
+          </div>
+          <mat-icon (click)="deleteLocation(i)"> delete_outline</mat-icon>
+        </div>
+      </ng-container>
+    </ng-container>
 
-    <div class="add__icon-container" *ngIf="!isViewForm">
-      <mat-icon>add_circle_outline</mat-icon>
-      <div class="add__text">เพิ่มสถานที่เปิดสอน</div>
-    </div>
+    <ksp-add-row-button (addClick)="addLocation()" *ngIf="!isViewForm"
+      >เพิ่มสถานที่เปิดสอน</ksp-add-row-button
+    >
   </div>
   <div class="group__container">
     <div class="group__header">หน่วยงานที่รับผิดชอบหลักสูตร</div>
@@ -191,10 +197,10 @@
         />
       </div>
     </div>
-    <div class="add__icon-container" *ngIf="!isViewForm">
-      <mat-icon>add_circle_outline</mat-icon>
-      <div class="add__text">เพิ่มสถานที่เปิดสอน</div>
-    </div>
+
+    <ksp-add-row-button *ngIf="!isViewForm"
+      >เพิ่มหน่วยงานที่รับผิดชอบหลักสูตร
+    </ksp-add-row-button>
   </div>
   <div class="group__container">
     <div class="group__header">
@@ -212,9 +218,8 @@
       </div>
     </div>
 
-    <div class="add__icon-container" *ngIf="!isViewForm">
-      <mat-icon>add_circle_outline</mat-icon>
-      <div class="add__text">เพิ่มสถานที่เปิดสอน</div>
-    </div>
+    <ksp-add-row-button *ngIf="!isViewForm"
+      >เพิ่มสถานที่ที่ต้องประเมินสภาพจริง</ksp-add-row-button
+    >
   </div>
 </form>

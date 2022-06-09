@@ -5,7 +5,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/ui/dialog';
-import { UniversitySearchComponent } from '@ksp/shared/ui/university-search';
+import { UniversitySearchComponent } from '@ksp/shared/form/university-search';
 
 @Component({
   selector: 'uni-service-register-coordinator',
