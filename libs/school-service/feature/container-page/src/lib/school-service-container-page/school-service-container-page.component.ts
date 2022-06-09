@@ -25,7 +25,7 @@ export const menu: MenuConfig[] = [
     label: 'ยื่นใบคำขอ',
     path: '',
     subMenuName: 'license',
-    isExpanded: false,
+    isExpanded: true,
     subMenu: [
       {
         label: 'ขอใบอนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)',

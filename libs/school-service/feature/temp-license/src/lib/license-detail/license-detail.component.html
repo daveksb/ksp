@@ -81,21 +81,21 @@
               ></textarea>
             </div>
           </div>
-          <ksp-form-attachment></ksp-form-attachment>
+          <ksp-form-attachment [groups]="educationInfo"></ksp-form-attachment>
         </mat-tab>
 
         <mat-tab label="ข้อมูลการสอนและการจ้าง">
           <ksp-form-teaching-info></ksp-form-teaching-info>
-          <ksp-form-attachment></ksp-form-attachment>
+          <ksp-form-attachment [groups]="teachingInfo"></ksp-form-attachment>
         </mat-tab>
 
         <mat-tab label="ข้อมูลชี้แจงเหตุผล">
           <ksp-form-reason-info></ksp-form-reason-info>
-          <ksp-form-attachment></ksp-form-attachment>
+          <ksp-form-attachment [groups]="reasonInfo"></ksp-form-attachment>
         </mat-tab>
 
         <mat-tab label="เอกสารหลักฐานประกอบ">
-          <ksp-form-attachment></ksp-form-attachment>
+          <ksp-form-attachment [groups]="evidenceFiles"></ksp-form-attachment>
         </mat-tab>
       </mat-tab-group>
     </div>
@@ -104,13 +104,15 @@
 
 <div class="bottom__container">
   <ksp-bottom-menu
-    (prevClicked)="back()"
-    [showCenterButtons]="true"
-    [isLastPage]="true"
     (saveClicked)="save()"
     (cancelClicked)="cancel()"
+    (tempSaveClicked)="back()"
+    [isFirstPage]="true"
+    [colorMode]="'green'"
+    [showCenterButtons]="true"
+    [isLastPage]="true"
+    [showCancelButton]="true"
     [showTempSaveButton]="true"
     [showSaveButton]="selectedTabIndex === 5"
-    (tempSaveClicked)="back()"
   ></ksp-bottom-menu>
 </div>
