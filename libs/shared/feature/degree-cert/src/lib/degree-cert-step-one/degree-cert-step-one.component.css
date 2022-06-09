@@ -47,6 +47,7 @@
 .form-label {
   font-size: 18px;
   color: #656565;
+  margin-bottom: 0.1rem;
 }
 
 .form-control,
@@ -64,4 +65,5 @@ mat-icon {
   width: auto;
   cursor: pointer;
   padding: 0;
+  color: #f23c51;
 }
