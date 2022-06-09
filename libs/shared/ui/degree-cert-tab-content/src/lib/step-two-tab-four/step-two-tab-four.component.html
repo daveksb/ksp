@@ -1,560 +1,286 @@
-<div class="tab-content" id="nav-tabContent">
-  <div
-    class="tab-pane fade show active tab__body"
-    id="nav-home"
-    role="tabpanel"
-    aria-labelledby="nav-home-tab"
-  >
-    <div class="tab-content" id="nav-tabContent">
+<div class="header__container">
+  <div class="header">ที่ปรึกษาวิทยานิพนธ์และการค้นคว้าอิสระ</div>
+
+  <div class="header-2">
+    (สำหรับหลักสูตรปริญญาโท เอก ทางการศึกษา (วิชาชีพครู) และปริญญาโท
+    เอกทางการศึกษา (วิชาชีพบริหาร))
+  </div>
+</div>
+
+<div class="group__number">ลำดับที่ 1</div>
+<div class="group__container">
+  <div class="row row--full">
+    <div class="mb-3">
+      <label class="form-label">คำนำหน้าชื่อ</label>
+      <select
+        class="search__content form-select form-select-sm"
+        aria-label=".form-select-sm example"
+      >
+        <option selected>นางสาว</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">ชื่อ </label>
+      <input
+        class="form-control form-control-sm"
+        type="text"
+        placeholder="กรุณากรอก"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">นามสกุล </label>
+      <input
+        class="form-control form-control-sm"
+        type="text"
+        placeholder="กรุณากรอก"
+      />
+    </div>
+  </div>
+  <div class="row row--primary">
+    <div class="mb-3">
+      <label class="form-label">หมายเลขบัตรประชาชน </label>
+      <input
+        class="form-control form-control-sm"
+        type="text"
+        placeholder="หมายเลขบัตรประชาชนจำนวน 13 หลัก"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">ตำแหน่งวิชาการ </label>
+      <input
+        class="form-control form-control-sm"
+        type="text"
+        placeholder="กรุณากรอก"
+      />
+    </div>
+  </div>
+  <div class="group__header">คุณวุฒิการศึกษา</div>
+  <div class="detail__box">
+    <div class="row row--secondary">
+      <div class="mb-3">
+        <label class="form-label">คุณวุฒิ / สาขาวิชา ที่ 1 </label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          placeholder="กรุณากรอก"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">สถาบัน </label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          placeholder="กรุณากรอก"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">ปีที่สำเร็จการศึกษา (พ.ศ.) </label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          placeholder="กรอกเฉพาะตัวเลข"
+        />
+      </div>
+    </div>
+
+    <div class="row row--secondary">
+      <div class="mb-3">
+        <label class="form-label">คุณวุฒิ / สาขาวิชา ที่ 2 </label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          placeholder="กรุณากรอก"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">สถาบัน </label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          placeholder="กรุณากรอก"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">ปีที่สำเร็จการศึกษา (พ.ศ.) </label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          placeholder="กรอกเฉพาะตัวเลข"
+        />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <ksp-add-row-button>เพิ่มคุณวุฒิการศึกษา</ksp-add-row-button>
+    </div>
+
+    <div class="row row--third">
       <div>
-        <div class="title__secondary">
-          <div class="header__title">
-            ที่ปรึกษาวิทยานิพนธ์และการค้นคว้าอิสระ
+        <label class="form-label"
+          >สถานะของอาจารย์ที่ปรึกษาวิทยานิพนธ์ (กรุณาเลือก)
+        </label>
+        <div class="content__checkbox">
+          <div class="checkbox__detail">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                value="1"
+                name="status"
+              />
+              <label class="form-check-label"> ที่ปรึกษาหลัก </label>
+            </div>
           </div>
-
-          <div class="header__title--2">
-            (สำหรับหลักสูตรปริญญาโท เอก ทางการศึกษา (วิชาชีพครู) และปริญญาโท
-            เอกทางการศึกษา (วิชาชีพบริหาร))
+          <div class="checkbox__detail">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                value="2"
+                name="status"
+              />
+              <label class="form-check-label"> ที่ปรึกษาร่วม </label>
+            </div>
           </div>
         </div>
-
-        <div class="title__text">ลำดับที่ 1</div>
-        <div class="detail__container">
-          <div class="detail__content">
-            <div>
-              <label for="exampleFormControlInput1" class="form-label"
-                >คำนำหน้าชื่อ</label
-              >
-              <select
-                class="search__content form-select form-select-sm"
-                aria-label=".form-select-sm example"
-              >
-                <option selected>นางสาว</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
-            <div>
-              <label for="exampleFormControlInput1" class="form-label"
-                >ชื่อ
-              </label>
+      </div>
+      <div>
+        <label class="form-label">ประเภทที่ปรึกษา (กรุณาเลือก) </label>
+        <div class="content__checkbox">
+          <div class="checkbox__detail">
+            <div class="form-check">
               <input
-                class="form-control form-control-sm"
-                type="text"
-                placeholder="กรุณากรอก"
+                class="form-check-input"
+                type="radio"
+                value="1"
+                name="type"
               />
+              <label class="form-check-label"> เป็นที่ปรึกษาวิทยานิพนธ์ </label>
             </div>
-            <div>
-              <label for="exampleFormControlInput1" class="form-label"
-                >นามสกุล
-              </label>
+          </div>
+          <div class="checkbox__detail">
+            <div class="form-check">
               <input
-                class="form-control form-control-sm"
-                type="text"
-                placeholder="กรุณากรอก"
+                class="form-check-input"
+                type="radio"
+                value="2"
+                name="type"
               />
-            </div>
-          </div>
-          <div class="detail__primary">
-            <div>
-              <label for="exampleFormControlInput1" class="form-label"
-                >หมายเลขบัตรประชาชน
+              <label class="form-check-label">
+                เป็นที่ปรึกษาค้นคว้าอิสระ
               </label>
-              <input
-                class="form-control form-control-sm"
-                type="text"
-                placeholder="หมายเลขบัตรประชาชนจำนวน 13 หลัก"
-              />
             </div>
-            <div>
-              <label for="exampleFormControlInput1" class="form-label"
-                >ตำแหน่งวิชาการ
-              </label>
-              <input
-                class="form-control form-control-sm"
-                type="text"
-                placeholder="กรุณากรอก"
-              />
-            </div>
-          </div>
-          <div class="detail__header">คุณวุฒิการศึกษา</div>
-          <div class="detail__box">
-            <div class="detail__secondary">
-
-              <div>
-                <label for="exampleFormControlInput1" class="form-label"
-                  >คุณวุฒิ / สาขาวิชา ที่ 1
-                </label>
-                <input
-                  class="form-control form-control-sm"
-                  type="text"
-                  placeholder="กรุณากรอก"
-                />
-              </div>
-
-              <div>
-                <label for="exampleFormControlInput1" class="form-label"
-                  >สถาบัน
-                </label>
-                <input
-                  class="form-control form-control-sm"
-                  type="text"
-                  placeholder="กรุณากรอก"
-                />
-              </div>
-
-              <div>
-                <label for="exampleFormControlInput1" class="form-label"
-                  >ปีที่สำเร็จการศึกษา (พ.ศ.)
-                </label>
-                <input
-                  class="form-control form-control-sm"
-                  type="text"
-                  placeholder="กรอกเฉพาะตัวเลข"
-                />
-              </div>
-
-            </div>
-
-            <div class="detail__secondary">
-
-              <div>
-                <label for="exampleFormControlInput1" class="form-label"
-                  >คุณวุฒิ / สาขาวิชา ที่ 2
-                </label>
-                <input
-                  class="form-control form-control-sm"
-                  type="text"
-                  placeholder="กรุณากรอก"
-                />
-              </div>
-
-              <div>
-                <label for="exampleFormControlInput1" class="form-label"
-                  >สถาบัน
-                </label>
-                <input
-                  class="form-control form-control-sm"
-                  type="text"
-                  placeholder="กรุณากรอก"
-                />
-              </div>
-
-              <div>
-                <label for="exampleFormControlInput1" class="form-label"
-                  >ปีที่สำเร็จการศึกษา (พ.ศ.)
-                </label>
-                <input
-                  class="form-control form-control-sm"
-                  type="text"
-                  placeholder="กรอกเฉพาะตัวเลข"
-                />
-              </div>
-
-            </div>
-
-            <div class="detail__footer">
-              <button type="button" class="btn btn-add">
-                <img
-                  src="/assets/images/img-uni/Add.svg"
-                  class="icon__add"
-                />เพิ่มคุณวุฒิการศึกษา
-              </button>
-            </div>
-          </div>
-          <div class="detail__third">
-            <div>
-              <label for="exampleFormControlInput1" class="form-label"
-                >สถานะของอาจารย์ที่ปรึกษาวิทยานิพนธ์ (กรุณาเลือก)
-              </label>
-              <div class="content__checkbox">
-                <div class="checkbox__detail">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckChecked"
-                      checked
-                    />
-                    <label class="form-check-label" for="flexCheckChecked">
-                      ที่ปรึกษาหลัก
-                    </label>
-                  </div>
-                </div>
-                <div class="checkbox__detail">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckDefault"
-                    />
-                    <label class="form-check-label" for="flexCheckDefault">
-                      ที่ปรึกษาร่วม
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <label for="exampleFormControlInput1" class="form-label"
-                >ประเภทที่ปรึกษา (กรุณาเลือก)
-              </label>
-              <div class="content__checkbox">
-                <div class="checkbox__detail">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckChecked"
-                      checked
-                    />
-                    <label class="form-check-label" for="flexCheckChecked">
-                      เป็นที่ปรึกษาวิทยานิพนธ์
-                    </label>
-                  </div>
-                </div>
-                <div class="checkbox__detail">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckDefault"
-                    />
-                    <label class="form-check-label" for="flexCheckDefault">
-                      เป็นที่ปรึกษาค้นคว้าอิสระ
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="detail__fourth">
-            <div>
-              <label for="exampleFormControlInput1" class="form-label"
-                >จำนวนนักศึกษาที่ดูแล (คน)
-              </label>
-              <input class="form-control form-control-sm" type="text" />
-            </div>
-          </div>
-          <hr />
-
-          <div class="checkbox__container">
-            <input type="checkbox" class="checkbox-1" />
-            <label for="exampleFormControlInput1" class="detail__header--secondary"
-              >ทำเครื่องหมาย (/) กรณีประจำหลักสูตรมากกว่า ๑ หลักสูตร
-            </label>
-          </div>
-
-          <div class="detail__first">
-            <div>
-              <label for="exampleFormControlInput1" class="form-label"
-                >หลักสูตร 2
-              </label>
-              <input
-                class="form-control form-control-sm"
-                type="text"
-                placeholder="กรุณากรอก"
-              />
-            </div>
-
-            <div>
-              <label for="exampleFormControlInput1" class="form-label"
-                >จำนวนนักศึกษาที่ดูแล (คน)
-              </label>
-              <input
-                class="form-control form-control-sm"
-                type="text"
-                placeholder="กรอกเฉพาะตัวเลข"
-              />
-            </div>
-          </div>
-
-          <div class="detail__third">
-            <div>
-              <label for="exampleFormControlInput1" class="form-label"
-                >สถานะของอาจารย์ที่ปรึกษาวิทยานิพนธ์ (กรุณาเลือก)
-              </label>
-              <div class="content__checkbox">
-                <div class="checkbox__detail">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckChecked"
-                      checked
-                    />
-                    <label class="form-check-label" for="flexCheckChecked">
-                      ที่ปรึกษาหลัก
-                    </label>
-                  </div>
-                </div>
-                <div class="checkbox__detail">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckDefault"
-                    />
-                    <label class="form-check-label" for="flexCheckDefault">
-                      ที่ปรึกษาร่วม
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <label for="exampleFormControlInput1" class="form-label"
-                >ประเภทที่ปรึกษา (กรุณาเลือก)
-              </label>
-              <div class="content__checkbox">
-                <div class="checkbox__detail">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckChecked"
-                      checked
-                    />
-                    <label class="form-check-label" for="flexCheckChecked">
-                      เป็นที่ปรึกษาวิทยานิพนธ์
-                    </label>
-                  </div>
-                </div>
-                <div class="checkbox__detail">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckDefault"
-                    />
-                    <label class="form-check-label" for="flexCheckDefault">
-                      เป็นที่ปรึกษาค้นคว้าอิสระ
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="detail__footer">
-            <button type="button" class="btn btn-add">
-              <img
-                src="/assets/images/img-uni/Add.svg"
-                class="icon__add"
-              />เพิ่มหลักสูตร
-            </button>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="row row--fifth">
+      <div class="mb-3">
+        <label class="form-label">จำนวนนักศึกษาที่ดูแล (คน) </label>
+        <input class="form-control form-control-sm" type="text" />
+      </div>
+    </div>
+    <hr />
 
-        <div class="title__text">ลำดับที่ 2</div>
-        <div class="detail__container">
-          <div class="detail__content">
-            <div>
-              <label for="exampleFormControlInput1" class="form-label"
-                >คำนำหน้าชื่อ</label
-              >
-              <select
-                class="search__content form-select form-select-sm"
-                aria-label=".form-select-sm example"
-              >
-                <option selected>กรุณาระบุ</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
-            <div>
-              <label for="exampleFormControlInput1" class="form-label"
-                >ชื่อ
-              </label>
-              <input
-                class="form-control form-control-sm"
-                type="text"
-                placeholder="กรุณากรอก"
-              />
-            </div>
-            <div>
-              <label for="exampleFormControlInput1" class="form-label"
-                >นามสกุล
-              </label>
-              <input
-                class="form-control form-control-sm"
-                type="text"
-                placeholder="กรุณากรอก"
-              />
-            </div>
-          </div>
-          <div class="detail__primary">
-            <div>
-              <label for="exampleFormControlInput1" class="form-label"
-                >หมายเลขบัตรประชาชน
-              </label>
-              <input
-                class="form-control form-control-sm"
-                type="text"
-                placeholder="หมายเลขบัตรประชาชนจำนวน 13 หลัก"
-              />
-            </div>
-            <div>
-              <label for="exampleFormControlInput1" class="form-label"
-                >ตำแหน่งวิชาการ
-              </label>
-              <input
-                class="form-control form-control-sm"
-                type="text"
-                placeholder="กรุณากรอก"
-              />
-            </div>
-          </div>
-          <div class="detail__header">คุณวุฒิการศึกษา</div>
-          <div class="detail__box">
-            <div class="detail__secondary">
-              <div>
-                <label for="exampleFormControlInput1" class="form-label"
-                  >คุณวุฒิ / สาขาวิชา ที่ 1
-                </label>
-                <input
-                  class="form-control form-control-sm"
-                  type="text"
-                  placeholder="กรุณากรอก"
-                />
-              </div>
-              <div>
-                <label for="exampleFormControlInput1" class="form-label"
-                  >สถาบัน
-                </label>
-                <input
-                  class="form-control form-control-sm"
-                  type="text"
-                  placeholder="กรุณากรอก"
-                />
-              </div>
-              <div>
-                <label for="exampleFormControlInput1" class="form-label"
-                  >ปีที่สำเร็จการศึกษา (พ.ศ.)
-                </label>
-                <input
-                  class="form-control form-control-sm"
-                  type="text"
-                  placeholder="กรอกเฉพาะตัวเลข"
-                />
-              </div>
-            </div>
-            <div class="detail__footer">
-              <button type="button" class="btn btn-add">
-                <img
-                  src="/assets/images/img-uni/Add.svg"
-                  class="icon__add"
-                />เพิ่มคุณวุฒิการศึกษา
-              </button>
-            </div>
-          </div>
-          <div class="detail__third">
-            <div>
-              <label for="exampleFormControlInput1" class="form-label"
-                >สถานะของอาจารย์ที่ปรึกษาวิทยานิพนธ์ (กรุณาเลือก)
-              </label>
-              <div class="content__checkbox">
-                <div class="checkbox__detail">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckChecked"
-                      checked
-                    />
-                    <label class="form-check-label" for="flexCheckChecked">
-                      ที่ปรึกษาหลัก
-                    </label>
-                  </div>
-                </div>
-                <div class="checkbox__detail">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckDefault"
-                    />
-                    <label class="form-check-label" for="flexCheckDefault">
-                      ที่ปรึกษาร่วม
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <label for="exampleFormControlInput1" class="form-label"
-                >ประเภทที่ปรึกษา (กรุณาเลือก)
-              </label>
-              <div class="content__checkbox">
-                <div class="checkbox__detail">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckChecked"
-                      checked
-                    />
-                    <label class="form-check-label" for="flexCheckChecked">
-                      เป็นที่ปรึกษาวิทยานิพนธ์
-                    </label>
-                  </div>
-                </div>
-                <div class="checkbox__detail">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckDefault"
-                    />
-                    <label class="form-check-label" for="flexCheckDefault">
-                      เป็นที่ปรึกษาค้นคว้าอิสระ
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="detail__fourth">
-            <div>
-              <label for="exampleFormControlInput1" class="form-label"
-                >จำนวนนักศึกษาที่ดูแล (คน)
-              </label>
-              <input class="form-control form-control-sm" type="text" />
-            </div>
-          </div>
-          <hr />
+    <div class="checkbox__container">
+      <input type="checkbox" class="checkbox" />
+      <label class="checkbox__header"
+        >ทำเครื่องหมาย (/) กรณีประจำหลักสูตรมากกว่า ๑ หลักสูตร
+      </label>
+    </div>
 
-          <div class="checkbox__container">
-            <input type="checkbox" class="checkbox-1" />
-            <label for="exampleFormControlInput1" class="detail__header--secondary"
-              >ทำเครื่องหมาย (/) กรณีประจำหลักสูตรมากกว่า ๑ หลักสูตร
-            </label>
+    <div class="row row--fourth">
+      <div class="mb-3">
+        <label class="form-label">หลักสูตร 2 </label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          placeholder="กรุณากรอก"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">จำนวนนักศึกษาที่ดูแล (คน) </label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          placeholder="กรอกเฉพาะตัวเลข"
+        />
+      </div>
+    </div>
+
+    <div class="row row--third">
+      <div class="mb-3">
+        <label class="form-label"
+          >สถานะของอาจารย์ที่ปรึกษาวิทยานิพนธ์ (กรุณาเลือก)
+        </label>
+        <div class="content__checkbox">
+          <div class="checkbox__detail">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                value="1"
+                name="status"
+              />
+              <label class="form-check-label"> ที่ปรึกษาหลัก </label>
+            </div>
+          </div>
+          <div class="checkbox__detail">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                value="2"
+                name="status"
+              />
+              <label class="form-check-label"> ที่ปรึกษาร่วม </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <label class="form-label">ประเภทที่ปรึกษา (กรุณาเลือก) </label>
+        <div class="content__checkbox">
+          <div class="checkbox__detail">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                value="1"
+                name="type"
+              />
+              <label class="form-check-label"> เป็นที่ปรึกษาวิทยานิพนธ์ </label>
+            </div>
+          </div>
+          <div class="checkbox__detail">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                value="2"
+                name="type"
+              />
+              <label class="form-check-label">
+                เป็นที่ปรึกษาค้นคว้าอิสระ
+              </label>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="detail__footer">
-      <button type="button" class="btn btn-add">
-        <img
-          src="/assets/images/img-uni/Add.svg"
-          class="icon__add"
-        />เพิ่มอาจารย์ประจำหลักสูตร / ผู้รับผิดชอบหลักสูตร
-      </button>
+    <div class="mb-3">
+      <ksp-add-row-button>เพิ่มคุณวุฒิการศึกษา</ksp-add-row-button>
     </div>
   </div>
 </div>
+
+<ksp-add-row-button>ที่ปรึกษาวิทยานิพนธ์และการค้นคว้าอิสระ </ksp-add-row-button>

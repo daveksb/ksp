@@ -26,6 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
     StepThreeTabOneComponent,
     StepThreeTabTwoComponent,
     StepTwoTabOneSecondComponent,
+
   ],
   exports: [
     StepTwoTabOneComponent,
