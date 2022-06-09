@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { MenuConfig } from '@ksp/shared/ui/side-menu';
 
 export const menu: MenuConfig[] = [
@@ -60,10 +61,18 @@ export const menu: MenuConfig[] = [
 })
 export class UniServiceContainerPageComponent implements OnInit {
   menuConfig: MenuConfig[] = [];
+  header = '';
+  subHeader = '';
 
-  //constructor() {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.menuConfig = menu;
+
+    this.route.data.subscribe((data) => {
+      this.header = data['header'];
+      this.subHeader = data['subHeader'];
+      console.log('test', data);
+    });
   }
 }

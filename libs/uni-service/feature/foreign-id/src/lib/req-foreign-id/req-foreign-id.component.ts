@@ -12,6 +12,8 @@ import {
   styleUrls: ['./req-foreign-id.component.css'],
 })
 export class ReqForeignIdComponent {
+  foreignFiles = ['สำเนาหนังสือเดินทาง'];
+
   constructor(public dialog: MatDialog, private router: Router) {}
 
   cancel() {
