@@ -36,14 +36,8 @@
   grid-template-columns: 4fr 1fr;
 }
 
-.form-select-sm {
-  font-size: 20px;
+.form-select {
   color: #656565;
-}
-
-.detail__footer {
-  display: flex;
-  justify-content: center;
 }
 
 .checkbox-1 {
@@ -51,18 +45,10 @@
   height: 15px;
 }
 
-.detail__header--fourth {
+.checkbox__label {
   font-size: 18px;
   line-height: 15px;
-}
-
-.detail__header--third {
-  font-size: 20px;
-}
-
-.detail__footer {
-  display: flex;
-  justify-content: center;
+  margin-left: 10px;
 }
 
 .form-label {
@@ -70,18 +56,7 @@
   color: #656565;
 }
 
-.form-control {
-  font-size: 20px;
-  background-color: #fff;
-}
-
-.form-select {
-  font-size: 20px;
-}
-
-.option__row {
-  display: grid;
-  grid-template-columns: 0fr 1fr;
-  grid-column-gap: 10px;
-  margin: 10px;
+.button__container {
+  display: flex;
+  justify-content: center;
 }
