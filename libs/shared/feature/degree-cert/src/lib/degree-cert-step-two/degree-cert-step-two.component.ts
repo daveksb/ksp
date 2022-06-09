@@ -29,7 +29,7 @@ export class DegreeCertStepTwoComponent {
   }
 
   tabChanged($event: MatTabChangeEvent) {
-    console.log('tab index = ', $event.index);
+    //console.log('tab index = ', $event.index);
     this.tabIndexChanged.emit($event.index);
   }
 }
