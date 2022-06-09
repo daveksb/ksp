@@ -11,7 +11,12 @@ export class StepTwoTabTwoComponent implements OnInit {
   teacherForm = this.fb.group({
     title: [''],
     name: [''],
-    degrees: this.fb.array([]),
+    degrees: this.fb.array([
+      {
+        name: [''],
+        year: [''],
+      },
+    ]),
   });
 
   mainForm = this.fb.group({
@@ -30,7 +35,12 @@ export class StepTwoTabTwoComponent implements OnInit {
     const teacherForm = this.fb.group({
       title: [''],
       name: [''],
-      degrees: this.fb.array([]),
+      degrees: this.fb.array([
+        {
+          name: [''],
+          year: [''],
+        },
+      ]),
     });
 
     this.teachers.push(teacherForm);
