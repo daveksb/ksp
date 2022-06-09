@@ -50,6 +50,7 @@
     "shared-form-uni-course-form": "libs/shared/form/uni-course-form",
     "shared-form-university-search": "libs/shared/form/university-search",
     "shared-interface": "libs/shared/interface",
+    "shared-ui-add-row-button": "libs/shared/ui/add-row-button",
     "shared-ui-bottom-menu": "libs/shared/ui/bottom-menu",
     "shared-ui-degree-cert-tab-content": "libs/shared/ui/degree-cert-tab-content",
     "shared-ui-dialog": "libs/shared/ui/dialog",

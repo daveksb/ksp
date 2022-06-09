@@ -163,10 +163,9 @@
       </div>
     </div>
 
-    <div class="add__icon-container" *ngIf="!isViewForm">
-      <mat-icon>add_circle_outline</mat-icon>
-      <div class="add__text">เพิ่มสถานที่เปิดสอน</div>
-    </div>
+    <ksp-add-row-button *ngIf="!isViewForm"
+      >เพิ่มสถานที่เปิดสอน</ksp-add-row-button
+    >
   </div>
   <div class="group__container">
     <div class="group__header">หน่วยงานที่รับผิดชอบหลักสูตร</div>
@@ -191,10 +190,10 @@
         />
       </div>
     </div>
-    <div class="add__icon-container" *ngIf="!isViewForm">
-      <mat-icon>add_circle_outline</mat-icon>
-      <div class="add__text">เพิ่มสถานที่เปิดสอน</div>
-    </div>
+
+    <ksp-add-row-button *ngIf="!isViewForm"
+      >เพิ่มหน่วยงานที่รับผิดชอบหลักสูตร
+    </ksp-add-row-button>
   </div>
   <div class="group__container">
     <div class="group__header">
@@ -212,9 +211,8 @@
       </div>
     </div>
 
-    <div class="add__icon-container" *ngIf="!isViewForm">
-      <mat-icon>add_circle_outline</mat-icon>
-      <div class="add__text">เพิ่มสถานที่เปิดสอน</div>
-    </div>
+    <ksp-add-row-button *ngIf="!isViewForm"
+      >เพิ่มสถานที่ที่ต้องประเมินสภาพจริง</ksp-add-row-button
+    >
   </div>
 </form>
