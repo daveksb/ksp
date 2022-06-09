@@ -23,8 +23,9 @@ hr {
 .mat-tab-label {
   background: #eff1f3;
   color: #515153;
-  width: 180px;
+  width: 250px;
   margin: 0 2px;
+  font-size: 16px;
 }
 
 .mat-tab-label-active {

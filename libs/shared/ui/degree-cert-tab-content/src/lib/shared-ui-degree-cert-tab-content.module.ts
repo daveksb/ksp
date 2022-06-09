@@ -7,9 +7,10 @@ import { StepTwoTabFourComponent } from './step-two-tab-four/step-two-tab-four.c
 import { StepThreeTabOneComponent } from './step-three-tab-one/step-three-tab-one.component';
 import { StepThreeTabTwoComponent } from './step-three-tab-two/step-three-tab-two.component';
 import { StepTwoTabOneSecondComponent } from './step-two-tab-one-second/step-two-tab-one-second.component';
+import { SharedUiAddRowButtonModule } from '@ksp/shared/ui/add-row-button';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule,SharedUiAddRowButtonModule],
   declarations: [
     StepTwoTabOneComponent,
     StepTwoTabTwoComponent,
@@ -18,6 +19,7 @@ import { StepTwoTabOneSecondComponent } from './step-two-tab-one-second/step-two
     StepThreeTabOneComponent,
     StepThreeTabTwoComponent,
     StepTwoTabOneSecondComponent,
+
   ],
   exports: [
     StepTwoTabOneComponent,
