@@ -8,9 +8,16 @@ import { StepThreeTabOneComponent } from './step-three-tab-one/step-three-tab-on
 import { StepThreeTabTwoComponent } from './step-three-tab-two/step-three-tab-two.component';
 import { StepTwoTabOneSecondComponent } from './step-two-tab-one-second/step-two-tab-one-second.component';
 import { SharedUiAddRowButtonModule } from '@ksp/shared/ui/add-row-button';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  imports: [CommonModule, SharedUiAddRowButtonModule],
+  imports: [
+    CommonModule,
+    SharedUiAddRowButtonModule,
+    MatIconModule,
+    ReactiveFormsModule,
+  ],
   declarations: [
     StepTwoTabOneComponent,
     StepTwoTabTwoComponent,

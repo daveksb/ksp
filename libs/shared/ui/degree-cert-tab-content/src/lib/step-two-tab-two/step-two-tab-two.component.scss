@@ -1,5 +1,14 @@
+* {
+  font-size: 20px;
+}
+
 .page__title {
   font-size: 22px;
+}
+
+.group__header {
+  display: flex;
+  justify-content: space-between;
 }
 
 .group__title {
@@ -59,4 +68,9 @@
 .button__container {
   display: flex;
   justify-content: center;
+}
+
+.delete__icon {
+  cursor: pointer;
+  color: red;
 }
