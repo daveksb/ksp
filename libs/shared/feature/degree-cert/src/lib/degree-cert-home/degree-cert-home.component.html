@@ -6,43 +6,30 @@
 
       <div class="detail__container--third">
         <div class="detail__container">
-          <label for="exampleFormControlInput1" class="form-label"
-            >เลขที่ใบคำขอ
-          </label>
+          <label class="form-label">เลขที่ใบคำขอ </label>
           <input class="form-control form-control-sm" type="text" />
         </div>
         <div class="detail__container">
-          <label for="exampleFormControlInput1" class="form-label"
-            >ช่วงวันที่
-          </label>
+          <label class="form-label">ช่วงวันที่ </label>
           <input class="form-control form-control-sm" type="date" />
         </div>
       </div>
 
       <div class="detail__container--first">
         <div class="detail__container">
-          <label for="exampleFormControlInput1" class="form-label"
-            >ชื่อปริญญาและสาขาวิชา
-          </label>
+          <label class="form-label">ชื่อปริญญาและสาขาวิชา </label>
           <input class="form-control form-control-sm" type="text" />
         </div>
       </div>
 
       <div class="detail__container--second">
         <div class="detail__container">
-          <label for="exampleFormControlInput1" class="form-label"
-            >รหัสสถาบัน
-          </label>
+          <label class="form-label">รหัสสถาบัน </label>
           <input class="form-control form-control-sm" type="text" />
         </div>
         <div class="detail__container">
-          <label for="exampleFormControlInput1" class="form-label"
-            >สถาบัน / มหาวิทยาลัย
-          </label>
-          <select
-            class="form-select form-select-sm"
-            aria-label=".form-select-sm example"
-          >
+          <label class="form-label">สถาบัน / มหาวิทยาลัย </label>
+          <select class="form-select form-select-sm">
             <option selected>กรุณาเลือก</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -53,42 +40,35 @@
 
       <div class="detail__container--second">
         <div class="detail__container">
-          <label for="exampleFormControlInput1" class="form-label"
-            >ระดับปริญญาที่เสนอขอรับรอง
-          </label>
+          <label class="form-label">ระดับปริญญาที่เสนอขอรับรอง </label>
           <input class="form-control form-control-sm" type="text" />
         </div>
         <div class="detail__container">
-          <label for="exampleFormControlInput1" class="form-label"
-            >สถานะหลักสูตร
-          </label>
+          <label class="form-label">สถานะหลักสูตร </label>
           <input class="form-control form-control-sm" type="text" />
         </div>
       </div>
 
       <div class="detail__container--second">
         <div class="detail__container">
-          <label for="exampleFormControlInput1" class="form-label"
-            >สถานะตรวจสอบ
-          </label>
+          <label class="form-label">สถานะตรวจสอบ </label>
           <input class="form-control form-control-sm" type="text" />
         </div>
         <div class="detail__container">
-          <label for="exampleFormControlInput1" class="form-label"
-            >สถานะรับรอง
-          </label>
+          <label class="form-label">สถานะรับรอง </label>
           <input class="form-control form-control-sm" type="text" />
         </div>
       </div>
 
       <div class="button__container">
-        <button (click)="clear()" type="button" class="btn btn-outline-primary btn-clear">
+        <button (click)="clear()" type="button" class="btn btn-outline-primary">
           ล้างข้อมูล
         </button>
         <button
+          id="search__button"
           (click)="search()"
           type="button"
-          class="btn btn-primary btn-search"
+          class="btn btn-primary"
         >
           ค้นหา
         </button>
@@ -174,14 +154,14 @@
         <ng-container matColumnDef="edit">
           <th mat-header-cell *matHeaderCellDef>แก้ไข</th>
           <td mat-cell *matCellDef="let element">
-            <mat-icon class="edit">edit</mat-icon>
+            <mat-icon>edit</mat-icon>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="print">
           <th mat-header-cell *matHeaderCellDef>พิมพ์ใบคำขอ</th>
           <td mat-cell *matCellDef="let element">
-            <mat-icon class="print">print</mat-icon>
+            <mat-icon>print</mat-icon>
           </td>
         </ng-container>
 

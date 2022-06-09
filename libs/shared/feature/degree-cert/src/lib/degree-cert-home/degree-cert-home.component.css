@@ -20,11 +20,11 @@
 .box__title {
   font-size: 22px;
   padding-left: 15px;
-  padding-top: 15px;
+  padding-top: 2px;
 }
 
 .detail__container {
-  margin-bottom: 16px;
+  margin-bottom: 4px;
   padding: 0 15px;
 }
 
@@ -33,17 +33,15 @@
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-.form-label {
-  font-size: 18px;
-  color: #656565;
-}
-
-.form-control {
-  font-size: 18px;
-}
-
+.form-label,
+.form-control,
 .form-select {
   font-size: 18px;
+}
+
+.form-label {
+  margin-bottom: 0.1rem;
+  color: #656565;
 }
 
 .detail__container--second {
@@ -57,14 +55,14 @@
 }
 
 .button__container {
-  padding: 10px 0;
+  padding: 5px 0;
   display: flex;
   justify-content: flex-end;
   margin: 0px 15px;
 }
 
 .button__container-2 {
-  padding: 10px 0;
+  padding: 5px 0;
   display: flex;
   justify-content: flex-end;
 }
@@ -90,7 +88,7 @@
   margin-right: 10px;
 }
 
-.btn-search {
+#search__button {
   margin-left: 10px;
 }
 
@@ -98,16 +96,7 @@ tr.mat-header-row {
   background-color: aliceblue;
 }
 
-.edit {
+mat-icon {
   color: #0056ff;
   cursor: pointer;
-}
-
-.print {
-  color: #0056ff;
-  cursor: pointer;
-}
-
-.btn-clear {
-  background-color: #fff;
 }
