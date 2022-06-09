@@ -38,7 +38,8 @@
 }
 
 .row--third {
-  grid-template-columns: 1fr 1fr 0.5fr;
+  grid-template-columns: 1fr 1fr 0.5fr 0.1fr;
+  align-items: flex-end;
 }
 
 .row--fourth {
@@ -71,6 +72,8 @@
 }
 
 .delete__icon {
+  width: auto;
   cursor: pointer;
-  color: red;
+  padding: 0;
+  color: #f23c51;
 }

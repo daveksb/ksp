@@ -14,23 +14,16 @@ export class StepTwoTabTwoComponent implements OnInit {
     degrees: this.fb.array([]),
   });
 
-  formGroup = this.fb.group({
+  mainForm = this.fb.group({
     teachers: this.fb.array([this.teacherForm]),
-  });
-
-  degreeformGroup = this.fb.group({
-    name: [''],
-    year: [''],
   });
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.formGroup.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
+    this.mainForm.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
       console.log('form value = ', res);
     });
-
-    console.log('this.getDegree(0) = ', this.getDegree(0));
   }
 
   addTeacher() {
@@ -47,8 +40,11 @@ export class StepTwoTabTwoComponent implements OnInit {
     this.teachers.removeAt(index);
   }
 
-  getDegree(index: number): FormArray<any> {
-    return this.formGroup.controls['teachers'].controls[index].controls[
+  /**
+   * get teacher[index] degrees
+   */
+  getDegrees(index: number): FormArray<any> {
+    return this.mainForm.controls['teachers'].controls[index].controls[
       'degrees'
     ];
   }
@@ -58,10 +54,14 @@ export class StepTwoTabTwoComponent implements OnInit {
       name: [''],
       year: [''],
     });
-    this.getDegree(index).push(degreeformGroup);
+    this.getDegrees(index).push(degreeformGroup);
+  }
+
+  deleteDegree(teacherIndex: number, degreeIndex: number) {
+    this.getDegrees(teacherIndex).removeAt(degreeIndex);
   }
 
   get teachers() {
-    return this.formGroup.controls['teachers'];
+    return this.mainForm.controls['teachers'];
   }
 }

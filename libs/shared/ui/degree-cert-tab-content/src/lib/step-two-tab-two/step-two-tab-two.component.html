@@ -1,6 +1,6 @@
 <div class="page__title">อาจารย์ประจำหลักสูตร / ผู้รับผิดชอบหลักสูตร</div>
 
-<form [formGroup]="formGroup">
+<form [formGroup]="mainForm">
   <ng-container formArrayName="teachers">
     <ng-container *ngFor="let teacherForm of teachers.controls; let i = index">
       <div class="group__header">
@@ -60,15 +60,15 @@
 
         <div>คุณวุฒิการศึกษา</div>
 
-        <!-- <ng-container
-          *ngFor="let degreeForm of getDegree(i).controls; let j = index"
-        > -->
         <ng-container
+          *ngFor="let degreeForm of getDegrees(i).controls; let j = index"
+        >
+          <!-- <ng-container
           *ngFor="
             let degreeForm of teacherForm.controls['degrees'].controls;
             let j = index
           "
-        >
+        > -->
           <div class="row row--third">
             <div>
               <label class="form-label"
@@ -96,11 +96,20 @@
                 placeholder="กรุณากรอก"
               />
             </div>
+            <mat-icon
+              *ngIf="j > 0"
+              class="delete__icon"
+              (click)="deleteDegree(i, j)"
+            >
+              delete_outline</mat-icon
+            >
           </div>
         </ng-container>
 
         <div class="button__container">
-          <ksp-add-row-button (addClick)="addDegree(i)"
+          <ksp-add-row-button
+            (addClick)="addDegree(i)"
+            *ngIf="getDegrees(i).controls.length < 3"
             >เพิ่มคุณวุฒิการศึกษา</ksp-add-row-button
           >
         </div>
@@ -133,7 +142,7 @@
 </form>
 
 <div class="button__container">
-  <ksp-add-row-button (addClick)="addTeacher()"
+  <ksp-add-row-button (addClick)="addTeacher()" *ngIf="teachers.length < 4"
     >เพิ่มอาจารย์ประจำหลักสูตร / ผู้รับผิดชอบหลักสูตร</ksp-add-row-button
   >
 </div>
