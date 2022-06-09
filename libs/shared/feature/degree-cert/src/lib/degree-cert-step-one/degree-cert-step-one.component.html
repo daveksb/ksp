@@ -156,7 +156,7 @@
       <ng-container
         *ngFor="let locationForm of locations.controls; let i = index"
       >
-        <div class="row row--full" [formGroupName]="i">
+        <div class="row row--ternary" [formGroupName]="i">
           <div>
             <label class="form-label">สถานที่เปิดสอน {{ i + 1 }} </label>
             <input
@@ -165,6 +165,7 @@
               formControlName="title"
             />
           </div>
+          <mat-icon (click)="deleteLocation(i)"> delete_outline</mat-icon>
         </div>
       </ng-container>
     </ng-container>

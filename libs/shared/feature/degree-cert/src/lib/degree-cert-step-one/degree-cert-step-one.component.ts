@@ -7,7 +7,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
 import { DynamicComponent, ListData } from '@ksp/shared/interface';
 import { debounceTime } from 'rxjs';
@@ -35,7 +34,7 @@ export class DegreeCertStepOneComponent implements OnInit {
   });
 
   constructor(
-    private router: Router,
+    //private router: Router,
     private fb: FormBuilder,
     private service: DegreeCertStepOneService
   ) {}
@@ -59,16 +58,13 @@ export class DegreeCertStepOneComponent implements OnInit {
     this.addLocation();
   }
 
-  get locations() {
-    return this.step1Form.controls['locations'] as FormArray;
+  addLocation() {
+    const locationForm = this.fb.group({ title: [''] });
+    this.locations.push(locationForm);
   }
 
-  addLocation() {
-    const locationForm = this.fb.group({
-      title: [''],
-    });
-
-    this.locations.push(locationForm);
+  deleteLocation(index: number) {
+    this.locations.removeAt(index);
   }
 
   loadComponent(index: number) {
@@ -77,5 +73,9 @@ export class DegreeCertStepOneComponent implements OnInit {
     viewContainerRef.createComponent<DynamicComponent>(
       this.service.componentList[index]
     );
+  }
+
+  get locations() {
+    return this.step1Form.controls['locations'] as FormArray;
   }
 }
