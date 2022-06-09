@@ -9,4 +9,4 @@ import { MatDialogModule } from '@angular/material/dialog';
   declarations: [UniversitySearchComponent],
   exports: [UniversitySearchComponent],
 })
-export class SharedUiUniversitySearchModule {}
+export class SharedFormUniversitySearchModule {}

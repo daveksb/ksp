@@ -13,6 +13,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedDirectiveModule } from '@ksp/shared/directive';
+import { SharedUiAddRowButtonModule } from '@ksp/shared/ui/add-row-button';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { SharedDirectiveModule } from '@ksp/shared/directive';
     MatTableModule,
     MatIconModule,
     SharedDirectiveModule,
+    SharedUiAddRowButtonModule,
   ],
   declarations: [
     DegreeCertHomeComponent,

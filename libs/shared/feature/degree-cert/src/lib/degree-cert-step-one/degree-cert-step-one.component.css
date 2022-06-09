@@ -38,9 +38,16 @@
   grid-template-columns: 15% auto 30%;
 }
 
+.row--ternary {
+  grid-gap: 1px;
+  grid-template-columns: 97% auto;
+  align-items: flex-end;
+}
+
 .form-label {
   font-size: 18px;
   color: #656565;
+  margin-bottom: 0.1rem;
 }
 
 .form-control,
@@ -54,20 +61,9 @@
   color: #f23c51;
 }
 
-.add__icon-container {
-  display: flex;
-  justify-content: center;
-  color: #f68b33;
-  align-items: flex-end;
-}
-
 mat-icon {
+  width: auto;
   cursor: pointer;
-  font-size: 21px;
-}
-
-.add__text {
-  font-size: 18px;
-  margin-left: 2px;
-  cursor: pointer;
+  padding: 0;
+  color: #f23c51;
 }
