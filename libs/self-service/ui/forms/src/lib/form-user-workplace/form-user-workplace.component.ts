@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { UniversitySearchComponent } from '@ksp/shared/ui/university-search';
+import { UniversitySearchComponent } from '@ksp/shared/form/university-search';
 
 @Component({
   selector: 'self-service-form-user-workplace',

@@ -1,6 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuConfig } from '@ksp/shared/ui/side-menu';
 
+@Component({
+  selector: 'uni-service-container-page',
+  templateUrl: './uni-service-container-page.component.html',
+  styleUrls: ['./uni-service-container-page.component.css'],
+})
+export class UniServiceContainerPageComponent implements OnInit {
+  menuConfig: MenuConfig[] = [];
+
+  ngOnInit(): void {
+    this.menuConfig = menu;
+  }
+}
+
 export const menu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/home.svg ',
@@ -52,18 +65,3 @@ export const menu: MenuConfig[] = [
     path: '',
   },
 ];
-
-@Component({
-  selector: 'uni-service-container-page',
-  templateUrl: './uni-service-container-page.component.html',
-  styleUrls: ['./uni-service-container-page.component.css'],
-})
-export class UniServiceContainerPageComponent implements OnInit {
-  menuConfig: MenuConfig[] = [];
-
-  //constructor() {}
-
-  ngOnInit(): void {
-    this.menuConfig = menu;
-  }
-}

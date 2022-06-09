@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'shared-ui-university-search',
+  displayName: 'shared-form-university-search',
   preset: '../../../../jest.preset.ts',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../../coverage/libs/shared/ui/university-search',
+  coverageDirectory: '../../../../coverage/libs/shared/form/university-search',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },
