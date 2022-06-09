@@ -152,18 +152,24 @@
   <div class="group__container">
     <div class="group__header">สถานที่ที่เปิดสอน</div>
 
-    <div class="row row--full">
-      <div>
-        <label class="form-label">สถานที่เปิดสอน 1 </label>
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="กรุณาระบุกรอก"
-        />
-      </div>
-    </div>
+    <ng-container formArrayName="locations">
+      <ng-container
+        *ngFor="let locationForm of locations.controls; let i = index"
+      >
+        <div class="row row--full" [formGroupName]="i">
+          <div>
+            <label class="form-label">สถานที่เปิดสอน {{ i + 1 }} </label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              formControlName="title"
+            />
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
 
-    <ksp-add-row-button *ngIf="!isViewForm"
+    <ksp-add-row-button (addClick)="addLocation()" *ngIf="!isViewForm"
       >เพิ่มสถานที่เปิดสอน</ksp-add-row-button
     >
   </div>

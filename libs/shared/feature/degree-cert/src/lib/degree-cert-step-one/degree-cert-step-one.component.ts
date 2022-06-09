@@ -6,7 +6,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
 import {
@@ -16,6 +16,7 @@ import {
   CourseFormTwoComponent,
 } from '@ksp/shared/form/uni-course-form';
 import { DynamicComponent, ListData } from '@ksp/shared/interface';
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'ksp-degree-cert-step-one',
@@ -34,6 +35,7 @@ export class DegreeCertStepOneComponent implements OnInit {
   step1Form = this.fb.group({
     degreeType: [''],
     courseType: [''],
+    locations: this.fb.array([]),
   });
 
   constructor(private router: Router, private fb: FormBuilder) {}
@@ -42,6 +44,10 @@ export class DegreeCertStepOneComponent implements OnInit {
     this.courseTypes = courseTypes;
     this.degreeTypes = degreeTypes;
 
+    this.step1Form.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
+      console.log('form value = ', res);
+    });
+
     this.step1Form.controls['courseType'].valueChanges.subscribe((res) => {
       this.loadComponent(Number(res));
     });
@@ -49,6 +55,20 @@ export class DegreeCertStepOneComponent implements OnInit {
     this.step1Form.controls['degreeType'].valueChanges.subscribe((res) => {
       this.degreeType.emit(Number(res));
     });
+
+    this.addLocation();
+  }
+
+  get locations() {
+    return this.step1Form.controls['locations'] as FormArray;
+  }
+
+  addLocation() {
+    const locationForm = this.fb.group({
+      title: [''],
+    });
+
+    this.locations.push(locationForm);
   }
 
   loadComponent(index: number) {
