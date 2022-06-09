@@ -5,4 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './form-foreign-id.component.html',
   styleUrls: ['./form-foreign-id.component.scss'],
 })
-export class FormForeignIdComponent {}
+export class FormForeignIdComponent {
+  foreignInfo = ['1.สำเนาหนังสือเดินทาง'];
+}

@@ -12,16 +12,18 @@ import {
   styleUrls: ['./activity-education-level.component.scss'],
 })
 export class ActivityEducationLevelComponent {
+  educationLevel = ['1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน'];
+
   constructor(private router: Router, public dialog: MatDialog) {}
 
   back() {
     this.router.navigate(['./', 'activity', 'detail']);
   }
 
-  /*   cancel() {
+  cancel() {
     this.router.navigate(['./', 'activity']);
   }
- */
+
   save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',

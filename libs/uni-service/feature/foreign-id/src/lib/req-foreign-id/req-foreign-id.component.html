@@ -1,3 +1,8 @@
+<!-- <ksp-top-nav>
+  <span header>ข้อมูลของฉัน</span>
+  <span subHeader>ประวัติการชำระเงินและใบเสร็จรับเงิน</span>
+</ksp-top-nav> -->
+
 <div class="main-container">
   <div class="box__title">
     รายละเอียดใบคำขอสร้างเลขคุรุสภาสำหรับนักศึกษาชาวต่างชาติ
@@ -283,9 +288,15 @@
           />
         </div>
       </div>
+
       <br />
       <hr />
-      <ksp-form-attachment></ksp-form-attachment>
+      <br />
+
+      <ksp-form-attachment
+        [title]="'กรุณาแนบหลักฐานประกอบการปฏิบัติงาน'"
+        [groups]="foreignFiles"
+      ></ksp-form-attachment>
     </div>
   </div>
 </div>

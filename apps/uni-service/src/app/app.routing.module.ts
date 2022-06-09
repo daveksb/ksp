@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'login', component: UniServiceLoginComponent },
   {
     path: 'home',
+    data: { header: 'หน้าแรก' },
     component: UniServiceContainerPageComponent,
     children: [
       {
@@ -33,6 +34,10 @@ const routes: Routes = [
   },
   {
     path: 'degree-cert',
+    data: {
+      header: 'ยื่นใบคำขอ',
+      subHeader: 'ขอรับรองปริญญาและประกาศนียบัตร',
+    },
     loadChildren: () =>
       import('@ksp/uni-service/feature/degree-cert').then(
         (m) => m.UniServiceFeatureDegreeCertModule
@@ -40,6 +45,10 @@ const routes: Routes = [
   },
   {
     path: 'graduate-list',
+    data: {
+      header: 'ยื่นใบคำขอ',
+      subHeader: 'ขอยื่นรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
+    },
     loadChildren: () =>
       import('@ksp/uni-service/feature/graduate-list').then(
         (m) => m.UniServiceFeatureGraduateListModule
@@ -47,6 +56,10 @@ const routes: Routes = [
   },
   {
     path: 'foreign-id',
+    data: {
+      header: 'ยื่นใบคำขอ',
+      subHeader: 'ขอสร้างเลขคุรุสภาสำหรับนักศึกษาชาวต่างชาติ',
+    },
     component: UniServiceContainerPageComponent,
     children: [
       {
