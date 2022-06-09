@@ -8,8 +8,19 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./step-two-tab-two.component.scss'],
 })
 export class StepTwoTabTwoComponent implements OnInit {
+  teacherForm = this.fb.group({
+    title: [''],
+    name: [''],
+    degrees: this.fb.array([]),
+  });
+
   formGroup = this.fb.group({
-    teachers: this.fb.array([]),
+    teachers: this.fb.array([this.teacherForm]),
+  });
+
+  degreeformGroup = this.fb.group({
+    name: [''],
+    year: [''],
   });
 
   constructor(private fb: FormBuilder) {}
@@ -19,11 +30,16 @@ export class StepTwoTabTwoComponent implements OnInit {
       console.log('form value = ', res);
     });
 
-    this.addTeacher();
+    console.log('this.getDegree(0) = ', this.getDegree(0));
   }
 
   addTeacher() {
-    const teacherForm = this.fb.group({ title: [''] });
+    const teacherForm = this.fb.group({
+      title: [''],
+      name: [''],
+      degrees: this.fb.array([]),
+    });
+
     this.teachers.push(teacherForm);
   }
 
@@ -31,7 +47,21 @@ export class StepTwoTabTwoComponent implements OnInit {
     this.teachers.removeAt(index);
   }
 
+  getDegree(index: number): FormArray<any> {
+    return this.formGroup.controls['teachers'].controls[index].controls[
+      'degrees'
+    ];
+  }
+
+  addDegree(index: number) {
+    const degreeformGroup = this.fb.group({
+      name: [''],
+      year: [''],
+    });
+    this.getDegree(index).push(degreeformGroup);
+  }
+
   get teachers() {
-    return this.formGroup.controls['teachers'] as FormArray;
+    return this.formGroup.controls['teachers'];
   }
 }
