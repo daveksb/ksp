@@ -36,7 +36,6 @@ export class DegreeCertStepOneComponent implements OnInit {
   });
 
   constructor(
-    //private router: Router,
     private fb: FormBuilder,
     private service: DegreeCertStepOneService
   ) {}

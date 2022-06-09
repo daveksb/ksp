@@ -20,7 +20,6 @@ export class UniServiceContainerPageComponent implements OnInit {
     this.route.data.subscribe((data) => {
       this.header = data['header'];
       this.subHeader = data['subHeader'];
-      console.log('test', data);
     });
   }
 }
@@ -76,5 +75,3 @@ export const menu: MenuConfig[] = [
     path: '',
   },
 ];
-
-
