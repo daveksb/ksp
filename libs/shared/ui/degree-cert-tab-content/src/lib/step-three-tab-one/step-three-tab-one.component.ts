@@ -12,11 +12,17 @@ export class StepThreeTabOneComponent implements OnInit {
     rows: this.fb.array([]),
   });
 
+  totalHours = 0;
+
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.form.valueChanges.pipe(debounceTime(500)).subscribe((res) => {
-      console.log('form value = ', res);
+      console.log('form value = ', res.rows);
+
+      if (res.rows) {
+        this.totalHours = <number>res.rows.reduce((p, c: any) => p + c.hour, 0);
+      }
     });
 
     this.addRow();
@@ -35,6 +41,4 @@ export class StepThreeTabOneComponent implements OnInit {
   get rows() {
     return this.form.controls['rows'] as FormArray;
   }
-
-  
 }

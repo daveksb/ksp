@@ -12,11 +12,29 @@ export class StepThreeTabTwoComponent implements OnInit {
     rows: this.fb.array([]),
   });
 
+  totalWeekTerm = 0;
+  totalClassWeek = 0;
+  totalHourTerm = 0;
+
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.form.valueChanges.pipe(debounceTime(500)).subscribe((res) => {
-      console.log('form value = ', res);
+      console.log('form value = ', res.rows);
+
+      if (res.rows) {
+        this.totalWeekTerm = <number>(
+          res.rows.reduce((p, c: any) => p + c.weekTerm, 0)
+        );
+
+        this.totalClassWeek = <number>(
+          res.rows.reduce((p, c: any) => p + c.classWeek, 0)
+        );
+
+        this.totalHourTerm = <number>(
+          res.rows.reduce((p, c: any) => p + c.hourTerm, 0)
+        );
+      }
     });
 
     this.addRow();
