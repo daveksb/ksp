@@ -7,10 +7,10 @@ import { StepTwoTabFourComponent } from './step-two-tab-four/step-two-tab-four.c
 import { StepThreeTabOneComponent } from './step-three-tab-one/step-three-tab-one.component';
 import { StepThreeTabTwoComponent } from './step-three-tab-two/step-three-tab-two.component';
 import { StepTwoTabOneSecondComponent } from './step-two-tab-one-second/step-two-tab-one-second.component';
-import { SharedUiAddRowButtonModule } from '@ksp/shared/ui/add-row-button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { SharedUiAddRowButtonModule } from '@ksp/shared/ui/add-row-button';
 import { SharedFormAdvisorPersonInfoModule } from '@ksp/shared/form/advisor-person-info';
 
 @NgModule({

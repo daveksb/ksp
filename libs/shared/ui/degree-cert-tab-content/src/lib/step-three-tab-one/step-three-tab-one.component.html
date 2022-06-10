@@ -1,4 +1,4 @@
-<form [formGroup]="step3tab1Form">
+<form [formGroup]="form">
   <div class="content__container">
     <div class="detail__header">
       การฝึกปฏิบัติวิชาชีพระหว่างเรียน สำหรับหลักสูตร ป.ตรี / โท ครู / ป.บัณฑิต
@@ -18,84 +18,71 @@
           </thead>
 
           <tbody>
+            <ng-container formArrayName="rows">
+              <ng-container *ngFor="let row of rows.controls; let i = index">
+                <tr [formGroupName]="i">
+                  <th scope="row">
+                    <div class="label__table--number">{{ i + 1 }}</div>
+                  </th>
+
+                  <td class="detail__table">
+                    <div>
+                      <input
+                        class="form-control form-control-sm"
+                        type="number"
+                        placeholder=""
+                        formControlName="year"
+                      />
+                    </div>
+                  </td>
+
+                  <td class="detail__table">
+                    <div>
+                      <input
+                        class="form-control form-control-sm"
+                        type="number"
+                        placeholder=""
+                        formControlName="term"
+                      />
+                    </div>
+                  </td>
+
+                  <td class="detail__table">
+                    <div>
+                      <input
+                        class="form-control form-control-sm"
+                        type="number"
+                        placeholder=""
+                        formControlName="hour"
+                      />
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+            </ng-container>
+
             <tr>
-              <ng-container
-                *ngFor="let locationForm of years.controls; let i = index"
-              >
-                <th scope="row">
-                  <div class="label__table--number">{{ i + 1 }}</div>
-                </th>
-              </ng-container>
+              <th scope="row"></th>
+              <td class="detail__table"></td>
+              <td class="detail__table">
+                <ksp-add-row-button (addClick)="addRow()"
+                  >เพิ่มสถานที่เปิดสอน</ksp-add-row-button
+                >
+              </td>
+              <td class="detail__table"></td>
+            </tr>
 
-              <ng-container
-                formArrayName="years"
-                *ngFor="let yearForm of years.controls; let i = index"
-              >
-                <td class="detail__table">
-                  <div>
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      placeholder=""
-                    />
-                  </div>
-                </td>
-              </ng-container>
-
-              <ng-container
-                formArrayName="terms"
-                *ngFor="let termForm of years.controls; let i = index"
-              >
-                <td class="detail__table">
-                  <div>
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      placeholder=""
-                    />
-                  </div>
-                </td>
-              </ng-container>
-
-              <ng-container
-                formArrayName="hours"
-                *ngFor="let hourForm of years.controls; let i = index"
-              >
-                <td class="detail__table">
-                  <div>
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      placeholder=""
-                    />
-                  </div>
-                </td>
-              </ng-container>
+            <tr>
+              <th scope="row"></th>
+              <th scope="row"></th>
+              <td class="detail__table">
+                <div class="label__table--footer">รวมทั้งหมด</div>
+              </td>
+              <td class="detail__table">
+                <div class="summary__container">{{ totalHours }}</div>
+              </td>
             </tr>
           </tbody>
-
-          <td class="detail__table">
-            <ksp-add-row-button (addClick)="addYear()"
-              >เพิ่มสถานที่เปิดสอน</ksp-add-row-button
-            >
-          </td>
-
-          <tr>
-            <th scope="row"></th>
-            <td class="detail__table"></td>
-
-            <td class="detail__table"></td>
-          </tr>
-          <tr>
-            <th scope="row"></th>
-            <th scope="row"></th>
-            <td class="detail__table">
-              <div class="label__table--footer">รวมทั้งหมด</div>
-            </td>
-            <td class="detail__table">
-              <div class="summary__container">0</div>
-            </td>
-          </tr>
         </table>
       </div>
     </div>
