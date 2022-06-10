@@ -29,7 +29,7 @@
                     <div>
                       <input
                         class="form-control form-control-sm"
-                        type="text"
+                        type="number"
                         placeholder=""
                         formControlName="year"
                       />
@@ -40,7 +40,7 @@
                     <div>
                       <input
                         class="form-control form-control-sm"
-                        type="text"
+                        type="number"
                         placeholder=""
                         formControlName="term"
                       />
@@ -51,7 +51,7 @@
                     <div>
                       <input
                         class="form-control form-control-sm"
-                        type="text"
+                        type="number"
                         placeholder=""
                         formControlName="hour"
                       />
@@ -60,30 +60,29 @@
                 </tr>
               </ng-container>
             </ng-container>
+
+            <tr>
+              <th scope="row"></th>
+              <td class="detail__table"></td>
+              <td class="detail__table">
+                <ksp-add-row-button (addClick)="addRow()"
+                  >เพิ่มสถานที่เปิดสอน</ksp-add-row-button
+                >
+              </td>
+              <td class="detail__table"></td>
+            </tr>
+
+            <tr>
+              <th scope="row"></th>
+              <th scope="row"></th>
+              <td class="detail__table">
+                <div class="label__table--footer">รวมทั้งหมด</div>
+              </td>
+              <td class="detail__table">
+                <div class="summary__container">0</div>
+              </td>
+            </tr>
           </tbody>
-
-          <td class="detail__table">
-            <ksp-add-row-button (addClick)="addRow()"
-              >เพิ่มสถานที่เปิดสอน</ksp-add-row-button
-            >
-          </td>
-
-          <tr>
-            <th scope="row"></th>
-            <td class="detail__table"></td>
-
-            <td class="detail__table"></td>
-          </tr>
-          <tr>
-            <th scope="row"></th>
-            <th scope="row"></th>
-            <td class="detail__table">
-              <div class="label__table--footer">รวมทั้งหมด</div>
-            </td>
-            <td class="detail__table">
-              <div class="summary__container">0</div>
-            </td>
-          </tr>
         </table>
       </div>
     </div>
