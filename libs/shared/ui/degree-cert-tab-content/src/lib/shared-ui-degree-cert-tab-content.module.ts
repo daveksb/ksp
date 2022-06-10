@@ -28,6 +28,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     StepThreeTabOneComponent,
     StepThreeTabTwoComponent,
     StepTwoTabOneSecondComponent,
+
   ],
   exports: [
     StepTwoTabOneComponent,

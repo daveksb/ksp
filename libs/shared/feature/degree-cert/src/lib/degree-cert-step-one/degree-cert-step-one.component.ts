@@ -31,6 +31,8 @@ export class DegreeCertStepOneComponent implements OnInit {
     degreeType: [''],
     courseType: [''],
     locations: this.fb.array([]),
+    institutions: this.fb.array([]),
+    locations2: this.fb.array([]),
   });
 
   constructor(
@@ -55,6 +57,8 @@ export class DegreeCertStepOneComponent implements OnInit {
     });
 
     this.addLocation();
+    this.addInstitution();
+    this.addLocation2();
   }
 
   addLocation() {
@@ -62,8 +66,26 @@ export class DegreeCertStepOneComponent implements OnInit {
     this.locations.push(locationForm);
   }
 
+  addLocation2() {
+    const locationForm2 = this.fb.group({ title: [''] });
+    this.locations2.push(locationForm2);
+  }
+
+  addInstitution() {
+    const institutionForm = this.fb.group({ title: [''] });
+    this.institutions.push(institutionForm);
+  }
+
   deleteLocation(index: number) {
     this.locations.removeAt(index);
+  }
+
+  deleteInstitution(index: number) {
+    this.institutions.removeAt(index);
+  }
+
+  deleteLocation2(index: number) {
+    this.locations2.removeAt(index);
   }
 
   loadComponent(index: number) {
@@ -76,5 +98,13 @@ export class DegreeCertStepOneComponent implements OnInit {
 
   get locations() {
     return this.step1Form.controls['locations'] as FormArray;
+  }
+
+  get institutions() {
+    return this.step1Form.controls['institutions'] as FormArray;
+  }
+
+  get locations2() {
+    return this.step1Form.controls['locations2'] as FormArray;
   }
 }

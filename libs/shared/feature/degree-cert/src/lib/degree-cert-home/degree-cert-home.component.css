@@ -55,10 +55,10 @@
 }
 
 .button__container {
-  padding: 5px 0;
+  padding: 15px 0;
   display: flex;
   justify-content: flex-end;
-  margin: 0px 15px;
+  margin: 0 15px;
 }
 
 .button__container-2 {
@@ -85,7 +85,7 @@
   box-sizing: border-box;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 #search__button {
@@ -100,3 +100,8 @@ mat-icon {
   color: #0056ff;
   cursor: pointer;
 }
+
+#btn__clear {
+  background-color: #fff;
+}
+

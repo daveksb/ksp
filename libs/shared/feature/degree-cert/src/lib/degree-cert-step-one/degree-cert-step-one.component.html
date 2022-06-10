@@ -177,48 +177,53 @@
   <div class="group__container">
     <div class="group__header">หน่วยงานที่รับผิดชอบหลักสูตร</div>
 
-    <div class="row row--full">
-      <div>
-        <label class="form-label">ชื่อคณะ / หน่วยงานที่ 1 </label>
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="กรุณากรอก"
-        />
-      </div>
-    </div>
-    <div class="row row--full">
-      <div>
-        <label class="form-label">ชื่อคณะ / หน่วยงานที่ 2 </label>
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="กรุณากรอก"
-        />
-      </div>
-    </div>
+    <ng-container formArrayName="institutions">
+      <ng-container
+        *ngFor="let institutionForm of institutions.controls; let i = index"
+      >
+        <div class="row row--ternary" [formGroupName]="i">
+          <div>
+            <label class="form-label">ชื่อคณะ / หน่วยงานที่ {{ i + 1 }} </label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              placeholder="กรุณากรอก"
+            />
+          </div>
+          <mat-icon (click)="deleteInstitution(i)"> delete_outline</mat-icon>
+        </div>
+      </ng-container>
+    </ng-container>
 
-    <ksp-add-row-button *ngIf="!isViewForm"
+    <ksp-add-row-button (addClick)="addInstitution()" *ngIf="!isViewForm"
       >เพิ่มหน่วยงานที่รับผิดชอบหลักสูตร
     </ksp-add-row-button>
   </div>
+
   <div class="group__container">
     <div class="group__header">
       สถานที่ที่ต้องประเมินสภาพจริง / ติดตามผลเชิงประจักษ์
     </div>
 
-    <div class="row row--full">
-      <div>
-        <label class="form-label">สถานที่ 1 </label>
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="กรุณากรอก"
-        />
-      </div>
-    </div>
+    <ng-container formArrayName="locations2">
+      <ng-container
+        *ngFor="let locationForm2 of locations2.controls; let i = index"
+      >
+        <div class="row row--ternary">
+          <div>
+            <label class="form-label">สถานที่ {{ i + 1 }} </label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              placeholder="กรุณากรอก"
+            />
+          </div>
+          <mat-icon (click)="deleteLocation2(i)"> delete_outline</mat-icon>
+        </div>
+      </ng-container>
+    </ng-container>
 
-    <ksp-add-row-button *ngIf="!isViewForm"
+    <ksp-add-row-button (addClick)="addLocation2()" *ngIf="!isViewForm"
       >เพิ่มสถานที่ที่ต้องประเมินสภาพจริง</ksp-add-row-button
     >
   </div>
