@@ -10,12 +10,14 @@ import { StepTwoTabOneSecondComponent } from './step-two-tab-one-second/step-two
 import { SharedUiAddRowButtonModule } from '@ksp/shared/ui/add-row-button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedUiAddRowButtonModule,
     MatIconModule,
+    MatTooltipModule,
     ReactiveFormsModule,
   ],
   declarations: [
