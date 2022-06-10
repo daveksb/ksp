@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'ksp-step-3-tab-1',
@@ -7,59 +8,37 @@ import { FormArray, FormBuilder } from '@angular/forms';
   styleUrls: ['./step-three-tab-one.component.scss'],
 })
 export class StepThreeTabOneComponent implements OnInit {
-  step3tab1Form = this.fb.group({
-    years: this.fb.array([]),
-    terms: this.fb.array([]),
-    hours: this.fb.array([]),
+  form = this.fb.group({
+    rows: this.fb.array([]),
   });
+
+  totalHours = 0;
+
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    /* this.step1Form.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
-      console.log('form value = ', res);
-    }); */
+    this.form.valueChanges.pipe(debounceTime(500)).subscribe((res) => {
+      console.log('form value = ', res.rows);
 
-    this.addYear();
-    this.addTerm();
-    this.addHours();
+      if (res.rows) {
+        this.totalHours = <number>res.rows.reduce((p, c: any) => p + c.hour, 0);
+      }
+    });
+
+    this.addRow();
   }
 
-  addYear() {
-    const yearForm = this.fb.group({ title: [''] });
-    this.years.push(yearForm);
+  addRow() {
+    const step3Form = this.fb.group({
+      year: [''],
+      term: [''],
+      hour: [''],
+    });
+
+    this.rows.push(step3Form);
   }
 
-  addTerm() {
-    const termForm = this.fb.group({ title: [''] });
-    this.terms.push(termForm);
-  }
-
-  addHours() {
-    const hourForm = this.fb.group({ title: [''] });
-    this.hours.push(hourForm);
-  }
-
-  deleteYear(index: number) {
-    this.years.removeAt(index);
-  }
-
-  deleteTerm(index: number) {
-    this.terms.removeAt(index);
-  }
-
-  deleteHour(index: number) {
-    this.hours.removeAt(index);
-  }
-
-  get years() {
-    return this.step3tab1Form.controls['years'] as FormArray;
-  }
-
-  get terms() {
-    return this.step3tab1Form.controls['terms'] as FormArray;
-  }
-
-  get hours() {
-    return this.step3tab1Form.controls['hours'] as FormArray;
+  get rows() {
+    return this.form.controls['rows'] as FormArray;
   }
 }

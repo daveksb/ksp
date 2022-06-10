@@ -1,308 +1,150 @@
-<div class="tab-content" id="nav-tabContent">
-  <div
-    class="tab-pane fade show active tab__body"
-    id="nav-home"
-    role="tabpanel"
-    aria-labelledby="nav-home-tab"
-  >
-    <div class="tab__content">
-      <div class="header__detail">
-        ปริญญา/หลักสูตร<br />
-        1) ปริญญาตรีทางการศึกษา (วิชาชีพครู) <br />
-        2) ปริญญาตรีทางการศึกษา (วิชาชีพบริหาร) <br />
-        3) ประกาศนียบัตรบัณฑิตทางการศึกษา (วิชาชีพครู) <br />
-        4) ประกาศนียบัตรบัณฑิตทางการศึกษา (วิชาชีพบริหาร)
-      </div>
-
-      <div class="detail__container">
-        <div class="detail__header">โครงสร้างหลักสูตร</div>
-        <div class="table-responsive">
-          <table class="table">
-            <thead class="header__table">
-              <tr>
-                <th scope="col" class="header__column--primary">
-                  โครงสร้างหลักสูตร
-                </th>
-                <th scope="col" class="header__column">จำนวนหน่วยกิต</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row" class="label__table">วิชาการศึกษาทั่วไป</th>
-                <td class="detail__table">
-                  <div class="table__input">
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      placeholder="จำนวนหน่วยกิต"
-                    />
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row" class="label__table">
-                  วิชาชีพครู : ภาคทฤษฎีและปฏิบัติ
-                </th>
-                <td class="detail__table">
-                  <div class="table__input">
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      placeholder="จำนวนหน่วยกิต"
-                    />
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row" class="label__table">
-                  วิชาชีพครู : ฝึกปฏิบัติวิชาชีพระหว่างเรียน
-                </th>
-                <td class="detail__table">
-                  <div class="table__input">
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      placeholder="จำนวนหน่วยกิต"
-                    />
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row" class="label__table">
-                  วิชาชีพครู : ปฏิบัติการสอนในสถานศึกษา / การบริหารสถานศึกษา
-                </th>
-                <td class="detail__table">
-                  <div class="table__input">
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      placeholder="จำนวนหน่วยกิต"
-                    />
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row" class="label__table">วิชาเอกแรก</th>
-                <td class="detail__table">
-                  <div class="table__input">
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      placeholder="จำนวนหน่วยกิต"
-                    />
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row" class="label__table">
-                  วิชาเอกที่สองหรือวิชาโท
-                </th>
-                <td class="detail__table">
-                  <div class="table__input">
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      placeholder="จำนวนหน่วยกิต"
-                    />
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <th scope="row" class="label__table">วิชาเลือกเสรี</th>
-                <td class="detail__table">
-                  <div class="table__input">
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      placeholder="จำนวนหน่วยกิต"
-                    />
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <th scope="row" class="label__table">วิชาเอก</th>
-                <td class="detail__table">
-                  <div class="table__input">
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      placeholder="จำนวนหน่วยกิต"
-                    />
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <th scope="row" class="label__table--footer">รวมทั้งหมด</th>
-                <td class="detail__table">
-                  <div class="table__input">
-                    <div class="summary__container">0</div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+<form [formGroup]="form">
+  <div class="tab-content" id="nav-tabContent">
+    <div
+      class="tab-pane fade show active tab__body"
+      id="nav-home"
+      role="tabpanel"
+      aria-labelledby="nav-home-tab"
+    >
+      <div class="tab__content">
+        <div class="header__detail">
+          ปริญญา/หลักสูตร<br />
+          1) ปริญญาตรีทางการศึกษา (วิชาชีพครู) <br />
+          2) ปริญญาตรีทางการศึกษา (วิชาชีพบริหาร) <br />
+          3) ประกาศนียบัตรบัณฑิตทางการศึกษา (วิชาชีพครู) <br />
+          4) ประกาศนียบัตรบัณฑิตทางการศึกษา (วิชาชีพบริหาร)
         </div>
-      </div>
-      <div class="detail__container">
-        <div class="detail__header">
-          แผนการรับนิสิต / นักศึกษา <span class="label__text">*</span>
+
+        <div class="detail__container">
+          <div class="detail__header">โครงสร้างหลักสูตร</div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="header__table">
+                <tr>
+                  <th scope="col" class="header__column--primary">
+                    โครงสร้างหลักสูตร
+                  </th>
+                  <th scope="col" class="header__column">จำนวนหน่วยกิต</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <ng-container formArrayName="subjects">
+                  <ng-container
+                    *ngFor="let item of subjects.controls; let i = index"
+                  >
+                    <tr [formGroupName]="i">
+                      <th scope="row" class="label__table">
+                        {{ item.value.label }}
+                      </th>
+                      <td class="detail__table">
+                        <div class="table__input">
+                          <input
+                            class="form-control form-control-sm"
+                            type="number"
+                            placeholder="จำนวนหน่วยกิต"
+                            formControlName="credit"
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </ng-container>
+
+                <tr>
+                  <th scope="row" class="label__table--footer">รวมทั้งหมด</th>
+                  <td class="detail__table">
+                    <div class="table__input">
+                      <div class="summary__container">{{ totalCredit }}</div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div class="table-responsive">
-          <table class="table">
-            <thead class="header__table">
-              <tr>
-                <th scope="col" class="header__column--third">
-                  แผนการรับนักศึกษา (รายปี)
-                </th>
-                <th scope="col" class="header__column">ปีการศึกษา (พ.ศ)</th>
-                <th scope="col" class="header__column">จำนวนนักศึกษา</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row" class="label__table">แผนฯ ปีที่ 1</th>
-                <td class="detail__table">
-                  <div class="table__input">
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      placeholder="กรอกปีการศึกษา"
-                    />
-                  </div>
-                </td>
 
-                <td class="detail__table">
-                  <div class="table__input">
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      placeholder="จำนวนนักศึกษา"
-                    />
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row" class="label__table">แผนฯ ปีที่ 2</th>
-                <td class="detail__table">
-                  <div class="table__input">
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      placeholder="กรอกปีการศึกษา"
-                    />
-                  </div>
-                </td>
+        <div class="detail__container">
+          <div class="detail__header">
+            แผนการรับนิสิต / นักศึกษา <span class="label__text">*</span>
+          </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="header__table">
+                <tr>
+                  <th scope="col" class="header__column--third">
+                    แผนการรับนักศึกษา (รายปี)
+                  </th>
+                  <th scope="col" class="header__column">ปีการศึกษา (พ.ศ)</th>
+                  <th scope="col" class="header__column">จำนวนนักศึกษา</th>
+                </tr>
+              </thead>
 
-                <td class="detail__table">
-                  <div class="table__input">
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      placeholder="จำนวนนักศึกษา"
-                    />
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row" class="label__table">แผนฯ ปีที่ 3</th>
-                <td class="detail__table">
-                  <div class="table__input">
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      placeholder="กรอกปีการศึกษา"
-                    />
-                  </div>
-                </td>
+              <tbody>
+                <ng-container formArrayName="plans">
+                  <ng-container
+                    *ngFor="let item of plans.controls; let j = index"
+                  >
+                    <tr [formGroupName]="j">
+                      <th scope="row" class="label__table">
+                        {{ item.value?.label }}
+                      </th>
+                      <td class="detail__table">
+                        <div class="table__input">
+                          <input
+                            class="form-control form-control-sm"
+                            type="number"
+                            placeholder="กรอกปีการศึกษา"
+                            formControlName="year"
+                          />
+                        </div>
+                      </td>
 
-                <td class="detail__table">
-                  <div class="table__input">
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      placeholder="จำนวนนักศึกษา"
-                    />
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row" class="label__table">แผนฯ ปีที่ 4</th>
-                <td class="detail__table">
-                  <div class="table__input">
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      placeholder="กรอกปีการศึกษา"
-                    />
-                  </div>
-                </td>
-
-                <td class="detail__table">
-                  <div class="table__input">
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      placeholder="จำนวนนักศึกษา"
-                    />
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row" class="label__table">แผนฯ ปีที่ 5</th>
-                <td class="detail__table">
-                  <div class="table__input">
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      placeholder="กรอกปีการศึกษา"
-                    />
-                  </div>
-                </td>
-
-                <td class="detail__table">
-                  <div class="table__input">
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      placeholder="จำนวนนักศึกษา"
-                    />
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row"></th>
-                <td class="detail__table">
-                  <div class="label__table--footer">รวมทั้งหมด</div>
-                </td>
-                <td class="detail__table">
-                  <div class="table__input">
-                    <div class="summary__container">0</div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                      <td class="detail__table">
+                        <div class="table__input">
+                          <input
+                            class="form-control form-control-sm"
+                            type="number"
+                            placeholder="จำนวนนักศึกษา"
+                            formControlName="student"
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </ng-container>
+                <tr>
+                  <th scope="row"></th>
+                  <td class="detail__table">
+                    <div class="label__table--footer">รวมทั้งหมด</div>
+                  </td>
+                  <td class="detail__table">
+                    <div class="table__input">
+                      <div class="summary__container">{{ totalStudent }}</div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
+    <div
+      class="tab-pane fade"
+      id="nav-profile"
+      role="tabpanel"
+      aria-labelledby="nav-profile-tab"
+    >
+      ...
+    </div>
+    <div
+      class="tab-pane fade"
+      id="nav-contact"
+      role="tabpanel"
+      aria-labelledby="nav-contact-tab"
+    >
+      ...
+    </div>
   </div>
-  <div
-    class="tab-pane fade"
-    id="nav-profile"
-    role="tabpanel"
-    aria-labelledby="nav-profile-tab"
-  >
-    ...
-  </div>
-  <div
-    class="tab-pane fade"
-    id="nav-contact"
-    role="tabpanel"
-    aria-labelledby="nav-contact-tab"
-  >
-    ...
-  </div>
-</div>
+</form>
