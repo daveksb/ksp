@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'ksp-step-3-tab-1',
@@ -7,59 +8,29 @@ import { FormArray, FormBuilder } from '@angular/forms';
   styleUrls: ['./step-three-tab-one.component.scss'],
 })
 export class StepThreeTabOneComponent implements OnInit {
-  step3tab1Form = this.fb.group({
-    years: this.fb.array([]),
-    terms: this.fb.array([]),
-    hours: this.fb.array([]),
+  step3Form = this.fb.group({
+    rows: this.fb.array([]),
   });
+
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    /* this.step1Form.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
+    this.step3Form.valueChanges.subscribe((res) => {
       console.log('form value = ', res);
-    }); */
-
-    this.addYear();
-    this.addTerm();
-    this.addHours();
+    });
   }
 
-  addYear() {
-    const yearForm = this.fb.group({ title: [''] });
-    this.years.push(yearForm);
+  addRow() {
+    const step3Form: any = this.fb.group({
+      years: [''],
+      terms: [''],
+      hours: [''],
+    });
+
+    this.rows.push(step3Form);
   }
 
-  addTerm() {
-    const termForm = this.fb.group({ title: [''] });
-    this.terms.push(termForm);
-  }
-
-  addHours() {
-    const hourForm = this.fb.group({ title: [''] });
-    this.hours.push(hourForm);
-  }
-
-  deleteYear(index: number) {
-    this.years.removeAt(index);
-  }
-
-  deleteTerm(index: number) {
-    this.terms.removeAt(index);
-  }
-
-  deleteHour(index: number) {
-    this.hours.removeAt(index);
-  }
-
-  get years() {
-    return this.step3tab1Form.controls['years'] as FormArray;
-  }
-
-  get terms() {
-    return this.step3tab1Form.controls['terms'] as FormArray;
-  }
-
-  get hours() {
-    return this.step3tab1Form.controls['hours'] as FormArray;
+  get rows() {
+    return this.step3Form.controls['rows'];
   }
 }

@@ -1,4 +1,4 @@
-<form [formGroup]="step3tab1Form">
+<form [formGroup]="step3Form">
   <div class="content__container">
     <div class="detail__header">
       การฝึกปฏิบัติวิชาชีพระหว่างเรียน สำหรับหลักสูตร ป.ตรี / โท ครู / ป.บัณฑิต
@@ -18,64 +18,51 @@
           </thead>
 
           <tbody>
-            <tr>
+            <ng-container formArrayName="rows">
               <ng-container
-                *ngFor="let locationForm of years.controls; let i = index"
+                *ngFor="let row of rows.controls; let i = index"
               >
-                <th scope="row">
-                  <div class="label__table--number">{{ i + 1 }}</div>
-                </th>
-              </ng-container>
+                <tr>
+                  <th scope="row">
+                    <div class="label__table--number">{{ i + 1 }}</div>
+                  </th>
 
-              <ng-container
-                formArrayName="years"
-                *ngFor="let yearForm of years.controls; let i = index"
-              >
-                <td class="detail__table">
-                  <div>
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      placeholder=""
-                    />
-                  </div>
-                </td>
-              </ng-container>
+                  <td class="detail__table">
+                    <div>
+                      <input
+                        class="form-control form-control-sm"
+                        type="text"
+                        placeholder=""
+                      />
+                    </div>
+                  </td>
 
-              <ng-container
-                formArrayName="terms"
-                *ngFor="let termForm of years.controls; let i = index"
-              >
-                <td class="detail__table">
-                  <div>
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      placeholder=""
-                    />
-                  </div>
-                </td>
-              </ng-container>
+                  <td class="detail__table">
+                    <div>
+                      <input
+                        class="form-control form-control-sm"
+                        type="text"
+                        placeholder=""
+                      />
+                    </div>
+                  </td>
 
-              <ng-container
-                formArrayName="hours"
-                *ngFor="let hourForm of years.controls; let i = index"
-              >
-                <td class="detail__table">
-                  <div>
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      placeholder=""
-                    />
-                  </div>
-                </td>
+                  <td class="detail__table">
+                    <div>
+                      <input
+                        class="form-control form-control-sm"
+                        type="text"
+                        placeholder=""
+                      />
+                    </div>
+                  </td>
+                </tr>
               </ng-container>
-            </tr>
+            </ng-container>
           </tbody>
 
           <td class="detail__table">
-            <ksp-add-row-button (addClick)="addYear()"
+            <ksp-add-row-button (addClick)="addRow()"
               >เพิ่มสถานที่เปิดสอน</ksp-add-row-button
             >
           </td>
