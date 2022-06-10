@@ -43,22 +43,18 @@
 }
 
 .row--secondary {
-  display: grid;
   grid-template-columns: 1fr 1fr 0.5fr;
 }
 
 .row--third {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 10%;
 }
 
 .row--fourth {
-  display: grid;
   grid-template-columns: 1fr 15%;
 }
 
 .row--fifth {
-  display: grid;
   grid-template-columns: 25% 1fr;
 }
 
