@@ -2,43 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 
-const data = [
-  {
-    label: 'วิชาการศึกษาทั่วไป',
-    formName: 'subject1',
-  },
-  {
-    label: 'วิชาชีพครู : ภาคทฤษฎีและปฏิบัติ',
-    formName: 'subject2',
-  },
-  {
-    label: 'วิชาชีพครู : ฝึกปฏิบัติวิชาชีพระหว่างเรียน',
-    formName: 'subject3',
-  },
-  {
-    label: 'วิชาชีพครู : ปฏิบัติการสอนในสถานศึกษา / การบริหารสถานศึกษา',
-    formName: 'subject4',
-  },
-  {
-    label: 'วิชาเอกแรก',
-    formName: 'subject5',
-  },
-  {
-    label: 'วิชาเอกที่สองหรือวิชาโท',
-    formName: 'subject6',
-  },
-  {
-    label: 'วิชาเลือกเสรี',
-    formName: 'subject7',
-  },
-  {
-    label: 'วิชาเอก',
-    formName: 'subject8',
-  },
-];
-
-//const temp1 = data.reduce((p, c) => ({ ...p, ...{ [c.formName]: '' } }), {});
-
 @Component({
   selector: 'ksp-step-2-tab-1-second',
   templateUrl: './step-two-tab-one-second.component.html',
@@ -48,61 +11,61 @@ export class StepTwoTabOneSecondComponent implements OnInit {
   totalCredit = 0;
   totalStudent = 0;
 
-  temp2 = {
-    rows: this.fb.array([
+  defaultSubject = {
+    subjects: this.fb.array([
       this.fb.group({
-        label: 'aaa',
+        label: 'วิชาการศึกษาทั่วไป',
+        credit: [''],
+      }),
+    ]),
+  };
+
+  defaultPlan = {
+    plans: this.fb.array([
+      this.fb.group({
+        label: 'แผนฯ ปีที่ 1',
         student: [''],
         year: [''],
       }),
     ]),
   };
 
-  temp3 = {
-    subjects: this.fb.array([
-      this.fb.group({
-        label: 'aaa',
-        credit: [''],
-      }),
-    ]),
-  };
-
   form = this.fb.group({
-    ...this.temp2,
-    ...this.temp3,
+    ...this.defaultPlan,
+    ...this.defaultSubject,
   });
-
-  data = data;
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.form.valueChanges.pipe(debounceTime(500)).subscribe((res) => {
-      console.log('form value = ', res);
-
-      if (res.rows) {
-        this.totalStudent = <number>(
-          res.rows.reduce((p, c: any) => p + c.student, 0)
+      if (res.subjects) {
+        this.totalCredit = <number>(
+          res.subjects.reduce((p, c: any) => p + c.credit, 0)
         );
-        console.log('stu = ', this.totalStudent);
+      }
+
+      if (res.plans) {
+        this.totalStudent = <number>(
+          res.plans.reduce((p, c: any) => p + c.student, 0)
+        );
       }
     });
-
-    this.addRows();
+    this.addData();
   }
 
-  get rows() {
-    return this.form.controls['rows'];
+  get plans() {
+    return this.form.controls['plans'];
   }
 
   get subjects() {
     return this.form.controls['subjects'];
   }
 
-  addRows() {
-    const newRow = (data: string) => {
+  addData() {
+    const newPlan = (year: number) => {
       return this.fb.group({
-        label: data,
+        label: 'แผนฯ ปีที่ ' + year,
         student: [''],
         year: [''],
       });
@@ -116,14 +79,18 @@ export class StepTwoTabOneSecondComponent implements OnInit {
     };
 
     const subjects: any = [
-      newSubject('kkk'),
-      newSubject('lll'),
-      newSubject('mmm'),
+      newSubject('วิชาชีพครู : ภาคทฤษฎีและปฏิบัติ'),
+      newSubject('วิชาชีพครู : ฝึกปฏิบัติวิชาชีพระหว่างเรียน'),
+      newSubject('วิชาชีพครู : ปฏิบัติการสอนในสถานศึกษา / การบริหารสถานศึกษา'),
+      newSubject('วิชาเอกแรก'),
+      newSubject('วิชาเอกที่สองหรือวิชาโท'),
+      newSubject('วิชาเลือกเสรี'),
+      newSubject('วิชาเอก'),
     ];
 
-    const rows: any = [newRow('aa'), newRow('bb'), newRow('cc')];
+    const plans: any = [newPlan(2), newPlan(3), newPlan(4), newPlan(5)];
 
-    rows.forEach((i: any) => this.rows.push(i));
+    plans.forEach((i: any) => this.plans.push(i));
     subjects.forEach((i: any) => this.subjects.push(i));
   }
 }

@@ -55,7 +55,7 @@
                   <th scope="row" class="label__table--footer">รวมทั้งหมด</th>
                   <td class="detail__table">
                     <div class="table__input">
-                      <div class="summary__container">0</div>
+                      <div class="summary__container">{{ totalCredit }}</div>
                     </div>
                   </td>
                 </tr>
@@ -81,9 +81,9 @@
               </thead>
 
               <tbody>
-                <ng-container formArrayName="rows">
+                <ng-container formArrayName="plans">
                   <ng-container
-                    *ngFor="let item of rows.controls; let j = index"
+                    *ngFor="let item of plans.controls; let j = index"
                   >
                     <tr [formGroupName]="j">
                       <th scope="row" class="label__table">
@@ -120,7 +120,7 @@
                   </td>
                   <td class="detail__table">
                     <div class="table__input">
-                      <div class="summary__container">0</div>
+                      <div class="summary__container">{{ totalStudent }}</div>
                     </div>
                   </td>
                 </tr>
