@@ -52,9 +52,7 @@
 
     <div>คุณวุฒิการศึกษา</div>
 
-    <!--   <ng-container
-      *ngFor="let degreeForm of getDegrees(i).controls; let j = index"
-    >
+    <ng-container *ngFor="let degreeForm of degrees.controls; let j = index">
       <div class="row row--third">
         <div>
           <label class="form-label">คุณวุฒิ / สาขาวิชา ที่ {{ j + 1 }}</label>
@@ -84,20 +82,18 @@
           *ngIf="j > 0"
           class="delete__icon"
           matTooltip="ลบคุณวุฒิการศึกษา ลำดับที่ {{ j + 1 }}"
-          (click)="deleteDegree(i, j)"
+          (click)="({})"
         >
           delete_outline</mat-icon
         >
       </div>
-    </ng-container> -->
+    </ng-container>
 
-    <!--     <div class="button__container">
-      <ksp-add-row-button
-        (addClick)="addDegree(i)"
-        *ngIf="getDegrees(i).controls.length < 3"
+    <div class="button__container">
+      <ksp-add-row-button (addClick)="addDegree()"
         >เพิ่มคุณวุฒิการศึกษา</ksp-add-row-button
       >
-    </div> -->
+    </div>
     <hr />
   </div>
 </form>
