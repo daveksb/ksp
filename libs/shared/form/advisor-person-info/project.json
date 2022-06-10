@@ -1,0 +1,17 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/shared/form/advisor-person-info/src",
+  "prefix": "ksp",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/form/advisor-person-info/**/*.ts",
+          "libs/shared/form/advisor-person-info/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

@@ -45,6 +45,7 @@
     "shared-assets": "libs/shared/assets",
     "shared-directive": "libs/shared/directive",
     "shared-feature-degree-cert": "libs/shared/feature/degree-cert",
+    "shared-form-advisor-person-info": "libs/shared/form/advisor-person-info",
     "shared-form-degree-cert-search": "libs/shared/form/degree-cert-search",
     "shared-form-education-level": "libs/shared/form/education-level",
     "shared-form-uni-course-form": "libs/shared/form/uni-course-form",

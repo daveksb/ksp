@@ -1,0 +1,75 @@
+* {
+  font-size: 20px;
+}
+
+.group__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.group__title {
+  font-size: 20px;
+  color: #0056ff;
+}
+
+.group__container {
+  background-color: #f9f9fa;
+  padding: 16px;
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+.row {
+  display: grid;
+  grid-column-gap: 18px;
+  margin-bottom: 14px;
+}
+
+.row--first {
+  grid-template-columns: 15% 1fr 1fr;
+}
+
+.row--secondary {
+  grid-template-columns: 30% 1fr;
+}
+
+.row--third {
+  grid-template-columns: 1fr 1fr 0.5fr 0.1fr;
+  align-items: flex-end;
+}
+
+.row--fourth {
+  grid-template-columns: 4fr 1fr;
+}
+
+.form-select {
+  color: #656565;
+}
+
+.checkbox-1 {
+  width: 15px;
+  height: 15px;
+}
+
+.checkbox__label {
+  font-size: 18px;
+  line-height: 15px;
+  margin-left: 10px;
+}
+
+.form-label {
+  font-size: 18px;
+  color: #656565;
+}
+
+.button__container {
+  display: flex;
+  justify-content: center;
+}
+
+.delete__icon {
+  width: auto;
+  cursor: pointer;
+  padding: 0;
+  color: #f23c51;
+}

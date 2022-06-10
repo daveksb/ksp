@@ -1,0 +1,101 @@
+<form [formGroup]="mainForm">
+  <div class="group__container">
+    <div class="row row--first">
+      <div>
+        <label class="form-label">คำนำหน้าชื่อ</label>
+        <select class="form-select form-select-sm">
+          <option selected>นางสาว</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div>
+        <label class="form-label">ชื่อ </label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          placeholder="กรุณากรอก"
+        />
+      </div>
+      <div>
+        <label class="form-label">นามสกุล </label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          placeholder="กรุณากรอก"
+        />
+      </div>
+    </div>
+
+    <div class="row row--secondary">
+      <div>
+        <label class="form-label">หมายเลขบัตรประชาชน</label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          placeholder="กรุณากรอก"
+        />
+      </div>
+
+      <div>
+        <label class="form-label">ตำแหน่งวิชาการ</label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          placeholder="กรุณากรอก"
+        />
+      </div>
+    </div>
+
+    <div>คุณวุฒิการศึกษา</div>
+
+    <ng-container
+      *ngFor="let degreeForm of getDegrees(i).controls; let j = index"
+    >
+      <div class="row row--third">
+        <div>
+          <label class="form-label">คุณวุฒิ / สาขาวิชา ที่ {{ j + 1 }}</label>
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            placeholder="กรุณากรอก"
+          />
+        </div>
+        <div>
+          <label class="form-label">สถาบัน </label>
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            placeholder="กรุณากรอก"
+          />
+        </div>
+        <div>
+          <label class="form-label">ปีที่สำเร็จการศึกษา (พ.ศ.) </label>
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            placeholder="กรุณากรอก"
+          />
+        </div>
+        <mat-icon
+          *ngIf="j > 0"
+          class="delete__icon"
+          matTooltip="ลบคุณวุฒิการศึกษา ลำดับที่ {{ j + 1 }}"
+          (click)="deleteDegree(i, j)"
+        >
+          delete_outline</mat-icon
+        >
+      </div>
+    </ng-container>
+
+    <div class="button__container">
+      <ksp-add-row-button
+        (addClick)="addDegree(i)"
+        *ngIf="getDegrees(i).controls.length < 3"
+        >เพิ่มคุณวุฒิการศึกษา</ksp-add-row-button
+      >
+    </div>
+    <hr />
+  </div>
+</form>
