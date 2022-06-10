@@ -1,4 +1,4 @@
-<form [formGroup]="step3Form">
+<form [formGroup]="form">
   <div class="content__container">
     <div class="detail__header">
       การฝึกปฏิบัติวิชาชีพระหว่างเรียน สำหรับหลักสูตร ป.ตรี / โท ครู / ป.บัณฑิต
@@ -19,10 +19,8 @@
 
           <tbody>
             <ng-container formArrayName="rows">
-              <ng-container
-                *ngFor="let row of rows.controls; let i = index"
-              >
-                <tr>
+              <ng-container *ngFor="let row of rows.controls; let i = index">
+                <tr [formGroupName]="i">
                   <th scope="row">
                     <div class="label__table--number">{{ i + 1 }}</div>
                   </th>
@@ -33,6 +31,7 @@
                         class="form-control form-control-sm"
                         type="text"
                         placeholder=""
+                        formControlName="year"
                       />
                     </div>
                   </td>
@@ -43,6 +42,7 @@
                         class="form-control form-control-sm"
                         type="text"
                         placeholder=""
+                        formControlName="term"
                       />
                     </div>
                   </td>
@@ -53,6 +53,7 @@
                         class="form-control form-control-sm"
                         type="text"
                         placeholder=""
+                        formControlName="hour"
                       />
                     </div>
                   </td>

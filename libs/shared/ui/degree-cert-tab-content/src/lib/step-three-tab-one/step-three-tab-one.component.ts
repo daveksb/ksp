@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'ksp-step-3-tab-1',
@@ -8,29 +8,31 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./step-three-tab-one.component.scss'],
 })
 export class StepThreeTabOneComponent implements OnInit {
-  step3Form = this.fb.group({
+  form = this.fb.group({
     rows: this.fb.array([]),
   });
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.step3Form.valueChanges.subscribe((res) => {
+    this.form.valueChanges.pipe(debounceTime(500)).subscribe((res) => {
       console.log('form value = ', res);
     });
+
+    this.addRow();
   }
 
   addRow() {
-    const step3Form: any = this.fb.group({
-      years: [''],
-      terms: [''],
-      hours: [''],
+    const step3Form = this.fb.group({
+      year: [''],
+      term: [''],
+      hour: [''],
     });
 
     this.rows.push(step3Form);
   }
 
   get rows() {
-    return this.step3Form.controls['rows'];
+    return this.form.controls['rows'] as FormArray;
   }
 }
