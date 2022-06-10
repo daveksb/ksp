@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 
 const data = [
@@ -37,7 +37,7 @@ const data = [
   },
 ];
 
-const temp1 = data.reduce((p, c) => ({ ...p, ...{ [c.formName]: '' } }), {});
+//const temp1 = data.reduce((p, c) => ({ ...p, ...{ [c.formName]: '' } }), {});
 
 @Component({
   selector: 'ksp-step-2-tab-1-second',
@@ -58,9 +58,18 @@ export class StepTwoTabOneSecondComponent implements OnInit {
     ]),
   };
 
+  temp3 = {
+    subjects: this.fb.array([
+      this.fb.group({
+        label: 'aaa',
+        credit: [''],
+      }),
+    ]),
+  };
+
   form = this.fb.group({
-    ...temp1,
     ...this.temp2,
+    ...this.temp3,
   });
 
   data = data;
@@ -68,13 +77,13 @@ export class StepTwoTabOneSecondComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    console.log('temp = ', temp1);
-
     this.form.valueChanges.pipe(debounceTime(500)).subscribe((res) => {
       console.log('form value = ', res);
 
       if (res.rows) {
-        this.totalStudent = <number>res.rows.reduce((p, c: any) => p + c.student, 0);
+        this.totalStudent = <number>(
+          res.rows.reduce((p, c: any) => p + c.student, 0)
+        );
         console.log('stu = ', this.totalStudent);
       }
     });
@@ -82,41 +91,39 @@ export class StepTwoTabOneSecondComponent implements OnInit {
     this.addRows();
   }
 
-  /*   get data() {
-    return this.form.controls['data'] as FormArray;
-  } */
-
-  addRows() {
-    const arr: any = [
-      this.fb.group({
-        label: 'xxx',
-        student: [''],
-        year: [''],
-      }),
-      this.fb.group({
-        label: 'yyy',
-        student: [''],
-        year: [''],
-      }),
-      this.fb.group({
-        label: 'zzz',
-        student: [''],
-        year: [''],
-      }),
-      this.fb.group({
-        label: 'ccc',
-        student: [''],
-        year: [''],
-      }),
-    ];
-
-    arr.forEach((i: any) => this.rows.push(i));
-
-    //this.rows.push(temp);
+  get rows() {
+    return this.form.controls['rows'];
   }
 
-  get rows() {
-    //console.log('xxx = ', this.form.controls['rows'].controls[0]);
-    return this.form.controls['rows'];
+  get subjects() {
+    return this.form.controls['subjects'];
+  }
+
+  addRows() {
+    const newRow = (data: string) => {
+      return this.fb.group({
+        label: data,
+        student: [''],
+        year: [''],
+      });
+    };
+
+    const newSubject = (data: string) => {
+      return this.fb.group({
+        label: data,
+        credit: [''],
+      });
+    };
+
+    const subjects: any = [
+      newSubject('kkk'),
+      newSubject('lll'),
+      newSubject('mmm'),
+    ];
+
+    const rows: any = [newRow('aa'), newRow('bb'), newRow('cc')];
+
+    rows.forEach((i: any) => this.rows.push(i));
+    subjects.forEach((i: any) => this.subjects.push(i));
   }
 }

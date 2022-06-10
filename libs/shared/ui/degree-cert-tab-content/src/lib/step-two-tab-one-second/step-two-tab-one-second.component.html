@@ -29,20 +29,26 @@
               </thead>
 
               <tbody>
-                <ng-container *ngFor="let item of data; let i = index">
-                  <tr>
-                    <th scope="row" class="label__table">{{ item.label }}</th>
-                    <td class="detail__table">
-                      <div class="table__input">
-                        <input
-                          class="form-control form-control-sm"
-                          type="number"
-                          placeholder="จำนวนหน่วยกิต"
-                          [formControlName]="item.formName"
-                        />
-                      </div>
-                    </td>
-                  </tr>
+                <ng-container formArrayName="subjects">
+                  <ng-container
+                    *ngFor="let item of subjects.controls; let i = index"
+                  >
+                    <tr [formGroupName]="i">
+                      <th scope="row" class="label__table">
+                        {{ item.value.label }}
+                      </th>
+                      <td class="detail__table">
+                        <div class="table__input">
+                          <input
+                            class="form-control form-control-sm"
+                            type="number"
+                            placeholder="จำนวนหน่วยกิต"
+                            formControlName="credit"
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-container>
                 </ng-container>
 
                 <tr>
