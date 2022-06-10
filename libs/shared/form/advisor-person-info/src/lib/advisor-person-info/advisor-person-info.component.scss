@@ -2,16 +2,6 @@
   font-size: 20px;
 }
 
-.group__header {
-  display: flex;
-  justify-content: space-between;
-}
-
-.group__title {
-  font-size: 20px;
-  color: #0056ff;
-}
-
 .group__container {
   background-color: #f9f9fa;
   padding: 16px;
@@ -38,23 +28,8 @@
   align-items: flex-end;
 }
 
-.row--fourth {
-  grid-template-columns: 4fr 1fr;
-}
-
 .form-select {
   color: #656565;
-}
-
-.checkbox-1 {
-  width: 15px;
-  height: 15px;
-}
-
-.checkbox__label {
-  font-size: 18px;
-  line-height: 15px;
-  margin-left: 10px;
 }
 
 .form-label {
