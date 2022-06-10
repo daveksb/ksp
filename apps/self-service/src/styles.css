@@ -12,6 +12,10 @@
   font-family: 'KSP Bold' !important;
 }
 
+.mat-tooltip {
+  font-size: 18px;
+}
+
 table {
   width: 100%;
 }

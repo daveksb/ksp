@@ -5,7 +5,11 @@
     <ng-container *ngFor="let teacherForm of teachers.controls; let i = index">
       <div class="group__header">
         <div class="group__title">ลำดับที่ {{ i + 1 }}</div>
-        <mat-icon class="delete__icon" (click)="deleteTeacher(i)"
+        <mat-icon
+          matTooltip="ลบอาจารย์ประจำหลักสูตร ลำดับที่ {{ i + 1 }}"
+          *ngIf="i > 0"
+          class="delete__icon"
+          (click)="deleteTeacher(i)"
           >delete_outline</mat-icon
         >
       </div>
@@ -99,6 +103,7 @@
             <mat-icon
               *ngIf="j > 0"
               class="delete__icon"
+              matTooltip="ลบคุณวุฒิการศึกษา ลำดับที่ {{ j + 1 }}"
               (click)="deleteDegree(i, j)"
             >
               delete_outline</mat-icon
