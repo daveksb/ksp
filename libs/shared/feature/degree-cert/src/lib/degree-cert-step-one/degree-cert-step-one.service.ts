@@ -11,7 +11,7 @@ import { ListData } from '@ksp/shared/interface';
   providedIn: 'any',
 })
 export class DegreeCertStepOneService {
-  constructor() {}
+  //constructor() {}
 
   degreeTypes: ListData[] = [
     {

@@ -1,198 +1,88 @@
-<div class="content__container">
-  <div class="detail__header">
-    การฝึกปฏิบัติวิชาชีพระหว่างเรียน สำหรับหลักสูตร ป.ตรี / โท ครู / ป.บัณฑิต
-    ครู ที่มีการฝึกปฏิบัติวิชาชีพระหว่างเรียน
-  </div>
-  <div class="detail__container">
-    <div class="table-responsive">
-      <table class="table">
-        <thead class="header__table">
-          <tr>
-            <th scope="col" class="header__column">ครั้งที่</th>
-            <th scope="col" class="header__column">ชั้นปี</th>
-            <th scope="col" class="header__column">ภาคเรียนที่</th>
-            <th scope="col" class="header__column">จำนวนชั่วโมง</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">
-              <div class="label__table--number">1.</div>
-            </th>
+<form [formGroup]="step3tab1Form">
+  <div class="content__container">
+    <div class="detail__header">
+      การฝึกปฏิบัติวิชาชีพระหว่างเรียน สำหรับหลักสูตร ป.ตรี / โท ครู / ป.บัณฑิต
+      ครู ที่มีการฝึกปฏิบัติวิชาชีพระหว่างเรียน
+    </div>
 
-            <td class="detail__table">
-              <div>
-                <input
-                  class="form-control form-control-sm"
-                  type="text"
-                  placeholder=""
-                />
-              </div>
-            </td>
-            <td class="detail__table">
-              <div>
-                <input
-                  class="form-control form-control-sm"
-                  type="text"
-                  placeholder=""
-                />
-              </div>
-            </td>
-            <td class="detail__table">
-              <div>
-                <input
-                  class="form-control form-control-sm"
-                  type="text"
-                  placeholder=""
-                />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">
-              <div class="label__table--number">2.</div>
-            </th>
+    <div class="detail__container">
+      <div class="table-responsive">
+        <table class="table">
+          <thead class="header__table">
+            <tr>
+              <th scope="col" class="header__column">ครั้งที่</th>
+              <th scope="col" class="header__column">ชั้นปี</th>
+              <th scope="col" class="header__column">ภาคเรียนที่</th>
+              <th scope="col" class="header__column">จำนวนชั่วโมง</th>
+            </tr>
+          </thead>
 
-            <td class="detail__table">
-              <div>
-                <input
-                  class="form-control form-control-sm"
-                  type="text"
-                  placeholder=""
-                />
-              </div>
-            </td>
-            <td class="detail__table">
-              <div>
-                <input
-                  class="form-control form-control-sm"
-                  type="text"
-                  placeholder=""
-                />
-              </div>
-            </td>
-            <td class="detail__table">
-              <div>
-                <input
-                  class="form-control form-control-sm"
-                  type="text"
-                  placeholder=""
-                />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">
-              <div class="label__table--number">3.</div>
-            </th>
+          <tbody>
+            <tr>
+              <ng-container
+                *ngFor="let locationForm of years.controls; let i = index"
+              >
+                <th scope="row">
+                  <div class="label__table--number">{{ i + 1 }}</div>
+                </th>
+              </ng-container>
 
-            <td class="detail__table">
-              <div>
-                <input
-                  class="form-control form-control-sm"
-                  type="text"
-                  placeholder=""
-                />
-              </div>
-            </td>
-            <td class="detail__table">
-              <div>
-                <input
-                  class="form-control form-control-sm"
-                  type="text"
-                  placeholder=""
-                />
-              </div>
-            </td>
-            <td class="detail__table">
-              <div>
-                <input
-                  class="form-control form-control-sm"
-                  type="text"
-                  placeholder=""
-                />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">
-              <div class="label__table--number">4.</div>
-            </th>
+              <ng-container
+                formArrayName="years"
+                *ngFor="let yearForm of years.controls; let i = index"
+              >
+                <td class="detail__table">
+                  <div>
+                    <input
+                      class="form-control form-control-sm"
+                      type="text"
+                      placeholder=""
+                    />
+                  </div>
+                </td>
+              </ng-container>
 
-            <td class="detail__table">
-              <div>
-                <input
-                  class="form-control form-control-sm"
-                  type="text"
-                  placeholder=""
-                />
-              </div>
-            </td>
-            <td class="detail__table">
-              <div>
-                <input
-                  class="form-control form-control-sm"
-                  type="text"
-                  placeholder=""
-                />
-              </div>
-            </td>
-            <td class="detail__table">
-              <div>
-                <input
-                  class="form-control form-control-sm"
-                  type="text"
-                  placeholder=""
-                />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">
-              <div class="label__table--number">5.</div>
-            </th>
+              <ng-container
+                formArrayName="terms"
+                *ngFor="let termForm of years.controls; let i = index"
+              >
+                <td class="detail__table">
+                  <div>
+                    <input
+                      class="form-control form-control-sm"
+                      type="text"
+                      placeholder=""
+                    />
+                  </div>
+                </td>
+              </ng-container>
 
-            <td class="detail__table">
-              <div>
-                <input
-                  class="form-control form-control-sm"
-                  type="text"
-                  placeholder=""
-                />
-              </div>
-            </td>
-            <td class="detail__table">
-              <div>
-                <input
-                  class="form-control form-control-sm"
-                  type="text"
-                  placeholder=""
-                />
-              </div>
-            </td>
-            <td class="detail__table">
-              <div>
-                <input
-                  class="form-control form-control-sm"
-                  type="text"
-                  placeholder=""
-                />
-              </div>
-            </td>
-          </tr>
+              <ng-container
+                formArrayName="hours"
+                *ngFor="let hourForm of years.controls; let i = index"
+              >
+                <td class="detail__table">
+                  <div>
+                    <input
+                      class="form-control form-control-sm"
+                      type="text"
+                      placeholder=""
+                    />
+                  </div>
+                </td>
+              </ng-container>
+            </tr>
+          </tbody>
+
+          <td class="detail__table">
+            <ksp-add-row-button (addClick)="addYear()"
+              >เพิ่มสถานที่เปิดสอน</ksp-add-row-button
+            >
+          </td>
+
           <tr>
             <th scope="row"></th>
             <td class="detail__table"></td>
-            <td class="detail__table">
-              <div class="detail__footer">
-                <button type="button" class="btn btn-add">
-                  <img
-                    src="/assets/images/img-uni/Add.svg"
-                    class="icon__add"
-                  />เพิ่มจำนวนครั้ง
-                </button>
-              </div>
-            </td>
 
             <td class="detail__table"></td>
           </tr>
@@ -206,8 +96,8 @@
               <div class="summary__container">0</div>
             </td>
           </tr>
-        </tbody>
-      </table>
+        </table>
+      </div>
     </div>
   </div>
-</div>
+</form>
