@@ -26,9 +26,10 @@ export class StepTwoTabTwoComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.mainForm.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
+    /*     this.mainForm.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
       console.log('form value = ', res);
-    });
+    }); */
+    console.log(' = ');
   }
 
   addTeacher() {
