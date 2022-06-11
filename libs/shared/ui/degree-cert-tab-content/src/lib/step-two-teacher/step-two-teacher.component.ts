@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
-import { debounceTime } from 'rxjs/operators';
 
 @Component({
-  selector: 'ksp-step-2-tab-2',
-  templateUrl: './step-two-tab-two.component.html',
-  styleUrls: ['./step-two-tab-two.component.scss'],
+  selector: 'ksp-step-2-teacher',
+  templateUrl: './step-two-teacher.component.html',
+  styleUrls: ['./step-two-teacher.component.scss'],
 })
-export class StepTwoTabTwoComponent implements OnInit {
+export class StepTwoTeacherComponent implements OnInit {
   teacherForm = this.fb.group({
     title: [''],
     name: [''],

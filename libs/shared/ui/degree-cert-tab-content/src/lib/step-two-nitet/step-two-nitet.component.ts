@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { debounceTime } from 'rxjs';
 
 @Component({
-  selector: 'ksp-step-2-tab-3',
-  templateUrl: './step-two-tab-three.component.html',
-  styleUrls: ['./step-two-tab-three.component.scss'],
+  selector: 'ksp-step-2-nitet',
+  templateUrl: './step-two-nitet.component.html',
+  styleUrls: ['./step-two-nitet.component.scss'],
 })
-export class StepTwoTabThreeComponent implements OnInit {
+export class StepTwoNitetComponent implements OnInit {
   experienceYearFocused = false;
 
   form = this.fb.group({

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StepTwoTabOneComponent } from './step-two-tab-one/step-two-tab-one.component';
-import { StepTwoTabTwoComponent } from './step-two-tab-two/step-two-tab-two.component';
-import { StepTwoTabThreeComponent } from './step-two-tab-three/step-two-tab-three.component';
-import { StepTwoTabFourComponent } from './step-two-tab-four/step-two-tab-four.component';
+import { StepTwoTeacherComponent } from './step-two-teacher/step-two-teacher.component';
+import { StepTwoNitetComponent } from './step-two-nitet/step-two-nitet.component';
+import { StepTwoAdvisorComponent } from './step-two-advisor/step-two-advisor.component';
 import { StepThreeTabOneComponent } from './step-three-tab-one/step-three-tab-one.component';
 import { StepThreeTabTwoComponent } from './step-three-tab-two/step-three-tab-two.component';
 import { StepTwoTabOneSecondComponent } from './step-two-tab-one-second/step-two-tab-one-second.component';
@@ -24,18 +24,18 @@ import { SharedFormAdvisorPersonInfoModule } from '@ksp/shared/form/advisor-pers
   ],
   declarations: [
     StepTwoTabOneComponent,
-    StepTwoTabTwoComponent,
-    StepTwoTabThreeComponent,
-    StepTwoTabFourComponent,
+    StepTwoTeacherComponent,
+    StepTwoNitetComponent,
+    StepTwoAdvisorComponent,
     StepThreeTabOneComponent,
     StepThreeTabTwoComponent,
     StepTwoTabOneSecondComponent,
   ],
   exports: [
     StepTwoTabOneComponent,
-    StepTwoTabTwoComponent,
-    StepTwoTabThreeComponent,
-    StepTwoTabFourComponent,
+    StepTwoTeacherComponent,
+    StepTwoNitetComponent,
+    StepTwoAdvisorComponent,
     StepThreeTabOneComponent,
     StepThreeTabTwoComponent,
     StepTwoTabOneSecondComponent,
