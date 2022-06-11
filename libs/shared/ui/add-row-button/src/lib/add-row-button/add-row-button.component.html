@@ -1,4 +1,13 @@
-<div class="add__icon-container">
+<div
+  class="icon__container"
+  [ngClass]="{ 'icon__container--blue ': mode === 'blue' }"
+>
   <mat-icon (click)="onClick()">add_circle_outline</mat-icon>
-  <div (click)="onClick()" class="add__text"><ng-content></ng-content></div>
+  <div
+    (click)="onClick()"
+    class="title"
+    [ngClass]="{ 'title--large ': mode === 'blue' }"
+  >
+    <ng-content></ng-content>
+  </div>
 </div>
