@@ -2,15 +2,20 @@
   font-size: 22px;
 }
 
-.header__box {
+.teacher-number__container {
   display: flex;
 }
 
-.header__button {
-  width: 175px;
+.teacher-number__input {
+  width: 150px;
 }
 
-#number__button {
+.teacher-number__button {
+  display: flex;
+  align-items: flex-end;
+}
+
+#teacher-number__button {
   margin-left: 18px;
   width: auto;
   height: fit-content;
@@ -25,14 +30,8 @@
 
 .group__container {
   background-color: #f9f9fa;
-  padding: 16px;
-  margin-bottom: 24px;
+  padding: 10px 16px;
   margin-top: 0;
-}
-
-.group__header {
-  font-size: 20px;
-  color: #000000;
 }
 
 .row {
@@ -40,29 +39,17 @@
   grid-column-gap: 18px;
 }
 
-.row--full {
-  grid-template-columns: 15% 1fr 1fr;
-}
-
 .row--half {
   padding: 0 12px;
   grid-template-columns: 1fr 1fr;
 }
 
-.row--primary {
-  grid-template-columns: 30% 1fr;
+.row--first {
+  grid-template-columns: 30% 30% 30% auto;
 }
 
-.row--secondary {
-  grid-template-columns: 1fr 1fr 0.45fr;
-}
-
-.row--third {
+.row--second {
   grid-template-columns: 40% 1fr 1fr;
-}
-
-.row--fourth {
-  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .checkbox__content {
@@ -73,11 +60,11 @@
 }
 
 .form-label {
+  margin-bottom: 0.1rem;
   font-size: 18px;
   color: #656565;
 }
 
-.form-control,
-.form-select {
+.form-control {
   font-size: 20px;
 }

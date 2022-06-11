@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'ksp-step-2-nitet',
@@ -18,13 +19,14 @@ export class NitetComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    /*     this.form.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
+    this.form.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
       console.log('form value = ', res);
     });
- */
+
+    /*
     this.form.controls['experienceYear'].valueChanges.subscribe((res) => {
       console.log('res = ', res);
-    });
+    });*/
   }
 
   get experienceYear() {

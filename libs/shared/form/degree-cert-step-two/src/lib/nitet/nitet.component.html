@@ -1,123 +1,130 @@
 <div class="header">อาจารย์นิเทศก์</div>
 
-<!-- <div class="header__box">
+<div class="teacher-number__container">
   <div>
     <label>ระบุจำนวน</label>
-    <input class="form-control header__button" type="number" min="0" max="9" />
+    <input
+      class="form-control form-control-sm teacher-number__input"
+      type="number"
+      min="0"
+      max="5"
+    />
   </div>
-  <div>
-    <br />
-    <button id="number__button" type="button" class="btn btn-primary">
+  <div class="teacher-number__button">
+    <button id="teacher-number__button" type="button" class="btn btn-primary">
       กรอกข้อมูลอาจารย์นิเทศก์
     </button>
   </div>
-</div> -->
-
-<div class="group__number">ลำดับที่ 1</div>
-
-<div class="group__container" [formGroup]="form">
-  <ksp-teacher-general-info
-    formControlName="advisorInfo"
-  ></ksp-teacher-general-info>
-
-  <div class="mb-3">
-    <div class="row row--third">
-      <div class="mb-3">
-        <label class="form-label">สังกัดคณะ </label>
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="อักษรศาสตร์และครุศาสตร์"
-        />
-      </div>
-      <div class="mb-3">
-        <label class="form-label">สถานะ (กรุณาเลือก) </label>
-
-        <div class="row row--half">
-          <div class="checkbox__content">
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                value="1"
-                name="status"
-                checked
-              />
-              <label class="form-check-label"> ประจำ </label>
-            </div>
-          </div>
-          <div class="checkbox__content">
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                value="2"
-                name="status"
-              />
-              <label class="form-check-label"> พิเศษ </label>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <label class="form-label">กลุ่มวิชาที่นิเทศ (กรุณาเลือก) </label>
-
-        <div class="row row--half">
-          <div class="checkbox__content">
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                value="1"
-                name="subject"
-              />
-              <label class="form-check-label"> วิชาชีพครู </label>
-            </div>
-          </div>
-          <div class="checkbox__content">
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                value="2"
-                name="subject"
-              />
-              <label class="form-check-label"> วิชาเอก </label>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row row--fourth">
-      <div class="mb-3">
-        <label class="form-label">ประสบการณ์นิเทศ (ปี) </label>
-        <input
-          formControlName="experienceYear"
-          class="form-control form-control-sm"
-          type="number"
-          min="0"
-          (focus)="experienceYearFocused = true"
-        />
-      </div>
-      <div>
-        <label class="form-label">จำนวน นศ.ที่รับผิดชอบในหลักสูตร (คน) </label>
-        <input
-          class="form-control form-control-sm"
-          type="number"
-          placeholder="กรอกเฉพาะตัวเลข"
-        />
-      </div>
-      <div class="mb-3">
-        <label class="form-label">จำนวน นศ.ในหลักสูตรอื่น (คน) </label>
-        <input
-          class="form-control form-control-sm"
-          type="number"
-          placeholder="กรอกเฉพาะตัวเลข"
-        />
-      </div>
-    </div>
-
-    <hr />
-    <ksp-instructor-info *ngIf="experienceYear < 3"></ksp-instructor-info>
-  </div>
 </div>
+
+<form [formGroup]="form">
+  <div class="group__number">ลำดับที่ 1</div>
+
+  <div class="group__container">
+    <ksp-teacher-general-info
+      formControlName="advisorInfo"
+    ></ksp-teacher-general-info>
+
+    <div>
+      <div class="row row--second">
+        <div class="mb-3">
+          <label class="form-label">สังกัดคณะ </label>
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            placeholder="อักษรศาสตร์และครุศาสตร์"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">สถานะ (กรุณาเลือก) </label>
+
+          <div class="row row--half">
+            <div class="checkbox__content">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  value="1"
+                  name="status"
+                  checked
+                />
+                <label class="form-check-label"> ประจำ </label>
+              </div>
+            </div>
+            <div class="checkbox__content">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  value="2"
+                  name="status"
+                />
+                <label class="form-check-label"> พิเศษ </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <label class="form-label">กลุ่มวิชาที่นิเทศ (กรุณาเลือก) </label>
+
+          <div class="row row--half">
+            <div class="checkbox__content">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  value="1"
+                  name="subject"
+                />
+                <label class="form-check-label"> วิชาชีพครู </label>
+              </div>
+            </div>
+            <div class="checkbox__content">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  value="2"
+                  name="subject"
+                />
+                <label class="form-check-label"> วิชาเอก </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row row--first">
+        <div class="mb-3">
+          <label class="form-label">ประสบการณ์นิเทศ (ปี) </label>
+          <input
+            formControlName="experienceYear"
+            class="form-control form-control-sm"
+            type="number"
+            min="0"
+            (focus)="experienceYearFocused = true"
+          />
+        </div>
+        <div>
+          <label class="form-label"
+            >จำนวน นศ.ที่รับผิดชอบในหลักสูตร (คน)
+          </label>
+          <input
+            class="form-control form-control-sm"
+            type="number"
+            placeholder="กรอกเฉพาะตัวเลข"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">จำนวน นศ.ในหลักสูตรอื่น (คน) </label>
+          <input
+            class="form-control form-control-sm"
+            type="number"
+            placeholder="กรอกเฉพาะตัวเลข"
+          />
+        </div>
+      </div>
+
+      <ksp-instructor-info *ngIf="experienceYear < 3"></ksp-instructor-info>
+    </div>
+  </div>
+</form>
