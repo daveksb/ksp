@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { SharedUiAddRowButtonModule } from '@ksp/shared/ui/add-row-button';
+import { SharedFormAdvisorPersonInfoModule } from '@ksp/shared/form/advisor-person-info';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { SharedUiAddRowButtonModule } from '@ksp/shared/ui/add-row-button';
     MatIconModule,
     MatTooltipModule,
     ReactiveFormsModule,
+    SharedFormAdvisorPersonInfoModule,
   ],
   declarations: [
     StepTwoTabOneComponent,
@@ -28,7 +30,6 @@ import { SharedUiAddRowButtonModule } from '@ksp/shared/ui/add-row-button';
     StepThreeTabOneComponent,
     StepThreeTabTwoComponent,
     StepTwoTabOneSecondComponent,
-
   ],
   exports: [
     StepTwoTabOneComponent,

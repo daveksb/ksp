@@ -130,6 +130,9 @@
       "@ksp/shared/feature/degree-cert": [
         "libs/shared/feature/degree-cert/src/index.ts"
       ],
+      "@ksp/shared/form/advisor-person-info": [
+        "libs/shared/form/advisor-person-info/src/index.ts"
+      ],
       "@ksp/shared/form/degree-cert-search": [
         "libs/shared/form/degree-cert-search/src/index.ts"
       ],

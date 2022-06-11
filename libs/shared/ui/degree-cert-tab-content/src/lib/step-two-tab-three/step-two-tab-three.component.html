@@ -1,6 +1,6 @@
 <div class="header">อาจารย์นิเทศก์</div>
 
-<div class="header__box">
+<!-- <div class="header__box">
   <div>
     <label>ระบุจำนวน</label>
     <input class="form-control header__button" type="number" min="0" max="9" />
@@ -11,91 +11,16 @@
       กรอกข้อมูลอาจารย์นิเทศก์
     </button>
   </div>
-</div>
+</div> -->
 
 <div class="group__number">ลำดับที่ 1</div>
 
-<div class="group__container">
-  <div class="row row--full">
-    <div class="mb-3">
-      <label class="form-label">คำนำหน้าชื่อ</label>
-      <select class="search__content form-select form-select-sm">
-        <option selected>นางสาว</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-    <div class="mb-3">
-      <label class="form-label">ชื่อ </label>
-      <input
-        class="form-control form-control-sm"
-        type="text"
-        placeholder="กรุณากรอก"
-      />
-    </div>
-    <div class="mb-3">
-      <label class="form-label">นามสกุล </label>
-      <input
-        class="form-control form-control-sm"
-        type="text"
-        placeholder="กรุณากรอก"
-      />
-    </div>
-  </div>
+<div class="group__container" [formGroup]="form">
+  <ksp-advisor-person-info
+    formControlName="advisorInfo"
+  ></ksp-advisor-person-info>
 
-  <div class="row row--primary">
-    <div class="mb-3">
-      <label class="form-label">หมายเลขบัตรประชาชน </label>
-      <input
-        class="form-control form-control-sm"
-        type="text"
-        placeholder="หมายเลขบัตรประชาชนจำนวน 13 หลัก"
-      />
-    </div>
-    <div class="mb-3">
-      <label class="form-label">ตำแหน่งวิชาการ </label>
-      <input
-        class="form-control form-control-sm"
-        type="text"
-        placeholder="กรุณากรอก"
-      />
-    </div>
-  </div>
-
-  <div class="group__header">คุณวุฒิการศึกษา</div>
   <div class="mb-3">
-    <div class="row row--secondary">
-      <div>
-        <label class="form-label">คุณวุฒิ / สาขาวิชา ที่ 1 </label>
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="กรุณากรอก"
-        />
-      </div>
-      <div class="mb-3">
-        <label class="form-label">สถาบัน </label>
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="กรุณากรอก"
-        />
-      </div>
-      <div class="mb-3">
-        <label class="form-label">ปีที่สำเร็จการศึกษา (พ.ศ.) </label>
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="กรอกเฉพาะตัวเลข"
-        />
-      </div>
-    </div>
-
-    <div class="mb-3">
-      <ksp-add-row-button>เพิ่มคุณวุฒิการศึกษา</ksp-add-row-button>
-    </div>
-
     <div class="row row--third">
       <div class="mb-3">
         <label class="form-label">สังกัดคณะ </label>
@@ -166,13 +91,19 @@
     <div class="row row--fourth">
       <div class="mb-3">
         <label class="form-label">ประสบการณ์นิเทศ (ปี) </label>
-        <input class="form-control form-control-sm" type="number" />
+        <input
+          formControlName="experienceYear"
+          class="form-control form-control-sm"
+          type="number"
+          min="0"
+          (focus)="experienceYearFocused = true"
+        />
       </div>
       <div>
         <label class="form-label">จำนวน นศ.ที่รับผิดชอบในหลักสูตร (คน) </label>
         <input
           class="form-control form-control-sm"
-          type="text"
+          type="number"
           placeholder="กรอกเฉพาะตัวเลข"
         />
       </div>
@@ -180,79 +111,15 @@
         <label class="form-label">จำนวน นศ.ในหลักสูตรอื่น (คน) </label>
         <input
           class="form-control form-control-sm"
-          type="text"
+          type="number"
           placeholder="กรอกเฉพาะตัวเลข"
         />
       </div>
     </div>
 
     <hr />
-
-    <div class="group__header">
-      อาจารย์นิเทศก์พี่เลี้ยงของอาจารย์นิเทศก์ที่มีประสบการณ์น้อยกว่า 2 ปี
-    </div>
-    <div class="row row--full">
-      <div class="mb-3">
-        <label class="form-label">คำนำหน้าชื่อ</label>
-        <select class="search__content form-select form-select-sm">
-          <option selected>กรุณาระบุ</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">ชื่อ </label>
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="กรุณากรอก"
-        />
-      </div>
-      <div class="mb-3">
-        <label class="form-label">นามสกุล </label>
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="กรุณากรอก"
-        />
-      </div>
-    </div>
-    <div class="row row--fifth">
-      <div class="mb-3">
-        <label class="form-label">ตำแหน่งวิชาการ </label>
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="กรุณากรอก"
-        />
-      </div>
-      <div class="mb-3">
-        <label class="form-label">วุฒิการศึกษา </label>
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="กรุณากรอก"
-        />
-      </div>
-      <div class="mb-3">
-        <label class="form-label">สาขาวิชา </label>
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="กรุณากรอก"
-        />
-      </div>
-    </div>
-    <div class="row row--full">
-      <div class="mb-3">
-        <label class="form-label">ประสบการณ์นิเทศ (ปี) </label>
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="กรอกเฉพาะตัวเลข"
-        />
-      </div>
-    </div>
+    <ksp-instructor-person-info
+      *ngIf="experienceYear < 3"
+    ></ksp-instructor-person-info>
   </div>
 </div>
