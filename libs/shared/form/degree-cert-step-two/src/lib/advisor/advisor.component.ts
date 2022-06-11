@@ -11,13 +11,12 @@ export class AdvisorComponent implements OnInit {
   advisorForm = this.fb.group({
     generalInfo: [],
     hasMoreCourses: [],
+    mainAdvisorInfo: [],
 
     courses: this.fb.array([
       this.fb.group({
-        courseName: [''],
-        studentNumber: [''],
-        advisorStatus: [''],
-        advisorType: [''],
+        courseName: [],
+        advisorInfos: [],
       }),
     ]),
   });
@@ -35,22 +34,22 @@ export class AdvisorComponent implements OnInit {
   }
 
   addCourse(index: number) {
-    const form = this.fb.group({
-      courseName: [''],
+    /*     const form = this.fb.group({
+      //courseName: [''],
       studentNumber: [''],
       advisorStatus: [''],
       advisorType: [''],
     });
-    this.getCourses(index).push(form);
+    this.getCourses(index).push(form); */
   }
 
   addAdvisor() {
-    const advisorForm = this.fb.group({
+    /*     const advisorForm = this.fb.group({
       generalInfo: [],
       hasMoreCourses: [],
       courses: this.fb.array([
         this.fb.group({
-          courseName: [''],
+          //courseName: [''],
           studentNumber: [''],
           advisorStatus: [''],
           advisorType: [''],
@@ -58,7 +57,7 @@ export class AdvisorComponent implements OnInit {
       ]),
     });
 
-    this.advisors.push(advisorForm);
+    this.advisors.push(advisorForm); */
   }
 
   getCourses(index: number) {
