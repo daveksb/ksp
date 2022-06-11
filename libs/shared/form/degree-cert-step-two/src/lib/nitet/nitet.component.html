@@ -3,14 +3,16 @@
 <form [formGroup]="form">
   <ng-container formArrayName="nitets">
     <ng-container *ngFor="let nitet of nitets.controls; let i = index">
-      <ng-container [formGroupName]="i">
+      <div [formGroupName]="i" [ngClass]="{ apply__opac: opaciseBox[i] }">
         <div class="group__header">
           <div class="group__number">ลำดับที่ {{ i + 1 }}</div>
           <mat-icon
             matTooltip="ลบอาจารย์นิเทศก์ ลำดับที่ {{ i + 1 }}"
             *ngIf="i > 0"
             class="delete__icon"
-            (click)="({})"
+            (click)="deleteNitet(i); opaciseBox[i] = false"
+            (mouseenter)="opaciseBox[i] = true"
+            (mouseout)="opaciseBox[i] = false"
             >delete_outline</mat-icon
           >
         </div>
@@ -126,7 +128,7 @@
             ></ksp-instructor-info>
           </div>
         </div>
-      </ng-container>
+      </div>
     </ng-container>
   </ng-container>
 

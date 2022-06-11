@@ -9,6 +9,7 @@ import { debounceTime } from 'rxjs';
 })
 export class NitetComponent implements OnInit {
   experienceYearFocused = false;
+  opaciseBox: boolean[] = [];
 
   nitetForm = this.fb.group({
     generalInfo: [],
@@ -40,6 +41,10 @@ export class NitetComponent implements OnInit {
     });
 
     this.nitets.push(form);
+  }
+
+  deleteNitet(index: number) {
+    this.nitets.removeAt(index);
   }
 
   get experienceYear() {
