@@ -2,15 +2,20 @@
   font-size: 22px;
 }
 
-.header__box {
+.teacher-number__container {
   display: flex;
 }
 
-.header__button {
-  width: 175px;
+.teacher-number__input {
+  width: 150px;
 }
 
-#number__button {
+.teacher-number__button {
+  display: flex;
+  align-items: flex-end;
+}
+
+#teacher-number__button {
   margin-left: 18px;
   width: auto;
   height: fit-content;
@@ -25,14 +30,9 @@
 
 .group__container {
   background-color: #f9f9fa;
-  padding: 16px;
+  padding: 10px 16px;
   margin-bottom: 24px;
   margin-top: 0;
-}
-
-.group__header {
-  font-size: 20px;
-  color: #000000;
 }
 
 .row {
@@ -40,21 +40,9 @@
   grid-column-gap: 18px;
 }
 
-.row--full {
-  grid-template-columns: 15% 1fr 1fr;
-}
-
 .row--half {
   padding: 0 12px;
   grid-template-columns: 1fr 1fr;
-}
-
-.row--primary {
-  grid-template-columns: 30% 1fr;
-}
-
-.row--secondary {
-  grid-template-columns: 1fr 1fr 0.45fr;
 }
 
 .row--third {
@@ -77,7 +65,6 @@
   color: #656565;
 }
 
-.form-control,
-.form-select {
+.form-control {
   font-size: 20px;
 }
