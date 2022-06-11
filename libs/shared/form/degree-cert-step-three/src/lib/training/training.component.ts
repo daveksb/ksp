@@ -21,7 +21,9 @@ export class TrainingComponent implements OnInit {
       console.log('form value = ', res.rows);
 
       if (res.rows) {
-        this.totalHours = <number>res.rows.reduce((p, c: any) => p + c.hour, 0);
+        this.totalHours = <number>(
+          res.rows.reduce((p: any, c: any) => p + Number(c.hour), 0)
+        );
       }
     });
 
