@@ -7,7 +7,7 @@
 .title__label {
   font-size: 22px;
   color: #000000;
-  margin: 0 64px 12px 64px;
+  margin: 0 40px 12px 40px;
   padding-top: 12px;
 }
 
@@ -29,7 +29,7 @@
   background: #ffffff;
   border-radius: 5px;
   padding: 24px;
-  margin: 0px 64px;
+  margin: 0px 40px;
 }
 .img__process {
   display: flex;
