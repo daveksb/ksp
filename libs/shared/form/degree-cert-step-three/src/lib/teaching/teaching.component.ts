@@ -3,11 +3,11 @@ import { FormArray, FormBuilder } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 
 @Component({
-  selector: 'ksp-step-3-tab-2',
-  templateUrl: './step-three-tab-two.component.html',
-  styleUrls: ['./step-three-tab-two.component.scss'],
+  selector: 'ksp-step-3-teaching',
+  templateUrl: './teaching.component.html',
+  styleUrls: ['./teaching.component.scss'],
 })
-export class StepThreeTabTwoComponent implements OnInit {
+export class TeachingComponent implements OnInit {
   form = this.fb.group({
     rows: this.fb.array([]),
   });

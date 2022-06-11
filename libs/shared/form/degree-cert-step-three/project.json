@@ -1,4 +1,5 @@
 {
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/shared/ui/degree-cert-tap-content/src",
   "prefix": "ksp",
@@ -7,8 +8,8 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "libs/shared/ui/degree-cert-tab-content/**/*.ts",
-          "libs/shared/ui/degree-cert-tab-content/**/*.html"
+          "libs/shared/form/degree-cert-step-three/**/*.ts",
+          "libs/shared/form/degree-cert-step-three/**/*.html"
         ]
       }
     }
