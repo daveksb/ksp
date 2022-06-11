@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AccusationListComponent } from './accusation-list/accusation-list.component';
 import { AccusationRecordComponent } from './accusation-record/accusation-record.component';
 import { EServiceUiAccusationSearchModule } from '@ksp/e-service/ui/accusation-search';
-import { SharedUiFormModule } from '@ksp/shared/ui/form';
+import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { EServiceDialogAccusationSearchModule } from '@ksp/e-service/dialog/accusation-search';
 import { MatTabsModule } from '@angular/material/tabs';
 import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-info';
@@ -27,7 +27,7 @@ import { SharedUiLicenseTypeButtonGroupModule } from '@ksp/shared/ui/license-typ
     EServiceDialogAccusationSearchModule,
     EServiceUiAccusationSearchModule,
     EServiceEthicsAccusationRoutingModule,
-    SharedUiFormModule,
+    SharedFormOthersModule,
     SharedUiLicenseInfoModule,
     SharedUiLicenseTypeButtonGroupModule,
     SharedUiBottomMenuModule,

@@ -7,7 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SchoolServiceContainerPageComponent } from '@ksp/school-service/feature/container-page';
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
-import { SharedUiFormModule } from '@ksp/shared/ui/form';
+import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { SchoolServiceUiStaffSearchModule } from '@ksp/school-service/ui/staff-search';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
@@ -35,7 +35,7 @@ export const routes: Routes = [
     RouterModule.forChild(routes),
     SharedUiTopNavModule,
     SharedUiLicenseInfoModule,
-    SharedUiFormModule,
+    SharedFormOthersModule,
     SchoolServiceUiStaffSearchModule,
     MatCheckboxModule,
     ReactiveFormsModule,

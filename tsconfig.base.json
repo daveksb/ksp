@@ -125,20 +125,27 @@
       "@ksp/self-service/ui/payment": [
         "libs/self-service/ui/payment/src/index.ts"
       ],
+      "@ksp/shared/form/teacher-info": [
+        "libs/shared/form/teacher-info/src/index.ts"
+      ],
       "@ksp/shared/assets": ["libs/shared/assets/src/index.ts"],
       "@ksp/shared/directive": ["libs/shared/directive/src/index.ts"],
       "@ksp/shared/feature/degree-cert": [
         "libs/shared/feature/degree-cert/src/index.ts"
       ],
-      "@ksp/shared/form/advisor-person-info": [
-        "libs/shared/form/advisor-person-info/src/index.ts"
-      ],
       "@ksp/shared/form/degree-cert-search": [
         "libs/shared/form/degree-cert-search/src/index.ts"
+      ],
+      "@ksp/shared/form/degree-cert-step-three": [
+        "libs/shared/form/degree-cert-step-three/src/index.ts"
+      ],
+      "@ksp/shared/form/degree-cert-step-two": [
+        "libs/shared/form/degree-cert-step-two/src/index.ts"
       ],
       "@ksp/shared/form/education-level": [
         "libs/shared/form/education-level/src/index.ts"
       ],
+      "@ksp/shared/form/others": ["libs/shared/form/others/src/index.ts"],
       "@ksp/shared/form/uni-course-form": [
         "libs/shared/form/uni-course-form/src/index.ts"
       ],
@@ -150,14 +157,10 @@
         "libs/shared/ui/add-row-button/src/index.ts"
       ],
       "@ksp/shared/ui/bottom-menu": ["libs/shared/ui/bottom-menu/src/index.ts"],
-      "@ksp/shared/ui/degree-cert-tab-content": [
-        "libs/shared/ui/degree-cert-tab-content/src/index.ts"
-      ],
       "@ksp/shared/ui/dialog": ["libs/shared/ui/dialog/src/index.ts"],
       "@ksp/shared/ui/forbidden-property": [
         "libs/shared/ui/forbidden-property/src/index.ts"
       ],
-      "@ksp/shared/ui/form": ["libs/shared/ui/form/src/index.ts"],
       "@ksp/shared/ui/license-info": [
         "libs/shared/ui/license-info/src/index.ts"
       ],
