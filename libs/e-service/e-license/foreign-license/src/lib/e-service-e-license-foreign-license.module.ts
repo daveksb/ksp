@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ForeignLicenseDetailComponent } from './foreign-license-detail/foreign-license-detail.component';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { ForeignLicenseListComponent } from './foreign-license-list/foreign-license-list.component';
-import { SharedUiFormModule } from '@ksp/shared/ui/form';
+import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EServiceUiLicenseCheckModule } from '@ksp/e-service/ui/license-check';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
@@ -35,11 +35,11 @@ export const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule,
-    SharedUiFormModule,
+    SharedFormOthersModule,
     MatDialogModule,
     RouterModule.forChild(routes),
     EServiceUiLicenseCheckModule,
-    SharedUiBottomMenuModule
+    SharedUiBottomMenuModule,
   ],
   declarations: [ForeignLicenseDetailComponent, ForeignLicenseListComponent],
   exports: [ForeignLicenseDetailComponent, ForeignLicenseListComponent],

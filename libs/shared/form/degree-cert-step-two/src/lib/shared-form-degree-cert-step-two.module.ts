@@ -9,7 +9,7 @@ import { SharedUiAddRowButtonModule } from '@ksp/shared/ui/add-row-button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SharedFormAdvisorPersonInfoModule } from '@ksp/shared/form/advisor-person-info';
+import { SharedFormTeacherInfoModule } from '@ksp/shared/form/teacher-info';
 
 @NgModule({
   imports: [
@@ -18,7 +18,7 @@ import { SharedFormAdvisorPersonInfoModule } from '@ksp/shared/form/advisor-pers
     MatIconModule,
     MatTooltipModule,
     ReactiveFormsModule,
-    SharedFormAdvisorPersonInfoModule,
+    SharedFormTeacherInfoModule,
   ],
   declarations: [
     TeacherComponent,

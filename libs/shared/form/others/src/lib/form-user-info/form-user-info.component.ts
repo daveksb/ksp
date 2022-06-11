@@ -6,10 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./form-user-info.component.scss'],
 })
 export class FormUserInfoComponent {
-
   @Input() isInputWhite = false;
 
   constructor() {}
-
-
 }

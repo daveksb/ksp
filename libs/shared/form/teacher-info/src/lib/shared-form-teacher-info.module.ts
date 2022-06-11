@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AdvisorPersonInfoComponent } from './advisor-person-info/advisor-person-info.component';
+import { TeacherGeneralInfoComponent } from './general-info/general-info.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { SharedUiAddRowButtonModule } from '@ksp/shared/ui/add-row-button';
 import { ReactiveFormsModule } from '@angular/forms';
-import { InstructorPersonInfoComponent } from './instructor-person-info/instructor-person-info.component';
+import { InstructorInfoComponent } from './instructor-info/instructor-info.component';
 
 @NgModule({
   imports: [
@@ -15,7 +15,7 @@ import { InstructorPersonInfoComponent } from './instructor-person-info/instruct
     ReactiveFormsModule,
     SharedUiAddRowButtonModule,
   ],
-  declarations: [AdvisorPersonInfoComponent, InstructorPersonInfoComponent],
-  exports: [AdvisorPersonInfoComponent, InstructorPersonInfoComponent],
+  declarations: [TeacherGeneralInfoComponent, InstructorInfoComponent],
+  exports: [TeacherGeneralInfoComponent, InstructorInfoComponent],
 })
-export class SharedFormAdvisorPersonInfoModule {}
+export class SharedFormTeacherInfoModule {}

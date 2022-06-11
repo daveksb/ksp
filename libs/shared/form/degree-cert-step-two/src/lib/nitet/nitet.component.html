@@ -16,9 +16,9 @@
 <div class="group__number">ลำดับที่ 1</div>
 
 <div class="group__container" [formGroup]="form">
-  <ksp-advisor-person-info
+  <ksp-teacher-general-info
     formControlName="advisorInfo"
-  ></ksp-advisor-person-info>
+  ></ksp-teacher-general-info>
 
   <div class="mb-3">
     <div class="row row--third">
@@ -118,8 +118,6 @@
     </div>
 
     <hr />
-    <ksp-instructor-person-info
-      *ngIf="experienceYear < 3"
-    ></ksp-instructor-person-info>
+    <ksp-instructor-info *ngIf="experienceYear < 3"></ksp-instructor-info>
   </div>
 </div>
