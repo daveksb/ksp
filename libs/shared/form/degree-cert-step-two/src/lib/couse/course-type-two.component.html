@@ -42,6 +42,7 @@
                           <input
                             class="form-control form-control-sm"
                             type="number"
+                            min="0"
                             placeholder="จำนวนหน่วยกิต"
                             formControlName="credit"
                           />
@@ -55,7 +56,9 @@
                   <th scope="row" class="label__table--footer">รวมทั้งหมด</th>
                   <td class="detail__table">
                     <div class="table__input">
-                      <div class="summary__container">{{ totalCredit }}</div>
+                      <div class="summary__container">
+                        {{ totalCredit | number }}
+                      </div>
                     </div>
                   </td>
                 </tr>
@@ -94,6 +97,7 @@
                           <input
                             class="form-control form-control-sm"
                             type="number"
+                            min="0"
                             placeholder="กรอกปีการศึกษา"
                             formControlName="year"
                           />
@@ -105,6 +109,7 @@
                           <input
                             class="form-control form-control-sm"
                             type="number"
+                            min="0"
                             placeholder="จำนวนนักศึกษา"
                             formControlName="student"
                           />
@@ -119,8 +124,8 @@
                     <div class="label__table--footer">รวมทั้งหมด</div>
                   </td>
                   <td class="detail__table">
-                    <div class="table__input">
-                      <div class="summary__container">{{ totalStudent }}</div>
+                    <div class="summary__container">
+                      {{ totalStudent | number }}
                     </div>
                   </td>
                 </tr>
@@ -129,22 +134,6 @@
           </div>
         </div>
       </div>
-    </div>
-    <div
-      class="tab-pane fade"
-      id="nav-profile"
-      role="tabpanel"
-      aria-labelledby="nav-profile-tab"
-    >
-      ...
-    </div>
-    <div
-      class="tab-pane fade"
-      id="nav-contact"
-      role="tabpanel"
-      aria-labelledby="nav-contact-tab"
-    >
-      ...
     </div>
   </div>
 </form>
