@@ -54,6 +54,10 @@ export class TeacherGeneralInfoComponent {
     this.degrees.push(degreeform);
   }
 
+  deleteDegree(degreeIndex: number) {
+    this.degrees.removeAt(degreeIndex);
+  }
+
   registerOnChange(onChange: any) {
     const sub = this.form.valueChanges.subscribe(onChange);
     this.onChangeSubs.push(sub);

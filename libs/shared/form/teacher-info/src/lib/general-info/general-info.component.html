@@ -82,14 +82,14 @@
           *ngIf="j > 0"
           class="delete__icon"
           matTooltip="ลบคุณวุฒิการศึกษา ลำดับที่ {{ j + 1 }}"
-          (click)="({})"
+          (click)="deleteDegree(j)"
         >
           delete_outline</mat-icon
         >
       </div>
     </ng-container>
 
-    <div class="button__container">
+    <div class="button__container" *ngIf="degrees.length < 4">
       <ksp-add-row-button (addClick)="addDegree()"
         >เพิ่มคุณวุฒิการศึกษา</ksp-add-row-button
       >

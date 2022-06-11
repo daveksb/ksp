@@ -73,3 +73,7 @@ add asterisk for required feild
   background-color: #e8e8e8 !important;
   border-color: #e8e8e8 !important;
 }
+
+.form-label {
+  margin-bottom: 0 !important;
+}
