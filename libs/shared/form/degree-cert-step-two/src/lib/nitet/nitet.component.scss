@@ -2,24 +2,10 @@
   font-size: 22px;
 }
 
-.teacher-number__container {
+.group__header {
   display: flex;
-}
-
-.teacher-number__input {
-  width: 150px;
-}
-
-.teacher-number__button {
-  display: flex;
+  justify-content: space-between;
   align-items: flex-end;
-}
-
-#teacher-number__button {
-  margin-left: 18px;
-  width: auto;
-  height: fit-content;
-  font-size: 18px;
 }
 
 .group__number {
@@ -73,4 +59,11 @@
   margin-top: 10px;
   display: flex;
   justify-content: center;
+}
+
+.delete__icon {
+  width: auto;
+  cursor: pointer;
+  padding: 0;
+  color: #f23c51;
 }

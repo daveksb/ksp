@@ -10,16 +10,20 @@ import { debounceTime } from 'rxjs';
 export class NitetComponent implements OnInit {
   experienceYearFocused = false;
 
-  form = this.fb.group({
+  nitetForm = this.fb.group({
     generalInfo: [],
     experienceYear: [],
     instructorInfo: [],
   });
 
+  form = this.fb.group({
+    nitets: this.fb.array([this.nitetForm]),
+  });
+
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.form.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
+    this.nitetForm.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
       console.log('form value = ', res);
     });
     /*
@@ -28,11 +32,25 @@ export class NitetComponent implements OnInit {
     });*/
   }
 
+  addNitet() {
+    const form = this.fb.group({
+      generalInfo: [],
+      experienceYear: [],
+      instructorInfo: [],
+    });
+
+    this.nitets.push(form);
+  }
+
   get experienceYear() {
     if (this.experienceYearFocused)
-      return this.form.controls['experienceYear'].value ?? 99;
+      return this.nitetForm.controls['experienceYear'].value ?? 99;
     else {
       return 99;
     }
+  }
+
+  get nitets() {
+    return this.form.controls['nitets'];
   }
 }
