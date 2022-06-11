@@ -34,13 +34,11 @@ export class AdvisorComponent implements OnInit {
   }
 
   addCourse(index: number) {
-    /*     const form = this.fb.group({
-      //courseName: [''],
-      studentNumber: [''],
-      advisorStatus: [''],
-      advisorType: [''],
+    const form = this.fb.group({
+      courseName: [],
+      advisorInfos: [],
     });
-    this.getCourses(index).push(form); */
+    this.getCourses(index).push(form);
   }
 
   addAdvisor() {

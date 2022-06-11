@@ -42,18 +42,23 @@
               <ng-container
                 *ngFor="let course of getCourses(i).controls; let j = index"
               >
-                <div class="row row--fourth">
-                  <div class="mb-3">
-                    <label class="form-label">หลักสูตร {{ j + 2 }}</label>
-                    <input
-                      class="form-control form-control-sm"
-                      type="text"
-                      placeholder="กรุณากรอก"
-                    />
+                <ng-container [formGroupName]="j">
+                  <div class="row row--fourth">
+                    <div class="mb-3">
+                      <label class="form-label">หลักสูตร {{ j + 2 }}</label>
+                      <input
+                        class="form-control form-control-sm"
+                        type="text"
+                        placeholder="กรุณากรอก"
+                        formControlName="courseName"
+                      />
+                    </div>
                   </div>
-                </div>
 
-                <ksp-advisor-info></ksp-advisor-info>
+                  <ksp-advisor-info
+                    formControlName="advisorInfos"
+                  ></ksp-advisor-info>
+                </ng-container>
               </ng-container>
             </ng-container>
             <div class="mb-3">

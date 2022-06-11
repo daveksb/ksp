@@ -28,6 +28,7 @@ export class AdvisorInfoComponent {
   form = this.fb.group({
     advisorStatus: [''],
     advisorType: [''],
+    studentNumber: [],
   });
 
   onChangeSubs: Subscription[] = [];
