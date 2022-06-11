@@ -41,13 +41,13 @@ export class CourseTypeTwoComponent implements OnInit {
     this.form.valueChanges.pipe(debounceTime(500)).subscribe((res) => {
       if (res.subjects) {
         this.totalCredit = <number>(
-          res.subjects.reduce((p, c: any) => p + c.credit, 0)
+          res.subjects.reduce((p, c: any) => p + Number(c.credit), 0)
         );
       }
 
       if (res.plans) {
         this.totalStudent = <number>(
-          res.plans.reduce((p, c: any) => p + c.student, 0)
+          res.plans.reduce((p, c: any) => p + Number(c.student), 0)
         );
       }
     });
