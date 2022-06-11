@@ -1,4 +1,4 @@
-export * from './lib/shared-ui-form.module';
+export * from './lib/shared-form-others.module';
 
 export * from './lib/form-address/form-address.component';
 

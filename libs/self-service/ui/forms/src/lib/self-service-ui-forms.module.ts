@@ -10,7 +10,7 @@ import { FormVerifyOtpComponent } from './form-verify-otp/form-verify-otp.compon
 import { FormVerifyPhoneComponent } from './form-verify-phone/form-verify-phone.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
-import { SharedUiFormModule } from '@ksp/shared/ui/form';
+import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { MatListModule } from '@angular/material/list';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -26,11 +26,11 @@ import { SharedFormEducationLevelModule } from '@ksp/shared/form/education-level
     MatTableModule,
     MatFormFieldModule,
     MatOptionModule,
-    SharedUiFormModule,
+    SharedFormOthersModule,
     MatListModule,
     SharedDirectiveModule,
     ReactiveFormsModule,
-    SharedFormEducationLevelModule
+    SharedFormEducationLevelModule,
   ],
   declarations: [
     FormUploadImageComponent,

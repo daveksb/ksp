@@ -1,13 +1,14 @@
 {
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "sourceRoot": "libs/shared/ui/form/src",
+  "sourceRoot": "libs/shared/form/others/src",
   "prefix": "ksp",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/shared/ui/form"],
+      "outputs": ["coverage/libs/shared/form/others"],
       "options": {
-        "jestConfig": "libs/shared/ui/form/jest.config.ts",
+        "jestConfig": "libs/shared/form/others/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -15,8 +16,8 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "libs/shared/ui/form/**/*.ts",
-          "libs/shared/ui/form/**/*.html"
+          "libs/shared/form/others/**/*.ts",
+          "libs/shared/form/others/**/*.html"
         ]
       }
     }

@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'shared-ui-form',
+  displayName: 'shared-form-others',
   preset: '../../../../jest.preset.ts',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../../coverage/libs/shared/ui/form',
+  coverageDirectory: '../../../../coverage/libs/shared/form/others',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

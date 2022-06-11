@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TempLicenseListComponent } from './temp-license-list/temp-license-list.component';
 import { TempLicenseDetailComponent } from './temp-license-detail/temp-license-detail.component';
-import { SharedUiFormModule } from '@ksp/shared/ui/form';
+import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { MatTabsModule } from '@angular/material/tabs';
 import { RouterModule, Routes } from '@angular/router';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
@@ -52,10 +52,10 @@ export const routes: Routes = [
     CommonModule,
     MatTabsModule,
     MatDialogModule,
-    SharedUiFormModule,
+    SharedFormOthersModule,
     EServiceUiLicenseCheckModule,
     RouterModule.forChild(routes),
-    SharedUiBottomMenuModule
+    SharedUiBottomMenuModule,
   ],
   declarations: [
     TempLicenseListComponent,

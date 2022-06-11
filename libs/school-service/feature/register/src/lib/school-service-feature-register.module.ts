@@ -5,7 +5,7 @@ import { AuthorComponent } from './author/author.component';
 import { RouterModule, Routes } from '@angular/router';
 import { UniServiceUiNavModule } from '@ksp/uni-service/ui/nav';
 import { CurrentUserComponent } from './current-user/current-user.component';
-import { SharedUiFormModule } from '@ksp/shared/ui/form';
+import { SharedFormOthersModule } from '@ksp/shared/form/others';
 
 export const routes: Routes = [
   {
@@ -23,7 +23,12 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, UniServiceUiNavModule, SharedUiFormModule ,RouterModule.forChild(routes)],
+  imports: [
+    CommonModule,
+    UniServiceUiNavModule,
+    SharedFormOthersModule,
+    RouterModule.forChild(routes),
+  ],
   declarations: [RegisterComponent, AuthorComponent, CurrentUserComponent],
   exports: [RegisterComponent, AuthorComponent, CurrentUserComponent],
 })

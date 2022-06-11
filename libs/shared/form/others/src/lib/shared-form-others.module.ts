@@ -32,4 +32,4 @@ import { FormForeignIdComponent } from './form-foreign-id/form-foreign-id.compon
     FormForeignIdComponent,
   ],
 })
-export class SharedUiFormModule {}
+export class SharedFormOthersModule {}

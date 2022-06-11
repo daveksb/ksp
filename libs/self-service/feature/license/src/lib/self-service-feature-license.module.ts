@@ -8,7 +8,7 @@ import { LicenseEditComponent } from './license-edit/license-edit.component';
 import { SharedUiSideMenuModule } from '@ksp/shared/ui/side-menu';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
-import { SharedUiFormModule } from '@ksp/shared/ui/form';
+import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master-page';
 import {
   PaymentChannelComponent,
@@ -52,7 +52,7 @@ export const routes: Routes = [
     RouterModule,
     SelfServiceUiMenuModule,
     SelfServiceUiFormsModule,
-    SharedUiFormModule,
+    SharedFormOthersModule,
     SharedUiSideMenuModule,
     MatTabsModule,
     MatExpansionModule,
