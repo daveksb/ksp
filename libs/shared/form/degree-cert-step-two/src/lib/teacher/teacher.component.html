@@ -47,11 +47,20 @@
                         formControlName="courseName"
                       />
                     </div>
+
+                    <mat-icon
+                      *ngIf="j > 0"
+                      class="delete__icon"
+                      matTooltip="ลบหลักสูตร ลำดับที่ {{ j + 2 }}"
+                      (click)="deleteCourse(i, j)"
+                    >
+                      delete_outline</mat-icon
+                    >
                   </div>
                 </ng-container>
               </ng-container>
             </ng-container>
-            <div class="button__container">
+            <div class="row row--fourth">
               <ksp-add-row-button
                 *ngIf="getCourses(i).length < 5"
                 (addClick)="addCourse(i)"
@@ -66,7 +75,10 @@
 </form>
 
 <div class="button__container">
-  <ksp-add-row-button (addClick)="addTeacher()" *ngIf="teachers.length < 4"
+  <ksp-add-row-button
+    (addClick)="addTeacher()"
+    *ngIf="teachers.length < 5"
+    [mode]="'blue'"
     >เพิ่มอาจารย์ประจำหลักสูตร / ผู้รับผิดชอบหลักสูตร</ksp-add-row-button
   >
 </div>

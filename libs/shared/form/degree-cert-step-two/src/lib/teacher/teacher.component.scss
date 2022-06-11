@@ -43,7 +43,7 @@
 }
 
 .row--fourth {
-  grid-template-columns: 1fr 16%;
+  grid-template-columns: 80% 1% auto;
 }
 
 .form-select {
@@ -72,8 +72,8 @@
 }
 
 .delete__icon {
-  width: auto;
   cursor: pointer;
   padding: 0;
   color: #f23c51;
+  margin-top: auto;
 }

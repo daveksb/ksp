@@ -55,6 +55,10 @@ export class TeacherComponent implements OnInit {
     this.teachers.removeAt(index);
   }
 
+  deleteCourse(teacherIndex: number, courseIndex: number) {
+    this.getCourses(teacherIndex).removeAt(courseIndex);
+  }
+
   get teachers() {
     return this.mainForm.controls['teachers'];
   }

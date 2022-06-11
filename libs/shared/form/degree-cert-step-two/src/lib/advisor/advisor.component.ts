@@ -42,20 +42,28 @@ export class AdvisorComponent implements OnInit {
   }
 
   addAdvisor() {
-    /*     const advisorForm = this.fb.group({
+    const advisorForm = this.fb.group({
       generalInfo: [],
       hasMoreCourses: [],
+      mainAdvisorInfo: [],
+
       courses: this.fb.array([
         this.fb.group({
-          //courseName: [''],
-          studentNumber: [''],
-          advisorStatus: [''],
-          advisorType: [''],
+          courseName: [],
+          advisorInfos: [],
         }),
       ]),
     });
 
-    this.advisors.push(advisorForm); */
+    this.advisors.push(advisorForm);
+  }
+
+  deleteAdvisor(index: number) {
+    this.advisors.removeAt(index);
+  }
+
+  deleteCourse(advisorIndex: number, courseIndex: number) {
+    this.getCourses(advisorIndex).removeAt(courseIndex);
   }
 
   getCourses(index: number) {
