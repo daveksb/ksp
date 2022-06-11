@@ -125,9 +125,6 @@
       "@ksp/self-service/ui/payment": [
         "libs/self-service/ui/payment/src/index.ts"
       ],
-      "@ksp/shared/form/teacher-info": [
-        "libs/shared/form/teacher-info/src/index.ts"
-      ],
       "@ksp/shared/assets": ["libs/shared/assets/src/index.ts"],
       "@ksp/shared/directive": ["libs/shared/directive/src/index.ts"],
       "@ksp/shared/feature/degree-cert": [
@@ -146,6 +143,9 @@
         "libs/shared/form/education-level/src/index.ts"
       ],
       "@ksp/shared/form/others": ["libs/shared/form/others/src/index.ts"],
+      "@ksp/shared/form/teacher-info": [
+        "libs/shared/form/teacher-info/src/index.ts"
+      ],
       "@ksp/shared/form/uni-course-form": [
         "libs/shared/form/uni-course-form/src/index.ts"
       ],

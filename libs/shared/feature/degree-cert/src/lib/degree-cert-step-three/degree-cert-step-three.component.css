@@ -33,7 +33,7 @@
 .img__process {
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
+  margin: 30px;
 }
 
 .tab-container {

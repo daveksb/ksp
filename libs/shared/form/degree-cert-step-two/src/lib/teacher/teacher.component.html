@@ -3,151 +3,82 @@
 <form [formGroup]="mainForm">
   <ng-container formArrayName="teachers">
     <ng-container *ngFor="let teacherForm of teachers.controls; let i = index">
-      <div class="group__header">
-        <div class="group__title">ลำดับที่ {{ i + 1 }}</div>
-        <mat-icon
-          matTooltip="ลบอาจารย์ประจำหลักสูตร ลำดับที่ {{ i + 1 }}"
-          *ngIf="i > 0"
-          class="delete__icon"
-          (click)="deleteTeacher(i)"
-          >delete_outline</mat-icon
-        >
-      </div>
-      <div class="group__container">
-        <div class="row row--first">
-          <div>
-            <label class="form-label">คำนำหน้าชื่อ</label>
-            <select class="form-select form-select-sm">
-              <option selected>นางสาว</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-          <div>
-            <label class="form-label">ชื่อ </label>
-            <input
-              class="form-control form-control-sm"
-              type="text"
-              placeholder="กรุณากรอก"
-            />
-          </div>
-          <div>
-            <label class="form-label">นามสกุล </label>
-            <input
-              class="form-control form-control-sm"
-              type="text"
-              placeholder="กรุณากรอก"
-            />
-          </div>
-        </div>
-
-        <div class="row row--secondary">
-          <div>
-            <label class="form-label">หมายเลขบัตรประชาชน</label>
-            <input
-              class="form-control form-control-sm"
-              type="text"
-              placeholder="กรุณากรอก"
-            />
-          </div>
-
-          <div>
-            <label class="form-label">ตำแหน่งวิชาการ</label>
-            <input
-              class="form-control form-control-sm"
-              type="text"
-              placeholder="กรุณากรอก"
-            />
-          </div>
-        </div>
-
-        <div>คุณวุฒิการศึกษา</div>
-
-        <ng-container
-          *ngFor="let degreeForm of getDegrees(i).controls; let j = index"
-        >
-          <!-- <ng-container
-          *ngFor="
-            let degreeForm of teacherForm.controls['degrees'].controls;
-            let j = index
-          "
-        > -->
-          <div class="row row--third">
-            <div>
-              <label class="form-label"
-                >คุณวุฒิ / สาขาวิชา ที่ {{ j + 1 }}</label
-              >
-              <input
-                class="form-control form-control-sm"
-                type="text"
-                placeholder="กรุณากรอก"
-              />
-            </div>
-            <div>
-              <label class="form-label">สถาบัน </label>
-              <input
-                class="form-control form-control-sm"
-                type="text"
-                placeholder="กรุณากรอก"
-              />
-            </div>
-            <div>
-              <label class="form-label">ปีที่สำเร็จการศึกษา (พ.ศ.) </label>
-              <input
-                class="form-control form-control-sm"
-                type="text"
-                placeholder="กรุณากรอก"
-              />
-            </div>
-            <mat-icon
-              *ngIf="j > 0"
-              class="delete__icon"
-              matTooltip="ลบคุณวุฒิการศึกษา ลำดับที่ {{ j + 1 }}"
-              (click)="deleteDegree(i, j)"
-            >
-              delete_outline</mat-icon
-            >
-          </div>
-        </ng-container>
-
-        <div class="button__container">
-          <ksp-add-row-button
-            (addClick)="addDegree(i)"
-            *ngIf="getDegrees(i).controls.length < 3"
-            >เพิ่มคุณวุฒิการศึกษา</ksp-add-row-button
+      <ng-container [formGroupName]="i">
+        <div class="group__header">
+          <div class="group__title">ลำดับที่ {{ i + 1 }}</div>
+          <mat-icon
+            matTooltip="ลบอาจารย์ประจำหลักสูตร ลำดับที่ {{ i + 1 }}"
+            *ngIf="i > 0"
+            class="delete__icon"
+            (click)="deleteTeacher(i)"
+            >delete_outline</mat-icon
           >
         </div>
-        <hr />
+        <div class="group__container">
+          <ksp-teacher-general-info
+            formControlName="generalInfo"
+          ></ksp-teacher-general-info>
 
-        <div>
-          <input type="checkbox" class="checkbox-1" />
-          <label class="checkbox__label"
-            >ทำเครื่องหมาย (/) กรณีประจำหลักสูตรมากกว่า ๑ หลักสูตร
-          </label>
-        </div>
-
-        <div class="row row--fourth">
           <div>
-            <label class="form-label">หลักสูตร 2</label>
             <input
-              class="form-control form-control-sm"
-              type="text"
-              placeholder="กรุณากรอก"
+              type="checkbox"
+              class="checkbox-1"
+              formControlName="hasMoreCourses"
             />
+            <label class="checkbox__label"
+              >ทำเครื่องหมาย (/) กรณีประจำหลักสูตรมากกว่า ๑ หลักสูตร
+            </label>
           </div>
-        </div>
 
-        <div class="button__container">
-          <ksp-add-row-button>เพิ่มหลักสูตร</ksp-add-row-button>
+          <ng-container *ngIf="getHasMoreCourses(i)">
+            <ng-container formArrayName="courses">
+              <ng-container
+                *ngFor="let course of getCourses(i).controls; let j = index"
+              >
+                <ng-container [formGroupName]="j">
+                  <div class="row row--fourth">
+                    <div>
+                      <label class="form-label">หลักสูตร {{ j + 2 }}</label>
+
+                      <input
+                        class="form-control form-control-sm"
+                        type="text"
+                        placeholder="กรุณากรอก"
+                        formControlName="courseName"
+                      />
+                    </div>
+
+                    <mat-icon
+                      *ngIf="j > 0"
+                      class="delete__icon"
+                      matTooltip="ลบหลักสูตร ลำดับที่ {{ j + 2 }}"
+                      (click)="deleteCourse(i, j)"
+                    >
+                      delete_outline</mat-icon
+                    >
+                  </div>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+            <div class="row row--fourth">
+              <ksp-add-row-button
+                *ngIf="getCourses(i).length < 5"
+                (addClick)="addCourse(i)"
+                >เพิ่มหลักสูตร</ksp-add-row-button
+              >
+            </div></ng-container
+          >
         </div>
-      </div>
+      </ng-container>
     </ng-container>
   </ng-container>
 </form>
 
 <div class="button__container">
-  <ksp-add-row-button (addClick)="addTeacher()" *ngIf="teachers.length < 4"
+  <ksp-add-row-button
+    (addClick)="addTeacher()"
+    *ngIf="teachers.length < 5"
+    [mode]="'blue'"
     >เพิ่มอาจารย์ประจำหลักสูตร / ผู้รับผิดชอบหลักสูตร</ksp-add-row-button
   >
 </div>

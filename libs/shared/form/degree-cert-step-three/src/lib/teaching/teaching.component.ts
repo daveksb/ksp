@@ -24,15 +24,15 @@ export class TeachingComponent implements OnInit {
 
       if (res.rows) {
         this.totalWeekTerm = <number>(
-          res.rows.reduce((p, c: any) => p + c.weekTerm, 0)
+          res.rows.reduce((p: any, c: any) => p + Number(c.weekTerm), 0)
         );
 
         this.totalClassWeek = <number>(
-          res.rows.reduce((p, c: any) => p + c.classWeek, 0)
+          res.rows.reduce((p: any, c: any) => p + Number(c.classWeek), 0)
         );
 
         this.totalHourTerm = <number>(
-          res.rows.reduce((p, c: any) => p + c.hourTerm, 0)
+          res.rows.reduce((p: any, c: any) => p + Number(c.hourTerm), 0)
         );
       }
     });
