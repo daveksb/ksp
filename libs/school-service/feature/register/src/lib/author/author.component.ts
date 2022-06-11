@@ -12,6 +12,8 @@ import {
   styleUrls: ['./author.component.scss'],
 })
 export class AuthorComponent {
+  authorInfo = ['หนังสือแต่งตั้งผู้ประสานงาน', 'สำเนาบัตรประชาชน'];
+
   constructor(private router: Router, public dialog: MatDialog) {}
 
   cancel() {
