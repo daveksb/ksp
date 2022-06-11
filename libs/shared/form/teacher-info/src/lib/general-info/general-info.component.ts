@@ -8,23 +8,23 @@ import {
 import { Subscription } from 'rxjs/internal/Subscription';
 
 @Component({
-  selector: 'ksp-advisor-person-info',
-  templateUrl: './advisor-person-info.component.html',
-  styleUrls: ['./advisor-person-info.component.scss'],
+  selector: 'ksp-teacher-general-info',
+  templateUrl: './general-info.component.html',
+  styleUrls: ['./general-info.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: AdvisorPersonInfoComponent,
+      useExisting: TeacherGeneralInfoComponent,
     },
     {
       provide: NG_VALIDATORS,
       multi: true,
-      useExisting: AdvisorPersonInfoComponent,
+      useExisting: TeacherGeneralInfoComponent,
     },
   ],
 })
-export class AdvisorPersonInfoComponent {
+export class TeacherGeneralInfoComponent {
   form = this.fb.group({
     firstName: [''],
     lastName: [''],
