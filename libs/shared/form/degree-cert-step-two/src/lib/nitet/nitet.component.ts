@@ -3,10 +3,10 @@ import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'ksp-step-2-nitet',
-  templateUrl: './step-two-nitet.component.html',
-  styleUrls: ['./step-two-nitet.component.scss'],
+  templateUrl: './nitet.component.html',
+  styleUrls: ['./nitet.component.scss'],
 })
-export class StepTwoNitetComponent implements OnInit {
+export class NitetComponent implements OnInit {
   experienceYearFocused = false;
 
   form = this.fb.group({

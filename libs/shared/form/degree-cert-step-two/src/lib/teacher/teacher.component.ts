@@ -3,10 +3,10 @@ import { FormArray, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'ksp-step-2-teacher',
-  templateUrl: './step-two-teacher.component.html',
-  styleUrls: ['./step-two-teacher.component.scss'],
+  templateUrl: './teacher.component.html',
+  styleUrls: ['./teacher.component.scss'],
 })
-export class StepTwoTeacherComponent implements OnInit {
+export class TeacherComponent implements OnInit {
   teacherForm = this.fb.group({
     title: [''],
     name: [''],

@@ -136,6 +136,9 @@
       "@ksp/shared/form/degree-cert-search": [
         "libs/shared/form/degree-cert-search/src/index.ts"
       ],
+      "@ksp/shared/form/degree-cert-step-two": [
+        "libs/shared/form/degree-cert-step-two/src/index.ts"
+      ],
       "@ksp/shared/form/education-level": [
         "libs/shared/form/education-level/src/index.ts"
       ],

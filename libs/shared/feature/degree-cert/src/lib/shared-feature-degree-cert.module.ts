@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedDirectiveModule } from '@ksp/shared/directive';
 import { SharedUiAddRowButtonModule } from '@ksp/shared/ui/add-row-button';
+import { SharedFormDegreeCertStepTwoModule } from '@ksp/shared/form/degree-cert-step-two';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { SharedUiAddRowButtonModule } from '@ksp/shared/ui/add-row-button';
     MatIconModule,
     SharedDirectiveModule,
     SharedUiAddRowButtonModule,
+    SharedFormDegreeCertStepTwoModule,
   ],
   declarations: [
     DegreeCertHomeComponent,
