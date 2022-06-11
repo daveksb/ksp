@@ -1,28 +1,29 @@
 <div class="header">อาจารย์นิเทศก์</div>
 
-<div class="teacher-number__container">
-  <div>
-    <label>ระบุจำนวน</label>
-    <input
-      class="form-control form-control-sm teacher-number__input"
-      type="number"
-      min="0"
-      max="5"
-    />
-  </div>
-  <div class="teacher-number__button">
-    <button id="teacher-number__button" type="button" class="btn btn-primary">
-      กรอกข้อมูลอาจารย์นิเทศก์
-    </button>
-  </div>
-</div>
-
 <form [formGroup]="form">
+  <!--   <div class="teacher-number__container">
+    <div>
+      <label>ระบุจำนวน</label>
+      <input
+        formControlName="nitetAmount"
+        class="form-control form-control-sm teacher-number__input"
+        type="number"
+        min="0"
+        max="5"
+      />
+    </div>
+    <div class="teacher-number__button">
+      <button id="teacher-number__button" type="button" class="btn btn-primary">
+        กรอกข้อมูลอาจารย์นิเทศก์
+      </button>
+    </div>
+  </div> -->
+
   <div class="group__number">ลำดับที่ 1</div>
 
   <div class="group__container">
     <ksp-teacher-general-info
-      formControlName="advisorInfo"
+      formControlName="generalInfo"
     ></ksp-teacher-general-info>
 
     <div>
@@ -126,5 +127,11 @@
 
       <ksp-instructor-info *ngIf="experienceYear < 3"></ksp-instructor-info>
     </div>
+  </div>
+
+  <div class="button__container">
+    <ksp-add-row-button [mode]="'blue'" (addClick)="({})"
+      >เพิ่มอาจารย์นิเทศก์</ksp-add-row-button
+    >
   </div>
 </form>

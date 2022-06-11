@@ -11,7 +11,7 @@ export class NitetComponent implements OnInit {
   experienceYearFocused = false;
 
   form = this.fb.group({
-    advisorInfo: [],
+    generalInfo: [],
     experienceYear: [],
     instructorInfo: [],
   });
@@ -22,7 +22,6 @@ export class NitetComponent implements OnInit {
     this.form.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
       console.log('form value = ', res);
     });
-
     /*
     this.form.controls['experienceYear'].valueChanges.subscribe((res) => {
       console.log('res = ', res);
