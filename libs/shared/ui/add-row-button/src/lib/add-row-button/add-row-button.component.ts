@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'ksp-add-row-button',
@@ -7,6 +7,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class AddRowButtonComponent {
   @Output() addClick = new EventEmitter<boolean>();
+  @Input() mode = 'default';
 
   onClick() {
     this.addClick.emit(true);

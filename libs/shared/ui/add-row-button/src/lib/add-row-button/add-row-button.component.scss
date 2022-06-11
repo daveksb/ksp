@@ -1,8 +1,12 @@
-.add__icon-container {
+.icon__container {
   display: flex;
   justify-content: center;
   color: #f68b33;
   align-items: flex-end;
+}
+
+.icon__container--blue {
+  color: #0056ff;
 }
 
 mat-icon {
@@ -10,8 +14,12 @@ mat-icon {
   font-size: 21px;
 }
 
-.add__text {
+.title {
   font-size: 18px;
   margin-left: 2px;
   cursor: pointer;
+}
+
+.title--large {
+  font-size: 20px;
 }
