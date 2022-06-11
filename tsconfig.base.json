@@ -136,6 +136,12 @@
       "@ksp/shared/form/degree-cert-search": [
         "libs/shared/form/degree-cert-search/src/index.ts"
       ],
+      "@ksp/shared/form/degree-cert-step-two": [
+        "libs/shared/form/degree-cert-step-two/src/index.ts"
+      ],
+      "@ksp/shared/form/degree-cert-step-three": [
+        "libs/shared/form/degree-cert-step-three/src/index.ts"
+      ],
       "@ksp/shared/form/education-level": [
         "libs/shared/form/education-level/src/index.ts"
       ],
@@ -150,9 +156,6 @@
         "libs/shared/ui/add-row-button/src/index.ts"
       ],
       "@ksp/shared/ui/bottom-menu": ["libs/shared/ui/bottom-menu/src/index.ts"],
-      "@ksp/shared/ui/degree-cert-tab-content": [
-        "libs/shared/ui/degree-cert-tab-content/src/index.ts"
-      ],
       "@ksp/shared/ui/dialog": ["libs/shared/ui/dialog/src/index.ts"],
       "@ksp/shared/ui/forbidden-property": [
         "libs/shared/ui/forbidden-property/src/index.ts"

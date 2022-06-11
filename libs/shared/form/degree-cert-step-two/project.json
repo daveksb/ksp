@@ -1,14 +1,14 @@
 {
   "projectType": "library",
-  "sourceRoot": "libs/shared/ui/degree-cert-tap-content/src",
+  "sourceRoot": "libs/shared/form/degree-cert-step-two/src",
   "prefix": "ksp",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "libs/shared/ui/degree-cert-tab-content/**/*.ts",
-          "libs/shared/ui/degree-cert-tab-content/**/*.html"
+          "libs/shared/form/degree-cert-step-two/**/*.ts",
+          "libs/shared/form/degree-cert-step-two/**/*.html"
         ]
       }
     }

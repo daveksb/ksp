@@ -4,10 +4,10 @@ import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'ksp-step-2-tab-1-second',
-  templateUrl: './step-two-tab-one-second.component.html',
-  styleUrls: ['./step-two-tab-one-second.component.scss'],
+  templateUrl: './course-type-two.component.html',
+  styleUrls: ['./course-type-two.component.scss'],
 })
-export class StepTwoTabOneSecondComponent implements OnInit {
+export class CourseTypeTwoComponent implements OnInit {
   totalCredit = 0;
   totalStudent = 0;
 
