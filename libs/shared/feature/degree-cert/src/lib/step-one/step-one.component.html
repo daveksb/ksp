@@ -1,8 +1,4 @@
-<form [formGroup]="step1Form">
-  <!--   <div class="img__process">
-    <img src="/assets/images/img-uni/Procees.png" />
-  </div> -->
-
+<form [formGroup]="form">
   <div class="group__container group__container--blue">
     <div class="group__header">ข้อมูลสถาบัน</div>
     <div class="row row--half">
@@ -70,7 +66,11 @@
     <div class="row row--2">
       <div>
         <label class="form-label">ปีของหลักสูตร</label>
-        <input class="form-control form-control-sm" type="number" min="0" />
+        <input
+          formControlName="year"
+          class="form-control form-control-sm"
+          type="number"
+        />
       </div>
       <div>
         <label class="form-label"
@@ -79,6 +79,7 @@
           ></label
         >
         <input
+          formControlName="courseName"
           class="form-control form-control-sm"
           type="text"
           placeholder="กรุณากรอก"

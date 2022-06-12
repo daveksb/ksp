@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
-import { DynamicComponent, ListData } from '@ksp/shared/interface';
+import { DynamicComponent, FormMode, ListData } from '@ksp/shared/interface';
 import { debounceTime } from 'rxjs';
 import { DegreeCertStepOneService } from './step-one.service';
 
@@ -22,14 +22,27 @@ export class DegreeCertStepOneComponent implements OnInit {
   courseTypes: ListData[] = [];
   degreeTypes: ListData[] = [];
 
-  @Input() mode = 'edit';
+  private _mode: FormMode = 'edit';
+
+  @Input()
+  set mode(value: FormMode) {
+    this._mode = value;
+    if (value === 'view') this.form.disable();
+  }
+
+  get mode(): FormMode {
+    return this._mode;
+  }
+
   @Output() degreeType = new EventEmitter<string>();
   @ViewChild(DynamicComponentDirective, { static: true })
   myHost!: DynamicComponentDirective;
 
-  step1Form = this.fb.group({
-    degreeType: [''],
-    courseType: [''],
+  form = this.fb.group({
+    degreeType: [],
+    courseType: [],
+    year: [],
+    courseName: [],
     locations: this.fb.array([]),
     institutions: this.fb.array([]),
     locations2: this.fb.array([]),
@@ -44,25 +57,30 @@ export class DegreeCertStepOneComponent implements OnInit {
     this.courseTypes = this.service.courseTypes;
     this.degreeTypes = this.service.degreeTypes;
 
-    this.step1Form.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
-      //console.log('form value = ', res);
-    });
+    this.listenFormChange();
+    this.setDefaulFormValue();
+  }
 
-    this.step1Form.controls['courseType'].valueChanges.subscribe((res) => {
-      this.loadComponent(Number(res));
-    });
-
-    this.step1Form.controls['degreeType'].valueChanges.subscribe((res) => {
-      // it has 8 degree types and target with 2 form types
-      const degree = Number(res);
-      const degreeType = degree < 4 ? 'a' : 'b';
-      //console.log('degree type = ', degreeType);
-      this.degreeType.emit(degreeType);
-    });
-
+  setDefaulFormValue() {
     this.addFormArray(this.locations);
     this.addFormArray(this.institutions);
     this.addFormArray(this.locations2);
+  }
+
+  listenFormChange() {
+    this.form.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
+      //console.log('form value = ', res);
+    });
+
+    this.form.controls['courseType'].valueChanges.subscribe((res) => {
+      this.loadComponent(Number(res));
+    });
+
+    this.form.controls['degreeType'].valueChanges.subscribe((res) => {
+      // it has 8 degree types and target with 2 form types
+      const degreeType = Number(res) < 4 ? 'a' : 'b';
+      this.degreeType.emit(degreeType);
+    });
   }
 
   addFormArray(form: FormArray<any>) {
@@ -83,14 +101,14 @@ export class DegreeCertStepOneComponent implements OnInit {
   }
 
   get locations() {
-    return this.step1Form.controls['locations'] as FormArray;
+    return this.form.controls['locations'] as FormArray;
   }
 
   get institutions() {
-    return this.step1Form.controls['institutions'] as FormArray;
+    return this.form.controls['institutions'] as FormArray;
   }
 
   get locations2() {
-    return this.step1Form.controls['locations2'] as FormArray;
+    return this.form.controls['locations2'] as FormArray;
   }
 }

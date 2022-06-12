@@ -67,9 +67,3 @@ mat-icon {
   padding: 0;
   color: #f23c51;
 }
-
-.img__process {
-  display: flex;
-  justify-content: center;
-  margin: 30px;
-}
