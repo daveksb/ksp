@@ -50,25 +50,7 @@
 
 .detail__action {
   display: flex;
-  justify-content: flex-ends;
-  margin-left: 70%;
-}
-
-.btn-primary {
-  font-size: 20px;
-  background-color: #0056ff;
-  width: 100%;
-  border-radius: 4px;
-}
-
-.btn-fourth {
-  font-size: 18px;
-  background-color: white;
-  color: #0056ff;
-  width: 100%;
-  border-radius: 4px;
-  border: 1px solid #0056ff;
-  margin-right: 20px;
+  justify-content: flex-end;
 }
 
 .table {
@@ -115,4 +97,8 @@
 
 .close__dialog {
   cursor: pointer;
+}
+
+#search-btn {
+  margin-left: 10px;
 }
