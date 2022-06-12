@@ -2,6 +2,46 @@ import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
+@Component({
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.css'],
+})
+export class DegreeCertListComponent {
+  displayedColumns: string[] = displayedColumns;
+  dataSource = new MatTableDataSource<DegreeCertInfo>();
+
+  constructor(private router: Router) {}
+
+  goToStep1() {
+    this.router.navigate(['/', 'degree-cert', 'request']);
+  }
+
+  search() {
+    this.dataSource.data = data;
+  }
+
+  clear() {
+    this.dataSource.data = [];
+  }
+}
+
+const displayedColumns: string[] = [
+  'order',
+  'degreeId',
+  'date',
+  'uni',
+  'major',
+  'verifyStatus',
+  'considerStatus',
+  'approveStatus',
+  'approveDate',
+  'editDate',
+  'verify',
+  'consider',
+  'edit',
+  'print',
+];
+
 export interface DegreeCertInfo {
   order: number;
   degreeId: string;
@@ -69,42 +109,3 @@ export const data: DegreeCertInfo[] = [
     print: '',
   },
 ];
-
-@Component({
-  selector: 'ksp-degree-cert-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
-})
-export class DegreeCertHomeComponent {
-  displayedColumns: string[] = [
-    'order',
-    'degreeId',
-    'date',
-    'uni',
-    'major',
-    'verifyStatus',
-    'considerStatus',
-    'approveStatus',
-    'approveDate',
-    'editDate',
-    'verify',
-    'consider',
-    'edit',
-    'print',
-  ];
-  dataSource = new MatTableDataSource<DegreeCertInfo>();
-
-  constructor(private router: Router) {}
-
-  goToStep1() {
-    this.router.navigate(['/', 'degree-cert', 'request']);
-  }
-
-  search() {
-    this.dataSource.data = data;
-  }
-
-  clear() {
-    this.dataSource.data = [];
-  }
-}
