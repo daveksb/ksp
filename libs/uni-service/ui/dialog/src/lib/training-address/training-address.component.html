@@ -1,81 +1,80 @@
-<div class="container">
-  <div class="box__container">
-    <div class="box__header">
-      <div class="title__box">สถานที่ปฏิบัติการสอน</div>
-    </div>
-    <hr />
-    <div class="box__detail">
-      <div class="header__label">สถานที่ปฏิบัติการสอนครั้งที่ 1</div>
-      <div class="detail__container--half">
-        <div>
-          <label for="exampleFormControlInput1" class="form-label"
-            >รหัสหน่วยงาน/สถานศึกษา</label
+<form [formGroup]="form">
+  <div class="container">
+    <div class="box__container">
+      <div class="box__header">
+        <div class="title__box">สถานที่ปฏิบัติการสอน</div>
+      </div>
+      <hr />
+      <div class="box__detail">
+        <ng-container formArrayName="addresses">
+          <ng-container
+            *ngFor="let teacherForm of addresses.controls; let i = index"
           >
-          <div class="search__content">
-            <input class="form-control form-control-sm" type="text" />
-            <img
-              class="icon"
-              (click)="searchAddress()"
-              src="/assets/images/img-uni/search.svg"
-            />
-          </div>
-        </div>
-        <div class="detail__container">
-          <label for="exampleFormControlInput1" class="form-label"
-            >ชื่อหน่วยงาน/สถานศึกษา
-          </label>
-          <input class="form-control form-control-sm" type="text" />
-        </div>
-      </div>
+            <ng-container [formGroupName]="i">
+              <div class="header__label">
+                สถานที่ปฏิบัติการสอนครั้งที่ {{ i + 1 }}
+              </div>
+              <div class="detail__container--half">
+                <div>
+                  <label for="exampleFormControlInput1" class="form-label"
+                    >รหัสหน่วยงาน/สถานศึกษา</label
+                  >
+                  <div class="search__content">
+                    <input
+                      class="form-control form-control-sm"
+                      type="text"
+                      formControlName="addressCode"
+                    />
+                    <mat-icon class="search" (click)="searchAddress()"
+                      >search</mat-icon
+                    >
+                  </div>
+                </div>
+                <div class="detail__container">
+                  <label for="exampleFormControlInput1" class="form-label"
+                    >ชื่อหน่วยงาน/สถานศึกษา
+                  </label>
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    formControlName="addressName"
+                  />
+                </div>
+                <mat-icon
+                  matTooltip="ลบสถานที่ปฏิบัติการสอนครั้งที่ {{ i + 1 }}"
+                  *ngIf="i > 0"
+                  class="delete__icon"
+                  (click)="deleteAddress(i)"
+                  >delete_outline</mat-icon
+                >
+              </div>
+            </ng-container>
+          </ng-container>
+        </ng-container>
 
-      <div class="header__label">สถานที่ปฏิบัติการสอนครั้งที่ 2</div>
-      <div class="detail__container--half">
-        <div class="detail__container">
-          <label for="exampleFormControlInput1" class="form-label"
-            >รหัสหน่วยงาน/สถานศึกษา
-          </label>
-          <div class="search__content">
-            <input class="form-control form-control-sm" type="text" />
-            <img
-              class="icon"
-              (click)="searchAddress()"
-              src="/assets/images/img-uni/search.svg"
-            />
-          </div>
+        <div class="detail__footer">
+          <ksp-add-row-button
+            [mode]="'blue'"
+            (addClick)="addAddress()"
+            *ngIf="addresses.length < 5"
+            >เพิ่มสถานที่ปฏิบัติการสอน</ksp-add-row-button
+          >
         </div>
-        <div class="detail__container">
-          <label for="exampleFormControlInput1" class="form-label"
-            >ชื่อหน่วยงาน/สถานศึกษา
-          </label>
-          <input class="form-control form-control-sm" type="text" />
+
+        <div class="detail__action">
+          <button matDialogClose type="button" class="btn btn-outline-primary">
+            ยกเลิก
+          </button>
+          <button
+            id="btn-save"
+            matDialogClose
+            type="button"
+            class="btn btn-primary"
+          >
+            บันทึก
+          </button>
         </div>
-      </div>
-
-      <div class="detail__footer">
-        <button type="button" class="btn btn-add">
-          <img
-            src="/assets/images/img-uni/add-icon.svg"
-            class="icon"
-          />เพิ่มสถานที่ปฏิบัติการสอน
-        </button>
-      </div>
-
-      <div class="detail__action">
-        <button
-          matDialogClose
-          type="button"
-          class="btn btn-fourth btn-sm label__button"
-        >
-          ยกเลิก
-        </button>
-        <button
-          matDialogClose
-          type="button"
-          class="btn btn-primary btn-sm label__button"
-        >
-          บันทึก
-        </button>
       </div>
     </div>
   </div>
-</div>
+</form>
