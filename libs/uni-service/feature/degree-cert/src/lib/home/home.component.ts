@@ -7,11 +7,13 @@ import {
 } from '@ksp/shared/ui/dialog';
 
 @Component({
-  selector: 'ksp-step-four',
-  templateUrl: './step-four.component.html',
-  styleUrls: ['./step-four.component.scss'],
+  selector: 'ksp-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
 })
-export class StepFourComponent {
+export class HomeComponent {
+  degreeType = '';
+
   constructor(private router: Router, public dialog: MatDialog) {}
 
   save() {
@@ -52,13 +54,5 @@ export class StepFourComponent {
         this.router.navigate(['/', 'degree-cert']);
       }
     });
-  }
-
-  prevPage() {
-    this.router.navigate(['./', 'degree-cert', 'step-3']);
-  }
-
-  cancel() {
-    this.router.navigate(['./', 'degree-cert']);
   }
 }

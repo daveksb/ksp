@@ -23,7 +23,7 @@ export class DegreeCertStepOneComponent implements OnInit {
   degreeTypes: ListData[] = [];
 
   @Input() mode = 'edit';
-  @Output() degreeType = new EventEmitter<number>();
+  @Output() degreeType = new EventEmitter<string>();
   @ViewChild(DynamicComponentDirective, { static: true })
   myHost!: DynamicComponentDirective;
 
@@ -45,7 +45,7 @@ export class DegreeCertStepOneComponent implements OnInit {
     this.degreeTypes = this.service.degreeTypes;
 
     this.step1Form.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
-      console.log('form value = ', res);
+      //console.log('form value = ', res);
     });
 
     this.step1Form.controls['courseType'].valueChanges.subscribe((res) => {
@@ -53,7 +53,11 @@ export class DegreeCertStepOneComponent implements OnInit {
     });
 
     this.step1Form.controls['degreeType'].valueChanges.subscribe((res) => {
-      this.degreeType.emit(Number(res));
+      // it has 8 degree types and target with 2 form types
+      const degree = Number(res);
+      const degreeType = degree < 4 ? 'a' : 'b';
+      //console.log('degree type = ', degreeType);
+      this.degreeType.emit(degreeType);
     });
 
     this.addFormArray(this.locations);

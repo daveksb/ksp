@@ -78,3 +78,11 @@ add asterisk for required feild
 button.mat-menu-item {
   font-family: 'KSP Regular';
 }
+
+/*
+ Mat stepper style
+*/
+.mat-stepper-label-position-bottom .mat-horizontal-stepper-header-container {
+  width: 75%;
+  align-self: center;
+}

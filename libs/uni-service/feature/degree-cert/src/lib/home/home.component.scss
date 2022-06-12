@@ -1,0 +1,25 @@
+.page__container {
+  margin: 20px 10px;
+}
+
+.page__header {
+  font-size: 22px;
+  margin-left: 30px;
+  padding-top: 12px;
+}
+
+.content__header {
+  display: flex;
+}
+
+.label__content {
+  font-size: 18px;
+  color: #808080;
+  margin-right: 24px;
+}
+.label__content--primary {
+  color: #f68b33;
+}
+.label__content--secondary {
+  color: #0056ff;
+}

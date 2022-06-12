@@ -3,11 +3,11 @@ import { FormBuilder } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 
 @Component({
-  selector: 'ksp-step-2-tab-1-b',
-  templateUrl: './course-type-two.component.html',
-  styleUrls: ['./course-type-two.component.scss'],
+  selector: 'ksp-step-2-tab-1-a',
+  templateUrl: './course-type-a.component.html',
+  styleUrls: ['./course-type-a.component.scss'],
 })
-export class CourseTypeTwoComponent implements OnInit {
+export class CourseTypeAComponent implements OnInit {
   totalCredit = 0;
   totalStudent = 0;
 
