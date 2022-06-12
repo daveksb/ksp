@@ -37,57 +37,6 @@
   color: #0056ff;
 }
 
-.detail__container--secondary {
-  background-color: #f9f9fa;
-  padding: 16px;
-  margin-bottom: 24px;
-}
-
-.detail__header--secondary {
-  font-size: 22px;
-  color: #000000;
-}
-
-.label__text {
-  font-size: 16px;
-  margin-left: 8px;
-  color: #f23c51;
-  text-align: center;
-}
-
-.detail__content--fifth {
-  display: grid;
-  grid-template-columns: 15% 1fr 1fr;
-  grid-column-gap: 18px;
-  margin-bottom: 14px;
-}
-
-.form-label {
-  font-size: 18px;
-  color: #656565;
-}
-
-.form-control {
-  font-size: 20px;
-  background-color: #fff;
-}
-
-.form-select {
-  font-size: 20px;
-}
-
-.detail__content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 18px;
-  margin-bottom: 14px;
-}
-
-.box__footer {
-  display: flex;
-  justify-content: center;
-}
-
 .bottom__container {
   position: fixed;
   bottom: 0;
