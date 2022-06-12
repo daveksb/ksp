@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 
 @Component({
-  selector: 'ksp-step-2-tab-1',
+  selector: 'ksp-step-2-tab-1-a',
   templateUrl: './course-type-one.component.html',
   styleUrls: ['./course-type-one.component.scss'],
 })
