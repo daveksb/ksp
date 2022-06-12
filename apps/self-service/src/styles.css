@@ -26,7 +26,7 @@ hr {
   color: #515153;
   width: 250px;
   margin: 0 2px;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .mat-tab-label-active {
@@ -85,4 +85,18 @@ button.mat-menu-item {
 .mat-stepper-label-position-bottom .mat-horizontal-stepper-header-container {
   width: 75%;
   align-self: center;
+}
+
+.mat-stepper-label-position-bottom
+  .mat-horizontal-stepper-header
+  .mat-step-icon {
+  height: 45px;
+  width: 45px;
+  color: #fff;
+  background-color: #0056ff;
+  margin-top: -10px;
+}
+
+.mat-step-text-label {
+  font-size: 18px;
 }

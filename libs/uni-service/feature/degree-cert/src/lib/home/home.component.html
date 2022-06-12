@@ -11,34 +11,47 @@
         <span class="label__content--secondary">112234467876543</span>
       </div>
     </div>
+    <hr />
+
+    <mat-stepper labelPosition="bottom" [animationDuration]="'0'" #stepper>
+      <mat-step>
+        <ng-template matStepLabel>ข้อมูลพื้นฐาน</ng-template>
+        <ksp-degree-cert-step-one (degreeType)="degreeType = $event">
+        </ksp-degree-cert-step-one>
+        <uni-service-degree-cert-coordinator></uni-service-degree-cert-coordinator>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>ด้านหลักสูตร</ng-template>
+        <ksp-degree-cert-step-two [formType]="degreeType">
+        </ksp-degree-cert-step-two>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>ด้านกระบวนการผลิต</ng-template>
+        <ksp-degree-cert-step-3></ksp-degree-cert-step-3>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>เอกสารแนบ</ng-template>
+        <ksp-degree-cert-step-four></ksp-degree-cert-step-four>
+      </mat-step>
+
+     <!--  <mat-step [editable]="isEditable">
+        <ng-template matStepLabel>ตรวจสอบและยื่นคำขอ</ng-template>
+      </mat-step> -->
+    </mat-stepper>
   </div>
 
-  <mat-stepper labelPosition="bottom" [animationDuration]="'0'" #stepper>
-    <mat-step>
-      <ng-template matStepLabel>ข้อมูลพื้นฐาน</ng-template>
-      <ksp-degree-cert-step-one (degreeType)="degreeType = $event">
-      </ksp-degree-cert-step-one>
-      <uni-service-degree-cert-coordinator></uni-service-degree-cert-coordinator>
-    </mat-step>
-
-    <mat-step>
-      <ng-template matStepLabel>ด้านหลักสูตร</ng-template>
-      <ksp-degree-cert-step-two [formType]="degreeType">
-      </ksp-degree-cert-step-two>
-    </mat-step>
-
-    <mat-step>
-      <ng-template matStepLabel>ด้านกระบวนการผลิต</ng-template>
-      <ksp-degree-cert-step-3></ksp-degree-cert-step-3>
-    </mat-step>
-
-    <mat-step>
-      <ng-template matStepLabel>เอกสารแนบ</ng-template>
-      <ksp-degree-cert-step-four></ksp-degree-cert-step-four>
-    </mat-step>
-
-    <!--  <mat-step>
-      <ng-template matStepLabel>ตรวจสอบและยื่นคำขอ</ng-template>
-    </mat-step> -->
-  </mat-stepper>
+  <div class="bottom__container">
+    <ksp-bottom-menu
+      [isLastPage]="true"
+      [isFirstPage]="true"
+      [showCenterButtons]="true"
+      [showSaveButton]="true"
+      [showCancelButton]="true"
+      (saveClicked)="save()"
+      (cancelClicked)="cancel()"
+    ></ksp-bottom-menu>
+  </div>
 </div>

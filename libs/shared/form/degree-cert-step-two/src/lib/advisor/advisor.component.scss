@@ -1,6 +1,5 @@
 .header__container {
-  display: grid;
-  grid-template-columns: 20% 1fr;
+  display: flex;
 }
 
 .group__header {
@@ -10,6 +9,7 @@
 
 .header {
   font-size: 22px;
+  margin-right: 10px;
 }
 
 .header-2 {

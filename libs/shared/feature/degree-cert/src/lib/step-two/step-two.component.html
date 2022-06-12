@@ -1,37 +1,33 @@
-<div class="container">
-  <div class="content__container">
-    <div class="tab-container">
-      <mat-tab-group
-        class="tab-group"
-        animationDuration="0ms"
-        (selectedTabChange)="tabChanged($event)"
-        [selectedIndex]="0"
-      >
-        <mat-tab
-          label="โครงสร้างหลักสูตรและแผนการรับนิสิตนักศึกษา"
-          class="tab-content"
-        >
-          <div *ngIf="formType === 'a'; then typeA; else typeB"></div>
-          <ng-template #typeA
-            ><ksp-step-2-tab-1-a></ksp-step-2-tab-1-a
-          ></ng-template>
-          <ng-template #typeB
-            ><ksp-step-2-tab-1-b></ksp-step-2-tab-1-b
-          ></ng-template>
-        </mat-tab>
+<div class="tab__container">
+  <mat-tab-group
+    class="tab-group"
+    animationDuration="0ms"
+    (selectedTabChange)="tabChanged($event)"
+    [selectedIndex]="0"
+  >
+    <mat-tab
+      label="โครงสร้างหลักสูตรและแผนการรับนิสิตนักศึกษา"
+      class="tab-content"
+    >
+      <div *ngIf="formType === 'a'; then typeA; else typeB"></div>
+      <ng-template #typeA
+        ><ksp-step-2-tab-1-a></ksp-step-2-tab-1-a
+      ></ng-template>
+      <ng-template #typeB
+        ><ksp-step-2-tab-1-b></ksp-step-2-tab-1-b
+      ></ng-template>
+    </mat-tab>
 
-        <mat-tab label="อาจารย์ / ผู้รับผิดชอบประจำหลักสูตร">
-          <ksp-step-2-teacher></ksp-step-2-teacher>
-        </mat-tab>
+    <mat-tab label="อาจารย์ / ผู้รับผิดชอบประจำหลักสูตร">
+      <ksp-step-2-teacher></ksp-step-2-teacher>
+    </mat-tab>
 
-        <mat-tab label="อาจารย์นิเทศก์">
-          <ksp-step-2-nitet></ksp-step-2-nitet>
-        </mat-tab>
+    <mat-tab label="อาจารย์นิเทศก์">
+      <ksp-step-2-nitet></ksp-step-2-nitet>
+    </mat-tab>
 
-        <mat-tab label="ที่ปรึกษาวิทยานิพนธ์และการค้นคว้าอิสระ">
-          <ksp-step-2-advisor></ksp-step-2-advisor>
-        </mat-tab>
-      </mat-tab-group>
-    </div>
-  </div>
+    <mat-tab label="ที่ปรึกษาวิทยานิพนธ์และการค้นคว้าอิสระ">
+      <ksp-step-2-advisor></ksp-step-2-advisor>
+    </mat-tab>
+  </mat-tab-group>
 </div>

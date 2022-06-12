@@ -8,9 +8,9 @@ import { debounceTime } from 'rxjs';
   styleUrls: ['./course-type-b.component.scss'],
 })
 export class CourseTypeBComponent implements OnInit {
-  creditSums: number[] = [];
-  yearSums: number[] = [];
-  planSums: number[] = [];
+  creditSums: number[] = [0, 0, 0];
+  yearSums: number[] = [0, 0, 0, 0, 0, 0];
+  planSums: number[] = [0, 0, 0, 0];
 
   defaultSubject = {
     subjects: this.fb.array([this.newSubject('หมวดวิชาบังคับ')]),
