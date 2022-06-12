@@ -16,17 +16,9 @@ import { Router } from '@angular/router';
 })
 export class DegreeCertStepTwoComponent {
   @Output() tabIndexChanged = new EventEmitter<number>();
-  @Input() formType = 0;
+  @Input() formType = 'a';
 
   constructor(private router: Router) {}
-
-  goToStep1() {
-    this.router.navigate(['/', 'degree-cert', 'step-1']);
-  }
-
-  goToStep3() {
-    this.router.navigate(['/', 'degree-cert', 'step-3']);
-  }
 
   tabChanged($event: MatTabChangeEvent) {
     //console.log('tab index = ', $event.index);

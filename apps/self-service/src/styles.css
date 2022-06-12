@@ -74,3 +74,11 @@ add asterisk for required feild
 .form-label {
   margin-bottom: 0 !important;
 }
+
+/*
+ Mat stepper style
+*/
+.mat-stepper-label-position-bottom .mat-horizontal-stepper-header-container {
+  width: 70%;
+  align-self: center;
+}

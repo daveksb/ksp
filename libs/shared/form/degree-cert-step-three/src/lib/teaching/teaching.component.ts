@@ -20,7 +20,7 @@ export class TeachingComponent implements OnInit {
 
   ngOnInit(): void {
     this.form.valueChanges.pipe(debounceTime(500)).subscribe((res) => {
-      console.log('form value = ', res.rows);
+      //console.log('form value = ', res.rows);
 
       if (res.rows) {
         this.totalWeekTerm = <number>(
