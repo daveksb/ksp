@@ -3,34 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 
-export interface DegreeCertInfo {
-  degreeId: string;
-  date: string;
-  uni: string;
-  major: string;
-  verifyStatus: string;
-  considerStatus: string;
-  approveStatus: string;
-  approveDate: string;
-  editDate: string;
-  verify: string;
-  consider: string;
-}
-
-export const data: DegreeCertInfo = {
-  degreeId: 'UNI_VC_64120009',
-  date: '10 ธ.ค. 2564',
-  uni: 'มหาวิทยาลัยภูเก็ต',
-  major: 'คุรุศาสตร์',
-  verifyStatus: 'รับข้อมูล',
-  considerStatus: 'พิจารณา',
-  approveStatus: 'พิจารณา',
-  approveDate: '30 ส.ค. 2564',
-  editDate: '30 ส.ค. 2564',
-  verify: 'ตรวจสอบแล้ว',
-  consider: 'ตรวจสอบแล้ว',
-};
-
 @Component({
   selector: 'e-service-degree-cert-list',
   templateUrl: './degree-cert-list.component.html',
@@ -42,20 +14,7 @@ export class DegreeCertListComponent implements OnInit {
   dataSource = new MatTableDataSource<DegreeCertInfo>();
   selection = new SelectionModel<DegreeCertInfo>(true, []);
 
-  displayedColumns: string[] = [
-    'select',
-    'degreeId',
-    'date',
-    'uni',
-    'major',
-    'verifyStatus',
-    'considerStatus',
-    'approveStatus',
-    'editDate',
-    'verify',
-    'consider',
-    'print',
-  ];
+  displayedColumns: string[] = displayedColumns;
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
@@ -105,3 +64,45 @@ export class DegreeCertListComponent implements OnInit {
     this.router.navigate(['./', 'degree-cert', 'verify', '3']);
   }
 }
+
+const displayedColumns: string[] = [
+  'select',
+  'degreeId',
+  'date',
+  'uni',
+  'major',
+  'verifyStatus',
+  'considerStatus',
+  'approveStatus',
+  'editDate',
+  'verify',
+  'consider',
+  'print',
+];
+export interface DegreeCertInfo {
+  degreeId: string;
+  date: string;
+  uni: string;
+  major: string;
+  verifyStatus: string;
+  considerStatus: string;
+  approveStatus: string;
+  approveDate: string;
+  editDate: string;
+  verify: string;
+  consider: string;
+}
+
+export const data: DegreeCertInfo = {
+  degreeId: 'UNI_VC_64120009',
+  date: '10 ธ.ค. 2564',
+  uni: 'มหาวิทยาลัยภูเก็ต',
+  major: 'คุรุศาสตร์',
+  verifyStatus: 'รับข้อมูล',
+  considerStatus: 'พิจารณา',
+  approveStatus: 'พิจารณา',
+  approveDate: '30 ส.ค. 2564',
+  editDate: '30 ส.ค. 2564',
+  verify: 'ตรวจสอบแล้ว',
+  consider: 'ตรวจสอบแล้ว',
+};

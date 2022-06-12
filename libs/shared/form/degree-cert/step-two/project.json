@@ -1,0 +1,18 @@
+{
+  "$schema": "../../../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/shared/form/degree-cert/step-two/src",
+  "prefix": "ksp",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/form/degree-cert/step-two/**/*.ts",
+          "libs/shared/form/degree-cert/step-two/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

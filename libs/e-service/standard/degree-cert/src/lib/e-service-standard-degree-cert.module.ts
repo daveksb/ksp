@@ -17,8 +17,7 @@ import { ApproveComponent } from './approve/approve.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { EServiceStandardDegreeCertRoutingModule } from './e-service-standard-degree-cert-routing.module';
-import { SharedFormDegreeCertSearchModule } from '@ksp/shared/form/degree-cert-search';
-import { UniServiceUiFormsModule } from '@ksp/uni-service/ui/forms';
+import { SharedFormDegreeCertSearchModule } from '@ksp/shared/form/degree-cert/search';
 
 @NgModule({
   imports: [
@@ -32,7 +31,6 @@ import { UniServiceUiFormsModule } from '@ksp/uni-service/ui/forms';
     SharedFeatureDegreeCertModule,
     SharedUiBottomMenuModule,
     SharedFormDegreeCertSearchModule,
-    UniServiceUiFormsModule,
   ],
   declarations: [
     DegreeCertListComponent,

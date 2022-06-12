@@ -1,15 +1,15 @@
 .group__container {
   padding: 16px;
-  margin-bottom: 24px;
+  margin: 24px 0;
   background-color: #f9f9fa;
-}
-
-.group__container--blue {
-  background-color: #f4faff;
 }
 
 .group__header {
   font-size: 22px;
+}
+
+.group__header--blue {
+  color: #0056ff;
 }
 
 .row {
@@ -18,22 +18,12 @@
   margin-bottom: 14px;
 }
 
-.row--half {
-  grid-template-columns: 1fr 1fr;
-}
-
-.row--full {
-  grid-template-columns: 1fr;
-}
-
 .row--1 {
   grid-template-columns: auto 30%;
 }
 
-.row--ternary {
-  grid-gap: 1px;
-  grid-template-columns: 97% auto;
-  align-items: flex-end;
+.row--2 {
+  grid-template-columns: 15% auto 30%;
 }
 
 .form-label {
@@ -51,15 +41,4 @@
   font-size: 16px;
   margin-left: 8px;
   color: #f23c51;
-}
-
-mat-icon {
-  width: auto;
-  cursor: pointer;
-  padding: 0;
-  color: #f23c51;
-}
-
-.tab__container {
-  padding-top: 24px;
 }
