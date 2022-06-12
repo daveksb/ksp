@@ -169,14 +169,16 @@
               formControlName="title"
             />
           </div>
-          <mat-icon *ngIf="i > 0" (click)="deleteLocation(i)">
+          <mat-icon *ngIf="i > 0" (click)="deleteFormArray(locations, i)">
             delete_outline</mat-icon
           >
         </div>
       </ng-container>
     </ng-container>
 
-    <ksp-add-row-button (addClick)="addLocation()" *ngIf="!isViewForm"
+    <ksp-add-row-button
+      (addClick)="addFormArray(locations)"
+      *ngIf="mode === 'edit'"
       >เพิ่มสถานที่เปิดสอน</ksp-add-row-button
     >
   </div>
@@ -196,14 +198,16 @@
               placeholder="กรุณากรอก"
             />
           </div>
-          <mat-icon *ngIf="i > 0" (click)="deleteInstitution(i)">
+          <mat-icon *ngIf="i > 0" (click)="deleteFormArray(institutions, i)">
             delete_outline</mat-icon
           >
         </div>
       </ng-container>
     </ng-container>
 
-    <ksp-add-row-button (addClick)="addInstitution()" *ngIf="!isViewForm"
+    <ksp-add-row-button
+      (addClick)="addFormArray(institutions)"
+      *ngIf="mode === 'edit'"
       >เพิ่มหน่วยงานที่รับผิดชอบหลักสูตร
     </ksp-add-row-button>
   </div>
@@ -226,14 +230,16 @@
               placeholder="กรุณากรอก"
             />
           </div>
-          <mat-icon *ngIf="i > 0" (click)="deleteLocation2(i)">
+          <mat-icon *ngIf="i > 0" (click)="deleteFormArray(locations2, i)">
             delete_outline</mat-icon
           >
         </div>
       </ng-container>
     </ng-container>
 
-    <ksp-add-row-button (addClick)="addLocation2()" *ngIf="!isViewForm"
+    <ksp-add-row-button
+      (addClick)="addFormArray(locations2)"
+      *ngIf="mode === 'edit'"
       >เพิ่มสถานที่ที่ต้องประเมินสภาพจริง</ksp-add-row-button
     >
   </div>

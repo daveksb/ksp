@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
 import { UniServiceContainerPageComponent } from '@ksp/uni-service/feature/container-page';
-import { ReqForeignIdComponent } from '@ksp/uni-service/feature/foreign-id';
+import { ForeignIdComponent } from '@ksp/uni-service/feature/foreign-id';
 import { UniServiceHomeComponent } from '@ksp/uni-service/feature/home';
 import { UniServiceLoginComponent } from '@ksp/uni-service/feature/login';
 
@@ -44,6 +45,17 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'student-list',
+    data: {
+      header: 'ยื่นใบคำขอ',
+      subHeader: 'ขอยื่นรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
+    },
+    loadChildren: () =>
+      import('@ksp/uni-service/feature/graduate-list').then(
+        (m) => m.UniServiceFeatureGraduateListModule
+      ),
+  },
+  {
     path: 'graduate-list',
     data: {
       header: 'ยื่นใบคำขอ',
@@ -64,7 +76,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: ReqForeignIdComponent,
+        component: ForeignIdComponent,
       },
     ],
   },

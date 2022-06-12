@@ -44,17 +44,21 @@ export const menu: MenuConfig[] = [
         label: 'ขอสร้างเลขประจำตัวคุรุสภาสำหรับนักศึกษาชาวต่างชาติ',
       },
       {
-        path: 'graduate-list',
-        label: 'ขอยื่นรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
+        path: 'student-list',
+        label: 'ขอยื่นรายชื่อผู้เข้าศึกษา',
       },
       {
+        path: 'graduate-list',
+        label: 'ขอยื่นรายชื่อผู้สำเร็จการศึกษา',
+      },
+      /*       {
         path: 'change-degree-info',
         label: 'ขอเปลี่ยนแปลงรายละเอียดปริญญาและประกาศนียบัตร',
       },
       {
         path: 'change-student-list',
         label: 'ขอเปลี่ยนแปลงรายละเอียดรายชื่อผู้เข้าและผู้สำเร็จการศึกษา',
-      },
+      }, */
     ],
     subMenuName: 'license',
     isExpanded: true,

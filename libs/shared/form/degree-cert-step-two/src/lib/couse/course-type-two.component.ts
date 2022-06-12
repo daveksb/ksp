@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 
 @Component({
-  selector: 'ksp-step-2-tab-1-second',
+  selector: 'ksp-step-2-tab-1-b',
   templateUrl: './course-type-two.component.html',
   styleUrls: ['./course-type-two.component.scss'],
 })
@@ -11,47 +11,32 @@ export class CourseTypeTwoComponent implements OnInit {
   totalCredit = 0;
   totalStudent = 0;
 
-  defaultSubject = {
-    subjects: this.fb.array([
-      this.fb.group({
-        label: 'วิชาการศึกษาทั่วไป',
-        credit: [''],
-      }),
-    ]),
-  };
-
-  defaultPlan = {
-    plans: this.fb.array([
-      this.fb.group({
-        label: 'แผนฯ ปีที่ 1',
-        student: [''],
-        year: [''],
-      }),
-    ]),
-  };
-
   form = this.fb.group({
-    ...this.defaultPlan,
-    ...this.defaultSubject,
+    plans: this.fb.array([this.newPlan(1)]),
+    subjects: this.fb.array([this.newSubject('วิชาการศึกษาทั่วไป')]),
   });
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
+    this.addData();
+    this.calculateSum();
+  }
+
+  sum(source: any[], data: string): number {
+    return source.reduce((p, c) => p + Number(c[data]), 0);
+  }
+
+  calculateSum() {
     this.form.valueChanges.pipe(debounceTime(500)).subscribe((res) => {
       if (res.subjects) {
-        this.totalCredit = <number>(
-          res.subjects.reduce((p, c: any) => p + Number(c.credit), 0)
-        );
+        this.totalCredit = this.sum(res.subjects, 'credit');
       }
 
       if (res.plans) {
-        this.totalStudent = <number>(
-          res.plans.reduce((p, c: any) => p + Number(c.student), 0)
-        );
+        this.totalStudent = this.sum(res.plans, 'student');
       }
     });
-    this.addData();
   }
 
   get plans() {
@@ -63,34 +48,41 @@ export class CourseTypeTwoComponent implements OnInit {
   }
 
   addData() {
-    const newPlan = (year: number) => {
-      return this.fb.group({
-        label: 'แผนฯ ปีที่ ' + year,
-        student: [''],
-        year: [''],
-      });
-    };
-
-    const newSubject = (data: string) => {
-      return this.fb.group({
-        label: data,
-        credit: [''],
-      });
-    };
-
-    const subjects: any = [
-      newSubject('วิชาชีพครู : ภาคทฤษฎีและปฏิบัติ'),
-      newSubject('วิชาชีพครู : ฝึกปฏิบัติวิชาชีพระหว่างเรียน'),
-      newSubject('วิชาชีพครู : ปฏิบัติการสอนในสถานศึกษา / การบริหารสถานศึกษา'),
-      newSubject('วิชาเอกแรก'),
-      newSubject('วิชาเอกที่สองหรือวิชาโท'),
-      newSubject('วิชาเลือกเสรี'),
-      newSubject('วิชาเอก'),
+    const subjects = [
+      this.newSubject('วิชาชีพครู : ภาคทฤษฎีและปฏิบัติ'),
+      this.newSubject('วิชาชีพครู : ฝึกปฏิบัติวิชาชีพระหว่างเรียน'),
+      this.newSubject(
+        'วิชาชีพครู : ปฏิบัติการสอนในสถานศึกษา / การบริหารสถานศึกษา'
+      ),
+      this.newSubject('วิชาเอกแรก'),
+      this.newSubject('วิชาเอกที่สองหรือวิชาโท'),
+      this.newSubject('วิชาเลือกเสรี'),
+      this.newSubject('วิชาเอก'),
     ];
 
-    const plans: any = [newPlan(2), newPlan(3), newPlan(4), newPlan(5)];
+    const plans = [
+      this.newPlan(2),
+      this.newPlan(3),
+      this.newPlan(4),
+      this.newPlan(5),
+    ];
 
-    plans.forEach((i: any) => this.plans.push(i));
-    subjects.forEach((i: any) => this.subjects.push(i));
+    plans.forEach((p) => this.plans.push(p));
+    subjects.forEach((s) => this.subjects.push(s));
+  }
+
+  newPlan(year: number) {
+    return this.fb.group({
+      label: 'แผนฯ ปีที่ ' + year,
+      student: [''],
+      year: [''],
+    });
+  }
+
+  newSubject(data: string) {
+    return this.fb.group({
+      label: data,
+      credit: [''],
+    });
   }
 }

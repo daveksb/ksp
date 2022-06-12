@@ -7,11 +7,11 @@ import {
 } from '@ksp/shared/ui/dialog';
 
 @Component({
-  selector: 'uni-service-req-foreign-id',
-  templateUrl: './req-foreign-id.component.html',
-  styleUrls: ['./req-foreign-id.component.css'],
+  selector: 'uni-service-foreign-id',
+  templateUrl: './foreign-id.component.html',
+  styleUrls: ['./foreign-id.component.css'],
 })
-export class ReqForeignIdComponent {
+export class ForeignIdComponent {
   foreignFiles = ['สำเนาหนังสือเดินทาง'];
 
   constructor(public dialog: MatDialog, private router: Router) {}
