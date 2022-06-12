@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SharedFormDegreeCertStepThreeModule } from '@ksp/shared/form/degree-cert/step-three';
+import { SharedFormDegreeCertStepOneModule } from '@ksp/shared/form/degree-cert/step-one';
 
 const routes: Routes = [
   {
@@ -39,6 +40,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SharedUiBottomMenuModule,
     SharedFeatureDegreeCertModule,
+    SharedFormDegreeCertStepOneModule,
     UniServiceUiFormsModule,
     MatStepperModule,
     MatTabsModule,

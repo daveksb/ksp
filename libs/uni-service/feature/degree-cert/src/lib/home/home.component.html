@@ -18,7 +18,7 @@
         <ng-template matStepLabel>ข้อมูลพื้นฐาน</ng-template>
         <ksp-degree-cert-step-one (degreeType)="degreeType = $event">
         </ksp-degree-cert-step-one>
-        <uni-service-degree-cert-coordinator></uni-service-degree-cert-coordinator>
+        <ksp-degree-cert-coordinator></ksp-degree-cert-coordinator>
       </mat-step>
 
       <mat-step>
@@ -37,7 +37,7 @@
         <ksp-degree-cert-step-four></ksp-degree-cert-step-four>
       </mat-step>
 
-     <!--  <mat-step [editable]="isEditable">
+      <!--  <mat-step [editable]="isEditable">
         <ng-template matStepLabel>ตรวจสอบและยื่นคำขอ</ng-template>
       </mat-step> -->
     </mat-stepper>
