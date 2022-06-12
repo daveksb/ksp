@@ -1,5 +1,5 @@
 export * from './lib/shared-feature-degree-cert.module';
-export * from './lib/home/home.component';
+export * from './lib/list/list.component';
 export * from './lib/step-one/step-one.component';
 export * from './lib/step-two/step-two.component';
 export * from './lib/step-three/step-three.component';
