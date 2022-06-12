@@ -22,7 +22,7 @@ export class DegreeCertStepOneComponent implements OnInit {
   courseTypes: ListData[] = [];
   degreeTypes: ListData[] = [];
 
-  @Input() isViewForm = false;
+  @Input() mode = 'edit';
   @Output() degreeType = new EventEmitter<number>();
   @ViewChild(DynamicComponentDirective, { static: true })
   myHost!: DynamicComponentDirective;

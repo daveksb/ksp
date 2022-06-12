@@ -45,6 +45,17 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'student-list',
+    data: {
+      header: 'ยื่นใบคำขอ',
+      subHeader: 'ขอยื่นรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
+    },
+    loadChildren: () =>
+      import('@ksp/uni-service/feature/graduate-list').then(
+        (m) => m.UniServiceFeatureGraduateListModule
+      ),
+  },
+  {
     path: 'graduate-list',
     data: {
       header: 'ยื่นใบคำขอ',

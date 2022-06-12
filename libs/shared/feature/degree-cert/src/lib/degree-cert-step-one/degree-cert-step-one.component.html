@@ -1,5 +1,4 @@
 <form [formGroup]="step1Form">
-
   <div class="img__process">
     <img src="/assets/images/img-uni/Procees-2.png" />
   </div>
@@ -175,7 +174,7 @@
       </ng-container>
     </ng-container>
 
-    <ksp-add-row-button (addClick)="addLocation()" *ngIf="!isViewForm"
+    <ksp-add-row-button (addClick)="addLocation()" *ngIf="mode === 'edit'"
       >เพิ่มสถานที่เปิดสอน</ksp-add-row-button
     >
   </div>
@@ -200,7 +199,7 @@
       </ng-container>
     </ng-container>
 
-    <ksp-add-row-button (addClick)="addInstitution()" *ngIf="!isViewForm"
+    <ksp-add-row-button (addClick)="addInstitution()" *ngIf="mode === 'edit'"
       >เพิ่มหน่วยงานที่รับผิดชอบหลักสูตร
     </ksp-add-row-button>
   </div>
@@ -228,7 +227,7 @@
       </ng-container>
     </ng-container>
 
-    <ksp-add-row-button (addClick)="addLocation2()" *ngIf="!isViewForm"
+    <ksp-add-row-button (addClick)="addLocation2()" *ngIf="mode === 'edit'"
       >เพิ่มสถานที่ที่ต้องประเมินสภาพจริง</ksp-add-row-button
     >
   </div>
