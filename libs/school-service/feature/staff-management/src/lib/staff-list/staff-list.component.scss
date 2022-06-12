@@ -1,13 +1,14 @@
 .container {
   background-color: #e5e5e5;
   max-width: 100%;
-  padding: 0 0 5px 0;
+  padding: 0 30px;
+  padding-bottom: 12px;
 }
 
 .table__container {
   background-color: #fff;
   padding: 15px;
-  margin: 15px;
+  margin: 18px 0;
 }
 
 .title__box {
@@ -15,10 +16,8 @@
 }
 
 .header {
-  color: #000000;
   font-size: 22px;
-  padding-top: 15px;
-  padding-left: 20px;
+  padding: 12px 0;
 }
 
 .table {
@@ -32,7 +31,7 @@
 }
 
 .table-responsive {
-  margin: 10px 20px;
+  margin: 10px 0;
 }
 
 .btn__container {
