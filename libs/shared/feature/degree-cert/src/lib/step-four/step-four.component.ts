@@ -8,8 +8,8 @@ import {
 
 @Component({
   selector: 'ksp-degree-cert-step-four',
-  templateUrl: './degree-cert-step-four.component.html',
-  styleUrls: ['./degree-cert-step-four.component.css'],
+  templateUrl: './step-four.component.html',
+  styleUrls: ['./step-four.component.css'],
 })
 export class DegreeCertStepFourComponent {
   constructor(public dialog: MatDialog, private router: Router) {}

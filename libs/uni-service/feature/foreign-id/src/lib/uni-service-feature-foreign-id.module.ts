@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReqForeignIdComponent } from './req-foreign-id/req-foreign-id.component';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
+import { ForeignIdComponent } from './foreign-id/foreign-id.component';
 
 @NgModule({
   imports: [
@@ -12,7 +12,7 @@ import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
     SharedFormOthersModule,
     SharedUiTopNavModule,
   ],
-  declarations: [ReqForeignIdComponent],
-  exports: [ReqForeignIdComponent],
+  declarations: [ForeignIdComponent],
+  exports: [ForeignIdComponent],
 })
 export class UniServiceFeatureForeignIdModule {}

@@ -6,22 +6,18 @@
   width: 100%;
 }
 
-.navigate__label {
-  font-family: 'KSP Bold';
+.label {
   font-size: 20px;
   color: #e87a02;
 }
 
-.navigate__label--secondary {
-  font-family: 'KSP Bold';
-  font-size: 20px;
+.label--secondary {
   color: #656565;
 }
 
 .user__info {
   display: flex;
   flex-direction: column;
-  font-family: 'KSP Bold';
   align-items: flex-end;
 }
 

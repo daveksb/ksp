@@ -16,6 +16,7 @@ export class BottomMenuComponent {
 
   @Input() isLastPage = false;
   @Input() isFirstPage = false;
+  @Input() saveButtonLabel = 'บันทึก';
   @Input() showCenterButtons = false;
   @Input() showCancelButton = true;
   @Input() showTempSaveButton = false;

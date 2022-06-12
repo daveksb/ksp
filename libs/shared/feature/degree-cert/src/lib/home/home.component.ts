@@ -72,8 +72,8 @@ export const data: DegreeCertInfo[] = [
 
 @Component({
   selector: 'ksp-degree-cert-home',
-  templateUrl: './degree-cert-home.component.html',
-  styleUrls: ['./degree-cert-home.component.css'],
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css'],
 })
 export class DegreeCertHomeComponent {
   displayedColumns: string[] = [

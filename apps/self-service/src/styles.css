@@ -13,16 +13,12 @@
   font-family: 'KSP Regular';
 }
 
-.mat-tooltip {
-  font-size: 18px;
-}
-
 table {
   width: 100%;
 }
 
 hr {
-  margin: 4px !important;
+  margin: 4px;
 }
 
 .mat-tab-label {
@@ -50,7 +46,7 @@ hr {
 }
 
 .material-icons {
-  font-family: 'Material Icons' !important;
+  font-family: 'Material Icons';
 }
 
 .mat-ink-bar {

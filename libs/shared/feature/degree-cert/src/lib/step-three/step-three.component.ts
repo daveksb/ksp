@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'ksp-degree-cert-step-three',
-  templateUrl: './degree-cert-step-three.component.html',
-  styleUrls: ['./degree-cert-step-three.component.css'],
+  templateUrl: './step-three.component.html',
+  styleUrls: ['./step-three.component.css'],
 })
 export class DegreeCertStepThreeComponent {
   constructor(private router: Router) {}
