@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { UniServiceContainerPageComponent } from '@ksp/uni-service/feature/container-page';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import {
-  DegreeCertHomeComponent,
+  DegreeCertListComponent,
   SharedFeatureDegreeCertModule,
 } from '@ksp/shared/feature/degree-cert';
 import { UniServiceUiFormsModule } from '@ksp/uni-service/ui/forms';
@@ -20,7 +20,7 @@ const routes: Routes = [
     children: [
       {
         path: 'list',
-        component: DegreeCertHomeComponent,
+        component: DegreeCertListComponent,
       },
       {
         path: 'request',
@@ -28,7 +28,7 @@ const routes: Routes = [
       },
       {
         path: '**',
-        component: DegreeCertHomeComponent,
+        component: DegreeCertListComponent,
       },
     ],
   },

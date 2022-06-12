@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DegreeCertHomeComponent } from './home/home.component';
+import { DegreeCertListComponent } from './list/list.component';
 import { DegreeCertStepOneComponent } from './step-one/step-one.component';
 import { DegreeCertStepTwoComponent } from './step-two/step-two.component';
 import { DegreeCertStepThreeComponent } from './step-three/step-three.component';
@@ -30,7 +30,7 @@ import { SharedFormDegreeCertStepThreeModule } from '@ksp/shared/form/degree-cer
     SharedFormDegreeCertStepThreeModule,
   ],
   declarations: [
-    DegreeCertHomeComponent,
+    DegreeCertListComponent,
     DegreeCertStepOneComponent,
     DegreeCertStepTwoComponent,
     DegreeCertStepThreeComponent,
@@ -38,7 +38,7 @@ import { SharedFormDegreeCertStepThreeModule } from '@ksp/shared/form/degree-cer
     DegreeCertStepFiveComponent,
   ],
   exports: [
-    DegreeCertHomeComponent,
+    DegreeCertListComponent,
     DegreeCertStepOneComponent,
     DegreeCertStepTwoComponent,
     DegreeCertStepThreeComponent,
