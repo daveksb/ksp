@@ -1,0 +1,63 @@
+<div class="page__container">
+  <div class="page__header">รายละเอียดใบคำขอรับรองปริญญาและประกาศนียบัตร</div>
+  <div class="content__container">
+    <div class="content__header">
+      <div class="label__content">
+        วันที่ทำรายการ :
+        <span class="label__content--primary">10 ตุลาคม 2565</span>
+      </div>
+      <div class="label__content">
+        เลขใบคำขอ :
+        <span class="label__content--secondary">112234467876543</span>
+      </div>
+    </div>
+  </div>
+
+  <mat-stepper labelPosition="bottom" [animationDuration]="'0'" #stepper>
+    <mat-step>
+      <ng-template matStepLabel>ข้อมูลพื้นฐาน</ng-template>
+      <ksp-degree-cert-step-one
+        (degreeType)="degreeType = $event"
+      ></ksp-degree-cert-step-one>
+      <uni-service-degree-cert-coordinator></uni-service-degree-cert-coordinator>
+
+      <div class="alert__text-container">
+        <span class="alert__text"
+          >*กรุณากรอกข้อมูลให้ถูกต้อง
+          เพื่อประโยชน์ของตัวท่านเองโปรดตรวจสอบอีกครั้งก่อนการบันทึกลงระบบ</span
+        >
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>ด้านหลักสูตร</ng-template
+      ><ksp-degree-cert-step-two
+        [formType]="degreeType"
+      ></ksp-degree-cert-step-two
+    ></mat-step>
+    <mat-step>
+      <ng-template matStepLabel>ด้านกระบวนการผลิต</ng-template>
+
+      <div class="tab-container">
+        <mat-tab-group
+          class="tab-group"
+          animationDuration="0ms"
+          dynamicHeight="true"
+        >
+          <mat-tab label="การฝึกปฏิบัติวิชาชีพระหว่างเรียน" class="tab-content">
+            <ksp-step-3-training></ksp-step-3-training>
+          </mat-tab>
+          <mat-tab label="การปฏิบัติการสอนในสถานศึกษาในสาขาวิชาเฉพาะ">
+            <ksp-step-3-teaching></ksp-step-3-teaching>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>เอกสารแนบ</ng-template
+      ><ksp-degree-cert-step-four></ksp-degree-cert-step-four
+    ></mat-step>
+    <!--  <mat-step>
+      <ng-template matStepLabel>ตรวจสอบและยื่นคำขอ</ng-template>
+    </mat-step> -->
+  </mat-stepper>
+</div>

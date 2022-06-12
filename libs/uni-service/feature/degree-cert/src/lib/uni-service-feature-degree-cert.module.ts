@@ -2,16 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { UniServiceContainerPageComponent } from '@ksp/uni-service/feature/container-page';
-import { StepOneComponent } from './step-one/step-one.component';
-import { StepTwoComponent } from './step-two/step-two.component';
-import { StepThreeComponent } from './step-three/step-three.component';
-import { StepFourComponent } from './step-four/step-four.component';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import {
   DegreeCertHomeComponent,
   SharedFeatureDegreeCertModule,
 } from '@ksp/shared/feature/degree-cert';
 import { UniServiceUiFormsModule } from '@ksp/uni-service/ui/forms';
+import { HomeComponent } from './home/home.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatTabsModule } from '@angular/material/tabs';
+import { SharedFormDegreeCertStepThreeModule } from '@ksp/shared/form/degree-cert-step-three';
 
 const routes: Routes = [
   {
@@ -23,21 +23,8 @@ const routes: Routes = [
         component: DegreeCertHomeComponent,
       },
       {
-        path: 'step-1',
-        component: StepOneComponent,
-      },
-      {
-        path: 'step-2',
-        component: StepTwoComponent,
-      },
-     
-      {
-        path: 'step-3',
-        component: StepThreeComponent,
-      },
-      {
-        path: 'step-4',
-        component: StepFourComponent,
+        path: 'request',
+        component: HomeComponent,
       },
       {
         path: '**',
@@ -53,12 +40,11 @@ const routes: Routes = [
     SharedUiBottomMenuModule,
     SharedFeatureDegreeCertModule,
     UniServiceUiFormsModule,
+    MatStepperModule,
+    MatTabsModule,
+    SharedFormDegreeCertStepThreeModule,
   ],
-  declarations: [
-    StepOneComponent,
-    StepTwoComponent,
-    StepThreeComponent,
-    StepFourComponent,
-  ],
+  declarations: [HomeComponent],
+  exports: [HomeComponent],
 })
 export class UniServiceFeatureDegreeCertModule {}

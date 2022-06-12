@@ -1,21 +1,5 @@
 <div class="container">
-  <div class="title__label">รายละเอียดใบคำขอรับรองปริญญาและประกาศนียบัตร</div>
   <div class="content__container">
-    <div class="content__header">
-      <div class="label__content">
-        วันที่ทำรายการ :
-        <span class="label__content--primary">10 ตุลาคม 2565</span>
-      </div>
-      <div class="label__content">
-        เลขใบคำขอ :
-        <span class="label__content--secondary">112234467876543</span>
-      </div>
-    </div>
-    <hr />
-    <div class="img__process">
-      <img src="/assets/images/img-uni/Procees-2.png" />
-    </div>
-
     <div class="tab-container">
       <mat-tab-group
         class="tab-group"
@@ -27,11 +11,11 @@
           label="โครงสร้างหลักสูตรและแผนการรับนิสิตนักศึกษา"
           class="tab-content"
         >
-          <div *ngIf="formType === 1; then type1; else type2"></div>
-          <ng-template #type1
+          <div *ngIf="formType === 'a'; then typeA; else typeB"></div>
+          <ng-template #typeA
             ><ksp-step-2-tab-1-a></ksp-step-2-tab-1-a
           ></ng-template>
-          <ng-template #type2
+          <ng-template #typeB
             ><ksp-step-2-tab-1-b></ksp-step-2-tab-1-b
           ></ng-template>
         </mat-tab>
