@@ -42,94 +42,9 @@
       </div>
     </div>
   </div>
-  <div class="group__container">
-    <div class="group__header group__header--blue">
-      ข้อมูลระดับปริญญาที่เสนอขอรับรอง
-    </div>
-    <div class="row row--1">
-      <div>
-        <label class="form-label"
-          >ระดับปริญญาที่เสนอขอรับรอง<span class="warn__text"
-            >*เลือกข้อมูลของท่านได้เพียง 1 ข้อเท่านั้น</span
-          ></label
-        >
-        <select
-          formControlName="degreeType"
-          class="search__content form-select form-select-sm"
-        >
-          <option *ngFor="let item of degreeTypes" [value]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
-      </div>
-    </div>
-    <div class="row row--2">
-      <div>
-        <label class="form-label">ปีของหลักสูตร</label>
-        <input
-          formControlName="year"
-          class="form-control form-control-sm"
-          type="number"
-        />
-      </div>
-      <div>
-        <label class="form-label"
-          >ชื่อหลักสูตรที่เสนอขอรับรอง<span class="warn__text"
-            >*กรุณาระบุชื่อหลักสูตรตามที่ปรากฏบนหน้าปก มคอ.2</span
-          ></label
-        >
-        <input
-          formControlName="courseName"
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="กรุณากรอก"
-        />
-      </div>
-    </div>
-    <div class="group__header">ชื่อปริญญาและสาขาวิชา</div>
-    <div class="row row--1">
-      <div>
-        <label class="form-label"
-          >ชื่อปริญญาและสาขาวิชา (ภาษาไทย แบบเต็ม)</label
-        >
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="กรุณากรอก"
-        />
-      </div>
-      <div>
-        <label class="form-label">ชื่อปริญญาและสาขาวิชา (ภาษาไทย แบบย่อ)</label>
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="กรุณากรอก"
-        />
-      </div>
-    </div>
-    <div class="row row--1">
-      <div>
-        <label class="form-label"
-          >ชื่อปริญญาและสาขาวิชา (ภาษาอังกฤษ แบบเต็ม)</label
-        >
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="กรุณากรอก"
-        />
-      </div>
-      <div>
-        <label class="form-label"
-          >ชื่อปริญญาและสาขาวิชา (ภาษาอังกฤษ แบบย่อ)</label
-        >
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="กรุณากรอก"
-        />
-      </div>
-    </div>
-  </div>
+
+  <ksp-degree-info [degreeTypes]="degreeTypes"></ksp-degree-info>
+
   <div class="group__container">
     <div class="group__header">การจัดการหลักสูตร หรือลักษณะหลักสูตร</div>
     <div class="row row--1">
@@ -245,5 +160,5 @@
     >
   </div>
 
-  <uni-service-degree-cert-coordinator></uni-service-degree-cert-coordinator>
+  <ksp-degree-cert-coordinator></ksp-degree-cert-coordinator>
 </form>

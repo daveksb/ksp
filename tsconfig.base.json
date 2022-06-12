@@ -130,14 +130,17 @@
       "@ksp/shared/feature/degree-cert": [
         "libs/shared/feature/degree-cert/src/index.ts"
       ],
-      "@ksp/shared/form/degree-cert-search": [
-        "libs/shared/form/degree-cert-search/src/index.ts"
+      "@ksp/shared/form/degree-cert/search": [
+        "libs/shared/form/degree-cert/search/src/index.ts"
       ],
-      "@ksp/shared/form/degree-cert-step-three": [
-        "libs/shared/form/degree-cert-step-three/src/index.ts"
+      "@ksp/shared/form/degree-cert/step-one": [
+        "libs/shared/form/degree-cert/step-one/src/index.ts"
       ],
-      "@ksp/shared/form/degree-cert-step-two": [
-        "libs/shared/form/degree-cert-step-two/src/index.ts"
+      "@ksp/shared/form/degree-cert/step-three": [
+        "libs/shared/form/degree-cert/step-three/src/index.ts"
+      ],
+      "@ksp/shared/form/degree-cert/step-two": [
+        "libs/shared/form/degree-cert/step-two/src/index.ts"
       ],
       "@ksp/shared/form/education-level": [
         "libs/shared/form/education-level/src/index.ts"

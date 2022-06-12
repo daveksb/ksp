@@ -1,14 +1,14 @@
 {
   "projectType": "library",
-  "sourceRoot": "libs/shared/form/degree-cert-step-two/src",
+  "sourceRoot": "libs/shared/form/degree-cert/step-one/src",
   "prefix": "ksp",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "libs/shared/form/degree-cert-step-two/**/*.ts",
-          "libs/shared/form/degree-cert-step-two/**/*.html"
+          "libs/shared/form/degree-cert/step-one/**/*.ts",
+          "libs/shared/form/degree-cert/step-one/**/*.html"
         ]
       }
     }

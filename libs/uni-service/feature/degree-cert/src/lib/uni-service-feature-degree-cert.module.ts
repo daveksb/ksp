@@ -11,7 +11,7 @@ import { UniServiceUiFormsModule } from '@ksp/uni-service/ui/forms';
 import { HomeComponent } from './home/home.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
-import { SharedFormDegreeCertStepThreeModule } from '@ksp/shared/form/degree-cert-step-three';
+import { SharedFormDegreeCertStepThreeModule } from '@ksp/shared/form/degree-cert/step-three';
 
 const routes: Routes = [
   {
