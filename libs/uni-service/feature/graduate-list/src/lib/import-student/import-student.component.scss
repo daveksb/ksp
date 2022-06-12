@@ -6,7 +6,6 @@
 }
 
 .title__label {
-  font-family: 'KSP Bold';
   font-size: 22px;
   color: #000000;
   padding: 24px 32px 0;
@@ -23,7 +22,6 @@
 }
 
 .label__content {
-  font-family: 'KSP Bold';
   font-size: 18px;
   color: #808080;
   margin-right: 24px;
@@ -53,7 +51,6 @@
 }
 
 .detail__header {
-  font-family: 'KSP Bold';
   font-size: 22px;
   color: #000000;
 }
@@ -63,10 +60,6 @@ table {
   background-color: #fff;
   border: 1px solid #000000;
   overflow: auto;
-}
-
-.mat-header-cell {
-  background-color: #edf6ff;
 }
 
 .table > :not(caption) > * > * {
@@ -100,17 +93,8 @@ table {
 
 .btn-add {
   color: #0056ff;
-  font-family: 'KSP Bold';
   font-size: 18px;
   width: auto;
-}
-
-.footer {
-  display: flex;
-  justify-content: center;
-  margin-left: 237px;
-  padding: 0 60px;
-  border: 1px solid #dadde1;
 }
 
 .bottom__container {
@@ -122,26 +106,14 @@ table {
   z-index: 1;
 }
 
-.btn-third {
-  font-size: 20px;
-  background: #0056ff;
-  border: 1px solid #0056ff;
-  box-sizing: border-box;
-  box-shadow: 0px 2px 4px rgba(102, 108, 139, 0.1);
-  border-radius: 1px;
-  color: #fff;
-  padding: 4px 24px;
-  margin: 14px;
-  width: 200px;
-}
-
-:host ::ng-deep .p-cell-editing {
+/* :host ::ng-deep .p-cell-editing {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
-}
+} */
 
 .table__order {
-  width: 50px;
+  text-align: center;
+  width: auto;
   background-color: #edf6ff;
 }
 
@@ -156,13 +128,6 @@ table {
   white-space: nowrap;
   width: auto;
   padding: 10px;
-}
-
-.table__header-2 {
-  white-space: normal;
-  width: auto;
-  padding: 0 10px;
-  background-color: #edf6ff;
 }
 
 .table__expand {

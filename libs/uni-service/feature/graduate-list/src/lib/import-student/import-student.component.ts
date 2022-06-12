@@ -86,6 +86,7 @@ export class ImportStudentComponent implements OnInit {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
       data: {
+        header: 'บันทึกข้อมูลสำเร็จ',
         buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });

@@ -13,13 +13,15 @@
       <ng-container [formGroupName]="i">
         <div class="group__header">
           <div class="group__number">ลำดับที่ {{ i + 1 }}</div>
-          <mat-icon
-            matTooltip="ลบอาจารย์ประจำหลักสูตร ลำดับที่ {{ i + 1 }}"
-            *ngIf="i > 0"
-            class="delete__icon"
-            (click)="deleteAdvisor(i)"
-            >delete_outline</mat-icon
-          >
+          <div>
+            <mat-icon
+              matTooltip="ลบอาจารย์ประจำหลักสูตร ลำดับที่ {{ i + 1 }}"
+              *ngIf="i > 0"
+              class="delete__icon"
+              (click)="deleteAdvisor(i)"
+              >delete_outline</mat-icon
+            >
+          </div>
         </div>
         <div class="group__container">
           <ksp-teacher-general-info

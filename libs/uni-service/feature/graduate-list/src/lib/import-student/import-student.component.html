@@ -57,7 +57,7 @@
               <th class="table__header" *ngIf="pageType === 2">
                 วันที่เข้ารับการศึกษา
               </th>
-              <th class="table__header-2">
+              <th class="table__header">
                 เลขบัตรประจำตัวประชาชน/<br />
                 เลขประจำตัวคุรุสภา
               </th>
@@ -86,6 +86,7 @@
                   <ng-template pTemplate="input">
                     {{ product.id }}
                   </ng-template>
+
                   <ng-template pTemplate="output">
                     {{ product.id }}
                   </ng-template>
@@ -95,6 +96,7 @@
                 <p-cellEditor>
                   <ng-template pTemplate="input">
                     <input
+                      class="approvetime__input"
                       pInputText
                       type="number"
                       [(ngModel)]="product.approveTime"
@@ -353,7 +355,7 @@
 
           <ng-template pTemplate="rowexpansion" let-product>
             <tr>
-              <td colspan="4">
+              <td [attr.colspan]="pageType === 1 ? 5 : 4">
                 <ksp-form-address
                   >ที่อยู่ตามทะเบียนบ้าน (นักศึกษาชาวไทย) หรือที่พักประจำ
                   (นักศึกษาชาวต่างชาติ)</ksp-form-address
