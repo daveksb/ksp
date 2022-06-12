@@ -38,6 +38,7 @@
 .checkbox__container {
   margin-bottom: 25px;
   display: flex;
+  flex-direction: column;
   line-height: 15px;
 }
 
@@ -50,6 +51,7 @@
 .checkbox__label {
   font-size: 18px;
   color: #808080;
+  margin: 8px 0;
 }
 
 .textarea__container {

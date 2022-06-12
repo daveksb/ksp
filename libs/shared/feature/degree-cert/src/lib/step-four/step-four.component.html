@@ -1,36 +1,18 @@
-<div class="container">
-  <!-- <div class="title__label">รายละเอียดใบคำขอรับรองปริญญาและประกาศนียบัตร</div> -->
-  <div class="content__container">
-    <!--     <div class="content__header">
-      <div class="label__content">
-        วันที่ทำรายการ :
-        <span class="label__content--primary">10 ตุลาคม 2565</span>
-      </div>
-      <div class="label__content">
-        เลขใบคำขอ :
-        <span class="label__content--secondary">112234467876543</span>
-      </div>
+<div class="tab__container">
+  <div class="detail__container">
+    <div class="detail__header">
+      กรุณาแนบหลักฐาน<span class="label__text"
+        >*กรุณาอัพโหลดไฟล์ .pdfและขนาดไม่เกิน 2 MB สามารถอัพโหลดไฟล์ได้มากกว่า 1
+        ไฟล์ต่อรายการ</span
+      >
     </div>
-    <hr /> -->
-    <!--  <div class="img__process">
-      <img src="/assets/images/img-uni/Procees-4.png" />
-    </div> -->
-
-    <div class="detail__container">
-      <div class="detail__header">
-        กรุณาแนบหลักฐาน<span class="label__text"
-          >*กรุณาอัพโหลดไฟล์ .pdfและขนาดไม่เกิน 2 MB สามารถอัพโหลดไฟล์ได้มากกว่า
-          1 ไฟล์ต่อรายการ</span
-        >
-      </div>
-      <div class="detail__header--secondary">
-        ปริญญาตรีทางการศึกษา (หลักสูตร 5 ปี)
-      </div>
-
-      <ksp-form-attachment
-        [title]="''"
-        [groups]="degreeCertFiles"
-      ></ksp-form-attachment>
+    <div class="detail__header--secondary">
+      ปริญญาตรีทางการศึกษา (หลักสูตร 5 ปี)
     </div>
+
+    <ksp-form-attachment
+      [title]="''"
+      [groups]="degreeCertFiles"
+    ></ksp-form-attachment>
   </div>
 </div>

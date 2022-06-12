@@ -6,8 +6,7 @@
 .box__container {
   background-color: #fff;
   max-width: 1200px;
-  padding: 10px;
-  margin: 0 15px;
+  padding: 18px;
 }
 
 .title__box {
@@ -18,7 +17,6 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
-  margin: 0 20px;
 }
 
 .form-label {
@@ -48,7 +46,6 @@
 .detail__action {
   display: flex;
   justify-content: flex-end;
-  margin: 0 20px;
 }
 
 #search__button {

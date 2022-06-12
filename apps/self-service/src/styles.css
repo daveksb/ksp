@@ -75,10 +75,28 @@ add asterisk for required feild
   margin-bottom: 0 !important;
 }
 
+button.mat-menu-item {
+  font-family: 'KSP Regular';
+}
+
 /*
  Mat stepper style
 */
 .mat-stepper-label-position-bottom .mat-horizontal-stepper-header-container {
-  width: 70%;
+  width: 75%;
   align-self: center;
+}
+
+.mat-stepper-label-position-bottom
+  .mat-horizontal-stepper-header
+  .mat-step-icon {
+  height: 45px;
+  width: 45px;
+  color: #fff;
+  background-color: #0056ff;
+  margin-top: -10px;
+}
+
+.mat-step-text-label {
+  font-size: 18px;
 }

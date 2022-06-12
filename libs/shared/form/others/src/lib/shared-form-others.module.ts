@@ -8,9 +8,12 @@ import { FormReasonInfoComponent } from './form-reason-info/form-reason-info.com
 import { FormAttachmentComponent } from './form-attachment/form-attachment.component';
 import { FormUserInfoComponent } from './form-user-info/form-user-info.component';
 import { FormForeignIdComponent } from './form-foreign-id/form-foreign-id.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule, MatIconModule, MatCheckboxModule],
   declarations: [
     FormAddressComponent,
     FormSchoolAddressComponent,

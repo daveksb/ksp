@@ -13,8 +13,13 @@ import {
 })
 export class HomeComponent {
   degreeType = '';
+  isEditable = false;
 
   constructor(private router: Router, public dialog: MatDialog) {}
+
+  cancel() {
+    this.router.navigate(['/', '']);
+  }
 
   save() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {

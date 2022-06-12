@@ -1,7 +1,8 @@
 .container {
   background-color: #e5e5e5;
   max-width: 100%;
-  padding: 12px 12px 45px 12px;
+  padding: 0 30px;
+  padding-bottom: 50px;
 }
 
 .box__detail {
@@ -18,13 +19,12 @@
 
 .box__container {
   background-color: #fff;
-  padding: 15px;
-  margin: 0 15px;
+  padding: 18px;
 }
 
 .title__box {
   font-size: 22px;
-  margin: 0 15px;
+  padding: 12px 0;
 }
 
 .result {

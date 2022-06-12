@@ -15,16 +15,23 @@
   </div>
 
   <div class="content__container-2">
-    <div class="checkbox__container">
-      <input type="checkbox" class="checkbox__form" />
-      <label for="vehicle1" class="checkbox__label"
-        >ผู้ขอประกอบวิชาชีพครูเป็นผู้มีความรู้ ความสามารถในการสอน</label
-      >
+    <div class="checkbox__container" [formGroup]="schoolFormGroup">
+      <ng-container *ngFor="let item of schoolReason | keyvalue">
+        <mat-checkbox
+          formControlName="{{ item.key }}"
+          class="checkbox__label"
+          >{{ item.key }}</mat-checkbox
+        >
+        <!--  <input type="checkbox" class="checkbox__form" />
+        <label for="vehicle1" class="checkbox__label"
+          >ผู้ขอประกอบวิชาชีพครูเป็นผู้มีความรู้ ความสามารถในการสอน</label
+        > -->
+      </ng-container>
     </div>
-    <div class="checkbox__container">
+    <!--   <div class="checkbox__container">
       <input type="checkbox" class="checkbox__form" />
       <label for="vehicle1" class="checkbox__label"
-        >ผู้ขอประกอบวิชาชีพครูเป็นผู้มีประสบการณ์ ในการสอน</label
+        ></label
       >
     </div>
     <div class="checkbox__container">
@@ -36,7 +43,7 @@
     <div class="checkbox__container">
       <input type="checkbox" class="checkbox__form" />
       <label for="vehicle1" class="checkbox__label">อื่นๆ</label>
-    </div>
+    </div> -->
     <div class="textarea__container">
       <textarea
         class="form-control form-control-sm"
@@ -59,14 +66,21 @@
   </div>
 
   <div class="content__container-2">
-    <div class="checkbox__container">
-      <input type="checkbox" class="checkbox__form" />
-      <label for="vehicle1" class="checkbox__label"
-        >สถาบันการศึกษาที่เปิดสอนในหลักสูตรที่ คุรุสภารับรองอยู่ห่างไกลที่พัก
-        ไม่สะดวกต่อการเดินทาง</label
+    <div class="checkbox__container" [formGroup]="teacherFormGroup">
+      <ng-container *ngFor="let item of teacherReason | keyvalue">
+        <mat-checkbox
+          formControlName="{{ item.key }}"
+          class="checkbox__label"
+          >{{ item.key }}</mat-checkbox
+        >
+        <!--  <input type="checkbox" class="checkbox__form" />
+        <label for="vehicle1" class="checkbox__label"
+          >สถาบันการศึกษาที่เปิดสอนในหลักสูตรที่ คุรุสภารับรองอยู่ห่างไกลที่พัก
+          ไม่สะดวกต่อการเดินทาง</label
+        > --></ng-container
       >
     </div>
-    <div class="checkbox__container">
+    <!--     <div class="checkbox__container">
       <input type="checkbox" class="checkbox__form" />
       <label for="vehicle1" class="checkbox__label"
         >ไม่ผ่านเกณฑ์การสอบเข้าศึกษาต่อในสถาบัน
@@ -96,7 +110,7 @@
     <div class="checkbox__container">
       <input type="checkbox" class="checkbox__form" />
       <label for="vehicle1" class="checkbox__label">อื่นๆ</label>
-    </div>
+    </div> -->
     <div class="textarea__container">
       <textarea
         class="form-control form-control-sm"
