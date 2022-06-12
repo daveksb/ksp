@@ -25,19 +25,16 @@
 .detail__content {
   display: flex;
   justify-content: space-between;
-  font-family: 'KSP Bold';
   font-size: 18px;
   margin: 12px 0 24px 0;
 }
 .btn-primary {
-  font-family: 'KSP Bold';
   font-size: 20px;
   background-color: #0056ff;
   width: 100%;
   border-radius: 4px;
 }
 .btn-secondary {
-  font-family: 'KSP Bold';
   font-size: 20px;
   background-color: #f68b33;
   width: 100%;
@@ -46,25 +43,21 @@
 }
 
 .form-label {
-  font-family: 'KSP Bold';
   font-size: 18px;
   margin-bottom: 0;
   margin-top: 10px;
 }
 .form-control {
-  font-family: 'KSP Bold';
   font-size: 20px;
   color: #666666;
 }
 
 .header {
-  font-family: 'KSP Bold';
   font-size: 50px;
   color: #333333;
   margin: 0;
 }
 .sub__header {
-  font-family: 'KSP Bold';
   font-size: 36px;
   color: #f68b33;
   margin: 40px 0 20px 0;
@@ -72,7 +65,6 @@
 
 .label__secondary {
   color: #000000;
-  font-family: 'KSP Bold';
   font-size: 18px;
   margin: 24px 0 10px 0;
   text-align: center;

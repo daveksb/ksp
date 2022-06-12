@@ -1,17 +1,17 @@
 .detail__container {
-  padding: 0 20px;
+  padding: 0 18px;
 }
 
 .content__container {
   display: grid;
   grid-template-columns: 164px 1fr 1fr;
-  grid-column-gap: 8px;
+  grid-column-gap: 16px;
 }
 
 .content__container--secondary {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-column-gap: 8px;
+  grid-column-gap: 16px;
 }
 
 .form-label {
@@ -21,6 +21,7 @@
 
 .form-control {
   background-color: #f6f6f6;
+  font-size: 18px;
 }
 
 .form-control-sm {
@@ -41,4 +42,5 @@
 
 .form__control__white {
   background-color: #fff;
+  font-size: 18px;
 }

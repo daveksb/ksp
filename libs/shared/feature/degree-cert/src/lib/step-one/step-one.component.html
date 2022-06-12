@@ -1,163 +1,167 @@
 <form [formGroup]="form">
-  <div class="group__container group__container--blue">
-    <div class="group__header">ข้อมูลสถาบัน</div>
-    <div class="row row--half">
-      <div>
-        <label class="form-label">กลุ่มสถาบัน</label>
-        <select class="search__content form-select form-select-sm">
-          <option selected>มหาวิทยาลัยของรัฐ / ในกำกับของรัฐ</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
+  <div class="tab__container">
+    <div class="group__container group__container--blue">
+      <div class="group__header">ข้อมูลสถาบัน</div>
+      <div class="row row--half">
+        <div>
+          <label class="form-label">กลุ่มสถาบัน</label>
+          <select class="search__content form-select form-select-sm">
+            <option selected>มหาวิทยาลัยของรัฐ / ในกำกับของรัฐ</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">รหัสสถาบัน</label>
+          <select class="search__content form-select form-select-sm">
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
       </div>
-      <div>
-        <label class="form-label">รหัสสถาบัน</label>
-        <select class="search__content form-select form-select-sm">
-          <option selected>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
+      <div class="row row--half">
+        <div>
+          <label class="form-label">สถาบัน / มหาลัย</label>
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            placeholder="กรุณากรอก"
+          />
+        </div>
+
+        <div>
+          <label class="form-label">จังหวัด</label>
+          <select class="search__content form-select form-select-sm">
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
       </div>
     </div>
-    <div class="row row--half">
-      <div>
-        <label class="form-label">สถาบัน / มหาลัย</label>
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          placeholder="กรุณากรอก"
-        />
-      </div>
 
-      <div>
-        <label class="form-label">จังหวัด</label>
-        <select class="search__content form-select form-select-sm">
-          <option selected>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
+    <ksp-degree-info [degreeTypes]="degreeTypes"></ksp-degree-info>
+
+    <div class="group__container">
+      <div class="group__header">การจัดการหลักสูตร หรือลักษณะหลักสูตร</div>
+      <div class="row row--1">
+        <div>
+          <label class="form-label"
+            >กรุณาเลือกประเภทการจัดการหลักสูตร หรือลักษณะหลักสูตร<span
+              class="warn__text"
+              >*เลือกข้อมูลของท่านได้เพียง 1 ข้อเท่านั้น</span
+            ></label
+          >
+          <select
+            formControlName="courseType"
+            class="search__content form-select form-select-sm"
+          >
+            <option *ngFor="let item of courseTypes" [value]="item.value">
+              {{ item.label }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="row row--full">
+        <ng-template kspDynamicComponent></ng-template>
       </div>
     </div>
-  </div>
+    <div class="group__container">
+      <div class="group__header">สถานที่ที่เปิดสอน</div>
 
-  <ksp-degree-info [degreeTypes]="degreeTypes"></ksp-degree-info>
-
-  <div class="group__container">
-    <div class="group__header">การจัดการหลักสูตร หรือลักษณะหลักสูตร</div>
-    <div class="row row--1">
-      <div>
-        <label class="form-label"
-          >กรุณาเลือกประเภทการจัดการหลักสูตร หรือลักษณะหลักสูตร<span
-            class="warn__text"
-            >*เลือกข้อมูลของท่านได้เพียง 1 ข้อเท่านั้น</span
-          ></label
+      <ng-container formArrayName="locations">
+        <ng-container
+          *ngFor="let locationForm of locations.controls; let i = index"
         >
-        <select
-          formControlName="courseType"
-          class="search__content form-select form-select-sm"
+          <div class="row row--ternary" [formGroupName]="i">
+            <div>
+              <label class="form-label">สถานที่เปิดสอน {{ i + 1 }} </label>
+              <input
+                class="form-control form-control-sm"
+                type="text"
+                formControlName="title"
+              />
+            </div>
+            <mat-icon *ngIf="i > 0" (click)="deleteFormArray(locations, i)">
+              delete_outline</mat-icon
+            >
+          </div>
+        </ng-container>
+      </ng-container>
+
+      <ksp-add-row-button
+        (addClick)="addFormArray(locations)"
+        *ngIf="mode === 'edit'"
+        >เพิ่มสถานที่เปิดสอน</ksp-add-row-button
+      >
+    </div>
+    <div class="group__container">
+      <div class="group__header">หน่วยงานที่รับผิดชอบหลักสูตร</div>
+
+      <ng-container formArrayName="institutions">
+        <ng-container
+          *ngFor="let institutionForm of institutions.controls; let i = index"
         >
-          <option *ngFor="let item of courseTypes" [value]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
+          <div class="row row--ternary" [formGroupName]="i">
+            <div>
+              <label class="form-label"
+                >ชื่อคณะ / หน่วยงานที่ {{ i + 1 }}
+              </label>
+              <input
+                class="form-control form-control-sm"
+                type="text"
+                placeholder="กรุณากรอก"
+              />
+            </div>
+            <mat-icon *ngIf="i > 0" (click)="deleteFormArray(institutions, i)">
+              delete_outline</mat-icon
+            >
+          </div>
+        </ng-container>
+      </ng-container>
+
+      <ksp-add-row-button
+        (addClick)="addFormArray(institutions)"
+        *ngIf="mode === 'edit'"
+        >เพิ่มหน่วยงานที่รับผิดชอบหลักสูตร
+      </ksp-add-row-button>
+    </div>
+
+    <div class="group__container">
+      <div class="group__header">
+        สถานที่ที่ต้องประเมินสภาพจริง / ติดตามผลเชิงประจักษ์
       </div>
-    </div>
-    <div class="row row--full">
-      <ng-template kspDynamicComponent></ng-template>
-    </div>
-  </div>
-  <div class="group__container">
-    <div class="group__header">สถานที่ที่เปิดสอน</div>
 
-    <ng-container formArrayName="locations">
-      <ng-container
-        *ngFor="let locationForm of locations.controls; let i = index"
-      >
-        <div class="row row--ternary" [formGroupName]="i">
-          <div>
-            <label class="form-label">สถานที่เปิดสอน {{ i + 1 }} </label>
-            <input
-              class="form-control form-control-sm"
-              type="text"
-              formControlName="title"
-            />
+      <ng-container formArrayName="locations2">
+        <ng-container
+          *ngFor="let locationForm2 of locations2.controls; let i = index"
+        >
+          <div class="row row--ternary">
+            <div>
+              <label class="form-label">สถานที่ {{ i + 1 }} </label>
+              <input
+                class="form-control form-control-sm"
+                type="text"
+                placeholder="กรุณากรอก"
+              />
+            </div>
+            <mat-icon *ngIf="i > 0" (click)="deleteFormArray(locations2, i)">
+              delete_outline</mat-icon
+            >
           </div>
-          <mat-icon *ngIf="i > 0" (click)="deleteFormArray(locations, i)">
-            delete_outline</mat-icon
-          >
-        </div>
+        </ng-container>
       </ng-container>
-    </ng-container>
 
-    <ksp-add-row-button
-      (addClick)="addFormArray(locations)"
-      *ngIf="mode === 'edit'"
-      >เพิ่มสถานที่เปิดสอน</ksp-add-row-button
-    >
-  </div>
-  <div class="group__container">
-    <div class="group__header">หน่วยงานที่รับผิดชอบหลักสูตร</div>
-
-    <ng-container formArrayName="institutions">
-      <ng-container
-        *ngFor="let institutionForm of institutions.controls; let i = index"
+      <ksp-add-row-button
+        (addClick)="addFormArray(locations2)"
+        *ngIf="mode === 'edit'"
+        >เพิ่มสถานที่ที่ต้องประเมินสภาพจริง</ksp-add-row-button
       >
-        <div class="row row--ternary" [formGroupName]="i">
-          <div>
-            <label class="form-label">ชื่อคณะ / หน่วยงานที่ {{ i + 1 }} </label>
-            <input
-              class="form-control form-control-sm"
-              type="text"
-              placeholder="กรุณากรอก"
-            />
-          </div>
-          <mat-icon *ngIf="i > 0" (click)="deleteFormArray(institutions, i)">
-            delete_outline</mat-icon
-          >
-        </div>
-      </ng-container>
-    </ng-container>
-
-    <ksp-add-row-button
-      (addClick)="addFormArray(institutions)"
-      *ngIf="mode === 'edit'"
-      >เพิ่มหน่วยงานที่รับผิดชอบหลักสูตร
-    </ksp-add-row-button>
-  </div>
-
-  <div class="group__container">
-    <div class="group__header">
-      สถานที่ที่ต้องประเมินสภาพจริง / ติดตามผลเชิงประจักษ์
     </div>
-
-    <ng-container formArrayName="locations2">
-      <ng-container
-        *ngFor="let locationForm2 of locations2.controls; let i = index"
-      >
-        <div class="row row--ternary">
-          <div>
-            <label class="form-label">สถานที่ {{ i + 1 }} </label>
-            <input
-              class="form-control form-control-sm"
-              type="text"
-              placeholder="กรุณากรอก"
-            />
-          </div>
-          <mat-icon *ngIf="i > 0" (click)="deleteFormArray(locations2, i)">
-            delete_outline</mat-icon
-          >
-        </div>
-      </ng-container>
-    </ng-container>
-
-    <ksp-add-row-button
-      (addClick)="addFormArray(locations2)"
-      *ngIf="mode === 'edit'"
-      >เพิ่มสถานที่ที่ต้องประเมินสภาพจริง</ksp-add-row-button
-    >
   </div>
 
   <ksp-degree-cert-coordinator></ksp-degree-cert-coordinator>

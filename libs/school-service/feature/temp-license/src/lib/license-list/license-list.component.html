@@ -21,7 +21,7 @@
       </div>
     </div>
 
-    <div class="detail__container"><hr /></div>
+    <hr />
 
     <div class="box__container">
       <div class="box__title">ค้นหารายการ</div>
@@ -96,9 +96,10 @@
           <input class="form-control form-control-sm" type="date" />
         </div>
 
-        <label for="exampleFormControlInput1" class="form-label-2"
-          ><br />-</label
-        >
+        <div>
+          <br />
+          <mat-icon>minimize</mat-icon>
+        </div>
 
         <div class="detail__container">
           <label for="exampleFormControlInput1" class="form-label"
@@ -109,7 +110,12 @@
       </div>
 
       <div class="button__container">
-        <button id="btn-clear" (click)="clear()" type="button" class="btn btn-outline-primary">
+        <button
+          id="btn-clear"
+          (click)="clear()"
+          type="button"
+          class="btn btn-outline-primary"
+        >
           ล้างข้อมูล
         </button>
         <button

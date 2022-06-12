@@ -53,13 +53,16 @@
     <div class="checkbox__container">
       <div class="detail__header">ข้อมูลผู้ขอรหัสสำหรับเข้าใช้งานระบบ</div>
       <div class="detail__header-2">สิทธิสำหรับการเข้าใช้งาน</div>
-      <div class="checkbox__content">
-        <input type="checkbox" class="checkbox" />
-        <label class="checkbox__label"
-          >ยื่นแบบคำขออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต</label
+      <div class="checkbox__content" [formGroup]="grantFormGroup">
+        <ng-container *ngFor="let item of grant | keyvalue">
+          <mat-checkbox
+            formControlName="{{ item.key }}"
+            class="checkbox__label"
+            >{{ item.key }}</mat-checkbox
+          ></ng-container
         >
       </div>
-      <div class="checkbox__content">
+      <!--     <div class="checkbox__content">
         <input type="checkbox" class="checkbox" />
         <label class="checkbox__label">ยื่นแบบคำขอหนังสือรับรองคุณวุฒิ</label>
       </div>
@@ -79,7 +82,7 @@
       <div class="checkbox__content">
         <input type="checkbox" class="checkbox" />
         <label class="checkbox__label">ทะเบียนข้อมูลครูและผู้บริหารศึกษา</label>
-      </div>
+      </div> -->
     </div>
 
     <div class="form__container">

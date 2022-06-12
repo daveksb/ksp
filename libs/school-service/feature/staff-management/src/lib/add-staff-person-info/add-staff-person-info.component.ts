@@ -7,6 +7,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-staff-person-info.component.scss'],
 })
 export class AddStaffPersonInfoComponent {
+  licenseButtons = [
+    'ใบอนุญาติประกอบวิชาชีพ - ครู',
+    'ใบอนุญาติประกอบวิชาชีพ - ผู้บริหารสถานศึกษา',
+  ];
+
   constructor(private router: Router) {}
 
   next() {

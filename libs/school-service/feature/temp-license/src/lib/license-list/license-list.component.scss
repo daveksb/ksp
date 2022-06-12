@@ -1,14 +1,13 @@
 .main-container {
   background-color: #e5e5e5;
-  height: auto;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+  max-width: 100%;
+  padding: 0 30px;
+  padding-bottom: 25px;
 }
 
 .top-container {
-  background-color: white;
-  margin: 0 15px 15px 15px;
+  background-color: #fff;
+  padding: 24px;
 }
 
 .bottom-content {
@@ -18,13 +17,12 @@
 
 .box__container {
   background-color: #f9f9fa;
-  margin: 20px;
-  padding-bottom: 20px;
+  margin: 18px 0;
+  padding: 18px;
   max-width: 1200px;
 }
 
 .button__container {
-  padding-right: 15px;
   display: flex;
   justify-content: flex-end;
 }
@@ -32,7 +30,6 @@
 .box__title {
   font-size: 22px;
   color: #0056ff;
-  padding-left: 15px;
 }
 
 .table__title {
@@ -60,18 +57,17 @@
 
 .detail__container {
   margin-bottom: 16px;
-  padding: 0 15px;
 }
 
 .detail__container--secondary {
   display: grid;
-  grid-template-columns: 1fr 1% 1fr;
+  grid-template-columns: 1fr 2% 1fr;
 }
 
 .detail__container--third {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-column-gap: 20px;
+  grid-column-gap: 18px;
 }
 
 .form-label {
@@ -133,13 +129,12 @@
 
 .content__header {
   display: flex;
-  margin: 10px 20px;
 }
 
 .header {
   font-size: 22px;
   color: #000000;
-  padding: 15px 0 0 25px;
+  padding: 12px 0;
 }
 
 .correct__icon {

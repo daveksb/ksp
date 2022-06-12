@@ -1,7 +1,13 @@
 .container {
   background-color: #e5e5e5;
   max-width: 100%;
+  padding: 0 30px;
   padding-bottom: 75px;
+}
+
+.box__container {
+  background-color: #fff;
+  padding: 18px;
 }
 
 .box__detail {
@@ -10,15 +16,9 @@
   margin: 24px;
 }
 
-.box__container {
-  background-color: #fff;
-  padding: 15px;
-  margin: 0 15px;
-}
-
 .header {
   font-size: 22px;
-  padding: 15px 0 0 15px;
+  padding: 12px 0;
 }
 
 .title__box {
@@ -64,13 +64,7 @@
 }
 
 .mattab__container {
-  margin: 24px 24px 0 24px;
-}
-
-.not__found {
-  text-align: center;
-  font-size: 16px;
-  margin: 25px 0;
+  margin: 24px;
 }
 
 .detail__content--secondary {
@@ -110,10 +104,4 @@
 
 .label__content--primary {
   color: #f68b33;
-}
-
-.btn__license-info {
-  display: flex;
-  margin: 10px 20px;
-  justify-content: center;
 }

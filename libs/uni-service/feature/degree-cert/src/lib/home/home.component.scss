@@ -1,11 +1,12 @@
 .page__container {
-  margin: 20px 10px;
+  background-color: #e5e5e5;
+  padding: 0 48px;
+  padding-bottom: 100px;
 }
 
 .page__header {
   font-size: 22px;
-  margin-left: 30px;
-  padding-top: 12px;
+  padding: 12px 0;
 }
 
 .content__header {
@@ -17,9 +18,26 @@
   color: #808080;
   margin-right: 24px;
 }
+
 .label__content--primary {
   color: #f68b33;
 }
+
 .label__content--secondary {
   color: #0056ff;
+}
+
+.bottom__container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 1;
+}
+
+.content__container {
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 24px;
 }
