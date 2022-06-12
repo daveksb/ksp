@@ -15,50 +15,15 @@
     <div class="header__label-2">* เลือกได้มากกว่า 1 รายการ</div>
   </div>
 
-  <div class="content__container-3">
+  <div class="content__container-3" [formGroup]="levelFormGroup">
     <div class="checkbox__container">
-      <input type="checkbox" class="checkbox__form" />
-      <label for="vehicle1" class="checkbox__label">ปฐมวัย</label>
-    </div>
-    <div class="checkbox__container">
-      <input type="checkbox" class="checkbox__form" />
-      <label for="vehicle1" class="checkbox__label"
-        >ช่วงชั้นที่ 1 (ประถมศึกษาปีที่ 1-3)</label
+      <ng-container *ngFor="let item of level | keyvalue">
+        <mat-checkbox
+          formControlName="{{ item.key }}"
+          class="checkbox__label"
+          >{{ item.key }}</mat-checkbox
+        ></ng-container
       >
-    </div>
-    <div class="checkbox__container">
-      <input type="checkbox" class="checkbox__form" />
-      <label for="vehicle1" class="checkbox__label"
-        >ช่วงชั้นที่ 2 (ประถมศึกษาปีที่ 4-6)</label
-      >
-    </div>
-    <div class="checkbox__container">
-      <input type="checkbox" class="checkbox__form" />
-      <label for="vehicle1" class="checkbox__label"
-        >ช่วงชั้นที่ 3 (มัธยมศึกษาปีที่ 1-3)</label
-      >
-    </div>
-    <div class="checkbox__container">
-      <input type="checkbox" class="checkbox__form" />
-      <label for="vehicle1" class="checkbox__label"
-        >ช่วงชั้นที่ 4 (มัธยมศึกษาปีที่ 4-6)</label
-      >
-    </div>
-    <div class="checkbox__container">
-      <input type="checkbox" class="checkbox__form" />
-      <label for="vehicle1" class="checkbox__label"
-        >ประกาศนียบัตรวิชาชีพ (ปวช.)</label
-      >
-    </div>
-    <div class="checkbox__container">
-      <input type="checkbox" class="checkbox__form" />
-      <label for="vehicle1" class="checkbox__label"
-        >ประกาศนียบัตรวิชาชีพขั้นสูง (ปวส.)</label
-      >
-    </div>
-    <div class="checkbox__container">
-      <input type="checkbox" class="checkbox__form" />
-      <label for="vehicle1" class="checkbox__label">อื่นๆ</label>
     </div>
   </div>
 </div>

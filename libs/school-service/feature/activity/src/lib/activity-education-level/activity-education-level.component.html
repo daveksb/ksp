@@ -58,58 +58,65 @@
     </div>
 
     <div class="box__detail-2">
-      <div class="checkbox__container">
-        <input type="checkbox" class="checkbox" />
-        <div class="checkbox__label">
-          วุฒิเพิ่มขึ้นในสาขาที่เกี่ยวข้องกับการประกอบวิชาชีพทางการศึกษา
+      <form [formGroup]="testForm">
+        <div class="checkbox__container">
+          <input
+            type="checkbox"
+            class="checkbox"
+            formControlName="selectValue"
+          />
+          <div class="checkbox__label">
+            วุฒิเพิ่มขึ้นในสาขาที่เกี่ยวข้องกับการประกอบวิชาชีพทางการศึกษา
+          </div>
         </div>
-      </div>
+        <ng-template [ngIf]="testForm.controls['selectValue'].value">
+          <div class="form__container">
+            <div class="detail__container--half">
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label"
+                  >สถาบันการศึกษา
+                </label>
+                <input class="form-control form-control-sm" type="text" />
+              </div>
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label"
+                  >วุฒิการศึกษาที่จบ
+                </label>
+                <input class="form-control form-control-sm" type="text" />
+              </div>
+            </div>
 
-      <div class="form__container">
-        <div class="detail__container--half">
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label"
-              >สถาบันการศึกษา
-            </label>
-            <input class="form-control form-control-sm" type="text" />
-          </div>
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label"
-              >วุฒิการศึกษาที่จบ
-            </label>
-            <input class="form-control form-control-sm" type="text" />
-          </div>
-        </div>
+            <div class="detail__container--half">
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label"
+                  >สาขา/วิชาเอก
+                </label>
+                <input class="form-control form-control-sm" type="text" />
+              </div>
+            </div>
 
-        <div class="detail__container--half">
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label"
-              >สาขา/วิชาเอก
-            </label>
-            <input class="form-control form-control-sm" type="text" />
+            <div class="detail__container--half">
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label"
+                  >วันเดือนปี เข้าศึกษา
+                </label>
+                <input class="form-control form-control-sm" type="date" />
+              </div>
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label"
+                  >วันเดือนปี สำเร็จการศึกษา
+                </label>
+                <input class="form-control form-control-sm" type="date" />
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div class="detail__container--half">
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label"
-              >วันเดือนปี เข้าศึกษา
-            </label>
-            <input class="form-control form-control-sm" type="date" />
-          </div>
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label"
-              >วันเดือนปี สำเร็จการศึกษา
-            </label>
-            <input class="form-control form-control-sm" type="date" />
-          </div>
-        </div>
-      </div>
-      <br />
-      <ksp-form-attachment
-        title="กรุณาแนบหลักฐานประกอบการปฏิบัติงาน"
-        [groups]="educationLevel"
-      ></ksp-form-attachment>
+          <br />
+          <ksp-form-attachment
+            title="กรุณาแนบหลักฐานประกอบการปฏิบัติงาน"
+            [groups]="educationLevel"
+          ></ksp-form-attachment>
+        </ng-template>
+      </form>
     </div>
   </div>
 </div>
