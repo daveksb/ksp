@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DegreeCertHomeComponent } from './degree-cert-home/degree-cert-home.component';
-import { DegreeCertStepOneComponent } from './degree-cert-step-one/degree-cert-step-one.component';
-import { DegreeCertStepTwoComponent } from './degree-cert-step-two/degree-cert-step-two.component';
-import { DegreeCertStepThreeComponent } from './degree-cert-step-three/degree-cert-step-three.component';
-import { DegreeCertStepFourComponent } from './degree-cert-step-four/degree-cert-step-four.component';
-import { DegreeCertStepFiveComponent } from './degree-cert-step-five/degree-cert-step-five.component';
+import { DegreeCertHomeComponent } from './home/home.component';
+import { DegreeCertStepOneComponent } from './step-one/step-one.component';
+import { DegreeCertStepTwoComponent } from './step-two/step-two.component';
+import { DegreeCertStepThreeComponent } from './step-three/step-three.component';
+import { DegreeCertStepFourComponent } from './step-four/step-four.component';
+import { DegreeCertStepFiveComponent } from './step-five/step-five.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { MatTableModule } from '@angular/material/table';

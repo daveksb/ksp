@@ -10,12 +10,12 @@ import { FormArray, FormBuilder } from '@angular/forms';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
 import { DynamicComponent, ListData } from '@ksp/shared/interface';
 import { debounceTime } from 'rxjs';
-import { DegreeCertStepOneService } from './degree-cert-step-one.service';
+import { DegreeCertStepOneService } from './step-one.service';
 
 @Component({
   selector: 'ksp-degree-cert-step-one',
-  templateUrl: './degree-cert-step-one.component.html',
-  styleUrls: ['./degree-cert-step-one.component.css'],
+  templateUrl: './step-one.component.html',
+  styleUrls: ['./step-one.component.css'],
   providers: [DegreeCertStepOneService],
 })
 export class DegreeCertStepOneComponent implements OnInit {
@@ -56,36 +56,18 @@ export class DegreeCertStepOneComponent implements OnInit {
       this.degreeType.emit(Number(res));
     });
 
-    this.addLocation();
-    this.addInstitution();
-    this.addLocation2();
+    this.addFormArray(this.locations);
+    this.addFormArray(this.institutions);
+    this.addFormArray(this.locations2);
   }
 
-  addLocation() {
-    const locationForm = this.fb.group({ title: [''] });
-    this.locations.push(locationForm);
+  addFormArray(form: FormArray<any>) {
+    const data = this.fb.group({ title: [''] });
+    form.push(data);
   }
 
-  addLocation2() {
-    const locationForm2 = this.fb.group({ title: [''] });
-    this.locations2.push(locationForm2);
-  }
-
-  addInstitution() {
-    const institutionForm = this.fb.group({ title: [''] });
-    this.institutions.push(institutionForm);
-  }
-
-  deleteLocation(index: number) {
-    this.locations.removeAt(index);
-  }
-
-  deleteInstitution(index: number) {
-    this.institutions.removeAt(index);
-  }
-
-  deleteLocation2(index: number) {
-    this.locations2.removeAt(index);
+  deleteFormArray(form: FormArray<any>, index: number) {
+    form.removeAt(index);
   }
 
   loadComponent(index: number) {
