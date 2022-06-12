@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { UniServiceContainerPageComponent } from '@ksp/uni-service/feature/container-page';
-import { StepFourComponent } from './step-four/step-four.component';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import {
   DegreeCertHomeComponent,
@@ -45,7 +44,7 @@ const routes: Routes = [
     MatTabsModule,
     SharedFormDegreeCertStepThreeModule,
   ],
-  declarations: [StepFourComponent, HomeComponent],
+  declarations: [HomeComponent],
   exports: [HomeComponent],
 })
 export class UniServiceFeatureDegreeCertModule {}
