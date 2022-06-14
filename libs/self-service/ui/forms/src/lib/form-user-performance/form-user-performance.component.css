@@ -7,7 +7,7 @@
 .content__container {
   display: grid;
   grid-template-columns: 30% 1fr;
-  grid-gap: 32px;
+  grid-column-gap: 32px;
   margin: 0 18px;
 }
 
@@ -36,26 +36,32 @@
   border-top: 0;
 }
 
-.table__container {
-  background-color: #e5e5e5;
-  margin: 0 20px;
-}
-
 tr.mat-header-row {
   background-color: #edf8ff;
 }
 
 .table__header {
-  padding: 0;
+  padding: 8px;
 }
 
 .table__detail {
-  padding: 0;
+  padding: 8px;
 }
 
 @media only screen and (max-width: 768px) {
   .content__container {
     display: flex;
     flex-direction: column;
+  }
+
+  .table__header {
+    padding: 16px;
+  }
+
+  .table__detail {
+    padding: 16px;
+  }
+  .table {
+    margin-top: 24px;
   }
 }
