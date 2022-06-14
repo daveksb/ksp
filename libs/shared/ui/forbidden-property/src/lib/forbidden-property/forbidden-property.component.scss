@@ -8,7 +8,16 @@
 .checkbox__container-2 {
   display: grid;
   grid-template-columns: 1.5fr 2fr 0.5fr;
+  grid-template-areas: '. box1 box2';
   margin: 10px 0;
+}
+
+.upload__box-1 {
+  grid-area: box1;
+}
+
+.upload__box-2 {
+  grid-area: box2;
 }
 
 .header__title {
@@ -39,7 +48,7 @@
 }
 
 .btn__container {
-  margin-top: 40px;
+  margin-top: 32px;
   text-align: center;
 }
 
@@ -47,10 +56,43 @@
   font-size: 16px;
 }
 
-#save-button {
-  margin-left: 10px;
+#btn-save {
+  margin-left: 12px;
+  font-size: 20px;
+}
+
+#btn-cancel {
+  font-size: 20px;
 }
 
 #upload-btn {
   margin-left: 5px;
+}
+
+/* mobile */
+
+@media only screen and (max-width: 768px) {
+  .checkbox__container {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .checkbox__container-2 {
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    grid-template-areas: 'box1 box2';
+    margin: 24px 0 12px 0;
+  }
+
+  .upload__box-1 {
+    grid-area: box1;
+  }
+
+  .upload__box-2 {
+    grid-area: box2;
+  }
+
+  #upload-btn {
+    width: auto;
+    font-size: 14px;
+  }
 }

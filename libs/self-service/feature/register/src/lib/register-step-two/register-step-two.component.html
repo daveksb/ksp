@@ -7,7 +7,7 @@
       <div class="detail__container">
         <div class="detail__container--left">
           <div class="form-group field__container">
-            <label for="prefixFormControlSelect" class="form__detail"
+            <label for="prefixFormControlSelect" class="form__label"
               >เลขที่บัตรประชาชน</label
             >
             <input
@@ -18,7 +18,7 @@
             />
           </div>
           <div class="form-group field__container">
-            <label class="form__detail">เลขที่หลังบัตรประชาชน</label>
+            <label class="form__label">เลขที่หลังบัตรประชาชน</label>
             <input
               type="text"
               class="form-control"
@@ -27,13 +27,16 @@
             />
           </div>
         </div>
+        <br />
         <div class="detail__container--right">
           <div class="form-group field__container">
-            <label for="lastnameFormControlInput" class="form__detail"
+            <label for="lastnameFormControlInput" class="form__lebel"
               >รูปถ่ายบัตรประชาชน</label
             >
             <div class="container__btn-upload">
-              <button class="btn btn-outline-primary" id="btn-upload">+ อัพโหลดรูปภาพ</button>
+              <button class="btn btn-outline-primary" id="btn-upload">
+                + อัพโหลดรูปภาพ
+              </button>
 
               <diV class="label-upload-detail"
                 >Choose image . jpg only, max size 1 MB</diV
@@ -44,11 +47,16 @@
       </div>
 
       <div class="form__footer">
-        <button (click)="previousPage()" type="submit" class="btn btn-light">
+        <button
+          id="btn-back"
+          (click)="previousPage()"
+          type="submit"
+          class="btn btn-secondary"
+        >
           กลับ
         </button>
         <button
-          id="confim__button"
+          id="btn-confirm"
           (click)="openDialog()"
           type="submit"
           class="btn btn-primary"

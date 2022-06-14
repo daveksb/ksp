@@ -44,22 +44,32 @@
       </div>
     </div>
     <div class="checkbox__container-2">
-      <div></div>
-      <input
-        class="form-control form-control-sm"
-        type="text"
-        placeholder="โปรดระบุ"
-      />
-      <button id="upload-btn" type="button" class="btn btn-primary">+ แนบเอกสาร</button>
+      <div class="upload__box-1">
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          placeholder="โปรดระบุ"
+        />
+      </div>
+      <div class="upload__box-2">
+        <button id="upload-btn" type="button" class="btn btn-primary">
+          + แนบเอกสาร
+        </button>
+      </div>
     </div>
   </div>
 
   <div class="btn__container">
-    <button matDialogClose type="button" class="btn btn-outline-primary">
+    <button
+      matDialogClose
+      id="btn-cancel"
+      type="button"
+      class="btn btn-outline-primary"
+    >
       ยกเลิก
     </button>
     <button
-      id="save-button"
+      id="btn-save"
       matDialogClose
       (click)="save()"
       type="button"

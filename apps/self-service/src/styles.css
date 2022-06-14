@@ -26,7 +26,16 @@ hr {
   color: #515153;
   width: 250px;
   margin: 0 2px;
-  font-size: 16px;
+  font-size: 18px;
+}
+
+/* mobile */
+@media only screen and (max-width: 768px) {
+  .mat-tab-label {
+    width: 150px;
+    margin: 0 2px;
+    font-size: 16px;
+  }
 }
 
 .mat-tab-label-active {

@@ -9,8 +9,8 @@
   /* box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; */
   border: 1px solid #c4c4c4;
   border-radius: 10px;
-  padding: 8px 0;
   text-align: end;
+  text-align: center;
 }
 
 .header__title {
@@ -39,4 +39,23 @@
 
 #confirm__button {
   margin-left: 10px;
+}
+
+/* mobile */
+@media only screen and (max-width: 768px) {
+  .form__container {
+    margin: 0;
+  }
+
+  .flex-column {
+    margin: 0;
+  }
+
+  .header__title {
+    margin-bottom: 25px;
+  }
+
+  .btn__container {
+    margin-top: 40px;
+  }
 }
