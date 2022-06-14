@@ -16,25 +16,59 @@
     <mat-stepper labelPosition="bottom" [animationDuration]="'0'" #stepper>
       <mat-step>
         <ng-template matStepLabel>ข้อมูลพื้นฐาน</ng-template>
-        <ksp-degree-cert-step-one (degreeType)="degreeType = $event">
+        <ksp-degree-cert-step-one
+          [mode]="'view'"
+          (degreeType)="degreeType = $event"
+        >
         </ksp-degree-cert-step-one>
-        <ksp-degree-cert-coordinator></ksp-degree-cert-coordinator>
+        <div class="check__form">
+          <e-service-license-check></e-service-license-check>
+        </div>
       </mat-step>
 
       <mat-step>
         <ng-template matStepLabel>ด้านหลักสูตร</ng-template>
-        <ksp-degree-cert-step-two [formType]="degreeType">
+        <ksp-degree-cert-step-two
+          (tabIndexChanged)="({})"
+          [formType]="degreeType"
+        >
         </ksp-degree-cert-step-two>
+        <div class="check__form">
+          <e-service-license-check></e-service-license-check>
+        </div>
       </mat-step>
 
       <mat-step>
         <ng-template matStepLabel>ด้านกระบวนการผลิต</ng-template>
         <ksp-degree-cert-step-3></ksp-degree-cert-step-3>
+        <div class="check__form">
+          <e-service-license-check></e-service-license-check>
+        </div>
       </mat-step>
 
       <mat-step>
         <ng-template matStepLabel>เอกสารแนบ</ng-template>
         <ksp-degree-cert-step-four></ksp-degree-cert-step-four>
+        <div class="check__form">
+          <e-service-license-check></e-service-license-check>
+        </div>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>ตรวจสอบและยื่นคำขอ</ng-template>
+        <div class="result__container">
+          <e-service-verify-result
+            [isBasicValid]="true"
+          ></e-service-verify-result>
+          <e-service-verify-result
+            [number]="2"
+            [isBasicValid]="true"
+            [isCourseValid]="true"
+            [isProcessValid]="true"
+          ></e-service-verify-result>
+        </div>
+
+        <ksp-degree-cert-step-five></ksp-degree-cert-step-five>
       </mat-step>
     </mat-stepper>
   </div>
@@ -46,8 +80,6 @@
       [showCenterButtons]="true"
       [showSaveButton]="true"
       [showCancelButton]="true"
-      (saveClicked)="save()"
-      (cancelClicked)="cancel()"
     ></ksp-bottom-menu>
   </div>
 </div>

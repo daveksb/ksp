@@ -5,12 +5,6 @@
   padding: 24px;
 }
 
-.container {
-  max-width: 100%;
-  padding-bottom: 50px;
-  background-color: #e5e5e5;
-}
-
 .bottom__container {
   position: fixed;
   bottom: 0;
@@ -20,6 +14,6 @@
   z-index: 1;
 }
 
-.detail__container {
-  background-color: #f9f9fa;
+.result__container {
+  display: flex;
 }

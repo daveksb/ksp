@@ -7,19 +7,13 @@ import {
 } from '@ksp/shared/ui/dialog';
 
 @Component({
-  templateUrl: './step-five.component.html',
-  styleUrls: ['./step-five.component.scss'],
+  selector: 'e-service-check',
+  templateUrl: './check.component.html',
+  styleUrls: ['./check.component.scss'],
 })
-export class StepFiveComponent {
+export class CheckComponent {
+  degreeType = '';
   constructor(public dialog: MatDialog, private router: Router) {}
-
-  cancel() {
-    this.router.navigate(['./', 'degree-cert', 'list', '1']);
-  }
-
-  prevPage() {
-    this.router.navigate(['./', 'degree-cert', 'step-4']);
-  }
 
   save() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -58,7 +52,6 @@ export class StepFiveComponent {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        
         this.router.navigate(['/', 'degree-cert', 'list', '1']);
       }
     });

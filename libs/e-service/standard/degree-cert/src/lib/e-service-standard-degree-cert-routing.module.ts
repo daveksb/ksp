@@ -2,13 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { ApproveComponent } from './approve/approve.component';
+import { CheckComponent } from './check/check.component';
 import { ConsiderComponent } from './consider/consider.component';
-import { DegreeCertListComponent } from './degree-cert-list/degree-cert-list.component';
-import { StepFiveComponent } from './step-five/step-five.component';
-import { StepFourComponent } from './step-four/step-four.component';
-import { StepOneComponent } from './step-one/step-one.component';
-import { StepThreeComponent } from './step-three/step-three.component';
-import { StepTwoComponent } from './step-two/step-two.component';
+import { DegreeCertListComponent } from './list/list.component';
 import { VerifyComponent } from './verify/verify.component';
 
 export const routes: Routes = [
@@ -22,39 +18,27 @@ export const routes: Routes = [
         pathMatch: 'full',
       },
       {
-        path: 'list/:type',
+        path: 'list',
         component: DegreeCertListComponent,
       },
+      /*       {
+        path: 'list/:type',
+        component: DegreeCertListComponent,
+      }, */
       {
-        path: 'step-1',
-        component: StepOneComponent,
-      },
-      {
-        path: 'step-2',
-        component: StepTwoComponent,
-      },
-      {
-        path: 'step-3',
-        component: StepThreeComponent,
-      },
-      {
-        path: 'step-4',
-        component: StepFourComponent,
-      },
-      {
-        path: 'step-5',
-        component: StepFiveComponent,
+        path: 'check', //ตรวจสอบ
+        component: CheckComponent,
       },
       {
         path: 'verify/:type',
         component: VerifyComponent,
       },
       {
-        path: 'consider',
+        path: 'consider', //พิจารณา
         component: ConsiderComponent,
       },
       {
-        path: 'approve',
+        path: 'approve', //ยืนยัน
         component: ApproveComponent,
       },
     ],
