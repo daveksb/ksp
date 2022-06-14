@@ -99,6 +99,9 @@
       "@ksp/school-service/feature/temp-license": [
         "libs/school-service/feature/temp-license/src/index.ts"
       ],
+      "@ksp/school-service/form/activity": [
+        "libs/school-service/form/activity/src/index.ts"
+      ],
       "@ksp/school-service/ui/staff-search": [
         "libs/school-service/ui/staff-search/src/index.ts"
       ],

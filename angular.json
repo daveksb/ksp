@@ -31,6 +31,7 @@
     "school-service-feature-register": "libs/school-service/feature/register",
     "school-service-feature-staff-management": "libs/school-service/feature/staff-management",
     "school-service-feature-temp-license": "libs/school-service/feature/temp-license",
+    "school-service-form-activity": "libs/school-service/form/activity",
     "school-service-ui-staff-search": "libs/school-service/ui/staff-search",
     "self-service": "apps/self-service",
     "self-service-feature-home": "libs/self-service/feature/home",

@@ -1,0 +1,17 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/school-service/form/activity/src",
+  "prefix": "ksp",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/school-service/form/activity/**/*.ts",
+          "libs/school-service/form/activity/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
