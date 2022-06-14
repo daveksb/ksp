@@ -15,6 +15,10 @@ export class CheckComponent {
   degreeType = '';
   constructor(public dialog: MatDialog, private router: Router) {}
 
+  cancel() {
+    this.router.navigate(['/', 'degree-cert', 'list']);
+  }
+
   save() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       height: '200px',
@@ -39,7 +43,6 @@ export class CheckComponent {
 
   onConfirmed() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      height: '250px',
       width: '350px',
       data: {
         header: 'ยืนยันข้อมูลสำเร็จ',
@@ -52,7 +55,7 @@ export class CheckComponent {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'degree-cert', 'list', '1']);
+        this.router.navigate(['/', 'degree-cert', 'list']);
       }
     });
   }

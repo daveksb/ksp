@@ -21,6 +21,9 @@
           (degreeType)="degreeType = $event"
         >
         </ksp-degree-cert-step-one>
+        <br />
+        <hr />
+        <br />
         <div class="check__form">
           <e-service-license-check></e-service-license-check>
         </div>
@@ -33,6 +36,9 @@
           [formType]="degreeType"
         >
         </ksp-degree-cert-step-two>
+        <br />
+        <hr />
+        <br />
         <div class="check__form">
           <e-service-license-check></e-service-license-check>
         </div>
@@ -41,6 +47,9 @@
       <mat-step>
         <ng-template matStepLabel>ด้านกระบวนการผลิต</ng-template>
         <ksp-degree-cert-step-3></ksp-degree-cert-step-3>
+        <br />
+        <hr />
+        <br />
         <div class="check__form">
           <e-service-license-check></e-service-license-check>
         </div>
@@ -49,6 +58,9 @@
       <mat-step>
         <ng-template matStepLabel>เอกสารแนบ</ng-template>
         <ksp-degree-cert-step-four></ksp-degree-cert-step-four>
+        <br />
+        <hr />
+        <br />
         <div class="check__form">
           <e-service-license-check></e-service-license-check>
         </div>
@@ -80,6 +92,8 @@
       [showCenterButtons]="true"
       [showSaveButton]="true"
       [showCancelButton]="true"
+      (saveClicked)="save()"
+      (cancelClicked)="cancel()"
     ></ksp-bottom-menu>
   </div>
 </div>
