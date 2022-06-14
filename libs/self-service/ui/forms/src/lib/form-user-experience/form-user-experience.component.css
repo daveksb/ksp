@@ -92,7 +92,11 @@
 
 @media only screen and (max-width: 768px) {
   .content__container {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #upload__button-container {
+    justify-content: center;
   }
 }

@@ -40,7 +40,11 @@
   background-size: 12px;
 }
 
-.form__control__white {
-  background-color: #fff;
-  font-size: 18px;
+/* mobile */
+@media only screen and (max-width: 768px) {
+  .content__container,
+  .content__container--secondary {
+    display: flex;
+    flex-direction: column;
+  }
 }

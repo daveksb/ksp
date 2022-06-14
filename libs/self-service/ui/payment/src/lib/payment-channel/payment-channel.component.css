@@ -34,6 +34,7 @@
   background-color: #edf8ff;
   border: 1px solid #ecedf3;
   color: #333333;
+  white-space: nowrap;
 }
 
 .header__container {

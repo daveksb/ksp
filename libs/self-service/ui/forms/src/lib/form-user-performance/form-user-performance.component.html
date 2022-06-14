@@ -2,45 +2,68 @@
   <div class="content__container">
     <div class="menu__container">
       <mat-selection-list #shoes [multiple]="false">
-        <mat-list-option *ngFor="let subject of typesOfSubject" [value]="subject">
+        <mat-list-option
+          *ngFor="let subject of typesOfSubject"
+          [value]="subject"
+        >
           {{ subject }}
         </mat-list-option>
       </mat-selection-list>
     </div>
 
     <div class="content__container-2">
-      <div class="table__container">
-        <table mat-table [dataSource]="dataSource">
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-            <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-          </ng-container>
+      <div class="table-responsive">
+        <div class="table">
+          <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef class="table__header">
+                ลำดับ
+              </th>
+              <td mat-cell *matCellDef="let element" class="table__detail">
+                {{ element.id }}
+              </td>
+            </ng-container>
 
-          <ng-container matColumnDef="score">
-            <th mat-header-cell *matHeaderCellDef>คะแนน</th>
-            <td mat-cell *matCellDef="let element">{{ element.score }}</td>
-          </ng-container>
+            <ng-container matColumnDef="score">
+              <th mat-header-cell *matHeaderCellDef class="table__header">
+                คะแนน
+              </th>
+              <td mat-cell *matCellDef="let element" class="table__detail">
+                {{ element.score }}
+              </td>
+            </ng-container>
 
-          <ng-container matColumnDef="result">
-            <th mat-header-cell *matHeaderCellDef>ผลประเมิน</th>
-            <td mat-cell *matCellDef="let element">{{ element.result }}</td>
-          </ng-container>
+            <ng-container matColumnDef="result">
+              <th mat-header-cell *matHeaderCellDef class="table__header">
+                ผลประเมิน
+              </th>
+              <td mat-cell *matCellDef="let element" class="table__detail">
+                {{ element.result }}
+              </td>
+            </ng-container>
 
-          <ng-container matColumnDef="announceDate">
-            <th mat-header-cell *matHeaderCellDef>วันที่ประกาศผล</th>
-            <td mat-cell *matCellDef="let element">
-              {{ element.announceDate }}
-            </td>
-          </ng-container>
+            <ng-container matColumnDef="announceDate">
+              <th mat-header-cell *matHeaderCellDef class="table__header">
+                วันที่ประกาศผล
+              </th>
+              <td mat-cell *matCellDef="let element" class="table__detail">
+                {{ element.announceDate }}
+              </td>
+            </ng-container>
 
-          <ng-container matColumnDef="endDate">
-            <th mat-header-cell *matHeaderCellDef>วันที่สิ้นสุด</th>
-            <td mat-cell *matCellDef="let element">{{ element.endDate }}</td>
-          </ng-container>
+            <ng-container matColumnDef="endDate">
+              <th mat-header-cell *matHeaderCellDef class="table__header">
+                วันที่สิ้นสุด
+              </th>
+              <td mat-cell *matCellDef="let element" class="table__detail">
+                {{ element.endDate }}
+              </td>
+            </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-        </table>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </div>
       </div>
     </div>
   </div>

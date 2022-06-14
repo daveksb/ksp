@@ -18,7 +18,7 @@ export class HomeComponent {
   constructor(private router: Router, public dialog: MatDialog) {}
 
   cancel() {
-    this.router.navigate(['/', '']);
+    this.router.navigate(['/', 'degree-cert']);
   }
 
   save() {

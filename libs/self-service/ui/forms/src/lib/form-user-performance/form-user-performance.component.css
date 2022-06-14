@@ -6,7 +6,9 @@
 
 .content__container {
   display: grid;
-  grid-template-columns: 15% auto;
+  grid-template-columns: 30% 1fr;
+  grid-column-gap: 32px;
+  margin: 0 18px;
 }
 
 .content__container-2 {
@@ -21,20 +23,45 @@
   padding-bottom: 8px;
   text-align: center;
   background-color: #edf8ff;
+  white-space: nowrap;
 }
 
-.table__container {
-  background-color: #e5e5e5;
-  margin: 0 20px;
+.table {
+  background-color: #fff;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.table > :not(:first-child) {
+  border-top: 0;
 }
 
 tr.mat-header-row {
   background-color: #edf8ff;
 }
 
+.table__header {
+  padding: 8px;
+}
+
+.table__detail {
+  padding: 8px;
+}
+
 @media only screen and (max-width: 768px) {
-  .btn-upload {
-    padding: 4px 12px;
+  .content__container {
     display: flex;
+    flex-direction: column;
+  }
+
+  .table__header {
+    padding: 16px;
+  }
+
+  .table__detail {
+    padding: 16px;
+  }
+  .table {
+    margin-top: 24px;
   }
 }

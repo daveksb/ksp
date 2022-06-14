@@ -17,7 +17,7 @@
 </mat-accordion>
 
 <div class="tab-container">
-  <mat-tab-group class="tab-group" animationDuration="0ms" [selectedIndex]="2">
+  <mat-tab-group class="tab-group" animationDuration="0ms" [selectedIndex]="0">
     <mat-tab label="ที่อยู่" class="tab-content">
       <ksp-form-address>ที่อยู่ทะเบียนบ้าน</ksp-form-address>
       <ksp-form-address
@@ -38,6 +38,7 @@
     </mat-tab>
     <mat-tab label="ข้อมูลทางการศึกษา">
       <self-service-form-user-education></self-service-form-user-education>
+      <hr />
       <ksp-form-attachment
         [title]="'กรุณาแนบหลักฐานประกอบวุฒิทางการศึกษา'"
         [groups]="educationFiles"
@@ -45,6 +46,7 @@
     </mat-tab>
     <mat-tab label="ข้อมูลประสบการณ์วิชาชีพ">
       <self-service-form-user-experience></self-service-form-user-experience>
+      <hr />
       <ksp-form-attachment
         [title]="'กรุณาแนบหลักฐานประกอบการฝึกประสบการณ์วิชาชีพ'"
         [groups]="experienceFiles"
@@ -52,14 +54,11 @@
     </mat-tab>
     <mat-tab label="ข้อมูลผลการประเมินสมรรถนะ">
       <self-service-form-user-performance></self-service-form-user-performance>
-      <br />
-      <div class="content__container">
-        <div></div>
-        <ksp-form-attachment
-          title=" "
-          [groups]="['สำเนาผลการทดสอบ']"
-        ></ksp-form-attachment>
-      </div>
+
+      <ksp-form-attachment
+        title="กรุณาแนบหลักฐาน"
+        [groups]="['สำเนาผลการทดสอบ']"
+      ></ksp-form-attachment>
     </mat-tab>
   </mat-tab-group>
 

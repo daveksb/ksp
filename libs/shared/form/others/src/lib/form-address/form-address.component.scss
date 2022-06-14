@@ -27,12 +27,12 @@
 }
 
 .form-control-sm {
-  font-size: 18px;
+  font-size: 16px;
   color: #000000;
 }
 
 .form-select-sm {
-  font-size: 18px;
+  font-size: 16px;
   color: #000000;
 }
 
@@ -40,4 +40,21 @@
   background-color: #fff;
   background-image: url(/assets/images/arrow-down-icon.png);
   background-size: 12px;
+}
+
+/* mobile */
+@media only screen and (max-width: 768px) {
+  .content__container {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+  }
+
+  .form__header {
+    margin: 0;
+  }
+
+  .form__container {
+    background-color: #fff;
+  }
 }
