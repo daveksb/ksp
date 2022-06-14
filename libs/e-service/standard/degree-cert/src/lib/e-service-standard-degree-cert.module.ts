@@ -1,11 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DegreeCertListComponent } from './degree-cert-list/degree-cert-list.component';
-import { StepOneComponent } from './step-one/step-one.component';
-import { StepTwoComponent } from './step-two/step-two.component';
-import { StepThreeComponent } from './step-three/step-three.component';
-import { StepFourComponent } from './step-four/step-four.component';
-import { StepFiveComponent } from './step-five/step-five.component';
+import { DegreeCertListComponent } from './list/list.component';
 import { EServiceUiLicenseCheckModule } from '@ksp/e-service/ui/license-check';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -18,6 +13,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { EServiceStandardDegreeCertRoutingModule } from './e-service-standard-degree-cert-routing.module';
 import { SharedFormDegreeCertSearchModule } from '@ksp/shared/form/degree-cert/search';
+import { CheckComponent } from './check/check.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatStepperModule } from '@angular/material/stepper';
+import { SharedFormDegreeCertStepOneModule } from '@ksp/shared/form/degree-cert/step-one';
 
 @NgModule({
   imports: [
@@ -31,25 +30,22 @@ import { SharedFormDegreeCertSearchModule } from '@ksp/shared/form/degree-cert/s
     SharedFeatureDegreeCertModule,
     SharedUiBottomMenuModule,
     SharedFormDegreeCertSearchModule,
+    SharedFeatureDegreeCertModule,
+    SharedFormDegreeCertStepOneModule,
+    //UniServiceUiFormsModule,
+    MatStepperModule,
+    MatTabsModule,
+    //SharedFormDegreeCertStepThreeModule,
   ],
   declarations: [
     DegreeCertListComponent,
-    StepOneComponent,
-    StepTwoComponent,
-    StepThreeComponent,
-    StepFourComponent,
-    StepFiveComponent,
     VerifyComponent,
     ConsiderComponent,
     ApproveComponent,
+    CheckComponent,
   ],
   exports: [
     DegreeCertListComponent,
-    StepOneComponent,
-    StepTwoComponent,
-    StepThreeComponent,
-    StepFourComponent,
-    StepFiveComponent,
     VerifyComponent,
     ConsiderComponent,
     ApproveComponent,

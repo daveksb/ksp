@@ -5,8 +5,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'e-service-degree-cert-list',
-  templateUrl: './degree-cert-list.component.html',
-  styleUrls: ['./degree-cert-list.component.scss'],
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.scss'],
 })
 export class DegreeCertListComponent implements OnInit {
   processType = 1;
@@ -20,8 +20,8 @@ export class DegreeCertListComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe((res) => {
-      this.processType = Number(res.get('type'));
-      //console.log('process type = ', this.processType);
+      if (res) this.processType = Number(res.get('type'));
+      console.log('process type = ', this.processType);
     });
   }
 
@@ -50,7 +50,8 @@ export class DegreeCertListComponent implements OnInit {
   }
 
   onSelect() {
-    this.router.navigate(['/', 'degree-cert', 'step-1']);
+    //this.router.navigate(['/', 'degree-cert', 'step-1']);
+    this.router.navigate(['/', 'degree-cert', 'check']);
   }
 
   onClear() {
