@@ -5,8 +5,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'e-service-degree-cert-list',
-  templateUrl: './degree-cert-list.component.html',
-  styleUrls: ['./degree-cert-list.component.scss'],
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.scss'],
 })
 export class DegreeCertListComponent implements OnInit {
   processType = 1;

@@ -4,7 +4,7 @@ import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container
 import { ApproveComponent } from './approve/approve.component';
 import { CheckComponent } from './check/check.component';
 import { ConsiderComponent } from './consider/consider.component';
-import { DegreeCertListComponent } from './degree-cert-list/degree-cert-list.component';
+import { DegreeCertListComponent } from './list/list.component';
 import { VerifyComponent } from './verify/verify.component';
 
 export const routes: Routes = [
@@ -21,12 +21,12 @@ export const routes: Routes = [
         path: 'list',
         component: DegreeCertListComponent,
       },
-      {
+      /*       {
         path: 'list/:type',
         component: DegreeCertListComponent,
-      },
+      }, */
       {
-        path: 'check',
+        path: 'check', //ตรวจสอบ
         component: CheckComponent,
       },
       {
@@ -34,11 +34,11 @@ export const routes: Routes = [
         component: VerifyComponent,
       },
       {
-        path: 'consider',
+        path: 'consider', //พิจารณา
         component: ConsiderComponent,
       },
       {
-        path: 'approve',
+        path: 'approve', //ยืนยัน
         component: ApproveComponent,
       },
     ],
