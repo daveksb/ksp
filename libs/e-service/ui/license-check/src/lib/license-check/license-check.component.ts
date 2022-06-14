@@ -7,6 +7,9 @@ import { Component, Input } from '@angular/core';
 })
 export class LicenseCheckComponent {
   @Input() reasons: string[] = [];
-  @Input() titles: string[] = [];
+  @Input() titles: string[] = [
+    'ครบถ้วน และถูกต้อง',
+    'ไม่ครบถ้วน และไม่ถูกต้อง',
+  ];
   @Input() headerTitle = 'ผลการตรวจสอบ';
 }

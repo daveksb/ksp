@@ -99,7 +99,7 @@
         <ng-container matColumnDef="print">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let element">
-            <button (click) = "onSelect()">พิมพ์ใบคำขอ</button>
+            <button (click)="onSelect()">พิมพ์ใบคำขอ</button>
           </td>
         </ng-container>
 
@@ -110,7 +110,9 @@
   </div>
 </div>
 
-<ng-container *ngIf="processType === 2 || processType === 3">
+<!-- <ng-container *ngIf="processType === 2 || processType === 3">
+ -->
+<ng-container>
   <div class="bottom__container">
     <div class="footer">
       <button (click)="consider()" class="btn-primary">

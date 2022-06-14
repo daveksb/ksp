@@ -20,8 +20,8 @@ export class DegreeCertListComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe((res) => {
-      this.processType = Number(res.get('type'));
-      //console.log('process type = ', this.processType);
+      if (res) this.processType = Number(res.get('type'));
+      console.log('process type = ', this.processType);
     });
   }
 
@@ -50,7 +50,8 @@ export class DegreeCertListComponent implements OnInit {
   }
 
   onSelect() {
-    this.router.navigate(['/', 'degree-cert', 'step-1']);
+    //this.router.navigate(['/', 'degree-cert', 'step-1']);
+    this.router.navigate(['/', 'degree-cert', 'check']);
   }
 
   onClear() {
