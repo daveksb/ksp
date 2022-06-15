@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
 })
 export class AddStaffPersonInfoComponent {
   licenseButtons = [
-    'ใบอนุญาติประกอบวิชาชีพ - ครู',
-    'ใบอนุญาติประกอบวิชาชีพ - ผู้บริหารสถานศึกษา',
+    'ใบอนุญาตประกอบวิชาชีพ - ครู',
+    'ใบอนุญาตประกอบวิชาชีพ - ผู้บริหารสถานศึกษา',
   ];
 
   constructor(private router: Router) {}

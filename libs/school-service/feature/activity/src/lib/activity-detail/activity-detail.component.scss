@@ -2,7 +2,7 @@
   background-color: #e5e5e5;
   max-width: 100%;
   padding: 0 30px;
-  padding-bottom: 50px;
+  padding-bottom: 75px;
 }
 
 .box__detail {
@@ -25,6 +25,11 @@
 .title__box {
   font-size: 22px;
   padding: 12px 0;
+}
+
+.checkbox__container {
+  display: grid;
+  grid-template-columns: 74% auto;
 }
 
 .result {
@@ -55,10 +60,6 @@
   color: #f68b33;
 }
 
-.table__container {
-  margin: 15px 125px 0;
-}
-
 .table {
   background-color: #fff;
   border: 1px solid #eceef2;
@@ -83,24 +84,16 @@
   color: #000000;
 }
 
-.table__title {
-  font-size: 18px;
-}
-
-.checkbox__container {
-  display: flex;
-  flex-direction: column;
-}
-
-.checkbox__title {
-  font-size: 18px;
-}
-
-.checkbox__label {
-  color: #656565;
-  font-size: 16px;
+.title {
+  font-size: 20px;
+  margin-bottom: 12px;
 }
 
 .remove_red_eye {
   color: #06dea9;
+}
+
+.form-select {
+  font-size: 16px;
+  color: #333333;
 }
