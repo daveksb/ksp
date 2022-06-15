@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivityListComponent } from './activity-list/activity-list.component';
 import { ActivityDetailComponent } from './activity-detail/activity-detail.component';
-import { ActivityEducationLevelComponent } from './activity-education-level/activity-education-level.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SchoolServiceContainerPageComponent } from '@ksp/school-service/feature/container-page';
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
@@ -25,7 +24,6 @@ export const routes: Routes = [
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: 'list', component: ActivityListComponent },
       { path: 'detail', component: ActivityDetailComponent },
-      { path: 'education-level', component: ActivityEducationLevelComponent },
     ],
   },
 ];
@@ -49,12 +47,10 @@ export const routes: Routes = [
   declarations: [
     ActivityListComponent,
     ActivityDetailComponent,
-    ActivityEducationLevelComponent,
   ],
   exports: [
     ActivityListComponent,
     ActivityDetailComponent,
-    ActivityEducationLevelComponent,
   ],
 })
 export class SchoolServiceFeatureActivityModule {}

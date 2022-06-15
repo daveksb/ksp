@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
   ActivityAcademicArchivementComponent,
@@ -17,6 +18,7 @@ import {
 } from '@ksp/school-service/form/activity';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
 import { DynamicComponent, ListData } from '@ksp/shared/interface';
+import { CompleteDialogComponent, ConfirmDialogComponent } from '@ksp/shared/ui/dialog';
 
 @Component({
   selector: 'ksp-activity-detail',
@@ -32,7 +34,7 @@ export class ActivityDetailComponent implements OnInit {
   @ViewChild(DynamicComponentDirective, { static: true })
   myHost!: DynamicComponentDirective;
 
-  constructor(private router: Router, private fb: FormBuilder) {}
+  constructor(private router: Router, private fb: FormBuilder, public dialog: MatDialog) {}
   addActivity = ['1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน'];
 
   ngOnInit(): void {
@@ -49,8 +51,41 @@ export class ActivityDetailComponent implements OnInit {
     viewContainerRef.createComponent<DynamicComponent>(componentList[index]);
   }
 
-  next() {
-    this.router.navigate(['./', 'activity', 'education-level']);
+  cancel() {
+    this.router.navigate(['./', 'activity', 'list']);
+  }
+
+  save() {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
+        btnLabel: 'ตกลง',
+      },
+    });
+
+    confirmDialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.onCompleted();
+      }
+    });
+  }
+
+  onCompleted() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      width: '350px',
+      data: {
+        header: `ยืนยันข้อมูลสำเร็จ`,
+
+        buttonLabel: 'กลับสู่หน้าหลัก',
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/', 'activity']);
+      }
+    });
   }
 }
 
@@ -66,7 +101,7 @@ const componentList = [
   ActivityRewardComponent,
   ActivityLectureRegisterComponent,
   ActivityStudyTourComponent,
-  ActivityLearningMaterialComponent
+  ActivityLearningMaterialComponent,
 ];
 
 const activityTypes = [

@@ -72,4 +72,8 @@ export class UniversitySearchComponent implements OnInit {
   search() {
     this.data = data;
   }
+
+  clear() {
+    this.data = [];
+  }
 }
