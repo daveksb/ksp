@@ -1,8 +1,7 @@
 .check__form {
-  margin: 25px 60px;
-  background: #ffffff;
+  background: #f9f9fa;
   border-radius: 5px;
-  padding: 24px;
+  padding: 12px;
 }
 
 .bottom__container {
@@ -16,4 +15,39 @@
 
 .result__container {
   display: flex;
+}
+
+.page__container {
+  background-color: #e5e5e5;
+  padding: 0 48px;
+  padding-bottom: 100px;
+}
+
+.page__header {
+  font-size: 22px;
+  padding: 12px 0;
+}
+
+.content__header {
+  display: flex;
+}
+
+.label__content {
+  font-size: 18px;
+  color: #808080;
+  margin-right: 24px;
+}
+
+.label__content--primary {
+  color: #f68b33;
+}
+
+.label__content--secondary {
+  color: #0056ff;
+}
+
+.content__container {
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 24px;
 }

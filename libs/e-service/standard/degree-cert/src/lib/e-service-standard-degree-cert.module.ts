@@ -17,6 +17,7 @@ import { CheckComponent } from './check/check.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatStepperModule } from '@angular/material/stepper';
 import { SharedFormDegreeCertStepOneModule } from '@ksp/shared/form/degree-cert/step-one';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import { SharedFormDegreeCertStepOneModule } from '@ksp/shared/form/degree-cert/
     MatStepperModule,
     MatTabsModule,
     //SharedFormDegreeCertStepThreeModule,
+    MatIconModule
   ],
   declarations: [
     DegreeCertListComponent,

@@ -21,10 +21,10 @@ export const routes: Routes = [
         path: 'list',
         component: DegreeCertListComponent,
       },
-      /*       {
+      {
         path: 'list/:type',
         component: DegreeCertListComponent,
-      }, */
+      },
       {
         path: 'check', //ตรวจสอบ
         component: CheckComponent,
