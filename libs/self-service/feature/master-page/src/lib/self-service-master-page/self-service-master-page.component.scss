@@ -4,6 +4,10 @@
   grid-template-columns: 237px auto;
 }
 
+.top__menu {
+  z-index: 9;
+}
+
 @media (max-width: 1200px) {
   .wrapper {
     display: grid;
@@ -11,6 +15,12 @@
   }
 
   .side__menu {
+    display: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  .top__menu {
     display: none;
   }
 }
