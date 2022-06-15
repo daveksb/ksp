@@ -29,7 +29,6 @@ import { SharedFormEducationLevelModule } from '@ksp/shared/form/education-level
     SharedFormOthersModule,
     MatListModule,
     SharedDirectiveModule,
-    ReactiveFormsModule,
     SharedFormEducationLevelModule,
   ],
   declarations: [

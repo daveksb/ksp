@@ -14,11 +14,11 @@ import { DynamicComponent, ListData } from '@ksp/shared/interface';
   templateUrl: './form-user-education.component.html',
   styleUrls: ['./form-user-education.component.css'],
 })
-
 export class FormUserEducationComponent implements OnInit {
   educationForm = this.fb.group({
     educationType: [''],
   });
+
   educationTypes: ListData[] = [];
   @ViewChild(DynamicComponentDirective, { static: true })
   myHost!: DynamicComponentDirective;

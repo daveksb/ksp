@@ -93,7 +93,8 @@
 }
 
 .checkbox__title {
-  font-size: 18px;
+  font-size: 20px;
+  margin-bottom: 12px;
 }
 
 .checkbox__label {
@@ -103,4 +104,9 @@
 
 .remove_red_eye {
   color: #06dea9;
+}
+
+.form-select {
+  font-size: 16px;
+  color: #333333;
 }

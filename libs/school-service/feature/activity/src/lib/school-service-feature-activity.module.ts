@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-info';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { SharedDirectiveModule } from '@ksp/shared/directive';
 
 export const routes: Routes = [
   {
@@ -43,6 +44,7 @@ export const routes: Routes = [
     MatTableModule,
     MatIconModule,
     EServiceUiAccusationInfoModule,
+    SharedDirectiveModule
   ],
   declarations: [
     ActivityListComponent,
