@@ -2,9 +2,10 @@
   <div class="container-fluid">
     <div class="label">
       <ng-content select="[header]"></ng-content>
-      <span> > </span>
-      <span class="label label--secondary">
-        <ng-content select="[subHeader]"></ng-content>
+
+      <span *ngIf="ref.children.length"> > </span>
+      <span #ref class="label label--secondary">
+        <ng-content select="[subHeader]" #test></ng-content>
       </span>
     </div>
     <div class="user__info">
