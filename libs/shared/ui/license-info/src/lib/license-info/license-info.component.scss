@@ -1,7 +1,5 @@
 .main__container {
-  display: grid;
-  grid-template-columns: 20% 15% auto;
-  grid-column-gap: 32px;
+  display: flex;
 }
 
 .img__container {
@@ -17,6 +15,7 @@
 .title {
   color: #656565;
   font-size: 16px;
+  margin: 0 48px;
 }
 
 .data {
