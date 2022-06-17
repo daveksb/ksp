@@ -53,11 +53,11 @@ export const data: AccusationList[] = [
 ];
 
 @Component({
-  selector: 'e-service-ethic-accusation-list',
-  templateUrl: './accusation-list.component.html',
-  styleUrls: ['./accusation-list.component.scss'],
+  selector: 'ksp-list-page',
+  templateUrl: './list-page.component.html',
+  styleUrls: ['./list-page.component.scss'],
 })
-export class AccusationListComponent{
+export class ListPageComponent implements OnInit {
   mode: Mode = null;
   dataSource = new MatTableDataSource<AccusationList>();
   displayedColumns: string[] = [
@@ -70,13 +70,13 @@ export class AccusationListComponent{
 
   constructor(public router: Router, private route: ActivatedRoute) {}
 
-/*   ngOnInit(): void {
-    this.route?.parent?.url.subscribe((urlPath) => {
-      this.mode = urlPath[urlPath.length - 1].path as Mode;
-    });
-
-    this.dataSource.data = [];
-  } */
+  ngOnInit(): void {
+    /* this.route.data.subscribe((data) => {
+      this.mode = data['type'];
+      console.log('mode = ', data);
+    }); */
+    this.route.firstChild.data.subscribe
+  }
 
   onSubmit(submitType: boolean) {
     if (submitType) {
@@ -89,16 +89,6 @@ export class AccusationListComponent{
   add() {
     this.router.navigate(['/', 'ethics', 'accusation', 'detail']);
   }
-
-  /* next() {
-    if (this.mode === 'accusation') {
-      this.router.navigate(['/', 'ethics', 'accusation', 'detail']);
-    } else if (this.mode === 'investigation') {
-      this.router.navigate(['/', 'ethics', 'investigation', 'detail']);
-    } else if (this.mode === 'inquiry') {
-      this.router.navigate(['/', 'ethics', 'inquiry', 'detail']);
-    } else this.router.navigate(['/', 'publish', 'detail']);
-  } */
 
   next() {
     this.router.navigate(['/', 'accusation', 'detail']);

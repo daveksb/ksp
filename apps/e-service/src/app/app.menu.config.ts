@@ -6,18 +6,18 @@ export const ethicsMenu: MenuConfig[] = [
     label: 'การกล่าวหา/กล่าวโทษ',
     path: '',
     isExpanded: true,
-    subMenuName: 'accusation',
+    subMenuName: 'ethics',
     subMenu: [
       {
-        path: 'ethics/accusation',
+        path: 'accusation',
         label: 'บันทีกการกล่าวหา/กล่าวโทษ',
       },
       {
-        path: 'ethics/investigation',
+        path: 'investigation',
         label: 'บันทีกการสืบสวนข้อเท็จจริง',
       },
       {
-        path: 'ethics/inquiry',
+        path: 'inquiry',
         label: 'บันทีกการสอบสวน',
       },
     ],

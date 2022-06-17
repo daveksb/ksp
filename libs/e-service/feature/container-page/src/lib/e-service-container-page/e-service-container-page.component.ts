@@ -17,6 +17,7 @@ export class EServiceContainerPageComponent implements OnInit {
     this.route.data.subscribe((data) => {
       this.menuConfig = data['menuConfig'];
       this.headerLabel = data['headerLabel'];
+      //console.log('data = ', data);
     });
   }
 }

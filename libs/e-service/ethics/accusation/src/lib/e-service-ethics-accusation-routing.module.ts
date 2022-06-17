@@ -1,21 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccusationSearchComponent } from '@ksp/e-service/dialog/accusation-search';
-import { InquiryDetailComponent, InquiryResultComponent } from '@ksp/e-service/ethics/inquiry';
-import { InvestigationDetailComponent } from '@ksp/e-service/ethics/investigation';
+import { ListPageComponent } from '@ksp/e-service/ethics/list-page';
+//import { InquiryDetailComponent, InquiryResultComponent } from '@ksp/e-service/ethics/inquiry';
+//import { InvestigationDetailComponent } from '@ksp/e-service/ethics/investigation';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { AccusationDecisionComponent } from './accusation-decision/accusation-decision.component';
-import { AccusationListComponent } from './accusation-list/accusation-list.component';
+//import { AccusationListComponent } from './accusation-list/accusation-list.component';
 import { AccusationRecordComponent } from './accusation-record/accusation-record.component';
 
 export const routes: Routes = [
   {
-    path: 'accusation', // กล่าวหา
+    data: {
+      type: 'accusation',
+    },
+    path: '', // กล่าวหา
     component: EServiceContainerPageComponent,
     children: [
       {
         path: 'list',
-        component: AccusationListComponent,
+        component: ListPageComponent,
       },
       {
         path: 'detail',
@@ -37,7 +41,7 @@ export const routes: Routes = [
       },
     ],
   },
-  {
+  /*   {
     path: 'investigation', // สืบสวน
     component: EServiceContainerPageComponent,
     children: [
@@ -55,8 +59,8 @@ export const routes: Routes = [
         pathMatch: 'full',
       },
     ],
-  },
-  {
+  }, */
+  /* {
     path: 'inquiry', // สอบสวน
     component: EServiceContainerPageComponent,
     children: [
@@ -78,8 +82,7 @@ export const routes: Routes = [
         pathMatch: 'full',
       },
     ],
-  },
-
+  }, */
 ];
 
 @NgModule({

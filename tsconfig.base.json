@@ -42,6 +42,9 @@
       "@ksp/e-service/ethics/investigation": [
         "libs/e-service/ethics/investigation/src/index.ts"
       ],
+      "@ksp/e-service/ethics/list-page": [
+        "libs/e-service/ethics/list-page/src/index.ts"
+      ],
       "@ksp/e-service/ethics/publish": [
         "libs/e-service/ethics/publish/src/index.ts"
       ],
