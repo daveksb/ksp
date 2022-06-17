@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'ksp-request-header-info',
@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   standalone: true,
 })
 export class RequestHeaderInfoComponent implements OnInit {
+  @Input() requestDate = '';
+  @Input() requestNumber = '';
+
   constructor() {}
 
   ngOnInit(): void {}
