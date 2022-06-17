@@ -5,6 +5,7 @@ import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container
 import { InvestigationDetailComponent } from './investigation-detail/investigation-detail.component';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import { ListPageComponent } from '@ksp/e-service/ethics/list-page';
+import { MatDialogModule } from '@angular/material/dialog';
 
 export const routes: Routes = [
   {
@@ -33,6 +34,7 @@ export const routes: Routes = [
     CommonModule,
     SharedUiBottomMenuModule,
     RouterModule.forChild(routes),
+    MatDialogModule,
   ],
   declarations: [InvestigationDetailComponent],
   exports: [InvestigationDetailComponent],

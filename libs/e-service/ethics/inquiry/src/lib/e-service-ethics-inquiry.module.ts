@@ -6,10 +6,11 @@ import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container
 import { InquiryDetailComponent } from './inquiry-detail/inquiry-detail.component';
 import { InquiryResultComponent } from './inquiry-result/inquiry-result.component';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
+import { ListPageComponent } from '@ksp/e-service/ethics/list-page';
 
 export const routes: Routes = [
   {
-    path: 'inquiry', // สอบสวน
+    path: '', // สอบสวน
     component: EServiceContainerPageComponent,
     children: [
       {
@@ -19,20 +20,22 @@ export const routes: Routes = [
       },
       {
         path: 'list',
-        component: PageNotFoundComponent,
+        component: ListPageComponent,
       },
       {
         path: 'detail',
-        component: PageNotFoundComponent,
+        component: InquiryDetailComponent,
       },
-
-
     ],
   },
 ];
 
 @NgModule({
-  imports: [CommonModule, SharedUiBottomMenuModule ,RouterModule.forChild(routes)],
+  imports: [
+    CommonModule,
+    SharedUiBottomMenuModule,
+    RouterModule.forChild(routes),
+  ],
   declarations: [InquiryDetailComponent, InquiryResultComponent],
   exports: [InquiryDetailComponent, InquiryResultComponent],
 })

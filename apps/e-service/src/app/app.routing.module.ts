@@ -57,7 +57,11 @@ const routes: Routes = [
   },
   {
     path: 'inquiry',
-    data: { menuConfig: ethicsMenu, headerLabel: 'ระบบงานจรรยาบรรณ' },
+    data: {
+      type: 'inquiry',
+      menuConfig: ethicsMenu,
+      headerLabel: 'ระบบงานจรรยาบรรณ',
+    },
     loadChildren: () =>
       import('@ksp/e-service/ethics/inquiry').then(
         (m) => m.EServiceEthicsInquiryModule

@@ -75,7 +75,10 @@ export class ListPageComponent implements OnInit {
       this.mode = data['type'];
       console.log('mode = ', data);
     }); */
-    this.route.firstChild.data.subscribe
+    this.route.parent?.data.subscribe((res) => {
+      this.mode = res['type'];
+      console.log('mode = ', this.mode);
+    });
   }
 
   onSubmit(submitType: boolean) {
@@ -87,10 +90,10 @@ export class ListPageComponent implements OnInit {
   }
 
   add() {
-    this.router.navigate(['/', 'ethics', 'accusation', 'detail']);
+    this.router.navigate(['/', 'accusation', 'detail']);
   }
 
   next() {
-    this.router.navigate(['/', 'accusation', 'detail']);
+    this.router.navigate(['/', this.mode, 'detail']);
   }
 }
