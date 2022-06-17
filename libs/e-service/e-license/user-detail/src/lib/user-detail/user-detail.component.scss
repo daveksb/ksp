@@ -4,25 +4,9 @@
   grid-column-gap: 18px;
 }
 
-.detail__content-primary {
-  display: grid;
-  grid-template-columns: 25% 1fr;
-}
-
-.detail__content--secondary {
-  display: grid;
-  grid-template-columns: 150px 1fr 1fr;
-  grid-column-gap: 18px;
-}
-
 .form-label {
   font-size: 18px;
   color: #656565;
-}
-
-.form-control {
-  background-color: #fff;
-  font-size: 18px;
 }
 
 .form-select {

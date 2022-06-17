@@ -26,7 +26,6 @@ export class ForeignLicenseDetailComponent implements OnInit {
 
   onConfirmed() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      height: '175px',
       width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูล
