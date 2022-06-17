@@ -87,9 +87,16 @@ a[data-bs-toggle='collapse'] {
 .dropdown-toggle::after {
   display: block;
   position: absolute;
-  top: 50%;
+  top: 45%;
   right: 20px;
-  transform: translateY(-50%);
+}
+
+.dropdown-toggle.collapsed::after {
+  display: block;
+  position: absolute;
+  top: 45%;
+  right: 20px;
+  transform: rotate(-180deg);
 }
 
 ul ul a {

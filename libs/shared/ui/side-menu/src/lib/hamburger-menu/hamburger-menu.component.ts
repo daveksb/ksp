@@ -1,14 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-
-export interface MenuConfig2 {
-  icon?: string;
-  label: string;
-  path: string;
-  params?: any;
-  subMenu?: MenuConfig2[];
-  subMenuName?: string;
-  isExpanded?: boolean;
-}
+import { MenuConfig } from '../side-menu/side-menu.component';
 
 @Component({
   selector: 'ksp-hamburger-menu',
@@ -16,7 +7,7 @@ export interface MenuConfig2 {
   styleUrls: ['./hamburger-menu.component.scss'],
 })
 export class HamburgerMenuComponent {
-  @Input() menuConfig: MenuConfig2[] = [];
+  @Input() menuConfig: MenuConfig[] = [];
   @Input() showHeader = false;
 
   /**
