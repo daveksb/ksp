@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { FormMode } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -12,9 +13,11 @@ import {
   styleUrls: ['./step-four.component.css'],
 })
 export class DegreeCertStepFourComponent {
+  @Input() mode: FormMode = 'edit';
+
   constructor(public dialog: MatDialog, private router: Router) {}
 
-  degreeCertFiles = [
+  uploadFiles = [
     'สำเนาใบอนุญาตปฏิบัติการสอน (transcript)',
     'สำเนาใบประเมินการปฎิบัติการสอนในสถานศึกษา',
     'สำเนาหนังสือนำส่งแบบประเมินฉบับจริง',
@@ -23,14 +26,6 @@ export class DegreeCertStepFourComponent {
     'สำเนาคำสั่งแต่งตั้งปฏิบัติหน้าที่',
     'สำเนาสัญญาจ้างหรือทะเบียนประวัติหรือหลักฐานการขอปฏิบัติการสอน',
   ];
-
-  back() {
-    this.router.navigate(['/', 'degree-cert', 'step-3']);
-  }
-
-  cancel() {
-    this.router.navigate(['/', 'degree-cert']);
-  }
 
   openDialog() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
