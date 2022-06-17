@@ -176,6 +176,9 @@
       "@ksp/shared/ui/page-not-found": [
         "libs/shared/ui/page-not-found/src/index.ts"
       ],
+      "@ksp/shared/ui/request-header-info": [
+        "libs/shared/ui/request-header-info/src/index.ts"
+      ],
       "@ksp/shared/ui/side-menu": ["libs/shared/ui/side-menu/src/index.ts"],
       "@ksp/shared/ui/top-nav": ["libs/shared/ui/top-nav/src/index.ts"],
       "@ksp/uni-service/feature/container-page": [
