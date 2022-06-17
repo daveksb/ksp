@@ -16,7 +16,6 @@
           <select
             [disabled]="pageType === 2"
             class="form-select form-select-sm"
-            aria-label=".form-select-sm example"
           >
             <option selected>กรุณาเลือก</option>
             <option value="1">One</option>
@@ -30,7 +29,6 @@
           <select
             [disabled]="pageType === 2"
             class="form-select form-select-sm"
-            aria-label=".form-select-sm example"
           >
             <option selected>กรุณาเลือก</option>
             <option value="1">One</option>
@@ -42,11 +40,7 @@
 
       <div class="mb-3">
         <label class="form-label">ที่อยู่</label>
-        <select
-          [disabled]="pageType === 2"
-          class="form-select form-select-sm"
-          aria-label=".form-select-sm example"
-        >
+        <select [disabled]="pageType === 2" class="form-select form-select-sm">
           <option selected>กรุณาเลือก</option>
           <option value="1">One</option>
           <option value="2">Two</option>

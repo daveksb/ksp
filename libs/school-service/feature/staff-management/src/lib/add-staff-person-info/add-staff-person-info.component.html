@@ -34,10 +34,7 @@
           <label for="exampleFormControlInput1" class="form-label"
             >คำนำหน้าชื่อภาษาไทย</label
           >
-          <select
-            class="form-select form-select-sm"
-            aria-label=".form-select-sm example"
-          >
+          <select class="form-select form-select-sm">
             <option selected>กรุณาเลือก</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -63,10 +60,7 @@
           <label for="exampleFormControlInput1" class="form-label"
             >คำนำหน้าชื่อภาษาอังกฤษ</label
           >
-          <select
-            class="form-select form-select-sm"
-            aria-label=".form-select-sm example"
-          >
+          <select class="form-select form-select-sm">
             <option selected>กรุณาเลือก</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -90,10 +84,7 @@
       <div class="detail__container--half">
         <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label">เพศ</label>
-          <select
-            class="form-select form-select-sm"
-            aria-label=".form-select-sm example"
-          >
+          <select class="form-select form-select-sm">
             <option selected>กรุณาเลือก</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -129,7 +120,9 @@
         <div class="license__label-2">1234567890</div>
       </div>
 
-      <ksp-license-type-button-group [groups]="licenseButtons"></ksp-license-type-button-group>
+      <ksp-license-type-button-group
+        [groups]="licenseButtons"
+      ></ksp-license-type-button-group>
 
       <div class="result">
         <div class="result__item">
