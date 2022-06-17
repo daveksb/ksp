@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RequesterInfoComponent } from './requester-info/requester-info.component';
 import { CoordinatorInfoComponent } from './coordinator-info/coordinator-info.component';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
+import { FormRequesterInfoComponent } from '@ksp/shared/form/school/register';
 
 export const routes: Routes = [
   {
@@ -36,12 +37,12 @@ export const routes: Routes = [
     MatIconModule,
     MatCheckboxModule,
     RequestHeaderInfoComponent,
+    FormRequesterInfoComponent,
   ],
   declarations: [
     CurrentUserComponent,
     RequesterInfoComponent,
     CoordinatorInfoComponent,
   ],
-  exports: [CurrentUserComponent],
 })
 export class SchoolServiceFeatureRegisterModule {}

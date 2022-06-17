@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'school-service-register',
   templateUrl: './requester-info.component.html',
   styleUrls: ['./requester-info.component.scss'],
 })
@@ -25,7 +24,7 @@ export class RequesterInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.grantFormGroup.valueChanges.subscribe((res) => {
-      console.log('res = ', res);
+      //console.log('res = ', res);
     });
   }
 

@@ -52,6 +52,7 @@
     "shared-form-degree-cert-step-two": "libs/shared/form/degree-cert/step-two",
     "shared-form-education-level": "libs/shared/form/education-level",
     "shared-form-others": "libs/shared/form/others",
+    "shared-form-school-register": "libs/shared/form/school/register",
     "shared-form-teacher-info": "libs/shared/form/teacher-info",
     "shared-form-uni-course-form": "libs/shared/form/uni-course-form",
     "shared-form-university-search": "libs/shared/form/university-search",
