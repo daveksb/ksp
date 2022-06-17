@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RegisterComponent } from './register/register.component';
-import { AuthorComponent } from './author/author.component';
 import { RouterModule, Routes } from '@angular/router';
 import { UniServiceUiNavModule } from '@ksp/uni-service/ui/nav';
 import { CurrentUserComponent } from './current-user/current-user.component';
@@ -9,6 +7,13 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
+import { RequesterInfoComponent } from './requester-info/requester-info.component';
+import { CoordinatorInfoComponent } from './coordinator-info/coordinator-info.component';
+import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
+import {
+  FormCoordinatorInfoComponent,
+  FormRequesterInfoComponent,
+} from '@ksp/shared/form/school/register';
 
 export const routes: Routes = [
   {
@@ -16,12 +21,12 @@ export const routes: Routes = [
     component: CurrentUserComponent,
   },
   {
-    path: 'register',
-    component: RegisterComponent,
+    path: 'requester-info',
+    component: RequesterInfoComponent,
   },
   {
-    path: 'author',
-    component: AuthorComponent,
+    path: 'coordinator-info',
+    component: CoordinatorInfoComponent,
   },
 ];
 
@@ -34,8 +39,14 @@ export const routes: Routes = [
     ReactiveFormsModule,
     MatIconModule,
     MatCheckboxModule,
+    RequestHeaderInfoComponent,
+    FormRequesterInfoComponent,
+    FormCoordinatorInfoComponent,
   ],
-  declarations: [RegisterComponent, AuthorComponent, CurrentUserComponent],
-  exports: [RegisterComponent, AuthorComponent, CurrentUserComponent],
+  declarations: [
+    CurrentUserComponent,
+    RequesterInfoComponent,
+    CoordinatorInfoComponent,
+  ],
 })
 export class SchoolServiceFeatureRegisterModule {}

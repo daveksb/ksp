@@ -4,6 +4,11 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { EServiceUiLicenseCheckModule } from '@ksp/e-service/ui/license-check';
 import { MatDialogModule } from '@angular/material/dialog';
+import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
+import {
+  FormCoordinatorInfoComponent,
+  FormRequesterInfoComponent,
+} from '@ksp/shared/form/school/register';
 
 @NgModule({
   imports: [
@@ -11,6 +16,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     SharedFormOthersModule,
     EServiceUiLicenseCheckModule,
     MatDialogModule,
+    RequestHeaderInfoComponent,
+    FormRequesterInfoComponent,
+    FormCoordinatorInfoComponent,
   ],
   declarations: [UserDetailComponent],
   exports: [UserDetailComponent],

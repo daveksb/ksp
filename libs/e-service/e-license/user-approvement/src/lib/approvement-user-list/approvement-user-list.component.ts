@@ -1,7 +1,52 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
+@Component({
+  selector: 'ksp-approvement-user-list',
+  templateUrl: './approvement-user-list.component.html',
+  styleUrls: ['./approvement-user-list.component.scss'],
+})
+export class ApprovementUserListComponent {
+  displayedColumns: string[] = column;
+  dataSource = new MatTableDataSource<userList>();
+
+  constructor(private router: Router) {}
+
+  selectedUniversity = '';
+
+  search() {
+    this.dataSource.data = data;
+  }
+
+  clear() {
+    this.dataSource.data = [];
+  }
+
+  onItemChange(universityCode: string) {
+    this.selectedUniversity = universityCode;
+    //console.log('universityCode = ', universityCode);
+  }
+
+  goToDetail() {
+    this.router.navigate(['/user-approvement', 'detail'], {
+      queryParams: { type: 1 },
+    });
+  }
+}
+
+export const column = [
+  'id',
+  'view',
+  'order',
+  'name',
+  'phone',
+  'authorName',
+  'school',
+  'province',
+  'status',
+  'date',
+];
 export interface userList {
   id: number;
   view: string;
@@ -41,47 +86,3 @@ export const data: userList[] = [
     date: 'xx/xx/xxxx',
   },
 ];
-
-@Component({
-  selector: 'ksp-approvement-user-list',
-  templateUrl: './approvement-user-list.component.html',
-  styleUrls: ['./approvement-user-list.component.scss'],
-})
-export class ApprovementUserListComponent {
-  displayedColumns: string[] = [
-    'id',
-    'view',
-    'order',
-    'name',
-    'phone',
-    'authorName',
-    'school',
-    'province',
-    'status',
-    'date',
-  ];
-  dataSource = new MatTableDataSource<userList>();
-
-  constructor(private router: Router) {}
-
-  selectedUniversity = '';
-
-  search() {
-    this.dataSource.data = data;
-  }
-
-  clear() {
-    this.dataSource.data = [];
-  }
-
-  onItemChange(universityCode: string) {
-    this.selectedUniversity = universityCode;
-    console.log('universityCode = ', universityCode);
-  }
-
-  goToDetail() {
-    this.router.navigate(['/user-approvement', 'detail'], {
-      queryParams: { type: 1 },
-    });
-  }
-}
