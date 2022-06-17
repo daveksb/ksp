@@ -8,7 +8,9 @@
         <tr>
           <th scope="col">รายการเอกสาร</th>
           <th scope="col" class="title__table">จำนวนหน้า</th>
-          <th scope="col" class="title__table">ตรวจสอบ</th>
+          <th *ngIf="mode === 'view'" scope="col" class="title__table">
+            ตรวจสอบ
+          </th>
           <th *ngIf="mode === 'edit'" scope="col" class="title__table">
             อัพโหลด
           </th>
@@ -24,7 +26,7 @@
               </div>
             </th>
             <td class="detail__table">-</td>
-            <td class="detail__table">ดูเอกสาร</td>
+            <td *ngIf="mode === 'view'" class="detail__table">ดูเอกสาร</td>
             <td *ngIf="mode === 'edit'" class="detail__table">
               <button id="btn-upload" type="button" class="btn btn-primary">
                 + อัพโหลด
