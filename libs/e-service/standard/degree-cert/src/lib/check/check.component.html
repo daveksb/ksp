@@ -13,7 +13,12 @@
     </div>
     <hr />
 
-    <mat-stepper labelPosition="bottom" [animationDuration]="'0'" #stepper>
+    <mat-stepper
+      [selectedIndex]="2"
+      labelPosition="bottom"
+      [animationDuration]="'0'"
+      #stepper
+    >
       <mat-step>
         <ng-template matStepLabel>ข้อมูลพื้นฐาน</ng-template>
         <ksp-degree-cert-step-one
@@ -21,9 +26,7 @@
           (degreeType)="degreeType = $event"
         >
         </ksp-degree-cert-step-one>
-        <br />
         <hr />
-        <br />
         <div class="check__form">
           <e-service-license-check></e-service-license-check>
         </div>
@@ -36,9 +39,7 @@
           [formType]="degreeType"
         >
         </ksp-degree-cert-step-two>
-        <br />
         <hr />
-        <br />
         <div class="check__form">
           <e-service-license-check></e-service-license-check>
         </div>
@@ -47,9 +48,7 @@
       <mat-step>
         <ng-template matStepLabel>ด้านกระบวนการผลิต</ng-template>
         <ksp-degree-cert-step-3></ksp-degree-cert-step-3>
-        <br />
         <hr />
-        <br />
         <div class="check__form">
           <e-service-license-check></e-service-license-check>
         </div>
@@ -57,10 +56,8 @@
 
       <mat-step>
         <ng-template matStepLabel>เอกสารแนบ</ng-template>
-        <ksp-degree-cert-step-four></ksp-degree-cert-step-four>
-        <br />
+        <ksp-degree-cert-step-four mode="view"></ksp-degree-cert-step-four>
         <hr />
-        <br />
         <div class="check__form">
           <e-service-license-check></e-service-license-check>
         </div>
