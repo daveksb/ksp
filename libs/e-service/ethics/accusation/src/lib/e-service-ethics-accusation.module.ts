@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AccusationListComponent } from './accusation-list/accusation-list.component';
-import { AccusationRecordComponent } from './accusation-record/accusation-record.component';
 import { EServiceUiAccusationSearchModule } from '@ksp/e-service/ui/accusation-search';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { EServiceDialogAccusationSearchModule } from '@ksp/e-service/dialog/accusation-search';
@@ -32,15 +31,7 @@ import { SharedUiLicenseTypeButtonGroupModule } from '@ksp/shared/ui/license-typ
     SharedUiLicenseTypeButtonGroupModule,
     SharedUiBottomMenuModule,
   ],
-  declarations: [
-    AccusationListComponent,
-    AccusationRecordComponent,
-    AccusationDecisionComponent,
-  ],
-  exports: [
-    AccusationListComponent,
-    AccusationRecordComponent,
-    AccusationDecisionComponent,
-  ],
+  declarations: [AccusationListComponent, AccusationDecisionComponent],
+  exports: [AccusationListComponent, AccusationDecisionComponent],
 })
 export class EServiceEthicsAccusationModule {}

@@ -6,6 +6,9 @@ import { InvestigationDetailComponent } from './investigation-detail/investigati
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import { ListPageComponent } from '@ksp/e-service/ethics/list-page';
 import { MatDialogModule } from '@angular/material/dialog';
+import { InvestigationMainComponent } from './investigation-main/investigation-main.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { AccusationRecordComponent } from '@ksp/e-service/ethics/accusation';
 
 export const routes: Routes = [
   {
@@ -23,7 +26,7 @@ export const routes: Routes = [
       },
       {
         path: 'detail',
-        component: InvestigationDetailComponent,
+        component: InvestigationMainComponent,
       },
     ],
   },
@@ -35,8 +38,11 @@ export const routes: Routes = [
     SharedUiBottomMenuModule,
     RouterModule.forChild(routes),
     MatDialogModule,
+    MatTabsModule,
+    AccusationRecordComponent
+
   ],
-  declarations: [InvestigationDetailComponent],
-  exports: [InvestigationDetailComponent],
+  declarations: [InvestigationDetailComponent, InvestigationMainComponent],
+  exports: [InvestigationDetailComponent, InvestigationMainComponent],
 })
 export class EServiceEthicsInvestigationModule {}
