@@ -69,7 +69,11 @@ const routes: Routes = [
   },
   {
     path: 'publish',
-    data: { menuConfig: ethicsMenu, headerLabel: 'ระบบงานจรรยาบรรณ' },
+    data: {
+      type: 'publish',
+      menuConfig: ethicsMenu,
+      headerLabel: 'ระบบงานจรรยาบรรณ',
+    },
     loadChildren: () =>
       import('@ksp/e-service/ethics/publish').then(
         (m) => m.EServiceEthicsPublishModule

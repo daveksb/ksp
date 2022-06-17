@@ -2,14 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PublishReviewComponent } from './publish-review/publish-review.component';
 import { MatTabsModule } from '@angular/material/tabs';
-import { EServiceEthicsInquiryModule } from '@ksp/e-service/ethics/inquiry';
-import { EServiceEthicsInvestigationModule } from '@ksp/e-service/ethics/investigation';
-import {
-  AccusationListComponent,
-  EServiceEthicsAccusationModule,
-} from '@ksp/e-service/ethics/accusation';
+import { InvestigationDetailComponent } from '@ksp/e-service/ethics/investigation';
+import { AccusationRecordComponent } from '@ksp/e-service/ethics/accusation';
 import { RouterModule, Routes } from '@angular/router';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
+import { ListPageComponent } from '@ksp/e-service/ethics/list-page';
+import { MatDialogModule } from '@angular/material/dialog';
+import {
+  InquiryDetailComponent,
+  InquiryResultComponent,
+} from '@ksp/e-service/ethics/inquiry';
 
 export const routes: Routes = [
   {
@@ -18,7 +20,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'list',
-        component: AccusationListComponent,
+        component: ListPageComponent,
       },
       {
         path: 'detail',
@@ -38,10 +40,12 @@ export const routes: Routes = [
   imports: [
     CommonModule,
     MatTabsModule,
-    EServiceEthicsInquiryModule,
-    EServiceEthicsInvestigationModule,
-    EServiceEthicsAccusationModule,
-    RouterModule.forChild(routes)
+    MatDialogModule,
+    RouterModule.forChild(routes),
+    AccusationRecordComponent,
+    InvestigationDetailComponent,
+    InquiryDetailComponent,
+    InquiryResultComponent,
   ],
 
   declarations: [PublishReviewComponent],

@@ -1,15 +1,32 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTabsModule } from '@angular/material/tabs';
 import { Router } from '@angular/router';
+import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-info';
+import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/ui/dialog';
+import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
+import { SharedUiLicenseTypeButtonGroupModule } from '@ksp/shared/ui/license-type-button-group';
 
 @Component({
   selector: 'e-service-inquiry-result',
   templateUrl: './inquiry-result.component.html',
   styleUrls: ['./inquiry-result.component.scss'],
+  standalone: true,
+  imports: [
+    MatTabsModule,
+    CommonModule,
+    SharedUiBottomMenuModule,
+    SharedFormOthersModule,
+    SharedUiLicenseTypeButtonGroupModule,
+    EServiceUiAccusationInfoModule,
+    SharedUiLicenseInfoModule,
+  ],
 })
 export class InquiryResultComponent {
   constructor(private router: Router, public dialog: MatDialog) {}

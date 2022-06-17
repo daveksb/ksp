@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { PageNotFoundComponent } from '@ksp/shared/ui/page-not-found';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
-import { InquiryDetailComponent } from './inquiry-detail/inquiry-detail.component';
-import { InquiryResultComponent } from './inquiry-result/inquiry-result.component';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import { ListPageComponent } from '@ksp/e-service/ethics/list-page';
+import { InquiryMainComponent } from './inquiry-main/inquiry-main.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { AccusationRecordComponent } from '@ksp/e-service/ethics/accusation';
+import { InvestigationDetailComponent } from '@ksp/e-service/ethics/investigation';
+import { MatDialogModule } from '@angular/material/dialog';
+import { InquiryDetailComponent } from './inquiry-detail/inquiry-detail.component';
+import { InquiryResultComponent } from './inquiry-result/inquiry-result.component';
 
 export const routes: Routes = [
   {
@@ -24,7 +28,7 @@ export const routes: Routes = [
       },
       {
         path: 'detail',
-        component: InquiryDetailComponent,
+        component: InquiryMainComponent,
       },
     ],
   },
@@ -35,8 +39,19 @@ export const routes: Routes = [
     CommonModule,
     SharedUiBottomMenuModule,
     RouterModule.forChild(routes),
+    MatTabsModule,
+    AccusationRecordComponent,
+    InvestigationDetailComponent,
+    MatDialogModule,
+    InquiryDetailComponent,
+    InquiryResultComponent
+
   ],
-  declarations: [InquiryDetailComponent, InquiryResultComponent],
-  exports: [InquiryDetailComponent, InquiryResultComponent],
+  declarations: [
+    InquiryMainComponent,
+  ],
+  exports: [
+    InquiryMainComponent,
+  ],
 })
 export class EServiceEthicsInquiryModule {}
