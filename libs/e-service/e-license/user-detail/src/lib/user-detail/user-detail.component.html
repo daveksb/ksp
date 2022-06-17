@@ -63,92 +63,12 @@
       <div class="detail__header">
         ข้อมูลผู้ขอเข้ารหัสสำหรับเข้าใช้งานระบบ (ผู้ประสานงาน)
       </div>
-
-      <div class="detail__content-primary">
-        <div class="mb-3">
-          <label class="form-label">หมายเลขบัตรประชาชน</label>
-          <input
-            [disabled]="pageType === 2"
-            [ngClass]="{ disabled: pageType === 2 }"
-            class="form-control form-control-sm"
-            type="text"
-          />
-        </div>
-      </div>
-
-      <div class="detail__content--secondary">
-        <div class="mb-3">
-          <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
-          <select
-            [disabled]="pageType === 2"
-            [ngClass]="{ disabled: pageType === 2 }"
-            class="form-select form-select-sm"
-            aria-label=".form-select-sm example"
-          >
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">ชื่อภาษาไทย</label>
-          <input
-            [disabled]="pageType === 2"
-            [ngClass]="{ disabled: pageType === 2 }"
-            class="form-control form-control-sm"
-            type="text"
-          />
-        </div>
-        <div class="mb-3">
-          <label class="form-label">นามสกุลภาษาไทย</label>
-          <input
-            [disabled]="pageType === 2"
-            [ngClass]="{ disabled: pageType === 2 }"
-            class="form-control form-control-sm"
-            type="text"
-          />
-        </div>
-      </div>
-
-      <div class="detail__content">
-        <div class="mb-3">
-          <label class="form-label">เบอร์โทรศัพท์มือถือ</label>
-          <input
-            [disabled]="pageType === 2"
-            [ngClass]="{ disabled: pageType === 2 }"
-            class="form-control form-control-sm"
-            type="text"
-          />
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">อีเมล</label>
-          <input
-            [disabled]="pageType === 2"
-            [ngClass]="{ disabled: pageType === 2 }"
-            class="form-control form-control-sm"
-            type="text"
-          />
-        </div>
-      </div>
-
-      <div class="detail__content">
-        <div class="mb-3">
-          <label class="form-label">ตำแหน่งงาน</label>
-          <input
-            [disabled]="pageType === 2"
-            [ngClass]="{ disabled: pageType === 2 }"
-            class="form-control form-control-sm"
-            type="text"
-          />
-        </div>
-      </div>
+      <ksp-form-requester-info></ksp-form-requester-info>
     </div>
 
     <div class="form__container">
       <div class="detail__header">
-        ข้อมูลผู้ขอเข้ารหัสสำหรับเข้าใช้งานระบบ (ผู้ประสานงาน)
+        ข้อมูลผู้มีอำนาจแต่งตั้ง (ที่ระบุไว้ในเอกสารแนบ)
       </div>
 
       <div class="detail__content--secondary">
@@ -211,7 +131,11 @@
     </div>
 
     <div class="upload__content">
-      <ksp-form-attachment></ksp-form-attachment>
+      <ksp-form-attachment
+        [title]="'หลักฐานเพื่อพิจารณา'"
+        mode="view"
+        [groups]="['หนังสือแต่งตั้ง']"
+      ></ksp-form-attachment>
     </div>
   </div>
 

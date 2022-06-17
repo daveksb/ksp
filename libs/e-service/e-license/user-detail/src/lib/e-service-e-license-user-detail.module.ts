@@ -5,6 +5,7 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { EServiceUiLicenseCheckModule } from '@ksp/e-service/ui/license-check';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
+import { FormRequesterInfoComponent } from '@ksp/shared/form/school/register';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
     EServiceUiLicenseCheckModule,
     MatDialogModule,
     RequestHeaderInfoComponent,
+    FormRequesterInfoComponent,
   ],
   declarations: [UserDetailComponent],
   exports: [UserDetailComponent],
