@@ -4,16 +4,10 @@
   <div class="header">รายละเอียดใบคำขอถอดถอน (ผู้ประสานงาน / ผู้รับผิดชอบ)</div>
 
   <div class="content__container">
-    <div class="content__header">
-      <div class="label__content">
-        วันที่ทำรายการ :
-        <span class="label__content--primary">10 ตุลาคม 2565</span>
-      </div>
-      <div class="label__content">
-        เลขใบคำขอ :
-        <span class="label__content--secondary">112234467876543</span>
-      </div>
-    </div>
+    <ksp-request-header-info
+      requestDate="10 ตุลาคม 2565"
+      requestNumber="112234467876543"
+    ></ksp-request-header-info>
     <hr />
 
     <div class="detail__container">
@@ -106,7 +100,9 @@
       ></textarea>
     </div>
     <div class="button__container">
-      <button class="btn btn-outline-warning" (click)="nextPage()">ถัดไป</button>
+      <button class="btn btn-outline-warning" (click)="nextPage()">
+        ถัดไป
+      </button>
     </div>
   </div>
 </div>
