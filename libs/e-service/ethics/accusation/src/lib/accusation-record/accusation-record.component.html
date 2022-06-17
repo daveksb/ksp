@@ -192,7 +192,7 @@
       </div>
     </div>
 
-    <ksp-form-attachment></ksp-form-attachment>
+    <ksp-form-attachment [groups]="accusationFiles"></ksp-form-attachment>
   </div>
 </div>
 
@@ -200,6 +200,9 @@
   <ksp-bottom-menu
     [showCenterButtons]="true"
     [isFirstPage]="true"
+    [showTempSaveButton]="true"
+    [showCancelButton]="true"
+    [colorMode]="'green'"
     (nextClicked)="next()"
     (cancelClicked)="cancel()"
   ></ksp-bottom-menu>

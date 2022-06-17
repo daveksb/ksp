@@ -3,7 +3,10 @@ import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
 import { Router } from '@angular/router';
-import { AccusationSearchComponent, EServiceDialogAccusationSearchModule } from '@ksp/e-service/dialog/accusation-search';
+import {
+  AccusationSearchComponent,
+  EServiceDialogAccusationSearchModule,
+} from '@ksp/e-service/dialog/accusation-search';
 import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-info';
 import { EServiceUiAccusationSearchModule } from '@ksp/e-service/ui/accusation-search';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
@@ -23,10 +26,12 @@ import { SharedUiLicenseTypeButtonGroupModule } from '@ksp/shared/ui/license-typ
     SharedFormOthersModule,
     SharedUiLicenseTypeButtonGroupModule,
     EServiceUiAccusationInfoModule,
-    SharedUiLicenseInfoModule
+    SharedUiLicenseInfoModule,
   ],
 })
 export class AccusationRecordComponent {
+  accusationFiles = ['เอกสารกล่าวหา/กล่าวโทษ', 'สำเนาบัตรประชาชน'];
+
   constructor(private router: Router, public dialog: MatDialog) {}
 
   @Input() hideAllButtons = false;
@@ -34,11 +39,11 @@ export class AccusationRecordComponent {
   @Input() hideTitle = false;
 
   next() {
-    this.router.navigate(['/', 'ethics', 'accusation', 'decision']);
+    this.router.navigate(['/', 'accusation', 'decision']);
   }
 
   cancel() {
-    this.router.navigate(['/', 'ethics', 'accusation']);
+    this.router.navigate(['/', 'accusation']);
   }
 
   openSearchDialog() {

@@ -67,12 +67,13 @@
   <ksp-bottom-menu
     [showCenterButtons]="true"
     [isLastPage]="true"
+    [showSaveButton]="true"
+    [colorMode]="'green'"
+    (saveClicked)="save()"
     (cancelClicked)="cancel()"
     (prevClicked)="back()"
-    (saveClicked)="save()"
   ></ksp-bottom-menu>
 </div>
-
 
 <!-- <div class="bottom__container">
   <div class="footer">
