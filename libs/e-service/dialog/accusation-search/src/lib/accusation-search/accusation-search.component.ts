@@ -1,6 +1,35 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 
+@Component({
+  selector: 'e-service-ethic-ui-accusation-list',
+  templateUrl: './accusation-search.component.html',
+  styleUrls: ['./accusation-search.component.scss'],
+})
+export class AccusationSearchComponent {
+  personSelected = false;
+  displayedColumns: string[] = column;
+  dataSource = new MatTableDataSource<PersonLicense>();
+
+  search() {
+    this.dataSource.data = data;
+  }
+
+  clear() {
+    this.dataSource.data = [];
+  }
+}
+
+export const column = [
+  'select',
+  'view',
+  'personId',
+  'name',
+  'organization',
+  'school',
+  'province',
+];
+
 export interface PersonLicense {
   id: number;
   personId: string;
@@ -28,30 +57,3 @@ export const data: PersonLicense[] = [
     province: 'ฉะเชิงเทรา',
   },
 ];
-
-@Component({
-  selector: 'e-service-ethic-ui-accusation-list',
-  templateUrl: './accusation-search.component.html',
-  styleUrls: ['./accusation-search.component.scss'],
-})
-export class AccusationSearchComponent {
-  personSelected = false;
-  displayedColumns: string[] = [
-    'select',
-    'view',
-    'personId',
-    'name',
-    'organization',
-    'school',
-    'province',
-  ];
-  dataSource = new MatTableDataSource<PersonLicense>();
-
-  search() {
-    this.dataSource.data = data;
-  }
-
-  clear() {
-    this.dataSource.data = [];
-  }
-}
