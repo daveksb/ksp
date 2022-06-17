@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'school-service-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  templateUrl: './requester-info.component.html',
+  styleUrls: ['./requester-info.component.scss'],
 })
-export class RegisterComponent implements OnInit {
+export class RequesterInfoComponent implements OnInit {
   grantFormGroup: FormGroup;
 
   grant = {

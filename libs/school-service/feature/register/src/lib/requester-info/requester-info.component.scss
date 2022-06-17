@@ -27,12 +27,7 @@
   color: #656565;
 }
 
-.form-control {
-  background-color: #fff;
-  font-size: 18px;
-}
-
-.form-select {
+.form-select .form-control {
   background-color: #fff;
   font-size: 18px;
 }
@@ -66,35 +61,11 @@
   margin: 24px 12px;
 }
 
-.content__header {
-  display: flex;
-}
-
-.label__content {
-  font-size: 18px;
-  color: #808080;
-  margin-right: 24px;
-}
-
-.label__content--primary {
-  color: #f68b33;
-}
-
-.label__content--secondary {
-  color: #0056ff;
-}
-
 .checkbox__content {
   display: flex;
   flex-direction: column;
   line-height: 15px;
   margin: 10px 24px;
-}
-
-.checkbox {
-  height: 15px;
-  width: 15px;
-  margin-right: 5px;
 }
 
 .checkbox__label {

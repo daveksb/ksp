@@ -7,11 +7,11 @@ import {
 } from '@ksp/shared/ui/dialog';
 
 @Component({
-  selector: 'school-service--author',
-  templateUrl: './author.component.html',
-  styleUrls: ['./author.component.scss'],
+  selector: 'school-service-author',
+  templateUrl: './coordinator-info.component.html',
+  styleUrls: ['./coordinator-info.component.scss'],
 })
-export class AuthorComponent {
+export class CoordinatorInfoComponent {
   authorInfo = ['หนังสือแต่งตั้งผู้ประสานงาน', 'สำเนาบัตรประชาชน'];
 
   constructor(private router: Router, public dialog: MatDialog) {}
