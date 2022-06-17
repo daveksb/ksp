@@ -11,9 +11,7 @@
       <div class="detail__header">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
       <div class="detail__container--half">
         <div>
-          <label for="exampleFormControlInput1" class="form-label"
-            >สังกัด</label
-          >
+          <label class="form-label">สังกัด</label>
           <select class="form-select form-select-sm">
             <option selected>กรุณาเลือก</option>
             <option value="1">One</option>
@@ -24,13 +22,13 @@
       </div>
       <div class="detail__container--half">
         <div>
-          <label for="exampleFormControlInput1" class="form-label"
+          <label class="form-label"
             >รหัส{{ searchType === 'uni' ? 'มหาวิทยาลัย' : 'โรงเรียน' }}</label
           >
           <input class="form-control form-control-sm" type="text" />
         </div>
         <div>
-          <label for="exampleFormControlInput1" class="form-label"
+          <label class="form-label"
             >ชื่อ{{ searchType === 'uni' ? 'มหาวิทยาลัย' : 'โรงเรียน' }}</label
           >
           <input class="form-control form-control-sm" type="text" />
@@ -38,7 +36,7 @@
       </div>
       <div class="detail__container--half">
         <div class="detail__container">
-          <label for="exampleFormControlInput1" class="form-label"
+          <label class="form-label"
             >จังหวัด <span class="error__label">*</span>
           </label>
           <select class="form-select form-select-sm">
@@ -49,7 +47,7 @@
           </select>
         </div>
         <div class="detail__container">
-          <label for="exampleFormControlInput1" class="form-label"
+          <label class="form-label"
             >อำเภอ <span class="error__label">*</span>
           </label>
           <select class="form-select form-select-sm">
