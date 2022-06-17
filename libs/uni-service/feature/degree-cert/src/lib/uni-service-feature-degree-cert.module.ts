@@ -13,6 +13,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SharedFormDegreeCertStepThreeModule } from '@ksp/shared/form/degree-cert/step-three';
 import { SharedFormDegreeCertStepOneModule } from '@ksp/shared/form/degree-cert/step-one';
+import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
 
 const routes: Routes = [
   {
@@ -45,6 +46,7 @@ const routes: Routes = [
     MatStepperModule,
     MatTabsModule,
     SharedFormDegreeCertStepThreeModule,
+    RequestHeaderInfoComponent,
   ],
   declarations: [HomeComponent],
   exports: [HomeComponent],
