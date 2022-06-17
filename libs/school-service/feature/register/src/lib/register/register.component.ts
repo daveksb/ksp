@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent implements OnInit{
+export class RegisterComponent implements OnInit {
   grantFormGroup: FormGroup;
 
   grant = {
@@ -30,6 +30,6 @@ export class RegisterComponent implements OnInit{
   }
 
   next() {
-    this.router.navigate(['/', 'register', 'author']);
+    this.router.navigate(['/', 'register', 'coordinator-info']);
   }
 }

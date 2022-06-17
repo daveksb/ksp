@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -28,7 +28,7 @@ export class UserDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe((res) => {
       this.pageType = Number(res['type']);
-      console.log('res = ', this.pageType);
+      //console.log('res = ', this.pageType);
     });
   }
 

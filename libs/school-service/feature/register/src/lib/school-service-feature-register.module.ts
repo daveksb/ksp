@@ -16,11 +16,11 @@ export const routes: Routes = [
     component: CurrentUserComponent,
   },
   {
-    path: 'register',
+    path: 'requester-info',
     component: RegisterComponent,
   },
   {
-    path: 'author',
+    path: 'coordinator-info',
     component: AuthorComponent,
   },
 ];
