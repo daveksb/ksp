@@ -1,0 +1,17 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/shared/form/school/register/src",
+  "prefix": "ksp",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/form/school/register/**/*.ts",
+          "libs/shared/form/school/register/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

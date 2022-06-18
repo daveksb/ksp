@@ -8,6 +8,7 @@ import { UniServiceFeatureRetiredRoutingModule } from './uni-service-feature-ret
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 import { UniServiceUiNavModule } from '@ksp/uni-service/ui/nav';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
     SharedUiTopNavModule,
     UniServiceUiNavModule,
     SharedFormOthersModule,
+    RequestHeaderInfoComponent,
   ],
   declarations: [
     RetiredSearchComponent,

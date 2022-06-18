@@ -4,25 +4,9 @@
   grid-column-gap: 18px;
 }
 
-.detail__content-primary {
-  display: grid;
-  grid-template-columns: 25% 1fr;
-}
-
-.detail__content--secondary {
-  display: grid;
-  grid-template-columns: 150px 1fr 1fr;
-  grid-column-gap: 18px;
-}
-
 .form-label {
   font-size: 18px;
   color: #656565;
-}
-
-.form-control {
-  background-color: #fff;
-  font-size: 18px;
 }
 
 .form-select {
@@ -68,54 +52,15 @@
   margin: 20px;
 }
 
-.content__header {
-  display: flex;
-}
-
-.label__content {
-  font-size: 18px;
-  color: #808080;
-  margin-right: 24px;
-}
-
-.label__content--primary {
-  color: #f68b33;
-}
-
-.label__content--secondary {
-  color: #0056ff;
-}
-
 .header {
   font-size: 22px;
-}
-
-.btn {
-  font-size: 20px;
-  box-shadow: 0px 2px 4px rgba(102, 108, 139, 0.1);
-  border-radius: 1px;
-  box-sizing: border-box;
-  width: 100px;
-  height: 35px;
-  padding: 0;
-  border: 1px solid #0056ff; //default color
-  margin: 5px;
-  background: #fff; //default bg color
-}
-
-.btn-third {
-  color: #0056ff;
-}
-
-.btn-fourth {
-  background: #0056ff;
-  color: #fff;
 }
 
 .footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 8px;
 }
 
 .view__lebel {
@@ -131,3 +76,6 @@
   background-color: #ecedf3;
 }
 
+#saveButton {
+  margin-left: 10px;
+}

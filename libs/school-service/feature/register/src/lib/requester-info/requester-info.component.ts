@@ -3,11 +3,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'school-service-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  templateUrl: './requester-info.component.html',
+  styleUrls: ['./requester-info.component.scss'],
 })
-export class RegisterComponent implements OnInit{
+export class RequesterInfoComponent implements OnInit {
   grantFormGroup: FormGroup;
 
   grant = {
@@ -25,11 +24,11 @@ export class RegisterComponent implements OnInit{
 
   ngOnInit(): void {
     this.grantFormGroup.valueChanges.subscribe((res) => {
-      console.log('res = ', res);
+      //console.log('res = ', res);
     });
   }
 
   next() {
-    this.router.navigate(['/', 'register', 'author']);
+    this.router.navigate(['/', 'register', 'coordinator-info']);
   }
 }

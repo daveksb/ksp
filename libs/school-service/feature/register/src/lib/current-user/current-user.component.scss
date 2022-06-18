@@ -45,24 +45,6 @@
   font-size: 22px;
 }
 
-.content__header {
-  display: flex;
-}
-
-.label__content {
-  font-size: 18px;
-  color: #808080;
-  margin-right: 24px;
-}
-
-.label__content--primary {
-  color: #f68b33;
-}
-
-.label__content--secondary {
-  color: #0056ff;
-}
-
 .table {
   margin: 0 0;
   background-color: #fff;
@@ -102,14 +84,4 @@
 .btn__container {
   display: flex;
   justify-content: space-between;
-}
-
-.btn-next {
-  color: #f68b33;
-  border: 1px solid #f68b33;
-}
-
-.btn-next:hover {
-  background-color: #f68b33;
-  color: #fff;
 }

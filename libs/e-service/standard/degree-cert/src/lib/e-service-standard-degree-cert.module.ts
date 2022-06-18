@@ -18,6 +18,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatStepperModule } from '@angular/material/stepper';
 import { SharedFormDegreeCertStepOneModule } from '@ksp/shared/form/degree-cert/step-one';
 import { MatIconModule } from '@angular/material/icon';
+import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
 
 @NgModule({
   imports: [
@@ -33,11 +34,10 @@ import { MatIconModule } from '@angular/material/icon';
     SharedFormDegreeCertSearchModule,
     SharedFeatureDegreeCertModule,
     SharedFormDegreeCertStepOneModule,
-    //UniServiceUiFormsModule,
     MatStepperModule,
     MatTabsModule,
-    //SharedFormDegreeCertStepThreeModule,
-    MatIconModule
+    MatIconModule,
+    RequestHeaderInfoComponent,
   ],
   declarations: [
     DegreeCertListComponent,

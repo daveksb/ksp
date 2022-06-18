@@ -26,7 +26,7 @@ export class CurrentUserComponent {
   }
 
   next() {
-    this.router.navigate(['/', 'register', 'register']);
+    this.router.navigate(['/', 'register', 'requester-info']);
   }
 
   cancel() {
