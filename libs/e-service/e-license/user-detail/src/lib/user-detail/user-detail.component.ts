@@ -8,17 +8,17 @@ import {
 } from '@ksp/shared/ui/dialog';
 
 @Component({
-  selector: 'ksp-user-detail',
   templateUrl: './user-detail.component.html',
   styleUrls: ['./user-detail.component.scss'],
 })
 export class UserDetailComponent implements OnInit {
-  title = [
+  checkComponentTitles = ['ผลการตรวจสอบ', 'สถานะการใช้งาน'];
+  checkComponentChoices = [
     ['อนุมัติ', 'ไม่อนุมัติ'],
     ['ใช้งาน', 'ไม่ใช้งาน'],
   ];
 
-  pageType = 1;
+  pageType = 0;
   constructor(
     private router: Router,
     public dialog: MatDialog,
@@ -34,9 +34,9 @@ export class UserDetailComponent implements OnInit {
 
   cancel() {
     if (this.pageType === SchoolServiceUserPageType.ApproveNewUser) {
-      this.router.navigate(['/', 'user-approvement']);
+      this.router.navigate(['/', 'approve-new-user']);
     } else if (this.pageType === SchoolServiceUserPageType.ManageCurrentUser) {
-      this.router.navigate(['/', 'user-management']);
+      this.router.navigate(['/', 'manage-current-user']);
     }
   }
 
@@ -61,16 +61,17 @@ export class UserDetailComponent implements OnInit {
       width: '350px',
       data: {
         header: `บันทึกข้อมูลสำเร็จ`,
-
         buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        if (this.pageType === 1) {
+        if (this.pageType === SchoolServiceUserPageType.ApproveNewUser) {
           this.router.navigate(['/', 'user-approvement']);
-        } else if (this.pageType === 2) {
+        } else if (
+          this.pageType === SchoolServiceUserPageType.ManageCurrentUser
+        ) {
           this.router.navigate(['/', 'user-management']);
         }
       }
