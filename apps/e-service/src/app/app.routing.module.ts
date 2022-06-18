@@ -53,6 +53,7 @@ const routes: Routes = [
       menuConfig: licenseMenu,
       headerLabel:
         'ใบคำขอรหัสเข้าใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
+      headerDetail: ' > ตรวจสอบและอนุมัติใบคำขอรหัสเข้าใช้งาน',
     },
     loadChildren: () =>
       import('@ksp/e-service/e-license/user-approvement').then(

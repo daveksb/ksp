@@ -1,7 +1,58 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { SchoolServiceUserPageType } from '@ksp/shared/interface';
 
+@Component({
+  selector: 'ksp-user-list',
+  templateUrl: './user-list.component.html',
+  styleUrls: ['./user-list.component.scss'],
+})
+export class UserListComponent implements OnInit {
+  displayedColumns: string[] = column;
+  dataSource = new MatTableDataSource<userList>();
+
+  constructor(private router: Router) {}
+
+  selectedUniversity = '';
+
+  data = [];
+
+  ngOnInit(): void {
+    this.data = [];
+  }
+
+  onItemChange(universityCode: string) {
+    this.selectedUniversity = universityCode;
+    //console.log('universityCode = ', universityCode);
+  }
+
+  search() {
+    this.dataSource.data = data;
+  }
+
+  clear() {
+    this.dataSource.data = [];
+  }
+
+  goToDetail() {
+    this.router.navigate(['/', 'user-management', 'detail'], {
+      queryParams: { type: SchoolServiceUserPageType.ManageCurrentUser },
+    });
+  }
+}
+
+export const column = [
+  'id',
+  'view',
+  'ssn',
+  'name',
+  'school',
+  'province',
+  'status',
+  'approveDate',
+  'editDate',
+];
 export interface userList {
   id: number;
   view: string;
@@ -38,52 +89,3 @@ export const data: userList[] = [
     editDate: 'xx/xx/xxxx',
   },
 ];
-
-@Component({
-  selector: 'ksp-user-list',
-  templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss'],
-})
-export class UserListComponent implements OnInit {
-  displayedColumns: string[] = [
-    'id',
-    'view',
-    'ssn',
-    'name',
-    'school',
-    'province',
-    'status',
-    'approveDate',
-    'editDate',
-  ];
-  dataSource = new MatTableDataSource<userList>();
-
-  constructor(private router: Router) {}
-
-  selectedUniversity = '';
-
-  data = [];
-
-  ngOnInit(): void {
-    this.data = [];
-  }
-
-  onItemChange(universityCode: string) {
-    this.selectedUniversity = universityCode;
-    console.log('universityCode = ', universityCode);
-  }
-
-  search() {
-    this.dataSource.data = data;
-  }
-
-  clear() {
-    this.dataSource.data = [];
-  }
-
-  goToDetail() {
-    this.router.navigate(['/', 'user-management', 'detail'], {
-      queryParams: { type: 2 },
-    });
-  }
-}
