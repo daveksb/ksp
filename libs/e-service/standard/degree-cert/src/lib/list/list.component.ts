@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
+import { DegreeCertProcessType } from '@ksp/shared/interface';
 
 @Component({
   selector: 'e-service-degree-cert-list',
@@ -50,7 +51,6 @@ export class DegreeCertListComponent implements OnInit {
   }
 
   onSelect() {
-    //this.router.navigate(['/', 'degree-cert', 'step-1']);
     this.router.navigate(['/', 'degree-cert', 'check']);
   }
 
@@ -59,10 +59,20 @@ export class DegreeCertListComponent implements OnInit {
   }
 
   consider() {
-    this.router.navigate(['./', 'degree-cert', 'verify', '2']);
+    this.router.navigate([
+      './',
+      'degree-cert',
+      'verify',
+      DegreeCertProcessType.Consider,
+    ]);
   }
   approve() {
-    this.router.navigate(['./', 'degree-cert', 'verify', '3']);
+    this.router.navigate([
+      './',
+      'degree-cert',
+      'verify',
+      DegreeCertProcessType.Approve,
+    ]);
   }
 }
 

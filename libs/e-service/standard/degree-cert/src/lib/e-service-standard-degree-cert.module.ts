@@ -46,11 +46,5 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
     ApproveComponent,
     CheckComponent,
   ],
-  exports: [
-    DegreeCertListComponent,
-    VerifyComponent,
-    ConsiderComponent,
-    ApproveComponent,
-  ],
 })
 export class EServiceStandardDegreeCertModule {}
