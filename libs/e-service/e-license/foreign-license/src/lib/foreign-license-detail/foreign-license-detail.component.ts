@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -11,14 +11,10 @@ import {
   templateUrl: './foreign-license-detail.component.html',
   styleUrls: ['./foreign-license-detail.component.scss'],
 })
-export class ForeignLicenseDetailComponent implements OnInit {
-  title: string[] = [];
+export class ForeignLicenseDetailComponent {
+  choices: string[] = ['ครบถ้วน และถูกต้อง', 'ไม่ครบถ้วน และไม่ถูกต้อง'];
 
   constructor(private router: Router, public dialog: MatDialog) {}
-
-  ngOnInit(): void {
-    this.title = ['ครบถ้วน และถูกต้อง', 'ไม่ครบถ้วน และไม่ถูกต้อง'];
-  }
 
   cancel() {
     this.router.navigate(['/', 'foreign-license', 'list']);

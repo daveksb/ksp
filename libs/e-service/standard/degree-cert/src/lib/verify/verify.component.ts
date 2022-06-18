@@ -7,8 +7,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./verify.component.scss'],
 })
 export class VerifyComponent implements OnInit {
-  titlesConsider = ['ผ่านการพิจารณา', 'ไม่ผ่านการพิจารณา'];
-  titlesApprove = [
+  considerChoices = ['ผ่านการพิจารณา', 'ไม่ผ่านการพิจารณา'];
+  approveChoices = [
     'ผ่านการพิจารณา',
     'ไม่ผ่านการพิจารณา',
     'ให้สถาบันแก้ไข / เพิ่มเติม',

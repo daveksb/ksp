@@ -95,13 +95,13 @@
   <div class="check__form">
     <ng-container *ngIf="processType === 2">
       <e-service-license-check
-        [titles]="titlesConsider"
+        [choices]="considerChoices"
       ></e-service-license-check>
     </ng-container>
 
     <ng-container *ngIf="processType === 3">
       <e-service-license-check
-        [titles]="titlesApprove"
+        [choices]="approveChoices"
       ></e-service-license-check>
     </ng-container>
   </div>

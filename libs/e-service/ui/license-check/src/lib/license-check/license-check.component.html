@@ -2,7 +2,7 @@
   <div class="header-3">{{ headerTitle }}</div>
 
   <div class="content__checkbox">
-    <ng-container *ngFor="let title of titles">
+    <ng-container *ngFor="let choice of choices">
       <div class="checkbox__detail">
         <div class="form-check">
           <input
@@ -13,8 +13,8 @@
             id="flexCheckDefault"
           />
 
-          <label class="form-check-label" for="flexCheckDefault">
-            {{ title }}
+          <label class="form-check-label">
+            {{ choice }}
           </label>
         </div>
       </div>
