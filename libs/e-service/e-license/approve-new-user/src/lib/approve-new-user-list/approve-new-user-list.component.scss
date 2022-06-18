@@ -25,11 +25,6 @@
   font-size: 22px;
 }
 
-.detail__header {
-  font-size: 20px;
-  color: #0056ff;
-}
-
 .detail__container {
   margin-bottom: 16px;
 }
@@ -48,9 +43,6 @@
 
 .form-control {
   background-color: #fff;
-}
-.error__label {
-  color: red;
 }
 
 .detail__action {
@@ -83,42 +75,6 @@
 
 .table > :not(:first-child) {
   border-top: 0;
-}
-
-.header__table {
-  background-color: #edf6ff;
-  font-size: 16px;
-}
-
-.header__column {
-  width: 110px;
-}
-
-.body__table {
-  font-size: 16px;
-  color: #000000;
-}
-
-.body__detail {
-  vertical-align: middle;
-}
-
-.form-check-input:checked {
-  background-color: #f68b33;
-  border-color: #f68b33;
-}
-
-.footer {
-  display: flex;
-  justify-content: center;
-}
-
-.confirm__button {
-  width: 200px;
-}
-
-.close__dialog {
-  cursor: pointer;
 }
 
 .edit__icon {

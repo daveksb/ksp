@@ -56,8 +56,8 @@ const routes: Routes = [
       headerDetail: ' > ตรวจสอบและอนุมัติใบคำขอรหัสเข้าใช้งาน',
     },
     loadChildren: () =>
-      import('@ksp/e-service/e-license/user-approvement').then(
-        (m) => m.EServiceELicenseUserApprovementModule
+      import('@ksp/e-service/e-license/approve-new-user').then(
+        (m) => m.EServiceELicenseApproveNewUserModule
       ),
   },
   {

@@ -3,9 +3,9 @@
   "projects": {
     "e-service": "apps/e-service",
     "e-service-dialog-accusation-search": "libs/e-service/dialog/accusation-search",
+    "e-service-e-license-approve-new-user": "libs/e-service/e-license/approve-new-user",
     "e-service-e-license-foreign-license": "libs/e-service/e-license/foreign-license",
     "e-service-e-license-temp-license": "libs/e-service/e-license/temp-license",
-    "e-service-e-license-user-approvement": "libs/e-service/e-license/user-approvement",
     "e-service-e-license-user-detail": "libs/e-service/e-license/user-detail",
     "e-service-e-license-user-management": "libs/e-service/e-license/user-management",
     "e-service-ethics-accusation": "libs/e-service/ethics/accusation",

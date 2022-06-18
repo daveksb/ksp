@@ -3,11 +3,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'ksp-approvement-user-list',
-  templateUrl: './approvement-user-list.component.html',
-  styleUrls: ['./approvement-user-list.component.scss'],
+  templateUrl: './approve-new-user-list.component.html',
+  styleUrls: ['./approve-new-user-list.component.scss'],
 })
-export class ApprovementUserListComponent {
+export class ApproveNewUserListComponent {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<userList>();
 
