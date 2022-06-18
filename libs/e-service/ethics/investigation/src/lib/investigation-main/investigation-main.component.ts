@@ -7,15 +7,14 @@ import {
 } from '@ksp/shared/ui/dialog';
 
 @Component({
-  selector: 'e-service-publish-review',
-  templateUrl: './publish-review.component.html',
-  styleUrls: ['./publish-review.component.scss'],
+  selector: 'e-service-investigation-main',
+  templateUrl: './investigation-main.component.html',
+  styleUrls: ['./investigation-main.component.scss'],
 })
-export class PublishReviewComponent {
-  constructor(public router: Router, public dialog: MatDialog) {}
-
+export class InvestigationMainComponent {
+  constructor(private router: Router, public dialog: MatDialog) {}
   cancel() {
-    this.router.navigate(['/', 'publish', 'list']);
+    this.router.navigate(['/', 'accusation']);
   }
 
   save() {
@@ -48,7 +47,7 @@ export class PublishReviewComponent {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'publish', 'list']);
+        this.router.navigate(['/', 'investigation']);
       }
     });
   }

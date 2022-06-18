@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 type Mode = 'accusation' | 'investigation' | 'inquiry' | 'publish' | null;
 
 export interface AccusationList {
+  order: number;
   id: string;
   receiveDate: string;
   blackNumber: string;
@@ -14,10 +15,13 @@ export interface AccusationList {
   process: string;
   status: string;
   lastUpdate: string;
+  edit: string;
+  view: string;
 }
 
 export const data: AccusationList[] = [
   {
+    order: 1,
     id: '641000001',
     receiveDate: '15 มิ.ย. 2654',
     blackNumber: 'xx/2564',
@@ -27,8 +31,11 @@ export const data: AccusationList[] = [
     process: 'บันทึกข้อมูลกล่าวหา/กล่าวโทษ',
     status: 'อยู่รหว่างดำเนินการ',
     lastUpdate: '15 มิ.ย. 2569',
+    edit: '',
+    view: '',
   },
   {
+    order: 2,
     id: '641000001',
     receiveDate: '15 มิ.ย. 2654',
     blackNumber: 'xx/2564',
@@ -38,8 +45,11 @@ export const data: AccusationList[] = [
     process: 'บันทึกข้อมูลกล่าวหา/กล่าวโทษ',
     status: 'อยู่รหว่างดำเนินการ',
     lastUpdate: '15 มิ.ย. 2569',
+    edit: '',
+    view: '',
   },
   {
+    order: 3,
     id: '641000001',
     receiveDate: '15 มิ.ย. 2654',
     blackNumber: 'xx/2564',
@@ -49,33 +59,45 @@ export const data: AccusationList[] = [
     process: 'บันทึกข้อมูลกล่าวหา/กล่าวโทษ',
     status: 'อยู่รหว่างดำเนินการ',
     lastUpdate: '15 มิ.ย. 2569',
+    edit: '',
+    view: '',
   },
 ];
 
 @Component({
-  selector: 'e-service-ethic-accusation-list',
-  templateUrl: './accusation-list.component.html',
-  styleUrls: ['./accusation-list.component.scss'],
+  selector: 'ksp-list-page',
+  templateUrl: './list-page.component.html',
+  styleUrls: ['./list-page.component.scss'],
 })
-export class AccusationListComponent implements OnInit {
+export class ListPageComponent implements OnInit {
   mode: Mode = null;
   dataSource = new MatTableDataSource<AccusationList>();
   displayedColumns: string[] = [
+    'order',
     'id',
     'receiveDate',
+    'blackNumber',
+    'redNumber',
     'personId',
     'name',
+    'process',
+    'status',
+    'lastUpdate',
+    'edit',
     'view',
   ];
 
   constructor(public router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.route?.parent?.url.subscribe((urlPath) => {
-      this.mode = urlPath[urlPath.length - 1].path as Mode;
+    /* this.route.data.subscribe((data) => {
+      this.mode = data['type'];
+      console.log('mode = ', data);
+    }); */
+    this.route.parent?.data.subscribe((res) => {
+      this.mode = res['type'];
+      console.log('res = ', res);
     });
-
-    this.dataSource.data = [];
   }
 
   onSubmit(submitType: boolean) {
@@ -87,16 +109,10 @@ export class AccusationListComponent implements OnInit {
   }
 
   add() {
-    this.router.navigate(['/', 'ethics', 'accusation', 'detail']);
+    this.router.navigate(['/', 'accusation', 'detail']);
   }
 
   next() {
-    if (this.mode === 'accusation') {
-      this.router.navigate(['/', 'ethics', 'accusation', 'detail']);
-    } else if (this.mode === 'investigation') {
-      this.router.navigate(['/', 'ethics', 'investigation', 'detail']);
-    } else if (this.mode === 'inquiry') {
-      this.router.navigate(['/', 'ethics', 'inquiry', 'detail']);
-    } else this.router.navigate(['/', 'publish', 'detail']);
+    this.router.navigate(['/', this.mode, 'detail']);
   }
 }

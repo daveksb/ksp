@@ -60,9 +60,10 @@
     </button>
   </div>
 </div>
+<hr />
 
 <div class="table__container">
-  <div>ผลการค้นหา</div>
+  <div class="box__title">ผลการค้นหา</div>
 
   <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="select">
@@ -111,22 +112,13 @@
   </table>
 
   <div class="buttons__table">
-    <button
-      matDialogClose
-      type="button"
-      class="btn btn-default btn-sm label__button"
-    >
+    <button matDialogClose type="button" class="btn btn-outline-success">
       ยกเลิก
     </button>
-    <button
-      matDialogClose
-      type="button"
-      class="btn btn-success btn-sm label__button"
-    >
-      ตกลง
-    </button>
+    <button matDialogClose type="button" class="btn btn-success">ตกลง</button>
   </div>
 </div>
+<hr />
 
 <div class="tab__container">
   <mat-tab-group class="tab-group" animationDuration="0ms" dynamicHeight="true">
@@ -138,11 +130,12 @@
 
     <mat-tab label="ข้อมูลใบอนุญาต">
       <ng-container *ngIf="dataSource.data.length && personSelected">
-        <!-- <e-service-license-info></e-service-license-info> -->
         <div class="header">
           ข้อมูลใบอนุญาตประกอบวิชาชีพทางการศึกษา (ยังไม่หมดอายุ)
         </div>
-        <ksp-license-type-button-group></ksp-license-type-button-group>
+        <ksp-license-type-button-group
+          [groups]="license"
+        ></ksp-license-type-button-group>
         <ksp-license-info></ksp-license-info>
       </ng-container>
     </mat-tab>

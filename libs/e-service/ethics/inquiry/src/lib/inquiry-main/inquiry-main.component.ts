@@ -1,53 +1,25 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTabsModule } from '@angular/material/tabs';
 import { Router } from '@angular/router';
-import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-info';
-import { SharedFormOthersModule } from '@ksp/shared/form/others';
-import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/ui/dialog';
-import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
-import { SharedUiLicenseTypeButtonGroupModule } from '@ksp/shared/ui/license-type-button-group';
-import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
 
 @Component({
-  selector: 'e-service-inquiry-result',
-  templateUrl: './inquiry-result.component.html',
-  styleUrls: ['./inquiry-result.component.scss'],
-  standalone: true,
-  imports: [
-    MatTabsModule,
-    CommonModule,
-    SharedUiBottomMenuModule,
-    SharedFormOthersModule,
-    SharedUiLicenseTypeButtonGroupModule,
-    EServiceUiAccusationInfoModule,
-    SharedUiLicenseInfoModule,
-    RequestHeaderInfoComponent
-  ],
+  selector: 'e-service-inquiry-main',
+  templateUrl: './inquiry-main.component.html',
+  styleUrls: ['./inquiry-main.component.scss'],
 })
-export class InquiryResultComponent {
+export class InquiryMainComponent {
   constructor(private router: Router, public dialog: MatDialog) {}
 
   @Input() hideAllButtons = false;
   @Input() hideContainer = false;
   @Input() hideTitle = false;
 
-  cancel() {
-    this.router.navigate(['/', 'ethics', 'inquiry']);
-  }
-
-  back() {
-    this.router.navigate(['/', 'ethics', 'inquiry', 'detail']);
-  }
-
   save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      height: '175px',
       width: '350px',
       data: {
         title: `คุณยืนยันการบันทึกข้อมูล
@@ -64,7 +36,6 @@ export class InquiryResultComponent {
 
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      height: '275px',
       width: '375px',
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
@@ -80,5 +51,9 @@ export class InquiryResultComponent {
         this.router.navigate(['/', 'ethics', 'inquiry']);
       }
     });
+  }
+
+  cancel() {
+    this.router.navigate(['/', 'inquiry']);
   }
 }

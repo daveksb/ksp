@@ -16,18 +16,16 @@ export class AccusationDecisionComponent {
 
   @Input() hideAllButtons = false;
 
-
   cancel() {
-    this.router.navigate(['/', 'ethics', 'accusation']);
+    this.router.navigate(['/', 'accusation']);
   }
 
   back() {
-    this.router.navigate(['/', 'ethics', 'accusation', 'detail']);
+    this.router.navigate(['/', 'accusation', 'detail']);
   }
 
   save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      height: '175px',
       width: '350px',
       data: {
         title: `คุณยืนยันการบันทึกข้อมูล
@@ -44,20 +42,19 @@ export class AccusationDecisionComponent {
 
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      height: '275px',
       width: '375px',
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
         content: `เลขที่รายการ : 640120000123
         วันที่ : 10 ตุลาคม 2656`,
-        subContent: 'ผู้บันทึกข้อมูล : นางสาวปาวีณา ใกล้คุก',
+        subContent: 'ผู้บันทึกข้อมูล : นางสาวปาวีณา ไก่คลุก',
         buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'ethics', 'accusation']);
+        this.router.navigate(['/', 'accusation']);
       }
     });
   }
