@@ -8,7 +8,7 @@ import {
   SharedFeatureDegreeCertModule,
 } from '@ksp/shared/feature/degree-cert';
 import { UniServiceUiFormsModule } from '@ksp/uni-service/ui/forms';
-import { HomeComponent } from './home/home.component';
+import { DegreeCertComponent } from './degree-cert/degree-cert.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SharedFormDegreeCertStepThreeModule } from '@ksp/shared/form/degree-cert/step-three';
@@ -26,7 +26,7 @@ const routes: Routes = [
       },
       {
         path: 'request',
-        component: HomeComponent,
+        component: DegreeCertComponent,
       },
       {
         path: '**',
@@ -42,13 +42,12 @@ const routes: Routes = [
     SharedUiBottomMenuModule,
     SharedFeatureDegreeCertModule,
     SharedFormDegreeCertStepOneModule,
+    SharedFormDegreeCertStepThreeModule,
     UniServiceUiFormsModule,
     MatStepperModule,
     MatTabsModule,
-    SharedFormDegreeCertStepThreeModule,
     RequestHeaderInfoComponent,
   ],
-  declarations: [HomeComponent],
-  exports: [HomeComponent],
+  declarations: [DegreeCertComponent],
 })
 export class UniServiceFeatureDegreeCertModule {}

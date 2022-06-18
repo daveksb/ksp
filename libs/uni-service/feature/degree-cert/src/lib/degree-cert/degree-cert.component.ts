@@ -7,11 +7,10 @@ import {
 } from '@ksp/shared/ui/dialog';
 
 @Component({
-  selector: 'ksp-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  templateUrl: './degree-cert.component.html',
+  styleUrls: ['./degree-cert.component.scss'],
 })
-export class HomeComponent {
+export class DegreeCertComponent {
   degreeType = '';
   isEditable = false;
 
@@ -23,17 +22,12 @@ export class HomeComponent {
 
   save() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      height: '200px',
       width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
         subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
         ใช่หรือไม่`,
       },
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
     });
 
     dialogRef.componentInstance.confirmed.subscribe((res) => {

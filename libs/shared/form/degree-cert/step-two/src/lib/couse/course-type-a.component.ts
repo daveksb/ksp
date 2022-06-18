@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { FormMode } from '@ksp/shared/interface';
 import { debounceTime } from 'rxjs';
 
 @Component({
@@ -8,6 +9,21 @@ import { debounceTime } from 'rxjs';
   styleUrls: ['./course-type-a.component.scss'],
 })
 export class CourseTypeAComponent implements OnInit {
+  private _mode: FormMode = 'edit';
+
+  @Input()
+  set mode(value: FormMode) {
+    this._mode = value;
+    if (value === 'view') {
+      console.log('mode  = ', value);
+      this.form.disable();
+    }
+  }
+
+  get mode(): FormMode {
+    return this._mode;
+  }
+
   totalCredit = 0;
   totalStudent = 0;
 
@@ -21,6 +37,11 @@ export class CourseTypeAComponent implements OnInit {
   ngOnInit(): void {
     this.addData();
     this.calculateSum();
+  }
+
+  disableForm() {
+    console.error('FORM DISABLED !!');
+    this.form.disable();
   }
 
   sum(source: any[], data: string): number {

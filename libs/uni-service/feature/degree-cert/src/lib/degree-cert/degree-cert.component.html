@@ -8,7 +8,12 @@
 
     <hr />
 
-    <mat-stepper labelPosition="bottom" [animationDuration]="'0'" #stepper>
+    <mat-stepper
+      labelPosition="bottom"
+      [animationDuration]="'0'"
+      [selectedIndex]="1"
+      #stepper
+    >
       <mat-step>
         <ng-template matStepLabel>ข้อมูลพื้นฐาน</ng-template>
         <ksp-degree-cert-step-one (degreeType)="degreeType = $event">

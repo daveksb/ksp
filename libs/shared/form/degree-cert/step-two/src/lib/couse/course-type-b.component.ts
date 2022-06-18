@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { FormMode } from '@ksp/shared/interface';
 import { debounceTime } from 'rxjs';
 
 @Component({
@@ -8,6 +9,8 @@ import { debounceTime } from 'rxjs';
   styleUrls: ['./course-type-b.component.scss'],
 })
 export class CourseTypeBComponent implements OnInit {
+  @Input() mode: FormMode = 'edit';
+
   creditSums: number[] = [0, 0, 0];
   yearSums: number[] = [0, 0, 0, 0, 0, 0];
   planSums: number[] = [0, 0, 0, 0];
