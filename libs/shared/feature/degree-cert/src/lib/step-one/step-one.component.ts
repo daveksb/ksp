@@ -75,12 +75,10 @@ export class DegreeCertStepOneComponent implements OnInit {
     this.form.controls['courseType'].valueChanges.subscribe((res) => {
       this.loadComponent(Number(res));
     });
+  }
 
-    this.form.controls['degreeType'].valueChanges.subscribe((res) => {
-      // it has 8 degree types and target with 2 form types
-      const degreeType = Number(res) < 4 ? 'a' : 'b';
-      this.degreeType.emit(degreeType);
-    });
+  onDegreeTypeChanged(degreeType: string) {
+    this.degreeType.emit(degreeType);
   }
 
   addFormArray(form: FormArray<any>) {

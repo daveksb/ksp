@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   selector: 'ksp-degree-cert-step-two',
   templateUrl: './step-two.component.html',
   styleUrls: ['./step-two.component.css'],
-  encapsulation: ViewEncapsulation.None,
+  //encapsulation: ViewEncapsulation.None,
 })
 export class DegreeCertStepTwoComponent {
   @Output() tabIndexChanged = new EventEmitter<number>();
