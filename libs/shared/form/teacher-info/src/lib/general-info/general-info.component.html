@@ -90,7 +90,10 @@
       </div>
     </ng-container>
 
-    <div class="button__container" *ngIf="degrees.length < 4">
+    <div
+      class="button__container"
+      *ngIf="degrees.length < 4 && mode === 'edit'"
+    >
       <ksp-add-row-button (addClick)="addDegree()"
         >เพิ่มคุณวุฒิการศึกษา</ksp-add-row-button
       >

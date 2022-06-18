@@ -20,6 +20,7 @@ import { SharedFormDegreeCertStepOneModule } from '@ksp/shared/form/degree-cert/
 import { MatIconModule } from '@angular/material/icon';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
 import { SharedFormDegreeCertStepTwoModule } from '@ksp/shared/form/degree-cert/step-two';
+import { FinalResultComponent } from './final-result/final-result.component';
 
 @NgModule({
   imports: [
@@ -47,6 +48,7 @@ import { SharedFormDegreeCertStepTwoModule } from '@ksp/shared/form/degree-cert/
     ConsiderComponent,
     ApproveComponent,
     CheckComponent,
+    FinalResultComponent,
   ],
 })
 export class EServiceStandardDegreeCertModule {}

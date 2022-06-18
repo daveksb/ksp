@@ -19,6 +19,7 @@
 
         <div class="group__container">
           <ksp-teacher-general-info
+            [mode]="mode"
             formControlName="generalInfo"
           ></ksp-teacher-general-info>
 
@@ -134,7 +135,7 @@
   <div class="button__container">
     <ksp-add-row-button
       [mode]="'blue'"
-      *ngIf="nitets.length < 4"
+      *ngIf="nitets.length < 4 && mode === 'edit'"
       (addClick)="addNitet()"
       >เพิ่มอาจารย์นิเทศก์</ksp-add-row-button
     >

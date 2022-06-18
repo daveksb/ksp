@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { FormMode } from '@ksp/shared/interface';
 import { debounceTime } from 'rxjs';
 
 @Component({
@@ -8,6 +9,8 @@ import { debounceTime } from 'rxjs';
   styleUrls: ['./teacher.component.scss'],
 })
 export class TeacherComponent implements OnInit {
+  @Input() mode: FormMode = 'edit';
+
   teacherForm = this.fb.group({
     generalInfo: [],
     hasMoreCourses: [],
@@ -18,15 +21,19 @@ export class TeacherComponent implements OnInit {
     ]),
   });
 
-  mainForm = this.fb.group({
+  form = this.fb.group({
     teachers: this.fb.array([this.teacherForm]),
   });
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.mainForm.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
-      console.log('form value = ', res);
+    if (this.mode === 'view') {
+      this.form.disable();
+    }
+
+    this.form.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
+      //console.log('form value = ', res);
     });
   }
 
@@ -60,17 +67,15 @@ export class TeacherComponent implements OnInit {
   }
 
   get teachers() {
-    return this.mainForm.controls['teachers'];
+    return this.form.controls['teachers'];
   }
 
   getCourses(index: number) {
-    return this.mainForm.controls['teachers'].controls[index].controls[
-      'courses'
-    ];
+    return this.form.controls['teachers'].controls[index].controls['courses'];
   }
 
   getHasMoreCourses(index: number) {
-    return this.mainForm.controls['teachers'].controls[index].controls[
+    return this.form.controls['teachers'].controls[index].controls[
       'hasMoreCourses'
     ].value;
   }

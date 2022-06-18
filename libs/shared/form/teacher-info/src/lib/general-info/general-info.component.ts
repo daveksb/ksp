@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
+import { FormMode } from '@ksp/shared/interface';
 import { Subscription } from 'rxjs/internal/Subscription';
 
 @Component({
@@ -25,6 +26,8 @@ import { Subscription } from 'rxjs/internal/Subscription';
   ],
 })
 export class TeacherGeneralInfoComponent {
+  @Input() mode: FormMode = 'edit';
+
   form = this.fb.group({
     firstName: [''],
     lastName: [''],

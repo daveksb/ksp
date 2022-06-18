@@ -4,6 +4,7 @@ import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container
 import { ApproveComponent } from './approve/approve.component';
 import { CheckComponent } from './check/check.component';
 import { ConsiderComponent } from './consider/consider.component';
+import { FinalResultComponent } from './final-result/final-result.component';
 import { DegreeCertListComponent } from './list/list.component';
 import { VerifyComponent } from './verify/verify.component';
 
@@ -40,6 +41,10 @@ export const routes: Routes = [
       {
         path: 'approve', //ยืนยัน
         component: ApproveComponent,
+      },
+      {
+        path: 'final-result', //ขั้นตอนสุดท้าย
+        component: FinalResultComponent,
       },
     ],
   },
