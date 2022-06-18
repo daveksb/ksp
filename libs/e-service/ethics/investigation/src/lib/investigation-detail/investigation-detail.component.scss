@@ -47,13 +47,6 @@
   white-space: nowrap;
 }
 
-.page__title {
-  padding-left: 15px;
-  padding-top: 15px;
-  font-size: 22px;
-  color: #000;
-}
-
 .content__container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -94,25 +87,6 @@
   z-index: 1;
 }
 
-.label__content {
-  font-size: 18px;
-  color: #808080;
-  margin-right: 24px;
-}
-
-.label__content--primary {
-  color: #f68b33;
-}
-
-.label__content--secondary {
-  color: #01b27b;
-}
-
-.content__header {
-  display: flex;
-  flex-direction: row;
-}
-
 .checkbox__label {
   font-size: 16px;
   color: #656565;
@@ -130,13 +104,18 @@
   margin: 0 24px;
 }
 
-.btn__upload {
-  font-size: 20px;
-  background: #0056ff;
-  border: 1px solid #0056ff;
-  color: #fff;
-  margin: 10px 0;
-  width: 150px;
+.edit {
+  color: #0056ff;
+  cursor: pointer;
+}
+
+.delete {
+  color: red;
+  cursor: pointer;
+}
+
+#btn-upload {
+  margin-top: 12px;
 }
 
 .hide__container {

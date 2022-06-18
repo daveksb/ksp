@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 type Mode = 'accusation' | 'investigation' | 'inquiry' | 'publish' | null;
 
 export interface AccusationList {
+  order: number;
   id: string;
   receiveDate: string;
   blackNumber: string;
@@ -14,10 +15,13 @@ export interface AccusationList {
   process: string;
   status: string;
   lastUpdate: string;
+  edit: string;
+  view: string;
 }
 
 export const data: AccusationList[] = [
   {
+    order: 1,
     id: '641000001',
     receiveDate: '15 มิ.ย. 2654',
     blackNumber: 'xx/2564',
@@ -27,8 +31,11 @@ export const data: AccusationList[] = [
     process: 'บันทึกข้อมูลกล่าวหา/กล่าวโทษ',
     status: 'อยู่รหว่างดำเนินการ',
     lastUpdate: '15 มิ.ย. 2569',
+    edit: '',
+    view: '',
   },
   {
+    order: 2,
     id: '641000001',
     receiveDate: '15 มิ.ย. 2654',
     blackNumber: 'xx/2564',
@@ -38,8 +45,11 @@ export const data: AccusationList[] = [
     process: 'บันทึกข้อมูลกล่าวหา/กล่าวโทษ',
     status: 'อยู่รหว่างดำเนินการ',
     lastUpdate: '15 มิ.ย. 2569',
+    edit: '',
+    view: '',
   },
   {
+    order: 3,
     id: '641000001',
     receiveDate: '15 มิ.ย. 2654',
     blackNumber: 'xx/2564',
@@ -49,6 +59,8 @@ export const data: AccusationList[] = [
     process: 'บันทึกข้อมูลกล่าวหา/กล่าวโทษ',
     status: 'อยู่รหว่างดำเนินการ',
     lastUpdate: '15 มิ.ย. 2569',
+    edit: '',
+    view: '',
   },
 ];
 
@@ -61,10 +73,17 @@ export class ListPageComponent implements OnInit {
   mode: Mode = null;
   dataSource = new MatTableDataSource<AccusationList>();
   displayedColumns: string[] = [
+    'order',
     'id',
     'receiveDate',
+    'blackNumber',
+    'redNumber',
     'personId',
     'name',
+    'process',
+    'status',
+    'lastUpdate',
+    'edit',
     'view',
   ];
 

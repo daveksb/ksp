@@ -62,7 +62,7 @@
 }
 
 .form__container {
-  padding: 24px;
+  padding: 12px;
 }
 
 .form-label {
@@ -94,33 +94,19 @@
   z-index: 1;
 }
 
-.btn-search {
-  font-size: 16px;
-  background-color: #0056ff;
-  border: 1px solid #0056ff;
+#btn-search {
   width: auto;
-  color: #fff;
-  padding: 4px 12px;
-  margin: 12px 24px;
+  margin: 24px;
 }
 
-.label__content {
-  font-size: 18px;
-  color: #808080;
-  margin-right: 24px;
+.edit {
+  color: #0056ff;
+  cursor: pointer;
 }
 
-.label__content--primary {
-  color: #f68b33;
-}
-
-.label__content--secondary {
-  color: #01b27b;
-}
-
-.content__header {
-  display: flex;
-  flex-direction: row;
+.delete {
+  color: red;
+  cursor: pointer;
 }
 
 .hide__container {
