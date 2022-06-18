@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { SchoolServiceUserPageType } from '@ksp/shared/interface';
 
 @Component({
   templateUrl: './approve-new-user-list.component.html',
@@ -29,7 +30,7 @@ export class ApproveNewUserListComponent {
 
   goToDetail() {
     this.router.navigate(['/user-approvement', 'detail'], {
-      queryParams: { type: 1 },
+      queryParams: { type: SchoolServiceUserPageType.ApproveNewUser },
     });
   }
 }

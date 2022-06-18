@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserListComponent } from './user-list/user-list.component';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { RouterModule, Routes } from '@angular/router';
 import { UserDetailComponent } from '@ksp/e-service/e-license/user-detail';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
+import { ManageCurrentUserListComponent } from './user-list/manage-current-user-list.component';
 
 export const routes: Routes = [
   {
@@ -14,7 +14,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'list',
-        component: UserListComponent,
+        component: ManageCurrentUserListComponent,
       },
       {
         path: 'detail',
@@ -30,8 +30,12 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, MatDialogModule, MatTableModule ,RouterModule.forChild(routes)],
-  declarations: [UserListComponent],
-  exports: [UserListComponent],
+  imports: [
+    CommonModule,
+    MatDialogModule,
+    MatTableModule,
+    RouterModule.forChild(routes),
+  ],
+  declarations: [ManageCurrentUserListComponent],
 })
-export class EServiceELicenseUserManagementModule {}
+export class EServiceELicenseManageCurrentUserModule {}

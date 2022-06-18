@@ -48,7 +48,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'user-approvement',
+    path: 'approve-new-user',
     data: {
       menuConfig: licenseMenu,
       headerLabel:
@@ -61,14 +61,14 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'user-management',
+    path: 'manage-current-user',
     data: {
       menuConfig: licenseMenu,
       headerLabel: 'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา',
     },
     loadChildren: () =>
-      import('@ksp/e-service/e-license/user-management').then(
-        (m) => m.EServiceELicenseUserManagementModule
+      import('@ksp/e-service/e-license/manage-current-user').then(
+        (m) => m.EServiceELicenseManageCurrentUserModule
       ),
   },
 

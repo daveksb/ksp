@@ -4,11 +4,10 @@ import { Router } from '@angular/router';
 import { SchoolServiceUserPageType } from '@ksp/shared/interface';
 
 @Component({
-  selector: 'ksp-user-list',
-  templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss'],
+  templateUrl: './manage-current-user-list.component.html',
+  styleUrls: ['./manage-current-user-list.component.scss'],
 })
-export class UserListComponent implements OnInit {
+export class ManageCurrentUserListComponent implements OnInit {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<userList>();
 
