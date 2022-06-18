@@ -1,5 +1,5 @@
 export enum DegreeCertProcessType {
-  Check,
-  Consider,
-  Approve,
+  check,
+  consider,
+  approve,
 }

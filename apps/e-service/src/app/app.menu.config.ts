@@ -61,15 +61,15 @@ export const standardMenu: MenuConfig[] = [
     subMenuName: 'degree-cert',
     subMenu: [
       {
-        path: `degree-cert/list/${DegreeCertProcessType.Check}`,
+        path: `degree-cert/list/${DegreeCertProcessType.check}`,
         label: 'รายการใบคำขอรับรองปริญญาและประกาศนียบัตร',
       },
       {
-        path: `degree-cert/list/${DegreeCertProcessType.Consider}`,
+        path: `degree-cert/list/${DegreeCertProcessType.consider}`,
         label: 'ประเมินหลักสูตรและโครงสร้างหลักสูตร',
       },
       {
-        path: `degree-cert/list/${DegreeCertProcessType.Approve}`,
+        path: `degree-cert/list/${DegreeCertProcessType.approve}`,
         label: 'พิจารณาและออกใบรับรองปริญญาและประกาศนียบัตร',
       },
     ],

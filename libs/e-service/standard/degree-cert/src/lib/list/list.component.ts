@@ -10,19 +10,23 @@ import { DegreeCertProcessType } from '@ksp/shared/interface';
   styleUrls: ['./list.component.scss'],
 })
 export class DegreeCertListComponent implements OnInit {
-  processType = 1;
+  showActionButtons = false;
   data: DegreeCertInfo[] = [data];
   dataSource = new MatTableDataSource<DegreeCertInfo>();
   selection = new SelectionModel<DegreeCertInfo>(true, []);
-
   displayedColumns: string[] = displayedColumns;
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((res) => {
-      if (res) this.processType = Number(res.get('type'));
-      console.log('process type = ', this.processType);
+      if (res) {
+        this.showActionButtons = [
+          DegreeCertProcessType.consider,
+          DegreeCertProcessType.approve,
+        ].includes(Number(res.get('type')));
+      }
+      //console.log('process type = ', res);
     });
   }
 
@@ -63,7 +67,7 @@ export class DegreeCertListComponent implements OnInit {
       './',
       'degree-cert',
       'verify',
-      DegreeCertProcessType.Consider,
+      DegreeCertProcessType.consider,
     ]);
   }
   approve() {
@@ -71,7 +75,7 @@ export class DegreeCertListComponent implements OnInit {
       './',
       'degree-cert',
       'verify',
-      DegreeCertProcessType.Approve,
+      DegreeCertProcessType.approve,
     ]);
   }
 }

@@ -93,27 +93,20 @@
   </div>
 
   <div class="check__form">
-    <ng-container *ngIf="processType === 2">
-      <e-service-license-check
-        [choices]="considerChoices"
-      ></e-service-license-check>
-    </ng-container>
-
-    <ng-container *ngIf="processType === 3">
-      <e-service-license-check
-        [choices]="approveChoices"
-      ></e-service-license-check>
-    </ng-container>
+    <e-service-license-check
+      [headerTitle]="'ผลการพิจารณา'"
+      [choices]="choices[processType]"
+    ></e-service-license-check>
   </div>
 </div>
 
 <div class="bottom__container">
   <ksp-bottom-menu
     (nextClicked)="next()"
-    (prevClicked)="prev()"
     (cancelClicked)="cancel()"
     [isFirstPage]="true"
     [showCenterButtons]="true"
+    [showSaveButton]="true"
   >
   </ksp-bottom-menu>
 </div>
