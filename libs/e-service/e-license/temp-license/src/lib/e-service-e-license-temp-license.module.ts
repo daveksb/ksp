@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TempLicenseListComponent } from './temp-license-list/temp-license-list.component';
 import { TempLicenseDetailComponent } from './temp-license-detail/temp-license-detail.component';
-import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { MatTabsModule } from '@angular/material/tabs';
 import { RouterModule, Routes } from '@angular/router';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
@@ -16,6 +15,7 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { SharedFormOthersModule } from '@ksp/shared/form/others';
 
 export const routes: Routes = [
   {
