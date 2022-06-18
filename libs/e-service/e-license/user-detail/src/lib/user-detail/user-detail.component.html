@@ -73,8 +73,8 @@
 
   <div class="content__container-2">
     <e-service-license-check
-      [headerTitle]="pageType === 1 ? 'ผลการตรวจสอบ' : 'สถานะการใช้งาน'"
-      [titles]="pageType === 1 ? title[0] : title[1]"
+      [headerTitle]="checkComponentTitles[pageType]"
+      [choices]="checkComponentChoices[pageType]"
     ></e-service-license-check>
   </div>
 </div>

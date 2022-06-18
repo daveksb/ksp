@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { Router } from '@angular/router';
 
@@ -9,13 +9,13 @@ import { Router } from '@angular/router';
 })
 export class TempLicenseDetailComponent implements OnInit {
   reason: string[][] = [];
-  title: string[] = [];
+  choices: string[] = [];
   selectedTabIndex = 0;
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.title = ['ครบถ้วน และถูกต้อง', 'ไม่ครบถ้วน และไม่ถูกต้อง'];
+    this.choices = ['ครบถ้วน และถูกต้อง', 'ไม่ครบถ้วน และไม่ถูกต้อง'];
 
     this.reason[0] = [
       'เลขบัตรประชาชนไม่ถูกต้อง',
@@ -67,7 +67,7 @@ export class TempLicenseDetailComponent implements OnInit {
   }
 
   tabChanged(e: MatTabChangeEvent) {
-    console.log('tab index = ', e.index);
-    this.selectedTabIndex = e.index
+    //console.log('tab index = ', e.index);
+    this.selectedTabIndex = e.index;
   }
 }

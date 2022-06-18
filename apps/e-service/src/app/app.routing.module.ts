@@ -48,26 +48,27 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'user-approvement',
+    path: 'approve-new-user',
     data: {
       menuConfig: licenseMenu,
       headerLabel:
         'ใบคำขอรหัสเข้าใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
+      headerDetail: ' > ตรวจสอบและอนุมัติใบคำขอรหัสเข้าใช้งาน',
     },
     loadChildren: () =>
-      import('@ksp/e-service/e-license/user-approvement').then(
-        (m) => m.EServiceELicenseUserApprovementModule
+      import('@ksp/e-service/e-license/approve-new-user').then(
+        (m) => m.EServiceELicenseApproveNewUserModule
       ),
   },
   {
-    path: 'user-management',
+    path: 'manage-current-user',
     data: {
       menuConfig: licenseMenu,
       headerLabel: 'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา',
     },
     loadChildren: () =>
-      import('@ksp/e-service/e-license/user-management').then(
-        (m) => m.EServiceELicenseUserManagementModule
+      import('@ksp/e-service/e-license/manage-current-user').then(
+        (m) => m.EServiceELicenseManageCurrentUserModule
       ),
   },
 

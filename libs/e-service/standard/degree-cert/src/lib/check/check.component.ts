@@ -21,17 +21,12 @@ export class CheckComponent {
 
   save() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      height: '200px',
       width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
         subTitle: `คุณยืนยันข้อมูลผลการตรวจสอบ
         ใช่หรือไม่`,
       },
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
     });
 
     dialogRef.componentInstance.confirmed.subscribe((res) => {
@@ -46,7 +41,6 @@ export class CheckComponent {
       width: '350px',
       data: {
         header: 'ยืนยันข้อมูลสำเร็จ',
-
         subContent: `ระบบส่งใบคำขอเพื่อพิจารณาประเมินหลักสูตร
         เรียบร้อย`,
         buttonLabel: 'กลับสู่หน้าหลัก',

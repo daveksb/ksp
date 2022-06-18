@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
+import { DegreeCertProcessType } from '@ksp/shared/interface';
 
 @Component({
   selector: 'e-service-degree-cert-list',
@@ -9,19 +10,23 @@ import { SelectionModel } from '@angular/cdk/collections';
   styleUrls: ['./list.component.scss'],
 })
 export class DegreeCertListComponent implements OnInit {
-  processType = 1;
+  showActionButtons = false;
   data: DegreeCertInfo[] = [data];
   dataSource = new MatTableDataSource<DegreeCertInfo>();
   selection = new SelectionModel<DegreeCertInfo>(true, []);
-
   displayedColumns: string[] = displayedColumns;
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((res) => {
-      if (res) this.processType = Number(res.get('type'));
-      console.log('process type = ', this.processType);
+      if (res) {
+        this.showActionButtons = [
+          DegreeCertProcessType.consider,
+          DegreeCertProcessType.approve,
+        ].includes(Number(res.get('type')));
+      }
+      //console.log('process type = ', res);
     });
   }
 
@@ -50,7 +55,6 @@ export class DegreeCertListComponent implements OnInit {
   }
 
   onSelect() {
-    //this.router.navigate(['/', 'degree-cert', 'step-1']);
     this.router.navigate(['/', 'degree-cert', 'check']);
   }
 
@@ -59,10 +63,20 @@ export class DegreeCertListComponent implements OnInit {
   }
 
   consider() {
-    this.router.navigate(['./', 'degree-cert', 'verify', '2']);
+    this.router.navigate([
+      './',
+      'degree-cert',
+      'verify',
+      DegreeCertProcessType.consider,
+    ]);
   }
   approve() {
-    this.router.navigate(['./', 'degree-cert', 'verify', '3']);
+    this.router.navigate([
+      './',
+      'degree-cert',
+      'verify',
+      DegreeCertProcessType.approve,
+    ]);
   }
 }
 
