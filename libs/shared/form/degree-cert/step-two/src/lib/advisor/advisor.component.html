@@ -7,7 +7,7 @@
   </div>
 </div>
 
-<form [formGroup]="mainForm">
+<form [formGroup]="form">
   <ng-container formArrayName="advisors">
     <ng-container *ngFor="let advisorForm of advisors.controls; let i = index">
       <ng-container [formGroupName]="i">
@@ -16,7 +16,7 @@
           <div>
             <mat-icon
               matTooltip="ลบอาจารย์ประจำหลักสูตร ลำดับที่ {{ i + 1 }}"
-              *ngIf="i > 0"
+              *ngIf="i > 0 && mode === 'edit'"
               class="delete__icon"
               (click)="deleteAdvisor(i)"
               >delete_outline</mat-icon

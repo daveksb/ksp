@@ -24,14 +24,18 @@ export class AdvisorComponent implements OnInit {
     ]),
   });
 
-  mainForm = this.fb.group({
+  form = this.fb.group({
     advisors: this.fb.array([this.advisorForm]),
   });
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.mainForm.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
+    if (this.mode === 'view') {
+      this.form.disable();
+    }
+
+    this.form.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
       //console.log('form value = ', res);
     });
   }
@@ -70,18 +74,16 @@ export class AdvisorComponent implements OnInit {
   }
 
   getCourses(index: number) {
-    return this.mainForm.controls['advisors'].controls[index].controls[
-      'courses'
-    ];
+    return this.form.controls['advisors'].controls[index].controls['courses'];
   }
 
   getHasMoreCourses(index: number) {
-    return this.mainForm.controls['advisors'].controls[index].controls[
+    return this.form.controls['advisors'].controls[index].controls[
       'hasMoreCourses'
     ].value;
   }
 
   get advisors() {
-    return this.mainForm.controls['advisors'];
+    return this.form.controls['advisors'];
   }
 }

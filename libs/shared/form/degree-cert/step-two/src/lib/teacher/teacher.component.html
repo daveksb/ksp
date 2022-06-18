@@ -1,6 +1,6 @@
 <div class="page__title">อาจารย์ประจำหลักสูตร / ผู้รับผิดชอบหลักสูตร</div>
 
-<form [formGroup]="mainForm">
+<form [formGroup]="form">
   <ng-container formArrayName="teachers">
     <ng-container *ngFor="let teacherForm of teachers.controls; let i = index">
       <ng-container [formGroupName]="i">

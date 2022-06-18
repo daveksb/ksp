@@ -28,12 +28,12 @@ export class NitetComponent implements OnInit {
 
   ngOnInit(): void {
     this.nitetForm.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
-      console.log('form value = ', res);
+      //console.log('form value = ', res);
     });
-    /*
-    this.form.controls['experienceYear'].valueChanges.subscribe((res) => {
-      console.log('res = ', res);
-    });*/
+
+    if (this.mode === 'view') {
+      this.form.disable();
+    }
   }
 
   addNitet() {

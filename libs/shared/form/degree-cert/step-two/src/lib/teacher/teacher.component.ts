@@ -21,14 +21,18 @@ export class TeacherComponent implements OnInit {
     ]),
   });
 
-  mainForm = this.fb.group({
+  form = this.fb.group({
     teachers: this.fb.array([this.teacherForm]),
   });
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.mainForm.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
+    if (this.mode === 'view') {
+      this.form.disable();
+    }
+
+    this.form.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
       //console.log('form value = ', res);
     });
   }
@@ -63,17 +67,15 @@ export class TeacherComponent implements OnInit {
   }
 
   get teachers() {
-    return this.mainForm.controls['teachers'];
+    return this.form.controls['teachers'];
   }
 
   getCourses(index: number) {
-    return this.mainForm.controls['teachers'].controls[index].controls[
-      'courses'
-    ];
+    return this.form.controls['teachers'].controls[index].controls['courses'];
   }
 
   getHasMoreCourses(index: number) {
-    return this.mainForm.controls['teachers'].controls[index].controls[
+    return this.form.controls['teachers'].controls[index].controls[
       'hasMoreCourses'
     ].value;
   }
