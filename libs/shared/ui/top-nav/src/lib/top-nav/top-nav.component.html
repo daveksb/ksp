@@ -1,11 +1,18 @@
 <nav class="navbar navbar-expand-lg navbar-light">
   <div class="container-fluid">
     <div class="label">
-      <ng-content select="[header]"></ng-content>
+      <span #s1>
+        <ng-content select="[header]"></ng-content>
+      </span>
 
-      <span *ngIf="ref.children.length"> > </span>
-      <span #ref class="label label--secondary">
-        <ng-content select="[subHeader]" #test></ng-content>
+      <span *ngIf="s1.children.length + s2.children.length > 1"> > </span>
+
+      <span #s2 class="label label--secondary">
+        <ng-content select="[subHeader]"></ng-content>
+      </span>
+
+      <span #s3 class="label label--ternary">
+        <ng-content select="[detail]"></ng-content>
       </span>
     </div>
     <div class="user__info">

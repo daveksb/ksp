@@ -15,8 +15,14 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@ksp/e-service/e-license/manage-current-user": [
+        "libs/e-service/e-license/manage-current-user/src/index.ts"
+      ],
       "@ksp/e-service/dialog/accusation-search": [
         "libs/e-service/dialog/accusation-search/src/index.ts"
+      ],
+      "@ksp/e-service/e-license/approve-new-user": [
+        "libs/e-service/e-license/approve-new-user/src/index.ts"
       ],
       "@ksp/e-service/e-license/foreign-license": [
         "libs/e-service/e-license/foreign-license/src/index.ts"
@@ -24,14 +30,8 @@
       "@ksp/e-service/e-license/temp-license": [
         "libs/e-service/e-license/temp-license/src/index.ts"
       ],
-      "@ksp/e-service/e-license/user-approvement": [
-        "libs/e-service/e-license/user-approvement/src/index.ts"
-      ],
       "@ksp/e-service/e-license/user-detail": [
         "libs/e-service/e-license/user-detail/src/index.ts"
-      ],
-      "@ksp/e-service/e-license/user-management": [
-        "libs/e-service/e-license/user-management/src/index.ts"
       ],
       "@ksp/e-service/ethics/accusation": [
         "libs/e-service/ethics/accusation/src/index.ts"

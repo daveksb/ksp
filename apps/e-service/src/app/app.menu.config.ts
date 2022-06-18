@@ -1,3 +1,4 @@
+import { DegreeCertProcessType } from '@ksp/shared/interface';
 import { MenuConfig } from '@ksp/shared/ui/side-menu';
 
 export const ethicsMenu: MenuConfig[] = [
@@ -60,15 +61,15 @@ export const standardMenu: MenuConfig[] = [
     subMenuName: 'degree-cert',
     subMenu: [
       {
-        path: 'degree-cert/list/1',
+        path: `degree-cert/list/${DegreeCertProcessType.check}`,
         label: 'รายการใบคำขอรับรองปริญญาและประกาศนียบัตร',
       },
       {
-        path: 'degree-cert/list/2',
+        path: `degree-cert/list/${DegreeCertProcessType.consider}`,
         label: 'ประเมินหลักสูตรและโครงสร้างหลักสูตร',
       },
       {
-        path: 'degree-cert/list/3',
+        path: `degree-cert/list/${DegreeCertProcessType.approve}`,
         label: 'พิจารณาและออกใบรับรองปริญญาและประกาศนียบัตร',
       },
     ],
@@ -167,7 +168,7 @@ export const licenseMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ใบคำขอรหัสเข้าใช้งานระบบบริหารหน่วยงานทางการศึกษา (School Service)',
-    path: 'user-approvement/list',
+    path: 'approve-new-user',
     isExpanded: false,
   },
   {
@@ -178,7 +179,7 @@ export const licenseMenu: MenuConfig[] = [
     subMenuName: 'user-management',
     subMenu: [
       {
-        path: 'user-management/list',
+        path: 'manage-current-user',
         label: 'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
       },
     ],

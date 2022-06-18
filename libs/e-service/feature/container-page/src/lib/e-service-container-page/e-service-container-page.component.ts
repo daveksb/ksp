@@ -10,6 +10,7 @@ import { MenuConfig } from '@ksp/shared/ui/side-menu';
 export class EServiceContainerPageComponent implements OnInit {
   menuConfig: MenuConfig[] = [];
   headerLabel = '';
+  headerDetail = '';
 
   constructor(private route: ActivatedRoute) {}
 
@@ -17,7 +18,7 @@ export class EServiceContainerPageComponent implements OnInit {
     this.route.data.subscribe((data) => {
       this.menuConfig = data['menuConfig'];
       this.headerLabel = data['headerLabel'];
-      //console.log('data = ', data);
+      this.headerDetail = data['headerDetail'];
     });
   }
 }

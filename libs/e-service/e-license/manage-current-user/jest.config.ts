@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'e-service-e-license-user-management',
+  displayName: 'e-service-e-license-manage-current-user',
   preset: '../../../../jest.preset.ts',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -9,7 +9,7 @@ module.exports = {
     },
   },
   coverageDirectory:
-    '../../../../coverage/libs/e-service/e-license/user-management',
+    '../../../../coverage/libs/e-service/e-license/manage-current-user',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

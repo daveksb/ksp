@@ -9,7 +9,7 @@ import { ConfirmDialogComponent } from '@ksp/shared/ui/dialog';
   styleUrls: ['./approve.component.scss'],
 })
 export class ApproveComponent {
-  titles = [
+  choices = [
     'รับรอง',
     'ไม่รับรอง',
     'ให้สถาบันแก้ไข / เพิ่มเติม',
@@ -29,17 +29,12 @@ export class ApproveComponent {
 
   save() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      height: '200px',
       width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
         subTitle: `คุณยืนยันข้อมูลผลการพิจารณาหลักสูตร
         ใช่หรือไม่`,
       },
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
     });
 
     dialogRef.componentInstance.confirmed.subscribe((res) => {
