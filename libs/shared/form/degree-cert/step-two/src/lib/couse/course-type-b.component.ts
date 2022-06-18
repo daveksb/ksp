@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { FormMode } from '@ksp/shared/interface';
 import { debounceTime } from 'rxjs';
 
 @Component({
@@ -8,6 +9,8 @@ import { debounceTime } from 'rxjs';
   styleUrls: ['./course-type-b.component.scss'],
 })
 export class CourseTypeBComponent implements OnInit {
+  @Input() mode: FormMode = 'edit';
+
   creditSums: number[] = [0, 0, 0];
   yearSums: number[] = [0, 0, 0, 0, 0, 0];
   planSums: number[] = [0, 0, 0, 0];
@@ -70,9 +73,7 @@ export class CourseTypeBComponent implements OnInit {
 
         res.plans.forEach((i, index) => {
           const { label, year, ...newData } = i as any;
-
           let sum = 0;
-
           for (const property in newData) {
             sum += Number(newData[property]);
           }
@@ -113,5 +114,6 @@ export class CourseTypeBComponent implements OnInit {
 
     plans.forEach((i) => this.plans.push(i));
     subjects.forEach((i) => this.subjects.push(i));
+    if (this.mode === 'view') this.form.disable();
   }
 }

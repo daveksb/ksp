@@ -44,7 +44,10 @@
       </div>
     </div>
 
-    <ksp-degree-info [degreeTypes]="degreeTypes"></ksp-degree-info>
+    <ksp-degree-info
+      [degreeTypes]="degreeTypes"
+      (degreeTypeChanged)="onDegreeTypeChanged($event)"
+    ></ksp-degree-info>
 
     <div class="group__container">
       <div class="group__header">การจัดการหลักสูตร หรือลักษณะหลักสูตร</div>
@@ -164,5 +167,5 @@
     </div>
   </div>
 
-  <ksp-degree-cert-coordinator></ksp-degree-cert-coordinator>
+  <ksp-degree-cert-coordinator [mode]="mode"></ksp-degree-cert-coordinator>
 </form>

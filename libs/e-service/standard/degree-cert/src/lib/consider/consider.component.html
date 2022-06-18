@@ -1,24 +1,18 @@
 <div class="container">
   <div class="title__label">รายละเอียดใบคำขอ</div>
   <div class="content__container">
-    <div class="content__header">
-      <div class="label__content">
-        วันที่ทำรายการ :
-        <span class="label__content--primary">10 ตุลาคม 2565</span>
-      </div>
-      <div class="label__content">
-        เลขใบคำขอ :
-        <span class="label__content--secondary">112234467876543</span>
-      </div>
-    </div>
-
+    <ksp-request-header-info
+      [requestDate]="'10 ตุลาคม 2565'"
+      [requestNumber]="'112234467876543'"
+    ></ksp-request-header-info>
     <hr />
-
     <div class="detail__container">
-      <div class="detail__header">ข้อมูลรับรองปริญญา</div>
+      <div class="detail__header">
+        ข้อมูลรับรองปริญญา และประกาศนียบัตรทางการศึกษา
+      </div>
       <ksp-degree-cert-step-one [mode]="'view'"> </ksp-degree-cert-step-one>
 
-      <button class="btn__view">
+      <button class="btn btn-primary">
         กดเพื่อดูใบคำขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา
       </button>
 
@@ -51,7 +45,7 @@
           มติและรายงานการประชุม คณะอนุกรรมการ พิจารณาประเมินหลักสูตร
         </div>
 
-        <button class="btn__upload">+ เพิ่มมติและรายงานการประชุม</button>
+        <button class="btn btn-primary">+ เพิ่มมติและรายงานการประชุม</button>
       </div>
 
       <div class="table__container">
@@ -81,7 +75,7 @@
         <div class="table__header">
           การประเมิณสภาพจริง เพื่อพิจารณาประเมินหลักสูตร
         </div>
-        <button class="btn__upload">+ เพิ่มการประเมิณสภาพจริง</button>
+        <button class="btn btn-primary">+ เพิ่มการประเมิณสภาพจริง</button>
       </div>
 
       <div class="table__container">
@@ -106,54 +100,8 @@
           </table>
         </div>
       </div>
-
-      <div class="table__header">โครงสร้างหลักสูตร</div>
-      <div class="table__container">
-        <div class="table-responsive">
-          <table class="table">
-            <thead class="header__table">
-              <tr>
-                <th scope="col">เลขที่ใบคำขอ</th>
-                <th scope="col">วันที่ส่งคำขอ</th>
-                <th scope="col">สถาบัน / มหาวิทยาลัย</th>
-                <th scope="col">ชื่อปริญญา / สาขาวิชา</th>
-              </tr>
-            </thead>
-            <tbody class="body__table">
-              <tr>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="table__header">แผนการรับนิสิต / นักศึกษา</div>
-      <div class="table__container">
-        <div class="table-responsive">
-          <table class="table">
-            <thead class="header__table">
-              <tr>
-                <th scope="col">เลขที่ใบคำขอ</th>
-                <th scope="col">วันที่ส่งคำขอ</th>
-                <th scope="col">สถาบัน / มหาวิทยาลัย</th>
-                <th scope="col">ชื่อปริญญา / สาขาวิชา</th>
-              </tr>
-            </thead>
-            <tbody class="body__table">
-              <tr>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <ksp-step-2-tab-1-a [mode]="'view'"></ksp-step-2-tab-1-a>
+      <!-- <ksp-step-2-tab-1-b [mode]="'view'"></ksp-step-2-tab-1-b> -->
     </div>
   </div>
 
@@ -167,7 +115,9 @@
     (cancelClicked)="cancel()"
     (prevClicked)="prevPage()"
     (saveClicked)="save()"
+    [isFirstPage]="true"
     [isLastPage]="true"
+    [showSaveButton]="true"
     [showCenterButtons]="true"
   >
   </ksp-bottom-menu>

@@ -1,13 +1,8 @@
 <form [formGroup]="form">
-  <div class="tab-content" id="nav-tabContent">
-    <div
-      class="tab-pane fade show active tab__body"
-      id="nav-home"
-      role="tabpanel"
-      aria-labelledby="nav-home-tab"
-    >
+  <div class="tab-content">
+    <div class="tab-pane fade show active tab__body">
       <div class="tab__content">
-        <div class="header__detail">
+        <div *ngIf="mode === 'edit'" class="header__detail">
           ปริญญา/หลักสูตร<br />
           1) ปริญญาตรีทางการศึกษา (วิชาชีพครู) <br />
           2) ปริญญาตรีทางการศึกษา (วิชาชีพบริหาร) <br />

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormMode } from '@ksp/shared/interface';
 
 @Component({
   selector: 'ksp-degree-cert-coordinator',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./coordinator.component.scss'],
 })
 export class DegreeCertCoordinatorComponent implements OnInit {
+  @Input() mode: FormMode = 'edit';
+
   constructor() {}
 
   ngOnInit(): void {}

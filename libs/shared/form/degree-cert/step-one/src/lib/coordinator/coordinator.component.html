@@ -81,7 +81,7 @@
   </div>
 </div>
 
-<div class="alert__text-container">
+<div *ngIf="mode === 'edit'" class="alert__text-container">
   <span class="alert__text"
     >*กรุณากรอกข้อมูลให้ถูกต้อง
     เพื่อประโยชน์ของตัวท่านเองโปรดตรวจสอบอีกครั้งก่อนการบันทึกลงระบบ</span

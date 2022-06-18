@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { FormMode } from '@ksp/shared/interface';
 import { debounceTime } from 'rxjs';
 
 @Component({
@@ -8,6 +9,8 @@ import { debounceTime } from 'rxjs';
   styleUrls: ['./course-type-a.component.scss'],
 })
 export class CourseTypeAComponent implements OnInit {
+  @Input() mode: FormMode = 'edit';
+
   totalCredit = 0;
   totalStudent = 0;
 
@@ -69,6 +72,8 @@ export class CourseTypeAComponent implements OnInit {
 
     plans.forEach((p) => this.plans.push(p));
     subjects.forEach((s) => this.subjects.push(s));
+
+    if (this.mode === 'view') this.form.disable();
   }
 
   newPlan(year: number) {

@@ -10,12 +10,12 @@
       class="tab-content"
     >
       <div *ngIf="formType === 'a'; then typeA; else typeB"></div>
-      <ng-template #typeA
-        ><ksp-step-2-tab-1-a></ksp-step-2-tab-1-a
-      ></ng-template>
-      <ng-template #typeB
-        ><ksp-step-2-tab-1-b></ksp-step-2-tab-1-b
-      ></ng-template>
+      <ng-template #typeA>
+        <ksp-step-2-tab-1-a></ksp-step-2-tab-1-a>
+      </ng-template>
+      <ng-template #typeB>
+        <ksp-step-2-tab-1-b></ksp-step-2-tab-1-b>
+      </ng-template>
     </mat-tab>
 
     <mat-tab label="อาจารย์ / ผู้รับผิดชอบประจำหลักสูตร">
