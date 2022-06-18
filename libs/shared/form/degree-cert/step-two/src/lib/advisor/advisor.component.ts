@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { FormMode } from '@ksp/shared/interface';
 import { debounceTime } from 'rxjs';
 
 @Component({
@@ -8,6 +9,8 @@ import { debounceTime } from 'rxjs';
   styleUrls: ['./advisor.component.scss'],
 })
 export class AdvisorComponent implements OnInit {
+  @Input() mode: FormMode = 'edit';
+
   advisorForm = this.fb.group({
     generalInfo: [],
     hasMoreCourses: [],
@@ -29,7 +32,7 @@ export class AdvisorComponent implements OnInit {
 
   ngOnInit(): void {
     this.mainForm.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
-      console.log('form value = ', res);
+      //console.log('form value = ', res);
     });
   }
 

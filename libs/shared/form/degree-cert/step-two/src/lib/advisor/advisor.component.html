@@ -25,6 +25,7 @@
         </div>
         <div class="group__container">
           <ksp-teacher-general-info
+            [mode]="mode"
             formControlName="generalInfo"
           ></ksp-teacher-general-info>
 
@@ -79,7 +80,7 @@
             </ng-container>
             <div class="mb-3">
               <ksp-add-row-button
-                *ngIf="getCourses(i).length < 5"
+                *ngIf="getCourses(i).length < 5 && mode === 'edit'"
                 (addClick)="addCourse(i)"
                 >เพิ่มหลักสูตร</ksp-add-row-button
               >
@@ -93,7 +94,7 @@
 
 <ksp-add-row-button
   (addClick)="addAdvisor()"
-  *ngIf="advisors.length < 5"
+  *ngIf="advisors.length < 5 && mode === 'edit'"
   [mode]="'blue'"
   >เพิ่มที่ปรึกษาวิทยานิพนธ์และการค้นคว้าอิสระ
 </ksp-add-row-button>

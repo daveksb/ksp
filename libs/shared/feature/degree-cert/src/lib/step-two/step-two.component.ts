@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
-import { Router } from '@angular/router';
+import { FormMode } from '@ksp/shared/interface';
 
 @Component({
   selector: 'ksp-degree-cert-step-two',
@@ -10,8 +10,7 @@ import { Router } from '@angular/router';
 export class DegreeCertStepTwoComponent {
   @Output() tabIndexChanged = new EventEmitter<number>();
   @Input() formType = 'a';
-
-  constructor(private router: Router) {}
+  @Input() mode: FormMode = 'edit';
 
   tabChanged($event: MatTabChangeEvent) {
     //console.log('tab index = ', $event.index);

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { FormMode } from '@ksp/shared/interface';
 import { debounceTime } from 'rxjs';
 
 @Component({
@@ -8,6 +9,8 @@ import { debounceTime } from 'rxjs';
   styleUrls: ['./teacher.component.scss'],
 })
 export class TeacherComponent implements OnInit {
+  @Input() mode: FormMode = 'edit';
+
   teacherForm = this.fb.group({
     generalInfo: [],
     hasMoreCourses: [],
@@ -26,7 +29,7 @@ export class TeacherComponent implements OnInit {
 
   ngOnInit(): void {
     this.mainForm.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
-      console.log('form value = ', res);
+      //console.log('form value = ', res);
     });
   }
 

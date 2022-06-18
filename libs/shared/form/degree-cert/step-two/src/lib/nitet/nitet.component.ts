@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { FormMode } from '@ksp/shared/interface';
 import { debounceTime } from 'rxjs';
 
 @Component({
@@ -8,6 +9,8 @@ import { debounceTime } from 'rxjs';
   styleUrls: ['./nitet.component.scss'],
 })
 export class NitetComponent implements OnInit {
+  @Input() mode: FormMode = 'edit';
+
   experienceYearFocused = false;
   opaciseBox: boolean[] = [];
 
