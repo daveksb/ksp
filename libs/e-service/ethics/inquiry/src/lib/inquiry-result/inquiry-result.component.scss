@@ -12,20 +12,6 @@
 
 .box-container {
   background-color: white;
-  margin: 12px;
-  padding: 12px;
-}
-
-.content__container {
-  margin: 24px 48px;
-  padding: 24px;
-  background-color: #f9f9fa;
-}
-.btn-secondary {
-  font-size: 16px;
-  background-color: #0056ff;
-  width: auto;
-  border-radius: 4px;
 }
 
 .bottom__container {
@@ -46,49 +32,6 @@
   height: 50px;
 }
 
-.btn-primary {
-  font-size: 20px;
-  background: #fff;
-  border: 1px solid #01b27b;
-  box-sizing: border-box;
-  border-radius: 1px;
-  color: #01b27b;
-  padding: 0 20px;
-  margin: 8px;
-  width: 150px;
-}
-
-.btn-secondary {
-  font-size: 20px;
-  background: #fff;
-  border: 1px solid #f68b33;
-  box-sizing: border-box;
-  border-radius: 1px;
-  color: #f68b33;
-  padding: 0 20px;
-  margin: 8px;
-  width: 150px;
-}
-
-.btn-third {
-  font-size: 20px;
-  background: #01b27b;
-  border: 1px solid #01b27b;
-  box-sizing: border-box;
-  border-radius: 1px;
-  color: #fff;
-  padding: 0 20px;
-  margin: 8px;
-  width: 150px;
-}
-
-.page__title {
-  padding-left: 15px;
-  padding-top: 15px;
-  font-size: 22px;
-  color: #000;
-}
-
 .form__container {
   padding: 0 24px;
 }
@@ -101,12 +44,7 @@
 
 .form-control {
   background-color: #fff;
-}
-
-.form-header {
   font-size: 18px;
-  color: #000;
-  margin-bottom: 12px;
 }
 
 .btn__center {

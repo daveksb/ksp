@@ -4,8 +4,6 @@
     hide__container: hideContainer
   }"
 >
-  <div class="page__title" *ngIf="!hideTitle">บันทึกข้อมูลการสืบสวนข้อเท็จจริง</div>
-  <img src="" />
 
   <div class="box-container">
     <div class="content__header">
@@ -28,11 +26,11 @@
           <label for="exampleFormControlInput1" class="form-label"
             >หมายเลขแดง
           </label>
-          <input class="form-control form-control-sm" type="date" />
+          <input class="form-control form-control-sm" type="text" />
         </div>
       </div>
 
-      <div>จัดทำคำวินิจฉัยคณะกรรมการมาตรฐานวิชาชีพ</div>
+      <div class="header">จัดทำคำวินิจฉัยคณะกรรมการมาตรฐานวิชาชีพ</div>
       <div class="content__container-secondary">
         <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label"
@@ -52,12 +50,12 @@
             ><br />
           </label>
           <div>
-            <button class="btn__upload">+ อัพโหลดไฟล์</button>
+            <button class="btn btn-primary">+ อัพโหลดไฟล์</button>
           </div>
         </div>
       </div>
 
-      <div>แจ้งผู้กล่าวหา/กล่าวโทษทราบ</div>
+      <div class="header">แจ้งผู้กล่าวหา/กล่าวโทษทราบ</div>
       <div class="content__container-third">
         <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label"
@@ -71,12 +69,12 @@
             ><br />
           </label>
           <div>
-            <button class="btn__upload">+ อัพโหลดไฟล์</button>
+            <button class="btn btn-primary">+ อัพโหลดไฟล์</button>
           </div>
         </div>
       </div>
 
-      <div>แจ้งต้นสังกัดทราบ</div>
+      <div class="header">แจ้งต้นสังกัดทราบ</div>
       <div class="content__container-third">
         <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label"
@@ -89,12 +87,12 @@
             ><br />
           </label>
           <div>
-            <button class="btn__upload">+ อัพโหลดไฟล์</button>
+            <button class="btn btn-primary">+ อัพโหลดไฟล์</button>
           </div>
         </div>
       </div>
 
-      <div>แจ้งผู้ถูกกล่าวหา/กล่าวโทษทราบ</div>
+      <div class="header">แจ้งผู้ถูกกล่าวหา/กล่าวโทษทราบ</div>
       <div class="content__container-third">
         <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label"
@@ -108,7 +106,7 @@
             ><br />
           </label>
           <div>
-            <button class="btn__upload">+ อัพโหลดไฟล์</button>
+            <button class="btn btn-primary">+ อัพโหลดไฟล์</button>
           </div>
         </div>
       </div>
@@ -129,7 +127,7 @@
   </div> -->
 </div>
 
-<div class="bottom__container" *ngIf="!hideAllButtons">
+<!-- <div class="bottom__container" *ngIf="!hideAllButtons">
   <ksp-bottom-menu
     [showCenterButtons]="true"
     [isLastPage]="true"
@@ -138,3 +136,4 @@
     (saveClicked)="save()"
   ></ksp-bottom-menu>
 </div>
+ -->

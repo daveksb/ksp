@@ -11,8 +11,10 @@
     </div>
 
     <div class="button__group">
-      <button (click)="cancel()" class="btn__cancel">ยกเลิก</button>
-      <button (click)="save()" class="btn__save">บันทึก</button>
+      <button (click)="cancel()" class="btn btn-outline-success">ยกเลิก</button>
+      <button (click)="save()" id="btn-save" class="btn btn-success">
+        บันทึก
+      </button>
     </div>
   </div>
 
@@ -23,7 +25,9 @@
       dynamicHeight="true"
     >
       <mat-tab label="สอบสวน" class="tab-content">
-        <e-service-inquiry-detail></e-service-inquiry-detail>
+        <e-service-inquiry-detail
+          [hideContainer]="true"
+        ></e-service-inquiry-detail>
       </mat-tab>
 
       <mat-tab label="แจ้งผลคำวินิจฉัย">
@@ -31,12 +35,29 @@
       </mat-tab>
 
       <mat-tab label="บันทึกการกล่าวหา/กล่าวโทษ">
-        <e-service-ethic-accusation-record></e-service-ethic-accusation-record>
+        <e-service-ethic-accusation-record
+          [hideAllButtons]="true"
+          [hideBox]="true"
+          [hideContainer]="true"
+        ></e-service-ethic-accusation-record>
       </mat-tab>
 
       <mat-tab label="สืบสวนข้อเท็จจริง">
-        <e-service-investigation-detail></e-service-investigation-detail>
+        <e-service-investigation-detail
+          [hideContainer]="true"
+        ></e-service-investigation-detail>
       </mat-tab>
     </mat-tab-group>
   </div>
+</div>
+
+<div class="bottom__container">
+  <ksp-bottom-menu
+    [showCenterButtons]="true"
+    [isFirstPage]="true"
+    [isLastPage]="true"
+    [showSaveButton]="true"
+    (saveClicked)="save()"
+    (cancelClicked)="cancel()"
+  ></ksp-bottom-menu>
 </div>

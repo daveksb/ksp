@@ -33,10 +33,17 @@ export class AccusationRecordComponent {
   accusationFiles = ['เอกสารกล่าวหา/กล่าวโทษ', 'สำเนาบัตรประชาชน'];
 
   constructor(private router: Router, public dialog: MatDialog) {}
+  license = [
+    'ใบอนุญาตประกอบวิชาชีพ - ครู',
+    'ใบอนุญาตประกอบวิชาชีพ - ผู้บริหารสถานศึกษา',
+    'ใบอนุญาตประกอบวิชาชีพ - ผู้บริหารสถานศึกษา',
+    'ใบอนุญาตประกอบวิชาชีพ - ศึกษานิเทศก์',
+  ];
 
   @Input() hideAllButtons = false;
   @Input() hideContainer = false;
   @Input() hideTitle = false;
+  @Input() hideBox = false;
 
   next() {
     this.router.navigate(['/', 'accusation', 'decision']);

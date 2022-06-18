@@ -36,7 +36,7 @@ export const ethicsMenu: MenuConfig[] = [
     subMenuName: 'report',
     subMenu: [
       {
-        path: 'record',
+        path: 'accusation',
         label: 'รายงานสถิติการกล่าวหา/กล่าวโทษ',
       },
       {

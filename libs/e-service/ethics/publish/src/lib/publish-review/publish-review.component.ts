@@ -20,7 +20,6 @@ export class PublishReviewComponent {
 
   save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      height: '175px',
       width: '350px',
       data: {
         title: `คุณยืนยันการบันทึกข้อมูล
@@ -37,7 +36,6 @@ export class PublishReviewComponent {
 
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      height: '275px',
       width: '375px',
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,

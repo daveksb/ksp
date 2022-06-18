@@ -9,7 +9,12 @@
   </div>
   <img src="" />
 
-  <div class="box-container">
+  <div
+    class="box-container"
+    [ngClass]="{
+      hide__box: hideBox
+    }"
+  >
     <div class="content__header">
       <div class="label__content">
         เลขที่รายการ :
@@ -58,7 +63,12 @@
     </div>
   </div>
 
-  <div class="box-container">
+  <div
+    class="box-container"
+    [ngClass]="{
+      hide__box: hideBox
+    }"
+  >
     <div class="table__title">ข้อมูลผู้ถูกกล่าวหา/กล่าวโทษ</div>
     <button (click)="openSearchDialog()" type="button" class="btn-search">
       ค้นหา/เปลี่ยนแปลง ข้อมูลผู้มีใบอนุญาต
@@ -74,10 +84,11 @@
           <div class="header">
             ข้อมูลใบอนุญาตประกอบวิชาชีพทางการศึกษา (ยังไม่หมดอายุ)
           </div>
-          <ksp-license-type-button-group></ksp-license-type-button-group>
+          <ksp-license-type-button-group
+            [groups]="license"
+          ></ksp-license-type-button-group>
           <ksp-license-info></ksp-license-info>
-          ></mat-tab
-        >
+        </mat-tab>
 
         <mat-tab label="ที่อยู่">
           <e-service-address-info></e-service-address-info>
