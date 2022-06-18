@@ -1,4 +1,5 @@
 .header {
+  font-size: 22px;
   margin-left: 20px;
 }
 
@@ -92,4 +93,8 @@ table {
   color: #00de74;
   cursor: pointer;
   font-size: 20px;
+}
+
+tr.mat-header-row {
+  background-color: #edf8ff;
 }

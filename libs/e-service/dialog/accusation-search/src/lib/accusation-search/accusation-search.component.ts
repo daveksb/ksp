@@ -7,6 +7,12 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./accusation-search.component.scss'],
 })
 export class AccusationSearchComponent {
+  license = [
+    'ใบอนุญาตประกอบวิชาชีพ - ครู',
+    'ใบอนุญาตประกอบวิชาชีพ - ผู้บริหารสถานศึกษา',
+    'ใบอนุญาตประกอบวิชาชีพ - ผู้บริหารสถานศึกษา',
+    'ใบอนุญาตประกอบวิชาชีพ - ศึกษานิเทศก์',
+  ];
   personSelected = false;
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<PersonLicense>();
