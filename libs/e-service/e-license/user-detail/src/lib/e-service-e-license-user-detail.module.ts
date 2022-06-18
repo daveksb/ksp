@@ -9,6 +9,7 @@ import {
   FormCoordinatorInfoComponent,
   FormRequesterInfoComponent,
 } from '@ksp/shared/form/school/register';
+import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import {
     RequestHeaderInfoComponent,
     FormRequesterInfoComponent,
     FormCoordinatorInfoComponent,
+    SharedUiTopNavModule
   ],
   declarations: [UserDetailComponent],
   exports: [UserDetailComponent],

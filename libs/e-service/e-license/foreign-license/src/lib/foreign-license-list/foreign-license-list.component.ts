@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
-export interface TempLicenseInfo {
+export interface ForeignLicenseInfo {
   order: number;
   reqCode: string;
   ssn: string;
@@ -13,7 +14,7 @@ export interface TempLicenseInfo {
   sendDate: string;
 }
 
-export const data: TempLicenseInfo[] = [
+export const data: ForeignLicenseInfo[] = [
   {
     order: 1,
     reqCode: 'SF_TR6406000001',
@@ -60,21 +61,35 @@ export const data: TempLicenseInfo[] = [
   },
 ];
 
+export const column = [
+  'order',
+  'reqCode',
+  'ssn',
+  'name',
+  'professType',
+  'workStep',
+  'status',
+  'editDate',
+  'sendDate',
+  'view',
+];
+
 @Component({
   selector: 'ksp-foreign-license-list',
   templateUrl: './foreign-license-list.component.html',
   styleUrls: ['./foreign-license-list.component.scss'],
 })
 export class ForeignLicenseListComponent {
+  displayedColumns: string[] = column;
+  dataSource = new MatTableDataSource<ForeignLicenseInfo>();
   constructor(private router: Router) {}
-  data: TempLicenseInfo[] = [];
 
   search() {
-    this.data = data;
+    this.dataSource.data = data;
   }
 
   clear() {
-    this.data = [];
+    this.dataSource.data = [];
   }
 
   nextPage(requestType: number) {

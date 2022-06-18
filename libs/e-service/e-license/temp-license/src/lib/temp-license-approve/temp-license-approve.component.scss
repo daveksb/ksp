@@ -2,17 +2,23 @@
   font-size: 16px;
 }
 
+.header__container {
+  display: flex;
+  justify-content: space-between;
+}
+
 .container {
   max-width: 100%;
-  padding: 0 0 5px 0;
-  background-color: #f6f6f6;
+  padding: 0 32px;
+  background-color: #e5e5e5;
+  padding-bottom: 75px;
 }
 
 .detail__container {
   background: #ffffff;
   box-shadow: 0px 0px 15px #e2e2e2;
-  padding: 24px;
-  margin: 9px 40px;
+  padding: 16px;
+  margin-bottom: 12px;
 }
 
 .content__container {
@@ -22,38 +28,15 @@
   margin: 10px;
 }
 
-.label__content {
-  font-size: 18px;
-  color: #808080;
-  margin-right: 24px;
-}
-
-.label__content-2 {
-  display: flex;
-  flex-direction: row;
-}
-
-.label__content--primary {
-  color: #f68b33;
-}
-.label__content--secondary {
-  color: #0056ff;
-}
-.content__header {
-  display: flex;
-  flex-direction: column;
-}
 .header {
   font-size: 22px;
   color: #000000;
-  padding-top: 20px;
-  padding-left: 40px;
+  padding: 12px 0;
 }
 
 .header-2 {
-  font-size: 16px;
+  font-size: 22px;
   color: #0056ff;
-  margin-bottom: 20px;
 }
 
 .header-3 {
@@ -72,33 +55,15 @@
   margin: 10px 40px;
 }
 
-.btn__container {
-  padding: 10px;
-  display: flex;
-  justify-content: center;
+.bottom__container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   background-color: #fff;
-  border: 1px solid #e2e2e2;
+  z-index: 1;
 }
 
-.btn__back {
-  font-size: 18px;
-  color: #01b27b;
-  background-color: #fff;
-  border: 1px solid #01b27b;
-  border-radius: 2px;
-  width: 100px;
-  margin: 0 10px;
-}
-
-.btn__next {
-  font-size: 18px;
-  color: #fff;
-  background-color: #01b27b;
-  border: 1px solid #01b27b;
-  border-radius: 2px;
-  width: 100px;
-  margin: 0 10px;
-}
 .form-check {
   line-height: 20px;
 }
@@ -142,21 +107,6 @@
 
 .table__container {
   margin: 10px 75px;
-}
-
-.btn__view {
-  background-color: #01b27b;
-  color: #fff;
-  border: 1px solid #01b27b;
-  border-radius: 4px;
-}
-
-.btn__print {
-  background-color: #fff;
-  color: #01b27b;
-  border: 1px solid #01b27b;
-  border-radius: 4px;
-  width: 75px;
 }
 
 .picture__box {

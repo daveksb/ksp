@@ -156,11 +156,11 @@ export const licenseMenu: MenuConfig[] = [
     subMenuName: 'foreign-id',
     subMenu: [
       {
-        path: 'bb',
+        path: 'foreign-license/list',
         label: 'รายการใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
       },
       {
-        path: 'aa',
+        path: 'foreign-license/detail',
         label: 'พิจารณาเลขคุรุสภาสำหรับชาวต่างชาติ',
       },
     ],

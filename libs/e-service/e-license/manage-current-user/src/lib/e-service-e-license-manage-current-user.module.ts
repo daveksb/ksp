@@ -6,6 +6,8 @@ import { UserDetailComponent } from '@ksp/e-service/e-license/user-detail';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { ManageCurrentUserListComponent } from './user-list/manage-current-user-list.component';
+import { MatIconModule } from '@angular/material/icon';
+import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 
 export const routes: Routes = [
   {
@@ -34,6 +36,8 @@ export const routes: Routes = [
     CommonModule,
     MatDialogModule,
     MatTableModule,
+    MatIconModule,
+    SharedUiTopNavModule,
     RouterModule.forChild(routes),
   ],
   declarations: [ManageCurrentUserListComponent],

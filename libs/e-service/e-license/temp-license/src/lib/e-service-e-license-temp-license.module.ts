@@ -12,6 +12,10 @@ import { TempLicenseCheckConfirmComponent } from './temp-license-check-confirm/t
 import { MatDialogModule } from '@angular/material/dialog';
 import { TempLicenseApproveComponent } from './temp-license-approve/temp-license-approve.component';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
+import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
+import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
 
 export const routes: Routes = [
   {
@@ -56,6 +60,10 @@ export const routes: Routes = [
     EServiceUiLicenseCheckModule,
     RouterModule.forChild(routes),
     SharedUiBottomMenuModule,
+    RequestHeaderInfoComponent,
+    SharedUiTopNavModule,
+    MatTableModule,
+    MatIconModule,
   ],
   declarations: [
     TempLicenseListComponent,

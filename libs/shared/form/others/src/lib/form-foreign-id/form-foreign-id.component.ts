@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { FormMode } from '@ksp/shared/interface';
 
 @Component({
   selector: 'ksp-form-foreign-id',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./form-foreign-id.component.scss'],
 })
 export class FormForeignIdComponent {
+  @Input() mode: FormMode = 'edit';
+  
   foreignInfo = ['1.สำเนาหนังสือเดินทาง'];
 }

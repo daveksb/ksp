@@ -1,19 +1,20 @@
+<ksp-top-nav
+  ><span header>ยื่นใบคำขอ</span
+  ><span subHeader
+    >ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ
+  </span></ksp-top-nav
+>
+
 <div class="container">
   <div class="header">
     รายละเอียดใบคำขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
     (ชาวไทย)
   </div>
   <div class="detail__container">
-    <div class="content__header">
-      <div class="label__content">
-        วันที่ทำรายการ :
-        <span class="label__content--primary">10 ตุลาคม 2565</span>
-      </div>
-      <div class="label__content">
-        เลขใบคำขอ :
-        <span class="label__content--secondary">112234467876543</span>
-      </div>
-    </div>
+    <ksp-request-header-info
+      [requestDate]="'10 ตุลาคม 2565'"
+      [requestNumber]="'112234467876543'"
+    ></ksp-request-header-info>
 
     <hr />
 
@@ -99,6 +100,7 @@
       (cancelClicked)="cancel()"
       (prevClicked)="prevPage()"
       (nextClicked)="next()"
+      [showSaveButton]="true"
       [showCenterButtons]="true"
       [isFirstPage]="true"
     ></ksp-bottom-menu>
