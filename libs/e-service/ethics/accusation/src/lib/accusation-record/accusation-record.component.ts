@@ -1,26 +1,56 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
 import { Router } from '@angular/router';
 import { AccusationSearchComponent } from '@ksp/e-service/dialog/accusation-search';
+import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-info';
+import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
+import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
+import { SharedUiLicenseTypeButtonGroupModule } from '@ksp/shared/ui/license-type-button-group';
+import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
 
 @Component({
   selector: 'e-service-ethic-accusation-record',
   templateUrl: './accusation-record.component.html',
   styleUrls: ['./accusation-record.component.scss'],
+  standalone: true,
+  imports: [
+    MatTabsModule,
+    CommonModule,
+    SharedUiBottomMenuModule,
+    SharedFormOthersModule,
+    SharedUiLicenseTypeButtonGroupModule,
+    EServiceUiAccusationInfoModule,
+    SharedUiLicenseInfoModule,
+    RequestHeaderInfoComponent,
+    MatIconModule,
+  ],
 })
 export class AccusationRecordComponent {
+  accusationFiles = ['เอกสารกล่าวหา/กล่าวโทษ', 'สำเนาบัตรประชาชน'];
+
   constructor(private router: Router, public dialog: MatDialog) {}
+  license = [
+    'ใบอนุญาตประกอบวิชาชีพ - ครู',
+    'ใบอนุญาตประกอบวิชาชีพ - ผู้บริหารสถานศึกษา',
+    'ใบอนุญาตประกอบวิชาชีพ - ผู้บริหารสถานศึกษา',
+    'ใบอนุญาตประกอบวิชาชีพ - ศึกษานิเทศก์',
+  ];
 
   @Input() hideAllButtons = false;
   @Input() hideContainer = false;
   @Input() hideTitle = false;
+  @Input() hideBox = false;
 
   next() {
-    this.router.navigate(['/', 'ethics', 'accusation', 'decision']);
+    this.router.navigate(['/', 'accusation', 'decision']);
   }
 
   cancel() {
-    this.router.navigate(['/', 'ethics', 'accusation']);
+    this.router.navigate(['/', 'accusation']);
   }
 
   openSearchDialog() {

@@ -32,16 +32,48 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'ethics',
-    data: { menuConfig: ethicsMenu, headerLabel: 'ระบบงานจรรยาบรรณ' },
+    path: 'investigation',
+    data: {
+      type: 'investigation',
+      menuConfig: ethicsMenu,
+      headerLabel: 'ระบบงานจรรยาบรรณ',
+    },
+    loadChildren: () =>
+      import('@ksp/e-service/ethics/investigation').then(
+        (m) => m.EServiceEthicsInvestigationModule
+      ),
+  },
+  {
+    path: 'accusation',
+    data: {
+      type: 'accusationxxx',
+      menuConfig: ethicsMenu,
+      headerLabel: 'ระบบงานจรรยาบรรณ',
+    },
     loadChildren: () =>
       import('@ksp/e-service/ethics/accusation').then(
         (m) => m.EServiceEthicsAccusationModule
       ),
   },
   {
+    path: 'inquiry',
+    data: {
+      type: 'inquiry',
+      menuConfig: ethicsMenu,
+      headerLabel: 'ระบบงานจรรยาบรรณ',
+    },
+    loadChildren: () =>
+      import('@ksp/e-service/ethics/inquiry').then(
+        (m) => m.EServiceEthicsInquiryModule
+      ),
+  },
+  {
     path: 'publish',
-    data: { menuConfig: ethicsMenu, headerLabel: 'ระบบงานจรรยาบรรณ' },
+    data: {
+      type: 'publish',
+      menuConfig: ethicsMenu,
+      headerLabel: 'ระบบงานจรรยาบรรณ',
+    },
     loadChildren: () =>
       import('@ksp/e-service/ethics/publish').then(
         (m) => m.EServiceEthicsPublishModule

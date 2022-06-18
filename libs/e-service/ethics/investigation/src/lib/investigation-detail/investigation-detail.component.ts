@@ -1,15 +1,36 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
 import { Router } from '@angular/router';
+import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-info';
+import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/ui/dialog';
+import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
+import { SharedUiLicenseTypeButtonGroupModule } from '@ksp/shared/ui/license-type-button-group';
+import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
 
 @Component({
   selector: 'e-service-investigation-detail',
   templateUrl: './investigation-detail.component.html',
   styleUrls: ['./investigation-detail.component.scss'],
+  standalone: true,
+  imports: [
+    MatTabsModule,
+    CommonModule,
+    SharedUiBottomMenuModule,
+    SharedFormOthersModule,
+    SharedUiLicenseTypeButtonGroupModule,
+    EServiceUiAccusationInfoModule,
+    SharedUiLicenseInfoModule,
+    RequestHeaderInfoComponent,
+    MatIconModule,
+  ],
 })
 export class InvestigationDetailComponent {
   constructor(private router: Router, public dialog: MatDialog) {}

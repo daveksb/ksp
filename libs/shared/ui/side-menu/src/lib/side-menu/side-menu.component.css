@@ -96,7 +96,7 @@ a[data-bs-toggle='collapse'] {
   position: absolute;
   top: 45%;
   right: 20px;
-  transform: rotate(-180deg);
+  transform: rotate(180deg);
 }
 
 ul ul a {

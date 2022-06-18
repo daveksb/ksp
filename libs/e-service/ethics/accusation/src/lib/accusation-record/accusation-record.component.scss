@@ -13,7 +13,7 @@
 
 .box-container {
   background-color: white;
-  margin: 12px;
+  margin: 0 16px 16px 16px;
   padding: 12px;
 }
 
@@ -46,8 +46,7 @@
 }
 
 .page__title {
-  padding-left: 15px;
-  padding-top: 15px;
+  padding: 12px;
   font-size: 22px;
   color: #000;
 }
@@ -63,7 +62,7 @@
 }
 
 .form__container {
-  padding: 24px;
+  padding: 12px;
 }
 
 .form-label {
@@ -86,25 +85,6 @@
   margin: 0 20px;
 }
 
-.footer {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  margin-left: 237px;
-  padding: 0 65px;
-  border: 1px solid #dadde1;
-  height: 50px;
-}
-
-.btn__center {
-  display: flex;
-  justify-content: center;
-}
-
-.btn__right {
-  display: flex;
-  justify-content: flex-end;
-}
-
 .bottom__container {
   position: fixed;
   bottom: 0;
@@ -114,72 +94,27 @@
   z-index: 1;
 }
 
-.btn-primary {
-  font-size: 20px;
-  background: #fff;
-  border: 1px solid #01b27b;
-  box-sizing: border-box;
-  border-radius: 1px;
-  color: #01b27b;
-  padding: 0 20px;
-  margin: 8px;
-  width: 150px;
-}
-
-.btn-secondary {
-  font-size: 20px;
-  background: #fff;
-  border: 1px solid #f68b33;
-  box-sizing: border-box;
-  border-radius: 1px;
-  color: #f68b33;
-  padding: 0 20px;
-  margin: 8px;
-  width: 150px;
-}
-
-.btn-third {
-  font-size: 20px;
-  background: #01b27b;
-  border: 1px solid #01b27b;
-  box-sizing: border-box;
-  border-radius: 1px;
-  color: #fff;
-  padding: 0 20px;
-  margin: 8px;
-  width: 150px;
-}
-
-.btn-search {
-  font-size: 16px;
-  background-color: #0056ff;
-  border: 1px solid #0056ff;
+#btn-search {
   width: auto;
-  color: #fff;
-  padding: 4px 12px;
-  margin: 12px 24px;
+  margin: 24px;
 }
 
-.label__content {
-  font-size: 18px;
-  color: #808080;
-  margin-right: 24px;
+.edit {
+  color: #0056ff;
+  cursor: pointer;
 }
 
-.label__content--primary {
-  color: #f68b33;
-}
-
-.label__content--secondary {
-  color: #01b27b;
-}
-
-.content__header {
-  display: flex;
-  flex-direction: row;
+.delete {
+  color: red;
+  cursor: pointer;
 }
 
 .hide__container {
   background-color: #fff;
   padding-bottom: 0;
+}
+
+.hide__box {
+  margin: 0;
+  padding: 0;
 }
