@@ -23,20 +23,20 @@
 .title__label {
   font-size: 22px;
   color: #000000;
-  margin: 0 64px 12px 64px;
-  padding-top: 12px;
+  margin: 5px 20px;
 }
+
 .content__container {
   background: #ffffff;
   border-radius: 5px;
-  padding: 24px;
-  margin: 0px 64px;
+  padding: 10px 20px;
+  margin: 0px 20px;
 }
 
 .detail__header {
   font-size: 22px;
   color: #000000;
-  margin: 12px;
+  margin: 0 6px;
 }
 
 .table__container {
@@ -77,45 +77,15 @@
 }
 
 .table__header-2 {
- display: flex;
- justify-content: space-between;
-}
-
-.btn__view {
-  background-color: #0056ff;
-  color: #fff;
-  border: 1px solid #0056ff;
-  height: 40px;
-  border-radius: 4px;
-  font-size: 20px;
-}
-
-.btn__upload {
-  background-color: #0056ff;
-  color: #fff;
-  border: 1px solid #0056ff;
-  height: 40px;
-  border-radius: 4px;
-  margin: 0 12px;
-  font-size: 16px;
-}
-
-.content__header {
   display: flex;
-}
-.label__content {
-  font-size: 18px;
-  color: #808080;
-  margin-right: 24px;
-}
-.label__content--primary {
-  color: #f68b33;
-}
-.label__content--secondary {
-  color: #0056ff;
+  justify-content: space-between;
 }
 
 .result__container {
-    display: flex;
-  }
+  display: flex;
+}
 
+.btn {
+  width: auto;
+  height: 35px;
+}
