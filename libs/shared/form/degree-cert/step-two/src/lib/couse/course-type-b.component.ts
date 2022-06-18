@@ -73,9 +73,7 @@ export class CourseTypeBComponent implements OnInit {
 
         res.plans.forEach((i, index) => {
           const { label, year, ...newData } = i as any;
-
           let sum = 0;
-
           for (const property in newData) {
             sum += Number(newData[property]);
           }
@@ -116,5 +114,6 @@ export class CourseTypeBComponent implements OnInit {
 
     plans.forEach((i) => this.plans.push(i));
     subjects.forEach((i) => this.subjects.push(i));
+    if (this.mode === 'view') this.form.disable();
   }
 }

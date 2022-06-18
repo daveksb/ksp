@@ -9,20 +9,7 @@ import { debounceTime } from 'rxjs';
   styleUrls: ['./course-type-a.component.scss'],
 })
 export class CourseTypeAComponent implements OnInit {
-  private _mode: FormMode = 'edit';
-
-  @Input()
-  set mode(value: FormMode) {
-    this._mode = value;
-    if (value === 'view') {
-      console.log('mode  = ', value);
-      this.form.disable();
-    }
-  }
-
-  get mode(): FormMode {
-    return this._mode;
-  }
+  @Input() mode: FormMode = 'edit';
 
   totalCredit = 0;
   totalStudent = 0;
@@ -37,11 +24,6 @@ export class CourseTypeAComponent implements OnInit {
   ngOnInit(): void {
     this.addData();
     this.calculateSum();
-  }
-
-  disableForm() {
-    console.error('FORM DISABLED !!');
-    this.form.disable();
   }
 
   sum(source: any[], data: string): number {
@@ -90,6 +72,8 @@ export class CourseTypeAComponent implements OnInit {
 
     plans.forEach((p) => this.plans.push(p));
     subjects.forEach((s) => this.subjects.push(s));
+
+    if (this.mode === 'view') this.form.disable();
   }
 
   newPlan(year: number) {
