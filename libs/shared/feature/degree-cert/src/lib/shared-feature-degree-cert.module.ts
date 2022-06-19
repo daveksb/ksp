@@ -11,12 +11,12 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SharedDirectiveModule } from '@ksp/shared/directive';
 import { SharedUiAddRowButtonModule } from '@ksp/shared/ui/add-row-button';
 import { SharedFormDegreeCertStepTwoModule } from '@ksp/shared/form/degree-cert/step-two';
 import { SharedFormDegreeCertStepThreeModule } from '@ksp/shared/form/degree-cert/step-three';
 import { UniServiceUiFormsModule } from '@ksp/uni-service/ui/forms';
 import { SharedFormDegreeCertStepOneModule } from '@ksp/shared/form/degree-cert/step-one';
+import { DynamicComponentDirective } from '@ksp/shared/directive';
 
 @NgModule({
   imports: [
@@ -26,12 +26,12 @@ import { SharedFormDegreeCertStepOneModule } from '@ksp/shared/form/degree-cert/
     SharedFormOthersModule,
     MatTableModule,
     MatIconModule,
-    SharedDirectiveModule,
     SharedUiAddRowButtonModule,
     SharedFormDegreeCertStepTwoModule,
     SharedFormDegreeCertStepThreeModule,
     UniServiceUiFormsModule,
     SharedFormDegreeCertStepOneModule,
+    DynamicComponentDirective,
   ],
   declarations: [
     DegreeCertListComponent,

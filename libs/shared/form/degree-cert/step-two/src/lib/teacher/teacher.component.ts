@@ -1,15 +1,21 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, forwardRef, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { FormMode } from '@ksp/shared/interface';
+import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'ksp-step-2-teacher',
   templateUrl: './teacher.component.html',
   styleUrls: ['./teacher.component.scss'],
+  /*   providers: [
+    {
+      provide: KspFormBaseComponent,
+      useExisting: forwardRef(() => TeacherComponent),
+    },
+  ], */
 })
-export class TeacherComponent implements OnInit {
-  @Input() mode: FormMode = 'edit';
+export class TeacherComponent extends KspFormBaseComponent implements OnInit {
+  //@Input() mode: FormMode = 'view';
 
   teacherForm = this.fb.group({
     generalInfo: [],
@@ -25,9 +31,12 @@ export class TeacherComponent implements OnInit {
     teachers: this.fb.array([this.teacherForm]),
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    super();
+  }
 
   ngOnInit(): void {
+    console.log('xx mode = ', this.mode);
     if (this.mode === 'view') {
       this.form.disable();
     }

@@ -6,16 +6,16 @@ import { FormMode } from './form';
   template: ``,
   standalone: true,
 })
-export class KspFormBaseComponent<T> implements ControlValueAccessor {
+export abstract class KspFormBaseComponent implements ControlValueAccessor {
   @Input() mode: FormMode = 'edit';
   public disabled = false;
 
-  public value: T | null = null;
-  public onChange(newVal: T) {}
+  //public value: T | null = null;
+  public onChange(newVal: any) {}
   public onTouched(_?: any) {}
 
-  public writeValue(obj: T): void {
-    this.value = obj;
+  public writeValue(obj: any): void {
+    //this.value = obj;
   }
   public registerOnChange(fn: any): void {
     this.onChange = fn;

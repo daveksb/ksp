@@ -76,10 +76,8 @@
 </form>
 
 <div class="button__container">
-  <ksp-add-row-button
-    (addClick)="addTeacher()"
-    *ngIf="teachers.length < 5 && mode === 'edit'"
-    [mode]="'blue'"
+  <ksp-add-row-button (addClick)="addTeacher()" [mode]="'blue'"
     >เพิ่มอาจารย์ประจำหลักสูตร / ผู้รับผิดชอบหลักสูตร</ksp-add-row-button
   >
+  <!-- *ngIf="teachers.length < 5 && mode === 'edit'" -->
 </div>
