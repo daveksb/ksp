@@ -14,13 +14,12 @@ import {
 export class TempLicenseApproveComponent {
   constructor(private router: Router, public dialog: MatDialog) {}
 
-  back() {
+  cancel() {
     this.router.navigate(['/', 'temp-license', 'list']);
   }
 
-  next() {
+  save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      height: '175px',
       width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูล

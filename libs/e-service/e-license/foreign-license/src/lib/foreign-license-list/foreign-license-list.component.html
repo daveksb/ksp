@@ -1,14 +1,21 @@
+<ksp-top-nav
+  ><span header>ยื่นใบคำขอ</span
+  ><span subHeader
+    >ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ
+  </span></ksp-top-nav
+>
+
 <div class="main-container">
   <div class="header">รายการใบคำขอสร้างเลขคุรุสภาสำหรับครูชาวต่างชาติ</div>
   <div class="top-container">
-    <div class="header">ค้นหาหน่วยงาน/สถานศึกษา</div>
+    <div class="box__title">ค้นหาหน่วยงาน/สถานศึกษา</div>
 
-    <div class="detail__container"><hr /></div>
+    <hr />
 
     <div class="box__container">
-      <div class="header-2">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
+      <div class="box__title">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
       <div class="detail__container--primary">
-        <div class="detail__container">
+        <div class="mb-3">
           <label class="form-label">สังกัด </label>
           <select class="form-select form-select-sm">
             <option selected>กรุณาเลือก</option>
@@ -20,35 +27,35 @@
       </div>
 
       <div class="detail__container--secondary">
-        <div class="detail__container">
+        <div class="mb-3">
           <label class="form-label">รหัสหน่วยงาน / สถานศึกษา</label>
           <input class="form-control form-control-sm" type="text" />
         </div>
-        <div class="detail__container">
+        <div class="mb-3">
           <label class="form-label">ชื่อหน่วยงาน / สถานศึกษา</label>
           <input class="form-control form-control-sm" type="text" />
         </div>
       </div>
 
       <div class="detail__container--third">
-        <div class="detail__container">
+        <div class="mb-3">
           <label class="form-label">เลขที่ใบคำขอ</label>
           <input class="form-control form-control-sm" type="text" />
         </div>
 
-        <div class="detail__container">
+        <div class="mb-3">
           <label class="form-label">ชื่อ-นามสกุล</label>
           <input class="form-control form-control-sm" type="text" />
         </div>
       </div>
 
       <div class="detail__container--third">
-        <div class="detail__container">
+        <div class="mb-3">
           <label class="form-label">วันที่ยื่นใบคำขอ</label>
           <input class="form-control form-control-sm" type="date" />
         </div>
 
-        <div class="detail__container">
+        <div class="mb-3">
           <label class="form-label">สถานะ</label>
           <select class="form-select form-select-sm">
             <option selected>กรุณาเลือก</option>
@@ -60,64 +67,82 @@
       </div>
 
       <div class="button__container">
-        <button
-          (click)="clear()"
-          type="button"
-          class="btn btn-fourth btn-sm label__button"
-        >
+        <button (click)="clear()" type="button" class="btn btn-outline-primary">
           ล้างข้อมูล
         </button>
         <button
           (click)="search()"
+          id="btn-search"
           type="button"
-          class="btn btn-primary btn-sm label__button"
+          class="btn btn-primary"
         >
           ค้นหา
         </button>
       </div>
     </div>
+    <hr />
 
-    <div class="detail__container"><hr /></div>
-
-    <div class="table__title">
-      <div class="box__title-2">
-        รายการใบคำขอสร้างเลขคุรุสภาสำหรับครูชาวต่างชาติ
-      </div>
+    <div class="box__title-2">
+      รายการใบคำขอสร้างเลขคุรุสภาสำหรับครูชาวต่างชาติ
     </div>
     <div class="bottom-content">
-      <div class="table-responsive">
-        <table class="table">
-          <thead class="header__table">
-            <tr>
-              <th scope="col">ลำดับ</th>
-              <th scope="col">เลขที่ใบคำขอ</th>
-              <th scope="col">หมายเลขบัตรประชาชน/เลขหนังสือเดินทาง</th>
-              <th scope="col">ชื่อ-นามสกุล</th>
-              <th scope="col">โรงเรียน/หน่วยงาน</th>
-              <th scope="col">จังหวัด</th>
-              <th scope="col">สถานะ</th>
-              <th scope="col">วันที่แก้ไขล่าสุด</th>
-              <th scope="col">วันที่ยื่น</th>
-              <th scope="col">ดู/ตรวจสอบ</th>
-            </tr>
-          </thead>
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="order">
+          <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+          <td mat-cell *matCellDef="let element">{{ element.order }}</td>
+        </ng-container>
 
-          <tbody class="body__table">
-            <tr *ngFor="let item of data">
-              <td class="detail__table">{{ item.order }}</td>
-              <td class="detail__table">{{ item.reqCode }}</td>
-              <td class="detail__table">{{ item.ssn }}</td>
-              <td class="detail__table">{{ item.name }}</td>
-              <td class="detail__table">{{ item.professType }}</td>
-              <td class="detail__table">{{ item.workStep }}</td>
-              <td class="detail__table">{{ item.status }}</td>
-              <td class="detail__table">{{ item.editDate }}</td>
-              <td class="detail__table">{{ item.sendDate }}</td>
-              <td (click)="nextPage(1)" class="detail__table">ICON</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <ng-container matColumnDef="reqCode">
+          <th mat-header-cell *matHeaderCellDef>ตรวจสอบ</th>
+          <td mat-cell *matCellDef="let element">{{ element.reqCode }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="ssn">
+          <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
+          <td mat-cell *matCellDef="let element">{{ element.ssn }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="professType">
+          <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+          <td mat-cell *matCellDef="let element">{{ element.professType }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="workStep">
+          <th mat-header-cell *matHeaderCellDef>ประเภทวิชาชีพ</th>
+          <td mat-cell *matCellDef="let element">{{ element.workStep }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>สถานะ</th>
+          <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="editDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
+          <th></th>
+          <td mat-cell *matCellDef="let element">{{ element.editDate }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="sendDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่ยื่นใบคำขอ</th>
+          <td mat-cell *matCellDef="let element">{{ element.sendDate }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="view">
+          <th mat-header-cell *matHeaderCellDef>ใบอนุญาต</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-icon (click)="nextPage(1)" class="remove_red_eye">remove_red_eye</mat-icon>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
     </div>
   </div>
 </div>
