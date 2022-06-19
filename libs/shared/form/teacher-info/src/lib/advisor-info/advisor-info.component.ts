@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -55,12 +60,12 @@ export class AdvisorInfoComponent {
     }
   }
 
-  /* validate(control: AbstractControl) {
+  validate(control: AbstractControl) {
     if (this.form.valid) {
       return null;
     }
     const errors: any = {};
-    errors = this.addControlErrors(errors, 'city');
+    //errors = this.addControlErrors(errors, 'city');
     return errors;
-  } */
+  }
 }

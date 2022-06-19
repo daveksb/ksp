@@ -1,6 +1,6 @@
 import {
   Directive,
-  OnChanges,
+  OnInit,
   TemplateRef,
   ViewContainerRef,
 } from '@angular/core';
@@ -10,21 +10,18 @@ import { KspFormBaseComponent } from '@ksp/shared/interface';
   selector: '[hideInViewMode]',
   standalone: true,
 })
-export class HideInViewModeDirective implements OnChanges {
-  //@Input() hideInViewMode = false;
-
+export class HideInViewModeDirective implements OnInit {
   constructor(
     private view: ViewContainerRef,
     private template: TemplateRef<any>,
     private host: KspFormBaseComponent
   ) {}
 
-  ngOnChanges(): void {
-    console.log('mode = ', this.host.mode);
-    if (this.host.mode === 'view') {
-      this.view.clear();
-    } else {
+  ngOnInit(): void {
+    if (this.host.mode === 'edit') {
       this.view.createEmbeddedView(this.template);
+    } else {
+      this.view.clear();
     }
   }
 }

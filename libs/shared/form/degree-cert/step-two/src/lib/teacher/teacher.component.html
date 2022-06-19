@@ -63,21 +63,21 @@
             </ng-container>
             <div class="row row--fourth">
               <ksp-add-row-button
-                *ngIf="getCourses(i).length < 5 && mode === 'edit'"
+                *ngIf="getCourses(i).length < 4"
                 (addClick)="addCourse(i)"
-                >เพิ่มหลักสูตร</ksp-add-row-button
               >
-            </div></ng-container
-          >
+                เพิ่มหลักสูตร
+              </ksp-add-row-button>
+            </div>
+          </ng-container>
         </div>
       </ng-container>
     </ng-container>
   </ng-container>
 </form>
 
-<div class="button__container">
-  <ksp-add-row-button (addClick)="addTeacher()" [mode]="'blue'"
+<div *ngIf="teachers.length < 5" class="button__container">
+  <ksp-add-row-button *hideInViewMode (addClick)="addTeacher()" [mode]="'blue'"
     >เพิ่มอาจารย์ประจำหลักสูตร / ผู้รับผิดชอบหลักสูตร</ksp-add-row-button
   >
-  <!-- *ngIf="teachers.length < 5 && mode === 'edit'" -->
 </div>

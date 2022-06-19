@@ -7,16 +7,14 @@ import { debounceTime } from 'rxjs';
   selector: 'ksp-step-2-teacher',
   templateUrl: './teacher.component.html',
   styleUrls: ['./teacher.component.scss'],
-  /*   providers: [
+  providers: [
     {
       provide: KspFormBaseComponent,
       useExisting: forwardRef(() => TeacherComponent),
     },
-  ], */
+  ],
 })
 export class TeacherComponent extends KspFormBaseComponent implements OnInit {
-  //@Input() mode: FormMode = 'view';
-
   teacherForm = this.fb.group({
     generalInfo: [],
     hasMoreCourses: [],
@@ -36,7 +34,6 @@ export class TeacherComponent extends KspFormBaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('xx mode = ', this.mode);
     if (this.mode === 'view') {
       this.form.disable();
     }
