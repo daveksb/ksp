@@ -1,7 +1,8 @@
 .container {
   background-color: #e5e5e5;
   max-width: 100%;
-  padding: 5px 30px;
+  padding: 0 32px;
+  padding-bottom: 25px;
 }
 
 .detail__content {
@@ -33,13 +34,13 @@
 .content__container-2 {
   background-color: #fff;
   padding: 24px;
-  margin-top: 12px;
+  margin-top: 16px;
 }
 
 .form__container {
   background-color: #f9f9fa;
   padding: 16px;
-  margin: 10px 20px;
+  margin: 12px 20px;
 }
 
 .form__container-2 {
@@ -54,6 +55,7 @@
 
 .header {
   font-size: 22px;
+  padding: 12px 0;
 }
 
 .footer {

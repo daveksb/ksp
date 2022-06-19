@@ -1,3 +1,10 @@
+<ksp-top-nav
+  ><span header>ยื่นใบคำขอ</span
+  ><span subHeader
+    >ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ
+  </span></ksp-top-nav
+>
+
 <div class="container">
   <div class="box__container">
     <div class="box__header">
@@ -6,7 +13,7 @@
     <hr />
     <div class="box__detail">
       <div class="detail__container--half">
-        <div>
+        <div class="mb-3">
           <label class="form-label">สังกัด</label>
           <select class="form-select form-select-sm">
             <option selected>กรุณาเลือก</option>
@@ -18,22 +25,22 @@
       </div>
 
       <div class="detail__container--half">
-        <div>
+        <div class="mb-3">
           <label class="form-label">รหัสมหาวิทยาลัย</label>
           <input class="form-control form-control-sm" type="text" />
         </div>
-        <div>
+        <div class="mb-3">
           <label class="form-label">ชื่อโรงเรียน/หน่วยงาน</label>
           <input class="form-control form-control-sm" type="text" />
         </div>
       </div>
 
       <div class="detail__container--half">
-        <div>
+        <div class="mb-3">
           <label class="form-label">เลขที่ใบคำขอ</label>
           <input class="form-control form-control-sm" type="text" />
         </div>
-        <div>
+        <div class="mb-3">
           <label class="form-label">ชื่อ-นามสกุล</label>
           <input class="form-control form-control-sm" type="text" />
         </div>
@@ -82,7 +89,7 @@
       <ng-container matColumnDef="view">
         <th mat-header-cell *matHeaderCellDef>ดู/แก้ไข</th>
         <td mat-cell *matCellDef="let element" (click)="goToDetail()">
-          <img src="assets/images/edit.png" class="edit__icon" />
+          <mat-icon class="edit">edit</mat-icon>
         </td>
       </ng-container>
 

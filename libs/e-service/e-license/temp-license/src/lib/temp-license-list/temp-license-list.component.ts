@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
 export interface TempLicenseInfo {
@@ -60,21 +61,38 @@ export const data: TempLicenseInfo[] = [
   },
 ];
 
+export const column = [
+  'order',
+  'edit',
+  'reqCode',
+  'ssn',
+  'name',
+  'professType',
+  'workStep',
+  'status',
+  'editDate',
+  'sendDate',
+  'reqDoc',
+  'approveDoc',
+];
+
 @Component({
   selector: 'e-service-temp-license-list',
   templateUrl: './temp-license-list.component.html',
   styleUrls: ['./temp-license-list.component.scss'],
 })
 export class TempLicenseListComponent {
+  displayedColumns: string[] = column;
+  dataSource = new MatTableDataSource<TempLicenseInfo>();
+
   constructor(private router: Router) {}
-  data: TempLicenseInfo[] = [];
 
   search() {
-    this.data = data;
+    this.dataSource.data = data;
   }
 
   clear() {
-    this.data = [];
+    this.dataSource.data = [];
   }
 
   nextPage(requestType: number) {

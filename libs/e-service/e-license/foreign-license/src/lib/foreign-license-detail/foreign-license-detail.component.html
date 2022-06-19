@@ -1,5 +1,12 @@
+<ksp-top-nav
+  ><span header>ยื่นใบคำขอ</span
+  ><span subHeader
+    >ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ
+  </span></ksp-top-nav
+>
+
 <div class="main-container">
-  <ksp-form-foreign-id></ksp-form-foreign-id>
+  <ksp-form-foreign-id [mode]="'view'"></ksp-form-foreign-id>
 
   <div class="content__container">
     <e-service-license-check [choices]="choices"></e-service-license-check>
@@ -12,6 +19,7 @@
     [isLastPage]="true"
     [isFirstPage]="true"
     [showCenterButtons]="true"
+    [showSaveButton]="true"
     (saveClicked)="onConfirmed()"
   ></ksp-bottom-menu>
 </div>

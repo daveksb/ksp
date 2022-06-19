@@ -12,7 +12,7 @@
 .box__container {
   background-color: #fff;
   padding: 15px;
-  max-width: 1440px;
+  max-width: 1200px;
 }
 
 .table__container {
@@ -41,8 +41,10 @@
   margin-bottom: 0;
 }
 
-.form-control {
+.form-control,
+.form-select {
   background-color: #fff;
+  font-size: 18px;
 }
 
 .detail__action {
@@ -68,4 +70,13 @@
 
 #search__button {
   margin-left: 10px;
+}
+
+tr.mat-header-row {
+  background-color: #edf6ff;
+}
+
+.edit {
+  color: #0056ff;
+  cursor: pointer;
 }
