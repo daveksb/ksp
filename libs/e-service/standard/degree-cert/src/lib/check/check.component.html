@@ -5,7 +5,9 @@
       [requestDate]="'10 ตุลาคม 2565'"
       [requestNumber]="'112234467876543'"
     ></ksp-request-header-info>
+    <br />
     <hr />
+    <br />
 
     <mat-stepper
       [selectedIndex]="1"
@@ -20,7 +22,9 @@
           (degreeType)="degreeType = $event"
         >
         </ksp-degree-cert-step-one>
+        <br />
         <hr />
+        <br />
         <div class="check__form">
           <e-service-license-check></e-service-license-check>
         </div>
@@ -34,7 +38,9 @@
           [formType]="degreeType"
         >
         </ksp-degree-cert-step-two>
+        <br />
         <hr />
+        <br />
         <div class="check__form">
           <e-service-license-check></e-service-license-check>
         </div>
@@ -43,7 +49,9 @@
       <mat-step>
         <ng-template matStepLabel>ด้านกระบวนการผลิต</ng-template>
         <ksp-degree-cert-step-3></ksp-degree-cert-step-3>
+        <br />
         <hr />
+        <br />
         <div class="check__form">
           <e-service-license-check></e-service-license-check>
         </div>
@@ -52,7 +60,9 @@
       <mat-step>
         <ng-template matStepLabel>เอกสารแนบ</ng-template>
         <ksp-degree-cert-step-four mode="view"></ksp-degree-cert-step-four>
+        <br />
         <hr />
+        <br />
         <div class="check__form">
           <e-service-license-check></e-service-license-check>
         </div>
