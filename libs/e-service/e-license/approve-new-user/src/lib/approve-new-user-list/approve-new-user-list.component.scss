@@ -12,7 +12,7 @@
 .box__container {
   background-color: #fff;
   padding: 15px;
-  max-width: 1440px;
+  max-width: 1200px;
 }
 
 .table__container {
@@ -68,4 +68,13 @@
 
 #search__button {
   margin-left: 10px;
+}
+
+tr.mat-header-row {
+  background-color: #edf6ff;
+}
+
+.edit {
+  color: #0056ff;
+  cursor: pointer;
 }
