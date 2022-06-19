@@ -8,7 +8,7 @@
           <div class="group__number">ลำดับที่ {{ i + 1 }}</div>
           <mat-icon
             matTooltip="ลบอาจารย์นิเทศก์ ลำดับที่ {{ i + 1 }}"
-            *ngIf="i > 0"
+            *ngIf="i"
             class="delete__icon"
             (click)="deleteNitet(i); opaciseBox[i] = false"
             (mouseenter)="opaciseBox[i] = true"
@@ -132,11 +132,8 @@
     </ng-container>
   </ng-container>
 
-  <div class="button__container">
-    <ksp-add-row-button
-      [mode]="'blue'"
-      *ngIf="nitets.length < 4 && mode === 'edit'"
-      (addClick)="addNitet()"
+  <div *ngIf="nitets.length < 4" class="button__container">
+    <ksp-add-row-button [mode]="'blue'" *hideInViewMode (addClick)="addNitet()"
       >เพิ่มอาจารย์นิเทศก์</ksp-add-row-button
     >
   </div>

@@ -1,16 +1,20 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, forwardRef, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { FormMode } from '@ksp/shared/interface';
+import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'ksp-step-2-nitet',
   templateUrl: './nitet.component.html',
   styleUrls: ['./nitet.component.scss'],
+  providers: [
+    {
+      provide: KspFormBaseComponent,
+      useExisting: forwardRef(() => NitetComponent),
+    },
+  ],
 })
-export class NitetComponent implements OnInit {
-  @Input() mode: FormMode = 'edit';
-
+export class NitetComponent extends KspFormBaseComponent implements OnInit {
   experienceYearFocused = false;
   opaciseBox: boolean[] = [];
 
@@ -24,7 +28,9 @@ export class NitetComponent implements OnInit {
     nitets: this.fb.array([this.nitetForm]),
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    super();
+  }
 
   ngOnInit(): void {
     this.nitetForm.valueChanges.pipe(debounceTime(750)).subscribe((res) => {

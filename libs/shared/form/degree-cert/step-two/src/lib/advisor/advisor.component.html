@@ -92,9 +92,8 @@
   </ng-container>
 </form>
 
-<ksp-add-row-button
-  (addClick)="addAdvisor()"
-  *ngIf="advisors.length < 5 && mode === 'edit'"
-  [mode]="'blue'"
-  >เพิ่มที่ปรึกษาวิทยานิพนธ์และการค้นคว้าอิสระ
-</ksp-add-row-button>
+<ng-container *ngIf="advisors.length < 5">
+  <ksp-add-row-button *hideInViewMode (addClick)="addAdvisor()" [mode]="'blue'"
+    >เพิ่มที่ปรึกษาวิทยานิพนธ์และการค้นคว้าอิสระ
+  </ksp-add-row-button>
+</ng-container>

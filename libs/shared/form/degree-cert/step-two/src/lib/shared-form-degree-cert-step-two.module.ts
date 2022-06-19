@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedFormTeacherInfoModule } from '@ksp/shared/form/teacher-info';
 import { CourseTypeAComponent } from './couse/course-type-a.component';
 import { CourseTypeBComponent } from './couse/course-type-b.component';
+import { HideInViewModeDirective } from '@ksp/shared/directive';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { CourseTypeBComponent } from './couse/course-type-b.component';
     MatTooltipModule,
     ReactiveFormsModule,
     SharedFormTeacherInfoModule,
+    HideInViewModeDirective,
   ],
   declarations: [
     TeacherComponent,

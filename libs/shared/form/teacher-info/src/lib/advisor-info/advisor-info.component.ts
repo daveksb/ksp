@@ -64,10 +64,8 @@ export class AdvisorInfoComponent {
     if (this.form.valid) {
       return null;
     }
-
     const errors: any = {};
-    /*
-    errors = this.addControlErrors(errors, 'city'); */
+    //errors = this.addControlErrors(errors, 'city');
     return errors;
   }
 }
