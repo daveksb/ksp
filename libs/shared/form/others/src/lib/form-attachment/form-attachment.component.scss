@@ -41,6 +41,12 @@
   padding: 5px;
 }
 
+.view__label {
+  color: #f68b33;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 /* mobile */
 @media only screen and (max-width: 768px) {
   .detail__header {

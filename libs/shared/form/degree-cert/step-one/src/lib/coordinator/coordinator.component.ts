@@ -9,6 +9,7 @@ import { FormMode } from '@ksp/shared/interface';
 export class DegreeCertCoordinatorComponent implements OnInit {
   @Input() mode: FormMode = 'edit';
 
+
   constructor() {}
 
   ngOnInit(): void {}

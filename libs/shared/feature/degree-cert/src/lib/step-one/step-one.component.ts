@@ -22,6 +22,9 @@ export class DegreeCertStepOneComponent implements OnInit {
   courseTypes: ListData[] = [];
   degreeTypes: ListData[] = [];
 
+  @Input() showCoordinatorForm = true;
+
+
   private _mode: FormMode = 'edit';
 
   @Input()
