@@ -1,29 +1,58 @@
-import { Component, Input } from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
+/* eslint-disable @typescript-eslint/no-empty-function */
+import { Component, Input, OnDestroy } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { FormMode } from './form';
 
 @Component({
   template: ``,
   standalone: true,
 })
-export abstract class KspFormBaseComponent implements ControlValueAccessor {
+export abstract class KspFormBaseComponent implements OnDestroy {
   @Input() mode: FormMode = 'edit';
-  public disabled = false;
+  public form!: FormGroup;
+  subscriptions: Subscription[] = [];
 
-  //public value: T | null = null;
-  public onChange(newVal: any) {}
-  public onTouched(_?: any) {}
-
-  public writeValue(obj: any): void {
-    //this.value = obj;
+  constructor() {
+    this.subscriptions.push(
+      // any time the inner form changes update the parent of any change
+      this.form.valueChanges.subscribe((value) => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
   }
-  public registerOnChange(fn: any): void {
+  get value() {
+    return this.form.value;
+  }
+
+  set value(value: any) {
+    this.form.setValue(value);
+    this.onChange(value);
+    this.onTouched();
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((s) => s.unsubscribe());
+  }
+
+  public onChange = (value?: any) => {};
+  public onTouched = () => {};
+
+  public registerOnChange(fn: () => void) {
     this.onChange = fn;
   }
-  public registerOnTouched(fn: any): void {
+  public registerOnTouched(fn: () => void) {
     this.onTouched = fn;
   }
-  public setDisabledState?(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+
+  writeValue(value: any) {
+    if (value) {
+      this.value = value;
+    }
+
+    if (value === null) {
+      this.form.reset();
+    }
   }
 }

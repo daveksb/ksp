@@ -1,34 +1,36 @@
-import { Component, Input } from '@angular/core';
+import { Component, forwardRef, OnInit, Provider } from '@angular/core';
 import {
-  AbstractControl,
+  ControlValueAccessor,
   FormBuilder,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
-import { FormMode } from '@ksp/shared/interface';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { KspFormBaseComponent } from '@ksp/shared/interface';
+
+const providerFactory: Provider[] = [
+  {
+    provide: NG_VALUE_ACCESSOR,
+    multi: true,
+    useExisting: forwardRef(() => TeacherGeneralInfoComponent),
+  },
+  {
+    provide: NG_VALIDATORS,
+    multi: true,
+    useExisting: forwardRef(() => TeacherGeneralInfoComponent),
+  },
+];
 
 @Component({
   selector: 'ksp-teacher-general-info',
   templateUrl: './general-info.component.html',
   styleUrls: ['./general-info.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      multi: true,
-      useExisting: TeacherGeneralInfoComponent,
-    },
-    {
-      provide: NG_VALIDATORS,
-      multi: true,
-      useExisting: TeacherGeneralInfoComponent,
-    },
-  ],
+  providers: providerFactory,
 })
-export class TeacherGeneralInfoComponent {
-  @Input() mode: FormMode = 'edit';
-
-  form = this.fb.group({
+export class TeacherGeneralInfoComponent
+  extends KspFormBaseComponent
+  implements OnInit, ControlValueAccessor
+{
+  override form = this.fb.group({
     firstName: [''],
     lastName: [''],
     degrees: this.fb.array([
@@ -39,14 +41,16 @@ export class TeacherGeneralInfoComponent {
     ]),
   });
 
-  onChangeSubs: Subscription[] = [];
+  constructor(private fb: FormBuilder) {
+    super();
+  }
 
-  onTouched: any = () => {};
-
-  constructor(private fb: FormBuilder) {}
+  ngOnInit(): void {
+    if (this.mode === 'view') this.form.disable();
+  }
 
   get degrees() {
-    return this.form.controls['degrees'];
+    return this.form.controls.degrees;
   }
 
   addDegree() {
@@ -61,38 +65,11 @@ export class TeacherGeneralInfoComponent {
     this.degrees.removeAt(degreeIndex);
   }
 
-  registerOnChange(onChange: any) {
-    const sub = this.form.valueChanges.subscribe(onChange);
-    this.onChangeSubs.push(sub);
-  }
-
-  registerOnTouched(onTouched: any) {
-    this.onTouched = onTouched;
-  }
-
-  setDisabledState(disabled: boolean) {
-    if (disabled) {
-      this.form.disable();
-    } else {
-      this.form.enable();
-    }
-  }
-
-  writeValue(value: any) {
-    if (value) {
-      this.form.setValue(value, { emitEvent: false });
-    }
-  }
-
-  validate(control: AbstractControl) {
+  /* validate(control: AbstractControl) {
     if (this.form.valid) {
       return null;
     }
-
     const errors: any = {};
-    /*
-    errors = this.addControlErrors(errors, 'addressLine1');
-    errors = this.addControlErrors(errors, 'city'); */
     return errors;
-  }
+  } */
 }
