@@ -24,7 +24,7 @@ export class NitetComponent extends KspFormBaseComponent implements OnInit {
     instructorInfo: [],
   });
 
-  form = this.fb.group({
+  override form = this.fb.group({
     nitets: this.fb.array([this.nitetForm]),
   });
 

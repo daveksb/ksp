@@ -25,7 +25,7 @@ export class TeacherComponent extends KspFormBaseComponent implements OnInit {
     ]),
   });
 
-  form = this.fb.group({
+  override form = this.fb.group({
     teachers: this.fb.array([this.teacherForm]),
   });
 

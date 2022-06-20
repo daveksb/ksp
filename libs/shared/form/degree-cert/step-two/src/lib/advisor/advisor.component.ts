@@ -27,7 +27,7 @@ export class AdvisorComponent extends KspFormBaseComponent implements OnInit {
     ]),
   });
 
-  form = this.fb.group({
+  override form = this.fb.group({
     advisors: this.fb.array([this.advisorForm]),
   });
 
