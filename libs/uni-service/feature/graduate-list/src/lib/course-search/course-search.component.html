@@ -1,3 +1,10 @@
+<ksp-top-nav
+  ><span header>ยื่นใบคำขอ </span
+  ><span subHeader
+    >ขอยื่นรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา
+  </span></ksp-top-nav
+>
+
 <div class="main-container">
   <div class="top-container">
     <div class="box__container">
@@ -158,45 +165,6 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
       </div>
-
-      <!-- <div class="table-responsive">
-        <table class="table">
-          <thead class="header__table">
-            <tr>
-              <th scope="col">ลำดับ</th>
-              <th scope="col">ยื่น/แก้ไข</th>
-              <th scope="col">วันที่ยื่นใบคำขอ</th>
-              <th scope="col">รหัสปริญญา</th>
-              <th scope="col">ชื่อหลักสูตร</th>
-              <th scope="col">สาขาวิชา</th>
-              <th scope="col">ชื่อปริญญา</th>
-              <th scope="col">สถานะรายชื่อผู้เข้า</th>
-              <th scope="col">สถานะรายชื่อผู้สำเร็จ</th>
-              <th scope="col">วันที่แก้ไขล่าสุด</th>
-              <th scope="col">พิมพ์ใบคำขอ</th>
-            </tr>
-          </thead>
-          <tbody class="body__table">
-            <tr *ngFor="let item of data">
-              <td class="detail__table">{{ item.order }}</td>
-              <td (click)="nextPage()" class="detail__table">
-                <mat-icon class="edit">edit</mat-icon>
-              </td>
-              <td class="detail__table">{{ item.sendDate }}</td>
-              <td class="detail__table">{{ item.major }}</td>
-              <td class="detail__table">{{ item.branch }}</td>
-              <td class="detail__table">{{ item.degreeCode }}</td>
-              <td class="detail__table">{{ item.degreeName }}</td>
-              <td class="detail__table">{{ item.studentStatus }}</td>
-              <td class="detail__table">{{ item.graduateStatus }}</td>
-              <td class="detail__table">{{ item.editDate }}</td>
-              <td class="detail__table">
-                <mat-icon class="print">print</mat-icon>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div> -->
     </div>
   </div>
 </div>

@@ -17,6 +17,16 @@ export class UserDetailComponent implements OnInit {
     ['อนุมัติ', 'ไม่อนุมัติ'],
     ['ใช้งาน', 'ไม่ใช้งาน'],
   ];
+  headers = [
+    [
+      'ใบคำขอรหัสเข้าใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service) ',
+      'ตรวจสอบและอนุมัติใบคำขอรหัสเข้าใช้งาน',
+    ],
+    [
+      'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
+      'ข้อมูลผู้เข้าใช้งานระบบ School Service',
+    ],
+  ];
 
   pageType = 0;
   constructor(

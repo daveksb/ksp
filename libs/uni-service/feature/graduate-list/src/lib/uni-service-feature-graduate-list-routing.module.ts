@@ -15,7 +15,7 @@ const routes: Routes = [
         component: CourseSearchComponent,
       },
       {
-        path: 'course-detail',
+        path: 'course-detail/:type',
         component: CourseDetailComponent,
       },
       {

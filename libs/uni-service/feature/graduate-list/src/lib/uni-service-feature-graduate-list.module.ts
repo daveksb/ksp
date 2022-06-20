@@ -19,6 +19,7 @@ import { SharedFeatureDegreeCertModule } from '@ksp/shared/feature/degree-cert';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
+import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 @NgModule({
   imports: [
     CommonModule,
@@ -37,7 +38,8 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
     SharedFeatureDegreeCertModule,
     MatIconModule,
     MatTableModule,
-    RequestHeaderInfoComponent
+    RequestHeaderInfoComponent,
+    SharedUiTopNavModule,
   ],
   declarations: [
     CourseSearchComponent,

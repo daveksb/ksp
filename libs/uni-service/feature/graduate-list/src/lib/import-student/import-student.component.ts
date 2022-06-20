@@ -23,6 +23,19 @@ export class ImportStudentComponent implements OnInit {
   pageType = 0;
   foundUser = false;
 
+  headers = [
+    [
+      'ยื่นใบคำขอ',
+      'ขอยื่นรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
+      'ขอยื่นรายชื่อผู้เข้าศึกษา',
+    ],
+    [
+      'ยื่นใบคำขอ',
+      'ขอยื่นรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
+      'ขอยื่นรายชื่อผู้สำเร็จการศึกษา',
+    ],
+  ];
+
   constructor(
     public dialog: MatDialog,
     private userService: UserService,

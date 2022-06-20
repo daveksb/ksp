@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UniserviceImportType } from '@ksp/shared/interface';
 
 @Component({
   selector: 'uni-service-course-detail',
@@ -7,10 +8,19 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./course-detail.component.scss'],
 })
 export class CourseDetailComponent implements OnInit {
-  processType = 0;
+  processType!: UniserviceImportType;
+
+  importType = UniserviceImportType;
+
   constructor(private router: Router, private route: ActivatedRoute) {}
 
-  rows = [1, 2, 3, 4];
+  planRows = [1, 2, 3, 4];
+
+  headerDetail = [
+    '',
+    'ขอยื่นรายชื่อผู้เข้าศึกษา',
+    'ขอยื่นรายชื่อผู้สำเร็จการศึกษา',
+  ];
 
   ngOnInit() {
     this.route.paramMap.subscribe((res) => {
