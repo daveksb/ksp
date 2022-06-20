@@ -5,8 +5,6 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './course-form-one.component.html',
   styleUrls: ['./course-form-one.component.scss'],
 })
-export class CourseFormOneComponent implements OnInit {
+export class CourseFormOneComponent {
   @Input() data: any;
-
-  ngOnInit(): void {}
 }

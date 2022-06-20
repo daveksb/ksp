@@ -1,5 +1,37 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+
+export type SearchType = 'uni' | 'school';
+
+@Component({
+  selector: 'ksp-university-search',
+  templateUrl: './university-search.component.html',
+  styleUrls: ['./university-search.component.css'],
+})
+export class UniversitySearchComponent implements OnInit {
+  @Input() searchType: SearchType = 'school';
+  @Output() confirmed = new EventEmitter<string>();
+
+  selectedUniversity = '';
+
+  data: University[] = [];
+
+  ngOnInit(): void {
+    this.data = [];
+  }
+
+  onItemChange(universityCode: string) {
+    this.selectedUniversity = universityCode;
+    //console.log('universityCode = ', universityCode);
+  }
+
+  search() {
+    this.data = data;
+  }
+
+  clear() {
+    this.data = [];
+  }
+}
 
 export interface University {
   uniCode: string;
@@ -43,37 +75,3 @@ export const data = [
     organization: 'สำนักงานคณะกรรมการการ อาชีวศึกษา',
   },
 ];
-
-export type SearchType = 'uni' | 'school';
-
-@Component({
-  selector: 'ksp-university-search',
-  templateUrl: './university-search.component.html',
-  styleUrls: ['./university-search.component.css'],
-})
-export class UniversitySearchComponent implements OnInit {
-  @Input() searchType: SearchType = 'school';
-  @Output() confirmed = new EventEmitter<string>();
-
-  selectedUniversity = '';
-
-  data: University[] = [];
-  constructor(private matDialog: MatDialog) {}
-
-  ngOnInit(): void {
-    this.data = [];
-  }
-
-  onItemChange(universityCode: string) {
-    this.selectedUniversity = universityCode;
-    console.log('universityCode = ', universityCode);
-  }
-
-  search() {
-    this.data = data;
-  }
-
-  clear() {
-    this.data = [];
-  }
-}

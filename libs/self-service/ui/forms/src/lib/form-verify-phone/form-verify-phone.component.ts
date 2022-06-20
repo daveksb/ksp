@@ -13,9 +13,5 @@ export class FormVerifyPhoneComponent {
     this.dialog.open(FormVerifyOtpComponent, {
       width: '600px',
     });
-
-    /*     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    }); */
   }
 }

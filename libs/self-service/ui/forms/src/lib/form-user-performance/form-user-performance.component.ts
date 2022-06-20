@@ -1,6 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 
+@Component({
+  selector: 'self-service-form-user-performance',
+  templateUrl: './form-user-performance.component.html',
+  styleUrls: ['./form-user-performance.component.css'],
+})
+export class FormUserPerformanceComponent implements OnInit {
+  typesOfSubject: string[] = [
+    'วิชาชีพครู',
+    'วิชาภาษาไทยเพื่อการสื่อสาร',
+    'วิชาภาษาอังกฤษเพื่อการสื่อสาร',
+    'วิชาการใช้เทคโนโลยีเพื่อการศึกษา',
+  ];
+  personSelected = false;
+  displayedColumns: string[] = [
+    'id',
+    'score',
+    'result',
+    'announceDate',
+    'endDate',
+  ];
+  dataSource = new MatTableDataSource<performanceInfo>();
+
+  ngOnInit(): void {
+    this.dataSource.data = data;
+  }
+}
+
 export interface performanceInfo {
   id: number;
   score: string;
@@ -32,30 +59,3 @@ export const data: performanceInfo[] = [
     endDate: '31/มกราคม/2565',
   },
 ];
-
-@Component({
-  selector: 'self-service-form-user-performance',
-  templateUrl: './form-user-performance.component.html',
-  styleUrls: ['./form-user-performance.component.css'],
-})
-export class FormUserPerformanceComponent implements OnInit {
-  typesOfSubject: string[] = [
-    'วิชาชีพครู',
-    'วิชาภาษาไทยเพื่อการสื่อสาร',
-    'วิชาภาษาอังกฤษเพื่อการสื่อสาร',
-    'วิชาการใช้เทคโนโลยีเพื่อการศึกษา',
-  ];
-  personSelected = false;
-  displayedColumns: string[] = [
-    'id',
-    'score',
-    'result',
-    'announceDate',
-    'endDate',
-  ];
-  dataSource = new MatTableDataSource<performanceInfo>();
-
-  ngOnInit(): void {
-    this.dataSource.data = data;
-  }
-}
