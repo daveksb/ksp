@@ -1,4 +1,4 @@
-import { Component, forwardRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -8,13 +8,7 @@ import { debounceTime } from 'rxjs';
   selector: 'ksp-step-2-advisor',
   templateUrl: './advisor.component.html',
   styleUrls: ['./advisor.component.scss'],
-  //providers: providerFactory(AdvisorComponent),
-  providers: [
-    {
-      provide: KspFormBaseComponent,
-      useExisting: forwardRef(() => AdvisorComponent),
-    },
-  ],
+  providers: providerFactory(AdvisorComponent),
 })
 export class AdvisorComponent extends KspFormBaseComponent implements OnInit {
   advisorForm = this.fb.group({

@@ -1,20 +1,13 @@
-import { Component, forwardRef, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
-import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'ksp-step-2-nitet',
   templateUrl: './nitet.component.html',
   styleUrls: ['./nitet.component.scss'],
-  //providers: providerFactory(NitetComponent),
-  providers: [
-    {
-      provide: KspFormBaseComponent,
-      useExisting: forwardRef(() => NitetComponent),
-    },
-  ],
+  providers: providerFactory(NitetComponent),
 })
 export class NitetComponent extends KspFormBaseComponent {
   experienceYearFocused = false;
@@ -34,12 +27,6 @@ export class NitetComponent extends KspFormBaseComponent {
     super();
   }
 
-  /* ngOnInit(): void {
-    this.nitetForm.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
-      //console.log('form value = ', res);
-    });
-  }
- */
   addNitet() {
     const form = this.fb.group({
       generalInfo: [],
