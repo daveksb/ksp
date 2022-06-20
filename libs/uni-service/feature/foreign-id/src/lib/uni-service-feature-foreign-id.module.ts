@@ -4,6 +4,7 @@ import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 import { ForeignIdComponent } from './foreign-id/foreign-id.component';
+import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
 
 @NgModule({
   imports: [
@@ -11,6 +12,7 @@ import { ForeignIdComponent } from './foreign-id/foreign-id.component';
     SharedUiBottomMenuModule,
     SharedFormOthersModule,
     SharedUiTopNavModule,
+    RequestHeaderInfoComponent
   ],
   declarations: [ForeignIdComponent],
   exports: [ForeignIdComponent],

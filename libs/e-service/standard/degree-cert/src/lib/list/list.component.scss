@@ -65,10 +65,16 @@
 }
 
 .print {
-  padding: 6px 0;
+  padding: 2px 0;
   font-size: 20px;
 }
 
 tr.mat-header-row {
   background-color: #edf6ff;
+}
+
+.print__button {
+  display: flex;
+  justify-content: center;
+  padding: 2px 0;
 }

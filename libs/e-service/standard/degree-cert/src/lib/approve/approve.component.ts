@@ -20,11 +20,11 @@ export class ApproveComponent {
   constructor(public dialog: MatDialog, private router: Router) {}
 
   cancel() {
-    this.router.navigate(['./', 'degree-cert', 'list', '3']);
+    this.router.navigate(['./', 'degree-cert', 'list', '2']);
   }
 
   prevPage() {
-    this.router.navigate(['./', 'degree-cert', 'verify', '3']);
+    this.router.navigate(['./', 'degree-cert', 'verify', '2']);
   }
 
   save() {
@@ -39,7 +39,7 @@ export class ApproveComponent {
 
     dialogRef.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'degree-cert', 'list', '3']);
+        this.router.navigate(['/', 'degree-cert', 'list', '2']);
       }
     });
   }

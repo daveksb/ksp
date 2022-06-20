@@ -11,9 +11,16 @@ import { FormForeignIdComponent } from './form-foreign-id/form-foreign-id.compon
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule, MatIconModule, MatCheckboxModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatIconModule,
+    MatCheckboxModule,
+    RequestHeaderInfoComponent,
+  ],
   declarations: [
     FormAddressComponent,
     FormSchoolAddressComponent,
