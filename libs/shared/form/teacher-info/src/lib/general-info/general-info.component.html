@@ -79,24 +79,23 @@
             placeholder="กรุณากรอก"
           />
         </div>
-        <mat-icon
-          *ngIf="j > 0"
-          class="delete__icon"
-          matTooltip="ลบคุณวุฒิการศึกษา ลำดับที่ {{ j + 1 }}"
-          (click)="deleteDegree(j)"
-        >
-          delete_outline</mat-icon
-        >
+        <ng-container *hideInViewMode>
+          <mat-icon
+            *ngIf="j > 0"
+            class="delete__icon"
+            matTooltip="ลบคุณวุฒิการศึกษา ลำดับที่ {{ j + 1 }}"
+            (click)="deleteDegree(j)"
+          >
+            delete_outline
+          </mat-icon>
+        </ng-container>
       </div>
     </ng-container>
 
-    <div
-      class="button__container"
-      *ngIf="degrees.length < 4 && mode === 'edit'"
-    >
-      <ksp-add-row-button (addClick)="addDegree()"
-        >เพิ่มคุณวุฒิการศึกษา</ksp-add-row-button
-      >
+    <div class="button__container" *hideInViewMode>
+      <ksp-add-row-button *ngIf="degrees.length < 4" (addClick)="addDegree()">
+        เพิ่มคุณวุฒิการศึกษา
+      </ksp-add-row-button>
     </div>
     <hr />
   </div>

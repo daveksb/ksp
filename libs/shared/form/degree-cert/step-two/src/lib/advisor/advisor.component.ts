@@ -1,18 +1,14 @@
-import { Component, forwardRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { providerFactory } from '@ksp/shared/utility';
 import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'ksp-step-2-advisor',
   templateUrl: './advisor.component.html',
   styleUrls: ['./advisor.component.scss'],
-  providers: [
-    {
-      provide: KspFormBaseComponent,
-      useExisting: forwardRef(() => AdvisorComponent),
-    },
-  ],
+  providers: providerFactory(AdvisorComponent),
 })
 export class AdvisorComponent extends KspFormBaseComponent implements OnInit {
   advisorForm = this.fb.group({
@@ -27,7 +23,7 @@ export class AdvisorComponent extends KspFormBaseComponent implements OnInit {
     ]),
   });
 
-  form = this.fb.group({
+  override form = this.fb.group({
     advisors: this.fb.array([this.advisorForm]),
   });
 
@@ -36,10 +32,6 @@ export class AdvisorComponent extends KspFormBaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.mode === 'view') {
-      this.form.disable();
-    }
-
     this.form.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
       //console.log('form value = ', res);
     });
@@ -89,6 +81,6 @@ export class AdvisorComponent extends KspFormBaseComponent implements OnInit {
   }
 
   get advisors() {
-    return this.form.controls['advisors'];
+    return this.form.controls.advisors;
   }
 }

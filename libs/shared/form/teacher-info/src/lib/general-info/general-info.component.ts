@@ -1,34 +1,16 @@
-import { Component, Input } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  NG_VALIDATORS,
-  NG_VALUE_ACCESSOR,
-} from '@angular/forms';
-import { FormMode } from '@ksp/shared/interface';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { providerFactory } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-teacher-general-info',
   templateUrl: './general-info.component.html',
   styleUrls: ['./general-info.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      multi: true,
-      useExisting: TeacherGeneralInfoComponent,
-    },
-    {
-      provide: NG_VALIDATORS,
-      multi: true,
-      useExisting: TeacherGeneralInfoComponent,
-    },
-  ],
+  providers: providerFactory(TeacherGeneralInfoComponent),
 })
-export class TeacherGeneralInfoComponent {
-  @Input() mode: FormMode = 'edit';
-
-  form = this.fb.group({
+export class TeacherGeneralInfoComponent extends KspFormBaseComponent {
+  override form = this.fb.group({
     firstName: [''],
     lastName: [''],
     degrees: this.fb.array([
@@ -39,14 +21,12 @@ export class TeacherGeneralInfoComponent {
     ]),
   });
 
-  onChangeSubs: Subscription[] = [];
-
-  onTouched: any = () => {};
-
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    super();
+  }
 
   get degrees() {
-    return this.form.controls['degrees'];
+    return this.form.controls.degrees;
   }
 
   addDegree() {
@@ -59,40 +39,5 @@ export class TeacherGeneralInfoComponent {
 
   deleteDegree(degreeIndex: number) {
     this.degrees.removeAt(degreeIndex);
-  }
-
-  registerOnChange(onChange: any) {
-    const sub = this.form.valueChanges.subscribe(onChange);
-    this.onChangeSubs.push(sub);
-  }
-
-  registerOnTouched(onTouched: any) {
-    this.onTouched = onTouched;
-  }
-
-  setDisabledState(disabled: boolean) {
-    if (disabled) {
-      this.form.disable();
-    } else {
-      this.form.enable();
-    }
-  }
-
-  writeValue(value: any) {
-    if (value) {
-      this.form.setValue(value, { emitEvent: false });
-    }
-  }
-
-  validate(control: AbstractControl) {
-    if (this.form.valid) {
-      return null;
-    }
-
-    const errors: any = {};
-    /*
-    errors = this.addControlErrors(errors, 'addressLine1');
-    errors = this.addControlErrors(errors, 'city'); */
-    return errors;
   }
 }

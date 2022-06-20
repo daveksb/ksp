@@ -1,18 +1,14 @@
-import { Component, forwardRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { providerFactory } from '@ksp/shared/utility';
 import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'ksp-step-2-teacher',
   templateUrl: './teacher.component.html',
   styleUrls: ['./teacher.component.scss'],
-  providers: [
-    {
-      provide: KspFormBaseComponent,
-      useExisting: forwardRef(() => TeacherComponent),
-    },
-  ],
+  providers: providerFactory(TeacherComponent),
 })
 export class TeacherComponent extends KspFormBaseComponent implements OnInit {
   teacherForm = this.fb.group({
@@ -25,7 +21,7 @@ export class TeacherComponent extends KspFormBaseComponent implements OnInit {
     ]),
   });
 
-  form = this.fb.group({
+  override form = this.fb.group({
     teachers: this.fb.array([this.teacherForm]),
   });
 
@@ -34,10 +30,6 @@ export class TeacherComponent extends KspFormBaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.mode === 'view') {
-      this.form.disable();
-    }
-
     this.form.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
       //console.log('form value = ', res);
     });
@@ -73,16 +65,14 @@ export class TeacherComponent extends KspFormBaseComponent implements OnInit {
   }
 
   get teachers() {
-    return this.form.controls['teachers'];
+    return this.form.controls.teachers;
   }
 
   getCourses(index: number) {
-    return this.form.controls['teachers'].controls[index].controls['courses'];
+    return this.teachers.controls[index].controls.courses;
   }
 
   getHasMoreCourses(index: number) {
-    return this.form.controls['teachers'].controls[index].controls[
-      'hasMoreCourses'
-    ].value;
+    return this.teachers.controls[index].controls.hasMoreCourses.value;
   }
 }
