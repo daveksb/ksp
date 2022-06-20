@@ -1,13 +1,36 @@
-<e-service-final-result-info></e-service-final-result-info>
+<ksp-top-nav
+  ><span header>ยื่นใบคำขอ</span
+  ><span subHeader
+    >ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ
+  </span></ksp-top-nav
+>
+<div class="container">
+  <div class="title__label">รายละเอียดใบคำขอ</div>
+  <div class="content__container">
+    <ksp-request-header-info
+      [requestDate]="'10 ตุลาคม 2565'"
+      [requestNumber]="'112234467876543'"
+    ></ksp-request-header-info>
+    <hr />
+    <div class="detail__container">
+      <div class="detail__header">
+        ข้อมูลรับรองปริญญา และประกาศนียบัตรทางการศึกษา
+      </div>
+      <e-service-final-result-info></e-service-final-result-info>
+      <ksp-degree-cert-step-one [mode]="'view'" [showCoordinatorForm]="false">
+      </ksp-degree-cert-step-one>
+    </div>
+  </div>
 
-xxxxxxxxxxxxx
-
-<hr />
-
-xxxxxxxxxxxxx
-
-<hr />
-
-xxxxxxxxxxxxx
-
-<hr />
+  <div class="bottom__container">
+    <ksp-bottom-menu
+      [isFirstPage]="true"
+      [isLastPage]="true"
+      [showSaveButton]="true"
+      [showCenterButtons]="true"
+      (saveClicked)="save()"
+      (cancelClicked)="cancel()"
+    >
+    </ksp-bottom-menu>
+  </div>
+</div>

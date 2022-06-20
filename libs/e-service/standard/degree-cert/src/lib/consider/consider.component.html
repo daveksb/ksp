@@ -1,3 +1,10 @@
+<ksp-top-nav
+  ><span header>ยื่นใบคำขอ</span
+  ><span subHeader
+    >ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ
+  </span></ksp-top-nav
+>
+
 <div class="container">
   <div class="title__label">รายละเอียดใบคำขอ</div>
   <div class="content__container">
@@ -10,7 +17,7 @@
       <div class="detail__header">
         ข้อมูลรับรองปริญญา และประกาศนียบัตรทางการศึกษา
       </div>
-      <ksp-degree-cert-step-one [mode]="'view'"> </ksp-degree-cert-step-one>
+      <ksp-degree-cert-step-one [mode]="'view'" [showCoordinatorForm]="false"> </ksp-degree-cert-step-one>
 
       <button class="btn btn-primary">
         กดเพื่อดูใบคำขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา

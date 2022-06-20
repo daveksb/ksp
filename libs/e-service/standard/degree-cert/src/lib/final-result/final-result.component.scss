@@ -1,0 +1,33 @@
+.container {
+  max-width: 100%;
+  padding: 0 48px;
+  padding-bottom: 100px;
+  background-color: #e5e5e5;
+}
+
+.bottom__container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 1;
+}
+
+.title__label {
+  font-size: 22px;
+  color: #000000;
+  padding: 12px 0;
+}
+
+.content__container {
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 10px 20px;
+}
+
+.detail__header {
+  font-size: 22px;
+  color: #000000;
+  margin: 0 6px;
+}

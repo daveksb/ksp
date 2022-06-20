@@ -167,5 +167,8 @@
     </div>
   </div>
 
-  <ksp-degree-cert-coordinator [mode]="mode"></ksp-degree-cert-coordinator>
+  <ksp-degree-cert-coordinator
+    [mode]="mode"
+    *ngIf="showCoordinatorForm"
+  ></ksp-degree-cert-coordinator>
 </form>

@@ -13,12 +13,12 @@ export class CompleteDialogComponent {
       content: string;
       btnLabel: string;
       subContent: string;
+      //printButton: string;
+      showPrintButton: boolean;
     }
   ) {}
 
   @Output() completed = new EventEmitter<boolean>();
-
-  @Input() isCanPrint = false;
 
   complete() {
     this.completed.emit(true);
