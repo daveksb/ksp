@@ -7,10 +7,10 @@ import {
 } from '@ksp/shared/ui/dialog';
 
 @Component({
-  templateUrl: './degree-cert.component.html',
-  styleUrls: ['./degree-cert.component.scss'],
+  templateUrl: './degree-cert-request.component.html',
+  styleUrls: ['./degree-cert-request.component.scss'],
 })
-export class DegreeCertComponent {
+export class DegreeCertRequestComponent {
   degreeType = '';
   isEditable = false;
 

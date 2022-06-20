@@ -48,7 +48,7 @@ export class TrainingAddressComponent {
   }
 
   get addresses() {
-    return this.form.controls['addresses'];
+    return this.form.controls.addresses;
   }
 
   deleteAddress(index: number) {

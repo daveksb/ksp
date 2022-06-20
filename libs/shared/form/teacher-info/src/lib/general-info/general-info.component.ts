@@ -40,12 +40,4 @@ export class TeacherGeneralInfoComponent extends KspFormBaseComponent {
   deleteDegree(degreeIndex: number) {
     this.degrees.removeAt(degreeIndex);
   }
-
-  /* validate(control: AbstractControl) {
-    if (this.form.valid) {
-      return null;
-    }
-    const errors: any = {};
-    return errors;
-  } */
 }
