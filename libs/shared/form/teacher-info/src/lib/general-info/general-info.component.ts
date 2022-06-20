@@ -1,22 +1,17 @@
-import { Component, forwardRef, OnInit, Provider } from '@angular/core';
-import {
-  ControlValueAccessor,
-  FormBuilder,
-  NG_VALIDATORS,
-  NG_VALUE_ACCESSOR,
-} from '@angular/forms';
+import { Component, forwardRef, OnInit } from '@angular/core';
+import { FormBuilder, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 
-const providerFactory: Provider[] = [
+export const providerFactory = (component: any) => [
   {
     provide: NG_VALUE_ACCESSOR,
     multi: true,
-    useExisting: forwardRef(() => TeacherGeneralInfoComponent),
+    useExisting: forwardRef(() => component),
   },
   {
     provide: NG_VALIDATORS,
     multi: true,
-    useExisting: forwardRef(() => TeacherGeneralInfoComponent),
+    useExisting: forwardRef(() => component),
   },
 ];
 
@@ -24,11 +19,11 @@ const providerFactory: Provider[] = [
   selector: 'ksp-teacher-general-info',
   templateUrl: './general-info.component.html',
   styleUrls: ['./general-info.component.scss'],
-  providers: providerFactory,
+  providers: providerFactory(TeacherGeneralInfoComponent),
 })
 export class TeacherGeneralInfoComponent
   extends KspFormBaseComponent
-  implements OnInit, ControlValueAccessor
+  implements OnInit
 {
   override form = this.fb.group({
     firstName: [''],

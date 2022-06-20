@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Component, Input, OnDestroy } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { ControlValueAccessor, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { FormMode } from './form';
 
@@ -8,7 +8,9 @@ import { FormMode } from './form';
   template: ``,
   standalone: true,
 })
-export abstract class KspFormBaseComponent implements OnDestroy {
+export abstract class KspFormBaseComponent
+  implements OnDestroy, ControlValueAccessor
+{
   @Input() mode: FormMode = 'edit';
   public form!: FormGroup;
   subscriptions: Subscription[] = [];
