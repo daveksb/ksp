@@ -92,8 +92,11 @@
   </ng-container>
 </form>
 
-<ng-container *ngIf="advisors.length < 5">
-  <ksp-add-row-button *hideInViewMode (addClick)="addAdvisor()" [mode]="'blue'"
+<ng-container *hideInViewMode>
+  <ksp-add-row-button
+    *ngIf="advisors.length < 5"
+    (addClick)="addAdvisor()"
+    [mode]="'blue'"
     >เพิ่มที่ปรึกษาวิทยานิพนธ์และการค้นคว้าอิสระ
   </ksp-add-row-button>
 </ng-container>

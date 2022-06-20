@@ -1,20 +1,15 @@
-import { Component, forwardRef, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
-import { debounceTime } from 'rxjs';
+import { providerFactory } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-step-2-nitet',
   templateUrl: './nitet.component.html',
   styleUrls: ['./nitet.component.scss'],
-  providers: [
-    {
-      provide: KspFormBaseComponent,
-      useExisting: forwardRef(() => NitetComponent),
-    },
-  ],
+  providers: providerFactory(NitetComponent),
 })
-export class NitetComponent extends KspFormBaseComponent implements OnInit {
+export class NitetComponent extends KspFormBaseComponent {
   experienceYearFocused = false;
   opaciseBox: boolean[] = [];
 
@@ -24,22 +19,12 @@ export class NitetComponent extends KspFormBaseComponent implements OnInit {
     instructorInfo: [],
   });
 
-  form = this.fb.group({
+  override form = this.fb.group({
     nitets: this.fb.array([this.nitetForm]),
   });
 
   constructor(private fb: FormBuilder) {
     super();
-  }
-
-  ngOnInit(): void {
-    this.nitetForm.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
-      //console.log('form value = ', res);
-    });
-
-    if (this.mode === 'view') {
-      this.form.disable();
-    }
   }
 
   addNitet() {
@@ -58,13 +43,13 @@ export class NitetComponent extends KspFormBaseComponent implements OnInit {
 
   get experienceYear() {
     if (this.experienceYearFocused)
-      return this.nitetForm.controls['experienceYear'].value ?? 99;
+      return this.nitetForm.controls.experienceYear.value ?? 99;
     else {
       return 99;
     }
   }
 
   get nitets() {
-    return this.form.controls['nitets'];
+    return this.form.controls.nitets;
   }
 }
