@@ -1,0 +1,91 @@
+.container {
+  max-width: 100%;
+  padding-bottom: 70px;
+  background-color: #e5e5e5;
+}
+
+.check__form {
+  margin: 25px 20px 0 20px;
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 24px;
+}
+
+.bottom__container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 1;
+}
+
+.title__label {
+  font-size: 22px;
+  color: #000000;
+  padding: 5px 20px;
+}
+
+.content__container {
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 0px 20px;
+}
+
+.detail__header {
+  font-size: 22px;
+  color: #000000;
+  margin: 0 6px;
+}
+
+.table__container {
+  margin-bottom: 25px;
+}
+
+.table {
+  background-color: #fff;
+  border: 1px solid #eceef2;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  margin: 0 12px;
+}
+
+.table > :not(:first-child) {
+  border-top: 0;
+}
+
+.header__table {
+  background-color: #edf6ff;
+  font-size: 16px;
+  white-space: nowrap;
+  color: #000000;
+}
+
+.body__table {
+  font-size: 16px;
+  color: #000000;
+  white-space: nowrap;
+}
+
+.table__header {
+  margin: 12px;
+  color: #0056ff;
+  font-size: 18px;
+}
+
+.table__header-2 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.result__container {
+  display: flex;
+}
+
+.btn {
+  width: auto;
+  height: 35px;
+}
