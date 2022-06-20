@@ -68,11 +68,11 @@ export class UserDetailComponent implements OnInit {
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
         if (this.pageType === SchoolServiceUserPageType.ApproveNewUser) {
-          this.router.navigate(['/', 'user-approvement']);
+          this.router.navigate(['/', 'approve-new-user', 'list']);
         } else if (
           this.pageType === SchoolServiceUserPageType.ManageCurrentUser
         ) {
-          this.router.navigate(['/', 'user-management']);
+          this.router.navigate(['/', 'manage-current-user', 'list']);
         }
       }
     });

@@ -15,14 +15,17 @@ export const routes: Routes = [
     component: EServiceContainerPageComponent,
     children: [
       {
+        data: { subHeader: 'ccc' },
         path: 'list',
         component: ListPageComponent,
       },
       {
+        data: { subHeader: 'bbb' },
         path: 'detail',
         component: AccusationRecordComponent,
       },
       {
+        data: { subHeader: 'aaa' },
         path: 'test',
         component: AccusationSearchComponent,
       },

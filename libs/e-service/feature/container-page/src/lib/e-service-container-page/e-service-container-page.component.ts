@@ -19,6 +19,7 @@ export class EServiceContainerPageComponent implements OnInit {
       this.menuConfig = data['menuConfig'];
       this.headerLabel = data['headerLabel'];
       this.headerDetail = data['headerDetail'];
+      //console.log('res3 = ', data);
     });
   }
 }

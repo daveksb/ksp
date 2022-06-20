@@ -94,9 +94,9 @@ export class ListPageComponent implements OnInit {
       this.mode = data['type'];
       console.log('mode = ', data);
     }); */
-    this.route.parent?.data.subscribe((res) => {
+    this.route.data.subscribe((res) => {
       this.mode = res['type'];
-      console.log('res = ', res);
+      //console.log('res = ', res);
     });
   }
 
