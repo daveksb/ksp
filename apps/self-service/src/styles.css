@@ -100,8 +100,15 @@ button.mat-menu-item {
   height: 45px;
   width: 45px;
   color: #fff;
-  background-color: #0056ff;
   margin-top: -10px;
+  background: #0056ff;
+  opacity: 50%;
+}
+
+.mat-step-header .mat-step-icon-selected,
+.mat-step-header .mat-step-icon-state-done,
+.mat-step-header .mat-step-icon-state-edit {
+  opacity: 100% !important;
 }
 
 .mat-step-text-label {

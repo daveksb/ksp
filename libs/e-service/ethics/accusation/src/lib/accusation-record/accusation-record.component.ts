@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AccusationSearchComponent } from '@ksp/e-service/dialog/accusation-search';
 import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-info';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
@@ -11,6 +11,7 @@ import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
 import { SharedUiLicenseTypeButtonGroupModule } from '@ksp/shared/ui/license-type-button-group';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
+import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 
 @Component({
   selector: 'e-service-ethic-accusation-record',
@@ -27,12 +28,17 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
     SharedUiLicenseInfoModule,
     RequestHeaderInfoComponent,
     MatIconModule,
+    SharedUiTopNavModule
   ],
 })
-export class AccusationRecordComponent {
+export class AccusationRecordComponent implements OnInit {
   accusationFiles = ['เอกสารกล่าวหา/กล่าวโทษ', 'สำเนาบัตรประชาชน'];
 
-  constructor(private router: Router, public dialog: MatDialog) {}
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private route: ActivatedRoute
+  ) {}
   license = [
     'ใบอนุญาตประกอบวิชาชีพ - ครู',
     'ใบอนุญาตประกอบวิชาชีพ - ผู้บริหารสถานศึกษา',
@@ -64,5 +70,15 @@ export class AccusationRecordComponent {
         this.onCompleted();
       }
     }); */
+  }
+
+  ngOnInit(): void {
+    /* this.route.data.subscribe((data) => {
+      this.mode = data['type'];
+      console.log('mode = ', data);
+    }); */
+    this.route.data.subscribe((res) => {
+      //console.log('res2 = ', res);
+    });
   }
 }

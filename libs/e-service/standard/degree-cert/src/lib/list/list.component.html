@@ -106,8 +106,10 @@
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let element">
             <button id="btn-print" class="btn btn-primary">
-              <mat-icon class="print">print</mat-icon>
-              <span class="print__label">พิมพ์ใบคำขอ</span>
+              <div class="print__button">
+                <mat-icon class="print">print</mat-icon>
+                <span class="print__label">พิมพ์ใบคำขอ</span>
+              </div>
             </button>
           </td>
         </ng-container>

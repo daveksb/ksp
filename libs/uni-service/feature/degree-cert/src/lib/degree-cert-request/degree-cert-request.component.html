@@ -14,25 +14,25 @@
       [selectedIndex]="1"
       #stepper
     >
-      <mat-step>
+      <mat-step [completed]="false">
         <ng-template matStepLabel>ข้อมูลพื้นฐาน</ng-template>
         <ksp-degree-cert-step-one (degreeType)="degreeType = $event">
         </ksp-degree-cert-step-one>
         <ksp-degree-cert-coordinator></ksp-degree-cert-coordinator>
       </mat-step>
 
-      <mat-step>
+      <mat-step [completed]="false">
         <ng-template matStepLabel>ด้านหลักสูตร</ng-template>
         <ksp-degree-cert-step-two [formType]="degreeType">
         </ksp-degree-cert-step-two>
       </mat-step>
 
-      <mat-step>
+      <mat-step [completed]="false">
         <ng-template matStepLabel>ด้านกระบวนการผลิต</ng-template>
         <ksp-degree-cert-step-3></ksp-degree-cert-step-3>
       </mat-step>
 
-      <mat-step>
+      <mat-step [completed]="false">
         <ng-template matStepLabel>เอกสารแนบ</ng-template>
         <ksp-degree-cert-step-four></ksp-degree-cert-step-four>
       </mat-step>

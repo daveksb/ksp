@@ -3,16 +3,10 @@
     รายละเอียดใบคำขอ > <span>ขอยื่นรายชื่อผู้เข้าศึกษา</span>
   </div>
   <div class="content__container">
-    <div class="content__header">
-      <div class="label__content">
-        วันที่ทำรายการ :
-        <span class="label__content--primary">10 ตุลาคม 2565</span>
-      </div>
-      <div class="label__content">
-        เลขใบคำขอ :
-        <span class="label__content--secondary">112234467876543</span>
-      </div>
-    </div>
+    <ksp-request-header-info
+      [requestDate]="'10 ตุลาคม 2565'"
+      [requestNumber]="'112234467876543'"
+    ></ksp-request-header-info>
     <hr />
 
     <div class="detail__container">
@@ -113,6 +107,7 @@
                 <p-cellEditor>
                   <ng-template pTemplate="input">
                     <input
+                      class="date__input"
                       pInputText
                       type="date"
                       [(ngModel)]="product.graduateDate"
@@ -128,6 +123,7 @@
                 <p-cellEditor>
                   <ng-template pTemplate="input">
                     <input
+                      class="date__input"
                       pInputText
                       type="date"
                       [(ngModel)]="product.approveDate"
@@ -150,6 +146,7 @@
                 <p-cellEditor>
                   <ng-template pTemplate="input">
                     <input
+                      class="date__input"
                       pInputText
                       type="date"
                       [(ngModel)]="product.startDate"
@@ -289,6 +286,7 @@
                 <p-cellEditor>
                   <ng-template pTemplate="input">
                     <input
+                      class="date__input"
                       pInputText
                       type="text"
                       [(ngModel)]="product.phone"
@@ -304,6 +302,7 @@
                 <p-cellEditor>
                   <ng-template pTemplate="input">
                     <input
+                      class="date__input"
                       pInputText
                       type="date"
                       [(ngModel)]="product.birthDate"
@@ -356,7 +355,7 @@
 
           <ng-template pTemplate="rowexpansion" let-product>
             <tr>
-              <td [attr.colspan]="pageType === 1 ? 5 : 4">
+              <td [attr.colspan]="pageType === 1 ? 5 : 5">
                 <ksp-form-address
                   >ที่อยู่ตามทะเบียนบ้าน (นักศึกษาชาวไทย) หรือที่พักประจำ
                   (นักศึกษาชาวต่างชาติ)</ksp-form-address

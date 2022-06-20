@@ -11,28 +11,10 @@
   padding: 24px 32px 0;
 }
 
-.content__header {
-  display: flex;
-}
-
 .header__detail {
   display: flex;
   justify-content: space-between;
   margin-bottom: 15px;
-}
-
-.label__content {
-  font-size: 18px;
-  color: #808080;
-  margin-right: 24px;
-}
-
-.label__content--primary {
-  color: #f68b33;
-}
-
-.label__content--secondary {
-  color: #0056ff;
 }
 
 .content__container {
@@ -106,7 +88,7 @@ table {
 
 .table__order {
   text-align: center;
-  width: auto;
+  width: 30px;
   background-color: #edf6ff;
 }
 
@@ -114,7 +96,7 @@ table {
   white-space: nowrap;
   width: auto;
   background-color: #edf6ff;
-  padding: 20px 10px;
+  padding: 10px;
 }
 
 .table__detail {
@@ -148,8 +130,18 @@ table {
   border: 1px solid #666666;
   padding: 2px;
   border-radius: 2px;
+  width: 75px;
 }
 
 .approvetime__input {
-  width: 100px;
+  width: 75px;
+  text-align: center;
+}
+
+input {
+  width: 150px;
+}
+
+.date__input {
+  width: 125px;
 }
