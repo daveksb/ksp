@@ -11,18 +11,31 @@ import { FormMode } from './form';
 export abstract class KspFormBaseComponent
   implements OnDestroy, ControlValueAccessor
 {
-  @Input() mode: FormMode = 'edit';
+  _mode: FormMode = 'edit';
+
+  @Input()
+  set mode(value: FormMode) {
+    this._mode = value;
+    if (value === 'view') {
+      this.form.disable();
+    }
+  }
+
+  get mode(): FormMode {
+    return this._mode;
+  }
+
   public form!: FormGroup;
   subscriptions: Subscription[] = [];
 
   constructor() {
-    /*     this.subscriptions.push(
+    this.subscriptions.push(
       // any time the inner form changes update the parent of any change
-      this.form.valueChanges.subscribe((value) => {
+      this.form?.valueChanges.subscribe((value) => {
         this.onChange(value);
         this.onTouched();
       })
-    ); */
+    );
   }
   get value() {
     return this.form.value;
