@@ -13,6 +13,7 @@ import {
 })
 export class CheckComponent {
   degreeType = '';
+  
   constructor(public dialog: MatDialog, private router: Router) {}
 
   cancel() {
@@ -44,6 +45,7 @@ export class CheckComponent {
         subContent: `ระบบส่งใบคำขอเพื่อพิจารณาประเมินหลักสูตร
         เรียบร้อย`,
         buttonLabel: 'กลับสู่หน้าหลัก',
+        showPrintButton: true,
       },
     });
 

@@ -10,19 +10,21 @@
   <div class="btn__container">
     <button
       matDialogClose
-      *ngIf="isCanPrint"
-      (click)="complete()"
+      *ngIf="data.showPrintButton || false"
+      id="btn-print"
       type="button"
       class="btn btn-outline-primary"
     >
-      <img class="print__icon" src="assets/images/print.png" />
-
-      พิมพ์แบบรายงาน
+      <div class="print__button">
+        <mat-icon>print</mat-icon>
+        พิมพ์แบบรายงาน
+      </div>
     </button>
 
     <button
       matDialogClose
       (click)="complete()"
+      id="btn-home"
       type="button"
       class="btn btn-primary"
     >
