@@ -42,33 +42,15 @@
 
     <ksp-form-attachment [groups]="registerFiles"></ksp-form-attachment>
 
-    <div class="footer__container">
-      <div class="footer__content--left">
-        <button
-          (click)="prevPage()"
-          type="button"
-          class="btn btn-outline-warning"
-        >
-          ย้อนกลับ
-        </button>
-      </div>
-      <div class="footer__content">
-        <button
-          (click)="cancel()"
-          type="button"
-          class="btn btn-outline-primary"
-        >
-          ยกเลิก
-        </button>
-        <button
-          (click)="confirm()"
-          id="btn-save"
-          type="button"
-          class="btn btn-primary"
-        >
-          บันทึก
-        </button>
-      </div>
-    </div>
+    <ksp-bottom-menu
+      [isFirstPage]="false"
+      [isLastPage]="true"
+      [showCenterButtons]="true"
+      [showSaveButton]="true"
+      (prevClicked)="prevPage()"
+      (cancelClicked)="cancel()"
+      (saveClicked)="confirm()"
+    >
+    </ksp-bottom-menu>
   </div>
 </div>

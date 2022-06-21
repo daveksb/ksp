@@ -17,28 +17,10 @@
   margin: 0px 128px;
 }
 
-.content__header {
-  display: flex;
-}
-
 .img__step {
   display: flex;
   justify-content: center;
   margin: 25px;
-}
-
-.label__content {
-  font-size: 18px;
-  color: #808080;
-  margin-right: 24px;
-}
-
-.label__content--primary {
-  color: #f68b33;
-}
-
-.label__content--secondary {
-  color: #0056ff;
 }
 
 .detail__container {
@@ -66,25 +48,4 @@
 .detail__header {
   font-size: 22px;
   color: #0056ff;
-}
-
-.footer__container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  margin-top: 20px;
-}
-
-.footer__content {
-  display: flex;
-  justify-content: center;
-}
-
-.footer__content--left {
-  display: flex;
-  justify-content: flex-start;
-  margin-right: 200px;
-}
-
-#btn-save {
-  margin-left: 10px;
 }
