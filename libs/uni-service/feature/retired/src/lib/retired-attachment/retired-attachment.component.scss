@@ -34,43 +34,6 @@
   margin: 0px 128px;
 }
 
-.detail__container {
-  background-color: #f9f9fa;
-  padding: 16px;
-  margin: 24px 0;
-}
-
-.detail__content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 18px;
-}
-
-.detail__content--secondary {
-  display: grid;
-  grid-template-columns: 150px 1fr 1fr;
-  grid-column-gap: 18px;
-}
-
-.form-label {
-  font-size: 18px;
-  color: #656565;
-}
-
-.form-control {
-  font-size: 18px;
-  background-color: #fff;
-}
-
-.form-select {
-  font-size: 18px;
-}
-
-.detail__header {
-  font-size: 22px;
-  color: #0056ff;
-}
-
 #btn-save {
   margin-left: 10px;
 }

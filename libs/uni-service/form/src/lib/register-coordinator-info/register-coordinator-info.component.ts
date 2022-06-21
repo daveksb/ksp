@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'uni-service-register-coordinator-info',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register-coordinator-info.component.scss'],
 })
 export class FormRegisterCoordinatorInfoComponent implements OnInit {
+  @Input() formHeader: any;
+
   constructor() {}
 
   ngOnInit(): void {}

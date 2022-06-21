@@ -164,6 +164,9 @@
       "@ksp/shared/form/university-search": [
         "libs/shared/form/university-search/src/index.ts"
       ],
+      "@ksp/shared/form/university-select": [
+        "libs/shared/form/university-select/src/index.ts"
+      ],
       "@ksp/shared/interface": ["libs/shared/interface/src/index.ts"],
       "@ksp/shared/ui/add-row-button": [
         "libs/shared/ui/add-row-button/src/index.ts"
@@ -188,7 +191,6 @@
       "@ksp/shared/ui/side-menu": ["libs/shared/ui/side-menu/src/index.ts"],
       "@ksp/shared/ui/top-nav": ["libs/shared/ui/top-nav/src/index.ts"],
       "@ksp/shared/utility": ["libs/shared/utility/src/index.ts"],
-      "@ksp/uni-service/form": ["libs/uni-service/form/src/index.ts"],
       "@ksp/uni-service/feature/container-page": [
         "libs/uni-service/feature/container-page/src/index.ts"
       ],
@@ -213,6 +215,7 @@
       "@ksp/uni-service/feature/retired": [
         "libs/uni-service/feature/retired/src/index.ts"
       ],
+      "@ksp/uni-service/form": ["libs/uni-service/form/src/index.ts"],
       "@ksp/uni-service/ui/dialog": ["libs/uni-service/ui/dialog/src/index.ts"],
       "@ksp/uni-service/ui/nav": ["libs/uni-service/ui/nav/src/index.ts"]
     }
