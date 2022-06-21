@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { UniversitySearchComponent } from '@ksp/shared/form/university-search';
 
 @Component({
-  selector: 'school-service-current-user',
   templateUrl: './current-user.component.html',
   styleUrls: ['./current-user.component.scss'],
 })

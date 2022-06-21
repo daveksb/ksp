@@ -12,11 +12,11 @@ import {
   styleUrls: ['./coordinator-info.component.scss'],
 })
 export class CoordinatorInfoComponent {
-  authorInfo = ['หนังสือแต่งตั้งผู้ประสานงาน', 'สำเนาบัตรประชาชน'];
+  uploadFileList = ['หนังสือแต่งตั้งผู้ประสานงาน', 'สำเนาบัตรประชาชน'];
 
   constructor(private router: Router, public dialog: MatDialog) {}
 
-  cancel() {
+  navigateBack() {
     this.router.navigate(['/', 'login']);
   }
 
@@ -26,7 +26,6 @@ export class CoordinatorInfoComponent {
 
   save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      height: '250px',
       width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
@@ -39,14 +38,13 @@ export class CoordinatorInfoComponent {
 
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.onCompleted();
+        this.showCompleteDialog();
       }
     });
   }
 
-  onCompleted() {
+  showCompleteDialog() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      height: '275px',
       width: '375px',
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
@@ -59,7 +57,7 @@ export class CoordinatorInfoComponent {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'login']);
+        this.navigateBack();
       }
     });
   }
