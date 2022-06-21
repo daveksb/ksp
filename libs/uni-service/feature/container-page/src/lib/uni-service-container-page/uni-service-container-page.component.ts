@@ -16,7 +16,6 @@ export class UniServiceContainerPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.menuConfig = menu;
-
     this.route.data.subscribe((data) => {
       this.header = data['header'];
       this.subHeader = data['subHeader'];

@@ -9,7 +9,6 @@
     display: grid;
     grid-template-columns: 100%;
   }
-
   .side__menu {
     display: none;
   }

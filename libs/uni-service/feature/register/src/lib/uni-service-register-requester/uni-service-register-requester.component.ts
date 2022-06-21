@@ -12,13 +12,9 @@ export class UniServiceRegisterRequesterComponent {
   constructor(private router: Router, public dialog: MatDialog) {}
 
   search() {
-    const dialogRef = this.dialog.open(UniversitySearchComponent, {
+    this.dialog.open(UniversitySearchComponent, {
       height: '900px',
       width: '1200px',
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
     });
   }
 

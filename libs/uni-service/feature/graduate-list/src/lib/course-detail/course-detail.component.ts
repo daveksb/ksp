@@ -3,13 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UniserviceImportType } from '@ksp/shared/interface';
 
 @Component({
-  selector: 'uni-service-course-detail',
   templateUrl: './course-detail.component.html',
   styleUrls: ['./course-detail.component.scss'],
 })
 export class CourseDetailComponent implements OnInit {
   processType!: UniserviceImportType;
-
   importType = UniserviceImportType;
 
   constructor(private router: Router, private route: ActivatedRoute) {}
@@ -25,7 +23,7 @@ export class CourseDetailComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe((res) => {
       this.processType = Number(res.get('type'));
-      console.log('process type = ', this.processType);
+      //console.log('process type = ', this.processType);
     });
   }
 

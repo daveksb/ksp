@@ -1,6 +1,28 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
+@Component({
+  selector: 'uni-service-retired-search',
+  templateUrl: './retired-search.component.html',
+  styleUrls: ['./retired-search.component.scss'],
+})
+export class RetiredSearchComponent {
+  data: RetiredInfo[] = [];
+  constructor(private router: Router) {}
+
+  search() {
+    this.data = data;
+  }
+
+  clear() {
+    this.data = [];
+  }
+
+  confirm() {
+    this.router.navigate(['/', 'retired', 'reason']);
+  }
+}
+
 export interface RetiredInfo {
   retiredRole: string;
   retiredName: string;
@@ -27,25 +49,3 @@ export const data: RetiredInfo[] = [
     retiredPhone: '081-9872676',
   },
 ];
-
-@Component({
-  selector: 'uni-service-retired-search',
-  templateUrl: './retired-search.component.html',
-  styleUrls: ['./retired-search.component.scss'],
-})
-export class RetiredSearchComponent {
-  data: RetiredInfo[] = [];
-  constructor(private router: Router) {}
-
-  search() {
-    this.data = data;
-  }
-
-  clear() {
-    this.data = [];
-  }
-
-  confirm() {
-    this.router.navigate(['/', 'retired', 'reason']);
-  }
-}
