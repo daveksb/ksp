@@ -3,62 +3,27 @@ import { CommonModule } from '@angular/common';
 import { TempLicenseListComponent } from './temp-license-list/temp-license-list.component';
 import { TempLicenseDetailComponent } from './temp-license-detail/temp-license-detail.component';
 import { MatTabsModule } from '@angular/material/tabs';
-import { RouterModule, Routes } from '@angular/router';
-import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { EServiceUiLicenseCheckModule } from '@ksp/e-service/ui/license-check';
 import { TempLicenseCheckForbiddenComponent } from './temp-license-check-forbidden/temp-license-check-forbidden.component';
 import { TempLicenseCheckConfirmComponent } from './temp-license-check-confirm/temp-license-check-confirm.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TempLicenseApproveComponent } from './temp-license-approve/temp-license-approve.component';
-import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
+import { ELicenseTempLicenseRoutingModule } from './e-license-temp-license-routing.module';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
-
-export const routes: Routes = [
-  {
-    path: '',
-    component: EServiceContainerPageComponent,
-    children: [
-      {
-        path: '',
-        redirectTo: 'list',
-        pathMatch: 'full',
-      },
-      {
-        path: 'list',
-        component: TempLicenseListComponent,
-      },
-      {
-        path: 'detail',
-        component: TempLicenseDetailComponent,
-      },
-      {
-        path: 'forbidden',
-        component: TempLicenseCheckForbiddenComponent,
-      },
-      {
-        path: 'confirm',
-        component: TempLicenseCheckConfirmComponent,
-      },
-      {
-        path: 'approve',
-        component: TempLicenseApproveComponent,
-      },
-    ],
-  },
-];
 
 @NgModule({
   imports: [
     CommonModule,
+    ELicenseTempLicenseRoutingModule,
     MatTabsModule,
     MatDialogModule,
     SharedFormOthersModule,
     EServiceUiLicenseCheckModule,
-    RouterModule.forChild(routes),
     SharedUiBottomMenuModule,
     RequestHeaderInfoComponent,
     SharedUiTopNavModule,
@@ -73,11 +38,9 @@ export const routes: Routes = [
     TempLicenseApproveComponent,
   ],
   exports: [
-    TempLicenseListComponent,
-    TempLicenseDetailComponent,
     TempLicenseCheckForbiddenComponent,
     TempLicenseCheckConfirmComponent,
     TempLicenseApproveComponent,
   ],
 })
-export class EServiceELicenseTempLicenseModule {}
+export class ELicenseTempLicenseModule {}

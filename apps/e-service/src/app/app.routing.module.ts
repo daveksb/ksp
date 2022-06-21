@@ -20,7 +20,7 @@ const routes: Routes = [
     data: { menuConfig: licenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
     loadChildren: () =>
       import('@ksp/e-service/e-license/temp-license').then(
-        (m) => m.EServiceELicenseTempLicenseModule
+        (m) => m.ELicenseTempLicenseModule
       ),
   },
   {

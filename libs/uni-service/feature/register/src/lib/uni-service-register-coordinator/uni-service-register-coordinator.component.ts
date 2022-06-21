@@ -49,10 +49,6 @@ export class UniServiceRegisterCoordinatorComponent {
       },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    });
-
     dialogRef.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         this.onConfirmed();
