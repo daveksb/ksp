@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UniserviceImportType } from '@ksp/shared/interface';
 
 export interface StudentInfo {
   order: number;
@@ -63,7 +64,9 @@ export const data: StudentInfo[] = [
   templateUrl: './course-search.component.html',
   styleUrls: ['./course-search.component.scss'],
 })
-export class CourseSearchComponent {
+export class CourseSearchComponent implements OnInit {
+  processType!: UniserviceImportType;
+
   displayedColumns: string[] = [
     'order',
     'edit',
@@ -79,10 +82,22 @@ export class CourseSearchComponent {
   ];
   dataSource = new MatTableDataSource<StudentInfo>();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.route.data.subscribe((res) => {
+      console.log('res = ', res);
+      this.processType = res['type'];
+    });
+  }
 
   nextPage() {
-    this.router.navigate(['/', 'graduate-list', 'course-detail']);
+    this.router.navigate([
+      '/',
+      'graduate-list',
+      'course-detail',
+      this.processType,
+    ]);
   }
 
   search() {

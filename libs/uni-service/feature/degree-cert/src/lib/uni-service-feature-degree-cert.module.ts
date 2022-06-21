@@ -15,6 +15,7 @@ import { SharedFormDegreeCertStepThreeModule } from '@ksp/shared/form/degree-cer
 import { SharedFormDegreeCertStepOneModule } from '@ksp/shared/form/degree-cert/step-one';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
 import { MatIconModule } from '@angular/material/icon';
+import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 
 const routes: Routes = [
   {
@@ -49,6 +50,7 @@ const routes: Routes = [
     MatTabsModule,
     RequestHeaderInfoComponent,
     MatIconModule,
+    SharedUiTopNavModule,
   ],
   declarations: [DegreeCertRequestComponent],
 })
