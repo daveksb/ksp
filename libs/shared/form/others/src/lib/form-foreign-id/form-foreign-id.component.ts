@@ -8,6 +8,7 @@ import { FormMode } from '@ksp/shared/interface';
 })
 export class FormForeignIdComponent {
   @Input() mode: FormMode = 'edit';
-  
+  @Input() formHeader: any;
+
   foreignInfo = ['1.สำเนาหนังสือเดินทาง'];
 }

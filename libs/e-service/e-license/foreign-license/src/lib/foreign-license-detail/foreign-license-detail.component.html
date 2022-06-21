@@ -6,20 +6,81 @@
 >
 
 <div class="main-container">
-  <ksp-form-foreign-id [mode]="'view'"></ksp-form-foreign-id>
-
+  <div class="box__title">
+    รายละเอียดใบคำขอสร้างเลขคุรุสภาสำหรับนักศึกษาชาวต่างชาติ
+  </div>
+  <div class="content__container">
+    <ksp-request-header-info
+      [requestDate]="'10 ตุลาคม 2565'"
+      [requestNumber]="'112234467876543'"
+    ></ksp-request-header-info>
+    <hr />
+    <div class="header__container">
+      <div class="detail__content">
+        <div class="mb-1">
+          <label class="form-label">สังกัด</label>
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            disabled
+            placeholder="xxxxx"
+          />
+        </div>
+      </div>
+      <div class="detail__content">
+        <div class="mb-1">
+          <label class="form-label">รหัสหน่วยงาน / สถานศึกษา</label>
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            disabled
+            placeholder="xxxxx"
+          />
+        </div>
+        <div class="mb-1">
+          <label class="form-label">ชื่อหน่วยงาน / สถานศึกษา</label>
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            disabled
+            placeholder="xxxxx"
+          />
+        </div>
+      </div>
+      <div class="detail__content--primary">
+        <div class="mb-1">
+          <label class="form-label">ที่อยู่</label>
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            disabled
+            placeholder="xxxxx"
+          />
+        </div>
+      </div>
+    </div>
+    <ksp-form-foreign-id [mode]="'view'"></ksp-form-foreign-id>
+    <hr />
+    <div class="form__upload">
+      <ksp-form-attachment
+        [groups]="foreignInfo"
+        [mode]="mode"
+      ></ksp-form-attachment>
+    </div>
+  </div>
+  <br />
   <div class="content__container">
     <e-service-license-check [choices]="choices"></e-service-license-check>
   </div>
-</div>
 
-<div class="bottom__container">
-  <ksp-bottom-menu
-    (cancelClicked)="cancel()"
-    [isLastPage]="true"
-    [isFirstPage]="true"
-    [showCenterButtons]="true"
-    [showSaveButton]="true"
-    (saveClicked)="onConfirmed()"
-  ></ksp-bottom-menu>
+  <div class="bottom__container">
+    <ksp-bottom-menu
+      (cancelClicked)="cancel()"
+      [isLastPage]="true"
+      [isFirstPage]="true"
+      [showCenterButtons]="true"
+      [showSaveButton]="true"
+      (saveClicked)="onConfirmed()"
+    ></ksp-bottom-menu>
+  </div>
 </div>
