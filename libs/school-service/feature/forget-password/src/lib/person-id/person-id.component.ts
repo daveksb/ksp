@@ -5,12 +5,11 @@ import { Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/ui/dialog';
 
 @Component({
-  selector: 'school-service-forget-password',
-  templateUrl: './forget-password.component.html',
-  styleUrls: ['./forget-password.component.scss'],
+  templateUrl: './person-id.component.html',
+  styleUrls: ['./person-id.component.scss'],
 })
-export class ForgetPasswordComponent implements OnInit {
-  forgotPasswordForm = this.fb.group({
+export class PersonIdComponent implements OnInit {
+  form = this.fb.group({
     schoolId: ['', Validators.required],
     personId: ['', Validators.required],
   });
@@ -22,7 +21,7 @@ export class ForgetPasswordComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.forgotPasswordForm.valueChanges.subscribe((res) => {
+    this.form.valueChanges.subscribe((res) => {
       //console.log('form value = ', res);
     });
   }
@@ -32,10 +31,8 @@ export class ForgetPasswordComponent implements OnInit {
   }
 
   accept() {
-    //console.log('form valid = ', this.forgotPasswordForm.valid);
-
-    if (this.forgotPasswordForm.valid) {
-      this.router.navigate(['/', 'forget-password', 'set-password']);
+    if (this.form.valid) {
+      this.router.navigate(['/', 'forget-password', 'set-new-password']);
     } else {
       this.dialog.open(ConfirmDialogComponent, {
         data: {

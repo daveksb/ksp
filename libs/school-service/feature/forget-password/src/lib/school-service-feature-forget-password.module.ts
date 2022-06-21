@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { PersonIdComponent } from './person-id/person-id.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SetNewPasswordComponent } from './set-new-password/set-new-password.component';
 import { UniServiceUiNavModule } from '@ksp/uni-service/ui/nav';
@@ -8,11 +8,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 export const routes: Routes = [
   {
-    path: 'confirm-password',
-    component: ForgetPasswordComponent,
+    path: 'person-id',
+    component: PersonIdComponent,
   },
   {
-    path: 'set-password',
+    path: 'set-new-password',
     component: SetNewPasswordComponent,
   },
 ];
@@ -24,7 +24,6 @@ export const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes),
   ],
-  declarations: [ForgetPasswordComponent, SetNewPasswordComponent],
-  exports: [ForgetPasswordComponent, SetNewPasswordComponent],
+  declarations: [PersonIdComponent, SetNewPasswordComponent],
 })
 export class SchoolServiceFeatureForgetPasswordModule {}

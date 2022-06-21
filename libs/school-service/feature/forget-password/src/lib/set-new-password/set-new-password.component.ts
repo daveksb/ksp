@@ -14,7 +14,7 @@ import {
 export class SetNewPasswordComponent {
   constructor(private router: Router, public dialog: MatDialog) {}
 
-  cancel() {
+  navigateBack() {
     this.router.navigate(['/', 'login']);
   }
 
@@ -49,7 +49,7 @@ export class SetNewPasswordComponent {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'login']);
+        this.navigateBack();
       }
     });
   }
