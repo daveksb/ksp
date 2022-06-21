@@ -28,8 +28,8 @@ const routes: Routes = [
   {
     path: 'foreign-teacher',
     loadChildren: () =>
-      import('@ksp/school-service/feature/foreign-id').then(
-        (m) => m.SchoolServiceFeatureForeignIdModule
+      import('@ksp/school-service/feature/foreign-teacher').then(
+        (m) => m.SchoolServiceFeatureForeignTeacherModule
       ),
   },
   {

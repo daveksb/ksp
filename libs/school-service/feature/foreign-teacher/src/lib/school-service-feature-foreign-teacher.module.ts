@@ -32,4 +32,4 @@ export const routes: Route[] = [
   ],
   declarations: [ForeignTeacherIdRequestComponent],
 })
-export class SchoolServiceFeatureForeignIdModule {}
+export class SchoolServiceFeatureForeignTeacherModule {}
