@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { FormMode } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -13,6 +14,8 @@ import {
 })
 export class ForeignLicenseDetailComponent {
   choices: string[] = ['ครบถ้วน และถูกต้อง', 'ไม่ครบถ้วน และไม่ถูกต้อง'];
+  @Input() mode: FormMode = 'view';
+  foreignInfo = ['1.สำเนาหนังสือเดินทาง'];
 
   constructor(private router: Router, public dialog: MatDialog) {}
 
