@@ -66,11 +66,7 @@
       </div>
 
       <div class="button__container">
-        <button
-          (click)="clear()"
-          type="button"
-          class="btn btn-outline-primary btn-clear"
-        >
+        <button (click)="clear()" type="button" class="btn btn-outline-primary">
           ล้างข้อมูล
         </button>
         <button
@@ -86,7 +82,7 @@
 
   <div class="table__title">ข้อมูลรับรองปริญญาและประกาศนียบัตร</div>
   <div class="bottom-container">
-    <div class="bottom-content">
+    <div class="box__container">
       <div class="table-responsive">
         <table mat-table [dataSource]="dataSource">
           <ng-container matColumnDef="order">

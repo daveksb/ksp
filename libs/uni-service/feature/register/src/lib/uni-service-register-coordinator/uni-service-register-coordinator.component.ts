@@ -35,10 +35,6 @@ export class UniServiceRegisterCoordinatorComponent {
     this.router.navigate(['/', 'login']);
   }
 
-  submit() {
-    // will do later
-  }
-
   confirm() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',

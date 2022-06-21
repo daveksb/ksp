@@ -3,6 +3,50 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UniserviceImportType } from '@ksp/shared/interface';
 
+@Component({
+  selector: 'uni-service-course-search',
+  templateUrl: './course-search.component.html',
+  styleUrls: ['./course-search.component.scss'],
+})
+export class CourseSearchComponent implements OnInit {
+  processType!: UniserviceImportType;
+
+  displayedColumns: string[] = columns;
+  dataSource = new MatTableDataSource<StudentInfo>();
+
+  constructor(private router: Router, private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.route.data.subscribe((res) => {
+      this.processType = res['type'];
+    });
+  }
+
+  nextPage() {
+    this.router.navigate(['/graduate-list', 'course-detail', this.processType]);
+  }
+
+  search() {
+    this.dataSource.data = data;
+  }
+
+  clear() {
+    this.dataSource.data = [];
+  }
+}
+const columns = [
+  'order',
+  'edit',
+  'sendDate',
+  'degreeCode',
+  'major',
+  'branch',
+  'degreeName',
+  'studentStatus',
+  'graduateStatus',
+  'editDate',
+  'print',
+];
 export interface StudentInfo {
   order: number;
   edit: string;
@@ -58,53 +102,3 @@ export const data: StudentInfo[] = [
     print: '',
   },
 ];
-
-@Component({
-  selector: 'uni-service-course-search',
-  templateUrl: './course-search.component.html',
-  styleUrls: ['./course-search.component.scss'],
-})
-export class CourseSearchComponent implements OnInit {
-  processType!: UniserviceImportType;
-
-  displayedColumns: string[] = [
-    'order',
-    'edit',
-    'sendDate',
-    'degreeCode',
-    'major',
-    'branch',
-    'degreeName',
-    'studentStatus',
-    'graduateStatus',
-    'editDate',
-    'print',
-  ];
-  dataSource = new MatTableDataSource<StudentInfo>();
-
-  constructor(private router: Router, private route: ActivatedRoute) {}
-
-  ngOnInit(): void {
-    this.route.data.subscribe((res) => {
-      console.log('res = ', res);
-      this.processType = res['type'];
-    });
-  }
-
-  nextPage() {
-    this.router.navigate([
-      '/',
-      'graduate-list',
-      'course-detail',
-      this.processType,
-    ]);
-  }
-
-  search() {
-    this.dataSource.data = data;
-  }
-
-  clear() {
-    this.dataSource.data = [];
-  }
-}

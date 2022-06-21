@@ -24,13 +24,8 @@ export class UniServiceLoginComponent {
   }
 
   forgotPassword() {
-    const dialogRef = this.dialog.open(ForgotPasswordPersonIdComponent, {
-      height: '350px',
+    this.dialog.open(ForgotPasswordPersonIdComponent, {
       width: '350px',
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
     });
   }
 }

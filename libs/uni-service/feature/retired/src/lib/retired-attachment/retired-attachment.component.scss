@@ -1,20 +1,3 @@
-.button__container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  margin-top: 25px;
-}
-
-.button__content {
-  display: flex;
-  justify-content: center;
-}
-
-.button__content--left {
-  display: flex;
-  justify-content: flex-start;
-  margin-right: 200px;
-}
-
 .container {
   max-width: 100%;
   padding-bottom: 25px;
@@ -32,8 +15,4 @@
   border-radius: 5px;
   padding: 24px;
   margin: 0px 128px;
-}
-
-#btn-save {
-  margin-left: 10px;
 }

@@ -16,19 +16,19 @@
     <mat-stepper
       labelPosition="bottom"
       [animationDuration]="'0'"
-      [selectedIndex]="1"
+      [selectedIndex]="0"
       #stepper
     >
       <mat-step [completed]="false">
         <ng-template matStepLabel>ข้อมูลพื้นฐาน</ng-template>
-        <ksp-degree-cert-step-one (degreeType)="degreeType = $event">
+        <ksp-degree-cert-step-one (degreeType)="step1DegreeType = $event">
         </ksp-degree-cert-step-one>
         <ksp-degree-cert-coordinator></ksp-degree-cert-coordinator>
       </mat-step>
 
       <mat-step [completed]="false">
         <ng-template matStepLabel>ด้านหลักสูตร</ng-template>
-        <ksp-degree-cert-step-two [formType]="degreeType">
+        <ksp-degree-cert-step-two [formType]="step1DegreeType">
         </ksp-degree-cert-step-two>
       </mat-step>
 
@@ -52,7 +52,7 @@
       [showSaveButton]="true"
       [showCancelButton]="true"
       (saveClicked)="save()"
-      (cancelClicked)="cancel()"
+      (cancelClicked)="navigateBack()"
     ></ksp-bottom-menu>
   </div>
 </div>

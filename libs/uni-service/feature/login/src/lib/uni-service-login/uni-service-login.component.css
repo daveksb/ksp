@@ -2,6 +2,7 @@
   max-width: 1440px;
   background-image: url('/assets/images/BG-secondary.png');
   background-size: cover;
+  height: 100vh;
 }
 .login__container {
   padding: 20px 100px;
@@ -28,34 +29,10 @@
   font-size: 18px;
   margin: 12px 0 24px 0;
 }
-.btn-primary {
+
+.btn {
+  width: 100%;
   font-size: 20px;
-  background-color: #0056ff;
-  width: 100%;
-  border-radius: 4px;
-}
-.btn-secondary {
-  font-size: 20px;
-  background-color: #f68b33;
-  width: 100%;
-  border-radius: 4px;
-  border: 0;
-}
-.btn-third {
-  font-size: 18px;
-  background-color: white;
-  color: #f68b33;
-  width: 100%;
-  border-radius: 4px;
-  border: 1px solid #f68b33;
-}
-.btn-fourth {
-  font-size: 18px;
-  background-color: white;
-  color: #0056ff;
-  width: 100%;
-  border-radius: 4px;
-  border: 1px solid #0056ff;
 }
 
 .form-label {
