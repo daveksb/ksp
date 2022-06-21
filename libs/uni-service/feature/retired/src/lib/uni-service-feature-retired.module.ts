@@ -7,8 +7,9 @@ import { RetiredAttachmentComponent } from './retired-attachment/retired-attachm
 import { UniServiceFeatureRetiredRoutingModule } from './uni-service-feature-retired-routing.module';
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 import { UniServiceUiNavModule } from '@ksp/uni-service/ui/nav';
-import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
+import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { UniServiceFormModule } from '@ksp/uni-service/form';
 
 @NgModule({
   imports: [
@@ -18,6 +19,8 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
     UniServiceUiNavModule,
     SharedFormOthersModule,
     RequestHeaderInfoComponent,
+    UniServiceFormModule
+
   ],
   declarations: [
     RetiredSearchComponent,

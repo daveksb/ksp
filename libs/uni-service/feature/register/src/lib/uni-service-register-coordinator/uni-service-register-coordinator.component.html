@@ -14,33 +14,19 @@
     <div class="img__step">
       <img src="/assets/images/img-uni/stepper.png" />
     </div>
-    <div class="detail__container">
-      <div class="detail__header">กรุณาเลือกสถาบันที่ท่านสังกัด</div>
-      <div class="detail__content">
-        <div class="mb-3">
-          <label class="form-label">สถาบัน / มหาวิทยาลัย</label>
-          <input
-            (click)="search()"
-            class="form-control form-control-sm"
-            type="search"
-            placeholder="กรุณาเลือก"
-          />
-        </div>
-        <div class="mb-3">
-          <label class="form-label">สังกัด</label>
-          <input
-            (click)="search()"
-            class="form-control form-control-sm"
-            type="search"
-            placeholder="กรุณาเลือก"
-          />
-        </div>
-      </div>
-    </div>
 
-    <uni-service-register-coordinator-info></uni-service-register-coordinator-info>
+    <ksp-university-select></ksp-university-select>
 
-    <ksp-form-attachment [groups]="registerFiles"></ksp-form-attachment>
+    <uni-service-register-coordinator-info
+      [formHeader]="
+        'ข้อมูลผู้แต่งตั้งผู้ประสานงาน / ผู้รับผิดชอบ (ที่ระบุไว้ในเอกสารแนบ)'
+      "
+    ></uni-service-register-coordinator-info>
+
+    <ksp-form-attachment
+      [title]="'กรุณาแนบหลักฐานเพื่อพิจารณา'"
+      [groups]="registerFiles"
+    ></ksp-form-attachment>
 
     <ksp-bottom-menu
       [isFirstPage]="false"

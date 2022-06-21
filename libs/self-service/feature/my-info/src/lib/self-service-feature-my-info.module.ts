@@ -6,6 +6,7 @@ import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master
 import { PageNotFoundComponent } from '@ksp/shared/ui/page-not-found';
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 import { PersonInfoComponent } from './person-info/person-info.component';
+import { PaymentHistoryBoxComponent } from '@ksp/self-service/ui/payment';
 
 export const routes: Route[] = [
   {
@@ -34,7 +35,12 @@ export const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [CommonModule, SharedUiTopNavModule, RouterModule.forChild(routes)],
+  imports: [
+    CommonModule,
+    SharedUiTopNavModule,
+    RouterModule.forChild(routes),
+    PaymentHistoryBoxComponent,
+  ],
   declarations: [PaymentHistoryComponent, PersonInfoComponent],
   exports: [PaymentHistoryComponent, PersonInfoComponent],
 })

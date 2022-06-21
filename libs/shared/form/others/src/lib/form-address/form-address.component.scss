@@ -1,13 +1,12 @@
 .form__container {
-  margin-bottom: 30px;
-  background-color: #f9f9fa;
+  margin-bottom: 24px;
+  background-color: #fff;
 }
 
 .content__container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 16px;
-  margin: 0 20px;
 }
 
 .form-label {
@@ -18,12 +17,11 @@
 .form__header {
   font-size: 22px;
   color: #000000;
-  margin: 0 20px;
   padding: 10px 0;
 }
 
 .form-control {
-  background-color: #fff;
+  background-color: #f6f6f6;
 }
 
 .form-control-sm {
@@ -37,9 +35,20 @@
 }
 
 .form-select {
-  background-color: #fff;
+  background-color: #edf8ff;
   background-image: url(/assets/images/arrow-down-icon.png);
   background-size: 12px;
+}
+
+.form__container__white {
+  padding: 18px;
+  margin-bottom: 24px;
+  background-color: #f9f9fa;
+}
+
+.form__control__white,
+.form__select__white {
+  background-color: #fff;
 }
 
 /* mobile */

@@ -18,7 +18,8 @@ import { UserService } from './user.service';
 })
 export class ImportStudentComponent implements OnInit {
   users: User[] = [];
-  prefixes: SelectItem[] = [];
+  ThPrefixes: SelectItem[] = [];
+  EngPrefixes: SelectItem[] = [];
   isGraduated = false;
   pageType = 0;
   foundUser = false;
@@ -47,10 +48,15 @@ export class ImportStudentComponent implements OnInit {
     this.userService.getUsers().subscribe((res: any) => {
       this.users = res;
     });
-    this.prefixes = [
+    this.ThPrefixes = [
       { label: 'นาย', value: '1' },
       { label: 'นาง', value: '2' },
       { label: 'นางสาว', value: '3' },
+    ];
+    this.EngPrefixes = [
+      { label: 'Mr.', value: '1' },
+      { label: 'Mrs.', value: '2' },
+      { label: 'Miss.', value: '3' },
     ];
 
     this.route.paramMap.subscribe((res) => {

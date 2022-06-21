@@ -13,91 +13,53 @@
     <div class="detail__container">
       <div class="detail__header">สถานที่สังกัด</div>
 
-      <div class="detail__content-2">
-        <div class="detail__label">สถาบัน / มหาวิทยาลัย :</div>
-        <div class="detail__label-2">วิทยาลัยอาชีวศึกษาชลบุรี</div>
-      </div>
+      <ng-container *ngFor="let address of addressInfo">
+        <div class="detail__content-2">
+          <div class="detail__label">{{ address[0] }} :</div>
+          <div class="detail__label-2">{{ address[1] }}</div>
+        </div></ng-container
+      >
 
-      <div class="detail__content-2">
+      <!-- <div class="detail__content-2">
         <div class="detail__label">สังกัด :</div>
         <div class="detail__label-2">สำนักงานคณะกรรมการอาชีวศึกษา</div>
-      </div>
+      </div> -->
 
       <div class="detail__header-2">
         ข้อมูลผู้ขอรหัสสำหรับเข้าใช้งานระบบ (ผู้ประสานงาน / ผู้รับผิดชอบ)
       </div>
 
-      <div class="detail__content-2">
-        <div class="detail__label">สิทธิ์สำหรับการเข้าใช้งาน :</div>
-        <div class="detail__label-2">
-          เจ้าหน้าที่ประสานงาน (รับรองปริญญาและประกาศนียบัตรทางการศึกษา)
+      <ng-container *ngFor="let user of userInfo">
+        <div class="detail__content-2">
+          <div class="detail__label">{{ user[0] }} :</div>
+          <div class="detail__label-2">{{ user[1] }}</div>
+        </div></ng-container
+      >
+
+      <div class="box__container">
+        <div class="detail__header">เหตุผลการถอดถอน</div>
+        <div class="detail__content--secondary">
+          <div class="mb-3">
+            <label class="form-label">เหตุผลการถอดถอน</label>
+            <select class="form-select form-select-sm">
+              <option selected>กรุณาเลือก</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
         </div>
+        <textarea
+          class="form-control form-control-sm"
+          rows="3"
+          placeholder="กรุณาระบุ"
+        ></textarea>
       </div>
-
-      <div class="detail__content-2">
-        <div class="detail__label">หมายเลขบัตรประชาชน :</div>
-        <div class="detail__label-2">1 1234 23456 78 9</div>
+      <div class="button__container">
+        <button class="btn btn-outline-warning" (click)="nextPage()">
+          ถัดไป
+        </button>
       </div>
-
-      <div class="detail__content-2">
-        <div class="detail__label">ชื่อ-นามสกุลภาษาไทย :</div>
-        <div class="detail__label-2">นางสาว สุภาพร สุขเกษม</div>
-      </div>
-
-      <div class="detail__content-2">
-        <div class="detail__label">ชื่อ-นามสกุลภาษาอังกฤษ :</div>
-        <div class="detail__label-2">MISS SUPAPORN SUKKASAME</div>
-      </div>
-
-      <div class="detail__content-2">
-        <div class="detail__label">ตำแหน่งทางการบริหาร :</div>
-        <div class="detail__label-2">ไม่มี</div>
-      </div>
-
-      <div class="detail__content-2">
-        <div class="detail__label">สังกัด :</div>
-        <div class="detail__label-2">สำนักงานคณะกรรมการอาชีวศึกษา</div>
-      </div>
-
-      <div class="detail__content-2">
-        <div class="detail__label">เบอร์โทรศัพท์ (ที่ทำงาน) :</div>
-        <div class="detail__label-2">038-9087654</div>
-      </div>
-
-      <div class="detail__content-2">
-        <div class="detail__label">เบอร์โทรศัพท์ (ที่ติดต่อได้) :</div>
-        <div class="detail__label-2">081-9872678</div>
-      </div>
-
-      <div class="detail__content-2">
-        <div class="detail__label">อีเมล :</div>
-        <div class="detail__label-2">suoaporn.sss@gmail.com</div>
-      </div>
-    </div>
-
-    <div class="detail__container">
-      <div class="detail__header">เหตุผลการถอดถอน</div>
-      <div class="detail__content--secondary">
-        <div class="mb-3">
-          <label class="form-label">เหตุผลการถอดถอน</label>
-          <select class="form-select form-select-sm">
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
-      </div>
-      <textarea
-        class="form-control form-control-sm"
-        rows="3"
-        placeholder="กรุณาระบุ"
-      ></textarea>
-    </div>
-    <div class="button__container">
-      <button class="btn btn-outline-warning" (click)="nextPage()">
-        ถัดไป
-      </button>
     </div>
   </div>
 </div>
