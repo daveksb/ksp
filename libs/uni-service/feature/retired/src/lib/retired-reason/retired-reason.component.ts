@@ -28,7 +28,7 @@ export class RetiredReasonComponent {
 
   constructor(private router: Router) {}
 
-  nextPage() {
+  next() {
     this.router.navigate(['/', 'retired', 'attachment']);
   }
 }

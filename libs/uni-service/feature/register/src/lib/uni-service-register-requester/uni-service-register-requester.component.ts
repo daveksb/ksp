@@ -18,7 +18,7 @@ export class UniServiceRegisterRequesterComponent {
     });
   }
 
-  nextPage() {
+  next() {
     this.router.navigate(['/', 'register', 'coordinator']);
   }
 }

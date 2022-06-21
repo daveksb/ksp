@@ -20,7 +20,8 @@ import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
     SharedFormOthersModule,
     RequestHeaderInfoComponent,
     UniServiceFormModule,
-    SharedUiBottomMenuModule,
+    SharedUiBottomMenuModule
+
   ],
   declarations: [
     RetiredSearchComponent,
