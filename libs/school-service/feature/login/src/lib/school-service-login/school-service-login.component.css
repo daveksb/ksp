@@ -53,7 +53,7 @@
 .sub__header {
   font-size: 36px;
   color: #f68b33;
-  margin: 40px 0 20px 0;
+  margin: 20px 0;
 }
 
 .label__secondary {
@@ -73,10 +73,10 @@
 
 @media only screen and (max-width: 800px) {
   .header {
-    font-size: 30px;
+    font-size: 28px;
   }
   .sub__header {
-    font-size: 20px;
+    font-size: 24px;
     margin: 10px 0 12px 0;
   }
 }

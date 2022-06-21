@@ -18,7 +18,10 @@ import {
 } from '@ksp/school-service/form/activity';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
 import { DynamicComponent, ListData } from '@ksp/shared/interface';
-import { CompleteDialogComponent, ConfirmDialogComponent } from '@ksp/shared/ui/dialog';
+import {
+  CompleteDialogComponent,
+  ConfirmDialogComponent,
+} from '@ksp/shared/ui/dialog';
 
 @Component({
   selector: 'ksp-activity-detail',
@@ -34,15 +37,23 @@ export class ActivityDetailComponent implements OnInit {
   @ViewChild(DynamicComponentDirective, { static: true })
   myHost!: DynamicComponentDirective;
 
-  constructor(private router: Router, private fb: FormBuilder, public dialog: MatDialog) {}
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    public dialog: MatDialog
+  ) {}
   addActivity = ['1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน'];
 
   ngOnInit(): void {
     this.activityTypes = activityTypes;
 
-    this.activityForm.controls['activityType'].valueChanges.subscribe((res) => {
+    this.activityType.valueChanges.subscribe((res) => {
       this.loadComponent(Number(res));
     });
+  }
+
+  get activityType() {
+    return this.activityForm.controls.activityType;
   }
 
   loadComponent(index: number) {

@@ -44,9 +44,8 @@ export const routes: Routes = [
     MatIconModule,
     EServiceUiAccusationInfoModule,
     DynamicComponentDirective,
-    RequestHeaderInfoComponent
+    RequestHeaderInfoComponent,
   ],
   declarations: [ActivityListComponent, ActivityDetailComponent],
-  exports: [ActivityListComponent, ActivityDetailComponent],
 })
 export class SchoolServiceFeatureActivityModule {}

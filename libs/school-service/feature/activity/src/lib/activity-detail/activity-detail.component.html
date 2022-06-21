@@ -10,6 +10,7 @@
   <div class="box__container">
     <ksp-request-header-info
       [requestDate]="'10 ตุลาคม 2565'"
+      [requestNumber]="'112234467876543'"
     ></ksp-request-header-info>
     <hr />
 
@@ -75,7 +76,7 @@
       </form>
       <ng-template kspDynamicComponent></ng-template>
 
-      <ng-template [ngIf]="activityForm.controls['activityType'].value">
+      <ng-template [ngIf]="activityType.value">
         <hr />
         <ksp-form-attachment
           title="กรุณาแนบหลักฐานประกอบการปฏิบัติงาน"
