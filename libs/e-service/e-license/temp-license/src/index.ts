@@ -1,4 +1,4 @@
-export * from './lib/e-service-e-license-temp-license.module';
+export * from './lib/e-license-temp-license.module';
 
 export * from './lib/temp-license-check-forbidden/temp-license-check-forbidden.component';
 
