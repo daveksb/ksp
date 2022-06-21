@@ -78,8 +78,8 @@
     "uni-service-feature-login": "libs/uni-service/feature/login",
     "uni-service-feature-register": "libs/uni-service/feature/register",
     "uni-service-feature-retired": "libs/uni-service/feature/retired",
+    "uni-service-form": "libs/uni-service/form",
     "uni-service-ui-dialog": "libs/uni-service/ui/dialog",
-    "uni-service-ui-forms": "libs/uni-service/ui/forms",
     "uni-service-ui-nav": "libs/uni-service/ui/nav"
   }
 }

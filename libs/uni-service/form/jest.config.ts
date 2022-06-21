@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'uni-service-ui-forms',
-  preset: '../../../../jest.preset.ts',
+  displayName: 'uni-service-form',
+  preset: '../../../jest.preset.ts',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
     'ts-jest': {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../../coverage/libs/uni-service/ui/forms',
+  coverageDirectory: '../../../coverage/libs/uni-service/form',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },
