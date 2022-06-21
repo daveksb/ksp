@@ -30,13 +30,6 @@ export class TrainingAddressComponent {
       height: '900px',
       width: '1200px',
     });
-
-    // on submit
-    /* dialogRef.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        this.dialog.open(TrainingAddressComponent);
-      }
-    }); */
   }
 
   addAddress() {

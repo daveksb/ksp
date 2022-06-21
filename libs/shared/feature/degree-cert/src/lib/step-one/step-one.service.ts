@@ -11,7 +11,13 @@ import { ListData } from '@ksp/shared/interface';
   providedIn: 'any',
 })
 export class DegreeCertStepOneService {
-  //constructor() {}
+  componentList = [
+    CourseFormOneComponent,
+    CourseFormTwoComponent,
+    CourseFormThreeComponent,
+    CourseFormFourComponent,
+    CourseFormOneComponent,
+  ];
 
   degreeTypes: ListData[] = [
     {
@@ -69,13 +75,5 @@ export class DegreeCertStepOneService {
       value: 4,
       label: 'เอก-โท',
     },
-  ];
-
-  componentList = [
-    CourseFormOneComponent,
-    CourseFormTwoComponent,
-    CourseFormThreeComponent,
-    CourseFormFourComponent,
-    CourseFormOneComponent,
   ];
 }

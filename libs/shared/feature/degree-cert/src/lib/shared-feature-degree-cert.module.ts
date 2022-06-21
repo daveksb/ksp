@@ -13,7 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedFormDegreeCertStepTwoModule } from '@ksp/shared/form/degree-cert/step-two';
 import { SharedFormDegreeCertStepThreeModule } from '@ksp/shared/form/degree-cert/step-three';
-import { UniServiceUiFormsModule } from '@ksp/uni-service/ui/forms';
+import { UniServiceFormModule } from '@ksp/uni-service/form';
 import { SharedFormDegreeCertStepOneModule } from '@ksp/shared/form/degree-cert/step-one';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
 import { AddRowButtonComponent } from '@ksp/shared/ui/add-row-button';
@@ -29,7 +29,7 @@ import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
     MatIconModule,
     SharedFormDegreeCertStepTwoModule,
     SharedFormDegreeCertStepThreeModule,
-    UniServiceUiFormsModule,
+    UniServiceFormModule,
     SharedFormDegreeCertStepOneModule,
     DynamicComponentDirective,
     AddRowButtonComponent,

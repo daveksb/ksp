@@ -1,13 +1,14 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "sourceRoot": "libs/uni-service/ui/forms/src",
+  "sourceRoot": "libs/uni-service/form/src",
   "prefix": "ksp",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/uni-service/ui/forms"],
+      "outputs": ["coverage/libs/uni-service/form"],
       "options": {
-        "jestConfig": "libs/uni-service/ui/forms/jest.config.ts",
+        "jestConfig": "libs/uni-service/form/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -15,8 +16,8 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "libs/uni-service/ui/forms/**/*.ts",
-          "libs/uni-service/ui/forms/**/*.html"
+          "libs/uni-service/form/**/*.ts",
+          "libs/uni-service/form/**/*.html"
         ]
       }
     }

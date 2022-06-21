@@ -7,15 +7,15 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./form-user-experience.component.css'],
 })
 export class FormUserExperienceComponent implements OnInit {
-  testForm = this.fb.group({
+  form = this.fb.group({
     selectValue: [''],
   });
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.testForm.controls['selectValue'].valueChanges.subscribe((res) => {
-      console.log('res', res);
+    this.form.controls['selectValue'].valueChanges.subscribe((res) => {
+      //console.log('res', res);
     });
   }
 }

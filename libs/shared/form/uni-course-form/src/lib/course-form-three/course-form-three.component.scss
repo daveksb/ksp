@@ -1,93 +1,6 @@
-.container {
-  max-width: 100%;
-  padding: 0;
-  background-color: #e5e5e5;
-}
-
-.title__label {
-  font-size: 22px;
-  color: #000000;
-  margin: 0 64px 12px 64px;
-  padding-top: 12px;
-}
-
-.content__header {
-  display: flex;
-}
-
-.label__content {
-  font-size: 18px;
-  color: #808080;
-  margin-right: 24px;
-}
-
-.label__content--primary {
-  color: #f68b33;
-}
-
-.label__content--secondary {
-  color: #0056ff;
-}
-
-.content__container {
-  background: #ffffff;
-  border-radius: 5px;
-  padding: 24px;
-  margin: 0px 64px;
-}
-
-.img__process {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 30px;
-}
-
-.detail__container {
-  background-color: #f4faff;
-  padding: 16px;
-  margin-bottom: 24px;
-}
-
-.detail__container--secondary {
-  background-color: #f9f9fa;
-  padding: 16px;
-  margin-bottom: 24px;
-}
-
-.detail__header {
-  font-size: 22px;
-  color: #0056ff;
-}
-
-.detail__header--secondary {
-  font-size: 22px;
-  color: #000000;
-}
-
-.detail__content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 18px;
-  margin-bottom: 14px;
-}
-
 .detail__content--primary {
   display: grid;
   grid-template-columns: 1fr;
-  margin-bottom: 14px;
-}
-
-.detail__content--secondary {
-  display: grid;
-  grid-template-columns: 1fr 30%;
-  grid-column-gap: 18px;
-  margin-bottom: 14px;
-}
-
-.detail__content--third {
-  display: grid;
-  grid-template-columns: 10% 1fr 30%;
-  grid-column-gap: 18px;
   margin-bottom: 14px;
 }
 
@@ -96,28 +9,6 @@
   grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 18px;
   margin-bottom: 14px;
-}
-
-.detail__content--fifth {
-  display: grid;
-  grid-template-columns: 15% 1fr 1fr;
-  grid-column-gap: 18px;
-  margin-bottom: 14px;
-}
-
-.detail__footer {
-  display: flex;
-  justify-content: center;
-}
-
-.btn-add {
-  font-size: 18px;
-  color: #f68b33;
-  width: auto;
-}
-
-.icon__add {
-  margin-right: 8px;
 }
 
 .form-label {
@@ -129,14 +20,3 @@
   font-size: 20px;
   background-color: #fff;
 }
-
-.form-select {
-  font-size: 20px;
-}
-
-.label__text {
-  font-size: 16px;
-  margin-left: 8px;
-  color: #f23c51;
-}
-
