@@ -7,6 +7,7 @@ import { UniServiceRegisterCoordinatorComponent } from './uni-service-register-c
 import { UniServiceFeatureRegisterRoutingModule } from './uni-service-feature-register-routing.module';
 import { UniServiceUiNavModule } from '@ksp/uni-service/ui/nav';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { SharedFormUniversitySelectModule } from '@ksp/shared/form/university-select';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
 
 @NgModule({
@@ -17,7 +18,8 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
     UniServiceUiFormsModule,
     UniServiceUiNavModule,
     SharedFormOthersModule,
-    RequestHeaderInfoComponent
+    RequestHeaderInfoComponent,
+    SharedFormUniversitySelectModule,
   ],
   declarations: [
     UniServiceRegisterRequesterComponent,

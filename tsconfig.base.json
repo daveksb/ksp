@@ -164,6 +164,9 @@
       "@ksp/shared/form/university-search": [
         "libs/shared/form/university-search/src/index.ts"
       ],
+      "@ksp/shared/form/university-select": [
+        "libs/shared/form/university-select/src/index.ts"
+      ],
       "@ksp/shared/interface": ["libs/shared/interface/src/index.ts"],
       "@ksp/shared/ui/add-row-button": [
         "libs/shared/ui/add-row-button/src/index.ts"

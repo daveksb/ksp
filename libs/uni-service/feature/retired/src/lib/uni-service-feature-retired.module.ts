@@ -9,6 +9,7 @@ import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 import { UniServiceUiNavModule } from '@ksp/uni-service/ui/nav';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
+import { UniServiceUiFormsModule } from '@ksp/uni-service/ui/forms';
 
 @NgModule({
   imports: [
@@ -18,6 +19,8 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
     UniServiceUiNavModule,
     SharedFormOthersModule,
     RequestHeaderInfoComponent,
+    UniServiceUiFormsModule
+
   ],
   declarations: [
     RetiredSearchComponent,

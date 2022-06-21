@@ -57,6 +57,7 @@
     "shared-form-teacher-info": "libs/shared/form/teacher-info",
     "shared-form-uni-course-form": "libs/shared/form/uni-course-form",
     "shared-form-university-search": "libs/shared/form/university-search",
+    "shared-form-university-select": "libs/shared/form/university-select",
     "shared-interface": "libs/shared/interface",
     "shared-ui-add-row-button": "libs/shared/ui/add-row-button",
     "shared-ui-bottom-menu": "libs/shared/ui/bottom-menu",
