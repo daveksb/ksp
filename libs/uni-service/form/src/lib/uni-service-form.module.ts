@@ -15,4 +15,4 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormRegisterRequesterInfoComponent,
   ],
 })
-export class UniServiceUiFormsModule {}
+export class UniServiceFormModule {}

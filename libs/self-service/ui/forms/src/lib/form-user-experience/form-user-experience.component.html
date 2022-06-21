@@ -39,7 +39,7 @@
 </div>
 
 <div class="content__container-2">
-  <form [formGroup]="testForm">
+  <form [formGroup]="form">
     <div class="checkbox__content">
       <input formControlName="selectValue" type="checkbox" class="checkbox" />
       <label class="form-label checkbox-label">
@@ -48,7 +48,7 @@
     </div>
   </form>
 
-  <ng-template [ngIf]="testForm.controls['selectValue'].value">
+  <ng-template [ngIf]="form.controls.selectValue.value">
     <ksp-experience-form></ksp-experience-form>
   </ng-template>
 </div>
