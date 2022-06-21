@@ -1,3 +1,9 @@
+<ksp-top-nav
+  ><span header>ยื่นใบคำขอ </span
+  ><span subHeader>ขอยื่นรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา </span>
+  <span detail>{{ headerDetail[processType] }}</span></ksp-top-nav
+>
+
 <div class="container">
   <div class="title__label">รายละเอียดใบคำขอ</div>
   <div class="content__container">
@@ -33,11 +39,17 @@
             <th scope="col" class="header__column">
               ยืนรายชื่อเข้ารับการศึกษา
             </th>
-            <th scope="col" class="header__column" >ยืนรายชื่อสำเร็จการศึกษา</th>
+            <th
+              scope="col"
+              class="header__column"
+              *ngIf="processType === importType.graduateList"
+            >
+              ยืนรายชื่อสำเร็จการศึกษา
+            </th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let row of rows">
+          <tr *ngFor="let row of planRows">
             <th scope="row" class="detail__table--secondary">แผนฯ ปีที่ 1</th>
 
             <td class="detail__table">
@@ -52,17 +64,22 @@
             <td class="detail__table">
               <div>
                 150 / 150
-                <span (click)="goToImportStudent(1)" class="label__edit"
+                <span
+                  (click)="goToImportStudent(importType.studentList)"
+                  class="label__edit"
                   ><img src="/assets/images/img-uni/Edit.svg" />
                   รายชื่อนักศึกษา</span
                 >
               </div>
             </td>
-            <td class="detail__table">
+            <td
+              class="detail__table"
+              *ngIf="processType === importType.graduateList"
+            >
               <div>
                 100 / 150
                 <span
-                  (click)="goToImportStudent(2)"
+                  (click)="goToImportStudent(importType.graduateList)"
                   class="label__edit label__edit--secondary"
                   ><img src="/assets/images/img-uni/Edit-2.svg" />
                   รายชื่อนักศึกษา</span
@@ -81,7 +98,10 @@
               <div class="summary__container">0</div>
             </td>
             <td class="detail__table"></td>
-            <td class="detail__table"></td>
+            <td
+              class="detail__table"
+              *ngIf="processType === importType.graduateList"
+            ></td>
           </tr>
         </tbody>
       </table>
