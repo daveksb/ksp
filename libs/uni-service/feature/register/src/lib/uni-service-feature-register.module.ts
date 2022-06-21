@@ -27,9 +27,5 @@ import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
     UniServiceRegisterRequesterComponent,
     UniServiceRegisterCoordinatorComponent,
   ],
-  exports: [
-    UniServiceRegisterRequesterComponent,
-    UniServiceRegisterCoordinatorComponent,
-  ],
 })
 export class UniServiceFeatureRegisterModule {}
