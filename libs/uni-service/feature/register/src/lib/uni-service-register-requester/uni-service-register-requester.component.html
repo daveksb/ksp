@@ -19,14 +19,10 @@
 
     <uni-service-register-requester-info></uni-service-register-requester-info>
 
-    <div class="footer__container">
-      <button
-        (click)="nextPage()"
-        type="button"
-        class="btn btn-outline-warning"
-      >
-        ถัดไป
-      </button>
-    </div>
+    <ksp-bottom-menu
+      [isFirstPage]="true"
+      [showCenterButtons]="false"
+      (nextClicked)="next()"
+    ></ksp-bottom-menu>
   </div>
 </div>

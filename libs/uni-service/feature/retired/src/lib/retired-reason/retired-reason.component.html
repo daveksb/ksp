@@ -55,11 +55,11 @@
           placeholder="กรุณาระบุ"
         ></textarea>
       </div>
-      <div class="button__container">
-        <button class="btn btn-outline-warning" (click)="nextPage()">
-          ถัดไป
-        </button>
-      </div>
+      <ksp-bottom-menu
+        [isFirstPage]="true"
+        [showCenterButtons]="false"
+        (nextClicked)="next()"
+      ></ksp-bottom-menu>
     </div>
   </div>
 </div>

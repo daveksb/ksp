@@ -2,16 +2,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas: 'box1 box2 box3';
-  margin-left: 237px;
-  padding: 0 65px;
-  border: 1px solid #dadde1;
   height: 50px;
   align-items: center;
-}
-
-#last__button {
-  grid-area: box3;
-  justify-self: end;
 }
 
 .footer-2 {
@@ -26,6 +18,18 @@
 
 #cancel__button {
   margin-right: 5px;
+}
+
+.first__button {
+  margin-left: 25px;
+  grid-area: box1;
+  justify-self: start;
+}
+
+.last__button {
+  margin-right: 25px;
+  grid-area: box3;
+  justify-self: end;
 }
 
 @media (max-width: 1200px) {

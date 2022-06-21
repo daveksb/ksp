@@ -2,7 +2,7 @@
   background-color: #e5e5e5;
   max-width: 100%;
   padding: 0 32px;
-  padding-bottom: 25px;
+  padding-bottom: 75px;
 }
 
 .detail__content {
@@ -58,13 +58,6 @@
   padding: 12px 0;
 }
 
-.footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 8px;
-}
-
 .view__lebel {
   display: flex;
   justify-content: flex-end;
@@ -74,10 +67,13 @@
   cursor: pointer;
 }
 
-.disabled {
-  background-color: #ecedf3;
-}
-
-#saveButton {
-  margin-left: 10px;
+.bottom__container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 1;
+  padding-left: 237px;
+  border: 1px solid #dadde1;
 }

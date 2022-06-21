@@ -23,20 +23,17 @@
       [groups]="retiredFiles"
     ></ksp-form-attachment>
 
-    <div class="button__container">
-      <div class="button__content--left">
-        <button class="btn btn-outline-warning" (click)="prevPage()">
-          ย้อนกลับ
-        </button>
-      </div>
-      <div class="button__content">
-        <button class="btn btn-outline-primary" (click)="cancel()">
-          ยกเลิก
-        </button>
-        <button class="btn btn-primary" id="btn-save" (click)="save()">
-          บันทึก
-        </button>
-      </div>
+    <div class="bottom__container">
+      <ksp-bottom-menu
+        [isFirstPage]="false"
+        [isLastPage]="true"
+        [showCenterButtons]="true"
+        [showSaveButton]="true"
+        (prevClicked)="prevPage()"
+        (cancelClicked)="cancel()"
+        (saveClicked)="save()"
+      >
+      </ksp-bottom-menu>
     </div>
   </div>
 </div>

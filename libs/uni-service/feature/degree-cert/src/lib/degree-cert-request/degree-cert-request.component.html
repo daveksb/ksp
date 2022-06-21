@@ -43,16 +43,16 @@
       </mat-step>
     </mat-stepper>
   </div>
+</div>
 
-  <div class="bottom__container">
-    <ksp-bottom-menu
-      [isLastPage]="true"
-      [isFirstPage]="true"
-      [showCenterButtons]="true"
-      [showSaveButton]="true"
-      [showCancelButton]="true"
-      (saveClicked)="save()"
-      (cancelClicked)="cancel()"
-    ></ksp-bottom-menu>
-  </div>
+<div class="bottom__container">
+  <ksp-bottom-menu
+    [isLastPage]="true"
+    [isFirstPage]="true"
+    [showCenterButtons]="true"
+    [showSaveButton]="true"
+    [showCancelButton]="true"
+    (saveClicked)="save()"
+    (cancelClicked)="cancel()"
+  ></ksp-bottom-menu>
 </div>

@@ -10,6 +10,7 @@ import { UniServiceUiNavModule } from '@ksp/uni-service/ui/nav';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { UniServiceFormModule } from '@ksp/uni-service/form';
+import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { UniServiceFormModule } from '@ksp/uni-service/form';
     UniServiceUiNavModule,
     SharedFormOthersModule,
     RequestHeaderInfoComponent,
-    UniServiceFormModule
+    UniServiceFormModule,
+    SharedUiBottomMenuModule
 
   ],
   declarations: [
