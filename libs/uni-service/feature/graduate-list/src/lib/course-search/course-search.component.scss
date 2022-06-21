@@ -39,11 +39,6 @@
   padding-left: 15px;
 }
 
-.table__title {
-  font-size: 22px;
-  padding-left: 15px;
-}
-
 .detail__container {
   margin-bottom: 16px;
   padding: 0 15px;
@@ -60,12 +55,8 @@
   margin-bottom: 0;
 }
 
+.form-select,
 .form-control {
-  background-color: #fff;
-  font-size: 18px;
-}
-
-.form-select {
   background-color: #fff;
   font-size: 18px;
 }
@@ -80,24 +71,8 @@
   border-top: 0;
 }
 
-.header__table {
-  background-color: #edf6ff;
-  font-size: 16px;
-  white-space: nowrap;
-}
-
-.body__table {
-  font-size: 16px;
-  color: #000000;
-  white-space: nowrap;
-}
-
+.print,
 .edit {
-  color: #0056ff;
-  cursor: pointer;
-}
-
-.print {
   color: #0056ff;
   cursor: pointer;
 }

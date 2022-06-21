@@ -1,6 +1,31 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+
+@Component({
+  selector: 'uni-service-home',
+  templateUrl: './uni-service-home.component.html',
+  styleUrls: ['./uni-service-home.component.css'],
+})
+export class UniServiceHomeComponent {
+  displayedColumns: string[] = [
+    'order',
+    'degreeId',
+    'uniName',
+    'course',
+    'major',
+    'degreeName',
+    'educationLevel',
+  ];
+  dataSource = new MatTableDataSource<DegreeInfo>();
+
+  search() {
+    this.dataSource.data = data;
+  }
+
+  clear() {
+    this.dataSource.data = [];
+  }
+}
 
 export interface DegreeInfo {
   order: number;
@@ -41,31 +66,3 @@ export const data: DegreeInfo[] = [
     educationLevel: 'ปริญญาตรีทางการศึกษา (หลักสูตร 4 ปี)',
   },
 ];
-
-@Component({
-  selector: 'uni-service-home',
-  templateUrl: './uni-service-home.component.html',
-  styleUrls: ['./uni-service-home.component.css'],
-})
-export class UniServiceHomeComponent {
-  displayedColumns: string[] = [
-    'order',
-    'degreeId',
-    'uniName',
-    'course',
-    'major',
-    'degreeName',
-    'educationLevel',
-  ];
-  dataSource = new MatTableDataSource<DegreeInfo>();
-
-  constructor(public dialog: MatDialog) {}
-
-  search() {
-    this.dataSource.data = data;
-  }
-
-  clear() {
-    this.dataSource.data = [];
-  }
-}

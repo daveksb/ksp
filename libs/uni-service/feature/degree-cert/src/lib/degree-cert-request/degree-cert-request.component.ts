@@ -11,12 +11,11 @@ import {
   styleUrls: ['./degree-cert-request.component.scss'],
 })
 export class DegreeCertRequestComponent {
-  degreeType = '';
-  isEditable = false;
+  step1DegreeType = '';
 
   constructor(private router: Router, public dialog: MatDialog) {}
 
-  cancel() {
+  navigateBack() {
     this.router.navigate(['/', 'degree-cert']);
   }
 
@@ -32,11 +31,12 @@ export class DegreeCertRequestComponent {
 
     dialogRef.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.onConfirmed();
+        this.showConfirmDialog();
       }
     });
   }
-  onConfirmed() {
+
+  showConfirmDialog() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '375px',
       data: {
@@ -50,7 +50,7 @@ export class DegreeCertRequestComponent {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'degree-cert']);
+        this.navigateBack();
       }
     });
   }

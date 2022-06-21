@@ -33,34 +33,22 @@
           </div>
         </div>
         <div class="button__content">
-          <button
-            (click)="home()"
-            type="submit"
-            class="btn btn-primary btn-sm label__button"
-          >
+          <button (click)="home()" type="submit" class="btn btn-primary">
             เข้าสู่ระบบ
           </button>
           <hr />
           <div class="label__secondary">ยังไม่มีรหัสเข้าใช้งาน</div>
-          <button
-            (click)="register()"
-            type="button"
-            class="btn btn-secondary btn-sm label__button"
-          >
+          <button (click)="register()" type="button" class="btn btn-warning">
             ลงทะเบียนขอรับรหัสเข้าใช้งาน
           </button>
         </div>
       </form>
     </div>
     <div class="footer">
-      <button type="button" class="btn btn-third btn-sm label__button">
+      <button type="button" class="btn btn-outline-warning">
         ตรวจสอบยื่นผู้ประสานงาน
       </button>
-      <button
-        (click)="retired()"
-        type="button"
-        class="btn btn-fourth btn-sm label__button"
-      >
+      <button (click)="retired()" type="button" class="btn btn-outline-primary">
         ขอถอดถอนผู้ประสานงาน
       </button>
     </div>

@@ -17,11 +17,6 @@
   margin: 15px 15px;
 }
 
-.bottom-content {
-  background-color: #f9f9fa;
-  margin: 10px;
-}
-
 .box__container {
   background-color: #f9f9fa;
   margin: 10px;
@@ -60,12 +55,8 @@
   margin-bottom: 0;
 }
 
+.form-select,
 .form-control {
-  background-color: #fff;
-  font-size: 18px;
-}
-
-.form-select {
   background-color: #fff;
   font-size: 18px;
 }
@@ -80,18 +71,6 @@
   border-top: 0;
 }
 
-.header__table {
-  background-color: #edf6ff;
-  font-size: 16px;
-  white-space: nowrap;
-}
-
-.body__table {
-  font-size: 16px;
-  color: #000000;
-  white-space: nowrap;
-}
-
 .btn-search {
   margin-left: 10px;
 }
@@ -100,6 +79,6 @@ tr.mat-header-row {
   background-color: aliceblue;
 }
 
-.btn-clear {
+.btn-outline-primary {
   background-color: #fff;
 }
