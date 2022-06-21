@@ -8,11 +8,10 @@ import {
 } from '@ksp/shared/ui/dialog';
 
 @Component({
-  selector: 'ksp-foreign-id',
-  templateUrl: './foreign-id.component.html',
-  styleUrls: ['./foreign-id.component.scss'],
+  templateUrl: './foreign-teacher-id-request.component.html',
+  styleUrls: ['./foreign-teacher-id-request.component.scss'],
 })
-export class ForeignIdComponent {
+export class ForeignTeacherIdRequestComponent {
   @Input() mode: FormMode = 'edit';
   foreignInfo = ['1.สำเนาหนังสือเดินทาง'];
   constructor(private router: Router, public dialog: MatDialog) {}

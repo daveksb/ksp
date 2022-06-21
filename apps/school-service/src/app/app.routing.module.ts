@@ -26,7 +26,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'foreign-id',
+    path: 'foreign-teacher',
     loadChildren: () =>
       import('@ksp/school-service/feature/foreign-id').then(
         (m) => m.SchoolServiceFeatureForeignIdModule
