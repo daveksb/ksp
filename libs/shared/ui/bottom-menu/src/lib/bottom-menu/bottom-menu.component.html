@@ -1,5 +1,5 @@
 <div class="footer">
-  <div>
+  <div class="first__button">
     <button
       (click)="prevClicked.emit(true)"
       type="button"
@@ -47,7 +47,7 @@
     </button>
   </div>
 
-  <div id="last__button">
+  <div class="last__button">
     <button
       (click)="nextClicked.emit(true)"
       *ngIf="!isLastPage"

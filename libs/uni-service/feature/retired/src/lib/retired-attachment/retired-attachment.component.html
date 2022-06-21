@@ -23,15 +23,17 @@
       [groups]="retiredFiles"
     ></ksp-form-attachment>
 
-    <ksp-bottom-menu
-      [isFirstPage]="false"
-      [isLastPage]="true"
-      [showCenterButtons]="true"
-      [showSaveButton]="true"
-      (prevClicked)="prevPage()"
-      (cancelClicked)="cancel()"
-      (saveClicked)="save()"
-    >
-    </ksp-bottom-menu>
+    <div class="bottom__container">
+      <ksp-bottom-menu
+        [isFirstPage]="false"
+        [isLastPage]="true"
+        [showCenterButtons]="true"
+        [showSaveButton]="true"
+        (prevClicked)="prevPage()"
+        (cancelClicked)="cancel()"
+        (saveClicked)="save()"
+      >
+      </ksp-bottom-menu>
+    </div>
   </div>
 </div>

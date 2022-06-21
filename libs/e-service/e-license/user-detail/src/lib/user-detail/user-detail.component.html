@@ -84,16 +84,14 @@
   </div>
 </div>
 
-<div class="footer">
-  <button (click)="cancel()" type="button" class="btn btn-outline-primary">
-    ยกเลิก
-  </button>
-  <button
-    id="saveButton"
-    (click)="save()"
-    type="button"
-    class="btn btn-primary"
+<div class="bottom__container">
+  <ksp-bottom-menu
+    [isFirstPage]="true"
+    [isLastPage]="true"
+    [showCenterButtons]="true"
+    [showSaveButton]="true"
+    (cancelClicked)="cancel()"
+    (saveClicked)="save()"
   >
-    บันทึก
-  </button>
+  </ksp-bottom-menu>
 </div>
