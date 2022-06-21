@@ -82,15 +82,16 @@
       [choices]="checkComponentChoices[pageType]"
     ></e-service-license-check>
   </div>
-  <div class="bottom__container">
-    <ksp-bottom-menu
-      [isFirstPage]="true"
-      [isLastPage]="true"
-      [showCenterButtons]="true"
-      [showSaveButton]="true"
-      (cancelClicked)="cancel()"
-      (saveClicked)="save()"
-    >
-    </ksp-bottom-menu>
-  </div>
+</div>
+
+<div class="bottom__container">
+  <ksp-bottom-menu
+    [isFirstPage]="true"
+    [isLastPage]="true"
+    [showCenterButtons]="true"
+    [showSaveButton]="true"
+    (cancelClicked)="cancel()"
+    (saveClicked)="save()"
+  >
+  </ksp-bottom-menu>
 </div>
