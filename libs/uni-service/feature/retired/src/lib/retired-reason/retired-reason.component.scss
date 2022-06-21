@@ -23,6 +23,10 @@
   max-height: 100%;
 }
 
+.box__container {
+  margin: 24px 0;
+}
+
 .detail__container {
   background-color: #f9f9fa;
   padding: 16px;
@@ -39,7 +43,8 @@
   font-size: 18px;
   color: #656565;
 }
-.form-select .form-control {
+.form-select,
+.form-control {
   background-color: #fff;
   font-size: 18px;
 }

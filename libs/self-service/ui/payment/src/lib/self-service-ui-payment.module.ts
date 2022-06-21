@@ -8,7 +8,12 @@ import { ViewReceiveComponent } from './view-receive/view-receive.component';
 import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  imports: [CommonModule, SelfServiceUiMenuModule, SharedUiTopNavModule, MatIconModule],
+  imports: [
+    CommonModule,
+    SelfServiceUiMenuModule,
+    SharedUiTopNavModule,
+    MatIconModule,
+  ],
   declarations: [
     PaymentChannelComponent,
     PromptpayComponent,

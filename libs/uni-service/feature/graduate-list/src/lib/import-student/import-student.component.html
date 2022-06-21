@@ -197,10 +197,10 @@
                   <ng-template pTemplate="input">
                     <mat-select>
                       <mat-option
-                        *ngFor="let prefix of prefixes"
-                        [value]="prefix.value"
+                        *ngFor="let ThPrefix of ThPrefixes"
+                        [value]="ThPrefix.value"
                       >
-                        {{ prefix.label }}
+                        {{ ThPrefix.label }}
                       </mat-option>
                     </mat-select>
                   </ng-template>
@@ -244,10 +244,10 @@
                   <ng-template pTemplate="input">
                     <mat-select>
                       <mat-option
-                        *ngFor="let prefix of prefixes"
-                        [value]="prefix.value"
+                        *ngFor="let EngPrefix of EngPrefixes"
+                        [value]="EngPrefix.value"
                       >
-                        {{ prefix.label }}
+                        {{ EngPrefix.label }}
                       </mat-option>
                     </mat-select>
                   </ng-template>
