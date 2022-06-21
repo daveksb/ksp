@@ -14,6 +14,7 @@
 .button__container-2 {
   display: flex;
   justify-content: center;
+  margin: 16px;
 }
 
 .container {
@@ -35,11 +36,13 @@
   padding: 16px;
   margin: 20px 0;
 }
+
 .detail__content {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 18px;
 }
+
 .detail__content--secondary {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
@@ -56,6 +59,7 @@
   font-size: 18px;
   color: #656565;
 }
+
 .form-control {
   background-color: #fff;
   font-size: 18px;
@@ -72,7 +76,7 @@
 }
 
 .table__header {
-  font-size: 20px;
+  font-size: 22px;
   color: #0056ff;
   margin: 10px 0;
 }
@@ -97,15 +101,6 @@
 
 .detail__table {
   vertical-align: middle;
-}
-
-.btn-confirm {
-  color: #fff;
-  font-size: 20px;
-  background-color: #0056ff;
-  border: 1px solid #0056ff;
-  width: 200px;
-  border-radius: 4px;
 }
 
 #btn-search {
