@@ -47,7 +47,7 @@
     <div class="upload__content">
       <ksp-form-attachment
         [title]="'กรุณาแนบหลักฐานเพื่อการพิจารณา'"
-        [groups]="authorInfo"
+        [groups]="uploadFileList"
       ></ksp-form-attachment>
     </div>
 
@@ -59,7 +59,10 @@
       </div>
 
       <div class="footer-2">
-        <button class="btn btn-outline-primary btn-center" (click)="cancel()">
+        <button
+          class="btn btn-outline-primary btn-center"
+          (click)="navigateBack()"
+        >
           ยกเลิก
         </button>
         <button class="btn btn-primary btn-center" (click)="save()">

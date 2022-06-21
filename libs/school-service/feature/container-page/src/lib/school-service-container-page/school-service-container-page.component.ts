@@ -46,7 +46,7 @@ export const menu: MenuConfig[] = [
       },
       {
         label: 'ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ',
-        path: 'foreign-id',
+        path: 'foreign-teacher/id-request',
       },
       {
         label: 'ขอหนังสือรับรองคุณวุฒิ',

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Route } from '@angular/router';
-import { ForeignIdComponent } from './foreign-id/foreign-id.component';
+import { ForeignTeacherIdRequestComponent } from './foreign-teacher-id-request/foreign-teacher-id-request.component';
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 import { SchoolServiceContainerPageComponent } from '@ksp/school-service/feature/container-page';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
@@ -14,8 +14,8 @@ export const routes: Route[] = [
     component: SchoolServiceContainerPageComponent,
     children: [
       {
-        path: '',
-        component: ForeignIdComponent,
+        path: 'id-request',
+        component: ForeignTeacherIdRequestComponent,
       },
     ],
   },
@@ -28,9 +28,8 @@ export const routes: Route[] = [
     SharedUiTopNavModule,
     SharedFormOthersModule,
     SharedUiBottomMenuModule,
-    RequestHeaderInfoComponent
+    RequestHeaderInfoComponent,
   ],
-  declarations: [ForeignIdComponent],
-  exports: [ForeignIdComponent],
+  declarations: [ForeignTeacherIdRequestComponent],
 })
-export class SchoolServiceFeatureForeignIdModule {}
+export class SchoolServiceFeatureForeignTeacherModule {}

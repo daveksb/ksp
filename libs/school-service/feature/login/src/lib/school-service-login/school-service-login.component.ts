@@ -18,6 +18,6 @@ export class SchoolServiceLoginComponent {
   }
 
   forget() {
-    this.router.navigate(['/', 'forget-password', 'confirm-password']);
+    this.router.navigate(['/', 'forget-password', 'person-id']);
   }
 }

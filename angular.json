@@ -26,7 +26,7 @@
     "school-service": "apps/school-service",
     "school-service-feature-activity": "libs/school-service/feature/activity",
     "school-service-feature-container-page": "libs/school-service/feature/container-page",
-    "school-service-feature-foreign-id": "libs/school-service/feature/foreign-id",
+    "school-service-feature-foreign-teacher": "libs/school-service/feature/foreign-teacher",
     "school-service-feature-forget-password": "libs/school-service/feature/forget-password",
     "school-service-feature-login": "libs/school-service/feature/login",
     "school-service-feature-register": "libs/school-service/feature/register",

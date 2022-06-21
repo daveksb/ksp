@@ -2,6 +2,7 @@
   max-width: 1440px;
   background-image: url('/assets/images/BG-secondary.png');
   background-size: cover;
+  height: 100vh;
 }
 .login__container {
   padding: 64px 100px;
@@ -28,18 +29,10 @@
   font-size: 18px;
   margin: 12px 0 24px 0;
 }
-.btn-primary {
-  font-size: 20px;
-  background-color: #0056ff;
+
+.btn {
   width: 100%;
-  border-radius: 4px;
-}
-.btn-secondary {
   font-size: 20px;
-  background-color: #f68b33;
-  width: 100%;
-  border-radius: 4px;
-  border: 0;
 }
 
 .form-label {
@@ -60,7 +53,7 @@
 .sub__header {
   font-size: 36px;
   color: #f68b33;
-  margin: 40px 0 20px 0;
+  margin: 20px 0;
 }
 
 .label__secondary {
@@ -69,14 +62,8 @@
   margin: 24px 0 10px 0;
   text-align: center;
 }
-.label__forth {
-  margin-top: 15px;
-  color: #0056ff;
-  display: flex;
-  justify-content: flex-end;
-}
 
-.label__third {
+.link__text {
   margin-top: 15px;
   color: #0056ff;
   display: flex;
@@ -86,10 +73,10 @@
 
 @media only screen and (max-width: 800px) {
   .header {
-    font-size: 30px;
+    font-size: 28px;
   }
   .sub__header {
-    font-size: 20px;
+    font-size: 24px;
     margin: 10px 0 12px 0;
   }
 }

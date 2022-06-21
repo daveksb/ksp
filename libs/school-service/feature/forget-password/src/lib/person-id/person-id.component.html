@@ -2,12 +2,12 @@
 
 <div class="container">
   <div class="content__container">
-    <div class="header__title">ลืมรหัสผ่าน</div>
+    <div class="header">ลืมรหัสผ่าน</div>
     <hr />
-    <div class="header__title-2">กรุณากรอกข้อมูลเพื่อยืนยันตัวตน</div>
+    <div class="title">กรุณากรอกข้อมูลเพื่อยืนยันตัวตน</div>
 
     <div class="form__container">
-      <form [formGroup]="forgotPasswordForm">
+      <form [formGroup]="form">
         <div class="form__title required">รหัสโรงเรียน</div>
         <input formControlName="schoolId" type="text" class="form-control" />
 

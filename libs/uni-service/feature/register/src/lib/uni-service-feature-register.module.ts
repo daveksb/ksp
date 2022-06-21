@@ -7,7 +7,7 @@ import { UniServiceRegisterCoordinatorComponent } from './uni-service-register-c
 import { UniServiceFeatureRegisterRoutingModule } from './uni-service-feature-register-routing.module';
 import { UniServiceUiNavModule } from '@ksp/uni-service/ui/nav';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
-import { SharedFormUniversitySelectModule } from '@ksp/shared/form/university-select';
+import { UniversitySelectComponent } from '@ksp/shared/form/university-select';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 
@@ -21,7 +21,7 @@ import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
     SharedFormOthersModule,
     SharedUiBottomMenuModule,
     RequestHeaderInfoComponent,
-    SharedFormUniversitySelectModule,
+    UniversitySelectComponent,
   ],
   declarations: [
     UniServiceRegisterRequesterComponent,
