@@ -6,6 +6,7 @@ import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 import { SchoolServiceContainerPageComponent } from '@ksp/school-service/feature/container-page';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
 
 export const routes: Route[] = [
   {
@@ -27,6 +28,7 @@ export const routes: Route[] = [
     SharedUiTopNavModule,
     SharedFormOthersModule,
     SharedUiBottomMenuModule,
+    RequestHeaderInfoComponent
   ],
   declarations: [ForeignIdComponent],
   exports: [ForeignIdComponent],

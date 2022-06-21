@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { FormMode } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -12,6 +13,8 @@ import {
   styleUrls: ['./foreign-id.component.scss'],
 })
 export class ForeignIdComponent {
+  @Input() mode: FormMode = 'edit';
+  foreignInfo = ['1.สำเนาหนังสือเดินทาง'];
   constructor(private router: Router, public dialog: MatDialog) {}
 
   cancel() {
