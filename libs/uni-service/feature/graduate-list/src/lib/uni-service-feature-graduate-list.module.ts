@@ -18,7 +18,7 @@ import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import { SharedFeatureDegreeCertModule } from '@ksp/shared/feature/degree-cert';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
+import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 @NgModule({
   imports: [

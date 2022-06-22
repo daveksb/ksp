@@ -4,8 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
-} from '@ksp/shared/ui/dialog';
-import { ForbiddenPropertyComponent } from '@ksp/shared/ui/forbidden-property';
+} from '@ksp/shared/dialog';
+import { ForbiddenPropertyComponent } from '@ksp/shared/form/forbidden-property';
 
 @Component({
   selector: 'school-service-license-detail',

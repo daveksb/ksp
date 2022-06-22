@@ -11,7 +11,7 @@ import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
-import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
+import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
 
 @NgModule({
   imports: [

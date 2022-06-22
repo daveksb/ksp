@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ConfirmDialogComponent } from '@ksp/shared/ui/dialog';
+import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 
 @Component({
   selector: 'e-service-consider',

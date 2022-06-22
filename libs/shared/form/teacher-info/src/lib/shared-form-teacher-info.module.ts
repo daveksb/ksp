@@ -7,7 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { InstructorInfoComponent } from './instructor-info/instructor-info.component';
 import { AdvisorInfoComponent } from './advisor-info/advisor-info.component';
 import { HideInViewModeDirective } from '@ksp/shared/directive';
-import { AddRowButtonComponent } from '@ksp/shared/ui/add-row-button';
+import { AddRowButtonComponent } from '@ksp/shared/new-ui';
 
 @NgModule({
   imports: [

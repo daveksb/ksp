@@ -5,7 +5,7 @@ import { FormMode } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
-} from '@ksp/shared/ui/dialog';
+} from '@ksp/shared/dialog';
 
 @Component({
   selector: 'ksp-degree-cert-step-four',
@@ -14,7 +14,6 @@ import {
 })
 export class DegreeCertStepFourComponent {
   @Input() mode: FormMode = 'edit';
-
 
   constructor(public dialog: MatDialog, private router: Router) {}
 

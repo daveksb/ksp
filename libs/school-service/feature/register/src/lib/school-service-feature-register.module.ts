@@ -9,7 +9,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { RequesterInfoComponent } from './requester-info/requester-info.component';
 import { CoordinatorInfoComponent } from './coordinator-info/coordinator-info.component';
-import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
+import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
 import {
   FormCoordinatorInfoComponent,
   FormRequesterInfoComponent,

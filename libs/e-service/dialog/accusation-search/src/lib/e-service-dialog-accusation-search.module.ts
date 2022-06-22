@@ -8,7 +8,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
-import { SharedUiLicenseTypeButtonGroupModule } from '@ksp/shared/ui/license-type-button-group';
+import { LicenseTypeButtonGroupComponent } from '@ksp/shared/new-ui';
 
 @NgModule({
   imports: [
@@ -20,7 +20,7 @@ import { SharedUiLicenseTypeButtonGroupModule } from '@ksp/shared/ui/license-typ
     MatIconModule,
     EServiceUiAccusationInfoModule,
     SharedUiLicenseInfoModule,
-    SharedUiLicenseTypeButtonGroupModule,
+    LicenseTypeButtonGroupComponent,
   ],
   declarations: [AccusationSearchComponent],
   exports: [AccusationSearchComponent],
