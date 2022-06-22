@@ -7,17 +7,20 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 
+export type controlName = 'nameTh' | 'nameEng' | 'prefixTh' | 'prefixEng';
+
 @Component({
   selector: 'self-service-license-edit',
   templateUrl: './license-edit.component.html',
   styleUrls: ['./license-edit.component.css'],
 })
 export class LicenseEditComponent implements OnInit {
+  editPrefixCheck = false;
+  editNameCheck = false;
+  editLastnameCheck = false;
+  distributeCheck = false;
+
   form = this.fb.group({
-    editPrefixCheck: [''],
-    editNameCheck: [''],
-    editLastnameCheck: [''],
-    distributeCheck: [''],
     prefixTh: [],
     prefixEng: [],
     nameTh: [],
@@ -33,6 +36,19 @@ export class LicenseEditComponent implements OnInit {
     'สำเนาหนังสือรับรองการใช้คำหน้านามหญิง (ถ้ามี)',
   ];
 
+  disableControlA(evt: any, controlNames: controlName[]) {
+    const status = evt.target.checked;
+
+    controlNames.forEach((i) => {
+      console.log('i = ', i);
+      if (status) {
+        this.form.controls[i].enable();
+      } else {
+        this.form.controls[i].disable();
+      }
+    });
+  }
+
   constructor(
     public dialog: MatDialog,
     private router: Router,
@@ -42,9 +58,8 @@ export class LicenseEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.form.valueChanges.subscribe((res) => {
-      console.log('res = ', res);
+      ///console.log('res = ', res);
     });
-
     this.form.disable();
   }
 
@@ -53,7 +68,8 @@ export class LicenseEditComponent implements OnInit {
   }
 
   onConfirm() {
-    const dialog = this.dialog.open(ConfirmDialogComponent, {
+    console.log('edit prefix check = ', this.editPrefixCheck);
+    /* const dialog = this.dialog.open(ConfirmDialogComponent, {
       width: '375px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่`,
@@ -67,7 +83,7 @@ export class LicenseEditComponent implements OnInit {
       if (res) {
         this.onSaveAndRequest();
       }
-    });
+    }); */
   }
 
   onSaveAndRequest() {

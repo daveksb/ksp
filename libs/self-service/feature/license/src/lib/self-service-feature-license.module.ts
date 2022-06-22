@@ -20,7 +20,7 @@ import {
 import { MatExpansionModule } from '@angular/material/expansion';
 import { SelfServiceLicenseInfoComponent } from '@ksp/self-service/ui';
 import { PageNotFoundComponent } from '@ksp/shared/ui';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 export const routes: Routes = [
   {
@@ -65,6 +65,7 @@ export const routes: Routes = [
     SelfServiceLicenseInfoComponent,
     BottomNavComponent,
     ReactiveFormsModule,
+    FormsModule,
   ],
   declarations: [LicenseRequestComponent, LicenseEditComponent],
 })

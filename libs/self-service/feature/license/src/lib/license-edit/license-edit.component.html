@@ -13,13 +13,14 @@
       <input
         type="checkbox"
         class="checkbox-1"
-        formControlName="editPrefixCheck"
+        name="test"
+        (change)="disableControlA($event, ['prefixTh', 'prefixEng'])"
       />
       <label class="checkbox-label">เปลี่ยน / เพิ่มเติม คำนำหน้าชื่อ</label>
     </div>
     <div class="content__container--three-columns">
       <div class="mb-3">
-        <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
+        <label class="form-label">คำนำหน้าชื่อภาษาไทย xxx</label>
         <select class="form-select form-select-sm" disabled>
           <option selected>กรุณาเลือก</option>
           <option value="1">One</option>
@@ -33,7 +34,7 @@
       </div>
 
       <div class="mb-3">
-        <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
+        <label class="form-label">คำนำหน้าชื่อภาษาไทย yyy</label>
         <select class="form-select form-select-sm" formControlName="prefixTh">
           <option selected>กรุณาเลือก</option>
           <option value="1">One</option>
@@ -69,11 +70,7 @@
       </div>
     </div>
     <div class="checkbox__container">
-      <input
-        type="checkbox"
-        class="checkbox-1"
-        formControlName="editNameCheck"
-      />
+      <input type="checkbox" class="checkbox-1" />
       <label class="checkbox-label">เปลี่ยนชื่อ</label>
     </div>
     <div class="content__container--three-columns">
@@ -159,12 +156,7 @@
       </div>
     </div>
     <div class="checkbox__container">
-      <input
-        id="check_1"
-        type="checkbox"
-        class="checkbox-1"
-        formControlName="distributeCheck"
-      />
+      <input id="check_1" type="checkbox" class="checkbox-1" />
       <label class="checkbox-label">จำหน่ายข้อมูล</label>
     </div>
     <div class="content__container">
