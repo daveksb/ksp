@@ -13,7 +13,7 @@ import {
   LicenseTypeButtonGroupComponent,
   RequestHeaderInfoComponent,
 } from '@ksp/shared/new-ui';
-import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
+import { TopNavComponent } from '@ksp/shared/menu';
 
 @Component({
   selector: 'e-service-ethic-accusation-record',
@@ -28,7 +28,7 @@ import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
     EServiceUiAccusationInfoModule,
     RequestHeaderInfoComponent,
     MatIconModule,
-    SharedUiTopNavModule,
+    TopNavComponent,
     LicenseTypeButtonGroupComponent,
     LicenseInfoComponent,
   ],

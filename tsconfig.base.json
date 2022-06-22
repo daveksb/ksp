@@ -172,10 +172,9 @@
         "libs/shared/form/university-select/src/index.ts"
       ],
       "@ksp/shared/interface": ["libs/shared/interface/src/index.ts"],
+      "@ksp/shared/menu": ["libs/shared/menu/src/index.ts"],
       "@ksp/shared/new-ui": ["libs/shared/new-ui/src/index.ts"],
       "@ksp/shared/ui/bottom-menu": ["libs/shared/ui/bottom-menu/src/index.ts"],
-      "@ksp/shared/ui/side-menu": ["libs/shared/ui/side-menu/src/index.ts"],
-      "@ksp/shared/ui/top-nav": ["libs/shared/ui/top-nav/src/index.ts"],
       "@ksp/shared/utility": ["libs/shared/utility/src/index.ts"],
       "@ksp/uni-service/feature/container-page": [
         "libs/uni-service/feature/container-page/src/index.ts"

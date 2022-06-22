@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MenuConfig } from '@ksp/shared/ui/side-menu';
+import { MenuConfig } from '@ksp/shared/menu';
 
 @Component({
   templateUrl: './self-service-master-page.component.html',

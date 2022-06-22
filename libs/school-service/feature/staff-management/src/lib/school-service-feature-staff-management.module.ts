@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { StaffListComponent } from './staff-list/staff-list.component';
 import { SchoolServiceContainerPageComponent } from '@ksp/school-service/feature/container-page';
 import { LicenseSearchComponent } from './license-search/license-search.component';
-import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
+
 import { AddStaffPersonInfoComponent } from './add-staff-person-info/add-staff-person-info.component';
 import { AddStaffTeachingInfoComponent } from './add-staff-teaching-info/add-staff-teaching-info.component';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -20,6 +20,7 @@ import {
   LicenseTypeButtonGroupComponent,
   RequestHeaderInfoComponent,
 } from '@ksp/shared/new-ui';
+import { TopNavComponent } from '@ksp/shared/menu';
 
 export const routes: Routes = [
   {
@@ -47,7 +48,7 @@ export const routes: Routes = [
     MatTabsModule,
     SharedFormOthersModule,
     SharedUiBottomMenuModule,
-    SharedUiTopNavModule,
+    TopNavComponent,
     SchoolServiceUiStaffSearchModule,
     MatTableModule,
     MatIconModule,

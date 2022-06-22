@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
   selector: 'ksp-top-nav',
   templateUrl: './top-nav.component.html',
   styleUrls: ['./top-nav.component.scss'],
+  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TopNavComponent {

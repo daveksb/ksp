@@ -11,7 +11,7 @@ import { InvestigationDetailComponent } from '@ksp/e-service/ethics/investigatio
 import { MatDialogModule } from '@angular/material/dialog';
 import { InquiryDetailComponent } from './inquiry-detail/inquiry-detail.component';
 import { InquiryResultComponent } from './inquiry-result/inquiry-result.component';
-import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
+import { TopNavComponent } from '@ksp/shared/menu';
 
 export const routes: Routes = [
   {
@@ -46,14 +46,9 @@ export const routes: Routes = [
     MatDialogModule,
     InquiryDetailComponent,
     InquiryResultComponent,
-    SharedUiTopNavModule
-
+    TopNavComponent,
   ],
-  declarations: [
-    InquiryMainComponent,
-  ],
-  exports: [
-    InquiryMainComponent,
-  ],
+  declarations: [InquiryMainComponent],
+  exports: [InquiryMainComponent],
 })
 export class EServiceEthicsInquiryModule {}

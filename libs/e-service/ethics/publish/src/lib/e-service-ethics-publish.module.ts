@@ -13,7 +13,7 @@ import {
   InquiryResultComponent,
 } from '@ksp/e-service/ethics/inquiry';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
-import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
+import { TopNavComponent } from '@ksp/shared/menu';
 
 export const routes: Routes = [
   {
@@ -49,7 +49,7 @@ export const routes: Routes = [
     InquiryDetailComponent,
     InquiryResultComponent,
     SharedUiBottomMenuModule,
-    SharedUiTopNavModule
+    TopNavComponent,
   ],
 
   declarations: [PublishReviewComponent],

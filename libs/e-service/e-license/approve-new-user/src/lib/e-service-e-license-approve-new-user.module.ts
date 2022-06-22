@@ -6,8 +6,8 @@ import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container
 import { UserDetailComponent } from '@ksp/e-service/e-license/user-detail';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
-import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 import { MatIconModule } from '@angular/material/icon';
+import { TopNavComponent } from '@ksp/shared/menu';
 
 export const routes: Route[] = [
   {
@@ -37,8 +37,8 @@ export const routes: Route[] = [
     MatDialogModule,
     MatTableModule,
     RouterModule.forChild(routes),
-    SharedUiTopNavModule,
     MatIconModule,
+    TopNavComponent,
   ],
   declarations: [ApproveNewUserListComponent],
 })

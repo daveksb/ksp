@@ -8,10 +8,10 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EServiceUiLicenseCheckModule } from '@ksp/e-service/ui/license-check';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
-import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
+import { TopNavComponent } from '@ksp/shared/menu';
 
 export const routes: Routes = [
   {
@@ -44,7 +44,7 @@ export const routes: Routes = [
     RouterModule.forChild(routes),
     EServiceUiLicenseCheckModule,
     SharedUiBottomMenuModule,
-    SharedUiTopNavModule,
+    TopNavComponent,
     MatTableModule,
     MatIconModule,
     RequestHeaderInfoComponent,

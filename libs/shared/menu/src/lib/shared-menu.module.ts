@@ -9,4 +9,4 @@ import { HamburgerMenuComponent } from './hamburger-menu/hamburger-menu.componen
   declarations: [SideMenuComponent, HamburgerMenuComponent],
   exports: [SideMenuComponent, HamburgerMenuComponent],
 })
-export class SharedUiSideMenuModule {}
+export class SharedMenuModule {}

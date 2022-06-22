@@ -13,7 +13,6 @@
       <ng-container *ngFor="let menu of menuConfig">
         <li *ngIf="!menu.subMenu?.length">
           <a
-
             routerLink="/{{ menu.path }}"
             [queryParams]="menu.params"
             routerLinkActive="active-link"

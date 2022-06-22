@@ -9,7 +9,7 @@ import { InvestigationMainComponent } from './investigation-main/investigation-m
 import { MatTabsModule } from '@angular/material/tabs';
 import { AccusationRecordComponent } from '@ksp/e-service/ethics/accusation';
 import { InvestigationDetailComponent } from './investigation-detail/investigation-detail.component';
-import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
+import { TopNavComponent } from '@ksp/shared/menu';
 
 export const routes: Routes = [
   {
@@ -42,7 +42,7 @@ export const routes: Routes = [
     MatTabsModule,
     AccusationRecordComponent,
     InvestigationDetailComponent,
-    SharedUiTopNavModule
+    TopNavComponent,
   ],
   declarations: [InvestigationMainComponent],
   exports: [InvestigationMainComponent],

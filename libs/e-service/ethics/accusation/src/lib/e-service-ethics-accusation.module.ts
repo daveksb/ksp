@@ -16,7 +16,7 @@ import {
   LicenseTypeButtonGroupComponent,
   RequestHeaderInfoComponent,
 } from '@ksp/shared/new-ui';
-import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
+import { TopNavComponent } from '@ksp/shared/menu';
 
 @NgModule({
   imports: [
@@ -32,7 +32,7 @@ import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
     SharedFormOthersModule,
     SharedUiBottomMenuModule,
     RequestHeaderInfoComponent,
-    SharedUiTopNavModule,
+    TopNavComponent,
     LicenseTypeButtonGroupComponent,
     LicenseInfoComponent,
   ],

@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'shared-ui-side-menu',
-  preset: '../../../../jest.preset.ts',
+  displayName: 'shared-menu',
+  preset: '../../../jest.preset.ts',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
     'ts-jest': {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../../coverage/libs/shared/ui/side-menu',
+  coverageDirectory: '../../../coverage/libs/shared/menu',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

@@ -1,7 +1,7 @@
-# shared-ui-top-nav
+# shared-menu
 
 This library was generated with [Nx](https://nx.dev).
 
 ## Running unit tests
 
-Run `nx test shared-ui-top-nav` to execute the unit tests.
+Run `nx test shared-menu` to execute the unit tests.

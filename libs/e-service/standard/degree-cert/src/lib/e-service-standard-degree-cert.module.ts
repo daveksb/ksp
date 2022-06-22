@@ -21,7 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
 import { SharedFormDegreeCertStepTwoModule } from '@ksp/shared/form/degree-cert/step-two';
 import { FinalResultComponent } from './final-result/final-result.component';
-import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
+import { TopNavComponent } from '@ksp/shared/menu';
 
 @NgModule({
   imports: [
@@ -42,7 +42,7 @@ import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
     MatIconModule,
     SharedFormDegreeCertStepTwoModule,
     RequestHeaderInfoComponent,
-    SharedUiTopNavModule,
+    TopNavComponent,
   ],
   declarations: [
     DegreeCertListComponent,
