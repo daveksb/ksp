@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
-} from '@ksp/shared/ui/dialog';
+} from '@ksp/shared/dialog';
 
 @Component({
   selector: 'e-service-check',
@@ -13,7 +13,7 @@ import {
 })
 export class CheckComponent {
   degreeType = '';
-  
+
   constructor(public dialog: MatDialog, private router: Router) {}
 
   cancel() {

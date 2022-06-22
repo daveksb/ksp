@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { CompleteDialogComponent } from '@ksp/shared/ui/dialog';
+import { CompleteDialogComponent } from '@ksp/shared/dialog';
 
 @Component({
   selector: 'self-service-promptpay',

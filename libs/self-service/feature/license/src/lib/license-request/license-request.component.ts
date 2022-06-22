@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ConfirmDialogComponent } from '@ksp/shared/ui/dialog';
-import { ForbiddenPropertyComponent } from '@ksp/shared/ui/forbidden-property';
+import { ConfirmDialogComponent } from '@ksp/shared/dialog';
+import { ForbiddenPropertyComponent } from '@ksp/shared/form/forbidden-property';
 
 @Component({
   templateUrl: './license-request.component.html',

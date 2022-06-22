@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
-} from '@ksp/shared/ui/dialog';
+} from '@ksp/shared/dialog';
 
 @Component({
   selector: 'school-service-add-staff-teaching-info',
@@ -88,7 +88,6 @@ export class AddStaffTeachingInfoComponent implements OnInit {
 
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-    
       width: '350px',
       data: {
         header: `บันทึกข้อมูลสำเร็จ`,

@@ -8,7 +8,7 @@ import { UniServiceFeatureRegisterRoutingModule } from './uni-service-feature-re
 import { UniServiceUiNavModule } from '@ksp/uni-service/ui/nav';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { UniversitySelectComponent } from '@ksp/shared/form/university-select';
-import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
+import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 
 @NgModule({

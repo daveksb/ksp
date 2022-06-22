@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
-} from '@ksp/shared/ui/dialog';
+} from '@ksp/shared/dialog';
 import { UniversitySearchComponent } from '@ksp/shared/form/university-search';
 
 @Component({

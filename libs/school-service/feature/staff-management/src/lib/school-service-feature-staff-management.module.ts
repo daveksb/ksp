@@ -16,8 +16,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SharedUiLicenseTypeButtonGroupModule } from '@ksp/shared/ui/license-type-button-group';
-import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
+import {
+  LicenseTypeButtonGroupComponent,
+  RequestHeaderInfoComponent,
+} from '@ksp/shared/new-ui';
 
 export const routes: Routes = [
   {
@@ -50,8 +52,8 @@ export const routes: Routes = [
     SchoolServiceUiStaffSearchModule,
     MatTableModule,
     MatIconModule,
-    SharedUiLicenseTypeButtonGroupModule,
-    RequestHeaderInfoComponent
+    RequestHeaderInfoComponent,
+    LicenseTypeButtonGroupComponent,
   ],
   declarations: [
     StaffListComponent,

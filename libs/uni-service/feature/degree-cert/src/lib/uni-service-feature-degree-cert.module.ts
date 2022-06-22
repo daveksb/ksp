@@ -13,7 +13,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SharedFormDegreeCertStepThreeModule } from '@ksp/shared/form/degree-cert/step-three';
 import { SharedFormDegreeCertStepOneModule } from '@ksp/shared/form/degree-cert/step-one';
-import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
+import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 

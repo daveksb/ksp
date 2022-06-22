@@ -8,7 +8,7 @@ import { TempLicenseCheckForbiddenComponent } from './temp-license-check-forbidd
 import { TempLicenseCheckConfirmComponent } from './temp-license-check-confirm/temp-license-check-confirm.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TempLicenseApproveComponent } from './temp-license-approve/temp-license-approve.component';
-import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
+import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';

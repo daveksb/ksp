@@ -18,7 +18,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatStepperModule } from '@angular/material/stepper';
 import { SharedFormDegreeCertStepOneModule } from '@ksp/shared/form/degree-cert/step-one';
 import { MatIconModule } from '@angular/material/icon';
-import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
+import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
 import { SharedFormDegreeCertStepTwoModule } from '@ksp/shared/form/degree-cert/step-two';
 import { FinalResultComponent } from './final-result/final-result.component';
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
@@ -42,7 +42,7 @@ import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
     MatIconModule,
     SharedFormDegreeCertStepTwoModule,
     RequestHeaderInfoComponent,
-    SharedUiTopNavModule
+    SharedUiTopNavModule,
   ],
   declarations: [
     DegreeCertListComponent,

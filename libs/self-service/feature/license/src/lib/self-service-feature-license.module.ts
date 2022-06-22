@@ -13,9 +13,9 @@ import {
   PaymentChannelComponent,
   PromptpayComponent,
 } from '@ksp/self-service/feature/payment';
-import { PageNotFoundComponent } from '@ksp/shared/ui/page-not-found';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { LicenseInfoComponent } from '@ksp/self-service/ui';
+import { PageNotFoundComponent } from '@ksp/shared/new-ui';
 
 export const routes: Routes = [
   {

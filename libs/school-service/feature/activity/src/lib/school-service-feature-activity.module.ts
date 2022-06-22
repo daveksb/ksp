@@ -15,7 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-info';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
-import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
+import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
 
 export const routes: Routes = [
   {
