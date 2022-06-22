@@ -7,7 +7,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { ManageCurrentUserListComponent } from './user-list/manage-current-user-list.component';
 import { MatIconModule } from '@angular/material/icon';
-import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
+import { TopNavComponent } from '@ksp/shared/menu';
 
 export const routes: Routes = [
   {
@@ -37,7 +37,7 @@ export const routes: Routes = [
     MatDialogModule,
     MatTableModule,
     MatIconModule,
-    SharedUiTopNavModule,
+    TopNavComponent,
     RouterModule.forChild(routes),
   ],
   declarations: [ManageCurrentUserListComponent],

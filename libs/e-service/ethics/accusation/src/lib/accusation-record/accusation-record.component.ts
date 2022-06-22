@@ -7,13 +7,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AccusationSearchComponent } from '@ksp/e-service/dialog/accusation-search';
 import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-info';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
-import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
-import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
+import { BottomNavComponent } from '@ksp/shared/menu';
 import {
+  LicenseInfoComponent,
   LicenseTypeButtonGroupComponent,
   RequestHeaderInfoComponent,
-} from '@ksp/shared/new-ui';
-import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
+} from '@ksp/shared/ui';
+import { TopNavComponent } from '@ksp/shared/menu';
 
 @Component({
   selector: 'e-service-ethic-accusation-record',
@@ -23,14 +23,14 @@ import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
   imports: [
     MatTabsModule,
     CommonModule,
-    SharedUiBottomMenuModule,
+    BottomNavComponent,
     SharedFormOthersModule,
     EServiceUiAccusationInfoModule,
-    SharedUiLicenseInfoModule,
     RequestHeaderInfoComponent,
     MatIconModule,
-    SharedUiTopNavModule,
+    TopNavComponent,
     LicenseTypeButtonGroupComponent,
+    LicenseInfoComponent,
   ],
 })
 export class AccusationRecordComponent implements OnInit {

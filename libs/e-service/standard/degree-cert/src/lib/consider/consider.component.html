@@ -17,7 +17,8 @@
       <div class="detail__header">
         ข้อมูลรับรองปริญญา และประกาศนียบัตรทางการศึกษา
       </div>
-      <ksp-degree-cert-step-one [mode]="'view'" [showCoordinatorForm]="false"> </ksp-degree-cert-step-one>
+      <ksp-degree-cert-step-one [mode]="'view'" [showCoordinatorForm]="false">
+      </ksp-degree-cert-step-one>
 
       <button class="btn btn-primary">
         กดเพื่อดูใบคำขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา
@@ -118,14 +119,13 @@
 </div>
 
 <div class="bottom__container">
-  <ksp-bottom-menu
+  <ksp-bottom-nav
     (cancelClicked)="cancel()"
     (prevClicked)="prevPage()"
     (saveClicked)="save()"
     [isLastPage]="true"
     [showSaveButton]="true"
     [showCenterButtons]="true"
-
   >
-  </ksp-bottom-menu>
+  </ksp-bottom-nav>
 </div>

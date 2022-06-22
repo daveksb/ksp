@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Route } from '@angular/router';
 import { PaymentHistoryComponent } from './payment-history/payment-history.component';
 import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master-page';
-import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
+
 import { PersonInfoComponent } from './person-info/person-info.component';
 import { PaymentHistoryItemComponent } from '@ksp/self-service/ui';
-import { PageNotFoundComponent } from '@ksp/shared/new-ui';
+import { PageNotFoundComponent } from '@ksp/shared/ui';
+import { TopNavComponent } from '@ksp/shared/menu';
 
 export const routes: Route[] = [
   {
@@ -37,7 +38,7 @@ export const routes: Route[] = [
 @NgModule({
   imports: [
     CommonModule,
-    SharedUiTopNavModule,
+    TopNavComponent,
     RouterModule.forChild(routes),
     PaymentHistoryItemComponent,
   ],

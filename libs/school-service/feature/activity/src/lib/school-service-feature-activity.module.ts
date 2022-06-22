@@ -4,18 +4,21 @@ import { ActivityListComponent } from './activity-list/activity-list.component';
 import { ActivityDetailComponent } from './activity-detail/activity-detail.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SchoolServiceContainerPageComponent } from '@ksp/school-service/feature/container-page';
-import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
-import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
+
 import { SchoolServiceUiStaffSearchModule } from '@ksp/school-service/ui/staff-search';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
+import { BottomNavComponent } from '@ksp/shared/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-info';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
-import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
+import {
+  LicenseInfoComponent,
+  RequestHeaderInfoComponent,
+} from '@ksp/shared/ui';
+import { TopNavComponent } from '@ksp/shared/menu';
 
 export const routes: Routes = [
   {
@@ -33,18 +36,18 @@ export const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    SharedUiTopNavModule,
-    SharedUiLicenseInfoModule,
+    TopNavComponent,
     SharedFormOthersModule,
     SchoolServiceUiStaffSearchModule,
     MatCheckboxModule,
     ReactiveFormsModule,
-    SharedUiBottomMenuModule,
+    BottomNavComponent,
     MatTableModule,
     MatIconModule,
     EServiceUiAccusationInfoModule,
     DynamicComponentDirective,
     RequestHeaderInfoComponent,
+    LicenseInfoComponent,
   ],
   declarations: [ActivityListComponent, ActivityDetailComponent],
 })

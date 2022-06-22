@@ -16,8 +16,8 @@ import { SharedFormDegreeCertStepThreeModule } from '@ksp/shared/form/degree-cer
 import { UniServiceFormModule } from '@ksp/uni-service/form';
 import { SharedFormDegreeCertStepOneModule } from '@ksp/shared/form/degree-cert/step-one';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
-import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
-import { AddRowButtonComponent } from '@ksp/shared/new-ui';
+import { AddRowButtonComponent } from '@ksp/shared/ui';
+import { TopNavComponent } from '@ksp/shared/menu';
 
 @NgModule({
   imports: [
@@ -33,7 +33,7 @@ import { AddRowButtonComponent } from '@ksp/shared/new-ui';
     SharedFormDegreeCertStepOneModule,
     DynamicComponentDirective,
     AddRowButtonComponent,
-    SharedUiTopNavModule,
+    TopNavComponent,
   ],
   declarations: [
     DegreeCertListComponent,
