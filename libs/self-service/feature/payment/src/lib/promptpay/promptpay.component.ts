@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { CompleteDialogComponent } from '@ksp/shared/ui/dialog';
 
 @Component({
-  selector: 'ksp-promptpay',
+  selector: 'self-service-promptpay',
   templateUrl: './promptpay.component.html',
   styleUrls: ['./promptpay.component.scss'],
 })
@@ -14,7 +14,6 @@ export class PromptpayComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       const completeDialog = this.dialog.open(CompleteDialogComponent, {
-        height: '175px',
         width: '350px',
         data: {
           header: `ชำระเงินสำเร็จ`,
