@@ -1,8 +1,58 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EthicsMode } from '@ksp/shared/interface';
 
-type Mode = 'accusation' | 'investigation' | 'inquiry' | 'publish' | null;
+@Component({
+  selector: 'ksp-list-page',
+  templateUrl: './list-page.component.html',
+  styleUrls: ['./list-page.component.scss'],
+})
+export class ListPageComponent implements OnInit {
+  mode!: EthicsMode;
+  dataSource = new MatTableDataSource<AccusationList>();
+  displayedColumns: string[] = columns;
+
+  constructor(public router: Router, private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.route.data.subscribe((res) => {
+      this.mode = res['type'];
+      //console.log('res = ', res);
+    });
+  }
+
+  onSubmit(submitType: boolean) {
+    if (submitType) {
+      this.dataSource.data = data;
+    } else {
+      this.dataSource.data = [];
+    }
+  }
+
+  add() {
+    this.router.navigate(['/', 'accusation', 'detail']);
+  }
+
+  next() {
+    this.router.navigate(['/', this.mode, 'detail']);
+  }
+}
+
+export const columns = [
+  'order',
+  'id',
+  'receiveDate',
+  'blackNumber',
+  'redNumber',
+  'personId',
+  'name',
+  'process',
+  'status',
+  'lastUpdate',
+  'edit',
+  'view',
+];
 
 export interface AccusationList {
   order: number;
@@ -63,56 +113,3 @@ export const data: AccusationList[] = [
     view: '',
   },
 ];
-
-@Component({
-  selector: 'ksp-list-page',
-  templateUrl: './list-page.component.html',
-  styleUrls: ['./list-page.component.scss'],
-})
-export class ListPageComponent implements OnInit {
-  mode: Mode = null;
-  dataSource = new MatTableDataSource<AccusationList>();
-  displayedColumns: string[] = [
-    'order',
-    'id',
-    'receiveDate',
-    'blackNumber',
-    'redNumber',
-    'personId',
-    'name',
-    'process',
-    'status',
-    'lastUpdate',
-    'edit',
-    'view',
-  ];
-
-  constructor(public router: Router, private route: ActivatedRoute) {}
-
-  ngOnInit(): void {
-    /* this.route.data.subscribe((data) => {
-      this.mode = data['type'];
-      console.log('mode = ', data);
-    }); */
-    this.route.data.subscribe((res) => {
-      this.mode = res['type'];
-      //console.log('res = ', res);
-    });
-  }
-
-  onSubmit(submitType: boolean) {
-    if (submitType) {
-      this.dataSource.data = data;
-    } else {
-      this.dataSource.data = [];
-    }
-  }
-
-  add() {
-    this.router.navigate(['/', 'accusation', 'detail']);
-  }
-
-  next() {
-    this.router.navigate(['/', this.mode, 'detail']);
-  }
-}

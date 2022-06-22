@@ -53,6 +53,12 @@ export class AccusationRecordComponent implements OnInit {
   @Input() hideTitle = false;
   @Input() hideBox = false;
 
+  ngOnInit(): void {
+    this.route.data.subscribe((res) => {
+      //console.log('res2 = ', res);
+    });
+  }
+
   next() {
     this.router.navigate(['/', 'accusation', 'decision']);
   }
@@ -72,15 +78,5 @@ export class AccusationRecordComponent implements OnInit {
         this.onCompleted();
       }
     }); */
-  }
-
-  ngOnInit(): void {
-    /* this.route.data.subscribe((data) => {
-      this.mode = data['type'];
-      console.log('mode = ', data);
-    }); */
-    this.route.data.subscribe((res) => {
-      //console.log('res2 = ', res);
-    });
   }
 }

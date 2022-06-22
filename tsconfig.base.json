@@ -48,9 +48,6 @@
       "@ksp/e-service/ethics/publish": [
         "libs/e-service/ethics/publish/src/index.ts"
       ],
-      "@ksp/e-service/ethics/report": [
-        "libs/e-service/ethics/report/src/index.ts"
-      ],
       "@ksp/e-service/feature/container-page": [
         "libs/e-service/feature/container-page/src/index.ts"
       ],

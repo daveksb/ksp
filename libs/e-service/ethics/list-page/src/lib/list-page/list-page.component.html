@@ -3,9 +3,8 @@
 <div class="main-container">
   <div class="page__title">ข้อมูลการกล่าวหา / กล่าวโทษ</div>
 
-  <e-service-accusation-search
-    (submited)="onSubmit($event)"
-  ></e-service-accusation-search>
+  <e-service-accusation-search (submited)="onSubmit($event)">
+  </e-service-accusation-search>
 
   <br />
 
@@ -17,7 +16,7 @@
           *ngIf="mode === 'accusation'"
           (click)="add()"
           type="button"
-          class="btn btn-secondary btn-sm label__button"
+          class="btn btn-primary"
         >
           + บันทึกการกล่าวหา/กล่าวโทษ
         </button>
