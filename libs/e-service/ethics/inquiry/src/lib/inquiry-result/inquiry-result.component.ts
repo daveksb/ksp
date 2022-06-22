@@ -9,7 +9,7 @@ import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
-} from '@ksp/shared/ui/dialog';
+} from '@ksp/shared/dialog';
 import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
 import { SharedUiLicenseTypeButtonGroupModule } from '@ksp/shared/ui/license-type-button-group';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
@@ -27,7 +27,7 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
     SharedUiLicenseTypeButtonGroupModule,
     EServiceUiAccusationInfoModule,
     SharedUiLicenseInfoModule,
-    RequestHeaderInfoComponent
+    RequestHeaderInfoComponent,
   ],
 })
 export class InquiryResultComponent {

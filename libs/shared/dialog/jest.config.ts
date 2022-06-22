@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'shared-ui-dialog',
-  preset: '../../../../jest.preset.ts',
+  displayName: 'shared-dialog',
+  preset: '../../../jest.preset.ts',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
     'ts-jest': {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../../coverage/libs/shared/ui/dialog',
+  coverageDirectory: '../../../coverage/libs/shared/dialog',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

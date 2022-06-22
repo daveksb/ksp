@@ -1,14 +1,14 @@
 {
   "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "sourceRoot": "libs/shared/ui/forbidden-property/src",
+  "sourceRoot": "libs/shared/form/forbidden-property/src",
   "prefix": "ksp",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/shared/ui/forbidden-property"],
+      "outputs": ["coverage/libs/shared/form/forbidden-property"],
       "options": {
-        "jestConfig": "libs/shared/ui/forbidden-property/jest.config.ts",
+        "jestConfig": "libs/shared/form/forbidden-property/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -16,8 +16,8 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "libs/shared/ui/forbidden-property/**/*.ts",
-          "libs/shared/ui/forbidden-property/**/*.html"
+          "libs/shared/form/forbidden-property/**/*.ts",
+          "libs/shared/form/forbidden-property/**/*.html"
         ]
       }
     }

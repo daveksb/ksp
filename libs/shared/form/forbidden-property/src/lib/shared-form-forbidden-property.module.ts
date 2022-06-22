@@ -8,4 +8,4 @@ import { MatDialogModule } from '@angular/material/dialog';
   declarations: [ForbiddenPropertyComponent],
   exports: [ForbiddenPropertyComponent],
 })
-export class SharedUiForbiddenPropertyModule {}
+export class SharedFormForbiddenPropertyModule {}

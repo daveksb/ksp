@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'shared-ui-forbidden-property',
+  displayName: 'shared-form-forbidden-property',
   preset: '../../../../jest.preset.ts',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../../coverage/libs/shared/ui/forbidden-property',
+  coverageDirectory: '../../../../coverage/libs/shared/form/forbidden-property',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

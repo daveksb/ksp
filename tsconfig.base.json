@@ -132,6 +132,7 @@
       "@ksp/self-service/form": ["libs/self-service/form/src/index.ts"],
       "@ksp/self-service/ui": ["libs/self-service/ui/src/index.ts"],
       "@ksp/shared/assets": ["libs/shared/assets/src/index.ts"],
+      "@ksp/shared/dialog": ["libs/shared/dialog/src/index.ts"],
       "@ksp/shared/directive": ["libs/shared/directive/src/index.ts"],
       "@ksp/shared/feature/degree-cert": [
         "libs/shared/feature/degree-cert/src/index.ts"
@@ -150,6 +151,9 @@
       ],
       "@ksp/shared/form/education-level": [
         "libs/shared/form/education-level/src/index.ts"
+      ],
+      "@ksp/shared/form/forbidden-property": [
+        "libs/shared/form/forbidden-property/src/index.ts"
       ],
       "@ksp/shared/form/others": ["libs/shared/form/others/src/index.ts"],
       "@ksp/shared/form/school/register": [
@@ -173,10 +177,6 @@
         "libs/shared/ui/add-row-button/src/index.ts"
       ],
       "@ksp/shared/ui/bottom-menu": ["libs/shared/ui/bottom-menu/src/index.ts"],
-      "@ksp/shared/ui/dialog": ["libs/shared/ui/dialog/src/index.ts"],
-      "@ksp/shared/ui/forbidden-property": [
-        "libs/shared/ui/forbidden-property/src/index.ts"
-      ],
       "@ksp/shared/ui/license-info": [
         "libs/shared/ui/license-info/src/index.ts"
       ],

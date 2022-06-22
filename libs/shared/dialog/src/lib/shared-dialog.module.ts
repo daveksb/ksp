@@ -25,4 +25,4 @@ import { EServiceUiLicenseCheckModule } from '@ksp/e-service/ui/license-check';
     FilesPreviewComponent,
   ],
 })
-export class SharedUiDialogModule {}
+export class SharedDialogModule {}

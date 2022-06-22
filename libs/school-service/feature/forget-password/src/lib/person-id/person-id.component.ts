@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ConfirmDialogComponent } from '@ksp/shared/ui/dialog';
+import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 
 @Component({
   templateUrl: './person-id.component.html',

@@ -21,7 +21,7 @@ import { DynamicComponent, ListData } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
-} from '@ksp/shared/ui/dialog';
+} from '@ksp/shared/dialog';
 
 @Component({
   selector: 'ksp-activity-detail',

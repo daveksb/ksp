@@ -5,7 +5,7 @@ import { FormMode } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
-} from '@ksp/shared/ui/dialog';
+} from '@ksp/shared/dialog';
 
 @Component({
   templateUrl: './foreign-teacher-id-request.component.html',

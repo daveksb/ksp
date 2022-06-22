@@ -1,13 +1,14 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "sourceRoot": "libs/shared/ui/dialog/src",
+  "sourceRoot": "libs/shared/dialog/src",
   "prefix": "ksp",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/shared/ui/dialog"],
+      "outputs": ["coverage/libs/shared/dialog"],
       "options": {
-        "jestConfig": "libs/shared/ui/dialog/jest.config.ts",
+        "jestConfig": "libs/shared/dialog/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -15,8 +16,8 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "libs/shared/ui/dialog/**/*.ts",
-          "libs/shared/ui/dialog/**/*.html"
+          "libs/shared/dialog/**/*.ts",
+          "libs/shared/dialog/**/*.html"
         ]
       }
     }

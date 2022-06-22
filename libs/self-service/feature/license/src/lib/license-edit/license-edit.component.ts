@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
-} from '@ksp/shared/ui/dialog';
+} from '@ksp/shared/dialog';
 
 @Component({
   selector: 'self-service-license-edit',
