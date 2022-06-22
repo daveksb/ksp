@@ -10,13 +10,13 @@ import { AddStaffTeachingInfoComponent } from './add-staff-teaching-info/add-sta
 import { MatTabsModule } from '@angular/material/tabs';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
-import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
 import { SchoolServiceUiStaffSearchModule } from '@ksp/school-service/ui/staff-search';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
+  LicenseInfoComponent,
   LicenseTypeButtonGroupComponent,
   RequestHeaderInfoComponent,
 } from '@ksp/shared/new-ui';
@@ -47,13 +47,13 @@ export const routes: Routes = [
     MatTabsModule,
     SharedFormOthersModule,
     SharedUiBottomMenuModule,
-    SharedUiLicenseInfoModule,
     SharedUiTopNavModule,
     SchoolServiceUiStaffSearchModule,
     MatTableModule,
     MatIconModule,
     RequestHeaderInfoComponent,
     LicenseTypeButtonGroupComponent,
+    LicenseInfoComponent,
   ],
   declarations: [
     StaffListComponent,

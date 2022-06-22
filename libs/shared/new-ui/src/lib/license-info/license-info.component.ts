@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'ksp-license-info',
   templateUrl: './license-info.component.html',
   styleUrls: ['./license-info.component.scss'],
+  standalone: true,
 })
-export class LicenseInfoComponent implements OnInit {
+export class LicenseInfoComponent {
   constructor() {}
-
-  ngOnInit(): void {}
 }

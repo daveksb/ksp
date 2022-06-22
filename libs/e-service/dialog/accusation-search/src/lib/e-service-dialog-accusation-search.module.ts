@@ -7,7 +7,6 @@ import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-inf
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
-import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
 import { LicenseTypeButtonGroupComponent } from '@ksp/shared/new-ui';
 
 @NgModule({
@@ -19,7 +18,6 @@ import { LicenseTypeButtonGroupComponent } from '@ksp/shared/new-ui';
     MatDialogModule,
     MatIconModule,
     EServiceUiAccusationInfoModule,
-    SharedUiLicenseInfoModule,
     LicenseTypeButtonGroupComponent,
   ],
   declarations: [AccusationSearchComponent],

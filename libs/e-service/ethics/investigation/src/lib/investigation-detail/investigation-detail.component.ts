@@ -11,8 +11,8 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
 import {
+  LicenseInfoComponent,
   LicenseTypeButtonGroupComponent,
   RequestHeaderInfoComponent,
 } from '@ksp/shared/new-ui';
@@ -28,10 +28,10 @@ import {
     SharedUiBottomMenuModule,
     SharedFormOthersModule,
     EServiceUiAccusationInfoModule,
-    SharedUiLicenseInfoModule,
     RequestHeaderInfoComponent,
     MatIconModule,
     LicenseTypeButtonGroupComponent,
+    LicenseInfoComponent,
   ],
 })
 export class InvestigationDetailComponent {

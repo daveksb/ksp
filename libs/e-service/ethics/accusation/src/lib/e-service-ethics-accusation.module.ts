@@ -11,8 +11,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { AccusationDecisionComponent } from './accusation-decision/accusation-decision.component';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
-import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
 import {
+  LicenseInfoComponent,
   LicenseTypeButtonGroupComponent,
   RequestHeaderInfoComponent,
 } from '@ksp/shared/new-ui';
@@ -30,11 +30,11 @@ import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
     EServiceUiAccusationSearchModule,
     EServiceEthicsAccusationRoutingModule,
     SharedFormOthersModule,
-    SharedUiLicenseInfoModule,
     SharedUiBottomMenuModule,
     RequestHeaderInfoComponent,
     SharedUiTopNavModule,
     LicenseTypeButtonGroupComponent,
+    LicenseInfoComponent,
   ],
   declarations: [AccusationDecisionComponent],
   exports: [AccusationDecisionComponent],

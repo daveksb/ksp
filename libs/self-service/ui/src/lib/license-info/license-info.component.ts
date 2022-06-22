@@ -8,4 +8,4 @@ import { Component } from '@angular/core';
   imports: [CommonModule],
   standalone: true,
 })
-export class LicenseInfoComponent {}
+export class SelfServiceLicenseInfoComponent {}

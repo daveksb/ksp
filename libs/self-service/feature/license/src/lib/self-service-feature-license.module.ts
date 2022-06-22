@@ -14,7 +14,7 @@ import {
   PromptpayComponent,
 } from '@ksp/self-service/feature/payment';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { LicenseInfoComponent } from '@ksp/self-service/ui';
+import { SelfServiceLicenseInfoComponent } from '@ksp/self-service/ui';
 import { PageNotFoundComponent } from '@ksp/shared/new-ui';
 
 export const routes: Routes = [
@@ -57,7 +57,7 @@ export const routes: Routes = [
     MatExpansionModule,
     SharedUiTopNavModule,
     RouterModule.forChild(routes),
-    LicenseInfoComponent,
+    SelfServiceLicenseInfoComponent,
   ],
   declarations: [LicenseRequestComponent, LicenseEditComponent],
 })
