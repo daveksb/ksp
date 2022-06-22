@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { LandingPageComponent } from '@ksp/e-service/feature/landing-page';
 import { EServiceLoginComponent } from '@ksp/e-service/feature/login';
+import { EthicsCustomRoute } from '@ksp/shared/interface';
 import { ethicsMenu, licenseMenu, standardMenu } from './app.menu.config';
 
-const routes: Routes = [
+const routes: EthicsCustomRoute[] = [
   { path: 'login', component: EServiceLoginComponent },
   { path: 'landing', component: LandingPageComponent },
   {
@@ -34,7 +35,7 @@ const routes: Routes = [
   {
     path: 'investigation',
     data: {
-      type: 'investigation',
+      ethicsMode: 'investigation',
       menuConfig: ethicsMenu,
       headerLabel: 'ระบบงานจรรยาบรรณ',
     },
@@ -46,7 +47,7 @@ const routes: Routes = [
   {
     path: 'accusation',
     data: {
-      type: 'accusationxxx',
+      ethicsMode: 'accusation',
       menuConfig: ethicsMenu,
       headerLabel: 'ระบบงานจรรยาบรรณ',
     },
@@ -58,7 +59,7 @@ const routes: Routes = [
   {
     path: 'inquiry',
     data: {
-      type: 'inquiry',
+      ethicsMode: 'inquiry',
       menuConfig: ethicsMenu,
       headerLabel: 'ระบบงานจรรยาบรรณ',
     },
@@ -70,7 +71,7 @@ const routes: Routes = [
   {
     path: 'publish',
     data: {
-      type: 'publish',
+      ethicsMode: 'publish',
       menuConfig: ethicsMenu,
       headerLabel: 'ระบบงานจรรยาบรรณ',
     },

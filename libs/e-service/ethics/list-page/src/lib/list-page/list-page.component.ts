@@ -17,7 +17,7 @@ export class ListPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.data.subscribe((res) => {
-      this.mode = res['type'];
+      this.mode = res['ethicsMode'];
       //console.log('res = ', res);
     });
   }
