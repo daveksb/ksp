@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'self-service-ui-forms',
-  preset: '../../../../jest.preset.ts',
+  displayName: 'self-service-ui',
+  preset: '../../../jest.preset.ts',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
     'ts-jest': {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../../coverage/libs/self-service/ui/forms',
+  coverageDirectory: '../../../coverage/libs/self-service/ui',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

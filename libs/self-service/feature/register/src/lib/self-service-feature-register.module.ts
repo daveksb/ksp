@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RegisterStepOneComponent } from './register-step-one/register-step-one.component';
 import { RegisterStepTwoComponent } from './register-step-two/register-step-two.component';
 import { RegisterStepThreeComponent } from './register-step-three/register-step-three.component';
-import { SelfServiceUiFormsModule } from '@ksp/self-service/ui/forms';
+import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule, Routes } from '@angular/router';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
@@ -34,7 +34,7 @@ export const routes: Routes = [
   imports: [
     CommonModule,
     MatDialogModule,
-    SelfServiceUiFormsModule,
+    SelfServiceFormModule,
     RouterModule.forChild(routes),
   ],
   declarations: [

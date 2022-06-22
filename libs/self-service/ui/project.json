@@ -1,13 +1,14 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "sourceRoot": "libs/self-service/ui/menu/src",
+  "sourceRoot": "libs/self-service/ui/src",
   "prefix": "ksp",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/self-service/ui/menu"],
+      "outputs": ["coverage/libs/self-service/ui"],
       "options": {
-        "jestConfig": "libs/self-service/ui/menu/jest.config.ts",
+        "jestConfig": "libs/self-service/ui/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -15,8 +16,8 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "libs/self-service/ui/menu/**/*.ts",
-          "libs/self-service/ui/menu/**/*.html"
+          "libs/self-service/ui/**/*.ts",
+          "libs/self-service/ui/**/*.html"
         ]
       }
     }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { FormVerifyPhoneComponent } from '@ksp/self-service/ui/forms';
+import { FormVerifyPhoneComponent } from '@ksp/self-service/form';
 
 @Component({
   selector: 'self-service-register-step-two',

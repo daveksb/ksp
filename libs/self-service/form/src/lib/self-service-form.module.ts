@@ -50,4 +50,4 @@ import { DynamicComponentDirective } from '@ksp/shared/directive';
     FormVerifyPhoneComponent,
   ],
 })
-export class SelfServiceUiFormsModule {}
+export class SelfServiceFormModule {}

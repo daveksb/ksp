@@ -1,4 +1,4 @@
-export * from './lib/self-service-ui-forms.module';
+export * from './lib/self-service-form.module';
 
 export * from './lib/form-upload-image/form-upload-image.component';
 
