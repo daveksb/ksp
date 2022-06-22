@@ -44,11 +44,5 @@ export const routes: Routes = [
     PrivacyPolicyComponent,
     RegisterCompletedComponent,
   ],
-  exports: [
-    RegisterStepOneComponent,
-    RegisterStepTwoComponent,
-    RegisterStepThreeComponent,
-    PrivacyPolicyComponent,
-  ],
 })
 export class SelfServiceFeatureRegisterModule {}
