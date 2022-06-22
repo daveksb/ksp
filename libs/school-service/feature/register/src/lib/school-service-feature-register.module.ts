@@ -14,6 +14,8 @@ import {
   FormCoordinatorInfoComponent,
   FormRequesterInfoComponent,
 } from '@ksp/shared/form/school/register';
+import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
+import { UniversitySelectComponent } from '@ksp/shared/form/university-select';
 
 export const routes: Routes = [
   {
@@ -42,6 +44,8 @@ export const routes: Routes = [
     RequestHeaderInfoComponent,
     FormRequesterInfoComponent,
     FormCoordinatorInfoComponent,
+    SharedUiBottomMenuModule,
+    UniversitySelectComponent,
   ],
   declarations: [
     CurrentUserComponent,

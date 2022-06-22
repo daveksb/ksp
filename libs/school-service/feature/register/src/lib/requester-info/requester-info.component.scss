@@ -1,18 +1,5 @@
-.detail__container {
-  background-color: #f9f9fa;
-  padding: 16px;
-  margin: 24px 0;
-}
-
 .detail__content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 18px;
-}
-
-.form-label {
-  font-size: 18px;
-  color: #656565;
+  margin: 10px;
 }
 
 .form-select,
@@ -60,11 +47,6 @@
 
 .header {
   font-size: 22px;
-}
-
-.btn__container {
-  display: flex;
-  justify-content: end;
 }
 
 .img__step {

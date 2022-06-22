@@ -21,7 +21,7 @@ export class CoordinatorInfoComponent {
   }
 
   back() {
-    this.router.navigate(['/', 'register', 'register']);
+    this.router.navigate(['/', 'register', 'requester-info']);
   }
 
   save() {
