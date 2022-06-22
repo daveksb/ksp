@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
@@ -7,6 +7,8 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./form-address.component.scss'],
 })
 export class FormAddressComponent {
+  @Input() isWhiteMode = true;
+
   form = this.fb.group({
     location: [],
     houseNumber: [],
@@ -18,8 +20,6 @@ export class FormAddressComponent {
     subDistrict: [],
     district: [],
   });
-
-  @Input() isWhiteMode = true;
 
   constructor(private fb: FormBuilder) {}
 }

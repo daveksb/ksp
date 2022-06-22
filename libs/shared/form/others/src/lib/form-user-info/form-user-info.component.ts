@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
@@ -7,6 +7,7 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./form-user-info.component.scss'],
 })
 export class FormUserInfoComponent {
+  @Input() isWhiteMode = false;
   form = this.fb.group({
     prefixTh: [],
     nameTh: [],
@@ -20,7 +21,6 @@ export class FormUserInfoComponent {
     contactPhone: [],
     workplacePhone: [],
   });
-  @Input() isInputWhite = false;
 
   constructor(private fb: FormBuilder) {}
 }
