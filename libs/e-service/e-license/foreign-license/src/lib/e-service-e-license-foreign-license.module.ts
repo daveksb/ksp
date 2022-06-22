@@ -50,6 +50,5 @@ export const routes: Routes = [
     RequestHeaderInfoComponent,
   ],
   declarations: [ForeignLicenseDetailComponent, ForeignLicenseListComponent],
-  exports: [ForeignLicenseDetailComponent, ForeignLicenseListComponent],
 })
 export class EServiceELicenseForeignLicenseModule {}
