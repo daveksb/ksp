@@ -10,7 +10,7 @@ import { SharedFormTeacherInfoModule } from '@ksp/shared/form/teacher-info';
 import { CourseTypeAComponent } from './course/course-type-a.component';
 import { CourseTypeBComponent } from './course/course-type-b.component';
 import { HideInViewModeDirective } from '@ksp/shared/directive';
-import { AddRowButtonComponent } from '@ksp/shared/new-ui';
+import { AddRowButtonComponent } from '@ksp/shared/ui';
 
 @NgModule({
   imports: [

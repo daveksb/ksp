@@ -5,7 +5,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { ForbiddenPropertyComponent } from '@ksp/shared/form/forbidden-property';
+import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
 
 @Component({
   selector: 'school-service-license-detail',
@@ -32,7 +32,7 @@ export class LicenseDetailComponent implements OnInit {
   ];
 
   reasonInfo = [
-    '1.หนังสือบันทึกชี้แจงเหตุผลคว่มจำเป็น (ถ้ามี)',
+    '1.หนังสือบันทึกชี้แจงเหตุผลความจำเป็น (ถ้ามี)',
     '2.หลักฐานการพัฒนาตนเอง',
   ];
 
@@ -71,16 +71,12 @@ export class LicenseDetailComponent implements OnInit {
     });
   }
 
-  back() {
+  backToListPage() {
     this.router.navigate(['/', 'temp-license', 'list']);
   }
 
-  cancel() {
-    this.router.navigate(['/', 'temp-license']);
-  }
-
   save() {
-    const dialogRef = this.dialog.open(ForbiddenPropertyComponent, {
+    const dialogRef = this.dialog.open(ForbiddenPropertyFormComponent, {
       height: '475px',
       width: '850px',
     });
@@ -125,7 +121,7 @@ export class LicenseDetailComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'temp-license', 'list']);
+        this.backToListPage();
       }
     });
   }

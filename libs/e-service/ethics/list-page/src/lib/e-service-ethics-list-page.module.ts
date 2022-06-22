@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { EServiceUiAccusationSearchModule } from '@ksp/e-service/ui/accusation-search';
 import { MatDialogModule } from '@angular/material/dialog';
-import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
+import { TopNavComponent } from '@ksp/shared/menu';
 
 @NgModule({
   imports: [
@@ -14,7 +14,7 @@ import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
     MatTableModule,
     EServiceUiAccusationSearchModule,
     MatDialogModule,
-    SharedUiTopNavModule
+    TopNavComponent,
   ],
   declarations: [ListPageComponent],
   exports: [ListPageComponent],

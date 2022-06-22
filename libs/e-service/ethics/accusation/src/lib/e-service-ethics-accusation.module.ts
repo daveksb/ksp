@@ -10,13 +10,13 @@ import { EServiceEthicsAccusationRoutingModule } from './e-service-ethics-accusa
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { AccusationDecisionComponent } from './accusation-decision/accusation-decision.component';
-import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
-import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
+import { BottomNavComponent } from '@ksp/shared/menu';
 import {
+  LicenseInfoComponent,
   LicenseTypeButtonGroupComponent,
   RequestHeaderInfoComponent,
-} from '@ksp/shared/new-ui';
-import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
+} from '@ksp/shared/ui';
+import { TopNavComponent } from '@ksp/shared/menu';
 
 @NgModule({
   imports: [
@@ -30,11 +30,11 @@ import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
     EServiceUiAccusationSearchModule,
     EServiceEthicsAccusationRoutingModule,
     SharedFormOthersModule,
-    SharedUiLicenseInfoModule,
-    SharedUiBottomMenuModule,
+    BottomNavComponent,
     RequestHeaderInfoComponent,
-    SharedUiTopNavModule,
+    TopNavComponent,
     LicenseTypeButtonGroupComponent,
+    LicenseInfoComponent,
   ],
   declarations: [AccusationDecisionComponent],
   exports: [AccusationDecisionComponent],

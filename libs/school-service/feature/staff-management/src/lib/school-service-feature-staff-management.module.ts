@@ -4,22 +4,23 @@ import { RouterModule, Routes } from '@angular/router';
 import { StaffListComponent } from './staff-list/staff-list.component';
 import { SchoolServiceContainerPageComponent } from '@ksp/school-service/feature/container-page';
 import { LicenseSearchComponent } from './license-search/license-search.component';
-import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
+
 import { AddStaffPersonInfoComponent } from './add-staff-person-info/add-staff-person-info.component';
 import { AddStaffTeachingInfoComponent } from './add-staff-teaching-info/add-staff-teaching-info.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
-import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
-import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
+import { BottomNavComponent } from '@ksp/shared/menu';
 import { SchoolServiceUiStaffSearchModule } from '@ksp/school-service/ui/staff-search';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
+  LicenseInfoComponent,
   LicenseTypeButtonGroupComponent,
   RequestHeaderInfoComponent,
-} from '@ksp/shared/new-ui';
+} from '@ksp/shared/ui';
+import { TopNavComponent } from '@ksp/shared/menu';
 
 export const routes: Routes = [
   {
@@ -46,14 +47,14 @@ export const routes: Routes = [
     ReactiveFormsModule,
     MatTabsModule,
     SharedFormOthersModule,
-    SharedUiBottomMenuModule,
-    SharedUiLicenseInfoModule,
-    SharedUiTopNavModule,
+    BottomNavComponent,
+    TopNavComponent,
     SchoolServiceUiStaffSearchModule,
     MatTableModule,
     MatIconModule,
     RequestHeaderInfoComponent,
     LicenseTypeButtonGroupComponent,
+    LicenseInfoComponent,
   ],
   declarations: [
     StaffListComponent,

@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { PersonInfoComponent } from './person-info/person-info.component';
 import { AddressInfoComponent } from './address-info/address-info.component';
 import { WorkplaceInfoComponent } from './workplace-info/workplace-info.component';
-import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
+import { LicenseInfoComponent } from '@ksp/shared/ui';
 
 @NgModule({
-  imports: [CommonModule, SharedUiLicenseInfoModule],
+  imports: [CommonModule, LicenseInfoComponent],
   declarations: [
     PersonInfoComponent,
     AddressInfoComponent,

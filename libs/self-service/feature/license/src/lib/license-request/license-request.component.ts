@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
-import { ForbiddenPropertyComponent } from '@ksp/shared/form/forbidden-property';
+import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
 
 @Component({
   templateUrl: './license-request.component.html',
@@ -25,7 +25,7 @@ export class LicenseRequestComponent {
   ];
 
   save() {
-    const confirmDialog = this.dialog.open(ForbiddenPropertyComponent, {
+    const confirmDialog = this.dialog.open(ForbiddenPropertyFormComponent, {
       width: '900px',
     });
 

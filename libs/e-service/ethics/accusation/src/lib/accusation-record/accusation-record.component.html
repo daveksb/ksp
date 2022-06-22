@@ -202,7 +202,7 @@
 </div>
 
 <div class="bottom__container" *ngIf="!hideAllButtons">
-  <ksp-bottom-menu
+  <ksp-bottom-nav
     [showCenterButtons]="true"
     [isFirstPage]="true"
     [showSaveButton]="true"
@@ -210,5 +210,5 @@
     [colorMode]="'green'"
     (nextClicked)="next()"
     (cancelClicked)="cancel()"
-  ></ksp-bottom-menu>
+  ></ksp-bottom-nav>
 </div>

@@ -9,12 +9,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { RequesterInfoComponent } from './requester-info/requester-info.component';
 import { CoordinatorInfoComponent } from './coordinator-info/coordinator-info.component';
-import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
+import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import {
   FormCoordinatorInfoComponent,
   FormRequesterInfoComponent,
 } from '@ksp/shared/form/school/register';
-import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
+import { BottomNavComponent } from '@ksp/shared/menu';
 import { UniversitySelectComponent } from '@ksp/shared/form/university-select';
 
 export const routes: Routes = [
@@ -44,7 +44,7 @@ export const routes: Routes = [
     RequestHeaderInfoComponent,
     FormRequesterInfoComponent,
     FormCoordinatorInfoComponent,
-    SharedUiBottomMenuModule,
+    BottomNavComponent,
     UniversitySelectComponent,
   ],
   declarations: [

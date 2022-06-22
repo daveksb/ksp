@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TrainingComponent } from './training/training.component';
-import { AddRowButtonComponent } from '@ksp/shared/new-ui';
+import { AddRowButtonComponent } from '@ksp/shared/ui';
 
 @NgModule({
   imports: [

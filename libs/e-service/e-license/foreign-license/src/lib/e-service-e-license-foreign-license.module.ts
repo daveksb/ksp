@@ -7,11 +7,11 @@ import { ForeignLicenseListComponent } from './foreign-license-list/foreign-lice
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EServiceUiLicenseCheckModule } from '@ksp/e-service/ui/license-check';
-import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
-import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
+import { BottomNavComponent } from '@ksp/shared/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
-import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
+import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import { TopNavComponent } from '@ksp/shared/menu';
 
 export const routes: Routes = [
   {
@@ -43,13 +43,12 @@ export const routes: Routes = [
     MatDialogModule,
     RouterModule.forChild(routes),
     EServiceUiLicenseCheckModule,
-    SharedUiBottomMenuModule,
-    SharedUiTopNavModule,
+    BottomNavComponent,
+    TopNavComponent,
     MatTableModule,
     MatIconModule,
     RequestHeaderInfoComponent,
   ],
   declarations: [ForeignLicenseDetailComponent, ForeignLicenseListComponent],
-  exports: [ForeignLicenseDetailComponent, ForeignLicenseListComponent],
 })
 export class EServiceELicenseForeignLicenseModule {}
