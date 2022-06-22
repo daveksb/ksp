@@ -108,7 +108,6 @@
       "@ksp/school-service/ui/staff-search": [
         "libs/school-service/ui/staff-search/src/index.ts"
       ],
-      "@ksp/self-service/ui": ["libs/self-service/ui/src/index.ts"],
       "@ksp/self-service/feature/home": [
         "libs/self-service/feature/home/src/index.ts"
       ],
@@ -131,6 +130,7 @@
         "libs/self-service/feature/register/src/index.ts"
       ],
       "@ksp/self-service/form": ["libs/self-service/form/src/index.ts"],
+      "@ksp/self-service/ui": ["libs/self-service/ui/src/index.ts"],
       "@ksp/shared/assets": ["libs/shared/assets/src/index.ts"],
       "@ksp/shared/directive": ["libs/shared/directive/src/index.ts"],
       "@ksp/shared/feature/degree-cert": [
@@ -168,6 +168,7 @@
         "libs/shared/form/university-select/src/index.ts"
       ],
       "@ksp/shared/interface": ["libs/shared/interface/src/index.ts"],
+      "@ksp/shared/new-ui": ["libs/shared/new-ui/src/index.ts"],
       "@ksp/shared/ui/add-row-button": [
         "libs/shared/ui/add-row-button/src/index.ts"
       ],
@@ -181,9 +182,6 @@
       ],
       "@ksp/shared/ui/license-type-button-group": [
         "libs/shared/ui/license-type-button-group/src/index.ts"
-      ],
-      "@ksp/shared/ui/page-not-found": [
-        "libs/shared/ui/page-not-found/src/index.ts"
       ],
       "@ksp/shared/ui/request-header-info": [
         "libs/shared/ui/request-header-info/src/index.ts"
