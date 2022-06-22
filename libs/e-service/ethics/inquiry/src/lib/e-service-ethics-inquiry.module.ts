@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
-import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
+import { BottomNavComponent } from '@ksp/shared/menu';
 import { ListPageComponent } from '@ksp/e-service/ethics/list-page';
 import { InquiryMainComponent } from './inquiry-main/inquiry-main.component';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -38,7 +38,7 @@ export const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    SharedUiBottomMenuModule,
+    BottomNavComponent,
     RouterModule.forChild(routes),
     MatTabsModule,
     AccusationRecordComponent,

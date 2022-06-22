@@ -1,13 +1,16 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 export type ColorMode = 'green' | 'blue';
 
 @Component({
-  selector: 'ksp-bottom-menu',
-  templateUrl: './bottom-menu.component.html',
-  styleUrls: ['./bottom-menu.component.scss'],
+  selector: 'ksp-bottom-nav',
+  templateUrl: './bottom-nav.component.html',
+  styleUrls: ['./bottom-nav.component.scss'],
+  standalone: true,
+  imports: [CommonModule],
 })
-export class BottomMenuComponent {
+export class BottomNavComponent {
   @Output() prevClicked = new EventEmitter<boolean>();
   @Output() nextClicked = new EventEmitter<boolean>();
   @Output() saveClicked = new EventEmitter<boolean>();

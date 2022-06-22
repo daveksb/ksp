@@ -5,12 +5,12 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { Router } from '@angular/router';
 import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-info';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
-import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
+import { BottomNavComponent } from '@ksp/shared/menu';
 import {
   LicenseInfoComponent,
   LicenseTypeButtonGroupComponent,
   RequestHeaderInfoComponent,
-} from '@ksp/shared/new-ui';
+} from '@ksp/shared/ui';
 
 @Component({
   selector: 'e-service-inquiry-detail',
@@ -21,7 +21,7 @@ import {
     MatTabsModule,
     CommonModule,
     MatIconModule,
-    SharedUiBottomMenuModule,
+    BottomNavComponent,
     SharedFormOthersModule,
     EServiceUiAccusationInfoModule,
     RequestHeaderInfoComponent,

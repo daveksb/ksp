@@ -4,13 +4,13 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { EServiceUiLicenseCheckModule } from '@ksp/e-service/ui/license-check';
 import { MatDialogModule } from '@angular/material/dialog';
-import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
+import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import {
   FormCoordinatorInfoComponent,
   FormRequesterInfoComponent,
 } from '@ksp/shared/form/school/register';
 
-import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
+import { BottomNavComponent } from '@ksp/shared/menu';
 import { TopNavComponent } from '@ksp/shared/menu';
 
 @NgModule({
@@ -23,7 +23,7 @@ import { TopNavComponent } from '@ksp/shared/menu';
     FormRequesterInfoComponent,
     FormCoordinatorInfoComponent,
     TopNavComponent,
-    SharedUiBottomMenuModule,
+    BottomNavComponent,
   ],
   declarations: [UserDetailComponent],
   exports: [UserDetailComponent],

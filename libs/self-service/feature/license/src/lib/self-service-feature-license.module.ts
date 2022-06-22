@@ -15,7 +15,7 @@ import {
 } from '@ksp/self-service/feature/payment';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { SelfServiceLicenseInfoComponent } from '@ksp/self-service/ui';
-import { PageNotFoundComponent } from '@ksp/shared/new-ui';
+import { PageNotFoundComponent } from '@ksp/shared/ui';
 
 export const routes: Routes = [
   {

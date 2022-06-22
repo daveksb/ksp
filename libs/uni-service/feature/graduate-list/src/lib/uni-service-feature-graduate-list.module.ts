@@ -14,11 +14,11 @@ import { TableModule } from 'primeng/table';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
-import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
+import { BottomNavComponent } from '@ksp/shared/menu';
 import { SharedFeatureDegreeCertModule } from '@ksp/shared/feature/degree-cert';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
+import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 
 @NgModule({
@@ -35,7 +35,7 @@ import { TopNavComponent } from '@ksp/shared/menu';
     SharedFormOthersModule,
     MatSelectModule,
     MatOptionModule,
-    SharedUiBottomMenuModule,
+    BottomNavComponent,
     SharedFeatureDegreeCertModule,
     MatIconModule,
     MatTableModule,

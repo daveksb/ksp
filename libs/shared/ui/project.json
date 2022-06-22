@@ -1,14 +1,15 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "sourceRoot": "libs/shared/new-ui/src",
+  "sourceRoot": "libs/shared/ui/src",
   "prefix": "ksp",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "libs/shared/new-ui/**/*.ts",
-          "libs/shared/new-ui/**/*.html"
+          "libs/shared/ui/**/*.ts",
+          "libs/shared/ui/**/*.html"
         ]
       }
     }

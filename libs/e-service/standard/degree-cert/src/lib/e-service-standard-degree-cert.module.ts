@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DegreeCertListComponent } from './list/list.component';
 import { EServiceUiLicenseCheckModule } from '@ksp/e-service/ui/license-check';
-import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
+import { BottomNavComponent } from '@ksp/shared/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SharedFeatureDegreeCertModule } from '@ksp/shared/feature/degree-cert';
 import { EServiceUiVerifyResultBoxModule } from '@ksp/e-service/ui/verify-result-box';
@@ -18,7 +18,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatStepperModule } from '@angular/material/stepper';
 import { SharedFormDegreeCertStepOneModule } from '@ksp/shared/form/degree-cert/step-one';
 import { MatIconModule } from '@angular/material/icon';
-import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
+import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SharedFormDegreeCertStepTwoModule } from '@ksp/shared/form/degree-cert/step-two';
 import { FinalResultComponent } from './final-result/final-result.component';
 import { TopNavComponent } from '@ksp/shared/menu';
@@ -33,7 +33,7 @@ import { TopNavComponent } from '@ksp/shared/menu';
     EServiceUiVerifyResultBoxModule,
     EServiceStandardDegreeCertRoutingModule,
     SharedFeatureDegreeCertModule,
-    SharedUiBottomMenuModule,
+    BottomNavComponent,
     SharedFormDegreeCertSearchModule,
     SharedFeatureDegreeCertModule,
     SharedFormDegreeCertStepOneModule,

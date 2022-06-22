@@ -6,10 +6,10 @@ import { RetiredAttachmentComponent } from './retired-attachment/retired-attachm
 import { UniServiceFeatureRetiredRoutingModule } from './uni-service-feature-retired-routing.module';
 
 import { UniServiceUiNavModule } from '@ksp/uni-service/ui/nav';
-import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
+import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { UniServiceFormModule } from '@ksp/uni-service/form';
-import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
+import { BottomNavComponent } from '@ksp/shared/menu';
 import { TopNavComponent } from '@ksp/shared/menu';
 
 @NgModule({
@@ -21,7 +21,7 @@ import { TopNavComponent } from '@ksp/shared/menu';
     SharedFormOthersModule,
     RequestHeaderInfoComponent,
     UniServiceFormModule,
-    SharedUiBottomMenuModule,
+    BottomNavComponent,
   ],
   declarations: [
     RetiredSearchComponent,

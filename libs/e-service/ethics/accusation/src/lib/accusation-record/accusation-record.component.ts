@@ -7,12 +7,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AccusationSearchComponent } from '@ksp/e-service/dialog/accusation-search';
 import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-info';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
-import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
+import { BottomNavComponent } from '@ksp/shared/menu';
 import {
   LicenseInfoComponent,
   LicenseTypeButtonGroupComponent,
   RequestHeaderInfoComponent,
-} from '@ksp/shared/new-ui';
+} from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 
 @Component({
@@ -23,7 +23,7 @@ import { TopNavComponent } from '@ksp/shared/menu';
   imports: [
     MatTabsModule,
     CommonModule,
-    SharedUiBottomMenuModule,
+    BottomNavComponent,
     SharedFormOthersModule,
     EServiceUiAccusationInfoModule,
     RequestHeaderInfoComponent,

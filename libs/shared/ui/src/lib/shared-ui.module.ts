@@ -2,4 +2,4 @@ import { NgModule } from '@angular/core';
 @NgModule({
   imports: [],
 })
-export class SharedNewUiModule {}
+export class SharedUiModule {}

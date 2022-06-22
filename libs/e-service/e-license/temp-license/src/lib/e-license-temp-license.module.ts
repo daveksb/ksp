@@ -8,11 +8,11 @@ import { TempLicenseCheckForbiddenComponent } from './temp-license-check-forbidd
 import { TempLicenseCheckConfirmComponent } from './temp-license-check-confirm/temp-license-check-confirm.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TempLicenseApproveComponent } from './temp-license-approve/temp-license-approve.component';
-import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
+import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
-import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
+import { BottomNavComponent } from '@ksp/shared/menu';
 import { ELicenseTempLicenseRoutingModule } from './e-license-temp-license-routing.module';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { TopNavComponent } from '@ksp/shared/menu';
@@ -25,7 +25,7 @@ import { TopNavComponent } from '@ksp/shared/menu';
     MatDialogModule,
     SharedFormOthersModule,
     EServiceUiLicenseCheckModule,
-    SharedUiBottomMenuModule,
+    BottomNavComponent,
     RequestHeaderInfoComponent,
     TopNavComponent,
     MatTableModule,

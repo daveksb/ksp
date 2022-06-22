@@ -9,7 +9,7 @@ import { AddStaffPersonInfoComponent } from './add-staff-person-info/add-staff-p
 import { AddStaffTeachingInfoComponent } from './add-staff-teaching-info/add-staff-teaching-info.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
-import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
+import { BottomNavComponent } from '@ksp/shared/menu';
 import { SchoolServiceUiStaffSearchModule } from '@ksp/school-service/ui/staff-search';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
@@ -19,7 +19,7 @@ import {
   LicenseInfoComponent,
   LicenseTypeButtonGroupComponent,
   RequestHeaderInfoComponent,
-} from '@ksp/shared/new-ui';
+} from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 
 export const routes: Routes = [
@@ -47,7 +47,7 @@ export const routes: Routes = [
     ReactiveFormsModule,
     MatTabsModule,
     SharedFormOthersModule,
-    SharedUiBottomMenuModule,
+    BottomNavComponent,
     TopNavComponent,
     SchoolServiceUiStaffSearchModule,
     MatTableModule,

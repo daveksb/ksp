@@ -4,9 +4,9 @@ import { RouterModule, Route } from '@angular/router';
 import { ForeignTeacherIdRequestComponent } from './foreign-teacher-id-request/foreign-teacher-id-request.component';
 
 import { SchoolServiceContainerPageComponent } from '@ksp/school-service/feature/container-page';
-import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
+import { BottomNavComponent } from '@ksp/shared/menu';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
-import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
+import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 
 export const routes: Route[] = [
@@ -28,7 +28,7 @@ export const routes: Route[] = [
     RouterModule.forChild(routes),
     TopNavComponent,
     SharedFormOthersModule,
-    SharedUiBottomMenuModule,
+    BottomNavComponent,
     RequestHeaderInfoComponent,
   ],
   declarations: [ForeignTeacherIdRequestComponent],

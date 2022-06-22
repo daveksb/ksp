@@ -7,7 +7,7 @@ import { SchoolServiceContainerPageComponent } from '@ksp/school-service/feature
 
 import { SchoolServiceUiStaffSearchModule } from '@ksp/school-service/ui/staff-search';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
+import { BottomNavComponent } from '@ksp/shared/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -17,7 +17,7 @@ import { DynamicComponentDirective } from '@ksp/shared/directive';
 import {
   LicenseInfoComponent,
   RequestHeaderInfoComponent,
-} from '@ksp/shared/new-ui';
+} from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 
 export const routes: Routes = [
@@ -41,7 +41,7 @@ export const routes: Routes = [
     SchoolServiceUiStaffSearchModule,
     MatCheckboxModule,
     ReactiveFormsModule,
-    SharedUiBottomMenuModule,
+    BottomNavComponent,
     MatTableModule,
     MatIconModule,
     EServiceUiAccusationInfoModule,

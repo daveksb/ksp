@@ -97,7 +97,7 @@
 </div>
 
 <div class="bottom__container">
-  <ksp-bottom-menu
+  <ksp-bottom-nav
     (saveClicked)="save()"
     (cancelClicked)="cancel()"
     (tempSaveClicked)="back()"
@@ -108,5 +108,5 @@
     [showCancelButton]="true"
     [showTempSaveButton]="true"
     [showSaveButton]="selectedTabIndex === 5"
-  ></ksp-bottom-menu>
+  ></ksp-bottom-nav>
 </div>

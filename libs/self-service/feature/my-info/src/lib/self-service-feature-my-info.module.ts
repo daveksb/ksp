@@ -6,7 +6,7 @@ import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master
 
 import { PersonInfoComponent } from './person-info/person-info.component';
 import { PaymentHistoryItemComponent } from '@ksp/self-service/ui';
-import { PageNotFoundComponent } from '@ksp/shared/new-ui';
+import { PageNotFoundComponent } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 
 export const routes: Route[] = [

@@ -3,15 +3,10 @@ import { CommonModule } from '@angular/common';
 import { SchoolServiceContainerPageComponent } from './school-service-container-page/school-service-container-page.component';
 import { RouterModule } from '@angular/router';
 import { SharedMenuModule } from '@ksp/shared/menu';
-import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
+import { BottomNavComponent } from '@ksp/shared/menu';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    SharedMenuModule,
-    SharedUiBottomMenuModule,
-    RouterModule,
-  ],
+  imports: [CommonModule, SharedMenuModule, BottomNavComponent, RouterModule],
   declarations: [SchoolServiceContainerPageComponent],
   exports: [SchoolServiceContainerPageComponent],
 })
