@@ -6,7 +6,7 @@ import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master
 import { PageNotFoundComponent } from '@ksp/shared/ui/page-not-found';
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 import { PersonInfoComponent } from './person-info/person-info.component';
-import { PaymentHistoryBoxComponent } from '@ksp/self-service/feature/payment';
+import { PaymentHistoryItemComponent } from '@ksp/self-service/feature/payment';
 
 export const routes: Route[] = [
   {
@@ -39,7 +39,7 @@ export const routes: Route[] = [
     CommonModule,
     SharedUiTopNavModule,
     RouterModule.forChild(routes),
-    PaymentHistoryBoxComponent,
+    PaymentHistoryItemComponent,
   ],
   declarations: [PaymentHistoryComponent, PersonInfoComponent],
 })
