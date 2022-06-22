@@ -7,7 +7,14 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 
-export type controlName = 'nameTh' | 'nameEng' | 'prefixTh' | 'prefixEng';
+export type controlName =
+  | 'prefixTh'
+  | 'prefixEng'
+  | 'nameTh'
+  | 'nameEng'
+  | 'lastnameTh'
+  | 'lastnameEng'
+  | 'distributeData';
 
 @Component({
   selector: 'self-service-license-edit',
@@ -15,11 +22,6 @@ export type controlName = 'nameTh' | 'nameEng' | 'prefixTh' | 'prefixEng';
   styleUrls: ['./license-edit.component.css'],
 })
 export class LicenseEditComponent implements OnInit {
-  editPrefixCheck = false;
-  editNameCheck = false;
-  editLastnameCheck = false;
-  distributeCheck = false;
-
   form = this.fb.group({
     prefixTh: [],
     prefixEng: [],
@@ -68,8 +70,7 @@ export class LicenseEditComponent implements OnInit {
   }
 
   onConfirm() {
-    console.log('edit prefix check = ', this.editPrefixCheck);
-    /* const dialog = this.dialog.open(ConfirmDialogComponent, {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
       width: '375px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่`,
@@ -83,7 +84,7 @@ export class LicenseEditComponent implements OnInit {
       if (res) {
         this.onSaveAndRequest();
       }
-    }); */
+    });
   }
 
   onSaveAndRequest() {

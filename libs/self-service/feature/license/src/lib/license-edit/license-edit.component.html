@@ -70,7 +70,11 @@
       </div>
     </div>
     <div class="checkbox__container">
-      <input type="checkbox" class="checkbox-1" />
+      <input
+        type="checkbox"
+        class="checkbox-1"
+        (change)="disableControlA($event, ['nameTh', 'nameEng'])"
+      />
       <label class="checkbox-label">เปลี่ยนชื่อ</label>
     </div>
     <div class="content__container--three-columns">
@@ -113,7 +117,12 @@
       </div>
     </div>
     <div class="checkbox__container">
-      <input id="check_1" type="checkbox" class="checkbox-1" />
+      <input
+        id="check_1"
+        type="checkbox"
+        class="checkbox-1"
+        (change)="disableControlA($event, ['lastnameTh', 'lastnameEng'])"
+      />
       <label class="checkbox-label">เปลี่ยนนามสกุล</label>
     </div>
     <div class="content__container--three-columns">
@@ -156,7 +165,12 @@
       </div>
     </div>
     <div class="checkbox__container">
-      <input id="check_1" type="checkbox" class="checkbox-1" />
+      <input
+        id="check_1"
+        type="checkbox"
+        class="checkbox-1"
+        (change)="disableControlA($event, ['distributeData'])"
+      />
       <label class="checkbox-label">จำหน่ายข้อมูล</label>
     </div>
     <div class="content__container">
