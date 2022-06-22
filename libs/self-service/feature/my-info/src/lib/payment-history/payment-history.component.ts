@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ViewReceiveComponent } from '@ksp/self-service/ui/payment';
+import { ViewReceiveComponent } from '@ksp/self-service/feature/payment';
 
 @Component({
   selector: 'self-service-payment-history',

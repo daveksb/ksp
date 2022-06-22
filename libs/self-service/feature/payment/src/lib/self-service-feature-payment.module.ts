@@ -21,4 +21,4 @@ import { MatIconModule } from '@angular/material/icon';
   ],
   exports: [PaymentChannelComponent, PromptpayComponent, ViewReceiveComponent],
 })
-export class SelfServiceUiPaymentModule {}
+export class SelfServiceFeaturePaymentModule {}

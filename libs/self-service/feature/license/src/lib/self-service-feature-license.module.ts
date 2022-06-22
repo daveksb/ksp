@@ -13,7 +13,7 @@ import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master
 import {
   PaymentChannelComponent,
   PromptpayComponent,
-} from '@ksp/self-service/ui/payment';
+} from '@ksp/self-service/feature/payment';
 import { PageNotFoundComponent } from '@ksp/shared/ui/page-not-found';
 import { MatExpansionModule } from '@angular/material/expansion';
 

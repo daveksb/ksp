@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'self-service-ui-payment',
+  displayName: 'self-service-feature-payment',
   preset: '../../../../jest.preset.ts',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../../coverage/libs/self-service/ui/payment',
+  coverageDirectory: '../../../../coverage/libs/self-service/feature/payment',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },
