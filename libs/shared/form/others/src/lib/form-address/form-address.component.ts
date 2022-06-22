@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'ksp-form-address',
@@ -8,5 +9,17 @@ import { Component, Input } from '@angular/core';
 export class FormAddressComponent {
   @Input() isWhiteMode = true;
 
-  constructor() {}
+  form = this.fb.group({
+    location: [],
+    houseNumber: [],
+    villageNumber: [],
+    lane: [],
+    road: [],
+    zipCode: [],
+    provience: [],
+    subDistrict: [],
+    district: [],
+  });
+
+  constructor(private fb: FormBuilder) {}
 }

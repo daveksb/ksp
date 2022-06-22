@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { DynamicComponent } from '@ksp/shared/interface';
 
 @Component({
@@ -7,5 +8,15 @@ import { DynamicComponent } from '@ksp/shared/interface';
   styleUrls: ['./education-level-form-four.component.scss'],
 })
 export class EducationLevelFormFourComponent implements DynamicComponent {
+  form = this.fb.group({
+    educationInstitution: [],
+    graduateDegree: [],
+    branch: [],
+    admissionDate: [],
+    graduateDate: [],
+    approveAcademic: [],
+  });
   @Input() data: any;
+
+  constructor(private fb: FormBuilder) {}
 }

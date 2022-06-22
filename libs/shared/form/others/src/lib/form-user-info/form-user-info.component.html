@@ -1,112 +1,147 @@
-<div class="detail__container">
-  <div class="content__container">
-    <div class="mb-3">
-      <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
-      <select
-        [class.white__background]="isWhiteMode"
-        class="form-select form-select-sm"
-      >
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
+<form [formGroup]="form">
+  <div class="detail__container">
+    <div class="content__container">
+      <div class="mb-3">
+        <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
+        <select
+          [ngClass]="{
+            form__control__white: isWhiteMode
+          }"
+          class="form-select form-select-sm"
+          formControlName="prefixTh"
+        >
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">ชื่อ</label>
+        <input
+          [ngClass]="{
+            form__control__white: isWhiteMode
+          }"
+          class="form-control form-control-sm"
+          type="text"
+          formControlName="nameTh"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">นามสกุล</label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          [ngClass]="{
+            form__control__white: isWhiteMode
+          }"
+          formControlName="lastnameTh"
+        />
+      </div>
     </div>
-    <div class="mb-3">
-      <label class="form-label">ชื่อ</label>
-      <input
-        [class.white__background]="isWhiteMode"
-        class="form-control form-control-sm"
-        type="text"
-      />
+    <div class="content__container">
+      <div class="mb-3">
+        <label class="form-label">คำนำหน้าชื่อภาษาอังกฤษ</label>
+        <select
+          [ngClass]="{
+            form__control__white: isWhiteMode
+          }"
+          class="form-select form-select-sm"
+          formControlName="prefixEng"
+        >
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">ชื่อ</label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          [ngClass]="{
+            form__control__white: isWhiteMode
+          }"
+          formControlName="nameEng"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">นามสกุล</label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          [ngClass]="{
+            form__control__white: isWhiteMode
+          }"
+          formControlName="lastnameEng"
+        />
+      </div>
     </div>
-    <div class="mb-3">
-      <label class="form-label">นามสกุล</label>
-      <input
-        class="form-control form-control-sm"
-        type="text"
-        [class.white__background]="isWhiteMode"
-      />
+    <div class="content__container--secondary">
+      <div class="mb-3">
+        <label class="form-label">เพศ</label>
+        <select
+          [ngClass]="{
+            form__control__white: isWhiteMode
+          }"
+          class="form-select form-select-sm"
+          formControlName="sex"
+        >
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">วันเดือนปีเกิด</label>
+        <input
+          class="form-control form-control-sm"
+          type="date"
+          [ngClass]="{
+            form__control__white: isWhiteMode
+          }"
+          formControlName="birthdate"
+        />
+      </div>
+    </div>
+    <div class="content__container--secondary">
+      <div class="mb-3">
+        <label class="form-label">อีเมล</label>
+        <input
+          class="form-control form-control-sm"
+          type="email"
+          [ngClass]="{
+            form__control__white: isWhiteMode
+          }"
+          formControlName="email"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
+        <input
+          class="form-control form-control-sm"
+          type="tel"
+          [ngClass]="{
+            form__control__white: isWhiteMode
+          }"
+          formControlName="contactPhone"
+        />
+      </div>
+    </div>
+    <div class="content__container--secondary">
+      <div class="mb-3">
+        <label class="form-label">เบอร์โทรศัพท์ (ที่ทำงาน)</label>
+        <input
+          class="form-control form-control-sm"
+          type="tel"
+          [ngClass]="{
+            form__control__white: isWhiteMode
+          }"
+          formControlName="workplacePhone"
+        />
+      </div>
     </div>
   </div>
-  <div class="content__container">
-    <div class="mb-3">
-      <label class="form-label">คำนำหน้าชื่อภาษาอังกฤษ</label>
-      <select
-        [class.white__background]="isWhiteMode"
-        class="form-select form-select-sm"
-      >
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-    <div class="mb-3">
-      <label class="form-label">ชื่อ</label>
-      <input
-        class="form-control form-control-sm"
-        type="text"
-        [class.white__background]="isWhiteMode"
-      />
-    </div>
-    <div class="mb-3">
-      <label class="form-label">นามสกุล</label>
-      <input
-        class="form-control form-control-sm"
-        type="text"
-        [class.white__background]="isWhiteMode"
-      />
-    </div>
-  </div>
-  <div class="content__container--secondary">
-    <div class="mb-3">
-      <label class="form-label">เพศ</label>
-      <select
-        [class.white__background]="isWhiteMode"
-        class="form-select form-select-sm"
-      >
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-    <div class="mb-3">
-      <label class="form-label">วันเดือนปีเกิด</label>
-      <input
-        class="form-control form-control-sm"
-        type="date"
-        [class.white__background]="isWhiteMode"
-      />
-    </div>
-  </div>
-  <div class="content__container--secondary">
-    <div class="mb-3">
-      <label class="form-label">อีเมล</label>
-      <input
-        class="form-control form-control-sm"
-        type="email"
-        [class.white__background]="isWhiteMode"
-      />
-    </div>
-    <div class="mb-3">
-      <label class="form-label">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
-      <input
-        class="form-control form-control-sm"
-        type="tel"
-        [class.white__background]="isWhiteMode"
-      />
-    </div>
-  </div>
-  <div class="content__container--secondary">
-    <div class="mb-3">
-      <label class="form-label">เบอร์โทรศัพท์ (ที่ทำงาน)</label>
-      <input
-        class="form-control form-control-sm"
-        type="tel"
-        [class.white__background]="isWhiteMode"
-      />
-    </div>
-  </div>
-</div>
+</form>

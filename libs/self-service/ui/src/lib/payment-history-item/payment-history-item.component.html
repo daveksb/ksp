@@ -1,11 +1,17 @@
 <div class="box__container">
   <div class="box__content">
     <div>
-      ใบเสร็จรับเงิน : <span>รายการขอต่ออายุใบอนุญาตประกอบวิชาชีพ</span>
+      ใบเสร็จรับเงิน : <span>{{ name }}</span>
     </div>
-    <div>ชำระเมื่อวันที่ : <span>10-02-2022 / 14:00น.</span></div>
-    <div>จำนวนเงิน : <span>500 บาท</span></div>
-    <div>เลขที่ใบเสร็จ : <span>6304255</span></div>
+    <div>
+      ชำระเมื่อวันที่ : <span>{{ date }}</span>
+    </div>
+    <div>
+      จำนวนเงิน : <span>{{ amount }}</span>
+    </div>
+    <div>
+      เลขที่ใบเสร็จ : <span>{{ order }}</span>
+    </div>
   </div>
   <hr />
   <div class="box__footer">

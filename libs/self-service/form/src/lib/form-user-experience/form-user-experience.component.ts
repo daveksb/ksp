@@ -8,6 +8,9 @@ import { FormBuilder } from '@angular/forms';
 })
 export class FormUserExperienceComponent implements OnInit {
   form = this.fb.group({
+    TrainingAddressOne: [],
+    TrainingAddressTwo: [],
+    teachingAddress: [],
     selectValue: [''],
   });
 
