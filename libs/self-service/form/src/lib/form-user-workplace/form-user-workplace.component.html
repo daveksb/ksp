@@ -1,83 +1,118 @@
-<div class="content__container">
-  <div class="mb-3">
-    <label class="form-label">สังกัด</label>
-    <select class="search__content form-select form-select-sm">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+<form [formGroup]="form">
+  <div class="content__container">
+    <div class="mb-3">
+      <label class="form-label">สังกัด</label>
+      <select
+        class="search__content form-select form-select-sm"
+        formControlName="affiliation"
+      >
+        <option selected>กรุณาเลือก</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">ชื่อหน่วยงาน/สถานศึกษา</label>
+      <input
+        class="form-control form-control-sm"
+        type="text"
+        (click)="openSearchDialog()"
+        formControlName="addressName"
+      />
+    </div>
   </div>
 
-  <div class="mb-3">
-    <label class="form-label">ชื่อหน่วยงาน/สถานศึกษา</label>
-    <input
-      class="form-control form-control-sm"
-      type="text"
-      (click)="openSearchDialog()"
-    />
-  </div>
-</div>
+  <div class="content__container">
+    <div class="mb-3">
+      <label class="form-label">ที่อยู่/เลขที่</label>
+      <input
+        class="form-control form-control-sm"
+        type="text"
+        formControlName="houseNumber"
+      />
+    </div>
 
-<div class="content__container">
-  <div class="mb-3">
-    <label class="form-label">ที่อยู่/เลขที่</label>
-    <input class="form-control form-control-sm" type="text" />
-  </div>
-
-  <div class="mb-3">
-    <label class="form-label">หมู่ที่</label>
-    <input class="form-control form-control-sm" type="text" />
-  </div>
-</div>
-
-<div class="content__container">
-  <div class="mb-3">
-    <label class="form-label">ซอย</label>
-    <input class="form-control form-control-sm" type="text" />
+    <div class="mb-3">
+      <label class="form-label">หมู่ที่</label>
+      <input
+        class="form-control form-control-sm"
+        type="text"
+        formControlName="villageNumber"
+      />
+    </div>
   </div>
 
-  <div class="mb-3">
-    <label class="form-label">ถนน</label>
-    <input class="form-control form-control-sm" type="text" />
-  </div>
-</div>
+  <div class="content__container">
+    <div class="mb-3">
+      <label class="form-label">ซอย</label>
+      <input
+        class="form-control form-control-sm"
+        type="text"
+        formControlName="lane"
+      />
+    </div>
 
-<div class="content__container">
-  <div class="mb-3">
-    <label class="form-label">รหัสไปรษณีย์</label>
-    <input class="form-control form-control-sm" type="text" />
-  </div>
-
-  <div class="mb-3">
-    <label class="form-label">จังหวัด</label>
-    <select class="search__content form-select form-select-sm">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
-  </div>
-</div>
-
-<div class="content__container">
-  <div class="mb-3">
-    <label class="form-label">ตำบล</label>
-    <select class="search__content form-select form-select-sm">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+    <div class="mb-3">
+      <label class="form-label">ถนน</label>
+      <input
+        class="form-control form-control-sm"
+        type="text"
+        formControlName="road"
+      />
+    </div>
   </div>
 
-  <div class="mb-3">
-    <label class="form-label">อำเภอ</label>
-    <select class="search__content form-select form-select-sm">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+  <div class="content__container">
+    <div class="mb-3">
+      <label class="form-label">รหัสไปรษณีย์</label>
+      <input
+        class="form-control form-control-sm"
+        type="text"
+        formControlName="zipCode"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">จังหวัด</label>
+      <select
+        class="search__content form-select form-select-sm"
+        formControlName="provience"
+      >
+        <option selected>กรุณาเลือก</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
   </div>
-</div>
+
+  <div class="content__container">
+    <div class="mb-3">
+      <label class="form-label">ตำบล</label>
+      <select
+        class="search__content form-select form-select-sm"
+        formControlName="subDistrict"
+      >
+        <option selected>กรุณาเลือก</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">อำเภอ</label>
+      <select
+        class="search__content form-select form-select-sm"
+        formControlName="district"
+      >
+        <option selected>กรุณาเลือก</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+  </div>
+</form>
