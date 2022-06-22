@@ -60,6 +60,5 @@ export const routes: Routes = [
     RouterModule.forChild(routes),
   ],
   declarations: [LicenseRequestComponent, LicenseEditComponent],
-  exports: [LicenseRequestComponent, LicenseEditComponent],
 })
 export class SelfServiceFeatureLicenseModule {}

@@ -21,11 +21,6 @@
   margin: 15px 55px;
 }
 
-.content__container {
-  display: grid;
-  grid-template-columns: 15% auto;
-}
-
 .checkbox__container-2 {
   display: flex;
   line-height: 15px;
@@ -62,6 +57,4 @@
     padding: 12px 24px;
     margin-bottom: 8px;
   }
-
- 
 }
