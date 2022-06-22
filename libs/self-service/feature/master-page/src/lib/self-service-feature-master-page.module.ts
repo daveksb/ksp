@@ -13,6 +13,5 @@ import { RouterModule } from '@angular/router';
     SharedUiTopNavModule,
   ],
   declarations: [SelfServiceMasterPageComponent],
-  exports: [SelfServiceMasterPageComponent],
 })
 export class SelfServiceFeatureMasterPageModule {}

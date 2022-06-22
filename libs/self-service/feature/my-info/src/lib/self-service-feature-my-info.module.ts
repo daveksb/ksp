@@ -42,6 +42,5 @@ export const routes: Route[] = [
     PaymentHistoryBoxComponent,
   ],
   declarations: [PaymentHistoryComponent, PersonInfoComponent],
-  exports: [PaymentHistoryComponent, PersonInfoComponent],
 })
 export class SelfServiceFeatureMyInfoModule {}
