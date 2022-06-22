@@ -5,7 +5,6 @@ import { ConfirmDialogComponent } from '@ksp/shared/ui/dialog';
 import { ForbiddenPropertyComponent } from '@ksp/shared/ui/forbidden-property';
 
 @Component({
-  selector: 'self-service-license-request',
   templateUrl: './license-request.component.html',
   styleUrls: ['./license-request.component.css'],
 })

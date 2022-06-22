@@ -5,6 +5,5 @@ import { SelfServiceThaiLoginComponent } from './self-service-thai-login/self-se
 @NgModule({
   imports: [CommonModule],
   declarations: [SelfServiceThaiLoginComponent],
-  exports: [SelfServiceThaiLoginComponent],
 })
 export class SelfServiceFeatureLoginModule {}

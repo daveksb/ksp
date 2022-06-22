@@ -50,15 +50,15 @@ h3 {
 
 .btn {
   width: 150px;
+  font-size: 20px;
 }
 
 #btn-confirm {
   margin-left: 20px;
-  font-size: 20px;
 }
 
-#btn-back {
-  font-size: 20px;
+#btn-upload {
+  background-color: #fff;
 }
 
 .form__footer {
@@ -76,10 +76,6 @@ h3 {
 
 .field__container {
   padding: 0 200px;
-}
-
-#btn-upload {
-  background-color: #fff;
 }
 
 /* mobile */

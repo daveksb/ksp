@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'ksp-self-service-home',
   templateUrl: './self-service-home.component.html',
   styleUrls: ['./self-service-home.component.css'],
 })
