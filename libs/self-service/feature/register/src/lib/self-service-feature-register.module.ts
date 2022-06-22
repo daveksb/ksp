@@ -8,6 +8,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule, Routes } from '@angular/router';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { RegisterCompletedComponent } from './register-completed/register-completed.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export const routes: Routes = [
   {
@@ -36,6 +37,7 @@ export const routes: Routes = [
     MatDialogModule,
     SelfServiceFormModule,
     RouterModule.forChild(routes),
+    ReactiveFormsModule
   ],
   declarations: [
     RegisterStepOneComponent,

@@ -24,22 +24,22 @@
 }
 
 .box--primary {
-  background: #fbfbfb;
+  background: #fff;
   box-shadow: 0px 2px 4px #fb7290;
 }
 
 .box--secondary {
-  background: #ffffff;
+  background: #fff;
   box-shadow: 0px 2px 4px #5cc6c6;
 }
 
 .box--third {
-  background: #ffffff;
+  background: #fff;
   box-shadow: 0px 2px 4px #7e71fc;
 }
 
 .box--fourth {
-  background: #ffffff;
+  background: #fff;
   box-shadow: 0px 2px 4px #125eaf;
 }
 

@@ -1,39 +1,51 @@
-<div class="container">
-  <div class="form__container">
-    <h3>สมัครสมาชิก</h3>
-    <div><img src="/assets/images/first-step-progress.png" /></div>
+<form [formGroup]="form">
+  <div class="container">
+    <div class="form__container">
+      <h3>สมัครสมาชิก</h3>
+      <div><img src="/assets/images/first-step-progress.png" /></div>
 
-    <div class="form__detail">
-      <div class="detail__container">
-        <div class="detail__container--left">
-          <div class="form__header">ตั้งค่าการเข้าใช้งาน</div>
+      <div class="form__detail">
+        <div class="detail__container">
+          <div class="detail__container--left">
+            <div class="form__header">ตั้งค่าการเข้าใช้งาน</div>
 
-          <div class="form-group field__container">
-            <label class="form__detail">รหัสเข้าใช้งาน</label>
-            <input type="text" class="form-control" placeholder="" />
+            <div class="form-group field__container">
+              <label class="form__detail">รหัสเข้าใช้งาน</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder=""
+                formControlName="password"
+              />
+            </div>
+          </div>
+          <div class="detail__container--right">
+            <div class="form-group field__container">
+              <label for="lastnameFormControlInput" class="form__detail"
+                >ยืนยันรหัสเข้าใช้งาน</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                placeholder=""
+                formControlName="confirmPassword"
+              />
+            </div>
           </div>
         </div>
-        <div class="detail__container--right">
-          <div class="form-group field__container">
-            <label for="lastnameFormControlInput" class="form__detail"
-              >ยืนยันรหัสเข้าใช้งาน</label
-            >
-            <input type="text" class="form-control" placeholder="" />
-          </div>
-        </div>
-      </div>
 
-      <div class="form__footer">
-        <button
-          id="btn-confirm"
-          (click)="openDialog()"
-          type="submit"
-          class="btn btn-primary"
-        >
-          ยืนยันรหัส
-        </button>
-        <div (click)="loginPage()" class="label__login">เข้าสู่ระบบ</div>
+        <div class="form__footer">
+          <button
+            id="btn-confirm"
+            (click)="openDialog()"
+            type="submit"
+            class="btn btn-primary"
+          >
+            ยืนยันรหัส
+          </button>
+          <div (click)="loginPage()" class="label__login">เข้าสู่ระบบ</div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</form>
