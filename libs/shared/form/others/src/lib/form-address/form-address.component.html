@@ -1,124 +1,135 @@
-<div
-  [ngClass]="{
-    form__container__white: isWhiteMode
-  }"
-  class="form__container"
->
-  <div class="form__header"><ng-content></ng-content></div>
-  <div class="content__container">
-    <div class="mb-3">
-      <label class="form-label">อาคาร/สถานที่</label>
-      <input
-        [ngClass]="{
-          form__control__white: isWhiteMode
-        }"
-        class="form-control form-control-sm"
-        type="text"
-      />
+<form [formGroup]="form">
+  <div
+    [ngClass]="{
+      form__container__white: isWhiteMode
+    }"
+    class="form__container"
+  >
+    <div class="form__header"><ng-content></ng-content></div>
+    <div class="content__container">
+      <div class="mb-3">
+        <label class="form-label">อาคาร/สถานที่</label>
+        <input
+          [ngClass]="{
+            form__control__white: isWhiteMode
+          }"
+          class="form-control form-control-sm"
+          type="text"
+          formControlName="location"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">บ้านเลขที่</label>
+        <input
+          [ngClass]="{
+            form__control__white: isWhiteMode
+          }"
+          class="form-control form-control-sm"
+          type="text"
+          formControlName="houseNumber"
+        />
+      </div>
     </div>
-    <div class="mb-3">
-      <label class="form-label">บ้านเลขที่</label>
-      <input
-        [ngClass]="{
-          form__control__white: isWhiteMode
-        }"
-        class="form-control form-control-sm"
-        type="text"
-      />
-    </div>
-  </div>
 
-  <div class="content__container">
-    <div class="mb-3">
-      <label class="form-label">หมู่ที่</label>
-      <input
-        [ngClass]="{
-          form__control__white: isWhiteMode
-        }"
-        class="form-control form-control-sm"
-        type="text"
-      />
+    <div class="content__container">
+      <div class="mb-3">
+        <label class="form-label">หมู่ที่</label>
+        <input
+          [ngClass]="{
+            form__control__white: isWhiteMode
+          }"
+          class="form-control form-control-sm"
+          type="text"
+          formControlName="villageNumber"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">ซอย</label>
+        <input
+          [ngClass]="{
+            form__control__white: isWhiteMode
+          }"
+          class="form-control form-control-sm"
+          type="text"
+          formControlName="lane"
+        />
+      </div>
     </div>
-    <div class="mb-3">
-      <label class="form-label">ซอย</label>
-      <input
-        [ngClass]="{
-          form__control__white: isWhiteMode
-        }"
-        class="form-control form-control-sm"
-        type="text"
-      />
-    </div>
-  </div>
 
-  <div class="content__container">
-    <div class="mb-3">
-      <label class="form-label">ถนน</label>
-      <input
-        [ngClass]="{
-          form__control__white: isWhiteMode
-        }"
-        class="form-control form-control-sm"
-        type="text"
-      />
+    <div class="content__container">
+      <div class="mb-3">
+        <label class="form-label">ถนน</label>
+        <input
+          [ngClass]="{
+            form__control__white: isWhiteMode
+          }"
+          class="form-control form-control-sm"
+          type="text"
+          formControlName="road"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">รหัสไปรษณีย์</label>
+        <input
+          [ngClass]="{
+            form__control__white: isWhiteMode
+          }"
+          class="form-control form-control-sm"
+          type="text"
+          formControlName="zipCode"
+        />
+      </div>
     </div>
-    <div class="mb-3">
-      <label class="form-label">รหัสไปรษณีย์</label>
-      <input
-        [ngClass]="{
-          form__control__white: isWhiteMode
-        }"
-        class="form-control form-control-sm"
-        type="text"
-      />
-    </div>
-  </div>
 
-  <div class="content__container">
-    <div class="mb-3">
-      <label class="form-label">จังหวัด</label>
-      <select
-        [ngClass]="{
-          form__select__white: isWhiteMode
-        }"
-        class="form-select form-select-sm"
-      >
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
+    <div class="content__container">
+      <div class="mb-3">
+        <label class="form-label">จังหวัด</label>
+        <select
+          [ngClass]="{
+            form__select__white: isWhiteMode
+          }"
+          class="form-select form-select-sm"
+          formControlName="provience"
+        >
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">ตำบล</label>
+        <select
+          [ngClass]="{
+            form__select__white: isWhiteMode
+          }"
+          class="form-select form-select-sm"
+          formControlName="subDistrict"
+        >
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
     </div>
-    <div class="mb-3">
-      <label class="form-label">ตำบล</label>
-      <select
-        [ngClass]="{
-          form__select__white: isWhiteMode
-        }"
-        class="form-select form-select-sm"
-      >
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-  </div>
 
-  <div class="content__container">
-    <div class="mb-3">
-      <label class="form-label">อำเภอ</label>
-      <select
-        [ngClass]="{
-          form__select__white: isWhiteMode
-        }"
-        class="form-select form-select-sm"
-      >
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
+    <div class="content__container">
+      <div class="mb-3">
+        <label class="form-label">อำเภอ</label>
+        <select
+          [ngClass]="{
+            form__select__white: isWhiteMode
+          }"
+          class="form-select form-select-sm"
+          formControlName="district"
+        >
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
     </div>
   </div>
-</div>
+</form>
