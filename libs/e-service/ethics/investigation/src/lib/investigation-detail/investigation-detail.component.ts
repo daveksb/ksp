@@ -12,8 +12,10 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
-import { SharedUiLicenseTypeButtonGroupModule } from '@ksp/shared/ui/license-type-button-group';
-import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
+import {
+  LicenseTypeButtonGroupComponent,
+  RequestHeaderInfoComponent,
+} from '@ksp/shared/new-ui';
 
 @Component({
   selector: 'e-service-investigation-detail',
@@ -25,11 +27,11 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
     CommonModule,
     SharedUiBottomMenuModule,
     SharedFormOthersModule,
-    SharedUiLicenseTypeButtonGroupModule,
     EServiceUiAccusationInfoModule,
     SharedUiLicenseInfoModule,
     RequestHeaderInfoComponent,
     MatIconModule,
+    LicenseTypeButtonGroupComponent,
   ],
 })
 export class InvestigationDetailComponent {

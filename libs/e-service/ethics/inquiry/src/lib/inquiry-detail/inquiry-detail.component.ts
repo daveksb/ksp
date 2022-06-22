@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { Router } from '@angular/router';
@@ -7,8 +7,10 @@ import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-inf
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
-import { SharedUiLicenseTypeButtonGroupModule } from '@ksp/shared/ui/license-type-button-group';
-import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
+import {
+  LicenseTypeButtonGroupComponent,
+  RequestHeaderInfoComponent,
+} from '@ksp/shared/new-ui';
 
 @Component({
   selector: 'e-service-inquiry-detail',
@@ -21,10 +23,10 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
     MatIconModule,
     SharedUiBottomMenuModule,
     SharedFormOthersModule,
-    SharedUiLicenseTypeButtonGroupModule,
     EServiceUiAccusationInfoModule,
     SharedUiLicenseInfoModule,
     RequestHeaderInfoComponent,
+    LicenseTypeButtonGroupComponent,
   ],
 })
 export class InquiryDetailComponent {

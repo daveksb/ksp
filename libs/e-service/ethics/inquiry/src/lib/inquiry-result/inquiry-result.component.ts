@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
 import { Router } from '@angular/router';
@@ -11,8 +11,10 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
-import { SharedUiLicenseTypeButtonGroupModule } from '@ksp/shared/ui/license-type-button-group';
-import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
+import {
+  LicenseTypeButtonGroupComponent,
+  RequestHeaderInfoComponent,
+} from '@ksp/shared/new-ui';
 
 @Component({
   selector: 'e-service-inquiry-result',
@@ -24,10 +26,10 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
     CommonModule,
     SharedUiBottomMenuModule,
     SharedFormOthersModule,
-    SharedUiLicenseTypeButtonGroupModule,
     EServiceUiAccusationInfoModule,
     SharedUiLicenseInfoModule,
     RequestHeaderInfoComponent,
+    LicenseTypeButtonGroupComponent,
   ],
 })
 export class InquiryResultComponent {
@@ -37,7 +39,7 @@ export class InquiryResultComponent {
   @Input() hideContainer = false;
   @Input() hideTitle = false;
 
-  cancel() {
+  goToInquiry() {
     this.router.navigate(['/', 'ethics', 'inquiry']);
   }
 
@@ -64,7 +66,6 @@ export class InquiryResultComponent {
 
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      height: '275px',
       width: '375px',
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
@@ -77,7 +78,7 @@ export class InquiryResultComponent {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'ethics', 'inquiry']);
+        this.goToInquiry();
       }
     });
   }
