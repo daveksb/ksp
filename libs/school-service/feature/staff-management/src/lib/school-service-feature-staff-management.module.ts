@@ -17,7 +17,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedUiLicenseTypeButtonGroupModule } from '@ksp/shared/ui/license-type-button-group';
-import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
+import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
 
 export const routes: Routes = [
   {
@@ -51,7 +51,7 @@ export const routes: Routes = [
     MatTableModule,
     MatIconModule,
     SharedUiLicenseTypeButtonGroupModule,
-    RequestHeaderInfoComponent
+    RequestHeaderInfoComponent,
   ],
   declarations: [
     StaffListComponent,

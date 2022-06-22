@@ -13,7 +13,7 @@ import { AccusationDecisionComponent } from './accusation-decision/accusation-de
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
 import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
 import { SharedUiLicenseTypeButtonGroupModule } from '@ksp/shared/ui/license-type-button-group';
-import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
+import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 
 @NgModule({
@@ -32,8 +32,7 @@ import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
     SharedUiLicenseTypeButtonGroupModule,
     SharedUiBottomMenuModule,
     RequestHeaderInfoComponent,
-    SharedUiTopNavModule
-
+    SharedUiTopNavModule,
   ],
   declarations: [AccusationDecisionComponent],
   exports: [AccusationDecisionComponent],

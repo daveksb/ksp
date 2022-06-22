@@ -6,7 +6,7 @@ import { RetiredAttachmentComponent } from './retired-attachment/retired-attachm
 import { UniServiceFeatureRetiredRoutingModule } from './uni-service-feature-retired-routing.module';
 import { SharedUiTopNavModule } from '@ksp/shared/ui/top-nav';
 import { UniServiceUiNavModule } from '@ksp/uni-service/ui/nav';
-import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
+import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { UniServiceFormModule } from '@ksp/uni-service/form';
 import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
@@ -20,8 +20,7 @@ import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
     SharedFormOthersModule,
     RequestHeaderInfoComponent,
     UniServiceFormModule,
-    SharedUiBottomMenuModule
-
+    SharedUiBottomMenuModule,
   ],
   declarations: [
     RetiredSearchComponent,

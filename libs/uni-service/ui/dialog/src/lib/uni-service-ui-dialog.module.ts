@@ -5,7 +5,7 @@ import { ForgotPasswordSetNewPasswordComponent } from './forgot-password-set-new
 import { ForgotPasswordNotFoundComponent } from './forgot-password-not-found/forgot-password-not-found.component';
 import { TrainingAddressComponent } from './training-address/training-address.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { AddRowButtonComponent } from '@ksp/shared/ui/add-row-button';
+import { AddRowButtonComponent } from '@ksp/shared/new-ui';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';

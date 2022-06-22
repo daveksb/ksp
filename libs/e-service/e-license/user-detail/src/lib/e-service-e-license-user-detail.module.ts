@@ -4,7 +4,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { EServiceUiLicenseCheckModule } from '@ksp/e-service/ui/license-check';
 import { MatDialogModule } from '@angular/material/dialog';
-import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
+import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
 import {
   FormCoordinatorInfoComponent,
   FormRequesterInfoComponent,
@@ -22,7 +22,7 @@ import { SharedUiBottomMenuModule } from '@ksp/shared/ui/bottom-menu';
     FormRequesterInfoComponent,
     FormCoordinatorInfoComponent,
     SharedUiTopNavModule,
-    SharedUiBottomMenuModule
+    SharedUiBottomMenuModule,
   ],
   declarations: [UserDetailComponent],
   exports: [UserDetailComponent],

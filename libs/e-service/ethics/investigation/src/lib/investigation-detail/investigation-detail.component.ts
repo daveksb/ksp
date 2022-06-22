@@ -13,7 +13,7 @@ import {
 } from '@ksp/shared/dialog';
 import { SharedUiLicenseInfoModule } from '@ksp/shared/ui/license-info';
 import { SharedUiLicenseTypeButtonGroupModule } from '@ksp/shared/ui/license-type-button-group';
-import { RequestHeaderInfoComponent } from '@ksp/shared/ui/request-header-info';
+import { RequestHeaderInfoComponent } from '@ksp/shared/new-ui';
 
 @Component({
   selector: 'e-service-investigation-detail',
