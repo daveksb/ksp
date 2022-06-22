@@ -78,14 +78,14 @@
       "@ksp/e-service/ui/verify-result-box": [
         "libs/e-service/ui/verify-result-box/src/index.ts"
       ],
-      "@ksp/school-service/feature/foreign-teacher": [
-        "libs/school-service/feature/foreign-teacher/src/index.ts"
-      ],
       "@ksp/school-service/feature/activity": [
         "libs/school-service/feature/activity/src/index.ts"
       ],
       "@ksp/school-service/feature/container-page": [
         "libs/school-service/feature/container-page/src/index.ts"
+      ],
+      "@ksp/school-service/feature/foreign-teacher": [
+        "libs/school-service/feature/foreign-teacher/src/index.ts"
       ],
       "@ksp/school-service/feature/forget-password": [
         "libs/school-service/feature/forget-password/src/index.ts"
@@ -108,6 +108,7 @@
       "@ksp/school-service/ui/staff-search": [
         "libs/school-service/ui/staff-search/src/index.ts"
       ],
+      "@ksp/self-service/ui": ["libs/self-service/ui/src/index.ts"],
       "@ksp/self-service/feature/home": [
         "libs/self-service/feature/home/src/index.ts"
       ],
@@ -123,14 +124,13 @@
       "@ksp/self-service/feature/my-info": [
         "libs/self-service/feature/my-info/src/index.ts"
       ],
+      "@ksp/self-service/feature/payment": [
+        "libs/self-service/feature/payment/src/index.ts"
+      ],
       "@ksp/self-service/feature/register": [
         "libs/self-service/feature/register/src/index.ts"
       ],
-      "@ksp/self-service/ui/forms": ["libs/self-service/ui/forms/src/index.ts"],
-      "@ksp/self-service/ui/menu": ["libs/self-service/ui/menu/src/index.ts"],
-      "@ksp/self-service/ui/payment": [
-        "libs/self-service/ui/payment/src/index.ts"
-      ],
+      "@ksp/self-service/form": ["libs/self-service/form/src/index.ts"],
       "@ksp/shared/assets": ["libs/shared/assets/src/index.ts"],
       "@ksp/shared/directive": ["libs/shared/directive/src/index.ts"],
       "@ksp/shared/feature/degree-cert": [

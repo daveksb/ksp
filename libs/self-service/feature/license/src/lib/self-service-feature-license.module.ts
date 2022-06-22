@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { SelfServiceUiMenuModule } from '@ksp/self-service/ui/menu';
 import { LicenseRequestComponent } from './license-request/license-request.component';
-import { SelfServiceUiFormsModule } from '@ksp/self-service/ui/forms';
+import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { LicenseEditComponent } from './license-edit/license-edit.component';
 import { SharedUiSideMenuModule } from '@ksp/shared/ui/side-menu';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -13,9 +12,10 @@ import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master
 import {
   PaymentChannelComponent,
   PromptpayComponent,
-} from '@ksp/self-service/ui/payment';
+} from '@ksp/self-service/feature/payment';
 import { PageNotFoundComponent } from '@ksp/shared/ui/page-not-found';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { LicenseInfoComponent } from '@ksp/self-service/ui';
 
 export const routes: Routes = [
   {
@@ -50,16 +50,15 @@ export const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule,
-    SelfServiceUiMenuModule,
-    SelfServiceUiFormsModule,
+    SelfServiceFormModule,
     SharedFormOthersModule,
     SharedUiSideMenuModule,
     MatTabsModule,
     MatExpansionModule,
     SharedUiTopNavModule,
     RouterModule.forChild(routes),
+    LicenseInfoComponent,
   ],
   declarations: [LicenseRequestComponent, LicenseEditComponent],
-  exports: [LicenseRequestComponent, LicenseEditComponent],
 })
 export class SelfServiceFeatureLicenseModule {}

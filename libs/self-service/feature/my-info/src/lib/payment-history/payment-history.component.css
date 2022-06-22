@@ -33,41 +33,10 @@
   grid-column-gap: 44px;
 }
 
-.box__container {
-  background: #ffffff;
-  box-shadow: 0px 0px 15px #e2e2e2;
-  border-radius: 20px;
-  margin: 24px 0;
-  font-size: 20px;
-}
-
-.box__content {
-  padding: 18px 24px 0 24px;
-}
-
-.box__footer {
-  display: flex;
-  padding: 0 24px 18px 24px;
-}
-
-.footer__label {
-  color: #3f89fe;
-  margin-right: 36px;
-}
-
-.icon__box {
-  margin-right: 6px;
-}
-
 hr {
   margin: 8px 0;
   color: #dbdbdb;
 }
-
-.view__detail {
-  cursor: pointer;
-}
-
 
 @media only screen and (max-width: 980px) {
   .container {

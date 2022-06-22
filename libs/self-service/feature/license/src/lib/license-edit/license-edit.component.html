@@ -9,7 +9,7 @@
 
 <div class="detail__container">
   <div class="title">เปลี่ยนแปลง / แก้ไขใบอนุญาต</div>
-  <input id="check_1" type="checkbox" name="Checkbox" class="checkbox-1" />
+  <input type="checkbox" name="Checkbox" class="checkbox-1" />
   <label class="checkbox-label">เปลี่ยน / เพิ่มเติม คำนำหน้าชื่อ</label>
 
   <div class="content__container--three-columns">
@@ -64,7 +64,7 @@
     </div>
   </div>
 
-  <input id="check_1" type="checkbox" name="Checkbox" class="checkbox-1" />
+  <input type="checkbox" name="Checkbox" class="checkbox-1" />
   <label class="checkbox-label">เปลี่ยนชื่อ</label>
 
   <div class="content__container--three-columns">
@@ -147,12 +147,12 @@
     </div>
   </div>
 
-  <ksp-form-attachment [groups]="uploadGroups"></ksp-form-attachment>
+  <ksp-form-attachment [groups]="uploadFileList"></ksp-form-attachment>
 
-  <label class="text-danger"
-    >*กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
-    โปรดตรวจสอบอีกครั้งก่อนการบันทึกลงระบบ</label
-  >
+  <label class="text-danger">
+    *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
+    โปรดตรวจสอบอีกครั้งก่อนการบันทึกลงระบบ
+  </label>
 
   <div class="button__container">
     <button (click)="onConfirm()" class="btn btn-primary">บันทึก</button>
