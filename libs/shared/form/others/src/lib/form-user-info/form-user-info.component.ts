@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'ksp-form-user-info',
@@ -6,7 +6,5 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./form-user-info.component.scss'],
 })
 export class FormUserInfoComponent {
-  @Input() isInputWhite = false;
-
-  constructor() {}
+  @Input() isWhiteMode = false;
 }

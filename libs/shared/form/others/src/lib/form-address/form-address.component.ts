@@ -1,14 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'ksp-form-address',
   templateUrl: './form-address.component.html',
   styleUrls: ['./form-address.component.scss'],
 })
-export class FormAddressComponent implements OnInit {
+export class FormAddressComponent {
   @Input() isWhiteMode = true;
 
   constructor() {}
-
-  ngOnInit(): void {}
 }
