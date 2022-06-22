@@ -5,19 +5,13 @@
 }
 
 .detail__content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 18px;
+  margin: 20px 0;
 }
 
-.form-label {
-  font-size: 18px;
-  color: #656565;
-}
 
 .form-select,
 .form-control {
-  background-color: #fff;
+  background-color: rgb(32, 30, 30);
   font-size: 18px;
 }
 
@@ -75,9 +69,4 @@
 .warning__label-2 {
   color: #000000;
   margin: 0 24px;
-}
-
-.btn__container {
-  display: flex;
-  justify-content: space-between;
 }

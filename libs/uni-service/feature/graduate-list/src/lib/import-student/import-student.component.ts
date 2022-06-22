@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { ActivatedRoute, Router } from '@angular/router';
+import { UniserviceImportType } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -21,7 +22,8 @@ export class ImportStudentComponent implements OnInit {
   ThPrefixes: SelectItem[] = [];
   EngPrefixes: SelectItem[] = [];
   isGraduated = false;
-  pageType = 0;
+  pageType!: UniserviceImportType;
+  importType = UniserviceImportType;
   foundUser = false;
 
   headers = [
