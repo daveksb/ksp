@@ -15,6 +15,7 @@ export class LicenseRequestComponent implements OnInit {
     address2: [],
     workplace: [],
     education: [],
+    experience: [],
   });
 
   educationFiles = [

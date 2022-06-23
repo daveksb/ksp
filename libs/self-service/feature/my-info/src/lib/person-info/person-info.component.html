@@ -102,8 +102,13 @@
 
     <div class="button__container">
       <button class="btn btn-secondary">ล้างข้อมูล</button>
-      <button id="btn-edit" class="btn btn-primary" >
-        แก้ไชข้อมูล
+      <button
+        id="btn-edit"
+        class="btn btn-primary"
+        (click)="onClick()"
+        [ngClass]="status === 'edit' ? 'btn-primary' : 'btn-warning'"
+      >
+        {{ label }}
       </button>
     </div>
   </div>

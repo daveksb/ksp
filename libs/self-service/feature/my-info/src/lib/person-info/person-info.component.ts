@@ -7,6 +7,9 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./person-info.component.scss'],
 })
 export class PersonInfoComponent implements OnInit {
+  status = 'edit';
+  label = 'แก้ไขข้อมูล';
+
   form = this.fb.group({
     name: [],
     lastname: [],
@@ -20,10 +23,23 @@ export class PersonInfoComponent implements OnInit {
   });
 
   constructor(private fb: FormBuilder) {}
+
   ngOnInit(): void {
     this.form.valueChanges.subscribe((res) => {
       ('');
     });
     this.form.disable();
+  }
+
+  onClick() {
+    if (this.status == 'edit') {
+      this.status = 'save';
+      this.label = 'บันทึกข้อมูล';
+      this.form.enable();
+    } else {
+      this.status = 'edit';
+      this.label = 'แก้ไขข้อมูล';
+      this.form.disable();
+    }
   }
 }
