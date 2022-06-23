@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'self-service-person-info',
@@ -6,7 +7,39 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./person-info.component.scss'],
 })
 export class PersonInfoComponent implements OnInit {
-  constructor() {}
+  status = 'edit';
+  label = 'แก้ไขข้อมูล';
 
-  ngOnInit(): void {}
+  form = this.fb.group({
+    name: [],
+    lastname: [],
+    password: [],
+    phone: [],
+    birthDate: [],
+    nationality: [],
+    religion: [],
+    postLevel: [],
+    address: [],
+  });
+
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.form.valueChanges.subscribe((res) => {
+      ('');
+    });
+    this.form.disable();
+  }
+
+  onClick() {
+    if (this.status == 'edit') {
+      this.status = 'save';
+      this.label = 'บันทึกข้อมูล';
+      this.form.enable();
+    } else {
+      this.status = 'edit';
+      this.label = 'แก้ไขข้อมูล';
+      this.form.disable();
+    }
+  }
 }

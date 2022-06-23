@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
@@ -8,8 +9,14 @@ import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
   templateUrl: './license-request.component.html',
   styleUrls: ['./license-request.component.css'],
 })
-export class LicenseRequestComponent {
-  constructor(private router: Router, public dialog: MatDialog) {}
+export class LicenseRequestComponent implements OnInit {
+  form = this.fb.group({
+    address1: [],
+    address2: [],
+    workplace: [],
+    education: [],
+    experience: [],
+  });
 
   educationFiles = [
     'สำเนาใบรายงานผลการศึกษา (Transcript)',
@@ -23,6 +30,18 @@ export class LicenseRequestComponent {
     'สำเนาคำสั่งแต่งตั้งปฏิบติหน้าที่',
     'สำเนาสัญญาจ้างหรือทะเบียนประวัติหรือหลักฐานการขอปฏิบัติการสอน',
   ];
+
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private fb: FormBuilder
+  ) {}
+
+  ngOnInit(): void {
+    this.form.controls.experience.valueChanges.subscribe((res) => {
+      console.log('res = ', res);
+    });
+  }
 
   save() {
     const confirmDialog = this.dialog.open(ForbiddenPropertyFormComponent, {

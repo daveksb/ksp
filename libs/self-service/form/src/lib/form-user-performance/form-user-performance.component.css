@@ -8,7 +8,7 @@
   display: grid;
   grid-template-columns: 30% 1fr;
   grid-column-gap: 32px;
-  margin: 0 18px;
+  margin-bottom: 24px;
 }
 
 .content__container-2 {
@@ -30,6 +30,7 @@
   background-color: #fff;
   overflow: auto;
   white-space: nowrap;
+  margin: 0;
 }
 
 .table > :not(:first-child) {

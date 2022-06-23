@@ -1,20 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-
-export type controlName =
-  | 'prefixTh'
-  | 'prefixEng'
-  | 'nameTh'
-  | 'nameEng'
-  | 'lastnameTh'
-  | 'lastnameEng'
-  | 'distributeData';
 
 @Component({
   selector: 'self-service-license-edit',
@@ -24,11 +15,11 @@ export type controlName =
 export class LicenseEditComponent implements OnInit {
   form = this.fb.group({
     prefixTh: [],
-    prefixEng: [],
+    prefixEn: [],
     nameTh: [],
-    nameEng: [],
+    nameEn: [],
     lastnameTh: [],
-    lastnameEng: [],
+    lastnameEn: [],
     distributeData: [],
   });
 
@@ -38,12 +29,11 @@ export class LicenseEditComponent implements OnInit {
     'สำเนาหนังสือรับรองการใช้คำหน้านามหญิง (ถ้ามี)',
   ];
 
-  disableControlA(evt: any, controlNames: controlName[]) {
-    const status = evt.target.checked;
+  disableControl(evt: any, controlNames: controlName[]) {
+    const checked = evt.target.checked;
 
     controlNames.forEach((i) => {
-      console.log('i = ', i);
-      if (status) {
+      if (checked) {
         this.form.controls[i].enable();
       } else {
         this.form.controls[i].disable();
@@ -54,18 +44,17 @@ export class LicenseEditComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private router: Router,
-    private fb: FormBuilder,
-    private route: ActivatedRoute
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.form.valueChanges.subscribe((res) => {
-      ///console.log('res = ', res);
+      ('');
     });
     this.form.disable();
   }
 
-  cancel() {
+  navigateBack() {
     this.router.navigate(['/', 'license', 'request']);
   }
 
@@ -105,3 +94,11 @@ export class LicenseEditComponent implements OnInit {
     });
   }
 }
+export type controlName =
+  | 'prefixTh'
+  | 'prefixEn'
+  | 'nameTh'
+  | 'nameEn'
+  | 'lastnameTh'
+  | 'lastnameEn'
+  | 'distributeData';

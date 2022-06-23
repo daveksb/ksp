@@ -1,8 +1,8 @@
-<div class="content__container">
-  <div class="mb-3">
-    <div class="content">
-      <form [formGroup]="educationForm">
-        <div class="form-label">ลักษณะวุฒิการศึกษา</div>
+<form [formGroup]="form">
+  <div class="content__container">
+    <div class="mb-3">
+      <label class="form-label">ลักษณะวุฒิการศึกษา</label>
+      <div class="content">
         <select
           formControlName="educationType"
           class="form-select form-select-sm"
@@ -11,9 +11,33 @@
             {{ edu.label }}
           </option>
         </select>
-      </form>
+      </div>
     </div>
-  </div>
 
-  <ng-template kspDynamicComponent></ng-template>
-</div>
+    <!-- <ng-template kspDynamicComponent></ng-template> -->
+    <ksp-education-level-form-one
+      *ngIf="selectedEducationType === 0"
+      formControlName="educationLevelForm"
+    ></ksp-education-level-form-one>
+    <ksp-education-level-form-two
+      *ngIf="selectedEducationType === 1"
+      formControlName="educationLevelForm"
+    ></ksp-education-level-form-two>
+    <ksp-education-level-form-one
+      *ngIf="selectedEducationType === 2"
+      formControlName="educationLevelForm"
+    ></ksp-education-level-form-one>
+    <ksp-education-level-form-one
+      *ngIf="selectedEducationType === 3"
+      formControlName="educationLevelForm"
+    ></ksp-education-level-form-one>
+    <ksp-education-level-form-three
+      *ngIf="selectedEducationType === 4"
+      formControlName="educationLevelForm"
+    ></ksp-education-level-form-three>
+    <ksp-education-level-form-four
+      *ngIf="selectedEducationType === 5"
+      formControlName="educationLevelForm"
+    ></ksp-education-level-form-four>
+  </div>
+</form>
