@@ -16,11 +16,19 @@
           />
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword" class="form-label">รหัสผ่าน</label>
+          <label class="form-label">รหัสผ่าน</label>
           <input
-            type="password"
-            class="form-control"
+            [type]="eyeIconClicked ? 'text' : 'password'"
+            class="form-control form__password"
             placeholder="กรอกรหัสผ่าน"
+          />
+          <img
+            class="eye__icon"
+            (click)="eyeIconClicked = !eyeIconClicked"
+            [ngClass]="{
+              'eye__icon--open': eyeIconClicked,
+              'eye__icon--close': !eyeIconClicked
+            }"
           />
         </div>
         <div class="detail__content">

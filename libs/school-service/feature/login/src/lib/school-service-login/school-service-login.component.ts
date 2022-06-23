@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 export class SchoolServiceLoginComponent {
   constructor(private router: Router) {}
 
+  eyeIconClicked = false;
+
   home() {
     this.router.navigate(['/', 'temp-license', 'list']);
   }

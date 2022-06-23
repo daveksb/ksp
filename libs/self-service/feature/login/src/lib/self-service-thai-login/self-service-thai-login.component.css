@@ -5,6 +5,7 @@
   background-size: cover;
   height: 100vh;
 }
+
 .btn-secondary {
   font-size: 20px;
   background-color: #ffaa65;
@@ -14,46 +15,59 @@
   height: 46px;
   border-radius: 10px;
 }
+
 .dropdown-toggle::after {
   display: none;
 }
+
 .form-label {
   font-size: 24px;
 }
+
 .form-control {
   font-size: 18px;
   color: #666666;
 }
+
 .form-control-lg {
   height: 50px;
+  padding: 6px 24px 6px 12px;
 }
+
 .btn-primary {
   width: 100%;
   border-radius: 10px;
   padding: 6px 24px;
 }
+
 .login__container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   padding: 72px 100px;
 }
+
 .header__content {
   text-align: center;
 }
+
 .footer__content {
   text-align: center;
 }
+
 .login__container--right {
   padding: 0 42px;
 }
+
 .label__button {
   font-size: 24px;
 }
+
 h1 {
   font-size: 50px;
   color: #222222;
   margin: 0;
 }
+
 h3 {
   font-size: 30px;
   color: #666666;
@@ -66,6 +80,7 @@ h3 {
   margin-top: 24px;
   cursor: pointer;
 }
+
 .label__third {
   color: #666666;
   text-decoration: underline;
@@ -73,13 +88,32 @@ h3 {
   display: flex;
   justify-content: flex-end;
 }
+
 .footer {
   display: flex;
   justify-content: flex-end;
 }
+
 .footer__label {
   font-size: 20px;
   color: #222222;
+}
+
+.eye__icon {
+  float: right;
+  margin-top: -35px;
+  position: relative;
+  height: 22px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.eye__icon--open {
+  content: url('/assets/images/eye_open.png');
+}
+
+.eye__icon--close {
+  content: url('/assets/images/eye_close.png');
 }
 
 /* device  responsive*/

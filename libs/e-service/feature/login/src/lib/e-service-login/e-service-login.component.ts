@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 export class EServiceLoginComponent {
   constructor(private router: Router) {}
 
+  eyeIconClicked = false;
+
   login() {
     this.router.navigate(['/', 'landing']);
   }
