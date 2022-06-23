@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,7 +7,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./self-service-thai-login.component.css'],
 })
 export class SelfServiceThaiLoginComponent {
-  constructor(private router: Router) {}
+  form = this.fb.group({
+    personId: [],
+    password: [],
+  });
+
+  constructor(private router: Router, private fb: FormBuilder) {}
 
   register() {
     this.router.navigate(['/', 'register', 'policy']);

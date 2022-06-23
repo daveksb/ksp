@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { FormVerifyPhoneComponent } from '@ksp/self-service/form';
@@ -9,7 +10,12 @@ import { FormVerifyPhoneComponent } from '@ksp/self-service/form';
   styleUrls: ['./register-step-two.component.scss'],
 })
 export class RegisterStepTwoComponent {
-  constructor(public dialog: MatDialog, private router: Router) {}
+  form = this.fb.group({
+    personId: [],
+    backPersonId: [],
+  });
+
+  constructor(public dialog: MatDialog, private router: Router, private fb: FormBuilder) {}
 
   openDialog() {
     const dialogRef = this.dialog.open(FormVerifyPhoneComponent, {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { RegisterCompletedComponent } from '../register-completed/register-completed.component';
@@ -9,7 +10,13 @@ import { RegisterCompletedComponent } from '../register-completed/register-compl
   styleUrls: ['./register-step-three.component.scss'],
 })
 export class RegisterStepThreeComponent {
-  constructor(public dialog: MatDialog, private router: Router) {}
+  form = this.fb.group({
+    password: [],
+    confirmPassword: [],
+  });
+
+
+  constructor(public dialog: MatDialog, private router: Router, private fb: FormBuilder) {}
 
   openDialog() {
     this.dialog.open(RegisterCompletedComponent, {

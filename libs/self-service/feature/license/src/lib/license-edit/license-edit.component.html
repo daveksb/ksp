@@ -2,159 +2,205 @@
   ><span header>ใบอนุญาตประกอบวิชาชีพ </span
   ><span subHeader>เปลี่ยนแปลง/ แก้ไขใบอนุญาต</span></ksp-top-nav
 >
-
-<div class="header">
-  มีความประสงค์จะขอให้เปลี่ยนแปลงข้อมูลทะเบียนผู้ได้รับใบอนุญาต
-</div>
-
-<div class="detail__container">
-  <div class="title">เปลี่ยนแปลง / แก้ไขใบอนุญาต</div>
-  <input type="checkbox" name="Checkbox" class="checkbox-1" />
-  <label class="checkbox-label">เปลี่ยน / เพิ่มเติม คำนำหน้าชื่อ</label>
-
-  <div class="content__container--three-columns">
-    <div class="mb-3">
-      <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
-      <select class="form-select form-select-sm">
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-
-    <div class="center-label">
-      <label class="change-label">เปลี่ยน เป็น</label>
-    </div>
-
-    <div class="mb-3">
-      <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
-      <select class="form-select form-select-sm">
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
+<form [formGroup]="form">
+  <div class="header">
+    มีความประสงค์จะขอให้เปลี่ยนแปลงข้อมูลทะเบียนผู้ได้รับใบอนุญาต
   </div>
 
-  <div class="content__container--three-columns">
-    <div class="mb-3">
-      <label class="form-label">คำนำหน้าชื่อภาษาอังกฤษ</label>
-      <select class="form-select form-select-sm">
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
+  <div class="detail__container">
+    <div class="title">เปลี่ยนแปลง / แก้ไขใบอนุญาต</div>
+    <div class="checkbox__container">
+      <input
+        type="checkbox"
+        class="checkbox-1"
+        name="test"
+        (change)="disableControlA($event, ['prefixTh', 'prefixEng'])"
+      />
+      <label class="checkbox-label">เปลี่ยน / เพิ่มเติม คำนำหน้าชื่อ</label>
+    </div>
+    <div class="content__container--three-columns">
+      <div class="mb-3">
+        <label class="form-label">คำนำหน้าชื่อภาษาไทย xxx</label>
+        <select class="form-select form-select-sm" disabled>
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+
+      <div class="center-label">
+        <label class="change-label">เปลี่ยน เป็น</label>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">คำนำหน้าชื่อภาษาไทย yyy</label>
+        <select class="form-select form-select-sm" formControlName="prefixTh">
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
     </div>
 
-    <div class="center-label">
-      <label class="change-label">เปลี่ยน เป็น</label>
+    <div class="content__container--three-columns">
+      <div class="mb-3">
+        <label class="form-label">คำนำหน้าชื่อภาษาอังกฤษ</label>
+        <select class="form-select form-select-sm" disabled>
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+
+      <div class="center-label">
+        <label class="change-label">เปลี่ยน เป็น</label>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">คำนำหน้าชื่อภาษาอังกฤษ</label>
+        <select class="form-select form-select-sm" formControlName="prefixEng">
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+    </div>
+    <div class="checkbox__container">
+      <input
+        type="checkbox"
+        class="checkbox-1"
+        (change)="disableControlA($event, ['nameTh', 'nameEng'])"
+      />
+      <label class="checkbox-label">เปลี่ยนชื่อ</label>
+    </div>
+    <div class="content__container--three-columns">
+      <div class="mb-3">
+        <label class="form-label">ชื่อภาษาไทย</label>
+        <input class="form-control form-control-sm" type="text" disabled />
+      </div>
+
+      <div class="center-label">
+        <label class="change-label">เปลี่ยน เป็น</label>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">ชื่อภาษาไทย</label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          formControlName="nameTh"
+        />
+      </div>
     </div>
 
-    <div class="mb-3">
-      <label class="form-label">คำนำหน้าชื่อภาษาอังกฤษ</label>
-      <select class="form-select form-select-sm">
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
+    <div class="content__container--three-columns">
+      <div class="mb-3">
+        <label class="form-label">ชื่อภาษาอังกฤษ</label>
+        <input class="form-control form-control-sm" type="text" disabled />
+      </div>
+
+      <div class="center-label">
+        <label class="change-label">เปลี่ยน เป็น</label>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">ชื่อภาษาอังกฤษ</label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          formControlName="nameEng"
+        />
+      </div>
     </div>
+    <div class="checkbox__container">
+      <input
+        id="check_1"
+        type="checkbox"
+        class="checkbox-1"
+        (change)="disableControlA($event, ['lastnameTh', 'lastnameEng'])"
+      />
+      <label class="checkbox-label">เปลี่ยนนามสกุล</label>
+    </div>
+    <div class="content__container--three-columns">
+      <div class="mb-3">
+        <label class="form-label">นามสกุลภาษาไทย</label>
+        <input class="form-control form-control-sm" type="text" disabled />
+      </div>
+
+      <div class="center-label">
+        <label class="change-label">เปลี่ยน เป็น</label>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">นามสกุลภาษาไทย</label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          formControlName="lastnameTh"
+        />
+      </div>
+    </div>
+
+    <div class="content__container--three-columns">
+      <div class="mb-3">
+        <label class="form-label">นามสกุลภาษาอังกฤษ</label>
+        <input class="form-control form-control-sm" type="text" disabled />
+      </div>
+
+      <div class="center-label">
+        <label class="change-label">เปลี่ยน เป็น</label>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">นามสกุลภาษาอังกฤษ</label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          formControlName="lastnameEng"
+        />
+      </div>
+    </div>
+    <div class="checkbox__container">
+      <input
+        id="check_1"
+        type="checkbox"
+        class="checkbox-1"
+        (change)="disableControlA($event, ['distributeData'])"
+      />
+      <label class="checkbox-label">จำหน่ายข้อมูล</label>
+    </div>
+    <div class="content__container">
+      <div class="mb-3">
+        <select
+          class="search__content form-select form-select-sm"
+          formControlName="distributeData"
+        >
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+    </div>
+
+    <ksp-form-attachment [groups]="uploadFileList"></ksp-form-attachment>
+
+    <label class="text-danger">
+      *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
+      โปรดตรวจสอบอีกครั้งก่อนการบันทึกลงระบบ
+    </label>
+
+    <ksp-bottom-nav
+      (cancelClicked)="cancel()"
+      [isLastPage]="true"
+      [isFirstPage]="true"
+      [showCenterButtons]="true"
+      [showSaveButton]="true"
+      (saveClicked)="onConfirm()"
+    ></ksp-bottom-nav>
   </div>
-
-  <input type="checkbox" name="Checkbox" class="checkbox-1" />
-  <label class="checkbox-label">เปลี่ยนชื่อ</label>
-
-  <div class="content__container--three-columns">
-    <div class="mb-3">
-      <label class="form-label">ชื่อภาษาไทย</label>
-      <input class="form-control form-control-sm" type="text" />
-    </div>
-
-    <div class="center-label">
-      <label class="change-label">เปลี่ยน เป็น</label>
-    </div>
-
-    <div class="mb-3">
-      <label class="form-label">ชื่อภาษาไทย</label>
-      <input class="form-control form-control-sm" type="text" />
-    </div>
-  </div>
-
-  <div class="content__container--three-columns">
-    <div class="mb-3">
-      <label class="form-label">ชื่อภาษาอังกฤษ</label>
-      <input class="form-control form-control-sm" type="text" />
-    </div>
-
-    <div class="center-label">
-      <label class="change-label">เปลี่ยน เป็น</label>
-    </div>
-
-    <div class="mb-3">
-      <label class="form-label">ชื่อภาษาอังกฤษ</label>
-      <input class="form-control form-control-sm" type="text" />
-    </div>
-  </div>
-
-  <input id="check_1" type="checkbox" name="Checkbox" class="checkbox-1" />
-  <label class="checkbox-label">เปลี่ยนนามสกุล</label>
-
-  <div class="content__container--three-columns">
-    <div class="mb-3">
-      <label class="form-label">นามสกุลภาษาไทย</label>
-      <input class="form-control form-control-sm" type="text" />
-    </div>
-
-    <div class="center-label">
-      <label class="change-label">เปลี่ยน เป็น</label>
-    </div>
-
-    <div class="mb-3">
-      <label class="form-label">นามสกุลภาษาไทย</label>
-      <input class="form-control form-control-sm" type="text" />
-    </div>
-  </div>
-
-  <div class="content__container--three-columns">
-    <div class="mb-3">
-      <label class="form-label">นามสกุลภาษาอังกฤษ</label>
-      <input class="form-control form-control-sm" type="text" />
-    </div>
-
-    <div class="center-label">
-      <label class="change-label">เปลี่ยน เป็น</label>
-    </div>
-
-    <div class="mb-3">
-      <label class="form-label">นามสกุลภาษาอังกฤษ</label>
-      <input class="form-control form-control-sm" type="text" />
-    </div>
-  </div>
-
-  <input id="check_1" type="checkbox" name="Checkbox" class="checkbox-1" />
-  <label class="checkbox-label">จำหน่ายข้อมูล</label>
-  <div class="content__container">
-    <div class="mb-3">
-      <select class="search__content form-select form-select-sm">
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-  </div>
-
-  <ksp-form-attachment [groups]="uploadFileList"></ksp-form-attachment>
-
-  <label class="text-danger">
-    *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
-    โปรดตรวจสอบอีกครั้งก่อนการบันทึกลงระบบ
-  </label>
-
-  <div class="button__container">
-    <button (click)="onConfirm()" class="btn btn-primary">บันทึก</button>
-  </div>
-</div>
+</form>

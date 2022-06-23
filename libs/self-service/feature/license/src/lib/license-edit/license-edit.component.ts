@@ -1,23 +1,73 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+
+export type controlName =
+  | 'prefixTh'
+  | 'prefixEng'
+  | 'nameTh'
+  | 'nameEng'
+  | 'lastnameTh'
+  | 'lastnameEng'
+  | 'distributeData';
 
 @Component({
   selector: 'self-service-license-edit',
   templateUrl: './license-edit.component.html',
   styleUrls: ['./license-edit.component.css'],
 })
-export class LicenseEditComponent {
+export class LicenseEditComponent implements OnInit {
+  form = this.fb.group({
+    prefixTh: [],
+    prefixEng: [],
+    nameTh: [],
+    nameEng: [],
+    lastnameTh: [],
+    lastnameEng: [],
+    distributeData: [],
+  });
+
   uploadFileList = [
     'สำเนาหนังสือสำคัญการเปลี่ยนชื่อ/ชื่อสกุล/เปลี่ยนหรือเพิ่มคำนำหน้าชื่อ',
     'สำเนาหลักฐานการสมรส หรือการสิ้นสุดการสมรส (ถ้ามี)',
     'สำเนาหนังสือรับรองการใช้คำหน้านามหญิง (ถ้ามี)',
   ];
 
-  constructor(public dialog: MatDialog) {}
+  disableControlA(evt: any, controlNames: controlName[]) {
+    const status = evt.target.checked;
+
+    controlNames.forEach((i) => {
+      console.log('i = ', i);
+      if (status) {
+        this.form.controls[i].enable();
+      } else {
+        this.form.controls[i].disable();
+      }
+    });
+  }
+
+  constructor(
+    public dialog: MatDialog,
+    private router: Router,
+    private fb: FormBuilder,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    this.form.valueChanges.subscribe((res) => {
+      ///console.log('res = ', res);
+    });
+    this.form.disable();
+  }
+
+  cancel() {
+    this.router.navigate(['/', 'license', 'request']);
+  }
 
   onConfirm() {
     const dialog = this.dialog.open(ConfirmDialogComponent, {
@@ -38,7 +88,7 @@ export class LicenseEditComponent {
   }
 
   onSaveAndRequest() {
-    this.dialog.open(CompleteDialogComponent, {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
       width: '375px',
       data: {
         header: `บันทึกข้อมูลและยื่นใบคำขอสำเร็จเรียบร้อย`,
@@ -47,6 +97,11 @@ export class LicenseEditComponent {
         subContent: `กรุณาตรวจสอบสถานะใบคำขอหรือรหัสเข้าใช้งาน
           ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },
+    });
+    dialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/', 'license', 'request']);
+      }
     });
   }
 }

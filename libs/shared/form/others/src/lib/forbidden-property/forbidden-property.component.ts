@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   templateUrl: './forbidden-property.component.html',
   styleUrls: ['./forbidden-property.component.scss'],
   standalone: true,
+  imports: [MatDialogModule],
 })
 export class ForbiddenPropertyFormComponent {
   @Input()

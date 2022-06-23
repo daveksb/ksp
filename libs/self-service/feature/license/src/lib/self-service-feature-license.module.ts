@@ -4,7 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { LicenseRequestComponent } from './license-request/license-request.component';
 import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { LicenseEditComponent } from './license-edit/license-edit.component';
-import { SharedMenuModule, TopNavComponent } from '@ksp/shared/menu';
+import {
+  BottomNavComponent,
+  SharedMenuModule,
+  TopNavComponent,
+} from '@ksp/shared/menu';
 import { MatTabsModule } from '@angular/material/tabs';
 
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
@@ -16,6 +20,7 @@ import {
 import { MatExpansionModule } from '@angular/material/expansion';
 import { SelfServiceLicenseInfoComponent } from '@ksp/self-service/ui';
 import { PageNotFoundComponent } from '@ksp/shared/ui';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 export const routes: Routes = [
   {
@@ -58,6 +63,9 @@ export const routes: Routes = [
     TopNavComponent,
     RouterModule.forChild(routes),
     SelfServiceLicenseInfoComponent,
+    BottomNavComponent,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   declarations: [LicenseRequestComponent, LicenseEditComponent],
 })
