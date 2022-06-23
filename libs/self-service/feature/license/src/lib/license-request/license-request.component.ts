@@ -4,7 +4,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { debounceTime } from 'rxjs';
+import { LicenseRequestService } from './license-request.service';
 
+@UntilDestroy()
 @Component({
   templateUrl: './license-request.component.html',
   styleUrls: ['./license-request.component.css'],
@@ -18,29 +22,26 @@ export class LicenseRequestComponent implements OnInit {
     experience: [],
   });
 
-  educationFiles = [
-    'สำเนาใบรายงานผลการศึกษา (Transcript)',
-    'สำเนาปริญญาบัตร หรือสำเนาหนังสือรับรองคุณวุฒิ',
-  ];
-
-  experienceFiles = [
-    'สำเนาหนังสือนำส่งแบบประเมินฉบับจริง',
-    'สำเนาคำสั่งแต่งตั้งคณะผู้ประเมินการปฏิบัติการสอน',
-    'สำเนาตารางสอนรายสัปดาห์',
-    'สำเนาคำสั่งแต่งตั้งปฏิบติหน้าที่',
-    'สำเนาสัญญาจ้างหรือทะเบียนประวัติหรือหลักฐานการขอปฏิบัติการสอน',
-  ];
-
   constructor(
     private router: Router,
     public dialog: MatDialog,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public service: LicenseRequestService
   ) {}
 
   ngOnInit(): void {
-    this.form.controls.experience.valueChanges.subscribe((res) => {
-      console.log('res = ', res);
-    });
+    this.form.valueChanges
+      .pipe(debounceTime(300), untilDestroyed(this))
+      .subscribe((res) => {
+        //
+      });
+  }
+
+  useSameAddress(evt: any) {
+    const checked = evt.target.checked;
+    if (checked) {
+      this.form.controls.address2.patchValue(this.form.controls.address1.value);
+    }
   }
 
   save() {

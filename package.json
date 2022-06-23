@@ -21,6 +21,7 @@
     "@angular/platform-browser": "14.0.2",
     "@angular/platform-browser-dynamic": "14.0.2",
     "@angular/router": "14.0.2",
+    "@ngneat/until-destroy": "^9.2.1",
     "@nrwl/angular": "14.3.6",
     "@nrwl/nx-cloud": "14.1.2",
     "bootstrap": "^5.1.3",
