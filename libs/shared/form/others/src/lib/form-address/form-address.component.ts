@@ -1,25 +1,30 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { providerFactory } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-form-address',
   templateUrl: './form-address.component.html',
   styleUrls: ['./form-address.component.scss'],
+  providers: providerFactory(FormAddressComponent),
 })
-export class FormAddressComponent {
+export class FormAddressComponent extends KspFormBaseComponent {
   @Input() isWhiteMode = true;
 
-  form = this.fb.group({
-    location: [],
-    houseNumber: [],
-    villageNumber: [],
-    lane: [],
-    road: [],
-    zipCode: [],
-    provience: [],
-    subDistrict: [],
-    district: [],
+  override form = this.fb.group({
+    location: [''],
+    houseNumber: [''],
+    villageNumber: [''],
+    lane: [''],
+    road: [''],
+    zipCode: [''],
+    provience: [''],
+    subDistrict: [''],
+    district: [''],
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    super();
+  }
 }
