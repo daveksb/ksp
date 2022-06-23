@@ -39,7 +39,7 @@ export class LicenseRequestComponent implements OnInit {
 
   ngOnInit(): void {
     this.form.controls.experience.valueChanges.subscribe((res) => {
-      console.log('res = ', res);
+      //console.log('res = ', res);
     });
   }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
 import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -33,9 +33,6 @@ export class FormUserEducationComponent
       this.form?.valueChanges.subscribe((value) => {
         this.onChange(value);
         this.onTouched();
-        //this.form.reset();
-        //this.form.reset(undefined, { onlySelf: true, emitEvent: false });
-        //this.form.setControl('educationLevelForm', new FormControl());
       })
     );
   }
@@ -46,8 +43,6 @@ export class FormUserEducationComponent
     this.form.controls['educationType'].valueChanges
       .pipe(skip(1))
       .subscribe((res) => {
-        //this.loadComponent(Number(res));
-        //this.form.setControl('educationLevelForm', new FormControl());
         this.selectedEducationType = Number(res);
       });
   }

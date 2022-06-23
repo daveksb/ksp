@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { debounceTime } from 'rxjs';
 
+@UntilDestroy()
 @Component({
   selector: 'self-service-form-user-experience',
   templateUrl: './form-user-experience.component.html',
@@ -13,12 +16,11 @@ export class FormUserExperienceComponent
   extends KspFormBaseComponent
   implements OnInit
 {
-
   override form = this.fb.group({
     TrainingAddressOne: [],
     TrainingAddressTwo: [],
     teachingAddress: [],
-    hasForeignLicense: [''],
+    hasForeignLicense: [],
     foreignLicenseForm: [],
   });
 
@@ -26,7 +28,7 @@ export class FormUserExperienceComponent
     super();
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
-      this.form?.valueChanges.subscribe((value) => {
+      this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
         this.onChange(value);
         this.onTouched();
       })
@@ -34,8 +36,19 @@ export class FormUserExperienceComponent
   }
 
   ngOnInit(): void {
-    this.form.controls['hasForeignLicense'].valueChanges.subscribe((res) => {
-      //console.log('res', res);
-    });
+    this.form.valueChanges
+      .pipe(debounceTime(300), untilDestroyed(this))
+      .subscribe((res) => {
+        //console.log('exp form = ', res);
+      });
+  }
+
+  resetForeignLicenseForm(evt: any) {
+    const checked = evt.target.checked;
+    if (!checked) this.form.controls.foreignLicenseForm.reset();
+  }
+
+  get hasForeignLicense() {
+    return this.form.controls.hasForeignLicense.value;
   }
 }
