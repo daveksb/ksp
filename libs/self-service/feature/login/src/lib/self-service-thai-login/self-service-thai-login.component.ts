@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./self-service-thai-login.component.css'],
 })
 export class SelfServiceThaiLoginComponent {
+  eyeIconClicked = false;
+
   form = this.fb.group({
     personId: [],
     password: [],
