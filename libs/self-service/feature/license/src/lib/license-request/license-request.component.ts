@@ -13,6 +13,8 @@ export class LicenseRequestComponent implements OnInit {
   form = this.fb.group({
     address1: [],
     address2: [],
+    workplace: [],
+    education: [],
   });
 
   educationFiles = [
@@ -35,7 +37,7 @@ export class LicenseRequestComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.form.controls.address1.valueChanges.subscribe((res) => {
+    this.form.valueChanges.subscribe((res) => {
       console.log('res = ', res);
     });
   }

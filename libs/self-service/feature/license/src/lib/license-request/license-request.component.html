@@ -16,7 +16,7 @@
   </mat-expansion-panel>
 </mat-accordion>
 
-<ng-container [formGroup]="form">
+<form [formGroup]="form">
   <div class="tab-container">
     <mat-tab-group
       class="tab-group"
@@ -42,10 +42,14 @@
         </div>
       </mat-tab>
       <mat-tab label="สถานที่ทำงาน">
-        <self-service-form-user-workplace></self-service-form-user-workplace>
+        <self-service-form-user-workplace
+          formControlName="workplace"
+        ></self-service-form-user-workplace>
       </mat-tab>
       <mat-tab label="ข้อมูลทางการศึกษา">
-        <self-service-form-user-education></self-service-form-user-education>
+        <self-service-form-user-education
+          formControlName=""
+        ></self-service-form-user-education>
         <hr />
         <ksp-form-attachment
           [title]="'กรุณาแนบหลักฐานประกอบวุฒิทางการศึกษา'"
@@ -82,4 +86,4 @@
       </button>
     </div>
   </div>
-</ng-container>
+</form>

@@ -49,8 +49,9 @@ export class LicenseEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.form.valueChanges.subscribe((res) => {
-      this.form.disable();
+      ('');
     });
+    this.form.disable();
   }
 
   navigateBack() {

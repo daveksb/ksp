@@ -1,8 +1,8 @@
-<div class="content__container">
-  <div class="mb-3">
-    <div class="content">
-      <form [formGroup]="educationForm">
-        <div class="form-label">ลักษณะวุฒิการศึกษา</div>
+<form [formGroup]="form">
+  <div class="content__container">
+    <div class="mb-3">
+      <label class="form-label">ลักษณะวุฒิการศึกษา</label>
+      <div class="content">
         <select
           formControlName="educationType"
           class="form-select form-select-sm"
@@ -11,9 +11,9 @@
             {{ edu.label }}
           </option>
         </select>
-      </form>
+      </div>
     </div>
-  </div>
 
-  <ng-template kspDynamicComponent></ng-template>
-</div>
+    <ng-template kspDynamicComponent></ng-template>
+  </div>
+</form>

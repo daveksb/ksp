@@ -8,6 +8,7 @@ import { PersonInfoComponent } from './person-info/person-info.component';
 import { PaymentHistoryItemComponent } from '@ksp/self-service/ui';
 import { PageNotFoundComponent } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export const routes: Route[] = [
   {
@@ -41,6 +42,7 @@ export const routes: Route[] = [
     TopNavComponent,
     RouterModule.forChild(routes),
     PaymentHistoryItemComponent,
+    ReactiveFormsModule
   ],
   declarations: [PaymentHistoryComponent, PersonInfoComponent],
 })

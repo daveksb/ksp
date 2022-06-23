@@ -7,32 +7,49 @@ import {
   EducationLevelFormThreeComponent,
   EducationLevelFormTwoComponent,
 } from '@ksp/shared/form/education-level';
-import { DynamicComponent, ListData } from '@ksp/shared/interface';
+import {
+  DynamicComponent,
+  KspFormBaseComponent,
+  ListData,
+} from '@ksp/shared/interface';
+import { providerFactory } from '@ksp/shared/utility';
 
 @Component({
   selector: 'self-service-form-user-education',
   templateUrl: './form-user-education.component.html',
   styleUrls: ['./form-user-education.component.css'],
+  providers: providerFactory(FormUserEducationComponent),
 })
-export class FormUserEducationComponent implements OnInit {
-  educationForm = this.fb.group({
+export class FormUserEducationComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
+  override form = this.fb.group({
     educationType: [''],
+    educationLevelForm: this.fb.group({}),
   });
 
   educationTypes: ListData[] = [];
   @ViewChild(DynamicComponentDirective, { static: true })
   myHost!: DynamicComponentDirective;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    super();
+    this.subscriptions.push(
+      // any time the inner form changes update the parent of any change
+      this.form?.valueChanges.subscribe((value) => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
+  }
 
   ngOnInit(): void {
     this.educationTypes = educationTypes;
 
-    this.educationForm.controls['educationType'].valueChanges.subscribe(
-      (res) => {
-        this.loadComponent(Number(res));
-      }
-    );
+    this.form.controls['educationType'].valueChanges.subscribe((res) => {
+      this.loadComponent(Number(res));
+    });
   }
 
   loadComponent(index: number) {
