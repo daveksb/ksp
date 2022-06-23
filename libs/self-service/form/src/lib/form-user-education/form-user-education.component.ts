@@ -1,18 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
-import {
-  EducationLevelFormFourComponent,
-  EducationLevelFormOneComponent,
-  EducationLevelFormThreeComponent,
-  EducationLevelFormTwoComponent,
-} from '@ksp/shared/form/education-level';
-import {
-  DynamicComponent,
-  KspFormBaseComponent,
-  ListData,
-} from '@ksp/shared/interface';
+import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+import { skip } from 'rxjs';
 
 @Component({
   selector: 'self-service-form-user-education',
@@ -24,9 +15,11 @@ export class FormUserEducationComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+  selectedEducationType!: number;
+
   override form = this.fb.group({
-    educationType: [''],
-    educationLevelForm: this.fb.group({}),
+    educationType: [],
+    educationLevelForm: [],
   });
 
   educationTypes: ListData[] = [];
@@ -40,6 +33,9 @@ export class FormUserEducationComponent
       this.form?.valueChanges.subscribe((value) => {
         this.onChange(value);
         this.onTouched();
+        //this.form.reset();
+        //this.form.reset(undefined, { onlySelf: true, emitEvent: false });
+        //this.form.setControl('educationLevelForm', new FormControl());
       })
     );
   }
@@ -47,26 +43,15 @@ export class FormUserEducationComponent
   ngOnInit(): void {
     this.educationTypes = educationTypes;
 
-    this.form.controls['educationType'].valueChanges.subscribe((res) => {
-      this.loadComponent(Number(res));
-    });
-  }
-
-  loadComponent(index: number) {
-    const viewContainerRef = this.myHost.viewContainerRef;
-    viewContainerRef.clear();
-    viewContainerRef.createComponent<DynamicComponent>(componentList[index]);
+    this.form.controls['educationType'].valueChanges
+      .pipe(skip(1))
+      .subscribe((res) => {
+        //this.loadComponent(Number(res));
+        //this.form.setControl('educationLevelForm', new FormControl());
+        this.selectedEducationType = Number(res);
+      });
   }
 }
-
-const componentList = [
-  EducationLevelFormOneComponent,
-  EducationLevelFormTwoComponent,
-  EducationLevelFormOneComponent,
-  EducationLevelFormOneComponent,
-  EducationLevelFormThreeComponent,
-  EducationLevelFormFourComponent,
-];
 
 const educationTypes = [
   {

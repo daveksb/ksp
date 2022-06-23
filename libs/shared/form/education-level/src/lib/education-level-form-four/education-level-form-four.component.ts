@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { DynamicComponent, KspFormBaseComponent } from '@ksp/shared/interface';
+import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
 @Component({
@@ -9,10 +9,7 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./education-level-form-four.component.scss'],
   providers: providerFactory(EducationLevelFormFourComponent),
 })
-export class EducationLevelFormFourComponent
-  extends KspFormBaseComponent
-  implements DynamicComponent
-{
+export class EducationLevelFormFourComponent extends KspFormBaseComponent {
   override form = this.fb.group({
     educationInstitution: [],
     graduateDegree: [],
@@ -21,7 +18,6 @@ export class EducationLevelFormFourComponent
     graduateDate: [],
     approveAcademic: [],
   });
-  @Input() data: any;
 
   constructor(private fb: FormBuilder) {
     super();

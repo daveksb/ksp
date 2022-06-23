@@ -9,10 +9,7 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./education-level-form-one.component.scss'],
   providers: providerFactory(EducationLevelFormOneComponent),
 })
-export class EducationLevelFormOneComponent
-  extends KspFormBaseComponent
-  implements DynamicComponent
-{
+export class EducationLevelFormOneComponent extends KspFormBaseComponent {
   override form = this.fb.group({
     educationInstitution: [],
     graduateDegree: [],
@@ -20,8 +17,6 @@ export class EducationLevelFormOneComponent
     admissionDate: [],
     graduateDate: [],
   });
-
-  @Input() data: any;
 
   constructor(private fb: FormBuilder) {
     super();

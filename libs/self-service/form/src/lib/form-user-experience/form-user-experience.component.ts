@@ -13,12 +13,13 @@ export class FormUserExperienceComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+
   override form = this.fb.group({
     TrainingAddressOne: [],
     TrainingAddressTwo: [],
     teachingAddress: [],
-    selectValue: [''],
-    foreignLicenseForm: this.fb.group({}),
+    hasForeignLicense: [''],
+    foreignLicenseForm: [],
   });
 
   constructor(private fb: FormBuilder) {
@@ -33,7 +34,7 @@ export class FormUserExperienceComponent
   }
 
   ngOnInit(): void {
-    this.form.controls['selectValue'].valueChanges.subscribe((res) => {
+    this.form.controls['hasForeignLicense'].valueChanges.subscribe((res) => {
       //console.log('res', res);
     });
   }
