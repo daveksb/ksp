@@ -21,7 +21,7 @@
     <div class="checkbox__container">
       <div class="detail__header">ข้อมูลผู้ขอรหัสสำหรับเข้าใช้งานระบบ</div>
       <div class="detail__header-2">สิทธิสำหรับการเข้าใช้งาน</div>
-      <div class="checkbox__content" [formGroup]="grantFormGroup">
+      <div class="checkbox__content" [formGroup]="form">
         <ng-container *ngFor="let item of grant | keyvalue">
           <mat-checkbox
             formControlName="{{ item.key }}"

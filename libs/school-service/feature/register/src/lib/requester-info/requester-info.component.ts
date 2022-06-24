@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   templateUrl: './requester-info.component.html',
   styleUrls: ['./requester-info.component.scss'],
 })
 export class RequesterInfoComponent implements OnInit {
-  grantFormGroup: FormGroup;
+  form: FormGroup;
 
   grant = {
     ['ยื่นแบบคำขออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต']: false,
@@ -19,11 +21,11 @@ export class RequesterInfoComponent implements OnInit {
   };
 
   constructor(private fb: FormBuilder, public router: Router) {
-    this.grantFormGroup = this.fb.group(this.grant);
+    this.form = this.fb.group(this.grant);
   }
 
   ngOnInit(): void {
-    this.grantFormGroup.valueChanges.subscribe((res) => {
+    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
       //console.log('res = ', res);
     });
   }

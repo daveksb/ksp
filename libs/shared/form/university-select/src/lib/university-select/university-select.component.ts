@@ -13,8 +13,12 @@ export class UniversitySelectComponent {
 
   search() {
     this.dialog.open(UniversitySearchComponent, {
-      height: '900px',
+      //height: '900px',
       width: '1200px',
+      position: {
+        top: '0px',
+        right: '0px',
+      },
     });
   }
 }
