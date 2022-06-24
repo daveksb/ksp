@@ -1,10 +1,12 @@
-<input
-  type="file"
-  (change)="onFileSelected($event)"
-  hidden="true"
-  #fileUpload
-/>
-
 <button (click)="fileUpload.click()" type="button" class="btn btn-primary">
   <img src="/assets/images/img-uni/Upload.svg" /> อัพโหลดไฟล์
 </button>
+
+<input
+  hidden="true"
+  type="file"
+  (change)="onFileSelected($event)"
+  #fileUpload
+/>
+
+<span class="file__name">{{ fileName }}</span>
