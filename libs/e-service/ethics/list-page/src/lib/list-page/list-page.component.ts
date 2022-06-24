@@ -3,8 +3,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EthicsMode } from '@ksp/shared/interface';
 
+/**
+ * Ethics List page, shared between all ethics mode
+ */
 @Component({
-  selector: 'ksp-list-page',
   templateUrl: './list-page.component.html',
   styleUrls: ['./list-page.component.scss'],
 })
