@@ -20,6 +20,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
+import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 
 @NgModule({
   imports: [
@@ -41,6 +42,7 @@ import { TopNavComponent } from '@ksp/shared/menu';
     MatTableModule,
     RequestHeaderInfoComponent,
     TopNavComponent,
+    FileUploadComponent
   ],
   declarations: [
     CourseSearchComponent,
