@@ -16,7 +16,7 @@ a:focus {
 }
 
 .active-link {
-  color: blue !important;
+  color: #f68b33 !important;
 }
 
 #sidebar.active {
