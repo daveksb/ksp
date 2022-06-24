@@ -67,6 +67,9 @@ export class LicenseDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateHeaderLabel();
+    this.form.valueChanges.subscribe((res) => {
+      //console.log('res = ', res);
+    });
   }
 
   useSameAddress(evt: any) {

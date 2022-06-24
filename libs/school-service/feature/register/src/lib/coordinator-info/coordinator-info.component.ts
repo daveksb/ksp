@@ -1,20 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'school-service-author',
   templateUrl: './coordinator-info.component.html',
   styleUrls: ['./coordinator-info.component.scss'],
 })
-export class CoordinatorInfoComponent {
+export class CoordinatorInfoComponent implements OnInit {
+  form = this.fb.group({
+    coordinator: [],
+  });
+
   uploadFileList = ['หนังสือแต่งตั้งผู้ประสานงาน', 'สำเนาบัตรประชาชน'];
 
-  constructor(private router: Router, public dialog: MatDialog) {}
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private fb: FormBuilder
+  ) {}
+
+  ngOnInit(): void {
+    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
+      //console.log('res = ', res);
+    });
+  }
 
   navigateBack() {
     this.router.navigate(['/', 'login']);

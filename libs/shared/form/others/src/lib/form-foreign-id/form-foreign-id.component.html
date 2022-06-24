@@ -1,186 +1,219 @@
-<div class="detail__container">
-  <div class="detail__header">{{ formHeader }}</div>
+<form [formGroup]="form">
+  <div class="detail__container">
+    <div class="detail__header">{{ formHeader }}</div>
 
-  <div class="detail__content--primary">
-    <div>
-      <label class="form-label">คำนำหน้าชื่อภาษาอังกฤษ</label>
-      <select class="search__content form-select form-select-sm">
-        <option selected>นางสาว</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-    <div>
-      <label class="form-label">ชื่อภาษาอังกฤษ </label>
-      <input
-        class="form-control form-control-sm"
-        type="text"
-        placeholder="กรุณากรอก"
-      />
-    </div>
-    <div>
-      <label class="form-label">ชื่อกลางภาษาอังกฤษ </label>
-      <input
-        class="form-control form-control-sm"
-        type="text"
-        placeholder="กรุณากรอก"
-      />
+    <div class="detail__content--primary">
+      <div>
+        <label class="form-label">คำนำหน้าชื่อภาษาอังกฤษ</label>
+        <select
+          class="search__content form-select form-select-sm"
+          formControlName="prefixEn"
+        >
+          <option selected>นางสาว</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div>
+        <label class="form-label">ชื่อภาษาอังกฤษ </label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          placeholder="กรุณากรอก"
+          formControlName="nameEn"
+        />
+      </div>
+      <div>
+        <label class="form-label">ชื่อกลางภาษาอังกฤษ </label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          placeholder="กรุณากรอก"
+          formControlName="midnameEn"
+        />
+      </div>
+
+      <div>
+        <label class="form-label">นามสกุลภาษาอังกฤษ </label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          placeholder="กรุณากรอก"
+          formControlName="lastnameEn"
+        />
+      </div>
     </div>
 
-    <div>
-      <label class="form-label">นามสกุลภาษาอังกฤษ </label>
-      <input
-        class="form-control form-control-sm"
-        type="text"
-        placeholder="กรุณากรอก"
-      />
+    <div class="detail__content--primary">
+      <div>
+        <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
+        <select
+          class="search__content form-select form-select-sm"
+          formControlName="prefixTh"
+        >
+          <option selected>นางสาว</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div>
+        <label class="form-label">ชื่อภาษาไทย </label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          placeholder="กรุณากรอก"
+          formControlName="nameTh"
+        />
+      </div>
+      <div>
+        <label class="form-label">ชื่อกลางภาษาไทย </label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          placeholder="กรุณากรอก"
+          formControlName="midnameTh"
+        />
+      </div>
+
+      <div>
+        <label class="form-label">นามสกุลภาษาไทย </label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          placeholder="กรุณากรอก"
+          formControlName="lastnameTh"
+        />
+      </div>
+    </div>
+
+    <div class="detail__content--secondary">
+      <div>
+        <label class="form-label">เพศ</label>
+        <select
+          class="search__content form-select form-select-sm"
+          formControlName="sex"
+        >
+          <option selected>หญิง</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div>
+        <label class="form-label">วันเดือนปีเกิด</label>
+        <input
+          class="form-control form-control-sm"
+          type="date"
+          placeholder="กรุณากรอก"
+          formControlName="birthDate"
+        />
+      </div>
+    </div>
+
+    <div class="detail__content--secondary">
+      <div>
+        <label class="form-label">อีเมล์</label>
+        <input
+          class="form-control form-control-sm"
+          type="email"
+          placeholder="กรุณากรอก"
+          formControlName="email"
+        />
+      </div>
+      <div>
+        <label class="form-label">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
+        <input
+          class="form-control form-control-sm"
+          type="tel"
+          placeholder="กรุณากรอก"
+          formControlName="contactPhone"
+        />
+      </div>
+    </div>
+
+    <div class="detail__content--secondary">
+      <div>
+        <label class="form-label"
+          >หมายเลขหนังสือเดินทาง (Passport Number)</label
+        >
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          placeholder="กรุณากรอก"
+          formControlName="passportNumber"
+        />
+      </div>
+      <div>
+        <label class="form-label">ประเทศ</label>
+        <select
+          class="search__content form-select form-select-sm"
+          formControlName="country"
+        >
+          <option selected>อังกฤษ</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="detail__content--third">
+      <div>
+        <label class="form-label">วันเดือนปีที่ออกหนังสือเดินทาง</label>
+        <input
+          class="form-control form-control-sm"
+          type="date"
+          placeholder="กรุณากรอก"
+          formControlName="passportRelease"
+        />
+      </div>
+
+      <div>
+        <label class="form-label">วันเดือนปีที่หนังสือเดินทางหมดอายุ</label>
+        <input
+          class="form-control form-control-sm"
+          type="date"
+          placeholder="กรุณากรอก"
+          formControlName="passportExpire"
+        />
+      </div>
+
+      <div>
+        <label class="form-label">Visa Class</label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          placeholder="กรุณากรอก"
+          formControlName="visaClass"
+        />
+      </div>
+    </div>
+
+    <div class="detail__content--secondary">
+      <div>
+        <label class="form-label">ประเภทวีซ่า</label>
+        <select
+          class="search__content form-select form-select-sm"
+          formControlName="visaType"
+        >
+          <option selected>F (Official)</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="form-label">วันเดือนปีวีซ่าหมดอายุ</label>
+        <input
+          class="form-control form-control-sm"
+          type="date"
+          placeholder="กรุณากรอก"
+          formControlName="visaExpire"
+        />
+      </div>
     </div>
   </div>
-
-  <div class="detail__content--primary">
-    <div>
-      <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
-      <select class="search__content form-select form-select-sm">
-        <option selected>นางสาว</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-    <div>
-      <label class="form-label">ชื่อภาษาไทย </label>
-      <input
-        class="form-control form-control-sm"
-        type="text"
-        placeholder="กรุณากรอก"
-      />
-    </div>
-    <div>
-      <label class="form-label">ชื่อกลางภาษาไทย </label>
-      <input
-        class="form-control form-control-sm"
-        type="text"
-        placeholder="กรุณากรอก"
-      />
-    </div>
-
-    <div>
-      <label class="form-label">นามสกุลภาษาไทย </label>
-      <input
-        class="form-control form-control-sm"
-        type="text"
-        placeholder="กรุณากรอก"
-      />
-    </div>
-  </div>
-
-  <div class="detail__content--secondary">
-    <div>
-      <label class="form-label">เพศ</label>
-      <select class="search__content form-select form-select-sm">
-        <option selected>หญิง</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-    <div>
-      <label class="form-label">วันเดือนปีเกิด</label>
-      <input
-        class="form-control form-control-sm"
-        type="date"
-        placeholder="กรุณากรอก"
-      />
-    </div>
-  </div>
-
-  <div class="detail__content--secondary">
-    <div>
-      <label class="form-label">อีเมล์</label>
-      <input
-        class="form-control form-control-sm"
-        type="email"
-        placeholder="กรุณากรอก"
-      />
-    </div>
-    <div>
-      <label class="form-label">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
-      <input
-        class="form-control form-control-sm"
-        type="tel"
-        placeholder="กรุณากรอก"
-      />
-    </div>
-  </div>
-
-  <div class="detail__content--secondary">
-    <div>
-      <label class="form-label">หมายเลขหนังสือเดินทาง (Passport Number)</label>
-      <input
-        class="form-control form-control-sm"
-        type="text"
-        placeholder="กรุณากรอก"
-      />
-    </div>
-    <div>
-      <label class="form-label">ประเทศ</label>
-      <select class="search__content form-select form-select-sm">
-        <option selected>อังกฤษ</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="detail__content--third">
-    <div>
-      <label class="form-label">วันเดือนปีที่ออกหนังสือเดินทาง</label>
-      <input
-        class="form-control form-control-sm"
-        type="date"
-        placeholder="กรุณากรอก"
-      />
-    </div>
-
-    <div>
-      <label class="form-label">วันเดือนปีที่หนังสือเดินทางหมดอายุ</label>
-      <input
-        class="form-control form-control-sm"
-        type="date"
-        placeholder="กรุณากรอก"
-      />
-    </div>
-
-    <div>
-      <label class="form-label">Visa Class</label>
-      <input
-        class="form-control form-control-sm"
-        type="text"
-        placeholder="กรุณากรอก"
-      />
-    </div>
-  </div>
-
-  <div class="detail__content--secondary">
-    <div>
-      <label class="form-label">ประเภทวีซ่า</label>
-      <select class="search__content form-select form-select-sm">
-        <option selected>F (Official)</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-
-    <div>
-      <label class="form-label">วันเดือนปีวีซ่าหมดอายุ</label>
-      <input
-        class="form-control form-control-sm"
-        type="date"
-        placeholder="กรุณากรอก"
-      />
-    </div>
-  </div>
-</div>
+</form>

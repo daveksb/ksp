@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
@@ -60,6 +61,8 @@ export const data: staffInfo[] = [
   styleUrls: ['./staff-list.component.scss'],
 })
 export class StaffListComponent {
+
+
   personSelected = false;
   displayedColumns: string[] = [
     'order',
@@ -75,7 +78,7 @@ export class StaffListComponent {
   ];
   dataSource = new MatTableDataSource<staffInfo>();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private fb: FormBuilder) {}
 
   search() {
     this.dataSource.data = data;

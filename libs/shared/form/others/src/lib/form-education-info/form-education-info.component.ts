@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { ThisReceiver } from '@angular/compiler';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -9,9 +10,14 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./form-education-info.component.scss'],
   providers: providerFactory(FormEducationInfoComponent),
 })
-export class FormEducationInfoComponent extends KspFormBaseComponent {
+export class FormEducationInfoComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
   override form = this.fb.group({
+    degreeLevel: [0],
     degreeName: [],
+    isEducationDegree: [false],
     branch: [],
     educationInstitution: [],
     country: [],
@@ -19,6 +25,19 @@ export class FormEducationInfoComponent extends KspFormBaseComponent {
     graduateDate: [],
     grade: [],
   });
+
+  @Input() showIsEducationDegree = false;
+
+  _defualtDegree = 0;
+
+  @Input()
+  set defualtDegree(value: any) {
+    this._defualtDegree = value;
+  }
+
+  get defualtDegree(): any {
+    return this._defualtDegree;
+  }
 
   constructor(private fb: FormBuilder) {
     super();
@@ -29,5 +48,21 @@ export class FormEducationInfoComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+
+  ngOnInit(): void {
+    if (this.defualtDegree) {
+      setTimeout(() => {
+        this.degreeLevel.setValue(this.defualtDegree);
+        this.degreeLevel.disable();
+      }, 0);
+    }
+    this.form.valueChanges.subscribe((res) => {
+      console.log('res = ', res);
+    });
+  }
+
+  get degreeLevel() {
+    return this.form.controls.degreeLevel;
   }
 }

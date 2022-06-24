@@ -37,7 +37,7 @@
         <mat-tab-group
           (selectedIndexChange)="onTabIndexChanged($event)"
           class="tab-group"
-          selectedIndex="3"
+          selectedIndex="2"
         >
           <mat-tab label="ที่อยู่" class="tab-content">
             <ksp-form-address formControlName="address1"
@@ -68,11 +68,15 @@
           </mat-tab>
 
           <mat-tab label="ข้อมูลทางการศึกษา">
-            <ksp-form-education-info formControlName="education1"
-              >วุฒิการศึกษาปริญญาตรี</ksp-form-education-info
+            <ksp-form-education-info
+              formControlName="education1"
+              [defualtDegree]="1"
+              >วุฒิทางการศึกษา</ksp-form-education-info
             >
-            <ksp-form-education-info formControlName="education2"
-              >วุฒิการศึกษาปริญญาโท
+            <ksp-form-education-info
+              formControlName="education2"
+              [defualtDegree]="2"
+              >วุฒิทางการศึกษา
             </ksp-form-education-info>
             <div class="content__container">
               <div class="mb-3">
@@ -92,7 +96,9 @@
           </mat-tab>
 
           <mat-tab label="ข้อมูลการสอนและการจ้าง">
-            <ksp-form-teaching-info></ksp-form-teaching-info>
+            <ksp-form-teaching-info
+              formControlName="teaching"
+            ></ksp-form-teaching-info>
             <ksp-form-attachment [groups]="teachingInfo"></ksp-form-attachment>
           </mat-tab>
 

@@ -1,49 +1,53 @@
 <uni-service-top-nav>ลงทะเบียนขอรับรหัสเข้าใช้งาน</uni-service-top-nav>
 
-<div class="container">
-  <div class="header">รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ</div>
+<form [formGroup]="form">
+  <div class="container">
+    <div class="header">รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ</div>
 
-  <div class="content__container">
-    <ksp-request-header-info
-      [requestDate]="'10 ตุลาคม 2565'"
-      [requestNumber]="'112234467876543'"
-    ></ksp-request-header-info>
+    <div class="content__container">
+      <ksp-request-header-info
+        [requestDate]="'10 ตุลาคม 2565'"
+        [requestNumber]="'112234467876543'"
+      ></ksp-request-header-info>
 
-    <hr />
+      <hr />
 
-    <div class="img__step">
-      <img src="/assets/images/img-uni/stepper.png" />
+      <div class="img__step">
+        <img src="/assets/images/img-uni/stepper.png" />
+      </div>
+
+      <div class="detail__content">
+        <ksp-university-select [isViewOnly]="true"></ksp-university-select>
+      </div>
+
+      <div class="school__code">
+        <div class="box__header">รหัสเข้าใช้งาน (รหัสโรงเรียน) คือ</div>
+        <div class="detail__header">xxxx</div>
+      </div>
+
+      <div [kspSetGrayBg]="true" class="header-2">
+        ข้อมูลผู้แต่งตั้งผู้ประสานงาน / ผู้รับผิดชอบ (ที่ระบุไว้ในเอกสารแนบ)
+      </div>
+      <ksp-form-coordinator-info
+        formControlName="coordinator"
+      ></ksp-form-coordinator-info>
+
+      <div class="upload__content">
+        <ksp-form-attachment
+          [title]="'กรุณาแนบหลักฐานเพื่อการพิจารณา'"
+          [groups]="uploadFileList"
+        ></ksp-form-attachment>
+      </div>
+
+      <ksp-bottom-nav
+        [isLastPage]="true"
+        [showCenterButtons]="true"
+        [showSaveButton]="true"
+        [showCancelButton]="true"
+        (prevClicked)="back()"
+        (saveClicked)="save()"
+        (cancelClicked)="navigateBack()"
+      ></ksp-bottom-nav>
     </div>
-
-    <div class="detail__content">
-      <ksp-university-select></ksp-university-select>
-    </div>
-
-    <div class="school__code">
-      <div class="box__header">รหัสเข้าใช้งาน (รหัสโรงเรียน) คือ</div>
-      <div class="detail__header">xxxx</div>
-    </div>
-
-    <div [kspSetGrayBg]="true" class="header-2">
-      ข้อมูลผู้แต่งตั้งผู้ประสานงาน / ผู้รับผิดชอบ (ที่ระบุไว้ในเอกสารแนบ)
-    </div>
-    <ksp-form-coordinator-info></ksp-form-coordinator-info>
-
-    <div class="upload__content">
-      <ksp-form-attachment
-        [title]="'กรุณาแนบหลักฐานเพื่อการพิจารณา'"
-        [groups]="uploadFileList"
-      ></ksp-form-attachment>
-    </div>
-
-    <ksp-bottom-nav
-      [isLastPage]="true"
-      [showCenterButtons]="true"
-      [showSaveButton]="true"
-      [showCancelButton]="true"
-      (prevClicked)="back()"
-      (saveClicked)="save()"
-      (cancelClicked)="navigateBack()"
-    ></ksp-bottom-nav>
   </div>
-</div>
+</form>

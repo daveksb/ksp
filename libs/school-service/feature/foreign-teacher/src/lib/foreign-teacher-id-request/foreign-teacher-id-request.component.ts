@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { FormMode } from '@ksp/shared/interface';
@@ -6,15 +6,30 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   templateUrl: './foreign-teacher-id-request.component.html',
   styleUrls: ['./foreign-teacher-id-request.component.scss'],
 })
-export class ForeignTeacherIdRequestComponent {
+export class ForeignTeacherIdRequestComponent implements OnInit{
+  form = this.fb.group({
+    foreignTeacher: [],
+  });
+
   @Input() mode: FormMode = 'edit';
   foreignInfo = ['1.สำเนาหนังสือเดินทาง'];
-  constructor(private router: Router, public dialog: MatDialog) {}
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private fb: FormBuilder
+  ) {}
+
+  ngOnInit(): void {
+    this.form.valueChanges.subscribe((res) => {
+      //console.log('res = ', res);
+    });
+  }
 
   cancel() {
     this.router.navigate(['/', 'temp-license']);
