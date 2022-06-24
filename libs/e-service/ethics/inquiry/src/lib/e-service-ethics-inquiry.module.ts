@@ -12,6 +12,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { InquiryDetailComponent } from './inquiry-detail/inquiry-detail.component';
 import { InquiryResultComponent } from './inquiry-result/inquiry-result.component';
 import { TopNavComponent } from '@ksp/shared/menu';
+import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 
 export const routes: Routes = [
   {

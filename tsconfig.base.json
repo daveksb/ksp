@@ -149,6 +149,9 @@
       "@ksp/shared/form/education-level": [
         "libs/shared/form/education-level/src/index.ts"
       ],
+      "@ksp/shared/form/file-upload": [
+        "libs/shared/form/file-upload/src/index.ts"
+      ],
       "@ksp/shared/form/others": ["libs/shared/form/others/src/index.ts"],
       "@ksp/shared/form/school/register": [
         "libs/shared/form/school/register/src/index.ts"

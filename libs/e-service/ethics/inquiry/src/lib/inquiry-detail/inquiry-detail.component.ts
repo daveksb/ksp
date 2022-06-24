@@ -4,6 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { Router } from '@angular/router';
 import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-info';
+import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { BottomNavComponent } from '@ksp/shared/menu';
 import {
@@ -27,6 +28,7 @@ import {
     RequestHeaderInfoComponent,
     LicenseTypeButtonGroupComponent,
     LicenseInfoComponent,
+    FileUploadComponent,
   ],
 })
 export class InquiryDetailComponent {

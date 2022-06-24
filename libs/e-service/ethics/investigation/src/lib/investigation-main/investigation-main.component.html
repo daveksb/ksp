@@ -1,17 +1,20 @@
-<ksp-top-nav><span subHeader>ระบบงานจรรยาบรรณ </span></ksp-top-nav>
+<ksp-top-nav>
+  <span subHeader>ระบบงานจรรยาบรรณ </span>
+</ksp-top-nav>
 
 <div class="main__container">
   <div class="page__title">บันทึกข้อมูลการสืบสวนข้อเท็จจริง</div>
 
   <div class="tab__container">
     <mat-tab-group class="tab-group">
-      <mat-tab label="บันทึกการกล่าวหา/กล่าวโทษ" class="tab-content"
-        ><e-service-ethic-accusation-record
+      <mat-tab label="บันทึกการกล่าวหา/กล่าวโทษ" class="tab-content">
+        <e-service-ethic-accusation-record
           [hideAllButtons]="true"
           [hideContainer]="true"
           [hideTitle]="true"
           [hideBox]="true"
-        ></e-service-ethic-accusation-record>
+        >
+        </e-service-ethic-accusation-record>
       </mat-tab>
 
       <mat-tab label="สืบสวนข้อเท็จจริง">
@@ -22,15 +25,14 @@
     </mat-tab-group>
   </div>
 
-  <div class="bottom__container">
-    <ksp-bottom-nav
-      [showCenterButtons]="true"
-      [isFirstPage]="true"
-      [isLastPage]="true"
-      [showSaveButton]="true"
-      [colorMode]="'green'"
-      (saveClicked)="save()"
-      (cancelClicked)="cancel()"
-    ></ksp-bottom-nav>
-  </div>
+  <ksp-bottom-nav
+    kspStickyBottomNav
+    [showCenterButtons]="true"
+    [isFirstPage]="true"
+    [isLastPage]="true"
+    [showSaveButton]="true"
+    [colorMode]="'green'"
+    (saveClicked)="save()"
+    (cancelClicked)="cancel()"
+  ></ksp-bottom-nav>
 </div>

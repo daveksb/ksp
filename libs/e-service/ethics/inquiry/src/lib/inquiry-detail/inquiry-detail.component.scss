@@ -125,7 +125,7 @@
   cursor: pointer;
 }
 
-#btn-upload {
+#upload__button {
   margin-top: 12px;
 }
 
@@ -134,13 +134,12 @@
   padding-bottom: 0;
 }
 
-.xxx {
+.checkbox__row {
   display: flex;
   line-height: 15px;
   margin: 12px 0;
 }
 
-.xxx-2 {
-  display: flex;
-  line-height: 15px;
+.checkbox__row--no-margin {
+  margin: 0;
 }

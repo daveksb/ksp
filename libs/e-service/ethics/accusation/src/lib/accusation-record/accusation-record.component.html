@@ -11,12 +11,7 @@
   </div>
   <img src="" />
 
-  <div
-    class="box-container"
-    [ngClass]="{
-      hide__box: hideBox
-    }"
-  >
+  <div class="box-container" [ngClass]="{ hide__box: hideBox }">
     <ksp-request-header-info
       [requestDate]="'10 ตุลาคม 2565'"
       [requestNumber]="'112234467876543'"
@@ -201,14 +196,14 @@
   </div>
 </div>
 
-<div class="bottom__container" *ngIf="!hideAllButtons">
-  <ksp-bottom-nav
-    [showCenterButtons]="true"
-    [isFirstPage]="true"
-    [showSaveButton]="true"
-    [showCancelButton]="true"
-    [colorMode]="'green'"
-    (nextClicked)="next()"
-    (cancelClicked)="cancel()"
-  ></ksp-bottom-nav>
-</div>
+<ksp-bottom-nav
+  *ngIf="!hideAllButtons"
+  kspStickyBottomNav
+  [showCenterButtons]="true"
+  [isFirstPage]="true"
+  [showSaveButton]="true"
+  [showCancelButton]="true"
+  [colorMode]="'green'"
+  (nextClicked)="next()"
+  (cancelClicked)="cancel()"
+></ksp-bottom-nav>
