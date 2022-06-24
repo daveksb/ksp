@@ -1,10 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import {
-  CompleteDialogComponent,
-  ConfirmDialogComponent,
-} from '@ksp/shared/dialog';
+import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 
 @Component({
   templateUrl: './final-result.component.html',
