@@ -10,5 +10,5 @@ import { SetGrayBackgroundDirective } from '@ksp/shared/directive';
   styleUrls: ['./coordinator-info.component.scss'],
 })
 export class FormCoordinatorInfoComponent {
-  @Input() isGreyMode = true;
+  @Input() isGrayMode = true;
 }
