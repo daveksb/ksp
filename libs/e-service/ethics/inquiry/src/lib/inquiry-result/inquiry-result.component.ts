@@ -15,6 +15,7 @@ import {
   LicenseTypeButtonGroupComponent,
   RequestHeaderInfoComponent,
 } from '@ksp/shared/ui';
+import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 
 @Component({
   selector: 'e-service-inquiry-result',
@@ -30,6 +31,7 @@ import {
     RequestHeaderInfoComponent,
     LicenseTypeButtonGroupComponent,
     LicenseInfoComponent,
+    FileUploadComponent,
   ],
 })
 export class InquiryResultComponent {
@@ -49,7 +51,6 @@ export class InquiryResultComponent {
 
   save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      height: '175px',
       width: '350px',
       data: {
         title: `คุณยืนยันการบันทึกข้อมูล

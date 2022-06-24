@@ -17,6 +17,5 @@ import { TopNavComponent } from '@ksp/shared/menu';
     TopNavComponent,
   ],
   declarations: [ListPageComponent],
-  exports: [ListPageComponent],
 })
 export class EServiceEthicsListPageModule {}

@@ -1,0 +1,17 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/shared/form/file-upload/src",
+  "prefix": "ksp",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/form/file-upload/**/*.ts",
+          "libs/shared/form/file-upload/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

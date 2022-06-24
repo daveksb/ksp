@@ -50,14 +50,6 @@ table {
   border-top: 0;
 }
 
-.btn-upload {
-  font-size: 16px;
-  background-color: #0056ff;
-  color: #fff;
-  border-radius: 4px;
-  margin-left: 15px;
-}
-
 .btn-upload-secondary {
   font-size: 16px;
   background-color: transparent;
@@ -146,4 +138,8 @@ input {
 
 .date__input {
   width: 125px;
+}
+
+#upload__button {
+  margin-left: 20px;
 }
