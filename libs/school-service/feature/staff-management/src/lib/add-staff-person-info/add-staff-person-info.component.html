@@ -3,78 +3,97 @@
   ><span subHeader>เพิ่มบุคลากร</span></ksp-top-nav
 >
 
-<div class="container">
-  <div class="header">รายละเอียดเพิ่มบุคลากรภายในหน่วยงาน</div>
+<form [formGroup]="form">
+  <div class="container">
+    <div class="header">รายละเอียดเพิ่มบุคลากรภายในหน่วยงาน</div>
 
-  <div class="box__container">
-    <ksp-request-header-info
-      [requestDate]="'10 ตุลาคม 2565'"
-    ></ksp-request-header-info>
-    <hr />
+    <div class="box__container">
+      <ksp-request-header-info
+        [requestDate]="'10 ตุลาคม 2565'"
+      ></ksp-request-header-info>
+      <hr />
 
-    <div class="box__detail">
-      <div class="detail__container--half">
-        <div class="mb-3">
-          <label class="form-label">หมายเลขบัตรประชาชน </label>
-          <input class="form-control form-control-sm" type="text" />
+      <div class="box__detail">
+        <div class="detail__container--half">
+          <div class="mb-3">
+            <label class="form-label">หมายเลขบัตรประชาชน </label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              formControlName="personId"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label"
+              >หมายเลขหนังสือเดินทาง (Passport Number)
+            </label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              formControlName="passportNumber"
+            />
+          </div>
         </div>
-        <div class="mb-3">
-          <label class="form-label"
-            >หมายเลขหนังสือเดินทาง (Passport Number)
-          </label>
-          <input class="form-control form-control-sm" type="text" />
+
+        <ksp-form-user-info
+          formControlName="staff"
+          [isWhiteMode]="true"
+        ></ksp-form-user-info>
+      </div>
+
+      <div class="box__detail">
+        <div class="title__box">ข้อมูลใบอนุญาตประกอบวิชาชีพ</div>
+        <div class="license__content">
+          <div class="license__label-1">หมายเลขสมาชิกคุรุสภา</div>
+          <div class="license__label-2">1234567890</div>
+        </div>
+
+        <ksp-license-type-button-group
+          [groups]="licenseButtons"
+        ></ksp-license-type-button-group>
+
+        <div class="result">
+          <div class="result__item">
+            <ksp-license-info></ksp-license-info>
+          </div>
         </div>
       </div>
 
-      <ksp-form-user-info [isWhiteMode]="true"></ksp-form-user-info>
-    </div>
+      <div class="mattab__container">
+        <mat-tab-group
+          class="tab-group"
+          animationDuration="0ms"
+          dynamicHeight="true"
+        >
+          <mat-tab label="ที่อยู่" class="tab-content">
+            <ksp-form-address formControlName="address1"
+              >ที่อยู่ทะเบียนบ้าน</ksp-form-address
+            >
+            <ksp-form-address formControlName="address2"
+              >ที่อยู่ที่ติดต่อได้สะดวก
+            </ksp-form-address>
+          </mat-tab>
 
-    <div class="box__detail">
-      <div class="title__box">ข้อมูลใบอนุญาตประกอบวิชาชีพ</div>
-      <div class="license__content">
-        <div class="license__label-1">หมายเลขสมาชิกคุรุสภา</div>
-        <div class="license__label-2">1234567890</div>
+          <mat-tab label="วุฒิทางการศึกษา">
+            <ksp-form-education-info
+              formControlName="education1"
+              [showIsEducationDegree]="true"
+            ></ksp-form-education-info>
+            <ksp-form-education-info
+              formControlName="education2"
+              [showIsEducationDegree]="true"
+            ></ksp-form-education-info>
+          </mat-tab>
+        </mat-tab-group>
       </div>
-
-      <ksp-license-type-button-group
-        [groups]="licenseButtons"
-      ></ksp-license-type-button-group>
-
-      <div class="result">
-        <div class="result__item">
-          <ksp-license-info></ksp-license-info>
-        </div>
-      </div>
-    </div>
-
-    <div class="mattab__container">
-      <mat-tab-group
-        class="tab-group"
-        animationDuration="0ms"
-        dynamicHeight="true"
-      >
-        <mat-tab label="ที่อยู่" class="tab-content">
-          <ksp-form-address>ที่อยู่ทะเบียนบ้าน</ksp-form-address>
-          <ksp-form-address>ที่อยู่ที่ติดต่อได้สะดวก </ksp-form-address>
-        </mat-tab>
-
-        <mat-tab label="วุฒิทางการศึกษา">
-          <ksp-form-education-info
-            [showIsEducationDegree]="true"
-          ></ksp-form-education-info>
-          <ksp-form-education-info
-            [showIsEducationDegree]="true"
-          ></ksp-form-education-info>
-        </mat-tab>
-      </mat-tab-group>
     </div>
   </div>
-</div>
 
-<div class="bottom__container">
-  <ksp-bottom-nav
-    (nextClicked)="next()"
-    [isFirstPage]="true"
-    [showCenterButtons]="false"
-  ></ksp-bottom-nav>
-</div>
+  <div class="bottom__container">
+    <ksp-bottom-nav
+      (nextClicked)="next()"
+      [isFirstPage]="true"
+      [showCenterButtons]="false"
+    ></ksp-bottom-nav>
+  </div>
+</form>

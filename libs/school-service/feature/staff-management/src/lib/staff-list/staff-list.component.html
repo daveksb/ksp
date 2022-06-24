@@ -1,95 +1,100 @@
 <ksp-top-nav><span header>ทะเบียนบุคลากรภายในหน่วยงาน</span></ksp-top-nav>
 
-<div class="container">
-  <div class="header">ทะเบียนบุคลากรภายในหน่วยงาน</div>
+<form [formGroup]="form">
+  <div class="container">
+    <div class="header">ทะเบียนบุคลากรภายในหน่วยงาน</div>
 
-  <school-service-staff-search
-    (clear)="clear()"
-    (search)="search()"
-  ></school-service-staff-search>
+    <school-service-staff-search
+      formControlName="staffSearch"
+      (clear)="clear()"
+      (search)="search()"
+    ></school-service-staff-search>
 
-  <div class="table__container">
-    <div class="title__box">ทะเบียนรายชื่อบุคลากรภายในหน่วยงาน</div>
-    <hr />
+    <div class="table__container">
+      <div class="title__box">ทะเบียนรายชื่อบุคลากรภายในหน่วยงาน</div>
+      <hr />
 
-    <div class="btn__container">
-      <button (click)="addStaff()" class="btn__add">+ เพิ่มบุคลากร</button>
-      <button (click)="goToDetail()" class="btn__search">ค้นหาใบอนุญาต</button>
-    </div>
+      <div class="btn__container">
+        <button (click)="addStaff()" class="btn__add">+ เพิ่มบุคลากร</button>
+        <button (click)="goToDetail()" class="btn__search">
+          ค้นหาใบอนุญาต
+        </button>
+      </div>
 
-    <div class="table-responsive">
-      <table mat-table [dataSource]="dataSource">
-        <ng-container matColumnDef="order">
-          <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-          <td mat-cell *matCellDef="let element">{{ element.order }}</td>
-        </ng-container>
+      <div class="table-responsive">
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="order">
+            <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+            <td mat-cell *matCellDef="let element">{{ element.order }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="ssn">
-          <th mat-header-cell *matHeaderCellDef>
-            หมายเลขบัตรประชาชน/เลขที่หนังสือเดินทาง
-          </th>
-          <td mat-cell *matCellDef="let element">{{ element.ssn }}</td>
-        </ng-container>
+          <ng-container matColumnDef="ssn">
+            <th mat-header-cell *matHeaderCellDef>
+              หมายเลขบัตรประชาชน/เลขที่หนังสือเดินทาง
+            </th>
+            <td mat-cell *matCellDef="let element">{{ element.ssn }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
-          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-        </ng-container>
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+            <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="startDate">
-          <th mat-header-cell *matHeaderCellDef>วันที่เข้าปฏิบัติงาน</th>
-          <td mat-cell *matCellDef="let element">{{ element.startDate }}</td>
-        </ng-container>
+          <ng-container matColumnDef="startDate">
+            <th mat-header-cell *matHeaderCellDef>วันที่เข้าปฏิบัติงาน</th>
+            <td mat-cell *matCellDef="let element">{{ element.startDate }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="endDate">
-          <th mat-header-cell *matHeaderCellDef>วันที่หมดสัญญา</th>
-          <td mat-cell *matCellDef="let element">{{ element.endDate }}</td>
-        </ng-container>
+          <ng-container matColumnDef="endDate">
+            <th mat-header-cell *matHeaderCellDef>วันที่หมดสัญญา</th>
+            <td mat-cell *matCellDef="let element">{{ element.endDate }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="profession">
-          <th mat-header-cell *matHeaderCellDef>ใบอนุญาตประกอบวิชาชีพ</th>
-          <td mat-cell *matCellDef="let element">
-            <mat-icon *ngIf="element.profession" class="check_box"
-              >check_box</mat-icon
-            >
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="profession">
+            <th mat-header-cell *matHeaderCellDef>ใบอนุญาตประกอบวิชาชีพ</th>
+            <td mat-cell *matCellDef="let element">
+              <mat-icon *ngIf="element.profession" class="check_box"
+                >check_box</mat-icon
+              >
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="teaching">
-          <th mat-header-cell *matHeaderCellDef>ใบปฏิบัติการสอน</th>
-          <td mat-cell *matCellDef="let element">
-            <mat-icon *ngIf="element.teaching" class="check_box"
-              >check_box</mat-icon
-            >
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="teaching">
+            <th mat-header-cell *matHeaderCellDef>ใบปฏิบัติการสอน</th>
+            <td mat-cell *matCellDef="let element">
+              <mat-icon *ngIf="element.teaching" class="check_box"
+                >check_box</mat-icon
+              >
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="tempLicense">
-          <th mat-header-cell *matHeaderCellDef>หนังสืออนุญาตชั่วคราว</th>
-          <td mat-cell *matCellDef="let element">
-            <mat-icon *ngIf="element.tempLicense" class="check_box"
-              >check_box</mat-icon
-            >
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="tempLicense">
+            <th mat-header-cell *matHeaderCellDef>หนังสืออนุญาตชั่วคราว</th>
+            <td mat-cell *matCellDef="let element">
+              <mat-icon *ngIf="element.tempLicense" class="check_box"
+                >check_box</mat-icon
+              >
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="edit">
-          <th mat-header-cell *matHeaderCellDef>ดูข้อมูล</th>
-          <td mat-cell *matCellDef="let element">
-            <mat-icon class="remove_red_eye">remove_red_eye</mat-icon>
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef>ดูข้อมูล</th>
+            <td mat-cell *matCellDef="let element">
+              <mat-icon class="remove_red_eye">remove_red_eye</mat-icon>
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="view">
-          <th mat-header-cell *matHeaderCellDef>แก้ไข</th>
-          <td mat-cell *matCellDef="let element">
-            <mat-icon class="edit">edit</mat-icon>
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="view">
+            <th mat-header-cell *matHeaderCellDef>แก้ไข</th>
+            <td mat-cell *matCellDef="let element">
+              <mat-icon class="edit">edit</mat-icon>
+            </td>
+          </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
     </div>
   </div>
-</div>
+</form>

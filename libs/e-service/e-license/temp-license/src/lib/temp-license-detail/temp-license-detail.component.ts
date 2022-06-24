@@ -96,7 +96,7 @@ export class TempLicenseDetailComponent implements OnInit {
   }
 
   tabChanged(e: MatTabChangeEvent) {
-    console.log('tab index = ', e.index);
+    //console.log('tab index = ', e.index);
     this.selectedTabIndex = e.index;
   }
 }

@@ -58,7 +58,7 @@ export class FormEducationInfoComponent
       }, 0);
     }
     this.form.valueChanges.subscribe((res) => {
-      console.log('res = ', res);
+      //console.log('res = ', res);
     });
   }
 

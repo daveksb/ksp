@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,12 +8,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-staff-person-info.component.scss'],
 })
 export class AddStaffPersonInfoComponent {
+  form = this.fb.group({
+    personId: [],
+    passportNumber: [],
+    staff: [],
+    address1: [],
+    address2: [],
+    education1: [],
+    education2: [],
+  });
+
   licenseButtons = [
     'ใบอนุญาตประกอบวิชาชีพ - ครู',
     'ใบอนุญาตประกอบวิชาชีพ - ผู้บริหารสถานศึกษา',
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private fb: FormBuilder) {}
 
   next() {
     this.router.navigate(['./', 'staff-management', 'staff-teaching-info']);

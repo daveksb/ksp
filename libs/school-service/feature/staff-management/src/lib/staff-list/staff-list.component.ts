@@ -61,7 +61,9 @@ export const data: staffInfo[] = [
   styleUrls: ['./staff-list.component.scss'],
 })
 export class StaffListComponent {
-
+  form = this.fb.group({
+    staffSearch: [],
+  });
 
   personSelected = false;
   displayedColumns: string[] = [

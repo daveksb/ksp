@@ -26,7 +26,7 @@ export class SetNewPasswordComponent implements OnInit{
 
   ngOnInit(): void {
     this.form.valueChanges.subscribe((res) => {
-      console.log('form value = ', res);
+      //console.log('form value = ', res);
     });
   }
 

@@ -1,11 +1,35 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { providerFactory } from '@ksp/shared/utility';
 
 @Component({
   selector: 'school-service-staff-search',
   templateUrl: './staff-search.component.html',
   styleUrls: ['./staff-search.component.scss'],
+  providers: providerFactory(StaffSearchComponent),
 })
-export class StaffSearchComponent {
+export class StaffSearchComponent extends KspFormBaseComponent {
+  override form = this.fb.group({
+    licenseNumber: [],
+    licenseType: [],
+    personId: [],
+    name: [],
+    post: [],
+    TeachingLevel: [],
+  });
+
   @Output() clear = new EventEmitter<boolean>();
   @Output() search = new EventEmitter<boolean>();
+
+  constructor(private fb: FormBuilder) {
+    super();
+    this.subscriptions.push(
+      // any time the inner form changes update the parent of any change
+      this.form?.valueChanges.subscribe((value) => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
+  }
 }
