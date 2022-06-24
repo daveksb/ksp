@@ -20,11 +20,11 @@
 
     <div class="content__container-3">
       <div class="checkbox__container">
-        <ng-container *ngFor="let item of level | keyvalue">
+        <ng-container *ngFor="let item of levels">
           <mat-checkbox
-            formControlName="{{ item.key }}"
+            formControlName="{{ item.name }}"
             class="checkbox__label"
-            >{{ item.key }}</mat-checkbox
+            >{{ item.label }}</mat-checkbox
           ></ng-container
         >
       </div>

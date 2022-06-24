@@ -12,21 +12,46 @@ export class FormTeachingInfoComponent
   implements OnInit
 {
   level = {
-    ['ปฐมวัย']: false,
+    /*     ['ปฐมวัย']: false,
     ['ช่วงชั้นที่ 1 (ประถมศึกษาปีที่ 1-3)']: false,
     ['ช่วงชั้นที่ 2 (ประถมศึกษาปีที่ 4-6)']: false,
     ['ช่วงชั้นที่ 3 (มัธยมศึกษาปีที่ 1-3) ']: false,
     ['ช่วงชั้นที่ 4 (มัธยมศึกษาปีที่ 4-6)']: false,
     ['ประกาศนียบัตรวิชาชีพ (ปวช.)']: false,
     ['ประกาศนียบัตรวิชาชีพขั้นสูง (ปวส.)']: false,
-    ['อื่นๆ']: false,
+    ['อื่นๆ']: false, */
+    lv1: true,
+    lv2: true,
+    lv3: true,
   };
 
-  levelFormGroup = this.fb.group(this.level);
+  levels = [
+    {
+      label: 'ช่วงชั้นที่ 3 (มัธยมศึกษาปีที่ 1-3)',
+      name: 'lv4',
+      value: false,
+    },
+    {
+      label: 'ช่วงชั้นที่ 1 (ประถมศึกษาปีที่ 1-3)',
+      name: 'lv2',
+      value: false,
+    },
+    {
+      label: 'ช่วงชั้นที่ 2 (ประถมศึกษาปีที่ 4-6)',
+      name: 'lv3',
+      value: true,
+    },
+    { label: 'ปฐมวัย', name: 'lv1', value: false },
+  ];
 
   override form = this.fb.group({
     subjectAssign: [],
-    test: this.levelFormGroup,
+
+    lv1: [true],
+    lv2: [false],
+    lv3: [true],
+    lv4: [true],
+
     contractNumber: [],
     post: [],
     workStartDate: [],
