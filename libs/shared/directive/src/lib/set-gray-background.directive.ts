@@ -1,15 +1,25 @@
-import { Directive, ElementRef } from '@angular/core';
+import { Directive, ElementRef, Input } from '@angular/core';
 
 @Directive({
   selector: '[kspSetGrayBg]',
   standalone: true,
 })
 export class SetGrayBackgroundDirective {
-  constructor(el: ElementRef) {
-    this.changeColor(el);
+  _kspSetGrayBg = false;
+
+  @Input()
+  set kspSetGrayBg(value: boolean) {
+    this._kspSetGrayBg = value;
+    this.changeColor(this.el);
   }
 
+  get kspSetGrayBg(): boolean {
+    return this._kspSetGrayBg;
+  }
+
+  constructor(private el: ElementRef) {}
+
   changeColor(el: ElementRef) {
-    el.nativeElement.style.backgroundColor = '#f9f9fa';
+    if (this._kspSetGrayBg) el.nativeElement.style.backgroundColor = '#f9f9fa';
   }
 }
