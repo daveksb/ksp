@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,4 +8,6 @@ import { CommonModule } from '@angular/common';
   templateUrl: './coordinator-info.component.html',
   styleUrls: ['./coordinator-info.component.scss'],
 })
-export class FormCoordinatorInfoComponent {}
+export class FormCoordinatorInfoComponent {
+  @Input() isGreyMode = true;
+}
