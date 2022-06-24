@@ -16,6 +16,7 @@ import {
   LicenseTypeButtonGroupComponent,
   RequestHeaderInfoComponent,
 } from '@ksp/shared/ui';
+import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 
 @Component({
   selector: 'e-service-investigation-detail',
@@ -32,6 +33,7 @@ import {
     MatIconModule,
     LicenseTypeButtonGroupComponent,
     LicenseInfoComponent,
+    FileUploadComponent,
   ],
 })
 export class InvestigationDetailComponent {
@@ -42,12 +44,11 @@ export class InvestigationDetailComponent {
   @Input() hideTitle = false;
 
   cancel() {
-    this.router.navigate(['/', 'ethics', 'accusation']);
+    this.router.navigate(['/ethics', 'accusation']);
   }
 
   save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      height: '175px',
       width: '350px',
       data: {
         title: `คุณยืนยันการบันทึกข้อมูล
@@ -77,7 +78,7 @@ export class InvestigationDetailComponent {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'ethics', 'investigation']);
+        this.router.navigate(['/ethics', 'investigation']);
       }
     });
   }
