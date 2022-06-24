@@ -8,14 +8,14 @@ import { FormBuilder } from '@angular/forms';
 })
 export class FormUserInfoComponent {
   @Input() isWhiteMode = false;
-  
+
   form = this.fb.group({
     prefixTh: [],
     nameTh: [],
     lastnameTh: [],
-    prefixEng: [],
-    nameEng: [],
-    lastnameEng: [],
+    prefixEn: [],
+    nameEn: [],
+    lastnameEn: [],
     sex: [],
     birthdate: [],
     email: [],

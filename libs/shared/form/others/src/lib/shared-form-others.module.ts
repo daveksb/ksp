@@ -12,6 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import { SetWhiteBackgroundDirective } from '@ksp/shared/directive';
+import { SetGrayBackgroundDirective } from '@ksp/shared/directive';
 
 @NgModule({
   imports: [
@@ -20,6 +22,8 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
     MatIconModule,
     MatCheckboxModule,
     RequestHeaderInfoComponent,
+    SetWhiteBackgroundDirective,
+    SetGrayBackgroundDirective,
   ],
   declarations: [
     FormAddressComponent,
