@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { BottomNavComponent } from '@ksp/shared/menu';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { TopNavComponent } from '@ksp/shared/menu';
     MatIconModule,
     BottomNavComponent,
     RequestHeaderInfoComponent,
+    ReactiveFormsModule
   ],
   declarations: [LicenseListComponent, LicenseDetailComponent],
   exports: [LicenseListComponent, LicenseDetailComponent],

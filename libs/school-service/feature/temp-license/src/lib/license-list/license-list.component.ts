@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
@@ -43,45 +44,6 @@ export const data: TempLicenseInfo[] = [
     requestDoc: '',
     approveDoc: '',
   },
-  {
-    order: 3,
-    reqCode: 'SF_TR6406000001',
-    ssn: 'x-xxxx-xxxx-xx-x',
-    name: 'นายประหยัด จันทร์อังคาร',
-    professType: 'หนังสืออนุญาตชั่วคราว-ครู',
-    workStep: 'ตรวจสอบเอกสาร (2)',
-    status: 2, //'ปรับแก้ไข/เพิ่มเติม',
-    editDate: '10 พ.ค. 2564',
-    sendDate: '1 พ.ค. 2564',
-    requestDoc: '',
-    approveDoc: '',
-  },
-  {
-    order: 4,
-    reqCode: 'SF_TR6406000001',
-    ssn: 'x-xxxx-xxxx-xx-x',
-    name: 'นายประหยัด จันทร์อังคาร',
-    professType: 'หนังสืออนุญาตชั่วคราว-ครู',
-    workStep: 'ตรวจสอบเอกสาร (2)',
-    status: 2, //'ปรับแก้ไข/เพิ่มเติม',
-    editDate: '10 พ.ค. 2564',
-    sendDate: '1 พ.ค. 2564',
-    requestDoc: '',
-    approveDoc: '',
-  },
-  {
-    order: 5,
-    reqCode: 'SF_TR6406000001',
-    ssn: 'x-xxxx-xxxx-xx-x',
-    name: 'นายประหยัด จันทร์อังคาร',
-    professType: 'หนังสืออนุญาตชั่วคราว-ครู',
-    workStep: 'ตรวจสอบเอกสาร (2)',
-    status: 2, //'ปรับแก้ไข/เพิ่มเติม',
-    editDate: '10 พ.ค. 2564',
-    sendDate: '1 พ.ค. 2564',
-    requestDoc: '',
-    approveDoc: '',
-  },
 ];
 @Component({
   selector: 'school-service-license-list',
@@ -89,6 +51,16 @@ export const data: TempLicenseInfo[] = [
   styleUrls: ['./license-list.component.scss'],
 })
 export class LicenseListComponent {
+  form = this.fb.group({
+    licenseNumber: [],
+    personId: [],
+    profession: [],
+    process: [],
+    status: [],
+    submitDateFrom: [],
+    submitDateTo: [],
+  });
+
   @Input() isStatusValid = false;
 
   personSelected = false;
@@ -107,7 +79,7 @@ export class LicenseListComponent {
   ];
   dataSource = new MatTableDataSource<TempLicenseInfo>();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private fb: FormBuilder) {}
   data: TempLicenseInfo[] = [];
 
   search() {
