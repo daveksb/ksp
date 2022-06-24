@@ -10,6 +10,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { AccusationRecordComponent } from '@ksp/e-service/ethics/accusation';
 import { InvestigationDetailComponent } from './investigation-detail/investigation-detail.component';
 import { TopNavComponent } from '@ksp/shared/menu';
+import { StickyBottomNavDirective } from '@ksp/shared/directive';
 
 export const routes: Routes = [
   {
@@ -43,6 +44,7 @@ export const routes: Routes = [
     AccusationRecordComponent,
     InvestigationDetailComponent,
     TopNavComponent,
+    StickyBottomNavDirective,
   ],
   declarations: [InvestigationMainComponent],
   exports: [InvestigationMainComponent],
