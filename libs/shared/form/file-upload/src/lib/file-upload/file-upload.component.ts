@@ -1,6 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpEventType } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HttpEventType,
+} from '@angular/common/http';
 import { finalize, Subscription } from 'rxjs';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,7 +17,7 @@ import { providerFactory } from '@ksp/shared/utility';
   standalone: true,
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss'],
-  imports: [CommonModule, MatIconModule],
+  imports: [CommonModule, MatIconModule, HttpClientModule],
   providers: providerFactory(FileUploadComponent),
 })
 export class FileUploadComponent extends KspFormBaseComponent {

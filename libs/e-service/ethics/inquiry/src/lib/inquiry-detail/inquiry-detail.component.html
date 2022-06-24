@@ -1,9 +1,4 @@
-<div
-  class="main__container {"
-  [ngClass]="{
-    hide__container: hideContainer
-  }"
->
+<div class="main__container {" [class.hide__container]="hideContainer">
   <div class="box-container">
     <ksp-request-header-info
       [requestDate]="'10 ตุลาคม 2565'"
@@ -90,7 +85,9 @@
         <textarea class="form-control form-control-sm" type="text" rows="4">
         </textarea>
 
-        <button id="btn-upload" class="btn btn-primary">อัพโหลดไฟล์</button>
+        <div id="upload__button">
+          <ksp-file-upload></ksp-file-upload>
+        </div>
       </div>
     </div>
 
@@ -117,38 +114,39 @@
         <label class="form-label">มติที่ประชุม </label>
         <textarea class="form-control form-control-sm" type="text" rows="4">
         </textarea>
-
-        <button id="btn-upload" class="btn btn-primary">+ อัพโหลดไฟล์</button>
+        <div id="upload__button">
+          <ksp-file-upload></ksp-file-upload>
+        </div>
       </div>
     </div>
 
     <div class="checkbox__container">
-      <div class="xxx">
+      <div class="checkbox__row">
         <input type="checkbox" class="checkbox" />
         <label class="checkbox__label">ยกข้อกล่าวหา/กล่าวโทษ</label>
       </div>
 
-      <div class="xxx">
+      <div class="checkbox__row">
         <input type="checkbox" class="checkbox" />
         <label class="checkbox__label">ตักเตือน</label>
       </div>
 
-      <div class="xxx">
+      <div class="checkbox__row">
         <input type="checkbox" class="checkbox" />
         <label class="checkbox__label">ภาคทัณฑ์</label>
       </div>
 
-      <div class="xxx-2">
+      <div class="checkbox__row checkbox__row--no-margin">
         <div class="content__container-primary">
           <input type="checkbox" class="checkbox" />
           <label class="checkbox__label">พักใช้</label>
           <label class="checkbox__label">ระยะเวลา</label>
-          <input class="form-control form-control-sm" type="number" min="0"/>
+          <input class="form-control form-control-sm" type="number" min="0" />
           <label class="checkbox__label">วัน</label>
         </div>
       </div>
 
-      <div class="xxx-2">
+      <div class="checkbox__row checkbox__row--no-margin">
         <div class="content__container-secondary">
           <label class="checkbox__label"
             >ระยะเวลาเริ่มต้นและสิ้นสุดการพักใช้ (วัน/เดือน/ปี)</label
@@ -160,7 +158,7 @@
         </div>
       </div>
 
-      <div class="xxx">
+      <div class="checkbox__row">
         <input type="checkbox" class="checkbox" />
         <label class="checkbox__label">เพิกถอนใบอนุญาตประกอบวิชาชีพ</label>
       </div>
