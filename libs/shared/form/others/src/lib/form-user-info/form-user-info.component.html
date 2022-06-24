@@ -4,7 +4,7 @@
       <div class="mb-3">
         <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
         <select
-          [class.white__background]="isWhiteMode"
+          [kspSetWhiteBg]="isWhiteMode"
           class="form-select form-select-sm"
           formControlName="prefixTh"
         >
@@ -17,7 +17,7 @@
       <div class="mb-3">
         <label class="form-label">ชื่อ</label>
         <input
-          [class.white__background]="isWhiteMode"
+          [kspSetWhiteBg]="isWhiteMode"
           class="form-control form-control-sm"
           type="text"
           formControlName="nameTh"
@@ -28,7 +28,7 @@
         <input
           class="form-control form-control-sm"
           type="text"
-          [class.white__background]="isWhiteMode"
+          [kspSetWhiteBg]="isWhiteMode"
           formControlName="lastnameTh"
         />
       </div>
@@ -37,9 +37,9 @@
       <div class="mb-3">
         <label class="form-label">คำนำหน้าชื่อภาษาอังกฤษ</label>
         <select
-          [class.white__background]="isWhiteMode"
+          [kspSetWhiteBg]="isWhiteMode"
           class="form-select form-select-sm"
-          formControlName="prefixEng"
+          formControlName="prefixEn"
         >
           <option selected>กรุณาเลือก</option>
           <option value="1">One</option>
@@ -52,8 +52,8 @@
         <input
           class="form-control form-control-sm"
           type="text"
-          [class.white__background]="isWhiteMode"
-          formControlName="nameEng"
+          [kspSetWhiteBg]="isWhiteMode"
+          formControlName="nameEn"
         />
       </div>
       <div class="mb-3">
@@ -61,8 +61,8 @@
         <input
           class="form-control form-control-sm"
           type="text"
-          [class.white__background]="isWhiteMode"
-          formControlName="lastnameEng"
+          [kspSetWhiteBg]="isWhiteMode"
+          formControlName="lastnameEn"
         />
       </div>
     </div>
@@ -70,7 +70,7 @@
       <div class="mb-3">
         <label class="form-label">เพศ</label>
         <select
-          [class.white__background]="isWhiteMode"
+          [kspSetWhiteBg]="isWhiteMode"
           class="form-select form-select-sm"
           formControlName="sex"
         >
@@ -85,7 +85,7 @@
         <input
           class="form-control form-control-sm"
           type="date"
-          [class.white__background]="isWhiteMode"
+          [kspSetWhiteBg]="isWhiteMode"
           formControlName="birthdate"
         />
       </div>
@@ -96,7 +96,7 @@
         <input
           class="form-control form-control-sm"
           type="email"
-          [class.white__background]="isWhiteMode"
+          [kspSetWhiteBg]="isWhiteMode"
           formControlName="email"
         />
       </div>
@@ -105,7 +105,7 @@
         <input
           class="form-control form-control-sm"
           type="tel"
-          [class.white__background]="isWhiteMode"
+          [kspSetWhiteBg]="isWhiteMode"
           formControlName="contactPhone"
         />
       </div>
@@ -116,7 +116,7 @@
         <input
           class="form-control form-control-sm"
           type="tel"
-          [class.white__background]="isWhiteMode"
+          [kspSetWhiteBg]="isWhiteMode"
           formControlName="workplacePhone"
         />
       </div>

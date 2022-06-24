@@ -6,12 +6,12 @@ import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container
 import { ForeignLicenseListComponent } from './foreign-license-list/foreign-license-list.component';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { MatDialogModule } from '@angular/material/dialog';
-import { EServiceUiLicenseCheckModule } from '@ksp/e-service/ui/license-check';
 import { BottomNavComponent } from '@ksp/shared/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
+import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 
 export const routes: Routes = [
   {
@@ -42,12 +42,12 @@ export const routes: Routes = [
     SharedFormOthersModule,
     MatDialogModule,
     RouterModule.forChild(routes),
-    EServiceUiLicenseCheckModule,
     BottomNavComponent,
     TopNavComponent,
     MatTableModule,
     MatIconModule,
     RequestHeaderInfoComponent,
+    LicenseCheckComponent,
   ],
   declarations: [ForeignLicenseDetailComponent, ForeignLicenseListComponent],
 })

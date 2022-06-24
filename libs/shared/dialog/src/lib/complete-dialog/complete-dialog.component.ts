@@ -1,9 +1,13 @@
-import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
+import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   templateUrl: './complete-dialog.component.html',
   styleUrls: ['./complete-dialog.component.scss'],
+  standalone: true,
+  imports: [CommonModule, MatDialogModule, MatIconModule],
 })
 export class CompleteDialogComponent {
   constructor(
@@ -13,7 +17,6 @@ export class CompleteDialogComponent {
       content: string;
       btnLabel: string;
       subContent: string;
-      //printButton: string;
       showPrintButton: boolean;
     }
   ) {}
