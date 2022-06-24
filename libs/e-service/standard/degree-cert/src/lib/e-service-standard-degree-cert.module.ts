@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DegreeCertListComponent } from './list/list.component';
-import { EServiceUiLicenseCheckModule } from '@ksp/e-service/ui/license-check';
 import { BottomNavComponent } from '@ksp/shared/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SharedFeatureDegreeCertModule } from '@ksp/shared/feature/degree-cert';
@@ -22,6 +21,10 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SharedFormDegreeCertStepTwoModule } from '@ksp/shared/form/degree-cert/step-two';
 import { FinalResultComponent } from './final-result/final-result.component';
 import { TopNavComponent } from '@ksp/shared/menu';
+import {
+  FinalResultInfoComponent,
+  LicenseCheckComponent,
+} from '@ksp/e-service/ui/license-check';
 
 @NgModule({
   imports: [
@@ -29,7 +32,6 @@ import { TopNavComponent } from '@ksp/shared/menu';
     MatDialogModule,
     MatTableModule,
     MatCheckboxModule,
-    EServiceUiLicenseCheckModule,
     EServiceUiVerifyResultBoxModule,
     EServiceStandardDegreeCertRoutingModule,
     SharedFeatureDegreeCertModule,
@@ -43,6 +45,8 @@ import { TopNavComponent } from '@ksp/shared/menu';
     SharedFormDegreeCertStepTwoModule,
     RequestHeaderInfoComponent,
     TopNavComponent,
+    LicenseCheckComponent,
+    FinalResultInfoComponent,
   ],
   declarations: [
     DegreeCertListComponent,

@@ -12,14 +12,14 @@ export class SchoolServiceLoginComponent {
   eyeIconClicked = false;
 
   home() {
-    this.router.navigate(['/', 'temp-license', 'list']);
+    this.router.navigate(['/temp-license', 'list']);
   }
 
   register() {
-    this.router.navigate(['/', 'register', 'current-user']);
+    this.router.navigate(['/register', 'current-user']);
   }
 
   forget() {
-    this.router.navigate(['/', 'forget-password', 'person-id']);
+    this.router.navigate(['/forget-password', 'person-id']);
   }
 }
