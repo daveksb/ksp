@@ -38,19 +38,22 @@
         animationDuration="0ms"
         dynamicHeight="true"
         (selectedTabChange)="tabChanged($event)"
-        selectedIndex="2"
+        selectedIndex="0"
       >
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address>
             <span class="ms-2">ที่อยู่ทะเบียนบ้าน</span>
           </ksp-form-address>
-          <ksp-form-address>
-            <span class="ms-2">ที่อยู่ที่ติดต่อได้สะดวก</span>
-            <div class="mt-2 ms-2 d-flex align-items-center">
-              <input type="checkbox" class="address__checkbox" />
-              <label class="form-label ms-2">ที่อยู่ตามทะเบียนบ้าน</label>
-            </div>
-          </ksp-form-address>
+
+          <div class="mt-3">
+            <ksp-form-address>
+              <span class="ms-2">ที่อยู่ที่ติดต่อได้สะดวก</span>
+              <div class="mt-2 ms-2 d-flex align-items-center">
+                <input type="checkbox" class="address__checkbox" />
+                <label class="form-label ms-2">ที่อยู่ตามทะเบียนบ้าน</label>
+              </div>
+            </ksp-form-address>
+          </div>
         </mat-tab>
 
         <mat-tab label="ที่อยู่ของสถานศึกษาที่ขออนุญาต">

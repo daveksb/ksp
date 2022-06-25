@@ -31,7 +31,6 @@ hr {
 add asterisk for required feild
 */
 .required::after {
-  color: red;
   content: ' *';
 }
 
@@ -42,7 +41,7 @@ add asterisk for required feild
 
 .form-label {
   margin-bottom: 0 !important;
-  font-size: 20px;
+  font-size: 18px;
   color: var(--ksp-gray);
 }
 
