@@ -8,7 +8,7 @@ import { ConfirmDialogComponent } from '@ksp/shared/dialog';
   templateUrl: './person-id.component.html',
   styleUrls: ['./person-id.component.scss'],
 })
-export class PersonIdComponent implements OnInit {
+export class PersonIdComponent {
   form = this.fb.group({
     schoolId: ['', Validators.required],
     personId: ['', Validators.required],
@@ -19,12 +19,6 @@ export class PersonIdComponent implements OnInit {
     private fb: FormBuilder,
     public dialog: MatDialog
   ) {}
-
-  ngOnInit(): void {
-    this.form.valueChanges.subscribe((res) => {
-      //console.log('form value = ', res);
-    });
-  }
 
   cancel() {
     this.router.navigate(['/', 'login']);

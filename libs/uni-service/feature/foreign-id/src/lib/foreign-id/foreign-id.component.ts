@@ -32,7 +32,7 @@ export class ForeignIdComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+      //console.log(`Dialog result: ${result}`);
     });
 
     dialogRef.componentInstance.confirmed.subscribe((res) => {

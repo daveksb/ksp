@@ -63,7 +63,7 @@ export class ImportStudentComponent implements OnInit {
 
     this.route.paramMap.subscribe((res) => {
       //this.processType = Number(res.get('type'));
-      console.log('process type = ', res);
+      //console.log('process type = ', res);
       this.pageType = Number(res.get('type'));
     });
   }

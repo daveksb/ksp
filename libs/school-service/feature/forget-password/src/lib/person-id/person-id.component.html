@@ -1,13 +1,13 @@
 <uni-service-top-nav><br /></uni-service-top-nav>
 
-<div class="container">
-  <div class="content__container">
-    <div class="header">ลืมรหัสผ่าน</div>
-    <hr />
-    <div class="title">กรุณากรอกข้อมูลเพื่อยืนยันตัวตน</div>
+<form [formGroup]="form">
+  <div class="container">
+    <div class="content__container">
+      <div class="header">ลืมรหัสผ่าน</div>
+      <hr />
+      <div class="title">กรุณากรอกข้อมูลเพื่อยืนยันตัวตน</div>
 
-    <div class="form__container">
-      <form [formGroup]="form">
+      <div class="form__container">
         <div class="form__title required">รหัสโรงเรียน</div>
         <input formControlName="schoolId" type="text" class="form-control" />
 
@@ -17,12 +17,14 @@
         <div class="form__title-2">
           หมายเลขบัตรประชาชนของผู้แต่งตั้ง / ผู้มีอำนาจ / ผู้บริหาร
         </div>
-      </form>
-    </div>
+      </div>
 
-    <div class="d-flex justify-content-center">
-      <button (click)="cancel()" class="btn btn-outline-primary">ยกเลิก</button>
-      <button (click)="accept()" class="btn btn-primary">ตกลง</button>
+      <div class="d-flex justify-content-center">
+        <button (click)="cancel()" class="btn btn-outline-primary">
+          ยกเลิก
+        </button>
+        <button (click)="accept()" class="btn btn-primary">ตกลง</button>
+      </div>
     </div>
   </div>
-</div>
+</form>

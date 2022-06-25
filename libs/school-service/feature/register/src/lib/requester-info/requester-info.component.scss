@@ -1,5 +1,5 @@
 .detail__content {
-  margin: 10px;
+  margin: 12px 24px;
 }
 
 .form-select,
@@ -30,19 +30,18 @@
 }
 
 .checkbox__container {
-  margin: 12px;
+  margin: 12px 40px;
 }
 
 .checkbox__content {
   display: flex;
   flex-direction: column;
-  line-height: 15px;
-  margin: 10px 24px;
+  margin: 0 24px;
 }
 
 .checkbox__label {
   font-size: 20px;
-  margin: 8px 0;
+  margin: 4px 0;
 }
 
 .header {

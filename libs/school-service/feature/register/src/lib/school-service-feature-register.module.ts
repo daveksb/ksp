@@ -16,6 +16,7 @@ import {
 } from '@ksp/shared/form/school/register';
 import { BottomNavComponent } from '@ksp/shared/menu';
 import { UniversitySelectComponent } from '@ksp/shared/form/university-select';
+import { SetGrayBackgroundDirective } from '@ksp/shared/directive';
 
 export const routes: Routes = [
   {
@@ -46,6 +47,7 @@ export const routes: Routes = [
     FormCoordinatorInfoComponent,
     BottomNavComponent,
     UniversitySelectComponent,
+    SetGrayBackgroundDirective
   ],
   declarations: [
     CurrentUserComponent,

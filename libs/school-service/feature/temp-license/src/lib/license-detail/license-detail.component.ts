@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -13,6 +14,18 @@ import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
   styleUrls: ['./license-detail.component.scss'],
 })
 export class LicenseDetailComponent implements OnInit {
+  form = this.fb.group({
+    personSearch: [],
+    address1: [],
+    address2: [],
+    schoolAddress: [],
+    education1: [],
+    education2: [],
+    otherProperty: [],
+    teaching: [],
+    reason: [],
+  });
+
   requestTypeLabel = '';
   selectedTabIndex = 0;
 
@@ -48,11 +61,22 @@ export class LicenseDetailComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.updateHeaderLabel();
+    this.form.valueChanges.subscribe((res) => {
+      //console.log('res = ', res);
+    });
+  }
+
+  useSameAddress(evt: any) {
+    const checked = evt.target.checked;
+    if (checked) {
+      this.form.controls.address2.patchValue(this.form.controls.address1.value);
+    }
   }
 
   onTabIndexChanged(tabIndex: number) {

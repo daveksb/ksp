@@ -1,69 +1,95 @@
-<div class="form__container">
-  <div class="form__header">ข้อมูลการสอน</div>
-  <div class="content__container-3">
-    <div class="mb-3">
-      <label class="form-label">วิชาที่ได้รับมอบหมายให้สอน</label>
-      <label class="form-label-2">* กรุณาระบุทุกวิชาที่ได้รับมอบหมาย</label>
-      <input class="form-control form-control-sm" type="text" />
+<form [formGroup]="form">
+  <div class="form__container">
+    <div class="form__header">ข้อมูลการสอน</div>
+    <div class="content__container-3">
+      <div class="mb-3">
+        <label class="form-label">วิชาที่ได้รับมอบหมายให้สอน</label>
+        <label class="form-label-2">* กรุณาระบุทุกวิชาที่ได้รับมอบหมาย</label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          formControlName="subjectAssign"
+        />
+      </div>
+    </div>
+
+    <div class="form__header-2">
+      <div class="header__label">ระดับช่วงชั้น</div>
+      <div class="header__label-2">* เลือกได้มากกว่า 1 รายการ</div>
+    </div>
+
+    <div class="content__container-3">
+      <div class="checkbox__container">
+        <ng-container *ngFor="let item of levels">
+          <mat-checkbox
+            formControlName="{{ item.name }}"
+            class="checkbox__label"
+            >{{ item.label }}</mat-checkbox
+          ></ng-container
+        >
+      </div>
     </div>
   </div>
 
-  <div class="form__header-2">
-    <div class="header__label">ระดับช่วงชั้น</div>
-    <div class="header__label-2">* เลือกได้มากกว่า 1 รายการ</div>
-  </div>
+  <div class="form__container">
+    <div class="form__header">ข้อมูลการจ้าง</div>
 
-  <div class="content__container-3" [formGroup]="levelFormGroup">
-    <div class="checkbox__container">
-      <ng-container *ngFor="let item of level | keyvalue">
-        <mat-checkbox
-          formControlName="{{ item.key }}"
-          class="checkbox__label"
-          >{{ item.key }}</mat-checkbox
-        ></ng-container
-      >
+    <div class="content__container">
+      <div class="mb-3">
+        <label class="form-label">ตำแหน่ง</label>
+        <select class="form-select form-select-sm" formControlName="post">
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">สัญญาจ้างเลขที่</label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          formControlName="contractNumber"
+        />
+      </div>
+    </div>
+
+    <div class="content__container">
+      <div class="mb-3">
+        <label class="form-label">วันที่เริ่มปฏิบัติงาน</label>
+        <input
+          class="form-control form-control-sm"
+          type="date"
+          formControlName="workStartDate"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">วันที่สิ้นสุดการปฏิบัติงาน</label>
+        <input
+          class="form-control form-control-sm"
+          type="date"
+          formControlName="workEndDate"
+        />
+      </div>
+    </div>
+
+    <div class="content__container">
+      <div class="mb-3">
+        <label class="form-label">ระยะเวลาที่จ้าง (ปี)</label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          formControlName="hireDurationYear"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">ระยะเวลาที่จ้าง (เดือน)</label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          formControlName="hireDurationMonth"
+        />
+      </div>
     </div>
   </div>
-</div>
-
-<div class="form__container">
-  <div class="form__header">ข้อมูลการจ้าง</div>
-
-  <div class="content__container">
-    <div class="mb-3">
-      <label class="form-label">ตำแหน่ง</label>
-      <select class="form-select form-select-sm">
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-    <div class="mb-3">
-      <label class="form-label">สัญญาจ้างเลขที่</label>
-      <input class="form-control form-control-sm" type="text" />
-    </div>
-  </div>
-
-  <div class="content__container">
-    <div class="mb-3">
-      <label class="form-label">วันที่เริ่มปฏิบัติงาน</label>
-      <input class="form-control form-control-sm" type="date" />
-    </div>
-    <div class="mb-3">
-      <label class="form-label">วันที่สิ้นสุดการปฏิบัติงาน</label>
-      <input class="form-control form-control-sm" type="date" />
-    </div>
-  </div>
-
-  <div class="content__container">
-    <div class="mb-3">
-      <label class="form-label">ระยะเวลาที่จ้าง (ปี)</label>
-      <input class="form-control form-control-sm" type="text" />
-    </div>
-    <div class="mb-3">
-      <label class="form-label">ระยะเวลาที่จ้าง (เดือน)</label>
-      <input class="form-control form-control-sm" type="text" />
-    </div>
-  </div>
-</div>
+</form>

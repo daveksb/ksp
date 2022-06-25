@@ -8,6 +8,7 @@ import { BottomNavComponent } from '@ksp/shared/menu';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export const routes: Route[] = [
   {
@@ -30,6 +31,7 @@ export const routes: Route[] = [
     SharedFormOthersModule,
     BottomNavComponent,
     RequestHeaderInfoComponent,
+    ReactiveFormsModule
   ],
   declarations: [ForeignTeacherIdRequestComponent],
 })

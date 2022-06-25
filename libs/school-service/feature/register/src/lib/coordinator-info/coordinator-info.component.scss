@@ -1,5 +1,5 @@
 .detail__content {
-  margin: 10px 20px;
+  margin: 12px 24px;
 }
 
 .form-select,
@@ -8,9 +8,9 @@
   font-size: 18px;
 }
 
-.detail__header {
+.header {
   font-size: 22px;
-  color: #0056ff;
+  color: #000;
 }
 
 .container {
@@ -21,25 +21,34 @@
 
 .content__container {
   background-color: #fff;
-  padding: 12px;
+  padding: 24px;
 }
 
 .upload__content {
   margin: 20px;
 }
 
-.header {
+.box__header {
   font-size: 22px;
+  color: #0056ff;
+}
+
+.detail__header {
+  font-size: 22px;
+  margin-left: 12px;
 }
 
 .header-2 {
   font-size: 22px;
-  margin: 0 5px;
+  color: #0056ff;
+  padding: 8px 16px;
+  margin: 0 24px;
 }
 
 .school__code {
   display: flex;
-  margin: 0 20px;
+  align-items: center;
+  margin: 12px 24px;
 }
 
 .img__step {

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -11,8 +12,23 @@ import {
   templateUrl: './set-new-password.component.html',
   styleUrls: ['./set-new-password.component.scss'],
 })
-export class SetNewPasswordComponent {
-  constructor(private router: Router, public dialog: MatDialog) {}
+export class SetNewPasswordComponent implements OnInit{
+  form = this.fb.group({
+    password: ['', Validators.required],
+    rePassword: ['', Validators.required],
+  });
+
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private fb: FormBuilder
+  ) {}
+
+  ngOnInit(): void {
+    this.form.valueChanges.subscribe((res) => {
+      //console.log('form value = ', res);
+    });
+  }
 
   navigateBack() {
     this.router.navigate(['/', 'login']);

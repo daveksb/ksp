@@ -1,43 +1,47 @@
 <uni-service-top-nav>ลงทะเบียนขอรับรหัสเข้าใช้งาน</uni-service-top-nav>
 
-<div class="container">
-  <div class="header">รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ</div>
+<form [formGroup]="form">
+  <div class="container">
+    <div class="header">รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ</div>
 
-  <div class="content__container">
-    <ksp-request-header-info
-      [requestDate]="'10 ตุลาคม 2565'"
-      [requestNumber]="'112234467876543'"
-    ></ksp-request-header-info>
-    <hr />
+    <div class="content__container">
+      <ksp-request-header-info
+        [requestDate]="'10 ตุลาคม 2565'"
+        [requestNumber]="'112234467876543'"
+      ></ksp-request-header-info>
+      <hr />
 
-    <div class="img__step">
-      <img src="/assets/images/img-uni/stepper.png" />
-    </div>
-
-    <div class="detail__content">
-      <ksp-university-select></ksp-university-select>
-    </div>
-
-    <div class="checkbox__container">
-      <div class="detail__header">ข้อมูลผู้ขอรหัสสำหรับเข้าใช้งานระบบ</div>
-      <div class="detail__header-2">สิทธิสำหรับการเข้าใช้งาน</div>
-      <div class="checkbox__content" [formGroup]="form">
-        <ng-container *ngFor="let item of grant | keyvalue">
-          <mat-checkbox
-            formControlName="{{ item.key }}"
-            class="checkbox__label"
-            >{{ item.key }}</mat-checkbox
-          ></ng-container
-        >
+      <div class="img__step">
+        <img src="/assets/images/img-uni/stepper.png" />
       </div>
+
+      <div class="detail__content">
+        <ksp-university-select [isViewOnly]="true"></ksp-university-select>
+      </div>
+
+      <div class="checkbox__container">
+        <div class="detail__header">ข้อมูลผู้ขอรหัสสำหรับเข้าใช้งานระบบ</div>
+        <div class="detail__header-2">สิทธิสำหรับการเข้าใช้งาน</div>
+        <div class="checkbox__content">
+          <ng-container *ngFor="let item of grant">
+            <mat-checkbox
+              formControlName="{{ item.name }}"
+              class="checkbox__label"
+              >{{ item.label }}</mat-checkbox
+            ></ng-container
+          >
+        </div>
+      </div>
+
+      <ksp-form-requester-info
+        formControlName="requester"
+      ></ksp-form-requester-info>
+
+      <ksp-bottom-nav
+        [isFirstPage]="true"
+        (nextClicked)="next()"
+        [showCenterButtons]="false"
+      ></ksp-bottom-nav>
     </div>
-
-    <ksp-form-requester-info></ksp-form-requester-info>
-
-    <ksp-bottom-nav
-      [isFirstPage]="true"
-      (nextClicked)="next()"
-      [showCenterButtons]="false"
-    ></ksp-bottom-nav>
   </div>
-</div>
+</form>

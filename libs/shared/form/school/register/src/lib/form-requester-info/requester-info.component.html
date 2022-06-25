@@ -1,14 +1,20 @@
-<div class="form__container">
-  <div class="detail__content-2">
-    <div class="mb-3">
-      <label class="form-label">หมายเลขบัตรประชาชน</label>
-      <input
-        class="form-control form-control-sm"
-        type="text"
-        placeholder="กรุณากรอกหมายเลขบัตรประชาชนจำนวน 13 หลัก"
-      />
+<form [formGroup]="form">
+  <div class="form__container">
+    <div class="detail__content">
+      <div class="mb-3">
+        <label class="form-label">หมายเลขบัตรประชาชน</label>
+        <input
+          formControlName="personId"
+          class="form-control form-control-sm"
+          type="text"
+          placeholder="กรุณากรอกหมายเลขบัตรประชาชนจำนวน 13 หลัก"
+        />
+      </div>
     </div>
-  </div>
 
-  <ksp-form-coordinator-info></ksp-form-coordinator-info>
-</div>
+    <ksp-form-coordinator-info
+      [isGrayMode]="false"
+      formControlName="requesterInfo"
+    ></ksp-form-coordinator-info>
+  </div>
+</form>

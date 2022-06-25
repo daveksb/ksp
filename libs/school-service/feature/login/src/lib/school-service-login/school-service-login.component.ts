@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,9 +8,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./school-service-login.component.css'],
 })
 export class SchoolServiceLoginComponent {
-  constructor(private router: Router) {}
-
   eyeIconClicked = false;
+
+  form = this.fb.group({
+    username: [],
+    password: [],
+  });
+
+  constructor(private router: Router, private fb: FormBuilder) {}
 
   home() {
     this.router.navigate(['/temp-license', 'list']);

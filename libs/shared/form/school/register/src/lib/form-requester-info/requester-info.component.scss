@@ -1,19 +1,9 @@
 .detail__content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 18px;
-}
-
-.detail__content-2 {
-  display: grid;
   grid-template-columns: 25% 1fr;
   grid-column-gap: 18px;
-}
-
-.detail__content--secondary {
-  display: grid;
-  grid-template-columns: 150px 1fr 1fr;
-  grid-column-gap: 18px;
+  padding: 0 20px;
+  margin: 0 20px;
 }
 
 .form-label,
@@ -25,5 +15,5 @@
 }
 
 .form__container {
-  margin: 24px 12px;
+  margin: 0;
 }

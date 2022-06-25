@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,7 +7,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./current-user.component.scss'],
 })
 export class CurrentUserComponent {
-  constructor(public router: Router) {}
+  form = this.fb.group({
+    selectUniversity: [],
+  });
+
+  constructor(public router: Router, private fb: FormBuilder) {}
 
   next() {
     this.router.navigate(['/', 'register', 'requester-info']);

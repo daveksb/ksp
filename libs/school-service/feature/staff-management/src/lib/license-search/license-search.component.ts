@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,8 +8,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./license-search.component.scss'],
 })
 export class LicenseSearchComponent {
+  form = this.fb.group({
+    personId: [],
+    licenseNumber: [],
+    name: [],
+    licenseType: [],
+  });
+
   foundItem = false;
-  constructor(private router: Router) {}
+  constructor(private router: Router, private fb: FormBuilder) {}
 
   search() {
     this.foundItem = true;

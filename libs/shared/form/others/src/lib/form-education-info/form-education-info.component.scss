@@ -8,6 +8,7 @@
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 16px;
   margin: 0 20px;
+  align-items: center;
 }
 
 .form-label {
@@ -40,4 +41,15 @@
   background-color: #fff;
   background-image: url(/assets/images/arrow-down-icon.png);
   background-size: 12px;
+}
+
+.checkbox__container {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox {
+  height: 15px;
+  width: 15px;
+  margin-right: 5px;
 }
