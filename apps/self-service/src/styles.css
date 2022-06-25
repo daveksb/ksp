@@ -12,7 +12,6 @@
 
 * {
   font-family: 'KSP Regular';
-  font-size: 16px;
 }
 
 table {
@@ -37,5 +36,14 @@ add asterisk for required feild
 }
 
 .form-label {
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
+  font-size: 20px;
+  color: #656565;
+}
+
+.form-select,
+.form-control {
+  color: #656565 !important;
+  font-size: 22px !important;
+  padding: 0 0.75rem !important;
 }

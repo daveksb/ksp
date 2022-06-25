@@ -20,12 +20,16 @@
     <hr />
 
     <div class="top__container">
-      <div class="header-2">ค้นหารายการ</div>
-      <label class="form-label-3">หมายเลขบัตรประชาชน</label>
-      <div class="content__container--secondary">
-        <input class="form-control form-control-sm" type="text" />
+      <div class="ms-4 header-2">ค้นหารายการ</div>
+
+      <div class="row mb-3 ms-2">
+        <div class="col-6">
+          <label class="form-label">หมายเลขบัตรประชาชน</label>
+          <input class="form-control" type="text" />
+        </div>
       </div>
-      <ksp-form-user-info [isWhiteMode]="true"></ksp-form-user-info>
+
+      <ksp-form-user-info></ksp-form-user-info>
     </div>
 
     <div class="tab-container">
@@ -37,8 +41,8 @@
       >
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address>ที่อยู่ทะเบียนบ้าน</ksp-form-address>
-          <ksp-form-address
-            >ที่อยู่ทะเบียนบ้าน
+          <ksp-form-address>
+            ที่อยู่ทะเบียนบ้าน
             <div class="checkbox__container-2">
               <input type="checkbox" class="checkbox__box" />
               <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
