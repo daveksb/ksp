@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { LicenseRequestComponent } from './license-request/license-request.component';
-import { SelfServiceFormModule } from '@ksp/self-service/form';
+import {
+  FormUploadImageComponent,
+  SelfServiceFormModule,
+} from '@ksp/self-service/form';
 import { LicenseEditComponent } from './license-edit/license-edit.component';
 import {
   BottomNavComponent,
@@ -66,6 +69,7 @@ export const routes: Routes = [
     BottomNavComponent,
     ReactiveFormsModule,
     FormsModule,
+    FormUploadImageComponent,
   ],
   declarations: [LicenseRequestComponent, LicenseEditComponent],
 })
