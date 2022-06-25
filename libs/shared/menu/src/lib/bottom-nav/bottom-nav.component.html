@@ -1,4 +1,4 @@
-<div class="footer">
+<div class="nav__container">
   <div class="first__button">
     <button
       (click)="prevClicked.emit(true)"
@@ -10,13 +10,12 @@
     </button>
   </div>
 
-  <div class="footer-2" *ngIf="showCenterButtons">
+  <div class="center__buttons" *ngIf="showCenterButtons">
     <button
       *ngIf="showCancelButton"
       (click)="cancelClicked.emit(true)"
       type="button"
       class="btn"
-      id="cancel__button"
       [ngClass]="{
         'btn-outline-primary': colorMode === 'blue',
         'btn-outline-success': colorMode === 'green'
@@ -24,20 +23,21 @@
     >
       ยกเลิก
     </button>
+
     <button
       *ngIf="showTempSaveButton"
       (click)="tempSaveClicked.emit(true)"
       type="button"
-      class="btn btn-success"
+      class="btn btn-success ms-3"
     >
       บันทึกชั่วคราว
     </button>
+
     <button
       *ngIf="showSaveButton"
       (click)="saveClicked.emit(true)"
       type="button"
-      id="save__button"
-      class="btn"
+      class="btn ms-3"
       [ngClass]="{
         'btn-primary': colorMode === 'blue',
         'btn-success': colorMode === 'green'
@@ -52,7 +52,7 @@
       (click)="nextClicked.emit(true)"
       *ngIf="!isLastPage"
       type="button"
-      class="btn btn-outline-warning"
+      class="ms-3 btn btn-outline-warning"
     >
       ถัดไป
     </button>

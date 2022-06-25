@@ -112,14 +112,13 @@
     ></e-service-license-check>
   </div>
 
-  <div class="bottom__container">
-    <ksp-bottom-nav
-      (cancelClicked)="cancel()"
-      (prevClicked)="prevPage()"
-      (nextClicked)="next()"
-      [showSaveButton]="true"
-      [showCenterButtons]="true"
-      [isFirstPage]="true"
-    ></ksp-bottom-nav>
-  </div>
+  <ksp-bottom-nav
+    kspStickyBottomNav
+    (cancelClicked)="cancel()"
+    (prevClicked)="prevPage()"
+    (nextClicked)="next()"
+    [showSaveButton]="true"
+    [showCenterButtons]="true"
+    [isFirstPage]="true"
+  ></ksp-bottom-nav>
 </div>
