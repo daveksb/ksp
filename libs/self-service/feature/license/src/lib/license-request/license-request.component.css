@@ -38,13 +38,13 @@
   margin-right: 5px;
 }
 
-.label__warn {
-  color: red;
-  font-size: 16px;
-}
-
 mat-expansion-panel {
   padding: 5px 0;
+}
+
+.btn-light {
+  background-color: #e8e8e8;
+  border-color: #e8e8e8;
 }
 
 /* mobile */

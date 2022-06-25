@@ -32,7 +32,7 @@
         <hr />
         <ksp-form-address formControlName="address2" [isWhiteMode]="false"
           >ที่อยู่ที่ติดต่อได้สะดวก
-          <span class="label__warn">*กรุณากรอกข้อมูลตำบล,อำเภอ</span>
+          <span class="text-danger">*กรุณากรอกข้อมูลตำบล,อำเภอ</span>
           <div class="checkbox__container-2">
             <input
               (change)="useSameAddress($event)"
@@ -42,7 +42,7 @@
             <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
           </div>
         </ksp-form-address>
-        <div class="label__warn">
+        <div class="text-danger">
           *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
           โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
         </div>

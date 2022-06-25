@@ -6,7 +6,9 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'self-service-license-edit',
   templateUrl: './license-edit.component.html',
@@ -29,18 +31,6 @@ export class LicenseEditComponent implements OnInit {
     'สำเนาหนังสือรับรองการใช้คำหน้านามหญิง (ถ้ามี)',
   ];
 
-  disableControl(evt: any, controlNames: controlName[]) {
-    const checked = evt.target.checked;
-
-    controlNames.forEach((i) => {
-      if (checked) {
-        this.form.controls[i].enable();
-      } else {
-        this.form.controls[i].disable();
-      }
-    });
-  }
-
   constructor(
     public dialog: MatDialog,
     private router: Router,
@@ -48,10 +38,21 @@ export class LicenseEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.form.valueChanges.subscribe((res) => {
-      ('');
-    });
     this.form.disable();
+    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
+      //
+    });
+  }
+
+  disableControl(evt: any, controlList: controlName[]) {
+    const checked = evt.target.checked;
+    controlList.forEach((i) => {
+      if (checked) {
+        this.form.controls[i].enable();
+      } else {
+        this.form.controls[i].disable();
+      }
+    });
   }
 
   navigateBack() {
@@ -89,11 +90,12 @@ export class LicenseEditComponent implements OnInit {
     });
     dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'license', 'request']);
+        this.navigateBack();
       }
     });
   }
 }
+
 export type controlName =
   | 'prefixTh'
   | 'prefixEn'
