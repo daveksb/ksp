@@ -24,6 +24,9 @@ export class FileUploadComponent extends KspFormBaseComponent {
   @Input()
   requiredFileType!: string;
 
+  @Input() buttonLabel = 'อัพโหลดไฟล์';
+  @Input() showUploadedFileName = true;
+
   fileName = '';
   uploadProgress!: number | null;
   uploadSub!: Subscription | null;

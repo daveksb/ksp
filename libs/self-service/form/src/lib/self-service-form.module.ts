@@ -32,7 +32,6 @@ import { DynamicComponentDirective } from '@ksp/shared/directive';
     DynamicComponentDirective,
   ],
   declarations: [
-    FormUploadImageComponent,
     FormUserEducationComponent,
     FormUserExperienceComponent,
     FormUserPerformanceComponent,
@@ -41,7 +40,6 @@ import { DynamicComponentDirective } from '@ksp/shared/directive';
     FormVerifyPhoneComponent,
   ],
   exports: [
-    FormUploadImageComponent,
     FormUserEducationComponent,
     FormUserExperienceComponent,
     FormUserPerformanceComponent,

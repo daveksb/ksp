@@ -1,40 +1,5 @@
-.form__container {
-  margin-bottom: 30px;
-  background-color: #f9f9fa;
-}
-
-.content__container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 16px;
-  margin: 0 20px;
-  align-items: center;
-}
-
-.form-label {
-  font-size: 18px;
-  color: #656565;
-}
-
-.form__header {
-  font-size: 22px;
-  color: #000000;
-  margin: 0 20px;
-  padding: 10px 0;
-}
-
 .form-control {
   background-color: #fff;
-}
-
-.form-control-sm {
-  font-size: 18px;
-  color: #000000;
-}
-
-.form-select-sm {
-  font-size: 18px;
-  color: #000000;
 }
 
 .form-select {

@@ -1,23 +1,14 @@
-.footer {
+:host {
+  width: 100%;
+  background-color: #fff;
+}
+
+.nav__container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas: 'box1 box2 box3';
   height: 50px;
   align-items: center;
-}
-
-.footer-2 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#save__button {
-  margin-left: 5px;
-}
-
-#cancel__button {
-  margin-right: 5px;
 }
 
 .first__button {
@@ -26,14 +17,14 @@
   justify-self: start;
 }
 
+.center__buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .last__button {
   margin-right: 25px;
   grid-area: box3;
   justify-self: end;
-}
-
-@media (max-width: 1200px) {
-  .footer {
-    margin-left: 0;
-  }
 }

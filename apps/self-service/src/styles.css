@@ -1,16 +1,22 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import './mat-style.css';
+
+:root {
+  --ksp-gray: #656565;
+}
 
 @font-face {
-  font-family: 'KSP Bold';
-  src: URL('/assets/font/KSP/ttf/KSP\ Regular\ ver\ 1.00.ttf')
-    format('truetype');
+  font-family: 'ksp regular';
+  src: URL('/assets/font/ksp/ksp-regular.ttf') format('truetype');
+}
 
-  font-family: 'KSP Regular';
-  src: URL('/assets/font/KSP/KSP\ Bold\ ver\ 1.00.ttf') format('truetype');
+@font-face {
+  font-family: 'ksp bold';
+  src: URL('/assets/font/ksp/ksp-bold.ttf') format('truetype');
 }
 
 * {
-  font-family: 'KSP Regular';
+  font-family: 'ksp bold';
 }
 
 table {
@@ -21,50 +27,10 @@ hr {
   margin: 0.5rem 2px !important;
 }
 
-.mat-tab-label {
-  background: #eff1f3;
-  color: #515153;
-  width: 250px;
-  margin: 0 2px;
-  font-size: 16px;
-}
-
-/* mobile */
-@media only screen and (max-width: 768px) {
-  .mat-tab-label {
-    width: auto;
-  }
-}
-
-.mat-tab-label-active {
-  background-color: white;
-  opacity: 1 !important;
-  border-top: solid #0056ff;
-  border-bottom: none;
-}
-
-.mat-tab-body-content {
-  padding: 25px;
-}
-
-.mat-tab-body-wrapper {
-  border-radius: 0 0 15px 15px;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-
-.material-icons {
-  font-family: 'Material Icons';
-}
-
-.mat-ink-bar {
-  visibility: hidden !important;
-}
-
 /*
 add asterisk for required feild
 */
 .required::after {
-  color: red;
   content: ' *';
 }
 
@@ -73,44 +39,15 @@ add asterisk for required feild
   width: 120px;
 }
 
-.btn-light {
-  background-color: #e8e8e8 !important;
-  border-color: #e8e8e8 !important;
-}
-
 .form-label {
   margin-bottom: 0 !important;
-}
-
-button.mat-menu-item {
-  font-family: 'KSP Regular';
-}
-
-/*
- Mat stepper style
-*/
-.mat-stepper-label-position-bottom .mat-horizontal-stepper-header-container {
-  width: 75%;
-  align-self: center;
-}
-
-.mat-stepper-label-position-bottom
-  .mat-horizontal-stepper-header
-  .mat-step-icon {
-  height: 45px;
-  width: 45px;
-  color: #fff;
-  margin-top: -10px;
-  background: #0056ff;
-  opacity: 50%;
-}
-
-.mat-step-header .mat-step-icon-selected,
-.mat-step-header .mat-step-icon-state-done,
-.mat-step-header .mat-step-icon-state-edit {
-  opacity: 100% !important;
-}
-
-.mat-step-text-label {
   font-size: 18px;
+  color: var(--ksp-gray);
+}
+
+.form-select,
+.form-control {
+  color: var(--ksp-gray) !important;
+  font-size: 22px !important;
+  padding: 0 0.75rem !important;
 }

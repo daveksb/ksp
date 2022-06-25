@@ -1,0 +1,65 @@
+.mat-tab-label {
+  background: #eff1f3;
+  width: 250px;
+  margin: 0 2px;
+  font-size: 18px;
+}
+
+@media only screen and (max-width: 768px) {
+  .mat-tab-label {
+    width: auto;
+  }
+}
+
+.mat-tab-label-active {
+  background-color: white;
+  opacity: 1 !important;
+  border-top: solid #0056ff;
+  border-bottom: none;
+}
+
+.mat-tab-body-content {
+  padding: 25px;
+}
+
+.mat-tab-body-wrapper {
+  border-radius: 0 0 15px 15px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+}
+
+.mat-ink-bar {
+  visibility: hidden !important;
+}
+
+/*
+ Mat stepper style
+*/
+.mat-stepper-label-position-bottom .mat-horizontal-stepper-header-container {
+  width: 75%;
+  align-self: center;
+}
+
+.mat-stepper-label-position-bottom
+  .mat-horizontal-stepper-header
+  .mat-step-icon {
+  height: 45px;
+  width: 45px;
+  color: #fff;
+  margin-top: -10px;
+  background: #0056ff;
+  opacity: 50%;
+}
+
+.mat-step-header .mat-step-icon-selected,
+.mat-step-header .mat-step-icon-state-done,
+.mat-step-header .mat-step-icon-state-edit {
+  opacity: 100% !important;
+}
+
+.mat-step-text-label {
+  font-size: 18px;
+}

@@ -3,53 +3,46 @@
   ><span subHeader>ขอขึ้นใบอนุญาตประกอบวิชาชีพ</span></ksp-top-nav
 >
 
-<!-- <mat-accordion> -->
-<!-- <mat-expansion-panel> -->
-<!-- <mat-expansion-panel-header>
-      <mat-panel-title> แสดง/ซ่อน ข้อมูลผู้ใช้ </mat-panel-title>
-    </mat-expansion-panel-header> -->
 <self-service-license-info></self-service-license-info>
+
 <self-service-form-upload-image></self-service-form-upload-image>
-<div class="detail__container">
-  <ksp-form-user-info></ksp-form-user-info>
+
+<div class="user-info__container">
+  <ksp-form-user-info [isDarkMode]="true"></ksp-form-user-info>
 </div>
-<!-- </mat-expansion-panel> -->
-<!-- </mat-accordion> -->
 
 <form [formGroup]="form">
-  <div class="tab-container">
+  <div class="pt-3 pb-1 ps-5 pe-5">
     <mat-tab-group
       class="tab-group"
       animationDuration="0ms"
       [selectedIndex]="0"
     >
       <mat-tab label="ที่อยู่" class="tab-content">
-        <ksp-form-address formControlName="address1" [isWhiteMode]="false">
-          ที่อยู่ทะเบียนบ้าน
+        <ksp-form-address formControlName="address1" [isDarkMode]="true">
+          <span class="ms-2">ที่อยู่ทะเบียนบ้าน</span>
         </ksp-form-address>
         <hr />
-        <ksp-form-address formControlName="address2" [isWhiteMode]="false"
-          >ที่อยู่ที่ติดต่อได้สะดวก
-          <span class="label__warn">*กรุณากรอกข้อมูลตำบล,อำเภอ</span>
-          <div class="checkbox__container-2">
+        <ksp-form-address formControlName="address2" [isDarkMode]="true">
+          <span class="ms-2">ที่อยู่ที่ติดต่อได้สะดวก</span>
+          <span class="text-danger ms-1">*กรุณากรอกข้อมูลตำบล, อำเภอ</span>
+          <div class="mt-2 ms-2 d-flex align-items-center">
             <input
               (change)="useSameAddress($event)"
               type="checkbox"
-              class="checkbox__box"
+              class="address__checkbox"
             />
-            <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
+            <label class="form-label ms-2">ที่อยู่ตามทะเบียนบ้าน</label>
           </div>
         </ksp-form-address>
-        <div class="label__warn">
-          *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
-          โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
-        </div>
       </mat-tab>
+
       <mat-tab label="สถานที่ทำงาน">
         <self-service-form-user-workplace
           formControlName="workplace"
         ></self-service-form-user-workplace>
       </mat-tab>
+
       <mat-tab label="ข้อมูลทางการศึกษา">
         <self-service-form-user-education
           formControlName="education"
@@ -60,6 +53,7 @@
           [groups]="service.educationFiles"
         ></ksp-form-attachment>
       </mat-tab>
+
       <mat-tab label="ข้อมูลประสบการณ์วิชาชีพ">
         <self-service-form-user-experience
           formControlName="experience"
@@ -70,6 +64,7 @@
           [groups]="service.experienceFiles"
         ></ksp-form-attachment>
       </mat-tab>
+
       <mat-tab label="ข้อมูลผลการประเมินสมรรถนะ">
         <self-service-form-user-performance></self-service-form-user-performance>
         <hr />
@@ -80,14 +75,14 @@
       </mat-tab>
     </mat-tab-group>
 
-    <div class="footer">
+    <div class="fs-5 text-danger mt-2">
+      *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
+      โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
+    </div>
+
+    <div class="d-flex justify-content-center mt-3 mb-3">
       <button type="button" class="btn btn-light">ล้างข้อมูล</button>
-      <button
-        (click)="save()"
-        id="next__button"
-        type="button"
-        class="btn btn-primary"
-      >
+      <button (click)="save()" type="button" class="ms-3 btn btn-primary">
         ต่อไป
       </button>
     </div>

@@ -10,7 +10,14 @@ import { providerFactory } from '@ksp/shared/utility';
   providers: providerFactory(FormUserInfoComponent),
 })
 export class FormUserInfoComponent extends KspFormBaseComponent {
-  @Input() isWhiteMode = false;
+  @Input() isDarkMode = false;
+  /**
+   * Dark Mode : all inputs will have gray background and form container will have white background
+   * Use in Self-Service
+   *
+   * Normal Mode : all inputs will have white background and form container will have gray background
+   * Use in E-service, School-Service
+   */
 
   override form = this.fb.group({
     prefixTh: [],

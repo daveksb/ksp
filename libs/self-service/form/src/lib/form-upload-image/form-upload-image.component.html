@@ -1,8 +1,13 @@
 <div class="profile__container">
-  <div><img src="/assets/images/img-profile.png" /></div>
-  <button type="button" class="btn btn-primary">
-    <img src="/assets/images/plus-icon.svg" class="icon__upload" />อัพโหลดรูปภาพ
-  </button>
+  <img src="/assets/images/img-profile.png" />
+
+  <div class="mt-2">
+    <ksp-file-upload
+      buttonLabel="อัพโหลดรูปภาพ"
+      [showUploadedFileName]="false"
+    ></ksp-file-upload>
+  </div>
+
   <div class="description__label">
     jpg. or png, / size 130x 130px. / 15mb. maximum
   </div>

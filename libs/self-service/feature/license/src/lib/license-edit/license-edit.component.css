@@ -38,7 +38,6 @@
 }
 
 .form-label {
-  font-size: 16px;
   color: #656565;
 }
 
@@ -71,12 +70,6 @@
 .checkbox-1 {
   width: 15px;
   height: 15px;
-}
-
-.button__container {
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
 }
 
 .change-label {
@@ -125,9 +118,5 @@
     font-size: 24px;
     text-align: center;
     color: #000000;
-  }
-
-  .button__container {
-    margin-top: 24px;
   }
 }
