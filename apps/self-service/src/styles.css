@@ -1,16 +1,23 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @import './mat-style.css';
 
-@font-face {
-  font-family: 'KSP Bold';
-  src: URL('/assets/font/KSP/ksp-bold.ttf') format('truetype');
+:root {
+  --ksp-gray: #656565;
+}
 
-  font-family: 'KSP Regular';
-  src: URL('/assets/font/KSP/ksp-regular.ttf') format('truetype');
+@font-face {
+  font-family: 'ksp regular';
+  src: URL('/assets/font/ksp/ksp-regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'ksp bold';
+  src: URL('/assets/font/ksp/ksp-bold.ttf') format('truetype');
 }
 
 * {
-  font-family: 'KSP Regular';
+  font-family: 'ksp regular';
+  font-weight: 600;
 }
 
 table {
@@ -37,12 +44,12 @@ add asterisk for required feild
 .form-label {
   margin-bottom: 0 !important;
   font-size: 20px;
-  color: #656565;
+  color: var(--ksp-gray);
 }
 
 .form-select,
 .form-control {
-  color: #656565 !important;
+  color: var(--ksp-gray) !important;
   font-size: 22px !important;
   padding: 0 0.75rem !important;
 }
