@@ -28,21 +28,7 @@
   padding-bottom: 75px;
 }
 
-.checkbox__box {
-  height: 15px;
-  width: 15px;
-  margin-right: 5px;
-}
-
-.checkbox__container-2 {
-  display: flex;
-  line-height: 15px;
-  margin-top: 20px;
-}
-
-.content__container-2 {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-column-gap: 16px;
-  margin: 0 20px;
+.address__checkbox {
+  height: 16px;
+  width: 16px;
 }

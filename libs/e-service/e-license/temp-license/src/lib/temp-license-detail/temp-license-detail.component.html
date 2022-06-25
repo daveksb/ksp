@@ -38,14 +38,17 @@
         animationDuration="0ms"
         dynamicHeight="true"
         (selectedTabChange)="tabChanged($event)"
+        selectedIndex="2"
       >
         <mat-tab label="ที่อยู่" class="tab-content">
-          <ksp-form-address>ที่อยู่ทะเบียนบ้าน</ksp-form-address>
           <ksp-form-address>
-            ที่อยู่ทะเบียนบ้าน
-            <div class="checkbox__container-2">
-              <input type="checkbox" class="checkbox__box" />
-              <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
+            <span class="ms-2">ที่อยู่ทะเบียนบ้าน</span>
+          </ksp-form-address>
+          <ksp-form-address>
+            <span class="ms-2">ที่อยู่ที่ติดต่อได้สะดวก</span>
+            <div class="mt-2 ms-2 d-flex align-items-center">
+              <input type="checkbox" class="address__checkbox" />
+              <label class="form-label ms-2">ที่อยู่ตามทะเบียนบ้าน</label>
             </div>
           </ksp-form-address>
         </mat-tab>
@@ -55,26 +58,32 @@
         </mat-tab>
 
         <mat-tab label="ข้อมูลทางการศึกษา">
-          <ksp-form-education-info
-            >วุฒิการศึกษาปริญญาตรี</ksp-form-education-info
-          >
-          <ksp-form-education-info
-            >วุฒิการศึกษาปริญญาโท</ksp-form-education-info
-          >
-          <div class="content__container-2">
-            <div class="mb-3">
-              <label class="form-label"
-                >คุณสมบัติอื่นที่สอดคล้องหรือเป็นประโยชน์ต่อการจัดการเรียนการสอนในกลุ่มสาระหรือรายวิชาที่สอน
-                (พิจารณาเป็นรายกรณี)</label
-              >
-              <textarea
-                class="form-control form-control-sm"
-                rows="4"
-                placeholder="โปรดระบุ"
-              ></textarea>
-            </div>
+          <div>
+            <ksp-form-education-info>
+              <span class="ms-2 fs-5">วุฒิการศึกษาปริญญาตรี</span>
+            </ksp-form-education-info>
           </div>
+
+          <div class="mt-4">
+            <ksp-form-education-info class="mt-5">
+              <span class="ms-2 fs-5">วุฒิการศึกษาปริญญาโท</span>
+            </ksp-form-education-info>
+          </div>
+
+          <div class="ms-4 me-4">
+            <label class="form-label"
+              >คุณสมบัติอื่นที่สอดคล้องหรือเป็นประโยชน์ต่อการจัดการเรียนการสอนในกลุ่มสาระหรือรายวิชาที่สอน
+              (พิจารณาเป็นรายกรณี)</label
+            >
+            <textarea
+              class="form-control form-control-sm"
+              rows="4"
+              placeholder="โปรดระบุ"
+            ></textarea>
+          </div>
+
           <ksp-form-attachment
+            class="mt-3"
             [title]="'หลักฐานประกอบ'"
             [groups]="educationInfo"
             [mode]="'view'"
