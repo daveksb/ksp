@@ -3,11 +3,10 @@
 
 @font-face {
   font-family: 'KSP Bold';
-  src: URL('/assets/font/KSP/ttf/KSP\ Regular\ ver\ 1.00.ttf')
-    format('truetype');
+  src: URL('/assets/font/KSP/ksp-bold.ttf') format('truetype');
 
   font-family: 'KSP Regular';
-  src: URL('/assets/font/KSP/KSP\ Bold\ ver\ 1.00.ttf') format('truetype');
+  src: URL('/assets/font/KSP/ksp-regular.ttf') format('truetype');
 }
 
 * {
