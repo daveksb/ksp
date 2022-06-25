@@ -1,79 +1,76 @@
 <form [formGroup]="form">
-  <div
-    [class.bg-light]="!isDarkMode"
-    class="form__container"
-    [ngClass]="{ 'ps-3 pe-3': !isDarkMode }"
-  >
+  <div [ngClass]="{ 'ps-3 pe-3 bg-light': !isDarkMode }">
     <div class="form__header"><ng-content></ng-content></div>
-    <div class="content__container">
-      <div class="mb-3">
+
+    <div class="row ps-2 pe-2 mb-3">
+      <div class="col">
         <label class="form-label">อาคาร/สถานที่</label>
         <input
           [class.bg-light]="isDarkMode"
-          class="form-control form-control-sm"
+          class="form-control"
           type="text"
           formControlName="location"
         />
       </div>
-      <div class="mb-3">
+      <div class="col">
         <label class="form-label">บ้านเลขที่</label>
         <input
           [class.bg-light]="isDarkMode"
-          class="form-control form-control-sm"
+          class="form-control"
           type="text"
           formControlName="houseNumber"
         />
       </div>
     </div>
 
-    <div class="content__container">
-      <div class="mb-3">
+    <div class="row ps-2 pe-2 mb-3">
+      <div class="col">
         <label class="form-label">หมู่ที่</label>
         <input
           [class.bg-light]="isDarkMode"
-          class="form-control form-control-sm"
+          class="form-control"
           type="text"
           formControlName="villageNumber"
         />
       </div>
-      <div class="mb-3">
+      <div class="col">
         <label class="form-label">ซอย</label>
         <input
           [class.bg-light]="isDarkMode"
-          class="form-control form-control-sm"
+          class="form-control"
           type="text"
           formControlName="lane"
         />
       </div>
     </div>
 
-    <div class="content__container">
-      <div class="mb-3">
+    <div class="row ps-2 pe-2 mb-3">
+      <div class="col">
         <label class="form-label">ถนน</label>
         <input
           [class.bg-light]="isDarkMode"
-          class="form-control form-control-sm"
+          class="form-control"
           type="text"
           formControlName="road"
         />
       </div>
-      <div class="mb-3">
+      <div class="col">
         <label class="form-label">รหัสไปรษณีย์</label>
         <input
           [class.bg-light]="isDarkMode"
-          class="form-control form-control-sm"
+          class="form-control"
           type="text"
           formControlName="zipCode"
         />
       </div>
     </div>
 
-    <div class="content__container">
-      <div class="mb-3">
+    <div class="row ps-2 pe-2 mb-3">
+      <div class="col">
         <label class="form-label">จังหวัด</label>
         <select
           [class.bg-white]="!isDarkMode"
-          class="form-select form-select-sm"
+          class="form-select"
           formControlName="provience"
         >
           <option selected>กรุณาเลือก</option>
@@ -82,11 +79,11 @@
           <option value="3">Three</option>
         </select>
       </div>
-      <div class="mb-3">
+      <div class="col">
         <label class="form-label">ตำบล</label>
         <select
           [class.bg-white]="!isDarkMode"
-          class="form-select form-select-sm"
+          class="form-select"
           formControlName="subDistrict"
         >
           <option selected>กรุณาเลือก</option>
@@ -97,12 +94,12 @@
       </div>
     </div>
 
-    <div class="content__container">
-      <div class="mb-3">
+    <div class="row ps-2 pe-2 mb-3">
+      <div class="col-6">
         <label class="form-label">อำเภอ</label>
         <select
           [class.bg-white]="!isDarkMode"
-          class="form-select form-select-sm"
+          class="form-select"
           formControlName="district"
         >
           <option selected>กรุณาเลือก</option>

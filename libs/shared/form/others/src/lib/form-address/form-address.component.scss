@@ -1,18 +1,3 @@
-.form__container {
-  margin-bottom: 24px;
-}
-
-.content__container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 16px;
-}
-
-.form-label {
-  font-size: 18px;
-  color: #656565;
-}
-
 .form__header {
   font-size: 22px;
   color: #000000;
@@ -25,7 +10,6 @@
   background-size: 12px;
 }
 
-/* mobile */
 @media only screen and (max-width: 768px) {
   .content__container {
     display: flex;
