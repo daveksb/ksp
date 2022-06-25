@@ -12,11 +12,11 @@ export class StickyBottomNavDirective implements OnInit {
     this.renderer.setStyle(this.el.nativeElement, 'bottom', 0);
     this.renderer.setStyle(this.el.nativeElement, 'left', 0);
     this.renderer.setStyle(this.el.nativeElement, 'z-index', 1);
-    /*
+
     this.renderer.setStyle(
       this.el.nativeElement,
       'border',
       '1px solid #dadde1'
-    ); */
+    );
   }
 }
