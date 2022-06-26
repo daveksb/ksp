@@ -6,37 +6,6 @@
   padding: 20px 32px;
 }
 
-.content__container {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  grid-column-gap: 8px;
-  margin-bottom: 10px;
-}
-
-.title {
-  display: none;
-  font-size: 20px;
-  margin-bottom: 20px;
-}
-
-.header {
-  margin: 12px 24px;
-  font-size: 22px;
-}
-
-.center-label {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  margin: 16px 0;
-}
-
-.content__container--three-columns {
-  display: grid;
-  grid-template-columns: 3fr 1.5fr 3fr;
-  grid-column-gap: 8px;
-}
-
 .form-label {
   color: #656565;
 }
@@ -45,78 +14,34 @@
   background-color: #f6f6f6;
 }
 
-.form-control-sm {
-  font-size: 16px;
-  color: #000000;
-}
-
-.form-select-sm {
-  font-size: 16px;
-  color: #000000;
-}
-
 .form-select {
   background-color: #edf8ff;
   background-image: url(/assets/images/arrow-down-icon.png);
   background-size: 12px;
 }
 
-.checkbox-label {
-  font-size: 16px;
-  color: #656565;
-  margin-left: 10px;
-}
-
-.checkbox-1 {
+.checkbox {
   width: 15px;
   height: 15px;
+  margin-right: 5px;
+}
+
+.change-button {
+  display: flex;
+  justify-content: center;
 }
 
 .change-label {
-  border: 1px solid #ccc;
+  border: 1px solid #3dabfc;
   padding: 4px 12px;
   border-radius: 15px;
-  background-color: #e8e8e8;
-  color: #656565;
-}
-
-.checkbox__container {
-  display: flex;
-  align-items: center;
+  background-color: #edf8ff;
+  color: #3dabfc;
 }
 
 @media only screen and (max-width: 768px) {
   .detail__container {
-    background: #ffffff;
-    box-shadow: 0px 0px 15px #e2e2e2;
-    border-radius: 20px;
     padding: 24px 20px;
     margin: 12px 24px;
-  }
-
-  .content__container {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .content__container--three-columns {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-column-gap: 8px;
-  }
-
-  .center-label {
-    margin: 0;
-  }
-
-  .header {
-    display: none;
-  }
-
-  .title {
-    display: block;
-    font-size: 24px;
-    text-align: center;
-    color: #000000;
   }
 }

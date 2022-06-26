@@ -1,11 +1,8 @@
 <form [formGroup]="form">
-  <div class="content__container">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col-md-6 mb-3">
       <label class="form-label">สังกัด</label>
-      <select
-        class="search__content form-select form-select-sm"
-        formControlName="affiliation"
-      >
+      <select class="search__content form-select" formControlName="affiliation">
         <option selected>กรุณาเลือก</option>
         <option value="1">One</option>
         <option value="2">Two</option>
@@ -13,10 +10,10 @@
       </select>
     </div>
 
-    <div class="mb-3">
+    <div class="col-md-6 mb-3">
       <label class="form-label">ชื่อหน่วยงาน/สถานศึกษา</label>
       <input
-        class="form-control form-control-sm"
+        class="form-control"
         type="text"
         (click)="openSearchDialog()"
         formControlName="addressName"
@@ -24,62 +21,39 @@
     </div>
   </div>
 
-  <div class="content__container">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col-md-6 mb-3">
       <label class="form-label">ที่อยู่/เลขที่</label>
-      <input
-        class="form-control form-control-sm"
-        type="text"
-        formControlName="houseNumber"
-      />
+      <input class="form-control" type="text" formControlName="houseNumber" />
     </div>
 
-    <div class="mb-3">
+    <div class="col-md-6 mb-3">
       <label class="form-label">หมู่ที่</label>
-      <input
-        class="form-control form-control-sm"
-        type="text"
-        formControlName="villageNumber"
-      />
+      <input class="form-control" type="text" formControlName="villageNumber" />
     </div>
   </div>
 
-  <div class="content__container">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col-md-6 mb-3">
       <label class="form-label">ซอย</label>
-      <input
-        class="form-control form-control-sm"
-        type="text"
-        formControlName="lane"
-      />
+      <input class="form-control" type="text" formControlName="lane" />
     </div>
 
-    <div class="mb-3">
+    <div class="col-md-6 mb-3">
       <label class="form-label">ถนน</label>
-      <input
-        class="form-control form-control-sm"
-        type="text"
-        formControlName="road"
-      />
+      <input class="form-control" type="text" formControlName="road" />
     </div>
   </div>
 
-  <div class="content__container">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col-md-6 mb-3">
       <label class="form-label">รหัสไปรษณีย์</label>
-      <input
-        class="form-control form-control-sm"
-        type="text"
-        formControlName="zipCode"
-      />
+      <input class="form-control" type="text" formControlName="zipCode" />
     </div>
 
-    <div class="mb-3">
+    <div class="col-md-6 mb-3">
       <label class="form-label">จังหวัด</label>
-      <select
-        class="search__content form-select form-select-sm"
-        formControlName="provience"
-      >
+      <select class="search__content form-select" formControlName="provience">
         <option selected>กรุณาเลือก</option>
         <option value="1">One</option>
         <option value="2">Two</option>
@@ -88,13 +62,10 @@
     </div>
   </div>
 
-  <div class="content__container">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col-md-6 mb-3">
       <label class="form-label">ตำบล</label>
-      <select
-        class="search__content form-select form-select-sm"
-        formControlName="subDistrict"
-      >
+      <select class="search__content form-select" formControlName="subDistrict">
         <option selected>กรุณาเลือก</option>
         <option value="1">One</option>
         <option value="2">Two</option>
@@ -102,12 +73,9 @@
       </select>
     </div>
 
-    <div class="mb-3">
+    <div class="col-md-6 mb-3">
       <label class="form-label">อำเภอ</label>
-      <select
-        class="search__content form-select form-select-sm"
-        formControlName="district"
-      >
+      <select class="search__content form-select" formControlName="district">
         <option selected>กรุณาเลือก</option>
         <option value="1">One</option>
         <option value="2">Two</option>

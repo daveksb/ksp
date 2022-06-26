@@ -33,7 +33,7 @@ export class LicenseRequestComponent implements OnInit {
     this.form.valueChanges
       .pipe(debounceTime(300), untilDestroyed(this))
       .subscribe((res) => {
-        //
+        console.log('res = ', this.form);
       });
   }
 

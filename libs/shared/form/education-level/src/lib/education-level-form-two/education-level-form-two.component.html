@@ -1,9 +1,9 @@
 <form [formGroup]="form">
-  <div class="content__container">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col-md-6 mb-3">
       <label class="form-label">สถาบันการศึกษา</label>
       <select
-        class="search__content form-select form-select-sm"
+        class="search__content form-select"
         formControlName="educationInstitution"
       >
         <option selected>กรุณาเลือก</option>
@@ -13,10 +13,10 @@
       </select>
     </div>
 
-    <div class="mb-3">
+    <div class="col-md-6 mb-3">
       <label class="form-label">วุฒิปริญญาที่จบ</label>
       <select
-        class="search__content form-select form-select-sm"
+        class="search__content form-select"
         formControlName="graduateDegree"
       >
         <option selected>กรุณาเลือก</option>
@@ -27,42 +27,30 @@
     </div>
   </div>
 
-  <div class="content__container">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col-md-6 mb-3">
       <label class="form-label">สาขา/วิชาเอก</label>
-      <input
-        class="form-control form-control-sm"
-        type="text"
-        formControlName="branch"
-      />
+      <input class="form-control" type="text" formControlName="branch" />
     </div>
   </div>
 
-  <div class="content__container">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col-md-6 mb-3">
       <label class="form-label">วันเดือนปี เข้าศึกษา</label>
-      <input
-        class="form-control form-control-sm"
-        type="date"
-        formControlName="admissionDate"
-      />
+      <input class="form-control" type="date" formControlName="admissionDate" />
     </div>
-    <div class="mb-3">
+    <div class="col-md-6 mb-3">
       <label class="form-label">วันเดือนปี สำเร็จการศึกษา</label>
-      <input
-        class="form-control form-control-sm"
-        type="date"
-        formControlName="graduateDate"
-      />
+      <input class="form-control" type="date" formControlName="graduateDate" />
     </div>
   </div>
 
-  <div class="content__container">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col-md-6 mb-3">
       <label class="form-label"
         >วุฒิปริญญาก่อนเข้าศึกษาประกาศนียบัตรบัณฑิตวิชาชีพครู</label
       >
-      <select class="form-select form-select-sm" formControlName="beforeDegree">
+      <select class="form-select" formControlName="beforeDegree">
         <option selected>กรุณาเลือก</option>
         <option value="1">ภาษาฝรั่งเศษ</option>
         <option value="2">ภาษาจีน</option>
