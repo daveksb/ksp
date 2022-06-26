@@ -3,95 +3,63 @@
   ><span subHeader>ค้นหาใบอนุญาต</span></ksp-top-nav
 >
 
-<form [formGroup]="form">
-  <div class="container">
-    <div class="header">ค้นหาข้อมูลใบอนุญาตประกอบวิชาชีพทางการศึกษา</div>
+<div [formGroup]="form" class="container">
+  <div class="fs-5 pt-2 pb-1">ค้นหาข้อมูลใบอนุญาตประกอบวิชาชีพทางการศึกษา</div>
 
-    <div class="box__container">
-      <div class="title__box">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
-      <hr />
-      <div class="box__detail">
-        <div class="detail__container--half">
-          <div class="mb-3">
-            <label class="form-label">หมายเลขบัตรประชาชน</label>
-            <input
-              class="form-control form-control-sm"
-              type="text"
-              formControlName="personId"
-            />
-          </div>
+  <div class="bg-white p-3">
+    <div class="fs-5">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
+    <hr />
 
-          <div class="mb-3">
-            <label class="form-label">เลขที่ใบอนุญาต</label>
-            <input
-              class="form-control form-control-sm"
-              type="text"
-              formControlName="licenseNumber"
-            />
-          </div>
-        </div>
-        <div class="detail__container--half">
-          <div class="mb-3">
-            <label class="form-label">ชื่อ-นามสกุล </label>
-            <input
-              class="form-control form-control-sm"
-              type="text"
-              formControlName="name"
-            />
-          </div>
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">หมายเลขบัตรประชาชน</label>
+        <input class="form-control" type="text" formControlName="personId" />
+      </div>
 
-          <div class="mb-3">
-            <label class="form-label">ประเภทใบอนุญาต </label>
-            <select
-              class="form-select form-select-sm"
-              formControlName="licenseType"
-            >
-              <option selected>กรุณาเลือก</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-        </div>
-        <div class="button__group">
-          <button
-            (click)="clear()"
-            type="button"
-            class="btn btn-outline-primary"
-          >
-            ล้างข้อมูล
-          </button>
-          <button
-            id="search__button"
-            (click)="search()"
-            type="button"
-            class="btn btn-primary"
-          >
-            ค้นหา
-          </button>
-        </div>
+      <div class="col">
+        <label class="form-label">เลขที่ใบอนุญาต</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="licenseNumber"
+        />
       </div>
     </div>
-
-    <div class="content__container">
-      <div class="title__box">ผลการค้นหา</div>
-      <hr />
-      <div *ngIf="foundItem" class="result">
-        <div class="result__item">
-          <ksp-license-info></ksp-license-info>
-        </div>
-        <hr />
-        <div class="result__item">
-          <ksp-license-info></ksp-license-info>
-        </div>
-        <hr />
-        <div class="result__item">
-          <ksp-license-info></ksp-license-info>
-          <button disabled class="btn btn-outline-danger">
-            ถูกเพิกถอนใบอนุญาต
-          </button>
-        </div>
+    <div class="row">
+      <div class="col">
+        <label class="form-label">ชื่อ-นามสกุล </label>
+        <input class="form-control" type="text" formControlName="name" />
       </div>
+
+      <div class="col">
+        <label class="form-label">ประเภทใบอนุญาต </label>
+        <select class="form-select" formControlName="licenseType">
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+    </div>
+    <div class="d-flex justify-content-end mt-3">
+      <button (click)="clear()" type="button" class="btn btn-outline-primary">
+        ล้างข้อมูล
+      </button>
+      <button (click)="search()" type="button" class="ms-2 btn btn-primary">
+        ค้นหา
+      </button>
     </div>
   </div>
-</form>
+
+  <div class="bg-white p-3 mt-3">
+    <div class="fs-5">ผลการค้นหา</div>
+    <hr />
+    <!-- <div *ngIf="foundItem"> -->
+    <ksp-license-info></ksp-license-info>
+    <hr />
+    <ksp-license-info [isLicenseRevoked]="true"></ksp-license-info>
+    <hr />
+    <ksp-license-info></ksp-license-info>
+  </div>
+</div>
+<!-- </div> -->
