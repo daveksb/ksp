@@ -3,6 +3,7 @@
 
 :root {
   --ksp-gray: #656565;
+  --ksp-gray-bg: #e5e5e5;
 }
 
 @font-face {

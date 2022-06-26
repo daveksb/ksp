@@ -1,10 +1,10 @@
 <uni-service-top-nav>ลงทะเบียนขอรับรหัสเข้าใช้งาน</uni-service-top-nav>
 
 <form [formGroup]="form">
-  <div class="container">
-    <div class="header">รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ</div>
+  <div class="container-fluid">
+    <div class="fs-4">รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ</div>
 
-    <div class="content__container">
+    <div class="bg-white p-3">
       <ksp-request-header-info
         [requestDate]="'10 ตุลาคม 2565'"
         [requestNumber]="'112234467876543'"
@@ -15,27 +15,25 @@
         <img src="/assets/images/img-uni/stepper.png" />
       </div>
 
-      <div class="detail__content">
-        <ksp-university-select [isViewOnly]="true"></ksp-university-select>
-      </div>
+      <ksp-university-select [isViewOnly]="true"></ksp-university-select>
 
-      <div class="checkbox__container">
-        <div class="detail__header">ข้อมูลผู้ขอรหัสสำหรับเข้าใช้งานระบบ</div>
-        <div class="detail__header-2">สิทธิสำหรับการเข้าใช้งาน</div>
-        <div class="checkbox__content">
+      <div class="m-3">
+        <div class="text-primary fs-4">ข้อมูลผู้ขอรหัสสำหรับเข้าใช้งานระบบ</div>
+        <div class="fs-5">สิทธิสำหรับการเข้าใช้งาน</div>
+        <div class="d-flex flex-column">
           <ng-container *ngFor="let item of grant">
-            <mat-checkbox
-              formControlName="{{ item.name }}"
-              class="checkbox__label"
-              >{{ item.label }}</mat-checkbox
-            ></ng-container
-          >
+            <mat-checkbox formControlName="{{ item.name }}" class="fs-5 ms-3">
+              {{ item.label }}
+            </mat-checkbox>
+          </ng-container>
         </div>
       </div>
 
-      <ksp-form-requester-info
-        formControlName="requester"
-      ></ksp-form-requester-info>
+      <div class="px-4 mb-2">
+        <ksp-form-requester-info
+          formControlName="requester"
+        ></ksp-form-requester-info>
+      </div>
 
       <ksp-bottom-nav
         [isFirstPage]="true"

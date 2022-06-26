@@ -14,10 +14,10 @@ export class CurrentUserComponent {
   constructor(public router: Router, private fb: FormBuilder) {}
 
   next() {
-    this.router.navigate(['/', 'register', 'requester-info']);
+    this.router.navigate(['/register', 'requester-info']);
   }
 
   back() {
-    this.router.navigate(['/', 'login']);
+    this.router.navigate(['/login']);
   }
 }
