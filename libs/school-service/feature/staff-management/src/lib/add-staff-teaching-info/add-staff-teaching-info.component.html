@@ -1,145 +1,155 @@
-<ksp-top-nav
-  ><span header>ทะเบียนบุคลากรภายในหน่วยงาน</span
-  ><span subHeader>เพิ่มบุคลากร</span></ksp-top-nav
->
+<ksp-top-nav>
+  <span header>ทะเบียนบุคลากรภายในหน่วยงาน</span>
+  <span subHeader>เพิ่มบุคลากร</span>
+</ksp-top-nav>
 
-<form [formGroup]="form">
-  <div class="container">
-    <div class="header">รายละเอียดเพิ่มบุคลากรภายในหน่วยงาน</div>
+<div [formGroup]="form" class="container">
+  <div class="fs-5 pt-1 mb-1">รายละเอียดเพิ่มบุคลากรภายในหน่วยงาน</div>
 
-    <div class="box__container">
-      <ksp-request-header-info
-        [requestDate]="'10 ตุลาคม 2565'"
-      ></ksp-request-header-info>
-      <hr />
+  <div class="bg-white p-3">
+    <ksp-request-header-info
+      [requestDate]="'10 ตุลาคม 2565'"
+    ></ksp-request-header-info>
+    <hr />
 
-      <div class="box__detail">
-        <div class="title__box">ตำแหน่งงานภายในหน่วยงาน</div>
+    <div class="bg-light pt-2 pb-2 ps-3 pe-5">
+      <div class="fs-5 ps-">ตำแหน่งงานภายในหน่วยงาน</div>
 
-        <div class="detail__container--half">
-          <div class="mb-3">
-            <label class="form-label">ประเภทบุคลากร</label>
-            <select class="form-select" formControlName="staffType">
-              <option selected>กรุณาเลือก</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
+      <div class="row mb-2 ps-3">
+        <div class="col-6">
+          <label class="form-label">ประเภทบุคลากร</label>
+          <select class="form-select" formControlName="staffType">
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
         </div>
+      </div>
 
-        <div class="detail__container--half">
-          <div class="mb-3">
-            <label class="form-label">ตำแหน่งงาน</label>
-            <select class="form-select" formControlName="post">
-              <option selected>กรุณาเลือก</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">วิทยฐานะ</label>
-            <select class="form-select" formControlName="academicStanding">
-              <option selected>กรุณาเลือก</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
+      <div class="row mb-2 ps-3">
+        <div class="col">
+          <label class="form-label">ตำแหน่งงาน</label>
+          <select class="form-select" formControlName="post">
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
         </div>
-
-        <div class="detail__container--half">
-          <div class="detail__container">
-            <label class="form-label">วันเดือนปีที่เข้าปฏิบัติงาน </label>
-            <input
-              class="form-control"
-              type="date"
-              formControlName="startWorkDate"
-            />
-          </div>
-          <div class="detail__container">
-            <label class="form-label">วันเดือนปีที่หมดสัญญา </label>
-            <input
-              class="form-control"
-              type="date"
-              formControlName="endWorkDate"
-            />
-          </div>
+        <div class="col">
+          <label class="form-label">วิทยฐานะ</label>
+          <select class="form-select" formControlName="academicStanding">
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
         </div>
+      </div>
 
-        <div class="form-label-2">สถานะบุคลากร</div>
-        <div class="checkbox__content">
-          <div class="checkbox__content-2">
-            <ng-container *ngFor="let item of status">
-              <input
-                formControlName="{{ item.name }}"
-                type="radio"
-                value="{{ item.value }}" />
-              <label class="checkbox__label">{{ item.label }}</label>
-              <input
-                class="form-control status__date"
-                type="date"
-                formControlName="statusDate"
-            /></ng-container>
-          </div>
-        </div>
-
-        <div class="textarea__container">
-          <div class="textarea__label">ระบุสาเหตุ</div>
-          <textarea
+      <div class="row mb-2 ps-3">
+        <div class="col">
+          <label class="form-label">วันเดือนปีที่เข้าปฏิบัติงาน </label>
+          <input
             class="form-control"
-            rows="3"
-            formControlName="reason"
-          ></textarea>
+            type="date"
+            formControlName="startWorkDate"
+          />
+        </div>
+        <div class="col">
+          <label class="form-label">วันเดือนปีที่หมดสัญญา </label>
+          <input
+            class="form-control"
+            type="date"
+            formControlName="endWorkDate"
+          />
         </div>
       </div>
 
-      <div class="box__detail">
-        <div class="title__box">ช่วงชั้นที่สอน</div>
-        <section class="container-fluid">
-          <div class="checkbox__container">
-            <ng-container *ngFor="let item1 of levels">
-              <mat-checkbox
-                formControlName="{{ item1.name }}"
-                class="checkbox__label"
-                >{{ item1.label }}</mat-checkbox
-              >
-            </ng-container>
-          </div>
-        </section>
-      </div>
+      <div class="fs-5 text-secondary ps-3">สถานะบุคลากร</div>
 
-      <div class="box__detail">
-        <div class="title__box">ประเภทวิชาที่สอน</div>
-        <section class="container-fluid">
-          <div class="checkbox__container-2">
-            <ng-container *ngFor="let item2 of subjects">
-              <mat-checkbox
-                formControlName="{{ item2.name }}"
-                class="checkbox__label"
-                >{{ item2.label }}</mat-checkbox
-              >
-            </ng-container>
+      <ng-container *ngFor="let item of status">
+        <div class="row mb-2">
+          <span class="col-1 d-flex justify-content-end align-self-center">
             <input
-              class="form-control check-other"
-              type="text"
-              formControlName="other"
+              formControlName="{{ item.name }}"
+              type="radio"
+              value="{{ item.value }}"
             />
-          </div>
-        </section>
+          </span>
+          <span class="col-2 d-flex align-self-center">
+            <label class="fs-5 text-secondary">{{ item.label }}</label>
+          </span>
+          <span class="col">
+            <input
+              class="w-25 form-control"
+              type="date"
+              formControlName="statusDate"
+            />
+          </span>
+        </div>
+      </ng-container>
+
+      <div class="ms-5 mb-2">
+        <div class="fs-5 text-secondary">ระบุสาเหตุ</div>
+        <textarea
+          class="form-control"
+          rows="3"
+          formControlName="reason"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="bg-light p-3 mt-3">
+      <div class="fs-5">ช่วงชั้นที่สอน</div>
+
+      <div class="row">
+        <ng-container *ngFor="let item of levels">
+          <span class="col-3">
+            <mat-checkbox
+              formControlName="{{ item.name }}"
+              class="text-secondary m-2"
+              >{{ item.label }}
+            </mat-checkbox>
+          </span>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="bg-light p-3 mt-3">
+      <div class="fs-5">ประเภทวิชาที่สอน</div>
+
+      <div class="row">
+        <ng-container *ngFor="let s of subjects">
+          <span class="col-4">
+            <mat-checkbox
+              formControlName="{{ s.name }}"
+              class="m-2 text-secondary"
+              >{{ s.label }}
+            </mat-checkbox>
+          </span>
+        </ng-container>
+      </div>
+      <div class="row ms-4">
+        <span class="col-4">
+          <input
+            class="form-control check-other"
+            type="text"
+            formControlName="other"
+          />
+        </span>
       </div>
     </div>
   </div>
-</form>
-
-<div class="bottom__container">
-  <ksp-bottom-nav
-    (prevClicked)="back()"
-    [isLastPage]="true"
-    [showCenterButtons]="true"
-    [showSaveButton]="true"
-    (saveClicked)="save()"
-    (cancelClicked)="cancel()"
-  ></ksp-bottom-nav>
 </div>
+
+<ksp-bottom-nav
+  kspStickyBottomNav
+  (prevClicked)="back()"
+  [isLastPage]="true"
+  [showCenterButtons]="true"
+  [showSaveButton]="true"
+  (saveClicked)="save()"
+  (cancelClicked)="cancel()"
+></ksp-bottom-nav>
