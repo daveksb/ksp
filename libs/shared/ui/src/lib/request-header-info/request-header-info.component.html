@@ -1,10 +1,10 @@
-<div class="header">
-  <div class="content">
+<div class="d-flex">
+  <div class="fs-5 text-secondary">
     วันที่ทำรายการ :
-    <span class="content content--primary">{{ requestDate }}</span>
+    <span class="request__date">{{ requestDate }}</span>
   </div>
-  <div *ngIf="requestNumber" class="content">
+  <div *ngIf="requestNumber" class="fs-5 text-secondary ms-4">
     เลขใบคำขอ :
-    <span class="content content--secondary">{{ requestNumber }}</span>
+    <span class="text-primary">{{ requestNumber }}</span>
   </div>
 </div>
