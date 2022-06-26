@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
@@ -8,7 +9,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./activity-list.component.scss'],
 })
 export class ActivityListComponent {
-  personSelected = false;
+  form = this.fb.group({
+    activitySearch: [],
+  });
+
   displayedColumns: string[] = [
     'order',
     'licenseID',
@@ -23,7 +27,7 @@ export class ActivityListComponent {
   ];
   dataSource = new MatTableDataSource<activityInfo>();
 
-  constructor(public router: Router) {}
+  constructor(public router: Router, private fb: FormBuilder) {}
 
   search() {
     this.dataSource.data = data;

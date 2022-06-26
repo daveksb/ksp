@@ -1,30 +1,32 @@
-<div class="row row--first">
-  <div class="mb-3">
-    <label class="form-label">เรื่อง</label>
-    <input class="form-control form-control-sm" type="text" />
-  </div>
-</div>
-
-<div class="row row--first">
-  <div class="mb-3">
-    <label class="form-label">สถานที่</label>
-    <input class="form-control form-control-sm" type="text" />
+<form [formGroup]="form">
+  <div class="row row--first">
+    <div class="mb-3">
+      <label class="form-label">เรื่อง</label>
+      <input class="form-control" type="text" formControlName="subject" />
+    </div>
   </div>
 
-  <div>
-    <label class="form-label">หน่วยงาน</label>
-    <input class="form-control form-control-sm" type="text" />
-  </div>
-</div>
+  <div class="row row--first">
+    <div class="mb-3">
+      <label class="form-label">สถานที่</label>
+      <input class="form-control" type="text" formControlName="address" />
+    </div>
 
-<div class="row row--first">
-  <div class="mb-3">
-    <label class="form-label">จำนวนชั่วโมงที่เป็นวิทยากร</label>
-    <input class="form-control form-control-sm" type="text" />
+    <div>
+      <label class="form-label">หน่วยงาน</label>
+      <input class="form-control" type="text" formControlName="agency" />
+    </div>
   </div>
 
-  <div>
-    <label class="form-label">วันเดือนปี</label>
-    <input class="form-control form-control-sm" type="date" />
+  <div class="row row--first">
+    <div class="mb-3">
+      <label class="form-label">จำนวนชั่วโมงที่เป็นวิทยากร</label>
+      <input class="form-control" type="text" formControlName="hour" />
+    </div>
+
+    <div>
+      <label class="form-label">วันเดือนปี</label>
+      <input class="form-control" type="date" formControlName="date" />
+    </div>
   </div>
-</div>
+</form>
