@@ -1,54 +1,7 @@
-.detail__content {
-  margin: 12px 24px;
-}
-
-.form-select,
-.form-control {
-  background-color: #fff;
-  font-size: 18px;
-}
-
-.header {
-  font-size: 22px;
-  color: #000;
-}
-
 .container {
-  background-color: #e5e5e5;
+  background-color: var(--ksp-gray-bg);
   max-width: 100%;
-  padding: 30px 120px;
-}
-
-.content__container {
-  background-color: #fff;
-  padding: 24px;
-}
-
-.upload__content {
-  margin: 20px;
-}
-
-.box__header {
-  font-size: 22px;
-  color: #0056ff;
-}
-
-.detail__header {
-  font-size: 22px;
-  margin-left: 12px;
-}
-
-.header-2 {
-  font-size: 22px;
-  color: #0056ff;
-  padding: 8px 16px;
-  margin: 0 24px;
-}
-
-.school__code {
-  display: flex;
-  align-items: center;
-  margin: 12px 24px;
+  padding: 10px 120px;
 }
 
 .img__step {
