@@ -1,16 +1,5 @@
-.content__container {
-  display: flex;
-  flex-direction: column;
-}
-
 .form-label {
-  font-size: 16px;
   color: #656565;
-}
-
-.form-select-sm {
-  font-size: 16px;
-  color: #000000;
 }
 
 .form-select {

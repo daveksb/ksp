@@ -14,14 +14,7 @@
   background-size: cover;
 }
 
-.content__container--secondary {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 16px;
-}
-
 .form-label {
-  font-size: 16px;
   color: #656565;
 }
 
@@ -29,32 +22,10 @@
   background-color: #f6f6f6;
 }
 
-.form-control-sm {
-  font-size: 16px;
-  color: #000000;
-}
-
-.form-select-sm {
-  font-size: 16px;
-  color: #000000;
-}
-
 .form-select {
   background-color: #edf8ff;
   background-image: url(/assets/images/arrow-down-icon.png);
   background-size: 12px;
-}
-
-.img__content {
-  width: 125px;
-  height: 200px;
-}
-
-.img__container {
-  display: flex;
-  align-items: center;
-  margin: 20px 0;
-  flex-direction: column;
 }
 
 .button__container {
@@ -67,11 +38,6 @@
 }
 
 @media only screen and (max-width: 768px) {
-  .content__container--secondary {
-    display: flex;
-    flex-direction: column;
-  }
-
   .container {
     padding: 12px 24px;
   }

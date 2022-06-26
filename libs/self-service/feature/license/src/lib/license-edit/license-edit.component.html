@@ -3,25 +3,24 @@
   ><span subHeader>เปลี่ยนแปลง/ แก้ไขใบอนุญาต</span></ksp-top-nav
 >
 <form [formGroup]="form">
-  <div class="header">
+  <div class="fs-5 mt-1 mb-1 ms-4 me-4">
     มีความประสงค์จะขอให้เปลี่ยนแปลงข้อมูลทะเบียนผู้ได้รับใบอนุญาต
   </div>
 
   <div class="detail__container">
-    <div class="title">เปลี่ยนแปลง / แก้ไขใบอนุญาต</div>
-    <div class="checkbox__container">
+    <div class="d-flex align-items-center">
       <input
         type="checkbox"
-        class="checkbox-1"
+        class="checkbox"
         name="test"
         (change)="disableControl($event, ['prefixTh', 'prefixEn'])"
       />
-      <label class="checkbox-label">เปลี่ยน / เพิ่มเติม คำนำหน้าชื่อ</label>
+      <label class="form-label">เปลี่ยน / เพิ่มเติม คำนำหน้าชื่อ</label>
     </div>
-    <div class="content__container--three-columns">
-      <div class="mb-3">
-        <label class="form-label">คำนำหน้าชื่อภาษาไทย xxx</label>
-        <select class="form-select form-select-sm" disabled>
+    <div class="row align-items-center">
+      <div class="col-md-5 col-md-5 mb-3">
+        <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
+        <select class="form-select" disabled>
           <option selected>กรุณาเลือก</option>
           <option value="1">One</option>
           <option value="2">Two</option>
@@ -29,13 +28,14 @@
         </select>
       </div>
 
-      <div class="center-label">
+      <div class="change-button col-md-2 mb-3 mb-md-0 mb-3 mb-md-0">
         <label class="change-label">เปลี่ยน เป็น</label>
       </div>
 
-      <div class="mb-3">
-        <label class="form-label">คำนำหน้าชื่อภาษาไทย yyy</label>
-        <select class="form-select form-select-sm" formControlName="prefixTh">
+      <div class="col-md-5 col-md-5 mb-3">
+        <label class="form-label">คำนำหน้าชื่อภาษาไทย</label
+        ><span class="fs-6 text-danger"> *</span>
+        <select class="form-select" formControlName="prefixTh">
           <option selected>กรุณาเลือก</option>
           <option value="1">One</option>
           <option value="2">Two</option>
@@ -44,10 +44,10 @@
       </div>
     </div>
 
-    <div class="content__container--three-columns">
-      <div class="mb-3">
+    <div class="row align-items-center">
+      <div class="col-md-5 mb-3">
         <label class="form-label">คำนำหน้าชื่อภาษาอังกฤษ</label>
-        <select class="form-select form-select-sm" disabled>
+        <select class="form-select" disabled>
           <option selected>กรุณาเลือก</option>
           <option value="1">One</option>
           <option value="2">Two</option>
@@ -55,13 +55,15 @@
         </select>
       </div>
 
-      <div class="center-label">
+      <div class="change-button col-md-2 mb-3 mb-md-0">
+        <br />
         <label class="change-label">เปลี่ยน เป็น</label>
       </div>
 
-      <div class="mb-3">
-        <label class="form-label">คำนำหน้าชื่อภาษาอังกฤษ</label>
-        <select class="form-select form-select-sm" formControlName="prefixEn">
+      <div class="col-md-5 mb-3">
+        <label class="form-label">คำนำหน้าชื่อภาษาอังกฤษ</label
+        ><span class="fs-6 text-danger"> *</span>
+        <select class="form-select" formControlName="prefixEn">
           <option selected>กรุณาเลือก</option>
           <option value="1">One</option>
           <option value="2">Two</option>
@@ -69,114 +71,106 @@
         </select>
       </div>
     </div>
-    <div class="checkbox__container">
+    <div class="d-flex align-items-center">
       <input
         type="checkbox"
-        class="checkbox-1"
+        class="checkbox"
         (change)="disableControl($event, ['nameTh', 'nameEn'])"
       />
-      <label class="checkbox-label">เปลี่ยนชื่อ</label>
+      <label class="form-label">เปลี่ยนชื่อ</label>
     </div>
-    <div class="content__container--three-columns">
-      <div class="mb-3">
+    <div class="row align-items-center">
+      <div class="col-md-5 mb-3">
         <label class="form-label">ชื่อภาษาไทย</label>
-        <input class="form-control form-control-sm" type="text" disabled />
+        <input class="form-control" type="text" disabled />
       </div>
 
-      <div class="center-label">
+      <div class="change-button col-md-2 mb-3 mb-md-0">
+        <br />
         <label class="change-label">เปลี่ยน เป็น</label>
       </div>
 
-      <div class="mb-3">
-        <label class="form-label">ชื่อภาษาไทย</label>
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          formControlName="nameTh"
-        />
+      <div class="col-md-5 mb-3">
+        <label class="form-label">ชื่อภาษาไทย</label
+        ><span class="fs-6 text-danger"> *</span>
+        <input class="form-control" type="text" formControlName="nameTh" />
       </div>
     </div>
 
-    <div class="content__container--three-columns">
-      <div class="mb-3">
+    <div class="row align-items-center">
+      <div class="col-md-5 mb-3">
         <label class="form-label">ชื่อภาษาอังกฤษ</label>
-        <input class="form-control form-control-sm" type="text" disabled />
+        <input class="form-control" type="text" disabled />
       </div>
 
-      <div class="center-label">
+      <div class="change-button col-md-2 mb-3 mb-md-0">
+        <br />
         <label class="change-label">เปลี่ยน เป็น</label>
       </div>
 
-      <div class="mb-3">
-        <label class="form-label">ชื่อภาษาอังกฤษ</label>
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          formControlName="nameEn"
-        />
+      <div class="col-md-5 mb-3">
+        <label class="form-label">ชื่อภาษาอังกฤษ</label
+        ><span class="fs-6 text-danger"> *</span>
+        <input class="form-control" type="text" formControlName="nameEn" />
       </div>
     </div>
-    <div class="checkbox__container">
+    <div class="d-flex align-items-center">
       <input
         id="check_1"
         type="checkbox"
-        class="checkbox-1"
+        class="checkbox"
         (change)="disableControl($event, ['lastnameTh', 'lastnameEn'])"
       />
-      <label class="checkbox-label">เปลี่ยนนามสกุล</label>
+      <label class="form-label">เปลี่ยนนามสกุล</label>
     </div>
-    <div class="content__container--three-columns">
-      <div class="mb-3">
+    <div class="row align-items-center">
+      <div class="col-md-5 mb-3">
         <label class="form-label">นามสกุลภาษาไทย</label>
-        <input class="form-control form-control-sm" type="text" disabled />
+        <input class="form-control" type="text" disabled />
       </div>
 
-      <div class="center-label">
+      <div class="change-button col-md-2 mb-3 mb-md-0">
+        <br />
         <label class="change-label">เปลี่ยน เป็น</label>
       </div>
 
-      <div class="mb-3">
-        <label class="form-label">นามสกุลภาษาไทย</label>
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          formControlName="lastnameTh"
-        />
+      <div class="col-md-5 mb-3">
+        <label class="form-label">นามสกุลภาษาไทย</label
+        ><span class="fs-6 text-danger"> *</span>
+        <input class="form-control" type="text" formControlName="lastnameTh" />
       </div>
     </div>
 
-    <div class="content__container--three-columns">
-      <div class="mb-3">
+    <div class="row align-items-center">
+      <div class="col-md-5 mb-3">
         <label class="form-label">นามสกุลภาษาอังกฤษ</label>
-        <input class="form-control form-control-sm" type="text" disabled />
+        <input class="form-control" type="text" disabled />
       </div>
 
-      <div class="center-label">
+      <div class="change-button col-md-2 mb-3 mb-md-0">
+        <br />
         <label class="change-label">เปลี่ยน เป็น</label>
       </div>
 
-      <div class="mb-3">
-        <label class="form-label">นามสกุลภาษาอังกฤษ</label>
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          formControlName="lastnameEn"
-        />
+      <div class="col-md-5 mb-3">
+        <label class="form-label">นามสกุลภาษาอังกฤษ</label
+        ><span class="fs-6 text-danger"> *</span>
+        <input class="form-control" type="text" formControlName="lastnameEn" />
       </div>
     </div>
-    <div class="checkbox__container">
+    <div class="d-flex align-items-center">
       <input
         id="check_1"
         type="checkbox"
-        class="checkbox-1"
+        class="checkbox"
         (change)="disableControl($event, ['distributeData'])"
       />
-      <label class="checkbox-label">จำหน่ายข้อมูล</label>
+      <label class="form-label">จำหน่ายข้อมูล</label>
     </div>
-    <div class="content__container">
-      <div class="mb-3">
+    <div class="row">
+      <div class="col-md-5 mb-3">
         <select
-          class="search__content form-select form-select-sm"
+          class="search__content form-select"
           formControlName="distributeData"
         >
           <option selected>กรุณาเลือก</option>
@@ -186,7 +180,7 @@
         </select>
       </div>
     </div>
-
+    <hr />
     <ksp-form-attachment [groups]="uploadFileList"></ksp-form-attachment>
 
     <label class="text-danger">

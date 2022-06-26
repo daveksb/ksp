@@ -1,25 +1,10 @@
-.content__container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 16px;
-}
-
-.content__container-2 {
-  display: flex;
-  flex-direction: column;
-}
-
 .form-label {
   font-size: 16px;
   color: #656565;
 }
+
 .form-control {
   background-color: #f6f6f6;
-}
-
-.form-select-sm {
-  font-size: 16px;
-  color: #000000;
 }
 
 .checkbox-label {
@@ -94,11 +79,6 @@
 }
 
 @media only screen and (max-width: 768px) {
-  .content__container {
-    display: flex;
-    flex-direction: column;
-  }
-
   #upload__button-container {
     justify-content: center;
   }
