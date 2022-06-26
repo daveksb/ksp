@@ -13,51 +13,56 @@ import {
   styleUrls: ['./add-staff-teaching-info.component.scss'],
 })
 export class AddStaffTeachingInfoComponent implements OnInit {
-  levelFormGroup: FormGroup;
-  subjectFormGroup: FormGroup;
+  levels = levels;
+  subjects = subjects;
+  status = status;
 
-  levels = {
-    ['อนุบาล']: false,
-    ['ชั้นประถมปีที่ 1-3']: false,
-    ['ชั้นประถมปีที่ 4-6']: false,
-    ['ชั้นมัธยมปีที่ 1-3']: false,
-    ['ชั้นมัธยมปีที่ 4-6']: false,
-    ['ประกาศนียบัตรวิชาชีพ (ปวช.)']: false,
-    ['ประกาศนียบัตรวิชาชีพขั้นสูง (ปวส.) / อนุปริญญา']: false,
-  };
-
-  subjects = {
-    ['ภาษาไทย']: false,
-    ['ภาษาต่างประเทศ']: false,
-    ['สุขศึกษาและพละศึกษา']: false,
-    ['สังคมศึกษา ศาสนาและวัฒนธรรม']: false,
-    ['การงานอาชีพและเทคโนโลยี']: false,
-    ['อื่นๆ']: false,
-    ['วิทยาศาสตร์']: false,
-    ['ปฐมวัย']: false,
-    ['คหกรรม']: false,
-    ['ศิลปกรรม']: false,
-    ['เกษตรกรรม']: false,
-    ['ประมง']: false,
-    ['คณิตศาสตร์']: false,
-    ['เทคโนโลยีสารสนเทศและการสื่อสาร']: false,
-    ['พาณิชยกรรม/บริหารธุรกิจ']: false,
-    ['อุตสาหกรรม']: false,
-    ['อุตสาหกรรมสิ่งทอ']: false,
-    ['อุตสาหกรรมท่องเที่ยว']: false,
-  };
+  form = this.fb.group({
+    staffType: [],
+    post: [],
+    academicStanding: [],
+    startWorkDate: [],
+    endWorkDate: [],
+    staffStatus: [], //checkbox
+    reason: [],
+    level1: [false],
+    level2: [false],
+    level3: [false],
+    level4: [false],
+    level5: [false],
+    level6: [false],
+    level7: [false],
+    status: [],
+    statusDate: [],
+    subject1: [false],
+    subject2: [false],
+    subject3: [false],
+    subject4: [false],
+    subject5: [false],
+    subject6: [false],
+    subject7: [false],
+    subject8: [false],
+    subject9: [false],
+    subject10: [false],
+    subject11: [false],
+    subject12: [false],
+    subject13: [false],
+    subject14: [false],
+    subject15: [false],
+    subject16: [false],
+    subject17: [false],
+    subject18: [false],
+    other: [],
+  });
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     public dialog: MatDialog
-  ) {
-    this.levelFormGroup = this.fb.group(this.levels);
-    this.subjectFormGroup = this.fb.group(this.subjects);
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.levelFormGroup.valueChanges.subscribe((res) => {
+    this.form.valueChanges.subscribe((res) => {
       //console.log('res = ', res);
     });
   }
@@ -102,3 +107,44 @@ export class AddStaffTeachingInfoComponent implements OnInit {
     });
   }
 }
+
+export const levels = [
+  { label: 'อนุบาล', name: 'level1', value: false },
+  { label: 'ชั้นประถมปีที่ 1-3', name: 'level2', value: false },
+  { label: 'ชั้นประถมปีที่ 4-6', name: 'level3', value: false },
+  { label: 'ชั้นมัธยมปีที่ 1-3', name: 'level4', value: false },
+  { label: 'ชั้นมัธยมปีที่ 4-6', name: 'level5', value: false },
+  { label: 'ประกาศนียบัตรวิชาชีพ (ปวช.)', name: 'level6', value: false },
+  {
+    label: 'ประกาศนียบัตรวิชาชีพขั้นสูง (ปวส.) / อนุปริญญา',
+    name: 'level7',
+    value: false,
+  },
+];
+
+export const subjects = [
+  { label: 'ภาษาไทย', name: 'subject1', value: false },
+  { label: 'วิทยาศาสตร์', name: 'subject6', value: false },
+  { label: 'คณิตศาสตร์', name: 'subject12', value: false },
+  { label: 'ภาษาต่างประเทศ', name: 'subject2', value: false },
+  { label: 'ปฐมวัย', name: 'subject7', value: false },
+  { label: 'เทคโนโลยีสารสนเทศและการสื่อสาร', name: 'subject13', value: false },
+  { label: 'สุขศึกษาและพละศึกษา', name: 'subject3', value: false },
+  { label: 'คหกรรม', name: 'subject8', value: false },
+  { label: 'พาณิชยกรรม/บริหารธุรกิจ', name: 'subject14', value: false },
+  { label: 'สังคมศึกษา ศาสนาและวัฒนธรรม', name: 'subject4', value: false },
+  { label: 'ศิลปกรรม', name: 'subject9', value: false },
+  { label: 'อุตสาหกรรม', name: 'subject15', value: false },
+  { label: 'การงานอาชีพและเทคโนโลยี', name: 'subject5', value: false },
+  { label: 'เกษตรกรรม', name: 'subject10', value: false },
+  { label: 'อุตสาหกรรมสิ่งทอ', name: 'subject16', value: false },
+  { label: 'อื่นๆ', name: 'subject18', value: false },
+  { label: 'ประมง', name: 'subject11', value: false },
+  { label: 'อุตสาหกรรมท่องเที่ยว', name: 'subject17', value: false },
+];
+
+export const status = [
+  { label: 'แจ้งเข้า', name: 'status', value: 1 },
+  { label: 'แจ้งออก', name: 'status', value: 2 },
+  { label: 'ยกเลิกข้อมูล', name: 'status', value: 3 },
+];

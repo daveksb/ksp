@@ -1,54 +1,72 @@
-<div class="row row--first">
-  <div class="checkbox__container">
-    <input type="checkbox" class="checkbox" />
-    <label class="checkbox__label">เลื่อนวิทยฐานะ</label>
+<form [formGroup]="form">
+  <div class="row row--first">
+    <div class="checkbox__container">
+      <input
+        type="checkbox"
+        class="checkbox"
+        formControlName="isAcademicChecked"
+      />
+      <label class="checkbox__label">เลื่อนวิทยฐานะ</label>
+    </div>
+
+    <div class="checkbox__container">
+      <input
+        type="checkbox"
+        class="checkbox"
+        formControlName="isPendingAcademicChecked"
+      />
+      <label class="checkbox__label"
+        >อยู่ระหว่างการพิจารณาประเมิณให้มีหรือเลื่อนวิทยฐานะ</label
+      >
+    </div>
   </div>
 
-  <div class="checkbox__container">
-    <input type="checkbox" class="checkbox" />
-    <label class="checkbox__label"
-      >อยู่ระหว่างการพิจารณาประเมิณให้มีหรือเลื่อนวิทยฐานะ</label
-    >
-  </div>
-</div>
-
-<div class="row row--first">
-  <div class="mb-3">
-    <label class="form-label">จาก</label>
-    <input class="form-control form-control-sm" type="text" />
-  </div>
-  <div class="mb-3">
-    <label class="form-label">จาก</label>
-    <input class="form-control form-control-sm" type="text" />
-  </div>
-</div>
-
-<div class="row row--first">
-  <div class="mb-3">
-    <label class="form-label">เป็น</label>
-    <input class="form-control form-control-sm" type="text" />
+  <div class="row row--first">
+    <div class="mb-3">
+      <label class="form-label">จาก</label>
+      <input class="form-control" type="text" formControlName="oldAcademic" />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">จาก</label>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="oldPendingAcademic"
+      />
+    </div>
   </div>
 
-  <div class="mb-3">
-    <label class="form-label">เป็น</label>
-    <input class="form-control form-control-sm" type="text" />
-  </div>
-</div>
+  <div class="row row--first">
+    <div class="mb-3">
+      <label class="form-label">เป็น</label>
+      <input class="form-control" type="text" formControlName="newAcademic" />
+    </div>
 
-<div class="row row--second">
-  <div class="mb-3">
-    <label class="form-label">ตามคำสั่ง</label>
-    <input class="form-control form-control-sm" type="text" />
+    <div class="mb-3">
+      <label class="form-label">เป็น</label>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="newPendingAcademic"
+      />
+    </div>
   </div>
-  <div class="mb-3">
-    <label class="form-label">ที่</label>
-    <input class="form-control form-control-sm" type="text" />
-  </div>
-</div>
 
-<div class="row row--first">
-  <div class="mb-3">
-    <label class="form-label">ลงวันที่</label>
-    <input class="form-control form-control-sm" type="date" />
+  <div class="row row--second">
+    <div class="mb-3">
+      <label class="form-label">ตามคำสั่ง</label>
+      <input class="form-control" type="text" formControlName="orderName" />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">ที่</label>
+      <input class="form-control" type="text" formControlName="orderNumber" />
+    </div>
   </div>
-</div>
+
+  <div class="row row--first">
+    <div class="mb-3">
+      <label class="form-label">ลงวันที่</label>
+      <input class="form-control" type="date" formControlName="orderDate" />
+    </div>
+  </div>
+</form>

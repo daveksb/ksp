@@ -68,15 +68,16 @@
 
 .checkbox__content {
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
   margin: 0 48px;
+  grid-gap: 8px;
 }
 
 .checkbox__content-2 {
   display: grid;
-  grid-template-columns: 0.25fr 0.75fr 1.25fr 75%;
+  grid-template-columns: 2% 8% auto;
   align-items: center;
-  margin: 8px 0;
+  grid-gap: 8px;
 }
 
 .checkbox__label {
@@ -128,3 +129,6 @@
   grid-row-gap: 16px;
 }
 
+.status__date {
+  width: 200px;
+}

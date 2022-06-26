@@ -1,72 +1,106 @@
-<div class="row row--first">
-  <div class="checkbox__container">
-    <input type="checkbox" class="checkbox" />
-    <label class="checkbox__label">ตำรา</label>
+<form [formGroup]="form">
+  <div class="row row--first">
+    <div class="checkbox__container">
+      <input type="checkbox" class="checkbox" formControlName="isBookChecked" />
+      <label class="checkbox__label">ตำรา</label>
+    </div>
+
+    <div class="checkbox__container">
+      <input
+        type="checkbox"
+        class="checkbox"
+        formControlName="isArticleChecked"
+      />
+      <label class="checkbox__label">บทความ</label>
+    </div>
   </div>
 
-  <div class="checkbox__container">
-    <input type="checkbox" class="checkbox" />
-    <label class="checkbox__label">บทความ</label>
-  </div>
-</div>
-
-<div class="row row--first">
-  <div class="mb-3">
-    <label class="form-label">ชื่อ</label>
-    <input class="form-control form-control-sm" type="text" />
-  </div>
-  <div class="mb-3">
-    <label class="form-label">เรื่อง</label>
-    <input class="form-control form-control-sm" type="text" />
-  </div>
-</div>
-
-<div class="row row--first">
-  <div class="mb-3">
-    <label class="form-label">สำนักพิมพ์</label>
-    <input class="form-control form-control-sm" type="text" />
+  <div class="row row--first">
+    <div class="mb-3">
+      <label class="form-label">ชื่อ</label>
+      <input class="form-control" type="text" formControlName="bookName" />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">เรื่อง</label>
+      <input class="form-control" type="text" formControlName="articleName" />
+    </div>
   </div>
 
-  <div class="mb-3">
-    <label class="form-label">เผยแพร่ในวารสาน/หนังสือ/เว็บไซต์</label>
-    <input class="form-control form-control-sm" type="text" />
-  </div>
-</div>
+  <div class="row row--first">
+    <div class="mb-3">
+      <label class="form-label">สำนักพิมพ์</label>
+      <input class="form-control" type="text" formControlName="bookPublisher" />
+    </div>
 
-<div class="row row--first">
-  <div class="mb-3">
-    <label class="form-label">พิมพ์เมื่อ</label>
-    <input class="form-control form-control-sm" type="date" />
-  </div>
-
-  <div class="mb-3">
-    <label class="form-label">สำนักพิมพ์</label>
-    <input class="form-control form-control-sm" type="text" />
-  </div>
-</div>
-
-<div class="row row--first">
-  <div class="checkbox__container">
-    <input type="checkbox" class="checkbox" />
-    <label class="checkbox__label">ผลงานวิชาการ</label>
+    <div class="mb-3">
+      <label class="form-label">เผยแพร่ในวารสาน/หนังสือ/เว็บไซต์</label>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="articlePublishing"
+      />
+    </div>
   </div>
 
-  <div class="mb-3">
-    <label class="form-label">พิมพ์เมื่อ</label>
-    <input class="form-control form-control-sm" type="date" />
-  </div>
-</div>
+  <div class="row row--first">
+    <div class="mb-3">
+      <label class="form-label">พิมพ์เมื่อ</label>
+      <input
+        class="form-control"
+        type="date"
+        formControlName="bookPublishDate"
+      />
+    </div>
 
-<div class="row row--first">
-  <div class="mb-3">
-    <label class="form-label">เรื่อง</label>
-    <input class="form-control form-control-sm" type="text" />
+    <div class="mb-3">
+      <label class="form-label">สำนักพิมพ์</label>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="articlePublisher"
+      />
+    </div>
   </div>
-</div>
 
-<div class="row row--first">
-  <div class="mb-3">
-    <label class="form-label">วันเดือนปีที่ใช้</label>
-    <input class="form-control form-control-sm" type="date" />
+  <div class="row row--first">
+    <div class="checkbox__container">
+      <input
+        type="checkbox"
+        class="checkbox"
+        formControlName="isAchievementChecked"
+      />
+      <label class="checkbox__label">ผลงานวิชาการ</label>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">พิมพ์เมื่อ</label>
+      <input
+        class="form-control"
+        type="date"
+        formControlName="articlePublishDate"
+      />
+    </div>
   </div>
-</div>
+
+  <div class="row row--first">
+    <div class="mb-3">
+      <label class="form-label">เรื่อง</label>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="achievementName"
+      />
+    </div>
+  </div>
+
+  <div class="row row--first">
+    <div class="mb-3">
+      <label class="form-label">วันเดือนปีที่ใช้</label>
+      <input
+        class="form-control"
+        type="date"
+        formControlName="achievementDate"
+      />
+    </div>
+  </div>
+</form>

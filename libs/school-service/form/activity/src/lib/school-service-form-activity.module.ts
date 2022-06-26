@@ -12,9 +12,10 @@ import { ActivityDiplomaReceiveComponent } from './activity-diploma-receive/acti
 import { ActivityInnovationComponent } from './activity-innovation/activity-innovation.component';
 import { ActivityRewardComponent } from './activity-reward/activity-reward.component';
 import { ActivityLectureRegisterComponent } from './activity-lecture-register/activity-lecture-register.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   declarations: [
     ActivityAddDegreeComponent,
     ActivitySeminarComponent,
