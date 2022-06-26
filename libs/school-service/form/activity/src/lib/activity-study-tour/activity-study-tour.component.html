@@ -1,21 +1,23 @@
-<div class="row row--first">
-  <div class="mb-3">
-    <label class="form-label">เรื่อง</label>
-    <input class="form-control form-control-sm" type="text" />
+<form [formGroup]="form">
+  <div class="row row--first">
+    <div class="mb-3">
+      <label class="form-label">เรื่อง</label>
+      <input class="form-control" type="text" formControlName="name" />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">สถานที่</label>
+      <input class="form-control" type="text" formControlName="address" />
+    </div>
   </div>
-  <div class="mb-3">
-    <label class="form-label">สถานที่</label>
-    <input class="form-control form-control-sm" type="text" />
-  </div>
-</div>
 
-<div class="row row--first">
-  <div>
-    <label class="form-label">หน่วยงานที่จัด</label>
-    <input class="form-control form-control-sm" type="text" />
+  <div class="row row--first">
+    <div class="mb-3">
+      <label class="form-label">หน่วยงานที่จัด</label>
+      <input class="form-control" type="text" formControlName="agency" />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">วันเดือนปี</label>
+      <input class="form-control" type="date" formControlName="date" />
+    </div>
   </div>
-  <div class="mb-3">
-    <label class="form-label">วันเดือนปี</label>
-    <input class="form-control form-control-sm" type="date" />
-  </div>
-</div>
+</form>
