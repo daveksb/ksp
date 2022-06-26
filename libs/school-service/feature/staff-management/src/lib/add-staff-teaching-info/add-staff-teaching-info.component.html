@@ -103,37 +103,39 @@
 
     <div class="bg-light p-3 mt-3">
       <div class="fs-5">ช่วงชั้นที่สอน</div>
-      <section class="container-fluid">
-        <div class="checkbox__container">
-          <ng-container *ngFor="let item1 of levels">
+
+      <div class="row">
+        <ng-container *ngFor="let item of levels">
+          <span class="col-3">
             <mat-checkbox
-              formControlName="{{ item1.name }}"
-              class="checkbox__label"
-              >{{ item1.label }}</mat-checkbox
-            >
-          </ng-container>
-        </div>
-      </section>
+              formControlName="{{ item.name }}"
+              class="text-secondary m-2"
+              >{{ item.label }}
+            </mat-checkbox>
+          </span>
+        </ng-container>
+      </div>
     </div>
 
     <div class="bg-light p-3 mt-3">
       <div class="fs-5">ประเภทวิชาที่สอน</div>
-      <section class="container-fluid">
-        <div class="checkbox__container-2">
-          <ng-container *ngFor="let item2 of subjects">
+
+      <div class="row">
+        <ng-container *ngFor="let s of subjects">
+          <span class="col-4">
             <mat-checkbox
-              formControlName="{{ item2.name }}"
-              class="checkbox__label"
-              >{{ item2.label }}</mat-checkbox
-            >
-          </ng-container>
-          <input
-            class="form-control check-other"
-            type="text"
-            formControlName="other"
-          />
-        </div>
-      </section>
+              formControlName="{{ s.name }}"
+              class="m-2 text-secondary"
+              >{{ s.label }}
+            </mat-checkbox>
+          </span>
+        </ng-container>
+      </div>
+      <input
+        class="form-control check-other"
+        type="text"
+        formControlName="other"
+      />
     </div>
   </div>
 </div>

@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'school-service-add-staff-teaching-info',
   templateUrl: './add-staff-teaching-info.component.html',
@@ -62,7 +64,7 @@ export class AddStaffTeachingInfoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.form.valueChanges.subscribe((res) => {
+    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
       //console.log('res = ', res);
     });
   }

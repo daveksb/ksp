@@ -4,19 +4,3 @@
   padding: 0 30px;
   padding-bottom: 75px;
 }
-
-.checkbox__container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  margin: 12px;
-  grid-row-gap: 16px;
-}
-
-.checkbox__container-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-  margin: 12px;
-  grid-row-gap: 16px;
-}
