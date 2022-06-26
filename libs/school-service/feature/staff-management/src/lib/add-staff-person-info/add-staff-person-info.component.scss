@@ -42,19 +42,6 @@
   background-color: #fff;
 }
 
-.form-control-sm {
-  font-size: 18px;
-  color: #656565;
-}
-
-.form-select {
-  background-color: #fff;
-}
-
-.form-select-sm {
-  font-size: 18px;
-  color: #656565;
-}
 .result {
   display: flex;
   flex-direction: column;
@@ -66,23 +53,6 @@
 
 .mattab__container {
   margin: 24px;
-}
-
-.detail__content--secondary {
-  display: grid;
-  grid-template-columns: 150px 1fr 1fr;
-  grid-column-gap: 18px;
-}
-
-.bottom__container {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #fff;
-  z-index: 1;
-  padding-left: 237px;
-  border: 1px solid #dadde1;
 }
 
 .license__content {
@@ -97,14 +67,4 @@
 
 .license__label-2 {
   color: #000;
-}
-
-.label__content {
-  font-size: 18px;
-  color: #808080;
-  margin-right: 24px;
-}
-
-.label__content--primary {
-  color: #f68b33;
 }

@@ -1,7 +1,7 @@
-<ksp-top-nav
-  ><span header>ทะเบียนบุคลากรภายในหน่วยงาน</span
-  ><span subHeader>เพิ่มบุคลากร</span></ksp-top-nav
->
+<ksp-top-nav>
+  <span header>ทะเบียนบุคลากรภายในหน่วยงาน</span>
+  <span subHeader>เพิ่มบุคลากร</span>
+</ksp-top-nav>
 
 <form [formGroup]="form">
   <div class="container">
@@ -11,6 +11,7 @@
       <ksp-request-header-info
         [requestDate]="'10 ตุลาคม 2565'"
       ></ksp-request-header-info>
+
       <hr />
 
       <div class="box__detail">
@@ -18,7 +19,7 @@
           <div class="mb-3">
             <label class="form-label">หมายเลขบัตรประชาชน </label>
             <input
-              class="form-control form-control-sm"
+              class="form-control"
               type="text"
               formControlName="personId"
             />
@@ -28,7 +29,7 @@
               >หมายเลขหนังสือเดินทาง (Passport Number)
             </label>
             <input
-              class="form-control form-control-sm"
+              class="form-control"
               type="text"
               formControlName="passportNumber"
             />
@@ -37,7 +38,7 @@
 
         <ksp-form-user-info
           formControlName="staff"
-          [isWhiteMode]="true"
+          [isDarkMode]="false"
         ></ksp-form-user-info>
       </div>
 
@@ -66,11 +67,11 @@
           dynamicHeight="true"
         >
           <mat-tab label="ที่อยู่" class="tab-content">
-            <ksp-form-address formControlName="address1"
-              >ที่อยู่ทะเบียนบ้าน</ksp-form-address
-            >
-            <ksp-form-address formControlName="address2"
-              >ที่อยู่ที่ติดต่อได้สะดวก
+            <ksp-form-address formControlName="address1">
+              ที่อยู่ทะเบียนบ้าน
+            </ksp-form-address>
+            <ksp-form-address formControlName="address2">
+              ที่อยู่ที่ติดต่อได้สะดวก
             </ksp-form-address>
           </mat-tab>
 
@@ -89,11 +90,10 @@
     </div>
   </div>
 
-  <div class="bottom__container">
-    <ksp-bottom-nav
-      (nextClicked)="next()"
-      [isFirstPage]="true"
-      [showCenterButtons]="false"
-    ></ksp-bottom-nav>
-  </div>
+  <ksp-bottom-nav
+    kspStickyBottomNav
+    (nextClicked)="next()"
+    [isFirstPage]="true"
+    [showCenterButtons]="false"
+  ></ksp-bottom-nav>
 </form>
