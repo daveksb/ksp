@@ -141,4 +141,8 @@
   .label--fourth {
     font-size: 14px;
   }
+
+  .box__header {
+    margin: 5px 16px;
+  }
 }

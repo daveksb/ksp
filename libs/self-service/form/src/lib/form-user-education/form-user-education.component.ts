@@ -44,6 +44,7 @@ export class FormUserEducationComponent
       .pipe(skip(1))
       .subscribe((res) => {
         this.selectedEducationType = Number(res);
+        //this.form.controls.educationLevelForm.reset();
       });
   }
 }

@@ -1,18 +1,18 @@
 <form [formGroup]="form">
-  <div class="content__container">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col-md-6 mb-3">
       <label class="form-label">สถานศึกษาฝึกประสบการณ์วิชาชีพ ครั้งที่ 1</label>
       <input
-        class="form-control form-control-sm"
+        class="form-control"
         type="text"
         formControlName="TrainingAddressOne"
       />
     </div>
 
-    <div class="mb-3">
+    <div class="col-md-6 mb-3">
       <label class="form-label">สถานศึกษาฝึกประสบการณ์วิชาชีพ ครั้งที่ 2</label>
       <input
-        class="form-control form-control-sm"
+        class="form-control"
         type="text"
         formControlName="TrainingAddressTwo"
       />
@@ -24,11 +24,11 @@
     <span class="hr-text">หรือ</span>
   </div>
 
-  <div class="content__container">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col-md-6 mb-3">
       <label class="form-label">สถานศึกษาที่ปฏิบัติการสอน</label>
       <select
-        class="search__content form-select form-select-sm"
+        class="search__content form-select"
         formControlName="teachingAddress"
       >
         <option selected>กรุณาเลือก</option>
@@ -38,7 +38,7 @@
       </select>
     </div>
 
-    <div id="upload__button-container" class="mb-3">
+    <div id="upload__button-container" class="col-md-6 mb-3">
       <td class="upload__detail">
         <button type="button" class="btn btn-primary" id="btn-address">
           <img
@@ -50,7 +50,7 @@
     </div>
   </div>
 
-  <div class="content__container-2">
+  <div class="col">
     <div class="checkbox__content">
       <input
         formControlName="hasForeignLicense"

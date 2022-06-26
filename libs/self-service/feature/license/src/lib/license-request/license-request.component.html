@@ -7,12 +7,12 @@
 
 <self-service-form-upload-image></self-service-form-upload-image>
 
-<div class="user-info__container">
+<div class="detail__container">
   <ksp-form-user-info [isDarkMode]="true"></ksp-form-user-info>
 </div>
 
 <form [formGroup]="form">
-  <div class="pt-3 pb-1 ps-5 pe-5">
+  <div class="pt-3 pb-1 ps-3 ps-md-5 pe-3 pe-md-5">
     <mat-tab-group
       class="tab-group"
       animationDuration="0ms"
@@ -20,19 +20,19 @@
     >
       <mat-tab label="ที่อยู่" class="tab-content">
         <ksp-form-address formControlName="address1" [isDarkMode]="true">
-          <span class="ms-2">ที่อยู่ทะเบียนบ้าน</span>
+          <span>ที่อยู่ทะเบียนบ้าน</span>
         </ksp-form-address>
         <hr />
         <ksp-form-address formControlName="address2" [isDarkMode]="true">
-          <span class="ms-2">ที่อยู่ที่ติดต่อได้สะดวก</span>
-          <span class="text-danger ms-1">*กรุณากรอกข้อมูลตำบล, อำเภอ</span>
-          <div class="mt-2 ms-2 d-flex align-items-center">
+          <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
+          <span class="text-danger ms-1 fs-6">*กรุณากรอกข้อมูลตำบล, อำเภอ</span>
+          <div class="d-flex align-items-center">
             <input
               (change)="useSameAddress($event)"
               type="checkbox"
               class="address__checkbox"
             />
-            <label class="form-label ms-2">ที่อยู่ตามทะเบียนบ้าน</label>
+            <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
           </div>
         </ksp-form-address>
       </mat-tab>
@@ -81,7 +81,7 @@
     </div>
 
     <div class="d-flex justify-content-center mt-3 mb-3">
-      <button type="button" class="btn btn-light">ล้างข้อมูล</button>
+      <button type="button" class="btn btn-secondary">ล้างข้อมูล</button>
       <button (click)="save()" type="button" class="ms-3 btn btn-primary">
         ต่อไป
       </button>

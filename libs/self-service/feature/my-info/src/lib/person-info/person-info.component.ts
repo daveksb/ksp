@@ -31,6 +31,10 @@ export class PersonInfoComponent implements OnInit {
     this.form.disable();
   }
 
+  clearData() {
+    this.form.reset();
+  }
+
   onClick() {
     if (this.status == 'edit') {
       this.status = 'save';
