@@ -29,7 +29,7 @@ export class RequesterInfoComponent implements OnInit {
   }
 
   next() {
-    this.router.navigate(['/', 'register', 'coordinator-info']);
+    this.router.navigate(['/register', 'coordinator-info']);
   }
 }
 
