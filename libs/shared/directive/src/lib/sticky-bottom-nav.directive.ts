@@ -10,7 +10,7 @@ export class StickyBottomNavDirective implements OnInit {
   ngOnInit(): void {
     this.renderer.setStyle(this.el.nativeElement, 'position', 'fixed');
     this.renderer.setStyle(this.el.nativeElement, 'bottom', 0);
-    this.renderer.setStyle(this.el.nativeElement, 'left', 0);
+    this.renderer.setStyle(this.el.nativeElement, 'left', 237);
     this.renderer.setStyle(this.el.nativeElement, 'z-index', 1);
 
     this.renderer.setStyle(

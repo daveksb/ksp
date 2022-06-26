@@ -3,6 +3,50 @@ import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
+@Component({
+  selector: 'school-service-staff-list',
+  templateUrl: './staff-list.component.html',
+  styleUrls: ['./staff-list.component.scss'],
+})
+export class StaffListComponent {
+  form = this.fb.group({
+    staffSearch: [],
+  });
+
+  personSelected = false;
+  displayedColumns: string[] = [
+    'order',
+    'ssn',
+    'name',
+    'startDate',
+    'endDate',
+    'profession',
+    'teaching',
+    'tempLicense',
+    'edit',
+    'view',
+  ];
+  dataSource = new MatTableDataSource<staffInfo>();
+
+  constructor(private router: Router, private fb: FormBuilder) {}
+
+  search() {
+    this.dataSource.data = data;
+  }
+
+  clear() {
+    this.dataSource.data = [];
+  }
+
+  goToDetail() {
+    this.router.navigate(['./', 'staff-management', 'license-search']);
+  }
+
+  addStaff() {
+    this.router.navigate(['./', 'staff-management', 'staff-person-info']);
+  }
+}
+
 export interface staffInfo {
   order: number;
   ssn: string;
@@ -54,47 +98,3 @@ export const data: staffInfo[] = [
     view: '',
   },
 ];
-
-@Component({
-  selector: 'school-service-staff-list',
-  templateUrl: './staff-list.component.html',
-  styleUrls: ['./staff-list.component.scss'],
-})
-export class StaffListComponent {
-  form = this.fb.group({
-    staffSearch: [],
-  });
-
-  personSelected = false;
-  displayedColumns: string[] = [
-    'order',
-    'ssn',
-    'name',
-    'startDate',
-    'endDate',
-    'profession',
-    'teaching',
-    'tempLicense',
-    'edit',
-    'view',
-  ];
-  dataSource = new MatTableDataSource<staffInfo>();
-
-  constructor(private router: Router, private fb: FormBuilder) {}
-
-  search() {
-    this.dataSource.data = data;
-  }
-
-  clear() {
-    this.dataSource.data = [];
-  }
-
-  goToDetail() {
-    this.router.navigate(['./', 'staff-management', 'license-search']);
-  }
-
-  addStaff() {
-    this.router.navigate(['./', 'staff-management', 'staff-person-info']);
-  }
-}
