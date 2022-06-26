@@ -10,7 +10,10 @@
     </button>
   </div>
 
-  <div class="center__buttons" *ngIf="showCenterButtons">
+  <div
+    class="d-flex justify-content-center align-items-center"
+    *ngIf="showCenterButtons"
+  >
     <button
       *ngIf="showCancelButton"
       (click)="cancelClicked.emit(true)"

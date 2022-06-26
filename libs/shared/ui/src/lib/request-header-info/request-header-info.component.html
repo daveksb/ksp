@@ -3,7 +3,7 @@
     วันที่ทำรายการ :
     <span class="content content--primary">{{ requestDate }}</span>
   </div>
-  <div class="content">
+  <div *ngIf="requestNumber" class="content">
     เลขใบคำขอ :
     <span class="content content--secondary">{{ requestNumber }}</span>
   </div>

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
@@ -5,6 +6,7 @@ import { Component, Input } from '@angular/core';
   templateUrl: './request-header-info.component.html',
   styleUrls: ['./request-header-info.component.scss'],
   standalone: true,
+  imports: [CommonModule],
 })
 export class RequestHeaderInfoComponent {
   @Input() requestDate = '';

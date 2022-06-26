@@ -21,6 +21,7 @@ import {
   RequestHeaderInfoComponent,
 } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
+import { StickyBottomNavDirective } from '@ksp/shared/directive';
 
 export const routes: Routes = [
   {
@@ -55,6 +56,7 @@ export const routes: Routes = [
     RequestHeaderInfoComponent,
     LicenseTypeButtonGroupComponent,
     LicenseInfoComponent,
+    StickyBottomNavDirective,
   ],
   declarations: [
     StaffListComponent,
