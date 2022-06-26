@@ -1,39 +1,14 @@
-.detail__container {
-  background-color: #f9f9fa;
-  padding: 0 18px;
-}
-
-.detail__header {
-  font-size: 22px;
-  //color: #0056ff;
-  padding-top: 12px;
-}
-
-.table {
-  background-color: #fff;
-}
-
 .table > :not(:first-child) {
   border-top: 0;
 }
 
 .header__table {
   background-color: #edf6ff;
-  font-size: 16px;
+  font-size: 1.2rem;
 }
 
 .body__table {
-  font-size: 16px;
   color: #808080;
-}
-
-.title__table {
-  text-align: center;
-}
-
-.detail__table {
-  text-align: center;
-  vertical-align: middle;
 }
 
 #btn-upload {
@@ -48,12 +23,7 @@
   text-decoration: underline;
 }
 
-/* mobile */
 @media only screen and (max-width: 768px) {
-  .detail__header {
-    font-size: 18px;
-  }
-
   .table {
     white-space: nowrap;
   }
