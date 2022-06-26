@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { Router } from '@angular/router';
+import { TempLicenseDetailService } from './temp-license-detail.service';
 
 @Component({
   selector: 'e-service-temp-license-detail',
@@ -11,88 +12,35 @@ export class TempLicenseDetailComponent implements OnInit {
   reason: string[][] = [];
   choices: string[] = [];
   selectedTabIndex = 0;
+  educationInfo: string[] = [];
+  teachingInfo: string[] = [];
+  reasonInfo: string[] = [];
+  evidenceFiles: string[] = [];
 
-  educationInfo = [
-    '1.สำเนาปริญญาบัตรหรือสำเนาหนังสือรับรอง',
-    '2.สำเนาใบรายนงานผลการศึกษา',
-    '3.สำเนาหลักฐานการเปลี่ยนชื่อฯ (ถ้ามี)',
-    '4.สำเนาหนังสือรับรองการเทียบวุฒิฯ (ถ้ามี)',
-    '5.สำเนาเอกสารคำแปลวุฒิ (ถ้ามี)',
-  ];
-
-  teachingInfo = [
-    '1.ตารางสอนรายบุคคล',
-    '2.สำเนาสัญญาจ้าง',
-    '3.หน้งสือรับรองการจ้างต่อ (ถ้ามี)',
-    '4.สำเนาคำสั่งให้ไปปฏิบัติหน้าที่สอนฯ (ถ้ามี)',
-  ];
-
-  reasonInfo = [
-    '1.หนังสือบันทึกชี้แจงเหตุผลคว่มจำเป็น (ถ้ามี)',
-    '2.หลักฐานการพัฒนาตนเอง',
-  ];
-
-  evidenceFiles = [
-    'หนังสือนำส่งจากสถานศึกษา (ฉบับจริงและวันที่ออกหนังสือไม่เกิน 30 วัน)',
-    'สำเนาหนังสือแต่งตั้ง ผอ. หรือ รอง ผอ.รักษาราชการแทนจากต้นสังกัด (กรณีรักษาการผู้อำนวยการ)',
-    'หนังสือรับรองการจ้างต่อ (กรณีที่สัญญาจ้างปัจจุบันที่เหลือระยะเวลาการจ้างน้อยกว่า 30 วัน)',
-    'สำเนาคำสั่งให้ไปปฏิบัติการสอนในสถานศึกษาจากต้นสังกัด หรือสำเนาหนังสือส่งตัวรับตัวจากต้นสังกัดถึงสถานศึกษา (กรณี จ้างโดย สพป./สพม./ต้นสังกัด)',
-    'หนังสือบันทึกชี้แจงเหตุผลความจำเป็นของสถานศึกษาและปัญหาการพัฒนาตนเองไม่ทันตามกำหนดระยะเวลา(กรณีได้รับอนุญาตฯ ครบตามกำหนดระยะเวลา)',
-    'รูปถ่าย 1 นิ้ว',
-  ];
-
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private service: TempLicenseDetailService
+  ) {}
 
   ngOnInit(): void {
-    this.choices = ['ครบถ้วน และถูกต้อง', 'ไม่ครบถ้วน และไม่ถูกต้อง'];
-
-    this.reason[0] = [
-      'เลขบัตรประชาชนไม่ถูกต้อง',
-      'คำนำหน้าไม่ถูกต้อง',
-      'ชื่อภาษาไทยไม่ถูกต้อง',
-      'ชื่อภาษาอังกฤษไม่ถูกต้อง',
-      'นามสกุลภาษาไทยไม่ถูกต้อง',
-      'นามสกุลภาษาอังกฤษไม่ถูกต้อง',
-      'อื่นๆ (ระบุ)',
-    ];
-    this.reason[2] = [
-      'ชื่อปริญญา/หลักสูตรไม่ถูกต้อง',
-      'สาขา/วิชาเอกไม่ถูกต้อง',
-      'สถาบันการศึกษาไม่ถูกต้อง',
-      'ประเทศไม่ถูกต้อง',
-      'วันเดือนปี เข้าศึกษาไม่ถูกต้อง',
-      'วันเดือนปี สำเร็จการศึกษาไม่ถูกต้อง',
-      'อื่นๆ (ระบุ)',
-    ];
-    this.reason[3] = [
-      'ระบุชื่อวิชาไม่ตรงกับตารางสอน',
-      'ระบุช่วงชั้นที่สอนไม่ตรงกับตารางสอน',
-      'ระบุตำแหน่งไม่ถูกต้องตามสัญญาจ้าง',
-      'ระบุเลขที่สัญญาจ้างไม่ถูกต้อง',
-      'ระบุวันเริ่มปฏิบัติงานไม่ถูกต้อง',
-      'ระบุวันสิ้นสุดการปฏิบัติงานไม่ถูกต้อง',
-      'ระบุระยะเวลาปีที่จ้างไม่ถูกต้อง',
-      'ระบุระยะเวลาเดือนที่จ้างไม่ถูกต้อง',
-      'อื่นๆ (ระบุ)',
-    ];
-    this.reason[4] = [
-      'ไม่ชี้แจงเหตุผลความจำเป็นของสถานศึกษาที่ต้องรับผู้ไม่มีใบอนุญาตประกอบวิชาชีพ',
-      'ไม่ชี้แจงเหตุผลที่ไม่สามารถพัฒนาตนเองได้ตามระยะเวลาที่คุรุสภากำหนด',
-      'ขอเอกสารการพํฒนาตนเองเพิ่ม',
-      'อื่นๆ (ระบุ)',
-    ];
+    this.reason = this.service.reason;
+    this.choices = this.service.choices;
+    this.educationInfo = this.service.educationInfo;
+    this.teachingInfo = this.service.teachingInfo;
+    this.reasonInfo = this.service.reasonInfo;
+    this.evidenceFiles = this.service.evidenceFiles;
   }
 
   cancel() {
-    this.router.navigate(['/', 'temp-license']);
+    this.router.navigate(['/temp-license']);
   }
 
   next() {
-    this.router.navigate(['/', 'temp-license', 'forbidden']);
+    this.router.navigate(['/temp-license', 'forbidden']);
   }
 
   prevPage() {
-    this.router.navigate(['/', 'temp-license', 'list']);
+    this.router.navigate(['/temp-license', 'list']);
   }
 
   tabChanged(e: MatTabChangeEvent) {
