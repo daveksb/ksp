@@ -1,64 +1,63 @@
 <uni-service-top-nav>ลงทะเบียนขอรับรหัสเข้าใช้งาน</uni-service-top-nav>
 
-<form [formGroup]="form">
-  <div class="container">
-    <div class="header">รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ</div>
+<div class="container-fluid bg-light">
+  <div class="fs-4">รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ</div>
 
-    <div class="content__container">
-      <ksp-request-header-info
-        [requestDate]="'10 ตุลาคม 2565'"
-        [requestNumber]="'112234467876543'"
-      ></ksp-request-header-info>
+  <div class="bg-white p-3 mt-2">
+    <ksp-request-header-info
+      [requestDate]="'10 ตุลาคม 2565'"
+      [requestNumber]="'112234467876543'"
+    ></ksp-request-header-info>
 
-      <hr />
+    <hr />
 
-      <div class="detail__content">
-        <ksp-university-select
-          formControlName="selectUniversity"
-        ></ksp-university-select>
-      </div>
-
-      <div class="warning__content">
-        <div class="warning__label-1">
-          พบข้อมูลผู้ประสานงานที่ได้รับรหัสเข้าใช้งานในระบบ
-        </div>
-        <div class="warning__label-2">
-          หากท่านทำการยื่นขอรับรหัสเข้าใช้งานใหม่
-        </div>
-      </div>
-
-      <div class="detail__container">
-        <div class="detail__header">ผลการค้นหา</div>
-        <div class="table-responsive">
-          <table class="table">
-            <thead class="header__table">
-              <tr>
-                <th scope="col">ลำดับ</th>
-                <th scope="col">ชื่อ-นามสกุล</th>
-                <th scope="col">เบอร์โทรศัพท์</th>
-                <th scope="col">ชื่อ-นามสกุล ผู้แต่งตั้ง</th>
-                <th scope="col">สถานะ</th>
-              </tr>
-            </thead>
-
-            <tbody class="body__table">
-              <tr>
-                <td class="detail__table">1</td>
-                <td class="detail__table">นายพิชัย ชาญชัย</td>
-                <td class="detail__table">091-9872678</td>
-                <td class="detail__table">นายกมล อัศวหาญ</td>
-                <td class="detail__table">ใช้งาน</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <ksp-bottom-nav
-        (prevClicked)="back()"
-        (nextClicked)="next()"
-        [showCenterButtons]="false"
-      ></ksp-bottom-nav>
+    <div [formGroup]="form">
+      <ksp-university-select
+        formControlName="selectUniversity"
+      ></ksp-university-select>
     </div>
+
+    <div class="bg-light p-3 mt-5">
+      <div class="fs-5 text-danger">
+        พบข้อมูลผู้ประสานงานที่ได้รับรหัสเข้าใช้งานในระบบ
+      </div>
+      <div class="fs-5 ms-5">
+        หากท่านทำการยื่นขอรับรหัสเข้าใช้งานใหม่
+        ผู้ประสานงานดังกล่าวจะไม่สามารถเข้าใช้งานเมื่อท่านได้รับอนุมัติแล้ว
+      </div>
+    </div>
+
+    <div class="bg-light p-3 mt-4 mb-2">
+      <div class="text-primary fs-5 mb-1">ผลการค้นหา</div>
+      <div class="table-responsive">
+        <table class="table">
+          <thead class="header__table">
+            <tr>
+              <th scope="col">ลำดับ</th>
+              <th scope="col">ชื่อ-นามสกุล</th>
+              <th scope="col">เบอร์โทรศัพท์</th>
+              <th scope="col">ชื่อ-นามสกุล ผู้แต่งตั้ง</th>
+              <th scope="col">สถานะ</th>
+            </tr>
+          </thead>
+
+          <tbody class="bg-white">
+            <tr>
+              <td class="detail__table">1</td>
+              <td class="detail__table">นายพิชัย ชาญชัย</td>
+              <td class="detail__table">091-9872678</td>
+              <td class="detail__table">นายกมล อัศวหาญ</td>
+              <td class="detail__table">ใช้งาน</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <ksp-bottom-nav
+      (prevClicked)="back()"
+      (nextClicked)="next()"
+      [showCenterButtons]="false"
+    ></ksp-bottom-nav>
   </div>
-</form>
+</div>
