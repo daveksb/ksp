@@ -60,10 +60,7 @@
         <div class="title">กิจกรรมการพัฒนาตนเอง</div>
         <div class="checkbox__container">
           <div class="mb-3">
-            <select
-              formControlName="activityType"
-              class="form-select"
-            >
+            <select formControlName="activityType" class="form-select">
               <option
                 *ngFor="let activity of activityTypes"
                 [value]="activity.value"
@@ -87,7 +84,7 @@
   </div>
 </div>
 
-<div class="bottom__container">
+<div class="sticky-bottom border">
   <ksp-bottom-nav
     [isFirstPage]="true"
     [isLastPage]="true"
