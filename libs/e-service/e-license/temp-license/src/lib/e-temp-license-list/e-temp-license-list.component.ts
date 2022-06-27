@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'e-service-temp-license-list',
-  templateUrl: './temp-license-list.component.html',
-  styleUrls: ['./temp-license-list.component.scss'],
+  templateUrl: './e-temp-license-list.component.html',
+  styleUrls: ['./e-temp-license-list.component.scss'],
 })
-export class TempLicenseListComponent {
+export class ETempLicenseListComponent {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<TempLicenseInfo>();
 

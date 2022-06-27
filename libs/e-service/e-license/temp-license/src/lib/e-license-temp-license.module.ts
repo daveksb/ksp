@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TempLicenseListComponent } from './temp-license-list/temp-license-list.component';
+import { ETempLicenseListComponent } from './e-temp-license-list/e-temp-license-list.component';
 import { TempLicenseDetailComponent } from './temp-license-detail/temp-license-detail.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { TempLicenseCheckForbiddenComponent } from './temp-license-check-forbidden/temp-license-check-forbidden.component';
@@ -35,7 +35,7 @@ import { TempLicenseSearchComponent } from '@ksp/shared/form/search';
     TempLicenseSearchComponent,
   ],
   declarations: [
-    TempLicenseListComponent,
+    ETempLicenseListComponent,
     TempLicenseDetailComponent,
     TempLicenseCheckForbiddenComponent,
     TempLicenseCheckConfirmComponent,

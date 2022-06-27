@@ -18,104 +18,10 @@
 
       <hr />
 
-      <div class="box__container">
-        <div class="box__title">ค้นหารายการ</div>
-        <div class="detail__container--third">
-          <div class="detail__container">
-            <label class="form-label">เลขที่ใบคำขอ </label>
-            <input
-              class="form-control"
-              type="text"
-              formControlName="licenseNumber"
-            />
-          </div>
-          <div class="detail__container">
-            <label class="form-label">หมายเลขบัตรประชาชน </label>
-            <input
-              class="form-control"
-              type="text"
-              formControlName="personId"
-            />
-          </div>
-        </div>
-
-        <div class="detail__container--third">
-          <div class="detail__container">
-            <label class="form-label">ประเภทวิชาชีพ</label>
-            <select class="form-select" formControlName="profession">
-              <option selected>กรุณาเลือก</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-          <div class="detail__container">
-            <label class="form-label">ขั้นตอนการดำเนินการ</label>
-            <select class="form-select" formControlName="process">
-              <option selected>กรุณาเลือก</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="detail__container--third">
-          <div class="detail__container">
-            <label class="form-label">สถานะการดำเนินการ</label>
-            <select class="form-select" formControlName="status">
-              <option selected>กรุณาเลือก</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="detail__container--secondary">
-          <div class="detail__container">
-            <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ</label>
-            <input
-              class="form-control"
-              type="date"
-              formControlName="submitDateFrom"
-            />
-          </div>
-
-          <div>
-            <br />
-            <mat-icon>minimize</mat-icon>
-          </div>
-
-          <div class="detail__container">
-            <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ</label>
-            <input
-              class="form-control"
-              type="date"
-              formControlName="submitDateTo"
-            />
-          </div>
-        </div>
-
-        <div class="button__container">
-          <button
-            id="btn-clear"
-            (click)="clear()"
-            type="button"
-            class="btn btn-outline-primary"
-          >
-            ล้างข้อมูล
-          </button>
-          <button
-            id="search__button"
-            (click)="search()"
-            type="button"
-            class="btn btn-primary"
-          >
-            ค้นหา
-          </button>
-        </div>
-      </div>
+      <ksp-temp-license-search
+        (clear)="clear()"
+        (search)="search()"
+      ></ksp-temp-license-search>
 
       <div class="detail__container"><hr /></div>
       <div class="box__title">ยื่นใบคำขอ</div>

@@ -4,11 +4,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'school-service-license-list',
-  templateUrl: './license-list.component.html',
-  styleUrls: ['./license-list.component.scss'],
+  templateUrl: './school-temp-license-list.component.html',
+  styleUrls: ['./school-temp-license-list.component.scss'],
 })
-export class LicenseListComponent {
+export class SchoolTempLicenseListComponent {
   form = this.fb.group({
     licenseNumber: [],
     personId: [],

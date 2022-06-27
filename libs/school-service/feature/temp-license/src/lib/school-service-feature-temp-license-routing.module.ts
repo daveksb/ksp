@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SchoolServiceContainerPageComponent } from '@ksp/school-service/feature/container-page';
 import { PageNotFoundComponent } from '@ksp/shared/ui';
 import { LicenseDetailComponent } from './license-detail/license-detail.component';
-import { LicenseListComponent } from './license-list/license-list.component';
+import { SchoolTempLicenseListComponent } from './school-temp-license-list/school-temp-license-list.component';
 
 const routes: Routes = [
   {
@@ -17,7 +17,7 @@ const routes: Routes = [
       },
       {
         path: 'list',
-        component: LicenseListComponent,
+        component: SchoolTempLicenseListComponent,
       },
       {
         path: 'detail',
