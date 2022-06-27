@@ -6,6 +6,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'uni-service-foreign-id',
@@ -16,10 +17,19 @@ export class ForeignIdComponent {
   @Input() mode: FormMode = 'edit';
   foreignInfo = ['1.สำเนาหนังสือเดินทาง'];
 
-  constructor(public dialog: MatDialog, private router: Router) {}
+  form = this.fb.group({
+    foreignStudent: [],
+  });
+
+  constructor(
+    public dialog: MatDialog,
+    private router: Router,
+    private fb: FormBuilder
+  ) {}
 
   cancel() {
-    this.router.navigate(['/', 'home']);
+    this.form.valueChanges.subscribe((res) => console.log(' res = ', res));
+    //this.router.navigate(['/', 'home']);
   }
 
   save() {
