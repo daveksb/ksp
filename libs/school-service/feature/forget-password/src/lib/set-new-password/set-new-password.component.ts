@@ -6,13 +6,14 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
-  selector: 'school-service-set-new-password',
   templateUrl: './set-new-password.component.html',
   styleUrls: ['./set-new-password.component.scss'],
 })
-export class SetNewPasswordComponent implements OnInit{
+export class SetNewPasswordComponent implements OnInit {
   form = this.fb.group({
     password: ['', Validators.required],
     rePassword: ['', Validators.required],
@@ -25,13 +26,13 @@ export class SetNewPasswordComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.form.valueChanges.subscribe((res) => {
+    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
       //console.log('form value = ', res);
     });
   }
 
   navigateBack() {
-    this.router.navigate(['/', 'login']);
+    this.router.navigate(['/login']);
   }
 
   accept() {
