@@ -4,6 +4,7 @@
 :root {
   --ksp-gray: #656565;
   --ksp-gray-bg: #e5e5e5;
+  --ksp-sidenav-width: 237px;
 }
 
 @font-face {
@@ -51,4 +52,14 @@ add asterisk for required feild
   color: var(--ksp-gray) !important;
   font-size: 22px !important;
   padding: 0 0.75rem !important;
+}
+
+.sticky-bottom {
+  position: sticky;
+  background-color: white;
+  right: 0;
+  bottom: 0;
+  left: var(--ksp-sidenav-width);
+  z-index: 1030;
+  width: auto !important;
 }

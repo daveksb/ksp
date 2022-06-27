@@ -6,34 +6,34 @@
   ></ksp-top-nav
 >
 
-<div [formGroup]="form" class="container">
-  <div class="header">
+<div [formGroup]="form" class="container-fluid">
+  <div class="fs-5 py-2">
     รายละเอียดใบคำขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
     {{ requestTypeLabel }}
   </div>
-  <div class="detail__container">
+  <div class="bg-white p-3">
     <ksp-request-header-info
       [requestDate]="'10 ตุลาคม 2565'"
-      [requestNumber]="'112234467876543'"
+      [requestNumber]="'112234467876545'"
     ></ksp-request-header-info>
     <hr />
 
-    <div class="top__container">
-      <div class="header-2">ค้นหารายการ</div>
+    <div class="bg-light px-3">
+      <div class="fs-4 text-primary">ค้นหารายการ</div>
 
-      <div class="content__container--secondary">
-        <div class="mb-3">
+      <div class="row mb-3">
+        <div class="col-5">
           <label class="form-label">หมายเลขบัตรประชาชน</label>
-          <input class="form-control form-control-sm" type="text" />
+          <input class="form-control" type="text" />
         </div>
       </div>
       <ksp-form-user-info
-        [isDarkMode]="true"
+        [isDarkMode]="false"
         formControlName="personSearch"
       ></ksp-form-user-info>
     </div>
 
-    <div class="tab-container">
+    <div class="bg-light mt-3">
       <mat-tab-group
         (selectedIndexChange)="onTabIndexChanged($event)"
         class="tab-group"
@@ -55,7 +55,7 @@
             </div>
           </ksp-form-address>
 
-          <div class="label__warn">
+          <div class="text-danger">
             *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
             โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
           </div>
@@ -78,20 +78,20 @@
             [defualtDegree]="2"
             >วุฒิทางการศึกษา
           </ksp-form-education-info>
-          <div class="content__container">
-            <div class="mb-3">
-              <label class="form-label-2"
-                >คุณสมบัติอื่นที่สอดคล้องหรือเป็นประโยชน์ต่อการจัดการเรียนการสอนในกลุ่มสาระหรือรายวิชาที่สอน
-                (พิจารณาเป็นรายกรณี)</label
-              >
-              <textarea
-                formControlName="otherProperty"
-                class="form-control form-control-sm"
-                rows="4"
-                placeholder="โปรดระบุ"
-              ></textarea>
-            </div>
+
+          <div class="px-4">
+            <label class="form-label-2"
+              >คุณสมบัติอื่นที่สอดคล้องหรือเป็นประโยชน์ต่อการจัดการเรียนการสอนในกลุ่มสาระหรือรายวิชาที่สอน
+              (พิจารณาเป็นรายกรณี)</label
+            >
+            <textarea
+              formControlName="otherProperty"
+              class="form-control form-control-sm"
+              rows="4"
+              placeholder="โปรดระบุ"
+            ></textarea>
           </div>
+
           <ksp-form-attachment [groups]="educationInfo"></ksp-form-attachment>
         </mat-tab>
 
@@ -115,16 +115,17 @@
   </div>
 </div>
 
-<ksp-bottom-nav
-  class="fixed-bottom border"
-  (saveClicked)="save()"
-  (cancelClicked)="backToListPage()"
-  (tempSaveClicked)="backToListPage()"
-  [isFirstPage]="true"
-  [colorMode]="'green'"
-  [isLastPage]="true"
-  [showCenterButtons]="true"
-  [showCancelButton]="true"
-  [showTempSaveButton]="true"
-  [showSaveButton]="selectedTabIndex === 5"
-></ksp-bottom-nav>
+<div class="sticky-bottom border">
+  <ksp-bottom-nav
+    (saveClicked)="save()"
+    (cancelClicked)="backToListPage()"
+    (tempSaveClicked)="backToListPage()"
+    [isFirstPage]="true"
+    [colorMode]="'green'"
+    [isLastPage]="true"
+    [showCenterButtons]="true"
+    [showCancelButton]="true"
+    [showTempSaveButton]="true"
+    [showSaveButton]="selectedTabIndex === 5"
+  ></ksp-bottom-nav>
+</div>

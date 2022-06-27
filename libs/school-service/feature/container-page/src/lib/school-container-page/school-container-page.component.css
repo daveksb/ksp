@@ -1,6 +1,6 @@
 .wrapper {
   display: grid;
-  grid-template-columns: 237px auto;
+  grid-template-columns: var(--ksp-sidenav-width) auto;
   padding: 0;
 }
 
