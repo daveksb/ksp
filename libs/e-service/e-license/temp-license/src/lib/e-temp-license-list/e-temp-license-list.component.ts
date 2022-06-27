@@ -2,6 +2,32 @@ import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
+@Component({
+  selector: 'e-service-temp-license-list',
+  templateUrl: './e-temp-license-list.component.html',
+  styleUrls: ['./e-temp-license-list.component.scss'],
+})
+export class ETempLicenseListComponent {
+  displayedColumns: string[] = column;
+  dataSource = new MatTableDataSource<TempLicenseInfo>();
+
+  constructor(private router: Router) {}
+
+  search() {
+    this.dataSource.data = data;
+  }
+
+  clear() {
+    this.dataSource.data = [];
+  }
+
+  nextPage(requestType: number) {
+    this.router.navigate(['/', 'temp-license', 'detail'], {
+      queryParams: { type: requestType },
+    });
+  }
+}
+
 export interface TempLicenseInfo {
   order: number;
   reqCode: string;
@@ -75,29 +101,3 @@ export const column = [
   'reqDoc',
   'approveDoc',
 ];
-
-@Component({
-  selector: 'e-service-temp-license-list',
-  templateUrl: './temp-license-list.component.html',
-  styleUrls: ['./temp-license-list.component.scss'],
-})
-export class TempLicenseListComponent {
-  displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<TempLicenseInfo>();
-
-  constructor(private router: Router) {}
-
-  search() {
-    this.dataSource.data = data;
-  }
-
-  clear() {
-    this.dataSource.data = [];
-  }
-
-  nextPage(requestType: number) {
-    this.router.navigate(['/', 'temp-license', 'detail'], {
-      queryParams: { type: requestType },
-    });
-  }
-}

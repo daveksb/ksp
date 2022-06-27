@@ -1,11 +1,7 @@
 .wrapper {
   display: grid;
-  grid-template-columns: 237px auto;
+  grid-template-columns: var(--ksp-sidenav-width) auto;
   padding: 0;
-}
-
-.top__menu {
-  z-index: 9;
 }
 
 @media (max-width: 1200px) {
@@ -15,12 +11,6 @@
   }
 
   .side__menu {
-    display: none;
-  }
-}
-
-@media (min-width: 1200px) {
-  .top__menu {
     display: none;
   }
 }

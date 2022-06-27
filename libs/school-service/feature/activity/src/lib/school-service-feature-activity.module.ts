@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivityListComponent } from './activity-list/activity-list.component';
 import { ActivityDetailComponent } from './activity-detail/activity-detail.component';
 import { RouterModule, Routes } from '@angular/router';
-import { SchoolServiceContainerPageComponent } from '@ksp/school-service/feature/container-page';
+import { SchoolContainerPageComponent } from '@ksp/school-service/feature/container-page';
 
 import { SchoolServiceUiStaffSearchModule } from '@ksp/school-service/ui/staff-search';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -23,7 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 export const routes: Routes = [
   {
     path: '',
-    component: SchoolServiceContainerPageComponent,
+    component: SchoolContainerPageComponent,
     children: [
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: 'list', component: ActivityListComponent },
