@@ -1,7 +1,7 @@
 .container {
   max-width: 1440px;
   background-image: url('/assets/images/BG-secondary.png');
-  padding: 150px 238px;
+  padding: 125px 240px;
   background-size: cover;
 }
 
@@ -66,6 +66,12 @@ h3 {
 .form-control {
   font-size: 18px;
 }
+
+.check {
+  font-size: 20px;
+  padding: 5px 0;
+}
+
 /* mobile */
 @media only screen and (max-width: 768px) {
   .container {
