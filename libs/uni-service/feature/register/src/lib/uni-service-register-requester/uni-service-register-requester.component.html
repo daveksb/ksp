@@ -11,9 +11,50 @@
     ></ksp-request-header-info>
 
     <hr />
-    <div class="img__step">
-      <img src="/assets/images/img-uni/stepper.png" />
+    <div>
+      <!-- <img src="/assets/images/img-uni/stepper.png" /> -->
+      <div class="d-flex flex-column align-items-center mb-5">
+        <div class="position-relative m-4 w-25">
+          <div class="progress" style="height: 1px">
+            <div
+              class="progress-bar"
+              role="progressbar"
+              style="width: 100%; background-color: #b8bcc3"
+              aria-valuenow="50"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            ></div>
+          </div>
+          <button
+            type="button"
+            class="position-absolute top-0 start-0 translate-middle btn btn-sm rounded-pill"
+            style="
+              width: 3rem;
+              height: 3rem;
+              pointer-events: none;
+              background-color: #f68b33;
+            "
+          >
+            <mat-icon class="xxx"> insert_drive_file</mat-icon>
+            <div class="yyy" style="color: #f68b33">
+              ข้อมูลผู้ขอรหัสสำหรับเข้าใช้งานระบบ
+            </div>
+          </button>
+
+          <button
+            type="button"
+            class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill"
+            style="width: 3rem; height: 3rem; pointer-events: none"
+          >
+            <mat-icon class="xxx">person</mat-icon>
+            <div class="yyy" style="color: #808080">
+              ข้อมูลผู้แต่งตั้งผู้ประสานงาน / ผู้รับผิดชอบ
+            </div>
+          </button>
+        </div>
+      </div>
     </div>
+    <br />
 
     <ksp-university-select></ksp-university-select>
 
