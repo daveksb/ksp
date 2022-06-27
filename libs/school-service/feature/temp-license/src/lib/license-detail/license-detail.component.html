@@ -116,17 +116,16 @@
   </div>
 </form>
 
-<div class="bottom__container">
-  <ksp-bottom-nav
-    (saveClicked)="save()"
-    (cancelClicked)="backToListPage()"
-    (tempSaveClicked)="backToListPage()"
-    [isFirstPage]="true"
-    [colorMode]="'green'"
-    [showCenterButtons]="true"
-    [isLastPage]="true"
-    [showCancelButton]="true"
-    [showTempSaveButton]="true"
-    [showSaveButton]="selectedTabIndex === 5"
-  ></ksp-bottom-nav>
-</div>
+<ksp-bottom-nav
+  class="fixed-bottom border"
+  (saveClicked)="save()"
+  (cancelClicked)="backToListPage()"
+  (tempSaveClicked)="backToListPage()"
+  [isFirstPage]="true"
+  [colorMode]="'green'"
+  [showCenterButtons]="true"
+  [isLastPage]="true"
+  [showCancelButton]="true"
+  [showTempSaveButton]="true"
+  [showSaveButton]="selectedTabIndex === 5"
+></ksp-bottom-nav>

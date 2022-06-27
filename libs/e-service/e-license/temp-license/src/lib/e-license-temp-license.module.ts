@@ -15,7 +15,6 @@ import { ELicenseTempLicenseRoutingModule } from './e-license-temp-license-routi
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
-import { StickyBottomNavDirective } from '@ksp/shared/directive';
 import { TempLicenseSearchComponent } from '@ksp/shared/form/search';
 
 @NgModule({
@@ -31,7 +30,6 @@ import { TempLicenseSearchComponent } from '@ksp/shared/form/search';
     MatTableModule,
     MatIconModule,
     LicenseCheckComponent,
-    StickyBottomNavDirective,
     TempLicenseSearchComponent,
   ],
   declarations: [
