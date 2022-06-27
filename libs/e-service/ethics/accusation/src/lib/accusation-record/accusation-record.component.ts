@@ -14,7 +14,6 @@ import {
   RequestHeaderInfoComponent,
 } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
-import { StickyBottomNavDirective } from '@ksp/shared/directive';
 
 @Component({
   selector: 'e-service-ethic-accusation-record',
@@ -32,7 +31,6 @@ import { StickyBottomNavDirective } from '@ksp/shared/directive';
     TopNavComponent,
     LicenseTypeButtonGroupComponent,
     LicenseInfoComponent,
-    StickyBottomNavDirective,
   ],
 })
 export class AccusationRecordComponent implements OnInit {

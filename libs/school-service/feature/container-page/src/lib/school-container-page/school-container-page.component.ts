@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MenuConfig } from '@ksp/shared/menu';
 
 @Component({
-  selector: 'school-service-container-page',
-  templateUrl: './school-service-container-page.component.html',
-  styleUrls: ['./school-service-container-page.component.css'],
+  selector: 'school-container-page',
+  templateUrl: './school-container-page.component.html',
+  styleUrls: ['./school-container-page.component.css'],
 })
-export class SchoolServiceContainerPageComponent implements OnInit {
+export class SchoolContainerPageComponent implements OnInit {
   menuConfig: MenuConfig[] = [];
 
   ngOnInit(): void {

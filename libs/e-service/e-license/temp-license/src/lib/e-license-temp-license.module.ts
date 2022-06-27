@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TempLicenseListComponent } from './temp-license-list/temp-license-list.component';
+import { ETempLicenseListComponent } from './e-temp-license-list/e-temp-license-list.component';
 import { TempLicenseDetailComponent } from './temp-license-detail/temp-license-detail.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { TempLicenseCheckForbiddenComponent } from './temp-license-check-forbidden/temp-license-check-forbidden.component';
@@ -15,7 +15,7 @@ import { ELicenseTempLicenseRoutingModule } from './e-license-temp-license-routi
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
-import { StickyBottomNavDirective } from '@ksp/shared/directive';
+import { TempLicenseSearchComponent } from '@ksp/shared/form/search';
 
 @NgModule({
   imports: [
@@ -30,10 +30,10 @@ import { StickyBottomNavDirective } from '@ksp/shared/directive';
     MatTableModule,
     MatIconModule,
     LicenseCheckComponent,
-    StickyBottomNavDirective,
+    TempLicenseSearchComponent,
   ],
   declarations: [
-    TempLicenseListComponent,
+    ETempLicenseListComponent,
     TempLicenseDetailComponent,
     TempLicenseCheckForbiddenComponent,
     TempLicenseCheckConfirmComponent,

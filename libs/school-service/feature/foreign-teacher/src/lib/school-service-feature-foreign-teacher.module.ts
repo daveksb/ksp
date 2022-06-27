@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Route } from '@angular/router';
 import { ForeignTeacherIdRequestComponent } from './foreign-teacher-id-request/foreign-teacher-id-request.component';
 
-import { SchoolServiceContainerPageComponent } from '@ksp/school-service/feature/container-page';
+import { SchoolContainerPageComponent } from '@ksp/school-service/feature/container-page';
 import { BottomNavComponent } from '@ksp/shared/menu';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
@@ -13,7 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 export const routes: Route[] = [
   {
     path: '',
-    component: SchoolServiceContainerPageComponent,
+    component: SchoolContainerPageComponent,
     children: [
       {
         path: 'id-request',
@@ -31,7 +31,7 @@ export const routes: Route[] = [
     SharedFormOthersModule,
     BottomNavComponent,
     RequestHeaderInfoComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [ForeignTeacherIdRequestComponent],
 })

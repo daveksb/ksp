@@ -1,14 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'school-service-license-list',
-  templateUrl: './license-list.component.html',
-  styleUrls: ['./license-list.component.scss'],
+  templateUrl: './school-temp-license-list.component.html',
+  styleUrls: ['./school-temp-license-list.component.scss'],
 })
-export class LicenseListComponent {
+export class SchoolTempLicenseListComponent {
   form = this.fb.group({
     licenseNumber: [],
     personId: [],
@@ -18,8 +17,6 @@ export class LicenseListComponent {
     submitDateFrom: [],
     submitDateTo: [],
   });
-
-  @Input() isStatusValid = false;
 
   personSelected = false;
   displayedColumns: string[] = [
@@ -66,7 +63,7 @@ export interface TempLicenseInfo {
   name: string;
   professType: string;
   workStep: string;
-  status: number;
+  status: string;
   editDate: string;
   sendDate: string;
   requestDoc: string;
@@ -81,7 +78,7 @@ export const data: TempLicenseInfo[] = [
     name: 'นายประหยัด จันทร์อังคาร',
     professType: 'หนังสืออนุญาตชั่วคราว-ครู',
     workStep: 'ตรวจสอบเอกสาร (2)',
-    status: 1, //'ผ่านการตรวจสอบ',
+    status: 'ผ่านการตรวจสอบ',
     editDate: '10 พ.ค. 2564',
     sendDate: '1 พ.ค. 2564',
     requestDoc: '',
@@ -94,7 +91,7 @@ export const data: TempLicenseInfo[] = [
     name: 'นายประหยัด จันทร์อังคาร',
     professType: 'หนังสืออนุญาตชั่วคราว-ครู',
     workStep: 'ตรวจสอบเอกสาร (2)',
-    status: 2, //'ปรับแก้ไข/เพิ่มเติม',
+    status: 'ปรับแก้ไข/เพิ่มเติม',
     editDate: '10 พ.ค. 2564',
     sendDate: '1 พ.ค. 2564',
     requestDoc: '',

@@ -1,16 +1,19 @@
-<div class="nav__container">
-  <div class="first__button">
+<div class="row" style="height: 50px">
+  <div class="col d-flex align-items-center">
     <button
       (click)="prevClicked.emit(true)"
       type="button"
-      class="btn btn-outline-warning"
-      *ngIf="!isFirstPage"
+      class="ms-2 btn btn-outline-warning"
     >
       ย้อนกลับ
     </button>
   </div>
+  <!-- *ngIf="!isFirstPage" -->
 
-  <div class="d-flex align-items-center" *ngIf="showCenterButtons">
+  <div
+    class="col d-flex justify-content-center align-items-center"
+    *ngIf="showCenterButtons"
+  >
     <button
       *ngIf="showCancelButton"
       (click)="cancelClicked.emit(true)"
@@ -47,12 +50,12 @@
     </button>
   </div>
 
-  <div class="last__button">
+  <!-- *ngIf="!isLastPage" -->
+  <div class="col d-flex justify-content-end align-items-center">
     <button
       (click)="nextClicked.emit(true)"
-      *ngIf="!isLastPage"
       type="button"
-      class="ms-3 btn btn-outline-warning"
+      class="me-3 btn btn-outline-warning"
     >
       ถัดไป
     </button>

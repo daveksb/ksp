@@ -1,129 +1,127 @@
 <form [formGroup]="form">
-  <div class="pt-4 pb-4 ps-4 pe-4">
-    <div class="row">
-      <div class="col-md mb-3">
-        <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
-        <select
-          [class.bg-white]="!isDarkMode"
-          class="form-select"
-          formControlName="prefixTh"
-        >
-          <option selected>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-      </div>
-      <div class="col-md-5 mb-3">
-        <label class="form-label">ชื่อ</label>
-        <input
-          [class.bg-light]="isDarkMode"
-          class="form-control"
-          type="text"
-          formControlName="nameTh"
-        />
-      </div>
-      <div class="col-md-5 mb-3">
-        <label class="form-label">นามสกุล</label>
-        <input
-          class="form-control"
-          type="text"
-          [class.bg-light]="isDarkMode"
-          formControlName="lastnameTh"
-        />
-      </div>
+  <div class="row">
+    <div class="col-md mb-3">
+      <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
+      <select
+        [class.bg-white]="!isDarkMode"
+        class="form-select"
+        formControlName="prefixTh"
+      >
+        <option selected>กรุณาเลือก</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
     </div>
-
-    <div class="row">
-      <div class="col-md mb-3">
-        <label class="form-label">คำนำหน้าชื่อภาษาอังกฤษ</label>
-        <select
-          [class.bg-white]="!isDarkMode"
-          class="form-select"
-          formControlName="prefixEn"
-        >
-          <option selected>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-      </div>
-      <div class="col-md-5 mb-3">
-        <label class="form-label">ชื่อ</label>
-        <input
-          class="form-control"
-          type="text"
-          [class.bg-light]="isDarkMode"
-          formControlName="nameEn"
-        />
-      </div>
-      <div class="col-md-5 mb-3">
-        <label class="form-label">นามสกุล</label>
-        <input
-          class="form-control"
-          type="text"
-          [class.bg-light]="isDarkMode"
-          formControlName="lastnameEn"
-        />
-      </div>
+    <div class="col-md-5 mb-3">
+      <label class="form-label">ชื่อ</label>
+      <input
+        [class.bg-light]="isDarkMode"
+        class="form-control"
+        type="text"
+        formControlName="nameTh"
+      />
     </div>
-
-    <div class="row">
-      <div class="col-md-6 mb-3">
-        <label class="form-label">เพศ</label>
-        <select
-          [class.bg-white]="!isDarkMode"
-          class="form-select"
-          formControlName="sex"
-        >
-          <option selected>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-      </div>
-      <div class="col-md-6 mb-3">
-        <label class="form-label">วันเดือนปีเกิด</label>
-        <input
-          class="form-control"
-          type="date"
-          [class.bg-light]="isDarkMode"
-          formControlName="birthdate"
-        />
-      </div>
+    <div class="col-md-5 mb-3">
+      <label class="form-label">นามสกุล</label>
+      <input
+        class="form-control"
+        type="text"
+        [class.bg-light]="isDarkMode"
+        formControlName="lastnameTh"
+      />
     </div>
+  </div>
 
-    <div class="row">
-      <div class="col-md-6 mb-3">
-        <label class="form-label">อีเมล</label>
-        <input
-          class="form-control"
-          type="email"
-          [class.bg-light]="isDarkMode"
-          formControlName="email"
-        />
-      </div>
-      <div class="col-md-6 mb-3">
-        <label class="form-label">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
-        <input
-          class="form-control"
-          type="tel"
-          [class.bg-light]="isDarkMode"
-          formControlName="contactPhone"
-        />
-      </div>
+  <div class="row">
+    <div class="col-md mb-3">
+      <label class="form-label">คำนำหน้าชื่อภาษาอังกฤษ</label>
+      <select
+        [class.bg-white]="!isDarkMode"
+        class="form-select"
+        formControlName="prefixEn"
+      >
+        <option selected>กรุณาเลือก</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
     </div>
+    <div class="col-md-5 mb-3">
+      <label class="form-label">ชื่อ</label>
+      <input
+        class="form-control"
+        type="text"
+        [class.bg-light]="isDarkMode"
+        formControlName="nameEn"
+      />
+    </div>
+    <div class="col-md-5 mb-3">
+      <label class="form-label">นามสกุล</label>
+      <input
+        class="form-control"
+        type="text"
+        [class.bg-light]="isDarkMode"
+        formControlName="lastnameEn"
+      />
+    </div>
+  </div>
 
-    <div class="row">
-      <div class="col-md-6 mb-3">
-        <label class="form-label">เบอร์โทรศัพท์ (ที่ทำงาน)</label>
-        <input
-          class="form-control"
-          type="tel"
-          [class.bg-light]="isDarkMode"
-          formControlName="workplacePhone"
-        />
-      </div>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">เพศ</label>
+      <select
+        [class.bg-white]="!isDarkMode"
+        class="form-select"
+        formControlName="sex"
+      >
+        <option selected>กรุณาเลือก</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">วันเดือนปีเกิด</label>
+      <input
+        class="form-control"
+        type="date"
+        [class.bg-light]="isDarkMode"
+        formControlName="birthdate"
+      />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">อีเมล</label>
+      <input
+        class="form-control"
+        type="email"
+        [class.bg-light]="isDarkMode"
+        formControlName="email"
+      />
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
+      <input
+        class="form-control"
+        type="tel"
+        [class.bg-light]="isDarkMode"
+        formControlName="contactPhone"
+      />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">เบอร์โทรศัพท์ (ที่ทำงาน)</label>
+      <input
+        class="form-control"
+        type="tel"
+        [class.bg-light]="isDarkMode"
+        formControlName="workplacePhone"
+      />
     </div>
   </div>
 </form>
