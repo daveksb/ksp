@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { StaffListComponent } from './staff-list/staff-list.component';
-import { SchoolServiceContainerPageComponent } from '@ksp/school-service/feature/container-page';
+import { SchoolContainerPageComponent } from '@ksp/school-service/feature/container-page';
 import { LicenseSearchComponent } from './license-search/license-search.component';
 
 import { AddStaffPersonInfoComponent } from './add-staff-person-info/add-staff-person-info.component';
@@ -26,7 +26,7 @@ import { StickyBottomNavDirective } from '@ksp/shared/directive';
 export const routes: Routes = [
   {
     path: '',
-    component: SchoolServiceContainerPageComponent,
+    component: SchoolContainerPageComponent,
     children: [
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: 'list', component: StaffListComponent },

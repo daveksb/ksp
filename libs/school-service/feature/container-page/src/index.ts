@@ -1,3 +1,3 @@
 export * from './lib/school-service-feature-container-page.module';
 
-export * from './lib/school-service-container-page/school-service-container-page.component';
+export * from './lib/school-container-page/school-container-page.component';
