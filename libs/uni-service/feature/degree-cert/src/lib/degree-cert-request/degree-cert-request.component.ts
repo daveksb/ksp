@@ -17,6 +17,7 @@ export class DegreeCertRequestComponent {
   form = this.fb.group({
     step1: [],
     step2: [],
+    step3: [],
   });
 
   constructor(

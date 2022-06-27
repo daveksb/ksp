@@ -28,7 +28,7 @@
               <div class="mb-3">
                 <label class="form-label">สังกัดคณะ </label>
                 <input
-                  class="form-control form-control-sm"
+                  class="form-control"
                   type="text"
                   placeholder="อักษรศาสตร์และครุศาสตร์"
                   formControlName="faculty"
@@ -102,7 +102,7 @@
                 <label class="form-label">ประสบการณ์นิเทศ (ปี) </label>
                 <input
                   formControlName="experienceYear"
-                  class="form-control form-control-sm"
+                  class="form-control"
                   type="number"
                   min="0"
                   (focus)="experienceYearFocused = true"
@@ -113,7 +113,7 @@
                   >จำนวน นศ.ที่รับผิดชอบในหลักสูตร (คน)
                 </label>
                 <input
-                  class="form-control form-control-sm"
+                  class="form-control"
                   type="number"
                   placeholder="กรอกเฉพาะตัวเลข"
                   formControlName="studentResponsible"
@@ -122,7 +122,7 @@
               <div class="mb-3">
                 <label class="form-label">จำนวน นศ.ในหลักสูตรอื่น (คน) </label>
                 <input
-                  class="form-control form-control-sm"
+                  class="form-control"
                   type="number"
                   placeholder="กรอกเฉพาะตัวเลข"
                   formControlName="studentOtherCourse"
@@ -136,6 +136,7 @@
             ></ksp-less-exp-nitet>
           </div>
         </div>
+        <br />
       </div>
     </ng-container>
   </ng-container>
