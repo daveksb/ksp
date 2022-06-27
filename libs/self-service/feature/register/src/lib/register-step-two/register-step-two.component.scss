@@ -1,7 +1,7 @@
 .container {
   max-width: 1440px;
   background-image: url('/assets/images/BG-secondary.png');
-  padding: 100px 238px;
+  padding: 100px 240px;
   background-size: cover;
 }
 
@@ -48,13 +48,16 @@ h3 {
   color: #a6a6a6;
 }
 
-.btn {
+/* .btn {
   width: 150px;
   font-size: 20px;
-}
+} */
 
-#btn-confirm {
-  margin-left: 20px;
+#btn-confirm,
+#btn-back {
+  margin: 0 10px;
+  width: 150px;
+  font-size: 20px;
 }
 
 #btn-upload {
@@ -76,6 +79,11 @@ h3 {
 
 .field__container {
   padding: 0 200px;
+}
+
+.check {
+  font-size: 20px;
+  padding: 5px 0;
 }
 
 /* mobile */
@@ -111,10 +119,6 @@ h3 {
   .field__container {
     margin-bottom: 8px;
     padding: 0 16px;
-  }
-
-  .btn {
-    width: 150px;
   }
 
   .form__footer {

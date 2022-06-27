@@ -9,6 +9,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { RegisterCompletedComponent } from './register-completed/register-completed.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
 export const routes: Routes = [
   {
@@ -37,7 +38,8 @@ export const routes: Routes = [
     MatDialogModule,
     SelfServiceFormModule,
     RouterModule.forChild(routes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule,
   ],
   declarations: [
     RegisterStepOneComponent,
