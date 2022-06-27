@@ -11,18 +11,29 @@ import { providerFactory } from '@ksp/shared/utility';
 })
 export class TeacherGeneralInfoComponent extends KspFormBaseComponent {
   override form = this.fb.group({
+    prefix: [''],
     firstName: [''],
     lastName: [''],
+    personId: [''],
+    academicPost: [''],
     degrees: this.fb.array([
-      {
+      this.fb.group({
         name: [''],
+        institution: [''],
         year: [''],
-      },
+      }),
     ]),
   });
 
   constructor(private fb: FormBuilder) {
     super();
+    this.subscriptions.push(
+      // any time the inner form changes update the parent of any change
+      this.form?.valueChanges.subscribe((value) => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
   }
 
   get degrees() {
@@ -32,6 +43,7 @@ export class TeacherGeneralInfoComponent extends KspFormBaseComponent {
   addDegree() {
     const degreeform: any = this.fb.group({
       name: [''],
+      institution: [''],
       year: [''],
     });
     this.degrees.push(degreeform);

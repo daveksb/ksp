@@ -12,10 +12,7 @@
       >
         <div *ngIf="formType === 'a'; then typeA; else typeB"></div>
         <ng-template #typeA>
-          <ksp-step-2-tab-1-a
-            [mode]="mode"
-            formControlName="plan1"
-          ></ksp-step-2-tab-1-a>
+          <ksp-step-2-tab-1-a [mode]="mode"></ksp-step-2-tab-1-a>
         </ng-template>
         <ng-template #typeB>
           <ksp-step-2-tab-1-b [mode]="mode"></ksp-step-2-tab-1-b>
