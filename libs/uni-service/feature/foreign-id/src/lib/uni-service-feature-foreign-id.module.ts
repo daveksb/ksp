@@ -6,6 +6,7 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { ForeignIdComponent } from './foreign-id/foreign-id.component';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { TopNavComponent } from '@ksp/shared/menu';
     SharedFormOthersModule,
     TopNavComponent,
     RequestHeaderInfoComponent,
+    ReactiveFormsModule
   ],
   declarations: [ForeignIdComponent],
   exports: [ForeignIdComponent],

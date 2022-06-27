@@ -4,6 +4,7 @@ import { UniServiceHomeComponent } from './uni-service-home/uni-service-home.com
 import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { MatTableModule } from '@angular/material/table';
 import { TopNavComponent } from '@ksp/shared/menu';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -11,6 +12,7 @@ import { TopNavComponent } from '@ksp/shared/menu';
     SelfServiceFormModule,
     MatTableModule,
     TopNavComponent,
+    ReactiveFormsModule
   ],
   declarations: [UniServiceHomeComponent],
 })

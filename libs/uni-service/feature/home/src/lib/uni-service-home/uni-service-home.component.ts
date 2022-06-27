@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
@@ -7,6 +8,17 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./uni-service-home.component.css'],
 })
 export class UniServiceHomeComponent {
+  form = this.fb.group({
+    institution: [],
+    affiliation: [],
+    degreeCode: [],
+    degreeName: [],
+    degreeLvel: [],
+    openYear: [],
+    requestNumber: [],
+    approveDate: [],
+  });
+
   displayedColumns: string[] = [
     'order',
     'degreeId',
@@ -17,6 +29,8 @@ export class UniServiceHomeComponent {
     'educationLevel',
   ];
   dataSource = new MatTableDataSource<DegreeInfo>();
+
+  constructor(private fb: FormBuilder) {}
 
   search() {
     this.dataSource.data = data;

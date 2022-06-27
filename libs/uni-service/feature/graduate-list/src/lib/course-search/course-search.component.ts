@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UniserviceImportType } from '@ksp/shared/interface';
@@ -14,7 +15,22 @@ export class CourseSearchComponent implements OnInit {
   displayedColumns: string[] = columns;
   dataSource = new MatTableDataSource<StudentInfo>();
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  form = this.fb.group({
+    institution: [],
+    affiliation: [],
+    degreeCode: [],
+    degreeName: [],
+    degreeLvel: [],
+    openYear: [],
+    requestNumber: [],
+    requestsubmitDate: [],
+  });
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.route.data.subscribe((res) => {

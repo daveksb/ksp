@@ -14,7 +14,7 @@ import {
   ListData,
 } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
-import { debounceTime } from 'rxjs';
+import { debounceTime, skip } from 'rxjs';
 import { DegreeCertStepOneService } from './step-one.service';
 
 @Component({
@@ -87,9 +87,11 @@ export class DegreeCertStepOneComponent
       //console.log('form value = ', res);
     });
 
-    this.form.controls['courseType'].valueChanges.subscribe((res) => {
-      this.loadComponent(Number(res));
-    });
+    this.form.controls['courseType'].valueChanges
+      .pipe(skip(1))
+      .subscribe((res) => {
+        this.loadComponent(Number(res));
+      });
   }
 
   onDegreeTypeChanged(degreeType: string) {

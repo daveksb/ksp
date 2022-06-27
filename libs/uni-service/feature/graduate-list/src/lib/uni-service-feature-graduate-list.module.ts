@@ -5,7 +5,7 @@ import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { UniServiceFeatureGraduateListRoutingModule } from './uni-service-feature-graduate-list-routing.module';
 import { ImportStudentComponent } from './import-student/import-student.component';
 import { MatButtonModule } from '@angular/material/button';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -42,7 +42,8 @@ import { FileUploadComponent } from '@ksp/shared/form/file-upload';
     MatTableModule,
     RequestHeaderInfoComponent,
     TopNavComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    ReactiveFormsModule,
   ],
   declarations: [
     CourseSearchComponent,
