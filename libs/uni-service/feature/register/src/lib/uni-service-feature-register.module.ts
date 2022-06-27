@@ -10,6 +10,7 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { UniversitySelectComponent } from '@ksp/shared/form/university-select';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { BottomNavComponent } from '@ksp/shared/menu';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { BottomNavComponent } from '@ksp/shared/menu';
     BottomNavComponent,
     RequestHeaderInfoComponent,
     UniversitySelectComponent,
+    MatIconModule,
   ],
   declarations: [
     UniServiceRegisterRequesterComponent,
