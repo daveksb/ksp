@@ -6,112 +6,114 @@
   ></ksp-top-nav
 >
 
-<div [formGroup]="form" class="container-fluid">
+<div [formGroup]="form" class="page__container">
   <div class="fs-5 py-2">
     รายละเอียดใบคำขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
     {{ requestTypeLabel }}
   </div>
   <div class="bg-white p-3">
-    <ksp-request-header-info
-      [requestDate]="'10 ตุลาคม 2565'"
-      [requestNumber]="'112234467876545'"
-    ></ksp-request-header-info>
-    <hr />
+    <div class="form__container">
+      <ksp-request-header-info
+        [requestDate]="'10 ตุลาคม 2565'"
+        [requestNumber]="'112234467876545'"
+      ></ksp-request-header-info>
+      <hr />
 
-    <div class="bg-light px-3">
-      <div class="fs-4 text-primary">ค้นหารายการ</div>
+      <div class="bg-light px-3">
+        <div class="fs-4 text-primary">ค้นหารายการ</div>
 
-      <div class="row mb-3">
-        <div class="col-5">
-          <label class="form-label">หมายเลขบัตรประชาชน</label>
-          <input class="form-control" type="text" />
+        <div class="row mb-3">
+          <div class="col-5">
+            <label class="form-label">หมายเลขบัตรประชาชน</label>
+            <input class="form-control" type="text" />
+          </div>
         </div>
+        <ksp-form-user-info
+          [isDarkMode]="false"
+          formControlName="personSearch"
+        ></ksp-form-user-info>
       </div>
-      <ksp-form-user-info
-        [isDarkMode]="false"
-        formControlName="personSearch"
-      ></ksp-form-user-info>
     </div>
+  </div>
 
-    <div class="bg-light mt-3">
-      <mat-tab-group
-        (selectedIndexChange)="onTabIndexChanged($event)"
-        class="tab-group"
-        selectedIndex="2"
-      >
-        <mat-tab label="ที่อยู่" class="tab-content">
-          <ksp-form-address formControlName="address1"
-            >ที่อยู่ทะเบียนบ้าน</ksp-form-address
-          >
-          <ksp-form-address formControlName="address2"
-            >ที่อยู่ที่ติดต่อได้สะดวก
-            <div class="checkbox__container">
-              <input
-                (change)="useSameAddress($event)"
-                type="checkbox"
-                class="checkbox__box"
-              />
-              <label class="form-label-2">ที่อยู่ตามทะเบียนบ้าน</label>
-            </div>
-          </ksp-form-address>
-
-          <div class="text-danger">
-            *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
-            โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
+  <div class="bg-light tab__container">
+    <mat-tab-group
+      (selectedIndexChange)="onTabIndexChanged($event)"
+      class="tab-group"
+      selectedIndex="2"
+    >
+      <mat-tab label="ที่อยู่" class="tab-content">
+        <ksp-form-address formControlName="address1"
+          >ที่อยู่ทะเบียนบ้าน</ksp-form-address
+        >
+        <ksp-form-address formControlName="address2"
+          >ที่อยู่ที่ติดต่อได้สะดวก
+          <div class="checkbox__container">
+            <input
+              (change)="useSameAddress($event)"
+              type="checkbox"
+              class="checkbox__box"
+            />
+            <label class="form-label-2">ที่อยู่ตามทะเบียนบ้าน</label>
           </div>
-        </mat-tab>
+        </ksp-form-address>
 
-        <mat-tab label="ที่อยู่ของสถานศึกษาที่ขออนุญาต">
-          <ksp-form-school-address
-            formControlName="schoolAddress"
-          ></ksp-form-school-address>
-        </mat-tab>
+        <div class="text-danger">
+          *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
+          โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
+        </div>
+      </mat-tab>
 
-        <mat-tab label="ข้อมูลทางการศึกษา">
-          <ksp-form-education-info
-            formControlName="education1"
-            [defualtDegree]="1"
-            >วุฒิทางการศึกษา</ksp-form-education-info
+      <mat-tab label="ที่อยู่ของสถานศึกษาที่ขออนุญาต">
+        <ksp-form-school-address
+          formControlName="schoolAddress"
+        ></ksp-form-school-address>
+      </mat-tab>
+
+      <mat-tab label="ข้อมูลทางการศึกษา">
+        <ksp-form-education-info
+          formControlName="education1"
+          [defualtDegree]="1"
+          >วุฒิทางการศึกษา</ksp-form-education-info
+        >
+        <ksp-form-education-info
+          formControlName="education2"
+          [defualtDegree]="2"
+          >วุฒิทางการศึกษา
+        </ksp-form-education-info>
+
+        <div class="px-4">
+          <label class="form-label-2"
+            >คุณสมบัติอื่นที่สอดคล้องหรือเป็นประโยชน์ต่อการจัดการเรียนการสอนในกลุ่มสาระหรือรายวิชาที่สอน
+            (พิจารณาเป็นรายกรณี)</label
           >
-          <ksp-form-education-info
-            formControlName="education2"
-            [defualtDegree]="2"
-            >วุฒิทางการศึกษา
-          </ksp-form-education-info>
+          <textarea
+            formControlName="otherProperty"
+            class="form-control form-control-sm"
+            rows="4"
+            placeholder="โปรดระบุ"
+          ></textarea>
+        </div>
 
-          <div class="px-4">
-            <label class="form-label-2"
-              >คุณสมบัติอื่นที่สอดคล้องหรือเป็นประโยชน์ต่อการจัดการเรียนการสอนในกลุ่มสาระหรือรายวิชาที่สอน
-              (พิจารณาเป็นรายกรณี)</label
-            >
-            <textarea
-              formControlName="otherProperty"
-              class="form-control form-control-sm"
-              rows="4"
-              placeholder="โปรดระบุ"
-            ></textarea>
-          </div>
+        <ksp-form-attachment [groups]="educationInfo"></ksp-form-attachment>
+      </mat-tab>
 
-          <ksp-form-attachment [groups]="educationInfo"></ksp-form-attachment>
-        </mat-tab>
+      <mat-tab label="ข้อมูลการสอนและการจ้าง">
+        <ksp-form-teaching-info
+          formControlName="teaching"
+        ></ksp-form-teaching-info>
+        <ksp-form-attachment [groups]="teachingInfo"></ksp-form-attachment>
+      </mat-tab>
 
-        <mat-tab label="ข้อมูลการสอนและการจ้าง">
-          <ksp-form-teaching-info
-            formControlName="teaching"
-          ></ksp-form-teaching-info>
-          <ksp-form-attachment [groups]="teachingInfo"></ksp-form-attachment>
-        </mat-tab>
+      <mat-tab label="ข้อมูลชี้แจงเหตุผล">
+        <ksp-form-reason-info></ksp-form-reason-info>
+        <ksp-form-attachment [groups]="reasonInfo"></ksp-form-attachment>
+      </mat-tab>
 
-        <mat-tab label="ข้อมูลชี้แจงเหตุผล">
-          <ksp-form-reason-info></ksp-form-reason-info>
-          <ksp-form-attachment [groups]="reasonInfo"></ksp-form-attachment>
-        </mat-tab>
-
-        <mat-tab label="เอกสารหลักฐานประกอบ">
-          <ksp-form-attachment [groups]="evidenceFiles"></ksp-form-attachment>
-        </mat-tab>
-      </mat-tab-group>
-    </div>
+      <mat-tab label="เอกสารหลักฐานประกอบ">
+        <ksp-form-attachment [groups]="evidenceFiles"></ksp-form-attachment>
+      </mat-tab>
+    </mat-tab-group>
   </div>
 </div>
 
