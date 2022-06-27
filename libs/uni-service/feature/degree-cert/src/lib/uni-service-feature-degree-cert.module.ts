@@ -16,6 +16,7 @@ import { SharedFormDegreeCertStepOneModule } from '@ksp/shared/form/degree-cert/
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { MatIconModule } from '@angular/material/icon';
 import { TopNavComponent } from '@ksp/shared/menu';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -51,6 +52,7 @@ const routes: Routes = [
     RequestHeaderInfoComponent,
     MatIconModule,
     TopNavComponent,
+    ReactiveFormsModule,
   ],
   declarations: [DegreeCertRequestComponent],
 })

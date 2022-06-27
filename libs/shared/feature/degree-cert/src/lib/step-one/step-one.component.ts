@@ -8,7 +8,12 @@ import {
 } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
-import { DynamicComponent, FormMode, ListData } from '@ksp/shared/interface';
+import {
+  DynamicComponent,
+  KspFormBaseComponent,
+  ListData,
+} from '@ksp/shared/interface';
+import { providerFactory } from '@ksp/shared/utility';
 import { debounceTime } from 'rxjs';
 import { DegreeCertStepOneService } from './step-one.service';
 
@@ -16,45 +21,52 @@ import { DegreeCertStepOneService } from './step-one.service';
   selector: 'ksp-degree-cert-step-one',
   templateUrl: './step-one.component.html',
   styleUrls: ['./step-one.component.css'],
-  providers: [DegreeCertStepOneService],
+  providers: providerFactory(DegreeCertStepOneComponent),
 })
-export class DegreeCertStepOneComponent implements OnInit {
+export class DegreeCertStepOneComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
   courseTypes: ListData[] = [];
   degreeTypes: ListData[] = [];
 
   @Input() showCoordinatorForm = true;
-
-
-  private _mode: FormMode = 'edit';
-
-  @Input()
-  set mode(value: FormMode) {
-    this._mode = value;
-    if (value === 'view') this.form.disable();
-  }
-
-  get mode(): FormMode {
-    return this._mode;
-  }
-
   @Output() degreeType = new EventEmitter<string>();
   @ViewChild(DynamicComponentDirective, { static: true })
   myHost!: DynamicComponentDirective;
 
-  form = this.fb.group({
+  override form = this.fb.group({
+    institutionsGroup: [],
+    institutionsCode: [],
+    institutionsName: [],
+    provience: [],
+
     degreeType: [],
+    degreeTypeForm: [],
+
     courseType: [],
-    year: [],
-    courseName: [],
+    courseTypeForm: [],
+
     locations: this.fb.array([]),
     institutions: this.fb.array([]),
     locations2: this.fb.array([]),
+
+    coordinator: [],
   });
 
   constructor(
     private fb: FormBuilder,
     private service: DegreeCertStepOneService
-  ) {}
+  ) {
+    super();
+    this.subscriptions.push(
+      // any time the inner form changes update the parent of any change
+      this.form?.valueChanges.subscribe((value) => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
+  }
 
   ngOnInit(): void {
     this.courseTypes = this.service.courseTypes;

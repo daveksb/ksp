@@ -237,6 +237,11 @@
                   <ng-template pTemplate="input">
                     <mat-select
                       [disabled]="pageType === importType.graduateList"
+                      [ngClass]="
+                        pageType === importType.graduateList
+                          ? 'disable__prefix'
+                          : ''
+                      "
                     >
                       <mat-option
                         *ngFor="let ThPrefix of ThPrefixes"
@@ -288,6 +293,11 @@
                   <ng-template pTemplate="input">
                     <mat-select
                       [disabled]="pageType === importType.graduateList"
+                      [ngClass]="
+                        pageType === importType.graduateList
+                          ? 'disable__prefix'
+                          : ''
+                      "
                     >
                       <mat-option
                         *ngFor="let EngPrefix of EngPrefixes"
