@@ -1,89 +1,11 @@
 .main-container {
-  background-color: #e5e5e5;
+  background-color: var(--ksp-gray-bg);
   height: auto;
   width: 100%;
   display: flex;
   flex-direction: column;
   padding: 0 32px;
   padding-bottom: 25px;
-}
-
-.top-container {
-  background-color: white;
-  padding: 16px;
-}
-
-.bottom-content {
-  background-color: #f9f9fa;
-  margin: 10px;
-}
-
-.box__container {
-  background-color: #f9f9fa;
-  margin: 16px 0;
-  max-width: 1200px;
-}
-
-.button__container {
-  padding-bottom: 15px;
-  padding-right: 15px;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.box__title {
-  font-size: 22px;
-  color: #0056ff;
-  padding-left: 15px;
-}
-
-.box__title-2 {
-  font-size: 22px;
-  color: #0056ff;
-}
-
-.table__title {
-  display: flex;
-  font-size: 22px;
-  padding-left: 15px;
-  justify-content: space-between;
-}
-
-.detail__container {
-  margin-bottom: 16px;
-  padding: 0 15px;
-}
-
-.detail__container--secondary {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-}
-
-.detail__container--third {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-.form-label {
-  font-size: 18px;
-  color: #656565;
-  margin-bottom: 0;
-}
-
-.form-label-2 {
-  font-size: 20px;
-  color: #000;
-  text-align: center;
-}
-
-.form-control {
-  background-color: #fff;
-  font-size: 18px;
-}
-
-.form-select {
-  background-color: #fff;
-  font-size: 18px;
 }
 
 .table {
@@ -94,16 +16,6 @@
 
 .table > :not(:first-child) {
   border-top: 0;
-}
-
-.header {
-  font-size: 22px;
-  color: #000000;
-  padding: 12px 0;
-}
-
-#btn-search {
-  margin-left: 15px;
 }
 
 tr.mat-header-row {
@@ -118,8 +30,4 @@ tr.mat-header-row {
 .check_circle {
   color: #4caf50;
   cursor: pointer;
-}
-
-.minimize {
-  font-size: 18px;
 }

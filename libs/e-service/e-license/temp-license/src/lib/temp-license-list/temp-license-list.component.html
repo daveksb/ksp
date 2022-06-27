@@ -6,11 +6,12 @@
   </span></ksp-top-nav
 >
 <div class="main-container">
-  <div class="header">
+  <div class="fs-5 my-1">
     รายละเอียดใบคำขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
     (ชาวไทย)
   </div>
-  <div class="top-container">
+
+  <div class="bg-white px-3 py-2">
     <ksp-request-header-info
       [requestDate]="'10 ตุลาคม 2565'"
       [requestNumber]="'112234467876543'"
@@ -18,89 +19,15 @@
 
     <hr />
 
-    <div class="box__container">
-      <div class="box__title">ค้นหารายการ</div>
-      <div class="detail__container--third">
-        <div class="detail__container">
-          <label class="form-label">เลขที่ใบคำขอ </label>
-          <input class="form-control form-control-sm" type="text" />
-        </div>
-        <div class="detail__container">
-          <label class="form-label">หมายเลขบัตรประชาชน </label>
-          <input class="form-control form-control-sm" type="text" />
-        </div>
-      </div>
-
-      <div class="detail__container--third">
-        <div class="detail__container">
-          <label class="form-label">ประเภทวิชาชีพ</label>
-          <select class="form-select form-select-sm">
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
-        <div class="detail__container">
-          <label class="form-label">ขั้นตอนการดำเนินการ</label>
-          <select class="form-select form-select-sm">
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="detail__container--third">
-        <div class="detail__container">
-          <label class="form-label">สถานะการดำเนินการ</label>
-          <select class="form-select form-select-sm">
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="detail__container--secondary">
-        <div class="detail__container">
-          <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ</label>
-          <input class="form-control form-control-sm" type="date" />
-        </div>
-
-        <label class="form-label-2"
-          ><br />
-          <mat-icon class="minimize">minimize</mat-icon></label
-        >
-
-        <div class="detail__container">
-          <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ</label>
-          <input class="form-control form-control-sm" type="date" />
-        </div>
-      </div>
-
-      <div class="button__container">
-        <button (click)="clear()" type="button" class="btn btn-outline-primary">
-          ล้างข้อมูล
-        </button>
-        <button
-          (click)="search()"
-          id="btn-search"
-          type="button"
-          class="btn btn-primary"
-        >
-          ค้นหา
-        </button>
-      </div>
-    </div>
+    <ksp-temp-license-search
+      (clear)="clear()"
+      (search)="search()"
+    ></ksp-temp-license-search>
 
     <hr />
 
-    <div class="table__title">
-      <div class="box__title-2">ยื่นใบคำขอ</div>
-    </div>
+    <div class="fs-5">ยื่นใบคำขอ</div>
+
     <div class="bottom-content">
       <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="order">

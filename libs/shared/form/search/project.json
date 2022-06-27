@@ -1,0 +1,17 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/shared/form/search/src",
+  "prefix": "ksp",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/form/search/**/*.ts",
+          "libs/shared/form/search/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

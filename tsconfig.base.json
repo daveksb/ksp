@@ -156,6 +156,7 @@
       "@ksp/shared/form/school/register": [
         "libs/shared/form/school/register/src/index.ts"
       ],
+      "@ksp/shared/form/search": ["libs/shared/form/search/src/index.ts"],
       "@ksp/shared/form/teacher-info": [
         "libs/shared/form/teacher-info/src/index.ts"
       ],
