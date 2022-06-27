@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
+import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { providerFactory } from '@ksp/shared/utility';
 import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'ksp-step-3-teaching',
   templateUrl: './teaching.component.html',
   styleUrls: ['./teaching.component.scss'],
+  providers: providerFactory(TeachingComponent),
 })
-export class TeachingComponent implements OnInit {
-  form = this.fb.group({
+export class TeachingComponent extends KspFormBaseComponent implements OnInit {
+  override form = this.fb.group({
     rows: this.fb.array([]),
   });
 
@@ -16,7 +19,16 @@ export class TeachingComponent implements OnInit {
   totalClassWeek = 0;
   totalHourTerm = 0;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    super();
+    this.subscriptions.push(
+      // any time the inner form changes update the parent of any change
+      this.form?.valueChanges.subscribe((value) => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
+  }
 
   ngOnInit(): void {
     this.form.valueChanges.pipe(debounceTime(500)).subscribe((res) => {

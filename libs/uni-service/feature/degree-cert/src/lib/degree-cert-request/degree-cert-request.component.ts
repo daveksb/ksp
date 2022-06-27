@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -13,10 +14,21 @@ import {
 export class DegreeCertRequestComponent {
   step1DegreeType = '';
 
-  constructor(private router: Router, public dialog: MatDialog) {}
+  form = this.fb.group({
+    step1: [],
+    step2: [],
+    step3: [],
+  });
+
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private fb: FormBuilder
+  ) {}
 
   navigateBack() {
-    this.router.navigate(['/', 'degree-cert']);
+    this.form.valueChanges.subscribe((res) => console.log(' res = ', res));
+    //this.router.navigate(['/', 'degree-cert']);
   }
 
   save() {

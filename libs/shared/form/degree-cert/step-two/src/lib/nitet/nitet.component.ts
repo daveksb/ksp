@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -9,14 +9,21 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./nitet.component.scss'],
   providers: providerFactory(NitetComponent),
 })
-export class NitetComponent extends KspFormBaseComponent {
+export class NitetComponent extends KspFormBaseComponent implements OnInit {
   experienceYearFocused = false;
   opaciseBox: boolean[] = [];
 
   nitetForm = this.fb.group({
     generalInfo: [],
+
+    faculty: [],
+    status: [],
+    subject: [],
     experienceYear: [],
-    instructorInfo: [],
+    studentResponsible: [],
+    studentOtherCourse: [],
+
+    lessExperience: [],
   });
 
   override form = this.fb.group({
@@ -25,13 +32,33 @@ export class NitetComponent extends KspFormBaseComponent {
 
   constructor(private fb: FormBuilder) {
     super();
+    this.subscriptions.push(
+      // any time the inner form changes update the parent of any change
+      this.form?.valueChanges.subscribe((value) => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
+  }
+
+  ngOnInit(): void {
+    this.nitetForm.controls.experienceYear.valueChanges.subscribe((res) => {
+      if (res && res > 2) {
+        this.nitetForm.controls.lessExperience.reset();
+      }
+    });
   }
 
   addNitet() {
     const form = this.fb.group({
       generalInfo: [],
       experienceYear: [],
-      instructorInfo: [],
+      faculty: [],
+      status: [],
+      subject: [],
+      studentResponsible: [],
+      studentOtherCourse: [],
+      lessExperience: [],
     });
 
     this.nitets.push(form);

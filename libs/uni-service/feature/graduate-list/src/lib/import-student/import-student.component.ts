@@ -26,6 +26,8 @@ export class ImportStudentComponent implements OnInit {
   importType = UniserviceImportType;
   foundUser = false;
 
+  
+
   headers = [
     [
       'ยื่นใบคำขอ',

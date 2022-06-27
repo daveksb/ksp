@@ -5,7 +5,10 @@
       <div class="row row--half">
         <div>
           <label class="form-label">กลุ่มสถาบัน</label>
-          <select class="search__content form-select form-select-sm">
+          <select
+            class="search__content form-select"
+            formControlName="institutionsGroup"
+          >
             <option selected>มหาวิทยาลัยของรัฐ / ในกำกับของรัฐ</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -14,7 +17,10 @@
         </div>
         <div>
           <label class="form-label">รหัสสถาบัน</label>
-          <select class="search__content form-select form-select-sm">
+          <select
+            class="search__content form-select"
+            formControlName="institutionsCode"
+          >
             <option selected>กรุณาเลือก</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -26,15 +32,19 @@
         <div>
           <label class="form-label">สถาบัน / มหาลัย</label>
           <input
-            class="form-control form-control-sm"
+            class="form-control"
             type="text"
             placeholder="กรุณากรอก"
+            formControlName="institutionsName"
           />
         </div>
 
         <div>
           <label class="form-label">จังหวัด</label>
-          <select class="search__content form-select form-select-sm">
+          <select
+            class="search__content form-select"
+            formControlName="provience"
+          >
             <option selected>กรุณาเลือก</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -47,6 +57,7 @@
     <ksp-degree-info
       [degreeTypes]="degreeTypes"
       (degreeTypeChanged)="onDegreeTypeChanged($event)"
+      formControlName="degreeTypeForm"
     ></ksp-degree-info>
 
     <div class="group__container">
@@ -61,7 +72,7 @@
           >
           <select
             formControlName="courseType"
-            class="search__content form-select form-select-sm"
+            class="search__content form-select"
           >
             <option *ngFor="let item of courseTypes" [value]="item.value">
               {{ item.label }}
@@ -73,6 +84,7 @@
         <ng-template kspDynamicComponent></ng-template>
       </div>
     </div>
+
     <div class="group__container">
       <div class="group__header">สถานที่ที่เปิดสอน</div>
 
@@ -84,8 +96,9 @@
             <div>
               <label class="form-label">สถานที่เปิดสอน {{ i + 1 }} </label>
               <input
-                class="form-control form-control-sm"
+                class="form-control"
                 type="text"
+                placeholder="กรุณากรอก"
                 formControlName="title"
               />
             </div>
@@ -115,9 +128,10 @@
                 >ชื่อคณะ / หน่วยงานที่ {{ i + 1 }}
               </label>
               <input
-                class="form-control form-control-sm"
+                class="form-control"
                 type="text"
                 placeholder="กรุณากรอก"
+                formControlName="title"
               />
             </div>
             <mat-icon *ngIf="i > 0" (click)="deleteFormArray(institutions, i)">
@@ -143,13 +157,14 @@
         <ng-container
           *ngFor="let locationForm2 of locations2.controls; let i = index"
         >
-          <div class="row row--ternary">
+          <div class="row row--ternary" [formGroupName]="i">
             <div>
-              <label class="form-label">สถานที่ {{ i + 1 }} </label>
+              <label class="form-label">สถานที่เปิดสอน {{ i + 1 }} </label>
               <input
-                class="form-control form-control-sm"
+                class="form-control"
                 type="text"
                 placeholder="กรุณากรอก"
+                formControlName="title"
               />
             </div>
             <mat-icon *ngIf="i > 0" (click)="deleteFormArray(locations2, i)">
@@ -162,12 +177,13 @@
       <ksp-add-row-button
         (addClick)="addFormArray(locations2)"
         *ngIf="mode === 'edit'"
-        >เพิ่มสถานที่ที่ต้องประเมินสภาพจริง</ksp-add-row-button
+        >เพิ่มสถานที่เปิดสอน</ksp-add-row-button
       >
     </div>
   </div>
 
   <ksp-degree-cert-coordinator
+    formControlName="coordinator"
     [mode]="mode"
     *ngIf="showCoordinatorForm"
   ></ksp-degree-cert-coordinator>

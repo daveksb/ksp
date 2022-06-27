@@ -1,67 +1,75 @@
 <hr />
-<div class="group__header">
-  อาจารย์นิเทศก์พี่เลี้ยงของอาจารย์นิเทศก์ที่มีประสบการณ์น้อยกว่า 2 ปี
-</div>
-<div class="row row--first">
-  <div class="mb-3">
-    <label class="form-label">คำนำหน้าชื่อ</label>
-    <select class="search__content form-select form-select-sm">
-      <option selected>กรุณาระบุ</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+<form [formGroup]="form">
+  <div class="group__header">
+    อาจารย์นิเทศก์พี่เลี้ยงของอาจารย์นิเทศก์ที่มีประสบการณ์น้อยกว่า 2 ปี
   </div>
-  <div class="mb-3">
-    <label class="form-label">ชื่อ </label>
-    <input
-      class="form-control form-control-sm"
-      type="text"
-      placeholder="กรุณากรอก"
-    />
+  <div class="row row--first">
+    <div class="mb-3">
+      <label class="form-label">คำนำหน้าชื่อ</label>
+      <select class="search__content form-select" formControlName="prefix">
+        <option selected>กรุณาระบุ</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">ชื่อ </label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="กรุณากรอก"
+        formControlName="firstname"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">นามสกุล </label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="กรุณากรอก"
+        formControlName="lastname"
+      />
+    </div>
   </div>
-  <div class="mb-3">
-    <label class="form-label">นามสกุล </label>
-    <input
-      class="form-control form-control-sm"
-      type="text"
-      placeholder="กรุณากรอก"
-    />
+  <div class="row row--second">
+    <div class="mb-3">
+      <label class="form-label">ตำแหน่งวิชาการ </label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="กรุณากรอก"
+        formControlName="academicPost"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">วุฒิการศึกษา </label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="กรุณากรอก"
+        formControlName="educationDegree"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">สาขาวิชา </label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="กรุณากรอก"
+        formControlName="branch"
+      />
+    </div>
   </div>
-</div>
-<div class="row row--second">
-  <div class="mb-3">
-    <label class="form-label">ตำแหน่งวิชาการ </label>
-    <input
-      class="form-control form-control-sm"
-      type="text"
-      placeholder="กรุณากรอก"
-    />
+  <div class="row row--second">
+    <div>
+      <label class="form-label">ประสบการณ์นิเทศ (ปี) </label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="กรอกเฉพาะตัวเลข"
+        formControlName="nitetExperience"
+      />
+    </div>
   </div>
-  <div class="mb-3">
-    <label class="form-label">วุฒิการศึกษา </label>
-    <input
-      class="form-control form-control-sm"
-      type="text"
-      placeholder="กรุณากรอก"
-    />
-  </div>
-  <div class="mb-3">
-    <label class="form-label">สาขาวิชา </label>
-    <input
-      class="form-control form-control-sm"
-      type="text"
-      placeholder="กรุณากรอก"
-    />
-  </div>
-</div>
-<div class="row row--second">
-  <div>
-    <label class="form-label">ประสบการณ์นิเทศ (ปี) </label>
-    <input
-      class="form-control form-control-sm"
-      type="text"
-      placeholder="กรอกเฉพาะตัวเลข"
-    />
-  </div>
-</div>
+</form>

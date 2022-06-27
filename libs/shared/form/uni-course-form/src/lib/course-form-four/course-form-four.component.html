@@ -1,39 +1,45 @@
-<div class="detail__content--primary">
-  <div>
-    <label class="form-label">ชื่อวิชาเอก </label>
-    <input
-      class="form-control form-control-sm"
-      type="text"
-      placeholder="กรุณากรอก"
-    />
+<form [formGroup]="form">
+  <div class="detail__content--primary">
+    <div>
+      <label class="form-label">ชื่อวิชาเอก </label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="กรุณากรอก"
+        formControlName="major"
+      />
+    </div>
   </div>
-</div>
-<div class="detail__content--primary">
-  <div>
-    <label class="form-label">ชื่อวิชาโท</label>
-    <input
-      class="form-control form-control-sm"
-      type="text"
-      placeholder="กรุณากรอก"
-    />
+  <div class="detail__content--primary">
+    <div>
+      <label class="form-label">ชื่อวิชาโท</label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="กรุณากรอก"
+        formControlName="minorSubject"
+      />
+    </div>
   </div>
-</div>
 
-<div class="detail__content--fourth">
-  <div>
-    <label class="form-label">ปีที่ยื่นการรับรอง</label>
-    <input
-      class="form-control form-control-sm"
-      type="text"
-      placeholder="กรุณาระบุเป็นตัวเลขของปีพ.ศเท่านั้น"
-    />
+  <div class="detail__content--fourth">
+    <div>
+      <label class="form-label">ปีที่ยื่นการรับรอง</label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="กรุณาระบุเป็นตัวเลขของปีพ.ศ.เท่านั้น"
+        formControlName="sendApproveYear"
+      />
+    </div>
+    <div>
+      <label class="form-label">ปีการศึกษาแรกที่เปิดสอน (ตามหลักสูตร)</label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="กรุณาระบุเป็นตัวเลขของปีพ.ศ.เท่านั้น"
+        formControlName="firstYearOpen"
+      />
+    </div>
   </div>
-  <div>
-    <label class="form-label">ปีการศึกษาแรกที่เปิดสอน (ตามหลักสูตร)</label>
-    <input
-      class="form-control form-control-sm"
-      type="text"
-      placeholder="กรุณาระบุเป็นตัวเลขของปีพ.ศเท่านั้น"
-    />
-  </div>
-</div>
+</form>

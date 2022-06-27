@@ -132,3 +132,9 @@ input {
 #upload__button {
   margin-left: 20px;
 }
+
+.disable__prefix {
+  background-color: #efefef4d;
+  color: -internal-light-dark(rgb(84, 84, 84), rgb(170, 170, 170));
+  border-color: rgba(118, 118, 118, 0.3);
+}

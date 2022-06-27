@@ -4,9 +4,10 @@ import { CourseFormOneComponent } from './course-form-one/course-form-one.compon
 import { CourseFormTwoComponent } from './course-form-two/course-form-two.component';
 import { CourseFormThreeComponent } from './course-form-three/course-form-three.component';
 import { CourseFormFourComponent } from './course-form-four/course-form-four.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   declarations: [
     CourseFormOneComponent,
     CourseFormTwoComponent,
