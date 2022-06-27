@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { UniversitySearchComponent } from '@ksp/shared/form/university-search';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'ksp-university-select',
   templateUrl: './university-select.component.html',
@@ -13,32 +15,21 @@ import { providerFactory } from '@ksp/shared/utility';
   imports: [ReactiveFormsModule],
   providers: providerFactory(UniversitySelectComponent),
 })
-export class UniversitySelectComponent
-  extends KspFormBaseComponent
-  implements OnInit
-{
+export class UniversitySelectComponent extends KspFormBaseComponent {
   override form = this.fb.group({
     institution: [],
     affiliation: [],
   });
 
-  @Input() isViewOnly = false;
-
   constructor(public dialog: MatDialog, private fb: FormBuilder) {
     super();
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
-      this.form?.valueChanges.subscribe((value) => {
+      this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
         this.onChange(value);
         this.onTouched();
       })
     );
-  }
-
-  ngOnInit(): void {
-    if (this.isViewOnly) {
-      this.form.disable();
-    }
   }
 
   search() {

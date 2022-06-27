@@ -1,24 +1,23 @@
 <form [formGroup]="form">
-  <div class="container">
-    <div class="header">กรุณาเลือกสถาบันที่ท่านสังกัด</div>
-    <div class="content">
-      <div class="mb-3">
+  <div class="bg-light px-4 py-3">
+    <div class="text-primary fs-4">กรุณาเลือกสถาบันที่ท่านสังกัด</div>
+    <div class="row">
+      <div class="col">
         <label class="form-label">สถาบัน / มหาวิทยาลัย</label>
-
         <input
           formControlName="institution"
           (click)="search()"
-          class="form-control form-control-sm"
+          class="form-control"
           type="search"
           placeholder="กรุณาเลือก"
         />
       </div>
-      <div class="mb-3">
+      <div class="col">
         <label class="form-label">สังกัด</label>
         <input
           formControlName="affiliation"
           (click)="search()"
-          class="form-control form-control-sm"
+          class="form-control"
           type="search"
           placeholder="กรุณาเลือก"
         />
