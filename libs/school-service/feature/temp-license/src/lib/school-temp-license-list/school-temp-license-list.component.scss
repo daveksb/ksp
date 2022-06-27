@@ -5,90 +5,10 @@
   padding-bottom: 25px;
 }
 
-.top-container {
-  background-color: #fff;
-  padding: 24px;
-}
-
-.bottom-content {
-  background-color: #f9f9fa;
-  margin: 10px;
-}
-
-.box__container {
-  background-color: #f9f9fa;
-  margin: 18px 0;
-  padding: 18px;
-  max-width: 1200px;
-}
-
-.button__container {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.box__title {
-  font-size: 22px;
-  color: #0056ff;
-}
-
-.table__title {
-  display: flex;
-  font-size: 22px;
-  padding-left: 15px;
-  justify-content: flex-end;
-}
-
 .btn__status {
   background-color: #fff;
   border-radius: 15px;
   pointer-events: none;
-}
-
-.status__valid {
-  color: #4caf50;
-  border: 1px solid #4caf50;
-}
-
-.status__invalid {
-  color: red;
-  border: 1px solid red;
-}
-
-.detail__container {
-  margin-bottom: 16px;
-}
-
-.detail__container--secondary {
-  display: grid;
-  grid-template-columns: 1fr 2% 1fr;
-}
-
-.detail__container--third {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 18px;
-}
-
-.form-label {
-  font-size: 18px;
-  color: #656565;
-  margin-bottom: 0;
-}
-.form-label-2 {
-  font-size: 20px;
-  color: #000;
-  text-align: center;
-}
-
-.form-control {
-  background-color: #fff;
-  font-size: 18px;
-}
-
-.form-select {
-  background-color: #fff;
-  font-size: 18px;
 }
 
 .table {
@@ -101,42 +21,6 @@
   border-top: 0;
 }
 
-.header__table {
-  background-color: #edf6ff;
-  font-size: 16px;
-  white-space: nowrap;
-}
-
-.body__table {
-  font-size: 16px;
-  color: #000000;
-  white-space: nowrap;
-}
-
-.label__content {
-  font-size: 18px;
-  color: #808080;
-  margin-right: 24px;
-}
-
-.label__content--primary {
-  color: #f68b33;
-}
-
-.label__content--secondary {
-  color: #0056ff;
-}
-
-.content__header {
-  display: flex;
-}
-
-.header {
-  font-size: 22px;
-  color: #000000;
-  padding: 12px 0;
-}
-
 .correct__icon {
   fill: green;
 }
@@ -147,25 +31,4 @@
 
 tr.mat-header-row {
   background-color: #edf8ff;
-}
-
-.note {
-  color: #0056ff;
-}
-
-#menu__button {
-  margin-right: 10px;
-}
-
-#search__button {
-  margin-left: 10px;
-}
-
-#btn-clear {
-  background-color: #fff;
-}
-
-#btn-clear:hover {
-  background-color: #0056ff;
-  color: #fff;
 }
