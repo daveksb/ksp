@@ -3,11 +3,10 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'school-service-add-staff-person-info',
-  templateUrl: './add-staff-person-info.component.html',
-  styleUrls: ['./add-staff-person-info.component.scss'],
+  templateUrl: './staff-person-info.component.html',
+  styleUrls: ['./staff-person-info.component.scss'],
 })
-export class AddStaffPersonInfoComponent {
+export class StaffPersonInfoComponent {
   form = this.fb.group({
     personId: [],
     passportNumber: [],
@@ -26,6 +25,6 @@ export class AddStaffPersonInfoComponent {
   constructor(private router: Router, private fb: FormBuilder) {}
 
   next() {
-    this.router.navigate(['./', 'staff-management', 'staff-teaching-info']);
+    this.router.navigate(['/staff-management', 'staff-teaching-info']);
   }
 }
