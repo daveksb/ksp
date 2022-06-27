@@ -4,8 +4,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 0 32px;
-  padding-bottom: 75px;
+  padding: 16px 32px;
 }
 
 .content__container {
@@ -15,7 +14,6 @@
 }
 
 .box__title {
-  padding-top: 16px;
   font-size: 22px;
 }
 

@@ -4,9 +4,9 @@
 
 .mat-tab-label {
   background: #eff1f3;
-  width: 250px;
+  width: 275px;
   margin: 0 2px;
-  font-size: 1.2rem;
+  font-size: 1.125rem;
 }
 
 @media only screen and (max-width: 768px) {

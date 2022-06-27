@@ -1,133 +1,160 @@
 <ksp-top-nav><span header>หน้าแรก </span></ksp-top-nav>
+<form [formGroup]="form">
+  <div class="main-container">
+    <div class="top-container">
+      <div class="box__container">
+        <div class="box__title">ค้นหาข้อมูล/หลักสูตรที่ต้องการ</div>
+        <div class="detail__container--third">
+          <div class="detail__container">
+            <label class="form-label">สถาบัน / มหาวิทยาลัย </label>
+            <select class="form-select" formControlName="institution">
+              <option selected>กรุณาเลือก</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+          <div class="detail__container">
+            <label class="form-label">สังกัด / คณะหน่วยงาน </label>
+            <select class="form-select" formControlName="affiliation">
+              <option selected>กรุณาเลือก</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+        </div>
 
-<div class="main-container">
-  <div class="top-container">
-    <div class="box__container">
-      <div class="box__title">ค้นหาข้อมูล/หลักสูตรที่ต้องการ</div>
-      <div class="detail__container--third">
-        <div class="detail__container">
-          <label class="form-label">สถาบัน / มหาวิทยาลัย </label>
-          <select class="form-select form-select-sm">
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
+        <div class="detail__container--third">
+          <div class="detail__container">
+            <label class="form-label">รหัสรับรองปริญญา</label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="degreeCode"
+            />
+          </div>
+          <div class="detail__container">
+            <label class="form-label"
+              >ชื่อปริญญา และประกาศนียบัตรทางการศึกษา</label
+            >
+            <input
+              class="form-control"
+              type="text"
+              formControlName="degreeName"
+            />
+          </div>
         </div>
-        <div class="detail__container">
-          <label class="form-label">สังกัด / คณะหน่วยงาน </label>
-          <select class="form-select form-select-sm">
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
-      </div>
 
-      <div class="detail__container--third">
-        <div class="detail__container">
-          <label class="form-label">รหัสรับรองปริญญา</label>
-          <input class="form-control form-control-sm" type="text" />
+        <div class="detail__container--third">
+          <div class="detail__container">
+            <label class="form-label">ระดับปริญญาทางการศึกษา</label>
+            <select class="form-select" formControlName="degreeLvel">
+              <option selected>กรุณาเลือก</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+          <div class="detail__container">
+            <label class="form-label">ปีการศึกษาที่เปิด</label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="openYear"
+            />
+          </div>
         </div>
-        <div class="detail__container">
-          <label class="form-label"
-            >ชื่อปริญญา และประกาศนียบัตรทางการศึกษา</label
+
+        <div class="detail__container--third">
+          <div class="detail__container">
+            <label class="form-label">เลขที่ใบคำขอ</label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="requestNumber"
+            />
+          </div>
+          <div class="detail__container">
+            <label class="form-label">วันที่ได้รับรอง</label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="approveDate"
+            />
+          </div>
+        </div>
+
+        <div class="button__container">
+          <button
+            (click)="clear()"
+            type="button"
+            class="btn btn-outline-primary"
           >
-          <input class="form-control form-control-sm" type="text" />
+            ล้างข้อมูล
+          </button>
+          <button
+            (click)="search()"
+            type="button"
+            class="btn btn-primary btn-search"
+          >
+            ค้นหา
+          </button>
         </div>
       </div>
+    </div>
 
-      <div class="detail__container--third">
-        <div class="detail__container">
-          <label class="form-label">ระดับปริญญาทางการศึกษา</label>
-          <select class="form-select form-select-sm">
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
-        <div class="detail__container">
-          <label class="form-label">ปีการศึกษาที่เปิด</label>
-          <input class="form-control form-control-sm" type="text" />
-        </div>
-      </div>
+    <div class="table__title">ข้อมูลรับรองปริญญาและประกาศนียบัตร</div>
+    <div class="bottom-container">
+      <div class="box__container">
+        <div class="table-responsive">
+          <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="order">
+              <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+              <td mat-cell *matCellDef="let element">{{ element.order }}</td>
+            </ng-container>
 
-      <div class="detail__container--third">
-        <div class="detail__container">
-          <label class="form-label">เลขที่ใบคำขอ</label>
-          <input class="form-control form-control-sm" type="text" />
-        </div>
-        <div class="detail__container">
-          <label class="form-label">วันที่ได้รับรอง</label>
-          <input class="form-control form-control-sm" type="text" />
-        </div>
-      </div>
+            <ng-container matColumnDef="degreeId">
+              <th mat-header-cell *matHeaderCellDef>รหัสปริญญา</th>
+              <td mat-cell *matCellDef="let element">{{ element.degreeId }}</td>
+            </ng-container>
 
-      <div class="button__container">
-        <button (click)="clear()" type="button" class="btn btn-outline-primary">
-          ล้างข้อมูล
-        </button>
-        <button
-          (click)="search()"
-          type="button"
-          class="btn btn-primary btn-search"
-        >
-          ค้นหา
-        </button>
+            <ng-container matColumnDef="uniName">
+              <th mat-header-cell *matHeaderCellDef>รายชื่อมหาวิทยาลัย</th>
+              <td mat-cell *matCellDef="let element">{{ element.uniName }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="course">
+              <th mat-header-cell *matHeaderCellDef>ชื่อหลักสูตร</th>
+              <td mat-cell *matCellDef="let element">{{ element.course }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="major">
+              <th mat-header-cell *matHeaderCellDef>สาขาวิชา</th>
+              <td mat-cell *matCellDef="let element">{{ element.major }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="degreeName">
+              <th mat-header-cell *matHeaderCellDef>ชื่อปริญญา</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.degreeName }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="educationLevel">
+              <th mat-header-cell *matHeaderCellDef>
+                ระดับการศึกษาที่ขอรับรอง
+              </th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.educationLevel }}
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </div>
       </div>
     </div>
   </div>
-
-  <div class="table__title">ข้อมูลรับรองปริญญาและประกาศนียบัตร</div>
-  <div class="bottom-container">
-    <div class="box__container">
-      <div class="table-responsive">
-        <table mat-table [dataSource]="dataSource">
-          <ng-container matColumnDef="order">
-            <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-            <td mat-cell *matCellDef="let element">{{ element.order }}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="degreeId">
-            <th mat-header-cell *matHeaderCellDef>รหัสปริญญา</th>
-            <td mat-cell *matCellDef="let element">{{ element.degreeId }}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="uniName">
-            <th mat-header-cell *matHeaderCellDef>รายชื่อมหาวิทยาลัย</th>
-            <td mat-cell *matCellDef="let element">{{ element.uniName }}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="course">
-            <th mat-header-cell *matHeaderCellDef>ชื่อหลักสูตร</th>
-            <td mat-cell *matCellDef="let element">{{ element.course }}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="major">
-            <th mat-header-cell *matHeaderCellDef>สาขาวิชา</th>
-            <td mat-cell *matCellDef="let element">{{ element.major }}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="degreeName">
-            <th mat-header-cell *matHeaderCellDef>ชื่อปริญญา</th>
-            <td mat-cell *matCellDef="let element">
-              {{ element.degreeName }}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="educationLevel">
-            <th mat-header-cell *matHeaderCellDef>ระดับการศึกษาที่ขอรับรอง</th>
-            <td mat-cell *matCellDef="let element">
-              {{ element.educationLevel }}
-            </td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
+</form>

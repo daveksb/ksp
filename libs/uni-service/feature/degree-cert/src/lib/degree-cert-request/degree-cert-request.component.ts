@@ -27,8 +27,7 @@ export class DegreeCertRequestComponent {
   ) {}
 
   navigateBack() {
-    this.form.valueChanges.subscribe((res) => console.log(' res = ', res));
-    //this.router.navigate(['/', 'degree-cert']);
+    this.router.navigate(['/', 'degree-cert']);
   }
 
   save() {

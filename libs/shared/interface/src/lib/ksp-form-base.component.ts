@@ -15,7 +15,9 @@ export abstract class KspFormBaseComponent implements ControlValueAccessor {
   set mode(value: FormMode) {
     this._mode = value;
     if (value === 'view') {
-      this.form.disable();
+      setTimeout(() => {
+        this.form.disable();
+      }, 0);
     }
   }
 
@@ -27,7 +29,7 @@ export abstract class KspFormBaseComponent implements ControlValueAccessor {
   subscriptions: Subscription[] = [];
 
   constructor() {
-   /*  this.subscriptions.push(
+    /*  this.subscriptions.push(
       // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
         this.onChange(value);
