@@ -2,28 +2,28 @@
 
 <form [formGroup]="form">
   <div class="container">
-    <div class="content__container">
-      <div class="header">ลืมรหัสผ่าน</div>
+    <div class="content">
+      <div class="fs-4">ลืมรหัสผ่าน</div>
       <hr />
-      <div class="title">กรุณากรอกข้อมูลเพื่อยืนยันตัวตน</div>
+      <div class="text-primary fs-4">กรุณากรอกข้อมูลเพื่อยืนยันตัวตน</div>
 
-      <div class="form__container">
-        <div class="form__title required">รหัสโรงเรียน</div>
+      <div class="">
+        <div class="form-label required">รหัสโรงเรียน</div>
         <input formControlName="schoolId" type="text" class="form-control" />
 
-        <div class="form__title required">หมายเลขบัตรประชาชน</div>
+        <div class="form-label required">หมายเลขบัตรประชาชน</div>
         <input formControlName="personId" type="text" class="form-control" />
 
-        <div class="form__title-2">
+        <div class="form-label">
           หมายเลขบัตรประชาชนของผู้แต่งตั้ง / ผู้มีอำนาจ / ผู้บริหาร
         </div>
       </div>
 
-      <div class="d-flex justify-content-center">
+      <div class="d-flex justify-content-center mt-4">
         <button (click)="cancel()" class="btn btn-outline-primary">
           ยกเลิก
         </button>
-        <button (click)="accept()" class="btn btn-primary">ตกลง</button>
+        <button (click)="accept()" class="ms-2 btn btn-primary">ตกลง</button>
       </div>
     </div>
   </div>

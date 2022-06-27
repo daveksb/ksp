@@ -1,6 +1,7 @@
 <div class="row" style="height: 50px">
   <div class="col d-flex align-items-center">
     <button
+      *ngIf="!isFirstPage"
       (click)="prevClicked.emit(true)"
       type="button"
       class="ms-2 btn btn-outline-warning"
@@ -8,7 +9,6 @@
       ย้อนกลับ
     </button>
   </div>
-  <!-- *ngIf="!isFirstPage" -->
 
   <div
     class="col d-flex justify-content-center align-items-center"
@@ -50,9 +50,9 @@
     </button>
   </div>
 
-  <!-- *ngIf="!isLastPage" -->
   <div class="col d-flex justify-content-end align-items-center">
     <button
+      *ngIf="!isLastPage"
       (click)="nextClicked.emit(true)"
       type="button"
       class="me-3 btn btn-outline-warning"

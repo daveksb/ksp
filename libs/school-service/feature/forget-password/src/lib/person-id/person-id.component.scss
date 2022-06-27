@@ -1,47 +1,15 @@
-.btn-primary {
-  margin-left: 20px;
-}
-
-.header {
-  font-size: 22px;
-  color: #000;
-}
-
-.title {
-  font-size: 22px;
-  color: #0056ff;
-  margin: 10px 60px 0 60px;
-}
-
-.form__container {
-  margin: 10px 60px;
-}
-
-.form__title {
-  font-size: 18px;
-  color: #808080;
-}
-
-.form__title-2 {
-  font-size: 14px;
-  color: #808080;
-  margin-top: -10px;
-}
-
-.form-control {
-  margin-bottom: 10px;
-}
-
 .container {
   background-color: #e5e5e5;
   max-width: 1440px;
   padding: 120px 240px;
   display: flex;
   justify-content: center;
+  height: 85vh;
 }
 
-.content__container {
+.content {
   background-color: #fff;
-  padding: 12px;
+  padding: 1rem 2rem;
   width: 600px;
+  height: 360px;
 }

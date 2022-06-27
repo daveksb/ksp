@@ -11,8 +11,8 @@ a:focus {
   color: #a6a6a6;
   transition: all 0.3s;
   box-shadow: 5px 0px 4px #efefef;
-  font-size: 16px;
   height: 100%;
+  padding-left: 1rem;
 }
 
 .active-link {
@@ -58,13 +58,12 @@ a:focus {
 
 #sidebar ul li a {
   padding: 10px 12px;
-  font-size: 18px;
+  font-size: 1.1rem;
   display: block;
 }
 
 #sidebar ul li a.sub-menu {
   padding: 5px 3px 5px 0;
-  font-size: 16px;
 }
 
 #sidebar ul li a:hover {
@@ -117,15 +116,15 @@ ul ul li {
 }
 
 @media only screen and (max-width: 768px) {
-  #sidebar {
+  /*   #sidebar {
     margin-left: -230px;
-  }
+  } */
 
-  #sidebar.active {
+  /*   #sidebar.active {
     margin-left: 20px;
-  }
+  } */
 
-  #sidebarCollapse span {
+  /*   #sidebarCollapse span {
     display: none;
-  }
+  } */
 }

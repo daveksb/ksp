@@ -1,7 +1,6 @@
-.container-fluid {
-  background-color: #e5e5e5;
-  padding: 0 30px;
-  padding-bottom: 10px;
+.page__container {
+  background-color: var(--ksp-gray-bg);
+  padding: 0 30px 10px 30px;
 }
 
 .checkbox__box {
@@ -14,4 +13,8 @@
   display: flex;
   line-height: 15px;
   margin-top: 20px;
+}
+
+.form__container {
+  max-width: 1200px;
 }
