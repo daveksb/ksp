@@ -29,6 +29,9 @@ export class LicenseDetailComponent implements OnInit {
     reason: [],
   });
 
+  schoolAddressLabel = `ที่อยู่ของสถานศึกษา
+  ที่ขออนุญาต`;
+
   requestTypeLabel = '';
   selectedTabIndex = 0;
 
