@@ -1,4 +1,4 @@
-import { Directive, ElementRef, OnInit, Renderer2 } from '@angular/core';
+/* import { Directive, ElementRef, OnInit, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[kspStickyBottomNav]',
@@ -20,3 +20,4 @@ export class StickyBottomNavDirective implements OnInit {
     );
   }
 }
+ */
