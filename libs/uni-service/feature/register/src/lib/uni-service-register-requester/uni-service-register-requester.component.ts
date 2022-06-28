@@ -19,6 +19,6 @@ export class UniServiceRegisterRequesterComponent {
   }
 
   next() {
-    this.router.navigate(['/', 'register', 'coordinator']);
+    this.router.navigate(['/register', 'coordinator']);
   }
 }

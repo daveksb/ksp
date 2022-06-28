@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { FormMode } from '@ksp/shared/interface';
 import { FilesPreviewComponent } from '@ksp/shared/dialog';
 
@@ -11,10 +10,11 @@ import { FilesPreviewComponent } from '@ksp/shared/dialog';
 })
 export class FormAttachmentComponent {
   @Input() title = `กรุณาแนบหลักฐานประกอบ`;
+  @Input() titleClass = ``;
   @Input() groups: string[] = [];
   @Input() mode: FormMode = 'edit';
 
-  constructor(public dialog: MatDialog, private router: Router) {}
+  constructor(public dialog: MatDialog) {}
   view() {
     const dialogRef = this.dialog.open(FilesPreviewComponent, {
       width: '800px',
