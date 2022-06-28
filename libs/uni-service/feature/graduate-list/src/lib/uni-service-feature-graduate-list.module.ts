@@ -21,6 +21,7 @@ import { MatTableModule } from '@angular/material/table';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
+import { DegreeSearchFormComponent } from '@ksp/shared/form/search';
 
 @NgModule({
   imports: [
@@ -44,6 +45,7 @@ import { FileUploadComponent } from '@ksp/shared/form/file-upload';
     TopNavComponent,
     FileUploadComponent,
     ReactiveFormsModule,
+    DegreeSearchFormComponent,
   ],
   declarations: [
     CourseSearchComponent,

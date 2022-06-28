@@ -36,6 +36,7 @@ export class CourseSearchComponent implements OnInit {
     this.route.data.subscribe((res) => {
       this.processType = res['type'];
     });
+    this.dataSource.data = data;
   }
 
   nextPage() {
