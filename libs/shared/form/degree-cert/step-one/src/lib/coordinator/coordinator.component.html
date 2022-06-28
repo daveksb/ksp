@@ -1,14 +1,14 @@
 <form [formGroup]="form">
-  <div class="group__container">
-    <div class="group__header">
-      ผู้ประสานงาน<span class="alert__text"
+  <div class="bg-light p-3">
+    <div class="fs-5">
+      ผู้ประสานงาน<span class="ms-2 fs-6 text-danger"
         >*กรุณาระบุเจ้าหน้าที่ที่สำนักงานเลขาธิการสามารถติดต่อประสานงาน
         แจ้งข้อมูลต่างๆที่เกี่ยวข้องกับการรับรองปริญญาฯเท่านั้น</span
       >
     </div>
 
-    <div class="row row--secondary">
-      <div>
+    <div class="row mb-2">
+      <div class="col-2">
         <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
         <select class="search__content form-select" formControlName="prefixTh">
           <option selected>นางสาว</option>
@@ -17,7 +17,7 @@
           <option value="3">Three</option>
         </select>
       </div>
-      <div>
+      <div class="col-5">
         <label class="form-label">ชื่อภาษาไทย </label>
         <input
           class="form-control"
@@ -26,7 +26,7 @@
           formControlName="nameTh"
         />
       </div>
-      <div>
+      <div class="col-5">
         <label class="form-label">นามสกุลภาษาไทย </label>
         <input
           class="form-control"
@@ -36,8 +36,9 @@
         />
       </div>
     </div>
-    <div class="row row--half">
-      <div>
+
+    <div class="row mb-2">
+      <div class="col">
         <label class="form-label">ตำแหน่ง</label>
         <input
           class="form-control"
@@ -46,7 +47,7 @@
           formControlName="post"
         />
       </div>
-      <div>
+      <div class="col">
         <label class="form-label">เบอร์โทรศัพท์มือถือ</label>
         <input
           class="form-control"
@@ -56,8 +57,9 @@
         />
       </div>
     </div>
-    <div class="row row--half">
-      <div>
+
+    <div class="row mb-2">
+      <div class="col">
         <label class="form-label">เบอร์โทรศัพท์สำนักงาน / ที่ทำการ</label>
         <input
           class="form-control"
@@ -66,7 +68,7 @@
           formControlName="workplacePhone"
         />
       </div>
-      <div>
+      <div class="col">
         <label class="form-label">เบอร์โทรสาร</label>
         <input
           class="form-control"
@@ -76,8 +78,9 @@
         />
       </div>
     </div>
-    <div class="row row--half">
-      <div>
+
+    <div class="row">
+      <div class="col-6">
         <label class="form-label">อีเมล์</label>
         <input
           class="form-control"
@@ -90,7 +93,7 @@
   </div>
 
   <div *ngIf="mode === 'edit'" class="alert__text-container">
-    <span class="alert__text"
+    <span class="text-danger"
       >*กรุณากรอกข้อมูลให้ถูกต้อง
       เพื่อประโยชน์ของตัวท่านเองโปรดตรวจสอบอีกครั้งก่อนการบันทึกลงระบบ</span
     >

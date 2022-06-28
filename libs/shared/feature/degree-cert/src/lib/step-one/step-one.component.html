@@ -2,7 +2,6 @@
   <div class="bg-white px-2 py-2" style="max-width: 1200px">
     <div class="bg-light px-3 py-2">
       <div class="fs-5">ข้อมูลสถาบัน</div>
-
       <div class="row mb-3">
         <div class="col">
           <label class="form-label">กลุ่มสถาบัน</label>
@@ -29,7 +28,6 @@
           </select>
         </div>
       </div>
-
       <div class="row mb-3">
         <div class="col">
           <label class="form-label">สถาบัน / มหาลัย</label>
@@ -40,7 +38,6 @@
             formControlName="institutionsName"
           />
         </div>
-
         <div class="col">
           <label class="form-label">จังหวัด</label>
           <select
@@ -200,11 +197,13 @@
         >เพิ่มสถานที่เปิดสอน</ksp-add-row-button
       >
     </div>
-  </div>
 
-  <ksp-degree-cert-coordinator
-    formControlName="coordinator"
-    [mode]="mode"
-    *ngIf="showCoordinatorForm"
-  ></ksp-degree-cert-coordinator>
+    <div class="mt-3">
+      <ksp-degree-cert-coordinator
+        formControlName="coordinator"
+        [mode]="mode"
+        *ngIf="showCoordinatorForm"
+      ></ksp-degree-cert-coordinator>
+    </div>
+  </div>
 </form>
