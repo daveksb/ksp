@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -12,11 +13,27 @@ import {
   styleUrls: ['./inquiry-main.component.scss'],
 })
 export class InquiryMainComponent {
-  constructor(private router: Router, public dialog: MatDialog) {}
+  form = this.fb.group({
+    inquiry: [],
+    rulingInform: [],
+    accusation: [],
+    investigation: [],
+  });
+
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private fb: FormBuilder
+  ) {}
 
   @Input() hideAllButtons = false;
   @Input() hideContainer = false;
   @Input() hideTitle = false;
+
+  cancel() {
+    this.form.valueChanges.subscribe((res) => console.log(' res = ', res));
+    //this.router.navigate(['/', 'inquiry']);
+  }
 
   save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
@@ -51,9 +68,5 @@ export class InquiryMainComponent {
         this.router.navigate(['/', 'ethics', 'inquiry']);
       }
     });
-  }
-
-  cancel() {
-    this.router.navigate(['/', 'inquiry']);
   }
 }

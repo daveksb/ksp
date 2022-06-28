@@ -55,14 +55,14 @@
 
 .content__container-primary {
   display: grid;
-  grid-template-columns: 2% 12% 16% 24% auto;
+  grid-template-columns: 10% 14% 20% auto;
   align-items: center;
   grid-column-gap: 16px;
 }
 
 .content__container-secondary {
   display: grid;
-  grid-template-columns: 40% 4% 20% 8% 20% auto;
+  grid-template-columns: 35% 4% 22% 6% 22% auto;
   grid-column-gap: 16px;
   align-items: center;
   margin: 0 20px;
@@ -70,6 +70,10 @@
 
 .form__container {
   padding: 0 24px;
+}
+
+.form__container-2 {
+  padding: 0 42px;
 }
 
 .form-label {
@@ -136,10 +140,6 @@
 
 .checkbox__row {
   display: flex;
-  line-height: 15px;
-  margin: 12px 0;
-}
-
-.checkbox__row--no-margin {
-  margin: 0;
+  align-items: center;
+  margin-bottom: 8px;
 }

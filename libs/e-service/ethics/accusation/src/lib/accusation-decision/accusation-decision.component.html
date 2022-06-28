@@ -1,62 +1,41 @@
 <ksp-top-nav><span subHeader>ระบบงานจรรยาบรรณ </span></ksp-top-nav>
 
-<div class="main-container">
-  <div class="page__title">บันทึกข้อมูลการกล่าวหา/กล่าวโทษ</div>
-  <img src="" />
+<form [formGroup]="form">
+  <div class="main-container">
+    <div class="page__title">บันทึกข้อมูลการกล่าวหา/กล่าวโทษ</div>
+    <img src="" />
 
-  <div class="box-container">
-    <ksp-request-header-info
-      [requestDate]="'10 ตุลาคม 2565'"
-      [requestNumber]="'112234467876543'"
-    ></ksp-request-header-info>
+    <div class="box-container">
+      <ksp-request-header-info
+        [requestDate]="'10 ตุลาคม 2565'"
+        [requestNumber]="'112234467876543'"
+      ></ksp-request-header-info>
 
-    <hr />
+      <hr />
 
-    <div class="content__container">
-      <div class="header">การพิจารณาดำเนินการ</div>
+      <div class="content__container">
+        <div class="header">การพิจารณาดำเนินการ</div>
 
-      <div class="checkbox__container">
-        <div class="mb-3">
-          <input type="checkbox" class="checkbox" />
-          <label class="checkbox__label"
-            >รับเรื่องพิจารณา และดำเนินการขั้นต่อไป</label
-          >
-        </div>
-        <div class="mb-3">
-          <input type="checkbox" class="checkbox" />
-          <label class="checkbox__label"
-            >ไม่รับเรื่องพิจารณาและจำหน่ายออก เนื่องจากอายุความเกิน ๅ ปี</label
-          >
-        </div>
-        <div class="mb-3">
-          <input type="checkbox" class="checkbox" />
-          <label class="checkbox__label">ยุติเรื่องกรณีไม่มีใบอนุญาต</label>
-        </div>
-        <div class="mb-3">
-          <input type="checkbox" class="checkbox" />
-          <label class="checkbox__label">บัตรสนเทห์</label>
-        </div>
-        <div class="mb-3">
-          <input type="checkbox" class="checkbox" />
-          <label class="checkbox__label">หนังสือร้องเรียนขาดสาระสำคัญ</label>
-        </div>
-        <div class="mb-3">
-          <input type="checkbox" class="checkbox" />
-          <label class="checkbox__label"
-            >เหตุเกิดก่อนข้อบังคับคุรุสภา
-            ว่าด้วยมาตรฐานวิชาชีพและจรรยาบรรณวิชาชีพ พ.ศ.2548</label
-          >
-        </div>
-        <div>
-          <input type="checkbox" class="checkbox" />
-          <label class="checkbox__label">อื่นๆ (ระบุด้วยตนเอง)</label>
-        </div>
+        <div class="checkbox__container">
+          <div class="d-flex flex-column">
+            <ng-container *ngFor="let item of decisions">
+              <mat-checkbox
+                class="fs-5 form-label"
+                formControlName="{{ item.name }}"
+              >
+                {{ item.label }}
+              </mat-checkbox></ng-container
+            >
+          </div>
 
-        <div class="form__container"><input class="form__control" /></div>
+          <div class="form__container">
+            <input class="form-control" formControlName="otherDetail" />
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</form>
 
 <div class="sticky-bottom border" *ngIf="!hideAllButtons">
   <ksp-bottom-nav

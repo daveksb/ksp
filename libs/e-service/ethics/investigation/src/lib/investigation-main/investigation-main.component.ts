@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -12,8 +13,18 @@ import {
   styleUrls: ['./investigation-main.component.scss'],
 })
 export class InvestigationMainComponent {
-  constructor(private router: Router, public dialog: MatDialog) {}
+  form = this.fb.group({
+    accusation: [],
+    invsetigation: [],
+  });
+
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private fb: FormBuilder
+  ) {}
   cancel() {
+    //this.form.valueChanges.subscribe((res) => console.log(' res = ', res));
     this.router.navigate(['/', 'accusation']);
   }
 

@@ -17,6 +17,10 @@ import {
   RequestHeaderInfoComponent,
 } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
+import { AccusationMainComponent } from './accusation-main/accusation-main.component';
+import { AccusationRecordComponent } from './accusation-record/accusation-record.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -35,8 +39,11 @@ import { TopNavComponent } from '@ksp/shared/menu';
     TopNavComponent,
     LicenseTypeButtonGroupComponent,
     LicenseInfoComponent,
+    AccusationRecordComponent,
+    MatCheckboxModule,
+    ReactiveFormsModule,
   ],
-  declarations: [AccusationDecisionComponent],
-  exports: [AccusationDecisionComponent],
+  declarations: [AccusationDecisionComponent, AccusationMainComponent],
+  exports: [AccusationDecisionComponent, AccusationMainComponent],
 })
 export class EServiceEthicsAccusationModule {}

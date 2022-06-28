@@ -1,209 +1,233 @@
-<ksp-top-nav><span subHeader>ระบบงานจรรยาบรรณ </span></ksp-top-nav>
-
-<div
-  class="main-container"
-  [ngClass]="{
-    hide__container: hideContainer
-  }"
->
-  <div class="page__title" *ngIf="!hideTitle">
-    บันทึกข้อมูลการกล่าวหา/กล่าวโทษ
-  </div>
-  <img src="" />
-
-  <div class="box-container" [ngClass]="{ hide__box: hideBox }">
-    <ksp-request-header-info
-      [requestDate]="'10 ตุลาคม 2565'"
-      [requestNumber]="'112234467876543'"
-    ></ksp-request-header-info>
-
-    <hr />
-
-    <div class="table__title">
-      <div>ข้อมูลผู้กล่าวหา/กล่าวโทษ</div>
-      <div class="add__list">+ เพิ่มรายการ</div>
-    </div>
-    <div class="table__container">
-      <div class="table-responsive">
-        <table class="table">
-          <thead class="header__table">
-            <tr>
-              <th scope="col">ลำดับ</th>
-              <th scope="col">หมายเลขบัตรประชาชน</th>
-              <th scope="col">ชื่อ</th>
-              <th scope="col">นามสกุล</th>
-              <th scope="col">เบอร์โทรศัพท์</th>
-              <th scope="col">แก้ไข</th>
-              <th scope="col">ลบ</th>
-            </tr>
-          </thead>
-          <tbody class="body__table">
-            <tr>
-              <th>1</th>
-              <th>x-xxxx-xxxx-xx-x</th>
-              <th>xxxxxx</th>
-              <th>yyyyyy</th>
-              <th>098-xxx-xxxx</th>
-              <th><mat-icon class="edit">edit</mat-icon></th>
-              <th><mat-icon class="delete">delete</mat-icon></th>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
+<form [formGroup]="form">
   <div
-    class="box-container"
+    class="main-container"
     [ngClass]="{
-      hide__box: hideBox
+      hide__container: hideContainer
     }"
   >
-    <div class="table__title">ข้อมูลผู้ถูกกล่าวหา/กล่าวโทษ</div>
-    <button
-      id="btn-search"
-      (click)="openSearchDialog()"
-      type="button"
-      class="btn btn-primary"
-    >
-      ค้นหา/เปลี่ยนแปลง ข้อมูลผู้มีใบอนุญาต
-    </button>
+    <div class="page__title" *ngIf="!hideTitle">
+      บันทึกข้อมูลการกล่าวหา/กล่าวโทษ
+    </div>
 
-    <div class="tab__container">
-      <mat-tab-group class="tab-group">
-        <mat-tab label="ข้อมูลผู้มีใบอนุญาต" class="tab-content"
-          ><e-service-person-info></e-service-person-info>
-        </mat-tab>
+    <div class="box-container" [ngClass]="{ hide__box: hideBox }">
+      <ksp-request-header-info
+        [requestDate]="'10 ตุลาคม 2565'"
+        [requestNumber]="'112234467876543'"
+      ></ksp-request-header-info>
 
-        <mat-tab label="ข้อมูลใบอนุญาต">
-          <div class="header">
-            ข้อมูลใบอนุญาตประกอบวิชาชีพทางการศึกษา (ยังไม่หมดอายุ)
+      <hr />
+
+      <div class="table__title">
+        ข้อมูลผู้กล่าวหา/กล่าวโทษ
+        <div class="add__list">+ เพิ่มรายการ</div>
+      </div>
+      <div class="table__container">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="header__table">
+              <tr>
+                <th scope="col">ลำดับ</th>
+                <th scope="col">หมายเลขบัตรประชาชน</th>
+                <th scope="col">ชื่อ</th>
+                <th scope="col">นามสกุล</th>
+                <th scope="col">เบอร์โทรศัพท์</th>
+                <th scope="col">แก้ไข</th>
+                <th scope="col">ลบ</th>
+              </tr>
+            </thead>
+            <tbody class="body__table">
+              <tr>
+                <th>1</th>
+                <th>x-xxxx-xxxx-xx-x</th>
+                <th>xxxxxx</th>
+                <th>yyyyyy</th>
+                <th>098-xxx-xxxx</th>
+                <th><mat-icon class="edit">edit</mat-icon></th>
+                <th><mat-icon class="delete">delete</mat-icon></th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <hr />
+
+      <div class="table__title">ข้อมูลผู้ถูกกล่าวหา/กล่าวโทษ</div>
+      <button
+        id="btn-search"
+        (click)="openSearchDialog()"
+        type="button"
+        class="btn btn-primary"
+      >
+        ค้นหา/เปลี่ยนแปลง ข้อมูลผู้มีใบอนุญาต
+      </button>
+
+      <div class="tab__container">
+        <mat-tab-group class="tab-group">
+          <mat-tab label="ข้อมูลผู้มีใบอนุญาต" class="tab-content"
+            ><e-service-person-info></e-service-person-info>
+          </mat-tab>
+
+          <mat-tab label="ข้อมูลใบอนุญาต">
+            <div class="header">
+              ข้อมูลใบอนุญาตประกอบวิชาชีพทางการศึกษา (ยังไม่หมดอายุ)
+            </div>
+            <ksp-license-type-button-group
+              [groups]="license"
+            ></ksp-license-type-button-group>
+            <ksp-license-info></ksp-license-info>
+          </mat-tab>
+
+          <mat-tab label="ที่อยู่">
+            <e-service-address-info></e-service-address-info>
+          </mat-tab>
+
+          <mat-tab label="สถานที่ทำงาน">
+            <e-service-workplace-info></e-service-workplace-info>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+
+      <hr />
+
+      <div class="table__title">รายละเอียดการกล่าวหา/กล่าวโทษ</div>
+
+      <div class="form__container">
+        <div class="content__container">
+          <div class="mb-3">
+            <label class="form-label">หมายเลขคดีดำ</label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="blackNumber"
+            />
           </div>
-          <ksp-license-type-button-group
-            [groups]="license"
-          ></ksp-license-type-button-group>
-          <ksp-license-info></ksp-license-info>
-        </mat-tab>
+          <div class="mb-3">
+            <label class="form-label">ประพฤติผิดจรรยาบรรณต่อ</label>
+            <select class="form-select" formControlName="misconductEthic">
+              <option selected>กรุณาเลือก</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+        </div>
 
-        <mat-tab label="ที่อยู่">
-          <e-service-address-info></e-service-address-info>
-        </mat-tab>
+        <div class="content__container">
+          <div class="mb-3">
+            <label class="form-label">วันที่เกิดเหตุ</label>
+            <input
+              class="form-control"
+              type="date"
+              formControlName="incidentDate"
+            />
+          </div>
+        </div>
 
-        <mat-tab label="สถานที่ทำงาน">
-          <e-service-workplace-info></e-service-workplace-info>
-        </mat-tab>
-      </mat-tab-group>
+        <div class="mb-3">
+          <label class="form-label">สถานที่เกิดเหตุ </label>
+          <textarea
+            class="form-control"
+            type="text"
+            rows="3"
+            formControlName="incidentAddress"
+          >
+          </textarea>
+        </div>
+
+        <div class="content__container">
+          <div class="mb-3">
+            <label class="form-label">ประเภทของการกล่าวโทษ/ข้อกล่าวโทษ</label>
+            <select class="form-select" formControlName="incidentType">
+              <option selected>กรุณาเลือก</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">ประเด็นตั้งข้อกล่าวหา/กล่าวโทษ</label>
+          <textarea
+            class="form-control"
+            type="text"
+            rows="3"
+            formControlName="accuseSubject"
+          >
+          </textarea>
+        </div>
+
+        <div class="content__container">
+          <div class="mb-3">
+            <label class="form-label"
+              >วันที่วินิจฉัยชี้ขาด/วันที่ออกคำสั่ง</label
+            >
+            <input
+              class="form-control"
+              type="date"
+              formControlName="orderDate"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">รายละเอียด/หมายเหตุ</label>
+          <textarea
+            class="form-control"
+            type="text"
+            rows="3"
+            formControlName="detail"
+          >
+          </textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">ลักษณะการลงโทษ</label>
+          <textarea
+            class="form-control"
+            type="text"
+            rows="3"
+            formControlName="punishType"
+          >
+          </textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">เนื่องจากกระทำความผิด</label>
+          <textarea
+            class="form-control"
+            type="text"
+            rows="3"
+            formControlName="offend"
+          >
+          </textarea>
+        </div>
+
+        <div class="content__container">
+          <div class="mb-3">
+            <label class="form-label">เจ้าหน้าที่ได้รับมอบงาน</label>
+            <select class="form-select" formControlName="assignStaff">
+              <option selected>กรุณาเลือก</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">วันที่รับมอบ</label>
+            <input
+              class="form-control"
+              type="date"
+              formControlName="assignDate"
+            />
+          </div>
+        </div>
+      </div>
+
+      <ksp-form-attachment
+        [groups]="accusationFiles"
+        [title]="'กรุณาแนบหลักฐาน'"
+      ></ksp-form-attachment>
     </div>
-
-    <hr />
-
-    <div class="form-header">รายละเอียดการกล่าวหา/กล่าวโทษ</div>
-
-    <div class="form__container">
-      <div class="content__container">
-        <div class="mb-3">
-          <label class="form-label">หมายเลขคดีดำ</label>
-          <input class="form-control form-control-sm" type="text" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label">ประพฤติผิดจรรยาบรรณต่อ</label>
-          <select class="form-select form-select-sm">
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="content__container">
-        <div class="mb-3">
-          <label class="form-label">วันที่เกิดเหตุ</label>
-          <input class="form-control form-control-sm" type="date" />
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label">สถานที่เกิดเหตุ </label>
-        <textarea class="form-control form-control-sm" type="text" rows="4">
-        </textarea>
-      </div>
-
-      <div class="content__container">
-        <div class="mb-3">
-          <label class="form-label">ประเภทของการกล่าวโทษ/ข้อกล่าวโทษ</label>
-          <select class="form-select form-select-sm">
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label">ประเด็นตั้งข้อกล่าวหา/กล่าวโทษ</label>
-        <textarea class="form-control form-control-sm" type="text" rows="4">
-        </textarea>
-      </div>
-
-      <div class="content__container">
-        <div class="mb-3">
-          <label class="form-label">วันที่วินิจฉัยชี้ขาด/วันที่ออกคำสั่ง</label>
-          <input class="form-control form-control-sm" type="date" />
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label">รายละเอียด/หมายเหตุ</label>
-        <textarea class="form-control form-control-sm" type="text" rows="4">
-        </textarea>
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label">ลักษณะการลงโทษ</label>
-        <textarea class="form-control form-control-sm" type="text" rows="4">
-        </textarea>
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label">เนื่องจากกระทำความผิด</label>
-        <textarea class="form-control form-control-sm" type="text" rows="4">
-        </textarea>
-      </div>
-
-      <div class="content__container">
-        <div class="mb-3">
-          <label class="form-label">เจ้าหน้าที่ได้รับมอบงาน</label>
-          <select class="form-select form-select-sm">
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">วันที่รับมอบ</label>
-          <input class="form-control form-control-sm" type="date" />
-        </div>
-      </div>
-    </div>
-
-    <ksp-form-attachment
-      [groups]="accusationFiles"
-      [title]="'กรุณาแนบหลักฐาน'"
-    ></ksp-form-attachment>
   </div>
-</div>
-
-<ksp-bottom-nav
-  *ngIf="!hideAllButtons"
-  class="fixed-bottom border"
-  [showCenterButtons]="true"
-  [isFirstPage]="true"
-  [showSaveButton]="true"
-  [showCancelButton]="true"
-  [colorMode]="'green'"
-  (nextClicked)="next()"
-  (cancelClicked)="cancel()"
-></ksp-bottom-nav>
+</form>
