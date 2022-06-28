@@ -16,24 +16,30 @@
         <img src="/assets/images/img-uni/stepper.png" />
       </div>
 
-      <div class="m-2">
-        <ksp-university-select [mode]="'view'"></ksp-university-select>
+      <div class="mb-3">
+        <ksp-university-select
+          [mode]="'view'"
+          [label1]="'สังกัด'"
+          [label2]="'โรงเรียน / สถานศึกษา'"
+        ></ksp-university-select>
       </div>
 
       <div class="d-flex">
-        <div class="fs-4 text-primary ps-5">รหัสเข้าใช้งาน (รหัสโรงเรียน)</div>
+        <div class="fs-4 text-primary ps-4">รหัสเข้าใช้งาน (รหัสโรงเรียน)</div>
         <div class="fs-4 ms-2">คือ xxxx</div>
       </div>
 
-      <div class="bg-light fs-5 text-primary px-4 pt-2 pb-3 m-2">
-        ข้อมูลผู้แต่งตั้งผู้ประสานงาน / ผู้รับผิดชอบ (ที่ระบุไว้ในเอกสารแนบ)
+      <div class="bg-light px-4 pt-3 pb-3">
+        <div class="text-primary fs-5">
+          ข้อมูลผู้แต่งตั้งผู้ประสานงาน / ผู้รับผิดชอบ (ที่ระบุไว้ในเอกสารแนบ)
+        </div>
 
         <ksp-form-coordinator-info
           formControlName="coordinator"
         ></ksp-form-coordinator-info>
       </div>
 
-      <div class="mx-2 my-3">
+      <div class="my-3">
         <ksp-form-attachment
           [title]="'กรุณาแนบหลักฐานเพื่อการพิจารณา'"
           [groups]="uploadFileList"

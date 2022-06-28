@@ -42,7 +42,7 @@ export const grants = [
   { label: 'ยื่นแบบคำขอหนังสือรับรองคุณวุฒิ', name: 'grant2', value: false },
   {
     label:
-      'ยื่นแบบคำขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School OneInnovation : OSOI) ',
+      'ยื่นแบบคำขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One Innovation : OSOI) ',
     name: 'grant3',
     value: false,
   },
