@@ -8,6 +8,7 @@ import { MatTableModule } from '@angular/material/table';
 import { ManageCurrentUserListComponent } from './user-list/manage-current-user-list.component';
 import { MatIconModule } from '@angular/material/icon';
 import { TopNavComponent } from '@ksp/shared/menu';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export const routes: Routes = [
   {
@@ -39,6 +40,7 @@ export const routes: Routes = [
     MatIconModule,
     TopNavComponent,
     RouterModule.forChild(routes),
+    ReactiveFormsModule,
   ],
   declarations: [ManageCurrentUserListComponent],
 })

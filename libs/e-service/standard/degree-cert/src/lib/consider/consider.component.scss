@@ -1,11 +1,10 @@
 .container {
   max-width: 100%;
-  padding-bottom: 70px;
   background-color: #e5e5e5;
+  padding: 24px;
 }
 
 .check__form {
-  margin: 25px 20px 0 20px;
   background: #ffffff;
   border-radius: 5px;
   padding: 24px;
@@ -14,14 +13,12 @@
 .title__label {
   font-size: 22px;
   color: #000000;
-  margin: 5px 20px;
 }
 
 .content__container {
   background: #ffffff;
   border-radius: 5px;
   padding: 10px 20px;
-  margin: 0px 20px;
 }
 
 .detail__header {

@@ -22,7 +22,7 @@
       [animationDuration]="'0'"
       #stepper
     >
-      <mat-step>
+      <mat-step [completed]="false">
         <ng-template matStepLabel>ข้อมูลพื้นฐาน</ng-template>
         <ksp-degree-cert-step-one
           [mode]="'view'"
@@ -37,7 +37,7 @@
         </div>
       </mat-step>
 
-      <mat-step>
+      <mat-step [completed]="false">
         <ng-template matStepLabel>ด้านหลักสูตร</ng-template>
         <ksp-degree-cert-step-two
           (tabIndexChanged)="({})"
@@ -53,9 +53,9 @@
         </div>
       </mat-step>
 
-      <mat-step>
+      <mat-step [completed]="false">
         <ng-template matStepLabel>ด้านกระบวนการผลิต</ng-template>
-        <ksp-degree-cert-step-3></ksp-degree-cert-step-3>
+        <ksp-degree-cert-step-3 [mode]="'view'"></ksp-degree-cert-step-3>
         <br />
         <hr />
         <br />
@@ -64,7 +64,7 @@
         </div>
       </mat-step>
 
-      <mat-step>
+      <mat-step [completed]="false">
         <ng-template matStepLabel>เอกสารแนบ</ng-template>
         <ksp-degree-cert-step-four mode="view"></ksp-degree-cert-step-four>
         <br />
@@ -75,7 +75,7 @@
         </div>
       </mat-step>
 
-      <mat-step>
+      <mat-step [completed]="false">
         <ng-template matStepLabel>ตรวจสอบและยื่นคำขอ</ng-template>
         <div class="result__container">
           <e-service-verify-result
@@ -93,16 +93,16 @@
       </mat-step>
     </mat-stepper>
   </div>
+</div>
 
-  <div class="sticky-bottom border">
-    <ksp-bottom-nav
-      [isLastPage]="true"
-      [isFirstPage]="true"
-      [showCenterButtons]="true"
-      [showSaveButton]="true"
-      [showCancelButton]="true"
-      (saveClicked)="save()"
-      (cancelClicked)="cancel()"
-    ></ksp-bottom-nav>
-  </div>
+<div class="sticky-bottom border">
+  <ksp-bottom-nav
+    [isLastPage]="true"
+    [isFirstPage]="true"
+    [showCenterButtons]="true"
+    [showSaveButton]="true"
+    [showCancelButton]="true"
+    (saveClicked)="save()"
+    (cancelClicked)="cancel()"
+  ></ksp-bottom-nav>
 </div>

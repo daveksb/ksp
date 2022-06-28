@@ -15,4 +15,5 @@ export class LicenseCheckComponent {
     'ไม่ครบถ้วน และไม่ถูกต้อง',
   ];
   @Input() headerTitle = 'ผลการตรวจสอบ';
+  @Input() isHasReason = true;
 }
