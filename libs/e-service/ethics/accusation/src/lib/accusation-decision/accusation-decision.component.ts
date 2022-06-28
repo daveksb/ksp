@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -12,7 +13,18 @@ import {
   styleUrls: ['./accusation-decision.component.scss'],
 })
 export class AccusationDecisionComponent {
-  constructor(private router: Router, public dialog: MatDialog) {}
+  decisions = decisions;
+
+  form = this.fb.group({
+    decisions: [],
+    otherDetail: [],
+  });
+
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private fb: FormBuilder
+  ) {}
 
   @Input() hideAllButtons = false;
 
@@ -59,3 +71,35 @@ export class AccusationDecisionComponent {
     });
   }
 }
+
+export const decisions = [
+  {
+    label: 'รับเรื่องพิจารณา และดำเนินการขั้นต่อไป',
+    value: 1,
+  },
+  {
+    label: 'ไม่รับเรื่องพิจารณาและจำหน่ายออก เนื่องจากอายุความเกิน 1 ปี',
+    value: 2,
+  },
+  {
+    label: 'ยุติเรื่องกรณีไม่มีใบอนุญาต',
+    value: 3,
+  },
+  {
+    label: 'บัตรสนเทห์',
+    value: 4,
+  },
+  {
+    label: 'หนังสือร้องเรียนขาดสาระสำคัญ',
+    value: 5,
+  },
+  {
+    label:
+      'เหตุเกิดก่อนข้อบังคับคุรุสภาว่าด้วยมาตรฐานวิชาชีพและจรรยาบรรณวิชาชีพ พ.ศ.2548',
+    value: 6,
+  },
+  {
+    label: 'อื่นๆ (ระบุด้วยตนเอง)',
+    value: 7,
+  },
+];

@@ -13,6 +13,7 @@ import { InquiryDetailComponent } from './inquiry-detail/inquiry-detail.componen
 import { InquiryResultComponent } from './inquiry-result/inquiry-result.component';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export const routes: Routes = [
   {
@@ -48,6 +49,7 @@ export const routes: Routes = [
     InquiryDetailComponent,
     InquiryResultComponent,
     TopNavComponent,
+    ReactiveFormsModule,
   ],
   declarations: [InquiryMainComponent],
   exports: [InquiryMainComponent],

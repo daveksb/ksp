@@ -4,22 +4,27 @@
   <div class="fs-4">รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ</div>
 
   <div class="bg-white p-3 mt-2">
-    <ksp-request-header-info
+    <div class="fs-5">ค้นหาหน่วยงาน / สถานศึกษา</div>
+    <hr />
+    <!--  <ksp-request-header-info
       [requestDate]="'10 ตุลาคม 2565'"
       [requestNumber]="'112234467876543'"
     ></ksp-request-header-info>
 
-    <hr />
+    <hr /> -->
 
     <div [formGroup]="form">
       <ksp-university-select
+        [label1]="'สังกัด'"
+        [label2]="'โรงเรียน / สถานศึกษา'"
         formControlName="selectUniversity"
       ></ksp-university-select>
     </div>
 
-    <div class="bg-light p-3 mt-5">
+    <div class="bg-white p-3 mt-3">
       <div class="fs-5 text-danger">
-        พบข้อมูลผู้ประสานงานที่ได้รับรหัสเข้าใช้งานในระบบ
+        โรงเรียน/หน่วยงานของท่านได้สมัครสมาชิกแล้ว
+        ท่านต้องการสมัครสมาชิกใหม่หรือไม่
       </div>
       <div class="fs-5 ms-5">
         หากท่านทำการยื่นขอรับรหัสเข้าใช้งานใหม่
@@ -27,7 +32,7 @@
       </div>
     </div>
 
-    <div class="bg-light p-3 mt-4 mb-2">
+    <div class="bg-light p-3 mt-1 mb-2">
       <div class="text-primary fs-5 mb-1">ผลการค้นหา</div>
       <div class="table-responsive">
         <table class="table">

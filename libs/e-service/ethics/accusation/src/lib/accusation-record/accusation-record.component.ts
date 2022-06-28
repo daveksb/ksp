@@ -14,6 +14,9 @@ import {
   RequestHeaderInfoComponent,
 } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { providerFactory } from '@ksp/shared/utility';
 
 @Component({
   selector: 'e-service-ethic-accusation-record',
@@ -31,16 +34,46 @@ import { TopNavComponent } from '@ksp/shared/menu';
     TopNavComponent,
     LicenseTypeButtonGroupComponent,
     LicenseInfoComponent,
+    ReactiveFormsModule,
   ],
+  providers: providerFactory(AccusationRecordComponent),
 })
-export class AccusationRecordComponent implements OnInit {
+export class AccusationRecordComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
   accusationFiles = ['เอกสารกล่าวหา/กล่าวโทษ', 'สำเนาบัตรประชาชน'];
 
+  override form = this.fb.group({
+    blackNumber: [],
+    misconductEthic: [],
+    incidentDate: [],
+    incidentAddress: [],
+    incidentType: [],
+    accuseSubject: [],
+    orderDate: [],
+    detail: [],
+    punishType: [],
+    offend: [],
+    assignStaff: [],
+    assignDate: [],
+  });
+
   constructor(
-    private router: Router,
     public dialog: MatDialog,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private fb: FormBuilder
+  ) {
+    super();
+    this.subscriptions.push(
+      // any time the inner form changes update the parent of any change
+      this.form?.valueChanges.subscribe((value) => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
+  }
+
   license = [
     'ใบอนุญาตประกอบวิชาชีพ - ครู',
     'ใบอนุญาตประกอบวิชาชีพ - ผู้บริหารสถานศึกษา',
@@ -58,25 +91,16 @@ export class AccusationRecordComponent implements OnInit {
       //console.log('res2 = ', res);
     });
   }
-
-  next() {
-    this.router.navigate(['/', 'accusation', 'decision']);
-  }
-
-  cancel() {
-    this.router.navigate(['/', 'accusation']);
-  }
-
   openSearchDialog() {
     this.dialog.open(AccusationSearchComponent, {
       height: '750px',
       width: '1250px',
     });
+  }
 
-    /* dialog.componentInstance.confirmed.subscribe((res) => {
+  /* dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         this.onCompleted();
       }
     }); */
-  }
 }

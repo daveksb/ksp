@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -12,7 +13,15 @@ import {
   styleUrls: ['./publish-review.component.scss'],
 })
 export class PublishReviewComponent {
-  constructor(public router: Router, public dialog: MatDialog) {}
+  form = this.fb.group({
+    publish: [],
+  });
+
+  constructor(
+    public router: Router,
+    public dialog: MatDialog,
+    private fb: FormBuilder
+  ) {}
 
   cancel() {
     this.router.navigate(['/', 'publish', 'list']);

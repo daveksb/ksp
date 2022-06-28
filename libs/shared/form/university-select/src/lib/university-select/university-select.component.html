@@ -1,9 +1,9 @@
 <form [formGroup]="form">
   <div class="bg-light px-4 py-3">
-    <div class="text-primary fs-4">กรุณาเลือกสถาบันที่ท่านสังกัด</div>
+    <div class="text-primary fs-5">กรุณาเลือกสถาบันที่ท่านสังกัด</div>
     <div class="row">
       <div class="col">
-        <label class="form-label">สถาบัน / มหาวิทยาลัย</label>
+        <label class="form-label">{{ label1 }}</label>
         <input
           formControlName="institution"
           (click)="search()"
@@ -13,7 +13,7 @@
         />
       </div>
       <div class="col">
-        <label class="form-label">สังกัด</label>
+        <label class="form-label">{{ label2 }}</label>
         <input
           formControlName="affiliation"
           (click)="search()"

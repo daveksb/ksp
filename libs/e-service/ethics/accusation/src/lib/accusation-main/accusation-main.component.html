@@ -1,0 +1,24 @@
+<ksp-top-nav>
+  <span subHeader>ระบบงานจรรยาบรรณ </span>
+</ksp-top-nav>
+
+<form [formGroup]="form">
+  <div class="main__container">
+    <div class="tab__container">
+      <e-service-ethic-accusation-record
+        formControlName="accusation"
+      ></e-service-ethic-accusation-record>
+    </div>
+
+    <div class="sticky-bottom border">
+      <ksp-bottom-nav
+        [showCenterButtons]="true"
+        [isFirstPage]="true"
+        [showSaveButton]="true"
+        [colorMode]="'green'"
+        (nextClicked)="next()"
+        (cancelClicked)="cancel()"
+      ></ksp-bottom-nav>
+    </div>
+  </div>
+</form>

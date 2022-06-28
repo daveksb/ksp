@@ -4,7 +4,7 @@ import { AccusationSearchComponent } from '@ksp/e-service/dialog/accusation-sear
 import { ListPageComponent } from '@ksp/e-service/ethics/list-page';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { AccusationDecisionComponent } from './accusation-decision/accusation-decision.component';
-import { AccusationRecordComponent } from './accusation-record/accusation-record.component';
+import { AccusationMainComponent } from './accusation-main/accusation-main.component';
 
 export const routes: Routes = [
   {
@@ -22,7 +22,7 @@ export const routes: Routes = [
       {
         data: { subHeader: 'bbb' },
         path: 'detail',
-        component: AccusationRecordComponent,
+        component: AccusationMainComponent,
       },
       {
         data: { subHeader: 'aaa' },

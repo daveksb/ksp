@@ -1,65 +1,65 @@
 <ksp-top-nav><span subHeader>ระบบงานจรรยาบรรณ </span></ksp-top-nav>
 
-<div class="container">
-  <div class="header">ตรวจสอบและเผยแพร่คำวินิจฉัยชี้ขาด</div>
-  <div class="checkbox__container">
-    <div class="checkbox__content">
-      <input class="checkbox" type="checkbox" />
-      <label class="checkbox__label">เผยแพร่คำวินิจฉัย</label>
-    </div>
-    <div class="checkbox__content">
-      <input class="checkbox" type="checkbox" />
-      <label class="checkbox__label">ไม่เผยแพร่คำวินิจฉัย</label>
+<form [formGroup]="form">
+  <div class="container">
+    <div class="header">ตรวจสอบและเผยแพร่คำวินิจฉัยชี้ขาด</div>
+    <div class="checkbox__container">
+      <div class="checkbox__content">
+        <input class="radio" type="radio" value="1" formControlName="publish" />
+        <label class="checkbox__label">เผยแพร่คำวินิจฉัย</label>
+      </div>
+      <div class="checkbox__content">
+        <input class="radio" type="radio" value="2" formControlName="publish" />
+        <label class="checkbox__label">ไม่เผยแพร่คำวินิจฉัย</label>
+      </div>
+
+      <div class="button__group">
+        <button (click)="cancel()" class="btn btn-outline-success">
+          ยกเลิก
+        </button>
+        <button (click)="save()" id="btn-save" class="btn btn-success">
+          บันทึก
+        </button>
+      </div>
     </div>
 
-    <div class="button__group">
-      <button (click)="cancel()" class="btn btn-outline-success">ยกเลิก</button>
-      <button (click)="save()" id="btn-save" class="btn btn-success">
-        บันทึก
-      </button>
+    <div class="tab__container">
+      <mat-tab-group
+        class="tab-group"
+        animationDuration="0ms"
+        dynamicHeight="true"
+      >
+        <mat-tab label="สอบสวน" class="tab-content">
+          <e-service-inquiry-detail
+            [hideContainer]="true"
+            [mode]="'view'"
+          ></e-service-inquiry-detail>
+        </mat-tab>
+
+        <mat-tab label="แจ้งผลคำวินิจฉัย">
+          <e-service-inquiry-result
+            [hideContainer]="true"
+            [mode]="'view'"
+          ></e-service-inquiry-result>
+        </mat-tab>
+
+        <mat-tab label="บันทึกการกล่าวหา/กล่าวโทษ">
+          <e-service-ethic-accusation-record
+            [hideAllButtons]="true"
+            [hideBox]="true"
+            [hideContainer]="true"
+            [hideTitle]="true"
+            [mode]="'view'"
+          ></e-service-ethic-accusation-record>
+        </mat-tab>
+
+        <mat-tab label="สืบสวนข้อเท็จจริง">
+          <e-service-investigation-detail
+            [hideContainer]="true"
+            [mode]="'view'"
+          ></e-service-investigation-detail>
+        </mat-tab>
+      </mat-tab-group>
     </div>
   </div>
-
-  <div class="tab__container">
-    <mat-tab-group
-      class="tab-group"
-      animationDuration="0ms"
-      dynamicHeight="true"
-    >
-      <mat-tab label="สอบสวน" class="tab-content">
-        <e-service-inquiry-detail
-          [hideContainer]="true"
-        ></e-service-inquiry-detail>
-      </mat-tab>
-
-      <mat-tab label="แจ้งผลคำวินิจฉัย">
-        <e-service-inquiry-result></e-service-inquiry-result>
-      </mat-tab>
-
-      <mat-tab label="บันทึกการกล่าวหา/กล่าวโทษ">
-        <e-service-ethic-accusation-record
-          [hideAllButtons]="true"
-          [hideBox]="true"
-          [hideContainer]="true"
-        ></e-service-ethic-accusation-record>
-      </mat-tab>
-
-      <mat-tab label="สืบสวนข้อเท็จจริง">
-        <e-service-investigation-detail
-          [hideContainer]="true"
-        ></e-service-investigation-detail>
-      </mat-tab>
-    </mat-tab-group>
-  </div>
-</div>
-
-<!-- <div class="bottom__container">
-  <ksp-bottom-nav
-    [showCenterButtons]="true"
-    [isFirstPage]="true"
-    [isLastPage]="true"
-    [showSaveButton]="true"
-    (saveClicked)="save()"
-    (cancelClicked)="cancel()"
-  ></ksp-bottom-nav>
-</div> -->
+</form>

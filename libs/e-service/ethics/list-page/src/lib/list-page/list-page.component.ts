@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EthicsMode } from '@ksp/shared/interface';
@@ -15,7 +16,15 @@ export class ListPageComponent implements OnInit {
   dataSource = new MatTableDataSource<AccusationList>();
   displayedColumns: string[] = columns;
 
-  constructor(public router: Router, private route: ActivatedRoute) {}
+  form = this.fb.group({
+    ethicSearch: [],
+  });
+
+  constructor(
+    public router: Router,
+    private route: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.route.data.subscribe((res) => {
