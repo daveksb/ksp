@@ -1,9 +1,10 @@
 <form [formGroup]="form">
-  <div class="tab__container">
-    <div class="group__container group__container--blue">
-      <div class="group__header">ข้อมูลสถาบัน</div>
-      <div class="row row--half">
-        <div>
+  <div class="bg-white px-2 py-2" style="max-width: 1200px">
+    <div class="bg-light px-3 py-2">
+      <div class="fs-5">ข้อมูลสถาบัน</div>
+
+      <div class="row mb-3">
+        <div class="col">
           <label class="form-label">กลุ่มสถาบัน</label>
           <select
             class="search__content form-select"
@@ -15,7 +16,7 @@
             <option value="3">Three</option>
           </select>
         </div>
-        <div>
+        <div class="col">
           <label class="form-label">รหัสสถาบัน</label>
           <select
             class="search__content form-select"
@@ -28,8 +29,9 @@
           </select>
         </div>
       </div>
-      <div class="row row--half">
-        <div>
+
+      <div class="row mb-3">
+        <div class="col">
           <label class="form-label">สถาบัน / มหาลัย</label>
           <input
             class="form-control"
@@ -39,7 +41,7 @@
           />
         </div>
 
-        <div>
+        <div class="col">
           <label class="form-label">จังหวัด</label>
           <select
             class="search__content form-select"
@@ -61,16 +63,16 @@
       [mode]="mode"
     ></ksp-degree-info>
 
-    <div class="group__container">
-      <div class="group__header">การจัดการหลักสูตร หรือลักษณะหลักสูตร</div>
-      <div class="row row--1">
-        <div>
-          <label class="form-label"
-            >กรุณาเลือกประเภทการจัดการหลักสูตร หรือลักษณะหลักสูตร<span
-              class="warn__text"
-              >*เลือกข้อมูลของท่านได้เพียง 1 ข้อเท่านั้น</span
-            ></label
-          >
+    <div class="bg-light px-3 pt-2">
+      <div class="fs-5">การจัดการหลักสูตร หรือลักษณะหลักสูตร</div>
+      <div class="row mb-3">
+        <label class="form-label"
+          >กรุณาเลือกประเภทการจัดการหลักสูตร หรือลักษณะหลักสูตร<span
+            class="warn__text"
+            >*เลือกข้อมูลของท่านได้เพียง 1 ข้อเท่านั้น</span
+          ></label
+        >
+        <div class="col-7">
           <select
             formControlName="courseType"
             class="search__content form-select"
@@ -81,20 +83,19 @@
           </select>
         </div>
       </div>
-      <div class="row row--full">
+      <div class="row mb-3">
         <ng-template kspDynamicComponent></ng-template>
       </div>
     </div>
 
-    <div class="group__container">
-      <div class="group__header">สถานที่ที่เปิดสอน</div>
-
+    <div class="bg-light px-3 py-2 mt-3">
+      <div class="fs-5">สถานที่ที่เปิดสอน</div>
       <ng-container formArrayName="locations">
         <ng-container
           *ngFor="let locationForm of locations.controls; let i = index"
         >
-          <div class="row row--ternary" [formGroupName]="i">
-            <div>
+          <div class="row mb-2" [formGroupName]="i">
+            <div class="col-11">
               <label class="form-label">สถานที่เปิดสอน {{ i + 1 }} </label>
               <input
                 class="form-control"
@@ -103,28 +104,34 @@
                 formControlName="title"
               />
             </div>
-            <mat-icon *ngIf="i > 0" (click)="deleteFormArray(locations, i)">
-              delete_outline</mat-icon
-            >
+            <div class="col-1 d-flex align-items-end text-danger">
+              <mat-icon
+                role="button"
+                *ngIf="i > 0"
+                (click)="deleteFormArray(locations, i)"
+              >
+                delete_outline</mat-icon
+              >
+            </div>
           </div>
         </ng-container>
       </ng-container>
-
       <ksp-add-row-button
         (addClick)="addFormArray(locations)"
         *ngIf="mode === 'edit'"
         >เพิ่มสถานที่เปิดสอน</ksp-add-row-button
       >
     </div>
-    <div class="group__container">
-      <div class="group__header">หน่วยงานที่รับผิดชอบหลักสูตร</div>
+
+    <div class="bg-light px-3 py-2 mt-3">
+      <div class="fs-5">หน่วยงานที่รับผิดชอบหลักสูตร</div>
 
       <ng-container formArrayName="institutions">
         <ng-container
           *ngFor="let institutionForm of institutions.controls; let i = index"
         >
-          <div class="row row--ternary" [formGroupName]="i">
-            <div>
+          <div class="row mb-2" [formGroupName]="i">
+            <div class="col-11">
               <label class="form-label"
                 >ชื่อคณะ / หน่วยงานที่ {{ i + 1 }}
               </label>
@@ -135,9 +142,15 @@
                 formControlName="title"
               />
             </div>
-            <mat-icon *ngIf="i > 0" (click)="deleteFormArray(institutions, i)">
-              delete_outline</mat-icon
-            >
+            <div class="col-1 d-flex align-items-end text-danger">
+              <mat-icon
+                role="button"
+                *ngIf="i > 0"
+                (click)="deleteFormArray(institutions, i)"
+              >
+                delete_outline</mat-icon
+              >
+            </div>
           </div>
         </ng-container>
       </ng-container>
@@ -149,8 +162,8 @@
       </ksp-add-row-button>
     </div>
 
-    <div class="group__container">
-      <div class="group__header">
+    <div class="bg-light p-3 mt-3">
+      <div class="fs-5">
         สถานที่ที่ต้องประเมินสภาพจริง / ติดตามผลเชิงประจักษ์
       </div>
 
@@ -158,8 +171,8 @@
         <ng-container
           *ngFor="let locationForm2 of locations2.controls; let i = index"
         >
-          <div class="row row--ternary" [formGroupName]="i">
-            <div>
+          <div class="row mb-2" [formGroupName]="i">
+            <div class="col-11">
               <label class="form-label">สถานที่เปิดสอน {{ i + 1 }} </label>
               <input
                 class="form-control"
@@ -168,9 +181,15 @@
                 formControlName="title"
               />
             </div>
-            <mat-icon *ngIf="i > 0" (click)="deleteFormArray(locations2, i)">
-              delete_outline</mat-icon
-            >
+            <div class="col-1 d-flex align-items-end text-danger">
+              <mat-icon
+                role="button"
+                *ngIf="i > 0"
+                (click)="deleteFormArray(locations2, i)"
+              >
+                delete_outline</mat-icon
+              >
+            </div>
           </div>
         </ng-container>
       </ng-container>
