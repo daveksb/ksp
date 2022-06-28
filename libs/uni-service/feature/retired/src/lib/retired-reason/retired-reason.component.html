@@ -15,12 +15,15 @@
     <div class="bg-light px-3 pt-1 pb-3">
       <div class="fs-4 text-primary">สถาบันที่สังกัด</div>
 
-      <ng-container *ngFor="let org of organizations">
-        <div class="d-flex">
-          <div class="fs-5 text-secondary">{{ org.label }} :</div>
-          <div class="fs-5 ms-3">{{ org.value }}</div>
-        </div>
-      </ng-container>
+      <div class="d-flex">
+        <div class="fs-5 text-secondary">สถาบัน / มหาวิทยาลัย :</div>
+        <div class="fs-5 ms-3">{{ userInfo.university }}</div>
+      </div>
+
+      <div class="d-flex">
+        <div class="fs-5 text-secondary">สังกัด :</div>
+        <div class="fs-5 ms-3">{{ userInfo.organisation }}</div>
+      </div>
 
       <div class="fs-4 text-primary mt-3">
         ข้อมูลผู้ขอรหัสสำหรับเข้าใช้งานระบบ (ผู้ประสานงาน / ผู้รับผิดชอบ)
