@@ -11,7 +11,6 @@ const routes: Routes = [
   { path: 'login', component: UniServiceLoginComponent },
   {
     path: 'home',
-    /* data: { header: 'หน้าแรก' }, */
     component: UniServiceContainerPageComponent,
     children: [
       {
@@ -63,7 +62,6 @@ const routes: Routes = [
   },
   {
     path: 'foreign-id',
-
     component: UniServiceContainerPageComponent,
     children: [
       {
@@ -80,7 +78,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true, paramsInheritanceStrategy: 'always' })],
+  imports: [
+    RouterModule.forRoot(routes, {
+      useHash: true,
+      paramsInheritanceStrategy: 'always',
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

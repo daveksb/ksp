@@ -11,6 +11,11 @@ const routes: Routes = [
     component: UniServiceContainerPageComponent,
     children: [
       {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'course-search',
+      },
+      {
         path: 'course-search',
         component: CourseSearchComponent,
       },
