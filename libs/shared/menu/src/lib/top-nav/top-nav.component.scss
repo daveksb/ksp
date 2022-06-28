@@ -2,7 +2,7 @@
   padding: 15px 5px;
   /* background-image: url(/assets/images/header-sidebar.png);
   background-size: cover; */
-  height: 58px;
+  height: var(--ksp-top-nav-height);
   width: 100%;
 }
 

@@ -1,61 +1,60 @@
 <ksp-top-nav><span header>หน้าแรก </span></ksp-top-nav>
-<form [formGroup]="form">
-  <div class="main-container">
-    <ksp-degree-search-form>
+
+<div
+  class="bg-secondary bg-opacity-10 px-4 py-3"
+  [style.height]="'calc(100vh - var(--ksp-top-nav-height))'"
+>
+  <div class="bg-white p-3" style="max-width: 1200px">
+    <ksp-degree-search-form (clear)="clear()" (search)="search()">
       <span class="fs-4"> ค้นหาข้อมูล/ หลักสูตรที่ต้องการ </span>
     </ksp-degree-search-form>
-
-    <div class="table__title">ข้อมูลรับรองปริญญาและประกาศนียบัตร</div>
-    <div class="bottom-container">
-      <div class="box__container">
-        <div class="table-responsive">
-          <table mat-table [dataSource]="dataSource">
-            <ng-container matColumnDef="order">
-              <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-              <td mat-cell *matCellDef="let element">{{ element.order }}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="degreeId">
-              <th mat-header-cell *matHeaderCellDef>รหัสปริญญา</th>
-              <td mat-cell *matCellDef="let element">{{ element.degreeId }}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="uniName">
-              <th mat-header-cell *matHeaderCellDef>รายชื่อมหาวิทยาลัย</th>
-              <td mat-cell *matCellDef="let element">{{ element.uniName }}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="course">
-              <th mat-header-cell *matHeaderCellDef>ชื่อหลักสูตร</th>
-              <td mat-cell *matCellDef="let element">{{ element.course }}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="major">
-              <th mat-header-cell *matHeaderCellDef>สาขาวิชา</th>
-              <td mat-cell *matCellDef="let element">{{ element.major }}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="degreeName">
-              <th mat-header-cell *matHeaderCellDef>ชื่อปริญญา</th>
-              <td mat-cell *matCellDef="let element">
-                {{ element.degreeName }}
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="educationLevel">
-              <th mat-header-cell *matHeaderCellDef>
-                ระดับการศึกษาที่ขอรับรอง
-              </th>
-              <td mat-cell *matCellDef="let element">
-                {{ element.educationLevel }}
-              </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-          </table>
-        </div>
-      </div>
-    </div>
   </div>
-</form>
+
+  <div class="fs-5 mt-2">ข้อมูลรับรองปริญญาและประกาศนียบัตร</div>
+
+  <div class="bg-white p-3">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="order">
+        <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+        <td mat-cell *matCellDef="let element">{{ element.order }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="degreeId">
+        <th mat-header-cell *matHeaderCellDef>รหัสปริญญา</th>
+        <td mat-cell *matCellDef="let element">{{ element.degreeId }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="uniName">
+        <th mat-header-cell *matHeaderCellDef>รายชื่อมหาวิทยาลัย</th>
+        <td mat-cell *matCellDef="let element">{{ element.uniName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="course">
+        <th mat-header-cell *matHeaderCellDef>ชื่อหลักสูตร</th>
+        <td mat-cell *matCellDef="let element">{{ element.course }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="major">
+        <th mat-header-cell *matHeaderCellDef>สาขาวิชา</th>
+        <td mat-cell *matCellDef="let element">{{ element.major }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="degreeName">
+        <th mat-header-cell *matHeaderCellDef>ชื่อปริญญา</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.degreeName }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="educationLevel">
+        <th mat-header-cell *matHeaderCellDef>ระดับการศึกษาที่ขอรับรอง</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.educationLevel }}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>

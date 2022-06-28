@@ -3,7 +3,10 @@
   <span subHeader> ขอยื่นรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา </span>
 </ksp-top-nav>
 
-<div class="bg-secondary bg-opacity-10 px-4 py-3" style="height: 90vh">
+<div
+  class="bg-secondary bg-opacity-10 px-4 py-3"
+  [style.height]="'calc(100vh - var(--ksp-top-nav-height))'"
+>
   <div class="bg-white p-3" style="max-width: 1200px">
     <ksp-degree-search-form (clear)="clear()" (search)="search()">
       <span class="fs-4"> ค้นหา </span>

@@ -14,9 +14,11 @@ import {
   ListData,
 } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { debounceTime, skip } from 'rxjs';
 import { DegreeCertStepOneService } from './step-one.service';
 
+@UntilDestroy()
 @Component({
   selector: 'ksp-degree-cert-step-one',
   templateUrl: './step-one.component.html',
@@ -61,7 +63,7 @@ export class DegreeCertStepOneComponent
     super();
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
-      this.form?.valueChanges.subscribe((value) => {
+      this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
         this.onChange(value);
         this.onTouched();
       })
@@ -83,12 +85,14 @@ export class DegreeCertStepOneComponent
   }
 
   listenFormChange() {
-    this.form.valueChanges.pipe(debounceTime(750)).subscribe((res) => {
-      //console.log('form value = ', res);
-    });
+    this.form.valueChanges
+      .pipe(untilDestroyed(this), debounceTime(750))
+      .subscribe((res) => {
+        //console.log('form value = ', res);
+      });
 
     this.form.controls['courseType'].valueChanges
-      .pipe(skip(1))
+      .pipe(skip(1), untilDestroyed(this))
       .subscribe((res) => {
         this.loadComponent(Number(res));
       });

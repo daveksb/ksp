@@ -28,10 +28,10 @@ export class CourseDetailComponent implements OnInit {
   }
 
   goToImportStudent(type: number) {
-    this.router.navigate(['./', 'graduate-list', 'import-student', type]);
+    this.router.navigate(['/graduate', 'import-student', type]);
   }
 
   cancel() {
-    this.router.navigate(['./', 'graduate-list']);
+    this.router.navigate(['/graduate']);
   }
 }

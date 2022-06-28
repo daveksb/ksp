@@ -2,7 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'ksp-degree-info',
   templateUrl: './degree-info.component.html',
@@ -40,7 +42,7 @@ export class DegreeInfoComponent
     super();
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
-      this.form?.valueChanges.subscribe((value) => {
+      this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
         this.onChange(value);
         this.onTouched();
       })
@@ -48,10 +50,12 @@ export class DegreeInfoComponent
   }
 
   ngOnInit(): void {
-    this.form.controls['degreeType'].valueChanges.subscribe((res) => {
-      // it has 8 degree types and target with 2 form types
-      const degreeType = Number(res) < 4 ? 'a' : 'b';
-      this.degreeTypeChanged.emit(degreeType);
-    });
+    this.form.controls['degreeType'].valueChanges
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        // it has 8 degree types and target with 2 form types
+        const degreeType = Number(res) < 4 ? 'a' : 'b';
+        this.degreeTypeChanged.emit(degreeType);
+      });
   }
 }
