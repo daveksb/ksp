@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-
 import { ActivatedRoute, Router } from '@angular/router';
 import { UniserviceImportType } from '@ksp/shared/interface';
 import {
@@ -25,8 +24,6 @@ export class ImportStudentComponent implements OnInit {
   pageType!: UniserviceImportType;
   importType = UniserviceImportType;
   foundUser = false;
-
-  
 
   headers = [
     [

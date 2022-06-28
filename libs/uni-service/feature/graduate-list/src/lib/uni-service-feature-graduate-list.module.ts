@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CourseSearchComponent } from './course-search/course-search.component';
+import { DegreeListComponent } from './degree-list/degree-list.component';
 import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { UniServiceFeatureGraduateListRoutingModule } from './uni-service-feature-graduate-list-routing.module';
 import { ImportStudentComponent } from './import-student/import-student.component';
@@ -48,7 +48,7 @@ import { DegreeSearchFormComponent } from '@ksp/shared/form/search';
     DegreeSearchFormComponent,
   ],
   declarations: [
-    CourseSearchComponent,
+    DegreeListComponent,
     CourseDetailComponent,
     ImportStudentComponent,
   ],

@@ -1,51 +1,24 @@
-.container {
-  max-width: 100%;
-  padding: 0;
-  background-color: #f6f6f6;
-  padding-bottom: 24px;
-}
-
-.title__label {
-  font-size: 22px;
-  padding: 15px;
-  margin-left: 50px;
-}
-
-.content__container {
-  background: #ffffff;
-  border-radius: 5px;
-  padding: 24px;
-  margin: 0px 64px;
-  margin-bottom: 32px;
-}
-
-.detail__header {
-  font-size: 22px;
-  color: #0056ff;
-}
-
-.detail__header--secondary {
-  font-size: 22px;
-  color: #000000;
-}
-
-.btn-view {
-  font-size: 20px;
-  width: auto;
-  border-radius: 4px;
-}
-
 .table {
   background-color: #fff;
   border: 1px solid #eceef2;
 }
 
-.header__column {
+.table-header {
   text-align: center;
+  background-color: #edf6ff;
+  font-size: 16px;
+  border: 1px solid #ededee;
+  border-bottom: 0px;
+  padding: 14px;
+  margin-top: 16px;
 }
 
-.header__column--secondary {
-  text-align: start;
+.table > :not(caption) > * > * {
+  padding: 14px;
+}
+
+.table > :not(:first-child) {
+  border-top: 0;
 }
 
 .header__table {
@@ -62,44 +35,4 @@
 .detail__table--secondary {
   text-align: start;
   font-size: 18px;
-}
-
-.table > :not(caption) > * > * {
-  padding: 14px;
-}
-
-.table > :not(:first-child) {
-  border-top: 0;
-}
-
-.label__table--footer {
-  font-size: 20px;
-  text-align: end;
-}
-
-.label__edit {
-  color: #0056ff;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.label__edit--secondary {
-  color: #f68b33;
-}
-
-.summary__container {
-  text-align: center;
-  background: #eceef2;
-  border-radius: 5px;
-  padding: 8px;
-}
-
-.table-header {
-  text-align: center;
-  background-color: #edf6ff;
-  font-size: 16px;
-  border: 1px solid #ededee;
-  border-bottom: 0px;
-  padding: 14px;
-  margin-top: 16px;
 }

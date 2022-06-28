@@ -43,11 +43,11 @@ export const menu: MenuConfig[] = [
         label: 'ขอสร้างเลขประจำตัวคุรุสภาสำหรับนักศึกษาชาวต่างชาติ',
       },
       {
-        path: 'student-list',
+        path: 'admission',
         label: 'ขอยื่นรายชื่อผู้เข้าศึกษา',
       },
       {
-        path: 'graduate-list',
+        path: 'graduate',
         label: 'ขอยื่นรายชื่อผู้สำเร็จการศึกษา',
       },
       /*       {
