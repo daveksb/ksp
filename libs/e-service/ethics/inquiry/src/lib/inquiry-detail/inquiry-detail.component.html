@@ -1,177 +1,256 @@
-<div class="main__container {" [class.hide__container]="hideContainer">
-  <div class="box-container">
-    <ksp-request-header-info
-      [requestDate]="'10 ตุลาคม 2565'"
-      [requestNumber]="'112234467876543'"
-    ></ksp-request-header-info>
+<form [formGroup]="form">
+  <div class="main__container {" [class.hide__container]="hideContainer">
+    <div class="box-container">
+      <ksp-request-header-info
+        [requestDate]="'10 ตุลาคม 2565'"
+        [requestNumber]="'112234467876543'"
+      ></ksp-request-header-info>
 
-    <hr />
+      <hr />
 
-    <div class="form-header">บันทึกการสืบสวนข้อเท็จจริง</div>
-    <div class="form-label">
-      จัดทำคำสั่งแต่งตั้งคณะอนุกรรมการสอบสวน เสนอคณะกรรมการ (แบบจ.บ.1)
-    </div>
+      <div class="form-header">บันทึกการสืบสวนข้อเท็จจริง</div>
+      <div class="form-label">
+        จัดทำคำสั่งแต่งตั้งคณะอนุกรรมการสอบสวน เสนอคณะกรรมการ (แบบจ.บ.1)
+      </div>
 
-    <div class="form__container">
-      <div class="content__container">
+      <div class="form__container">
+        <div class="content__container">
+          <div class="mb-3">
+            <label class="form-label">คำสั่งคณะกรรมการมาตรฐานวิชาชีพ </label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="boardOrder"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">ลงวันที่ </label>
+            <input
+              class="form-control"
+              type="date"
+              formControlName="boardDate"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="table__header">
+        <div class="table__title">
+          คณะอนุกรรมการสอบสวนการประพฤติผิดจรรยาบรรณของวิชาชีพ
+        </div>
+        <div class="add__list">+ เพิ่มรายการ</div>
+      </div>
+      <div class="table__container">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="header__table">
+              <tr>
+                <th scope="col">ลำดับ</th>
+                <th scope="col">หมายเลขบัตรประชาชน</th>
+                <th scope="col">เลขที่ใบอนุญาต</th>
+                <th scope="col">ตำแหน่งกรรมการ</th>
+                <th scope="col">ชื่อ</th>
+                <th scope="col">นามสกุล</th>
+                <th scope="col">ตำแหน่ง</th>
+                <th scope="col">สังกัด - หน่วยงาน/สถานศึกษา</th>
+                <th scope="col">แก้ไข</th>
+                <th scope="col">ลบ</th>
+              </tr>
+            </thead>
+            <tbody class="body__table">
+              <tr>
+                <th>x</th>
+                <th>x-xxxx-xxxx-xx-x</th>
+                <th>x-xxxx-xxxx-xx-x</th>
+                <th>x-xxxx-xxxx-xx-x</th>
+                <th>x-xxxx-xxxx-xx-x</th>
+                <th>x-xxxx-xxxx-xx-x</th>
+                <th>x-xxxx-xxxx-xx-x</th>
+                <th>x-xxxx-xxxx-xx-x</th>
+                <th><mat-icon class="edit">edit</mat-icon></th>
+                <th><mat-icon class="delete">delete</mat-icon></th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="header">
+        แสดงตารางผู้ถูกกล่าวหา และให้เลือกวันที่แจ้งแบบรายคน
+      </div>
+
+      <div class="form__container">
+        <div class="form-label">จัดทำรายงานการสอบสวน (จ.บ.6)</div>
+
+        <div class="content__container">
+          <div class="mb-3">
+            <label class="form-label">วันที่ </label>
+            <input
+              class="form-control"
+              type="date"
+              formControlName="reportDate"
+            />
+          </div>
+        </div>
+
         <div class="mb-3">
-          <label class="form-label">คำสั่งคณะกรรมการมาตรฐานวิชาชีพ </label>
-          <input class="form-control form-control-sm" type="text" />
+          <label class="form-label">รายงานผลการสืบสวน </label>
+          <textarea
+            class="form-control"
+            type="text"
+            rows="3"
+            formControlName="inquiryReport"
+          ></textarea>
+
+          <div id="upload__button">
+            <ksp-file-upload></ksp-file-upload>
+          </div>
         </div>
+      </div>
+
+      <hr />
+
+      <div class="form__container">
+        <div class="form-header">การพิจารณาดำเนินการ</div>
+        <div class="form-label">
+          คณะกรรมการวินิจฉัยระดับความผิดจรรยาบรรณของวิชาชีพ
+          ตามมติคณะกรรมการมาตรฐานวิชาชีพในการประชุม
+        </div>
+        <div class="content__container">
+          <div class="mb-3">
+            <label class="form-label">ครั้งที่ </label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="considerLevelTimes"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">วันที่ </label>
+            <input
+              class="form-control"
+              type="date"
+              formControlName="considerLevelDate"
+            />
+          </div>
+        </div>
+
         <div class="mb-3">
-          <label class="form-label">ลงวันที่ </label>
-          <input class="form-control form-control-sm" type="date" />
-        </div>
-      </div>
-    </div>
-
-    <div class="table__header">
-      <div class="table__title">
-        คณะอนุกรรมการสอบสวนการประพฤติผิดจรรยาบรรณของวิชาชีพ
-      </div>
-      <div class="add__list">+ เพิ่มรายการ</div>
-    </div>
-    <div class="table__container">
-      <div class="table-responsive">
-        <table class="table">
-          <thead class="header__table">
-            <tr>
-              <th scope="col">ลำดับ</th>
-              <th scope="col">หมายเลขบัตรประชาชน</th>
-              <th scope="col">เลขที่ใบอนุญาต</th>
-              <th scope="col">ตำแหน่งกรรมการ</th>
-              <th scope="col">ชื่อ</th>
-              <th scope="col">นามสกุล</th>
-              <th scope="col">ตำแหน่ง</th>
-              <th scope="col">สังกัด - หน่วยงาน/สถานศึกษา</th>
-              <th scope="col">แก้ไข</th>
-              <th scope="col">ลบ</th>
-            </tr>
-          </thead>
-          <tbody class="body__table">
-            <tr>
-              <th>x</th>
-              <th>x-xxxx-xxxx-xx-x</th>
-              <th>x-xxxx-xxxx-xx-x</th>
-              <th>x-xxxx-xxxx-xx-x</th>
-              <th>x-xxxx-xxxx-xx-x</th>
-              <th>x-xxxx-xxxx-xx-x</th>
-              <th>x-xxxx-xxxx-xx-x</th>
-              <th>x-xxxx-xxxx-xx-x</th>
-              <th><mat-icon class="edit">edit</mat-icon></th>
-              <th><mat-icon class="delete">delete</mat-icon></th>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="header">
-      แสดงตารางผู้ถูกกล่าวหา และให้เลือกวันที่แจ้งแบบรายคน
-    </div>
-
-    <div class="form__container">
-      <div class="form-label">จัดทำรายงานการสอบสวน (จ.บ.6)</div>
-
-      <div class="content__container">
-        <div class="mb-3">
-          <label class="form-label">วันที่ </label>
-          <input class="form-control form-control-sm" type="date" />
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label">รายงานผลการสืบสวน </label>
-        <textarea class="form-control form-control-sm" type="text" rows="4">
-        </textarea>
-
-        <div id="upload__button">
-          <ksp-file-upload></ksp-file-upload>
-        </div>
-      </div>
-    </div>
-
-    <hr />
-
-    <div class="form__container">
-      <div>การพิจารณาดำเนินการ</div>
-      <div>
-        คณะกรรมการวินิจฉัยระดับความผิดจรรยาบรรณของวิชาชีพ
-        ตามมติคณะกรรมการมาตรฐานวิชาชีพในการประชุม
-      </div>
-      <div class="content__container">
-        <div class="mb-3">
-          <label class="form-label">ครั้งที่ </label>
-          <input class="form-control form-control-sm" type="text" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label">วันที่ </label>
-          <input class="form-control form-control-sm" type="date" />
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label">มติที่ประชุม </label>
-        <textarea class="form-control form-control-sm" type="text" rows="4">
-        </textarea>
-        <div id="upload__button">
-          <ksp-file-upload></ksp-file-upload>
-        </div>
-      </div>
-    </div>
-
-    <div class="checkbox__container">
-      <div class="checkbox__row">
-        <input type="checkbox" class="checkbox" />
-        <label class="checkbox__label">ยกข้อกล่าวหา/กล่าวโทษ</label>
-      </div>
-
-      <div class="checkbox__row">
-        <input type="checkbox" class="checkbox" />
-        <label class="checkbox__label">ตักเตือน</label>
-      </div>
-
-      <div class="checkbox__row">
-        <input type="checkbox" class="checkbox" />
-        <label class="checkbox__label">ภาคทัณฑ์</label>
-      </div>
-
-      <div class="checkbox__row checkbox__row--no-margin">
-        <div class="content__container-primary">
-          <input type="checkbox" class="checkbox" />
-          <label class="checkbox__label">พักใช้</label>
-          <label class="checkbox__label">ระยะเวลา</label>
-          <input class="form-control form-control-sm" type="number" min="0" />
-          <label class="checkbox__label">วัน</label>
-        </div>
-      </div>
-
-      <div class="checkbox__row checkbox__row--no-margin">
-        <div class="content__container-secondary">
-          <label class="checkbox__label"
-            >ระยะเวลาเริ่มต้นและสิ้นสุดการพักใช้ (วัน/เดือน/ปี)</label
+          <label class="form-label">มติที่ประชุม </label>
+          <textarea
+            class="form-control"
+            type="text"
+            rows="3"
+            formControlName="considerLevelReason"
           >
-          <label class="checkbox__label">วันที่</label>
-          <input class="form-control form-control-sm" type="date" />
-          <label class="checkbox__label">ถึง วันที่</label>
-          <input class="form-control form-control-sm" type="date" />
+          </textarea>
+          <div id="upload__button">
+            <ksp-file-upload></ksp-file-upload>
+          </div>
         </div>
       </div>
 
-      <div class="checkbox__row">
-        <input type="checkbox" class="checkbox" />
-        <label class="checkbox__label">เพิกถอนใบอนุญาตประกอบวิชาชีพ</label>
-      </div>
-    </div>
+      <div class="checkbox__container">
+        <div class="checkbox__row">
+          <input
+            type="radio"
+            class="checkbox"
+            value="1"
+            formControlName="consider"
+          />
+          <label class="checkbox__label">ยกข้อกล่าวหา/กล่าวโทษ</label>
+        </div>
 
-    <div class="form__container">
-      <input type="checkbox" class="checkbox" />
-      <label class="form-label">มติคณะกรรมการอื่นๆ </label>
-      <textarea
-        class="form-control form-control-sm"
-        type="text"
-        rows="4"
-      ></textarea>
+        <div class="checkbox__row">
+          <input
+            type="radio"
+            class="checkbox"
+            value="2"
+            formControlName="consider"
+          />
+          <label class="checkbox__label">ตักเตือน</label>
+        </div>
+
+        <div class="checkbox__row">
+          <input
+            type="radio"
+            class="checkbox"
+            value="3"
+            formControlName="consider"
+          />
+          <label class="checkbox__label">ภาคทัณฑ์</label>
+        </div>
+
+        <div class="checkbox__row">
+          <input
+            type="radio"
+            class="checkbox"
+            value="4"
+            formControlName="consider"
+          />
+          <div class="content__container-primary">
+            <label class="checkbox__label">พักใช้</label>
+            <label class="checkbox__label">ระยะเวลา</label>
+            <input
+              class="form-control"
+              type="number"
+              min="0"
+              formControlName="considerDay"
+            />
+            <label class="checkbox__label">วัน</label>
+          </div>
+        </div>
+
+        <div class="checkbox__row">
+          <div class="content__container-secondary">
+            <label class="checkbox__label"
+              >ระยะเวลาเริ่มต้นและสิ้นสุดการพักใช้ (วัน/เดือน/ปี)</label
+            >
+            <label class="checkbox__label">วันที่</label>
+            <input
+              class="form-control"
+              type="date"
+              formControlName="considerDateFrom"
+            />
+            <label class="checkbox__label">ถึง วันที่</label>
+            <input
+              class="form-control"
+              type="date"
+              formControlName="considerDateTo"
+            />
+          </div>
+        </div>
+
+        <div class="checkbox__row">
+          <input
+            type="radio"
+            class="checkbox"
+            value="5"
+            formControlName="consider"
+          />
+          <label class="checkbox__label">เพิกถอนใบอนุญาตประกอบวิชาชีพ</label>
+        </div>
+
+        <div class="checkbox__row">
+          <input
+            type="radio"
+            class="checkbox"
+            name="consider"
+            value="6"
+            formControlName="consider"
+          />
+          <label class="form-label">มติคณะกรรมการอื่นๆ </label>
+        </div>
+      </div>
+
+      <div class="form__container-2">
+        <textarea
+          class="form-control"
+          type="text"
+          rows="3"
+          formControlName="boardOtherReason"
+        ></textarea>
+      </div>
     </div>
   </div>
-</div>
+</form>

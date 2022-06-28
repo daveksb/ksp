@@ -29,24 +29,18 @@
 }
 
 .form__container {
-  padding-left: 20px;
+  padding-left: 24px;
   display: grid;
   grid-template-columns: 1fr 2fr;
-}
-
-.checkbox__label {
-  font-size: 16px;
-  color: #656565;
-}
-
-.checkbox {
-  height: 15px;
-  width: 15px;
-  margin-right: 5px;
 }
 
 .checkbox__container {
   display: flex;
   flex-direction: column;
   margin: 12px 24px;
+}
+
+.radio {
+  height: 15px;
+  width: 15px;
 }

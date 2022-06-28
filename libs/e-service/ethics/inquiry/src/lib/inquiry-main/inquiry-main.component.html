@@ -1,49 +1,55 @@
 <ksp-top-nav><span subHeader>ระบบงานจรรยาบรรณ </span></ksp-top-nav>
 
-<div class="main__container">
-  <div class="page__title">บันทึกข้อมูลการสอบสวน</div>
-  <div class="tab__container">
-    <mat-tab-group selectedIndex="1" class="tab-group">
-      <mat-tab label="สอบสวน" class="tab-content"
-        ><e-service-inquiry-detail
-          [hideContainer]="true"
-        ></e-service-inquiry-detail>
-      </mat-tab>
+<form [formGroup]="form">
+  <div class="main__container">
+    <div class="page__title">บันทึกข้อมูลการสอบสวน</div>
+    <div class="tab__container">
+      <mat-tab-group selectedIndex="1" class="tab-group">
+        <mat-tab label="สอบสวน" class="tab-content"
+          ><e-service-inquiry-detail
+            [hideContainer]="true"
+            formControlName="inquiry"
+          ></e-service-inquiry-detail>
+        </mat-tab>
 
-      <mat-tab label="แจ้งผลคำวินิจฉัย">
-        <e-service-inquiry-result
-          [hideContainer]="true"
-        ></e-service-inquiry-result>
-      </mat-tab>
+        <mat-tab label="แจ้งผลคำวินิจฉัย">
+          <e-service-inquiry-result
+            [hideContainer]="true"
+            formControlName="rulingInform"
+          ></e-service-inquiry-result>
+        </mat-tab>
 
-      <mat-tab label="บันทึกการกล่าวหา/กล่าวโทษ">
-        <e-service-ethic-accusation-record
-          [hideAllButtons]="true"
-          [hideContainer]="true"
-          [hideTitle]="true"
-          [hideBox]="true"
-        ></e-service-ethic-accusation-record>
-      </mat-tab>
+        <mat-tab label="บันทึกการกล่าวหา/กล่าวโทษ">
+          <e-service-ethic-accusation-record
+            [hideAllButtons]="true"
+            [hideContainer]="true"
+            [hideTitle]="true"
+            [hideBox]="true"
+            formControlName="accusation"
+          ></e-service-ethic-accusation-record>
+        </mat-tab>
 
-      <mat-tab label="สืบสวนข้อเท็จจริง">
-        <e-service-investigation-detail
-          [hideContainer]="true"
-          [hideTitle]="true"
-        ></e-service-investigation-detail>
-      </mat-tab>
-    </mat-tab-group>
+        <mat-tab label="สืบสวนข้อเท็จจริง">
+          <e-service-investigation-detail
+            [hideContainer]="true"
+            [hideTitle]="true"
+            formControlName="investigation"
+          ></e-service-investigation-detail>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
   </div>
+</form>
 
-  <div class="sticky-bottom border" *ngIf="!hideAllButtons">
-    <ksp-bottom-nav
-      [showCenterButtons]="true"
-      [isFirstPage]="true"
-      [isLastPage]="true"
-      [showCancelButton]="true"
-      [showSaveButton]="true"
-      (cancelClicked)="cancel()"
-      (saveClicked)="save()"
-      [colorMode]="'green'"
-    ></ksp-bottom-nav>
-  </div>
+<div class="sticky-bottom border">
+  <ksp-bottom-nav
+    [showCenterButtons]="true"
+    [isFirstPage]="true"
+    [isLastPage]="true"
+    [showCancelButton]="true"
+    [showSaveButton]="true"
+    (cancelClicked)="cancel()"
+    (saveClicked)="save()"
+    [colorMode]="'green'"
+  ></ksp-bottom-nav>
 </div>

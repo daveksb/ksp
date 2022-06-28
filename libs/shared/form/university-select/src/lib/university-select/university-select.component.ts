@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { UniversitySearchComponent } from '@ksp/shared/form/university-search';
@@ -16,6 +16,9 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   providers: providerFactory(UniversitySelectComponent),
 })
 export class UniversitySelectComponent extends KspFormBaseComponent {
+  @Input() label1: any;
+  @Input() label2: any;
+
   override form = this.fb.group({
     institution: [],
     affiliation: [],

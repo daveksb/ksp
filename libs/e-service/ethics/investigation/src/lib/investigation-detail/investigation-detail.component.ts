@@ -17,6 +17,9 @@ import {
   RequestHeaderInfoComponent,
 } from '@ksp/shared/ui';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
+import { providerFactory } from '@ksp/shared/utility';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { KspFormBaseComponent } from '@ksp/shared/interface';
 
 @Component({
   selector: 'e-service-investigation-detail',
@@ -34,14 +37,41 @@ import { FileUploadComponent } from '@ksp/shared/form/file-upload';
     LicenseTypeButtonGroupComponent,
     LicenseInfoComponent,
     FileUploadComponent,
+    ReactiveFormsModule,
   ],
+  providers: providerFactory(InvestigationDetailComponent),
 })
-export class InvestigationDetailComponent {
-  constructor(private router: Router, public dialog: MatDialog) {}
-
+export class InvestigationDetailComponent extends KspFormBaseComponent {
   @Input() hideAllButtons = false;
   @Input() hideContainer = false;
   @Input() hideTitle = false;
+
+  override form = this.fb.group({
+    orderNumber: [],
+    date: [],
+    investigateDate: [],
+    ReportDate: [],
+    reportResult: [],
+    decisions: [],
+    causeDetail: [],
+  });
+
+  decisions = decisions;
+
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private fb: FormBuilder
+  ) {
+    super();
+    this.subscriptions.push(
+      // any time the inner form changes update the parent of any change
+      this.form?.valueChanges.subscribe((value) => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
+  }
 
   cancel() {
     this.router.navigate(['/ethics', 'accusation']);
@@ -83,3 +113,26 @@ export class InvestigationDetailComponent {
     });
   }
 }
+
+export const decisions = [
+  {
+    label: 'มีมูลความผิด วินิจฉัยชี้ขาดความผิดเล็กน้อย',
+    name: 'decisions',
+    value: 1,
+  },
+  {
+    label: 'ตักเตือน / ภาคภัณฑ์ (ต้องเลือกอย่างใดอย่างหนึ่งเสมอ)',
+    name: 'decisions',
+    value: 2,
+  },
+  {
+    label: 'มีมูลความผิด นำเสนอคณะกรรมการตั้งคณะอนุกรรมการสอบสวน',
+    name: 'decisions',
+    value: 3,
+  },
+  {
+    label: 'ไม่มีมูล ยุติเรื่อง ยกข้อกล่าวหา',
+    name: 'decisions',
+    value: 4,
+  },
+];

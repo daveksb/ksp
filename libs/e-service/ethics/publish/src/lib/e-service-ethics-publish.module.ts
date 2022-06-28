@@ -14,6 +14,7 @@ import {
 } from '@ksp/e-service/ethics/inquiry';
 import { BottomNavComponent } from '@ksp/shared/menu';
 import { TopNavComponent } from '@ksp/shared/menu';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export const routes: Routes = [
   {
@@ -50,6 +51,7 @@ export const routes: Routes = [
     InquiryResultComponent,
     BottomNavComponent,
     TopNavComponent,
+    ReactiveFormsModule,
   ],
 
   declarations: [PublishReviewComponent],

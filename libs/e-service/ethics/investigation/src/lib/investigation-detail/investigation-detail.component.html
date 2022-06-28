@@ -1,139 +1,134 @@
-<div class="main-container" [class.hide__container]="hideContainer">
-  <div class="box-container">
-    <ksp-request-header-info
-      [requestDate]="'10 ตุลาคม 2565'"
-      [requestNumber]="'112234467876543'"
-    ></ksp-request-header-info>
+<form [formGroup]="form">
+  <div class="main-container" [class.hide__container]="hideContainer">
+    <div class="box-container">
+      <ksp-request-header-info
+        [requestDate]="'10 ตุลาคม 2565'"
+        [requestNumber]="'112234467876543'"
+      ></ksp-request-header-info>
 
+      <hr />
+
+      <div class="form-header">บันทึกการสืบสวนข้อเท็จจริง</div>
+      <div class="form__container">
+        <div class="content__container">
+          <div class="mb-3">
+            <label class="form-label">คำสั่งสำนักงานเลขาธิการคุรุสภาที่ </label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="orderNumber"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">ลงวันที่ </label>
+            <input class="form-control" type="date" formControlName="date" />
+          </div>
+        </div>
+      </div>
+
+      <div class="table__container">
+        <div class="table__header">
+          <div class="form-label">คณะอนุกรรมการสืบสวนข้อเท็จจริง</div>
+          <div class="add__list">+ เพิ่มรายการ</div>
+        </div>
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="header__table">
+              <tr>
+                <th scope="col">ลำดับ</th>
+                <th scope="col">หมายเลขบัตรประชาชน</th>
+                <th scope="col">เลขที่ใบอนุญาต</th>
+                <th scope="col">ตำแหน่งกรรมการ</th>
+                <th scope="col">ชื่อ</th>
+                <th scope="col">นามสกุล</th>
+                <th scope="col">ตำแหน่ง</th>
+                <th scope="col">สังกัด - หน่วยงาน/สถานศึกษา</th>
+                <th scope="col">แก้ไข</th>
+                <th scope="col">ลบ</th>
+              </tr>
+            </thead>
+            <tbody class="body__table">
+              <tr>
+                <th>x</th>
+                <th>x-xxxx-xxxx-xx-x</th>
+                <th>x-xxxx-xxxx-xx-x</th>
+                <th>x-xxxx-xxxx-xx-x</th>
+                <th>x-xxxx-xxxx-xx-x</th>
+                <th>x-xxxx-xxxx-xx-x</th>
+                <th>x-xxxx-xxxx-xx-x</th>
+                <th>x-xxxx-xxxx-xx-x</th>
+                <th><mat-icon class="edit">edit</mat-icon></th>
+                <th><mat-icon class="delete">delete</mat-icon></th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="form__container">
+        <div class="content__container">
+          <div class="mb-3">
+            <label class="form-label">วันที่ดำเนินการสืบสวนข้อเท็จจริง </label>
+            <input
+              class="form-control"
+              type="date"
+              formControlName="investigateDate"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label"
+              >วันที่จัดทำรายงานสืบสวนข้อเท็จจริงเสนอเลขาธิการคุรุสภา
+            </label>
+            <input
+              class="form-control"
+              type="date"
+              formControlName="ReportDate"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">รายงานผลการสืบสวน </label>
+          <textarea
+            class="form-control"
+            type="text"
+            rows="3"
+            formControlName="reportResult"
+          ></textarea>
+          <div id="upload__button">
+            <ksp-file-upload></ksp-file-upload>
+          </div>
+        </div>
+      </div>
+    </div>
     <hr />
 
-    <div class="form-header">บันทึกการสืบสวนข้อเท็จจริง</div>
-    <div class="form__container">
-      <div class="content__container">
-        <div class="mb-3">
-          <label class="form-label">คำสั่งสำนักงานเลขาธิการคุรุสภาที่ </label>
-          <input class="form-control form-control-sm" type="text" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label">ลงวันที่ </label>
-          <input class="form-control form-control-sm" type="date" />
-        </div>
-      </div>
-    </div>
+    <div class="box-container">
+      <div class="form-header">การพิจารณาดำเนินการ</div>
 
-    <div class="table__header">
-      <div class="table__title">คณะอนุกรรมการสืบสวนข้อเท็จจริง</div>
-      <div class="add__list">+ เพิ่มรายการ</div>
-    </div>
-    <div class="table__container">
-      <div class="table-responsive">
-        <table class="table">
-          <thead class="header__table">
-            <tr>
-              <th scope="col">ลำดับ</th>
-              <th scope="col">หมายเลขบัตรประชาชน</th>
-              <th scope="col">เลขที่ใบอนุญาต</th>
-              <th scope="col">ตำแหน่งกรรมการ</th>
-              <th scope="col">ชื่อ</th>
-              <th scope="col">นามสกุล</th>
-              <th scope="col">ตำแหน่ง</th>
-              <th scope="col">สังกัด - หน่วยงาน/สถานศึกษา</th>
-              <th scope="col">แก้ไข</th>
-              <th scope="col">ลบ</th>
-            </tr>
-          </thead>
-          <tbody class="body__table">
-            <tr>
-              <th>x</th>
-              <th>x-xxxx-xxxx-xx-x</th>
-              <th>x-xxxx-xxxx-xx-x</th>
-              <th>x-xxxx-xxxx-xx-x</th>
-              <th>x-xxxx-xxxx-xx-x</th>
-              <th>x-xxxx-xxxx-xx-x</th>
-              <th>x-xxxx-xxxx-xx-x</th>
-              <th>x-xxxx-xxxx-xx-x</th>
-              <th><mat-icon class="edit">edit</mat-icon></th>
-              <th><mat-icon class="delete">delete</mat-icon></th>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+      <div class="checkbox__container">
+        <ng-container *ngFor="let item of decisions">
+          <div class="d-flex flex-row align-items-center mb-2">
+            <input
+              type="radio"
+              class="radio"
+              value="{{ item.value }}"
+              formControlName="{{ item.name }}"
+            />
+            <label class="form-label">{{ item.label }}</label>
+          </div>
+        </ng-container>
 
-    <div class="form__container">
-      <div class="content__container">
-        <div class="mb-3">
-          <label class="form-label">วันที่ดำเนินการสืบสวนข้อเท็จจริง </label>
-          <input class="form-control form-control-sm" type="date" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label"
-            >วันที่จัดทำรายงานสืบสวนข้อเท็จจริงเสนอเลขาธิการคุรุสภา
-          </label>
-          <input class="form-control form-control-sm" type="date" />
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label">รายงานผลการสืบสวน </label>
-        <textarea class="form-control form-control-sm" type="text" rows="4">
-        </textarea>
-        <div id="upload__button">
-          <ksp-file-upload></ksp-file-upload>
+        <div class="form__container-2">
+          <label class="form-label">สาเหตุเนื่องจาก </label>
+          <textarea
+            class="form-control"
+            type="text"
+            rows="3"
+            formControlName="causeDetail"
+          ></textarea>
         </div>
       </div>
     </div>
   </div>
-
-  <div class="box-container">
-    <div class="form-header">การพิจารณาดำเนินการ</div>
-
-    <div class="checkbox__container">
-      <div class="mb-3">
-        <input type="checkbox" class="checkbox" />
-        <label class="checkbox__label"
-          >มีมูลความผิด วินิจฉัยชี้ขาดความผิดเล็กน้อย</label
-        >
-      </div>
-
-      <div class="mb-3">
-        <input type="checkbox" class="checkbox" />
-        <label class="checkbox__label"
-          >ตักเตือน / ภาคภัณฑ์ (ต้องเลือกอย่างใดอย่างหนึ่งเสมอ)</label
-        >
-      </div>
-
-      <div class="mb-3">
-        <input type="checkbox" class="checkbox" />
-        <label class="checkbox__label"
-          >มีมูลความผิด นำเสนอคณะกรรมการตั้งคณะอนุกรรมการสอบสวน</label
-        >
-      </div>
-
-      <div class="mb-3">
-        <input type="checkbox" class="checkbox" />
-        <label class="checkbox__label">ไม่มีมูล ยุติเรื่อง ยกข้อกล่าวหา</label>
-      </div>
-    </div>
-
-    <div class="form__container">
-      <label class="form-label">สาเหตุเนื่องจาก </label>
-      <textarea
-        class="form-control form-control-sm"
-        type="text"
-        rows="4"
-      ></textarea>
-    </div>
-  </div>
-</div>
-
-<!-- <div class="bottom__container" *ngIf="!hideAllButtons">
-  <ksp-bottom-nav
-    [showCenterButtons]="true"
-    [isFirstPage]="true"
-    [isLastPage]="true"
-    (saveClicked)="save()"
-    (cancelClicked)="cancel()"
-  ></ksp-bottom-nav>
-</div>
- -->
+</form>

@@ -16,6 +16,9 @@ import {
   RequestHeaderInfoComponent,
 } from '@ksp/shared/ui';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { providerFactory } from '@ksp/shared/utility';
+import { KspFormBaseComponent } from '@ksp/shared/interface';
 
 @Component({
   selector: 'e-service-inquiry-result',
@@ -32,10 +35,34 @@ import { FileUploadComponent } from '@ksp/shared/form/file-upload';
     LicenseTypeButtonGroupComponent,
     LicenseInfoComponent,
     FileUploadComponent,
+    ReactiveFormsModule,
   ],
+  providers: providerFactory(InquiryResultComponent),
 })
-export class InquiryResultComponent {
-  constructor(private router: Router, public dialog: MatDialog) {}
+export class InquiryResultComponent extends KspFormBaseComponent {
+  override form = this.fb.group({
+    redNumber: [],
+    rulingTimes: [],
+    rulingDate: [],
+    accuserInform: [],
+    agencyInform: [],
+    accusedInform: [],
+  });
+
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private fb: FormBuilder
+  ) {
+    super();
+    this.subscriptions.push(
+      // any time the inner form changes update the parent of any change
+      this.form?.valueChanges.subscribe((value) => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
+  }
 
   @Input() hideAllButtons = false;
   @Input() hideContainer = false;

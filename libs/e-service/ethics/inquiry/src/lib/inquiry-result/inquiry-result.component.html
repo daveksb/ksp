@@ -1,82 +1,108 @@
-<div class="main-container" [class.hide__container]="hideContainer">
-  <div>
-    <ksp-request-header-info
-      [requestDate]="'10 ตุลาคม 2565'"
-      [requestNumber]="'112234467876543'"
-    ></ksp-request-header-info>
+<form [formGroup]="form">
+  <div class="main-container" [class.hide__container]="hideContainer">
+    <div>
+      <ksp-request-header-info
+        [requestDate]="'10 ตุลาคม 2565'"
+        [requestNumber]="'112234467876543'"
+      ></ksp-request-header-info>
 
-    <hr />
+      <hr />
 
-    <div class="form__container">
-      <div class="content__container-pimary">
-        <div class="mb-3">
-          <label class="form-label">หมายเลขแดง </label>
-          <input class="form-control form-control-sm" type="text" />
-        </div>
-      </div>
-
-      <div class="header">จัดทำคำวินิจฉัยคณะกรรมการมาตรฐานวิชาชีพ</div>
-      <div class="content__container-secondary">
-        <div class="mb-3">
-          <label class="form-label">ครั้งที่ </label>
-          <input class="form-control form-control-sm" type="text" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label">วันที่ </label>
-          <input class="form-control form-control-sm" type="date" />
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label"><br /> </label>
-          <div>
-            <ksp-file-upload></ksp-file-upload>
+      <div class="form__container">
+        <div class="content__container-pimary">
+          <div class="mb-3">
+            <label class="form-label">หมายเลขแดง </label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="redNumber"
+            />
           </div>
         </div>
-      </div>
 
-      <div class="header">แจ้งผู้กล่าวหา/กล่าวโทษทราบ</div>
-      <div class="content__container-third">
-        <div class="mb-3">
-          <label class="form-label">วันที่ </label>
-          <input class="form-control form-control-sm" type="date" />
-        </div>
+        <div class="header">จัดทำคำวินิจฉัยคณะกรรมการมาตรฐานวิชาชีพ</div>
+        <div class="content__container-secondary">
+          <div class="mb-3">
+            <label class="form-label">ครั้งที่ </label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="rulingTimes"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">วันที่ </label>
+            <input
+              class="form-control"
+              type="date"
+              formControlName="rulingDate"
+            />
+          </div>
 
-        <div class="mb-3">
-          <label class="form-label"><br /> </label>
-          <div>
-            <ksp-file-upload></ksp-file-upload>
+          <div class="mb-3">
+            <label class="form-label"><br /> </label>
+            <div>
+              <ksp-file-upload></ksp-file-upload>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="header">แจ้งต้นสังกัดทราบ</div>
-      <div class="content__container-third">
-        <div class="mb-3">
-          <label class="form-label">วันที่ </label>
-          <input class="form-control form-control-sm" type="date" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label"><br /> </label>
-          <div>
-            <ksp-file-upload></ksp-file-upload>
+        <div class="header">แจ้งผู้กล่าวหา/กล่าวโทษทราบ</div>
+        <div class="content__container-third">
+          <div class="mb-3">
+            <label class="form-label">วันที่ </label>
+            <input
+              class="form-control"
+              type="date"
+              formControlName="accuserInform"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"><br /> </label>
+            <div>
+              <ksp-file-upload></ksp-file-upload>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="header">แจ้งผู้ถูกกล่าวหา/กล่าวโทษทราบ</div>
-      <div class="content__container-third">
-        <div class="mb-3">
-          <label class="form-label">วันที่ </label>
-          <input class="form-control form-control-sm" type="date" />
+        <div class="header">แจ้งต้นสังกัดทราบ</div>
+        <div class="content__container-third">
+          <div class="mb-3">
+            <label class="form-label">วันที่ </label>
+            <input
+              class="form-control"
+              type="date"
+              formControlName="agencyInform"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label"><br /> </label>
+            <div>
+              <ksp-file-upload></ksp-file-upload>
+            </div>
+          </div>
         </div>
 
-        <div class="mb-3">
-          <label class="form-label"><br /> </label>
-          <div>
-            <ksp-file-upload></ksp-file-upload>
+        <div class="header">แจ้งผู้ถูกกล่าวหา/กล่าวโทษทราบ</div>
+        <div class="content__container-third">
+          <div class="mb-3">
+            <label class="form-label">วันที่ </label>
+            <input
+              class="form-control"
+              type="date"
+              formControlName="accusedInform"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"><br /> </label>
+            <div>
+              <ksp-file-upload></ksp-file-upload>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</form>

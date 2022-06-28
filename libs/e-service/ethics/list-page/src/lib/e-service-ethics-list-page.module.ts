@@ -6,6 +6,7 @@ import { MatTableModule } from '@angular/material/table';
 import { EServiceUiAccusationSearchModule } from '@ksp/e-service/ui/accusation-search';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TopNavComponent } from '@ksp/shared/menu';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { TopNavComponent } from '@ksp/shared/menu';
     EServiceUiAccusationSearchModule,
     MatDialogModule,
     TopNavComponent,
+    ReactiveFormsModule
   ],
   declarations: [ListPageComponent],
 })
