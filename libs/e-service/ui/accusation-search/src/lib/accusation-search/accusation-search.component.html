@@ -1,98 +1,144 @@
-<div class="top-container">
-  <div class="box__container">
-    <div class="box__title">ค้นหา</div>
-    <hr />
-    <div class="detail__container--secondary">
-      <div class="detail__container">
-        <label class="form-label">เลขที่รายการ </label>
-        <input class="form-control" type="text" />
+<form [formGroup]="form">
+  <div class="top-container">
+    <div class="box__container">
+      <div class="box__title">ค้นหา</div>
+      <hr />
+      <div class="detail__container--secondary">
+        <div class="detail__container">
+          <label class="form-label">เลขที่รายการ </label>
+          <input
+            class="form-control"
+            type="text"
+            formControlName="listNumber"
+          />
+        </div>
+        <div class="detail__container">
+          <label class="form-label">ปี พ.ศ. </label>
+          <input class="form-control" type="text" formControlName="eraBe" />
+        </div>
+        <div class="detail__container">
+          <label class="form-label">จาก-ถึง: วันเดือนปีที่รับเรื่อง </label>
+          <input
+            class="form-control"
+            type="date"
+            formControlName="fromToDate"
+          />
+        </div>
       </div>
-      <div class="detail__container">
-        <label class="form-label">ปี พ.ศ. </label>
-        <input class="form-control" type="text" />
-      </div>
-      <div class="detail__container">
-        <label class="form-label">จาก-ถึง: วันเดือนปีที่รับเรื่อง </label>
-        <input class="form-control" type="date" />
-      </div>
-    </div>
 
-    <div class="detail__container--third">
-      <div class="detail__container">
-        <label class="form-label">หมายเลขคดีดำ</label>
-        <input class="form-control" type="text" />
+      <div class="detail__container--third">
+        <div class="detail__container">
+          <label class="form-label">หมายเลขคดีดำ</label>
+          <input
+            class="form-control"
+            type="text"
+            formControlName="blackNumber"
+          />
+        </div>
+        <div class="detail__container">
+          <label class="form-label">หมายเลขคดีแดง</label>
+          <input class="form-control" type="text" formControlName="redNumber" />
+        </div>
       </div>
-      <div class="detail__container">
-        <label class="form-label">หมายเลขคดีแดง</label>
-        <input class="form-control" type="text" />
-      </div>
-    </div>
 
-    <div class="form__header">ผู้ถูกกล่าวหา/กล่าวโทษ</div>
-    <div class="detail__container--third">
-      <div class="detail__container">
-        <label class="form-label">เลขที่ใบอนุญาตประกอบวิชาชีพ</label>
-        <input class="form-control" type="text" />
+      <div class="form__header">ผู้ถูกกล่าวหา/กล่าวโทษ</div>
+      <div class="detail__container--third">
+        <div class="detail__container">
+          <label class="form-label">เลขที่ใบอนุญาตประกอบวิชาชีพ</label>
+          <input
+            class="form-control"
+            type="text"
+            formControlName="accusedLicenseNumber"
+          />
+        </div>
+        <div class="detail__container">
+          <label class="form-label"
+            >หมายเลขบัตรประชาชน / เลขที่หนังสือเดินทาง (Passport)</label
+          >
+          <input
+            class="form-control"
+            type="text"
+            formControlName="accusedPersonId"
+          />
+        </div>
       </div>
-      <div class="detail__container">
-        <label class="form-label"
-          >หมายเลขบัตรประชาชน / เลขที่หนังสือเดินทาง (Passport)</label
+
+      <div class="detail__container--third">
+        <div class="detail__container">
+          <label class="form-label">ชื่อ / Name</label>
+          <input
+            class="form-control"
+            type="text"
+            formControlName="accusedFirstname"
+          />
+        </div>
+        <div class="detail__container">
+          <label class="form-label">นามสกุล / Last Name</label>
+          <input
+            class="form-control"
+            type="text"
+            formControlName="accusedLastname"
+          />
+        </div>
+      </div>
+
+      <div class="form__header">ผู้กล่าวหา/กล่าวโทษ</div>
+      <div class="detail__container--third">
+        <div class="detail__container">
+          <label class="form-label">เลขที่ใบอนุญาตประกอบวิชาชีพ</label>
+          <input
+            class="form-control"
+            type="text"
+            formControlName="accuserLicenseNumber"
+          />
+        </div>
+        <div class="detail__container">
+          <label class="form-label"
+            >หมายเลขบัตรประชาชน / เลขที่หนังสือเดินทาง (Passport)</label
+          >
+          <input
+            class="form-control"
+            type="text"
+            formControlName="accuserPersonId"
+          />
+        </div>
+      </div>
+
+      <div class="detail__container--third">
+        <div class="detail__container">
+          <label class="form-label">ชื่อ / Name</label>
+          <input
+            class="form-control"
+            type="text"
+            formControlName="accuserFirstname"
+          />
+        </div>
+        <div class="detail__container">
+          <label class="form-label">นามสกุล / Last Name</label>
+          <input
+            class="form-control"
+            type="text"
+            formControlName="accuserLastname"
+          />
+        </div>
+      </div>
+
+      <div class="button__container">
+        <button
+          (click)="submited.emit(false)"
+          type="button"
+          class="btn btn-fourth btn-sm label__button"
         >
-        <input class="form-control" type="text" />
-      </div>
-    </div>
-
-    <div class="detail__container--third">
-      <div class="detail__container">
-        <label class="form-label">ชื่อ / Name</label>
-        <input class="form-control" type="text" />
-      </div>
-      <div class="detail__container">
-        <label class="form-label">นามสกุล / Last Name</label>
-        <input class="form-control" type="text" />
-      </div>
-    </div>
-
-    <div class="form__header">ผู้กล่าวหา/กล่าวโทษ</div>
-    <div class="detail__container--third">
-      <div class="detail__container">
-        <label class="form-label">เลขที่ใบอนุญาตประกอบวิชาชีพ</label>
-        <input class="form-control" type="text" />
-      </div>
-      <div class="detail__container">
-        <label class="form-label"
-          >หมายเลขบัตรประชาชน / เลขที่หนังสือเดินทาง (Passport)</label
+          ล้างข้อมูล
+        </button>
+        <button
+          (click)="submited.emit(true)"
+          type="button"
+          class="btn btn-primary btn-sm label__button"
         >
-        <input class="form-control" type="text" />
+          ค้นหา
+        </button>
       </div>
-    </div>
-
-    <div class="detail__container--third">
-      <div class="detail__container">
-        <label class="form-label">ชื่อ / Name</label>
-        <input class="form-control" type="text" />
-      </div>
-      <div class="detail__container">
-        <label class="form-label">นามสกุล / Last Name</label>
-        <input class="form-control" type="text" />
-      </div>
-    </div>
-
-    <div class="button__container">
-      <button
-        (click)="submited.emit(false)"
-        type="button"
-        class="btn btn-fourth btn-sm label__button"
-      >
-        ล้างข้อมูล
-      </button>
-      <button
-        (click)="submited.emit(true)"
-        type="button"
-        class="btn btn-primary btn-sm label__button"
-      >
-        ค้นหา
-      </button>
     </div>
   </div>
-</div>
+</form>
