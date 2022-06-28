@@ -1,14 +1,16 @@
 <uni-service-top-nav>ลงทะเบียนขอรับรหัสเข้าใช้งาน</uni-service-top-nav>
 
-<div class="container">
-  <div class="title__label">
+<div class="bg-secondary bg-opacity-10 pt-1 pb-3">
+  <div class="container-xl p-0 fs-4">
     รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ (ผู้ประสานงาน / ผู้รับผิดชอบ)
   </div>
-  <div class="content__container">
-    <ksp-request-header-info
-      [requestDate]="'10 ตุลาคม 2565'"
-      [requestNumber]="'112234467876543'"
-    ></ksp-request-header-info>
+  <div class="bg-white container-xl">
+    <div class="pt-2">
+      <ksp-request-header-info
+        [requestDate]="'10 ตุลาคม 2565'"
+        [requestNumber]="'112234467876543'"
+      ></ksp-request-header-info>
+    </div>
 
     <hr />
     <div>
@@ -35,8 +37,8 @@
               background-color: #f68b33;
             "
           >
-            <mat-icon class="xxx"> insert_drive_file</mat-icon>
-            <div class="yyy" style="color: #f68b33">
+            <mat-icon class="text-white m-1"> insert_drive_file</mat-icon>
+            <div class="stepper__label" style="color: #f68b33">
               ข้อมูลผู้ขอรหัสสำหรับเข้าใช้งานระบบ
             </div>
           </button>
@@ -46,8 +48,8 @@
             class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill"
             style="width: 3rem; height: 3rem; pointer-events: none"
           >
-            <mat-icon class="xxx">person</mat-icon>
-            <div class="yyy" style="color: #808080">
+            <mat-icon class="text-white m-1">person</mat-icon>
+            <div class="stepper__label" style="color: #808080">
               ข้อมูลผู้แต่งตั้งผู้ประสานงาน / ผู้รับผิดชอบ
             </div>
           </button>
@@ -60,10 +62,12 @@
 
     <uni-service-register-requester-info></uni-service-register-requester-info>
 
-    <ksp-bottom-nav
-      [isFirstPage]="true"
-      [showCenterButtons]="false"
-      (nextClicked)="next()"
-    ></ksp-bottom-nav>
+    <div class="my-2">
+      <ksp-bottom-nav
+        [isFirstPage]="true"
+        [showCenterButtons]="false"
+        (nextClicked)="next()"
+      ></ksp-bottom-nav>
+    </div>
   </div>
 </div>

@@ -1,21 +1,21 @@
-<div class="bg-light p-3">
-  <div class="fs-5">
+<div class="bg-light px-3 pt-1 pb-3">
+  <div class="fs-5 py-1" [class]="titleClass">
     {{ title }}
   </div>
   <div class="table-responsive">
     <table class="bg-white">
       <thead>
-        <tr class="header__table">
-          <th scope="col">รายการเอกสาร</th>
-          <th scope="col" class="text-center">จำนวนหน้า</th>
+        <tr class="fs-6" style="background-color: #edf6ff">
+          <th class="ps-3">รายการเอกสาร</th>
+          <th class="text-center">จำนวนหน้า</th>
           <th *ngIf="mode === 'view'" class="text-center">ตรวจสอบ</th>
           <th *ngIf="mode === 'edit'" class="text-center">อัพโหลด</th>
         </tr>
       </thead>
-      <tbody class="body__table">
+      <tbody class="text-secondary">
         <ng-container *ngFor="let group of groups; index as i">
           <tr>
-            <th scope="row">
+            <th class="ps-3">
               {{ group }}
               <div>
                 xxxxxxxx_xxxxx.pdf<img src="/assets/images/img-uni/close.svg" />
