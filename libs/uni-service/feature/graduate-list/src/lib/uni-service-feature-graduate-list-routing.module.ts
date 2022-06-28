@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UniServiceContainerPageComponent } from '@ksp/uni-service/feature/container-page';
 import { CourseDetailComponent } from './course-detail/course-detail.component';
-import { CourseSearchComponent } from './course-search/course-search.component';
+import { GraduateListComponent } from './graduate-list/graduate-list.component';
 import { ImportStudentComponent } from './import-student/import-student.component';
 
 const routes: Routes = [
@@ -13,11 +13,11 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'course-search',
+        redirectTo: 'graduate-list',
       },
       {
-        path: 'course-search',
-        component: CourseSearchComponent,
+        path: 'graduate-list',
+        component: GraduateListComponent,
       },
       {
         path: 'course-detail/:type',
@@ -29,7 +29,7 @@ const routes: Routes = [
       },
       {
         path: '**',
-        component: CourseSearchComponent,
+        component: GraduateListComponent,
       },
     ],
   },

@@ -47,7 +47,7 @@ export const menu: MenuConfig[] = [
         label: 'ขอยื่นรายชื่อผู้เข้าศึกษา',
       },
       {
-        path: 'graduate-list',
+        path: 'graduate',
         label: 'ขอยื่นรายชื่อผู้สำเร็จการศึกษา',
       },
       /*       {

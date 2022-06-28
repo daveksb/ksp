@@ -1,46 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UniserviceImportType } from '@ksp/shared/interface';
 
 @Component({
-  selector: 'uni-service-course-search',
-  templateUrl: './course-search.component.html',
-  styleUrls: ['./course-search.component.scss'],
+  templateUrl: './graduate-list.component.html',
+  styleUrls: ['./graduate-list.component.scss'],
 })
-export class CourseSearchComponent implements OnInit {
+export class GraduateListComponent implements OnInit {
   processType!: UniserviceImportType;
 
   displayedColumns: string[] = columns;
   dataSource = new MatTableDataSource<StudentInfo>();
 
-  form = this.fb.group({
-    institution: [],
-    affiliation: [],
-    degreeCode: [],
-    degreeName: [],
-    degreeLvel: [],
-    openYear: [],
-    requestNumber: [],
-    requestsubmitDate: [],
-  });
-
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private fb: FormBuilder
-  ) {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.data.subscribe((res) => {
       this.processType = res['type'];
     });
-    this.dataSource.data = data;
   }
 
   nextPage() {
-    this.router.navigate(['/graduate-list', 'course-detail', this.processType]);
+    this.router.navigate(['/graduate', 'course-detail', this.processType]);
   }
 
   search() {

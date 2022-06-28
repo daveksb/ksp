@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'ksp-degree-search-form',
@@ -8,11 +9,20 @@ import { CommonModule } from '@angular/common';
   templateUrl: './degree-search-form.component.html',
   styleUrls: ['./degree-search-form.component.scss'],
 })
-export class DegreeSearchFormComponent implements OnInit {
+export class DegreeSearchFormComponent {
   @Output() clear = new EventEmitter<boolean>();
   @Output() search = new EventEmitter<boolean>();
 
-  constructor() {}
+  form = this.fb.group({
+    institution: [],
+    affiliation: [],
+    degreeCode: [],
+    degreeName: [],
+    degreeLvel: [],
+    openYear: [],
+    requestNumber: [],
+    requestsubmitDate: [],
+  });
 
-  ngOnInit(): void {}
+  constructor(private fb: FormBuilder) {}
 }

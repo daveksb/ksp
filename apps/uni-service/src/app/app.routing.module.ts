@@ -51,7 +51,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'graduate-list',
+    path: 'graduate',
     data: {
       type: UniserviceImportType.graduateList,
     },
