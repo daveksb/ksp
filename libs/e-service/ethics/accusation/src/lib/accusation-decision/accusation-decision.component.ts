@@ -16,13 +16,7 @@ export class AccusationDecisionComponent {
   decisions = decisions;
 
   form = this.fb.group({
-    decisions1: [false],
-    decisions2: [false],
-    decisions3: [false],
-    decisions4: [false],
-    decisions5: [false],
-    decisions6: [false],
-    decisions7: [false],
+    decisions: [],
     otherDetail: [],
   });
 
@@ -35,7 +29,6 @@ export class AccusationDecisionComponent {
   @Input() hideAllButtons = false;
 
   cancel() {
-    //this.form.valueChanges.subscribe((res) => console.log('res = ', res));
     this.router.navigate(['/', 'accusation']);
   }
 
@@ -82,38 +75,31 @@ export class AccusationDecisionComponent {
 export const decisions = [
   {
     label: 'รับเรื่องพิจารณา และดำเนินการขั้นต่อไป',
-    name: 'decisions1',
-    value: false,
+    value: 1,
   },
   {
     label: 'ไม่รับเรื่องพิจารณาและจำหน่ายออก เนื่องจากอายุความเกิน 1 ปี',
-    name: 'decisions2',
-    value: false,
+    value: 2,
   },
   {
     label: 'ยุติเรื่องกรณีไม่มีใบอนุญาต',
-    name: 'decisions3',
-    value: false,
+    value: 3,
   },
   {
     label: 'บัตรสนเทห์',
-    name: 'decisions4',
-    value: false,
+    value: 4,
   },
   {
     label: 'หนังสือร้องเรียนขาดสาระสำคัญ',
-    name: 'decisions5',
-    value: false,
+    value: 5,
   },
   {
     label:
       'เหตุเกิดก่อนข้อบังคับคุรุสภาว่าด้วยมาตรฐานวิชาชีพและจรรยาบรรณวิชาชีพ พ.ศ.2548',
-    name: 'decisions6',
-    value: false,
+    value: 6,
   },
   {
     label: 'อื่นๆ (ระบุด้วยตนเอง)',
-    name: 'decisions7',
-    value: false,
+    value: 7,
   },
 ];

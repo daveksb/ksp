@@ -17,16 +17,17 @@
         <div class="header">การพิจารณาดำเนินการ</div>
 
         <div class="checkbox__container">
-          <div class="d-flex flex-column">
-            <ng-container *ngFor="let item of decisions">
-              <mat-checkbox
-                class="fs-5 form-label"
-                formControlName="{{ item.name }}"
-              >
-                {{ item.label }}
-              </mat-checkbox></ng-container
-            >
-          </div>
+          <ng-container *ngFor="let item of decisions"
+            ><div class="d-flex flex-row align-items-center mb-2">
+              <input
+                type="radio"
+                class="radio fs-5 form-label me-2"
+                formControlName="decisions"
+                value="{{ item.value }}"
+              />
+              <label>{{ item.label }}</label>
+            </div>
+          </ng-container>
 
           <div class="form__container">
             <input class="form-control" formControlName="otherDetail" />

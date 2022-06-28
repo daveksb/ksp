@@ -27,16 +27,17 @@
         </mat-tab>
       </mat-tab-group>
     </div>
-
-    <ksp-bottom-nav
-      class="fixed-bottom border"
-      [showCenterButtons]="true"
-      [isFirstPage]="true"
-      [isLastPage]="true"
-      [showSaveButton]="true"
-      [colorMode]="'green'"
-      (saveClicked)="save()"
-      (cancelClicked)="cancel()"
-    ></ksp-bottom-nav>
   </div>
 </form>
+
+<div class="sticky-bottom border">
+  <ksp-bottom-nav
+    [showCenterButtons]="true"
+    [isFirstPage]="true"
+    [isLastPage]="true"
+    [showSaveButton]="true"
+    [colorMode]="'green'"
+    (saveClicked)="save()"
+    (cancelClicked)="cancel()"
+  ></ksp-bottom-nav>
+</div>

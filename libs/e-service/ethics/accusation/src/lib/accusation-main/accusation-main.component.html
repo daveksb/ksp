@@ -10,14 +10,15 @@
       ></e-service-ethic-accusation-record>
     </div>
 
-    <ksp-bottom-nav
-      class="fixed-bottom border"
-      [showCenterButtons]="true"
-      [isFirstPage]="true"
-      [showSaveButton]="true"
-      [colorMode]="'green'"
-      (nextClicked)="next()"
-      (cancelClicked)="cancel()"
-    ></ksp-bottom-nav>
+    <div class="sticky-bottom border">
+      <ksp-bottom-nav
+        [showCenterButtons]="true"
+        [isFirstPage]="true"
+        [showSaveButton]="true"
+        [colorMode]="'green'"
+        (nextClicked)="next()"
+        (cancelClicked)="cancel()"
+      ></ksp-bottom-nav>
+    </div>
   </div>
 </form>

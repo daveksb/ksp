@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './accusation-main.component.html',
   styleUrls: ['./accusation-main.component.scss'],
 })
-export class AccusationMainComponent implements OnInit {
+export class AccusationMainComponent {
   form = this.fb.group({
     accusation: [],
   });
@@ -25,9 +25,5 @@ export class AccusationMainComponent implements OnInit {
 
   cancel() {
     this.router.navigate(['/', 'accusation']);
-  }
-
-  ngOnInit(): void {
-    this.form.valueChanges.subscribe((res) => console.log('res = ', res));
   }
 }

@@ -111,8 +111,8 @@
       <hr />
 
       <div class="form__container">
-        <div>การพิจารณาดำเนินการ</div>
-        <div>
+        <div class="form-header">การพิจารณาดำเนินการ</div>
+        <div class="form-label">
           คณะกรรมการวินิจฉัยระดับความผิดจรรยาบรรณของวิชาชีพ
           ตามมติคณะกรรมการมาตรฐานวิชาชีพในการประชุม
         </div>
@@ -244,7 +244,12 @@
       </div>
 
       <div class="form__container-2">
-        <textarea class="form-control" type="text" rows="3"></textarea>
+        <textarea
+          class="form-control"
+          type="text"
+          rows="3"
+          formControlName="boardOtherReason"
+        ></textarea>
       </div>
     </div>
   </div>

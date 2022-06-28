@@ -38,18 +38,18 @@
         </mat-tab>
       </mat-tab-group>
     </div>
-
-    <div class="sticky-bottom border" *ngIf="!hideAllButtons">
-      <ksp-bottom-nav
-        [showCenterButtons]="true"
-        [isFirstPage]="true"
-        [isLastPage]="true"
-        [showCancelButton]="true"
-        [showSaveButton]="true"
-        (cancelClicked)="cancel()"
-        (saveClicked)="save()"
-        [colorMode]="'green'"
-      ></ksp-bottom-nav>
-    </div>
   </div>
 </form>
+
+<div class="sticky-bottom border">
+  <ksp-bottom-nav
+    [showCenterButtons]="true"
+    [isFirstPage]="true"
+    [isLastPage]="true"
+    [showCancelButton]="true"
+    [showSaveButton]="true"
+    (cancelClicked)="cancel()"
+    (saveClicked)="save()"
+    [colorMode]="'green'"
+  ></ksp-bottom-nav>
+</div>
