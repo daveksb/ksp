@@ -1,8 +1,7 @@
 .container {
   background-color: #e5e5e5;
   max-width: 100%;
-  padding: 0 32px;
-  padding-bottom: 75px;
+  padding: 24px;
 }
 
 .detail__content {
@@ -24,11 +23,13 @@
 .detail__header {
   font-size: 22px;
   color: #000;
+  margin: 0 24px;
+  padding-top: 12px;
 }
 
 .content__container {
   background-color: #fff;
-  padding: 12px;
+  padding: 24px;
 }
 
 .content__container-2 {
@@ -39,14 +40,11 @@
 
 .form__container {
   background-color: #f9f9fa;
-  padding: 16px;
-  margin: 12px 20px;
 }
 
 .form__container-2 {
   background-color: #fff;
   padding: 16px;
-  margin: 10px 20px;
 }
 
 .upload__content {
@@ -55,7 +53,6 @@
 
 .header {
   font-size: 22px;
-  padding: 12px 0;
 }
 
 .view__lebel {

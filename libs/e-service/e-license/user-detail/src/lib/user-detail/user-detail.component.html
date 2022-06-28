@@ -18,10 +18,7 @@
       <div class="detail__content">
         <div class="mb-3">
           <label class="form-label">สังกัด</label>
-          <select
-            [disabled]="pageType === 2"
-            class="form-select form-select-sm"
-          >
+          <select [disabled]="pageType === 2" class="form-select">
             <option selected>กรุณาเลือก</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -31,10 +28,7 @@
 
         <div class="mb-3">
           <label class="form-label">หน่วยงาน/สถานศึกษา</label>
-          <select
-            [disabled]="pageType === 2"
-            class="form-select form-select-sm"
-          >
+          <select [disabled]="pageType === 2" class="form-select">
             <option selected>กรุณาเลือก</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -45,7 +39,7 @@
 
       <div class="mb-3">
         <label class="form-label">ที่อยู่</label>
-        <select [disabled]="pageType === 2" class="form-select form-select-sm">
+        <select [disabled]="pageType === 2" class="form-select">
           <option selected>กรุณาเลือก</option>
           <option value="1">One</option>
           <option value="2">Two</option>
@@ -64,20 +58,24 @@
       </div>
       <ksp-form-requester-info></ksp-form-requester-info>
     </div>
-
-    <ksp-form-coordinator-info></ksp-form-coordinator-info>
-
-    <div class="upload__content">
-      <ksp-form-attachment
-        [title]="'หลักฐานเพื่อพิจารณา'"
-        mode="view"
-        [groups]="['หนังสือแต่งตั้ง']"
-      ></ksp-form-attachment>
+    <br />
+    <div class="form__container">
+      <div class="detail__header">
+        ข้อมูลผู้มีอำนาจแต่งตั้ง (ที่ระบุไว้ในเอกสารแนบ)
+      </div>
+      <ksp-form-coordinator-info></ksp-form-coordinator-info>
     </div>
+    <br />
+    <ksp-form-attachment
+      [title]="'หลักฐานเพื่อพิจารณา'"
+      mode="view"
+      [groups]="['หนังสือแต่งตั้ง']"
+    ></ksp-form-attachment>
   </div>
 
   <div class="content__container-2">
     <e-service-license-check
+      [isHasReason]="false"
       [headerTitle]="checkComponentTitles[pageType]"
       [choices]="checkComponentChoices[pageType]"
     ></e-service-license-check>

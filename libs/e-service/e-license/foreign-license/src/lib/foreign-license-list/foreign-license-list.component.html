@@ -17,7 +17,7 @@
       <div class="detail__container--primary">
         <div class="mb-3">
           <label class="form-label">สังกัด </label>
-          <select class="form-select form-select-sm">
+          <select class="form-select">
             <option selected>กรุณาเลือก</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -29,35 +29,35 @@
       <div class="detail__container--secondary">
         <div class="mb-3">
           <label class="form-label">รหัสหน่วยงาน / สถานศึกษา</label>
-          <input class="form-control form-control-sm" type="text" />
+          <input class="form-control" type="text" />
         </div>
         <div class="mb-3">
           <label class="form-label">ชื่อหน่วยงาน / สถานศึกษา</label>
-          <input class="form-control form-control-sm" type="text" />
+          <input class="form-control" type="text" />
         </div>
       </div>
 
       <div class="detail__container--third">
         <div class="mb-3">
           <label class="form-label">เลขที่ใบคำขอ</label>
-          <input class="form-control form-control-sm" type="text" />
+          <input class="form-control" type="text" />
         </div>
 
         <div class="mb-3">
           <label class="form-label">ชื่อ-นามสกุล</label>
-          <input class="form-control form-control-sm" type="text" />
+          <input class="form-control" type="text" />
         </div>
       </div>
 
       <div class="detail__container--third">
         <div class="mb-3">
           <label class="form-label">วันที่ยื่นใบคำขอ</label>
-          <input class="form-control form-control-sm" type="date" />
+          <input class="form-control" type="date" />
         </div>
 
         <div class="mb-3">
           <label class="form-label">สถานะ</label>
-          <select class="form-select form-select-sm">
+          <select class="form-select">
             <option selected>กรุณาเลือก</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -136,7 +136,9 @@
         <ng-container matColumnDef="view">
           <th mat-header-cell *matHeaderCellDef>ใบอนุญาต</th>
           <td mat-cell *matCellDef="let element">
-            <mat-icon (click)="nextPage(1)" class="remove_red_eye">remove_red_eye</mat-icon>
+            <mat-icon (click)="nextPage(1)" class="remove_red_eye"
+              >remove_red_eye</mat-icon
+            >
           </td>
         </ng-container>
 
