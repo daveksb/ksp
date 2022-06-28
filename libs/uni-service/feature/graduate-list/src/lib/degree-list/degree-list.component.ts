@@ -4,10 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UniserviceImportType } from '@ksp/shared/interface';
 
 @Component({
-  templateUrl: './graduate-list.component.html',
-  styleUrls: ['./graduate-list.component.scss'],
+  templateUrl: './degree-list.component.html',
+  styleUrls: ['./degree-list.component.scss'],
 })
-export class GraduateListComponent implements OnInit {
+export class DegreeListComponent implements OnInit {
   processType!: UniserviceImportType;
 
   displayedColumns: string[] = columns;

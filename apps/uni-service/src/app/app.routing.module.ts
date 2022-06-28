@@ -41,7 +41,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'student-list',
+    path: 'admission',
     data: {
       type: UniserviceImportType.studentList,
     },
