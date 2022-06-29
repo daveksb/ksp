@@ -50,7 +50,7 @@
           <ksp-form-address [mode]="'view'">
             <span class="ms-2">ที่อยู่ที่ติดต่อได้สะดวก</span>
             <div class="mt-2 ms-2 d-flex align-items-center">
-              <input type="checkbox" class="address__checkbox" disabled/>
+              <input type="checkbox" class="address__checkbox" disabled />
               <label class="form-label ms-2">ที่อยู่ตามทะเบียนบ้าน</label>
             </div>
           </ksp-form-address>
@@ -63,14 +63,18 @@
 
       <mat-tab label="ข้อมูลทางการศึกษา">
         <div>
-          <ksp-form-education-info [mode]="'view'">
-            <span class="ms-2 fs-5">วุฒิการศึกษาปริญญาตรี</span>
+          <ksp-form-education-info [defualtDegree]="1" [mode]="'view'">
+            <span class="ms-2 fs-5">ข้อมูลทางการศึกษา</span>
           </ksp-form-education-info>
         </div>
 
         <div class="mt-4">
-          <ksp-form-education-info class="mt-5" [mode]="'view'">
-            <span class="ms-2 fs-5">วุฒิการศึกษาปริญญาโท</span>
+          <ksp-form-education-info
+            class="mt-5"
+            [mode]="'view'"
+            [defualtDegree]="2"
+          >
+            <span class="ms-2 fs-5">ข้อมูลทางการศึกษา</span>
           </ksp-form-education-info>
         </div>
 

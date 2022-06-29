@@ -4,131 +4,68 @@
   ></ksp-top-nav
 >
 
-<div class="container">
-  <div class="box__container">
-    <div class="box__header">
-      <div class="title__box">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
-    </div>
-    <hr />
-    <div class="box__detail">
-      <div class="detail__container--half">
-        <div class="mb-3">
-          <label class="form-label">สังกัด</label>
-          <select class="form-select">
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
-      </div>
+<form [formGroup]="form">
+  <div class="container">
+    <ksp-user-search
+      (clear)="clear()"
+      (search)="search()"
+      formControlName="manageSearch"
+    ></ksp-user-search>
 
-      <div class="detail__container--half">
-        <div class="mb-3">
-          <label class="form-label">รหัสมหาวิทยาลัย</label>
-          <input class="form-control" type="text" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label">ชื่อโรงเรียน/หน่วยงาน</label>
-          <input class="form-control" type="text" />
-        </div>
-      </div>
+    <div class="table__container">
+      <div class="title__box">รายชื่อผู้เข้าใช้งานระบบ school service</div>
 
-      <div class="detail__container--half">
-        <div class="mb-3">
-          <label class="form-label">เลขที่ใบคำขอ</label>
-          <input class="form-control" type="text" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label">ชื่อ-นามสกุล</label>
-          <input class="form-control" type="text" />
-        </div>
-      </div>
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        </ng-container>
 
-      <div class="detail__container--half">
-        <div class="detail__container">
-          <label class="form-label">วันที่ยื่นใบคำขอ </label>
-          <input class="form-control" type="date" />
-        </div>
-        <div class="detail__container">
-          <label class="form-label">สถานะใบคำขอ </label>
-          <select class="form-select">
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
-      </div>
-      <div class="detail__action">
-        <button (click)="clear()" type="button" class="btn btn-outline-primary">
-          ล้างข้อมูล
-        </button>
-        <button
-          id="search__button"
-          (click)="search()"
-          type="button"
-          class="btn btn-primary"
-        >
-          ค้นหา
-        </button>
-      </div>
+        <ng-container matColumnDef="view">
+          <th mat-header-cell *matHeaderCellDef>ดู/แก้ไข</th>
+          <td mat-cell *matCellDef="let element" (click)="goToDetail()">
+            <mat-icon class="edit">edit</mat-icon>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="ssn">
+          <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
+          <td mat-cell *matCellDef="let element">{{ element.ssn }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="school">
+          <th mat-header-cell *matHeaderCellDef>โรงเรียน/หน่วยงาน</th>
+          <td mat-cell *matCellDef="let element">{{ element.school }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="province">
+          <th mat-header-cell *matHeaderCellDef>จังหวัด</th>
+          <td mat-cell *matCellDef="let element">{{ element.province }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>สถานะ</th>
+          <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="approveDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่อนุมัติ</th>
+          <td mat-cell *matCellDef="let element">{{ element.approveDate }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="editDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่แก้ไข</th>
+          <td mat-cell *matCellDef="let element">{{ element.editDate }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
     </div>
   </div>
-
-  <div class="table__container">
-    <div class="title__box">รายชื่อผู้เข้าใช้งานระบบ school service</div>
-
-    <table mat-table [dataSource]="dataSource">
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="view">
-        <th mat-header-cell *matHeaderCellDef>ดู/แก้ไข</th>
-        <td mat-cell *matCellDef="let element" (click)="goToDetail()">
-          <mat-icon class="edit">edit</mat-icon>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="ssn">
-        <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
-        <td mat-cell *matCellDef="let element">{{ element.ssn }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="school">
-        <th mat-header-cell *matHeaderCellDef>โรงเรียน/หน่วยงาน</th>
-        <td mat-cell *matCellDef="let element">{{ element.school }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="province">
-        <th mat-header-cell *matHeaderCellDef>จังหวัด</th>
-        <td mat-cell *matCellDef="let element">{{ element.province }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef>สถานะ</th>
-        <td mat-cell *matCellDef="let element">{{ element.status }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="approveDate">
-        <th mat-header-cell *matHeaderCellDef>วันที่อนุมัติ</th>
-        <td mat-cell *matCellDef="let element">{{ element.approveDate }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="editDate">
-        <th mat-header-cell *matHeaderCellDef>วันที่แก้ไข</th>
-        <td mat-cell *matCellDef="let element">{{ element.editDate }}</td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
-  </div>
-</div>
+</form>

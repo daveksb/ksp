@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
@@ -8,10 +9,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./e-temp-license-list.component.scss'],
 })
 export class ETempLicenseListComponent {
+  form = this.fb.group({
+    licenseSearch: [],
+  });
+
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<TempLicenseInfo>();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private fb: FormBuilder) {}
 
   search() {
     this.dataSource.data = data;
