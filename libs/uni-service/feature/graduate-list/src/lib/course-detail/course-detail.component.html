@@ -6,7 +6,7 @@
 
 <div class="bg-secondary bg-opacity-10 px-4 pt-1 pb-3">
   <div class="fs-5">รายละเอียดใบคำขอ</div>
-  <div class="bg-white p-3" style="max-width: 1200px">
+  <div class="bg-white p-3">
     <ksp-request-header-info
       [requestDate]="'10 ตุลาคม 2565'"
     ></ksp-request-header-info>
@@ -65,8 +65,9 @@
               <div>
                 150 / 150
                 <span
+                  role="button"
                   (click)="goToImportStudent(importType.studentList)"
-                  class="label__edit"
+                  class="label__edit text-primary"
                   ><img src="/assets/images/img-uni/Edit.svg" />
                   รายชื่อนักศึกษา</span
                 >
@@ -79,8 +80,9 @@
               <div>
                 100 / 150
                 <span
+                  role="button"
                   (click)="goToImportStudent(importType.graduateList)"
-                  class="label__edit label__edit--secondary"
+                  class="label__edit label__edit--secondary text-orange"
                   ><img src="/assets/images/img-uni/Edit-2.svg" />
                   รายชื่อนักศึกษา</span
                 >

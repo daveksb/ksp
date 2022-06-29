@@ -1,0 +1,40 @@
+<div class="d-flex flex-column align-items-center mb-3">
+  <div class="position-relative m-4 w-25">
+    <div class="progress" style="height: 1px">
+      <div
+        class="progress-bar"
+        role="progressbar"
+        style="width: 100%; background-color: #b8bcc3"
+        [style.background-color]="buttonColor"
+        aria-valuenow="50"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      ></div>
+    </div>
+    <button
+      type="button"
+      class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-orange rounded-pill"
+      style="width: 3rem; height: 3rem; pointer-events: none; border: none"
+    >
+      <mat-icon class="text-white"> insert_drive_file</mat-icon>
+    </button>
+
+    <button
+      type="button"
+      class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill"
+      style="width: 3rem; height: 3rem; pointer-events: none; border: none"
+      [style.background-color]="buttonColor"
+    >
+      <mat-icon class="text-white">person</mat-icon>
+    </button>
+  </div>
+
+  <div class="label__container" [style.grid-column-gap]="gridGapSize">
+    <div class="text-orange" style="cursor: default">
+      ข้อมูลผู้ขอรหัสสำหรับเข้าใช้งานระบบ
+    </div>
+    <div [style.color]="buttonColor" style="cursor: default">
+      {{ buttonLabel }}
+    </div>
+  </div>
+</div>

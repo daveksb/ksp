@@ -9,7 +9,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { RequesterInfoComponent } from './requester-info/requester-info.component';
 import { CoordinatorInfoComponent } from './coordinator-info/coordinator-info.component';
-import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import {
+  RequestHeaderInfoComponent,
+  StepperNavComponent,
+} from '@ksp/shared/ui';
 import {
   FormCoordinatorInfoComponent,
   FormRequesterInfoComponent,
@@ -46,6 +49,7 @@ export const routes: Routes = [
     FormCoordinatorInfoComponent,
     BottomNavComponent,
     UniversitySelectComponent,
+    StepperNavComponent,
   ],
   declarations: [
     CurrentUserComponent,

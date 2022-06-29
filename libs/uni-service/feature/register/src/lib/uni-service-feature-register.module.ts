@@ -8,9 +8,13 @@ import { UniServiceFeatureRegisterRoutingModule } from './uni-service-feature-re
 import { UniServiceUiNavModule } from '@ksp/uni-service/ui/nav';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { UniversitySelectComponent } from '@ksp/shared/form/university-select';
-import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import {
+  RequestHeaderInfoComponent,
+  StepperNavComponent,
+} from '@ksp/shared/ui';
 import { BottomNavComponent } from '@ksp/shared/menu';
 import { MatIconModule } from '@angular/material/icon';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   imports: [
@@ -24,6 +28,8 @@ import { MatIconModule } from '@angular/material/icon';
     RequestHeaderInfoComponent,
     UniversitySelectComponent,
     MatIconModule,
+    MatStepperModule,
+    StepperNavComponent,
   ],
   declarations: [
     UniServiceRegisterRequesterComponent,

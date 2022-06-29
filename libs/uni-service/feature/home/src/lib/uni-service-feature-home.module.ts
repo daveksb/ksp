@@ -15,6 +15,7 @@ import { DegreeSearchFormComponent } from '@ksp/shared/form/search';
     TopNavComponent,
     ReactiveFormsModule,
     DegreeSearchFormComponent,
+    ReactiveFormsModule,
   ],
   declarations: [UniServiceHomeComponent],
 })

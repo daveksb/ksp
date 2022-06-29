@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
@@ -7,6 +8,12 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./uni-service-home.component.css'],
 })
 export class UniServiceHomeComponent {
+  form = this.fb.group({
+    homeSearch: [],
+  });
+
+  constructor(private fb: FormBuilder) {}
+
   displayedColumns: string[] = [
     'order',
     'degreeId',
