@@ -21,8 +21,8 @@
           }
         ],
         "styles": [
-          "libs/shared/assets/src/assets/project-styles.scss",
-          "apps/self-service/src/styles.scss"
+          "apps/e-service/src/app-styles.scss",
+          "libs/shared/assets/src/assets/project-styles.scss"
         ],
         "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.js"]
       },

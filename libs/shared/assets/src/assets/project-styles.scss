@@ -2,7 +2,7 @@
 Project scope style , used widely across all apps
 */
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
-@import './mat-style.css';
+@import './mat-styles.scss';
 
 :root {
   --ksp-gray: #656565;

@@ -1,0 +1,16 @@
+/*
+import order is important for overwrite bootstrap
+**/
+
+$customTheme: (
+  'orange': #f68b33,
+);
+
+//$primary: #0056ff; // #3f89fe;
+
+@import './node_modules/bootstrap/scss/functions';
+@import './node_modules/bootstrap/scss/variables';
+//@import './node_modules/bootstrap/scss/maps';
+//@import './node_modules/bootstrap/scss/mixins';
+$theme-colors: map-merge($theme-colors, $customTheme);
+@import './node_modules/bootstrap/scss/bootstrap';
