@@ -47,17 +47,10 @@
   height: 35px;
 }
 
-.content__checkbox {
-  display: grid;
-  grid-template-columns: 25% 10% 1fr auto;
-  grid-column-gap: 18px;
-  margin: 10px 0;
-}
-
 .content__checkbox-2 {
   display: grid;
-  grid-template-columns: 91.5% 91.5%;
-  grid-column-gap: 8px;
+  grid-template-columns: 1fr 2fr;
+  grid-column-gap: 100px;
   margin-left: 12px;
 }
 
@@ -68,16 +61,20 @@
   margin-left: 12px;
 }
 
-.form-control {
-  font-size: 16px;
+.radio {
+  height: 15px;
+  width: 15px;
+  margin-right: 5px;
 }
 
 .form-check {
-  line-height: 20px;
+  display: flex;
+  align-items: center;
+  padding: 0;
 }
 
 .form-check-label {
-  font-size: 18px;
+  text-align: start;
 }
 
 .form-label {
@@ -133,7 +130,7 @@
   line-height: 28px;
 }
 
-.xxx {
+.content__checkbox {
   display: flex;
   align-items: center;
 }

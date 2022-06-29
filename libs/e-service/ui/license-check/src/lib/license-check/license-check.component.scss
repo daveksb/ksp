@@ -18,14 +18,11 @@
 .content__checkbox {
   display: flex;
   flex-direction: row;
+  margin-bottom: 12px;
 }
 
 .checkbox__label {
   font-size: 18px;
-}
-
-.textarea__container {
-  margin-top: 12px;
 }
 
 .checkbox__box {
@@ -43,7 +40,7 @@
 .form-label-2 {
   font-size: 18px;
   color: #656565;
-  margin: 12px 0;
+  margin-bottom: 12px;
 }
 
 .form-control {

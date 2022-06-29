@@ -5,163 +5,210 @@
   </span></ksp-top-nav
 >
 
-<div class="container">
-  <div class="title__label">รายละเอียดใบคำขอ</div>
-  <div class="content__container">
-    <ksp-request-header-info
-      [requestDate]="'10 ตุลาคม 2565'"
-      [requestNumber]="'112234467876543'"
-    ></ksp-request-header-info>
-
-    <hr />
-
-    <div class="detail__container">
-      <div class="detail__header">ข้อมูลรับรองปริญญา</div>
-      <ksp-degree-cert-step-one [mode]="'view'" [showCoordinatorForm]="false">
-      </ksp-degree-cert-step-one>
-
-      <button class="btn__view">
-        กดเพื่อดูใบคำขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา
-      </button>
-
-      <div class="result__container">
-        <e-service-consider-result
-          [isBasicValid]="true"
-          name="ครบถ้วนถูกต้อง"
-        ></e-service-consider-result>
-
-        <e-service-consider-result
-          [number]="2"
-          name="ขอแก้ไข / เพิ่มเติม"
-        ></e-service-consider-result>
-
-        <e-service-consider-result
-          [number]="3"
-          [isBasicValid]="true"
-          name="ครบถ้วนถูกต้อง"
-        ></e-service-consider-result>
-      </div>
+<form [formGroup]="form">
+  <div class="container">
+    <div class="title__label">รายละเอียดใบคำขอ</div>
+    <div class="content__container">
+      <ksp-request-header-info
+        [requestDate]="'10 ตุลาคม 2565'"
+        [requestNumber]="'112234467876543'"
+      ></ksp-request-header-info>
 
       <hr />
-      <div class="detail__header">
-        คณะอนุกรรมการ พิจารณาประเมินหลักสูตร ประเมินสภาพจริง
-        (พิจารณาตามเกณฑ์รับรอง)
-      </div>
 
-      <div class="table__header-2">
-        <div class="table__header">
-          มติและรายงานการประชุม คณะอนุกรรมการ พิจารณาประเมินหลักสูตร
+      <div class="detail__container">
+        <div class="detail__header">ข้อมูลรับรองปริญญา</div>
+        <ksp-degree-cert-step-one [mode]="'view'" [showCoordinatorForm]="false">
+        </ksp-degree-cert-step-one>
+
+        <button class="btn btn-primary">
+          กดเพื่อดูใบคำขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา
+        </button>
+
+        <div class="result__container">
+          <e-service-consider-result
+            [isBasicValid]="true"
+            name="ครบถ้วนถูกต้อง"
+          ></e-service-consider-result>
+
+          <e-service-consider-result
+            [number]="2"
+            name="ขอแก้ไข / เพิ่มเติม"
+          ></e-service-consider-result>
+
+          <e-service-consider-result
+            [number]="3"
+            [isBasicValid]="true"
+            name="ครบถ้วนถูกต้อง"
+          ></e-service-consider-result>
         </div>
 
-        <button class="btn__upload">+ เพิ่มมติและรายงานการประชุม</button>
-      </div>
-
-      <div class="table__container">
-        <div class="table-responsive">
-          <table class="table">
-            <thead class="header__table">
-              <tr>
-                <th scope="col">เลขที่ใบคำขอ</th>
-                <th scope="col">วันที่ส่งคำขอ</th>
-                <th scope="col">สถาบัน / มหาวิทยาลัย</th>
-                <th scope="col">ชื่อปริญญา / สาขาวิชา</th>
-              </tr>
-            </thead>
-            <tbody class="body__table">
-              <tr>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-              </tr>
-            </tbody>
-          </table>
+        <hr />
+        <div class="detail__header">
+          คณะอนุกรรมการ พิจารณาประเมินหลักสูตร ประเมินสภาพจริง
+          (พิจารณาตามเกณฑ์รับรอง)
         </div>
-      </div>
 
-      <div class="table__header-2">
-        <div class="table__header">
-          การประเมิณสภาพจริง เพื่อพิจารณาประเมินหลักสูตร
+        <div class="table__header-2">
+          <div class="table__header">
+            มติและรายงานการประชุม คณะอนุกรรมการ พิจารณาประเมินหลักสูตร
+          </div>
+
+          <button class="btn__upload">+ เพิ่มมติและรายงานการประชุม</button>
         </div>
-        <button class="btn__upload">+ เพิ่มการประเมิณสภาพจริง</button>
-      </div>
 
-      <div class="table__container">
-        <div class="table-responsive">
-          <table class="table">
-            <thead class="header__table">
-              <tr>
-                <th scope="col">เลขที่ใบคำขอ</th>
-                <th scope="col">วันที่ส่งคำขอ</th>
-                <th scope="col">สถาบัน / มหาวิทยาลัย</th>
-                <th scope="col">ชื่อปริญญา / สาขาวิชา</th>
-              </tr>
-            </thead>
-            <tbody class="body__table">
-              <tr>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="table__container">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="header__table">
+                <tr>
+                  <th></th>
+                  <th scope="col">มติครั้งที่</th>
+                  <th scope="col">วันที่ส่งคำขอ</th>
+                  <th scope="col">ประธาน</th>
+                  <th scope="col">ชื่อคณะกรรมการ</th>
+                  <th scope="col">ผลการประชุม</th>
+                  <th scope="col">เอกสาร</th>
+                </tr>
+              </thead>
+              <tbody class="body__table">
+                <tr>
+                  <td>1</td>
+                  <td class="detail__table">xxx</td>
+                  <td class="detail__table">xxx</td>
+                  <td class="detail__table">xxx</td>
+                  <td class="detail__table">xxx</td>
+                  <td class="detail__table">xxx</td>
+                  <td class="detail__table">ดูเอกสาร</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="table__header-2">
+          <div class="table__header">
+            การประเมิณสภาพจริง เพื่อพิจารณาประเมินหลักสูตร
+          </div>
+          <button class="btn__upload">+ เพิ่มการประเมิณสภาพจริง</button>
+        </div>
+
+        <div class="table__container">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="header__table">
+                <tr>
+                  <th></th>
+                  <th scope="col">วันที่ประเมิน</th>
+                  <th scope="col">ชื่อคณะกรรมการ</th>
+                  <th scope="col">รายละเอียด</th>
+                  <th scope="col">เอกสาร</th>
+                </tr>
+              </thead>
+              <tbody class="body__table">
+                <tr>
+                  <td>1</td>
+                  <td class="detail__table">xxx</td>
+                  <td class="detail__table">xxx</td>
+                  <td class="detail__table">xxx</td>
+                  <td class="detail__table">ดูเอกสาร</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <br />
+    <br />
 
-  <div class="check__form">
-    <e-service-license-check [choices]="choices"> </e-service-license-check>
+    <div class="check__form">
+      <e-service-license-check [choices]="choices" [isHasReason]="false">
+      </e-service-license-check>
 
-    <div class="approve__detail">
-      <div class="content__container-1">
-        <div class="mb-3">
-          <label class="form-label">มติครั้งที่</label>
-          <input class="form-control" type="text" placeholder="กรุณากรอก" />
+      <div>ถ้าเลือก "รับรอง" ด้านบนจะขึ้นกล่องข้างล่าง</div>
+      <div class="approve__detail">
+        <div class="content__container-1">
+          <div class="mb-3">
+            <label class="form-label">ปีการศึกษาที่รับรอง (พ.ศ.)</label>
+            <input
+              class="form-control"
+              type="text"
+              placeholder="กรุณากรอก"
+              formControlName="approveYear"
+            />
+          </div>
         </div>
 
-        <div class="mb-3">
-          <label class="form-label">ช่วงวันที่</label>
-          <input class="form-control" type="text" placeholder="กรุณากรอก" />
-        </div>
-      </div>
-      <div class="content__container-2">
-        <div class="mb-3">
-          <label class="form-label">ประเภทกรรมการ</label>
-          <select class="search__content form-select form-select-sm">
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
-      </div>
-      <div class="content__container-2">
-        <div class="mb-3">
-          <label class="form-label">ชื่อกรรมการ</label>
-          <input class="form-control" type="text" placeholder="กรุณากรอก" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label">ชื่อประธาน</label>
-          <input class="form-control" type="text" placeholder="กรุณากรอก" />
-        </div>
-      </div>
+        <div class="content__container-1">
+          <div class="mb-3">
+            <label class="form-label">มติครั้งที่</label>
+            <input
+              class="form-control"
+              type="text"
+              placeholder="กรุณากรอก"
+              formControlName="reasonTimes"
+            />
+          </div>
 
-      <div class="upload__label">
-        <div class="form-label">เอกสารแนบ</div>
-        <div class="form-label-2">
-          *กรุณาอัพโหลดไฟล์ .pdf และขนาดไม่เกิน 2 MB สามารถอัพโหลดไฟล์ได้มากกว่า
-          1 ไฟล์ต่อรายการ
+          <div class="mb-3">
+            <label class="form-label">ช่วงวันที่</label>
+            <input
+              class="form-control"
+              type="date"
+              placeholder="กรุณากรอก"
+              formControlName="date"
+            />
+          </div>
         </div>
+        <div class="content__container-2">
+          <div class="mb-3">
+            <label class="form-label">ประเภทกรรมการ</label>
+            <select
+              class="search__content form-select"
+              formControlName="boardType"
+            >
+              <option selected>กรุณาเลือก</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+        </div>
+        <div class="content__container-2">
+          <div class="mb-3">
+            <label class="form-label">ชื่อกรรมการ</label>
+            <input
+              class="form-control"
+              type="text"
+              placeholder="กรุณากรอก"
+              formControlName="boardName"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">ชื่อประธาน</label>
+            <input
+              class="form-control"
+              type="text"
+              placeholder="กรุณากรอก"
+              formControlName="chairmanName"
+            />
+          </div>
+        </div>
+
+        <div class="upload__label">
+          <div class="form-label">เอกสารแนบ (รายงานการประชุม)</div>
+          <div class="form-label-2">
+            *กรุณาอัพโหลดไฟล์ .pdf และขนาดไม่เกิน 2 MB
+            สามารถอัพโหลดไฟล์ได้มากกว่า 1 ไฟล์ต่อรายการ
+          </div>
+        </div>
+        <button class="btn__upload-2">+ อัพโหลดไฟล์</button>
+        <div class="form-label">xxxxxxxxxx-xxxxxx_xxxxx.pdf</div>
+        <div class="form-label">xxxxxx_xxxxx.pdf</div>
       </div>
-      <button class="btn__upload-2">+ อัพโหลดไฟล์</button>
-      <div class="form-label">xxxxxxxxxx-xxxxxx_xxxxx.pdf</div>
-      <div class="form-label">xxxxxx_xxxxx.pdf</div>
     </div>
   </div>
-</div>
+</form>
 
 <div class="sticky-bottom border">
   <ksp-bottom-nav

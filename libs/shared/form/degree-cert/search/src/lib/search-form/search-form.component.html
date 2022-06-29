@@ -1,77 +1,103 @@
-<div class="box__container">
-  <div class="box__title">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
+<form [formGroup]="form">
+  <div class="box__container">
+    <div class="box__title">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
 
-  <div class="detail__container--third">
-    <div class="detail__container">
-      <label class="form-label">เลขที่ใบคำขอ </label>
-      <input class="form-control" type="text" />
+    <div class="detail__container--third">
+      <div class="detail__container">
+        <label class="form-label">เลขที่ใบคำขอ </label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="licenseNumber"
+        />
+      </div>
+      <div class="detail__container">
+        <label class="form-label">ช่วงวันที่ </label>
+        <input class="form-control" type="date" formControlName="date" />
+      </div>
     </div>
-    <div class="detail__container">
-      <label class="form-label">ช่วงวันที่ </label>
-      <input class="form-control" type="date" />
+
+    <div class="detail__container--first">
+      <div class="detail__container">
+        <label class="form-label">ชื่อปริญญาและสาขาวิชา </label>
+        <input class="form-control" type="text" formControlName="degreeName" />
+      </div>
+    </div>
+
+    <div class="detail__container--second">
+      <div class="detail__container">
+        <label class="form-label">รหัสสถาบัน </label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="institutionNumber"
+        />
+      </div>
+      <div class="detail__container">
+        <label class="form-label">สถาบัน / มหาวิทยาลัย </label>
+        <select class="form-select" formControlName="institutionName">
+          <option disabled selected hidden>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="detail__container--second">
+      <div class="detail__container">
+        <label class="form-label">ระดับปริญญาที่เสนอขอรับรอง </label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="submitDegreeLevel"
+        />
+      </div>
+      <div class="detail__container">
+        <label class="form-label">สถานะหลักสูตร </label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="courseStatus"
+        />
+      </div>
+    </div>
+
+    <div class="detail__container--second">
+      <div class="detail__container">
+        <label class="form-label">สถานะตรวจสอบ </label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="verifyStatus"
+        />
+      </div>
+      <div class="detail__container">
+        <label class="form-label">สถานะรับรอง </label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="approveStatus"
+        />
+      </div>
+    </div>
+
+    <div class="button__container">
+      <button
+        (click)="cleared.emit(true)"
+        type="button"
+        class="btn btn-outline-primary"
+      >
+        ล้างข้อมูล
+      </button>
+      <button
+        (click)="searched.emit(true)"
+        id="btn-save"
+        type="button"
+        class="btn btn-primary"
+      >
+        ค้นหา
+      </button>
     </div>
   </div>
-
-  <div class="detail__container--first">
-    <div class="detail__container">
-      <label class="form-label">ชื่อปริญญาและสาขาวิชา </label>
-      <input class="form-control" type="text" />
-    </div>
-  </div>
-
-  <div class="detail__container--second">
-    <div class="detail__container">
-      <label class="form-label">รหัสสถาบัน </label>
-      <input class="form-control" type="text" />
-    </div>
-    <div class="detail__container">
-      <label class="form-label">สถาบัน / มหาวิทยาลัย </label>
-      <select class="form-select">
-        <option disabled selected hidden>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="detail__container--second">
-    <div class="detail__container">
-      <label class="form-label">ระดับปริญญาที่เสนอขอรับรอง </label>
-      <input class="form-control" type="text" />
-    </div>
-    <div class="detail__container">
-      <label class="form-label">สถานะหลักสูตร </label>
-      <input class="form-control" type="text" />
-    </div>
-  </div>
-
-  <div class="detail__container--second">
-    <div class="detail__container">
-      <label class="form-label">สถานะตรวจสอบ </label>
-      <input class="form-control" type="text" />
-    </div>
-    <div class="detail__container">
-      <label class="form-label">สถานะรับรอง </label>
-      <input class="form-control" type="text" />
-    </div>
-  </div>
-
-  <div class="button__container">
-    <button
-      (click)="cleared.emit(true)"
-      type="button"
-      class="btn btn-outline-primary"
-    >
-      ล้างข้อมูล
-    </button>
-    <button
-      (click)="searched.emit(true)"
-      id="btn-save"
-      type="button"
-      class="btn btn-primary"
-    >
-      ค้นหา
-    </button>
-  </div>
-</div>
+</form>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
@@ -9,6 +10,15 @@ import { ConfirmDialogComponent } from '@ksp/shared/dialog';
   styleUrls: ['./approve.component.scss'],
 })
 export class ApproveComponent {
+  form = this.fb.group({
+    approveYear: [],
+    reasonTimes: [],
+    date: [],
+    boardType: [],
+    boardName: [],
+    chairmanName: [],
+  });
+
   choices = [
     'รับรอง',
     'ไม่รับรอง',
@@ -17,7 +27,11 @@ export class ApproveComponent {
     'ยกเลิกการรับรอง',
   ];
 
-  constructor(public dialog: MatDialog, private router: Router) {}
+  constructor(
+    public dialog: MatDialog,
+    private router: Router,
+    private fb: FormBuilder
+  ) {}
 
   cancel() {
     this.router.navigate(['./', 'degree-cert', 'list', '2']);

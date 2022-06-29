@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { DegreeCertProcessType } from '@ksp/shared/interface';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'e-service-degree-cert-list',
@@ -16,7 +17,15 @@ export class DegreeCertListComponent implements OnInit {
   selection = new SelectionModel<DegreeCertInfo>(true, []);
   displayedColumns: string[] = displayedColumns;
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  form = this.fb.group({
+    degreeCertSearch: [],
+  });
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((res) => {

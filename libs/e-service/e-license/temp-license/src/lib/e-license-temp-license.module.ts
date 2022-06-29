@@ -16,6 +16,7 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import { TempLicenseSearchComponent } from '@ksp/shared/form/search';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { TempLicenseSearchComponent } from '@ksp/shared/form/search';
     MatIconModule,
     LicenseCheckComponent,
     TempLicenseSearchComponent,
+    ReactiveFormsModule,
   ],
   declarations: [
     ETempLicenseListComponent,

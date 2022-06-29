@@ -25,6 +25,7 @@ import {
   FinalResultInfoComponent,
   LicenseCheckComponent,
 } from '@ksp/e-service/ui/license-check';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -47,6 +48,7 @@ import {
     TopNavComponent,
     LicenseCheckComponent,
     FinalResultInfoComponent,
+    ReactiveFormsModule,
   ],
   declarations: [
     DegreeCertListComponent,

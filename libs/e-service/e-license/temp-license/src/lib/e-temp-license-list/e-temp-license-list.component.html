@@ -5,103 +5,112 @@
     (ชาวไทย)
   </span></ksp-top-nav
 >
-<div class="main-container">
-  <div class="fs-5 my-1">
-    รายละเอียดใบคำขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
-    (ชาวไทย)
-  </div>
 
-  <div class="bg-white px-3 py-2">
-    <ksp-request-header-info
-      [requestDate]="'10 ตุลาคม 2565'"
-      [requestNumber]="'112234467876543'"
-    ></ksp-request-header-info>
+<form [formGroup]="form">
+  <div
+    class="bg-secondary bg-opacity-10 p-4"
+    [style.height]="'calc(100vh - var(--ksp-top-nav-height))'"
+  >
+    <div class="fs-4">
+      รายละเอียดใบคำขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
+      (ชาวไทย)
+    </div>
 
-    <hr />
+    <div class="bg-white px-3 py-3">
+      <ksp-request-header-info
+        [requestDate]="'10 ตุลาคม 2565'"
+        [requestNumber]="'112234467876543'"
+      ></ksp-request-header-info>
 
-    <ksp-temp-license-search
-      (clear)="clear()"
-      (search)="search()"
-    ></ksp-temp-license-search>
+      <hr />
 
-    <hr />
+      <ksp-temp-license-search
+        formControlName="licenseSearch"
+        (clear)="clear()"
+        (search)="search()"
+      ></ksp-temp-license-search>
 
-    <div class="fs-5">ยื่นใบคำขอ</div>
+      <hr />
 
-    <div class="bottom-content">
-      <table mat-table [dataSource]="dataSource">
-        <ng-container matColumnDef="order">
-          <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-          <td mat-cell *matCellDef="let element">{{ element.order }}</td>
-        </ng-container>
+      <div class="fs-5">ยื่นใบคำขอ</div>
 
-        <ng-container matColumnDef="edit">
-          <th mat-header-cell *matHeaderCellDef>ตรวจสอบ</th>
-          <td mat-cell *matCellDef="let element">
-            <mat-icon (click)="nextPage(1)" class="check_circle"
-              >check_circle</mat-icon
-            >
-          </td>
-        </ng-container>
+      <div class="bottom-content">
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="order">
+            <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+            <td mat-cell *matCellDef="let element">{{ element.order }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="reqCode">
-          <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
-          <td mat-cell *matCellDef="let element">{{ element.reqCode }}</td>
-        </ng-container>
+          <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef>ตรวจสอบ</th>
+            <td mat-cell *matCellDef="let element">
+              <mat-icon (click)="nextPage(1)" class="check_circle"
+                >check_circle</mat-icon
+              >
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="ssn">
-          <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
-          <td mat-cell *matCellDef="let element">{{ element.ssn }}</td>
-        </ng-container>
+          <ng-container matColumnDef="reqCode">
+            <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
+            <td mat-cell *matCellDef="let element">{{ element.reqCode }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
-          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-        </ng-container>
+          <ng-container matColumnDef="ssn">
+            <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
+            <td mat-cell *matCellDef="let element">{{ element.ssn }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="professType">
-          <th mat-header-cell *matHeaderCellDef>ประเภทวิชาชีพ</th>
-          <td mat-cell *matCellDef="let element">{{ element.professType }}</td>
-        </ng-container>
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+            <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="workStep">
-          <th mat-header-cell *matHeaderCellDef>ขั้นตอนการดำเนินการth></th>
-          <td mat-cell *matCellDef="let element">{{ element.workStep }}</td>
-        </ng-container>
+          <ng-container matColumnDef="professType">
+            <th mat-header-cell *matHeaderCellDef>ประเภทวิชาชีพ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.professType }}
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="status">
-          <th mat-header-cell *matHeaderCellDef>สถานะ</th>
-          <td mat-cell *matCellDef="let element">{{ element.status }}</td>
-        </ng-container>
+          <ng-container matColumnDef="workStep">
+            <th mat-header-cell *matHeaderCellDef>ขั้นตอนการดำเนินการ</th>
+            <td mat-cell *matCellDef="let element">{{ element.workStep }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="editDate">
-          <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
-          <th></th>
-          <td mat-cell *matCellDef="let element">{{ element.editDate }}</td>
-        </ng-container>
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>สถานะ</th>
+            <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="sendDate">
-          <th mat-header-cell *matHeaderCellDef>วันที่ยื่นใบคำขอ</th>
-          <td mat-cell *matCellDef="let element">{{ element.sendDate }}</td>
-        </ng-container>
+          <ng-container matColumnDef="editDate">
+            <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
+            <th></th>
+            <td mat-cell *matCellDef="let element">{{ element.editDate }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="reqDoc">
-          <th mat-header-cell *matHeaderCellDef>ใบคำขอ</th>
-          <td mat-cell *matCellDef="let element">
-            <mat-icon class="insert_drive_file">insert_drive_file</mat-icon>
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="sendDate">
+            <th mat-header-cell *matHeaderCellDef>วันที่ยื่นใบคำขอ</th>
+            <td mat-cell *matCellDef="let element">{{ element.sendDate }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="approveDoc">
-          <th mat-header-cell *matHeaderCellDef>ใบอนุญาต</th>
-          <td mat-cell *matCellDef="let element">
-            <mat-icon class="insert_drive_file">insert_drive_file</mat-icon>
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="reqDoc">
+            <th mat-header-cell *matHeaderCellDef>ใบคำขอ</th>
+            <td mat-cell *matCellDef="let element">
+              <mat-icon class="insert_drive_file">insert_drive_file</mat-icon>
+            </td>
+          </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
+          <ng-container matColumnDef="approveDoc">
+            <th mat-header-cell *matHeaderCellDef>ใบอนุญาต</th>
+            <td mat-cell *matCellDef="let element">
+              <mat-icon class="insert_drive_file">insert_drive_file</mat-icon>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
     </div>
   </div>
-</div>
+</form>
