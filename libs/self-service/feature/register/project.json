@@ -5,7 +5,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/self-service/feature/register"],
+      "outputs": [
+        "coverage/libs/self-service/feature/register"
+      ],
       "options": {
         "jestConfig": "libs/self-service/feature/register/jest.config.ts",
         "passWithNoTests": true

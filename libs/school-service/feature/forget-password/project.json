@@ -5,7 +5,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/school-service/feature/forget-password"],
+      "outputs": [
+        "coverage/libs/school-service/feature/forget-password"
+      ],
       "options": {
         "jestConfig": "libs/school-service/feature/forget-password/jest.config.ts",
         "passWithNoTests": true

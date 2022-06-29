@@ -18,7 +18,12 @@
     "default": {
       "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ],
         "accessToken": "NTM5MjA1Y2MtZTBkMS00YTQwLWI1MjItNTE2MTI1ZTZhNDg2fHJlYWQtd3JpdGU="
       }
     }
@@ -38,10 +43,12 @@
       "style": "css"
     }
   },
-  "defaultProject": "uni-service",
+  "defaultProject": "self-service",
   "targetDefaults": {
     "build": {
-      "dependsOn": ["^build"]
+      "dependsOn": [
+        "^build"
+      ]
     }
   }
 }

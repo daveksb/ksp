@@ -5,7 +5,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/shared/form/uni-course-form"],
+      "outputs": [
+        "coverage/libs/shared/form/uni-course-form"
+      ],
       "options": {
         "jestConfig": "libs/shared/form/uni-course-form/jest.config.ts",
         "passWithNoTests": true

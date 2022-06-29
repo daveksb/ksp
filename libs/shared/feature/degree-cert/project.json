@@ -5,7 +5,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/shared/feature/degree-cert"],
+      "outputs": [
+        "coverage/libs/shared/feature/degree-cert"
+      ],
       "options": {
         "jestConfig": "libs/shared/feature/degree-cert/jest.config.ts",
         "passWithNoTests": true

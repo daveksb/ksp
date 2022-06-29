@@ -6,7 +6,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/shared/form/university-search"],
+      "outputs": [
+        "coverage/libs/shared/form/university-search"
+      ],
       "options": {
         "jestConfig": "libs/shared/form/university-search/jest.config.ts",
         "passWithNoTests": true

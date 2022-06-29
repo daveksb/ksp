@@ -5,7 +5,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/self-service/feature/master-page"],
+      "outputs": [
+        "coverage/libs/self-service/feature/master-page"
+      ],
       "options": {
         "jestConfig": "libs/self-service/feature/master-page/jest.config.ts",
         "passWithNoTests": true

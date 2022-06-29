@@ -5,7 +5,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/school-service/feature/register"],
+      "outputs": [
+        "coverage/libs/school-service/feature/register"
+      ],
       "options": {
         "jestConfig": "libs/school-service/feature/register/jest.config.ts",
         "passWithNoTests": true

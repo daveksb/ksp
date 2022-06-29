@@ -5,7 +5,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/shared/assets"],
+      "outputs": [
+        "coverage/libs/shared/assets"
+      ],
       "options": {
         "jestConfig": "libs/shared/assets/jest.config.ts",
         "passWithNoTests": true

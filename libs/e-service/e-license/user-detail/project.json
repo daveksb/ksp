@@ -5,7 +5,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/e-service/e-license/user-detail"],
+      "outputs": [
+        "coverage/libs/e-service/e-license/user-detail"
+      ],
       "options": {
         "jestConfig": "libs/e-service/e-license/user-detail/jest.config.ts",
         "passWithNoTests": true
