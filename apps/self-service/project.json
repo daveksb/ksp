@@ -5,9 +5,7 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/self-service",
         "index": "apps/self-service/src/index.html",
@@ -22,13 +20,8 @@
             "output": "./assets"
           }
         ],
-        "styles": [
-          "apps/self-service/src/styles.scss",
-          "node_modules/bootstrap/dist/css/bootstrap.min.css"
-        ],
-        "scripts": [
-          "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
-        ]
+        "styles": ["apps/self-service/src/styles.scss"],
+        "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"]
       },
       "configurations": {
         "production": {
@@ -92,9 +85,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/apps/self-service"
-      ],
+      "outputs": ["coverage/apps/self-service"],
       "options": {
         "jestConfig": "apps/self-service/jest.config.ts",
         "passWithNoTests": true
