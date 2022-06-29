@@ -5,103 +5,107 @@
   </span></ksp-top-nav
 >
 
-<div class="page__container">
-  <div class="page__header">รายละเอียดใบคำขอรับรองปริญญาและประกาศนียบัตร</div>
-  <div class="content__container">
-    <ksp-request-header-info
-      [requestDate]="'10 ตุลาคม 2565'"
-      [requestNumber]="'112234467876543'"
-    ></ksp-request-header-info>
-    <br />
-    <hr />
-    <br />
+<form [formGroup]="form">
+  <div class="page__container">
+    <div class="page__header">รายละเอียดใบคำขอรับรองปริญญาและประกาศนียบัตร</div>
+    <div class="content__container">
+      <ksp-request-header-info
+        [requestDate]="'10 ตุลาคม 2565'"
+        [requestNumber]="'112234467876543'"
+      ></ksp-request-header-info>
+      <br />
+      <hr />
+      <br />
 
-    <mat-stepper
-      [selectedIndex]="1"
-      labelPosition="bottom"
-      [animationDuration]="'0'"
-      #stepper
-    >
-      <mat-step [completed]="false">
-        <ng-template matStepLabel>ข้อมูลพื้นฐาน</ng-template>
-        <ksp-degree-cert-step-one
-          [mode]="'view'"
-          (degreeType)="degreeType = $event"
-        >
-        </ksp-degree-cert-step-one>
-        <br />
-        <hr />
-        <br />
-        <div class="check__form">
-          <e-service-license-check
-            [isHasReason]="false"
-          ></e-service-license-check>
-        </div>
-      </mat-step>
+      <mat-stepper
+        [selectedIndex]="1"
+        labelPosition="bottom"
+        [animationDuration]="'0'"
+        #stepper
+      >
+        <mat-step [completed]="false">
+          <ng-template matStepLabel>ข้อมูลพื้นฐาน</ng-template>
+          <ksp-degree-cert-step-one
+            [mode]="'view'"
+            (degreeType)="degreeType = $event"
+          >
+          </ksp-degree-cert-step-one>
+          <br />
+          <hr />
+          <br />
+          <div class="check__form">
+            <e-service-license-check
+              [isHasReason]="false"
+            ></e-service-license-check>
+          </div>
+        </mat-step>
 
-      <mat-step [completed]="false">
-        <ng-template matStepLabel>ด้านหลักสูตร</ng-template>
-        <ksp-degree-cert-step-two
-          (tabIndexChanged)="({})"
-          [mode]="'view'"
-          [formType]="degreeType"
-        >
-        </ksp-degree-cert-step-two>
-        <br />
-        <hr />
-        <br />
-        <div class="check__form">
-          <e-service-license-check
-            [isHasReason]="false"
-          ></e-service-license-check>
-        </div>
-      </mat-step>
+        <mat-step [completed]="false">
+          <ng-template matStepLabel>ด้านหลักสูตร</ng-template>
+          <ksp-degree-cert-step-two
+            (tabIndexChanged)="({})"
+            [mode]="'view'"
+            [formType]="degreeType"
+          >
+          </ksp-degree-cert-step-two>
+          <br />
+          <hr />
+          <br />
+          <div class="check__form">
+            <e-service-license-check
+              [isHasReason]="false"
+            ></e-service-license-check>
+          </div>
+        </mat-step>
 
-      <mat-step [completed]="false">
-        <ng-template matStepLabel>ด้านกระบวนการผลิต</ng-template>
-        <ksp-degree-cert-step-3 [mode]="'view'"></ksp-degree-cert-step-3>
-        <br />
-        <hr />
-        <br />
-        <div class="check__form">
-          <e-service-license-check
-            [isHasReason]="false"
-          ></e-service-license-check>
-        </div>
-      </mat-step>
+        <mat-step [completed]="false">
+          <ng-template matStepLabel>ด้านกระบวนการผลิต</ng-template>
+          <ksp-degree-cert-step-3 [mode]="'view'"></ksp-degree-cert-step-3>
+          <br />
+          <hr />
+          <br />
+          <div class="check__form">
+            <e-service-license-check
+              [isHasReason]="false"
+            ></e-service-license-check>
+          </div>
+        </mat-step>
 
-      <mat-step [completed]="false">
-        <ng-template matStepLabel>เอกสารแนบ</ng-template>
-        <ksp-degree-cert-step-four mode="view"></ksp-degree-cert-step-four>
-        <br />
-        <hr />
-        <br />
-        <div class="check__form">
-          <e-service-license-check
-            [isHasReason]="false"
-          ></e-service-license-check>
-        </div>
-      </mat-step>
+        <mat-step [completed]="false">
+          <ng-template matStepLabel>เอกสารแนบ</ng-template>
+          <ksp-degree-cert-step-four mode="view"></ksp-degree-cert-step-four>
+          <br />
+          <hr />
+          <br />
+          <div class="check__form">
+            <e-service-license-check
+              [isHasReason]="false"
+            ></e-service-license-check>
+          </div>
+        </mat-step>
 
-      <mat-step [completed]="false">
-        <ng-template matStepLabel>ตรวจสอบและยื่นคำขอ</ng-template>
-        <div class="result__container">
-          <e-service-verify-result
-            [isBasicValid]="true"
-          ></e-service-verify-result>
-          <e-service-verify-result
-            [number]="2"
-            [isBasicValid]="true"
-            [isCourseValid]="true"
-            [isProcessValid]="true"
-          ></e-service-verify-result>
-        </div>
+        <mat-step [completed]="false">
+          <ng-template matStepLabel>ตรวจสอบและยื่นคำขอ</ng-template>
+          <div class="result__container">
+            <e-service-verify-result
+              [isBasicValid]="true"
+            ></e-service-verify-result>
+            <e-service-verify-result
+              [number]="2"
+              [isBasicValid]="true"
+              [isCourseValid]="true"
+              [isProcessValid]="true"
+            ></e-service-verify-result>
+          </div>
 
-        <ksp-degree-cert-step-five></ksp-degree-cert-step-five>
-      </mat-step>
-    </mat-stepper>
+          <ksp-degree-cert-step-five
+            formControlName="step5"
+          ></ksp-degree-cert-step-five>
+        </mat-step>
+      </mat-stepper>
+    </div>
   </div>
-</div>
+</form>
 
 <div class="sticky-bottom border">
   <ksp-bottom-nav

@@ -1,74 +1,106 @@
-<div class="top__container">
-  <div class="header__content">
-    <div class="header">ยืนยันผลการตรวจสอบ</div>
-    <div class="warn__label">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
-  </div>
+<form [formGroup]="form">
+  <div class="top__container">
+    <div class="header__content">
+      <div class="header">ยืนยันผลการตรวจสอบ</div>
+      <div class="warn__label">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
+    </div>
 
-  <div class="content__checkbox">
-    <div class="checkbox__detail">
-      <div class="form-check">
-        <input class="radio" type="radio" name="check" />
-        <label class="form-label"> ครบถ้วน และถูกต้อง </label>
+    <div class="content__checkbox">
+      <div class="checkbox__detail">
+        <div class="form-check">
+          <input
+            class="radio"
+            type="radio"
+            value="1"
+            formControlName="verify"
+          />
+          <label class="form-label"> ครบถ้วน และถูกต้อง </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="content__checkbox">
+      <div class="checkbox__detail">
+        <div class="form-check">
+          <input
+            class="radio"
+            type="radio"
+            value="2"
+            formControlName="verify"
+          />
+          <label class="form-label"> ขอแก้ไข / เพิ่มเติม </label>
+        </div>
+      </div>
+
+      <div class="content__checkbox-2">
+        <div class="form-label">วันที่ต้องการใบคำขอส่งกลับ</div>
+        <input class="form-control" type="date" formControlName="returnDate" />
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="header__content">
+      <div class="header">ต้องการส่งตรวจสอบลำดับต่อไป หรือส่งเพื่อพิจารณา</div>
+      <div class="warn__label">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
+    </div>
+
+    <div class="content__checkbox">
+      <div class="checkbox__detail">
+        <div class="form-check">
+          <input
+            class="radio"
+            type="radio"
+            value="1"
+            formControlName="forward"
+          />
+          <label class="form-label"> ส่งตรวจสอบลำดับต่อไป </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="content__checkbox">
+      <div class="checkbox__detail">
+        <div class="form-check">
+          <input
+            class="radio"
+            type="radio"
+            value="2"
+            formControlName="forward"
+          />
+          <label class="form-label">
+            ไม่ผ่านการตรวจสอบ เนื่องจากไม่ครบถ้วน / ไม่ถูกต้อง
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="content__checkbox">
+      <div class="checkbox__detail">
+        <div class="form-check">
+          <input
+            class="radio"
+            type="radio"
+            value="3"
+            formControlName="forward"
+          />
+          <label class="form-label"> ส่งเรื่องพิจารณา </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="content__checkbox">
+      <div class="checkbox__detail">
+        <div class="form-check">
+          <input
+            class="radio"
+            type="radio"
+            value="4"
+            formControlName="forward"
+          />
+          <label class="form-label"> ยกเลิก </label>
+        </div>
       </div>
     </div>
   </div>
-
-  <div class="content__checkbox">
-    <div class="checkbox__detail">
-      <div class="form-check">
-        <input class="radio" type="radio" name="check" />
-        <label class="form-label"> ขอแก้ไข / เพิ่มเติม </label>
-      </div>
-    </div>
-
-    <div class="content__checkbox-2">
-      <div class="form-label">วันที่ต้องการใบคำขอส่งกลับ</div>
-      <input class="form-control" type="date" value="" />
-    </div>
-  </div>
-
-  <hr />
-
-  <div class="header__content">
-    <div class="header">ต้องการส่งตรวจสอบลำดับต่อไป หรือส่งเพื่อพิจารณา</div>
-    <div class="warn__label">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
-  </div>
-
-  <div class="content__checkbox">
-    <div class="checkbox__detail">
-      <div class="form-check">
-        <input class="radio" type="radio" name="status" />
-        <label class="form-label"> ส่งตรวจสอบลำดับต่อไป </label>
-      </div>
-    </div>
-  </div>
-
-  <div class="content__checkbox">
-    <div class="checkbox__detail">
-      <div class="form-check">
-        <input class="radio" type="radio" name="status" />
-        <label class="form-label">
-          ไม่ผ่านการตรวจสอบ เนื่องจากไม่ครบถ้วน / ไม่ถูกต้อง
-        </label>
-      </div>
-    </div>
-  </div>
-
-  <div class="content__checkbox">
-    <div class="checkbox__detail">
-      <div class="form-check">
-        <input class="radio" type="radio" name="status" />
-        <label class="form-label"> ส่งเรื่องพิจารณา </label>
-      </div>
-    </div>
-  </div>
-
-  <div class="content__checkbox">
-    <div class="checkbox__detail">
-      <div class="form-check">
-        <input class="radio" type="radio" name="status" />
-        <label class="form-label"> ยกเลิก </label>
-      </div>
-    </div>
-  </div>
-</div>
+</form>

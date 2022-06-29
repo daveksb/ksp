@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
@@ -8,7 +9,15 @@ import { ConfirmDialogComponent } from '@ksp/shared/dialog';
   styleUrls: ['./final-result.component.scss'],
 })
 export class FinalResultComponent {
-  constructor(public dialog: MatDialog, private router: Router) {}
+  form = this.fb.group({
+    finalResult: [],
+  });
+
+  constructor(
+    public dialog: MatDialog,
+    private router: Router,
+    private fb: FormBuilder
+  ) {}
 
   cancel() {
     this.router.navigate(['/', 'degree-cert', 'list', '0']);

@@ -69,15 +69,6 @@
   justify-content: space-between;
 }
 
-.btn__view {
-  background-color: #0056ff;
-  color: #fff;
-  border: 1px solid #0056ff;
-  height: 40px;
-  border-radius: 4px;
-  font-size: 20px;
-}
-
 .btn__upload {
   background-color: #0056ff;
   color: #fff;
@@ -127,4 +118,9 @@
   color: red;
   margin-left: 5px;
   line-height: 28px;
+}
+
+.btn {
+  width: auto;
+  height: 40px;
 }
