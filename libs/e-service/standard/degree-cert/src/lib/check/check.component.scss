@@ -2,6 +2,7 @@
   background: #f9f9fa;
   border-radius: 5px;
   padding: 12px;
+  border: 1px solid #e9ecef;
 }
 
 .result__container {
@@ -10,13 +11,11 @@
 
 .page__container {
   background-color: #e5e5e5;
-  padding: 0 48px;
-  padding-bottom: 100px;
+  padding: 24px;
 }
 
 .page__header {
   font-size: 22px;
-  padding: 12px 0;
 }
 
 .content__container {

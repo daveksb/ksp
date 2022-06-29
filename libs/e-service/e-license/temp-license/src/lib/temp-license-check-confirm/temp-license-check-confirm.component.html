@@ -64,29 +64,27 @@
         <div class="warn__label">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
       </div>
 
-      <div class="content__checkbox">
-        <div class="checkbox__detail">
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value=""
-              id="flexCheckDefault"
-            />
-            <label class="form-check-label" for="flexCheckDefault">
-              ครบถ้วน และถูกต้อง
-            </label>
-          </div>
+      <div class="checkbox__detail">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="confirm"
+            id="flexCheckDefault"
+          />
+          <label class="form-check-label" for="flexCheckDefault">
+            ครบถ้วน และถูกต้อง
+          </label>
         </div>
       </div>
 
-      <div class="content__checkbox-3">
+      <div class="xxx">
         <div class="checkbox__detail">
           <div class="form-check">
             <input
               class="form-check-input"
-              type="checkbox"
-              value=""
+              type="radio"
+              name="confirm"
               id="flexCheckDefault"
             />
             <label class="form-check-label" for="flexCheckDefault">
@@ -94,23 +92,19 @@
             </label>
           </div>
         </div>
-
-        <div class="form-label">วันที่ต้องการใบคำขอส่งกลับ</div>
-        <input
-          class="form-control form-control-sm"
-          type="date"
-          value=""
-          id="flexCheckDefault"
-        />
+        <div class="content__checkbox-3">
+          <div class="form-label">วันที่ต้องการใบคำขอส่งกลับ</div>
+          <input class="form-control" type="date" id="flexCheckDefault" />
+        </div>
       </div>
 
-      <div class="content__checkbox">
+      <div class="xxx">
         <div class="checkbox__detail">
           <div class="form-check">
             <input
               class="form-check-input"
-              type="checkbox"
-              value=""
+              type="radio"
+              name="confirm"
               id="flexCheckDefault"
             />
             <label class="form-check-label" for="flexCheckDefault">
@@ -118,19 +112,19 @@
             </label>
           </div>
         </div>
-
-        <div class="form-label">หมายเหตุ/เหตุผล</div>
-        <select class="form-select form-select-sm">
-          <option selected>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
+        <div class="content__checkbox-2">
+          <div class="form-label">หมายเหตุ/เหตุผล</div>
+          <select class="form-select">
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
       </div>
 
       <br />
       <hr />
-      <br />
 
       <div class="header__content">
         <div class="header-3">
@@ -139,13 +133,13 @@
         <div class="warn__label">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
       </div>
 
-      <div class="content__checkbox-2">
+      <div class="xxx">
         <div class="checkbox__detail">
           <div class="form-check">
             <input
               class="form-check-input"
-              type="checkbox"
-              value=""
+              type="radio"
+              name="share"
               id="flexCheckDefault"
             />
             <label class="form-check-label" for="flexCheckDefault">
@@ -155,13 +149,13 @@
         </div>
       </div>
 
-      <div class="content__checkbox-2">
+      <div class="xxx">
         <div class="checkbox__detail">
           <div class="form-check">
             <input
               class="form-check-input"
-              type="checkbox"
-              value=""
+              type="radio"
+              name="share"
               id="flexCheckDefault"
             />
             <label class="form-check-label" for="flexCheckDefault">
@@ -171,13 +165,13 @@
         </div>
       </div>
 
-      <div class="content__checkbox-2">
+      <div class="xxx">
         <div class="checkbox__detail">
           <div class="form-check">
             <input
               class="form-check-input"
-              type="checkbox"
-              value=""
+              type="radio"
+              name="share"
               id="flexCheckDefault"
             />
             <label class="form-check-label" for="flexCheckDefault">
@@ -187,13 +181,13 @@
         </div>
       </div>
 
-      <div class="content__checkbox-2">
+      <div class="xxx">
         <div class="checkbox__detail">
           <div class="form-check">
             <input
               class="form-check-input"
-              type="checkbox"
-              value=""
+              type="radio"
+              name="share"
               id="flexCheckDefault"
             />
             <label class="form-check-label" for="flexCheckDefault">
@@ -205,7 +199,6 @@
     </div>
   </div>
 </div>
-
 <div class="sticky-bottom border">
   <ksp-bottom-nav
     (cancelClicked)="cancel()"

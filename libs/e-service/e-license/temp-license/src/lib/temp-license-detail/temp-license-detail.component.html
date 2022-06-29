@@ -6,12 +6,12 @@
   </span>
 </ksp-top-nav>
 
-<div class="bg-light ps-4 pe-4">
-  <div class="fs-5 pt-2 pb-2">
+<div class="bg-secondary bg-opacity-10 p-4">
+  <div class="fs-5">
     รายละเอียดใบคำขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
     (ชาวไทย)
   </div>
-  <div class="box__container">
+  <div class="bg-white p-4">
     <ksp-request-header-info
       [requestDate]="'10 ตุลาคม 2565'"
       [requestNumber]="'112234467876543'"
@@ -19,10 +19,10 @@
 
     <hr />
 
-    <div class="top__container">
-      <div class="fs-4 text-primary ms-4">ค้นหารายการ</div>
+    <div class="bg-light p-4">
+      <div class="fs-4 text-primary">ค้นหารายการ</div>
 
-      <div class="row mb-3 ms-2">
+      <div class="row">
         <div class="col-6">
           <label class="form-label">หมายเลขบัตรประชาชน</label>
           <input class="form-control" type="text" />
@@ -31,6 +31,8 @@
 
       <ksp-form-user-info></ksp-form-user-info>
     </div>
+
+    <br />
 
     <mat-tab-group
       class="tab-group"
@@ -118,16 +120,18 @@
       </mat-tab>
     </mat-tab-group>
   </div>
+  <br />
 
-  <div class="box__container">
+  <div class="bg-white p-4">
     <e-service-license-check
       [choices]="choices"
       [reasons]="reason[selectedTabIndex]"
     ></e-service-license-check>
   </div>
+</div>
 
+<div class="sticky-bottom border">
   <ksp-bottom-nav
-    class="fixed-bottom border"
     (cancelClicked)="cancel()"
     (prevClicked)="prevPage()"
     (nextClicked)="next()"

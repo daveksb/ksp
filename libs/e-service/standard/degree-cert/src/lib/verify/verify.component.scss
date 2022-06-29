@@ -4,7 +4,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding-bottom: 80px;
+  padding: 24px;
 }
 
 .content__container {
@@ -15,13 +15,11 @@
 
 .box__title {
   font-size: 22px;
-  padding-left: 24px;
-  padding-top: 12px;
 }
 
 .top-container {
   background-color: white;
-  margin: 4px 24px;
+
 }
 
 .table {
@@ -75,7 +73,6 @@
 
 .check__form {
   background-color: white;
-  margin: 12px 24px;
   padding: 24px;
 }
 

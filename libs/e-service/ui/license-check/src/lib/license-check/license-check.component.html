@@ -1,4 +1,4 @@
-<div class="top__container-2">
+<div class="top__container">
   <div class="header-3">{{ headerTitle }}</div>
 
   <div class="content__checkbox">
@@ -20,7 +20,7 @@
       </div>
     </ng-container>
   </div>
-  <div class="form-label-2">หมายเหตุ/เหตุผล</div>
+  <div class="form-label-2" *ngIf="isHasReason">หมายเหตุ/เหตุผล</div>
 
   <div class="checkbox__container">
     <ng-container *ngFor="let reason of reasons">
@@ -32,6 +32,6 @@
   </div>
 
   <div class="textarea__container">
-    <textarea rows="4" class="form-control form-control-sm"></textarea>
+    <textarea rows="3" class="form-control form-control-sm"></textarea>
   </div>
 </div>

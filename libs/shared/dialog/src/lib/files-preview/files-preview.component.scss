@@ -6,9 +6,12 @@
 .button__container {
   display: flex;
   justify-content: center;
-  margin: 12px 0;
 }
 
 .header {
   font-size: 22px;
+}
+
+.main__container {
+  height: calc(100vh - 58px);
 }

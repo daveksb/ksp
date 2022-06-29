@@ -48,7 +48,7 @@ export class DegreeCertListComponent implements OnInit {
   }
 
   onSearch() {
-    for (let index = 0; index < 30; index++) {
+    for (let index = 0; index < 25; index++) {
       this.data = [...this.data, data];
     }
     this.dataSource.data = this.data;

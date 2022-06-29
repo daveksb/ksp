@@ -6,10 +6,16 @@
       dynamicHeight="true"
     >
       <mat-tab label="การฝึกปฏิบัติวิชาชีพระหว่างเรียน" class="tab-content">
-        <ksp-step-3-training formControlName="training"></ksp-step-3-training>
+        <ksp-step-3-training
+          formControlName="training"
+          [mode]="mode"
+        ></ksp-step-3-training>
       </mat-tab>
       <mat-tab label="การปฏิบัติการสอนในสถานศึกษาในสาขาวิชาเฉพาะ">
-        <ksp-step-3-teaching formControlName="teaching"></ksp-step-3-teaching>
+        <ksp-step-3-teaching
+          formControlName="teaching"
+          [mode]="mode"
+        ></ksp-step-3-teaching>
       </mat-tab>
     </mat-tab-group>
   </div>

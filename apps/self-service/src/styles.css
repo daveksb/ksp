@@ -61,6 +61,6 @@ add asterisk for required feild
   right: 0;
   bottom: 0;
   left: var(--ksp-sidenav-width);
-  z-index: 1030;
+  z-index: 2;
   width: auto !important;
 }
