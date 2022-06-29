@@ -35,18 +35,6 @@ export class ApproveNewUserListComponent {
   }
 }
 
-export const column = [
-  'id',
-  'view',
-  'order',
-  'name',
-  'phone',
-  'authorName',
-  'school',
-  'province',
-  'status',
-  'date',
-];
 export interface userList {
   id: number;
   view: string;
@@ -59,6 +47,19 @@ export interface userList {
   status: string;
   date: string;
 }
+
+export const column = [
+  'id',
+  'view',
+  'order',
+  'name',
+  'phone',
+  'authorName',
+  'school',
+  'province',
+  'status',
+  'date',
+];
 
 export const data: userList[] = [
   {

@@ -3,7 +3,7 @@
     <div class="col-md mb-3">
       <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
       <select
-        [class.bg-white]="!isDarkMode"
+        [class.bg-white]="!isDarkMode && mode === 'edit'"
         class="form-select"
         formControlName="prefixTh"
       >
@@ -37,7 +37,7 @@
     <div class="col-md mb-3">
       <label class="form-label">คำนำหน้าชื่อภาษาอังกฤษ</label>
       <select
-        [class.bg-white]="!isDarkMode"
+        [class.bg-white]="!isDarkMode && mode === 'edit'"
         class="form-select"
         formControlName="prefixEn"
       >
@@ -71,7 +71,7 @@
     <div class="col-md-6 mb-3">
       <label class="form-label">เพศ</label>
       <select
-        [class.bg-white]="!isDarkMode"
+        [class.bg-white]="!isDarkMode && mode === 'edit'"
         class="form-select"
         formControlName="sex"
       >

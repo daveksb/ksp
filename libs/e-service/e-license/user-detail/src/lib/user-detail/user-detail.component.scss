@@ -2,22 +2,13 @@
   background-color: #e5e5e5;
   max-width: 100%;
   padding: 24px;
+  height: auto;
 }
 
 .detail__content {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 18px;
-}
-
-.form-label {
-  font-size: 18px;
-  color: #656565;
-}
-
-.form-select {
-  background-color: #fff;
-  font-size: 18px;
 }
 
 .detail__header {
@@ -45,10 +36,6 @@
 .form__container-2 {
   background-color: #fff;
   padding: 16px;
-}
-
-.upload__content {
-  margin: 20px;
 }
 
 .header {
