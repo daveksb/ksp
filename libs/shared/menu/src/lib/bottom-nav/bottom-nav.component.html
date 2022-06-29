@@ -4,7 +4,7 @@
       *ngIf="!isFirstPage"
       (click)="prevClicked.emit(true)"
       type="button"
-      class="btn btn-outline-warning"
+      class="btn border-orange text-orange"
     >
       ย้อนกลับ
     </button>
@@ -20,8 +20,8 @@
       type="button"
       class="btn"
       [ngClass]="{
-        'btn-outline-primary': colorMode === 'blue',
-        'btn-outline-success': colorMode === 'green'
+        'border-primary text-primary': colorMode === 'blue',
+        'border-success text-success': colorMode === 'green'
       }"
     >
       ยกเลิก
@@ -55,7 +55,7 @@
       *ngIf="!isLastPage"
       (click)="nextClicked.emit(true)"
       type="button"
-      class="btn btn-outline-warning"
+      class="btn border-orange text-orange"
     >
       ถัดไป
     </button>
