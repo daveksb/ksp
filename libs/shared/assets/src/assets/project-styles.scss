@@ -42,12 +42,9 @@ add asterisk for required feild
   content: ' *';
 }
 
-.btn {
-  width: 120px;
-}
-
 .btn,
 .btn:hover {
+  width: 120px;
   color: white;
 }
 
@@ -71,13 +68,17 @@ add asterisk for required feild
   bottom: 0;
   left: var(--ksp-sidenav-width);
   z-index: 2;
-  width: auto !important;
+  width: auto;
 }
 
 .full-height {
-  height: calc(100vh - var(--ksp-top-nav-height));
+  min-height: calc(100vh - var(--ksp-top-nav-height));
+}
+
+.full-width {
+  max-width: calc(100vw - var(--ksp-sidenav-width));
 }
 
 .default-width {
-  width: var(--ksp-content-width);
+  max-width: var(--ksp-content-width);
 }

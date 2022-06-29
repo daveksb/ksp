@@ -3,10 +3,13 @@
   ><span subHeader>ค้นหาใบอนุญาต</span></ksp-top-nav
 >
 
-<div [formGroup]="form" class="container">
-  <div class="fs-5 pt-2 pb-1">ค้นหาข้อมูลใบอนุญาตประกอบวิชาชีพทางการศึกษา</div>
+<div
+  [formGroup]="form"
+  class="bg-secondary bg-opacity-10 px-4 py-2 full-height"
+>
+  <div class="fs-5 pb-1">ค้นหาข้อมูลใบอนุญาตประกอบวิชาชีพทางการศึกษา</div>
 
-  <div class="bg-white p-3">
+  <div class="bg-white p-3 default-width">
     <div class="fs-5">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
     <hr />
 
@@ -42,7 +45,11 @@
       </div>
     </div>
     <div class="d-flex justify-content-end mt-3">
-      <button (click)="clear()" type="button" class="btn btn-outline-primary">
+      <button
+        (click)="clear()"
+        type="button"
+        class="btn text-primary border-primary"
+      >
         ล้างข้อมูล
       </button>
       <button (click)="search()" type="button" class="ms-2 btn btn-primary">
@@ -51,10 +58,9 @@
     </div>
   </div>
 
-  <div class="bg-white p-3 mt-3">
+  <div class="bg-white p-3 mt-3" *ngIf="foundItem">
     <div class="fs-5">ผลการค้นหา</div>
     <hr />
-    <!-- <div *ngIf="foundItem"> -->
     <ksp-license-info></ksp-license-info>
     <hr />
     <ksp-license-info [isLicenseRevoked]="true"></ksp-license-info>
@@ -62,4 +68,3 @@
     <ksp-license-info></ksp-license-info>
   </div>
 </div>
-<!-- </div> -->

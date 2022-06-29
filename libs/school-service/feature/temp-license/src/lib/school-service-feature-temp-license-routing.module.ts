@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SchoolContainerPageComponent } from '@ksp/school-service/feature/container-page';
 import { PageNotFoundComponent } from '@ksp/shared/ui';
-import { LicenseDetailComponent } from './license-detail/license-detail.component';
+import { SchoolTempLicenseDetailComponent } from './school-temp-license-detail/school-temp-license-detail.component';
 import { SchoolTempLicenseListComponent } from './school-temp-license-list/school-temp-license-list.component';
 
 const routes: Routes = [
@@ -21,7 +21,7 @@ const routes: Routes = [
       },
       {
         path: 'detail',
-        component: LicenseDetailComponent,
+        component: SchoolTempLicenseDetailComponent,
       },
       {
         path: '**',

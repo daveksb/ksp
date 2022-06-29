@@ -8,15 +8,14 @@ import {
 } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { LicenseDetailService } from './license-detail.service';
+import { LicenseDetailService } from './school-temp-license-detail.service';
 
 @UntilDestroy()
 @Component({
-  selector: 'school-service-license-detail',
-  templateUrl: './license-detail.component.html',
-  styleUrls: ['./license-detail.component.scss'],
+  templateUrl: './school-temp-license-detail.component.html',
+  styleUrls: ['./school-temp-license-detail.component.scss'],
 })
-export class LicenseDetailComponent implements OnInit {
+export class SchoolTempLicenseDetailComponent implements OnInit {
   form = this.fb.group({
     personSearch: [],
     address1: [],

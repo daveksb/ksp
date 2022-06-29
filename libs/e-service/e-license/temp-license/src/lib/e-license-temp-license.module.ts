@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ETempLicenseListComponent } from './e-temp-license-list/e-temp-license-list.component';
-import { TempLicenseDetailComponent } from './temp-license-detail/temp-license-detail.component';
+import { ETempLicenseDetailComponent } from './e-temp-license-detail/e-temp-license-detail.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { TempLicenseCheckForbiddenComponent } from './temp-license-check-forbidden/temp-license-check-forbidden.component';
 import { TempLicenseCheckConfirmComponent } from './temp-license-check-confirm/temp-license-check-confirm.component';
@@ -36,7 +36,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   declarations: [
     ETempLicenseListComponent,
-    TempLicenseDetailComponent,
+    ETempLicenseDetailComponent,
     TempLicenseCheckForbiddenComponent,
     TempLicenseCheckConfirmComponent,
     TempLicenseApproveComponent,
