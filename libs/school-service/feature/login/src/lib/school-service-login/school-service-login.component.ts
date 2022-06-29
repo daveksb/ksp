@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'school-service-login',
   templateUrl: './school-service-login.component.html',
-  styleUrls: ['./school-service-login.component.css'],
+  styleUrls: ['./school-service-login.component.scss'],
 })
 export class SchoolServiceLoginComponent {
   eyeIconClicked = false;

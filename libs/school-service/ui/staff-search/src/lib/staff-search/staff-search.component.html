@@ -1,12 +1,11 @@
 <form [formGroup]="form">
-  <div class="box__container">
-    <div class="box__header">
-      <div class="title__box">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
-    </div>
-    <hr />
-    <div class="box__detail">
-      <div class="detail__container--half">
-        <div class="mb-1">
+  <div class="bg-secondary bg-opacity-10 default-width">
+    <div class="bg-white px-3 py-2">
+      <div class="fs-5">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
+      <hr />
+
+      <div class="row mb-2">
+        <div class="col">
           <label class="form-label">เลขที่ใบอนุญาต</label>
           <input
             class="form-control"
@@ -14,7 +13,7 @@
             formControlName="licenseNumber"
           />
         </div>
-        <div class="mb-1">
+        <div class="col">
           <label class="form-label">ประเภทใบอนุญาต</label>
           <select class="form-select" formControlName="licenseType">
             <option selected>กรุณาเลือก</option>
@@ -24,18 +23,20 @@
           </select>
         </div>
       </div>
-      <div class="detail__container--half">
-        <div class="mb-1">
+
+      <div class="row mb-2">
+        <div class="col">
           <label class="form-label">หมายเลขบัตรประชาชน</label>
           <input class="form-control" type="text" formControlName="personId" />
         </div>
-        <div class="mb-1">
+        <div class="col">
           <label class="form-label">ชื่อ-นามสกุล</label>
           <input class="form-control" type="text" formControlName="name" />
         </div>
       </div>
-      <div class="detail__container--half">
-        <div class="mb-2">
+
+      <div class="row mb-3">
+        <div class="col">
           <label class="form-label">ตำแหน่งงาน </label>
           <select class="form-select" formControlName="post">
             <option selected>กรุณาเลือก</option>
@@ -44,7 +45,7 @@
             <option value="3">Three</option>
           </select>
         </div>
-        <div class="mb-2">
+        <div class="col">
           <label class="form-label">ช่วงชั้นที่สอน </label>
           <select class="form-select" formControlName="TeachingLevel">
             <option selected>กรุณาเลือก</option>
@@ -54,19 +55,19 @@
           </select>
         </div>
       </div>
-      <div class="detail__action">
+
+      <div class="d-flex justify-content-end">
         <button
           (click)="clear.emit(true)"
           type="button"
-          class="btn btn-outline-primary"
+          class="btn border-primary text-primary"
         >
           ล้างข้อมูล
         </button>
         <button
-          id="search__button"
           (click)="search.emit(true)"
           type="button"
-          class="btn btn-primary"
+          class="ms-2 btn btn-primary"
         >
           ค้นหา
         </button>

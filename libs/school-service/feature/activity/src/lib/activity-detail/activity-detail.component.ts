@@ -63,7 +63,7 @@ export class ActivityDetailComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['./', 'activity', 'list']);
+    this.router.navigate(['/activity', 'list']);
   }
 
   save() {
@@ -87,14 +87,13 @@ export class ActivityDetailComponent implements OnInit {
       width: '350px',
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
-
         buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'activity']);
+        this.router.navigate(['/activity']);
       }
     });
   }
