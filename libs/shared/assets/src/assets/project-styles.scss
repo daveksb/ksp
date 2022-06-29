@@ -41,10 +41,12 @@ add asterisk for required feild
   content: ' *';
 }
 
+.btn {
+  width: 120px;
+}
+
 .btn,
 .btn:hover {
-  //font-size: 1rem;
-  width: 120px;
   color: white;
 }
 
