@@ -1,11 +1,16 @@
+/**
+Project scope style , used widely across all apps
+*/
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
-@import './mat-style.css';
+@import './mat-styles.scss';
 
 :root {
   --ksp-gray: #656565;
   --ksp-gray-bg: #e5e5e5;
   --ksp-sidenav-width: 237px;
   --ksp-top-nav-height: 58px;
+  --base-color: #f68b33;
+  --ksp-content-width: 1200px; // default width for page content
 }
 
 @font-face {
@@ -27,7 +32,7 @@ table {
 }
 
 hr {
-  margin: 0.8rem 2px !important;
+  margin: 0.6rem 2px !important;
 }
 
 /*
@@ -38,8 +43,12 @@ add asterisk for required feild
 }
 
 .btn {
-  font-size: 1rem;
   width: 120px;
+}
+
+.btn,
+.btn:hover {
+  color: white;
 }
 
 .form-label {
@@ -63,4 +72,12 @@ add asterisk for required feild
   left: var(--ksp-sidenav-width);
   z-index: 2;
   width: auto !important;
+}
+
+.full-height {
+  height: calc(100vh - var(--ksp-top-nav-height));
+}
+
+.default-width {
+  width: var(--ksp-content-width);
 }

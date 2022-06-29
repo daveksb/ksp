@@ -5,7 +5,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/self-service/feature/license"],
+      "outputs": [
+        "coverage/libs/self-service/feature/license"
+      ],
       "options": {
         "jestConfig": "libs/self-service/feature/license/jest.config.ts",
         "passWithNoTests": true

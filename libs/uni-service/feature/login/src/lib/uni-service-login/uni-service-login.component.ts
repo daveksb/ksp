@@ -14,15 +14,15 @@ export class UniServiceLoginComponent {
   eyeIconClicked = false;
 
   home() {
-    this.router.navigate(['/', 'home']);
+    this.router.navigate(['/home']);
   }
 
   register() {
-    this.router.navigate(['/', 'register']);
+    this.router.navigate(['/register']);
   }
 
   retired() {
-    this.router.navigate(['/', 'retired']);
+    this.router.navigate(['/retired']);
   }
 
   forgotPassword() {

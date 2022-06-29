@@ -5,7 +5,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/uni-service/feature/container-page"],
+      "outputs": [
+        "coverage/libs/uni-service/feature/container-page"
+      ],
       "options": {
         "jestConfig": "libs/uni-service/feature/container-page/jest.config.ts",
         "passWithNoTests": true

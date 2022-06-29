@@ -6,7 +6,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/e-service/e-license/manage-current-user"],
+      "outputs": [
+        "coverage/libs/e-service/e-license/manage-current-user"
+      ],
       "options": {
         "jestConfig": "libs/e-service/e-license/manage-current-user/jest.config.ts",
         "passWithNoTests": true

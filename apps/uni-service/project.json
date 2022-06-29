@@ -21,10 +21,10 @@
           }
         ],
         "styles": [
-          "apps/self-service/src/styles.css",
-          "node_modules/bootstrap/dist/css/bootstrap.min.css"
+          "apps/uni-service/src/app-styles.scss",
+          "libs/shared/assets/src/assets/project-styles.scss"
         ],
-        "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"]
+        "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.js"]
       },
       "configurations": {
         "production": {
@@ -103,5 +103,10 @@
       }
     }
   },
-  "tags": []
+  "tags": [],
+  "generators": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    }
+  }
 }

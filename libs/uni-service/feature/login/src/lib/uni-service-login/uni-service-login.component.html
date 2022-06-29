@@ -46,17 +46,21 @@
           </button>
           <hr />
           <div class="label__secondary">ยังไม่มีรหัสเข้าใช้งาน</div>
-          <button (click)="register()" type="button" class="btn btn-warning">
+          <button (click)="register()" type="button" class="btn btn-orange">
             ลงทะเบียนขอรับรหัสเข้าใช้งาน
           </button>
         </div>
       </form>
     </div>
     <div class="footer">
-      <button type="button" class="btn btn-outline-warning">
+      <button type="button" class="btn border-orange text-orange">
         ตรวจสอบยื่นผู้ประสานงาน
       </button>
-      <button (click)="retired()" type="button" class="btn btn-outline-primary">
+      <button
+        (click)="retired()"
+        type="button"
+        class="btn border-primary text-primary"
+      >
         ขอถอดถอนผู้ประสานงาน
       </button>
     </div>

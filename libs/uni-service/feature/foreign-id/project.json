@@ -5,7 +5,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/uni-service/feature/foreign-id"],
+      "outputs": [
+        "coverage/libs/uni-service/feature/foreign-id"
+      ],
       "options": {
         "jestConfig": "libs/uni-service/feature/foreign-id/jest.config.ts",
         "passWithNoTests": true

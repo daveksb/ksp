@@ -5,7 +5,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/uni-service/ui/dialog"],
+      "outputs": [
+        "coverage/libs/uni-service/ui/dialog"
+      ],
       "options": {
         "jestConfig": "libs/uni-service/ui/dialog/jest.config.ts",
         "passWithNoTests": true

@@ -5,7 +5,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/e-service/ethics/accusation"],
+      "outputs": [
+        "coverage/libs/e-service/ethics/accusation"
+      ],
       "options": {
         "jestConfig": "libs/e-service/ethics/accusation/jest.config.ts",
         "passWithNoTests": true

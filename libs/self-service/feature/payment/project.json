@@ -6,7 +6,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/self-service/feature/payment"],
+      "outputs": [
+        "coverage/libs/self-service/feature/payment"
+      ],
       "options": {
         "jestConfig": "libs/self-service/feature/payment/jest.config.ts",
         "passWithNoTests": true
