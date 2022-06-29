@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -12,7 +13,17 @@ import {
   styleUrls: ['./temp-license-approve.component.scss'],
 })
 export class TempLicenseApproveComponent {
-  constructor(private router: Router, public dialog: MatDialog) {}
+  form = this.fb.group({
+    result: [],
+    licenseNumber: [],
+    licenseDate: [],
+  });
+
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private fb: FormBuilder
+  ) {}
 
   cancel() {
     this.router.navigate(['/', 'temp-license', 'list']);

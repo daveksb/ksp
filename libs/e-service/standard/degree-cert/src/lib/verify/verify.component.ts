@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DegreeCertProcessType } from '@ksp/shared/interface';
 
@@ -8,6 +9,14 @@ import { DegreeCertProcessType } from '@ksp/shared/interface';
   styleUrls: ['./verify.component.scss'],
 })
 export class VerifyComponent implements OnInit {
+  form = this.fb.group({
+    reasonTimes: [],
+    date: [],
+    boardType: [],
+    boardName: [],
+    chairmanName: [],
+  });
+
   titles = ['', 'พิจารณาประเมินหลักสูคร', 'พิจารณารับรองหลักสูคร'];
 
   choices = [
@@ -23,7 +32,11 @@ export class VerifyComponent implements OnInit {
   ];
 
   processType: DegreeCertProcessType = 0;
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((res) => {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SchoolServiceUserPageType } from '@ksp/shared/interface';
@@ -8,10 +9,14 @@ import { SchoolServiceUserPageType } from '@ksp/shared/interface';
   styleUrls: ['./approve-new-user-list.component.scss'],
 })
 export class ApproveNewUserListComponent {
+  form = this.fb.group({
+    approveSearch: [],
+  });
+
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<userList>();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private fb: FormBuilder) {}
 
   selectedUniversity = '';
 
@@ -35,18 +40,6 @@ export class ApproveNewUserListComponent {
   }
 }
 
-export const column = [
-  'id',
-  'view',
-  'order',
-  'name',
-  'phone',
-  'authorName',
-  'school',
-  'province',
-  'status',
-  'date',
-];
 export interface userList {
   id: number;
   view: string;
@@ -59,6 +52,19 @@ export interface userList {
   status: string;
   date: string;
 }
+
+export const column = [
+  'id',
+  'view',
+  'order',
+  'name',
+  'phone',
+  'authorName',
+  'school',
+  'province',
+  'status',
+  'date',
+];
 
 export const data: userList[] = [
   {

@@ -1,3 +1,10 @@
+.container {
+  max-width: 100%;
+  background-color: #f9f9fa;
+  padding: 16px;
+  margin: 8px;
+}
+
 #result__box {
   background: #eefcef;
   padding: 4px;
@@ -22,13 +29,6 @@
   color: #38ac3d;
 }
 
-.container {
-  width: 100%;
-  background-color: #f9f9fa;
-  margin: 24px 0;
-  padding: 16px;
-}
-
 .header {
   font-size: 22px;
   color: #0056ff;
@@ -45,14 +45,4 @@
 .group--secondary {
   grid-template-columns: 30% 1fr;
   grid-column-gap: 16px;
-}
-
-.form-label {
-  font-size: 18px;
-  color: #656565;
-}
-
-.form-control {
-  font-size: 18px;
-  color: #000;
 }

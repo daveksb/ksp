@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SchoolServiceUserPageType } from '@ksp/shared/interface';
@@ -8,10 +9,14 @@ import { SchoolServiceUserPageType } from '@ksp/shared/interface';
   styleUrls: ['./manage-current-user-list.component.scss'],
 })
 export class ManageCurrentUserListComponent implements OnInit {
+  form = this.fb.group({
+    manageSearch: [],
+  });
+
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<userList>();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private fb: FormBuilder) {}
 
   selectedUniversity = '';
 

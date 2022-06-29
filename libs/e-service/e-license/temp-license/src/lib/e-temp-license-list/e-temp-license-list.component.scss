@@ -1,14 +1,4 @@
-.main-container {
-  background-color: var(--ksp-gray-bg);
-  height: auto;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 0 32px;
-  padding-bottom: 25px;
-}
-
-.table {
+/* .table {
   margin: 0 0;
   background-color: #fff;
   border: 1px solid #eceef2;
@@ -16,11 +6,7 @@
 
 .table > :not(:first-child) {
   border-top: 0;
-}
-
-tr.mat-header-row {
-  background-color: #edf6ff;
-}
+} */
 
 .insert_drive_file {
   color: #0056ff;
@@ -30,4 +16,8 @@ tr.mat-header-row {
 .check_circle {
   color: #4caf50;
   cursor: pointer;
+}
+
+tr.mat-header-row {
+  background-color: #edf6ff;
 }

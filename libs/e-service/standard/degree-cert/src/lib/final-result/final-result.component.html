@@ -4,24 +4,31 @@
     >ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ
   </span></ksp-top-nav
 >
-<div class="container">
-  <div class="title__label">รายละเอียดใบคำขอ</div>
-  <div class="content__container">
-    <ksp-request-header-info
-      [requestDate]="'10 ตุลาคม 2565'"
-      [requestNumber]="'112234467876543'"
-    ></ksp-request-header-info>
-    <hr />
-    <div class="detail__container">
-      <div class="detail__header">
-        ข้อมูลรับรองปริญญา และประกาศนียบัตรทางการศึกษา
+
+<form [formGroup]="form">
+  <div class="container">
+    <div class="title__label">รายละเอียดใบคำขอ</div>
+    <div class="content__container">
+      <ksp-request-header-info
+        [requestDate]="'10 ตุลาคม 2565'"
+        [requestNumber]="'112234467876543'"
+      ></ksp-request-header-info>
+      <hr />
+      <div class="detail__container">
+        <div class="detail__header">
+          ข้อมูลรับรองปริญญา และประกาศนียบัตรทางการศึกษา
+        </div>
+        <div class="m-2">
+          <e-service-final-result-info
+            formControlName="finalResult"
+          ></e-service-final-result-info>
+        </div>
+        <ksp-degree-cert-step-one [mode]="'view'" [showCoordinatorForm]="false">
+        </ksp-degree-cert-step-one>
       </div>
-      <e-service-final-result-info></e-service-final-result-info>
-      <ksp-degree-cert-step-one [mode]="'view'" [showCoordinatorForm]="false">
-      </ksp-degree-cert-step-one>
     </div>
   </div>
-</div>
+</form>
 
 <div class="sticky-bottom border">
   <ksp-bottom-nav

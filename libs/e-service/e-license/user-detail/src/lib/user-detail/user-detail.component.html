@@ -18,7 +18,7 @@
       <div class="detail__content">
         <div class="mb-3">
           <label class="form-label">สังกัด</label>
-          <select [disabled]="pageType === 2" class="form-select">
+          <select class="form-select" disabled>
             <option selected>กรุณาเลือก</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -28,7 +28,7 @@
 
         <div class="mb-3">
           <label class="form-label">หน่วยงาน/สถานศึกษา</label>
-          <select [disabled]="pageType === 2" class="form-select">
+          <select class="form-select" disabled>
             <option selected>กรุณาเลือก</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -39,7 +39,7 @@
 
       <div class="mb-3">
         <label class="form-label">ที่อยู่</label>
-        <select [disabled]="pageType === 2" class="form-select">
+        <select class="form-select" disabled>
           <option selected>กรุณาเลือก</option>
           <option value="1">One</option>
           <option value="2">Two</option>
@@ -47,7 +47,7 @@
         </select>
       </div>
 
-      <div class="view__lebel" *ngIf="pageType === 1">
+      <div class="view__lebel" *ngIf="pageType === 0">
         ดูรายชื่อผู้เข้าใช้งานระบบของหน่วยงาน/สถานศึกษานี้
       </div>
     </div>
@@ -56,14 +56,14 @@
       <div class="detail__header">
         ข้อมูลผู้ขอเข้ารหัสสำหรับเข้าใช้งานระบบ (ผู้ประสานงาน)
       </div>
-      <ksp-form-requester-info></ksp-form-requester-info>
+      <ksp-form-requester-info [mode]="'view'"></ksp-form-requester-info>
     </div>
     <br />
     <div class="form__container">
       <div class="detail__header">
         ข้อมูลผู้มีอำนาจแต่งตั้ง (ที่ระบุไว้ในเอกสารแนบ)
       </div>
-      <ksp-form-coordinator-info></ksp-form-coordinator-info>
+      <ksp-form-coordinator-info [mode]="'view'"></ksp-form-coordinator-info>
     </div>
     <br />
     <ksp-form-attachment

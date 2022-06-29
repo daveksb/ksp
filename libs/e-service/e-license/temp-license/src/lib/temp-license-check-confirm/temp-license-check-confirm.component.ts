@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -12,7 +13,18 @@ import {
   styleUrls: ['./temp-license-check-confirm.component.scss'],
 })
 export class TempLicenseCheckConfirmComponent {
-  constructor(private router: Router, public dialog: MatDialog) {}
+  form = this.fb.group({
+    verify: [],
+    returnDate: [],
+    reason: [],
+    forward: [],
+  });
+
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private fb: FormBuilder
+  ) {}
 
   cancel() {
     this.router.navigate(['/', 'temp-license']);

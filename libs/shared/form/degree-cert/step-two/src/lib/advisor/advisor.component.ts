@@ -13,11 +13,7 @@ import { debounceTime } from 'rxjs';
 export class AdvisorComponent extends KspFormBaseComponent implements OnInit {
   advisorForm = this.fb.group({
     generalInfo: [],
-
-    
-
     hasMoreCourses: [],
-
     mainAdvisorInfo: [],
     courses: this.fb.array([
       this.fb.group({

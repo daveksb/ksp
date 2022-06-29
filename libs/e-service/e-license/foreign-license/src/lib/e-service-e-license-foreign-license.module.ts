@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export const routes: Routes = [
   {
@@ -48,6 +49,7 @@ export const routes: Routes = [
     MatIconModule,
     RequestHeaderInfoComponent,
     LicenseCheckComponent,
+    ReactiveFormsModule,
   ],
   declarations: [ForeignLicenseDetailComponent, ForeignLicenseListComponent],
 })

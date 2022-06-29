@@ -1,19 +1,18 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { providerFactory } from '@ksp/shared/utility';
+import { KspFormBaseComponent } from '@ksp/shared/interface';
 
 @Component({
-  selector: 'ksp-temp-license-search',
+  selector: 'ksp-user-search',
   standalone: true,
-  imports: [CommonModule, MatIconModule, ReactiveFormsModule],
-  templateUrl: './temp-license-search.component.html',
-  styleUrls: ['./temp-license-search.component.scss'],
-  providers: providerFactory(TempLicenseSearchComponent),
+  imports: [CommonModule, ReactiveFormsModule],
+  templateUrl: './user-search.component.html',
+  styleUrls: ['./user-search.component.scss'],
+  providers: providerFactory(UserSearchComponent),
 })
-export class TempLicenseSearchComponent extends KspFormBaseComponent {
+export class UserSearchComponent extends KspFormBaseComponent {
   override form = this.fb.group({
     licenseNumber: [],
     personId: [],
@@ -24,6 +23,8 @@ export class TempLicenseSearchComponent extends KspFormBaseComponent {
     submitDateTo: [],
   });
 
+  @Output() search = new EventEmitter<boolean>();
+  @Output() clear = new EventEmitter<boolean>();
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
@@ -34,7 +35,4 @@ export class TempLicenseSearchComponent extends KspFormBaseComponent {
       })
     );
   }
-
-  @Output() clear = new EventEmitter<boolean>(false);
-  @Output() search = new EventEmitter<boolean>(false);
 }
