@@ -2,9 +2,11 @@
 
 <form [formGroup]="form">
   <div class="container">
-    <div class="fs-4">รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ</div>
+    <div class="container-xl px-0 pt-2">
+      <div class="fs-4">รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ</div>
+    </div>
 
-    <div class="bg-white px-4 py-2">
+    <div class="bg-white container-xl">
       <ksp-request-header-info
         [requestDate]="'10 ตุลาคม 2565'"
         [requestNumber]="'112234467876543'"
@@ -12,9 +14,15 @@
 
       <hr />
 
-      <div class="img__step">
+      <!-- <div class="img__step">
         <img src="/assets/images/img-uni/stepper.png" />
-      </div>
+      </div> -->
+
+      <ksp-stepper-nav
+        [buttonColor]="'#f68b33'"
+        [buttonLabel]="'ข้อมูลผู้มีอำนาจแต่งตั้ง'"
+        [gridGapSize]="'9rem'"
+      ></ksp-stepper-nav>
 
       <div class="mb-3">
         <ksp-university-select
@@ -25,12 +33,12 @@
       </div>
 
       <div class="d-flex">
-        <div class="fs-4 text-primary ps-4">รหัสเข้าใช้งาน (รหัสโรงเรียน)</div>
-        <div class="fs-4 ms-2">คือ xxxx</div>
+        <div class="fs-5 text-primary ps-4">รหัสเข้าใช้งาน (รหัสโรงเรียน)</div>
+        <div class="fs-5 ms-2">คือ xxxx</div>
       </div>
 
-      <div class="bg-light px-4 pt-3 pb-3">
-        <div class="text-primary fs-5">
+      <div class="bg-light">
+        <div class="text-primary fs-5 px-4 pt-4">
           ข้อมูลผู้แต่งตั้งผู้ประสานงาน / ผู้รับผิดชอบ (ที่ระบุไว้ในเอกสารแนบ)
         </div>
 

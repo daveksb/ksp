@@ -1,83 +1,89 @@
-<div class="bg-light px-3 pt-1 pb-2">
-  <ng-content></ng-content>
+<form [formGroup]="form">
+  <div class="bg-light px-3 pt-1 pb-2">
+    <ng-content></ng-content>
 
-  <div class="row mb-2">
-    <div class="col">
-      <label class="form-label">สถาบัน / มหาวิทยาลัย </label>
-      <select class="form-select" formControlName="institution">
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">สถาบัน / มหาวิทยาลัย </label>
+        <select class="form-select" formControlName="institution">
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div class="col">
+        <label class="form-label">สังกัด / คณะหน่วยงาน </label>
+        <select class="form-select" formControlName="affiliation">
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
     </div>
-    <div class="col">
-      <label class="form-label">สังกัด / คณะหน่วยงาน </label>
-      <select class="form-select" formControlName="affiliation">
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
+
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">รหัสรับรองปริญญา</label>
+        <input class="form-control" type="text" formControlName="degreeCode" />
+      </div>
+      <div class="col">
+        <label class="form-label">ชื่อปริญญา และประกาศนียบัตรทางการศึกษา</label>
+        <input class="form-control" type="text" formControlName="degreeName" />
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">ระดับปริญญาทางการศึกษา</label>
+        <select class="form-select" formControlName="degreeLvel">
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div class="col">
+        <label class="form-label">ปีการศึกษาที่เปิด</label>
+        <input class="form-control" type="text" formControlName="openYear" />
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">เลขที่ใบคำขอ</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="requestNumber"
+        />
+      </div>
+      <div class="col">
+        <label class="form-label">วันที่ยื่นใบคำขอ</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="requestsubmitDate"
+        />
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end mt-2">
+      <button
+        (click)="clear.emit(true)"
+        type="button"
+        class="btn border-primary text-primary"
+      >
+        ล้างข้อมูล
+      </button>
+      <button
+        (click)="search.emit(true)"
+        type="button"
+        class="btn btn-primary ms-2"
+      >
+        ค้นหา
+      </button>
     </div>
   </div>
-
-  <div class="row mb-2">
-    <div class="col">
-      <label class="form-label">รหัสรับรองปริญญา</label>
-      <input class="form-control" type="text" formControlName="degreeCode" />
-    </div>
-    <div class="col">
-      <label class="form-label">ชื่อปริญญา และประกาศนียบัตรทางการศึกษา</label>
-      <input class="form-control" type="text" formControlName="degreeName" />
-    </div>
-  </div>
-
-  <div class="row mb-2">
-    <div class="col">
-      <label class="form-label">ระดับปริญญาทางการศึกษา</label>
-      <select class="form-select" formControlName="degreeLvel">
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-    <div class="col">
-      <label class="form-label">ปีการศึกษาที่เปิด</label>
-      <input class="form-control" type="text" formControlName="openYear" />
-    </div>
-  </div>
-
-  <div class="row mb-2">
-    <div class="col">
-      <label class="form-label">เลขที่ใบคำขอ</label>
-      <input class="form-control" type="text" formControlName="requestNumber" />
-    </div>
-    <div class="col">
-      <label class="form-label">วันที่ยื่นใบคำขอ</label>
-      <input
-        class="form-control"
-        type="text"
-        formControlName="requestsubmitDate"
-      />
-    </div>
-  </div>
-
-  <div class="d-flex justify-content-end mt-2">
-    <button
-      (click)="clear.emit(true)"
-      type="button"
-      class="btn border-primary text-primary"
-    >
-      ล้างข้อมูล
-    </button>
-    <button
-      (click)="search.emit(true)"
-      type="button"
-      class="btn btn-primary ms-2"
-    >
-      ค้นหา
-    </button>
-  </div>
-</div>
+</form>

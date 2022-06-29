@@ -16,79 +16,43 @@
     <hr />
     <div>
       <!-- <img src="/assets/images/img-uni/stepper.png" /> -->
-      <div class="d-flex flex-column align-items-center mb-5">
-        <div class="position-relative m-4 w-25">
-          <div class="progress" style="height: 1px">
-            <div
-              class="progress-bar"
-              role="progressbar"
-              style="width: 100%; background-color: #f68b33"
-              aria-valuenow="50"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div>
-          <button
-            type="button"
-            class="position-absolute top-0 start-0 translate-middle btn btn-sm rounded-pill"
-            style="
-              width: 3rem;
-              height: 3rem;
-              pointer-events: none;
-              background-color: #f68b33;
-            "
-          >
-            <mat-icon class="text-white mt-2 ms-1"> insert_drive_file</mat-icon>
-            <div class="stepper_label">ข้อมูลผู้ขอรหัสสำหรับเข้าใช้งานระบบ</div>
-          </button>
-          <button
-            type="button"
-            class="position-absolute top-0 start-100 translate-middle btn btn-sm rounded-pill"
-            style="
-              width: 3rem;
-              height: 3rem;
-              pointer-events: none;
-              background-color: #f68b33;
-            "
-          >
-            <mat-icon class="text-white my-1">person</mat-icon>
-            <div class="stepper_label">
-              ข้อมูลผู้แต่งตั้งผู้ประสานงาน / ผู้รับผิดชอบ
-            </div>
-          </button>
-        </div>
+
+      <ksp-stepper-nav
+        [buttonColor]="'#f68b33'"
+        [gridGapSize]="'8rem'"
+        [buttonLabel]="'ข้อมูลผู้แต่งตั้งผู้ประสานงาน/ผู้รับผิดชอบ'"
+      ></ksp-stepper-nav>
+
+      <div class="my-3">
+        <ksp-university-select></ksp-university-select>
       </div>
-    </div>
 
-    <div class="my-3">
-      <ksp-university-select></ksp-university-select>
-    </div>
+      <div class="my-3">
+        <uni-register-coordinator-info
+          [formHeader]="
+            'ข้อมูลผู้แต่งตั้งผู้ประสานงาน / ผู้รับผิดชอบ (ที่ระบุไว้ในเอกสารแนบ)'
+          "
+        ></uni-register-coordinator-info>
+      </div>
 
-    <div class="my-3">
-      <uni-register-coordinator-info
-        [formHeader]="
-          'ข้อมูลผู้แต่งตั้งผู้ประสานงาน / ผู้รับผิดชอบ (ที่ระบุไว้ในเอกสารแนบ)'
-        "
-      ></uni-register-coordinator-info>
-    </div>
+      <div class="my-3">
+        <ksp-form-attachment
+          [title]="'กรุณาแนบหลักฐานเพื่อพิจารณา'"
+          [titleClass]="'text-primary fs-4'"
+          [groups]="registerFiles"
+        ></ksp-form-attachment>
+      </div>
 
-    <div class="my-3">
-      <ksp-form-attachment
-        [title]="'กรุณาแนบหลักฐานเพื่อพิจารณา'"
-        [titleClass]="'text-primary fs-4'"
-        [groups]="registerFiles"
-      ></ksp-form-attachment>
+      <ksp-bottom-nav
+        [isFirstPage]="false"
+        [isLastPage]="true"
+        [showCenterButtons]="true"
+        [showSaveButton]="true"
+        (prevClicked)="prevPage()"
+        (cancelClicked)="cancel()"
+        (saveClicked)="confirm()"
+      >
+      </ksp-bottom-nav>
     </div>
-
-    <ksp-bottom-nav
-      [isFirstPage]="false"
-      [isLastPage]="true"
-      [showCenterButtons]="true"
-      [showSaveButton]="true"
-      (prevClicked)="prevPage()"
-      (cancelClicked)="cancel()"
-      (saveClicked)="confirm()"
-    >
-    </ksp-bottom-nav>
   </div>
 </div>

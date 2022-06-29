@@ -2,17 +2,26 @@
 
 <form [formGroup]="form">
   <div class="container-fluid">
-    <div class="fs-4">รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ</div>
+    <div class="container-xl px-0 pt-2">
+      <div class="fs-4">รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ</div>
+    </div>
 
-    <div class="bg-white px-4 py-2">
+    <div class="bg-white container-xl">
       <ksp-request-header-info
         [requestDate]="'10 ตุลาคม 2565'"
         [requestNumber]="'112234467876543'"
       ></ksp-request-header-info>
       <hr />
 
-      <div class="img__step">
+      <!-- <div class="img__step">
         <img src="/assets/images/img-uni/stepper.png" />
+      </div> -->
+
+      <div>
+        <ksp-stepper-nav
+          [buttonLabel]="'ข้อมูลผู้มีอำนาจแต่งตั้ง'"
+          [gridGapSize]="'9rem'"
+        ></ksp-stepper-nav>
       </div>
 
       <ksp-university-select
@@ -36,11 +45,9 @@
         </div>
       </div>
 
-      <div class="px-4 mb-4">
-        <ksp-form-requester-info
-          formControlName="requester"
-        ></ksp-form-requester-info>
-      </div>
+      <ksp-form-requester-info
+        formControlName="requester"
+      ></ksp-form-requester-info>
 
       <ksp-bottom-nav
         [isFirstPage]="true"
