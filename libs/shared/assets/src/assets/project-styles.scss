@@ -71,11 +71,11 @@ add asterisk for required feild
   bottom: 0;
   left: var(--ksp-sidenav-width);
   z-index: 2;
-  width: auto !important;
+  width: auto;
 }
 
 .full-height {
-  height: calc(100vh - var(--ksp-top-nav-height));
+  height: calc(100vh);
 }
 
 .default-width {

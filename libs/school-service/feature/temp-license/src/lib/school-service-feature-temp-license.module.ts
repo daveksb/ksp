@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SchoolTempLicenseListComponent } from './school-temp-license-list/school-temp-license-list.component';
-import { LicenseDetailComponent } from './license-detail/license-detail.component';
+import { SchoolTempLicenseDetailComponent } from './school-temp-license-detail/school-temp-license-detail.component';
 import { SchoolServiceFeatureTempLicenseRoutingModule } from './school-service-feature-temp-license-routing.module';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
@@ -31,6 +31,9 @@ import { TempLicenseSearchComponent } from '@ksp/shared/form/search';
     ReactiveFormsModule,
     TempLicenseSearchComponent,
   ],
-  declarations: [SchoolTempLicenseListComponent, LicenseDetailComponent],
+  declarations: [
+    SchoolTempLicenseListComponent,
+    SchoolTempLicenseDetailComponent,
+  ],
 })
 export class SchoolServiceFeatureTempLicenseModule {}

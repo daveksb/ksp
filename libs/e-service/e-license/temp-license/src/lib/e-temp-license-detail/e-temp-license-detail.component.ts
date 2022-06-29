@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { Router } from '@angular/router';
-import { TempLicenseDetailService } from './temp-license-detail.service';
+import { TempLicenseDetailService } from './e-temp-license-detail.service';
 
 @Component({
   selector: 'e-service-temp-license-detail',
-  templateUrl: './temp-license-detail.component.html',
-  styleUrls: ['./temp-license-detail.component.scss'],
+  templateUrl: './e-temp-license-detail.component.html',
+  styleUrls: ['./e-temp-license-detail.component.scss'],
 })
-export class TempLicenseDetailComponent implements OnInit {
+export class ETempLicenseDetailComponent implements OnInit {
   reason: string[][] = [];
   choices: string[] = [];
   selectedTabIndex = 0;

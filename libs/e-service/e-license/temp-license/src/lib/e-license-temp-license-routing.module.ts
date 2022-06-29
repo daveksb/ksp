@@ -4,7 +4,7 @@ import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container
 import { TempLicenseApproveComponent } from './temp-license-approve/temp-license-approve.component';
 import { TempLicenseCheckConfirmComponent } from './temp-license-check-confirm/temp-license-check-confirm.component';
 import { TempLicenseCheckForbiddenComponent } from './temp-license-check-forbidden/temp-license-check-forbidden.component';
-import { TempLicenseDetailComponent } from './temp-license-detail/temp-license-detail.component';
+import { ETempLicenseDetailComponent } from './e-temp-license-detail/e-temp-license-detail.component';
 import { ETempLicenseListComponent } from './e-temp-license-list/e-temp-license-list.component';
 
 const routes: Routes = [
@@ -23,7 +23,7 @@ const routes: Routes = [
       },
       {
         path: 'detail',
-        component: TempLicenseDetailComponent,
+        component: ETempLicenseDetailComponent,
       },
       {
         path: 'forbidden',
