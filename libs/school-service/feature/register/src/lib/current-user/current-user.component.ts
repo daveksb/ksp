@@ -7,9 +7,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./current-user.component.scss'],
 })
 export class CurrentUserComponent {
-  form = this.fb.group({
+  /*   form = this.fb.group({
     selectUniversity: [],
   });
+ */
+
+  selectedUniversity = '';
 
   constructor(public router: Router, private fb: FormBuilder) {}
 

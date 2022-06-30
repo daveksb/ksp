@@ -5,7 +5,7 @@
 
 <div
   [formGroup]="form"
-  class="bg-secondary bg-opacity-10 px-4 py-2 full-height"
+  class="bg-secondary bg-opacity-10 px-4 pt-1 pb-3 full-height"
 >
   <div class="fs-5 pb-1">ค้นหาข้อมูลใบอนุญาตประกอบวิชาชีพทางการศึกษา</div>
 
@@ -58,7 +58,7 @@
     </div>
   </div>
 
-  <div class="bg-white p-3 mt-3" *ngIf="foundItem">
+  <div class="bg-white p-3 mt-3 default-width" *ngIf="foundItem">
     <div class="fs-5">ผลการค้นหา</div>
     <hr />
     <ksp-license-info></ksp-license-info>

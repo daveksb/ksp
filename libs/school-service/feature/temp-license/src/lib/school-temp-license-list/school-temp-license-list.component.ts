@@ -34,7 +34,9 @@ export class SchoolTempLicenseListComponent {
   ];
   dataSource = new MatTableDataSource<TempLicenseInfo>();
 
-  constructor(private router: Router, private fb: FormBuilder) {}
+  constructor(private router: Router, private fb: FormBuilder) {
+    this.dataSource.data = data;
+  }
   data: TempLicenseInfo[] = [];
 
   search() {

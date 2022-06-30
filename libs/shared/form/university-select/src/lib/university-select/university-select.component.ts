@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { UniversitySearchComponent } from '@ksp/shared/form/university-search';
@@ -16,8 +16,9 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   providers: providerFactory(UniversitySelectComponent),
 })
 export class UniversitySelectComponent extends KspFormBaseComponent {
-  @Input() label1: any;
-  @Input() label2: any;
+  @Input() label1 = 'สังกัด';
+  @Input() label2 = 'โรงเรียน / สถานศึกษา';
+  @Output() selectedUniversity = new EventEmitter<string>();
 
   override form = this.fb.group({
     institution: [],
@@ -36,12 +37,18 @@ export class UniversitySelectComponent extends KspFormBaseComponent {
   }
 
   search() {
-    this.dialog.open(UniversitySearchComponent, {
+    const dialog = this.dialog.open(UniversitySearchComponent, {
       width: '1200px',
       position: {
         top: '0px',
         right: '0px',
       },
+    });
+
+    dialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.selectedUniversity.emit('testScool');
+      }
     });
   }
 }

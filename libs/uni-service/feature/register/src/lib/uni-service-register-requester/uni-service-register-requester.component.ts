@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UniversitySearchComponent } from '@ksp/shared/form/university-search';
@@ -7,7 +7,6 @@ import { UniversitySearchComponent } from '@ksp/shared/form/university-search';
   selector: 'uni-service-register-requester',
   templateUrl: './uni-service-register-requester.component.html',
   styleUrls: ['./uni-service-register-requester.component.scss'],
-  /* encapsulation: ViewEncapsulation.None, */
 })
 export class UniServiceRegisterRequesterComponent {
   constructor(private router: Router, public dialog: MatDialog) {}
