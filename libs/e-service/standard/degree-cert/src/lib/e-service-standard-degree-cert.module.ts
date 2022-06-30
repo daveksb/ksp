@@ -26,7 +26,7 @@ import {
   LicenseCheckComponent,
 } from '@ksp/e-service/ui/license-check';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FileUploadComponent } from '@ksp/shared/form/file-upload';
+import { FormMeetingRecordComponent } from '@ksp/e-service/form';
 
 @NgModule({
   imports: [
@@ -50,7 +50,7 @@ import { FileUploadComponent } from '@ksp/shared/form/file-upload';
     LicenseCheckComponent,
     FinalResultInfoComponent,
     ReactiveFormsModule,
-    FileUploadComponent,
+    FormMeetingRecordComponent,
   ],
   declarations: [
     DegreeCertListComponent,

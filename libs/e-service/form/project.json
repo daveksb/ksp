@@ -1,0 +1,17 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/e-service/form/src",
+  "prefix": "ksp",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/e-service/form/**/*.ts",
+          "libs/e-service/form/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

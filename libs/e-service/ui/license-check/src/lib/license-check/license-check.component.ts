@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -19,4 +19,5 @@ export class LicenseCheckComponent {
   ];
   @Input() headerTitle = 'ผลการตรวจสอบ';
   @Input() isHasReason = true;
+  @Output() selectedItem = 0;
 }

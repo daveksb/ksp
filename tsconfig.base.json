@@ -57,6 +57,7 @@
       "@ksp/e-service/feature/login": [
         "libs/e-service/feature/login/src/index.ts"
       ],
+      "@ksp/e-service/form": ["libs/e-service/form/src/index.ts"],
       "@ksp/e-service/standard/degree-cert": [
         "libs/e-service/standard/degree-cert/src/index.ts"
       ],

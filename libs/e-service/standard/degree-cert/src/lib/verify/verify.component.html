@@ -2,124 +2,53 @@
   <span header> พิจารณารับรองหลักสูคร </span>
 </ksp-top-nav>
 
-<form [formGroup]="form">
-  <div class="bg-secondary bg-opacity-10 px-4 py-1">
-    <div class="fs-5">{{ titles[processType] }}</div>
-    <div class="bg-white p-3 default-width">
-      <div class="fs-5 text-primary">
-        รายการขอรับรองปริญญาและประกาศนียบัตรวิชาชีพทางการศึกษา
-      </div>
+<div class="bg-secondary bg-opacity-10 px-4 py-1">
+  <div class="fs-5">{{ titles[processType] }}</div>
+  <div class="bg-white p-3 default-width">
+    <div class="fs-5 text-primary">
+      รายการขอรับรองปริญญาและประกาศนียบัตรวิชาชีพทางการศึกษา
+    </div>
 
-      <div class="table__container">
-        <div class="table-responsive">
-          <table class="table">
-            <thead class="header__table">
-              <tr>
-                <th scope="col">เลขที่ใบคำขอ</th>
-                <th scope="col">วันที่ส่งคำขอ</th>
-                <th scope="col">สถาบัน / มหาวิทยาลัย</th>
-                <th scope="col">ชื่อปริญญา / สาขาวิชา</th>
-              </tr>
-            </thead>
-            <tbody class="body__table">
-              <tr>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-              </tr>
-              <tr>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="fs-5 text-primary">บันทึกมติที่ประชุมคณะอนุกรรมการ</div>
-
-      <div class="bg-light p-3">
-        <div class="row mb-2">
-          <div class="col-2">
-            <label class="form-label">มติครั้งที่</label>
-            <input
-              class="form-control"
-              type="text"
-              placeholder="กรุณากรอก"
-              formControlName="reasonTimes"
-            />
-          </div>
-          <div class="col-4">
-            <label class="form-label">ช่วงวันที่</label>
-            <input
-              class="form-control"
-              type="date"
-              placeholder="กรุณากรอก"
-              formControlName="date"
-            />
-          </div>
-        </div>
-
-        <div class="row mb-2">
-          <div class="col-6">
-            <label class="form-label">ประเภทกรรมการ</label>
-            <select
-              class="search__content form-select"
-              formControlName="boardType"
-            >
-              <option selected>กรุณาเลือก</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="row mb-2">
-          <div class="col">
-            <label class="form-label">ชื่อกรรมการ</label>
-            <input
-              class="form-control"
-              type="text"
-              placeholder="กรุณากรอก"
-              formControlName="boardName"
-            />
-          </div>
-          <div class="col">
-            <label class="form-label">ชื่อประธาน</label>
-            <input
-              class="form-control"
-              type="text"
-              placeholder="กรุณากรอก"
-              formControlName="chairmanName"
-            />
-          </div>
-        </div>
-
-        <div class="d-flex">
-          <div class="form-label">เอกสารแนบ</div>
-          <div class="ms-2 text-danger">
-            *กรุณาอัพโหลดไฟล์ .pdf และขนาดไม่เกิน 2 MB
-            สามารถอัพโหลดไฟล์ได้มากกว่า 1 ไฟล์ต่อรายการ
-          </div>
-        </div>
-
-        <ksp-file-upload></ksp-file-upload>
+    <div class="table__container">
+      <div class="table-responsive">
+        <table class="table">
+          <thead class="header__table">
+            <tr>
+              <th scope="col">เลขที่ใบคำขอ</th>
+              <th scope="col">วันที่ส่งคำขอ</th>
+              <th scope="col">สถาบัน / มหาวิทยาลัย</th>
+              <th scope="col">ชื่อปริญญา / สาขาวิชา</th>
+            </tr>
+          </thead>
+          <tbody class="body__table">
+            <tr>
+              <td class="detail__table">xxx</td>
+              <td class="detail__table">xxx</td>
+              <td class="detail__table">xxx</td>
+              <td class="detail__table">xxx</td>
+            </tr>
+            <tr>
+              <td class="detail__table">xxx</td>
+              <td class="detail__table">xxx</td>
+              <td class="detail__table">xxx</td>
+              <td class="detail__table">xxx</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
-    <div class="mt-3 bg-white py-1 px-3 default-width">
-      <e-service-license-check
-        [isHasReason]="false"
-        [headerTitle]="'ผลการพิจารณา'"
-        [choices]="choices[processType]"
-      ></e-service-license-check>
-    </div>
+    <ksp-form-meeting-record></ksp-form-meeting-record>
   </div>
-</form>
+
+  <div class="mt-3 bg-white py-1 px-3 default-width">
+    <e-service-license-check
+      [isHasReason]="false"
+      [headerTitle]="'ผลการพิจารณา'"
+      [choices]="choices[processType]"
+    ></e-service-license-check>
+  </div>
+</div>
 
 <div class="sticky-bottom border">
   <ksp-bottom-nav
