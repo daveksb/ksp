@@ -17,6 +17,7 @@ import { TopNavComponent } from '@ksp/shared/menu';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import { TempLicenseSearchComponent } from '@ksp/shared/form/search';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TempLicenseApproveListComponent } from './temp-license-approve-list/temp-license-approve-list.component';
 
 @NgModule({
   imports: [
@@ -40,11 +41,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     TempLicenseCheckForbiddenComponent,
     TempLicenseCheckConfirmComponent,
     TempLicenseApproveComponent,
+    TempLicenseApproveListComponent,
   ],
   exports: [
     TempLicenseCheckForbiddenComponent,
     TempLicenseCheckConfirmComponent,
     TempLicenseApproveComponent,
+    TempLicenseApproveListComponent,
   ],
 })
 export class ELicenseTempLicenseModule {}

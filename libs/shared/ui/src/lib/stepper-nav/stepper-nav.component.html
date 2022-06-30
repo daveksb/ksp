@@ -16,25 +16,26 @@
       class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-orange rounded-pill"
       style="width: 3rem; height: 3rem; pointer-events: none; border: none"
     >
-      <mat-icon class="text-white"> insert_drive_file</mat-icon>
+      <i class="bi bi-file-earmark-text fs-4"></i>
     </button>
 
-    <button
+    <div
       type="button"
       class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill"
       style="width: 3rem; height: 3rem; pointer-events: none; border: none"
       [style.background-color]="buttonColor"
     >
-      <mat-icon class="text-white">person</mat-icon>
-    </button>
+      <i class="bi bi-person fs-4"></i>
+    </div>
   </div>
 
-  <div class="label__container" [style.grid-column-gap]="gridGapSize">
+  <div class="label__container w-50">
     <div class="text-orange" style="cursor: default">
-      ข้อมูลผู้ขอรหัสสำหรับเข้าใช้งานระบบ
+      {{ LabelFirst }}
     </div>
+
     <div [style.color]="buttonColor" style="cursor: default">
-      {{ buttonLabel }}
+      {{ LabelSecond }}
     </div>
   </div>
 </div>

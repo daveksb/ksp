@@ -3,7 +3,12 @@
 <form [formGroup]="form">
   <div class="main-container">
     <div class="page__title">บันทึกข้อมูลการกล่าวหา/กล่าวโทษ</div>
-    <img src="" />
+
+    <ksp-stepper-nav
+      [buttonColor]="'#f68b33'"
+      [LabelFirst]="'บันทึกการกล่าวหา/กล่าวโทษ'"
+      [LabelSecond]="'พิจารณาดำเนินการ'"
+    ></ksp-stepper-nav>
 
     <div class="box-container">
       <ksp-request-header-info

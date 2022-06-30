@@ -1,6 +1,6 @@
 <form [formGroup]="form">
   <div
-    class="main-container"
+    class="main-container bg-secondary bg-opacity-10"
     [ngClass]="{
       hide__container: hideContainer
     }"
@@ -8,6 +8,12 @@
     <div class="page__title" *ngIf="!hideTitle">
       บันทึกข้อมูลการกล่าวหา/กล่าวโทษ
     </div>
+
+    <ksp-stepper-nav
+      *ngIf="!hideStepper"
+      [LabelFirst]="'บันทึกการกล่าวหา/กล่าวโทษ'"
+      [LabelSecond]="'พิจารณาดำเนินการ'"
+    ></ksp-stepper-nav>
 
     <div class="box-container" [ngClass]="{ hide__box: hideBox }">
       <ksp-request-header-info
@@ -17,10 +23,8 @@
 
       <hr />
 
-      <div class="table__title">
-        ข้อมูลผู้กล่าวหา/กล่าวโทษ
-        <div class="add__list">+ เพิ่มรายการ</div>
-      </div>
+      <div class="table__title">ข้อมูลผู้กล่าวหา/กล่าวโทษ</div>
+      <div class="d-flex justify-content-end add__list">+ เพิ่มรายการ</div>
       <div class="table__container">
         <div class="table-responsive">
           <table class="table">
@@ -42,8 +46,15 @@
                 <th>xxxxxx</th>
                 <th>yyyyyy</th>
                 <th>098-xxx-xxxx</th>
-                <th><mat-icon class="edit">edit</mat-icon></th>
-                <th><mat-icon class="delete">delete</mat-icon></th>
+                <th>
+                  <i
+                    role="button"
+                    class="bi bi-pencil-square fs-5 text-primary"
+                  ></i>
+                </th>
+                <th>
+                  <i role="button" class="bi bi-trash fs-5 text-danger"></i>
+                </th>
               </tr>
             </tbody>
           </table>

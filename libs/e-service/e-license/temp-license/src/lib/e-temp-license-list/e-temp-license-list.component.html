@@ -44,9 +44,11 @@
           <ng-container matColumnDef="edit">
             <th mat-header-cell *matHeaderCellDef>ตรวจสอบ</th>
             <td mat-cell *matCellDef="let element">
-              <mat-icon (click)="nextPage(1)" class="check_circle"
-                >check_circle</mat-icon
-              >
+              <i
+                role="button"
+                (click)="nextPage(1)"
+                class="bi bi-check-circle-fill text-success fs-5"
+              ></i>
             </td>
           </ng-container>
 
@@ -96,14 +98,20 @@
           <ng-container matColumnDef="reqDoc">
             <th mat-header-cell *matHeaderCellDef>ใบคำขอ</th>
             <td mat-cell *matCellDef="let element">
-              <mat-icon class="insert_drive_file">insert_drive_file</mat-icon>
+              <i
+                role="button"
+                class="bi bi-file-earmark-text-fill text-primary fs-5"
+              ></i>
             </td>
           </ng-container>
 
           <ng-container matColumnDef="approveDoc">
             <th mat-header-cell *matHeaderCellDef>ใบอนุญาต</th>
             <td mat-cell *matCellDef="let element">
-              <mat-icon class="insert_drive_file">insert_drive_file</mat-icon>
+              <i
+                role="button"
+                class="bi bi-file-earmark-text-fill text-primary fs-5"
+              ></i>
             </td>
           </ng-container>
 

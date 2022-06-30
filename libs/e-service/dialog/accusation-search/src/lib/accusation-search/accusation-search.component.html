@@ -76,9 +76,11 @@
     <ng-container matColumnDef="view">
       <th mat-header-cell *matHeaderCellDef>ดูข้อมูล</th>
       <td mat-cell *matCellDef="let row">
-        <mat-icon (click)="personSelected = true" class="eye__icon"
-          >remove_red_eye</mat-icon
-        >
+        <i
+          role="button"
+          (click)="personSelected = true"
+          class="bi bi-eye text-success fs-5"
+        ></i>
       </td>
     </ng-container>
 

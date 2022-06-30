@@ -25,6 +25,7 @@
     "@nrwl/angular": "14.3.6",
     "@nrwl/nx-cloud": "14.1.2",
     "bootstrap": "^5.2.0-beta1",
+    "bootstrap-icons": "^1.8.3",
     "primeng": "13.4.1",
     "rxjs": "7.5.5",
     "tslib": "^2.0.0",
