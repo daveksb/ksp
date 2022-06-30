@@ -1,5 +1,5 @@
 export * from './lib/uni-service-form.module';
 
-export * from './lib/register-coordinator-info/register-coordinator-info.component';
+export * from './lib/form-register-coordinator/form-register-coordinator.component';
 
-export * from './lib/register-requester-info/register-requester-info.component';
+export * from './lib/form-register-requester/form-register-requester.component';
