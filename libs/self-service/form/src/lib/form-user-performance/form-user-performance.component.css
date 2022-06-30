@@ -37,10 +37,6 @@
   border-top: 0;
 }
 
-tr.mat-header-row {
-  background-color: #edf8ff;
-}
-
 .table__header {
   padding: 8px;
 }

@@ -10,6 +10,7 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { UniServiceFormModule } from '@ksp/uni-service/form';
 import { BottomNavComponent } from '@ksp/shared/menu';
 import { TopNavComponent } from '@ksp/shared/menu';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { TopNavComponent } from '@ksp/shared/menu';
     RequestHeaderInfoComponent,
     UniServiceFormModule,
     BottomNavComponent,
+    ReactiveFormsModule,
   ],
   declarations: [
     RetiredSearchComponent,

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UniversitySearchComponent } from '@ksp/shared/form/university-search';
@@ -9,7 +10,15 @@ import { UniversitySearchComponent } from '@ksp/shared/form/university-search';
   styleUrls: ['./uni-service-register-requester.component.scss'],
 })
 export class UniServiceRegisterRequesterComponent {
-  constructor(private router: Router, public dialog: MatDialog) {}
+  form = this.fb.group({
+    requester: [],
+  });
+
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private fb: FormBuilder
+  ) {}
 
   search() {
     this.dialog.open(UniversitySearchComponent, {

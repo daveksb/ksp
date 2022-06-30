@@ -1,109 +1,113 @@
 <uni-service-top-nav>ขอถอดถอนผู้ประสานงาน</uni-service-top-nav>
 
-<div class="bg-secondary bg-opacity-10 py-2">
-  <div class="container-xl ps-0 fs-4 default-width">
-    รายละเอียดใบคำขอถอดถอน (ผู้ประสานงาน / ผู้รับผิดชอบ)
-  </div>
-
-  <div class="container-xl bg-white px-3 py-2 default-width">
-    <ksp-request-header-info
-      requestDate="10 ตุลาคม 2565"
-      requestNumber="112234467876543"
-    ></ksp-request-header-info>
-    <hr />
-
-    <div class="bg-light px-3 pt-1 pb-3">
-      <div class="fs-4 text-primary">สถาบันที่สังกัด</div>
-
-      <div class="d-flex">
-        <div class="fs-5 text-secondary">สถาบัน / มหาวิทยาลัย :</div>
-        <div class="fs-5 ms-3">{{ userInfo.university }}</div>
-      </div>
-
-      <div class="d-flex">
-        <div class="fs-5 text-secondary">สังกัด :</div>
-        <div class="fs-5 ms-3">{{ userInfo.organisation }}</div>
-      </div>
-
-      <div class="fs-4 text-primary mt-3">
-        ข้อมูลผู้ขอรหัสสำหรับเข้าใช้งานระบบ (ผู้ประสานงาน / ผู้รับผิดชอบ)
-      </div>
-
-      <div class="d-flex">
-        <div class="fs-5 text-secondary">สิทธิ์สำหรับการเข้าใช้งาน :</div>
-        <div class="fs-5 ms-3">{{ userInfo.userRight }}</div>
-      </div>
-
-      <div class="d-flex mb-1">
-        <div class="fs-5 text-secondary">หมายเลขบัตรประชาชน :</div>
-        <div class="fs-5 ms-3">{{ userInfo.personId }}</div>
-      </div>
-
-      <div class="d-flex mb-1">
-        <div class="fs-5 text-secondary">ชื่อ-นามสกุลภาษาไทย :</div>
-        <div class="fs-5 ms-3">{{ userInfo.nameTh }}</div>
-      </div>
-
-      <div class="d-flex mb-1">
-        <div class="fs-5 text-secondary">ชื่อ-นามสกุลภาษาอังกฤษ :</div>
-        <div class="fs-5 ms-3">{{ userInfo.nameEn }}</div>
-      </div>
-
-      <div class="d-flex mb-1">
-        <div class="fs-5 text-secondary">ตำแหน่งทางการบริหาร :</div>
-        <div class="fs-5 ms-3">{{ userInfo.managementPosition }}</div>
-      </div>
-
-      <div class="d-flex mb-1">
-        <div class="fs-5 text-secondary">สังกัด :</div>
-        <div class="fs-5 ms-3">{{ userInfo.organisation }}</div>
-      </div>
-
-      <div class="d-flex mb-1">
-        <div class="fs-5 text-secondary">เบอร์โทรศัพท์ (ที่ทำงาน) :</div>
-        <div class="fs-5 ms-3">{{ userInfo.workPhone }}</div>
-      </div>
-
-      <div class="d-flex mb-1">
-        <div class="fs-5 text-secondary">เบอร์โทรศัพท์ (ที่ติดต่อได้) :</div>
-        <div class="fs-5 ms-3">{{ userInfo.phone }}</div>
-      </div>
-
-      <div class="d-flex mb-1">
-        <div class="fs-5 text-secondary">อีเมล์ :</div>
-        <div class="fs-5 ms-3">{{ userInfo.email }}</div>
-      </div>
+<form [formGroup]="form">
+  <div class="bg-secondary bg-opacity-10 py-2">
+    <div class="container-xl ps-0 fs-4 default-width">
+      รายละเอียดใบคำขอถอดถอน (ผู้ประสานงาน / ผู้รับผิดชอบ)
     </div>
 
-    <div class="bg-light mt-3 px-3 pt-1 pb-3">
-      <div class="fs-4 text-primary">เหตุผลการถอดถอน</div>
+    <div class="container-xl bg-white px-3 py-2 default-width">
+      <ksp-request-header-info
+        requestDate="10 ตุลาคม 2565"
+        requestNumber="112234467876543"
+      ></ksp-request-header-info>
+      <hr />
 
-      <div class="row">
-        <div class="col-5">
-          <label class="form-label">เหตุผลการถอดถอน</label>
-          <select class="form-select">
-            <option selected>กรุณาเลือก</option>
-            <option value="1">เลิกจ้าง</option>
-            <option value="2">---</option>
-          </select>
+      <div class="bg-light px-3 pt-1 pb-3">
+        <div class="fs-4 text-primary">สถาบันที่สังกัด</div>
+
+        <div class="d-flex">
+          <div class="fs-5 text-secondary">สถาบัน / มหาวิทยาลัย :</div>
+          <div class="fs-5 ms-3">{{ userInfo.university }}</div>
+        </div>
+
+        <div class="d-flex">
+          <div class="fs-5 text-secondary">สังกัด :</div>
+          <div class="fs-5 ms-3">{{ userInfo.organisation }}</div>
+        </div>
+
+        <div class="fs-4 text-primary mt-3">
+          ข้อมูลผู้ขอรหัสสำหรับเข้าใช้งานระบบ (ผู้ประสานงาน / ผู้รับผิดชอบ)
+        </div>
+
+        <div class="d-flex">
+          <div class="fs-5 text-secondary">สิทธิ์สำหรับการเข้าใช้งาน :</div>
+          <div class="fs-5 ms-3">{{ userInfo.userRight }}</div>
+        </div>
+
+        <div class="d-flex mb-1">
+          <div class="fs-5 text-secondary">หมายเลขบัตรประชาชน :</div>
+          <div class="fs-5 ms-3">{{ userInfo.personId }}</div>
+        </div>
+
+        <div class="d-flex mb-1">
+          <div class="fs-5 text-secondary">ชื่อ-นามสกุลภาษาไทย :</div>
+          <div class="fs-5 ms-3">{{ userInfo.nameTh }}</div>
+        </div>
+
+        <div class="d-flex mb-1">
+          <div class="fs-5 text-secondary">ชื่อ-นามสกุลภาษาอังกฤษ :</div>
+          <div class="fs-5 ms-3">{{ userInfo.nameEn }}</div>
+        </div>
+
+        <div class="d-flex mb-1">
+          <div class="fs-5 text-secondary">ตำแหน่งทางการบริหาร :</div>
+          <div class="fs-5 ms-3">{{ userInfo.managementPosition }}</div>
+        </div>
+
+        <div class="d-flex mb-1">
+          <div class="fs-5 text-secondary">สังกัด :</div>
+          <div class="fs-5 ms-3">{{ userInfo.organisation }}</div>
+        </div>
+
+        <div class="d-flex mb-1">
+          <div class="fs-5 text-secondary">เบอร์โทรศัพท์ (ที่ทำงาน) :</div>
+          <div class="fs-5 ms-3">{{ userInfo.workPhone }}</div>
+        </div>
+
+        <div class="d-flex mb-1">
+          <div class="fs-5 text-secondary">เบอร์โทรศัพท์ (ที่ติดต่อได้) :</div>
+          <div class="fs-5 ms-3">{{ userInfo.phone }}</div>
+        </div>
+
+        <div class="d-flex mb-1">
+          <div class="fs-5 text-secondary">อีเมล์ :</div>
+          <div class="fs-5 ms-3">{{ userInfo.email }}</div>
         </div>
       </div>
 
-      <div class="mt-2">
-        <textarea
-          class="form-control form-control-sm"
-          rows="3"
-          placeholder="กรุณาระบุ"
-        ></textarea>
+      <div class="bg-light mt-3 px-3 pt-1 pb-3">
+        <div class="fs-4 text-primary">เหตุผลการถอดถอน</div>
+
+        <div class="row">
+          <div class="col-5">
+            <label class="form-label">เหตุผลการถอดถอน</label>
+            <select class="form-select" formControlName="reason">
+              <option>กรุณาเลือก</option>
+              <option selected value="1">เลิกจ้าง</option>
+              <option value="2">xxx</option>
+              <option value="3">xxx</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mt-2">
+          <textarea
+            class="form-control"
+            rows="3"
+            placeholder="กรุณาระบุ"
+            formControlName="detail"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="mt-1">
+        <ksp-bottom-nav
+          [isFirstPage]="true"
+          [showCenterButtons]="false"
+          (nextClicked)="next()"
+        ></ksp-bottom-nav>
       </div>
     </div>
-
-    <div class="mt-1">
-      <ksp-bottom-nav
-        [isFirstPage]="true"
-        [showCenterButtons]="false"
-        (nextClicked)="next()"
-      ></ksp-bottom-nav>
-    </div>
   </div>
-</div>
+</form>

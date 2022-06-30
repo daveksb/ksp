@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,6 +8,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./retired-reason.component.scss'],
 })
 export class RetiredReasonComponent {
+  form = this.fb.group({
+    reason: [],
+    detail: [],
+  });
+
   userInfo = {
     university: 'วิทยาลัยอาชีวศึกษาชลบุรี',
     organisation: 'สำนักงานคณะกรรมการอาชีวศึกษา',
@@ -20,7 +26,7 @@ export class RetiredReasonComponent {
     email: 'suoaporn.sss@gmail.com',
   };
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private fb: FormBuilder) {}
 
   next() {
     this.router.navigate(['/retired', 'attachment']);

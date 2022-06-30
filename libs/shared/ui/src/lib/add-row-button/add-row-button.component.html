@@ -1,5 +1,5 @@
 <div class="icon__container" [class.icon__container--blue]="mode === 'blue'">
-  <mat-icon (click)="onClick()">add_circle_outline</mat-icon>
+  <i role="button" (click)="onClick()" class="bi bi-plus-circle fs-6"></i>
 
   <div (click)="onClick()" class="title" [class.title--large]="mode === 'blue'">
     <ng-content></ng-content>

@@ -48,10 +48,6 @@
   display: flex;
 }
 
-.icon {
-  margin: 0 5px;
-}
-
 .header__label {
   font-size: 18px;
   color: #656565;
@@ -64,19 +60,6 @@
   margin-bottom: 15px;
 }
 
-.delete__icon {
-  cursor: pointer;
-  padding: 0;
-  color: #f23c51;
-  margin: auto;
-}
-
 #btn-save {
   margin-left: 10px;
-}
-
-.search {
-  cursor: pointer;
-  color: #0056ff;
-  margin: auto;
 }

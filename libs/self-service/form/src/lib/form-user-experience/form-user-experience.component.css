@@ -31,11 +31,6 @@
   align-items: flex-end;
 }
 
-.icon__upload {
-  vertical-align: bottom;
-  padding: 2px;
-}
-
 .btn {
   width: auto;
   font-size: 14px;

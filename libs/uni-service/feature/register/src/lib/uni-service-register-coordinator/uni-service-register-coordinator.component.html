@@ -1,57 +1,58 @@
 <uni-service-top-nav>ลงทะเบียนขอรับรหัสเข้าใช้งาน</uni-service-top-nav>
 
-<div class="bg-secondary bg-opacity-10 pt-1 pb-3">
-  <div class="container-xl p-0 fs-4">
-    รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ (ผู้ประสานงาน / ผู้รับผิดชอบ)
-  </div>
-
-  <div class="bg-white container-xl">
-    <div class="pt-2">
-      <ksp-request-header-info
-        [requestDate]="'10 ตุลาคม 2565'"
-        [requestNumber]="'112234467876543'"
-      ></ksp-request-header-info>
+<form [formGroup]="form">
+  <div class="bg-secondary bg-opacity-10 pt-1 pb-3">
+    <div class="container-xl p-0 fs-4">
+      รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ (ผู้ประสานงาน / ผู้รับผิดชอบ)
     </div>
 
-    <hr />
-    <div>
-      <!-- <img src="/assets/images/img-uni/stepper.png" /> -->
-
-      <ksp-stepper-nav
-        [buttonColor]="'#f68b33'"
-        [LabelSecond]="'ข้อมูลผู้แต่งตั้งผู้ประสานงาน/ผู้รับผิดชอบ'"
-      ></ksp-stepper-nav>
-
-      <div class="my-3">
-        <ksp-university-select></ksp-university-select>
+    <div class="bg-white container-xl">
+      <div class="pt-2">
+        <ksp-request-header-info
+          [requestDate]="'10 ตุลาคม 2565'"
+          [requestNumber]="'112234467876543'"
+        ></ksp-request-header-info>
       </div>
 
-      <div class="my-3">
-        <uni-form-register-coordinator
-          [formHeader]="
-            'ข้อมูลผู้แต่งตั้งผู้ประสานงาน / ผู้รับผิดชอบ (ที่ระบุไว้ในเอกสารแนบ)'
-          "
-        ></uni-form-register-coordinator>
-      </div>
+      <hr />
+      <div>
+        <ksp-stepper-nav
+          [buttonColor]="'#f68b33'"
+          [LabelSecond]="'ข้อมูลผู้แต่งตั้งผู้ประสานงาน/ผู้รับผิดชอบ'"
+        ></ksp-stepper-nav>
 
-      <div class="my-3">
-        <ksp-form-attachment
-          [title]="'กรุณาแนบหลักฐานเพื่อพิจารณา'"
-          [titleClass]="'text-primary fs-4'"
-          [groups]="registerFiles"
-        ></ksp-form-attachment>
-      </div>
+        <div class="my-3">
+          <ksp-university-select></ksp-university-select>
+        </div>
 
-      <ksp-bottom-nav
-        [isFirstPage]="false"
-        [isLastPage]="true"
-        [showCenterButtons]="true"
-        [showSaveButton]="true"
-        (prevClicked)="prevPage()"
-        (cancelClicked)="cancel()"
-        (saveClicked)="confirm()"
-      >
-      </ksp-bottom-nav>
+        <div class="my-3">
+          <uni-form-register-coordinator
+            formControlName="coordinator"
+            [formHeader]="
+              'ข้อมูลผู้แต่งตั้งผู้ประสานงาน / ผู้รับผิดชอบ (ที่ระบุไว้ในเอกสารแนบ)'
+            "
+          ></uni-form-register-coordinator>
+        </div>
+
+        <div class="my-3">
+          <ksp-form-attachment
+            [title]="'กรุณาแนบหลักฐานเพื่อพิจารณา'"
+            [titleClass]="'text-primary fs-4'"
+            [groups]="registerFiles"
+          ></ksp-form-attachment>
+        </div>
+
+        <ksp-bottom-nav
+          [isFirstPage]="false"
+          [isLastPage]="true"
+          [showCenterButtons]="true"
+          [showSaveButton]="true"
+          (prevClicked)="prevPage()"
+          (cancelClicked)="cancel()"
+          (saveClicked)="confirm()"
+        >
+        </ksp-bottom-nav>
+      </div>
     </div>
   </div>
-</div>
+</form>

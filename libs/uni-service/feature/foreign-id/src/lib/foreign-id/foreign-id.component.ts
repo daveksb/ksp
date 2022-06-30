@@ -28,8 +28,7 @@ export class ForeignIdComponent {
   ) {}
 
   cancel() {
-    this.form.valueChanges.subscribe((res) => console.log(' res = ', res));
-    //this.router.navigate(['/', 'home']);
+    this.router.navigate(['/', 'home']);
   }
 
   save() {

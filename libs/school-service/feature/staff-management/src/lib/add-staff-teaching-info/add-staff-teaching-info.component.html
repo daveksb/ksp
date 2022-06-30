@@ -12,10 +12,10 @@
     ></ksp-request-header-info>
     <hr />
 
-    <div class="bg-light pt-2 pb-2 ps-3 pe-5">
+    <div class="bg-light pt-2 pb-2 ps-3 pe-3">
       <div class="fs-5 ps-">ตำแหน่งงานภายในหน่วยงาน</div>
 
-      <div class="row mb-2 ps-3">
+      <div class="row mb-2 px-3">
         <div class="col-6">
           <label class="form-label">ประเภทบุคลากร</label>
           <select class="form-select" formControlName="staffType">
@@ -27,7 +27,7 @@
         </div>
       </div>
 
-      <div class="row mb-2 ps-3">
+      <div class="row mb-2 px-3">
         <div class="col">
           <label class="form-label">ตำแหน่งงาน</label>
           <select class="form-select" formControlName="post">
@@ -48,7 +48,7 @@
         </div>
       </div>
 
-      <div class="row mb-2 ps-3">
+      <div class="row mb-2 px-3">
         <div class="col">
           <label class="form-label">วันเดือนปีที่เข้าปฏิบัติงาน </label>
           <input
@@ -78,12 +78,12 @@
               value="{{ item.value }}"
             />
           </span>
-          <span class="col-2 d-flex align-self-center">
+          <span class="col-1 px-0 d-flex align-self-center">
             <label class="fs-5 text-secondary">{{ item.label }}</label>
           </span>
-          <span class="col">
+          <span class="col-2">
             <input
-              class="w-25 form-control"
+              class="form-control"
               type="date"
               formControlName="statusDate"
             />
@@ -91,7 +91,7 @@
         </div>
       </ng-container>
 
-      <div class="ms-5 mb-2">
+      <div class="mx-3 mb-2">
         <div class="fs-5 text-secondary">ระบุสาเหตุ</div>
         <textarea
           class="form-control"

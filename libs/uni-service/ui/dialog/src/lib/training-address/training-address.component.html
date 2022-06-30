@@ -19,30 +19,31 @@
                   <label class="form-label">รหัสหน่วยงาน/สถานศึกษา</label>
                   <div class="search__content">
                     <input
-                      class="form-control form-control-sm"
+                      class="form-control"
                       type="text"
                       formControlName="addressCode"
                     />
-                    <mat-icon class="search" (click)="searchAddress()"
-                      >search</mat-icon
-                    >
+                    <i
+                      role="button"
+                      (click)="searchAddress()"
+                      class="bi bi-search text-primary fs-5"
+                    ></i>
                   </div>
                 </div>
                 <div class="detail__container">
                   <label class="form-label">ชื่อหน่วยงาน/สถานศึกษา </label>
                   <input
-                    class="form-control form-control-sm"
+                    class="form-control"
                     type="text"
                     formControlName="addressName"
                   />
                 </div>
-                <mat-icon
-                  matTooltip="ลบสถานที่ปฏิบัติการสอนครั้งที่ {{ i + 1 }}"
+                <i
+                  role="button"
                   *ngIf="i > 0"
-                  class="delete__icon"
                   (click)="deleteAddress(i)"
-                  >delete_outline</mat-icon
-                >
+                  class="bi bi-trash text-danger fs-5"
+                ></i>
               </div>
             </ng-container>
           </ng-container>

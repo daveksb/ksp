@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -13,7 +14,15 @@ import { UniversitySearchComponent } from '@ksp/shared/form/university-search';
   styleUrls: ['./uni-service-register-coordinator.component.scss'],
 })
 export class UniServiceRegisterCoordinatorComponent {
-  constructor(private router: Router, public dialog: MatDialog) {}
+  form = this.fb.group({
+    coordinator: [],
+  });
+
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private fb: FormBuilder
+  ) {}
 
   registerFiles = ['หนังสือแต่งตั้งผู้ประสานงาน', 'สำเนาบัตรประชาชน'];
 

@@ -88,19 +88,15 @@
               />
             </div>
             <ng-container *hideInViewMode>
-              <mat-icon
+              <i
+                role="button"
                 *ngIf="j > 0"
-                class="delete__icon"
-                matTooltip="ลบคุณวุฒิการศึกษา ลำดับที่ {{ j + 1 }}"
                 (click)="deleteDegree(j)"
-              >
-                delete_outline
-              </mat-icon>
+                class="bi bi-trash text-danger fs-5"
+              ></i>
             </ng-container>
-          </div>
-        </ng-container></ng-container
-      ></ng-container
-    >
+          </div> </ng-container></ng-container
+    ></ng-container>
 
     <div class="button__container" *hideInViewMode>
       <ksp-add-row-button *ngIf="degrees.length < 4" (addClick)="addDegree()">

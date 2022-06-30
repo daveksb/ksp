@@ -2,16 +2,11 @@
   display: flex;
   justify-content: center;
   color: #f68b33;
-  align-items: flex-end;
+  align-items: baseline;
 }
 
 .icon__container--blue {
   color: #0056ff;
-}
-
-mat-icon {
-  cursor: pointer;
-  font-size: 21px;
 }
 
 .title {

@@ -18,7 +18,10 @@ import { BottomNavComponent } from '@ksp/shared/menu';
 import { SharedFeatureDegreeCertModule } from '@ksp/shared/feature/degree-cert';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import {
+  AddRowButtonComponent,
+  RequestHeaderInfoComponent,
+} from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 import { DegreeSearchFormComponent } from '@ksp/shared/form/search';
@@ -46,6 +49,7 @@ import { DegreeSearchFormComponent } from '@ksp/shared/form/search';
     FileUploadComponent,
     ReactiveFormsModule,
     DegreeSearchFormComponent,
+    AddRowButtonComponent,
   ],
   declarations: [
     DegreeListComponent,
