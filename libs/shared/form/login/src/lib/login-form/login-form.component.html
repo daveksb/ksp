@@ -1,31 +1,37 @@
-<div class="bg-white shadow rounded p-4">
-  <div class="form-group">
-    <label class="form-label">รหัสผู้ใช้งาน</label>
-    <input type="email" class="form-control" placeholder="กรอกรหัสผู้ใช้งาน" />
+<div class="bg-white shadow rounded rounded-3 p-4" style="min-width: 350px">
+  <div class="form-group mb-2">
+    <label class="fs-6">รหัสผู้ใช้งาน</label>
+    <input
+      type="email"
+      class="form-control bg-white"
+      placeholder="กรอกรหัสผู้ใช้งาน"
+    />
   </div>
-  <div class="form-group">
-    <label class="form-label">รหัสผ่าน</label>
+
+  <div class="form-group mb-2">
+    <label class="fs-6">รหัสผ่าน</label>
     <input
       [type]="eyeIconClicked ? 'text' : 'password'"
-      class="form-control form__password"
+      class="form-control bg-white"
       placeholder="กรอกรหัสผ่าน"
     />
-    <img
-      class="eye__icon"
+    <i
       (click)="eyeIconClicked = !eyeIconClicked"
+      class="text-secondary"
       [ngClass]="{
-        'eye__icon--open': eyeIconClicked,
-        'eye__icon--close': !eyeIconClicked
+        'bi-eye': eyeIconClicked,
+        'bi-eye-slash': !eyeIconClicked
       }"
-    />
+    ></i>
   </div>
-  <div class="d-flex justify-content-between">
+
+  <div class="d-flex justify-content-between mt-1 mb-3">
     <div class="form-check">
       <input class="form-check-input" type="checkbox" value="" checked />
-      <label class="form-check-label"> จดจำฉัน </label>
+      <label class="fs-6"> จดจำฉัน </label>
     </div>
-    <div class="label__third" (click)="forgetPassword.emit(true)">
-      ลืมรหัสผ่าน?
+    <div role="button" class="text-primary" (click)="forgetPassword.emit(true)">
+      ลืมรหัสผ่าน
     </div>
   </div>
 
@@ -33,12 +39,15 @@
     <button
       (click)="login.emit(true)"
       type="submit"
-      class="btn btn-primary w-100"
+      class="btn btn-primary w-100 mb-2"
     >
       เข้าสู่ระบบ
     </button>
+
     <hr />
-    <div class="label__secondary">ยังไม่มีรหัสเข้าใช้งาน</div>
+
+    <div class="mt-2 text-center mb-1">ยังไม่มีรหัสเข้าใช้งาน</div>
+
     <button
       (click)="register.emit(true)"
       type="button"

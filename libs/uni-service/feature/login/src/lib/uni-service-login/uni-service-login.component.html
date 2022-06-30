@@ -1,9 +1,9 @@
 <div class="container">
-  <div class="login__container">
-    <div class="login__header">
+  <div class="d-flex flex-column align-items-center">
+    <div class="text-center mb-3">
       <img src="/assets/images/k-logo-2.png" class="img__header" />
-      <div class="header">ระบบบริการสถาบันผลิตครู (Uni Service)</div>
-      <div class="sub__header">เข้าสู่ระบบใช้งาน</div>
+      <div class="fs-1 mt-1">ระบบบริการสถาบันผลิตครู (Uni Service)</div>
+      <div class="fs-2 mt-3 text-orange">เข้าสู่ระบบใช้งาน</div>
     </div>
 
     <ksp-login-form
@@ -12,17 +12,21 @@
       (forgetPassword)="forgetPassword()"
     ></ksp-login-form>
 
-    <div class="footer">
-      <button type="button" class="btn border-orange text-orange">
-        ตรวจสอบยื่นผู้ประสานงาน
-      </button>
-      <button
-        (click)="retired()"
-        type="button"
-        class="btn border-primary text-primary"
-      >
-        ขอถอดถอนผู้ประสานงาน
-      </button>
+    <div class="grid gap-3 mt-4" style="min-width: 350px">
+      <div class="g-col-6">
+        <button type="button" class="btn border-orange text-orange w-100">
+          ตรวจสอบยื่นผู้ประสานงาน
+        </button>
+      </div>
+      <div class="g-col-6">
+        <button
+          (click)="retired()"
+          type="button"
+          class="btn border-primary text-primary w-100"
+        >
+          ขอถอดถอนผู้ประสานงาน
+        </button>
+      </div>
     </div>
   </div>
 </div>
