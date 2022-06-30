@@ -14,13 +14,12 @@
         <div class="group__header">
           <div class="group__number">ลำดับที่ {{ i + 1 }}</div>
           <div>
-            <mat-icon
-              matTooltip="ลบอาจารย์ประจำหลักสูตร ลำดับที่ {{ i + 1 }}"
+            <i
+              role="button"
               *ngIf="i > 0 && mode === 'edit'"
-              class="delete__icon"
               (click)="deleteAdvisor(i)"
-              >delete_outline</mat-icon
-            >
+              class="bi bi-trash text-danger fs-5"
+            ></i>
           </div>
         </div>
         <div class="group__container">
@@ -63,14 +62,11 @@
                         formControlName="courseName"
                       />
                     </div>
-                    <mat-icon
+                    <i
                       *ngIf="j > 0"
-                      class="delete__icon"
-                      matTooltip="ลบหลักสูตร ลำดับที่ {{ j + 2 }}"
                       (click)="deleteCourse(i, j)"
-                    >
-                      delete_outline</mat-icon
-                    >
+                      class="bi bi-trash text-danger fs-5"
+                    ></i>
                   </div>
 
                   <ksp-advisor-info

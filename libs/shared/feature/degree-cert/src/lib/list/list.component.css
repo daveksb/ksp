@@ -92,16 +92,6 @@
   margin-left: 10px;
 }
 
-tr.mat-header-row {
-  background-color: aliceblue;
-}
-
-mat-icon {
-  color: #0056ff;
-  cursor: pointer;
-}
-
 #btn__clear {
   background-color: #fff;
 }
-

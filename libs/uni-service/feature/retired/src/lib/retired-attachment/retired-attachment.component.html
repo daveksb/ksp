@@ -1,43 +1,46 @@
 <uni-service-top-nav>ขอถอดถอนผู้ประสานงาน</uni-service-top-nav>
 
-<div class="bg-secondary bg-opacity-10 py-2" style="height: 100vh">
-  <div class="container-xl ps-0 fs-4">
-    รายละเอียดใบคำขอถอดถอน (ผู้ประสานงาน / ผู้รับผิดชอบ)
-  </div>
-
-  <div class="container-xl bg-white px-3 py-2">
-    <ksp-request-header-info
-      requestDate="10 ตุลาคม 2565"
-      requestNumber="112234467876543"
-    ></ksp-request-header-info>
-    <hr />
-
-    <uni-form-register-coordinator
-      [formHeader]="
-        'ข้อมูลถอดถอนผู้ประสานงาน / ผู้รับผิดชอบ (ที่ระบุไว้ในเอกสารแนบ)'
-      "
-    >
-    </uni-form-register-coordinator>
-
-    <div class="mt-3">
-      <ksp-form-attachment
-        [title]="'กรุณาแนบหลักฐานเพื่อพิจารณา'"
-        [titleClass]="'fs-4 text-primary'"
-        [groups]="retiredFiles"
-      ></ksp-form-attachment>
+<form [formGroup]="form">
+  <div class="bg-secondary bg-opacity-10 py-2" style="height: 100vh">
+    <div class="container-xl ps-0 fs-4">
+      รายละเอียดใบคำขอถอดถอน (ผู้ประสานงาน / ผู้รับผิดชอบ)
     </div>
 
-    <div class="mt-2">
-      <ksp-bottom-nav
-        [isFirstPage]="false"
-        [isLastPage]="true"
-        [showCenterButtons]="true"
-        [showSaveButton]="true"
-        (prevClicked)="prevPage()"
-        (cancelClicked)="cancel()"
-        (saveClicked)="save()"
+    <div class="container-xl bg-white px-3 py-2">
+      <ksp-request-header-info
+        requestDate="10 ตุลาคม 2565"
+        requestNumber="112234467876543"
+      ></ksp-request-header-info>
+      <hr />
+
+      <uni-form-register-coordinator
+        formControlName="coordinatorRetired"
+        [formHeader]="
+          'ข้อมูลถอดถอนผู้ประสานงาน / ผู้รับผิดชอบ (ที่ระบุไว้ในเอกสารแนบ)'
+        "
       >
-      </ksp-bottom-nav>
+      </uni-form-register-coordinator>
+
+      <div class="mt-3">
+        <ksp-form-attachment
+          [title]="'กรุณาแนบหลักฐานเพื่อพิจารณา'"
+          [titleClass]="'fs-4 text-primary'"
+          [groups]="retiredFiles"
+        ></ksp-form-attachment>
+      </div>
+
+      <div class="mt-2">
+        <ksp-bottom-nav
+          [isFirstPage]="false"
+          [isLastPage]="true"
+          [showCenterButtons]="true"
+          [showSaveButton]="true"
+          (prevClicked)="prevPage()"
+          (cancelClicked)="cancel()"
+          (saveClicked)="save()"
+        >
+        </ksp-bottom-nav>
+      </div>
     </div>
   </div>
-</div>
+</form>

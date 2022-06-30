@@ -15,6 +15,7 @@ import {
 import { BottomNavComponent } from '@ksp/shared/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatStepperModule } from '@angular/material/stepper';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatIconModule,
     MatStepperModule,
     StepperNavComponent,
+    ReactiveFormsModule,
   ],
   declarations: [
     UniServiceRegisterRequesterComponent,
