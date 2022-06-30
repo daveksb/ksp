@@ -1,9 +1,9 @@
 <form [formGroup]="form">
-  <div class="box__container">
-    <div class="box__title">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
+  <div class="bg-light px-3 pt-1 pb-2 default-width">
+    <div class="fs-5">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
 
-    <div class="detail__container--third">
-      <div class="detail__container">
+    <div class="row">
+      <div class="col-4">
         <label class="form-label">เลขที่ใบคำขอ </label>
         <input
           class="form-control"
@@ -11,21 +11,21 @@
           formControlName="licenseNumber"
         />
       </div>
-      <div class="detail__container">
+      <div class="col-4">
         <label class="form-label">ช่วงวันที่ </label>
         <input class="form-control" type="date" formControlName="date" />
       </div>
     </div>
 
-    <div class="detail__container--first">
-      <div class="detail__container">
+    <div class="row mb-2">
+      <div class="col-8">
         <label class="form-label">ชื่อปริญญาและสาขาวิชา </label>
         <input class="form-control" type="text" formControlName="degreeName" />
       </div>
     </div>
 
-    <div class="detail__container--second">
-      <div class="detail__container">
+    <div class="row mb-2">
+      <div class="col">
         <label class="form-label">รหัสสถาบัน </label>
         <input
           class="form-control"
@@ -33,7 +33,7 @@
           formControlName="institutionNumber"
         />
       </div>
-      <div class="detail__container">
+      <div class="col">
         <label class="form-label">สถาบัน / มหาวิทยาลัย </label>
         <select class="form-select" formControlName="institutionName">
           <option disabled selected hidden>กรุณาเลือก</option>
@@ -44,8 +44,8 @@
       </div>
     </div>
 
-    <div class="detail__container--second">
-      <div class="detail__container">
+    <div class="row mb-2">
+      <div class="col">
         <label class="form-label">ระดับปริญญาที่เสนอขอรับรอง </label>
         <input
           class="form-control"
@@ -53,7 +53,7 @@
           formControlName="submitDegreeLevel"
         />
       </div>
-      <div class="detail__container">
+      <div class="col">
         <label class="form-label">สถานะหลักสูตร </label>
         <input
           class="form-control"
@@ -63,8 +63,8 @@
       </div>
     </div>
 
-    <div class="detail__container--second">
-      <div class="detail__container">
+    <div class="row mb-3">
+      <div class="col">
         <label class="form-label">สถานะตรวจสอบ </label>
         <input
           class="form-control"
@@ -72,7 +72,7 @@
           formControlName="verifyStatus"
         />
       </div>
-      <div class="detail__container">
+      <div class="col">
         <label class="form-label">สถานะรับรอง </label>
         <input
           class="form-control"
@@ -82,7 +82,7 @@
       </div>
     </div>
 
-    <div class="button__container">
+    <div class="d-flex justify-content-end">
       <button
         (click)="cleared.emit(true)"
         type="button"
@@ -92,9 +92,8 @@
       </button>
       <button
         (click)="searched.emit(true)"
-        id="btn-save"
         type="button"
-        class="btn btn-primary"
+        class="btn btn-primary ms-2"
       >
         ค้นหา
       </button>

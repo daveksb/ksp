@@ -26,6 +26,7 @@ import {
   LicenseCheckComponent,
 } from '@ksp/e-service/ui/license-check';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormMeetingRecordComponent } from '@ksp/e-service/form';
 
 @NgModule({
   imports: [
@@ -49,6 +50,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     LicenseCheckComponent,
     FinalResultInfoComponent,
     ReactiveFormsModule,
+    FormMeetingRecordComponent,
   ],
   declarations: [
     DegreeCertListComponent,

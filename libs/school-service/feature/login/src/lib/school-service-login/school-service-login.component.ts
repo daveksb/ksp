@@ -8,8 +8,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./school-service-login.component.scss'],
 })
 export class SchoolServiceLoginComponent {
-  eyeIconClicked = false;
-
   form = this.fb.group({
     username: [],
     password: [],

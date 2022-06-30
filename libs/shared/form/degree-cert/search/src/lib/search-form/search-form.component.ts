@@ -2,9 +2,11 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
-  selector: 'ksp-search-form',
+  selector: 'ksp-degree-cert-search-form',
   templateUrl: './search-form.component.html',
   styleUrls: ['./search-form.component.scss'],
   providers: providerFactory(SearchFormComponent),
@@ -29,7 +31,7 @@ export class SearchFormComponent extends KspFormBaseComponent {
     super();
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
-      this.form?.valueChanges.subscribe((value) => {
+      this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
         this.onChange(value);
         this.onTouched();
       })

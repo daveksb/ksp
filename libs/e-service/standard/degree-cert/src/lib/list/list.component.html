@@ -1,21 +1,17 @@
-<ksp-top-nav
-  ><span header>ยื่นใบคำขอ</span
-  ><span subHeader
-    >ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ
-  </span></ksp-top-nav
->
+<ksp-top-nav>
+  <span header>ยื่นใบคำขอ</span>
+  <span subHeader>ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ </span>
+</ksp-top-nav>
 
 <form [formGroup]="form">
-  <div class="main-container">
-    <div class="box__title">
-      รายการขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา
-    </div>
-    <div class="top-container">
-      <ksp-search-form
+  <div class="bg-secondary bg-opacity-10 py-2 px-4 full-height">
+    <div class="fs-5">รายการขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา</div>
+    <div class="bg-white p-3">
+      <ksp-degree-cert-search-form
         formControlName="degreeCertSearch"
         (cleared)="onClear()"
         (searched)="onSearch()"
-      ></ksp-search-form>
+      ></ksp-degree-cert-search-form>
 
       <br />
 
@@ -131,12 +127,25 @@
 </form>
 
 <ng-container *ngIf="showActionButtons">
-  <div class="bottom__container">
-    <div class="footer">
-      <button id="action__button" (click)="consider()" class="btn btn-warning">
+  <div
+    class="sticky-bottom border d-flex justify-content-center align-items-center"
+    style="height: 50px"
+  >
+    <div>
+      <button
+        (click)="consider()"
+        class="fs-6 btn btn-sm bg-orange"
+        style="width: 300px"
+      >
         พิจารณาประเมินหลักสูตร (หลายรายการ)
       </button>
-      <button id="action__button" (click)="approve()" class="btn btn-primary">
+    </div>
+    <div>
+      <button
+        (click)="approve()"
+        class="fs-6 ms-3 btn btn-sm btn-primary"
+        style="width: 300px"
+      >
         พิจารณารับรอง (หลายรายการ)
       </button>
     </div>
