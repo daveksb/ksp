@@ -8,7 +8,13 @@
       <div class="fs-2 mt-4 mb-1 text-orange">เข้าสู่ระบบใช้งาน</div>
     </div>
 
-    <div class="login__content">
+    <ksp-login-form
+      (login)="login()"
+      (register)="register()"
+      (forgetPassword)="forgetPassword()"
+    ></ksp-login-form>
+
+    <!--   <div class="login__content">
       <form>
         <div class="form-group">
           <label class="form-label">รหัสผู้ใช้งาน</label>
@@ -67,6 +73,6 @@
           ขอถอดถอนผู้ใช้งาน
         </div>
       </form>
-    </div>
+    </div> -->
   </div>
 </div>
