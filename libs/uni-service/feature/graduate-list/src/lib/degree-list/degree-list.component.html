@@ -25,12 +25,11 @@
       <ng-container matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef>ยื่น/แก้ไข</th>
         <td mat-cell *matCellDef="let element">
-          <mat-icon
+          <i
             (click)="nextPage()"
-            class="text-primary fs-5 ms-1"
             role="button"
-            >edit</mat-icon
-          >
+            class="bi bi-pencil-square text-primary fs-5 ms-1"
+          ></i>
         </td>
       </ng-container>
 
@@ -88,9 +87,10 @@
       <ng-container matColumnDef="print">
         <th mat-header-cell *matHeaderCellDef>พิมพ์ใบคำขอ</th>
         <td mat-cell *matCellDef="let element">
-          <mat-icon class="text-primary fs-5 ms-3" role="button"
-            >print</mat-icon
-          >
+          <i
+            role="button"
+            class="bi bi-printer-fill text-primary fs-5 ms-3"
+          ></i>
         </td>
       </ng-container>
 

@@ -71,17 +71,19 @@
 
         <ng-container matColumnDef="edit">
           <th mat-header-cell *matHeaderCellDef>เพิ่ม/แก้ไข</th>
-          <td mat-cell *matCellDef="let element" (click)="view()">
-            <mat-icon role="button" class="text-primary">edit</mat-icon>
+          <td mat-cell *matCellDef="let element">
+            <i
+              role="button"
+              (click)="view()"
+              class="bi bi-pencil-square text-primary fs-5"
+            ></i>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="view">
           <th mat-header-cell *matHeaderCellDef>ดูข้อมูล</th>
           <td mat-cell *matCellDef="let element">
-            <mat-icon role="button" class="text-success"
-              >remove_red_eye</mat-icon
-            >
+            <i role="button" class="bi bi-eye fs-5 text-success"></i>
           </td>
         </ng-container>
 

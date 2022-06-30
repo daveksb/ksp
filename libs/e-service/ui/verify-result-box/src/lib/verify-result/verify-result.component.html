@@ -15,8 +15,9 @@
       content__invalid: !isBasicValid
     }"
   >
-    <mat-icon *ngIf="isBasicValid">check_circle_outline</mat-icon
-    ><mat-icon *ngIf="!isBasicValid">highlight_off</mat-icon> ข้อมูลพิ้นฐาน
+    <i *ngIf="isBasicValid" class="bi bi-check-circle me-1"></i>
+    <i *ngIf="!isBasicValid" class="bi bi-x-circle me-1"></i>
+    ข้อมูลพิ้นฐาน
   </div>
   <div
     class="content__base"
@@ -25,8 +26,9 @@
       content__invalid: !isCourseValid
     }"
   >
-    <mat-icon *ngIf="isCourseValid">check_circle_outline</mat-icon
-    ><mat-icon *ngIf="!isCourseValid">highlight_off</mat-icon>ด้านหลักสูตร
+    <i *ngIf="isCourseValid" class="bi bi-check-circle me-1"></i>
+    <i *ngIf="!isCourseValid" class="bi bi-x-circle me-1"></i>
+    ด้านหลักสูตร
   </div>
   <div
     class="content__base"
@@ -35,8 +37,9 @@
       content__invalid: !isProcessValid
     }"
   >
-    <mat-icon *ngIf="isProcessValid">check_circle_outline</mat-icon
-    ><mat-icon *ngIf="!isProcessValid">highlight_off</mat-icon>ด้านกระบวนการผลิต
+    <i *ngIf="isProcessValid" class="bi bi-check-circle me-1"></i>
+    <i *ngIf="!isProcessValid" class="bi bi-x-circle me-1"></i>
+    ด้านกระบวนการผลิต
   </div>
   <div
     class="content__base"
@@ -45,7 +48,8 @@
       content__invalid: !isAttachmentValid
     }"
   >
-    <mat-icon *ngIf="isAttachmentValid">check_circle_outline</mat-icon
-    ><mat-icon *ngIf="!isAttachmentValid">highlight_off</mat-icon>เอกสารแนบ
+    <i *ngIf="isAttachmentValid" class="bi bi-check-circle me-1"></i>
+    <i *ngIf="!isAttachmentValid" class="bi bi-x-circle me-1"></i>
+    เอกสารแนบ
   </div>
 </div>

@@ -6,15 +6,14 @@
       <div [formGroupName]="i" [ngClass]="{ apply__opac: opaciseBox[i] }">
         <div class="group__header">
           <div class="group__number">ลำดับที่ {{ i + 1 }}</div>
-          <mat-icon
-            matTooltip="ลบอาจารย์นิเทศก์ ลำดับที่ {{ i + 1 }}"
+          <i
+            role="button"
             *ngIf="i"
-            class="delete__icon"
             (click)="deleteNitet(i); opaciseBox[i] = false"
             (mouseenter)="opaciseBox[i] = true"
             (mouseout)="opaciseBox[i] = false"
-            >delete_outline</mat-icon
-          >
+            class="bi bi-trash text-danger fs-5"
+          ></i>
         </div>
 
         <div class="group__container">
