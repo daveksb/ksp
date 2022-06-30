@@ -19,21 +19,31 @@
       }"
     />
   </div>
-  <div class="detail__content">
+  <div class="d-flex justify-content-between">
     <div class="form-check">
       <input class="form-check-input" type="checkbox" value="" checked />
       <label class="form-check-label"> จดจำฉัน </label>
     </div>
-    <div class="label__third" (click)="({})">ลืมรหัสผ่าน?</div>
+    <div class="label__third" (click)="forgetPassword.emit(true)">
+      ลืมรหัสผ่าน?
+    </div>
   </div>
 
   <div class="d-flex flex-column">
-    <button (click)="({})" type="submit" class="btn btn-primary w-100">
+    <button
+      (click)="login.emit(true)"
+      type="submit"
+      class="btn btn-primary w-100"
+    >
       เข้าสู่ระบบ
     </button>
     <hr />
     <div class="label__secondary">ยังไม่มีรหัสเข้าใช้งาน</div>
-    <button (click)="({})" type="button" class="btn btn-orange w-100">
+    <button
+      (click)="register.emit(true)"
+      type="button"
+      class="btn btn-orange w-100"
+    >
       ลงทะเบียนขอรับรหัสเข้าใช้งาน
     </button>
   </div>

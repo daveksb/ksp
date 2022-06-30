@@ -11,7 +11,7 @@ import { ForgotPasswordPersonIdComponent } from '@ksp/uni-service/ui/dialog';
 export class UniServiceLoginComponent {
   constructor(private router: Router, public dialog: MatDialog) {}
 
-  home() {
+  login() {
     this.router.navigate(['/home']);
   }
 
@@ -23,7 +23,7 @@ export class UniServiceLoginComponent {
     this.router.navigate(['/retired']);
   }
 
-  forgotPassword() {
+  forgetPassword() {
     this.dialog.open(ForgotPasswordPersonIdComponent, {
       width: '350px',
     });

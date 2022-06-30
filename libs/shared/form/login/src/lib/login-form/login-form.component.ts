@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -9,10 +9,10 @@ import { ReactiveFormsModule } from '@angular/forms';
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss'],
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent {
   eyeIconClicked = false;
 
-  constructor() {}
-
-  ngOnInit(): void {}
+  @Output() login = new EventEmitter<boolean>();
+  @Output() register = new EventEmitter<boolean>();
+  @Output() forgetPassword = new EventEmitter<boolean>();
 }
