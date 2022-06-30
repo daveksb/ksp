@@ -5,3 +5,5 @@ export * from './lib/temp-license-check-forbidden/temp-license-check-forbidden.c
 export * from './lib/temp-license-check-confirm/temp-license-check-confirm.component';
 
 export * from './lib/temp-license-approve/temp-license-approve.component';
+
+export * from './lib/temp-license-approve-list/temp-license-approve-list.component';
