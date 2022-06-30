@@ -78,5 +78,15 @@ tr.mat-header-row {
 
 .mat-checkbox-checked.mat-accent .mat-checkbox-background,
 .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
-  background-color: #f68b33;
+  background-color: #f68b33 !important;
+}
+
+.mat-header-cell {
+  color: black;
+  font-size: 1rem;
+}
+
+.mat-cell {
+  color: var(--ksp-gray);
+  font-size: 1rem;
 }

@@ -1,35 +1,38 @@
 <uni-service-top-nav>ลงทะเบียนขอรับรหัสเข้าใช้งาน</uni-service-top-nav>
 
-<div class="bg-secondary bg-opacity-10 pt-1 pb-3">
-  <div class="container-xl p-0 fs-4">
-    รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ (ผู้ประสานงาน / ผู้รับผิดชอบ)
-  </div>
-  <div class="bg-white container-xl">
-    <div class="pt-2">
-      <ksp-request-header-info
-        [requestDate]="'10 ตุลาคม 2565'"
-        [requestNumber]="'112234467876543'"
-      ></ksp-request-header-info>
+<form [formGroup]="form">
+  <div class="bg-secondary bg-opacity-10 pt-1 pb-3">
+    <div class="container-xl p-0 fs-4">
+      รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ (ผู้ประสานงาน / ผู้รับผิดชอบ)
     </div>
+    <div class="bg-white container-xl">
+      <div class="py-2">
+        <ksp-request-header-info
+          [requestDate]="'10 ตุลาคม 2565'"
+          [requestNumber]="'112234467876543'"
+        ></ksp-request-header-info>
+      </div>
 
-    <hr />
-    <div>
+      <hr />
+      <div>
+        <ksp-stepper-nav
+          [LabelSecond]="'ข้อมูลผู้แต่งตั้งผู้ประสานงาน/ผู้รับผิดชอบ'"
+        ></ksp-stepper-nav>
 
-      <ksp-stepper-nav
-        [LabelSecond]="'ข้อมูลผู้แต่งตั้งผู้ประสานงาน/ผู้รับผิดชอบ'"
-      ></ksp-stepper-nav>
+        <ksp-university-select></ksp-university-select>
 
-      <ksp-university-select></ksp-university-select>
+        <uni-form-register-requester
+          formControlName="requester"
+        ></uni-form-register-requester>
 
-      <uni-form-register-requester></uni-form-register-requester>
-
-      <div class="my-2">
-        <ksp-bottom-nav
-          [isFirstPage]="true"
-          [showCenterButtons]="false"
-          (nextClicked)="next()"
-        ></ksp-bottom-nav>
+        <div class="my-2">
+          <ksp-bottom-nav
+            [isFirstPage]="true"
+            [showCenterButtons]="false"
+            (nextClicked)="next()"
+          ></ksp-bottom-nav>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</form>
