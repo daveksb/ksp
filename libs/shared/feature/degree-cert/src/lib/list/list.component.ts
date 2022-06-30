@@ -26,7 +26,7 @@ export class DegreeCertListComponent {
   constructor(private router: Router, private fb: FormBuilder) {}
 
   goToStep1() {
-    this.router.navigate(['/', 'degree-cert', 'request']);
+    this.router.navigate(['/degree-cert', 'request']);
   }
 
   search() {

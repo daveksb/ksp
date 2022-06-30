@@ -1,0 +1,17 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/shared/form/login/src",
+  "prefix": "ksp",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/form/login/**/*.ts",
+          "libs/shared/form/login/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

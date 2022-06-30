@@ -1,9 +1,5 @@
 .header__container {
   background-image: url('/assets/images/img-uni/top-bar-img.png');
   background-size: cover;
-}
-.haeder__label {
-  text-align: center;
-  padding: 14px 0;
-  font-size: 28px;
+  height: var(--ksp-top-nav-height);
 }

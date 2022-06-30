@@ -1,11 +1,11 @@
 <uni-service-top-nav>ขอถอดถอนผู้ประสานงาน</uni-service-top-nav>
 
 <div class="bg-secondary bg-opacity-10 py-2">
-  <div class="container-xl ps-0 fs-4">
+  <div class="container-xl ps-0 fs-4 default-width">
     รายละเอียดใบคำขอถอดถอน (ผู้ประสานงาน / ผู้รับผิดชอบ)
   </div>
 
-  <div class="container-xl bg-white px-3 py-2">
+  <div class="container-xl bg-white px-3 py-2 default-width">
     <ksp-request-header-info
       requestDate="10 ตุลาคม 2565"
       requestNumber="112234467876543"
@@ -98,10 +98,12 @@
       </div>
     </div>
 
-    <ksp-bottom-nav
-      [isFirstPage]="true"
-      [showCenterButtons]="false"
-      (nextClicked)="next()"
-    ></ksp-bottom-nav>
+    <div class="mt-1">
+      <ksp-bottom-nav
+        [isFirstPage]="true"
+        [showCenterButtons]="false"
+        (nextClicked)="next()"
+      ></ksp-bottom-nav>
+    </div>
   </div>
 </div>
