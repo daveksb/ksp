@@ -12,6 +12,7 @@ import {
   LicenseInfoComponent,
   LicenseTypeButtonGroupComponent,
   RequestHeaderInfoComponent,
+  StepperNavComponent,
 } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
@@ -35,6 +36,7 @@ import { providerFactory } from '@ksp/shared/utility';
     LicenseTypeButtonGroupComponent,
     LicenseInfoComponent,
     ReactiveFormsModule,
+    StepperNavComponent
   ],
   providers: providerFactory(AccusationRecordComponent),
 })
