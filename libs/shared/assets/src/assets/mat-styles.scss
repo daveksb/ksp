@@ -70,3 +70,13 @@
 tr.mat-header-row {
   background-color: #edf6ff;
 }
+
+.mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+  opacity: 0.01 !important;
+  background-color: #f68b33 !important;
+}
+
+.mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: #f68b33;
+}
