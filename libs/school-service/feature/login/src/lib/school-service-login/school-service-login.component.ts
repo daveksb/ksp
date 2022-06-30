@@ -17,7 +17,7 @@ export class SchoolServiceLoginComponent {
 
   constructor(private router: Router, private fb: FormBuilder) {}
 
-  home() {
+  login() {
     this.router.navigate(['/temp-license', 'list']);
   }
 
@@ -25,7 +25,7 @@ export class SchoolServiceLoginComponent {
     this.router.navigate(['/register', 'current-user']);
   }
 
-  forget() {
+  forgetPassword() {
     this.router.navigate(['/forget-password', 'person-id']);
   }
 }

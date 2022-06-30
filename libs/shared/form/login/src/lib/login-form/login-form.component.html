@@ -1,18 +1,17 @@
-<div class="bg-white shadow rounded rounded-3 p-4" style="min-width: 350px">
+<div
+  class="bg-white shadow rounded rounded-3 px-4 pt-4 pb-3"
+  style="min-width: 350px"
+>
   <div class="form-group mb-2">
     <label class="fs-6">รหัสผู้ใช้งาน</label>
-    <input
-      type="email"
-      class="form-control bg-white"
-      placeholder="กรอกรหัสผู้ใช้งาน"
-    />
+    <input type="email" class="form-control" placeholder="กรอกรหัสผู้ใช้งาน" />
   </div>
 
   <div class="form-group mb-2">
     <label class="fs-6">รหัสผ่าน</label>
     <input
       [type]="eyeIconClicked ? 'text' : 'password'"
-      class="form-control bg-white"
+      class="form-control"
       placeholder="กรอกรหัสผ่าน"
     />
     <i
@@ -39,7 +38,7 @@
     <button
       (click)="login.emit(true)"
       type="submit"
-      class="btn btn-primary w-100 mb-2"
+      class="btn btn-sm btn-primary w-100 fs-5 mb-1"
     >
       เข้าสู่ระบบ
     </button>
@@ -51,9 +50,17 @@
     <button
       (click)="register.emit(true)"
       type="button"
-      class="btn btn-orange w-100"
+      class="fs-5 btn btn-sm btn-orange w-100"
     >
       ลงทะเบียนขอรับรหัสเข้าใช้งาน
     </button>
+  </div>
+
+  <div
+    *ngIf="showRetired"
+    role="button"
+    class="mt-2 d-flex justify-content-end text-primary align-content-end"
+  >
+    ขอถอดถอนผู้ใช้งาน
   </div>
 </div>

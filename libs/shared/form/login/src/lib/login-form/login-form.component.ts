@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -12,7 +12,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class LoginFormComponent {
   eyeIconClicked = false;
 
+  @Input() showRetired = false;
   @Output() login = new EventEmitter<boolean>();
   @Output() register = new EventEmitter<boolean>();
   @Output() forgetPassword = new EventEmitter<boolean>();
+  @Output() retired = new EventEmitter<boolean>();
 }
