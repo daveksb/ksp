@@ -16,8 +16,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   providers: providerFactory(UniversitySelectComponent),
 })
 export class UniversitySelectComponent extends KspFormBaseComponent {
-  @Input() label1: any;
-  @Input() label2: any;
+  @Input() label1 = 'สังกัด';
+  @Input() label2 = 'โรงเรียน / สถานศึกษา';
 
   override form = this.fb.group({
     institution: [],
