@@ -3,14 +3,15 @@ bootstrap will imported to the app here
 import order is important for overwrite default variables
 **/
 
-/* $customTheme: (
+$customTheme: (
   'orange': #f68b33,
 );
- */
 
 @import './node_modules/bootstrap/scss/functions';
 @import './node_modules/bootstrap/scss/variables';
 //@import './node_modules/bootstrap/scss/maps';
 //@import './node_modules/bootstrap/scss/mixins';
-//$theme-colors: map-merge($theme-colors, $customTheme);
+$theme-colors: map-merge($theme-colors, $customTheme);
+
 @import './node_modules/bootstrap/scss/bootstrap';
+@import './node_modules/bootstrap-icons/font/bootstrap-icons';

@@ -15,6 +15,7 @@ import {
   LicenseInfoComponent,
   LicenseTypeButtonGroupComponent,
   RequestHeaderInfoComponent,
+  StepperNavComponent,
 } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { AccusationMainComponent } from './accusation-main/accusation-main.component';
@@ -42,6 +43,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AccusationRecordComponent,
     MatCheckboxModule,
     ReactiveFormsModule,
+    StepperNavComponent,
   ],
   declarations: [AccusationDecisionComponent, AccusationMainComponent],
   exports: [AccusationDecisionComponent, AccusationMainComponent],

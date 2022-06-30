@@ -130,7 +130,7 @@ export const licenseMenu: MenuConfig[] = [
         label: 'รายการใบคำขออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
       },
       {
-        path: 'temp-license/approve',
+        path: 'temp-license/approve-list',
         label: 'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
       },
     ],
@@ -156,7 +156,7 @@ export const licenseMenu: MenuConfig[] = [
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ)',
     path: '',
-    isExpanded: false,
+    isExpanded: true,
     subMenuName: 'foreign-id',
     subMenu: [
       {

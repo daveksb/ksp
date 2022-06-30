@@ -6,6 +6,7 @@ import { TempLicenseCheckConfirmComponent } from './temp-license-check-confirm/t
 import { TempLicenseCheckForbiddenComponent } from './temp-license-check-forbidden/temp-license-check-forbidden.component';
 import { ETempLicenseDetailComponent } from './e-temp-license-detail/e-temp-license-detail.component';
 import { ETempLicenseListComponent } from './e-temp-license-list/e-temp-license-list.component';
+import { TempLicenseApproveListComponent } from './temp-license-approve-list/temp-license-approve-list.component';
 
 const routes: Routes = [
   {
@@ -34,7 +35,11 @@ const routes: Routes = [
         component: TempLicenseCheckConfirmComponent,
       },
       {
-        path: 'approve',
+        path: 'approve-list',
+        component: TempLicenseApproveListComponent,
+      },
+      {
+        path: 'approve-detail',
         component: TempLicenseApproveComponent,
       },
     ],

@@ -15,3 +15,4 @@ $enable-cssgrid: true;
 //@import './node_modules/bootstrap/scss/mixins';
 $theme-colors: map-merge($theme-colors, $customTheme);
 @import './node_modules/bootstrap/scss/bootstrap';
+@import './node_modules/bootstrap-icons/font/bootstrap-icons';

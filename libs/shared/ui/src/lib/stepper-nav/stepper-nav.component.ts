@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -9,11 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './stepper-nav.component.html',
   styleUrls: ['./stepper-nav.component.scss'],
 })
-export class StepperNavComponent implements OnInit {
-  @Input() buttonColor = 'light-grey';
-  @Input() buttonLabel = '';
-  @Input() gridGapSize = '';
-  constructor() {}
-
-  ngOnInit(): void {}
+export class StepperNavComponent {
+  @Input() buttonColor = 'light';
+  @Input() LabelFirst = 'ข้อมูลผู้ขอรหัสสำหรับเข้าใช้งานระบบ';
+  @Input() LabelSecond = '';
 }
