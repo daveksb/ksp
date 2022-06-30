@@ -95,6 +95,7 @@
 .add__list {
   color: #0056ff;
   margin: 0 20px;
+  cursor: pointer;
 }
 
 .checkbox__label {
@@ -119,27 +120,17 @@
   color: red;
 }
 
-.edit {
-  color: #0056ff;
-  cursor: pointer;
-}
-
-.delete {
-  color: red;
-  cursor: pointer;
-}
-
 #upload__button {
   margin-top: 12px;
-}
-
-.hide__container {
-  background-color: #fff;
-  padding-bottom: 0;
 }
 
 .checkbox__row {
   display: flex;
   align-items: center;
   margin-bottom: 8px;
+}
+
+.hide__container {
+  background-color: #fff;
+  padding-bottom: 0;
 }

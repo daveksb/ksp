@@ -87,6 +87,7 @@ export class AccusationRecordComponent
   @Input() hideContainer = false;
   @Input() hideTitle = false;
   @Input() hideBox = false;
+  @Input() hideStepper = false;
 
   ngOnInit(): void {
     this.route.data.subscribe((res) => {
