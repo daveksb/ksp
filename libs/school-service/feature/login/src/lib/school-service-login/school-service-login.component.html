@@ -2,77 +2,16 @@
   <div [formGroup]="form" class="d-flex flex-column align-items-center">
     <div class="text-center">
       <img src="/assets/images/k-logo-2.png" class="img__header" />
-      <div class="fs-1 mt-1">
-        ระบบบริการหน่วยงานทางการศึกษา (School Service)
-      </div>
+      <div class="fs-1">ระบบบริการหน่วยงานทางการศึกษา (School Service)</div>
       <div class="fs-2 mt-4 mb-1 text-orange">เข้าสู่ระบบใช้งาน</div>
     </div>
 
     <ksp-login-form
+      [showRetired]="true"
       (login)="login()"
       (register)="register()"
       (forgetPassword)="forgetPassword()"
+      (retired)="({})"
     ></ksp-login-form>
-
-    <!--   <div class="login__content">
-      <form>
-        <div class="form-group">
-          <label class="form-label">รหัสผู้ใช้งาน</label>
-          <input
-            formControlName="username"
-            type="email"
-            class="form-control"
-            placeholder="กรอกรหัสผู้ใช้งาน"
-          />
-        </div>
-        <div class="form-group">
-          <label class="form-label">รหัสผ่าน</label>
-          <input
-            formControlName="password"
-            [type]="eyeIconClicked ? 'text' : 'password'"
-            class="form-control form__password"
-            placeholder="กรอกรหัสผ่าน"
-          />
-          <img
-            class="eye__icon"
-            (click)="eyeIconClicked = !eyeIconClicked"
-            [ngClass]="{
-              'eye__icon--open': eyeIconClicked,
-              'eye__icon--close': !eyeIconClicked
-            }"
-          />
-        </div>
-
-        <div class="d-flex justify-content-between my-3 fs-6">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" checked />
-            <label class="form-check-label"> จดจำฉัน </label>
-          </div>
-          <div role="button" class="text-primary" (click)="forget()">
-            ลืมรหัสผ่าน?
-          </div>
-        </div>
-
-        <div class="button__content">
-          <div class="mb-3">
-            <button (click)="home()" type="button" class="btn btn-primary">
-              เข้าสู่ระบบ
-            </button>
-          </div>
-          <hr />
-          <div role="button" class="mt-3 mb-1 fs-6 text-center">
-            ยังไม่มีรหัสเข้าใช้งาน
-          </div>
-          <div class="mb-2">
-            <button (click)="register()" type="button" class="btn btn-orange">
-              ลงทะเบียนขอรับรหัสเข้าใช้งาน
-            </button>
-          </div>
-        </div>
-        <div role="button" class="d-flex justify-content-end text-primary">
-          ขอถอดถอนผู้ใช้งาน
-        </div>
-      </form>
-    </div> -->
   </div>
 </div>
