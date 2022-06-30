@@ -430,10 +430,7 @@
         </p-table>
 
         <div class="detail__footer" *ngIf="pageType === importType.studentList">
-          <button type="button" class="btn btn-add">
-            <i role="button" class="bi bi-plus-circle fs-5"></i>
-            เพิ่มรายชื่อ
-          </button>
+          <ksp-add-row-button [mode]="'blue'">เพิ่มรายชื่อ</ksp-add-row-button>
         </div>
       </div>
     </div>
