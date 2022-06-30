@@ -1,69 +1,15 @@
 <div class="container">
-  <div class="login__container">
-    <div class="login__header">
-      <img src="/assets/images/k-logo-2.png" class="img__header" />
-      <div class="header">ระบบงานเจ้าหน้าที่ (E Service)</div>
-      <div class="sub__header">เข้าสู่ระบบใช้งาน</div>
+  <div class="d-flex flex-column align-items-center">
+    <div class="text-center">
+      <img src="/assets/images/k-logo-2.png" style="width: 334px" />
+      <div class="fs-1">ระบบงานเจ้าหน้าที่ (E Service)</div>
+      <div class="fs-2 mt-4 mb-1 text-orange">เข้าสู่ระบบใช้งาน</div>
     </div>
-    <div class="login__content">
-      <form>
-        <div class="form-group">
-          <label for="exampleInputEmail" class="form-label"
-            >รหัสผู้ใช้งาน</label
-          >
-          <input
-            type="email"
-            class="form-control"
-            id="exampleInputEmail"
-            placeholder="กรอกรหัสผู้ใช้งาน"
-          />
-        </div>
-        <div class="form-group">
-          <label class="form-label">รหัสผ่าน</label>
-          <input
-            [type]="eyeIconClicked ? 'text' : 'password'"
-            class="form-control form__password"
-            placeholder="กรอกรหัสผ่าน"
-          />
-          <img
-            class="eye__icon"
-            (click)="eyeIconClicked = !eyeIconClicked"
-            [ngClass]="{
-              'eye__icon--open': eyeIconClicked,
-              'eye__icon--close': !eyeIconClicked
-            }"
-          />
-        </div>
-        <div class="detail__content">
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value=""
-              id="flexCheckChecked"
-              checked
-            />
-            <label class="form-check-label" for="flexCheckChecked">
-              จดจำฉัน
-            </label>
-          </div>
-          <div class="label__third">ลืมรหัสผ่าน?</div>
-        </div>
-        <div class="button__content">
-          <button
-            (click)="login()"
-            type="button"
-            class="btn btn-primary btn-sm label__button"
-          >
-            เข้าสู่ระบบ
-          </button>
-          <hr />
-          <div class="label__secondary">ยังไม่มีรหัสเข้าใช้งาน</div>
-          <button type="button" class="btn btn-secondary btn-sm label__button">
-            ลงทะเบียนขอรับรหัสเข้าใช้งาน
-          </button>
-        </div>
-      </form>
-    </div>
+
+    <ksp-login-form
+      (login)="login()"
+      (register)="({})"
+      (forgetPassword)="({})"
+    ></ksp-login-form>
   </div>
 </div>
