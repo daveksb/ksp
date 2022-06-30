@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'uni-service-register-requester-info',
-  templateUrl: './form-register-requester-info.component.html',
-  styleUrls: ['./form-register-requester-info.component.scss'],
+  selector: 'uni-form-register-requester',
+  templateUrl: './form-register-requester.component.html',
+  styleUrls: ['./form-register-requester.component.scss'],
 })
 export class FormRegisterRequesterInfoComponent implements OnInit {
   constructor() {}
