@@ -10,47 +10,46 @@
     </button>
   </div>
 
-  <div
-    class="g-col-4 d-flex justify-content-center align-items-center"
-    *ngIf="showCenterButtons"
-  >
-    <button
-      *ngIf="showCancelButton"
-      (click)="cancelClicked.emit(true)"
-      type="button"
-      class="btn"
-      [ngClass]="{
-        'border-primary text-primary': colorMode === 'blue',
-        'border-success text-success': colorMode === 'green'
-      }"
-    >
-      ยกเลิก
-    </button>
+  <div class="g-col-4 d-flex align-items-center justify-content-center">
+    <ng-container *ngIf="showCenterButtons">
+      <button
+        *ngIf="showCancelButton"
+        (click)="cancelClicked.emit(true)"
+        type="button"
+        class="btn"
+        [ngClass]="{
+          'border-primary text-primary': colorMode === 'blue',
+          'border-success text-success': colorMode === 'green'
+        }"
+      >
+        ยกเลิก
+      </button>
 
-    <button
-      *ngIf="showTempSaveButton"
-      (click)="tempSaveClicked.emit(true)"
-      type="button"
-      class="btn btn-success ms-3"
-    >
-      บันทึกชั่วคราว
-    </button>
+      <button
+        *ngIf="showTempSaveButton"
+        (click)="tempSaveClicked.emit(true)"
+        type="button"
+        class="btn btn-success ms-2"
+      >
+        บันทึกชั่วคราว
+      </button>
 
-    <button
-      *ngIf="showSaveButton"
-      (click)="saveClicked.emit(true)"
-      type="button"
-      class="btn ms-3"
-      [ngClass]="{
-        'btn-primary': colorMode === 'blue',
-        'btn-success': colorMode === 'green'
-      }"
-    >
-      {{ saveButtonLabel }}
-    </button>
+      <button
+        *ngIf="showSaveButton"
+        (click)="saveClicked.emit(true)"
+        type="button"
+        class="btn ms-2"
+        [ngClass]="{
+          'btn-primary': colorMode === 'blue',
+          'btn-success': colorMode === 'green'
+        }"
+      >
+        {{ saveButtonLabel }}
+      </button>
+    </ng-container>
   </div>
 
-  <div class="g-col-4 d-flex justify-content-end align-items-center">
+  <div class="g-col-4 d-flex align-items-center justify-content-end">
     <button
       *ngIf="!isLastPage"
       (click)="nextClicked.emit(true)"
