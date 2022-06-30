@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormRegisterCoordinatorInfoComponent } from './register-coordinator-info/register-coordinator-info.component';
-import { FormRegisterRequesterInfoComponent } from './register-requester-info/register-requester-info.component';
+import { FormRegisterCoordinatorInfoComponent } from './form-register-coordinator-info/form-register-coordinator-info.component';
+import { FormRegisterRequesterInfoComponent } from './form-register-requester-info/form-register-requester-info.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
