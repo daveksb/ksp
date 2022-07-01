@@ -6,7 +6,7 @@
   [formGroup]="form"
   class="bg-secondary bg-opacity-10 px-4 py-2 full-height"
 >
-  <div class="fs-5">ทะเบียนบุคลากรภายในหน่วยงาน</div>
+  <div class="box-header">ทะเบียนบุคลากรภายในหน่วยงาน</div>
 
   <school-service-staff-search
     formControlName="staffSearch"
@@ -15,7 +15,7 @@
   ></school-service-staff-search>
 
   <div class="bg-white px-3 py-2 mt-3">
-    <div class="fs-5">ทะเบียนรายชื่อบุคลากรภายในหน่วยงาน</div>
+    <div class="box-header">ทะเบียนรายชื่อบุคลากรภายในหน่วยงาน</div>
     <hr />
 
     <div class="d-flex justify-content-end">
@@ -67,7 +67,7 @@
           <td mat-cell *matCellDef="let element">
             <i
               *ngIf="element.profession"
-              class="bi bi-check-square text-orange"
+              class="bi bi-check-square text-orange fs-5"
             ></i>
           </td>
         </ng-container>
@@ -95,7 +95,7 @@
         <ng-container matColumnDef="edit">
           <th mat-header-cell *matHeaderCellDef>ดูข้อมูล</th>
           <td mat-cell *matCellDef="let element">
-            <i role="button" class="bi bi-eye text-orange fs-5"></i>
+            <i role="button" class="bi bi-eye text-success fs-5"></i>
           </td>
         </ng-container>
 
@@ -105,7 +105,7 @@
             <i
               (click)="addStaff()"
               role="button"
-              class="bi bi-pencil-square ext-orange fs-5"
+              class="bi bi-pencil-square text-primary fs-5"
             ></i>
           </td>
         </ng-container>

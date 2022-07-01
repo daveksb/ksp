@@ -3,8 +3,8 @@
   <span subHeader>เพิ่มบุคลากร</span>
 </ksp-top-nav>
 
-<div [formGroup]="form" class="container">
-  <div class="fs-5 pt-1 mb-1">รายละเอียดเพิ่มบุคลากรภายในหน่วยงาน</div>
+<div [formGroup]="form" class="bg-secondary bg-opacity-10 px-4 py-2">
+  <div class="box-header pt-1 mb-1">รายละเอียดเพิ่มบุคลากรภายในหน่วยงาน</div>
 
   <div class="bg-white p-3">
     <ksp-request-header-info
@@ -13,7 +13,7 @@
     <hr />
 
     <div class="bg-light pt-2 pb-2 ps-3 pe-3">
-      <div class="fs-5 ps-">ตำแหน่งงานภายในหน่วยงาน</div>
+      <div class="box-header">ตำแหน่งงานภายในหน่วยงาน</div>
 
       <div class="row mb-2 px-3">
         <div class="col-6">
@@ -67,7 +67,7 @@
         </div>
       </div>
 
-      <div class="fs-5 text-secondary ps-3">สถานะบุคลากร</div>
+      <div class="form-label text-secondary ps-3">สถานะบุคลากร</div>
 
       <ng-container *ngFor="let item of status">
         <div class="row mb-2">
@@ -79,7 +79,7 @@
             />
           </span>
           <span class="col-1 px-0 d-flex align-self-center">
-            <label class="fs-5 text-secondary">{{ item.label }}</label>
+            <label class="form-label text-secondary">{{ item.label }}</label>
           </span>
           <span class="col-2">
             <input
@@ -92,7 +92,7 @@
       </ng-container>
 
       <div class="mx-3 mb-2">
-        <div class="fs-5 text-secondary">ระบุสาเหตุ</div>
+        <div class="form-label text-secondary">ระบุสาเหตุ</div>
         <textarea
           class="form-control"
           rows="3"
@@ -102,7 +102,7 @@
     </div>
 
     <div class="bg-light p-3 mt-3">
-      <div class="fs-5">ช่วงชั้นที่สอน</div>
+      <div class="box-header">ช่วงชั้นที่สอน</div>
 
       <div class="row">
         <ng-container *ngFor="let item of levels">
@@ -118,7 +118,7 @@
     </div>
 
     <div class="bg-light p-3 mt-3">
-      <div class="fs-5">ประเภทวิชาที่สอน</div>
+      <div class="box-header">ประเภทวิชาที่สอน</div>
 
       <div class="row">
         <ng-container *ngFor="let s of subjects">
@@ -144,12 +144,13 @@
   </div>
 </div>
 
-<ksp-bottom-nav
-  class="fixed-bottom border"
-  (prevClicked)="back()"
-  [isLastPage]="true"
-  [showCenterButtons]="true"
-  [showSaveButton]="true"
-  (saveClicked)="save()"
-  (cancelClicked)="cancel()"
-></ksp-bottom-nav>
+<div class="sticky-bottom border">
+  <ksp-bottom-nav
+    (prevClicked)="back()"
+    [isLastPage]="true"
+    [showCenterButtons]="true"
+    [showSaveButton]="true"
+    (saveClicked)="save()"
+    (cancelClicked)="cancel()"
+  ></ksp-bottom-nav>
+</div>

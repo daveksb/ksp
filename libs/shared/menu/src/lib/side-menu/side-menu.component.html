@@ -19,11 +19,12 @@
           [queryParams]="menu.params"
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="{ exact: true }"
-          ><img src="{{ menu.icon }}" class="icon__sidenav" />{{
-            menu.label
-          }}</a
+          ><div class="xxx">
+            <img src="{{ menu.icon }}" class="icon__sidenav" />{{ menu.label }}
+          </div></a
         >
       </li>
+
       <li *ngIf="menu.subMenu?.length">
         <a
           data-bs-toggle="collapse"
@@ -31,9 +32,9 @@
           href="#{{ menu.subMenuName }}"
           aria-expanded="false"
           class="dropdown-toggle collapsed"
-          ><img src="{{ menu.icon }}" class="icon__sidenav" />{{
-            menu.label
-          }}</a
+          ><div class="xxx">
+            <img src="{{ menu.icon }}" class="icon__sidenav" />{{ menu.label }}
+          </div></a
         >
         <ul
           [ngClass]="{ show: menu.isExpanded }"
