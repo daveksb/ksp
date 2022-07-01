@@ -30,7 +30,7 @@ export class RetiredSearchComponent {
   }
 
   confirm() {
-    this.router.navigate(['/', 'retired', 'reason']);
+    this.router.navigate(['/retired', 'reason']);
   }
 }
 

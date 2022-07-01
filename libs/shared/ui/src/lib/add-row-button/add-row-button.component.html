@@ -1,7 +1,9 @@
-<div class="icon__container" [class.icon__container--blue]="mode === 'blue'">
-  <i role="button" (click)="onClick()" class="bi bi-plus-circle fs-6"></i>
+<div class="d-flex justify-content-center" (click)="addRowClick.emit(true)">
+  <i role="button" class="bi bi-plus-circle"></i>
 
-  <div (click)="onClick()" class="title" [class.title--large]="mode === 'blue'">
+  <span role="button" class="ms-1">
     <ng-content></ng-content>
-  </div>
+  </span>
 </div>
+
+<!-- [style]="'color: var(--color); font-size: var(--font-size)'" -->

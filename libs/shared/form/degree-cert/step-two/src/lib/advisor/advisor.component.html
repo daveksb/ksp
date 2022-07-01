@@ -78,7 +78,7 @@
             <div class="mb-3">
               <ksp-add-row-button
                 *ngIf="getCourses(i).length < 5 && mode === 'edit'"
-                (addClick)="addCourse(i)"
+                (addRowClick)="addCourse(i)"
                 >เพิ่มหลักสูตร</ksp-add-row-button
               >
             </div>
@@ -92,8 +92,8 @@
 <ng-container *hideInViewMode>
   <ksp-add-row-button
     *ngIf="advisors.length < 5"
-    (addClick)="addAdvisor()"
-    [mode]="'blue'"
+    (addRowClick)="addAdvisor()"
+    class="blue"
     >เพิ่มที่ปรึกษาวิทยานิพนธ์และการค้นคว้าอิสระ
   </ksp-add-row-button>
 </ng-container>

@@ -8,7 +8,8 @@
 
       <div class="bg-light px-3 pt-1 pb-3">
         <div class="fs-4 text-primary">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
-        <div class="row mb-3">
+
+        <div class="row mb-2">
           <div class="col-7">
             <label class="form-label">สิทธิ์สำหรับการเข้าใช้งาน</label>
             <select class="form-select" formControlName="grant">
@@ -24,38 +25,9 @@
           </div>
         </div>
 
-        <div class="row mb-3">
-          <div class="col-7">
-            <label class="form-label">สังกัด</label>
-            <select class="form-select" formControlName="affiliation">
-              <option selected>กรุณาเลือก</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-        </div>
+        <ksp-basic-institute-search></ksp-basic-institute-search>
 
-        <div class="row mb-3">
-          <div class="col-3">
-            <label class="form-label">รหัสมหาวิทยาลัย</label>
-            <input
-              class="form-control"
-              type="text"
-              formControlName="universityCode"
-            />
-          </div>
-          <div class="col-9">
-            <label class="form-label">ชื่อมหาวิทยาลัย</label>
-            <input
-              class="form-control"
-              type="text"
-              formControlName="universityName"
-            />
-          </div>
-        </div>
-
-        <div class="row mb-3">
+        <div class="row mb-2">
           <div class="col">
             <label class="form-label">เลขที่ใบคำขอ</label>
             <input

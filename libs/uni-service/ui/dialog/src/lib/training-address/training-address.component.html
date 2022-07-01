@@ -51,8 +51,8 @@
 
         <div class="detail__footer">
           <ksp-add-row-button
-            [mode]="'blue'"
-            (addClick)="addAddress()"
+            class="blue"
+            (addRowClick)="addAddress()"
             *ngIf="addresses.length < 5"
             >เพิ่มสถานที่ปฏิบัติการสอน</ksp-add-row-button
           >
