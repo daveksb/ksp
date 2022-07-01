@@ -9,7 +9,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { ReactiveFormsModule } from '@angular/forms';
-import { UserSearchComponent } from '@ksp/shared/form/search';
+import { InstituteSearchComponent } from '@ksp/shared/form/search';
 
 export const routes: Route[] = [
   {
@@ -42,7 +42,7 @@ export const routes: Route[] = [
     MatIconModule,
     TopNavComponent,
     ReactiveFormsModule,
-    UserSearchComponent,
+    InstituteSearchComponent,
   ],
   declarations: [ApproveNewUserListComponent],
 })

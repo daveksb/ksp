@@ -9,7 +9,6 @@ Project scope style , used widely across all apps
   --ksp-gray-bg: #e5e5e5;
   --ksp-sidenav-width: 237px;
   --ksp-top-nav-height: 58px;
-  --base-color: #f68b33;
   --ksp-content-width: 1200px; // default width for page content
 }
 
@@ -21,10 +20,6 @@ Project scope style , used widely across all apps
 @font-face {
   font-family: 'ksp bold';
   src: URL('/assets/font/ksp/ksp-bold.ttf') format('truetype');
-}
-
-* {
-  font-family: 'ksp bold';
 }
 
 table {
@@ -57,8 +52,9 @@ add asterisk for required feild
 .form-select,
 .form-control {
   color: var(--ksp-gray) !important;
-  font-size: 22px !important;
+  font-size: 1.25rem !important;
   padding: 0 0.75rem !important;
+  font-family: 'ksp regular';
 }
 
 .sticky-bottom {
