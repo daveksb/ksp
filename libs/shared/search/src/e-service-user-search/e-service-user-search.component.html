@@ -9,26 +9,28 @@
 
     <div class="row mb-2">
       <div class="col">
-        <label class="form-label">เลขที่ใบคำขอ</label>
+        <label class="form-label">หมายเลขบัตรประชาชน</label>
         <input
           class="form-control"
           type="text"
-          formControlName="licenseNumber"
+          formControlName="process"
+          formControlName="personId"
         />
       </div>
       <div class="col">
         <label class="form-label">ชื่อ-นามสกุล</label>
-        <input class="form-control" type="text" formControlName="name" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="status"
+          formControlName="name"
+        />
       </div>
     </div>
 
     <div class="row mb-2">
-      <div class="col">
-        <label class="form-label">วันที่ยื่นใบคำขอ </label>
-        <input class="form-control" type="date" formControlName="submitDate" />
-      </div>
-      <div class="col">
-        <label class="form-label">สถานะใบคำขอ </label>
+      <div class="col-6">
+        <label class="form-label">สถานะการใช้งาน </label>
         <select class="form-select" formControlName="status">
           <option selected>กรุณาเลือก</option>
           <option value="1">One</option>

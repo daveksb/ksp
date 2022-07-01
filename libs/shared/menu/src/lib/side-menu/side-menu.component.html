@@ -19,7 +19,7 @@
           [queryParams]="menu.params"
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="{ exact: true }"
-          ><div class="xxx">
+          ><div class="menu__content">
             <img src="{{ menu.icon }}" class="icon__sidenav" />{{ menu.label }}
           </div></a
         >
@@ -32,7 +32,7 @@
           href="#{{ menu.subMenuName }}"
           aria-expanded="false"
           class="dropdown-toggle collapsed"
-          ><div class="xxx">
+          ><div class="menu__content">
             <img src="{{ menu.icon }}" class="icon__sidenav" />{{ menu.label }}
           </div></a
         >
