@@ -5,8 +5,6 @@ Project scope style , used widely across all apps
 @import './mat-styles.scss';
 
 :root {
-  --ksp-gray: #656565;
-  --ksp-gray-bg: #e5e5e5;
   --ksp-sidenav-width: 237px;
   --ksp-top-nav-height: 58px;
   --ksp-content-width: 1200px; // default width for page content
@@ -43,14 +41,14 @@ add asterisk for required feild
   color: white;
 }
 
+.box-header {
+  font-size: 1.375rem;
+}
+
 .form-label {
   margin-bottom: 0 !important;
   font-size: 1.125rem;
-  color: var(--ksp-gray);
-}
-
-.box-header {
-  font-size: 1.375rem;
+  color: var(--bs-gray-700);
 }
 
 .form-select,
