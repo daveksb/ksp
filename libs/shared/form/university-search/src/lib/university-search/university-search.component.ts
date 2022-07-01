@@ -3,7 +3,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export type SearchType = 'uni' | 'school';
 
 @Component({
-  selector: 'ksp-university-search',
   templateUrl: './university-search.component.html',
   styleUrls: ['./university-search.component.css'],
 })

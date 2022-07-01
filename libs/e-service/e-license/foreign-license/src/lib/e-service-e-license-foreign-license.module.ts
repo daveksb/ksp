@@ -13,7 +13,7 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import { ReactiveFormsModule } from '@angular/forms';
-import { InstituteSearchComponent } from '@ksp/shared/form/search';
+import { EServiceRequestSearchComponent } from '@ksp/shared/form/search';
 
 export const routes: Routes = [
   {
@@ -51,7 +51,7 @@ export const routes: Routes = [
     RequestHeaderInfoComponent,
     LicenseCheckComponent,
     ReactiveFormsModule,
-    InstituteSearchComponent,
+    EServiceRequestSearchComponent,
   ],
   declarations: [ForeignLicenseDetailComponent, ForeignLicenseListComponent],
 })

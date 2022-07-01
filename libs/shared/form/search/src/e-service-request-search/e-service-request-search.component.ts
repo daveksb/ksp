@@ -2,17 +2,18 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { InstituteType } from '@ksp/shared/interface';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy } from '@ngneat/until-destroy';
+import { BasicInstituteSearchComponent } from '../basic-institute-search/basic-institute-search.component';
 
 @UntilDestroy()
 @Component({
-  selector: 'ksp-institute-search',
+  selector: 'ksp-request-search',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './institute-search.component.html',
-  styleUrls: ['./institute-search.component.scss'],
+  imports: [CommonModule, ReactiveFormsModule, BasicInstituteSearchComponent],
+  templateUrl: './e-service-request-search.component.html',
+  styleUrls: ['./e-service-request-search.component.scss'],
 })
-export class InstituteSearchComponent {
+export class EServiceRequestSearchComponent {
   form = this.fb.group({
     licenseNumber: [],
     personId: [],
