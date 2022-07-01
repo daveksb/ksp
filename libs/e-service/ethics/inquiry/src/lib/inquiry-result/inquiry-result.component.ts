@@ -99,7 +99,7 @@ export class InquiryResultComponent extends KspFormBaseComponent {
         header: `ยืนยันข้อมูลสำเร็จ`,
         content: `เลขที่รายการ : 640120000123
         วันที่ : 10 ตุลาคม 2656`,
-        subContent: 'ผู้บันทึกข้อมูล : นางสาวปาวีณา ใกล้คุก',
+        subContent: 'ผู้บันทึกข้อมูล : นางสาวปาเจรา ใกล้คุก',
         buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });

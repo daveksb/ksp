@@ -7,10 +7,10 @@
   [formGroup]="form"
   class="bg-secondary bg-opacity-10 px-4 pt-1 pb-3 full-height"
 >
-  <div class="fs-5 pb-1">ค้นหาข้อมูลใบอนุญาตประกอบวิชาชีพทางการศึกษา</div>
+  <div class="box-header pb-1">ค้นหาข้อมูลใบอนุญาตประกอบวิชาชีพทางการศึกษา</div>
 
   <div class="bg-white p-3 default-width">
-    <div class="fs-5">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
+    <div class="box-header">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
     <hr />
 
     <div class="row mb-2">
@@ -58,13 +58,15 @@
     </div>
   </div>
 
-  <div class="bg-white p-3 mt-3 default-width" *ngIf="foundItem">
-    <div class="fs-5">ผลการค้นหา</div>
+  <div class="bg-white p-3 mt-3 default-width">
+    <div class="box-header">ผลการค้นหา</div>
     <hr />
-    <ksp-license-info></ksp-license-info>
-    <hr />
-    <ksp-license-info [isLicenseRevoked]="true"></ksp-license-info>
-    <hr />
-    <ksp-license-info></ksp-license-info>
+    <div *ngIf="foundItem">
+      <ksp-license-info></ksp-license-info>
+      <hr />
+      <ksp-license-info [isLicenseRevoked]="true"></ksp-license-info>
+      <hr />
+      <ksp-license-info></ksp-license-info>
+    </div>
   </div>
 </div>

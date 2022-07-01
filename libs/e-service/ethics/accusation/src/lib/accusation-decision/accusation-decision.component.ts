@@ -59,7 +59,7 @@ export class AccusationDecisionComponent {
         header: `ยืนยันข้อมูลสำเร็จ`,
         content: `เลขที่รายการ : 640120000123
         วันที่ : 10 ตุลาคม 2656`,
-        subContent: 'ผู้บันทึกข้อมูล : นางสาวปาวีณา ไก่คลุก',
+        subContent: 'ผู้บันทึกข้อมูล : นางสาวปาเจรา ไก่คลุก',
         buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });

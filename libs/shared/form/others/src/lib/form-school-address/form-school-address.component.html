@@ -1,8 +1,8 @@
 <form [formGroup]="form">
-  <div class="form__container">
-    <div class="form__header">ที่อยู่ของสถานศึกษาที่ขออนุญาต</div>
-    <div class="content__container">
-      <div class="mb-3">
+  <div class="bg-light px-3 py-3">
+    <div class="box-header">ที่อยู่ของสถานศึกษาที่ขออนุญาต</div>
+    <div class="row">
+      <div class="col-6 col-6 mb-3">
         <label class="form-label">เลขที่หนังสือนำส่ง</label>
         <input
           class="form-control"
@@ -10,7 +10,7 @@
           formControlName="letterNumber"
         />
       </div>
-      <div class="mb-3">
+      <div class="col-6 mb-3">
         <label class="form-label">วันที่ออกหนังสือนำส่ง</label>
         <input
           class="form-control"
@@ -20,30 +20,30 @@
       </div>
     </div>
 
-    <div class="content__container">
-      <div class="mb-3">
+    <div class="row">
+      <div class="col-6 mb-3">
         <label class="form-label">รหัสหน่วยงาน/สถานศึกษา</label>
         <input class="form-control" type="text" formControlName="schoolCode" />
       </div>
-      <div class="mb-3">
+      <div class="col-6 mb-3">
         <label class="form-label">สังกัด</label>
         <input class="form-control" type="text" formControlName="affiliation" />
       </div>
     </div>
 
-    <div class="content__container">
-      <div class="mb-3">
+    <div class="row">
+      <div class="col-6 mb-3">
         <label class="form-label">หน่วยงาน/สถานศึกษา</label>
         <input class="form-control" type="text" formControlName="schoolName" />
       </div>
-      <div class="mb-3">
+      <div class="col-6 mb-3">
         <label class="form-label">เลขที่</label>
         <input class="form-control" type="text" formControlName="houseNumber" />
       </div>
     </div>
 
-    <div class="content__container">
-      <div class="mb-3">
+    <div class="row">
+      <div class="col-6 mb-3">
         <label class="form-label">หมู่ที่</label>
         <input
           class="form-control"
@@ -51,25 +51,25 @@
           formControlName="villageNumber"
         />
       </div>
-      <div class="mb-3">
+      <div class="col-6 mb-3">
         <label class="form-label">ซอย</label>
         <input class="form-control" type="text" formControlName="lane" />
       </div>
     </div>
 
-    <div class="content__container">
-      <div class="mb-3">
+    <div class="row">
+      <div class="col-6 mb-3">
         <label class="form-label">ถนน</label>
         <input class="form-control" type="text" formControlName="road" />
       </div>
-      <div class="mb-3">
+      <div class="col-6 mb-3">
         <label class="form-label">รหัสไปรษณีย์</label>
         <input class="form-control" type="text" formControlName="zipCode" />
       </div>
     </div>
 
-    <div class="content__container">
-      <div class="mb-3">
+    <div class="row">
+      <div class="col-6 mb-3">
         <label class="form-label">จังหวัด</label>
         <select class="form-select" formControlName="provience">
           <option selected>กรุณาเลือก</option>
@@ -78,7 +78,7 @@
           <option value="3">Three</option>
         </select>
       </div>
-      <div class="mb-3">
+      <div class="col-6 mb-3">
         <label class="form-label">ตำบล</label>
         <select class="form-select" formControlName="subDistrict">
           <option selected>กรุณาเลือก</option>
@@ -89,8 +89,8 @@
       </div>
     </div>
 
-    <div class="content__container">
-      <div class="mb-3">
+    <div class="row">
+      <div class="col-6 mb-3">
         <label class="form-label">อำเภอ</label>
         <select class="form-select" formControlName="district">
           <option selected>กรุณาเลือก</option>
@@ -99,25 +99,25 @@
           <option value="3">Three</option>
         </select>
       </div>
-      <div class="mb-3">
+      <div class="col-6 mb-3">
         <label class="form-label">โทรศัพท์</label>
         <input class="form-control" type="text" formControlName="phone" />
       </div>
     </div>
 
-    <div class="content__container">
-      <div class="mb-3">
+    <div class="row">
+      <div class="col-6 mb-3">
         <label class="form-label">โทรสาร</label>
         <input class="form-control" type="text" formControlName="fax" />
       </div>
-      <div class="mb-3">
+      <div class="col-6 mb-3">
         <label class="form-label">อีเมล</label>
         <input class="form-control" type="text" formControlName="email" />
       </div>
     </div>
 
-    <div class="content__container">
-      <div class="mb-3">
+    <div class="row">
+      <div class="col-6 mb-3">
         <label class="form-label">เว็บไซต์</label>
         <input class="form-control" type="text" formControlName="website" />
       </div>

@@ -1,13 +1,13 @@
 <form [formGroup]="form">
-  <div class="form__container">
-    <div class="form__header">
+  <div class="bg-light px-3 py-3">
+    <div class="box-header">
       ชี้แจงเหตุผลความจำเป็นที่ต้องรับผู้ไม่มีใบประกอบวิชาชีพ
       เข้าประกอบวิชาชีพครูในสถานศึกษา
     </div>
-    <div class="content__container-2">
-      <div class="mb-3">
+    <div class="row">
+      <div class="col mb-3">
         <label class="form-label">สถานศึกษาชี้แจงเหตุผลความจำเป็น</label>
-        <label class="form-label-2">* เลือกได้มากกว่า 1 รายการ</label>
+        <label class="text-danger ms-2">* เลือกได้มากกว่า 1 รายการ</label>
 
         <input
           class="form-control"
@@ -17,34 +17,30 @@
       </div>
     </div>
 
-    <div class="content__container-2">
-      <div class="checkbox__container">
-        <ng-container *ngFor="let item of schoolReason">
-          <mat-checkbox
-            formControlName="{{ item.name }}"
-            class="checkbox__label"
-            >{{ item.label }}</mat-checkbox
-          >
-        </ng-container>
+    <ng-container *ngFor="let item of schoolReason">
+      <div class="d-flex flex-column mb-2">
+        <mat-checkbox formControlName="{{ item.name }}" class="form-label">{{
+          item.label
+        }}</mat-checkbox>
       </div>
+    </ng-container>
 
-      <div class="textarea__container">
-        <textarea
-          formControlName="schoolOtherDetail"
-          class="form-control"
-          rows="3"
-          placeholder="โปรดระบุ"
-        ></textarea>
-      </div>
+    <div class="mx-4">
+      <textarea
+        formControlName="schoolOtherDetail"
+        class="form-control"
+        rows="3"
+        placeholder="โปรดระบุ"
+      ></textarea>
     </div>
-
-    <div class="content__container-2">
-      <div class="mb-3">
+    <br />
+    <div class="row">
+      <div class="col mb-3">
         <label class="form-label"
           >ผู้ขอประกอบวิชาชีพครู
           ชี้แจงเหตุผลที่ไม่สามารถพัฒนาตนเองได้ตามระยะเวลาที่คุรุสภากำหนด</label
         >
-        <label class="form-label-2">* เลือกได้มากกว่า 1 รายการ</label>
+        <label class="text-danger ms-2">* เลือกได้มากกว่า 1 รายการ</label>
 
         <input
           class="form-control"
@@ -54,25 +50,21 @@
       </div>
     </div>
 
-    <div class="content__container-2">
-      <div class="checkbox__container">
-        <ng-container *ngFor="let item of teacherReason">
-          <mat-checkbox
-            formControlName="{{ item.name }}"
-            class="checkbox__label"
-            >{{ item.label }}</mat-checkbox
-          >
-        </ng-container>
+    <ng-container *ngFor="let item of teacherReason">
+      <div class="d-flex flex-column mb-2">
+        <mat-checkbox formControlName="{{ item.name }}" class="form-label">{{
+          item.label
+        }}</mat-checkbox>
       </div>
+    </ng-container>
 
-      <div class="textarea__container">
-        <textarea
-          formControlName="teacherOtherDetail"
-          class="form-control"
-          rows="3"
-          placeholder="โปรดระบุ"
-        ></textarea>
-      </div>
+    <div class="mx-4">
+      <textarea
+        formControlName="teacherOtherDetail"
+        class="form-control"
+        rows="3"
+        placeholder="โปรดระบุ"
+      ></textarea>
     </div>
   </div>
 </form>

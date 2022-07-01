@@ -60,28 +60,28 @@ export const menu: MenuConfig[] = [
     ],
   },
   {
-    icon: 'assets/images/icon-sidenav/event.svg',
+    icon: 'assets/images/icon-sidenav/display.svg',
     label: 'ทะเบียนบุคลากรภายในหน่วยงาน',
     path: 'staff-management',
   },
   {
-    icon: 'assets/images/icon-sidenav/reward.svg',
+    icon: 'assets/images/icon-sidenav/display.svg',
     label: 'ทะเบียนหนังสืออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาต',
     path: '',
   },
   {
-    icon: 'assets/images/icon-sidenav/reward.svg',
+    icon: 'assets/images/icon-sidenav/display.svg',
     label: 'กิจกกรมพัฒนาตนเอง (หนังสืออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาต)',
     path: 'activity',
   },
   {
-    icon: 'assets/images/icon-sidenav/reward.svg',
+    icon: 'assets/images/icon-sidenav/file-earmark-text-fill.svg',
     label: 'รายงาน',
     path: '',
   },
-  /*   {
-    icon: 'assets/images/icon-sidenav/reward.svg',
+  {
+    icon: 'assets/images/icon-sidenav/gear-fill.svg',
     label: 'รายชื่อเจ้าหน้าที่ใช้งาน',
     path: '',
-  }, */
+  },
 ];
