@@ -3,8 +3,8 @@
   <span subHeader>เพิ่มบุคลากร</span>
 </ksp-top-nav>
 
-<div [formGroup]="form" class="container">
-  <div class="fs-5 pt-1 mb-1">รายละเอียดเพิ่มบุคลากรภายในหน่วยงาน</div>
+<div [formGroup]="form" class="bg-secondary bg-opacity-10 px-4 py-2">
+  <div class="box-header pt-1 mb-1">รายละเอียดเพิ่มบุคลากรภายในหน่วยงาน</div>
 
   <div class="bg-white p-3">
     <ksp-request-header-info
@@ -38,10 +38,10 @@
     </div>
 
     <div class="bg-light p-3 m-3">
-      <div class="fs-4">ข้อมูลใบอนุญาตประกอบวิชาชีพ</div>
-      <div class="d-flex">
-        <div class="fs-5 text-secondary ms-4">หมายเลขสมาชิกคุรุสภา</div>
-        <div class="fs-5 ms-3">1234567890</div>
+      <div class="box-header">ข้อมูลใบอนุญาตประกอบวิชาชีพ</div>
+      <div class="d-flex align-items-center">
+        <div class="form-label text-secondary ms-4">หมายเลขสมาชิกคุรุสภา</div>
+        <div class="form-label text-black ms-3">1234567890</div>
       </div>
 
       <ksp-license-type-button-group
@@ -59,8 +59,8 @@
       >
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address formControlName="address1">
-            ที่อยู่ทะเบียนบ้าน
-          </ksp-form-address>
+            ที่อยู่ทะเบียนบ้าน </ksp-form-address
+          ><br />
           <ksp-form-address formControlName="address2">
             ที่อยู่ที่ติดต่อได้สะดวก
           </ksp-form-address>
@@ -70,7 +70,8 @@
           <ksp-form-education-info
             formControlName="education1"
             [showIsEducationDegree]="true"
-          ></ksp-form-education-info>
+          ></ksp-form-education-info
+          ><br />
           <ksp-form-education-info
             formControlName="education2"
             [showIsEducationDegree]="true"
@@ -81,9 +82,10 @@
   </div>
 </div>
 
-<ksp-bottom-nav
-  class="fixed-bottom border"
-  (nextClicked)="next()"
-  [isFirstPage]="true"
-  [showCenterButtons]="false"
-></ksp-bottom-nav>
+<div class="sticky-bottom border">
+  <ksp-bottom-nav
+    (nextClicked)="next()"
+    [isFirstPage]="true"
+    [showCenterButtons]="false"
+  ></ksp-bottom-nav>
+</div>

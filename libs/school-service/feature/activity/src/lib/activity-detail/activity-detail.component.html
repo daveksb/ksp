@@ -5,8 +5,8 @@
   <span subHeader>เพิ่มกิจกรรมการพัฒนาตนเอง</span>
 </ksp-top-nav>
 
-<div class="bg-secondary bg-opacity-10 px-4 py-1">
-  <div class="fs-5 pt-1">รายละเอียดเพิ่มกิจกรรมพัฒนาตนเอง</div>
+<div class="bg-secondary bg-opacity-10 px-4 py-1 full-height">
+  <div class="box-header pt-1">รายละเอียดเพิ่มกิจกรรมพัฒนาตนเอง</div>
 
   <div class="bg-white p-2">
     <div class="px-3">
@@ -21,7 +21,7 @@
     </div>
 
     <div class="bg-light py-2 px-4 mx-3 mt-3">
-      <div class="fs-5">
+      <div class="box-header">
         ข้อมูลหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต
       </div>
 
@@ -45,7 +45,7 @@
               <td>xx/xx/xxxx</td>
               <td>xx/xx/xxxx</td>
               <td>
-                <i role="button" class="fs-5 text-primary bi bi-eye"></i>
+                <i role="button" class="box-header text-success bi bi-eye"></i>
               </td>
             </tr>
           </tbody>
@@ -55,7 +55,7 @@
 
     <div class="bg-light py-3 px-4 m-3">
       <form [formGroup]="activityForm">
-        <div class="fs-5">กิจกรรมการพัฒนาตนเอง</div>
+        <div class="box-header mb-2">กิจกรรมการพัฒนาตนเอง</div>
         <div class="row">
           <div class="col-8 mb-3">
             <select formControlName="activityType" class="form-select">
@@ -70,9 +70,10 @@
         </div>
       </form>
       <ng-template kspDynamicComponent></ng-template>
+    </div>
 
+    <div class="mx-3">
       <ng-template [ngIf]="activityType.value">
-        <hr />
         <ksp-form-attachment
           title="กรุณาแนบหลักฐานประกอบการปฏิบัติงาน"
           [groups]="addActivity"

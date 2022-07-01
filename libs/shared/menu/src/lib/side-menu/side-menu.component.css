@@ -114,6 +114,10 @@ ul ul li {
   margin-right: 12px;
 }
 
+.xxx {
+  display: flex;
+}
+
 @media only screen and (max-width: 768px) {
   /*   #sidebar {
     margin-left: -230px;

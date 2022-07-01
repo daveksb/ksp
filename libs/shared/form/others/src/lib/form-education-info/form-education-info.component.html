@@ -1,8 +1,10 @@
 <form [formGroup]="form">
-  <div class="ps-3 pe-3 pt-2 pb-2 bg-light">
-    <ng-content></ng-content>
+  <div class="ps-3 pe-3 pt-3 pb-3 bg-light">
+    <div class="box-header">
+      <ng-content></ng-content>
+    </div>
 
-    <div class="row ps-2 pe-2 mb-3">
+    <div class="row mb-3">
       <div class="col-6">
         <label class="form-label">ระดับวุฒิทางการศึกษา</label>
         <select class="form-select" formControlName="degreeLevel">
@@ -11,17 +13,17 @@
           <option [value]="3">ปริญญาเอก</option>
         </select>
       </div>
-      <div *ngIf="showIsEducationDegree" class="col checkbox__container">
+      <div *ngIf="showIsEducationDegree" class="col d-flex align-items-center">
         <input
           type="checkbox"
-          class="checkbox"
+          class="me-2"
           formControlName="isEducationDegree"
         />
         <label class="form-label">ปริญญาทางการศึกษา</label>
       </div>
     </div>
 
-    <div class="row ps-2 pe-2 mb-3">
+    <div class="row mb-3">
       <div class="col">
         <label class="form-label">ชื่อปริญญา/หลักสูตร</label>
         <input class="form-control" type="text" formControlName="degreeName" />
@@ -32,7 +34,7 @@
       </div>
     </div>
 
-    <div class="row ps-2 pe-2 mb-3">
+    <div class="row mb-3">
       <div class="col">
         <label class="form-label">สถาบันการศึกษา</label>
         <input
@@ -52,7 +54,7 @@
       </div>
     </div>
 
-    <div class="row ps-2 pe-2 mb-3">
+    <div class="row mb-3">
       <div class="col">
         <label class="form-label">วันเดือนปี เข้าศึกษา</label>
         <input
@@ -71,7 +73,7 @@
       </div>
     </div>
 
-    <div class="row ps-2 pe-2 mb-3">
+    <div class="row mb-3">
       <div class="col-6">
         <label class="form-label">เกรดเฉลี่ย</label>
         <input class="form-control" type="text" formControlName="grade" />
