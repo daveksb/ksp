@@ -1,82 +1,80 @@
 <form [formGroup]="form">
-  <div class="bg-light py-2 px-3">
+  <div class="bg-light py-2 px-3 default-width">
     <div class="fs-5">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
 
-    <div class="box__detail">
-      <div class="row mb-2">
-        <div class="col-7">
-          <label class="form-label">สังกัด</label>
-          <select class="form-select" formControlName="licenseNumber">
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
+    <div class="row mb-2">
+      <div class="col-7">
+        <label class="form-label">สังกัด</label>
+        <select class="form-select" formControlName="licenseNumber">
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
       </div>
+    </div>
 
-      <div class="row mb-2">
-        <div class="col-4">
-          <label class="form-label">รหัสหน่วยงาน/ สถานศึกษา </label>
-          <input class="form-control" type="text" formControlName="personId" />
-        </div>
-        <div class="col-8">
-          <label class="form-label">ชื่อหน่วยงาน/ สถานศึกษา</label>
-          <input
-            class="form-control"
-            type="text"
-            formControlName="professionType"
-          />
-        </div>
+    <div class="row mb-2">
+      <div class="col-4">
+        <label class="form-label">รหัสหน่วยงาน/ สถานศึกษา </label>
+        <input class="form-control" type="text" formControlName="personId" />
       </div>
+      <div class="col-8">
+        <label class="form-label">ชื่อหน่วยงาน/ สถานศึกษา</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="professionType"
+        />
+      </div>
+    </div>
 
-      <div class="row mb-2">
-        <div class="col">
-          <label class="form-label">เลขที่ใบคำขอ</label>
-          <input class="form-control" type="text" formControlName="process" />
-        </div>
-        <div class="col">
-          <label class="form-label">ชื่อ-นามสกุล</label>
-          <input class="form-control" type="text" formControlName="status" />
-        </div>
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">เลขที่ใบคำขอ</label>
+        <input class="form-control" type="text" formControlName="process" />
       </div>
+      <div class="col">
+        <label class="form-label">ชื่อ-นามสกุล</label>
+        <input class="form-control" type="text" formControlName="status" />
+      </div>
+    </div>
 
-      <div class="row mb-2">
-        <div class="col">
-          <label class="form-label">วันที่ยื่นใบคำขอ </label>
-          <input
-            class="form-control"
-            type="date"
-            formControlName="submitDateFrom"
-          />
-        </div>
-        <div class="col">
-          <label class="form-label">สถานะใบคำขอ </label>
-          <select class="form-select" formControlName="submitDateTo">
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">วันที่ยื่นใบคำขอ </label>
+        <input
+          class="form-control"
+          type="date"
+          formControlName="submitDateFrom"
+        />
       </div>
+      <div class="col">
+        <label class="form-label">สถานะใบคำขอ </label>
+        <select class="form-select" formControlName="submitDateTo">
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+    </div>
 
-      <div class="d-flex justify-content-end">
-        <button
-          type="button"
-          class="btn border-primary text-primary"
-          (click)="clear.emit(true)"
-        >
-          ล้างข้อมูล
-        </button>
-        <button
-          type="button"
-          class="ms-2 btn btn-primary"
-          (click)="search.emit(true)"
-        >
-          ค้นหา
-        </button>
-      </div>
+    <div class="d-flex justify-content-end">
+      <button
+        type="button"
+        class="btn border-primary text-primary"
+        (click)="clear.emit(true)"
+      >
+        ล้างข้อมูล
+      </button>
+      <button
+        type="button"
+        class="ms-2 btn btn-primary"
+        (click)="search.emit(true)"
+      >
+        ค้นหา
+      </button>
     </div>
   </div>
 </form>
