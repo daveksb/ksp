@@ -99,7 +99,10 @@
     ></ng-container>
 
     <div *hideInViewMode>
-      <ksp-add-row-button *ngIf="degrees.length < 4" (addClick)="addDegree()">
+      <ksp-add-row-button
+        *ngIf="degrees.length < 4"
+        (addRowClick)="addDegree()"
+      >
         เพิ่มคุณวุฒิการศึกษา
       </ksp-add-row-button>
     </div>

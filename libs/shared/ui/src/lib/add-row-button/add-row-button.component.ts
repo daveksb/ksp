@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -11,9 +11,8 @@ import { MatIconModule } from '@angular/material/icon';
 })
 
 /**
- *
- * use class="blue" for make font blue color and bigger font
+ * use class="blue" for make blue color and bigger font
  */
 export class AddRowButtonComponent {
-  @Output() addClick = new EventEmitter<boolean>();
+  @Output() addRowClick = new EventEmitter<boolean>();
 }

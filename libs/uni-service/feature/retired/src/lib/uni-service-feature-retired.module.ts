@@ -11,6 +11,7 @@ import { UniServiceFormModule } from '@ksp/uni-service/form';
 import { BottomNavComponent } from '@ksp/shared/menu';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BasicInstituteSearchComponent } from '@ksp/shared/search';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     UniServiceFormModule,
     BottomNavComponent,
     ReactiveFormsModule,
+    BasicInstituteSearchComponent,
   ],
   declarations: [
     RetiredSearchComponent,

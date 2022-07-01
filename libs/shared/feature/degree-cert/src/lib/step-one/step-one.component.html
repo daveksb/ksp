@@ -113,7 +113,7 @@
         </ng-container>
       </ng-container>
       <ksp-add-row-button
-        (addClick)="addFormArray(locations)"
+        (addRowClick)="addFormArray(locations)"
         *ngIf="mode === 'edit'"
         >เพิ่มสถานที่เปิดสอน</ksp-add-row-button
       >
@@ -151,7 +151,7 @@
       </ng-container>
 
       <ksp-add-row-button
-        (addClick)="addFormArray(institutions)"
+        (addRowClick)="addFormArray(institutions)"
         *ngIf="mode === 'edit'"
         >เพิ่มหน่วยงานที่รับผิดชอบหลักสูตร
       </ksp-add-row-button>
@@ -189,7 +189,7 @@
       </ng-container>
 
       <ksp-add-row-button
-        (addClick)="addFormArray(locations2)"
+        (addRowClick)="addFormArray(locations2)"
         *ngIf="mode === 'edit'"
         >เพิ่มสถานที่เปิดสอน</ksp-add-row-button
       >
