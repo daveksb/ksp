@@ -2,16 +2,21 @@
 
 <form [formGroup]="form">
   <div class="container">
-    <div class="content">
-      <div class="fs-4">ลืมรหัสผ่าน</div>
+    <div class="content mt-5">
+      <div class="box-header">ลืมรหัสผ่าน</div>
       <hr />
-      <div class="text-primary fs-4">กรุณากรอกข้อมูลเพื่อยืนยันตัวตน</div>
+      <div class="text-primary box-header">กรุณากรอกข้อมูลเพื่อยืนยันตัวตน</div>
 
-      <div class="">
-        <div class="form-label required">รหัสโรงเรียน</div>
+      <div class="mb-3">
+        <div class="form-label">
+          รหัสโรงเรียน <span class="text-danger">*</span>
+        </div>
         <input formControlName="schoolId" type="text" class="form-control" />
-
-        <div class="form-label required">หมายเลขบัตรประชาชน</div>
+      </div>
+      <div class="mb-1">
+        <div class="form-label">
+          หมายเลขบัตรประชาชน <span class="text-danger">*</span>
+        </div>
         <input formControlName="personId" type="text" class="form-control" />
 
         <div class="form-label">
@@ -19,8 +24,8 @@
         </div>
       </div>
 
-      <div class="d-flex justify-content-center mt-4">
-        <button (click)="cancel()" class="btn btn-outline-primary">
+      <div class="d-flex justify-content-center mt-4 mb-3">
+        <button (click)="cancel()" class="btn border-primary text-primary">
           ยกเลิก
         </button>
         <button (click)="accept()" class="ms-2 btn btn-primary">ตกลง</button>

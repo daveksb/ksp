@@ -1,13 +1,17 @@
 <div class="bg-white">
   <div class="d-flex justify-content-between">
-    <div class="fs-4">ค้นหาหน่วยงาน/สถานศึกษา</div>
+    <div class="box-header">ค้นหาหน่วยงาน/สถานศึกษา</div>
     <div>
-      <i role="button" matDialogClose class="bi bi-x fs-5 text-primary"></i>
+      <i
+        role="button"
+        matDialogClose
+        class="bi bi-x box-header text-primary"
+      ></i>
     </div>
   </div>
   <hr />
   <div class="box__detail">
-    <div class="detail__header">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
+    <div class="box-header text-primary">กรุณาเลือกสถานบันที่ท่านสังกัด</div>
     <div class="row mb-2">
       <div col-6>
         <label class="form-label">สังกัด</label>
@@ -22,13 +26,17 @@
     <div class="row mb-2">
       <div class="col">
         <label class="form-label"
-          >รหัส{{ searchType === 'uni' ? 'มหาวิทยาลัย' : 'โรงเรียน' }}</label
+          >รหัส{{
+            searchType === 'uni' ? 'มหาวิทยาลัย' : 'โรงเรียน/สถานศึกษา'
+          }}</label
         >
         <input class="form-control" type="text" />
       </div>
       <div class="col">
         <label class="form-label"
-          >ชื่อ{{ searchType === 'uni' ? 'มหาวิทยาลัย' : 'โรงเรียน' }}</label
+          >ชื่อ{{
+            searchType === 'uni' ? 'มหาวิทยาลัย' : 'โรงเรียน/สถานศึกษา'
+          }}</label
         >
         <input class="form-control" type="text" />
       </div>
@@ -36,7 +44,9 @@
 
     <div class="row mb-2">
       <div class="col">
-        <label class="form-label">จังหวัด </label>
+        <label class="form-label"
+          >จังหวัด <span class="text-danger">*</span>
+        </label>
         <select class="form-select">
           <option selected>กรุณาเลือก</option>
           <option value="1">One</option>
@@ -45,7 +55,9 @@
         </select>
       </div>
       <div class="col">
-        <label class="form-label">อำเภอ </label>
+        <label class="form-label"
+          >อำเภอ <span class="text-danger">*</span></label
+        >
         <select class="form-select">
           <option selected>กรุณาเลือก</option>
           <option value="1">One</option>
@@ -68,13 +80,13 @@
     </div>
     <hr />
 
-    <div class="fs-5 text-primary">ผลการค้นหา</div>
+    <div class="box-header text-primary">ผลการค้นหา</div>
     <div class="table-responsive">
       <table class="table">
         <thead class="header__table">
           <tr>
             <th scope="col">เลือก</th>
-            <th scope="col" class="header__column">
+            <th scope="col">
               รหัส{{ searchType === 'uni' ? 'มหาวิทยาลัย' : 'โรงเรียน' }}
             </th>
             <th scope="col">

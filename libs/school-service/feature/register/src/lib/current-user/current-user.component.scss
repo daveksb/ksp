@@ -1,6 +1,6 @@
 .container-fluid {
   padding: 10px 120px;
-  height: 100vh;
+  height: calc(100vh - 58px);
   background-color: var(--ksp-gray-bg);
 }
 
