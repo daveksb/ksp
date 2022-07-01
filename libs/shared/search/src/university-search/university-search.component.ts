@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
-import { BasicInstituteSearchComponent } from '@ksp/shared/search';
+import { BasicInstituteSearchComponent } from '../basic-institute-search/basic-institute-search.component';
 
 export type SearchType = 'uni' | 'school';
 
