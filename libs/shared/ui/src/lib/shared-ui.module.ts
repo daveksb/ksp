@@ -1,5 +1,3 @@
 import { NgModule } from '@angular/core';
-@NgModule({
-  imports: [],
-})
+@NgModule({})
 export class SharedUiModule {}

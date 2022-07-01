@@ -72,8 +72,8 @@
   </ng-container>
 </form>
 
-<div *ngIf="teachers.length < 5" class="button__container">
-  <ksp-add-row-button *hideInViewMode (addClick)="addTeacher()" [mode]="'blue'"
-    >เพิ่มอาจารย์ประจำหลักสูตร / ผู้รับผิดชอบหลักสูตร</ksp-add-row-button
+<ng-container *ngIf="teachers.length < 5">
+  <ksp-add-row-button *hideInViewMode (addClick)="addTeacher()" class="blue"
+    >เพิ่มอาจารย์ประจำหลักสูตร/ ผู้รับผิดชอบหลักสูตร</ksp-add-row-button
   >
-</div>
+</ng-container>

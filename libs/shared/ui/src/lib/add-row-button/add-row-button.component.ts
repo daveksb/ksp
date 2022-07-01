@@ -9,11 +9,11 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrls: ['./add-row-button.component.scss'],
   imports: [CommonModule, MatIconModule],
 })
+
+/**
+ *
+ * use class="blue" for make font blue color and bigger font
+ */
 export class AddRowButtonComponent {
   @Output() addClick = new EventEmitter<boolean>();
-  @Input() mode = 'default';
-
-  onClick() {
-    this.addClick.emit(true);
-  }
 }

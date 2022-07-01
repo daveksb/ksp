@@ -1,20 +1,20 @@
-.icon__container {
-  display: flex;
-  justify-content: center;
-  color: #f68b33;
-  align-items: baseline;
+/* :host {
+  --color: var(--bs-orange);
+  --font-size: 1rem;
 }
 
-.icon__container--blue {
-  color: #0056ff;
+:host.blue {
+  --color: blue;
+  --font-size: 1.5rem;
+}
+ */
+
+:host {
+  color: var(--bs-orange);
+  font-size: 1.2rem !important;
 }
 
-.title {
-  font-size: 18px;
-  margin-left: 2px;
-  cursor: pointer;
-}
-
-.title--large {
-  font-size: 20px;
+:host-context(.blue) {
+  color: blue;
+  font-size: 1.4rem !important;
 }
