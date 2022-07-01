@@ -15,7 +15,7 @@ a:focus {
 }
 
 .active-link {
-  color: #f68b33 !important;
+  color: #0056ff !important;
 }
 
 #sidebar.active {
@@ -66,12 +66,12 @@ a:focus {
 }
 
 #sidebar ul li a:hover {
-  color: #f68b33;
+  color: #0056ff;
 }
 
 #sidebar ul li.active > a,
 a[aria-expanded='true'] {
-  color: #f68b33;
+  color: #0056ff;
 }
 
 a[data-bs-toggle='collapse'] {

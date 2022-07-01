@@ -1,5 +1,6 @@
 .container {
-  height: 45em;
+  height: 100vh;
+  max-width: 1440px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,11 +10,11 @@
 .wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 25px;
+  grid-gap: 24px;
   justify-items: center;
 }
 
-button {
+#button {
   width: 250px;
   height: 80px;
 }
