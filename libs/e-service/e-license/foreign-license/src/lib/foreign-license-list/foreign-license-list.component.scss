@@ -15,20 +15,6 @@
   margin: 12px 0;
 }
 
-.box__container {
-  background-color: #f9f9fa;
-  margin: 16px 0;
-  max-width: 1200px;
-  padding: 12px;
-}
-
-.button__container {
-  padding-bottom: 15px;
-  padding-right: 15px;
-  display: flex;
-  justify-content: flex-end;
-}
-
 .box__title {
   font-size: 22px;
   color: #000000;
@@ -37,40 +23,6 @@
 .box__title-2 {
   font-size: 22px;
   color: #0056ff;
-}
-
-.detail__container--primary {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  grid-column-gap: 16px;
-}
-
-.detail__container--secondary {
-  display: grid;
-  grid-template-columns: 0.25fr 1fr;
-  grid-column-gap: 16px;
-}
-
-.detail__container--third {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 16px;
-}
-
-.form-label {
-  font-size: 18px;
-  color: #656565;
-  margin-bottom: 0;
-}
-
-.form-control {
-  background-color: #fff;
-  font-size: 18px;
-}
-
-.form-select {
-  background-color: #fff;
-  font-size: 18px;
 }
 
 .table {
@@ -86,8 +38,4 @@
 .header {
   font-size: 22px;
   color: #000000;
-}
-
-#btn-search {
-  margin-left: 15px;
 }

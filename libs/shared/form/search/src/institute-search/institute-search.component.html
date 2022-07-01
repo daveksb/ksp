@@ -1,12 +1,10 @@
 <form [formGroup]="form">
-  <div class="box__container">
-    <div class="box__header">
-      <div class="title__box">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
-    </div>
-    <hr />
+  <div class="bg-light py-2 px-3">
+    <div class="fs-5">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
+
     <div class="box__detail">
-      <div class="detail__container--half">
-        <div class="mb-3">
+      <div class="row mb-2">
+        <div class="col-7">
           <label class="form-label">สังกัด</label>
           <select class="form-select" formControlName="licenseNumber">
             <option selected>กรุณาเลือก</option>
@@ -17,13 +15,13 @@
         </div>
       </div>
 
-      <div class="detail__container--half">
-        <div class="mb-3">
-          <label class="form-label">รหัสมหาวิทยาลัย</label>
+      <div class="row mb-2">
+        <div class="col-4">
+          <label class="form-label">รหัสหน่วยงาน/ สถานศึกษา </label>
           <input class="form-control" type="text" formControlName="personId" />
         </div>
-        <div class="mb-3">
-          <label class="form-label">ชื่อโรงเรียน/หน่วยงาน</label>
+        <div class="col-8">
+          <label class="form-label">ชื่อหน่วยงาน/ สถานศึกษา</label>
           <input
             class="form-control"
             type="text"
@@ -32,19 +30,19 @@
         </div>
       </div>
 
-      <div class="detail__container--half">
-        <div class="mb-3">
+      <div class="row mb-2">
+        <div class="col">
           <label class="form-label">เลขที่ใบคำขอ</label>
           <input class="form-control" type="text" formControlName="process" />
         </div>
-        <div class="mb-3">
+        <div class="col">
           <label class="form-label">ชื่อ-นามสกุล</label>
           <input class="form-control" type="text" formControlName="status" />
         </div>
       </div>
 
-      <div class="detail__container--half">
-        <div class="detail__container">
+      <div class="row mb-2">
+        <div class="col">
           <label class="form-label">วันที่ยื่นใบคำขอ </label>
           <input
             class="form-control"
@@ -52,7 +50,7 @@
             formControlName="submitDateFrom"
           />
         </div>
-        <div class="detail__container">
+        <div class="col">
           <label class="form-label">สถานะใบคำขอ </label>
           <select class="form-select" formControlName="submitDateTo">
             <option selected>กรุณาเลือก</option>
@@ -62,7 +60,8 @@
           </select>
         </div>
       </div>
-      <div class="detail__action">
+
+      <div class="d-flex justify-content-end">
         <button
           type="button"
           class="btn border-primary text-primary"
@@ -71,9 +70,8 @@
           ล้างข้อมูล
         </button>
         <button
-          id="search__button"
           type="button"
-          class="btn btn-primary"
+          class="ms-2 btn btn-primary"
           (click)="search.emit(true)"
         >
           ค้นหา

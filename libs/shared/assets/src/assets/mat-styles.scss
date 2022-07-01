@@ -69,6 +69,7 @@
 
 tr.mat-header-row {
   background-color: #edf6ff;
+  font-family: var(--bs-body-font-family);
 }
 
 .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
@@ -89,4 +90,5 @@ tr.mat-header-row {
 .mat-cell {
   color: var(--ksp-gray);
   font-size: 1rem;
+  font-family: var(--bs-body-font-family);
 }
