@@ -1,106 +1,19 @@
-<ksp-top-nav
-  ><span header>ยื่นใบคำขอ</span
-  ><span subHeader
-    >ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ
-  </span></ksp-top-nav
->
+<ksp-top-nav>
+  <span header>ยื่นใบคำขอ</span>
+  <span subHeader>ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ </span>
+</ksp-top-nav>
 
 <form [formGroup]="form">
-  <div class="main-container">
-    <div class="header">รายการใบคำขอสร้างเลขคุรุสภาสำหรับครูชาวต่างชาติ</div>
-    <div class="top-container">
-      <div class="box__title">ค้นหาหน่วยงาน/สถานศึกษา</div>
+  <div class="bg-secondary bg-opacity-10 px-3 py-2 full-height">
+    <div class="fs-5">รายการใบคำขอสร้างเลขคุรุสภาสำหรับครูชาวต่างชาติ</div>
 
+    <div class="bg-white px-3 py-2">
+      <div class="fs-5">ค้นหาหน่วยงาน/สถานศึกษา</div>
       <hr />
-
-      <div class="box__container">
-        <div class="box__title">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
-        <div class="detail__container--primary">
-          <div class="mb-3">
-            <label class="form-label">สังกัด </label>
-            <select class="form-select" formControlName="affiliation">
-              <option selected>กรุณาเลือก</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="detail__container--secondary">
-          <div class="mb-3">
-            <label class="form-label">รหัสหน่วยงาน / สถานศึกษา</label>
-            <input
-              class="form-control"
-              type="text"
-              formControlName="institutionCode"
-            />
-          </div>
-          <div class="mb-3">
-            <label class="form-label">ชื่อหน่วยงาน / สถานศึกษา</label>
-            <input
-              class="form-control"
-              type="text"
-              formControlName="institutionName"
-            />
-          </div>
-        </div>
-
-        <div class="detail__container--third">
-          <div class="mb-3">
-            <label class="form-label">เลขที่ใบคำขอ</label>
-            <input
-              class="form-control"
-              type="text"
-              formControlName="requestNumber"
-            />
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">ชื่อ-นามสกุล</label>
-            <input class="form-control" type="text" formControlName="name" />
-          </div>
-        </div>
-
-        <div class="detail__container--third">
-          <div class="mb-3">
-            <label class="form-label">วันที่ยื่นใบคำขอ</label>
-            <input
-              class="form-control"
-              type="date"
-              formControlName="submitReqDate"
-            />
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">สถานะ</label>
-            <select class="form-select" formControlName="status">
-              <option selected>กรุณาเลือก</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="button__container">
-          <button
-            (click)="clear()"
-            type="button"
-            class="btn btn-outline-primary"
-          >
-            ล้างข้อมูล
-          </button>
-          <button
-            (click)="search()"
-            id="btn-search"
-            type="button"
-            class="btn btn-primary"
-          >
-            ค้นหา
-          </button>
-        </div>
-      </div>
+      <ksp-institute-search
+        (clear)="clear()"
+        (search)="search()"
+      ></ksp-institute-search>
       <hr />
 
       <div class="box__title-2">

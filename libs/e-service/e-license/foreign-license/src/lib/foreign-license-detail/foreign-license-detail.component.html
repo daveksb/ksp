@@ -1,23 +1,20 @@
-<ksp-top-nav
-  ><span header>ยื่นใบคำขอ</span
-  ><span subHeader
-    >ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ
-  </span></ksp-top-nav
->
+<ksp-top-nav>
+  <span header>ยื่นใบคำขอ</span>
+  <span subHeader>ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ </span>
+</ksp-top-nav>
 
-<div class="main-container">
-  <div class="box__title">
-    รายละเอียดใบคำขอสร้างเลขคุรุสภาสำหรับนักศึกษาชาวต่างชาติ
-  </div>
-  <div class="content__container">
+<div class="bg-secondary bg-opacity-10 px-4 py-2">
+  <div class="fs-5">รายละเอียดใบคำขอสร้างเลขคุรุสภาสำหรับครูชาวต่างชาติ</div>
+  <div class="bg-white p-3">
     <ksp-request-header-info
       [requestDate]="'10 ตุลาคม 2565'"
       [requestNumber]="'112234467876543'"
     ></ksp-request-header-info>
     <hr />
-    <div class="header__container">
-      <div class="detail__content">
-        <div class="mb-1">
+
+    <div class="px-3 pt-1 pb-2">
+      <div class="row mb-2">
+        <div class="col-6">
           <label class="form-label">สังกัด</label>
           <input
             class="form-control"
@@ -27,8 +24,9 @@
           />
         </div>
       </div>
-      <div class="detail__content">
-        <div class="mb-1">
+
+      <div class="row mb-2">
+        <div class="col">
           <label class="form-label">รหัสหน่วยงาน / สถานศึกษา</label>
           <input
             class="form-control"
@@ -37,7 +35,7 @@
             placeholder="xxxxx"
           />
         </div>
-        <div class="mb-1">
+        <div class="col">
           <label class="form-label">ชื่อหน่วยงาน / สถานศึกษา</label>
           <input
             class="form-control"
@@ -47,8 +45,9 @@
           />
         </div>
       </div>
-      <div class="detail__content--primary">
-        <div class="mb-1">
+
+      <div class="row">
+        <div class="col">
           <label class="form-label">ที่อยู่</label>
           <input
             class="form-control"
@@ -61,7 +60,8 @@
     </div>
     <ksp-form-foreign-id [mode]="'view'"></ksp-form-foreign-id>
     <hr />
-    <div class="form__upload">
+
+    <div class="mt-2">
       <ksp-form-attachment
         [groups]="foreignInfo"
         [mode]="mode"
@@ -69,7 +69,8 @@
     </div>
   </div>
   <br />
-  <div class="content__container">
+
+  <div class="bg-white px-3 py-2">
     <e-service-license-check
       [choices]="choices"
       [isHasReason]="false"

@@ -4,9 +4,15 @@ import order is important for overwrite default variables
 **/
 
 $customTheme: (
-  'orange': #f68b33,
+  'ksp': #f68b33,
 );
 
+/* $customFs: (
+  55: 1.125rem,
+  45: 1.375rem,
+);
+ */
+$font-family-base: 'ksp bold';
 $enable-cssgrid: true;
 
 @import './node_modules/bootstrap/scss/functions';
@@ -14,6 +20,7 @@ $enable-cssgrid: true;
 //@import './node_modules/bootstrap/scss/maps';
 //@import './node_modules/bootstrap/scss/mixins';
 $theme-colors: map-merge($theme-colors, $customTheme);
+//$font-sizes: map-merge($font-sizes, $customFs);
 
 @import './node_modules/bootstrap/scss/bootstrap';
 @import './node_modules/bootstrap-icons/font/bootstrap-icons';
