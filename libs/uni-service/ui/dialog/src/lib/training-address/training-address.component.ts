@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { UniversitySearchComponent } from '@ksp/shared/form/university-search';
+import { UniversitySearchComponent } from '@ksp/shared/search';
 
 @Component({
   selector: 'uni-service-training-address',
@@ -19,11 +18,7 @@ export class TrainingAddressComponent {
     addresses: this.fb.array([this.teachingAddressForm]),
   });
 
-  constructor(
-    public dialog: MatDialog,
-    private router: Router,
-    private fb: FormBuilder
-  ) {}
+  constructor(public dialog: MatDialog, private fb: FormBuilder) {}
 
   searchAddress() {
     this.dialog.open(UniversitySearchComponent, {

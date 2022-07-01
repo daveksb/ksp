@@ -13,7 +13,7 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import { ReactiveFormsModule } from '@angular/forms';
-import { EServiceRequestSearchComponent } from '@ksp/shared/form/search';
+import { EServiceRequestSearchComponent } from '@ksp/shared/search';
 
 export const routes: Routes = [
   {

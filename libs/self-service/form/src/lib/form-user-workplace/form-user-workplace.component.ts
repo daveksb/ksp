@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { UniversitySearchComponent } from '@ksp/shared/form/university-search';
 import {
   formWorkplaceModel,
   KspFormBaseComponent,
 } from '@ksp/shared/interface';
+import { UniversitySearchComponent } from '@ksp/shared/search';
 import { providerFactory } from '@ksp/shared/utility';
 
 @Component({

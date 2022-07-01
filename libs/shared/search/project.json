@@ -1,14 +1,15 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "sourceRoot": "libs/shared/form/search/src",
+  "sourceRoot": "libs/shared/search/src",
   "prefix": "ksp",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "libs/shared/form/search/**/*.ts",
-          "libs/shared/form/search/**/*.html"
+          "libs/shared/search/**/*.ts",
+          "libs/shared/search/**/*.html"
         ]
       }
     }
