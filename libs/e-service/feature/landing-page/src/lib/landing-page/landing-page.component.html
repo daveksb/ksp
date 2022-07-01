@@ -1,17 +1,56 @@
 <div class="container">
   <div class="wrapper">
-    <button [disabled]="false" (click)="elicense()">
+    <button
+      id="button"
+      type="button"
+      class="btn btn-outline-secondary text-dark shadow"
+      [disabled]="false"
+      (click)="elicense()"
+    >
       ระบบใบอนุญาตประกอบวิชาชีพทางการศึกษา (E-Licensing)
     </button>
-    <button [disabled]="false" (click)="standard()">
+    <button
+      id="button"
+      type="button"
+      class="btn btn-outline-secondary text-dark shadow"
+      [disabled]="false"
+      (click)="standard()"
+    >
       ระบบงานมาตรฐานวิชาชีพ
     </button>
-    <button [disabled]="false" (click)="ethics()">
+    <button
+      id="button"
+      type="button"
+      class="btn btn-outline-secondary text-dark shadow"
+      [disabled]="false"
+      (click)="ethics()"
+    >
       ระบบงานจรรยาบรรณวิชาชีพ
     </button>
 
-    <button [disabled]="true">ระบบงานพัฒนาและยกย่องวิชาชีพ</button>
-    <button [disabled]="true">ระบบงานค่าธรรมเนียม</button>
-    <button [disabled]="true">ระบบบริหารจัดการผู้ดูแลระบบ</button>
+    <button
+      id="button"
+      type="button"
+      class="btn btn-outline-secondary text-dark shadow"
+      [disabled]="true"
+    >
+      ระบบงานพัฒนาและยกย่องวิชาชีพ
+    </button>
+    <button
+      id="button"
+      type="button"
+      class="btn btn-outline-secondary text-dark shadow"
+      [disabled]="true"
+    >
+      ระบบงานค่าธรรมเนียม
+    </button>
+    <button
+      id="button"
+      type="button"
+      class="btn btn-outline-secondary text-dark shadow"
+      [disabled]="true"
+    >
+      ระบบบริหารจัดการผู้ดูแลระบบ
+    </button>
   </div>
 </div>

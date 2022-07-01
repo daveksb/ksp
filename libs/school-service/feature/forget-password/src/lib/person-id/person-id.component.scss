@@ -1,15 +1,14 @@
 .container {
   background-color: #e5e5e5;
   max-width: 1440px;
-  padding: 120px 240px;
   display: flex;
   justify-content: center;
-  height: 85vh;
+  height: calc(100vh - 58px);
 }
 
 .content {
   background-color: #fff;
   padding: 1rem 2rem;
   width: 600px;
-  height: 360px;
+  height: fit-content;
 }

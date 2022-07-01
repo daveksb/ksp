@@ -1,7 +1,7 @@
 .container-fluid {
   padding: 10px 120px;
-  height: 100vh;
-  background-color: var(--bs-gray-400);
+  height: calc(100vh - 58px);
+  background-color: var(--ksp-gray-bg);
 }
 
 .header__table {
