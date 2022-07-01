@@ -158,21 +158,18 @@
       "@ksp/shared/form/school/register": [
         "libs/shared/form/school/register/src/index.ts"
       ],
-      "@ksp/shared/form/search": ["libs/shared/form/search/src/index.ts"],
       "@ksp/shared/form/teacher-info": [
         "libs/shared/form/teacher-info/src/index.ts"
       ],
       "@ksp/shared/form/uni-course-form": [
         "libs/shared/form/uni-course-form/src/index.ts"
       ],
-      "@ksp/shared/form/university-search": [
-        "libs/shared/form/university-search/src/index.ts"
-      ],
       "@ksp/shared/form/university-select": [
         "libs/shared/form/university-select/src/index.ts"
       ],
       "@ksp/shared/interface": ["libs/shared/interface/src/index.ts"],
       "@ksp/shared/menu": ["libs/shared/menu/src/index.ts"],
+      "@ksp/shared/search": ["libs/shared/search/src/index.ts"],
       "@ksp/shared/ui": ["libs/shared/ui/src/index.ts"],
       "@ksp/shared/utility": ["libs/shared/utility/src/index.ts"],
       "@ksp/uni-service/feature/container-page": [

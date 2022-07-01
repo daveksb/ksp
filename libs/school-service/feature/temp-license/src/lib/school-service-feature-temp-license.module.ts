@@ -13,7 +13,7 @@ import { BottomNavComponent } from '@ksp/shared/menu';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TempLicenseSearchComponent } from '@ksp/shared/form/search';
+import { TempLicenseSearchComponent } from '@ksp/shared/search';
 
 @NgModule({
   imports: [

@@ -5,7 +5,7 @@ import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { MatTableModule } from '@angular/material/table';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { ReactiveFormsModule } from '@angular/forms';
-import { DegreeSearchFormComponent } from '@ksp/shared/form/search';
+import { DegreeSearchComponent } from '@ksp/shared/search';
 
 @NgModule({
   imports: [
@@ -14,7 +14,7 @@ import { DegreeSearchFormComponent } from '@ksp/shared/form/search';
     MatTableModule,
     TopNavComponent,
     ReactiveFormsModule,
-    DegreeSearchFormComponent,
+    DegreeSearchComponent,
     ReactiveFormsModule,
   ],
   declarations: [UniServiceHomeComponent],
