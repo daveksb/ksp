@@ -140,9 +140,9 @@
     </ng-container>
   </ng-container>
 
-  <div *ngIf="nitets.length < 4" class="button__container">
-    <ksp-add-row-button [mode]="'blue'" *hideInViewMode (addClick)="addNitet()"
+  <ng-container *ngIf="nitets.length < 4">
+    <ksp-add-row-button *hideInViewMode (addRowClick)="addNitet()" class="blue"
       >เพิ่มอาจารย์นิเทศก์</ksp-add-row-button
     >
-  </div>
+  </ng-container>
 </form>

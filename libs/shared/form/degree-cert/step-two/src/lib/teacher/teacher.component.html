@@ -1,4 +1,4 @@
-<div class="page__title">อาจารย์ประจำหลักสูตร / ผู้รับผิดชอบหลักสูตร</div>
+<div class="box-header">อาจารย์ประจำหลักสูตร / ผู้รับผิดชอบหลักสูตร</div>
 
 <form [formGroup]="form">
   <ng-container formArrayName="teachers">
@@ -7,7 +7,7 @@
         <div class="group__header">
           <div class="group__title">ลำดับที่ {{ i + 1 }}</div>
           <i
-            *ngIf="i > 0"
+            *ngIf="i"
             role="button"
             (click)="deleteTeacher(i)"
             class="bi bi-trash text-danger fs-5"
@@ -60,7 +60,7 @@
             <div class="row row--fourth">
               <ksp-add-row-button
                 *ngIf="getCourses(i).length < 4"
-                (addClick)="addCourse(i)"
+                (addRowClick)="addCourse(i)"
               >
                 เพิ่มหลักสูตร
               </ksp-add-row-button>
@@ -72,8 +72,8 @@
   </ng-container>
 </form>
 
-<div *ngIf="teachers.length < 5" class="button__container">
-  <ksp-add-row-button *hideInViewMode (addClick)="addTeacher()" [mode]="'blue'"
-    >เพิ่มอาจารย์ประจำหลักสูตร / ผู้รับผิดชอบหลักสูตร</ksp-add-row-button
+<ng-container *ngIf="teachers.length < 5">
+  <ksp-add-row-button *hideInViewMode (addRowClick)="addTeacher()" class="blue"
+    >เพิ่มอาจารย์ประจำหลักสูตร/ ผู้รับผิดชอบหลักสูตร</ksp-add-row-button
   >
-</div>
+</ng-container>

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -9,11 +9,10 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrls: ['./add-row-button.component.scss'],
   imports: [CommonModule, MatIconModule],
 })
-export class AddRowButtonComponent {
-  @Output() addClick = new EventEmitter<boolean>();
-  @Input() mode = 'default';
 
-  onClick() {
-    this.addClick.emit(true);
-  }
+/**
+ * use class="blue" for make blue color and bigger font
+ */
+export class AddRowButtonComponent {
+  @Output() addRowClick = new EventEmitter<boolean>();
 }
