@@ -1,18 +1,18 @@
 <form [formGroup]="form">
-  <div class="detail__container">
-    <div class="detail__header">{{ formHeader }}</div>
+  <div class="px-3 py-1">
+    <div class="fs-5 mb-1">{{ formHeader }}</div>
 
-    <div class="detail__content--primary">
-      <div>
+    <div class="row mb-2">
+      <div class="col-2">
         <label class="form-label">คำนำหน้าชื่อภาษาอังกฤษ</label>
-        <select class="search__content form-select" formControlName="prefixEn">
+        <select class="form-select" formControlName="prefixEn">
           <option selected>นางสาว</option>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
         </select>
       </div>
-      <div>
+      <div class="col-2">
         <label class="form-label">ชื่อภาษาอังกฤษ </label>
         <input
           class="form-control"
@@ -21,7 +21,7 @@
           formControlName="nameEn"
         />
       </div>
-      <div>
+      <div class="col-4">
         <label class="form-label">ชื่อกลางภาษาอังกฤษ </label>
         <input
           class="form-control"
@@ -30,8 +30,7 @@
           formControlName="midnameEn"
         />
       </div>
-
-      <div>
+      <div class="col-4">
         <label class="form-label">นามสกุลภาษาอังกฤษ </label>
         <input
           class="form-control"
@@ -42,8 +41,8 @@
       </div>
     </div>
 
-    <div class="detail__content--primary">
-      <div>
+    <div class="row mb-2">
+      <div class="col-2">
         <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
         <select class="search__content form-select" formControlName="prefixTh">
           <option selected>นางสาว</option>
@@ -52,7 +51,7 @@
           <option value="3">Three</option>
         </select>
       </div>
-      <div>
+      <div class="col-2">
         <label class="form-label">ชื่อภาษาไทย </label>
         <input
           class="form-control"
@@ -61,7 +60,7 @@
           formControlName="nameTh"
         />
       </div>
-      <div>
+      <div class="col-4">
         <label class="form-label">ชื่อกลางภาษาไทย </label>
         <input
           class="form-control"
@@ -71,7 +70,7 @@
         />
       </div>
 
-      <div>
+      <div class="col-4">
         <label class="form-label">นามสกุลภาษาไทย </label>
         <input
           class="form-control"
@@ -82,8 +81,8 @@
       </div>
     </div>
 
-    <div class="detail__content--secondary">
-      <div>
+    <div class="row mb-2">
+      <div class="col">
         <label class="form-label">เพศ</label>
         <select class="search__content form-select" formControlName="sex">
           <option selected>หญิง</option>
@@ -92,7 +91,7 @@
           <option value="3">Three</option>
         </select>
       </div>
-      <div>
+      <div class="col">
         <label class="form-label">วันเดือนปีเกิด</label>
         <input
           class="form-control"
@@ -103,8 +102,8 @@
       </div>
     </div>
 
-    <div class="detail__content--secondary">
-      <div>
+    <div class="row">
+      <div class="col">
         <label class="form-label">อีเมล์</label>
         <input
           class="form-control"
@@ -113,7 +112,7 @@
           formControlName="email"
         />
       </div>
-      <div>
+      <div class="col">
         <label class="form-label">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
         <input
           class="form-control"
@@ -124,8 +123,8 @@
       </div>
     </div>
 
-    <div class="detail__content--secondary">
-      <div>
+    <div class="row mb-2">
+      <div class="col">
         <label class="form-label"
           >หมายเลขหนังสือเดินทาง (Passport Number)</label
         >
@@ -136,7 +135,7 @@
           formControlName="passportNumber"
         />
       </div>
-      <div>
+      <div class="col">
         <label class="form-label">ประเทศ</label>
         <select class="search__content form-select" formControlName="country">
           <option selected>อังกฤษ</option>
@@ -147,8 +146,8 @@
       </div>
     </div>
 
-    <div class="detail__content--third">
-      <div>
+    <div class="row mb-2">
+      <div class="col">
         <label class="form-label">วันเดือนปีที่ออกหนังสือเดินทาง</label>
         <input
           class="form-control"
@@ -157,8 +156,7 @@
           formControlName="passportRelease"
         />
       </div>
-
-      <div>
+      <div class="col">
         <label class="form-label">วันเดือนปีที่หนังสือเดินทางหมดอายุ</label>
         <input
           class="form-control"
@@ -167,8 +165,10 @@
           formControlName="passportExpire"
         />
       </div>
+    </div>
 
-      <div>
+    <div class="row mb-2">
+      <div class="col">
         <label class="form-label">Visa Class</label>
         <input
           class="form-control"
@@ -177,10 +177,7 @@
           formControlName="visaClass"
         />
       </div>
-    </div>
-
-    <div class="detail__content--secondary">
-      <div>
+      <div class="col">
         <label class="form-label">ประเภทวีซ่า</label>
         <select class="search__content form-select" formControlName="visaType">
           <option selected>F (Official)</option>
@@ -189,8 +186,10 @@
           <option value="3">Three</option>
         </select>
       </div>
+    </div>
 
-      <div>
+    <div class="row mb-2">
+      <div class="col-6">
         <label class="form-label">วันเดือนปีวีซ่าหมดอายุ</label>
         <input
           class="form-control"
