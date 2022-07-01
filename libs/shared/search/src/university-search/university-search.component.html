@@ -11,36 +11,9 @@
   </div>
   <hr />
   <div class="box__detail">
-    <div class="box-header text-primary">กรุณาเลือกสถานบันที่ท่านสังกัด</div>
-    <div class="row mb-2">
-      <div col-6>
-        <label class="form-label">สังกัด</label>
-        <select class="form-select">
-          <option selected>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-      </div>
-    </div>
-    <div class="row mb-2">
-      <div class="col">
-        <label class="form-label"
-          >รหัส{{
-            searchType === 'uni' ? 'มหาวิทยาลัย' : 'โรงเรียน/สถานศึกษา'
-          }}</label
-        >
-        <input class="form-control" type="text" />
-      </div>
-      <div class="col">
-        <label class="form-label"
-          >ชื่อ{{
-            searchType === 'uni' ? 'มหาวิทยาลัย' : 'โรงเรียน/สถานศึกษา'
-          }}</label
-        >
-        <input class="form-control" type="text" />
-      </div>
-    </div>
+    <div class="detail__header">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
+
+    <ksp-basic-institute-search></ksp-basic-institute-search>
 
     <div class="row mb-2">
       <div class="col">

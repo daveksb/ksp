@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { UniversitySearchComponent } from '@ksp/shared/form/university-search';
+import { UniversitySearchComponent } from '@ksp/shared/search';
 
 @Component({
   selector: 'uni-service-register-requester',

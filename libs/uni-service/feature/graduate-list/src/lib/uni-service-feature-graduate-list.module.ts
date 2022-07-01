@@ -24,7 +24,7 @@ import {
 } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
-import { DegreeSearchFormComponent } from '@ksp/shared/form/search';
+import { DegreeSearchComponent } from '@ksp/shared/search';
 
 @NgModule({
   imports: [
@@ -48,7 +48,7 @@ import { DegreeSearchFormComponent } from '@ksp/shared/form/search';
     TopNavComponent,
     FileUploadComponent,
     ReactiveFormsModule,
-    DegreeSearchFormComponent,
+    DegreeSearchComponent,
     AddRowButtonComponent,
   ],
   declarations: [
