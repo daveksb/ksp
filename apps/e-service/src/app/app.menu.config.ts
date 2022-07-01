@@ -119,7 +119,7 @@ export const standardMenu: MenuConfig[] = [
 
 export const licenseMenu: MenuConfig[] = [
   {
-    icon: 'assets/images/icon-sidenav/card.svg',
+    icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต (ชาวไทย)',
     path: '',
     isExpanded: true,
@@ -136,7 +136,7 @@ export const licenseMenu: MenuConfig[] = [
     ],
   },
   {
-    icon: 'assets/images/icon-sidenav/card.svg',
+    icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต (ชาวต่างชาติ)',
     path: '',
     isExpanded: false,
@@ -153,7 +153,7 @@ export const licenseMenu: MenuConfig[] = [
     ],
   },
   {
-    icon: 'assets/images/icon-sidenav/card.svg',
+    icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ)',
     path: '',
     isExpanded: true,
@@ -170,13 +170,13 @@ export const licenseMenu: MenuConfig[] = [
     ],
   },
   {
-    icon: 'assets/images/icon-sidenav/card.svg',
+    icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอรหัสเข้าใช้งานระบบบริหารหน่วยงานทางการศึกษา (School Service)',
     path: 'approve-new-user',
     isExpanded: false,
   },
   {
-    icon: 'assets/images/icon-sidenav/card.svg',
+    icon: 'assets/images/icon-sidenav/people.svg',
     label: 'บริหารจัดการผู้ใช้งาน',
     path: '',
     isExpanded: true,

@@ -1,28 +1,24 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { InstituteType } from '@ksp/shared/interface';
-import { UntilDestroy } from '@ngneat/until-destroy';
 import { BasicInstituteSearchComponent } from '../basic-institute-search/basic-institute-search.component';
 
-@UntilDestroy()
 @Component({
-  selector: 'ksp-request-search',
+  selector: 'ksp-e-service-user-search',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, BasicInstituteSearchComponent],
-  templateUrl: './e-service-request-search.component.html',
-  styleUrls: ['./e-service-request-search.component.scss'],
+  templateUrl: './e-service-user-search.component.html',
+  styleUrls: ['./e-service-user-search.component.scss'],
 })
-export class EServiceRequestSearchComponent {
+export class EServiceUserSearchComponent {
   form = this.fb.group({
     institution: [],
-    licenseNumber: [],
+    personId: [],
     name: [],
-    submitDate: [],
     status: [],
   });
 
-  @Input() mode: InstituteType = 'school';
+  //@Input() mode: InstituteType = 'school';
   @Output() search = new EventEmitter<boolean>();
   @Output() clear = new EventEmitter<boolean>();
   constructor(private fb: FormBuilder) {}

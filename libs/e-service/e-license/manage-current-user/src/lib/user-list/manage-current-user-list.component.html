@@ -6,11 +6,10 @@
 
 <form [formGroup]="form">
   <div class="container">
-    <ksp-request-search
+    <ksp-e-service-user-search
       (clear)="clear()"
       (search)="search()"
-      formControlName="manageSearch"
-    ></ksp-request-search>
+    ></ksp-e-service-user-search>
 
     <div class="table__container">
       <div class="title__box">รายชื่อผู้เข้าใช้งานระบบ school service</div>

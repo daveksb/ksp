@@ -50,30 +50,22 @@ export const menu: MenuConfig[] = [
         path: 'graduate',
         label: 'ขอยื่นรายชื่อผู้สำเร็จการศึกษา',
       },
-      /*       {
-        path: 'change-degree-info',
-        label: 'ขอเปลี่ยนแปลงรายละเอียดปริญญาและประกาศนียบัตร',
-      },
-      {
-        path: 'change-student-list',
-        label: 'ขอเปลี่ยนแปลงรายละเอียดรายชื่อผู้เข้าและผู้สำเร็จการศึกษา',
-      }, */
     ],
     subMenuName: 'license',
     isExpanded: true,
   },
   {
-    icon: 'assets/images/icon-sidenav/card.svg',
+    icon: 'assets/images/icon-sidenav/display.svg',
     label: 'ทะเบียนข้อมูล',
     path: '',
   },
   {
-    icon: 'assets/images/icon-sidenav/card.svg',
+    icon: 'assets/images/icon-sidenav/file-earmark-text-fill.svg',
     label: 'รายงาน',
     path: '',
   },
   {
-    icon: 'assets/images/icon-sidenav/card.svg',
+    icon: 'assets/images/icon-sidenav/gear-fill.svg',
     label: 'ตั้งค่า',
     path: '',
   },

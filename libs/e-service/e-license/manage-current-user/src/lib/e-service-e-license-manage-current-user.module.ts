@@ -9,7 +9,7 @@ import { ManageCurrentUserListComponent } from './user-list/manage-current-user-
 import { MatIconModule } from '@angular/material/icon';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { ReactiveFormsModule } from '@angular/forms';
-import { EServiceRequestSearchComponent } from '@ksp/shared/search';
+import { EServiceRequestSearchComponent, EServiceUserSearchComponent } from '@ksp/shared/search';
 
 export const routes: Routes = [
   {
@@ -42,7 +42,7 @@ export const routes: Routes = [
     TopNavComponent,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
-    EServiceRequestSearchComponent,
+    EServiceUserSearchComponent
   ],
   declarations: [ManageCurrentUserListComponent],
 })

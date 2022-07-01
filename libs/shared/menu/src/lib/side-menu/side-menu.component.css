@@ -110,12 +110,12 @@ ul ul li {
 }
 
 .icon__sidenav {
-  margin-bottom: 4px;
   margin-right: 12px;
 }
 
-.xxx {
+.menu__content {
   display: flex;
+  align-items: baseline;
 }
 
 @media only screen and (max-width: 768px) {
