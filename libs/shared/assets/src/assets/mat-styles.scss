@@ -94,6 +94,10 @@ tr.mat-header-row {
 /*
 font family for all class that start with mat****
 */
-div[class^='mat'] {
+span,
+div,
+td,
+th,
+tr[class^='mat'] {
   font-family: var(--bs-body-font-family);
 }

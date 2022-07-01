@@ -1,7 +1,7 @@
 <uni-service-top-nav>ลงทะเบียนขอรับรหัสเข้าใช้งาน</uni-service-top-nav>
 
 <form [formGroup]="form">
-  <div class="container">
+  <div class="container-fluid bg-secondary bg-opacity-10 pb-3">
     <div class="container-xl px-0 pt-2">
       <div class="fs-4">รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ</div>
     </div>
@@ -33,7 +33,7 @@
       </div>
 
       <div class="bg-light">
-        <div class="text-primary fs-5 px-4 pt-4">
+        <div class="text-primary fs-5 px-4 pt-2">
           ข้อมูลผู้แต่งตั้งผู้ประสานงาน / ผู้รับผิดชอบ (ที่ระบุไว้ในเอกสารแนบ)
         </div>
 
@@ -42,7 +42,7 @@
         ></ksp-form-coordinator-info>
       </div>
 
-      <div class="my-3">
+      <div class="my-4">
         <ksp-form-attachment
           [title]="'กรุณาแนบหลักฐานเพื่อการพิจารณา'"
           [groups]="uploadFileList"
