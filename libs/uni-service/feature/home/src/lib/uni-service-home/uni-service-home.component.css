@@ -7,12 +7,3 @@ table {
 table > :not(:first-child) {
   border-top: 0;
 }
-
-.mat-header-cell {
-  color: black;
-  font-size: 1rem;
-}
-
-.mat-cell {
-  color: var(--ksp-gray);
-}
