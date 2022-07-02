@@ -13,7 +13,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "ksp",
+            "prefix": "eService",
             "style": "camelCase"
           }
         ],
@@ -21,7 +21,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "ksp",
+            "prefix": "e-service",
             "style": "kebab-case"
           }
         ]
