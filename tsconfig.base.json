@@ -197,8 +197,7 @@
         "libs/uni-service/feature/retired/src/index.ts"
       ],
       "@ksp/uni-service/form": ["libs/uni-service/form/src/index.ts"],
-      "@ksp/uni-service/ui/dialog": ["libs/uni-service/ui/dialog/src/index.ts"],
-      "@ksp/uni-service/ui/nav": ["libs/uni-service/ui/nav/src/index.ts"]
+      "@ksp/uni-service/ui/dialog": ["libs/uni-service/ui/dialog/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

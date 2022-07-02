@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { UniServiceUiNavModule } from '@ksp/uni-service/ui/nav';
 import { RegisterCurrentUserComponent } from './register-current-user/register-current-user.component';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -17,7 +16,7 @@ import {
   FormCoordinatorInfoComponent,
   FormRequesterInfoComponent,
 } from '@ksp/shared/form/school/register';
-import { BottomNavComponent } from '@ksp/shared/menu';
+import { BottomNavComponent, TopNavSecondComponent } from '@ksp/shared/menu';
 import { UniversitySelectComponent } from '@ksp/shared/form/university-select';
 
 export const routes: Routes = [
@@ -38,7 +37,7 @@ export const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    UniServiceUiNavModule,
+    TopNavSecondComponent,
     SharedFormOthersModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
