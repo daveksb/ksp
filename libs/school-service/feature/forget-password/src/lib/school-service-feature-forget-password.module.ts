@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { PersonIdComponent } from './person-id/person-id.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SetNewPasswordComponent } from './set-new-password/set-new-password.component';
-import { UniServiceUiNavModule } from '@ksp/uni-service/ui/nav';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TopNavSecondComponent } from '@ksp/shared/menu';
 
 export const routes: Routes = [
   {
@@ -20,7 +20,7 @@ export const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    UniServiceUiNavModule,
+    TopNavSecondComponent,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
   ],

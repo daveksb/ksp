@@ -4,11 +4,10 @@ import { RetiredSearchComponent } from './retired-search/retired-search.componen
 import { RetiredReasonComponent } from './retired-reason/retired-reason.component';
 import { RetiredAttachmentComponent } from './retired-attachment/retired-attachment.component';
 import { UniServiceFeatureRetiredRoutingModule } from './uni-service-feature-retired-routing.module';
-import { UniServiceUiNavModule } from '@ksp/uni-service/ui/nav';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { UniServiceFormModule } from '@ksp/uni-service/form';
-import { BottomNavComponent } from '@ksp/shared/menu';
+import { BottomNavComponent, TopNavSecondComponent } from '@ksp/shared/menu';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BasicInstituteSearchComponent } from '@ksp/shared/search';
@@ -18,7 +17,7 @@ import { BasicInstituteSearchComponent } from '@ksp/shared/search';
     CommonModule,
     UniServiceFeatureRetiredRoutingModule,
     TopNavComponent,
-    UniServiceUiNavModule,
+    TopNavSecondComponent,
     SharedFormOthersModule,
     RequestHeaderInfoComponent,
     UniServiceFormModule,

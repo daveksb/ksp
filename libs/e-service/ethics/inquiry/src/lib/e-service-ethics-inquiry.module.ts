@@ -7,13 +7,12 @@ import { ListPageComponent } from '@ksp/e-service/ethics/list-page';
 import { InquiryMainComponent } from './inquiry-main/inquiry-main.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AccusationRecordComponent } from '@ksp/e-service/ethics/accusation';
-import { InvestigationDetailComponent } from '@ksp/e-service/ethics/investigation';
 import { MatDialogModule } from '@angular/material/dialog';
 import { InquiryDetailComponent } from './inquiry-detail/inquiry-detail.component';
 import { InquiryResultComponent } from './inquiry-result/inquiry-result.component';
 import { TopNavComponent } from '@ksp/shared/menu';
-import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormInvestigationDetailComponent } from '@ksp/e-service/form';
 
 export const routes: Routes = [
   {
@@ -44,12 +43,12 @@ export const routes: Routes = [
     RouterModule.forChild(routes),
     MatTabsModule,
     AccusationRecordComponent,
-    InvestigationDetailComponent,
     MatDialogModule,
     InquiryDetailComponent,
     InquiryResultComponent,
     TopNavComponent,
     ReactiveFormsModule,
+    FormInvestigationDetailComponent,
   ],
   declarations: [InquiryMainComponent],
   exports: [InquiryMainComponent],

@@ -6,7 +6,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { TrainingAddressComponent } from '@ksp/uni-service/ui/dialog';
+import { TrainingAddressComponent } from '@ksp/uni-service/dialog';
 import { SelectItem } from 'primeng/api';
 import { User } from './user';
 import { UserService } from './user.service';

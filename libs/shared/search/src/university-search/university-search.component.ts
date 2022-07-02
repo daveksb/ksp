@@ -7,7 +7,7 @@ export type SearchType = 'uni' | 'school';
 
 @Component({
   templateUrl: './university-search.component.html',
-  styleUrls: ['./university-search.component.css'],
+  styleUrls: ['./university-search.component.scss'],
   standalone: true,
   imports: [CommonModule, MatDialogModule, BasicInstituteSearchComponent],
 })

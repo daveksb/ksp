@@ -1,0 +1,110 @@
+.main-container {
+  background-color: #e5e5e5;
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 50px;
+}
+
+.table__container {
+  margin: 0 24px;
+}
+
+.box-container {
+  background-color: white;
+}
+
+.table__header {
+  font-size: 18px;
+  color: #000;
+  display: flex;
+  justify-content: space-between;
+}
+
+.table {
+  background-color: #fff;
+  border: 1px solid #eceef2;
+}
+
+.table > :not(:first-child) {
+  border-top: 0;
+}
+
+.header__table {
+  background-color: #edf6ff;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.body__table {
+  font-size: 16px;
+  color: #000000;
+  white-space: nowrap;
+}
+
+.content__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 18px;
+}
+
+.form__container {
+  padding: 0 24px;
+}
+
+.form__container-2 {
+  padding: 0 20px;
+}
+
+.form-label {
+  font-size: 16px;
+  color: #656565;
+  margin-bottom: 0;
+}
+
+.form-control {
+  background-color: #fff;
+}
+
+.form-header {
+  font-size: 20px;
+  color: #000;
+  margin-bottom: 12px;
+}
+
+.add__list {
+  color: #0056ff;
+  cursor: pointer;
+}
+
+.radio {
+  height: 15px;
+  width: 15px;
+  margin-right: 5px;
+}
+
+.checkbox__container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 24px;
+}
+
+.edit {
+  color: #0056ff;
+  cursor: pointer;
+}
+
+.delete {
+  color: red;
+  cursor: pointer;
+}
+
+#upload__button {
+  margin-top: 12px;
+}
+
+.hide__container {
+  background-color: #fff;
+  padding-bottom: 0;
+}

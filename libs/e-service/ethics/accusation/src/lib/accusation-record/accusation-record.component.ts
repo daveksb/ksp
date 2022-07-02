@@ -3,16 +3,15 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AccusationSearchComponent } from '@ksp/e-service/dialog/accusation-search';
 import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-info';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
-import { BottomNavComponent } from '@ksp/shared/menu';
+import { BottomNavComponent, StepperNavComponent } from '@ksp/shared/menu';
 import {
   LicenseInfoComponent,
   LicenseTypeButtonGroupComponent,
   RequestHeaderInfoComponent,
-  StepperNavComponent,
 } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
@@ -36,7 +35,7 @@ import { providerFactory } from '@ksp/shared/utility';
     LicenseTypeButtonGroupComponent,
     LicenseInfoComponent,
     ReactiveFormsModule,
-    StepperNavComponent
+    StepperNavComponent,
   ],
   providers: providerFactory(AccusationRecordComponent),
 })

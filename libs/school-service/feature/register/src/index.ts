@@ -1,7 +1,7 @@
 export * from './lib/school-service-feature-register.module';
 
-export * from './lib/requester-info/requester-info.component';
+export * from './lib/register-requester/register-requester.component';
 
-export * from './lib/coordinator-info/coordinator-info.component';
+export * from './lib/register-coordinator/register-coordinator.component';
 
-export * from './lib/current-user/current-user.component';
+export * from './lib/register-current-user/register-current-user.component';

@@ -15,7 +15,7 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { BottomNavComponent } from '@ksp/shared/menu';
-import { SharedFeatureDegreeCertModule } from '@ksp/shared/feature/degree-cert';
+import { SharedDegreeCertModule } from '@ksp/shared/degree-cert';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import {
@@ -41,7 +41,7 @@ import { DegreeSearchComponent } from '@ksp/shared/search';
     MatSelectModule,
     MatOptionModule,
     BottomNavComponent,
-    SharedFeatureDegreeCertModule,
+    SharedDegreeCertModule,
     MatIconModule,
     MatTableModule,
     RequestHeaderInfoComponent,

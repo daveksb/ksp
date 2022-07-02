@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UniServiceRegisterCoordinatorComponent } from './uni-service-register-coordinator/uni-service-register-coordinator.component';
-import { UniServiceRegisterRequesterComponent } from './uni-service-register-requester/uni-service-register-requester.component';
+import { UniRegisterCoordinatorComponent } from './uni-register-coordinator/uni-register-coordinator.component';
+import { UniRegisterRequesterComponent } from './uni-register-requester/uni-register-requester.component';
 
 const routes: Routes = [
   {
     path: 'requester',
-    component: UniServiceRegisterRequesterComponent,
+    component: UniRegisterRequesterComponent,
   },
   {
     path: 'coordinator',
-    component: UniServiceRegisterCoordinatorComponent,
+    component: UniRegisterCoordinatorComponent,
   },
   {
     path: '**',
-    component: UniServiceRegisterRequesterComponent,
+    component: UniRegisterRequesterComponent,
   },
 ];
 

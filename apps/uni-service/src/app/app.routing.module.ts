@@ -4,7 +4,7 @@ import { UniserviceImportType } from '@ksp/shared/interface';
 
 import { UniServiceContainerPageComponent } from '@ksp/uni-service/feature/container-page';
 import { ForeignIdComponent } from '@ksp/uni-service/feature/foreign-id';
-import { UniServiceHomeComponent } from '@ksp/uni-service/feature/home';
+import { UniHomeComponent } from '@ksp/uni-service/feature/home';
 import { UniServiceLoginComponent } from '@ksp/uni-service/feature/login';
 
 const routes: Routes = [
@@ -15,7 +15,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: UniServiceHomeComponent,
+        component: UniHomeComponent,
       },
     ],
   },

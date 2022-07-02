@@ -50,13 +50,19 @@
   </div>
 
   <div class="g-col-4 d-flex align-items-center justify-content-end">
-    <button
-      *ngIf="!isLastPage"
-      (click)="nextClicked.emit(true)"
-      type="button"
-      class="btn border-orange text-orange"
+    <span
+      [matTooltipDisabled]="!disableNext"
+      matTooltip="{{ disableNextMessage }}"
     >
-      ถัดไป
-    </button>
+      <button
+        *ngIf="!isLastPage"
+        (click)="nextClicked.emit(true)"
+        [disabled]="disableNext"
+        type="button"
+        class="btn text-orange border-orange"
+      >
+        ถัดไป
+      </button>
+    </span>
   </div>
 </div>

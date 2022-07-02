@@ -5,8 +5,8 @@ import { UniServiceContainerPageComponent } from '@ksp/uni-service/feature/conta
 import { BottomNavComponent } from '@ksp/shared/menu';
 import {
   DegreeCertListComponent,
-  SharedFeatureDegreeCertModule,
-} from '@ksp/shared/feature/degree-cert';
+  SharedDegreeCertModule,
+} from '@ksp/shared/degree-cert';
 import { UniServiceFormModule } from '@ksp/uni-service/form';
 import { DegreeCertRequestComponent } from './degree-cert-request/degree-cert-request.component';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -43,7 +43,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     BottomNavComponent,
-    SharedFeatureDegreeCertModule,
+    SharedDegreeCertModule,
     SharedFormDegreeCertStepOneModule,
     SharedFormDegreeCertStepThreeModule,
     UniServiceFormModule,

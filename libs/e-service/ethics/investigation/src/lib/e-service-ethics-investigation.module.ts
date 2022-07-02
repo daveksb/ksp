@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { BottomNavComponent } from '@ksp/shared/menu';
-import { ListPageComponent } from '@ksp/e-service/ethics/list-page';
 import { MatDialogModule } from '@angular/material/dialog';
-import { InvestigationMainComponent } from './investigation-main/investigation-main.component';
+import { InvestigationDetailComponent } from './investigation-detail/investigation-detail.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AccusationRecordComponent } from '@ksp/e-service/ethics/accusation';
-import { InvestigationDetailComponent } from './investigation-detail/investigation-detail.component';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { ReactiveFormsModule } from '@angular/forms';
+import { InvestigationListComponent } from './investigation-list/investigation-list.component';
+import { FormInvestigationDetailComponent } from '@ksp/e-service/form';
 
 export const routes: Routes = [
   {
@@ -24,11 +24,11 @@ export const routes: Routes = [
       },
       {
         path: 'list',
-        component: ListPageComponent,
+        component: InvestigationListComponent,
       },
       {
         path: 'detail',
-        component: InvestigationMainComponent,
+        component: InvestigationDetailComponent,
       },
     ],
   },
@@ -42,11 +42,10 @@ export const routes: Routes = [
     MatDialogModule,
     MatTabsModule,
     AccusationRecordComponent,
-    InvestigationDetailComponent,
     TopNavComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormInvestigationDetailComponent,
   ],
-  declarations: [InvestigationMainComponent],
-  exports: [InvestigationMainComponent],
+  declarations: [InvestigationDetailComponent],
 })
 export class EServiceEthicsInvestigationModule {}

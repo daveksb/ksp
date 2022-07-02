@@ -42,11 +42,11 @@ export class ListPageComponent implements OnInit {
   }
 
   add() {
-    this.router.navigate(['/', 'accusation', 'detail']);
+    this.router.navigate(['accusation', 'detail']);
   }
 
   next() {
-    this.router.navigate(['/', this.mode, 'detail']);
+    this.router.navigate([this.mode, 'detail']);
   }
 }
 
