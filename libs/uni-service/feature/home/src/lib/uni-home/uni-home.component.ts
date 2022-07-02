@@ -3,11 +3,10 @@ import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
-  selector: 'uni-service-home',
-  templateUrl: './uni-service-home.component.html',
-  styleUrls: ['./uni-service-home.component.css'],
+  templateUrl: './uni-home.component.html',
+  styleUrls: ['./uni-home.component.css'],
 })
-export class UniServiceHomeComponent {
+export class UniHomeComponent {
   form = this.fb.group({
     homeSearch: [],
   });

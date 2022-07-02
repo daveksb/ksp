@@ -10,12 +10,11 @@ import { EServiceEthicsAccusationRoutingModule } from './e-service-ethics-accusa
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { AccusationDecisionComponent } from './accusation-decision/accusation-decision.component';
-import { BottomNavComponent } from '@ksp/shared/menu';
+import { BottomNavComponent, StepperNavComponent } from '@ksp/shared/menu';
 import {
   LicenseInfoComponent,
   LicenseTypeButtonGroupComponent,
   RequestHeaderInfoComponent,
-  StepperNavComponent,
 } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { AccusationMainComponent } from './accusation-main/accusation-main.component';

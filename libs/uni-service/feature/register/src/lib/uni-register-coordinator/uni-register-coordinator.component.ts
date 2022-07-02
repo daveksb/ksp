@@ -9,11 +9,10 @@ import {
 import { UniversitySearchComponent } from '@ksp/shared/search';
 
 @Component({
-  selector: 'uni-service-register-coordinator',
-  templateUrl: './uni-service-register-coordinator.component.html',
-  styleUrls: ['./uni-service-register-coordinator.component.scss'],
+  templateUrl: './uni-register-coordinator.component.html',
+  styleUrls: ['./uni-register-coordinator.component.scss'],
 })
-export class UniServiceRegisterCoordinatorComponent {
+export class UniRegisterCoordinatorComponent {
   form = this.fb.group({
     coordinator: [],
   });

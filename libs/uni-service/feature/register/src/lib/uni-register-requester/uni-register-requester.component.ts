@@ -5,11 +5,10 @@ import { Router } from '@angular/router';
 import { UniversitySearchComponent } from '@ksp/shared/search';
 
 @Component({
-  selector: 'uni-service-register-requester',
-  templateUrl: './uni-service-register-requester.component.html',
-  styleUrls: ['./uni-service-register-requester.component.scss'],
+  templateUrl: './uni-register-requester.component.html',
+  styleUrls: ['./uni-register-requester.component.scss'],
 })
-export class UniServiceRegisterRequesterComponent {
+export class UniRegisterRequesterComponent {
   form = this.fb.group({
     requester: [],
   });

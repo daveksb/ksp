@@ -8,15 +8,16 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { RegisterRequesterComponent } from './register-requester/register-requester.component';
 import { CoordinatorInfoComponent } from './register-coordinator/register-coordinator.component';
-import {
-  RequestHeaderInfoComponent,
-  StepperNavComponent,
-} from '@ksp/shared/ui';
+import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import {
   FormCoordinatorInfoComponent,
   FormRequesterInfoComponent,
 } from '@ksp/shared/form/school/register';
-import { BottomNavComponent, TopNavSecondComponent } from '@ksp/shared/menu';
+import {
+  BottomNavComponent,
+  StepperNavComponent,
+  TopNavSecondComponent,
+} from '@ksp/shared/menu';
 import { UniversitySelectComponent } from '@ksp/shared/form/university-select';
 
 export const routes: Routes = [
