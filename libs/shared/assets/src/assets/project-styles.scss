@@ -81,3 +81,17 @@ add asterisk for required feild
 .default-width {
   max-width: var(--ksp-content-width);
 }
+
+thead {
+  background-color: #edf6ff;
+}
+
+.table {
+  margin: 0 0;
+  background-color: #fff;
+  border: 1px solid #eceef2;
+}
+
+.table > :not(:first-child) {
+  border-top: 0;
+}
