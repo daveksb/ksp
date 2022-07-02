@@ -1,15 +1,14 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "sourceRoot": "libs/uni-service/ui/dialog/src",
+  "sourceRoot": "libs/uni-service/dialog/src",
   "prefix": "ksp",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/libs/uni-service/ui/dialog"
-      ],
+      "outputs": ["coverage/libs/uni-service/dialog"],
       "options": {
-        "jestConfig": "libs/uni-service/ui/dialog/jest.config.ts",
+        "jestConfig": "libs/uni-service/dialog/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -17,8 +16,8 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "libs/uni-service/ui/dialog/**/*.ts",
-          "libs/uni-service/ui/dialog/**/*.html"
+          "libs/uni-service/dialog/**/*.ts",
+          "libs/uni-service/dialog/**/*.html"
         ]
       }
     }

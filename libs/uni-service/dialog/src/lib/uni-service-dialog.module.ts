@@ -32,4 +32,4 @@ import { MatIconModule } from '@angular/material/icon';
     TrainingAddressComponent,
   ],
 })
-export class UniServiceUiDialogModule {}
+export class UniServiceDialogModule {}

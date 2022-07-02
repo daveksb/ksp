@@ -1,4 +1,4 @@
-export * from './lib/uni-service-ui-dialog.module';
+export * from './lib/uni-service-dialog.module';
 
 export * from './lib/forgot-password-person-id/forgot-password-person-id.component';
 

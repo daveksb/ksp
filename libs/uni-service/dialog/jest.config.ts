@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'uni-service-ui-dialog',
-  preset: '../../../../jest.preset.ts',
+  displayName: 'uni-service-dialog',
+  preset: '../../../jest.preset.ts',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
     'ts-jest': {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../../coverage/libs/uni-service/ui/dialog',
+  coverageDirectory: '../../../coverage/libs/uni-service/dialog',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },
