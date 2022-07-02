@@ -1,3 +1,3 @@
 export * from './lib/uni-service-feature-home.module';
 
-export * from './lib/uni-service-home/uni-service-home.component';
+export * from './lib/uni-home/uni-home.component';
