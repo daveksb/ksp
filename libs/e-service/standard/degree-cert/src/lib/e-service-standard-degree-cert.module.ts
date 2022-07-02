@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DegreeCertListComponent } from './list/list.component';
 import { BottomNavComponent } from '@ksp/shared/menu';
 import { MatDialogModule } from '@angular/material/dialog';
-import { SharedFeatureDegreeCertModule } from '@ksp/shared/feature/degree-cert';
+import { SharedDegreeCertModule } from '@ksp/shared/degree-cert';
 import { EServiceUiVerifyResultBoxModule } from '@ksp/e-service/ui/verify-result-box';
 import { VerifyComponent } from './verify/verify.component';
 import { ConsiderComponent } from './consider/consider.component';
@@ -36,10 +36,10 @@ import { FormMeetingRecordComponent } from '@ksp/e-service/form';
     MatCheckboxModule,
     EServiceUiVerifyResultBoxModule,
     EServiceStandardDegreeCertRoutingModule,
-    SharedFeatureDegreeCertModule,
+    SharedDegreeCertModule,
     BottomNavComponent,
     SharedFormDegreeCertSearchModule,
-    SharedFeatureDegreeCertModule,
+    SharedDegreeCertModule,
     SharedFormDegreeCertStepOneModule,
     MatStepperModule,
     MatTabsModule,

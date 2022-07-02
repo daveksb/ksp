@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'shared-feature-degree-cert',
-  preset: '../../../../jest.preset.ts',
+  displayName: 'shared-degree-cert',
+  preset: '../../../jest.preset.ts',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
     'ts-jest': {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../../coverage/libs/shared/feature/degree-cert',
+  coverageDirectory: '../../../coverage/libs/shared/degree-cert',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

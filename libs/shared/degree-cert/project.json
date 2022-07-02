@@ -1,15 +1,14 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "sourceRoot": "libs/shared/feature/degree-cert/src",
+  "sourceRoot": "libs/shared/degree-cert/src",
   "prefix": "ksp",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/libs/shared/feature/degree-cert"
-      ],
+      "outputs": ["coverage/libs/shared/degree-cert"],
       "options": {
-        "jestConfig": "libs/shared/feature/degree-cert/jest.config.ts",
+        "jestConfig": "libs/shared/degree-cert/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -17,8 +16,8 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "libs/shared/feature/degree-cert/**/*.ts",
-          "libs/shared/feature/degree-cert/**/*.html"
+          "libs/shared/degree-cert/**/*.ts",
+          "libs/shared/degree-cert/**/*.html"
         ]
       }
     }

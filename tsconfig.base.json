@@ -132,9 +132,6 @@
       "@ksp/shared/assets": ["libs/shared/assets/src/index.ts"],
       "@ksp/shared/dialog": ["libs/shared/dialog/src/index.ts"],
       "@ksp/shared/directive": ["libs/shared/directive/src/index.ts"],
-      "@ksp/shared/feature/degree-cert": [
-        "libs/shared/feature/degree-cert/src/index.ts"
-      ],
       "@ksp/shared/form/degree-cert/search": [
         "libs/shared/form/degree-cert/search/src/index.ts"
       ],
@@ -197,7 +194,8 @@
       "@ksp/uni-service/feature/retired": [
         "libs/uni-service/feature/retired/src/index.ts"
       ],
-      "@ksp/uni-service/form": ["libs/uni-service/form/src/index.ts"]
+      "@ksp/uni-service/form": ["libs/uni-service/form/src/index.ts"],
+      "@ksp/shared/degree-cert": ["libs/shared/degree-cert/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

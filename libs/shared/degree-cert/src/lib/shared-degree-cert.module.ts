@@ -52,4 +52,4 @@ import { TopNavComponent } from '@ksp/shared/menu';
     DegreeCertStepFiveComponent,
   ],
 })
-export class SharedFeatureDegreeCertModule {}
+export class SharedDegreeCertModule {}
