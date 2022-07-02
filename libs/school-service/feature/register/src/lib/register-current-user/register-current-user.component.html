@@ -15,7 +15,7 @@
       (selectedUniversity)="selectedUniversity = $event"
     ></ksp-university-select>
 
-    <div *ngIf="selectedUniversity.length" class="bg-white p-3 mt-3">
+    <div *ngIf="selectedUniversity.length" class="bg-white p-3 mt-2">
       <div class="fs-5 text-danger">
         โรงเรียน/หน่วยงานของท่านได้สมัครสมาชิกแล้ว
         ท่านต้องการสมัครสมาชิกใหม่หรือไม่
@@ -57,6 +57,8 @@
       (prevClicked)="back()"
       (nextClicked)="next()"
       [showCenterButtons]="false"
+      [disableNext]="!selectedUniversity"
+      disableNextMessage="กรุณาเลือกโรงเรียน/ สถานศึกษาก่อน"
     ></ksp-bottom-nav>
   </div>
 </div>

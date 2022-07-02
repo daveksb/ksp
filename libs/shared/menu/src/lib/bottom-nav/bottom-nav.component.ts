@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 export type ColorMode = 'green' | 'blue';
 
@@ -8,7 +9,7 @@ export type ColorMode = 'green' | 'blue';
   templateUrl: './bottom-nav.component.html',
   styleUrls: ['./bottom-nav.component.scss'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatTooltipModule],
 })
 export class BottomNavComponent {
   @Output() prevClicked = new EventEmitter<boolean>();
@@ -19,6 +20,8 @@ export class BottomNavComponent {
 
   @Input() isLastPage = false;
   @Input() isFirstPage = false;
+  @Input() disableNext = false;
+  @Input() disableNextMessage = 'กรุณาเลือกรายการก่อน';
   @Input() saveButtonLabel = 'บันทึก';
   @Input() showCenterButtons = false;
   @Input() showCancelButton = true;
