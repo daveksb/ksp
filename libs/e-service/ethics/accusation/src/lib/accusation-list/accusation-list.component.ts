@@ -1,18 +1,29 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { MatTableDataSource } from '@angular/material/table';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EthicsMode } from '@ksp/shared/interface';
+import { TopNavComponent } from '@ksp/shared/menu';
+import { AccusationSearchComponent } from '@ksp/shared/search';
 
-/**
- * Ethics List page, shared between all ethics mode
- */
 @Component({
-  templateUrl: './list-page.component.html',
-  styleUrls: ['./list-page.component.scss'],
+  templateUrl: './accusation-list.component.html',
+  styleUrls: ['./accusation-list.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    TopNavComponent,
+    ReactiveFormsModule,
+    MatIconModule,
+    MatTableModule,
+    MatDialogModule,
+    AccusationSearchComponent,
+  ],
 })
-export class ListPageComponent implements OnInit {
-  mode!: EthicsMode;
+export class AccusationListComponent implements OnInit {
+  //mode!: EthicsMode;
   dataSource = new MatTableDataSource<AccusationList>();
   displayedColumns: string[] = columns;
 
@@ -27,10 +38,11 @@ export class ListPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.data.subscribe((res) => {
+    /* this.route.data.subscribe((res) => {
       this.mode = res['ethicsMode'];
-      //console.log('res = ', res);
-    });
+      console.log('res = ', res);
+    }); */
+    console.log(' ');
   }
 
   onSubmit(submitType: boolean) {
@@ -41,12 +53,8 @@ export class ListPageComponent implements OnInit {
     }
   }
 
-  add() {
-    this.router.navigate(['accusation', 'detail']);
-  }
-
   next() {
-    this.router.navigate([this.mode, 'detail']);
+    this.router.navigate(['accusation', 'detail']);
   }
 }
 

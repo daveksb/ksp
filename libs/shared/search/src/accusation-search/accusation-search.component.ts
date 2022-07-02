@@ -1,13 +1,16 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
 @Component({
-  selector: 'e-service-accusation-search',
+  selector: 'ksp-ethics-accusation-search',
   templateUrl: './accusation-search.component.html',
   styleUrls: ['./accusation-search.component.scss'],
   providers: providerFactory(AccusationSearchComponent),
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
 })
 export class AccusationSearchComponent extends KspFormBaseComponent {
   override form = this.fb.group({

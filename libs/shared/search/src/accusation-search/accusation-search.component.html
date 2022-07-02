@@ -1,0 +1,130 @@
+<form [formGroup]="form">
+  <div class="bg-white px-4 py-2 default-width">
+    <div class="box-header">ค้นหา</div>
+    <hr />
+    <div class="row mb-2">
+      <div class="col-6">
+        <label class="form-label">เลขที่รายการ </label>
+        <input class="form-control" type="text" formControlName="listNumber" />
+      </div>
+      <div class="col-2">
+        <label class="form-label">ปี พ.ศ. </label>
+        <input class="form-control" type="text" formControlName="eraBe" />
+      </div>
+      <div class="col-4">
+        <label class="form-label">จาก-ถึง: วันเดือนปีที่รับเรื่อง </label>
+        <input class="form-control" type="date" formControlName="fromToDate" />
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">หมายเลขคดีดำ</label>
+        <input class="form-control" type="text" formControlName="blackNumber" />
+      </div>
+      <div class="col">
+        <label class="form-label">หมายเลขคดีแดง</label>
+        <input class="form-control" type="text" formControlName="redNumber" />
+      </div>
+    </div>
+
+    <div class="box-header">ผู้ถูกกล่าวหา/กล่าวโทษ</div>
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">เลขที่ใบอนุญาตประกอบวิชาชีพ</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="accusedLicenseNumber"
+        />
+      </div>
+      <div class="col">
+        <label class="form-label"
+          >หมายเลขบัตรประชาชน / เลขที่หนังสือเดินทาง (Passport)</label
+        >
+        <input
+          class="form-control"
+          type="text"
+          formControlName="accusedPersonId"
+        />
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">ชื่อ / Name</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="accusedFirstname"
+        />
+      </div>
+      <div class="col">
+        <label class="form-label">นามสกุล / Last Name</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="accusedLastname"
+        />
+      </div>
+    </div>
+
+    <div class="box-header">ผู้กล่าวหา/กล่าวโทษ</div>
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">เลขที่ใบอนุญาตประกอบวิชาชีพ</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="accuserLicenseNumber"
+        />
+      </div>
+      <div class="col">
+        <label class="form-label"
+          >หมายเลขบัตรประชาชน / เลขที่หนังสือเดินทาง (Passport)</label
+        >
+        <input
+          class="form-control"
+          type="text"
+          formControlName="accuserPersonId"
+        />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label class="form-label">ชื่อ / Name</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="accuserFirstname"
+        />
+      </div>
+      <div class="col">
+        <label class="form-label">นามสกุล / Last Name</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="accuserLastname"
+        />
+      </div>
+    </div>
+
+    <div class="mt-2 d-flex justify-content-end">
+      <button
+        (click)="submited.emit(false)"
+        type="button"
+        class="btn border-primary text-primary"
+      >
+        ล้างข้อมูล
+      </button>
+      <button
+        (click)="submited.emit(true)"
+        type="button"
+        class="ms-2 btn btn-primary"
+      >
+        ค้นหา
+      </button>
+    </div>
+  </div>
+</form>

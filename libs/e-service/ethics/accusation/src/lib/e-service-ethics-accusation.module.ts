@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EServiceUiAccusationSearchModule } from '@ksp/e-service/ui/accusation-search';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { EServiceDialogAccusationSearchModule } from '@ksp/e-service/dialog/accusation-search';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -21,6 +20,7 @@ import { AccusationMainComponent } from './accusation-main/accusation-main.compo
 import { AccusationRecordComponent } from './accusation-record/accusation-record.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AccusationSearchComponent } from '@ksp/shared/search';
 
 @NgModule({
   imports: [
@@ -31,7 +31,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatIconModule,
     EServiceUiAccusationInfoModule,
     EServiceDialogAccusationSearchModule,
-    EServiceUiAccusationSearchModule,
     EServiceEthicsAccusationRoutingModule,
     SharedFormOthersModule,
     BottomNavComponent,
@@ -43,6 +42,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatCheckboxModule,
     ReactiveFormsModule,
     StepperNavComponent,
+    AccusationSearchComponent,
   ],
   declarations: [AccusationDecisionComponent, AccusationMainComponent],
   exports: [AccusationDecisionComponent, AccusationMainComponent],

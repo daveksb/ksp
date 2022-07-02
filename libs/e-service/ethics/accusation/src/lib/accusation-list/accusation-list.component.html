@@ -1,0 +1,117 @@
+<ksp-top-nav><span subHeader>ระบบงานจรรยาบรรณ </span></ksp-top-nav>
+
+<form [formGroup]="form">
+  <div class="bg-secondary bg-opacity-10 p-2">
+    <div class="box-header">ข้อมูลการกล่าวหา / กล่าวโทษ</div>
+
+    <ksp-ethics-accusation-search
+      (submited)="onSubmit($event)"
+      formControlName="ethicSearch"
+    >
+    </ksp-ethics-accusation-search>
+
+    <br />
+
+    <div class="bg-white mx-3 px-3 py-2">
+      <div class="d-flex justify-content-between">
+        <div class="box-header">รายการการกล่าวหา/กล่าวโทษ</div>
+        <button (click)="next()" type="button" class="btn btn-primary w-auto">
+          + บันทึกการกล่าวหา/กล่าวโทษ
+        </button>
+      </div>
+
+      <hr />
+
+      <div class="table-responsive">
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="order">
+            <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.order }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>เลขที่รายการ</th>
+            <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="receiveDate">
+            <th mat-header-cell *matHeaderCellDef>วันที่รับ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.receiveDate }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="blackNumber">
+            <th mat-header-cell *matHeaderCellDef>หมายเลขคดีดำ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.blackNumber }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="redNumber">
+            <th mat-header-cell *matHeaderCellDef>หมายเลขคดีแดง</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.redNumber }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="personId">
+            <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
+            <td mat-cell *matCellDef="let element">{{ element.personId }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>
+              ชื่อ-นามสกุล ผู้ถูกกล่าวหา
+            </th>
+            <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="process">
+            <th mat-header-cell *matHeaderCellDef>ขั้นตอน</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.process }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>สถานะ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.status }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="lastUpdate">
+            <th mat-header-cell *matHeaderCellDef>วันที่ทำรายการล่าสุด</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.lastUpdate }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef>ตรวจสอบ</th>
+            <td mat-cell *matCellDef="let row">
+              <i
+                role="button"
+                (click)="next()"
+                class="bi bi-pencil-square fs-5 text-primary"
+              ></i>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="view">
+            <th mat-header-cell *matHeaderCellDef>ดูข้อมูล</th>
+            <td mat-cell *matCellDef="let row">
+              <i role="button" class="bi bi-eye fs-5 text-success"></i>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</form>

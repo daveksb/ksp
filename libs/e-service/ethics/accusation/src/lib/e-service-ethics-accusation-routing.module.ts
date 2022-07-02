@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccusationSearchComponent } from '@ksp/e-service/dialog/accusation-search';
-import { ListPageComponent } from '@ksp/e-service/ethics/list-page';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { AccusationDecisionComponent } from './accusation-decision/accusation-decision.component';
+import { AccusationListComponent } from './accusation-list/accusation-list.component';
 import { AccusationMainComponent } from './accusation-main/accusation-main.component';
 
 export const routes: Routes = [
@@ -15,17 +15,14 @@ export const routes: Routes = [
     component: EServiceContainerPageComponent,
     children: [
       {
-        data: { subHeader: 'ccc' },
         path: 'list',
-        component: ListPageComponent,
+        component: AccusationListComponent,
       },
       {
-        data: { subHeader: 'bbb' },
         path: 'detail',
         component: AccusationMainComponent,
       },
       {
-        data: { subHeader: 'aaa' },
         path: 'test',
         component: AccusationSearchComponent,
       },
@@ -33,7 +30,6 @@ export const routes: Routes = [
         path: 'decision',
         component: AccusationDecisionComponent,
       },
-
       {
         path: '',
         redirectTo: 'list',
