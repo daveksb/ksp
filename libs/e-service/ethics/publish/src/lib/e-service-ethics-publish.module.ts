@@ -5,7 +5,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { AccusationRecordComponent } from '@ksp/e-service/ethics/accusation';
 import { RouterModule, Routes } from '@angular/router';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
-import { ListPageComponent } from '@ksp/e-service/ethics/list-page';
 import { MatDialogModule } from '@angular/material/dialog';
 import {
   InquiryDetailComponent,
@@ -15,6 +14,7 @@ import { BottomNavComponent } from '@ksp/shared/menu';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormInvestigationDetailComponent } from '@ksp/e-service/form';
+import { PublishListComponent } from './publish-list/publish-list.component';
 
 export const routes: Routes = [
   {
@@ -22,18 +22,17 @@ export const routes: Routes = [
     component: EServiceContainerPageComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'list',
+        pathMatch: 'full',
+      },
+      {
         path: 'list',
-        component: ListPageComponent,
+        component: PublishListComponent,
       },
       {
         path: 'detail',
         component: PublishReviewComponent,
-      },
-
-      {
-        path: '',
-        redirectTo: 'list',
-        pathMatch: 'full',
       },
     ],
   },
