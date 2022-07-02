@@ -10,9 +10,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy()
 @Component({
-  selector: 'school-service-author',
-  templateUrl: './coordinator-info.component.html',
-  styleUrls: ['./coordinator-info.component.scss'],
+  templateUrl: './register-coordinator.component.html',
+  styleUrls: ['./register-coordinator.component.scss'],
 })
 export class CoordinatorInfoComponent implements OnInit {
   form = this.fb.group({
@@ -34,11 +33,11 @@ export class CoordinatorInfoComponent implements OnInit {
   }
 
   navigateBack() {
-    this.router.navigate(['/', 'login']);
+    this.router.navigate(['login']);
   }
 
   back() {
-    this.router.navigate(['/', 'register', 'requester-info']);
+    this.router.navigate(['register', 'requester-info']);
   }
 
   save() {

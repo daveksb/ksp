@@ -7,7 +7,6 @@
     <div class="box-header">ค้นหาหน่วยงาน / สถานศึกษา</div>
     <hr />
 
-
     <ksp-university-select
       [label1]="'สังกัด'"
       [label2]="'โรงเรียน / สถานศึกษา'"
@@ -52,12 +51,10 @@
       </div>
     </div>
 
-    <div class="mt-3">
-      <ksp-bottom-nav
-        (prevClicked)="back()"
-        (nextClicked)="next()"
-        [showCenterButtons]="false"
-      ></ksp-bottom-nav>
-    </div>
+    <ksp-bottom-nav
+      (prevClicked)="back()"
+      (nextClicked)="next()"
+      [showCenterButtons]="false"
+    ></ksp-bottom-nav>
   </div>
 </div>

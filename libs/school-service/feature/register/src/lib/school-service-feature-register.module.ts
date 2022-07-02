@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { UniServiceUiNavModule } from '@ksp/uni-service/ui/nav';
-import { CurrentUserComponent } from './current-user/current-user.component';
+import { RegisterCurrentUserComponent } from './register-current-user/register-current-user.component';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
-import { RequesterInfoComponent } from './requester-info/requester-info.component';
-import { CoordinatorInfoComponent } from './coordinator-info/coordinator-info.component';
+import { RegisterRequesterComponent } from './register-requester/register-requester.component';
+import { CoordinatorInfoComponent } from './register-coordinator/register-coordinator.component';
 import {
   RequestHeaderInfoComponent,
   StepperNavComponent,
@@ -23,14 +23,14 @@ import { UniversitySelectComponent } from '@ksp/shared/form/university-select';
 export const routes: Routes = [
   {
     path: 'current-user',
-    component: CurrentUserComponent,
+    component: RegisterCurrentUserComponent,
   },
   {
-    path: 'requester-info',
-    component: RequesterInfoComponent,
+    path: 'requester',
+    component: RegisterRequesterComponent,
   },
   {
-    path: 'coordinator-info',
+    path: 'coordinator',
     component: CoordinatorInfoComponent,
   },
 ];
@@ -52,8 +52,8 @@ export const routes: Routes = [
     StepperNavComponent,
   ],
   declarations: [
-    CurrentUserComponent,
-    RequesterInfoComponent,
+    RegisterCurrentUserComponent,
+    RegisterRequesterComponent,
     CoordinatorInfoComponent,
   ],
 })

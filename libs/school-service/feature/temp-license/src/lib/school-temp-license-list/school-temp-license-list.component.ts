@@ -35,7 +35,7 @@ export class SchoolTempLicenseListComponent {
   dataSource = new MatTableDataSource<TempLicenseInfo>();
 
   constructor(private router: Router, private fb: FormBuilder) {
-    this.dataSource.data = data;
+    //this.dataSource.data = data;
   }
   data: TempLicenseInfo[] = [];
 
@@ -48,13 +48,13 @@ export class SchoolTempLicenseListComponent {
   }
 
   nextPage(requestType: number) {
-    this.router.navigate(['/', 'temp-license', 'detail'], {
+    this.router.navigate(['/temp-license', 'detail'], {
       queryParams: { type: requestType },
     });
   }
 
   nextPage2() {
-    this.router.navigate(['/', 'foreign-id']);
+    this.router.navigate(['/foreign-id']);
   }
 }
 

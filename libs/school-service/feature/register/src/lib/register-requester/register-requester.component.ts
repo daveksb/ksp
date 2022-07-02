@@ -5,10 +5,10 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy()
 @Component({
-  templateUrl: './requester-info.component.html',
-  styleUrls: ['./requester-info.component.scss'],
+  templateUrl: './register-requester.component.html',
+  styleUrls: ['./register-requester.component.scss'],
 })
-export class RequesterInfoComponent implements OnInit {
+export class RegisterRequesterComponent implements OnInit {
   grant = grants;
 
   form = this.fb.group({
@@ -29,7 +29,7 @@ export class RequesterInfoComponent implements OnInit {
   }
 
   next() {
-    this.router.navigate(['/register', 'coordinator-info']);
+    this.router.navigate(['/register', 'coordinator']);
   }
 }
 
