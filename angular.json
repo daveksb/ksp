@@ -11,7 +11,6 @@
     "e-service-ethics-accusation": "libs/e-service/ethics/accusation",
     "e-service-ethics-inquiry": "libs/e-service/ethics/inquiry",
     "e-service-ethics-investigation": "libs/e-service/ethics/investigation",
-    "e-service-ethics-list-page": "libs/e-service/ethics/list-page",
     "e-service-ethics-publish": "libs/e-service/ethics/publish",
     "e-service-feature-container-page": "libs/e-service/feature/container-page",
     "e-service-feature-landing-page": "libs/e-service/feature/landing-page",

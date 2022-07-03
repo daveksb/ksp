@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { BottomNavComponent } from '@ksp/shared/menu';
-import { ListPageComponent } from '@ksp/e-service/ethics/list-page';
 import { InquiryMainComponent } from './inquiry-main/inquiry-main.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AccusationRecordComponent } from '@ksp/e-service/ethics/accusation';
@@ -13,6 +12,7 @@ import { InquiryResultComponent } from './inquiry-result/inquiry-result.componen
 import { TopNavComponent } from '@ksp/shared/menu';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormInvestigationDetailComponent } from '@ksp/e-service/form';
+import { InquiryListComponent } from './inquiry-list/inquiry-list.component';
 
 export const routes: Routes = [
   {
@@ -26,7 +26,7 @@ export const routes: Routes = [
       },
       {
         path: 'list',
-        component: ListPageComponent,
+        component: InquiryListComponent,
       },
       {
         path: 'detail',
