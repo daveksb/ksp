@@ -24,15 +24,16 @@ const routes: Routes = [
     component: UniServiceContainerPageComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'list',
+        pathMatch: 'full',
+      },
+      {
         path: 'request',
         component: DegreeCertRequestComponent,
       },
       {
         path: 'list',
-        component: DegreeCertListComponent,
-      },
-      {
-        path: '**',
         component: DegreeCertListComponent,
       },
     ],

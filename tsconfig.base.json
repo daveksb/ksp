@@ -127,9 +127,6 @@
       "@ksp/shared/degree-cert": ["libs/shared/degree-cert/src/index.ts"],
       "@ksp/shared/dialog": ["libs/shared/dialog/src/index.ts"],
       "@ksp/shared/directive": ["libs/shared/directive/src/index.ts"],
-      "@ksp/shared/form/degree-cert/search": [
-        "libs/shared/form/degree-cert/search/src/index.ts"
-      ],
       "@ksp/shared/form/degree-cert/step-one": [
         "libs/shared/form/degree-cert/step-one/src/index.ts"
       ],

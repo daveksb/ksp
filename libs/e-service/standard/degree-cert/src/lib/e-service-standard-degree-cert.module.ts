@@ -11,7 +11,6 @@ import { ApproveComponent } from './approve/approve.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { EServiceStandardDegreeCertRoutingModule } from './e-service-standard-degree-cert-routing.module';
-import { SharedFormDegreeCertSearchModule } from '@ksp/shared/form/degree-cert/search';
 import { CheckComponent } from './check/check.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -27,6 +26,7 @@ import {
 } from '@ksp/e-service/ui/license-check';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormMeetingRecordComponent } from '@ksp/e-service/form';
+import { DegreeCertSearchComponent } from '@ksp/shared/search';
 
 @NgModule({
   imports: [
@@ -38,7 +38,6 @@ import { FormMeetingRecordComponent } from '@ksp/e-service/form';
     EServiceStandardDegreeCertRoutingModule,
     SharedDegreeCertModule,
     BottomNavComponent,
-    SharedFormDegreeCertSearchModule,
     SharedDegreeCertModule,
     SharedFormDegreeCertStepOneModule,
     MatStepperModule,
@@ -51,6 +50,7 @@ import { FormMeetingRecordComponent } from '@ksp/e-service/form';
     FinalResultInfoComponent,
     ReactiveFormsModule,
     FormMeetingRecordComponent,
+    DegreeCertSearchComponent,
   ],
   declarations: [
     DegreeCertListComponent,

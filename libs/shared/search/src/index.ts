@@ -5,3 +5,4 @@ export * from './basic-institute-search/basic-institute-search.component';
 export * from './university-search/university-search.component';
 export * from './e-service-user-search/e-service-user-search.component';
 export * from './accusation-search/accusation-search.component';
+export * from './degree-cert-search/degree-cert-search.component';
