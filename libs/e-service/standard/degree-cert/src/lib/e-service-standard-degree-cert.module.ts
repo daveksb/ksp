@@ -27,10 +27,12 @@ import {
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormMeetingRecordComponent } from '@ksp/e-service/form';
 import { DegreeCertSearchComponent } from '@ksp/shared/search';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
     MatDialogModule,
     MatTableModule,
     MatCheckboxModule,

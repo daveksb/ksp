@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { DegreeCertProcessType } from '@ksp/shared/interface';
-import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'e-service-degree-cert-list',
@@ -17,19 +16,18 @@ export class EServiceDegreeCertListComponent implements OnInit {
   selection = new SelectionModel<DegreeCertInfo>(true, []);
   displayedColumns: string[] = displayedColumns;
 
-  form = this.fb.group({
+  /*   form = this.fb.group({
     degreeCertSearch: [],
-  });
+  }); */
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private fb: FormBuilder
-  ) {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((res) => {
       if (res) {
+        /**
+         * show action buttons if process = consider || approve
+         */
         this.showActionButtons = [
           DegreeCertProcessType.consider,
           DegreeCertProcessType.approve,
@@ -64,7 +62,7 @@ export class EServiceDegreeCertListComponent implements OnInit {
   }
 
   onSelect() {
-    this.router.navigate(['/', 'degree-cert', 'check']);
+    this.router.navigate(['/degree-cert', 'check']);
   }
 
   onClear() {
@@ -73,16 +71,14 @@ export class EServiceDegreeCertListComponent implements OnInit {
 
   consider() {
     this.router.navigate([
-      './',
-      'degree-cert',
+      '/degree-cert',
       'verify',
       DegreeCertProcessType.consider,
     ]);
   }
   approve() {
     this.router.navigate([
-      './',
-      'degree-cert',
+      '/degree-cert',
       'verify',
       DegreeCertProcessType.approve,
     ]);
@@ -90,7 +86,7 @@ export class EServiceDegreeCertListComponent implements OnInit {
 }
 
 const displayedColumns: string[] = [
-  'select',
+  //'select',
   'degreeId',
   'date',
   'uni',
