@@ -10,15 +10,15 @@ export class LandingPageComponent {
   constructor(private router: Router) {}
 
   elicense() {
-    this.router.navigate(['/', 'temp-license']);
+    this.router.navigate(['temp-license']);
   }
 
   standard() {
-    this.router.navigate(['/', 'degree-cert']);
+    this.router.navigate(['degree-cert']);
   }
 
   ethics() {
-    this.router.navigate(['/', 'accusation']);
+    this.router.navigate(['accusation']);
   }
 
   praise() {
