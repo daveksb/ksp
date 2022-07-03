@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'uni-service-feature-graduate-list',
+  displayName: 'uni-service-feature-graduate',
   preset: '../../../../jest.preset.ts',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,8 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory:
-    '../../../../coverage/libs/uni-service/feature/graduate-list',
+  coverageDirectory: '../../../../coverage/libs/uni-service/feature/graduate',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

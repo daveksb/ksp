@@ -1,4 +1,4 @@
-export * from './lib/uni-service-feature-graduate-list.module';
+export * from './lib/uni-service-feature-graduate.module';
 
 export * from './lib/degree-list/degree-list.component';
 

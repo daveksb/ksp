@@ -171,8 +171,8 @@
       "@ksp/uni-service/feature/foreign-id": [
         "libs/uni-service/feature/foreign-id/src/index.ts"
       ],
-      "@ksp/uni-service/feature/graduate-list": [
-        "libs/uni-service/feature/graduate-list/src/index.ts"
+      "@ksp/uni-service/feature/graduate": [
+        "libs/uni-service/feature/graduate/src/index.ts"
       ],
       "@ksp/uni-service/feature/home": [
         "libs/uni-service/feature/home/src/index.ts"

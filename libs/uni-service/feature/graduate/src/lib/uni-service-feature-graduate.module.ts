@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DegreeListComponent } from './degree-list/degree-list.component';
 import { CourseDetailComponent } from './course-detail/course-detail.component';
-import { UniServiceFeatureGraduateListRoutingModule } from './uni-service-feature-graduate-list-routing.module';
+import { UniServiceFeatureGraduateRoutingModule } from './uni-service-feature-graduate-list-routing.module';
 import { ImportStudentComponent } from './import-student/import-student.component';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -29,7 +29,7 @@ import { DegreeSearchComponent } from '@ksp/shared/search';
 @NgModule({
   imports: [
     CommonModule,
-    UniServiceFeatureGraduateListRoutingModule,
+    UniServiceFeatureGraduateRoutingModule,
     MatButtonModule,
     FormsModule,
     MatDialogModule,
@@ -57,4 +57,4 @@ import { DegreeSearchComponent } from '@ksp/shared/search';
     ImportStudentComponent,
   ],
 })
-export class UniServiceFeatureGraduateListModule {}
+export class UniServiceFeatureGraduateModule {}

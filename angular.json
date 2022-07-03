@@ -67,7 +67,7 @@
     "uni-service-feature-container-page": "libs/uni-service/feature/container-page",
     "uni-service-feature-degree-cert": "libs/uni-service/feature/degree-cert",
     "uni-service-feature-foreign-id": "libs/uni-service/feature/foreign-id",
-    "uni-service-feature-graduate-list": "libs/uni-service/feature/graduate-list",
+    "uni-service-feature-graduate": "libs/uni-service/feature/graduate",
     "uni-service-feature-home": "libs/uni-service/feature/home",
     "uni-service-feature-login": "libs/uni-service/feature/login",
     "uni-service-feature-register": "libs/uni-service/feature/register",

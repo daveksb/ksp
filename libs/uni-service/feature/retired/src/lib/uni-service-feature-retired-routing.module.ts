@@ -5,8 +5,8 @@ import { RetiredHomeComponent } from './retired-home/retired-home.component';
 import { RetiredReasonComponent } from './retired-reason/retired-reason.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'search' },
-  { path: 'search', component: RetiredHomeComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'home' },
+  { path: 'home', component: RetiredHomeComponent },
   { path: 'reason', component: RetiredReasonComponent },
   { path: 'attachment', component: RetiredAttachmentComponent },
   { path: '**', component: RetiredHomeComponent },

@@ -46,8 +46,8 @@ const routes: Routes = [
       type: UniserviceImportType.studentList,
     },
     loadChildren: () =>
-      import('@ksp/uni-service/feature/graduate-list').then(
-        (m) => m.UniServiceFeatureGraduateListModule
+      import('@ksp/uni-service/feature/graduate').then(
+        (m) => m.UniServiceFeatureGraduateModule
       ),
   },
   {
@@ -56,8 +56,8 @@ const routes: Routes = [
       type: UniserviceImportType.graduateList,
     },
     loadChildren: () =>
-      import('@ksp/uni-service/feature/graduate-list').then(
-        (m) => m.UniServiceFeatureGraduateListModule
+      import('@ksp/uni-service/feature/graduate').then(
+        (m) => m.UniServiceFeatureGraduateModule
       ),
   },
   {
