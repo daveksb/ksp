@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DegreeCertListComponent } from './list/list.component';
+import { EServiceDegreeCertListComponent } from './list/e-service-degree-cert-list.component';
 import { BottomNavComponent } from '@ksp/shared/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SharedDegreeCertModule } from '@ksp/shared/degree-cert';
@@ -53,7 +53,7 @@ import { DegreeCertSearchComponent } from '@ksp/shared/search';
     DegreeCertSearchComponent,
   ],
   declarations: [
-    DegreeCertListComponent,
+    EServiceDegreeCertListComponent,
     VerifyComponent,
     ConsiderComponent,
     ApproveComponent,

@@ -2,12 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { BottomNavComponent } from '@ksp/shared/menu';
-import {
-  DegreeCertListComponent,
-  SharedDegreeCertModule,
-} from '@ksp/shared/degree-cert';
+import { SharedDegreeCertModule } from '@ksp/shared/degree-cert';
 import { UniServiceFormModule } from '@ksp/uni-service/form';
-import { DegreeCertRequestComponent } from './degree-cert-request/degree-cert-request.component';
+import { DegreeCertRequestComponent } from './request/degree-cert-request.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SharedFormDegreeCertStepThreeModule } from '@ksp/shared/form/degree-cert/step-three';
@@ -17,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UniContainerPageComponent } from '@ksp/uni-service/pages';
+import { UniDegreeCertListComponent } from './list/uni-degree-cert-list.component';
 
 const routes: Routes = [
   {
@@ -29,12 +27,12 @@ const routes: Routes = [
         pathMatch: 'full',
       },
       {
-        path: 'request',
-        component: DegreeCertRequestComponent,
+        path: 'list',
+        component: UniDegreeCertListComponent,
       },
       {
-        path: 'list',
-        component: DegreeCertListComponent,
+        path: 'request',
+        component: DegreeCertRequestComponent,
       },
     ],
   },

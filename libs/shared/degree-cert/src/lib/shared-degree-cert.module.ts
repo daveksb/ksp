@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DegreeCertListComponent } from './list/degree-cert-list.component';
 import { DegreeCertStepOneComponent } from './step-one/step-one.component';
 import { DegreeCertStepTwoComponent } from './step-two/step-two.component';
 import { DegreeCertStepThreeComponent } from './step-three/step-three.component';
@@ -40,7 +39,6 @@ import { RouterModule } from '@angular/router';
     DegreeCertSearchComponent,
   ],
   declarations: [
-    DegreeCertListComponent,
     DegreeCertStepOneComponent,
     DegreeCertStepTwoComponent,
     DegreeCertStepThreeComponent,
@@ -48,7 +46,6 @@ import { RouterModule } from '@angular/router';
     DegreeCertStepFiveComponent,
   ],
   exports: [
-    DegreeCertListComponent,
     DegreeCertStepOneComponent,
     DegreeCertStepTwoComponent,
     DegreeCertStepThreeComponent,

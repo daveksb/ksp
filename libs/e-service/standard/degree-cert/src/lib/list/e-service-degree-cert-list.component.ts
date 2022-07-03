@@ -7,10 +7,10 @@ import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'e-service-degree-cert-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss'],
+  templateUrl: './e-service-degree-cert-list.component.html',
+  styleUrls: ['./e-service-degree-cert-list.component.scss'],
 })
-export class DegreeCertListComponent implements OnInit {
+export class EServiceDegreeCertListComponent implements OnInit {
   showActionButtons = false;
   data: DegreeCertInfo[] = [data];
   dataSource = new MatTableDataSource<DegreeCertInfo>();

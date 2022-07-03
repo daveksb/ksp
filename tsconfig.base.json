@@ -58,9 +58,6 @@
       "@ksp/e-service/standard/degree-cert": [
         "libs/e-service/standard/degree-cert/src/index.ts"
       ],
-      "@ksp/e-service/standard/graduate-list": [
-        "libs/e-service/standard/graduate-list/src/index.ts"
-      ],
       "@ksp/e-service/ui/accusation-info": [
         "libs/e-service/ui/accusation-info/src/index.ts"
       ],

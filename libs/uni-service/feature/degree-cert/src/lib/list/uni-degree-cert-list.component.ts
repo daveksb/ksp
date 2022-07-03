@@ -1,11 +1,21 @@
 import { Component } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { RouterModule } from '@angular/router';
+import { TopNavComponent } from '@ksp/shared/menu';
+import { DegreeCertSearchComponent } from '@ksp/shared/search';
 
 @Component({
-  templateUrl: './degree-cert-list.component.html',
-  styleUrls: ['./degree-cert-list.component.scss'],
+  templateUrl: './uni-degree-cert-list.component.html',
+  styleUrls: ['./uni-degree-cert-list.component.scss'],
+  standalone: true,
+  imports: [
+    TopNavComponent,
+    DegreeCertSearchComponent,
+    RouterModule,
+    MatTableModule,
+  ],
 })
-export class DegreeCertListComponent {
+export class UniDegreeCertListComponent {
   displayedColumns: string[] = displayedColumns;
   dataSource = new MatTableDataSource<DegreeCertInfo>();
 

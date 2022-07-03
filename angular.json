@@ -17,7 +17,6 @@
     "e-service-feature-login": "libs/e-service/feature/login",
     "e-service-form": "libs/e-service/form",
     "e-service-standard-degree-cert": "libs/e-service/standard/degree-cert",
-    "e-service-standard-graduate-list": "libs/e-service/standard/graduate-list",
     "e-service-ui-accusation-info": "libs/e-service/ui/accusation-info",
     "e-service-ui-license-check": "libs/e-service/ui/license-check",
     "e-service-ui-verify-result-box": "libs/e-service/ui/verify-result-box",
