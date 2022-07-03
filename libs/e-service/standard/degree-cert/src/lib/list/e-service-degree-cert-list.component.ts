@@ -16,10 +16,6 @@ export class EServiceDegreeCertListComponent implements OnInit {
   selection = new SelectionModel<DegreeCertInfo>(true, []);
   displayedColumns: string[] = displayedColumns;
 
-  /*   form = this.fb.group({
-    degreeCertSearch: [],
-  }); */
-
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -55,7 +51,7 @@ export class EServiceDegreeCertListComponent implements OnInit {
   }
 
   onSearch() {
-    for (let index = 0; index < 25; index++) {
+    for (let index = 0; index < 10; index++) {
       this.data = [...this.data, data];
     }
     this.dataSource.data = this.data;
@@ -86,7 +82,7 @@ export class EServiceDegreeCertListComponent implements OnInit {
 }
 
 const displayedColumns: string[] = [
-  //'select',
+  'select',
   'degreeId',
   'date',
   'uni',

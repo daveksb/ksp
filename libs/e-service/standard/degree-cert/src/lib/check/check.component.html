@@ -7,15 +7,14 @@
 
 <form [formGroup]="form">
   <div class="page__container">
-    <div class="page__header">รายละเอียดใบคำขอรับรองปริญญาและประกาศนียบัตร</div>
+    <div class="box-header">รายละเอียดใบคำขอรับรองปริญญาและประกาศนียบัตร</div>
     <div class="content__container">
       <ksp-request-header-info
         [requestDate]="'10 ตุลาคม 2565'"
         [requestNumber]="'112234467876543'"
       ></ksp-request-header-info>
-      <br />
+
       <hr />
-      <br />
 
       <mat-stepper
         [selectedIndex]="1"
@@ -26,13 +25,11 @@
         <mat-step [completed]="false">
           <ng-template matStepLabel>ข้อมูลพื้นฐาน</ng-template>
           <ksp-degree-cert-step-one
-            [mode]="'view'"
+            mode="view"
             (degreeType)="degreeType = $event"
           >
           </ksp-degree-cert-step-one>
-          <br />
           <hr />
-          <br />
           <div class="check__form">
             <e-service-license-check
               [isHasReason]="false"
