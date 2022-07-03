@@ -1,33 +1,13 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 
 @Component({
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css'],
+  templateUrl: './degree-cert-list.component.html',
+  styleUrls: ['./degree-cert-list.component.scss'],
 })
 export class DegreeCertListComponent {
   displayedColumns: string[] = displayedColumns;
   dataSource = new MatTableDataSource<DegreeCertInfo>();
-
-  form = this.fb.group({
-    requestNumber: [],
-    datePeriod: [],
-    degreeName: [],
-    institutionCode: [],
-    institutionName: [],
-    reqDegreeLevel: [],
-    courseStatus: [],
-    verifyStatus: [],
-    approveStatus: [],
-  });
-
-  constructor(private router: Router, private fb: FormBuilder) {}
-
-  goToStep1() {
-    this.router.navigate(['/degree-cert', 'request']);
-  }
 
   search() {
     this.dataSource.data = data;

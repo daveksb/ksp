@@ -5,7 +5,7 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 
 @UntilDestroy()
 @Component({
-  selector: 'ksp-degree-cert-search-form',
+  selector: 'ksp-degree-cert-search',
   templateUrl: './degree-cert-search.component.html',
   styleUrls: ['./degree-cert-search.component.scss'],
   standalone: true,
