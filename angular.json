@@ -17,7 +17,6 @@
     "e-service-feature-login": "libs/e-service/feature/login",
     "e-service-form": "libs/e-service/form",
     "e-service-standard-degree-cert": "libs/e-service/standard/degree-cert",
-    "e-service-standard-graduate-list": "libs/e-service/standard/graduate-list",
     "e-service-ui-accusation-info": "libs/e-service/ui/accusation-info",
     "e-service-ui-license-check": "libs/e-service/ui/license-check",
     "e-service-ui-verify-result-box": "libs/e-service/ui/verify-result-box",
@@ -46,7 +45,6 @@
     "shared-degree-cert": "libs/shared/degree-cert",
     "shared-dialog": "libs/shared/dialog",
     "shared-directive": "libs/shared/directive",
-    "shared-form-degree-cert-search": "libs/shared/form/degree-cert/search",
     "shared-form-degree-cert-step-one": "libs/shared/form/degree-cert/step-one",
     "shared-form-degree-cert-step-three": "libs/shared/form/degree-cert/step-three",
     "shared-form-degree-cert-step-two": "libs/shared/form/degree-cert/step-two",
@@ -65,14 +63,12 @@
     "shared-utility": "libs/shared/utility",
     "uni-service": "apps/uni-service",
     "uni-service-dialog": "libs/uni-service/dialog",
-    "uni-service-feature-container-page": "libs/uni-service/feature/container-page",
     "uni-service-feature-degree-cert": "libs/uni-service/feature/degree-cert",
-    "uni-service-feature-foreign-id": "libs/uni-service/feature/foreign-id",
-    "uni-service-feature-graduate-list": "libs/uni-service/feature/graduate-list",
-    "uni-service-feature-home": "libs/uni-service/feature/home",
-    "uni-service-feature-login": "libs/uni-service/feature/login",
+    "uni-service-feature-foreign-student-id": "libs/uni-service/feature/foreign-student-id",
+    "uni-service-feature-graduate": "libs/uni-service/feature/graduate",
     "uni-service-feature-register": "libs/uni-service/feature/register",
     "uni-service-feature-retired": "libs/uni-service/feature/retired",
-    "uni-service-form": "libs/uni-service/form"
+    "uni-service-form": "libs/uni-service/form",
+    "uni-service-pages": "libs/uni-service/pages"
   }
 }

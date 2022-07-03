@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DegreeCertListComponent } from './list/list.component';
+import { EServiceDegreeCertListComponent } from './list/e-service-degree-cert-list.component';
 import { BottomNavComponent } from '@ksp/shared/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SharedDegreeCertModule } from '@ksp/shared/degree-cert';
@@ -11,7 +11,6 @@ import { ApproveComponent } from './approve/approve.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { EServiceStandardDegreeCertRoutingModule } from './e-service-standard-degree-cert-routing.module';
-import { SharedFormDegreeCertSearchModule } from '@ksp/shared/form/degree-cert/search';
 import { CheckComponent } from './check/check.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -27,10 +26,13 @@ import {
 } from '@ksp/e-service/ui/license-check';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormMeetingRecordComponent } from '@ksp/e-service/form';
+import { DegreeCertSearchComponent } from '@ksp/shared/search';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
     MatDialogModule,
     MatTableModule,
     MatCheckboxModule,
@@ -38,7 +40,6 @@ import { FormMeetingRecordComponent } from '@ksp/e-service/form';
     EServiceStandardDegreeCertRoutingModule,
     SharedDegreeCertModule,
     BottomNavComponent,
-    SharedFormDegreeCertSearchModule,
     SharedDegreeCertModule,
     SharedFormDegreeCertStepOneModule,
     MatStepperModule,
@@ -51,9 +52,10 @@ import { FormMeetingRecordComponent } from '@ksp/e-service/form';
     FinalResultInfoComponent,
     ReactiveFormsModule,
     FormMeetingRecordComponent,
+    DegreeCertSearchComponent,
   ],
   declarations: [
-    DegreeCertListComponent,
+    EServiceDegreeCertListComponent,
     VerifyComponent,
     ConsiderComponent,
     ApproveComponent,

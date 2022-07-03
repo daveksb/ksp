@@ -5,7 +5,7 @@ import { ApproveComponent } from './approve/approve.component';
 import { CheckComponent } from './check/check.component';
 import { ConsiderComponent } from './consider/consider.component';
 import { FinalResultComponent } from './final-result/final-result.component';
-import { DegreeCertListComponent } from './list/list.component';
+import { EServiceDegreeCertListComponent } from './list/e-service-degree-cert-list.component';
 import { VerifyComponent } from './verify/verify.component';
 
 export const routes: Routes = [
@@ -20,11 +20,11 @@ export const routes: Routes = [
       },
       {
         path: 'list',
-        component: DegreeCertListComponent,
+        component: EServiceDegreeCertListComponent,
       },
       {
         path: 'list/:type',
-        component: DegreeCertListComponent,
+        component: EServiceDegreeCertListComponent,
       },
       {
         path: 'check', //ตรวจสอบ

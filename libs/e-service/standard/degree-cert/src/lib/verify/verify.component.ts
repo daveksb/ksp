@@ -8,7 +8,7 @@ import { DegreeCertProcessType } from '@ksp/shared/interface';
   styleUrls: ['./verify.component.scss'],
 })
 export class VerifyComponent implements OnInit {
-  titles = ['', 'พิจารณาประเมินหลักสูคร', 'พิจารณารับรองหลักสูคร'];
+  titles = ['', 'พิจารณาประเมินหลักสูตร', 'พิจารณารับรองหลักสูตร'];
 
   choices = [
     [],
@@ -22,7 +22,7 @@ export class VerifyComponent implements OnInit {
     ],
   ];
 
-  processType: DegreeCertProcessType = 0;
+  processType: DegreeCertProcessType = DegreeCertProcessType.check;
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {

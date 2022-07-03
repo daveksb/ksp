@@ -5,38 +5,8 @@
   flex-direction: column;
 }
 
-.checkbox__detail {
-  background: #ffffff;
-  border: 1px solid #dadde1;
-  box-sizing: border-box;
-  border-radius: 5px;
-  width: 250px;
-  padding: 4px;
-  margin-right: 15px;
-}
-
-.content__checkbox {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 12px;
-}
-
-.checkbox__label {
-  font-size: 18px;
-}
-
 .checkbox__box {
   height: 15px;
   width: 15px;
   margin-right: 5px;
-}
-
-.header-3 {
-  font-size: 22px;
-  color: #0056ff;
-  margin-bottom: 16px;
-}
-
-.top__container {
-  margin-bottom: 12px;
 }

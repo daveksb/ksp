@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DegreeCertListComponent } from './list/list.component';
 import { DegreeCertStepOneComponent } from './step-one/step-one.component';
 import { DegreeCertStepTwoComponent } from './step-two/step-two.component';
 import { DegreeCertStepThreeComponent } from './step-three/step-three.component';
@@ -18,11 +17,14 @@ import { SharedFormDegreeCertStepOneModule } from '@ksp/shared/form/degree-cert/
 import { DynamicComponentDirective } from '@ksp/shared/directive';
 import { AddRowButtonComponent } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
+import { DegreeCertSearchComponent } from '@ksp/shared/search';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    RouterModule,
     MatTabsModule,
     SharedFormOthersModule,
     MatTableModule,
@@ -34,9 +36,9 @@ import { TopNavComponent } from '@ksp/shared/menu';
     DynamicComponentDirective,
     AddRowButtonComponent,
     TopNavComponent,
+    DegreeCertSearchComponent,
   ],
   declarations: [
-    DegreeCertListComponent,
     DegreeCertStepOneComponent,
     DegreeCertStepTwoComponent,
     DegreeCertStepThreeComponent,
@@ -44,7 +46,6 @@ import { TopNavComponent } from '@ksp/shared/menu';
     DegreeCertStepFiveComponent,
   ],
   exports: [
-    DegreeCertListComponent,
     DegreeCertStepOneComponent,
     DegreeCertStepTwoComponent,
     DegreeCertStepThreeComponent,

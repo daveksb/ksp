@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RetiredSearchComponent } from './retired-search/retired-search.component';
 import { RetiredReasonComponent } from './retired-reason/retired-reason.component';
 import { RetiredAttachmentComponent } from './retired-attachment/retired-attachment.component';
 import { UniServiceFeatureRetiredRoutingModule } from './uni-service-feature-retired-routing.module';
@@ -10,7 +9,11 @@ import { UniServiceFormModule } from '@ksp/uni-service/form';
 import { BottomNavComponent, TopNavSecondComponent } from '@ksp/shared/menu';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { ReactiveFormsModule } from '@angular/forms';
-import { BasicInstituteSearchComponent } from '@ksp/shared/search';
+import {
+  BasicInstituteSearchComponent,
+  RetiredSearchComponent,
+} from '@ksp/shared/search';
+import { RetiredHomeComponent } from './retired-home/retired-home.component';
 
 @NgModule({
   imports: [
@@ -24,9 +27,10 @@ import { BasicInstituteSearchComponent } from '@ksp/shared/search';
     BottomNavComponent,
     ReactiveFormsModule,
     BasicInstituteSearchComponent,
+    RetiredSearchComponent,
   ],
   declarations: [
-    RetiredSearchComponent,
+    RetiredHomeComponent,
     RetiredReasonComponent,
     RetiredAttachmentComponent,
   ],

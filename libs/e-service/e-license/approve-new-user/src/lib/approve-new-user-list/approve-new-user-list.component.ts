@@ -34,7 +34,7 @@ export class ApproveNewUserListComponent {
   }
 
   goToDetail() {
-    this.router.navigate(['/', 'approve-new-user', 'detail'], {
+    this.router.navigate(['approve-new-user', 'detail'], {
       queryParams: { type: SchoolServiceUserPageType.ApproveNewUser },
     });
   }

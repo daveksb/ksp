@@ -1,0 +1,66 @@
+table {
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #000000;
+  overflow: auto;
+}
+
+.table > :not(caption) > * > * {
+  padding: 14px;
+}
+
+.table > :not(:first-child) {
+  border-top: 0;
+}
+
+.table__order {
+  text-align: center;
+  width: 30px;
+  background-color: #edf6ff;
+}
+
+.table__header {
+  white-space: nowrap;
+  width: auto;
+  background-color: #edf6ff;
+  padding: 10px;
+}
+
+.table__detail {
+  white-space: nowrap;
+  width: auto;
+  padding: 10px;
+}
+
+.table__expand {
+  color: #f68b33;
+  cursor: pointer;
+  text-decoration: underline;
+  white-space: nowrap;
+}
+
+.mat-select {
+  border: 1px solid #666666;
+  padding: 2px;
+  border-radius: 2px;
+  width: 75px;
+}
+
+.approvetime__input {
+  width: 75px;
+  text-align: center;
+}
+
+input {
+  width: 150px;
+}
+
+.date__input {
+  width: 125px;
+}
+
+.disable__prefix {
+  background-color: #efefef4d;
+  color: -internal-light-dark(rgb(84, 84, 84), rgb(170, 170, 170));
+  border-color: rgba(118, 118, 118, 0.3);
+}

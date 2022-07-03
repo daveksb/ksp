@@ -5,16 +5,17 @@ import { UniRegisterRequesterComponent } from './uni-register-requester/uni-regi
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'requester',
+    pathMatch: 'full',
+  },
+  {
     path: 'requester',
     component: UniRegisterRequesterComponent,
   },
   {
     path: 'coordinator',
     component: UniRegisterCoordinatorComponent,
-  },
-  {
-    path: '**',
-    component: UniRegisterRequesterComponent,
   },
 ];
 

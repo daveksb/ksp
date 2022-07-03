@@ -2,16 +2,18 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UniserviceImportType } from '@ksp/shared/interface';
 
-import { UniServiceContainerPageComponent } from '@ksp/uni-service/feature/container-page';
-import { ForeignIdComponent } from '@ksp/uni-service/feature/foreign-id';
-import { UniHomeComponent } from '@ksp/uni-service/feature/home';
-import { UniServiceLoginComponent } from '@ksp/uni-service/feature/login';
+import { ForeignStudentIdComponent } from '@ksp/uni-service/feature/foreign-student-id';
+import {
+  UniContainerPageComponent,
+  UniHomeComponent,
+  UniLoginComponent,
+} from '@ksp/uni-service/pages';
 
 const routes: Routes = [
-  { path: 'login', component: UniServiceLoginComponent },
+  { path: 'login', component: UniLoginComponent },
   {
     path: 'home',
-    component: UniServiceContainerPageComponent,
+    component: UniContainerPageComponent,
     children: [
       {
         path: '',
@@ -46,8 +48,8 @@ const routes: Routes = [
       type: UniserviceImportType.studentList,
     },
     loadChildren: () =>
-      import('@ksp/uni-service/feature/graduate-list').then(
-        (m) => m.UniServiceFeatureGraduateListModule
+      import('@ksp/uni-service/feature/graduate').then(
+        (m) => m.UniServiceFeatureGraduateModule
       ),
   },
   {
@@ -56,17 +58,17 @@ const routes: Routes = [
       type: UniserviceImportType.graduateList,
     },
     loadChildren: () =>
-      import('@ksp/uni-service/feature/graduate-list').then(
-        (m) => m.UniServiceFeatureGraduateListModule
+      import('@ksp/uni-service/feature/graduate').then(
+        (m) => m.UniServiceFeatureGraduateModule
       ),
   },
   {
-    path: 'foreign-id',
-    component: UniServiceContainerPageComponent,
+    path: 'foreign-student-id',
+    component: UniContainerPageComponent,
     children: [
       {
         path: '',
-        component: ForeignIdComponent,
+        component: ForeignStudentIdComponent,
       },
     ],
   },
