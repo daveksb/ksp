@@ -1,36 +1,13 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'uni-service-retired-search',
-  templateUrl: './retired-search.component.html',
-  styleUrls: ['./retired-search.component.scss'],
+  templateUrl: './retired-home.component.html',
+  styleUrls: ['./retired-home.component.scss'],
 })
-export class RetiredSearchComponent {
-  form = this.fb.group({
-    grant: [],
-    affiliation: [],
-    universityCode: [],
-    universityName: [],
-    requestNumber: [],
-    name: [],
-    phone: [],
-  });
-
+export class RetiredHomeComponent {
   data: RetiredInfo[] = [];
-  constructor(private router: Router, private fb: FormBuilder) {}
-
   search() {
     this.data = data;
-  }
-
-  clear() {
-    this.data = [];
-  }
-
-  confirm() {
-    this.router.navigate(['/retired', 'reason']);
   }
 }
 
