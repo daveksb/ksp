@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BottomNavComponent } from '@ksp/shared/menu';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 
-import { ForeignIdComponent } from './foreign-id/foreign-id.component';
+import { ForeignStudentIdComponent } from './foreign-student-id/foreign-student-id.component';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -15,9 +15,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     SharedFormOthersModule,
     TopNavComponent,
     RequestHeaderInfoComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  declarations: [ForeignIdComponent],
-  exports: [ForeignIdComponent],
+  declarations: [ForeignStudentIdComponent],
+  exports: [ForeignStudentIdComponent],
 })
-export class UniServiceFeatureForeignIdModule {}
+export class UniServiceFeatureForeignStudentIdModule {}

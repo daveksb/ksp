@@ -53,7 +53,7 @@ export const menu: MenuConfig[] = [
         label: 'ขอรับรองปริญญาและประกาศนียบัตร',
       },
       {
-        path: 'foreign-id',
+        path: 'foreign-student-id',
         label: 'ขอสร้างเลขประจำตัวคุรุสภาสำหรับนักศึกษาชาวต่างชาติ',
       },
       {

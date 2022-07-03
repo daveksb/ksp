@@ -165,8 +165,8 @@
       "@ksp/uni-service/feature/degree-cert": [
         "libs/uni-service/feature/degree-cert/src/index.ts"
       ],
-      "@ksp/uni-service/feature/foreign-id": [
-        "libs/uni-service/feature/foreign-id/src/index.ts"
+      "@ksp/uni-service/feature/foreign-student-id": [
+        "libs/uni-service/feature/foreign-student-id/src/index.ts"
       ],
       "@ksp/uni-service/feature/graduate": [
         "libs/uni-service/feature/graduate/src/index.ts"

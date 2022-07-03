@@ -9,7 +9,6 @@ const routes: Routes = [
   { path: 'home', component: RetiredHomeComponent },
   { path: 'reason', component: RetiredReasonComponent },
   { path: 'attachment', component: RetiredAttachmentComponent },
-  { path: '**', component: RetiredHomeComponent },
 ];
 
 @NgModule({

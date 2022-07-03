@@ -9,11 +9,10 @@ import {
 import { FormBuilder } from '@angular/forms';
 
 @Component({
-  selector: 'uni-service-foreign-id',
-  templateUrl: './foreign-id.component.html',
-  styleUrls: ['./foreign-id.component.css'],
+  templateUrl: './foreign-student-id.component.html',
+  styleUrls: ['./foreign-student-id.component.scss'],
 })
-export class ForeignIdComponent {
+export class ForeignStudentIdComponent {
   @Input() mode: FormMode = 'edit';
   foreignInfo = ['1.สำเนาหนังสือเดินทาง'];
 

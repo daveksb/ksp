@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UniserviceImportType } from '@ksp/shared/interface';
 
-import { ForeignIdComponent } from '@ksp/uni-service/feature/foreign-id';
+import { ForeignStudentIdComponent } from '@ksp/uni-service/feature/foreign-student-id';
 import {
   UniContainerPageComponent,
   UniHomeComponent,
@@ -63,12 +63,12 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'foreign-id',
-    component: UniServiceContainerPageComponent,
+    path: 'foreign-student-id',
+    component: UniContainerPageComponent,
     children: [
       {
         path: '',
-        component: ForeignIdComponent,
+        component: ForeignStudentIdComponent,
       },
     ],
   },
