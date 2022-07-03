@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UniServiceContainerPageComponent } from '@ksp/uni-service/feature/container-page';
+import { UniContainerPageComponent } from '@ksp/uni-service/pages';
 import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { DegreeListComponent } from './degree-list/degree-list.component';
 import { ImportStudentComponent } from './import-student/import-student.component';
@@ -8,7 +8,7 @@ import { ImportStudentComponent } from './import-student/import-student.componen
 const routes: Routes = [
   {
     path: '',
-    component: UniServiceContainerPageComponent,
+    component: UniContainerPageComponent,
     children: [
       {
         path: '',
@@ -26,10 +26,6 @@ const routes: Routes = [
       {
         path: 'import-student/:type',
         component: ImportStudentComponent,
-      },
-      {
-        path: '**',
-        component: DegreeListComponent,
       },
     ],
   },

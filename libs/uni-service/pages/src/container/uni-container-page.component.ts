@@ -1,13 +1,27 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { MenuConfig } from '@ksp/shared/menu';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { SelfServiceUiModule } from '@ksp/self-service/ui';
+import {
+  MenuConfig,
+  SharedMenuModule,
+  TopNavComponent,
+} from '@ksp/shared/menu';
 
 @Component({
   selector: 'uni-service-container-page',
-  templateUrl: './uni-service-container-page.component.html',
-  styleUrls: ['./uni-service-container-page.component.css'],
+  templateUrl: './uni-container-page.component.html',
+  styleUrls: ['./uni-container-page.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    SelfServiceUiModule,
+    SharedMenuModule,
+    TopNavComponent,
+  ],
 })
-export class UniServiceContainerPageComponent implements OnInit {
+export class UniContainerPageComponent implements OnInit {
   menuConfig: MenuConfig[] = [];
   header = '';
   subHeader = '';

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { UniServiceContainerPageComponent } from '@ksp/uni-service/feature/container-page';
 import { BottomNavComponent } from '@ksp/shared/menu';
 import {
   DegreeCertListComponent,
@@ -17,11 +16,12 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { MatIconModule } from '@angular/material/icon';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UniContainerPageComponent } from '@ksp/uni-service/pages';
 
 const routes: Routes = [
   {
     path: '',
-    component: UniServiceContainerPageComponent,
+    component: UniContainerPageComponent,
     children: [
       {
         path: '',

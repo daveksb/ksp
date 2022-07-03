@@ -1,10 +1,23 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { MatTableDataSource } from '@angular/material/table';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { SelfServiceFormModule } from '@ksp/self-service/form';
+import { TopNavComponent } from '@ksp/shared/menu';
+import { DegreeSearchComponent } from '@ksp/shared/search';
 
 @Component({
   templateUrl: './uni-home.component.html',
-  styleUrls: ['./uni-home.component.css'],
+  styleUrls: ['./uni-home.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    SelfServiceFormModule,
+    MatTableModule,
+    TopNavComponent,
+    ReactiveFormsModule,
+    DegreeSearchComponent,
+  ],
 })
 export class UniHomeComponent {
   form = this.fb.group({

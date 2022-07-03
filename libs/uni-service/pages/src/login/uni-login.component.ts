@@ -1,14 +1,18 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { LoginFormComponent } from '@ksp/shared/form/login';
 import { ForgotPasswordPersonIdComponent } from '@ksp/uni-service/dialog';
 
 @Component({
   selector: 'uni-service-login',
-  templateUrl: './uni-service-login.component.html',
-  styleUrls: ['./uni-service-login.component.scss'],
+  templateUrl: './uni-login.component.html',
+  styleUrls: ['./uni-login.component.scss'],
+  standalone: true,
+  imports: [CommonModule, LoginFormComponent],
 })
-export class UniServiceLoginComponent {
+export class UniLoginComponent {
   constructor(private router: Router, public dialog: MatDialog) {}
 
   login() {

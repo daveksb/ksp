@@ -1,0 +1,17 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/uni-service/pages/src",
+  "prefix": "ksp",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/uni-service/pages/**/*.ts",
+          "libs/uni-service/pages/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
