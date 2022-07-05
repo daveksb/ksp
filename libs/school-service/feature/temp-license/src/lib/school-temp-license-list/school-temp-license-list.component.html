@@ -1,21 +1,21 @@
 <ksp-top-nav>
   <span header>ยื่นใบคำขอ</span>
   <span subHeader
-    >รายการใบอนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ</span
+    >รายการใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพทางการศึกษาโดยไม่มีใบอนุญาตประกอบวิชาชีพ</span
   >
 </ksp-top-nav>
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
     <div class="box-header pb-1">
-      รายละเอียดใบคำขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
+      รายการใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพทางการศึกษาโดยไม่มีใบอนุญาตประกอบวิชาชีพ
     </div>
-    <div class="bg-white px-3 py-2">
-      <ksp-request-header-info
+    <div class="bg-white px-3 py-3">
+     <!--  <ksp-request-header-info
         [requestDate]="'10 ตุลาคม 2565'"
         [requestNumber]="'112234467876543'"
       ></ksp-request-header-info>
-      <hr />
+      <hr /> -->
       <ksp-temp-license-search
         (clear)="clear()"
         (search)="search()"

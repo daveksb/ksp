@@ -57,7 +57,7 @@ a:focus {
 
 #sidebar ul li a {
   padding: 10px 12px;
-  font-size: 1.1rem;
+  font-size: 1.125rem;
   display: block;
 }
 
@@ -98,7 +98,7 @@ a[data-bs-toggle='collapse'] {
 }
 
 ul ul a {
-  font-size: 0.9em !important;
+  font-size: 1em !important;
   padding: 24px;
   background: #ffffff;
   color: #a6a6a6;
@@ -111,6 +111,10 @@ ul ul li {
 
 .icon__sidenav {
   margin-right: 12px;
+}
+
+.icon__sidenav.active {
+  color: #0056ff;
 }
 
 .menu__content {
