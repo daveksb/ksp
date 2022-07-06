@@ -60,6 +60,7 @@
     *ngIf="showRetired"
     role="button"
     class="mt-2 d-flex justify-content-end text-primary align-content-end"
+    (click)="retired.emit(true)"
   >
     ขอถอดถอนผู้ใช้งาน
   </div>

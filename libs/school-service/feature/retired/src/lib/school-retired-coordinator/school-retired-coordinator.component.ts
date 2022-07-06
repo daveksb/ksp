@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -8,25 +7,17 @@ import {
 } from '@ksp/shared/dialog';
 
 @Component({
-  selector: 'uni-service-retired-attachment',
-  templateUrl: './retired-attachment.component.html',
-  styleUrls: ['./retired-attachment.component.scss'],
+  selector: 'ksp-school-retired-coordinator',
+  templateUrl: './school-retired-coordinator.component.html',
+  styleUrls: ['./school-retired-coordinator.component.scss'],
 })
-export class RetiredAttachmentComponent {
-  form = this.fb.group({
-    coordinatorRetired: [],
-  });
+export class SchoolRetiredCoordinatorComponent {
+  constructor(private router: Router, public dialog: MatDialog) {}
 
-  constructor(
-    private router: Router,
-    public dialog: MatDialog,
-    private fb: FormBuilder
-  ) {}
-
-  retiredFiles = ['หนังสือแต่งตั้งผู้ประสานงาน', 'สำเนาบัตรประชาชน'];
+  retiredFiles = ['หนังสือแต่งตั้งผู้ประสานงาน'];
 
   prevPage() {
-    this.router.navigate(['/', 'retired', 'reason']);
+    this.router.navigate(['/', 'retired-user', 'requester']);
   }
 
   cancel() {
@@ -43,10 +34,6 @@ export class RetiredAttachmentComponent {
         ใช่หรือไม่`,
       },
     });
-
-    /* dialogRef.afterClosed().subscribe((result) => {
-      //console.log(`Dialog result: ${result}`);
-    }); */
 
     dialogRef.componentInstance.confirmed.subscribe((res) => {
       if (res) {
@@ -67,7 +54,7 @@ export class RetiredAttachmentComponent {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'login']);
+        this.cancel();
       }
     });
   }

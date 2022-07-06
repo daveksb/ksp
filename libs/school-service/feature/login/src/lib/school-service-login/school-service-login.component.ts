@@ -26,4 +26,8 @@ export class SchoolServiceLoginComponent {
   forgetPassword() {
     this.router.navigate(['/forget-password', 'person-id']);
   }
+
+  retired() {
+    this.router.navigate(['/', 'retired-user', 'search']);
+  }
 }

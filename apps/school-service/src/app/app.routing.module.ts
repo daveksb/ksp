@@ -19,6 +19,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'retired-user',
+    loadChildren: () =>
+      import('@ksp/school-service/feature/retired').then(
+        (m) => m.SchoolServiceFeatureRetiredModule
+      ),
+  },
+  {
     path: 'temp-license',
     loadChildren: () =>
       import('@ksp/school-service/feature/temp-license').then(

@@ -33,12 +33,9 @@
       </table>
 
       <div class="py-2 d-flex justify-content-center">
-        <a
-          class="btn btn-primary"
-          type="buton"
-          [routerLink]="['/retired', 'reason']"
-          >ยืนยัน</a
-        >
+        <button class="btn btn-primary" type="button" (click)="confirm()">
+          ยืนยัน
+        </button>
       </div>
     </ng-container>
   </div>

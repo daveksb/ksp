@@ -28,6 +28,7 @@
     "school-service-feature-login": "libs/school-service/feature/login",
     "school-service-feature-qualification-approve": "libs/school-service/feature/qualification-approve",
     "school-service-feature-register": "libs/school-service/feature/register",
+    "school-service-feature-retired": "libs/school-service/feature/retired",
     "school-service-feature-staff-management": "libs/school-service/feature/staff-management",
     "school-service-feature-temp-license": "libs/school-service/feature/temp-license",
     "school-service-form-activity": "libs/school-service/form/activity",
