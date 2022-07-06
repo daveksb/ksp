@@ -136,8 +136,8 @@
 <div class="sticky-bottom border">
   <ksp-bottom-nav
     (cancelClicked)="cancel()"
-    (prevClicked)="prevPage()"
     (saveClicked)="save()"
+    [isFirstPage]="true"
     [isLastPage]="true"
     [showCenterButtons]="true"
     [showCancelButton]="true"

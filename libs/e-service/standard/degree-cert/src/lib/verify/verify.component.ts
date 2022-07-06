@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { DegreeCertProcessType } from '@ksp/shared/interface';
 
 @Component({
@@ -23,7 +25,11 @@ export class VerifyComponent implements OnInit {
   ];
 
   processType: DegreeCertProcessType = DegreeCertProcessType.check;
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((res) => {
@@ -41,5 +47,22 @@ export class VerifyComponent implements OnInit {
       './degree-cert',
       DegreeCertProcessType[this.processType],
     ]);
+  }
+
+  save() {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
+        subTitle: `คุณยืนยันข้อมูลผลการพิจารณาหลักสูตร
+        ใช่หรือไม่`,
+      },
+    });
+
+    dialogRef.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/', 'degree-cert', 'list', this.processType]);
+      }
+    });
   }
 }

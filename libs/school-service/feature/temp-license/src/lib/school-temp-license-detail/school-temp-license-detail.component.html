@@ -25,7 +25,11 @@
         <div class="row mb-3">
           <div class="col-5">
             <label class="form-label">หมายเลขบัตรประชาชน</label>
-            <input class="form-control" type="text" />
+            <input
+              class="form-control"
+              type="text"
+              placeholder="หมายเลขบัตรประชาชนจำนวน 13 หลัก"
+            />
           </div>
         </div>
         <ksp-form-user-info
@@ -35,7 +39,7 @@
       </div>
     </div>
 
-    <div class="full-width">
+    <div class="full-width pb-2">
       <mat-tab-group
         (selectedIndexChange)="onTabIndexChanged($event)"
         class="tab-group mt-3"

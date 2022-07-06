@@ -18,8 +18,9 @@
       <div class="row mb-2 px-3">
         <div class="col-6">
           <label class="form-label">ประเภทบุคลากร</label>
+
           <select class="form-select" formControlName="staffType">
-            <option selected>กรุณาเลือก</option>
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
@@ -31,7 +32,7 @@
         <div class="col">
           <label class="form-label">ตำแหน่งงาน</label>
           <select class="form-select" formControlName="post">
-            <option selected>กรุณาเลือก</option>
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
@@ -40,7 +41,7 @@
         <div class="col">
           <label class="form-label">วิทยฐานะ</label>
           <select class="form-select" formControlName="academicStanding">
-            <option selected>กรุณาเลือก</option>
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
@@ -104,7 +105,7 @@
     <div class="bg-light p-3 mt-3">
       <div class="box-header">ช่วงชั้นที่สอน</div>
 
-      <div class="row">
+      <div class="row ms-4">
         <ng-container *ngFor="let item of levels">
           <span class="col-3">
             <mat-checkbox
@@ -120,7 +121,7 @@
     <div class="bg-light p-3 mt-3">
       <div class="box-header">ประเภทวิชาที่สอน</div>
 
-      <div class="row">
+      <div class="row ms-4">
         <ng-container *ngFor="let s of subjects">
           <span class="col-4">
             <mat-checkbox
@@ -131,8 +132,8 @@
           </span>
         </ng-container>
       </div>
-      <div class="row ms-4">
-        <span class="col-4">
+      <div class="row ms-5">
+        <span class="col-3">
           <input
             class="form-control check-other"
             type="text"

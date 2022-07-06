@@ -37,7 +37,6 @@ export class ForeignTeacherIdRequestComponent implements OnInit{
 
   onConfirmed() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      height: '200px',
       width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูล
@@ -54,7 +53,6 @@ export class ForeignTeacherIdRequestComponent implements OnInit{
 
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      height: '175px',
       width: '375px',
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,

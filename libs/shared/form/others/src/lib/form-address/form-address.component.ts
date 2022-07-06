@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { formAddressModel, KspFormBaseComponent } from '@ksp/shared/interface';
+import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
 @Component({
@@ -20,7 +20,17 @@ export class FormAddressComponent extends KspFormBaseComponent {
    * Use in E-service, School-Service
    */
 
-  override form = this.fb.group(formAddressModel);
+  override form = this.fb.group({
+    location: [''],
+    houseNumber: [''],
+    villageNumber: [''],
+    lane: [''],
+    road: [''],
+    zipCode: [''],
+    provience: [null],
+    subDistrict: [null],
+    district: [null],
+  });
 
   constructor(private fb: FormBuilder) {
     super();
@@ -33,3 +43,4 @@ export class FormAddressComponent extends KspFormBaseComponent {
     );
   }
 }
+

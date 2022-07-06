@@ -17,6 +17,7 @@
         <ng-container matColumnDef="select">
           <th mat-header-cell *matHeaderCellDef>
             <mat-checkbox
+              *ngIf="showActionButtons"
               (change)="$event ? masterToggle() : null"
               [checked]="selection.hasValue() && isAllSelected()"
               [indeterminate]="selection.hasValue() && !isAllSelected()"
@@ -25,10 +26,10 @@
           </th>
           <td mat-cell *matCellDef="let row">
             <mat-checkbox
+              *ngIf="showActionButtons"
               (click)="$event.stopPropagation()"
               (change)="$event ? selection.toggle(row) : null"
               [checked]="selection.isSelected(row)"
-              (click)="onSelect()"
             >
             </mat-checkbox>
           </td>
@@ -36,7 +37,14 @@
 
         <ng-container matColumnDef="degreeId">
           <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
-          <td mat-cell *matCellDef="let element">{{ element.degreeId }}</td>
+          <td
+            (click)="goToDetailPage()"
+            class="license__detail"
+            mat-cell
+            *matCellDef="let element"
+          >
+            {{ element.degreeId }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="date">

@@ -30,7 +30,7 @@ import {
 })
 export class ActivityDetailComponent implements OnInit {
   activityForm = this.fb.group({
-    activityType: [''],
+    activityType: [null],
   });
 
   activityTypes: ListData[] = [];

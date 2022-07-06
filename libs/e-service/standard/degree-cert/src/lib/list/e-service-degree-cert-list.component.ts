@@ -15,6 +15,7 @@ export class EServiceDegreeCertListComponent implements OnInit {
   dataSource = new MatTableDataSource<DegreeCertInfo>();
   selection = new SelectionModel<DegreeCertInfo>(true, []);
   displayedColumns: string[] = displayedColumns;
+  pageType = 0;
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
@@ -29,7 +30,9 @@ export class EServiceDegreeCertListComponent implements OnInit {
           DegreeCertProcessType.approve,
         ].includes(Number(res.get('type')));
       }
-      //console.log('process type = ', res);
+      this.pageType = Number(res.get('type'));
+
+      console.log('page type = ', this.pageType);
     });
   }
 
@@ -57,10 +60,6 @@ export class EServiceDegreeCertListComponent implements OnInit {
     this.dataSource.data = this.data;
   }
 
-  onSelect() {
-    this.router.navigate(['/degree-cert', 'check']);
-  }
-
   onClear() {
     this.dataSource.data = [];
   }
@@ -72,12 +71,23 @@ export class EServiceDegreeCertListComponent implements OnInit {
       DegreeCertProcessType.consider,
     ]);
   }
+
   approve() {
     this.router.navigate([
       '/degree-cert',
       'verify',
       DegreeCertProcessType.approve,
     ]);
+  }
+
+  goToDetailPage() {
+    if (this.pageType === 0) {
+      this.router.navigate(['/degree-cert', 'check']);
+    } else if (this.pageType === 1) {
+      this.router.navigate(['/', 'degree-cert', 'consider']);
+    } else if (this.pageType === 2) {
+      this.router.navigate(['/', 'degree-cert', 'approve']);
+    }
   }
 }
 
