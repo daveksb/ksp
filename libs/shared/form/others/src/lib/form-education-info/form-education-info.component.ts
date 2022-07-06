@@ -26,6 +26,8 @@ export class FormEducationInfoComponent
   });
 
   @Input() showIsEducationDegree = false;
+  @Input() showGradeInput = true;
+  @Input() showPropertyInput = false;
 
   _defualtDegree = 0;
 

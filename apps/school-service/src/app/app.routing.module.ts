@@ -33,6 +33,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'qualification-approve',
+    loadChildren: () =>
+      import('@ksp/school-service/feature/qualification-approve').then(
+        (m) => m.SchoolServiceFeatureQualificationApproveModule
+      ),
+  },
+  {
     path: 'staff-management',
     loadChildren: () =>
       import('@ksp/school-service/feature/staff-management').then(

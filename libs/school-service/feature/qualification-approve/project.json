@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/school-service/feature/qualification-approve/src",
+  "prefix": "ksp",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/school-service/feature/qualification-approve"],
+      "options": {
+        "jestConfig": "libs/school-service/feature/qualification-approve/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/school-service/feature/qualification-approve/**/*.ts",
+          "libs/school-service/feature/qualification-approve/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

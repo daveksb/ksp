@@ -50,7 +50,7 @@ export const menu: MenuConfig[] = [
       },
       {
         label: 'ขอหนังสือรับรองคุณวุฒิ',
-        path: 'temp-license/aa',
+        path: 'qualification-approve/detail',
       },
       {
         label:

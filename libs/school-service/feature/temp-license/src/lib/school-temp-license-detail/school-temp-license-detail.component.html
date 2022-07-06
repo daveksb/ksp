@@ -82,10 +82,12 @@
           <ksp-form-education-info
             formControlName="education2"
             [defualtDegree]="2"
+            [showGradeInput]="false"
+            [showPropertyInput]="true"
             >วุฒิทางการศึกษา
           </ksp-form-education-info>
 
-          <div class="px-4">
+          <!-- <div class="px-4">
             <label class="form-label-2"
               >คุณสมบัติอื่นที่สอดคล้องหรือเป็นประโยชน์ต่อการจัดการเรียนการสอนในกลุ่มสาระหรือรายวิชาที่สอน
               (พิจารณาเป็นรายกรณี)</label
@@ -96,7 +98,7 @@
               rows="3"
               placeholder="โปรดระบุ"
             ></textarea>
-          </div>
+          </div> -->
           <br />
           <ksp-form-attachment [groups]="educationInfo"></ksp-form-attachment>
         </mat-tab>
