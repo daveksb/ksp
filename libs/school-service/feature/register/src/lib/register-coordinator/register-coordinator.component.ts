@@ -46,7 +46,7 @@ export class CoordinatorInfoComponent implements OnInit {
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
         subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
-        ใช่หรือไม`,
+        ใช่หรือไม่`,
         schoolCode: 'รหัสเข้าใช้งาน(รหัสโรงเรียน): xxxx',
         btnLabel: 'บันทึก',
       },
