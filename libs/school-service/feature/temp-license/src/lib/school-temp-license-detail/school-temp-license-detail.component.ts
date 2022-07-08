@@ -23,7 +23,6 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     schoolAddress: [],
     education1: [],
     education2: [],
-    otherProperty: [],
     teaching: [],
     reason: [],
   });

@@ -22,10 +22,9 @@
 
     <div class="row-3">
       <ng-container *ngFor="let item of levels">
-        <div class="d-flex my-2">
-          <mat-checkbox formControlName="{{ item.name }}" class="form-label">{{
-            item.label
-          }}</mat-checkbox>
+        <div class="d-flex align-items-center my-2">
+          <input class="me-2" formControlName="{{ item.name }}" type="checkbox" />
+          <label class="form-label">{{ item.label }}</label>
         </div></ng-container
       >
     </div>
