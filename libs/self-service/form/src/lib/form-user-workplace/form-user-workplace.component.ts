@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import {
-  formWorkplaceModel,
-  KspFormBaseComponent,
-} from '@ksp/shared/interface';
+import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { UniversitySearchComponent } from '@ksp/shared/search';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -15,7 +12,18 @@ import { providerFactory } from '@ksp/shared/utility';
   providers: providerFactory(FormUserWorkplaceComponent),
 })
 export class FormUserWorkplaceComponent extends KspFormBaseComponent {
-  override form = this.fb.group(formWorkplaceModel);
+  override form = this.fb.group({
+    affiliation: [''],
+    addressName: [''],
+    houseNumber: [''],
+    villageNumber: [''],
+    lane: [''],
+    road: [''],
+    zipCode: [''],
+    provience: [''],
+    subDistrict: [''],
+    district: [''],
+  });
 
   constructor(private dialog: MatDialog, private fb: FormBuilder) {
     super();

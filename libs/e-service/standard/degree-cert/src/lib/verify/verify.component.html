@@ -52,9 +52,10 @@
 
 <div class="sticky-bottom border">
   <ksp-bottom-nav
-    (nextClicked)="next()"
     (cancelClicked)="cancel()"
+    (saveClicked)="save()"
     [isFirstPage]="true"
+    [isLastPage]="true"
     [showCenterButtons]="true"
     [showSaveButton]="true"
   >

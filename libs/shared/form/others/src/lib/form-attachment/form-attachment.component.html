@@ -1,12 +1,12 @@
-<div class="bg-light px-3 py-2">
-  <div class="box-header py-1" [class]="titleClass">
+<div class="bg-light px-3 py-3">
+  <div class="box-header pb-1" [class]="titleClass">
     {{ title }}
   </div>
   <div class="table-responsive">
-    <table class="bg-white">
+    <table class="bg-white" style="border: 1px solid #c4c4c4">
       <thead>
         <tr class="fs-6" style="background-color: #edf6ff">
-          <th class="ps-3">รายการเอกสาร</th>
+          <th class="ps-3 py-2">รายการเอกสาร</th>
           <th class="text-center">จำนวนหน้า</th>
           <th *ngIf="mode === 'view'" class="text-center">ตรวจสอบ</th>
           <th *ngIf="mode === 'edit'" class="text-center">อัพโหลด</th>
@@ -14,13 +14,10 @@
       </thead>
       <tbody class="text-secondary">
         <ng-container *ngFor="let group of groups; index as i">
-          <tr>
-            <th class="ps-3">
+          <tr style="border-top: 1px solid #dadde1">
+            <th class="ps-3 py-2 text-black">
               {{ group }}
-              <div>
-                xxxxxxxx_xxxxx.pdf
-                <i class="bi bi-x-circle-fill fs-6 text-danger"></i>
-              </div>
+              <div class="text-secondary">xxxxxxxx_xxxxx.pdf</div>
             </th>
             <td class="text-center">-</td>
             <td *ngIf="mode === 'view'" class="text-center">
@@ -28,7 +25,7 @@
             </td>
             <td *ngIf="mode === 'edit'" class="text-center">
               <button id="btn-upload" type="button" class="btn btn-primary">
-                + อัพโหลด
+                + อัพโหลดไฟล์
               </button>
             </td>
           </tr>

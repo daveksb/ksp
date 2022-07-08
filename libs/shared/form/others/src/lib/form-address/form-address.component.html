@@ -13,7 +13,9 @@
         />
       </div>
       <div class="col-md-6 mb-3">
-        <label class="form-label">บ้านเลขที่</label>
+        <label class="form-label"
+          >บ้านเลขที่ <span class="text-danger">*</span>
+        </label>
         <input
           [class.bg-light]="isDarkMode"
           class="form-control"
@@ -73,7 +75,7 @@
           class="form-select"
           formControlName="provience"
         >
-          <option selected>กรุณาเลือก</option>
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
@@ -86,7 +88,7 @@
           class="form-select"
           formControlName="subDistrict"
         >
-          <option selected>กรุณาเลือก</option>
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
@@ -102,7 +104,7 @@
           class="form-select"
           formControlName="district"
         >
-          <option selected>กรุณาเลือก</option>
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>

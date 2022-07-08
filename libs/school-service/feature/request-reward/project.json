@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/school-service/feature/request-reward/src",
+  "prefix": "ksp",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/school-service/feature/request-reward"],
+      "options": {
+        "jestConfig": "libs/school-service/feature/request-reward/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/school-service/feature/request-reward/**/*.ts",
+          "libs/school-service/feature/request-reward/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

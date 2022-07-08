@@ -7,27 +7,29 @@
         class="form-select"
         formControlName="prefixTh"
       >
-        <option selected>กรุณาเลือก</option>
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">One</option>
         <option value="2">Two</option>
         <option value="3">Three</option>
       </select>
     </div>
     <div class="col-md-5 mb-3">
-      <label class="form-label">ชื่อ</label>
+      <label class="form-label">ชื่อภาษาไทย</label>
       <input
         [class.bg-light]="isDarkMode"
         class="form-control"
         type="text"
+        placeholder="กรุณากรอกชื่อภาษาไทย"
         formControlName="nameTh"
       />
     </div>
     <div class="col-md-5 mb-3">
-      <label class="form-label">นามสกุล</label>
+      <label class="form-label">นามสกุลภาษาไทย</label>
       <input
+        [class.bg-light]="isDarkMode"
         class="form-control"
         type="text"
-        [class.bg-light]="isDarkMode"
+        placeholder="กรุณากรอกนามสกุลภาษาไทย"
         formControlName="lastnameTh"
       />
     </div>
@@ -41,27 +43,29 @@
         class="form-select"
         formControlName="prefixEn"
       >
-        <option selected>กรุณาเลือก</option>
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">One</option>
         <option value="2">Two</option>
         <option value="3">Three</option>
       </select>
     </div>
     <div class="col-md-5 mb-3">
-      <label class="form-label">ชื่อ</label>
+      <label class="form-label">ชื่อภาษาอังกฤษ</label>
       <input
         class="form-control"
         type="text"
         [class.bg-light]="isDarkMode"
+        placeholder="กรุณากรอกชื่อภาษาอังกฤษ"
         formControlName="nameEn"
       />
     </div>
     <div class="col-md-5 mb-3">
-      <label class="form-label">นามสกุล</label>
+      <label class="form-label">นามสกุลภาษาอังกฤษ</label>
       <input
         class="form-control"
         type="text"
         [class.bg-light]="isDarkMode"
+        placeholder="กรุณากรอกนามสกุลภาษาอังกฤษ"
         formControlName="lastnameEn"
       />
     </div>
@@ -75,10 +79,10 @@
         class="form-select"
         formControlName="sex"
       >
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option value="1">ชาย</option>
+        <option value="2">หญิง</option>
+        <option value="3">อื่นๆ</option>
       </select>
     </div>
     <div class="col-md-6 mb-3">

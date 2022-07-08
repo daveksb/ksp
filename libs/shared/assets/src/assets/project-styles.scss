@@ -63,7 +63,8 @@ add asterisk for required feild
 
 .form-search {
   display: block;
-  background: white url(/assets/images/search-icon.svg) no-repeat right 10px center;
+  background: white url(/assets/images/search-icon.svg) no-repeat right 10px
+    center;
   padding-right: 2.5rem !important;
 }
 
@@ -101,4 +102,14 @@ thead {
 
 .table > :not(:first-child) {
   border-top: 0;
+}
+
+input[type='checkbox'] {
+  height: 1rem;
+  width: 1rem;
+}
+
+input[type='radio'] {
+  height: 1rem;
+  width: 1rem;
 }

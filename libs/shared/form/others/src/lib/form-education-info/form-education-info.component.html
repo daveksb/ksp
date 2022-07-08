@@ -8,18 +8,25 @@
       <div class="col-6">
         <label class="form-label">ระดับวุฒิทางการศึกษา</label>
         <select class="form-select" formControlName="degreeLevel">
+          <option [value]="null" selected hidden disabled>กรุณาเลือก</option>
           <option [value]="1">ปริญญาตรี</option>
           <option [value]="2">ปริญญาโท</option>
           <option [value]="3">ปริญญาเอก</option>
+          <option [value]="4">
+            วุฒิการศึกษาปริญญาอื่นๆที่เทียบเท่าปริญญาตรี / ปริญญาทางการศึกษา
+          </option>
         </select>
       </div>
-      <div *ngIf="showIsEducationDegree" class="col d-flex align-items-center">
-        <input
-          type="checkbox"
-          class="me-2"
-          formControlName="isEducationDegree"
-        />
-        <label class="form-label">ปริญญาทางการศึกษา</label>
+      <div *ngIf="showIsEducationDegree" class="col-6">
+        <br />
+        <div class="d-flex align-items-center">
+          <input
+            type="checkbox"
+            class="me-2"
+            formControlName="isEducationDegree"
+          />
+          <label class="form-label">ปริญญาทางการศึกษา</label>
+        </div>
       </div>
     </div>
 
@@ -46,7 +53,7 @@
       <div class="col">
         <label class="form-label">ประเทศ</label>
         <select class="form-select" formControlName="country">
-          <option selected>กรุณาเลือก</option>
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
@@ -73,10 +80,25 @@
       </div>
     </div>
 
-    <div class="row mb-3">
+    <div class="row mb-3" *ngIf="showGradeInput">
       <div class="col-6">
         <label class="form-label">เกรดเฉลี่ย</label>
         <input class="form-control" type="text" formControlName="grade" />
+      </div>
+    </div>
+
+    <div class="row" *ngIf="showPropertyInput">
+      <div class="col">
+        <label class="form-label-2"
+          >คุณสมบัติอื่นที่สอดคล้องหรือเป็นประโยชน์ต่อการจัดการเรียนการสอนในกลุ่มสาระหรือรายวิชาที่สอน
+          (พิจารณาเป็นรายกรณี)</label
+        >
+        <textarea
+          formControlName="otherProperty"
+          class="form-control"
+          rows="3"
+          placeholder="โปรดระบุ"
+        ></textarea>
       </div>
     </div>
   </div>

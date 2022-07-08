@@ -37,7 +37,7 @@ export class CoordinatorInfoComponent implements OnInit {
   }
 
   back() {
-    this.router.navigate(['register', 'requester-info']);
+    this.router.navigate(['register', 'requester']);
   }
 
   save() {

@@ -27,7 +27,7 @@ export class CheckComponent {
 
   cancel() {
     //this.form.valueChanges.subscribe((res) => console.log(' res = ', res));
-    this.router.navigate(['/', 'degree-cert', 'list']);
+    this.router.navigate(['/', 'degree-cert', 'list', 0]);
   }
 
   save() {
@@ -61,7 +61,7 @@ export class CheckComponent {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'degree-cert', 'list']);
+        this.router.navigate(['/', 'degree-cert', 'list', 0]);
       }
     });
   }

@@ -19,6 +19,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'retired-user',
+    loadChildren: () =>
+      import('@ksp/school-service/feature/retired').then(
+        (m) => m.SchoolServiceFeatureRetiredModule
+      ),
+  },
+  {
     path: 'temp-license',
     loadChildren: () =>
       import('@ksp/school-service/feature/temp-license').then(
@@ -30,6 +37,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('@ksp/school-service/feature/foreign-teacher').then(
         (m) => m.SchoolServiceFeatureForeignTeacherModule
+      ),
+  },
+  {
+    path: 'qualification-approve',
+    loadChildren: () =>
+      import('@ksp/school-service/feature/qualification-approve').then(
+        (m) => m.SchoolServiceFeatureQualificationApproveModule
       ),
   },
   {

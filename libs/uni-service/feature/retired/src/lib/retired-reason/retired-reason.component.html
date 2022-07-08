@@ -2,7 +2,7 @@
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 py-2">
-    <div class="container-xl ps-0 fs-4 default-width">
+    <div class="container-xl ps-0 box-header default-width">
       รายละเอียดใบคำขอถอดถอน (ผู้ประสานงาน / ผู้รับผิดชอบ)
     </div>
 
@@ -14,7 +14,7 @@
       <hr />
 
       <div class="bg-light px-3 pt-1 pb-3">
-        <div class="fs-4 text-primary">สถาบันที่สังกัด</div>
+        <div class="box-header text-primary">สถาบันที่สังกัด</div>
 
         <div class="d-flex">
           <div class="fs-5 text-secondary">สถาบัน / มหาวิทยาลัย :</div>
@@ -26,7 +26,7 @@
           <div class="fs-5 ms-3">{{ userInfo.organisation }}</div>
         </div>
 
-        <div class="fs-4 text-primary mt-3">
+        <div class="box-header text-primary mt-3">
           ข้อมูลผู้ขอรหัสสำหรับเข้าใช้งานระบบ (ผู้ประสานงาน / ผู้รับผิดชอบ)
         </div>
 
@@ -71,22 +71,22 @@
         </div>
 
         <div class="d-flex mb-1">
-          <div class="fs-5 text-secondary">อีเมล์ :</div>
+          <div class="fs-5 text-secondary">อีเมล :</div>
           <div class="fs-5 ms-3">{{ userInfo.email }}</div>
         </div>
       </div>
 
       <div class="bg-light mt-3 px-3 pt-1 pb-3">
-        <div class="fs-4 text-primary">เหตุผลการถอดถอน</div>
+        <div class="box-header text-primary">เหตุผลการถอดถอน</div>
 
         <div class="row">
           <div class="col-5">
             <label class="form-label">เหตุผลการถอดถอน</label>
             <select class="form-select" formControlName="reason">
-              <option>กรุณาเลือก</option>
-              <option selected value="1">เลิกจ้าง</option>
-              <option value="2">xxx</option>
-              <option value="3">xxx</option>
+              <option selected value="null">กรุณาเลือก</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
             </select>
           </div>
         </div>
@@ -100,14 +100,12 @@
           ></textarea>
         </div>
       </div>
-
-      <div class="mt-1">
-        <ksp-bottom-nav
-          [isFirstPage]="true"
-          [showCenterButtons]="false"
-          (nextClicked)="next()"
-        ></ksp-bottom-nav>
-      </div>
+      <br />
+      <ksp-bottom-nav
+        [isFirstPage]="true"
+        [showCenterButtons]="false"
+        (nextClicked)="next()"
+      ></ksp-bottom-nav>
     </div>
   </div>
 </form>

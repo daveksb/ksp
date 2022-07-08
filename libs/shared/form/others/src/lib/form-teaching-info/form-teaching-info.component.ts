@@ -69,7 +69,7 @@ export const levels = [
     value: false,
   },
   {
-    label: 'ช่วงชั้นที่ 4 (มัธยมศึกษาปีที่ 4-6',
+    label: 'ช่วงชั้นที่ 4 (มัธยมศึกษาปีที่ 4-6)',
     name: 'level5',
     value: false,
   },
