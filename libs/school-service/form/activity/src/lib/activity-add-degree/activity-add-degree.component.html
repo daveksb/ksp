@@ -3,7 +3,7 @@
     <div class="mb-3">
       <label class="form-label">สถาบันการศึกษา</label>
       <input
-        class="form-control"
+        class="form-control form-search"
         type="text"
         formControlName="educationInstitution"
       />
@@ -12,8 +12,8 @@
     <div class="mb-3">
       <label class="form-label">วุฒิปริญญาที่จบ</label>
       <input
-        class="form-control"
-        type="date"
+        class="form-control form-search"
+        type="text"
         formControlName="graduateDegree"
       />
     </div>
@@ -22,12 +22,16 @@
   <div class="row row--second">
     <div class="mb-3">
       <label class="form-label">สาขา/วิชาเอก</label>
-      <input class="form-control" type="text" formControlName="branch" />
+      <input
+        class="form-control form-search"
+        type="text"
+        formControlName="branch"
+      />
     </div>
 
     <div>
       <label class="form-label">วันเดือนปี เข้าศึกษา</label>
-      <input class="form-control" type="text" formControlName="admissionDate" />
+      <input class="form-control" type="date" formControlName="admissionDate" />
     </div>
     <div>
       <label class="form-label">วันเดือนปี สำเร็จการศึกษา</label>

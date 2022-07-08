@@ -44,7 +44,7 @@
             <td>xx/xx/xxxx</td>
             <td>xx/xx/xxxx</td>
             <td>
-              <i role="button" class="box-header text-primary bi bi-eye"></i>
+              <i role="button" class="box-header text-success bi bi-eye"></i>
             </td>
           </tr>
           <tr>
@@ -54,7 +54,7 @@
             <td>xx/xx/xxxx</td>
             <td>xx/xx/xxxx</td>
             <td>
-              <i role="button" class="box-header text-primary bi bi-eye"></i>
+              <i role="button" class="box-header text-success bi bi-eye"></i>
             </td>
           </tr>
         </tbody>
@@ -66,7 +66,11 @@
         <div class="box-header mb-2">กิจกรรมการพัฒนาตนเอง</div>
         <div class="row">
           <div class="col-8 mb-3">
-            <select formControlName="activityType" class="form-select">
+            <select
+              formControlName="activityType"
+              class="form-select"
+              style="white-space: break-spaces"
+            >
               <option value="null" selected hidden disabled>กรุณาเลือก</option>
               <option
                 *ngFor="let activity of activityTypes"

@@ -111,17 +111,17 @@ export class AddStaffTeachingInfoComponent implements OnInit {
 }
 
 export const levels = [
-  { label: 'อนุบาล', name: 'level1', value: false },
-  { label: 'ชั้นประถมปีที่ 1-3', name: 'level2', value: false },
-  { label: 'ชั้นประถมปีที่ 4-6', name: 'level3', value: false },
-  { label: 'ชั้นมัธยมปีที่ 1-3', name: 'level4', value: false },
-  { label: 'ชั้นมัธยมปีที่ 4-6', name: 'level5', value: false },
   { label: 'ประกาศนียบัตรวิชาชีพ (ปวช.)', name: 'level6', value: false },
+  { label: 'ชั้นมัธยมปีที่ 1-3', name: 'level4', value: false },
+  { label: 'ชั้นประถมปีที่ 1-3', name: 'level2', value: false },
+  { label: 'อนุบาล', name: 'level1', value: false },
   {
     label: 'ประกาศนียบัตรวิชาชีพขั้นสูง (ปวส.) / อนุปริญญา',
     name: 'level7',
     value: false,
   },
+  { label: 'ชั้นมัธยมปีที่ 4-6', name: 'level5', value: false },
+  { label: 'ชั้นประถมปีที่ 4-6', name: 'level3', value: false },
 ];
 
 export const subjects = [
