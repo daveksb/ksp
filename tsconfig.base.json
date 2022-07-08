@@ -88,6 +88,9 @@
       "@ksp/school-service/feature/register": [
         "libs/school-service/feature/register/src/index.ts"
       ],
+      "@ksp/school-service/feature/request-reward": [
+        "libs/school-service/feature/request-reward/src/index.ts"
+      ],
       "@ksp/school-service/feature/retired": [
         "libs/school-service/feature/retired/src/index.ts"
       ],
