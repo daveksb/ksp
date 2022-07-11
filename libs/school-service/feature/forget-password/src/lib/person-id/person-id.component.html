@@ -1,26 +1,36 @@
 <ksp-top-nav-2><br /></ksp-top-nav-2>
 
 <form [formGroup]="form">
-  <div class="container">
-    <div class="content mt-5">
+  <div
+    class="bg-secondary bg-opacity-10 d-flex justify-content-center"
+    style="max-width: 1440px; height: calc(100vh - 58px)"
+  >
+    <div
+      class="bg-white mt-5 px-4 py-3"
+      style="height: fit-content; width: 600px"
+    >
       <div class="box-header">ลืมรหัสผ่าน</div>
       <hr />
-      <div class="text-primary box-header">กรุณากรอกข้อมูลเพื่อยืนยันตัวตน</div>
-
-      <div class="mb-3">
-        <div class="form-label">
-          รหัสโรงเรียน <span class="text-danger">*</span>
+      <div class="px-5 py-2">
+        <div class="text-primary box-header">
+          กรุณากรอกข้อมูลเพื่อยืนยันตัวตน
         </div>
-        <input formControlName="schoolId" type="text" class="form-control" />
-      </div>
-      <div class="mb-1">
-        <div class="form-label">
-          หมายเลขบัตรประชาชน <span class="text-danger">*</span>
-        </div>
-        <input formControlName="personId" type="text" class="form-control" />
 
-        <div class="form-label">
-          หมายเลขบัตรประชาชนของผู้แต่งตั้ง / ผู้มีอำนาจ / ผู้บริหาร
+        <div class="mb-3">
+          <div class="form-label">
+            รหัสโรงเรียน <span class="text-danger">*</span>
+          </div>
+          <input formControlName="schoolId" type="text" class="form-control" />
+        </div>
+        <div class="mb-1">
+          <div class="form-label">
+            หมายเลขบัตรประชาชน <span class="text-danger">*</span>
+          </div>
+          <input formControlName="personId" type="text" class="form-control" />
+
+          <div class="form-label fs-6">
+            หมายเลขบัตรประชาชนของผู้แต่งตั้ง / ผู้มีอำนาจ / ผู้บริหาร
+          </div>
         </div>
       </div>
 

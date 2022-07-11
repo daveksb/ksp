@@ -101,3 +101,7 @@ th,
 tr[class^='mat'] {
   font-family: var(--bs-body-font-family);
 }
+
+.mat-menu-panel {
+  max-width: none !important;
+}
