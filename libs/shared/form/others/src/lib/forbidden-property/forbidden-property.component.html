@@ -1,75 +1,74 @@
 <div class="d-flex flex-column">
-  <div class="header__title">
+  <div class="fs-5">
     {{ title }}
   </div>
 
-  <div class="detail__container">
-    <div class="detail__title">
+  <div class="my-3">
+    <div class="form-label">
       1. เคยเป็นผู้มีความประพฤติเสื่อม หรือบกพร่องในศีลธรรมอันดีหรือไม่
     </div>
-    <div class="checkbox__container">
-      <div class="checkbox__content">
-        <input class="checkbox" type="radio" />
-        <label class="checkbox__label"> ไม่เคย</label>
+    <div class="row my-3">
+      <div class="col-4 d-flex align-items-center">
+        <input class="me-2" type="radio" name="property1" />
+        <label class="form-label">ไม่เคย</label>
       </div>
-      <div class="checkbox__content">
-        <input class="checkbox" type="radio" />
-        <label class="checkbox__label">เคย</label>
+      <div class="col-4 d-flex align-items-center">
+        <input class="me-2" type="radio" name="property1" />
+        <label class="form-label">เคย</label>
       </div>
     </div>
-    <div class="detail__title">
+    <div class="form-label">
       2. เป็นผู้ไร้ความสามารถหรือเสมือนไร้ความสามารถ หรือไม่
     </div>
-    <div class="checkbox__container">
-      <div class="checkbox__content">
-        <input class="checkbox" type="radio" />
-        <label class="checkbox__label">ไม่เคย</label>
+    <div class="row my-3">
+      <div class="col-4 d-flex align-items-center">
+        <input class="me-2" type="radio" name="property2"/>
+        <label class="form-label">ไม่เคย</label>
       </div>
-      <div class="checkbox__content">
-        <input class="checkbox" type="radio" />
-        <label class="checkbox__label">เคย</label>
-      </div>
-    </div>
-    <div class="detail__title">
-      3.เคยต้องโทษจำคุกในคดีที่คุรุสภาเห็นว่าอาจนำมาซึ่งความเสื่อมเสียเกียรติศักดิ์แห่งวิชาชีพ
-    </div>
-    <div class="checkbox__container">
-      <div class="checkbox__content">
-        <input class="checkbox" type="radio" />
-        <label class="checkbox__label">ไม่เคย</label>
-      </div>
-      <div class="checkbox__content">
-        <input class="checkbox" type="radio" />
-        <label class="checkbox__label">เคย</label>
+      <div class="col-4 d-flex align-items-center">
+        <input class="me-2" type="radio" name="property2"/>
+        <label class="form-label">เคย</label>
       </div>
     </div>
-    <div class="checkbox__container-2">
-      <div class="upload__box-1">
+    <div class="form-label">
+      3.
+      เคยต้องโทษจำคุกในคดีที่คุรุสภาเห็นว่าอาจนำมาซึ่งความเสื่อมเสียเกียรติศักดิ์แห่งวิชาชีพ
+    </div>
+    <div class="row my-3">
+      <div class="col-4 d-flex align-items-center">
+        <input class="me-2" type="radio" name="property3"/>
+        <label class="form-label">ไม่เคย</label>
+      </div>
+      <div class="col d-flex align-items-center">
+        <input class="me-2" type="radio" name="property3"/>
+        <label class="form-label">เคย</label>
+      </div>
+      <div class="col-7">
         <input class="form-control" type="text" placeholder="โปรดระบุ" />
       </div>
-      <div class="upload__box-2">
-        <button id="upload-btn" type="button" class="btn btn-primary">
-          + แนบเอกสาร
-        </button>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-4"></div>
+      <div class="col ms-4">
+        <ksp-file-upload></ksp-file-upload>
       </div>
     </div>
   </div>
-
-  <div class="btn__container">
+  <br />
+  <div class="d-flex justify-content-center">
     <button
       matDialogClose
-      id="btn-cancel"
       type="button"
-      class="btn border-primary text-primary"
+      class="btn border-primary text-primary me-1"
     >
       ยกเลิก
     </button>
     <button
-      id="btn-save"
       matDialogClose
       (click)="save()"
       type="button"
-      class="btn btn-primary"
+      class="btn btn-primary ms-1"
     >
       บันทึก
     </button>

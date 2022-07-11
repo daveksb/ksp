@@ -87,7 +87,6 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
 
   save() {
     const dialogRef = this.dialog.open(ForbiddenPropertyFormComponent, {
-      height: '475px',
       width: '850px',
     });
 
