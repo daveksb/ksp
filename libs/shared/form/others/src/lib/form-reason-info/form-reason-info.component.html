@@ -18,10 +18,9 @@
     </div>
 
     <ng-container *ngFor="let item of schoolReason">
-      <div class="d-flex flex-column mb-2">
-        <mat-checkbox formControlName="{{ item.name }}" class="form-label">{{
-          item.label
-        }}</mat-checkbox>
+      <div class="d-flex align-items-center mb-2">
+        <input class="me-2" formControlName="{{ item.name }}" type="checkbox" />
+        <label class="form-label">{{ item.label }}</label>
       </div>
     </ng-container>
 
@@ -51,10 +50,9 @@
     </div>
 
     <ng-container *ngFor="let item of teacherReason">
-      <div class="d-flex flex-column mb-2">
-        <mat-checkbox formControlName="{{ item.name }}" class="form-label">{{
-          item.label
-        }}</mat-checkbox>
+      <div class="d-flex align-items-center mb-2">
+        <input class="me-2" formControlName="{{ item.name }}" type="checkbox" />
+        <label class="form-label">{{ item.label }}</label>
       </div>
     </ng-container>
 

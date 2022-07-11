@@ -23,7 +23,6 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     schoolAddress: [],
     education1: [],
     education2: [],
-    otherProperty: [],
     teaching: [],
     reason: [],
   });
@@ -88,7 +87,6 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
 
   save() {
     const dialogRef = this.dialog.open(ForbiddenPropertyFormComponent, {
-      height: '475px',
       width: '850px',
     });
 

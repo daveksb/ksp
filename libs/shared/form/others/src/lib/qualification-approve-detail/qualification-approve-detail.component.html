@@ -1,1 +1,47 @@
-<p>qualification-approve-detail works!</p>
+<div class="box-header text-center">จึงขอรับรองคุณวุฒิการศึกษา</div>
+<br />
+<div class="mb-2">
+  <input type="checkbox" class="me-2" />
+  <label class="fs-5">วุฒิการศึกษาปริญญาตรี</label>
+</div>
+<div class="row mb-2">
+  <div class="col-6">
+    <label class="form-label">ชื่อปริญญา/หลักสูตร</label>
+    <input type="text" class="form-control" />
+  </div>
+
+  <div class="col-6">
+    <label class="form-label">สาขา/วิชาเอก</label>
+    <input type="text" class="form-control" />
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-6">
+    <label class="form-label">สถาบันการศึกษา</label>
+    <input type="text" class="form-control" />
+  </div>
+</div>
+<br />
+<div class="fs-5">
+  เนื่องจาก เป็นสาขาวิชาที่ตรงกับความต้องการของหน่วยงาน และ
+</div>
+<div class="form-label">
+  (ให้หน่วยงานผู้ใช้ระบุเหตุผลความจำเป็น
+  หรือความต้องการประกอบการพิจารณาขอรับรองคุณวุฒิ)
+</div>
+<textarea class="form-control" rows="3" placeholder="กรุณากรอก"></textarea>
+
+<br />
+<div class="d-flex justify-content-center">
+  <button matDialogClose class="btn border-primary text-primary me-1">
+    ยกเลืก
+  </button>
+  <button
+    (click)="confirmed.emit(true)"
+    matDialogClose
+    class="btn btn-primary ms-1"
+  >
+    บันทึก
+  </button>
+</div>

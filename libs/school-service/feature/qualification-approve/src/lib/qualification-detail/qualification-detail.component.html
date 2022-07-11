@@ -46,22 +46,33 @@
             </div>
           </ksp-form-address>
 
-          <div class="text-danger">
+          <!-- <div class="text-danger">
             *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
             โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
-          </div>
+          </div> -->
         </mat-tab>
 
         <mat-tab label="ข้อมูลทางการศึกษา">
-          <ksp-form-education-info [defualtDegree]="1"></ksp-form-education-info
+          <ksp-form-education-info [defualtDegree]="1"
+            ><input
+              type="checkbox"
+              class="me-2"
+            />วุฒิการศึกษา</ksp-form-education-info
           ><br />
-          <ksp-form-education-info [defualtDegree]="2" [showGradeInput]="false">
-          </ksp-form-education-info
+          <ksp-form-education-info [defualtDegree]="2" [showGradeInput]="false"
+            ><input
+              type="checkbox"
+              class="me-2"
+            />วุฒิการศึกษา </ksp-form-education-info
           ><br />
-          <ksp-form-education-info [defualtDegree]="3" [showGradeInput]="false">
-          </ksp-form-education-info
+          <ksp-form-education-info [defualtDegree]="3" [showGradeInput]="false"
+            ><input
+              type="checkbox"
+              class="me-2"
+            />วุฒิการศึกษา </ksp-form-education-info
           ><br />
-          <ksp-form-education-info [defualtDegree]="4" [showGradeInput]="false">
+          <ksp-form-education-info [defualtDegree]="4" [showGradeInput]="false"
+            ><input type="checkbox" class="me-2" />วุฒิการศึกษา
           </ksp-form-education-info>
         </mat-tab>
 
@@ -81,5 +92,6 @@
     [showCenterButtons]="true"
     [showCancelButton]="true"
     [showSaveButton]="true"
+    (saveClicked)="save()"
   ></ksp-bottom-nav>
 </div>

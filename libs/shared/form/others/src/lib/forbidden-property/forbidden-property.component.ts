@@ -1,12 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
+import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 import { FormMode } from '@ksp/shared/interface';
 
 @Component({
   templateUrl: './forbidden-property.component.html',
   styleUrls: ['./forbidden-property.component.scss'],
   standalone: true,
-  imports: [MatDialogModule],
+  imports: [MatDialogModule, FileUploadComponent],
 })
 export class ForbiddenPropertyFormComponent {
   @Input()

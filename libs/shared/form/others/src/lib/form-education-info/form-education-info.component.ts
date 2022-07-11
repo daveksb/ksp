@@ -23,6 +23,7 @@ export class FormEducationInfoComponent
     admissionDate: [],
     graduateDate: [],
     grade: [],
+    otherProperty: [],
   });
 
   @Input() showIsEducationDegree = false;

@@ -1,11 +1,13 @@
 <div class="px-2 pb-2">
-  <div class="box-header">{{ headerTitle }}</div>
+  <div class="box-header text-primary">{{ headerTitle }}</div>
 
   <div class="d-flex justify-content-start mb-2">
     <ng-container *ngFor="let choice of choices">
       <div class="border rounded ps-2 pe-5 py-1 me-3 bg-white w-25">
-        <input class="align-middle" type="radio" name="xxx" />
-        <label class="ms-1"> {{ choice }} </label>
+        <div class="d-flex align-items-center">
+          <input class="align-middle" type="radio" name="xxx" />
+          <label class="ms-1"> {{ choice }} </label>
+        </div>
       </div>
     </ng-container>
   </div>
@@ -16,7 +18,7 @@
     <ng-container *ngFor="let reason of reasons">
       <div class="mb-3">
         <input type="checkbox" class="checkbox__box" />
-        <label>{{ reason }}6</label>
+        <label>{{ reason }}</label>
       </div>
     </ng-container>
   </div>

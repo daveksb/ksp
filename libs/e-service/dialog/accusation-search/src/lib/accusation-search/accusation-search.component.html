@@ -69,7 +69,11 @@
     <ng-container matColumnDef="select">
       <th mat-header-cell *matHeaderCellDef>เลือก</th>
       <td mat-cell *matCellDef="let row">
-        <mat-checkbox (click)="$event.stopPropagation()"> </mat-checkbox>
+        <input
+          (click)="$event.stopPropagation()"
+          type="radio"
+          name="license1"
+        />
       </td>
     </ng-container>
 

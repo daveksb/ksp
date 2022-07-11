@@ -55,7 +55,7 @@ export const menu: MenuConfig[] = [
       {
         label:
           'ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One Innovation : OSOI)',
-        path: 'temp-license/bb',
+        path: 'request-reward/detail',
       },
     ],
   },
