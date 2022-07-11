@@ -47,6 +47,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'activity',
+    loadChildren: () =>
+      import('@ksp/school-service/feature/activity').then(
+        (m) => m.SchoolServiceFeatureActivityModule
+      ),
+  },
+  {
     path: 'staff-management',
     loadChildren: () =>
       import('@ksp/school-service/feature/staff-management').then(
@@ -54,10 +61,10 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'activity',
+    path: 'request-reward',
     loadChildren: () =>
-      import('@ksp/school-service/feature/activity').then(
-        (m) => m.SchoolServiceFeatureActivityModule
+      import('@ksp/school-service/feature/request-reward').then(
+        (m) => m.SchoolServiceFeatureRequestRewardModule
       ),
   },
 

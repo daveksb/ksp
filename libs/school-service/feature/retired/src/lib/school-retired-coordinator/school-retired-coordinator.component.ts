@@ -26,7 +26,6 @@ export class SchoolRetiredCoordinatorComponent {
 
   save() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      height: '200px',
       width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
@@ -49,6 +48,8 @@ export class SchoolRetiredCoordinatorComponent {
         header: 'ยืนยันข้อมูลสำเร็จ',
         content: `วันที่ : 10 ตุลาคม 2565
         เลขที่ใบคำขอ : 12234467876543 `,
+        subContent: `กรุณาตรวจสอบสถานะใบคำขอหรือรหัสเข้าใช้งาน
+        ผ่านทางอีเมล์ผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },
     });
 
