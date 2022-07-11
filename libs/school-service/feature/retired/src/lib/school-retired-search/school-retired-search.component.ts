@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { untilDestroyed } from '@ngneat/until-destroy';
 
 @Component({
   selector: 'ksp-school-retired-search',
@@ -7,9 +9,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./school-retired-search.component.scss'],
 })
 export class SchoolRetiredSearchComponent {
-  constructor(private router: Router) {}
+  form = this.fb.group({
+    userSearch: [],
+    userSelect: [],
+  });
+
+  selectUser = '';
+
+  constructor(private router: Router, private fb: FormBuilder) {}
 
   data: RetiredInfo[] = [];
+
+  onItemChange(userName: string) {
+    this.selectUser = userName;
+    //console.log('universityCode = ', universityCode);
+  }
+
   search() {
     this.data = data;
   }
@@ -23,6 +38,7 @@ export interface RetiredInfo {
   retiredRole: string;
   retiredName: string;
   retiredPhone: string;
+  value: number;
 }
 
 export const data: RetiredInfo[] = [
@@ -31,17 +47,20 @@ export const data: RetiredInfo[] = [
       'เจ้าหน้าที่ประสานงาน (รับรองปริญญาและประกาศนียบัตรทางการศึกษา)',
     retiredName: 'นาย พิชัย ชาญชัญ',
     retiredPhone: '081-9872676',
+    value: 1,
   },
   {
     retiredRole:
       'เจ้าหน้าที่ประสานงาน (รับรองปริญญาและประกาศนียบัตรทางการศึกษา)',
-    retiredName: 'นาย พิชัย ชาญชัญ',
+    retiredName: 'นาย พิโรธ ชาญชัญ',
     retiredPhone: '081-9872676',
+    value: 2,
   },
   {
     retiredRole:
       'เจ้าหน้าที่ประสานงาน (รับรองปริญญาและประกาศนียบัตรทางการศึกษา)',
-    retiredName: 'นาย พิชัย ชาญชัญ',
+    retiredName: 'นาย พิธา ชาญชัญ',
     retiredPhone: '081-9872676',
+    value: 3,
   },
 ];

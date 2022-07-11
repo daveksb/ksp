@@ -3,9 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RequestRewardDetailComponent } from './request-reward-detail/request-reward-detail.component';
 import { Route, RouterModule } from '@angular/router';
 import { SchoolContainerPageComponent } from '@ksp/school-service/feature/container-page';
-import { AddRowButtonComponent, RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import {
+  AddRowButtonComponent,
+  RequestHeaderInfoComponent,
+} from '@ksp/shared/ui';
 import { BottomNavComponent, TopNavComponent } from '@ksp/shared/menu';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export const routes: Route[] = [
   {
@@ -29,6 +33,7 @@ export const routes: Route[] = [
     SharedFormOthersModule,
     BottomNavComponent,
     AddRowButtonComponent,
+    ReactiveFormsModule,
   ],
   declarations: [RequestRewardDetailComponent],
   exports: [RequestRewardDetailComponent],

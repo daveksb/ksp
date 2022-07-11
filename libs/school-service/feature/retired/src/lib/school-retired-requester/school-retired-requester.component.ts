@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,7 +8,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./school-retired-requester.component.scss'],
 })
 export class SchoolRetiredRequesterComponent {
-  constructor(private router: Router) {}
+  form = this.fb.group({
+    retiredReason: [],
+    retiredDetail: [],
+  });
+
+  constructor(private router: Router, private fb: FormBuilder) {}
 
   userInfo = {
     university: 'วิทยาลัยอาชีวศึกษาชลบุรี',

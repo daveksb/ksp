@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -12,7 +13,15 @@ import {
   styleUrls: ['./school-retired-coordinator.component.scss'],
 })
 export class SchoolRetiredCoordinatorComponent {
-  constructor(private router: Router, public dialog: MatDialog) {}
+  form = this.fb.group({
+    retiredTnfo: [],
+  });
+
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private fb: FormBuilder
+  ) {}
 
   retiredFiles = ['หนังสือแต่งตั้งผู้ประสานงาน'];
 

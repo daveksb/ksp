@@ -82,6 +82,10 @@ add asterisk for required feild
   min-height: calc(100vh - var(--ksp-top-nav-height));
 }
 
+.full-height-2 {
+  min-height: calc(100vh - var(--ksp-top-nav-height) - 52px);
+}
+
 .full-width {
   max-width: calc(100vw - var(--ksp-sidenav-width));
 }

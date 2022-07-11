@@ -26,19 +26,8 @@
               disabled
             />
           </div>
-        </div>
-        <div class="row">
           <div class="col-6 mb-1">
-            <label class="form-label">รหัสหน่วยงาน / สถานศึกษา</label>
-            <input
-              class="form-control"
-              type="text"
-              placeholder="xxxxx"
-              disabled
-            />
-          </div>
-          <div class="col-6 mb-1">
-            <label class="form-label">ชื่อหน่วยงาน / สถานศึกษา</label>
+            <label class="form-label">หน่วยงาน/สถานศึกษา</label>
             <input
               class="form-control"
               type="text"
@@ -59,14 +48,17 @@
           </div>
         </div>
       </div>
+      <br />
+      <div class="mb-3">
+        <ksp-form-foreign-id
+          formControlName="foreignTeacher"
+          [formHeader]="'ข้อมูลครูชาวต่างชาติ'"
+        ></ksp-form-foreign-id>
+      </div>
       <hr />
-      <ksp-form-foreign-id
-        formControlName="foreignTeacher"
-        [formHeader]="'ข้อมูลครูชาวต่างชาติ'"
-      ></ksp-form-foreign-id>
-      <hr />
-      <div class="my-2">
+      <div class="mb-2 mt-3">
         <ksp-form-attachment
+          [title]="'กรุณาแนบหลักฐานประกอบการปฏิบัติงาน '"
           [groups]="foreignInfo"
           [mode]="mode"
         ></ksp-form-attachment>

@@ -53,8 +53,16 @@ export class SchoolTempLicenseListComponent {
     });
   }
 
-  nextPage2() {
-    this.router.navigate(['/foreign-id']);
+  foreignPage() {
+    this.router.navigate(['/', 'foreign-teacher', 'id-request']);
+  }
+
+  qualificationPage() {
+    this.router.navigate(['/', 'qualification-approve', 'detail']);
+  }
+
+  rewardPage() {
+    this.router.navigate(['/', 'request-reward', 'detail']);
   }
 }
 

@@ -1,6 +1,6 @@
 <form [formGroup]="form">
-  <div class="row row--first">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col-6 mb-3">
       <label class="form-label">สถาบันการศึกษา</label>
       <input
         class="form-control form-search"
@@ -9,7 +9,7 @@
       />
     </div>
 
-    <div class="mb-3">
+    <div class="col-6 mb-3">
       <label class="form-label">วุฒิปริญญาที่จบ</label>
       <input
         class="form-control form-search"
@@ -19,8 +19,8 @@
     </div>
   </div>
 
-  <div class="row row--second">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col-6 mb-3">
       <label class="form-label">สาขา/วิชาเอก</label>
       <input
         class="form-control form-search"
@@ -29,11 +29,12 @@
       />
     </div>
 
-    <div>
+    <div class="col-3">
       <label class="form-label">วันเดือนปี เข้าศึกษา</label>
       <input class="form-control" type="date" formControlName="admissionDate" />
     </div>
-    <div>
+
+    <div class="col-3">
       <label class="form-label">วันเดือนปี สำเร็จการศึกษา</label>
       <input class="form-control" type="date" formControlName="graduateDate" />
     </div>

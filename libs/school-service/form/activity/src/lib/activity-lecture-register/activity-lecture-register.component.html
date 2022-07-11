@@ -1,52 +1,32 @@
 <form [formGroup]="form">
-  <div class="row row--first">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col-6 mb-3">
       <label class="form-label">เรื่อง</label>
-      <input
-        class="form-control"
-        type="text"
-        formControlName="name"
-      />
+      <input class="form-control" type="text" formControlName="name" />
     </div>
   </div>
 
-  <div class="row row--first">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col mb-3">
       <label class="form-label">สถานที่</label>
-      <input
-        class="form-control"
-        type="text"
-        formControlName="address"
-      />
+      <input class="form-control" type="text" formControlName="address" />
     </div>
 
-    <div>
+    <div class="col mb-3">
       <label class="form-label">หน่วยงานที่จัด</label>
-      <input
-        class="form-control"
-        type="text"
-        formControlName="agency"
-      />
+      <input class="form-control" type="text" formControlName="agency" />
     </div>
   </div>
 
-  <div class="row row--first">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col mb-3">
       <label class="form-label">วันที่</label>
-      <input
-        class="form-control"
-        type="date"
-        formControlName="dateFrom"
-      />
+      <input class="form-control" type="date" formControlName="dateFrom" />
     </div>
 
-    <div>
+    <div class="col mb-3">
       <label class="form-label">ถึงวันที่</label>
-      <input
-        class="form-control"
-        type="date"
-        formControlName="dateTo"
-      />
+      <input class="form-control" type="date" formControlName="dateTo" />
     </div>
   </div>
 </form>
