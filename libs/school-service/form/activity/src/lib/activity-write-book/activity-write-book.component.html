@@ -1,38 +1,34 @@
 <form [formGroup]="form">
-  <div class="row row--first">
-    <div class="checkbox__container">
-      <input type="checkbox" class="checkbox" formControlName="isBookChecked" />
-      <label class="checkbox__label">ตำรา</label>
+  <div class="row">
+    <div class="col d-flex align-items-center mb-3">
+      <input type="checkbox" class="me-2" formControlName="isBookChecked" />
+      <label class="form-label">ตำรา</label>
     </div>
 
-    <div class="checkbox__container">
-      <input
-        type="checkbox"
-        class="checkbox"
-        formControlName="isArticleChecked"
-      />
-      <label class="checkbox__label">บทความ</label>
+    <div class="col d-flex align-items-center mb-3">
+      <input type="checkbox" class="me-2" formControlName="isArticleChecked" />
+      <label class="form-label">บทความ</label>
     </div>
   </div>
 
-  <div class="row row--first">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col mb-3">
       <label class="form-label">ชื่อ</label>
       <input class="form-control" type="text" formControlName="bookName" />
     </div>
-    <div class="mb-3">
+    <div class="col mb-3">
       <label class="form-label">เรื่อง</label>
       <input class="form-control" type="text" formControlName="articleName" />
     </div>
   </div>
 
-  <div class="row row--first">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col mb-3">
       <label class="form-label">สำนักพิมพ์</label>
       <input class="form-control" type="text" formControlName="bookPublisher" />
     </div>
 
-    <div class="mb-3">
+    <div class="col mb-3">
       <label class="form-label">เผยแพร่ในวารสาร/หนังสือ/เว็บไซต์</label>
       <input
         class="form-control"
@@ -42,8 +38,8 @@
     </div>
   </div>
 
-  <div class="row row--first">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col mb-3">
       <label class="form-label">พิมพ์เมื่อ</label>
       <input
         class="form-control"
@@ -52,7 +48,7 @@
       />
     </div>
 
-    <div class="mb-3">
+    <div class="col mb-3">
       <label class="form-label">สำนักพิมพ์</label>
       <input
         class="form-control"
@@ -62,17 +58,17 @@
     </div>
   </div>
 
-  <div class="row row--first">
-    <div class="checkbox__container">
+  <div class="row">
+    <div class="col d-flex align-items-center my-3">
       <input
         type="checkbox"
-        class="checkbox"
+        class="me-2"
         formControlName="isAchievementChecked"
       />
-      <label class="checkbox__label">ผลงานวิชาการ</label>
+      <label class="form-label">ผลงานวิชาการ</label>
     </div>
 
-    <div class="mb-3">
+    <div class="col mb-3">
       <label class="form-label">พิมพ์เมื่อ</label>
       <input
         class="form-control"
@@ -82,8 +78,8 @@
     </div>
   </div>
 
-  <div class="row row--first">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col-6 mb-3">
       <label class="form-label">เรื่อง</label>
       <input
         class="form-control"
@@ -93,8 +89,8 @@
     </div>
   </div>
 
-  <div class="row row--first">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col-6 mb-3">
       <label class="form-label">วันเดือนปีที่ใช้</label>
       <input
         class="form-control"

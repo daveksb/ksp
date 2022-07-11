@@ -5,198 +5,267 @@
   ></ksp-top-nav
 >
 
-<div class="bg-secondary bg-opacity-10 px-4 py-2">
-  <div class="box-header">
-    รายละเอียดใบคำขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One
-    Innovation : OSOI)
-  </div>
-  <div class="bg-white py-3 px-4">
-    <div>
-      <ksp-request-header-info
-        [requestDate]="'10 ตุลาคม 2565'"
-        [requestNumber]="'112234467876545'"
-      ></ksp-request-header-info>
-      <hr />
+<form [formGroup]="form">
+  <div class="bg-secondary bg-opacity-10 px-4 py-2">
+    <div class="box-header">
+      รายละเอียดใบคำขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One
+      Innovation : OSOI)
+    </div>
+    <div class="bg-white py-3 px-4">
+      <div>
+        <ksp-request-header-info
+          [requestDate]="'10 ตุลาคม 2565'"
+          [requestNumber]="'112234467876545'"
+        ></ksp-request-header-info>
+        <hr />
 
-      <div class="bg-white px-3 py-2">
-        <div class="box-header mb-2">ข้อมูลผลงานหนึ่งโรงเรียนหนึ่งนวัตกรรม</div>
-
-        <div class="row mb-2">
-          <div class="col">
-            <label class="form-label"
-              >ชื่อผลงานหนึ่งโรงเรียนหนึ่งนวัตกรรม</label
-            >
-            <textarea class="form-control" rows="3"></textarea>
+        <div class="bg-white px-3 py-2">
+          <div class="box-header mb-2">
+            ข้อมูลผลงานหนึ่งโรงเรียนหนึ่งนวัตกรรม
           </div>
-        </div>
 
-        <div class="row mb-3">
-          <div class="col-6">
-            <label class="form-label"
-              >ประเภทผลงานหนึ่งโรงเรียนหนึ่งนวัตกรรม</label
-            >
-            <select class="form-select" formControlName="licenseType">
-              <option value="null" selected hidden disabled>กรุณาเลือก</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="bg-light py-2 px-3 mb-3">
-          <div class="box-header">การส่งผลงานหนึ่งโรงเรียนหนึ่งนวัตกรรม</div>
-
-          <!--  <div>
-
-            <input type="radio" class="me-2" />
-            <label class="form-label"
-              >{{}}</label
-            >
-          </div> -->
-
-          <ng-container *ngFor="let item of rewards"
-            ><div class="d-flex flex-row align-items-center mb-2">
-              <input
-                type="radio"
-                value="{{ item.value }}"
-                name="{{ item.name }}"
-              />
-              <label class="form-label ms-2">{{ item.label }}</label>
+          <div class="row mb-2">
+            <div class="col">
+              <label class="form-label"
+                >ชื่อผลงานหนึ่งโรงเรียนหนึ่งนวัตกรรม</label
+              >
+              <textarea
+                class="form-control"
+                rows="3"
+                formControlName="workName"
+              ></textarea>
             </div>
-          </ng-container>
-          <!--
-          <div>
-            <input type="radio" class="me-2" />
-            <label class="form-label"
-              >เคยส่งเข้ารับการคัดสรรกับคุรุสภา
-              แต่ไม่ได้รับรางวัลของคุรุสภา</label
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-6">
+              <label class="form-label"
+                >ประเภทผลงานหนึ่งโรงเรียนหนึ่งนวัตกรรม</label
+              >
+              <select class="form-select" formControlName="workType">
+                <option value="null" selected hidden disabled>
+                  กรุณาเลือก
+                </option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="bg-light py-2 px-3 mb-3">
+            <div class="box-header">การส่งผลงานหนึ่งโรงเรียนหนึ่งนวัตกรรม</div>
+
+            <ng-container *ngFor="let item of rewards"
+              ><div class="d-flex flex-row align-items-center mb-2">
+                <input
+                  formControlName="workSubmit"
+                  type="radio"
+                  value="{{ item.value }}"
+                />
+                <label class="form-label ms-2">{{ item.label }}</label>
+              </div>
+            </ng-container>
+          </div>
+
+          <div class="box-header mb-3">ผู้ร่วมพัฒนาผลงานนวัตกรรม</div>
+          <div class="form-label text-black">ผู้บริหารสถานศึกษา</div>
+          <div class="mb-3">
+            <table class="table table-responsive">
+              <thead class="header__table">
+                <tr>
+                  <th scope="col">ลำดับ</th>
+                  <th scope="col">เลขบัตรประจำตัวประชาชน</th>
+                  <th scope="col" colspan="3" class="text-center">
+                    ชื่อ-นามสกุล (ภาษาไทย)
+                  </th>
+                  <th scope="col">เบอร์โทรศัพท์มือถือ</th>
+                  <th scope="col">อีเมล</th>
+                  <th scope="col">วิทยฐานะ</th>
+                </tr>
+              </thead>
+              <tbody class="body__table">
+                <tr>
+                  <td class="text-center">1</td>
+                  <td>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="personId"
+                    />
+                  </td>
+                  <td style="width: 125px">
+                    <select class="form-select" formControlName="prefix">
+                      <option value="null" selected hidden disabled>
+                        เลือก
+                      </option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select>
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="firstName"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="lastName"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="phone"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="email"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="academicStanding"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="form-label text-black">คณะผู้ร่วมพัฒนาผลงานนวัตกรรม</div>
+          <div class="mb-3">
+            <table class="table table-responsive">
+              <thead class="header__table">
+                <tr>
+                  <th scope="col">ลำดับ</th>
+                  <th scope="col">ประเภทผู้ร่วมพัฒนา</th>
+                  <th scope="col">เลขบัตรประจำตัวประชาชน</th>
+                  <th scope="col" colspan="3" class="text-center">
+                    ชื่อ-นามสกุล (ภาษาไทย)
+                  </th>
+                  <th scope="col">เบอร์โทรศัพท์มือถือ</th>
+                  <th scope="col">อีเมล</th>
+                  <th scope="col">วิทยฐานะ</th>
+                </tr>
+              </thead>
+              <tbody class="body__table">
+                <ng-container formArrayName="rows">
+                  <ng-container
+                    *ngFor="let row of rows.controls; let i = index"
+                  >
+                    <tr [formGroupName]="i">
+                      <td class="text-center">{{ i + 1 }}</td>
+                      <td style="width: 125px">
+                        <select
+                          class="form-select"
+                          formControlName="developerType"
+                        >
+                          <option value="null" selected hidden disabled>
+                            กรุณาเลือก
+                          </option>
+                          <option value="1">One</option>
+                          <option value="2">Two</option>
+                          <option value="3">Three</option>
+                        </select>
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="personId"
+                        />
+                      </td>
+                      <td style="width: 125px">
+                        <select class="form-select" formControlName="prefix">
+                          <option value="null" selected hidden disabled>
+                            เลือก
+                          </option>
+                          <option value="1">One</option>
+                          <option value="2">Two</option>
+                          <option value="3">Three</option>
+                        </select>
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="firstName"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="lastName"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="phone"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="email"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="academicStanding"
+                        />
+                      </td>
+                    </tr>
+                  </ng-container>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mb-3">
+            <ksp-add-row-button
+              class="blue"
+              (addRowClick)="addRow()"
+              *ngIf="rows.length < 5"
+              >เพิ่มรายชื่อ</ksp-add-row-button
             >
           </div>
 
+          <div class="mb-3">
+            <ksp-form-attachment
+              title="กรุณาแนบหลักฐาน "
+              [groups]="rewardFiles"
+            ></ksp-form-attachment>
+          </div>
+
+          <div class="box-header text-primary">VDO ประกอบการขอรางวัล</div>
           <div>
-            <input type="radio" class="me-2" />
-            <label class="form-label"
-              >ได้รับรางวัลของคุรุสภา แต่มีการพัฒนาต่อยอดนวัตกรรม</label
-            >
-          </div> -->
+            ลิงค์ (youtube) หรือ
+            <a href="https://www.google.co.th/drive">กดที่นี่</a>
+            เพื่อวางไฟล์ผ่าน Google Drive ที่กำหนด
+          </div>
+          <input class="form-control" type="url" formControlName="rewardLink" />
         </div>
-
-        <div class="box-header mb-3">ผู้ร่วมพัฒนาผลงานนวัตกรรม</div>
-        <div class="form-label text-black">ผู้บริหารสถานศึกษา</div>
-        <div class="mb-3">
-          <table class="table table-responsive">
-            <thead class="header__table">
-              <tr>
-                <th scope="col">ลำดับ</th>
-                <th scope="col">เลขบัตรประจำตัวประชาชน</th>
-                <th scope="col" colspan="3" class="text-center">
-                  ชื่อ-นามสกุล (ภาษาไทย)
-                </th>
-                <th scope="col">เบอร์โทรศัพท์มือถือ</th>
-                <th scope="col">อีเมล</th>
-                <th scope="col">วิทยฐานะ</th>
-              </tr>
-            </thead>
-            <tbody class="body__table">
-              <tr>
-                <td class="text-center">1</td>
-                <td><input type="text" class="form-control" /></td>
-                <td style="width: 125px">
-                  <select class="form-select">
-                    <option value="null" selected hidden disabled>เลือก</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                </td>
-                <td><input type="text" class="form-control" /></td>
-                <td><input type="text" class="form-control" /></td>
-                <td>
-                  <input type="text" class="form-control" />
-                </td>
-                <td><input type="text" class="form-control" /></td>
-                <td>
-                  <input type="text" class="form-control" />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="form-label text-black">คณะผู้ร่วมพัฒนาผลงานนวัตกรรม</div>
-        <div class="mb-3">
-          <table class="table table-responsive">
-            <thead class="header__table">
-              <tr>
-                <th scope="col">ลำดับ</th>
-                <th scope="col">ประเภทผู้ร่วมพัฒนา</th>
-                <th scope="col">เลขบัตรประจำตัวประชาชน</th>
-                <th scope="col" colspan="3" class="text-center">
-                  ชื่อ-นามสกุล (ภาษาไทย)
-                </th>
-                <th scope="col">เบอร์โทรศัพท์มือถือ</th>
-                <th scope="col">อีเมล</th>
-                <th scope="col">วิทยฐานะ</th>
-              </tr>
-            </thead>
-            <tbody class="body__table">
-              <tr>
-                <td class="text-center">1</td>
-                <td style="width: 125px">
-                  <select class="form-select">
-                    <option value="null" selected hidden disabled>
-                      กรุณาเลือก
-                    </option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                </td>
-                <td><input type="text" class="form-control" /></td>
-                <td style="width: 125px">
-                  <select class="form-select">
-                    <option value="null" selected hidden disabled>เลือก</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                </td>
-                <td><input type="text" class="form-control" /></td>
-                <td><input type="text" class="form-control" /></td>
-                <td>
-                  <input type="text" class="form-control" />
-                </td>
-                <td><input type="text" class="form-control" /></td>
-                <td>
-                  <input type="text" class="form-control" />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="mb-3">
-          <ksp-add-row-button class="blue">เพิ่มรายชื่อ</ksp-add-row-button>
-        </div>
-
-        <div class="mb-3">
-          <ksp-form-attachment
-            title="กรุณาแนบหลักฐาน "
-            [groups]="rewardFiles"
-          ></ksp-form-attachment>
-        </div>
-
-        <div class="box-header text-primary">VDO ประกอบการขอรางวัล</div>
-        <div>
-          ลิงค์ (youtube) หรือ
-          <a href="https://www.google.co.th/drive/about.html">กดที่นี่</a>
-          เพื่อวางไฟล์ผ่าน Google Drive ที่กำหนด
-        </div>
-        <input class="form-control" type="url" />
       </div>
     </div>
   </div>
-</div>
+</form>
 
 <div class="sticky-bottom border">
   <ksp-bottom-nav

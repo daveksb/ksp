@@ -5,84 +5,103 @@
   ></ksp-top-nav
 >
 
-<div class="bg-secondary bg-opacity-10 px-4 py-2">
-  <div class="box-header">
-    รายละเอียดใบคำขอรับรองคุณวุฒิการศึกษาเพื่อใช้ในการขอรับใบอนุญาตประกอบวิชาชีพ
-  </div>
-  <div class="bg-white py-3 px-4">
-    <div>
-      <ksp-request-header-info
-        [requestDate]="'10 ตุลาคม 2565'"
-        [requestNumber]="'112234467876545'"
-      ></ksp-request-header-info>
-      <hr />
+<form [formGroup]="form">
+  <div class="bg-secondary bg-opacity-10 px-4 py-2">
+    <div class="box-header">
+      รายละเอียดใบคำขอรับรองคุณวุฒิการศึกษาเพื่อใช้ในการขอรับใบอนุญาตประกอบวิชาชีพ
+    </div>
+    <div class="bg-white py-3 px-4">
+      <div>
+        <ksp-request-header-info
+          [requestDate]="'10 ตุลาคม 2565'"
+          [requestNumber]="'112234467876545'"
+        ></ksp-request-header-info>
+        <hr />
 
-      <div class="bg-light px-3 py-2 default-width">
-        <div class="box-header text-primary">ค้นหารายการ</div>
+        <div class="bg-light px-3 py-2 default-width">
+          <div class="box-header text-primary">ค้นหารายการ</div>
 
-        <div class="row mb-3">
-          <div class="col-5">
-            <label class="form-label">หมายเลขบัตรประชาชน</label>
-            <input
-              class="form-control"
-              type="text"
-              placeholder="หมายเลขบัตรประชาชนจำนวน 13 หลัก"
-            />
+          <div class="row mb-3">
+            <div class="col-5">
+              <label class="form-label">หมายเลขบัตรประชาชน</label>
+              <input
+                class="form-control"
+                type="text"
+                placeholder="หมายเลขบัตรประชาชนจำนวน 13 หลัก"
+                formControlName="personId"
+              />
+            </div>
           </div>
+          <ksp-form-user-info
+            [isDarkMode]="false"
+            formControlName="searchUserInfo"
+          ></ksp-form-user-info>
         </div>
-        <ksp-form-user-info [isDarkMode]="false"></ksp-form-user-info>
+      </div>
+
+      <div class="full-width pb-2">
+        <mat-tab-group class="tab-group mt-3" selectedIndex="0">
+          <mat-tab label="ที่อยู่" class="tab-content">
+            <ksp-form-address formControlName="address1"
+              >ที่อยู่ทะเบียนบ้าน</ksp-form-address
+            ><br />
+            <ksp-form-address formControlName="address2"
+              >ที่อยู่ที่ติดต่อได้สะดวก
+              <div class="d-flex align-items-center">
+                <input
+                  type="checkbox"
+                  class="me-2"
+                  (change)="useSameAddress($event)"
+                />
+                <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
+              </div>
+            </ksp-form-address>
+          </mat-tab>
+
+          <mat-tab label="ข้อมูลทางการศึกษา">
+            <ksp-form-education-info
+              formControlName="education1"
+              [defualtDegree]="1"
+              [disabled]="true"
+              ><input
+                type="checkbox"
+                class="me-2"
+              />วุฒิการศึกษา</ksp-form-education-info
+            ><br />
+            <ksp-form-education-info
+              formControlName="education2"
+              [defualtDegree]="2"
+              [showGradeInput]="false"
+              ><input
+                type="checkbox"
+                class="me-2"
+              />วุฒิการศึกษา </ksp-form-education-info
+            ><br />
+            <ksp-form-education-info
+              formControlName="education3"
+              [defualtDegree]="3"
+              [showGradeInput]="false"
+              ><input
+                type="checkbox"
+                class="me-2"
+              />วุฒิการศึกษา </ksp-form-education-info
+            ><br />
+            <ksp-form-education-info
+              formControlName="education4"
+              [defualtDegree]="4"
+              [showGradeInput]="false"
+              ><input type="checkbox" class="me-2" />วุฒิการศึกษา
+            </ksp-form-education-info>
+          </mat-tab>
+
+          <mat-tab label="เอกสารหลักฐานประกอบ">
+            <ksp-form-attachment [groups]="evidenceFiles"></ksp-form-attachment>
+          </mat-tab>
+        </mat-tab-group>
       </div>
     </div>
-
-    <div class="full-width pb-2">
-      <mat-tab-group class="tab-group mt-3" selectedIndex="0">
-        <mat-tab label="ที่อยู่" class="tab-content">
-          <ksp-form-address>ที่อยู่ทะเบียนบ้าน</ksp-form-address><br />
-          <ksp-form-address
-            >ที่อยู่ที่ติดต่อได้สะดวก
-            <div class="d-flex align-items-center">
-              <input type="checkbox" class="me-2" />
-              <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
-            </div>
-          </ksp-form-address>
-
-          <!-- <div class="text-danger">
-            *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
-            โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
-          </div> -->
-        </mat-tab>
-
-        <mat-tab label="ข้อมูลทางการศึกษา">
-          <ksp-form-education-info [defualtDegree]="1"
-            ><input
-              type="checkbox"
-              class="me-2"
-            />วุฒิการศึกษา</ksp-form-education-info
-          ><br />
-          <ksp-form-education-info [defualtDegree]="2" [showGradeInput]="false"
-            ><input
-              type="checkbox"
-              class="me-2"
-            />วุฒิการศึกษา </ksp-form-education-info
-          ><br />
-          <ksp-form-education-info [defualtDegree]="3" [showGradeInput]="false"
-            ><input
-              type="checkbox"
-              class="me-2"
-            />วุฒิการศึกษา </ksp-form-education-info
-          ><br />
-          <ksp-form-education-info [defualtDegree]="4" [showGradeInput]="false"
-            ><input type="checkbox" class="me-2" />วุฒิการศึกษา
-          </ksp-form-education-info>
-        </mat-tab>
-
-        <mat-tab label="เอกสารหลักฐานประกอบ">
-          <ksp-form-attachment [groups]="evidenceFiles"></ksp-form-attachment>
-        </mat-tab>
-      </mat-tab-group>
-    </div>
   </div>
-</div>
+</form>
 
 <div class="sticky-bottom border">
   <ksp-bottom-nav
@@ -92,6 +111,6 @@
     [showCenterButtons]="true"
     [showCancelButton]="true"
     [showSaveButton]="true"
-    (saveClicked)="save()"
+    (saveClicked)="onSave()"
   ></ksp-bottom-nav>
 </div>

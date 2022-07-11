@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -11,7 +12,22 @@ import {
   templateUrl: './request-reward-detail.component.html',
   styleUrls: ['./request-reward-detail.component.scss'],
 })
-export class RequestRewardDetailComponent {
+export class RequestRewardDetailComponent implements OnInit {
+  form = this.fb.group({
+    workName: [],
+    workType: [],
+    workSubmit: [],
+    rewardLink: [],
+    personId: [''],
+    prefix: [null],
+    firstName: [''],
+    lastName: [''],
+    phone: [''],
+    email: [''],
+    academicStanding: [''],
+    rows: this.fb.array([]),
+  });
+
   rewardFiles = [
     'แบบ นร. 1',
     'แบบ นร.2',
@@ -21,7 +37,34 @@ export class RequestRewardDetailComponent {
 
   rewards = rewards;
 
-  constructor(private router: Router, public dialog: MatDialog) {}
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private fb: FormBuilder
+  ) {}
+
+  ngOnInit(): void {
+    this.addRow();
+  }
+
+  get rows() {
+    return this.form.controls['rows'] as FormArray;
+  }
+
+  addRow() {
+    const rewardForm = this.fb.group({
+      developerType: [null],
+      personId: [''],
+      prefix: [null],
+      firstName: [''],
+      lastName: [''],
+      phone: [''],
+      email: [''],
+      academicStanding: [''],
+    });
+
+    this.rows.push(rewardForm);
+  }
 
   cancel() {
     this.router.navigate(['/', 'temp-license', 'list']);
@@ -60,15 +103,13 @@ export class RequestRewardDetailComponent {
 }
 
 export const rewards = [
-  { label: 'ไม่เคยส่งเข้ารับการคัดสรรกับคุรุสภา', name: 'reward', value: 1 },
+  { label: 'ไม่เคยส่งเข้ารับการคัดสรรกับคุรุสภา', value: 1 },
   {
-    label: 'เคยส่งเข้ารับการคัดสรรกับคุรุสภาแต่ไม่ได้รับรางวัลของคุรุสภา',
-    name: 'reward',
+    label: 'เคยส่งเข้ารับการคัดสรรกับคุรุสภา แต่ไม่ได้รับรางวัลของคุรุสภา',
     value: 2,
   },
   {
     label: 'ได้รับรางวัลของคุรุสภา แต่มีการพัฒนาต่อยอดนวัตกรรม',
-    name: 'reward',
     value: 3,
   },
 ];

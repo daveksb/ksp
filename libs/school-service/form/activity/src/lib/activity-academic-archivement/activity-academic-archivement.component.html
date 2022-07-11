@@ -1,32 +1,28 @@
 <form [formGroup]="form">
-  <div class="row row--first">
-    <div class="checkbox__container">
-      <input
-        type="checkbox"
-        class="checkbox"
-        formControlName="isAcademicChecked"
-      />
-      <label class="checkbox__label">เลื่อนวิทยฐานะ</label>
+  <div class="row">
+    <div class="col d-flex align-items-center mb-3">
+      <input type="checkbox" class="me-2" formControlName="isAcademicChecked" />
+      <label class="form-label">เลื่อนวิทยฐานะ</label>
     </div>
 
-    <div class="checkbox__container">
+    <div class="col d-flex align-items-center mb-3">
       <input
         type="checkbox"
-        class="checkbox"
+        class="me-2"
         formControlName="isPendingAcademicChecked"
       />
-      <label class="checkbox__label"
+      <label class="form-label"
         >อยู่ระหว่างการพิจารณาประเมินให้มีหรือเลื่อนวิทยฐานะ</label
       >
     </div>
   </div>
 
-  <div class="row row--first">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col mb-3">
       <label class="form-label">จาก</label>
       <input class="form-control" type="text" formControlName="oldAcademic" />
     </div>
-    <div class="mb-3">
+    <div class="col mb-3">
       <label class="form-label">จาก</label>
       <input
         class="form-control"
@@ -36,13 +32,13 @@
     </div>
   </div>
 
-  <div class="row row--first">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col mb-3">
       <label class="form-label">เป็น</label>
       <input class="form-control" type="text" formControlName="newAcademic" />
     </div>
 
-    <div class="mb-3">
+    <div class="col mb-3">
       <label class="form-label">เป็น</label>
       <input
         class="form-control"
@@ -52,19 +48,19 @@
     </div>
   </div>
 
-  <div class="row row--second">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col mb-3">
       <label class="form-label">ตามคำสั่ง</label>
       <input class="form-control" type="text" formControlName="orderName" />
     </div>
-    <div class="mb-3">
+    <div class="col mb-3">
       <label class="form-label">ที่</label>
       <input class="form-control" type="text" formControlName="orderNumber" />
     </div>
   </div>
 
-  <div class="row row--first">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col-6 mb-3">
       <label class="form-label">ลงวันที่</label>
       <input class="form-control" type="date" formControlName="orderDate" />
     </div>

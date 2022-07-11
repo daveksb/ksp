@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -15,7 +16,18 @@ import {
   templateUrl: './qualification-detail.component.html',
   styleUrls: ['./qualification-detail.component.scss'],
 })
-export class QualificationDetailComponent {
+export class QualificationDetailComponent implements OnInit {
+  form = this.fb.group({
+    personId: [],
+    searchUserInfo: [],
+    address1: [],
+    address2: [],
+    education1: [],
+    education2: [],
+    education3: [],
+    education4: [],
+  });
+
   evidenceFiles = [
     'หนังสือนำส่งจากหน่วยงานผู้ใช้',
     'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
@@ -27,9 +39,22 @@ export class QualificationDetailComponent {
     'เอกสารอื่นๆ',
   ];
 
-  constructor(public dialog: MatDialog, private router: Router) {}
+  ngOnInit(): void {}
 
-  save() {
+  constructor(
+    public dialog: MatDialog,
+    private router: Router,
+    private fb: FormBuilder
+  ) {}
+
+  useSameAddress(evt: any) {
+    const checked = evt.target.checked;
+    if (checked) {
+      this.form.controls.address2.patchValue(this.form.controls.address1.value);
+    }
+  }
+
+  onSave() {
     const confirmDialog = this.dialog.open(
       QualificationApproveDetailComponent,
       {
