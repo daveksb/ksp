@@ -1,9 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { providerFactory } from '@ksp/shared/utility';
+import {
+  phonePattern,
+  providerFactory,
+  validatorMessages,
+} from '@ksp/shared/utility';
 
 @UntilDestroy()
 @Component({
@@ -15,6 +19,8 @@ import { providerFactory } from '@ksp/shared/utility';
   providers: providerFactory(FormCoordinatorInfoComponent),
 })
 export class FormCoordinatorInfoComponent extends KspFormBaseComponent {
+  validatorMessages = validatorMessages;
+
   override form = this.fb.group({
     prefixTh: [],
     nameTh: [],
@@ -24,8 +30,8 @@ export class FormCoordinatorInfoComponent extends KspFormBaseComponent {
     lastnameEn: [],
     post: [],
     workplacePhone: [],
-    contactPhone: [],
-    email: [],
+    contactPhone: [null, [Validators.pattern(phonePattern)]],
+    email: ['', [Validators.email]],
   });
 
   @Input() isGrayMode = true;
@@ -39,5 +45,13 @@ export class FormCoordinatorInfoComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+
+  get email() {
+    return this.form.controls.email;
+  }
+
+  get contactPhone() {
+    return this.form.controls.contactPhone;
   }
 }

@@ -83,10 +83,24 @@
           type="text"
           formControlName="contactPhone"
         />
+        <ng-container
+          *ngIf="
+            contactPhone.invalid && (contactPhone.dirty || contactPhone.touched)
+          "
+        >
+          <span class="text-danger" *ngIf="contactPhone.errors?.['pattern']"
+            >{{ validatorMessages.phone }}
+          </span>
+        </ng-container>
       </div>
       <div class="col">
         <label class="form-label">อีเมล</label>
         <input class="form-control" type="text" formControlName="email" />
+        <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
+          <span class="text-danger" *ngIf="email.errors?.['email']">{{
+            validatorMessages.email
+          }}</span>
+        </ng-container>
       </div>
     </div>
   </div>
