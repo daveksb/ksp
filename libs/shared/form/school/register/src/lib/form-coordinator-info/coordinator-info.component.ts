@@ -22,16 +22,16 @@ export class FormCoordinatorInfoComponent extends KspFormBaseComponent {
   validatorMessages = validatorMessages;
 
   override form = this.fb.group({
-    prefixTh: [],
-    nameTh: [],
-    lastnameTh: [],
-    prefixEn: [],
-    nameEn: [],
-    lastnameEn: [],
-    post: [],
-    workplacePhone: [],
-    contactPhone: [null, [Validators.pattern(phonePattern)]],
-    email: ['', [Validators.email]],
+    prefixTh: [''],
+    firstnameTh: ['', Validators.pattern('^[ก-๏/s]+$')],
+    lastnameTh: ['', Validators.pattern('^[ก-๏/s]+$')],
+    prefixEn: [''],
+    firstnameEn: ['', Validators.pattern('^[a-zA-Z/s]+$')],
+    lastnameEn: ['', Validators.pattern('^[a-zA-Z/s]+$')],
+    post: [''],
+    workplacePhone: [null, Validators.pattern(phonePattern)],
+    contactPhone: [null, Validators.pattern(phonePattern)],
+    email: ['', Validators.email],
   });
 
   @Input() isGrayMode = true;
@@ -47,8 +47,28 @@ export class FormCoordinatorInfoComponent extends KspFormBaseComponent {
     );
   }
 
+  get firstnameTh() {
+    return this.form.controls.firstnameTh;
+  }
+
+  get lastnameTh() {
+    return this.form.controls.lastnameTh;
+  }
+
+  get firstnameEn() {
+    return this.form.controls.firstnameEn;
+  }
+
+  get lastnameEn() {
+    return this.form.controls.lastnameEn;
+  }
+
   get email() {
     return this.form.controls.email;
+  }
+
+  get workplacePhone() {
+    return this.form.controls.workplacePhone;
   }
 
   get contactPhone() {

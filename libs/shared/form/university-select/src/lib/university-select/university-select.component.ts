@@ -39,6 +39,7 @@ export class UniversitySelectComponent extends KspFormBaseComponent {
   search() {
     const dialog = this.dialog.open(UniversitySearchComponent, {
       width: '1200px',
+      height: '100vh',
       position: {
         top: '0px',
         right: '0px',
