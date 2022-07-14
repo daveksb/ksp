@@ -18,6 +18,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 export class UniversitySelectComponent extends KspFormBaseComponent {
   @Input() label1 = 'สังกัด';
   @Input() label2 = 'โรงเรียน / สถานศึกษา';
+  @Input() searchType = '';
   @Output() selectedUniversity = new EventEmitter<string>();
 
   override form = this.fb.group({
@@ -43,6 +44,9 @@ export class UniversitySelectComponent extends KspFormBaseComponent {
       position: {
         top: '0px',
         right: '0px',
+      },
+      data: {
+        searchType: this.searchType,
       },
     });
 

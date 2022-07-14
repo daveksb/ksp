@@ -64,6 +64,14 @@ export const menu: MenuConfig[] = [
         path: 'graduate',
         label: 'ขอยื่นรายชื่อผู้สำเร็จการศึกษา',
       },
+      {
+        path: 'edit-degree',
+        label: 'ขอเปลี่ยนแปลงรายละเอียดปริญญาและประกาศนียบัตร',
+      },
+      {
+        path: 'edit-student',
+        label: 'ขอเปลี่ยนแปลงรายละเอียดรายชื่อผู้เข้าและผู้สำเร็จการศึกษา',
+      },
     ],
     subMenuName: 'license',
     isExpanded: false,

@@ -8,7 +8,11 @@
   [style.height]="'calc(100vh - var(--ksp-top-nav-height))'"
 >
   <div class="bg-white p-3" style="max-width: 1200px">
-    <ksp-degree-search (clear)="clear()" (search)="search()">
+    <ksp-degree-search
+      (clear)="clear()"
+      (search)="search()"
+      [showSubmitDateInput]="true"
+    >
       <span class="fs-4"> ค้นหา </span>
     </ksp-degree-search>
   </div>

@@ -42,13 +42,10 @@ export class DegreeCertStepOneComponent
     institutionsCode: [],
     institutionsName: [],
     provience: [],
-
     degreeType: [],
     degreeTypeForm: [],
-
-    courseType: [],
+    courseType: [null],
     courseTypeForm: [],
-
     locations: this.fb.array([]),
     institutions: this.fb.array([]),
     locations2: this.fb.array([]),

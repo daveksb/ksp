@@ -1,11 +1,11 @@
 <form [formGroup]="form">
   <div class="bg-light mt-3 px-4 py-2">
-    <div class="box-header text-primary">
+    <div class="box-header text-primary mb-1">
       ข้อมูลผู้ขอรหัสสำหรับเข้าใช้งานระบบ (ผู้ประสานงาน/ผู้รับผิดชอบ)
     </div>
 
     <div class="row">
-      <div class="col-6">
+      <div class="col-6 mb-3">
         <label class="form-label">สิทธิสำหรับการเข้าใช้งาน</label>
         <select class="form-select" formControlName="grant">
           <option selected>กรุณาเลือก</option>
@@ -20,7 +20,7 @@
     </div>
 
     <div class="row">
-      <div class="col-5">
+      <div class="col-5 mb-3">
         <label class="form-label">หมายเลขบัตรประชาชน</label>
         <input
           class="form-control"
@@ -106,7 +106,7 @@
         <input
           class="form-control"
           type="text"
-          placeholder="อืนๆ โปรดระบุ"
+          placeholder="อื่นๆ โปรดระบุ"
           formControlName="other"
         />
       </div>
@@ -115,7 +115,11 @@
     <div class="row mb-3">
       <div class="col">
         <label class="form-label">สังกัด</label>
-        <input class="form-control" type="text" formControlName="affiliation" />
+        <input
+          class="form-control form-search"
+          type="text"
+          formControlName="affiliation"
+        />
       </div>
       <div class="col">
         <label class="form-label">เบอร์โทรศัพท์ (ที่ทำงาน)</label>

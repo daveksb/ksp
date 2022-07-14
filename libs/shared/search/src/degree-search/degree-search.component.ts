@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
@@ -16,16 +16,18 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 })
 export class DegreeSearchComponent extends KspFormBaseComponent {
   override form = this.fb.group({
-    institution: [],
-    affiliation: [],
+    institution: [''],
+    affiliation: [''],
     degreeCode: [],
     degreeName: [],
-    degreeLvel: [],
+    degreeLevel: [''],
     openYear: [],
     requestNumber: [],
     requestsubmitDate: [],
   });
 
+  @Input() showApproveDateInput = false;
+  @Input() showSubmitDateInput = false;
   @Output() clear = new EventEmitter<boolean>();
   @Output() search = new EventEmitter<boolean>();
 

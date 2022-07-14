@@ -11,9 +11,13 @@
   </div>
   <hr />
   <div class="box__detail">
-    <div class="fs-5">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
+    <div class="box-header text-primary">
+      {{ data.subHeader || 'กรุณาเลือกสถาบันที่ท่านสังกัด' }}
+    </div>
 
-    <ksp-basic-institute-search></ksp-basic-institute-search>
+    <ksp-basic-institute-search
+      [searchType]="data.searchType"
+    ></ksp-basic-institute-search>
 
     <div class="row mb-2">
       <div class="col">
@@ -60,17 +64,21 @@
           <tr>
             <th scope="col">เลือก</th>
             <th scope="col">
-              รหัส{{ searchType === 'uni' ? 'มหาวิทยาลัย' : 'โรงเรียน' }}
+              {{
+                data.searchType === 'uni' ? 'รหัสมหาวิทยาลัย' : 'รหัสโรงเรียน'
+              }}
             </th>
             <th scope="col">
-              ชื่อ{{ searchType === 'uni' ? 'มหาวิทยาลัย' : 'โรงเรียน' }}
+              {{
+                data.searchType === 'uni' ? 'ชื่อมหาวิทยาลัย' : 'ชื่อโรงเรียน'
+              }}
             </th>
             <th scope="col">ที่อยู่</th>
             <th scope="col">สังกัด</th>
           </tr>
         </thead>
         <tbody class="body__table">
-          <tr *ngFor="let item of data">
+          <tr *ngFor="let item of Data">
             <th scope="row" class="body__detail">
               <div>
                 <input

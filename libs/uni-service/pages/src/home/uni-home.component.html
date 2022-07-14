@@ -9,13 +9,14 @@
       <ksp-degree-search
         (clear)="clear()"
         (search)="search()"
+        [showApproveDateInput]="true"
         formControlName="homeSearch"
       >
-        <span class="fs-4"> ค้นหาข้อมูล/ หลักสูตรที่ต้องการ </span>
+        <span class="box-header"> ค้นหาข้อมูล/ หลักสูตรที่ต้องการ </span>
       </ksp-degree-search>
     </div>
-
-    <div class="fs-5 mt-2">ข้อมูลรับรองปริญญาและประกาศนียบัตร</div>
+    <br />
+    <div class="box-header">ข้อมูลรับรองปริญญาและประกาศนียบัตร</div>
 
     <div class="bg-white p-3">
       <table mat-table [dataSource]="dataSource">

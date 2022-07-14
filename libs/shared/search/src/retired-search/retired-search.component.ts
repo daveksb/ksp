@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -23,6 +23,7 @@ export class RetiredSearchComponent extends KspFormBaseComponent {
     phone: [],
   });
 
+  @Input() searchType = '';
   @Output() clear = new EventEmitter();
   @Output() search = new EventEmitter();
 

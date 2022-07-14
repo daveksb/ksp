@@ -19,7 +19,11 @@
           [LabelSecond]="'ข้อมูลผู้แต่งตั้งผู้ประสานงาน/ผู้รับผิดชอบ'"
         ></ksp-stepper-nav>
 
-        <ksp-university-select></ksp-university-select>
+        <ksp-university-select
+          [label1]="'สถาบัน / มหาวิทยาลัย'"
+          [label2]="'กลุ่มสถาบัน'"
+          [searchType]="'uni'"
+        ></ksp-university-select>
 
         <uni-form-register-requester
           formControlName="requester"

@@ -23,7 +23,7 @@ export class UniRegisterCoordinatorComponent {
     private fb: FormBuilder
   ) {}
 
-  registerFiles = ['หนังสือแต่งตั้งผู้ประสานงาน', 'สำเนาบัตรประชาชน'];
+  registerFiles = ['หนังสือแต่งตั้งผู้ประสานงาน'];
 
   search() {
     const dialogRef = this.dialog.open(UniversitySearchComponent, {
@@ -50,6 +50,7 @@ export class UniRegisterCoordinatorComponent {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
         subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
         ใช่หรือไม่`,
+        btnLabel: 'บันทึก',
       },
     });
 
@@ -68,7 +69,7 @@ export class UniRegisterCoordinatorComponent {
         content: `วันที่ : 10 ตุลาคม 2565
         เลขที่ใบคำขอ : 12234467876543 `,
         subContent: `กรุณาตรวจสอบสถานะใบคำขอหรือรหัสเข้าใช้งาน
-          ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วัน`,
+        ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },
     });
 

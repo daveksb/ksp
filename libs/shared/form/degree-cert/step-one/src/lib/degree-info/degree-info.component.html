@@ -6,7 +6,8 @@
     <div class="row row--1">
       <div>
         <label class="form-label"
-          >ระดับปริญญาที่เสนอขอรับรอง<span class="warn__text"
+          >ระดับปริญญาที่เสนอขอรับรอง
+          <span class="fs-6 text-danger"
             >*เลือกข้อมูลของท่านได้เพียง 1 ข้อเท่านั้น</span
           ></label
         >
@@ -14,6 +15,7 @@
           formControlName="degreeType"
           class="search__content form-select"
         >
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let item of degreeTypes" [value]="item.value">
             {{ item.label }}
           </option>
@@ -23,17 +25,13 @@
     <div class="row row--2">
       <div>
         <label class="form-label">ปีของหลักสูตร</label>
-        <input
-          formControlName="courseYear"
-          class="form-control"
-          type="number"
-        />
+        <input formControlName="courseYear" class="form-control" type="text" />
       </div>
       <div>
         <label class="form-label"
-          >ชื่อหลักสูตรที่เสนอขอรับรอง<span class="warn__text"
-            >*กรุณาระบุชื่อหลักสูตรตามที่ปรากฏบนหน้าปก มคอ.2</span
-          ></label
+          >ชื่อหลักสูตรที่เสนอขอรับรอง<span class="fs-6 text-danger">
+            *กรุณาระบุชื่อหลักสูตรตามที่ปรากฏบนหน้าปก มคอ.2
+          </span></label
         >
         <input
           formControlName="courseName"
