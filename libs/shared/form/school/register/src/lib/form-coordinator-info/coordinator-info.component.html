@@ -15,9 +15,18 @@
         <input
           class="form-control"
           type="text"
-          formControlName="nameTh"
+          formControlName="firstnameTh"
           placeholder="กรุณากรอกชื่อภาษาไทย"
         />
+        <ng-container
+          *ngIf="
+            firstnameTh.invalid && (firstnameTh.dirty || firstnameTh.touched)
+          "
+        >
+          <span class="text-danger" *ngIf="firstnameTh.errors?.['pattern']">
+            xxx
+          </span>
+        </ng-container>
       </div>
       <div class="col-5">
         <label class="form-label">นามสกุลภาษาไทย</label>
@@ -27,6 +36,15 @@
           formControlName="lastnameTh"
           placeholder="กรุณากรอกนามสกุลภาษาไทย"
         />
+        <ng-container
+          *ngIf="
+          lastnameTh.invalid && (lastnameTh.dirty || lastnameTh.touched)
+          "
+        >
+          <span class="text-danger" *ngIf="lastnameTh.errors?.['pattern']">
+            xxx
+          </span>
+        </ng-container>
       </div>
     </div>
 
@@ -45,9 +63,18 @@
         <input
           class="form-control"
           type="text"
-          formControlName="nameEn"
+          formControlName="firstnameEn"
           placeholder="กรุณากรอกชื่อภาษาอังกฤษ"
         />
+        <ng-container
+          *ngIf="
+            firstnameEn.invalid && (firstnameEn.dirty || firstnameEn.touched)
+          "
+        >
+          <span class="text-danger" *ngIf="firstnameEn.errors?.['pattern']">
+            xxx
+          </span>
+        </ng-container>
       </div>
       <div class="col-5">
         <label class="form-label">นามสกุลภาษาอังกฤษ</label>
@@ -57,6 +84,15 @@
           formControlName="lastnameEn"
           placeholder="กรุณากรอกชื่อภาษาอังกฤษ"
         />
+        <ng-container
+          *ngIf="
+          lastnameEn.invalid && (lastnameEn.dirty || lastnameEn.touched)
+          "
+        >
+          <span class="text-danger" *ngIf="lastnameEn.errors?.['pattern']">
+            xxx
+          </span>
+        </ng-container>
       </div>
     </div>
 
@@ -73,6 +109,16 @@
           type="text"
           formControlName="workplacePhone"
         />
+        <ng-container
+          *ngIf="
+            workplacePhone.invalid &&
+            (workplacePhone.dirty || workplacePhone.touched)
+          "
+        >
+          <span class="text-danger" *ngIf="workplacePhone.errors?.['pattern']"
+            >{{ validatorMessages.phone }}
+          </span>
+        </ng-container>
       </div>
     </div>
     <div class="row">

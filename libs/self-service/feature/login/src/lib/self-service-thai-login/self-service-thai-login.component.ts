@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ForgotPasswordSearchPersonComponent } from '@ksp/shared/dialog';
 
 @Component({
   templateUrl: './self-service-thai-login.component.html',
@@ -14,13 +16,28 @@ export class SelfServiceThaiLoginComponent {
     password: [],
   });
 
-  constructor(private router: Router, private fb: FormBuilder) {}
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    public dialog: MatDialog
+  ) {}
 
   register() {
     this.router.navigate(['/', 'register', 'policy']);
   }
 
   login() {
-    this.router.navigate(['/', 'license', 'request']);
+    this.router.navigate(['/', 'home']);
+  }
+
+  forgot() {
+    this.dialog.closeAll();
+    const dialogRef = this.dialog.open(ForgotPasswordSearchPersonComponent, {
+      width: '350px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      //console.log(`Dialog result: ${result}`);
+    });
   }
 }

@@ -19,10 +19,10 @@
         <hr />
 
         <div class="bg-light px-3 py-2 default-width">
-          <div class="box-header text-primary">ค้นหารายการ</div>
+          <div class="box-header text-primary">รายละเอียดข้อมูล</div>
 
           <div class="row mb-3">
-            <div class="col-5">
+            <div class="col">
               <label class="form-label">หมายเลขบัตรประชาชน</label>
               <input
                 class="form-control"
@@ -31,10 +31,23 @@
                 formControlName="personId"
               />
             </div>
+            <div class="col">
+              <label class="form-label">ประเภทการยื่น</label>
+              <select class="form-select">
+                <option value="null" selected hidden disabled>
+                  กรุณาเลือก
+                </option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
           </div>
           <ksp-form-user-info
             [isDarkMode]="false"
             formControlName="searchUserInfo"
+            [showNationalityInput]="true"
+            [showPostInput]="true"
           ></ksp-form-user-info>
         </div>
       </div>
@@ -61,36 +74,43 @@
           <mat-tab label="ข้อมูลทางการศึกษา">
             <ksp-form-education-info
               formControlName="education1"
-              [defualtDegree]="1"
-              [disabled]="true"
+              [showSelectDegree]="false"
+              [showGradeInput]="true"
+              [showGraduateYearInput]="true"
               ><input
                 type="checkbox"
                 class="me-2"
-              />วุฒิการศึกษา</ksp-form-education-info
+              />วุฒิการศึกษาปริญญาตรี</ksp-form-education-info
             ><br />
             <ksp-form-education-info
               formControlName="education2"
-              [defualtDegree]="2"
+              [showSelectDegree]="false"
               [showGradeInput]="false"
+              [showGraduateYearInput]="true"
               ><input
                 type="checkbox"
                 class="me-2"
-              />วุฒิการศึกษา </ksp-form-education-info
+              />วุฒิการศึกษาปริญญาโท</ksp-form-education-info
             ><br />
             <ksp-form-education-info
               formControlName="education3"
-              [defualtDegree]="3"
+              [showSelectDegree]="false"
               [showGradeInput]="false"
+              [showGraduateYearInput]="true"
               ><input
                 type="checkbox"
                 class="me-2"
-              />วุฒิการศึกษา </ksp-form-education-info
+              />วุฒิการศึกษาปริญญาเอก</ksp-form-education-info
             ><br />
             <ksp-form-education-info
               formControlName="education4"
-              [defualtDegree]="4"
+              [showSelectDegree]="false"
               [showGradeInput]="false"
-              ><input type="checkbox" class="me-2" />วุฒิการศึกษา
+              [showGraduateYearInput]="true"
+              ><input
+                type="checkbox"
+                class="me-2"
+              />วุฒิการศึกษาปริญญาอื่นๆที่เทียบเท่าปริญญาตรี / ปริญญาทางการศึกษา
             </ksp-form-education-info>
           </mat-tab>
 
@@ -112,5 +132,6 @@
     [showCancelButton]="true"
     [showSaveButton]="true"
     (saveClicked)="onSave()"
+    (cancelClicked)="cancel()"
   ></ksp-bottom-nav>
 </div>

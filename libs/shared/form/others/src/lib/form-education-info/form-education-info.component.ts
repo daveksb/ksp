@@ -14,7 +14,7 @@ export class FormEducationInfoComponent
   implements OnInit
 {
   override form = this.fb.group({
-    degreeLevel: [0],
+    degreeLevel: [],
     degreeName: [],
     isEducationDegree: [false],
     branch: [],
@@ -24,13 +24,16 @@ export class FormEducationInfoComponent
     graduateDate: [],
     grade: [],
     otherProperty: [],
+    graduateYear: [],
   });
 
-  @Input() showIsEducationDegree = false;
-  @Input() showGradeInput = true;
+  @Input() showGradeInput = false;
   @Input() showPropertyInput = false;
+  @Input() showSelectDegree = false;
+  @Input() showGraduateYearInput = false;
 
-  _defualtDegree = 0;
+
+/*   _defualtDegree = 0;
 
   @Input()
   set defualtDegree(value: any) {
@@ -39,7 +42,7 @@ export class FormEducationInfoComponent
 
   get defualtDegree(): any {
     return this._defualtDegree;
-  }
+  } */
 
   constructor(private fb: FormBuilder) {
     super();
@@ -53,12 +56,12 @@ export class FormEducationInfoComponent
   }
 
   ngOnInit(): void {
-    if (this.defualtDegree) {
+    /* if (this.defualtDegree) {
       setTimeout(() => {
         this.degreeLevel.setValue(this.defualtDegree);
         this.degreeLevel.disable();
       }, 0);
-    }
+    } */
     this.form.valueChanges.subscribe((res) => {
       //console.log('res = ', res);
     });

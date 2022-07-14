@@ -59,6 +59,7 @@
             <ng-container *ngFor="let item of rewards"
               ><div class="d-flex flex-row align-items-center mb-2">
                 <input
+                  class="form-check-input m-0"
                   formControlName="workSubmit"
                   type="radio"
                   value="{{ item.value }}"
@@ -251,15 +252,14 @@
             <ksp-form-attachment
               title="กรุณาแนบหลักฐาน "
               [groups]="rewardFiles"
+              [titleNote]="
+                '* กรุณาอัพโหลดไฟล์ .pdfและขนาดไม่เกิน 10 MB สามารถอัพโหลดไฟล์ได้มากกว่า 1 ไฟล์ต่อรายการ'
+              "
             ></ksp-form-attachment>
           </div>
 
-          <div class="box-header text-primary">VDO ประกอบการขอรางวัล</div>
-          <div>
-            ลิงค์ (youtube) หรือ
-            <a href="https://www.google.co.th/drive">กดที่นี่</a>
-            เพื่อวางไฟล์ผ่าน Google Drive ที่กำหนด
-          </div>
+          <div class="box-header text-primary">วีดิทัศน์ประกอบการขอรางวัล</div>
+          <div>ลิงก์ (youtube)</div>
           <input class="form-control" type="url" formControlName="rewardLink" />
         </div>
       </div>
@@ -278,5 +278,6 @@
     [showTempSaveButton]="true"
     (cancelClicked)="cancel()"
     (saveClicked)="save()"
+    [saveButtonLabel]="'บันทึกและตรวจสอบ'"
   ></ksp-bottom-nav>
 </div>

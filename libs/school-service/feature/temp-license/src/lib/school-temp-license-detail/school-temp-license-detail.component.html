@@ -26,7 +26,7 @@
           <div class="col-5">
             <label class="form-label">หมายเลขบัตรประชาชน</label>
             <input
-              class="form-control"
+              class="form-control form-search"
               type="text"
               placeholder="หมายเลขบัตรประชาชนจำนวน 13 หลัก"
             />
@@ -76,15 +76,14 @@
         <mat-tab label="ข้อมูลทางการศึกษา">
           <ksp-form-education-info
             formControlName="education1"
-            [defualtDegree]="1"
-            >วุฒิการศึกษา</ksp-form-education-info
+            [showGradeInput]="true"
+            >วุฒิการศึกษาปริญญาตรี</ksp-form-education-info
           ><br />
           <ksp-form-education-info
             formControlName="education2"
-            [defualtDegree]="2"
             [showGradeInput]="false"
             [showPropertyInput]="true"
-            >วุฒิการศึกษา
+            >วุฒิการศึกษาปริญญาโท
           </ksp-form-education-info>
 
           <!-- <div class="px-4">

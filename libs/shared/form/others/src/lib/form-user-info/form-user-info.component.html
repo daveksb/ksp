@@ -127,5 +127,25 @@
         formControlName="workplacePhone"
       />
     </div>
+    <div class="col" *ngIf="showPostInput">
+      <label class="form-label">ตำแหน่ง</label>
+      <input class="form-control" type="text" formControlName="post" />
+    </div>
+  </div>
+
+  <div class="row mb-3" *ngIf="showNationalityInput">
+    <div class="col-6">
+      <label class="form-label">สัญชาติ</label>
+      <select
+        class="form-select"
+        formControlName="nationality"
+        [class.bg-white]="!isDarkMode && mode === 'edit'"
+      >
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
   </div>
 </form>

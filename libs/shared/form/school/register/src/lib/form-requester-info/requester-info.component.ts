@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormCoordinatorInfoComponent } from '../form-coordinator-info/coordinator-info.component';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -17,7 +17,14 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 })
 export class FormRequesterInfoComponent extends KspFormBaseComponent {
   override form = this.fb.group({
-    personId: [],
+    personId: [
+      '',
+      [
+        Validators.pattern('^[0-9]*$'),
+        Validators.minLength(13),
+        Validators.maxLength(13),
+      ],
+    ],
     requesterInfo: [],
   });
 
@@ -30,5 +37,9 @@ export class FormRequesterInfoComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+
+  get personId() {
+    return this.form.controls.personId;
   }
 }

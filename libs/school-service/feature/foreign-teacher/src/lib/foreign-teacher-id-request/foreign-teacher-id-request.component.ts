@@ -12,7 +12,7 @@ import { FormBuilder } from '@angular/forms';
   templateUrl: './foreign-teacher-id-request.component.html',
   styleUrls: ['./foreign-teacher-id-request.component.scss'],
 })
-export class ForeignTeacherIdRequestComponent implements OnInit{
+export class ForeignTeacherIdRequestComponent implements OnInit {
   form = this.fb.group({
     foreignTeacher: [],
   });
@@ -41,6 +41,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit{
       data: {
         title: `คุณต้องการยืนยันข้อมูล
         และส่งใบคำขอ ใช่หรือไม่? `,
+        btnLabel: 'ยืนยัน',
       },
     });
 
@@ -56,7 +57,6 @@ export class ForeignTeacherIdRequestComponent implements OnInit{
       width: '375px',
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
-
         buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });

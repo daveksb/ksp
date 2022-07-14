@@ -118,11 +118,12 @@ input[type='radio'] {
   width: 1rem;
 }
 
-/* input[type='checkbox']:checked {
-  accent-color: #f68b33;
+input[type='checkbox']:checked {
+  background-color: #f68b33;
+  border: #f68b33;
 }
 
 input[type='radio']:checked {
   background-color: #f68b33;
-  border: none;
-} */
+  border: #f68b33;
+}

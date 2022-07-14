@@ -4,45 +4,42 @@
       <ng-content></ng-content>
     </div>
 
-    <div class="row mb-3">
-      <div class="col-6">
+    <div class="row" *ngIf="showSelectDegree">
+      <div class="col-6 mb-3">
         <label class="form-label">ระดับวุฒิทางการศึกษา</label>
         <select class="form-select" formControlName="degreeLevel">
-          <option [value]="null" selected hidden disabled>กรุณาเลือก</option>
-          <option [value]="1">ปริญญาตรี</option>
-          <option [value]="2">ปริญญาโท</option>
-          <option [value]="3">ปริญญาเอก</option>
-          <option [value]="4">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option value="1">ปริญญาตรี</option>
+          <option value="2">ปริญญาโท</option>
+          <option value="3">ปริญญาเอก</option>
+          <option value="4">
             วุฒิการศึกษาปริญญาอื่นๆที่เทียบเท่าปริญญาตรี / ปริญญาทางการศึกษา
           </option>
         </select>
       </div>
-      <div *ngIf="showIsEducationDegree" class="col-6">
-        <br />
-        <div class="d-flex align-items-center">
-          <input
-            type="checkbox"
-            class="me-2"
-            formControlName="isEducationDegree"
-          />
-          <label class="form-label">ปริญญาทางการศึกษา</label>
-        </div>
+      <div class="col-6 mb-2 d-flex align-items-center">
+        <input
+          type="checkbox"
+          class="me-2"
+          formControlName="isEducationDegree"
+        />
+        <label class="form-label">ปริญญาทางการศึกษา</label>
       </div>
     </div>
 
-    <div class="row mb-3">
-      <div class="col">
+    <div class="row">
+      <div class="col mb-3">
         <label class="form-label">ชื่อปริญญา/หลักสูตร</label>
         <input class="form-control" type="text" formControlName="degreeName" />
       </div>
-      <div class="col">
+      <div class="col mb-3">
         <label class="form-label">สาขา/วิชาเอก</label>
         <input class="form-control" type="text" formControlName="branch" />
       </div>
     </div>
 
-    <div class="row mb-3">
-      <div class="col">
+    <div class="row">
+      <div class="col mb-3">
         <label class="form-label">สถาบันการศึกษา</label>
         <input
           class="form-control"
@@ -50,7 +47,7 @@
           formControlName="educationInstitution"
         />
       </div>
-      <div class="col">
+      <div class="col mb-3">
         <label class="form-label">ประเทศ</label>
         <select class="form-select" formControlName="country">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
@@ -61,8 +58,8 @@
       </div>
     </div>
 
-    <div class="row mb-3">
-      <div class="col">
+    <div class="row">
+      <div class="col mb-3">
         <label class="form-label">วันเดือนปี เข้าศึกษา</label>
         <input
           class="form-control"
@@ -70,7 +67,7 @@
           formControlName="admissionDate"
         />
       </div>
-      <div class="col">
+      <div class="col mb-3">
         <label class="form-label">วันเดือนปี สำเร็จการศึกษา</label>
         <input
           class="form-control"
@@ -80,10 +77,18 @@
       </div>
     </div>
 
-    <div class="row mb-3" *ngIf="showGradeInput">
-      <div class="col-6">
+    <div class="row">
+      <div class="col-6 mb-3" *ngIf="showGradeInput">
         <label class="form-label">เกรดเฉลี่ย</label>
         <input class="form-control" type="text" formControlName="grade" />
+      </div>
+      <div class="col-6 mb-3" *ngIf="showGraduateYearInput">
+        <label class="form-label">ปีการศึกษาที่เข้าศึกษา</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="graduateYear"
+        />
       </div>
     </div>
 

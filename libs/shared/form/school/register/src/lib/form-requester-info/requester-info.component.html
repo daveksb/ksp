@@ -8,6 +8,13 @@
         type="text"
         placeholder="หมายเลขบัตรประชาชนจำนวน 13 หลัก"
       />
+      <ng-container
+        *ngIf="personId.invalid && (personId.dirty || personId.touched)"
+      >
+        <span class="text-danger" *ngIf="personId.errors"
+          >กรอกหมายเลขบัตรประชาชนให้ครบ 13 หลัก</span
+        >
+      </ng-container>
     </div>
   </div>
 
