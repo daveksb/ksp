@@ -66,7 +66,7 @@ export const menu: MenuConfig[] = [
       },
     ],
     subMenuName: 'license',
-    isExpanded: true,
+    isExpanded: false,
   },
   {
     icon: 'assets/images/icon-sidenav/display.svg',
