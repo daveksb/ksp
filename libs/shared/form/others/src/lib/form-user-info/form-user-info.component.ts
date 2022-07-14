@@ -11,6 +11,9 @@ import { providerFactory } from '@ksp/shared/utility';
 })
 export class FormUserInfoComponent extends KspFormBaseComponent {
   @Input() isDarkMode = false;
+  @Input() showPostInput = false;
+  @Input() showNationalityInput = false;
+
   /**
    * Dark Mode : all inputs will have gray background and form container will have white background
    * Use in Self-Service
@@ -31,6 +34,8 @@ export class FormUserInfoComponent extends KspFormBaseComponent {
     email: [],
     contactPhone: [],
     workplacePhone: [],
+    post: [],
+    nationality: [],
   });
 
   constructor(private fb: FormBuilder) {

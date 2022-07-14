@@ -17,7 +17,7 @@ export const menu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/home.svg ',
     label: 'หน้าแรก',
-    path: '',
+    path: 'home',
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',

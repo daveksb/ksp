@@ -54,6 +54,10 @@ export class QualificationDetailComponent implements OnInit {
     }
   }
 
+  cancel() {
+    this.router.navigate(['/', 'temp-license', 'list']);
+  }
+
   onSave() {
     const confirmDialog = this.dialog.open(
       QualificationApproveDetailComponent,
@@ -111,7 +115,7 @@ export class QualificationDetailComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'temp-license', 'list']);
+        this.cancel();
       }
     });
   }

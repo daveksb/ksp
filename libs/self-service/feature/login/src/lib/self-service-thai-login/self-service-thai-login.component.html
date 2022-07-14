@@ -56,7 +56,9 @@
           />
         </div>
         <div class="footer__content">
-          <div class="label__third">ลืมรหัสผ่าน?</div>
+          <div class="label__third">
+            <span role="button" (click)="forgot()">ลืมรหัสผ่าน?</span>
+          </div>
 
           <button
             (click)="login()"

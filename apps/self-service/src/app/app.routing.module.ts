@@ -4,13 +4,21 @@ import { SelfServiceHomeComponent } from '@ksp/self-service/feature/home';
 import { SelfServiceThaiLoginComponent } from '@ksp/self-service/feature/login';
 
 const routes: Routes = [
-  { path: 'home', component: SelfServiceHomeComponent },
+  { path: 'landing', component: SelfServiceHomeComponent },
   { path: 'login', component: SelfServiceThaiLoginComponent },
   {
     path: 'register',
     loadChildren: () =>
       import('@ksp/self-service/feature/register').then(
         (m) => m.SelfServiceFeatureRegisterModule
+      ),
+  },
+
+  {
+    path: 'home',
+    loadChildren: () =>
+      import('@ksp/self-service/feature/home').then(
+        (m) => m.SelfServiceFeatureHomeModule
       ),
   },
 

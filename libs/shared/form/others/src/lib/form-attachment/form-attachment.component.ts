@@ -11,6 +11,7 @@ import { FilesPreviewComponent } from '@ksp/shared/dialog';
 export class FormAttachmentComponent {
   @Input() title = `กรุณาแนบหลักฐานประกอบ`;
   @Input() titleClass = ``;
+  @Input() titleNote = '';
   @Input() groups: string[] = [];
   @Input() mode: FormMode = 'edit';
 
