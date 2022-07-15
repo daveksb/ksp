@@ -1,19 +1,19 @@
 <form [formGroup]="form">
-  <div class="content__container">
-    <div class="detail__header">
+  <div class="bg-white">
+    <div class="fs-5 text-black">
       การฝึกปฏิบัติวิชาชีพระหว่างเรียน สำหรับหลักสูตร ป.ตรี / โท ครู / ป.บัณฑิต
       ครู ที่มีการฝึกปฏิบัติวิชาชีพระหว่างเรียน
     </div>
 
-    <div class="detail__container">
+    <div class="bg-light p-3 my-4">
       <div class="table-responsive">
         <table class="table">
-          <thead class="header__table">
+          <thead>
             <tr>
-              <th scope="col" class="header__column">ครั้งที่</th>
-              <th scope="col" class="header__column">ชั้นปี</th>
-              <th scope="col" class="header__column">ภาคเรียนที่</th>
-              <th scope="col" class="header__column">จำนวนชั่วโมง</th>
+              <th scope="col" class="text-center">ครั้งที่</th>
+              <th scope="col" class="text-center">ชั้นปี</th>
+              <th scope="col" class="text-center">ภาคเรียนที่</th>
+              <th scope="col" class="text-center">จำนวนชั่วโมง</th>
             </tr>
           </thead>
 
@@ -22,13 +22,13 @@
               <ng-container *ngFor="let row of rows.controls; let i = index">
                 <tr [formGroupName]="i">
                   <th scope="row">
-                    <div class="label__table--number">{{ i + 1 }}</div>
+                    <div class="fs-5 text-center">{{ i + 1 }}</div>
                   </th>
 
-                  <td class="detail__table">
+                  <td>
                     <div>
                       <input
-                        class="form-control"
+                        class="form-control text-center"
                         type="number"
                         min="0"
                         placeholder=""
@@ -37,10 +37,10 @@
                     </div>
                   </td>
 
-                  <td class="detail__table">
+                  <td>
                     <div>
                       <input
-                        class="form-control"
+                        class="form-control text-center"
                         type="number"
                         min="0"
                         placeholder=""
@@ -49,10 +49,10 @@
                     </div>
                   </td>
 
-                  <td class="detail__table">
+                  <td>
                     <div>
                       <input
-                        class="form-control"
+                        class="form-control text-center"
                         type="number"
                         min="0"
                         placeholder=""
@@ -66,25 +66,28 @@
 
             <tr>
               <th scope="row"></th>
-              <td class="detail__table"></td>
-              <td class="detail__table">
+              <td></td>
+              <td>
                 <ksp-add-row-button
                   (addRowClick)="addRow()"
                   *ngIf="mode === 'edit'"
                   >เพิ่มจำนวนครั้ง
                 </ksp-add-row-button>
               </td>
-              <td class="detail__table"></td>
+              <td></td>
             </tr>
 
             <tr>
               <th scope="row"></th>
               <th scope="row"></th>
-              <td class="detail__table">
-                <div class="label__table--footer">รวมทั้งหมด</div>
-              </td>
-              <td class="detail__table">
-                <div class="summary__container">{{ totalHours }}</div>
+              <td class="text-end fs-5">รวมทั้งหมด</td>
+              <td>
+                <div
+                  class="form-control bg-secondary bg-opacity-25 text-center"
+                  disabled
+                >
+                  {{ totalHours }}
+                </div>
               </td>
             </tr>
           </tbody>

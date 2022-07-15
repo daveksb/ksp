@@ -5,14 +5,14 @@
 >
 
 <div class="bg-secondary bg-opacity-10 px-4 pt-1 pb-3">
-  <div class="fs-5">รายละเอียดใบคำขอ</div>
+  <div class="box-header">รายละเอียดใบคำขอ</div>
   <div class="bg-white p-3">
     <ksp-request-header-info
       [requestDate]="'10 ตุลาคม 2565'"
     ></ksp-request-header-info>
 
     <hr />
-    <div class="fs-5 mt-2">
+    <div class="box-header mt-2">
       ข้อมูลขอรับรองปริญญา และประกาศนียบัตรทางการศึกษา
     </div>
 
@@ -24,24 +24,38 @@
       </button>
     </div>
     <hr />
-    <div class="detail__header">แผนการรับนิสิต / นักศึกษา</div>
-    <div class="table-header">แผนการรับนิสิต / นักศึกษา (ผ่านการรับรอง)</div>
+
+    <div class="box-header text-primary">แผนการรับนิสิต / นักศึกษา</div>
     <div class="table-responsive">
       <table class="table">
-        <thead class="header__table">
+        <thead>
           <tr>
-            <th scope="col" class="header__column--secondary">
-              แผนการรับนักศึกษา (รายปี)
-            </th>
-            <th scope="col" class="header__column">ปีการศึกษา (พ.ศ)</th>
-            <th scope="col" class="header__column">ชื่อแผน</th>
-            <th scope="col" class="header__column">จำนวนนักศึกษา</th>
-            <th scope="col" class="header__column">
-              ยืนรายชื่อเข้ารับการศึกษา
+            <th
+              scope="col"
+              class="text-center"
+              colspan="5"
+              *ngIf="processType === importType.studentList"
+            >
+              แผนการรับนิสิต / นักศึกษา (ผ่านการรับรอง)
             </th>
             <th
               scope="col"
-              class="header__column"
+              class="text-center"
+              colspan="6"
+              *ngIf="processType === importType.graduateList"
+            >
+              แผนการรับนิสิต / นักศึกษา (ผ่านการรับรอง)
+            </th>
+          </tr>
+          <tr>
+            <th scope="col" class="text-start">แผนการรับนักศึกษา (รายปี)</th>
+            <th scope="col" class="text-center">ปีการศึกษา (พ.ศ)</th>
+            <th scope="col" class="text-center">ชื่อแผน</th>
+            <th scope="col" class="text-center">จำนวนนักศึกษา</th>
+            <th scope="col" class="text-center">ยืนรายชื่อเข้ารับการศึกษา</th>
+            <th
+              scope="col"
+              class="text-center"
               *ngIf="processType === importType.graduateList"
             >
               ยืนรายชื่อสำเร็จการศึกษา
@@ -50,24 +64,26 @@
         </thead>
         <tbody>
           <tr *ngFor="let row of planRows">
-            <th scope="row" class="detail__table--secondary">แผนฯ ปีที่ 1</th>
+            <th scope="row" class="text-start form-label vertical-middle">
+              แผนฯ ปีที่ {{ row }}
+            </th>
 
-            <td class="detail__table">
+            <td class="text-center form-label vertical-middle">
               <div>2564</div>
             </td>
-            <td class="detail__table">
+            <td class="text-center form-label vertical-middle">
               <div>แผน ก</div>
             </td>
-            <td class="detail__table">
+            <td class="text-center form-label vertical-middle">
               <div>150</div>
             </td>
-            <td class="detail__table">
+            <td class="text-center form-label vertical-middle">
               <div>
                 150 / 150
                 <span
                   role="button"
                   (click)="goToImportStudent(importType.studentList)"
-                  class="label__edit text-primary"
+                  class="text-decoration-underline text-primary"
                 >
                   <i role="button" class="bi bi-pencil-fill fs-6"></i>
                   รายชื่อนักศึกษา</span
@@ -75,7 +91,7 @@
               </div>
             </td>
             <td
-              class="detail__table"
+              class="text-center form-label vertical-middle"
               *ngIf="processType === importType.graduateList"
             >
               <div>
@@ -83,7 +99,7 @@
                 <span
                   role="button"
                   (click)="goToImportStudent(importType.graduateList)"
-                  class="label__edit label__edit--secondary text-orange"
+                  class="text-decoration-underline text-orange"
                 >
                   <i role="button" class="bi bi-pencil-fill fs-6"></i>
                   รายชื่อนักศึกษา</span
@@ -93,17 +109,22 @@
           </tr>
 
           <tr>
-            <th scope="row" class="label__table--footer"></th>
-            <td class="detail__table"></td>
-            <td class="detail__table">
+            <th scope="row"></th>
+            <td class="text-center form-label vertical-middle"></td>
+            <td class="text-center form-label vertical-middle">
               <div>รวมทั้งหมด</div>
             </td>
-            <td class="detail__table">
-              <div class="summary__container">0</div>
+            <td class="text-center form-label vertical-middle">
+              <div
+                class="form-control bg-secondary bg-opacity-25 text-center"
+                disabled
+              >
+                600
+              </div>
             </td>
-            <td class="detail__table"></td>
+            <td class="text-center form-label vertical-middle"></td>
             <td
-              class="detail__table"
+              class="text-center form-label vertical-middle"
               *ngIf="processType === importType.graduateList"
             ></td>
           </tr>
@@ -119,5 +140,6 @@
     [isFirstPage]="true"
     [showCenterButtons]="true"
     (cancelClicked)="cancel()"
+    [cancelButtonLabel]="'ปิด'"
   ></ksp-bottom-nav>
 </div>

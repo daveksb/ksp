@@ -1,7 +1,7 @@
-<div class="header__container">
-  <div class="header">ที่ปรึกษาวิทยานิพนธ์และการค้นคว้าอิสระ</div>
+<div class="d-flex align-items-center">
+  <div class="box-header me-2">ที่ปรึกษาวิทยานิพนธ์และการค้นคว้าอิสระ</div>
 
-  <div class="header-2">
+  <div class="form-label text-black">
     (สำหรับหลักสูตรปริญญาโท เอก ทางการศึกษา (วิชาชีพครู) และปริญญาโท
     เอกทางการศึกษา (วิชาชีพบริหาร))
   </div>
@@ -11,8 +11,8 @@
   <ng-container formArrayName="advisors">
     <ng-container *ngFor="let advisorForm of advisors.controls; let i = index">
       <ng-container [formGroupName]="i">
-        <div class="group__header">
-          <div class="group__number">ลำดับที่ {{ i + 1 }}</div>
+        <div class="d-flex justify-content-between">
+          <div class="fs-5 text-primary">ลำดับที่ {{ i + 1 }}</div>
           <div>
             <i
               role="button"
@@ -22,7 +22,7 @@
             ></i>
           </div>
         </div>
-        <div class="group__container">
+        <div class="bg-light p-3 mb-4">
           <ksp-teacher-general-info
             [mode]="mode"
             formControlName="generalInfo"
@@ -35,13 +35,9 @@
 
           <hr />
 
-          <div class="checkbox__container">
-            <input
-              type="checkbox"
-              class="checkbox"
-              formControlName="hasMoreCourses"
-            />
-            <label class="checkbox__header"
+          <div class="d-flex align-items-center">
+            <input type="checkbox" class="me-2" formControlName="hasMoreCourses" />
+            <label class="form-label text-black"
               >ทำเครื่องหมาย (<i class="bi bi-check"></i>)
               กรณีประจำหลักสูตรมากกว่า ๑ หลักสูตร
             </label>
@@ -53,8 +49,8 @@
                 *ngFor="let course of getCourses(i).controls; let j = index"
               >
                 <ng-container [formGroupName]="j">
-                  <div class="row row--fourth">
-                    <div class="mb-3">
+                  <div class="row">
+                    <div class="col mb-3">
                       <label class="form-label">หลักสูตร {{ j + 2 }}</label>
                       <input
                         class="form-control"
@@ -63,11 +59,15 @@
                         formControlName="courseName"
                       />
                     </div>
-                    <i
-                      *ngIf="j > 0"
-                      (click)="deleteCourse(i, j)"
-                      class="bi bi-trash text-danger fs-5"
-                    ></i>
+                    <div class="col-auto">
+                      <br />
+                      <i
+                        role="button"
+                        *ngIf="j > 0"
+                        (click)="deleteCourse(i, j)"
+                        class="bi bi-trash text-danger fs-5"
+                      ></i>
+                    </div>
                   </div>
 
                   <ksp-advisor-info

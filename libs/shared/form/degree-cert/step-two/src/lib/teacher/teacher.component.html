@@ -4,8 +4,8 @@
   <ng-container formArrayName="teachers">
     <ng-container *ngFor="let teacherForm of teachers.controls; let i = index">
       <ng-container [formGroupName]="i">
-        <div class="group__header">
-          <div class="group__title">ลำดับที่ {{ i + 1 }}</div>
+        <div class="d-flex justify-content-between">
+          <div class="fs-5 text-primary">ลำดับที่ {{ i + 1 }}</div>
           <i
             *ngIf="i"
             role="button"
@@ -13,19 +13,15 @@
             class="bi bi-trash text-danger fs-5"
           ></i>
         </div>
-        <div class="group__container">
+        <div class="bg-light p-3 mb-4">
           <ksp-teacher-general-info
             [mode]="mode"
             formControlName="generalInfo"
           ></ksp-teacher-general-info>
 
-          <div>
-            <input
-              type="checkbox"
-              class="checkbox-1"
-              formControlName="hasMoreCourses"
-            />
-            <label class="checkbox__label"
+          <div class="d-flex align-items-center">
+            <input type="checkbox" formControlName="hasMoreCourses" />
+            <label class="form-label text-black ms-2"
               >ทำเครื่องหมาย (<i class="bi bi-check"></i>)
               กรณีประจำหลักสูตรมากกว่า ๑ หลักสูตร
             </label>
@@ -37,8 +33,8 @@
                 *ngFor="let course of getCourses(i).controls; let j = index"
               >
                 <ng-container [formGroupName]="j">
-                  <div class="row row--fourth">
-                    <div>
+                  <div class="row">
+                    <div class="col-10 mb-3">
                       <label class="form-label">หลักสูตร {{ j + 2 }}</label>
 
                       <input
@@ -48,23 +44,28 @@
                         formControlName="courseName"
                       />
                     </div>
-                    <i
-                      role="button"
-                      *ngIf="j > 0"
-                      (click)="deleteCourse(i, j)"
-                      class="bi bi-trash text-danger fs-5"
-                    ></i>
+                    <div class="col-auto">
+                      <br />
+                      <i
+                        role="button"
+                        *ngIf="j > 0"
+                        (click)="deleteCourse(i, j)"
+                        class="bi bi-trash text-danger fs-5"
+                      ></i>
+                    </div>
                   </div>
                 </ng-container>
               </ng-container>
             </ng-container>
-            <div class="row row--fourth">
-              <ksp-add-row-button
-                *ngIf="getCourses(i).length < 4"
-                (addRowClick)="addCourse(i)"
-              >
-                เพิ่มหลักสูตร
-              </ksp-add-row-button>
+            <div class="row">
+              <div class="col-10">
+                <ksp-add-row-button
+                  *ngIf="getCourses(i).length < 4"
+                  (addRowClick)="addCourse(i)"
+                >
+                  เพิ่มหลักสูตร
+                </ksp-add-row-button>
+              </div>
             </div>
           </ng-container>
         </div>

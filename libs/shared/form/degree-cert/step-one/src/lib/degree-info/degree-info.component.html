@@ -1,20 +1,15 @@
 <form [formGroup]="form">
-  <div class="group__container">
-    <div class="group__header group__header--blue">
-      ข้อมูลระดับปริญญาที่เสนอขอรับรอง
-    </div>
-    <div class="row row--1">
-      <div>
+  <div class="bg-light p-3 my-3">
+    <div class="box-header text-primary">ข้อมูลระดับปริญญาที่เสนอขอรับรอง</div>
+    <div class="row mb-3">
+      <div class="col-8">
         <label class="form-label"
           >ระดับปริญญาที่เสนอขอรับรอง
           <span class="fs-6 text-danger"
             >*เลือกข้อมูลของท่านได้เพียง 1 ข้อเท่านั้น</span
           ></label
         >
-        <select
-          formControlName="degreeType"
-          class="search__content form-select"
-        >
+        <select formControlName="degreeType" class="form-select">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let item of degreeTypes" [value]="item.value">
             {{ item.label }}
@@ -22,12 +17,12 @@
         </select>
       </div>
     </div>
-    <div class="row row--2">
-      <div>
+    <div class="row mb-3">
+      <div class="col-2">
         <label class="form-label">ปีของหลักสูตร</label>
         <input formControlName="courseYear" class="form-control" type="text" />
       </div>
-      <div>
+      <div class="col-6">
         <label class="form-label"
           >ชื่อหลักสูตรที่เสนอขอรับรอง<span class="fs-6 text-danger">
             *กรุณาระบุชื่อหลักสูตรตามที่ปรากฏบนหน้าปก มคอ.2
@@ -41,9 +36,30 @@
         />
       </div>
     </div>
-    <div class="group__header">ชื่อปริญญาและสาขาวิชา</div>
-    <div class="row row--1">
-      <div>
+
+    <div class="row mb-3">
+      <div class="col-8">
+        <label class="form-label">ประเภทของหลักสูตร</label>
+        <select class="search__content form-select">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option value="1">ภาษาไทย</option>
+          <option value="2">ภาษาอังกฤษ</option>
+          <option value="3">นานาชาติ</option>
+        </select>
+      </div>
+      <div class="col-4">
+        <label class="form-label">สถานะของหลักสูตร</label>
+        <select class="search__content form-select">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option value="1">ใหม่</option>
+          <option value="2">ปรับปรุง</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="box-header">ชื่อปริญญาและสาขาวิชา</div>
+    <div class="row mb-3">
+      <div class="col-8">
         <label class="form-label"
           >ชื่อปริญญาและสาขาวิชา (ภาษาไทย แบบเต็ม)</label
         >
@@ -54,7 +70,7 @@
           formControlName="degreeNameThFull"
         />
       </div>
-      <div>
+      <div class="col">
         <label class="form-label">ชื่อปริญญาและสาขาวิชา (ภาษาไทย แบบย่อ)</label>
         <input
           class="form-control"
@@ -64,8 +80,8 @@
         />
       </div>
     </div>
-    <div class="row row--1">
-      <div>
+    <div class="row mb-3">
+      <div class="col-8">
         <label class="form-label"
           >ชื่อปริญญาและสาขาวิชา (ภาษาอังกฤษ แบบเต็ม)</label
         >
@@ -76,7 +92,7 @@
           formControlName="degreeNameThShort"
         />
       </div>
-      <div>
+      <div class="col">
         <label class="form-label"
           >ชื่อปริญญาและสาขาวิชา (ภาษาอังกฤษ แบบย่อ)</label
         >
@@ -86,6 +102,27 @@
           placeholder="กรุณากรอก"
           formControlName="degreeNameEnShort"
         />
+      </div>
+    </div>
+
+    <div class="box-header">สถานะภาพหลักสูตร</div>
+    <div class="row">
+      <div class="col-3">
+        <label class="form-label"
+          >การอนุมัติหลักสูตรของสภามหาวิทยาลัย ครั้งที่
+        </label>
+        <input class="form-control" type="text" />
+      </div>
+      <div class="col-3">
+        <label class="form-label">วันที่</label>
+        <input class="form-control" type="date" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-3">
+        <label class="form-label">การพิจารณารับทราบของ อว. วันที่</label>
+        <input class="form-control" type="date" />
       </div>
     </div>
   </div>

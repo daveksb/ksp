@@ -1,11 +1,12 @@
-<div class="header">อาจารย์นิเทศก์</div>
+<div class="box-header">อาจารย์นิเทศก์</div>
 
 <form [formGroup]="form">
   <ng-container formArrayName="nitets">
     <ng-container *ngFor="let nitet of nitets.controls; let i = index">
-      <div [formGroupName]="i" [ngClass]="{ apply__opac: opaciseBox[i] }">
-        <div class="group__header">
-          <div class="group__number">ลำดับที่ {{ i + 1 }}</div>
+      <!-- <div [formGroupName]="i" [ngClass]="{ apply__opac: opaciseBox[i] }"> -->
+      <div [formGroupName]="i">
+        <div class="d-flex justify-content-between align-items-end">
+          <div class="fs-5 text-primary">ลำดับที่ {{ i + 1 }}</div>
           <i
             role="button"
             *ngIf="i"
@@ -16,15 +17,15 @@
           ></i>
         </div>
 
-        <div class="group__container">
+        <div class="bg-light p-3">
           <ksp-teacher-general-info
             [mode]="mode"
             formControlName="generalInfo"
           ></ksp-teacher-general-info>
 
           <div>
-            <div class="row row--second">
-              <div class="mb-3">
+            <div class="row">
+              <div class="col-4 mb-3">
                 <label class="form-label">สังกัดคณะ </label>
                 <input
                   class="form-control"
@@ -33,71 +34,79 @@
                   formControlName="faculty"
                 />
               </div>
-              <div class="mb-3">
+              <div class="col-4 mb-3">
                 <label class="form-label">สถานะ (กรุณาเลือก) </label>
 
-                <div class="row row--half">
-                  <div class="checkbox__content">
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        value="1"
-                        name="status"
-                        formControlName="status"
-                      />
-                      <label class="form-check-label"> ประจำ </label>
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-control">
+                      <div class="d-flex align-items-center">
+                        <input
+                          class="m-0 me-2"
+                          type="radio"
+                          value="1"
+                          name="status"
+                          formControlName="status"
+                        />
+                        <label class="fs-5"> ประจำ </label>
+                      </div>
                     </div>
                   </div>
-                  <div class="checkbox__content">
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        value="2"
-                        name="status"
-                        formControlName="status"
-                      />
-                      <label class="form-check-label"> พิเศษ </label>
+                  <div class="col-6">
+                    <div class="form-control">
+                      <div class="d-flex align-items-center">
+                        <input
+                          class="me-2"
+                          type="radio"
+                          value="2"
+                          name="status"
+                          formControlName="status"
+                        />
+                        <label class="fs-5"> พิเศษ </label>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div>
+              <div class="col-4 mb-3">
                 <label class="form-label"
                   >กลุ่มวิชาที่นิเทศก์ (กรุณาเลือก)
                 </label>
 
-                <div class="row row--half">
-                  <div class="checkbox__content">
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        value="1"
-                        name="subject"
-                        formControlName="subject"
-                      />
-                      <label class="form-check-label"> วิชาชีพครู </label>
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-control">
+                      <div class="d-flex align-items-center">
+                        <input
+                          class="me-2"
+                          type="radio"
+                          value="1"
+                          name="subject"
+                          formControlName="subject"
+                        />
+                        <label class="fs-5"> วิชาชีพครู </label>
+                      </div>
                     </div>
                   </div>
-                  <div class="checkbox__content">
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        value="2"
-                        name="subject"
-                        formControlName="subject"
-                      />
-                      <label class="form-check-label"> วิชาเอก </label>
+                  <div class="col-6">
+                    <div class="form-control">
+                      <div class="d-flex align-items-center">
+                        <input
+                          class="me-2"
+                          type="radio"
+                          value="2"
+                          name="subject"
+                          formControlName="subject"
+                        />
+                        <label class="fs-5"> วิชาเอก </label>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="row row--first">
-              <div class="mb-3">
+            <div class="row">
+              <div class="col-3 mb-3">
                 <label class="form-label">ประสบการณ์นิเทศก์ (ปี) </label>
                 <input
                   formControlName="experienceYear"
@@ -106,12 +115,8 @@
                   min="0"
                   (focus)="experienceYearFocused = true"
                 />
-                <div class="fs-6 text-danger" *ngIf="experienceYear < 3">
-                  *กรุณาระบุอาจารย์นิเทศก์พี่เลี้ยง
-                  เนื่องจากประสบการณ์นิเทศก์น้อยกว่า 2 ปี
-                </div>
               </div>
-              <div>
+              <div class="col-3 mb-3">
                 <label class="form-label"
                   >จำนวน นศ.ที่รับผิดชอบในหลักสูตร (คน)
                 </label>
@@ -122,7 +127,7 @@
                   formControlName="studentResponsible"
                 />
               </div>
-              <div class="mb-3">
+              <div class="col-3 mb-3">
                 <label class="form-label">จำนวน นศ.ในหลักสูตรอื่น (คน) </label>
                 <input
                   class="form-control"
@@ -131,6 +136,10 @@
                   formControlName="studentOtherCourse"
                 />
               </div>
+            </div>
+            <div class="fs-6 text-danger" *ngIf="experienceYear < 3">
+              *กรุณาระบุอาจารย์นิเทศก์พี่เลี้ยง
+              เนื่องจากประสบการณ์นิเทศก์น้อยกว่า 2 ปี
             </div>
 
             <ksp-less-exp-nitet

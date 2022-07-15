@@ -113,7 +113,7 @@ export class ImportStudentComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'graduate-list']);
+        this.router.navigate(['/', 'home']);
       }
     });
   }

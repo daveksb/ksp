@@ -1,10 +1,10 @@
 <hr />
 <form [formGroup]="form">
-  <div class="group__header">
+  <div class="fs-5">
     อาจารย์นิเทศก์พี่เลี้ยงของอาจารย์นิเทศก์ที่มีประสบการณ์น้อยกว่า 2 ปี
   </div>
-  <div class="row row--first">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col-2 mb-3">
       <label class="form-label">คำนำหน้าชื่อ</label>
       <select class="search__content form-select" formControlName="prefix">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
@@ -13,7 +13,7 @@
         <option value="3">Three</option>
       </select>
     </div>
-    <div class="mb-3">
+    <div class="col-5 mb-3">
       <label class="form-label">ชื่อ </label>
       <input
         class="form-control"
@@ -22,7 +22,7 @@
         formControlName="firstname"
       />
     </div>
-    <div class="mb-3">
+    <div class="col-5 mb-3">
       <label class="form-label">นามสกุล </label>
       <input
         class="form-control"
@@ -32,8 +32,8 @@
       />
     </div>
   </div>
-  <div class="row row--second">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col mb-3">
       <label class="form-label">ตำแหน่งวิชาการ </label>
       <input
         class="form-control"
@@ -42,7 +42,7 @@
         formControlName="academicPost"
       />
     </div>
-    <div class="mb-3">
+    <div class="col mb-3">
       <label class="form-label">วุฒิการศึกษา </label>
       <input
         class="form-control"
@@ -51,7 +51,7 @@
         formControlName="educationDegree"
       />
     </div>
-    <div class="mb-3">
+    <div class="col mb-3">
       <label class="form-label">สาขาวิชา </label>
       <input
         class="form-control"
@@ -61,8 +61,8 @@
       />
     </div>
   </div>
-  <div class="row row--second">
-    <div>
+  <div class="row">
+    <div class="col-2">
       <label class="form-label">ประสบการณ์นิเทศก์ (ปี) </label>
       <input
         class="form-control"

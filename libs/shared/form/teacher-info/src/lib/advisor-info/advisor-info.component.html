@@ -1,64 +1,72 @@
 <form [formGroup]="form">
-  <div class="row row--third">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col-5 mb-3">
       <label class="form-label"
         >สถานะของอาจารย์ที่ปรึกษาวิทยานิพนธ์ (กรุณาเลือก)
       </label>
-      <div class="content__checkbox">
-        <div class="checkbox__detail">
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              [value]="1"
-              formControlName="advisorStatus"
-            />
-            <label class="form-check-label"> ที่ปรึกษาหลัก </label>
+      <div class="row">
+        <div class="col">
+          <div class="form-control">
+            <div class="d-flex align-items-center">
+              <input
+                type="radio"
+                class="me-2"
+                [value]="1"
+                formControlName="advisorStatus"
+              />
+              <label class="fs-5"> ที่ปรึกษาหลัก </label>
+            </div>
           </div>
         </div>
-        <div class="checkbox__detail">
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              [value]="2"
-              formControlName="advisorStatus"
-            />
-            <label class="form-check-label"> ที่ปรึกษาร่วม </label>
+        <div class="col">
+          <div class="form-control">
+            <div class="d-flex align-items-center">
+              <input
+                type="radio"
+                class="me-2"
+                [value]="2"
+                formControlName="advisorStatus"
+              />
+              <label class="fs-5"> ที่ปรึกษาร่วม </label>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div>
+    <div class="col-5 mb-3">
       <label class="form-label">ประเภทที่ปรึกษา (กรุณาเลือก) </label>
-      <div class="content__checkbox">
-        <div class="checkbox__detail">
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              [value]="1"
-              formControlName="advisorType"
-            />
-            <label class="form-check-label"> เป็นที่ปรึกษาวิทยานิพนธ์ </label>
+      <div class="row">
+        <div class="col">
+          <div class="form-control">
+            <div class="d-flex align-items-center">
+              <input
+                type="radio"
+                class="me-2"
+                [value]="1"
+                formControlName="advisorType"
+              />
+              <label class="fs-5"> เป็นที่ปรึกษาวิทยานิพนธ์ </label>
+            </div>
           </div>
         </div>
-        <div class="checkbox__detail">
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              [value]="2"
-              formControlName="advisorType"
-            />
-            <label class="form-check-label"> เป็นที่ปรึกษาค้นคว้าอิสระ </label>
+        <div class="col">
+          <div class="form-control">
+            <div class="d-flex align-items-center">
+              <input
+                type="radio"
+                class="me-2"
+                [value]="2"
+                formControlName="advisorType"
+              />
+              <label class="fs-5"> เป็นที่ปรึกษาค้นคว้าอิสระ </label>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="row row--fifth">
-    <div class="mb-3">
+  <div class="row">
+    <div class="col-2 mb-3">
       <label class="form-label">จำนวนนักศึกษาที่ดูแล (คน) </label>
       <input
         formControlName="studentNumber"
