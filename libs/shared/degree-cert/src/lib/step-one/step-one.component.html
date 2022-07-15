@@ -1,7 +1,7 @@
 <form [formGroup]="form">
   <div class="bg-white pt-4" style="width: auto">
     <div class="px-3 py-2" style="background-color: #f4faff">
-      <div class="fs-5">ข้อมูลสถาบัน</div>
+      <div class="box-header">ข้อมูลสถาบัน</div>
       <div class="row mb-3">
         <div class="col">
           <label class="form-label">กลุ่มสถาบัน</label>
@@ -61,7 +61,7 @@
     ></ksp-degree-info>
 
     <div class="bg-light px-3 pt-2">
-      <div class="fs-5">การจัดการหลักสูตร หรือลักษณะหลักสูตร</div>
+      <div class="box-header">การจัดการหลักสูตร หรือลักษณะหลักสูตร</div>
       <div class="row mb-3">
         <label class="form-label"
           >กรุณาเลือกประเภทการจัดการหลักสูตร หรือลักษณะหลักสูตร<span
@@ -88,7 +88,7 @@
     </div>
 
     <div class="bg-light px-3 py-2 mt-3">
-      <div class="fs-5">สถานที่ที่เปิดสอน</div>
+      <div class="box-header">สถานที่ที่เปิดสอน</div>
       <ng-container formArrayName="locations">
         <ng-container
           *ngFor="let locationForm of locations.controls; let i = index"
@@ -122,7 +122,7 @@
     </div>
 
     <div class="bg-light px-3 py-2 mt-3">
-      <div class="fs-5">หน่วยงานที่รับผิดชอบหลักสูตร</div>
+      <div class="box-header">หน่วยงานที่รับผิดชอบหลักสูตร</div>
 
       <ng-container formArrayName="institutions">
         <ng-container
@@ -160,7 +160,7 @@
     </div>
 
     <div class="bg-light p-3 mt-3">
-      <div class="fs-5">
+      <div class="box-header">
         สถานที่ที่ต้องประเมินสภาพจริง / ติดตามผลเชิงประจักษ์
       </div>
 
