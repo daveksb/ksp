@@ -23,7 +23,7 @@ export class RetiredAttachmentComponent {
     private fb: FormBuilder
   ) {}
 
-  retiredFiles = ['หนังสือแต่งตั้งผู้ประสานงาน', 'สำเนาบัตรประชาชน'];
+  retiredFiles = ['หนังสือแต่งตั้งผู้ประสานงาน'];
 
   prevPage() {
     this.router.navigate(['/', 'retired', 'reason']);
@@ -41,6 +41,7 @@ export class RetiredAttachmentComponent {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
         subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
         ใช่หรือไม่`,
+        btnLabel: 'ยืนยัน',
       },
     });
 
@@ -62,6 +63,8 @@ export class RetiredAttachmentComponent {
         header: 'ยืนยันข้อมูลสำเร็จ',
         content: `วันที่ : 10 ตุลาคม 2565
         เลขที่ใบคำขอ : 12234467876543 `,
+        subContent: `กรุณาตรวจสอบสถานะใบคำขอหรือรหัสเข้าใช้งาน
+        ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },
     });
 

@@ -14,3 +14,7 @@
   border-radius: 5px;
   padding: 24px;
 }
+
+::ng-deep .mat-horizontal-stepper-header #hee {
+  pointer-events: none !important;
+}

@@ -1,9 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MatDialogModule } from '@angular/material/dialog';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BasicInstituteSearchComponent } from '../basic-institute-search/basic-institute-search.component';
 
-export type SearchType = 'uni' | 'school';
+/* export type SearchType = 'uni' | 'school'; */
 
 @Component({
   templateUrl: './university-search.component.html',
@@ -12,15 +19,24 @@ export type SearchType = 'uni' | 'school';
   imports: [CommonModule, MatDialogModule, BasicInstituteSearchComponent],
 })
 export class UniversitySearchComponent implements OnInit {
-  @Input() searchType: SearchType = 'school';
+  /* @Input() searchType = ''; */
+  /* @Input() subHeader = ''; */
   @Output() confirmed = new EventEmitter<string>();
 
   selectedUniversity = '';
 
-  data: University[] = [];
+  Data: University[] = [];
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA)
+    public data: {
+      searchType: string;
+      subHeader: string;
+    }
+  ) {}
 
   ngOnInit(): void {
-    this.data = [];
+    this.Data = [];
   }
 
   onItemChange(universityCode: string) {
@@ -29,11 +45,11 @@ export class UniversitySearchComponent implements OnInit {
   }
 
   search() {
-    this.data = data;
+    this.Data = data;
   }
 
   clear() {
-    this.data = [];
+    this.Data = [];
   }
 }
 

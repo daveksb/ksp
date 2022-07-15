@@ -9,7 +9,7 @@
             class="search__content form-select"
             formControlName="institutionsGroup"
           >
-            <option selected>มหาวิทยาลัยของรัฐ / ในกำกับของรัฐ</option>
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
@@ -21,7 +21,7 @@
             class="search__content form-select"
             formControlName="institutionsCode"
           >
-            <option selected>กรุณาเลือก</option>
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
@@ -44,7 +44,7 @@
             class="search__content form-select"
             formControlName="provience"
           >
-            <option selected>กรุณาเลือก</option>
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
@@ -65,8 +65,8 @@
       <div class="row mb-3">
         <label class="form-label"
           >กรุณาเลือกประเภทการจัดการหลักสูตร หรือลักษณะหลักสูตร<span
-            class="warn__text"
-            >*เลือกข้อมูลของท่านได้เพียง 1 ข้อเท่านั้น</span
+            class="text-danger fs-6"
+            > *เลือกข้อมูลของท่านได้เพียง 1 ข้อเท่านั้น</span
           ></label
         >
         <div class="col-7">
@@ -74,6 +74,7 @@
             formControlName="courseType"
             class="search__content form-select"
           >
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
             <option *ngFor="let item of courseTypes" [value]="item.value">
               {{ item.label }}
             </option>

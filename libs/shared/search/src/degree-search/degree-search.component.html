@@ -4,9 +4,9 @@
 
     <div class="row mb-2">
       <div class="col">
-        <label class="form-label">สถาบัน / มหาวิทยาลัย </label>
+        <label class="form-label">สถาบัน / มหาวิทยาลัย</label>
         <select class="form-select" formControlName="institution">
-          <option selected>กรุณาเลือก</option>
+          <option value="null" selected disabled hidden>กรุณาเลือก</option>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
@@ -15,7 +15,7 @@
       <div class="col">
         <label class="form-label">สังกัด / คณะหน่วยงาน </label>
         <select class="form-select" formControlName="affiliation">
-          <option selected>กรุณาเลือก</option>
+          <option value="null" selected disabled hidden>กรุณาเลือก</option>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
@@ -37,8 +37,8 @@
     <div class="row mb-2">
       <div class="col">
         <label class="form-label">ระดับปริญญาทางการศึกษา</label>
-        <select class="form-select" formControlName="degreeLvel">
-          <option selected>กรุณาเลือก</option>
+        <select class="form-select" formControlName="degreeLevel">
+          <option value="null" selected disabled hidden>กรุณาเลือก</option>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
@@ -59,7 +59,15 @@
           formControlName="requestNumber"
         />
       </div>
-      <div class="col">
+      <div class="col" *ngIf="showApproveDateInput">
+        <label class="form-label">วันที่ได้รับรอง</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="requestsubmitDate"
+        />
+      </div>
+      <div class="col" *ngIf="showSubmitDateInput">
         <label class="form-label">วันที่ยื่นใบคำขอ</label>
         <input
           class="form-control"

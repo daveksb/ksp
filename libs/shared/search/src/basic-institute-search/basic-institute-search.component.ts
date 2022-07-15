@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { InstituteType, KspFormBaseComponent } from '@ksp/shared/interface';
+import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -21,7 +21,7 @@ export class BasicInstituteSearchComponent extends KspFormBaseComponent {
     instituteName: [],
   });
 
-  //@Input() mode: InstituteType = 'school';
+  @Input() searchType = '';
 
   constructor(private fb: FormBuilder) {
     super();

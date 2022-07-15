@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ForgotPasswordSearchPersonComponent } from '@ksp/shared/dialog';
 import { LoginFormComponent } from '@ksp/shared/form/login';
-import { ForgotPasswordPersonIdComponent } from '@ksp/uni-service/dialog';
 
 @Component({
   selector: 'uni-service-login',
@@ -28,7 +28,7 @@ export class UniLoginComponent {
   }
 
   forgetPassword() {
-    this.dialog.open(ForgotPasswordPersonIdComponent, {
+    this.dialog.open(ForgotPasswordSearchPersonComponent, {
       width: '350px',
     });
   }

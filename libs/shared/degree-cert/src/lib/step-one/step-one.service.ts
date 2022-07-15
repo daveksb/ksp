@@ -13,10 +13,9 @@ import { ListData } from '@ksp/shared/interface';
 export class DegreeCertStepOneService {
   componentList = [
     CourseFormOneComponent,
-    CourseFormTwoComponent,
     CourseFormThreeComponent,
     CourseFormFourComponent,
-    CourseFormOneComponent,
+    CourseFormTwoComponent,
   ];
 
   degreeTypes: ListData[] = [
@@ -57,22 +56,18 @@ export class DegreeCertStepOneService {
   courseTypes: ListData[] = [
     {
       value: 0,
-      label: 'ปริญญาตรีทางการศึกษา (หลักสูตร 5 ปี)',
-    },
-    {
-      value: 1,
       label: 'เอกเดี่ยว กรณีไม่มีการกำหนดวิชาเอก หรือแขนงวิชาย่อย',
     },
     {
-      value: 2,
+      value: 1,
       label: 'เอกเดี่ยว กรณีมีการกำหนดวิชาเอก หรือแขนงวิชาย่อย',
     },
     {
-      value: 3,
+      value: 2,
       label: 'เอกคู่',
     },
     {
-      value: 4,
+      value: 3,
       label: 'เอก-โท',
     },
   ];

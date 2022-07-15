@@ -19,12 +19,12 @@ export class UniRegisterRequesterComponent {
     private fb: FormBuilder
   ) {}
 
-  search() {
+  /* search() {
     this.dialog.open(UniversitySearchComponent, {
       height: '900px',
       width: '1200px',
     });
-  }
+  } */
 
   next() {
     this.router.navigate(['/register', 'coordinator']);
