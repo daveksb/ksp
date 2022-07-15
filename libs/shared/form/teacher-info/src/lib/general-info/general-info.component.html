@@ -1,7 +1,7 @@
 <form [formGroup]="form">
-  <div class="group__container">
-    <div class="row row--first">
-      <div>
+  <div class="bg-light mb-4">
+    <div class="row">
+      <div class="col-2 mb-3">
         <label class="form-label">คำนำหน้าชื่อ</label>
         <select class="form-select" formControlName="prefix">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
@@ -10,7 +10,7 @@
           <option value="3">Three</option>
         </select>
       </div>
-      <div>
+      <div class="col mb-3">
         <label class="form-label">ชื่อ </label>
         <input
           formControlName="firstName"
@@ -19,7 +19,7 @@
           placeholder="กรุณากรอก"
         />
       </div>
-      <div>
+      <div class="col">
         <label class="form-label">นามสกุล </label>
         <input
           formControlName="lastName"
@@ -30,8 +30,8 @@
       </div>
     </div>
 
-    <div class="row row--secondary">
-      <div>
+    <div class="row">
+      <div class="col mb-3">
         <label class="form-label">หมายเลขบัตรประชาชน</label>
         <input
           class="form-control"
@@ -41,7 +41,7 @@
         />
       </div>
 
-      <div>
+      <div class="col mb-3">
         <label class="form-label">ตำแหน่งวิชาการ</label>
         <input
           class="form-control"
@@ -52,12 +52,12 @@
       </div>
     </div>
 
-    <div>คุณวุฒิการศึกษา</div>
+    <div class="box-header">คุณวุฒิการศึกษา</div>
     <ng-container formArrayName="degrees">
       <ng-container *ngFor="let degreeForm of degrees.controls; let j = index">
         <ng-container [formGroupName]="j">
-          <div class="row row--third">
-            <div>
+          <div class="row">
+            <div class="col mb-3">
               <label class="form-label"
                 >คุณวุฒิ / สาขาวิชา ที่ {{ j + 1 }}</label
               >
@@ -68,7 +68,7 @@
                 formControlName="name"
               />
             </div>
-            <div>
+            <div class="col mb-3">
               <label class="form-label">สถาบัน </label>
               <input
                 class="form-control"
@@ -77,7 +77,7 @@
                 formControlName="institution"
               />
             </div>
-            <div>
+            <div class="col-2 mb-3">
               <label class="form-label">ปีที่สำเร็จการศึกษา (พ.ศ.) </label>
               <input
                 class="form-control"
@@ -86,14 +86,17 @@
                 formControlName="year"
               />
             </div>
-            <ng-container *hideInViewMode>
-              <i
-                role="button"
-                *ngIf="j > 0"
-                (click)="deleteDegree(j)"
-                class="bi bi-trash text-danger fs-5"
-              ></i>
-            </ng-container>
+            <div class="col-auto">
+              <ng-container *hideInViewMode>
+                <br />
+                <i
+                  role="button"
+                  *ngIf="j > 0"
+                  (click)="deleteDegree(j)"
+                  class="bi bi-trash text-danger fs-5"
+                ></i>
+              </ng-container>
+            </div>
           </div> </ng-container></ng-container
     ></ng-container>
 

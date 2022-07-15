@@ -1,19 +1,19 @@
 <form [formGroup]="form">
-  <div class="content__container">
-    <div class="detail__header">
+  <div class="bg-white">
+    <div class="box-header">
       การปฏิบัติการสอนในสถานศึกษาในสาขาวิชาเฉพาะ วิชาชีพครู /
       การบริหารการศึกษาสำหรับทุกหลักสูตร
     </div>
-    <div class="detail__container">
+    <div class="bg-light p-3 my-4">
       <div class="table-responsive">
         <table class="table">
-          <thead class="header__table">
+          <thead>
             <tr>
-              <th scope="col" class="header__column">ภาคที่</th>
-              <th scope="col" class="header__column">ชั้นปีที่</th>
-              <th scope="col" class="header__column">จำนวนสัปดาห์ต่อภาค</th>
-              <th scope="col" class="header__column">จำนวนคาบต่อสัปดาห์</th>
-              <th scope="col" class="header__column">จำนวนชั่วโมงต่อภาค</th>
+              <th scope="col" class="text-center">ภาคที่</th>
+              <th scope="col" class="text-center">ชั้นปีที่</th>
+              <th scope="col" class="text-center">จำนวนสัปดาห์ต่อภาค</th>
+              <th scope="col" class="text-center">จำนวนคาบต่อสัปดาห์</th>
+              <th scope="col" class="text-center">จำนวนชั่วโมงต่อภาค</th>
             </tr>
           </thead>
           <tbody>
@@ -31,10 +31,10 @@
                       />
                     </div>
                   </th>
-                  <td class="detail__table">
+                  <td>
                     <div>
                       <input
-                        class="form-control"
+                        class="form-control text-center"
                         type="number"
                         min="0"
                         placeholder=""
@@ -42,10 +42,10 @@
                       />
                     </div>
                   </td>
-                  <td class="detail__table">
+                  <td>
                     <div>
                       <input
-                        class="form-control"
+                        class="form-control text-center"
                         type="number"
                         min="0"
                         placeholder=""
@@ -53,10 +53,10 @@
                       />
                     </div>
                   </td>
-                  <td class="detail__table">
+                  <td>
                     <div>
                       <input
-                        class="form-control"
+                        class="form-control text-center"
                         type="number"
                         min="0"
                         placeholder=""
@@ -64,10 +64,10 @@
                       />
                     </div>
                   </td>
-                  <td class="detail__table">
+                  <td>
                     <div>
                       <input
-                        class="form-control"
+                        class="form-control text-center"
                         type="number"
                         min="0"
                         placeholder=""
@@ -81,31 +81,44 @@
 
             <tr>
               <th scope="row"></th>
-              <td class="detail__table"></td>
-              <td class="detail__table">
+              <td></td>
+              <td>
                 <ksp-add-row-button
                   (addRowClick)="addRow()"
                   *ngIf="mode === 'edit'"
                   >เพิ่ม</ksp-add-row-button
                 >
               </td>
-              <td class="detail__table"></td>
-              <td class="detail__table"></td>
+              <td></td>
+              <td></td>
             </tr>
 
             <tr>
               <th scope="row"></th>
-              <td class="detail__table">
-                <div class="label__table--footer">รวมทั้งหมด</div>
+              <td class="text-end fs-5">รวมทั้งหมด</td>
+              <td>
+                <div
+                  class="form-control bg-secondary bg-opacity-25 text-center"
+                  disabled
+                >
+                  {{ totalWeekTerm }}
+                </div>
               </td>
-              <td class="detail__table">
-                <div class="summary__container">{{ totalWeekTerm }}</div>
+              <td>
+                <div
+                  class="form-control bg-secondary bg-opacity-25 text-center"
+                  disabled
+                >
+                  {{ totalClassWeek }}
+                </div>
               </td>
-              <td class="detail__table">
-                <div class="summary__container">{{ totalClassWeek }}</div>
-              </td>
-              <td class="detail__table">
-                <div class="summary__container">{{ totalHourTerm }}</div>
+              <td>
+                <div
+                  class="form-control bg-secondary bg-opacity-25 text-center"
+                  disabled
+                >
+                  {{ totalHourTerm }}
+                </div>
               </td>
             </tr>
           </tbody>

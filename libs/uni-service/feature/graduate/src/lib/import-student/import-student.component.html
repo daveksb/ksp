@@ -385,6 +385,13 @@
               </div>
             </td>
 
+            <td
+              class="table__detail"
+              *ngIf="pageType === importType.studentList"
+            >
+              <div [pRowToggler]="product" class="table__expand">รายวิชา</div>
+            </td>
+
             <td class="d-flex">
               <button
                 *ngIf="!editing"

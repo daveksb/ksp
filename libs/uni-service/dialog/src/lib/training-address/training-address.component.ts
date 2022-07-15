@@ -24,6 +24,10 @@ export class TrainingAddressComponent {
     this.dialog.open(UniversitySearchComponent, {
       height: '900px',
       width: '1200px',
+      data: {
+        subHeader: 'กรุณาเลือกหน่วยงาน / สถานศึกษา',
+        searchType: 'uni',
+      },
     });
   }
 

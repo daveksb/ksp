@@ -3,6 +3,9 @@
     <div class="box__container">
       <div class="box__header">
         <div class="title__box">สถานที่ปฏิบัติการสอน</div>
+        <div>
+          <i role="button" class="bi bi-x-lg" matDialogClose=""></i>
+        </div>
       </div>
       <hr />
       <div class="box__detail">
@@ -11,13 +14,13 @@
             *ngFor="let teacherForm of addresses.controls; let i = index"
           >
             <ng-container [formGroupName]="i">
-              <div class="header__label">
+              <div class="form-label my-2">
                 สถานที่ปฏิบัติการสอนครั้งที่ {{ i + 1 }}
               </div>
-              <div class="detail__container--half">
-                <div>
+              <div class="row">
+                <div class="col mb-3">
                   <label class="form-label">รหัสหน่วยงาน/สถานศึกษา</label>
-                  <div class="search__content">
+                  <div class="d-flex align-items-center">
                     <input
                       class="form-control"
                       type="text"
@@ -26,11 +29,11 @@
                     <i
                       role="button"
                       (click)="searchAddress()"
-                      class="bi bi-search text-primary fs-5"
+                      class="bi bi-search text-primary fs-5 ms-1"
                     ></i>
                   </div>
                 </div>
-                <div class="detail__container">
+                <div class="col mb-3">
                   <label class="form-label">ชื่อหน่วยงาน/สถานศึกษา </label>
                   <input
                     class="form-control"
@@ -38,12 +41,15 @@
                     formControlName="addressName"
                   />
                 </div>
-                <i
-                  role="button"
-                  *ngIf="i > 0"
-                  (click)="deleteAddress(i)"
-                  class="bi bi-trash text-danger fs-5"
-                ></i>
+                <div class="col-auto">
+                  <br />
+                  <i
+                    role="button"
+                    *ngIf="i > 0"
+                    (click)="deleteAddress(i)"
+                    class="bi bi-trash text-danger fs-5"
+                  ></i>
+                </div>
               </div>
             </ng-container>
           </ng-container>
@@ -59,7 +65,11 @@
         </div>
 
         <div class="detail__action">
-          <button matDialogClose type="button" class="btn btn-outline-primary">
+          <button
+            matDialogClose
+            type="button"
+            class="btn border-primary text-primary"
+          >
             ยกเลิก
           </button>
           <button

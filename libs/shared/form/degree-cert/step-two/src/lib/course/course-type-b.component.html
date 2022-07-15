@@ -1,238 +1,255 @@
 <form [formGroup]="form">
-  <div class="tab-content">
-    <div class="tab-pane fade show active tab__body">
-      <div class="tab__content">
-        <div *ngIf="mode === 'edit'" class="header__detail">
-          ปริญญา/หลักสูตร<br />
-          1) ปริญญาโททางการศึกษา (วิชาชีพครู) <br />
-          2) ปริญญาโททางการศึกษา (วิชาชีพบริหาร) <br />
-          3) ปริญญาเอกทางการศึกษา (วิชาชีพครู) <br />
-          4) ปริญญาเอกทางการศึกษา (วิชาชีพบริหาร)
-        </div>
-        <div class="detail__container">
-          <div class="detail__header">โครงสร้างหลักสูตร</div>
-          <div class="table-responsive">
-            <table class="table">
-              <thead class="header__table">
-                <tr>
-                  <th scope="col" class="header__column--primary">หมวดวิชา</th>
-                  <th scope="col" class="header__column">แผนที่ 1</th>
-                  <th scope="col" class="header__column">แผนที่ 2</th>
-                  <th scope="col" class="header__column">แผนที่ 3</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="body__table">
-                  <th scope="row"></th>
-                  <td class="detail__table">
-                    <div>
-                      <input
-                        class="form-control form__primary"
-                        type="text"
-                        placeholder="ระบุชื่อแผน"
-                        formControlName="subject1GroupName"
-                      />
-                    </div>
-                  </td>
-                  <td class="detail__table">
-                    <div>
-                      <input
-                        class="form-control form__primary"
-                        type="text"
-                        placeholder="ระบุชื่อแผน"
-                        formControlName="subject2GroupName"
-                      />
-                    </div>
-                  </td>
-                  <td class="detail__table">
-                    <div>
-                      <input
-                        class="form-control form__primary"
-                        type="text"
-                        placeholder="ระบุชื่อแผน"
-                        formControlName="subject3GroupName"
-                      />
-                    </div>
-                  </td>
-                </tr>
-                <ng-container formArrayName="subjects">
-                  <ng-container
-                    *ngFor="let item of subjects.controls; let i = index"
-                  >
-                    <tr [formGroupName]="i">
-                      <th scope="row" class="label__table">
-                        {{ item.value?.label }}
-                      </th>
-                      <td class="detail__table">
-                        <div>
-                          <input
-                            class="form-control"
-                            type="number"
-                            min="0"
-                            placeholder="จำนวนหน่วยกิต"
-                            formControlName="credit1"
-                          />
-                        </div>
-                      </td>
-                      <td class="detail__table">
-                        <div>
-                          <input
-                            class="form-control"
-                            type="number"
-                            min="0"
-                            placeholder="จำนวนหน่วยกิต"
-                            formControlName="credit2"
-                          />
-                        </div>
-                      </td>
-                      <td class="detail__table">
-                        <div>
-                          <input
-                            class="form-control"
-                            type="number"
-                            min="0"
-                            placeholder="จำนวนหน่วยกิต"
-                            formControlName="credit3"
-                          />
-                        </div>
-                      </td>
-                    </tr>
-                  </ng-container>
-                </ng-container>
+  <div *ngIf="mode === 'edit'" class="form-header text-black">
+    ปริญญา/หลักสูตร<br />
+    1) ปริญญาโททางการศึกษา (วิชาชีพครู) <br />
+    2) ปริญญาโททางการศึกษา (วิชาชีพบริหาร) <br />
+    3) ปริญญาเอกทางการศึกษา (วิชาชีพครู) <br />
+    4) ปริญญาเอกทางการศึกษา (วิชาชีพบริหาร)
+  </div>
+  <div class="bg-light p-3 my-3">
+    <div class="box-header">โครงสร้างหลักสูตร</div>
+    <div class="table-responsive">
+      <table class="table p-3">
+        <thead>
+          <tr>
+            <th scope="col" class="w-25">หมวดวิชา</th>
+            <th scope="col" class="text-center">แผนที่ 1</th>
+            <th scope="col" class="text-center">แผนที่ 2</th>
+            <th scope="col" class="text-center">แผนที่ 3</th>
+          </tr>
+        </thead>
+        <thead>
+          <tr>
+            <th scope="row"></th>
+            <th>
+              <div>
+                <input
+                  class="form-control text-center"
+                  type="text"
+                  placeholder="ระบุชื่อแผน"
+                  formControlName="subject1GroupName"
+                />
+              </div>
+            </th>
+            <th>
+              <div>
+                <input
+                  class="form-control text-center"
+                  type="text"
+                  placeholder="ระบุชื่อแผน"
+                  formControlName="subject2GroupName"
+                />
+              </div>
+            </th>
+            <th>
+              <div>
+                <input
+                  class="form-control text-center"
+                  type="text"
+                  placeholder="ระบุชื่อแผน"
+                  formControlName="subject3GroupName"
+                />
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr></tr>
+          <ng-container formArrayName="subjects">
+            <ng-container *ngFor="let item of subjects.controls; let i = index">
+              <tr [formGroupName]="i">
+                <th scope="row" class="align-middle">
+                  {{ item.value?.label }}
+                </th>
+                <td>
+                  <div>
+                    <input
+                      class="form-control text-center"
+                      type="text"
+                      placeholder="จำนวนหน่วยกิต"
+                      formControlName="credit1"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <input
+                      class="form-control text-center"
+                      type="text"
+                      placeholder="จำนวนหน่วยกิต"
+                      formControlName="credit2"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <input
+                      class="form-control text-center"
+                      type="text"
+                      placeholder="จำนวนหน่วยกิต"
+                      formControlName="credit3"
+                    />
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+          </ng-container>
 
-                <tr>
-                  <th scope="row" class="label__table--footer">รวมทั้งหมด</th>
-                  <td class="detail__table">
-                    <div class="summary__container">
-                      {{ creditSums[0] | number }}
-                    </div>
-                  </td>
-                  <td class="detail__table">
-                    <div class="summary__container">
-                      {{ creditSums[1] | number }}
-                    </div>
-                  </td>
-                  <td class="detail__table">
-                    <div class="summary__container">
-                      {{ creditSums[2] | number }}
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="detail__container">
-          <div class="detail__header">
-            แผนการรับนิสิต / นักศึกษา <span class="label__text">*</span>
-          </div>
-          <div class="table-responsive">
-            <table class="table">
-              <thead class="header__table">
-                <tr>
-                  <th scope="col" class="header__column--secondary">
-                    แผนการรับนักศึกษา (รายปี)
-                  </th>
-                  <th scope="col" class="header__column">ปีการศึกษา (พ.ศ)</th>
-                  <th scope="col" class="header__column">แผนที่ 1 (จำนวนคน)</th>
-                  <th scope="col" class="header__column">แผนที่ 2 (จำนวนคน)</th>
-                  <th scope="col" class="header__column">แผนที่ 3 (จำนวนคน)</th>
-                  <th scope="col" class="header__column">รวมทั้งหมด</th>
-                </tr>
-              </thead>
-              <tbody>
-                <ng-container formArrayName="plans">
-                  <ng-container
-                    *ngFor="let item of plans.controls; let j = index"
+          <tr>
+            <th scope="row" class="text-end fs-5">รวมทั้งหมด</th>
+            <td>
+              <div
+                class="form-control text-center bg-secondary bg-opacity-25"
+                disabled
+              >
+                {{ creditSums[0] | number }}
+              </div>
+            </td>
+            <td>
+              <div
+                class="form-control text-center bg-secondary bg-opacity-25"
+                disabled
+              >
+                {{ creditSums[1] | number }}
+              </div>
+            </td>
+            <td>
+              <div
+                class="form-control text-center bg-secondary bg-opacity-25"
+                disabled
+              >
+                {{ creditSums[2] | number }}
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="bg-light p-3 my-3">
+    <div class="box-header">
+      แผนการรับนิสิต / นักศึกษา <span class="text-danger fs-6">*</span>
+    </div>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" class="w-25">แผนการรับนักศึกษา (รายปี)</th>
+            <th scope="col" class="text-center" style="width: 11rem">
+              ปีการศึกษา (พ.ศ)
+            </th>
+            <th scope="col" class="text-center" style="width: 11rem">
+              แผนที่ 1 (จำนวนคน)
+            </th>
+            <th scope="col" class="text-center" style="width: 11rem">
+              แผนที่ 2 (จำนวนคน)
+            </th>
+            <th scope="col" class="text-center" style="width: 11rem">
+              แผนที่ 3 (จำนวนคน)
+            </th>
+            <th scope="col" class="text-center" style="width: 11rem">
+              รวมทั้งหมด
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container formArrayName="plans">
+            <ng-container *ngFor="let item of plans.controls; let j = index">
+              <tr [formGroupName]="j">
+                <th scope="row" class="align-middle">
+                  {{ item.value.label }}
+                </th>
+                <td>
+                  <div>
+                    <input
+                      class="form-control text-center"
+                      type="text"
+                      placeholder="กรอกปีการศึกษา"
+                      formControlName="year"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <input
+                      class="form-control text-center"
+                      type="text"
+                      placeholder="จำนวนนักศึกษา"
+                      formControlName="student1"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <input
+                      class="form-control text-center"
+                      type="text"
+                      placeholder="จำนวนนักศึกษา"
+                      formControlName="student2"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <input
+                      class="form-control text-center"
+                      type="text"
+                      placeholder="จำนวนนักศึกษา"
+                      formControlName="student3"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div
+                    class="form-control text-center bg-secondary bg-opacity-25"
+                    disabled
                   >
-                    <tr [formGroupName]="j">
-                      <th scope="row" class="label__table">
-                        {{ item.value.label }}
-                      </th>
-                      <td class="detail__table">
-                        <div>
-                          <input
-                            class="form-control"
-                            type="number"
-                            min="0"
-                            placeholder="กรอกปีการศึกษา"
-                            formControlName="year"
-                          />
-                        </div>
-                      </td>
-                      <td class="detail__table">
-                        <div>
-                          <input
-                            class="form-control"
-                            type="number"
-                            min="0"
-                            placeholder="จำนวนนักศึกษา"
-                            formControlName="student1"
-                          />
-                        </div>
-                      </td>
-                      <td class="detail__table">
-                        <div>
-                          <input
-                            class="form-control"
-                            type="number"
-                            min="0"
-                            placeholder="จำนวนนักศึกษา"
-                            formControlName="student2"
-                          />
-                        </div>
-                      </td>
-                      <td class="detail__table">
-                        <div>
-                          <input
-                            class="form-control"
-                            type="number"
-                            min="0"
-                            placeholder="จำนวนนักศึกษา"
-                            formControlName="student3"
-                          />
-                        </div>
-                      </td>
-                      <td class="detail__table">
-                        <div class="summary__container">
-                          {{ yearSums[j] | number }}
-                        </div>
-                      </td>
-                    </tr>
-                  </ng-container>
-                </ng-container>
+                    {{ yearSums[j] | number }}
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+          </ng-container>
 
-                <tr>
-                  <th scope="row"></th>
-                  <td class="detail__table">
-                    <div class="label__table--footer">รวมทั้งหมด</div>
-                  </td>
-                  <td class="detail__table">
-                    <div class="summary__container">
-                      {{ planSums[0] | number }}
-                    </div>
-                  </td>
-                  <td class="detail__table">
-                    <div class="summary__container">
-                      {{ planSums[1] | number }}
-                    </div>
-                  </td>
-                  <td class="detail__table">
-                    <div class="summary__container">
-                      {{ planSums[2] | number }}
-                    </div>
-                  </td>
-                  <td class="detail__table">
-                    <div class="summary__container">
-                      {{ planSums[3] | number }}
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+          <tr>
+            <th scope="row"></th>
+            <td class="text-end fs-5">รวมทั้งหมด</td>
+
+            <td>
+              <div
+                class="form-control text-center bg-secondary bg-opacity-25"
+                disabled
+              >
+                {{ planSums[0] | number }}
+              </div>
+            </td>
+            <td>
+              <div
+                class="form-control text-center bg-secondary bg-opacity-25"
+                disabled
+              >
+                {{ planSums[1] | number }}
+              </div>
+            </td>
+            <td>
+              <div
+                class="form-control text-center bg-secondary bg-opacity-25"
+                disabled
+              >
+                {{ planSums[2] | number }}
+              </div>
+            </td>
+            <td>
+              <div
+                class="form-control text-center bg-secondary bg-opacity-25"
+                disabled
+              >
+                {{ planSums[3] | number }}
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </form>
