@@ -86,7 +86,12 @@
               เลขประจำตัวคุรุสภา
             </th>
             <th class="p-2 text-nowrap">หมายเลขหนังสือเดินทาง</th>
-            <th class="p-2 text-nowrap">สัญชาติ</th>
+            <th
+              class="p-2 text-nowrap"
+              *ngIf="pageType === importType.studentList"
+            >
+              สัญชาติ
+            </th>
 
             <th
               class="p-2 text-nowrap text-center"
