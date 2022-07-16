@@ -26,8 +26,6 @@ export class DegreeSearchComponent extends KspFormBaseComponent {
     requestsubmitDate: [],
   });
 
-  @Input() showApproveDateInput = false;
-  @Input() showSubmitDateInput = false;
   @Output() clear = new EventEmitter<boolean>();
   @Output() search = new EventEmitter<boolean>();
 

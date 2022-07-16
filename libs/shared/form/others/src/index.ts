@@ -21,3 +21,5 @@ export * from './lib/forbidden-property/forbidden-property.component';
 export * from './lib/qualification-approve-detail/qualification-approve-detail.component';
 
 export * from './lib/qualification-approve-person/qualification-approve-person.component';
+
+export * from './lib/form-address-table/form-address-table.component';

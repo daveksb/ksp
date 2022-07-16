@@ -21,8 +21,13 @@ export class DegreeListComponent implements OnInit {
     });
   }
 
-  nextPage() {
-    this.router.navigate(['/graduate', 'course-detail', this.processType]);
+  nextPage(type: number) {
+    this.router.navigate([
+      '/',
+      'student-list',
+      'course-detail',
+      (this.processType = type - 1),
+    ]);
   }
 
   search() {
@@ -45,6 +50,7 @@ const columns = [
   'graduateStatus',
   'editDate',
   'print',
+  'history',
 ];
 export interface StudentInfo {
   order: number;
@@ -57,7 +63,6 @@ export interface StudentInfo {
   studentStatus: string;
   graduateStatus: string;
   editDate: string;
-  print: string;
 }
 
 export const data: StudentInfo[] = [
@@ -72,7 +77,6 @@ export const data: StudentInfo[] = [
     studentStatus: 'สร้าง',
     graduateStatus: '-',
     editDate: '12 ส.ค. 2564',
-    print: '',
   },
   {
     order: 2,
@@ -85,19 +89,5 @@ export const data: StudentInfo[] = [
     studentStatus: 'รับข้อมูล',
     graduateStatus: 'สร้าง',
     editDate: '12 ส.ค. 2564',
-    print: '',
-  },
-  {
-    order: 3,
-    edit: '',
-    sendDate: '12 ส.ค. 2564',
-    degreeCode: '069784',
-    major: 'การศึกษาบัณฑิต สาขาวิชาเคมี หลักสูตรปรับปรุง พ.ศ.2562',
-    branch: 'วิทยาศาสตร์',
-    degreeName: 'วิทยาศาสตร์บัณฑิต',
-    studentStatus: 'รับข้อมูล',
-    graduateStatus: 'รับข้อมูล',
-    editDate: '12 ส.ค. 2564',
-    print: '',
   },
 ];

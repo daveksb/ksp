@@ -43,16 +43,13 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'admission',
-    data: {
-      type: UniserviceImportType.studentList,
-    },
+    path: 'student-list',
     loadChildren: () =>
       import('@ksp/uni-service/feature/graduate').then(
         (m) => m.UniServiceFeatureGraduateModule
       ),
   },
-  {
+  /*  {
     path: 'graduate',
     data: {
       type: UniserviceImportType.graduateList,
@@ -61,7 +58,7 @@ const routes: Routes = [
       import('@ksp/uni-service/feature/graduate').then(
         (m) => m.UniServiceFeatureGraduateModule
       ),
-  },
+  }, */
   {
     path: 'foreign-student-id',
     component: UniContainerPageComponent,

@@ -11,7 +11,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TableModule } from 'primeng/table';
-import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import {
+  FormAddressTableComponent,
+  SharedFormOthersModule,
+} from '@ksp/shared/form/others';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { BottomNavComponent } from '@ksp/shared/menu';
@@ -25,6 +28,7 @@ import {
 import { TopNavComponent } from '@ksp/shared/menu';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 import { DegreeSearchComponent } from '@ksp/shared/search';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   imports: [
@@ -50,6 +54,8 @@ import { DegreeSearchComponent } from '@ksp/shared/search';
     ReactiveFormsModule,
     DegreeSearchComponent,
     AddRowButtonComponent,
+    DropdownModule,
+    FormAddressTableComponent,
   ],
   declarations: [
     DegreeListComponent,
