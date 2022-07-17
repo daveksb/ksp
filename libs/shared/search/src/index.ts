@@ -7,3 +7,5 @@ export * from './e-service-user-search/e-service-user-search.component';
 export * from './accusation-search/accusation-search.component';
 export * from './degree-cert-search/degree-cert-search.component';
 export * from './retired-search/retired-search.component';
+
+export * from './degree-home-search/degree-home-search.component';

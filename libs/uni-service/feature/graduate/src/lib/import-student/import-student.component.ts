@@ -10,6 +10,7 @@ import { TrainingAddressComponent } from '@ksp/uni-service/dialog';
 import { SelectItem } from 'primeng/api';
 import { User } from './user';
 import { UserService } from './user.service';
+import { FormAddressTableComponent } from '@ksp/shared/form/others';
 
 @Component({
   selector: 'uni-service-import-student',
@@ -20,6 +21,7 @@ export class ImportStudentComponent implements OnInit {
   users: User[] = [];
   ThPrefixes: SelectItem[] = [];
   EngPrefixes: SelectItem[] = [];
+  nationality: SelectItem[] = [];
   isGraduated = false;
   pageType!: UniserviceImportType;
   importType = UniserviceImportType;
@@ -59,6 +61,11 @@ export class ImportStudentComponent implements OnInit {
       { label: 'Mrs.', value: '2' },
       { label: 'Miss.', value: '3' },
     ];
+    this.nationality = [
+      { label: 'One', value: '1' },
+      { label: 'Two', value: '2' },
+      { label: 'Three', value: '3' },
+    ];
 
     this.route.paramMap.subscribe((res) => {
       //this.processType = Number(res.get('type'));
@@ -76,13 +83,19 @@ export class ImportStudentComponent implements OnInit {
   onRowEditCancel(product: User, index: number) {}
 
   cancel() {
-    this.router.navigate(['./', 'graduate-list']);
+    this.router.navigate(['./', 'home']);
   }
 
   searchAddress() {
     const dialog = this.dialog.open(TrainingAddressComponent, {
       height: '900px',
       width: '1200px',
+    });
+  }
+
+  viewAdress() {
+    const dialog = this.dialog.open(FormAddressTableComponent, {
+      width: '900px',
     });
   }
 

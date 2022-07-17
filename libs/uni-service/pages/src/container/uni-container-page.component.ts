@@ -57,12 +57,8 @@ export const menu: MenuConfig[] = [
         label: 'ขอสร้างเลขประจำตัวคุรุสภาสำหรับนักศึกษาชาวต่างชาติ',
       },
       {
-        path: 'admission',
-        label: 'ขอยื่นรายชื่อผู้เข้าศึกษา',
-      },
-      {
-        path: 'graduate',
-        label: 'ขอยื่นรายชื่อผู้สำเร็จการศึกษา',
+        path: 'student-list',
+        label: 'ขอยื่นรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
       },
       {
         path: 'edit-degree',
@@ -80,15 +76,35 @@ export const menu: MenuConfig[] = [
     icon: 'assets/images/icon-sidenav/display.svg',
     label: 'ทะเบียนข้อมูล',
     path: '',
+    subMenu: [
+      {
+        path: 'degree-data',
+        label: 'ทะเบียนข้อมูลหลักสูตรที่รับรองปริญญาและประกาศนียบัตร',
+      },
+      {
+        path: 'student-data',
+        label: 'ข้อมูลรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
+      },
+      {
+        path: 'test-data',
+        label: 'ข้อมูลผลการทดสอบ',
+      },
+      {
+        path: 'performance-data',
+        label: 'ข้อมูลผลการประเมินสมรรถนะ',
+      },
+    ],
+    subMenuName: 'data',
+    isExpanded: false,
   },
   {
     icon: 'assets/images/icon-sidenav/file-earmark-text-fill.svg',
     label: 'รายงาน',
     path: '',
   },
-  {
+  /* {
     icon: 'assets/images/icon-sidenav/gear-fill.svg',
     label: 'ตั้งค่า',
     path: '',
-  },
+  }, */
 ];

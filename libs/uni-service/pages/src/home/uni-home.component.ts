@@ -4,7 +4,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { TopNavComponent } from '@ksp/shared/menu';
-import { DegreeSearchComponent } from '@ksp/shared/search';
+import { DegreeHomeSearchComponent } from '@ksp/shared/search';
 
 @Component({
   templateUrl: './uni-home.component.html',
@@ -16,7 +16,7 @@ import { DegreeSearchComponent } from '@ksp/shared/search';
     MatTableModule,
     TopNavComponent,
     ReactiveFormsModule,
-    DegreeSearchComponent,
+    DegreeHomeSearchComponent,
   ],
 })
 export class UniHomeComponent {
@@ -28,12 +28,13 @@ export class UniHomeComponent {
 
   displayedColumns: string[] = [
     'order',
-    'degreeId',
+    'approveNumber',
+    'degreeLevel',
     'uniName',
-    'course',
-    'major',
     'degreeName',
-    'educationLevel',
+    'major',
+    'branch',
+    'approveDate',
   ];
   dataSource = new MatTableDataSource<DegreeInfo>();
 
@@ -48,40 +49,44 @@ export class UniHomeComponent {
 
 export interface DegreeInfo {
   order: number;
-  degreeId: string;
+  approveNumber: string;
+  degreeLevel: string;
   uniName: string;
-  course: string;
-  major: string;
   degreeName: string;
-  educationLevel: string;
+  major: string;
+  branch: string;
+  approveDate: string;
 }
 
 export const data: DegreeInfo[] = [
   {
     order: 1,
-    degreeId: '069784',
+    approveNumber: '00069784',
+    degreeLevel: 'ปริญญาตรีทางการศึกษา (หลักสูตร 4 ปี)',
     uniName: 'มหาวิทยาลัยราชภัฏพระนครศรีอยุธยา',
-    course: 'การศึกษาบัณฑิต สาขาวิชาเคมี หลักสูตรปรับปรุง พ.ศ.2562',
+    degreeName: 'การศึกษาบัณฑิต สาขาวิชาเคมี หลักสูตรปรับปรุง พ.ศ.2562',
     major: 'วิทยาศาสตร์พื้นฐาน',
-    degreeName: 'วิทยาศาสตร์บัณฑิต',
-    educationLevel: 'ปริญญาตรีทางการศึกษา (หลักสูตร 4 ปี)',
+    branch: 'วิทยาศาสตร์บัณฑิต',
+    approveDate: '10/10/2565',
   },
   {
     order: 2,
-    degreeId: '069784',
+    approveNumber: '00069784',
+    degreeLevel: 'ปริญญาตรีทางการศึกษา (หลักสูตร 4 ปี)',
     uniName: 'มหาวิทยาลัยราชภัฏพระนครศรีอยุธยา',
-    course: 'พัฒนาครูโครงงานคุณธรรม',
-    major: 'ศึกษาศาสตร์',
-    degreeName: 'การศึกษาบัณฑิต',
-    educationLevel: 'ปริญญาตรีทางการศึกษา (หลักสูตร 4 ปี)',
+    degreeName: 'การศึกษาบัณฑิต สาขาวิชาเคมี หลักสูตรปรับปรุง พ.ศ.2562',
+    major: 'วิทยาศาสตร์พื้นฐาน',
+    branch: 'วิทยาศาสตร์บัณฑิต',
+    approveDate: '10/10/2565',
   },
   {
-    order: 2,
-    degreeId: '069784',
+    order: 3,
+    approveNumber: '00069784',
+    degreeLevel: 'ปริญญาตรีทางการศึกษา (หลักสูตร 4 ปี)',
     uniName: 'มหาวิทยาลัยราชภัฏพระนครศรีอยุธยา',
-    course: 'การออกแบบการจัดการเรียนรู้บนพื้นฐานเทคโนโลยี',
-    major: 'เทคโนโลยีสารสนเทศ',
-    degreeName: 'ศิลปศาสตร์บัณฑิต สาขาวิชาวิทยาการคอมพิวเตอร์',
-    educationLevel: 'ปริญญาตรีทางการศึกษา (หลักสูตร 4 ปี)',
+    degreeName: 'การศึกษาบัณฑิต สาขาวิชาเคมี หลักสูตรปรับปรุง พ.ศ.2562',
+    major: 'วิทยาศาสตร์พื้นฐาน',
+    branch: 'วิทยาศาสตร์บัณฑิต',
+    approveDate: '10/10/2565',
   },
 ];

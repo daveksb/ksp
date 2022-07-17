@@ -3,6 +3,7 @@ export interface User {
   order?: string;
   startDate: string;
   personId: string;
+  nationality: string;
   passportId: string;
   titleTh: string;
   firstNameTh: string;
@@ -14,7 +15,6 @@ export interface User {
   phone: string;
   birthDate: string;
   address: string;
-
   approveTime?: number;
   graduateDate?: string;
   approveDate?: string;
