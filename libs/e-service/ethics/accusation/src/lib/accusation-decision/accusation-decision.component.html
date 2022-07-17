@@ -1,8 +1,8 @@
 <ksp-top-nav><span subHeader>ระบบงานจรรยาบรรณ </span></ksp-top-nav>
 
 <form [formGroup]="form">
-  <div class="main-container">
-    <div class="page__title">บันทึกข้อมูลการกล่าวหา/กล่าวโทษ</div>
+  <div class="bg-secondary bg-opacity-10 px-3 py-2 full-height-2">
+    <div class="box-header">บันทึกข้อมูลการกล่าวหา/กล่าวโทษ</div>
 
     <ksp-stepper-nav
       [buttonColor]="'#f68b33'"
@@ -10,7 +10,7 @@
       [LabelSecond]="'พิจารณาดำเนินการ'"
     ></ksp-stepper-nav>
 
-    <div class="box-container">
+    <div class="bg-white p-3">
       <ksp-request-header-info
         [requestDate]="'10 ตุลาคม 2565'"
         [requestNumber]="'112234467876543'"
@@ -18,24 +18,26 @@
 
       <hr />
 
-      <div class="content__container">
-        <div class="header">การพิจารณาดำเนินการ</div>
+      <div class="bg-light p-3 m-4">
+        <div class="fs-5">การพิจารณาดำเนินการ</div>
 
-        <div class="checkbox__container">
+        <div class="py-2 px-3">
           <ng-container *ngFor="let item of decisions"
             ><div class="d-flex flex-row align-items-center mb-2">
               <input
                 type="radio"
-                class="radio fs-5 form-label me-2"
+                class="me-2"
                 formControlName="decisions"
                 value="{{ item.value }}"
               />
-              <label>{{ item.label }}</label>
+              <label class="form-label">{{ item.label }}</label>
             </div>
           </ng-container>
 
-          <div class="form__container">
-            <input class="form-control" formControlName="otherDetail" />
+          <div class="row ps-4">
+            <div class="col-6">
+              <input class="form-control" formControlName="otherDetail" />
+            </div>
           </div>
         </div>
       </div>

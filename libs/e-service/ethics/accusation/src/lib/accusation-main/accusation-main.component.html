@@ -3,22 +3,30 @@
 </ksp-top-nav>
 
 <form [formGroup]="form">
-  <div class="main__container">
-    <div class="tab__container">
+  <div class="bg-secondary bg-opacity-10 py-2 px-3">
+    <div class="box-header">บันทึกข้อมูลการกล่าวหา/กล่าวโทษ</div>
+    <ksp-stepper-nav
+      [LabelFirst]="'บันทึกการกล่าวหา/กล่าวโทษ'"
+      [LabelSecond]="'พิจารณาดำเนินการ'"
+    ></ksp-stepper-nav>
+
+    <div class="bg-white p-3">
+
+
       <e-service-ethic-accusation-record
         formControlName="accusation"
       ></e-service-ethic-accusation-record>
     </div>
-
-    <div class="sticky-bottom border">
-      <ksp-bottom-nav
-        [showCenterButtons]="true"
-        [isFirstPage]="true"
-        [showSaveButton]="true"
-        [colorMode]="'green'"
-        (nextClicked)="next()"
-        (cancelClicked)="cancel()"
-      ></ksp-bottom-nav>
-    </div>
   </div>
 </form>
+
+<div class="sticky-bottom border">
+  <ksp-bottom-nav
+    [showCenterButtons]="true"
+    [isFirstPage]="true"
+    [showSaveButton]="true"
+    [colorMode]="'green'"
+    (nextClicked)="next()"
+    (cancelClicked)="cancel()"
+  ></ksp-bottom-nav>
+</div>

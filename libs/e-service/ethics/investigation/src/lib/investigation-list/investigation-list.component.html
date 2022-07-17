@@ -1,7 +1,7 @@
 <ksp-top-nav><span subHeader>ระบบงานจรรยาบรรณ </span></ksp-top-nav>
 
 <form [formGroup]="form">
-  <div class="bg-secondary bg-opacity-10 px-3 pt-1 pb-3">
+  <div class="bg-secondary bg-opacity-10 px-3 pt-1 pb-3 full-height">
     <div class="box-header">ข้อมูลการกล่าวหา / กล่าวโทษ</div>
 
     <ksp-ethics-accusation-search
@@ -11,11 +11,8 @@
     </ksp-ethics-accusation-search>
     <br />
     <div class="bg-white px-3 py-2">
-      <div class="d-flex justify-content-between">
+      <div class="d-flex">
         <div class="box-header">รายการการกล่าวหา/กล่าวโทษ</div>
-        <button (click)="next()" type="button" class="btn btn-primary w-auto">
-          + บันทึกการกล่าวหา/กล่าวโทษ
-        </button>
       </div>
       <hr />
       <div class="table-responsive">
