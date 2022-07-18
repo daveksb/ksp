@@ -64,10 +64,6 @@ export class InquiryResultComponent extends KspFormBaseComponent {
     );
   }
 
-  @Input() hideAllButtons = false;
-  @Input() hideContainer = false;
-  @Input() hideTitle = false;
-
   goToInquiry() {
     this.router.navigate(['/', 'ethics', 'inquiry']);
   }

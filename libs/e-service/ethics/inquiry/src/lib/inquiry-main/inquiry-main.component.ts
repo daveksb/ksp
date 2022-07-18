@@ -26,21 +26,16 @@ export class InquiryMainComponent {
     private fb: FormBuilder
   ) {}
 
-  @Input() hideAllButtons = false;
-  @Input() hideContainer = false;
-  @Input() hideTitle = false;
-
   cancel() {
-    this.form.valueChanges.subscribe((res) => console.log(' res = ', res));
-    //this.router.navigate(['/', 'inquiry']);
+    this.router.navigate(['/', 'inquiry']);
   }
 
   save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
-        title: `คุณยืนยันการบันทึกข้อมูล
-        ใช่หรือไม่? `,
+        title: `คุณยืนยันการบันทึกข้อมูลใช่หรือไม่? `,
+        btnLabel: 'ยืนยัน',
       },
     });
 
@@ -55,7 +50,7 @@ export class InquiryMainComponent {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '375px',
       data: {
-        header: `ยืนยันข้อมูลสำเร็จ`,
+        header: `บันทึกข้อมูลสำเร็จ`,
         content: `เลขที่รายการ : 640120000123
         วันที่ : 10 ตุลาคม 2656`,
         subContent: 'ผู้บันทึกข้อมูล : นางสาวปาเจรา ใกล้คุก',
@@ -65,7 +60,7 @@ export class InquiryMainComponent {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'ethics', 'inquiry']);
+        this.cancel();
       }
     });
   }

@@ -37,10 +37,6 @@ import { providerFactory } from '@ksp/shared/utility';
   providers: providerFactory(InquiryDetailComponent),
 })
 export class InquiryDetailComponent extends KspFormBaseComponent {
-  @Input() hideAllButtons = false;
-  @Input() hideContainer = false;
-  @Input() hideTitle = false;
-
   override form = this.fb.group({
     boardOrder: [],
     boardDate: [],

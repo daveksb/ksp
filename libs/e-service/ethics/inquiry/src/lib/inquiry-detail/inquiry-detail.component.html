@@ -1,256 +1,233 @@
 <form [formGroup]="form">
-  <div class="main__container {" [class.hide__container]="hideContainer">
-    <div class="box-container">
-      <ksp-request-header-info
-        [requestDate]="'10 ตุลาคม 2565'"
-        [requestNumber]="'112234467876543'"
-      ></ksp-request-header-info>
+  <ksp-request-header-info
+    [requestLabel1]="'วันที่ทำรายการ'"
+    [requestLabel2]="'เลขที่รายการ'"
+    [requestDate]="'10 ตุลาคม 2565'"
+    [requestNumber]="'112234467876543'"
+  ></ksp-request-header-info>
 
-      <hr />
+  <hr />
 
-      <div class="form-header">บันทึกการสืบสวนข้อเท็จจริง</div>
-      <div class="form-label">
-        จัดทำคำสั่งแต่งตั้งคณะอนุกรรมการสอบสวน เสนอคณะกรรมการ (แบบจ.บ.1)
+  <div class="box-header">บันทึกการสอบสวน</div>
+  <div class="form-label">
+    จัดทำคำสั่งแต่งตั้งคณะอนุกรรมการสอบสวน เสนอคณะกรรมการ (แบบจบ.1)
+  </div>
+
+  <div class="row">
+    <div class="col mb-3">
+      <label class="form-label">คำสั่งคณะกรรมการมาตรฐานวิชาชีพที่ </label>
+      <input class="form-control" type="text" formControlName="boardOrder" />
+    </div>
+    <div class="col mb-3">
+      <label class="form-label">ลงวันที่ </label>
+      <input class="form-control" type="date" formControlName="boardDate" />
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between">
+    <div class="form-label">
+      คณะอนุกรรมการสอบสวนการประพฤติผิดจรรยาบรรณของวิชาชีพ
+    </div>
+    <div role="button" class="text-primary">+ เพิ่มรายการ</div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ลำดับ</th>
+          <th scope="col">หมายเลขบัตรประชาชน</th>
+          <th scope="col">เลขที่ใบอนุญาต</th>
+          <th scope="col">ตำแหน่งกรรมการ</th>
+          <th scope="col" colspan="3" class="text-center">ชื่อ-นามสกุล</th>
+          <th scope="col">ตำแหน่ง</th>
+          <th scope="col">สังกัด - หน่วยงาน/สถานศึกษา</th>
+          <th scope="col">แก้ไข</th>
+          <th scope="col">ลบ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>1</th>
+          <th>x-xxxx-xxxx-xx-x</th>
+          <th>xxxxxxxxxxxx</th>
+          <th>xxxxxxxxxxxx</th>
+          <th>นาย</th>
+          <th>ธนานุรักษ์</th>
+          <th>ใจสอาด</th>
+          <th>xxxxxxxxxxxx</th>
+          <th>สังกัดโรงเรียน</th>
+          <th>
+            <i role="button" class="bi bi-pencil-square fs-5 text-primary"></i>
+          </th>
+          <th>
+            <i role="button" class="bi bi-trash fs-5 text-danger"></i>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-responsive my-3">
+    <div class="box-header">ผู้ถูกกล่าวหา/กล่าวโทษ</div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ลำดับ</th>
+          <th scope="col">หมายเลขบัตรประชาชน</th>
+          <th scope="col">ชื่อ - นามสกุล</th>
+          <th scope="col">สังกัด</th>
+          <th scope="col">หน่วยงาน/สถานศึกษา</th>
+          <th scope="col">จังหวัด</th>
+          <th scope="col">บันทึกการแจ้งและอธิบายข้อกล่าวหาหรือกล่าวโทษ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>1</th>
+          <th>x-xxxx-xxxx-xx-x</th>
+          <th>นายธนานุรักษ์ ใจสอาด</th>
+          <th>LorumLorumLorum</th>
+          <th>วิทยาลัยเทคนิคฉะเชิงเทรา</th>
+          <th>ฉะเชิงเทรา</th>
+          <th>
+            <input type="date" class="form-control" />
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="form-label">จัดทำรายงานการสอบสวน (จ.บ.6)</div>
+  <div class="row">
+    <div class="col-6 mb-3">
+      <label class="form-label">วันที่ </label>
+      <input class="form-control" type="date" formControlName="reportDate" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col mb-3">
+      <label class="form-label">รายงานผลการสืบสวน </label>
+      <textarea
+        class="form-control"
+        type="text"
+        rows="3"
+        formControlName="inquiryReport"
+      ></textarea>
+    </div>
+    <ksp-file-upload></ksp-file-upload>
+  </div>
+
+  <hr />
+
+  <div class="bg-light px-3 py-2">
+    <div class="box-header">การพิจารณาดำเนินการ</div>
+    <div class="form-label">
+      คณะกรรมการวินิจฉัยระดับความผิดจรรยาบรรณของวิชาชีพ
+      ตามมติคณะกรรมการมาตรฐานวิชาชีพในการประชุม
+    </div>
+    <div class="row">
+      <div class="col mb-3">
+        <label class="form-label">ครั้งที่ </label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="considerLevelTimes"
+        />
+      </div>
+      <div class="col mb-3">
+        <label class="form-label">วันที่ </label>
+        <input
+          class="form-control"
+          type="date"
+          formControlName="considerLevelDate"
+        />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col mb-3">
+        <label class="form-label">มติที่ประชุม </label>
+        <textarea
+          class="form-control"
+          type="text"
+          rows="3"
+          formControlName="considerLevelReason"
+        >
+        </textarea>
+      </div>
+      <ksp-file-upload></ksp-file-upload>
+    </div>
+
+    <div class="my-3">
+      <div class="d-flex align-items-center mb-2">
+        <input type="radio" value="1" formControlName="consider" />
+        <label class="form-label ms-2">ยกข้อกล่าวหา/กล่าวโทษ</label>
       </div>
 
-      <div class="form__container">
-        <div class="content__container">
-          <div class="mb-3">
-            <label class="form-label">คำสั่งคณะกรรมการมาตรฐานวิชาชีพ </label>
-            <input
-              class="form-control"
-              type="text"
-              formControlName="boardOrder"
-            />
-          </div>
-          <div class="mb-3">
-            <label class="form-label">ลงวันที่ </label>
-            <input
-              class="form-control"
-              type="date"
-              formControlName="boardDate"
-            />
-          </div>
-        </div>
+      <div class="d-flex align-items-center mb-2">
+        <input type="radio" value="2" formControlName="consider" />
+        <label class="form-label ms-2">ตักเตือน</label>
       </div>
 
-      <div class="table__header">
-        <div class="table__title">
-          คณะอนุกรรมการสอบสวนการประพฤติผิดจรรยาบรรณของวิชาชีพ
-        </div>
-        <div class="add__list">+ เพิ่มรายการ</div>
-      </div>
-      <div class="table__container">
-        <div class="table-responsive">
-          <table class="table">
-            <thead class="header__table">
-              <tr>
-                <th scope="col">ลำดับ</th>
-                <th scope="col">หมายเลขบัตรประชาชน</th>
-                <th scope="col">เลขที่ใบอนุญาต</th>
-                <th scope="col">ตำแหน่งกรรมการ</th>
-                <th scope="col">ชื่อ</th>
-                <th scope="col">นามสกุล</th>
-                <th scope="col">ตำแหน่ง</th>
-                <th scope="col">สังกัด - หน่วยงาน/สถานศึกษา</th>
-                <th scope="col">แก้ไข</th>
-                <th scope="col">ลบ</th>
-              </tr>
-            </thead>
-            <tbody class="body__table">
-              <tr>
-                <th>x</th>
-                <th>x-xxxx-xxxx-xx-x</th>
-                <th>x-xxxx-xxxx-xx-x</th>
-                <th>x-xxxx-xxxx-xx-x</th>
-                <th>x-xxxx-xxxx-xx-x</th>
-                <th>x-xxxx-xxxx-xx-x</th>
-                <th>x-xxxx-xxxx-xx-x</th>
-                <th>x-xxxx-xxxx-xx-x</th>
-                <th>
-                  <i
-                    role="button"
-                    class="bi bi-pencil-square fs-5 text-primary"
-                  ></i>
-                </th>
-                <th>
-                  <i role="button" class="bi bi-trash fs-5 text-danger"></i>
-                </th>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      <div class="d-flex align-items-center mb-2">
+        <input type="radio" value="3" formControlName="consider" />
+        <label class="form-label ms-2">ภาคทัณฑ์</label>
       </div>
 
-      <div class="header">
-        แสดงตารางผู้ถูกกล่าวหา และให้เลือกวันที่แจ้งแบบรายคน
+      <div class="d-flex align-items-center mb-2">
+        <input type="radio" value="4" formControlName="consider" />
+
+        <label class="form-label ms-2">พักใช้</label>
+        <label class="form-label mx-3">ระยะเวลา</label>
+        <input
+          class="form-control"
+          style="width: 8rem"
+          type="number"
+          min="0"
+          formControlName="considerDay"
+        />
+        <label class="form-label mx-3">วัน</label>
       </div>
 
-      <div class="form__container">
-        <div class="form-label">จัดทำรายงานการสอบสวน (จ.บ.6)</div>
+      <div class="d-flex align-items-center mb-2">
+        <label class="form-label ms-4"
+          >ระยะเวลาเริ่มต้นและสิ้นสุดการพักใช้ (วัน / เดือน / ปี)</label
+        >
+        <label class="form-label mx-3">วันที่</label>
+        <input
+          class="form-control"
+          style="width: 12rem"
+          type="date"
+          formControlName="considerDateFrom"
+        />
 
-        <div class="content__container">
-          <div class="mb-3">
-            <label class="form-label">วันที่ </label>
-            <input
-              class="form-control"
-              type="date"
-              formControlName="reportDate"
-            />
-          </div>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">รายงานผลการสืบสวน </label>
-          <textarea
-            class="form-control"
-            type="text"
-            rows="3"
-            formControlName="inquiryReport"
-          ></textarea>
-
-          <div id="upload__button">
-            <ksp-file-upload></ksp-file-upload>
-          </div>
-        </div>
+        <label class="form-label mx-3">ถึง วันที่</label>
+        <input
+          class="form-control"
+          type="date"
+          style="width: 12rem"
+          formControlName="considerDateTo"
+        />
       </div>
 
-      <hr />
-
-      <div class="form__container">
-        <div class="form-header">การพิจารณาดำเนินการ</div>
-        <div class="form-label">
-          คณะกรรมการวินิจฉัยระดับความผิดจรรยาบรรณของวิชาชีพ
-          ตามมติคณะกรรมการมาตรฐานวิชาชีพในการประชุม
-        </div>
-        <div class="content__container">
-          <div class="mb-3">
-            <label class="form-label">ครั้งที่ </label>
-            <input
-              class="form-control"
-              type="text"
-              formControlName="considerLevelTimes"
-            />
-          </div>
-          <div class="mb-3">
-            <label class="form-label">วันที่ </label>
-            <input
-              class="form-control"
-              type="date"
-              formControlName="considerLevelDate"
-            />
-          </div>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">มติที่ประชุม </label>
-          <textarea
-            class="form-control"
-            type="text"
-            rows="3"
-            formControlName="considerLevelReason"
-          >
-          </textarea>
-          <div id="upload__button">
-            <ksp-file-upload></ksp-file-upload>
-          </div>
-        </div>
+      <div class="d-flex align-items-center mb-2">
+        <input type="radio" value="5" formControlName="consider" />
+        <label class="form-label ms-2">เพิกถอนใบอนุญาตประกอบวิชาชีพ</label>
       </div>
 
-      <div class="checkbox__container">
-        <div class="checkbox__row">
-          <input
-            type="radio"
-            class="checkbox"
-            value="1"
-            formControlName="consider"
-          />
-          <label class="checkbox__label">ยกข้อกล่าวหา/กล่าวโทษ</label>
-        </div>
-
-        <div class="checkbox__row">
-          <input
-            type="radio"
-            class="checkbox"
-            value="2"
-            formControlName="consider"
-          />
-          <label class="checkbox__label">ตักเตือน</label>
-        </div>
-
-        <div class="checkbox__row">
-          <input
-            type="radio"
-            class="checkbox"
-            value="3"
-            formControlName="consider"
-          />
-          <label class="checkbox__label">ภาคทัณฑ์</label>
-        </div>
-
-        <div class="checkbox__row">
-          <input
-            type="radio"
-            class="checkbox"
-            value="4"
-            formControlName="consider"
-          />
-          <div class="content__container-primary">
-            <label class="checkbox__label">พักใช้</label>
-            <label class="checkbox__label">ระยะเวลา</label>
-            <input
-              class="form-control"
-              type="number"
-              min="0"
-              formControlName="considerDay"
-            />
-            <label class="checkbox__label">วัน</label>
-          </div>
-        </div>
-
-        <div class="checkbox__row">
-          <div class="content__container-secondary">
-            <label class="checkbox__label"
-              >ระยะเวลาเริ่มต้นและสิ้นสุดการพักใช้ (วัน/เดือน/ปี)</label
-            >
-            <label class="checkbox__label">วันที่</label>
-            <input
-              class="form-control"
-              type="date"
-              formControlName="considerDateFrom"
-            />
-            <label class="checkbox__label">ถึง วันที่</label>
-            <input
-              class="form-control"
-              type="date"
-              formControlName="considerDateTo"
-            />
-          </div>
-        </div>
-
-        <div class="checkbox__row">
-          <input
-            type="radio"
-            class="checkbox"
-            value="5"
-            formControlName="consider"
-          />
-          <label class="checkbox__label">เพิกถอนใบอนุญาตประกอบวิชาชีพ</label>
-        </div>
-
-        <div class="checkbox__row">
-          <input
-            type="radio"
-            class="checkbox"
-            name="consider"
-            value="6"
-            formControlName="consider"
-          />
-          <label class="form-label">มติคณะกรรมการอื่นๆ </label>
-        </div>
+      <div class="d-flex align-items-center">
+        <input
+          type="radio"
+          name="consider"
+          value="6"
+          formControlName="consider"
+        />
+        <label class="form-label ms-2">มติคณะกรรมการอื่นๆ </label>
       </div>
 
-      <div class="form__container-2">
+      <div class="mx-4">
         <textarea
           class="form-control"
           type="text"

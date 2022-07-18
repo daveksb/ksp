@@ -1,161 +1,165 @@
-<div class="header">ข้อมูลผู้ถูกกล่าวหา/กล่าวโทษ</div>
+<div class="box-header text-primary">ข้อมูลผู้ถูกกล่าวหา/กล่าวโทษ</div>
+<hr />
+<div class="bg-white">
+  <div class="box-header">ค้นหา</div>
 
-<div class="top-container">
-  <div class="box__title">ค้นหา</div>
-
-  <div class="row__container row__container--4">
-    <div class="input__container">
+  <div class="row">
+    <div class="col-3">
       <label class="form-label">หมายเลขบัตรประชาชน </label>
       <input class="form-control" type="text" />
     </div>
 
-    <div class="input__container">
+    <div class="col-2">
       <label class="form-label">คำนำหน้าชื่อ</label>
-      <input class="form-control" type="text" />
+      <select class="form-select">
+        <option selected>กรุณาเลือก</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
     </div>
 
-    <div class="input__container">
+    <div class="col">
       <label class="form-label">ชื่อ</label>
       <input class="form-control" type="text" />
     </div>
 
-    <div class="input__container">
+    <div class="col">
       <label class="form-label">นามสกุล</label>
       <input class="form-control" type="text" />
     </div>
   </div>
 
-  <div class="row__container row__container--2">
-    <div class="input__container">
+  <div class="row">
+    <div class="col-5">
       <label class="form-label"> สังกัด</label>
-      <input class="form-control" type="text" />
+      <select class="form-select">
+        <option selected>กรุณาเลือก</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
     </div>
   </div>
 
-  <div class="row__container row__container--2">
-    <div class="input__container">
+  <div class="row">
+    <div class="col-5">
       <label class="form-label"> จังหวัด</label>
-      <input class="form-control" type="text" />
+      <select class="form-select">
+        <option selected>กรุณาเลือก</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
     </div>
-    <div class="input__container">
+    <div class="col">
       <label class="form-label">หน่วยงาน / สถานศึกษา</label>
       <input class="form-control" type="text" />
     </div>
   </div>
 
-  <div class="buttons__search">
+  <div class="d-flex justify-content-end mt-3">
     <button
       (click)="clear()"
       type="button"
-      class="btn btn-transparent btn-sm label__button"
+      class="btn border-primary text-primary"
     >
       ล้างข้อมูล
     </button>
-    <button
-      (click)="search()"
-      type="button"
-      class="btn btn-primary btn-sm label__button"
-    >
+    <button (click)="search()" type="button" class="btn btn-primary ms-2">
       ค้นหา
     </button>
   </div>
 </div>
 <hr />
 
-<div class="table__container">
-  <div class="box__title">ผลการค้นหา</div>
+<div class="box-header">ผลการค้นหา</div>
 
-  <table mat-table [dataSource]="dataSource">
-    <ng-container matColumnDef="select">
-      <th mat-header-cell *matHeaderCellDef>เลือก</th>
-      <td mat-cell *matCellDef="let row">
-        <input
-          (click)="$event.stopPropagation()"
-          type="radio"
-          name="license1"
-        />
-      </td>
-    </ng-container>
+<table mat-table [dataSource]="dataSource">
+  <ng-container matColumnDef="select">
+    <th mat-header-cell *matHeaderCellDef>เลือก</th>
+    <td mat-cell *matCellDef="let row">
+      <input (click)="$event.stopPropagation()" type="radio" name="license1" />
+    </td>
+  </ng-container>
 
-    <ng-container matColumnDef="view">
-      <th mat-header-cell *matHeaderCellDef>ดูข้อมูล</th>
-      <td mat-cell *matCellDef="let row">
-        <i
-          role="button"
-          (click)="personSelected = true"
-          class="bi bi-eye text-success fs-5"
-        ></i>
-      </td>
-    </ng-container>
+  <ng-container matColumnDef="view">
+    <th mat-header-cell *matHeaderCellDef>ดูข้อมูล</th>
+    <td mat-cell *matCellDef="let row">
+      <i
+        role="button"
+        (click)="personSelected = true"
+        class="bi bi-eye text-success fs-5"
+      ></i>
+    </td>
+  </ng-container>
 
-    <ng-container matColumnDef="personId">
-      <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
-      <td mat-cell *matCellDef="let element">{{ element.personId }}</td>
-    </ng-container>
+  <ng-container matColumnDef="personId">
+    <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
+    <td mat-cell *matCellDef="let element">{{ element.personId }}</td>
+  </ng-container>
 
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
-      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-    </ng-container>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+  </ng-container>
 
-    <ng-container matColumnDef="organization">
-      <th mat-header-cell *matHeaderCellDef>สังกัด</th>
-      <td mat-cell *matCellDef="let element">{{ element.organization }}</td>
-    </ng-container>
+  <ng-container matColumnDef="organization">
+    <th mat-header-cell *matHeaderCellDef>สังกัด</th>
+    <td mat-cell *matCellDef="let element">{{ element.organization }}</td>
+  </ng-container>
 
-    <ng-container matColumnDef="school">
-      <th mat-header-cell *matHeaderCellDef>หน่วยงาน/ สถานศึกษา</th>
-      <td mat-cell *matCellDef="let element">{{ element.school }}</td>
-    </ng-container>
+  <ng-container matColumnDef="school">
+    <th mat-header-cell *matHeaderCellDef>หน่วยงาน/ สถานศึกษา</th>
+    <td mat-cell *matCellDef="let element">{{ element.school }}</td>
+  </ng-container>
 
-    <ng-container matColumnDef="province">
-      <th mat-header-cell *matHeaderCellDef>จังหวัด</th>
-      <td mat-cell *matCellDef="let element">{{ element.province }}</td>
-    </ng-container>
+  <ng-container matColumnDef="province">
+    <th mat-header-cell *matHeaderCellDef>จังหวัด</th>
+    <td mat-cell *matCellDef="let element">{{ element.province }}</td>
+  </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
 
-  <div class="buttons__table">
-    <button matDialogClose type="button" class="btn btn-outline-success">
-      ยกเลิก
-    </button>
-    <button matDialogClose type="button" class="btn btn-success">ตกลง</button>
-  </div>
+<div class="d-flex justify-content-center mt-3">
+  <button matDialogClose type="button" class="btn border-success text-success">
+    ยกเลิก
+  </button>
+  <button matDialogClose type="button" class="btn btn-success ms-2">
+    ตกลง
+  </button>
 </div>
-<hr />
+<br />
+<mat-tab-group class="tab-group" animationDuration="0ms" dynamicHeight="true">
+  <mat-tab label="ข้อมูลผู้ได้รับใบอนุญาต" class="tab-content">
+    <ng-container *ngIf="dataSource.data.length && personSelected">
+      <e-service-person-info></e-service-person-info>
+    </ng-container>
+  </mat-tab>
 
-<div class="tab__container">
-  <mat-tab-group class="tab-group" animationDuration="0ms" dynamicHeight="true">
-    <mat-tab label="ข้อมูลผู้มีใบอนุญาต" class="tab-content">
-      <ng-container *ngIf="dataSource.data.length && personSelected">
-        <e-service-person-info></e-service-person-info>
-      </ng-container>
-    </mat-tab>
+  <mat-tab label="ข้อมูลใบอนุญาต">
+    <ng-container *ngIf="dataSource.data.length && personSelected">
+      <div class="box-header">
+        ข้อมูลใบอนุญาตประกอบวิชาชีพทางการศึกษา (ยังไม่หมดอายุ)
+      </div>
+      <ksp-license-type-button-group
+        [groups]="license"
+      ></ksp-license-type-button-group>
+      <ksp-license-info></ksp-license-info>
+    </ng-container>
+  </mat-tab>
 
-    <mat-tab label="ข้อมูลใบอนุญาต">
-      <ng-container *ngIf="dataSource.data.length && personSelected">
-        <div class="header">
-          ข้อมูลใบอนุญาตประกอบวิชาชีพทางการศึกษา (ยังไม่หมดอายุ)
-        </div>
-        <ksp-license-type-button-group
-          [groups]="license"
-        ></ksp-license-type-button-group>
-        <ksp-license-info></ksp-license-info>
-      </ng-container>
-    </mat-tab>
+  <mat-tab label="ที่อยู่">
+    <ng-container *ngIf="dataSource.data.length && personSelected"
+      ><e-service-address-info></e-service-address-info
+    ></ng-container>
+  </mat-tab>
 
-    <mat-tab label="ที่อยู่">
-      <ng-container *ngIf="dataSource.data.length && personSelected"
-        ><e-service-address-info></e-service-address-info
-      ></ng-container>
-    </mat-tab>
-
-    <mat-tab label="สถานที่ทำงาน">
-      <ng-container *ngIf="dataSource.data.length && personSelected">
-        <e-service-workplace-info></e-service-workplace-info>
-      </ng-container>
-    </mat-tab>
-  </mat-tab-group>
-</div>
+  <mat-tab label="สถานที่ทำงาน">
+    <ng-container *ngIf="dataSource.data.length && personSelected">
+      <e-service-workplace-info></e-service-workplace-info>
+    </ng-container>
+  </mat-tab>
+</mat-tab-group>

@@ -31,8 +31,8 @@ export class PublishReviewComponent {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
-        title: `คุณยืนยันการบันทึกข้อมูล
-        ใช่หรือไม่? `,
+        title: `คุณยืนยันการบันทึกข้อมูลใช่หรือไม่? `,
+        btnLabel: 'ยืนยัน',
       },
     });
 
@@ -47,7 +47,7 @@ export class PublishReviewComponent {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '375px',
       data: {
-        header: `ยืนยันข้อมูลสำเร็จ`,
+        header: `บันทึกข้อมูลสำเร็จ`,
         content: `เลขที่รายการ : 640120000123
         วันที่ : 10 ตุลาคม 2656`,
         subContent: 'ผู้บันทึกข้อมูล : นางสาวปาเจรา ใกล้คุก',

@@ -11,4 +11,6 @@ import { Component, Input } from '@angular/core';
 export class RequestHeaderInfoComponent {
   @Input() requestDate = '';
   @Input() requestNumber = '';
+  @Input() requestLabel1 = 'วันที่ทำรายการ';
+  @Input() requestLabel2 = 'เลขใบคำขอ';
 }

@@ -6,7 +6,7 @@ export const ethicsMenu: MenuConfig[] = [
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'การกล่าวหา/กล่าวโทษ',
     path: '',
-    isExpanded: true,
+    isExpanded: false,
     subMenuName: 'ethics',
     subMenu: [
       {
@@ -57,7 +57,7 @@ export const standardMenu: MenuConfig[] = [
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ใบคำขอรับรองปริญญาและประกาศนียบัตร',
     path: '',
-    isExpanded: true,
+    isExpanded: false,
     subMenuName: 'degree-cert',
     subMenu: [
       {
@@ -82,7 +82,7 @@ export const standardMenu: MenuConfig[] = [
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ใบคำขอส่งรายชื่อผู้เข้าและผู้สำเร็จการศึกษา',
     path: '',
-    isExpanded: true,
+    isExpanded: false,
     subMenuName: 'gradute-list',
     subMenu: [
       {
@@ -122,7 +122,7 @@ export const licenseMenu: MenuConfig[] = [
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต (ชาวไทย)',
     path: '',
-    isExpanded: true,
+    isExpanded: false,
     subMenuName: 'temp-thai',
     subMenu: [
       {
@@ -156,7 +156,7 @@ export const licenseMenu: MenuConfig[] = [
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ)',
     path: '',
-    isExpanded: true,
+    isExpanded: false,
     subMenuName: 'foreign-id',
     subMenu: [
       {
@@ -179,7 +179,7 @@ export const licenseMenu: MenuConfig[] = [
     icon: 'assets/images/icon-sidenav/people.svg',
     label: 'บริหารจัดการผู้ใช้งาน',
     path: '',
-    isExpanded: true,
+    isExpanded: false,
     subMenuName: 'user-management',
     subMenu: [
       {

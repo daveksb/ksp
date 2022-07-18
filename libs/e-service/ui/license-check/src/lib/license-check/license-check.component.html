@@ -14,11 +14,11 @@
 
   <div class="form-label mb-2" *ngIf="isHasReason">หมายเหตุ/เหตุผล</div>
 
-  <div class="checkbox__container">
+  <div class="d-flex flex-column ms-3">
     <ng-container *ngFor="let reason of reasons">
-      <div class="mb-3">
-        <input type="checkbox" class="checkbox__box" />
-        <label>{{ reason }}</label>
+      <div class="d-flex align-items-center mb-2">
+        <input type="checkbox" />
+        <label class="form-label text-black ms-2">{{ reason }}</label>
       </div>
     </ng-container>
   </div>

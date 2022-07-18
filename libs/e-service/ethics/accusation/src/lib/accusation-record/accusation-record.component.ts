@@ -82,12 +82,6 @@ export class AccusationRecordComponent
     'ใบอนุญาตประกอบวิชาชีพ - ศึกษานิเทศก์',
   ];
 
-  @Input() hideAllButtons = false;
-  @Input() hideContainer = false;
-  @Input() hideTitle = false;
-  @Input() hideBox = false;
-  @Input() hideStepper = false;
-
   ngOnInit(): void {
     this.route.data.subscribe((res) => {
       //console.log('res2 = ', res);
@@ -95,7 +89,7 @@ export class AccusationRecordComponent
   }
   openSearchDialog() {
     this.dialog.open(AccusationSearchComponent, {
-      height: '750px',
+      height: '100vh',
       width: '1250px',
     });
   }

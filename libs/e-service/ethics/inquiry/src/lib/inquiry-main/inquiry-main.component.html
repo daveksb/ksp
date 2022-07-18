@@ -1,38 +1,30 @@
 <ksp-top-nav><span subHeader>ระบบงานจรรยาบรรณ </span></ksp-top-nav>
 
 <form [formGroup]="form">
-  <div class="main__container">
-    <div class="page__title">บันทึกข้อมูลการสอบสวน</div>
-    <div class="tab__container">
-      <mat-tab-group selectedIndex="1" class="tab-group">
+  <div class="bg-secondary bg-opacity-10 px-3 py-2 full-height-2">
+    <div class="box-header">บันทึกข้อมูลการสืบสวนข้อเท็จจริง</div>
+    <div class="bg-white">
+      <mat-tab-group selectedIndex="0" class="tab-group">
         <mat-tab label="สอบสวน" class="tab-content"
           ><e-service-inquiry-detail
-            [hideContainer]="true"
             formControlName="inquiry"
           ></e-service-inquiry-detail>
         </mat-tab>
 
         <mat-tab label="แจ้งผลคำวินิจฉัย">
           <e-service-inquiry-result
-            [hideContainer]="true"
             formControlName="rulingInform"
           ></e-service-inquiry-result>
         </mat-tab>
 
         <mat-tab label="บันทึกการกล่าวหา/กล่าวโทษ">
           <e-service-ethic-accusation-record
-            [hideStepper]="true"
-            [hideAllButtons]="true"
-            [hideContainer]="true"
-            [hideTitle]="true"
-            [hideBox]="true"
             formControlName="accusation"
           ></e-service-ethic-accusation-record>
         </mat-tab>
 
         <mat-tab label="สืบสวนข้อเท็จจริง">
           <e-service-form-investigation-detail
-            [hideContainer]="true"
             [hideTitle]="true"
             formControlName="investigation"
           ></e-service-form-investigation-detail>
