@@ -3,10 +3,10 @@
   <span subHeader>{{ headers[pageType][1] }}</span>
 </ksp-top-nav>
 
-<div class="container">
-  <div class="header">รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ</div>
+<div class="bg-secondary bg-opacity-10 px-4 py-2">
+  <div class="box-header">รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ</div>
 
-  <div class="content__container">
+  <div class="bg-white p-3">
     <ksp-request-header-info
       [requestDate]="'10 ตุลาคม 2565'"
       [requestNumber]="'112234467876543'"
@@ -14,9 +14,9 @@
 
     <hr />
 
-    <div class="form__container-2">
-      <div class="detail__content">
-        <div class="mb-3">
+    <div class="px-4 py-2">
+      <div class="row">
+        <div class="col mb-3">
           <label class="form-label">สังกัด</label>
           <select class="form-select" disabled>
             <option selected>กรุณาเลือก</option>
@@ -26,7 +26,7 @@
           </select>
         </div>
 
-        <div class="mb-3">
+        <div class="col mb-3">
           <label class="form-label">หน่วยงาน/สถานศึกษา</label>
           <select class="form-select" disabled>
             <option selected>กรุณาเลือก</option>
@@ -47,20 +47,24 @@
         </select>
       </div>
 
-      <div class="view__lebel" *ngIf="pageType === 0">
-        ดูรายชื่อผู้เข้าใช้งานระบบของหน่วยงาน/สถานศึกษานี้
+      <div class="d-flex justify-content-end" *ngIf="pageType === 0">
+        <label
+          class="text-primary form-label text-decoration-underline"
+          role="button"
+          >ดูรายชื่อผู้เข้าใช้งานระบบของหน่วยงาน/สถานศึกษานี้</label
+        >
       </div>
     </div>
 
-    <div class="form__container">
-      <div class="detail__header">
+    <div class="bg-light">
+      <div class="box-header px-4 pt-3">
         ข้อมูลผู้ขอเข้ารหัสสำหรับเข้าใช้งานระบบ (ผู้ประสานงาน)
       </div>
       <ksp-form-requester-info [mode]="'view'"></ksp-form-requester-info>
     </div>
     <br />
-    <div class="form__container">
-      <div class="detail__header">
+    <div class="bg-light">
+      <div class="box-header px-4 pt-3">
         ข้อมูลผู้มีอำนาจแต่งตั้ง (ที่ระบุไว้ในเอกสารแนบ)
       </div>
       <ksp-form-coordinator-info [mode]="'view'"></ksp-form-coordinator-info>
@@ -72,8 +76,8 @@
       [groups]="['หนังสือแต่งตั้ง']"
     ></ksp-form-attachment>
   </div>
-
-  <div class="content__container-2">
+  <br />
+  <div class="bg-white p-4">
     <e-service-license-check
       [isHasReason]="false"
       [headerTitle]="checkComponentTitles[pageType]"

@@ -53,7 +53,7 @@ export class ApproveComponent {
 
     dialogRef.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'degree-cert', 'final-result',]);
+        this.router.navigate(['/', 'degree-cert']);
       }
     });
   }

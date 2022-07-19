@@ -2,39 +2,45 @@
   <div class="bg-white py-2 px-3 default-width">
     <div class="box-header">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
     <hr />
+    <div class="bg-light p-3">
+      <ksp-basic-institute-search
+        formControlName="institution"
+        [searchType]="searchType"
+      ></ksp-basic-institute-search>
 
-    <ksp-basic-institute-search
-      formControlName="institution"
-    ></ksp-basic-institute-search>
+      <div class="row mb-2">
+        <div class="col">
+          <label class="form-label">เลขที่ใบคำขอ</label>
+          <input
+            class="form-control"
+            type="text"
+            formControlName="licenseNumber"
+          />
+        </div>
+        <div class="col">
+          <label class="form-label">ชื่อ-นามสกุล</label>
+          <input class="form-control" type="text" formControlName="name" />
+        </div>
+      </div>
 
-    <div class="row mb-2">
-      <div class="col">
-        <label class="form-label">เลขที่ใบคำขอ</label>
-        <input
-          class="form-control"
-          type="text"
-          formControlName="licenseNumber"
-        />
-      </div>
-      <div class="col">
-        <label class="form-label">ชื่อ-นามสกุล</label>
-        <input class="form-control" type="text" formControlName="name" />
-      </div>
-    </div>
-
-    <div class="row mb-2">
-      <div class="col">
-        <label class="form-label">วันที่ยื่นใบคำขอ </label>
-        <input class="form-control" type="date" formControlName="submitDate" />
-      </div>
-      <div class="col">
-        <label class="form-label">สถานะใบคำขอ </label>
-        <select class="form-select" formControlName="status">
-          <option selected>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
+      <div class="row mb-2">
+        <div class="col">
+          <label class="form-label">วันที่ยื่นใบคำขอ</label>
+          <input
+            class="form-control"
+            type="date"
+            formControlName="submitDate"
+          />
+        </div>
+        <div class="col">
+          <label class="form-label">สถานะ</label>
+          <select class="form-select" formControlName="status">
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
       </div>
     </div>
 

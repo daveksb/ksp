@@ -113,7 +113,11 @@ const routes: EthicsCustomRoute[] = [
 
   {
     path: 'one-school-one-innovation',
-    data: { menuConfig: professionalMenu, headerLabel: 'xxx' },
+    data: {
+      menuConfig: professionalMenu,
+      headerLabel:
+        'รางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One Innovation: OSOI)',
+    },
     loadChildren: () =>
       import('@ksp/e-service/professional/one-school-one-innovation').then(
         (m) => m.EServiceProfessionalOneSchoolOneInnovationModule
@@ -122,7 +126,7 @@ const routes: EthicsCustomRoute[] = [
 
   {
     path: 'refund',
-    data: { menuConfig: refundFeeMenu, headerLabel: 'xxx' },
+    data: { menuConfig: refundFeeMenu, headerLabel: 'ขอคืนเงินค่าธรรมเนียม' },
     loadChildren: () =>
       import('@ksp/e-service/fee/refund-fee').then(
         (m) => m.EServiceFeeRefundFeeModule

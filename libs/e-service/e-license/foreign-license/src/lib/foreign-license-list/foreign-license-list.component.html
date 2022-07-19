@@ -4,22 +4,23 @@
 </ksp-top-nav>
 
 <form [formGroup]="form">
-  <div class="bg-secondary bg-opacity-10 px-3 py-2 full-height">
-    <div class="fs-5">รายการใบคำขอสร้างเลขคุรุสภาสำหรับครูชาวต่างชาติ</div>
+  <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
+    <div class="box-header">
+      รายการใบคำขอสร้างเลขคุรุสภาสำหรับครูชาวต่างชาติ
+    </div>
 
-    <div class="bg-white px-3 py-2">
-      <div class="fs-5">ค้นหาหน่วยงาน/สถานศึกษา</div>
-      <hr />
+    <div class="bg-white">
       <ksp-request-search
         (clear)="clear()"
         (search)="search()"
+        [searchType]="'school'"
       ></ksp-request-search>
       <hr />
 
-      <div class="box__title-2">
+      <div class="box-header px-3">
         รายการใบคำขอสร้างเลขคุรุสภาสำหรับครูชาวต่างชาติ
       </div>
-      <div class="bottom-content">
+      <div class="px-3 py-2">
         <table mat-table [dataSource]="dataSource">
           <ng-container matColumnDef="order">
             <th mat-header-cell *matHeaderCellDef>ลำดับ</th>

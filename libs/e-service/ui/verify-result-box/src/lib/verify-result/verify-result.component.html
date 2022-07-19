@@ -1,15 +1,15 @@
-<div class="content__container">
-  <div class="header__label">
+<div class="bg-white w-auto py-2 px-3 border me-4">
+  <div class="box-header mb-3">
     ผลการตรวจสอบข้อมูลและเอกสารครั้งที่ {{ number }}
   </div>
 
-  <div class="content__label">วันที่ 12 เมษายน 2564</div>
+  <div class="form-label">วันที่ 12 เมษายน 2564</div>
 
-  <div class="content__label">โดย นางสาวญาดา ทิ่งทอง</div>
+  <div class="form-label">โดย นางสาวญาดา ทิ่งทอง</div>
   <hr />
 
   <div
-    class="content__base"
+    class="d-flex my-2"
     [ngClass]="{
       content__valid: isBasicValid,
       content__invalid: !isBasicValid
@@ -20,7 +20,7 @@
     ข้อมูลพิ้นฐาน
   </div>
   <div
-    class="content__base"
+    class="d-flex my-2"
     [ngClass]="{
       content__valid: isCourseValid,
       content__invalid: !isCourseValid
@@ -31,7 +31,7 @@
     ด้านหลักสูตร
   </div>
   <div
-    class="content__base"
+    class="d-flex my-2"
     [ngClass]="{
       content__valid: isProcessValid,
       content__invalid: !isProcessValid
@@ -42,7 +42,7 @@
     ด้านกระบวนการผลิต
   </div>
   <div
-    class="content__base"
+    class="d-flex my-2"
     [ngClass]="{
       content__valid: isAttachmentValid,
       content__invalid: !isAttachmentValid

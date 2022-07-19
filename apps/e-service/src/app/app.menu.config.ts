@@ -72,10 +72,10 @@ export const standardMenu: MenuConfig[] = [
         path: `degree-cert/list/${DegreeCertProcessType.approve}`,
         label: 'พิจารณาและออกใบรับรองปริญญาและประกาศนียบัตร',
       },
-      {
+      /* {
         path: `degree-cert/final-result`,
         label: '**ขั้นตอนสุดท้าย',
-      },
+      }, */
     ],
   },
   {

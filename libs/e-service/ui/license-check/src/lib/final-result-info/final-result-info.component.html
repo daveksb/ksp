@@ -1,31 +1,31 @@
 <form [formGroup]="form">
   <div class="bg-light px-3 py-2">
-    <div class="header">ผลการรับรอง</div>
-    <div id="result__box">
-      <div class="result__container">
-        <i class="bi bi-check-circle fs-5 text-success me-2"></i>
-        <label class="result__title">ครบถ้วนถูกต้อง</label>
-      </div>
-    </div>
-    <div class="group group--primary">
-      <div class="group group--secondary">
-        <div class="mb-3">
-          <label class="form-label">มติครั้งที่</label>
-          <input
-            class="form-control"
-            type="text"
-            formControlName="reasonTimes"
-          />
-        </div>
-        <div class="mb-3">
-          <label class="form-label">ช่วงวันที่</label>
-          <input class="form-control" type="date" formControlName="date" />
+    <div class="box-header text-primary">ผลการรับรอง</div>
+
+    <div class="d-flex my-2">
+      <div
+        class="border border-success py-1 px-2 w-auto rounded-pill bg-success bg-opacity-10"
+      >
+        <div class="d-flex align-items-center">
+          <i class="bi bi-check-circle fs-5 text-success me-2"></i>
+          <label class="text-success fs-5">ครบถ้วนถูกต้อง</label>
         </div>
       </div>
     </div>
 
-    <div class="group group--primary">
-      <div class="mb-3">
+    <div class="row w-50">
+      <div class="col-6 mb-3">
+        <label class="form-label">มติครั้งที่</label>
+        <input class="form-control" type="text" formControlName="reasonTimes" />
+      </div>
+      <div class="col-6 mb-3">
+        <label class="form-label">ช่วงวันที่</label>
+        <input class="form-control" type="date" formControlName="date" />
+      </div>
+    </div>
+
+    <div class="row w-50">
+      <div class="col mb-3">
         <label class="form-label">รหัสรับรองปริญญา</label>
         <input
           class="form-control"
