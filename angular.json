@@ -1634,6 +1634,32 @@
         }
       ]
     },
+    "e-service-fee-refund-fee": {
+      "projectType": "library",
+      "root": "libs/e-service/fee/refund-fee",
+      "sourceRoot": "libs/e-service/fee/refund-fee/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-service/fee/refund-fee"],
+          "options": {
+            "jestConfig": "libs/e-service/fee/refund-fee/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/fee/refund-fee/**/*.ts",
+              "libs/e-service/fee/refund-fee/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-form": {
       "root": "libs/e-service/form",
       "projectType": "library",
@@ -1727,6 +1753,60 @@
           "hash": "095e7f31b37e81c0a51c926290157de0d8e90960"
         }
       ]
+    },
+    "e-service-professional-one-school-one-innovation": {
+      "projectType": "library",
+      "root": "libs/e-service/professional/one-school-one-innovation",
+      "sourceRoot": "libs/e-service/professional/one-school-one-innovation/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/e-service/professional/one-school-one-innovation"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/professional/one-school-one-innovation/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/professional/one-school-one-innovation/**/*.ts",
+              "libs/e-service/professional/one-school-one-innovation/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-professional-professional": {
+      "projectType": "library",
+      "root": "libs/e-service/professional/professional",
+      "sourceRoot": "libs/e-service/professional/professional/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-service/professional/professional"],
+          "options": {
+            "jestConfig": "libs/e-service/professional/professional/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/professional/professional/**/*.ts",
+              "libs/e-service/professional/professional/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
     },
     "e-service-standard-degree-cert": {
       "root": "libs/e-service/standard/degree-cert",
@@ -9206,8 +9286,5 @@
       ]
     }
   },
-  "version": 1,
-  "cli": {
-    "analytics": false
-  }
+  "version": 1
 }
