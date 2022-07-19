@@ -23,9 +23,10 @@ export class RegisterRequesterComponent implements OnInit {
   constructor(private fb: FormBuilder, public router: Router) {}
 
   ngOnInit(): void {
-    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      //console.log('res = ', res);
-    });
+    /* this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
+      console.log('form valid  = ', this.form);
+    }); */
+    console.log(' ');
   }
 
   next() {

@@ -7,6 +7,8 @@ import {
   phonePattern,
   providerFactory,
   validatorMessages,
+  nameEnPattern,
+  nameThPattern,
 } from '@ksp/shared/utility';
 
 @UntilDestroy()
@@ -23,11 +25,11 @@ export class FormCoordinatorInfoComponent extends KspFormBaseComponent {
 
   override form = this.fb.group({
     prefixTh: [''],
-    firstnameTh: ['', Validators.pattern('^[ก-๏/s]+$')],
-    lastnameTh: ['', Validators.pattern('^[ก-๏/s]+$')],
+    firstnameTh: ['', Validators.pattern(nameThPattern)],
+    lastnameTh: ['', Validators.pattern(nameThPattern)],
     prefixEn: [''],
-    firstnameEn: ['', Validators.pattern('^[a-zA-Z/s]+$')],
-    lastnameEn: ['', Validators.pattern('^[a-zA-Z/s]+$')],
+    firstnameEn: ['', Validators.pattern(nameEnPattern)],
+    lastnameEn: ['', Validators.pattern(nameEnPattern)],
     post: [''],
     workplacePhone: [null, Validators.pattern(phonePattern)],
     contactPhone: [null, Validators.pattern(phonePattern)],
@@ -45,6 +47,9 @@ export class FormCoordinatorInfoComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
+      //console.log('form = ', this.form);
+    });
   }
 
   get firstnameTh() {

@@ -24,7 +24,7 @@
           "
         >
           <span class="text-danger" *ngIf="firstnameTh.errors?.['pattern']">
-            xxx
+            {{ validatorMessages.th }}
           </span>
         </ng-container>
       </div>
@@ -37,12 +37,10 @@
           placeholder="กรุณากรอกนามสกุลภาษาไทย"
         />
         <ng-container
-          *ngIf="
-          lastnameTh.invalid && (lastnameTh.dirty || lastnameTh.touched)
-          "
+          *ngIf="lastnameTh.invalid && (lastnameTh.dirty || lastnameTh.touched)"
         >
           <span class="text-danger" *ngIf="lastnameTh.errors?.['pattern']">
-            xxx
+            {{ validatorMessages.th }}
           </span>
         </ng-container>
       </div>
@@ -72,7 +70,7 @@
           "
         >
           <span class="text-danger" *ngIf="firstnameEn.errors?.['pattern']">
-            xxx
+            {{ validatorMessages.en }}
           </span>
         </ng-container>
       </div>
@@ -85,12 +83,10 @@
           placeholder="กรุณากรอกชื่อภาษาอังกฤษ"
         />
         <ng-container
-          *ngIf="
-          lastnameEn.invalid && (lastnameEn.dirty || lastnameEn.touched)
-          "
+          *ngIf="lastnameEn.invalid && (lastnameEn.dirty || lastnameEn.touched)"
         >
           <span class="text-danger" *ngIf="lastnameEn.errors?.['pattern']">
-            xxx
+            {{ validatorMessages.en }}
           </span>
         </ng-container>
       </div>
@@ -115,8 +111,8 @@
             (workplacePhone.dirty || workplacePhone.touched)
           "
         >
-          <span class="text-danger" *ngIf="workplacePhone.errors?.['pattern']"
-            >{{ validatorMessages.phone }}
+          <span class="text-danger" *ngIf="workplacePhone.errors?.['pattern']">
+            {{ validatorMessages.phone }}
           </span>
         </ng-container>
       </div>
