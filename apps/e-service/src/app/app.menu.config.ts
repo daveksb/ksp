@@ -72,10 +72,10 @@ export const standardMenu: MenuConfig[] = [
         path: `degree-cert/list/${DegreeCertProcessType.approve}`,
         label: 'พิจารณาและออกใบรับรองปริญญาและประกาศนียบัตร',
       },
-      {
+      /* {
         path: `degree-cert/final-result`,
         label: '**ขั้นตอนสุดท้าย',
-      },
+      }, */
     ],
   },
   {
@@ -185,6 +185,49 @@ export const licenseMenu: MenuConfig[] = [
       {
         path: 'manage-current-user',
         label: 'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
+      },
+    ],
+  },
+];
+
+export const professionalMenu: MenuConfig[] = [
+  {
+    icon: 'assets/images/icon-sidenav/card.svg',
+    label: 'ใบคำขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'professional',
+    subMenu: [
+      {
+        path: 'one-school-one-innovation/list',
+        label: 'รายการใบคำขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม',
+      },
+      {
+        path: 'one-school-one-innovation/approve',
+        label: 'พิจารณารางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม',
+      },
+    ],
+  },
+];
+
+export const refundFeeMenu: MenuConfig[] = [
+  {
+    icon: 'assets/images/icon-sidenav/card.svg',
+    label: 'รายการขอคืนเงินค่าธรรมเนียม',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'professional',
+    subMenu: [
+      {
+        path: 'refund/list',
+        label: 'รายการใบขอคืนค่าธรรมเนียม',
+      },
+      {
+        path: 'refund/detail',
+        label: 'บัญชีรายชื่อและอนุมัติการคืนค่าธรรมเนียม',
+      },{
+        path: 'refund/approve',
+        label: 'ตรวจสอบและบันทึกสถานะการคืนค่าธรรมเนียม',
       },
     ],
   },

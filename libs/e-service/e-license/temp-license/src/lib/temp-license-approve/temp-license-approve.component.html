@@ -6,11 +6,11 @@
 >
 
 <form [formGroup]="form">
-  <div class="bg-secondary bg-opacity-10 p-4">
-    <div class="fs-4">
+  <div class="bg-secondary bg-opacity-10 px-4 py-2">
+    <div class="box-header">
       ยืนยันผลการตรวจสอบ และออกหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาต
     </div>
-    <div class="detail__container">
+    <div class="bg-white p-3">
       <ksp-request-header-info
         [requestDate]="'10 ตุลาคม 2565'"
         [requestNumber]="'112234467876543'"
@@ -18,98 +18,94 @@
 
       <hr />
 
-      <div class="header__container">
-        <div class="header-2">ประวัติผลการตรวจสอบคุณสมบัติและเอกสาร</div>
+      <div class="d-flex justify-content-between mb-2">
+        <div class="box-header text-primary">
+          ประวัติผลการตรวจสอบคุณสมบัติและเอกสาร
+        </div>
         <button class="btn btn-success">ดูใบคำขอ</button>
       </div>
 
-      <div class="table__container">
-        <div class="table-responsive">
-          <table class="table">
-            <thead class="header__table">
-              <tr>
-                <th scope="col">ลำดับ</th>
-                <th scope="col">ชื่อ-นามสกุล เจ้าหน้าที่ที่ตรวจสอบ</th>
-                <th scope="col">วันที่ตรวจสอบ</th>
-                <th scope="col">สถานะ</th>
-              </tr>
-            </thead>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">ลำดับ</th>
+              <th scope="col">ชื่อ-นามสกุล เจ้าหน้าที่ที่ตรวจสอบ</th>
+              <th scope="col">วันที่ตรวจสอบ</th>
+              <th scope="col">สถานะ</th>
+            </tr>
+          </thead>
 
-            <tbody class="body__table">
-              <tr>
-                <td class="detail__table">1</td>
-                <td class="detail__table">xxxxxxxxxx yyyyyyyyyy</td>
-                <td class="detail__table">xx/xx/xxxx</td>
-                <td class="detail__table">xxxxxxxxxx</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+          <tbody>
+            <tr>
+              <td class="detail__table">1</td>
+              <td class="detail__table">xxxxxxxxxx yyyyyyyyyy</td>
+              <td class="detail__table">xx/xx/xxxx</td>
+              <td class="detail__table">xxxxxxxxxx</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
+
     <br />
-    <div class="detail__container">
-      <div class="header-3">ผลการยืนยันการตรวจสอบ</div>
+
+    <div class="bg-white p-3">
+      <div class="box-header">ผลการยืนยันการตรวจสอบ</div>
       <hr />
 
-      <div class="checkbox__detail">
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="radio"
-            value="1"
-            formControlName="result"
-          />
-          <label class="form-header" for="flexCheckDefault">
+      <div class="border bg-white h-auto w-50 p-2 my-2 mx-5">
+        <div class="d-flex align-items-center">
+          <input type="radio" value="2" formControlName="result" />
+          <label class="form-label ms-1" for="flexCheckDefault">
             ยืนยันผลการตรวจสอบ และออกหนังสือรับรอง
           </label>
+        </div>
 
-          <div class="content__container">
-            <div class="mb-3">
-              <label class="form-label">เลขที่หนังสือรับรอง</label>
-              <input
-                class="form-control"
-                type="text"
-                formControlName="licenseNumber"
-              />
-            </div>
-            <div class="mb-3">
-              <label class="form-label">วันเดือนปีที่ออกหนังสือรับรอง</label>
-              <input
-                class="form-control"
-                type="date"
-                formControlName="licenseDate"
-              />
-            </div>
+        <div class="row mx-3">
+          <div class="col mb-3">
+            <label class="form-label">เลขที่หนังสือรับรอง</label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="licenseNumber"
+            />
+          </div>
+          <div class="col mb-3">
+            <label class="form-label">วันเดือนปีที่ออกหนังสือรับรอง</label>
+            <input
+              class="form-control"
+              type="date"
+              formControlName="licenseDate"
+            />
           </div>
         </div>
       </div>
 
-      <div class="checkbox__detail">
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="radio"
-            value="2"
-            formControlName="result"
-          />
-          <label class="form-header" for="flexCheckDefault">
+      <div class="border bg-white h-auto w-50 p-2 my-2 mx-5">
+        <div class="d-flex align-items-center">
+          <input type="radio" value="2" formControlName="result" />
+          <label class="form-label ms-2" for="flexCheckDefault">
             ไม่ยืนยันผลการตรวจสอบ
           </label>
         </div>
       </div>
     </div>
     <br />
-    <div class="detail__container">
-      <div class="table__header">
-        <div class="header-3">หนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาต</div>
+    <div class="bg-white p-3">
+      <div class="d-flex justify-content-between">
+        <div class="box-header">
+          หนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาต
+        </div>
         <button class="btn btn-success">พิมพ์</button>
       </div>
 
       <hr />
-      <div class="picture__box">
-        <div class="picture__title">
-          หนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาต
+      <div class="d-flex justify-content-center">
+        <div class="h-100 w-75 border bg-light" style="padding: 15rem 0">
+          <div class="text-danger text-center box-header p-5">
+            หนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาต
+          </div>
         </div>
       </div>
     </div>

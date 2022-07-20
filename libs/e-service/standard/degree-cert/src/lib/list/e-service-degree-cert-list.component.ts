@@ -89,6 +89,10 @@ export class EServiceDegreeCertListComponent implements OnInit {
       this.router.navigate(['/', 'degree-cert', 'approve']);
     }
   }
+
+  lastStep() {
+    this.router.navigate(['/', 'degree-cert', 'final-result']);
+  }
 }
 
 const displayedColumns: string[] = [

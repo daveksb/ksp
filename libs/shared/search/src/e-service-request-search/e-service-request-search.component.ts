@@ -22,7 +22,7 @@ export class EServiceRequestSearchComponent {
     status: [],
   });
 
-  @Input() mode: InstituteType = 'school';
+  @Input() searchType = '';
   @Output() search = new EventEmitter<boolean>();
   @Output() clear = new EventEmitter<boolean>();
   constructor(private fb: FormBuilder) {}

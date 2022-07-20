@@ -3,7 +3,13 @@ import { RouterModule } from '@angular/router';
 import { LandingPageComponent } from '@ksp/e-service/feature/landing-page';
 import { EServiceLoginComponent } from '@ksp/e-service/feature/login';
 import { EthicsCustomRoute } from '@ksp/shared/interface';
-import { ethicsMenu, licenseMenu, standardMenu } from './app.menu.config';
+import {
+  ethicsMenu,
+  licenseMenu,
+  professionalMenu,
+  refundFeeMenu,
+  standardMenu,
+} from './app.menu.config';
 
 const routes: EthicsCustomRoute[] = [
   { path: 'login', component: EServiceLoginComponent },
@@ -102,6 +108,28 @@ const routes: EthicsCustomRoute[] = [
     loadChildren: () =>
       import('@ksp/e-service/e-license/manage-current-user').then(
         (m) => m.EServiceELicenseManageCurrentUserModule
+      ),
+  },
+
+  {
+    path: 'one-school-one-innovation',
+    data: {
+      menuConfig: professionalMenu,
+      headerLabel:
+        'รางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One Innovation: OSOI)',
+    },
+    loadChildren: () =>
+      import('@ksp/e-service/professional/one-school-one-innovation').then(
+        (m) => m.EServiceProfessionalOneSchoolOneInnovationModule
+      ),
+  },
+
+  {
+    path: 'refund',
+    data: { menuConfig: refundFeeMenu, headerLabel: 'ขอคืนเงินค่าธรรมเนียม' },
+    loadChildren: () =>
+      import('@ksp/e-service/fee/refund-fee').then(
+        (m) => m.EServiceFeeRefundFeeModule
       ),
   },
 

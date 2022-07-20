@@ -21,12 +21,12 @@ export class LandingPageComponent {
     this.router.navigate(['accusation']);
   }
 
-  praise() {
-    this.router.navigate(['/', '']);
+  professional() {
+    this.router.navigate(['one-school-one-innovation']);
   }
 
   fee() {
-    this.router.navigate(['/', '']);
+    this.router.navigate(['refund']);
   }
 
   admin() {

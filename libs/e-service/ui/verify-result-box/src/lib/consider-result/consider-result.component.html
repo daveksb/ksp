@@ -1,8 +1,8 @@
-<div class="content__container">
-  <div class="header__label">ครั้งที่ {{ number }}</div>
+<div class="bg-white w-auto py-2 px-5 border me-3">
+  <div class="box-header text-center">ครั้งที่ {{ number }}</div>
 
   <div
-    class="content__base"
+    class="d-flex justify-content-center my-2"
     [ngClass]="{
       content__valid: isBasicValid,
       content__invalid: !isBasicValid
@@ -13,6 +13,6 @@
     {{ name }}
   </div>
 
-  <div class="content__label">วันที่ 12 เมษายน 2564</div>
-  <div class="content__label">โดย นางสาวญาดา ทิ่งทอง</div>
+  <div class="text-center fs-6 text-secondary">วันที่ 12 เมษายน 2564</div>
+  <div class="text-center fs-6 text-secondary">โดย นางสาวญาดา ทิ่งทอง</div>
 </div>

@@ -5,14 +5,14 @@
 >
 
 <form [formGroup]="form">
-  <div class="container">
+  <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
     <ksp-request-search
       (clear)="clear()"
       (search)="search()"
     ></ksp-request-search>
-
-    <div class="table__container">
-      <div class="title__box">ผลการค้นหา</div>
+    <br />
+    <div class="bg-white p-3">
+      <div class="box-header">ผลการค้นหา</div>
 
       <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="id">

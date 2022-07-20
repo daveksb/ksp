@@ -54,7 +54,16 @@
       "@ksp/e-service/feature/login": [
         "libs/e-service/feature/login/src/index.ts"
       ],
+      "@ksp/e-service/fee/refund-fee": [
+        "libs/e-service/fee/refund-fee/src/index.ts"
+      ],
       "@ksp/e-service/form": ["libs/e-service/form/src/index.ts"],
+      "@ksp/e-service/professional/one-school-one-innovation": [
+        "libs/e-service/professional/one-school-one-innovation/src/index.ts"
+      ],
+      "@ksp/e-service/professional/professional": [
+        "libs/e-service/professional/professional/src/index.ts"
+      ],
       "@ksp/e-service/standard/degree-cert": [
         "libs/e-service/standard/degree-cert/src/index.ts"
       ],

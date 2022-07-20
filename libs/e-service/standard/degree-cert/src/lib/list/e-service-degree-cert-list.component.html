@@ -39,7 +39,7 @@
           <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
           <td
             (click)="goToDetailPage()"
-            class="license__detail"
+            class="text-primary link"
             mat-cell
             *matCellDef="let element"
           >
@@ -114,7 +114,7 @@
         <ng-container matColumnDef="print">
           <th mat-header-cell *matHeaderCellDef></th>
           <td class="text-end" mat-cell *matCellDef="let element">
-            <button class="btn btn-sm btn-primary">
+            <button class="btn btn-sm btn-primary" (click)="lastStep()">
               <div class="d-flex justify-content-center">
                 <i role="button" class="bi bi-printer"></i>
                 <span class="ms-1">พิมพ์ใบคำขอ</span>

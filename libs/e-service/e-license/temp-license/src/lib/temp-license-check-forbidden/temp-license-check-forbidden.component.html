@@ -6,12 +6,12 @@
   </span></ksp-top-nav
 >
 
-<div class="container">
-  <div class="header">
+<div class="bg-secondary bg-opacity-10 px-4 py-2">
+  <div class="box-header">
     รายละเอียดใบคำขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
     (ชาวไทย)
   </div>
-  <div class="detail__container">
+  <div class="bg-white p-3">
     <ksp-request-header-info
       [requestDate]="'10 ตุลาคม 2565'"
       [requestNumber]="'112234467876543'"
@@ -19,69 +19,75 @@
 
     <hr />
 
-    <div class="box__container">
-      <div class="header__title">
+    <div class="bg-light p-3">
+      <div class="box-header mb-3">
         ลักษณะต้องห้ามตามที่กำหนดไว้ในมาตรา 44
         แห่งพระราชบัญญัติสภาครูและบุคลากรทางการศึกษา พ.ศ.2546
       </div>
 
-      <div class="detail__title">
+      <div class="form-label">
         1. เคยเป็นผู้มีความประพฤติเสื่อม หรือบกพร่องในศีลธรรมอันดีหรือไม่
       </div>
-      <div class="checkbox__container">
-        <div class="checkbox__content">
-          <input class="checkbox" type="radio" disabled />
-          <label class="checkbox__label"> ไม่เคย</label>
+      <div class="row ms-2 my-3">
+        <div class="col-2 d-flex align-items-center">
+          <input type="radio" disabled />
+          <label class="form-label ms-2"> ไม่เคย</label>
         </div>
-        <div class="checkbox__content">
-          <input class="checkbox" type="radio" disabled />
-          <label class="checkbox__label">เคย</label>
+        <div class="col-2 d-flex align-items-center">
+          <input type="radio" disabled />
+          <label class="form-label ms-2">เคย</label>
         </div>
       </div>
-      <div class="detail__title">
+      <div class="form-label">
         2. เป็นผู้ไร้ความสามารถหรือเสมือนไร้ความสามารถ หรือไม่
       </div>
-      <div class="checkbox__container">
-        <div class="checkbox__content">
-          <input class="checkbox" type="radio" disabled />
-          <label class="checkbox__label">ไม่เคย</label>
+      <div class="row ms-2 my-3">
+        <div class="col-2 d-flex align-items-center">
+          <input type="radio" disabled />
+          <label class="form-label ms-2">ไม่เคย</label>
         </div>
-        <div class="checkbox__content">
-          <input class="checkbox" type="radio" disabled />
-          <label class="checkbox__label">เคย</label>
+        <div class="col-2 d-flex align-items-center">
+          <input type="radio" disabled />
+          <label class="form-label ms-2">เคย</label>
         </div>
       </div>
-      <div class="detail__title">
+      <div class="form-label">
         3.
         เคยต้องโทษจำคุกในคดีที่คุรุสภาเห็นว่าอาจนำมาซึ่งความเสื่อมเสียเกียรติศักดิ์แห่งวิชาชีพ
       </div>
-      <div class="checkbox__container">
-        <div class="checkbox__content">
-          <input class="checkbox" type="radio" disabled />
-          <label class="checkbox__label">ไม่เคย</label>
+      <div class="row ms-2 my-3">
+        <div class="col-2 d-flex align-items-center">
+          <input type="radio" disabled />
+          <label class="form-label ms-2">ไม่เคย</label>
         </div>
-        <div class="checkbox__content">
-          <input class="checkbox" type="radio" disabled />
-          <label class="checkbox__label">เคย</label>
+        <div class="col d-flex align-items-center">
+          <input type="radio" disabled />
+          <label class="form-label ms-2">เคย</label>
+        </div>
+        <div class="col-9">
+          <input
+            class="form-control w-50"
+            type="text"
+            placeholder="โปรดระบุ"
+            disabled
+          />
         </div>
       </div>
-      <div class="checkbox__container-2">
-        <div></div>
-        <input
-          class="form-control"
-          type="text"
-          placeholder="โปรดระบุ"
-          disabled
-        />
-        <div class="view__doc">ดูเอกสารแนบ</div>
+      <div class="row ms-2">
+        <div class="col-2"></div>
+        <div class="col">
+          <label
+            class="text-orange form-label ms-4 text-decoration-underline"
+            role="button"
+            >ดูเอกสารแนบ</label
+          >
+        </div>
       </div>
     </div>
   </div>
   <br />
-  <div class="detail__container">
-    <div class="top__container-2">
-      <e-service-license-check [isHasReason]="false"></e-service-license-check>
-    </div>
+  <div class="bg-white p-4">
+    <e-service-license-check [isHasReason]="false"></e-service-license-check>
   </div>
 </div>
 
