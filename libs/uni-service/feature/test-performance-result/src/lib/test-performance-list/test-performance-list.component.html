@@ -1,1 +1,104 @@
-<p>test-performance-list works!</p>
+<ksp-top-nav
+  ><span header>ทะเบียนข้อมูล</span>
+  <span subHeader>รายการผลการประเมินสมรรถนะ</span></ksp-top-nav
+>
+
+<div class="bg-secondary bg-opacity-10 py-2 px-4">
+  <div class="box-header">รายการผลการประเมินสมรรถนะ</div>
+  <div class="bg-white p-3">
+    <div class="bg-light p-3">
+      <div class="box-header">ค้นหาข้อมูล/หลักสูตรที่ต้องการ</div>
+
+      <div class="row mb-2">
+        <div class="col">
+          <label class="form-label">สถาบัน / มหาวิทยาลัย</label>
+          <select class="form-select">
+            <option value="null" selected disabled hidden>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="col">
+          <label class="form-label">สังกัด / คณะหน่วยงาน </label>
+          <select class="form-select">
+            <option value="null" selected disabled hidden>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col">
+          <label class="form-label">รหัสรับรองปริญญา</label>
+          <input class="form-control" type="text" />
+        </div>
+        <div class="col">
+          <label class="form-label"
+            >ชื่อปริญญา และประกาศนียบัตรทางการศึกษา</label
+          >
+          <input class="form-control" type="text" />
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col">
+          <label class="form-label">ระดับปริญญาทางการศึกษา</label>
+          <select class="form-select">
+            <option value="null" selected disabled hidden>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="col">
+          <label class="form-label">ปีการศึกษาที่เปิด</label>
+          <input class="form-control" type="text" />
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col">
+          <label class="form-label">หมายเลขบัตรประชาชน</label>
+          <input class="form-control" type="text" />
+        </div>
+        <div class="col">
+          <label class="form-label">ชื่อ - นามสกุล</label>
+          <input class="form-control" type="text" />
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end">
+        <button class="btn border-primary text-primary bg-white" type="button">
+          ล้างข้อมูล
+        </button>
+        <button class="btn btn-primary ms-2" type="button">ค้นหา</button>
+      </div>
+    </div>
+  </div>
+  <br />
+
+  <div class="d-flex justify-content-end">
+    <button class="btn btn-primary w-auto" type="button" (click)="save()">
+      บันทึกผลการประเมิน
+    </button>
+    <button
+      class="btn border-success text-success bg-white ms-2 w-auto"
+      type="button"
+    >
+      <img src="/assets/images/img-uni/microsoft excel.png" />
+      ดาวน์โหลดไฟล์
+    </button>
+  </div>
+  <br />
+
+  <div class="bg-white p-3">
+    <div class="box-header">หลักสูตร</div>
+  </div>
+  <br />
+  <div class="bg-white p-3">
+    <div class="box-header">รายชื่อนักศึกษา</div>
+  </div>
+</div>

@@ -1,6 +1,9 @@
 <div class="bg-white">
-  <div class="box-header">
-    ค้นหาข้อมูลปริญญา และประกาศนียบัตรทางการศึกษาที่ต้องการ
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="box-header">
+      ค้นหาข้อมูลปริญญา และประกาศนียบัตรทางการศึกษาที่ต้องการ
+    </div>
+    <i class="bi bi-x-lg text-primary" role="button" matDialogClose></i>
   </div>
   <hr />
   <div class="row">
@@ -84,8 +87,9 @@
     <button class="btn btn-primary ms-2" (click)="search()">ค้นหา</button>
   </div>
   <hr />
+  <div class="box-header text-primary">ผลการค้นหา</div>
   <table class="table">
-    <thead>
+    <thead style="white-space: nowrap">
       <tr>
         <th scope="col">เลือก</th>
         <th scope="col">รหัสการรับรอง</th>
@@ -101,24 +105,25 @@
         <th scope="row" class="body__detail">
           <div>
             <input
-              class="form-check-input"
               type="radio"
-              (change)="onItemChange(item.uniCode)"
+              (change)="onItemChange(item.approveCode)"
               name="university"
             />
           </div>
         </th>
-        <td class="detail__table">{{ item.uniCode }}</td>
-        <td class="detail__table">{{ item.uniName }}</td>
-        <td class="detail__table">{{ item.address }}</td>
-        <td class="detail__table">{{ item.organization }}</td>
-        <td class="detail__table">{{ item.uniCode }}</td>
-        <td class="detail__table">{{ item.uniName }}</td>
+        <td class="detail__table">{{ item.approveCode }}</td>
+        <td class="detail__table">{{ item.degreeLevel }}</td>
+        <td class="detail__table">{{ item.university }}</td>
+        <td class="detail__table">{{ item.degreeName }}</td>
+        <td class="detail__table">{{ item.major }}</td>
+        <td class="detail__table">{{ item.branch }}</td>
       </tr>
     </tbody>
   </table>
   <br />
   <div class="d-flex justify-content-center">
-    <button class="btn btn-primary" (click)="confirm()">ยืนยัน</button>
+    <button matDialogClose class="btn btn-primary" (click)="confirm()">
+      ยืนยัน
+    </button>
   </div>
 </div>

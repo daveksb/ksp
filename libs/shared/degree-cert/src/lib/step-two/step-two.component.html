@@ -11,14 +11,27 @@
     >
       <div *ngIf="formType === 'a'; then typeA; else typeB"></div>
       <ng-template #typeA>
+        <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
+          <input type="checkbox" />
+          <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
+        </div>
         <ksp-step-2-tab-1-a [mode]="mode"></ksp-step-2-tab-1-a>
       </ng-template>
       <ng-template #typeB>
+        <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
+          <input type="checkbox" />
+          <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
+        </div>
         <ksp-step-2-tab-1-b [mode]="mode"></ksp-step-2-tab-1-b>
       </ng-template>
     </mat-tab>
 
     <mat-tab label="อาจารย์ / ผู้รับผิดชอบประจำหลักสูตร">
+      <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
+        <input type="checkbox" />
+        <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
+      </div>
+
       <ksp-step-2-teacher
         [mode]="mode"
         formControlName="teacher"
@@ -26,6 +39,11 @@
     </mat-tab>
 
     <mat-tab label="อาจารย์นิเทศก์">
+      <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
+        <input type="checkbox" />
+        <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
+      </div>
+
       <ksp-step-2-nitet
         [mode]="mode"
         formControlName="nitet"
@@ -33,6 +51,11 @@
     </mat-tab>
 
     <mat-tab label="ที่ปรึกษาวิทยานิพนธ์และการค้นคว้าอิสระ">
+      <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
+        <input type="checkbox" />
+        <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
+      </div>
+
       <ksp-step-2-advisor
         [mode]="mode"
         formControlName="advisor"

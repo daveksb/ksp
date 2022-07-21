@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'uni-service-edit-degree-cert-search',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatDialogModule],
   templateUrl: './edit-degree-cert-search.component.html',
   styleUrls: ['./edit-degree-cert-search.component.scss'],
 })
 export class EditDegreeCertSearchComponent implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
 
   selectedUniversity = '';
   Data: University[] = [];
@@ -30,49 +32,63 @@ export class EditDegreeCertSearchComponent implements OnInit {
   }
 
   confirm() {
-    
+    this.router.navigate(['/', 'edit-degree-cert', 'detail']);
   }
 }
 
 export interface University {
-  uniCode: string;
-  uniName: string;
-  address: string;
-  organization: string;
+  approveCode: string;
+  degreeLevel: string;
+  university: string;
+  degreeName: string;
+  major: string;
+  branch: string;
 }
 
 export const data = [
   {
-    uniCode: '000009',
-    uniName: 'วิทยาลัยเทคโนโลยีและอุตสาหกรรม การต่อเรือหนองคาย',
-    address:
+    approveCode: '000009',
+    degreeLevel: 'วิทยาลัยเทคโนโลยีและอุตสาหกรรม การต่อเรือหนองคาย',
+    university:
       '174 หมู่ 1 ซอย 2 ถนนแก้ววรวุฒิ ตำบลมีชัย อำเภอเมืองหนองคาย จังหวัดหนองคาย 43000',
-    organization: 'สำนักงานคณะกรรมการการ อาชีวศึกษา',
+    degreeName: 'สำนักงานคณะกรรมการการ อาชีวศึกษา',
+    major: 'สำนักงานคณะกรรมการการ อาชีวศึกษา',
+    branch: 'สำนักงานคณะกรรมการการ อาชีวศึกษา',
   },
   {
-    uniCode: '001597',
-    uniName: 'วิทยาลัยเทคนิคฉะเชิงเทรา',
-    address:
-      '12 ถนนมหาจักรพรรด ตำบลหน้าเมือง อำเภอเมืองฉะเชิงเทรา จังหวัดฉะเชิงเทรา 24000',
-    organization: 'สำนักงานคณะกรรมการการ อาชีวศึกษา',
+    approveCode: '000009',
+    degreeLevel: 'วิทยาลัยเทคโนโลยีและอุตสาหกรรม การต่อเรือหนองคาย',
+    university:
+      '174 หมู่ 1 ซอย 2 ถนนแก้ววรวุฒิ ตำบลมีชัย อำเภอเมืองหนองคาย จังหวัดหนองคาย 43000',
+    degreeName: 'สำนักงานคณะกรรมการการ อาชีวศึกษา',
+    major: 'สำนักงานคณะกรรมการการ อาชีวศึกษา',
+    branch: 'สำนักงานคณะกรรมการการ อาชีวศึกษา',
   },
   {
-    uniCode: '001601',
-    uniName: 'วิทยาลัยอาชีวศึกษาชลบุรี',
-    address: '388 ม.5 ต.บ้านสวน อ.เมือง จ.ชลบุรี 20000',
-    organization: 'สำนักงานคณะกรรมการการ อาชีวศึกษา',
+    approveCode: '000009',
+    degreeLevel: 'วิทยาลัยเทคโนโลยีและอุตสาหกรรม การต่อเรือหนองคาย',
+    university:
+      '174 หมู่ 1 ซอย 2 ถนนแก้ววรวุฒิ ตำบลมีชัย อำเภอเมืองหนองคาย จังหวัดหนองคาย 43000',
+    degreeName: 'สำนักงานคณะกรรมการการ อาชีวศึกษา',
+    major: 'สำนักงานคณะกรรมการการ อาชีวศึกษา',
+    branch: 'สำนักงานคณะกรรมการการ อาชีวศึกษา',
   },
   {
-    uniCode: '001611',
-    uniName: 'วิทยาลัยเทคนิคนครปฐม',
-    address: '2 ถนนเพชรเกษม ตำบลพระประโทน อำเภอเมือง จังหวัดนครปฐม 73000',
-    organization: 'สำนักงานคณะกรรมการการ อาชีวศึกษา',
+    approveCode: '000009',
+    degreeLevel: 'วิทยาลัยเทคโนโลยีและอุตสาหกรรม การต่อเรือหนองคาย',
+    university:
+      '174 หมู่ 1 ซอย 2 ถนนแก้ววรวุฒิ ตำบลมีชัย อำเภอเมืองหนองคาย จังหวัดหนองคาย 43000',
+    degreeName: 'สำนักงานคณะกรรมการการ อาชีวศึกษา',
+    major: 'สำนักงานคณะกรรมการการ อาชีวศึกษา',
+    branch: 'สำนักงานคณะกรรมการการ อาชีวศึกษา',
   },
   {
-    uniCode: '001621',
-    uniName: 'วิทยาลัยเทคนิคหนองบัวลําภู',
-    address:
-      '102 หมู่ 3 ตำบลโพธิ์ชัย อำเภอเมืองหนองบัวลำภู จังหวัดหนองบัวลำภู 39000',
-    organization: 'สำนักงานคณะกรรมการการ อาชีวศึกษา',
+    approveCode: '000009',
+    degreeLevel: 'วิทยาลัยเทคโนโลยีและอุตสาหกรรม การต่อเรือหนองคาย',
+    university:
+      '174 หมู่ 1 ซอย 2 ถนนแก้ววรวุฒิ ตำบลมีชัย อำเภอเมืองหนองคาย จังหวัดหนองคาย 43000',
+    degreeName: 'สำนักงานคณะกรรมการการ อาชีวศึกษา',
+    major: 'สำนักงานคณะกรรมการการ อาชีวศึกษา',
+    branch: 'สำนักงานคณะกรรมการการ อาชีวศึกษา',
   },
 ];

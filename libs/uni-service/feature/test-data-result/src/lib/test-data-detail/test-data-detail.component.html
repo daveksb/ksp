@@ -1,1 +1,184 @@
-<p>test-data-detail works!</p>
+<ksp-top-nav
+  ><span header>ทะเบียนข้อมูล</span>
+  <span subHeader>ข้อมูลผลการทดสอบ > </span>
+  <span detail>นำเข้าผลทดสอบ</span>
+</ksp-top-nav>
+
+<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height-2">
+  <div class="box-header">นำเข้าผลทดสอบ</div>
+  <div class="bg-white p-3">
+    <div class="bg-light p-3">
+      <div class="box-header mb-3">
+        กรุณาเลือกปีการศึกษา และรายวิชาที่ต้องการนำเข้า
+      </div>
+
+      <div class="row mb-3">
+        <label class="form-label text-end text-black col-2"
+          >ปีการศึกษาที่สอบ</label
+        >
+        <div class="col-5">
+          <select class="form-select">
+            <option>กรุณาเลือก</option>
+            <option>xxx</option>
+            <option>xxx</option>
+            <option>xxx</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="form-label text-end text-black col-2"
+          >รายวิชาที่สอบ</label
+        >
+        <div class="col-5">
+          <select class="form-select">
+            <option>กรุณาเลือก</option>
+            <option>xxx</option>
+            <option>xxx</option>
+            <option>xxx</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="form-label text-end text-black col-2">รหัสวิชา</label>
+        <div class="col-5">
+          <input class="form-control" value="111" disabled />
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end mt-3">
+      <button class="btn border-success text-success w-auto">
+        <img
+          src="/assets/images/img-uni/microsoft excel.png" class="me-1"
+        />ดาวน์โหลดแบบตารางนำเข้า
+      </button>
+      <button class="btn btn-primary w-auto ms-2" (click)="search()">
+        นำเข้าตารางผลการทดสอบ
+      </button>
+    </div>
+  </div>
+  <br />
+  <div class="bg-white p-3">
+    <div class="box-header">
+      รายการนำเข้าผลการทดสอบ<span class="text-danger fs-6">
+        *กรุณาตรวจสอบข้อมูลการนำเข้า ก่อนการกด “บันทึก”
+      </span>
+    </div>
+    <div class="bg-light px-3 py-2">
+      <div class="d-flex justify-content-between w-75 mb-2">
+        <label class="form-label text-black"
+          >รายการนำเข้า (ทั้งหมด): 4 รายการ</label
+        >
+        <label class="form-label text-success"
+          >รายการนำเข้า (สำเร็จ): 3 รายการ</label
+        >
+        <label class="form-label text-danger"
+          >รายการนำเข้า (ผิดพลาด): 1 รายการ</label
+        >
+      </div>
+      <div class="table-responsive">
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>เลือก</th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox></mat-checkbox>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="year">
+            <th mat-header-cell *matHeaderCellDef>ปีการศึกษา</th>
+            <td mat-cell *matCellDef="let element">{{ element.year }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="subjectCode">
+            <th mat-header-cell *matHeaderCellDef>รหัสวิชา</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.subjectCode }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="subjectName">
+            <th mat-header-cell *matHeaderCellDef>ชื่อวิชา</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.subjectName }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="personId">
+            <th mat-header-cell *matHeaderCellDef>
+              หมายเลขบัตรประชาชน/เลขประจำตัวคุรุสภา
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.personId }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.name }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="fullScore">
+            <th mat-header-cell *matHeaderCellDef>คะแนนเต็ม</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.fullScore }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="score">
+            <th mat-header-cell *matHeaderCellDef>คะแนน</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.score }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="testResult">
+            <th mat-header-cell *matHeaderCellDef>ผลการทดสอบ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.testResult }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="testStatus">
+            <th mat-header-cell *matHeaderCellDef>สถานะการทดสอบ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.testStatus }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="annouceDate">
+            <th mat-header-cell *matHeaderCellDef>วันที่ประกาศ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.annouceDate }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="validDate">
+            <th mat-header-cell *matHeaderCellDef>ใช้ผลได้ถึงวันที่</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.validDate }}
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sticky-bottom border">
+  <ksp-bottom-nav
+    (cancelClicked)="cancel()"
+    [isLastPage]="true"
+    [isFirstPage]="true"
+    [showCenterButtons]="true"
+    [showSaveButton]="true"
+    (saveClicked)="save()"
+  ></ksp-bottom-nav>
+</div>

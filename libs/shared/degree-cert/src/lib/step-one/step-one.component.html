@@ -1,6 +1,6 @@
 <form [formGroup]="form">
   <div class="bg-white pt-4" style="width: auto">
-    <div class="px-3 py-2" style="background-color: #f4faff">
+    <div class="px-3 py-2 mb-3" style="background-color: #f4faff">
       <div class="box-header">ข้อมูลสถาบัน</div>
       <div class="row mb-3">
         <div class="col">
@@ -53,6 +53,11 @@
       </div>
     </div>
 
+    <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
+      <input type="checkbox" />
+      <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
+    </div>
+
     <ksp-degree-info
       [degreeTypes]="degreeTypes"
       (degreeTypeChanged)="onDegreeTypeChanged($event)"
@@ -60,7 +65,12 @@
       [mode]="mode"
     ></ksp-degree-info>
 
-    <div class="bg-light px-3 pt-2">
+    <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
+      <input type="checkbox" />
+      <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
+    </div>
+
+    <div class="bg-light px-3 pt-2 mb-3">
       <div class="box-header">การจัดการหลักสูตร หรือลักษณะหลักสูตร</div>
       <div class="row mb-3">
         <label class="form-label"
@@ -87,7 +97,12 @@
       </div>
     </div>
 
-    <div class="bg-light px-3 py-2 mt-3">
+    <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
+      <input type="checkbox" />
+      <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
+    </div>
+
+    <div class="bg-light px-3 py-2 mb-3">
       <div class="box-header">สถานที่ที่เปิดสอน</div>
       <ng-container formArrayName="locations">
         <ng-container
@@ -121,7 +136,12 @@
       >
     </div>
 
-    <div class="bg-light px-3 py-2 mt-3">
+    <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
+      <input type="checkbox" />
+      <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
+    </div>
+
+    <div class="bg-light px-3 py-2 mb-3">
       <div class="box-header">หน่วยงานที่รับผิดชอบหลักสูตร</div>
 
       <ng-container formArrayName="institutions">
@@ -159,7 +179,12 @@
       </ksp-add-row-button>
     </div>
 
-    <div class="bg-light p-3 mt-3">
+    <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
+      <input type="checkbox" />
+      <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
+    </div>
+
+    <div class="bg-light p-3 mb-3">
       <div class="box-header">
         สถานที่ที่ต้องประเมินสภาพจริง / ติดตามผลเชิงประจักษ์
       </div>
@@ -197,12 +222,15 @@
       >
     </div>
 
-    <div class="mt-3">
-      <ksp-degree-cert-coordinator
-        formControlName="coordinator"
-        [mode]="mode"
-        *ngIf="showCoordinatorForm"
-      ></ksp-degree-cert-coordinator>
+    <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
+      <input type="checkbox" />
+      <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
     </div>
+
+    <ksp-degree-cert-coordinator
+      formControlName="coordinator"
+      [mode]="mode"
+      *ngIf="showCoordinatorForm"
+    ></ksp-degree-cert-coordinator>
   </div>
 </form>

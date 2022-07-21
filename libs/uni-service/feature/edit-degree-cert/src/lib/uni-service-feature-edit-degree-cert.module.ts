@@ -2,11 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EditDegreeListComponent } from './edit-degree-list/edit-degree-list.component';
 import { MatTableModule } from '@angular/material/table';
-import { TopNavComponent } from '@ksp/shared/menu';
+import { BottomNavComponent, TopNavComponent } from '@ksp/shared/menu';
 import { DegreeCertSearchComponent } from '@ksp/shared/search';
 import { RouterModule, Routes } from '@angular/router';
 import { UniContainerPageComponent } from '@ksp/uni-service/pages';
 import { EditDegreeDetailComponent } from './edit-degree-detail/edit-degree-detail.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import { SharedDegreeCertModule } from '@ksp/shared/degree-cert';
 
 const routes: Routes = [
   {
@@ -36,6 +39,10 @@ const routes: Routes = [
     MatTableModule,
     TopNavComponent,
     DegreeCertSearchComponent,
+    MatStepperModule,
+    BottomNavComponent,
+    RequestHeaderInfoComponent,
+    SharedDegreeCertModule,
     RouterModule.forChild(routes),
   ],
   declarations: [EditDegreeListComponent, EditDegreeDetailComponent],

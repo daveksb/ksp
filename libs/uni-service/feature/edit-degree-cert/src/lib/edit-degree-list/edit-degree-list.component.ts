@@ -24,6 +24,7 @@ export class EditDegreeListComponent implements OnInit {
 
   searchLicense() {
     this.dialog.open(EditDegreeCertSearchComponent, {
+      height: '100vh',
       width: '1000px',
     });
   }
