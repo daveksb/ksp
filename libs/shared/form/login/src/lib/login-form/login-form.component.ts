@@ -13,6 +13,7 @@ export class LoginFormComponent {
   eyeIconClicked = false;
 
   @Input() showRetired = false;
+  @Input() hideRegister = false;
   @Output() login = new EventEmitter<boolean>();
   @Output() register = new EventEmitter<boolean>();
   @Output() forgetPassword = new EventEmitter<boolean>();
