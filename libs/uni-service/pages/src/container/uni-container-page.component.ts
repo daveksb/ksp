@@ -61,11 +61,11 @@ export const menu: MenuConfig[] = [
         label: 'ขอยื่นรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
       },
       {
-        path: 'edit-degree',
+        path: 'edit-degree-cert',
         label: 'ขอเปลี่ยนแปลงรายละเอียดปริญญาและประกาศนียบัตร',
       },
       {
-        path: 'edit-student',
+        path: 'edit-student-list',
         label: 'ขอเปลี่ยนแปลงรายละเอียดรายชื่อผู้เข้าและผู้สำเร็จการศึกษา',
       },
     ],
@@ -78,19 +78,19 @@ export const menu: MenuConfig[] = [
     path: '',
     subMenu: [
       {
-        path: 'degree-data',
+        path: 'xxx',
         label: 'ทะเบียนข้อมูลหลักสูตรที่รับรองปริญญาและประกาศนียบัตร',
       },
       {
-        path: 'student-data',
+        path: 'xxx',
         label: 'ข้อมูลรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
       },
       {
-        path: 'test-data',
+        path: 'test-data-result',
         label: 'ข้อมูลผลการทดสอบ',
       },
       {
-        path: 'performance-data',
+        path: 'performance-data-result',
         label: 'ข้อมูลผลการประเมินสมรรถนะ',
       },
     ],

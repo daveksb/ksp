@@ -4,7 +4,9 @@
 >
 
 <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
-  <div class="box-header">รายการขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา</div>
+  <div class="box-header">
+    รายการขอเปลี่ยนแปลงรายละเอียดรับรองปริญญาและประกาศนียบัตรทางการศึกษา
+  </div>
 
   <div class="bg-white p-3">
     <ksp-degree-cert-search
@@ -13,12 +15,13 @@
     ></ksp-degree-cert-search>
     <br />
     <div class="d-flex justify-content-end my-1">
-      <a
-        class="btn border-primary text-primary btn-upload mb-2"
+      <button
+        class="btn border-primary text-primary mb-2"
         type="buton"
-        [routerLink]="['/degree-cert', 'request']"
-        >+ สร้างใบคำขอ</a
+        (click)="searchLicense()"
       >
+        + สร้างใบคำขอ
+      </button>
     </div>
 
     <div class="table-responsive">
