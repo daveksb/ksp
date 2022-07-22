@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import {
+  CompleteDialogComponent,
+  ConfirmDialogComponent,
+} from '@ksp/shared/dialog';
 
 @Component({
   selector: 'ksp-test-performance-detail',
@@ -11,7 +17,7 @@ export class TestPerformanceDetailComponent implements OnInit {
   dataSource = new MatTableDataSource<importTest>();
   displayedColumns: string[] = displayedColumns;
 
-  constructor() {}
+  constructor(private router: Router, public dialog: MatDialog) {}
 
   ngOnInit(): void {}
 
@@ -20,6 +26,41 @@ export class TestPerformanceDetailComponent implements OnInit {
       this.data = [...this.data, data2];
     }
     this.dataSource.data = this.data;
+  }
+
+  cancel() {
+    this.router.navigate(['/', 'performance-data-result', 'list']);
+  }
+
+  save() {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
+        btnLabel: 'ยืนยัน',
+      },
+    });
+
+    confirmDialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.onCompleted();
+      }
+    });
+  }
+
+  onCompleted() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      width: '350px',
+      data: {
+        header: `บันทึกข้อมูลสำเร็จ`,
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.cancel();
+      }
+    });
   }
 }
 
