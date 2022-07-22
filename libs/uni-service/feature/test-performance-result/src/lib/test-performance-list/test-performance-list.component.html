@@ -1,0 +1,200 @@
+<ksp-top-nav
+  ><span header>ทะเบียนข้อมูล</span>
+  <span subHeader>รายการผลการประเมินสมรรถนะ</span></ksp-top-nav
+>
+
+<div class="bg-secondary bg-opacity-10 py-2 px-4 ">
+  <div class="box-header">รายการผลการประเมินสมรรถนะ</div>
+  <div class="bg-white p-3">
+    <div class="bg-light p-3">
+      <div class="box-header">ค้นหาข้อมูล/หลักสูตรที่ต้องการ</div>
+
+      <div class="row mb-2">
+        <div class="col">
+          <label class="form-label">สถาบัน / มหาวิทยาลัย</label>
+          <select class="form-select">
+            <option value="null" selected disabled hidden>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="col">
+          <label class="form-label">สังกัด / คณะหน่วยงาน </label>
+          <select class="form-select">
+            <option value="null" selected disabled hidden>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col">
+          <label class="form-label">รหัสรับรองปริญญา</label>
+          <input class="form-control" type="text" />
+        </div>
+        <div class="col">
+          <label class="form-label"
+            >ชื่อปริญญา และประกาศนียบัตรทางการศึกษา</label
+          >
+          <input class="form-control" type="text" />
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col">
+          <label class="form-label">ระดับปริญญาทางการศึกษา</label>
+          <select class="form-select">
+            <option value="null" selected disabled hidden>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="col">
+          <label class="form-label">ปีการศึกษาที่เปิด</label>
+          <input class="form-control" type="text" />
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col">
+          <label class="form-label">หมายเลขบัตรประชาชน</label>
+          <input class="form-control" type="text" />
+        </div>
+        <div class="col">
+          <label class="form-label">ชื่อ - นามสกุล</label>
+          <input class="form-control" type="text" />
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end">
+        <button
+          class="btn border-primary text-primary bg-white"
+          type="button"
+          (click)="clear()"
+        >
+          ล้างข้อมูล
+        </button>
+        <button class="btn btn-primary ms-2" type="button" (click)="search()">
+          ค้นหา
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end my-3">
+    <button class="btn btn-primary w-auto" type="button" (click)="save()">
+      บันทึกผลการประเมิน
+    </button>
+    <button
+      class="btn border-success text-success bg-white ms-2 w-auto"
+      type="button"
+    >
+      <img src="/assets/images/img-uni/microsoft excel.png" />
+      ดาวน์โหลดไฟล์
+    </button>
+  </div>
+
+  <div class="fs-6 text-danger d-flex justify-content-end">
+    กรุณาเลือกหลักสูตร หรือรายชื่อที่ต้องการบันทึกผลการประเมิน
+  </div>
+  <div class="bg-white p-3">
+    <div class="box-header">หลักสูตร</div>
+    <div class="table-reponsive bg-white">
+      <table mat-table [dataSource]="dataSource1">
+        <ng-container matColumnDef="university">
+          <th mat-header-cell *matHeaderCellDef>สถาบัน/มหาวิทยาลัย</th>
+          <td mat-cell *matCellDef="let element">{{ element.university }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="faculty">
+          <th mat-header-cell *matHeaderCellDef>สังกัด/คณะ</th>
+          <td mat-cell *matCellDef="let element">{{ element.faculty }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="degreeCode">
+          <th mat-header-cell *matHeaderCellDef>รหัสปริญญา</th>
+          <td mat-cell *matCellDef="let element">{{ element.degreeCode }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="degreeName">
+          <th mat-header-cell *matHeaderCellDef>
+            ชื่อปริญญาและประกาศนียบัตรทางการศึกษา
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.degreeName }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="branch">
+          <th mat-header-cell *matHeaderCellDef>สาขาวิชา</th>
+          <td mat-cell *matCellDef="let element">{{ element.branch }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="year">
+          <th mat-header-cell *matHeaderCellDef>ปีการศึกษาที่เปิด</th>
+          <td mat-cell *matCellDef="let element">{{ element.year }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="importDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่นำเข้าข้อมูล</th>
+          <td mat-cell *matCellDef="let element">{{ element.importDate }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>สถานะการนำเข้า</th>
+          <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns1"></tr>
+      </table>
+    </div>
+  </div>
+  <br />
+  <div class="bg-white p-3">
+    <div class="box-header">รายชื่อนักศึกษา</div>
+    <div class="table-reponsive bg-white">
+      <table mat-table [dataSource]="dataSource2">
+        <ng-container matColumnDef="personId">
+          <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชุาชน</th>
+          <td mat-cell *matCellDef="let element">{{ element.personId }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="faculty">
+          <th mat-header-cell *matHeaderCellDef>สังกัด/คณะ</th>
+          <td mat-cell *matCellDef="let element">{{ element.faculty }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="branch">
+          <th mat-header-cell *matHeaderCellDef>สาขาวิชา</th>
+          <td mat-cell *matCellDef="let element">{{ element.branch }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="year">
+          <th mat-header-cell *matHeaderCellDef>วันที่รับเข้าศึกษา</th>
+          <td mat-cell *matCellDef="let element">{{ element.year }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="importDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่นำเข้าผลทดสอบ</th>
+          <td mat-cell *matCellDef="let element">{{ element.importDate }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>สถานะ</th>
+          <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns2"></tr>
+      </table>
+    </div>
+  </div>
+</div>

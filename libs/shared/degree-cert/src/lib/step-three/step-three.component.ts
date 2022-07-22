@@ -15,6 +15,8 @@ export class DegreeCertStepThreeComponent extends KspFormBaseComponent {
     teaching: [],
   });
 
+  @Input() showEditCheckbox = false;
+
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(

@@ -43,17 +43,19 @@
       เข้าสู่ระบบ
     </button>
 
-    <hr />
+    <ng-container *ngIf="!hideRegister">
+      <hr />
 
-    <div class="mt-2 text-center mb-1">ยังไม่มีรหัสเข้าใช้งาน</div>
+      <div class="mt-2 text-center mb-1">ยังไม่มีรหัสเข้าใช้งาน</div>
 
-    <button
-      (click)="register.emit(true)"
-      type="button"
-      class="fs-5 btn btn-sm btn-orange w-100"
-    >
-      ลงทะเบียนขอรับรหัสเข้าใช้งาน
-    </button>
+      <button
+        (click)="register.emit(true)"
+        type="button"
+        class="fs-5 btn btn-sm btn-orange w-100"
+      >
+        ลงทะเบียนขอรับรหัสเข้าใช้งาน
+      </button>
+    </ng-container>
   </div>
 
   <div

@@ -13,6 +13,7 @@ import { providerFactory } from '@ksp/shared/utility';
 export class DegreeCertStepTwoComponent extends KspFormBaseComponent {
   @Output() tabIndexChanged = new EventEmitter<number>();
   @Input() formType = 'a';
+  @Input() showEditCheckbox = false;
 
   override form = this.fb.group({
     plan1: [],

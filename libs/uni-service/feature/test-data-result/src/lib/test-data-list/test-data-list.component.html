@@ -1,0 +1,174 @@
+<ksp-top-nav
+  ><span header>ทะเบียนข้อมูล</span>
+  <span subHeader>ข้อมูลผลการทดสอบ</span></ksp-top-nav
+>
+
+<div class="bg-secondary bg-opacity-10 py-2 px-4 full-height">
+  <div class="box-header">รายการผลการทดสอบ</div>
+  <div class="bg-white p-3">
+    <div class="bg-light p-3">
+      <div class="box-header">ค้นหาข้อมูล/หลักสูตรที่ต้องการค้นหา</div>
+      <div class="row mb-2">
+        <div class="col">
+          <label class="form-label">รหัสวิชา</label>
+          <select class="form-select">
+            <option>กรุณาเลือก</option>
+            <option>xxx</option>
+            <option>xxx</option>
+            <option>xxx</option>
+          </select>
+        </div>
+        <div class="col">
+          <label class="form-label">ชื่อวิชา</label>
+          <select class="form-select">
+            <option>กรุณาเลือก</option>
+            <option>xxx</option>
+            <option>xxx</option>
+            <option>xxx</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col">
+          <label class="form-label">ผลการทดสอบ</label>
+          <select class="form-select">
+            <option>กรุณาเลือก</option>
+            <option>xxx</option>
+            <option>xxx</option>
+            <option>xxx</option>
+          </select>
+        </div>
+        <div class="col">
+          <label class="form-label">สถานะการทดสอบ</label>
+          <select class="form-select">
+            <option>กรุณาเลือก</option>
+            <option>xxx</option>
+            <option>xxx</option>
+            <option>xxx</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col">
+          <label class="form-label"
+            >หมายเลขบัตรประชาชน / เลขประจำตัวคุรุสภา /
+            หมายเลขหนังสือเดินทาง</label
+          >
+          <select class="form-select">
+            <option>กรุณาเลือก</option>
+            <option>xxx</option>
+            <option>xxx</option>
+            <option>xxx</option>
+          </select>
+        </div>
+        <div class="col">
+          <label class="form-label">ชื่อ-นามสกุล</label>
+          <select class="form-select">
+            <option>กรุณาเลือก</option>
+            <option>xxx</option>
+            <option>xxx</option>
+            <option>xxx</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-6">
+          <label class="form-label">ปีการศึกษา</label>
+          <select class="form-select">
+            <option>กรุณาเลือก</option>
+            <option>xxx</option>
+            <option>xxx</option>
+            <option>xxx</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end">
+        <button
+          class="btn border-primary text-primary bg-white"
+          type="button"
+          (click)="clear()"
+        >
+          ล้างข้อมูล
+        </button>
+        <button class="btn btn-primary ms-2" type="button" (click)="search()">
+          ค้นหา
+        </button>
+      </div>
+    </div>
+  </div>
+  <br />
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <div class="box-header">
+      รายการแบบคำขอยื่นขอเปลี่ยนแปลงรายละเอียดรายชื่อผู้เข้าและผู้สำเร็จการศึกษา
+    </div>
+    <button
+      class="btn bg-white border-primary text-primary"
+      type="button"
+      (click)="import()"
+    >
+      + นำเข้าข้อมูล
+    </button>
+  </div>
+  <div class="table-reponsive bg-white p-3">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="year">
+        <th mat-header-cell *matHeaderCellDef>ปีการศึกษา</th>
+        <td mat-cell *matCellDef="let element">{{ element.year }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="subjectCode">
+        <th mat-header-cell *matHeaderCellDef>รหัสวิชา</th>
+        <td mat-cell *matCellDef="let element">{{ element.subjectCode }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="personId">
+        <th mat-header-cell *matHeaderCellDef>
+          หมายเลขบัตรประชุาชน/เลขประจำตัวคุรุสภา
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.personId }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="score">
+        <th mat-header-cell *matHeaderCellDef>คะแนน</th>
+        <td mat-cell *matCellDef="let element">{{ element.score }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="testResult">
+        <th mat-header-cell *matHeaderCellDef>ผลการทดสอบ</th>
+        <td mat-cell *matCellDef="let element">{{ element.testResult }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="testStatus">
+        <th mat-header-cell *matHeaderCellDef>สถานะการทดสอบ</th>
+        <td mat-cell *matCellDef="let element">{{ element.testStatus }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="importDate">
+        <th mat-header-cell *matHeaderCellDef>วันที่นำเข้า</th>
+        <td mat-cell *matCellDef="let element">{{ element.importDate }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="announceDate">
+        <th mat-header-cell *matHeaderCellDef>ประกาศ ณ วันที่</th>
+        <td mat-cell *matCellDef="let element">{{ element.announceDate }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>

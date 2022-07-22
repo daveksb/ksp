@@ -72,10 +72,6 @@ export const standardMenu: MenuConfig[] = [
         path: `degree-cert/list/${DegreeCertProcessType.approve}`,
         label: 'พิจารณาและออกใบรับรองปริญญาและประกาศนียบัตร',
       },
-      /* {
-        path: `degree-cert/final-result`,
-        label: '**ขั้นตอนสุดท้าย',
-      }, */
     ],
   },
   {
@@ -104,16 +100,113 @@ export const standardMenu: MenuConfig[] = [
     label: 'ใบคำขอเทียบโอนความรู้',
     path: '',
     isExpanded: false,
-    subMenuName: '--',
-    subMenu: [],
+    subMenuName: 'request-knowledge',
+    subMenu: [
+      {
+        path: 'aa',
+        label: 'รายการใบคำขอเทียบโอนความรู้',
+      },
+      {
+        path: 'bb',
+        label: 'บัญชีรายชื่อและนำเสนอขอเทียบโอนความรู้',
+      },
+      {
+        path: 'cc',
+        label: 'พิจารณารับรองและพิมพ์วุฒิบัตร',
+      },
+    ],
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ใบคำขอรับรองคุณวุฒิทางการศึกษา',
     path: '',
     isExpanded: false,
-    subMenuName: '--',
+    subMenuName: 'request-degree',
+    subMenu: [
+      {
+        path: 'aa',
+        label: 'รายการใบคำรับรองคุณวุฒิทางการศึกษา',
+      },
+      {
+        path: 'bb',
+        label: 'พิจารณารับรองคุณวุฒิทางการศึกษา',
+      },
+      {
+        path: 'cc',
+        label: 'บัญชีรายชื่อและพิมพ์หนังสือคุณวุฒิทางการศึกษา',
+      },
+    ],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/card.svg',
+    label: 'นำเข้าและบันทึกผลการทดสอบ',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'import-test',
     subMenu: [],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/card.svg',
+    label: 'นำเข้าและบันทึกผลการประเมินสมรรถนะทางวิชาชีพครู',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'import-performance',
+    subMenu: [],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/card.svg',
+    label: 'ทะเบียนข้อมูล',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'data',
+    subMenu: [
+      {
+        path: 'aa',
+        label: 'ทะเบียนรหัสรับรองปริญญาและประกาศนียบัตร',
+      },
+      {
+        path: 'bb',
+        label: 'ทะเบียนรายชื่อนักศึกษาเข้าเรียนและจบการศึกษา',
+      },
+      {
+        path: 'cc',
+        label: 'ทะเบียนผู้ผ่านการทดสอบ',
+      },
+      {
+        path: 'cc',
+        label: 'ทะเบียนผู้ผ่านการประเมินสมรรถนะทางวิชาชีพครู',
+      },
+    ],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/card.svg',
+    label: 'รายงาน',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'report',
+    subMenu: [
+      {
+        path: 'aa',
+        label: 'รายงานยื่นใบคำขอ(แยกตามประเภท)',
+      },
+      {
+        path: 'bb',
+        label: ' รายงานรายชื่อปริญญาและประกาศนียบัตรที่ได้รับการรับรอง',
+      },
+    ],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/card.svg',
+    label: 'ระบบบริหารจัดการผู้ใช้งาน',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'user-manage',
+    subMenu: [
+      {
+        path: 'aa',
+        label: 'ผู้ใช้งานระบบบริการสถาบันผลิตครู (Uni Service)',
+      },
+    ],
   },
 ];
 
@@ -225,7 +318,8 @@ export const refundFeeMenu: MenuConfig[] = [
       {
         path: 'refund/detail',
         label: 'บัญชีรายชื่อและอนุมัติการคืนค่าธรรมเนียม',
-      },{
+      },
+      {
         path: 'refund/approve',
         label: 'ตรวจสอบและบันทึกสถานะการคืนค่าธรรมเนียม',
       },

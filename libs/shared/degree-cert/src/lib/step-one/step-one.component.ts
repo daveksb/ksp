@@ -32,6 +32,7 @@ export class DegreeCertStepOneComponent
   courseTypes: ListData[] = [];
   degreeTypes: ListData[] = [];
 
+  @Input() showEditCheckbox = false;
   @Input() showCoordinatorForm = true;
   @Output() degreeType = new EventEmitter<string>();
   @ViewChild(DynamicComponentDirective, { static: true })

@@ -49,16 +49,6 @@ const routes: Routes = [
         (m) => m.UniServiceFeatureGraduateModule
       ),
   },
-  /*  {
-    path: 'graduate',
-    data: {
-      type: UniserviceImportType.graduateList,
-    },
-    loadChildren: () =>
-      import('@ksp/uni-service/feature/graduate').then(
-        (m) => m.UniServiceFeatureGraduateModule
-      ),
-  }, */
   {
     path: 'foreign-student-id',
     component: UniContainerPageComponent,
@@ -68,6 +58,46 @@ const routes: Routes = [
         component: ForeignStudentIdComponent,
       },
     ],
+  },
+  {
+    path: 'edit-degree-cert',
+    data: {
+      type: UniserviceImportType.graduateList,
+    },
+    loadChildren: () =>
+      import('@ksp/uni-service/feature/edit-degree-cert').then(
+        (m) => m.UniServiceFeatureEditDegreeCertModule
+      ),
+  },
+  {
+    path: 'edit-student-list',
+    data: {
+      type: UniserviceImportType.graduateList,
+    },
+    loadChildren: () =>
+      import('@ksp/uni-service/feature/edit-student-list').then(
+        (m) => m.UniServiceFeatureEditStudentListModule
+      ),
+  },
+  {
+    path: 'test-data-result',
+    data: {
+      type: UniserviceImportType.graduateList,
+    },
+    loadChildren: () =>
+      import('@ksp/uni-service/feature/test-data-result').then(
+        (m) => m.UniServiceFeatureTestDataResultModule
+      ),
+  },
+  {
+    path: 'performance-data-result',
+    data: {
+      type: UniserviceImportType.graduateList,
+    },
+    loadChildren: () =>
+      import('@ksp/uni-service/feature/test-performance-result').then(
+        (m) => m.UniServiceFeatureTestPerformanceResultModule
+      ),
   },
   {
     path: '**',

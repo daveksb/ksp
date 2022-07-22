@@ -6,12 +6,20 @@
       dynamicHeight="true"
     >
       <mat-tab label="การฝึกปฏิบัติวิชาชีพระหว่างเรียน" class="tab-content">
+        <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
+          <input type="checkbox" />
+          <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
+        </div>
         <ksp-step-3-training
           formControlName="training"
           [mode]="mode"
         ></ksp-step-3-training>
       </mat-tab>
       <mat-tab label="การปฏิบัติการสอนในสถานศึกษาในสาขาวิชาเฉพาะ">
+        <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
+          <input type="checkbox" />
+          <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
+        </div>
         <ksp-step-3-teaching
           formControlName="teaching"
           [mode]="mode"

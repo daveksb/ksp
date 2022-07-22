@@ -157,6 +157,7 @@
       "@ksp/shared/form/file-upload": [
         "libs/shared/form/file-upload/src/index.ts"
       ],
+      "@ksp/shared/form/license": ["libs/shared/form/license/src/index.ts"],
       "@ksp/shared/form/login": ["libs/shared/form/login/src/index.ts"],
       "@ksp/shared/form/others": ["libs/shared/form/others/src/index.ts"],
       "@ksp/shared/form/school/register": [
@@ -180,6 +181,12 @@
       "@ksp/uni-service/feature/degree-cert": [
         "libs/uni-service/feature/degree-cert/src/index.ts"
       ],
+      "@ksp/uni-service/feature/edit-degree-cert": [
+        "libs/uni-service/feature/edit-degree-cert/src/index.ts"
+      ],
+      "@ksp/uni-service/feature/edit-student-list": [
+        "libs/uni-service/feature/edit-student-list/src/index.ts"
+      ],
       "@ksp/uni-service/feature/foreign-student-id": [
         "libs/uni-service/feature/foreign-student-id/src/index.ts"
       ],
@@ -191,6 +198,12 @@
       ],
       "@ksp/uni-service/feature/retired": [
         "libs/uni-service/feature/retired/src/index.ts"
+      ],
+      "@ksp/uni-service/feature/test-data-result": [
+        "libs/uni-service/feature/test-data-result/src/index.ts"
+      ],
+      "@ksp/uni-service/feature/test-performance-result": [
+        "libs/uni-service/feature/test-performance-result/src/index.ts"
       ],
       "@ksp/uni-service/form": ["libs/uni-service/form/src/index.ts"],
       "@ksp/uni-service/pages": ["libs/uni-service/pages/src/index.ts"]

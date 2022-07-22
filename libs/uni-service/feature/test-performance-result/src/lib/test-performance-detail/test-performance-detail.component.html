@@ -1,0 +1,345 @@
+<ksp-top-nav
+  ><span header>ทะเบียนข้อมูล</span>
+  <span subHeader>ข้อมูลผลการทดสอบ > </span>
+  <span detail>นำเข้าผลทดสอบ</span>
+</ksp-top-nav>
+
+<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height-2">
+  <div class="box-header">
+    ผลการประเมินสมรรถนทางวิชาชีพครู ด้านการปฏิบัติงานและการปฏิบัติตน
+    ตามมาตรฐานวิชาชีพครู
+  </div>
+  <div class="bg-white p-3">
+    <div class="bg-light p-3">
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <label class="fs-5 text-black col-4 text-end">มหาวิทยาลัย</label>
+            <label class="fs-5 text-secondary col">มหาวิทยาลัยภูเก็ต</label>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="row">
+            <label class="fs-5 text-black col-4 text-end">สังกัด/คณะ</label>
+            <label class="fs-5 text-secondary col">ครุศาสตร์</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <label class="fs-5 text-black col-4 text-end">ระดับปริญญา</label>
+            <label class="fs-5 text-secondary col"
+              >ปริญญาตรีทางการศึกษา (หลักสูตร 5 ปี)</label
+            >
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="row">
+            <label class="fs-5 text-black col-4 text-end"
+              >ชื่อสาขาวิชาเอก</label
+            >
+            <label class="fs-5 text-secondary col">เอกภาษาอังกฤษ</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <label class="fs-5 text-black col-4 text-end">ชื่อปริญญา</label>
+            <label class="fs-5 text-secondary col"
+              >(2800) การศึกษาบัณฑิต (5 ปี) หลักสูตรปรับปรุง พ.ศ. 2564</label
+            >
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="row">
+            <label class="fs-5 text-black col-4 text-end"
+              >วันที่รับรองปริญญา</label
+            >
+            <label class="fs-5 text-secondary col">20 มีนาคม 2563</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <div class="row">
+            <label class="fs-5 text-black col-4 text-end"
+              >ปีการศึกษาที่เปิดสอน</label
+            >
+            <div class="col-3">
+              <select class="form-select">
+                <option value="null" selected disabled hidden>
+                  กรุณาเลือก
+                </option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <div class="row">
+            <label class="fs-5 text-black text-end col-4"
+              >จำนวนนักศึกษาที่เรียน</label
+            >
+            <label class="fs-5 text-secondary col">150 คน</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-center py-2">
+        <button class="btn border-primary text-primary">ยกเลิก</button>
+        <button class="btn btn-primary ms-2">ยืนยัน</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between my-3">
+    <div class="box-header">
+      บันทึกผลการประเมินสมรรถนทางวิชาชีพครู ด้านการปฏิบัติงานและการปฏิบัติตน
+      ตามมาตรฐานวิชาชีพครู
+    </div>
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-primary w-auto me-2" (click)="search()">
+        นำเข้าตารางผลการทดสอบ
+      </button>
+      <button class="btn border-success text-success w-auto bg-white">
+        <img
+          src="/assets/images/img-uni/microsoft excel.png"
+          class="me-1"
+        />ดาวน์โหลดแบบตารางนำเข้า
+      </button>
+    </div>
+  </div>
+  <div class="fs-6 text-danger">
+    *กรุณาตรวจสอบข้อมูลการนำเข้า ก่อนการกด “บันทึก”
+  </div>
+  <div class="bg-white p-3">
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="selectHeader">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            [attr.rowspan]="2"
+            style="width: 2rem"
+          >
+            เลือก
+          </th>
+        </ng-container>
+
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">
+            เลือก
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <input type="checkbox" class="form-check-input" />
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="personIdHeader">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            [attr.rowspan]="2"
+            style="width: 10rem"
+          >
+            หมายเลขบัตรประชาชน
+          </th>
+        </ng-container>
+
+        <ng-container matColumnDef="personId">
+          <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">
+            หมายเลขบัตรประชาชน
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.personId }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="nameHeader">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            [attr.rowspan]="2"
+            style="width: 12rem"
+          >
+            ชื่อ-นามสกุล
+          </th>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">
+            ชื่อ-นามสกุล
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.name }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="score1">
+          <th mat-header-cell *matHeaderCellDef>คะแนน</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="d-flex justify-content-center">
+              <input
+                type="text"
+                class="form-control w-50 text-center"
+                value="{{ element.score1 }}"
+              />
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="evaluate1">
+          <th mat-header-cell *matHeaderCellDef>ผลการประเมิน</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="d-flex justify-content-center">
+              <input
+                type="text"
+                class="form-control w-75 text-center"
+                value="{{ element.evaluate1 }}"
+              />
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="score2">
+          <th mat-header-cell *matHeaderCellDef>คะแนน</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="d-flex justify-content-center">
+              <input
+                type="text"
+                class="form-control w-50 text-center"
+                value="{{ element.score2 }}"
+              />
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="evaluate2">
+          <th mat-header-cell *matHeaderCellDef>ผลการประเมิน</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="d-flex justify-content-center">
+              <input
+                type="text"
+                class="form-control w-75 text-center"
+                value=" {{ element.evaluate2 }}"
+              />
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="score3">
+          <th mat-header-cell *matHeaderCellDef>คะแนน</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="d-flex justify-content-center">
+              <input
+                type="text"
+                class="form-control w-50 text-center"
+                value="{{ element.score3 }}"
+              />
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="evaluate3">
+          <th mat-header-cell *matHeaderCellDef>ผลการประเมิน</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="d-flex justify-content-center">
+              <input
+                type="text"
+                class="form-control w-75 text-center"
+                value="{{ element.evaluate3 }}"
+              />
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="score4">
+          <th mat-header-cell *matHeaderCellDef>คะแนน</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="d-flex justify-content-center">
+              <input
+                type="text"
+                class="form-control w-50 text-center"
+                value="{{ element.score4 }}"
+              />
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="evaluate4">
+          <th mat-header-cell *matHeaderCellDef>ผลการประเมิน</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="d-flex justify-content-center">
+              <input
+                type="text"
+                class="form-control w-75 text-center"
+                value="{{ element.evaluate4 }}"
+              />
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="learning">
+          <th mat-header-cell *matHeaderCellDef [attr.colspan]="2">
+            ด้านการจัดการเรียนรู้
+          </th>
+        </ng-container>
+
+        <ng-container matColumnDef="average">
+          <th mat-header-cell *matHeaderCellDef [attr.colspan]="2">
+            คะแนนเฉลี่ยรวมผลการประเมิน
+          </th>
+        </ng-container>
+
+        <ng-container matColumnDef="ethics">
+          <th mat-header-cell *matHeaderCellDef [attr.colspan]="2">
+            ด้านการปฏิบัติหน้าที่ครูและจรรยาบรรณของวิชาชีพ
+          </th>
+        </ng-container>
+
+        <ng-container matColumnDef="relationship">
+          <th mat-header-cell *matHeaderCellDef [attr.colspan]="2">
+            ด้านความสัมพันธ์กับผู้ปกครองและชุมชน
+          </th>
+        </ng-container>
+
+        <tr
+          mat-header-row
+          *matHeaderRowDef="[
+            'selectHeader',
+            'personIdHeader',
+            'nameHeader',
+            'learning',
+            'relationship',
+            'ethics',
+            'average'
+          ]"
+        ></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="sticky-bottom border">
+  <ksp-bottom-nav
+    [isLastPage]="true"
+    [isFirstPage]="true"
+    [showCenterButtons]="true"
+    [showSaveButton]="true"
+    (saveClicked)="save()"
+    (cancelClicked)="cancel()"
+  ></ksp-bottom-nav>
+</div>
