@@ -140,18 +140,12 @@ export const standardMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'นำเข้าและบันทึกผลการทดสอบ',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'import-test',
-    subMenu: [],
+    path: 'import-test',
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'นำเข้าและบันทึกผลการประเมินสมรรถนะทางวิชาชีพครู',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'import-performance',
-    subMenu: [],
+    path: 'import-performance',
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',

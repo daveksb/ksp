@@ -1,4 +1,4 @@
-export * from './lib/uni-service-feature-test-data-result.module';
+export * from './lib/e-service-standard-test-result.module';
 
 export * from './lib/test-data-list/test-data-list.component';
 

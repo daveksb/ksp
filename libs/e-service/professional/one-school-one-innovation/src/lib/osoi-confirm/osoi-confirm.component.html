@@ -201,9 +201,10 @@
 <div class="sticky-bottom border">
   <ksp-bottom-nav
     [showCenterButtons]="true"
-    [isFirstPage]="true"
     [isLastPage]="true"
     [showSaveButton]="true"
     [showCancelButton]="true"
+    (prevClicked)="back()"
+    (cancelClicked)="cancel()"
   ></ksp-bottom-nav>
 </div>

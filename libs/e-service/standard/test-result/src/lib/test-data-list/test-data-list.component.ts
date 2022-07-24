@@ -22,7 +22,7 @@ export class TestDataListComponent implements OnInit {
   }
 
   import() {
-    this.router.navigate(['/', 'test-data-result', 'detail']);
+    this.router.navigate(['/', 'import-test', 'detail']);
   }
 
   ngOnInit(): void {}

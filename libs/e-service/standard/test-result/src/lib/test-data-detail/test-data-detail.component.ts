@@ -8,11 +8,11 @@ import {
 } from '@ksp/shared/dialog';
 
 @Component({
-  selector: 'ksp-test-performance-detail',
-  templateUrl: './test-performance-detail.component.html',
-  styleUrls: ['./test-performance-detail.component.scss'],
+  selector: 'ksp-test-data-detail',
+  templateUrl: './test-data-detail.component.html',
+  styleUrls: ['./test-data-detail.component.scss'],
 })
-export class TestPerformanceDetailComponent implements OnInit {
+export class TestDataDetailComponent implements OnInit {
   data: importTest[] = [data2];
   dataSource = new MatTableDataSource<importTest>();
   displayedColumns: string[] = displayedColumns;
@@ -29,7 +29,7 @@ export class TestPerformanceDetailComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/', 'performance-data-result', 'list']);
+    this.router.navigate(['/', 'import-test']);
   }
 
   save() {
@@ -37,7 +37,6 @@ export class TestPerformanceDetailComponent implements OnInit {
       width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
-        btnLabel: 'ยืนยัน',
       },
     });
 
@@ -66,39 +65,42 @@ export class TestPerformanceDetailComponent implements OnInit {
 
 const displayedColumns: string[] = [
   'select',
+  'year',
+  'subjectCode',
+  'subjectName',
   'personId',
   'name',
-  'score1',
-  'evaluate1',
-  'score2',
-  'evaluate2',
-  'score3',
-  'evaluate3',
-  'score4',
-  'evaluate4',
+  'fullScore',
+  'score',
+  'testResult',
+  'testStatus',
+  'annouceDate',
+  'validDate',
 ];
 export interface importTest {
+  year: string;
+  subjectCode: string;
+  subjectName: string;
   personId: string;
   name: string;
-  score1: string;
-  score2: string;
-  score3: string;
-  score4: string;
-  evaluate1: string;
-  evaluate2: string;
-  evaluate3: string;
-  evaluate4: string;
+  fullScore: string;
+  score: string;
+  testResult: string;
+  testStatus: string;
+  annouceDate: string;
+  validDate: string;
 }
 
 export const data2: importTest = {
+  year: '2564',
+  subjectCode: '101',
+  subjectName: 'วิชาชีพครู',
   personId: '3-1020-xXXXX-XX-1',
-  name: 'นางสาวกนกวรรณ คล้อยใจตาม',
-  score1: '5',
-  score2: '5',
-  score3: '5',
-  score4: '5',
-  evaluate1: 'ดีมาก',
-  evaluate2: 'ดีมาก',
-  evaluate3: 'ดีมาก',
-  evaluate4: 'ดีมาก',
+  name: 'นางสาวมาลัย ซ่อนกลิ่น',
+  fullScore: '70',
+  score: '70',
+  testResult: 'ผ่าน',
+  testStatus: 'มาสอบ',
+  annouceDate: '01/02/2564',
+  validDate: '01/02/2568',
 };

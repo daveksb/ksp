@@ -3,15 +3,16 @@ import { CommonModule } from '@angular/common';
 import { TestPerformanceListComponent } from './test-performance-list/test-performance-list.component';
 import { TestPerformanceDetailComponent } from './test-performance-detail/test-performance-detail.component';
 import { RouterModule, Routes } from '@angular/router';
-import { UniContainerPageComponent } from '@ksp/uni-service/pages';
 import { BottomNavComponent, TopNavComponent } from '@ksp/shared/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
+import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const routes: Routes = [
   {
     path: '',
-    component: UniContainerPageComponent,
+    component: EServiceContainerPageComponent,
     children: [
       {
         path: '',
@@ -37,9 +38,10 @@ const routes: Routes = [
     MatCheckboxModule,
     MatTableModule,
     BottomNavComponent,
+    MatDialogModule,
     RouterModule.forChild(routes),
   ],
   declarations: [TestPerformanceListComponent, TestPerformanceDetailComponent],
   exports: [TestPerformanceListComponent, TestPerformanceDetailComponent],
 })
-export class UniServiceFeatureTestPerformanceResultModule {}
+export class EServiceStandardPerformanceResultModule {}

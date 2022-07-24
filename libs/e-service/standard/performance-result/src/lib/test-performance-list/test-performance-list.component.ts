@@ -19,7 +19,7 @@ export class TestPerformanceListComponent implements OnInit {
   ngOnInit(): void {}
 
   save() {
-    this.router.navigate(['/', 'performance-data-result', 'detail']);
+    this.router.navigate(['/', 'import-performance', 'detail']);
   }
 
   search() {

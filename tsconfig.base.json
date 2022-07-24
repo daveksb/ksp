@@ -15,6 +15,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@ksp/e-service/standard/performance-result": [
+        "libs/e-service/standard/performance-result/src/index.ts"
+      ],
+      "@ksp/e-service/standard/test-result": [
+        "libs/e-service/standard/test-result/src/index.ts"
+      ],
       "@ksp/e-service/dialog/accusation-search": [
         "libs/e-service/dialog/accusation-search/src/index.ts"
       ],
@@ -201,12 +207,6 @@
       ],
       "@ksp/uni-service/feature/retired": [
         "libs/uni-service/feature/retired/src/index.ts"
-      ],
-      "@ksp/uni-service/feature/test-data-result": [
-        "libs/uni-service/feature/test-data-result/src/index.ts"
-      ],
-      "@ksp/uni-service/feature/test-performance-result": [
-        "libs/uni-service/feature/test-performance-result/src/index.ts"
       ],
       "@ksp/uni-service/form": ["libs/uni-service/form/src/index.ts"],
       "@ksp/uni-service/pages": ["libs/uni-service/pages/src/index.ts"]

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ksp-osoi-confirm',
@@ -6,7 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./osoi-confirm.component.scss'],
 })
 export class OsoiConfirmComponent implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  back() {
+    this.router.navigate(['/', 'one-school-one-innovation', 'approve']);
+  }
+
+  cancel() {
+    this.router.navigate(['/', 'one-school-one-innovation', 'list']);
+  }
 }

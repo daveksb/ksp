@@ -14,4 +14,8 @@ export class OsoiDetailComponent implements OnInit {
   next() {
     this.router.navigate(['/', 'one-school-one-innovation', 'confirm']);
   }
+
+  cancel() {
+    this.router.navigate(['/', 'one-school-one-innovation', 'list']);
+  }
 }

@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'uni-service-feature-test-data-result',
+  displayName: 'e-service-standard-performance-result',
   preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -10,7 +10,7 @@ export default {
     },
   },
   coverageDirectory:
-    '../../../../coverage/libs/uni-service/feature/test-data-result',
+    '../../../../coverage/libs/e-service/standard/performance-result',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },
