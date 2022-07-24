@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { SchoolServiceRequestRewardType } from '@ksp/shared/interface';
 
 @Component({
   selector: 'ksp-osoi-list',
