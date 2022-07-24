@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ksp-osoi-detail',
@@ -6,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./osoi-detail.component.scss'],
 })
 export class OsoiDetailComponent implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  next() {
+    this.router.navigate(['/', 'one-school-one-innovation', 'confirm']);
+  }
 }

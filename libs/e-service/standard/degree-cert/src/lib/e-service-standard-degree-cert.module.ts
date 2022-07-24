@@ -25,9 +25,9 @@ import {
   LicenseCheckComponent,
 } from '@ksp/e-service/ui/license-check';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormMeetingRecordComponent } from '@ksp/e-service/form';
 import { DegreeCertSearchComponent } from '@ksp/shared/search';
 import { RouterModule } from '@angular/router';
+import { FormMeetingRecordComponent } from '@ksp/e-service/form';
 
 @NgModule({
   imports: [

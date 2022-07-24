@@ -14,18 +14,7 @@ import {
 })
 export class RequestRewardDetailComponent implements OnInit {
   form = this.fb.group({
-    workName: [],
-    workType: [],
-    workSubmit: [],
-    rewardLink: [],
-    personId: [''],
-    prefix: [null],
-    firstName: [''],
-    lastName: [''],
-    phone: [''],
-    email: [''],
-    academicStanding: [''],
-    rows: this.fb.array([]),
+    requestReward: [],
   });
 
   rewardFiles = [
@@ -43,28 +32,7 @@ export class RequestRewardDetailComponent implements OnInit {
     private fb: FormBuilder
   ) {}
 
-  ngOnInit(): void {
-    this.addRow();
-  }
-
-  get rows() {
-    return this.form.controls['rows'] as FormArray;
-  }
-
-  addRow() {
-    const rewardForm = this.fb.group({
-      developerType: [null],
-      personId: [''],
-      prefix: [null],
-      firstName: [''],
-      lastName: [''],
-      phone: [''],
-      email: [''],
-      academicStanding: [''],
-    });
-
-    this.rows.push(rewardForm);
-  }
+  ngOnInit(): void {}
 
   cancel() {
     this.router.navigate(['/', 'temp-license', 'list']);

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 @Component({
-  selector: 'ksp-form-meeting-record',
+  selector: 'e-service-form-meeting-record',
   standalone: true,
   imports: [CommonModule, FileUploadComponent, ReactiveFormsModule],
   template: ` <p>form-meeting-record works!</p> `,
@@ -18,6 +18,8 @@ export class FormMeetingRecordComponent {
     boardName: [],
     chairmanName: [],
   });
+
+  @Input() showBoxHeader = 'บันทึกมติที่ประชุมคณะอนุกรรมการ';
 
   constructor(private fb: FormBuilder) {}
 }

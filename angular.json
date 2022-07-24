@@ -7115,6 +7115,32 @@
         }
       ]
     },
+    "shared-form-school-request-reward": {
+      "projectType": "library",
+      "root": "libs/shared/form/school/request-reward",
+      "sourceRoot": "libs/shared/form/school/request-reward/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/form/school/request-reward"],
+          "options": {
+            "jestConfig": "libs/shared/form/school/request-reward/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/form/school/request-reward/**/*.ts",
+              "libs/shared/form/school/request-reward/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "shared-form-teacher-info": {
       "root": "libs/shared/form/teacher-info",
       "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
@@ -9418,8 +9444,5 @@
       ]
     }
   },
-  "version": 1,
-  "cli": {
-    "analytics": false
-  }
+  "version": 1
 }

@@ -10,6 +10,7 @@ import {
 import { BottomNavComponent, TopNavComponent } from '@ksp/shared/menu';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RequestRewardFormComponent } from '@ksp/shared/form/school/request-reward';
 
 export const routes: Route[] = [
   {
@@ -34,6 +35,7 @@ export const routes: Route[] = [
     BottomNavComponent,
     AddRowButtonComponent,
     ReactiveFormsModule,
+    RequestRewardFormComponent,
   ],
   declarations: [RequestRewardDetailComponent],
   exports: [RequestRewardDetailComponent],
