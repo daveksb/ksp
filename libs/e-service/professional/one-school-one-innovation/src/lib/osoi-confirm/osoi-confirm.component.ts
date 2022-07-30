@@ -18,4 +18,8 @@ export class OsoiConfirmComponent implements OnInit {
   cancel() {
     this.router.navigate(['/', 'one-school-one-innovation', 'list']);
   }
+
+  next() {
+    this.router.navigate(['/', 'one-school-one-innovation', 'ranking']);
+  }
 }

@@ -6,7 +6,7 @@
   ></ksp-top-nav
 >
 
-<div class="bg-secondary bg-opacity-10 px-4 py-2">
+<div class="bg-secondary bg-opacity-10 px-4 py-2 full-width-2">
   <div class="box-header">
     รายละเอียดใบคำขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
     {{ requestTypeLabel }}
@@ -86,18 +86,6 @@
             >วุฒิการศึกษาปริญญาโท
           </ksp-form-education-info>
 
-          <!-- <div class="px-4">
-            <label class="form-label-2"
-              >คุณสมบัติอื่นที่สอดคล้องหรือเป็นประโยชน์ต่อการจัดการเรียนการสอนในกลุ่มสาระหรือรายวิชาที่สอน
-              (พิจารณาเป็นรายกรณี)</label
-            >
-            <textarea
-              formControlName="otherProperty"
-              class="form-control"
-              rows="3"
-              placeholder="โปรดระบุ"
-            ></textarea>
-          </div> -->
           <br />
           <ksp-form-attachment [groups]="educationInfo"></ksp-form-attachment>
         </mat-tab>

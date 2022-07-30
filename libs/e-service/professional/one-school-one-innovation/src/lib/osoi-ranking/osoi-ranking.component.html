@@ -52,10 +52,10 @@
     <div class="box-header">ผลการพิจารณาคณะกรรมการ</div>
     <hr />
 
-    <div class="row">
-      <div class="d-flex col-3 align-items-center">
+    <div class="row mb-3">
+      <div class="d-flex col-3 align-items-center me-5">
         <input type="checkbox" />
-        <label class="form-label mx-2">xxx</label>
+        <label class="form-label mx-2">ภูมิภาค</label>
         <select class="form-select">
           <option selected>กรุณาเลือก</option>
           <option value="1">One</option>
@@ -66,7 +66,7 @@
 
       <div class="d-flex col-3 align-items-center">
         <input type="checkbox" />
-        <label class="form-label mx-2">xxx</label>
+        <label class="form-label mx-2">ประเทศ</label>
         <select class="form-select">
           <option selected>กรุณาเลือก</option>
           <option value="1">One</option>
@@ -74,11 +74,10 @@
           <option value="3">Three</option>
         </select>
       </div>
-
-      <e-service-form-meeting-record
-        [showBoxHeader]="''"
-      ></e-service-form-meeting-record>
     </div>
+    <e-service-form-meeting-record
+      [showBoxHeader]="''"
+    ></e-service-form-meeting-record>
   </div>
 </div>
 
@@ -89,5 +88,7 @@
     [isLastPage]="true"
     [showSaveButton]="true"
     [showCancelButton]="true"
+    (saveClicked)="next()"
+    (cancelClicked)="cancel()"
   ></ksp-bottom-nav>
 </div>

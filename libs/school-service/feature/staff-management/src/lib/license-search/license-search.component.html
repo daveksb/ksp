@@ -62,11 +62,17 @@
     <div class="box-header">ผลการค้นหา</div>
     <hr />
     <div *ngIf="foundItem">
-      <ksp-license-info></ksp-license-info>
+      <div style="margin-left: 5rem">
+        <ksp-license-info [isLicenseRevoked]="true"></ksp-license-info>
+      </div>
       <hr />
-      <ksp-license-info [isLicenseRevoked]="true"></ksp-license-info>
+      <div style="margin-left: 5rem">
+        <ksp-license-info [isLicenseRevoked]="true"></ksp-license-info>
+      </div>
       <hr />
-      <ksp-license-info></ksp-license-info>
+      <div style="margin-left: 5rem">
+        <ksp-license-info [isLicenseRevoked]="true"></ksp-license-info>
+      </div>
     </div>
   </div>
 </div>

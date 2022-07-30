@@ -13,6 +13,7 @@ import { OsoiObjectionComponent } from './osoi-objection/osoi-objection.componen
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { FormMeetingRecordComponent } from '@ksp/e-service/form';
 import { MatTableModule } from '@angular/material/table';
+import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 
 const routes: Routes = [
   {
@@ -58,6 +59,7 @@ const routes: Routes = [
     RequestHeaderInfoComponent,
     FormMeetingRecordComponent,
     MatTableModule,
+    FileUploadComponent,
     RouterModule.forChild(routes),
   ],
   declarations: [

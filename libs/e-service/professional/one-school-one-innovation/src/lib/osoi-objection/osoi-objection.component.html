@@ -54,9 +54,9 @@
     <hr />
 
     <div class="row mb-3">
-      <div class="d-flex col-3 align-items-center">
+      <div class="d-flex col-3 align-items-center me-5">
         <input type="checkbox" />
-        <label class="form-label mx-2">xxx</label>
+        <label class="form-label mx-2">ภูมิภาค</label>
         <select class="form-select">
           <option selected>กรุณาเลือก</option>
           <option value="1">One</option>
@@ -67,7 +67,7 @@
 
       <div class="d-flex col-3 align-items-center">
         <input type="checkbox" />
-        <label class="form-label mx-2">xxx</label>
+        <label class="form-label mx-2">ประเทศ</label>
         <select class="form-select">
           <option selected>กรุณาเลือก</option>
           <option value="1">One</option>
@@ -83,7 +83,7 @@
 
   <br />
   <div class="bg-white p-3">
-    <div class="box-header">xxx</div>
+    <div class="box-header">ข้อมูลการขอคัดค้าน</div>
     <hr />
     <div class="d-flex">
       <div class="me-5">
@@ -98,14 +98,14 @@
 
     <div class="row">
       <div class="col-6">
-        <label class="form-label">xxx</label>
-        <input class="form-control" type="tel" />
+        <label class="form-label">หมายเลขบัตรประชาชน</label>
+        <input class="form-control" type="text" />
       </div>
     </div>
 
     <div class="row mb-2">
       <div class="col-2">
-        <label class="form-label">xxx</label>
+        <label class="form-label">คำนำหน้าชื่อ</label>
         <select class="search__content form-select">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">One</option>
@@ -114,18 +114,18 @@
         </select>
       </div>
       <div class="col-5">
-        <label class="form-label">xxx </label>
+        <label class="form-label">ชื่อ (ภาษาไทย) </label>
         <input class="form-control" type="text" />
       </div>
       <div class="col-5">
-        <label class="form-label">xxx </label>
+        <label class="form-label">นามสกุล (ภาษาไทย) </label>
         <input class="form-control" type="text" />
       </div>
     </div>
 
     <div class="row mb-2">
       <div class="col">
-        <label class="form-label">xxx</label>
+        <label class="form-label">สังกัด</label>
         <input
           class="form-control"
           type="text"
@@ -134,7 +134,7 @@
         />
       </div>
       <div class="col">
-        <label class="form-label">xxx</label>
+        <label class="form-label">หน่วยงาน</label>
         <input
           class="form-control"
           type="tel"
@@ -146,7 +146,7 @@
 
     <div class="row mb-2">
       <div class="col-6">
-        <label class="form-label">xxx</label>
+        <label class="form-label">ผู้ประสานงาน</label>
         <input
           class="form-control"
           type="text"
@@ -156,7 +156,7 @@
       </div>
     </div>
     <div class="mb-2">
-      <label class="form-label">xxx</label>
+      <label class="form-label">เหตุผลการคัดค้าน</label>
       <textarea class="form-control" rows="3"></textarea>
     </div>
   </div>
@@ -165,33 +165,35 @@
   <div class="bg-white p-3">
     <div class="d-flex align-items-center">
       <input type="checkbox" />
-      <div class="box-header ms-2">xxx</div>
+      <div class="box-header ms-2">ข้อมูลการเพิกถอน</div>
     </div>
     <hr />
     <div class="row">
       <div class="col-6">
         <div class="row">
           <div class="col-3">
-            <label class="form-label">xxx</label>
-            <input class="form-control" type="email" />
+            <label class="form-label">มติครั้งที่</label>
+            <input class="form-control" type="text" />
           </div>
           <div class="col">
-            <label class="form-label">xxx</label>
-            <input class="form-control" type="email" />
+            <label class="form-label">วันที่</label>
+            <input class="form-control" type="text" />
           </div>
         </div>
       </div>
 
       <div class="d-flex flex-column col">
-        <div class="col">xxx</div>
-        <button type="button" class="btn btn-primary">xxx</button>
+        <div class="col">
+          <label class="form-label">เอกสารแนบ</label>
+        </div>
+        <ksp-file-upload></ksp-file-upload>
       </div>
     </div>
 
     <div class="row">
       <div class="col-6">
-        <label class="form-label">xxx</label>
-        <input class="form-control" type="email" />
+        <label class="form-label">วันที่เพิกถอน</label>
+        <input class="form-control" type="text" />
       </div>
     </div>
   </div>
@@ -204,5 +206,7 @@
     [isLastPage]="true"
     [showSaveButton]="true"
     [showCancelButton]="true"
+    (saveClicked)="next()"
+    (cancelClicked)="cancel()"
   ></ksp-bottom-nav>
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ksp-osoi-objection',
@@ -6,7 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./osoi-objection.component.scss'],
 })
 export class OsoiObjectionComponent implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  cancel() {
+    this.router.navigate(['/', 'one-school-one-innovation', 'list']);
+  }
+
+  next() {
+    this.router.navigate(['/', 'one-school-one-innovation', 'list']);
+  }
 }
