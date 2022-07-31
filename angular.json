@@ -1994,6 +1994,58 @@
         }
       ]
     },
+    "e-service-standard-performance-result": {
+      "projectType": "library",
+      "root": "libs/e-service/standard/performance-result",
+      "sourceRoot": "libs/e-service/standard/performance-result/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-service/standard/performance-result"],
+          "options": {
+            "jestConfig": "libs/e-service/standard/performance-result/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/standard/performance-result/**/*.ts",
+              "libs/e-service/standard/performance-result/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-standard-test-result": {
+      "projectType": "library",
+      "root": "libs/e-service/standard/test-result",
+      "sourceRoot": "libs/e-service/standard/test-result/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-service/standard/test-result"],
+          "options": {
+            "jestConfig": "libs/e-service/standard/test-result/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/standard/test-result/**/*.ts",
+              "libs/e-service/standard/test-result/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-ui-accusation-info": {
       "root": "libs/e-service/ui/accusation-info",
       "projectType": "library",
@@ -7115,6 +7167,32 @@
         }
       ]
     },
+    "shared-form-school-request-reward": {
+      "projectType": "library",
+      "root": "libs/shared/form/school/request-reward",
+      "sourceRoot": "libs/shared/form/school/request-reward/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/form/school/request-reward"],
+          "options": {
+            "jestConfig": "libs/shared/form/school/request-reward/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/form/school/request-reward/**/*.ts",
+              "libs/shared/form/school/request-reward/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "shared-form-teacher-info": {
       "root": "libs/shared/form/teacher-info",
       "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
@@ -9147,60 +9225,6 @@
           "hash": "d1f5c8852d652eac23b0378b6c259ea88d5a88d1"
         }
       ]
-    },
-    "uni-service-feature-test-data-result": {
-      "projectType": "library",
-      "root": "libs/uni-service/feature/test-data-result",
-      "sourceRoot": "libs/uni-service/feature/test-data-result/src",
-      "prefix": "ksp",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/uni-service/feature/test-data-result"],
-          "options": {
-            "jestConfig": "libs/uni-service/feature/test-data-result/jest.config.ts",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/uni-service/feature/test-data-result/**/*.ts",
-              "libs/uni-service/feature/test-data-result/**/*.html"
-            ]
-          }
-        }
-      },
-      "tags": []
-    },
-    "uni-service-feature-test-performance-result": {
-      "projectType": "library",
-      "root": "libs/uni-service/feature/test-performance-result",
-      "sourceRoot": "libs/uni-service/feature/test-performance-result/src",
-      "prefix": "ksp",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/uni-service/feature/test-performance-result"
-          ],
-          "options": {
-            "jestConfig": "libs/uni-service/feature/test-performance-result/jest.config.ts",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/uni-service/feature/test-performance-result/**/*.ts",
-              "libs/uni-service/feature/test-performance-result/**/*.html"
-            ]
-          }
-        }
-      },
-      "tags": []
     },
     "uni-service-form": {
       "root": "libs/uni-service/form",

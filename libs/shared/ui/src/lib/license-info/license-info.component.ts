@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ksp-license-info',
@@ -11,5 +12,9 @@ import { Component, Input } from '@angular/core';
 export class LicenseInfoComponent {
   @Input() isLicenseRevoked = false;
 
-  constructor() {}
+  constructor(private router: Router) {}
+
+  select() {
+    this.router.navigate(['/', 'staff-management', 'staff-person-info']);
+  }
 }

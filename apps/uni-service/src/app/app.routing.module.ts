@@ -79,14 +79,14 @@ const routes: Routes = [
         (m) => m.UniServiceFeatureEditStudentListModule
       ),
   },
-  {
+  /* {
     path: 'test-data-result',
     data: {
       type: UniserviceImportType.graduateList,
     },
     loadChildren: () =>
-      import('@ksp/uni-service/feature/test-data-result').then(
-        (m) => m.UniServiceFeatureTestDataResultModule
+      import('@ksp/e-service-standard-test-result').then(
+        (m) => m.EServiceStandardTestResultModule
       ),
   },
   {
@@ -95,10 +95,10 @@ const routes: Routes = [
       type: UniserviceImportType.graduateList,
     },
     loadChildren: () =>
-      import('@ksp/uni-service/feature/test-performance-result').then(
-        (m) => m.UniServiceFeatureTestPerformanceResultModule
+      import('@ksp/e-service-standard-performance-result').then(
+        (m) => m.EServiceStandardPerformanceResultModule
       ),
-  },
+  }, */
   {
     path: '**',
     redirectTo: 'login',

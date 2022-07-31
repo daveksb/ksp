@@ -1,19 +1,17 @@
-<div class="tab__container">
-  <div class="detail__container">
-    <div class="detail__header">
-      กรุณาแนบหลักฐาน<span class="label__text"
-        >*กรุณาอัพโหลดไฟล์ .pdfและขนาดไม่เกิน 2 MB สามารถอัพโหลดไฟล์ได้มากกว่า 1
-        ไฟล์ต่อรายการ</span
-      >
-    </div>
-    <div class="detail__header--secondary">
-      ปริญญาตรีทางการศึกษา (หลักสูตร 5 ปี)
-    </div>
-
-    <ksp-form-attachment
-      [mode]="mode"
-      [title]="''"
-      [groups]="uploadFiles"
-    ></ksp-form-attachment>
+<div class="bg-light">
+  <div class="box-header px-3 py-2">
+    กรุณาแนบหลักฐาน<span class="fs-6 text-danger">
+      *กรุณาอัพโหลดไฟล์ .pdfและขนาดไม่เกิน 2 MB สามารถอัพโหลดไฟล์ได้มากกว่า 1
+      ไฟล์ต่อรายการ</span
+    >
   </div>
+  <div class="form-label text-black px-3">
+    ปริญญาตรีทางการศึกษา (หลักสูตร 5 ปี)
+  </div>
+
+  <ksp-form-attachment
+    [mode]="mode"
+    [title]="''"
+    [groups]="uploadFiles"
+  ></ksp-form-attachment>
 </div>

@@ -86,11 +86,11 @@ export const menu: MenuConfig[] = [
         label: 'ข้อมูลรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
       },
       {
-        path: 'test-data-result',
+        path: 'xxx',
         label: 'ข้อมูลผลการทดสอบ',
       },
       {
-        path: 'performance-data-result',
+        path: 'xxx',
         label: 'ข้อมูลผลการประเมินสมรรถนะ',
       },
     ],

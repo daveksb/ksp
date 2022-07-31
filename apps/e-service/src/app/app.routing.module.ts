@@ -133,6 +133,24 @@ const routes: EthicsCustomRoute[] = [
       ),
   },
 
+  {
+    path: 'import-test',
+    data: { menuConfig: standardMenu, headerLabel: 'ขอคืนเงินค่าธรรมเนียม' },
+    loadChildren: () =>
+      import('@ksp/e-service/standard/test-result').then(
+        (m) => m.EServiceStandardTestResultModule
+      ),
+  },
+
+  {
+    path: 'import-performance',
+    data: { menuConfig: standardMenu, headerLabel: 'ขอคืนเงินค่าธรรมเนียม' },
+    loadChildren: () =>
+      import('@ksp/e-service/standard/performance-result').then(
+        (m) => m.EServiceStandardPerformanceResultModule
+      ),
+  },
+
   { path: '', component: EServiceLoginComponent },
 ];
 
