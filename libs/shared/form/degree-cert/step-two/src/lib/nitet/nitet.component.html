@@ -1,5 +1,18 @@
 <div class="box-header">อาจารย์นิเทศก์</div>
 
+<div class="row mb-3">
+  <div class="col-2">
+    <label class="form-label">ระบุจำนวน</label>
+    <input type="text" class="form-control" />
+  </div>
+  <div class="col-3">
+    <br />
+    <button (click)="addNitet()" type="button" class="btn btn-primary w-auto">
+      กรอกข้อมูลอาจารย์นิเทศก์
+    </button>
+  </div>
+</div>
+
 <form [formGroup]="form">
   <ng-container formArrayName="nitets">
     <ng-container *ngFor="let nitet of nitets.controls; let i = index">
@@ -153,9 +166,9 @@
     </ng-container>
   </ng-container>
 
-  <ng-container *ngIf="nitets.length < 4">
+  <!-- <ng-container *ngIf="nitets.length < 4">
     <ksp-add-row-button *hideInViewMode (addRowClick)="addNitet()" class="blue"
       >เพิ่มอาจารย์นิเทศก์</ksp-add-row-button
     >
-  </ng-container>
+  </ng-container> -->
 </form>

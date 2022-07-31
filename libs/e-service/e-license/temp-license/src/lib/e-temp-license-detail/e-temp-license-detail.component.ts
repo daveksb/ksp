@@ -23,7 +23,7 @@ export class ETempLicenseDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.reason = this.service.reason;
+    /* this.reason = this.service.reason; */
     this.choices = this.service.choices;
     this.educationInfo = this.service.educationInfo;
     this.teachingInfo = this.service.teachingInfo;
@@ -36,7 +36,7 @@ export class ETempLicenseDetailComponent implements OnInit {
   }
 
   next() {
-    this.router.navigate(['/temp-license', 'forbidden']);
+    this.router.navigate(['/temp-license', 'confirm']);
   }
 
   prevPage() {
