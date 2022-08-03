@@ -9,6 +9,7 @@ import { BottomNavComponent, TopNavComponent } from '@ksp/shared/menu';
 import { EditLicenseComponent } from '@ksp/shared/form/license';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -41,6 +42,7 @@ const routes: Routes = [
     SharedFormOthersModule,
     RequestHeaderInfoComponent,
     BottomNavComponent,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
   ],
   declarations: [EditStudentListComponent, EditStudentDetailComponent],

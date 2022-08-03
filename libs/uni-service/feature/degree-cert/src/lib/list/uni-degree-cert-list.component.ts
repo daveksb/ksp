@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
@@ -13,6 +14,7 @@ import { DegreeCertSearchComponent } from '@ksp/shared/search';
     DegreeCertSearchComponent,
     RouterModule,
     MatTableModule,
+    CommonModule,
   ],
 })
 export class UniDegreeCertListComponent {
@@ -58,8 +60,6 @@ export interface DegreeCertInfo {
   editDate: string;
   verify: string;
   consider: string;
-  edit: string;
-  print: string;
 }
 
 export const data: DegreeCertInfo[] = [
@@ -74,10 +74,8 @@ export const data: DegreeCertInfo[] = [
     approveStatus: 'พิจารณา',
     approveDate: '30 ส.ค. 2564',
     editDate: '30 ส.ค. 2564',
-    verify: 'ตรวจสอบแล้ว',
-    consider: 'ตรวจสอบแล้ว',
-    edit: '',
-    print: '',
+    verify: 'แก้ไข',
+    consider: 'แก้ไข',
   },
   {
     order: 2,
@@ -90,10 +88,8 @@ export const data: DegreeCertInfo[] = [
     approveStatus: 'พิจารณา',
     approveDate: '30 ส.ค. 2564',
     editDate: '30 ส.ค. 2564',
-    verify: 'แก้ไข',
+    verify: 'ตรวจสอบแล้ว',
     consider: 'แก้ไข',
-    edit: '',
-    print: '',
   },
   {
     order: 3,
@@ -106,9 +102,7 @@ export const data: DegreeCertInfo[] = [
     approveStatus: 'พิจารณา',
     approveDate: '30 ส.ค. 2564',
     editDate: '30 ส.ค. 2564',
-    verify: 'ตรวจสอบแล้ว',
-    consider: 'แก้ไข',
-    edit: '',
-    print: '',
+    verify: 'ปรับแก้ไข/เพิ่มเติม',
+    consider: 'ตรวจสอบแล้ว',
   },
 ];

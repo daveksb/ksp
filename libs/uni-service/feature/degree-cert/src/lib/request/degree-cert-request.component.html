@@ -46,7 +46,9 @@
 
         <mat-step [completed]="false">
           <ng-template matStepLabel>เอกสารแนบ</ng-template>
-          <ksp-degree-cert-step-four></ksp-degree-cert-step-four>
+          <ksp-degree-cert-step-four
+            [formType]="step1DegreeType"
+          ></ksp-degree-cert-step-four>
         </mat-step>
 
         <mat-step [completed]="false">

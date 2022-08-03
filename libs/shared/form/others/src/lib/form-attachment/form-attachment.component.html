@@ -17,7 +17,15 @@
           <tr style="border-top: 1px solid #dadde1">
             <th class="ps-3 py-2 text-black">
               {{ group }}
-              <div class="text-secondary">xxxxxxxx_xxxxx.pdf</div>
+              <div class="text-secondary">
+                <div>
+                  xxxxxxxx_xxxxx.pdf
+                  <i
+                    class="bi bi-x-circle-fill text-danger fs-6 ms-2"
+                    role="button"
+                  ></i>
+                </div>
+              </div>
             </th>
             <td class="text-center">-</td>
             <td *ngIf="mode === 'view'" class="text-center">

@@ -98,7 +98,7 @@ export class ImportStudentComponent implements OnInit {
   searchAddress() {
     this.dialog.open(TrainingAddressComponent, {
       height: '900px',
-      width: '1200px',
+      width: '1000px',
     });
   }
 
