@@ -15,12 +15,6 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ksp/e-service/standard/performance-result": [
-        "libs/e-service/standard/performance-result/src/index.ts"
-      ],
-      "@ksp/e-service/standard/test-result": [
-        "libs/e-service/standard/test-result/src/index.ts"
-      ],
       "@ksp/e-service/dialog/accusation-search": [
         "libs/e-service/dialog/accusation-search/src/index.ts"
       ],
@@ -72,6 +66,12 @@
       ],
       "@ksp/e-service/standard/degree-cert": [
         "libs/e-service/standard/degree-cert/src/index.ts"
+      ],
+      "@ksp/e-service/standard/performance-result": [
+        "libs/e-service/standard/performance-result/src/index.ts"
+      ],
+      "@ksp/e-service/standard/test-result": [
+        "libs/e-service/standard/test-result/src/index.ts"
       ],
       "@ksp/e-service/ui/accusation-info": [
         "libs/e-service/ui/accusation-info/src/index.ts"
