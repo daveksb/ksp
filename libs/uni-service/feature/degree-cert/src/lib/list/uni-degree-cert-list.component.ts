@@ -4,6 +4,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { DegreeCertSearchComponent } from '@ksp/shared/search';
+import { UniFormBadgeComponent } from '@ksp/shared/ui';
 
 @Component({
   templateUrl: './uni-degree-cert-list.component.html',
@@ -15,6 +16,7 @@ import { DegreeCertSearchComponent } from '@ksp/shared/search';
     RouterModule,
     MatTableModule,
     CommonModule,
+    UniFormBadgeComponent,
   ],
 })
 export class UniDegreeCertListComponent {
