@@ -1,3 +1,7 @@
+<ng-container *ngIf="mode === 'edit'">
+  <ksp-uni-warn-incorrect [details]="step2Incorrect"></ksp-uni-warn-incorrect
+></ng-container>
+
 <form [formGroup]="form">
   <mat-tab-group
     animationDuration="0ms"

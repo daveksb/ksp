@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { EditDegreeCertSearchComponent } from '@ksp/uni-service/dialog';
+import {
+  EditDegreeCertSearchComponent,
+  HistoryRequestDialogComponent,
+} from '@ksp/uni-service/dialog';
 
 @Component({
   selector: 'ksp-edit-degree-list',
@@ -30,6 +33,12 @@ export class EditDegreeListComponent implements OnInit {
         top: '0px',
         right: '0px',
       },
+    });
+  }
+
+  history() {
+    this.dialog.open(HistoryRequestDialogComponent, {
+      width: '400px',
     });
   }
 

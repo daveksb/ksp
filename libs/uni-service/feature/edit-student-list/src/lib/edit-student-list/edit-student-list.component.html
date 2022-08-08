@@ -203,7 +203,11 @@
       <ng-container matColumnDef="print">
         <th mat-header-cell *matHeaderCellDef>ประวัติ</th>
         <td class="text-center" mat-cell *matCellDef="let element">
-          <i role="button" class="bi bi-eye fs-5 text-success"></i>
+          <i
+            role="button"
+            (click)="history()"
+            class="bi bi-eye fs-5 text-success"
+          ></i>
         </td>
       </ng-container>
 

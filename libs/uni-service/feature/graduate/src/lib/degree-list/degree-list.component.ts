@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UniserviceImportType } from '@ksp/shared/interface';
+import {
+  HistoryRequestDialogComponent,
+  PrintRequestDialogComponent,
+} from '@ksp/uni-service/dialog';
 
 @Component({
   templateUrl: './degree-list.component.html',
@@ -13,7 +18,11 @@ export class DegreeListComponent implements OnInit {
   displayedColumns: string[] = columns;
   dataSource = new MatTableDataSource<StudentInfo>();
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.route.data.subscribe((res) => {
@@ -28,6 +37,18 @@ export class DegreeListComponent implements OnInit {
       'course-detail',
       (this.processType = type - 1),
     ]);
+  }
+
+  history() {
+    this.dialog.open(HistoryRequestDialogComponent, {
+      width: '400px',
+    });
+  }
+
+  print() {
+    this.dialog.open(PrintRequestDialogComponent, {
+      width: '400px',
+    });
   }
 
   search() {

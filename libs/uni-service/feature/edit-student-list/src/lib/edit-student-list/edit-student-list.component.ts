@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { HistoryRequestDialogComponent } from '@ksp/uni-service/dialog';
 
 @Component({
   selector: 'ksp-edit-student-list',
@@ -11,7 +13,13 @@ export class EditStudentListComponent {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<studentList>();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, public dialog: MatDialog) {}
+
+  history() {
+    this.dialog.open(HistoryRequestDialogComponent, {
+      width: '400px',
+    });
+  }
 
   search() {
     this.dataSource.data = data;

@@ -31,6 +31,8 @@ export class EditStudentDetailComponent {
     private fb: FormBuilder
   ) {}
 
+
+
   searchData() {
     this.data = true;
   }

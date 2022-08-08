@@ -16,6 +16,11 @@ export class DegreeCertStepFourComponent {
   @Input() mode: FormMode = 'edit';
   @Input() formType = 'a';
 
+  step4Incorrect = [
+    'ไม่ครบถ้วน และไม่ถูกต้อง',
+    'หมายเหตุ สำเนาใบอนุญาตไม่ถูกต้อง',
+  ];
+
   constructor(public dialog: MatDialog, private router: Router) {}
 
   uploadFiles1 = [

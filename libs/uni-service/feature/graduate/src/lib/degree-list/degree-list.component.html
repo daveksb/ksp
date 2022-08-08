@@ -104,6 +104,7 @@
         <td mat-cell *matCellDef="let element">
           <i
             role="button"
+            (click)="print()"
             class="bi bi-printer-fill text-primary fs-5 ms-3"
           ></i>
         </td>
@@ -112,7 +113,7 @@
       <ng-container matColumnDef="history">
         <th mat-header-cell *matHeaderCellDef>ประวัติ</th>
         <td mat-cell *matCellDef="let element">
-          <i role="button" class="bi bi-eye text-success fs-5 ms-3"></i>
+          <i role="button" (click)="history()" class="bi bi-eye text-success fs-5 ms-3"></i>
         </td>
       </ng-container>
 
