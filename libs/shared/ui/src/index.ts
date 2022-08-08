@@ -7,3 +7,5 @@ export * from './lib/license-type-button-group/license-type-button-group.compone
 export * from './lib/license-info/license-info.component';
 
 export * from './lib/uni-form-badge/uni-form-badge.component';
+
+export * from './lib/uni-warn-incorrect/uni-warn-incorrect.component';
