@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   displayName: 'self-service-feature-home',
   preset: '../../../../jest.preset.ts',

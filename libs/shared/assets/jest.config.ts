@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   displayName: 'shared-assets',
   preset: '../../../jest.preset.ts',

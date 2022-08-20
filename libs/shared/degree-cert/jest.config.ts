@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   displayName: 'shared-degree-cert',
   preset: '../../../jest.preset.ts',

@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   displayName: 'school-service-feature-temp-license',
   preset: '../../../../jest.preset.ts',

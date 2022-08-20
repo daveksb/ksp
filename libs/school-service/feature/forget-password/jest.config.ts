@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   displayName: 'school-service-feature-forget-password',
   preset: '../../../../jest.preset.ts',

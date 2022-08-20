@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   displayName: 'e-service-feature-container-page',
   preset: '../../../../jest.preset.ts',

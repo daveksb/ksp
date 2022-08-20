@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   displayName: 'e-service-e-license-manage-current-user',
   preset: '../../../../jest.preset.ts',

@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   displayName: 'uni-service-dialog',
   preset: '../../../jest.preset.ts',
