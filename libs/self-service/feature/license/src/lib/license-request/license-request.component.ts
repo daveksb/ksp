@@ -11,7 +11,7 @@ import { LicenseRequestService } from './license-request.service';
 @UntilDestroy()
 @Component({
   templateUrl: './license-request.component.html',
-  styleUrls: ['./license-request.component.css'],
+  styleUrls: ['./license-request.component.scss'],
 })
 export class LicenseRequestComponent implements OnInit {
   form = this.fb.group({
@@ -69,13 +69,13 @@ export class LicenseRequestComponent implements OnInit {
 
     completeDialog.componentInstance.saved.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'license', 'request']);
+        this.router.navigate(['/license', 'request']);
       }
     });
 
     completeDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'license', 'payment-channel']);
+        this.router.navigate(['/license', 'payment-channel']);
       }
     });
   }
