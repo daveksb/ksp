@@ -24,17 +24,17 @@ export class FormUserInfoComponent extends KspFormBaseComponent {
 
   override form = this.fb.group({
     prefixTh: [null],
-    nameTh: [],
-    lastnameTh: [],
+    firstNameTh: [],
+    lastNameTh: [],
     prefixEn: [],
-    nameEn: [],
-    lastnameEn: [],
+    firstNameEn: [],
+    lastNameEn: [],
     sex: [],
     birthdate: [],
     email: [],
     contactPhone: [],
-    workplacePhone: [],
-    post: [],
+    workPhone: [],
+    postCode: [],
     nationality: [],
   });
 

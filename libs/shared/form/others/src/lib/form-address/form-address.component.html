@@ -20,7 +20,7 @@
           [class.bg-light]="isDarkMode"
           class="form-control"
           type="text"
-          formControlName="houseNumber"
+          formControlName="houseNo"
         />
       </div>
     </div>
@@ -32,7 +32,7 @@
           [class.bg-light]="isDarkMode"
           class="form-control"
           type="text"
-          formControlName="villageNumber"
+          formControlName="moo"
         />
       </div>
       <div class="col-md-6 mb-3">
@@ -41,7 +41,7 @@
           [class.bg-light]="isDarkMode"
           class="form-control"
           type="text"
-          formControlName="lane"
+          formControlName="alley"
         />
       </div>
     </div>
@@ -64,7 +64,7 @@
           [class.bg-light]="isDarkMode"
           class="form-control"
           type="text"
-          formControlName="zipCode"
+          formControlName="postCode"
         />
       </div>
     </div>
@@ -77,7 +77,7 @@
         <select
           [class.bg-white]="!isDarkMode && mode === 'edit'"
           class="form-select"
-          formControlName="provience"
+          formControlName="province"
         >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">One</option>
@@ -92,7 +92,7 @@
         <select
           [class.bg-white]="!isDarkMode && mode === 'edit'"
           class="form-select"
-          formControlName="subDistrict"
+          formControlName="tumbol"
         >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">One</option>
@@ -110,7 +110,7 @@
         <select
           [class.bg-white]="!isDarkMode && mode === 'edit'"
           class="form-select"
-          formControlName="district"
+          formControlName="amphur"
         >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">One</option>

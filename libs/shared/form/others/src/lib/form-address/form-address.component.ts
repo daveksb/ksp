@@ -22,14 +22,14 @@ export class FormAddressComponent extends KspFormBaseComponent {
 
   override form = this.fb.group({
     location: [''],
-    houseNumber: [''],
-    villageNumber: [''],
-    lane: [''],
+    houseNo: [''],
+    moo: [''],
+    alley: [''],
     road: [''],
-    zipCode: [''],
-    provience: [null],
-    subDistrict: [null],
-    district: [null],
+    postCode: [''],
+    province: [null],
+    amphur: [null],
+    tumbol: [null],
   });
 
   constructor(private fb: FormBuilder) {
@@ -43,4 +43,3 @@ export class FormAddressComponent extends KspFormBaseComponent {
     );
   }
 }
-

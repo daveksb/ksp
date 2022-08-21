@@ -20,7 +20,7 @@
         class="form-control"
         type="text"
         placeholder="กรุณากรอกชื่อภาษาไทย"
-        formControlName="nameTh"
+        formControlName="firstNameTh"
       />
     </div>
     <div class="col-md-5 mb-3">
@@ -30,7 +30,7 @@
         class="form-control"
         type="text"
         placeholder="กรุณากรอกนามสกุลภาษาไทย"
-        formControlName="lastnameTh"
+        formControlName="lastNameTh"
       />
     </div>
   </div>
@@ -56,7 +56,7 @@
         type="text"
         [class.bg-light]="isDarkMode"
         placeholder="กรุณากรอกชื่อภาษาอังกฤษ"
-        formControlName="nameEn"
+        formControlName="firstNameEn"
       />
     </div>
     <div class="col-md-5 mb-3">
@@ -66,7 +66,7 @@
         type="text"
         [class.bg-light]="isDarkMode"
         placeholder="กรุณากรอกนามสกุลภาษาอังกฤษ"
-        formControlName="lastnameEn"
+        formControlName="lastNameEn"
       />
     </div>
   </div>
@@ -124,12 +124,12 @@
         class="form-control"
         type="tel"
         [class.bg-light]="isDarkMode"
-        formControlName="workplacePhone"
+        formControlName="workPhone"
       />
     </div>
     <div class="col" *ngIf="showPostInput">
       <label class="form-label">ตำแหน่ง</label>
-      <input class="form-control" type="text" formControlName="post" />
+      <input class="form-control" type="text" formControlName="postCode" />
     </div>
   </div>
 
