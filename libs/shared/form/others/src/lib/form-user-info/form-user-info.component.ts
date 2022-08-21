@@ -13,6 +13,7 @@ export class FormUserInfoComponent extends KspFormBaseComponent {
   @Input() isDarkMode = false;
   @Input() showPostInput = false;
   @Input() showNationalityInput = false;
+  @Input() prefixList = null;
 
   /**
    * Dark Mode : all inputs will have gray background and form container will have white background

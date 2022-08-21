@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,10 +14,9 @@ export class StaffPersonInfoService {
     return this.http.post(this.serviceUrl, {});
   }
 
-  /* getUsers(): Observable<User[]> {
+  getPrefix(): Observable<any> {
     return this.http
-      .get(this.serviceUrl)
-      .pipe<User[]>(map((data: any) => data.users));
+      .get(`${this.serviceUrl}/nameprefix`)
+      .pipe(map((data: any) => data.datareturn));
   }
- */
 }
