@@ -16,7 +16,7 @@
     <div class="bg-light p-3 m-3">
       <div class="row mb-3">
         <div class="col">
-          <label class="form-label">หมายเลขบัตรประชาชน </label>
+          <label class="form-label required">หมายเลขบัตรประชาชน </label>
           <input class="form-control" type="text" formControlName="personId" />
         </div>
         <div class="col">
@@ -32,7 +32,7 @@
       </div>
 
       <ksp-form-user-info
-        formControlName="staff"
+        formControlName="generalInfo"
         [isDarkMode]="false"
       ></ksp-form-user-info>
     </div>
@@ -86,7 +86,10 @@
 <div class="sticky-bottom border">
   <ksp-bottom-nav
     (nextClicked)="next()"
+    (saveClicked)="save()"
     [isFirstPage]="true"
-    [showCenterButtons]="false"
+    [showSaveButton]="true"
+    [disableSaveButton]="!form.valid"
+    [showCenterButtons]="true"
   ></ksp-bottom-nav>
 </div>

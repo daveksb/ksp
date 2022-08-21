@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -23,16 +23,16 @@ export class FormUserInfoComponent extends KspFormBaseComponent {
    */
 
   override form = this.fb.group({
-    prefixTh: [null],
-    firstNameTh: [],
-    lastNameTh: [],
-    prefixEn: [],
+    prefixTh: ['', Validators.required],
+    firstNameTh: ['', Validators.required],
+    lastNameTh: ['', Validators.required],
+    prefixEn: ['', Validators.required],
     firstNameEn: [],
     lastNameEn: [],
-    sex: [],
+    sex: ['', Validators.required],
     birthdate: [],
-    email: [],
-    contactPhone: [],
+    email: ['', Validators.required],
+    contactPhone: ['', Validators.required],
     workPhone: [],
     postCode: [],
     nationality: [],

@@ -1,7 +1,7 @@
 <form [formGroup]="form">
   <div class="row">
     <div class="col-md mb-3">
-      <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
+      <label class="form-label required">คำนำหน้าชื่อภาษาไทย</label>
       <select
         [class.bg-white]="!isDarkMode && mode === 'edit'"
         class="form-select"
@@ -14,7 +14,7 @@
       </select>
     </div>
     <div class="col-md-5 mb-3">
-      <label class="form-label">ชื่อภาษาไทย</label>
+      <label class="form-label required">ชื่อภาษาไทย</label>
       <input
         [class.bg-light]="isDarkMode"
         class="form-control"
@@ -24,7 +24,7 @@
       />
     </div>
     <div class="col-md-5 mb-3">
-      <label class="form-label">นามสกุลภาษาไทย</label>
+      <label class="form-label required">นามสกุลภาษาไทย</label>
       <input
         [class.bg-light]="isDarkMode"
         class="form-control"
@@ -37,7 +37,7 @@
 
   <div class="row">
     <div class="col-md mb-3">
-      <label class="form-label">คำนำหน้าชื่อภาษาอังกฤษ</label>
+      <label class="form-label required">คำนำหน้าชื่อภาษาอังกฤษ</label>
       <select
         [class.bg-white]="!isDarkMode && mode === 'edit'"
         class="form-select"
@@ -50,7 +50,7 @@
       </select>
     </div>
     <div class="col-md-5 mb-3">
-      <label class="form-label">ชื่อภาษาอังกฤษ</label>
+      <label class="form-label required">ชื่อภาษาอังกฤษ</label>
       <input
         class="form-control"
         type="text"
@@ -60,7 +60,7 @@
       />
     </div>
     <div class="col-md-5 mb-3">
-      <label class="form-label">นามสกุลภาษาอังกฤษ</label>
+      <label class="form-label required">นามสกุลภาษาอังกฤษ</label>
       <input
         class="form-control"
         type="text"
@@ -73,7 +73,7 @@
 
   <div class="row">
     <div class="col-md-6 mb-3">
-      <label class="form-label">เพศ</label>
+      <label class="form-label required">เพศ</label>
       <select
         [class.bg-white]="!isDarkMode && mode === 'edit'"
         class="form-select"
@@ -86,7 +86,7 @@
       </select>
     </div>
     <div class="col-md-6 mb-3">
-      <label class="form-label">วันเดือนปีเกิด</label>
+      <label class="form-label required">วันเดือนปีเกิด</label>
       <input
         class="form-control"
         type="date"
@@ -98,7 +98,7 @@
 
   <div class="row">
     <div class="col-md-6 mb-3">
-      <label class="form-label">อีเมล</label>
+      <label class="form-label required">อีเมล</label>
       <input
         class="form-control"
         type="email"
@@ -107,7 +107,7 @@
       />
     </div>
     <div class="col-md-6 mb-3">
-      <label class="form-label">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
+      <label class="form-label required">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
       <input
         class="form-control"
         type="tel"

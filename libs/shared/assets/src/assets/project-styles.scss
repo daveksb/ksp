@@ -34,6 +34,7 @@ add asterisk for required feild
 */
 .required::after {
   content: ' *';
+  color: red;
 }
 
 .btn,
