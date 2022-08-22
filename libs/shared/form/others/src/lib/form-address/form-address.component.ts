@@ -11,6 +11,7 @@ import { providerFactory } from '@ksp/shared/utility';
 })
 export class FormAddressComponent extends KspFormBaseComponent {
   @Input() isDarkMode = false;
+  @Input() provinces: any[] = [];
 
   /**
    * Dark Mode : all inputs will have gray background and form container will have white background

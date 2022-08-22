@@ -15,6 +15,7 @@ export class StaffPersonInfoComponent implements OnInit {
   ];
 
   prefixList$!: Observable<any>;
+  provinces$!: Observable<any>;
 
   form = this.fb.group({
     personId: ['', Validators.required],
@@ -38,9 +39,17 @@ export class StaffPersonInfoComponent implements OnInit {
     }); */
 
     this.prefixList$ = this.service.getPrefix();
+    this.provinces$ = this.service.getProvinces();
     /*     this.prefixList$.subscribe((res) => {
       console.log('res = ', res);
     }); */
+  }
+
+  useSameAddress(evt: any) {
+    const checked = evt.target.checked;
+    if (checked) {
+      this.form.controls.address2.patchValue(this.form.controls.address1.value);
+    }
   }
 
   next() {

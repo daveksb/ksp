@@ -60,11 +60,23 @@
         dynamicHeight="true"
       >
         <mat-tab label="ที่อยู่" class="tab-content">
-          <ksp-form-address formControlName="address1">
-            ที่อยู่ทะเบียนบ้าน </ksp-form-address
-          ><br />
+          <ksp-form-address
+            [provinces]="provinces$ | async"
+            formControlName="address1"
+          >
+            ที่อยู่ทะเบียนบ้าน
+          </ksp-form-address>
+
           <ksp-form-address formControlName="address2">
-            ที่อยู่ที่ติดต่อได้สะดวก
+            <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
+            <div class="d-flex align-items-center">
+              <input
+                (change)="useSameAddress($event)"
+                type="checkbox"
+                class="address__checkbox"
+              />
+              <label class="form-label ms-1">ที่อยู่ตามทะเบียนบ้าน</label>
+            </div>
           </ksp-form-address>
         </mat-tab>
 

@@ -19,4 +19,22 @@ export class StaffPersonInfoService {
       .get(`${this.serviceUrl}/nameprefix`)
       .pipe(map((data: any) => data.datareturn));
   }
+
+  getProvinces(): Observable<any> {
+    return this.http
+      .get(`${this.serviceUrl}/province`)
+      .pipe(map((data: any) => data.datareturn));
+  }
+
+  getAmphurs(): Observable<any> {
+    return this.http
+      .get(`${this.serviceUrl}/nameprefix`)
+      .pipe(map((data: any) => data.datareturn));
+  }
+
+  getTumbols(): Observable<any> {
+    return this.http
+      .get(`${this.serviceUrl}/nameprefix`)
+      .pipe(map((data: any) => data.datareturn));
+  }
 }
