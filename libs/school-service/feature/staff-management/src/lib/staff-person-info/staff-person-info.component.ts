@@ -16,13 +16,35 @@ export class StaffPersonInfoComponent implements OnInit {
 
   prefixList$!: Observable<any>;
   provinces$!: Observable<any>;
+  amphurs$!: Observable<any>;
+  tumbols$!: Observable<any>;
 
   form = this.fb.group({
     personId: ['', Validators.required],
     passportNumber: [],
     generalInfo: [],
-    address1: [],
-    address2: [],
+    address1: this.fb.group({
+      location: [''],
+      houseNo: [''],
+      moo: [''],
+      alley: [''],
+      road: [''],
+      postCode: [''],
+      province: [null],
+      amphur: [null],
+      tumbol: [null],
+    }),
+    address2: this.fb.group({
+      location: [''],
+      houseNo: [''],
+      moo: [''],
+      alley: [''],
+      road: [''],
+      postCode: [''],
+      province: [null],
+      amphur: [null],
+      tumbol: [null],
+    }),
     education1: [],
     education2: [],
   });
@@ -34,15 +56,20 @@ export class StaffPersonInfoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    /*     this.form.valueChanges.subscribe((res) => {
-      console.log('res = ', res);
-    }); */
+    this.form.controls.address1.controls.province.valueChanges.subscribe(
+      (res: any) => {
+        this.amphurs$ = this.service.getAmphurs(res);
+      }
+    );
+
+    this.form.controls.address1.controls.amphur.valueChanges.subscribe(
+      (res: any) => {
+        this.tumbols$ = this.service.getTumbols(res);
+      }
+    );
 
     this.prefixList$ = this.service.getPrefix();
     this.provinces$ = this.service.getProvinces();
-    /*     this.prefixList$.subscribe((res) => {
-      console.log('res = ', res);
-    }); */
   }
 
   useSameAddress(evt: any) {
@@ -56,5 +83,7 @@ export class StaffPersonInfoComponent implements OnInit {
     this.router.navigate(['/staff-management', 'staff-teaching-info']);
   }
 
-  save() {}
+  save() {
+    console.log('save success = ');
+  }
 }

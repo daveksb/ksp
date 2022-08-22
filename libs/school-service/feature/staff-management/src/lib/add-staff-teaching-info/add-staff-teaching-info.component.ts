@@ -7,6 +7,8 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Observable } from 'rxjs';
+import { StaffPersonInfoService } from '../staff-person-info/staff-person-info.service';
 
 @UntilDestroy()
 @Component({
@@ -15,6 +17,10 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   styleUrls: ['./add-staff-teaching-info.component.scss'],
 })
 export class AddStaffTeachingInfoComponent implements OnInit {
+  staffTypes$!: Observable<any>;
+  positionTypes$!: Observable<any>;
+  academicTypes$!: Observable<any>;
+
   levels = levels;
   subjects = subjects;
   status = status;
@@ -60,21 +66,26 @@ export class AddStaffTeachingInfoComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private service: StaffPersonInfoService
   ) {}
 
   ngOnInit(): void {
+    this.staffTypes$ = this.service.getStaffTypes();
+    this.positionTypes$ = this.service.getPositionTypes();
+    this.academicTypes$ = this.service.getAcademicStandingTypes();
+
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
       //console.log('res = ', res);
     });
   }
 
   back() {
-    this.router.navigate(['./', 'staff-management', 'staff-person-info']);
+    this.router.navigate(['/staff-management', 'staff-person-info']);
   }
 
   cancel() {
-    this.router.navigate(['./', 'staff-management']);
+    this.router.navigate(['/staff-management']);
   }
 
   save() {

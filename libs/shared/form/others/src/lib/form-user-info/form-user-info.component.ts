@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
-import { providerFactory } from '@ksp/shared/utility';
+import { phonePattern, providerFactory } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-form-user-info',
@@ -28,15 +28,16 @@ export class FormUserInfoComponent extends KspFormBaseComponent {
     firstNameTh: ['', Validators.required],
     lastNameTh: ['', Validators.required],
     prefixEn: ['', Validators.required],
-    firstNameEn: [],
-    lastNameEn: [],
+    firstNameEn: ['', Validators.required],
+    lastNameEn: ['', Validators.required],
     sex: ['', Validators.required],
-    birthdate: [],
+    birthdate: ['', Validators.required],
     email: ['', Validators.required],
-    contactPhone: ['', Validators.required],
+    contactPhone: ['', [Validators.required]],
+    //contactPhone: ['', [Validators.required, Validators.pattern(phonePattern)]],
     workPhone: [],
-    postCode: [],
     nationality: [],
+    //postCode: [],
   });
 
   constructor(private fb: FormBuilder) {

@@ -26,15 +26,33 @@ export class StaffPersonInfoService {
       .pipe(map((data: any) => data.datareturn));
   }
 
-  getAmphurs(): Observable<any> {
+  getAmphurs(pid: number): Observable<any> {
     return this.http
-      .get(`${this.serviceUrl}/nameprefix`)
+      .get(`${this.serviceUrl}/amphur?provinceId=${pid}`)
       .pipe(map((data: any) => data.datareturn));
   }
 
-  getTumbols(): Observable<any> {
+  getTumbols(aid: number): Observable<any> {
     return this.http
-      .get(`${this.serviceUrl}/nameprefix`)
+      .get(`${this.serviceUrl}/tambol?amphurCode=${aid}`)
+      .pipe(map((data: any) => data.datareturn));
+  }
+
+  getStaffTypes(): Observable<any> {
+    return this.http
+      .get(`${this.serviceUrl}/schoolstafftype`)
+      .pipe(map((data: any) => data.datareturn));
+  }
+
+  getPositionTypes(): Observable<any> {
+    return this.http
+      .get(`${this.serviceUrl}/schoolpositiontype`)
+      .pipe(map((data: any) => data.datareturn));
+  }
+
+  getAcademicStandingTypes(): Observable<any> {
+    return this.http
+      .get(`${this.serviceUrl}/schoolacademicstandingtype`)
       .pipe(map((data: any) => data.datareturn));
   }
 }

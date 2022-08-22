@@ -62,6 +62,8 @@
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address
             [provinces]="provinces$ | async"
+            [amphurs]="amphurs$ | async"
+            [tumbols]="tumbols$ | async"
             formControlName="address1"
           >
             ที่อยู่ทะเบียนบ้าน
