@@ -21,6 +21,7 @@ import { StandardWorkingComponent } from './standard-working/standard-working.co
 import { StandardWorkingTeacherComponent } from './standard-working-teacher/standard-working-teacher.component';
 import { StandardWorkingNonTeacherComponent } from './standard-working-non-teacher/standard-working-non-teacher.component';
 import { SchoolServiceFormActivityModule } from '@ksp/school-service/form/activity';
+import { SubstituteObjectiveComponent } from './substitute-objective/substitute-objective.component';
 
 @NgModule({
   imports: [
@@ -36,7 +37,6 @@ import { SchoolServiceFormActivityModule } from '@ksp/school-service/form/activi
     DynamicComponentDirective,
     StandardWorkingTeacherComponent,
     StandardWorkingNonTeacherComponent,
-    
   ],
   declarations: [
     FormUserEducationComponent,
@@ -46,6 +46,7 @@ import { SchoolServiceFormActivityModule } from '@ksp/school-service/form/activi
     FormVerifyOtpComponent,
     FormVerifyPhoneComponent,
     StandardWorkingComponent,
+    SubstituteObjectiveComponent,
   ],
   exports: [
     FormUserEducationComponent,
@@ -55,6 +56,7 @@ import { SchoolServiceFormActivityModule } from '@ksp/school-service/form/activi
     FormVerifyOtpComponent,
     FormVerifyPhoneComponent,
     StandardWorkingComponent,
+    SubstituteObjectiveComponent,
   ],
 })
 export class SelfServiceFormModule {}

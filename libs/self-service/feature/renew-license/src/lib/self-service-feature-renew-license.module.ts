@@ -4,9 +4,15 @@ import { RenewLicenseRequestComponent } from './renew-license-request/renew-lice
 import { RouterModule, Routes } from '@angular/router';
 import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master-page';
 import { MatTabsModule } from '@angular/material/tabs';
-import { FormUploadImageComponent, SelfServiceFormModule } from '@ksp/self-service/form';
+import {
+  FormUploadImageComponent,
+  SelfServiceFormModule,
+} from '@ksp/self-service/form';
 import { TopNavComponent } from '@ksp/shared/menu';
-import { RequestStatusComponent, SelfServiceLicenseInfoComponent } from '@ksp/self-service/ui';
+import {
+  RequestStatusComponent,
+  SelfServiceLicenseInfoComponent,
+} from '@ksp/self-service/ui';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 
 export const routes: Routes = [

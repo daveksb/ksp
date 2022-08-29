@@ -14,6 +14,7 @@ export class StandardWorkingComponent
   implements OnInit
 {
   selectedEducationType!: number;
+  workingInfo = ['1.รางวัลอื่นและประกาศเกียรติคุณ'];
 
   override form = this.fb.group({
     educationType: [],

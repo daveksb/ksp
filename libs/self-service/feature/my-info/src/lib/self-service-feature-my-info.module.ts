@@ -9,7 +9,12 @@ import { PaymentHistoryItemComponent } from '@ksp/self-service/ui';
 import { PageNotFoundComponent } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormUploadImageComponent, SelfServiceFormModule } from '@ksp/self-service/form';
+import {
+  FormUploadImageComponent,
+  SelfServiceFormModule,
+} from '@ksp/self-service/form';
+import { PerformanceResultComponent } from './performance-result/performance-result.component';
+import { MatTableModule } from '@angular/material/table';
 
 export const routes: Route[] = [
   {
@@ -30,6 +35,10 @@ export const routes: Route[] = [
         component: PaymentHistoryComponent,
       },
       {
+        path: 'performance-result',
+        component: PerformanceResultComponent,
+      },
+      {
         path: '**',
         component: PageNotFoundComponent,
       },
@@ -44,8 +53,14 @@ export const routes: Route[] = [
     RouterModule.forChild(routes),
     PaymentHistoryItemComponent,
     ReactiveFormsModule,
-    FormUploadImageComponent
+    MatTableModule,
+    FormUploadImageComponent,
   ],
-  declarations: [PaymentHistoryComponent, PersonInfoComponent],
+  declarations: [
+    PaymentHistoryComponent,
+    PersonInfoComponent,
+    PerformanceResultComponent,
+  ],
+  exports: [PerformanceResultComponent],
 })
 export class SelfServiceFeatureMyInfoModule {}

@@ -1,0 +1,143 @@
+<ksp-top-nav><span header>ขอคืนเงินค่าธรรมเนียม</span></ksp-top-nav>
+
+<div class="main__container">
+  <self-service-request-status></self-service-request-status>
+  <br />
+  <div class="px-4 pb-4">
+    <div class="detail__container bg-white">
+      <ksp-form-user-info [isDarkMode]="true"></ksp-form-user-info>
+    </div>
+    <br />
+    <div class="detail__container bg-white">
+      <div class="text-black fs-5">ข้อมูลขอคืนเงินค่าธรรมเนียม</div>
+      <div class="row mb-2">
+        <div class="col-6">
+          <label class="form-label">ประเภทใบประกอบวิชาชีพ</label>
+          <select class="form-select" formControlName="affiliation">
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="col-6">
+          <label class="form-label">ประเภทวิชาชีพ</label>
+          <select class="form-select" formControlName="affiliation">
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-6">
+          <label class="form-label">เลขใบคำขอ</label>
+          <input disabled class="form-control" type="text" formControlName="" />
+        </div>
+        <div class="col-6">
+          <label class="form-label">เหตุผลขอคืนเงินค่าธรรมเนียม</label>
+          <select class="form-select" formControlName="affiliation">
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col">
+          <br />
+          <input
+            class="form-control"
+            type="text"
+            formControlName=""
+            placeholder="เหตุผลขอคืนเงินค่าธรรมเนียม"
+          />
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-6">
+          <label class="form-label">เลขที่ใบเสร็จ</label>
+          <input disabled class="form-control" type="text" formControlName="" />
+        </div>
+        <div class="col-6">
+          <label class="form-label">จำนวนเงิน (บาท)</label>
+          <input disabled class="form-control" type="text" formControlName="" />
+        </div>
+      </div>
+      <hr />
+      <div class="text-black fs-5">ช่องทางแจ้งข้อมูลการโอนเงิน</div>
+
+      <div class="row mb-2 ms-2">
+        <span class="col-auto d-flex justify-content-end align-self-center">
+          <input formControlName="" type="checkbox" />
+        </span>
+        <span class="col-auto px-0 d-flex align-self-center">
+          <label class="form-label text-secondary"
+            >ข้อความแจ้งเตือนผ่านโทรศัพท์มือถือ (SMS)
+          </label>
+        </span>
+        <span class="col-2">
+          <input
+            class="form-control"
+            type="text"
+            formControlName="statusDate"
+          />
+        </span>
+      </div>
+
+      <div class="row mb-2 ms-2">
+        <span class="col-auto d-flex justify-content-end align-self-center">
+          <input formControlName="" type="checkbox" />
+        </span>
+        <span class="col-auto px-0 d-flex align-self-center">
+          <label class="form-label text-secondary"
+            >จดหมายอิเล็กทรอนิกส์ (E-Mail)
+          </label>
+        </span>
+        <span class="col-2">
+          <input
+            class="form-control"
+            type="text"
+            formControlName="statusDate"
+          />
+        </span>
+      </div>
+
+      <div class="fs-6 text-danger">
+        * เมื่อสำนักงานเลขาธิการคุรุสภา โอนเงินผ่านระบบ KTB Corporate Online
+        แล้ว จะส่งข้อมูลไปยังช่องทางที่ท่านเลือก
+      </div>
+
+      <hr />
+      <div class="text-black fs-5">ขอรับเงินผ่านระบบ KTB Corporate Online</div>
+      <div class="row">
+        <div class="col-6">
+          <label class="form-label">บัญชีธนาคาร</label>
+          <select class="form-select" formControlName="affiliation">
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="col-6">
+          <label class="form-label">เลขที่บัญชี</label>
+          <input class="form-control" type="text" formControlName="" />
+        </div>
+      </div>
+    </div>
+    <br />
+    <div class="detail__container bg-white">
+      <ksp-form-attachment
+        [groups]="refundInfo"
+        [mode]="'edit'"
+      ></ksp-form-attachment>
+    </div>
+    <div class="d-flex justify-content-center mt-3">
+      <button type="button" class="btn btn-secondary">ล้างข้อมูล</button>
+      <button type="button" (click)="save()" class="ms-3 btn btn-primary">บันทึก</button>
+    </div>
+  </div>
+</div>

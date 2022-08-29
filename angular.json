@@ -4925,6 +4925,32 @@
         }
       ]
     },
+    "self-service-feature-refund-fee": {
+      "projectType": "library",
+      "root": "libs/self-service/feature/refund-fee",
+      "sourceRoot": "libs/self-service/feature/refund-fee/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/self-service/feature/refund-fee"],
+          "options": {
+            "jestConfig": "libs/self-service/feature/refund-fee/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/self-service/feature/refund-fee/**/*.ts",
+              "libs/self-service/feature/refund-fee/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "self-service-feature-register": {
       "root": "libs/self-service/feature/register",
       "projectType": "library",
@@ -5102,6 +5128,60 @@
             "lintFilePatterns": [
               "libs/self-service/feature/renew-license/**/*.ts",
               "libs/self-service/feature/renew-license/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "self-service-feature-self-improve-activity": {
+      "projectType": "library",
+      "root": "libs/self-service/feature/self-improve-activity",
+      "sourceRoot": "libs/self-service/feature/self-improve-activity/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/self-service/feature/self-improve-activity"
+          ],
+          "options": {
+            "jestConfig": "libs/self-service/feature/self-improve-activity/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/self-service/feature/self-improve-activity/**/*.ts",
+              "libs/self-service/feature/self-improve-activity/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "self-service-feature-substitute-license": {
+      "projectType": "library",
+      "root": "libs/self-service/feature/substitute-license",
+      "sourceRoot": "libs/self-service/feature/substitute-license/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/self-service/feature/substitute-license"],
+          "options": {
+            "jestConfig": "libs/self-service/feature/substitute-license/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/self-service/feature/substitute-license/**/*.ts",
+              "libs/self-service/feature/substitute-license/**/*.html"
             ]
           }
         }

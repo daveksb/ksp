@@ -139,11 +139,20 @@
       "@ksp/self-service/feature/payment": [
         "libs/self-service/feature/payment/src/index.ts"
       ],
+      "@ksp/self-service/feature/refund-fee": [
+        "libs/self-service/feature/refund-fee/src/index.ts"
+      ],
       "@ksp/self-service/feature/register": [
         "libs/self-service/feature/register/src/index.ts"
       ],
       "@ksp/self-service/feature/renew-license": [
         "libs/self-service/feature/renew-license/src/index.ts"
+      ],
+      "@ksp/self-service/feature/self-improve-activity": [
+        "libs/self-service/feature/self-improve-activity/src/index.ts"
+      ],
+      "@ksp/self-service/feature/substitute-license": [
+        "libs/self-service/feature/substitute-license/src/index.ts"
       ],
       "@ksp/self-service/form": ["libs/self-service/form/src/index.ts"],
       "@ksp/self-service/ui": ["libs/self-service/ui/src/index.ts"],

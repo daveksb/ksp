@@ -13,7 +13,6 @@ const routes: Routes = [
         (m) => m.SelfServiceFeatureRegisterModule
       ),
   },
-
   {
     path: 'home',
     loadChildren: () =>
@@ -21,7 +20,6 @@ const routes: Routes = [
         (m) => m.SelfServiceFeatureHomeModule
       ),
   },
-
   {
     path: 'license',
     loadChildren: () =>
@@ -29,7 +27,6 @@ const routes: Routes = [
         (m) => m.SelfServiceFeatureLicenseModule
       ),
   },
-
   {
     path: 'renew-license',
     loadChildren: () =>
@@ -37,7 +34,27 @@ const routes: Routes = [
         (m) => m.SelfServiceFeatureRenewLicenseModule
       ),
   },
-
+  {
+    path: 'refund-fee',
+    loadChildren: () =>
+      import('@ksp/self-service/feature/refund-fee').then(
+        (m) => m.SelfServiceFeatureRefundFeeModule
+      ),
+  },
+  {
+    path: 'substitute-license',
+    loadChildren: () =>
+      import('@ksp/self-service/feature/substitute-license').then(
+        (m) => m.SelfServiceFeatureSubstituteLicenseModule
+      ),
+  },
+  {
+    path: 'self-improvement',
+    loadChildren: () =>
+      import('@ksp/self-service/feature/self-improve-activity').then(
+        (m) => m.SelfServiceFeatureSelfImproveActivityModule
+      ),
+  },
   {
     path: 'my-info',
     loadChildren: () =>
