@@ -30,13 +30,13 @@ export const menu: MenuConfig[] = [
         path: 'license/request',
       },
       {
-        label: 'ขอต่ออายุใบประกอบวิชาชีพ',
-        path: 'license/a',
+        label: 'ขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
+        path: 'renew-license/request',
       },
-      {
+      /* {
         label: 'ขอหนังสืออนุญาตชั่วคราว',
         path: 'license/b',
-      },
+      }, */
       {
         label: 'ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ',
         path: 'license/edit',
@@ -45,10 +45,10 @@ export const menu: MenuConfig[] = [
         label: 'ขอใบแทนใบอนุญาตประกอบวิชาชีพ',
         path: 'license/d',
       },
-      {
+      /* {
         label: 'ขอหนังสืออนุญาตปฎิบัติการสอน',
         path: 'license/e',
-      },
+      }, */
       {
         label: 'ขอหนังสือรับรองความรู้',
         path: 'license/f',
@@ -65,10 +65,10 @@ export const menu: MenuConfig[] = [
         label: 'ขอรับรางวัลการยกย่องเชิดชูเกียรติ',
         path: 'license/i',
       },
-      {
+      /* {
         label: '##ช่องทางชำระเงิน##',
         path: 'license/payment-channel',
-      },
+      }, */
     ],
   },
   {

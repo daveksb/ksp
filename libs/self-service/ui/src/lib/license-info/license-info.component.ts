@@ -13,4 +13,10 @@ export class SelfServiceLicenseInfoComponent {
   @Input() requestNo = '';
   @Input() KuruspaId = '';
   @Input() personId = '';
+
+  @Input() header = '';
+  @Input() subheader1 = '';
+  @Input() subheader2 = '';
+  @Input() subheader3 = '';
+  @Input() subheader4 = '';
 }

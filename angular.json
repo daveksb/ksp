@@ -5082,6 +5082,32 @@
         }
       ]
     },
+    "self-service-feature-renew-license": {
+      "projectType": "library",
+      "root": "libs/self-service/feature/renew-license",
+      "sourceRoot": "libs/self-service/feature/renew-license/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/self-service/feature/renew-license"],
+          "options": {
+            "jestConfig": "libs/self-service/feature/renew-license/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/self-service/feature/renew-license/**/*.ts",
+              "libs/self-service/feature/renew-license/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "self-service-form": {
       "root": "libs/self-service/form",
       "$schema": "../../../node_modules/nx/schemas/project-schema.json",
@@ -9442,8 +9468,5 @@
       ]
     }
   },
-  "version": 1,
-  "cli": {
-    "analytics": false
-  }
+  "version": 1
 }

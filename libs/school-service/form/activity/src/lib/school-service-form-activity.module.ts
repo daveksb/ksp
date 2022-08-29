@@ -13,6 +13,8 @@ import { ActivityInnovationComponent } from './activity-innovation/activity-inno
 import { ActivityRewardComponent } from './activity-reward/activity-reward.component';
 import { ActivityLectureRegisterComponent } from './activity-lecture-register/activity-lecture-register.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { StandardTestPassComponent } from './standard-test-pass/standard-test-pass.component';
+import { StandardTrainPassComponent } from './standard-train-pass/standard-train-pass.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule],
@@ -29,6 +31,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ActivityInnovationComponent,
     ActivityRewardComponent,
     ActivityLectureRegisterComponent,
+    StandardTestPassComponent,
+    StandardTrainPassComponent,
   ],
   exports: [
     ActivityAddDegreeComponent,
@@ -43,6 +47,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ActivityInnovationComponent,
     ActivityRewardComponent,
     ActivityLectureRegisterComponent,
+    StandardTestPassComponent,
+    StandardTrainPassComponent,
   ],
 })
 export class SchoolServiceFormActivityModule {}

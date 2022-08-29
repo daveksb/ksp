@@ -142,6 +142,9 @@
       "@ksp/self-service/feature/register": [
         "libs/self-service/feature/register/src/index.ts"
       ],
+      "@ksp/self-service/feature/renew-license": [
+        "libs/self-service/feature/renew-license/src/index.ts"
+      ],
       "@ksp/self-service/form": ["libs/self-service/form/src/index.ts"],
       "@ksp/self-service/ui": ["libs/self-service/ui/src/index.ts"],
       "@ksp/shared/assets": ["libs/shared/assets/src/index.ts"],

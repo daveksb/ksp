@@ -23,3 +23,7 @@ export * from './lib/activity-innovation/activity-innovation.component';
 export * from './lib/activity-reward/activity-reward.component';
 
 export * from './lib/activity-lecture-register/activity-lecture-register.component';
+
+export * from './lib/standard-test-pass/standard-test-pass.component';
+
+export * from './lib/standard-train-pass/standard-train-pass.component';

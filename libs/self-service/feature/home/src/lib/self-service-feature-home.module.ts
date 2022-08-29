@@ -6,6 +6,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master-page';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { MatTableModule } from '@angular/material/table';
+import {
+  SelfServiceLicenseInfoComponent,
+  SlideshowComponent,
+} from '@ksp/self-service/ui';
 
 export const routes: Routes = [
   {
@@ -25,6 +29,8 @@ export const routes: Routes = [
     CommonModule,
     TopNavComponent,
     MatTableModule,
+    SlideshowComponent,
+    SelfServiceLicenseInfoComponent,
     RouterModule.forChild(routes),
   ],
   declarations: [SelfServiceHomeComponent, SelfServiceHomePageComponent],

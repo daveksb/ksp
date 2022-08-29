@@ -31,6 +31,14 @@ const routes: Routes = [
   },
 
   {
+    path: 'renew-license',
+    loadChildren: () =>
+      import('@ksp/self-service/feature/renew-license').then(
+        (m) => m.SelfServiceFeatureRenewLicenseModule
+      ),
+  },
+
+  {
     path: 'my-info',
     loadChildren: () =>
       import('@ksp/self-service/feature/my-info').then(
