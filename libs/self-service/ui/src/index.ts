@@ -7,3 +7,5 @@ export * from './lib/payment-history-item/payment-history-item.component';
 export * from './lib/slideshow/slideshow.component';
 
 export * from './lib/request-status/request-status.component';
+
+export * from './lib/slideshow-second/slideshow-second.component';

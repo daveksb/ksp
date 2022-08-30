@@ -1,6 +1,7 @@
 <ksp-top-nav><span header>หน้าแรก</span></ksp-top-nav>
 
 <div class="full-height main__container px-3 py-3">
+  <ksp-uni-form-badge></ksp-uni-form-badge>
   <div class="row mx-4">
     <div class="col-6 ps-0 pe-2">
       <self-service-slideshow></self-service-slideshow>
@@ -32,7 +33,7 @@
         </div>
         <div class="col">
           <label class="form-label">ประเภทใบคำขอ</label>
-          <select class="form-select" formControlName="">
+          <select class="form-select">
             <option selected>กรุณาเลือก</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -47,7 +48,7 @@
         </div>
         <div class="col-3">
           <label class="form-label">สถานะการชำระเงิน</label>
-          <select class="form-select" formControlName="">
+          <select class="form-select">
             <option selected>กรุณาเลือก</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -56,7 +57,7 @@
         </div>
         <div class="col">
           <label class="form-label">สถานะรายการ</label>
-          <select class="form-select" formControlName="">
+          <select class="form-select">
             <option selected>กรุณาเลือก</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -66,18 +67,66 @@
       </div>
       <br />
       <div class="d-flex justify-content-center pb-2">
-        <button class="btn btn-secondary opacity-25 me-1" (click)="clear()">
+        <button class="btn btn-secondary me-2" (click)="clear()">
           ล้างข้อมูล
         </button>
-        <button class="btn btn-primary ms-1" (click)="search()">ค้นหา</button>
+        <button class="btn btn-primary ms-2" (click)="search()">ค้นหา</button>
       </div>
     </div>
     <br />
     <div class="d-flex justify-content-between align-items-center mb-2">
       <div class="box-header">สรุปผลลัพธ์การค้นหา 5 รายการ</div>
-      <button class="btn border-primary text-primary bg-white">
+      <button
+        mat-button
+        [matMenuTriggerFor]="license"
+        class="btn text-primary border-primary bg-white"
+      >
         + สร้างใบคำขอ
       </button>
+      <mat-menu #license="matMenu">
+        <button mat-menu-item [matMenuTriggerFor]="request">
+          ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ
+        </button>
+        <button mat-menu-item [matMenuTriggerFor]="renew">
+          ขอต่ออายุใบอนุญาตประกอบวิชาชีพ
+        </button>
+        <button mat-menu-item (click)="substituteLicense()">
+          ขอใบแทนใบอนุญาตประกอบวิชาชีพ
+        </button>
+        <button mat-menu-item>ขอหนังสือรับรองความรู้</button>
+        <button mat-menu-item>ขอยื่นเทียบเคียงความรู้</button>
+        <button mat-menu-item (click)="refundFee()">ขอคืนค่าธรรมเนียม</button>
+        <button mat-menu-item [matMenuTriggerFor]="reward">
+          ขอรับรางวัลการยกย่องเชิดชูเกียรติ
+        </button>
+      </mat-menu>
+
+      <mat-menu #request="matMenu">
+        <button mat-menu-item (click)="teacherLicense()">ครู</button>
+        <button mat-menu-item>ผู้บริหารสถานศึกษา</button>
+        <button mat-menu-item>ผู้บริหารการศึกษา</button>
+        <button mat-menu-item>ศึกษานิเทศก์</button>
+      </mat-menu>
+
+      <mat-menu #renew="matMenu">
+        <button mat-menu-item (click)="teacherRenew()">ครู</button>
+        <button mat-menu-item>ผู้บริหารสถานศึกษา</button>
+        <button mat-menu-item>ผู้บริหารการศึกษา</button>
+        <button mat-menu-item>ศึกษานิเทศก์</button>
+      </mat-menu>
+
+      <mat-menu #reward="matMenu">
+        <button mat-menu-item (click)="reward1()">รางวัลคุรุสภา</button>
+        <button mat-menu-item (click)="reward2()">
+          รางวัลครูภาษาไทยดีเด่น
+        </button>
+        <button mat-menu-item (click)="reward3()">รางวัลครูผู้สอนดีเด่น</button>
+        <button mat-menu-item (click)="reward4()">รางวัลคุรุสดุดี</button>
+        <button mat-menu-item (click)="reward5()">รางวัลครูอาวุโส</button>
+        <button mat-menu-item (click)="reward6()">
+          รางวัลผลงานวิจัยของคุรุสภา
+        </button>
+      </mat-menu>
     </div>
 
     <div class="table">

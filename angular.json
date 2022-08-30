@@ -5134,6 +5134,32 @@
       },
       "tags": []
     },
+    "self-service-feature-reward": {
+      "projectType": "library",
+      "root": "libs/self-service/feature/reward",
+      "sourceRoot": "libs/self-service/feature/reward/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/self-service/feature/reward"],
+          "options": {
+            "jestConfig": "libs/self-service/feature/reward/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/self-service/feature/reward/**/*.ts",
+              "libs/self-service/feature/reward/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "self-service-feature-self-improve-activity": {
       "projectType": "library",
       "root": "libs/self-service/feature/self-improve-activity",
@@ -7293,6 +7319,32 @@
             "lintFilePatterns": [
               "libs/shared/form/school/request-reward/**/*.ts",
               "libs/shared/form/school/request-reward/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "shared-form-self-reward-form": {
+      "projectType": "library",
+      "root": "libs/shared/form/self-reward-form",
+      "sourceRoot": "libs/shared/form/self-reward-form/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/form/self-reward-form"],
+          "options": {
+            "jestConfig": "libs/shared/form/self-reward-form/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/form/self-reward-form/**/*.ts",
+              "libs/shared/form/self-reward-form/**/*.html"
             ]
           }
         }

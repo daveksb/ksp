@@ -3,8 +3,8 @@
   background-image: url('/assets/images/BG-secondary.png');
   padding: 18px 36px;
   background-size: cover;
-  height: 100vh;
 }
+
 .btn-secondary {
   font-size: 20px;
   background-color: #fff;
@@ -17,7 +17,7 @@
 
 .login__container {
   text-align: center;
-  padding: 82px 0px;
+  padding: 100px 0px;
 }
 h3 {
   font-size: 30px;
@@ -41,7 +41,7 @@ h3 {
 .label__content {
   font-size: 50px;
   color: #222222;
-  margin: 0 0 46px 0;
+  margin: 0 0 44px 0;
 }
 .footer {
   display: flex;

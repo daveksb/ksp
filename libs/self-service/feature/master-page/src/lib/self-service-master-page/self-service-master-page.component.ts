@@ -43,11 +43,11 @@ export const menu: MenuConfig[] = [
       },
       {
         label: 'ขอหนังสือรับรองความรู้',
-        path: 'license/f',
+        path: 'license/xxx',
       },
       {
         label: 'ขอยื่นเทียบเคียงความรู้',
-        path: 'license/g',
+        path: 'license/xxx',
       },
       {
         label: 'ขอคืนเงินค่าธรรมเนียม',
@@ -55,14 +55,14 @@ export const menu: MenuConfig[] = [
       },
       {
         label: 'ขอรับรางวัลการยกย่องเชิดชูเกียรติ',
-        path: 'license/i',
+        path: 'license/xxx',
       },
     ],
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ใบอนุญาตประกอบวิชาชีพ',
-    path: '',
+    path: 'xxx',
   },
   {
     icon: 'assets/images/icon-sidenav/event.svg',
@@ -72,7 +72,7 @@ export const menu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/reward.svg',
     label: 'รางวัลของฉัน',
-    path: '',
+    path: 'xxx',
   },
   {
     icon: 'assets/images/icon-sidenav/people.svg',
@@ -86,15 +86,15 @@ export const menu: MenuConfig[] = [
       },
       {
         label: 'สถานที่ทำงาน',
-        path: 'my-info/b',
+        path: 'my-info/xxx',
       },
       {
         label: 'ข้อมูลการศึกษา',
-        path: 'my-info/c',
+        path: 'my-info/xxx',
       },
       {
         label: 'ข้อมูลประสบการณ์วิชาชีพ',
-        path: 'my-info/d',
+        path: 'my-info/xxx',
       },
       {
         label: 'ข้อมูลผลการประเมินสมรรถนะ',
