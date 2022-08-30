@@ -132,3 +132,21 @@ input[type='radio']:checked {
   background-color: #f68b33;
   border: #f68b33;
 }
+
+.edit__status {
+  background: #edf8ff;
+  color: #007fcf;
+  width: 6rem;
+}
+
+.verify__status {
+  background: #eefcef;
+  color: #38ac3d;
+  width: 6rem;
+}
+
+.modify__status {
+  background: #ff99a5;
+  color: #f80808;
+  width: 6rem;
+}

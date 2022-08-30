@@ -1,0 +1,127 @@
+<form [formGroup]="form">
+  <div class="text-black mb-2">
+    กิจกรรมการปฏิบัติงาน<span class="text-danger fs-6">
+      * กรุณาเลือกกิจกรรมและกรอกรายละเอียด ไม่น้อยกว่า 3 กิจกรรม</span
+    >
+  </div>
+
+  <div class="d-flex align-items-center">
+    <input type="checkbox" class="me-2" formControlName="activity1" />
+    <label class="text-secondary"
+      >วุฒิเพิ่มขึ้นในสาขาที่เกี่ยวข้องกับการประกอบวิชาชีพทางการศึกษา</label
+    >
+  </div>
+  <div class="bg-secondary bg-opacity-10 px-3 py-2 my-3" *ngIf="activity1">
+    <ksp-activity-add-degree></ksp-activity-add-degree>
+  </div>
+
+  <div class="d-flex align-items-center">
+    <input type="checkbox" class="me-2" formControlName="activity2" />
+    <label class="text-secondary"
+      >เข้ารับการอบรมและได้รับวุฒิบัตรแสดงความชำนาญในการประกอบวิชาชีพจากคุรุสภา</label
+    >
+  </div>
+  <div class="bg-secondary bg-opacity-10 px-3 py-2 my-3" *ngIf="activity2">
+    <ksp-activity-diploma-receive></ksp-activity-diploma-receive>
+  </div>
+
+  <div class="d-flex align-items-center">
+    <input type="checkbox" class="me-2" formControlName="activity3" />
+    <label class="text-secondary"
+      >ผ่านการอบรมหลักสูตรที่เกี่ยวข้องกับการปฎิบัติงานในหน้าที่</label
+    >
+  </div>
+  <div class="bg-secondary bg-opacity-10 px-3 py-2 my-3" *ngIf="activity3">
+    <ksp-activity-seminar></ksp-activity-seminar>
+  </div>
+
+  <div class="d-flex align-items-center">
+    <input type="checkbox" class="me-2" formControlName="activity4" />
+    <label class="text-secondary">เลื่อนวิทยฐานะ</label>
+  </div>
+  <div class="bg-secondary bg-opacity-10 px-3 py-2 my-3" *ngIf="activity4">
+    <ksp-activity-academic-archivement></ksp-activity-academic-archivement>
+  </div>
+
+  <div class="d-flex align-items-center">
+    <input type="checkbox" class="me-2" formControlName="activity5" />
+    <label class="text-secondary"
+      >วิทยากรที่เป็นประโยชน์ต่อการจัดการเรียนรู้หรือการจัดการศึกษา</label
+    >
+  </div>
+  <div class="bg-secondary bg-opacity-10 px-3 py-2 my-3" *ngIf="activity5">
+    <ksp-activity-lecturer></ksp-activity-lecturer>
+  </div>
+
+  <div class="d-flex align-items-center">
+    <input type="checkbox" class="me-2" formControlName="activity6" />
+    <label class="text-secondary"
+      >เขียนตำรา หรือบทความ
+      หรือผลงานทางวิชาการที่เป็นประโยชน์ต่อการจัดการเรียนรู้หรือการจัดการศึกษา</label
+    >
+  </div>
+  <div class="bg-secondary bg-opacity-10 px-3 py-2 my-3" *ngIf="activity6">
+    <ksp-activity-write-book></ksp-activity-write-book>
+  </div>
+
+  <div class="d-flex align-items-center">
+    <input type="checkbox" class="me-2" formControlName="activity7" />
+    <label class="text-secondary"
+      >สร้างนวัตกรรมที่ใช้ในการจัดการเรียนรู้หรือที่เป็นประโยชน์ต่อการศึกษา</label
+    >
+  </div>
+  <div class="bg-secondary bg-opacity-10 px-3 py-2 my-3" *ngIf="activity7">
+    <ksp-activity-innovation></ksp-activity-innovation>
+  </div>
+
+  <div class="d-flex align-items-center">
+    <input type="checkbox" class="me-2" formControlName="activity8" />
+    <label class="text-secondary"
+      >ทำวิจัยที่เป็นประโยชน์ต่อการจัดการเรียนรู้และการจัดการศึกษา</label
+    >
+  </div>
+  <div class="bg-secondary bg-opacity-10 px-3 py-2 my-3" *ngIf="activity8">
+    <ksp-activity-research></ksp-activity-research>
+  </div>
+
+  <div class="d-flex align-items-center">
+    <input type="checkbox" class="me-2" formControlName="activity9" />
+    <label class="text-secondary"
+      >รับรางวัลจากคุรุสภาหรือของหน่วยงานทางการศึกษาอื่น</label
+    >
+  </div>
+  <div class="bg-secondary bg-opacity-10 px-3 py-2 my-3" *ngIf="activity9">
+    <ksp-activity-reward></ksp-activity-reward>
+  </div>
+
+  <div class="d-flex align-items-center">
+    <input type="checkbox" class="me-2" formControlName="activity10" />
+    <label class="text-secondary"
+      >เข้าฟังการบรรยาย อภิปราย ประชุมปฏิบัติการ ประชุมสัมมนา หรืออื่น ๆ
+      โดยมีการลงทะเบียนและมีหลักฐานแสดงการเข้าร่วมกิจกรรมดังกล่าว</label
+    >
+  </div>
+  <div class="bg-secondary bg-opacity-10 px-3 py-2 my-3" *ngIf="activity10">
+    <ksp-activity-lecture-register></ksp-activity-lecture-register>
+  </div>
+
+  <div class="d-flex align-items-center">
+    <input type="checkbox" class="me-2" formControlName="activity11" />
+    <label class="text-secondary"
+      >ศึกษาดูงานที่เกี่ยวข้องกับการประกอบวิชาชีพทางการศึกษา</label
+    >
+  </div>
+  <div class="bg-secondary bg-opacity-10 px-3 py-2 my-3" *ngIf="activity11">
+    <ksp-activity-study-tour></ksp-activity-study-tour>
+  </div>
+
+  <div class="d-flex align-items-center">
+    <input type="checkbox" class="me-2" formControlName="activity12" />
+    <label class="text-secondary"
+      >จัดทำผลงานหรือกิจกรรมที่เป็นประโยชน์ต่อการจัดการเรียนรู้หรือการจัดการศึกษา</label
+    >
+  </div>
+  <div class="bg-secondary bg-opacity-10 px-3 py-2 my-3" *ngIf="activity12">
+    <ksp-activity-learning-material></ksp-activity-learning-material>
+  </div>
+</form>

@@ -18,6 +18,10 @@ export class LicenseSearchComponent {
   foundItem = false;
   constructor(private router: Router, private fb: FormBuilder) {}
 
+  addStaff() {
+    this.router.navigate(['./', 'staff-management', 'staff-person-info']);
+  }
+
   search() {
     this.foundItem = true;
   }

@@ -5,6 +5,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { DegreeHomeSearchComponent } from '@ksp/shared/search';
+import { UniFormBadgeComponent } from '@ksp/shared/ui';
 
 @Component({
   templateUrl: './uni-home.component.html',
@@ -17,6 +18,7 @@ import { DegreeHomeSearchComponent } from '@ksp/shared/search';
     TopNavComponent,
     ReactiveFormsModule,
     DegreeHomeSearchComponent,
+    UniFormBadgeComponent,
   ],
 })
 export class UniHomeComponent {

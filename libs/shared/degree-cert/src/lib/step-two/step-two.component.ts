@@ -23,6 +23,8 @@ export class DegreeCertStepTwoComponent extends KspFormBaseComponent {
     advisor: [],
   });
 
+  step2Incorrect = ['ไม่ครบถ้วน และไม่ถูกต้อง', 'หมายเหตุ XXXXXXXXX'];
+
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -11,16 +12,34 @@ import {
   templateUrl: './edit-student-detail.component.html',
   styleUrls: ['./edit-student-detail.component.scss'],
 })
-export class EditStudentDetailComponent implements OnInit {
+export class EditStudentDetailComponent {
+  form = this.fb.group({
+    editStudent: [],
+  });
+
   uploadFileList = [
     'สำเนาหนังสือสำคัญการเปลี่ยนชื่อ / ชื่อสกุล / เปลี่ยนหรือเพิ่มคำนำหน้าชื่อ',
     'สำเนาหลักฐานการสมรส หรือการสิ้นสุดการสมรส (ถ้ามี)',
     'สำเนาหนังสือรับรองการใช้คำหน้านามหญิง (ถ้ามี)',
   ];
 
-  constructor(private router: Router, public dialog: MatDialog) {}
+  data = false;
 
-  ngOnInit(): void {}
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private fb: FormBuilder
+  ) {}
+
+
+
+  searchData() {
+    this.data = true;
+  }
+
+  clearData() {
+    this.data = false;
+  }
 
   cancel() {
     this.router.navigate(['/', 'edit-student-list', 'list']);

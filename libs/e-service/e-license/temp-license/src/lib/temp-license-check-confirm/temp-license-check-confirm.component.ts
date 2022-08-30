@@ -27,11 +27,11 @@ export class TempLicenseCheckConfirmComponent {
   ) {}
 
   cancel() {
-    this.router.navigate(['/', 'temp-license']);
+    this.router.navigate(['/', 'temp-license', 'list']);
   }
 
   prevPage() {
-    this.router.navigate(['/', 'temp-license', 'forbidden']);
+    this.router.navigate(['/', 'temp-license', 'detail']);
   }
 
   save() {

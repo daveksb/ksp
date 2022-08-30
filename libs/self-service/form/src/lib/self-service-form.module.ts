@@ -17,6 +17,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatOptionModule } from '@angular/material/core';
 import { SharedFormEducationLevelModule } from '@ksp/shared/form/education-level';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
+import { StandardWorkingComponent } from './standard-working/standard-working.component';
+import { StandardWorkingTeacherComponent } from './standard-working-teacher/standard-working-teacher.component';
+import { StandardWorkingNonTeacherComponent } from './standard-working-non-teacher/standard-working-non-teacher.component';
+import { SchoolServiceFormActivityModule } from '@ksp/school-service/form/activity';
+import { SubstituteObjectiveComponent } from './substitute-objective/substitute-objective.component';
 
 @NgModule({
   imports: [
@@ -30,6 +35,8 @@ import { DynamicComponentDirective } from '@ksp/shared/directive';
     MatListModule,
     SharedFormEducationLevelModule,
     DynamicComponentDirective,
+    StandardWorkingTeacherComponent,
+    StandardWorkingNonTeacherComponent,
   ],
   declarations: [
     FormUserEducationComponent,
@@ -38,6 +45,8 @@ import { DynamicComponentDirective } from '@ksp/shared/directive';
     FormUserWorkplaceComponent,
     FormVerifyOtpComponent,
     FormVerifyPhoneComponent,
+    StandardWorkingComponent,
+    SubstituteObjectiveComponent,
   ],
   exports: [
     FormUserEducationComponent,
@@ -46,6 +55,8 @@ import { DynamicComponentDirective } from '@ksp/shared/directive';
     FormUserWorkplaceComponent,
     FormVerifyOtpComponent,
     FormVerifyPhoneComponent,
+    StandardWorkingComponent,
+    SubstituteObjectiveComponent,
   ],
 })
 export class SelfServiceFormModule {}

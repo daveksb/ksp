@@ -2,7 +2,6 @@
   background: #ffffff;
   box-shadow: 0px 0px 15px #e2e2e2;
   border-radius: 20px;
-  margin: 12px 24px;
   padding: 20px 32px;
 }
 
@@ -39,9 +38,21 @@
   color: #3dabfc;
 }
 
+.main__container {
+  padding: 12px 48px;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  background-image: url(/assets/images/BG-Information.png);
+}
+
 @media only screen and (max-width: 768px) {
   .detail__container {
     padding: 24px 20px;
     margin: 12px 24px;
+  }
+
+  .main__container {
+    padding: 6px 8px;
   }
 }

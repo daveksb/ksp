@@ -54,7 +54,24 @@ export class DegreeInfoComponent
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         // it has 8 degree types and target with 2 form types
-        const degreeType = Number(res) < 4 ? 'a' : 'b';
+        /* const degreeType = Number(res) < 4 ? 'a' : 'b';
+        this.degreeTypeChanged.emit(degreeType); */
+
+        let xxx!: string;
+
+        if (Number(res) === 0) {
+          xxx = 'a';
+        } else if (Number(res) === 1) {
+          xxx = 'b';
+        } else if (Number(res) === 2 || Number(res) === 3) {
+          xxx = 'c';
+        } else if (Number(res) === 4 || Number(res) === 5) {
+          xxx = 'd';
+        } else if (Number(res) === 6 || Number(res) === 7) {
+          xxx = 'e';
+        }
+
+        const degreeType = xxx;
         this.degreeTypeChanged.emit(degreeType);
       });
   }

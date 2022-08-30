@@ -21,6 +21,7 @@
       >
         <mat-step [completed]="false">
           <ng-template matStepLabel>ข้อมูลพื้นฐาน</ng-template>
+
           <ksp-degree-cert-step-one
             (degreeType)="step1DegreeType = $event"
             formControlName="step1"
@@ -30,6 +31,7 @@
 
         <mat-step [completed]="false">
           <ng-template matStepLabel>ด้านหลักสูตร</ng-template>
+
           <ksp-degree-cert-step-two
             [formType]="step1DegreeType"
             formControlName="step2"
@@ -46,7 +48,10 @@
 
         <mat-step [completed]="false">
           <ng-template matStepLabel>เอกสารแนบ</ng-template>
-          <ksp-degree-cert-step-four></ksp-degree-cert-step-four>
+
+          <ksp-degree-cert-step-four
+            [formType]="step1DegreeType"
+          ></ksp-degree-cert-step-four>
         </mat-step>
 
         <mat-step [completed]="false">

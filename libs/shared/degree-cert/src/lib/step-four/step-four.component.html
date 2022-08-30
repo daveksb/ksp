@@ -1,3 +1,7 @@
+<ng-container *ngIf="mode === 'edit'">
+  <ksp-uni-warn-incorrect [details]="step4Incorrect"></ksp-uni-warn-incorrect
+></ng-container>
+
 <div class="bg-light">
   <div class="box-header px-3 py-2">
     กรุณาแนบหลักฐาน<span class="fs-6 text-danger">
@@ -9,9 +13,41 @@
     ปริญญาตรีทางการศึกษา (หลักสูตร 5 ปี)
   </div>
 
-  <ksp-form-attachment
-    [mode]="mode"
-    [title]="''"
-    [groups]="uploadFiles"
-  ></ksp-form-attachment>
+  <div [ngSwitch]="formType">
+    <ng-container *ngSwitchCase="'a'">
+      <ksp-form-attachment
+        [mode]="mode"
+        [title]="''"
+        [groups]="uploadFiles1"
+      ></ksp-form-attachment>
+    </ng-container>
+    <ng-container *ngSwitchCase="'b'">
+      <ksp-form-attachment
+        [mode]="mode"
+        [groups]="uploadFiles2"
+        [title]="''"
+      ></ksp-form-attachment>
+    </ng-container>
+    <ng-container *ngSwitchCase="'c'">
+      <ksp-form-attachment
+        [mode]="mode"
+        [groups]="uploadFiles3"
+        [title]="''"
+      ></ksp-form-attachment>
+    </ng-container>
+    <ng-container *ngSwitchCase="'d'">
+      <ksp-form-attachment
+        [mode]="mode"
+        [groups]="uploadFiles4"
+        [title]="''"
+      ></ksp-form-attachment>
+    </ng-container>
+    <ng-container *ngSwitchCase="'e'">
+      <ksp-form-attachment
+        [mode]="mode"
+        [groups]="uploadFiles5"
+        [title]="''"
+      ></ksp-form-attachment>
+    </ng-container>
+  </div>
 </div>

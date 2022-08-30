@@ -38,39 +38,44 @@
       >
         <ng-template pTemplate="header">
           <tr>
-            <th class="p-2 text-nowrap">เลือก</th>
             <th
-              class="p-2 text-nowrap"
+              class="p-2 text-nowrap align-text-top"
+              *ngIf="pageType === importType.graduateList"
+            >
+              เลือก
+            </th>
+            <th
+              class="p-2 text-nowrap align-text-top"
               *ngIf="pageType === importType.studentList"
             >
               ลำดับ
             </th>
             <th
-              class="p-2 text-nowrap"
+              class="p-2 text-nowrap align-text-top"
               *ngIf="pageType === importType.graduateList"
             >
               ครั้งที่สภาอนุมัติ
             </th>
             <th
-              class="p-2 text-nowrap"
+              class="p-2 text-nowrap align-text-top"
               *ngIf="pageType === importType.graduateList"
             >
               วันที่สภาอนุมัติ
             </th>
             <th
-              class="p-2 text-nowrap"
+              class="p-2 text-nowrap align-text-top"
               *ngIf="pageType === importType.graduateList"
             >
               วันที่จบการศึกษา
             </th>
             <th
-              class="p-2 text-nowrap"
+              class="p-2 text-nowrap align-text-top"
               *ngIf="pageType === importType.graduateList"
             >
               สถานที่ปฏิบัติการสอน
             </th>
             <th
-              class="p-2 text-nowrap"
+              class="p-2 text-nowrap align-text-top"
               *ngIf="pageType === importType.studentList"
             >
               วันที่รับเข้า
@@ -79,40 +84,133 @@
               class="p-2 text-nowrap"
               *ngIf="pageType === importType.graduateList"
             >
-              วันที่เข้ารับการศึกษา
+              <div>
+                <label>วันที่เข้ารับการศึกษา</label>
+                <input type="date" class="form-control" style="width: 150px" />
+              </div>
             </th>
-            <th class="p-2 text-nowrap">
+
+            <th
+              class="p-2 text-nowrap"
+              *ngIf="pageType === importType.studentList"
+            >
               เลขบัตรประจำตัวประชาชน /<br />
               เลขประจำตัวคุรุสภา
             </th>
-            <th class="p-2 text-nowrap">หมายเลขหนังสือเดินทาง</th>
+
             <th
               class="p-2 text-nowrap"
+              *ngIf="pageType === importType.graduateList"
+            >
+              <div>
+                เลขบัตรประจำตัวประชาชน
+                <input
+                  class="form-control form-search"
+                  style="width: 175px"
+                  type="text"
+                />
+              </div>
+            </th>
+
+            <th class="p-2 text-nowrap align-text-top">
+              หมายเลขหนังสือเดินทาง
+              <input
+                class="form-control form-search"
+                style="width: 175px"
+                type="text"
+                *ngIf="pageType === importType.graduateList"
+              />
+            </th>
+            <th
+              class="p-2 text-nowrap align-text-top"
               *ngIf="pageType === importType.studentList"
             >
               สัญชาติ
             </th>
 
-            <th
-              class="p-2 text-nowrap text-center"
-              colspan="3"
-              style="width: 5rem"
-            >
-              ชื่อ-นามสกุล (ภาษาไทย)
+            <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
+              คำนำหน้าชื่อ
             </th>
 
-            <th
-              class="p-2 text-nowrap text-center"
-              colspan="3"
-              style="width: 5rem"
-            >
-              ชื่อ-นามสกุล (ภาษาอังกฤษ)
+            <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
+              ชื่อ (ภาษาไทย)
+              <div>
+                <input
+                  class="form-control form-search"
+                  style="width: 150px"
+                  type="text"
+                  *ngIf="pageType === importType.graduateList"
+                />
+              </div>
             </th>
-            <th class="p-2 text-nowrap">เบอร์โทรศัพท์มือถือ</th>
-            <th class="p-2 text-nowrap">วัน/เดือน/ปีเกิด(พ.ศ.)</th>
-            <th class="p-2 text-nowrap">ที่อยู่</th>
+
+            <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
+              นามสกุล (ภาษาไทย)
+              <div>
+                <input
+                  class="form-control form-search"
+                  style="width: 150px"
+                  type="text"
+                  *ngIf="pageType === importType.graduateList"
+                />
+              </div>
+            </th>
+
+            <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
+              คำนำหน้าชื่อ
+            </th>
+
+            <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
+              ชื่อ (ภาษาอังกฤษ)
+              <div>
+                <input
+                  class="form-control form-search"
+                  style="width: 150px"
+                  type="text"
+                  *ngIf="pageType === importType.graduateList"
+                />
+              </div>
+            </th>
+
+            <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
+              ชื่อกลาง (ภาษาอังกฤษ)
+              <div>
+                <input
+                  class="form-control form-search"
+                  style="width: 150px"
+                  type="text"
+                  *ngIf="pageType === importType.graduateList"
+                />
+              </div>
+            </th>
+
+            <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
+              นามสกุล (ภาษาอังกฤษ)
+              <div>
+                <input
+                  class="form-control form-search"
+                  style="width: 150px"
+                  type="text"
+                  *ngIf="pageType === importType.graduateList"
+                />
+              </div>
+            </th>
+
+            <th class="p-2 text-nowrap align-text-top">
+              เบอร์โทรศัพท์มือถือ
+              <input
+                class="form-control form-search"
+                style="width: 150px"
+                type="text"
+                *ngIf="pageType === importType.graduateList"
+              />
+            </th>
+            <th class="p-2 text-nowrap align-text-top">
+              วัน/เดือน/ปีเกิด(พ.ศ.)
+            </th>
+            <th class="p-2 text-nowrap align-text-top">ที่อยู่</th>
             <th
-              class="p-2 text-nowrap"
+              class="p-2 text-nowrap align-text-top"
               *ngIf="pageType === importType.studentList"
             >
               รายวิชา
@@ -146,7 +244,7 @@
               class="text-center"
               *ngIf="pageType === importType.graduateList"
             >
-              <input type="checkbox" />
+              <input type="checkbox" class="form-check-input" />
             </td>
 
             <td
@@ -370,6 +468,7 @@
                 </ng-template>
               </p-cellEditor>
             </td>
+
             <td class="p-2 text-nowrap">
               <p-cellEditor>
                 <ng-template pTemplate="input">
@@ -387,6 +486,25 @@
                 </ng-template>
               </p-cellEditor>
             </td>
+
+            <td class="p-2 text-nowrap">
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input
+                    class="form-control"
+                    style="width: 150px"
+                    pInputText
+                    type="text"
+                    [(ngModel)]="product.middleNameEn"
+                    [disabled]="pageType === importType.graduateList"
+                  />
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{ product.middleNameEn }}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+
             <td class="p-2 text-nowrap">
               <p-cellEditor>
                 <ng-template pTemplate="input">
@@ -404,6 +522,7 @@
                 </ng-template>
               </p-cellEditor>
             </td>
+
             <td class="p-2 text-nowrap">
               <p-cellEditor>
                 <ng-template pTemplate="input">
@@ -466,6 +585,7 @@
               <div
                 class="text-orange text-decoration-underline whitespace-nowrap"
                 role="button"
+                (click)="insertSubject()"
               >
                 รายวิชา
               </div>
@@ -526,5 +646,6 @@
     [showTempSaveButton]="true"
     (saveClicked)="save()"
     (cancelClicked)="cancel()"
+    [saveButtonLabel]="'บันทึกและยื่นใบคำขอ'"
   ></ksp-bottom-nav>
 </div>

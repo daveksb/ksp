@@ -1,3 +1,7 @@
+<ng-container *ngIf="mode === 'edit'">
+  <ksp-uni-warn-incorrect [details]="step2Incorrect"></ksp-uni-warn-incorrect
+></ng-container>
+
 <form [formGroup]="form">
   <mat-tab-group
     animationDuration="0ms"
@@ -8,7 +12,13 @@
       label="โครงสร้างหลักสูตรและแผนการรับนิสิตนักศึกษา"
       class="tab-content"
     >
-      <div *ngIf="formType === 'a'; then typeA; else typeB"></div>
+      <div
+        *ngIf="
+          formType === 'a' || formType === 'b' || formType === 'c';
+          then typeA;
+          else typeB
+        "
+      ></div>
       <ng-template #typeA>
         <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
           <input type="checkbox" />

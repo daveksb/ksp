@@ -1,7 +1,8 @@
-.container {
-  max-width: 1440px;
-  padding: 24px;
-  height: 100vh;
+.main__container {
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  background-image: url(/assets/images/BG-Information.png);
 }
 
 .content__container {
@@ -16,6 +17,13 @@
   color: #000000;
   text-align: center;
   margin-bottom: 24px;
+}
+
+.header__label-2 {
+  font-size: 20px;
+  color: #000000;
+  text-align: center;
+  margin: 24px 0;
 }
 
 .content__label {

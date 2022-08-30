@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { HistoryRequestDialogComponent } from '@ksp/uni-service/dialog';
 
 @Component({
   selector: 'ksp-edit-student-list',
@@ -11,7 +13,13 @@ export class EditStudentListComponent {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<studentList>();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, public dialog: MatDialog) {}
+
+  history() {
+    this.dialog.open(HistoryRequestDialogComponent, {
+      width: '400px',
+    });
+  }
 
   search() {
     this.dataSource.data = data;
@@ -27,60 +35,73 @@ export class EditStudentListComponent {
 }
 
 export const column = [
-  'id',
-  'licenseNumber',
-  'requestDate',
+  'order',
+  'requestId',
+  'submitDate',
   'personId',
   'name',
-  'degreeLevel',
+  'degreeCode',
   'university',
   'degreeName',
   'major',
   'verifyStatus',
-  'lastEditDate',
+  'editDate',
+  'edit',
   'print',
-  'history',
 ];
 
 export interface studentList {
-  id: number;
-  licenseNumber: string;
-  requestDate: string;
+  order: number;
+  requestId: string;
+  submitDate: string;
   personId: string;
   name: string;
-  degreeLevel: string;
+  degreeCode: string;
   university: string;
   degreeName: string;
   major: string;
   verifyStatus: string;
-  lastEditDate: string;
+  editDate: string;
 }
 
 export const data: studentList[] = [
   {
-    id: 1,
-    licenseNumber: '305565052100123',
-    requestDate: '21 พ.ค. 2565',
-    personId: '3-1020-xXXXX-XX-1',
-    name: 'นางสาวมาลัย ซ่อนกลิ่น',
-    degreeLevel: 'ปริญาตรีทางการศึกษาหลักสูตร 4 ปี',
-    university: 'มหาวิทยาลัยราชภัฏพระนครศรีอยุธยา',
-    degreeName: 'การศึกษาบัณฑิต สาขาวิชาเคมี หลักสูตรปรับปรุง พ.ศ.2562',
-    major: 'วิทยาศาสตร์พื้นฐาน',
+    order: 1,
+    requestId: 'string',
+    submitDate: 'string',
+    personId: 'string',
+    name: 'string',
+    degreeCode: 'string',
+    university: 'string',
+    degreeName: 'string',
+    major: 'string',
     verifyStatus: 'สร้าง',
-    lastEditDate: '10 ต.ค. 2564',
+    editDate: 'string',
   },
   {
-    id: 2,
-    licenseNumber: '305565052100123',
-    requestDate: '21 พ.ค. 2565',
-    personId: '3-1020-xXXXX-XX-1',
-    name: 'นางสาวมาลัย ซ่อนกลิ่น',
-    degreeLevel: 'ปริญาตรีทางการศึกษาหลักสูตร 4 ปี',
-    university: 'มหาวิทยาลัยราชภัฏพระนครศรีอยุธยา',
-    degreeName: 'การศึกษาบัณฑิต สาขาวิชาเคมี หลักสูตรปรับปรุง พ.ศ.2562',
-    major: 'วิทยาศาสตร์พื้นฐาน',
-    verifyStatus: 'สร้าง',
-    lastEditDate: '10 ต.ค. 2564',
+    order: 2,
+    requestId: 'string',
+    submitDate: 'string',
+    personId: 'string',
+    name: 'string',
+    degreeCode: 'string',
+    university: 'string',
+    degreeName: 'string',
+    major: 'string',
+    verifyStatus: 'ยื่นเรียบร้อย',
+    editDate: 'string',
+  },
+  {
+    order: 3,
+    requestId: 'string',
+    submitDate: 'string',
+    personId: 'string',
+    name: 'string',
+    degreeCode: 'string',
+    university: 'string',
+    degreeName: 'string',
+    major: 'string',
+    verifyStatus: 'รับข้อมูล',
+    editDate: 'string',
   },
 ];
