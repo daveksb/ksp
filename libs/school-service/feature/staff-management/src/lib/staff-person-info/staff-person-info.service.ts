@@ -6,7 +6,7 @@ import { map, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class StaffPersonInfoService {
-  private serviceUrl = 'http://38.242.138.3/ksp/kspmasterdata';
+  private serviceUrl = 'https://kspapi.oceanicnetwork.net/ksp/kspmasterdata';
 
   constructor(private http: HttpClient) {}
 
