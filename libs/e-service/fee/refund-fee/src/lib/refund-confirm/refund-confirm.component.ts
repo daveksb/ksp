@@ -3,13 +3,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'ksp-refund-list',
-  templateUrl: './refund-list.component.html',
-  styleUrls: ['./refund-list.component.scss'],
+  selector: 'ksp-refund-confirm',
+  templateUrl: './refund-confirm.component.html',
+  styleUrls: ['./refund-confirm.component.scss'],
 })
-export class RefundListComponent implements OnInit {
+export class RefundConfirmComponent implements OnInit {
   displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<refundInfo>();
+  dataSource = new MatTableDataSource<refundConfirmInfo>();
 
   constructor(private router: Router) {}
 
@@ -21,18 +21,15 @@ export class RefundListComponent implements OnInit {
     this.dataSource.data = [];
   }
 
-  approve() {
-    this.router.navigate(['/', 'refund', 'confirm']);
-  }
-
-  verify() {
-    this.router.navigate(['/', 'refund', 'detail']);
+  cancel() {
+    this.router.navigate(['/', 'refund', 'list']);
   }
 
   ngOnInit(): void {}
 }
 
-export interface refundInfo {
+interface refundConfirmInfo {
+  no: number;
   order: string;
   ssn: string;
   name: string;
@@ -42,12 +39,11 @@ export interface refundInfo {
   process: string;
   status: string;
   submitDate: string;
-  approveDate: string;
-  refundDate: string;
 }
 
-export const data: refundInfo[] = [
+const data: refundConfirmInfo[] = [
   {
+    no: 1,
     order: 'SF_TR6406000001',
     ssn: 'x-xxxx-xxxx-xx-x',
     name: 'นายประหยัด จันทร์อังคาร',
@@ -57,10 +53,9 @@ export const data: refundInfo[] = [
     process: 'ตรวจสอบ',
     status: 'เสร็จสิ้น',
     submitDate: '01 มิ.ย.2564',
-    approveDate: '01 มิ.ย.2564',
-    refundDate: '01 มิ.ย.2564',
   },
   {
+    no: 2,
     order: 'SF_TR6406000001',
     ssn: 'x-xxxx-xxxx-xx-x',
     name: 'นายประหยัด จันทร์อังคาร',
@@ -70,10 +65,9 @@ export const data: refundInfo[] = [
     process: 'ตรวจสอบ',
     status: 'เสร็จสิ้น',
     submitDate: '01 มิ.ย.2564',
-    approveDate: '01 มิ.ย.2564',
-    refundDate: '01 มิ.ย.2564',
   },
   {
+    no: 3,
     order: 'SF_TR6406000001',
     ssn: 'x-xxxx-xxxx-xx-x',
     name: 'นายประหยัด จันทร์อังคาร',
@@ -83,10 +77,9 @@ export const data: refundInfo[] = [
     process: 'ตรวจสอบ',
     status: 'เสร็จสิ้น',
     submitDate: '01 มิ.ย.2564',
-    approveDate: '01 มิ.ย.2564',
-    refundDate: '01 มิ.ย.2564',
   },
   {
+    no: 4,
     order: 'SF_TR6406000001',
     ssn: 'x-xxxx-xxxx-xx-x',
     name: 'นายประหยัด จันทร์อังคาร',
@@ -96,13 +89,12 @@ export const data: refundInfo[] = [
     process: 'ตรวจสอบ',
     status: 'เสร็จสิ้น',
     submitDate: '01 มิ.ย.2564',
-    approveDate: '01 มิ.ย.2564',
-    refundDate: '01 มิ.ย.2564',
   },
 ];
 
-export const column = [
+const column = [
   'select',
+  'no',
   'order',
   'ssn',
   'name',
@@ -112,8 +104,4 @@ export const column = [
   'process',
   'status',
   'submitDate',
-  'approveDate',
-  'refundDate',
-  'verify',
-  'approve',
 ];

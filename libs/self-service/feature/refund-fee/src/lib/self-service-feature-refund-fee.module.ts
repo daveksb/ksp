@@ -6,6 +6,7 @@ import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master
 import { TopNavComponent } from '@ksp/shared/menu';
 import { RequestStatusComponent } from '@ksp/self-service/ui';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { FormRefundFeeDetailComponent } from '@ksp/shared/form/license';
 
 export const routes: Routes = [
   {
@@ -26,6 +27,7 @@ export const routes: Routes = [
     TopNavComponent,
     RequestStatusComponent,
     SharedFormOthersModule,
+    FormRefundFeeDetailComponent,
     RouterModule.forChild(routes),
   ],
   declarations: [RefundFeeRequestComponent],
