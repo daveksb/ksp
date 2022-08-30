@@ -30,11 +30,13 @@ import { SeniorTeacherSubsidyThreeComponent } from './senior-teacher-subsidy-thr
 import { SeniorTeacherSubsidyFourComponent } from './senior-teacher-subsidy-four/senior-teacher-subsidy-four.component';
 import { SeniorTeacherSubsidyFiveComponent } from './senior-teacher-subsidy-five/senior-teacher-subsidy-five.component';
 import { SeniorTeacherSubsidySixComponent } from './senior-teacher-subsidy-six/senior-teacher-subsidy-six.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     MatListModule,
+    ReactiveFormsModule,
     SeniorTeacherSubsidyOneComponent,
     SeniorTeacherSubsidyTwoComponent,
     SeniorTeacherSubsidyThreeComponent,

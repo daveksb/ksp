@@ -1,43 +1,60 @@
-<div>xxx</div>
+<form [formGroup]="form">
+  <div class="box-header text-primary">ข้อมูลผู้ขอรับเงินช่วยเหลือ</div>
 
-<div>
-  <input type="checkbox" />
-  <label>xxx</label>
-</div>
-
-<div class="d-flex">
-  <div class="menu__container">
-    <mat-selection-list #cost [multiple]="false">
-      <mat-list-option *ngFor="let subject of typesOfSubject" [value]="subject">
-        {{ subject }}
-      </mat-list-option>
-    </mat-selection-list>
+  <div class="d-flex align-items-center">
+    <input
+      type="checkbox"
+      class="me-1"
+      class="checkbox me-1"
+      formControlName="hasSubsidy"
+    />
+    <label class="form-label"
+      >ผ่านการคัดเลือกให้เป็นผู้ได้รับเงินช่วยเหลือทางการเงิน</label
+    >
   </div>
 
-  <div class="border w-100 h-auto rounded">
-    <ng-container *ngIf="cost.selectedOptions.selected[0]?.value === 'สถานภาพ'"
-      ><ksp-senior-teacher-subsidy-one></ksp-senior-teacher-subsidy-one
-    ></ng-container>
-    <ng-container *ngIf="cost.selectedOptions.selected[0]?.value === 'คู่สมรส'"
-      ><ksp-senior-teacher-subsidy-two></ksp-senior-teacher-subsidy-two
-    ></ng-container>
-    <ng-container *ngIf="cost.selectedOptions.selected[0]?.value === 'บุตร'"
-      ><ksp-senior-teacher-subsidy-three></ksp-senior-teacher-subsidy-three
-    ></ng-container>
-    <ng-container
-      *ngIf="cost.selectedOptions.selected[0]?.value === 'ค่าใช้จ่าย'"
-      ><ksp-senior-teacher-subsidy-four></ksp-senior-teacher-subsidy-four
-    ></ng-container>
-    <ng-container
-      *ngIf="cost.selectedOptions.selected[0]?.value === 'รายได้ก่อนเกษียณ'"
-      ><ksp-senior-teacher-subsidy-five></ksp-senior-teacher-subsidy-five
-    ></ng-container>
-    <ng-container
-      *ngIf="
-        cost.selectedOptions.selected[0]?.value ===
-        'ทรัพย์สินของตนเองและคู่สมรส'
-      "
-      ><ksp-senior-teacher-subsidy-six></ksp-senior-teacher-subsidy-six
-    ></ng-container>
-  </div>
-</div>
+  <ng-template [ngIf]="hasSubsidy">
+    <br />
+    <div class="d-flex">
+      <div class="menu__container">
+        <mat-selection-list #cost [multiple]="false">
+          <mat-list-option
+            *ngFor="let subject of typesOfSubject"
+            [value]="subject"
+          >
+            {{ subject }}
+          </mat-list-option>
+        </mat-selection-list>
+      </div>
+
+      <div class="border w-100 h-auto rounded">
+        <ng-container
+          *ngIf="cost.selectedOptions.selected[0]?.value === 'สถานภาพ'"
+          ><ksp-senior-teacher-subsidy-one></ksp-senior-teacher-subsidy-one
+        ></ng-container>
+        <ng-container
+          *ngIf="cost.selectedOptions.selected[0]?.value === 'คู่สมรส'"
+          ><ksp-senior-teacher-subsidy-two></ksp-senior-teacher-subsidy-two
+        ></ng-container>
+        <ng-container *ngIf="cost.selectedOptions.selected[0]?.value === 'บุตร'"
+          ><ksp-senior-teacher-subsidy-three></ksp-senior-teacher-subsidy-three
+        ></ng-container>
+        <ng-container
+          *ngIf="cost.selectedOptions.selected[0]?.value === 'ค่าใช้จ่าย'"
+          ><ksp-senior-teacher-subsidy-four></ksp-senior-teacher-subsidy-four
+        ></ng-container>
+        <ng-container
+          *ngIf="cost.selectedOptions.selected[0]?.value === 'รายได้ก่อนเกษียณ'"
+          ><ksp-senior-teacher-subsidy-five></ksp-senior-teacher-subsidy-five
+        ></ng-container>
+        <ng-container
+          *ngIf="
+            cost.selectedOptions.selected[0]?.value ===
+            'ทรัพย์สินของตนเองและคู่สมรส'
+          "
+          ><ksp-senior-teacher-subsidy-six></ksp-senior-teacher-subsidy-six
+        ></ng-container>
+      </div>
+    </div>
+  </ng-template>
+</form>

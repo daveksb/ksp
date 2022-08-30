@@ -52,6 +52,14 @@ export class SelfServiceHomePageComponent {
   reward6() {
     this.router.navigate(['/', 'reward', 'research']);
   }
+
+  refundFee() {
+    this.router.navigate(['/', 'refund-fee', 'request']);
+  }
+
+  substituteLicense() {
+    this.router.navigate(['/', 'substitute-license', 'request']);
+  }
 }
 
 export const column = [
@@ -88,6 +96,33 @@ export const data: PersonLicense[] = [
   },
   {
     order: 2,
+    licenseNumber: '110200051214',
+    submitDate: '10/10/2022',
+    name: 'พรทิพย์ นาคปรก',
+    paymentStatus: 'ชำระแล้ว',
+    listStatus: 'ขอเอกสารเพิ่มเติม',
+    process: 'ส่งตรวจสอบ',
+  },
+  {
+    order: 3,
+    licenseNumber: '110200051214',
+    submitDate: '10/10/2022',
+    name: 'พรทิพย์ นาคปรก',
+    paymentStatus: 'ชำระแล้ว',
+    listStatus: 'ขอเอกสารเพิ่มเติม',
+    process: 'ส่งตรวจสอบ',
+  },
+  {
+    order: 4,
+    licenseNumber: '110200051214',
+    submitDate: '10/10/2022',
+    name: 'พรทิพย์ นาคปรก',
+    paymentStatus: 'ชำระแล้ว',
+    listStatus: 'ขอเอกสารเพิ่มเติม',
+    process: 'ส่งตรวจสอบ',
+  },
+  {
+    order: 5,
     licenseNumber: '110200051214',
     submitDate: '10/10/2022',
     name: 'พรทิพย์ นาคปรก',

@@ -3,7 +3,6 @@
   background-image: url('/assets/images/BG-login-sf-01.png');
   padding: 18px 36px;
   background-size: cover;
-  height: 100vh;
 }
 
 .btn-secondary {
@@ -43,7 +42,7 @@
 .login__container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 72px 100px;
+  padding: 76px 100px;
 }
 
 .header__content {

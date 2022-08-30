@@ -15,8 +15,8 @@
       [selectedIndex]="0"
     >
       <mat-tab label="ที่อยู่" class="tab-content">
-        <ksp-form-address formControlName="" [isDarkMode]="true">
-          <span>ที่อยู่ทะเบียนบ้าน</span>
+        <ksp-form-address [isDarkMode]="true">
+          <span>ที่อยู่ที่สามารถติดต่อได้</span>
         </ksp-form-address>
         <hr />
         <div class="box-header">สถานที่ทำงาน</div>
@@ -24,23 +24,23 @@
         <div class="row">
           <div class="col-md-6 mb-3">
             <label class="form-label">โทรศัพท์</label>
-            <input class="form-control" type="text" formControlName="" />
+            <input class="form-control" type="text" />
           </div>
 
           <div class="col-md-6 mb-3">
             <label class="form-label">โทรสาร</label>
-            <input class="form-control" type="text" formControlName="" />
+            <input class="form-control" type="text" />
           </div>
         </div>
         <div class="row">
           <div class="col-md-6 mb-3">
             <label class="form-label">อีเมล</label>
-            <input class="form-control" type="text" formControlName="" />
+            <input class="form-control" type="text" />
           </div>
 
           <div class="col-md-6 mb-3">
             <label class="form-label">เว็บไซต์</label>
-            <input class="form-control" type="text" formControlName="" />
+            <input class="form-control" type="text" />
           </div>
         </div>
       </mat-tab>
@@ -59,6 +59,8 @@
 
       <mat-tab label="ข้อมูลนวัตกรรมและรางวัล">
         <ksp-best-teacher-innovation></ksp-best-teacher-innovation>
+        <br />
+        <ksp-form-attachment></ksp-form-attachment>
       </mat-tab>
     </mat-tab-group>
 
