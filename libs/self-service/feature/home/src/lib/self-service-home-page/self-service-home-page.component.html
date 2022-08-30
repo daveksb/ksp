@@ -75,12 +75,15 @@
     <br />
     <div class="d-flex justify-content-between align-items-center mb-2">
       <div class="box-header">สรุปผลลัพธ์การค้นหา 5 รายการ</div>
-      <!-- <button class="btn border-primary text-primary bg-white">
+      <button
+        mat-button
+        [matMenuTriggerFor]="license"
+        class="btn text-primary border-primary bg-white"
+      >
         + สร้างใบคำขอ
-      </button> -->
-      <button mat-button [matMenuTriggerFor]="animals">สร้างใบคำขอ</button>
-      <mat-menu #animals="matMenu">
-        <button mat-menu-item [matMenuTriggerFor]="license">
+      </button>
+      <mat-menu #license="matMenu">
+        <button mat-menu-item [matMenuTriggerFor]="request">
           ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ
         </button>
         <button mat-menu-item [matMenuTriggerFor]="renew">
@@ -90,21 +93,32 @@
         <button mat-menu-item>ขอหนังสือรับรองความรู้</button>
         <button mat-menu-item>ขอยื่นเทียบเคียงความรู้</button>
         <button mat-menu-item>ขอคืนค่าธรรมเนียม</button>
-        <button mat-menu-item>ขอรับรางวัลการยกย่องเชิดชูเกียรติ</button>
+        <button mat-menu-item [matMenuTriggerFor]="reward">
+          ขอรับรางวัลการยกย่องเชิดชูเกียรติ
+        </button>
       </mat-menu>
 
-      <mat-menu #license="matMenu">
-        <button mat-menu-item>ครู</button>
+      <mat-menu #request="matMenu">
+        <button mat-menu-item (click)="teacherLicense()">ครู</button>
         <button mat-menu-item>ผู้บริหารสถานศึกษา</button>
         <button mat-menu-item>ผู้บริหารการศึกษา</button>
         <button mat-menu-item>ศึกษานิเทศก์</button>
       </mat-menu>
 
       <mat-menu #renew="matMenu">
-        <button mat-menu-item>ครู</button>
+        <button mat-menu-item (click)="teacherRenew()">ครู</button>
         <button mat-menu-item>ผู้บริหารสถานศึกษา</button>
         <button mat-menu-item>ผู้บริหารการศึกษา</button>
         <button mat-menu-item>ศึกษานิเทศก์</button>
+      </mat-menu>
+
+      <mat-menu #reward="matMenu">
+        <button mat-menu-item (click)="reward1()">รางวัลคุรุสภา</button>
+        <button mat-menu-item (click)="reward2()">รางวัลครูภาษาไทยดีเด่น</button>
+        <button mat-menu-item (click)="reward3()">รางวัลครูผู้สอนดีเด่น</button>
+        <button mat-menu-item (click)="reward4()">รางวัลคุรุสดุดี</button>
+        <button mat-menu-item (click)="reward5()">รางวัลครูอาวุโส</button>
+        <button mat-menu-item (click)="reward6()">รางวัลผลงานวิจัยของคุรุสภา</button>
       </mat-menu>
     </div>
 

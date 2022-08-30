@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ksp-self-service-home-page',
@@ -7,7 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./self-service-home-page.component.scss'],
 })
 export class SelfServiceHomePageComponent {
-  /* constructor() {} */
+  constructor(private router: Router) {}
 
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<PersonLicense>();
@@ -18,6 +19,38 @@ export class SelfServiceHomePageComponent {
 
   clear() {
     this.dataSource.data = [];
+  }
+
+  teacherLicense() {
+    this.router.navigate(['/', 'license', 'request']);
+  }
+
+  teacherRenew() {
+    this.router.navigate(['/', 'renew-license', 'request']);
+  }
+
+  reward1() {
+    this.router.navigate(['/', 'reward', 'council']);
+  }
+
+  reward2() {
+    this.router.navigate(['/', 'reward', 'thai-teacher']);
+  }
+
+  reward3() {
+    this.router.navigate(['/', 'reward', 'best-teacher']);
+  }
+
+  reward4() {
+    this.router.navigate(['/', 'reward', 'praise-teacher']);
+  }
+
+  reward5() {
+    this.router.navigate(['/', 'reward', 'senior-teacher']);
+  }
+
+  reward6() {
+    this.router.navigate(['/', 'reward', 'research']);
   }
 }
 

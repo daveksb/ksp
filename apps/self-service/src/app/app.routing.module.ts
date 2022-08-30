@@ -56,6 +56,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'reward',
+    loadChildren: () =>
+      import('@ksp/self-service/feature/reward').then(
+        (m) => m.SelfServiceFeatureRewardModule
+      ),
+  },
+  {
     path: 'my-info',
     loadChildren: () =>
       import('@ksp/self-service/feature/my-info').then(
