@@ -78,5 +78,6 @@ export class LicenseRequestComponent implements OnInit {
         this.router.navigate(['/license', 'payment-channel']);
       }
     });
+    
   }
 }

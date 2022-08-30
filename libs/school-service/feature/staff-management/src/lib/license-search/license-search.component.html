@@ -61,6 +61,12 @@
   <div class="bg-white p-3 mt-3 default-width">
     <div class="box-header">ผลการค้นหา</div>
     <hr />
+
+    <div class="d-flex flex-column align-items-center" *ngIf="!foundItem">
+      <div class="mb-2 fs-5">ไม่พบข้อมูล</div>
+      <button class="btn border-primary text-primary" (click)="addStaff()">+ เพิ่มบุคลากร</button>
+    </div>
+
     <div *ngIf="foundItem">
       <div style="margin-left: 5rem">
         <ksp-license-info [isLicenseRevoked]="true"></ksp-license-info>

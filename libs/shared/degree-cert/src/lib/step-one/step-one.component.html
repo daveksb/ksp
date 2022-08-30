@@ -1,3 +1,7 @@
+<ng-container *ngIf="mode === 'edit'">
+  <ksp-uni-warn-incorrect [details]="step1Incorrect"></ksp-uni-warn-incorrect>
+</ng-container>
+
 <form [formGroup]="form">
   <div class="bg-white" style="width: auto">
     <div class="px-3 py-2 mb-3" style="background-color: #f4faff">

@@ -8,190 +8,99 @@
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 py-2 px-4 full-height-2">
-    <div class="box-header">
-      รายละเอียดใบคำขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
-      (ชาวไทย)
-    </div>
+    <div class="box-header">รายละเอียดใบคำขอหนังสืออนุญาตประกอบวิชาชีพ</div>
     <div class="bg-white p-3">
       <div class="d-flex justify-content-between">
         <ksp-request-header-info
           [requestDate]="'10 ตุลาคม 2565'"
           [requestNumber]="'112234467876543'"
         ></ksp-request-header-info>
-        <div class="form-label">
-          วันที่ตรวจสอบ :
-          <span class="text-orange">10 ตุลาคม 2565</span>
-        </div>
       </div>
       <hr />
-      <div class="box-header">ประวัติผลการตรวจสอบคุณสมบัติและเอกสาร</div>
 
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">ครั้งที่</th>
-              <th scope="col">วันที่เริ่มตรวจสอบ</th>
-              <th scope="col">วันที่ตรวจสอบเสร็จ</th>
-              <th scope="col">ชื่อ-นามสกุล เจ้าหน้าที่</th>
-              <th scope="col">ผลการตรวจสอบ</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr>
-              <td>x</td>
-              <td>x</td>
-              <td>x</td>
-              <td>x</td>
-              <td>x</td>
-            </tr>
-            <tr>
-              <td>x</td>
-              <td>x</td>
-              <td>x</td>
-              <td>x</td>
-              <td>x</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="box-header text-primary">
+        ประวัติการตรวจสอบคุณสมบัติและเอกสาร
       </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ลำดับ</th>
+            <th scope="col">ชื่อ-นามสกุล เจ้าหน้าที่ที่ตรวจสอบ</th>
+            <th scope="col">วันที่ตรวจสอบ</th>
+            <th scope="col">สถานะ</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>x</td>
+            <td>x</td>
+            <td>x</td>
+          </tr>
+        </tbody>
+      </table>
       <br />
       <div class="bg-white border py-3 px-4">
-        <div class="d-flex align-items-center mb-3">
-          <div class="box-header text-primary me-1">ยืนยันผลการตรวจสอบ</div>
-          <div class="text-danger">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
+        <div class="box-header text-primary me-1">
+          ยืนยันผลการตรวจสอบ
+          <span class="text-danger fs-6"
+            >* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</span
+          >
         </div>
 
         <div class="d-flex align-items-center mb-3">
-          <div class="form-control" style="width: 22rem">
-            <div class="d-flex align-items-center">
-              <input
-                class="radio"
-                type="radio"
-                value="1"
-                formControlName="verify"
-              />
-              <label class="form-label ms-2"> ครบถ้วน และถูกต้อง </label>
-            </div>
+          <div class="d-flex align-items-center">
+            <input type="radio" value="1" formControlName="verify" />
+            <label class="form-label ms-1"> ครบถ้วน และถูกต้อง </label>
           </div>
         </div>
 
-        <div class="d-flex align-items-center mb-3">
-          <div class="form-control" style="width: 22rem">
-            <div class="d-flex align-items-center">
-              <input
-                class="radio"
-                type="radio"
-                value="2"
-                formControlName="verify"
-              />
-              <label class="form-label ms-2"> ขอแก้ไข / เพิ่มเติม </label>
-            </div>
-          </div>
-          <div class="row w-50 ms-2">
-            <div class="col-4 text-center">วันที่ต้องการใบคำขอส่งกลับ</div>
-            <div class="col-4">
-              <input
-                class="form-control"
-                type="date"
-                id="flexCheckDefault"
-                formControlName="returnDate"
-              />
-            </div>
+        <div class="d-flex align-items-center">
+          <div class="d-flex align-items-center">
+            <input type="radio" value="2" formControlName="verify" />
+            <label class="form-label ms-1"> ขอแก้ไข / เพิ่มเติม </label>
           </div>
         </div>
 
-        <div class="d-flex align-items-center mb-3">
-          <div class="form-control" style="width: 22rem">
-            <div class="d-flex align-items-center">
-              <input
-                class="radio"
-                type="radio"
-                value="3"
-                formControlName="verify"
-              />
-              <label class="form-label ms-2"> ขาดคุณสมบัติ </label>
-            </div>
-          </div>
-
-          <div class="row w-50 ms-2">
-            <div class="col-4 text-center">หมายเหตุ / เหตุผล</div>
-            <div class="col-4">
-              <select class="form-select w-100" formControlName="reason">
-                <option selected>กรุณาเลือก</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
+        <div class="row mb-3 ms-2">
+          <div class="col-6">
+            <label class="form-label">วันที่ต้องการใบคำขอส่งกลับ</label>
+            <input
+              class="form-control"
+              type="date"
+              id="flexCheckDefault"
+              formControlName="returnDate"
+            />
           </div>
         </div>
 
-        <hr />
-
-        <div class="d-flex align-items-center mb-3">
-          <div class="box-header text-primary me-1">
-            ต้องการส่งตรวจสอบลำดับต่อไป หรือส่งเพื่อพิจารณา
-          </div>
-          <div class="text-danger">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
-        </div>
-
-        <div class="d-flex align-items-center mb-3">
-          <div class="form-control" style="width: 22rem">
-            <div class="d-flex align-items-center">
-              <input
-                class="radio"
-                type="radio"
-                value="1"
-                formControlName="forward"
-              />
-              <label class="form-label ms-2"> ส่งตรวจสอบลำดับต่อไป </label>
-            </div>
+        <div class="d-flex align-items-center">
+          <div class="d-flex align-items-center">
+            <input type="radio" value="3" formControlName="verify" />
+            <label class="form-label ms-1"> ขาดคุณสมบัติ </label>
           </div>
         </div>
 
-        <div class="d-flex align-items-center mb-3">
-          <div class="form-control" style="width: 22rem">
-            <div class="d-flex align-items-center">
-              <input
-                class="radio"
-                type="radio"
-                value="2"
-                formControlName="forward"
-              />
-              <label class="form-label ms-2">
-                ไม่ผ่านการตรวจสอบ เนื่องจากไม่ครบถ้วน / ไม่ถูกต้อง
-              </label>
-            </div>
+        <div class="row mb-3 ms-2">
+          <div class="col-6">
+            <label class="form-label">สาเหตุ</label>
+            <select class="form-select w-100" formControlName="reason">
+              <option value="null" selected disabled hidden>กรุณาเลือก</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
           </div>
         </div>
 
-        <div class="d-flex align-items-center mb-3">
-          <div class="form-control" style="width: 22rem">
-            <div class="d-flex align-items-center">
-              <input
-                class="radio"
-                type="radio"
-                value="3"
-                formControlName="forward"
-              />
-              <label class="form-label ms-2"> ส่งเรื่องพิจารณา </label>
-            </div>
-          </div>
-        </div>
-
-        <div class="d-flex align-items-center mb-3">
-          <div class="form-control" style="width: 22rem">
-            <div class="d-flex align-items-center">
-              <input
-                class="radio"
-                type="radio"
-                value="4"
-                formControlName="forward"
-              />
-              <label class="form-label ms-2"> ยกเลิก </label>
-            </div>
+        <div class="row ms-2">
+          <div class="col-6">
+            <textarea
+              class="form-control"
+              rows="3"
+              placeholder="โปรดระบุ"
+            ></textarea>
           </div>
         </div>
       </div>

@@ -30,12 +30,8 @@ export const menu: MenuConfig[] = [
         path: 'license/request',
       },
       {
-        label: 'ขอต่ออายุใบประกอบวิชาชีพ',
-        path: 'license/a',
-      },
-      {
-        label: 'ขอหนังสืออนุญาตชั่วคราว',
-        path: 'license/b',
+        label: 'ขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
+        path: 'renew-license/request',
       },
       {
         label: 'ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ',
@@ -43,11 +39,7 @@ export const menu: MenuConfig[] = [
       },
       {
         label: 'ขอใบแทนใบอนุญาตประกอบวิชาชีพ',
-        path: 'license/d',
-      },
-      {
-        label: 'ขอหนังสืออนุญาตปฎิบัติการสอน',
-        path: 'license/e',
+        path: 'substitute-license/request',
       },
       {
         label: 'ขอหนังสือรับรองความรู้',
@@ -59,15 +51,11 @@ export const menu: MenuConfig[] = [
       },
       {
         label: 'ขอคืนเงินค่าธรรมเนียม',
-        path: 'license/h',
+        path: 'refund-fee/request',
       },
       {
         label: 'ขอรับรางวัลการยกย่องเชิดชูเกียรติ',
         path: 'license/i',
-      },
-      {
-        label: '##ช่องทางชำระเงิน##',
-        path: 'license/payment-channel',
       },
     ],
   },
@@ -79,7 +67,7 @@ export const menu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/event.svg',
     label: 'กิจกรรมการพัฒนาตัวเอง',
-    path: '',
+    path: 'self-improvement/request',
   },
   {
     icon: 'assets/images/icon-sidenav/reward.svg',
@@ -110,7 +98,7 @@ export const menu: MenuConfig[] = [
       },
       {
         label: 'ข้อมูลผลการประเมินสมรรถนะ',
-        path: 'my-info/e',
+        path: 'my-info/performance-result',
       },
       {
         label: 'ประวัติการชำระเงินและใบเสร็จรับเงิน',

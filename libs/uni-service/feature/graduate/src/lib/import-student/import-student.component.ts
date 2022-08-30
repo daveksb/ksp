@@ -6,7 +6,10 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { TrainingAddressComponent } from '@ksp/uni-service/dialog';
+import {
+  StudentListSubjectComponent,
+  TrainingAddressComponent,
+} from '@ksp/uni-service/dialog';
 import { SelectItem } from 'primeng/api';
 import { User } from './user';
 import { UserService } from './user.service';
@@ -86,15 +89,21 @@ export class ImportStudentComponent implements OnInit {
     this.router.navigate(['./', 'home']);
   }
 
+  insertSubject() {
+    this.dialog.open(StudentListSubjectComponent, {
+      width: '600px',
+    });
+  }
+
   searchAddress() {
-    const dialog = this.dialog.open(TrainingAddressComponent, {
+    this.dialog.open(TrainingAddressComponent, {
       height: '900px',
-      width: '1200px',
+      width: '1000px',
     });
   }
 
   viewAdress() {
-    const dialog = this.dialog.open(FormAddressTableComponent, {
+    this.dialog.open(FormAddressTableComponent, {
       width: '900px',
     });
   }

@@ -1,7 +1,8 @@
-.container {
-  max-width: 1440px;
-  padding: 24px;
-  height: 100vh;
+.main__container {
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  background-image: url(/assets/images/BG-Information.png);
 }
 
 .content__container {

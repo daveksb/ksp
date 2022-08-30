@@ -65,14 +65,32 @@
       <ng-container matColumnDef="studentStatus">
         <th mat-header-cell *matHeaderCellDef>สถานะรายชื่อผู้เข้า</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.studentStatus }}
+          <span
+            class="rounded-pill d-flex justify-content-center"
+            [ngClass]="{
+              edit__status:
+                element.studentStatus === 'สร้าง' || 'ยื่นเรียบร้อย',
+              verify__status: element.studentStatus === 'รับข้อมูล'
+            }"
+          >
+            {{ element.studentStatus }}</span
+          >
         </td>
       </ng-container>
 
       <ng-container matColumnDef="graduateStatus">
         <th mat-header-cell *matHeaderCellDef>สถานะรายชื่อผู้สำเร็จ</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.graduateStatus }}
+          <span
+            class="rounded-pill d-flex justify-content-center"
+            [ngClass]="{
+              edit__status:
+                element.graduateStatus === 'สร้าง' || 'ยื่นเรียบร้อย',
+              verify__status: element.graduateStatus === 'รับข้อมูล'
+            }"
+          >
+            {{ element.graduateStatus }}</span
+          >
         </td>
       </ng-container>
 
@@ -86,6 +104,7 @@
         <td mat-cell *matCellDef="let element">
           <i
             role="button"
+            (click)="print()"
             class="bi bi-printer-fill text-primary fs-5 ms-3"
           ></i>
         </td>
@@ -94,10 +113,7 @@
       <ng-container matColumnDef="history">
         <th mat-header-cell *matHeaderCellDef>ประวัติ</th>
         <td mat-cell *matCellDef="let element">
-          <i
-            role="button"
-            class="bi bi-printer-fill text-primary fs-5 ms-3"
-          ></i>
+          <i role="button" (click)="history()" class="bi bi-eye text-success fs-5 ms-3"></i>
         </td>
       </ng-container>
 

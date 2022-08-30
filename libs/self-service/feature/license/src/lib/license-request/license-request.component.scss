@@ -3,12 +3,20 @@
   border-radius: 20px;
   padding: 30px 20px;
   margin: 15px 55px;
+  background: #fff;
 }
 
 .address__checkbox {
   height: 15px;
   width: 15px;
   margin-right: 5px;
+}
+
+.main__container {
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  background-image: url(/assets/images/BG-Information.png);
 }
 
 @media only screen and (max-width: 768px) {
