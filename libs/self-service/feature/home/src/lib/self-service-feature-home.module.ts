@@ -10,6 +10,7 @@ import {
   SelfServiceLicenseInfoComponent,
   SlideshowComponent,
 } from '@ksp/self-service/ui';
+import { MatMenuModule } from '@angular/material/menu';
 
 export const routes: Routes = [
   {
@@ -31,6 +32,7 @@ export const routes: Routes = [
     MatTableModule,
     SlideshowComponent,
     SelfServiceLicenseInfoComponent,
+    MatMenuModule,
     RouterModule.forChild(routes),
   ],
   declarations: [SelfServiceHomeComponent, SelfServiceHomePageComponent],

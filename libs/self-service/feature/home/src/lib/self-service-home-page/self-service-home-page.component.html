@@ -75,9 +75,37 @@
     <br />
     <div class="d-flex justify-content-between align-items-center mb-2">
       <div class="box-header">สรุปผลลัพธ์การค้นหา 5 รายการ</div>
-      <button class="btn border-primary text-primary bg-white">
+      <!-- <button class="btn border-primary text-primary bg-white">
         + สร้างใบคำขอ
-      </button>
+      </button> -->
+      <button mat-button [matMenuTriggerFor]="animals">สร้างใบคำขอ</button>
+      <mat-menu #animals="matMenu">
+        <button mat-menu-item [matMenuTriggerFor]="license">
+          ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ
+        </button>
+        <button mat-menu-item [matMenuTriggerFor]="renew">
+          ขอต่ออายุใบอนุญาตประกอบวิชาชีพ
+        </button>
+        <button mat-menu-item>ขอใบแทนใบอนุญาตประกอบวิชาชีพ</button>
+        <button mat-menu-item>ขอหนังสือรับรองความรู้</button>
+        <button mat-menu-item>ขอยื่นเทียบเคียงความรู้</button>
+        <button mat-menu-item>ขอคืนค่าธรรมเนียม</button>
+        <button mat-menu-item>ขอรับรางวัลการยกย่องเชิดชูเกียรติ</button>
+      </mat-menu>
+
+      <mat-menu #license="matMenu">
+        <button mat-menu-item>ครู</button>
+        <button mat-menu-item>ผู้บริหารสถานศึกษา</button>
+        <button mat-menu-item>ผู้บริหารการศึกษา</button>
+        <button mat-menu-item>ศึกษานิเทศก์</button>
+      </mat-menu>
+
+      <mat-menu #renew="matMenu">
+        <button mat-menu-item>ครู</button>
+        <button mat-menu-item>ผู้บริหารสถานศึกษา</button>
+        <button mat-menu-item>ผู้บริหารการศึกษา</button>
+        <button mat-menu-item>ศึกษานิเทศก์</button>
+      </mat-menu>
     </div>
 
     <div class="table">
