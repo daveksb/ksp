@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   displayName: 'school-service-feature-activity',
   preset: '../../../../jest.preset.ts',

@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   displayName: 'uni-service-feature-degree-cert',
   preset: '../../../../jest.preset.ts',

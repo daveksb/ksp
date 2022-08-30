@@ -23,6 +23,7 @@ export class BottomNavComponent {
   @Input() disableNext = false;
   @Input() disableNextMessage = 'กรุณาเลือกรายการก่อน';
   @Input() saveButtonLabel = 'บันทึก';
+  @Input() disableSaveButton = false;
   @Input() showCenterButtons = false;
   @Input() showCancelButton = true;
   @Input() showTempSaveButton = false;

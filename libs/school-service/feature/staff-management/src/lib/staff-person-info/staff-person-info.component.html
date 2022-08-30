@@ -16,7 +16,7 @@
     <div class="bg-light p-3 m-3">
       <div class="row mb-3">
         <div class="col">
-          <label class="form-label">หมายเลขบัตรประชาชน </label>
+          <label class="form-label required">หมายเลขบัตรประชาชน </label>
           <input class="form-control" type="text" formControlName="personId" />
         </div>
         <div class="col">
@@ -32,8 +32,9 @@
       </div>
 
       <ksp-form-user-info
-        formControlName="staff"
+        formControlName="generalInfo"
         [isDarkMode]="false"
+        [prefixList]="prefixList$ | async"
       ></ksp-form-user-info>
     </div>
 
@@ -59,11 +60,25 @@
         dynamicHeight="true"
       >
         <mat-tab label="ที่อยู่" class="tab-content">
-          <ksp-form-address formControlName="address1">
-            ที่อยู่ทะเบียนบ้าน </ksp-form-address
-          ><br />
+          <ksp-form-address
+            [provinces]="provinces$ | async"
+            [amphurs]="amphurs$ | async"
+            [tumbols]="tumbols$ | async"
+            formControlName="address1"
+          >
+            ที่อยู่ทะเบียนบ้าน
+          </ksp-form-address>
+
           <ksp-form-address formControlName="address2">
-            ที่อยู่ที่ติดต่อได้สะดวก
+            <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
+            <div class="d-flex align-items-center">
+              <input
+                (change)="useSameAddress($event)"
+                type="checkbox"
+                class="address__checkbox"
+              />
+              <label class="form-label ms-1">ที่อยู่ตามทะเบียนบ้าน</label>
+            </div>
           </ksp-form-address>
         </mat-tab>
 
@@ -86,7 +101,10 @@
 <div class="sticky-bottom border">
   <ksp-bottom-nav
     (nextClicked)="next()"
+    (saveClicked)="save()"
     [isFirstPage]="true"
-    [showCenterButtons]="false"
+    [showSaveButton]="true"
+    [disableSaveButton]="!form.valid"
+    [showCenterButtons]="true"
   ></ksp-bottom-nav>
 </div>

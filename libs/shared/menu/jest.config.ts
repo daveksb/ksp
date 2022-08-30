@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   displayName: 'shared-menu',
   preset: '../../../jest.preset.ts',

@@ -17,14 +17,14 @@ export class FormEducationInfoComponent
     degreeLevel: [],
     degreeName: [],
     isEducationDegree: [false],
-    branch: [],
-    educationInstitution: [],
+    major: [],
+    institution: [],
     country: [],
     admissionDate: [],
     graduateDate: [],
     grade: [],
     otherProperty: [],
-    graduateYear: [],
+    academicYear: [],
   });
 
   @Input() showGradeInput = false;
@@ -32,8 +32,7 @@ export class FormEducationInfoComponent
   @Input() showSelectDegree = false;
   @Input() showGraduateYearInput = false;
 
-
-/*   _defualtDegree = 0;
+  /*   _defualtDegree = 0;
 
   @Input()
   set defualtDegree(value: any) {

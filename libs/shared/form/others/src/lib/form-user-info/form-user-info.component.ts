@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
-import { providerFactory } from '@ksp/shared/utility';
+import { phonePattern, providerFactory } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-form-user-info',
@@ -13,6 +13,7 @@ export class FormUserInfoComponent extends KspFormBaseComponent {
   @Input() isDarkMode = false;
   @Input() showPostInput = false;
   @Input() showNationalityInput = false;
+  @Input() prefixList = null;
 
   /**
    * Dark Mode : all inputs will have gray background and form container will have white background
@@ -23,19 +24,20 @@ export class FormUserInfoComponent extends KspFormBaseComponent {
    */
 
   override form = this.fb.group({
-    prefixTh: [null],
-    nameTh: [],
-    lastnameTh: [],
-    prefixEn: [],
-    nameEn: [],
-    lastnameEn: [],
-    sex: [],
-    birthdate: [],
-    email: [],
-    contactPhone: [],
-    workplacePhone: [],
-    post: [],
+    prefixTh: ['', Validators.required],
+    firstNameTh: ['', Validators.required],
+    lastNameTh: ['', Validators.required],
+    prefixEn: ['', Validators.required],
+    firstNameEn: ['', Validators.required],
+    lastNameEn: ['', Validators.required],
+    sex: ['', Validators.required],
+    birthdate: ['', Validators.required],
+    email: ['', Validators.required],
+    contactPhone: ['', [Validators.required]],
+    //contactPhone: ['', [Validators.required, Validators.pattern(phonePattern)]],
+    workPhone: [],
     nationality: [],
+    //postCode: [],
   });
 
   constructor(private fb: FormBuilder) {

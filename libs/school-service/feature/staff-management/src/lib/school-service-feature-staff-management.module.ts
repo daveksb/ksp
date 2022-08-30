@@ -21,6 +21,7 @@ import {
   RequestHeaderInfoComponent,
 } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 export const routes: Routes = [
   {
@@ -42,6 +43,7 @@ export const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule,
     RouterModule.forChild(routes),
     MatCheckboxModule,
     ReactiveFormsModule,
