@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   displayName: 'uni-service-feature-retired',
   preset: '../../../../jest.preset.ts',

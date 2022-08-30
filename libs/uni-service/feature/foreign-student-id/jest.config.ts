@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   displayName: 'uni-service-feature-foreign-student-id',
   preset: '../../../../jest.preset.ts',

@@ -11,6 +11,9 @@ import { providerFactory } from '@ksp/shared/utility';
 })
 export class FormAddressComponent extends KspFormBaseComponent {
   @Input() isDarkMode = false;
+  @Input() provinces: any[] = [];
+  @Input() amphurs: any[] = [];
+  @Input() tumbols: any[] = [];
 
   /**
    * Dark Mode : all inputs will have gray background and form container will have white background
@@ -22,14 +25,14 @@ export class FormAddressComponent extends KspFormBaseComponent {
 
   override form = this.fb.group({
     location: [''],
-    houseNumber: [''],
-    villageNumber: [''],
-    lane: [''],
+    houseNo: [''],
+    moo: [''],
+    alley: [''],
     road: [''],
-    zipCode: [''],
-    provience: [null],
-    subDistrict: [null],
-    district: [null],
+    postCode: [''],
+    province: [null],
+    amphur: [null],
+    tumbol: [null],
   });
 
   constructor(private fb: FormBuilder) {
@@ -43,4 +46,3 @@ export class FormAddressComponent extends KspFormBaseComponent {
     );
   }
 }
-

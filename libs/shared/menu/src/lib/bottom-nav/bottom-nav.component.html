@@ -39,6 +39,7 @@
         (click)="saveClicked.emit(true)"
         type="button"
         class="btn px-0 ms-2"
+        [disabled]="disableSaveButton"
         [ngClass]="{
           'btn-primary': colorMode === 'blue',
           'btn-success': colorMode === 'green'

@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   displayName: 'e-service-ethics-accusation',
   preset: '../../../../jest.preset.ts',

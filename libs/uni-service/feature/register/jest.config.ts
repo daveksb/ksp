@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   displayName: 'uni-service-feature-register',
   preset: '../../../../jest.preset.ts',

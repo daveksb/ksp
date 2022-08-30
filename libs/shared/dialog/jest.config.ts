@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   displayName: 'shared-dialog',
   preset: '../../../jest.preset.ts',

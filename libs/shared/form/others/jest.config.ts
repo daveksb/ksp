@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   displayName: 'shared-form-others',
   preset: '../../../../jest.preset.ts',

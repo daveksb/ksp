@@ -20,7 +20,7 @@
           [class.bg-light]="isDarkMode"
           class="form-control"
           type="text"
-          formControlName="houseNumber"
+          formControlName="houseNo"
         />
       </div>
     </div>
@@ -32,7 +32,7 @@
           [class.bg-light]="isDarkMode"
           class="form-control"
           type="text"
-          formControlName="villageNumber"
+          formControlName="moo"
         />
       </div>
       <div class="col-md-6 mb-3">
@@ -41,7 +41,7 @@
           [class.bg-light]="isDarkMode"
           class="form-control"
           type="text"
-          formControlName="lane"
+          formControlName="alley"
         />
       </div>
     </div>
@@ -57,65 +57,60 @@
         />
       </div>
       <div class="col-md-6 mb-3">
-        <label class="form-label"
-          >รหัสไปรษณีย์<span class="text-danger"> *</span></label
-        >
+        <label class="form-label">รหัสไปรษณีย์</label>
         <input
           [class.bg-light]="isDarkMode"
           class="form-control"
           type="text"
-          formControlName="zipCode"
+          formControlName="postCode"
         />
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-6 mb-3">
-        <label class="form-label"
-          >จังหวัด<span class="text-danger"> *</span></label
-        >
+        <label class="form-label">จังหวัด</label>
         <select
           [class.bg-white]="!isDarkMode && mode === 'edit'"
           class="form-select"
-          formControlName="provience"
+          formControlName="province"
         >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option
+            *ngFor="let province of provinces"
+            [value]="province?.province_id"
+          >
+            {{ province?.province_name }}
+          </option>
         </select>
       </div>
       <div class="col-md-6 mb-3">
-        <label class="form-label"
-          >ตำบล<span class="text-danger"> *</span></label
-        >
+        <label class="form-label">ตำบล</label>
         <select
           [class.bg-white]="!isDarkMode && mode === 'edit'"
           class="form-select"
-          formControlName="subDistrict"
+          formControlName="tumbol"
         >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option *ngFor="let t of tumbols" [value]="t?.tambolCode">
+            {{ t?.tambolName }}
+          </option>
         </select>
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-6 mb-3">
-        <label class="form-label"
-          >อำเภอ<span class="text-danger"> *</span></label
-        >
+        <label class="form-label">อำเภอ</label>
         <select
           [class.bg-white]="!isDarkMode && mode === 'edit'"
           class="form-select"
-          formControlName="district"
+          formControlName="amphur"
         >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option *ngFor="let a of amphurs" [value]="a?.amphurCode">
+            {{ a?.amphurName }}
+          </option>
         </select>
       </div>
     </div>

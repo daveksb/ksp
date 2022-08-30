@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   displayName: 'uni-service-form',
   preset: '../../../jest.preset.ts',
