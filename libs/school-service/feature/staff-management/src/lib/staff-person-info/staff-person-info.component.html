@@ -14,25 +14,8 @@
     <hr />
 
     <div class="bg-light p-3 m-3">
-      <div class="row mb-3">
-        <div class="col">
-          <label class="form-label required">หมายเลขบัตรประชาชน </label>
-          <input class="form-control" type="text" formControlName="personId" />
-        </div>
-        <div class="col">
-          <label class="form-label"
-            >หมายเลขหนังสือเดินทาง (Passport Number)
-          </label>
-          <input
-            class="form-control"
-            type="text"
-            formControlName="passportNumber"
-          />
-        </div>
-      </div>
-
       <ksp-form-user-info
-        formControlName="generalInfo"
+        formControlName="userInfo"
         [isDarkMode]="false"
         [prefixList]="prefixList$ | async"
       ></ksp-form-user-info>
@@ -64,12 +47,12 @@
             [provinces]="provinces$ | async"
             [amphurs]="amphurs$ | async"
             [tumbols]="tumbols$ | async"
-            formControlName="address1"
+            formControlName="addr1"
           >
             ที่อยู่ทะเบียนบ้าน
           </ksp-form-address>
 
-          <ksp-form-address formControlName="address2">
+          <ksp-form-address formControlName="addr2">
             <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
             <div class="d-flex align-items-center">
               <input
@@ -84,12 +67,12 @@
 
         <mat-tab label="วุฒิทางการศึกษา">
           <ksp-form-education-info
-            formControlName="education1"
+            formControlName="edu1"
             [showSelectDegree]="true"
           ></ksp-form-education-info
           ><br />
           <ksp-form-education-info
-            formControlName="education2"
+            formControlName="edu2"
             [showSelectDegree]="true"
           ></ksp-form-education-info>
         </mat-tab>
@@ -104,7 +87,9 @@
     (saveClicked)="save()"
     [isFirstPage]="true"
     [showSaveButton]="true"
-    [disableSaveButton]="!form.valid"
+    [disableSaveButton]="false"
     [showCenterButtons]="true"
   ></ksp-bottom-nav>
 </div>
+
+<!-- [disableSaveButton]="!form.valid" -->

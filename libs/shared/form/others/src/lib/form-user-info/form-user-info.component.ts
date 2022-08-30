@@ -24,6 +24,8 @@ export class FormUserInfoComponent extends KspFormBaseComponent {
    */
 
   override form = this.fb.group({
+    idCardNo: ['', Validators.required],
+    passportNo: [],
     prefixTh: ['', Validators.required],
     firstNameTh: ['', Validators.required],
     lastNameTh: ['', Validators.required],
@@ -37,7 +39,6 @@ export class FormUserInfoComponent extends KspFormBaseComponent {
     //contactPhone: ['', [Validators.required, Validators.pattern(phonePattern)]],
     workPhone: [],
     nationality: [],
-    //postCode: [],
   });
 
   constructor(private fb: FormBuilder) {

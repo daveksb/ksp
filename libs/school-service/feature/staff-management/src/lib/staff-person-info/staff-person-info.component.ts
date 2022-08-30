@@ -20,10 +20,8 @@ export class StaffPersonInfoComponent implements OnInit {
   tumbols$!: Observable<any>;
 
   form = this.fb.group({
-    personId: ['', Validators.required],
-    passportNumber: [],
-    generalInfo: [],
-    address1: this.fb.group({
+    userInfo: [],
+    addr1: this.fb.group({
       location: [''],
       houseNo: [''],
       moo: [''],
@@ -34,7 +32,7 @@ export class StaffPersonInfoComponent implements OnInit {
       amphur: [null],
       tumbol: [null],
     }),
-    address2: this.fb.group({
+    addr2: this.fb.group({
       location: [''],
       houseNo: [''],
       moo: [''],
@@ -45,8 +43,8 @@ export class StaffPersonInfoComponent implements OnInit {
       amphur: [null],
       tumbol: [null],
     }),
-    education1: [],
-    education2: [],
+    edu1: [],
+    edu2: [],
   });
 
   constructor(
@@ -56,13 +54,13 @@ export class StaffPersonInfoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.form.controls.address1.controls.province.valueChanges.subscribe(
+    this.form.controls.addr1.controls.province.valueChanges.subscribe(
       (res: any) => {
         this.amphurs$ = this.service.getAmphurs(res);
       }
     );
 
-    this.form.controls.address1.controls.amphur.valueChanges.subscribe(
+    this.form.controls.addr1.controls.amphur.valueChanges.subscribe(
       (res: any) => {
         this.tumbols$ = this.service.getTumbols(res);
       }
@@ -75,7 +73,7 @@ export class StaffPersonInfoComponent implements OnInit {
   useSameAddress(evt: any) {
     const checked = evt.target.checked;
     if (checked) {
-      this.form.controls.address2.patchValue(this.form.controls.address1.value);
+      this.form.controls.addr2.patchValue(this.form.controls.addr1.value);
     }
   }
 
@@ -84,6 +82,12 @@ export class StaffPersonInfoComponent implements OnInit {
   }
 
   save() {
-    console.log('save success = ');
+    //console.log('form controls = ', this.form.getRawValue());
+    const formData = this.form.value;
+    console.log('formData = ', formData);
+
+    this.service.addStaff(formData).subscribe((res) => {
+      console.log('add staff result = ', res);
+    });
   }
 }
