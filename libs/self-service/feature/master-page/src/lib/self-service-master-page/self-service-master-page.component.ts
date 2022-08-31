@@ -27,7 +27,7 @@ export const menu: MenuConfig[] = [
     subMenu: [
       {
         label: 'ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ',
-        path: 'license/request',
+        path: 'license/teacher',
       },
       {
         label: 'ขอต่ออายุใบอนุญาตประกอบวิชาชีพ',

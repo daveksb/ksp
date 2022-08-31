@@ -1,0 +1,71 @@
+<div class="d-flex">
+  <div class="detail__container bg-white me-2">
+    <self-service-form-upload-image></self-service-form-upload-image>
+  </div>
+  <div class="detail__container bg-white w-100 ms-2">
+    <div class="box-header">Personal informations</div>
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">title</label>
+        <input class="form-control" type="text" />
+      </div>
+      <div class="col">
+        <label class="form-label">Last Name</label>
+        <input class="form-control" type="text" />
+      </div>
+      <div class="col">
+        <label class="form-label">First Name</label>
+        <input class="form-control" type="text" />
+      </div>
+      <div class="col">
+        <label class="form-label">Middle Name</label>
+        <input class="form-control" type="text" />
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-6">
+        <label class="form-label">Nationality</label>
+        <input class="form-control" type="text" />
+      </div>
+      <div class="col">
+        <label class="form-label">birthdate</label>
+        <input class="form-control" type="text" />
+      </div>
+      <div class="col">
+        <label class="form-label">Age</label>
+        <input class="form-control" type="text" />
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">passport</label>
+        <input class="form-control" type="text" />
+      </div>
+      <div class="col">
+        <label class="form-label">No. Passport</label>
+        <input class="form-control" type="text" />
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<div class="bg-white">
+  <mat-tab-group class="tab-group" animationDuration="0ms" [selectedIndex]="0">
+    <mat-tab label="Present Address in Thailand" class="tab-content">
+      <self-service-foreign-step-two-tab-one></self-service-foreign-step-two-tab-one>
+    </mat-tab>
+
+    <mat-tab label="work place"
+      ><self-service-foreign-step-two-tab-two></self-service-foreign-step-two-tab-two>
+    </mat-tab>
+
+    <mat-tab label="Academic Details"
+      ><self-service-foreign-step-two-tab-three></self-service-foreign-step-two-tab-three>
+      <ksp-form-attachment [groups]="academicFiles"></ksp-form-attachment>
+    </mat-tab>
+
+    <mat-tab label="Grantion Teaching Licenses"
+      ><self-service-foreign-step-two-tab-four></self-service-foreign-step-two-tab-four>
+    </mat-tab>
+  </mat-tab-group>
+</div>

@@ -1,0 +1,18 @@
+<div class="detail__container px-5">
+  <div class="box-header mb-3">
+    I wish to submit an application for a teaching license and have attached
+    herewith the following documents and evidence:
+  </div>
+  <ng-container *ngFor="let rule of rules; index as i">
+    <div class="d-flex mb-3">
+      <input
+        class="me-1"
+        style="margin-top: 0.3rem"
+        type="checkbox"
+        name="xxx"
+      />
+      <label class="form-label break__line me-3"> {{ rule }} </label>
+      <ksp-file-upload [uploadType]="'link'"></ksp-file-upload>
+    </div>
+  </ng-container>
+</div>

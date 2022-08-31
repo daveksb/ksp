@@ -21,9 +21,18 @@ import {
   PromptpayComponent,
 } from '@ksp/self-service/feature/payment';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { SelfServiceLicenseInfoComponent } from '@ksp/self-service/ui';
+import {
+  RequestStatusComponent,
+  SelfServiceLicenseInfoComponent,
+} from '@ksp/self-service/ui';
 import { PageNotFoundComponent } from '@ksp/shared/ui';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LicenseRequestSchoolManagerComponent } from './license-request-school-manager/license-request-school-manager.component';
+import { LicenseRequestEducationManagerComponent } from './license-request-education-manager/license-request-education-manager.component';
+import { LicenseRequestStudySupervisionComponent } from './license-request-study-supervision/license-request-study-supervision.component';
+import { LicenseRequestForeignComponent } from './license-request-foreign/license-request-foreign.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import { LicenseForeignAgreementComponent } from './license-foreign-agreement/license-foreign-agreement.component';
 
 export const routes: Routes = [
   {
@@ -31,8 +40,29 @@ export const routes: Routes = [
     component: SelfServiceMasterPageComponent,
     children: [
       {
-        path: 'request',
+        path: 'teacher',
         component: LicenseRequestComponent,
+      },
+      {
+        path: 'agreement',
+        component: LicenseForeignAgreementComponent,
+      },
+
+      {
+        path: 'foreign-teacher',
+        component: LicenseRequestForeignComponent,
+      },
+      {
+        path: 'school-manager',
+        component: LicenseRequestSchoolManagerComponent,
+      },
+      {
+        path: 'education-manager',
+        component: LicenseRequestEducationManagerComponent,
+      },
+      {
+        path: 'study-supervision',
+        component: LicenseRequestStudySupervisionComponent,
       },
       {
         path: 'edit',
@@ -70,7 +100,24 @@ export const routes: Routes = [
     ReactiveFormsModule,
     FormsModule,
     FormUploadImageComponent,
+    MatStepperModule,
+    RequestStatusComponent,
   ],
-  declarations: [LicenseRequestComponent, LicenseEditComponent],
+  declarations: [
+    LicenseRequestComponent,
+    LicenseEditComponent,
+    LicenseRequestSchoolManagerComponent,
+    LicenseRequestEducationManagerComponent,
+    LicenseRequestStudySupervisionComponent,
+    LicenseRequestForeignComponent,
+    LicenseForeignAgreementComponent,
+  ],
+  exports: [
+    LicenseRequestSchoolManagerComponent,
+    LicenseRequestEducationManagerComponent,
+    LicenseRequestStudySupervisionComponent,
+    LicenseRequestForeignComponent,
+    LicenseForeignAgreementComponent,
+  ],
 })
 export class SelfServiceFeatureLicenseModule {}

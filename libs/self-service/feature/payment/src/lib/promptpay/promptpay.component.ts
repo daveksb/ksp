@@ -23,7 +23,7 @@ export class PromptpayComponent implements OnInit {
 
       completeDialog.componentInstance.completed.subscribe((res) => {
         if (res) {
-          this.router.navigate(['/', 'license', 'request']);
+          this.router.navigate(['/', 'license', 'teacher']);
         }
       });
     }, 5000);
