@@ -24,20 +24,23 @@ export class FormUserInfoComponent extends KspFormBaseComponent {
    */
 
   override form = this.fb.group({
-    prefixTh: ['', Validators.required],
-    firstNameTh: ['', Validators.required],
-    lastNameTh: ['', Validators.required],
-    prefixEn: ['', Validators.required],
-    firstNameEn: ['', Validators.required],
-    lastNameEn: ['', Validators.required],
-    sex: ['', Validators.required],
-    birthdate: ['', Validators.required],
-    email: ['', Validators.required],
-    contactPhone: ['', [Validators.required]],
-    //contactPhone: ['', [Validators.required, Validators.pattern(phonePattern)]],
+    idCardNo: ['', Validators.required],
+    passportNo: [],
+    prefixTh: [null, Validators.required],
+    firstNameTh: [null, Validators.required],
+    lastNameTh: [null, Validators.required],
+    prefixEn: [null, Validators.required],
+    firstNameEn: [null, Validators.required],
+    lastNameEn: [null, Validators.required],
+    sex: [null, Validators.required],
+    birthDate: [null, Validators.required],
+    email: [null, Validators.required],
+    contactPhone: [null, [Validators.required]],
+    //contactPhone: [null, [Validators.required, Validators.pattern(phonePattern)]],
     workPhone: [],
-    nationality: [],
-    //postCode: [],
+    nationality: [null],
+    schoolId: [null],
+    createDate: [null],
   });
 
   constructor(private fb: FormBuilder) {

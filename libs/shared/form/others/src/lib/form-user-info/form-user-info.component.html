@@ -1,4 +1,26 @@
 <form [formGroup]="form">
+  <input
+    class="form-control"
+    style="display: none"
+    formControlName="schoolId"
+  />
+  <input
+    class="form-control"
+    style="display: none"
+    formControlName="createDate"
+  />
+
+  <div class="row mb-3">
+    <div class="col">
+      <label class="form-label required">หมายเลขบัตรประชาชน </label>
+      <input class="form-control" type="text" formControlName="idCardNo" />
+    </div>
+    <div class="col">
+      <label class="form-label">หมายเลขหนังสือเดินทาง (Passport Number) </label>
+      <input class="form-control" type="text" formControlName="passportNo" />
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-md mb-3">
       <label class="form-label required">คำนำหน้าชื่อภาษาไทย</label>
@@ -91,7 +113,7 @@
         class="form-control"
         type="date"
         [class.bg-light]="isDarkMode"
-        formControlName="birthdate"
+        formControlName="birthDate"
       />
     </div>
   </div>
