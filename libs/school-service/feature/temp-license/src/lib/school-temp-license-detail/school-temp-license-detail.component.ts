@@ -17,9 +17,9 @@ import { LicenseDetailService } from './school-temp-license-detail.service';
 })
 export class SchoolTempLicenseDetailComponent implements OnInit {
   form = this.fb.group({
-    personSearch: [],
-    address1: [],
-    address2: [],
+    userInfo: [],
+    addr1: [],
+    addr2: [],
     schoolAddress: [],
     education1: [],
     education2: [],
@@ -58,10 +58,14 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     });
   }
 
+  searchStaff(idCard: string) {
+    console.log('idCard = ', idCard);
+  }
+
   useSameAddress(evt: any) {
     const checked = evt.target.checked;
     if (checked) {
-      this.form.controls.address2.patchValue(this.form.controls.address1.value);
+      this.form.controls.addr2.patchValue(this.form.controls.addr1.value);
     }
   }
 

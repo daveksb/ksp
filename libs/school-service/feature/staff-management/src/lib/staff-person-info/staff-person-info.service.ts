@@ -1,15 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, shareReplay } from 'rxjs';
+//import { environment } from '';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StaffPersonInfoService {
   private serviceUrl = 'https://kspapi.oceanicnetwork.net/ksp';
-
-  token =
-    'abcdjbtswWVuiFxOlK4aHOK6AvcDlK6bBfCnQEHvanYkhuWAWQS6WQx6n4uVmZTxCYi4JEJ9ysLo2h6WLvjHaeHpAx2C3bt3LGjq';
+  token = '';
 
   constructor(private http: HttpClient) {}
 
