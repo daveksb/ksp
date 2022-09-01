@@ -30,9 +30,9 @@ export class FormAddressComponent extends KspFormBaseComponent {
     alley: [''],
     road: [''],
     postCode: [''],
-    province: [null],
-    amphur: [null],
-    tumbol: [null],
+    province: [''],
+    amphur: [''],
+    tumbol: [''],
   });
 
   constructor(private fb: FormBuilder) {

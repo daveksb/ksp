@@ -21,7 +21,7 @@ export class StaffPersonInfoService {
     return this.http.post(
       `${this.serviceUrl}/kspschoolregister/schregisterinsert`,
       {
-        payload,
+        ...payload,
         tokenkey: this.token,
       }
     );

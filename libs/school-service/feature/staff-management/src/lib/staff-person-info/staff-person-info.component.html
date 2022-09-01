@@ -44,15 +44,20 @@
       >
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address
-            [provinces]="provinces$ | async"
-            [amphurs]="amphurs$ | async"
-            [tumbols]="tumbols$ | async"
+            [provinces]="provinces1$ | async"
+            [amphurs]="amphurs1$ | async"
+            [tumbols]="tumbols1$ | async"
             formControlName="addr1"
           >
             ที่อยู่ทะเบียนบ้าน
           </ksp-form-address>
 
-          <ksp-form-address formControlName="addr2">
+          <ksp-form-address
+            [provinces]="provinces2$ | async"
+            [amphurs]="amphurs2$ | async"
+            [tumbols]="tumbols2$ | async"
+            formControlName="addr2"
+          >
             <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
             <div class="d-flex align-items-center">
               <input
@@ -87,9 +92,7 @@
     (saveClicked)="save()"
     [isFirstPage]="true"
     [showSaveButton]="true"
-    [disableSaveButton]="false"
+    [disableSaveButton]="!form.valid"
     [showCenterButtons]="true"
   ></ksp-bottom-nav>
 </div>
-
-<!-- [disableSaveButton]="!form.valid" -->

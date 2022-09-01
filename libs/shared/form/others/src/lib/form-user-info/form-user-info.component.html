@@ -1,4 +1,15 @@
 <form [formGroup]="form">
+  <input
+    class="form-control"
+    style="display: none"
+    formControlName="schoolId"
+  />
+  <input
+    class="form-control"
+    style="display: none"
+    formControlName="createDate"
+  />
+
   <div class="row mb-3">
     <div class="col">
       <label class="form-label required">หมายเลขบัตรประชาชน </label>
@@ -102,7 +113,7 @@
         class="form-control"
         type="date"
         [class.bg-light]="isDarkMode"
-        formControlName="birthdate"
+        formControlName="birthDate"
       />
     </div>
   </div>
