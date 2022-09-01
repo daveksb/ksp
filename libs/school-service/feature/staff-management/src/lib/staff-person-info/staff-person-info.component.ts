@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddressService, GeneralInfoService } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
@@ -26,8 +26,8 @@ export class StaffPersonInfoComponent implements OnInit {
   prefixList$!: Observable<any>;
 
   form = this.fb.group({
-    userInfo: this.fb.group({
-      idCardNo: [''],
+    userInfo: [] /* this.fb.group({
+      idCardNo: [null],
       passportNo: [''],
       prefixTh: [''],
       firstNameTh: [''],
@@ -43,24 +43,24 @@ export class StaffPersonInfoComponent implements OnInit {
       nationality: [null],
       schoolId: ['1234567'],
       createDate: ['2022-08-22T10:17:01'],
-    }),
+    }), */,
     addr1: this.fb.group({
-      location: ['36'],
-      houseNo: ['36'],
-      moo: ['36'],
-      alley: ['36'],
-      road: ['36'],
+      location: ['ทดสอบ'],
+      houseNo: ['345'],
+      moo: ['2'],
+      alley: ['ทดสอบ'],
+      road: ['ทดสอบ'],
       postCode: ['36'],
       province: ['33'],
       amphur: ['34'],
       tumbol: ['35'],
     }),
     addr2: this.fb.group({
-      location: ['36'],
-      houseNo: ['36'],
-      moo: ['36'],
-      alley: ['36'],
-      road: ['36'],
+      location: ['ทดสอบ'],
+      houseNo: ['123'],
+      moo: ['1'],
+      alley: ['ทดสอบ'],
+      road: ['ทดสอบ'],
       postCode: ['36'],
       province: ['33'],
       amphur: ['34'],
@@ -75,7 +75,7 @@ export class StaffPersonInfoComponent implements OnInit {
       country: ['36'],
       admissionDate: ['2022-08-22T10:17:01'],
       graduateDate: ['2022-08-22T10:17:01'],
-      grade: ['3.1'],
+      grade: ['3'],
       otherProperty: ['sample'],
       academicYear: ['sample'],
     }),
@@ -117,9 +117,9 @@ export class StaffPersonInfoComponent implements OnInit {
     });
 
     this.getAddList();
-    this.form.valueChanges.subscribe((res) => {
-      console.log('form value = ', res);
-    });
+    /* this.form.valueChanges.subscribe((res) => {
+      //console.log('form valid = ', this.form.valid);
+    }); */
   }
 
   useSameAddress(evt: any) {
@@ -136,13 +136,10 @@ export class StaffPersonInfoComponent implements OnInit {
   }
 
   save() {
-    const formData = this.form.getRawValue();
-
-    /*     formData.userInfo = {
-      ...formData.userInfo,
-      ...{ schoolId: '1010720030', createDate: null },
-    };
-  */
+    const formData: any = this.form.getRawValue();
+    formData.userInfo.schoolId = '1234567';
+    formData.userInfo.nationality = 'TH';
+    formData.userInfo.createDate = new Date().toISOString().split('T')[0];
 
     console.log('formData = ', formData);
     this.staffInfoService.addStaff(formData).subscribe((res) => {

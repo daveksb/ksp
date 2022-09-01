@@ -100,7 +100,7 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
   }
 
   backToListPage() {
-    this.router.navigate(['/', 'temp-license', 'list']);
+    this.router.navigate(['/temp-license', 'list']);
   }
 
   save() {

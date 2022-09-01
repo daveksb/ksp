@@ -134,6 +134,9 @@
     [showCenterButtons]="true"
     [showCancelButton]="true"
     [showTempSaveButton]="true"
-    [showSaveButton]="selectedTabIndex === 5"
+    [showSaveButton]="true"
+    [saveButtonLabel]="'ส่งใบคำขอ'"
+    [disableSaveButton]="!form.valid"
   ></ksp-bottom-nav>
+  <!-- [showSaveButton]="selectedTabIndex === 5" -->
 </div>
