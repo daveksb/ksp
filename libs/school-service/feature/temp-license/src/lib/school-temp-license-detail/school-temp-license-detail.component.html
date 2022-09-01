@@ -44,6 +44,7 @@
         </div>
         <ksp-form-user-info
           [isDarkMode]="false"
+          [prefixList]="prefixList$ | async"
           formControlName="userInfo"
         ></ksp-form-user-info>
       </div>

@@ -8183,6 +8183,24 @@
         }
       ]
     },
+    "shared-service": {
+      "projectType": "library",
+      "root": "libs/shared/service",
+      "sourceRoot": "libs/shared/service/src",
+      "prefix": "ksp",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/service/**/*.ts",
+              "libs/shared/service/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "shared-ui": {
       "root": "libs/shared/ui",
       "$schema": "../../../node_modules/nx/schemas/project-schema.json",

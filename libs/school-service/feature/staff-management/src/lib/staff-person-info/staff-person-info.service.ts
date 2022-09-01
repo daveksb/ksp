@@ -24,42 +24,6 @@ export class StaffPersonInfoService {
     );
   }
 
-  getCountry(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/kspmasterdata/country`).pipe(
-      map((data: any) => data.datareturn),
-      shareReplay()
-    );
-  }
-
-  getPrefix(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/kspmasterdata/nameprefix`).pipe(
-      map((data: any) => data.datareturn),
-      shareReplay()
-    );
-  }
-
-  getProvinces(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/kspmasterdata/province`).pipe(
-      map((data: any) => data.datareturn),
-      shareReplay()
-    );
-  }
-
-  getAmphurs(pid: number): Observable<any> {
-    return this.http
-      .get(`${environment.apiUrl}/kspmasterdata/amphur?provinceId=${pid}`)
-      .pipe(
-        map((data: any) => data.datareturn),
-        shareReplay()
-      );
-  }
-
-  getTumbols(aid: number): Observable<any> {
-    return this.http
-      .get(`${environment.apiUrl}/kspmasterdata/tambol?amphurCode=${aid}`)
-      .pipe(map((data: any) => data.datareturn));
-  }
-
   getStaffTypes(): Observable<any> {
     return this.http
       .get(`${environment.apiUrl}/kspmasterdata/schoolstafftype`)

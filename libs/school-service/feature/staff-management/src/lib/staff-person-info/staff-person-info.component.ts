@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AddressService, GeneralInfoService } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 import { StaffPersonInfoService } from './staff-person-info.service';
 
@@ -97,7 +98,9 @@ export class StaffPersonInfoComponent implements OnInit {
     private router: Router,
     private activatedroute: ActivatedRoute,
     private fb: FormBuilder,
-    private service: StaffPersonInfoService
+    private staffInfoService: StaffPersonInfoService,
+    private addressService: AddressService,
+    private generalInfoService: GeneralInfoService
   ) {}
 
   get addr1() {
@@ -142,7 +145,7 @@ export class StaffPersonInfoComponent implements OnInit {
   */
 
     console.log('formData = ', formData);
-    this.service.addStaff(formData).subscribe((res) => {
+    this.staffInfoService.addStaff(formData).subscribe((res) => {
       console.log('add staff result = ', res);
       this.router.navigate(['/staff-management', 'staff-person-info', res.id]);
     });
@@ -150,23 +153,23 @@ export class StaffPersonInfoComponent implements OnInit {
 
   getAddList() {
     this.addr1.province.valueChanges.subscribe((res: any) => {
-      this.amphurs1$ = this.service.getAmphurs(res);
+      this.amphurs1$ = this.addressService.getAmphurs(res);
     });
 
     this.addr1.amphur.valueChanges.subscribe((res: any) => {
-      this.tumbols1$ = this.service.getTumbols(res);
+      this.tumbols1$ = this.addressService.getTumbols(res);
     });
 
     this.addr2.province.valueChanges.subscribe((res: any) => {
-      this.amphurs2$ = this.service.getAmphurs(res);
+      this.amphurs2$ = this.addressService.getAmphurs(res);
     });
 
     this.addr2.amphur.valueChanges.subscribe((res: any) => {
-      this.tumbols2$ = this.service.getTumbols(res);
+      this.tumbols2$ = this.addressService.getTumbols(res);
     });
 
-    this.prefixList$ = this.service.getPrefix();
-    this.provinces$ = this.service.getProvinces();
-    this.countries$ = this.service.getCountry();
+    this.prefixList$ = this.generalInfoService.getPrefix();
+    this.provinces$ = this.addressService.getProvinces();
+    this.countries$ = this.addressService.getCountry();
   }
 }

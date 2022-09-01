@@ -7,7 +7,9 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
+import { GeneralInfoService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Observable } from 'rxjs';
 import { TempLicenseService } from '../temp-license.service';
 import { LicenseDetailService } from './school-temp-license-detail.service';
 
@@ -39,13 +41,16 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
   reasonInfo: string[] = [];
   evidenceFiles: string[] = [];
 
+  prefixList$!: Observable<any>;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private fb: FormBuilder,
     private service: LicenseDetailService,
-    private tempLicenseService: TempLicenseService
+    private tempLicenseService: TempLicenseService,
+    private generalInfoService: GeneralInfoService
   ) {}
 
   ngOnInit(): void {
@@ -57,6 +62,8 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     this.updateHeaderLabel();
     /* this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
     }); */
+
+    this.prefixList$ = this.generalInfoService.getPrefix();
   }
 
   searchStaff(idCard: string) {
