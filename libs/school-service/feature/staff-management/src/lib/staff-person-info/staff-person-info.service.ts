@@ -35,9 +35,10 @@ export class StaffPersonInfoService {
   }
 
   getPrefix(): Observable<any> {
-    return this.http
-      .get(`${this.serviceUrl}/kspmasterdata/nameprefix`)
-      .pipe(map((data: any) => data.datareturn));
+    return this.http.get(`${this.serviceUrl}/kspmasterdata/nameprefix`).pipe(
+      map((data: any) => data.datareturn),
+      shareReplay()
+    );
   }
 
   getProvinces(): Observable<any> {
@@ -50,7 +51,10 @@ export class StaffPersonInfoService {
   getAmphurs(pid: number): Observable<any> {
     return this.http
       .get(`${this.serviceUrl}/kspmasterdata/amphur?provinceId=${pid}`)
-      .pipe(map((data: any) => data.datareturn));
+      .pipe(
+        map((data: any) => data.datareturn),
+        shareReplay()
+      );
   }
 
   getTumbols(aid: number): Observable<any> {
@@ -68,12 +72,18 @@ export class StaffPersonInfoService {
   getPositionTypes(): Observable<any> {
     return this.http
       .get(`${this.serviceUrl}/kspmasterdata/schoolpositiontype`)
-      .pipe(map((data: any) => data.datareturn));
+      .pipe(
+        map((data: any) => data.datareturn),
+        shareReplay()
+      );
   }
 
   getAcademicStandingTypes(): Observable<any> {
     return this.http
       .get(`${this.serviceUrl}/kspmasterdata/schoolacademicstandingtype`)
-      .pipe(map((data: any) => data.datareturn));
+      .pipe(
+        map((data: any) => data.datareturn),
+        shareReplay()
+      );
   }
 }

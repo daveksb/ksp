@@ -44,7 +44,7 @@
       >
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address
-            [provinces]="provinces1$ | async"
+            [provinces]="provinces$ | async"
             [amphurs]="amphurs1$ | async"
             [tumbols]="tumbols1$ | async"
             formControlName="addr1"
@@ -53,7 +53,7 @@
           </ksp-form-address>
 
           <ksp-form-address
-            [provinces]="provinces2$ | async"
+            [provinces]="provinces$ | async"
             [amphurs]="amphurs2$ | async"
             [tumbols]="tumbols2$ | async"
             formControlName="addr2"

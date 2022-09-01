@@ -16,14 +16,13 @@ export class StaffPersonInfoComponent implements OnInit {
     'ใบอนุญาตประกอบวิชาชีพ - ผู้บริหารสถานศึกษา',
   ];
 
-  prefixList$!: Observable<any>;
-  provinces1$!: Observable<any>;
-  provinces2$!: Observable<any>;
+  countries$!: Observable<any>;
+  provinces$!: Observable<any>;
   amphurs1$!: Observable<any>;
   tumbols1$!: Observable<any>;
   amphurs2$!: Observable<any>;
   tumbols2$!: Observable<any>;
-  countries$!: Observable<any>;
+  prefixList$!: Observable<any>;
 
   form = this.fb.group({
     userInfo: this.fb.group({
@@ -167,8 +166,7 @@ export class StaffPersonInfoComponent implements OnInit {
     });
 
     this.prefixList$ = this.service.getPrefix();
-    this.provinces1$ = this.service.getProvinces();
-    this.provinces2$ = this.service.getProvinces();
+    this.provinces$ = this.service.getProvinces();
     this.countries$ = this.service.getCountry();
   }
 }
