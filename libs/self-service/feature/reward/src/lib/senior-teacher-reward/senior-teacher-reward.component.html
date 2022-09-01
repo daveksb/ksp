@@ -1,0 +1,77 @@
+<ksp-top-nav><span header>รางวัลคุรุสภา</span></ksp-top-nav>
+
+<div class="full-width-2 bg-light">
+  <self-service-request-status></self-service-request-status>
+
+  <div class="m-4 bg-white p-3">
+    <div class="fs-5 text-black">ข้อมูลขอรางวัลคุรุสภา</div>
+    <ksp-form-user-info [isDarkMode]="true"></ksp-form-user-info>
+  </div>
+
+  <div class="pt-3 pb-1 ps-3 ps-md-5 pe-3 pe-md-5">
+    <mat-tab-group
+      class="tab-group"
+      animationDuration="0ms"
+      [selectedIndex]="0"
+    >
+      <mat-tab label="ที่อยู่" class="tab-content">
+        <ksp-form-address [isDarkMode]="true">
+          <span>ที่อยู่ที่สามารถติดต่อได้</span>
+        </ksp-form-address>
+        <hr />
+        <div class="box-header">สถานที่ทำงาน</div>
+        <self-service-form-user-workplace></self-service-form-user-workplace>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">โทรศัพท์</label>
+            <input class="form-control" type="text" />
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">โทรสาร</label>
+            <input class="form-control" type="text" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">อีเมล</label>
+            <input class="form-control" type="text" />
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">เว็บไซต์</label>
+            <input class="form-control" type="text" />
+          </div>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="ข้อมูลครูอาวุโส">
+        <ksp-senior-teacher-info></ksp-senior-teacher-info>
+      </mat-tab>
+
+      <mat-tab label="ข้อมูลประกอบวิชาชีพ">
+        <ksp-senior-teacher-career></ksp-senior-teacher-career>
+      </mat-tab>
+
+      <mat-tab label="ข้อมูลผู้ขอรับเงินช่วยเหลือ">
+        <ksp-senior-teacher-subsidy></ksp-senior-teacher-subsidy>
+      </mat-tab>
+
+      <mat-tab label="เอกสารประกอบ">
+        <ksp-form-attachment></ksp-form-attachment>
+      </mat-tab>
+    </mat-tab-group>
+
+    <div class="fs-6 text-danger mt-2">
+      *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
+      โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
+    </div>
+
+    <div class="d-flex justify-content-center mt-3 mb-3">
+      <button type="button" class="btn border-primary text-primary bg-white">
+        บันทึกชั่วคราว
+      </button>
+      <button type="button" class="ms-3 btn btn-primary">บันทึกและยื่น</button>
+    </div>
+  </div>
+</div>

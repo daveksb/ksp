@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormUploadImageComponent } from './form-upload-image/form-upload-image.component';
-
 import { FormUserEducationComponent } from './form-user-education/form-user-education.component';
 import { FormUserExperienceComponent } from './form-user-experience/form-user-experience.component';
 import { FormUserPerformanceComponent } from './form-user-performance/form-user-performance.component';

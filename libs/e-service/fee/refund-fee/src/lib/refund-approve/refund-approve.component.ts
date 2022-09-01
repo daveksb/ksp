@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ksp-refund-approve',
@@ -6,7 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./refund-approve.component.scss'],
 })
 export class RefundApproveComponent implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
+
+  back() {
+    this.router.navigate(['/', 'refund', 'detail']);
+  }
+
+  cancel() {
+    this.router.navigate(['/', 'refund', 'list']);
+  }
 
   ngOnInit(): void {}
 }

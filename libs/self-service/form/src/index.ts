@@ -21,3 +21,4 @@ export * from './lib/standard-working-teacher/standard-working-teacher.component
 export * from './lib/standard-working-non-teacher/standard-working-non-teacher.component';
 
 export * from './lib/substitute-objective/substitute-objective.component';
+

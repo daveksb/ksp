@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ksp-refund-detail',
@@ -6,7 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./refund-detail.component.scss'],
 })
 export class RefundDetailComponent implements OnInit {
-  constructor() {}
+  refundInfo = ['1.สำเนาวุฒิการศึกษา'];
+  choices = ['ครบถ้วน และถูกต้อง', 'ไม่ครบถ้วน และไม่ถูกต้อง'];
+
+  constructor(private router: Router) {}
+
+  nextPage() {
+    this.router.navigate(['/', 'refund', 'approve']);
+  }
+
+  cancel() {
+    this.router.navigate(['/', 'refund', 'list']);
+  }
 
   ngOnInit(): void {}
 }

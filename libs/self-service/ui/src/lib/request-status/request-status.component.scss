@@ -1,17 +1,16 @@
 .content__detail {
-  margin: 5px 20px;
+  padding: 5px 20px;
 }
 
 .box__header {
   font-size: 20px;
-  margin: 5px 0;
 }
 
 .box__container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-column-gap: 24px;
-  background: #f6f6f6;
+  background: #fff;
   border-radius: 20px;
   padding: 24px 60px;
 }
