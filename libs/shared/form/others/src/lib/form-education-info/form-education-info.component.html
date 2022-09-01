@@ -47,9 +47,9 @@
         <label class="form-label">ประเทศ</label>
         <select class="form-select" formControlName="country">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option *ngFor="let c of countries" [value]="c?.countryNo">
+            {{ c?.countryN }}
+          </option>
         </select>
       </div>
     </div>

@@ -21,7 +21,7 @@ import {
   RequestHeaderInfoComponent,
 } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 export const routes: Routes = [
   {
@@ -32,6 +32,7 @@ export const routes: Routes = [
       { path: 'list', component: StaffListComponent },
       { path: 'license-search', component: LicenseSearchComponent },
       { path: 'staff-person-info', component: StaffPersonInfoComponent },
+      { path: 'staff-person-info/:id', component: StaffPersonInfoComponent },
       {
         path: 'staff-teaching-info',
         component: AddStaffTeachingInfoComponent,

@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { StaffManagementService } from '../staff-management.service';
 
 @Component({
   selector: 'school-service-staff-list',
   templateUrl: './staff-list.component.html',
   styleUrls: ['./staff-list.component.scss'],
 })
-export class StaffListComponent {
+export class StaffListComponent implements OnInit {
   form = this.fb.group({
     staffSearch: [],
   });
@@ -28,7 +29,18 @@ export class StaffListComponent {
   ];
   dataSource = new MatTableDataSource<staffInfo>();
 
-  constructor(private router: Router, private fb: FormBuilder) {}
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private service: StaffManagementService
+  ) {}
+
+  ngOnInit(): void {
+    console.log('ssss = ');
+    this.service.getStaffs().subscribe((res) => {
+      console.log('res = ', res);
+    });
+  }
 
   search() {
     this.dataSource.data = data;
@@ -39,11 +51,11 @@ export class StaffListComponent {
   }
 
   goToDetail() {
-    this.router.navigate(['./', 'staff-management', 'license-search']);
+    this.router.navigate(['/staff-management', 'license-search']);
   }
 
   addStaff() {
-    this.router.navigate(['./', 'staff-management', 'staff-person-info']);
+    this.router.navigate(['/staff-management', 'staff-person-info']);
   }
 }
 
