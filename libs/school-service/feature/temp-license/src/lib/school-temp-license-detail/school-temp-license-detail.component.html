@@ -29,12 +29,22 @@
               class="form-control form-search"
               type="text"
               placeholder="หมายเลขบัตรประชาชนจำนวน 13 หลัก"
+              #idcard
             />
+          </div>
+          <div class="col-3 mt-4">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="searchStaff(idcard.value)"
+            >
+              ค้นหา
+            </button>
           </div>
         </div>
         <ksp-form-user-info
           [isDarkMode]="false"
-          formControlName="personSearch"
+          formControlName="userInfo"
         ></ksp-form-user-info>
       </div>
     </div>
@@ -46,10 +56,10 @@
         selectedIndex="0"
       >
         <mat-tab label="ที่อยู่" class="tab-content">
-          <ksp-form-address formControlName="address1"
+          <ksp-form-address formControlName="addr1"
             >ที่อยู่ทะเบียนบ้าน</ksp-form-address
           ><br />
-          <ksp-form-address formControlName="address2"
+          <ksp-form-address formControlName="addr2"
             >ที่อยู่ที่ติดต่อได้สะดวก
             <div class="d-flex align-items-center">
               <input

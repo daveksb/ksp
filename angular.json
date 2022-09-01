@@ -6296,6 +6296,24 @@
         }
       ]
     },
+    "shared-environment": {
+      "projectType": "library",
+      "root": "libs/shared/environment",
+      "sourceRoot": "libs/shared/environment/src",
+      "prefix": "ksp",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/environment/**/*.ts",
+              "libs/shared/environment/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "shared-form-degree-cert-step-one": {
       "root": "libs/shared/form/degree-cert/step-one",
       "projectType": "library",

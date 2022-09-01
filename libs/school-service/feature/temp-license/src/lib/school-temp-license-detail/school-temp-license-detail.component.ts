@@ -8,6 +8,7 @@ import {
 } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { TempLicenseService } from '../temp-license.service';
 import { LicenseDetailService } from './school-temp-license-detail.service';
 
 @UntilDestroy()
@@ -17,9 +18,9 @@ import { LicenseDetailService } from './school-temp-license-detail.service';
 })
 export class SchoolTempLicenseDetailComponent implements OnInit {
   form = this.fb.group({
-    personSearch: [],
-    address1: [],
-    address2: [],
+    userInfo: [],
+    addr1: [],
+    addr2: [],
     schoolAddress: [],
     education1: [],
     education2: [],
@@ -43,7 +44,8 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private service: LicenseDetailService
+    private service: LicenseDetailService,
+    private tempLicenseService: TempLicenseService
   ) {}
 
   ngOnInit(): void {
@@ -58,10 +60,16 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     });
   }
 
+  searchStaff(idCard: string) {
+    this.tempLicenseService.searchIdCard('1234567', idCard).subscribe((res) => {
+      console.log('search result = ', res);
+    });
+  }
+
   useSameAddress(evt: any) {
     const checked = evt.target.checked;
     if (checked) {
-      this.form.controls.address2.patchValue(this.form.controls.address1.value);
+      this.form.controls.addr2.patchValue(this.form.controls.addr1.value);
     }
   }
 
