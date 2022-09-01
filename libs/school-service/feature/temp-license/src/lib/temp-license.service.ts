@@ -1,10 +1,17 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '@ksp/shared/environment';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TempLicenseService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  //https://kspapi.oceanicnetwork.net/ksp/kspschoolregister/schstaffsearchidcardno?idCardNo=1&schoolId=14&tokenkey=abcdjbtswWVuiFxOlK4aHOK6AvcDlK6bBfCnQEHvanYkhuWAWQS6WQx6n4uVmZTxCYi4JEJ9ysLo2h6WLvjHaeHpAx2C3bt3LGjqidCardNo=1&schoolId=14&tokenkey=abcdjbtswWVuiFxOlK4aHOK6AvcDlK6bBfCnQEHvanYkhuWAWQS6WQx6n4uVmZTxCYi4JEJ9ysLo2h6WLvjHaeHpAx2C3bt3LGjq
+  searchIdCard(schoolId: string, idCard: string): Observable<any> {
+    return this.http.get(
+      `${environment.apiUrl}/kspschoolregister/schstaffsearchidcardno?idCardNo=${idCard}&schoolId=${schoolId}&tokenkey=${environment.token}`
+    );
+  }
 }

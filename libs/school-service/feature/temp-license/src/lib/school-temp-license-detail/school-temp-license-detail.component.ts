@@ -8,6 +8,7 @@ import {
 } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { TempLicenseService } from '../temp-license.service';
 import { LicenseDetailService } from './school-temp-license-detail.service';
 
 @UntilDestroy()
@@ -43,7 +44,8 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private service: LicenseDetailService
+    private service: LicenseDetailService,
+    private tempLicenseService: TempLicenseService
   ) {}
 
   ngOnInit(): void {
@@ -59,7 +61,9 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
   }
 
   searchStaff(idCard: string) {
-    console.log('idCard = ', idCard);
+    this.tempLicenseService.searchIdCard('1234567', idCard).subscribe((res) => {
+      console.log('search result = ', res);
+    });
   }
 
   useSameAddress(evt: any) {
