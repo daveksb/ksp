@@ -22,8 +22,8 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     addr1: [],
     addr2: [],
     schoolAddress: [],
-    education1: [],
-    education2: [],
+    edu1: [],
+    edu2: [],
     teaching: [],
     reason: [],
   });
@@ -55,14 +55,17 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     this.evidenceFiles = this.service.evidenceFiles;
 
     this.updateHeaderLabel();
-    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      //console.log('res = ', res);
-    });
+    /* this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
+    }); */
   }
 
   searchStaff(idCard: string) {
     this.tempLicenseService.searchIdCard('1234567', idCard).subscribe((res) => {
-      console.log('search result = ', res);
+      res.prefixTh = '1';
+      const { id, ...searchResult } = res;
+      // remove id from object
+      console.log('search result = ', searchResult);
+      this.form.controls.userInfo.patchValue(searchResult);
     });
   }
 
