@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, Observable, shareReplay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +27,13 @@ export class StaffPersonInfoService {
     );
   }
 
+  getCountry(): Observable<any> {
+    return this.http.get(`${this.serviceUrl}/kspmasterdata/country`).pipe(
+      map((data: any) => data.datareturn),
+      shareReplay()
+    );
+  }
+
   getPrefix(): Observable<any> {
     return this.http
       .get(`${this.serviceUrl}/kspmasterdata/nameprefix`)
@@ -34,9 +41,10 @@ export class StaffPersonInfoService {
   }
 
   getProvinces(): Observable<any> {
-    return this.http
-      .get(`${this.serviceUrl}/kspmasterdata/province`)
-      .pipe(map((data: any) => data.datareturn));
+    return this.http.get(`${this.serviceUrl}/kspmasterdata/province`).pipe(
+      map((data: any) => data.datareturn),
+      shareReplay()
+    );
   }
 
   getAmphurs(pid: number): Observable<any> {
