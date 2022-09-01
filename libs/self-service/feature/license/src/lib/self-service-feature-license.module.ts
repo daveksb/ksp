@@ -33,6 +33,7 @@ import { LicenseRequestStudySupervisionComponent } from './license-request-study
 import { LicenseRequestForeignComponent } from './license-request-foreign/license-request-foreign.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { LicenseForeignAgreementComponent } from './license-foreign-agreement/license-foreign-agreement.component';
+import { EditLicenseComponent } from '@ksp/shared/form/license';
 
 export const routes: Routes = [
   {
@@ -102,6 +103,7 @@ export const routes: Routes = [
     FormUploadImageComponent,
     MatStepperModule,
     RequestStatusComponent,
+    EditLicenseComponent,
   ],
   declarations: [
     LicenseRequestComponent,
