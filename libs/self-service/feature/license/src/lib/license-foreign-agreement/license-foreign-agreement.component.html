@@ -1,0 +1,27 @@
+<ksp-top-nav
+  ><span header>TEACHING LICENSE APPLICATION FORM</span>
+</ksp-top-nav>
+
+<div class="main__container full-height px-3 py-1">
+  <self-service-request-status></self-service-request-status>
+  <div class="box-header text-center mb-3">
+    THE TEACHERS' COUNCIL OF THAILAND TEACHING LICENSE APPLICATION FORM
+  </div>
+
+  <div class="detail__container px-5">
+    <ng-container *ngFor="let rule of rules; index as i">
+      <div class="d-flex mb-3">
+        <label class="form-label"> {{ rule }} </label>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="d-flex justify-content-center my-3">
+    <button type="button" (click)="cancel()" class="btn btn-secondary">
+      Cancel
+    </button>
+    <button type="button" (click)="save()" class="ms-3 btn btn-primary">
+      Save (Draft)
+    </button>
+  </div>
+</div>

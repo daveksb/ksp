@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./council-reward.component.scss'],
 })
 export class CouncilRewardComponent implements OnInit {
+  rewardFiles = ['1. รางวัลอื่นและประกาศเกียรติคุณ'];
   constructor() {}
 
   ngOnInit(): void {}

@@ -56,7 +56,7 @@ export class LicenseEditComponent implements OnInit {
   }
 
   navigateBack() {
-    this.router.navigate(['/', 'license', 'request']);
+    this.router.navigate(['/', 'license', 'teacher']);
   }
 
   onConfirm() {

@@ -27,7 +27,7 @@ export const menu: MenuConfig[] = [
     subMenu: [
       {
         label: 'ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ',
-        path: 'license/request',
+        path: 'license/teacher',
       },
       {
         label: 'ขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
@@ -72,7 +72,7 @@ export const menu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/reward.svg',
     label: 'รางวัลของฉัน',
-    path: 'xxx',
+    path: 'reward/council',
   },
   {
     icon: 'assets/images/icon-sidenav/people.svg',

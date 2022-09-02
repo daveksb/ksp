@@ -1,0 +1,42 @@
+<ksp-top-nav
+  ><span header>TEACHING LICENSE APPLICATION FORM</span>
+</ksp-top-nav>
+
+<div class="main__container px-3 py-1">
+  <self-service-request-status></self-service-request-status>
+  <div class="box-header text-center">
+    THE TEACHERS' COUNCIL OF THAILAND TEACHING LICENSE APPLICATION FORM
+  </div>
+
+  <mat-stepper
+    labelPosition="bottom"
+    [animationDuration]="'0'"
+    [selectedIndex]="0"
+    #stepper
+  >
+    <mat-step [completed]="false">
+      <ng-template matStepLabel>check documentation </ng-template>
+      <self-service-foreign-license-step-one></self-service-foreign-license-step-one>
+    </mat-step>
+
+    <mat-step [completed]="false">
+      <ng-template matStepLabel>Personal Details</ng-template>
+      <self-service-foreign-license-step-two></self-service-foreign-license-step-two>
+    </mat-step>
+
+    <mat-step [completed]="false">
+      <ng-template matStepLabel>Documents and evidence required</ng-template>
+      <self-service-foreign-license-step-three></self-service-foreign-license-step-three>
+    </mat-step>
+
+    <mat-step [completed]="false">
+      <ng-template matStepLabel>Personal Declaration</ng-template>
+      <self-service-foreign-license-step-four></self-service-foreign-license-step-four>
+    </mat-step>
+  </mat-stepper>
+
+  <div class="d-flex justify-content-center mb-3">
+    <button type="button" class="btn btn-secondary">Cancel</button>
+    <button type="button" class="ms-3 btn btn-primary">Save (Draft)</button>
+  </div>
+</div>

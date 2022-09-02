@@ -21,8 +21,24 @@ export class SelfServiceHomePageComponent {
     this.dataSource.data = [];
   }
 
-  teacherLicense() {
-    this.router.navigate(['/', 'license', 'request']);
+  thaiTeacher() {
+    this.router.navigate(['/', 'license', 'teacher']);
+  }
+
+  foreignTeacher() {
+    this.router.navigate(['/', 'license', 'agreement']);
+  }
+
+  schoolManager() {
+    this.router.navigate(['/', 'license', 'school-manager']);
+  }
+
+  educationManager() {
+    this.router.navigate(['/', 'license', 'education-manager']);
+  }
+
+  studySupervision() {
+    this.router.navigate(['/', 'license', 'study-supervision']);
   }
 
   teacherRenew() {

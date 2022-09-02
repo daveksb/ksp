@@ -16,8 +16,8 @@ export class StaffListComponent implements OnInit {
 
   personSelected = false;
   displayedColumns: string[] = [
-    'order',
-    'ssn',
+    'id',
+    'idCardNo',
     'name',
     'startDate',
     'endDate',
@@ -37,13 +37,16 @@ export class StaffListComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('ssss = ');
-    this.service.getStaffs().subscribe((res) => {
+    /* this.service.getStaffs().subscribe((res) => {
       console.log('res = ', res);
-    });
+    }); */
   }
 
   search() {
-    this.dataSource.data = data;
+    this.service.getStaffs().subscribe((res) => {
+      console.log('res = ', res);
+      this.dataSource.data = res;
+    });
   }
 
   clear() {
@@ -60,19 +63,18 @@ export class StaffListComponent implements OnInit {
 }
 
 export interface staffInfo {
-  order: number;
-  ssn: string;
-  name: string;
+  id: number;
+  idCardNo: string;
+  firstNameTh: string;
+  lastNameTh: string;
   startDate: string;
   endDate: string;
   profession: boolean;
   teaching: boolean;
   tempLicense: boolean;
-  edit: string;
-  view: string;
 }
 
-export const data: staffInfo[] = [
+/* export const data: staffInfo[] = [
   {
     order: 1,
     ssn: 'x-xxxx-xxxx-xx-x',
@@ -109,4 +111,4 @@ export const data: staffInfo[] = [
     edit: '',
     view: '',
   },
-];
+]; */
