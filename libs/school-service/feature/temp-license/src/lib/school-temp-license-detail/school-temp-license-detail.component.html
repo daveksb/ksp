@@ -44,6 +44,7 @@
         </div>
         <ksp-form-user-info
           [isDarkMode]="false"
+          [prefixList]="prefixList$ | async"
           formControlName="userInfo"
         ></ksp-form-user-info>
       </div>
@@ -85,12 +86,12 @@
 
         <mat-tab label="ข้อมูลทางการศึกษา">
           <ksp-form-education-info
-            formControlName="education1"
+            formControlName="edu1"
             [showGradeInput]="true"
             >วุฒิการศึกษาปริญญาตรี</ksp-form-education-info
           ><br />
           <ksp-form-education-info
-            formControlName="education2"
+            formControlName="edu2"
             [showGradeInput]="false"
             [showPropertyInput]="true"
             >วุฒิการศึกษาปริญญาโท
@@ -133,6 +134,9 @@
     [showCenterButtons]="true"
     [showCancelButton]="true"
     [showTempSaveButton]="true"
-    [showSaveButton]="selectedTabIndex === 5"
+    [showSaveButton]="true"
+    [saveButtonLabel]="'ส่งใบคำขอ'"
+    [disableSaveButton]="!form.valid"
   ></ksp-bottom-nav>
+  <!-- [showSaveButton]="selectedTabIndex === 5" -->
 </div>

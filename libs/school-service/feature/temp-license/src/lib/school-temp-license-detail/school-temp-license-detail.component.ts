@@ -7,7 +7,9 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
+import { GeneralInfoService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Observable } from 'rxjs';
 import { TempLicenseService } from '../temp-license.service';
 import { LicenseDetailService } from './school-temp-license-detail.service';
 
@@ -22,8 +24,8 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     addr1: [],
     addr2: [],
     schoolAddress: [],
-    education1: [],
-    education2: [],
+    edu1: [],
+    edu2: [],
     teaching: [],
     reason: [],
   });
@@ -39,13 +41,16 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
   reasonInfo: string[] = [];
   evidenceFiles: string[] = [];
 
+  prefixList$!: Observable<any>;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private fb: FormBuilder,
     private service: LicenseDetailService,
-    private tempLicenseService: TempLicenseService
+    private tempLicenseService: TempLicenseService,
+    private generalInfoService: GeneralInfoService
   ) {}
 
   ngOnInit(): void {
@@ -55,14 +60,19 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     this.evidenceFiles = this.service.evidenceFiles;
 
     this.updateHeaderLabel();
-    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      //console.log('res = ', res);
-    });
+    /* this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
+    }); */
+
+    this.prefixList$ = this.generalInfoService.getPrefix();
   }
 
   searchStaff(idCard: string) {
     this.tempLicenseService.searchIdCard('1234567', idCard).subscribe((res) => {
-      console.log('search result = ', res);
+      res.prefixTh = '1';
+      const { id, ...searchResult } = res;
+      // remove id from object
+      console.log('search result = ', searchResult);
+      this.form.controls.userInfo.patchValue(searchResult);
     });
   }
 
@@ -90,7 +100,7 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
   }
 
   backToListPage() {
-    this.router.navigate(['/', 'temp-license', 'list']);
+    this.router.navigate(['/temp-license', 'list']);
   }
 
   save() {
