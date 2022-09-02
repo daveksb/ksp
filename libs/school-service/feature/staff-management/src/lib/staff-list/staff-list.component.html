@@ -35,21 +35,23 @@
 
     <div class="mt-2">
       <table mat-table [dataSource]="dataSource">
-        <ng-container matColumnDef="order">
+        <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-          <td mat-cell *matCellDef="let element">{{ element.order }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
         </ng-container>
 
-        <ng-container matColumnDef="ssn">
+        <ng-container matColumnDef="idCardNo">
           <th mat-header-cell *matHeaderCellDef>
             หมายเลขบัตรประชาชน/เลขที่หนังสือเดินทาง
           </th>
-          <td mat-cell *matCellDef="let element">{{ element.ssn }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.idCardNo }}</td>
         </ng-container>
 
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
-          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+          <td mat-cell *matCellDef="let element">
+            {{ element.firstNameTh }} {{ element.lastNameTh }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="startDate">
