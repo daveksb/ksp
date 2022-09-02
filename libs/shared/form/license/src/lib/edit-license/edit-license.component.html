@@ -145,16 +145,16 @@
     </div>
   </div>
 
-  <div class="d-flex align-items-center mb-2">
-    <input
-      type="checkbox"
-      name="test"
-      (change)="disableControl($event, ['passport'])"
-    />
-    <label class="form-label ms-1">เปลี่ยนหมายเลขหนังสือเดินทาง</label>
-  </div>
+  <ng-container *ngIf="showEditPassport">
+    <div class="d-flex align-items-center mb-2">
+      <input
+        type="checkbox"
+        name="test"
+        (change)="disableControl($event, ['passport'])"
+      />
+      <label class="form-label ms-1">เปลี่ยนหมายเลขหนังสือเดินทางxxx</label>
+    </div>
 
-  <div *ngIf="showEditPassport">
     <div class="row align-items-center ms-2 mb-2">
       <div class="col-md-5 col-md-5">
         <input type="text" class="form-control" disabled />
@@ -166,7 +166,30 @@
 
       <div class="col-md-5 col-md-5">
         <input type="text" class="form-control" formControlName="passport" />
-      </div>
+      </div></div
+  ></ng-container>
+
+  <ng-container *ngIf="showDistributeData">
+    <div class="d-flex align-items-center mb-2">
+      <input
+        type="checkbox"
+        class="me-1"
+        (change)="disableControl($event, ['distributeData'])"
+      />
+      <label class="form-label">จำหน่ายข้อมูล</label>
     </div>
-  </div>
+    <div class="row ms-2 mb-2">
+      <div class="col-md-5 mb-3">
+        <select
+          class="search__content form-select"
+          formControlName="distributeData"
+        >
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+    </div></ng-container
+  >
 </form>

@@ -1,0 +1,82 @@
+<ksp-top-nav
+  ><span header>ใบอนุญาตประกอบวิชาชีพ</span
+  ><span subHeader>ขอขึ้นใบอนุญาตประกอบวิชาชีพ</span></ksp-top-nav
+>
+
+<div class="main__container">
+  <self-service-license-info
+    [header]="'รายละเอียดใบคำขอ'"
+    [subheader1]="'วันที่ทำรายการ'"
+    [subheader2]="'เลขใบคำขอ'"
+    [subheader3]="'เลขที่ประจำตัวคุรุสภา'"
+    [subheader4]="'เลขประจำตัวประชาชน'"
+    [date]="'10 ตุลาคม 2565'"
+    [requestNo]="'11020-00xxx-xx-x'"
+    [KuruspaId]="'11020-00xxx-xx-x'"
+    [personId]="'3365500066412'"
+  ></self-service-license-info>
+
+  <div class="d-flex my-4">
+    <div class="detail__container bg-white me-1">
+      <self-service-form-upload-image></self-service-form-upload-image>
+    </div>
+    <div class="detail__container bg-white w-100 ms-1">
+      <ksp-form-user-info [isDarkMode]="true"></ksp-form-user-info>
+    </div>
+  </div>
+
+  <div class="pt-3 pb-1 ps-3 ps-md-5 pe-3 pe-md-5">
+    <mat-tab-group
+      class="tab-group"
+      animationDuration="0ms"
+      [selectedIndex]="0"
+    >
+      <mat-tab label="ที่อยู่" class="tab-content">
+        <ksp-form-address [isDarkMode]="true">
+          <span>ที่อยู่ทะเบียนบ้าน</span>
+        </ksp-form-address>
+        <hr />
+        <ksp-form-address [isDarkMode]="true">
+          <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
+          <span class="text-danger ms-1 fs-6">*กรุณากรอกข้อมูลตำบล, อำเภอ</span>
+          <div class="d-flex align-items-center">
+            <input type="checkbox" class="me-2" />
+            <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
+          </div>
+        </ksp-form-address>
+      </mat-tab>
+
+      <mat-tab label="สถานที่ทำงาน">
+        <self-service-form-user-workplace></self-service-form-user-workplace>
+      </mat-tab>
+
+      <mat-tab label="ข้อมูลทางการศึกษา">
+        <self-service-form-user-education></self-service-form-user-education>
+        <hr />
+        <ksp-form-attachment
+          [groups]="educationeFiles"
+          [title]="'กรุณาแนบหลักฐานประกอบวุฒิทางการศึกษา'"
+        ></ksp-form-attachment>
+      </mat-tab>
+
+      <mat-tab label="ข้อมูลประสบการณ์วิชาชีพ">
+        <self-service-study-supervision-experience></self-service-study-supervision-experience>
+        <hr />
+        <ksp-form-attachment
+          [groups]="experienceFiles"
+          [title]="'กรุณาแนบหลักฐานประกอบ'"
+        ></ksp-form-attachment>
+      </mat-tab>
+    </mat-tab-group>
+
+    <div class="fs-5 text-danger mt-2">
+      *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
+      โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
+    </div>
+
+    <div class="d-flex justify-content-center mt-3 mb-3">
+      <button type="button" class="btn btn-secondary">ล้างข้อมูล</button>
+      <button type="button" (click)="save()" class="ms-3 btn btn-primary">ต่อไป</button>
+    </div>
+  </div>
+</div>

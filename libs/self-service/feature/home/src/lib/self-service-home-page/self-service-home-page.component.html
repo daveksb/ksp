@@ -2,11 +2,8 @@
 
 <div class="full-height main__container px-3 py-3">
   <ksp-uni-form-badge></ksp-uni-form-badge>
-  <div class="row mx-4">
+  <div class="row justify-content-center mx-4">
     <div class="col-6 ps-0 pe-2">
-      <self-service-slideshow></self-service-slideshow>
-    </div>
-    <div class="col-6 pe-0 ps-2">
       <self-service-slideshow></self-service-slideshow>
     </div>
   </div>
@@ -102,10 +99,14 @@
       </mat-menu>
 
       <mat-menu #request="matMenu">
-        <button mat-menu-item (click)="teacherLicense()">ครู</button>
-        <button mat-menu-item>ผู้บริหารสถานศึกษา</button>
-        <button mat-menu-item>ผู้บริหารการศึกษา</button>
-        <button mat-menu-item>ศึกษานิเทศก์</button>
+        <button mat-menu-item [matMenuTriggerFor]="teacher">ครู</button>
+        <button mat-menu-item (click)="schoolManager()">
+          ผู้บริหารสถานศึกษา
+        </button>
+        <button mat-menu-item (click)="educationManager()">
+          ผู้บริหารการศึกษา
+        </button>
+        <button mat-menu-item (click)="studySupervision()">ศึกษานิเทศก์</button>
       </mat-menu>
 
       <mat-menu #renew="matMenu">
@@ -126,6 +127,11 @@
         <button mat-menu-item (click)="reward6()">
           รางวัลผลงานวิจัยของคุรุสภา
         </button>
+      </mat-menu>
+
+      <mat-menu #teacher="matMenu">
+        <button mat-menu-item (click)="thaiTeacher()">ครูชาวไทย</button>
+        <button mat-menu-item (click)="foreignTeacher()">ครูชาวต่างชาติ</button>
       </mat-menu>
     </div>
 

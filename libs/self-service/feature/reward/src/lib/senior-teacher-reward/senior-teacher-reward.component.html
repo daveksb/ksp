@@ -1,6 +1,6 @@
 <ksp-top-nav><span header>รางวัลคุรุสภา</span></ksp-top-nav>
 
-<div class="full-width-2 bg-light">
+<div class="full-width-2 main__container">
   <self-service-request-status></self-service-request-status>
 
   <div class="m-4 bg-white p-3">
@@ -58,7 +58,7 @@
       </mat-tab>
 
       <mat-tab label="เอกสารประกอบ">
-        <ksp-form-attachment></ksp-form-attachment>
+        <ksp-form-attachment [groups]="rewardFiles"></ksp-form-attachment>
       </mat-tab>
     </mat-tab-group>
 

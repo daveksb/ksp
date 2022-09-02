@@ -1,0 +1,16 @@
+<div class="detail__container px-5">
+  <div class="box-header mb-3">
+    Applicants check each documentation item and arrange in the following order.
+  </div>
+  <ng-container *ngFor="let rule of rules; index as i">
+    <div class="d-flex mb-3">
+      <input
+        class="me-1"
+        style="margin-top: 0.3rem"
+        type="checkbox"
+        name="xxx"
+      />
+      <label class="form-label break__line"> {{ rule }} </label>
+    </div>
+  </ng-container>
+</div>

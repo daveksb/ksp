@@ -22,8 +22,8 @@
   </div>
 
   <div class="row">
-    <div class="col-md mb-3">
-      <label class="form-label required">คำนำหน้าชื่อภาษาไทย</label>
+    <div class="col-md-2 mb-3">
+      <label class="form-label required">คำนำหน้าชื่อไทย</label>
       <select
         [class.bg-white]="!isDarkMode && mode === 'edit'"
         class="form-select"
@@ -35,7 +35,7 @@
         </option>
       </select>
     </div>
-    <div class="col-md-5 mb-3">
+    <div class="col-md mb-3">
       <label class="form-label required">ชื่อภาษาไทย</label>
       <input
         [class.bg-light]="isDarkMode"
@@ -45,7 +45,7 @@
         formControlName="firstNameTh"
       />
     </div>
-    <div class="col-md-5 mb-3">
+    <div class="col-md mb-3">
       <label class="form-label required">นามสกุลภาษาไทย</label>
       <input
         [class.bg-light]="isDarkMode"
@@ -58,8 +58,8 @@
   </div>
 
   <div class="row">
-    <div class="col-md mb-3">
-      <label class="form-label required">คำนำหน้าชื่อภาษาอังกฤษ</label>
+    <div class="col-md-2 mb-3">
+      <label class="form-label required">คำนำหน้าชื่ออังกฤษ</label>
       <select
         [class.bg-white]="!isDarkMode && mode === 'edit'"
         class="form-select"
@@ -71,7 +71,7 @@
         </option>
       </select>
     </div>
-    <div class="col-md-5 mb-3">
+    <div class="col-md mb-3">
       <label class="form-label required">ชื่อภาษาอังกฤษ</label>
       <input
         class="form-control"
@@ -81,7 +81,7 @@
         formControlName="firstNameEn"
       />
     </div>
-    <div class="col-md-5 mb-3">
+    <div class="col-md mb-3">
       <label class="form-label required">นามสกุลภาษาอังกฤษ</label>
       <input
         class="form-control"

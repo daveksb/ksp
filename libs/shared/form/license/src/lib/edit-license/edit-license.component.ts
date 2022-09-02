@@ -25,9 +25,11 @@ export class EditLicenseComponent
     lastnameTh: [],
     lastnameEn: [],
     passport: [],
+    distributeData: [],
   });
 
   @Input() showEditPassport = false;
+  @Input() showDistributeData = false;
 
   constructor(private fb: FormBuilder) {
     super();
@@ -66,4 +68,5 @@ export type controlName =
   | 'nameEn'
   | 'lastnameTh'
   | 'lastnameEn'
-  | 'passport';
+  | 'passport'
+  | 'distributeData';
