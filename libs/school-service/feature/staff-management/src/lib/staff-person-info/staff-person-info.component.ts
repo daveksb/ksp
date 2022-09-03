@@ -27,8 +27,10 @@ export class StaffPersonInfoComponent implements OnInit {
 
   form = this.fb.group({
     userInfo: [],
-    addr1: this.fb.group({
-      addressType: [1],
+    addr1: [],
+    addr2: [],
+    /* addr1: this.fb.group({
+      //addressType: [1],
       location: ['ทดสอบ'],
       houseNo: ['345'],
       moo: ['2'],
@@ -40,7 +42,7 @@ export class StaffPersonInfoComponent implements OnInit {
       tumbol: ['35'],
     }),
     addr2: this.fb.group({
-      addressType: [2],
+      //addressType: [2],
       location: ['ทดสอบ'],
       houseNo: ['123'],
       moo: ['1'],
@@ -50,7 +52,7 @@ export class StaffPersonInfoComponent implements OnInit {
       province: ['33'],
       amphur: ['34'],
       tumbol: ['35'],
-    }),
+    }), */
     edu1: this.fb.group({
       degreeLevel: ['1'],
       degreeName: ['sample'],
@@ -88,12 +90,12 @@ export class StaffPersonInfoComponent implements OnInit {
     private generalInfoService: GeneralInfoService
   ) {}
 
-  get addr1() {
-    return this.form.controls.addr1.controls;
+  get addr1(): any {
+    return this.form.controls.addr1; //.controls;
   }
 
-  get addr2() {
-    return this.form.controls.addr2.controls;
+  get addr2(): any {
+    return this.form.controls.addr2; //.controls;
   }
 
   ngOnInit(): void {
@@ -143,6 +145,10 @@ export class StaffPersonInfoComponent implements OnInit {
     }
   }
 
+  test(e: any) {
+    console.log('chasnge = ', e);
+  }
+
   next() {
     this.router.navigate([
       '/staff-management',
@@ -151,23 +157,31 @@ export class StaffPersonInfoComponent implements OnInit {
     ]);
   }
 
+  provinceChanged(type: number, evt: any) {
+    const province = evt.target?.value;
+    console.log('province = ', province);
+    if (province) {
+      if (type === 1) {
+        this.amphurs1$ = this.addressService.getAmphurs(province);
+      } else if (type === 2) {
+        this.amphurs2$ = this.addressService.getAmphurs(province);
+      }
+    }
+  }
+
+  amphurChanged(type: number, evt: any) {
+    const amphur = evt.target?.value;
+    console.log('amphur = ', amphur);
+    if (amphur) {
+      if (type === 1) {
+        this.tumbols1$ = this.addressService.getTumbols(amphur);
+      } else if (type === 2) {
+        this.tumbols2$ = this.addressService.getTumbols(amphur);
+      }
+    }
+  }
+
   getListData() {
-    this.addr1.province.valueChanges.subscribe((res: any) => {
-      this.amphurs1$ = this.addressService.getAmphurs(res);
-    });
-
-    this.addr1.amphur.valueChanges.subscribe((res: any) => {
-      this.tumbols1$ = this.addressService.getTumbols(res);
-    });
-
-    this.addr2.province.valueChanges.subscribe((res: any) => {
-      this.amphurs2$ = this.addressService.getAmphurs(res);
-    });
-
-    this.addr2.amphur.valueChanges.subscribe((res: any) => {
-      this.tumbols2$ = this.addressService.getTumbols(res);
-    });
-
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.provinces$ = this.addressService.getProvinces();
     this.countries$ = this.addressService.getCountry();

@@ -74,6 +74,7 @@
           [class.bg-white]="!isDarkMode && mode === 'edit'"
           class="form-select"
           formControlName="province"
+          (change)="provinceChanged.emit($event)"
         >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option
@@ -106,6 +107,7 @@
           [class.bg-white]="!isDarkMode && mode === 'edit'"
           class="form-select"
           formControlName="amphur"
+          (change)="amphurChanged.emit($event)"
         >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let a of amphurs" [value]="a?.amphurCode">
