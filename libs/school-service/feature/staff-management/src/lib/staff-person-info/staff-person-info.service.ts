@@ -39,9 +39,11 @@ export class StaffPersonInfoService {
   }
 
   getStaffEdu(staffId: number): Observable<any> {
-    return this.http.get(
-      `${environment.apiUrl}/kspschoolregister/schstaffsearcheduid?id=${staffId}&tokenkey=${environment.token}`
-    );
+    return this.http
+      .get(
+        `${environment.apiUrl}/kspschoolregister/schstaffsearcheduid?id=${staffId}&tokenkey=${environment.token}`
+      )
+      .pipe(map((data: any) => data.datareturn));
   }
 
   getStaffTypes(): Observable<any> {

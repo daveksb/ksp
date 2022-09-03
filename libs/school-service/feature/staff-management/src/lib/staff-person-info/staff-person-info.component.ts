@@ -28,6 +28,7 @@ export class StaffPersonInfoComponent implements OnInit {
   form = this.fb.group({
     userInfo: [],
     addr1: this.fb.group({
+      addressType: [1],
       location: ['ทดสอบ'],
       houseNo: ['345'],
       moo: ['2'],
@@ -39,6 +40,7 @@ export class StaffPersonInfoComponent implements OnInit {
       tumbol: ['35'],
     }),
     addr2: this.fb.group({
+      addressType: [2],
       location: ['ทดสอบ'],
       houseNo: ['123'],
       moo: ['1'],
@@ -52,7 +54,7 @@ export class StaffPersonInfoComponent implements OnInit {
     edu1: this.fb.group({
       degreeLevel: ['1'],
       degreeName: ['sample'],
-      isEducationDegree: ['true'],
+      isEducationDegree: ['1'],
       major: ['sample'],
       institution: ['sample'],
       country: ['36'],
@@ -60,7 +62,7 @@ export class StaffPersonInfoComponent implements OnInit {
       graduateDate: ['2022-08-22T10:17:01'],
       grade: ['3'],
       otherProperty: ['sample'],
-      academicYear: ['sample'],
+      academicYear: ['2565'],
     }),
     edu2: this.fb.group({
       degreeLevel: [null],
@@ -98,16 +100,13 @@ export class StaffPersonInfoComponent implements OnInit {
     this.activatedroute.paramMap.subscribe((params) => {
       this.staffId = Number(params.get('id'));
       if (this.staffId) {
-        console.log('xxx = ');
-
         this.staffService.getStaffUserInfo(this.staffId).subscribe((res) => {
           const { id, schoolId, createDate, ...formData } = res;
           this.form.controls.userInfo.patchValue(formData);
         });
 
         this.staffService.getStaffAddress(this.staffId).subscribe((res) => {
-          console.log('address = ', res);
-          this.form.controls.userInfo.patchValue(res);
+          this.form.controls.addr1.patchValue(res);
         });
 
         this.staffService.getStaffEdu(this.staffId).subscribe((res) => {
@@ -121,6 +120,19 @@ export class StaffPersonInfoComponent implements OnInit {
     /* this.form.valueChanges.subscribe((res) => {
       //console.log('form valid = ', this.form.valid);
     }); */
+  }
+
+  save() {
+    const formData: any = this.form.getRawValue();
+    formData.userInfo.schoolId = '1234567';
+    formData.userInfo.nationality = 'TH';
+    formData.userInfo.createDate = new Date().toISOString();
+
+    console.log('formData = ', formData);
+    this.staffService.addStaff(formData).subscribe((res) => {
+      console.log('add staff result = ', res);
+      this.router.navigate(['/staff-management', 'staff-person-info', res.id]);
+    });
   }
 
   useSameAddress(evt: any) {
@@ -137,19 +149,6 @@ export class StaffPersonInfoComponent implements OnInit {
       'staff-teaching-info',
       this.staffId,
     ]);
-  }
-
-  save() {
-    const formData: any = this.form.getRawValue();
-    formData.userInfo.schoolId = '1234567';
-    formData.userInfo.nationality = 'TH';
-    formData.userInfo.createDate = new Date().toISOString();
-
-    console.log('formData = ', formData);
-    this.staffService.addStaff(formData).subscribe((res) => {
-      console.log('add staff result = ', res);
-      this.router.navigate(['/staff-management', 'staff-person-info', res.id]);
-    });
   }
 
   getListData() {
