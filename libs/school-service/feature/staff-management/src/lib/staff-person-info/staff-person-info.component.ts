@@ -101,6 +101,7 @@ export class StaffPersonInfoComponent implements OnInit {
   ngOnInit(): void {
     this.activatedroute.paramMap.subscribe((params) => {
       this.staffId = Number(params.get('id'));
+
       if (this.staffId) {
         this.staffService.getStaffUserInfo(this.staffId).subscribe((res) => {
           const { id, schoolId, createDate, ...formData } = res;
@@ -114,9 +115,13 @@ export class StaffPersonInfoComponent implements OnInit {
             res.map((addr, i) => {
               const { id, schStaffId, addressType, ...formData } = addr;
               if (i === 0) {
+                this.amphurs1$ = this.addressService.getAmphurs(addr.province);
+                this.tumbols1$ = this.addressService.getTumbols(addr.amphur);
                 this.form.controls.addr1.patchValue(formData);
               }
               if (i === 1) {
+                this.amphurs2$ = this.addressService.getAmphurs(addr.province);
+                this.tumbols2$ = this.addressService.getTumbols(addr.amphur);
                 this.form.controls.addr2.patchValue(formData);
               }
             });
