@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -20,6 +20,8 @@ export class AddStaffTeachingInfoComponent implements OnInit {
   staffTypes$!: Observable<any>;
   positionTypes$!: Observable<any>;
   academicTypes$!: Observable<any>;
+
+  staffId!: number;
 
   levels = levels;
   subjects = subjects;
@@ -67,7 +69,8 @@ export class AddStaffTeachingInfoComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     public dialog: MatDialog,
-    private service: StaffPersonInfoService
+    private service: StaffPersonInfoService,
+    private activatedroute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -75,13 +78,21 @@ export class AddStaffTeachingInfoComponent implements OnInit {
     this.positionTypes$ = this.service.getPositionTypes();
     this.academicTypes$ = this.service.getAcademicStandingTypes();
 
+    this.activatedroute.paramMap.subscribe((params) => {
+      this.staffId = Number(params.get('id'));
+    });
+
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
       //console.log('res = ', res);
     });
   }
 
   back() {
-    this.router.navigate(['/staff-management', 'staff-person-info']);
+    this.router.navigate([
+      '/staff-management',
+      'staff-person-info',
+      this.staffId,
+    ]);
   }
 
   cancel() {

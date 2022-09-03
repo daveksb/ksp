@@ -26,25 +26,11 @@ export class StaffPersonInfoComponent implements OnInit {
   prefixList$!: Observable<any>;
 
   form = this.fb.group({
-    userInfo: [] /* this.fb.group({
-      idCardNo: [null],
-      passportNo: [''],
-      prefixTh: [''],
-      firstNameTh: [''],
-      lastNameTh: [''],
-      prefixEn: [''],
-      firstNameEn: [''],
-      lastNameEn: [''],
-      sex: [''],
-      birthDate: [''],
-      email: [''],
-      contactPhone: [''],
-      workPhone: [''],
-      nationality: [null],
-      schoolId: ['1234567'],
-      createDate: ['2022-08-22T10:17:01'],
-    }), */,
-    addr1: this.fb.group({
+    userInfo: [],
+    addr1: [],
+    addr2: [],
+    /* addr1: this.fb.group({
+      //addressType: [1],
       location: ['ทดสอบ'],
       houseNo: ['345'],
       moo: ['2'],
@@ -56,6 +42,7 @@ export class StaffPersonInfoComponent implements OnInit {
       tumbol: ['35'],
     }),
     addr2: this.fb.group({
+      //addressType: [2],
       location: ['ทดสอบ'],
       houseNo: ['123'],
       moo: ['1'],
@@ -65,11 +52,11 @@ export class StaffPersonInfoComponent implements OnInit {
       province: ['33'],
       amphur: ['34'],
       tumbol: ['35'],
-    }),
+    }), */
     edu1: this.fb.group({
       degreeLevel: ['1'],
       degreeName: ['sample'],
-      isEducationDegree: [false],
+      isEducationDegree: ['1'],
       major: ['sample'],
       institution: ['sample'],
       country: ['36'],
@@ -77,12 +64,12 @@ export class StaffPersonInfoComponent implements OnInit {
       graduateDate: ['2022-08-22T10:17:01'],
       grade: ['3'],
       otherProperty: ['sample'],
-      academicYear: ['sample'],
+      academicYear: ['2565'],
     }),
     edu2: this.fb.group({
       degreeLevel: [null],
       degreeName: [null],
-      isEducationDegree: [false],
+      isEducationDegree: [null],
       major: [null],
       institution: [null],
       country: [null],
@@ -98,73 +85,116 @@ export class StaffPersonInfoComponent implements OnInit {
     private router: Router,
     private activatedroute: ActivatedRoute,
     private fb: FormBuilder,
-    private staffInfoService: StaffPersonInfoService,
+    private staffService: StaffPersonInfoService,
     private addressService: AddressService,
     private generalInfoService: GeneralInfoService
   ) {}
 
-  get addr1() {
-    return this.form.controls.addr1.controls;
+  get addr1(): any {
+    return this.form.controls.addr1; //.controls;
   }
 
-  get addr2() {
-    return this.form.controls.addr2.controls;
+  get addr2(): any {
+    return this.form.controls.addr2; //.controls;
   }
 
   ngOnInit(): void {
     this.activatedroute.paramMap.subscribe((params) => {
       this.staffId = Number(params.get('id'));
+
+      if (this.staffId) {
+        this.staffService.getStaffUserInfo(this.staffId).subscribe((res) => {
+          const { id, schoolId, createDate, ...formData } = res;
+          this.form.controls.userInfo.patchValue(formData);
+        });
+
+        this.staffService
+          .getStaffAddress(this.staffId)
+          .subscribe((res: any[]) => {
+            //array of address
+            res.map((addr, i) => {
+              const { id, schStaffId, addressType, ...formData } = addr;
+              if (i === 0) {
+                this.amphurs1$ = this.addressService.getAmphurs(addr.province);
+                this.tumbols1$ = this.addressService.getTumbols(addr.amphur);
+                this.form.controls.addr1.patchValue(formData);
+              }
+              if (i === 1) {
+                this.amphurs2$ = this.addressService.getAmphurs(addr.province);
+                this.tumbols2$ = this.addressService.getTumbols(addr.amphur);
+                this.form.controls.addr2.patchValue(formData);
+              }
+            });
+          });
+
+        this.staffService.getStaffEdu(this.staffId).subscribe((res) => {
+          //console.log('edu = ', res);
+          //this.form.controls.userInfo.patchValue(formData);
+        });
+      }
     });
 
-    this.getAddList();
-    /* this.form.valueChanges.subscribe((res) => {
-      //console.log('form valid = ', this.form.valid);
-    }); */
-  }
-
-  useSameAddress(evt: any) {
-    const checked = evt.target.checked;
-
-    if (checked) {
-      this.form.controls.addr2.patchValue(this.form.controls.addr1.value);
-      //console.log('form addr 2 value = ', this.form.controls.addr2.value);
-    }
-  }
-
-  next() {
-    this.router.navigate(['/staff-management', 'staff-teaching-info']);
+    this.getListData();
   }
 
   save() {
     const formData: any = this.form.getRawValue();
     formData.userInfo.schoolId = '1234567';
     formData.userInfo.nationality = 'TH';
-    formData.userInfo.createDate = new Date().toISOString().split('T')[0];
+    formData.userInfo.createDate = new Date().toISOString();
+    formData.addr1.addressType = 1;
+    formData.addr2.addressType = 2;
 
     console.log('formData = ', formData);
-    this.staffInfoService.addStaff(formData).subscribe((res) => {
+    this.staffService.addStaff(formData).subscribe((res) => {
       console.log('add staff result = ', res);
       this.router.navigate(['/staff-management', 'staff-person-info', res.id]);
     });
   }
 
-  getAddList() {
-    this.addr1.province.valueChanges.subscribe((res: any) => {
-      this.amphurs1$ = this.addressService.getAmphurs(res);
-    });
+  useSameAddress(evt: any) {
+    const checked = evt.target.checked;
+    this.amphurs2$ = this.amphurs1$;
+    this.tumbols2$ = this.tumbols1$;
 
-    this.addr1.amphur.valueChanges.subscribe((res: any) => {
-      this.tumbols1$ = this.addressService.getTumbols(res);
-    });
+    if (checked) {
+      this.form.controls.addr2.patchValue(this.form.controls.addr1.value);
+    }
+  }
 
-    this.addr2.province.valueChanges.subscribe((res: any) => {
-      this.amphurs2$ = this.addressService.getAmphurs(res);
-    });
+  nextPage() {
+    this.router.navigate([
+      '/staff-management',
+      'staff-teaching-info',
+      this.staffId,
+    ]);
+  }
 
-    this.addr2.amphur.valueChanges.subscribe((res: any) => {
-      this.tumbols2$ = this.addressService.getTumbols(res);
-    });
+  provinceChanged(type: number, evt: any) {
+    const province = evt.target?.value;
+    console.log('province = ', province);
+    if (province) {
+      if (type === 1) {
+        this.amphurs1$ = this.addressService.getAmphurs(province);
+      } else if (type === 2) {
+        this.amphurs2$ = this.addressService.getAmphurs(province);
+      }
+    }
+  }
 
+  amphurChanged(type: number, evt: any) {
+    const amphur = evt.target?.value;
+    console.log('amphur = ', amphur);
+    if (amphur) {
+      if (type === 1) {
+        this.tumbols1$ = this.addressService.getTumbols(amphur);
+      } else if (type === 2) {
+        this.tumbols2$ = this.addressService.getTumbols(amphur);
+      }
+    }
+  }
+
+  getListData() {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.provinces$ = this.addressService.getProvinces();
     this.countries$ = this.addressService.getCountry();
