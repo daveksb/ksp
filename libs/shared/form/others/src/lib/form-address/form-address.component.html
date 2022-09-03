@@ -2,6 +2,8 @@
   <div class="pb-3 pt-3" [ngClass]="{ 'ps-3 pe-3 bg-light': !isDarkMode }">
     <div class="box-header"><ng-content></ng-content></div>
 
+    <!-- <input type="text" formControlName="addressType" style="display: none" /> -->
+
     <div class="row">
       <div class="col-md-6 mb-3">
         <label class="form-label">อาคาร/สถานที่</label>
@@ -62,7 +64,7 @@
           [class.bg-light]="isDarkMode"
           class="form-control"
           type="text"
-          formControlName="postCode"
+          formControlName="postcode"
         />
       </div>
     </div>

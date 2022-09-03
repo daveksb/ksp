@@ -107,21 +107,29 @@ export class StaffPersonInfoComponent implements OnInit {
           this.form.controls.userInfo.patchValue(formData);
         });
 
-        this.staffService.getStaffAddress(this.staffId).subscribe((res) => {
-          this.form.controls.addr1.patchValue(res);
-        });
+        this.staffService
+          .getStaffAddress(this.staffId)
+          .subscribe((res: any[]) => {
+            //array of address
+            res.map((addr, i) => {
+              const { id, schStaffId, addressType, ...formData } = addr;
+              if (i === 0) {
+                this.form.controls.addr1.patchValue(formData);
+              }
+              if (i === 1) {
+                this.form.controls.addr2.patchValue(formData);
+              }
+            });
+          });
 
         this.staffService.getStaffEdu(this.staffId).subscribe((res) => {
-          console.log('edu = ', res);
+          //console.log('edu = ', res);
           //this.form.controls.userInfo.patchValue(formData);
         });
       }
     });
 
     this.getListData();
-    /* this.form.valueChanges.subscribe((res) => {
-      //console.log('form valid = ', this.form.valid);
-    }); */
   }
 
   save() {
@@ -129,6 +137,8 @@ export class StaffPersonInfoComponent implements OnInit {
     formData.userInfo.schoolId = '1234567';
     formData.userInfo.nationality = 'TH';
     formData.userInfo.createDate = new Date().toISOString();
+    formData.addr1.addressType = 1;
+    formData.addr2.addressType = 2;
 
     console.log('formData = ', formData);
     this.staffService.addStaff(formData).subscribe((res) => {
@@ -139,17 +149,15 @@ export class StaffPersonInfoComponent implements OnInit {
 
   useSameAddress(evt: any) {
     const checked = evt.target.checked;
+    this.amphurs2$ = this.amphurs1$;
+    this.tumbols2$ = this.tumbols1$;
+
     if (checked) {
       this.form.controls.addr2.patchValue(this.form.controls.addr1.value);
-      //console.log('form addr 2 value = ', this.form.controls.addr2.value);
     }
   }
 
-  test(e: any) {
-    console.log('chasnge = ', e);
-  }
-
-  next() {
+  nextPage() {
     this.router.navigate([
       '/staff-management',
       'staff-teaching-info',
