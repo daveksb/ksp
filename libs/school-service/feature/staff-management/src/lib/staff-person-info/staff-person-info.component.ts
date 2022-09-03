@@ -26,24 +26,7 @@ export class StaffPersonInfoComponent implements OnInit {
   prefixList$!: Observable<any>;
 
   form = this.fb.group({
-    userInfo: [] /* this.fb.group({
-      idCardNo: [null],
-      passportNo: [''],
-      prefixTh: [''],
-      firstNameTh: [''],
-      lastNameTh: [''],
-      prefixEn: [''],
-      firstNameEn: [''],
-      lastNameEn: [''],
-      sex: [''],
-      birthDate: [''],
-      email: [''],
-      contactPhone: [''],
-      workPhone: [''],
-      nationality: [null],
-      schoolId: ['1234567'],
-      createDate: ['2022-08-22T10:17:01'],
-    }), */,
+    userInfo: [],
     addr1: this.fb.group({
       location: ['ทดสอบ'],
       houseNo: ['345'],
@@ -69,7 +52,7 @@ export class StaffPersonInfoComponent implements OnInit {
     edu1: this.fb.group({
       degreeLevel: ['1'],
       degreeName: ['sample'],
-      isEducationDegree: [false],
+      isEducationDegree: ['true'],
       major: ['sample'],
       institution: ['sample'],
       country: ['36'],
@@ -82,7 +65,7 @@ export class StaffPersonInfoComponent implements OnInit {
     edu2: this.fb.group({
       degreeLevel: [null],
       degreeName: [null],
-      isEducationDegree: [false],
+      isEducationDegree: [null],
       major: [null],
       institution: [null],
       country: [null],
@@ -98,7 +81,7 @@ export class StaffPersonInfoComponent implements OnInit {
     private router: Router,
     private activatedroute: ActivatedRoute,
     private fb: FormBuilder,
-    private staffInfoService: StaffPersonInfoService,
+    private staffService: StaffPersonInfoService,
     private addressService: AddressService,
     private generalInfoService: GeneralInfoService
   ) {}
@@ -114,9 +97,27 @@ export class StaffPersonInfoComponent implements OnInit {
   ngOnInit(): void {
     this.activatedroute.paramMap.subscribe((params) => {
       this.staffId = Number(params.get('id'));
+      if (this.staffId) {
+        console.log('xxx = ');
+
+        this.staffService.getStaffUserInfo(this.staffId).subscribe((res) => {
+          const { id, schoolId, createDate, ...formData } = res;
+          this.form.controls.userInfo.patchValue(formData);
+        });
+
+        this.staffService.getStaffAddress(this.staffId).subscribe((res) => {
+          console.log('address = ', res);
+          this.form.controls.userInfo.patchValue(res);
+        });
+
+        this.staffService.getStaffEdu(this.staffId).subscribe((res) => {
+          console.log('edu = ', res);
+          //this.form.controls.userInfo.patchValue(formData);
+        });
+      }
     });
 
-    this.getAddList();
+    this.getListData();
     /* this.form.valueChanges.subscribe((res) => {
       //console.log('form valid = ', this.form.valid);
     }); */
@@ -124,7 +125,6 @@ export class StaffPersonInfoComponent implements OnInit {
 
   useSameAddress(evt: any) {
     const checked = evt.target.checked;
-
     if (checked) {
       this.form.controls.addr2.patchValue(this.form.controls.addr1.value);
       //console.log('form addr 2 value = ', this.form.controls.addr2.value);
@@ -132,23 +132,27 @@ export class StaffPersonInfoComponent implements OnInit {
   }
 
   next() {
-    this.router.navigate(['/staff-management', 'staff-teaching-info']);
+    this.router.navigate([
+      '/staff-management',
+      'staff-teaching-info',
+      this.staffId,
+    ]);
   }
 
   save() {
     const formData: any = this.form.getRawValue();
     formData.userInfo.schoolId = '1234567';
     formData.userInfo.nationality = 'TH';
-    formData.userInfo.createDate = new Date().toISOString().split('T')[0];
+    formData.userInfo.createDate = new Date().toISOString();
 
     console.log('formData = ', formData);
-    this.staffInfoService.addStaff(formData).subscribe((res) => {
+    this.staffService.addStaff(formData).subscribe((res) => {
       console.log('add staff result = ', res);
       this.router.navigate(['/staff-management', 'staff-person-info', res.id]);
     });
   }
 
-  getAddList() {
+  getListData() {
     this.addr1.province.valueChanges.subscribe((res: any) => {
       this.amphurs1$ = this.addressService.getAmphurs(res);
     });

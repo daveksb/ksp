@@ -16,7 +16,7 @@ export class FormEducationInfoComponent
   override form = this.fb.group({
     degreeLevel: [],
     degreeName: [],
-    isEducationDegree: [false],
+    isEducationDegree: [],
     major: [],
     institution: [],
     country: [],
