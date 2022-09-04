@@ -1,7 +1,15 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
-import { providerFactory } from '@ksp/shared/utility';
+import {
+  idCardPattern,
+  nameEnPattern,
+  nameThPattern,
+  passportPattern,
+  phonePattern,
+  providerFactory,
+  validatorMessages,
+} from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-form-user-info',
@@ -15,6 +23,8 @@ export class FormUserInfoComponent extends KspFormBaseComponent {
   @Input() showNationalityInput = false;
   @Input() prefixList = null;
 
+  validatorMessages = validatorMessages;
+
   /**
    * Dark Mode : all inputs will have gray background and form container will have white background
    * Use in Self-Service
@@ -24,19 +34,34 @@ export class FormUserInfoComponent extends KspFormBaseComponent {
    */
 
   override form = this.fb.group({
-    idCardNo: [null, Validators.required],
-    passportNo: [],
+    idCardNo: [null, [Validators.required, Validators.pattern(idCardPattern)]],
+    passportNo: [null, [Validators.pattern(passportPattern)]],
     prefixTh: [null, Validators.required],
-    firstNameTh: [null, Validators.required],
-    lastNameTh: [null, Validators.required],
+    firstNameTh: [
+      null,
+      [Validators.required, Validators.pattern(nameThPattern)],
+    ],
+    lastNameTh: [
+      null,
+      [Validators.required, Validators.pattern(nameThPattern)],
+    ],
     prefixEn: [null, Validators.required],
-    firstNameEn: [null, Validators.required],
-    lastNameEn: [null, Validators.required],
+    firstNameEn: [
+      null,
+      [Validators.required, Validators.pattern(nameEnPattern)],
+    ],
+    lastNameEn: [
+      null,
+      [Validators.required, Validators.pattern(nameEnPattern)],
+    ],
     sex: [null, Validators.required],
     birthDate: [null, Validators.required],
-    email: [null, Validators.required],
-    contactPhone: [null, [Validators.required]], //contactPhone: [null, [Validators.required, Validators.pattern(phonePattern)]],
-    workPhone: [null, Validators.required],
+    email: [null, [Validators.required, Validators.email]],
+    contactPhone: [
+      null,
+      [Validators.required, Validators.pattern(phonePattern)],
+    ], //contactPhone: [null, [Validators.required, Validators.pattern(phonePattern)]],
+    workPhone: [null, [Validators.required, Validators.pattern(phonePattern)]],
     nationality: ['TH'],
     /*     schoolId: [null],
     createDate: [null], */
@@ -51,5 +76,41 @@ export class FormUserInfoComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+
+  get idCardNo() {
+    return this.form.controls.idCardNo;
+  }
+
+  get passportNo() {
+    return this.form.controls.passportNo;
+  }
+
+  get firstNameTh() {
+    return this.form.controls.firstNameTh;
+  }
+
+  get lastNameTh() {
+    return this.form.controls.lastNameTh;
+  }
+
+  get firstNameEn() {
+    return this.form.controls.firstNameEn;
+  }
+
+  get lastNameEn() {
+    return this.form.controls.lastNameEn;
+  }
+
+  get contactPhone() {
+    return this.form.controls.contactPhone;
+  }
+
+  get workPhone() {
+    return this.form.controls.workPhone;
+  }
+
+  get email() {
+    return this.form.controls.email;
   }
 }
