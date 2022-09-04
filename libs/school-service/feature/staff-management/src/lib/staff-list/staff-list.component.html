@@ -105,7 +105,7 @@
           <th mat-header-cell *matHeaderCellDef>แก้ไข</th>
           <td mat-cell *matCellDef="let element">
             <i
-              (click)="addStaff()"
+              (click)="editStaff(element.id)"
               role="button"
               class="bi bi-pencil-square text-primary fs-5"
             ></i>
