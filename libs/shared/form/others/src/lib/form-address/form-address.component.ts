@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -14,6 +14,8 @@ export class FormAddressComponent extends KspFormBaseComponent {
   @Input() provinces: any[] = [];
   @Input() amphurs: any[] = [];
   @Input() tumbols: any[] = [];
+  @Output() provinceChanged = new EventEmitter<any>();
+  @Output() amphurChanged = new EventEmitter<any>();
 
   /**
    * Dark Mode : all inputs will have gray background and form container will have white background
@@ -24,12 +26,13 @@ export class FormAddressComponent extends KspFormBaseComponent {
    */
 
   override form = this.fb.group({
+    //addressType: [],
     location: [''],
     houseNo: [''],
     moo: [''],
     alley: [''],
     road: [''],
-    postCode: [''],
+    postcode: [''],
     province: [''],
     amphur: [''],
     tumbol: [''],

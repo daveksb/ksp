@@ -34,7 +34,7 @@ export const routes: Routes = [
       { path: 'staff-person-info', component: StaffPersonInfoComponent },
       { path: 'staff-person-info/:id', component: StaffPersonInfoComponent },
       {
-        path: 'staff-teaching-info',
+        path: 'staff-teaching-info/:id',
         component: AddStaffTeachingInfoComponent,
       },
     ],
