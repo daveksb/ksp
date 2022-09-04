@@ -9,8 +9,6 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./request-status.component.scss'],
 })
 export class RequestStatusComponent {
-  @Input() pay = '';
-  @Input() request = '';
-  @Input() approve = '';
-  @Input() edit = '';
+  @Input() headers: string[] = [];
+
 }

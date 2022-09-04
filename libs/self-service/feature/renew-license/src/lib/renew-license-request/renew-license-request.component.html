@@ -1,7 +1,9 @@
 <ksp-top-nav><span header>ใบคำขอต่ออายุใบประกอบวิชาชีพ</span></ksp-top-nav>
 
 <div class="main__container">
-  <self-service-request-status></self-service-request-status>
+  <self-service-request-status
+    [headers]="headerGroup"
+  ></self-service-request-status>
 
   <div class="d-flex m-4">
     <div class="detail__container bg-white me-2">

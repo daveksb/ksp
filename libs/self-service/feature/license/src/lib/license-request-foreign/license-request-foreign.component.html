@@ -36,7 +36,9 @@
   </mat-stepper>
 
   <div class="d-flex justify-content-center mb-3">
-    <button type="button" class="btn btn-secondary">Cancel</button>
-    <button type="button" class="ms-3 btn btn-primary">Save (Draft)</button>
+    <button type="button" (click)="cancel()" class="btn btn-secondary">Cancel</button>
+    <button type="button" (click)="save()" class="ms-3 btn btn-primary">
+      Save (Draft)
+    </button>
   </div>
 </div>

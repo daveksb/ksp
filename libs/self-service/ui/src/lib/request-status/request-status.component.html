@@ -1,4 +1,4 @@
-<div class="content__detail">
+<!-- <div class="content__detail">
   <div class="box-header">รายละเอียดใบคำขอต่ออายุ</div>
 
   <div class="box__container">
@@ -21,6 +21,25 @@
     <div class="box box--fifth">
       <div class="box__title">วันที่หมดอายุใบอนุญาต</div>
       <div class="box__detail label--fifth">xxx</div>
+    </div>
+  </div>
+</div> -->
+
+<div class="mx-4">
+  <div class="box-header">รายละเอียดใบคำขอ</div>
+  <div class="bg-white rounded-3 shadow-sm">
+    <div class="row row-cols-4">
+      <ng-container *ngFor="let header of headers; index as i">
+        <div class="col p-2">
+          <div class="d-flex flex-column align-items-center">
+            <div class="text-black fs-5">{{ header }}</div>
+
+            <div class="bg-warning px-3 text-white fs-5 rounded">
+              1234567890
+            </div>
+          </div>
+        </div>
+      </ng-container>
     </div>
   </div>
 </div>
