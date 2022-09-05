@@ -38,10 +38,10 @@ export class AddStaffTeachingInfoComponent implements OnInit {
     staffStatus: [], //checkbox
     reason: [],
     status: [],
+    statusDate: [],
     teachingLevel: this.fb.array([]),
     teachingSubjects: this.fb.array([]),
-    statusDate: [],
-    other: [],
+    teachingSubjectOther: [],
   });
 
   constructor(
@@ -58,8 +58,10 @@ export class AddStaffTeachingInfoComponent implements OnInit {
   ngOnInit(): void {
     this.activatedroute.paramMap.subscribe((params) => {
       this.staffId = Number(params.get('id'));
+
+      // edit mode
       if (this.staffId) {
-        //
+        this.loadTeachingInfo(this.staffId);
       }
     });
 
@@ -68,6 +70,18 @@ export class AddStaffTeachingInfoComponent implements OnInit {
     }); */
 
     this.getList();
+  }
+
+  loadTeachingInfo(staffId: number) {
+    this.teachingInfoService.getTeachingInfo(staffId).subscribe((res) => {
+      //console.log('loaded teaching info = ', res);
+      const data = {
+        ...res,
+        teachingLevel: JSON.parse(atob(res.teachingLevel)),
+        teachingSubjects: JSON.parse(atob(res.teachingSubjects)),
+      };
+      console.log('loaded teaching info  = ', data);
+    });
   }
 
   get teachingLevelFormArray() {
@@ -99,15 +113,30 @@ export class AddStaffTeachingInfoComponent implements OnInit {
     //this.addHiringInfo();
   }
 
+  // map json data for expected format for osb
+  mapJsonData(input: any[], source: any[]) {
+    const result = input
+      .map((v, i) => (v ? source[i].value : null))
+      .filter((v) => v !== null);
+    //console.log('map data = ', result);
+    return JSON.stringify(result);
+  }
+
   addTeachingInfo() {
     const payload = {
       staffId: this.staffId,
-      teachingLevel: JSON.stringify(this.form.controls.teachingLevel.value),
-      teachingSubjects: JSON.stringify(
-        this.form.controls.teachingSubjects.value
+      teachingLevel: this.mapJsonData(
+        this.form.controls.teachingLevel.value,
+        levels
       ),
-      teachingSubjectOther: '2',
+      teachingSubjects: this.mapJsonData(
+        this.form.controls.teachingSubjects.value,
+        subjects
+      ),
+      teachingSubjectOther: this.form.controls.teachingSubjectOther.value,
     };
+
+    console.log('payload = ', payload);
     this.teachingInfoService.addTeachingInfo(payload).subscribe((res) => {
       console.log('add teaching info result = ', res);
     });
@@ -160,7 +189,7 @@ export class AddStaffTeachingInfoComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'staff-management']);
+        this.router.navigate(['/staff-management']);
       }
     });
   }
@@ -179,41 +208,41 @@ export class AddStaffTeachingInfoComponent implements OnInit {
 }
 
 export const levels = [
-  { label: 'ประกาศนียบัตรวิชาชีพ (ปวช.)', name: 'level6' },
-  { label: 'ชั้นมัธยมปีที่ 1-3', name: 'level4' },
-  { label: 'ชั้นประถมปีที่ 1-3', name: 'level2' },
-  { label: 'อนุบาล', name: 'level1' },
+  { label: 'ประกาศนียบัตรวิชาชีพ (ปวช.)', value: 'level6' },
+  { label: 'ชั้นมัธยมปีที่ 1-3', value: 'level4' },
+  { label: 'ชั้นประถมปีที่ 1-3', value: 'level2' },
+  { label: 'อนุบาล', value: 'level1' },
   {
     label: 'ประกาศนียบัตรวิชาชีพขั้นสูง (ปวส.) / อนุปริญญา',
-    name: 'level7',
+    value: 'level7',
   },
-  { label: 'ชั้นมัธยมปีที่ 4-6', name: 'level5' },
-  { label: 'ชั้นประถมปีที่ 4-6', name: 'level3' },
+  { label: 'ชั้นมัธยมปีที่ 4-6', value: 'level5' },
+  { label: 'ชั้นประถมปีที่ 4-6', value: 'level3' },
 ];
 
 export const subjects = [
-  { label: 'ภาษาไทย', name: 's1' },
-  { label: 'วิทยาศาสตร์', name: 's6' },
-  { label: 'คณิตศาสตร์', name: 's12' },
-  { label: 'ภาษาต่างประเทศ', name: 's2' },
-  { label: 'ปฐมวัย', name: 's7' },
-  { label: 'เทคโนโลยีสารสนเทศและการสื่อสาร', name: 's13' },
-  { label: 'สุขศึกษาและพละศึกษา', name: 's3' },
-  { label: 'คหกรรม', name: 's8' },
-  { label: 'พาณิชยกรรม/บริหารธุรกิจ', name: 's14' },
-  { label: 'สังคมศึกษา ศาสนาและวัฒนธรรม', name: 's4' },
-  { label: 'ศิลปกรรม', name: 's9' },
-  { label: 'อุตสาหกรรม', name: 's15' },
-  { label: 'การงานอาชีพและเทคโนโลยี', name: 's5' },
-  { label: 'เกษตรกรรม', name: 's10' },
-  { label: 'อุตสาหกรรมสิ่งทอ', name: 's16' },
-  { label: 'อื่นๆ', name: 's18' },
-  { label: 'ประมง', name: 's11' },
-  { label: 'อุตสาหกรรมท่องเที่ยว', name: 's17' },
+  { label: 'ภาษาไทย', value: 's1' },
+  { label: 'วิทยาศาสตร์', value: 's6' },
+  { label: 'คณิตศาสตร์', value: 's12' },
+  { label: 'ภาษาต่างประเทศ', value: 's2' },
+  { label: 'ปฐมวัย', value: 's7' },
+  { label: 'เทคโนโลยีสารสนเทศและการสื่อสาร', value: 's13' },
+  { label: 'สุขศึกษาและพละศึกษา', value: 's3' },
+  { label: 'คหกรรม', value: 's8' },
+  { label: 'พาณิชยกรรม/บริหารธุรกิจ', value: 's14' },
+  { label: 'สังคมศึกษา ศาสนาและวัฒนธรรม', value: 's4' },
+  { label: 'ศิลปกรรม', value: 's9' },
+  { label: 'อุตสาหกรรม', value: 's15' },
+  { label: 'การงานอาชีพและเทคโนโลยี', value: 's5' },
+  { label: 'เกษตรกรรม', value: 's10' },
+  { label: 'อุตสาหกรรมสิ่งทอ', value: 's16' },
+  { label: 'อื่นๆ', value: 's18' },
+  { label: 'ประมง', value: 's11' },
+  { label: 'อุตสาหกรรมท่องเที่ยว', value: 's17' },
 ];
 
 export const status = [
-  { label: 'แจ้งเข้า', name: 'status', value: 1 },
-  { label: 'แจ้งออก', name: 'status', value: 2 },
-  { label: 'ยกเลิกข้อมูล', name: 'status', value: 3 },
+  { label: 'แจ้งเข้า', value: 1 },
+  { label: 'แจ้งออก', value: 2 },
+  { label: 'ยกเลิกข้อมูล', value: 3 },
 ];

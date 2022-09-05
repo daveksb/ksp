@@ -71,11 +71,11 @@
 
         <div class="form-label text-secondary ps-3">สถานะบุคลากร</div>
 
-        <ng-container *ngFor="let item of status">
+        <!--         <ng-container *ngFor="let item of status">
           <div class="row mb-2">
             <span class="col-1 d-flex justify-content-end align-self-center">
               <input
-                formControlName="{{ item.name }}"
+                formControlName="{{ item.label }}"
                 type="radio"
                 value="{{ item.value }}"
               />
@@ -91,7 +91,7 @@
               />
             </span>
           </div>
-        </ng-container>
+        </ng-container> -->
 
         <div class="mx-3 mb-2">
           <div class="form-label text-secondary">ระบุสาเหตุ</div>
@@ -157,7 +157,7 @@
             <input
               class="form-control check-other"
               type="text"
-              formControlName="other"
+              formControlName="teachingSubjectOther"
             />
           </span>
         </div>

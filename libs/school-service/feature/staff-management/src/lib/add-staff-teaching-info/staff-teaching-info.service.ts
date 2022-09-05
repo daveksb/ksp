@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -27,5 +27,13 @@ export class StaffTeachingInfoService {
         tokenkey: environment.token,
       }
     );
+  }
+
+  getTeachingInfo(staffId: number): Observable<any> {
+    //https://kspapi.oceanicnetwork.net/ksp/kspschoolregister/schstaffteachinginfoselectid?staffId=3&tokenkey=
+    return this.http.get(
+      `${environment.apiUrl}/kspschoolregister/schstaffteachinginfoselectid?staffId=${staffId}&tokenkey=${environment.token}`
+    );
+    //.pipe(map((data: any) => data.datareturn));
   }
 }
