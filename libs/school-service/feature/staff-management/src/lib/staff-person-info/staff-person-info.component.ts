@@ -29,30 +29,6 @@ export class StaffPersonInfoComponent implements OnInit {
     userInfo: [],
     addr1: [],
     addr2: [],
-    /* addr1: this.fb.group({
-      //addressType: [1],
-      location: ['ทดสอบ'],
-      houseNo: ['345'],
-      moo: ['2'],
-      alley: ['ทดสอบ'],
-      road: ['ทดสอบ'],
-      postCode: ['36'],
-      province: ['33'],
-      amphur: ['34'],
-      tumbol: ['35'],
-    }),
-    addr2: this.fb.group({
-      //addressType: [2],
-      location: ['ทดสอบ'],
-      houseNo: ['123'],
-      moo: ['1'],
-      alley: ['ทดสอบ'],
-      road: ['ทดสอบ'],
-      postCode: ['36'],
-      province: ['33'],
-      amphur: ['34'],
-      tumbol: ['35'],
-    }), */
     edu1: this.fb.group({
       degreeLevel: ['1'],
       degreeName: ['sample'],
@@ -89,14 +65,6 @@ export class StaffPersonInfoComponent implements OnInit {
     private addressService: AddressService,
     private generalInfoService: GeneralInfoService
   ) {}
-
-  get addr1(): any {
-    return this.form.controls.addr1; //.controls;
-  }
-
-  get addr2(): any {
-    return this.form.controls.addr2; //.controls;
-  }
 
   ngOnInit(): void {
     this.activatedroute.paramMap.subscribe((params) => {
@@ -162,17 +130,8 @@ export class StaffPersonInfoComponent implements OnInit {
     }
   }
 
-  nextPage() {
-    this.router.navigate([
-      '/staff-management',
-      'staff-teaching-info',
-      this.staffId,
-    ]);
-  }
-
   provinceChanged(type: number, evt: any) {
     const province = evt.target?.value;
-    console.log('province = ', province);
     if (province) {
       if (type === 1) {
         this.amphurs1$ = this.addressService.getAmphurs(province);
@@ -184,7 +143,6 @@ export class StaffPersonInfoComponent implements OnInit {
 
   amphurChanged(type: number, evt: any) {
     const amphur = evt.target?.value;
-    console.log('amphur = ', amphur);
     if (amphur) {
       if (type === 1) {
         this.tumbols1$ = this.addressService.getTumbols(amphur);
@@ -198,5 +156,21 @@ export class StaffPersonInfoComponent implements OnInit {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.provinces$ = this.addressService.getProvinces();
     this.countries$ = this.addressService.getCountry();
+  }
+
+  nextPage() {
+    this.router.navigate([
+      '/staff-management',
+      'staff-teaching-info',
+      this.staffId,
+    ]);
+  }
+
+  get addr1(): any {
+    return this.form.controls.addr1;
+  }
+
+  get addr2(): any {
+    return this.form.controls.addr2;
   }
 }

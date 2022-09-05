@@ -10,19 +10,33 @@
     formControlName="createDate"
   /> -->
 
-  <div class="row mb-3">
+  <div class="row mb-2">
     <div class="col">
       <label class="form-label required">หมายเลขบัตรประชาชน </label>
       <input class="form-control" type="text" formControlName="idCardNo" />
+      <ng-container
+        *ngIf="idCardNo.invalid && (idCardNo.dirty || idCardNo.touched)"
+      >
+        <span class="text-danger" *ngIf="idCardNo.errors?.['pattern']">
+          {{ validatorMessages.ssn }}
+        </span>
+      </ng-container>
     </div>
     <div class="col">
       <label class="form-label">หมายเลขหนังสือเดินทาง (Passport Number) </label>
       <input class="form-control" type="text" formControlName="passportNo" />
+      <ng-container
+        *ngIf="passportNo.invalid && (passportNo.dirty || passportNo.touched)"
+      >
+        <span class="text-danger" *ngIf="passportNo.errors?.['pattern']">
+          {{ validatorMessages.passport }}
+        </span>
+      </ng-container>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-2 mb-3">
+  <div class="row mb-2">
+    <div class="col-md-2">
       <label class="form-label required">คำนำหน้าชื่อไทย</label>
       <select
         [class.bg-white]="!isDarkMode && mode === 'edit'"
@@ -35,7 +49,7 @@
         </option>
       </select>
     </div>
-    <div class="col-md mb-3">
+    <div class="col-md">
       <label class="form-label required">ชื่อภาษาไทย</label>
       <input
         [class.bg-light]="isDarkMode"
@@ -44,8 +58,17 @@
         placeholder="กรุณากรอกชื่อภาษาไทย"
         formControlName="firstNameTh"
       />
+      <ng-container
+        *ngIf="
+          firstNameTh.invalid && (firstNameTh.dirty || firstNameTh.touched)
+        "
+      >
+        <span class="text-danger" *ngIf="firstNameTh.errors?.['pattern']">
+          {{ validatorMessages.th }}
+        </span>
+      </ng-container>
     </div>
-    <div class="col-md mb-3">
+    <div class="col-md">
       <label class="form-label required">นามสกุลภาษาไทย</label>
       <input
         [class.bg-light]="isDarkMode"
@@ -54,11 +77,18 @@
         placeholder="กรุณากรอกนามสกุลภาษาไทย"
         formControlName="lastNameTh"
       />
+      <ng-container
+        *ngIf="lastNameTh.invalid && (lastNameTh.dirty || lastNameTh.touched)"
+      >
+        <span class="text-danger" *ngIf="lastNameTh.errors?.['pattern']">
+          {{ validatorMessages.th }}
+        </span>
+      </ng-container>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-2 mb-3">
+  <div class="row mb-2">
+    <div class="col-md-2">
       <label class="form-label required">คำนำหน้าชื่ออังกฤษ</label>
       <select
         [class.bg-white]="!isDarkMode && mode === 'edit'"
@@ -71,7 +101,7 @@
         </option>
       </select>
     </div>
-    <div class="col-md mb-3">
+    <div class="col-md">
       <label class="form-label required">ชื่อภาษาอังกฤษ</label>
       <input
         class="form-control"
@@ -80,8 +110,17 @@
         placeholder="กรุณากรอกชื่อภาษาอังกฤษ"
         formControlName="firstNameEn"
       />
+      <ng-container
+        *ngIf="
+          firstNameEn.invalid && (firstNameEn.dirty || firstNameEn.touched)
+        "
+      >
+        <span class="text-danger" *ngIf="firstNameEn.errors?.['pattern']">
+          {{ validatorMessages.en }}
+        </span>
+      </ng-container>
     </div>
-    <div class="col-md mb-3">
+    <div class="col-md">
       <label class="form-label required">นามสกุลภาษาอังกฤษ</label>
       <input
         class="form-control"
@@ -90,11 +129,18 @@
         placeholder="กรุณากรอกนามสกุลภาษาอังกฤษ"
         formControlName="lastNameEn"
       />
+      <ng-container
+        *ngIf="lastNameEn.invalid && (lastNameEn.dirty || lastNameEn.touched)"
+      >
+        <span class="text-danger" *ngIf="lastNameEn.errors?.['pattern']">
+          {{ validatorMessages.en }}
+        </span>
+      </ng-container>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-6 mb-3">
+  <div class="row mb-2">
+    <div class="col-md-6">
       <label class="form-label required">เพศ</label>
       <select
         [class.bg-white]="!isDarkMode && mode === 'edit'"
@@ -107,7 +153,7 @@
         <option value="3">อื่นๆ</option>
       </select>
     </div>
-    <div class="col-md-6 mb-3">
+    <div class="col-md-6">
       <label class="form-label required">วันเดือนปีเกิด</label>
       <input
         class="form-control"
@@ -118,8 +164,8 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-6 mb-3">
+  <div class="row mb-2">
+    <div class="col-md-6">
       <label class="form-label required">อีเมล</label>
       <input
         class="form-control"
@@ -127,8 +173,13 @@
         [class.bg-light]="isDarkMode"
         formControlName="email"
       />
+      <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
+        <span class="text-danger" *ngIf="email.errors?.['email']">{{
+          validatorMessages.email
+        }}</span>
+      </ng-container>
     </div>
-    <div class="col-md-6 mb-3">
+    <div class="col-md-6">
       <label class="form-label required">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
       <input
         class="form-control"
@@ -136,11 +187,20 @@
         [class.bg-light]="isDarkMode"
         formControlName="contactPhone"
       />
+      <ng-container
+        *ngIf="
+          contactPhone.invalid && (contactPhone.dirty || contactPhone.touched)
+        "
+      >
+        <span class="text-danger" *ngIf="contactPhone.errors?.['pattern']"
+          >{{ validatorMessages.phone }}
+        </span>
+      </ng-container>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-6 mb-3">
+  <div class="row mb-2">
+    <div class="col-md-6">
       <label class="form-label required">เบอร์โทรศัพท์ (ที่ทำงาน)</label>
       <input
         class="form-control"
@@ -148,6 +208,13 @@
         [class.bg-light]="isDarkMode"
         formControlName="workPhone"
       />
+      <ng-container
+        *ngIf="workPhone.invalid && (workPhone.dirty || workPhone.touched)"
+      >
+        <span class="text-danger" *ngIf="workPhone.errors?.['pattern']"
+          >{{ validatorMessages.phone }}
+        </span>
+      </ng-container>
     </div>
     <!--     <div class="col" *ngIf="showPostInput">
       <label class="form-label">ตำแหน่ง</label>
@@ -155,7 +222,7 @@
     </div> -->
   </div>
 
-  <div class="row mb-3" *ngIf="showNationalityInput">
+  <div class="row mb-2" *ngIf="showNationalityInput">
     <div class="col-6">
       <label class="form-label">สัญชาติ</label>
       <select

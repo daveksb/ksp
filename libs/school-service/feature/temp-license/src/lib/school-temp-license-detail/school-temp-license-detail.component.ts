@@ -69,7 +69,7 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
   searchStaff(idCard: string) {
     this.tempLicenseService.searchIdCard('1234567', idCard).subscribe((res) => {
       res.prefixTh = '1';
-      const { id, ...searchResult } = res;
+      const { id, schoolId, createDate, ...searchResult } = res;
       // remove id from object
       console.log('search result = ', searchResult);
       this.form.controls.userInfo.patchValue(searchResult);
