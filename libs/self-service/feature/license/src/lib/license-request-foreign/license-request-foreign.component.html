@@ -3,7 +3,11 @@
 </ksp-top-nav>
 
 <div class="main__container px-3 py-1">
-  <self-service-request-status></self-service-request-status>
+  <self-service-request-status
+    [headers]="headerGroup"
+    [title]="title"
+  ></self-service-request-status>
+  <br />
   <div class="box-header text-center">
     THE TEACHERS' COUNCIL OF THAILAND TEACHING LICENSE APPLICATION FORM
   </div>
@@ -36,7 +40,11 @@
   </mat-stepper>
 
   <div class="d-flex justify-content-center mb-3">
-    <button type="button" class="btn btn-secondary">Cancel</button>
-    <button type="button" class="ms-3 btn btn-primary">Save (Draft)</button>
+    <button type="button" (click)="cancel()" class="btn btn-secondary">
+      Cancel
+    </button>
+    <button type="button" (click)="save()" class="ms-3 btn btn-primary">
+      Save (Draft)
+    </button>
   </div>
 </div>

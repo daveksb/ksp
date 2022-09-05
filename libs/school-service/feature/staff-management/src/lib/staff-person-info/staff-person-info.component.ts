@@ -12,11 +12,6 @@ import { StaffPersonInfoService } from '@ksp/shared/service';
 export class StaffPersonInfoComponent implements OnInit {
   staffId!: number;
 
-  licenseButtons = [
-    'ใบอนุญาตประกอบวิชาชีพ - ครู',
-    'ใบอนุญาตประกอบวิชาชีพ - ผู้บริหารสถานศึกษา',
-  ];
-
   countries$!: Observable<any>;
   provinces$!: Observable<any>;
   amphurs1$!: Observable<any>;

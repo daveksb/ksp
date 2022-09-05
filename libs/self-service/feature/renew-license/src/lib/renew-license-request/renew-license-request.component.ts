@@ -10,6 +10,14 @@ import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
   styleUrls: ['./renew-license-request.component.scss'],
 })
 export class RenewLicenseRequestComponent {
+  headerGroup = [
+    'วันที่ทำรายการ',
+    'เลขใบคำขอ',
+    'เลขประจำตัวประชาชน',
+    'วันที่ออกใบอนุญาต',
+    'วันที่หมดอายุใบอนุญาต',
+  ];
+
   constructor(public dialog: MatDialog, private router: Router) {}
 
   save() {

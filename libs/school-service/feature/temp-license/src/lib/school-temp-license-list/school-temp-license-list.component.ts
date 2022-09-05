@@ -10,27 +10,20 @@ import { TempLicenseService } from '@ksp/shared/service';
 })
 export class SchoolTempLicenseListComponent {
   form = this.fb.group({
-    licenseNumber: [],
-    personId: [],
-    profession: [],
-    process: [],
-    status: [],
-    submitDateFrom: [],
-    submitDateTo: [],
+    licenseSearch: [],
   });
 
   schoolId = '0010201056';
   personSelected = false;
   displayedColumns: string[] = [
-    'order',
-    'reqCode',
-    'ssn',
-    'name',
-    'professType',
-    'workStep',
-    'status',
-    'editDate',
-    'sendDate',
+    'id',
+    'requestNo',
+    'idCardNo',
+    'requestType',
+    'requestProcess',
+    'requestStatus',
+    'updateDate',
+    'requestDate',
     'requestDoc',
     'approveDoc',
   ];
@@ -39,20 +32,17 @@ export class SchoolTempLicenseListComponent {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private tempLicenseService: TempLicenseService
-  ) /*
+    private tempLicenseService: TempLicenseService /*
     private route: ActivatedRoute,
     public dialog: MatDialog,*/
-  {}
-
-  data: TempLicenseInfo[] = [];
+  ) {}
 
   search() {
     this.tempLicenseService
       .getSchoolStaffLicense(this.schoolId)
-      .subscribe((res) => {
-        console.log('licenses = ', res);
-        //this.dataSource.data = res;
+      .subscribe((res: any) => {
+        //console.log('licenses = ', res);
+        this.dataSource.data = res;
       });
   }
 
@@ -80,44 +70,14 @@ export class SchoolTempLicenseListComponent {
 }
 
 export interface TempLicenseInfo {
-  order: number;
-  reqCode: string;
-  ssn: string;
-  name: string;
-  professType: string;
-  workStep: string;
-  status: string;
-  editDate: string;
-  sendDate: string;
-  requestDoc: string;
-  approveDoc: string;
+  id: number;
+  requestNo: string;
+  idCardNo: string;
+  requestType: string;
+  requestProcess: string;
+  requestStatus: string;
+  updateDate: string;
+  requestDate: string;
 }
-/*
-export const data: TempLicenseInfo[] = [
-  {
-    order: 1,
-    reqCode: 'SF_TR6406000001',
-    ssn: 'x-xxxx-xxxx-xx-x',
-    name: 'นายประหยัด จันทร์อังคาร',
-    professType: 'หนังสืออนุญาตชั่วคราว-ครู',
-    workStep: 'ตรวจสอบเอกสาร (2)',
-    status: 'ผ่านการตรวจสอบ',
-    editDate: '10 พ.ค. 2564',
-    sendDate: '1 พ.ค. 2564',
-    requestDoc: '',
-    approveDoc: '',
-  },
-  {
-    order: 2,
-    reqCode: 'SF_TR6406000001',
-    ssn: 'x-xxxx-xxxx-xx-x',
-    name: 'นายประหยัด จันทร์อังคาร',
-    professType: 'หนังสืออนุญาตชั่วคราว-ครู',
-    workStep: 'ตรวจสอบเอกสาร (2)',
-    status: 'ปรับแก้ไข/เพิ่มเติม',
-    editDate: '10 พ.ค. 2564',
-    sendDate: '1 พ.ค. 2564',
-    requestDoc: '',
-    approveDoc: '',
-  },
-]; */
+
+//name: string;
