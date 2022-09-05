@@ -10,11 +10,6 @@ export class StaffPersonInfoService {
   constructor(private http: HttpClient) {}
 
   addStaff(payload: any): Observable<any> {
-    /* const header = new HttpHeaders().set(
-      'Authorization',
-      `Bearer frrrjbtswWVuiFxOlK4aHOK6AvcDlK6bBfCnQEHvanYkhuWAWQS6WQx6n4uVmZTxCYi4JEJ9ysLo2h6WLvjHaeHpAx2C3bt3LGjq`
-    );
-    const headers = { headers: header }; */
     return this.http.post(
       `${environment.apiUrl}/kspschoolregister/schregisterinsert`,
       {
@@ -28,14 +23,6 @@ export class StaffPersonInfoService {
     return this.http.get(
       `${environment.apiUrl}/kspschoolregister/schstaffsearchid?id=${staffId}&tokenkey=${environment.token}`
     );
-  }
-
-  getStaffAddress(staffId: number): Observable<any> {
-    return this.http
-      .get(
-        `${environment.apiUrl}/kspschoolregister/schstaffsearchaddress?id=${staffId}&tokenkey=${environment.token}`
-      )
-      .pipe(map((data: any) => data.datareturn));
   }
 
   getStaffEdu(staffId: number): Observable<any> {

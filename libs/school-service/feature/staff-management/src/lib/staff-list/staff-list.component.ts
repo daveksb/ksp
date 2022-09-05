@@ -9,11 +9,12 @@ import { StaffManagementService } from '../staff-management.service';
   templateUrl: './staff-list.component.html',
   styleUrls: ['./staff-list.component.scss'],
 })
-export class StaffListComponent implements OnInit {
+export class StaffListComponent {
   form = this.fb.group({
     staffSearch: [],
   });
 
+  schoolId = '0010201056';
   personSelected = false;
   displayedColumns: string[] = [
     'id',
@@ -35,17 +36,10 @@ export class StaffListComponent implements OnInit {
     private service: StaffManagementService
   ) {}
 
-  ngOnInit(): void {
-    console.log('ssss = ');
-    /* this.service.getStaffs().subscribe((res) => {
-      console.log('res = ', res);
-    }); */
-  }
-
   search() {
-    this.service.getStaffs().subscribe((res) => {
-      console.log('res = ', res);
+    this.service.getStaffs(this.schoolId).subscribe((res) => {
       this.dataSource.data = res;
+      console.log('res = ', res);
     });
   }
 
@@ -60,6 +54,10 @@ export class StaffListComponent implements OnInit {
   addStaff() {
     this.router.navigate(['/staff-management', 'staff-person-info']);
   }
+
+  editStaff(staffId: number) {
+    this.router.navigate(['/staff-management', 'staff-person-info', staffId]);
+  }
 }
 
 export interface staffInfo {
@@ -73,42 +71,3 @@ export interface staffInfo {
   teaching: boolean;
   tempLicense: boolean;
 }
-
-/* export const data: staffInfo[] = [
-  {
-    order: 1,
-    ssn: 'x-xxxx-xxxx-xx-x',
-    name: 'นายธนารักษ์ ใจสะอาด',
-    startDate: 'วว/ดด/ปปปป',
-    endDate: 'วว/ดด/ปปปป',
-    profession: true,
-    teaching: false,
-    tempLicense: false,
-    edit: '',
-    view: '',
-  },
-  {
-    order: 2,
-    ssn: 'x-xxxx-xxxx-xx-x',
-    name: 'นายธนารักษ์ ใจสะอาด',
-    startDate: 'วว/ดด/ปปปป',
-    endDate: 'วว/ดด/ปปปป',
-    profession: false,
-    teaching: true,
-    tempLicense: false,
-    edit: '',
-    view: '',
-  },
-  {
-    order: 2,
-    ssn: 'x-xxxx-xxxx-xx-x',
-    name: 'นายธนารักษ์ ใจสะอาด',
-    startDate: 'วว/ดด/ปปปป',
-    endDate: 'วว/ดด/ปปปป',
-    profession: true,
-    teaching: false,
-    tempLicense: true,
-    edit: '',
-    view: '',
-  },
-]; */

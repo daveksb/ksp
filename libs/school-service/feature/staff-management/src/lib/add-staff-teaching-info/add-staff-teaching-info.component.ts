@@ -6,9 +6,11 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { StaffPersonInfoService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
-import { StaffPersonInfoService } from '../staff-person-info/staff-person-info.service';
+
+import { StaffTeachingInfoService } from './staff-teaching-info.service';
 
 @UntilDestroy()
 @Component({
@@ -70,14 +72,11 @@ export class AddStaffTeachingInfoComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private service: StaffPersonInfoService,
-    private activatedroute: ActivatedRoute
+    private activatedroute: ActivatedRoute,
+    private teachingInfoService: StaffTeachingInfoService
   ) {}
 
   ngOnInit(): void {
-    this.staffTypes$ = this.service.getStaffTypes();
-    this.positionTypes$ = this.service.getPositionTypes();
-    this.academicTypes$ = this.service.getAcademicStandingTypes();
-
     this.activatedroute.paramMap.subscribe((params) => {
       this.staffId = Number(params.get('id'));
     });
@@ -85,21 +84,56 @@ export class AddStaffTeachingInfoComponent implements OnInit {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
       //console.log('res = ', res);
     });
+
+    this.getList();
   }
 
-  back() {
-    this.router.navigate([
-      '/staff-management',
-      'staff-person-info',
-      this.staffId,
-    ]);
-  }
-
-  cancel() {
-    this.router.navigate(['/staff-management']);
+  getList() {
+    this.staffTypes$ = this.service.getStaffTypes();
+    this.positionTypes$ = this.service.getPositionTypes();
+    this.academicTypes$ = this.service.getAcademicStandingTypes();
   }
 
   save() {
+    this.addTeachingInfo();
+    this.addHiringInfo();
+  }
+
+  addTeachingInfo() {
+    const payload = {
+      staffId: '10',
+      teachingLevel:
+        "{'field1':'data1','field2':'data2','field3':['thai','english','math']}",
+      teachingSubjects: "{'field1':'data1','field2':'data2','field3':'data3'}",
+      teachingSubjectOther: '2',
+    };
+
+    this.teachingInfoService.addTeachingInfo(payload).subscribe((res) => {
+      console.log('add teaching info result = ', res);
+    });
+  }
+
+  addHiringInfo() {
+    const payload = {
+      staffId: '10',
+      psersonType: '2',
+      position: '3',
+      academicStanding: '4',
+      startDate: '2022-08-22T10:17:01',
+      endDate: '2022-08-22T10:17:01',
+      hiringStatus: '5',
+      hiringStatusDate: '2022-08-22T10:17:01',
+      hiringStatusReason: '7',
+      hiringContractNo: '8',
+      hiringPeriodYear: '9',
+      hiringPeriodMonth: '10',
+    };
+    this.teachingInfoService.addHiringInfo(payload).subscribe((res) => {
+      console.log('add hiring info result = ', res);
+    });
+  }
+
+  /*   save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -113,7 +147,7 @@ export class AddStaffTeachingInfoComponent implements OnInit {
         this.onCompleted();
       }
     });
-  }
+  } */
 
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
@@ -129,6 +163,18 @@ export class AddStaffTeachingInfoComponent implements OnInit {
         this.router.navigate(['/', 'staff-management']);
       }
     });
+  }
+
+  backPage() {
+    this.router.navigate([
+      '/staff-management',
+      'staff-person-info',
+      this.staffId,
+    ]);
+  }
+
+  cancel() {
+    this.router.navigate(['/staff-management']);
   }
 }
 

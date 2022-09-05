@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -20,22 +20,20 @@ export class FormAddressComponent extends KspFormBaseComponent {
   /**
    * Dark Mode : all inputs will have gray background and form container will have white background
    * Use in Self-Service
-   *
    * Normal Mode : all inputs will have white background and form container will have gray background
    * Use in E-service, School-Service
    */
 
   override form = this.fb.group({
-    //addressType: [],
     location: [''],
-    houseNo: [''],
+    houseNo: [null, Validators.required],
     moo: [''],
     alley: [''],
-    road: [''],
-    postcode: [''],
-    province: [''],
-    amphur: [''],
-    tumbol: [''],
+    road: [null, Validators.required],
+    postcode: [null, Validators.required],
+    province: [null, Validators.required],
+    amphur: [null, Validators.required],
+    tumbol: [null, Validators.required],
   });
 
   constructor(private fb: FormBuilder) {

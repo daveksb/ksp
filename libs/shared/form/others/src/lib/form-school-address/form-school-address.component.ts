@@ -11,23 +11,23 @@ import { providerFactory } from '@ksp/shared/utility';
 })
 export class FormSchoolAddressComponent extends KspFormBaseComponent {
   override form = this.fb.group({
-    letterNumber: [],
-    letterRelease: [],
-    schoolCode: [],
-    affiliation: [],
+    /*     letterNumber: [],
+    letterRelease: [], */
+    schoolId: [],
     schoolName: [],
-    houseNumber: [],
-    villageNumber: [],
-    lane: [],
+    bureauName: [],
+    address: [],
     road: [],
+    provinceName: [],
+    amphurName: [],
+    tumbon: [],
     zipCode: [],
-    provience: [],
-    subDistrict: [],
-    district: [],
-    phone: [],
+    moo: [],
+    eMail: [],
     fax: [],
-    email: [],
-    website: [],
+    street: [],
+    telphone: [],
+    web: [],
   });
 
   constructor(private fb: FormBuilder) {

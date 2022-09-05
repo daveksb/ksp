@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddressService, GeneralInfoService } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
-import { StaffPersonInfoService } from './staff-person-info.service';
+import { StaffPersonInfoService } from '@ksp/shared/service';
 
 @Component({
   templateUrl: './staff-person-info.component.html',
@@ -24,56 +24,8 @@ export class StaffPersonInfoComponent implements OnInit {
     userInfo: [],
     addr1: [],
     addr2: [],
-    /* addr1: this.fb.group({
-      //addressType: [1],
-      location: ['ทดสอบ'],
-      houseNo: ['345'],
-      moo: ['2'],
-      alley: ['ทดสอบ'],
-      road: ['ทดสอบ'],
-      postCode: ['36'],
-      province: ['33'],
-      amphur: ['34'],
-      tumbol: ['35'],
-    }),
-    addr2: this.fb.group({
-      //addressType: [2],
-      location: ['ทดสอบ'],
-      houseNo: ['123'],
-      moo: ['1'],
-      alley: ['ทดสอบ'],
-      road: ['ทดสอบ'],
-      postCode: ['36'],
-      province: ['33'],
-      amphur: ['34'],
-      tumbol: ['35'],
-    }), */
-    edu1: this.fb.group({
-      degreeLevel: ['1'],
-      degreeName: ['sample'],
-      isEducationDegree: ['1'],
-      major: ['sample'],
-      institution: ['sample'],
-      country: ['36'],
-      admissionDate: ['2022-08-22T10:17:01'],
-      graduateDate: ['2022-08-22T10:17:01'],
-      grade: ['3'],
-      otherProperty: ['sample'],
-      academicYear: ['2565'],
-    }),
-    edu2: this.fb.group({
-      degreeLevel: [null],
-      degreeName: [null],
-      isEducationDegree: [null],
-      major: [null],
-      institution: [null],
-      country: [null],
-      admissionDate: [null],
-      graduateDate: [null],
-      grade: [null],
-      otherProperty: [null],
-      academicYear: [null],
-    }),
+    edu1: [],
+    edu2: [],
   });
 
   constructor(
@@ -85,14 +37,6 @@ export class StaffPersonInfoComponent implements OnInit {
     private generalInfoService: GeneralInfoService
   ) {}
 
-  get addr1(): any {
-    return this.form.controls.addr1; //.controls;
-  }
-
-  get addr2(): any {
-    return this.form.controls.addr2; //.controls;
-  }
-
   ngOnInit(): void {
     this.activatedroute.paramMap.subscribe((params) => {
       this.staffId = Number(params.get('id'));
@@ -103,7 +47,7 @@ export class StaffPersonInfoComponent implements OnInit {
           this.form.controls.userInfo.patchValue(formData);
         });
 
-        this.staffService
+        this.addressService
           .getStaffAddress(this.staffId)
           .subscribe((res: any[]) => {
             //array of address
@@ -122,9 +66,20 @@ export class StaffPersonInfoComponent implements OnInit {
             });
           });
 
-        this.staffService.getStaffEdu(this.staffId).subscribe((res) => {
-          //console.log('edu = ', res);
-          //this.form.controls.userInfo.patchValue(formData);
+        this.staffService.getStaffEdu(this.staffId).subscribe((res: any[]) => {
+          res.map((edu, i) => {
+            const { id, schStaffId, geade, ...formData } = edu;
+            //this.countries$ = this.addressService.getCountry();
+            formData.admissionDate = formData.admissionDate.split('T')[0];
+            formData.graduateDate = formData.graduateDate.split('T')[0];
+            console.log('country = ', formData);
+            if (i === 0) {
+              this.form.controls.edu1.patchValue(formData);
+            }
+            if (i === 1) {
+              this.form.controls.edu2.patchValue(formData);
+            }
+          });
         });
       }
     });
@@ -134,7 +89,7 @@ export class StaffPersonInfoComponent implements OnInit {
 
   save() {
     const formData: any = this.form.getRawValue();
-    formData.userInfo.schoolId = '1234567';
+    formData.userInfo.schoolId = '0010201056';
     formData.userInfo.nationality = 'TH';
     formData.userInfo.createDate = new Date().toISOString();
     formData.addr1.addressType = 1;
@@ -157,17 +112,8 @@ export class StaffPersonInfoComponent implements OnInit {
     }
   }
 
-  nextPage() {
-    this.router.navigate([
-      '/staff-management',
-      'staff-teaching-info',
-      this.staffId,
-    ]);
-  }
-
   provinceChanged(type: number, evt: any) {
     const province = evt.target?.value;
-    console.log('province = ', province);
     if (province) {
       if (type === 1) {
         this.amphurs1$ = this.addressService.getAmphurs(province);
@@ -179,7 +125,6 @@ export class StaffPersonInfoComponent implements OnInit {
 
   amphurChanged(type: number, evt: any) {
     const amphur = evt.target?.value;
-    console.log('amphur = ', amphur);
     if (amphur) {
       if (type === 1) {
         this.tumbols1$ = this.addressService.getTumbols(amphur);
@@ -193,5 +138,21 @@ export class StaffPersonInfoComponent implements OnInit {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.provinces$ = this.addressService.getProvinces();
     this.countries$ = this.addressService.getCountry();
+  }
+
+  nextPage() {
+    this.router.navigate([
+      '/staff-management',
+      'staff-teaching-info',
+      this.staffId,
+    ]);
+  }
+
+  get addr1(): any {
+    return this.form.controls.addr1;
+  }
+
+  get addr2(): any {
+    return this.form.controls.addr2;
   }
 }
