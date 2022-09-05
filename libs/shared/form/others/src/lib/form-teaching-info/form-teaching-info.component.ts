@@ -25,12 +25,6 @@ export class FormTeachingInfoComponent
     level6: [false],
     level7: [false],
     level8: [false],
-    contractNumber: [],
-    post: [],
-    workStartDate: [],
-    workEndDate: [],
-    hireDurationYear: [],
-    hireDurationMonth: [],
   });
 
   constructor(private fb: FormBuilder) {

@@ -54,7 +54,7 @@
       <mat-tab-group
         (selectedIndexChange)="onTabIndexChanged($event)"
         class="tab-group mt-3"
-        selectedIndex="0"
+        selectedIndex="3"
       >
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address
@@ -113,9 +113,45 @@
 
         <mat-tab label="ข้อมูลการสอนและการจ้าง">
           <ksp-form-teaching-info
-            formControlName="teaching"
-          ></ksp-form-teaching-info
-          ><br />
+            formControlName="teachingInfo"
+          ></ksp-form-teaching-info>
+          <ksp-form-hiring-info
+            [positionTypes]="positionTypes$ | async"
+            formControlName="hiringInfo"
+          ></ksp-form-hiring-info>
+
+          <!--           <div class="bg-light px-3 py-3">
+            <div class="box-header">การขอหนังสืออนุญาตชั่วคราว</div>
+
+            <div class="row">
+              <div class="col mb-3">
+                <label class="form-label">ขออนุญาตฉบับที่</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  formControlName="contractNumber"
+                />
+              </div>
+            </div>
+
+            <table class="table w-25">
+              <thead>
+                <tr>
+                  <th scope="col">ลำดับ</th>
+                  <th scope="col">วันที่ยื่นคำขอ</th>
+                  <th scope="col">วันหมดอายุ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>10 พ.ค.2564</td>
+                  <td>1 พ.ค.2564</td>
+                </tr>
+              </tbody>
+            </table>
+          </div> -->
+
           <ksp-form-attachment [groups]="teachingInfo"></ksp-form-attachment>
         </mat-tab>
 

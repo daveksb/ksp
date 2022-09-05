@@ -30,7 +30,8 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     schoolAddr: [],
     edu1: [],
     edu2: [],
-    teaching: [],
+    teachingInfo: [],
+    hiringInfo: [],
     reason: [],
   });
 
@@ -39,6 +40,7 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
   tumbols1$!: Observable<any>;
   amphurs2$!: Observable<any>;
   tumbols2$!: Observable<any>;
+  positionTypes$!: Observable<any>;
 
   staffId!: number;
   schoolAddressLabel = `ที่อยู่ของสถานศึกษา
@@ -53,7 +55,6 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
   teachingInfo: string[] = [];
   reasonInfo: string[] = [];
   evidenceFiles: string[] = [];
-
   prefixList$!: Observable<any>;
 
   constructor(
@@ -65,7 +66,7 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     private tempLicenseService: TempLicenseService,
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
-    private staffService: StaffPersonInfoService
+    private personInfoService: StaffPersonInfoService
   ) {}
 
   ngOnInit(): void {
@@ -73,10 +74,12 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.staffId = Number(params.get('id'));
       if (this.staffId) {
-        this.staffService.getStaffUserInfo(this.staffId).subscribe((res) => {
-          const { id, schoolId, createDate, ...formData } = res;
-          this.form.controls.userInfo.patchValue(formData);
-        });
+        this.personInfoService
+          .getStaffUserInfo(this.staffId)
+          .subscribe((res) => {
+            const { id, schoolId, createDate, ...formData } = res;
+            this.form.controls.userInfo.patchValue(formData);
+          });
 
         this.addressService
           .getStaffAddress(this.staffId)
@@ -220,6 +223,8 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     this.evidenceFiles = this.service.evidenceFiles;
     this.updateHeaderLabel();
     this.provinces$ = this.addressService.getProvinces();
+    this.positionTypes$ = this.personInfoService.getPositionTypes();
+
     this.tempLicenseService
       .getSchoolInfo(this.schoolId)
       .pipe(untilDestroyed(this))
