@@ -23,7 +23,7 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     userInfo: [],
     addr1: [],
     addr2: [],
-    schoolAddress: [],
+    schoolAddr: [],
     edu1: [],
     edu2: [],
     teaching: [],
@@ -66,6 +66,35 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     this.getList();
   }
 
+  addTempLicense() {
+    const payload = {
+      requestNo: 'test-request-no',
+      requestStatus: null,
+      requestProcess: null,
+      requestDate: new Date().toISOString().split('.')[0],
+      schoolId: this.schoolId,
+      staffId: '121', //this.staffId,
+      idCardNo: '1234567878781',
+      requestType: '1',
+      updateDate: new Date().toISOString().split('.')[0],
+    };
+    this.tempLicenseService.addTempLicense(payload).subscribe((res) => {
+      console.log('add temp license = ', res);
+    });
+  }
+
+  /*   save() {
+    const dialogRef = this.dialog.open(ForbiddenPropertyFormComponent, {
+      width: '850px',
+    });
+
+    dialogRef.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.onConfirmed();
+      }
+    });
+  } */
+
   searchStaff(idCard: string) {
     const userInfo$ = this.tempLicenseService.searchIdCard(
       this.schoolId,
@@ -74,6 +103,7 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
 
     userInfo$
       .pipe(
+        untilDestroyed(this),
         mergeMap((res) => this.addressService.getStaffAddress(res.id)),
         withLatestFrom(userInfo$)
       )
@@ -129,18 +159,6 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     this.router.navigate(['/temp-license', 'list']);
   }
 
-  save() {
-    const dialogRef = this.dialog.open(ForbiddenPropertyFormComponent, {
-      width: '850px',
-    });
-
-    dialogRef.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        this.onConfirmed();
-      }
-    });
-  }
-
   onConfirmed() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
@@ -187,10 +205,11 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     this.provinces$ = this.addressService.getProvinces();
     this.tempLicenseService
       .getSchoolInfo(this.schoolId)
+      .pipe(untilDestroyed(this))
       .subscribe((res: any) => {
         //console.log('school = ', res);
         const { letterNumber, ...form } = res;
-        this.form.controls.schoolAddress.patchValue(form);
+        this.form.controls.schoolAddr.patchValue(form);
       });
   }
 }
