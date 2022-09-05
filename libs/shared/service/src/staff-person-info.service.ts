@@ -10,11 +10,6 @@ export class StaffPersonInfoService {
   constructor(private http: HttpClient) {}
 
   addStaff(payload: any): Observable<any> {
-    /* const header = new HttpHeaders().set(
-      'Authorization',
-      `Bearer frrrjbtswWVuiFxOlK4aHOK6AvcDlK6bBfCnQEHvanYkhuWAWQS6WQx6n4uVmZTxCYi4JEJ9ysLo2h6WLvjHaeHpAx2C3bt3LGjq`
-    );
-    const headers = { headers: header }; */
     return this.http.post(
       `${environment.apiUrl}/kspschoolregister/schregisterinsert`,
       {

@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddressService, GeneralInfoService } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
-import { StaffPersonInfoService } from './staff-person-info.service';
+import { StaffPersonInfoService } from '@ksp/shared/service';
 
 @Component({
   templateUrl: './staff-person-info.component.html',
@@ -31,32 +31,6 @@ export class StaffPersonInfoComponent implements OnInit {
     addr2: [],
     edu1: [],
     edu2: [],
-    /*     edu1: this.fb.group({
-      degreeLevel: ['1'],
-      degreeName: ['sample'],
-      isEducationDegree: ['1'],
-      major: ['sample'],
-      institution: ['sample'],
-      country: ['36'],
-      admissionDate: ['2022-08-22T10:17:01'],
-      graduateDate: ['2022-08-22T10:17:01'],
-      grade: ['3'],
-      otherProperty: ['sample'],
-      academicYear: ['2565'],
-    }),
-    edu2: this.fb.group({
-      degreeLevel: [null],
-      degreeName: [null],
-      isEducationDegree: [null],
-      major: [null],
-      institution: [null],
-      country: [null],
-      admissionDate: [null],
-      graduateDate: [null],
-      grade: [null],
-      otherProperty: [null],
-      academicYear: [null],
-    }), */
   });
 
   constructor(

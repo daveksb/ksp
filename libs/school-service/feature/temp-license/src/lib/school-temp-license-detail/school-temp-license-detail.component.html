@@ -89,7 +89,7 @@
         <mat-tab label="{{ schoolAddressLabel }}">
           <ng-template matTabContent>
             <ksp-form-school-address
-              formControlName="schoolAddress"
+              formControlName="schoolAddr"
             ></ksp-form-school-address>
           </ng-template>
         </mat-tab>
@@ -135,7 +135,7 @@
 
 <div class="sticky-bottom border">
   <ksp-bottom-nav
-    (saveClicked)="save()"
+    (saveClicked)="addTempLicense()"
     (cancelClicked)="backToListPage()"
     (tempSaveClicked)="backToListPage()"
     [isFirstPage]="true"
@@ -146,7 +146,8 @@
     [showTempSaveButton]="true"
     [showSaveButton]="true"
     [saveButtonLabel]="'ส่งใบคำขอ'"
-    [disableSaveButton]="!form.valid"
   ></ksp-bottom-nav>
-  <!-- [showSaveButton]="selectedTabIndex === 5" -->
+  <!-- [showSaveButton]="selectedTabIndex === 5"
+  [disableSaveButton]="!form.valid"
+  -->
 </div>

@@ -6,9 +6,10 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { StaffPersonInfoService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
-import { StaffPersonInfoService } from '../staff-person-info/staff-person-info.service';
+
 import { StaffTeachingInfoService } from './staff-teaching-info.service';
 
 @UntilDestroy()
