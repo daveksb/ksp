@@ -230,8 +230,7 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe((res: any) => {
         //console.log('school = ', res);
-        const { letterNumber, ...form } = res;
-        this.form.controls.schoolAddr.patchValue(form);
+        this.form.controls.schoolAddr.patchValue(res);
       });
   }
 }
