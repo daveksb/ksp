@@ -9,9 +9,26 @@ import { map, Observable } from 'rxjs';
 export class StaffTeachingInfoService {
   constructor(private http: HttpClient) {}
 
+  getTeachingInfo(staffId: number): Observable<any> {
+    return this.http.get(
+      `${environment.apiUrl}/kspschoolregister/schstaffteachinginfoselectid?staffId=${staffId}&tokenkey=${environment.token}`
+    );
+    //.pipe(map((data: any) => data.datareturn));
+  }
+
   addTeachingInfo(payload: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspschoolregister/schstaffteachinginfoinsert`,
+      {
+        ...payload,
+        tokenkey: environment.token,
+      }
+    );
+  }
+
+  updateTeachingInfo(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspschoolregister/schstaffteachinginfoupdate`,
       {
         ...payload,
         tokenkey: environment.token,
@@ -27,13 +44,5 @@ export class StaffTeachingInfoService {
         tokenkey: environment.token,
       }
     );
-  }
-
-  getTeachingInfo(staffId: number): Observable<any> {
-    //https://kspapi.oceanicnetwork.net/ksp/kspschoolregister/schstaffteachinginfoselectid?staffId=3&tokenkey=
-    return this.http.get(
-      `${environment.apiUrl}/kspschoolregister/schstaffteachinginfoselectid?staffId=${staffId}&tokenkey=${environment.token}`
-    );
-    //.pipe(map((data: any) => data.datareturn));
   }
 }
