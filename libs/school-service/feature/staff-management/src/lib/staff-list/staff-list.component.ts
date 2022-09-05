@@ -39,6 +39,7 @@ export class StaffListComponent {
   search() {
     this.service.getStaffs(this.schoolId).subscribe((res) => {
       this.dataSource.data = res;
+      console.log('res = ', res);
     });
   }
 

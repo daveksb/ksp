@@ -28,12 +28,12 @@ export class TempLicenseService {
       );
   }
 
-  getSchoolStaffLicense(schoolId: string) {
+  getSchoolStaffLicense(schoolId: string): Observable<any> {
     return this.http
       .get(
         `${environment.apiUrl}/kspschoolregister/schtmplicencerequestselect?schoolid=${schoolId}&tokenkey=${environment.token}`
       )
-      .pipe(shareReplay());
+      .pipe(map((data: any) => data.datareturn));
   }
 
   addTempLicense(payload: any): Observable<any> {
