@@ -11,10 +11,10 @@ import {
   AddressService,
   GeneralInfoService,
   StaffPersonInfoService,
+  TempLicenseService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { mergeMap, Observable, withLatestFrom } from 'rxjs';
-import { TempLicenseService } from '../temp-license.service';
 import { LicenseDetailService } from './school-temp-license-detail.service';
 
 @UntilDestroy()
@@ -102,7 +102,7 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
 
   addTempLicense() {
     const payload = {
-      requestNo: 'test-request-no',
+      requestNo: Date.now(),
       requestStatus: null,
       requestProcess: null,
       requestDate: new Date().toISOString().split('.')[0],
@@ -130,11 +130,11 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
   } */
 
   searchStaff(idCard: string) {
+    if (!idCard) return;
     this.tempLicenseService
-      .searchIdCard(this.schoolId, idCard)
+      .searchStaffFromIdCard(this.schoolId, idCard)
       .subscribe((res) => {
         //console.log('res = ', res);
-
         if (res.returnCode === '98') {
           this.router.navigate(['/temp-license', 'detail'], {
             queryParams: { type: this.requestType },
