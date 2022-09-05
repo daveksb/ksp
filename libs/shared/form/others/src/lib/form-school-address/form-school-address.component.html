@@ -1,7 +1,7 @@
 <form [formGroup]="form">
   <div class="bg-light px-3 py-3">
     <div class="box-header">ที่อยู่ของสถานศึกษาที่ขออนุญาต</div>
-    <div class="row">
+    <!--     <div class="row">
       <div class="col-6 col-6 mb-3">
         <label class="form-label">เลขที่หนังสือนำส่ง</label>
         <input
@@ -18,16 +18,16 @@
           formControlName="letterRelease"
         />
       </div>
-    </div>
+    </div> -->
 
     <div class="row">
       <div class="col-6 mb-3">
         <label class="form-label">รหัสหน่วยงาน/สถานศึกษา</label>
-        <input class="form-control" type="text" formControlName="schoolCode" />
+        <input class="form-control" type="text" formControlName="schoolId" />
       </div>
       <div class="col-6 mb-3">
         <label class="form-label">สังกัด</label>
-        <input class="form-control" type="text" formControlName="affiliation" />
+        <input class="form-control" type="text" formControlName="bureauName" />
       </div>
     </div>
 
@@ -38,22 +38,18 @@
       </div>
       <div class="col-6 mb-3">
         <label class="form-label">เลขที่</label>
-        <input class="form-control" type="text" formControlName="houseNumber" />
+        <input class="form-control" type="text" formControlName="address" />
       </div>
     </div>
 
     <div class="row">
       <div class="col-6 mb-3">
         <label class="form-label">หมู่ที่</label>
-        <input
-          class="form-control"
-          type="text"
-          formControlName="villageNumber"
-        />
+        <input class="form-control" type="text" formControlName="moo" />
       </div>
       <div class="col-6 mb-3">
         <label class="form-label">ซอย</label>
-        <input class="form-control" type="text" formControlName="lane" />
+        <input class="form-control" type="text" formControlName="street" />
       </div>
     </div>
 
@@ -71,37 +67,26 @@
     <div class="row">
       <div class="col-6 mb-3">
         <label class="form-label">จังหวัด</label>
-        <select class="form-select" formControlName="provience">
-          <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="provinceName"
+        />
       </div>
       <div class="col-6 mb-3">
         <label class="form-label">ตำบล</label>
-        <select class="form-select" formControlName="subDistrict">
-          <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
+        <input class="form-control" type="text" formControlName="tumbon" />
       </div>
     </div>
 
     <div class="row">
       <div class="col-6 mb-3">
         <label class="form-label">อำเภอ</label>
-        <select class="form-select" formControlName="district">
-          <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
+        <input class="form-control" type="text" formControlName="amphurName" />
       </div>
       <div class="col-6 mb-3">
         <label class="form-label">โทรศัพท์</label>
-        <input class="form-control" type="text" formControlName="phone" />
+        <input class="form-control" type="text" formControlName="telphone" />
       </div>
     </div>
 
@@ -112,14 +97,14 @@
       </div>
       <div class="col-6 mb-3">
         <label class="form-label">อีเมล</label>
-        <input class="form-control" type="text" formControlName="email" />
+        <input class="form-control" type="text" formControlName="eMail" />
       </div>
     </div>
 
     <div class="row">
       <div class="col-6 mb-3">
         <label class="form-label">เว็บไซต์</label>
-        <input class="form-control" type="text" formControlName="website" />
+        <input class="form-control" type="text" formControlName="web" />
       </div>
     </div>
   </div>

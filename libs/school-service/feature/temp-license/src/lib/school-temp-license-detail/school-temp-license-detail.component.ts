@@ -7,9 +7,9 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
-import { GeneralInfoService } from '@ksp/shared/service';
+import { AddressService, GeneralInfoService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable } from 'rxjs';
+import { mergeMap, Observable, withLatestFrom } from 'rxjs';
 import { TempLicenseService } from '../temp-license.service';
 import { LicenseDetailService } from './school-temp-license-detail.service';
 
@@ -30,11 +30,19 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     reason: [],
   });
 
+  provinces$!: Observable<any>;
+  amphurs1$!: Observable<any>;
+  tumbols1$!: Observable<any>;
+  amphurs2$!: Observable<any>;
+  tumbols2$!: Observable<any>;
+
+  staffId!: number;
   schoolAddressLabel = `ที่อยู่ของสถานศึกษา
   ที่ขออนุญาต`;
 
   requestTypeLabel = '';
   selectedTabIndex = 0;
+  schoolId = '0010201056';
 
   educationInfo: string[] = [];
   teachingInfo: string[] = [];
@@ -50,30 +58,48 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     private fb: FormBuilder,
     private service: LicenseDetailService,
     private tempLicenseService: TempLicenseService,
-    private generalInfoService: GeneralInfoService
+    private generalInfoService: GeneralInfoService,
+    private addressService: AddressService
   ) {}
 
   ngOnInit(): void {
-    this.educationInfo = this.service.educationInfo;
-    this.teachingInfo = this.service.teachingInfo;
-    this.reasonInfo = this.service.reasonInfo;
-    this.evidenceFiles = this.service.evidenceFiles;
-
-    this.updateHeaderLabel();
-    /* this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-    }); */
-
-    this.prefixList$ = this.generalInfoService.getPrefix();
+    this.getList();
   }
 
   searchStaff(idCard: string) {
-    this.tempLicenseService.searchIdCard('1234567', idCard).subscribe((res) => {
-      res.prefixTh = '1';
-      const { id, schoolId, createDate, ...searchResult } = res;
-      // remove id from object
-      console.log('search result = ', searchResult);
-      this.form.controls.userInfo.patchValue(searchResult);
-    });
+    const userInfo$ = this.tempLicenseService.searchIdCard(
+      this.schoolId,
+      idCard
+    );
+
+    userInfo$
+      .pipe(
+        mergeMap((res) => this.addressService.getStaffAddress(res.id)),
+        withLatestFrom(userInfo$)
+      )
+      .subscribe((res) => {
+        //console.log('res = ', res);
+        const addresses: any[] = res[0];
+        const userInfo = res[1];
+        this.staffId = userInfo.id;
+        const { id, schoolId, createDate, ...searchResult } = userInfo;
+        console.log('search result = ', searchResult);
+        this.form.controls.userInfo.patchValue(searchResult);
+
+        addresses.map((addr, i) => {
+          const { id, schStaffId, addressType, ...formData } = addr;
+          if (i === 0) {
+            this.amphurs1$ = this.addressService.getAmphurs(addr.province);
+            this.tumbols1$ = this.addressService.getTumbols(addr.amphur);
+            this.form.controls.addr1.patchValue(formData);
+          }
+          if (i === 1) {
+            this.amphurs2$ = this.addressService.getAmphurs(addr.province);
+            this.tumbols2$ = this.addressService.getTumbols(addr.amphur);
+            this.form.controls.addr2.patchValue(formData);
+          }
+        });
+      });
   }
 
   useSameAddress(evt: any) {
@@ -149,5 +175,22 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
         this.backToListPage();
       }
     });
+  }
+
+  getList() {
+    this.prefixList$ = this.generalInfoService.getPrefix();
+    this.educationInfo = this.service.educationInfo;
+    this.teachingInfo = this.service.teachingInfo;
+    this.reasonInfo = this.service.reasonInfo;
+    this.evidenceFiles = this.service.evidenceFiles;
+    this.updateHeaderLabel();
+    this.provinces$ = this.addressService.getProvinces();
+    this.tempLicenseService
+      .getSchoolInfo(this.schoolId)
+      .subscribe((res: any) => {
+        //console.log('school = ', res);
+        const { letterNumber, ...form } = res;
+        this.form.controls.schoolAddress.patchValue(form);
+      });
   }
 }

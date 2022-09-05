@@ -98,9 +98,11 @@
     (saveClicked)="save()"
     [isFirstPage]="true"
     [showSaveButton]="true"
-    [disableSaveButton]="!form.valid"
+    [disableSaveButton]="false"
     [disableNext]="!staffId"
     [disableNextMessage]="'กรุณาบันทึกก่อน'"
     [showCenterButtons]="true"
   ></ksp-bottom-nav>
 </div>
+
+<!-- [disableSaveButton]="!form.valid" -->
