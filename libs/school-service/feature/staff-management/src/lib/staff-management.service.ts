@@ -13,11 +13,11 @@ export class StaffManagementService {
 
   constructor(private http: HttpClient) {}
 
-  getStaffs(): Observable<any> {
+  getStaffs(schoolId: string): Observable<any> {
     //https://kspapi.oceanicnetwork.net/ksp/kspschoolregister/schstaffall?schoolId=14&tokenkey=frrrjbtswWVuiFxOlK4aHOK6AvcDlK6bBfCnQEHvanYkhuWAWQS6WQx6n4uVmZTxCYi4JEJ9ysLo2h6WLvjHaeHpAx2C3bt3LGjq
     return this.http
       .get(
-        `${this.serviceUrl}/kspschoolregister/schstaffall?schoolId=1234567&tokenkey=${this.token}`
+        `${this.serviceUrl}/kspschoolregister/schstaffall?schoolId=${schoolId}&tokenkey=${this.token}`
       )
       .pipe(map((data: any) => data.datareturn));
   }

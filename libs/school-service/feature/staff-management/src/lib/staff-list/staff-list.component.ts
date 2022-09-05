@@ -14,6 +14,7 @@ export class StaffListComponent {
     staffSearch: [],
   });
 
+  schoolId = '0010201056';
   personSelected = false;
   displayedColumns: string[] = [
     'id',
@@ -36,7 +37,7 @@ export class StaffListComponent {
   ) {}
 
   search() {
-    this.service.getStaffs().subscribe((res) => {
+    this.service.getStaffs(this.schoolId).subscribe((res) => {
       this.dataSource.data = res;
     });
   }
