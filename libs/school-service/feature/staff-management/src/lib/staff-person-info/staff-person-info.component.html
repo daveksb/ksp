@@ -98,7 +98,7 @@
     (saveClicked)="save()"
     [isFirstPage]="true"
     [showSaveButton]="true"
-    [disableSaveButton]="false"
+    [disableSaveButton]="!form.valid"
     [disableNext]="!staffId"
     [disableNextMessage]="'กรุณาบันทึกก่อน'"
     [showCenterButtons]="true"

@@ -24,6 +24,10 @@ const routes: Routes = [
         component: SchoolTempLicenseDetailComponent,
       },
       {
+        path: 'detail/:id',
+        component: SchoolTempLicenseDetailComponent,
+      },
+      {
         path: '**',
         component: PageNotFoundComponent,
       },

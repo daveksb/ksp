@@ -7,7 +7,11 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
-import { AddressService, GeneralInfoService } from '@ksp/shared/service';
+import {
+  AddressService,
+  GeneralInfoService,
+  StaffPersonInfoService,
+} from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { mergeMap, Observable, withLatestFrom } from 'rxjs';
 import { TempLicenseService } from '../temp-license.service';
@@ -40,6 +44,7 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
   schoolAddressLabel = `ที่อยู่ของสถานศึกษา
   ที่ขออนุญาต`;
 
+  requestType = 1;
   requestTypeLabel = '';
   selectedTabIndex = 0;
   schoolId = '0010201056';
@@ -59,11 +64,40 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     private service: LicenseDetailService,
     private tempLicenseService: TempLicenseService,
     private generalInfoService: GeneralInfoService,
-    private addressService: AddressService
+    private addressService: AddressService,
+    private staffService: StaffPersonInfoService
   ) {}
 
   ngOnInit(): void {
     this.getList();
+    this.route.paramMap.subscribe((params) => {
+      this.staffId = Number(params.get('id'));
+      if (this.staffId) {
+        this.staffService.getStaffUserInfo(this.staffId).subscribe((res) => {
+          const { id, schoolId, createDate, ...formData } = res;
+          this.form.controls.userInfo.patchValue(formData);
+        });
+
+        this.addressService
+          .getStaffAddress(this.staffId)
+          .subscribe((res: any[]) => {
+            //array of address
+            res.map((addr, i) => {
+              const { id, schStaffId, addressType, ...formData } = addr;
+              if (i === 0) {
+                this.amphurs1$ = this.addressService.getAmphurs(addr.province);
+                this.tumbols1$ = this.addressService.getTumbols(addr.amphur);
+                this.form.controls.addr1.patchValue(formData);
+              }
+              if (i === 1) {
+                this.amphurs2$ = this.addressService.getAmphurs(addr.province);
+                this.tumbols2$ = this.addressService.getTumbols(addr.amphur);
+                this.form.controls.addr2.patchValue(formData);
+              }
+            });
+          });
+      }
+    });
   }
 
   addTempLicense() {
@@ -96,39 +130,19 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
   } */
 
   searchStaff(idCard: string) {
-    const userInfo$ = this.tempLicenseService.searchIdCard(
-      this.schoolId,
-      idCard
-    );
-
-    userInfo$
-      .pipe(
-        untilDestroyed(this),
-        mergeMap((res) => this.addressService.getStaffAddress(res.id)),
-        withLatestFrom(userInfo$)
-      )
+    this.tempLicenseService
+      .searchIdCard(this.schoolId, idCard)
       .subscribe((res) => {
         //console.log('res = ', res);
-        const addresses: any[] = res[0];
-        const userInfo = res[1];
-        this.staffId = userInfo.id;
-        const { id, schoolId, createDate, ...searchResult } = userInfo;
-        console.log('search result = ', searchResult);
-        this.form.controls.userInfo.patchValue(searchResult);
 
-        addresses.map((addr, i) => {
-          const { id, schStaffId, addressType, ...formData } = addr;
-          if (i === 0) {
-            this.amphurs1$ = this.addressService.getAmphurs(addr.province);
-            this.tumbols1$ = this.addressService.getTumbols(addr.amphur);
-            this.form.controls.addr1.patchValue(formData);
-          }
-          if (i === 1) {
-            this.amphurs2$ = this.addressService.getAmphurs(addr.province);
-            this.tumbols2$ = this.addressService.getTumbols(addr.amphur);
-            this.form.controls.addr2.patchValue(formData);
-          }
-        });
+        if (res.returnCode === '98') {
+          this.router.navigate(['/temp-license', 'detail'], {
+            queryParams: { type: this.requestType },
+          });
+        } else
+          this.router.navigate(['/temp-license', 'detail', res.id], {
+            queryParams: { type: this.requestType },
+          });
       });
   }
 
@@ -146,10 +160,13 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
   updateHeaderLabel() {
     this.route.queryParams.subscribe((params) => {
       if (params['type'] == 1) {
+        this.requestType = 1;
         this.requestTypeLabel = '(ชาวไทย)';
       } else if (params['type'] == 2) {
+        this.requestType = 2;
         this.requestTypeLabel = '(ผู้บริหารการศึกษา)';
       } else if (params['type'] == 3) {
+        this.requestType = 3;
         this.requestTypeLabel = '(ชาวต่างชาติ)';
       }
     });
