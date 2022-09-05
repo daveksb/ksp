@@ -9,6 +9,9 @@ import { ConfirmDialogComponent } from '@ksp/shared/dialog';
   styleUrls: ['./license-request-foreign.component.scss'],
 })
 export class LicenseRequestForeignComponent implements OnInit {
+  headerGroup = ['Issue Date', 'Form ID'];
+  title = 'TEACHING LICENSE APPLICATION FORM';
+
   constructor(private router: Router, public dialog: MatDialog) {}
 
   ngOnInit(): void {}

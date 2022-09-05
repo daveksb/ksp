@@ -10,5 +10,5 @@ import { CommonModule } from '@angular/common';
 })
 export class RequestStatusComponent {
   @Input() headers: string[] = [];
-
+  @Input() title = 'รายละเอียดใบคำขอ';
 }

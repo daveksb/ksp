@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'ksp-license-foreign-agreement',
+  selector: 'self-service-license-foreign-agreement',
   templateUrl: './license-foreign-agreement.component.html',
   styleUrls: ['./license-foreign-agreement.component.scss'],
 })
 export class LicenseForeignAgreementComponent implements OnInit {
+  headerGroup = ['Issue Date', 'Form ID'];
+  title = 'TEACHING LICENSE APPLICATION FORM';
   rules = [
     `1. Applicants must provide evidence of checking their educational institution whether recognized by either the Office of the Civil Service
   Commission, Thailand or by accrediting organizations that play a role in higher education accreditation which are recognized by the
