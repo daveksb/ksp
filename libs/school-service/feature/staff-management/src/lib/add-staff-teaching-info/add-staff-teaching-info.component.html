@@ -107,7 +107,14 @@
         <div class="box-header">ช่วงชั้นที่สอน</div>
 
         <div class="row flex-row-reverse ms-3">
-          <ng-container *ngFor="let item of levels">
+          <label
+            formArrayName="teachingLevel"
+            *ngFor="let order of teachingLevelFormArray.controls; let i = index"
+          >
+            <input type="checkbox" class="me-2" [formControlName]="i" />
+            <label class="text-secondary">{{ levels[i].label }} </label>
+          </label>
+          <!--           <ng-container *ngFor="let item of levels">
             <div class="d-flex align-items-center col-3 mb-2 p-0">
               <input
                 type="checkbox"
@@ -116,7 +123,7 @@
               />
               <label class="text-secondary">{{ item.label }}</label>
             </div>
-          </ng-container>
+          </ng-container> -->
         </div>
       </div>
 
@@ -124,7 +131,7 @@
         <div class="box-header">ประเภทวิชาที่สอน</div>
 
         <div class="row ms-3">
-          <ng-container *ngFor="let subj of subjects">
+          <!--  <ng-container *ngFor="let subj of subjects">
             <div class="d-flex align-items-center col-4 mb-2 p-0">
               <input
                 type="checkbox"
@@ -133,7 +140,17 @@
               />
               <label class="text-secondary">{{ subj.label }}</label>
             </div>
-          </ng-container>
+          </ng-container> -->
+          <label
+            formArrayName="teachingSubjects"
+            *ngFor="
+              let order of teachingSubjectsFormArray.controls;
+              let i = index
+            "
+          >
+            <input type="checkbox" class="me-2" [formControlName]="i" />
+            <label class="text-secondary">{{ subjects[i].label }} </label>
+          </label>
         </div>
         <div class="row ms-4">
           <span class="col-3">

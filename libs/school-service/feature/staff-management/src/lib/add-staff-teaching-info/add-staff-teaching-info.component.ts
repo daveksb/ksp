@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -37,33 +37,10 @@ export class AddStaffTeachingInfoComponent implements OnInit {
     endWorkDate: [],
     staffStatus: [], //checkbox
     reason: [],
-    level1: [false],
-    level2: [false],
-    level3: [false],
-    level4: [false],
-    level5: [false],
-    level6: [false],
-    level7: [false],
     status: [],
+    teachingLevel: this.fb.array([]),
+    teachingSubjects: this.fb.array([]),
     statusDate: [],
-    subject1: [false],
-    subject2: [false],
-    subject3: [false],
-    subject4: [false],
-    subject5: [false],
-    subject6: [false],
-    subject7: [false],
-    subject8: [false],
-    subject9: [false],
-    subject10: [false],
-    subject11: [false],
-    subject12: [false],
-    subject13: [false],
-    subject14: [false],
-    subject15: [false],
-    subject16: [false],
-    subject17: [false],
-    subject18: [false],
     other: [],
   });
 
@@ -74,18 +51,41 @@ export class AddStaffTeachingInfoComponent implements OnInit {
     private service: StaffPersonInfoService,
     private activatedroute: ActivatedRoute,
     private teachingInfoService: StaffTeachingInfoService
-  ) {}
+  ) {
+    this.addCheckboxes();
+  }
 
   ngOnInit(): void {
     this.activatedroute.paramMap.subscribe((params) => {
       this.staffId = Number(params.get('id'));
+      if (this.staffId) {
+        //
+      }
     });
 
-    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      //console.log('res = ', res);
-    });
+    /*     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
+      console.log('form = ', res);
+    }); */
 
     this.getList();
+  }
+
+  get teachingLevelFormArray() {
+    return this.form.controls.teachingLevel as FormArray;
+  }
+
+  get teachingSubjectsFormArray() {
+    return this.form.controls.teachingSubjects as FormArray;
+  }
+
+  private addCheckboxes() {
+    this.levels.forEach(() =>
+      this.teachingLevelFormArray.push(new FormControl(false))
+    );
+
+    this.subjects.forEach(() =>
+      this.teachingSubjectsFormArray.push(new FormControl(false))
+    );
   }
 
   getList() {
@@ -96,18 +96,18 @@ export class AddStaffTeachingInfoComponent implements OnInit {
 
   save() {
     this.addTeachingInfo();
-    this.addHiringInfo();
+    //this.addHiringInfo();
   }
 
   addTeachingInfo() {
     const payload = {
-      staffId: '10',
-      teachingLevel:
-        "{'field1':'data1','field2':'data2','field3':['thai','english','math']}",
-      teachingSubjects: "{'field1':'data1','field2':'data2','field3':'data3'}",
+      staffId: this.staffId,
+      teachingLevel: JSON.stringify(this.form.controls.teachingLevel.value),
+      teachingSubjects: JSON.stringify(
+        this.form.controls.teachingSubjects.value
+      ),
       teachingSubjectOther: '2',
     };
-
     this.teachingInfoService.addTeachingInfo(payload).subscribe((res) => {
       console.log('add teaching info result = ', res);
     });
@@ -115,7 +115,7 @@ export class AddStaffTeachingInfoComponent implements OnInit {
 
   addHiringInfo() {
     const payload = {
-      staffId: '10',
+      staffId: this.staffId,
       psersonType: '2',
       position: '3',
       academicStanding: '4',
@@ -179,38 +179,37 @@ export class AddStaffTeachingInfoComponent implements OnInit {
 }
 
 export const levels = [
-  { label: 'ประกาศนียบัตรวิชาชีพ (ปวช.)', name: 'level6', value: false },
-  { label: 'ชั้นมัธยมปีที่ 1-3', name: 'level4', value: false },
-  { label: 'ชั้นประถมปีที่ 1-3', name: 'level2', value: false },
-  { label: 'อนุบาล', name: 'level1', value: false },
+  { label: 'ประกาศนียบัตรวิชาชีพ (ปวช.)', name: 'level6' },
+  { label: 'ชั้นมัธยมปีที่ 1-3', name: 'level4' },
+  { label: 'ชั้นประถมปีที่ 1-3', name: 'level2' },
+  { label: 'อนุบาล', name: 'level1' },
   {
     label: 'ประกาศนียบัตรวิชาชีพขั้นสูง (ปวส.) / อนุปริญญา',
     name: 'level7',
-    value: false,
   },
-  { label: 'ชั้นมัธยมปีที่ 4-6', name: 'level5', value: false },
-  { label: 'ชั้นประถมปีที่ 4-6', name: 'level3', value: false },
+  { label: 'ชั้นมัธยมปีที่ 4-6', name: 'level5' },
+  { label: 'ชั้นประถมปีที่ 4-6', name: 'level3' },
 ];
 
 export const subjects = [
-  { label: 'ภาษาไทย', name: 'subject1', value: false },
-  { label: 'วิทยาศาสตร์', name: 'subject6', value: false },
-  { label: 'คณิตศาสตร์', name: 'subject12', value: false },
-  { label: 'ภาษาต่างประเทศ', name: 'subject2', value: false },
-  { label: 'ปฐมวัย', name: 'subject7', value: false },
-  { label: 'เทคโนโลยีสารสนเทศและการสื่อสาร', name: 'subject13', value: false },
-  { label: 'สุขศึกษาและพละศึกษา', name: 'subject3', value: false },
-  { label: 'คหกรรม', name: 'subject8', value: false },
-  { label: 'พาณิชยกรรม/บริหารธุรกิจ', name: 'subject14', value: false },
-  { label: 'สังคมศึกษา ศาสนาและวัฒนธรรม', name: 'subject4', value: false },
-  { label: 'ศิลปกรรม', name: 'subject9', value: false },
-  { label: 'อุตสาหกรรม', name: 'subject15', value: false },
-  { label: 'การงานอาชีพและเทคโนโลยี', name: 'subject5', value: false },
-  { label: 'เกษตรกรรม', name: 'subject10', value: false },
-  { label: 'อุตสาหกรรมสิ่งทอ', name: 'subject16', value: false },
-  { label: 'อื่นๆ', name: 'subject18', value: false },
-  { label: 'ประมง', name: 'subject11', value: false },
-  { label: 'อุตสาหกรรมท่องเที่ยว', name: 'subject17', value: false },
+  { label: 'ภาษาไทย', name: 's1' },
+  { label: 'วิทยาศาสตร์', name: 's6' },
+  { label: 'คณิตศาสตร์', name: 's12' },
+  { label: 'ภาษาต่างประเทศ', name: 's2' },
+  { label: 'ปฐมวัย', name: 's7' },
+  { label: 'เทคโนโลยีสารสนเทศและการสื่อสาร', name: 's13' },
+  { label: 'สุขศึกษาและพละศึกษา', name: 's3' },
+  { label: 'คหกรรม', name: 's8' },
+  { label: 'พาณิชยกรรม/บริหารธุรกิจ', name: 's14' },
+  { label: 'สังคมศึกษา ศาสนาและวัฒนธรรม', name: 's4' },
+  { label: 'ศิลปกรรม', name: 's9' },
+  { label: 'อุตสาหกรรม', name: 's15' },
+  { label: 'การงานอาชีพและเทคโนโลยี', name: 's5' },
+  { label: 'เกษตรกรรม', name: 's10' },
+  { label: 'อุตสาหกรรมสิ่งทอ', name: 's16' },
+  { label: 'อื่นๆ', name: 's18' },
+  { label: 'ประมง', name: 's11' },
+  { label: 'อุตสาหกรรมท่องเที่ยว', name: 's17' },
 ];
 
 export const status = [

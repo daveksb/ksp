@@ -14,7 +14,7 @@ import {
   TempLicenseService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { mergeMap, Observable, withLatestFrom } from 'rxjs';
+import { Observable } from 'rxjs';
 import { LicenseDetailService } from './school-temp-license-detail.service';
 
 @UntilDestroy()

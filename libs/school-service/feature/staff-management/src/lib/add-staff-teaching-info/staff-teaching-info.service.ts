@@ -9,9 +9,6 @@ import { Observable } from 'rxjs';
 export class StaffTeachingInfoService {
   constructor(private http: HttpClient) {}
 
-  //https://kspapi.oceanicnetwork.net/ksp/kspschoolregister/schstaffteachinginfoupdate
-  //https://kspapi.oceanicnetwork.net/ksp/kspschoolregister/schstaffteachinginfoinsert
-
   addTeachingInfo(payload: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspschoolregister/schstaffteachinginfoinsert`,

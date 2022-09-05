@@ -27,6 +27,7 @@
 
       <button
         *ngIf="showTempSaveButton"
+        [disabled]="disableTempSaveButton"
         (click)="tempSaveClicked.emit(true)"
         type="button"
         class="btn btn-success ms-2"
