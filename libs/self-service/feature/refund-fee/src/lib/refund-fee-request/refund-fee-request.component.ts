@@ -13,6 +13,7 @@ import {
 })
 export class RefundFeeRequestComponent implements OnInit {
   refundInfo = ['1.สำเนาวุฒิการศึกษา'];
+  headerGroup = ['วันที่ทำรายการ', 'เลขใบคำขอ'];
   constructor(private router: Router, public dialog: MatDialog) {}
 
   ngOnInit(): void {}

@@ -1,12 +1,9 @@
-<div class="buttons__container">
-  <ng-container *ngFor="let group of groups; index as i">
-    <button class="btn__license">{{ group }}</button>
-    <!-- <button class="btn__license">
-      ใบอนุญาตประกอบวิชาชีพ-ผู้บริหารสถานศึกษา
-    </button>
-    <button class="btn__license">
-      ใบอนุญาตประกอบวิชาชีพ-ผู้บริหารการศึกษา
-    </button>
-    -->
+<div class="d-flex justify-content-center mb-3">
+  <ng-container *ngFor="let licenseButton of licenseButtons; index as i">
+    <!-- <button class="btn__license">{{ group }}</button> -->
+
+    <mat-button-toggle-group name="licenseType" aria-label="Font Style">
+      <mat-button-toggle value="bold">{{ licenseButton }}</mat-button-toggle>
+    </mat-button-toggle-group>
   </ng-container>
 </div>
