@@ -97,9 +97,20 @@ export class StaffPersonInfoComponent implements OnInit {
             });
           });
 
-        this.staffService.getStaffEdu(this.staffId).subscribe((res) => {
-          //console.log('edu = ', res);
-          //this.form.controls.userInfo.patchValue(formData);
+        this.staffService.getStaffEdu(this.staffId).subscribe((res: any[]) => {
+          res.map((edu, i) => {
+            const { id, schStaffId, geade, ...formData } = edu;
+            //this.countries$ = this.addressService.getCountry();
+            formData.admissionDate = formData.admissionDate.split('T')[0];
+            formData.graduateDate = formData.graduateDate.split('T')[0];
+            console.log('country = ', formData);
+            if (i === 0) {
+              this.form.controls.edu1.patchValue(formData);
+            }
+            if (i === 1) {
+              this.form.controls.edu2.patchValue(formData);
+            }
+          });
         });
       }
     });
