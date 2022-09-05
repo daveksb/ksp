@@ -7,9 +7,16 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
-import { GeneralInfoService } from '@ksp/shared/service';
+import { AddressService, GeneralInfoService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable } from 'rxjs';
+import {
+  forkJoin,
+  map,
+  mergeMap,
+  Observable,
+  switchMap,
+  withLatestFrom,
+} from 'rxjs';
 import { TempLicenseService } from '../temp-license.service';
 import { LicenseDetailService } from './school-temp-license-detail.service';
 
@@ -30,6 +37,7 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     reason: [],
   });
 
+  staffId!: number;
   schoolAddressLabel = `ที่อยู่ของสถานศึกษา
   ที่ขออนุญาต`;
 
@@ -50,30 +58,31 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     private fb: FormBuilder,
     private service: LicenseDetailService,
     private tempLicenseService: TempLicenseService,
-    private generalInfoService: GeneralInfoService
+    private generalInfoService: GeneralInfoService,
+    private addressService: AddressService
   ) {}
 
   ngOnInit(): void {
-    this.educationInfo = this.service.educationInfo;
-    this.teachingInfo = this.service.teachingInfo;
-    this.reasonInfo = this.service.reasonInfo;
-    this.evidenceFiles = this.service.evidenceFiles;
-
-    this.updateHeaderLabel();
-    /* this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-    }); */
-
-    this.prefixList$ = this.generalInfoService.getPrefix();
+    this.getList();
   }
 
   searchStaff(idCard: string) {
-    this.tempLicenseService.searchIdCard('1234567', idCard).subscribe((res) => {
-      res.prefixTh = '1';
-      const { id, schoolId, createDate, ...searchResult } = res;
-      // remove id from object
-      console.log('search result = ', searchResult);
-      this.form.controls.userInfo.patchValue(searchResult);
-    });
+    const userInfo$ = this.tempLicenseService.searchIdCard('1234567', idCard);
+
+    userInfo$
+      .pipe(
+        mergeMap((res) => this.addressService.getStaffAddress(res.id)),
+        withLatestFrom(userInfo$)
+      )
+      .subscribe((res) => {
+        //console.log('res = ', res);
+        const addr = res[0];
+        const userInfo = res[1];
+        this.staffId = userInfo.id;
+        const { id, schoolId, createDate, ...searchResult } = userInfo;
+        console.log('search result = ', searchResult);
+        this.form.controls.userInfo.patchValue(searchResult);
+      });
   }
 
   useSameAddress(evt: any) {
@@ -149,5 +158,14 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
         this.backToListPage();
       }
     });
+  }
+
+  getList() {
+    this.prefixList$ = this.generalInfoService.getPrefix();
+    this.educationInfo = this.service.educationInfo;
+    this.teachingInfo = this.service.teachingInfo;
+    this.reasonInfo = this.service.reasonInfo;
+    this.evidenceFiles = this.service.evidenceFiles;
+    this.updateHeaderLabel();
   }
 }

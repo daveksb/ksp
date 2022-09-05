@@ -76,7 +76,7 @@ export class StaffPersonInfoComponent implements OnInit {
           this.form.controls.userInfo.patchValue(formData);
         });
 
-        this.staffService
+        this.addressService
           .getStaffAddress(this.staffId)
           .subscribe((res: any[]) => {
             //array of address
