@@ -9,14 +9,7 @@ import {
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
 import { AddressService, GeneralInfoService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import {
-  forkJoin,
-  map,
-  mergeMap,
-  Observable,
-  switchMap,
-  withLatestFrom,
-} from 'rxjs';
+import { mergeMap, Observable, withLatestFrom } from 'rxjs';
 import { TempLicenseService } from '../temp-license.service';
 import { LicenseDetailService } from './school-temp-license-detail.service';
 
@@ -37,12 +30,19 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     reason: [],
   });
 
+  provinces$!: Observable<any>;
+  amphurs1$!: Observable<any>;
+  tumbols1$!: Observable<any>;
+  amphurs2$!: Observable<any>;
+  tumbols2$!: Observable<any>;
+
   staffId!: number;
   schoolAddressLabel = `ที่อยู่ของสถานศึกษา
   ที่ขออนุญาต`;
 
   requestTypeLabel = '';
   selectedTabIndex = 0;
+  schoolId = '0010201056';
 
   educationInfo: string[] = [];
   teachingInfo: string[] = [];
@@ -67,7 +67,10 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
   }
 
   searchStaff(idCard: string) {
-    const userInfo$ = this.tempLicenseService.searchIdCard('1234567', idCard);
+    const userInfo$ = this.tempLicenseService.searchIdCard(
+      this.schoolId,
+      idCard
+    );
 
     userInfo$
       .pipe(
@@ -76,12 +79,26 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
       )
       .subscribe((res) => {
         //console.log('res = ', res);
-        const addr = res[0];
+        const addresses: any[] = res[0];
         const userInfo = res[1];
         this.staffId = userInfo.id;
         const { id, schoolId, createDate, ...searchResult } = userInfo;
         console.log('search result = ', searchResult);
         this.form.controls.userInfo.patchValue(searchResult);
+
+        addresses.map((addr, i) => {
+          const { id, schStaffId, addressType, ...formData } = addr;
+          if (i === 0) {
+            this.amphurs1$ = this.addressService.getAmphurs(addr.province);
+            this.tumbols1$ = this.addressService.getTumbols(addr.amphur);
+            this.form.controls.addr1.patchValue(formData);
+          }
+          if (i === 1) {
+            this.amphurs2$ = this.addressService.getAmphurs(addr.province);
+            this.tumbols2$ = this.addressService.getTumbols(addr.amphur);
+            this.form.controls.addr2.patchValue(formData);
+          }
+        });
       });
   }
 
@@ -167,5 +184,13 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     this.reasonInfo = this.service.reasonInfo;
     this.evidenceFiles = this.service.evidenceFiles;
     this.updateHeaderLabel();
+    this.provinces$ = this.addressService.getProvinces();
+    this.tempLicenseService
+      .getSchoolInfo(this.schoolId)
+      .subscribe((res: any) => {
+        //console.log('school = ', res);
+        const { letterNumber, ...form } = res;
+        this.form.controls.schoolAddress.patchValue(form);
+      });
   }
 }

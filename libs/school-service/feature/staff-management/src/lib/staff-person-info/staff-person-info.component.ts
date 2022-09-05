@@ -29,7 +29,9 @@ export class StaffPersonInfoComponent implements OnInit {
     userInfo: [],
     addr1: [],
     addr2: [],
-    edu1: this.fb.group({
+    edu1: [],
+    edu2: [],
+    /*     edu1: this.fb.group({
       degreeLevel: ['1'],
       degreeName: ['sample'],
       isEducationDegree: ['1'],
@@ -54,7 +56,7 @@ export class StaffPersonInfoComponent implements OnInit {
       grade: [null],
       otherProperty: [null],
       academicYear: [null],
-    }),
+    }), */
   });
 
   constructor(
@@ -107,7 +109,7 @@ export class StaffPersonInfoComponent implements OnInit {
 
   save() {
     const formData: any = this.form.getRawValue();
-    formData.userInfo.schoolId = '1234567';
+    formData.userInfo.schoolId = '0010201056';
     formData.userInfo.nationality = 'TH';
     formData.userInfo.createDate = new Date().toISOString();
     formData.addr1.addressType = 1;

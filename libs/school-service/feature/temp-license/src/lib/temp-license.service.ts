@@ -16,4 +16,13 @@ export class TempLicenseService {
       )
       .pipe(shareReplay());
   }
+
+  getSchoolInfo(schoolId: string) {
+    //https://kspapi.oceanicnetwork.net/ksp/kspschoolregister/schschoolsearchschoolid?schoolId=1064020154&tokenkey=abcdjbtswWVuiFxOlK4aHOK6AvcDlK6bBfCnQEHvanYkhuWAWQS6WQx6n4uVmZTxCYi4JEJ9ysLo2h6WLvjHaeHpAx2C3bt3LGjq
+    return this.http
+      .get(
+        `${environment.apiUrl}/kspschoolregister/schschoolsearchschoolid?schoolId=${schoolId}&tokenkey=${environment.token}`
+      )
+      .pipe(shareReplay());
+  }
 }
