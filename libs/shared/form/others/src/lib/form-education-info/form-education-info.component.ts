@@ -34,12 +34,10 @@ export class FormEducationInfoComponent
   @Input() countries: any[] = [];
 
   /*   _defualtDegree = 0;
-
   @Input()
   set defualtDegree(value: any) {
     this._defualtDegree = value;
   }
-
   get defualtDegree(): any {
     return this._defualtDegree;
   } */

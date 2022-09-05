@@ -44,6 +44,8 @@ export class StaffPersonInfoComponent implements OnInit {
       if (this.staffId) {
         this.staffService.getStaffUserInfo(this.staffId).subscribe((res) => {
           const { id, schoolId, createDate, ...formData } = res;
+          formData.birthDate = formData.birthDate.split('T')[0];
+          console.log('kk = ', formData);
           this.form.controls.userInfo.patchValue(formData);
         });
 
