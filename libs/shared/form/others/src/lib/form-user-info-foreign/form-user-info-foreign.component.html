@@ -1,120 +1,122 @@
-<div class="row mb-2">
-  <div class="col-6">
-    <label class="form-label required">เลขที่หนังสือเดินทาง </label>
-    <input class="form-control" type="text" />
-  </div>
-  <div class="col">
-    <label class="form-label">วันที่ออก </label>
-    <input class="form-control" type="date" />
+<form [formGroup]="form">
+  <div class="row mb-2">
+    <div class="col-6">
+      <label class="form-label required">เลขที่หนังสือเดินทาง </label>
+      <input class="form-control" type="text" />
+    </div>
+    <div class="col">
+      <label class="form-label">วันที่ออก </label>
+      <input class="form-control" type="date" />
+    </div>
+
+    <div class="col">
+      <label class="form-label">วันที่หมดอายุ </label>
+      <input class="form-control" type="date" />
+    </div>
   </div>
 
-  <div class="col">
-    <label class="form-label">วันที่หมดอายุ </label>
-    <input class="form-control" type="date" />
-  </div>
-</div>
+  <div class="row mb-2">
+    <div class="col-2">
+      <label class="form-label required">คำนำหน้าชื่อไทย </label>
+      <select class="form-select">
+        <option selected>กรุณาเลือก</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+    <div class="col">
+      <label class="form-label">ชื่อภาษาไทย </label>
+      <input class="form-control" type="text" />
+    </div>
 
-<div class="row mb-2">
-  <div class="col-2">
-    <label class="form-label required">คำนำหน้าชื่อไทย </label>
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
-  </div>
-  <div class="col">
-    <label class="form-label">ชื่อภาษาไทย </label>
-    <input class="form-control" type="text" />
-  </div>
-
-  <div class="col">
-    <label class="form-label">ชื่อกลาง </label>
-    <input class="form-control" type="text" />
-  </div>
-  <div class="col">
-    <label class="form-label">นามสกุลภาษาไทย </label>
-    <input class="form-control" type="text" />
-  </div>
-</div>
-
-<div class="row mb-2">
-  <div class="col-2">
-    <label class="form-label required">คำนำหน้าชื่ออังกฤษ </label>
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
-  </div>
-  <div class="col">
-    <label class="form-label">ชื่อภาษาอังกฤษ </label>
-    <input class="form-control" type="text" />
+    <div class="col">
+      <label class="form-label">ชื่อกลาง </label>
+      <input class="form-control" type="text" />
+    </div>
+    <div class="col">
+      <label class="form-label">นามสกุลภาษาไทย </label>
+      <input class="form-control" type="text" />
+    </div>
   </div>
 
-  <div class="col">
-    <label class="form-label">ชื่อกลาง </label>
-    <input class="form-control" type="text" />
-  </div>
-  <div class="col">
-    <label class="form-label">นามสกุลภาษาอังกฤษ </label>
-    <input class="form-control" type="text" />
-  </div>
-</div>
+  <div class="row mb-2">
+    <div class="col-2">
+      <label class="form-label required">คำนำหน้าชื่ออังกฤษ </label>
+      <select class="form-select">
+        <option selected>กรุณาเลือก</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+    <div class="col">
+      <label class="form-label">ชื่อภาษาอังกฤษ </label>
+      <input class="form-control" type="text" />
+    </div>
 
-<div class="row mb-2">
-  <div class="col">
-    <label class="form-label">วันเดือนปีเกิด </label>
-    <input class="form-control" type="date" />
-  </div>
-
-  <div class="col">
-    <label class="form-label">ประเทศ </label>
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
-  </div>
-  <div class="col">
-    <label class="form-label">สัญชาติ </label>
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
-  </div>
-</div>
-
-<div class="row mb-2">
-  <div class="col">
-    <label class="form-label">Visa Class </label>
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+    <div class="col">
+      <label class="form-label">ชื่อกลาง </label>
+      <input class="form-control" type="text" />
+    </div>
+    <div class="col">
+      <label class="form-label">นามสกุลภาษาอังกฤษ </label>
+      <input class="form-control" type="text" />
+    </div>
   </div>
 
-  <div class="col">
-    <label class="form-label">ประเภทวีซ่า </label>
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
-  </div>
-</div>
+  <div class="row mb-2">
+    <div class="col">
+      <label class="form-label">วันเดือนปีเกิด </label>
+      <input class="form-control" type="date" />
+    </div>
 
-<div class="row mb-2">
-  <div class="col-6">
-    <label class="form-label">อนุญาตถึงวันที่ </label>
-    <input class="form-control" type="date" />
+    <div class="col">
+      <label class="form-label">ประเทศ </label>
+      <select class="form-select">
+        <option selected>กรุณาเลือก</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+    <div class="col">
+      <label class="form-label">สัญชาติ </label>
+      <select class="form-select">
+        <option selected>กรุณาเลือก</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
   </div>
-</div>
+
+  <div class="row mb-2">
+    <div class="col">
+      <label class="form-label">Visa Class </label>
+      <select class="form-select">
+        <option selected>กรุณาเลือก</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+
+    <div class="col">
+      <label class="form-label">ประเภทวีซ่า </label>
+      <select class="form-select">
+        <option selected>กรุณาเลือก</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-6">
+      <label class="form-label">อนุญาตถึงวันที่ </label>
+      <input class="form-control" type="date" />
+    </div>
+  </div>
+</form>

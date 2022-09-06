@@ -5,7 +5,10 @@
       <label class="box-header">วุฒิการศึกษาปริญญาตรี</label>
     </div>
     <ng-container *ngIf="degree1">
-      <ksp-form-education-info [showGradeInput]="true"></ksp-form-education-info
+      <ksp-form-education-info
+        [showGradeInput]="true"
+        formControlName="edu1"
+      ></ksp-form-education-info
     ></ng-container>
 
     <div class="d-flex align-items-center">
@@ -13,7 +16,7 @@
       <label class="box-header">วุฒิประกาศนียบัตรระดับบัณฑิตศึกษา</label>
     </div>
     <ng-container *ngIf="degree2">
-      <ksp-form-education-info></ksp-form-education-info
+      <ksp-form-education-info formControlName="edu2"></ksp-form-education-info
     ></ng-container>
 
     <div class="d-flex align-items-center">
@@ -21,7 +24,7 @@
       <label class="box-header">วุฒิปริญญาโท</label>
     </div>
     <ng-container *ngIf="degree3">
-      <ksp-form-education-info></ksp-form-education-info
+      <ksp-form-education-info formControlName="edu3"></ksp-form-education-info
     ></ng-container>
 
     <div class="d-flex align-items-center">
@@ -29,7 +32,7 @@
       <label class="box-header">วุฒิปริญญาเอก</label>
     </div>
     <ng-container *ngIf="degree4">
-      <ksp-form-education-info></ksp-form-education-info
+      <ksp-form-education-info formControlName="edu4"></ksp-form-education-info
     ></ng-container>
 
     <div class="d-flex align-items-center">
@@ -37,7 +40,7 @@
       <label class="box-header">วุฒิปริญญาอื่นๆ</label>
     </div>
     <ng-container *ngIf="degree5">
-      <ksp-form-education-info></ksp-form-education-info
+      <ksp-form-education-info formControlName="edu5"></ksp-form-education-info
     ></ng-container>
 
     <div class="d-flex align-items-center">
@@ -48,7 +51,11 @@
       >
     </div>
     <ng-container *ngIf="degree6">
-      <textarea class="form-control" rows="3"></textarea>
+      <textarea
+        class="form-control"
+        rows="3"
+        formControlName="other"
+      ></textarea>
     </ng-container>
   </div>
 </form>

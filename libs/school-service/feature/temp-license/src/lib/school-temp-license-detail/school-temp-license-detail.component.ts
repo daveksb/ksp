@@ -27,12 +27,15 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
 
   form = this.fb.group({
     userInfo: [],
+    userInfoForeign: [],
     addr1: [],
     addr2: [],
     edu1: [],
     edu2: [],
+    edu3: [],
     schoolAddr: [],
     teachingInfo: [],
+    teachingInfo2: [],
     hiringInfo: [],
     reason: [],
   });

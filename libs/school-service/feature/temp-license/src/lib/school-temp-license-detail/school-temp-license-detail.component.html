@@ -50,7 +50,9 @@
           ></ksp-form-user-info
         ></ng-container>
         <ng-container *ngIf="pageType === 3">
-          <ksp-form-user-info-foreign></ksp-form-user-info-foreign
+          <ksp-form-user-info-foreign
+            formControlName="userInfoForeign"
+          ></ksp-form-user-info-foreign
         ></ng-container>
       </div>
     </div>
@@ -127,6 +129,7 @@
 
           <ksp-form-education-info-manager
             *ngIf="pageType === 2 || pageType === 3"
+            formControlName="edu3"
           ></ksp-form-education-info-manager>
           <br />
           <ksp-form-attachment [groups]="educationInfo"></ksp-form-attachment>
@@ -141,7 +144,9 @@
           </ng-container>
 
           <ng-container *ngIf="pageType === 2">
-            <ksp-form-teaching-info-manager></ksp-form-teaching-info-manager
+            <ksp-form-teaching-info-manager
+              formControlName="teachingInfo2"
+            ></ksp-form-teaching-info-manager
             ><br
           /></ng-container>
 
