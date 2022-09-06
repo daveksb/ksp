@@ -2,7 +2,8 @@
   <div class="pb-3 pt-3" [ngClass]="{ 'ps-3 pe-3 bg-light': !isDarkMode }">
     <div class="box-header"><ng-content></ng-content></div>
 
-    <!-- <input type="text" formControlName="addressType" style="display: none" /> -->
+    <input type="hidden" formControlName="id" />
+    <input type="hidden" formControlName="addressType" />
 
     <div class="row">
       <div class="col-md-6 mb-3">

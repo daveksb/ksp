@@ -25,6 +25,8 @@ export class FormAddressComponent extends KspFormBaseComponent {
    */
 
   override form = this.fb.group({
+    id: [null],
+    addressType: [null],
     location: [''],
     houseNo: [null, Validators.required],
     moo: [''],
