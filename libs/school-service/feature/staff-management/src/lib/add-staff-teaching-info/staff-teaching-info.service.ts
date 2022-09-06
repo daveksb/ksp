@@ -38,7 +38,8 @@ export class StaffTeachingInfoService {
 
   addHiringInfo(payload: any): Observable<any> {
     return this.http.post(
-      `${environment.apiUrl}/kspschoolregister/schstaffhiringinfoinsert`,
+      //https://kspapi.oceanicnetwork.net/ksp/kspschoolregister/schstaffteachinginsertupdate
+      `${environment.apiUrl}/kspschoolregister/schstaffhiringinfoinsertupdate`,
       {
         ...payload,
         tokenkey: environment.token,
