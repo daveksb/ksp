@@ -35,6 +35,10 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     reason: [],
   });
 
+  eduSelected = false;
+  addrSelected = false;
+
+  countries$!: Observable<any>;
   provinces$!: Observable<any>;
   amphurs1$!: Observable<any>;
   tumbols1$!: Observable<any>;
@@ -66,7 +70,7 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     private tempLicenseService: TempLicenseService,
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
-    private personInfoService: StaffPersonInfoService
+    private staffService: StaffPersonInfoService
   ) {}
 
   ngOnInit(): void {
@@ -74,23 +78,35 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     this.checkStaffId();
   }
 
+  onTabIndexChanged(tabIndex: number) {
+    this.selectedTabIndex = tabIndex;
+    if (this.staffId && tabIndex === 2 && !this.eduSelected) {
+      this.patchEdu(this.staffId);
+      this.eduSelected = true;
+    }
+
+    if (this.staffId && tabIndex === 1 && !this.addrSelected) {
+      this.patchAddress(this.staffId);
+      this.addrSelected = true;
+    }
+  }
+
   checkStaffId() {
     this.route.paramMap.subscribe((params) => {
       this.staffId = Number(params.get('id'));
       if (this.staffId) {
         this.patchUserInfo(this.staffId);
-        this.patchAddress(this.staffId);
-        this.pathchEdu(this.staffId);
       }
     });
   }
 
   patchUserInfo(staffId: number) {
-    this.personInfoService
+    this.staffService
       .getStaffUserInfo(staffId)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         const { id, schoolId, createDate, ...formData } = res;
+        formData.birthDate = formData.birthDate.split('T')[0];
         this.form.controls.userInfo.patchValue(formData);
       });
   }
@@ -117,12 +133,25 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
       });
   }
 
-  pathchEdu(staffId: number) {
-    this.personInfoService
+  patchEdu(staffId: number) {
+    this.staffService
       .getStaffEdu(staffId)
       .pipe(untilDestroyed(this))
       .subscribe((res: any[]) => {
-        console.log('res ff = ', res);
+        //console.log('get edu = ', res);
+        if (res && res.length) {
+          res.map((edu, i) => {
+            const { id, schStaffId, ...formData } = edu;
+            formData.admissionDate = formData.admissionDate.split('T')[0];
+            formData.graduateDate = formData.graduateDate.split('T')[0];
+            if (i === 0) {
+              this.form.controls.edu1.patchValue(formData);
+            }
+            if (i === 1) {
+              this.form.controls.edu2.patchValue(formData);
+            }
+          });
+        }
       });
   }
 
@@ -187,8 +216,8 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     this.reasonInfo = this.service.reasonInfo;
     this.evidenceFiles = this.service.evidenceFiles;
     this.provinces$ = this.addressService.getProvinces();
-    this.positionTypes$ = this.personInfoService.getPositionTypes();
-
+    this.positionTypes$ = this.staffService.getPositionTypes();
+    this.countries$ = this.addressService.getCountry();
     this.tempLicenseService
       .getSchoolInfo(this.schoolId)
       .pipe(untilDestroyed(this))
@@ -211,10 +240,6 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
         this.requestTypeLabel = '(ชาวต่างชาติ)';
       }
     });
-  }
-
-  onTabIndexChanged(tabIndex: number) {
-    this.selectedTabIndex = tabIndex;
   }
 
   backToListPage() {

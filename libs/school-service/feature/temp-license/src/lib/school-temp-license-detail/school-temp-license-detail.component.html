@@ -98,13 +98,17 @@
           <ksp-form-education-info
             formControlName="edu1"
             [showGradeInput]="true"
-            >วุฒิการศึกษาปริญญาตรี</ksp-form-education-info
+            [countries]="countries$ | async"
+          >
+            วุฒิการศึกษาปริญญาตรี </ksp-form-education-info
           ><br />
           <ksp-form-education-info
             formControlName="edu2"
             [showGradeInput]="false"
             [showPropertyInput]="true"
-            >วุฒิการศึกษาปริญญาโท
+            [countries]="countries$ | async"
+          >
+            วุฒิการศึกษาปริญญาโท
           </ksp-form-education-info>
 
           <br />
