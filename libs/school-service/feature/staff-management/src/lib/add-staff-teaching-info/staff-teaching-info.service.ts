@@ -16,6 +16,12 @@ export class StaffTeachingInfoService {
     //.pipe(map((data: any) => data.datareturn));
   }
 
+  getHiringInfo(staffId: number): Observable<any> {
+    return this.http.get(
+      `${environment.apiUrl}/kspschoolregister/schstaffhiringinfoselectid?staffId=${staffId}&tokenkey=${environment.token}`
+    );
+  }
+
   addTeachingInfo(payload: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspschoolregister/schstaffteachinginfoinsert`,

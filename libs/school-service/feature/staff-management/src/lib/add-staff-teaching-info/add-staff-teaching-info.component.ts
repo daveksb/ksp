@@ -63,12 +63,28 @@ export class AddStaffTeachingInfoComponent implements OnInit {
       // edit mode
       if (this.staffId) {
         this.loadTeachingInfo(this.staffId);
+
+        this.teachingInfoService
+          .getHiringInfo(this.staffId)
+          .subscribe((res) => {
+            const {
+              teachingLevel,
+              teachingSubjects,
+              teachingSubjectOther,
+              ...formData
+            } = res;
+            formData.startDate = formData.startDate.split('T')[0];
+            formData.endDate = formData.endDate.split('T')[0];
+            formData.hiringStatusDate = formData.hiringStatusDate.split('T')[0];
+            //console.log('kk = ', res);
+            this.form.patchValue(formData);
+          });
       }
     });
 
-    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
+    /* this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
       console.log('form = ', res);
-    });
+    }); */
 
     this.getList();
   }
@@ -81,7 +97,19 @@ export class AddStaffTeachingInfoComponent implements OnInit {
         teachingLevel: JSON.parse(atob(res.teachingLevel)),
         teachingSubjects: JSON.parse(atob(res.teachingSubjects)),
       };
-      //console.log('loaded teaching info  = ', data);
+      console.log('loaded teaching info  = ', data);
+
+      levels.map((level, i) => {
+        const hasValue = data.teachingLevel.includes(level.value);
+        this.teachingLevelFormArray.controls[i].patchValue(hasValue);
+      });
+
+      subjects.map((subject, i) => {
+        const hasValue = data.teachingSubjects.includes(subject.value);
+        this.teachingSubjectsFormArray.controls[i].patchValue(hasValue);
+      });
+      /*  this.form.controls.teachingLevel.setValue(data);
+      this.form.controls.teachingSubjects.setValue(data); */
     });
   }
 
@@ -137,10 +165,10 @@ export class AddStaffTeachingInfoComponent implements OnInit {
       teachingSubjectOther: this.form.controls.teachingSubjectOther.value,
     };
 
-    console.log('payload = ', payload);
-    this.teachingInfoService.addTeachingInfo(payload).subscribe((res) => {
+    //console.log('payload = ', payload);
+    /* this.teachingInfoService.addTeachingInfo(payload).subscribe((res) => {
       console.log('add teaching info result = ', res);
-    });
+    }); */
   }
 
   addHiringInfo() {
@@ -159,9 +187,9 @@ export class AddStaffTeachingInfoComponent implements OnInit {
       hiringPeriodMonth: '10', */
     };
 
-    this.teachingInfoService.addHiringInfo(payload).subscribe((res) => {
+    /* this.teachingInfoService.addHiringInfo(payload).subscribe((res) => {
       console.log('add hiring info result = ', res);
-    });
+    }); */
   }
 
   /*   save() {
