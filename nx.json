@@ -38,7 +38,7 @@
       "style": "css"
     }
   },
-  "defaultProject": "self-service",
+  "defaultProject": "school-service",
   "targetDefaults": {
     "build": {
       "dependsOn": ["^build"]

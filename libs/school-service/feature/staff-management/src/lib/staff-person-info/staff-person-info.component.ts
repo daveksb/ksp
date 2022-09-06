@@ -73,7 +73,7 @@ export class StaffPersonInfoComponent implements OnInit {
               const { id, schStaffId, geade, ...formData } = edu;
               formData.admissionDate = formData.admissionDate.split('T')[0];
               formData.graduateDate = formData.graduateDate.split('T')[0];
-              console.log('country = ', formData);
+              console.log('edu form = ', formData);
               if (i === 0) {
                 this.form.controls.edu1.patchValue(formData);
               }

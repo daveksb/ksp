@@ -19,7 +19,7 @@ export class FormEducationInfoComponent
     isEducationDegree: [],
     major: [],
     institution: [],
-    country: [],
+    country: [''],
     admissionDate: [],
     graduateDate: [],
     grade: [],

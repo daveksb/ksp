@@ -40,5 +40,7 @@ export class FormSchoolAddressComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+
+    this.form.disable();
   }
 }
