@@ -30,15 +30,16 @@ export class AddStaffTeachingInfoComponent implements OnInit {
   status = status;
 
   form = this.fb.group({
-    staffType: [],
-    post: [],
+    psersonType: [],
+    position: [],
     academicStanding: [],
-    startWorkDate: [],
-    endWorkDate: [],
-    staffStatus: [], //checkbox
-    reason: [],
-    status: [],
-    statusDate: [],
+    startDate: [],
+    endDate: [],
+
+    hiringStatus: [], //radio
+    hiringStatusDate: [],
+    hiringStatusReason: [],
+
     teachingLevel: this.fb.array([]),
     teachingSubjects: this.fb.array([]),
     teachingSubjectOther: [],
@@ -65,9 +66,9 @@ export class AddStaffTeachingInfoComponent implements OnInit {
       }
     });
 
-    /*     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
+    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
       console.log('form = ', res);
-    }); */
+    });
 
     this.getList();
   }
@@ -80,7 +81,7 @@ export class AddStaffTeachingInfoComponent implements OnInit {
         teachingLevel: JSON.parse(atob(res.teachingLevel)),
         teachingSubjects: JSON.parse(atob(res.teachingSubjects)),
       };
-      console.log('loaded teaching info  = ', data);
+      //console.log('loaded teaching info  = ', data);
     });
   }
 
@@ -109,8 +110,8 @@ export class AddStaffTeachingInfoComponent implements OnInit {
   }
 
   save() {
-    this.addTeachingInfo();
-    //this.addHiringInfo();
+    //this.addTeachingInfo();
+    this.addHiringInfo();
   }
 
   // map json data for expected format for osb
@@ -145,18 +146,19 @@ export class AddStaffTeachingInfoComponent implements OnInit {
   addHiringInfo() {
     const payload = {
       staffId: this.staffId,
-      psersonType: '2',
-      position: '3',
-      academicStanding: '4',
-      startDate: '2022-08-22T10:17:01',
-      endDate: '2022-08-22T10:17:01',
-      hiringStatus: '5',
-      hiringStatusDate: '2022-08-22T10:17:01',
-      hiringStatusReason: '7',
-      hiringContractNo: '8',
+      psersonType: this.form.controls.psersonType.value,
+      position: this.form.controls.position.value,
+      academicStanding: this.form.controls.academicStanding.value,
+      startDate: this.form.controls.startDate.value,
+      endDate: this.form.controls.endDate.value,
+      hiringStatus: this.form.controls.hiringStatus.value,
+      hiringStatusDate: this.form.controls.hiringStatusDate.value,
+      hiringStatusReason: this.form.controls.hiringStatusReason.value,
+      /*  hiringContractNo: '8',
       hiringPeriodYear: '9',
-      hiringPeriodMonth: '10',
+      hiringPeriodMonth: '10', */
     };
+
     this.teachingInfoService.addHiringInfo(payload).subscribe((res) => {
       console.log('add hiring info result = ', res);
     });
@@ -242,7 +244,7 @@ export const subjects = [
 ];
 
 export const status = [
-  { label: 'แจ้งเข้า', value: 1 },
-  { label: 'แจ้งออก', value: 2 },
-  { label: 'ยกเลิกข้อมูล', value: 3 },
+  { label: 'แจ้งเข้า', value: '1' },
+  { label: 'แจ้งออก', value: '2' },
+  { label: 'ยกเลิกข้อมูล', value: '3' },
 ];
