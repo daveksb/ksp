@@ -1,0 +1,57 @@
+<form [formGroup]="form">
+  <div class="bg-light px-3 py-3">
+    <div class="box-header">ข้อมูลการจ้าง</div>
+
+    <div class="row">
+      <div class="col-6 mb-3">
+        <label class="form-label">ตำแหน่ง</label>
+        <select class="form-select" formControlName="post">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option *ngFor="let p of positionTypes" [value]="p?.id">
+            {{ p?.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-6 mb-3">
+        <label class="form-label">สัญญาจ้างเลขที่</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="hiringContractNo"
+        />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6 mb-3">
+        <label class="form-label">วันที่เริ่มปฏิบัติงาน</label>
+        <input class="form-control" type="date" formControlName="startDate" />
+      </div>
+      <div class="col-6 mb-3">
+        <label class="form-label">วันที่สิ้นสุดการปฏิบัติงาน</label>
+        <input class="form-control" type="date" formControlName="endDate" />
+      </div>
+    </div>
+
+    <div *ngIf="showHiringPeriod" class="row">
+      <div class="col-6 mb-3">
+        <label class="form-label">ระยะเวลาที่จ้าง (ปี)</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="hiringPeriodYear"
+        />
+      </div>
+      <div class="col-6 mb-3">
+        <label class="form-label">ระยะเวลาที่จ้าง (เดือน)</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="hiringPeriodMonth"
+        />
+      </div>
+    </div>
+  </div>
+
+  <br />
+</form>

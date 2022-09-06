@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import { FormHiringInfoComponent } from './form-hiring-info/form-hiring-info.component';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
     FormAttachmentComponent,
     FormUserInfoComponent,
     FormForeignIdComponent,
+    FormHiringInfoComponent,
   ],
   exports: [
     FormAddressComponent,
@@ -40,6 +42,7 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
     FormAttachmentComponent,
     FormUserInfoComponent,
     FormForeignIdComponent,
+    FormHiringInfoComponent,
   ],
 })
 export class SharedFormOthersModule {}

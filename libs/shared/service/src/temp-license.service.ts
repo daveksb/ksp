@@ -23,8 +23,8 @@ export class TempLicenseService {
         `${environment.apiUrl}/kspschoolregister/schschoolsearchschoolid?schoolId=${schoolId}&tokenkey=${environment.token}`
       )
       .pipe(
-        shareReplay(),
-        map((data: any) => data.datareturn)
+        shareReplay()
+        //map((data: any) => data.datareturn)
       );
   }
 
