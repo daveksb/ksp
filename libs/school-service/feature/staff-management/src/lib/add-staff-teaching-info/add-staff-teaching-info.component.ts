@@ -91,14 +91,24 @@ export class AddStaffTeachingInfoComponent implements OnInit {
 
   loadTeachingInfo(staffId: number) {
     this.teachingInfoService.getTeachingInfo(staffId).subscribe((res) => {
-      console.log('loaded teaching info = ', res);
+      //console.log('loaded teaching info = ', res);
       const data = {
         ...res,
         teachingLevel: JSON.parse(atob(res.teachingLevel)),
         teachingSubjects: JSON.parse(atob(res.teachingSubjects)),
       };
       console.log('loaded teaching info  = ', data);
-     /*  this.form.controls.teachingLevel.setValue(data);
+
+      levels.map((level, i) => {
+        const hasValue = data.teachingLevel.includes(level.value);
+        this.teachingLevelFormArray.controls[i].patchValue(hasValue);
+      });
+
+      subjects.map((subject, i) => {
+        const hasValue = data.teachingSubjects.includes(subject.value);
+        this.teachingSubjectsFormArray.controls[i].patchValue(hasValue);
+      });
+      /*  this.form.controls.teachingLevel.setValue(data);
       this.form.controls.teachingSubjects.setValue(data); */
     });
   }
