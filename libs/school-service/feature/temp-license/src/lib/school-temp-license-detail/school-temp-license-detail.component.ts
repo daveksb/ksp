@@ -27,14 +27,18 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     userInfo: [],
     addr1: [],
     addr2: [],
-    schoolAddr: [],
     edu1: [],
     edu2: [],
+    schoolAddr: [],
     teachingInfo: [],
     hiringInfo: [],
     reason: [],
   });
 
+  eduSelected = false;
+  addrSelected = false;
+
+  countries$!: Observable<any>;
   provinces$!: Observable<any>;
   amphurs1$!: Observable<any>;
   tumbols1$!: Observable<any>;
@@ -48,7 +52,6 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
 
   requestType = 1;
   requestTypeLabel = '';
-  selectedTabIndex = 0;
   schoolId = '0010201056';
 
   educationInfo: string[] = [];
@@ -66,12 +69,45 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     private tempLicenseService: TempLicenseService,
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
-    private personInfoService: StaffPersonInfoService
+    private staffService: StaffPersonInfoService
   ) {}
 
   ngOnInit(): void {
     this.getList();
     this.checkStaffId();
+    this.form.valueChanges.subscribe((res) => {
+      console.log('form = ', res);
+    });
+  }
+
+  tempSave() {
+    if (!this.staffId) {
+      const formData: any = this.form.getRawValue();
+      formData.userInfo.schoolId = '0010201056';
+      formData.userInfo.nationality = 'TH';
+      formData.userInfo.createDate = new Date().toISOString();
+      formData.addr1.addressType = 1;
+      formData.addr2.addressType = 2;
+
+      //console.log('formData = ', formData);
+      const { hiringInfo, reason, schoolAddr, teachingInfo, ...payload } =
+        formData;
+
+      console.log('payload = ', payload);
+      this.staffService.addStaff(payload).subscribe((res) => {
+        console.log('add staff result = ', res);
+        this.router.navigate(['/temp-license', 'detail', res.id], {
+          queryParams: { type: this.requestType },
+        });
+      });
+    }
+  }
+
+  onTabIndexChanged(tabIndex: number) {
+    if (this.staffId && tabIndex === 2 && !this.eduSelected) {
+      this.patchEdu(this.staffId);
+      this.eduSelected = true;
+    }
   }
 
   checkStaffId() {
@@ -80,17 +116,17 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
       if (this.staffId) {
         this.patchUserInfo(this.staffId);
         this.patchAddress(this.staffId);
-        this.pathchEdu(this.staffId);
       }
     });
   }
 
   patchUserInfo(staffId: number) {
-    this.personInfoService
+    this.staffService
       .getStaffUserInfo(staffId)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         const { id, schoolId, createDate, ...formData } = res;
+        formData.birthDate = formData.birthDate.split('T')[0];
         this.form.controls.userInfo.patchValue(formData);
       });
   }
@@ -117,23 +153,38 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
       });
   }
 
-  pathchEdu(staffId: number) {
-    this.personInfoService
+  patchEdu(staffId: number) {
+    this.staffService
       .getStaffEdu(staffId)
       .pipe(untilDestroyed(this))
       .subscribe((res: any[]) => {
-        console.log('res ff = ', res);
+        //console.log('get edu = ', res);
+        if (res && res.length) {
+          res.map((edu, i) => {
+            const { id, schStaffId, ...formData } = edu;
+            formData.admissionDate = formData.admissionDate.split('T')[0];
+            formData.graduateDate = formData.graduateDate.split('T')[0];
+            if (i === 0) {
+              this.form.controls.edu1.patchValue(formData);
+            }
+            if (i === 1) {
+              this.form.controls.edu2.patchValue(formData);
+            }
+          });
+        }
       });
   }
 
   addTempLicense() {
     const payload = {
-      requestNo: Date.now(),
-      requestStatus: null,
-      requestProcess: null,
+      ref1: '2', // school service
+      ref2: '03', // ใบคำขออนุญาต ชั่วคราว
+      ref3: '1',
+      requestStatus: 1,
+      requestProcess: 1,
       requestDate: new Date().toISOString().split('.')[0],
       schoolId: this.schoolId,
-      staffId: '121', //this.staffId,
+      staffId: this.staffId,
       idCardNo: '1234567878781',
       requestType: '1',
       updateDate: new Date().toISOString().split('.')[0],
@@ -174,6 +225,9 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
 
   useSameAddress(evt: any) {
     const checked = evt.target.checked;
+    this.amphurs2$ = this.amphurs1$;
+    this.tumbols2$ = this.tumbols1$;
+
     if (checked) {
       this.form.controls.addr2.patchValue(this.form.controls.addr1.value);
     }
@@ -187,8 +241,8 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     this.reasonInfo = this.service.reasonInfo;
     this.evidenceFiles = this.service.evidenceFiles;
     this.provinces$ = this.addressService.getProvinces();
-    this.positionTypes$ = this.personInfoService.getPositionTypes();
-
+    this.positionTypes$ = this.staffService.getPositionTypes();
+    this.countries$ = this.addressService.getCountry();
     this.tempLicenseService
       .getSchoolInfo(this.schoolId)
       .pipe(untilDestroyed(this))
@@ -213,10 +267,6 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     });
   }
 
-  onTabIndexChanged(tabIndex: number) {
-    this.selectedTabIndex = tabIndex;
-  }
-
   backToListPage() {
     this.router.navigate(['/temp-license', 'list']);
   }
@@ -232,11 +282,13 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
       },
     });
 
-    confirmDialog.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        this.onCompleted();
-      }
-    });
+    confirmDialog.componentInstance.confirmed
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res) {
+          this.onCompleted();
+        }
+      });
   }
 
   onCompleted() {
@@ -250,11 +302,35 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
       },
     });
 
-    completeDialog.componentInstance.completed.subscribe((res) => {
-      if (res) {
-        //this.backToListPage();
-        this.addTempLicense();
+    completeDialog.componentInstance.completed
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res) {
+          //this.backToListPage();
+          this.addTempLicense();
+        }
+      });
+  }
+
+  provinceChanged(type: number, evt: any) {
+    const province = evt.target?.value;
+    if (province) {
+      if (type === 1) {
+        this.amphurs1$ = this.addressService.getAmphurs(province);
+      } else if (type === 2) {
+        this.amphurs2$ = this.addressService.getAmphurs(province);
       }
-    });
+    }
+  }
+
+  amphurChanged(type: number, evt: any) {
+    const amphur = evt.target?.value;
+    if (amphur) {
+      if (type === 1) {
+        this.tumbols1$ = this.addressService.getTumbols(amphur);
+      } else if (type === 2) {
+        this.tumbols2$ = this.addressService.getTumbols(amphur);
+      }
+    }
   }
 }

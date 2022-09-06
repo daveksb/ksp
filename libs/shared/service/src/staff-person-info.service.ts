@@ -19,6 +19,16 @@ export class StaffPersonInfoService {
     );
   }
 
+  updateStaff(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspschoolregister/schstaffupdate`,
+      {
+        ...payload,
+        tokenkey: environment.token,
+      }
+    );
+  }
+
   getStaffUserInfo(staffId: number): Observable<any> {
     return this.http.get(
       `${environment.apiUrl}/kspschoolregister/schstaffsearchid?id=${staffId}&tokenkey=${environment.token}`

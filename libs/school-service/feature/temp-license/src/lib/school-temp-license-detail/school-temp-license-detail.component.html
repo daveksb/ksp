@@ -61,6 +61,8 @@
             [provinces]="provinces$ | async"
             [amphurs]="amphurs1$ | async"
             [tumbols]="tumbols1$ | async"
+            (provinceChanged)="provinceChanged(1, $event)"
+            (amphurChanged)="amphurChanged(1, $event)"
             formControlName="addr1"
             >ที่อยู่ทะเบียนบ้าน</ksp-form-address
           ><br />
@@ -68,6 +70,8 @@
             [provinces]="provinces$ | async"
             [amphurs]="amphurs2$ | async"
             [tumbols]="tumbols2$ | async"
+            (provinceChanged)="provinceChanged(2, $event)"
+            (amphurChanged)="amphurChanged(2, $event)"
             formControlName="addr2"
             >ที่อยู่ที่ติดต่อได้สะดวก
             <div class="d-flex align-items-center">
@@ -98,13 +102,17 @@
           <ksp-form-education-info
             formControlName="edu1"
             [showGradeInput]="true"
-            >วุฒิการศึกษาปริญญาตรี</ksp-form-education-info
+            [countries]="countries$ | async"
+          >
+            วุฒิการศึกษาปริญญาตรี </ksp-form-education-info
           ><br />
           <ksp-form-education-info
             formControlName="edu2"
             [showGradeInput]="false"
             [showPropertyInput]="true"
-            >วุฒิการศึกษาปริญญาโท
+            [countries]="countries$ | async"
+          >
+            วุฒิการศึกษาปริญญาโท
           </ksp-form-education-info>
 
           <br />
@@ -141,7 +149,7 @@
   <ksp-bottom-nav
     (saveClicked)="save()"
     (cancelClicked)="backToListPage()"
-    (tempSaveClicked)="backToListPage()"
+    (tempSaveClicked)="tempSave()"
     [isFirstPage]="true"
     [colorMode]="'green'"
     [isLastPage]="true"
