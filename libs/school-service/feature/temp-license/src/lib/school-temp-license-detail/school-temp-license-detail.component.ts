@@ -27,9 +27,9 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     userInfo: [],
     addr1: [],
     addr2: [],
-    schoolAddr: [],
     edu1: [],
     edu2: [],
+    schoolAddr: [],
     teachingInfo: [],
     hiringInfo: [],
     reason: [],
@@ -52,7 +52,6 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
 
   requestType = 1;
   requestTypeLabel = '';
-  selectedTabIndex = 0;
   schoolId = '0010201056';
 
   educationInfo: string[] = [];
@@ -78,16 +77,61 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     this.checkStaffId();
   }
 
+  tempSave() {
+    if (!this.staffId) {
+      const formData: any = this.form.getRawValue();
+      formData.userInfo.schoolId = '0010201056';
+      formData.userInfo.nationality = 'TH';
+      formData.userInfo.createDate = new Date().toISOString();
+      formData.addr1.addressType = 1;
+      formData.addr2.addressType = 2;
+
+      //console.log('formData = ', formData);
+      const { hiringInfo, reason, schoolAddr, teachingInfo, ...payload } =
+        formData;
+
+      console.log('payload = ', payload);
+      this.staffService.addStaff(payload).subscribe((res) => {
+        console.log('add staff result = ', res);
+        this.router.navigate(['/temp-license', 'detail', res.id], {
+          queryParams: { type: this.requestType },
+        });
+      });
+    }
+  }
+
   onTabIndexChanged(tabIndex: number) {
-    this.selectedTabIndex = tabIndex;
+    //this.selectedTabIndex = tabIndex;
     if (this.staffId && tabIndex === 2 && !this.eduSelected) {
       this.patchEdu(this.staffId);
       this.eduSelected = true;
     }
 
-    if (this.staffId && tabIndex === 1 && !this.addrSelected) {
+    /* if (this.staffId && tabIndex === 1 && !this.addrSelected) {
       this.patchAddress(this.staffId);
       this.addrSelected = true;
+    } */
+  }
+
+  provinceChanged(type: number, evt: any) {
+    const province = evt.target?.value;
+    if (province) {
+      if (type === 1) {
+        this.amphurs1$ = this.addressService.getAmphurs(province);
+      } else if (type === 2) {
+        this.amphurs2$ = this.addressService.getAmphurs(province);
+      }
+    }
+  }
+
+  amphurChanged(type: number, evt: any) {
+    const amphur = evt.target?.value;
+    if (amphur) {
+      if (type === 1) {
+        this.tumbols1$ = this.addressService.getTumbols(amphur);
+      } else if (type === 2) {
+        this.tumbols2$ = this.addressService.getTumbols(amphur);
+      }
     }
   }
 
@@ -96,6 +140,7 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
       this.staffId = Number(params.get('id'));
       if (this.staffId) {
         this.patchUserInfo(this.staffId);
+        this.patchAddress(this.staffId);
       }
     });
   }
@@ -203,6 +248,9 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
 
   useSameAddress(evt: any) {
     const checked = evt.target.checked;
+    this.amphurs2$ = this.amphurs1$;
+    this.tumbols2$ = this.tumbols1$;
+
     if (checked) {
       this.form.controls.addr2.patchValue(this.form.controls.addr1.value);
     }
@@ -257,11 +305,13 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
       },
     });
 
-    confirmDialog.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        this.onCompleted();
-      }
-    });
+    confirmDialog.componentInstance.confirmed
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res) {
+          this.onCompleted();
+        }
+      });
   }
 
   onCompleted() {
@@ -275,11 +325,13 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
       },
     });
 
-    completeDialog.componentInstance.completed.subscribe((res) => {
-      if (res) {
-        //this.backToListPage();
-        this.addTempLicense();
-      }
-    });
+    completeDialog.componentInstance.completed
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res) {
+          //this.backToListPage();
+          this.addTempLicense();
+        }
+      });
   }
 }
