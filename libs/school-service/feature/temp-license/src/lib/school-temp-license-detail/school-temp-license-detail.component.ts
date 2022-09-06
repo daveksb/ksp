@@ -30,7 +30,8 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     schoolAddr: [],
     edu1: [],
     edu2: [],
-    teaching: [],
+    teachingInfo: [],
+    hiringInfo: [],
     reason: [],
   });
 
@@ -39,6 +40,7 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
   tumbols1$!: Observable<any>;
   amphurs2$!: Observable<any>;
   tumbols2$!: Observable<any>;
+  positionTypes$!: Observable<any>;
 
   staffId!: number;
   schoolAddressLabel = `ที่อยู่ของสถานศึกษา
@@ -53,7 +55,6 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
   teachingInfo: string[] = [];
   reasonInfo: string[] = [];
   evidenceFiles: string[] = [];
-
   prefixList$!: Observable<any>;
 
   constructor(
@@ -65,39 +66,64 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     private tempLicenseService: TempLicenseService,
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
-    private staffService: StaffPersonInfoService
+    private personInfoService: StaffPersonInfoService
   ) {}
 
   ngOnInit(): void {
     this.getList();
+    this.checkStaffId();
+  }
+
+  checkStaffId() {
     this.route.paramMap.subscribe((params) => {
       this.staffId = Number(params.get('id'));
       if (this.staffId) {
-        this.staffService.getStaffUserInfo(this.staffId).subscribe((res) => {
-          const { id, schoolId, createDate, ...formData } = res;
-          this.form.controls.userInfo.patchValue(formData);
-        });
-
-        this.addressService
-          .getStaffAddress(this.staffId)
-          .subscribe((res: any[]) => {
-            //array of address
-            res.map((addr, i) => {
-              const { id, schStaffId, addressType, ...formData } = addr;
-              if (i === 0) {
-                this.amphurs1$ = this.addressService.getAmphurs(addr.province);
-                this.tumbols1$ = this.addressService.getTumbols(addr.amphur);
-                this.form.controls.addr1.patchValue(formData);
-              }
-              if (i === 1) {
-                this.amphurs2$ = this.addressService.getAmphurs(addr.province);
-                this.tumbols2$ = this.addressService.getTumbols(addr.amphur);
-                this.form.controls.addr2.patchValue(formData);
-              }
-            });
-          });
+        this.patchUserInfo(this.staffId);
+        this.patchAddress(this.staffId);
+        this.pathchEdu(this.staffId);
       }
     });
+  }
+
+  patchUserInfo(staffId: number) {
+    this.personInfoService
+      .getStaffUserInfo(staffId)
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        const { id, schoolId, createDate, ...formData } = res;
+        this.form.controls.userInfo.patchValue(formData);
+      });
+  }
+
+  patchAddress(staffId: number) {
+    this.addressService
+      .getStaffAddress(staffId)
+      .pipe(untilDestroyed(this))
+      .subscribe((res: any[]) => {
+        //array of address
+        res.map((addr, i) => {
+          const { id, schStaffId, addressType, ...formData } = addr;
+          if (i === 0) {
+            this.amphurs1$ = this.addressService.getAmphurs(addr.province);
+            this.tumbols1$ = this.addressService.getTumbols(addr.amphur);
+            this.form.controls.addr1.patchValue(formData);
+          }
+          if (i === 1) {
+            this.amphurs2$ = this.addressService.getAmphurs(addr.province);
+            this.tumbols2$ = this.addressService.getTumbols(addr.amphur);
+            this.form.controls.addr2.patchValue(formData);
+          }
+        });
+      });
+  }
+
+  pathchEdu(staffId: number) {
+    this.personInfoService
+      .getStaffEdu(staffId)
+      .pipe(untilDestroyed(this))
+      .subscribe((res: any[]) => {
+        console.log('res ff = ', res);
+      });
   }
 
   addTempLicense() {
@@ -117,7 +143,7 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     });
   }
 
-  /*   save() {
+  save() {
     const dialogRef = this.dialog.open(ForbiddenPropertyFormComponent, {
       width: '850px',
     });
@@ -127,7 +153,7 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
         this.onConfirmed();
       }
     });
-  } */
+  }
 
   searchStaff(idCard: string) {
     if (!idCard) return;
@@ -153,8 +179,23 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     }
   }
 
-  onTabIndexChanged(tabIndex: number) {
-    this.selectedTabIndex = tabIndex;
+  getList() {
+    this.updateHeaderLabel();
+    this.prefixList$ = this.generalInfoService.getPrefix();
+    this.educationInfo = this.service.educationInfo;
+    this.teachingInfo = this.service.teachingInfo;
+    this.reasonInfo = this.service.reasonInfo;
+    this.evidenceFiles = this.service.evidenceFiles;
+    this.provinces$ = this.addressService.getProvinces();
+    this.positionTypes$ = this.personInfoService.getPositionTypes();
+
+    this.tempLicenseService
+      .getSchoolInfo(this.schoolId)
+      .pipe(untilDestroyed(this))
+      .subscribe((res: any) => {
+        //console.log('school = ', res);
+        this.form.controls.schoolAddr.patchValue(res);
+      });
   }
 
   updateHeaderLabel() {
@@ -170,6 +211,10 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
         this.requestTypeLabel = '(ชาวต่างชาติ)';
       }
     });
+  }
+
+  onTabIndexChanged(tabIndex: number) {
+    this.selectedTabIndex = tabIndex;
   }
 
   backToListPage() {
@@ -207,26 +252,9 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.backToListPage();
+        //this.backToListPage();
+        this.addTempLicense();
       }
     });
-  }
-
-  getList() {
-    this.prefixList$ = this.generalInfoService.getPrefix();
-    this.educationInfo = this.service.educationInfo;
-    this.teachingInfo = this.service.teachingInfo;
-    this.reasonInfo = this.service.reasonInfo;
-    this.evidenceFiles = this.service.evidenceFiles;
-    this.updateHeaderLabel();
-    this.provinces$ = this.addressService.getProvinces();
-    this.tempLicenseService
-      .getSchoolInfo(this.schoolId)
-      .pipe(untilDestroyed(this))
-      .subscribe((res: any) => {
-        //console.log('school = ', res);
-        const { letterNumber, ...form } = res;
-        this.form.controls.schoolAddr.patchValue(form);
-      });
   }
 }

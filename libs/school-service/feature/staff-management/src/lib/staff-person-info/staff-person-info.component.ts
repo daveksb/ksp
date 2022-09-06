@@ -45,7 +45,6 @@ export class StaffPersonInfoComponent implements OnInit {
         this.staffService.getStaffUserInfo(this.staffId).subscribe((res) => {
           const { id, schoolId, createDate, ...formData } = res;
           formData.birthDate = formData.birthDate.split('T')[0];
-          console.log('kk = ', formData);
           this.form.controls.userInfo.patchValue(formData);
         });
 
@@ -69,19 +68,20 @@ export class StaffPersonInfoComponent implements OnInit {
           });
 
         this.staffService.getStaffEdu(this.staffId).subscribe((res: any[]) => {
-          res.map((edu, i) => {
-            const { id, schStaffId, geade, ...formData } = edu;
-            //this.countries$ = this.addressService.getCountry();
-            formData.admissionDate = formData.admissionDate.split('T')[0];
-            formData.graduateDate = formData.graduateDate.split('T')[0];
-            console.log('country = ', formData);
-            if (i === 0) {
-              this.form.controls.edu1.patchValue(formData);
-            }
-            if (i === 1) {
-              this.form.controls.edu2.patchValue(formData);
-            }
-          });
+          if (res && res.length) {
+            res.map((edu, i) => {
+              const { id, schStaffId, geade, ...formData } = edu;
+              formData.admissionDate = formData.admissionDate.split('T')[0];
+              formData.graduateDate = formData.graduateDate.split('T')[0];
+              console.log('edu form = ', formData);
+              if (i === 0) {
+                this.form.controls.edu1.patchValue(formData);
+              }
+              if (i === 1) {
+                this.form.controls.edu2.patchValue(formData);
+              }
+            });
+          }
         });
       }
     });

@@ -11,7 +11,8 @@ import { providerFactory } from '@ksp/shared/utility';
 })
 export class FormSchoolAddressComponent extends KspFormBaseComponent {
   override form = this.fb.group({
-    /*     letterNumber: [],
+    /*
+    letterNumber: [],
     letterRelease: [], */
     schoolId: [],
     schoolName: [],
@@ -39,5 +40,7 @@ export class FormSchoolAddressComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+
+    this.form.disable();
   }
 }

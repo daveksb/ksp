@@ -23,3 +23,5 @@ export * from './lib/qualification-approve-detail/qualification-approve-detail.c
 export * from './lib/qualification-approve-person/qualification-approve-person.component';
 
 export * from './lib/form-address-table/form-address-table.component';
+
+export * from './lib/form-hiring-info/form-hiring-info.component';
