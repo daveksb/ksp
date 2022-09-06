@@ -143,7 +143,7 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     });
   }
 
-  /*   save() {
+  save() {
     const dialogRef = this.dialog.open(ForbiddenPropertyFormComponent, {
       width: '850px',
     });
@@ -153,7 +153,7 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
         this.onConfirmed();
       }
     });
-  } */
+  }
 
   searchStaff(idCard: string) {
     if (!idCard) return;
@@ -179,8 +179,23 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     }
   }
 
-  onTabIndexChanged(tabIndex: number) {
-    this.selectedTabIndex = tabIndex;
+  getList() {
+    this.updateHeaderLabel();
+    this.prefixList$ = this.generalInfoService.getPrefix();
+    this.educationInfo = this.service.educationInfo;
+    this.teachingInfo = this.service.teachingInfo;
+    this.reasonInfo = this.service.reasonInfo;
+    this.evidenceFiles = this.service.evidenceFiles;
+    this.provinces$ = this.addressService.getProvinces();
+    this.positionTypes$ = this.personInfoService.getPositionTypes();
+
+    this.tempLicenseService
+      .getSchoolInfo(this.schoolId)
+      .pipe(untilDestroyed(this))
+      .subscribe((res: any) => {
+        //console.log('school = ', res);
+        this.form.controls.schoolAddr.patchValue(res);
+      });
   }
 
   updateHeaderLabel() {
@@ -196,6 +211,10 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
         this.requestTypeLabel = '(ชาวต่างชาติ)';
       }
     });
+  }
+
+  onTabIndexChanged(tabIndex: number) {
+    this.selectedTabIndex = tabIndex;
   }
 
   backToListPage() {
@@ -233,27 +252,9 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.backToListPage();
+        //this.backToListPage();
+        this.addTempLicense();
       }
     });
-  }
-
-  getList() {
-    this.updateHeaderLabel();
-    this.prefixList$ = this.generalInfoService.getPrefix();
-    this.educationInfo = this.service.educationInfo;
-    this.teachingInfo = this.service.teachingInfo;
-    this.reasonInfo = this.service.reasonInfo;
-    this.evidenceFiles = this.service.evidenceFiles;
-    this.provinces$ = this.addressService.getProvinces();
-    this.positionTypes$ = this.personInfoService.getPositionTypes();
-
-    this.tempLicenseService
-      .getSchoolInfo(this.schoolId)
-      .pipe(untilDestroyed(this))
-      .subscribe((res: any) => {
-        //console.log('school = ', res);
-        this.form.controls.schoolAddr.patchValue(res);
-      });
   }
 }
