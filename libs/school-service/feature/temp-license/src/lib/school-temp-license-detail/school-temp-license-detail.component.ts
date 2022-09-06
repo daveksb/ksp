@@ -23,14 +23,19 @@ import { LicenseDetailService } from './school-temp-license-detail.service';
   styleUrls: ['./school-temp-license-detail.component.scss'],
 })
 export class SchoolTempLicenseDetailComponent implements OnInit {
+  pageType = 0;
+
   form = this.fb.group({
     userInfo: [],
+    userInfoForeign: [],
     addr1: [],
     addr2: [],
     edu1: [],
     edu2: [],
+    edu3: [],
     schoolAddr: [],
     teachingInfo: [],
+    teachingInfo2: [],
     hiringInfo: [],
     reason: [],
   });
@@ -75,9 +80,13 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
   ngOnInit(): void {
     this.getList();
     this.checkStaffId();
-    /* this.form.valueChanges.subscribe((res) => {
-      console.log('form = ', res);
-    }); */
+    this.form.valueChanges.subscribe((res) => {
+      //console.log('form = ', res);
+    });
+    this.route.queryParams.subscribe((res) => {
+      this.pageType = Number(res['type']);
+      //console.log('res = ', this.pageType);
+    });
   }
 
   tempSave() {

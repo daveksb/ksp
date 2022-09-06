@@ -8,3 +8,9 @@ export enum SchoolServiceRequestRewardType {
   ranking,
   objetion,
 }
+
+export enum tempLicenseRequestType {
+  thai,
+  manager,
+  foreign,
+}
