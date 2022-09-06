@@ -75,6 +75,9 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
   ngOnInit(): void {
     this.getList();
     this.checkStaffId();
+    this.form.valueChanges.subscribe((res) => {
+      console.log('form = ', res);
+    });
   }
 
   tempSave() {
@@ -101,37 +104,9 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
   }
 
   onTabIndexChanged(tabIndex: number) {
-    //this.selectedTabIndex = tabIndex;
     if (this.staffId && tabIndex === 2 && !this.eduSelected) {
       this.patchEdu(this.staffId);
       this.eduSelected = true;
-    }
-
-    /* if (this.staffId && tabIndex === 1 && !this.addrSelected) {
-      this.patchAddress(this.staffId);
-      this.addrSelected = true;
-    } */
-  }
-
-  provinceChanged(type: number, evt: any) {
-    const province = evt.target?.value;
-    if (province) {
-      if (type === 1) {
-        this.amphurs1$ = this.addressService.getAmphurs(province);
-      } else if (type === 2) {
-        this.amphurs2$ = this.addressService.getAmphurs(province);
-      }
-    }
-  }
-
-  amphurChanged(type: number, evt: any) {
-    const amphur = evt.target?.value;
-    if (amphur) {
-      if (type === 1) {
-        this.tumbols1$ = this.addressService.getTumbols(amphur);
-      } else if (type === 2) {
-        this.tumbols2$ = this.addressService.getTumbols(amphur);
-      }
     }
   }
 
@@ -202,12 +177,14 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
 
   addTempLicense() {
     const payload = {
-      requestNo: Date.now(),
-      requestStatus: null,
-      requestProcess: null,
+      ref1: '2', // school service
+      ref2: '03', // ใบคำขออนุญาต ชั่วคราว
+      ref3: '1',
+      requestStatus: 1,
+      requestProcess: 1,
       requestDate: new Date().toISOString().split('.')[0],
       schoolId: this.schoolId,
-      staffId: '121', //this.staffId,
+      staffId: this.staffId,
       idCardNo: '1234567878781',
       requestType: '1',
       updateDate: new Date().toISOString().split('.')[0],
@@ -333,5 +310,27 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
           this.addTempLicense();
         }
       });
+  }
+
+  provinceChanged(type: number, evt: any) {
+    const province = evt.target?.value;
+    if (province) {
+      if (type === 1) {
+        this.amphurs1$ = this.addressService.getAmphurs(province);
+      } else if (type === 2) {
+        this.amphurs2$ = this.addressService.getAmphurs(province);
+      }
+    }
+  }
+
+  amphurChanged(type: number, evt: any) {
+    const amphur = evt.target?.value;
+    if (amphur) {
+      if (type === 1) {
+        this.tumbols1$ = this.addressService.getTumbols(amphur);
+      } else if (type === 2) {
+        this.tumbols2$ = this.addressService.getTumbols(amphur);
+      }
+    }
   }
 }

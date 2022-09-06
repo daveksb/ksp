@@ -35,14 +35,17 @@ export class AddressService {
     return this.http
       .get(`${environment.apiUrl}/kspmasterdata/amphur?provinceId=${pid}`)
       .pipe(
-        map((data: any) => data.datareturn),
-        shareReplay()
+        shareReplay(),
+        map((data: any) => data.datareturn)
       );
   }
 
   getTumbols(aid: number): Observable<any> {
     return this.http
       .get(`${environment.apiUrl}/kspmasterdata/tambol?amphurCode=${aid}`)
-      .pipe(map((data: any) => data.datareturn));
+      .pipe(
+        shareReplay(),
+        map((data: any) => data.datareturn)
+      );
   }
 }
