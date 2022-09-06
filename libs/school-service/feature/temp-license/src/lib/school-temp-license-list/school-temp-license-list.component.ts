@@ -32,18 +32,25 @@ export class SchoolTempLicenseListComponent {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private tempLicenseService: TempLicenseService /*
-    private route: ActivatedRoute,
-    public dialog: MatDialog,*/
+    private tempLicenseService: TempLicenseService
   ) {}
 
   search() {
-    this.tempLicenseService
-      .getSchoolStaffLicense(this.schoolId)
-      .subscribe((res: any) => {
-        //console.log('licenses = ', res);
-        this.dataSource.data = res;
-      });
+    const payload = {
+      schoolid: `${this.schoolId}`,
+      requestno: '2-03-1-650906-00002',
+      idcardno: '5555555555555',
+      requesttype: null,
+      requestprocess: null,
+      requeststatus: null,
+      requestdatefrom: null,
+      requestdateto: null,
+    };
+
+    this.tempLicenseService.searchRequest(payload).subscribe((res: any) => {
+      //console.log('licenses = ', res);
+      this.dataSource.data = res;
+    });
   }
 
   clear() {
