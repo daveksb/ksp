@@ -27,7 +27,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
 
   ngOnInit(): void {
     this.form.valueChanges.subscribe((res) => {
-      //console.log('res = ', res);
+      console.log('res = ', res);
     });
   }
 
