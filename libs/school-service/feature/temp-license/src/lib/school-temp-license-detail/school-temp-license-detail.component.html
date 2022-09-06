@@ -32,21 +32,26 @@
               #idcard
             />
           </div>
-          <div class="col-3 mt-4">
+          <div class="col-auto mt-4">
             <button
               type="button"
-              class="btn btn-secondary"
+              class="btn btn-primary w-auto"
               (click)="searchStaff(idcard.value)"
             >
               ค้นหา
             </button>
           </div>
         </div>
-        <ksp-form-user-info
-          [isDarkMode]="false"
-          [prefixList]="prefixList$ | async"
-          formControlName="userInfo"
-        ></ksp-form-user-info>
+        <ng-container *ngIf="pageType === 1 || pageType === 2">
+          <ksp-form-user-info
+            [isDarkMode]="false"
+            [prefixList]="prefixList$ | async"
+            formControlName="userInfo"
+          ></ksp-form-user-info
+        ></ng-container>
+        <ng-container *ngIf="pageType === 3">
+          <ksp-form-user-info-foreign></ksp-form-user-info-foreign
+        ></ng-container>
       </div>
     </div>
 
@@ -99,45 +104,61 @@
         </mat-tab>
 
         <mat-tab label="ข้อมูลทางการศึกษา">
-          <ksp-form-education-info
-            formControlName="edu1"
-            [showGradeInput]="true"
-            [countries]="countries$ | async"
-          >
-            วุฒิการศึกษาปริญญาตรี </ksp-form-education-info
-          ><br />
-          <ksp-form-education-info
-            formControlName="edu2"
-            [showGradeInput]="false"
-            [showPropertyInput]="true"
-            [countries]="countries$ | async"
-          >
-            วุฒิการศึกษาปริญญาโท
-          </ksp-form-education-info>
+          <ng-container *ngIf="pageType === 1">
+            <ksp-form-education-info
+              formControlName="edu1"
+              [showGradeInput]="true"
+              [countries]="countries$ | async"
+            >
+              วุฒิการศึกษาปริญญาตรี </ksp-form-education-info
+            ><br
+          /></ng-container>
 
+          <ng-container *ngIf="pageType === 1">
+            <ksp-form-education-info
+              formControlName="edu2"
+              [showGradeInput]="false"
+              [showPropertyInput]="true"
+              [countries]="countries$ | async"
+            >
+              วุฒิการศึกษาปริญญาโท </ksp-form-education-info
+            ><br
+          /></ng-container>
+
+          <ksp-form-education-info-manager
+            *ngIf="pageType === 2 || pageType === 3"
+          ></ksp-form-education-info-manager>
           <br />
-          <!-- <ksp-form-attachment [groups]="educationInfo"></ksp-form-attachment> -->
+          <ksp-form-attachment [groups]="educationInfo"></ksp-form-attachment>
         </mat-tab>
 
         <mat-tab label="ข้อมูลการสอนและการจ้าง">
-          <ksp-form-teaching-info
-            formControlName="teachingInfo"
-          ></ksp-form-teaching-info>
-          <br />
+          <ng-container *ngIf="pageType === 1 || pageType === 3">
+            <ksp-form-teaching-info
+              formControlName="teachingInfo"
+            ></ksp-form-teaching-info>
+            <br />
+          </ng-container>
+
+          <ng-container *ngIf="pageType === 2">
+            <ksp-form-teaching-info-manager></ksp-form-teaching-info-manager
+            ><br
+          /></ng-container>
+
           <ksp-form-hiring-info
             [positionTypes]="positionTypes$ | async"
             formControlName="hiringInfo"
           ></ksp-form-hiring-info>
           <br />
           <ksp-form-temp-license-number></ksp-form-temp-license-number>
-
-          <!-- <ksp-form-attachment [groups]="teachingInfo"></ksp-form-attachment> -->
+          <br />
+          <ksp-form-attachment [groups]="teachingInfo"></ksp-form-attachment>
         </mat-tab>
 
         <mat-tab label="ข้อมูลชี้แจงเหตุผล">
           <ksp-form-reason-info></ksp-form-reason-info>
           <br />
-          <!-- <ksp-form-attachment [groups]="reasonInfo"></ksp-form-attachment> -->
+          <ksp-form-attachment [groups]="reasonInfo"></ksp-form-attachment>
         </mat-tab>
 
         <mat-tab label="เอกสารหลักฐานประกอบ">

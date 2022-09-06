@@ -6,7 +6,10 @@ import { SchoolTempLicenseDetailComponent } from './school-temp-license-detail/s
 import { SchoolServiceFeatureTempLicenseRoutingModule } from './school-service-feature-temp-license-routing.module';
 import { MatTabsModule } from '@angular/material/tabs';
 import {
+  FormEducationInfoManagerComponent,
+  FormTeachingInfoManagerComponent,
   FormTempLicenseNumberComponent,
+  FormUserInfoForeignComponent,
   SharedFormOthersModule,
 } from '@ksp/shared/form/others';
 import { MatMenuModule } from '@angular/material/menu';
@@ -34,6 +37,9 @@ import { TempLicenseSearchComponent } from '@ksp/shared/search';
     ReactiveFormsModule,
     TempLicenseSearchComponent,
     FormTempLicenseNumberComponent,
+    FormTeachingInfoManagerComponent,
+    FormEducationInfoManagerComponent,
+    FormUserInfoForeignComponent,
   ],
   declarations: [
     SchoolTempLicenseListComponent,
