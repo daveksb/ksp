@@ -34,6 +34,7 @@ export class FormUserInfoComponent extends KspFormBaseComponent {
    */
 
   override form = this.fb.group({
+    id: [],
     idCardNo: [null, [Validators.required, Validators.pattern(idCardPattern)]],
     passportNo: [null, [Validators.pattern(passportPattern)]],
     prefixTh: [null, Validators.required],

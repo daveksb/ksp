@@ -93,7 +93,7 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     if (!this.staffId) {
       const formData: any = this.form.getRawValue();
       formData.userInfo.schoolId = '0010201056';
-      formData.userInfo.nationality = 'TH';
+      //formData.userInfo.nationality = 'TH';
       formData.userInfo.createDate = new Date().toISOString();
       formData.addr1.addressType = 1;
       formData.addr2.addressType = 2;
@@ -103,12 +103,12 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
         formData;
 
       console.log('payload = ', payload);
-      this.staffService.addStaff(payload).subscribe((res) => {
+      /*       this.staffService.addStaff(payload).subscribe((res) => {
         console.log('add staff result = ', res);
         this.router.navigate(['/temp-license', 'detail', res.id], {
           queryParams: { type: this.requestType },
         });
-      });
+      }); */
     }
   }
 

@@ -52,7 +52,7 @@ export class StaffPersonInfoComponent implements OnInit {
 
   pathUserInfo(staffId: number) {
     this.staffService.getStaffUserInfo(this.staffId).subscribe((res) => {
-      const { id, schoolId, createDate, ...formData } = res;
+      const { schoolId, createDate, ...formData } = res;
       formData.birthDate = formData.birthDate.split('T')[0];
       this.form.controls.userInfo.patchValue(formData);
     });
@@ -108,6 +108,7 @@ export class StaffPersonInfoComponent implements OnInit {
 
   updateStaff() {
     /* "{
+"
   ""userInfo"" : {
     ""id"" : ""2"",
     ""passportNo"" : ""2"",
@@ -157,15 +158,98 @@ export class StaffPersonInfoComponent implements OnInit {
   },
 }
 " */
-    const formData: any = this.form.getRawValue();
-    //formData.userInfo.schoolId = '0010201056';
-    //formData.userInfo.nationality = 'TH';
-    formData.addr1.schstaffid = this.staffId;
-    formData.addr2.schstaffid = this.staffId;
-    formData.edu1.schstaffid = this.staffId;
-    if (formData && formData.edu2) formData.edu2.schstaffid = this.staffId;
 
-    console.log('update formData = ', formData);
+    /* const formData: any = this.form.getRawValue();
+    formData.userInfo.schoolId = '0010201056';
+    formData.userInfo.nationality = 'TH';
+    formData.addr1.schstaffid = `${this.staffId}`;
+    formData.addr2.schstaffid = `${this.staffId}`;
+    formData.edu1.schstaffid = `${this.staffId}`;
+    if (formData && formData.edu2) formData.edu2.schstaffid = `${this.staffId}`;
+
+    console.log('update formData = ', formData); */
+
+    const formData = {
+      userInfo: {
+        id: '141',
+        idCardNo: '7150228413563',
+        passportNo: 'test',
+        firstNameTh: 'นดา',
+        lastNameTh: 'รัก',
+        prefixEn: '3',
+        firstNameEn: 'Nada',
+        lastNameEn: 'Rak',
+        sex: '2',
+        birthDate: '2022-09-05',
+        email: 'nada@gmail.com',
+        contactPhone: '0823893944',
+        workPhone: '0823893944',
+        nationality: 'TH',
+        prefixTh: '1',
+        schoolId: '0010201056',
+      },
+      addr1: {
+        id: '318',
+        addressType: '2',
+        location: 'test',
+        houseNo: '44',
+        moo: 'test',
+        alley: 'test',
+        road: 'AAAA',
+        postcode: '96120',
+        province: '12',
+        amphur: '1204',
+        tumbol: '120403',
+        schstaffid: '141',
+      },
+      addr2: {
+        id: '319',
+        addressType: '1',
+        location: 'test',
+        houseNo: '44',
+        moo: 'test',
+        alley: 'test',
+        road: 'AAAA',
+        postcode: '96120',
+        province: '12',
+        amphur: '1204',
+        tumbol: '120403',
+        schstaffid: '141',
+      },
+      edu1: {
+        id: '163',
+        degreeLevel: '1',
+        degreeName: 'sample',
+        isEducationDegree: '1',
+        major: 'sample',
+        institution: 'sample',
+        country: '79',
+        admissionDate: '2022-08-22',
+        graduateDate: '2022-08-22',
+        grade: '3',
+        otherProperty: 'sample',
+        academicYear: '2565',
+        schstaffid: '141',
+      },
+      edu2: {
+        id: '164',
+        degreeLevel: '1',
+        degreeName: 'sample',
+        isEducationDegree: '1',
+        major: 'sample',
+        institution: 'sample',
+        country: '79',
+        admissionDate: '2022-08-22',
+        graduateDate: '2022-08-22',
+        grade: '3',
+        otherProperty: 'sample',
+        academicYear: '2565',
+        schstaffid: '141',
+      },
+      tokenkey:
+        'abcdjbtswWVuiFxOlK4aHOK6AvcDlK6bBfCnQEHvanYkhuWAWQS6WQx6n4uVmZTxCYi4JEJ9ysLo2h6WLvjHaeHpAx2C3bt3LGjq',
+    };
+
     this.staffService.updateStaff(formData).subscribe((res) => {
       console.log('update staff result = ', res);
     });
