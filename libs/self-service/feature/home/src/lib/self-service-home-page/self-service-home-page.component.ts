@@ -50,7 +50,7 @@ export class SelfServiceHomePageComponent {
   } */
 
   rewardPage(requestType: number) {
-    this.router.navigate(['/', 'reward', 'detail'], {
+    this.router.navigate(['/', 'reward', 'request'], {
       queryParams: { type: requestType },
     });
   }

@@ -15,6 +15,7 @@ import { TopNavComponent } from '@ksp/shared/menu';
 import { SharedFormSelfRewardFormModule } from '@ksp/shared/form/self-reward-form';
 import { PraiseTeacherRewardComponent } from './praise-teacher-reward/praise-teacher-reward.component';
 import { SelfRewardRequestComponent } from './self-reward-request/self-reward-request.component';
+import { AddRowButtonComponent } from '@ksp/shared/ui';
 
 export const routes: Routes = [
   {
@@ -22,53 +23,12 @@ export const routes: Routes = [
     component: SelfServiceMasterPageComponent,
     children: [
       {
-        path: 'detail/:id',
+        path: 'request',
         component: SelfRewardRequestComponent,
       },
     ],
   },
 ];
-
-/* export const routes: Routes = [
-  {
-    path: '',
-    component: SelfServiceMasterPageComponent,
-    children: [
-      {
-        path: 'detail/:id',
-        component: SelfRewardRequestComponent,
-      },
-      {
-        path: 'council',
-        component: CouncilRewardComponent,
-      },
-      {
-        path: 'thai-teacher',
-        component: ThaiTeacherRewardComponent,
-      },
-      {
-        path: 'best-teacher',
-        component: BestTeacherRewardComponent,
-      },
-      {
-        path: 'praise-teacher',
-        component: PraiseTeacherRewardComponent,
-      },
-      {
-        path: 'senior-teacher',
-        component: SeniorTeacherRewardComponent,
-      },
-      {
-        path: 'research',
-        component: ResearchRewardComponent,
-      },
-      {
-        path: '**',
-        component: PageNotFoundComponent,
-      },
-    ],
-  },
-]; */
 
 @NgModule({
   imports: [
@@ -80,6 +40,7 @@ export const routes: Routes = [
     RequestStatusComponent,
     TopNavComponent,
     SharedFormSelfRewardFormModule,
+    AddRowButtonComponent,
   ],
   declarations: [
     ThaiTeacherRewardComponent,
@@ -98,7 +59,6 @@ export const routes: Routes = [
     ResearchRewardComponent,
     CouncilRewardComponent,
     SelfRewardRequestComponent,
-    RouterModule,
   ],
 })
 export class SelfServiceFeatureRewardModule {}
