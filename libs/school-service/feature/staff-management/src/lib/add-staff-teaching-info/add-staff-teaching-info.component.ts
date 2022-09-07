@@ -8,6 +8,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { StaffPersonInfoService } from '@ksp/shared/service';
+import { mapJsonData } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 
@@ -23,9 +24,7 @@ export class AddStaffTeachingInfoComponent implements OnInit {
   staffTypes$!: Observable<any>;
   positionTypes$!: Observable<any>;
   academicTypes$!: Observable<any>;
-
   staffId!: number;
-
   levels = levels;
   subjects = subjects;
   status = status;
@@ -101,7 +100,7 @@ export class AddStaffTeachingInfoComponent implements OnInit {
 
   loadTeachingInfo(staffId: number) {
     this.teachingInfoService.getTeachingInfo(staffId).subscribe((res) => {
-      console.log('loaded teaching info = ', res);
+      //console.log('loaded teaching info = ', res);
 
       if (res.returnCode !== '98') {
         const data = {
@@ -151,23 +150,14 @@ export class AddStaffTeachingInfoComponent implements OnInit {
     this.academicTypes$ = this.service.getAcademicStandingTypes();
   }
 
-  // map json data for expected format for osb
-  mapJsonData(input: any[], source: any[]) {
-    const result = input
-      .map((v, i) => (v ? source[i].value : null))
-      .filter((v) => v !== null);
-    //console.log('map data = ', result);
-    return JSON.stringify(result);
-  }
-
   addTeachingInfo() {
     const payload = {
       staffId: this.staffId,
-      teachingLevel: this.mapJsonData(
+      teachingLevel: mapJsonData(
         this.form.controls.teachingLevel.value,
         levels
       ),
-      teachingSubjects: this.mapJsonData(
+      teachingSubjects: mapJsonData(
         this.form.controls.teachingSubjects.value,
         subjects
       ),

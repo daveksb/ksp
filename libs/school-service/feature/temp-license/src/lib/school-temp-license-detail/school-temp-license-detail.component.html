@@ -49,11 +49,6 @@
           [foreignMode]="requestType === 3"
           formControlName="userInfo"
         ></ksp-form-user-info>
-        <!-- <ng-container *ngIf="requestType === 3">
-          <ksp-form-user-info-foreign
-            formControlName="userInfoForeign"
-          ></ksp-form-user-info-foreign
-        ></ng-container> -->
       </div>
     </div>
 
@@ -127,10 +122,10 @@
             ><br
           /></ng-container>
 
-          <ksp-form-education-info-manager
+          <!--           <ksp-form-education-info-manager
             *ngIf="requestType === 2 || requestType === 3"
             formControlName="edu3"
-          ></ksp-form-education-info-manager>
+          ></ksp-form-education-info-manager> -->
           <br />
           <ksp-form-attachment [groups]="educationInfo"></ksp-form-attachment>
         </mat-tab>
@@ -162,7 +157,6 @@
 
         <mat-tab label="ข้อมูลชี้แจงเหตุผล">
           <ksp-form-reason-info></ksp-form-reason-info>
-          <br />
           <ksp-form-attachment [groups]="reasonInfo"></ksp-form-attachment>
         </mat-tab>
 

@@ -29,12 +29,11 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     addr2: [],
     edu1: [],
     edu2: [],
-    edu3: [],
+    //edu3: [],
     schoolAddr: [],
     teachingInfo: [],
-    teachingInfo2: [],
     hiringInfo: [],
-    reason: [],
+    //reason: [],
   });
 
   eduSelected = false;
@@ -79,30 +78,32 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     this.getList();
     this.checkStaffId();
     this.checkRequestType();
-    this.form.valueChanges.subscribe((res) => {
+    /*     this.form.valueChanges.subscribe((res) => {
       //console.log('form = ', res);
-    });
+    }); */
   }
 
   tempSave() {
     if (!this.staffId) {
       const formData: any = this.form.getRawValue();
       formData.userInfo.schoolId = this.schoolId;
+      formData.userInfo.createDate = new Date().toISOString().split('.')[0];
       //formData.userInfo.nationality = 'TH';
-      formData.userInfo.createDate = new Date().toISOString();
-      /*    formData.addr1.addressType = 1;
-      formData.addr2.addressType = 2; */
-
+      //formData.addr1.addressType = 1;
+      //formData.addr2.addressType = 2;
       //console.log('formData = ', formData);
-      const { hiringInfo, reason, schoolAddr, teachingInfo, ...payload } =
-        formData;
+      const { id, ...userInfo } = formData.userInfo;
+      const payload = {
+        ...userInfo,
+        ...{ addresses: JSON.stringify([formData.addr1]) },
+        ...{ educations: JSON.stringify({ a: '1' }) },
+        ...{ teachingInfo: JSON.stringify({ a: '1' }) },
+        ...{ hiringInfo: JSON.stringify({ a: '1' }) },
+      };
 
       console.log('payload = ', payload);
       this.staffService.addStaff2(payload).subscribe((res) => {
         console.log('add staff result = ', res);
-        /* this.router.navigate(['/temp-license', 'detail', res.id], {
-          queryParams: { type: this.requestType },
-        }); */
       });
     }
   }
@@ -130,7 +131,7 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         this.icCardNo = res.idCardNo;
-        console.log('this.icCardNo = ', this.icCardNo);
+        //console.log('this.icCardNo = ', this.icCardNo);
         const { schoolId, createDate, ...formData } = res;
         formData.birthDate = formData.birthDate.split('T')[0];
         this.form.controls.userInfo.patchValue(formData);
@@ -260,7 +261,7 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
   checkRequestType() {
     this.route.queryParams.subscribe((params) => {
       this.requestType = Number(params['type']);
-      console.log('request type = ', this.requestType);
+      //console.log('request type = ', this.requestType);
       if (params['type'] == 1) {
         this.requestTypeLabel = '(ชาวไทย)';
       } else if (params['type'] == 2) {
