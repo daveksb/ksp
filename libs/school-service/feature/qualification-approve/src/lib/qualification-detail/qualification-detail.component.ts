@@ -18,8 +18,6 @@ import {
 })
 export class QualificationDetailComponent implements OnInit {
   form = this.fb.group({
-    personId: [],
-    searchUserInfo: [],
     address1: [],
     address2: [],
     education1: [],

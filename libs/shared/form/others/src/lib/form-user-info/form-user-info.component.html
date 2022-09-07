@@ -2,7 +2,7 @@
   <input type="hidden" formControlName="id" />
 
   <div class="row mb-2">
-    <div class="col" *ngIf="!foreignMode">
+    <div class="col-6" *ngIf="!foreignMode">
       <label class="form-label required">หมายเลขบัตรประชาชน </label>
       <input
         maxlength="13"
@@ -18,7 +18,20 @@
         </span>
       </ng-container>
     </div>
-    <div class="col">
+
+    <div class="col" [ngClass]="{ hide: !qualificationMode }">
+      <label class="form-label">ประเภทการยื่น</label>
+      <select
+        class="form-select"
+        [class.bg-white]="!isDarkMode && mode === 'edit'"
+      >
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option value="1">ชาวไทย</option>
+        <option value="2">ชาวต่างชาติ</option>
+      </select>
+    </div>
+
+    <div class="col" [ngClass]="{ hide: !foreignMode }">
       <label class="form-label">หมายเลขหนังสือเดินทาง (Passport Number) </label>
       <input class="form-control" type="text" formControlName="passportNo" />
       <ng-container
@@ -225,7 +238,7 @@
   </div>
 
   <div class="row mb-2" *ngIf="!foreignMode">
-    <div class="col-md-6">
+    <div class="col">
       <label class="form-label required">อีเมล</label>
       <input
         class="form-control"
@@ -239,6 +252,13 @@
         }}</span>
       </ng-container>
     </div>
+    <div class="col-md-6">
+      <label class="form-label required">ตำแหน่ง</label>
+      <input class="form-control" type="email" [class.bg-light]="isDarkMode" />
+    </div>
+  </div>
+
+  <div class="row mb-2" *ngIf="!foreignMode">
     <div class="col-md-6">
       <label class="form-label required">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
       <input
@@ -257,9 +277,6 @@
         </span>
       </ng-container>
     </div>
-  </div>
-
-  <div class="row mb-2" *ngIf="!foreignMode">
     <div class="col-md-6">
       <label class="form-label required">เบอร์โทรศัพท์ (ที่ทำงาน)</label>
       <input
@@ -310,6 +327,19 @@
     <div class="col-6">
       <label class="form-label">อนุญาตถึงวันที่ </label>
       <input class="form-control" type="date" />
+    </div>
+  </div>
+
+  <div class="row mb-2" *ngIf="qualificationMode">
+    <div class="col-6">
+      <label class="form-label required">สัญชาติ</label>
+      <select
+        [class.bg-white]="!isDarkMode && mode === 'edit'"
+        class="form-select"
+        formControlName="nationality"
+      >
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+      </select>
     </div>
   </div>
 

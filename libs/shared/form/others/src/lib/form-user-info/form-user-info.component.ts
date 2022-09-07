@@ -19,10 +19,9 @@ import {
 })
 export class FormUserInfoComponent extends KspFormBaseComponent {
   @Input() isDarkMode = false;
-  @Input() showPostInput = false;
-  @Input() showNationalityInput = false;
   @Input() prefixList = null;
   @Input() foreignMode = false;
+  @Input() qualificationMode = false;
 
   validatorMessages = validatorMessages;
 
