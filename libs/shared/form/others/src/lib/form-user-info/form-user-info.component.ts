@@ -19,9 +19,9 @@ import {
 })
 export class FormUserInfoComponent extends KspFormBaseComponent {
   @Input() isDarkMode = false;
-  @Input() showPostInput = false;
-  @Input() showNationalityInput = false;
   @Input() prefixList = null;
+  @Input() foreignMode = false;
+  @Input() qualificationMode = false;
 
   validatorMessages = validatorMessages;
 
@@ -37,11 +37,14 @@ export class FormUserInfoComponent extends KspFormBaseComponent {
     id: [],
     idCardNo: [null, [Validators.required, Validators.pattern(idCardPattern)]],
     passportNo: [null, [Validators.pattern(passportPattern)]],
+    passportStartDate: [],
+    passportEndDate: [],
     prefixTh: [null, Validators.required],
     firstNameTh: [
       null,
       [Validators.required, Validators.pattern(nameThPattern)],
     ],
+    middleNameTh: [],
     lastNameTh: [
       null,
       [Validators.required, Validators.pattern(nameThPattern)],
@@ -51,6 +54,7 @@ export class FormUserInfoComponent extends KspFormBaseComponent {
       null,
       [Validators.required, Validators.pattern(nameEnPattern)],
     ],
+    middleNameEn: [null],
     lastNameEn: [
       null,
       [Validators.required, Validators.pattern(nameEnPattern)],
@@ -61,11 +65,10 @@ export class FormUserInfoComponent extends KspFormBaseComponent {
     contactPhone: [
       null,
       [Validators.required, Validators.pattern(phonePattern)],
-    ], //contactPhone: [null, [Validators.required, Validators.pattern(phonePattern)]],
+    ],
     workPhone: [null, [Validators.required, Validators.pattern(phonePattern)]],
     nationality: ['TH'],
-    /*     schoolId: [null],
-    createDate: [null], */
+    country: [],
   });
 
   constructor(private fb: FormBuilder) {

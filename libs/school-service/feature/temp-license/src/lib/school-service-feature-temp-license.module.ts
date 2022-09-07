@@ -9,7 +9,6 @@ import {
   FormEducationInfoManagerComponent,
   FormTeachingInfoManagerComponent,
   FormTempLicenseNumberComponent,
-  FormUserInfoForeignComponent,
   SharedFormOthersModule,
 } from '@ksp/shared/form/others';
 import { MatMenuModule } from '@angular/material/menu';
@@ -39,7 +38,6 @@ import { TempLicenseSearchComponent } from '@ksp/shared/search';
     FormTempLicenseNumberComponent,
     FormTeachingInfoManagerComponent,
     FormEducationInfoManagerComponent,
-    FormUserInfoForeignComponent,
   ],
   declarations: [
     SchoolTempLicenseListComponent,

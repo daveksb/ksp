@@ -31,5 +31,3 @@ export * from './lib/form-temp-license-number/form-temp-license-number.component
 export * from './lib/form-teaching-info-manager/form-teaching-info-manager.component';
 
 export * from './lib/form-education-info-manager/form-education-info-manager.component';
-
-export * from './lib/form-user-info-foreign/form-user-info-foreign.component';

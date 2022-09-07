@@ -22,6 +22,7 @@ import {
 } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { HttpClientModule } from '@angular/common/http';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 export const routes: Routes = [
   {
@@ -55,6 +56,7 @@ export const routes: Routes = [
     SchoolServiceUiStaffSearchModule,
     MatTableModule,
     MatIconModule,
+    MatSnackBarModule,
     RequestHeaderInfoComponent,
     LicenseTypeButtonGroupComponent,
     LicenseInfoComponent,

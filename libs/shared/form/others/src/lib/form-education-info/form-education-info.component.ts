@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -15,11 +15,11 @@ export class FormEducationInfoComponent
 {
   override form = this.fb.group({
     id: [],
-    degreeLevel: [],
-    degreeName: [],
+    degreeLevel: [null, Validators.required],
+    degreeName: [null, Validators.required],
     isEducationDegree: [],
-    major: [],
-    institution: [],
+    major: [null, Validators.required],
+    institution: [null, Validators.required],
     country: [''],
     admissionDate: [],
     graduateDate: [],

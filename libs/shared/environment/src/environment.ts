@@ -2,5 +2,5 @@ export const environment = {
   production: false,
   apiUrl: 'https://kspapi.oceanicnetwork.net/ksp',
   token:
-    'abcdjbtswWVuiFxOlK4aHOK6AvcDlK6bBfCnQEHvanYkhuWAWQS6WQx6n4uVmZTxCYi4JEJ9ysLo2h6WLvjHaeHpAx2C3bt3LGjq',
+    'eVClCAw0dH1NX1JWAPgLwWjZDq0jpvE2IXI0sSbgXjiPRfCCZMNnp2IhLrUswAtlekCPjlCXyP9OBlbdCCWfBNmUO1g0TURBUkfB',
 };
