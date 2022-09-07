@@ -22,7 +22,7 @@ export class StaffPersonInfoComponent implements OnInit {
   tumbols2$!: Observable<any>;
   prefixList$!: Observable<any>;
 
-  today = thaiDate();
+  today = thaiDate(new Date());
 
   form = this.fb.group({
     userInfo: [],

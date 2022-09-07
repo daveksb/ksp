@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { TempLicenseService } from '@ksp/shared/service';
 import { replaceEmptyWithNull } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
+import { thaiDate } from '@ksp/shared/utility';
 
 @Component({
   templateUrl: './school-temp-license-list.component.html',
@@ -70,6 +71,17 @@ export class SchoolTempLicenseListComponent implements OnInit {
 
   rewardPage() {
     this.router.navigate(['/request-reward', 'detail']);
+  }
+
+  checkType(input: string) {
+    let result = '-';
+    if (input === '1') {
+      result = 'ครู';
+    }
+    if (input === '2') {
+      result = 'ผู้บริหาร';
+    }
+    return result;
   }
 }
 

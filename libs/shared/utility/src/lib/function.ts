@@ -1,5 +1,4 @@
-export function thaiDate() {
-  const date = new Date();
+export function thaiDate(date: Date) {
   return date.toLocaleDateString('th-TH', {
     year: 'numeric',
     month: 'long',
