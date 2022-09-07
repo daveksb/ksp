@@ -45,39 +45,11 @@ export class SelfServiceHomePageComponent {
     this.router.navigate(['/', 'renew-license', 'request']);
   }
 
-  /* xxx() {
-    this.router.navigate(['/', 'reward', 'detail']);
-  } */
-
   rewardPage(requestType: number) {
     this.router.navigate(['/', 'reward', 'request'], {
       queryParams: { type: requestType },
     });
   }
-
-  /* reward1() {
-    this.router.navigate(['/', 'reward', 'council']);
-  }
-
-  reward2() {
-    this.router.navigate(['/', 'reward', 'thai-teacher']);
-  }
-
-  reward3() {
-    this.router.navigate(['/', 'reward', 'best-teacher']);
-  }
-
-  reward4() {
-    this.router.navigate(['/', 'reward', 'praise-teacher']);
-  }
-
-  reward5() {
-    this.router.navigate(['/', 'reward', 'senior-teacher']);
-  }
-
-  reward6() {
-    this.router.navigate(['/', 'reward', 'research']);
-  } */
 
   refundFee() {
     this.router.navigate(['/', 'refund-fee', 'request']);
