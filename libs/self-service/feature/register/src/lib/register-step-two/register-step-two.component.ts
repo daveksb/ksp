@@ -32,6 +32,6 @@ export class RegisterStepTwoComponent {
   }
 
   previousPage() {
-    this.router.navigate(['/', 'register', 'step-1']);
+    this.router.navigate(['/', 'register', 'th-step-1']);
   }
 }

@@ -45,3 +45,5 @@ export * from './lib/foreign-step-two-tab-three/foreign-step-two-tab-three.compo
 export * from './lib/foreign-step-two-tab-four/foreign-step-two-tab-four.component';
 
 export * from './lib/foreign-step-two-tab-three-form/foreign-step-two-tab-three-form.component';
+
+export * from './lib/form-verify-otp-foreign/form-verify-otp-foreign.component';

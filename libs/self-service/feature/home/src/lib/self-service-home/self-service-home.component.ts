@@ -8,7 +8,13 @@ import { Router } from '@angular/router';
 export class SelfServiceHomeComponent {
   constructor(private router: Router) {}
 
-  thaiLogin() {
-    this.router.navigate(['/', 'login']);
+  register(requestType: number) {
+    this.router.navigate(['/', 'register', 'policy'], {
+      queryParams: { type: requestType },
+    });
   }
+
+  /* login() {
+    this.router.navigate(['/', 'register', 'policy']);
+  } */
 }

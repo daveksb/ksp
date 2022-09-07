@@ -1,8 +1,8 @@
 .container {
-  max-width: 1440px;
   background-image: url('/assets/images/BG-secondary.png');
   padding: 18px 36px;
   background-size: cover;
+  height: 100vh;
 }
 
 .btn-secondary {
@@ -15,41 +15,19 @@
   border-radius: 10px;
 }
 
-.login__container {
-  text-align: center;
-  padding: 100px 0px;
-}
-h3 {
-  font-size: 30px;
-  color: #666666;
-  margin: 0 0 36px 0;
-}
 .logo__container {
-  width: 334px;
+  width: 335px;
 }
+
 .box__container {
   display: grid;
   grid-template-columns: 1fr 36px 1fr;
   text-align: center;
-  grid-column-gap: 36px;
 }
 
 .img__content {
-  width: 302px;
+  width: 300px;
   cursor: pointer;
-}
-.label__content {
-  font-size: 50px;
-  color: #222222;
-  margin: 0 0 44px 0;
-}
-.footer {
-  display: flex;
-  justify-content: flex-end;
-}
-.footer__label {
-  font-size: 20px;
-  color: #222222;
 }
 
 /* device  responsive*/

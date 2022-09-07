@@ -1,6 +1,11 @@
 <div class="container-fluid">
   <div class="content__container">
-    <div class="content__header">นโยบายข้อมูลส่วนบุคคล</div>
+    <div class="content__header" *ngIf="pageType === 1">
+      นโยบายข้อมูลส่วนบุคคล
+    </div>
+    <div class="content__header" *ngIf="pageType === 2">
+      Terms & Condition and Data Privacy
+    </div>
     <div class="content__detail">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget
       condimentum mauris. Curabitur faucibus mollis urna. Vestibulum aliquet
@@ -41,10 +46,28 @@
       a porta non, bibendum in sapien. Maecenas luctus urna mauris.
     </div>
     <div class="button__container">
-      <button id="btn-accept" (click)="register()" type="button" class="btn btn-primary">
+      <button
+        *ngIf="pageType === 1"
+        id="btn-accept"
+        (click)="register()"
+        type="button"
+        class="btn btn-primary"
+      >
         ยอมรับ
       </button>
-      <div (click)="loginPage()" class="label__login">เข้าสู่ระบบ</div>
+      <button
+        *ngIf="pageType === 2"
+        id="btn-accept"
+        (click)="register2()"
+        type="button"
+        class="btn btn-primary"
+      >
+        Accept
+      </button>
+      <div (click)="loginPage()" class="label__login">
+        <div *ngIf="pageType === 1">เข้าสู่ระบบ</div>
+        <div *ngIf="pageType === 2">Login</div>
+      </div>
     </div>
   </div>
 </div>

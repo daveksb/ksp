@@ -14,12 +14,30 @@ import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master
 import { TopNavComponent } from '@ksp/shared/menu';
 import { SharedFormSelfRewardFormModule } from '@ksp/shared/form/self-reward-form';
 import { PraiseTeacherRewardComponent } from './praise-teacher-reward/praise-teacher-reward.component';
+import { SelfRewardRequestComponent } from './self-reward-request/self-reward-request.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: SelfServiceMasterPageComponent,
     children: [
+      {
+        path: 'detail/:id',
+        component: SelfRewardRequestComponent,
+      },
+    ],
+  },
+];
+
+/* export const routes: Routes = [
+  {
+    path: '',
+    component: SelfServiceMasterPageComponent,
+    children: [
+      {
+        path: 'detail/:id',
+        component: SelfRewardRequestComponent,
+      },
       {
         path: 'council',
         component: CouncilRewardComponent,
@@ -44,9 +62,13 @@ export const routes: Routes = [
         path: 'research',
         component: ResearchRewardComponent,
       },
+      {
+        path: '**',
+        component: PageNotFoundComponent,
+      },
     ],
   },
-];
+]; */
 
 @NgModule({
   imports: [
@@ -66,6 +88,7 @@ export const routes: Routes = [
     SeniorTeacherRewardComponent,
     ResearchRewardComponent,
     CouncilRewardComponent,
+    SelfRewardRequestComponent,
   ],
   exports: [
     ThaiTeacherRewardComponent,
@@ -74,6 +97,8 @@ export const routes: Routes = [
     SeniorTeacherRewardComponent,
     ResearchRewardComponent,
     CouncilRewardComponent,
+    SelfRewardRequestComponent,
+    RouterModule,
   ],
 })
 export class SelfServiceFeatureRewardModule {}

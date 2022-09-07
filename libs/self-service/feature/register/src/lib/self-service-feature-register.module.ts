@@ -10,6 +10,10 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
 import { RegisterCompletedComponent } from './register-completed/register-completed.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { RegisterForeignComponent } from './register-foreign/register-foreign.component';
+import { RegisterForeignStepOneComponent } from './register-foreign-step-one/register-foreign-step-one.component';
+import { RegisterForeignStepThreeComponent } from './register-foreign-step-three/register-foreign-step-three.component';
+import { RegisterForeignStepTwoComponent } from './register-foreign-step-two/register-foreign-step-two.component';
 
 export const routes: Routes = [
   {
@@ -19,16 +23,32 @@ export const routes: Routes = [
   },
   { path: 'policy', component: PrivacyPolicyComponent },
   {
-    path: 'step-1',
+    path: 'th-step-1',
     component: RegisterStepOneComponent,
   },
   {
-    path: 'step-2',
+    path: 'th-step-2',
     component: RegisterStepTwoComponent,
   },
   {
-    path: 'step-3',
+    path: 'th-step-3',
     component: RegisterStepThreeComponent,
+  },
+  {
+    path: 'en-step-0',
+    component: RegisterForeignComponent,
+  },
+  {
+    path: 'en-step-1',
+    component: RegisterForeignStepOneComponent,
+  },
+  {
+    path: 'en-step-2',
+    component: RegisterForeignStepTwoComponent,
+  },
+  {
+    path: 'en-step-3',
+    component: RegisterForeignStepThreeComponent,
   },
 ];
 
@@ -47,6 +67,16 @@ export const routes: Routes = [
     RegisterStepThreeComponent,
     PrivacyPolicyComponent,
     RegisterCompletedComponent,
+    RegisterForeignComponent,
+    RegisterForeignStepOneComponent,
+    RegisterForeignStepThreeComponent,
+    RegisterForeignStepTwoComponent,
+  ],
+  exports: [
+    RegisterForeignComponent,
+    RegisterForeignStepOneComponent,
+    RegisterForeignStepThreeComponent,
+    RegisterForeignStepTwoComponent,
   ],
 })
 export class SelfServiceFeatureRegisterModule {}

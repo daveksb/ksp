@@ -1,8 +1,8 @@
 .container {
-  max-width: 1440px;
   background-image: url('/assets/images/BG-login-sf-01.png');
   padding: 18px 36px;
   background-size: cover;
+  height: 100vh;
 }
 
 .btn-secondary {
@@ -15,87 +15,13 @@
   border-radius: 10px;
 }
 
-.dropdown-toggle::after {
-  display: none;
-}
-
-.form-label {
-  font-size: 24px;
-}
-
-.form-control {
-  font-size: 18px;
-  color: #666666;
-}
-
-.form-control-lg {
-  height: 50px;
-  padding: 6px 24px 6px 12px;
-}
-
-.btn-primary {
-  width: 100%;
-  border-radius: 10px;
-  padding: 6px 24px;
-}
-
 .login__container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 76px 100px;
-}
-
-.header__content {
-  text-align: center;
-}
-
-.footer__content {
-  text-align: center;
-}
-
-.login__container--right {
-  padding: 0 42px;
-}
-
-.label__button {
-  font-size: 24px;
-}
-
-h1 {
-  font-size: 50px;
-  color: #222222;
-  margin: 0;
-}
-
-h3 {
-  font-size: 30px;
-  color: #666666;
-  margin: 0 0 46px 0;
 }
 
 .label__secondary {
   color: #f68b33;
-  text-decoration: underline;
-  margin-top: 24px;
-  cursor: pointer;
-}
-
-.label__third {
-  color: #666666;
-  text-decoration: underline;
-  margin-bottom: 24px;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.footer {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.footer__label {
-  font-size: 20px;
-  color: #222222;
 }
 
 .eye__icon {

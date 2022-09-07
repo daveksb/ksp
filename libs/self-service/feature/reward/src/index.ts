@@ -11,3 +11,5 @@ export * from './lib/research-reward/research-reward.component';
 export * from './lib/council-reward/council-reward.component';
 
 export * from './lib/praise-teacher-reward/praise-teacher-reward.component';
+
+export * from './lib/self-reward-request/self-reward-request.component';

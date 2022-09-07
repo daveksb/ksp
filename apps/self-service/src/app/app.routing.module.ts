@@ -4,8 +4,8 @@ import { SelfServiceHomeComponent } from '@ksp/self-service/feature/home';
 import { SelfServiceThaiLoginComponent } from '@ksp/self-service/feature/login';
 
 const routes: Routes = [
-  { path: 'landing', component: SelfServiceHomeComponent },
   { path: 'login', component: SelfServiceThaiLoginComponent },
+  { path: 'landing', component: SelfServiceHomeComponent },
   {
     path: 'register',
     loadChildren: () =>
@@ -70,7 +70,7 @@ const routes: Routes = [
       ),
   },
 
-  { path: '**', component: SelfServiceHomeComponent },
+  { path: '**', component: SelfServiceThaiLoginComponent },
 ];
 
 @NgModule({
