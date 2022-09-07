@@ -1,9 +1,12 @@
 .container {
   max-width: 1440px;
   background-image: url('/assets/images/BG-secondary.png');
-  padding: 100px 240px;
-  background-size: 100% 100%;
+  background-size: cover;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 15rem;
 }
 
 .form__container {
