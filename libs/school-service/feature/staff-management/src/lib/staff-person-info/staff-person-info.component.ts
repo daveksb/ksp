@@ -170,7 +170,7 @@ export class StaffPersonInfoComponent implements OnInit {
     const formData: any = this.form.getRawValue();
     formData.userInfo.schoolId = '0010201056';
     formData.userInfo.nationality = 'TH';
-    formData.userInfo.createDate = '2022-09-12T00:20:13'; //new Date().toISOString().split('.')[0],
+    formData.userInfo.createDate = new Date().toISOString().split('.')[0];
     formData.addr1.addressType = 1;
     formData.addr2.addressType = 2;
 

@@ -37,14 +37,14 @@ export class FormUserInfoComponent extends KspFormBaseComponent {
     id: [],
     idCardNo: [null, [Validators.required, Validators.pattern(idCardPattern)]],
     passportNo: [null, [Validators.pattern(passportPattern)]],
-    passportStartDate: [null],
+    passportStartDate: [],
     passportEndDate: [],
     prefixTh: [null, Validators.required],
     firstNameTh: [
       null,
       [Validators.required, Validators.pattern(nameThPattern)],
     ],
-    middleNameTh: [null],
+    middleNameTh: [],
     lastNameTh: [
       null,
       [Validators.required, Validators.pattern(nameThPattern)],
@@ -69,8 +69,6 @@ export class FormUserInfoComponent extends KspFormBaseComponent {
     workPhone: [null, [Validators.required, Validators.pattern(phonePattern)]],
     nationality: ['TH'],
     country: [],
-    /*     schoolId: [null],
-    createDate: [null], */
   });
 
   constructor(private fb: FormBuilder) {
