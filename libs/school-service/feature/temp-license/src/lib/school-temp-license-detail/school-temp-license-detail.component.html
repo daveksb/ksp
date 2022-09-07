@@ -42,18 +42,18 @@
             </button>
           </div>
         </div>
-        <ng-container *ngIf="pageType === 1 || pageType === 2">
-          <ksp-form-user-info
-            [isDarkMode]="false"
-            [prefixList]="prefixList$ | async"
-            formControlName="userInfo"
-          ></ksp-form-user-info
-        ></ng-container>
-        <ng-container *ngIf="pageType === 3">
+
+        <ksp-form-user-info
+          [isDarkMode]="false"
+          [prefixList]="prefixList$ | async"
+          [foreignMode]="requestType === 3"
+          formControlName="userInfo"
+        ></ksp-form-user-info>
+        <!-- <ng-container *ngIf="requestType === 3">
           <ksp-form-user-info-foreign
             formControlName="userInfoForeign"
           ></ksp-form-user-info-foreign
-        ></ng-container>
+        ></ng-container> -->
       </div>
     </div>
 
@@ -106,7 +106,7 @@
         </mat-tab>
 
         <mat-tab label="ข้อมูลทางการศึกษา">
-          <ng-container *ngIf="pageType === 1">
+          <ng-container *ngIf="requestType === 1">
             <ksp-form-education-info
               formControlName="edu1"
               [showGradeInput]="true"
@@ -116,7 +116,7 @@
             ><br
           /></ng-container>
 
-          <ng-container *ngIf="pageType === 1">
+          <ng-container *ngIf="requestType === 1">
             <ksp-form-education-info
               formControlName="edu2"
               [showGradeInput]="false"
@@ -128,7 +128,7 @@
           /></ng-container>
 
           <ksp-form-education-info-manager
-            *ngIf="pageType === 2 || pageType === 3"
+            *ngIf="requestType === 2 || requestType === 3"
             formControlName="edu3"
           ></ksp-form-education-info-manager>
           <br />
@@ -136,14 +136,14 @@
         </mat-tab>
 
         <mat-tab label="ข้อมูลการสอนและการจ้าง">
-          <ng-container *ngIf="pageType === 1 || pageType === 3">
+          <ng-container *ngIf="requestType === 1 || requestType === 3">
             <ksp-form-teaching-info
               formControlName="teachingInfo"
             ></ksp-form-teaching-info>
             <br />
           </ng-container>
 
-          <ng-container *ngIf="pageType === 2">
+          <ng-container *ngIf="requestType === 2">
             <ksp-form-teaching-info-manager
               formControlName="teachingInfo2"
             ></ksp-form-teaching-info-manager
@@ -187,7 +187,7 @@
     [showTempSaveButton]="true"
     [disableTempSaveButton]="false"
     [showSaveButton]="staffId > 0"
-    [disableSaveButton]="!form.valid"
+    [disableSaveButton]="false"
     [saveButtonLabel]="'ส่งใบคำขอ'"
   ></ksp-bottom-nav>
 </div>

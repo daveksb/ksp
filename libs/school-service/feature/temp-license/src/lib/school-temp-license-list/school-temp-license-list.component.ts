@@ -38,8 +38,8 @@ export class SchoolTempLicenseListComponent {
   search() {
     const payload = {
       schoolid: `${this.schoolId}`,
-      requestno: '2-03-1-650906-00002',
-      idcardno: '5555555555555',
+      requestno: null,
+      idcardno: null,
       requesttype: null,
       requestprocess: null,
       requeststatus: null,

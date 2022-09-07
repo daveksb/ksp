@@ -9,6 +9,13 @@ import { environment } from '@ksp/shared/environment';
 export class StaffPersonInfoService {
   constructor(private http: HttpClient) {}
 
+  addStaff2(payload: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/kspstaff/schstaff2insert`, {
+      ...payload,
+      tokenkey: environment.token,
+    });
+  }
+
   addStaff(payload: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspschoolregister/schregisterinsert`,
