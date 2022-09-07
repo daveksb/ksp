@@ -13,10 +13,11 @@
     <div class="bg-white px-3 py-3">
       <ksp-temp-license-search
         formControlName="licenseSearch"
+        [eduOccupyList]="eduOccupyList$ | async"
         (clear)="clear()"
-        (search)="search()"
+        (search)="search($event)"
       ></ksp-temp-license-search>
-      <hr />
+
       <div class="box-header text-primary">ยื่นใบคำขอ</div>
 
       <div class="d-flex justify-content-end">
@@ -78,7 +79,7 @@
           <ng-container matColumnDef="requestType">
             <th mat-header-cell *matHeaderCellDef>ประเภทวิชาชีพ</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.requestType }}
+              {{ checkType(element.requestType) }}
             </td>
           </ng-container>
 
@@ -106,13 +107,15 @@
 
           <ng-container matColumnDef="updateDate">
             <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
-            <td mat-cell *matCellDef="let element">{{ element.updateDate }}</td>
+            <td mat-cell *matCellDef="let element">
+              {{ element.updateDate | date }}
+            </td>
           </ng-container>
 
           <ng-container matColumnDef="requestDate">
             <th mat-header-cell *matHeaderCellDef>วันที่ยื่นใบคำขอ</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.requestDate }}
+              {{ element.requestDate | date }}
             </td>
           </ng-container>
 

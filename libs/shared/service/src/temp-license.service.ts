@@ -22,10 +22,7 @@ export class TempLicenseService {
       .get(
         `${environment.apiUrl}/kspschoolregister/schschoolsearchschoolid?schoolId=${schoolId}&tokenkey=${environment.token}`
       )
-      .pipe(
-        shareReplay()
-        //map((data: any) => data.datareturn)
-      );
+      .pipe(shareReplay());
   }
 
   searchRequest(payload: any): Observable<any> {
@@ -48,5 +45,14 @@ export class TempLicenseService {
         tokenkey: environment.token,
       }
     );
+  }
+
+  getSchoolEduOccupy() {
+    return this.http
+      .get(`${environment.apiUrl}/kspmasterdata/schooleduoccupy`)
+      .pipe(
+        shareReplay(),
+        map((data: any) => data.datareturn)
+      );
   }
 }
