@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AddressService, GeneralInfoService } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 import { StaffPersonInfoService } from '@ksp/shared/service';
+import { thaiDate } from '@ksp/shared/utility';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   templateUrl: './staff-person-info.component.html',
@@ -20,6 +22,8 @@ export class StaffPersonInfoComponent implements OnInit {
   tumbols2$!: Observable<any>;
   prefixList$!: Observable<any>;
 
+  today = thaiDate();
+
   form = this.fb.group({
     userInfo: [],
     addr1: [],
@@ -34,7 +38,8 @@ export class StaffPersonInfoComponent implements OnInit {
     private fb: FormBuilder,
     private staffService: StaffPersonInfoService,
     private addressService: AddressService,
-    private generalInfoService: GeneralInfoService
+    private generalInfoService: GeneralInfoService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -54,6 +59,12 @@ export class StaffPersonInfoComponent implements OnInit {
     this.staffService.getStaffUserInfo(this.staffId).subscribe((res) => {
       const { schoolId, createDate, ...formData } = res;
       formData.birthDate = formData.birthDate.split('T')[0];
+      formData.passportStartDate = null;
+      formData.passportEndDate = null;
+      formData.middleNameTh = null;
+      formData.middleNameEn = null;
+      formData.country = null;
+      //console.log('form xx = ', formData);
       this.form.controls.userInfo.patchValue(formData);
     });
   }
@@ -107,58 +118,6 @@ export class StaffPersonInfoComponent implements OnInit {
   }
 
   updateStaff() {
-    /* "{
-"
-  ""userInfo"" : {
-    ""id"" : ""2"",
-    ""passportNo"" : ""2"",
-    ""firstNameTh"" : ""3"",
-    ""lastNameTh"" : ""4"",
-    ""prefixEn"" : ""5"",
-    ""firstNameEn"" : ""6"",
-    ""lastNameEn"" : ""7"",
-    ""sex"" : ""8"",
-    ""birthDate"" : ""2022-08-22T00:00:00"",
-    ""email"" : ""10"",
-    ""contactPhone"" : ""11"",
-    ""workPhone"" : ""12"",
-    ""nationality"" : ""13"",
-    ""schoolId"" : ""14"",
-    ""createDate"" : ""2022-08-22T00:00:00"",
-    ""prefixTh"" : ""66""
-  },
-  ""addr1"" : {
-    ""id"" : ""127"",
-    ""schstaffid"" : ""2"",
-    ""addressType"" : ""16"",
-    ""location"" : ""17"",
-    ""houseNo"" : ""18"",
-    ""moo"" : ""19"",
-    ""alley"" : ""20"",
-    ""road"" : ""21"",
-    ""postcode"" : ""22"",
-    ""province"" : ""23"",
-    ""amphur"" : ""24"",
-    ""tumbol"" : ""25""
-  },
-  ""edu1"" : {
-    ""id"" : ""91"",
-    ""schstaffid"" : ""2"",
-    ""degreeLevel"" : ""36"",
-    ""degreeName"" : ""37"",
-    ""isEducationDegree"" : ""38"",
-    ""major"" : ""39"",
-    ""institution"" : ""40"",
-    ""country"" : ""41"",
-    ""admissionDate"" : ""2022-08-22T00:00:00"",
-    ""graduateDate"" : ""2022-08-22T00:00:00"",
-    ""grade"" : ""44"",
-    ""otherProperty"" : ""45"",
-    ""academicYear"" : ""46""
-  },
-}
-" */
-
     /* const formData: any = this.form.getRawValue();
     formData.userInfo.schoolId = '0010201056';
     formData.userInfo.nationality = 'TH';
@@ -264,10 +223,13 @@ export class StaffPersonInfoComponent implements OnInit {
     formData.addr2.addressType = 2;
 
     console.log('insert formData = ', formData);
-    /*     this.staffService.addStaff(formData).subscribe((res) => {
+    this.staffService.addStaff(formData).subscribe((res) => {
       console.log('add staff result = ', res);
+      this.snackBar.open('บันทึกข้อมูลสำเร็จ', 'ปิด', {
+        duration: 2000,
+      });
       this.router.navigate(['/staff-management', 'staff-person-info', res.id]);
-    }); */
+    });
   }
 
   useSameAddress(evt: any) {

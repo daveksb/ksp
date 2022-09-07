@@ -38,7 +38,7 @@ export class FormUserInfoComponent extends KspFormBaseComponent {
     id: [],
     idCardNo: [null, [Validators.required, Validators.pattern(idCardPattern)]],
     passportNo: [null, [Validators.pattern(passportPattern)]],
-    passportStartDate: [],
+    passportStartDate: [null],
     passportEndDate: [],
     prefixTh: [null, Validators.required],
     firstNameTh: [

@@ -1,21 +1,15 @@
 <form [formGroup]="form">
-  <!--   <input
-    class="form-control"
-    style="display: none"
-    formControlName="schoolId"
-  />
-  <input
-    class="form-control"
-    style="display: none"
-    formControlName="createDate"
-  /> -->
-
   <input type="hidden" formControlName="id" />
 
   <div class="row mb-2">
     <div class="col" *ngIf="!foreignMode">
       <label class="form-label required">หมายเลขบัตรประชาชน </label>
-      <input class="form-control" type="text" formControlName="idCardNo" />
+      <input
+        maxlength="13"
+        class="form-control"
+        type="text"
+        formControlName="idCardNo"
+      />
       <ng-container
         *ngIf="idCardNo.invalid && (idCardNo.dirty || idCardNo.touched)"
       >
@@ -36,7 +30,7 @@
       </ng-container>
     </div>
 
-    <div class="col">
+    <div class="col" [ngClass]="{ hide: !foreignMode }">
       <label class="form-label required">วันที่ออก</label>
       <input
         class="form-control"
@@ -46,7 +40,7 @@
       />
     </div>
 
-    <div class="col">
+    <div class="col" [ngClass]="{ hide: !foreignMode }">
       <label class="form-label required">วันที่หมดอายุ</label>
       <input
         class="form-control"

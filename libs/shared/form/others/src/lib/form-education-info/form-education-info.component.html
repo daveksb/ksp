@@ -8,7 +8,7 @@
 
     <div class="row" *ngIf="showSelectDegree">
       <div class="col-6 mb-3">
-        <label class="form-label">ระดับวุฒิทางการศึกษา</label>
+        <label class="form-label required">ระดับวุฒิทางการศึกษา</label>
         <select class="form-select" formControlName="degreeLevel">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">ปริญญาตรี</option>
@@ -31,18 +31,18 @@
 
     <div class="row">
       <div class="col mb-3">
-        <label class="form-label">ชื่อปริญญา/หลักสูตร</label>
+        <label class="form-label required">ชื่อปริญญา/หลักสูตร</label>
         <input class="form-control" type="text" formControlName="degreeName" />
       </div>
       <div class="col mb-3">
-        <label class="form-label">สาขา/วิชาเอก</label>
+        <label class="form-label required">สาขา/วิชาเอก</label>
         <input class="form-control" type="text" formControlName="major" />
       </div>
     </div>
 
     <div class="row">
       <div class="col mb-3">
-        <label class="form-label">สถาบันการศึกษา</label>
+        <label class="form-label required">สถาบันการศึกษา</label>
         <input class="form-control" type="text" formControlName="institution" />
       </div>
       <div class="col mb-3">
