@@ -4,7 +4,7 @@
   <div class="row mb-2">
     <div class="col">
       <label class="form-label">เลขที่ใบคำขอ </label>
-      <input class="form-control" type="text" formControlName="requestNo" />
+      <input class="form-control" type="text" formControlName="requestno" />
     </div>
     <div class="col">
       <label class="form-label">หมายเลขบัตรประชาชน </label>
@@ -12,7 +12,7 @@
         class="form-control"
         type="text"
         maxlength="13"
-        formControlName="idCardNo"
+        formControlName="idcardno"
         placeholder="หมายเลขบัตรประชาชนจำนวน 13 หลัก"
       />
     </div>
@@ -21,16 +21,16 @@
   <div class="row mb-2">
     <div class="col">
       <label class="form-label">ประเภทวิชาชีพ</label>
-      <select class="form-select" formControlName="requestType">
-        <option value="null" disabled hidden>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+      <select class="form-select" formControlName="requesttype">
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option *ngFor="let e of eduOccupyList" [value]="e?.eduOccupyType">
+          {{ e?.eduOccupyName }}
+        </option>
       </select>
     </div>
     <div class="col">
       <label class="form-label">ขั้นตอนการดำเนินการ</label>
-      <select class="form-select" formControlName="requestProcess">
+      <select class="form-select" formControlName="requestprocess">
         <option value="null" disabled hidden>กรุณาเลือก</option>
         <option value="1">One</option>
         <option value="2">Two</option>
@@ -42,7 +42,7 @@
   <div class="row mb-2">
     <div class="col-6">
       <label class="form-label">สถานะการดำเนินการ</label>
-      <select class="form-select" formControlName="requestStatus">
+      <select class="form-select" formControlName="requeststatus">
         <option value="null" disabled hidden>กรุณาเลือก</option>
         <option value="1">One</option>
         <option value="2">Two</option>
@@ -57,7 +57,7 @@
       <input
         class="form-control"
         type="date"
-        formControlName="requestDateFrom"
+        formControlName="requestdatefrom"
       />
     </div>
 
@@ -68,20 +68,20 @@
 
     <div class="col">
       <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ</label>
-      <input class="form-control" type="date" formControlName="requestDateTo" />
+      <input class="form-control" type="date" formControlName="requestdateto" />
     </div>
   </div>
 
   <div class="d-flex justify-content-end mt-3">
     <button
-      (click)="clear.emit(true)"
+      (click)="clear.emit(true); form.reset()"
       type="button"
       class="btn border-primary text-primary bg-white"
     >
       ล้างข้อมูล
     </button>
     <button
-      (click)="search.emit(true)"
+      (click)="search.emit(form.value)"
       type="button"
       class="btn btn-primary ms-2"
     >

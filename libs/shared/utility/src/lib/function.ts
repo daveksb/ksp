@@ -15,3 +15,14 @@ export function mapJsonData(input: any[], source: any[]) {
   //console.log('map data = ', result);
   return JSON.stringify(result);
 }
+
+// replace empty object property with null
+export function replaceEmptyWithNull(input: any) {
+  for (const [key, value] of Object.entries(input)) {
+    if (value === '') {
+      input[key] = null;
+    }
+  }
+
+  return input;
+}

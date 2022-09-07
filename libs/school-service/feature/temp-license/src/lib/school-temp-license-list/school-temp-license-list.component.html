@@ -13,8 +13,9 @@
     <div class="bg-white px-3 py-3">
       <ksp-temp-license-search
         formControlName="licenseSearch"
+        [eduOccupyList]="eduOccupyList$ | async"
         (clear)="clear()"
-        (search)="search()"
+        (search)="search($event)"
       ></ksp-temp-license-search>
 
       <div class="box-header text-primary">ยื่นใบคำขอ</div>

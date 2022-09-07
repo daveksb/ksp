@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
@@ -17,22 +17,22 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 })
 export class TempLicenseSearchComponent extends KspFormBaseComponent {
   @Output() clear = new EventEmitter<boolean>(false);
-  @Output() search = new EventEmitter<boolean>(false);
+  @Output() search = new EventEmitter<any>();
+  @Input() eduOccupyList: any[] = [];
 
   override form = this.fb.group({
-    requestNo: [],
-    idCardNo: [],
-    requestType: [],
-    requestprocess: [],
-    requeststatus: [],
-    requestDateFrom: [],
-    requestDateTo: [],
+    requestno: [null],
+    idcardno: [null],
+    requesttype: [null],
+    requestprocess: [null],
+    requeststatus: [null],
+    requestdatefrom: [null],
+    requestdateto: [null],
   });
 
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
         this.onChange(value);
         this.onTouched();
