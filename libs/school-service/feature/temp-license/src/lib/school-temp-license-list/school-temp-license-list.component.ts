@@ -79,7 +79,7 @@ export class SchoolTempLicenseListComponent implements OnInit {
       result = 'ครู';
     }
     if (input === '2') {
-      result = 'ผู้บริหาร';
+      result = 'ผู้บริหารสถานศึกษา';
     }
     return result;
   }

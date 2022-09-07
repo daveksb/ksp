@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AddressService, GeneralInfoService } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 import { StaffPersonInfoService } from '@ksp/shared/service';
-import { thaiDate } from '@ksp/shared/utility';
+import { replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -46,16 +46,16 @@ export class StaffPersonInfoComponent implements OnInit {
     this.activatedroute.paramMap.subscribe((params) => {
       this.staffId = Number(params.get('id'));
       if (this.staffId) {
-        this.pathUserInfo(this.staffId);
-        this.patchAddress(this.staffId);
-        this.patchEdu(this.staffId);
+        this.pathUserInfo();
+        this.patchAddress();
+        this.patchEdu();
       }
     });
 
     this.getListData();
   }
 
-  pathUserInfo(staffId: number) {
+  pathUserInfo() {
     this.staffService.getStaffUserInfo(this.staffId).subscribe((res) => {
       const { schoolId, createDate, ...formData } = res;
       formData.birthDate = formData.birthDate.split('T')[0];
@@ -69,7 +69,7 @@ export class StaffPersonInfoComponent implements OnInit {
     });
   }
 
-  patchAddress(staffId: number) {
+  patchAddress() {
     this.addressService
       .getStaffAddress(this.staffId)
       .subscribe((res: any[]) => {
@@ -90,7 +90,7 @@ export class StaffPersonInfoComponent implements OnInit {
       });
   }
 
-  patchEdu(staffId: number) {
+  patchEdu() {
     this.staffService.getStaffEdu(this.staffId).subscribe((res: any[]) => {
       if (res && res.length) {
         res.map((edu, i) => {
@@ -128,35 +128,11 @@ export class StaffPersonInfoComponent implements OnInit {
 
     console.log('update formData = ', formData);
 
-    for (const [key, value] of Object.entries(formData.userInfo)) {
-      if (value === '') {
-        formData.userInfo[key] = null;
-      }
-    }
-
-    for (const [key, value] of Object.entries(formData.addr1)) {
-      if (value === '') {
-        formData.addr1[key] = null;
-      }
-    }
-
-    for (const [key, value] of Object.entries(formData.addr2)) {
-      if (value === '') {
-        formData.addr2[key] = null;
-      }
-    }
-
-    for (const [key, value] of Object.entries(formData.edu2)) {
-      if (value === '') {
-        formData.edu1[key] = null;
-      }
-    }
-
-    for (const [key, value] of Object.entries(formData.edu2)) {
-      if (value === '') {
-        formData.edu2[key] = null;
-      }
-    }
+    formData.userInfo = replaceEmptyWithNull(formData.userInfo);
+    formData.addr1 = replaceEmptyWithNull(formData.addr1);
+    formData.addr2 = replaceEmptyWithNull(formData.addr2);
+    formData.edu1 = replaceEmptyWithNull(formData.edu1);
+    formData.edu2 = replaceEmptyWithNull(formData.edu2);
 
     this.staffService.updateStaff(formData).subscribe((res) => {
       //console.log('update staff result = ', res);
