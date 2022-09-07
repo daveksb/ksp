@@ -20,13 +20,13 @@ export class TempLicenseSearchComponent extends KspFormBaseComponent {
   @Output() search = new EventEmitter<boolean>(false);
 
   override form = this.fb.group({
-    licenseNumber: [],
-    personId: [],
-    professionType: [null],
-    process: [null],
-    status: [null],
-    submitDateFrom: [],
-    submitDateTo: [],
+    requestNo: [],
+    idCardNo: [],
+    requestType: [],
+    requestprocess: [],
+    requeststatus: [],
+    requestDateFrom: [],
+    requestDateTo: [],
   });
 
   constructor(private fb: FormBuilder) {

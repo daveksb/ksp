@@ -119,22 +119,27 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.staffId = Number(params.get('id'));
       if (this.staffId) {
-        this.patchUserInfo(this.staffId);
-        this.patchAddress(this.staffId);
+        this.getStaff2Data(this.staffId);
+        //this.patchAddress(this.staffId);
       }
     });
   }
 
-  patchUserInfo(staffId: number) {
+  getStaff2Data(staffId: number) {
+    const payload = {
+      id: '3', //`${staffId}`,
+      schoolId: '12', //this.schoolId,
+    };
     this.staffService
-      .getStaffUserInfo(staffId)
+      //.getStaffUserInfo(staffId)
+      .getStaff2(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         this.icCardNo = res.idCardNo;
-        //console.log('this.icCardNo = ', this.icCardNo);
-        const { schoolId, createDate, ...formData } = res;
+        console.log('get data = ', res);
+        /*         const { schoolId, createDate, ...formData } = res;
         formData.birthDate = formData.birthDate.split('T')[0];
-        this.form.controls.userInfo.patchValue(formData);
+        this.form.controls.userInfo.patchValue(formData); */
       });
   }
 

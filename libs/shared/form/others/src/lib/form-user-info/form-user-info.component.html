@@ -238,27 +238,6 @@
   </div>
 
   <div class="row mb-2" *ngIf="!foreignMode">
-    <div class="col">
-      <label class="form-label required">อีเมล</label>
-      <input
-        class="form-control"
-        type="email"
-        [class.bg-light]="isDarkMode"
-        formControlName="email"
-      />
-      <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
-        <span class="text-danger" *ngIf="email.errors?.['email']">{{
-          validatorMessages.email
-        }}</span>
-      </ng-container>
-    </div>
-    <div class="col-md-6">
-      <label class="form-label required">ตำแหน่ง</label>
-      <input class="form-control" type="email" [class.bg-light]="isDarkMode" />
-    </div>
-  </div>
-
-  <div class="row mb-2" *ngIf="!foreignMode">
     <div class="col-md-6">
       <label class="form-label required">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
       <input
@@ -292,6 +271,27 @@
           >{{ validatorMessages.phone }}
         </span>
       </ng-container>
+    </div>
+  </div>
+
+  <div class="row mb-2" *ngIf="!foreignMode">
+    <div class="col-6">
+      <label class="form-label required">อีเมล</label>
+      <input
+        class="form-control"
+        type="email"
+        [class.bg-light]="isDarkMode"
+        formControlName="email"
+      />
+      <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
+        <span class="text-danger" *ngIf="email.errors?.['email']">{{
+          validatorMessages.email
+        }}</span>
+      </ng-container>
+    </div>
+    <div class="col-md-6" [ngClass]="{ hide: !foreignMode }">
+      <label class="form-label required">ตำแหน่ง</label>
+      <input class="form-control" type="email" [class.bg-light]="isDarkMode" />
     </div>
   </div>
 

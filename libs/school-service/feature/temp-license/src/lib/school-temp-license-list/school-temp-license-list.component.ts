@@ -86,5 +86,3 @@ export interface TempLicenseInfo {
   updateDate: string;
   requestDate: string;
 }
-
-//name: string;
