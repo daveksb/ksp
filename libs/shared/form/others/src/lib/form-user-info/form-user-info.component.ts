@@ -69,6 +69,9 @@ export class FormUserInfoComponent extends KspFormBaseComponent {
     workPhone: [null, [Validators.required, Validators.pattern(phonePattern)]],
     nationality: ['TH'],
     country: [],
+    visatype: [],
+    visaclass: [],
+    visaenddate: [],
   });
 
   constructor(private fb: FormBuilder) {

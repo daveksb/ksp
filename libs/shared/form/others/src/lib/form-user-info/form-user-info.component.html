@@ -295,12 +295,13 @@
     </div>
   </div>
 
-  <div class="row mb-2" *ngIf="foreignMode">
+  <div class="row mb-2" [ngClass]="{ hide: !foreignMode }">
     <div class="col">
       <label class="form-label">Visa Class </label>
       <select
         class="form-select"
         [class.bg-white]="!isDarkMode && mode === 'edit'"
+        formControlName="visaclass"
       >
         <option selected>กรุณาเลือก</option>
         <option value="1">One</option>
@@ -314,6 +315,7 @@
       <select
         class="form-select"
         [class.bg-white]="!isDarkMode && mode === 'edit'"
+        formControlName="visatype"
       >
         <option selected>กรุณาเลือก</option>
         <option value="1">One</option>
@@ -323,10 +325,10 @@
     </div>
   </div>
 
-  <div class="row mb-2" *ngIf="foreignMode">
+  <div class="row mb-2" [ngClass]="{ hide: !foreignMode }">
     <div class="col-6">
       <label class="form-label">อนุญาตถึงวันที่ </label>
-      <input class="form-control" type="date" />
+      <input formControlName="visaenddate" class="form-control" type="date" />
     </div>
   </div>
 
