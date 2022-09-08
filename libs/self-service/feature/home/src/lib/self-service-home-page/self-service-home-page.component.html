@@ -19,7 +19,7 @@
     [KuruspaId]="'1'"
     [personId]="'1'"
   ></self-service-license-info>
-
+  <br />
   <div class="mx-4">
     <div class="box-header">ค้นหาใบคำขอ</div>
     <div class="box__container px-4 py-2">
@@ -117,14 +117,16 @@
       </mat-menu>
 
       <mat-menu #reward="matMenu">
-        <button mat-menu-item (click)="reward1()">รางวัลคุรุสภา</button>
-        <button mat-menu-item (click)="reward2()">
+        <button mat-menu-item (click)="rewardPage(1)">รางวัลคุรุสภา</button>
+        <button mat-menu-item (click)="rewardPage(2)">
           รางวัลครูภาษาไทยดีเด่น
         </button>
-        <button mat-menu-item (click)="reward3()">รางวัลครูผู้สอนดีเด่น</button>
-        <button mat-menu-item (click)="reward4()">รางวัลคุรุสดุดี</button>
-        <button mat-menu-item (click)="reward5()">รางวัลครูอาวุโส</button>
-        <button mat-menu-item (click)="reward6()">
+        <button mat-menu-item (click)="rewardPage(3)">
+          รางวัลครูผู้สอนดีเด่น
+        </button>
+        <button mat-menu-item (click)="rewardPage(4)">รางวัลคุรุสดุดี</button>
+        <button mat-menu-item (click)="rewardPage(5)">รางวัลครูอาวุโส</button>
+        <button mat-menu-item (click)="rewardPage(6)">
           รางวัลผลงานวิจัยของคุรุสภา
         </button>
       </mat-menu>

@@ -1,0 +1,93 @@
+.container {
+  max-width: 1440px;
+  background-image: url('/assets/images/BG-secondary.png');
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 15rem;
+}
+
+.form__container {
+  display: grid;
+  background: #ffffff;
+  box-shadow: 0px 4px 10px rgba(63, 137, 254, 0.1);
+  border-radius: 20px;
+  padding: 24px 36px;
+  text-align: center;
+}
+
+.detail__container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-column-gap: 8px;
+  padding: 24px 0;
+}
+
+.form__detail {
+  text-align: left;
+  color: #656565;
+  font-size: 18px;
+}
+
+.field__container {
+  padding: 0 200px;
+}
+
+.form__footer {
+  text-align: center;
+  margin: 24px;
+}
+
+#btn-confirm {
+  width: 350px;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.label__login {
+  font-size: 20px;
+  color: #666666;
+  text-decoration: underline;
+  margin-top: 24px;
+  cursor: pointer;
+}
+
+.hr-or {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  padding: 0 200px;
+}
+
+.hr-or span {
+  position: absolute;
+  top: -4px;
+  padding: 0 5px;
+  margin: 0 -16px;
+  background: #fff;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* mobile */
+@media only screen and (max-width: 768px) {
+  .container {
+    width: 100%;
+    height: 100%;
+    padding: 72px 16px;
+  }
+  .form__container {
+    padding: 0;
+  }
+
+  .field__container {
+    padding: 0 24px;
+    margin-bottom: 8px;
+  }
+
+  #btn-confirm {
+    width: 300px;
+  }
+}

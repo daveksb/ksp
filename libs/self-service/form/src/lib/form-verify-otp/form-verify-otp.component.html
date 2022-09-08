@@ -1,33 +1,48 @@
 <div class="d-flex flex-column">
-  <div class="header__title">ยืนยันตัวตน OTP</div>
+  <div class="fs-2 text-center mb-5">ยืนยันตัวตน OTP</div>
 
-  <div class="input__group">
+  <div class="d-flex justify-content-center">
     <input
-      type="number"
-      min="0"
-      max="9"
-      maxlength="3"
-      step="1"
-      class="input__label"
+      type="text"
+      class="form-control p-0 mx-1"
+      style="width: 40px; height: 50px"
     />
-    <input type="number" min="0" max="9" step="1" class="input__label" />
-    <input type="number" min="0" max="9" step="1" class="input__label" />
-    <input type="number" min="0" max="9" step="1" class="input__label" />
-    <input type="number" min="0" max="9" step="1" class="input__label" />
-    <input type="number" min="0" max="9" step="1" class="input__label" />
+    <input
+      type="text"
+      class="form-control p-0 mx-1"
+      style="width: 40px; height: 50px"
+    />
+    <input
+      type="text"
+      class="form-control p-0 mx-1"
+      style="width: 40px; height: 50px"
+    />
+    <input
+      type="text"
+      class="form-control p-0 mx-1"
+      style="width: 40px; height: 50px"
+    />
+    <input
+      type="text"
+      class="form-control p-0 mx-1"
+      style="width: 40px; height: 50px"
+    />
+    <input
+      type="text"
+      class="form-control p-0 mx-1"
+      style="width: 40px; height: 50px"
+    />
   </div>
 
-  <div class="otp__ref">Ref code: RS1126</div>
-  <div class="resend__otp">ส่งรหัสยืนยันอีกครั้ง ภายใน - 02:26</div>
+  <div class="text-center mt-2 text-secondary">Ref code: RS1126</div>
+  <div class="text-center mt-3 text-secondary">
+    ส่งรหัสยืนยันอีกครั้ง ภายใน -
+    <span class="text-danger text-decoration-underline">03:00</span>
+  </div>
 
-  <div class="btn__container">
-    <button matDialogClose class="btn btn-secondary">ยกเลิก</button>
-    <button
-      matDialogClose
-      id="confirm__button"
-      class="btn btn-primary"
-      (click)="nextStep()"
-    >
+  <div class="d-flex justify-content-center mt-5">
+    <button matDialogClose class="btn btn-secondary me-2">ยกเลิก</button>
+    <button matDialogClose class="btn btn-primary ms-2" (click)="nextStep()">
       ยืนยัน
     </button>
   </div>

@@ -9,6 +9,6 @@ export class FormVerifyOtpComponent {
   constructor(private router: Router) {}
 
   nextStep() {
-    this.router.navigate(['/', 'register', 'step-3']);
+    this.router.navigate(['/', 'register', 'th-step-3']);
   }
 }
