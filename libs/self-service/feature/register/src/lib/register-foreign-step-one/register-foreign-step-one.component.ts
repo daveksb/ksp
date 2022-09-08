@@ -14,4 +14,8 @@ export class RegisterForeignStepOneComponent implements OnInit {
   next() {
     this.router.navigate(['/', 'register', 'en-step-2']);
   }
+
+  loginPage() {
+    this.router.navigate(['/', 'login']);
+  }
 }
