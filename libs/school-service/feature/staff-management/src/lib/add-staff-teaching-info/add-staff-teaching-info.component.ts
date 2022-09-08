@@ -227,11 +227,7 @@ export class AddStaffTeachingInfoComponent implements OnInit {
   }
 
   prevPage() {
-    this.router.navigate([
-      '/staff-management',
-      'staff-person-info',
-      this.staffId,
-    ]);
+    this.router.navigate(['/staff-management', 'edit-staff', this.staffId]);
   }
 
   cancel() {

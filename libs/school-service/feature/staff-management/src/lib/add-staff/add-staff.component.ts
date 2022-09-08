@@ -13,10 +13,10 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  templateUrl: './staff-person-info.component.html',
-  styleUrls: ['./staff-person-info.component.scss'],
+  templateUrl: './add-staff.component.html',
+  styleUrls: ['./add-staff.component.scss'],
 })
-export class StaffPersonInfoComponent implements OnInit {
+export class AddStaffComponent implements OnInit {
   staffId!: number;
 
   countries$!: Observable<any>;
@@ -197,15 +197,11 @@ export class StaffPersonInfoComponent implements OnInit {
   }
 
   nextPage() {
-    this.router.navigate([
-      '/staff-management',
-      'staff-teaching-info',
-      this.staffId,
-    ]);
+    this.router.navigate(['/staff-management', 'edit-staff', this.staffId]);
   }
 
   cancel() {
-    this.router.navigate(['/', 'staff-management', 'list']);
+    this.router.navigate(['/staff-management', 'list']);
   }
 
   save() {
