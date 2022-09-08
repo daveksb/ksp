@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormControl } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -14,21 +14,17 @@ export class FormTeachingInfoComponent
   implements OnInit
 {
   levels = levels;
+  subjects = subjects;
 
   override form = this.fb.group({
-    subjectAssign: [],
-    level1: [false],
-    level2: [false],
-    level3: [false],
-    level4: [false],
-    level5: [false],
-    level6: [false],
-    level7: [false],
-    level8: [false],
+    teachingLevel: this.fb.array([]),
+    teachingSubjects: this.fb.array([]),
+    teachingSubjectOther: [],
   });
 
   constructor(private fb: FormBuilder) {
     super();
+    this.addCheckboxes();
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
@@ -43,43 +39,55 @@ export class FormTeachingInfoComponent
       //();
     });
   }
+
+  private addCheckboxes() {
+    this.levels.forEach(() =>
+      this.teachingLevelFormArray.push(new FormControl(false))
+    );
+
+    this.subjects.forEach(() =>
+      this.teachingSubjectsFormArray.push(new FormControl(false))
+    );
+  }
+  get teachingSubjectsFormArray() {
+    return this.form.controls.teachingSubjects as FormArray;
+  }
+
+  get teachingLevelFormArray() {
+    return this.form.controls.teachingLevel as FormArray;
+  }
 }
 
 export const levels = [
-  { label: 'ปฐมวัย', name: 'level1', value: false },
+  { label: 'ประกาศนียบัตรวิชาชีพ (ปวช.)', value: 'level6' },
+  { label: 'ชั้นมัธยมปีที่ 1-3', value: 'level4' },
+  { label: 'ชั้นประถมปีที่ 1-3', value: 'level2' },
+  { label: 'อนุบาล', value: 'level1' },
   {
-    label: 'ช่วงชั้นที่ 1 (ประถมศึกษาปีที่ 1-3)',
-    name: 'level2',
-    value: false,
+    label: 'ประกาศนียบัตรวิชาชีพขั้นสูง (ปวส.) / อนุปริญญา',
+    value: 'level7',
   },
-  {
-    label: 'ช่วงชั้นที่ 2 (ประถมศึกษาปีที่ 4-6)',
-    name: 'level3',
-    value: false,
-  },
-  {
-    label: 'ช่วงชั้นที่ 3 (มัธยมศึกษาปีที่ 1-3)',
-    name: 'level4',
-    value: false,
-  },
-  {
-    label: 'ช่วงชั้นที่ 4 (มัธยมศึกษาปีที่ 4-6)',
-    name: 'level5',
-    value: false,
-  },
-  {
-    label: 'ประกาศนียบัตรวิชาชีพ (ปวช.)',
-    name: 'level6',
-    value: false,
-  },
-  {
-    label: 'ประกาศนียบัตรวิชาชีพขั้นสูง (ปวส.)',
-    name: 'level7',
-    value: false,
-  },
-  {
-    label: 'อื่นๆ',
-    name: 'level8',
-    value: false,
-  },
+  { label: 'ชั้นมัธยมปีที่ 4-6', value: 'level5' },
+  { label: 'ชั้นประถมปีที่ 4-6', value: 'level3' },
+];
+
+export const subjects = [
+  { label: 'ภาษาไทย', value: 's1' },
+  { label: 'วิทยาศาสตร์', value: 's6' },
+  { label: 'คณิตศาสตร์', value: 's12' },
+  { label: 'ภาษาต่างประเทศ', value: 's2' },
+  { label: 'ปฐมวัย', value: 's7' },
+  { label: 'เทคโนโลยีสารสนเทศและการสื่อสาร', value: 's13' },
+  { label: 'สุขศึกษาและพละศึกษา', value: 's3' },
+  { label: 'คหกรรม', value: 's8' },
+  { label: 'พาณิชยกรรม/บริหารธุรกิจ', value: 's14' },
+  { label: 'สังคมศึกษา ศาสนาและวัฒนธรรม', value: 's4' },
+  { label: 'ศิลปกรรม', value: 's9' },
+  { label: 'อุตสาหกรรม', value: 's15' },
+  { label: 'การงานอาชีพและเทคโนโลยี', value: 's5' },
+  { label: 'เกษตรกรรม', value: 's10' },
+  { label: 'อุตสาหกรรมสิ่งทอ', value: 's16' },
+  { label: 'อื่นๆ', value: 's18' },
+  { label: 'ประมง', value: 's11' },
+  { label: 'อุตสาหกรรมท่องเที่ยว', value: 's17' },
 ];

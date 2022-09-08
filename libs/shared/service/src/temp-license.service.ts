@@ -21,16 +21,7 @@ export class TempLicenseService {
       .pipe(shareReplay());
   }
 
-  /*   searchStaff2FromIdCard(payload: any): Observable<any> {
-    return this.http
-      .post(`${environment.apiUrl}/kspstaff/schstaff2select`, {
-        ...payload,
-        tokenkey: environment.token,
-      })
-      .pipe(shareReplay());
-  } */
-
-  getSchoolInfo(schoolId: string, tokenkey: any) {
+  getSchoolInfo(schoolId: string, tokenkey: string) {
     return this.http
       .get(
         `${environment.apiUrl}/kspschoolregister/schschoolsearchschoolid?schoolId=${schoolId}&tokenkey=${tokenkey}`

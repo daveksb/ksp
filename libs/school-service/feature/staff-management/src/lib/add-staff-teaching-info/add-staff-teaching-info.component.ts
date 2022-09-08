@@ -86,10 +86,6 @@ export class AddStaffTeachingInfoComponent implements OnInit {
       }
     });
 
-    /* this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      console.log('form = ', res);
-    }); */
-
     this.getList();
   }
 
@@ -235,15 +231,11 @@ export class AddStaffTeachingInfoComponent implements OnInit {
   }
 
   prevPage() {
-    this.router.navigate([
-      '/staff-management',
-      'staff-person-info',
-      this.staffId,
-    ]);
+    this.router.navigate(['/staff-management', 'edit-staff', this.staffId]);
   }
 
   cancel() {
-    this.router.navigate(['/', 'staff-management', 'list']);
+    this.router.navigate(['/staff-management', 'list']);
   }
 }
 
