@@ -15,4 +15,10 @@ export class GeneralInfoService {
       shareReplay()
     );
   }
+  getVisaType(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/kspmasterdata/visatype`).pipe(
+      map((data: any) => data.datareturn),
+      shareReplay()
+    );
+  }
 }

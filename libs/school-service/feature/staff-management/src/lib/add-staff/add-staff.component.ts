@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AddressService, GeneralInfoService } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 import { StaffPersonInfoService } from '@ksp/shared/service';
-import { replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
+import { getCookie, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   CompleteDialogComponent,
@@ -67,8 +67,9 @@ export class AddStaffComponent implements OnInit {
   }
 
   loadStaffData(staffId: number) {
+    const tokenkey = getCookie('schUserToken');
     this.staffService
-      .searchStaffFromId(staffId)
+      .searchStaffFromId(staffId, tokenkey)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         //console.log('staff 2 data = ', res);
@@ -79,7 +80,8 @@ export class AddStaffComponent implements OnInit {
   }
 
   save() {
-    if (this.staffId) {
+    const tokenkey = getCookie('schUserToken');
+    if ((this.staffId, tokenkey)) {
       this.updateStaff();
     } else {
       this.insertStaff();
@@ -103,7 +105,8 @@ export class AddStaffComponent implements OnInit {
     };
 
     console.log('insert payload = ', payload);
-    this.staffService.addStaff2(payload).subscribe((res) => {
+    const tokenkey = getCookie('schUserToken');
+    this.staffService.addStaff2(payload, tokenkey).subscribe((res) => {
       console.log('add staff result = ', res);
       this.onCompleted();
       this.form.reset();
@@ -125,8 +128,8 @@ export class AddStaffComponent implements OnInit {
     formData.addr2 = replaceEmptyWithNull(formData.addr2);
     formData.edu1 = replaceEmptyWithNull(formData.edu1);
     formData.edu2 = replaceEmptyWithNull(formData.edu2);
-
-    this.staffService.updateStaff(formData).subscribe((res) => {
+    const tokenkey = getCookie('schUserToken');
+    this.staffService.updateStaff(formData, tokenkey).subscribe((res) => {
       //console.log('update staff result = ', res);
       this.snackBar.open('แก้ไขข้อมูลสำเร็จ', 'ปิด', {
         duration: 2000,

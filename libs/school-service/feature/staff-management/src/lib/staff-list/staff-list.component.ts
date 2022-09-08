@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { getCookie } from '@ksp/shared/utility';
 import { StaffManagementService } from '../staff-management.service';
 
 @Component({
@@ -37,7 +38,8 @@ export class StaffListComponent {
   ) {}
 
   search() {
-    this.service.getStaffs(this.schoolId).subscribe((res) => {
+    const tokenkey = getCookie('schUserToken');
+    this.service.getStaffs(this.schoolId, tokenkey).subscribe((res) => {
       this.dataSource.data = res;
       //console.log('res = ', res);
     });

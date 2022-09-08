@@ -6,14 +6,18 @@ import { map, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class StaffManagementService {
+export class SchoolServiceFeatureLoginService {
   constructor(private http: HttpClient) {}
 
-  getStaffs(schoolId: string, tokenkey: any): Observable<any> {
+  validateLogin(form: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/ksplogin/userloginschuser`,
+      form
+    );
+  }
+  validateTokenKey(token: string): Observable<any> {
     return this.http
-      .get(
-        `${environment.apiUrl}/kspschoolregister/schstaffall?schoolId=${schoolId}&tokenkey=${tokenkey}`
-      )
+      .post(`${environment.apiUrl}/ksplogin/userloginschuser`, token)
       .pipe(map((data: any) => data.datareturn));
   }
 }
