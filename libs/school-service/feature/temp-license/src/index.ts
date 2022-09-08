@@ -1,1 +1,1 @@
-export * from './lib/school-service-feature-temp-license.module';
+export * from './lib/temp-license.module';

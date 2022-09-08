@@ -28,17 +28,18 @@ export class TempLicenseRequestComponent implements OnInit {
     userInfo: [],
     addr1: [],
     addr2: [],
+    schoolAddr: [],
     edu1: [],
     edu2: [],
-    //edu3: [],
-    schoolAddr: [],
     teachingInfo: [],
     hiringInfo: [],
-    //reason: [],
+    //reasonInfo: [],
   });
 
+  // use for lazy load api
   eduSelected = false;
   addrSelected = false;
+
   today = thaiDate(new Date());
   countries$!: Observable<any>;
   provinces$!: Observable<any>;
