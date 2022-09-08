@@ -29,7 +29,7 @@ const routes: Routes = [
     path: 'temp-license',
     loadChildren: () =>
       import('@ksp/school-service/feature/temp-license').then(
-        (m) => m.SchoolServiceFeatureTempLicenseModule
+        (m) => m.SchoolTempLicenseModule
       ),
   },
   {

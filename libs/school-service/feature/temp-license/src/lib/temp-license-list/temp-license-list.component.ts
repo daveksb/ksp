@@ -5,11 +5,10 @@ import { Router } from '@angular/router';
 import { TempLicenseService } from '@ksp/shared/service';
 import { replaceEmptyWithNull } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
-import { thaiDate } from '@ksp/shared/utility';
 
 @Component({
-  templateUrl: './school-temp-license-list.component.html',
-  styleUrls: ['./school-temp-license-list.component.scss'],
+  templateUrl: './temp-license-list.component.html',
+  styleUrls: ['./temp-license-list.component.scss'],
 })
 export class SchoolTempLicenseListComponent implements OnInit {
   form = this.fb.group({
@@ -56,7 +55,7 @@ export class SchoolTempLicenseListComponent implements OnInit {
   }
 
   nextPage(requestType: number) {
-    this.router.navigate(['/temp-license', 'detail'], {
+    this.router.navigate(['/temp-license', 'request'], {
       queryParams: { type: requestType },
     });
   }
