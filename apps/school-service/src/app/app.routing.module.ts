@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SchoolServiceLoginComponent } from '@ksp/school-service/feature/login';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: SchoolServiceLoginComponent },
@@ -31,6 +32,7 @@ const routes: Routes = [
       import('@ksp/school-service/feature/temp-license').then(
         (m) => m.SchoolTempLicenseModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: 'foreign-teacher',
@@ -38,6 +40,7 @@ const routes: Routes = [
       import('@ksp/school-service/feature/foreign-teacher').then(
         (m) => m.SchoolServiceFeatureForeignTeacherModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: 'qualification-approve',
@@ -45,6 +48,7 @@ const routes: Routes = [
       import('@ksp/school-service/feature/qualification-approve').then(
         (m) => m.SchoolServiceFeatureQualificationApproveModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: 'activity',
@@ -52,6 +56,7 @@ const routes: Routes = [
       import('@ksp/school-service/feature/activity').then(
         (m) => m.SchoolServiceFeatureActivityModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: 'staff-management',
@@ -59,6 +64,7 @@ const routes: Routes = [
       import('@ksp/school-service/feature/staff-management').then(
         (m) => m.SchoolServiceFeatureStaffManagementModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: 'request-reward',
@@ -66,6 +72,7 @@ const routes: Routes = [
       import('@ksp/school-service/feature/request-reward').then(
         (m) => m.SchoolServiceFeatureRequestRewardModule
       ),
+    canActivate: [AuthGuard],
   },
 
   { path: '**', component: SchoolServiceLoginComponent },
