@@ -2,13 +2,15 @@
   ><span header>TEACHING LICENSE APPLICATION FORM</span>
 </ksp-top-nav>
 
-<div class="main__container px-3 py-1">
-  <self-service-request-status
-    [headers]="headerGroup"
-    [title]="title"
-  ></self-service-request-status>
+<div class="main__container py-2">
+  <div class="px-4">
+    <self-service-request-status
+      [headers]="headerGroup"
+      [title]="title"
+    ></self-service-request-status>
+  </div>
   <br />
-  <div class="box-header text-center ">
+  <div class="box-header text-center">
     THE TEACHERS' COUNCIL OF THAILAND TEACHING LICENSE APPLICATION FORM
   </div>
 
@@ -39,7 +41,7 @@
     </mat-step>
   </mat-stepper>
 
-  <div class="d-flex justify-content-center mb-3">
+  <div class="d-flex justify-content-center my-3">
     <button type="button" (click)="cancel()" class="btn btn-secondary">
       Cancel
     </button>

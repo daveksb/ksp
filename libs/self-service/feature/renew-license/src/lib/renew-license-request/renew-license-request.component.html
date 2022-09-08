@@ -1,79 +1,73 @@
 <ksp-top-nav><span header>ใบคำขอต่ออายุใบประกอบวิชาชีพ</span></ksp-top-nav>
 
-<div class="main__container">
+<div class="main__container px-4 py-2">
   <self-service-request-status
     [headers]="headerGroup"
   ></self-service-request-status>
-  <br />
-  <div class="d-flex">
-    <div class="detail__container bg-white w-25 me-2">
+
+  <div class="d-flex my-4">
+    <div class="detail__container bg-white w-25 me-1">
       <self-service-form-upload-image></self-service-form-upload-image>
     </div>
-    <div class="detail__container bg-white w-100 ms-2">
+    <div class="detail__container bg-white w-100 ms-1">
       <ksp-form-user-info [isDarkMode]="true"></ksp-form-user-info>
     </div>
   </div>
-  <br />
-  <div class="pb-1 ps-3 ps-md-5 pe-3 pe-md-5">
-    <mat-tab-group
-      class="tab-group"
-      animationDuration="0ms"
-      [selectedIndex]="0"
-    >
-      <mat-tab label="ที่อยู่" class="tab-content">
-        <ksp-form-address formControlName="address1" [isDarkMode]="true">
-          <span>ที่อยู่ทะเบียนบ้าน</span>
-        </ksp-form-address>
-        <hr />
-        <ksp-form-address formControlName="address2" [isDarkMode]="true">
-          <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
-        </ksp-form-address>
-      </mat-tab>
 
-      <mat-tab label="สถานที่ทำงาน">
-        <self-service-form-user-workplace formControlName="workplace">
-        </self-service-form-user-workplace>
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label class="form-label">โทรศัพท์</label>
-            <input class="form-control" type="text" />
-          </div>
+  <mat-tab-group class="tab-group" animationDuration="0ms" [selectedIndex]="0">
+    <mat-tab label="ที่อยู่" class="tab-content">
+      <ksp-form-address formControlName="address1" [isDarkMode]="true">
+        <span>ที่อยู่ทะเบียนบ้าน</span>
+      </ksp-form-address>
+      <hr />
+      <ksp-form-address formControlName="address2" [isDarkMode]="true">
+        <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
+      </ksp-form-address>
+    </mat-tab>
 
-          <div class="col-md-6 mb-3">
-            <label class="form-label">โทรสาร</label>
-            <input class="form-control" type="text" />
-          </div>
+    <mat-tab label="สถานที่ทำงาน">
+      <self-service-form-user-workplace formControlName="workplace">
+      </self-service-form-user-workplace>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">โทรศัพท์</label>
+          <input class="form-control" type="text" />
         </div>
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label class="form-label">อีเมล</label>
-            <input class="form-control" type="text" />
-          </div>
 
-          <div class="col-md-6 mb-3">
-            <label class="form-label">เว็บไซต์</label>
-            <input class="form-control" type="text" />
-          </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">โทรสาร</label>
+          <input class="form-control" type="text" />
         </div>
-      </mat-tab>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">อีเมล</label>
+          <input class="form-control" type="text" />
+        </div>
 
-      <mat-tab label="ผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน">
-        <self-service-standard-working></self-service-standard-working>
-      </mat-tab>
-    </mat-tab-group>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">เว็บไซต์</label>
+          <input class="form-control" type="text" />
+        </div>
+      </div>
+    </mat-tab>
 
-    <div class="fs-6 text-danger mt-2">
-      *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
-      โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
-    </div>
+    <mat-tab label="ผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน">
+      <self-service-standard-working></self-service-standard-working>
+    </mat-tab>
+  </mat-tab-group>
 
-    <div class="d-flex justify-content-center mt-3 mb-3">
-      <button type="button" class="btn border-primary text-primary bg-white">
-        บันทึกชั่วคราว
-      </button>
-      <button type="button" class="ms-3 btn btn-primary" (click)="save()">
-        บันทึกและยื่น
-      </button>
-    </div>
+  <div class="fs-6 text-danger mt-1">
+    *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
+    โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
+  </div>
+
+  <div class="d-flex justify-content-center my-3">
+    <button type="button" class="btn border-primary text-primary bg-white">
+      บันทึกชั่วคราว
+    </button>
+    <button type="button" class="ms-3 btn btn-primary" (click)="save()">
+      บันทึกและยื่น
+    </button>
   </div>
 </div>
