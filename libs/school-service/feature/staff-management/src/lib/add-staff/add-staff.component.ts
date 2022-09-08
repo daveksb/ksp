@@ -11,8 +11,9 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { MatDialog } from '@angular/material/dialog';
-import { untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   templateUrl: './add-staff.component.html',
   styleUrls: ['./add-staff.component.scss'],
@@ -55,6 +56,7 @@ export class AddStaffComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.form.reset();
     this.activatedroute.paramMap.subscribe((params) => {
       this.staffId = Number(params.get('id'));
       if (this.staffId) {
@@ -77,52 +79,12 @@ export class AddStaffComponent implements OnInit {
       });
   }
 
-  patchEdu(edus: any[]) {
-    console.log('edus = ', edus);
-    if (edus && edus.length) {
-      edus.map((edu, i) => {
-        //const { schStaffId, ...formData } = edu;
-        //formData.admissionDate = formData.admissionDate.split('T')[0];
-        if (i === 0) {
-          this.form.controls.edu1.patchValue(edu);
-        }
-        if (i === 1) {
-          this.form.controls.edu2.patchValue(edu);
-        }
-      });
+  save() {
+    if (this.staffId) {
+      this.updateStaff();
+    } else {
+      this.insertStaff();
     }
-  }
-
-  patchAddress(addrs: any[]) {
-    console.log('add data = ', addrs);
-    if (addrs && addrs.length) {
-      addrs.map((addr: any, i: number) => {
-        if (i === 0) {
-          this.amphurs1$ = this.addressService.getAmphurs(addr.province);
-          this.tumbols1$ = this.addressService.getTumbols(addr.amphur);
-          this.form.controls.addr1.patchValue(addr);
-        }
-        if (i === 1) {
-          this.amphurs2$ = this.addressService.getAmphurs(addr.province);
-          this.tumbols2$ = this.addressService.getTumbols(addr.amphur);
-          this.form.controls.addr2.patchValue(addr);
-        }
-      });
-    }
-  }
-
-  pathUserInfo(data: any) {
-    const {
-      schoolId,
-      createDate,
-      addresses,
-      educations,
-      teachinginfo,
-      hiringinfo,
-      ...formData
-    } = data;
-    formData.birthDate = formData.birthDate.split('T')[0];
-    this.form.controls.userInfo.patchValue(formData);
   }
 
   insertStaff() {
@@ -135,7 +97,7 @@ export class AddStaffComponent implements OnInit {
 
     const payload = {
       ...userInfo,
-      ...{ addresses: JSON.stringify([formData.addr1]) },
+      ...{ addresses: JSON.stringify([formData.addr1, formData.addr2]) },
       ...{ educations: JSON.stringify([formData.edu1, formData.edu2]) },
       ...{ teachingInfo: JSON.stringify(formData.teachingInfo) },
       ...{ hiringInfo: JSON.stringify(formData.workingInfo) },
@@ -144,22 +106,19 @@ export class AddStaffComponent implements OnInit {
     console.log('insert payload = ', payload);
     this.staffService.addStaff2(payload).subscribe((res) => {
       console.log('add staff result = ', res);
-      this.snackBar.open('บันทึกข้อมูลสำเร็จ', 'ปิด', {
-        duration: 2000,
-      });
-      this.router.navigate(['/staff-management', 'edit-staff', res.id]);
+      this.onCompleted();
+      this.form.reset();
+      //this.router.navigate(['/staff-management', 'edit-staff', res.id]);
     });
   }
 
   updateStaff() {
+    //
+  }
+  /*   updateStaff() {
     const formData: any = this.form.getRawValue();
     formData.userInfo.schoolId = this.schoolId;
     formData.userInfo.nationality = 'TH';
-    /* formData.addr1.schstaffid = `${this.staffId}`;
-    formData.addr2.schstaffid = `${this.staffId}`;
-    formData.edu1.schstaffid = `${this.staffId}`; */
-    //if (formData && formData.edu2) formData.edu2.schstaffid = `${this.staffId}`;
-
     console.log('update formData = ', formData);
 
     formData.userInfo = replaceEmptyWithNull(formData.userInfo);
@@ -174,7 +133,7 @@ export class AddStaffComponent implements OnInit {
         duration: 2000,
       });
     });
-  }
+  } */
 
   useSameAddress(evt: any) {
     const checked = evt.target.checked;
@@ -222,14 +181,6 @@ export class AddStaffComponent implements OnInit {
     this.router.navigate(['/staff-management', 'list']);
   }
 
-  save() {
-    if (this.staffId) {
-      this.updateStaff();
-    } else {
-      this.insertStaff();
-    }
-  }
-
   onConfirmed() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
@@ -242,7 +193,6 @@ export class AddStaffComponent implements OnInit {
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         this.save();
-        this.onCompleted();
       }
     });
   }
@@ -257,7 +207,7 @@ export class AddStaffComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.cancel();
+        //this.cancel();
       }
     });
   }
@@ -268,5 +218,51 @@ export class AddStaffComponent implements OnInit {
 
   get addr2(): any {
     return this.form.controls.addr2;
+  }
+
+  patchEdu(edus: any[]) {
+    //console.log('edus = ', edus);
+    if (edus && edus.length) {
+      edus.map((edu, i) => {
+        if (i === 0) {
+          this.form.controls.edu1.patchValue(edu);
+        }
+        if (i === 1) {
+          this.form.controls.edu2.patchValue(edu);
+        }
+      });
+    }
+  }
+
+  patchAddress(addrs: any[]) {
+    //console.log('add data = ', addrs);
+    if (addrs && addrs.length) {
+      addrs.map((addr: any, i: number) => {
+        if (i === 0) {
+          this.amphurs1$ = this.addressService.getAmphurs(addr.province);
+          this.tumbols1$ = this.addressService.getTumbols(addr.amphur);
+          this.form.controls.addr1.patchValue(addr);
+        }
+        if (i === 1) {
+          this.amphurs2$ = this.addressService.getAmphurs(addr.province);
+          this.tumbols2$ = this.addressService.getTumbols(addr.amphur);
+          this.form.controls.addr2.patchValue(addr);
+        }
+      });
+    }
+  }
+
+  pathUserInfo(data: any) {
+    const {
+      schoolId,
+      createDate,
+      addresses,
+      educations,
+      teachinginfo,
+      hiringinfo,
+      ...formData
+    } = data;
+    formData.birthDate = formData.birthDate.split('T')[0];
+    this.form.controls.userInfo.patchValue(formData);
   }
 }

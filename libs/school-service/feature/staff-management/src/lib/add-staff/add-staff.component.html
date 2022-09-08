@@ -104,9 +104,9 @@
     [isLastPage]="true"
     [isFirstPage]="true"
     [showSaveButton]="true"
-    [disableSaveButton]="false"
+    [disableSaveButton]="!form.valid"
     [showCenterButtons]="true"
-    (saveClicked)="insertStaff()"
+    (saveClicked)="onConfirmed()"
     (cancelClicked)="cancel()"
   ></ksp-bottom-nav>
 </div>
