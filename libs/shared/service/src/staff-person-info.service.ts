@@ -16,13 +16,16 @@ export class StaffPersonInfoService {
     });
   }
 
-  /*   getStaff2(payload: any): Observable<any> {
+  searchStaffFromId(staffId: number): Observable<any> {
+    const payload = {
+      id: `${staffId}`,
+    };
     return this.http.post(`${environment.apiUrl}/kspstaff/schstaff2select`, {
       ...payload,
       tokenkey: environment.token,
     });
   }
- */
+
   searchStaffFromIdCard(payload: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspstaff/schstaff2selectidcardno`,
@@ -33,14 +36,11 @@ export class StaffPersonInfoService {
     );
   }
 
-  addStaff(payload: any): Observable<any> {
-    return this.http.post(
-      `${environment.apiUrl}/kspschoolregister/schregisterinsert`,
-      {
-        ...payload,
-        tokenkey: environment.token,
-      }
-    );
+  searchStaffsFromFilter(payload: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/kspstaff/xxxxxxxxxxxxxx`, {
+      ...payload,
+      tokenkey: environment.token,
+    });
   }
 
   updateStaff(payload: any): Observable<any> {

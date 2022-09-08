@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -39,7 +39,7 @@ export class StaffListComponent {
   search() {
     this.service.getStaffs(this.schoolId).subscribe((res) => {
       this.dataSource.data = res;
-      console.log('res = ', res);
+      //console.log('res = ', res);
     });
   }
 
@@ -52,11 +52,11 @@ export class StaffListComponent {
   }
 
   addStaff() {
-    this.router.navigate(['/staff-management', 'staff-person-info']);
+    this.router.navigate(['/staff-management', 'add-staff']);
   }
 
   editStaff(staffId: number) {
-    this.router.navigate(['/staff-management', 'staff-person-info', staffId]);
+    this.router.navigate(['/staff-management', 'edit-staff', staffId]);
   }
 }
 
