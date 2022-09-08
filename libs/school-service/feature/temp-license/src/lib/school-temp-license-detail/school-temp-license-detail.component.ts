@@ -13,6 +13,7 @@ import {
   StaffPersonInfoService,
   TempLicenseService,
 } from '@ksp/shared/service';
+import { thaiDate } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 import { LicenseDetailService } from './school-temp-license-detail.service';
@@ -38,7 +39,7 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
 
   eduSelected = false;
   addrSelected = false;
-
+  today = thaiDate(new Date());
   countries$!: Observable<any>;
   provinces$!: Observable<any>;
   amphurs1$!: Observable<any>;
