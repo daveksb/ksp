@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -10,22 +10,30 @@ import { providerFactory } from '@ksp/shared/utility';
   providers: providerFactory(FormHiringInfoComponent),
 })
 export class FormHiringInfoComponent extends KspFormBaseComponent {
-  @Input() positionTypes!: any[];
-  @Input() showHiringPeriod = true;
+  @Input() displayMode: 'staff' | 'request' = 'staff';
+  @Input() positionTypes: any = [];
+  @Input() staffTypes: any = [];
+  @Input() academicStandingList: any = [];
 
+  status = status;
   override form = this.fb.group({
+    psersonType: [],
     position: [],
+    academicStanding: [],
     hiringContractNo: [],
     startDate: [],
     endDate: [],
     hiringPeriodYear: [],
     hiringPeriodMonth: [],
+
+    hiringStatus: [], //radio
+    hiringStatusDate: [],
+    hiringStatusReason: [],
   });
 
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
         this.onChange(value);
         this.onTouched();
@@ -33,3 +41,9 @@ export class FormHiringInfoComponent extends KspFormBaseComponent {
     );
   }
 }
+
+export const status = [
+  { label: 'แจ้งเข้า', value: '1' },
+  { label: 'แจ้งออก', value: '2' },
+  { label: 'ยกเลิกข้อมูล', value: '3' },
+];

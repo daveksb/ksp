@@ -5,7 +5,7 @@ import { StaffListComponent } from './staff-list/staff-list.component';
 import { SchoolContainerPageComponent } from '@ksp/school-service/feature/container-page';
 import { LicenseSearchComponent } from './license-search/license-search.component';
 
-import { StaffPersonInfoComponent } from './staff-person-info/staff-person-info.component';
+import { AddStaffComponent } from './add-staff/add-staff.component';
 import { AddStaffTeachingInfoComponent } from './add-staff-teaching-info/add-staff-teaching-info.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
@@ -32,8 +32,8 @@ export const routes: Routes = [
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: 'list', component: StaffListComponent },
       { path: 'license-search', component: LicenseSearchComponent },
-      { path: 'staff-person-info', component: StaffPersonInfoComponent },
-      { path: 'staff-person-info/:id', component: StaffPersonInfoComponent },
+      { path: 'add-staff', component: AddStaffComponent },
+      { path: 'edit-staff/:id', component: AddStaffComponent },
       {
         path: 'staff-teaching-info/:id',
         component: AddStaffTeachingInfoComponent,
@@ -64,13 +64,13 @@ export const routes: Routes = [
   declarations: [
     StaffListComponent,
     LicenseSearchComponent,
-    StaffPersonInfoComponent,
+    AddStaffComponent,
     AddStaffTeachingInfoComponent,
   ],
   exports: [
     StaffListComponent,
     LicenseSearchComponent,
-    StaffPersonInfoComponent,
+    AddStaffComponent,
     AddStaffTeachingInfoComponent,
   ],
 })
