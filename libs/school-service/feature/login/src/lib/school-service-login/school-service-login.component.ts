@@ -25,6 +25,7 @@ export class SchoolServiceLoginComponent {
       .validateLogin(this.form.value.user)
       .subscribe((res) => {
         if (res.returnCode == 99) return;
+        this.schoolServiceFeatureLoginService.config = res;
         setCookie('schUserToken', res.schUserToken, 1);
         this.router.navigate(['/temp-license', 'list']);
       });

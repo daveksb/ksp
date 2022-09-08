@@ -8,7 +8,14 @@ import {
 } from '@ksp/shared/dialog';
 import { FormBuilder } from '@angular/forms';
 import { EMPTY, Observable, switchMap } from 'rxjs';
-import { AddressService, GeneralInfoService } from '@ksp/shared/service';
+import {
+  AddressService,
+  GeneralInfoService,
+  RequestLicenseService,
+} from '@ksp/shared/service';
+import { getCookie } from '@ksp/shared/utility';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+@UntilDestroy()
 @Component({
   templateUrl: './foreign-teacher-id-request.component.html',
   styleUrls: ['./foreign-teacher-id-request.component.scss'],
@@ -17,7 +24,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   form = this.fb.group({
     foreignTeacher: [],
   });
-
+  schoolId = '0010201056';
   @Input() mode: FormMode = 'edit';
   prefixList$!: Observable<any>;
   countries$!: Observable<any>;
@@ -28,7 +35,8 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     public dialog: MatDialog,
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService,
-    private addressService: AddressService
+    private addressService: AddressService,
+    private requestLicenseService: RequestLicenseService
   ) {}
 
   ngOnInit(): void {
@@ -55,9 +63,10 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       .pipe(
         switchMap((res) => {
           if (res) {
-            console.log(this.form.value.foreignTeacher);
-            console.log('CALL API');
             //call API
+            const form = this.getDefaultForm();
+            form.patchValue(this.form.value.foreignTeacher as any);
+            return this.requestLicenseService.requestLicense(form.value);
           }
           return EMPTY;
         })
@@ -84,8 +93,71 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     });
   }
   getList() {
+    const tokenkey = getCookie('schUserToken');
+    this.requestLicenseService
+      .getSchoolInfo(this.schoolId, tokenkey)
+      .pipe(untilDestroyed(this))
+      .subscribe((res: any) => {
+        console.log('school = ', res);
+      });
     this.countries$ = this.addressService.getCountry();
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.visaTypeList$ = this.generalInfoService.getVisaType();
+  }
+  getDefaultForm() {
+    const tokenkey = getCookie('schUserToken');
+    return this.fb.group({
+      currentprocess: null,
+      requeststatus: null,
+      updatedate: null,
+      licenseid: null,
+      staffid: null,
+      systemtype: null,
+      requesttype: null,
+      requesteduocupy: null,
+      requestfor: null,
+      schoolid: null,
+      idcardno: null,
+      passportno: null,
+      passportstartdate: null,
+      passportenddate: null,
+      prefixth: null,
+      firstnameth: null,
+      lastnameth: null,
+      prefixen: null,
+      firstnameen: null,
+      lastnameen: null,
+      sex: null,
+      birthdate: null,
+      email: null,
+      position: null,
+      educationoccupy: null,
+      contactphone: null,
+      workphone: null,
+      nationality: null,
+      country: null,
+      coordinatorinfo: null,
+      visainfo: null,
+      userpermission: null,
+      addressinfo: null,
+      schooladdrinfo: null,
+      eduinfo: null,
+      teachinginfo: null,
+      reasoninfo: null,
+      fileinfo: null,
+      otherreason: null,
+      refperson: null,
+      prohibitproperty: null,
+      checkprohibitproperty: null,
+      checksubresult: null,
+      checkfinalresult: null,
+      checkhistory: null,
+      approveresult: null,
+      paymentstatus: null,
+      ref1: null,
+      ref2: null,
+      ref3: null,
+      tokenkey,
+    });
   }
 }
