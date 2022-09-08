@@ -16,14 +16,14 @@ import {
 import { thaiDate } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
-import { LicenseDetailService } from './school-temp-license-detail.service';
+import { LicenseDetailService } from './temp-license-request.service';
 
 @UntilDestroy()
 @Component({
-  templateUrl: './school-temp-license-detail.component.html',
-  styleUrls: ['./school-temp-license-detail.component.scss'],
+  templateUrl: './temp-license-request.component.html',
+  styleUrls: ['./temp-license-request.component.scss'],
 })
-export class SchoolTempLicenseDetailComponent implements OnInit {
+export class TempLicenseRequestComponent implements OnInit {
   form = this.fb.group({
     userInfo: [],
     addr1: [],
@@ -226,11 +226,11 @@ export class SchoolTempLicenseDetailComponent implements OnInit {
       .subscribe((res) => {
         console.log('res = ', res);
         if (res.returnCode === '98') {
-          this.router.navigate(['/temp-license', 'detail'], {
+          this.router.navigate(['/temp-license', 'request'], {
             queryParams: { type: this.requestType },
           });
         } else
-          this.router.navigate(['/temp-license', 'detail', res.id], {
+          this.router.navigate(['/temp-license', 'request', res.id], {
             queryParams: { type: this.requestType },
           });
       });
