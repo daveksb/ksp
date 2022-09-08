@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { TempLicenseService } from '@ksp/shared/service';
-import { replaceEmptyWithNull } from '@ksp/shared/utility';
+import { getCookie, replaceEmptyWithNull } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -45,9 +45,12 @@ export class SchoolTempLicenseListComponent implements OnInit {
   search(searchParams: any) {
     const data = { ...searchParams, ...{ schoolid: `${this.schoolId}` } };
     const payload = replaceEmptyWithNull(data);
-    this.tempLicenseService.searchRequest(payload).subscribe((res: any) => {
-      this.dataSource.data = res;
-    });
+    const tokenkey = getCookie('schUserToken');
+    this.tempLicenseService
+      .searchRequest(payload, tokenkey)
+      .subscribe((res: any) => {
+        this.dataSource.data = res;
+      });
   }
 
   clear() {

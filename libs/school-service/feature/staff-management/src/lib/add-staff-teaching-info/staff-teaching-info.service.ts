@@ -9,46 +9,46 @@ import { map, Observable } from 'rxjs';
 export class StaffTeachingInfoService {
   constructor(private http: HttpClient) {}
 
-  getTeachingInfo(staffId: number): Observable<any> {
+  getTeachingInfo(staffId: number, tokenkey: any): Observable<any> {
     return this.http.get(
-      `${environment.apiUrl}/kspschoolregister/schstaffteachinginfoselectid?staffId=${staffId}&tokenkey=${environment.token}`
+      `${environment.apiUrl}/kspschoolregister/schstaffteachinginfoselectid?staffId=${staffId}&tokenkey=${tokenkey}`
     );
     //.pipe(map((data: any) => data.datareturn));
   }
 
-  getHiringInfo(staffId: number): Observable<any> {
+  getHiringInfo(staffId: number, tokenkey: any): Observable<any> {
     return this.http.get(
-      `${environment.apiUrl}/kspschoolregister/schstaffhiringinfoselectid?staffId=${staffId}&tokenkey=${environment.token}`
+      `${environment.apiUrl}/kspschoolregister/schstaffhiringinfoselectid?staffId=${staffId}&tokenkey=${tokenkey}`
     );
   }
 
-  addTeachingInfo(payload: any): Observable<any> {
+  addTeachingInfo(payload: any, tokenkey: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspschoolregister/schstaffteachinginfoinsert`,
       {
         ...payload,
-        tokenkey: environment.token,
+        tokenkey,
       }
     );
   }
 
-  updateTeachingInfo(payload: any): Observable<any> {
+  updateTeachingInfo(payload: any, tokenkey: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspschoolregister/schstaffteachinginfoupdate`,
       {
         ...payload,
-        tokenkey: environment.token,
+        tokenkey,
       }
     );
   }
 
-  addHiringInfo(payload: any): Observable<any> {
+  addHiringInfo(payload: any, tokenkey: any): Observable<any> {
     return this.http.post(
       //https://kspapi.oceanicnetwork.net/ksp/kspschoolregister/schstaffteachinginsertupdate
       `${environment.apiUrl}/kspschoolregister/schstaffhiringinfoinsertupdate`,
       {
         ...payload,
-        tokenkey: environment.token,
+        tokenkey,
       }
     );
   }

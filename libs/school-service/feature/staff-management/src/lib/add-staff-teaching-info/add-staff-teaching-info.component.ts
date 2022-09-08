@@ -8,7 +8,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { StaffPersonInfoService } from '@ksp/shared/service';
-import { mapJsonData } from '@ksp/shared/utility';
+import { getCookie, mapJsonData } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 
@@ -64,9 +64,9 @@ export class AddStaffTeachingInfoComponent implements OnInit {
       // edit mode
       if (this.staffId) {
         this.loadTeachingInfo(this.staffId);
-
+        const tokenkey = getCookie('schUserToken');
         this.teachingInfoService
-          .getHiringInfo(this.staffId)
+          .getHiringInfo(this.staffId, tokenkey)
           .subscribe((res) => {
             if (res.returnCode !== '98') {
               const {
@@ -99,31 +99,34 @@ export class AddStaffTeachingInfoComponent implements OnInit {
   }
 
   loadTeachingInfo(staffId: number) {
-    this.teachingInfoService.getTeachingInfo(staffId).subscribe((res) => {
-      //console.log('loaded teaching info = ', res);
+    const tokenkey = getCookie('schUserToken');
+    this.teachingInfoService
+      .getTeachingInfo(staffId, tokenkey)
+      .subscribe((res) => {
+        //console.log('loaded teaching info = ', res);
 
-      if (res.returnCode !== '98') {
-        const data = {
-          ...res,
-          teachingLevel: JSON.parse(atob(res.teachingLevel)),
-          teachingSubjects: JSON.parse(atob(res.teachingSubjects)),
-        };
-        //console.log('loaded teaching info  = ', data);
+        if (res.returnCode !== '98') {
+          const data = {
+            ...res,
+            teachingLevel: JSON.parse(atob(res.teachingLevel)),
+            teachingSubjects: JSON.parse(atob(res.teachingSubjects)),
+          };
+          //console.log('loaded teaching info  = ', data);
 
-        levels.map((level, i) => {
-          const hasValue = data.teachingLevel.includes(level.value);
-          this.teachingLevelFormArray.controls[i].patchValue(hasValue);
-        });
+          levels.map((level, i) => {
+            const hasValue = data.teachingLevel.includes(level.value);
+            this.teachingLevelFormArray.controls[i].patchValue(hasValue);
+          });
 
-        subjects.map((subject, i) => {
-          const hasValue = data.teachingSubjects.includes(subject.value);
-          this.teachingSubjectsFormArray.controls[i].patchValue(hasValue);
-        });
-      }
+          subjects.map((subject, i) => {
+            const hasValue = data.teachingSubjects.includes(subject.value);
+            this.teachingSubjectsFormArray.controls[i].patchValue(hasValue);
+          });
+        }
 
-      /*  this.form.controls.teachingLevel.setValue(data);
+        /*  this.form.controls.teachingLevel.setValue(data);
       this.form.controls.teachingSubjects.setValue(data); */
-    });
+      });
   }
 
   get teachingLevelFormArray() {
@@ -164,12 +167,15 @@ export class AddStaffTeachingInfoComponent implements OnInit {
       teachingSubjectOther: this.form.controls.teachingSubjectOther.value,
     };
     //console.log('payload = ', payload);
-    this.teachingInfoService.addTeachingInfo(payload).subscribe((res) => {
-      //console.log('add teaching info result = ', res);
-      this.snackBar.open('บันทึกข้อมูลสำเร็จ', 'ปิด', {
-        duration: 2000,
+    const tokenkey = getCookie('schUserToken');
+    this.teachingInfoService
+      .addTeachingInfo(payload, tokenkey)
+      .subscribe((res) => {
+        //console.log('add teaching info result = ', res);
+        this.snackBar.open('บันทึกข้อมูลสำเร็จ', 'ปิด', {
+          duration: 2000,
+        });
       });
-    });
   }
 
   addHiringInfo() {
@@ -187,10 +193,12 @@ export class AddStaffTeachingInfoComponent implements OnInit {
       hiringPeriodYear: '9',
       hiringPeriodMonth: '10', */
     };
-
-    this.teachingInfoService.addHiringInfo(payload).subscribe((res) => {
-      console.log('add hiring info result = ', res);
-    });
+    const tokenkey = getCookie('schUserToken');
+    this.teachingInfoService
+      .addHiringInfo(payload, tokenkey)
+      .subscribe((res) => {
+        console.log('add hiring info result = ', res);
+      });
   }
 
   onConfirmed() {

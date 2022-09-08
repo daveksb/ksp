@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AddressService, GeneralInfoService } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 import { StaffPersonInfoService } from '@ksp/shared/service';
-import { replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
+import { getCookie, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   CompleteDialogComponent,
@@ -62,22 +62,26 @@ export class StaffPersonInfoComponent implements OnInit {
   }
 
   pathUserInfo() {
-    this.staffService.getStaffUserInfo(this.staffId).subscribe((res) => {
-      const { schoolId, createDate, ...formData } = res;
-      formData.birthDate = formData.birthDate.split('T')[0];
-      formData.passportStartDate = null;
-      formData.passportEndDate = null;
-      formData.middleNameTh = null;
-      formData.middleNameEn = null;
-      formData.country = null;
-      //console.log('form xx = ', formData);
-      this.form.controls.userInfo.patchValue(formData);
-    });
+    const tokenkey = getCookie('schUserToken');
+    this.staffService
+      .getStaffUserInfo(this.staffId, tokenkey)
+      .subscribe((res) => {
+        const { schoolId, createDate, ...formData } = res;
+        formData.birthDate = formData.birthDate.split('T')[0];
+        formData.passportStartDate = null;
+        formData.passportEndDate = null;
+        formData.middleNameTh = null;
+        formData.middleNameEn = null;
+        formData.country = null;
+        //console.log('form xx = ', formData);
+        this.form.controls.userInfo.patchValue(formData);
+      });
   }
 
   patchAddress() {
+    const tokenkey = getCookie('schUserToken');
     this.addressService
-      .getStaffAddress(this.staffId)
+      .getStaffAddress(this.staffId, tokenkey)
       .subscribe((res: any[]) => {
         //array of address
         res.map((addr, i) => {
@@ -97,22 +101,25 @@ export class StaffPersonInfoComponent implements OnInit {
   }
 
   patchEdu() {
-    this.staffService.getStaffEdu(this.staffId).subscribe((res: any[]) => {
-      if (res && res.length) {
-        res.map((edu, i) => {
-          const { schStaffId, ...formData } = edu;
-          formData.admissionDate = formData.admissionDate.split('T')[0];
-          formData.graduateDate = formData.graduateDate.split('T')[0];
-          //console.log('edu form = ', formData);
-          if (i === 0) {
-            this.form.controls.edu1.patchValue(formData);
-          }
-          if (i === 1) {
-            this.form.controls.edu2.patchValue(formData);
-          }
-        });
-      }
-    });
+    const tokenkey = getCookie('schUserToken');
+    this.staffService
+      .getStaffEdu(this.staffId, tokenkey)
+      .subscribe((res: any[]) => {
+        if (res && res.length) {
+          res.map((edu, i) => {
+            const { schStaffId, ...formData } = edu;
+            formData.admissionDate = formData.admissionDate.split('T')[0];
+            formData.graduateDate = formData.graduateDate.split('T')[0];
+            //console.log('edu form = ', formData);
+            if (i === 0) {
+              this.form.controls.edu1.patchValue(formData);
+            }
+            if (i === 1) {
+              this.form.controls.edu2.patchValue(formData);
+            }
+          });
+        }
+      });
   }
 
   updateStaff() {
@@ -131,8 +138,8 @@ export class StaffPersonInfoComponent implements OnInit {
     formData.addr2 = replaceEmptyWithNull(formData.addr2);
     formData.edu1 = replaceEmptyWithNull(formData.edu1);
     formData.edu2 = replaceEmptyWithNull(formData.edu2);
-
-    this.staffService.updateStaff(formData).subscribe((res) => {
+    const tokenkey = getCookie('schUserToken');
+    this.staffService.updateStaff(formData, tokenkey).subscribe((res) => {
       //console.log('update staff result = ', res);
       this.snackBar.open('แก้ไขข้อมูลสำเร็จ', 'ปิด', {
         duration: 2000,
@@ -149,7 +156,8 @@ export class StaffPersonInfoComponent implements OnInit {
     formData.addr2.addressType = 2;
 
     console.log('insert formData = ', formData);
-    this.staffService.addStaff(formData).subscribe((res) => {
+    const tokenkey = getCookie('schUserToken');
+    this.staffService.addStaff(formData, tokenkey).subscribe((res) => {
       console.log('add staff result = ', res);
       this.snackBar.open('บันทึกข้อมูลสำเร็จ', 'ปิด', {
         duration: 2000,

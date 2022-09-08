@@ -9,10 +9,10 @@ import { map, Observable, shareReplay } from 'rxjs';
 export class AddressService {
   constructor(private http: HttpClient) {}
 
-  getStaffAddress(staffId: number): Observable<any> {
+  getStaffAddress(staffId: number, tokenkey: any): Observable<any> {
     return this.http
       .get(
-        `${environment.apiUrl}/kspschoolregister/schstaffsearchaddress?id=${staffId}&tokenkey=${environment.token}`
+        `${environment.apiUrl}/kspschoolregister/schstaffsearchaddress?id=${staffId}&tokenkey=${tokenkey}`
       )
       .pipe(map((data: any) => data.datareturn));
   }

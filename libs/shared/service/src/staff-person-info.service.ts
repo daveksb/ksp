@@ -9,10 +9,10 @@ import { environment } from '@ksp/shared/environment';
 export class StaffPersonInfoService {
   constructor(private http: HttpClient) {}
 
-  addStaff2(payload: any): Observable<any> {
+  addStaff2(payload: any, tokenkey: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/kspstaff/schstaff2insert`, {
       ...payload,
-      tokenkey: environment.token,
+      tokenkey,
     });
   }
 
@@ -23,46 +23,46 @@ export class StaffPersonInfoService {
     });
   }
  */
-  searchStaffFromIdCard(payload: any): Observable<any> {
+  searchStaffFromIdCard(payload: any, tokenkey: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspstaff/schstaff2selectidcardno`,
       {
         ...payload,
-        tokenkey: environment.token,
+        tokenkey,
       }
     );
   }
 
-  addStaff(payload: any): Observable<any> {
+  addStaff(payload: any, tokenkey: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspschoolregister/schregisterinsert`,
       {
         ...payload,
-        tokenkey: environment.token,
+        tokenkey,
       }
     );
   }
 
-  updateStaff(payload: any): Observable<any> {
+  updateStaff(payload: any, tokenkey: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspschoolregister/schstaffupdate`,
       {
         ...payload,
-        tokenkey: environment.token,
+        tokenkey,
       }
     );
   }
 
-  getStaffUserInfo(staffId: number): Observable<any> {
+  getStaffUserInfo(staffId: number, tokenkey: any): Observable<any> {
     return this.http.get(
-      `${environment.apiUrl}/kspschoolregister/schstaffsearchid?id=${staffId}&tokenkey=${environment.token}`
+      `${environment.apiUrl}/kspschoolregister/schstaffsearchid?id=${staffId}&tokenkey=${tokenkey}}`
     );
   }
 
-  getStaffEdu(staffId: number): Observable<any> {
+  getStaffEdu(staffId: number, tokenkey: any): Observable<any> {
     return this.http
       .get(
-        `${environment.apiUrl}/kspschoolregister/schstaffsearcheduid?id=${staffId}&tokenkey=${environment.token}`
+        `${environment.apiUrl}/kspschoolregister/schstaffsearcheduid?id=${staffId}&tokenkey=${tokenkey}`
       )
       .pipe(map((data: any) => data.datareturn));
   }

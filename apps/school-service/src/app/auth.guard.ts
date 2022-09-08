@@ -5,22 +5,17 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
-import { SchoolServiceFeatureLoginService } from '@ksp/school-service/feature/login';
+import { getCookie } from '@ksp/shared/utility';
 import { Observable, of } from 'rxjs';
-import { catchError, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(
-    private schoolServiceFeatureLoginService: SchoolServiceFeatureLoginService,
-    private router: Router
-  ) {}
+  constructor(private router: Router) {}
 
   checkAuth(): Observable<boolean> {
-    const tokenKey =
-      this.schoolServiceFeatureLoginService.getCookie('schUserToken');
+    const tokenKey = getCookie('schUserToken');
     if (tokenKey) return of(true);
     this.router.navigate(['/']);
     return of(false);

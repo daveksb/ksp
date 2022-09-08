@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { setCookie } from '@ksp/shared/utility';
 import { SchoolServiceFeatureLoginService } from '../school-service-feature-login.service';
 
 @Component({
@@ -23,17 +24,9 @@ export class SchoolServiceLoginComponent {
     this.schoolServiceFeatureLoginService
       .validateLogin(this.form.value.user)
       .subscribe((res) => {
-        if (res?.returnCode !== 99) {
-          console.log(res);
-          this.schoolServiceFeatureLoginService.setCookie(
-            'schUserToken',
-            res.schUserToken,
-            1
-          );
-          this.router.navigate(['/temp-license', 'list']);
-        } else {
-          console.log('CANNOT LOGIN');
-        }
+        if (res.returnCode == 99) return;
+        setCookie('schUserToken', res.schUserToken, 1);
+        this.router.navigate(['/temp-license', 'list']);
       });
   }
 

@@ -9,10 +9,10 @@ import { map, Observable } from 'rxjs';
 export class StaffManagementService {
   constructor(private http: HttpClient) {}
 
-  getStaffs(schoolId: string): Observable<any> {
+  getStaffs(schoolId: string, tokenkey: any): Observable<any> {
     return this.http
       .get(
-        `${environment.apiUrl}/kspschoolregister/schstaffall?schoolId=${schoolId}&tokenkey=${environment.token}`
+        `${environment.apiUrl}/kspschoolregister/schstaffall?schoolId=${schoolId}&tokenkey=${tokenkey}`
       )
       .pipe(map((data: any) => data.datareturn));
   }
