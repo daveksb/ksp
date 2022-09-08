@@ -8,8 +8,5 @@
     "types": []
   },
   "exclude": ["**/*.test.ts", "**/*.spec.ts"],
-  "include": [
-    "**/*.ts",
-    "../../../shared/service/src/staff-person-info.service.ts"
-  ]
+  "include": ["**/*.ts", "../../../shared/service/src/staff.service.ts"]
 }

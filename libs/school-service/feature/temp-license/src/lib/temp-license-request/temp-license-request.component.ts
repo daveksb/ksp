@@ -10,10 +10,10 @@ import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
 import {
   AddressService,
   GeneralInfoService,
-  StaffPersonInfoService,
+  StaffService,
   TempLicenseService,
 } from '@ksp/shared/service';
-import { getCookie, thaiDate } from '@ksp/shared/utility';
+import { thaiDate } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 import { LicenseDetailService } from './temp-license-request.service';
@@ -70,7 +70,7 @@ export class TempLicenseRequestComponent implements OnInit {
     private tempLicenseService: TempLicenseService,
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
-    private staffService: StaffPersonInfoService
+    private staffService: StaffService
   ) {}
 
   ngOnInit(): void {
@@ -95,9 +95,8 @@ export class TempLicenseRequestComponent implements OnInit {
       idcardno: idCard,
       schoolid: this.schoolId,
     };
-    const tokenkey = getCookie('schUserToken');
     this.staffService
-      .searchStaffFromIdCard(payload, tokenkey)
+      .searchStaffFromIdCard(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         //console.log('staff 2 data = ', res);
@@ -183,8 +182,7 @@ export class TempLicenseRequestComponent implements OnInit {
       };
 
       console.log('payload = ', payload);
-      const tokenkey = getCookie('schUserToken');
-      this.staffService.addStaff2(payload, tokenkey).subscribe((res) => {
+      this.staffService.addStaff2(payload).subscribe((res) => {
         console.log('add staff result = ', res);
       });
     }
@@ -204,12 +202,9 @@ export class TempLicenseRequestComponent implements OnInit {
       requestType: this.requestType,
       updateDate: new Date().toISOString().split('.')[0],
     };
-    const tokenkey = getCookie('schUserToken');
-    this.tempLicenseService
-      .addTempLicense(payload, tokenkey)
-      .subscribe((res) => {
-        console.log('add temp license = ', res);
-      });
+    this.tempLicenseService.addTempLicense(payload).subscribe((res) => {
+      console.log('add temp license = ', res);
+    });
   }
 
   save() {
@@ -243,9 +238,8 @@ export class TempLicenseRequestComponent implements OnInit {
     this.provinces$ = this.addressService.getProvinces();
     this.positionTypes$ = this.staffService.getPositionTypes();
     this.countries$ = this.addressService.getCountry();
-    const tokenkey = getCookie('schUserToken');
     this.tempLicenseService
-      .getSchoolInfo(this.schoolId, tokenkey)
+      .getSchoolInfo(this.schoolId)
       .pipe(untilDestroyed(this))
       .subscribe((res: any) => {
         //console.log('school = ', res);

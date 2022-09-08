@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AddressService, GeneralInfoService } from '@ksp/shared/service';
+import {
+  AddressService,
+  GeneralInfoService,
+  StaffService,
+} from '@ksp/shared/service';
 import { Observable } from 'rxjs';
-import { StaffPersonInfoService } from '@ksp/shared/service';
-import { getCookie, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -48,7 +50,7 @@ export class AddStaffComponent implements OnInit {
     private router: Router,
     private activatedroute: ActivatedRoute,
     private fb: FormBuilder,
-    private staffService: StaffPersonInfoService,
+    private staffService: StaffService,
     private addressService: AddressService,
     private generalInfoService: GeneralInfoService,
     public dialog: MatDialog
@@ -67,9 +69,8 @@ export class AddStaffComponent implements OnInit {
   }
 
   loadStaffData(staffId: number) {
-    const tokenkey = getCookie('schUserToken');
     this.staffService
-      .searchStaffFromId(staffId, tokenkey)
+      .searchStaffFromId(staffId)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         //console.log('staff 2 data = ', res);
@@ -80,8 +81,7 @@ export class AddStaffComponent implements OnInit {
   }
 
   save() {
-    const tokenkey = getCookie('schUserToken');
-    if ((this.staffId, tokenkey)) {
+    if (this.staffId) {
       this.updateStaff();
     } else {
       this.insertStaff();
@@ -105,8 +105,7 @@ export class AddStaffComponent implements OnInit {
     };
 
     console.log('insert payload = ', payload);
-    const tokenkey = getCookie('schUserToken');
-    this.staffService.addStaff2(payload, tokenkey).subscribe((res) => {
+    this.staffService.addStaff2(payload).subscribe((res) => {
       console.log('add staff result = ', res);
       this.onCompleted();
       this.form.reset();

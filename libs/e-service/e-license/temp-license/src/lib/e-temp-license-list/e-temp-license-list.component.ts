@@ -27,7 +27,7 @@ export class ETempLicenseListComponent {
   }
 
   nextPage(requestType: number) {
-    this.router.navigate(['/', 'temp-license', 'detail'], {
+    this.router.navigate(['/temp-license', 'detail'], {
       queryParams: { type: requestType },
     });
   }

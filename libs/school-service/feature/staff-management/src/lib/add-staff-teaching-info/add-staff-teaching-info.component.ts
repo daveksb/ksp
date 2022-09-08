@@ -7,7 +7,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { StaffPersonInfoService } from '@ksp/shared/service';
+import { StaffService } from '@ksp/shared/service';
 import { getCookie, mapJsonData } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
@@ -49,7 +49,7 @@ export class AddStaffTeachingInfoComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     public dialog: MatDialog,
-    private service: StaffPersonInfoService,
+    private service: StaffService,
     private activatedroute: ActivatedRoute,
     private teachingInfoService: StaffTeachingInfoService,
     private snackBar: MatSnackBar
