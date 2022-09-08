@@ -1,36 +1,46 @@
 <form [formGroup]="form">
-  <div class="bg-light px-3 py-3">
-    <div class="box-header">ข้อมูลการสอน</div>
-    <div class="row-3">
-      <div class="mb-3">
-        <div>
-          <label class="form-label me-2">วิชาที่ได้รับมอบหมายให้สอน</label>
-          <label class="text-danger">*กรุณาระบุทุกวิชาที่ได้รับมอบหมาย</label>
-        </div>
-        <input
-          class="form-control"
-          type="text"
-          formControlName="subjectAssign"
-        />
+  <div class="bg-white">
+    <!-- <div class="box-header">ข้อมูลการสอน</div> -->
+    <div class="bg-light p-3 my-3">
+      <div class="box-header">ช่วงชั้นที่สอน</div>
+
+      <div class="row row-cols-4 flex-row-reverse mx-5">
+        <label
+          class="d-flex flex-row align-items-center my-1 p-0"
+          formArrayName="teachingLevel"
+          *ngFor="let order of teachingLevelFormArray.controls; let i = index"
+        >
+          <input type="checkbox" class="me-2" [formControlName]="i" />
+          <label class="text-secondary">{{ levels[i].label }} </label>
+        </label>
       </div>
     </div>
 
-    <div>
-      <label class="box-header me-2">ระดับช่วงชั้น</label>
-      <label class="text-danger">*เลือกได้มากกว่า 1 รายการ</label>
-    </div>
+    <div class="bg-light p-3 my-3">
+      <div class="box-header">ประเภทวิชาที่สอน</div>
 
-    <div class="row-3">
-      <ng-container *ngFor="let item of levels">
-        <div class="d-flex align-items-center my-2">
+      <div class="row row-cols-3 mx-5">
+        <label
+          class="d-flex flex-row align-items-center my-1 p-0"
+          formArrayName="teachingSubjects"
+          *ngFor="
+            let order of teachingSubjectsFormArray.controls;
+            let i = index
+          "
+        >
+          <input type="checkbox" class="me-2" [formControlName]="i" />
+          <label class="text-secondary">{{ subjects[i].label }} </label>
+        </label>
+      </div>
+      <div class="row ms-5">
+        <span class="col-3">
           <input
-            class="me-2"
-            formControlName="{{ item.name }}"
-            type="checkbox"
+            class="form-control check-other"
+            type="text"
+            formControlName="teachingSubjectOther"
           />
-          <label class="form-label">{{ item.label }}</label>
-        </div></ng-container
-      >
+        </span>
+      </div>
     </div>
   </div>
 </form>

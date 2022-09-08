@@ -35,6 +35,7 @@
         class="tab-group"
         animationDuration="0ms"
         dynamicHeight="true"
+        selectedIndex="0"
       >
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address
@@ -81,6 +82,11 @@
             [countries]="countries$ | async"
           ></ksp-form-education-info>
         </mat-tab>
+
+        <mat-tab label="ข้อมูลการสอนและการจ้าง">
+          <ksp-form-teaching-info></ksp-form-teaching-info>
+          <ksp-form-hiring-info></ksp-form-hiring-info>
+        </mat-tab>
       </mat-tab-group>
     </div>
   </div>
@@ -88,16 +94,12 @@
 
 <div class="sticky-bottom border">
   <ksp-bottom-nav
-    (nextClicked)="nextPage()"
-    (saveClicked)="onConfirmed()"
-    (cancelClicked)="cancel()"
+    [isLastPage]="true"
     [isFirstPage]="true"
     [showSaveButton]="true"
-    [disableSaveButton]="!form.valid"
-    [disableNext]="!staffId"
-    [disableNextMessage]="'กรุณาบันทึกก่อน'"
+    [disableSaveButton]="false"
     [showCenterButtons]="true"
+    (saveClicked)="onConfirmed()"
+    (cancelClicked)="cancel()"
   ></ksp-bottom-nav>
 </div>
-
-<!-- [disableSaveButton]="!form.valid" -->

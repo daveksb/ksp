@@ -197,7 +197,12 @@ export class AddStaffComponent implements OnInit {
   }
 
   nextPage() {
-    this.router.navigate(['/staff-management', 'edit-staff', this.staffId]);
+    this.router.navigate([
+      '/staff-management',
+      'staff-teaching-info',
+      this.staffId,
+    ]);
+    //this.router.navigate(['/staff-management', 'edit-staff', this.staffId]);
   }
 
   cancel() {
