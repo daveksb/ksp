@@ -52,6 +52,7 @@ export class TempLicenseRequestComponent implements OnInit {
 
   requestType = 1;
   requestTypeLabel = '';
+  requestNo = '';
   schoolId = '0010201056';
 
   educationInfo: string[] = [];

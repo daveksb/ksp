@@ -51,7 +51,6 @@ export class AddStaffComponent implements OnInit {
     private staffService: StaffPersonInfoService,
     private addressService: AddressService,
     private generalInfoService: GeneralInfoService,
-    private snackBar: MatSnackBar,
     public dialog: MatDialog
   ) {}
 
