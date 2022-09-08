@@ -33,10 +33,10 @@ export const menu: MenuConfig[] = [
         label: 'ขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
         path: 'renew-license/request',
       },
-      {
+      /* {
         label: 'ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ',
         path: 'license/edit',
-      },
+      }, */
       {
         label: 'ขอใบแทนใบอนุญาตประกอบวิชาชีพ',
         path: 'substitute-license/request',
@@ -47,7 +47,7 @@ export const menu: MenuConfig[] = [
       },
       {
         label: 'ขอยื่นเทียบเคียงความรู้',
-        path: 'license/xxx',
+        path: 'transfer-knowledge/request',
       },
       {
         label: 'ขอคืนเงินค่าธรรมเนียม',
@@ -86,15 +86,15 @@ export const menu: MenuConfig[] = [
       },
       {
         label: 'สถานที่ทำงาน',
-        path: 'my-info/xxx',
+        path: 'my-info/1',
       },
       {
         label: 'ข้อมูลการศึกษา',
-        path: 'my-info/xxx',
+        path: 'my-info/2',
       },
       {
         label: 'ข้อมูลประสบการณ์วิชาชีพ',
-        path: 'my-info/xxx',
+        path: 'my-info/3',
       },
       {
         label: 'ข้อมูลผลการประเมินสมรรถนะ',

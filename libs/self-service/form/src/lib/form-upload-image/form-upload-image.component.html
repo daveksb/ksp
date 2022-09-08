@@ -1,14 +1,16 @@
 <div class="profile__container">
   <img src="/assets/images/img-profile.png" />
 
-  <div class="mt-2">
+  <div class="my-2">
     <ksp-file-upload
       buttonLabel="อัพโหลดรูปภาพ"
       [showUploadedFileName]="false"
     ></ksp-file-upload>
   </div>
 
-  <div class="description__label">
-    jpg. or png, / size 130x 130px. / 15mb. maximum
+  <div class="d-flex flex-column">
+    <div class="fs-6 text-secondary">* ภาพหน้าตรงขนาด 1x1.5 นิ้ว</div>
+    <div class="fs-6 text-secondary">* ขนาดไม่เกิน 2 MB</div>
+    <div class="fs-6 text-secondary">* รองรับไฟล์ .Jpg , Jpeg เท่านั้น</div>
   </div>
 </div>

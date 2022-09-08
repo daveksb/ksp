@@ -47,3 +47,7 @@ export * from './lib/foreign-step-two-tab-four/foreign-step-two-tab-four.compone
 export * from './lib/foreign-step-two-tab-three-form/foreign-step-two-tab-three-form.component';
 
 export * from './lib/form-verify-otp-foreign/form-verify-otp-foreign.component';
+
+export * from './lib/transfer-knowledge-info/transfer-knowledge-info.component';
+
+export * from './lib/transfer-knowledge-education/transfer-knowledge-education.component';
