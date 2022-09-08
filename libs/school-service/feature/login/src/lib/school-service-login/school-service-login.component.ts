@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SchoolServiceFeatureLoginService } from '../school-service-feature-login.service';
 
 @Component({
   selector: 'school-service-login',
@@ -9,14 +10,25 @@ import { Router } from '@angular/router';
 })
 export class SchoolServiceLoginComponent {
   form = this.fb.group({
-    username: [],
-    password: [],
+    user: [],
   });
 
-  constructor(private router: Router, private fb: FormBuilder) {}
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private schoolServiceFeatureLoginService: SchoolServiceFeatureLoginService
+  ) {}
 
   login() {
-    this.router.navigate(['/temp-license', 'list']);
+    this.schoolServiceFeatureLoginService
+      .validateLogin(this.form.value.user)
+      .subscribe((res) => {
+        if (res?.returnCode !== 99) {
+          this.router.navigate(['/temp-license', 'list']);
+        } else {
+          console.log('CANNOT LOGIN');
+        }
+      });
   }
 
   register() {
