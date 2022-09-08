@@ -16,6 +16,16 @@ export class StaffPersonInfoService {
     });
   }
 
+  searchStaffFromId(staffId: number): Observable<any> {
+    const payload = {
+      id: `${staffId}`,
+    };
+    return this.http.post(`${environment.apiUrl}/kspstaff/schstaff2select`, {
+      ...payload,
+      tokenkey: environment.token,
+    });
+  }
+
   searchStaffFromIdCard(payload: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspstaff/schstaff2selectidcardno`,

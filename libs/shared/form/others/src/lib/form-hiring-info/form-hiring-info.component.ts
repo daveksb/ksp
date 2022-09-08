@@ -11,9 +11,9 @@ import { providerFactory } from '@ksp/shared/utility';
 })
 export class FormHiringInfoComponent extends KspFormBaseComponent {
   @Input() displayMode: 'staff' | 'request' = 'staff';
-  @Input() positionTypes: any[] = [];
-  @Input() staffTypes: any[] = [];
-  @Input() academicStandingList: any[] = [];
+  @Input() positionTypes: any = [];
+  @Input() staffTypes: any = [];
+  @Input() academicStandingList: any = [];
 
   status = status;
   override form = this.fb.group({

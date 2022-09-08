@@ -84,8 +84,15 @@
         </mat-tab>
 
         <mat-tab label="ข้อมูลการสอนและการจ้าง">
-          <ksp-form-teaching-info></ksp-form-teaching-info>
-          <ksp-form-hiring-info></ksp-form-hiring-info>
+          <ksp-form-teaching-info
+            formControlName="teachingInfo"
+          ></ksp-form-teaching-info>
+          <ksp-form-hiring-info
+            formControlName="hiringInfo"
+            [staffTypes]="staffTypes$ | async"
+            [positionTypes]="positionTypes$ | async"
+            [academicStandingList]="academicTypes$ | async"
+          ></ksp-form-hiring-info>
         </mat-tab>
       </mat-tab-group>
     </div>
@@ -99,7 +106,7 @@
     [showSaveButton]="true"
     [disableSaveButton]="false"
     [showCenterButtons]="true"
-    (saveClicked)="onConfirmed()"
+    (saveClicked)="insertStaff()"
     (cancelClicked)="cancel()"
   ></ksp-bottom-nav>
 </div>

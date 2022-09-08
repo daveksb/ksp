@@ -11,6 +11,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { MatDialog } from '@angular/material/dialog';
+import { untilDestroyed } from '@ngneat/until-destroy';
 
 @Component({
   templateUrl: './add-staff.component.html',
@@ -26,7 +27,10 @@ export class AddStaffComponent implements OnInit {
   amphurs2$!: Observable<any>;
   tumbols2$!: Observable<any>;
   prefixList$!: Observable<any>;
-
+  staffTypes$!: Observable<any>;
+  positionTypes$!: Observable<any>;
+  academicTypes$!: Observable<any>;
+  schoolId = '0010201056';
   today = thaiDate(new Date());
 
   form = this.fb.group({
@@ -35,6 +39,8 @@ export class AddStaffComponent implements OnInit {
     addr2: [],
     edu1: [],
     edu2: [],
+    teachingInfo: [],
+    hiringInfo: [],
   });
 
   constructor(
@@ -52,77 +58,107 @@ export class AddStaffComponent implements OnInit {
     this.activatedroute.paramMap.subscribe((params) => {
       this.staffId = Number(params.get('id'));
       if (this.staffId) {
-        this.pathUserInfo();
-        this.patchAddress();
-        this.patchEdu();
+        this.loadStaffData(this.staffId);
       }
     });
 
     this.getListData();
   }
 
-  pathUserInfo() {
-    this.staffService.getStaffUserInfo(this.staffId).subscribe((res) => {
-      const { schoolId, createDate, ...formData } = res;
-      formData.birthDate = formData.birthDate.split('T')[0];
-      formData.passportStartDate = null;
-      formData.passportEndDate = null;
-      formData.middleNameTh = null;
-      formData.middleNameEn = null;
-      formData.country = null;
-      //console.log('form xx = ', formData);
-      this.form.controls.userInfo.patchValue(formData);
-    });
-  }
-
-  patchAddress() {
-    this.addressService
-      .getStaffAddress(this.staffId)
-      .subscribe((res: any[]) => {
-        //array of address
-        res.map((addr, i) => {
-          const { schStaffId, ...formData } = addr;
-          if (i === 0) {
-            this.amphurs1$ = this.addressService.getAmphurs(addr.province);
-            this.tumbols1$ = this.addressService.getTumbols(addr.amphur);
-            this.form.controls.addr1.patchValue(formData);
-          }
-          if (i === 1) {
-            this.amphurs2$ = this.addressService.getAmphurs(addr.province);
-            this.tumbols2$ = this.addressService.getTumbols(addr.amphur);
-            this.form.controls.addr2.patchValue(formData);
-          }
-        });
+  loadStaffData(staffId: number) {
+    this.staffService
+      .searchStaffFromId(staffId)
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        //console.log('staff 2 data = ', res);
+        this.pathUserInfo(res);
+        this.patchAddress(JSON.parse(atob(res.addresses)));
+        this.patchEdu(JSON.parse(atob(res.educations)));
       });
   }
 
-  patchEdu() {
-    this.staffService.getStaffEdu(this.staffId).subscribe((res: any[]) => {
-      if (res && res.length) {
-        res.map((edu, i) => {
-          const { schStaffId, ...formData } = edu;
-          formData.admissionDate = formData.admissionDate.split('T')[0];
-          formData.graduateDate = formData.graduateDate.split('T')[0];
-          //console.log('edu form = ', formData);
-          if (i === 0) {
-            this.form.controls.edu1.patchValue(formData);
-          }
-          if (i === 1) {
-            this.form.controls.edu2.patchValue(formData);
-          }
-        });
-      }
+  patchEdu(edus: any[]) {
+    console.log('edus = ', edus);
+    if (edus && edus.length) {
+      edus.map((edu, i) => {
+        //const { schStaffId, ...formData } = edu;
+        //formData.admissionDate = formData.admissionDate.split('T')[0];
+        if (i === 0) {
+          this.form.controls.edu1.patchValue(edu);
+        }
+        if (i === 1) {
+          this.form.controls.edu2.patchValue(edu);
+        }
+      });
+    }
+  }
+
+  patchAddress(addrs: any[]) {
+    console.log('add data = ', addrs);
+    if (addrs && addrs.length) {
+      addrs.map((addr: any, i: number) => {
+        if (i === 0) {
+          this.amphurs1$ = this.addressService.getAmphurs(addr.province);
+          this.tumbols1$ = this.addressService.getTumbols(addr.amphur);
+          this.form.controls.addr1.patchValue(addr);
+        }
+        if (i === 1) {
+          this.amphurs2$ = this.addressService.getAmphurs(addr.province);
+          this.tumbols2$ = this.addressService.getTumbols(addr.amphur);
+          this.form.controls.addr2.patchValue(addr);
+        }
+      });
+    }
+  }
+
+  pathUserInfo(data: any) {
+    const {
+      schoolId,
+      createDate,
+      addresses,
+      educations,
+      teachinginfo,
+      hiringinfo,
+      ...formData
+    } = data;
+    formData.birthDate = formData.birthDate.split('T')[0];
+    this.form.controls.userInfo.patchValue(formData);
+  }
+
+  insertStaff() {
+    const formData: any = this.form.getRawValue();
+    formData.userInfo.schoolId = this.schoolId;
+    formData.userInfo.createDate = new Date().toISOString().split('.')[0];
+    formData.addr1.addressType = 1;
+    formData.addr2.addressType = 2;
+    const { id, ...userInfo } = formData.userInfo;
+
+    const payload = {
+      ...userInfo,
+      ...{ addresses: JSON.stringify([formData.addr1]) },
+      ...{ educations: JSON.stringify([formData.edu1, formData.edu2]) },
+      ...{ teachingInfo: JSON.stringify(formData.teachingInfo) },
+      ...{ hiringInfo: JSON.stringify(formData.workingInfo) },
+    };
+
+    console.log('insert payload = ', payload);
+    this.staffService.addStaff2(payload).subscribe((res) => {
+      console.log('add staff result = ', res);
+      this.snackBar.open('บันทึกข้อมูลสำเร็จ', 'ปิด', {
+        duration: 2000,
+      });
+      this.router.navigate(['/staff-management', 'edit-staff', res.id]);
     });
   }
 
   updateStaff() {
     const formData: any = this.form.getRawValue();
-    formData.userInfo.schoolId = '0010201056';
+    formData.userInfo.schoolId = this.schoolId;
     formData.userInfo.nationality = 'TH';
-    formData.addr1.schstaffid = `${this.staffId}`;
+    /* formData.addr1.schstaffid = `${this.staffId}`;
     formData.addr2.schstaffid = `${this.staffId}`;
-    formData.edu1.schstaffid = `${this.staffId}`;
-    if (formData && formData.edu2) formData.edu2.schstaffid = `${this.staffId}`;
+    formData.edu1.schstaffid = `${this.staffId}`; */
+    //if (formData && formData.edu2) formData.edu2.schstaffid = `${this.staffId}`;
 
     console.log('update formData = ', formData);
 
@@ -137,24 +173,6 @@ export class AddStaffComponent implements OnInit {
       this.snackBar.open('แก้ไขข้อมูลสำเร็จ', 'ปิด', {
         duration: 2000,
       });
-    });
-  }
-
-  insertStaff() {
-    const formData: any = this.form.getRawValue();
-    formData.userInfo.schoolId = '0010201056';
-    formData.userInfo.nationality = 'TH';
-    formData.userInfo.createDate = new Date().toISOString().split('.')[0];
-    formData.addr1.addressType = 1;
-    formData.addr2.addressType = 2;
-
-    console.log('insert formData = ', formData);
-    this.staffService.addStaff(formData).subscribe((res) => {
-      console.log('add staff result = ', res);
-      this.snackBar.open('บันทึกข้อมูลสำเร็จ', 'ปิด', {
-        duration: 2000,
-      });
-      this.router.navigate(['/staff-management', 'staff-person-info', res.id]);
     });
   }
 
@@ -194,15 +212,10 @@ export class AddStaffComponent implements OnInit {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.provinces$ = this.addressService.getProvinces();
     this.countries$ = this.addressService.getCountry();
-  }
 
-  nextPage() {
-    this.router.navigate([
-      '/staff-management',
-      'staff-teaching-info',
-      this.staffId,
-    ]);
-    //this.router.navigate(['/staff-management', 'edit-staff', this.staffId]);
+    this.staffTypes$ = this.staffService.getStaffTypes();
+    this.positionTypes$ = this.staffService.getPositionTypes();
+    this.academicTypes$ = this.staffService.getAcademicStandingTypes();
   }
 
   cancel() {
