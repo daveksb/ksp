@@ -16,11 +16,21 @@ export class StaffPersonInfoService {
     });
   }
 
-  getStaff2(payload: any): Observable<any> {
+  /*   getStaff2(payload: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/kspstaff/schstaff2select`, {
       ...payload,
       tokenkey: environment.token,
     });
+  }
+ */
+  searchStaffFromIdCard(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspstaff/schstaff2selectidcardno`,
+      {
+        ...payload,
+        tokenkey: environment.token,
+      }
+    );
   }
 
   addStaff(payload: any): Observable<any> {
