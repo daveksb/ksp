@@ -7,11 +7,7 @@
   <div class="box-header pt-1 mb-1">รายละเอียดเพิ่มบุคลากรภายในหน่วยงาน</div>
 
   <div class="bg-white p-3">
-    <ksp-request-header-info
-      [requestDate]="'10 ตุลาคม 2565'"
-    ></ksp-request-header-info>
-
-    <hr />
+    <ksp-request-header-info [requestDate]="today"></ksp-request-header-info>
 
     <div class="bg-light p-3 m-3">
       <ksp-form-user-info
@@ -93,7 +89,8 @@
 <div class="sticky-bottom border">
   <ksp-bottom-nav
     (nextClicked)="nextPage()"
-    (saveClicked)="save()"
+    (saveClicked)="onConfirmed()"
+    (cancelClicked)="cancel()"
     [isFirstPage]="true"
     [showSaveButton]="true"
     [disableSaveButton]="!form.valid"

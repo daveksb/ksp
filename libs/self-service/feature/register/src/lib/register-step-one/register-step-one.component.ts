@@ -29,6 +29,6 @@ export class RegisterStepOneComponent {
   }
 
   nextPage() {
-    this.router.navigate(['/', 'register', 'step-2']);
+    this.router.navigate(['/', 'register', 'th-step-2']);
   }
 }

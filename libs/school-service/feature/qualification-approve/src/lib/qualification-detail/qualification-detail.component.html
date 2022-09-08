@@ -21,33 +21,10 @@
         <div class="bg-light px-3 py-2 default-width">
           <div class="box-header text-primary">รายละเอียดข้อมูล</div>
 
-          <div class="row mb-3">
-            <div class="col">
-              <label class="form-label">หมายเลขบัตรประชาชน</label>
-              <input
-                class="form-control"
-                type="text"
-                placeholder="หมายเลขบัตรประชาชนจำนวน 13 หลัก"
-                formControlName="personId"
-              />
-            </div>
-            <div class="col">
-              <label class="form-label">ประเภทการยื่น</label>
-              <select class="form-select">
-                <option value="null" selected hidden disabled>
-                  กรุณาเลือก
-                </option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
-          </div>
           <ksp-form-user-info
             [isDarkMode]="false"
             formControlName="searchUserInfo"
-            [showNationalityInput]="true"
-            [showPostInput]="true"
+            [qualificationMode]="true"
           ></ksp-form-user-info>
         </div>
       </div>

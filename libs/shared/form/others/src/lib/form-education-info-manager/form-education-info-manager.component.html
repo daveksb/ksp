@@ -1,0 +1,61 @@
+<form [formGroup]="form">
+  <div class="bg-light p-3">
+    <div class="d-flex align-items-center">
+      <input type="checkbox" class="me-2" formControlName="degree1" />
+      <label class="box-header">วุฒิการศึกษาปริญญาตรี</label>
+    </div>
+    <ng-container *ngIf="degree1">
+      <ksp-form-education-info
+        [showGradeInput]="true"
+        formControlName="edu1"
+      ></ksp-form-education-info
+    ></ng-container>
+
+    <div class="d-flex align-items-center">
+      <input type="checkbox" class="me-2" formControlName="degree2" />
+      <label class="box-header">วุฒิประกาศนียบัตรระดับบัณฑิตศึกษา</label>
+    </div>
+    <ng-container *ngIf="degree2">
+      <ksp-form-education-info formControlName="edu2"></ksp-form-education-info
+    ></ng-container>
+
+    <div class="d-flex align-items-center">
+      <input type="checkbox" class="me-2" formControlName="degree3" />
+      <label class="box-header">วุฒิปริญญาโท</label>
+    </div>
+    <ng-container *ngIf="degree3">
+      <ksp-form-education-info formControlName="edu3"></ksp-form-education-info
+    ></ng-container>
+
+    <div class="d-flex align-items-center">
+      <input type="checkbox" class="me-2" formControlName="degree4" />
+      <label class="box-header">วุฒิปริญญาเอก</label>
+    </div>
+    <ng-container *ngIf="degree4">
+      <ksp-form-education-info formControlName="edu4"></ksp-form-education-info
+    ></ng-container>
+
+    <div class="d-flex align-items-center">
+      <input type="checkbox" class="me-2" formControlName="degree5" />
+      <label class="box-header">วุฒิปริญญาอื่นๆ</label>
+    </div>
+    <ng-container *ngIf="degree5">
+      <ksp-form-education-info formControlName="edu5"></ksp-form-education-info
+    ></ng-container>
+
+    <div class="d-flex align-items-center">
+      <input type="checkbox" class="me-2" formControlName="degree6" />
+      <label class="box-header"
+        >คุณสมบัติอื่นที่สอดคล้องหรือเป็นประโยชน์ต่อการจัดการเรียนการสอนในกลุ่มสาระหรือรายวิชาที่สอน
+        (พิจารณาเป็นรายกรณี)</label
+      >
+    </div>
+    <ng-container *ngIf="degree6">
+      <textarea
+        class="form-control"
+        rows="3"
+        formControlName="other"
+      ></textarea>
+    </ng-container>
+  </div>
+</form>

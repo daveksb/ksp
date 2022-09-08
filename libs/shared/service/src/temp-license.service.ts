@@ -17,21 +17,31 @@ export class TempLicenseService {
       .pipe(shareReplay());
   }
 
+  /*   searchStaff2FromIdCard(payload: any): Observable<any> {
+    return this.http
+      .post(`${environment.apiUrl}/kspstaff/schstaff2select`, {
+        ...payload,
+        tokenkey: environment.token,
+      })
+      .pipe(shareReplay());
+  } */
+
   getSchoolInfo(schoolId: string) {
     return this.http
       .get(
         `${environment.apiUrl}/kspschoolregister/schschoolsearchschoolid?schoolId=${schoolId}&tokenkey=${environment.token}`
       )
-      .pipe(
-        shareReplay()
-        //map((data: any) => data.datareturn)
-      );
+      .pipe(shareReplay());
   }
 
-  getSchoolStaffLicense(schoolId: string): Observable<any> {
+  searchRequest(payload: any): Observable<any> {
     return this.http
-      .get(
-        `${environment.apiUrl}/kspschoolregister/schtmplicencerequestselect?schoolid=${schoolId}&tokenkey=${environment.token}`
+      .post(
+        `${environment.apiUrl}/kspschoolregister/schtmplicencerequestselect`,
+        {
+          ...payload,
+          tokenkey: environment.token,
+        }
       )
       .pipe(map((data: any) => data.datareturn));
   }
@@ -44,5 +54,14 @@ export class TempLicenseService {
         tokenkey: environment.token,
       }
     );
+  }
+
+  getSchoolEduOccupy() {
+    return this.http
+      .get(`${environment.apiUrl}/kspmasterdata/schooleduoccupy`)
+      .pipe(
+        shareReplay(),
+        map((data: any) => data.datareturn)
+      );
   }
 }

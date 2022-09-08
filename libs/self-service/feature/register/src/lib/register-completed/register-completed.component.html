@@ -1,14 +1,14 @@
-<div class="d-flex flex-column">
-  <div class="img__container">
-    <img src="/assets/images/Succees-2.png" class="success__img" />
+<div class="d-flex flex-column align-items-center">
+  <div class="my-4 text-center">
+    <img src="/assets/images/Succees-2.png" class="w-25 h-25" />
   </div>
 
-  <div class="header__title">ยินดีด้วย!</div>
-  <div class="detail__title">การสมัครสมาชิกของท่านเสร็จสมบูรณ์</div>
+  <div class="fs-2 header__color">{{ data.title }}</div>
+  <div class="fs-5 text-secondary">{{ data.subTitle }}</div>
 
-  <div class="btn__container">
+  <div class="my-4">
     <button matDialogClose class="btn btn-primary" (click)="loginPage()">
-      เข้าสู่ระบบ
+      {{ data.btnLabel }}
     </button>
   </div>
 </div>

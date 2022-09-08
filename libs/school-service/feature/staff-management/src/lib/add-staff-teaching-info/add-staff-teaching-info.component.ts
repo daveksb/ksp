@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { StaffPersonInfoService } from '@ksp/shared/service';
+import { mapJsonData } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 
@@ -22,9 +24,7 @@ export class AddStaffTeachingInfoComponent implements OnInit {
   staffTypes$!: Observable<any>;
   positionTypes$!: Observable<any>;
   academicTypes$!: Observable<any>;
-
   staffId!: number;
-
   levels = levels;
   subjects = subjects;
   status = status;
@@ -51,7 +51,8 @@ export class AddStaffTeachingInfoComponent implements OnInit {
     public dialog: MatDialog,
     private service: StaffPersonInfoService,
     private activatedroute: ActivatedRoute,
-    private teachingInfoService: StaffTeachingInfoService
+    private teachingInfoService: StaffTeachingInfoService,
+    private snackBar: MatSnackBar
   ) {
     this.addCheckboxes();
   }
@@ -67,17 +68,20 @@ export class AddStaffTeachingInfoComponent implements OnInit {
         this.teachingInfoService
           .getHiringInfo(this.staffId)
           .subscribe((res) => {
-            const {
-              teachingLevel,
-              teachingSubjects,
-              teachingSubjectOther,
-              ...formData
-            } = res;
-            formData.startDate = formData.startDate.split('T')[0];
-            formData.endDate = formData.endDate.split('T')[0];
-            formData.hiringStatusDate = formData.hiringStatusDate.split('T')[0];
-            //console.log('kk = ', res);
-            this.form.patchValue(formData);
+            if (res.returnCode !== '98') {
+              const {
+                teachingLevel,
+                teachingSubjects,
+                teachingSubjectOther,
+                ...formData
+              } = res;
+              formData.startDate = formData.startDate.split('T')[0];
+              formData.endDate = formData.endDate.split('T')[0];
+              formData.hiringStatusDate =
+                formData.hiringStatusDate.split('T')[0];
+              //console.log('kk = ', res);
+              this.form.patchValue(formData);
+            }
           });
       }
     });
@@ -89,25 +93,34 @@ export class AddStaffTeachingInfoComponent implements OnInit {
     this.getList();
   }
 
+  save() {
+    this.addTeachingInfo();
+    this.addHiringInfo();
+  }
+
   loadTeachingInfo(staffId: number) {
     this.teachingInfoService.getTeachingInfo(staffId).subscribe((res) => {
       //console.log('loaded teaching info = ', res);
-      const data = {
-        ...res,
-        teachingLevel: JSON.parse(atob(res.teachingLevel)),
-        teachingSubjects: JSON.parse(atob(res.teachingSubjects)),
-      };
-      console.log('loaded teaching info  = ', data);
 
-      levels.map((level, i) => {
-        const hasValue = data.teachingLevel.includes(level.value);
-        this.teachingLevelFormArray.controls[i].patchValue(hasValue);
-      });
+      if (res.returnCode !== '98') {
+        const data = {
+          ...res,
+          teachingLevel: JSON.parse(atob(res.teachingLevel)),
+          teachingSubjects: JSON.parse(atob(res.teachingSubjects)),
+        };
+        //console.log('loaded teaching info  = ', data);
 
-      subjects.map((subject, i) => {
-        const hasValue = data.teachingSubjects.includes(subject.value);
-        this.teachingSubjectsFormArray.controls[i].patchValue(hasValue);
-      });
+        levels.map((level, i) => {
+          const hasValue = data.teachingLevel.includes(level.value);
+          this.teachingLevelFormArray.controls[i].patchValue(hasValue);
+        });
+
+        subjects.map((subject, i) => {
+          const hasValue = data.teachingSubjects.includes(subject.value);
+          this.teachingSubjectsFormArray.controls[i].patchValue(hasValue);
+        });
+      }
+
       /*  this.form.controls.teachingLevel.setValue(data);
       this.form.controls.teachingSubjects.setValue(data); */
     });
@@ -137,38 +150,26 @@ export class AddStaffTeachingInfoComponent implements OnInit {
     this.academicTypes$ = this.service.getAcademicStandingTypes();
   }
 
-  save() {
-    //this.addTeachingInfo();
-    this.addHiringInfo();
-  }
-
-  // map json data for expected format for osb
-  mapJsonData(input: any[], source: any[]) {
-    const result = input
-      .map((v, i) => (v ? source[i].value : null))
-      .filter((v) => v !== null);
-    //console.log('map data = ', result);
-    return JSON.stringify(result);
-  }
-
   addTeachingInfo() {
     const payload = {
       staffId: this.staffId,
-      teachingLevel: this.mapJsonData(
+      teachingLevel: mapJsonData(
         this.form.controls.teachingLevel.value,
         levels
       ),
-      teachingSubjects: this.mapJsonData(
+      teachingSubjects: mapJsonData(
         this.form.controls.teachingSubjects.value,
         subjects
       ),
       teachingSubjectOther: this.form.controls.teachingSubjectOther.value,
     };
-
     //console.log('payload = ', payload);
-    /* this.teachingInfoService.addTeachingInfo(payload).subscribe((res) => {
-      console.log('add teaching info result = ', res);
-    }); */
+    this.teachingInfoService.addTeachingInfo(payload).subscribe((res) => {
+      //console.log('add teaching info result = ', res);
+      this.snackBar.open('บันทึกข้อมูลสำเร็จ', 'ปิด', {
+        duration: 2000,
+      });
+    });
   }
 
   addHiringInfo() {
@@ -187,26 +188,27 @@ export class AddStaffTeachingInfoComponent implements OnInit {
       hiringPeriodMonth: '10', */
     };
 
-    /* this.teachingInfoService.addHiringInfo(payload).subscribe((res) => {
+    this.teachingInfoService.addHiringInfo(payload).subscribe((res) => {
       console.log('add hiring info result = ', res);
-    }); */
+    });
   }
 
-  /*   save() {
+  onConfirmed() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
-        title: `คุณต้องการบันทึกข้อมูล
-        ใช่หรือไม่? `,
+        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
+        btnLabel: 'บันทึก',
       },
     });
 
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
+        this.save();
         this.onCompleted();
       }
     });
-  } */
+  }
 
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
@@ -219,12 +221,12 @@ export class AddStaffTeachingInfoComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/staff-management']);
+        this.cancel();
       }
     });
   }
 
-  backPage() {
+  prevPage() {
     this.router.navigate([
       '/staff-management',
       'staff-person-info',
@@ -233,7 +235,7 @@ export class AddStaffTeachingInfoComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/staff-management']);
+    this.router.navigate(['/', 'staff-management', 'list']);
   }
 }
 

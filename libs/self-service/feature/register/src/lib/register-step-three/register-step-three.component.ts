@@ -15,12 +15,20 @@ export class RegisterStepThreeComponent {
     confirmPassword: [],
   });
 
-
-  constructor(public dialog: MatDialog, private router: Router, private fb: FormBuilder) {}
+  constructor(
+    public dialog: MatDialog,
+    private router: Router,
+    private fb: FormBuilder
+  ) {}
 
   openDialog() {
     this.dialog.open(RegisterCompletedComponent, {
       width: '600px',
+      data: {
+        title: `ยินดีด้วย!`,
+        subTitle: `สมัครสมาชิกของท่านเสร็จสมบูรณ์`,
+        btnLabel: `เข้าสู่ระบบ`,
+      },
     });
   }
 

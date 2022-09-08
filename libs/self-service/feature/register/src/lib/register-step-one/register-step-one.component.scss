@@ -1,8 +1,8 @@
 .container {
   max-width: 1440px;
   background-image: url('/assets/images/BG-secondary.png');
-  padding: 100px 240px;
-  background-size: 100% 100%;
+  padding: 7.5rem 15rem;
+  background-size: cover;
 }
 
 .form__container {
@@ -30,7 +30,7 @@
 h3 {
   font-size: 30px;
   color: #000000;
-  margin: 32px;
+  margin-bottom: 32px;
 }
 
 .field__container {

@@ -16,6 +16,7 @@ export class DegreeInfoComponent
   implements OnInit
 {
   _degreeTypes: ListData[] = [];
+  degree = '';
 
   override form = this.fb.group({
     degreeType: [],
@@ -57,21 +58,19 @@ export class DegreeInfoComponent
         /* const degreeType = Number(res) < 4 ? 'a' : 'b';
         this.degreeTypeChanged.emit(degreeType); */
 
-        let xxx!: string;
-
         if (Number(res) === 0) {
-          xxx = 'a';
+          this.degree = 'a';
         } else if (Number(res) === 1) {
-          xxx = 'b';
+          this.degree = 'b';
         } else if (Number(res) === 2 || Number(res) === 3) {
-          xxx = 'c';
+          this.degree = 'c';
         } else if (Number(res) === 4 || Number(res) === 5) {
-          xxx = 'd';
+          this.degree = 'd';
         } else if (Number(res) === 6 || Number(res) === 7) {
-          xxx = 'e';
+          this.degree = 'e';
         }
 
-        const degreeType = xxx;
+        const degreeType = this.degree;
         this.degreeTypeChanged.emit(degreeType);
       });
   }

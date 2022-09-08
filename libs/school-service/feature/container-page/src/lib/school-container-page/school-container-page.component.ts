@@ -29,19 +29,19 @@ export const menu: MenuConfig[] = [
     subMenu: [
       {
         label: 'ขอใบอนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)',
-        path: 'temp-license/detail',
+        path: 'temp-license/request',
         params: { type: 1 },
       },
       {
         label:
           'ขออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ผู้บริหารสถานศึกษา)',
-        path: 'temp-license/detail',
+        path: 'temp-license/request',
         params: { type: 2 },
       },
       {
         label:
           'ขออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)',
-        path: 'temp-license/detail',
+        path: 'temp-license/request',
         params: { type: 3 },
       },
       {
@@ -62,7 +62,7 @@ export const menu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/display.svg',
     label: 'ทะเบียนบุคลากรภายในหน่วยงาน',
-    path: 'staff-management',
+    path: 'staff-management/list',
   },
   {
     icon: 'assets/images/icon-sidenav/display.svg',

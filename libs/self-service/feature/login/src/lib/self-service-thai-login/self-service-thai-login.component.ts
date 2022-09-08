@@ -23,7 +23,7 @@ export class SelfServiceThaiLoginComponent {
   ) {}
 
   register() {
-    this.router.navigate(['/', 'register', 'policy']);
+    this.router.navigate(['/', 'landing']);
   }
 
   login() {

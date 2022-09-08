@@ -72,7 +72,7 @@ export const menu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/reward.svg',
     label: 'รางวัลของฉัน',
-    path: 'reward/council',
+    path: 'xxx',
   },
   {
     icon: 'assets/images/icon-sidenav/people.svg',

@@ -1,17 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { TempLicenseService } from '@ksp/shared/service';
+import { replaceEmptyWithNull } from '@ksp/shared/utility';
+import { Observable } from 'rxjs';
 
 @Component({
-  templateUrl: './school-temp-license-list.component.html',
-  styleUrls: ['./school-temp-license-list.component.scss'],
+  templateUrl: './temp-license-list.component.html',
+  styleUrls: ['./temp-license-list.component.scss'],
 })
-export class SchoolTempLicenseListComponent {
+export class SchoolTempLicenseListComponent implements OnInit {
   form = this.fb.group({
     licenseSearch: [],
   });
+  eduOccupyList$!: Observable<any>;
 
   schoolId = '0010201056';
   personSelected = false;
@@ -32,18 +35,19 @@ export class SchoolTempLicenseListComponent {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private tempLicenseService: TempLicenseService /*
-    private route: ActivatedRoute,
-    public dialog: MatDialog,*/
+    private tempLicenseService: TempLicenseService
   ) {}
 
-  search() {
-    this.tempLicenseService
-      .getSchoolStaffLicense(this.schoolId)
-      .subscribe((res: any) => {
-        //console.log('licenses = ', res);
-        this.dataSource.data = res;
-      });
+  ngOnInit(): void {
+    this.eduOccupyList$ = this.tempLicenseService.getSchoolEduOccupy();
+  }
+
+  search(searchParams: any) {
+    const data = { ...searchParams, ...{ schoolid: `${this.schoolId}` } };
+    const payload = replaceEmptyWithNull(data);
+    this.tempLicenseService.searchRequest(payload).subscribe((res: any) => {
+      this.dataSource.data = res;
+    });
   }
 
   clear() {
@@ -51,7 +55,7 @@ export class SchoolTempLicenseListComponent {
   }
 
   nextPage(requestType: number) {
-    this.router.navigate(['/temp-license', 'detail'], {
+    this.router.navigate(['/temp-license', 'request'], {
       queryParams: { type: requestType },
     });
   }
@@ -67,6 +71,17 @@ export class SchoolTempLicenseListComponent {
   rewardPage() {
     this.router.navigate(['/request-reward', 'detail']);
   }
+
+  checkType(input: string) {
+    let result = '-';
+    if (input === '1') {
+      result = 'ครู';
+    }
+    if (input === '2') {
+      result = 'ผู้บริหารสถานศึกษา';
+    }
+    return result;
+  }
 }
 
 export interface TempLicenseInfo {
@@ -79,5 +94,3 @@ export interface TempLicenseInfo {
   updateDate: string;
   requestDate: string;
 }
-
-//name: string;

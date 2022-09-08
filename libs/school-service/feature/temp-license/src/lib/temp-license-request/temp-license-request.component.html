@@ -14,7 +14,7 @@
   <div [formGroup]="form" class="bg-white py-3 px-4">
     <div>
       <ksp-request-header-info
-        [requestDate]="'10 ตุลาคม 2565'"
+        [requestDate]="today"
         [requestNumber]="'112234467876545'"
       ></ksp-request-header-info>
       <hr />
@@ -22,40 +22,40 @@
       <div class="bg-light px-3 py-2 default-width">
         <div class="box-header text-primary">ค้นหารายการ</div>
 
-        <div class="row mb-3">
+        <div class="row mb-3" *ngIf="requestType !== 3">
           <div class="col-5">
             <label class="form-label">หมายเลขบัตรประชาชน</label>
             <input
               class="form-control form-search"
               type="text"
+              value="9652144515400"
               placeholder="หมายเลขบัตรประชาชนจำนวน 13 หลัก"
               #idcard
             />
           </div>
-          <div class="col-3 mt-4">
+          <div class="col-auto mt-4">
             <button
               type="button"
-              class="btn btn-secondary"
-              (click)="searchStaff(idcard.value)"
+              class="btn btn-primary w-auto"
+              (click)="searchStaffFromIdCard(idcard.value)"
             >
               ค้นหา
             </button>
           </div>
         </div>
+
         <ksp-form-user-info
           [isDarkMode]="false"
           [prefixList]="prefixList$ | async"
+          [foreignMode]="requestType === 3"
           formControlName="userInfo"
         ></ksp-form-user-info>
       </div>
     </div>
 
+    <!-- (selectedIndexChange)="onTabIndexChanged($event)" -->
     <div class="full-width pb-2">
-      <mat-tab-group
-        (selectedIndexChange)="onTabIndexChanged($event)"
-        class="tab-group mt-3"
-        selectedIndex="0"
-      >
+      <mat-tab-group class="tab-group mt-3" selectedIndex="0">
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address
             [provinces]="provinces$ | async"
@@ -99,41 +99,62 @@
         </mat-tab>
 
         <mat-tab label="ข้อมูลทางการศึกษา">
-          <ksp-form-education-info
-            formControlName="edu1"
-            [showGradeInput]="true"
-            [countries]="countries$ | async"
-          >
-            วุฒิการศึกษาปริญญาตรี </ksp-form-education-info
-          ><br />
-          <ksp-form-education-info
-            formControlName="edu2"
-            [showGradeInput]="false"
-            [showPropertyInput]="true"
-            [countries]="countries$ | async"
-          >
-            วุฒิการศึกษาปริญญาโท
-          </ksp-form-education-info>
+          <ng-container *ngIf="requestType === 1">
+            <ksp-form-education-info
+              formControlName="edu1"
+              [showGradeInput]="true"
+              [countries]="countries$ | async"
+            >
+              วุฒิการศึกษาปริญญาตรี </ksp-form-education-info
+            ><br
+          /></ng-container>
 
+          <ng-container *ngIf="requestType === 1">
+            <ksp-form-education-info
+              formControlName="edu2"
+              [showGradeInput]="false"
+              [showPropertyInput]="true"
+              [countries]="countries$ | async"
+            >
+              วุฒิการศึกษาปริญญาโท </ksp-form-education-info
+            ><br
+          /></ng-container>
+
+          <!--           <ksp-form-education-info-manager
+            *ngIf="requestType === 2 || requestType === 3"
+            formControlName="edu3"
+          ></ksp-form-education-info-manager> -->
           <br />
           <ksp-form-attachment [groups]="educationInfo"></ksp-form-attachment>
         </mat-tab>
 
         <mat-tab label="ข้อมูลการสอนและการจ้าง">
-          <ksp-form-teaching-info
-            formControlName="teachingInfo"
-          ></ksp-form-teaching-info>
+          <ng-container *ngIf="requestType === 1 || requestType === 3">
+            <ksp-form-teaching-info
+              formControlName="teachingInfo"
+            ></ksp-form-teaching-info>
+            <br />
+          </ng-container>
+
+          <ng-container *ngIf="requestType === 2">
+            <ksp-form-teaching-info-manager
+              formControlName="teachingInfo2"
+            ></ksp-form-teaching-info-manager
+            ><br
+          /></ng-container>
+
           <ksp-form-hiring-info
             [positionTypes]="positionTypes$ | async"
             formControlName="hiringInfo"
           ></ksp-form-hiring-info>
-
+          <br />
+          <ksp-form-temp-license-number></ksp-form-temp-license-number>
+          <br />
           <ksp-form-attachment [groups]="teachingInfo"></ksp-form-attachment>
         </mat-tab>
 
         <mat-tab label="ข้อมูลชี้แจงเหตุผล">
           <ksp-form-reason-info></ksp-form-reason-info>
-          <br />
           <ksp-form-attachment [groups]="reasonInfo"></ksp-form-attachment>
         </mat-tab>
 
@@ -156,41 +177,9 @@
     [showCenterButtons]="true"
     [showCancelButton]="true"
     [showTempSaveButton]="true"
-    [disableTempSaveButton]="!form.valid"
-    [showSaveButton]="staffId > 0"
-    [disableSaveButton]="!form.valid"
+    [disableTempSaveButton]="false"
+    [showSaveButton]="true"
+    [disableSaveButton]="false"
     [saveButtonLabel]="'ส่งใบคำขอ'"
   ></ksp-bottom-nav>
 </div>
-
-<!--           <div class="bg-light px-3 py-3">
-            <div class="box-header">การขอหนังสืออนุญาตชั่วคราว</div>
-
-            <div class="row">
-              <div class="col mb-3">
-                <label class="form-label">ขออนุญาตฉบับที่</label>
-                <input
-                  class="form-control"
-                  type="text"
-                  formControlName="contractNumber"
-                />
-              </div>
-            </div>
-
-            <table class="table w-25">
-              <thead>
-                <tr>
-                  <th scope="col">ลำดับ</th>
-                  <th scope="col">วันที่ยื่นคำขอ</th>
-                  <th scope="col">วันหมดอายุ</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>10 พ.ค.2564</td>
-                  <td>1 พ.ค.2564</td>
-                </tr>
-              </tbody>
-            </table>
-          </div> -->
