@@ -27,10 +27,15 @@
       </div>
 
       <div class="form__footer">
-        <button id="btn-confirm" (click)="submit()" type="submit" class="btn btn-primary">
+        <button
+          id="btn-confirm"
+          (click)="submit()"
+          type="submit"
+          class="btn btn-primary"
+        >
           Submit
         </button>
-        <div class="label__login">login</div>
+        <div class="label__login" (click)="loginPage()">login</div>
       </div>
     </div>
   </div>
