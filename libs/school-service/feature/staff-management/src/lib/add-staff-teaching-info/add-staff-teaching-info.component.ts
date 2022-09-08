@@ -193,21 +193,22 @@ export class AddStaffTeachingInfoComponent implements OnInit {
     });
   }
 
-  /*   save() {
+  onConfirmed() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
-        title: `คุณต้องการบันทึกข้อมูล
-        ใช่หรือไม่? `,
+        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
+        btnLabel: 'บันทึก',
       },
     });
 
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
+        this.save();
         this.onCompleted();
       }
     });
-  } */
+  }
 
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
@@ -220,12 +221,12 @@ export class AddStaffTeachingInfoComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/staff-management']);
+        this.cancel();
       }
     });
   }
 
-  backPage() {
+  prevPage() {
     this.router.navigate([
       '/staff-management',
       'staff-person-info',
@@ -234,7 +235,7 @@ export class AddStaffTeachingInfoComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/staff-management']);
+    this.router.navigate(['/', 'staff-management', 'list']);
   }
 }
 

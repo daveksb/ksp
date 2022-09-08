@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { FormVerifyOtpForeignComponent } from '@ksp/self-service/form';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { RegisterCompletedComponent } from '../register-completed/register-completed.component';
@@ -10,9 +11,13 @@ import { RegisterCompletedComponent } from '../register-completed/register-compl
   styleUrls: ['./register-foreign-step-three.component.scss'],
 })
 export class RegisterForeignStepThreeComponent implements OnInit {
-  constructor(public dialog: MatDialog) {}
+  constructor(private router: Router, public dialog: MatDialog) {}
 
   ngOnInit(): void {}
+
+  loginPage() {
+    this.router.navigate(['/', 'login']);
+  }
 
   save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {

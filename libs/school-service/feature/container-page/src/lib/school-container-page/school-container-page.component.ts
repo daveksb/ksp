@@ -62,7 +62,7 @@ export const menu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/display.svg',
     label: 'ทะเบียนบุคลากรภายในหน่วยงาน',
-    path: 'staff-management',
+    path: 'staff-management/list',
   },
   {
     icon: 'assets/images/icon-sidenav/display.svg',

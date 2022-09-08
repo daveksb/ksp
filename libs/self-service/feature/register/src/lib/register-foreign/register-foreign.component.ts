@@ -14,4 +14,8 @@ export class RegisterForeignComponent implements OnInit {
   submit() {
     this.router.navigate(['/', 'register', 'en-step-1']);
   }
+
+  loginPage() {
+    this.router.navigate(['/', 'login']);
+  }
 }
