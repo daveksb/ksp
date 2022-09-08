@@ -6,6 +6,11 @@ import { Observable } from 'rxjs';
 import { StaffPersonInfoService } from '@ksp/shared/service';
 import { replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {
+  CompleteDialogComponent,
+  ConfirmDialogComponent,
+} from '@ksp/shared/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   templateUrl: './staff-person-info.component.html',
@@ -39,7 +44,8 @@ export class StaffPersonInfoComponent implements OnInit {
     private staffService: StaffPersonInfoService,
     private addressService: AddressService,
     private generalInfoService: GeneralInfoService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -107,14 +113,6 @@ export class StaffPersonInfoComponent implements OnInit {
         });
       }
     });
-  }
-
-  save() {
-    if (this.staffId) {
-      this.updateStaff();
-    } else {
-      this.insertStaff();
-    }
   }
 
   updateStaff() {
@@ -204,6 +202,50 @@ export class StaffPersonInfoComponent implements OnInit {
       'staff-teaching-info',
       this.staffId,
     ]);
+  }
+
+  cancel() {
+    this.router.navigate(['/', 'staff-management', 'list']);
+  }
+
+  save() {
+    if (this.staffId) {
+      this.updateStaff();
+    } else {
+      this.insertStaff();
+    }
+  }
+
+  onConfirmed() {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
+        btnLabel: 'บันทึก',
+      },
+    });
+
+    confirmDialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.save();
+        this.onCompleted();
+      }
+    });
+  }
+
+  onCompleted() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      width: '350px',
+      data: {
+        header: `ยืนยันข้อมูลสำเร็จ`,
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.cancel();
+      }
+    });
   }
 
   get addr1(): any {

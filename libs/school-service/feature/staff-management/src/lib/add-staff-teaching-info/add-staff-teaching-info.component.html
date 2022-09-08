@@ -146,11 +146,11 @@
 
 <div class="sticky-bottom border">
   <ksp-bottom-nav
-    (prevClicked)="backPage()"
+    (prevClicked)="prevPage()"
     [isLastPage]="true"
     [showCenterButtons]="true"
     [showSaveButton]="true"
-    (saveClicked)="save()"
+    (saveClicked)="onConfirmed()"
     (cancelClicked)="cancel()"
   ></ksp-bottom-nav>
 </div>
