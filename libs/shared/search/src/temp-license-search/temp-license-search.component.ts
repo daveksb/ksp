@@ -24,7 +24,7 @@ export class TempLicenseSearchComponent extends KspFormBaseComponent {
     requestno: [null],
     idcardno: [null],
     requesttype: [null],
-    requestprocess: [null],
+    currentprocess: [null],
     requeststatus: [null],
     requestdatefrom: [null],
     requestdateto: [null],

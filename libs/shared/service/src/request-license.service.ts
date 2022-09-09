@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
-import { Observable, shareReplay } from 'rxjs';
+import { map, Observable, shareReplay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,11 +14,32 @@ export class RequestLicenseService {
       .post(`${environment.apiUrl}/kspstaff/schrequestinsert`, form)
       .pipe(shareReplay());
   }
-  getSchoolInfo(schoolId: string) {
+
+  getSchoolInfo(schoolId: string): Observable<any> {
     return this.http
       .get(
         `${environment.apiUrl}/kspschoolregister/schschoolsearchschoolid?schoolId=${schoolId}`
       )
       .pipe(shareReplay());
+  }
+
+  searchRequest(payload: any): Observable<any> {
+    return this.http
+      .post(`${environment.apiUrl}/kspstaff/schrequestsearch`, payload)
+      .pipe(
+        shareReplay(),
+        map((data: any) => data.datareturn)
+      );
+  }
+
+  getRequestById(id: number) {
+    return this.http
+      .post(`${environment.apiUrl}/kspstaff/schrequestselectidall`, {
+        id: `${id}`,
+      })
+      .pipe(
+        shareReplay()
+        //map((data: any) => data.datareturn)
+      );
   }
 }
