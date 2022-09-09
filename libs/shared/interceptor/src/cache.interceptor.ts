@@ -24,7 +24,6 @@ export class CacheInterceptor implements HttpInterceptor {
     }
     //console.log('cache = ', this.cache);
     const cachedResponse: any = this.cache.get(req.url);
-    //console.log('cachedResponse = ', cachedResponse);
 
     if (cachedResponse) {
       //console.log('cache hit = ', cachedResponse);
