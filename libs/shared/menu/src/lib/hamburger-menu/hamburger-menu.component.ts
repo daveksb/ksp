@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MenuConfig } from '../side-menu/side-menu.component';
+import { MenuConfig } from '@ksp/shared/interface';
 
 @Component({
   selector: 'ksp-hamburger-menu',

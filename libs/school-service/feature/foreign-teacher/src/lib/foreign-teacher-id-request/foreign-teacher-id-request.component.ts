@@ -14,6 +14,7 @@ import {
   RequestLicenseService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { createDefaultRequestForm, thaiDate } from '@ksp/shared/utility';
 @UntilDestroy()
 @Component({
   templateUrl: './foreign-teacher-id-request.component.html',
@@ -23,6 +24,8 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   form = this.fb.group({
     foreignTeacher: [],
   });
+  requestNumber = '';
+  requestDate = thaiDate(new Date());
   schoolId = '0010201056';
   @Input() mode: FormMode = 'edit';
   prefixList$!: Observable<any>;
@@ -63,7 +66,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
         switchMap((res) => {
           if (res) {
             //call API
-            const form = this.getDefaultForm();
+            const form = createDefaultRequestForm(this.fb);
             form.patchValue(this.form.value.foreignTeacher as any);
             return this.requestLicenseService.requestLicense(form.value);
           }
@@ -101,59 +104,5 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     this.countries$ = this.addressService.getCountry();
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.visaTypeList$ = this.generalInfoService.getVisaType();
-  }
-  getDefaultForm() {
-    return this.fb.group({
-      currentprocess: null,
-      requeststatus: null,
-      updatedate: null,
-      licenseid: null,
-      staffid: null,
-      systemtype: null,
-      requesttype: null,
-      requesteduocupy: null,
-      requestfor: null,
-      schoolid: null,
-      idcardno: null,
-      passportno: null,
-      passportstartdate: null,
-      passportenddate: null,
-      prefixth: null,
-      firstnameth: null,
-      lastnameth: null,
-      prefixen: null,
-      firstnameen: null,
-      lastnameen: null,
-      sex: null,
-      birthdate: null,
-      email: null,
-      position: null,
-      educationoccupy: null,
-      contactphone: null,
-      workphone: null,
-      nationality: null,
-      country: null,
-      coordinatorinfo: null,
-      visainfo: null,
-      userpermission: null,
-      addressinfo: null,
-      schooladdrinfo: null,
-      eduinfo: null,
-      teachinginfo: null,
-      reasoninfo: null,
-      fileinfo: null,
-      otherreason: null,
-      refperson: null,
-      prohibitproperty: null,
-      checkprohibitproperty: null,
-      checksubresult: null,
-      checkfinalresult: null,
-      checkhistory: null,
-      approveresult: null,
-      paymentstatus: null,
-      ref1: null,
-      ref2: null,
-      ref3: null,
-    });
   }
 }
