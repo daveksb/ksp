@@ -7,7 +7,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenHandleInterceptor } from '@ksp/shared/interceptor';
+import {
+  CacheInterceptor,
+  TokenHandleInterceptor,
+} from '@ksp/shared/interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +27,11 @@ import { TokenHandleInterceptor } from '@ksp/shared/interceptor';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenHandleInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CacheInterceptor,
       multi: true,
     },
   ],

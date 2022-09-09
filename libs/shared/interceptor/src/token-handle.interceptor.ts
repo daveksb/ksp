@@ -13,8 +13,6 @@ import { getCookie } from '@ksp/shared/utility';
   providedIn: 'root',
 })
 export class TokenHandleInterceptor implements HttpInterceptor {
-  private cache = new Map<string, any>();
-
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
@@ -44,17 +42,6 @@ export class TokenHandleInterceptor implements HttpInterceptor {
       return next.handle(request);
     }
 
-    return next.handle(request).pipe(
-      tap((response) => {
-        if (response instanceof HttpResponse) {
-          this.cache.set(request.url, response);
-        }
-      })
-    );
-    /* const cachedResponse = this.cache.get(request.url);
-    if (cachedResponse) {
-      return of(cachedResponse);
-    }
-  } */
+    return next.handle(request);
   }
 }
