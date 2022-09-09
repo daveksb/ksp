@@ -146,7 +146,7 @@
     <div class="row mb-2">
       <div class="col-6">
         <label class="form-label">Visa Class</label>
-        <select class="form-select" formControlName="visaClass">
+        <select class="form-select" formControlName="visaclass">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let c of visaTypeList" [value]="+c?.id">
             {{ c?.nameEn }}
@@ -155,7 +155,7 @@
       </div>
       <div class="col">
         <label class="form-label">ประเภทวีซ่า</label>
-        <select class="form-select" formControlName="visaType">
+        <select class="form-select" formControlName="visatype">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let c of visaTypeList" [value]="+c?.id">
             {{ c?.nameTh }}
@@ -166,7 +166,7 @@
     <div class="row mb-2">
       <div class="col-6">
         <label class="form-label">วันเดือนปีวีซ่าหมดอายุ</label>
-        <input class="form-control" type="date" formControlName="visaExpire" />
+        <input class="form-control" type="date" formControlName="visaenddate" />
       </div>
     </div>
   </div>

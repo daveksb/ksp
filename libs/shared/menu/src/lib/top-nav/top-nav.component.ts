@@ -12,7 +12,7 @@ import { deleteCookie, getCookie, thaiDate } from '@ksp/shared/utility';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule],
 })
-export class TopNavComponent implements OnInit {
+export class TopNavComponent {
   today = thaiDate(new Date());
   firstName = getCookie('firstName');
   lastName = getCookie('lastName');
@@ -20,9 +20,6 @@ export class TopNavComponent implements OnInit {
     private router: Router,
     private schoolServiceFeatureLoginService: SchoolServiceFeatureLoginService
   ) {}
-  ngOnInit(): void {
-    console.log(this.schoolServiceFeatureLoginService.config);
-  }
   logout() {
     deleteCookie('schUserToken');
     this.router.navigate(['/']);

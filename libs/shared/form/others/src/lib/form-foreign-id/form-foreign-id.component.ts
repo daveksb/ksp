@@ -13,27 +13,6 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 })
 export class FormForeignIdComponent extends KspFormBaseComponent {
   override form = createDefaultUserForm(this.fb, Validators);
-  // override form = this.fb.group({
-  //   prefixEn: [],
-  //   nameEn: [],
-  //   midnameEn: [],
-  //   lastnameEn: [],
-  //   prefixTh: [],
-  //   nameTh: [],
-  //   midnameTh: [],
-  //   lastnameTh: [],
-  //   sex: [],
-  //   birthDate: [],
-  //   email: [],
-  //   contactPhone: [],
-  //   passportNumber: [],
-  //   country: [],
-  //   passportRelease: [],
-  //   passportExpire: [],
-  //   visaClass: [],
-  //   visaType: [],
-  //   visaExpire: [],
-  // });
 
   @Input() formHeader = 'ข้อมูลครูชาวต่างชาติ';
   @Input() prefixList: any;
