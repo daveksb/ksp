@@ -83,6 +83,15 @@ export class TempLicenseRequestComponent implements OnInit {
     this.checkRequestType();
   }
 
+  checkRequestId() {
+    this.route.paramMap.subscribe((params) => {
+      this.requestId = Number(params.get('id'));
+      if (this.requestId) {
+        this.loadRequestData(this.requestId);
+      }
+    });
+  }
+
   createRequest() {
     const baseForm = this.getDefaultForm();
 
@@ -115,12 +124,18 @@ export class TempLicenseRequestComponent implements OnInit {
     };
 
     //console.log('payload = ', payload);
-
     baseForm.patchValue(payload);
-    console.log('current form = ', baseForm.value);
-
+    //console.log('current form = ', baseForm.value);
     this.requestLicenseService.requestLicense(payload).subscribe((res) => {
-      console.log('request result = ', res);
+      //console.log('request result = ', res);
+    });
+  }
+
+  loadRequestData(id: number) {
+    this.requestLicenseService.getRequestById(id).subscribe((res) => {
+      console.log('req = ', res);
+      //const userInfo = {};
+      //this.form.controls.userInfo.patchValue({ id: 2 });
     });
   }
 
@@ -213,15 +228,6 @@ export class TempLicenseRequestComponent implements OnInit {
 
   pathHiringInfo(data: any) {
     this.form.controls.hiringInfo.patchValue(data);
-  }
-
-  checkRequestId() {
-    this.route.paramMap.subscribe((params) => {
-      this.requestId = Number(params.get('id'));
-      if (this.requestId) {
-        // load request data
-      }
-    });
   }
 
   /*   onTabIndexChanged(tabIndex: number) {

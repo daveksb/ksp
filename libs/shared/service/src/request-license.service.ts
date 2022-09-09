@@ -31,4 +31,15 @@ export class RequestLicenseService {
         map((data: any) => data.datareturn)
       );
   }
+
+  getRequestById(id: number) {
+    return this.http
+      .post(`${environment.apiUrl}/kspstaff/schrequestselectidall`, {
+        id: `${id}`,
+      })
+      .pipe(
+        shareReplay()
+        //map((data: any) => data.datareturn)
+      );
+  }
 }

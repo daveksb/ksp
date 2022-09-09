@@ -84,6 +84,7 @@ export class AddStaffComponent implements OnInit {
 
   pathTeachingInfo(res: any) {
     const t = JSON.parse(res.teachingLevel);
+    console.log('teaching = ', t);
     const teachingLevel = levels.map((level, i) => {
       if (t.includes(level.value)) {
         return level.value;
@@ -92,6 +93,7 @@ export class AddStaffComponent implements OnInit {
       }
     });
     const s = JSON.parse(res.teachingSubjects);
+    console.log('subject = ', s);
     const teachingSubjects = subjects.map((subj, i) => {
       if (s.includes(subj.value)) {
         return subj.value;
@@ -195,7 +197,7 @@ export class AddStaffComponent implements OnInit {
       ...{ hiringinfo: JSON.stringify(formData.hiringInfo) },
     };
 
-    //console.log('update payload = ', payload);
+    console.log('update payload = ', payload);
     this.staffService.updateStaff2(payload).subscribe((res) => {
       //console.log('update result = ', res);
     });

@@ -56,8 +56,14 @@ export class SchoolTempLicenseListComponent implements OnInit {
     this.dataSource.data = [];
   }
 
-  nextPage(requestType: number) {
+  goToRequestPage(requestType: number) {
     this.router.navigate(['/temp-license', 'request'], {
+      queryParams: { type: requestType },
+    });
+  }
+
+  viewRequest(requestType: number, requestId: number) {
+    this.router.navigate(['/temp-license', 'request', requestId], {
       queryParams: { type: requestType },
     });
   }
