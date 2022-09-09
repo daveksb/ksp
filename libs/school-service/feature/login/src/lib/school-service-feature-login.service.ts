@@ -8,6 +8,7 @@ import { map, Observable } from 'rxjs';
 })
 export class SchoolServiceFeatureLoginService {
   constructor(private http: HttpClient) {}
+  config: any;
 
   validateLogin(form: any): Observable<any> {
     return this.http.post(
