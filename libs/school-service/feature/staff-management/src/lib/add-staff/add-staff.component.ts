@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Event, Router } from '@angular/router';
 import {
   AddressService,
   GeneralInfoService,
   StaffService,
 } from '@ksp/shared/service';
-import { Observable } from 'rxjs';
+import { filter, Observable } from 'rxjs';
 import { replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
 import {
   CompleteDialogComponent,
@@ -35,6 +35,7 @@ export class AddStaffComponent implements OnInit {
   academicTypes$!: Observable<any>;
   schoolId = '0010201056';
   today = thaiDate(new Date());
+  mode: 'view' | 'edit' | 'add' = 'add';
 
   form = this.fb.group({
     userInfo: [],
@@ -58,14 +59,30 @@ export class AddStaffComponent implements OnInit {
 
   ngOnInit(): void {
     this.form.reset();
+    this.checkMode();
+    this.getListData();
+
     this.activatedroute.paramMap.subscribe((params) => {
       this.staffId = Number(params.get('id'));
       if (this.staffId) {
         this.loadStaffData(this.staffId);
       }
     });
+  }
 
-    this.getListData();
+  checkMode() {
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        if (event.url.includes('view-staff')) {
+          this.mode = 'view';
+          this.form.disable();
+        } else if (event.url.includes('edit-staff')) {
+          this.mode = 'edit';
+        } else {
+          this.mode = 'add';
+        }
+      }
+    });
   }
 
   loadStaffData(staffId: number) {
@@ -109,7 +126,6 @@ export class AddStaffComponent implements OnInit {
       console.log('add staff result = ', res);
       this.onCompleted();
       this.form.reset();
-      //this.router.navigate(['/staff-management', 'edit-staff', res.id]);
     });
   }
 
