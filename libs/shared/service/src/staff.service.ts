@@ -37,10 +37,12 @@ export class StaffService {
   }
 
   searchStaffsFromFilter(payload: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/kspstaff/xxxxxxxxxxxxxx`, {
-      ...payload,
-      tokenkey: environment.token,
-    });
+    return this.http
+      .post(`${environment.apiUrl}/kspstaff/schstaff2selectall`, {
+        ...payload,
+        tokenkey: environment.token,
+      })
+      .pipe(map((data: any) => data.datareturn));
   }
 
   updateStaff(payload: any): Observable<any> {
