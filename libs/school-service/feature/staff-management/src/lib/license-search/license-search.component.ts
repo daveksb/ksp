@@ -19,7 +19,7 @@ export class LicenseSearchComponent {
   constructor(private router: Router, private fb: FormBuilder) {}
 
   addStaff() {
-    this.router.navigate(['./', 'staff-management', 'staff-person-info']);
+    this.router.navigate(['./staff-management', 'add-staff']);
   }
 
   search() {
@@ -31,6 +31,6 @@ export class LicenseSearchComponent {
   }
 
   goToDetail() {
-    this.router.navigate(['./', 'staff-management', 'license-search']);
+    this.router.navigate(['./staff-management', 'license-search']);
   }
 }

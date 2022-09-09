@@ -34,6 +34,7 @@ export const routes: Routes = [
       { path: 'license-search', component: LicenseSearchComponent },
       { path: 'add-staff', component: AddStaffComponent },
       { path: 'edit-staff/:id', component: AddStaffComponent },
+      { path: 'view-staff/:id', component: AddStaffComponent },
       {
         path: 'staff-teaching-info/:id',
         component: AddStaffTeachingInfoComponent,

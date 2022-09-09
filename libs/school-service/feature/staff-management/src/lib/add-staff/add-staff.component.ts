@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AddressService, GeneralInfoService } from '@ksp/shared/service';
+import { ActivatedRoute, NavigationEnd, Event, Router } from '@angular/router';
+import {
+  AddressService,
+  GeneralInfoService,
+  StaffService,
+} from '@ksp/shared/service';
 import { Observable } from 'rxjs';
-import { StaffPersonInfoService } from '@ksp/shared/service';
-import { getCookie, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -33,6 +35,7 @@ export class AddStaffComponent implements OnInit {
   academicTypes$!: Observable<any>;
   schoolId = '0010201056';
   today = thaiDate(new Date());
+  mode: 'view' | 'edit' | 'add' = 'add';
 
   form = this.fb.group({
     userInfo: [],
@@ -48,7 +51,7 @@ export class AddStaffComponent implements OnInit {
     private router: Router,
     private activatedroute: ActivatedRoute,
     private fb: FormBuilder,
-    private staffService: StaffPersonInfoService,
+    private staffService: StaffService,
     private addressService: AddressService,
     private generalInfoService: GeneralInfoService,
     public dialog: MatDialog
@@ -56,20 +59,37 @@ export class AddStaffComponent implements OnInit {
 
   ngOnInit(): void {
     this.form.reset();
-    this.activatedroute.paramMap.subscribe((params) => {
-      this.staffId = Number(params.get('id'));
-      if (this.staffId) {
-        this.loadStaffData(this.staffId);
+    this.checkMode();
+    this.getListData();
+
+    this.activatedroute.paramMap
+      .pipe(untilDestroyed(this))
+      .subscribe((params) => {
+        this.staffId = Number(params.get('id'));
+        if (this.staffId) {
+          this.loadStaffData(this.staffId);
+        }
+      });
+  }
+
+  checkMode() {
+    this.router.events.pipe(untilDestroyed(this)).subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        if (event.url.includes('view-staff')) {
+          this.mode = 'view';
+          this.form.disable();
+        } else if (event.url.includes('edit-staff')) {
+          this.mode = 'edit';
+        } else {
+          this.mode = 'add';
+        }
       }
     });
-
-    this.getListData();
   }
 
   loadStaffData(staffId: number) {
-    const tokenkey = getCookie('schUserToken');
     this.staffService
-      .searchStaffFromId(staffId, tokenkey)
+      .searchStaffFromId(staffId)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         //console.log('staff 2 data = ', res);
@@ -80,8 +100,7 @@ export class AddStaffComponent implements OnInit {
   }
 
   save() {
-    const tokenkey = getCookie('schUserToken');
-    if ((this.staffId, tokenkey)) {
+    if (this.staffId) {
       this.updateStaff();
     } else {
       this.insertStaff();
@@ -101,69 +120,62 @@ export class AddStaffComponent implements OnInit {
       ...{ addresses: JSON.stringify([formData.addr1, formData.addr2]) },
       ...{ educations: JSON.stringify([formData.edu1, formData.edu2]) },
       ...{ teachingInfo: JSON.stringify(formData.teachingInfo) },
-      ...{ hiringInfo: JSON.stringify(formData.workingInfo) },
+      ...{ hiringInfo: JSON.stringify(formData.hiringInfo) },
     };
 
-    console.log('insert payload = ', payload);
-    const tokenkey = getCookie('schUserToken');
-    this.staffService.addStaff2(payload, tokenkey).subscribe((res) => {
+    //console.log('insert payload = ', payload);
+    this.staffService.addStaff2(payload).subscribe((res) => {
       console.log('add staff result = ', res);
       this.onCompleted();
       this.form.reset();
-      //this.router.navigate(['/staff-management', 'edit-staff', res.id]);
     });
   }
 
   updateStaff() {
-    //
-  }
-  /*   updateStaff() {
     const formData: any = this.form.getRawValue();
-    formData.userInfo.schoolId = this.schoolId;
-    formData.userInfo.nationality = 'TH';
-    console.log('update formData = ', formData);
+    //console.log('formData = ', formData);
+    const { ...userInfo } = replaceEmptyWithNull(formData.userInfo);
 
-    formData.userInfo = replaceEmptyWithNull(formData.userInfo);
-    formData.addr1 = replaceEmptyWithNull(formData.addr1);
-    formData.addr2 = replaceEmptyWithNull(formData.addr2);
-    formData.edu1 = replaceEmptyWithNull(formData.edu1);
-    formData.edu2 = replaceEmptyWithNull(formData.edu2);
-    const tokenkey = getCookie('schUserToken');
-    this.staffService.updateStaff(formData, tokenkey).subscribe((res) => {
-      //console.log('update staff result = ', res);
-      this.snackBar.open('แก้ไขข้อมูลสำเร็จ', 'ปิด', {
-        duration: 2000,
-      });
+    const payload = {
+      ...userInfo,
+      ...{ addresses: JSON.stringify([formData.addr1, formData.addr2]) },
+      ...{ educations: JSON.stringify([formData.edu1, formData.edu2]) },
+      ...{ teachingInfo: JSON.stringify(formData.teachingInfo) },
+      ...{ hiringInfo: JSON.stringify(formData.hiringInfo) },
+    };
+
+    console.log('update payload = ', payload);
+    this.staffService.updateStaff2(payload).subscribe((res) => {
+      //console.log('update result = ', res);
     });
-  } */
+  }
 
   useSameAddress(evt: any) {
     const checked = evt.target.checked;
     this.amphurs2$ = this.amphurs1$;
     this.tumbols2$ = this.tumbols1$;
-
     if (checked) {
       this.form.controls.addr2.patchValue(this.form.controls.addr1.value);
     }
   }
 
-  provinceChanged(type: number, evt: any) {
+  provinceChanged(addrType: number, evt: any) {
     const province = evt.target?.value;
     if (province) {
-      if (type === 1) {
+      if (addrType === 1) {
         this.amphurs1$ = this.addressService.getAmphurs(province);
-      } else if (type === 2) {
+      } else if (addrType === 2) {
         this.amphurs2$ = this.addressService.getAmphurs(province);
       }
     }
   }
 
-  amphurChanged(type: number, evt: any) {
+  amphurChanged(addrType: number, evt: any) {
     const amphur = evt.target?.value;
     if (amphur) {
-      if (type === 1) {
+      if (addrType === 1) {
         this.tumbols1$ = this.addressService.getTumbols(amphur);
-      } else if (type === 2) {
+      } else if (addrType === 2) {
         this.tumbols2$ = this.addressService.getTumbols(amphur);
       }
     }
@@ -173,7 +185,6 @@ export class AddStaffComponent implements OnInit {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.provinces$ = this.addressService.getProvinces();
     this.countries$ = this.addressService.getCountry();
-
     this.staffTypes$ = this.staffService.getStaffTypes();
     this.positionTypes$ = this.staffService.getPositionTypes();
     this.academicTypes$ = this.staffService.getAcademicStandingTypes();
@@ -209,16 +220,16 @@ export class AddStaffComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        //this.cancel();
+        this.cancel();
       }
     });
   }
 
-  get addr1(): any {
+  get addr1() {
     return this.form.controls.addr1;
   }
 
-  get addr2(): any {
+  get addr2() {
     return this.form.controls.addr2;
   }
 

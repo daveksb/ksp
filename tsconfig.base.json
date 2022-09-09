@@ -206,6 +206,7 @@
       "@ksp/shared/form/university-select": [
         "libs/shared/form/university-select/src/index.ts"
       ],
+      "@ksp/shared/interceptor": ["libs/shared/interceptor/src/index.ts"],
       "@ksp/shared/interface": ["libs/shared/interface/src/index.ts"],
       "@ksp/shared/menu": ["libs/shared/menu/src/index.ts"],
       "@ksp/shared/search": ["libs/shared/search/src/index.ts"],

@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { getCookie } from '@ksp/shared/utility';
-import { StaffManagementService } from '../staff-management.service';
+import { StaffService } from '@ksp/shared/service';
 
 @Component({
   selector: 'school-service-staff-list',
@@ -12,11 +11,10 @@ import { StaffManagementService } from '../staff-management.service';
 })
 export class StaffListComponent {
   form = this.fb.group({
-    staffSearch: [],
+    searchFilter: [],
   });
 
   schoolId = '0010201056';
-  personSelected = false;
   displayedColumns: string[] = [
     'id',
     'idCardNo',
@@ -34,12 +32,14 @@ export class StaffListComponent {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private service: StaffManagementService
+    private service: StaffService
   ) {}
 
   search() {
-    const tokenkey = getCookie('schUserToken');
-    this.service.getStaffs(this.schoolId, tokenkey).subscribe((res) => {
+    const payload = {
+      schoolid: `${this.schoolId}`,
+    };
+    this.service.searchStaffsFromFilter(payload).subscribe((res) => {
       this.dataSource.data = res;
       //console.log('res = ', res);
     });
@@ -49,8 +49,12 @@ export class StaffListComponent {
     this.dataSource.data = [];
   }
 
-  goToDetail() {
+  searchLicense() {
     this.router.navigate(['/staff-management', 'license-search']);
+  }
+
+  viewStaff(staffId: number) {
+    this.router.navigate(['/staff-management', 'view-staff', staffId]);
   }
 
   addStaff() {
