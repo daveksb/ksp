@@ -1,0 +1,134 @@
+<ksp-top-nav>
+  <span header>ข้อมูลของฉัน</span>
+  <span subHeader>ข้อมูลประสบการณ์วิชาชีพ</span>
+</ksp-top-nav>
+
+<div class="main__container px-4 py-2 full-height">
+  <div class="detail__container p-3">
+    <form [formGroup]="form">
+      <div class="d-flex justify-content-between">
+        <div class="box-header">สถานศึกษาฝึกประสบการณ์วิชาชีพ</div>
+
+        <div class="text-primary fs-5" role="button">
+          <ksp-add-row-button
+            class="text-primary fs-6"
+            (addRowClick)="addFormArray(licenseInfo1)"
+          >
+            เพิ่ม
+          </ksp-add-row-button>
+        </div>
+      </div>
+
+      <ng-container formArrayName="licenseInfo1">
+        <ng-container
+          *ngFor="let DegreeForm of licenseInfo1.controls; let i = index"
+        >
+          <ng-container [formGroupName]="i">
+            <div class="border rounded p-3 mb-3">
+              <div class="d-flex justify-content-end">
+                <i
+                  class="bi bi-x-circle-fill text-danger"
+                  role="button"
+                  (click)="deleteFormArray(licenseInfo1, i)"
+                ></i>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label"
+                    >สถานศึกษาฝึกประสบการณ์วิชาชีพ ครั้งที่ 1</label
+                  >
+                  <input
+                    class="form-control"
+                    type="text"
+                    formControlName="TrainingAddressOne"
+                  />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                  <label class="form-label"
+                    >สถานศึกษาฝึกประสบการณ์วิชาชีพ ครั้งที่ 2</label
+                  >
+                  <input
+                    class="form-control"
+                    type="text"
+                    formControlName="TrainingAddressTwo"
+                  />
+                </div>
+              </div>
+            </div> </ng-container></ng-container
+      ></ng-container>
+      <hr />
+
+      <div class="d-flex justify-content-between">
+        <div class="box-header">สภานศึกษาที่ปฎิบัติการสอน</div>
+
+        <div class="text-primary fs-5" role="button">
+          <ksp-add-row-button
+            class="text-primary"
+            (addRowClick)="addFormArray(licenseInfo2)"
+          >
+            เพิ่ม
+          </ksp-add-row-button>
+        </div>
+      </div>
+
+      <ng-container formArrayName="licenseInfo2">
+        <ng-container
+          *ngFor="let DegreeForm of licenseInfo2.controls; let i = index"
+        >
+          <ng-container [formGroupName]="i">
+            <div class="border rounded p-3 mb-3">
+              <div class="d-flex justify-content-end">
+                <i
+                  class="bi bi-x-circle-fill text-danger"
+                  role="button"
+                  (click)="deleteFormArray(licenseInfo2, i)"
+                ></i>
+              </div>
+              <self-service-form-user-workplace></self-service-form-user-workplace>
+            </div> </ng-container></ng-container
+      ></ng-container>
+      <hr />
+
+      <div class="d-flex justify-content-between">
+        <div class="box-header">ใบอนุญาตประกอบวิชาชีพครูจากต่างประเทศ</div>
+
+        <div class="text-primary fs-5" role="button">
+          <ksp-add-row-button
+            class="text-primary"
+            (addRowClick)="addFormArray(licenseInfo3)"
+          >
+            เพิ่ม
+          </ksp-add-row-button>
+        </div>
+      </div>
+
+      <ng-container formArrayName="licenseInfo3">
+        <ng-container
+          *ngFor="let DegreeForm of licenseInfo3.controls; let i = index"
+        >
+          <ng-container [formGroupName]="i">
+            <div class="border rounded p-3 mb-3">
+              <div class="d-flex justify-content-end">
+                <i
+                  class="bi bi-x-circle-fill text-danger"
+                  role="button"
+                  (click)="deleteFormArray(licenseInfo3, i)"
+                ></i>
+              </div>
+              <ksp-experience-form></ksp-experience-form>
+            </div> </ng-container></ng-container
+      ></ng-container>
+      <hr />
+      <br />
+      <ksp-form-attachment
+        [groups]="info"
+        [mode]="mode"
+      ></ksp-form-attachment>
+    </form>
+  </div>
+  <div class="d-flex justify-content-center my-3">
+    <button class="btn btn-secondary me-2">ล้างข้อมูล</button>
+    <button class="btn btn-primary">แก้ไขข้อมูล</button>
+  </div>
+</div>

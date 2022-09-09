@@ -1,0 +1,22 @@
+<ksp-top-nav>
+  <span header>ข้อมูลของฉัน</span>
+  <span subHeader>ที่อยู่</span>
+</ksp-top-nav>
+
+<div class="main__container px-4 py-2 full-height">
+  <div class="detail__container p-3">
+    <ksp-form-address [isDarkMode]="true">
+      <span>ที่อยู่ทะเบียนบ้าน</span>
+    </ksp-form-address>
+  </div>
+  <br />
+  <div class="detail__container p-3">
+    <ksp-form-address [isDarkMode]="true">
+      <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
+    </ksp-form-address>
+  </div>
+  <div class="d-flex justify-content-center my-3">
+    <button class="btn btn-secondary me-2">ล้างข้อมูล</button>
+    <button class="btn btn-primary">แก้ไขข้อมูล</button>
+  </div>
+</div>

@@ -70,6 +70,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'compare-knowledge',
+    loadChildren: () =>
+      import('@ksp/self-service/feature/compare-knowledge').then(
+        (m) => m.SelfServiceFeatureCompareKnowledgeModule
+      ),
+  },
+  {
     path: 'my-info',
     loadChildren: () =>
       import('@ksp/self-service/feature/my-info').then(

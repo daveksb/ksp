@@ -4,37 +4,72 @@
 </ksp-top-nav>
 
 <form [formGroup]="form">
-  <div class="main__container">
-    <self-service-form-upload-image></self-service-form-upload-image>
+  <div class="main__container px-4 py-2">
+    <self-service-form-upload-image
+      [imgDetail]="'row'"
+    ></self-service-form-upload-image>
 
     <div class="detail__container">
       <div class="row">
         <div class="col-md-6 mb-3">
-          <label class="form-label">ชื่อ</label>
+          <label class="form-label">ชื่อภาษาไทย</label>
           <input class="form-control" type="text" formControlName="name" />
         </div>
 
         <div class="col-md-6 mb-3">
-          <label class="form-label">นามสกุล</label>
+          <label class="form-label">นามสกุลภาษาไทย</label>
           <input class="form-control" type="text" formControlName="lastname" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">ชื่อภาษาอังกฤษ</label>
+          <input class="form-control" type="text" formControlName="name" />
         </div>
 
         <div class="col-md-6 mb-3">
+          <label class="form-label">นามสกุลภาษาอังกฤษ</label>
+          <input class="form-control" type="text" formControlName="lastname" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md mb-3">
+          <label class="form-label">หมายเลขบัตรประชาชน</label>
+          <input class="form-control" type="text" formControlName="postLevel" />
+        </div>
+        <div class="col-md mb-3">
           <label class="form-label">รหัสผ่าน</label>
           <input class="form-control" type="text" formControlName="password" />
         </div>
-
-        <div class="col-md-6 mb-3">
+        <div class="col-md mb-3">
           <label class="form-label">เบอร์โทร</label>
           <input class="form-control" type="text" formControlName="phone" />
         </div>
+        <div class="col-md mb-3">
+          <label class="form-label">อีเมล</label>
+          <input class="form-control" type="text" formControlName="phone" />
+        </div>
+      </div>
 
-        <div class="col-md-6 mb-3">
+      <div class="row">
+        <div class="col-md mb-3">
           <label class="form-label">วันเดือนปีเกิด</label>
           <input class="form-control" type="date" formControlName="birthDate" />
         </div>
 
-        <div class="col-md-6 mb-3">
+        <div class="col-md mb-3">
+          <label class="form-label">ภูมิลำเนา</label>
+          <select class="form-select" formControlName="nationality">
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+
+        <div class="col-md mb-3">
           <label class="form-label">สัญชาติ</label>
           <select class="form-select" formControlName="nationality">
             <option selected>กรุณาเลือก</option>
@@ -44,28 +79,19 @@
           </select>
         </div>
 
-        <div class="col-md-6 mb-3">
+        <div class="col-md mb-3">
           <label class="form-label">ศาสนา</label>
-          <input class="form-control" type="text" formControlName="religion" />
-        </div>
-
-        <div class="col-md-6 mb-3">
-          <label class="form-label">ลำดับชั้นตำแหน่ง</label>
-          <input class="form-control" type="text" formControlName="postLevel" />
-        </div>
-
-        <div class="col mb-3">
-          <label class="form-label">ที่อยู่ปัจจุบัน</label>
-          <textarea
-            class="form-control"
-            rows="3"
-            formControlName="address"
-          ></textarea>
+          <select class="form-select" formControlName="nationality">
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
         </div>
       </div>
     </div>
 
-    <div class="button__container">
+    <div class="d-flex justify-content-center my-3">
       <button class="btn btn-secondary" (click)="clearData()">
         ล้างข้อมูล
       </button>

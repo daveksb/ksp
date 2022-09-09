@@ -121,6 +121,9 @@
       "@ksp/school-service/ui/staff-search": [
         "libs/school-service/ui/staff-search/src/index.ts"
       ],
+      "@ksp/self-service/feature/compare-knowledge": [
+        "libs/self-service/feature/compare-knowledge/src/index.ts"
+      ],
       "@ksp/self-service/feature/home": [
         "libs/self-service/feature/home/src/index.ts"
       ],
