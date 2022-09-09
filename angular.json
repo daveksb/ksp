@@ -7717,6 +7717,24 @@
         }
       ]
     },
+    "shared-interceptor": {
+      "projectType": "library",
+      "root": "libs/shared/interceptor",
+      "sourceRoot": "libs/shared/interceptor/src",
+      "prefix": "ksp",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/interceptor/**/*.ts",
+              "libs/shared/interceptor/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "shared-interface": {
       "root": "libs/shared/interface",
       "projectType": "library",
@@ -9636,8 +9654,5 @@
       ]
     }
   },
-  "version": 1,
-  "cli": {
-    "analytics": false
-  }
+  "version": 1
 }

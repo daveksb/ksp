@@ -12,7 +12,7 @@ export class TempLicenseService {
   searchStaffFromIdCard(schoolId: string, idCard: string): Observable<any> {
     return this.http
       .get(
-        `${environment.apiUrl}/kspschoolregister/schstaffsearchidcardno?idCardNo=${idCard}&schoolId=${schoolId}&tokenkey=${environment.token}`
+        `${environment.apiUrl}/kspschoolregister/schstaffsearchidcardno?idCardNo=${idCard}&schoolId=${schoolId}`
       )
       .pipe(shareReplay());
   }
@@ -20,7 +20,7 @@ export class TempLicenseService {
   getSchoolInfo(schoolId: string) {
     return this.http
       .get(
-        `${environment.apiUrl}/kspschoolregister/schschoolsearchschoolid?schoolId=${schoolId}&tokenkey=${environment.token}`
+        `${environment.apiUrl}/kspschoolregister/schschoolsearchschoolid?schoolId=${schoolId}`
       )
       .pipe(shareReplay());
   }
@@ -29,10 +29,7 @@ export class TempLicenseService {
     return this.http
       .post(
         `${environment.apiUrl}/kspschoolregister/schtmplicencerequestselect`,
-        {
-          ...payload,
-          tokenkey: environment.token,
-        }
+        payload
       )
       .pipe(map((data: any) => data.datareturn));
   }
@@ -40,10 +37,7 @@ export class TempLicenseService {
   addTempLicense(payload: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspschoolregister/schtmplicencerequestinsert`,
-      {
-        ...payload,
-        tokenkey: environment.token,
-      }
+      payload
     );
   }
 

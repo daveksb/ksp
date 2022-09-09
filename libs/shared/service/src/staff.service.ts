@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, shareReplay } from 'rxjs';
 import { environment } from '@ksp/shared/environment';
+import { map, Observable, shareReplay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +12,6 @@ export class StaffService {
   addStaff2(payload: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/kspstaff/schstaff2insert`, {
       ...payload,
-      tokenkey: environment.token,
     });
   }
 
@@ -22,7 +21,6 @@ export class StaffService {
     };
     return this.http.post(`${environment.apiUrl}/kspstaff/schstaff2select`, {
       ...payload,
-      tokenkey: environment.token,
     });
   }
 
@@ -31,7 +29,6 @@ export class StaffService {
       `${environment.apiUrl}/kspstaff/schstaff2selectidcardno`,
       {
         ...payload,
-        tokenkey: environment.token,
       }
     );
   }
@@ -40,7 +37,6 @@ export class StaffService {
     return this.http
       .post(`${environment.apiUrl}/kspstaff/schstaff2selectall`, {
         ...payload,
-        tokenkey: environment.token,
       })
       .pipe(map((data: any) => data.datareturn));
   }
@@ -48,20 +44,19 @@ export class StaffService {
   updateStaff2(payload: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/kspstaff/schstaff2update`, {
       ...payload,
-      tokenkey: environment.token,
     });
   }
 
   getStaffUserInfo(staffId: number): Observable<any> {
     return this.http.get(
-      `${environment.apiUrl}/kspschoolregister/schstaffsearchid?id=${staffId}&tokenkey=${environment.token}}`
+      `${environment.apiUrl}/kspschoolregister/schstaffsearchid?id=${staffId}}`
     );
   }
 
   getStaffEdu(staffId: number): Observable<any> {
     return this.http
       .get(
-        `${environment.apiUrl}/kspschoolregister/schstaffsearcheduid?id=${staffId}&tokenkey=${environment.token}`
+        `${environment.apiUrl}/kspschoolregister/schstaffsearcheduid?id=${staffId}`
       )
       .pipe(map((data: any) => data.datareturn));
   }
