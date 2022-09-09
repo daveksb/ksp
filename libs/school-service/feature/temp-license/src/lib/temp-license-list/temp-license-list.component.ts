@@ -84,6 +84,15 @@ export class SchoolTempLicenseListComponent implements OnInit {
     }
     return result;
   }
+
+  checkProcess(input: string) {
+    let result = '-';
+    if (input === '1') {
+      result = 'ยื่นเอกสาร';
+    }
+
+    return result;
+  }
 }
 
 export interface TempLicenseInfo {

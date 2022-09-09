@@ -28,6 +28,7 @@
             <input
               class="form-control form-search"
               type="text"
+              value="3002514504741"
               placeholder="หมายเลขบัตรประชาชนจำนวน 13 หลัก"
               #idcard
             />
@@ -143,8 +144,10 @@
           /></ng-container> -->
 
           <ksp-form-hiring-info
-            [positionTypes]="positionTypes$ | async"
             formControlName="hiringInfo"
+            [staffTypes]="staffTypes$ | async"
+            [positionTypes]="positionTypes$ | async"
+            [academicStandingList]="academicTypes$ | async"
           ></ksp-form-hiring-info>
           <br />
           <ksp-form-temp-license-number></ksp-form-temp-license-number>
@@ -176,9 +179,9 @@
     [showCenterButtons]="true"
     [showCancelButton]="true"
     [showTempSaveButton]="true"
-    [disableTempSaveButton]="false"
+    [disableTempSaveButton]="true"
     [showSaveButton]="true"
-    [disableSaveButton]="false"
+    [disableSaveButton]="!form.valid"
     [saveButtonLabel]="'ส่งใบคำขอ'"
   ></ksp-bottom-nav>
 </div>
