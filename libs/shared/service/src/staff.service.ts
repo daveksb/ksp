@@ -1,68 +1,62 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, shareReplay } from 'rxjs';
 import { environment } from '@ksp/shared/environment';
+import { map, Observable, shareReplay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class StaffPersonInfoService {
+export class StaffService {
   constructor(private http: HttpClient) {}
 
-  addStaff2(payload: any, tokenkey: any): Observable<any> {
+  addStaff2(payload: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/kspstaff/schstaff2insert`, {
       ...payload,
-      tokenkey,
     });
   }
 
-  searchStaffFromId(staffId: number, tokenkey: string): Observable<any> {
+  searchStaffFromId(staffId: number): Observable<any> {
     const payload = {
       id: `${staffId}`,
     };
     return this.http.post(`${environment.apiUrl}/kspstaff/schstaff2select`, {
       ...payload,
-      tokenkey,
     });
   }
 
-  searchStaffFromIdCard(payload: any, tokenkey: any): Observable<any> {
+  searchStaffFromIdCard(payload: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspstaff/schstaff2selectidcardno`,
       {
         ...payload,
-        tokenkey,
       }
     );
   }
 
-  searchStaffsFromFilter(payload: any, tokenkey: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/kspstaff/xxxxxxxxxxxxxx`, {
+  searchStaffsFromFilter(payload: any): Observable<any> {
+    return this.http
+      .post(`${environment.apiUrl}/kspstaff/schstaff2selectall`, {
+        ...payload,
+      })
+      .pipe(map((data: any) => data.datareturn));
+  }
+
+  updateStaff2(payload: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/kspstaff/schstaff2update`, {
       ...payload,
-      tokenkey,
     });
   }
 
-  updateStaff(payload: any, tokenkey: any): Observable<any> {
-    return this.http.post(
-      `${environment.apiUrl}/kspschoolregister/schstaffupdate`,
-      {
-        ...payload,
-        tokenkey,
-      }
-    );
-  }
-
-  getStaffUserInfo(staffId: number, tokenkey: any): Observable<any> {
+  getStaffUserInfo(staffId: number): Observable<any> {
     return this.http.get(
-      `${environment.apiUrl}/kspschoolregister/schstaffsearchid?id=${staffId}&tokenkey=${tokenkey}}`
+      `${environment.apiUrl}/kspschoolregister/schstaffsearchid?id=${staffId}}`
     );
   }
 
-  getStaffEdu(staffId: number, tokenkey: any): Observable<any> {
+  getStaffEdu(staffId: number): Observable<any> {
     return this.http
       .get(
-        `${environment.apiUrl}/kspschoolregister/schstaffsearcheduid?id=${staffId}&tokenkey=${tokenkey}`
+        `${environment.apiUrl}/kspschoolregister/schstaffsearcheduid?id=${staffId}`
       )
       .pipe(map((data: any) => data.datareturn));
   }

@@ -14,10 +14,10 @@ export class RequestLicenseService {
       .post(`${environment.apiUrl}/kspstaff/schrequestinsert`, form)
       .pipe(shareReplay());
   }
-  getSchoolInfo(schoolId: string, tokenkey: string) {
+  getSchoolInfo(schoolId: string) {
     return this.http
       .get(
-        `${environment.apiUrl}/kspschoolregister/schschoolsearchschoolid?schoolId=${schoolId}&tokenkey=${tokenkey}`
+        `${environment.apiUrl}/kspschoolregister/schschoolsearchschoolid?schoolId=${schoolId}`
       )
       .pipe(shareReplay());
   }

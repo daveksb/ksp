@@ -9,7 +9,7 @@
   <div class="box-header">ทะเบียนบุคลากรภายในหน่วยงาน</div>
 
   <school-service-staff-search
-    formControlName="staffSearch"
+    formControlName="searchFilter"
     (clear)="clear()"
     (search)="search()"
   ></school-service-staff-search>
@@ -26,7 +26,7 @@
         + เพิ่มบุคลากร
       </button>
       <button
-        (click)="goToDetail()"
+        (click)="searchLicense()"
         class="ms-2 btn text-orange bg-orange bg-opacity-10"
       >
         ค้นหาใบอนุญาต
@@ -97,7 +97,11 @@
         <ng-container matColumnDef="edit">
           <th mat-header-cell *matHeaderCellDef>ดูข้อมูล</th>
           <td mat-cell *matCellDef="let element">
-            <i role="button" class="bi bi-eye text-success fs-5"></i>
+            <i
+              (click)="viewStaff(element.id)"
+              role="button"
+              class="bi bi-eye text-success fs-5"
+            ></i>
           </td>
         </ng-container>
 

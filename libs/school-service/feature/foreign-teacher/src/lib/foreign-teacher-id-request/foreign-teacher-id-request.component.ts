@@ -13,7 +13,6 @@ import {
   GeneralInfoService,
   RequestLicenseService,
 } from '@ksp/shared/service';
-import { getCookie } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 @UntilDestroy()
 @Component({
@@ -47,7 +46,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/', 'temp-license']);
+    this.router.navigate(['/temp-license']);
   }
 
   onConfirmed() {
@@ -88,14 +87,13 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'temp-license', 'list']);
+        this.router.navigate(['/temp-license', 'list']);
       }
     });
   }
   getList() {
-    const tokenkey = getCookie('schUserToken');
     this.requestLicenseService
-      .getSchoolInfo(this.schoolId, tokenkey)
+      .getSchoolInfo(this.schoolId)
       .pipe(untilDestroyed(this))
       .subscribe((res: any) => {
         console.log('school = ', res);
@@ -105,7 +103,6 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     this.visaTypeList$ = this.generalInfoService.getVisaType();
   }
   getDefaultForm() {
-    const tokenkey = getCookie('schUserToken');
     return this.fb.group({
       currentprocess: null,
       requeststatus: null,
@@ -157,7 +154,6 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       ref1: null,
       ref2: null,
       ref3: null,
-      tokenkey,
     });
   }
 }

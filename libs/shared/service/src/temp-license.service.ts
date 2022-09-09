@@ -9,45 +9,35 @@ import { map, Observable, shareReplay } from 'rxjs';
 export class TempLicenseService {
   constructor(private http: HttpClient) {}
 
-  searchStaffFromIdCard(
-    schoolId: string,
-    idCard: string,
-    tokenkey: any
-  ): Observable<any> {
+  searchStaffFromIdCard(schoolId: string, idCard: string): Observable<any> {
     return this.http
       .get(
-        `${environment.apiUrl}/kspschoolregister/schstaffsearchidcardno?idCardNo=${idCard}&schoolId=${schoolId}&tokenkey=${tokenkey}`
+        `${environment.apiUrl}/kspschoolregister/schstaffsearchidcardno?idCardNo=${idCard}&schoolId=${schoolId}`
       )
       .pipe(shareReplay());
   }
 
-  getSchoolInfo(schoolId: string, tokenkey: string) {
+  getSchoolInfo(schoolId: string) {
     return this.http
       .get(
-        `${environment.apiUrl}/kspschoolregister/schschoolsearchschoolid?schoolId=${schoolId}&tokenkey=${tokenkey}`
+        `${environment.apiUrl}/kspschoolregister/schschoolsearchschoolid?schoolId=${schoolId}`
       )
       .pipe(shareReplay());
   }
 
-  searchRequest(payload: any, tokenkey: any): Observable<any> {
+  searchRequest(payload: any): Observable<any> {
     return this.http
       .post(
         `${environment.apiUrl}/kspschoolregister/schtmplicencerequestselect`,
-        {
-          ...payload,
-          tokenkey,
-        }
+        payload
       )
       .pipe(map((data: any) => data.datareturn));
   }
 
-  addTempLicense(payload: any, tokenkey: any): Observable<any> {
+  addTempLicense(payload: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspschoolregister/schtmplicencerequestinsert`,
-      {
-        ...payload,
-        tokenkey,
-      }
+      payload
     );
   }
 
