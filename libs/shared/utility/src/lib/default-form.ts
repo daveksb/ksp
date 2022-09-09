@@ -102,6 +102,3 @@ export function createDefaultRequestForm(FormBuilder: any) {
     ref3: null,
   });
 }
-export function gotest() {
-  return 'Test';
-}

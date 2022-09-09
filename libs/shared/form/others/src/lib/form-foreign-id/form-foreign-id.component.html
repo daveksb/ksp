@@ -17,7 +17,7 @@
           class="form-control"
           type="text"
           placeholder="กรุณากรอกชื่อภาษาอังกฤษ"
-          formControlName="nameEn"
+          formControlName="firstNameEn"
         />
       </div>
       <div class="col">
@@ -26,7 +26,7 @@
           class="form-control"
           type="text"
           placeholder="กรุณากรอกชื่อกลางภาษาอังกฤษ"
-          formControlName="midnameEn"
+          formControlName="middleNameEn"
         />
       </div>
       <div class="col">
@@ -35,7 +35,7 @@
           class="form-control"
           type="text"
           placeholder="กรุณากรอกนามสกุลภาษาอังกฤษ"
-          formControlName="lastnameEn"
+          formControlName="lastNameEn"
         />
       </div>
     </div>
@@ -55,7 +55,7 @@
           class="form-control"
           type="text"
           placeholder="กรุณากรอกชื่อภาษาไทย"
-          formControlName="nameTh"
+          formControlName="firstNameTh"
         />
       </div>
       <div class="col">
@@ -64,7 +64,7 @@
           class="form-control"
           type="text"
           placeholder="กรุณากรอกชื่อกลางภาษาไทย"
-          formControlName="midnameTh"
+          formControlName="middleNameTh"
         />
       </div>
 
@@ -74,7 +74,7 @@
           class="form-control"
           type="text"
           placeholder="กรุณากรอกนามสกุลภาษาไทย"
-          formControlName="lastnameTh"
+          formControlName="lastNameTh"
         />
       </div>
     </div>
@@ -111,11 +111,7 @@
         <label class="form-label"
           >หมายเลขหนังสือเดินทาง (Passport Number)</label
         >
-        <input
-          class="form-control"
-          type="text"
-          formControlName="passportNumber"
-        />
+        <input class="form-control" type="text" formControlName="passportNo" />
       </div>
       <div class="col">
         <label class="form-label">ประเทศ</label>
@@ -134,7 +130,7 @@
         <input
           class="form-control"
           type="date"
-          formControlName="passportRelease"
+          formControlName="passportStartDate"
         />
       </div>
       <div class="col-6">
@@ -142,7 +138,7 @@
         <input
           class="form-control"
           type="date"
-          formControlName="passportExpire"
+          formControlName="passportEndDate"
         />
       </div>
     </div>
