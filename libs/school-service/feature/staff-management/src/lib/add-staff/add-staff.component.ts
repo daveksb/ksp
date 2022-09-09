@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Event, Router } from '@angular/router';
 import {
   AddressService,
@@ -7,13 +7,18 @@ import {
   StaffService,
 } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
-import { replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
+import {
+  mapJsonData,
+  replaceEmptyWithNull,
+  thaiDate,
+} from '@ksp/shared/utility';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { levels, subjects } from '@ksp/shared/constant';
 
 @UntilDestroy()
 @Component({
@@ -72,6 +77,42 @@ export class AddStaffComponent implements OnInit {
       });
   }
 
+  get teachingInfo() {
+    return this.form.controls.teachingInfo as FormControl<any>;
+  }
+
+  pathTeachingInfo(res: any) {
+    const t = JSON.parse(res.teachingLevel);
+    const teachingLevel = levels.map((level, i) => {
+      if (t.includes(level.value)) {
+        return level.value;
+      } else {
+        return false;
+      }
+    });
+
+    const s = JSON.parse(res.teachingSubjects);
+    const teachingSubjects = subjects.map((subj, i) => {
+      if (s.includes(subj.value)) {
+        return subj.value;
+      } else {
+        return false;
+      }
+    });
+
+    const data = {
+      ...res,
+      teachingLevel,
+      teachingSubjects,
+    };
+
+    this.form.controls.teachingInfo.patchValue(data);
+  }
+
+  pathHiringInfo(data: any) {
+    this.form.controls.hiringInfo.patchValue(data);
+  }
+
   checkMode() {
     this.router.events.pipe(untilDestroyed(this)).subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
@@ -96,6 +137,8 @@ export class AddStaffComponent implements OnInit {
         this.pathUserInfo(res);
         this.patchAddress(JSON.parse(atob(res.addresses)));
         this.patchEdu(JSON.parse(atob(res.educations)));
+        this.pathTeachingInfo(JSON.parse(atob(res.teachinginfo)));
+        this.pathHiringInfo(JSON.parse(atob(res.hiringinfo)));
       });
   }
 
@@ -109,18 +152,19 @@ export class AddStaffComponent implements OnInit {
 
   insertStaff() {
     const formData: any = this.form.getRawValue();
-    formData.userInfo.schoolId = this.schoolId;
-    formData.userInfo.createDate = new Date().toISOString().split('.')[0];
     formData.addr1.addressType = 1;
     formData.addr2.addressType = 2;
+
     const { id, ...userInfo } = formData.userInfo;
+    userInfo.schoolId = this.schoolId;
+    userInfo.createDate = new Date().toISOString().split('.')[0];
 
     const payload = {
       ...userInfo,
       ...{ addresses: JSON.stringify([formData.addr1, formData.addr2]) },
       ...{ educations: JSON.stringify([formData.edu1, formData.edu2]) },
-      ...{ teachingInfo: JSON.stringify(formData.teachingInfo) },
-      ...{ hiringInfo: JSON.stringify(formData.hiringInfo) },
+      ...{ teachinginfo: JSON.stringify(formData.teachingInfo) },
+      ...{ hiringinfo: JSON.stringify(formData.hiringInfo) },
     };
 
     //console.log('insert payload = ', payload);
@@ -135,18 +179,33 @@ export class AddStaffComponent implements OnInit {
     const formData: any = this.form.getRawValue();
     //console.log('formData = ', formData);
     const { ...userInfo } = replaceEmptyWithNull(formData.userInfo);
+    userInfo.schoolId = this.schoolId;
+    //console.log('form teaching = ', this.form.controls.teachingInfo.value);
+
+    const teaching: any = this.form.controls.teachingInfo.value;
+
+    const teachingLevel = mapJsonData(teaching.teachingLevel, levels);
+    const teachingSubjects = mapJsonData(teaching.teachingSubjects, subjects);
+
+    const teachingInfo = {
+      teachingLevel,
+      teachingSubjects,
+      teachingSubjectOther: teaching.teachingSubjectOther?.value || null,
+    };
 
     const payload = {
       ...userInfo,
       ...{ addresses: JSON.stringify([formData.addr1, formData.addr2]) },
       ...{ educations: JSON.stringify([formData.edu1, formData.edu2]) },
-      ...{ teachingInfo: JSON.stringify(formData.teachingInfo) },
-      ...{ hiringInfo: JSON.stringify(formData.hiringInfo) },
+      ...{
+        teachinginfo: JSON.stringify(teachingInfo),
+      },
+      ...{ hiringinfo: JSON.stringify(formData.hiringInfo) },
     };
 
     console.log('update payload = ', payload);
     this.staffService.updateStaff2(payload).subscribe((res) => {
-      //console.log('update result = ', res);
+      console.log('update result = ', res);
     });
   }
 

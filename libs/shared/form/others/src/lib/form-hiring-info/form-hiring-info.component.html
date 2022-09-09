@@ -4,7 +4,7 @@
 
     <div class="row mb-3" [ngClass]="{ hide: displayMode === 'request' }">
       <div class="col-6">
-        <label class="form-label">ประเภทบุคลากร</label>
+        <label class="form-label required">ประเภทบุคลากร</label>
         <select class="form-select" formControlName="psersonType">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let t of staffTypes" [value]="t?.id">
@@ -16,7 +16,7 @@
 
     <div class="row mb-3">
       <div class="col">
-        <label class="form-label">ตำแหน่ง</label>
+        <label class="form-label required">ตำแหน่ง</label>
         <select class="form-select" formControlName="position">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let p of positionTypes" [value]="p?.id">
@@ -25,10 +25,10 @@
         </select>
       </div>
       <div class="col" [ngClass]="{ hide: displayMode === 'request' }">
-        <label class="form-label">วิทยฐานะ</label>
+        <label class="form-label required">วิทยฐานะ</label>
         <select class="form-select" formControlName="academicStanding">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option *ngFor="let p of positionTypes" [value]="p?.id">
+          <option *ngFor="let p of academicStandingList" [value]="p?.id">
             {{ p?.name }}
           </option>
         </select>

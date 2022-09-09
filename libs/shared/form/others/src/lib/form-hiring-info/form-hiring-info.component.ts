@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -17,9 +17,9 @@ export class FormHiringInfoComponent extends KspFormBaseComponent {
 
   status = status;
   override form = this.fb.group({
-    psersonType: [],
-    position: [],
-    academicStanding: [],
+    psersonType: [null, Validators.required],
+    position: [null, Validators.required],
+    academicStanding: [null, Validators.required],
     hiringContractNo: [],
     startDate: [],
     endDate: [],
