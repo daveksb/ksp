@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Event, Router } from '@angular/router';
 import {
   AddressService,
@@ -9,6 +9,7 @@ import {
 import { Observable } from 'rxjs';
 import {
   mapJsonData,
+  parseJson,
   replaceEmptyWithNull,
   thaiDate,
 } from '@ksp/shared/utility';
@@ -90,7 +91,6 @@ export class AddStaffComponent implements OnInit {
         return false;
       }
     });
-
     const s = JSON.parse(res.teachingSubjects);
     const teachingSubjects = subjects.map((subj, i) => {
       if (s.includes(subj.value)) {
@@ -99,13 +99,11 @@ export class AddStaffComponent implements OnInit {
         return false;
       }
     });
-
     const data = {
       ...res,
       teachingLevel,
       teachingSubjects,
     };
-
     this.form.controls.teachingInfo.patchValue(data);
   }
 
@@ -133,12 +131,11 @@ export class AddStaffComponent implements OnInit {
       .searchStaffFromId(staffId)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
-        //console.log('staff 2 data = ', res);
         this.pathUserInfo(res);
-        this.patchAddress(JSON.parse(atob(res.addresses)));
-        this.patchEdu(JSON.parse(atob(res.educations)));
-        this.pathTeachingInfo(JSON.parse(atob(res.teachinginfo)));
-        this.pathHiringInfo(JSON.parse(atob(res.hiringinfo)));
+        this.patchAddress(parseJson(res.addresses));
+        this.patchEdu(parseJson(res.educations));
+        this.pathTeachingInfo(parseJson(res.teachinginfo));
+        this.pathHiringInfo(parseJson(res.hiringinfo));
       });
   }
 
@@ -169,7 +166,7 @@ export class AddStaffComponent implements OnInit {
 
     //console.log('insert payload = ', payload);
     this.staffService.addStaff2(payload).subscribe((res) => {
-      console.log('add staff result = ', res);
+      //console.log('add staff result = ', res);
       this.onCompleted();
       this.form.reset();
     });
@@ -177,20 +174,15 @@ export class AddStaffComponent implements OnInit {
 
   updateStaff() {
     const formData: any = this.form.getRawValue();
-    //console.log('formData = ', formData);
     const { ...userInfo } = replaceEmptyWithNull(formData.userInfo);
     userInfo.schoolId = this.schoolId;
-    //console.log('form teaching = ', this.form.controls.teachingInfo.value);
-
     const teaching: any = this.form.controls.teachingInfo.value;
-
     const teachingLevel = mapJsonData(teaching.teachingLevel, levels);
     const teachingSubjects = mapJsonData(teaching.teachingSubjects, subjects);
-
     const teachingInfo = {
       teachingLevel,
       teachingSubjects,
-      teachingSubjectOther: teaching.teachingSubjectOther?.value || null,
+      teachingSubjectOther: teaching.teachingSubjectOther || null,
     };
 
     const payload = {
@@ -203,9 +195,9 @@ export class AddStaffComponent implements OnInit {
       ...{ hiringinfo: JSON.stringify(formData.hiringInfo) },
     };
 
-    console.log('update payload = ', payload);
+    //console.log('update payload = ', payload);
     this.staffService.updateStaff2(payload).subscribe((res) => {
-      console.log('update result = ', res);
+      //console.log('update result = ', res);
     });
   }
 
