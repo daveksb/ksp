@@ -118,7 +118,7 @@ export class AddStaffComponent implements OnInit {
       ...{ addresses: JSON.stringify([formData.addr1, formData.addr2]) },
       ...{ educations: JSON.stringify([formData.edu1, formData.edu2]) },
       ...{ teachingInfo: JSON.stringify(formData.teachingInfo) },
-      ...{ hiringInfo: JSON.stringify(formData.workingInfo) },
+      ...{ hiringInfo: JSON.stringify(formData.hiringInfo) },
     };
 
     console.log('insert payload = ', payload);
@@ -130,6 +130,26 @@ export class AddStaffComponent implements OnInit {
   }
 
   updateStaff() {
+    const formData: any = this.form.getRawValue();
+    console.log('formData = ', formData);
+
+    formData.userInfo.schoolId = this.schoolId;
+    formData.addr1.addressType = 1;
+    formData.addr2.addressType = 2;
+    const { ...userInfo } = formData.userInfo;
+
+    const payload = {
+      ...userInfo,
+      ...{ addresses: JSON.stringify([formData.addr1, formData.addr2]) },
+      ...{ educations: JSON.stringify([formData.edu1, formData.edu2]) },
+      ...{ teachingInfo: JSON.stringify(formData.teachingInfo) },
+      ...{ hiringInfo: JSON.stringify(formData.hiringInfo) },
+    };
+
+    console.log('update payload = ', payload);
+    this.staffService.updateStaff2(payload).subscribe((res) => {
+      console.log('update result = ', res);
+    });
     //
   }
   /*   updateStaff() {

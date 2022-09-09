@@ -45,14 +45,11 @@ export class StaffService {
       .pipe(map((data: any) => data.datareturn));
   }
 
-  updateStaff(payload: any): Observable<any> {
-    return this.http.post(
-      `${environment.apiUrl}/kspschoolregister/schstaffupdate`,
-      {
-        ...payload,
-        tokenkey: environment.token,
-      }
-    );
+  updateStaff2(payload: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/kspstaff/schstaff2update`, {
+      ...payload,
+      tokenkey: environment.token,
+    });
   }
 
   getStaffUserInfo(staffId: number): Observable<any> {
