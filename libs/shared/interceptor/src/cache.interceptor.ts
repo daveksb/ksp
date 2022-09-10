@@ -9,21 +9,26 @@ import {
 import { from, map, Observable, of, switchMap } from 'rxjs';
 import * as localForage from 'localforage';
 import * as moment from 'moment';
+import { environment } from '@ksp/shared/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CacheInterceptor implements HttpInterceptor {
   // cache data to indexedDB via LocalForage
-  // cache will be cleared every 2 hrs
-  private cacheTime = 120;
+  // cache will be cleared every 3 hrs
+  private cacheTime = 180;
 
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     //const url = request.url.replace('https://', '').replace(/[^0-9a-z]/g, '');
-    const url = request.url.replace('https://', '');
+    const url = request.url.replace(environment.apiUrl, '');
+
+    if (request.method !== 'GET') {
+      return next.handle(request);
+    }
 
     return from(localForage.keys()).pipe(
       switchMap((keys) => this.getFromCache(keys, url)),
