@@ -69,6 +69,9 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
         switchMap((res) => {
           if (res) {
             //call API
+            // this.getFormValidationErrors();
+            console.log(this.form.controls['foreignTeacher']);
+            if (!this.form.valid) return EMPTY;
             const rawUserInfo = this.form.value.foreignTeacher as any;
             const userInfo = Object.keys(rawUserInfo).reduce(
               (destination: any, key) => {
@@ -124,5 +127,18 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     this.countries$ = this.addressService.getCountry();
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.visaTypeList$ = this.generalInfoService.getVisaType();
+  }
+  getFormValidationErrors() {
+    Object.keys(this.form.controls).forEach((key) => {
+      const controlErrors = this.form.get(key)?.errors;
+      if (controlErrors != null) {
+        Object.keys(controlErrors).forEach((keyError) => {
+          console.log(
+            'Key control: ' + key + ', keyError: ' + keyError + ', err value: ',
+            controlErrors[keyError]
+          );
+        });
+      }
+    });
   }
 }
