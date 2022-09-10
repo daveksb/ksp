@@ -237,6 +237,27 @@
     </div>
   </div>
 
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <label class="form-label required">ตำแหน่ง</label>
+      <input class="form-control" type="email" [class.bg-light]="isDarkMode" />
+    </div>
+    <div class="col-6">
+      <label class="form-label required">อีเมล</label>
+      <input
+        class="form-control"
+        type="email"
+        [class.bg-light]="isDarkMode"
+        formControlName="email"
+      />
+      <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
+        <span class="text-danger" *ngIf="email.errors?.['email']">{{
+          validatorMessages.email
+        }}</span>
+      </ng-container>
+    </div>
+  </div>
+
   <div class="row mb-2" *ngIf="!foreignMode">
     <div class="col-md-6">
       <label class="form-label required">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
@@ -274,63 +295,42 @@
     </div>
   </div>
 
-  <div class="row mb-2" *ngIf="!foreignMode">
-    <div class="col-6">
-      <label class="form-label required">อีเมล</label>
-      <input
-        class="form-control"
-        type="email"
-        [class.bg-light]="isDarkMode"
-        formControlName="email"
-      />
-      <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
-        <span class="text-danger" *ngIf="email.errors?.['email']">{{
-          validatorMessages.email
-        }}</span>
-      </ng-container>
-    </div>
-    <div class="col-md-6" [ngClass]="{ hide: !foreignMode }">
-      <label class="form-label required">ตำแหน่ง</label>
-      <input class="form-control" type="email" [class.bg-light]="isDarkMode" />
-    </div>
-  </div>
+  <!-- <div class="row mb-2" [ngClass]="{ hide: !foreignMode }">
+      <div class="col">
+        <label class="form-label">Visa Class </label>
+        <select
+          class="form-select"
+          [class.bg-white]="!isDarkMode && mode === 'edit'"
+          formControlName="visaclass"
+        >
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
 
-  <div class="row mb-2" [ngClass]="{ hide: !foreignMode }">
-    <div class="col">
-      <label class="form-label">Visa Class </label>
-      <select
-        class="form-select"
-        [class.bg-white]="!isDarkMode && mode === 'edit'"
-        formControlName="visaclass"
-      >
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
+      <div class="col">
+        <label class="form-label">ประเภทวีซ่า </label>
+        <select
+          class="form-select"
+          [class.bg-white]="!isDarkMode && mode === 'edit'"
+          formControlName="visatype"
+        >
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
     </div>
 
-    <div class="col">
-      <label class="form-label">ประเภทวีซ่า </label>
-      <select
-        class="form-select"
-        [class.bg-white]="!isDarkMode && mode === 'edit'"
-        formControlName="visatype"
-      >
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="row mb-2" [ngClass]="{ hide: !foreignMode }">
-    <div class="col-6">
-      <label class="form-label">อนุญาตถึงวันที่ </label>
-      <input formControlName="visaenddate" class="form-control" type="date" />
-    </div>
-  </div>
+    <div class="row mb-2" [ngClass]="{ hide: !foreignMode }">
+      <div class="col-6">
+        <label class="form-label">อนุญาตถึงวันที่ </label>
+        <input formControlName="visaenddate" class="form-control" type="date" />
+      </div>
+    </div> -->
 
   <div class="row mb-2" *ngIf="qualificationMode">
     <div class="col-6">
@@ -344,20 +344,4 @@
       </select>
     </div>
   </div>
-
-  <!--   <div class="row mb-2" *ngIf="showNationalityInput">
-    <div class="col-6">
-      <label class="form-label">สัญชาติ</label>
-      <select
-        class="form-select"
-        formControlName="nationality"
-        [class.bg-white]="!isDarkMode && mode === 'edit'"
-      >
-        <option value="null" selected hidden disabled>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-  </div> -->
 </form>

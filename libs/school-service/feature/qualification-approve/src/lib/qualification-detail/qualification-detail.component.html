@@ -22,7 +22,9 @@
           <div class="box-header text-primary">รายละเอียดข้อมูล</div>
 
           <ksp-form-user-info
+            formControlName="userInfo"
             [isDarkMode]="false"
+            [prefixList]="prefixList$ | async"
             formControlName="userInfo"
             [qualificationMode]="true"
           ></ksp-form-user-info>
@@ -32,10 +34,22 @@
       <div class="full-width pb-2">
         <mat-tab-group class="tab-group mt-3" selectedIndex="0">
           <mat-tab label="ที่อยู่" class="tab-content">
-            <ksp-form-address formControlName="address1"
+            <ksp-form-address
+              formControlName="addr1"
+              [provinces]="provinces1$ | async"
+              [amphurs]="amphurs1$ | async"
+              [tumbols]="tumbols1$ | async"
+              (provinceChanged)="provinceChanged(1, $event)"
+              (amphurChanged)="amphurChanged(1, $event)"
               >ที่อยู่ทะเบียนบ้าน</ksp-form-address
             ><br />
-            <ksp-form-address formControlName="address2"
+            <ksp-form-address
+              formControlName="addr2"
+              [provinces]="provinces2$ | async"
+              [amphurs]="amphurs2$ | async"
+              [tumbols]="tumbols2$ | async"
+              (provinceChanged)="provinceChanged(2, $event)"
+              (amphurChanged)="amphurChanged(2, $event)"
               >ที่อยู่ที่ติดต่อได้สะดวก
               <div class="d-flex align-items-center">
                 <input
@@ -54,6 +68,7 @@
               [showSelectDegree]="false"
               [showGradeInput]="true"
               [showGraduateYearInput]="true"
+              [countries]="countries$ | async"
               ><input
                 type="checkbox"
                 class="me-2"
@@ -64,6 +79,7 @@
               [showSelectDegree]="false"
               [showGradeInput]="false"
               [showGraduateYearInput]="true"
+              [countries]="countries$ | async"
               ><input
                 type="checkbox"
                 class="me-2"
@@ -74,6 +90,7 @@
               [showSelectDegree]="false"
               [showGradeInput]="false"
               [showGraduateYearInput]="true"
+              [countries]="countries$ | async"
               ><input
                 type="checkbox"
                 class="me-2"
@@ -84,6 +101,7 @@
               [showSelectDegree]="false"
               [showGradeInput]="false"
               [showGraduateYearInput]="true"
+              [countries]="countries$ | async"
               ><input
                 type="checkbox"
                 class="me-2"
