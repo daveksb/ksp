@@ -123,7 +123,7 @@ export class TempLicenseRequestComponent implements OnInit {
       ...{ teachinginfo: JSON.stringify(formData.teachingInfo) },
     };
 
-    //console.log('payload = ', payload);
+    // console.log('payload = ', payload);
     baseForm.patchValue(payload);
     //console.log('current form = ', baseForm.value);
     this.requestLicenseService.requestLicense(payload).subscribe((res) => {

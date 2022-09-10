@@ -1,14 +1,5 @@
 import { Component, Input } from '@angular/core';
-
-export interface MenuConfig {
-  icon?: string;
-  label: string;
-  path: string;
-  params?: any;
-  subMenu?: MenuConfig[];
-  subMenuName?: string;
-  isExpanded?: boolean;
-}
+import { MenuConfig } from '@ksp/shared/interface';
 
 @Component({
   selector: 'ksp-side-menu',

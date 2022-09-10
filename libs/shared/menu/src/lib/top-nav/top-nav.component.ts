@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SchoolServiceFeatureLoginService } from '@ksp/school-service/feature/login';
+import { deleteCookie, getCookie, thaiDate } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-top-nav',
@@ -11,13 +13,15 @@ import { Router } from '@angular/router';
   imports: [CommonModule],
 })
 export class TopNavComponent {
-  constructor(private router: Router) {}
-
+  today = thaiDate(new Date());
+  firstName = getCookie('firstName');
+  lastName = getCookie('lastName');
+  constructor(
+    private router: Router,
+    private schoolServiceFeatureLoginService: SchoolServiceFeatureLoginService
+  ) {}
   logout() {
     deleteCookie('schUserToken');
     this.router.navigate(['/']);
   }
-}
-function deleteCookie(name: string) {
-  document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/';
 }

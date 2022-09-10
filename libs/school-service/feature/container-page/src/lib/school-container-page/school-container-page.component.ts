@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuConfig } from '@ksp/shared/menu';
+import { MenuConfig } from '@ksp/shared/interface';
 
 @Component({
   selector: 'school-container-page',

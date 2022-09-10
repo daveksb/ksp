@@ -15,9 +15,9 @@
         <ng-content select="[detail]"></ng-content>
       </span>
     </div>
-    <div class="user__info">
-      <div (click)="logout()" class="user__name">จิราภรณ์ รักไทรทอง</div>
-      <div class="login__time">เข้าใช้งานเมื่อวันที่ 1 มกราคม 2565</div>
+    <div (click)="logout()" class="user__info">
+      <div class="user__name">{{ firstName }} {{ lastName }}</div>
+      <div class="login__time">เข้าใช้งานเมื่อวันที่ {{ today }}</div>
     </div>
   </div>
 </nav>

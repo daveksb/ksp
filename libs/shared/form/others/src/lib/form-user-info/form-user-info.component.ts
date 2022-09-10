@@ -2,11 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import {
-  idCardPattern,
-  nameEnPattern,
-  nameThPattern,
-  passportPattern,
-  phonePattern,
+  createDefaultUserForm,
   providerFactory,
   validatorMessages,
 } from '@ksp/shared/utility';
@@ -33,52 +29,13 @@ export class FormUserInfoComponent extends KspFormBaseComponent {
    * Use in E-service, School-Service
    */
 
-  override form = this.fb.group({
-    id: [],
-    idCardNo: [null, [Validators.required, Validators.pattern(idCardPattern)]],
-    passportNo: [null, [Validators.pattern(passportPattern)]],
-    passportStartDate: [],
-    passportEndDate: [],
-    prefixTh: [null, Validators.required],
-    firstNameTh: [
-      null,
-      [Validators.required, Validators.pattern(nameThPattern)],
-    ],
-    middleNameTh: [],
-    lastNameTh: [
-      null,
-      [Validators.required, Validators.pattern(nameThPattern)],
-    ],
-    prefixEn: [null, Validators.required],
-    firstNameEn: [
-      null,
-      [Validators.required, Validators.pattern(nameEnPattern)],
-    ],
-    middleNameEn: [null],
-    lastNameEn: [
-      null,
-      [Validators.required, Validators.pattern(nameEnPattern)],
-    ],
-    sex: [null, Validators.required],
-    birthDate: [null, Validators.required],
-    email: [null, [Validators.required, Validators.email]],
-    contactPhone: [
-      null,
-      [Validators.required, Validators.pattern(phonePattern)],
-    ],
-    workPhone: [null, [Validators.required, Validators.pattern(phonePattern)]],
-    nationality: ['TH'],
-    country: [],
-    visatype: [],
-    visaclass: [],
-    visaenddate: [],
-  });
+  override form = createDefaultUserForm(this.fb, Validators);
 
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
-      this.form?.valueChanges.subscribe((value) => {
+      this.form?.valueChanges.subscribe((value: any) => {
         this.onChange(value);
         this.onTouched();
       })
