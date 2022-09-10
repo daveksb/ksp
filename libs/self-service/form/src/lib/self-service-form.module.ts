@@ -33,6 +33,10 @@ import { ForeignStepTwoTabTwoComponent } from './foreign-step-two-tab-two/foreig
 import { ForeignStepTwoTabThreeComponent } from './foreign-step-two-tab-three/foreign-step-two-tab-three.component';
 import { ForeignStepTwoTabFourComponent } from './foreign-step-two-tab-four/foreign-step-two-tab-four.component';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
+import { TransferKnowledgeInfoComponent } from './transfer-knowledge-info/transfer-knowledge-info.component';
+import { AddRowButtonComponent } from '@ksp/shared/ui';
+import { TransferKnowledgeEducationComponent } from './transfer-knowledge-education/transfer-knowledge-education.component';
+import { SchoolServiceFormActivityModule } from '@ksp/school-service/form/activity';
 
 @NgModule({
   imports: [
@@ -55,7 +59,8 @@ import { FileUploadComponent } from '@ksp/shared/form/file-upload';
     ForeignStepTwoTabThreeComponent,
     ForeignStepTwoTabFourComponent,
     FileUploadComponent,
-
+    AddRowButtonComponent,
+    SchoolServiceFormActivityModule
   ],
   declarations: [
     FormUserEducationComponent,
@@ -73,6 +78,8 @@ import { FileUploadComponent } from '@ksp/shared/form/file-upload';
     ForeignLicenseStepTwoComponent,
     ForeignLicenseStepThreeComponent,
     ForeignLicenseStepFourComponent,
+    TransferKnowledgeInfoComponent,
+    TransferKnowledgeEducationComponent,
   ],
   exports: [
     FormUserEducationComponent,
@@ -90,6 +97,8 @@ import { FileUploadComponent } from '@ksp/shared/form/file-upload';
     ForeignLicenseStepTwoComponent,
     ForeignLicenseStepThreeComponent,
     ForeignLicenseStepFourComponent,
+    TransferKnowledgeInfoComponent,
+    TransferKnowledgeEducationComponent,
   ],
 })
 export class SelfServiceFormModule {}

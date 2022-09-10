@@ -56,10 +56,24 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'transfer-knowledge',
+    loadChildren: () =>
+      import('@ksp/self-service/feature/transfer-knowledge').then(
+        (m) => m.SelfServiceFeatureTransferKnowledgeModule
+      ),
+  },
+  {
     path: 'reward',
     loadChildren: () =>
       import('@ksp/self-service/feature/reward').then(
         (m) => m.SelfServiceFeatureRewardModule
+      ),
+  },
+  {
+    path: 'compare-knowledge',
+    loadChildren: () =>
+      import('@ksp/self-service/feature/compare-knowledge').then(
+        (m) => m.SelfServiceFeatureCompareKnowledgeModule
       ),
   },
   {

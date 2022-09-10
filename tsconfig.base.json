@@ -121,6 +121,9 @@
       "@ksp/school-service/ui/staff-search": [
         "libs/school-service/ui/staff-search/src/index.ts"
       ],
+      "@ksp/self-service/feature/compare-knowledge": [
+        "libs/self-service/feature/compare-knowledge/src/index.ts"
+      ],
       "@ksp/self-service/feature/home": [
         "libs/self-service/feature/home/src/index.ts"
       ],
@@ -156,6 +159,9 @@
       ],
       "@ksp/self-service/feature/substitute-license": [
         "libs/self-service/feature/substitute-license/src/index.ts"
+      ],
+      "@ksp/self-service/feature/transfer-knowledge": [
+        "libs/self-service/feature/transfer-knowledge/src/index.ts"
       ],
       "@ksp/self-service/form": ["libs/self-service/form/src/index.ts"],
       "@ksp/self-service/ui": ["libs/self-service/ui/src/index.ts"],

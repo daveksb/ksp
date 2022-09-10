@@ -6,3 +6,10 @@
   border-radius: 50%;
   display: inline-block;
 }
+
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+  width: fit-content;
+}

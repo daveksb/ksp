@@ -33,21 +33,21 @@ export const menu: MenuConfig[] = [
         label: 'ขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
         path: 'renew-license/request',
       },
-      {
+      /* {
         label: 'ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ',
         path: 'license/edit',
-      },
+      }, */
       {
         label: 'ขอใบแทนใบอนุญาตประกอบวิชาชีพ',
         path: 'substitute-license/request',
       },
       {
         label: 'ขอหนังสือรับรองความรู้',
-        path: 'license/xxx',
+        path: 'transfer-knowledge/request',
       },
       {
         label: 'ขอยื่นเทียบเคียงความรู้',
-        path: 'license/xxx',
+        path: 'compare-knowledge/request',
       },
       {
         label: 'ขอคืนเงินค่าธรรมเนียม',
@@ -72,7 +72,7 @@ export const menu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/reward.svg',
     label: 'รางวัลของฉัน',
-    path: 'xxx',
+    path: 'reward/request',
   },
   {
     icon: 'assets/images/icon-sidenav/people.svg',
@@ -85,25 +85,30 @@ export const menu: MenuConfig[] = [
         path: 'my-info/person-info',
       },
       {
+        label: 'ที่อยู่',
+        path: 'my-info/address-info',
+      },
+      {
         label: 'สถานที่ทำงาน',
-        path: 'my-info/xxx',
+        path: 'my-info/workplace-info',
       },
       {
         label: 'ข้อมูลการศึกษา',
-        path: 'my-info/xxx',
+        path: 'my-info/education-info',
       },
       {
         label: 'ข้อมูลประสบการณ์วิชาชีพ',
-        path: 'my-info/xxx',
+        path: 'my-info/profession-experience',
       },
       {
         label: 'ข้อมูลผลการประเมินสมรรถนะ',
         path: 'my-info/performance-result',
       },
-      {
-        label: 'ประวัติการชำระเงินและใบเสร็จรับเงิน',
-        path: 'my-info/payment-history',
-      },
     ],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'ประวัติการชำระเงินและใบเสร็จรับเงิน',
+    path: 'my-info/payment-history',
   },
 ];
