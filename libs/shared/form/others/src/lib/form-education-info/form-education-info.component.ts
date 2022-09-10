@@ -33,6 +33,7 @@ export class FormEducationInfoComponent
   @Input() showSelectDegree = false;
   @Input() showGraduateYearInput = false;
   @Input() countries: any[] = [];
+  @Input() showCheckbox = true;
 
   /*   _defualtDegree = 0;
   @Input()

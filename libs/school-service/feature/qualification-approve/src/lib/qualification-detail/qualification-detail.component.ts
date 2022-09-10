@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -24,11 +24,10 @@ export class QualificationDetailComponent implements OnInit {
     userInfo: [],
     addr1: [],
     addr2: [],
-    education1: [],
-    education2: [],
-    education3: [],
-    education4: [],
+    education: [],
+    reasoninfo: [],
   });
+  requestNumber = '';
   prefixList$!: Observable<any>;
   provinces1$!: Observable<any>;
   provinces2$!: Observable<any>;
@@ -85,17 +84,17 @@ export class QualificationDetailComponent implements OnInit {
       QualificationApproveDetailComponent,
       {
         width: '850px',
+        data: this.form.get('education')?.value,
       }
     );
-
-    confirmDialog.componentInstance.confirmed.subscribe((res) => {
+    confirmDialog.afterClosed().subscribe((res: any) => {
       if (res) {
-        this.saved();
+        this.saved(res);
       }
     });
   }
 
-  saved() {
+  saved(reasonForm: any) {
     const completeDialog = this.dialog.open(
       QualificationApprovePersonComponent,
       {
@@ -103,14 +102,15 @@ export class QualificationDetailComponent implements OnInit {
       }
     );
 
-    completeDialog.componentInstance.completed.subscribe((res) => {
+    completeDialog.afterClosed().subscribe((res) => {
       if (res) {
-        this.onConfirmed();
+        this.onConfirmed(reasonForm, res);
       }
     });
   }
 
-  onConfirmed() {
+  onConfirmed(reasonForm: any, refPersonForm: any) {
+    console.log(refPersonForm, refPersonForm);
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -119,7 +119,11 @@ export class QualificationDetailComponent implements OnInit {
     });
 
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
+      console.log(res);
       if (res) {
+        //eduInfo otherReason addressinfo refPerson
+        console.log(reasonForm);
+        console.log(refPersonForm);
         console.log(this.form.value);
         this.onCompleted();
       }

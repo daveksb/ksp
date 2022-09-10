@@ -13,8 +13,8 @@
     <div class="bg-white py-3 px-4">
       <div>
         <ksp-request-header-info
-          [requestDate]="'10 ตุลาคม 2565'"
-          [requestNumber]="'112234467876545'"
+          [requestDate]="requestDate"
+          [requestNumber]="requestNumber"
         ></ksp-request-header-info>
         <hr />
 
@@ -64,49 +64,13 @@
 
           <mat-tab label="ข้อมูลทางการศึกษา">
             <ksp-form-education-info
-              formControlName="education1"
-              [showSelectDegree]="false"
+              formControlName="education"
+              [showSelectDegree]="true"
               [showGradeInput]="true"
               [showGraduateYearInput]="true"
+              [showCheckbox]="false"
               [countries]="countries$ | async"
-              ><input
-                type="checkbox"
-                class="me-2"
-              />วุฒิการศึกษาปริญญาตรี</ksp-form-education-info
-            ><br />
-            <ksp-form-education-info
-              formControlName="education2"
-              [showSelectDegree]="false"
-              [showGradeInput]="false"
-              [showGraduateYearInput]="true"
-              [countries]="countries$ | async"
-              ><input
-                type="checkbox"
-                class="me-2"
-              />วุฒิการศึกษาปริญญาโท</ksp-form-education-info
-            ><br />
-            <ksp-form-education-info
-              formControlName="education3"
-              [showSelectDegree]="false"
-              [showGradeInput]="false"
-              [showGraduateYearInput]="true"
-              [countries]="countries$ | async"
-              ><input
-                type="checkbox"
-                class="me-2"
-              />วุฒิการศึกษาปริญญาเอก</ksp-form-education-info
-            ><br />
-            <ksp-form-education-info
-              formControlName="education4"
-              [showSelectDegree]="false"
-              [showGradeInput]="false"
-              [showGraduateYearInput]="true"
-              [countries]="countries$ | async"
-              ><input
-                type="checkbox"
-                class="me-2"
-              />วุฒิการศึกษาปริญญาอื่นๆที่เทียบเท่าปริญญาตรี / ปริญญาทางการศึกษา
-            </ksp-form-education-info>
+            ></ksp-form-education-info>
           </mat-tab>
 
           <mat-tab label="เอกสารหลักฐานประกอบ">
