@@ -14,6 +14,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { FormHiringInfoComponent } from './form-hiring-info/form-hiring-info.component';
 import { FormVisaInfoComponent } from './form-visa-info/form-visa-info.component';
+import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { FormVisaInfoComponent } from './form-visa-info/form-visa-info.component
     MatIconModule,
     MatCheckboxModule,
     RequestHeaderInfoComponent,
+    FileUploadComponent,
   ],
   declarations: [
     FormAddressComponent,

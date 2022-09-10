@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import {
   HttpInterceptor,
   HttpEvent,
-  HttpResponse,
   HttpRequest,
   HttpHandler,
 } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { getCookie } from '@ksp/shared/utility';
 
 @Injectable({

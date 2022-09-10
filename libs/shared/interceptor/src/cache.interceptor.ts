@@ -7,7 +7,7 @@ import {
   HttpHandler,
 } from '@angular/common/http';
 import { from, map, Observable, of, switchMap } from 'rxjs';
-import * as localForage from 'localforage';
+import localForage from 'localforage';
 import * as moment from 'moment';
 import { environment } from '@ksp/shared/environment';
 

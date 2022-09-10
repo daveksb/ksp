@@ -15,7 +15,10 @@ export class FormAttachmentComponent {
   @Input() groups: string[] = [];
   @Input() mode: FormMode = 'edit';
 
+  fileName: string[] = [];
+
   constructor(public dialog: MatDialog) {}
+
   view() {
     const dialogRef = this.dialog.open(FilesPreviewComponent, {
       width: '800px',

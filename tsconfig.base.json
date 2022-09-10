@@ -2,6 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "rootDir": ".",
+    "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
@@ -10,10 +11,7 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": [
-      "es2017",
-      "dom"
-    ],
+    "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
@@ -60,9 +58,7 @@
       "@ksp/e-service/fee/refund-fee": [
         "libs/e-service/fee/refund-fee/src/index.ts"
       ],
-      "@ksp/e-service/form": [
-        "libs/e-service/form/src/index.ts"
-      ],
+      "@ksp/e-service/form": ["libs/e-service/form/src/index.ts"],
       "@ksp/e-service/professional/one-school-one-innovation": [
         "libs/e-service/professional/one-school-one-innovation/src/index.ts"
       ],
@@ -168,30 +164,14 @@
       "@ksp/self-service/feature/transfer-knowledge": [
         "libs/self-service/feature/transfer-knowledge/src/index.ts"
       ],
-      "@ksp/self-service/form": [
-        "libs/self-service/form/src/index.ts"
-      ],
-      "@ksp/self-service/ui": [
-        "libs/self-service/ui/src/index.ts"
-      ],
-      "@ksp/shared/assets": [
-        "libs/shared/assets/src/index.ts"
-      ],
-      "@ksp/shared/constant": [
-        "libs/shared/constant/src/index.ts"
-      ],
-      "@ksp/shared/degree-cert": [
-        "libs/shared/degree-cert/src/index.ts"
-      ],
-      "@ksp/shared/dialog": [
-        "libs/shared/dialog/src/index.ts"
-      ],
-      "@ksp/shared/directive": [
-        "libs/shared/directive/src/index.ts"
-      ],
-      "@ksp/shared/environment": [
-        "libs/shared/environment/src/index.ts"
-      ],
+      "@ksp/self-service/form": ["libs/self-service/form/src/index.ts"],
+      "@ksp/self-service/ui": ["libs/self-service/ui/src/index.ts"],
+      "@ksp/shared/assets": ["libs/shared/assets/src/index.ts"],
+      "@ksp/shared/constant": ["libs/shared/constant/src/index.ts"],
+      "@ksp/shared/degree-cert": ["libs/shared/degree-cert/src/index.ts"],
+      "@ksp/shared/dialog": ["libs/shared/dialog/src/index.ts"],
+      "@ksp/shared/directive": ["libs/shared/directive/src/index.ts"],
+      "@ksp/shared/environment": ["libs/shared/environment/src/index.ts"],
       "@ksp/shared/form/degree-cert/step-one": [
         "libs/shared/form/degree-cert/step-one/src/index.ts"
       ],
@@ -207,15 +187,9 @@
       "@ksp/shared/form/file-upload": [
         "libs/shared/form/file-upload/src/index.ts"
       ],
-      "@ksp/shared/form/license": [
-        "libs/shared/form/license/src/index.ts"
-      ],
-      "@ksp/shared/form/login": [
-        "libs/shared/form/login/src/index.ts"
-      ],
-      "@ksp/shared/form/others": [
-        "libs/shared/form/others/src/index.ts"
-      ],
+      "@ksp/shared/form/license": ["libs/shared/form/license/src/index.ts"],
+      "@ksp/shared/form/login": ["libs/shared/form/login/src/index.ts"],
+      "@ksp/shared/form/others": ["libs/shared/form/others/src/index.ts"],
       "@ksp/shared/form/school/register": [
         "libs/shared/form/school/register/src/index.ts"
       ],
@@ -234,30 +208,14 @@
       "@ksp/shared/form/university-select": [
         "libs/shared/form/university-select/src/index.ts"
       ],
-      "@ksp/shared/interceptor": [
-        "libs/shared/interceptor/src/index.ts"
-      ],
-      "@ksp/shared/interface": [
-        "libs/shared/interface/src/index.ts"
-      ],
-      "@ksp/shared/menu": [
-        "libs/shared/menu/src/index.ts"
-      ],
-      "@ksp/shared/search": [
-        "libs/shared/search/src/index.ts"
-      ],
-      "@ksp/shared/service": [
-        "libs/shared/service/src/index.ts"
-      ],
-      "@ksp/shared/ui": [
-        "libs/shared/ui/src/index.ts"
-      ],
-      "@ksp/shared/utility": [
-        "libs/shared/utility/src/index.ts"
-      ],
-      "@ksp/uni-service/dialog": [
-        "libs/uni-service/dialog/src/index.ts"
-      ],
+      "@ksp/shared/interceptor": ["libs/shared/interceptor/src/index.ts"],
+      "@ksp/shared/interface": ["libs/shared/interface/src/index.ts"],
+      "@ksp/shared/menu": ["libs/shared/menu/src/index.ts"],
+      "@ksp/shared/search": ["libs/shared/search/src/index.ts"],
+      "@ksp/shared/service": ["libs/shared/service/src/index.ts"],
+      "@ksp/shared/ui": ["libs/shared/ui/src/index.ts"],
+      "@ksp/shared/utility": ["libs/shared/utility/src/index.ts"],
+      "@ksp/uni-service/dialog": ["libs/uni-service/dialog/src/index.ts"],
       "@ksp/uni-service/feature/degree-cert": [
         "libs/uni-service/feature/degree-cert/src/index.ts"
       ],
@@ -279,16 +237,9 @@
       "@ksp/uni-service/feature/retired": [
         "libs/uni-service/feature/retired/src/index.ts"
       ],
-      "@ksp/uni-service/form": [
-        "libs/uni-service/form/src/index.ts"
-      ],
-      "@ksp/uni-service/pages": [
-        "libs/uni-service/pages/src/index.ts"
-      ]
+      "@ksp/uni-service/form": ["libs/uni-service/form/src/index.ts"],
+      "@ksp/uni-service/pages": ["libs/uni-service/pages/src/index.ts"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }
