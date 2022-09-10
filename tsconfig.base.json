@@ -82,9 +82,6 @@
       "@ksp/e-service/ui/verify-result-box": [
         "libs/e-service/ui/verify-result-box/src/index.ts"
       ],
-      "@ksp/school-service/feature/request": [
-        "libs/school-service/feature/request/src/index.ts"
-      ],
       "@ksp/school-service/feature/activity": [
         "libs/school-service/feature/activity/src/index.ts"
       ],
@@ -105,6 +102,9 @@
       ],
       "@ksp/school-service/feature/register": [
         "libs/school-service/feature/register/src/index.ts"
+      ],
+      "@ksp/school-service/feature/request": [
+        "libs/school-service/feature/request/src/index.ts"
       ],
       "@ksp/school-service/feature/request-reward": [
         "libs/school-service/feature/request-reward/src/index.ts"
@@ -207,6 +207,7 @@
       "@ksp/shared/form/university-select": [
         "libs/shared/form/university-select/src/index.ts"
       ],
+      "@ksp/shared/indexed-db": ["libs/shared/indexed-db/src/index.ts"],
       "@ksp/shared/interceptor": ["libs/shared/interceptor/src/index.ts"],
       "@ksp/shared/interface": ["libs/shared/interface/src/index.ts"],
       "@ksp/shared/menu": ["libs/shared/menu/src/index.ts"],

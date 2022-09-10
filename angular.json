@@ -7787,6 +7787,24 @@
         }
       ]
     },
+    "shared-indexed-db": {
+      "projectType": "library",
+      "root": "libs/shared/indexed-db",
+      "sourceRoot": "libs/shared/indexed-db/src",
+      "prefix": "ksp",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/indexed-db/**/*.ts",
+              "libs/shared/indexed-db/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "shared-interceptor": {
       "projectType": "library",
       "root": "libs/shared/interceptor",
