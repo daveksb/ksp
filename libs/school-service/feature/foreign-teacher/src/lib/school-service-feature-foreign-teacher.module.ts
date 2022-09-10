@@ -19,6 +19,10 @@ export const routes: Route[] = [
         path: 'id-request',
         component: ForeignTeacherIdRequestComponent,
       },
+      {
+        path: 'id-request/:id',
+        component: ForeignTeacherIdRequestComponent,
+      },
     ],
   },
 ];

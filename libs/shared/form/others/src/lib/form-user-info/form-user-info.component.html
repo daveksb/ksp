@@ -8,7 +8,7 @@
         maxlength="13"
         class="form-control"
         type="text"
-        formControlName="idCardNo"
+        formControlName="idcardno"
       />
       <ng-container
         *ngIf="idCardNo.invalid && (idCardNo.dirty || idCardNo.touched)"
@@ -33,7 +33,7 @@
 
     <div class="col" [ngClass]="{ hide: !foreignMode }">
       <label class="form-label">หมายเลขหนังสือเดินทาง (Passport Number) </label>
-      <input class="form-control" type="text" formControlName="passportNo" />
+      <input class="form-control" type="text" formControlName="passportno" />
       <ng-container
         *ngIf="passportNo.invalid && (passportNo.dirty || passportNo.touched)"
       >
@@ -49,7 +49,7 @@
         class="form-control"
         type="date"
         [class.bg-light]="isDarkMode"
-        formControlName="passportStartDate"
+        formControlName="passportstartdate"
       />
     </div>
 
@@ -59,7 +59,7 @@
         class="form-control"
         type="date"
         [class.bg-light]="isDarkMode"
-        formControlName="passportEndDate"
+        formControlName="passportenddate"
       />
     </div>
   </div>
@@ -70,7 +70,7 @@
       <select
         [class.bg-white]="!isDarkMode && mode === 'edit'"
         class="form-select"
-        formControlName="prefixTh"
+        formControlName="prefixth"
       >
         <option value="null">กรุณาเลือก</option>
         <option *ngFor="let prefix of prefixList" [value]="prefix.id">
@@ -85,7 +85,7 @@
         class="form-control"
         type="text"
         placeholder="กรุณากรอกชื่อภาษาไทย"
-        formControlName="firstNameTh"
+        formControlName="firstnameth"
       />
       <ng-container
         *ngIf="
@@ -105,7 +105,7 @@
         class="form-control"
         type="text"
         placeholder="กรุณากรอกชื่อภาษาไทย"
-        formControlName="middleNameTh"
+        formControlName="middlenameth"
       />
     </div>
 
@@ -116,7 +116,7 @@
         class="form-control"
         type="text"
         placeholder="กรุณากรอกนามสกุลภาษาไทย"
-        formControlName="lastNameTh"
+        formControlName="lastnameth"
       />
       <ng-container
         *ngIf="lastNameTh.invalid && (lastNameTh.dirty || lastNameTh.touched)"
@@ -134,7 +134,7 @@
       <select
         [class.bg-white]="!isDarkMode && mode === 'edit'"
         class="form-select"
-        formControlName="prefixEn"
+        formControlName="prefixen"
       >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let prefix of prefixList" [value]="prefix.id">
@@ -149,7 +149,7 @@
         type="text"
         [class.bg-light]="isDarkMode"
         placeholder="กรุณากรอกชื่อภาษาอังกฤษ"
-        formControlName="firstNameEn"
+        formControlName="firstnameen"
       />
       <ng-container
         *ngIf="
@@ -168,7 +168,7 @@
         class="form-control"
         type="text"
         placeholder="กรุณากรอกชื่อกลางภาษาอังกฤษ"
-        formControlName="middleNameEn"
+        formControlName="middlenameen"
       />
     </div>
     <div class="col-md">
@@ -178,7 +178,7 @@
         type="text"
         [class.bg-light]="isDarkMode"
         placeholder="กรุณากรอกนามสกุลภาษาอังกฤษ"
-        formControlName="lastNameEn"
+        formControlName="lastnameen"
       />
       <ng-container
         *ngIf="lastNameEn.invalid && (lastNameEn.dirty || lastNameEn.touched)"
@@ -210,7 +210,7 @@
         class="form-control"
         type="date"
         [class.bg-light]="isDarkMode"
-        formControlName="birthDate"
+        formControlName="birthdate"
       />
     </div>
 
@@ -244,7 +244,7 @@
         class="form-control"
         type="tel"
         [class.bg-light]="isDarkMode"
-        formControlName="contactPhone"
+        formControlName="contactphone"
       />
       <ng-container
         *ngIf="
@@ -262,7 +262,7 @@
         class="form-control"
         type="tel"
         [class.bg-light]="isDarkMode"
-        formControlName="workPhone"
+        formControlName="workphone"
       />
       <ng-container
         *ngIf="workPhone.invalid && (workPhone.dirty || workPhone.touched)"
