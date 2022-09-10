@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormMode } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
@@ -28,26 +28,47 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   schoolId = '0010201056';
   schoolName = '';
   address = '';
-  requestNumber = '';
   requestDate = thaiDate(new Date());
   @Input() mode: FormMode = 'edit';
   prefixList$!: Observable<any>;
   countries$!: Observable<any>;
   visaTypeList$!: Observable<any>;
   foreignInfo = ['1.สำเนาหนังสือเดินทาง'];
+  requestNumber = '';
+  requestId!: number;
   constructor(
     private router: Router,
     public dialog: MatDialog,
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
-    private requestLicenseService: RequestLicenseService
+    private requestLicenseService: RequestLicenseService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.getList();
-    this.form.valueChanges.subscribe((res) => {
-      // console.log('res = ', res);
+    this.checkRequestId();
+  }
+  checkRequestId() {
+    this.route.paramMap.subscribe((params) => {
+      this.requestId = Number(params.get('id'));
+      if (this.requestId) {
+        this.loadRequestData(this.requestId);
+      }
+    });
+  }
+  loadRequestData(id: number) {
+    this.requestLicenseService.getRequestById(id).subscribe((res: any) => {
+      if (res) {
+        this.requestNumber = res.requestno;
+        res.birthdate = res.birthdate?.split('T')[0];
+        res.passportstartdate = res.passportstartdate?.split('T')[0];
+        res.passportenddate = res.passportenddate?.split('T')[0];
+        // res.endDate = res.endDate.split('T')[0];
+        this.form.get('foreignTeacher')?.patchValue(res);
+        // this.form.get('foreignTeacher')?.value;
+      }
     });
   }
 
@@ -68,23 +89,14 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       .pipe(
         switchMap((res) => {
           if (res) {
-            //call API
-            // this.getFormValidationErrors();
-            console.log(this.form.controls['foreignTeacher']);
-            if (!this.form.valid) return EMPTY;
-            const rawUserInfo = this.form.value.foreignTeacher as any;
-            const userInfo = Object.keys(rawUserInfo).reduce(
-              (destination: any, key) => {
-                destination[key.toLowerCase()] = rawUserInfo[key];
-                return destination;
-              },
-              {}
-            );
-            userInfo.ref1 = '2'; // schoo ?
-            userInfo.ref2 = '04'; // foreihn
-            userInfo.ref3 = '1'; // not know
-            userInfo.systemtype = '2'; // sch ?
+            // call API
+            const userInfo = this.form.value.foreignTeacher as any;
+            userInfo.ref1 = '2';
+            userInfo.ref2 = '04';
+            userInfo.ref3 = '1';
+            userInfo.systemtype = '2';
             userInfo.requesttype = '3';
+            userInfo.schoolId = this.schoolId;
             return this.requestLicenseService.requestLicense(userInfo);
           }
           return EMPTY;

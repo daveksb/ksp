@@ -42,39 +42,39 @@ export class FormForeignIdComponent
     );
   }
   ngOnInit(): void {
-    this.form.controls['idCardNo'].clearValidators();
-    this.form.controls['workPhone'].clearValidators();
+    this.form.controls['idcardno'].clearValidators();
+    this.form.controls['workphone'].clearValidators();
   }
   get idCardNo() {
-    return this.form.controls.idCardNo;
+    return this.form.controls.idcardno;
   }
 
   get passportNo() {
-    return this.form.controls.passportNo;
+    return this.form.controls.passportno;
   }
 
   get firstNameTh() {
-    return this.form.controls.firstNameTh;
+    return this.form.controls.firstnameth;
   }
 
   get lastNameTh() {
-    return this.form.controls.lastNameTh;
+    return this.form.controls.lastnameth;
   }
 
   get firstNameEn() {
-    return this.form.controls.firstNameEn;
+    return this.form.controls.firstnameen;
   }
 
   get lastNameEn() {
-    return this.form.controls.lastNameEn;
+    return this.form.controls.lastnameen;
   }
 
   get contactPhone() {
-    return this.form.controls.contactPhone;
+    return this.form.controls.contactphone;
   }
 
   get workPhone() {
-    return this.form.controls.workPhone;
+    return this.form.controls.workphone;
   }
 
   get email() {

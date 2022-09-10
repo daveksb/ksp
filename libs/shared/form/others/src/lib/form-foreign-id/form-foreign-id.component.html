@@ -5,7 +5,7 @@
     <div class="row mb-2">
       <div class="col-2">
         <label class="form-label">คำนำหน้าชื่อภาษาอังกฤษ</label>
-        <select class="form-select required" formControlName="prefixEn">
+        <select class="form-select required" formControlName="prefixen">
           <option *ngFor="let prefix of prefixList" [value]="prefix.id">
             {{ prefix?.name_en }}
           </option>
@@ -17,7 +17,7 @@
           class="form-control"
           type="text"
           placeholder="กรุณากรอกชื่อภาษาอังกฤษ"
-          formControlName="firstNameEn"
+          formControlName="firstnameen"
         />
         <ng-container
           *ngIf="
@@ -35,7 +35,7 @@
           class="form-control"
           type="text"
           placeholder="กรุณากรอกชื่อกลางภาษาอังกฤษ"
-          formControlName="middleNameEn"
+          formControlName="middlenameen"
         />
       </div>
       <div class="col">
@@ -44,7 +44,7 @@
           class="form-control"
           type="text"
           placeholder="กรุณากรอกนามสกุลภาษาอังกฤษ"
-          formControlName="lastNameEn"
+          formControlName="lastnameen"
         />
         <ng-container
           *ngIf="lastNameEn.invalid && (lastNameEn.dirty || lastNameEn.touched)"
@@ -59,7 +59,7 @@
     <div class="row mb-2">
       <div class="col-2">
         <label class="form-label required">คำนำหน้าชื่อภาษาไทย</label>
-        <select class="form-select" formControlName="prefixTh">
+        <select class="form-select" formControlName="prefixth">
           <option *ngFor="let prefix of prefixList" [value]="prefix.id">
             {{ prefix?.name_th }}
           </option>
@@ -71,7 +71,7 @@
           class="form-control"
           type="text"
           placeholder="กรุณากรอกชื่อภาษาไทย"
-          formControlName="firstNameTh"
+          formControlName="firstnameth"
         />
         <ng-container
           *ngIf="
@@ -89,7 +89,7 @@
           class="form-control"
           type="text"
           placeholder="กรุณากรอกชื่อกลางภาษาไทย"
-          formControlName="middleNameTh"
+          formControlName="middlenameth"
         />
       </div>
 
@@ -99,7 +99,7 @@
           class="form-control"
           type="text"
           placeholder="กรุณากรอกนามสกุลภาษาไทย"
-          formControlName="lastNameTh"
+          formControlName="lastnameth"
         />
         <ng-container
           *ngIf="lastNameTh.invalid && (lastNameTh.dirty || lastNameTh.touched)"
@@ -123,7 +123,7 @@
       </div>
       <div class="col">
         <label class="form-label required">วันเดือนปีเกิด</label>
-        <input class="form-control" type="date" formControlName="birthDate" />
+        <input class="form-control" type="date" formControlName="birthdate" />
       </div>
     </div>
 
@@ -139,7 +139,7 @@
       </div>
       <div class="col">
         <label class="form-label required">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
-        <input class="form-control" type="tel" formControlName="contactPhone" />
+        <input class="form-control" type="tel" formControlName="contactphone" />
         <ng-container
           *ngIf="
             contactPhone.invalid && (contactPhone.dirty || contactPhone.touched)
@@ -157,7 +157,7 @@
         <label class="form-label required"
           >หมายเลขหนังสือเดินทาง (Passport Number)</label
         >
-        <input class="form-control" type="text" formControlName="passportNo" />
+        <input class="form-control" type="text" formControlName="passportno" />
       </div>
       <div class="col">
         <label class="form-label">ประเทศ</label>
@@ -176,7 +176,7 @@
         <input
           class="form-control"
           type="date"
-          formControlName="passportStartDate"
+          formControlName="passportstartdate"
         />
       </div>
       <div class="col-6">
@@ -184,7 +184,7 @@
         <input
           class="form-control"
           type="date"
-          formControlName="passportEndDate"
+          formControlName="passportenddate"
         />
       </div>
     </div>
