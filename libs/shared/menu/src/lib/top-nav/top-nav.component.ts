@@ -14,8 +14,8 @@ import { deleteCookie, getCookie, thaiDate } from '@ksp/shared/utility';
 })
 export class TopNavComponent {
   today = thaiDate(new Date());
-  firstName = getCookie('firstName');
-  lastName = getCookie('lastName');
+  firstName = getCookie('firstNameTh');
+  lastName = getCookie('lastNameTh');
   constructor(
     private router: Router,
     private schoolServiceFeatureLoginService: SchoolServiceFeatureLoginService

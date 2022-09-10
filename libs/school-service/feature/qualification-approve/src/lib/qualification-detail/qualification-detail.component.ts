@@ -10,6 +10,7 @@ import {
   QualificationApproveDetailComponent,
   QualificationApprovePersonComponent,
 } from '@ksp/shared/form/others';
+import { thaiDate } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-qualification-detail',
@@ -18,6 +19,7 @@ import {
 })
 export class QualificationDetailComponent implements OnInit {
   form = this.fb.group({
+    userInfo: [],
     address1: [],
     address2: [],
     education1: [],
@@ -25,7 +27,7 @@ export class QualificationDetailComponent implements OnInit {
     education3: [],
     education4: [],
   });
-
+  requestDate = thaiDate(new Date());
   evidenceFiles = [
     'หนังสือนำส่งจากหน่วยงานผู้ใช้',
     'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
