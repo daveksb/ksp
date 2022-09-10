@@ -1,13 +1,12 @@
 <ksp-top-nav><span header>หน้าแรก</span></ksp-top-nav>
 
-<div class="full-height main__container px-3 py-3">
+<div class="full-height main__container py-2 px-4">
   <ksp-uni-form-badge></ksp-uni-form-badge>
-  <div class="row justify-content-center mx-4">
+  <div class="row justify-content-center mb-3">
     <div class="col-6 ps-0 pe-2">
       <self-service-slideshow></self-service-slideshow>
     </div>
   </div>
-
   <self-service-license-info
     [header]="'สถานะใบคำขอ'"
     [subheader1]="'ใบคำขอที่ต้องชำระเงิน'"
@@ -20,181 +19,189 @@
     [personId]="'1'"
   ></self-service-license-info>
   <br />
-  <div class="mx-4">
-    <div class="box-header">ค้นหาใบคำขอ</div>
-    <div class="box__container px-4 py-2">
-      <div class="row">
-        <div class="col">
-          <label class="form-label">เลขที่ใบคำขอ</label>
-          <input type="text" class="form-control" />
-        </div>
-        <div class="col">
-          <label class="form-label">ประเภทใบคำขอ</label>
-          <select class="form-select">
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
+
+  <div class="box-header">ค้นหาใบคำขอ</div>
+  <div class="box__container px-4 py-2">
+    <div class="row">
+      <div class="col">
+        <label class="form-label">เลขที่ใบคำขอ</label>
+        <input type="text" class="form-control" />
       </div>
-      <div class="row">
-        <div class="col-3">
-          <label class="form-label">วันที่ยื่นคำขอ</label>
-          <input type="text" class="form-control" />
-        </div>
-        <div class="col-3">
-          <label class="form-label">สถานะการชำระเงิน</label>
-          <select class="form-select">
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
-        <div class="col">
-          <label class="form-label">สถานะรายการ</label>
-          <select class="form-select">
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
+      <div class="col">
+        <label class="form-label">ประเภทใบคำขอ</label>
+        <select class="form-select">
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
       </div>
-      <br />
-      <div class="d-flex justify-content-center pb-2">
-        <button class="btn btn-secondary me-2" (click)="clear()">
-          ล้างข้อมูล
-        </button>
-        <button class="btn btn-primary ms-2" (click)="search()">ค้นหา</button>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <label class="form-label">วันที่ยื่นคำขอ</label>
+        <input type="text" class="form-control" />
+      </div>
+      <div class="col-3">
+        <label class="form-label">สถานะการชำระเงิน</label>
+        <select class="form-select">
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div class="col">
+        <label class="form-label">สถานะรายการ</label>
+        <select class="form-select">
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
       </div>
     </div>
     <br />
-    <div class="d-flex justify-content-between align-items-center mb-2">
-      <div class="box-header">สรุปผลลัพธ์การค้นหา 5 รายการ</div>
-      <button
-        mat-button
-        [matMenuTriggerFor]="license"
-        class="btn text-primary border-primary bg-white"
-      >
-        + สร้างใบคำขอ
+    <div class="d-flex justify-content-center pb-2">
+      <button class="btn btn-secondary me-2" (click)="clear()">
+        ล้างข้อมูล
       </button>
-      <mat-menu #license="matMenu">
-        <button mat-menu-item [matMenuTriggerFor]="request">
-          ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ
-        </button>
-        <button mat-menu-item [matMenuTriggerFor]="renew">
-          ขอต่ออายุใบอนุญาตประกอบวิชาชีพ
-        </button>
-        <button mat-menu-item (click)="substituteLicense()">
-          ขอใบแทนใบอนุญาตประกอบวิชาชีพ
-        </button>
-        <button mat-menu-item>ขอหนังสือรับรองความรู้</button>
-        <button mat-menu-item>ขอยื่นเทียบเคียงความรู้</button>
-        <button mat-menu-item (click)="refundFee()">ขอคืนค่าธรรมเนียม</button>
-        <button mat-menu-item [matMenuTriggerFor]="reward">
-          ขอรับรางวัลการยกย่องเชิดชูเกียรติ
-        </button>
-      </mat-menu>
-
-      <mat-menu #request="matMenu">
-        <button mat-menu-item [matMenuTriggerFor]="teacher">ครู</button>
-        <button mat-menu-item (click)="schoolManager()">
-          ผู้บริหารสถานศึกษา
-        </button>
-        <button mat-menu-item (click)="educationManager()">
-          ผู้บริหารการศึกษา
-        </button>
-        <button mat-menu-item (click)="studySupervision()">ศึกษานิเทศก์</button>
-      </mat-menu>
-
-      <mat-menu #renew="matMenu">
-        <button mat-menu-item (click)="teacherRenew()">ครู</button>
-        <button mat-menu-item>ผู้บริหารสถานศึกษา</button>
-        <button mat-menu-item>ผู้บริหารการศึกษา</button>
-        <button mat-menu-item>ศึกษานิเทศก์</button>
-      </mat-menu>
-
-      <mat-menu #reward="matMenu">
-        <button mat-menu-item (click)="rewardPage(1)">รางวัลคุรุสภา</button>
-        <button mat-menu-item (click)="rewardPage(2)">
-          รางวัลครูภาษาไทยดีเด่น
-        </button>
-        <button mat-menu-item (click)="rewardPage(3)">
-          รางวัลครูผู้สอนดีเด่น
-        </button>
-        <button mat-menu-item (click)="rewardPage(4)">รางวัลคุรุสดุดี</button>
-        <button mat-menu-item (click)="rewardPage(5)">รางวัลครูอาวุโส</button>
-        <button mat-menu-item (click)="rewardPage(6)">
-          รางวัลผลงานวิจัยของคุรุสภา
-        </button>
-      </mat-menu>
-
-      <mat-menu #teacher="matMenu">
-        <button mat-menu-item (click)="thaiTeacher()">ครูชาวไทย</button>
-        <button mat-menu-item (click)="foreignTeacher()">ครูชาวต่างชาติ</button>
-      </mat-menu>
+      <button class="btn btn-primary ms-2" (click)="search()">ค้นหา</button>
     </div>
+  </div>
+  <br />
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <div class="box-header">สรุปผลลัพธ์การค้นหา 5 รายการ</div>
+    <button
+      mat-button
+      [matMenuTriggerFor]="license"
+      class="btn text-primary border-primary bg-white"
+    >
+      + สร้างใบคำขอ
+    </button>
+    <mat-menu #license="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="request">
+        ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="renew">
+        ขอต่ออายุใบอนุญาตประกอบวิชาชีพ
+      </button>
+      <button mat-menu-item (click)="substituteLicense()">
+        ขอใบแทนใบอนุญาตประกอบวิชาชีพ
+      </button>
+      <button mat-menu-item>ขอหนังสือรับรองความรู้</button>
+      <button mat-menu-item>ขอยื่นเทียบเคียงความรู้</button>
+      <button mat-menu-item (click)="refundFee()">ขอคืนค่าธรรมเนียม</button>
+      <button mat-menu-item [matMenuTriggerFor]="reward">
+        ขอรับรางวัลการยกย่องเชิดชูเกียรติ
+      </button>
+    </mat-menu>
 
-    <div class="table">
-      <table mat-table [dataSource]="dataSource">
-        <ng-container matColumnDef="order">
-          <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-          <td mat-cell *matCellDef="let element">{{ element.order }}</td>
-        </ng-container>
+    <mat-menu #request="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="teacher">ครู</button>
+      <button mat-menu-item (click)="schoolManager()">
+        ผู้บริหารสถานศึกษา
+      </button>
+      <button mat-menu-item (click)="educationManager()">
+        ผู้บริหารการศึกษา
+      </button>
+      <button mat-menu-item (click)="studySupervision()">ศึกษานิเทศก์</button>
+    </mat-menu>
 
-        <ng-container matColumnDef="licenseNumber">
-          <th mat-header-cell *matHeaderCellDef>เลขที่คำขอ</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.licenseNumber }}
-          </td>
-        </ng-container>
+    <mat-menu #renew="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="renewTeacher">ครู</button>
+      <button mat-menu-item>ผู้บริหารสถานศึกษา</button>
+      <button mat-menu-item>ผู้บริหารการศึกษา</button>
+      <button mat-menu-item>ศึกษานิเทศก์</button>
+    </mat-menu>
 
-        <ng-container matColumnDef="submitDate">
-          <th mat-header-cell *matHeaderCellDef>วันที่ยื่นคำขอ</th>
-          <td mat-cell *matCellDef="let element">{{ element.submitDate }}</td>
-        </ng-container>
+    <mat-menu #reward="matMenu">
+      <button mat-menu-item (click)="rewardPage(1)">รางวัลคุรุสภา</button>
+      <button mat-menu-item (click)="rewardPage(2)">
+        รางวัลครูภาษาไทยดีเด่น
+      </button>
+      <button mat-menu-item (click)="rewardPage(3)">
+        รางวัลครูผู้สอนดีเด่น
+      </button>
+      <button mat-menu-item (click)="rewardPage(4)">รางวัลคุรุสดุดี</button>
+      <button mat-menu-item (click)="rewardPage(5)">รางวัลครูอาวุโส</button>
+      <button mat-menu-item (click)="rewardPage(6)">
+        รางวัลผลงานวิจัยของคุรุสภา
+      </button>
+    </mat-menu>
 
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
-          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-        </ng-container>
+    <mat-menu #teacher="matMenu">
+      <button mat-menu-item (click)="thaiTeacher()">ครูชาวไทย</button>
+      <button mat-menu-item (click)="foreignTeacher()">ครูชาวต่างชาติ</button>
+    </mat-menu>
 
-        <ng-container matColumnDef="paymentStatus">
-          <th mat-header-cell *matHeaderCellDef>สถานะการชำระเงิน</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.paymentStatus }}
-          </td>
-        </ng-container>
+    <mat-menu #renewTeacher="matMenu">
+      <button mat-menu-item (click)="teacherRenew()">ครูชาวไทย</button>
+      <button mat-menu-item (click)="foreignTeacher()">ครูชาวต่างชาติ</button>
+    </mat-menu>
+  </div>
 
-        <ng-container matColumnDef="listStatus">
-          <th mat-header-cell *matHeaderCellDef>สถานะรายการ</th>
-          <td mat-cell *matCellDef="let element">{{ element.listStatus }}</td>
-        </ng-container>
+  <div class="table">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="order">
+        <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+        <td mat-cell *matCellDef="let element">{{ element.order }}</td>
+      </ng-container>
 
-        <ng-container matColumnDef="process">
-          <th mat-header-cell *matHeaderCellDef>ขั้นตอน</th>
-          <td mat-cell *matCellDef="let element">{{ element.process }}</td>
-        </ng-container>
+      <ng-container matColumnDef="licenseNumber">
+        <th mat-header-cell *matHeaderCellDef>เลขที่คำขอ</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.licenseNumber }}
+        </td>
+      </ng-container>
 
-        <ng-container matColumnDef="edit">
-          <th mat-header-cell *matHeaderCellDef>แก้ไข</th>
-          <td mat-cell *matCellDef="let element">
-            <i role="button" class="bi bi-pencil-square text-primary fs-5"></i>
-          </td>
-        </ng-container>
+      <ng-container matColumnDef="submitDate">
+        <th mat-header-cell *matHeaderCellDef>วันที่ยื่นคำขอ</th>
+        <td mat-cell *matCellDef="let element">{{ element.submitDate }}</td>
+      </ng-container>
 
-        <ng-container matColumnDef="print">
-          <th mat-header-cell *matHeaderCellDef>พิมพ์ใบคำขอ</th>
-          <td mat-cell *matCellDef="let element">
-            <i role="button" class="bi bi-printer-fill text-primary fs-5"></i>
-          </td>
-        </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
-    </div>
+      <ng-container matColumnDef="paymentStatus">
+        <th mat-header-cell *matHeaderCellDef>สถานะการชำระเงิน</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.paymentStatus }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="listStatus">
+        <th mat-header-cell *matHeaderCellDef>สถานะรายการ</th>
+        <td mat-cell *matCellDef="let element">{{ element.listStatus }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="process">
+        <th mat-header-cell *matHeaderCellDef>ขั้นตอน</th>
+        <td mat-cell *matCellDef="let element">{{ element.process }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef>แก้ไข</th>
+        <td mat-cell *matCellDef="let element">
+          <i
+            role="button"
+            (click)="editLicense()"
+            class="bi bi-pencil-square text-primary fs-5"
+          ></i>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="print">
+        <th mat-header-cell *matHeaderCellDef>พิมพ์ใบคำขอ</th>
+        <td mat-cell *matCellDef="let element">
+          <i role="button" class="bi bi-printer-fill text-primary fs-5"></i>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
   </div>
 </div>

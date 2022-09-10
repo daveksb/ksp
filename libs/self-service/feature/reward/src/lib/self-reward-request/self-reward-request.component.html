@@ -7,13 +7,13 @@
   <span header *ngIf="pageType === 6">รางวัลผลงานวิจัยของคุรุสภา</span>
 </ksp-top-nav>
 
-<div class="full-width-2 main__container">
+<div class="full-width-2 main__container px-4 py-2">
   <self-service-request-status
     [headers]="headerGroup"
   ></self-service-request-status>
   <br />
 
-  <div class="box-header mx-4">
+  <div class="box-header">
     <div *ngIf="pageType === 1">ข้อมูลขอรางวัลคุรุสภา</div>
     <div *ngIf="pageType === 2">ข้อมูลขอรางวัลครูภาษาไทยดีเด่น</div>
     <div *ngIf="pageType === 3">ข้อมูลขอรางวัลครูผู้สอนดีเด่น</div>
@@ -22,31 +22,39 @@
     <div *ngIf="pageType === 6">ข้อมูลขอรางวัลผลงานวิจัยของคุรุสภา</div>
   </div>
 
-  <div class="mx-4 bg-white p-3">
+  <div class="detail__container p-3">
     <ksp-form-user-info [isDarkMode]="true"></ksp-form-user-info>
   </div>
+  <br />
 
-  <div class="pt-3 pb-1 px-4">
-    <ksp-council-reward *ngIf="pageType === 1"></ksp-council-reward>
-    <ksp-thai-teacher-reward *ngIf="pageType === 2"></ksp-thai-teacher-reward>
-    <ksp-best-teacher-reward *ngIf="pageType === 3"></ksp-best-teacher-reward>
-    <ksp-praise-teacher-reward
-      *ngIf="pageType === 4"
-    ></ksp-praise-teacher-reward>
-    <ksp-senior-teacher-reward
-      *ngIf="pageType === 5"
-    ></ksp-senior-teacher-reward>
-    <ksp-research-reward *ngIf="pageType === 6"></ksp-research-reward>
+  <ng-container *ngIf="pageType === 1">
+    <ksp-council-reward></ksp-council-reward
+  ></ng-container>
 
-    <div class="fs-6 text-danger mt-2">
-      *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
-      โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
-    </div>
-    <div class="d-flex justify-content-center mt-3 mb-3">
-      <button type="button" class="btn border-primary text-primary bg-white">
-        บันทึกชั่วคราว
-      </button>
-      <button type="button" class="ms-3 btn btn-primary">บันทึกและยื่น</button>
-    </div>
+  <ng-container *ngIf="pageType === 2"
+    ><ksp-thai-teacher-reward></ksp-thai-teacher-reward
+  ></ng-container>
+  <ng-container *ngIf="pageType === 3"
+    ><ksp-best-teacher-reward></ksp-best-teacher-reward
+  ></ng-container>
+  <ng-container *ngIf="pageType === 4"
+    ><ksp-praise-teacher-reward></ksp-praise-teacher-reward
+  ></ng-container>
+  <ng-container *ngIf="pageType === 5">
+    <ksp-senior-teacher-reward></ksp-senior-teacher-reward
+  ></ng-container>
+  <ng-container *ngIf="pageType === 6">
+    <ksp-research-reward></ksp-research-reward
+  ></ng-container>
+
+  <div class="fs-6 text-danger mt-1">
+    *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
+    โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
+  </div>
+  <div class="d-flex justify-content-center my-3">
+    <button type="button" class="btn border-primary text-primary bg-white">
+      บันทึกชั่วคราว
+    </button>
+    <button type="button" class="ms-3 btn btn-primary">บันทึกและยื่น</button>
   </div>
 </div>

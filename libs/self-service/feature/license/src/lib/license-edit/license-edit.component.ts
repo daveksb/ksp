@@ -56,12 +56,12 @@ export class LicenseEditComponent implements OnInit {
   }
 
   navigateBack() {
-    this.router.navigate(['/', 'license', 'teacher']);
+    this.router.navigate(['/', 'home']);
   }
 
   onConfirm() {
     const dialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '375px',
+      width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่`,
         subTitle: `คุณต้องการบันทึกข้อมูลและยื่นใบคำขอใช่หรือไม่`,

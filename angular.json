@@ -4340,6 +4340,32 @@
         }
       ]
     },
+    "self-service-feature-compare-knowledge": {
+      "projectType": "library",
+      "root": "libs/self-service/feature/compare-knowledge",
+      "sourceRoot": "libs/self-service/feature/compare-knowledge/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/self-service/feature/compare-knowledge"],
+          "options": {
+            "jestConfig": "libs/self-service/feature/compare-knowledge/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/self-service/feature/compare-knowledge/**/*.ts",
+              "libs/self-service/feature/compare-knowledge/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "self-service-feature-home": {
       "root": "libs/self-service/feature/home",
       "projectType": "library",
@@ -5208,6 +5234,32 @@
             "lintFilePatterns": [
               "libs/self-service/feature/substitute-license/**/*.ts",
               "libs/self-service/feature/substitute-license/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "self-service-feature-transfer-knowledge": {
+      "projectType": "library",
+      "root": "libs/self-service/feature/transfer-knowledge",
+      "sourceRoot": "libs/self-service/feature/transfer-knowledge/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/self-service/feature/transfer-knowledge"],
+          "options": {
+            "jestConfig": "libs/self-service/feature/transfer-knowledge/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/self-service/feature/transfer-knowledge/**/*.ts",
+              "libs/self-service/feature/transfer-knowledge/**/*.html"
             ]
           }
         }
