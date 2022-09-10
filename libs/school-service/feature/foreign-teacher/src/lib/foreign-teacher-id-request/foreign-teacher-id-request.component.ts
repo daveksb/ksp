@@ -14,6 +14,7 @@ import {
   RequestLicenseService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { thaiDate } from '@ksp/shared/utility';
 @UntilDestroy()
 @Component({
   templateUrl: './foreign-teacher-id-request.component.html',
@@ -23,7 +24,12 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   form = this.fb.group({
     foreignTeacher: [],
   });
+  bureauName = '';
   schoolId = '0010201056';
+  schoolName = '';
+  address = '';
+  requestNumber = '';
+  requestDate = thaiDate(new Date());
   @Input() mode: FormMode = 'edit';
   prefixList$!: Observable<any>;
   countries$!: Observable<any>;
@@ -41,7 +47,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   ngOnInit(): void {
     this.getList();
     this.form.valueChanges.subscribe((res) => {
-      console.log('res = ', res);
+      // console.log('res = ', res);
     });
   }
 
@@ -63,9 +69,20 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
         switchMap((res) => {
           if (res) {
             //call API
-            const form = this.getDefaultForm();
-            form.patchValue(this.form.value.foreignTeacher as any);
-            return this.requestLicenseService.requestLicense(form.value);
+            const rawUserInfo = this.form.value.foreignTeacher as any;
+            const userInfo = Object.keys(rawUserInfo).reduce(
+              (destination: any, key) => {
+                destination[key.toLowerCase()] = rawUserInfo[key];
+                return destination;
+              },
+              {}
+            );
+            userInfo.ref1 = '2'; // schoo ?
+            userInfo.ref2 = '04'; // foreihn
+            userInfo.ref3 = '1'; // not know
+            userInfo.systemtype = '2'; // sch ?
+            userInfo.requesttype = '3';
+            return this.requestLicenseService.requestLicense(userInfo);
           }
           return EMPTY;
         })
@@ -96,64 +113,16 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       .getSchoolInfo(this.schoolId)
       .pipe(untilDestroyed(this))
       .subscribe((res: any) => {
-        console.log('school = ', res);
+        this.schoolName = res.schoolName;
+        this.bureauName = res.bureauName;
+        this.address = `บ้านเลขที่ ${res.address} ซอย ${
+          res?.street ?? ''
+        } หมู่ ${res?.moo ?? ''} ถนน ${res?.road ?? ''} ตำบล ${
+          res.tumbon
+        } อำเภอ ${res.amphurName} จังหวัด ${res.provinceName}`;
       });
     this.countries$ = this.addressService.getCountry();
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.visaTypeList$ = this.generalInfoService.getVisaType();
-  }
-  getDefaultForm() {
-    return this.fb.group({
-      currentprocess: null,
-      requeststatus: null,
-      updatedate: null,
-      licenseid: null,
-      staffid: null,
-      systemtype: null,
-      requesttype: null,
-      requesteduocupy: null,
-      requestfor: null,
-      schoolid: null,
-      idcardno: null,
-      passportno: null,
-      passportstartdate: null,
-      passportenddate: null,
-      prefixth: null,
-      firstnameth: null,
-      lastnameth: null,
-      prefixen: null,
-      firstnameen: null,
-      lastnameen: null,
-      sex: null,
-      birthdate: null,
-      email: null,
-      position: null,
-      educationoccupy: null,
-      contactphone: null,
-      workphone: null,
-      nationality: null,
-      country: null,
-      coordinatorinfo: null,
-      visainfo: null,
-      userpermission: null,
-      addressinfo: null,
-      schooladdrinfo: null,
-      eduinfo: null,
-      teachinginfo: null,
-      reasoninfo: null,
-      fileinfo: null,
-      otherreason: null,
-      refperson: null,
-      prohibitproperty: null,
-      checkprohibitproperty: null,
-      checksubresult: null,
-      checkfinalresult: null,
-      checkhistory: null,
-      approveresult: null,
-      paymentstatus: null,
-      ref1: null,
-      ref2: null,
-      ref3: null,
-    });
   }
 }

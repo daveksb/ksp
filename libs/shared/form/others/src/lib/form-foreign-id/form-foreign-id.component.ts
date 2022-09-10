@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
-import { providerFactory } from '@ksp/shared/utility';
+import { createDefaultUserForm, providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy()
@@ -12,27 +12,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   providers: providerFactory(FormForeignIdComponent),
 })
 export class FormForeignIdComponent extends KspFormBaseComponent {
-  override form = this.fb.group({
-    prefixEn: [],
-    nameEn: [],
-    midnameEn: [],
-    lastnameEn: [],
-    prefixTh: [],
-    nameTh: [],
-    midnameTh: [],
-    lastnameTh: [],
-    sex: [],
-    birthDate: [],
-    email: [],
-    contactPhone: [],
-    passportNumber: [],
-    country: [],
-    passportRelease: [],
-    passportExpire: [],
-    visaClass: [],
-    visaType: [],
-    visaExpire: [],
-  });
+  override form = createDefaultUserForm(this.fb, Validators);
 
   @Input() formHeader = 'ข้อมูลครูชาวต่างชาติ';
   @Input() prefixList: any;
@@ -45,10 +25,12 @@ export class FormForeignIdComponent extends KspFormBaseComponent {
     super();
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
-      this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
-        this.onChange(value);
-        this.onTouched();
-      })
+      this.form?.valueChanges
+        .pipe(untilDestroyed(this))
+        .subscribe((value: any) => {
+          this.onChange(value);
+          this.onTouched();
+        })
     );
   }
 }

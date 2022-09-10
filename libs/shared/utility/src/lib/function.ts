@@ -25,3 +25,7 @@ export function replaceEmptyWithNull(input: any) {
 
   return input;
 }
+
+export function parseJson(input: any) {
+  return JSON.parse(decodeURIComponent(escape(window.atob(input))));
+}

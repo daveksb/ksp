@@ -25,15 +25,6 @@ export class TempLicenseService {
       .pipe(shareReplay());
   }
 
-  searchRequest(payload: any): Observable<any> {
-    return this.http
-      .post(
-        `${environment.apiUrl}/kspschoolregister/schtmplicencerequestselect`,
-        payload
-      )
-      .pipe(map((data: any) => data.datareturn));
-  }
-
   addTempLicense(payload: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspschoolregister/schtmplicencerequestinsert`,

@@ -166,6 +166,7 @@
       "@ksp/self-service/form": ["libs/self-service/form/src/index.ts"],
       "@ksp/self-service/ui": ["libs/self-service/ui/src/index.ts"],
       "@ksp/shared/assets": ["libs/shared/assets/src/index.ts"],
+      "@ksp/shared/constant": ["libs/shared/constant/src/index.ts"],
       "@ksp/shared/degree-cert": ["libs/shared/degree-cert/src/index.ts"],
       "@ksp/shared/dialog": ["libs/shared/dialog/src/index.ts"],
       "@ksp/shared/directive": ["libs/shared/directive/src/index.ts"],

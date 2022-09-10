@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { TempLicenseService } from '@ksp/shared/service';
+import { RequestLicenseService, TempLicenseService } from '@ksp/shared/service';
 import { replaceEmptyWithNull } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
@@ -20,22 +20,24 @@ export class SchoolTempLicenseListComponent implements OnInit {
   personSelected = false;
   displayedColumns: string[] = [
     'id',
-    'requestNo',
-    'idCardNo',
-    'requestType',
-    'requestProcess',
-    'requestStatus',
-    'updateDate',
-    'requestDate',
-    'requestDoc',
-    'approveDoc',
+    'requestno',
+    'idcardno',
+    'name',
+    'requesttype',
+    'currentprocess',
+    'requeststatus',
+    'updatedate',
+    'requestdate',
+    'requestdoc',
+    'approvedoc',
   ];
   dataSource = new MatTableDataSource<TempLicenseInfo>();
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private tempLicenseService: TempLicenseService
+    private tempLicenseService: TempLicenseService,
+    private requestService: RequestLicenseService
   ) {}
 
   ngOnInit(): void {
@@ -45,7 +47,7 @@ export class SchoolTempLicenseListComponent implements OnInit {
   search(searchParams: any) {
     const data = { ...searchParams, ...{ schoolid: `${this.schoolId}` } };
     const payload = replaceEmptyWithNull(data);
-    this.tempLicenseService.searchRequest(payload).subscribe((res: any) => {
+    this.requestService.searchRequest(payload).subscribe((res: any) => {
       this.dataSource.data = res;
     });
   }
@@ -54,8 +56,14 @@ export class SchoolTempLicenseListComponent implements OnInit {
     this.dataSource.data = [];
   }
 
-  nextPage(requestType: number) {
+  goToRequestPage(requestType: number) {
     this.router.navigate(['/temp-license', 'request'], {
+      queryParams: { type: requestType },
+    });
+  }
+
+  viewRequest(requestType: number, requestId: number) {
+    this.router.navigate(['/temp-license', 'request', requestId], {
       queryParams: { type: requestType },
     });
   }
@@ -82,15 +90,24 @@ export class SchoolTempLicenseListComponent implements OnInit {
     }
     return result;
   }
+
+  checkProcess(input: string) {
+    let result = '-';
+    if (input === '1') {
+      result = 'ยื่นเอกสาร';
+    }
+
+    return result;
+  }
 }
 
 export interface TempLicenseInfo {
   id: number;
-  requestNo: string;
-  idCardNo: string;
-  requestType: string;
-  requestProcess: string;
-  requestStatus: string;
-  updateDate: string;
-  requestDate: string;
+  requestno: string;
+  idcardno: string;
+  requesttype: string;
+  currentprocess: string;
+  requeststatus: string;
+  updatedate: string;
+  requestdate: string;
 }

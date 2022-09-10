@@ -5973,6 +5973,24 @@
         }
       ]
     },
+    "shared-constant": {
+      "projectType": "library",
+      "root": "libs/shared/constant",
+      "sourceRoot": "libs/shared/constant/src",
+      "prefix": "ksp",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/constant/**/*.ts",
+              "libs/shared/constant/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "shared-degree-cert": {
       "root": "libs/shared/degree-cert",
       "$schema": "../../../node_modules/nx/schemas/project-schema.json",
