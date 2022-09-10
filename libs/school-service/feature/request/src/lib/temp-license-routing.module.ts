@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SchoolContainerPageComponent } from '@ksp/school-service/feature/container-page';
 import { PageNotFoundComponent } from '@ksp/shared/ui';
+import { SchoolRequestListComponent } from './request-list/request-list.component';
 import { TempLicenseRequestComponent } from './temp-license-request/temp-license-request.component';
-import { SchoolTempLicenseListComponent } from './temp-license-list/temp-license-list.component';
 
 const routes: Routes = [
   {
@@ -17,7 +17,7 @@ const routes: Routes = [
       },
       {
         path: 'list',
-        component: SchoolTempLicenseListComponent,
+        component: SchoolRequestListComponent,
       },
       {
         path: 'request',

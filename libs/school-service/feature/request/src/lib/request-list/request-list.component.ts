@@ -7,10 +7,10 @@ import { replaceEmptyWithNull } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
 @Component({
-  templateUrl: './temp-license-list.component.html',
-  styleUrls: ['./temp-license-list.component.scss'],
+  templateUrl: './request-list.component.html',
+  styleUrls: ['./request-list.component.scss'],
 })
-export class SchoolTempLicenseListComponent implements OnInit {
+export class SchoolRequestListComponent implements OnInit {
   form = this.fb.group({
     licenseSearch: [],
   });

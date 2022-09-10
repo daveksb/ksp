@@ -26,6 +26,8 @@
     "@nrwl/nx-cloud": "14.4.1",
     "bootstrap": "^5.2.0-beta1",
     "bootstrap-icons": "^1.8.3",
+    "localforage": "^1.10.0",
+    "moment": "^2.29.4",
     "primeng": "14.0.0-rc.1",
     "rxjs": "7.5.6",
     "tslib": "^2.0.0",
