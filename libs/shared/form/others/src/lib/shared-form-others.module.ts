@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { FormHiringInfoComponent } from './form-hiring-info/form-hiring-info.component';
+import { FormVisaInfoComponent } from './form-visa-info/form-visa-info.component';
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import { FormHiringInfoComponent } from './form-hiring-info/form-hiring-info.com
     FormUserInfoComponent,
     FormForeignIdComponent,
     FormHiringInfoComponent,
+    FormVisaInfoComponent,
   ],
   exports: [
     FormAddressComponent,
@@ -43,6 +45,7 @@ import { FormHiringInfoComponent } from './form-hiring-info/form-hiring-info.com
     FormUserInfoComponent,
     FormForeignIdComponent,
     FormHiringInfoComponent,
+    FormVisaInfoComponent,
   ],
 })
 export class SharedFormOthersModule {}
