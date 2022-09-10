@@ -1,54 +1,71 @@
 <div class="box-header text-center">จึงขอรับรองคุณวุฒิการศึกษา</div>
 <br />
 <div class="mb-2">
-  <input type="checkbox" class="me-2" />
-  <label class="fs-5">วุฒิการศึกษาปริญญาตรี</label>
+  <!-- <input type="checkbox" class="me-2" /> -->
+  <label class="fs-5">{{ degreeLevelName }}</label>
 </div>
 <div class="row mb-2">
   <div class="col-6">
     <label class="form-label">ชื่อปริญญา/หลักสูตร</label>
-    <input type="text" class="form-control" />
+    <input
+      type="text"
+      disabled
+      [placeholder]="degreeName"
+      class="form-control"
+    />
   </div>
 
   <div class="col-6">
     <label class="form-label">สาขา/วิชาเอก</label>
-    <input type="text" class="form-control" />
+    <input type="text" disabled [placeholder]="major" class="form-control" />
   </div>
 </div>
 
 <div class="row">
   <div class="col-6">
     <label class="form-label">สถาบันการศึกษา</label>
-    <input type="text" class="form-control" />
+    <input
+      type="text"
+      disabled
+      [placeholder]="institution"
+      class="form-control"
+    />
   </div>
 </div>
 <br />
-<div class="fs-5">
-  เนื่องจาก เป็นสาขาวิชาที่ตรงกับความต้องการของหน่วยงาน และ
-</div>
-<div class="form-label">
-  (ให้หน่วยงานผู้ใช้ระบุเหตุผลความจำเป็น
-  หรือความต้องการประกอบการพิจารณาขอรับรองคุณวุฒิ)
-</div>
-<textarea class="form-control" rows="3" placeholder="กรุณากรอก"></textarea>
-<br />
-<div class="fs-5">
-  ประสบการณ์ด้านการสอน การบริหารสถานศึกษา การบริหารการศึกษา
-  หรือการนิเทศก์การศึกษาในระดับการศึกษาขั้นพื้นฐาน และอุดมศึกษาที่ต่ำกว่าปริญญา
-</div>
+<form [formGroup]="form">
+  <div class="fs-5">
+    เนื่องจาก เป็นสาขาวิชาที่ตรงกับความต้องการของหน่วยงาน และ
+  </div>
+  <div class="form-label">
+    (ให้หน่วยงานผู้ใช้ระบุเหตุผลความจำเป็น
+    หรือความต้องการประกอบการพิจารณาขอรับรองคุณวุฒิ)
+  </div>
+  <textarea
+    class="form-control"
+    formControlName="reason1"
+    rows="3"
+    placeholder="กรุณากรอก"
+  ></textarea>
+  <br />
+  <div class="fs-5">
+    ประสบการณ์ด้านการสอน การบริหารสถานศึกษา การบริหารการศึกษา
+    หรือการนิเทศก์การศึกษาในระดับการศึกษาขั้นพื้นฐาน
+    และอุดมศึกษาที่ต่ำกว่าปริญญา
+  </div>
 
-<textarea class="form-control" rows="3" placeholder="กรุณากรอก"></textarea>
+  <textarea
+    class="form-control"
+    formControlName="reason2"
+    rows="3"
+    placeholder="กรุณากรอก"
+  ></textarea>
+</form>
 
 <br />
 <div class="d-flex justify-content-center">
   <button matDialogClose class="btn border-primary text-primary me-1">
     ยกเลิก
   </button>
-  <button
-    (click)="confirmed.emit(true)"
-    matDialogClose
-    class="btn btn-primary ms-1"
-  >
-    บันทึก
-  </button>
+  <button (click)="save()" class="btn btn-primary ms-1">บันทึก</button>
 </div>

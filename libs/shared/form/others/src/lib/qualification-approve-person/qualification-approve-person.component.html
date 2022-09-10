@@ -1,69 +1,62 @@
 <div class="box-header text-primary">ผู้รับรองข้อมูล</div>
 <hr />
-<div class="form-label text-black">ผู้ที่หน่วยงานขอรับรองคุณวุฒิ</div>
-<div class="row mb-2">
-  <div class="col-3">
-    <label class="form-label">คำนำหน้าชื่อ</label>
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+<form [formGroup]="form">
+  <div class="form-label text-black">ผู้ที่หน่วยงานขอรับรองคุณวุฒิ</div>
+  <div class="row mb-2">
+    <div class="col-3">
+      <label class="form-label">คำนำหน้าชื่อ</label>
+      <select formControlName="prefixth1" class="form-select">
+        <option *ngFor="let prefix of prefixList$ | async" [value]="prefix.id">
+          {{ prefix?.name_th }}
+        </option>
+      </select>
+    </div>
+    <div class="col">
+      <label class="form-label">ชื่อ</label>
+      <input formControlName="firstnameth1" type="text" class="form-control" />
+    </div>
+    <div class="col">
+      <label class="form-label">นามสกุล</label>
+      <input formControlName="lastnameth1" type="text" class="form-control" />
+    </div>
   </div>
-  <div class="col">
-    <label class="form-label">ชื่อ</label>
-    <input type="text" class="form-control" />
-  </div>
-  <div class="col">
-    <label class="form-label">นามสกุล</label>
-    <input type="text" class="form-control" />
-  </div>
-</div>
 
-<div class="row mb-2">
-  <div class="col-8">
-    <label class="form-label">ตำแหน่งของผู้ขอรับรอง</label>
-    <input type="text" class="form-control" />
+  <div class="row mb-2">
+    <div class="col-8">
+      <label class="form-label">ตำแหน่งของผู้ขอรับรอง</label>
+      <input formControlName="position1" type="text" class="form-control" />
+    </div>
   </div>
-</div>
-
-<div class="form-label text-black">หน่วยงานที่ขอรับรองคุณวุฒิ</div>
-<div class="row mb-2">
-  <div class="col-3">
-    <label class="form-label">คำนำหน้าชื่อ</label>
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+  <div class="form-label text-black">หน่วยงานที่ขอรับรองคุณวุฒิ</div>
+  <div class="row mb-2">
+    <div class="col-3">
+      <label class="form-label">คำนำหน้าชื่อ</label>
+      <select formControlName="prefixth1" class="form-select">
+        <option *ngFor="let prefix of prefixList$ | async" [value]="prefix.id">
+          {{ prefix?.name_th }}
+        </option>
+      </select>
+    </div>
+    <div class="col">
+      <label class="form-label">ชื่อ</label>
+      <input formControlName="firstnameth2" type="text" class="form-control" />
+    </div>
+    <div class="col">
+      <label class="form-label">นามสกุล</label>
+      <input formControlName="lastnameth2" type="text" class="form-control" />
+    </div>
   </div>
-  <div class="col">
-    <label class="form-label">ชื่อ</label>
-    <input type="text" class="form-control" />
+  <div class="row">
+    <div class="col-8">
+      <label class="form-label">ตำแหน่งผู้บริหารของหน่วยงาน</label>
+      <input formControlName="position2" type="text" class="form-control" />
+    </div>
   </div>
-  <div class="col">
-    <label class="form-label">นามสกุล</label>
-    <input type="text" class="form-control" />
-  </div>
-</div>
-<div class="row">
-  <div class="col-8">
-    <label class="form-label">ตำแหน่งผู้บริหารของหน่วยงาน</label>
-    <input type="text" class="form-control" />
-  </div>
-</div>
+</form>
 <br />
 <div class="d-flex justify-content-center">
   <button matDialogClose class="btn border-primary text-primary me-1">
     ยกเลิก
   </button>
-  <button
-    (click)="completed.emit(true)"
-    matDialogClose
-    class="btn btn-primary ms-1"
-  >
-    บันทึก
-  </button>
+  <button (click)="save()" class="btn btn-primary ms-1">บันทึก</button>
 </div>
