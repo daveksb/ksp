@@ -1,6 +1,6 @@
 /* eslint-disable */
 module.exports = {
-  displayName: 'school-service-feature-temp-license',
+  displayName: 'school-service-feature-request',
   preset: '../../../../jest.preset.ts',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -9,8 +9,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory:
-    '../../../../coverage/libs/school-service/feature/temp-license',
+  coverageDirectory: '../../../../coverage/libs/school-service/feature/request',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

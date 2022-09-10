@@ -42,6 +42,6 @@ export class SchoolServiceLoginComponent {
   }
 
   retired() {
-    this.router.navigate(['/', 'retired-user', 'search']);
+    this.router.navigate(['/retired-user', 'search']);
   }
 }

@@ -82,6 +82,9 @@
       "@ksp/e-service/ui/verify-result-box": [
         "libs/e-service/ui/verify-result-box/src/index.ts"
       ],
+      "@ksp/school-service/feature/request": [
+        "libs/school-service/feature/request/src/index.ts"
+      ],
       "@ksp/school-service/feature/activity": [
         "libs/school-service/feature/activity/src/index.ts"
       ],
@@ -111,9 +114,6 @@
       ],
       "@ksp/school-service/feature/staff-management": [
         "libs/school-service/feature/staff-management/src/index.ts"
-      ],
-      "@ksp/school-service/feature/temp-license": [
-        "libs/school-service/feature/temp-license/src/index.ts"
       ],
       "@ksp/school-service/form/activity": [
         "libs/school-service/form/activity/src/index.ts"

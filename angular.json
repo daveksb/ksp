@@ -3258,6 +3258,140 @@
         }
       ]
     },
+    "school-service-feature-request": {
+      "root": "libs/school-service/feature/request",
+      "projectType": "library",
+      "sourceRoot": "libs/school-service/feature/request/src",
+      "prefix": "e-service",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/school-service/feature/request"],
+          "options": {
+            "jestConfig": "libs/school-service/feature/request/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/school-service/feature/request/**/*.ts",
+              "libs/school-service/feature/request/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": [],
+      "files": [
+        {
+          "file": "libs/school-service/feature/request/.eslintrc.json",
+          "hash": "e85ace6d8121d13eadd5c2e7168e4fd8e1a0d1fe"
+        },
+        {
+          "file": "libs/school-service/feature/request/jest.config.ts",
+          "hash": "b51faee2f4a79b0e24c67c7e4ba72cad796987ee"
+        },
+        {
+          "file": "libs/school-service/feature/request/project.json",
+          "hash": "57356dc8c941588683e7f90bbfc1bc32e61011ce"
+        },
+        {
+          "file": "libs/school-service/feature/request/README.md",
+          "hash": "e8855321b32198c8a5b66b1ac31780664530de59"
+        },
+        {
+          "file": "libs/school-service/feature/request/src/index.ts",
+          "hash": "4051e8b223038b68de6404add7d2a9c3a40d11a5"
+        },
+        {
+          "file": "libs/school-service/feature/request/src/lib/school-service-feature-temp-license-routing.module.ts",
+          "hash": "8ebe591b488bfdb713bd7ed66a4fd70de4abfea3",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "school-service-feature-container-page",
+            "shared-ui"
+          ]
+        },
+        {
+          "file": "libs/school-service/feature/request/src/lib/school-service-feature-temp-license.module.ts",
+          "hash": "75a53e75b8fd2977b86a3dcd6fe1c06c72b2fb2a",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@angular/router",
+            "npm:@angular/material",
+            "shared-form-others",
+            "shared-menu",
+            "shared-ui",
+            "npm:@angular/forms",
+            "shared-search"
+          ]
+        },
+        {
+          "file": "libs/school-service/feature/request/src/lib/school-temp-license-detail/school-temp-license-detail.component.html",
+          "hash": "ea7d007ed8194590ac4861f26215128a761bec72"
+        },
+        {
+          "file": "libs/school-service/feature/request/src/lib/school-temp-license-detail/school-temp-license-detail.component.scss",
+          "hash": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+        },
+        {
+          "file": "libs/school-service/feature/request/src/lib/school-temp-license-detail/school-temp-license-detail.component.ts",
+          "hash": "614eee71c2746f979ec17c849976a8f18b335563",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/material",
+            "npm:@angular/router",
+            "shared-dialog",
+            "shared-form-others",
+            "npm:@ngneat/until-destroy"
+          ]
+        },
+        {
+          "file": "libs/school-service/feature/request/src/lib/school-temp-license-detail/school-temp-license-detail.service.ts",
+          "hash": "199d878e5f5c2f8f34c685170a0a181d9e041520",
+          "deps": ["npm:@angular/core"]
+        },
+        {
+          "file": "libs/school-service/feature/request/src/lib/school-temp-license-list/school-temp-license-list.component.html",
+          "hash": "fd88f06b705af942edd4adf4ea0fe402ed338a08"
+        },
+        {
+          "file": "libs/school-service/feature/request/src/lib/school-temp-license-list/school-temp-license-list.component.scss",
+          "hash": "8b137891791fe96927ad78e64b0aad7bded08bdc"
+        },
+        {
+          "file": "libs/school-service/feature/request/src/lib/school-temp-license-list/school-temp-license-list.component.ts",
+          "hash": "6b924d3e93a2e22c251c101f90c50c1ddfca4284",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/material",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "libs/school-service/feature/request/src/test-setup.ts",
+          "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
+          "deps": ["npm:jest-preset-angular"]
+        },
+        {
+          "file": "libs/school-service/feature/request/tsconfig.json",
+          "hash": "623fa1791cbe2260234eb5f1c17516536d5eb609"
+        },
+        {
+          "file": "libs/school-service/feature/request/tsconfig.lib.json",
+          "hash": "7ccc97366e32a44c55bcf924c3b7f68198a8d10b"
+        },
+        {
+          "file": "libs/school-service/feature/request/tsconfig.spec.json",
+          "hash": "d1f5c8852d652eac23b0378b6c259ea88d5a88d1"
+        }
+      ]
+    },
     "school-service-feature-request-reward": {
       "root": "libs/school-service/feature/request-reward",
       "projectType": "library",
@@ -3619,140 +3753,6 @@
         {
           "file": "libs/school-service/feature/staff-management/tsconfig.lib.json",
           "hash": "6c82dd8c3d2424596cc6c96b464f24be7d0099f3"
-        }
-      ]
-    },
-    "school-service-feature-temp-license": {
-      "root": "libs/school-service/feature/temp-license",
-      "projectType": "library",
-      "sourceRoot": "libs/school-service/feature/temp-license/src",
-      "prefix": "e-service",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/school-service/feature/temp-license"],
-          "options": {
-            "jestConfig": "libs/school-service/feature/temp-license/jest.config.ts",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/school-service/feature/temp-license/**/*.ts",
-              "libs/school-service/feature/temp-license/**/*.html"
-            ]
-          }
-        }
-      },
-      "tags": [],
-      "files": [
-        {
-          "file": "libs/school-service/feature/temp-license/.eslintrc.json",
-          "hash": "e85ace6d8121d13eadd5c2e7168e4fd8e1a0d1fe"
-        },
-        {
-          "file": "libs/school-service/feature/temp-license/jest.config.ts",
-          "hash": "b51faee2f4a79b0e24c67c7e4ba72cad796987ee"
-        },
-        {
-          "file": "libs/school-service/feature/temp-license/project.json",
-          "hash": "57356dc8c941588683e7f90bbfc1bc32e61011ce"
-        },
-        {
-          "file": "libs/school-service/feature/temp-license/README.md",
-          "hash": "e8855321b32198c8a5b66b1ac31780664530de59"
-        },
-        {
-          "file": "libs/school-service/feature/temp-license/src/index.ts",
-          "hash": "4051e8b223038b68de6404add7d2a9c3a40d11a5"
-        },
-        {
-          "file": "libs/school-service/feature/temp-license/src/lib/school-service-feature-temp-license-routing.module.ts",
-          "hash": "8ebe591b488bfdb713bd7ed66a4fd70de4abfea3",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router",
-            "school-service-feature-container-page",
-            "shared-ui"
-          ]
-        },
-        {
-          "file": "libs/school-service/feature/temp-license/src/lib/school-service-feature-temp-license.module.ts",
-          "hash": "75a53e75b8fd2977b86a3dcd6fe1c06c72b2fb2a",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "npm:@angular/router",
-            "npm:@angular/material",
-            "shared-form-others",
-            "shared-menu",
-            "shared-ui",
-            "npm:@angular/forms",
-            "shared-search"
-          ]
-        },
-        {
-          "file": "libs/school-service/feature/temp-license/src/lib/school-temp-license-detail/school-temp-license-detail.component.html",
-          "hash": "ea7d007ed8194590ac4861f26215128a761bec72"
-        },
-        {
-          "file": "libs/school-service/feature/temp-license/src/lib/school-temp-license-detail/school-temp-license-detail.component.scss",
-          "hash": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
-        },
-        {
-          "file": "libs/school-service/feature/temp-license/src/lib/school-temp-license-detail/school-temp-license-detail.component.ts",
-          "hash": "614eee71c2746f979ec17c849976a8f18b335563",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/forms",
-            "npm:@angular/material",
-            "npm:@angular/router",
-            "shared-dialog",
-            "shared-form-others",
-            "npm:@ngneat/until-destroy"
-          ]
-        },
-        {
-          "file": "libs/school-service/feature/temp-license/src/lib/school-temp-license-detail/school-temp-license-detail.service.ts",
-          "hash": "199d878e5f5c2f8f34c685170a0a181d9e041520",
-          "deps": ["npm:@angular/core"]
-        },
-        {
-          "file": "libs/school-service/feature/temp-license/src/lib/school-temp-license-list/school-temp-license-list.component.html",
-          "hash": "fd88f06b705af942edd4adf4ea0fe402ed338a08"
-        },
-        {
-          "file": "libs/school-service/feature/temp-license/src/lib/school-temp-license-list/school-temp-license-list.component.scss",
-          "hash": "8b137891791fe96927ad78e64b0aad7bded08bdc"
-        },
-        {
-          "file": "libs/school-service/feature/temp-license/src/lib/school-temp-license-list/school-temp-license-list.component.ts",
-          "hash": "6b924d3e93a2e22c251c101f90c50c1ddfca4284",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/forms",
-            "npm:@angular/material",
-            "npm:@angular/router"
-          ]
-        },
-        {
-          "file": "libs/school-service/feature/temp-license/src/test-setup.ts",
-          "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": ["npm:jest-preset-angular"]
-        },
-        {
-          "file": "libs/school-service/feature/temp-license/tsconfig.json",
-          "hash": "623fa1791cbe2260234eb5f1c17516536d5eb609"
-        },
-        {
-          "file": "libs/school-service/feature/temp-license/tsconfig.lib.json",
-          "hash": "7ccc97366e32a44c55bcf924c3b7f68198a8d10b"
-        },
-        {
-          "file": "libs/school-service/feature/temp-license/tsconfig.spec.json",
-          "hash": "d1f5c8852d652eac23b0378b6c259ea88d5a88d1"
         }
       ]
     },
