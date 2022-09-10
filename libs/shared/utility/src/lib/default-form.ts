@@ -43,8 +43,9 @@ export function createDefaultUserForm(FormBuilder: any, Validators: any) {
     workphone: [null, [Validators.required, Validators.pattern(phonePattern)]],
     nationality: ['TH'],
     country: [],
-    visatype: [],
-    visaclass: [],
-    visaenddate: [],
   });
+}
+
+export function createDefaultVisaInfo(FormBuilder: any) {
+  return FormBuilder.group({ visatype: [], visaclass: [], visaenddate: [] });
 }

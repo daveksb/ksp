@@ -25,7 +25,6 @@ export class FormForeignIdComponent
   @Input() formHeader = 'ข้อมูลครูชาวต่างชาติ';
   @Input() prefixList: any;
   @Input() countries: any;
-  @Input() visaTypeList: any;
 
   foreignInfo = ['1.สำเนาหนังสือเดินทาง'];
 

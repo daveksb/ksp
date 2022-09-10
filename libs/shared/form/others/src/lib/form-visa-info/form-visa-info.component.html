@@ -1,38 +1,28 @@
 <form [formGroup]="form">
-  <div class="row mb-2" [ngClass]="{ hide: !foreignMode }">
-    <div class="col">
-      <label class="form-label">Visa Class </label>
-      <select
-        class="form-select"
-        [class.bg-white]="!isDarkMode && mode === 'edit'"
-        formControlName="visaclass"
-      >
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+  <div class="row mb-2">
+    <div class="col-6">
+      <label class="form-label">Visa Class</label>
+      <select class="form-select" formControlName="visaclass">
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option *ngFor="let c of visaTypeList" [value]="+c?.id">
+          {{ c?.nameEn }}
+        </option>
       </select>
     </div>
-
     <div class="col">
-      <label class="form-label">ประเภทวีซ่า </label>
-      <select
-        class="form-select"
-        [class.bg-white]="!isDarkMode && mode === 'edit'"
-        formControlName="visatype"
-      >
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+      <label class="form-label">ประเภทวีซ่า</label>
+      <select class="form-select" formControlName="visatype">
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option *ngFor="let c of visaTypeList" [value]="+c?.id">
+          {{ c?.nameTh }}
+        </option>
       </select>
     </div>
   </div>
-
-  <div class="row mb-2" [ngClass]="{ hide: !foreignMode }">
+  <div class="row mb-2">
     <div class="col-6">
-      <label class="form-label">อนุญาตถึงวันที่ </label>
-      <input formControlName="visaenddate" class="form-control" type="date" />
+      <label class="form-label">วันเดือนปีวีซ่าหมดอายุ</label>
+      <input class="form-control" type="date" formControlName="visaenddate" />
     </div>
   </div>
 </form>

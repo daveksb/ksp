@@ -65,10 +65,13 @@
           formControlName="foreignTeacher"
           [prefixList]="prefixList$ | async"
           [countries]="countries$ | async"
-          [visaTypeList]="visaTypeList$ | async"
           [formHeader]="'ข้อมูลครูชาวต่างชาติ'"
-        ></ksp-form-foreign-id>
-        <ksp-form-visa-info></ksp-form-visa-info>
+        >
+          <ksp-form-visa-info
+            [visaTypeList]="visaTypeList$ | async"
+            formControlName="visainfo"
+          ></ksp-form-visa-info>
+        </ksp-form-foreign-id>
       </div>
       <hr />
       <div class="mb-2 mt-3">

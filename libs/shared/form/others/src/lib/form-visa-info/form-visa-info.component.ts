@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import {
-  createDefaultUserForm,
+  createDefaultVisaInfo,
   providerFactory,
   validatorMessages,
 } from '@ksp/shared/utility';
@@ -15,9 +15,7 @@ import {
 })
 export class FormVisaInfoComponent extends KspFormBaseComponent {
   @Input() isDarkMode = false;
-  @Input() prefixList = null;
-  @Input() foreignMode = false;
-  @Input() qualificationMode = false;
+  @Input() visaTypeList: any;
 
   validatorMessages = validatorMessages;
 
@@ -29,7 +27,7 @@ export class FormVisaInfoComponent extends KspFormBaseComponent {
    * Use in E-service, School-Service
    */
 
-  override form = createDefaultUserForm(this.fb, Validators);
+  override form = createDefaultVisaInfo(this.fb);
 
   constructor(private fb: FormBuilder) {
     super();
@@ -40,41 +38,5 @@ export class FormVisaInfoComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
-  }
-
-  get idCardNo() {
-    return this.form.controls.idcardno;
-  }
-
-  get passportNo() {
-    return this.form.controls.passportno;
-  }
-
-  get firstNameTh() {
-    return this.form.controls.firstnameth;
-  }
-
-  get lastNameTh() {
-    return this.form.controls.lastnameth;
-  }
-
-  get firstNameEn() {
-    return this.form.controls.firstnameen;
-  }
-
-  get lastNameEn() {
-    return this.form.controls.lastnameen;
-  }
-
-  get contactPhone() {
-    return this.form.controls.contactphone;
-  }
-
-  get workPhone() {
-    return this.form.controls.workphone;
-  }
-
-  get email() {
-    return this.form.controls.email;
   }
 }

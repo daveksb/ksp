@@ -23,6 +23,7 @@ import { thaiDate } from '@ksp/shared/utility';
 export class ForeignTeacherIdRequestComponent implements OnInit {
   form = this.fb.group({
     foreignTeacher: [],
+    visainfo: [],
   });
   bureauName = '';
   schoolId = '0010201056';
@@ -65,9 +66,10 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
         res.birthdate = res.birthdate?.split('T')[0];
         res.passportstartdate = res.passportstartdate?.split('T')[0];
         res.passportenddate = res.passportenddate?.split('T')[0];
-        // res.endDate = res.endDate.split('T')[0];
+        const visainfo = JSON.parse(atob(res.visainfo));
+        visainfo.passportenddate = visainfo.passportenddate?.split('T')[0];
         this.form.get('foreignTeacher')?.patchValue(res);
-        // this.form.get('foreignTeacher')?.value;
+        this.form.controls['visainfo'].patchValue(visainfo);
       }
     });
   }
@@ -97,6 +99,8 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             userInfo.systemtype = '2';
             userInfo.requesttype = '3';
             userInfo.schoolId = this.schoolId;
+            userInfo.visainfo = JSON.stringify(this.form.value.visainfo);
+            console.log(userInfo.visainfo);
             return this.requestLicenseService.requestLicense(userInfo);
           }
           return EMPTY;
@@ -139,18 +143,5 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     this.countries$ = this.addressService.getCountry();
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.visaTypeList$ = this.generalInfoService.getVisaType();
-  }
-  getFormValidationErrors() {
-    Object.keys(this.form.controls).forEach((key) => {
-      const controlErrors = this.form.get(key)?.errors;
-      if (controlErrors != null) {
-        Object.keys(controlErrors).forEach((keyError) => {
-          console.log(
-            'Key control: ' + key + ', keyError: ' + keyError + ', err value: ',
-            controlErrors[keyError]
-          );
-        });
-      }
-    });
   }
 }
