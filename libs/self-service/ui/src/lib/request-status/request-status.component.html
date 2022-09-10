@@ -1,15 +1,19 @@
-<div class="box-header mx-4">{{ title }}</div>
-<div class="row row-cols-4 bg-light rounded shadow-sm p-1 mx-4">
-  <!-- <div>xxx</div> -->
-  <ng-container *ngFor="let header of headers; index as i">
-    <div class="col p-1">
-      <div class="d-flex flex-column align-items-center px-2 py-3 border__box">
-        <div class="text-primary fs-5 mb-1">{{ header }}</div>
+<div class="box-header">{{ title }}</div>
+<div class="mx-3">
+  <div class="row row-cols-4 bg-light rounded shadow-sm p-1">
+    <!-- <div>xxx</div> -->
+    <ng-container *ngFor="let header of headers; index as i">
+      <div class="col p-1">
+        <div
+          class="d-flex flex-column align-items-center px-2 py-3 border__box"
+        >
+          <div class="text-primary fs-5 mb-1">{{ header }}</div>
 
-        <div class="px-3 content__primary text-white fs-5 rounded">
-          112234467876543
+          <div class="px-3 content__primary text-white fs-5 rounded">
+            112234467876543
+          </div>
         </div>
       </div>
-    </div>
-  </ng-container>
+    </ng-container>
+  </div>
 </div>

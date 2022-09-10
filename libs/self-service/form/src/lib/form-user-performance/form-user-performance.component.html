@@ -1,5 +1,5 @@
 <div class="d-flex">
-  <div class="menu__container">
+  <div class="menu__container w-25">
     <mat-selection-list #subject [multiple]="false">
       <mat-list-option *ngFor="let subject of typesOfSubject" [value]="subject">
         {{ subject }}
@@ -7,7 +7,7 @@
     </mat-selection-list>
   </div>
 
-  <div class="h-auto w-100 ms-2">
+  <div class="h-auto w-75 ms-2">
     <div class="table-responsive">
       <div class="table">
         <table mat-table [dataSource]="dataSource">
