@@ -52,7 +52,7 @@
 
     <!-- (selectedIndexChange)="onTabIndexChanged($event)" -->
     <div class="full-width pb-2">
-      <mat-tab-group class="tab-group mt-3" selectedIndex="3">
+      <mat-tab-group class="tab-group mt-3" selectedIndex="5">
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address
             [provinces]="provinces$ | async"
@@ -149,16 +149,28 @@
           <br />
           <ksp-form-temp-license-number></ksp-form-temp-license-number>
           <br />
-          <ksp-form-attachment [groups]="teachingInfo"></ksp-form-attachment>
+          <ksp-form-attachment
+            [uniqueTimestamp]="uniqueTimestamp"
+            [pageType]="pageType.teachingTab"
+            [groups]="teachingInfo"
+          ></ksp-form-attachment>
         </mat-tab>
 
         <mat-tab label="ข้อมูลชี้แจงเหตุผล">
           <ksp-form-reason-info></ksp-form-reason-info>
-          <ksp-form-attachment [groups]="reasonInfo"></ksp-form-attachment>
+          <ksp-form-attachment
+            [uniqueTimestamp]="uniqueTimestamp"
+            [pageType]="pageType.reasonTab"
+            [groups]="reasonInfo"
+          ></ksp-form-attachment>
         </mat-tab>
 
         <mat-tab label="เอกสารหลักฐานประกอบ">
-          <ksp-form-attachment [groups]="evidenceFiles"></ksp-form-attachment>
+          <ksp-form-attachment
+            [uniqueTimestamp]="uniqueTimestamp"
+            [pageType]="pageType.fileAttachTab"
+            [groups]="evidenceFiles"
+          ></ksp-form-attachment>
         </mat-tab>
       </mat-tab-group>
     </div>

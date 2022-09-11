@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { levels, subjects } from '@ksp/shared/constant';
+import { levels, RequestPageType, subjects } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -43,6 +43,10 @@ export class TempLicenseRequestComponent implements OnInit {
     teachinginfo: [],
     hiringinfo: [],
   });
+
+  uniqueTimestamp = ''; // use for file upload reference, gen only first time component loaded
+
+  pageType = RequestPageType;
 
   today = thaiDate(new Date());
   countries$!: Observable<any>;
@@ -90,6 +94,7 @@ export class TempLicenseRequestComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.uniqueTimestamp = `${new Date().getTime()}`;
     this.getList();
     this.checkRequestId();
     this.checkRequestType();
