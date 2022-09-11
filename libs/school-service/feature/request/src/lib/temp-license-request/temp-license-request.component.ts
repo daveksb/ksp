@@ -8,6 +8,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
+import { defaultRequestPayload } from '@ksp/shared/interface';
 import {
   AddressService,
   GeneralInfoService,
@@ -33,8 +34,8 @@ export class TempLicenseRequestComponent implements OnInit {
     schoolAddr: [],
     edu1: [],
     edu2: [],
-    teachingInfo: [],
-    hiringInfo: [],
+    teachinginfo: [],
+    hiringinfo: [],
   });
 
   today = thaiDate(new Date());
@@ -93,7 +94,7 @@ export class TempLicenseRequestComponent implements OnInit {
   }
 
   createRequest() {
-    const baseForm = this.getDefaultForm();
+    const baseForm = this.fb.group(defaultRequestPayload);
 
     const formData: any = this.form.getRawValue();
     formData.addr1.addressType = 1;
@@ -223,11 +224,11 @@ export class TempLicenseRequestComponent implements OnInit {
       teachingLevel,
       teachingSubjects,
     };
-    this.form.controls.teachingInfo.patchValue(data);
+    this.form.controls.teachinginfo.patchValue(data);
   }
 
   pathHiringInfo(data: any) {
-    this.form.controls.hiringInfo.patchValue(data);
+    this.form.controls.hiringinfo.patchValue(data);
   }
 
   /*   onTabIndexChanged(tabIndex: number) {
@@ -237,6 +238,7 @@ export class TempLicenseRequestComponent implements OnInit {
   } */
 
   tempSave() {
+    // save uncomplete form, get requestNo and Id as response
     if (!this.requestId) {
       const formData: any = this.form.getRawValue();
       formData.userInfo.schoolId = this.schoolId;
@@ -381,60 +383,5 @@ export class TempLicenseRequestComponent implements OnInit {
         this.tumbols2$ = this.addressService.getTumbols(amphur);
       }
     }
-  }
-
-  getDefaultForm() {
-    return this.fb.group({
-      currentprocess: null,
-      requeststatus: null,
-      updatedate: null,
-      licenseid: null,
-      staffid: null,
-      systemtype: null,
-      requesttype: null,
-      requesteduocupy: null,
-      requestfor: null,
-      schoolid: null,
-      idcardno: null,
-      passportno: null,
-      passportstartdate: null,
-      passportenddate: null,
-      prefixth: null,
-      firstnameth: null,
-      lastnameth: null,
-      prefixen: null,
-      firstnameen: null,
-      lastnameen: null,
-      sex: null,
-      birthdate: null,
-      email: null,
-      position: null,
-      educationoccupy: null,
-      contactphone: null,
-      workphone: null,
-      nationality: null,
-      country: null,
-      coordinatorinfo: null,
-      visainfo: null,
-      userpermission: null,
-      addressinfo: null,
-      schooladdrinfo: null,
-      eduinfo: null,
-      teachinginfo: null,
-      reasoninfo: null,
-      fileinfo: null,
-      otherreason: null,
-      refperson: null,
-      prohibitproperty: null,
-      checkprohibitproperty: null,
-      checksubresult: null,
-      checkfinalresult: null,
-      checkhistory: null,
-      approveresult: null,
-      paymentstatus: null,
-      ref1: null,
-      ref2: null,
-      ref3: null,
-    });
   }
 }

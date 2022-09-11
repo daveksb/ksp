@@ -54,7 +54,7 @@
 
     <!-- (selectedIndexChange)="onTabIndexChanged($event)" -->
     <div class="full-width pb-2">
-      <mat-tab-group class="tab-group mt-3" selectedIndex="0">
+      <mat-tab-group class="tab-group mt-3" selectedIndex="5">
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address
             [provinces]="provinces$ | async"
@@ -130,7 +130,7 @@
         <mat-tab label="ข้อมูลการสอนและการจ้าง">
           <ng-container *ngIf="requestType === 1 || requestType === 3">
             <ksp-form-teaching-info
-              formControlName="teachingInfo"
+              formControlName="teachinginfo"
             ></ksp-form-teaching-info>
             <br />
           </ng-container>
@@ -143,7 +143,7 @@
           /></ng-container> -->
 
           <ksp-form-hiring-info
-            formControlName="hiringInfo"
+            formControlName="hiringinfo"
             [staffTypes]="staffTypes$ | async"
             [positionTypes]="positionTypes$ | async"
             [academicStandingList]="academicTypes$ | async"

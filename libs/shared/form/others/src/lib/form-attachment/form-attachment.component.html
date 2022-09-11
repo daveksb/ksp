@@ -15,14 +15,14 @@
       </thead>
       <tbody class="text-secondary">
         <ng-container *ngFor="let group of groups; index as i">
-          <tr style="border-top: 1px solid #dadde1">
+          <tr style="height: 60px; border-top: 1px solid #dadde1">
             <th class="ps-3 py-2 text-black">
               {{ group }}
               <div class="text-secondary">
                 <div>
-                  xxxxxxxx_xxxxx.pdf
+                  {{ fileName[i] }}
                   <i
-                    *ngIf="i === 0 && mode === 'edit'"
+                    *ngIf="fileName[i] && mode === 'edit'"
                     class="bi bi-x-circle-fill text-danger fs-6 ms-2"
                     role="button"
                   ></i>
@@ -37,9 +37,11 @@
               <label class="view__label" (click)="view()">ดูเอกสารแนบ</label>
             </td>
             <td *ngIf="mode === 'edit'" class="text-center">
-              <button id="btn-upload" type="button" class="btn btn-primary">
-                + อัพโหลดไฟล์
-              </button>
+              <ksp-file-upload
+                [showUploadedFileName]="false"
+                [systemFileName]="group"
+                (uploadComplete)="fileName[i] = $event"
+              ></ksp-file-upload>
             </td>
             <!-- <td>
               <div
