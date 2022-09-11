@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { levels, subjects } from '@ksp/shared/constant';
+import { levels, RequestPageType, subjects } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -43,6 +43,8 @@ export class TempLicenseRequestComponent implements OnInit {
     teachinginfo: [],
     hiringinfo: [],
   });
+
+  pageType = RequestPageType;
 
   today = thaiDate(new Date());
   countries$!: Observable<any>;

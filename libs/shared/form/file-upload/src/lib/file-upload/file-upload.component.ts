@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { FileUploadService } from './file-upload.service';
+import { RequestPageType } from '@ksp/shared/constant';
 
 @UntilDestroy()
 @Component({
@@ -21,7 +22,8 @@ export class FileUploadComponent extends KspFormBaseComponent {
   requiredFileType!: string;
 
   @Input() buttonLabel = 'อัพโหลดไฟล์';
-  @Input() systemFileName = '';
+  @Input() systemFileName = '-'; // รายชื่ออ้างอิงในระบบ เช่น 'หนังสือนำส่งจากสถานศึกษา (ฉบับจริงและวันที่ออกหนังสือไม่เกิน 30 วัน)', 'รูปถ่าย 1 นิ้ว'
+  @Input() pageType!: RequestPageType; // tab ที่เรียกใช้งาน
   @Input() showUploadedFileName = true;
   @Input() uploadType: 'button' | 'link' = 'button';
   @Output() uploadComplete = new EventEmitter<string>();
@@ -36,27 +38,16 @@ export class FileUploadComponent extends KspFormBaseComponent {
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
 
-    /*
-    {
-  "pagetype" : "ทดสอบ3",
-  "originalname" : "ทดสอบ3",
-  "systemname" : "ทดสอบ4",
-  "file" : "ZQ==",
-  "uniquetimpstamp" : "abcd5444",
-  "tokenkey" : "abcdjbtswWVuiFxOlK4aHOK6AvcDlK6bBfCnQEHvanYkhuWAWQS6WQx6n4uVmZTxCYi4JEJ9ysLo2h6WLvjHaeHpAx2C3bt3LGjq"
-}
-    */
-
     const payload = {
-      pagetype: 'file-upload-tap-2',
+      pagetype: this.pageType,
       originalname: file.name,
       systemname: this.systemFileName,
-      file: 'ZQ==',
+      file: '',
       uniquetimpstamp: `${new Date().getTime()}`,
     };
 
     file.text().then((res) => {
-      //payload.file = JSON.stringify(res);
+      payload.file = btoa(unescape(encodeURIComponent(res)));
       this.uploadFile(payload);
     });
 
