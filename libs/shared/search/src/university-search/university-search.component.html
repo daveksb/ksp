@@ -1,113 +1,137 @@
-<div class="bg-white">
-  <div class="d-flex justify-content-between">
-    <div class="box-header">ค้นหาหน่วยงาน/สถานศึกษา</div>
-    <div>
-      <i
-        role="button"
-        matDialogClose
-        class="bi bi-x box-header text-primary"
-      ></i>
-    </div>
-  </div>
-  <hr />
-  <div class="box__detail">
-    <div class="box-header text-primary">
-      {{ data.subHeader || 'กรุณาเลือกสถาบันที่ท่านสังกัด' }}
-    </div>
-
-    <ksp-basic-institute-search
-      [searchType]="data.searchType"
-    ></ksp-basic-institute-search>
-
-    <div class="row mb-2">
-      <div class="col">
-        <label class="form-label"
-          >จังหวัด <span class="text-danger">*</span>
-        </label>
-        <select class="form-select">
-          <option selected disabled hidden>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
+<form [formGroup]="form">
+  <div class="bg-white">
+    <div class="d-flex justify-content-between">
+      <div class="box-header">ค้นหาหน่วยงาน/สถานศึกษา</div>
+      <div>
+        <i
+          role="button"
+          matDialogClose
+          class="bi bi-x box-header text-primary"
+        ></i>
       </div>
-      <div class="col">
-        <label class="form-label"
-          >อำเภอ <span class="text-danger">*</span></label
-        >
-        <select class="form-select">
-          <option selected disabled hidden>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-      </div>
-    </div>
-    <div class="d-flex justify-content-end">
-      <button
-        (click)="clear()"
-        type="button"
-        class="btn border-primary text-primary"
-      >
-        ล้างข้อมูล
-      </button>
-      <button (click)="search()" type="button" class="btn btn-primary ms-2">
-        ค้นหา
-      </button>
     </div>
     <hr />
+    <div class="box__detail">
+      <div class="box-header text-primary">
+        {{ data.subHeader || 'กรุณาเลือกสถาบันที่ท่านสังกัด' }}
+      </div>
 
-    <div class="box-header text-primary">ผลการค้นหา</div>
-    <div class="table-responsive">
-      <table class="table">
-        <thead class="header__table">
-          <tr>
-            <th scope="col">เลือก</th>
-            <th scope="col">
-              {{
-                data.searchType === 'uni' ? 'รหัสมหาวิทยาลัย' : 'รหัสโรงเรียน'
-              }}
-            </th>
-            <th scope="col">
-              {{
-                data.searchType === 'uni' ? 'ชื่อมหาวิทยาลัย' : 'ชื่อโรงเรียน'
-              }}
-            </th>
-            <th scope="col">ที่อยู่</th>
-            <th scope="col">สังกัด</th>
-          </tr>
-        </thead>
-        <tbody class="body__table">
-          <tr *ngFor="let item of Data">
-            <th scope="row" class="body__detail">
-              <div>
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  (change)="onItemChange(item.uniCode)"
-                  name="university"
-                />
-              </div>
-            </th>
-            <td class="detail__table">{{ item.uniCode }}</td>
-            <td class="detail__table">{{ item.uniName }}</td>
-            <td class="detail__table">{{ item.address }}</td>
-            <td class="detail__table">{{ item.organization }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <ksp-basic-institute-search
+        formControlName="institution"
+        [searchType]="data.searchType"
+      ></ksp-basic-institute-search>
 
-    <div class="d-flex justify-content-center mt-2">
-      <button
-        matDialogClose
-        type="button"
-        class="btn btn-primary"
-        (click)="confirmed.emit(selectedUniversity)"
-        [disabled]="!selectedUniversity"
+      <div class="row mb-2">
+        <div class="col">
+          <label class="form-label"
+            >จังหวัด <span class="text-danger">*</span>
+          </label>
+          <select
+            formControlName="provinceid"
+            (change)="provinceChange($event)"
+            class="form-select"
+          >
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
+            <option
+              *ngFor="let province of provinces$ | async"
+              [value]="province?.province_id"
+            >
+              {{ province?.province_name }}
+            </option>
+          </select>
+        </div>
+        <div class="col">
+          <label class="form-label"
+            >อำเภอ <span class="text-danger">*</span></label
+          >
+          <select formControlName="amphurid" class="form-select">
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
+            <option *ngFor="let a of amphurs$ | async" [value]="a?.amphurCode">
+              {{ a?.amphurName }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end">
+        <button
+          (click)="clear()"
+          type="button"
+          class="btn border-primary text-primary"
+        >
+          ล้างข้อมูล
+        </button>
+        <button (click)="search()" type="button" class="btn btn-primary ms-2">
+          ค้นหา
+        </button>
+      </div>
+      <hr />
+
+      <div class="box-header text-primary">ผลการค้นหา</div>
+      <div class="table-responsive">
+        <table class="table">
+          <thead class="header__table">
+            <tr>
+              <th scope="col">เลือก</th>
+              <th scope="col">
+                {{
+                  data.searchType === 'uni' ? 'รหัสมหาวิทยาลัย' : 'รหัสโรงเรียน'
+                }}
+              </th>
+              <th scope="col">
+                {{
+                  data.searchType === 'uni' ? 'ชื่อมหาวิทยาลัย' : 'ชื่อโรงเรียน'
+                }}
+              </th>
+              <th scope="col">ที่อยู่</th>
+              <th scope="col">สังกัด</th>
+            </tr>
+          </thead>
+          <tbody class="body__table">
+            <tr *ngFor="let item of Data">
+              <th scope="row" class="body__detail">
+                <div>
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    (change)="onItemChange(item.uniCode)"
+                    name="university"
+                  />
+                </div>
+              </th>
+              <td class="detail__table">{{ item.schoolId }}</td>
+              <td class="detail__table">{{ item.schoolName }}</td>
+              <td class="detail__table">{{ item.addressShow }}</td>
+              <td class="detail__table">{{ item.bureauName }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <nav
+        *ngIf="Data.length > 0"
+        style="padding-top: 20px"
+        aria-label="Page navigation example"
       >
-        ยืนยัน
-      </button>
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link">Previous</a></li>
+          <li class="page-item"><a class="page-link">1</a></li>
+          <li class="page-item"><a class="page-link">2</a></li>
+          <li class="page-item"><a class="page-link">3</a></li>
+          <li class="page-item"><a class="page-link">Next</a></li>
+        </ul>
+      </nav>
+
+      <div class="d-flex justify-content-center mt-2">
+        <button
+          matDialogClose
+          type="button"
+          class="btn btn-primary"
+          (click)="confirmed.emit(selectedUniversity)"
+          [disabled]="!selectedUniversity"
+        >
+          ยืนยัน
+        </button>
+      </div>
     </div>
   </div>
-</div>
+</form>

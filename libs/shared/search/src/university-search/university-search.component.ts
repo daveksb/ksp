@@ -1,13 +1,9 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  EventEmitter,
-  Inject,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AddressService, RequestLicenseService } from '@ksp/shared/service';
+import { Observable } from 'rxjs';
 import { BasicInstituteSearchComponent } from '../basic-institute-search/basic-institute-search.component';
 
 /* export type SearchType = 'uni' | 'school'; */
@@ -16,27 +12,47 @@ import { BasicInstituteSearchComponent } from '../basic-institute-search/basic-i
   templateUrl: './university-search.component.html',
   styleUrls: ['./university-search.component.scss'],
   standalone: true,
-  imports: [CommonModule, MatDialogModule, BasicInstituteSearchComponent],
+  imports: [
+    CommonModule,
+    MatDialogModule,
+    BasicInstituteSearchComponent,
+    ReactiveFormsModule,
+  ],
 })
 export class UniversitySearchComponent implements OnInit {
   /* @Input() searchType = ''; */
   /* @Input() subHeader = ''; */
   @Output() confirmed = new EventEmitter<string>();
-
+  provinces$!: Observable<any>;
+  amphurs$!: Observable<any>;
   selectedUniversity = '';
-
-  Data: University[] = [];
+  form = this.fb.group({
+    institution: null,
+    provinceid: null,
+    amphurid: null,
+    offset: '0',
+    row: '5',
+  });
+  Data: any[] = [];
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {
       searchType: string;
       subHeader: string;
-    }
+    },
+    private fb: FormBuilder,
+    private addressService: AddressService,
+    private requestLicenseService: RequestLicenseService
   ) {}
 
   ngOnInit(): void {
     this.Data = [];
+    this.getList();
+    this.form.valueChanges.subscribe((res) => console.log(res));
+  }
+  getList() {
+    this.provinces$ = this.addressService.getProvinces();
   }
 
   onItemChange(universityCode: string) {
@@ -45,11 +61,50 @@ export class UniversitySearchComponent implements OnInit {
   }
 
   search() {
-    this.Data = data;
+    const data = this.form.getRawValue() as any;
+    const { provinceid, amphurid, offset, row } = data;
+    const payload = {
+      bureauid: data?.institution?.organization,
+      schoolid: data?.institution?.instituteId,
+      schoolname: data?.institution?.instituteName,
+      provinceid,
+      amphurid,
+      offset,
+      row,
+    };
+    this.requestLicenseService
+      .seachSchool(payload)
+      .subscribe((res) => (this.Data = this.generateAddressShow(res)));
+    // this.Data = data;
+  }
+  generateAddressShow(res: any[]) {
+    res.forEach((item: any) => {
+      const address = this.haveValue(item.address) ? item.address : '';
+      const moo = this.haveValue(item.moo) ? 'หมู่ ' + item.moo : '';
+      const street = this.haveValue(item.street) ? 'ซอย ' + item.street : '';
+      const road = this.haveValue(item.road) ? 'ถนน ' + item.road : '';
+      const tumbon = this.haveValue(item.tumbon) ? 'ตำบล ' + item.tumbon : '';
+      const amphur = this.haveValue(item.amphurName)
+        ? 'อำเภอ ' + item.amphurName
+        : '';
+      const province = this.haveValue(item.provinceName)
+        ? 'จังหวัด ' + item.provinceName
+        : '';
+      item.addressShow = `${address} ${moo} ${street} ${road} ${tumbon} ${amphur}  ${province}`;
+    });
+    return res;
+  }
+  haveValue(value: any) {
+    if (value && value !== '-') return true;
+    return false;
   }
 
   clear() {
     this.Data = [];
+  }
+  provinceChange(evt: any) {
+    const province = evt.target?.value;
+    this.amphurs$ = this.addressService.getAmphurs(province);
   }
 }
 
@@ -59,39 +114,3 @@ export interface University {
   address: string;
   organization: string;
 }
-
-export const data = [
-  {
-    uniCode: '000009',
-    uniName: 'วิทยาลัยเทคโนโลยีและอุตสาหกรรม การต่อเรือหนองคาย',
-    address:
-      '174 หมู่ 1 ซอย 2 ถนนแก้ววรวุฒิ ตำบลมีชัย อำเภอเมืองหนองคาย จังหวัดหนองคาย 43000',
-    organization: 'สำนักงานคณะกรรมการการ อาชีวศึกษา',
-  },
-  {
-    uniCode: '001597',
-    uniName: 'วิทยาลัยเทคนิคฉะเชิงเทรา',
-    address:
-      '12 ถนนมหาจักรพรรด ตำบลหน้าเมือง อำเภอเมืองฉะเชิงเทรา จังหวัดฉะเชิงเทรา 24000',
-    organization: 'สำนักงานคณะกรรมการการ อาชีวศึกษา',
-  },
-  {
-    uniCode: '001601',
-    uniName: 'วิทยาลัยอาชีวศึกษาชลบุรี',
-    address: '388 ม.5 ต.บ้านสวน อ.เมือง จ.ชลบุรี 20000',
-    organization: 'สำนักงานคณะกรรมการการ อาชีวศึกษา',
-  },
-  {
-    uniCode: '001611',
-    uniName: 'วิทยาลัยเทคนิคนครปฐม',
-    address: '2 ถนนเพชรเกษม ตำบลพระประโทน อำเภอเมือง จังหวัดนครปฐม 73000',
-    organization: 'สำนักงานคณะกรรมการการ อาชีวศึกษา',
-  },
-  {
-    uniCode: '001621',
-    uniName: 'วิทยาลัยเทคนิคหนองบัวลําภู',
-    address:
-      '102 หมู่ 3 ตำบลโพธิ์ชัย อำเภอเมืองหนองบัวลำภู จังหวัดหนองบัวลำภู 39000',
-    organization: 'สำนักงานคณะกรรมการการ อาชีวศึกษา',
-  },
-];
