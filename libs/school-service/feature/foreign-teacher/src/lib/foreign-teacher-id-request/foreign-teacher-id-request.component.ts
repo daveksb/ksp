@@ -30,7 +30,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   schoolName = '';
   address = '';
   requestDate = thaiDate(new Date());
-  @Input() mode: FormMode = 'edit';
+  mode: FormMode = 'edit';
   prefixList$!: Observable<any>;
   countries$!: Observable<any>;
   visaTypeList$!: Observable<any>;
@@ -62,6 +62,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   loadRequestData(id: number) {
     this.requestLicenseService.getRequestById(id).subscribe((res: any) => {
       if (res) {
+        this.mode = 'view';
         this.requestNumber = res.requestno;
         res.birthdate = res.birthdate?.split('T')[0];
         res.passportstartdate = res.passportstartdate?.split('T')[0];
@@ -100,7 +101,6 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             userInfo.requesttype = '3';
             userInfo.schoolId = this.schoolId;
             userInfo.visainfo = JSON.stringify(this.form.value.visainfo);
-            console.log(userInfo.visainfo);
             return this.requestLicenseService.requestLicense(userInfo);
           }
           return EMPTY;

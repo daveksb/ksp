@@ -1,6 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import {
+  MatDialogModule,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { GeneralInfoService } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
@@ -16,6 +20,7 @@ export class QualificationApprovePersonComponent implements OnInit {
   prefixList$!: Observable<any>;
   constructor(
     public dialogRef: MatDialogRef<QualificationApprovePersonComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private generalInfoService: GeneralInfoService,
     private fb: FormBuilder
   ) {}
@@ -33,6 +38,12 @@ export class QualificationApprovePersonComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    const mode = this.data.mode;
+    if (mode == 'view')
+      setTimeout(() => {
+        this.form.patchValue(this.data.refperson);
+        this.form.disable();
+      }, 0);
     this.getList();
   }
   getList() {

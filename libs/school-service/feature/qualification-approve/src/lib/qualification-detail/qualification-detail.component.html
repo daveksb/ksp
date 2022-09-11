@@ -24,6 +24,7 @@
           <ksp-form-user-info
             formControlName="userInfo"
             [isDarkMode]="false"
+            [mode]="mode"
             [prefixList]="prefixList$ | async"
             formControlName="userInfo"
             [qualificationMode]="true"
@@ -36,6 +37,7 @@
           <mat-tab label="ที่อยู่" class="tab-content">
             <ksp-form-address
               formControlName="addr1"
+              [mode]="mode"
               [provinces]="provinces1$ | async"
               [amphurs]="amphurs1$ | async"
               [tumbols]="tumbols1$ | async"
@@ -45,6 +47,7 @@
             ><br />
             <ksp-form-address
               formControlName="addr2"
+              [mode]="mode"
               [provinces]="provinces2$ | async"
               [amphurs]="amphurs2$ | async"
               [tumbols]="tumbols2$ | async"
@@ -54,6 +57,7 @@
               <div class="d-flex align-items-center">
                 <input
                   type="checkbox"
+                  [disabled]="mode === 'view'"
                   class="me-2"
                   (change)="useSameAddress($event)"
                 />
@@ -64,6 +68,7 @@
 
           <mat-tab label="ข้อมูลทางการศึกษา">
             <ksp-form-education-info
+              [mode]="mode"
               formControlName="education"
               [showSelectDegree]="true"
               [showGradeInput]="true"

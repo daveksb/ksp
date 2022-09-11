@@ -240,7 +240,12 @@
   <div class="row mb-2">
     <div class="col-md-6">
       <label class="form-label required">ตำแหน่ง</label>
-      <input class="form-control" type="email" [class.bg-light]="isDarkMode" />
+      <input
+        class="form-control"
+        formControlName="position"
+        type="text"
+        [class.bg-light]="isDarkMode"
+      />
     </div>
     <div class="col-6">
       <label class="form-label required">อีเมล</label>

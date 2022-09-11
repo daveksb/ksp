@@ -37,13 +37,20 @@ export class QualificationApproveDetailComponent implements OnInit {
   @Output() confirmed = new EventEmitter<boolean>();
 
   ngOnInit(): void {
-    this.institution = this.data?.institution ?? '';
-    this.degreeName = this.data?.degreeName ?? '';
-    this.major = this.data?.major ?? '';
+    const education = this.data.education;
+    const mode = this.data.mode;
+    if (mode == 'view')
+      setTimeout(() => {
+        this.form.patchValue(this.data.otherreason);
+        this.form.disable();
+      }, 0);
+    this.institution = education?.institution ?? '';
+    this.degreeName = education?.degreeName ?? '';
+    this.major = education?.major ?? '';
     this.degreeLevelName =
-      this.degreelevelMapping.get(this.data?.degreeLevelName) ?? '';
+      this.degreelevelMapping.get(education?.degreeLevelName) ?? '';
   }
   save() {
-    this.dialogRef.close({ reasoninfo: this.form.value });
+    this.dialogRef.close({ otherreason: this.form.value });
   }
 }
