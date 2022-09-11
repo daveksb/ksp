@@ -8,7 +8,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
-import { defaultRequestPayload } from '@ksp/shared/interface';
+import { defaultRequestPayload, RequestType } from '@ksp/shared/interface';
 import {
   AddressService,
   GeneralInfoService,
@@ -58,6 +58,10 @@ export class TempLicenseRequestComponent implements OnInit {
   requestTypeLabel = '';
   requestNo = '';
   schoolId = '0010201056';
+  displayMode: number =
+    RequestType[
+      'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)'
+    ];
 
   educationInfo: string[] = [];
   teachingInfo: string[] = [];
@@ -132,10 +136,10 @@ export class TempLicenseRequestComponent implements OnInit {
   }
 
   loadRequestData(id: number) {
-    this.requestService.getRequestById(id).subscribe((res) => {
+    this.requestService.getRequestById(id).subscribe((res: any) => {
       console.log('req = ', res);
       //const userInfo = {};
-      //this.form.controls.userInfo.patchValue({ id: 2 });
+      this.form.controls.userInfo.patchValue(res);
     });
   }
 
@@ -307,13 +311,27 @@ export class TempLicenseRequestComponent implements OnInit {
   checkRequestType() {
     this.route.queryParams.subscribe((params) => {
       this.requestType = Number(params['type']);
-      //console.log('request type = ', this.requestType);
       if (params['type'] == 1) {
-        this.requestTypeLabel = '(ชาวไทย)';
+        this.requestTypeLabel =
+          RequestType[
+            RequestType[
+              'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)'
+            ]
+          ];
       } else if (params['type'] == 2) {
-        this.requestTypeLabel = '(ผู้บริหารการศึกษา)';
+        this.requestTypeLabel =
+          RequestType[
+            RequestType[
+              'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ผู้บริหาร)'
+            ]
+          ];
       } else if (params['type'] == 3) {
-        this.requestTypeLabel = '(ชาวต่างชาติ)';
+        this.requestTypeLabel =
+          RequestType[
+            RequestType[
+              'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)'
+            ]
+          ];
       }
     });
   }

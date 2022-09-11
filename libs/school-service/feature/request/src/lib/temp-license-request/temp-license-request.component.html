@@ -7,10 +7,7 @@
 >
 
 <div class="bg-secondary bg-opacity-10 px-4 py-2 full-width-2">
-  <div class="box-header">
-    รายละเอียดใบคำขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
-    {{ requestTypeLabel }}
-  </div>
+  <div class="box-header">รายละเอียดใบคำ {{ requestTypeLabel }}</div>
   <div [formGroup]="form" class="bg-white py-3 px-4">
     <div>
       <ksp-request-header-info
@@ -46,7 +43,7 @@
         <ksp-form-user-info
           [isDarkMode]="false"
           [prefixList]="prefixList$ | async"
-          [foreignMode]="requestType === 3"
+          [displayMode]="displayMode"
           formControlName="userInfo"
         ></ksp-form-user-info>
       </div>

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { KspFormBaseComponent, RequestType } from '@ksp/shared/interface';
 import {
   createDefaultUserForm,
   providerFactory,
@@ -16,9 +16,12 @@ import {
 export class FormUserInfoComponent extends KspFormBaseComponent {
   @Input() isDarkMode = false;
   @Input() prefixList = null;
-  @Input() foreignMode = false;
-  @Input() qualificationMode = false;
+  @Input() displayMode: number =
+    RequestType[
+      'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)'
+    ];
 
+  RequestType = RequestType;
   validatorMessages = validatorMessages;
 
   /**
