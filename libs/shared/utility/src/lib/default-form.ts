@@ -42,8 +42,8 @@ export function createDefaultUserForm(FormBuilder: any, Validators: any) {
       [Validators.required, Validators.pattern(phonePattern)],
     ],
     workphone: [null, [Validators.required, Validators.pattern(phonePattern)]],
-    nationality: ['TH'],
-    country: [],
+    nationality: [null],
+    country: [null],
   });
 }
 

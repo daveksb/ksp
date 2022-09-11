@@ -1,10 +1,5 @@
-import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -23,6 +18,7 @@ import {
 } from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
 import { EMPTY, Observable, switchMap } from 'rxjs';
+import { RequestType } from '@ksp/shared/interface';
 
 @Component({
   selector: 'ksp-qualification-detail',
@@ -38,6 +34,7 @@ export class QualificationDetailComponent implements OnInit {
     reasoninfo: [],
   });
   requestNumber = '';
+  userInfoFormdisplayMode: number = RequestType.ขอหนังสือรับรองคุณวุฒิ;
   prefixList$!: Observable<any>;
   provinces1$!: Observable<any>;
   provinces2$!: Observable<any>;
@@ -118,20 +115,10 @@ export class QualificationDetailComponent implements OnInit {
     this.provinces1$ = this.addressService.getProvinces();
     this.provinces2$ = this.provinces1$;
     this.countries$ = this.addressService.getCountry();
-    // this.staffTypes$ = this.staffService.getStaffTypes();
-    // this.positionTypes$ = this.staffService.getPositionTypes();
-    // this.academicTypes$ = this.staffService.getAcademicStandingTypes();
   }
 
-  // useSameAddress(evt: any) {
-  //   const checked = evt.target.checked;
-  //   if (checked) {
-  //     this.form.controls.address2.patchValue(this.form.controls.address1.value);
-  //   }
-  // }
-
   cancel() {
-    this.router.navigate(['/', 'temp-license', 'list']);
+    this.router.navigate(['/temp-license', 'list']);
   }
 
   onSave() {
