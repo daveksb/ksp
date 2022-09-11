@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -10,7 +10,9 @@ import {
   QualificationApproveDetailComponent,
   QualificationApprovePersonComponent,
 } from '@ksp/shared/form/others';
+import { AddressService, GeneralInfoService } from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ksp-qualification-detail',
@@ -20,13 +22,20 @@ import { thaiDate } from '@ksp/shared/utility';
 export class QualificationDetailComponent implements OnInit {
   form = this.fb.group({
     userInfo: [],
-    address1: [],
-    address2: [],
-    education1: [],
-    education2: [],
-    education3: [],
-    education4: [],
+    addr1: [],
+    addr2: [],
+    education: [],
+    reasoninfo: [],
   });
+  requestNumber = '';
+  prefixList$!: Observable<any>;
+  provinces1$!: Observable<any>;
+  provinces2$!: Observable<any>;
+  amphurs1$!: Observable<any>;
+  tumbols1$!: Observable<any>;
+  amphurs2$!: Observable<any>;
+  tumbols2$!: Observable<any>;
+  countries$!: Observable<any>;
   requestDate = thaiDate(new Date());
   evidenceFiles = [
     'หนังสือนำส่งจากหน่วยงานผู้ใช้',
@@ -39,20 +48,32 @@ export class QualificationDetailComponent implements OnInit {
     'เอกสารอื่นๆ',
   ];
 
-  ngOnInit(): void {}
-
+  ngOnInit(): void {
+    this.getListData();
+  }
+  getListData() {
+    this.prefixList$ = this.generalInfoService.getPrefix();
+    this.provinces1$ = this.addressService.getProvinces();
+    this.provinces2$ = this.provinces1$;
+    this.countries$ = this.addressService.getCountry();
+    // this.staffTypes$ = this.staffService.getStaffTypes();
+    // this.positionTypes$ = this.staffService.getPositionTypes();
+    // this.academicTypes$ = this.staffService.getAcademicStandingTypes();
+  }
   constructor(
     public dialog: MatDialog,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private generalInfoService: GeneralInfoService,
+    private addressService: AddressService
   ) {}
 
-  useSameAddress(evt: any) {
-    const checked = evt.target.checked;
-    if (checked) {
-      this.form.controls.address2.patchValue(this.form.controls.address1.value);
-    }
-  }
+  // useSameAddress(evt: any) {
+  //   const checked = evt.target.checked;
+  //   if (checked) {
+  //     this.form.controls.address2.patchValue(this.form.controls.address1.value);
+  //   }
+  // }
 
   cancel() {
     this.router.navigate(['/', 'temp-license', 'list']);
@@ -63,17 +84,17 @@ export class QualificationDetailComponent implements OnInit {
       QualificationApproveDetailComponent,
       {
         width: '850px',
+        data: this.form.get('education')?.value,
       }
     );
-
-    confirmDialog.componentInstance.confirmed.subscribe((res) => {
+    confirmDialog.afterClosed().subscribe((res: any) => {
       if (res) {
-        this.saved();
+        this.saved(res);
       }
     });
   }
 
-  saved() {
+  saved(reasonForm: any) {
     const completeDialog = this.dialog.open(
       QualificationApprovePersonComponent,
       {
@@ -81,14 +102,15 @@ export class QualificationDetailComponent implements OnInit {
       }
     );
 
-    completeDialog.componentInstance.completed.subscribe((res) => {
+    completeDialog.afterClosed().subscribe((res) => {
       if (res) {
-        this.onConfirmed();
+        this.onConfirmed(reasonForm, res);
       }
     });
   }
 
-  onConfirmed() {
+  onConfirmed(reasonForm: any, refPersonForm: any) {
+    console.log(refPersonForm, refPersonForm);
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -97,7 +119,12 @@ export class QualificationDetailComponent implements OnInit {
     });
 
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
+      console.log(res);
       if (res) {
+        //eduInfo otherReason addressinfo refPerson
+        console.log(reasonForm);
+        console.log(refPersonForm);
+        console.log(this.form.value);
         this.onCompleted();
       }
     });
@@ -118,5 +145,34 @@ export class QualificationDetailComponent implements OnInit {
         this.cancel();
       }
     });
+  }
+  provinceChanged(addrType: number, evt: any) {
+    const province = evt.target?.value;
+    if (province) {
+      if (addrType === 1) {
+        this.amphurs1$ = this.addressService.getAmphurs(province);
+      } else if (addrType === 2) {
+        this.amphurs2$ = this.addressService.getAmphurs(province);
+      }
+    }
+  }
+  amphurChanged(addrType: number, evt: any) {
+    const amphur = evt.target?.value;
+    if (amphur) {
+      if (addrType === 1) {
+        this.tumbols1$ = this.addressService.getTumbols(amphur);
+      } else if (addrType === 2) {
+        this.tumbols2$ = this.addressService.getTumbols(amphur);
+      }
+    }
+  }
+  useSameAddress(evt: any) {
+    const checked = evt.target.checked;
+    this.amphurs2$ = this.amphurs1$;
+    this.tumbols2$ = this.tumbols1$;
+    this.provinces2$ = this.provinces1$;
+    if (checked) {
+      this.form.controls.addr2.patchValue(this.form.controls.addr1.value);
+    }
   }
 }

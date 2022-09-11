@@ -13,8 +13,8 @@
     <div class="bg-white py-3 px-4">
       <div>
         <ksp-request-header-info
-          [requestDate]="'10 ตุลาคม 2565'"
-          [requestNumber]="'112234467876545'"
+          [requestDate]="requestDate"
+          [requestNumber]="requestNumber"
         ></ksp-request-header-info>
         <hr />
 
@@ -22,7 +22,9 @@
           <div class="box-header text-primary">รายละเอียดข้อมูล</div>
 
           <ksp-form-user-info
+            formControlName="userInfo"
             [isDarkMode]="false"
+            [prefixList]="prefixList$ | async"
             formControlName="userInfo"
             [qualificationMode]="true"
           ></ksp-form-user-info>
@@ -32,10 +34,22 @@
       <div class="full-width pb-2">
         <mat-tab-group class="tab-group mt-3" selectedIndex="0">
           <mat-tab label="ที่อยู่" class="tab-content">
-            <ksp-form-address formControlName="address1"
+            <ksp-form-address
+              formControlName="addr1"
+              [provinces]="provinces1$ | async"
+              [amphurs]="amphurs1$ | async"
+              [tumbols]="tumbols1$ | async"
+              (provinceChanged)="provinceChanged(1, $event)"
+              (amphurChanged)="amphurChanged(1, $event)"
               >ที่อยู่ทะเบียนบ้าน</ksp-form-address
             ><br />
-            <ksp-form-address formControlName="address2"
+            <ksp-form-address
+              formControlName="addr2"
+              [provinces]="provinces2$ | async"
+              [amphurs]="amphurs2$ | async"
+              [tumbols]="tumbols2$ | async"
+              (provinceChanged)="provinceChanged(2, $event)"
+              (amphurChanged)="amphurChanged(2, $event)"
               >ที่อยู่ที่ติดต่อได้สะดวก
               <div class="d-flex align-items-center">
                 <input
@@ -50,45 +64,13 @@
 
           <mat-tab label="ข้อมูลทางการศึกษา">
             <ksp-form-education-info
-              formControlName="education1"
-              [showSelectDegree]="false"
+              formControlName="education"
+              [showSelectDegree]="true"
               [showGradeInput]="true"
               [showGraduateYearInput]="true"
-              ><input
-                type="checkbox"
-                class="me-2"
-              />วุฒิการศึกษาปริญญาตรี</ksp-form-education-info
-            ><br />
-            <ksp-form-education-info
-              formControlName="education2"
-              [showSelectDegree]="false"
-              [showGradeInput]="false"
-              [showGraduateYearInput]="true"
-              ><input
-                type="checkbox"
-                class="me-2"
-              />วุฒิการศึกษาปริญญาโท</ksp-form-education-info
-            ><br />
-            <ksp-form-education-info
-              formControlName="education3"
-              [showSelectDegree]="false"
-              [showGradeInput]="false"
-              [showGraduateYearInput]="true"
-              ><input
-                type="checkbox"
-                class="me-2"
-              />วุฒิการศึกษาปริญญาเอก</ksp-form-education-info
-            ><br />
-            <ksp-form-education-info
-              formControlName="education4"
-              [showSelectDegree]="false"
-              [showGradeInput]="false"
-              [showGraduateYearInput]="true"
-              ><input
-                type="checkbox"
-                class="me-2"
-              />วุฒิการศึกษาปริญญาอื่นๆที่เทียบเท่าปริญญาตรี / ปริญญาทางการศึกษา
-            </ksp-form-education-info>
+              [showCheckbox]="false"
+              [countries]="countries$ | async"
+            ></ksp-form-education-info>
           </mat-tab>
 
           <mat-tab label="เอกสารหลักฐานประกอบ">
