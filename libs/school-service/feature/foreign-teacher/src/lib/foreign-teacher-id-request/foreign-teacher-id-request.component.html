@@ -62,12 +62,14 @@
       <br />
       <div class="mb-3">
         <ksp-form-foreign-id
+          [mode]="mode"
           formControlName="foreignTeacher"
           [prefixList]="prefixList$ | async"
           [countries]="countries$ | async"
           [formHeader]="'ข้อมูลครูชาวต่างชาติ'"
         >
           <ksp-form-visa-info
+            [mode]="mode"
             [visaTypeList]="visaTypeList$ | async"
             formControlName="visainfo"
           ></ksp-form-visa-info>

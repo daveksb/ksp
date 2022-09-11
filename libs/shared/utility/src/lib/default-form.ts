@@ -35,6 +35,7 @@ export function createDefaultUserForm(FormBuilder: any, Validators: any) {
     ],
     sex: [null, Validators.required],
     birthdate: [null, Validators.required],
+    position: [null, Validators.required],
     email: [null, [Validators.required, Validators.email]],
     contactphone: [
       null,
