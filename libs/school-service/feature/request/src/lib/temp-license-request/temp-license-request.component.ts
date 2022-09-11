@@ -8,7 +8,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
-import { defaultRequestPayload } from '@ksp/shared/interface';
+import { defaultRequestPayload, RequestType } from '@ksp/shared/interface';
 import {
   AddressService,
   GeneralInfoService,
@@ -16,7 +16,12 @@ import {
   StaffService,
   TempLicenseService,
 } from '@ksp/shared/service';
-import { parseJson, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
+import {
+  parseJson,
+  replaceEmptyWithNull,
+  thaiDate,
+  toLowercaseProp,
+} from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 import { LicenseDetailService } from './temp-license-request.service';
@@ -58,6 +63,10 @@ export class TempLicenseRequestComponent implements OnInit {
   requestTypeLabel = '';
   requestNo = '';
   schoolId = '0010201056';
+  displayMode: number =
+    RequestType[
+      'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)'
+    ];
 
   educationInfo: string[] = [];
   teachingInfo: string[] = [];
@@ -75,7 +84,7 @@ export class TempLicenseRequestComponent implements OnInit {
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
     private staffService: StaffService,
-    private requestLicenseService: RequestLicenseService
+    private requestService: RequestLicenseService
   ) {}
 
   ngOnInit(): void {
@@ -88,7 +97,7 @@ export class TempLicenseRequestComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.requestId = Number(params.get('id'));
       if (this.requestId) {
-        this.loadRequestData(this.requestId);
+        this.loadRequestFromId(this.requestId);
       }
     });
   }
@@ -103,13 +112,7 @@ export class TempLicenseRequestComponent implements OnInit {
     const { id, ...rawUserInfo } = formData.userInfo;
     rawUserInfo.schoolId = this.schoolId;
 
-    const userInfo = Object.keys(rawUserInfo).reduce(
-      (destination: any, key) => {
-        destination[key.toLowerCase()] = rawUserInfo[key];
-        return destination;
-      },
-      {}
-    );
+    const userInfo = toLowercaseProp(rawUserInfo);
 
     userInfo.ref1 = '2';
     userInfo.ref2 = '03';
@@ -124,19 +127,16 @@ export class TempLicenseRequestComponent implements OnInit {
       ...{ teachinginfo: JSON.stringify(formData.teachingInfo) },
     };
 
-    // console.log('payload = ', payload);
     baseForm.patchValue(payload);
     //console.log('current form = ', baseForm.value);
-    this.requestLicenseService.requestLicense(payload).subscribe((res) => {
+    this.requestService.requestLicense(payload).subscribe((res) => {
       //console.log('request result = ', res);
     });
   }
 
-  loadRequestData(id: number) {
-    this.requestLicenseService.getRequestById(id).subscribe((res) => {
-      console.log('req = ', res);
-      //const userInfo = {};
-      //this.form.controls.userInfo.patchValue({ id: 2 });
+  loadRequestFromId(id: number) {
+    this.requestService.getRequestById(id).subscribe((res: any) => {
+      this.form.controls.userInfo.patchValue(res);
     });
   }
 
@@ -150,6 +150,8 @@ export class TempLicenseRequestComponent implements OnInit {
       .searchStaffFromIdCard(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
+        console.log('req = ', res);
+        res = toLowercaseProp(res);
         this.pathUserInfo(res);
         this.patchAddress(parseJson(res.addresses));
         this.patchEdu(parseJson(res.educations));
@@ -189,7 +191,7 @@ export class TempLicenseRequestComponent implements OnInit {
   }
 
   pathUserInfo(data: any) {
-    const {
+    /*     const {
       schoolId,
       createDate,
       addresses,
@@ -197,9 +199,9 @@ export class TempLicenseRequestComponent implements OnInit {
       teachinginfo,
       hiringinfo,
       ...formData
-    } = data;
-    formData.birthDate = formData.birthDate.split('T')[0];
-    this.form.controls.userInfo.patchValue(formData);
+    } = data; */
+    //formData.birthDate = formData.birthDate.split('T')[0];
+    this.form.controls.userInfo.patchValue(data);
   }
 
   pathTeachingInfo(res: any) {
@@ -307,14 +309,29 @@ export class TempLicenseRequestComponent implements OnInit {
 
   checkRequestType() {
     this.route.queryParams.subscribe((params) => {
+      this.form.reset();
       this.requestType = Number(params['type']);
-      //console.log('request type = ', this.requestType);
       if (params['type'] == 1) {
-        this.requestTypeLabel = '(ชาวไทย)';
+        this.requestTypeLabel =
+          RequestType[
+            RequestType[
+              'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)'
+            ]
+          ];
       } else if (params['type'] == 2) {
-        this.requestTypeLabel = '(ผู้บริหารการศึกษา)';
+        this.requestTypeLabel =
+          RequestType[
+            RequestType[
+              'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ผู้บริหาร)'
+            ]
+          ];
       } else if (params['type'] == 3) {
-        this.requestTypeLabel = '(ชาวต่างชาติ)';
+        this.requestTypeLabel =
+          RequestType[
+            RequestType[
+              'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)'
+            ]
+          ];
       }
     });
   }

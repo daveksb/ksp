@@ -2,7 +2,19 @@
   <input type="hidden" formControlName="id" />
 
   <div class="row mb-2">
-    <div class="col-6" *ngIf="!foreignMode">
+    <div
+      class="col-6"
+      *ngIf="
+        !(
+          displayMode ===
+            RequestType['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ'] ||
+          displayMode ===
+            RequestType[
+              'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)'
+            ]
+        )
+      "
+    >
       <label class="form-label required">หมายเลขบัตรประชาชน </label>
       <input
         maxlength="13"
@@ -19,7 +31,12 @@
       </ng-container>
     </div>
 
-    <div class="col" [ngClass]="{ hide: !qualificationMode }">
+    <div
+      class="col"
+      [ngClass]="{
+        hide: displayMode !== RequestType['ขอหนังสือรับรองคุณวุฒิ']
+      }"
+    >
       <label class="form-label">ประเภทการยื่น</label>
       <select
         class="form-select"
@@ -31,7 +48,7 @@
       </select>
     </div>
 
-    <div class="col" [ngClass]="{ hide: !foreignMode }">
+    <div class="col">
       <label class="form-label">หมายเลขหนังสือเดินทาง (Passport Number) </label>
       <input class="form-control" type="text" formControlName="passportno" />
       <ng-container
@@ -43,7 +60,16 @@
       </ng-container>
     </div>
 
-    <div class="col" [ngClass]="{ hide: !foreignMode }">
+    <div
+      class="col"
+      [ngClass]="{
+        hide:
+          displayMode !==
+          RequestType[
+            'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)'
+          ]
+      }"
+    >
       <label class="form-label required">วันที่ออก</label>
       <input
         class="form-control"
@@ -53,7 +79,16 @@
       />
     </div>
 
-    <div class="col" [ngClass]="{ hide: !foreignMode }">
+    <div
+      class="col"
+      [ngClass]="{
+        hide:
+          displayMode !==
+          RequestType[
+            'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)'
+          ]
+      }"
+    >
       <label class="form-label required">วันที่หมดอายุ</label>
       <input
         class="form-control"
@@ -98,7 +133,17 @@
       </ng-container>
     </div>
 
-    <div class="col-md" *ngIf="foreignMode">
+    <div
+      class="col-md"
+      *ngIf="
+        displayMode ===
+          RequestType[
+            'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)'
+          ] ||
+        displayMode ===
+          RequestType['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ']
+      "
+    >
       <label class="form-label required">ชื่อกลาง</label>
       <input
         [class.bg-light]="isDarkMode"
@@ -161,7 +206,17 @@
         </span>
       </ng-container>
     </div>
-    <div class="col-md" *ngIf="foreignMode">
+    <div
+      class="col-md"
+      *ngIf="
+        displayMode ===
+          RequestType[
+            'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)'
+          ] ||
+        displayMode ===
+          RequestType['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ']
+      "
+    >
       <label class="form-label required">ชื่อกลาง</label>
       <input
         [class.bg-light]="isDarkMode"
@@ -191,7 +246,13 @@
   </div>
 
   <div class="row mb-2">
-    <div class="col-md-6" *ngIf="!foreignMode">
+    <div
+      class="col-md-6"
+      *ngIf="
+        displayMode !==
+        RequestType['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ']
+      "
+    >
       <label class="form-label required">เพศ</label>
       <select
         [class.bg-white]="!isDarkMode && mode === 'edit'"
@@ -214,7 +275,13 @@
       />
     </div>
 
-    <div class="col" *ngIf="foreignMode">
+    <div
+      class="col"
+      *ngIf="
+        displayMode ===
+        RequestType['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ']
+      "
+    >
       <label class="form-label required">ประเทศ</label>
       <select
         [class.bg-white]="!isDarkMode && mode === 'edit'"
@@ -225,7 +292,13 @@
       </select>
     </div>
 
-    <div class="col" *ngIf="foreignMode">
+    <div
+      class="col"
+      *ngIf="
+        displayMode ===
+        RequestType['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ']
+      "
+    >
       <label class="form-label required">สัญชาติ</label>
       <select
         [class.bg-white]="!isDarkMode && mode === 'edit'"
@@ -237,28 +310,12 @@
     </div>
   </div>
 
-  <div class="row mb-2">
-    <div class="col-md-6">
-      <label class="form-label required">ตำแหน่ง</label>
-      <input class="form-control" type="email" [class.bg-light]="isDarkMode" />
-    </div>
-    <div class="col-6">
-      <label class="form-label required">อีเมล</label>
-      <input
-        class="form-control"
-        type="email"
-        [class.bg-light]="isDarkMode"
-        formControlName="email"
-      />
-      <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
-        <span class="text-danger" *ngIf="email.errors?.['email']">{{
-          validatorMessages.email
-        }}</span>
-      </ng-container>
-    </div>
-  </div>
-
-  <div class="row mb-2" *ngIf="!foreignMode">
+  <div
+    class="row mb-2"
+    *ngIf="
+      displayMode !== RequestType['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ']
+    "
+  >
     <div class="col-md-6">
       <label class="form-label required">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
       <input
@@ -292,6 +349,27 @@
           >{{ validatorMessages.phone }}
         </span>
       </ng-container>
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-6">
+      <label class="form-label required">อีเมล</label>
+      <input
+        class="form-control"
+        type="email"
+        [class.bg-light]="isDarkMode"
+        formControlName="email"
+      />
+      <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
+        <span class="text-danger" *ngIf="email.errors?.['email']">{{
+          validatorMessages.email
+        }}</span>
+      </ng-container>
+    </div>
+    <div class="col-md-6" *ngIf="false">
+      <label class="form-label required">ตำแหน่ง</label>
+      <input class="form-control" type="email" [class.bg-light]="isDarkMode" />
     </div>
   </div>
 
@@ -332,7 +410,10 @@
       </div>
     </div> -->
 
-  <div class="row mb-2" *ngIf="qualificationMode">
+  <div
+    class="row mb-2"
+    *ngIf="displayMode === RequestType['ขอหนังสือรับรองคุณวุฒิ']"
+  >
     <div class="col-6">
       <label class="form-label required">สัญชาติ</label>
       <select

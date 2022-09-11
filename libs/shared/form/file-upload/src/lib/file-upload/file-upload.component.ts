@@ -55,6 +55,19 @@ export class FileUploadComponent extends KspFormBaseComponent {
       uniquetimpstamp: `${new Date().getTime()}`,
     };
 
+    file.text().then((res) => {
+      //payload.file = JSON.stringify(res);
+      this.uploadFile(payload);
+    });
+
+    if (file) {
+      this.fileName = file.name;
+    }
+
+    this.uploadComplete.emit(file.name);
+  }
+
+  uploadFile(payload: any) {
     this.uploadService
       .uploadFile(payload)
       .pipe(untilDestroyed(this))
@@ -62,16 +75,7 @@ export class FileUploadComponent extends KspFormBaseComponent {
         if (event.type == HttpEventType.UploadProgress) {
           this.uploadProgress = Math.round(100 * (event.loaded / event.total));
         }
-        this.uploadComplete.emit(file.name);
       });
-
-    /*     file.text().then((res) => {
-      console.log('res = ', res);
-    }); */
-
-    if (file) {
-      this.fileName = file.name;
-    }
   }
 
   cancelUpload() {
