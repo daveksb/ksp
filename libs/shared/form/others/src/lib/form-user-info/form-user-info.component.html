@@ -47,8 +47,12 @@
         <option value="2">ชาวต่างชาติ</option>
       </select>
     </div>
-
-    <div class="col">
+    <div
+      class="col"
+      [ngClass]="{
+        hide: displayMode === RequestType['ขอหนังสือรับรองคุณวุฒิ']
+      }"
+    >
       <label class="form-label">หมายเลขหนังสือเดินทาง (Passport Number) </label>
       <input class="form-control" type="text" formControlName="passportno" />
       <ng-container

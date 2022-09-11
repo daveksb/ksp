@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { AbstractControl, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -10,9 +10,14 @@ import {
   QualificationApproveDetailComponent,
   QualificationApprovePersonComponent,
 } from '@ksp/shared/form/others';
-import { AddressService, GeneralInfoService } from '@ksp/shared/service';
+import { FormMode } from '@ksp/shared/interface';
+import {
+  AddressService,
+  GeneralInfoService,
+  RequestLicenseService,
+} from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable, switchMap } from 'rxjs';
 import { RequestType } from '@ksp/shared/interface';
 
 @Component({
@@ -38,7 +43,11 @@ export class QualificationDetailComponent implements OnInit {
   amphurs2$!: Observable<any>;
   tumbols2$!: Observable<any>;
   countries$!: Observable<any>;
+  schoolId = '0010201056';
   requestDate = thaiDate(new Date());
+  requestId!: number;
+  otherreason: any;
+  refperson: any;
   evidenceFiles = [
     'หนังสือนำส่งจากหน่วยงานผู้ใช้',
     'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
@@ -49,23 +58,64 @@ export class QualificationDetailComponent implements OnInit {
     'สำเนาหลักฐานการเปลี่ยนชื่อ นามสกุล',
     'เอกสารอื่นๆ',
   ];
-
+  mode!: FormMode;
+  constructor(
+    public dialog: MatDialog,
+    private router: Router,
+    private fb: FormBuilder,
+    private generalInfoService: GeneralInfoService,
+    private addressService: AddressService,
+    private requestLicenseService: RequestLicenseService,
+    private route: ActivatedRoute
+  ) {}
   ngOnInit(): void {
     this.getListData();
+    this.checkRequestId();
   }
+  checkRequestId() {
+    this.route.paramMap.subscribe((params) => {
+      this.requestId = Number(params.get('id'));
+      if (this.requestId) {
+        this.loadRequestData(this.requestId);
+      }
+    });
+  }
+
+  loadRequestData(id: number) {
+    this.requestLicenseService.getRequestById(id).subscribe((res: any) => {
+      if (res) {
+        this.requestNumber = res.requestno;
+        res.birthdate = res.birthdate?.split('T')[0];
+        this.form.get('userInfo')?.patchValue(res);
+        res.eduinfo = JSON.parse(atob(res.eduinfo));
+        this.form.get('education')?.patchValue(res.eduinfo[0]);
+        this.form.get('education')?.patchValue(res.eduinfo[0]);
+        res.addressinfo = JSON.parse(atob(res.addressinfo));
+        for (let i = 0; i < res.addressinfo.length; i++) {
+          const form = this.form.get(`addr${i + 1}`) as AbstractControl<
+            any,
+            any
+          >;
+          this.getAmphurChanged(i + 1, res?.addressinfo[i].province);
+          this.getTumbon(i + 1, res?.addressinfo[i].amphur);
+          form?.patchValue(res?.addressinfo[i]);
+        }
+        console.log(this.amphurs1$);
+        res.refperson = JSON.parse(atob(res.refperson));
+        res.otherreason = JSON.parse(atob(res.otherreason));
+        this.refperson = res.refperson;
+        this.otherreason = res.otherreason;
+        this.mode = 'view';
+      }
+    });
+  }
+
   getListData() {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.provinces1$ = this.addressService.getProvinces();
     this.provinces2$ = this.provinces1$;
     this.countries$ = this.addressService.getCountry();
   }
-  constructor(
-    public dialog: MatDialog,
-    private router: Router,
-    private fb: FormBuilder,
-    private generalInfoService: GeneralInfoService,
-    private addressService: AddressService
-  ) {}
 
   cancel() {
     this.router.navigate(['/temp-license', 'list']);
@@ -76,7 +126,11 @@ export class QualificationDetailComponent implements OnInit {
       QualificationApproveDetailComponent,
       {
         width: '850px',
-        data: this.form.get('education')?.value,
+        data: {
+          education: this.form.get('education')?.value,
+          mode: this.mode,
+          otherreason: this.otherreason,
+        },
       }
     );
     confirmDialog.afterClosed().subscribe((res: any) => {
@@ -91,6 +145,7 @@ export class QualificationDetailComponent implements OnInit {
       QualificationApprovePersonComponent,
       {
         width: '850px',
+        data: { mode: this.mode, refperson: this.refperson },
       }
     );
 
@@ -102,7 +157,6 @@ export class QualificationDetailComponent implements OnInit {
   }
 
   onConfirmed(reasonForm: any, refPersonForm: any) {
-    console.log(refPersonForm, refPersonForm);
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -110,16 +164,41 @@ export class QualificationDetailComponent implements OnInit {
       },
     });
 
-    confirmDialog.componentInstance.confirmed.subscribe((res) => {
-      console.log(res);
-      if (res) {
-        //eduInfo otherReason addressinfo refPerson
-        console.log(reasonForm);
-        console.log(refPersonForm);
-        console.log(this.form.value);
+    confirmDialog.componentInstance.confirmed
+      .pipe(
+        switchMap((res) => {
+          if (res) {
+            //eduInfo otherreason addressinfo refperson
+            const formData: any = this.form.getRawValue();
+            console.log('formData', formData);
+            if (formData?.addr1?.addressType) formData.addr1.addressType = 1;
+            if (formData?.addr2?.addressType) formData.addr2.addressType = 2;
+            const { refperson } = refPersonForm;
+            const { otherreason } = reasonForm;
+            const userInfo = formData.userInfo;
+            userInfo.schoolId = this.schoolId;
+            userInfo.ref1 = '2';
+            userInfo.ref2 = '06';
+            userInfo.ref3 = '1';
+            userInfo.systemtype = '2';
+            userInfo.requesttype = '06';
+            const payload = {
+              ...userInfo,
+              ...{
+                addressinfo: JSON.stringify([formData.addr1, formData.addr2]),
+              },
+              ...{ eduinfo: JSON.stringify([formData.education]) },
+              ...{ refperson: JSON.stringify(refperson) },
+              ...{ otherreason: JSON.stringify(otherreason) },
+            };
+            return this.requestLicenseService.requestLicense(payload);
+          }
+          return EMPTY;
+        })
+      )
+      .subscribe((res) => {
         this.onCompleted();
-      }
-    });
+      });
   }
 
   onCompleted() {
@@ -148,8 +227,26 @@ export class QualificationDetailComponent implements OnInit {
       }
     }
   }
+  getAmphurChanged(addrType: number, province: any) {
+    if (province) {
+      if (addrType === 1) {
+        this.amphurs1$ = this.addressService.getAmphurs(province);
+      } else if (addrType === 2) {
+        this.amphurs2$ = this.addressService.getAmphurs(province);
+      }
+    }
+  }
   amphurChanged(addrType: number, evt: any) {
     const amphur = evt.target?.value;
+    if (amphur) {
+      if (addrType === 1) {
+        this.tumbols1$ = this.addressService.getTumbols(amphur);
+      } else if (addrType === 2) {
+        this.tumbols2$ = this.addressService.getTumbols(amphur);
+      }
+    }
+  }
+  getTumbon(addrType: number, amphur: any) {
     if (amphur) {
       if (addrType === 1) {
         this.tumbols1$ = this.addressService.getTumbols(amphur);

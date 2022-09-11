@@ -18,6 +18,10 @@ export const routes: Route[] = [
         path: 'detail',
         component: QualificationDetailComponent,
       },
+      {
+        path: 'detail/:id',
+        component: QualificationDetailComponent,
+      },
     ],
   },
 ];
