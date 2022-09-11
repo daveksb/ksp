@@ -75,7 +75,7 @@ export class TempLicenseRequestComponent implements OnInit {
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
     private staffService: StaffService,
-    private requestLicenseService: RequestLicenseService
+    private requestService: RequestLicenseService
   ) {}
 
   ngOnInit(): void {
@@ -124,16 +124,15 @@ export class TempLicenseRequestComponent implements OnInit {
       ...{ teachinginfo: JSON.stringify(formData.teachingInfo) },
     };
 
-    // console.log('payload = ', payload);
     baseForm.patchValue(payload);
     //console.log('current form = ', baseForm.value);
-    this.requestLicenseService.requestLicense(payload).subscribe((res) => {
+    this.requestService.requestLicense(payload).subscribe((res) => {
       //console.log('request result = ', res);
     });
   }
 
   loadRequestData(id: number) {
-    this.requestLicenseService.getRequestById(id).subscribe((res) => {
+    this.requestService.getRequestById(id).subscribe((res) => {
       console.log('req = ', res);
       //const userInfo = {};
       //this.form.controls.userInfo.patchValue({ id: 2 });
