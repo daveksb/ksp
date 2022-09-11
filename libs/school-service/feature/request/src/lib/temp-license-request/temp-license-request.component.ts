@@ -16,7 +16,12 @@ import {
   StaffService,
   TempLicenseService,
 } from '@ksp/shared/service';
-import { parseJson, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
+import {
+  parseJson,
+  replaceEmptyWithNull,
+  thaiDate,
+  toLowercaseProp,
+} from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 import { LicenseDetailService } from './temp-license-request.service';
@@ -92,7 +97,7 @@ export class TempLicenseRequestComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.requestId = Number(params.get('id'));
       if (this.requestId) {
-        this.loadRequestData(this.requestId);
+        this.loadRequestFromId(this.requestId);
       }
     });
   }
@@ -107,13 +112,7 @@ export class TempLicenseRequestComponent implements OnInit {
     const { id, ...rawUserInfo } = formData.userInfo;
     rawUserInfo.schoolId = this.schoolId;
 
-    const userInfo = Object.keys(rawUserInfo).reduce(
-      (destination: any, key) => {
-        destination[key.toLowerCase()] = rawUserInfo[key];
-        return destination;
-      },
-      {}
-    );
+    const userInfo = toLowercaseProp(rawUserInfo);
 
     userInfo.ref1 = '2';
     userInfo.ref2 = '03';
@@ -135,10 +134,8 @@ export class TempLicenseRequestComponent implements OnInit {
     });
   }
 
-  loadRequestData(id: number) {
+  loadRequestFromId(id: number) {
     this.requestService.getRequestById(id).subscribe((res: any) => {
-      console.log('req = ', res);
-      //const userInfo = {};
       this.form.controls.userInfo.patchValue(res);
     });
   }
@@ -153,6 +150,8 @@ export class TempLicenseRequestComponent implements OnInit {
       .searchStaffFromIdCard(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
+        console.log('req = ', res);
+        res = toLowercaseProp(res);
         this.pathUserInfo(res);
         this.patchAddress(parseJson(res.addresses));
         this.patchEdu(parseJson(res.educations));
@@ -192,7 +191,7 @@ export class TempLicenseRequestComponent implements OnInit {
   }
 
   pathUserInfo(data: any) {
-    const {
+    /*     const {
       schoolId,
       createDate,
       addresses,
@@ -200,9 +199,9 @@ export class TempLicenseRequestComponent implements OnInit {
       teachinginfo,
       hiringinfo,
       ...formData
-    } = data;
-    formData.birthDate = formData.birthDate.split('T')[0];
-    this.form.controls.userInfo.patchValue(formData);
+    } = data; */
+    //formData.birthDate = formData.birthDate.split('T')[0];
+    this.form.controls.userInfo.patchValue(data);
   }
 
   pathTeachingInfo(res: any) {
@@ -310,6 +309,7 @@ export class TempLicenseRequestComponent implements OnInit {
 
   checkRequestType() {
     this.route.queryParams.subscribe((params) => {
+      this.form.reset();
       this.requestType = Number(params['type']);
       if (params['type'] == 1) {
         this.requestTypeLabel =

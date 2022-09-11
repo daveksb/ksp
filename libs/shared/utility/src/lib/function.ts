@@ -30,3 +30,10 @@ export function replaceEmptyWithNull(input: any) {
 export function parseJson(input: any) {
   return JSON.parse(decodeURIComponent(escape(window.atob(input))));
 }
+
+export function toLowercaseProp(input: any) {
+  return Object.keys(input).reduce((destination: any, key) => {
+    destination[key.toLowerCase()] = input[key];
+    return destination;
+  }, {});
+}

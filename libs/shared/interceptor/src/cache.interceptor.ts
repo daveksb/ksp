@@ -16,8 +16,8 @@ import { environment } from '@ksp/shared/environment';
 })
 export class CacheInterceptor implements HttpInterceptor {
   // cache data to indexedDB via LocalForage
-  // cache will be cleared every 3 hrs
-  private cacheTime = 180;
+  // cache will be cleared every 5 hrs
+  private cacheTime = 300;
 
   intercept(
     request: HttpRequest<any>,
