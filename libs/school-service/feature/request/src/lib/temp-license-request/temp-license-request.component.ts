@@ -17,6 +17,7 @@ import {
   TempLicenseService,
 } from '@ksp/shared/service';
 import {
+  formatCheckboxData,
   parseJson,
   replaceEmptyWithNull,
   thaiDate,
@@ -63,6 +64,7 @@ export class TempLicenseRequestComponent implements OnInit {
   requestTypeLabel = '';
   requestNo = '';
   schoolId = '0010201056';
+  schoolAddressData: any = null;
   displayMode: number =
     RequestType[
       'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)'
@@ -102,6 +104,103 @@ export class TempLicenseRequestComponent implements OnInit {
     });
   }
 
+  loadRequestFromId(id: number) {
+    this.requestService.getRequestById(id).subscribe((res: any) => {
+      console.log('result = ', res);
+      this.form.controls.userInfo.patchValue(res);
+      this.patchAddress(parseJson(res.addressinfo));
+      this.form.controls.schoolAddr.patchValue(this.schoolAddressData);
+      this.patchEdu(parseJson(res.eduinfo));
+
+      this.patchHiringInfo(parseJson(res.teachinginfo));
+      this.patchTeachingInfo(parseJson(res.teachinginfo));
+    });
+  }
+
+  patchTeachingInfo(res: any) {
+    console.log('teaching response= ', res);
+
+    const t = JSON.parse(res.teachingInfo.teachingLevel);
+    const teachingLevel = levels.map((level) => {
+      if (t.includes(level.value)) {
+        return level.value;
+      } else {
+        return false;
+      }
+    });
+    const s = JSON.parse(res.teachingInfo.teachingSubjects);
+    const teachingSubjects = subjects.map((subj, i) => {
+      if (s.includes(subj.value)) {
+        return subj.value;
+      } else {
+        return false;
+      }
+    });
+    const data = {
+      ...res,
+      teachingLevel,
+      teachingSubjects,
+    };
+    this.form.controls.teachinginfo.patchValue(data);
+  }
+
+  patchHiringInfo(data: any) {
+    console.log('hiring = ', data);
+    this.form.controls.hiringinfo.patchValue(data);
+  }
+
+  patchEdu(edus: any[]) {
+    if (edus && edus.length) {
+      edus.map((edu, i) => {
+        if (i === 0) {
+          this.form.controls.edu1.patchValue(edu);
+        }
+        if (i === 1) {
+          this.form.controls.edu2.patchValue(edu);
+        }
+      });
+    }
+  }
+
+  patchAddress(addrs: any[]) {
+    //console.log('address = ', addrs);
+    if (addrs && addrs.length) {
+      addrs.map((addr: any, i: number) => {
+        if (i === 0) {
+          this.amphurs1$ = this.addressService.getAmphurs(addr.province);
+          this.tumbols1$ = this.addressService.getTumbols(addr.amphur);
+          this.form.controls.addr1.patchValue(addr);
+        }
+        if (i === 1) {
+          this.amphurs2$ = this.addressService.getAmphurs(addr.province);
+          this.tumbols2$ = this.addressService.getTumbols(addr.amphur);
+          this.form.controls.addr2.patchValue(addr);
+        }
+      });
+    }
+  }
+
+  searchStaffFromIdCard(idCard: string) {
+    if (!idCard) return;
+    const payload = {
+      idcardno: idCard,
+      schoolid: this.schoolId,
+    };
+    this.staffService
+      .searchStaffFromIdCard(payload)
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        console.log('req = ', res);
+        res = toLowercaseProp(res);
+        this.pathUserInfo(res);
+        this.patchAddress(parseJson(res.addresses));
+        this.form.controls.schoolAddr.patchValue(this.schoolAddressData);
+        this.patchEdu(parseJson(res.educations));
+        this.patchTeachingInfo(parseJson(res.teachinginfo));
+        this.patchHiringInfo(parseJson(res.hiringinfo));
+      });
+  }
+
   createRequest() {
     const baseForm = this.fb.group(defaultRequestPayload);
 
@@ -120,11 +219,31 @@ export class TempLicenseRequestComponent implements OnInit {
     userInfo.systemtype = '2';
     userInfo.requesttype = this.requestType;
 
+    const teaching: any = this.form.controls.teachinginfo.value;
+
+    const teachingLevel = formatCheckboxData(teaching.teachingLevel, levels);
+    const teachingSubjects = formatCheckboxData(
+      teaching.teachingSubjects,
+      subjects
+    );
+    const teachingInfo = {
+      teachingLevel,
+      teachingSubjects,
+      teachingSubjectOther: teaching.teachingSubjectOther || null,
+    };
+
+    //console.log('teachingInfo = ', teachingInfo);
+
     const payload = {
       ...replaceEmptyWithNull(userInfo),
       ...{ addressinfo: JSON.stringify([formData.addr1, formData.addr2]) },
       ...{ eduinfo: JSON.stringify([formData.edu1, formData.edu2]) },
-      ...{ teachinginfo: JSON.stringify(formData.teachingInfo) },
+      ...{
+        teachinginfo: JSON.stringify({
+          teachingInfo,
+          ...formData.hiringinfo,
+        }),
+      },
     };
 
     baseForm.patchValue(payload);
@@ -132,62 +251,6 @@ export class TempLicenseRequestComponent implements OnInit {
     this.requestService.requestLicense(payload).subscribe((res) => {
       //console.log('request result = ', res);
     });
-  }
-
-  loadRequestFromId(id: number) {
-    this.requestService.getRequestById(id).subscribe((res: any) => {
-      this.form.controls.userInfo.patchValue(res);
-    });
-  }
-
-  searchStaffFromIdCard(idCard: string) {
-    if (!idCard) return;
-    const payload = {
-      idcardno: idCard,
-      schoolid: this.schoolId,
-    };
-    this.staffService
-      .searchStaffFromIdCard(payload)
-      .pipe(untilDestroyed(this))
-      .subscribe((res) => {
-        console.log('req = ', res);
-        res = toLowercaseProp(res);
-        this.pathUserInfo(res);
-        this.patchAddress(parseJson(res.addresses));
-        this.patchEdu(parseJson(res.educations));
-        this.pathTeachingInfo(parseJson(res.teachinginfo));
-        this.pathHiringInfo(parseJson(res.hiringinfo));
-      });
-  }
-
-  patchEdu(edus: any[]) {
-    if (edus && edus.length) {
-      edus.map((edu, i) => {
-        if (i === 0) {
-          this.form.controls.edu1.patchValue(edu);
-        }
-        if (i === 1) {
-          this.form.controls.edu2.patchValue(edu);
-        }
-      });
-    }
-  }
-
-  patchAddress(addrs: any[]) {
-    if (addrs && addrs.length) {
-      addrs.map((addr: any, i: number) => {
-        if (i === 0) {
-          this.amphurs1$ = this.addressService.getAmphurs(addr.province);
-          this.tumbols1$ = this.addressService.getTumbols(addr.amphur);
-          this.form.controls.addr1.patchValue(addr);
-        }
-        if (i === 1) {
-          this.amphurs2$ = this.addressService.getAmphurs(addr.province);
-          this.tumbols2$ = this.addressService.getTumbols(addr.amphur);
-          this.form.controls.addr2.patchValue(addr);
-        }
-      });
-    }
   }
 
   pathUserInfo(data: any) {
@@ -200,44 +263,9 @@ export class TempLicenseRequestComponent implements OnInit {
       hiringinfo,
       ...formData
     } = data; */
-    //formData.birthDate = formData.birthDate.split('T')[0];
+    data.birthdate = data.birthdate.split('T')[0];
     this.form.controls.userInfo.patchValue(data);
   }
-
-  pathTeachingInfo(res: any) {
-    const t = JSON.parse(res.teachingLevel);
-    const teachingLevel = levels.map((level, i) => {
-      if (t.includes(level.value)) {
-        return level.value;
-      } else {
-        return false;
-      }
-    });
-    const s = JSON.parse(res.teachingSubjects);
-    const teachingSubjects = subjects.map((subj, i) => {
-      if (s.includes(subj.value)) {
-        return subj.value;
-      } else {
-        return false;
-      }
-    });
-    const data = {
-      ...res,
-      teachingLevel,
-      teachingSubjects,
-    };
-    this.form.controls.teachinginfo.patchValue(data);
-  }
-
-  pathHiringInfo(data: any) {
-    this.form.controls.hiringinfo.patchValue(data);
-  }
-
-  /*   onTabIndexChanged(tabIndex: number) {
-    if (tabIndex === 2) {
-      //this.patchEdu(this.staffId);
-    }
-  } */
 
   tempSave() {
     // save uncomplete form, get requestNo and Id as response
@@ -298,12 +326,15 @@ export class TempLicenseRequestComponent implements OnInit {
     this.staffTypes$ = this.staffService.getStaffTypes();
     this.positionTypes$ = this.staffService.getPositionTypes();
     this.academicTypes$ = this.staffService.getAcademicStandingTypes();
+    this.getSchoolAddress();
+  }
+
+  getSchoolAddress() {
     this.tempLicenseService
       .getSchoolInfo(this.schoolId)
       .pipe(untilDestroyed(this))
       .subscribe((res: any) => {
-        //console.log('school = ', res);
-        this.form.controls.schoolAddr.patchValue(res);
+        this.schoolAddressData = res;
       });
   }
 
@@ -401,4 +432,10 @@ export class TempLicenseRequestComponent implements OnInit {
       }
     }
   }
+
+  /*   onTabIndexChanged(tabIndex: number) {
+    if (tabIndex === 2) {
+      //this.patchEdu(this.staffId);
+    }
+  } */
 }
