@@ -39,6 +39,7 @@
             <td *ngIf="mode === 'edit'" class="text-center">
               <ksp-file-upload
                 [showUploadedFileName]="false"
+                [systemFileName]="group"
                 (uploadComplete)="fileName[i] = $event"
               ></ksp-file-upload>
             </td>

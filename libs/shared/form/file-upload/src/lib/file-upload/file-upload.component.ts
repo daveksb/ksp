@@ -1,16 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  HttpClient,
-  HttpClientModule,
-  HttpEventType,
-} from '@angular/common/http';
-import { finalize, Subscription } from 'rxjs';
+import { HttpClientModule, HttpEventType } from '@angular/common/http';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { MatIconModule } from '@angular/material/icon';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
-import { getCookie, providerFactory } from '@ksp/shared/utility';
-import { environment } from '@ksp/shared/environment';
+import { providerFactory } from '@ksp/shared/utility';
 import { FileUploadService } from './file-upload.service';
 
 @UntilDestroy()
@@ -27,6 +21,7 @@ export class FileUploadComponent extends KspFormBaseComponent {
   requiredFileType!: string;
 
   @Input() buttonLabel = 'อัพโหลดไฟล์';
+  @Input() systemFileName = '';
   @Input() showUploadedFileName = true;
   @Input() uploadType: 'button' | 'link' = 'button';
   @Output() uploadComplete = new EventEmitter<string>();
@@ -41,32 +36,41 @@ export class FileUploadComponent extends KspFormBaseComponent {
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
 
+    /*
+    {
+  "pagetype" : "ทดสอบ3",
+  "originalname" : "ทดสอบ3",
+  "systemname" : "ทดสอบ4",
+  "file" : "ZQ==",
+  "uniquetimpstamp" : "abcd5444",
+  "tokenkey" : "abcdjbtswWVuiFxOlK4aHOK6AvcDlK6bBfCnQEHvanYkhuWAWQS6WQx6n4uVmZTxCYi4JEJ9ysLo2h6WLvjHaeHpAx2C3bt3LGjq"
+}
+    */
+
+    const payload = {
+      pagetype: 'file-upload-tap-2',
+      originalname: file.name,
+      systemname: this.systemFileName,
+      file: 'ZQ==',
+      uniquetimpstamp: `${new Date().getTime()}`,
+    };
+
+    this.uploadService
+      .uploadFile(payload)
+      .pipe(untilDestroyed(this))
+      .subscribe((event: any) => {
+        if (event.type == HttpEventType.UploadProgress) {
+          this.uploadProgress = Math.round(100 * (event.loaded / event.total));
+        }
+        this.uploadComplete.emit(file.name);
+      });
+
+    /*     file.text().then((res) => {
+      console.log('res = ', res);
+    }); */
+
     if (file) {
       this.fileName = file.name;
-      const formData = new FormData();
-      formData.append('thumbnail', file);
-
-      const payload = {
-        pagetype: 'file-upload-tap',
-        originalname: file.name,
-        systemname:
-          'หนังสือนำส่งจากสถานศึกษา (ฉบับจริงและวันที่ออกหนังสือไม่เกิน 30 วัน)',
-        file: file.stream(),
-        uniquetimpstamp: new Date().getTime(),
-      };
-
-      this.uploadService
-        .uploadFile(payload)
-        .pipe(untilDestroyed(this))
-        .subscribe((event: any) => {
-          if (event.type == HttpEventType.UploadProgress) {
-            this.uploadProgress = Math.round(
-              100 * (event.loaded / event.total)
-            );
-          }
-
-          this.uploadComplete.emit(file.name);
-        });
     }
   }
 
