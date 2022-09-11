@@ -8,7 +8,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { StaffService } from '@ksp/shared/service';
-import { getCookie, mapJsonData } from '@ksp/shared/utility';
+import { getCookie, formatCheckboxData } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 
@@ -148,11 +148,11 @@ export class AddStaffTeachingInfoComponent implements OnInit {
   addTeachingInfo() {
     const payload = {
       staffId: this.staffId,
-      teachingLevel: mapJsonData(
+      teachingLevel: formatCheckboxData(
         this.form.controls.teachingLevel.value,
         levels
       ),
-      teachingSubjects: mapJsonData(
+      teachingSubjects: formatCheckboxData(
         this.form.controls.teachingSubjects.value,
         subjects
       ),

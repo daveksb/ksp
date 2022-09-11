@@ -8,7 +8,7 @@ import {
 } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 import {
-  mapJsonData,
+  formatCheckboxData,
   parseJson,
   replaceEmptyWithNull,
   thaiDate,
@@ -88,7 +88,7 @@ export class AddStaffComponent implements OnInit {
 
   pathTeachingInfo(res: any) {
     const t = JSON.parse(res.teachingLevel);
-    console.log('teaching = ', t);
+
     const teachingLevel = levels.map((level, i) => {
       if (t.includes(level.value)) {
         return level.value;
@@ -97,7 +97,7 @@ export class AddStaffComponent implements OnInit {
       }
     });
     const s = JSON.parse(res.teachingSubjects);
-    console.log('subject = ', s);
+
     const teachingSubjects = subjects.map((subj, i) => {
       if (s.includes(subj.value)) {
         return subj.value;
@@ -183,8 +183,11 @@ export class AddStaffComponent implements OnInit {
     const { ...userInfo } = replaceEmptyWithNull(formData.userInfo);
     userInfo.schoolId = this.schoolId;
     const teaching: any = this.form.controls.teachingInfo.value;
-    const teachingLevel = mapJsonData(teaching.teachingLevel, levels);
-    const teachingSubjects = mapJsonData(teaching.teachingSubjects, subjects);
+    const teachingLevel = formatCheckboxData(teaching.teachingLevel, levels);
+    const teachingSubjects = formatCheckboxData(
+      teaching.teachingSubjects,
+      subjects
+    );
     const teachingInfo = {
       teachingLevel,
       teachingSubjects,
