@@ -44,6 +44,8 @@ export class TempLicenseRequestComponent implements OnInit {
     hiringinfo: [],
   });
 
+  uniqueTimestamp = ''; // use for file upload reference, gen only first time component loaded
+
   pageType = RequestPageType;
 
   today = thaiDate(new Date());
@@ -92,6 +94,7 @@ export class TempLicenseRequestComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.uniqueTimestamp = `${new Date().getTime()}`;
     this.getList();
     this.checkRequestId();
     this.checkRequestType();

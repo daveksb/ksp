@@ -17,7 +17,7 @@ import { RequestPageType } from '@ksp/shared/constant';
   imports: [CommonModule, MatIconModule, HttpClientModule],
   providers: providerFactory(FileUploadComponent),
 })
-export class FileUploadComponent extends KspFormBaseComponent {
+export class FileUploadComponent {
   @Input()
   requiredFileType!: string;
 
@@ -25,15 +25,14 @@ export class FileUploadComponent extends KspFormBaseComponent {
   @Input() systemFileName = '-'; // รายชื่ออ้างอิงในระบบ เช่น 'หนังสือนำส่งจากสถานศึกษา (ฉบับจริงและวันที่ออกหนังสือไม่เกิน 30 วัน)', 'รูปถ่าย 1 นิ้ว'
   @Input() pageType!: RequestPageType; // tab ที่เรียกใช้งาน
   @Input() showUploadedFileName = true;
+  @Input() uniqueTimestamp = '';
   @Input() uploadType: 'button' | 'link' = 'button';
   @Output() uploadComplete = new EventEmitter<string>();
 
   fileName = '';
   uploadProgress!: number | null;
 
-  constructor(private uploadService: FileUploadService) {
-    super();
-  }
+  constructor(private uploadService: FileUploadService) {}
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
@@ -43,7 +42,7 @@ export class FileUploadComponent extends KspFormBaseComponent {
       originalname: file.name,
       systemname: this.systemFileName,
       file: '',
-      uniquetimpstamp: `${new Date().getTime()}`,
+      uniquetimpstamp: this.uniqueTimestamp,
     };
 
     file.text().then((res) => {

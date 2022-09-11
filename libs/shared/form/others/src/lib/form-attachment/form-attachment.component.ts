@@ -16,6 +16,7 @@ export class FormAttachmentComponent {
   @Input() pageType!: RequestPageType; // ใช้ อ้างอิง tab ในหน้าใบคำขอเพื่อระบุรายการไฟล์ ที่เกี่ยวข้อง enum RequestPageType
   @Input() groups: string[] = [];
   @Input() mode: FormMode = 'edit';
+  @Input() uniqueTimestamp = '';
 
   fileName: string[] = [];
 

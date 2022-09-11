@@ -150,6 +150,7 @@
           <ksp-form-temp-license-number></ksp-form-temp-license-number>
           <br />
           <ksp-form-attachment
+            [uniqueTimestamp]="uniqueTimestamp"
             [pageType]="pageType.teachingTab"
             [groups]="teachingInfo"
           ></ksp-form-attachment>
@@ -158,6 +159,7 @@
         <mat-tab label="ข้อมูลชี้แจงเหตุผล">
           <ksp-form-reason-info></ksp-form-reason-info>
           <ksp-form-attachment
+            [uniqueTimestamp]="uniqueTimestamp"
             [pageType]="pageType.reasonTab"
             [groups]="reasonInfo"
           ></ksp-form-attachment>
@@ -165,6 +167,7 @@
 
         <mat-tab label="เอกสารหลักฐานประกอบ">
           <ksp-form-attachment
+            [uniqueTimestamp]="uniqueTimestamp"
             [pageType]="pageType.fileAttachTab"
             [groups]="evidenceFiles"
           ></ksp-form-attachment>
