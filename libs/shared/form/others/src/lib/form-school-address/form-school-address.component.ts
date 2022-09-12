@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -40,7 +40,5 @@ export class FormSchoolAddressComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
-
-    this.form.disable();
   }
 }

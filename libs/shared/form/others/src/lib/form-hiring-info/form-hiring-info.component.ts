@@ -21,8 +21,8 @@ export class FormHiringInfoComponent extends KspFormBaseComponent {
     position: [null, Validators.required],
     academicStanding: [null, Validators.required],
     hiringContractNo: [],
-    startDate: [],
-    endDate: [],
+    startDate: [null, Validators.required],
+    endDate: [null, Validators.required],
     hiringPeriodYear: [],
     hiringPeriodMonth: [],
 

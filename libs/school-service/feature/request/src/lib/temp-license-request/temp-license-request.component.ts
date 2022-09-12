@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { levels, RequestPageType, subjects } from '@ksp/shared/constant';
+import {
+  levels,
+  RequestPageType,
+  RequestProcess,
+  subjects,
+} from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -120,10 +125,10 @@ export class TempLicenseRequestComponent implements OnInit {
   loadRequestFromId(id: number) {
     this.requestService.getRequestById(id).subscribe((res: any) => {
       //console.log('result = ', res);
+      this.requestNo = res.requestno;
       this.form.controls.userInfo.patchValue(res);
       this.patchAddress(parseJson(res.addressinfo));
       this.patchEdu(parseJson(res.eduinfo));
-
       this.patchHiringInfo(parseJson(res.hiringinfo));
       this.patchTeachingInfo(parseJson(res.teachinginfo));
     });
@@ -208,38 +213,46 @@ export class TempLicenseRequestComponent implements OnInit {
       });
   }
 
-  createRequest() {
+  createRequest(type: string) {
     const baseForm = this.fb.group(defaultRequestPayload);
-
     const formData: any = this.form.getRawValue();
-    formData.addr1.addressType = 1;
-    formData.addr2.addressType = 2;
+    formData.addr1.addresstype = 1;
+    formData.addr2.addresstype = 2;
 
     const { id, ...rawUserInfo } = formData.userInfo;
     rawUserInfo.schoolId = this.schoolId;
 
     const userInfo = toLowercaseProp(rawUserInfo);
 
+    if (type === 'tempSave') {
+      userInfo.currentprocess = `${RequestProcess.บันทึกชั่วคราว}`;
+    } else if (type === 'realSave') {
+      console.log('real save = ');
+      userInfo.currentprocess = `${RequestProcess.ยื่นใบคำขอ}`;
+    }
+
     userInfo.ref1 = '2';
     userInfo.ref2 = '03';
     userInfo.ref3 = '1';
     userInfo.systemtype = '2';
-    userInfo.requesttype = this.requestType;
+    userInfo.requesttype = `${this.requestType}`;
 
     const teaching: any = this.form.controls.teachinginfo.value;
+    let teachingInfo = {};
 
-    const teachingLevel = formatCheckboxData(teaching.teachingLevel, levels);
-    const teachingSubjects = formatCheckboxData(
-      teaching.teachingSubjects,
-      subjects
-    );
-    const teachingInfo = {
-      teachingLevel,
-      teachingSubjects,
-      teachingSubjectOther: teaching.teachingSubjectOther || null,
-    };
+    if (this.form.controls.teachinginfo.value) {
+      const teachingLevel = formatCheckboxData(teaching.teachingLevel, levels);
+      const teachingSubjects = formatCheckboxData(
+        teaching.teachingSubjects,
+        subjects
+      );
+      teachingInfo = {
+        teachingLevel,
+        teachingSubjects,
+        teachingSubjectOther: teaching.teachingSubjectOther || null,
+      };
+    }
 
-    //console.log('teachingInfo = ', teachingInfo);
     const payload = {
       ...replaceEmptyWithNull(userInfo),
       ...{ addressinfo: JSON.stringify([formData.addr1, formData.addr2]) },
@@ -248,63 +261,20 @@ export class TempLicenseRequestComponent implements OnInit {
       ...{ hiringinfo: JSON.stringify(formData.hiringinfo) },
     };
 
+    console.log('payload = ', payload);
+
     baseForm.patchValue(payload);
-    //console.log('current form = ', baseForm.value);
-    this.requestService.requestLicense(payload).subscribe((res) => {
-      //console.log('request result = ', res);
+    console.log('current form = ', baseForm.value);
+    this.requestService.requestLicense(baseForm.value).subscribe((res) => {
+      console.log('request result = ', res);
+      this.backToListPage();
     });
   }
 
   pathUserInfo(data: any) {
-    /*     const {
-      schoolId,
-      createDate,
-      addresses,
-      educations,
-      teachinginfo,
-      hiringinfo,
-      ...formData
-    } = data; */
+    //data = toLowercaseProp(data);
     data.birthdate = data.birthdate.split('T')[0];
     this.form.controls.userInfo.patchValue(data);
-  }
-
-  tempSave() {
-    // save uncomplete form, get requestNo and Id as response
-    if (!this.requestId) {
-      const formData: any = this.form.getRawValue();
-      formData.userInfo.schoolId = this.schoolId;
-      formData.userInfo.createDate = new Date().toISOString().split('.')[0];
-      //formData.userInfo.nationality = 'TH';
-      //formData.addr1.addressType = 1;
-      //formData.addr2.addressType = 2;
-      //console.log('formData = ', formData);
-      const { id, ...userInfo } = formData.userInfo;
-      const payload = {
-        ...userInfo,
-        ...{ addresses: JSON.stringify([formData.addr1]) },
-        ...{ educations: JSON.stringify({ a: '1' }) },
-        ...{ teachingInfo: JSON.stringify({ a: '1' }) },
-        ...{ hiringInfo: JSON.stringify({ a: '1' }) },
-      };
-
-      console.log('payload = ', payload);
-      this.staffService.addStaff2(payload).subscribe((res) => {
-        console.log('add staff result = ', res);
-      });
-    }
-  }
-
-  save() {
-    const dialogRef = this.dialog.open(ForbiddenPropertyFormComponent, {
-      width: '850px',
-    });
-
-    dialogRef.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        this.onConfirmed();
-      }
-    });
   }
 
   useSameAddress(evt: any) {
@@ -338,6 +308,18 @@ export class TempLicenseRequestComponent implements OnInit {
       .subscribe((res: any) => {
         this.form.controls.schoolAddr.patchValue(res);
       });
+  }
+
+  save() {
+    const dialogRef = this.dialog.open(ForbiddenPropertyFormComponent, {
+      width: '850px',
+    });
+
+    dialogRef.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.onConfirmed();
+      }
+    });
   }
 
   checkRequestType() {
@@ -408,7 +390,7 @@ export class TempLicenseRequestComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         if (res) {
-          this.createRequest();
+          this.createRequest('realSave');
         }
       });
   }
@@ -433,11 +415,6 @@ export class TempLicenseRequestComponent implements OnInit {
         this.tumbols2$ = this.addressService.getTumbols(amphur);
       }
     }
-  }
-
-  tumbolChanged(type: number, evt: any) {
-    const tumbol = evt.target?.value;
-    console.log('tumbol = ', tumbol);
   }
 
   /*   onTabIndexChanged(tabIndex: number) {

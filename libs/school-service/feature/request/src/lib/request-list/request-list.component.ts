@@ -93,10 +93,11 @@ export class SchoolRequestListComponent implements OnInit {
 
   checkProcess(input: string) {
     let result = '-';
-    if (input === '1') {
-      result = 'ยื่นเอกสาร';
+    if (input === '0') {
+      result = 'บันทึกชั่วคราว';
+    } else if (input === '1') {
+      result = 'ยื่นใบคำขอ';
     }
-
     return result;
   }
 }
