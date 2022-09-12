@@ -50,6 +50,7 @@
         (click)="login.emit(true)"
         type="submit"
         class="btn btn-sm btn-primary w-100 fs-5 mb-1"
+        [disabled]="!form.valid"
       >
         เข้าสู่ระบบ
       </button>

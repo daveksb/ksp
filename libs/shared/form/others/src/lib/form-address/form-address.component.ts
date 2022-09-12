@@ -48,4 +48,11 @@ export class FormAddressComponent extends KspFormBaseComponent {
       })
     );
   }
+
+  // change postcode corespond to Tumbol changed
+  updatePostcode(evt: any) {
+    const tumbolCode = evt.target?.value;
+    const postCode = this.tumbols.find((t) => t.tambolCode === tumbolCode);
+    this.form.controls.postcode.patchValue(postCode.tambolPostcode);
+  }
 }

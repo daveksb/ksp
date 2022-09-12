@@ -17,10 +17,10 @@ export class StaffListComponent {
   schoolId = '0010201056';
   displayedColumns: string[] = [
     'id',
-    'idCardNo',
+    'idcardno',
     'name',
-    'startDate',
-    'endDate',
+    'startdate',
+    'enddate',
     'profession',
     'teaching',
     'tempLicense',
@@ -68,11 +68,11 @@ export class StaffListComponent {
 
 export interface staffInfo {
   id: number;
-  idCardNo: string;
-  firstNameTh: string;
-  lastNameTh: string;
-  startDate: string;
-  endDate: string;
+  idcardno: string;
+  firstnameth: string;
+  lastnameth: string;
+  startdate: string;
+  enddate: string;
   profession: boolean;
   teaching: boolean;
   tempLicense: boolean;

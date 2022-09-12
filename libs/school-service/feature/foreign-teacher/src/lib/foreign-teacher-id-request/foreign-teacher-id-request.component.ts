@@ -99,7 +99,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             userInfo.ref3 = '1';
             userInfo.systemtype = '2';
             userInfo.requesttype = '3';
-            userInfo.schoolId = this.schoolId;
+            userInfo.schoolid = this.schoolId;
             userInfo.visainfo = JSON.stringify(this.form.value.visainfo);
             return this.requestLicenseService.requestLicense(userInfo);
           }

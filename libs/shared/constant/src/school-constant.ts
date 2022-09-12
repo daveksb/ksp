@@ -45,3 +45,12 @@ export enum RequestPageType {
   reasonTab = 'reasonTab',
   fileAttachTab = 'fileAttachTab',
 }
+
+// สถานะใบคำขอ
+export enum RequestProcess {
+  'บันทึกชั่วคราว',
+  'ยื่นใบคำขอ',
+  'ตรวจสอบเอกสาร',
+  'ยืนยันผล',
+  'ส่งแก้ไข',
+}

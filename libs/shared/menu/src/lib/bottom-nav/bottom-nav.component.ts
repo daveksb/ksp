@@ -27,7 +27,7 @@ export class BottomNavComponent {
   @Input() showCenterButtons = false;
   @Input() showCancelButton = true;
   @Input() showTempSaveButton = false;
-  @Input() disableTempSaveButton = false;
+  @Input() disableTempSaveButton = true;
   @Input() showSaveButton = false;
   @Input() colorMode: ColorMode = 'blue';
   @Input() cancelButtonLabel = 'ยกเลิก';

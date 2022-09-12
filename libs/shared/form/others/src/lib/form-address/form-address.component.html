@@ -47,8 +47,8 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-6 mb-3">
+    <div class="row mb-3">
+      <div class="col-md-6">
         <label class="form-label required">ถนน</label>
         <input
           [class.bg-light]="isDarkMode"
@@ -57,19 +57,10 @@
           formControlName="road"
         />
       </div>
-      <div class="col-md-6 mb-3">
-        <label class="form-label required">รหัสไปรษณีย์</label>
-        <input
-          [class.bg-light]="isDarkMode"
-          class="form-control"
-          type="text"
-          formControlName="postcode"
-        />
-      </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-6 mb-3">
+    <div class="row mb-3">
+      <div class="col-md-6">
         <label class="form-label required">จังหวัด</label>
         <select
           [class.bg-white]="!isDarkMode && mode === 'edit'"
@@ -86,23 +77,7 @@
           </option>
         </select>
       </div>
-      <div class="col-md-6 mb-3">
-        <label class="form-label required">ตำบล</label>
-        <select
-          [class.bg-white]="!isDarkMode && mode === 'edit'"
-          class="form-select"
-          formControlName="tumbol"
-        >
-          <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option *ngFor="let t of tumbols" [value]="t?.tambolCode">
-            {{ t?.tambolName }}
-          </option>
-        </select>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-6 mb-3">
+      <div class="col-md-6">
         <label class="form-label required">อำเภอ</label>
         <select
           [class.bg-white]="!isDarkMode && mode === 'edit'"
@@ -115,6 +90,32 @@
             {{ a?.amphurName }}
           </option>
         </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <label class="form-label required">ตำบล</label>
+        <select
+          [class.bg-white]="!isDarkMode && mode === 'edit'"
+          class="form-select"
+          formControlName="tumbol"
+          (change)="updatePostcode($event)"
+        >
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option *ngFor="let t of tumbols" [value]="t?.tambolCode">
+            {{ t?.tambolName }}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label required">รหัสไปรษณีย์</label>
+        <input
+          [class.bg-light]="isDarkMode"
+          class="form-control"
+          type="text"
+          formControlName="postcode"
+        />
       </div>
     </div>
   </div>

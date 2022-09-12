@@ -25,8 +25,8 @@
             <input
               class="form-control form-search"
               type="text"
-              value="6022154878454"
               placeholder="หมายเลขบัตรประชาชนจำนวน 13 หลัก"
+              value="7045200041205"
               #idcard
             />
           </div>
@@ -52,7 +52,7 @@
 
     <!-- (selectedIndexChange)="onTabIndexChanged($event)" -->
     <div class="full-width pb-2">
-      <mat-tab-group class="tab-group mt-3" selectedIndex="5">
+      <mat-tab-group class="tab-group mt-3" selectedIndex="0">
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address
             [provinces]="provinces$ | async"
@@ -122,7 +122,7 @@
             formControlName="edu3"
           ></ksp-form-education-info-manager> -->
           <br />
-          <ksp-form-attachment [groups]="educationInfo"></ksp-form-attachment>
+          <ksp-form-attachment [groups]="eduFiles"></ksp-form-attachment>
         </mat-tab>
 
         <mat-tab label="ข้อมูลการสอนและการจ้าง">
@@ -152,7 +152,7 @@
           <ksp-form-attachment
             [uniqueTimestamp]="uniqueTimestamp"
             [pageType]="pageType.teachingTab"
-            [groups]="teachingInfo"
+            [groups]="teachingFiles"
           ></ksp-form-attachment>
         </mat-tab>
 
@@ -161,7 +161,7 @@
           <ksp-form-attachment
             [uniqueTimestamp]="uniqueTimestamp"
             [pageType]="pageType.reasonTab"
-            [groups]="reasonInfo"
+            [groups]="reasonFiles"
           ></ksp-form-attachment>
         </mat-tab>
 
@@ -169,7 +169,8 @@
           <ksp-form-attachment
             [uniqueTimestamp]="uniqueTimestamp"
             [pageType]="pageType.fileAttachTab"
-            [groups]="evidenceFiles"
+            [groups]="attachFiles"
+            (downloadClick)="loadFile()"
           ></ksp-form-attachment>
         </mat-tab>
       </mat-tab-group>
@@ -181,16 +182,16 @@
   <ksp-bottom-nav
     (saveClicked)="save()"
     (cancelClicked)="backToListPage()"
-    (tempSaveClicked)="tempSave()"
+    (tempSaveClicked)="createRequest('tempSave')"
     [isFirstPage]="true"
     [colorMode]="'green'"
     [isLastPage]="true"
     [showCenterButtons]="true"
     [showCancelButton]="true"
     [showTempSaveButton]="true"
-    [disableTempSaveButton]="true"
+    [disableTempSaveButton]="disableTempSave"
     [showSaveButton]="true"
-    [disableSaveButton]="!form.valid"
+    [disableSaveButton]="disableSave"
     [saveButtonLabel]="'ส่งใบคำขอ'"
   ></ksp-bottom-nav>
 </div>

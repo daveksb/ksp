@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FormMode } from '@ksp/shared/interface';
 import { FilesPreviewComponent } from '@ksp/shared/dialog';
@@ -14,9 +14,10 @@ export class FormAttachmentComponent {
   @Input() titleClass = ``;
   @Input() titleNote = '';
   @Input() pageType!: RequestPageType; // ใช้ อ้างอิง tab ในหน้าใบคำขอเพื่อระบุรายการไฟล์ ที่เกี่ยวข้อง enum RequestPageType
-  @Input() groups: string[] = [];
+  @Input() groups: any[] = [];
   @Input() mode: FormMode = 'edit';
   @Input() uniqueTimestamp = '';
+  @Output() downloadClick = new EventEmitter<any>();
 
   fileName: string[] = [];
 

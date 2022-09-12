@@ -50,4 +50,10 @@ export class RequestLicenseService {
         map((data: any) => data.datareturn)
       );
   }
+
+  loadFile(payload: any) {
+    return this.http
+      .post(`${environment.apiUrl}/kspstaff/schrequestfileselectbyid`, payload)
+      .pipe(shareReplay());
+  }
 }
