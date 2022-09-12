@@ -2,11 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { SelfServiceUiModule } from '@ksp/self-service/ui';
-import {
-  MenuConfig,
-  SharedMenuModule,
-  TopNavComponent,
-} from '@ksp/shared/menu';
+import { MenuConfig } from '@ksp/shared/interface';
+import { SharedMenuModule, TopNavComponent } from '@ksp/shared/menu';
 
 @Component({
   selector: 'uni-service-container-page',

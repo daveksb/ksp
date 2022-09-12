@@ -1,60 +1,56 @@
 <ksp-top-nav>
-  <span header *ngIf="pageType === 1">รางวัลคุรุสภา</span>
-  <span header *ngIf="pageType === 2">รางวัลครูภาษาไทยดีเด่น</span>
-  <span header *ngIf="pageType === 3">รางวัลครูผู้สอนดีเด่น</span>
-  <span header *ngIf="pageType === 4">รางวัลคุรุสดุดี</span>
-  <span header *ngIf="pageType === 5">รางวัลครูอาวุโส</span>
-  <span header *ngIf="pageType === 6">รางวัลผลงานวิจัยของคุรุสภา</span>
+  <span header>รางวัลของฉัน</span>
 </ksp-top-nav>
 
-<div class="full-width-2 main__container px-4 py-2">
-  <self-service-request-status
-    [headers]="headerGroup"
-  ></self-service-request-status>
-  <br />
+<form [formGroup]="form">
+  <div class="full-width-2 main__container px-4 py-2">
+    <div class="row">
+      <div class="col-6">
+        <div class="box-header">ประเภทรางวัล</div>
+        <select class="form-select" formControlName="rewardType">
+          <option selected hidden disabled value="null">กรุณาเลือก</option>
+          <option *ngFor="let reward of rewardTypes" [value]="reward.value">
+            {{ reward.label }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <br />
+    <self-service-request-status
+      [headers]="headerGroup"
+    ></self-service-request-status>
+    <br />
+    <div class="box-header">รายละเอียด</div>
+    <div class="detail__container p-3">
+      <ksp-form-user-info [isDarkMode]="true"></ksp-form-user-info>
+    </div>
+    <br />
 
-  <div class="box-header">
-    <div *ngIf="pageType === 1">ข้อมูลขอรางวัลคุรุสภา</div>
-    <div *ngIf="pageType === 2">ข้อมูลขอรางวัลครูภาษาไทยดีเด่น</div>
-    <div *ngIf="pageType === 3">ข้อมูลขอรางวัลครูผู้สอนดีเด่น</div>
-    <div *ngIf="pageType === 4">ข้อมูลขอรางวัลคุรุสดุดี</div>
-    <div *ngIf="pageType === 5">ข้อมูลขอรางวัลครูอาวุโส</div>
-    <div *ngIf="pageType === 6">ข้อมูลขอรางวัลผลงานวิจัยของคุรุสภา</div>
+    <ng-container *ngIf="selectedRewardType === 0">
+      <ksp-council-reward></ksp-council-reward
+    ></ng-container>
+
+    <ng-container *ngIf="selectedRewardType === 1"
+      ><ksp-thai-teacher-reward></ksp-thai-teacher-reward
+    ></ng-container>
+    <ng-container *ngIf="selectedRewardType === 2"
+      ><ksp-best-teacher-reward></ksp-best-teacher-reward
+    ></ng-container>
+    <ng-container *ngIf="selectedRewardType === 3"
+      ><ksp-praise-teacher-reward></ksp-praise-teacher-reward
+    ></ng-container>
+    <ng-container *ngIf="selectedRewardType === 4">
+      <ksp-senior-teacher-reward></ksp-senior-teacher-reward
+    ></ng-container>
+    <ng-container *ngIf="selectedRewardType === 5">
+      <ksp-research-reward></ksp-research-reward
+    ></ng-container>
+
+    <div class="d-flex justify-content-center my-3">
+      <button type="button" class="btn border-primary text-primary bg-white">
+        บันทึกชั่วคราว
+      </button>
+      <button type="button" class="ms-3 btn btn-primary">บันทึกและยื่น</button>
+    </div>
   </div>
-
-  <div class="detail__container p-3">
-    <ksp-form-user-info [isDarkMode]="true"></ksp-form-user-info>
-  </div>
-  <br />
-
-  <ng-container *ngIf="pageType === 1">
-    <ksp-council-reward></ksp-council-reward
-  ></ng-container>
-
-  <ng-container *ngIf="pageType === 2"
-    ><ksp-thai-teacher-reward></ksp-thai-teacher-reward
-  ></ng-container>
-  <ng-container *ngIf="pageType === 3"
-    ><ksp-best-teacher-reward></ksp-best-teacher-reward
-  ></ng-container>
-  <ng-container *ngIf="pageType === 4"
-    ><ksp-praise-teacher-reward></ksp-praise-teacher-reward
-  ></ng-container>
-  <ng-container *ngIf="pageType === 5">
-    <ksp-senior-teacher-reward></ksp-senior-teacher-reward
-  ></ng-container>
-  <ng-container *ngIf="pageType === 6">
-    <ksp-research-reward></ksp-research-reward
-  ></ng-container>
-
-  <div class="fs-6 text-danger mt-1">
-    *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
-    โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
-  </div>
-  <div class="d-flex justify-content-center my-3">
-    <button type="button" class="btn border-primary text-primary bg-white">
-      บันทึกชั่วคราว
-    </button>
-    <button type="button" class="ms-3 btn btn-primary">บันทึกและยื่น</button>
-  </div>
-</div>
+</form>

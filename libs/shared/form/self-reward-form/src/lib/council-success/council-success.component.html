@@ -1,18 +1,43 @@
-<div class="box-header text-primary">
-  รายงานผลสำเร็จจากการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน
-</div>
-<div class="row mb-2">
-  <div class="col">
-    <label class="form-label">มาตรฐาน</label>
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+<form [formGroup]="form">
+  <div class="box-header text-primary">
+    รายงานผลสำเร็จจากการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน
   </div>
-  <div class="col">
-    <label class="form-label">รายละเอียด</label>
-    <input class="form-control" type="text" />
+  <ng-container formArrayName="standardInfo">
+    <ng-container
+      *ngFor="let DegreeForm of standardInfo.controls; let i = index"
+    >
+      <ng-container [formGroupName]="i">
+        <div class="border rounded px-3 py-2">
+          <div class="d-flex justify-content-end">
+            <i
+              class="bi bi-x-circle-fill text-danger"
+              (click)="deleteFormArray(standardInfo, i)"
+              role="button"
+            ></i>
+          </div>
+          <div class="row mb-2">
+            <div class="col">
+              <label class="form-label">มาตรฐาน</label>
+              <select class="form-select">
+                <option selected>กรุณาเลือก</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="form-label">รายละเอียด</label>
+              <input class="form-control" type="text" />
+            </div>
+          </div>
+        </div>
+        <br /></ng-container></ng-container
+  ></ng-container>
+  <div class="d-flex justify-content-end">
+    <ksp-add-row-button
+      class="text-primary"
+      (addRowClick)="addFormArray(standardInfo)"
+      >เพิ่มข้อมูลรายงานผลสำเร็จ</ksp-add-row-button
+    >
   </div>
-</div>
+</form>

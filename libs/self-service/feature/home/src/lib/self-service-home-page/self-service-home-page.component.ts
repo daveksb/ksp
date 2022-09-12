@@ -45,10 +45,6 @@ export class SelfServiceHomePageComponent {
     this.router.navigate(['/', 'renew-license', 'request']);
   }
 
-  editLicense() {
-    this.router.navigate(['/', 'license', 'edit']);
-  }
-
   rewardPage(requestType: number) {
     this.router.navigate(['/', 'reward', 'request'], {
       queryParams: { type: requestType },

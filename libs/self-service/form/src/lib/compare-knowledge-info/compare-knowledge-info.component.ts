@@ -4,17 +4,17 @@ import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
 @Component({
-  selector: 'ksp-council-evidence',
-  templateUrl: './council-evidence.component.html',
-  styleUrls: ['./council-evidence.component.scss'],
-  providers: providerFactory(CouncilEvidenceComponent),
+  selector: 'self-service-compare-knowledge-info',
+  templateUrl: './compare-knowledge-info.component.html',
+  styleUrls: ['./compare-knowledge-info.component.scss'],
+  providers: providerFactory(CompareKnowledgeInfoComponent),
 })
-export class CouncilEvidenceComponent
+export class CompareKnowledgeInfoComponent
   extends KspFormBaseComponent
   implements OnInit
 {
   override form = this.fb.group({
-    evidenceInfo: this.fb.array([]),
+    degreeInfo1: this.fb.array([]),
   });
 
   constructor(private fb: FormBuilder) {
@@ -29,7 +29,14 @@ export class CouncilEvidenceComponent
   }
 
   ngOnInit(): void {
-    this.addFormArray(this.evidenceInfo);
+    this.form.valueChanges.subscribe((res) => {
+      //console.log('form value = ', res);
+    });
+    this.setDefaulFormValue();
+  }
+
+  setDefaulFormValue() {
+    this.addFormArray(this.degreeInfo1);
   }
 
   deleteFormArray(form: FormArray<any>, index: number) {
@@ -37,11 +44,11 @@ export class CouncilEvidenceComponent
   }
 
   addFormArray(form: FormArray<any>) {
-    const data = this.fb.group('');
+    const data = this.fb.group({});
     form.push(data);
   }
 
-  get evidenceInfo() {
-    return this.form.controls['evidenceInfo'] as FormArray;
+  get degreeInfo1() {
+    return this.form.controls['degreeInfo1'] as FormArray;
   }
 }

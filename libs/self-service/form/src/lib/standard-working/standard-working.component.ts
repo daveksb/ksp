@@ -2,12 +2,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
 import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
+import { providerFactory } from '@ksp/shared/utility';
 import { skip } from 'rxjs';
 
 @Component({
   selector: 'self-service-standard-working',
   templateUrl: './standard-working.component.html',
   styleUrls: ['./standard-working.component.scss'],
+  providers: providerFactory(StandardWorkingComponent),
 })
 export class StandardWorkingComponent
   extends KspFormBaseComponent
