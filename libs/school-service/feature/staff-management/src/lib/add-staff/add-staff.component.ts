@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Event, Router } from '@angular/router';
 import {
   AddressService,
@@ -12,7 +12,6 @@ import {
   parseJson,
   replaceEmptyWithNull,
   thaiDate,
-  toLowercaseProp,
 } from '@ksp/shared/utility';
 import {
   CompleteDialogComponent,
@@ -84,6 +83,7 @@ export class AddStaffComponent implements OnInit {
   }
 
   pathTeachingInfo(res: any) {
+    //console.log('teaching = ', res);
     const teachingLevel = levels.map((level) => {
       if (res.teachingLevel.includes(level.value)) {
         return level.value;
@@ -106,10 +106,6 @@ export class AddStaffComponent implements OnInit {
     };
     this.form.controls.teachingInfo.patchValue(data);
   }
-
-  /*   pathHiringInfo(data: any) {
-    this.form.controls.hiringInfo.patchValue(data);
-  } */
 
   checkMode() {
     this.router.events.pipe(untilDestroyed(this)).subscribe((event: Event) => {
@@ -135,7 +131,7 @@ export class AddStaffComponent implements OnInit {
         this.patchAddress(parseJson(res.addresses));
         this.patchEdu(parseJson(res.educations));
         this.pathTeachingInfo(parseJson(res.teachinginfo));
-        this.form.controls.hiringInfo.patchValue(res.hiringinfo);
+        this.form.controls.hiringInfo.patchValue(parseJson(res.hiringinfo));
       });
   }
 
@@ -153,28 +149,9 @@ export class AddStaffComponent implements OnInit {
     formData.addr2.addressType = 2;
 
     const { id, ...userInfo } = formData.userInfo;
-    userInfo.schoolId = this.schoolId;
-    userInfo.createDate = new Date().toISOString().split('.')[0];
+    userInfo.schoolid = this.schoolId;
+    userInfo.createdate = new Date().toISOString().split('.')[0];
 
-    const payload = {
-      ...userInfo,
-      ...{ addresses: JSON.stringify([formData.addr1, formData.addr2]) },
-      ...{ educations: JSON.stringify([formData.edu1, formData.edu2]) },
-      ...{ teachinginfo: JSON.stringify(formData.teachingInfo) },
-      ...{ hiringinfo: JSON.stringify(formData.hiringInfo) },
-    };
-    //console.log('insert payload = ', payload);
-    this.staffService.addStaff2(payload).subscribe((res) => {
-      //console.log('add staff result = ', res);
-      this.onCompleted();
-      this.form.reset();
-    });
-  }
-
-  updateStaff() {
-    const formData: any = this.form.getRawValue();
-    const { ...userInfo } = replaceEmptyWithNull(formData.userInfo);
-    userInfo.schoolId = this.schoolId;
     const teaching: any = this.form.controls.teachingInfo.value;
     const teachingLevel = formatCheckboxData(teaching.teachingLevel, levels);
     const teachingSubjects = formatCheckboxData(
@@ -191,20 +168,53 @@ export class AddStaffComponent implements OnInit {
       ...userInfo,
       ...{ addresses: JSON.stringify([formData.addr1, formData.addr2]) },
       ...{ educations: JSON.stringify([formData.edu1, formData.edu2]) },
+      ...{ teachinginfo: JSON.stringify(teachingInfo) },
+      ...{ hiringinfo: JSON.stringify(formData.hiringInfo) },
+    };
+    //console.log('insert payload = ', payload);
+    this.staffService.addStaff2(payload).subscribe((res) => {
+      //console.log('add staff result = ', res);
+      this.onCompleted();
+      this.form.reset();
+    });
+  }
+
+  updateStaff() {
+    const formData: any = this.form.getRawValue();
+    //const { ...userInfo } = replaceEmptyWithNull(formData.userInfo);
+    formData.userInfo.schoolid = this.schoolId;
+
+    const teaching: any = this.form.controls.teachingInfo.value;
+    const teachingLevel = formatCheckboxData(teaching.teachingLevel, levels);
+    const teachingSubjects = formatCheckboxData(
+      teaching.teachingSubjects,
+      subjects
+    );
+    const teachingInfo = {
+      teachingLevel,
+      teachingSubjects,
+      teachingSubjectOther: teaching.teachingSubjectOther || null,
+    };
+
+    let payload = {
+      ...formData.userInfo,
+      ...{ addresses: JSON.stringify([formData.addr1, formData.addr2]) },
+      ...{ educations: JSON.stringify([formData.edu1, formData.edu2]) },
       ...{
         teachinginfo: JSON.stringify(teachingInfo),
       },
       ...{ hiringinfo: JSON.stringify(formData.hiringInfo) },
     };
 
-    //console.log('update payload = ', payload);
+    payload = replaceEmptyWithNull(payload);
+
     this.staffService.updateStaff2(payload).subscribe((res) => {
       //console.log('update result = ', res);
     });
   }
 
   pathUserInfo(data: any) {
-    data.birthDate = data.birthdate.split('T')[0];
+    data.birthdate = data.birthdate.split('T')[0];
     this.form.controls.userInfo.patchValue(data);
   }
 
