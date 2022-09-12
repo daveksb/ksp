@@ -52,7 +52,7 @@
 
     <!-- (selectedIndexChange)="onTabIndexChanged($event)" -->
     <div class="full-width pb-2">
-      <mat-tab-group class="tab-group mt-3" selectedIndex="0">
+      <mat-tab-group class="tab-group mt-3" selectedIndex="5">
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address
             [provinces]="provinces$ | async"
@@ -124,7 +124,7 @@
             formControlName="edu3"
           ></ksp-form-education-info-manager> -->
           <br />
-          <ksp-form-attachment [groups]="educationInfo"></ksp-form-attachment>
+          <ksp-form-attachment [groups]="eduFiles"></ksp-form-attachment>
         </mat-tab>
 
         <mat-tab label="ข้อมูลการสอนและการจ้าง">
@@ -154,7 +154,7 @@
           <ksp-form-attachment
             [uniqueTimestamp]="uniqueTimestamp"
             [pageType]="pageType.teachingTab"
-            [groups]="teachingInfo"
+            [groups]="teachingFiles"
           ></ksp-form-attachment>
         </mat-tab>
 
@@ -163,7 +163,7 @@
           <ksp-form-attachment
             [uniqueTimestamp]="uniqueTimestamp"
             [pageType]="pageType.reasonTab"
-            [groups]="reasonInfo"
+            [groups]="reasonFiles"
           ></ksp-form-attachment>
         </mat-tab>
 
@@ -171,7 +171,8 @@
           <ksp-form-attachment
             [uniqueTimestamp]="uniqueTimestamp"
             [pageType]="pageType.fileAttachTab"
-            [groups]="evidenceFiles"
+            [groups]="attachFiles"
+            (downloadClick)="loadFile()"
           ></ksp-form-attachment>
         </mat-tab>
       </mat-tab-group>

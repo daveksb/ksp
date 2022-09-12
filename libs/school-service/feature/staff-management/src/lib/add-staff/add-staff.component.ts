@@ -83,24 +83,17 @@ export class AddStaffComponent implements OnInit {
       });
   }
 
-  get teachingInfo() {
-    return this.form.controls.teachingInfo as FormControl<any>;
-  }
-
   pathTeachingInfo(res: any) {
-    const t = JSON.parse(res.teachingLevel);
-
-    const teachingLevel = levels.map((level, i) => {
-      if (t.includes(level.value)) {
+    const teachingLevel = levels.map((level) => {
+      if (res.teachingLevel.includes(level.value)) {
         return level.value;
       } else {
         return false;
       }
     });
-    const s = JSON.parse(res.teachingSubjects);
 
-    const teachingSubjects = subjects.map((subj, i) => {
-      if (s.includes(subj.value)) {
+    const teachingSubjects = subjects.map((subj) => {
+      if (res.teachingSubjects.includes(subj.value)) {
         return subj.value;
       } else {
         return false;
@@ -114,9 +107,9 @@ export class AddStaffComponent implements OnInit {
     this.form.controls.teachingInfo.patchValue(data);
   }
 
-  pathHiringInfo(data: any) {
+  /*   pathHiringInfo(data: any) {
     this.form.controls.hiringInfo.patchValue(data);
-  }
+  } */
 
   checkMode() {
     this.router.events.pipe(untilDestroyed(this)).subscribe((event: Event) => {
@@ -142,7 +135,7 @@ export class AddStaffComponent implements OnInit {
         this.patchAddress(parseJson(res.addresses));
         this.patchEdu(parseJson(res.educations));
         this.pathTeachingInfo(parseJson(res.teachinginfo));
-        this.pathHiringInfo(parseJson(res.hiringinfo));
+        this.form.controls.hiringInfo.patchValue(res.hiringinfo);
       });
   }
 
@@ -208,6 +201,11 @@ export class AddStaffComponent implements OnInit {
     this.staffService.updateStaff2(payload).subscribe((res) => {
       //console.log('update result = ', res);
     });
+  }
+
+  pathUserInfo(data: any) {
+    data.birthDate = data.birthdate.split('T')[0];
+    this.form.controls.userInfo.patchValue(data);
   }
 
   useSameAddress(evt: any) {
@@ -323,11 +321,5 @@ export class AddStaffComponent implements OnInit {
         }
       });
     }
-  }
-
-  pathUserInfo(data: any) {
-    data.birthDate = data.birthDate.split('T')[0];
-    data = toLowercaseProp(data);
-    this.form.controls.userInfo.patchValue(data);
   }
 }

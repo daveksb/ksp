@@ -73,10 +73,10 @@ export class TempLicenseRequestComponent implements OnInit {
       'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)'
     ];
 
-  educationInfo: string[] = [];
-  teachingInfo: string[] = [];
-  reasonInfo: string[] = [];
-  evidenceFiles: string[] = [];
+  eduFiles: any[] = [];
+  teachingFiles: any[] = [];
+  reasonFiles: any[] = [];
+  attachFiles: any[] = [];
   prefixList$!: Observable<any>;
 
   constructor(
@@ -105,6 +105,15 @@ export class TempLicenseRequestComponent implements OnInit {
       if (this.requestId) {
         this.loadRequestFromId(this.requestId);
       }
+    });
+  }
+
+  loadFile() {
+    const payload = {
+      id: `${134}`,
+    };
+    this.requestService.loadFile(payload).subscribe((res) => {
+      console.log('file = ', res);
     });
   }
 
@@ -310,10 +319,10 @@ export class TempLicenseRequestComponent implements OnInit {
 
   getList() {
     this.prefixList$ = this.generalInfoService.getPrefix();
-    this.educationInfo = this.service.educationInfo;
-    this.teachingInfo = this.service.teachingInfo;
-    this.reasonInfo = this.service.reasonInfo;
-    this.evidenceFiles = this.service.evidenceFiles;
+    this.eduFiles = this.service.educationInfo;
+    this.teachingFiles = this.service.teachingInfo;
+    this.reasonFiles = this.service.reasonInfo;
+    this.attachFiles = this.service.evidenceFiles;
     this.provinces$ = this.addressService.getProvinces();
     this.countries$ = this.addressService.getCountry();
     this.staffTypes$ = this.staffService.getStaffTypes();
