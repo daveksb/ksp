@@ -310,6 +310,12 @@
         formControlName="nationality"
       >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option
+          *ngFor="let nationality of nationalitys"
+          [value]="nationality.nationid"
+        >
+          {{ nationality.nationName }}
+        </option>
       </select>
     </div>
   </div>
@@ -426,6 +432,12 @@
         formControlName="nationality"
       >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option
+          *ngFor="let nationality of nationalitys"
+          [value]="nationality.nationid"
+        >
+          {{ nationality.nationName }}
+        </option>
       </select>
     </div>
   </div>

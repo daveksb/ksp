@@ -85,8 +85,6 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   }
 
   onConfirmed() {
-    console.log(this.form.get('foreignTeacher'));
-    console.log(this.form.get('visainfo'));
     if (
       !this.form.get('foreignTeacher')?.valid ||
       !this.form.get('visainfo')?.valid
