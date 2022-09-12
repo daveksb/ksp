@@ -1,4 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  ComponentFactoryResolver,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormMode } from '@ksp/shared/interface';
@@ -80,6 +85,13 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   }
 
   onConfirmed() {
+    console.log(this.form.get('foreignTeacher'));
+    console.log(this.form.get('visainfo'));
+    if (
+      !this.form.get('foreignTeacher')?.valid ||
+      !this.form.get('visainfo')?.valid
+    )
+      return;
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {

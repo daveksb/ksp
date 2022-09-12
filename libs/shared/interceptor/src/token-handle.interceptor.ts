@@ -20,7 +20,8 @@ export class TokenHandleInterceptor implements HttpInterceptor {
 
     if (
       request.url.includes('kspmasterdata') ||
-      request.url.includes('ksplogin')
+      request.url.includes('ksplogin') ||
+      request.url.includes('schschoolselect')
     ) {
       return next.handle(request);
     }

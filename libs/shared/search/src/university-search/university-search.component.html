@@ -93,7 +93,7 @@
                   <input
                     class="form-check-input"
                     type="radio"
-                    (change)="onItemChange(item.uniCode)"
+                    (change)="onItemChange(item.schoolId)"
                     name="university"
                   />
                 </div>
@@ -113,11 +113,15 @@
         aria-label="Page navigation example"
       >
         <ul class="pagination">
-          <li class="page-item"><a class="page-link">Previous</a></li>
-          <li class="page-item"><a class="page-link">1</a></li>
-          <li class="page-item"><a class="page-link">2</a></li>
-          <li class="page-item"><a class="page-link">3</a></li>
-          <li class="page-item"><a class="page-link">Next</a></li>
+          <li (click)="goPrevious()" class="page-item">
+            <a class="page-link">Previous</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link">{{ currentPage }}</a>
+          </li>
+          <li (click)="goNext()" class="page-item">
+            <a class="page-link">Next</a>
+          </li>
         </ul>
       </nav>
 
@@ -126,7 +130,7 @@
           matDialogClose
           type="button"
           class="btn btn-primary"
-          (click)="confirmed.emit(selectedUniversity)"
+          (click)="confirm()"
           [disabled]="!selectedUniversity"
         >
           ยืนยัน

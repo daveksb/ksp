@@ -43,6 +43,7 @@ export class FormForeignIdComponent
   ngOnInit(): void {
     this.form.controls['idcardno'].clearValidators();
     this.form.controls['workphone'].clearValidators();
+    this.form.controls['position'].clearValidators();
   }
   get idCardNo() {
     return this.form.controls.idcardno;

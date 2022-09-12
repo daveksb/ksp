@@ -50,4 +50,9 @@ export class RequestLicenseService {
         map((data: any) => data.datareturn)
       );
   }
+  getActiveUserSchool(payload: any): Observable<any> {
+    return this.http
+      .post(`${environment.apiUrl}/kspstaff/schschoolselect`, payload)
+      .pipe(shareReplay());
+  }
 }
