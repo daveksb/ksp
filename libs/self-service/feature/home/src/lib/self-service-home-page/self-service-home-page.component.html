@@ -92,9 +92,7 @@
       <button mat-menu-item>ขอหนังสือรับรองความรู้</button>
       <button mat-menu-item>ขอยื่นเทียบเคียงความรู้</button>
       <button mat-menu-item (click)="refundFee()">ขอคืนค่าธรรมเนียม</button>
-      <button mat-menu-item [matMenuTriggerFor]="reward">
-        ขอรับรางวัลการยกย่องเชิดชูเกียรติ
-      </button>
+      <button mat-menu-item>ขอรับรางวัลการยกย่องเชิดชูเกียรติ</button>
     </mat-menu>
 
     <mat-menu #request="matMenu">
@@ -115,7 +113,7 @@
       <button mat-menu-item>ศึกษานิเทศก์</button>
     </mat-menu>
 
-    <mat-menu #reward="matMenu">
+    <!-- <mat-menu #reward="matMenu">
       <button mat-menu-item (click)="rewardPage(1)">รางวัลคุรุสภา</button>
       <button mat-menu-item (click)="rewardPage(2)">
         รางวัลครูภาษาไทยดีเด่น
@@ -128,7 +126,7 @@
       <button mat-menu-item (click)="rewardPage(6)">
         รางวัลผลงานวิจัยของคุรุสภา
       </button>
-    </mat-menu>
+    </mat-menu> -->
 
     <mat-menu #teacher="matMenu">
       <button mat-menu-item (click)="thaiTeacher()">ครูชาวไทย</button>
@@ -185,11 +183,7 @@
       <ng-container matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef>แก้ไข</th>
         <td mat-cell *matCellDef="let element">
-          <i
-            role="button"
-            (click)="editLicense()"
-            class="bi bi-pencil-square text-primary fs-5"
-          ></i>
+          <i role="button" class="bi bi-pencil-square text-primary fs-5"></i>
         </td>
       </ng-container>
 

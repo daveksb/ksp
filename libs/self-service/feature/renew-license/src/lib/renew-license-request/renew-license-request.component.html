@@ -7,7 +7,9 @@
 
   <div class="d-flex my-4">
     <div class="detail__container bg-white w-25 me-1">
-      <self-service-form-upload-image></self-service-form-upload-image>
+      <self-service-form-upload-image
+        [imgDetail]="'col'"
+      ></self-service-form-upload-image>
     </div>
     <div class="detail__container bg-white w-100 ms-1">
       <ksp-form-user-info [isDarkMode]="true"></ksp-form-user-info>

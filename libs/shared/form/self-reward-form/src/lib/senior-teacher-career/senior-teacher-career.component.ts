@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -13,6 +13,8 @@ export class SeniorTeacherCareerComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+  @Input() btnLabel = '';
+
   override form = this.fb.group({
     workingInfo: this.fb.array([]),
   });
