@@ -35,28 +35,14 @@
   </mat-tab>
 
   <mat-tab label="ข้อมูลการศึกษา">
-    <ksp-thai-teacher-education></ksp-thai-teacher-education>
-    <div class="d-flex justify-content-start">
-      <ksp-add-row-button class="text-primary">เพิ่มข้อมูล</ksp-add-row-button>
-    </div></mat-tab
-  >
+    <ksp-council-education></ksp-council-education>
+  </mat-tab>
 
   <mat-tab label="ข้อมูลการสอน"
-    ><ksp-best-teacher-teaching></ksp-best-teacher-teaching>
-    <div class="d-flex justify-content-start">
-      <ksp-add-row-button class="text-primary">เพิ่มข้อมูล</ksp-add-row-button>
-    </div>
+    ><ksp-thai-teacher-teaching></ksp-thai-teacher-teaching>
   </mat-tab>
 
   <mat-tab label="ข้อมูลนวัตกรรมและรางวัล">
     <ksp-best-teacher-innovation></ksp-best-teacher-innovation>
-    <div class="d-flex justify-content-start">
-      <ksp-add-row-button class="text-primary">เพิ่มข้อมูล</ksp-add-row-button>
-    </div>
-    <br />
-    <ksp-form-attachment
-      [groups]="rewardFiles"
-      [titleClass]="'text-primary'"
-    ></ksp-form-attachment>
   </mat-tab>
 </mat-tab-group>

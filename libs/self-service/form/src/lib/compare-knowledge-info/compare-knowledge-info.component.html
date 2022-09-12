@@ -1,0 +1,109 @@
+<form [formGroup]="form">
+  <div class="box-header">วิชาการใช้ภาษาไทยเพื่อการสื่อสาร</div>
+  <div class="border rounded p-3 mb-3">
+    <div class="row">
+      <div class="col">
+        <label class="form-label">ผลคะแนนการทดสอบของหน่วยงาน</label>
+        <input class="form-control" type="text" />
+      </div>
+      <div class="col">
+        <label class="form-label">ระดับผลคะแนน</label>
+        <input class="form-control" type="text" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <label class="form-label">ใช้ผลคะแนนได้ถึงวันที่</label>
+        <input class="form-control" type="date" />
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="box-header">วิชาการใช้ภาษาอังกฤษเพื่อการสื่อสาร</div>
+  <div class="border rounded p-3 mb-3">
+    <div class="row">
+      <div class="col">
+        <label class="form-label">ผลคะแนนการทดสอบของหน่วยงาน</label>
+        <input class="form-control" type="text" />
+      </div>
+      <div class="col">
+        <label class="form-label">ระดับผลคะแนน</label>
+        <input class="form-control" type="text" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <label class="form-label">ใช้ผลคะแนนได้ถึงวันที่</label>
+        <input class="form-control" type="date" />
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="box-header">วิชาการใช้เทคโนโลยีดิจิทัลเพื่อการศึกษา</div>
+  <div class="border rounded p-3 mb-3">
+    <div class="row">
+      <div class="col">
+        <label class="form-label">ผลคะแนนการทดสอบของหน่วยงาน</label>
+        <input class="form-control" type="text" />
+      </div>
+      <div class="col-6">
+        <label class="form-label">ระดับผลคะแนน</label>
+        <input class="form-control" type="text" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label class="form-label">ใช้ผลคะแนนได้ถึงวันที่</label>
+        <input class="form-control" type="date" />
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="d-flex justify-content-between">
+    <div class="box-header">วิชาเอก</div>
+    <div class="text-primary fs-5" role="button">
+      <ksp-add-row-button
+        class="text-primary fs-6"
+        (addRowClick)="addFormArray(degreeInfo1)"
+      >
+        เพิ่มข้อมูลประวัติการศึกษา
+      </ksp-add-row-button>
+    </div>
+  </div>
+
+  <ng-container formArrayName="degreeInfo1">
+    <ng-container
+      *ngFor="let DegreeForm of degreeInfo1.controls; let i = index"
+    >
+      <ng-container [formGroupName]="i">
+        <div class="border rounded p-3 mb-3">
+          <div class="d-flex justify-content-end" *ngIf="i > 0">
+            <i
+              class="bi bi-x-circle-fill text-danger"
+              role="button"
+              (click)="deleteFormArray(degreeInfo1, i)"
+            ></i>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label class="form-label">วิชา</label>
+              <input class="form-control" type="text" />
+            </div>
+            <div class="col">
+              <label class="form-label">ผลคะแนนการทดสอบของหน่วยงาน</label>
+              <input class="form-control" type="text" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label class="form-label">ระดับผลคะแนน</label>
+              <input class="form-control" type="text" />
+            </div>
+            <div class="col">
+              <label class="form-label">ใช้ผลคะแนนได้ถึงวันที่</label>
+              <input class="form-control" type="date" />
+            </div>
+          </div>
+        </div> </ng-container></ng-container
+  ></ng-container>
+</form>

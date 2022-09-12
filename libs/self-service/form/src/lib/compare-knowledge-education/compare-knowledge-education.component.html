@@ -1,0 +1,227 @@
+<form [formGroup]="form">
+  <div class="d-flex justify-content-between">
+    <div class="box-header">ปริญญาตรี</div>
+
+    <div class="text-primary fs-5" role="button">
+      <ksp-add-row-button
+        class="text-primary fs-6"
+        (addRowClick)="addFormArray(degreeInfo1)"
+      >
+        เพิ่มข้อมูลประวัติการศึกษา
+      </ksp-add-row-button>
+    </div>
+  </div>
+
+  <ng-container formArrayName="degreeInfo1">
+    <ng-container
+      *ngFor="let DegreeForm of degreeInfo1.controls; let i = index"
+    >
+      <ng-container [formGroupName]="i">
+        <div class="border rounded p-3 mb-3">
+          <div class="d-flex justify-content-end" *ngIf="i > 0">
+            <i
+              class="bi bi-x-circle-fill text-danger"
+              role="button"
+              (click)="deleteFormArray(degreeInfo1, i)"
+            ></i>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label class="form-label">ระดับอนุปริญญา</label>
+              <select class="form-select">
+                <option selected>กรุณาเลือก</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+
+            <div class="col">
+              <label class="form-label">สถาบันการศึกษา</label>
+              <input class="form-control" type="text" />
+            </div>
+          </div>
+        </div> </ng-container></ng-container
+  ></ng-container>
+  <hr />
+
+  <div class="d-flex justify-content-between">
+    <div class="box-header">ปริญญาโท</div>
+
+    <div class="text-primary fs-5" role="button">
+      <ksp-add-row-button
+        class="text-primary"
+        (addRowClick)="addFormArray(degreeInfo2)"
+      >
+        เพิ่มข้อมูลประวัติการศึกษา
+      </ksp-add-row-button>
+    </div>
+  </div>
+
+  <ng-container formArrayName="degreeInfo2">
+    <ng-container
+      *ngFor="let DegreeForm of degreeInfo2.controls; let i = index"
+    >
+      <ng-container [formGroupName]="i">
+        <div class="border rounded p-3 mb-3">
+          <div class="d-flex justify-content-end" *ngIf="i > 0">
+            <i
+              class="bi bi-x-circle-fill text-danger"
+              role="button"
+              (click)="deleteFormArray(degreeInfo2, i)"
+            ></i>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label class="form-label">ระดับอนุปริญญา</label>
+              <select class="form-select">
+                <option selected>กรุณาเลือก</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="form-label">สถาบันการศึกษา</label>
+              <input class="form-control" type="text" />
+            </div>
+          </div>
+        </div> </ng-container></ng-container
+  ></ng-container>
+  <hr />
+
+  <div class="d-flex justify-content-between">
+    <div class="box-header">ปริญญาเอก</div>
+
+    <div class="text-primary fs-5" role="button">
+      <ksp-add-row-button
+        class="text-primary"
+        (addRowClick)="addFormArray(degreeInfo3)"
+      >
+        เพิ่มข้อมูลประวัติการศึกษา
+      </ksp-add-row-button>
+    </div>
+  </div>
+
+  <ng-container formArrayName="degreeInfo3">
+    <ng-container
+      *ngFor="let DegreeForm of degreeInfo3.controls; let i = index"
+    >
+      <ng-container [formGroupName]="i">
+        <div class="border rounded p-3 mb-3">
+          <div class="d-flex justify-content-end" *ngIf="i > 0">
+            <i
+              class="bi bi-x-circle-fill text-danger"
+              role="button"
+              (click)="deleteFormArray(degreeInfo3, i)"
+            ></i>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label class="form-label">ระดับอนุปริญญา</label>
+              <select class="form-select">
+                <option selected>กรุณาเลือก</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="form-label">สถาบันการศึกษา</label>
+              <input class="form-control" type="text" />
+            </div>
+          </div>
+        </div> </ng-container></ng-container
+  ></ng-container>
+  <hr />
+
+  <div class="d-flex justify-content-between">
+    <div class="box-header">ปริญญาอื่นๆ</div>
+
+    <div class="text-primary fs-5" role="button">
+      <ksp-add-row-button
+        class="text-primary"
+        (addRowClick)="addFormArray(degreeInfo4)"
+      >
+        เพิ่มข้อมูลประวัติการศึกษา
+      </ksp-add-row-button>
+    </div>
+  </div>
+
+  <ng-container formArrayName="degreeInfo4">
+    <ng-container
+      *ngFor="let DegreeForm of degreeInfo4.controls; let i = index"
+    >
+      <ng-container [formGroupName]="i">
+        <div class="border rounded p-3 mb-3">
+          <div class="d-flex justify-content-end" *ngIf="i > 0">
+            <i
+              class="bi bi-x-circle-fill text-danger"
+              role="button"
+              (click)="deleteFormArray(degreeInfo4, i)"
+            ></i>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label class="form-label">ระดับอนุปริญญา</label>
+              <select class="form-select">
+                <option selected>กรุณาเลือก</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="form-label">สถาบันการศึกษา</label>
+              <input class="form-control" type="text" />
+            </div>
+          </div>
+        </div> </ng-container></ng-container
+  ></ng-container>
+  <hr />
+
+  <div class="d-flex justify-content-between">
+    <div class="box-header">ใบรับรองฝึกอาชีพ</div>
+
+    <div class="text-primary fs-5" role="button">
+      <ksp-add-row-button
+        class="text-primary"
+        (addRowClick)="addFormArray(degreeInfo5)"
+      >
+        เพิ่มข้อมูลประวัติการศึกษา
+      </ksp-add-row-button>
+    </div>
+  </div>
+
+  <ng-container formArrayName="degreeInfo5">
+    <ng-container
+      *ngFor="let DegreeForm of degreeInfo5.controls; let i = index"
+    >
+      <ng-container [formGroupName]="i">
+        <div class="border rounded p-3 mb-3">
+          <div class="d-flex justify-content-end" *ngIf="i > 0">
+            <i
+              class="bi bi-x-circle-fill text-danger"
+              role="button"
+              (click)="deleteFormArray(degreeInfo5, i)"
+            ></i>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label class="form-label">ระดับอนุปริญญา</label>
+              <select class="form-select">
+                <option selected>กรุณาเลือก</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="form-label">สถาบันการศึกษา</label>
+              <input class="form-control" type="text" />
+            </div>
+          </div>
+        </div> </ng-container></ng-container
+  ></ng-container>
+  <hr />
+</form>

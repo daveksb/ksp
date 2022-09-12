@@ -1,36 +1,59 @@
-<div class="box-header text-primary">ประวัติการทำงาน</div>
-<div class="row mb-2">
-  <div class="col">
-    <label class="form-label">ประเภทวิชาชีพ</label>
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+<form [formGroup]="form">
+  <ng-container formArrayName="workingInfo">
+    <ng-container
+      *ngFor="let DegreeForm of workingInfo.controls; let i = index"
+    >
+      <ng-container [formGroupName]="i">
+        <div class="border rounded px-3 py-2">
+          <div class="d-flex justify-content-end">
+            <i
+              class="bi bi-x-circle-fill text-danger"
+              (click)="deleteFormArray(workingInfo, i)"
+              role="button"
+            ></i>
+          </div>
+          <div class="row mb-2">
+            <div class="col">
+              <label class="form-label">ประเภทวิชาชีพ</label>
+              <select class="form-select">
+                <option selected>กรุณาเลือก</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="form-label">ตำแหน่ง</label>
+              <input class="form-control" type="text" />
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-3">
+              <label class="form-label">วันที่เริ่ม</label>
+              <input class="form-control" type="date" />
+            </div>
+            <div class="col-3">
+              <label class="form-label">วันที่สิ้นสุด</label>
+              <input class="form-control" type="date" />
+            </div>
+
+            <div class="col-3">
+              <label class="form-label">ระยะเวลา (ปี)</label>
+              <input class="form-control" type="text" />
+            </div>
+            <div class="col-3">
+              <label class="form-label">ระยะเวลา (เดือน)</label>
+              <input class="form-control" type="text" />
+            </div>
+          </div>
+        </div>
+        <br /></ng-container></ng-container
+  ></ng-container>
+  <div class="d-flex justify-content-end">
+    <ksp-add-row-button
+      class="text-primary"
+      (addRowClick)="addFormArray(workingInfo)"
+      >{{ btnLabel }}</ksp-add-row-button
+    >
   </div>
-  <div class="col">
-    <label class="form-label">ตำแหน่ง</label>
-    <input class="form-control" type="text" />
-  </div>
-</div>
-<div class="row mb-2">
-  <div class="col">
-    <label class="form-label">วันที่เริ่ม</label>
-    <input class="form-control" type="date" />
-  </div>
-  <div class="col">
-    <label class="form-label">วันที่สิ้นสุด</label>
-    <input class="form-control" type="date" />
-  </div>
-</div>
-<div class="row mb-2">
-  <div class="col-3">
-    <label class="form-label">ระยะเวลา (ปี)</label>
-    <input disabled class="form-control" type="text" />
-  </div>
-  <div class="col-3">
-    <label class="form-label">ระยะเวลา (เดือน)</label>
-    <input disabled class="form-control" type="text" />
-  </div>
-</div>
+</form>

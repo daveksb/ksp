@@ -51,3 +51,9 @@ export * from './lib/form-verify-otp-foreign/form-verify-otp-foreign.component';
 export * from './lib/transfer-knowledge-info/transfer-knowledge-info.component';
 
 export * from './lib/transfer-knowledge-education/transfer-knowledge-education.component';
+
+export * from './lib/compare-knowledge-education/compare-knowledge-education.component';
+
+export * from './lib/compare-knowledge-info/compare-knowledge-info.component';
+
+export * from './lib/transfer-knowledge-standard-form/transfer-knowledge-standard-form.component';

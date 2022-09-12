@@ -1,77 +1,130 @@
-<label class="box-header mb-3">มาตราฐานความรู้ที่ต้องการเทียบโอน</label>
-<div class="d-flex align-items-center justify-content-between">
-  <select class="form-select">
-    <option value="null" selected hidden disabled>กรุณาเลือก</option>
-    <option value="1">One</option>
-    <option value="2">Two</option>
-    <option value="3">Three</option>
-  </select>
+<form [formGroup]="form">
+  <div class="box-header mb-3">มาตราฐานความรู้ที่ต้องการเทียบโอน</div>
+  <div class="d-flex align-items-center justify-content-between">
+    <select class="form-select">
+      <option value="null" selected hidden disabled>กรุณาเลือก</option>
+      <option value="1">One</option>
+      <option value="2">Two</option>
+      <option value="3">Three</option>
+    </select>
 
-  <ksp-add-row-button [classList]="'text-primary w-25'"
-    >เพิ่มมาตรฐานและหลักฐาน</ksp-add-row-button
+    <ksp-add-row-button
+      [classList]="'text-primary w-25'"
+      (addRowClick)="addStandard()"
+      >เพิ่มมาตรฐานและหลักฐาน</ksp-add-row-button
+    >
+  </div>
+  <br />
+  <ng-container formArrayName="standards">
+    <ng-container
+      *ngFor="let transferForm of standards.controls; let i = index"
+    >
+      <ng-container [formGroupName]="i">
+        <div class="bg-light py-3 px-4 mb-3">
+          <div class="d-flex justify-content-between">
+            <div class="form-label pb-3">มาตรฐานความรู้ที่ {{ i + 1 }}</div>
+            <i
+              class="bi bi-x-circle-fill text-danger"
+              role="button"
+              (click)="deleteStandard(i)"
+            ></i>
+          </div>
+          <ng-container formArrayName="subjects">
+            <ng-container
+              *ngFor="let subject of getSubjects(i).controls; let j = index"
+            >
+              <ng-container [formGroupName]="j">
+                <div class="py-3 px-4 border bg-white mb-3">
+                  <div class="d-flex justify-content-end" *ngIf="j > 0">
+                    <i
+                      class="bi bi-x-circle-fill text-danger"
+                      role="button"
+                      (click)="deleteSubject(i, j)"
+                    ></i>
+                  </div>
+                  <div class="row">
+                    <div class="col-8">
+                      <label class="form-label">ชื่อวิชาเทียบโอน</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        formControlName="subjectName"
+                      />
+                    </div>
+                    <div class="col">
+                      <label class="form-label">รหัสวิชา</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        formControlName="subjectCode"
+                      />
+                    </div>
+                    <div class="col">
+                      <label class="form-label">ผลการเรียน</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        formControlName="grade"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col">
+                      <label class="form-label">คำอธิบาย</label>
+                      <textarea
+                        rows="4"
+                        class="form-control"
+                        formControlName="detail"
+                      ></textarea>
+                    </div>
+                  </div>
+
+                  <div class="d-flex justify-content-end mt-3">
+                    <ksp-add-row-button
+                      [classList]="'text-primary'"
+                      (addRowClick)="addSubject(i)"
+                      >เพิ่มวิชาเพื่อเทียบโอน</ksp-add-row-button
+                    >
+                  </div>
+                </div>
+              </ng-container></ng-container
+            ></ng-container
+          >
+        </div>
+      </ng-container></ng-container
+    ></ng-container
   >
-</div>
-<br />
-<div class="bg-light py-3 px-4">
-  <div class="form-label pb-3">
-    มาตรฐานความรู้ที่ 1: ภาษาและเทคโนโลยีสำหรับครู
-  </div>
-  <div class="py-3 px-4 border bg-white mb-3">
-    <div class="row">
-      <div class="col-8">
-        <label class="form-label">ชื่อวิชาเทียบโอน</label>
-        <input class="form-control" type="text" />
+</form>
+
+<!-- <div class="bg-light py-3 px-4">
+    <div class="form-label pb-3">
+      มาตรฐานความรู้ที่ 2: ภาษาและเทคโนโลยีสำหรับครู
+    </div>
+    <div class="py-3 px-4 border bg-white mb-3">
+      <div class="row">
+        <div class="col-8">
+          <label class="form-label">ชื่อวิชาเทียบโอน</label>
+          <input class="form-control" type="text" />
+        </div>
+        <div class="col">
+          <label class="form-label">รหัสวิชา</label>
+          <input class="form-control" type="text" />
+        </div>
+        <div class="col">
+          <label class="form-label">ผลการเรียน</label>
+          <input class="form-control" type="text" />
+        </div>
       </div>
-      <div class="col">
-        <label class="form-label">รหัสวิชา</label>
-        <input class="form-control" type="text" />
-      </div>
-      <div class="col">
-        <label class="form-label">ผลการเรียน</label>
-        <input class="form-control" type="text" />
+      <div class="row">
+        <div class="col">
+          <label class="form-label">คำอธิบาย</label>
+          <textarea rows="4" class="form-control"></textarea>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <label class="form-label">คำอธิบาย</label>
-        <textarea rows="4" class="form-control"></textarea>
-      </div>
-    </div>
-  </div>
-  <ksp-add-row-button
-    [classList]="'text-primary w-auto d-flex justify-content-end'"
-    >เพิ่มวิชาเพื่อเทียบโอน</ksp-add-row-button
-  >
-</div>
-<br />
-<div class="bg-light py-3 px-4">
-  <div class="form-label pb-3">
-    มาตรฐานความรู้ที่ 2: ภาษาและเทคโนโลยีสำหรับครู
-  </div>
-  <div class="py-3 px-4 border bg-white mb-3">
-    <div class="row">
-      <div class="col-8">
-        <label class="form-label">ชื่อวิชาเทียบโอน</label>
-        <input class="form-control" type="text" />
-      </div>
-      <div class="col">
-        <label class="form-label">รหัสวิชา</label>
-        <input class="form-control" type="text" />
-      </div>
-      <div class="col">
-        <label class="form-label">ผลการเรียน</label>
-        <input class="form-control" type="text" />
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <label class="form-label">คำอธิบาย</label>
-        <textarea rows="4" class="form-control"></textarea>
-      </div>
-    </div>
-  </div>
-  <ksp-add-row-button
-    [classList]="'text-primary w-auto d-flex justify-content-end'"
-    >เพิ่มวิชาเพื่อเทียบโอน</ksp-add-row-button
-  >
-</div>
+    <ksp-add-row-button
+      [classList]="'text-primary w-auto d-flex justify-content-end'"
+      >เพิ่มวิชาเพื่อเทียบโอน</ksp-add-row-button
+    >
+  </div> -->
