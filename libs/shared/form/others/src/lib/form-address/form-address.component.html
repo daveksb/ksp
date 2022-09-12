@@ -100,7 +100,7 @@
           [class.bg-white]="!isDarkMode && mode === 'edit'"
           class="form-select"
           formControlName="tumbol"
-          (change)="tumbolChanged.emit($event)"
+          (change)="updatePostcode($event)"
         >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let t of tumbols" [value]="t?.tambolCode">

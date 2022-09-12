@@ -16,7 +16,6 @@ export class FormAddressComponent extends KspFormBaseComponent {
   @Input() tumbols: any[] = [];
   @Output() provinceChanged = new EventEmitter<any>();
   @Output() amphurChanged = new EventEmitter<any>();
-  @Output() tumbolChanged = new EventEmitter<any>();
 
   /**
    * Dark Mode : all inputs will have gray background and form container will have white background
@@ -48,5 +47,12 @@ export class FormAddressComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+
+  // change postcode corespond to Tumbol changed
+  updatePostcode(evt: any) {
+    const tumbolCode = evt.target?.value;
+    const postCode = this.tumbols.find((t) => t.tambolCode === tumbolCode);
+    this.form.controls.postcode.patchValue(postCode.tambolPostcode);
   }
 }

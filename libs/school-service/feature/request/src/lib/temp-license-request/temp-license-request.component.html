@@ -25,11 +25,11 @@
             <input
               class="form-control form-search"
               type="text"
-              value="6022154878454"
               placeholder="หมายเลขบัตรประชาชนจำนวน 13 หลัก"
               #idcard
             />
           </div>
+          <!-- value="6022154878454" -->
           <div class="col-auto mt-4">
             <button
               type="button"
@@ -192,7 +192,7 @@
     [showTempSaveButton]="true"
     [disableTempSaveButton]="true"
     [showSaveButton]="true"
-    [disableSaveButton]="false"
+    [disableSaveButton]="!form.valid"
     [saveButtonLabel]="'ส่งใบคำขอ'"
   ></ksp-bottom-nav>
 </div>

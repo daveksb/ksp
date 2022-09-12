@@ -12,6 +12,7 @@ import {
   parseJson,
   replaceEmptyWithNull,
   thaiDate,
+  toLowercaseProp,
 } from '@ksp/shared/utility';
 import {
   CompleteDialogComponent,
@@ -203,7 +204,7 @@ export class AddStaffComponent implements OnInit {
       ...{ hiringinfo: JSON.stringify(formData.hiringInfo) },
     };
 
-    console.log('update payload = ', payload);
+    //console.log('update payload = ', payload);
     this.staffService.updateStaff2(payload).subscribe((res) => {
       //console.log('update result = ', res);
     });
@@ -325,16 +326,8 @@ export class AddStaffComponent implements OnInit {
   }
 
   pathUserInfo(data: any) {
-    const {
-      schoolId,
-      createDate,
-      addresses,
-      educations,
-      teachinginfo,
-      hiringinfo,
-      ...formData
-    } = data;
-    formData.birthDate = formData.birthDate.split('T')[0];
-    this.form.controls.userInfo.patchValue(formData);
+    data.birthDate = data.birthDate.split('T')[0];
+    data = toLowercaseProp(data);
+    this.form.controls.userInfo.patchValue(data);
   }
 }
