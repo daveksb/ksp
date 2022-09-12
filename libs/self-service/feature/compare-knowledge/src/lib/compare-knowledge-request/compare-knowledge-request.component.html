@@ -1,1 +1,73 @@
-<p>compare-knowledge-request works!</p>
+<ksp-top-nav
+  ><span header>ใบคำขอเทียบโอนความรู้ตามมาตรฐานวิชาชีพครู</span></ksp-top-nav
+>
+<div class="main__container px-4 py-2">
+  <self-service-request-status
+    [headers]="headerGroup"
+  ></self-service-request-status>
+
+  <div class="d-flex my-4">
+    <div class="detail__container w-25 me-1">
+      <self-service-form-upload-image
+        [imgDetail]="'col'"
+      ></self-service-form-upload-image>
+    </div>
+    <div class="detail__container w-100 ms-1">
+      <ksp-form-user-info [isDarkMode]="true"></ksp-form-user-info>
+    </div>
+  </div>
+
+  <mat-tab-group class="tab-group" animationDuration="0ms" [selectedIndex]="0">
+    <mat-tab label="ที่อยู่" class="tab-content">
+      <ksp-form-address [isDarkMode]="true">
+        <span>ที่อยู่ทะเบียนบ้าน</span>
+      </ksp-form-address>
+
+      <hr />
+      <ksp-form-address [isDarkMode]="true">
+        <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
+        <span class="text-danger ms-1 fs-6">*กรุณากรอกข้อมูลตำบล, อำเภอ</span>
+        <div class="d-flex align-items-center">
+          <input type="checkbox" class="me-1" />
+          <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
+        </div>
+      </ksp-form-address>
+      <div class="fs-6 text-danger">
+        *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
+        โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
+      </div>
+    </mat-tab>
+
+    <mat-tab label="สถานที่ทำงาน">
+      <self-service-form-user-workplace></self-service-form-user-workplace>
+    </mat-tab>
+
+    <mat-tab label="ข้อมูลทางการศึกษา">
+      <self-service-compare-knowledge-education></self-service-compare-knowledge-education>
+    </mat-tab>
+
+    <mat-tab label="ข้อมูลเทียบเคียงผลการทดสอบ">
+      <self-service-compare-knowledge-info></self-service-compare-knowledge-info>
+    </mat-tab>
+
+    <mat-tab label="เอกสารประกอบ">
+      <ksp-form-attachment
+        [title]="'กรุณาแนบหลักฐานประกอบ'"
+        [groups]="objectiveFiles"
+      ></ksp-form-attachment>
+      <div class="fs-6 text-danger">
+        *กรุณาส่งเอกสารแสดงผลคะแนนที่ใช้เทียบเคียงผลการทดสอบ(ฉบับจริง)
+        ตามรายวิชาที่ยื่นเทียบเคียงผลการทดสอบ ไปยัง สำนักงานเลขาธิการคุรุสภา
+        เลขที่ XXXXXXX
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+
+  <div class="d-flex justify-content-center my-3">
+    <button type="button" class="btn btn-secondary">ล้างข้อมูล</button>
+    <button type="button" class="btn btn-warning mx-3">บันทึกชั่วคราว</button>
+    <button type="button" (click)="save()" class="btn btn-primary">
+      บันทึกและยื่น
+    </button>
+  </div>
+</div>

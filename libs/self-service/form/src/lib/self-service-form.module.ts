@@ -37,6 +37,8 @@ import { TransferKnowledgeInfoComponent } from './transfer-knowledge-info/transf
 import { AddRowButtonComponent } from '@ksp/shared/ui';
 import { TransferKnowledgeEducationComponent } from './transfer-knowledge-education/transfer-knowledge-education.component';
 import { SchoolServiceFormActivityModule } from '@ksp/school-service/form/activity';
+import { CompareKnowledgeEducationComponent } from './compare-knowledge-education/compare-knowledge-education.component';
+import { CompareKnowledgeInfoComponent } from './compare-knowledge-info/compare-knowledge-info.component';
 
 @NgModule({
   imports: [
@@ -60,7 +62,7 @@ import { SchoolServiceFormActivityModule } from '@ksp/school-service/form/activi
     ForeignStepTwoTabFourComponent,
     FileUploadComponent,
     AddRowButtonComponent,
-    SchoolServiceFormActivityModule
+    SchoolServiceFormActivityModule,
   ],
   declarations: [
     FormUserEducationComponent,
@@ -80,6 +82,8 @@ import { SchoolServiceFormActivityModule } from '@ksp/school-service/form/activi
     ForeignLicenseStepFourComponent,
     TransferKnowledgeInfoComponent,
     TransferKnowledgeEducationComponent,
+    CompareKnowledgeEducationComponent,
+    CompareKnowledgeInfoComponent,
   ],
   exports: [
     FormUserEducationComponent,
@@ -99,6 +103,8 @@ import { SchoolServiceFormActivityModule } from '@ksp/school-service/form/activi
     ForeignLicenseStepFourComponent,
     TransferKnowledgeInfoComponent,
     TransferKnowledgeEducationComponent,
+    CompareKnowledgeEducationComponent,
+    CompareKnowledgeInfoComponent,
   ],
 })
 export class SelfServiceFormModule {}

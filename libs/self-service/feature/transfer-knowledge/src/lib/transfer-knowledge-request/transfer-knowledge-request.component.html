@@ -8,7 +8,9 @@
 
   <div class="d-flex my-4">
     <div class="detail__container w-25 me-1">
-      <self-service-form-upload-image></self-service-form-upload-image>
+      <self-service-form-upload-image
+        [imgDetail]="'col'"
+      ></self-service-form-upload-image>
     </div>
     <div class="detail__container w-100 ms-1">
       <ksp-form-user-info [isDarkMode]="true"></ksp-form-user-info>
@@ -19,7 +21,6 @@
     <mat-tab label="ที่อยู่" class="tab-content">
       <ksp-form-address [isDarkMode]="true">
         <span>ที่อยู่ทะเบียนบ้าน</span>
-        
       </ksp-form-address>
 
       <hr />
