@@ -65,13 +65,19 @@ export class TempLicenseRequestComponent implements OnInit {
   academicTypes$!: Observable<any>;
 
   requestId!: number;
+  requestType = 1;
+  requestTypeLabel = '';
+  requestNo = '';
+  currentProcess = 0;
+  processEnum = RequestProcess;
+
+  disableTempSave = false;
+  disableSave = false;
+
   icCardNo = '';
   schoolAddressLabel = `ที่อยู่ของสถานศึกษา
   ที่ขออนุญาต`;
 
-  requestType = 1;
-  requestTypeLabel = '';
-  requestNo = '';
   schoolId = '0010201056';
   displayMode: number =
     RequestType[
@@ -104,6 +110,64 @@ export class TempLicenseRequestComponent implements OnInit {
     this.checkRequestType();
   }
 
+  updateRequest(type: string) {
+    const baseForm = this.fb.group(defaultRequestPayload);
+    const formData: any = this.form.getRawValue();
+    formData.addr1.addresstype = 1;
+    formData.addr2.addresstype = 2;
+
+    const { id, ...rawUserInfo } = formData.userInfo;
+    rawUserInfo.schoolId = this.schoolId;
+
+    const userInfo = toLowercaseProp(rawUserInfo);
+
+    if (type === 'tempSave') {
+      userInfo.currentprocess = `${RequestProcess.บันทึกชั่วคราว}`;
+    } else if (type === 'realSave') {
+      console.log('real save = ');
+      userInfo.currentprocess = `${RequestProcess.ยื่นใบคำขอ}`;
+    }
+
+    userInfo.ref1 = '2';
+    userInfo.ref2 = '03';
+    userInfo.ref3 = '1';
+    userInfo.systemtype = '2';
+    userInfo.requesttype = `${this.requestType}`;
+
+    const teaching: any = this.form.controls.teachinginfo.value;
+    let teachingInfo = {};
+
+    if (this.form.controls.teachinginfo.value) {
+      const teachingLevel = formatCheckboxData(teaching.teachingLevel, levels);
+      const teachingSubjects = formatCheckboxData(
+        teaching.teachingSubjects,
+        subjects
+      );
+      teachingInfo = {
+        teachingLevel,
+        teachingSubjects,
+        teachingSubjectOther: teaching.teachingSubjectOther || null,
+      };
+    }
+
+    const payload = {
+      ...replaceEmptyWithNull(userInfo),
+      ...{ addressinfo: JSON.stringify([formData.addr1, formData.addr2]) },
+      ...{ eduinfo: JSON.stringify([formData.edu1, formData.edu2]) },
+      ...{ teachinginfo: JSON.stringify(teachingInfo) },
+      ...{ hiringinfo: JSON.stringify(formData.hiringinfo) },
+    };
+
+    console.log('payload = ', payload);
+
+    baseForm.patchValue(payload);
+    console.log('current form = ', baseForm.value);
+    this.requestService.requestLicense(baseForm.value).subscribe((res) => {
+      console.log('request result = ', res);
+      this.backToListPage();
+    });
+  }
+
   checkRequestId() {
     this.route.paramMap.subscribe((params) => {
       this.requestId = Number(params.get('id'));
@@ -113,20 +177,20 @@ export class TempLicenseRequestComponent implements OnInit {
     });
   }
 
-  loadFile() {
-    const payload = {
-      id: `${134}`,
-    };
-    this.requestService.loadFile(payload).subscribe((res) => {
-      console.log('file = ', res);
-    });
-  }
-
   loadRequestFromId(id: number) {
     this.requestService.getRequestById(id).subscribe((res: any) => {
-      //console.log('result = ', res);
       this.requestNo = res.requestno;
-      this.form.controls.userInfo.patchValue(res);
+      this.currentProcess = +res.currentprocess;
+
+      if (this.currentProcess === 0) {
+        this.disableTempSave = false;
+        this.disableSave = false;
+      } else {
+        this.disableTempSave = true;
+        this.disableSave = true;
+      }
+
+      this.pathUserInfo(res);
       this.patchAddress(parseJson(res.addressinfo));
       this.patchEdu(parseJson(res.eduinfo));
       this.patchHiringInfo(parseJson(res.hiringinfo));
@@ -194,6 +258,15 @@ export class TempLicenseRequestComponent implements OnInit {
     }
   }
 
+  loadFile() {
+    const payload = {
+      id: `${134}`,
+    };
+    this.requestService.loadFile(payload).subscribe((res) => {
+      console.log('file = ', res);
+    });
+  }
+
   searchStaffFromIdCard(idCard: string) {
     if (!idCard) return;
     const payload = {
@@ -225,10 +298,10 @@ export class TempLicenseRequestComponent implements OnInit {
     const userInfo = toLowercaseProp(rawUserInfo);
 
     if (type === 'tempSave') {
-      userInfo.currentprocess = `${RequestProcess.บันทึกชั่วคราว}`;
+      //userInfo.currentprocess = `${RequestProcess.บันทึกชั่วคราว}`;
     } else if (type === 'realSave') {
       console.log('real save = ');
-      userInfo.currentprocess = `${RequestProcess.ยื่นใบคำขอ}`;
+      //userInfo.currentprocess = `${RequestProcess.ยื่นใบคำขอ}`;
     }
 
     userInfo.ref1 = '2';
@@ -272,7 +345,6 @@ export class TempLicenseRequestComponent implements OnInit {
   }
 
   pathUserInfo(data: any) {
-    //data = toLowercaseProp(data);
     data.birthdate = data.birthdate.split('T')[0];
     this.form.controls.userInfo.patchValue(data);
   }
