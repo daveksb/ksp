@@ -1,68 +1,85 @@
-<div class="box-header text-primary">ข้อมูลการปฏิบัติตนตามจรรยาบรรณ</div>
-<div class="row">
-  <div class="col-6">
-    <label class="form-label">สรุปการปฏิบัติงานตามมาตรฐาน</label>
-    <input class="form-control" type="text" />
-  </div>
-</div>
-<br />
-<div class="box-header text-primary">ประวัติการปฏิบัติตนตามจรรยาบรรณ</div>
-<div class="row mb-2">
-  <div class="col">
-    <label class="form-label">ปีที่เริ่ม</label>
-    <input class="form-control" type="text" />
-  </div>
-  <div class="col">
-    <label class="form-label">การมีวินัยและการพัฒนาตนเอง</label>
-    <input class="form-control" type="text" />
-  </div>
-</div>
-<div class="row mb-2">
-  <div class="col">
-    <label class="form-label">การรับผิดชอบต่ออาชีพ</label>
-    <input class="form-control" type="text" />
-  </div>
-  <div class="col">
-    <label class="form-label">การแสดงความเอื้ออาทร</label>
-    <input class="form-control" type="text" />
-  </div>
-</div>
-<div class="row mb-2">
-  <div class="col">
-    <label class="form-label">การส่งเสริมการเรียนรู้</label>
-    <input class="form-control" type="text" />
-  </div>
-  <div class="col">
-    <label class="form-label">การเป็นแบบอย่าง</label>
-    <input class="form-control" type="text" />
-  </div>
-</div>
-<div class="row mb-2">
-  <div class="col">
-    <label class="form-label">การช่วยเหลือเกื้อกูล</label>
-    <input class="form-control" type="text" />
-  </div>
-  <div class="col">
-    <label class="form-label">การให้ความเสมอภาค</label>
-    <input class="form-control" type="text" />
-  </div>
-</div>
-<div class="row mb-2">
-  <div class="col">
-    <label class="form-label">ความเป็นผู้นำในการอนุรักษ์</label>
-    <input class="form-control" type="text" />
-  </div>
-  <div class="col">
-    <label class="form-label">การเกื้อกูลและยึดมั่นในระบบคุณธรรม</label>
-    <input class="form-control" type="text" />
-  </div>
-</div>
+<form [formGroup]="form">
+  <div class="box-header text-primary">ประวัติการปฏิบัติตนตามจรรยาบรรณ</div>
+  <ng-container formArrayName="ethicInfo">
+    <ng-container *ngFor="let DegreeForm of ethicInfo.controls; let i = index">
+      <ng-container [formGroupName]="i">
+        <div class="border rounded px-3 py-2">
+          <div class="d-flex justify-content-end">
+            <i
+              class="bi bi-x-circle-fill text-danger"
+              (click)="deleteFormArray(ethicInfo, i)"
+              role="button"
+            ></i>
+          </div>
+          <div class="row mb-2">
+            <div class="col">
+              <label class="form-label">ปีที่เริ่ม</label>
+              <input class="form-control" type="text" />
+            </div>
+            <div class="col">
+              <label class="form-label">การมีวินัยและการพัฒนาตนเอง</label>
+              <input class="form-control" type="text" />
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col">
+              <label class="form-label">การรับผิดชอบต่ออาชีพ</label>
+              <input class="form-control" type="text" />
+            </div>
+            <div class="col">
+              <label class="form-label">การแสดงความเอื้ออาทร</label>
+              <input class="form-control" type="text" />
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col">
+              <label class="form-label">การส่งเสริมการเรียนรู้</label>
+              <input class="form-control" type="text" />
+            </div>
+            <div class="col">
+              <label class="form-label">การเป็นแบบอย่าง</label>
+              <input class="form-control" type="text" />
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col">
+              <label class="form-label">การช่วยเหลือเกื้อกูล</label>
+              <input class="form-control" type="text" />
+            </div>
+            <div class="col">
+              <label class="form-label">การให้ความเสมอภาค</label>
+              <input class="form-control" type="text" />
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col">
+              <label class="form-label">ความเป็นผู้นำในการอนุรักษ์</label>
+              <input class="form-control" type="text" />
+            </div>
+            <div class="col">
+              <label class="form-label"
+                >การเกื้อกูลและยึดมั่นในระบบคุณธรรม</label
+              >
+              <input class="form-control" type="text" />
+            </div>
+          </div>
 
-<div class="row mb-2">
-  <div class="col-6">
-    <label class="form-label"
-      >การมีภาวะผู้นำและหรือการเป็นผู้นำการเปลี่ยนแปลง</label
+          <div class="row mb-2">
+            <div class="col-6">
+              <label class="form-label"
+                >การมีภาวะผู้นำและหรือการเป็นผู้นำการเปลี่ยนแปลง</label
+              >
+              <input class="form-control" type="text" />
+            </div>
+          </div>
+        </div>
+        <br /> </ng-container></ng-container
+  ></ng-container>
+  <div class="d-flex justify-content-end">
+    <ksp-add-row-button
+      class="text-primary"
+      (addRowClick)="addFormArray(ethicInfo)"
+      >เพิ่มข้อมูลการปฏิบัติตนตามจรรยาบรรณ</ksp-add-row-button
     >
-    <input class="form-control" type="text" />
   </div>
-</div>
+</form>
