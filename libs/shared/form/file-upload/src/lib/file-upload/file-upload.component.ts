@@ -1,15 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  HttpClient,
-  HttpClientModule,
-  HttpEventType,
-} from '@angular/common/http';
-import { finalize, Subscription } from 'rxjs';
+import { HttpClientModule, HttpEventType } from '@angular/common/http';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { MatIconModule } from '@angular/material/icon';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+import { FileUploadService } from './file-upload.service';
+import { RequestPageType } from '@ksp/shared/constant';
 
 @UntilDestroy()
 @Component({
@@ -20,43 +17,55 @@ import { providerFactory } from '@ksp/shared/utility';
   imports: [CommonModule, MatIconModule, HttpClientModule],
   providers: providerFactory(FileUploadComponent),
 })
-export class FileUploadComponent extends KspFormBaseComponent {
+export class FileUploadComponent {
   @Input()
   requiredFileType!: string;
 
   @Input() buttonLabel = 'อัพโหลดไฟล์';
+  @Input() systemFileName = '-'; // รายชื่ออ้างอิงในระบบ เช่น 'หนังสือนำส่งจากสถานศึกษา (ฉบับจริงและวันที่ออกหนังสือไม่เกิน 30 วัน)', 'รูปถ่าย 1 นิ้ว'
+  @Input() pageType!: RequestPageType; // tab ที่เรียกใช้งาน
   @Input() showUploadedFileName = true;
-  @Input() uploadType = 'button';
+  @Input() uniqueTimestamp = '';
+  @Input() uploadType: 'button' | 'link' = 'button';
+  @Output() uploadComplete = new EventEmitter<string>();
 
   fileName = '';
   uploadProgress!: number | null;
-  uploadSub!: Subscription | null;
 
-  constructor(private http: HttpClient) {
-    super();
-  }
+  constructor(private uploadService: FileUploadService) {}
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
 
+    const payload = {
+      pagetype: this.pageType,
+      originalname: file.name,
+      systemname: this.systemFileName,
+      file: '',
+      uniquetimpstamp: this.uniqueTimestamp,
+    };
+
+    file.text().then((res) => {
+      payload.file = btoa(unescape(encodeURIComponent(res)));
+      this.uploadFile(payload);
+    });
+
     if (file) {
       this.fileName = file.name;
-      const formData = new FormData();
-      formData.append('thumbnail', file);
+    }
 
-      const upload$ = this.http
-        .post('/api/test-endpoint', formData, {
-          reportProgress: true,
-          observe: 'events',
-        })
-        .pipe(finalize(() => this.reset()));
+    this.uploadComplete.emit(file.name);
+  }
 
-      upload$.pipe(untilDestroyed(this)).subscribe((event: any) => {
+  uploadFile(payload: any) {
+    this.uploadService
+      .uploadFile(payload)
+      .pipe(untilDestroyed(this))
+      .subscribe((event: any) => {
         if (event.type == HttpEventType.UploadProgress) {
           this.uploadProgress = Math.round(100 * (event.loaded / event.total));
         }
       });
-    }
   }
 
   cancelUpload() {

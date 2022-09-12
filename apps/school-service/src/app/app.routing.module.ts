@@ -29,7 +29,7 @@ const routes: Routes = [
   {
     path: 'temp-license',
     loadChildren: () =>
-      import('@ksp/school-service/feature/temp-license').then(
+      import('@ksp/school-service/feature/request').then(
         (m) => m.SchoolTempLicenseModule
       ),
     canActivate: [AuthGuard],

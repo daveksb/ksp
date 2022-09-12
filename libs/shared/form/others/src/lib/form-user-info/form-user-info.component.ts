@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { KspFormBaseComponent, RequestType } from '@ksp/shared/interface';
 import {
   createDefaultUserForm,
   providerFactory,
@@ -16,9 +16,12 @@ import {
 export class FormUserInfoComponent extends KspFormBaseComponent {
   @Input() isDarkMode = false;
   @Input() prefixList = null;
-  @Input() foreignMode = false;
-  @Input() qualificationMode = false;
+  @Input() displayMode: number =
+    RequestType[
+      'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)'
+    ];
 
+  RequestType = RequestType;
   validatorMessages = validatorMessages;
 
   /**
@@ -43,35 +46,35 @@ export class FormUserInfoComponent extends KspFormBaseComponent {
   }
 
   get idCardNo() {
-    return this.form.controls.idCardNo;
+    return this.form.controls.idcardno;
   }
 
   get passportNo() {
-    return this.form.controls.passportNo;
+    return this.form.controls.passportno;
   }
 
   get firstNameTh() {
-    return this.form.controls.firstNameTh;
+    return this.form.controls.firstnameth;
   }
 
   get lastNameTh() {
-    return this.form.controls.lastNameTh;
+    return this.form.controls.lastnameth;
   }
 
   get firstNameEn() {
-    return this.form.controls.firstNameEn;
+    return this.form.controls.firstnameen;
   }
 
   get lastNameEn() {
-    return this.form.controls.lastNameEn;
+    return this.form.controls.lastnameen;
   }
 
   get contactPhone() {
-    return this.form.controls.contactPhone;
+    return this.form.controls.contactphone;
   }
 
   get workPhone() {
-    return this.form.controls.workPhone;
+    return this.form.controls.workphone;
   }
 
   get email() {

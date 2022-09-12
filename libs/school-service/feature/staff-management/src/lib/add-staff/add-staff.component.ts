@@ -8,7 +8,7 @@ import {
 } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 import {
-  mapJsonData,
+  formatCheckboxData,
   parseJson,
   replaceEmptyWithNull,
   thaiDate,
@@ -20,6 +20,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { levels, subjects } from '@ksp/shared/constant';
+import { RequestType } from '@ksp/shared/interface';
 
 @UntilDestroy()
 @Component({
@@ -42,7 +43,10 @@ export class AddStaffComponent implements OnInit {
   schoolId = '0010201056';
   today = thaiDate(new Date());
   mode: 'view' | 'edit' | 'add' = 'add';
-
+  displayMode: number =
+    RequestType[
+      'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)'
+    ];
   form = this.fb.group({
     userInfo: [],
     addr1: [],
@@ -84,7 +88,7 @@ export class AddStaffComponent implements OnInit {
 
   pathTeachingInfo(res: any) {
     const t = JSON.parse(res.teachingLevel);
-    console.log('teaching = ', t);
+
     const teachingLevel = levels.map((level, i) => {
       if (t.includes(level.value)) {
         return level.value;
@@ -93,7 +97,7 @@ export class AddStaffComponent implements OnInit {
       }
     });
     const s = JSON.parse(res.teachingSubjects);
-    console.log('subject = ', s);
+
     const teachingSubjects = subjects.map((subj, i) => {
       if (s.includes(subj.value)) {
         return subj.value;
@@ -165,7 +169,6 @@ export class AddStaffComponent implements OnInit {
       ...{ teachinginfo: JSON.stringify(formData.teachingInfo) },
       ...{ hiringinfo: JSON.stringify(formData.hiringInfo) },
     };
-
     //console.log('insert payload = ', payload);
     this.staffService.addStaff2(payload).subscribe((res) => {
       //console.log('add staff result = ', res);
@@ -179,8 +182,11 @@ export class AddStaffComponent implements OnInit {
     const { ...userInfo } = replaceEmptyWithNull(formData.userInfo);
     userInfo.schoolId = this.schoolId;
     const teaching: any = this.form.controls.teachingInfo.value;
-    const teachingLevel = mapJsonData(teaching.teachingLevel, levels);
-    const teachingSubjects = mapJsonData(teaching.teachingSubjects, subjects);
+    const teachingLevel = formatCheckboxData(teaching.teachingLevel, levels);
+    const teachingSubjects = formatCheckboxData(
+      teaching.teachingSubjects,
+      subjects
+    );
     const teachingInfo = {
       teachingLevel,
       teachingSubjects,

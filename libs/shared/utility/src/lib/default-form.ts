@@ -9,42 +9,44 @@ import {
 export function createDefaultUserForm(FormBuilder: any, Validators: any) {
   return FormBuilder.group({
     id: [],
-    idCardNo: [null, [Validators.required, Validators.pattern(idCardPattern)]],
-    passportNo: [null, [Validators.pattern(passportPattern)]],
-    passportStartDate: [],
-    passportEndDate: [],
-    prefixTh: [null, Validators.required],
-    firstNameTh: [
+    idcardno: [null, [Validators.required, Validators.pattern(idCardPattern)]],
+    passportno: [null, [Validators.pattern(passportPattern)]],
+    passportstartdate: [],
+    passportenddate: [],
+    prefixth: [null, Validators.required],
+    firstnameth: [
       null,
       [Validators.required, Validators.pattern(nameThPattern)],
     ],
-    middleNameTh: [],
-    lastNameTh: [
+    middlenameth: [],
+    lastnameth: [
       null,
       [Validators.required, Validators.pattern(nameThPattern)],
     ],
-    prefixEn: [null, Validators.required],
-    firstNameEn: [
+    prefixen: [null, Validators.required],
+    firstnameen: [
       null,
       [Validators.required, Validators.pattern(nameEnPattern)],
     ],
-    middleNameEn: [null],
-    lastNameEn: [
+    middlenameen: [null],
+    lastnameen: [
       null,
       [Validators.required, Validators.pattern(nameEnPattern)],
     ],
     sex: [null, Validators.required],
-    birthDate: [null, Validators.required],
+    birthdate: [null, Validators.required],
+    position: [null, Validators.required],
     email: [null, [Validators.required, Validators.email]],
-    contactPhone: [
+    contactphone: [
       null,
       [Validators.required, Validators.pattern(phonePattern)],
     ],
-    workPhone: [null, [Validators.required, Validators.pattern(phonePattern)]],
-    nationality: ['TH'],
-    country: [],
-    visatype: [],
-    visaclass: [],
-    visaenddate: [],
+    workphone: [null, [Validators.required, Validators.pattern(phonePattern)]],
+    nationality: [null],
+    country: [null],
   });
+}
+
+export function createDefaultVisaInfo(FormBuilder: any) {
+  return FormBuilder.group({ visatype: [], visaclass: [], visaenddate: [] });
 }

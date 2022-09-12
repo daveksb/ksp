@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { levels, subjects } from '@ksp/shared/constant';
+import { levels, RequestPageType, subjects } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
+import { defaultRequestPayload, RequestType } from '@ksp/shared/interface';
 import {
   AddressService,
   GeneralInfoService,
@@ -15,7 +16,13 @@ import {
   StaffService,
   TempLicenseService,
 } from '@ksp/shared/service';
-import { parseJson, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
+import {
+  formatCheckboxData,
+  parseJson,
+  replaceEmptyWithNull,
+  thaiDate,
+  toLowercaseProp,
+} from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 import { LicenseDetailService } from './temp-license-request.service';
@@ -33,9 +40,13 @@ export class TempLicenseRequestComponent implements OnInit {
     schoolAddr: [],
     edu1: [],
     edu2: [],
-    teachingInfo: [],
-    hiringInfo: [],
+    teachinginfo: [],
+    hiringinfo: [],
   });
+
+  uniqueTimestamp = ''; // use for file upload reference, gen only first time component loaded
+
+  pageType = RequestPageType;
 
   today = thaiDate(new Date());
   countries$!: Observable<any>;
@@ -57,6 +68,11 @@ export class TempLicenseRequestComponent implements OnInit {
   requestTypeLabel = '';
   requestNo = '';
   schoolId = '0010201056';
+  schoolAddressData: any = null;
+  displayMode: number =
+    RequestType[
+      'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)'
+    ];
 
   educationInfo: string[] = [];
   teachingInfo: string[] = [];
@@ -74,10 +90,11 @@ export class TempLicenseRequestComponent implements OnInit {
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
     private staffService: StaffService,
-    private requestLicenseService: RequestLicenseService
+    private requestService: RequestLicenseService
   ) {}
 
   ngOnInit(): void {
+    this.uniqueTimestamp = `${new Date().getTime()}`;
     this.getList();
     this.checkRequestId();
     this.checkRequestType();
@@ -87,74 +104,54 @@ export class TempLicenseRequestComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.requestId = Number(params.get('id'));
       if (this.requestId) {
-        this.loadRequestData(this.requestId);
+        this.loadRequestFromId(this.requestId);
       }
     });
   }
 
-  createRequest() {
-    const baseForm = this.getDefaultForm();
+  loadRequestFromId(id: number) {
+    this.requestService.getRequestById(id).subscribe((res: any) => {
+      console.log('result = ', res);
+      this.form.controls.userInfo.patchValue(res);
+      this.patchAddress(parseJson(res.addressinfo));
+      this.form.controls.schoolAddr.patchValue(this.schoolAddressData);
+      this.patchEdu(parseJson(res.eduinfo));
 
-    const formData: any = this.form.getRawValue();
-    formData.addr1.addressType = 1;
-    formData.addr2.addressType = 2;
-
-    const { id, ...rawUserInfo } = formData.userInfo;
-    rawUserInfo.schoolId = this.schoolId;
-
-    const userInfo = Object.keys(rawUserInfo).reduce(
-      (destination: any, key) => {
-        destination[key.toLowerCase()] = rawUserInfo[key];
-        return destination;
-      },
-      {}
-    );
-
-    userInfo.ref1 = '2';
-    userInfo.ref2 = '03';
-    userInfo.ref3 = '1';
-    userInfo.systemtype = '2';
-    userInfo.requesttype = this.requestType;
-
-    const payload = {
-      ...replaceEmptyWithNull(userInfo),
-      ...{ addressinfo: JSON.stringify([formData.addr1, formData.addr2]) },
-      ...{ eduinfo: JSON.stringify([formData.edu1, formData.edu2]) },
-      ...{ teachinginfo: JSON.stringify(formData.teachingInfo) },
-    };
-
-    // console.log('payload = ', payload);
-    baseForm.patchValue(payload);
-    //console.log('current form = ', baseForm.value);
-    this.requestLicenseService.requestLicense(payload).subscribe((res) => {
-      //console.log('request result = ', res);
+      this.patchHiringInfo(parseJson(res.teachinginfo));
+      this.patchTeachingInfo(parseJson(res.teachinginfo));
     });
   }
 
-  loadRequestData(id: number) {
-    this.requestLicenseService.getRequestById(id).subscribe((res) => {
-      console.log('req = ', res);
-      //const userInfo = {};
-      //this.form.controls.userInfo.patchValue({ id: 2 });
+  patchTeachingInfo(res: any) {
+    console.log('teaching response= ', res);
+
+    const t = JSON.parse(res.teachingInfo.teachingLevel);
+    const teachingLevel = levels.map((level) => {
+      if (t.includes(level.value)) {
+        return level.value;
+      } else {
+        return false;
+      }
     });
+    const s = JSON.parse(res.teachingInfo.teachingSubjects);
+    const teachingSubjects = subjects.map((subj, i) => {
+      if (s.includes(subj.value)) {
+        return subj.value;
+      } else {
+        return false;
+      }
+    });
+    const data = {
+      ...res,
+      teachingLevel,
+      teachingSubjects,
+    };
+    this.form.controls.teachinginfo.patchValue(data);
   }
 
-  searchStaffFromIdCard(idCard: string) {
-    if (!idCard) return;
-    const payload = {
-      idcardno: idCard,
-      schoolid: this.schoolId,
-    };
-    this.staffService
-      .searchStaffFromIdCard(payload)
-      .pipe(untilDestroyed(this))
-      .subscribe((res) => {
-        this.pathUserInfo(res);
-        this.patchAddress(parseJson(res.addresses));
-        this.patchEdu(parseJson(res.educations));
-        this.pathTeachingInfo(parseJson(res.teachinginfo));
-        this.pathHiringInfo(parseJson(res.hiringinfo));
-      });
+  patchHiringInfo(data: any) {
+    console.log('hiring = ', data);
+    this.form.controls.hiringinfo.patchValue(data);
   }
 
   patchEdu(edus: any[]) {
@@ -171,6 +168,7 @@ export class TempLicenseRequestComponent implements OnInit {
   }
 
   patchAddress(addrs: any[]) {
+    //console.log('address = ', addrs);
     if (addrs && addrs.length) {
       addrs.map((addr: any, i: number) => {
         if (i === 0) {
@@ -187,8 +185,81 @@ export class TempLicenseRequestComponent implements OnInit {
     }
   }
 
+  searchStaffFromIdCard(idCard: string) {
+    if (!idCard) return;
+    const payload = {
+      idcardno: idCard,
+      schoolid: this.schoolId,
+    };
+    this.staffService
+      .searchStaffFromIdCard(payload)
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        console.log('req = ', res);
+        res = toLowercaseProp(res);
+        this.pathUserInfo(res);
+        this.patchAddress(parseJson(res.addresses));
+        this.form.controls.schoolAddr.patchValue(this.schoolAddressData);
+        this.patchEdu(parseJson(res.educations));
+        this.patchTeachingInfo(parseJson(res.teachinginfo));
+        this.patchHiringInfo(parseJson(res.hiringinfo));
+      });
+  }
+
+  createRequest() {
+    const baseForm = this.fb.group(defaultRequestPayload);
+
+    const formData: any = this.form.getRawValue();
+    formData.addr1.addressType = 1;
+    formData.addr2.addressType = 2;
+
+    const { id, ...rawUserInfo } = formData.userInfo;
+    rawUserInfo.schoolId = this.schoolId;
+
+    const userInfo = toLowercaseProp(rawUserInfo);
+
+    userInfo.ref1 = '2';
+    userInfo.ref2 = '03';
+    userInfo.ref3 = '1';
+    userInfo.systemtype = '2';
+    userInfo.requesttype = this.requestType;
+
+    const teaching: any = this.form.controls.teachinginfo.value;
+
+    const teachingLevel = formatCheckboxData(teaching.teachingLevel, levels);
+    const teachingSubjects = formatCheckboxData(
+      teaching.teachingSubjects,
+      subjects
+    );
+    const teachingInfo = {
+      teachingLevel,
+      teachingSubjects,
+      teachingSubjectOther: teaching.teachingSubjectOther || null,
+    };
+
+    //console.log('teachingInfo = ', teachingInfo);
+
+    const payload = {
+      ...replaceEmptyWithNull(userInfo),
+      ...{ addressinfo: JSON.stringify([formData.addr1, formData.addr2]) },
+      ...{ eduinfo: JSON.stringify([formData.edu1, formData.edu2]) },
+      ...{
+        teachinginfo: JSON.stringify({
+          teachingInfo,
+          ...formData.hiringinfo,
+        }),
+      },
+    };
+
+    baseForm.patchValue(payload);
+    //console.log('current form = ', baseForm.value);
+    this.requestService.requestLicense(payload).subscribe((res) => {
+      //console.log('request result = ', res);
+    });
+  }
+
   pathUserInfo(data: any) {
-    const {
+    /*     const {
       schoolId,
       createDate,
       addresses,
@@ -196,47 +267,13 @@ export class TempLicenseRequestComponent implements OnInit {
       teachinginfo,
       hiringinfo,
       ...formData
-    } = data;
-    formData.birthDate = formData.birthDate.split('T')[0];
-    this.form.controls.userInfo.patchValue(formData);
+    } = data; */
+    data.birthdate = data.birthdate.split('T')[0];
+    this.form.controls.userInfo.patchValue(data);
   }
-
-  pathTeachingInfo(res: any) {
-    const t = JSON.parse(res.teachingLevel);
-    const teachingLevel = levels.map((level, i) => {
-      if (t.includes(level.value)) {
-        return level.value;
-      } else {
-        return false;
-      }
-    });
-    const s = JSON.parse(res.teachingSubjects);
-    const teachingSubjects = subjects.map((subj, i) => {
-      if (s.includes(subj.value)) {
-        return subj.value;
-      } else {
-        return false;
-      }
-    });
-    const data = {
-      ...res,
-      teachingLevel,
-      teachingSubjects,
-    };
-    this.form.controls.teachingInfo.patchValue(data);
-  }
-
-  pathHiringInfo(data: any) {
-    this.form.controls.hiringInfo.patchValue(data);
-  }
-
-  /*   onTabIndexChanged(tabIndex: number) {
-    if (tabIndex === 2) {
-      //this.patchEdu(this.staffId);
-    }
-  } */
 
   tempSave() {
+    // save uncomplete form, get requestNo and Id as response
     if (!this.requestId) {
       const formData: any = this.form.getRawValue();
       formData.userInfo.schoolId = this.schoolId;
@@ -294,25 +331,43 @@ export class TempLicenseRequestComponent implements OnInit {
     this.staffTypes$ = this.staffService.getStaffTypes();
     this.positionTypes$ = this.staffService.getPositionTypes();
     this.academicTypes$ = this.staffService.getAcademicStandingTypes();
+    this.getSchoolAddress();
+  }
+
+  getSchoolAddress() {
     this.tempLicenseService
       .getSchoolInfo(this.schoolId)
       .pipe(untilDestroyed(this))
       .subscribe((res: any) => {
-        //console.log('school = ', res);
-        this.form.controls.schoolAddr.patchValue(res);
+        this.schoolAddressData = res;
       });
   }
 
   checkRequestType() {
     this.route.queryParams.subscribe((params) => {
+      this.form.reset();
       this.requestType = Number(params['type']);
-      //console.log('request type = ', this.requestType);
       if (params['type'] == 1) {
-        this.requestTypeLabel = '(ชาวไทย)';
+        this.requestTypeLabel =
+          RequestType[
+            RequestType[
+              'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)'
+            ]
+          ];
       } else if (params['type'] == 2) {
-        this.requestTypeLabel = '(ผู้บริหารการศึกษา)';
+        this.requestTypeLabel =
+          RequestType[
+            RequestType[
+              'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ผู้บริหาร)'
+            ]
+          ];
       } else if (params['type'] == 3) {
-        this.requestTypeLabel = '(ชาวต่างชาติ)';
+        this.requestTypeLabel =
+          RequestType[
+            RequestType[
+              'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)'
+            ]
+          ];
       }
     });
   }
@@ -383,58 +438,9 @@ export class TempLicenseRequestComponent implements OnInit {
     }
   }
 
-  getDefaultForm() {
-    return this.fb.group({
-      currentprocess: null,
-      requeststatus: null,
-      updatedate: null,
-      licenseid: null,
-      staffid: null,
-      systemtype: null,
-      requesttype: null,
-      requesteduocupy: null,
-      requestfor: null,
-      schoolid: null,
-      idcardno: null,
-      passportno: null,
-      passportstartdate: null,
-      passportenddate: null,
-      prefixth: null,
-      firstnameth: null,
-      lastnameth: null,
-      prefixen: null,
-      firstnameen: null,
-      lastnameen: null,
-      sex: null,
-      birthdate: null,
-      email: null,
-      position: null,
-      educationoccupy: null,
-      contactphone: null,
-      workphone: null,
-      nationality: null,
-      country: null,
-      coordinatorinfo: null,
-      visainfo: null,
-      userpermission: null,
-      addressinfo: null,
-      schooladdrinfo: null,
-      eduinfo: null,
-      teachinginfo: null,
-      reasoninfo: null,
-      fileinfo: null,
-      otherreason: null,
-      refperson: null,
-      prohibitproperty: null,
-      checkprohibitproperty: null,
-      checksubresult: null,
-      checkfinalresult: null,
-      checkhistory: null,
-      approveresult: null,
-      paymentstatus: null,
-      ref1: null,
-      ref2: null,
-      ref3: null,
-    });
-  }
+  /*   onTabIndexChanged(tabIndex: number) {
+    if (tabIndex === 2) {
+      //this.patchEdu(this.staffId);
+    }
+  } */
 }

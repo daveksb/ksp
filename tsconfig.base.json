@@ -2,6 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "rootDir": ".",
+    "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
@@ -103,6 +104,9 @@
       "@ksp/school-service/feature/register": [
         "libs/school-service/feature/register/src/index.ts"
       ],
+      "@ksp/school-service/feature/request": [
+        "libs/school-service/feature/request/src/index.ts"
+      ],
       "@ksp/school-service/feature/request-reward": [
         "libs/school-service/feature/request-reward/src/index.ts"
       ],
@@ -111,9 +115,6 @@
       ],
       "@ksp/school-service/feature/staff-management": [
         "libs/school-service/feature/staff-management/src/index.ts"
-      ],
-      "@ksp/school-service/feature/temp-license": [
-        "libs/school-service/feature/temp-license/src/index.ts"
       ],
       "@ksp/school-service/form/activity": [
         "libs/school-service/form/activity/src/index.ts"

@@ -27,8 +27,8 @@ export class SchoolServiceLoginComponent {
         if (res.returnCode == 99) return;
         this.schoolServiceFeatureLoginService.config = res;
         setCookie('schUserToken', res.schUserToken, 1);
-        setCookie('firstName', res.schFname, 1);
-        setCookie('lastName', res.schLname, 1);
+        setCookie('firstNameTh', res.firstNameTh, 1);
+        setCookie('lastNameTh', res.lastNameTh, 1);
         this.router.navigate(['/temp-license', 'list']);
       });
   }
@@ -42,6 +42,6 @@ export class SchoolServiceLoginComponent {
   }
 
   retired() {
-    this.router.navigate(['/', 'retired-user', 'search']);
+    this.router.navigate(['/retired-user', 'search']);
   }
 }

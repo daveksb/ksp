@@ -37,3 +37,11 @@ export const subjects = [
   { label: 'ประมง', value: 's16' },
   { label: 'อุตสาหกรรมท่องเที่ยว', value: 's17' },
 ];
+
+// ใช้ อ้างอิง tab ในหน้าใบคำขอเพื่อระบุรายการไฟล์ ที่เกี่ยวข้อง
+export enum RequestPageType {
+  educationTab = 'educationTab',
+  teachingTab = 'teachingTab',
+  reasonTab = 'reasonTab',
+  fileAttachTab = 'fileAttachTab',
+}

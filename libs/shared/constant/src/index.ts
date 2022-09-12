@@ -1,1 +1,1 @@
-export { subjects , levels} from './school-constant';
+export * from './school-constant';
