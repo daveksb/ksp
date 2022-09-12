@@ -52,7 +52,7 @@
 
     <!-- (selectedIndexChange)="onTabIndexChanged($event)" -->
     <div class="full-width pb-2">
-      <mat-tab-group class="tab-group mt-3" selectedIndex="5">
+      <mat-tab-group class="tab-group mt-3" selectedIndex="0">
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address
             [provinces]="provinces$ | async"
@@ -60,6 +60,7 @@
             [tumbols]="tumbols1$ | async"
             (provinceChanged)="provinceChanged(1, $event)"
             (amphurChanged)="amphurChanged(1, $event)"
+            (tumbolChanged)="tumbolChanged(1, $event)"
             formControlName="addr1"
             >ที่อยู่ทะเบียนบ้าน</ksp-form-address
           ><br />
@@ -69,6 +70,7 @@
             [tumbols]="tumbols2$ | async"
             (provinceChanged)="provinceChanged(2, $event)"
             (amphurChanged)="amphurChanged(2, $event)"
+            (tumbolChanged)="tumbolChanged(2, $event)"
             formControlName="addr2"
             >ที่อยู่ที่ติดต่อได้สะดวก
             <div class="d-flex align-items-center">
@@ -190,7 +192,7 @@
     [showTempSaveButton]="true"
     [disableTempSaveButton]="true"
     [showSaveButton]="true"
-    [disableSaveButton]="!form.valid"
+    [disableSaveButton]="false"
     [saveButtonLabel]="'ส่งใบคำขอ'"
   ></ksp-bottom-nav>
 </div>

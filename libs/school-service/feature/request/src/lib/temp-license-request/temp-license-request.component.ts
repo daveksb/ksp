@@ -68,7 +68,6 @@ export class TempLicenseRequestComponent implements OnInit {
   requestTypeLabel = '';
   requestNo = '';
   schoolId = '0010201056';
-  schoolAddressData: any = null;
   displayMode: number =
     RequestType[
       'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)'
@@ -111,31 +110,28 @@ export class TempLicenseRequestComponent implements OnInit {
 
   loadRequestFromId(id: number) {
     this.requestService.getRequestById(id).subscribe((res: any) => {
-      console.log('result = ', res);
+      //console.log('result = ', res);
       this.form.controls.userInfo.patchValue(res);
       this.patchAddress(parseJson(res.addressinfo));
-      this.form.controls.schoolAddr.patchValue(this.schoolAddressData);
       this.patchEdu(parseJson(res.eduinfo));
 
-      this.patchHiringInfo(parseJson(res.teachinginfo));
+      this.patchHiringInfo(parseJson(res.hiringinfo));
       this.patchTeachingInfo(parseJson(res.teachinginfo));
     });
   }
 
   patchTeachingInfo(res: any) {
-    console.log('teaching response= ', res);
-
-    const t = JSON.parse(res.teachingInfo.teachingLevel);
+    //console.log('teaching response= ', res);
     const teachingLevel = levels.map((level) => {
-      if (t.includes(level.value)) {
+      if (res.teachingLevel.includes(level.value)) {
         return level.value;
       } else {
         return false;
       }
     });
-    const s = JSON.parse(res.teachingInfo.teachingSubjects);
-    const teachingSubjects = subjects.map((subj, i) => {
-      if (s.includes(subj.value)) {
+
+    const teachingSubjects = subjects.map((subj) => {
+      if (res.teachingSubjects.includes(subj.value)) {
         return subj.value;
       } else {
         return false;
@@ -150,7 +146,6 @@ export class TempLicenseRequestComponent implements OnInit {
   }
 
   patchHiringInfo(data: any) {
-    console.log('hiring = ', data);
     this.form.controls.hiringinfo.patchValue(data);
   }
 
@@ -195,11 +190,9 @@ export class TempLicenseRequestComponent implements OnInit {
       .searchStaffFromIdCard(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
-        console.log('req = ', res);
-        res = toLowercaseProp(res);
+        //console.log('req = ', res);
         this.pathUserInfo(res);
         this.patchAddress(parseJson(res.addresses));
-        this.form.controls.schoolAddr.patchValue(this.schoolAddressData);
         this.patchEdu(parseJson(res.educations));
         this.patchTeachingInfo(parseJson(res.teachinginfo));
         this.patchHiringInfo(parseJson(res.hiringinfo));
@@ -238,17 +231,12 @@ export class TempLicenseRequestComponent implements OnInit {
     };
 
     //console.log('teachingInfo = ', teachingInfo);
-
     const payload = {
       ...replaceEmptyWithNull(userInfo),
       ...{ addressinfo: JSON.stringify([formData.addr1, formData.addr2]) },
       ...{ eduinfo: JSON.stringify([formData.edu1, formData.edu2]) },
-      ...{
-        teachinginfo: JSON.stringify({
-          teachingInfo,
-          ...formData.hiringinfo,
-        }),
-      },
+      ...{ teachinginfo: JSON.stringify(teachingInfo) },
+      ...{ hiringinfo: JSON.stringify(formData.hiringinfo) },
     };
 
     baseForm.patchValue(payload);
@@ -339,7 +327,7 @@ export class TempLicenseRequestComponent implements OnInit {
       .getSchoolInfo(this.schoolId)
       .pipe(untilDestroyed(this))
       .subscribe((res: any) => {
-        this.schoolAddressData = res;
+        this.form.controls.schoolAddr.patchValue(res);
       });
   }
 
@@ -436,6 +424,11 @@ export class TempLicenseRequestComponent implements OnInit {
         this.tumbols2$ = this.addressService.getTumbols(amphur);
       }
     }
+  }
+
+  tumbolChanged(type: number, evt: any) {
+    const tumbol = evt.target?.value;
+    console.log('tumbol = ', tumbol);
   }
 
   /*   onTabIndexChanged(tabIndex: number) {

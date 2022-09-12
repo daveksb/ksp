@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { providerFactory } from '@ksp/shared/utility';
@@ -16,8 +16,8 @@ import { providerFactory } from '@ksp/shared/utility';
 export class LoginFormComponent extends KspFormBaseComponent {
   eyeIconClicked = false;
   override form = this.fb.group({
-    username: [],
-    password: [],
+    username: [null, Validators.required],
+    password: [null, Validators.required],
   });
 
   @Input() showRetired = false;
