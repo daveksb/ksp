@@ -4340,6 +4340,32 @@
         }
       ]
     },
+    "self-service-dialog": {
+      "projectType": "library",
+      "root": "libs/self-service/dialog",
+      "sourceRoot": "libs/self-service/dialog/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/self-service/dialog"],
+          "options": {
+            "jestConfig": "libs/self-service/dialog/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/self-service/dialog/**/*.ts",
+              "libs/self-service/dialog/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "self-service-feature-compare-knowledge": {
       "projectType": "library",
       "root": "libs/self-service/feature/compare-knowledge",

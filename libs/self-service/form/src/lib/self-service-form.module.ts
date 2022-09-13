@@ -5,8 +5,6 @@ import { FormUserEducationComponent } from './form-user-education/form-user-educ
 import { FormUserExperienceComponent } from './form-user-experience/form-user-experience.component';
 import { FormUserPerformanceComponent } from './form-user-performance/form-user-performance.component';
 import { FormUserWorkplaceComponent } from './form-user-workplace/form-user-workplace.component';
-import { FormVerifyOtpComponent } from './form-verify-otp/form-verify-otp.component';
-import { FormVerifyPhoneComponent } from './form-verify-phone/form-verify-phone.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
@@ -69,8 +67,6 @@ import { CompareKnowledgeInfoComponent } from './compare-knowledge-info/compare-
     FormUserExperienceComponent,
     FormUserPerformanceComponent,
     FormUserWorkplaceComponent,
-    FormVerifyOtpComponent,
-    FormVerifyPhoneComponent,
     StandardWorkingComponent,
     SubstituteObjectiveComponent,
     SchoolManagerExperienceComponent,
@@ -90,8 +86,6 @@ import { CompareKnowledgeInfoComponent } from './compare-knowledge-info/compare-
     FormUserExperienceComponent,
     FormUserPerformanceComponent,
     FormUserWorkplaceComponent,
-    FormVerifyOtpComponent,
-    FormVerifyPhoneComponent,
     StandardWorkingComponent,
     SubstituteObjectiveComponent,
     SchoolManagerExperienceComponent,

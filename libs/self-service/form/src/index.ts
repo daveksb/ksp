@@ -10,10 +10,6 @@ export * from './lib/form-user-performance/form-user-performance.component';
 
 export * from './lib/form-user-workplace/form-user-workplace.component';
 
-export * from './lib/form-verify-otp/form-verify-otp.component';
-
-export * from './lib/form-verify-phone/form-verify-phone.component';
-
 export * from './lib/standard-working/standard-working.component';
 
 export * from './lib/standard-working-teacher/standard-working-teacher.component';
@@ -45,8 +41,6 @@ export * from './lib/foreign-step-two-tab-three/foreign-step-two-tab-three.compo
 export * from './lib/foreign-step-two-tab-four/foreign-step-two-tab-four.component';
 
 export * from './lib/foreign-step-two-tab-three-form/foreign-step-two-tab-three-form.component';
-
-export * from './lib/form-verify-otp-foreign/form-verify-otp-foreign.component';
 
 export * from './lib/transfer-knowledge-info/transfer-knowledge-info.component';
 
