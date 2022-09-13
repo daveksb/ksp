@@ -6,7 +6,7 @@ import {
   phonePattern,
 } from './form-validators';
 
-export function createDefaultUserForm(FormBuilder: any, Validators: any) {
+export function createDefaultUserInfoForm(FormBuilder: any, Validators: any) {
   return FormBuilder.group({
     id: [],
     idcardno: [null, [Validators.required, Validators.pattern(idCardPattern)]],

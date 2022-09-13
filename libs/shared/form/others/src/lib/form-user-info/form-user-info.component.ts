@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent, RequestType } from '@ksp/shared/interface';
 import {
-  createDefaultUserForm,
+  createDefaultUserInfoForm,
   providerFactory,
   validatorMessages,
 } from '@ksp/shared/utility';
@@ -32,7 +32,7 @@ export class FormUserInfoComponent extends KspFormBaseComponent {
    * Use in E-service, School-Service
    */
 
-  override form = createDefaultUserForm(this.fb, Validators);
+  override form = createDefaultUserInfoForm(this.fb, Validators);
 
   constructor(private fb: FormBuilder) {
     super();

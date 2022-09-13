@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import {
-  createDefaultUserForm,
+  createDefaultUserInfoForm,
   providerFactory,
   validatorMessages,
 } from '@ksp/shared/utility';
@@ -19,7 +19,7 @@ export class FormForeignIdComponent
   extends KspFormBaseComponent
   implements OnInit
 {
-  override form = createDefaultUserForm(this.fb, Validators);
+  override form = createDefaultUserInfoForm(this.fb, Validators);
   validatorMessages = validatorMessages;
 
   @Input() formHeader = 'ข้อมูลครูชาวต่างชาติ';

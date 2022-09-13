@@ -82,6 +82,14 @@ export class AddStaffComponent implements OnInit {
       });
   }
 
+  save() {
+    if (this.staffId) {
+      this.updateStaff();
+    } else {
+      this.insertStaff();
+    }
+  }
+
   pathTeachingInfo(res: any) {
     //console.log('teaching = ', res);
     const teachingLevel = levels.map((level) => {
@@ -133,14 +141,6 @@ export class AddStaffComponent implements OnInit {
         this.pathTeachingInfo(parseJson(res.teachinginfo));
         this.form.controls.hiringInfo.patchValue(parseJson(res.hiringinfo));
       });
-  }
-
-  save() {
-    if (this.staffId) {
-      this.updateStaff();
-    } else {
-      this.insertStaff();
-    }
   }
 
   insertStaff() {
