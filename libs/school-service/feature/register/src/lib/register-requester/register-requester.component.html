@@ -8,8 +8,8 @@
 
     <div class="bg-white container-xl py-2">
       <ksp-request-header-info
-        [requestDate]="'10 ตุลาคม 2565'"
-        [requestNumber]="'112234467876543'"
+        [requestDate]="requestDate"
+        [requestNumber]="requestNumber"
       ></ksp-request-header-info>
       <hr />
 
@@ -23,6 +23,7 @@
         mode="view"
         [label1]="'สังกัด'"
         [label2]="'โรงเรียน / สถานศึกษา'"
+        [schoolName]="school?.schoolName"
       ></ksp-university-select>
 
       <div class="mx-4 mt-3">
@@ -43,9 +44,14 @@
         </ng-container>
       </div>
 
-      <ksp-form-requester-info
+      <ksp-form-user-info
         formControlName="requester"
-      ></ksp-form-requester-info>
+        [isDarkMode]="false"
+        [mode]="mode"
+        [prefixList]="prefixList$ | async"
+        [nationalitys]="nationalitys$ | async"
+        [displayMode]="userInfoFormdisplayMode"
+      ></ksp-form-user-info>
 
       <ksp-bottom-nav
         [isFirstPage]="true"

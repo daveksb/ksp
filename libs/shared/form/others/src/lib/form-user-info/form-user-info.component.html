@@ -50,7 +50,9 @@
     <div
       class="col"
       [ngClass]="{
-        hide: displayMode === RequestTypeEnum['ขอหนังสือรับรองคุณวุฒิ']
+        hide:
+          displayMode === RequestTypeEnum['ขอหนังสือรับรองคุณวุฒิ'] ||
+          displayMode === RequestTypeEnum['ขอยื่นผู้ประสานงาน']
       }"
     >
       <label class="form-label">หมายเลขหนังสือเดินทาง (Passport Number) </label>
@@ -378,9 +380,17 @@
         }}</span>
       </ng-container>
     </div>
-    <div class="col-md-6" *ngIf="false">
+    <div
+      class="col-md-6"
+      *ngIf="displayMode === RequestTypeEnum['ขอยื่นผู้ประสานงาน']"
+    >
       <label class="form-label required">ตำแหน่ง</label>
-      <input class="form-control" type="email" [class.bg-light]="isDarkMode" />
+      <input
+        class="form-control"
+        type="text"
+        formControlName="position"
+        [class.bg-light]="isDarkMode"
+      />
     </div>
   </div>
 

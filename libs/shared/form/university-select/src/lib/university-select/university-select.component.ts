@@ -18,6 +18,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 export class UniversitySelectComponent extends KspFormBaseComponent {
   @Input() label1 = 'สังกัด';
   @Input() label2 = 'โรงเรียน / สถานศึกษา';
+  @Input() schoolName = '';
   @Input() searchType = '';
   @Output() selectedUniversity = new EventEmitter<string>();
 

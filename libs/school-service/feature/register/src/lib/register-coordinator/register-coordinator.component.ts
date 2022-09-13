@@ -2,11 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { SchoolRequestType } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { FormMode } from '@ksp/shared/interface';
+import { GeneralInfoService, RequestLicenseService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { EMPTY, Observable, switchMap } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -17,21 +21,31 @@ export class CoordinatorInfoComponent implements OnInit {
   form = this.fb.group({
     coordinator: [],
   });
-
+  savingData: any;
   uploadFileList = ['หนังสือแต่งตั้งผู้ประสานงาน', 'สำเนาบัตรประชาชน'];
-
+  prefixList$!: Observable<any>;
+  nationalitys$!: Observable<any>;
+  mode: FormMode = 'edit';
+  userInfoFormdisplayMode: number = SchoolRequestType.ขอยื่นผู้ประสานงาน;
   constructor(
     private router: Router,
     public dialog: MatDialog,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private generalInfoService: GeneralInfoService,
+    private requestLicenseService: RequestLicenseService
   ) {}
 
   ngOnInit(): void {
-    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      //console.log('res = ', res);
-    });
+    this.savingData = history.state.data;
+    // this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
+    //   //console.log('res = ', res);
+    // });
+    this.getListData();
   }
-
+  getListData() {
+    this.prefixList$ = this.generalInfoService.getPrefix();
+    this.nationalitys$ = this.generalInfoService.getNationality();
+  }
   navigateBack() {
     this.router.navigate(['login']);
   }
@@ -52,11 +66,29 @@ export class CoordinatorInfoComponent implements OnInit {
       },
     });
 
-    confirmDialog.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        this.showCompleteDialog();
-      }
-    });
+    confirmDialog.componentInstance.confirmed
+      .pipe(
+        switchMap((res) => {
+          if (res) {
+            const payload = {
+              ...this.savingData,
+              coordinatorinfo: JSON.stringify(this.form.value),
+            };
+            payload.ref1 = '2';
+            payload.ref2 = '01';
+            payload.ref3 = '1';
+            payload.systemtype = '2';
+            payload.requesttype = '01';
+            return this.requestLicenseService.requestLicense(payload);
+          }
+          return EMPTY;
+        })
+      )
+      .subscribe((res) => {
+        if (res) {
+          this.showCompleteDialog();
+        }
+      });
   }
 
   showCompleteDialog() {

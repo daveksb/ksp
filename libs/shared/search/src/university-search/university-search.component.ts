@@ -69,8 +69,8 @@ export class UniversitySearchComponent implements OnInit {
     this.provinces$ = this.addressService.getProvinces();
   }
 
-  onItemChange(universityCode: string) {
-    this.selectedUniversity = universityCode;
+  onItemChange(university: any) {
+    this.selectedUniversity = university;
     //console.log('universityCode = ', universityCode);
   }
 
