@@ -1,7 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialogModule,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { AddressService, RequestLicenseService } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 import { BasicInstituteSearchComponent } from '../basic-institute-search/basic-institute-search.component';
@@ -31,9 +35,11 @@ export class UniversitySearchComponent implements OnInit {
     provinceid: null,
     amphurid: null,
     offset: '0',
-    row: '5',
+    row: '25',
   });
   Data: any[] = [];
+  currentPage!: number;
+  payload: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
@@ -43,7 +49,8 @@ export class UniversitySearchComponent implements OnInit {
     },
     private fb: FormBuilder,
     private addressService: AddressService,
-    private requestLicenseService: RequestLicenseService
+    private requestLicenseService: RequestLicenseService,
+    public dialogRef: MatDialogRef<UniversitySearchComponent>
   ) {}
 
   ngOnInit(): void {
@@ -72,9 +79,11 @@ export class UniversitySearchComponent implements OnInit {
       offset,
       row,
     };
-    this.requestLicenseService
-      .seachSchool(payload)
-      .subscribe((res) => (this.Data = this.generateAddressShow(res)));
+    this.currentPage = 1;
+    this.requestLicenseService.seachSchool(payload).subscribe((res) => {
+      this.Data = this.generateAddressShow(res);
+      this.payload = payload;
+    });
     // this.Data = data;
   }
   generateAddressShow(res: any[]) {
@@ -105,6 +114,30 @@ export class UniversitySearchComponent implements OnInit {
   provinceChange(evt: any) {
     const province = evt.target?.value;
     this.amphurs$ = this.addressService.getAmphurs(province);
+  }
+  goPrevious() {
+    if (this.currentPage == 1) return;
+    const { offset, ...payload } = this.payload;
+    payload.offset = parseInt(offset) - parseInt(payload.row);
+    payload.offset = payload.offset.toString();
+    this.requestLicenseService.seachSchool(payload).subscribe((res) => {
+      this.currentPage -= 1;
+      this.Data = this.generateAddressShow(res);
+      this.payload = payload;
+    });
+  }
+  goNext() {
+    const { offset, ...payload } = this.payload;
+    payload.offset = parseInt(offset) + parseInt(payload.row);
+    payload.offset = payload.offset.toString();
+    this.requestLicenseService.seachSchool(payload).subscribe((res) => {
+      this.currentPage += 1;
+      this.Data = this.generateAddressShow(res);
+      this.payload = payload;
+    });
+  }
+  confirm() {
+    this.dialogRef.close(this.selectedUniversity);
   }
 }
 

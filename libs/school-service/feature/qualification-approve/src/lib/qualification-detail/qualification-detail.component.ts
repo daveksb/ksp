@@ -31,7 +31,6 @@ export class QualificationDetailComponent implements OnInit {
     addr1: [],
     addr2: [],
     education: [],
-    reasoninfo: [],
   });
   requestNumber = '';
   userInfoFormdisplayMode: number = RequestType.ขอหนังสือรับรองคุณวุฒิ;
@@ -43,6 +42,7 @@ export class QualificationDetailComponent implements OnInit {
   amphurs2$!: Observable<any>;
   tumbols2$!: Observable<any>;
   countries$!: Observable<any>;
+  nationalitys$!: Observable<any>;
   schoolId = '0010201056';
   requestDate = thaiDate(new Date());
   requestId!: number;
@@ -115,6 +115,7 @@ export class QualificationDetailComponent implements OnInit {
     this.provinces1$ = this.addressService.getProvinces();
     this.provinces2$ = this.provinces1$;
     this.countries$ = this.addressService.getCountry();
+    this.nationalitys$ = this.generalInfoService.getNationality();
   }
 
   cancel() {
@@ -122,6 +123,10 @@ export class QualificationDetailComponent implements OnInit {
   }
 
   onSave() {
+    if (!this.form.get('userInfo')?.valid) return;
+    // if (!this.form.get('addr1')?.valid) return;
+    // if (!this.form.get('addr2')?.valid) return;
+    // if (!this.form.get('education')?.valid) return;
     const confirmDialog = this.dialog.open(
       QualificationApproveDetailComponent,
       {

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent, RequestType } from '@ksp/shared/interface';
 import {
@@ -13,7 +13,11 @@ import {
   styleUrls: ['./form-user-info.component.scss'],
   providers: providerFactory(FormUserInfoComponent),
 })
-export class FormUserInfoComponent extends KspFormBaseComponent {
+export class FormUserInfoComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
+  @Input() nationalitys = null;
   @Input() isDarkMode = false;
   @Input() prefixList = null;
   @Input() displayMode: number =
@@ -44,7 +48,9 @@ export class FormUserInfoComponent extends KspFormBaseComponent {
       })
     );
   }
-
+  ngOnInit(): void {
+    this.form.controls['passportno'].clearValidators();
+  }
   get idCardNo() {
     return this.form.controls.idcardno;
   }

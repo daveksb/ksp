@@ -21,4 +21,12 @@ export class GeneralInfoService {
       shareReplay()
     );
   }
+  getNationality(): Observable<any> {
+    return this.http
+      .get(`${environment.apiUrl}/kspmasterdata/nationality`)
+      .pipe(
+        map((data: any) => data.datareturn),
+        shareReplay()
+      );
+  }
 }
