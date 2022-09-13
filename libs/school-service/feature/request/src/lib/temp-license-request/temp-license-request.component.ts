@@ -5,7 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   levels,
   RequestPageType,
-  RequestProcess,
+  SchoolRequestProcess,
+  SchoolRequestType,
   subjects,
 } from '@ksp/shared/constant';
 import {
@@ -13,7 +14,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
-import { defaultRequestPayload, RequestType } from '@ksp/shared/interface';
+import { defaultRequestPayload } from '@ksp/shared/interface';
 import {
   AddressService,
   GeneralInfoService,
@@ -38,17 +39,6 @@ import { LicenseDetailService } from './temp-license-request.service';
   styleUrls: ['./temp-license-request.component.scss'],
 })
 export class TempLicenseRequestComponent implements OnInit {
-  form = this.fb.group({
-    userInfo: [],
-    addr1: [],
-    addr2: [],
-    schoolAddr: [],
-    edu1: [],
-    edu2: [],
-    teachinginfo: [],
-    hiringinfo: [],
-  });
-
   uniqueTimestamp = ''; // use for file upload reference, gen only first time component loaded
 
   pageType = RequestPageType;
@@ -68,11 +58,11 @@ export class TempLicenseRequestComponent implements OnInit {
   requestType = 1;
   requestTypeLabel = '';
   requestNo = '';
-  currentProcess = 0;
-  processEnum = RequestProcess;
+  currentProcess!: string;
+  processEnum = SchoolRequestProcess;
 
-  disableTempSave = false;
-  disableSave = false;
+  disableTempSave = true;
+  disableSave = true;
 
   icCardNo = '';
   schoolAddressLabel = `ที่อยู่ของสถานศึกษา
@@ -80,7 +70,7 @@ export class TempLicenseRequestComponent implements OnInit {
 
   schoolId = '0010201056';
   displayMode: number =
-    RequestType[
+    SchoolRequestType[
       'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)'
     ];
 
@@ -89,6 +79,17 @@ export class TempLicenseRequestComponent implements OnInit {
   reasonFiles: any[] = [];
   attachFiles: any[] = [];
   prefixList$!: Observable<any>;
+
+  form = this.fb.group({
+    userInfo: [],
+    addr1: [],
+    addr2: [],
+    schoolAddr: [],
+    edu1: [],
+    edu2: [],
+    teachinginfo: [],
+    hiringinfo: [],
+  });
 
   constructor(
     private router: Router,
@@ -108,6 +109,37 @@ export class TempLicenseRequestComponent implements OnInit {
     this.getList();
     this.checkRequestId();
     this.checkRequestType();
+    this.checkButtonsDisableStatus();
+  }
+
+  checkButtonsDisableStatus() {
+    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
+      console.log('userInfo valid = ', this.form.controls.userInfo.valid);
+      console.log('edu 1 valid = ', this.form.controls.edu1.valid);
+      console.log('form valid = ', this.form.valid);
+
+      // formValid + สถานะเป็นส่งใบคำขอ, บันทึกชั่วคราวไม่ได้ ส่งใบคำขอไม่ได้
+      if (
+        this.form.valid &&
+        this.currentProcess === SchoolRequestProcess.created
+      ) {
+        this.disableTempSave = true;
+        this.disableSave = true;
+      }
+
+      // formValid + สถานะเป็นบันทึกชั่วคราว, บันทึกชั่วคราวได้ ส่งใบคำขอได้
+      if (this.form.valid && SchoolRequestProcess.creating) {
+        this.disableTempSave = false;
+        this.disableSave = false;
+      }
+
+      // formValid + ไม่มีหมายเลขใบคำขอ ทำได้ทุกอย่าง
+      if (this.form.valid && !this.requestId) {
+        this.disableTempSave = false;
+        this.disableSave = false;
+      }
+      // มีหมายเลขใบคำขอแล้ว แสดงปุ่มยกเลิก
+    });
   }
 
   updateRequest(type: string) {
@@ -122,10 +154,10 @@ export class TempLicenseRequestComponent implements OnInit {
     const userInfo = toLowercaseProp(rawUserInfo);
 
     if (type === 'tempSave') {
-      userInfo.currentprocess = `${RequestProcess.บันทึกชั่วคราว}`;
+      userInfo.currentprocess = `${SchoolRequestProcess.creating}`;
     } else if (type === 'realSave') {
       console.log('real save = ');
-      userInfo.currentprocess = `${RequestProcess.ยื่นใบคำขอ}`;
+      userInfo.currentprocess = `${SchoolRequestProcess.created}`;
     }
 
     userInfo.ref1 = '2';
@@ -180,15 +212,7 @@ export class TempLicenseRequestComponent implements OnInit {
   loadRequestFromId(id: number) {
     this.requestService.getRequestById(id).subscribe((res: any) => {
       this.requestNo = res.requestno;
-      this.currentProcess = +res.currentprocess;
-
-      if (this.currentProcess === 0) {
-        this.disableTempSave = false;
-        this.disableSave = false;
-      } else {
-        this.disableTempSave = true;
-        this.disableSave = true;
-      }
+      this.currentProcess = res.currentprocess;
 
       this.pathUserInfo(res);
       this.patchAddress(parseJson(res.addressinfo));
@@ -400,22 +424,22 @@ export class TempLicenseRequestComponent implements OnInit {
       this.requestType = Number(params['type']);
       if (params['type'] == 1) {
         this.requestTypeLabel =
-          RequestType[
-            RequestType[
+          SchoolRequestType[
+            SchoolRequestType[
               'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)'
             ]
           ];
       } else if (params['type'] == 2) {
         this.requestTypeLabel =
-          RequestType[
-            RequestType[
+          SchoolRequestType[
+            SchoolRequestType[
               'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ผู้บริหาร)'
             ]
           ];
       } else if (params['type'] == 3) {
         this.requestTypeLabel =
-          RequestType[
-            RequestType[
+          SchoolRequestType[
+            SchoolRequestType[
               'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)'
             ]
           ];

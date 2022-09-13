@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SchoolRequestType } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -18,7 +19,6 @@ import {
 } from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
 import { EMPTY, Observable, switchMap } from 'rxjs';
-import { RequestType } from '@ksp/shared/interface';
 
 @Component({
   selector: 'ksp-qualification-detail',
@@ -33,7 +33,7 @@ export class QualificationDetailComponent implements OnInit {
     education: [],
   });
   requestNumber = '';
-  userInfoFormdisplayMode: number = RequestType.ขอหนังสือรับรองคุณวุฒิ;
+  userInfoFormdisplayMode: number = SchoolRequestType.ขอหนังสือรับรองคุณวุฒิ;
   prefixList$!: Observable<any>;
   provinces1$!: Observable<any>;
   provinces2$!: Observable<any>;

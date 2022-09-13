@@ -19,8 +19,7 @@ import {
 } from '@ksp/shared/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { levels, subjects } from '@ksp/shared/constant';
-import { RequestType } from '@ksp/shared/interface';
+import { levels, SchoolRequestType, subjects } from '@ksp/shared/constant';
 
 @UntilDestroy()
 @Component({
@@ -43,8 +42,8 @@ export class AddStaffComponent implements OnInit {
   schoolId = '0010201056';
   today = thaiDate(new Date());
   mode: 'view' | 'edit' | 'add' = 'add';
-  displayMode: number =
-    RequestType[
+  displayMode =
+    SchoolRequestType[
       'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)'
     ];
   form = this.fb.group({

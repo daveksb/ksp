@@ -100,22 +100,22 @@
             <ksp-form-education-info
               formControlName="edu1"
               [showGradeInput]="true"
+              [showSelectDegree]="true"
               [countries]="countries$ | async"
             >
-              วุฒิการศึกษาปริญญาตรี </ksp-form-education-info
-            ><br
-          /></ng-container>
+            </ksp-form-education-info>
+          </ng-container>
 
           <ng-container *ngIf="requestType === 1">
             <ksp-form-education-info
               formControlName="edu2"
               [showGradeInput]="false"
+              [showSelectDegree]="true"
               [showPropertyInput]="true"
               [countries]="countries$ | async"
             >
-              วุฒิการศึกษาปริญญาโท </ksp-form-education-info
-            ><br
-          /></ng-container>
+            </ksp-form-education-info>
+          </ng-container>
 
           <!--           <ksp-form-education-info-manager
             *ngIf="requestType === 2 || requestType === 3"
@@ -187,7 +187,8 @@
     [colorMode]="'green'"
     [isLastPage]="true"
     [showCenterButtons]="true"
-    [showCancelButton]="true"
+    [cancelButtonLabel]="'ยกเลิกใบคำขอ'"
+    [showCancelButton]="requestId > 0"
     [showTempSaveButton]="true"
     [disableTempSaveButton]="disableTempSave"
     [showSaveButton]="true"
