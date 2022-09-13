@@ -7,13 +7,15 @@ export function thaiDate(date: Date): string {
   });
 }
 
-// map json data for expected format for osb
-export function mapJsonData(input: any[], source: any[]) {
+// format json data
+// from [null,'true',null,'true',null,null] ===> ['s2','s4']
+export function formatCheckboxData(input: any[], source: any[]) {
   const result = input
     .map((v, i) => (v ? source[i].value : null))
     .filter((v) => v !== null);
   //console.log('map data = ', result);
-  return JSON.stringify(result);
+  //return JSON.stringify(result);
+  return result;
 }
 
 // replace object value from empty --> null

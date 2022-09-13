@@ -14,21 +14,14 @@
     "default": {
       "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ],
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
         "accessToken": "NTM5MjA1Y2MtZTBkMS00YTQwLWI1MjItNTE2MTI1ZTZhNDg2fHJlYWQtd3JpdGU="
       }
     }
   },
   "targetDefaults": {
     "build": {
-      "dependsOn": [
-        "^build"
-      ]
+      "dependsOn": ["^build"]
     }
   },
   "projects": {
@@ -40,9 +33,7 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/e-service",
             "index": "apps/e-service/src/index.html",
@@ -61,9 +52,7 @@
               "apps/e-service/src/app-styles.scss",
               "libs/shared/assets/src/assets/project-styles.scss"
             ],
-            "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.js"
-            ]
+            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.js"]
           },
           "configurations": {
             "production": {
@@ -97,9 +86,7 @@
             }
           },
           "defaultConfiguration": "production",
-          "dependsOn": [
-            "^build"
-          ]
+          "dependsOn": ["^build"]
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -130,9 +117,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/e-service"
-          ],
+          "outputs": ["coverage/apps/e-service"],
           "options": {
             "jestConfig": "apps/e-service/jest.config.ts",
             "passWithNoTests": true
@@ -180,17 +165,12 @@
         {
           "file": "apps/e-service/src/app/app.component.ts",
           "hash": "5016b1c03eba319452745ad2672c56e1dcfbd73e",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "apps/e-service/src/app/app.menu.config.ts",
           "hash": "1f39b56b4d3584a8374b14ecf70e9100c9a89643",
-          "deps": [
-            "shared-interface",
-            "shared-menu"
-          ]
+          "deps": ["shared-interface", "shared-menu"]
         },
         {
           "file": "apps/e-service/src/app/app.module.ts",
@@ -241,24 +221,17 @@
         {
           "file": "apps/e-service/src/main.ts",
           "hash": "d9a2e7e4a582e265db779363bd8b2492c43c141b",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/platform-browser-dynamic"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/platform-browser-dynamic"]
         },
         {
           "file": "apps/e-service/src/polyfills.ts",
           "hash": "e4555ed11fa2f217b8e4c744d564da4f7388b4c4",
-          "deps": [
-            "npm:zone.js"
-          ]
+          "deps": ["npm:zone.js"]
         },
         {
           "file": "apps/e-service/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "apps/e-service/tsconfig.app.json",
@@ -323,10 +296,7 @@
         {
           "file": "libs/e-service/dialog/accusation-search/src/lib/accusation-search/accusation-search.component.ts",
           "hash": "15052ad3fe4b3ec482dc4d6ced9917283b588ac7",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/material"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/material"]
         },
         {
           "file": "libs/e-service/dialog/accusation-search/src/lib/e-service-dialog-accusation-search.module.ts",
@@ -535,9 +505,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/e-service/e-license/manage-current-user"
-          ],
+          "outputs": ["coverage/libs/e-service/e-license/manage-current-user"],
           "options": {
             "jestConfig": "libs/e-service/e-license/manage-current-user/jest.config.ts",
             "passWithNoTests": true
@@ -612,9 +580,7 @@
         {
           "file": "libs/e-service/e-license/manage-current-user/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/e-service/e-license/manage-current-user/tsconfig.json",
@@ -708,9 +674,7 @@
         {
           "file": "libs/e-service/e-license/temp-license/src/lib/e-temp-license-detail/e-temp-license-detail.service.ts",
           "hash": "7e03531af289f0f1c0cd7efd8af4c0d387f1ec66",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "libs/e-service/e-license/temp-license/src/lib/e-temp-license-list/e-temp-license-list.component.html",
@@ -797,10 +761,7 @@
         {
           "file": "libs/e-service/e-license/temp-license/src/lib/temp-license-check-forbidden/temp-license-check-forbidden.component.ts",
           "hash": "1bb91f3f81cbe25c0016e78e564bf57e167d526f",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/router"]
         },
         {
           "file": "libs/e-service/e-license/temp-license/tsconfig.json",
@@ -820,9 +781,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/e-service/e-license/user-detail"
-          ],
+          "outputs": ["coverage/libs/e-service/e-license/user-detail"],
           "options": {
             "jestConfig": "libs/e-service/e-license/user-detail/jest.config.ts",
             "passWithNoTests": true
@@ -896,9 +855,7 @@
         {
           "file": "libs/e-service/e-license/user-detail/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/e-service/e-license/user-detail/tsconfig.json",
@@ -922,9 +879,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/e-service/ethics/accusation"
-          ],
+          "outputs": ["coverage/libs/e-service/ethics/accusation"],
           "options": {
             "jestConfig": "libs/e-service/ethics/accusation/jest.config.ts",
             "passWithNoTests": true
@@ -1075,9 +1030,7 @@
         {
           "file": "libs/e-service/ethics/accusation/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/e-service/ethics/accusation/tsconfig.json",
@@ -1452,9 +1405,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/e-service/feature/container-page"
-          ],
+          "outputs": ["coverage/libs/e-service/feature/container-page"],
           "options": {
             "jestConfig": "libs/e-service/feature/container-page/jest.config.ts",
             "passWithNoTests": true
@@ -1503,11 +1454,7 @@
         {
           "file": "libs/e-service/feature/container-page/src/lib/e-service-container-page/e-service-container-page.component.ts",
           "hash": "fd38da4a840b8f938073b829209cde450365f4ae",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router",
-            "shared-menu"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/router", "shared-menu"]
         },
         {
           "file": "libs/e-service/feature/container-page/src/lib/e-service-feature-container-page.module.ts",
@@ -1522,9 +1469,7 @@
         {
           "file": "libs/e-service/feature/container-page/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/e-service/feature/container-page/tsconfig.json",
@@ -1577,10 +1522,7 @@
         {
           "file": "libs/e-service/feature/landing-page/src/lib/e-service-feature-landing-page.module.ts",
           "hash": "6788a0fb2e76ecc113d492167a6a0fe1daaded68",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/common"]
         },
         {
           "file": "libs/e-service/feature/landing-page/src/lib/landing-page/landing-page.component.html",
@@ -1593,10 +1535,7 @@
         {
           "file": "libs/e-service/feature/landing-page/src/lib/landing-page/landing-page.component.ts",
           "hash": "a687a6dc8b158d2f004aa2857bb1ac01f49ac91f",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/router"]
         },
         {
           "file": "libs/e-service/feature/landing-page/tsconfig.json",
@@ -1616,9 +1555,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/e-service/feature/login"
-          ],
+          "outputs": ["coverage/libs/e-service/feature/login"],
           "options": {
             "jestConfig": "libs/e-service/feature/login/jest.config.ts",
             "passWithNoTests": true
@@ -1676,17 +1613,12 @@
         {
           "file": "libs/e-service/feature/login/src/lib/e-service-login/e-service-login.component.ts",
           "hash": "56a33e0bc6b2bf5c50d9a169a921ab4e52daa3f5",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/router"]
         },
         {
           "file": "libs/e-service/feature/login/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/e-service/feature/login/tsconfig.json",
@@ -1710,9 +1642,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/e-service/fee/refund-fee"
-          ],
+          "outputs": ["coverage/libs/e-service/fee/refund-fee"],
           "options": {
             "jestConfig": "libs/e-service/fee/refund-fee/jest.config.ts",
             "passWithNoTests": true
@@ -1767,9 +1697,7 @@
         {
           "file": "libs/e-service/form/src/lib/e-service-form.module.ts",
           "hash": "4405ea1dd1b2928fa5d93cc97d33a1d868102297",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "libs/e-service/form/src/lib/form-investigation-detail/form-investigation-detail.component.html",
@@ -1862,9 +1790,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/e-service/professional/professional"
-          ],
+          "outputs": ["coverage/libs/e-service/professional/professional"],
           "options": {
             "jestConfig": "libs/e-service/professional/professional/jest.config.ts",
             "passWithNoTests": true
@@ -2076,9 +2002,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/e-service/standard/performance-result"
-          ],
+          "outputs": ["coverage/libs/e-service/standard/performance-result"],
           "options": {
             "jestConfig": "libs/e-service/standard/performance-result/jest.config.ts",
             "passWithNoTests": true
@@ -2104,9 +2028,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/e-service/standard/test-result"
-          ],
+          "outputs": ["coverage/libs/e-service/standard/test-result"],
           "options": {
             "jestConfig": "libs/e-service/standard/test-result/jest.config.ts",
             "passWithNoTests": true
@@ -2169,18 +2091,12 @@
         {
           "file": "libs/e-service/ui/accusation-info/src/lib/address-info/address-info.component.ts",
           "hash": "92f03c12a479576036f6fe034bc9702cbb91c36d",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "libs/e-service/ui/accusation-info/src/lib/e-service-ui-accusation-info.module.ts",
           "hash": "820bc735007880a28899b7384633701048160eff",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "shared-ui"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/common", "shared-ui"]
         },
         {
           "file": "libs/e-service/ui/accusation-info/src/lib/person-info/person-info.component.html",
@@ -2193,9 +2109,7 @@
         {
           "file": "libs/e-service/ui/accusation-info/src/lib/person-info/person-info.component.ts",
           "hash": "69ec8c5e27008cc847dccd45ef1593a48fcb5b44",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "libs/e-service/ui/accusation-info/src/lib/workplace-info/workplace-info.component.html",
@@ -2208,9 +2122,7 @@
         {
           "file": "libs/e-service/ui/accusation-info/src/lib/workplace-info/workplace-info.component.ts",
           "hash": "e8948206c5f1bcdde9b16642b8fd5aec6095b2eb",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "libs/e-service/ui/accusation-info/tsconfig.json",
@@ -2259,9 +2171,7 @@
         {
           "file": "libs/e-service/ui/license-check/src/lib/e-service-ui-license-check.module.ts",
           "hash": "18813e61bd6682e71e9656558a2f87cac4f4ca18",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "libs/e-service/ui/license-check/src/lib/final-result-info/final-result-info.component.html",
@@ -2355,9 +2265,7 @@
         {
           "file": "libs/e-service/ui/verify-result-box/src/lib/consider-result/consider-result.component.ts",
           "hash": "20a6b3255e36665c209c6566e22f0971191692b4",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "libs/e-service/ui/verify-result-box/src/lib/e-service-ui-verify-result-box.module.ts",
@@ -2379,9 +2287,7 @@
         {
           "file": "libs/e-service/ui/verify-result-box/src/lib/verify-result/verify-result.component.ts",
           "hash": "77e69398d8b55a23f8f3d54854b243b6774be762",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "libs/e-service/ui/verify-result-box/tsconfig.json",
@@ -2401,9 +2307,7 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/school-service",
             "index": "apps/school-service/src/index.html",
@@ -2422,9 +2326,7 @@
               "apps/school-service/src/app-styles.scss",
               "libs/shared/assets/src/assets/project-styles.scss"
             ],
-            "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.js"
-            ]
+            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.js"]
           },
           "configurations": {
             "production": {
@@ -2432,7 +2334,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -2458,9 +2360,7 @@
             }
           },
           "defaultConfiguration": "production",
-          "dependsOn": [
-            "^build"
-          ]
+          "dependsOn": ["^build"]
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -2491,9 +2391,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/school-service"
-          ],
+          "outputs": ["coverage/apps/school-service"],
           "options": {
             "jestConfig": "apps/school-service/jest.config.ts",
             "passWithNoTests": true
@@ -2541,9 +2439,7 @@
         {
           "file": "apps/school-service/src/app/app.component.ts",
           "hash": "07fa0a5e66cf7f8f34bf298272d19188ad78063d",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "apps/school-service/src/app/app.module.ts",
@@ -2596,24 +2492,17 @@
         {
           "file": "apps/school-service/src/main.ts",
           "hash": "d9a2e7e4a582e265db779363bd8b2492c43c141b",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/platform-browser-dynamic"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/platform-browser-dynamic"]
         },
         {
           "file": "apps/school-service/src/polyfills.ts",
           "hash": "e4555ed11fa2f217b8e4c744d564da4f7388b4c4",
-          "deps": [
-            "npm:zone.js"
-          ]
+          "deps": ["npm:zone.js"]
         },
         {
           "file": "apps/school-service/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "apps/school-service/tsconfig.app.json",
@@ -2641,9 +2530,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/school-service/feature/activity"
-          ],
+          "outputs": ["coverage/libs/school-service/feature/activity"],
           "options": {
             "jestConfig": "libs/school-service/feature/activity/jest.config.ts",
             "passWithNoTests": true
@@ -2742,9 +2629,7 @@
         {
           "file": "libs/school-service/feature/activity/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/school-service/feature/activity/tsconfig.json",
@@ -2768,9 +2653,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/school-service/feature/container-page"
-          ],
+          "outputs": ["coverage/libs/school-service/feature/container-page"],
           "options": {
             "jestConfig": "libs/school-service/feature/container-page/jest.config.ts",
             "passWithNoTests": true
@@ -2819,10 +2702,7 @@
         {
           "file": "libs/school-service/feature/container-page/src/lib/school-container-page/school-container-page.component.ts",
           "hash": "fce68e13ff05f629fa2f8b421f3328e3083e7c44",
-          "deps": [
-            "npm:@angular/core",
-            "shared-menu"
-          ]
+          "deps": ["npm:@angular/core", "shared-menu"]
         },
         {
           "file": "libs/school-service/feature/container-page/src/lib/school-service-feature-container-page.module.ts",
@@ -2837,9 +2717,7 @@
         {
           "file": "libs/school-service/feature/container-page/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/school-service/feature/container-page/tsconfig.json",
@@ -2942,9 +2820,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/school-service/feature/forget-password"
-          ],
+          "outputs": ["coverage/libs/school-service/feature/forget-password"],
           "options": {
             "jestConfig": "libs/school-service/feature/forget-password/jest.config.ts",
             "passWithNoTests": true
@@ -3035,9 +2911,7 @@
         {
           "file": "libs/school-service/feature/forget-password/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/school-service/feature/forget-password/tsconfig.json",
@@ -3061,9 +2935,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/school-service/feature/login"
-          ],
+          "outputs": ["coverage/libs/school-service/feature/login"],
           "options": {
             "jestConfig": "libs/school-service/feature/login/jest.config.ts",
             "passWithNoTests": true
@@ -3132,9 +3004,7 @@
         {
           "file": "libs/school-service/feature/login/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/school-service/feature/login/tsconfig.json",
@@ -3236,9 +3106,7 @@
         {
           "file": "libs/school-service/feature/qualification-approve/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/school-service/feature/qualification-approve/tsconfig.json",
@@ -3262,9 +3130,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/school-service/feature/register"
-          ],
+          "outputs": ["coverage/libs/school-service/feature/register"],
           "options": {
             "jestConfig": "libs/school-service/feature/register/jest.config.ts",
             "passWithNoTests": true
@@ -3376,9 +3242,7 @@
         {
           "file": "libs/school-service/feature/register/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/school-service/feature/register/tsconfig.json",
@@ -3402,9 +3266,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/school-service/feature/request"
-          ],
+          "outputs": ["coverage/libs/school-service/feature/request"],
           "options": {
             "jestConfig": "libs/school-service/feature/request/jest.config.ts",
             "passWithNoTests": true
@@ -3491,9 +3353,7 @@
         {
           "file": "libs/school-service/feature/request/src/lib/school-temp-license-detail/school-temp-license-detail.service.ts",
           "hash": "199d878e5f5c2f8f34c685170a0a181d9e041520",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "libs/school-service/feature/request/src/lib/school-temp-license-list/school-temp-license-list.component.html",
@@ -3516,9 +3376,7 @@
         {
           "file": "libs/school-service/feature/request/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/school-service/feature/request/tsconfig.json",
@@ -3542,9 +3400,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/school-service/feature/request-reward"
-          ],
+          "outputs": ["coverage/libs/school-service/feature/request-reward"],
           "options": {
             "jestConfig": "libs/school-service/feature/request-reward/jest.config.ts",
             "passWithNoTests": true
@@ -3618,9 +3474,7 @@
         {
           "file": "libs/school-service/feature/request-reward/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/school-service/feature/request-reward/tsconfig.json",
@@ -3644,9 +3498,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/school-service/feature/retired"
-          ],
+          "outputs": ["coverage/libs/school-service/feature/retired"],
           "options": {
             "jestConfig": "libs/school-service/feature/retired/jest.config.ts",
             "passWithNoTests": true
@@ -3756,9 +3608,7 @@
         {
           "file": "libs/school-service/feature/retired/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/school-service/feature/retired/tsconfig.json",
@@ -4183,9 +4033,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/school-service/ui/staff-search"
-          ],
+          "outputs": ["coverage/libs/school-service/ui/staff-search"],
           "options": {
             "jestConfig": "libs/school-service/ui/staff-search/jest.config.ts",
             "passWithNoTests": true
@@ -4254,9 +4102,7 @@
         {
           "file": "libs/school-service/ui/staff-search/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/school-service/ui/staff-search/tsconfig.json",
@@ -4280,9 +4126,7 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/self-service",
             "index": "apps/self-service/src/index.html",
@@ -4337,9 +4181,7 @@
             }
           },
           "defaultConfiguration": "production",
-          "dependsOn": [
-            "^build"
-          ]
+          "dependsOn": ["^build"]
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -4370,9 +4212,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/self-service"
-          ],
+          "outputs": ["coverage/apps/self-service"],
           "options": {
             "jestConfig": "apps/self-service/jest.config.ts",
             "passWithNoTests": true
@@ -4425,9 +4265,7 @@
         {
           "file": "apps/self-service/src/app/app.component.ts",
           "hash": "0f2e27a2ce7a7cc326b1c5a14284a961e6422868",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "apps/self-service/src/app/app.module.ts",
@@ -4472,24 +4310,17 @@
         {
           "file": "apps/self-service/src/main.ts",
           "hash": "d9a2e7e4a582e265db779363bd8b2492c43c141b",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/platform-browser-dynamic"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/platform-browser-dynamic"]
         },
         {
           "file": "apps/self-service/src/polyfills.ts",
           "hash": "e4555ed11fa2f217b8e4c744d564da4f7388b4c4",
-          "deps": [
-            "npm:zone.js"
-          ]
+          "deps": ["npm:zone.js"]
         },
         {
           "file": "apps/self-service/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "apps/self-service/tsconfig.app.json",
@@ -4517,9 +4348,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/self-service/feature/compare-knowledge"
-          ],
+          "outputs": ["coverage/libs/self-service/feature/compare-knowledge"],
           "options": {
             "jestConfig": "libs/self-service/feature/compare-knowledge/jest.config.ts",
             "passWithNoTests": true
@@ -4545,9 +4374,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/self-service/feature/home"
-          ],
+          "outputs": ["coverage/libs/self-service/feature/home"],
           "options": {
             "jestConfig": "libs/self-service/feature/home/jest.config.ts",
             "passWithNoTests": true
@@ -4588,10 +4415,7 @@
         {
           "file": "libs/self-service/feature/home/src/lib/self-service-feature-home.module.ts",
           "hash": "f1c41edf991a5cebe626796436274d8603ad90da",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/common"]
         },
         {
           "file": "libs/self-service/feature/home/src/lib/self-service-home/self-service-home.component.css",
@@ -4604,17 +4428,12 @@
         {
           "file": "libs/self-service/feature/home/src/lib/self-service-home/self-service-home.component.ts",
           "hash": "bda7000a66ac117c28393c4df0e675ff79434ca2",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/router"]
         },
         {
           "file": "libs/self-service/feature/home/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/self-service/feature/home/tsconfig.json",
@@ -4638,9 +4457,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/self-service/feature/license"
-          ],
+          "outputs": ["coverage/libs/self-service/feature/license"],
           "options": {
             "jestConfig": "libs/self-service/feature/license/jest.config.ts",
             "passWithNoTests": true
@@ -4723,9 +4540,7 @@
         {
           "file": "libs/self-service/feature/license/src/lib/license-request/license-request.service.ts",
           "hash": "0fdf77fcd9e278caa1d92120ca60ec4a5832e5c8",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "libs/self-service/feature/license/src/lib/self-service-feature-license.module.ts",
@@ -4748,9 +4563,7 @@
         {
           "file": "libs/self-service/feature/license/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/self-service/feature/license/tsconfig.json",
@@ -4774,9 +4587,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/self-service/feature/login"
-          ],
+          "outputs": ["coverage/libs/self-service/feature/login"],
           "options": {
             "jestConfig": "libs/self-service/feature/login/jest.config.ts",
             "passWithNoTests": true
@@ -4843,9 +4654,7 @@
         {
           "file": "libs/self-service/feature/login/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/self-service/feature/login/tsconfig.json",
@@ -4869,9 +4678,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/self-service/feature/master-page"
-          ],
+          "outputs": ["coverage/libs/self-service/feature/master-page"],
           "options": {
             "jestConfig": "libs/self-service/feature/master-page/jest.config.ts",
             "passWithNoTests": true
@@ -4930,17 +4737,12 @@
         {
           "file": "libs/self-service/feature/master-page/src/lib/self-service-master-page/self-service-master-page.component.ts",
           "hash": "d5f03f097a72ddc84377e81498ca2b5af4e8d835",
-          "deps": [
-            "npm:@angular/core",
-            "shared-menu"
-          ]
+          "deps": ["npm:@angular/core", "shared-menu"]
         },
         {
           "file": "libs/self-service/feature/master-page/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/self-service/feature/master-page/tsconfig.json",
@@ -5001,9 +4803,7 @@
         {
           "file": "libs/self-service/feature/my-info/src/lib/payment-history/payment-history.component.ts",
           "hash": "41b08f2825b1eb473cadb44b8d2cfadd9c8df7d2",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "libs/self-service/feature/my-info/src/lib/person-info/person-info.component.html",
@@ -5016,10 +4816,7 @@
         {
           "file": "libs/self-service/feature/my-info/src/lib/person-info/person-info.component.ts",
           "hash": "e66c05d308d9b97204c0765b5ac1cd8a72d5465f",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/forms"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/forms"]
         },
         {
           "file": "libs/self-service/feature/my-info/src/lib/self-service-feature-my-info.module.ts",
@@ -5055,9 +4852,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/self-service/feature/payment"
-          ],
+          "outputs": ["coverage/libs/self-service/feature/payment"],
           "options": {
             "jestConfig": "libs/self-service/feature/payment/jest.config.ts",
             "passWithNoTests": true
@@ -5106,10 +4901,7 @@
         {
           "file": "libs/self-service/feature/payment/src/lib/payment-channel/payment-channel.component.ts",
           "hash": "11af5c9746d84f93ae32d19468c9cd3ba038fa3e",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/router"]
         },
         {
           "file": "libs/self-service/feature/payment/src/lib/promptpay/promptpay.component.html",
@@ -5143,9 +4935,7 @@
         {
           "file": "libs/self-service/feature/payment/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/self-service/feature/payment/tsconfig.json",
@@ -5169,9 +4959,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/self-service/feature/refund-fee"
-          ],
+          "outputs": ["coverage/libs/self-service/feature/refund-fee"],
           "options": {
             "jestConfig": "libs/self-service/feature/refund-fee/jest.config.ts",
             "passWithNoTests": true
@@ -5197,9 +4985,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/self-service/feature/register"
-          ],
+          "outputs": ["coverage/libs/self-service/feature/register"],
           "options": {
             "jestConfig": "libs/self-service/feature/register/jest.config.ts",
             "passWithNoTests": true
@@ -5248,10 +5034,7 @@
         {
           "file": "libs/self-service/feature/register/src/lib/privacy-policy/privacy-policy.component.ts",
           "hash": "d25daf6164c15aab691be81dee0516d1cbff4e98",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/router"]
         },
         {
           "file": "libs/self-service/feature/register/src/lib/register-completed/register-completed.component.html",
@@ -5264,10 +5047,7 @@
         {
           "file": "libs/self-service/feature/register/src/lib/register-completed/register-completed.component.ts",
           "hash": "5aeff904fbceda2661aff4598c3124eb881d61d6",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/router"]
         },
         {
           "file": "libs/self-service/feature/register/src/lib/register-step-one/register-step-one.component.html",
@@ -5338,9 +5118,7 @@
         {
           "file": "libs/self-service/feature/register/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/self-service/feature/register/tsconfig.json",
@@ -5364,9 +5142,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/self-service/feature/renew-license"
-          ],
+          "outputs": ["coverage/libs/self-service/feature/renew-license"],
           "options": {
             "jestConfig": "libs/self-service/feature/renew-license/jest.config.ts",
             "passWithNoTests": true
@@ -5392,9 +5168,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/self-service/feature/reward"
-          ],
+          "outputs": ["coverage/libs/self-service/feature/reward"],
           "options": {
             "jestConfig": "libs/self-service/feature/reward/jest.config.ts",
             "passWithNoTests": true
@@ -5448,9 +5222,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/self-service/feature/substitute-license"
-          ],
+          "outputs": ["coverage/libs/self-service/feature/substitute-license"],
           "options": {
             "jestConfig": "libs/self-service/feature/substitute-license/jest.config.ts",
             "passWithNoTests": true
@@ -5476,9 +5248,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/self-service/feature/transfer-knowledge"
-          ],
+          "outputs": ["coverage/libs/self-service/feature/transfer-knowledge"],
           "options": {
             "jestConfig": "libs/self-service/feature/transfer-knowledge/jest.config.ts",
             "passWithNoTests": true
@@ -5505,9 +5275,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/self-service/form"
-          ],
+          "outputs": ["coverage/libs/self-service/form"],
           "options": {
             "jestConfig": "libs/self-service/form/jest.config.ts",
             "passWithNoTests": true
@@ -5556,10 +5324,7 @@
         {
           "file": "libs/self-service/form/src/lib/form-upload-image/form-upload-image.component.ts",
           "hash": "16ac4a310e0b92f469e4806e83717d9a08e9f3c7",
-          "deps": [
-            "npm:@angular/core",
-            "shared-form-file-upload"
-          ]
+          "deps": ["npm:@angular/core", "shared-form-file-upload"]
         },
         {
           "file": "libs/self-service/form/src/lib/form-user-education/form-user-education.component.css",
@@ -5612,10 +5377,7 @@
         {
           "file": "libs/self-service/form/src/lib/form-user-performance/form-user-performance.component.ts",
           "hash": "456a596c0f4c2a48c97e159d00708bc12fa53ba8",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/material"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/material"]
         },
         {
           "file": "libs/self-service/form/src/lib/form-user-workplace/form-user-workplace.component.css",
@@ -5648,10 +5410,7 @@
         {
           "file": "libs/self-service/form/src/lib/form-verify-otp/form-verify-otp.component.ts",
           "hash": "794884fc533c00f5ffb8bb1c188248d7725a3c9c",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/router"]
         },
         {
           "file": "libs/self-service/form/src/lib/form-verify-phone/form-verify-phone.component.html",
@@ -5664,10 +5423,7 @@
         {
           "file": "libs/self-service/form/src/lib/form-verify-phone/form-verify-phone.component.ts",
           "hash": "3a20ea54d830ef8cc69d48567bfae2a210debf65",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/material"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/material"]
         },
         {
           "file": "libs/self-service/form/src/lib/self-service-form.module.ts",
@@ -5685,9 +5441,7 @@
         {
           "file": "libs/self-service/form/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/self-service/form/tsconfig.json",
@@ -5712,9 +5466,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/self-service/ui"
-          ],
+          "outputs": ["coverage/libs/self-service/ui"],
           "options": {
             "jestConfig": "libs/self-service/ui/jest.config.ts",
             "passWithNoTests": true
@@ -5763,10 +5515,7 @@
         {
           "file": "libs/self-service/ui/src/lib/license-info/license-info.component.ts",
           "hash": "08460bfd6ca013a1240d0277736c70fe6bd28e06",
-          "deps": [
-            "npm:@angular/common",
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/common", "npm:@angular/core"]
         },
         {
           "file": "libs/self-service/ui/src/lib/payment-history-item/payment-history-item.component.html",
@@ -5796,24 +5545,17 @@
         {
           "file": "libs/self-service/ui/src/lib/receive-preview/receive-preview.component.ts",
           "hash": "6aa0f754b4a7af2387c8f9b04498a4ab9d4c557f",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/material"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/material"]
         },
         {
           "file": "libs/self-service/ui/src/lib/self-service-ui.module.ts",
           "hash": "468a8c370a922671bcd8ce43cda9a5cc6fefb554",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "libs/self-service/ui/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/self-service/ui/tsconfig.json",
@@ -5837,9 +5579,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/shared/assets"
-          ],
+          "outputs": ["coverage/libs/shared/assets"],
           "options": {
             "jestConfig": "libs/shared/assets/jest.config.ts",
             "passWithNoTests": true
@@ -6212,17 +5952,12 @@
         {
           "file": "libs/shared/assets/src/lib/shared-assets.module.ts",
           "hash": "070b87ad871bd978042416c48381ee064be66418",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/common"]
         },
         {
           "file": "libs/shared/assets/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/shared/assets/tsconfig.json",
@@ -6265,9 +6000,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/shared/degree-cert"
-          ],
+          "outputs": ["coverage/libs/shared/degree-cert"],
           "options": {
             "jestConfig": "libs/shared/degree-cert/jest.config.ts",
             "passWithNoTests": true
@@ -6432,9 +6165,7 @@
         {
           "file": "libs/shared/degree-cert/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/shared/degree-cert/tsconfig.json",
@@ -6459,9 +6190,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/shared/dialog"
-          ],
+          "outputs": ["coverage/libs/shared/dialog"],
           "options": {
             "jestConfig": "libs/shared/dialog/jest.config.ts",
             "passWithNoTests": true
@@ -6553,16 +6282,12 @@
         {
           "file": "libs/shared/dialog/src/lib/shared-dialog.module.ts",
           "hash": "682cf0a5722f4614716fff4a429c20705d4d071b",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "libs/shared/dialog/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/shared/dialog/tsconfig.json",
@@ -6615,24 +6340,17 @@
         {
           "file": "libs/shared/directive/src/lib/dynamic-component.directive.ts",
           "hash": "de62183c9ed06a5cb55fac2f80d1535367c1d7a5",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "libs/shared/directive/src/lib/hide-in-view-mode.directive.ts",
           "hash": "e6120c6e0cc3d6c613fd5649163673d7d548337c",
-          "deps": [
-            "npm:@angular/core",
-            "shared-interface"
-          ]
+          "deps": ["npm:@angular/core", "shared-interface"]
         },
         {
           "file": "libs/shared/directive/src/lib/shared-directive.module.ts",
           "hash": "18be26ae3d47252b6ade45ae8d470ae2ba8273d6",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "libs/shared/directive/src/lib/sticky-bottom-nav.directive.ts",
@@ -7202,9 +6920,7 @@
         {
           "file": "libs/shared/form/file-upload/src/lib/shared-form-file-upload.module.ts",
           "hash": "2716e3c5abc47047cf1662a9cd50854be5e0ef06",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "libs/shared/form/file-upload/tsconfig.json",
@@ -7224,9 +6940,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/shared/form/license"
-          ],
+          "outputs": ["coverage/libs/shared/form/license"],
           "options": {
             "jestConfig": "libs/shared/form/license/jest.config.ts",
             "passWithNoTests": true
@@ -7298,10 +7012,7 @@
         {
           "file": "libs/shared/form/login/src/lib/shared-form-login.module.ts",
           "hash": "614112725991acd81c2b716c8dd3b80cef796d9b",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/common"]
         },
         {
           "file": "libs/shared/form/login/tsconfig.json",
@@ -7322,9 +7033,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/shared/form/others"
-          ],
+          "outputs": ["coverage/libs/shared/form/others"],
           "options": {
             "jestConfig": "libs/shared/form/others/jest.config.ts",
             "passWithNoTests": true
@@ -7573,9 +7282,7 @@
         {
           "file": "libs/shared/form/others/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/shared/form/others/tsconfig.json",
@@ -7668,9 +7375,7 @@
         {
           "file": "libs/shared/form/school/register/src/lib/shared-form-school-register.module.ts",
           "hash": "2e4b92d052bf31615b93af7b7155ff272d73a03f",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "libs/shared/form/school/register/tsconfig.json",
@@ -7690,9 +7395,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/shared/form/school/request-reward"
-          ],
+          "outputs": ["coverage/libs/shared/form/school/request-reward"],
           "options": {
             "jestConfig": "libs/shared/form/school/request-reward/jest.config.ts",
             "passWithNoTests": true
@@ -7718,9 +7421,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/shared/form/self-reward-form"
-          ],
+          "outputs": ["coverage/libs/shared/form/self-reward-form"],
           "options": {
             "jestConfig": "libs/shared/form/self-reward-form/jest.config.ts",
             "passWithNoTests": true
@@ -7857,9 +7558,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/shared/form/uni-course-form"
-          ],
+          "outputs": ["coverage/libs/shared/form/uni-course-form"],
           "options": {
             "jestConfig": "libs/shared/form/uni-course-form/jest.config.ts",
             "passWithNoTests": true
@@ -7981,9 +7680,7 @@
         {
           "file": "libs/shared/form/uni-course-form/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/shared/form/uni-course-form/tsconfig.json",
@@ -8007,9 +7704,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/shared/form/university-select"
-          ],
+          "outputs": ["coverage/libs/shared/form/university-select"],
           "options": {
             "jestConfig": "libs/shared/form/university-select/jest.config.ts",
             "passWithNoTests": true
@@ -8050,10 +7745,7 @@
         {
           "file": "libs/shared/form/university-select/src/lib/shared-form-university-select.module.ts",
           "hash": "c48a294dcf56883aa17af5b4393d179bb110c6b4",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/common"]
         },
         {
           "file": "libs/shared/form/university-select/src/lib/university-select/university-select.component.html",
@@ -8079,9 +7771,7 @@
         {
           "file": "libs/shared/form/university-select/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/shared/form/university-select/tsconfig.json",
@@ -8160,10 +7850,7 @@
         {
           "file": "libs/shared/interface/src/lib/ethics.ts",
           "hash": "bbc996a49e334efe3f09ea826536262df3fb43f2",
-          "deps": [
-            "npm:@angular/router",
-            "shared-menu"
-          ]
+          "deps": ["npm:@angular/router", "shared-menu"]
         },
         {
           "file": "libs/shared/interface/src/lib/form.ts",
@@ -8180,11 +7867,7 @@
         {
           "file": "libs/shared/interface/src/lib/ksp-form-base.component.ts",
           "hash": "9e8fc3ea2b417bdbb6abce931bf37371b9e81b56",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/forms",
-            "npm:rxjs"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/forms", "npm:rxjs"]
         },
         {
           "file": "libs/shared/interface/src/lib/school-service-user-page-type.ts",
@@ -8193,9 +7876,7 @@
         {
           "file": "libs/shared/interface/src/lib/shared-interface.module.ts",
           "hash": "d41c90834f72c134f44c710c309978fb246ddf2a",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "libs/shared/interface/src/lib/uni-service-import-type.ts",
@@ -8220,9 +7901,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/shared/menu"
-          ],
+          "outputs": ["coverage/libs/shared/menu"],
           "options": {
             "jestConfig": "libs/shared/menu/jest.config.ts",
             "passWithNoTests": true
@@ -8288,9 +7967,7 @@
         {
           "file": "libs/shared/menu/src/lib/hamburger-menu/hamburger-menu.component.ts",
           "hash": "8739e9d1a666de6483404da67a44fa250a3caa2f",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "libs/shared/menu/src/lib/shared-menu.module.ts",
@@ -8312,9 +7989,7 @@
         {
           "file": "libs/shared/menu/src/lib/side-menu/side-menu.component.ts",
           "hash": "bd53b745895d3f19ea65a10017f3a1841b2af1ef",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "libs/shared/menu/src/lib/stepper-nav/stepper-nav.component.html",
@@ -8344,9 +8019,7 @@
         {
           "file": "libs/shared/menu/src/lib/top-nav-2/top-nav-2.component.ts",
           "hash": "d36118a5a16c7561af519ac5fed6ff29bb6a65dc",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "libs/shared/menu/src/lib/top-nav/top-nav.component.html",
@@ -8368,9 +8041,7 @@
         {
           "file": "libs/shared/menu/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/shared/menu/tsconfig.json",
@@ -8681,10 +8352,7 @@
         {
           "file": "libs/shared/ui/src/lib/license-info/license-info.component.ts",
           "hash": "9fc23b385a6b1e51ecabcd0a094746e7efb8f77f",
-          "deps": [
-            "npm:@angular/common",
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/common", "npm:@angular/core"]
         },
         {
           "file": "libs/shared/ui/src/lib/license-type-button-group/license-type-button-group.component.html",
@@ -8697,10 +8365,7 @@
         {
           "file": "libs/shared/ui/src/lib/license-type-button-group/license-type-button-group.component.ts",
           "hash": "71c3d72621dbc8da3d459d654f4843d765e74c45",
-          "deps": [
-            "npm:@angular/common",
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/common", "npm:@angular/core"]
         },
         {
           "file": "libs/shared/ui/src/lib/page-not-found/page-not-found.component.html",
@@ -8713,9 +8378,7 @@
         {
           "file": "libs/shared/ui/src/lib/page-not-found/page-not-found.component.ts",
           "hash": "592b715da5e02d9ca44bb306adf6eb5b3a3f9e15",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "libs/shared/ui/src/lib/request-header-info/request-header-info.component.html",
@@ -8728,17 +8391,12 @@
         {
           "file": "libs/shared/ui/src/lib/request-header-info/request-header-info.component.ts",
           "hash": "515d8da32e33e8453474d4027c033efabc4d0e62",
-          "deps": [
-            "npm:@angular/common",
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/common", "npm:@angular/core"]
         },
         {
           "file": "libs/shared/ui/src/lib/shared-ui.module.ts",
           "hash": "e0ba0bb8119c2a2caf7bdae0844768c0230a7e9b",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "libs/shared/ui/tsconfig.json",
@@ -8796,9 +8454,7 @@
         {
           "file": "libs/shared/utility/src/lib/shared-utility.module.ts",
           "hash": "41adf0974624d190365202ee12d922242deb3f09",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "libs/shared/utility/tsconfig.json",
@@ -8818,9 +8474,7 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/uni-service",
             "index": "apps/uni-service/src/index.html",
@@ -8839,9 +8493,7 @@
               "apps/uni-service/src/app-styles.scss",
               "libs/shared/assets/src/assets/project-styles.scss"
             ],
-            "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.js"
-            ]
+            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.js"]
           },
           "configurations": {
             "production": {
@@ -8875,9 +8527,7 @@
             }
           },
           "defaultConfiguration": "production",
-          "dependsOn": [
-            "^build"
-          ]
+          "dependsOn": ["^build"]
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -8908,9 +8558,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/uni-service"
-          ],
+          "outputs": ["coverage/apps/uni-service"],
           "options": {
             "jestConfig": "apps/uni-service/jest.config.ts",
             "passWithNoTests": true
@@ -8963,9 +8611,7 @@
         {
           "file": "apps/uni-service/src/app/app.component.ts",
           "hash": "7c6586b0c51067a8f6da359bf9618cd3c4a599eb",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "apps/uni-service/src/app/app.module.ts",
@@ -9012,24 +8658,17 @@
         {
           "file": "apps/uni-service/src/main.ts",
           "hash": "d9a2e7e4a582e265db779363bd8b2492c43c141b",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/platform-browser-dynamic"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/platform-browser-dynamic"]
         },
         {
           "file": "apps/uni-service/src/polyfills.ts",
           "hash": "e4555ed11fa2f217b8e4c744d564da4f7388b4c4",
-          "deps": [
-            "npm:zone.js"
-          ]
+          "deps": ["npm:zone.js"]
         },
         {
           "file": "apps/uni-service/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "apps/uni-service/tsconfig.app.json",
@@ -9058,9 +8697,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/uni-service/dialog"
-          ],
+          "outputs": ["coverage/libs/uni-service/dialog"],
           "options": {
             "jestConfig": "libs/uni-service/dialog/jest.config.ts",
             "passWithNoTests": true
@@ -9109,10 +8746,7 @@
         {
           "file": "libs/uni-service/dialog/src/lib/forgot-password-not-found/forgot-password-not-found.component.ts",
           "hash": "ba17a6059eaac6d30122a3aae370b5b56fc64344",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/material"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/material"]
         },
         {
           "file": "libs/uni-service/dialog/src/lib/forgot-password-person-id/forgot-password-person-id.component.html",
@@ -9125,10 +8759,7 @@
         {
           "file": "libs/uni-service/dialog/src/lib/forgot-password-person-id/forgot-password-person-id.component.ts",
           "hash": "cd9ca567f9c7df185538e14f111e0ec59b6062ea",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/material"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/material"]
         },
         {
           "file": "libs/uni-service/dialog/src/lib/forgot-password-set-new-password/forgot-password-set-new-password.component.html",
@@ -9141,10 +8772,7 @@
         {
           "file": "libs/uni-service/dialog/src/lib/forgot-password-set-new-password/forgot-password-set-new-password.component.ts",
           "hash": "6e47012f552400037c622dc06c4094c1b39c3423",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/material"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/material"]
         },
         {
           "file": "libs/uni-service/dialog/src/lib/training-address/training-address.component.html",
@@ -9178,9 +8806,7 @@
         {
           "file": "libs/uni-service/dialog/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/uni-service/dialog/tsconfig.json",
@@ -9204,9 +8830,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/uni-service/feature/degree-cert"
-          ],
+          "outputs": ["coverage/libs/uni-service/feature/degree-cert"],
           "options": {
             "jestConfig": "libs/uni-service/feature/degree-cert/jest.config.ts",
             "passWithNoTests": true
@@ -9303,9 +8927,7 @@
         {
           "file": "libs/uni-service/feature/degree-cert/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/uni-service/feature/degree-cert/tsconfig.json",
@@ -9329,9 +8951,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/uni-service/feature/edit-degree-cert"
-          ],
+          "outputs": ["coverage/libs/uni-service/feature/edit-degree-cert"],
           "options": {
             "jestConfig": "libs/uni-service/feature/edit-degree-cert/jest.config.ts",
             "passWithNoTests": true
@@ -9357,9 +8977,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/uni-service/feature/edit-student-list"
-          ],
+          "outputs": ["coverage/libs/uni-service/feature/edit-student-list"],
           "options": {
             "jestConfig": "libs/uni-service/feature/edit-student-list/jest.config.ts",
             "passWithNoTests": true
@@ -9386,9 +9004,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/uni-service/feature/foreign-student-id"
-          ],
+          "outputs": ["coverage/libs/uni-service/feature/foreign-student-id"],
           "options": {
             "jestConfig": "libs/uni-service/feature/foreign-student-id/jest.config.ts",
             "passWithNoTests": true
@@ -9461,9 +9077,7 @@
         {
           "file": "libs/uni-service/feature/foreign-student-id/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/uni-service/feature/foreign-student-id/tsconfig.json",
@@ -9488,9 +9102,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/uni-service/feature/graduate"
-          ],
+          "outputs": ["coverage/libs/uni-service/feature/graduate"],
           "options": {
             "jestConfig": "libs/uni-service/feature/graduate/jest.config.ts",
             "passWithNoTests": true
@@ -9587,11 +9199,7 @@
         {
           "file": "libs/uni-service/feature/graduate/src/lib/import-student/user.service.ts",
           "hash": "7ac02a37e4980ade8bd12b4cc828b16bafec17bf",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "npm:rxjs"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/common", "npm:rxjs"]
         },
         {
           "file": "libs/uni-service/feature/graduate/src/lib/import-student/user.ts",
@@ -9626,9 +9234,7 @@
         {
           "file": "libs/uni-service/feature/graduate/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/uni-service/feature/graduate/tsconfig.json",
@@ -9652,9 +9258,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/uni-service/feature/register"
-          ],
+          "outputs": ["coverage/libs/uni-service/feature/register"],
           "options": {
             "jestConfig": "libs/uni-service/feature/register/jest.config.ts",
             "passWithNoTests": true
@@ -9734,10 +9338,7 @@
         {
           "file": "libs/uni-service/feature/register/src/lib/uni-service-feature-register-routing.module.ts",
           "hash": "879c85850ac6a0713719026be8dd85de9d961308",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/router"]
         },
         {
           "file": "libs/uni-service/feature/register/src/lib/uni-service-feature-register.module.ts",
@@ -9758,9 +9359,7 @@
         {
           "file": "libs/uni-service/feature/register/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/uni-service/feature/register/tsconfig.json",
@@ -9784,9 +9383,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/uni-service/feature/retired"
-          ],
+          "outputs": ["coverage/libs/uni-service/feature/retired"],
           "options": {
             "jestConfig": "libs/uni-service/feature/retired/jest.config.ts",
             "passWithNoTests": true
@@ -9854,9 +9451,7 @@
         {
           "file": "libs/uni-service/feature/retired/src/lib/retired-home/retired-home.component.ts",
           "hash": "67981017ba95370124b50ec1f5852386f0538d3b",
-          "deps": [
-            "npm:@angular/core"
-          ]
+          "deps": ["npm:@angular/core"]
         },
         {
           "file": "libs/uni-service/feature/retired/src/lib/retired-reason/retired-reason.component.html",
@@ -9878,10 +9473,7 @@
         {
           "file": "libs/uni-service/feature/retired/src/lib/uni-service-feature-retired-routing.module.ts",
           "hash": "f9aca72877b873bb8271a25f9af6c9b50bc9047f",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router"
-          ]
+          "deps": ["npm:@angular/core", "npm:@angular/router"]
         },
         {
           "file": "libs/uni-service/feature/retired/src/lib/uni-service-feature-retired.module.ts",
@@ -9900,9 +9492,7 @@
         {
           "file": "libs/uni-service/feature/retired/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/uni-service/feature/retired/tsconfig.json",
@@ -9927,9 +9517,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/uni-service/form"
-          ],
+          "outputs": ["coverage/libs/uni-service/form"],
           "options": {
             "jestConfig": "libs/uni-service/form/jest.config.ts",
             "passWithNoTests": true
@@ -10015,9 +9603,7 @@
         {
           "file": "libs/uni-service/form/src/test-setup.ts",
           "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
+          "deps": ["npm:jest-preset-angular"]
         },
         {
           "file": "libs/uni-service/form/tsconfig.json",
@@ -10138,5 +9724,8 @@
       ]
     }
   },
-  "version": 1
+  "version": 1,
+  "cli": {
+    "analytics": false
+  }
 }

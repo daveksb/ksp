@@ -1,4 +1,4 @@
-<div class="box-header text-primary">ข้อมูลการทำงาน</div>
+<div class="box-header text-primary">ข้อมูลการทำงานปัจจุบัน</div>
 <div class="row mb-2">
   <div class="col">
     <label class="form-label">เขตพื้นที่การศึกษา</label>
@@ -15,13 +15,16 @@
     <input class="form-control" type="text" />
   </div>
 </div>
-<div class="row">
-  <div class="col">
+<div class="row mb-4">
+  <div class="col-12">
     <label class="form-label"
       >สรุปผลการปฏิบัติตนตามจรรยาบรรณผู้ประกอบวิชาชีพทางการศึกษาที่เด่นที่สุด</label
     >
     <textarea class="form-control" rows="3"></textarea>
   </div>
 </div>
-<br />
-<ksp-senior-teacher-career></ksp-senior-teacher-career>
+<hr />
+<div class="box-header text-primary">ประวัติการทำงาน</div>
+<ksp-senior-teacher-career
+  [btnLabel]="'เพิ่มข้อมูลการทำงาน'"
+></ksp-senior-teacher-career>

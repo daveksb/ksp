@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Event, Router } from '@angular/router';
 import {
   AddressService,
@@ -8,7 +8,7 @@ import {
 } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 import {
-  mapJsonData,
+  formatCheckboxData,
   parseJson,
   replaceEmptyWithNull,
   thaiDate,
@@ -82,24 +82,18 @@ export class AddStaffComponent implements OnInit {
       });
   }
 
-  get teachingInfo() {
-    return this.form.controls.teachingInfo as FormControl<any>;
-  }
-
   pathTeachingInfo(res: any) {
-    const t = JSON.parse(res.teachingLevel);
-    console.log('teaching = ', t);
-    const teachingLevel = levels.map((level, i) => {
-      if (t.includes(level.value)) {
+    //console.log('teaching = ', res);
+    const teachingLevel = levels.map((level) => {
+      if (res.teachingLevel.includes(level.value)) {
         return level.value;
       } else {
         return false;
       }
     });
-    const s = JSON.parse(res.teachingSubjects);
-    console.log('subject = ', s);
-    const teachingSubjects = subjects.map((subj, i) => {
-      if (s.includes(subj.value)) {
+
+    const teachingSubjects = subjects.map((subj) => {
+      if (res.teachingSubjects.includes(subj.value)) {
         return subj.value;
       } else {
         return false;
@@ -111,10 +105,6 @@ export class AddStaffComponent implements OnInit {
       teachingSubjects,
     };
     this.form.controls.teachingInfo.patchValue(data);
-  }
-
-  pathHiringInfo(data: any) {
-    this.form.controls.hiringInfo.patchValue(data);
   }
 
   checkMode() {
@@ -141,7 +131,7 @@ export class AddStaffComponent implements OnInit {
         this.patchAddress(parseJson(res.addresses));
         this.patchEdu(parseJson(res.educations));
         this.pathTeachingInfo(parseJson(res.teachinginfo));
-        this.pathHiringInfo(parseJson(res.hiringinfo));
+        this.form.controls.hiringInfo.patchValue(parseJson(res.hiringinfo));
       });
   }
 
@@ -159,14 +149,26 @@ export class AddStaffComponent implements OnInit {
     formData.addr2.addressType = 2;
 
     const { id, ...userInfo } = formData.userInfo;
-    userInfo.schoolId = this.schoolId;
-    userInfo.createDate = new Date().toISOString().split('.')[0];
+    userInfo.schoolid = this.schoolId;
+    userInfo.createdate = new Date().toISOString().split('.')[0];
+
+    const teaching: any = this.form.controls.teachingInfo.value;
+    const teachingLevel = formatCheckboxData(teaching.teachingLevel, levels);
+    const teachingSubjects = formatCheckboxData(
+      teaching.teachingSubjects,
+      subjects
+    );
+    const teachingInfo = {
+      teachingLevel,
+      teachingSubjects,
+      teachingSubjectOther: teaching.teachingSubjectOther || null,
+    };
 
     const payload = {
       ...userInfo,
       ...{ addresses: JSON.stringify([formData.addr1, formData.addr2]) },
       ...{ educations: JSON.stringify([formData.edu1, formData.edu2]) },
-      ...{ teachinginfo: JSON.stringify(formData.teachingInfo) },
+      ...{ teachinginfo: JSON.stringify(teachingInfo) },
       ...{ hiringinfo: JSON.stringify(formData.hiringInfo) },
     };
     //console.log('insert payload = ', payload);
@@ -179,19 +181,23 @@ export class AddStaffComponent implements OnInit {
 
   updateStaff() {
     const formData: any = this.form.getRawValue();
-    const { ...userInfo } = replaceEmptyWithNull(formData.userInfo);
-    userInfo.schoolId = this.schoolId;
+    //const { ...userInfo } = replaceEmptyWithNull(formData.userInfo);
+    formData.userInfo.schoolid = this.schoolId;
+
     const teaching: any = this.form.controls.teachingInfo.value;
-    const teachingLevel = mapJsonData(teaching.teachingLevel, levels);
-    const teachingSubjects = mapJsonData(teaching.teachingSubjects, subjects);
+    const teachingLevel = formatCheckboxData(teaching.teachingLevel, levels);
+    const teachingSubjects = formatCheckboxData(
+      teaching.teachingSubjects,
+      subjects
+    );
     const teachingInfo = {
       teachingLevel,
       teachingSubjects,
       teachingSubjectOther: teaching.teachingSubjectOther || null,
     };
 
-    const payload = {
-      ...userInfo,
+    let payload = {
+      ...formData.userInfo,
       ...{ addresses: JSON.stringify([formData.addr1, formData.addr2]) },
       ...{ educations: JSON.stringify([formData.edu1, formData.edu2]) },
       ...{
@@ -200,10 +206,16 @@ export class AddStaffComponent implements OnInit {
       ...{ hiringinfo: JSON.stringify(formData.hiringInfo) },
     };
 
-    console.log('update payload = ', payload);
+    payload = replaceEmptyWithNull(payload);
+
     this.staffService.updateStaff2(payload).subscribe((res) => {
       //console.log('update result = ', res);
     });
+  }
+
+  pathUserInfo(data: any) {
+    data.birthdate = data.birthdate.split('T')[0];
+    this.form.controls.userInfo.patchValue(data);
   }
 
   useSameAddress(evt: any) {
@@ -319,19 +331,5 @@ export class AddStaffComponent implements OnInit {
         }
       });
     }
-  }
-
-  pathUserInfo(data: any) {
-    const {
-      schoolId,
-      createDate,
-      addresses,
-      educations,
-      teachinginfo,
-      hiringinfo,
-      ...formData
-    } = data;
-    formData.birthDate = formData.birthDate.split('T')[0];
-    this.form.controls.userInfo.patchValue(formData);
   }
 }

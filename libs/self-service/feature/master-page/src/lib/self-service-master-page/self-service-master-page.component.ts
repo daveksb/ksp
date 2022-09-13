@@ -33,10 +33,10 @@ export const menu: MenuConfig[] = [
         label: 'ขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
         path: 'renew-license/request',
       },
-      /* {
+      {
         label: 'ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ',
         path: 'license/edit',
-      }, */
+      },
       {
         label: 'ขอใบแทนใบอนุญาตประกอบวิชาชีพ',
         path: 'substitute-license/request',

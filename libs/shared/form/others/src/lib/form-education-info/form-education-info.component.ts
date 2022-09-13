@@ -20,7 +20,7 @@ export class FormEducationInfoComponent
     isEducationDegree: [],
     major: [null, Validators.required],
     institution: [null, Validators.required],
-    country: [''],
+    country: [],
     admissionDate: [],
     graduateDate: [],
     grade: [],

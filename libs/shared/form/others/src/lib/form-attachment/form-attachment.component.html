@@ -17,9 +17,9 @@
         <ng-container *ngFor="let group of groups; index as i">
           <tr style="height: 60px; border-top: 1px solid #dadde1">
             <th class="ps-3 py-2 text-black">
-              {{ group }}
+              {{ group.name }}
               <div class="text-secondary">
-                <div>
+                <div role="button" (click)="downloadClick.emit(true)">
                   {{ fileName[i] }}
                   <i
                     *ngIf="fileName[i] && mode === 'edit'"
@@ -38,8 +38,10 @@
             </td>
             <td *ngIf="mode === 'edit'" class="text-center">
               <ksp-file-upload
+                [pageType]="pageType"
+                [uniqueTimestamp]="uniqueTimestamp"
                 [showUploadedFileName]="false"
-                [systemFileName]="group"
+                [systemFileName]="group.name"
                 (uploadComplete)="fileName[i] = $event"
               ></ksp-file-upload>
             </td>

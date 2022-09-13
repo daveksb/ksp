@@ -31,6 +31,9 @@ import { SeniorTeacherSubsidyFourComponent } from './senior-teacher-subsidy-four
 import { SeniorTeacherSubsidyFiveComponent } from './senior-teacher-subsidy-five/senior-teacher-subsidy-five.component';
 import { SeniorTeacherSubsidySixComponent } from './senior-teacher-subsidy-six/senior-teacher-subsidy-six.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AddRowButtonComponent } from '@ksp/shared/ui';
+import { SchoolServiceFormActivityModule } from '@ksp/school-service/form/activity';
+import { SharedFormOthersModule } from '@ksp/shared/form/others';
 
 @NgModule({
   imports: [
@@ -43,6 +46,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     SeniorTeacherSubsidyFourComponent,
     SeniorTeacherSubsidyFiveComponent,
     SeniorTeacherSubsidySixComponent,
+    AddRowButtonComponent,
+    SchoolServiceFormActivityModule,
+    SharedFormOthersModule,
   ],
   declarations: [
     CouncilEducationComponent,

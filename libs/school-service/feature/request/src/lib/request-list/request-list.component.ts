@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { RequestProcess } from '@ksp/shared/constant';
 import { RequestLicenseService, TempLicenseService } from '@ksp/shared/service';
 import { replaceEmptyWithNull } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
@@ -91,12 +92,13 @@ export class SchoolRequestListComponent implements OnInit {
     return result;
   }
 
-  checkProcess(input: string) {
+  checkProcess(input: number) {
     let result = '-';
-    if (input === '1') {
-      result = 'ยื่นเอกสาร';
+    if (input === RequestProcess.บันทึกชั่วคราว) {
+      result = RequestProcess[RequestProcess.บันทึกชั่วคราว];
+    } else if (input === RequestProcess.ยื่นใบคำขอ) {
+      result = RequestProcess[RequestProcess.ยื่นใบคำขอ];
     }
-
     return result;
   }
 }

@@ -6,16 +6,17 @@ import { SeniorTeacherRewardComponent } from './senior-teacher-reward/senior-tea
 import { ResearchRewardComponent } from './research-reward/research-reward.component';
 import { CouncilRewardComponent } from './council-reward/council-reward.component';
 import { MatTabsModule } from '@angular/material/tabs';
-import { SharedFormOthersModule } from '@ksp/shared/form/others';
-import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { RequestStatusComponent } from '@ksp/self-service/ui';
 import { RouterModule, Routes } from '@angular/router';
 import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master-page';
 import { TopNavComponent } from '@ksp/shared/menu';
-import { SharedFormSelfRewardFormModule } from '@ksp/shared/form/self-reward-form';
 import { PraiseTeacherRewardComponent } from './praise-teacher-reward/praise-teacher-reward.component';
 import { SelfRewardRequestComponent } from './self-reward-request/self-reward-request.component';
 import { AddRowButtonComponent } from '@ksp/shared/ui';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SharedFormSelfRewardFormModule } from '@ksp/shared/form/self-reward-form';
+import { SelfServiceFormModule } from '@ksp/self-service/form';
+import { SharedFormOthersModule } from '@ksp/shared/form/others';
 
 export const routes: Routes = [
   {
@@ -41,6 +42,7 @@ export const routes: Routes = [
     TopNavComponent,
     SharedFormSelfRewardFormModule,
     AddRowButtonComponent,
+    ReactiveFormsModule,
   ],
   declarations: [
     ThaiTeacherRewardComponent,
