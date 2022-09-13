@@ -5,7 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   levels,
   RequestPageType,
-  RequestProcess,
+  SchoolRequestProcess,
+  SchoolRequestType,
   subjects,
 } from '@ksp/shared/constant';
 import {
@@ -13,7 +14,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
-import { defaultRequestPayload, RequestType } from '@ksp/shared/interface';
+import { defaultRequestPayload } from '@ksp/shared/interface';
 import {
   AddressService,
   GeneralInfoService,
@@ -38,17 +39,6 @@ import { LicenseDetailService } from './temp-license-request.service';
   styleUrls: ['./temp-license-request.component.scss'],
 })
 export class TempLicenseRequestComponent implements OnInit {
-  form = this.fb.group({
-    userInfo: [],
-    addr1: [],
-    addr2: [],
-    schoolAddr: [],
-    edu1: [],
-    edu2: [],
-    teachinginfo: [],
-    hiringinfo: [],
-  });
-
   uniqueTimestamp = ''; // use for file upload reference, gen only first time component loaded
 
   pageType = RequestPageType;
@@ -65,14 +55,16 @@ export class TempLicenseRequestComponent implements OnInit {
   academicTypes$!: Observable<any>;
 
   requestId!: number;
+  requestData: any;
   requestType = 1;
   requestTypeLabel = '';
   requestNo = '';
-  currentProcess = 0;
-  processEnum = RequestProcess;
+  currentProcess!: number;
+  processEnum = SchoolRequestProcess;
 
-  disableTempSave = false;
-  disableSave = false;
+  disableTempSave = true;
+  disableSave = true;
+  disableCancel = true;
 
   icCardNo = '';
   schoolAddressLabel = `ที่อยู่ของสถานศึกษา
@@ -80,7 +72,7 @@ export class TempLicenseRequestComponent implements OnInit {
 
   schoolId = '0010201056';
   displayMode: number =
-    RequestType[
+    SchoolRequestType[
       'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)'
     ];
 
@@ -89,6 +81,17 @@ export class TempLicenseRequestComponent implements OnInit {
   reasonFiles: any[] = [];
   attachFiles: any[] = [];
   prefixList$!: Observable<any>;
+
+  form = this.fb.group({
+    userInfo: [],
+    addr1: [],
+    addr2: [],
+    schoolAddr: [],
+    edu1: [],
+    edu2: [],
+    teachinginfo: [],
+    hiringinfo: [],
+  });
 
   constructor(
     private router: Router,
@@ -108,9 +111,119 @@ export class TempLicenseRequestComponent implements OnInit {
     this.getList();
     this.checkRequestId();
     this.checkRequestType();
+    this.checkButtonsDisableStatus();
+  }
+
+  submitRequest() {
+    // ถ้ามี request id เปลี่ยนสถานะ
+    // ถ้ายังไม่มี request id insert new row
+    if (this.requestId) {
+      this.updateRequest('submit');
+    } else {
+      this.createRequest('submit');
+    }
+  }
+
+  tempSave() {
+    if (this.requestId) {
+      this.updateRequest('temp');
+    } else {
+      this.createRequest('temp');
+    }
+  }
+
+  cancelRequest() {
+    const payload = {
+      id: `${this.requestId}`,
+      currentprocess: `${SchoolRequestProcess.ยกเลิก}`,
+    };
+    this.requestService.changeRequestProcess(payload).subscribe((res) => {
+      //console.log('Cancel request  = ', res);
+    });
   }
 
   updateRequest(type: string) {
+    const baseForm = this.fb.group(defaultRequestPayload);
+    const formData: any = this.form.getRawValue();
+
+    const userInfo = formData.userInfo;
+    userInfo.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
+    userInfo.ref1 = '2';
+    userInfo.ref2 = '03';
+    userInfo.ref3 = '1';
+    userInfo.systemtype = '2';
+    userInfo.requesttype = `${this.requestType}`;
+
+    const teaching: any = this.form.controls.teachinginfo.value;
+    let teachingInfo = {};
+
+    if (this.form.controls.teachinginfo.value) {
+      const teachingLevel = formatCheckboxData(teaching.teachingLevel, levels);
+      const teachingSubjects = formatCheckboxData(
+        teaching.teachingSubjects,
+        subjects
+      );
+      teachingInfo = {
+        teachingLevel,
+        teachingSubjects,
+        teachingSubjectOther: teaching.teachingSubjectOther || null,
+      };
+    }
+
+    const payload = {
+      ...replaceEmptyWithNull(userInfo),
+      ...{ addressinfo: JSON.stringify([formData.addr1, formData.addr2]) },
+      ...{ eduinfo: JSON.stringify([formData.edu1, formData.edu2]) },
+      ...{ teachinginfo: JSON.stringify(teachingInfo) },
+      ...{ hiringinfo: JSON.stringify(formData.hiringinfo) },
+    };
+
+    baseForm.patchValue(payload);
+
+    const {
+      ref1,
+      ref2,
+      ref3,
+      uniquetimestamp,
+      requestdate,
+      updatedate,
+      requestno,
+      ...temp
+    } = baseForm.value;
+
+    const res = replaceEmptyWithNull(temp);
+
+    res.id = `${this.requestId}`;
+    res.schoolid = this.schoolId;
+    if (type === 'submit') {
+      res.currentprocess = `${SchoolRequestProcess.ยื่นใบคำขอ}`;
+    } else {
+      res.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
+    }
+
+    console.log('update payload = ', res);
+    this.requestService.updateRequest(res).subscribe((res) => {
+      //console.log('update result = ', res);
+      this.backToListPage();
+    });
+  }
+
+  patchEdu(edus: any[]) {
+    //console.log('edu = ', edus);
+    if (edus && edus.length) {
+      edus.map((edu, i) => {
+        if (i === 0) {
+          this.form.controls.edu1.patchValue(edu);
+        }
+        if (i === 1) {
+          this.form.controls.edu2.patchValue(edu);
+        }
+      });
+    }
+  }
+
+  createRequest(type: string) {
+    console.log('create request = ');
     const baseForm = this.fb.group(defaultRequestPayload);
     const formData: any = this.form.getRawValue();
     formData.addr1.addresstype = 1;
@@ -121,11 +234,10 @@ export class TempLicenseRequestComponent implements OnInit {
 
     const userInfo = toLowercaseProp(rawUserInfo);
 
-    if (type === 'tempSave') {
-      userInfo.currentprocess = `${RequestProcess.บันทึกชั่วคราว}`;
-    } else if (type === 'realSave') {
-      console.log('real save = ');
-      userInfo.currentprocess = `${RequestProcess.ยื่นใบคำขอ}`;
+    if (this.requestId) {
+      userInfo.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
+    } else {
+      userInfo.currentprocess = `${SchoolRequestProcess.ยื่นใบคำขอ}`;
     }
 
     userInfo.ref1 = '2';
@@ -158,13 +270,60 @@ export class TempLicenseRequestComponent implements OnInit {
       ...{ hiringinfo: JSON.stringify(formData.hiringinfo) },
     };
 
+    if (type == 'submit') {
+      payload.currentprocess = `${SchoolRequestProcess.ยื่นใบคำขอ}`;
+    } else {
+      payload.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
+    }
+
     console.log('payload = ', payload);
 
     baseForm.patchValue(payload);
-    console.log('current form = ', baseForm.value);
+    //console.log('current form = ', baseForm.value);
     this.requestService.requestLicense(baseForm.value).subscribe((res) => {
-      console.log('request result = ', res);
+      //console.log('request result = ', res);
       this.backToListPage();
+    });
+  }
+
+  checkButtonsDisableStatus() {
+    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
+      //console.log('userInfo valid = ', this.form.controls.userInfo.valid);
+      //console.log('edu 1 valid = ', this.form.controls.edu1.valid);
+      //console.log('form valid = ', this.form.valid);
+
+      // formValid + สถานะเป็นยื่นใบคำขอ, บันทึกชั่วคราวไม่ได้ ส่งใบคำขอไม่ได้
+      if (
+        this.form.valid &&
+        this.currentProcess === SchoolRequestProcess.ยื่นใบคำขอ
+      ) {
+        this.disableTempSave = true;
+        this.disableSave = true;
+      }
+
+      // formValid + สถานะเป็นบันทึกชั่วคราว, บันทึกชั่วคราวได้ ส่งใบคำขอได้
+      if (
+        this.form.valid &&
+        this.currentProcess === SchoolRequestProcess.กำลังสร้าง
+      ) {
+        this.disableTempSave = false;
+        this.disableSave = false;
+      }
+
+      // formValid + ไม่มีหมายเลขใบคำขอ ทำได้ทุกอย่าง
+      if (this.form.valid && !this.requestId) {
+        this.disableTempSave = false;
+        this.disableSave = false;
+      }
+
+      // มีหมายเลขใบคำขอแล้ว enable ปุ่มยกเลิก
+      if (this.requestId) {
+        if (this.currentProcess === SchoolRequestProcess.ยกเลิก) {
+          this.disableCancel = true;
+        } else {
+          this.disableCancel = false;
+        }
+      }
     });
   }
 
@@ -179,16 +338,10 @@ export class TempLicenseRequestComponent implements OnInit {
 
   loadRequestFromId(id: number) {
     this.requestService.getRequestById(id).subscribe((res: any) => {
+      this.requestData = res;
       this.requestNo = res.requestno;
       this.currentProcess = +res.currentprocess;
-
-      if (this.currentProcess === 0) {
-        this.disableTempSave = false;
-        this.disableSave = false;
-      } else {
-        this.disableTempSave = true;
-        this.disableSave = true;
-      }
+      console.log('current process = ', this.currentProcess);
 
       this.pathUserInfo(res);
       this.patchAddress(parseJson(res.addressinfo));
@@ -225,19 +378,6 @@ export class TempLicenseRequestComponent implements OnInit {
 
   patchHiringInfo(data: any) {
     this.form.controls.hiringinfo.patchValue(data);
-  }
-
-  patchEdu(edus: any[]) {
-    if (edus && edus.length) {
-      edus.map((edu, i) => {
-        if (i === 0) {
-          this.form.controls.edu1.patchValue(edu);
-        }
-        if (i === 1) {
-          this.form.controls.edu2.patchValue(edu);
-        }
-      });
-    }
   }
 
   patchAddress(addrs: any[]) {
@@ -284,64 +424,6 @@ export class TempLicenseRequestComponent implements OnInit {
         this.patchTeachingInfo(parseJson(res.teachinginfo));
         this.patchHiringInfo(parseJson(res.hiringinfo));
       });
-  }
-
-  createRequest(type: string) {
-    const baseForm = this.fb.group(defaultRequestPayload);
-    const formData: any = this.form.getRawValue();
-    formData.addr1.addresstype = 1;
-    formData.addr2.addresstype = 2;
-
-    const { id, ...rawUserInfo } = formData.userInfo;
-    rawUserInfo.schoolId = this.schoolId;
-
-    const userInfo = toLowercaseProp(rawUserInfo);
-
-    if (type === 'tempSave') {
-      //userInfo.currentprocess = `${RequestProcess.บันทึกชั่วคราว}`;
-    } else if (type === 'realSave') {
-      console.log('real save = ');
-      //userInfo.currentprocess = `${RequestProcess.ยื่นใบคำขอ}`;
-    }
-
-    userInfo.ref1 = '2';
-    userInfo.ref2 = '03';
-    userInfo.ref3 = '1';
-    userInfo.systemtype = '2';
-    userInfo.requesttype = `${this.requestType}`;
-
-    const teaching: any = this.form.controls.teachinginfo.value;
-    let teachingInfo = {};
-
-    if (this.form.controls.teachinginfo.value) {
-      const teachingLevel = formatCheckboxData(teaching.teachingLevel, levels);
-      const teachingSubjects = formatCheckboxData(
-        teaching.teachingSubjects,
-        subjects
-      );
-      teachingInfo = {
-        teachingLevel,
-        teachingSubjects,
-        teachingSubjectOther: teaching.teachingSubjectOther || null,
-      };
-    }
-
-    const payload = {
-      ...replaceEmptyWithNull(userInfo),
-      ...{ addressinfo: JSON.stringify([formData.addr1, formData.addr2]) },
-      ...{ eduinfo: JSON.stringify([formData.edu1, formData.edu2]) },
-      ...{ teachinginfo: JSON.stringify(teachingInfo) },
-      ...{ hiringinfo: JSON.stringify(formData.hiringinfo) },
-    };
-
-    console.log('payload = ', payload);
-
-    baseForm.patchValue(payload);
-    console.log('current form = ', baseForm.value);
-    this.requestService.requestLicense(baseForm.value).subscribe((res) => {
-      console.log('request result = ', res);
-      this.backToListPage();
-    });
   }
 
   pathUserInfo(data: any) {
@@ -400,22 +482,22 @@ export class TempLicenseRequestComponent implements OnInit {
       this.requestType = Number(params['type']);
       if (params['type'] == 1) {
         this.requestTypeLabel =
-          RequestType[
-            RequestType[
+          SchoolRequestType[
+            SchoolRequestType[
               'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)'
             ]
           ];
       } else if (params['type'] == 2) {
         this.requestTypeLabel =
-          RequestType[
-            RequestType[
+          SchoolRequestType[
+            SchoolRequestType[
               'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ผู้บริหาร)'
             ]
           ];
       } else if (params['type'] == 3) {
         this.requestTypeLabel =
-          RequestType[
-            RequestType[
+          SchoolRequestType[
+            SchoolRequestType[
               'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)'
             ]
           ];
@@ -425,6 +507,26 @@ export class TempLicenseRequestComponent implements OnInit {
 
   backToListPage() {
     this.router.navigate(['/temp-license', 'list']);
+  }
+
+  onCancelRequest() {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
+        subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
+        ใช่หรือไม่`,
+        btnLabel: 'บันทึก',
+      },
+    });
+
+    confirmDialog.componentInstance.confirmed
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res) {
+          this.onCompleted();
+        }
+      });
   }
 
   onConfirmed() {
@@ -462,7 +564,7 @@ export class TempLicenseRequestComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         if (res) {
-          this.createRequest('realSave');
+          this.createRequest('submit');
         }
       });
   }

@@ -10,9 +10,24 @@ export class RequestLicenseService {
   constructor(private http: HttpClient) {}
 
   requestLicense(form: any): Observable<any> {
-    return this.http
-      .post(`${environment.apiUrl}/kspstaff/schrequestinsert`, form)
-      .pipe(shareReplay());
+    return this.http.post(
+      `${environment.apiUrl}/kspstaff/schrequestinsert`,
+      form
+    );
+  }
+
+  updateRequest(form: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspstaff/schrequestupdate`,
+      form
+    );
+  }
+
+  changeRequestProcess(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspstaff/schrequestupdatecurrentprocess`,
+      payload
+    );
   }
 
   getSchoolInfo(schoolId: string): Observable<any> {

@@ -19,8 +19,7 @@ import {
 } from '@ksp/shared/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { levels, subjects } from '@ksp/shared/constant';
-import { RequestType } from '@ksp/shared/interface';
+import { levels, SchoolRequestType, subjects } from '@ksp/shared/constant';
 
 @UntilDestroy()
 @Component({
@@ -43,8 +42,8 @@ export class AddStaffComponent implements OnInit {
   schoolId = '0010201056';
   today = thaiDate(new Date());
   mode: 'view' | 'edit' | 'add' = 'add';
-  displayMode: number =
-    RequestType[
+  displayMode =
+    SchoolRequestType[
       'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)'
     ];
   form = this.fb.group({
@@ -80,6 +79,14 @@ export class AddStaffComponent implements OnInit {
           this.loadStaffData(this.staffId);
         }
       });
+  }
+
+  save() {
+    if (this.staffId) {
+      this.updateStaff();
+    } else {
+      this.insertStaff();
+    }
   }
 
   pathTeachingInfo(res: any) {
@@ -133,14 +140,6 @@ export class AddStaffComponent implements OnInit {
         this.pathTeachingInfo(parseJson(res.teachinginfo));
         this.form.controls.hiringInfo.patchValue(parseJson(res.hiringinfo));
       });
-  }
-
-  save() {
-    if (this.staffId) {
-      this.updateStaff();
-    } else {
-      this.insertStaff();
-    }
   }
 
   insertStaff() {

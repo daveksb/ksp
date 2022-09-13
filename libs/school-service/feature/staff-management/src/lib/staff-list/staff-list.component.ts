@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { StaffService } from '@ksp/shared/service';
+import { parseJson } from '@ksp/shared/utility';
 
 @Component({
   selector: 'school-service-staff-list',
@@ -40,6 +41,12 @@ export class StaffListComponent {
       schoolid: `${this.schoolId}`,
     };
     this.service.searchStaffsFromFilter(payload).subscribe((res) => {
+      res.map((i: any) => {
+        const temp = parseJson(i.hiringinfo);
+        i.startdate = temp.startDate;
+        i.enddate = temp.endDate;
+      });
+
       this.dataSource.data = res;
       //console.log('res = ', res);
     });
