@@ -32,7 +32,7 @@ export class FileUploadComponent {
   fileName = '';
   uploadProgress!: number | null;
 
-  constructor(/* private uploadService: FileUploadService */) {}
+  constructor(private uploadService: FileUploadService) {}
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
@@ -45,10 +45,10 @@ export class FileUploadComponent {
       uniquetimpstamp: this.uniqueTimestamp,
     };
 
-    /* file.text().then((res) => {
+    file.text().then((res) => {
       payload.file = btoa(unescape(encodeURIComponent(res)));
       this.uploadFile(payload);
-    }); */
+    });
 
     if (file) {
       this.fileName = file.name;
@@ -57,7 +57,7 @@ export class FileUploadComponent {
     this.uploadComplete.emit(file.name);
   }
 
-  /* uploadFile(payload: any) {
+  uploadFile(payload: any) {
     this.uploadService
       .uploadFile(payload)
       .pipe(untilDestroyed(this))
@@ -66,7 +66,7 @@ export class FileUploadComponent {
           this.uploadProgress = Math.round(100 * (event.loaded / event.total));
         }
       });
-  } */
+  }
 
   cancelUpload() {
     this.reset();
