@@ -18,6 +18,7 @@
 
       <ksp-basic-institute-search
         formControlName="institution"
+        [bureaus]="bureaus$! | async"
         [searchType]="data.searchType"
       ></ksp-basic-institute-search>
 

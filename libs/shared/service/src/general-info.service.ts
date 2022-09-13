@@ -29,4 +29,10 @@ export class GeneralInfoService {
         shareReplay()
       );
   }
+  getBureau(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/kspmasterdata/bureau`).pipe(
+      map((data: any) => data.datareturn),
+      shareReplay()
+    );
+  }
 }
