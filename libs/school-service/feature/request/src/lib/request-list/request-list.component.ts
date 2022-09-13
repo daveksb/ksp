@@ -33,6 +33,7 @@ export class SchoolRequestListComponent implements OnInit {
     'approvedoc',
   ];
   dataSource = new MatTableDataSource<TempLicenseInfo>();
+  RequestProcessEnum = SchoolRequestProcess;
 
   constructor(
     private router: Router,
@@ -92,17 +93,19 @@ export class SchoolRequestListComponent implements OnInit {
     return result;
   }
 
-  checkProcess(input: string) {
-    if (input === 'creating') {
-      return SchoolRequestProcess.creating;
+  checkProcess(input: any) {
+    return SchoolRequestProcess[input];
+  }
+  /*     if (input === 'creating') {
+      return SchoolRequestProcess.กำลังสร้าง;
     } else if (input === 'created') {
-      return SchoolRequestProcess.created;
+      return SchoolRequestProcess.ยื่นใบคำขอ;
     } else if (input === 'proceeding') {
-      return SchoolRequestProcess.proceeding;
+      return SchoolRequestProcess.กำลังดำเนินการ;
     } else {
       return '';
     }
-  }
+  } */
 }
 
 export interface TempLicenseInfo {

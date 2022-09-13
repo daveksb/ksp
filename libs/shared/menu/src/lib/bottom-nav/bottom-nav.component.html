@@ -14,6 +14,7 @@
     <ng-container *ngIf="showCenterButtons">
       <button
         *ngIf="showCancelButton"
+        [disabled]="disableCancelButton"
         (click)="cancelClicked.emit(true)"
         type="button"
         class="btn"
