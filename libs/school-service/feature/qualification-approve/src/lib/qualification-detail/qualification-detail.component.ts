@@ -124,9 +124,9 @@ export class QualificationDetailComponent implements OnInit {
 
   onSave() {
     if (!this.form.get('userInfo')?.valid) return;
-    // if (!this.form.get('addr1')?.valid) return;
-    // if (!this.form.get('addr2')?.valid) return;
-    // if (!this.form.get('education')?.valid) return;
+    if (!this.form.get('addr1')?.valid) return;
+    if (!this.form.get('addr2')?.valid) return;
+    if (!this.form.get('education')?.valid) return;
     const confirmDialog = this.dialog.open(
       QualificationApproveDetailComponent,
       {
