@@ -3,12 +3,42 @@
   <div class="row">
     <div class="col-md-6 mb-3">
       <label class="form-label">สถานะปัจจุบัน</label>
-      <select formControlName="educationType" class="form-select">
-        <option selected hidden disabled value="null">กรุณาเลือก</option>
-        <option *ngFor="let edu of educationTypes" [value]="edu.value">
-          {{ edu.label }}
-        </option>
-      </select>
+
+      <ng-container *ngIf="educationType === 'teacher'">
+        <select formControlName="educationType" class="form-select">
+          <option selected hidden disabled value="null">กรุณาเลือก</option>
+          <option *ngFor="let edu of educationTypes1" [value]="edu.value">
+            {{ edu.label }}
+          </option>
+        </select></ng-container
+      >
+
+      <ng-container *ngIf="educationType === 'schManager'">
+        <select formControlName="educationType" class="form-select">
+          <option selected hidden disabled value="null">กรุณาเลือก</option>
+          <option *ngFor="let edu of educationTypes2" [value]="edu.value">
+            {{ edu.label }}
+          </option>
+        </select></ng-container
+      >
+
+      <ng-container *ngIf="educationType === 'eduManager'">
+        <select formControlName="educationType" class="form-select">
+          <option selected hidden disabled value="null">กรุณาเลือก</option>
+          <option *ngFor="let edu of educationTypes3" [value]="edu.value">
+            {{ edu.label }}
+          </option>
+        </select></ng-container
+      >
+
+      <ng-container *ngIf="educationType === 'supervision'">
+        <select formControlName="educationType" class="form-select">
+          <option selected hidden disabled value="null">กรุณาเลือก</option>
+          <option *ngFor="let edu of educationTypes4" [value]="edu.value">
+            {{ edu.label }}
+          </option>
+        </select></ng-container
+      >
     </div>
 
     <ng-container *ngIf="selectedEducationType === 0">

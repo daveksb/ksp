@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
 import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
@@ -15,6 +15,12 @@ export class StandardWorkingComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+  @Input() educationType:
+    | 'teacher'
+    | 'schManager'
+    | 'eduManager'
+    | 'supervision' = 'teacher';
+
   selectedEducationType!: number;
   workingInfo = ['1.รางวัลอื่นและประกาศเกียรติคุณ'];
 
@@ -23,7 +29,11 @@ export class StandardWorkingComponent
     educationLevelForm: [],
   });
 
-  educationTypes: ListData[] = [];
+  educationTypes1: ListData[] = [];
+  educationTypes2: ListData[] = [];
+  educationTypes3: ListData[] = [];
+  educationTypes4: ListData[] = [];
+
   @ViewChild(DynamicComponentDirective, { static: true })
   myHost!: DynamicComponentDirective;
 
@@ -39,7 +49,10 @@ export class StandardWorkingComponent
   }
 
   ngOnInit(): void {
-    this.educationTypes = educationTypes;
+    this.educationTypes1 = educationTypes1;
+    this.educationTypes2 = educationTypes2;
+    this.educationTypes3 = educationTypes3;
+    this.educationTypes4 = educationTypes4;
 
     this.form.controls['educationType'].valueChanges.subscribe((res) => {
       this.selectedEducationType = Number(res);
@@ -48,7 +61,7 @@ export class StandardWorkingComponent
   }
 }
 
-const educationTypes = [
+const educationTypes1 = [
   {
     value: 0,
     label: `ผู้ประกอบวิชาชีพครู`,
@@ -56,5 +69,38 @@ const educationTypes = [
   {
     value: 1,
     label: `ผู้มิได้ประกอบวิชาชีพครู`,
+  },
+];
+
+const educationTypes2 = [
+  {
+    value: 0,
+    label: `ผู้ประกอบวิชาชีพผู้บริหารสถานศึกษา`,
+  },
+  {
+    value: 1,
+    label: `ผู้มิได้ประกอบวิชาชีพผู้บริหารสถานศึกษา`,
+  },
+];
+
+const educationTypes3 = [
+  {
+    value: 0,
+    label: `ผู้ประกอบวิชาชีพผู้บริหารการศึกษา`,
+  },
+  {
+    value: 1,
+    label: `ผู้มิได้ประกอบวิชาชีพผู้บริหารการศึกษา`,
+  },
+];
+
+const educationTypes4 = [
+  {
+    value: 0,
+    label: `ผู้ประกอบวิชาชีพศึกษานิเทศก์`,
+  },
+  {
+    value: 1,
+    label: `ผู้มิได้ประกอบวิชาชีพศึกษานิเทศก์`,
   },
 ];
