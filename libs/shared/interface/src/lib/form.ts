@@ -60,6 +60,7 @@ export const defaultRequestPayload = {
   submissiondocno: null,
   subtype: null,
   systemtype: null,
+  teachinginfo: null,
   testresultcompareinfo: null,
   transferknowledgeinfo: null,
   uniquetimestamp: null,

@@ -137,7 +137,6 @@ export class TempLicenseRequestComponent implements OnInit {
       id: `${this.requestId}`,
       currentprocess: `${SchoolRequestProcess.ยกเลิก}`,
     };
-
     this.requestService.changeRequestProcess(payload).subscribe((res) => {
       //console.log('Cancel request  = ', res);
     });
@@ -154,7 +153,6 @@ export class TempLicenseRequestComponent implements OnInit {
     userInfo.ref3 = '1';
     userInfo.systemtype = '2';
     userInfo.requesttype = `${this.requestType}`;
-    //userInfo.birthdate = '2022-11-06T00:20:13';
 
     const teaching: any = this.form.controls.teachinginfo.value;
     let teachingInfo = {};
@@ -195,7 +193,6 @@ export class TempLicenseRequestComponent implements OnInit {
 
     const res = replaceEmptyWithNull(temp);
 
-    //res.subtype = 'test';
     res.id = `${this.requestId}`;
     res.schoolid = this.schoolId;
     if (type === 'submit') {
@@ -204,8 +201,9 @@ export class TempLicenseRequestComponent implements OnInit {
       res.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
     }
 
+    console.log('update payload = ', res);
     this.requestService.updateRequest(res).subscribe((res) => {
-      console.log('update result = ', res);
+      //console.log('update result = ', res);
       this.backToListPage();
     });
   }
@@ -509,6 +507,26 @@ export class TempLicenseRequestComponent implements OnInit {
 
   backToListPage() {
     this.router.navigate(['/temp-license', 'list']);
+  }
+
+  onCancelRequest() {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
+        subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
+        ใช่หรือไม่`,
+        btnLabel: 'บันทึก',
+      },
+    });
+
+    confirmDialog.componentInstance.confirmed
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res) {
+          this.onCompleted();
+        }
+      });
   }
 
   onConfirmed() {
