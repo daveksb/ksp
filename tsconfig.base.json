@@ -196,6 +196,9 @@
       "@ksp/shared/form/school/request-reward": [
         "libs/shared/form/school/request-reward/src/index.ts"
       ],
+      "@ksp/shared/form/self-activity-form": [
+        "libs/shared/form/self-activity-form/src/index.ts"
+      ],
       "@ksp/shared/form/self-reward-form": [
         "libs/shared/form/self-reward-form/src/index.ts"
       ],

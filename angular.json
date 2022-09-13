@@ -7413,6 +7413,32 @@
       },
       "tags": []
     },
+    "shared-form-self-activity-form": {
+      "projectType": "library",
+      "root": "libs/shared/form/self-activity-form",
+      "sourceRoot": "libs/shared/form/self-activity-form/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/form/self-activity-form"],
+          "options": {
+            "jestConfig": "libs/shared/form/self-activity-form/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/form/self-activity-form/**/*.ts",
+              "libs/shared/form/self-activity-form/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "shared-form-self-reward-form": {
       "projectType": "library",
       "root": "libs/shared/form/self-reward-form",
@@ -9724,8 +9750,5 @@
       ]
     }
   },
-  "version": 1,
-  "cli": {
-    "analytics": false
-  }
+  "version": 1
 }
