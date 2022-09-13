@@ -14,7 +14,7 @@ export class FormEducationInfoComponent
   implements OnInit
 {
   override form = this.fb.group({
-    id: [],
+    //id: [],
     degreeLevel: [null, Validators.required],
     degreeName: [null, Validators.required],
     isEducationDegree: [],

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { RequestProcess } from '@ksp/shared/constant';
+import { SchoolRequestProcess } from '@ksp/shared/constant';
 import { RequestLicenseService, TempLicenseService } from '@ksp/shared/service';
 import { replaceEmptyWithNull } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
@@ -33,6 +33,7 @@ export class SchoolRequestListComponent implements OnInit {
     'approvedoc',
   ];
   dataSource = new MatTableDataSource<TempLicenseInfo>();
+  RequestProcessEnum = SchoolRequestProcess;
 
   constructor(
     private router: Router,
@@ -92,15 +93,19 @@ export class SchoolRequestListComponent implements OnInit {
     return result;
   }
 
-  checkProcess(input: number) {
-    let result = '-';
-    if (input === RequestProcess.บันทึกชั่วคราว) {
-      result = RequestProcess[RequestProcess.บันทึกชั่วคราว];
-    } else if (input === RequestProcess.ยื่นใบคำขอ) {
-      result = RequestProcess[RequestProcess.ยื่นใบคำขอ];
-    }
-    return result;
+  checkProcess(input: any) {
+    return SchoolRequestProcess[input];
   }
+  /*     if (input === 'creating') {
+      return SchoolRequestProcess.กำลังสร้าง;
+    } else if (input === 'created') {
+      return SchoolRequestProcess.ยื่นใบคำขอ;
+    } else if (input === 'proceeding') {
+      return SchoolRequestProcess.กำลังดำเนินการ;
+    } else {
+      return '';
+    }
+  } */
 }
 
 export interface TempLicenseInfo {

@@ -7,9 +7,9 @@
       *ngIf="
         !(
           displayMode ===
-            RequestType['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ'] ||
+            RequestTypeEnum['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ'] ||
           displayMode ===
-            RequestType[
+            RequestTypeEnum[
               'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)'
             ]
         )
@@ -34,7 +34,7 @@
     <div
       class="col"
       [ngClass]="{
-        hide: displayMode !== RequestType['ขอหนังสือรับรองคุณวุฒิ']
+        hide: displayMode !== RequestTypeEnum['ขอหนังสือรับรองคุณวุฒิ']
       }"
     >
       <label class="form-label">ประเภทการยื่น</label>
@@ -50,7 +50,7 @@
     <div
       class="col"
       [ngClass]="{
-        hide: displayMode === RequestType['ขอหนังสือรับรองคุณวุฒิ']
+        hide: displayMode === RequestTypeEnum['ขอหนังสือรับรองคุณวุฒิ']
       }"
     >
       <label class="form-label">หมายเลขหนังสือเดินทาง (Passport Number) </label>
@@ -69,7 +69,7 @@
       [ngClass]="{
         hide:
           displayMode !==
-          RequestType[
+          RequestTypeEnum[
             'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)'
           ]
       }"
@@ -88,7 +88,7 @@
       [ngClass]="{
         hide:
           displayMode !==
-          RequestType[
+          RequestTypeEnum[
             'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)'
           ]
       }"
@@ -141,11 +141,11 @@
       class="col-md"
       *ngIf="
         displayMode ===
-          RequestType[
+          RequestTypeEnum[
             'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)'
           ] ||
         displayMode ===
-          RequestType['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ']
+          RequestTypeEnum['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ']
       "
     >
       <label class="form-label required">ชื่อกลาง</label>
@@ -214,11 +214,11 @@
       class="col-md"
       *ngIf="
         displayMode ===
-          RequestType[
+          RequestTypeEnum[
             'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)'
           ] ||
         displayMode ===
-          RequestType['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ']
+          RequestTypeEnum['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ']
       "
     >
       <label class="form-label required">ชื่อกลาง</label>
@@ -254,7 +254,7 @@
       class="col-md-6"
       *ngIf="
         displayMode !==
-        RequestType['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ']
+        RequestTypeEnum['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ']
       "
     >
       <label class="form-label required">เพศ</label>
@@ -283,7 +283,7 @@
       class="col"
       *ngIf="
         displayMode ===
-        RequestType['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ']
+        RequestTypeEnum['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ']
       "
     >
       <label class="form-label required">ประเทศ</label>
@@ -300,10 +300,10 @@
       class="col"
       *ngIf="
         displayMode ===
-        RequestType['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ']
+        RequestTypeEnum['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ']
       "
     >
-      <label class="form-label required">สัญชาติ</label>
+      <label class="form-label">สัญชาติ</label>
       <select
         [class.bg-white]="!isDarkMode && mode === 'edit'"
         class="form-select"
@@ -323,7 +323,8 @@
   <div
     class="row mb-2"
     *ngIf="
-      displayMode !== RequestType['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ']
+      displayMode !==
+      RequestTypeEnum['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ']
     "
   >
     <div class="col-md-6">
@@ -422,7 +423,7 @@
 
   <div
     class="row mb-2"
-    *ngIf="displayMode === RequestType['ขอหนังสือรับรองคุณวุฒิ']"
+    *ngIf="displayMode === RequestTypeEnum['ขอหนังสือรับรองคุณวุฒิ']"
   >
     <div class="col-6">
       <label class="form-label required">สัญชาติ</label>

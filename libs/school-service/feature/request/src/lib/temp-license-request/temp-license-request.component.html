@@ -96,32 +96,28 @@
         </mat-tab>
 
         <mat-tab label="ข้อมูลทางการศึกษา">
-          <ng-container *ngIf="requestType === 1">
-            <ksp-form-education-info
-              formControlName="edu1"
-              [showGradeInput]="true"
-              [countries]="countries$ | async"
-            >
-              วุฒิการศึกษาปริญญาตรี </ksp-form-education-info
-            ><br
-          /></ng-container>
+          <ksp-form-education-info
+            formControlName="edu1"
+            [showGradeInput]="true"
+            [showSelectDegree]="true"
+            [countries]="countries$ | async"
+          >
+          </ksp-form-education-info>
 
-          <ng-container *ngIf="requestType === 1">
-            <ksp-form-education-info
-              formControlName="edu2"
-              [showGradeInput]="false"
-              [showPropertyInput]="true"
-              [countries]="countries$ | async"
-            >
-              วุฒิการศึกษาปริญญาโท </ksp-form-education-info
-            ><br
-          /></ng-container>
+          <ksp-form-education-info
+            formControlName="edu2"
+            [showGradeInput]="false"
+            [showSelectDegree]="true"
+            [showPropertyInput]="true"
+            [countries]="countries$ | async"
+          >
+          </ksp-form-education-info>
 
           <!--           <ksp-form-education-info-manager
             *ngIf="requestType === 2 || requestType === 3"
             formControlName="edu3"
           ></ksp-form-education-info-manager> -->
-          <br />
+
           <ksp-form-attachment [groups]="eduFiles"></ksp-form-attachment>
         </mat-tab>
 
@@ -180,14 +176,16 @@
 
 <div class="sticky-bottom border">
   <ksp-bottom-nav
-    (saveClicked)="save()"
-    (cancelClicked)="backToListPage()"
-    (tempSaveClicked)="createRequest('tempSave')"
+    (saveClicked)="submitRequest()"
+    (cancelClicked)="cancelRequest()"
+    (tempSaveClicked)="tempSave()"
     [isFirstPage]="true"
     [colorMode]="'green'"
     [isLastPage]="true"
     [showCenterButtons]="true"
-    [showCancelButton]="true"
+    [cancelButtonLabel]="'ยกเลิกใบคำขอ'"
+    [showCancelButton]="requestId > 0"
+    [disableCancelButton]="disableCancel"
     [showTempSaveButton]="true"
     [disableTempSaveButton]="disableTempSave"
     [showSaveButton]="true"

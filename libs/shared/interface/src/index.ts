@@ -9,4 +9,3 @@ export * from './lib/degree-cert-process-type';
 export * from './lib/ksp-form-base.component';
 export * from './lib/uni-service-import-type';
 export * from './lib/institute-type';
-export * from './lib/school-request-type';
