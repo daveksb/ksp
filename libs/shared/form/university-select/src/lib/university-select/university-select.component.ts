@@ -49,10 +49,9 @@ export class UniversitySelectComponent extends KspFormBaseComponent {
         searchType: this.searchType,
       },
     });
-
-    dialog.componentInstance.confirmed.subscribe((res) => {
+    dialog.afterClosed().subscribe((res) => {
       if (res) {
-        this.selectedUniversity.emit('testScool');
+        this.selectedUniversity.emit(res);
       }
     });
   }

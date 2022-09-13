@@ -56,4 +56,9 @@ export class RequestLicenseService {
       .post(`${environment.apiUrl}/kspstaff/schrequestfileselectbyid`, payload)
       .pipe(shareReplay());
   }
+  getActiveUserSchool(payload: any): Observable<any> {
+    return this.http
+      .post(`${environment.apiUrl}/kspstaff/schschoolselect`, payload)
+      .pipe(shareReplay());
+  }
 }

@@ -26,7 +26,7 @@ export const routes: Routes = [
     component: RegisterCurrentUserComponent,
   },
   {
-    path: 'requester',
+    path: 'requester/:schoolid',
     component: RegisterRequesterComponent,
   },
   {

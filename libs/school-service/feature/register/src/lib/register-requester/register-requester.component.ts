@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import {
+  AddressService,
+  GeneralInfoService,
+  RequestLicenseService,
+} from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { switchMap } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -19,16 +25,51 @@ export class RegisterRequesterComponent implements OnInit {
     grant5: [false],
     requester: [],
   });
-
-  constructor(private fb: FormBuilder, public router: Router) {}
-
+  constructor(
+    private fb: FormBuilder,
+    public router: Router,
+    private generalInfoService: GeneralInfoService,
+    private addressService: AddressService,
+    private requestLicenseService: RequestLicenseService,
+    private route: ActivatedRoute
+  ) {}
   ngOnInit(): void {
-    /* this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
+    this
+      .router; /* this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
       console.log('form valid  = ', this.form);
     }); */
-    console.log(' ');
+    // this.getList();
+    this.checkRequestId();
   }
-
+  checkRequestId() {
+    this.route.paramMap
+      .pipe(
+        switchMap((params: any) => {
+          const schoolid = params.get('id');
+          return this.requestLicenseService
+            .getSchoolInfo(schoolid)
+            .pipe(untilDestroyed(this));
+        })
+      )
+      .subscribe((res) => console.log(res));
+  }
+  // getList() {
+  //   this.requestLicenseService
+  //     .getSchoolInfo(this.schoolId)
+  //     .pipe(untilDestroyed(this))
+  //     .subscribe((res: any) => {
+  //       this.schoolName = res.schoolName;
+  //       this.bureauName = res.bureauName;
+  //       this.address = `บ้านเลขที่ ${res.address} ซอย ${
+  //         res?.street ?? ''
+  //       } หมู่ ${res?.moo ?? ''} ถนน ${res?.road ?? ''} ตำบล ${
+  //         res.tumbon
+  //       } อำเภอ ${res.amphurName} จังหวัด ${res.provinceName}`;
+  //     });
+  //   this.countries$ = this.addressService.getCountry();
+  //   this.prefixList$ = this.generalInfoService.getPrefix();
+  //   this.visaTypeList$ = this.generalInfoService.getVisaType();
+  // }
   next() {
     this.router.navigate(['/register', 'coordinator']);
   }

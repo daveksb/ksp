@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RequestLicenseService } from '@ksp/shared/service';
 
 @Component({
   templateUrl: './register-current-user.component.html',
@@ -11,16 +12,29 @@ export class RegisterCurrentUserComponent {
     selectUniversity: [],
   });
  */
-
-  selectedUniversity = '';
-
-  constructor(public router: Router, private fb: FormBuilder) {}
+  activeUser = '';
+  schoolid = '';
+  constructor(
+    public router: Router,
+    private fb: FormBuilder,
+    private requestLicenseService: RequestLicenseService
+  ) {}
 
   next() {
-    this.router.navigate(['/register', 'requester']);
+    this.router.navigate(['/register', 'requester', this.schoolid]);
   }
 
   back() {
     this.router.navigate(['/login']);
+  }
+  selectedUniversity(schoolid: any) {
+    this.schoolid = schoolid;
+    this.requestLicenseService
+      .getActiveUserSchool({ schoolid })
+      .subscribe((res) => {
+        if (res?.returncode == 98) {
+          if (res?.returnmessage == 'no data') this.next();
+        }
+      });
   }
 }
