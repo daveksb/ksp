@@ -7465,6 +7465,34 @@
       },
       "tags": []
     },
+    "shared-form-self-renew-license-property-form": {
+      "projectType": "library",
+      "root": "libs/shared/form/self-renew-license-property-form",
+      "sourceRoot": "libs/shared/form/self-renew-license-property-form/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/shared/form/self-renew-license-property-form"
+          ],
+          "options": {
+            "jestConfig": "libs/shared/form/self-renew-license-property-form/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/form/self-renew-license-property-form/**/*.ts",
+              "libs/shared/form/self-renew-license-property-form/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "shared-form-self-reward-form": {
       "projectType": "library",
       "root": "libs/shared/form/self-reward-form",

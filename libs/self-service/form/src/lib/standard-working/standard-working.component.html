@@ -43,17 +43,13 @@
 
     <ng-container *ngIf="selectedEducationType === 0">
       <self-service-standard-working-teacher>
-      </self-service-standard-working-teacher
-    ></ng-container>
-
-    <ng-container *ngIf="selectedEducationType === 0">
+      </self-service-standard-working-teacher>
       <div class="mt-3">
         <ksp-form-attachment
           [groups]="workingInfo"
           [mode]="'edit'"
-        ></ksp-form-attachment>
-      </div>
-    </ng-container>
+        ></ksp-form-attachment></div
+    ></ng-container>
   </div>
   <ng-container *ngIf="selectedEducationType === 1">
     <self-service-standard-working-non-teacher></self-service-standard-working-non-teacher

@@ -200,6 +200,9 @@
       "@ksp/shared/form/self-activity-form": [
         "libs/shared/form/self-activity-form/src/index.ts"
       ],
+      "@ksp/shared/form/self-renew-license-property-form": [
+        "libs/shared/form/self-renew-license-property-form/src/index.ts"
+      ],
       "@ksp/shared/form/self-reward-form": [
         "libs/shared/form/self-reward-form/src/index.ts"
       ],

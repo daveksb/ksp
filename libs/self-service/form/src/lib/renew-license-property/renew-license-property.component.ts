@@ -1,41 +1,30 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { DynamicComponentDirective } from '@ksp/shared/directive';
 import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
-import { skip } from 'rxjs';
 
 @Component({
-  selector: 'self-service-standard-working',
-  templateUrl: './standard-working.component.html',
-  styleUrls: ['./standard-working.component.scss'],
-  providers: providerFactory(StandardWorkingComponent),
+  selector: 'self-service-renew-license-property',
+  templateUrl: './renew-license-property.component.html',
+  styleUrls: ['./renew-license-property.component.scss'],
+  providers: providerFactory(RenewLicensePropertyComponent),
 })
-export class StandardWorkingComponent
+export class RenewLicensePropertyComponent
   extends KspFormBaseComponent
   implements OnInit
 {
-  @Input() educationType:
-    | 'teacher'
-    | 'schManager'
-    | 'eduManager'
-    | 'supervision' = 'teacher';
+  @Input() renewLicenseTypes: 'schManager' | 'eduManager' | 'supervision' =
+    'schManager';
 
   selectedEducationType!: number;
-  workingInfo = ['1.รางวัลอื่นและประกาศเกียรติคุณ'];
 
   override form = this.fb.group({
     educationType: [],
-    educationLevelForm: [],
   });
 
   educationTypes1: ListData[] = [];
   educationTypes2: ListData[] = [];
   educationTypes3: ListData[] = [];
-  educationTypes4: ListData[] = [];
-
-  /* @ViewChild(DynamicComponentDirective, { static: true })
-  myHost!: DynamicComponentDirective; */
 
   constructor(private fb: FormBuilder) {
     super();
@@ -52,7 +41,6 @@ export class StandardWorkingComponent
     this.educationTypes1 = educationTypes1;
     this.educationTypes2 = educationTypes2;
     this.educationTypes3 = educationTypes3;
-    this.educationTypes4 = educationTypes4;
 
     this.form.controls['educationType'].valueChanges.subscribe((res) => {
       this.selectedEducationType = Number(res);
@@ -64,17 +52,6 @@ export class StandardWorkingComponent
 const educationTypes1 = [
   {
     value: 0,
-    label: `ผู้ประกอบวิชาชีพครู`,
-  },
-  {
-    value: 1,
-    label: `ผู้มิได้ประกอบวิชาชีพครู`,
-  },
-];
-
-const educationTypes2 = [
-  {
-    value: 0,
     label: `ผู้ประกอบวิชาชีพผู้บริหารสถานศึกษา`,
   },
   {
@@ -83,7 +60,7 @@ const educationTypes2 = [
   },
 ];
 
-const educationTypes3 = [
+const educationTypes2 = [
   {
     value: 0,
     label: `ผู้ประกอบวิชาชีพผู้บริหารการศึกษา`,
@@ -94,7 +71,7 @@ const educationTypes3 = [
   },
 ];
 
-const educationTypes4 = [
+const educationTypes3 = [
   {
     value: 0,
     label: `ผู้ประกอบวิชาชีพศึกษานิเทศก์`,

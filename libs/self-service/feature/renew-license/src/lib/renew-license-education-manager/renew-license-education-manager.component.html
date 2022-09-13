@@ -1,7 +1,9 @@
 <ksp-top-nav><span header>ใบคำขอต่ออายุใบประกอบวิชาชีพ</span></ksp-top-nav>
 
 <div class="main__container px-4 py-2">
-  <self-service-request-status [headers]="headerGroup"></self-service-request-status>
+  <self-service-request-status
+    [headers]="headerGroup"
+  ></self-service-request-status>
 
   <div class="d-flex my-4">
     <div class="detail__container bg-white w-25 me-1">
@@ -52,7 +54,11 @@
       </div>
     </mat-tab>
 
-    <mat-tab label="ข้อมูลคุณสมบัติของผู้ขอต่ออายุใบอนุญาต"> </mat-tab>
+    <mat-tab label="ข้อมูลคุณสมบัติของผู้ขอต่ออายุใบอนุญาต">
+      <self-service-renew-license-property
+        [renewLicenseTypes]="'eduManager'"
+      ></self-service-renew-license-property>
+    </mat-tab>
 
     <mat-tab label="ผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน"
       ><self-service-standard-working

@@ -37,6 +37,10 @@ import { TransferKnowledgeEducationComponent } from './transfer-knowledge-educat
 import { SchoolServiceFormActivityModule } from '@ksp/school-service/form/activity';
 import { CompareKnowledgeEducationComponent } from './compare-knowledge-education/compare-knowledge-education.component';
 import { CompareKnowledgeInfoComponent } from './compare-knowledge-info/compare-knowledge-info.component';
+import { RenewLicensePropertyComponent } from './renew-license-property/renew-license-property.component';
+import { SharedFormSelfRenewLicensePropertyFormModule } from '@ksp/shared/form/self-renew-license-property-form';
+import { RenewLicensePropertySupervisionComponent } from './renew-license-property-supervision/renew-license-property-supervision.component';
+import { RenewLicensePropertyManagerComponent } from './renew-license-property-manager/renew-license-property-manager.component';
 
 @NgModule({
   imports: [
@@ -61,6 +65,7 @@ import { CompareKnowledgeInfoComponent } from './compare-knowledge-info/compare-
     FileUploadComponent,
     AddRowButtonComponent,
     SchoolServiceFormActivityModule,
+    SharedFormSelfRenewLicensePropertyFormModule,
   ],
   declarations: [
     FormUserEducationComponent,
@@ -80,6 +85,9 @@ import { CompareKnowledgeInfoComponent } from './compare-knowledge-info/compare-
     TransferKnowledgeEducationComponent,
     CompareKnowledgeEducationComponent,
     CompareKnowledgeInfoComponent,
+    RenewLicensePropertyComponent,
+    RenewLicensePropertySupervisionComponent,
+    RenewLicensePropertyManagerComponent,
   ],
   exports: [
     FormUserEducationComponent,
@@ -99,6 +107,9 @@ import { CompareKnowledgeInfoComponent } from './compare-knowledge-info/compare-
     TransferKnowledgeEducationComponent,
     CompareKnowledgeEducationComponent,
     CompareKnowledgeInfoComponent,
+    RenewLicensePropertyComponent,
+    RenewLicensePropertySupervisionComponent,
+    RenewLicensePropertyManagerComponent,
   ],
 })
 export class SelfServiceFormModule {}
