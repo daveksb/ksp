@@ -25,8 +25,8 @@ export class EServiceLoginComponent {
       if (res.returnCode == 99) return;
       this.loginService.config = res;
       setCookie('userToken', res.schUserToken, 1);
-      setCookie('eFirstName', res.firstNameTh, 1);
-      setCookie('eLastName', res.lastNameTh, 1);
+      setCookie('firstNameTh', res.firstNameTh, 1);
+      setCookie('lastNameTh', res.lastNameTh, 1);
       this.router.navigate(['/landing']);
     });
   }

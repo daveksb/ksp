@@ -6,6 +6,8 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { RequestLicenseService } from '@ksp/shared/service';
+import { thaiDate } from '@ksp/shared/utility';
 
 @Component({
   templateUrl: './user-detail.component.html',
@@ -28,11 +30,17 @@ export class UserDetailComponent implements OnInit {
     ],
   ];
 
+  requestId!: number;
+  requestData!: any;
+
+  //thaiDate = thaiDate(new Date());
+
   pageType = 0;
   constructor(
     private router: Router,
     public dialog: MatDialog,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private requestService: RequestLicenseService
   ) {}
 
   ngOnInit(): void {
@@ -42,11 +50,31 @@ export class UserDetailComponent implements OnInit {
     });
   }
 
+  checkRequestId() {
+    this.route.paramMap.subscribe((params) => {
+      this.requestId = Number(params.get('id'));
+      if (this.requestId) {
+        this.loadRequestFromId(this.requestId);
+      }
+    });
+  }
+
+  loadRequestFromId(id: number) {
+    this.requestService.getRequestById(id).subscribe((res: any) => {
+      this.requestData = res;
+      //this.requestNo = res.requestno;
+      //this.currentProcess = +res.currentprocess;
+      //console.log('current process = ', this.currentProcess);
+
+      //this.pathUserInfo(res);
+    });
+  }
+
   cancel() {
     if (this.pageType === SchoolServiceUserPageType.ApproveNewUser) {
-      this.router.navigate(['/', 'approve-new-user']);
+      this.router.navigate(['/approve-new-user']);
     } else if (this.pageType === SchoolServiceUserPageType.ManageCurrentUser) {
-      this.router.navigate(['/', 'manage-current-user']);
+      this.router.navigate(['/manage-current-user']);
     }
   }
 
@@ -78,11 +106,11 @@ export class UserDetailComponent implements OnInit {
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
         if (this.pageType === SchoolServiceUserPageType.ApproveNewUser) {
-          this.router.navigate(['/', 'approve-new-user', 'list']);
+          this.router.navigate(['/approve-new-user', 'list']);
         } else if (
           this.pageType === SchoolServiceUserPageType.ManageCurrentUser
         ) {
-          this.router.navigate(['/', 'manage-current-user', 'list']);
+          this.router.navigate(['/manage-current-user', 'list']);
         }
       }
     });

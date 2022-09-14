@@ -4,7 +4,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SchoolServiceUserPageType } from '@ksp/shared/interface';
 import { RequestLicenseService } from '@ksp/shared/service';
-import { replaceEmptyWithNull } from '@ksp/shared/utility';
 
 @Component({
   templateUrl: './approve-new-user-list.component.html',
@@ -27,7 +26,6 @@ export class ApproveNewUserListComponent {
   selectedUniversity = '';
 
   search(params: any) {
-    //const payload = replaceEmptyWithNull(params);
     //console.log('params = ', params);
     const payload = {
       currentprocess: null,
@@ -51,11 +49,10 @@ export class ApproveNewUserListComponent {
 
   onItemChange(universityCode: string) {
     this.selectedUniversity = universityCode;
-    //console.log('universityCode = ', universityCode);
   }
 
-  goToDetail() {
-    this.router.navigate(['approve-new-user', 'detail'], {
+  goToDetail(id: number) {
+    this.router.navigate(['approve-new-user', 'detail', id], {
       queryParams: { type: SchoolServiceUserPageType.ApproveNewUser },
     });
   }

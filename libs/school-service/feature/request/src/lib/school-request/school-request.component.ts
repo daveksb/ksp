@@ -276,7 +276,7 @@ export class SchoolRequestComponent implements OnInit {
       payload.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
     }
 
-    console.log('payload = ', payload);
+    //console.log('payload = ', payload);
 
     baseForm.patchValue(payload);
     //console.log('current form = ', baseForm.value);
