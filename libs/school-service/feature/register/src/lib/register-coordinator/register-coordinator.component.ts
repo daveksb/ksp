@@ -96,7 +96,7 @@ export class CoordinatorInfoComponent implements OnInit {
             payload.ref2 = '01';
             payload.ref3 = '1';
             payload.systemtype = '2';
-            payload.requesttype = '01';
+            payload.requesttype = '1';
             return this.requestLicenseService.requestLicense(payload);
           }
           return EMPTY;

@@ -17,7 +17,7 @@ export class TopNavComponent {
   lastName = getCookie('lastNameTh');
   constructor(private router: Router) {}
   logout() {
-    deleteCookie('schUserToken');
+    deleteCookie('userToken');
     this.router.navigate(['/']);
   }
 }

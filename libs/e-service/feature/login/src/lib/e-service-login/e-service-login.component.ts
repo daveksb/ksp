@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { setCookie } from '@ksp/shared/utility';
+import { EServiceLoginService } from './e-service-login.service';
 
 @Component({
   selector: 'ksp-e-service-login',
@@ -7,9 +10,24 @@ import { Router } from '@angular/router';
   styleUrls: ['./e-service-login.component.scss'],
 })
 export class EServiceLoginComponent {
-  constructor(private router: Router) {}
+  form = this.fb.group({
+    user: [],
+  });
+
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private loginService: EServiceLoginService
+  ) {}
 
   login() {
-    this.router.navigate(['/landing']);
+    this.loginService.validateLogin(this.form.value.user).subscribe((res) => {
+      if (res.returnCode == 99) return;
+      this.loginService.config = res;
+      setCookie('userToken', res.schUserToken, 1);
+      setCookie('eFirstName', res.firstNameTh, 1);
+      setCookie('eLastName', res.lastNameTh, 1);
+      this.router.navigate(['/landing']);
+    });
   }
 }
