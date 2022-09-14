@@ -26,7 +26,7 @@
         [schoolName]="school?.schoolName"
       ></ksp-university-select>
 
-      <div class="mx-4 mt-3">
+      <div class="bg-light px-4 py-3 my-4">
         <div class="text-primary box-header">
           ข้อมูลผู้ขอรหัสสำหรับเข้าใช้งานระบบ
         </div>
@@ -39,15 +39,14 @@
           [nationalitys]="nationalitys$ | async"
           [displayMode]="userInfoFormdisplayMode"
         ></ksp-form-user-info>
-
-        <ksp-bottom-nav
-          [isFirstPage]="true"
-          [disableNext]="!form.valid"
-          [disableNextMessage]="'กรุณากรอกข้อมูลให้ครบถ้วน'"
-          (nextClicked)="next()"
-          [showCenterButtons]="false"
-        ></ksp-bottom-nav>
       </div>
+      <ksp-bottom-nav
+        [disableNext]="!form.valid"
+        [disableNextMessage]="'กรุณากรอกข้อมูลให้ครบถ้วน'"
+        (nextClicked)="next()"
+        (prevClicked)="prevPage()"
+        [showCenterButtons]="false"
+      ></ksp-bottom-nav>
     </div>
   </div>
 </form>

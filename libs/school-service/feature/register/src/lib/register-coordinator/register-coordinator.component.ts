@@ -64,8 +64,37 @@ export class CoordinatorInfoComponent implements OnInit {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.nationalitys$ = this.generalInfoService.getNationality();
   }
-  navigateBack() {
-    this.router.navigate(['login']);
+
+  cancel() {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: `คุณต้องการยกเลิกรายการใบคำขอ
+        ใช่หรือไม่?`,
+        btnLabel: 'ยืนยัน',
+      },
+    });
+
+    dialogRef.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.onConfirmed();
+      }
+    });
+  }
+
+  onConfirmed() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      width: '350px',
+      data: {
+        header: 'ยกเลิกรายการสำเร็จ',
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/', 'login']);
+      }
+    });
   }
 
   back() {
@@ -126,7 +155,7 @@ export class CoordinatorInfoComponent implements OnInit {
       if (res) {
         localForage.removeItem('registerSelectedSchool');
         localForage.removeItem('registerUserInfoFormValue');
-        this.navigateBack();
+        this.router.navigate(['/', 'login']);
       }
     });
   }

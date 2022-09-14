@@ -87,6 +87,10 @@ export class RegisterRequesterComponent implements OnInit {
       state: { data: userInfo },
     }); */
   }
+
+  prevPage() {
+    this.router.navigate(['/', 'register', 'current-user']);
+  }
 }
 export const grants = [
   {
