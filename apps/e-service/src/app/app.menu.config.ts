@@ -1,5 +1,4 @@
-import { DegreeCertProcessType } from '@ksp/shared/interface';
-import { MenuConfig } from '@ksp/shared/menu';
+import { DegreeCertProcessType, MenuConfig } from '@ksp/shared/interface';
 
 export const ethicsMenu: MenuConfig[] = [
   {

@@ -9,12 +9,10 @@ import {
 } from '@ksp/shared/dialog';
 import { FormMode } from '@ksp/shared/interface';
 import { GeneralInfoService, RequestLicenseService } from '@ksp/shared/service';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { EMPTY, Observable, switchMap } from 'rxjs';
 import localForage from 'localforage';
 import { thaiDate } from '@ksp/shared/utility';
 
-@UntilDestroy()
 @Component({
   templateUrl: './register-coordinator.component.html',
   styleUrls: ['./register-coordinator.component.scss'],
