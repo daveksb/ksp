@@ -23,7 +23,17 @@ export class CoordinatorInfoComponent implements OnInit {
     coordinator: [],
   });
   savingData: any;
-  uploadFileList = ['หนังสือแต่งตั้งผู้ประสานงาน', 'สำเนาบัตรประชาชน'];
+  uploadFileList = [
+    {
+      name: 'หนังสือแต่งตั้งผู้ประสานงาน',
+      fileId: '',
+    },
+    {
+      name: 'สำเนาบัตรประชาชน',
+      fileId: '',
+    },
+  ];
+
   prefixList$!: Observable<any>;
   nationalitys$!: Observable<any>;
   mode: FormMode = 'edit';
@@ -70,7 +80,7 @@ export class CoordinatorInfoComponent implements OnInit {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
         subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
         ใช่หรือไม่`,
-        schoolCode: 'รหัสเข้าใช้งาน(รหัสโรงเรียน): xxxx',
+        schoolCode: `รหัสเข้าใช้งาน(รหัสโรงเรียน): ${this.school?.schoolId}`,
         btnLabel: 'บันทึก',
       },
     });

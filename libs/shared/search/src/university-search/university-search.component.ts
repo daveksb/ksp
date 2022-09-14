@@ -40,7 +40,7 @@ export class UniversitySearchComponent implements OnInit {
     provinceid: null,
     amphurid: null,
     offset: '0',
-    row: '25',
+    row: '20',
   });
   Data: any[] = [];
   currentPage!: number;
@@ -91,7 +91,6 @@ export class UniversitySearchComponent implements OnInit {
       this.Data = this.generateAddressShow(res);
       this.payload = payload;
     });
-    // this.Data = data;
   }
   generateAddressShow(res: any[]) {
     res.forEach((item: any) => {
@@ -117,6 +116,7 @@ export class UniversitySearchComponent implements OnInit {
 
   clear() {
     this.Data = [];
+    this.form.reset();
   }
   provinceChange(evt: any) {
     const province = evt.target?.value;
