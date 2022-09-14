@@ -19,7 +19,6 @@
           <thead style="background-color: #edf6ff">
             <tr>
               <th>เลือก</th>
-              <th>สิทธิ์สำหรับการเข้าใช้งาน</th>
               <th>ชื่อ-นามสกุล</th>
               <th>เบอร์โทรศัพท์</th>
             </tr>
@@ -29,13 +28,11 @@
               <td>
                 <input
                   class="form-check-input"
-                  type="radio"
+                  type="checkbox"
                   formControlName="userSelect"
-                  value="{{ item.value }}"
                   (change)="onItemChange(item.retiredName)"
                 />
               </td>
-              <td>{{ item.retiredRole }}</td>
               <td>{{ item.retiredName }}</td>
               <td>{{ item.retiredPhone }}</td>
             </tr>
@@ -43,6 +40,13 @@
         </table>
 
         <div class="py-2 d-flex justify-content-center">
+          <button
+            type="button"
+            (click)="cancel()"
+            class="btn border-primary text-primary me-2"
+          >
+            ยกเลิก
+          </button>
           <button
             class="btn btn-primary"
             type="button"

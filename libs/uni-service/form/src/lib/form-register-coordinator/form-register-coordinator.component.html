@@ -5,7 +5,9 @@
     </div>
     <div class="row mb-3">
       <div class="col-2">
-        <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
+        <label class="form-label"
+          >คำนำหน้าชื่อภาษาไทย <span class="fs-6 text-danger">*</span></label
+        >
         <select class="form-select" formControlName="prefixTh">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">One</option>
@@ -14,11 +16,15 @@
         </select>
       </div>
       <div class="col-5">
-        <label class="form-label">ชื่อภาษาไทย</label>
+        <label class="form-label"
+          >ชื่อภาษาไทย <span class="fs-6 text-danger">*</span></label
+        >
         <input class="form-control" type="text" formControlName="firstnameTh" />
       </div>
       <div class="col-5">
-        <label class="form-label">นามสกุลภาษาไทย</label>
+        <label class="form-label"
+          >นามสกุลภาษาไทย <span class="fs-6 text-danger">*</span></label
+        >
         <input class="form-control" type="text" formControlName="lastnameTh" />
       </div>
     </div>
