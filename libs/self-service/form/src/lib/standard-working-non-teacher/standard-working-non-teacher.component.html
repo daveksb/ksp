@@ -1,7 +1,7 @@
 <form [formGroup]="form">
   <div class="text-black mb-2">
     กิจกรรมการปฏิบัติงาน<span class="text-danger fs-6">
-      * กรุณาเลือกกิจกรรมและกรอกรายละเอียด ไม่น้อยกว่า 3 กิจกรรม</span
+      * กรุณาเลือกกิจกรรมและกรอกรายละเอียด เพียง 1 ข้อ</span
     >
   </div>
 
@@ -11,8 +11,10 @@
       >ผ่านการอบรมความรู้มาตรฐานวิชาชีพและจรรยาบรรณของวิชาชีพที่คณะกรรมการคุรุสภากำหนด</label
     >
   </div>
-  <div class="bg-secondary bg-opacity-10 px-3 py-2 my-3" *ngIf="activity1">
-    <ksp-standard-train-pass></ksp-standard-train-pass>
+  <div class="bg-light px-3 py-2 my-2" *ngIf="activity1">
+    <ksp-standard-train-pass
+      formControlName="trainInfo"
+    ></ksp-standard-train-pass>
   </div>
 
   <div class="d-flex align-items-center">
@@ -21,8 +23,8 @@
       >ผ่านการทดสอบความรู้มาตรฐานวิชาชีพและจรรยาบรรณของวิชาชีพที่คณะกรรมการคุรุสภากำหนด</label
     >
   </div>
-  <div class="bg-secondary bg-opacity-10 px-3 py-2 my-3" *ngIf="activity2">
-    <ksp-standard-test-pass></ksp-standard-test-pass>
+  <div class="bg-light px-3 py-2 my-2" *ngIf="activity2">
+    <ksp-standard-test-pass formControlName="testInfo"></ksp-standard-test-pass>
   </div>
 
   <div class="d-flex align-items-center">

@@ -108,7 +108,7 @@ export const menu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ประวัติการชำระเงินและใบเสร็จรับเงิน',
+    label: 'ประวัติการชำระเงิน',
     path: 'my-info/payment-history',
   },
 ];
