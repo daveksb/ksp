@@ -69,7 +69,7 @@ export class LicenseRequestComponent implements OnInit {
 
     completeDialog.componentInstance.saved.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/license', 'request']);
+        this.router.navigate(['/', 'home']);
       }
     });
 
@@ -78,6 +78,5 @@ export class LicenseRequestComponent implements OnInit {
         this.router.navigate(['/license', 'payment-channel']);
       }
     });
-    
   }
 }

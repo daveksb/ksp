@@ -7,6 +7,26 @@
   white-space: nowrap;
 }
 
+.pass__status {
+  background: #eefcef;
+  color: #38ac3d;
+  border: 1px solid #38ac3d;
+  border-radius: 15px;
+  width: 5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.fail_status {
+  background: #ff99a5;
+  color: #f80808;
+  border: 1px solid #f80808;
+  border-radius: 15px;
+  width: 5rem;
+  display: flex;
+  justify-content: center;
+}
+
 @media only screen and (max-width: 768px) {
   .content__container {
     display: flex;
@@ -20,5 +40,4 @@
   .table__detail {
     padding: 16px;
   }
- 
 }

@@ -54,7 +54,7 @@ export const data: performanceInfo[] = [
   {
     id: 3,
     score: '96',
-    result: 'ไม่ผ่าน',
+    result: 'ไม่พบข้อมูล',
     announceDate: '12/มกราคม/2565',
     endDate: '31/มกราคม/2565',
   },
