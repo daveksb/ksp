@@ -114,13 +114,13 @@
         aria-label="Page navigation example"
       >
         <ul class="pagination">
-          <li (click)="goPrevious()" class="page-item">
+          <li role="button" (click)="goPrevious()" class="page-item">
             <a class="page-link">Previous</a>
           </li>
-          <li class="page-item">
+          <li role="button" class="page-item">
             <a class="page-link">{{ currentPage }}</a>
           </li>
-          <li (click)="goNext()" class="page-item">
+          <li role="button" (click)="goNext()" class="page-item">
             <a class="page-link">Next</a>
           </li>
         </ul>
