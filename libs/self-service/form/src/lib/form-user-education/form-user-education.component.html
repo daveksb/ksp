@@ -61,12 +61,6 @@
         *ngIf="selectedEducationType === 5"
         formControlName="educationLevelForm"
       ></ksp-education-level-form-four>
-      <ng-container *ngIf="selectedEducationType >= 0">
-        <br />
-        <ksp-form-attachment
-          [title]="'กรุณาแนบหลักฐานประกอบวุฒิทางการศึกษา'"
-        ></ksp-form-attachment
-      ></ng-container>
     </ng-container>
 
     <ng-container *ngIf="educationTypes === 'manager'">
