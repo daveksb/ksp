@@ -19,16 +19,6 @@ export class AuthGuard implements CanActivate {
     if (tokenKey) return of(true);
     this.router.navigate(['/']);
     return of(false);
-    // return this.schoolServiceFeatureLoginService
-    //   .validateTokenKey(tokenKey)
-    //   .pipe(
-    //     switchMap(() => {
-    //       return of(true);
-    //     }),
-    //     catchError(() => {
-    //       return of(false);
-    //     })
-    //   );
   }
 
   canActivate(

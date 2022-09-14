@@ -1,9 +1,4 @@
-import {
-  Component,
-  ComponentFactoryResolver,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormMode } from '@ksp/shared/interface';
@@ -39,7 +34,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   prefixList$!: Observable<any>;
   countries$!: Observable<any>;
   visaTypeList$!: Observable<any>;
-  foreignInfo = ['1.สำเนาหนังสือเดินทาง'];
+  foreignInfo = [{ name: '1.สำเนาหนังสือเดินทาง', fileId: '' }];
   requestNumber = '';
   requestId!: number;
   constructor(

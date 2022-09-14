@@ -10,6 +10,7 @@ import {
   refundFeeMenu,
   standardMenu,
 } from './app.menu.config';
+import { AuthGuard } from './auth.guard';
 
 const routes: EthicsCustomRoute[] = [
   { path: 'login', component: EServiceLoginComponent },
@@ -21,6 +22,7 @@ const routes: EthicsCustomRoute[] = [
       import('@ksp/e-service/standard/degree-cert').then(
         (m) => m.EServiceStandardDegreeCertModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: 'temp-license',
@@ -29,6 +31,7 @@ const routes: EthicsCustomRoute[] = [
       import('@ksp/e-service/e-license/temp-license').then(
         (m) => m.ELicenseTempLicenseModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: 'foreign-license',
@@ -37,6 +40,7 @@ const routes: EthicsCustomRoute[] = [
       import('@ksp/e-service/e-license/foreign-license').then(
         (m) => m.EServiceELicenseForeignLicenseModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: 'investigation',
@@ -49,6 +53,7 @@ const routes: EthicsCustomRoute[] = [
       import('@ksp/e-service/ethics/investigation').then(
         (m) => m.EServiceEthicsInvestigationModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: 'accusation',
@@ -61,6 +66,7 @@ const routes: EthicsCustomRoute[] = [
       import('@ksp/e-service/ethics/accusation').then(
         (m) => m.EServiceEthicsAccusationModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: 'inquiry',
@@ -73,6 +79,7 @@ const routes: EthicsCustomRoute[] = [
       import('@ksp/e-service/ethics/inquiry').then(
         (m) => m.EServiceEthicsInquiryModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: 'publish',
@@ -85,6 +92,7 @@ const routes: EthicsCustomRoute[] = [
       import('@ksp/e-service/ethics/publish').then(
         (m) => m.EServiceEthicsPublishModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: 'approve-new-user',
@@ -98,6 +106,7 @@ const routes: EthicsCustomRoute[] = [
       import('@ksp/e-service/e-license/approve-new-user').then(
         (m) => m.EServiceELicenseApproveNewUserModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: 'manage-current-user',
@@ -109,6 +118,7 @@ const routes: EthicsCustomRoute[] = [
       import('@ksp/e-service/e-license/manage-current-user').then(
         (m) => m.EServiceELicenseManageCurrentUserModule
       ),
+    canActivate: [AuthGuard],
   },
 
   {
@@ -122,6 +132,7 @@ const routes: EthicsCustomRoute[] = [
       import('@ksp/e-service/professional/one-school-one-innovation').then(
         (m) => m.EServiceProfessionalOneSchoolOneInnovationModule
       ),
+    canActivate: [AuthGuard],
   },
 
   {
@@ -131,6 +142,7 @@ const routes: EthicsCustomRoute[] = [
       import('@ksp/e-service/fee/refund-fee').then(
         (m) => m.EServiceFeeRefundFeeModule
       ),
+    canActivate: [AuthGuard],
   },
 
   {
@@ -140,6 +152,7 @@ const routes: EthicsCustomRoute[] = [
       import('@ksp/e-service/standard/test-result').then(
         (m) => m.EServiceStandardTestResultModule
       ),
+    canActivate: [AuthGuard],
   },
 
   {
@@ -149,6 +162,7 @@ const routes: EthicsCustomRoute[] = [
       import('@ksp/e-service/standard/performance-result').then(
         (m) => m.EServiceStandardPerformanceResultModule
       ),
+    canActivate: [AuthGuard],
   },
 
   { path: '', component: EServiceLoginComponent },

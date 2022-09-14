@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class LicenseDetailService {
+export class SchoolRequestService {
   educationInfo = [
     {
       name: '1.สำเนาปริญญาบัตรหรือสำเนาหนังสือรับรอง',
