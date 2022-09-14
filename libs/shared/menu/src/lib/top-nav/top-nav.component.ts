@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { deleteCookie, getCookie, thaiDate } from '@ksp/shared/utility';
 
@@ -13,8 +13,8 @@ import { deleteCookie, getCookie, thaiDate } from '@ksp/shared/utility';
 })
 export class TopNavComponent {
   today = thaiDate(new Date());
-  firstName = getCookie('firstName');
-  lastName = getCookie('lastName');
+  firstName = getCookie('firstNameTh');
+  lastName = getCookie('lastNameTh');
   constructor(private router: Router) {}
   logout() {
     deleteCookie('schUserToken');
