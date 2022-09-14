@@ -15,13 +15,13 @@ import {
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatDialogModule,
     MatTooltipModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [
     {
@@ -29,11 +29,11 @@ import {
       useClass: TokenHandleInterceptor,
       multi: true,
     },
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: CacheInterceptor,
-    //   multi: true,
-    // },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CacheInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

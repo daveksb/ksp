@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { BasicInstituteSearchComponent } from '../basic-institute-search/basic-institute-search.component';
@@ -18,8 +18,8 @@ export class EServiceUserSearchComponent {
     status: [],
   });
 
-  //@Input() mode: InstituteType = 'school';
-  @Output() search = new EventEmitter<boolean>();
+  @Output() search = new EventEmitter<any>();
   @Output() clear = new EventEmitter<boolean>();
+
   constructor(private fb: FormBuilder) {}
 }

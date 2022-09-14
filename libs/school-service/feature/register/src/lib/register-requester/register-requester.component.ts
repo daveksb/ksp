@@ -7,6 +7,7 @@ import { GeneralInfoService, RequestLicenseService } from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable, switchMap } from 'rxjs';
+import localForage from 'localforage';
 
 @UntilDestroy()
 @Component({
@@ -44,7 +45,12 @@ export class RegisterRequesterComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
   ngOnInit(): void {
-    this.school = history?.state?.data ?? null;
+    //this.school = history?.state?.data ?? null;
+    localForage.getItem('registerSelectedSchool').then((res) => {
+      this.school = res;
+      //console.log('school = ', this.school);
+    });
+
     this.getListData();
     this.checkRequestId();
   }
@@ -74,9 +80,12 @@ export class RegisterRequesterComponent implements OnInit {
       userpermission,
       schoolid: this.school.schoolId,
     };
-    this.router.navigate(['/register', 'coordinator'], {
+
+    localForage.setItem('registerUserInfoFormValue', userInfo);
+    this.router.navigate(['/register', 'coordinator']);
+    /*  this.router.navigate(['/register', 'coordinator'], {
       state: { data: userInfo },
-    });
+    }); */
   }
 }
 export const grants = [

@@ -26,7 +26,7 @@ export const routes: Route[] = [
         component: ApproveNewUserListComponent,
       },
       {
-        path: 'detail',
+        path: 'detail/:id',
         component: UserDetailComponent,
       },
     ],

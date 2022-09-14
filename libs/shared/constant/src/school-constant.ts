@@ -58,7 +58,6 @@ export enum SchoolRequestType {
 }
 
 // สถานะใบคำขอ
-
 export enum SchoolRequestProcess {
   'กำลังสร้าง',
   'ยื่นใบคำขอ',
@@ -71,19 +70,6 @@ export enum SchoolRequestProcess {
   'หมดอายุ',
   'ยกเลิก',
 }
-
-/* export enum SchoolRequestProcess {
-  'กำลังสร้าง' = 'creating',
-  'ยื่นใบคำขอ' = ' created',
-  'กำลังดำเนินการ' = 'proceeding',
-  'ปรับแก้ไข/เพิ่มเติม' = 'edit',
-  'ผ่านการตรวจสอบ' = 'verified',
-  'ผ่านการรับรอง/พิจารณา' = 'certified',
-  'ไม่ผ่านการรับรอง/พิจารณา' = 'uncertified',
-  'ส่งคืนและยกเลิก' = 'reject',
-  'หมดอายุ' = 'expired',
-  'ยกเลิก' = 'cancel',
-} */
 
 /* export enum SchoolRequestProcess {
   creating = 'กำลังสร้าง',

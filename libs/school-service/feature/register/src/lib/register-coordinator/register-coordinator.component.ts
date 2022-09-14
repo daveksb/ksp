@@ -9,10 +9,10 @@ import {
 } from '@ksp/shared/dialog';
 import { FormMode } from '@ksp/shared/interface';
 import { GeneralInfoService, RequestLicenseService } from '@ksp/shared/service';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { EMPTY, Observable, switchMap } from 'rxjs';
+import localForage from 'localforage';
+import { thaiDate } from '@ksp/shared/utility';
 
-@UntilDestroy()
 @Component({
   templateUrl: './register-coordinator.component.html',
   styleUrls: ['./register-coordinator.component.scss'],
@@ -22,11 +22,23 @@ export class CoordinatorInfoComponent implements OnInit {
     coordinator: [],
   });
   savingData: any;
-  uploadFileList = ['หนังสือแต่งตั้งผู้ประสานงาน', 'สำเนาบัตรประชาชน'];
+  uploadFileList = [
+    {
+      name: 'หนังสือแต่งตั้งผู้ประสานงาน',
+      fileId: '',
+    },
+    {
+      name: 'สำเนาบัตรประชาชน',
+      fileId: '',
+    },
+  ];
+
   prefixList$!: Observable<any>;
   nationalitys$!: Observable<any>;
   mode: FormMode = 'edit';
   userInfoFormdisplayMode: number = SchoolRequestType.ขอยื่นผู้ประสานงาน;
+  school: any;
+
   constructor(
     private router: Router,
     public dialog: MatDialog,
@@ -36,11 +48,17 @@ export class CoordinatorInfoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.savingData = history.state.data;
-    // this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-    //   //console.log('res = ', res);
-    // });
+    //this.savingData = history.state.data;
+
     this.getListData();
+
+    localForage.getItem('registerSelectedSchool').then((res) => {
+      this.school = res;
+    });
+
+    localForage.getItem('registerUserInfoFormValue').then((res) => {
+      this.savingData = res;
+    });
   }
   getListData() {
     this.prefixList$ = this.generalInfoService.getPrefix();
@@ -61,7 +79,7 @@ export class CoordinatorInfoComponent implements OnInit {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
         subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
         ใช่หรือไม่`,
-        schoolCode: 'รหัสเข้าใช้งาน(รหัสโรงเรียน): xxxx',
+        schoolCode: `รหัสเข้าใช้งาน(รหัสโรงเรียน): ${this.school?.schoolId}`,
         btnLabel: 'บันทึก',
       },
     });
@@ -78,7 +96,7 @@ export class CoordinatorInfoComponent implements OnInit {
             payload.ref2 = '01';
             payload.ref3 = '1';
             payload.systemtype = '2';
-            payload.requesttype = '01';
+            payload.requesttype = '1';
             return this.requestLicenseService.requestLicense(payload);
           }
           return EMPTY;
@@ -86,18 +104,19 @@ export class CoordinatorInfoComponent implements OnInit {
       )
       .subscribe((res) => {
         if (res) {
-          this.showCompleteDialog();
+          const requestNo = res?.requestno;
+          this.showCompleteDialog(requestNo);
         }
       });
   }
 
-  showCompleteDialog() {
+  showCompleteDialog(requestNo: string) {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '375px',
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
-        content: `วันที่ : 10 ตุลาคม  2565
-        เลขที่ใบคำขอ : 12234467876543`,
+        content: `วันที่ : ${thaiDate(new Date())}
+        เลขที่ใบคำขอ : ${requestNo}`,
         subContent: `กรุณาตรวจสอบสถานะใบคำขอผ่านทางอีเมล
         ผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },
@@ -105,6 +124,8 @@ export class CoordinatorInfoComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
+        localForage.removeItem('registerSelectedSchool');
+        localForage.removeItem('registerUserInfoFormValue');
         this.navigateBack();
       }
     });

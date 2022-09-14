@@ -24,6 +24,7 @@
           [mode]="'view'"
           [label1]="'สังกัด'"
           [label2]="'โรงเรียน / สถานศึกษา'"
+          [schoolName]="school?.schoolName"
         ></ksp-university-select>
       </div>
 
@@ -31,7 +32,7 @@
         <div class="box-header text-primary ps-4">
           รหัสเข้าใช้งาน (รหัสโรงเรียน)
         </div>
-        <div class="box-header ms-2">คือ xxxx</div>
+        <div class="box-header ms-2">คือ {{ school?.schoolId }}</div>
       </div>
 
       <div class="bg-light">
@@ -61,9 +62,11 @@
         [showCenterButtons]="true"
         [showSaveButton]="true"
         [showCancelButton]="true"
+        [disableSaveButton]="!form.valid"
         (prevClicked)="back()"
         (saveClicked)="save()"
         (cancelClicked)="navigateBack()"
+        [disableCancelButton]="false"
       ></ksp-bottom-nav>
     </div>
   </div>
