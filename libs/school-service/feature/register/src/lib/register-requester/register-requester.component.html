@@ -55,6 +55,8 @@
 
       <ksp-bottom-nav
         [isFirstPage]="true"
+        [disableNext]="!form.valid"
+        [disableNextMessage]="'กรุณากรอกข้อมูลให้ครบถ้วน'"
         (nextClicked)="next()"
         [showCenterButtons]="false"
       ></ksp-bottom-nav>

@@ -11,6 +11,7 @@ import { FormMode } from '@ksp/shared/interface';
 import { GeneralInfoService, RequestLicenseService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { EMPTY, Observable, switchMap } from 'rxjs';
+import localForage from 'localforage';
 
 @UntilDestroy()
 @Component({
@@ -27,6 +28,8 @@ export class CoordinatorInfoComponent implements OnInit {
   nationalitys$!: Observable<any>;
   mode: FormMode = 'edit';
   userInfoFormdisplayMode: number = SchoolRequestType.ขอยื่นผู้ประสานงาน;
+  school: any;
+
   constructor(
     private router: Router,
     public dialog: MatDialog,
@@ -36,11 +39,17 @@ export class CoordinatorInfoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.savingData = history.state.data;
-    // this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-    //   //console.log('res = ', res);
-    // });
+    //this.savingData = history.state.data;
+
     this.getListData();
+
+    localForage.getItem('registerSelectedSchool').then((res) => {
+      this.school = res;
+    });
+
+    localForage.getItem('registerUserInfoFormValue').then((res) => {
+      this.savingData = res;
+    });
   }
   getListData() {
     this.prefixList$ = this.generalInfoService.getPrefix();
