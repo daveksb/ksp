@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SchoolServiceUserPageType } from '@ksp/shared/interface';
@@ -10,23 +9,18 @@ import { RequestLicenseService } from '@ksp/shared/service';
   styleUrls: ['./approve-new-user-list.component.scss'],
 })
 export class ApproveNewUserListComponent {
-  form = this.fb.group({
-    approveSearch: [],
-  });
-
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<any>();
 
   constructor(
     private router: Router,
-    private fb: FormBuilder,
     private requestService: RequestLicenseService
   ) {}
 
   selectedUniversity = '';
 
   search(params: any) {
-    //console.log('params = ', params);
+    console.log('params = ', params);
     const payload = {
       currentprocess: null,
       idcardno: null,
@@ -35,7 +29,8 @@ export class ApproveNewUserListComponent {
       requestno: params.requestno,
       requeststatus: params.requeststatus,
       requesttype: '1',
-      schoolid: '0010201056',
+      schoolid: params.institution.schoolid,
+      //schoolid: '0010201056',
     };
 
     this.requestService.searchRequest(payload).subscribe((res: any) => {

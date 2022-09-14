@@ -6,8 +6,9 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { RequestLicenseService } from '@ksp/shared/service';
-import { thaiDate } from '@ksp/shared/utility';
+import { GeneralInfoService, RequestLicenseService } from '@ksp/shared/service';
+import { FormBuilder } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   templateUrl: './user-detail.component.html',
@@ -32,6 +33,11 @@ export class UserDetailComponent implements OnInit {
 
   requestId!: number;
   requestData!: any;
+  prefixList$!: Observable<any>;
+
+  form = this.fb.group({
+    userInfo: [],
+  });
 
   //thaiDate = thaiDate(new Date());
 
@@ -39,15 +45,20 @@ export class UserDetailComponent implements OnInit {
   constructor(
     private router: Router,
     public dialog: MatDialog,
+    private fb: FormBuilder,
     private route: ActivatedRoute,
-    private requestService: RequestLicenseService
+    private requestService: RequestLicenseService,
+    private generalInfoService: GeneralInfoService
   ) {}
 
   ngOnInit(): void {
+    this.checkRequestId();
     this.route.queryParams.subscribe((res) => {
       this.pageType = Number(res['type']);
       //console.log('res = ', this.pageType);
     });
+
+    this.prefixList$ = this.generalInfoService.getPrefix();
   }
 
   checkRequestId() {
@@ -62,11 +73,9 @@ export class UserDetailComponent implements OnInit {
   loadRequestFromId(id: number) {
     this.requestService.getRequestById(id).subscribe((res: any) => {
       this.requestData = res;
-      //this.requestNo = res.requestno;
-      //this.currentProcess = +res.currentprocess;
-      //console.log('current process = ', this.currentProcess);
-
       //this.pathUserInfo(res);
+      //data.birthdate = data.birthdate.split('T')[0];
+      this.form.controls.userInfo.patchValue(res);
     });
   }
 

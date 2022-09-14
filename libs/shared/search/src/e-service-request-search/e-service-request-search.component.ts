@@ -25,4 +25,9 @@ export class EServiceRequestSearchComponent {
   @Output() search = new EventEmitter<any>();
   @Output() clear = new EventEmitter<boolean>();
   constructor(private fb: FormBuilder) {}
+
+  onClear() {
+    this.form.reset();
+    this.clear.emit(true);
+  }
 }

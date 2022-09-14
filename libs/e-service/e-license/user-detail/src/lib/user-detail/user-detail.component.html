@@ -3,7 +3,7 @@
   <span subHeader>{{ headers[pageType][1] }}</span>
 </ksp-top-nav>
 
-<div class="bg-secondary bg-opacity-10 px-4 py-2">
+<div [formGroup]="form" class="bg-secondary bg-opacity-10 px-4 py-2">
   <div class="box-header">รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ</div>
 
   <div class="bg-white p-3">
@@ -55,7 +55,7 @@
     </div>
 
     <div class="bg-light px-4">
-      <div class="box-header px-4 pt-3">
+      <div class="box-header pt-3">
         ข้อมูลผู้ขอเข้ารหัสสำหรับเข้าใช้งานระบบ (ผู้ประสานงาน)
       </div>
       <ksp-form-user-info
@@ -63,8 +63,10 @@
         [isDarkMode]="false"
         [mode]="'view'"
         [displayMode]="0"
+        [prefixList]="prefixList$ | async"
+        formControlName="userInfo"
       ></ksp-form-user-info>
-      <!-- [prefixList]="prefixList$ | async"
+      <!--
         [nationalitys]="nationalitys$ | async" -->
       <!-- <ksp-form-requester-info [mode]="'view'"></ksp-form-requester-info> -->
     </div>
@@ -79,7 +81,7 @@
     <ksp-form-attachment
       [title]="'หลักฐานเพื่อพิจารณา'"
       mode="view"
-      [groups]="['หนังสือแต่งตั้ง']"
+      [groups]="[{ name: 'หนังสือแต่งตั้ง', fileId: '' }]"
     ></ksp-form-attachment>
   </div>
   <br />
