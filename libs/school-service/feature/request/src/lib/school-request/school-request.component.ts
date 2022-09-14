@@ -31,14 +31,14 @@ import {
 } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
-import { LicenseDetailService } from './temp-license-request.service';
+import { SchoolRequestService } from './school-request.service';
 
 @UntilDestroy()
 @Component({
-  templateUrl: './temp-license-request.component.html',
-  styleUrls: ['./temp-license-request.component.scss'],
+  templateUrl: './school-request.component.html',
+  styleUrls: ['./school-request.component.scss'],
 })
-export class TempLicenseRequestComponent implements OnInit {
+export class SchoolRequestComponent implements OnInit {
   uniqueTimestamp = ''; // use for file upload reference, gen only first time component loaded
 
   pageType = RequestPageType;
@@ -98,7 +98,7 @@ export class TempLicenseRequestComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private service: LicenseDetailService,
+    private schoolRequestService: SchoolRequestService,
     private tempLicenseService: TempLicenseService,
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
@@ -443,10 +443,10 @@ export class TempLicenseRequestComponent implements OnInit {
 
   getList() {
     this.prefixList$ = this.generalInfoService.getPrefix();
-    this.eduFiles = this.service.educationInfo;
-    this.teachingFiles = this.service.teachingInfo;
-    this.reasonFiles = this.service.reasonInfo;
-    this.attachFiles = this.service.evidenceFiles;
+    this.eduFiles = this.schoolRequestService.educationInfo;
+    this.teachingFiles = this.schoolRequestService.teachingInfo;
+    this.reasonFiles = this.schoolRequestService.reasonInfo;
+    this.attachFiles = this.schoolRequestService.evidenceFiles;
     this.provinces$ = this.addressService.getProvinces();
     this.countries$ = this.addressService.getCountry();
     this.staffTypes$ = this.staffService.getStaffTypes();

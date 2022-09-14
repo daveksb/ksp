@@ -16,7 +16,7 @@ export class ApproveNewUserListComponent {
   });
 
   displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<userList>();
+  dataSource = new MatTableDataSource<any>();
 
   constructor(
     private router: Router,
@@ -27,7 +27,19 @@ export class ApproveNewUserListComponent {
   selectedUniversity = '';
 
   search(params: any) {
-    const payload = replaceEmptyWithNull(params);
+    //const payload = replaceEmptyWithNull(params);
+    //console.log('params = ', params);
+    const payload = {
+      currentprocess: null,
+      idcardno: null,
+      requestdatefrom: params.requestdatefrom,
+      requestdateto: null,
+      requestno: params.requestno,
+      requeststatus: params.requeststatus,
+      requesttype: '1',
+      schoolid: '0010201056',
+    };
+
     this.requestService.searchRequest(payload).subscribe((res: any) => {
       this.dataSource.data = res;
     });
@@ -49,55 +61,13 @@ export class ApproveNewUserListComponent {
   }
 }
 
-export interface userList {
-  id: number;
-  view: string;
-  order: string;
-  name: string;
-  phone: string;
-  authorName: string;
-  school: string;
-  province: string;
-  status: string;
-  date: string;
-}
-
-export const column = [
+export const column: string[] = [
   'id',
-  'view',
-  'order',
+  'requestno',
+  //'idcardno',
   'name',
-  'phone',
-  'authorName',
-  'school',
-  'province',
-  'status',
-  'date',
-];
-
-export const data: userList[] = [
-  {
-    id: 1,
-    view: '',
-    order: '1234xxxxxxxx',
-    name: 'xxx xxxx xxxxxx',
-    phone: '098-xxx-xxxx',
-    authorName: 'xxx xxxx xxxx',
-    school: 'xxxxxx',
-    province: 'xxxxxx',
-    status: 'รอการอนุมัติ',
-    date: 'xx/xx/xxxx',
-  },
-  {
-    id: 2,
-    view: '',
-    order: '1234xxxxxxxx',
-    name: 'xxx xxxx xxxxxx',
-    phone: '098-xxx-xxxx',
-    authorName: 'xxx xxxx xxxx',
-    school: 'xxxxxx',
-    province: 'xxxxxx',
-    status: 'รอการอนุมัติ',
-    date: 'xx/xx/xxxx',
-  },
+  'contactphone',
+  'requeststatus',
+  'requestdate',
+  'view',
 ];
