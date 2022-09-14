@@ -57,11 +57,9 @@ export class SelfServiceHomePageComponent {
     this.router.navigate(['/', 'renew-license', 'study-supervision']);
   }
 
-  /* rewardPage(requestType: number) {
-    this.router.navigate(['/', 'reward', 'request'], {
-      queryParams: { type: requestType },
-    });
-  } */
+  reward() {
+    this.router.navigate(['/', 'reward', 'request']);
+  }
 
   transfer() {
     this.router.navigate(['/', 'transfer-knowledge', 'request']);

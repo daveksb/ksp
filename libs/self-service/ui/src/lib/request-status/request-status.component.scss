@@ -1,10 +1,34 @@
 .content__primary {
+  width: 10.25rem;
   background: #fba45b;
-  width: 175px;
   text-align: center;
 }
 
-.border__box {
-  border: 1px solid #fba45b;
-  box-shadow: 1px 2px 4px #fba45b;
+.content__second {
+  width: 10.25rem;
+  background: #5cc6c6;
+  text-align: center;
+}
+
+.content__third {
+  width: 10.25rem;
+  background: #7e71fc;
+  text-align: center;
+}
+
+.content__fourth {
+  width: 10.25rem;
+  background: #125eaf;
+  text-align: center;
+}
+
+.content__fifth {
+  width: 10.25rem;
+  background: #FB7290;
+  text-align: center;
+}
+
+.split__line {
+  border-right: 1px solid lightgray;
+  height: auto;
 }

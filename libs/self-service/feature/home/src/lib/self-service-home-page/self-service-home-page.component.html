@@ -92,7 +92,9 @@
       <button mat-menu-item (click)="transfer()">ขอหนังสือรับรองความรู้</button>
       <button mat-menu-item (click)="compare()">ขอยื่นเทียบเคียงความรู้</button>
       <button mat-menu-item (click)="refundFee()">ขอคืนค่าธรรมเนียม</button>
-      <button mat-menu-item>ขอรับรางวัลการยกย่องเชิดชูเกียรติ</button>
+      <button mat-menu-item (click)="reward()">
+        ขอรับรางวัลการยกย่องเชิดชูเกียรติ
+      </button>
     </mat-menu>
 
     <mat-menu #request="matMenu">
@@ -116,21 +118,6 @@
       </button>
       <button mat-menu-item (click)="supervisionRenew()">ศึกษานิเทศก์</button>
     </mat-menu>
-
-    <!-- <mat-menu #reward="matMenu">
-      <button mat-menu-item (click)="rewardPage(1)">รางวัลคุรุสภา</button>
-      <button mat-menu-item (click)="rewardPage(2)">
-        รางวัลครูภาษาไทยดีเด่น
-      </button>
-      <button mat-menu-item (click)="rewardPage(3)">
-        รางวัลครูผู้สอนดีเด่น
-      </button>
-      <button mat-menu-item (click)="rewardPage(4)">รางวัลคุรุสดุดี</button>
-      <button mat-menu-item (click)="rewardPage(5)">รางวัลครูอาวุโส</button>
-      <button mat-menu-item (click)="rewardPage(6)">
-        รางวัลผลงานวิจัยของคุรุสภา
-      </button>
-    </mat-menu> -->
 
     <mat-menu #teacher="matMenu">
       <button mat-menu-item (click)="thaiTeacher()">ครูชาวไทย</button>
