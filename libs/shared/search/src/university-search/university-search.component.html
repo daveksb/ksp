@@ -18,6 +18,7 @@
 
       <ksp-basic-institute-search
         formControlName="institution"
+        [bureaus]="bureaus$! | async"
         [searchType]="data.searchType"
       ></ksp-basic-institute-search>
 
@@ -93,7 +94,7 @@
                   <input
                     class="form-check-input"
                     type="radio"
-                    (change)="onItemChange(item.schoolId)"
+                    (change)="onItemChange(item)"
                     name="university"
                   />
                 </div>

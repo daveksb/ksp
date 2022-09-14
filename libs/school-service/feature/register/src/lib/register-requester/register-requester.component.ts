@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  AddressService,
-  GeneralInfoService,
-  RequestLicenseService,
-} from '@ksp/shared/service';
+import { SchoolRequestType } from '@ksp/shared/constant';
+import { FormMode } from '@ksp/shared/interface';
+import { GeneralInfoService, RequestLicenseService } from '@ksp/shared/service';
+import { thaiDate } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { switchMap } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -16,8 +15,14 @@ import { switchMap } from 'rxjs';
 })
 export class RegisterRequesterComponent implements OnInit {
   grant = grants;
-
-  form = this.fb.group({
+  requestNumber = '';
+  requestDate = thaiDate(new Date());
+  prefixList$!: Observable<any>;
+  nationalitys$!: Observable<any>;
+  mode: FormMode = 'edit';
+  userInfoFormdisplayMode: number = SchoolRequestType.ขอยื่นผู้ประสานงาน;
+  school!: any;
+  private _form = this.fb.group({
     grant1: [false],
     grant2: [false],
     grant3: [false],
@@ -25,22 +30,29 @@ export class RegisterRequesterComponent implements OnInit {
     grant5: [false],
     requester: [],
   });
+  public get form() {
+    return this._form;
+  }
+  public set form(value) {
+    this._form = value;
+  }
   constructor(
     private fb: FormBuilder,
     public router: Router,
     private generalInfoService: GeneralInfoService,
-    private addressService: AddressService,
     private requestLicenseService: RequestLicenseService,
     private route: ActivatedRoute
   ) {}
   ngOnInit(): void {
-    this
-      .router; /* this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      console.log('form valid  = ', this.form);
-    }); */
-    // this.getList();
+    this.school = history?.state?.data ?? null;
+    this.getListData();
     this.checkRequestId();
   }
+  getListData() {
+    this.prefixList$ = this.generalInfoService.getPrefix();
+    this.nationalitys$ = this.generalInfoService.getNationality();
+  }
+
   checkRequestId() {
     this.route.paramMap
       .pipe(
@@ -53,28 +65,20 @@ export class RegisterRequesterComponent implements OnInit {
       )
       .subscribe((res) => console.log(res));
   }
-  // getList() {
-  //   this.requestLicenseService
-  //     .getSchoolInfo(this.schoolId)
-  //     .pipe(untilDestroyed(this))
-  //     .subscribe((res: any) => {
-  //       this.schoolName = res.schoolName;
-  //       this.bureauName = res.bureauName;
-  //       this.address = `บ้านเลขที่ ${res.address} ซอย ${
-  //         res?.street ?? ''
-  //       } หมู่ ${res?.moo ?? ''} ถนน ${res?.road ?? ''} ตำบล ${
-  //         res.tumbon
-  //       } อำเภอ ${res.amphurName} จังหวัด ${res.provinceName}`;
-  //     });
-  //   this.countries$ = this.addressService.getCountry();
-  //   this.prefixList$ = this.generalInfoService.getPrefix();
-  //   this.visaTypeList$ = this.generalInfoService.getVisaType();
-  // }
   next() {
-    this.router.navigate(['/register', 'coordinator']);
+    const data = this.form.getRawValue();
+    const { requester, ...all } = data as any;
+    const userpermission = JSON.stringify(all);
+    const userInfo = {
+      ...requester,
+      userpermission,
+      schoolid: this.school.schoolId,
+    };
+    this.router.navigate(['/register', 'coordinator'], {
+      state: { data: userInfo },
+    });
   }
 }
-
 export const grants = [
   {
     label: 'ยื่นแบบคำขออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',

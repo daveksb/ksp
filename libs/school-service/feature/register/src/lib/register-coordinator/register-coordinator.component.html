@@ -39,9 +39,14 @@
           ข้อมูลผู้แต่งตั้งผู้ประสานงาน / ผู้รับผิดชอบ (ที่ระบุไว้ในเอกสารแนบ)
         </div>
 
-        <ksp-form-coordinator-info
+        <ksp-form-user-info
           formControlName="coordinator"
-        ></ksp-form-coordinator-info>
+          [isDarkMode]="false"
+          [mode]="mode"
+          [prefixList]="prefixList$ | async"
+          [nationalitys]="nationalitys$ | async"
+          [displayMode]="userInfoFormdisplayMode"
+        ></ksp-form-user-info>
       </div>
 
       <div class="my-4">
