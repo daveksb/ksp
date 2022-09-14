@@ -126,6 +126,8 @@ export class CoordinatorInfoComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
+        localForage.removeItem('registerSelectedSchool');
+        localForage.removeItem('registerUserInfoFormValue');
         this.navigateBack();
       }
     });

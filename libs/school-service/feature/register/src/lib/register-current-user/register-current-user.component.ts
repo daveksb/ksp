@@ -9,6 +9,7 @@ import localForage from 'localforage';
 })
 export class RegisterCurrentUserComponent {
   activeUser = '';
+  school!: any;
   constructor(
     public router: Router,
     private requestLicenseService: RequestLicenseService
@@ -27,6 +28,7 @@ export class RegisterCurrentUserComponent {
   }
 
   selectedUniversity(school: any) {
+    this.school = school;
     localForage.setItem('registerSelectedSchool', school);
 
     this.requestLicenseService
