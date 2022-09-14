@@ -12,6 +12,7 @@ import { GeneralInfoService, RequestLicenseService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { EMPTY, Observable, switchMap } from 'rxjs';
 import localForage from 'localforage';
+import { thaiDate } from '@ksp/shared/utility';
 
 @UntilDestroy()
 @Component({
@@ -105,18 +106,19 @@ export class CoordinatorInfoComponent implements OnInit {
       )
       .subscribe((res) => {
         if (res) {
-          this.showCompleteDialog();
+          const requestNo = res?.requestno;
+          this.showCompleteDialog(requestNo);
         }
       });
   }
 
-  showCompleteDialog() {
+  showCompleteDialog(requestNo: string) {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '375px',
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
-        content: `วันที่ : 10 ตุลาคม  2565
-        เลขที่ใบคำขอ : 12234467876543`,
+        content: `วันที่ : ${thaiDate(new Date())}
+        เลขที่ใบคำขอ : ${requestNo}`,
         subContent: `กรุณาตรวจสอบสถานะใบคำขอผ่านทางอีเมล
         ผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },
