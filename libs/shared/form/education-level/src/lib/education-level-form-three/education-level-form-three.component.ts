@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -10,6 +10,7 @@ import { providerFactory } from '@ksp/shared/utility';
   providers: providerFactory(EducationLevelFormThreeComponent),
 })
 export class EducationLevelFormThreeComponent extends KspFormBaseComponent {
+  @Input() countries: any[] = [];
   override form = this.fb.group({
     resolutionTimes: [],
     resolutionDate: [],

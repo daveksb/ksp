@@ -5,16 +5,15 @@
       <input
         class="form-control"
         type="text"
-        formControlName="foreignLicense"
-      />
+        formControlName="foreignLicense" />
     </div>
     <div class="col-md-6 mb-3">
       <label class="form-label">ประเทศ</label>
-      <select class="search__content form-select" formControlName="country">
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+      <select class="form-select" formControlName="country">
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option *ngFor="let c of countries" [value]="+c?.countryNo">
+          {{ c?.countryN }}
+        </option>
       </select>
     </div>
   </div>
@@ -22,11 +21,11 @@
   <div class="row">
     <div class="col-md-6 mb-3">
       <label class="form-label">ประเภทของใบอนุญาต</label>
-      <select class="search__content form-select" formControlName="licenseType">
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+      <select class="form-select" formControlName="licenseType">
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option *ngFor="let l of licenses" [value]="l?.id">
+          {{ l?.name }}
+        </option>
       </select>
     </div>
     <div class="col-md-6 mb-3">
@@ -41,8 +40,7 @@
       <input
         class="form-control"
         type="date"
-        formControlName="licenserelease"
-      />
+        formControlName="licenserelease" />
     </div>
     <div class="col-md-6 mb-3">
       <label class="form-label">วันเดือนปีที่ใบอนุญาตหมดอายุ</label>

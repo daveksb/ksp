@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
 import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
@@ -15,6 +15,7 @@ export class FormUserEducationComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+  @Input() countries: any[] = [];
   selectedEducationType!: number;
 
   override form = this.fb.group({
