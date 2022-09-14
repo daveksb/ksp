@@ -223,7 +223,7 @@ export class TempLicenseRequestComponent implements OnInit {
   }
 
   createRequest(type: string) {
-    console.log('create request = ');
+    //console.log('create request = ');
     const baseForm = this.fb.group(defaultRequestPayload);
     const formData: any = this.form.getRawValue();
     formData.addr1.addresstype = 1;
