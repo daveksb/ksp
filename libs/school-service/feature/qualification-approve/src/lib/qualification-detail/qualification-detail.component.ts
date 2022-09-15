@@ -119,7 +119,34 @@ export class QualificationDetailComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/temp-license', 'list']);
+    if (this.mode == 'view') {
+      const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+        width: '350px',
+        data: {
+          title: `คุณต้องการยกเลิกการยื่นคำขอ
+          ใช่หรือไม่? `,
+          btnLabel: 'ยืนยัน',
+        },
+      });
+      confirmDialog.componentInstance.confirmed
+        .pipe(
+          switchMap((res) => {
+            if (res) {
+              const payload = {
+                id: `${this.requestId}`,
+                currentprocess: `${SchoolRequestProcess.ยกเลิก}`,
+              };
+              return this.requestLicenseService.changeRequestProcess(payload);
+            }
+            return EMPTY;
+          })
+        )
+        .subscribe((res) => {
+          this.onCancelCompleted();
+        });
+    } else {
+      this.router.navigate(['/temp-license', 'list']);
+    }
   }
   get inValidForm() {
     return (
@@ -210,7 +237,25 @@ export class QualificationDetailComponent implements OnInit {
         this.onCompleted();
       });
   }
+  onClickPrev() {
+    this.router.navigate(['/temp-license']);
+  }
+  onCancelCompleted() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      width: '350px',
+      data: {
+        header: 'ระบบทำการยกเลิกเรียบร้อย',
+        content: `วันที่ : ${this.requestDate} 
+        เลขที่คำขอ : ${this.requestNumber}`,
+      },
+    });
 
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/temp-license', 'list']);
+      }
+    });
+  }
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
@@ -223,7 +268,7 @@ export class QualificationDetailComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.cancel();
+        this.router.navigate(['/temp-license', 'list']);
       }
     });
   }

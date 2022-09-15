@@ -90,14 +90,15 @@
 
 <div class="sticky-bottom border">
   <ksp-bottom-nav
-    [isFirstPage]="true"
+    [isFirstPage]="mode !== 'view'"
     [colorMode]="'blue'"
     [isLastPage]="true"
     [showCenterButtons]="true"
     [showCancelButton]="true"
-    [showSaveButton]="true"
+    [showSaveButton]="mode !== 'view'"
     [disableSaveButton]="inValidForm"
     (saveClicked)="onSave()"
     (cancelClicked)="cancel()"
+    (prevClicked)="onClickPrev()"
   ></ksp-bottom-nav>
 </div>
