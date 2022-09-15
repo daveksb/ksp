@@ -14,10 +14,10 @@ import localForage from 'localforage';
 import { thaiDate } from '@ksp/shared/utility';
 
 @Component({
-  templateUrl: './register-coordinator.component.html',
-  styleUrls: ['./register-coordinator.component.scss'],
+  templateUrl: './register-password.component.html',
+  styleUrls: ['./register-password.component.scss'],
 })
-export class CoordinatorInfoComponent implements OnInit {
+export class RegisterPasswordComponent implements OnInit {
   form = this.fb.group({
     coordinator: [],
   });

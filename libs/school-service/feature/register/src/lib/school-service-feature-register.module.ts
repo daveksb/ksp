@@ -19,6 +19,7 @@ import {
   TopNavSecondComponent,
 } from '@ksp/shared/menu';
 import { UniversitySelectComponent } from '@ksp/shared/form/university-select';
+import { RegisterPasswordComponent } from './register-password/register-password.component';
 
 export const routes: Routes = [
   {
@@ -32,6 +33,10 @@ export const routes: Routes = [
   {
     path: 'coordinator',
     component: CoordinatorInfoComponent,
+  },
+  {
+    path: 'password',
+    component: RegisterPasswordComponent,
   },
 ];
 
@@ -55,6 +60,7 @@ export const routes: Routes = [
     RegisterCurrentUserComponent,
     RegisterRequesterComponent,
     CoordinatorInfoComponent,
+    RegisterPasswordComponent,
   ],
 })
 export class SchoolServiceFeatureRegisterModule {}
