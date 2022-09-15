@@ -270,10 +270,8 @@ export class SchoolRequestComponent implements OnInit {
     formData.addr1.addresstype = 1;
     formData.addr2.addresstype = 2;
 
-    const { id, ...rawUserInfo } = formData.userInfo;
-    rawUserInfo.schoolId = this.schoolId;
-
-    const userInfo = toLowercaseProp(rawUserInfo);
+    const { id, ...userInfo } = formData.userInfo;
+    userInfo.schoolid = this.schoolId;
 
     if (this.requestId) {
       userInfo.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
@@ -305,12 +303,19 @@ export class SchoolRequestComponent implements OnInit {
       };
     }
 
+    const visaInfo = {
+      visaclass: userInfo.visaclass,
+      visatype: userInfo.visatype,
+      visaenddate: userInfo.visaenddate,
+    };
+
     const payload = {
       ...replaceEmptyWithNull(userInfo),
       ...{ addressinfo: JSON.stringify([formData.addr1, formData.addr2]) },
       ...{ eduinfo: JSON.stringify([formData.edu1, formData.edu2]) },
       ...{ teachinginfo: JSON.stringify(teachingInfo) },
       ...{ hiringinfo: JSON.stringify(formData.hiringinfo) },
+      ...{ visainfo: JSON.stringify(visaInfo) },
     };
 
     if (type == 'submit') {
@@ -318,7 +323,6 @@ export class SchoolRequestComponent implements OnInit {
     } else {
       payload.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
     }
-
     //console.log('payload = ', payload);
 
     baseForm.patchValue(payload);
@@ -474,10 +478,14 @@ export class SchoolRequestComponent implements OnInit {
     if (this.requestSubType === SchoolRequestSubType.ชาวต่างชาติ) {
       data.passportstartdate = data.passportstartdate.split('T')[0];
       data.passportenddate = data.passportenddate.split('T')[0];
-      const visa = parseJson(data.visainfo);
-      data.visaclass = visa.visaclass;
-      data.visatype = visa.visatype;
-      data.visaenddate = visa.visaenddate;
+      console.log('data = ', data);
+
+      if (data?.visainfo) {
+        const visa = parseJson(data?.visainfo);
+        data.visaclass = visa.visaclass;
+        data.visatype = visa.visatype;
+        data.visaenddate = visa.visaenddate;
+      }
     }
 
     this.form.controls.userInfo.patchValue(data);

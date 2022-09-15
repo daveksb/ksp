@@ -5,11 +5,16 @@ import {
   RequestHeaderInfoComponent,
 } from '@ksp/shared/ui';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
-import { Router } from '@angular/router';
+
 import { MatDialog } from '@angular/material/dialog';
-import { FormArray, FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
-import { providerFactory } from '@ksp/shared/utility';
+import { providerFactory, thaiDate } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-request-reward-form',
@@ -30,31 +35,32 @@ export class RequestRewardFormComponent
   implements OnInit
 {
   override form = this.fb.group({
-    workName: [],
-    workType: [],
-    workSubmit: [],
-    rewardLink: [],
-    personId: [''],
+    rewardname: [null, Validators.required],
+    rewardtype: [null, Validators.required],
+    submitBefore: [null, Validators.required],
+    vdoLink: [],
+    /*     personId: [''],
     prefix: [null],
     firstName: [''],
     lastName: [''],
     phone: [''],
     email: [''],
-    academicStanding: [''],
-    rows: this.fb.array([]),
+    academicStanding: [''], */
+    members: this.fb.array([]),
   });
 
   rewardFiles = [
-    'แบบ นร. 1',
-    'แบบ นร.2',
-    'เอกสารอื่นๆ',
-    'บันทึกนำส่งจากสถานศึกษา',
+    { name: 'แบบ นร. 1', fileId: '' },
+    { name: 'แบบ นร.2', fileId: '' },
+    { name: 'เอกสารอื่นๆ', fileId: '' },
+    { name: 'บันทึกนำส่งจากสถานศึกษา', fileId: '' },
   ];
 
   rewards = rewards;
+  today = thaiDate(new Date());
 
   constructor(
-    private router: Router,
+    //private router: Router,
     public dialog: MatDialog,
     private fb: FormBuilder
   ) {
@@ -72,14 +78,14 @@ export class RequestRewardFormComponent
     this.addRow();
   }
 
-  get rows() {
-    return this.form.controls['rows'] as FormArray;
+  get members() {
+    return this.form.controls.members as FormArray;
   }
 
   addRow() {
     const rewardForm = this.fb.group({
-      developerType: [null],
-      personId: [''],
+      membertype: [null],
+      idcardno: [null],
       prefix: [null],
       firstName: [''],
       lastName: [''],
@@ -88,7 +94,7 @@ export class RequestRewardFormComponent
       academicStanding: [''],
     });
 
-    this.rows.push(rewardForm);
+    this.members.push(rewardForm);
   }
 }
 

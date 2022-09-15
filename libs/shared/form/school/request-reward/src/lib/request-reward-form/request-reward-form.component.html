@@ -6,8 +6,8 @@
   <div class="bg-white py-3 px-4">
     <div>
       <ksp-request-header-info
-        [requestDate]="'10 ตุลาคม 2565'"
-        [requestNumber]="'112234467876545'"
+        [requestDate]="today"
+        [requestNumber]="''"
       ></ksp-request-header-info>
       <hr />
 
@@ -16,23 +16,23 @@
 
         <div class="row mb-2">
           <div class="col">
-            <label class="form-label"
+            <label class="form-label required"
               >ชื่อผลงานหนึ่งโรงเรียนหนึ่งนวัตกรรม</label
             >
             <textarea
               class="form-control"
               rows="3"
-              formControlName="workName"
+              formControlName="rewardname"
             ></textarea>
           </div>
         </div>
 
         <div class="row mb-3">
           <div class="col-6">
-            <label class="form-label"
+            <label class="form-label required"
               >ประเภทผลงานหนึ่งโรงเรียนหนึ่งนวัตกรรม</label
             >
-            <select class="form-select" formControlName="workType">
+            <select class="form-select" formControlName="rewardtype">
               <option value="null" selected hidden disabled>กรุณาเลือก</option>
               <option value="1">One</option>
               <option value="2">Two</option>
@@ -42,13 +42,15 @@
         </div>
 
         <div class="bg-light py-2 px-3 mb-3">
-          <div class="box-header">การส่งผลงานหนึ่งโรงเรียนหนึ่งนวัตกรรม</div>
+          <div class="box-header required">
+            การส่งผลงานหนึ่งโรงเรียนหนึ่งนวัตกรรม
+          </div>
 
           <ng-container *ngFor="let item of rewards"
             ><div class="d-flex flex-row align-items-center mb-2">
               <input
                 class="form-check-input m-0"
-                formControlName="workSubmit"
+                formControlName="submitBefore"
                 type="radio"
                 value="{{ item.value }}"
               />
@@ -57,7 +59,7 @@
           </ng-container>
         </div>
 
-        <div class="box-header mb-3">ผู้ร่วมพัฒนาผลงานนวัตกรรม</div>
+        <!--  <div class="box-header mb-3">ผู้ร่วมพัฒนาผลงานนวัตกรรม</div>
         <div class="form-label text-black">ผู้บริหารสถานศึกษา</div>
         <div class="mb-3">
           <table class="table table-responsive">
@@ -129,7 +131,7 @@
               </tr>
             </tbody>
           </table>
-        </div>
+        </div> -->
         <div class="form-label text-black">คณะผู้ร่วมพัฒนาผลงานนวัตกรรม</div>
         <div class="mb-3">
           <table class="table table-responsive">
@@ -147,15 +149,14 @@
               </tr>
             </thead>
             <tbody class="body__table">
-              <ng-container formArrayName="rows">
-                <ng-container *ngFor="let row of rows.controls; let i = index">
+              <ng-container formArrayName="members">
+                <ng-container
+                  *ngFor="let row of members.controls; let i = index"
+                >
                   <tr [formGroupName]="i">
                     <td class="text-center">{{ i + 1 }}</td>
                     <td style="width: 125px">
-                      <select
-                        class="form-select"
-                        formControlName="developerType"
-                      >
+                      <select class="form-select" formControlName="membertype">
                         <option value="null" selected hidden disabled>
                           กรุณาเลือก
                         </option>
@@ -168,7 +169,7 @@
                       <input
                         type="text"
                         class="form-control"
-                        formControlName="personId"
+                        formControlName="idcardno"
                       />
                     </td>
                     <td style="width: 125px">
@@ -227,7 +228,7 @@
           <ksp-add-row-button
             class="blue"
             (addRowClick)="addRow()"
-            *ngIf="rows.length < 5"
+            *ngIf="members.length < 5"
             >เพิ่มรายชื่อ</ksp-add-row-button
           >
         </div>
@@ -243,9 +244,9 @@
           ></ksp-form-attachment>
         </div>
 
-        <div class="box-header text-primary">วีดิทัศน์ประกอบการขอรางวัล</div>
+        <div class="box-header text-primary">VDO ประกอบการขอรางวัล</div>
         <div>ลิงก์ (youtube)</div>
-        <input class="form-control" type="url" formControlName="rewardLink" />
+        <input class="form-control" type="url" formControlName="vdoLink" />
       </div>
     </div>
   </div>

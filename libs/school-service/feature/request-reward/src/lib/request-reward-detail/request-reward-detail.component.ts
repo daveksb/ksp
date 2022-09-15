@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -12,17 +12,10 @@ import {
   templateUrl: './request-reward-detail.component.html',
   styleUrls: ['./request-reward-detail.component.scss'],
 })
-export class RequestRewardDetailComponent implements OnInit {
+export class RequestRewardDetailComponent {
   form = this.fb.group({
-    requestReward: [],
+    reward: [],
   });
-
-  rewardFiles = [
-    'แบบ นร. 1',
-    'แบบ นร.2',
-    'เอกสารอื่นๆ',
-    'บันทึกนำส่งจากสถานศึกษา',
-  ];
 
   rewards = rewards;
 
@@ -32,14 +25,13 @@ export class RequestRewardDetailComponent implements OnInit {
     private fb: FormBuilder
   ) {}
 
-  ngOnInit(): void {}
-
   cancel() {
-    this.router.navigate(['/', 'temp-license', 'list']);
+    this.router.navigate(['/temp-license', 'list']);
   }
 
-  save() {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+  save(form: any) {
+    console.log('form = ', form.reward);
+    /*     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
@@ -50,7 +42,7 @@ export class RequestRewardDetailComponent implements OnInit {
       if (res) {
         this.onConfirmed();
       }
-    });
+    }); */
   }
 
   onConfirmed() {
