@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { SchoolRequestType, UserInfoFormType } from '@ksp/shared/constant';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import {
@@ -18,9 +18,13 @@ export class FormUserInfoComponent
   extends KspFormBaseComponent
   implements OnInit
 {
-  @Input() nationalitys = null;
   @Input() isDarkMode = false;
-  @Input() prefixList = null;
+  @Input() prefixList: any[] = [];
+  @Input() countryList: any[] = [];
+  @Input() nationList: any[] = [];
+  @Input() visaClassList: any[] = [];
+  @Input() visaTypeList: any[] = [];
+
   @Input() displayMode!: number[];
 
   RequestTypeEnum = SchoolRequestType;
@@ -35,7 +39,7 @@ export class FormUserInfoComponent
    * Use in E-service, School-Service
    */
 
-  override form = createDefaultUserInfoForm(this.fb, Validators);
+  override form = createDefaultUserInfoForm(this.fb);
 
   constructor(private fb: FormBuilder) {
     super();
@@ -48,9 +52,23 @@ export class FormUserInfoComponent
     );
   }
   ngOnInit(): void {
-    this.form.controls.passportno.clearValidators();
-    this.form.controls.position.clearValidators();
-    console.log('diaplay mode = ', this.displayMode);
+    // ถ้าเป็น form คนไทยไม่ต้อง validate field เหล่านี้
+    //console.log('display mode = ', this.displayMode);
+    if (this.displayMode.includes(UserInfoFormType.thai)) {
+      this.form.controls.passportno.clearValidators();
+      this.form.controls.passportstartdate.clearValidators();
+      this.form.controls.passportenddate.clearValidators();
+      this.form.controls.position.clearValidators();
+    }
+
+    if (this.displayMode.includes(UserInfoFormType.foreign)) {
+      this.form.controls.idcardno.clearValidators();
+      this.form.controls.workphone.clearValidators();
+      this.form.controls.contactphone.clearValidators();
+      this.form.controls.position.clearValidators();
+      this.form.controls.sex.clearValidators();
+      this.form.controls.email.clearValidators();
+    }
   }
   get idCardNo() {
     return this.form.controls.idcardno;

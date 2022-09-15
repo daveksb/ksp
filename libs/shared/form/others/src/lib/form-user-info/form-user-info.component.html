@@ -234,6 +234,9 @@
         formControlName="country"
       >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option *ngFor="let c of countryList" [value]="c.countryNo">
+          {{ c?.countryN }}
+        </option>
       </select>
     </div>
 
@@ -245,11 +248,8 @@
         formControlName="nationality"
       >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
-        <option
-          *ngFor="let nationality of nationalitys"
-          [value]="nationality.nationid"
-        >
-          {{ nationality.nationName }}
+        <option *ngFor="let n of nationList" [value]="n.nationId">
+          {{ n.nationName }}
         </option>
       </select>
     </div>
@@ -326,10 +326,10 @@
         [class.bg-white]="!isDarkMode && mode === 'edit'"
         formControlName="visaclass"
       >
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+        <option value="null" selected disabled>กรุณาเลือก</option>
+        <option *ngFor="let v of visaClassList" [value]="v.id">
+          {{ v.name }}
+        </option>
       </select>
     </div>
 
@@ -340,10 +340,10 @@
         [class.bg-white]="!isDarkMode && mode === 'edit'"
         formControlName="visatype"
       >
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option *ngFor="let v of visaTypeList" [value]="v.id">
+          {{ v.nameTh }}
+        </option>
       </select>
     </div>
 
@@ -363,7 +363,7 @@
       >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option
-          *ngFor="let nationality of nationalitys"
+          *ngFor="let nationality of nationList"
           [value]="nationality.nationid"
         >
           {{ nationality.nationName }}

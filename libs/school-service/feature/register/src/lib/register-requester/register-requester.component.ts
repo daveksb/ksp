@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SchoolRequestType } from '@ksp/shared/constant';
+import { UserInfoFormType } from '@ksp/shared/constant';
 import { FormMode } from '@ksp/shared/interface';
 import { GeneralInfoService, RequestLicenseService } from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
@@ -21,7 +21,7 @@ export class RegisterRequesterComponent implements OnInit {
   prefixList$!: Observable<any>;
   nationalitys$!: Observable<any>;
   mode: FormMode = 'edit';
-  userInfoFormdisplayMode: number = SchoolRequestType.ขอยื่นผู้ประสานงาน;
+  userInfoFormdisplayMode: number = UserInfoFormType.thai;
   school!: any;
   private _form = this.fb.group({
     grant1: [false],

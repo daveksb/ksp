@@ -1,45 +1,62 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { SchoolRequestProcess } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { defaultRequestPayload } from '@ksp/shared/interface';
+import { RequestLicenseService } from '@ksp/shared/service';
 
 @Component({
   selector: 'ksp-request-reward-detail',
   templateUrl: './request-reward-detail.component.html',
   styleUrls: ['./request-reward-detail.component.scss'],
 })
-export class RequestRewardDetailComponent implements OnInit {
+export class RequestRewardDetailComponent {
   form = this.fb.group({
-    requestReward: [],
+    reward: [],
   });
 
-  rewardFiles = [
-    'แบบ นร. 1',
-    'แบบ นร.2',
-    'เอกสารอื่นๆ',
-    'บันทึกนำส่งจากสถานศึกษา',
-  ];
-
   rewards = rewards;
+  schoolId = '0010201056';
 
   constructor(
     private router: Router,
     public dialog: MatDialog,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private requestService: RequestLicenseService
   ) {}
 
-  ngOnInit(): void {}
+  createRequest(form: any) {
+    //console.log('create request = ');
+    const baseForm = this.fb.group(defaultRequestPayload);
+    //const formData: any = this.form.getRawValue();
+    form.schoolid = this.schoolId;
+    form.ref1 = `2`;
+    form.ref2 = '40';
+    form.ref3 = '1';
+    form.systemtype = `2`;
+    form.requesttype = `40`;
+    form.subtype = `-`;
+    form.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
+    form.osoimember = JSON.stringify(form.osoimember);
 
-  cancel() {
-    this.router.navigate(['/', 'temp-license', 'list']);
+    baseForm.patchValue(form);
+    console.log('current form = ', baseForm.value);
+    this.requestService.requestLicense(baseForm.value).subscribe((res) => {
+      //console.log('request result = ', res);
+    });
   }
 
-  save() {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+  cancel() {
+    this.router.navigate(['/temp-license', 'list']);
+  }
+
+  save(form: any) {
+    /*     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
@@ -50,7 +67,7 @@ export class RequestRewardDetailComponent implements OnInit {
       if (res) {
         this.onConfirmed();
       }
-    });
+    }); */
   }
 
   onConfirmed() {

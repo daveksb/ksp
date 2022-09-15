@@ -41,6 +41,10 @@
         <ksp-form-user-info
           [isDarkMode]="false"
           [prefixList]="prefixList$ | async"
+          [nationList]="nationList$ | async"
+          [countryList]="countries$ | async"
+          [visaClassList]="visaClassList | async"
+          [visaTypeList]="visaTypeList | async"
           [displayMode]="[userInfoFormType]"
           formControlName="userInfo"
         ></ksp-form-user-info>
