@@ -60,7 +60,10 @@ export class SchoolRequestComponent implements OnInit {
 
   requestId!: number;
   requestData: any;
-  requestSubType = 1;
+
+  systemType = '2'; // school service
+  requestType = '03';
+  requestSubType = 1; // 1 ไทย 2 ผู้บริหาร 3 ต่างชาติ
   requestLabel = '';
   requestNo = '';
   currentProcess!: number;
@@ -111,8 +114,34 @@ export class SchoolRequestComponent implements OnInit {
     this.uniqueTimestamp = `${new Date().getTime()}`;
     this.getList();
     this.checkRequestId();
-    this.checkRequestType();
+    this.checkRequestSubType();
     this.checkButtonsDisableStatus();
+  }
+
+  checkRequestSubType() {
+    this.route.queryParams.subscribe((params) => {
+      this.form.reset();
+      if (Number(params['subtype'])) {
+        this.requestSubType = Number(params['subtype']);
+      }
+
+      if (this.requestSubType === 3) {
+        this.userInfoFormType = UserInfoFormType.foreign;
+      } else {
+        this.userInfoFormType = UserInfoFormType.thai;
+      }
+
+      if (this.requestSubType == 1) {
+        this.requestLabel =
+          'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)';
+      } else if (this.requestSubType == 2) {
+        this.requestLabel =
+          'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ผู้บริหาร)';
+      } else if (this.requestSubType == 3) {
+        this.requestLabel =
+          'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)';
+      }
+    });
   }
 
   submitRequest() {
@@ -149,11 +178,8 @@ export class SchoolRequestComponent implements OnInit {
 
     const userInfo = formData.userInfo;
     userInfo.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
-    userInfo.ref1 = '2';
-    userInfo.ref2 = '03';
-    userInfo.ref3 = '1';
-    userInfo.systemtype = '2';
-    userInfo.requesttype = `3`;
+    userInfo.systemtype = `${this.systemType}`;
+    userInfo.requesttype = `${this.requestType}`;
     userInfo.subtype = `${this.requestSubType}`;
 
     const teaching: any = this.form.controls.teachinginfo.value;
@@ -242,11 +268,13 @@ export class SchoolRequestComponent implements OnInit {
       userInfo.currentprocess = `${SchoolRequestProcess.ยื่นใบคำขอ}`;
     }
 
-    userInfo.ref1 = '2';
+    userInfo.ref1 = `${this.systemType}`;
     userInfo.ref2 = '03';
     userInfo.ref3 = '1';
-    userInfo.systemtype = '2';
-    userInfo.requesttype = `${this.requestSubType}`;
+
+    userInfo.systemtype = `${this.systemType}`;
+    userInfo.requesttype = `${this.requestType}`;
+    userInfo.subtype = `${this.requestSubType}`;
 
     const teaching: any = this.form.controls.teachinginfo.value;
     let teachingInfo = {};
@@ -290,9 +318,9 @@ export class SchoolRequestComponent implements OnInit {
 
   checkButtonsDisableStatus() {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      //console.log('userInfo valid = ', this.form.controls.userInfo.valid);
+      console.log('userInfo valid = ', this.form.controls.userInfo.valid);
       //console.log('edu 1 valid = ', this.form.controls.edu1.valid);
-      //console.log('form valid = ', this.form.valid);
+      console.log('form valid = ', this.form.valid);
 
       // formValid + สถานะเป็นยื่นใบคำขอ, บันทึกชั่วคราวไม่ได้ ส่งใบคำขอไม่ได้
       if (
@@ -478,42 +506,6 @@ export class SchoolRequestComponent implements OnInit {
     dialogRef.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         this.onConfirmed();
-      }
-    });
-  }
-
-  checkRequestType() {
-    this.route.queryParams.subscribe((params) => {
-      this.form.reset();
-      this.requestSubType = Number(params['type']);
-
-      if (this.requestSubType === 3) {
-        this.userInfoFormType = UserInfoFormType.foreign;
-      } else {
-        this.userInfoFormType = UserInfoFormType.thai;
-      }
-
-      if (params['type'] == 1) {
-        this.requestLabel =
-          SchoolRequestType[
-            SchoolRequestType[
-              'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)'
-            ]
-          ];
-      } else if (params['type'] == 2) {
-        this.requestLabel =
-          SchoolRequestType[
-            SchoolRequestType[
-              'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ผู้บริหาร)'
-            ]
-          ];
-      } else if (params['type'] == 3) {
-        this.requestLabel =
-          SchoolRequestType[
-            SchoolRequestType[
-              'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)'
-            ]
-          ];
       }
     });
   }

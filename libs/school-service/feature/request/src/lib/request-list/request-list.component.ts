@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { SchoolRequestProcess } from '@ksp/shared/constant';
+import {
+  SchoolRequestProcess,
+  SchoolRequestSubType,
+  SchoolRequestType,
+} from '@ksp/shared/constant';
 import { RequestLicenseService, TempLicenseService } from '@ksp/shared/service';
 import { replaceEmptyWithNull } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
@@ -25,6 +29,7 @@ export class SchoolRequestListComponent implements OnInit {
     'idcardno',
     'name',
     'requesttype',
+    'subtype',
     'currentprocess',
     'requeststatus',
     'updatedate',
@@ -34,6 +39,8 @@ export class SchoolRequestListComponent implements OnInit {
   ];
   dataSource = new MatTableDataSource<TempLicenseInfo>();
   RequestProcessEnum = SchoolRequestProcess;
+  RequestTypeEnum = SchoolRequestType;
+  RequestSubTypeEnum = SchoolRequestSubType;
 
   constructor(
     private router: Router,
@@ -58,15 +65,15 @@ export class SchoolRequestListComponent implements OnInit {
     this.dataSource.data = [];
   }
 
-  goToRequestPage(requestType: number) {
+  goToRequestPage(subType: number) {
     this.router.navigate(['/temp-license', 'request'], {
-      queryParams: { type: requestType },
+      queryParams: { subtype: subType },
     });
   }
 
-  viewRequest(requestType: number, requestId: number) {
+  viewRequest(subType: number, requestId: number) {
     this.router.navigate(['/temp-license', 'request', requestId], {
-      queryParams: { type: requestType },
+      queryParams: { subtype: subType },
     });
   }
 
@@ -81,31 +88,6 @@ export class SchoolRequestListComponent implements OnInit {
   rewardPage() {
     this.router.navigate(['/request-reward', 'detail']);
   }
-
-  checkType(input: string) {
-    let result = '-';
-    if (input === '1') {
-      result = 'ครู';
-    }
-    if (input === '2') {
-      result = 'ผู้บริหารสถานศึกษา';
-    }
-    return result;
-  }
-
-  checkProcess(input: any) {
-    return SchoolRequestProcess[input];
-  }
-  /*     if (input === 'creating') {
-      return SchoolRequestProcess.กำลังสร้าง;
-    } else if (input === 'created') {
-      return SchoolRequestProcess.ยื่นใบคำขอ;
-    } else if (input === 'proceeding') {
-      return SchoolRequestProcess.กำลังดำเนินการ;
-    } else {
-      return '';
-    }
-  } */
 }
 
 export interface TempLicenseInfo {

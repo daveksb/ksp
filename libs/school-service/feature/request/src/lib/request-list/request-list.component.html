@@ -65,8 +65,12 @@
           </ng-container>
 
           <ng-container matColumnDef="idcardno">
-            <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
-            <td mat-cell *matCellDef="let element">{{ element.idcardno }}</td>
+            <th mat-header-cell *matHeaderCellDef>
+              หมายเลขบัตรประชาชน/หนังสือเดินทาง
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.idcardno }} {{ element.passportno }}
+            </td>
           </ng-container>
 
           <ng-container matColumnDef="name">
@@ -77,9 +81,16 @@
           </ng-container>
 
           <ng-container matColumnDef="requesttype">
+            <th mat-header-cell *matHeaderCellDef>ประเภทใบคำขอ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ RequestTypeEnum[element.requesttype] }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="subtype">
             <th mat-header-cell *matHeaderCellDef>ประเภทวิชาชีพ</th>
             <td mat-cell *matCellDef="let element">
-              {{ checkType(element.requesttype) }}
+              {{ RequestSubTypeEnum[element.subtype] }}
             </td>
           </ng-container>
 
@@ -124,7 +135,7 @@
             <td mat-cell *matCellDef="let element">
               <i
                 role="button"
-                (click)="viewRequest(element.requesttype, element.id)"
+                (click)="viewRequest(element.subtype, element.id)"
                 class="bi bi-file-earmark-text text-primary fs-5"
               ></i>
             </td>
