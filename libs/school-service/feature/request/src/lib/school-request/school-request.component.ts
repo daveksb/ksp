@@ -133,25 +133,13 @@ export class SchoolRequestComponent implements OnInit {
 
       if (this.requestSubType == 1) {
         this.requestLabel =
-          SchoolRequestType[
-            SchoolRequestType[
-              'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)'
-            ]
-          ];
+          'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)';
       } else if (this.requestSubType == 2) {
         this.requestLabel =
-          SchoolRequestType[
-            SchoolRequestType[
-              'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ผู้บริหาร)'
-            ]
-          ];
+          'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ผู้บริหาร)';
       } else if (this.requestSubType == 3) {
         this.requestLabel =
-          SchoolRequestType[
-            SchoolRequestType[
-              'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)'
-            ]
-          ];
+          'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)';
       }
     });
   }
