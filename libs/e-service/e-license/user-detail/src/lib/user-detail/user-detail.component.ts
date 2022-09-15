@@ -10,6 +10,7 @@ import { GeneralInfoService, RequestLicenseService } from '@ksp/shared/service';
 import { FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { SchoolRequestProcess } from '@ksp/shared/constant';
+import { parseJson } from '@ksp/shared/utility';
 
 @Component({
   templateUrl: './user-detail.component.html',

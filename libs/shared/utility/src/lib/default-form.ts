@@ -44,6 +44,9 @@ export function createDefaultUserInfoForm(FormBuilder: any, Validators: any) {
     workphone: [null, [Validators.required, Validators.pattern(phonePattern)]],
     nationality: [null],
     country: [null],
+    visaclass: [null],
+    visatype: [null],
+    visaenddate: [null],
   });
 }
 

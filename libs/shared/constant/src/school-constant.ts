@@ -74,5 +74,6 @@ export enum SchoolRequestProcess {
 export enum UserInfoFormType {
   'thai',
   'foreign',
+
   //'register',
 }

@@ -21,7 +21,7 @@ export class FormUserInfoComponent
   @Input() nationalitys = null;
   @Input() isDarkMode = false;
   @Input() prefixList = null;
-  @Input() displayMode!: number;
+  @Input() displayMode!: number[];
 
   RequestTypeEnum = SchoolRequestType;
   validatorMessages = validatorMessages;
@@ -50,6 +50,7 @@ export class FormUserInfoComponent
   ngOnInit(): void {
     this.form.controls.passportno.clearValidators();
     this.form.controls.position.clearValidators();
+    console.log('diaplay mode = ', this.displayMode);
   }
   get idCardNo() {
     return this.form.controls.idcardno;
