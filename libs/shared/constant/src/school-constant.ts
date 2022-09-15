@@ -71,16 +71,8 @@ export enum SchoolRequestProcess {
   'ยกเลิก',
 }
 
-/* export enum SchoolRequestProcess {
-  creating = 'กำลังสร้าง',
-  created = 'ยื่นใบคำขอ',
-  proceeding = 'กำลังดำเนินการ',
-  edit = 'ปรับแก้ไข/เพิ่มเติม',
-  verified = 'ผ่านการตรวจสอบ',
-  certified = 'ผ่านการรับรอง/พิจารณา',
-  uncertified = 'ไม่ผ่านการรับรอง/พิจารณา',
-  reject = 'ส่งคืนและยกเลิก',
-  expired = 'หมดอายุ',
-  cancel = 'ยกเลิก',
+export enum UserInfoFormType {
+  'thai',
+  'foreign',
+  //'register',
 }
- */

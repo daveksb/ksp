@@ -9,6 +9,7 @@ import {
 import { GeneralInfoService, RequestLicenseService } from '@ksp/shared/service';
 import { FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { SchoolRequestProcess } from '@ksp/shared/constant';
 
 @Component({
   templateUrl: './user-detail.component.html',
@@ -76,6 +77,17 @@ export class UserDetailComponent implements OnInit {
       //this.pathUserInfo(res);
       //data.birthdate = data.birthdate.split('T')[0];
       this.form.controls.userInfo.patchValue(res);
+    });
+  }
+
+  approveRequest() {
+    const payload = {
+      id: `${this.requestId}`,
+      currentprocess: `${SchoolRequestProcess.ผ่านการตรวจสอบ}`,
+    };
+    this.requestService.changeRequestProcess(payload).subscribe((res) => {
+      //console.log('Cancel request  = ', res);
+      //create new user in sch_user
     });
   }
 

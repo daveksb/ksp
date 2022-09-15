@@ -8,6 +8,7 @@ import {
   SchoolRequestProcess,
   SchoolRequestType,
   subjects,
+  UserInfoFormType,
 } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
@@ -56,8 +57,8 @@ export class SchoolRequestComponent implements OnInit {
 
   requestId!: number;
   requestData: any;
-  requestType = 1;
-  requestTypeLabel = '';
+  requestSubType = 1;
+  requestLabel = '';
   requestNo = '';
   currentProcess!: number;
   processEnum = SchoolRequestProcess;
@@ -71,10 +72,7 @@ export class SchoolRequestComponent implements OnInit {
   ที่ขออนุญาต`;
 
   schoolId = '0010201056';
-  displayMode: number =
-    SchoolRequestType[
-      'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)'
-    ];
+  userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form
 
   eduFiles: any[] = [];
   teachingFiles: any[] = [];
@@ -152,7 +150,7 @@ export class SchoolRequestComponent implements OnInit {
     userInfo.ref2 = '03';
     userInfo.ref3 = '1';
     userInfo.systemtype = '2';
-    userInfo.requesttype = `${this.requestType}`;
+    userInfo.requesttype = `${this.requestSubType}`;
 
     const teaching: any = this.form.controls.teachinginfo.value;
     let teachingInfo = {};
@@ -244,7 +242,7 @@ export class SchoolRequestComponent implements OnInit {
     userInfo.ref2 = '03';
     userInfo.ref3 = '1';
     userInfo.systemtype = '2';
-    userInfo.requesttype = `${this.requestType}`;
+    userInfo.requesttype = `${this.requestSubType}`;
 
     const teaching: any = this.form.controls.teachinginfo.value;
     let teachingInfo = {};
@@ -479,23 +477,29 @@ export class SchoolRequestComponent implements OnInit {
   checkRequestType() {
     this.route.queryParams.subscribe((params) => {
       this.form.reset();
-      this.requestType = Number(params['type']);
+      this.requestSubType = Number(params['type']);
+      //this.userInfoFormType = Number(params['type']);
+
+      if (this.requestSubType === 3) {
+        this.userInfoFormType = UserInfoFormType.foreign;
+      }
+
       if (params['type'] == 1) {
-        this.requestTypeLabel =
+        this.requestLabel =
           SchoolRequestType[
             SchoolRequestType[
               'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)'
             ]
           ];
       } else if (params['type'] == 2) {
-        this.requestTypeLabel =
+        this.requestLabel =
           SchoolRequestType[
             SchoolRequestType[
               'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ผู้บริหาร)'
             ]
           ];
       } else if (params['type'] == 3) {
-        this.requestTypeLabel =
+        this.requestLabel =
           SchoolRequestType[
             SchoolRequestType[
               'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)'

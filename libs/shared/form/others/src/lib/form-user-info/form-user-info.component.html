@@ -2,19 +2,7 @@
   <input type="hidden" formControlName="id" />
 
   <div class="row mb-2">
-    <div
-      class="col-6"
-      *ngIf="
-        !(
-          displayMode ===
-            RequestTypeEnum['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ'] ||
-          displayMode ===
-            RequestTypeEnum[
-              'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)'
-            ]
-        )
-      "
-    >
+    <div class="col-6" *ngIf="displayMode === FormTypeEnum.thai">
       <label
         class="form-label required"
         [ngClass]="{ required: mode === 'edit' }"
@@ -35,12 +23,7 @@
       </ng-container>
     </div>
 
-    <div
-      class="col"
-      [ngClass]="{
-        hide: displayMode !== RequestTypeEnum['ขอหนังสือรับรองคุณวุฒิ']
-      }"
-    >
+    <div class="col" *ngIf="false">
       <label class="form-label">ประเภทการยื่น</label>
       <select
         class="form-select"
@@ -51,14 +34,8 @@
         <option value="2">ชาวต่างชาติ</option>
       </select>
     </div>
-    <div
-      class="col"
-      [ngClass]="{
-        hide:
-          displayMode === RequestTypeEnum['ขอหนังสือรับรองคุณวุฒิ'] ||
-          displayMode === RequestTypeEnum['ขอยื่นผู้ประสานงาน']
-      }"
-    >
+
+    <div class="col" *ngIf="displayMode === FormTypeEnum.foreign">
       <label class="form-label">หมายเลขหนังสือเดินทาง (Passport Number) </label>
       <input class="form-control" type="text" formControlName="passportno" />
       <ng-container
@@ -70,16 +47,7 @@
       </ng-container>
     </div>
 
-    <div
-      class="col"
-      [ngClass]="{
-        hide:
-          displayMode !==
-          RequestTypeEnum[
-            'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)'
-          ]
-      }"
-    >
+    <div class="col" *ngIf="displayMode === FormTypeEnum.foreign">
       <label class="form-label required">วันที่ออก</label>
       <input
         class="form-control"
@@ -89,16 +57,7 @@
       />
     </div>
 
-    <div
-      class="col"
-      [ngClass]="{
-        hide:
-          displayMode !==
-          RequestTypeEnum[
-            'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)'
-          ]
-      }"
-    >
+    <div class="col" *ngIf="displayMode === FormTypeEnum.foreign">
       <label class="form-label required">วันที่หมดอายุ</label>
       <input
         class="form-control"
@@ -147,17 +106,7 @@
       </ng-container>
     </div>
 
-    <div
-      class="col-md"
-      *ngIf="
-        displayMode ===
-          RequestTypeEnum[
-            'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)'
-          ] ||
-        displayMode ===
-          RequestTypeEnum['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ']
-      "
-    >
+    <div class="col-md" *ngIf="displayMode === FormTypeEnum.foreign">
       <label class="form-label">ชื่อกลาง</label>
       <input
         [class.bg-light]="isDarkMode"
@@ -222,17 +171,7 @@
         </span>
       </ng-container>
     </div>
-    <div
-      class="col-md"
-      *ngIf="
-        displayMode ===
-          RequestTypeEnum[
-            'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)'
-          ] ||
-        displayMode ===
-          RequestTypeEnum['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ']
-      "
-    >
+    <div class="col-md" *ngIf="displayMode === FormTypeEnum.foreign">
       <label class="form-label required">ชื่อกลาง</label>
       <input
         [class.bg-light]="isDarkMode"
@@ -262,13 +201,7 @@
   </div>
 
   <div class="row mb-2">
-    <div
-      class="col-md-6"
-      *ngIf="
-        displayMode !==
-        RequestTypeEnum['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ']
-      "
-    >
+    <div class="col-md-6" *ngIf="displayMode === FormTypeEnum.thai">
       <label class="form-label required">เพศ</label>
       <select
         [class.bg-white]="!isDarkMode && mode === 'edit'"
@@ -291,13 +224,7 @@
       />
     </div>
 
-    <div
-      class="col"
-      *ngIf="
-        displayMode ===
-        RequestTypeEnum['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ']
-      "
-    >
+    <div class="col" *ngIf="displayMode === FormTypeEnum.foreign">
       <label class="form-label required">ประเทศ</label>
       <select
         [class.bg-white]="!isDarkMode && mode === 'edit'"
@@ -308,13 +235,7 @@
       </select>
     </div>
 
-    <div
-      class="col"
-      *ngIf="
-        displayMode ===
-        RequestTypeEnum['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ']
-      "
-    >
+    <div class="col" *ngIf="displayMode === FormTypeEnum.foreign">
       <label class="form-label">สัญชาติ</label>
       <select
         [class.bg-white]="!isDarkMode && mode === 'edit'"
@@ -332,13 +253,7 @@
     </div>
   </div>
 
-  <div
-    class="row mb-2"
-    *ngIf="
-      displayMode !==
-      RequestTypeEnum['ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ']
-    "
-  >
+  <div class="row mb-2" *ngIf="displayMode === FormTypeEnum.thai">
     <div class="col-md-6">
       <label class="form-label required">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
       <input
@@ -390,10 +305,7 @@
         }}</span>
       </ng-container>
     </div>
-    <div
-      class="col-md-6"
-      *ngIf="displayMode === RequestTypeEnum['ขอยื่นผู้ประสานงาน']"
-    >
+    <div class="col-md-6" *ngIf="false">
       <label class="form-label required">ตำแหน่ง</label>
       <input
         class="form-control"
@@ -441,10 +353,7 @@
       </div>
     </div> -->
 
-  <div
-    class="row mb-2"
-    *ngIf="displayMode === RequestTypeEnum['ขอหนังสือรับรองคุณวุฒิ']"
-  >
+  <div class="row mb-2" *ngIf="true">
     <div class="col-6">
       <label class="form-label required">สัญชาติ</label>
       <select
