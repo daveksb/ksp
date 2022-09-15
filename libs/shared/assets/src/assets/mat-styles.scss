@@ -43,7 +43,7 @@
 
 /*  Mat stepper */
 .mat-stepper-label-position-bottom .mat-horizontal-stepper-header-container {
-  width: 75%;
+  width: auto;
   align-self: center;
 }
 
@@ -65,7 +65,7 @@
 }
 
 .mat-step-text-label {
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 tr.mat-header-row {

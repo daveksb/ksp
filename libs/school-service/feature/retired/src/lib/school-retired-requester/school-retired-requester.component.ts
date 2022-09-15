@@ -31,4 +31,8 @@ export class SchoolRetiredRequesterComponent {
   nextPage() {
     this.router.navigate(['/', 'retired-user', 'coordinator']);
   }
+
+  prevPage() {
+    this.router.navigate(['/', 'retired-user', 'search']);
+  }
 }

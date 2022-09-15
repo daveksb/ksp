@@ -26,7 +26,7 @@ export class BottomNavComponent {
   @Input() disableSaveButton = false;
   @Input() showCenterButtons = false;
   @Input() showCancelButton = true;
-  @Input() disableCancelButton = true;
+  @Input() disableCancelButton = false;
   @Input() showTempSaveButton = false;
   @Input() disableTempSaveButton = true;
   @Input() showSaveButton = false;

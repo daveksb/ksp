@@ -11,15 +11,18 @@ import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
 })
 export class LicenseRequestStudySupervisionComponent implements OnInit {
   experienceFiles = [
-    '1. สำเนาวุฒิทางการศึกษา',
-    '2. หนังสือรับรองคุณวุฒิ	',
-    '3. วุฒิบัตรอบรม',
-  ];
-
-  educationeFiles = [
-    '1. สำเนาวุฒิทางการศึกษา',
-    '2. เอกสารผู้สำเร็จการศึกษา ( ระบบ KSP BUNDIT)		',
-    '3. วุฒิบัตรอบรม',
+    {
+      name: '1. สำเนาวุฒิทางการศึกษา',
+      fileId: '',
+    },
+    {
+      name: '2. เอกสารผู้สำเร็จการศึกษา ( ระบบ KSP BUNDIT)',
+      fileId: '',
+    },
+    {
+      name: '3. วุฒิบัตรอบรม',
+      fileId: '',
+    },
   ];
 
   constructor(public dialog: MatDialog, private router: Router) {}
