@@ -13,13 +13,8 @@ import {
   EducationDetailService,
 } from '@ksp/shared/service';
 import { defaultRequestPayload } from '@ksp/shared/interface';
-import {
-  formatCheckboxData,
-  parseJson,
-  replaceEmptyWithNull,
-  thaiDate,
-  toLowercaseProp,
-} from '@ksp/shared/utility';
+import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
+import { UserInfoFormType } from '@ksp/shared/constant';
 
 @UntilDestroy()
 @Component({
@@ -27,6 +22,7 @@ import {
   styleUrls: ['./license-request.component.scss'],
 })
 export class LicenseRequestComponent implements OnInit {
+  userInfoType = UserInfoFormType.thai;
   form = this.fb.group({
     userInfo: [],
     address1: [],

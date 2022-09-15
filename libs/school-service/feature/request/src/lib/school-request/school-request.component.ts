@@ -6,8 +6,10 @@ import {
   levels,
   RequestPageType,
   SchoolRequestProcess,
+  SchoolRequestSubType,
   SchoolRequestType,
   subjects,
+  UserInfoFormType,
 } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
@@ -53,11 +55,17 @@ export class SchoolRequestComponent implements OnInit {
   staffTypes$!: Observable<any>;
   positionTypes$!: Observable<any>;
   academicTypes$!: Observable<any>;
+  nationList$!: Observable<any>;
+  visaTypeList!: Observable<any>;
+  visaClassList!: Observable<any>;
 
   requestId!: number;
   requestData: any;
-  requestType = 1;
-  requestTypeLabel = '';
+
+  systemType = '2'; // school service
+  requestType = '03';
+  requestSubType = SchoolRequestSubType.ครู; // 1 ไทย 2 ผู้บริหาร 3 ต่างชาติ
+  requestLabel = '';
   requestNo = '';
   currentProcess!: number;
   processEnum = SchoolRequestProcess;
@@ -71,10 +79,7 @@ export class SchoolRequestComponent implements OnInit {
   ที่ขออนุญาต`;
 
   schoolId = '0010201056';
-  displayMode: number =
-    SchoolRequestType[
-      'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)'
-    ];
+  userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form
 
   eduFiles: any[] = [];
   teachingFiles: any[] = [];
@@ -110,8 +115,34 @@ export class SchoolRequestComponent implements OnInit {
     this.uniqueTimestamp = `${new Date().getTime()}`;
     this.getList();
     this.checkRequestId();
-    this.checkRequestType();
+    this.checkRequestSubType();
     this.checkButtonsDisableStatus();
+  }
+
+  checkRequestSubType() {
+    this.route.queryParams.subscribe((params) => {
+      this.form.reset();
+      if (Number(params['subtype'])) {
+        this.requestSubType = Number(params['subtype']);
+      }
+
+      if (this.requestSubType === SchoolRequestSubType.ชาวต่างชาติ) {
+        this.userInfoFormType = UserInfoFormType.foreign;
+      } else {
+        this.userInfoFormType = UserInfoFormType.thai;
+      }
+
+      if (this.requestSubType == 1) {
+        this.requestLabel =
+          'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)';
+      } else if (this.requestSubType == 2) {
+        this.requestLabel =
+          'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ผู้บริหาร)';
+      } else if (this.requestSubType == 3) {
+        this.requestLabel =
+          'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)';
+      }
+    });
   }
 
   submitRequest() {
@@ -148,11 +179,14 @@ export class SchoolRequestComponent implements OnInit {
 
     const userInfo = formData.userInfo;
     userInfo.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
-    userInfo.ref1 = '2';
-    userInfo.ref2 = '03';
-    userInfo.ref3 = '1';
-    userInfo.systemtype = '2';
+    userInfo.systemtype = `${this.systemType}`;
     userInfo.requesttype = `${this.requestType}`;
+    userInfo.subtype = `${this.requestSubType}`;
+
+    if (this.requestSubType === 3) {
+      userInfo.passportenddate = userInfo.passportenddate.split('T')[0];
+      userInfo.passportstartdate = userInfo.passportstartdate.split('T')[0];
+    }
 
     const teaching: any = this.form.controls.teachinginfo.value;
     let teachingInfo = {};
@@ -170,12 +204,19 @@ export class SchoolRequestComponent implements OnInit {
       };
     }
 
+    const visaInfo = {
+      visaclass: userInfo.visaclass,
+      visatype: userInfo.visatype,
+      visaenddate: userInfo.visaenddate,
+    };
+
     const payload = {
       ...replaceEmptyWithNull(userInfo),
       ...{ addressinfo: JSON.stringify([formData.addr1, formData.addr2]) },
       ...{ eduinfo: JSON.stringify([formData.edu1, formData.edu2]) },
       ...{ teachinginfo: JSON.stringify(teachingInfo) },
       ...{ hiringinfo: JSON.stringify(formData.hiringinfo) },
+      ...{ visainfo: JSON.stringify(visaInfo) },
     };
 
     baseForm.patchValue(payload);
@@ -204,7 +245,7 @@ export class SchoolRequestComponent implements OnInit {
     console.log('update payload = ', res);
     this.requestService.updateRequest(res).subscribe((res) => {
       //console.log('update result = ', res);
-      this.backToListPage();
+      //this.backToListPage();
     });
   }
 
@@ -229,10 +270,8 @@ export class SchoolRequestComponent implements OnInit {
     formData.addr1.addresstype = 1;
     formData.addr2.addresstype = 2;
 
-    const { id, ...rawUserInfo } = formData.userInfo;
-    rawUserInfo.schoolId = this.schoolId;
-
-    const userInfo = toLowercaseProp(rawUserInfo);
+    const { id, ...userInfo } = formData.userInfo;
+    userInfo.schoolid = this.schoolId;
 
     if (this.requestId) {
       userInfo.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
@@ -240,11 +279,13 @@ export class SchoolRequestComponent implements OnInit {
       userInfo.currentprocess = `${SchoolRequestProcess.ยื่นใบคำขอ}`;
     }
 
-    userInfo.ref1 = '2';
+    userInfo.ref1 = `${this.systemType}`;
     userInfo.ref2 = '03';
     userInfo.ref3 = '1';
-    userInfo.systemtype = '2';
+
+    userInfo.systemtype = `${this.systemType}`;
     userInfo.requesttype = `${this.requestType}`;
+    userInfo.subtype = `${this.requestSubType}`;
 
     const teaching: any = this.form.controls.teachinginfo.value;
     let teachingInfo = {};
@@ -262,12 +303,19 @@ export class SchoolRequestComponent implements OnInit {
       };
     }
 
+    const visaInfo = {
+      visaclass: userInfo.visaclass,
+      visatype: userInfo.visatype,
+      visaenddate: userInfo.visaenddate,
+    };
+
     const payload = {
       ...replaceEmptyWithNull(userInfo),
       ...{ addressinfo: JSON.stringify([formData.addr1, formData.addr2]) },
       ...{ eduinfo: JSON.stringify([formData.edu1, formData.edu2]) },
       ...{ teachinginfo: JSON.stringify(teachingInfo) },
       ...{ hiringinfo: JSON.stringify(formData.hiringinfo) },
+      ...{ visainfo: JSON.stringify(visaInfo) },
     };
 
     if (type == 'submit') {
@@ -275,7 +323,6 @@ export class SchoolRequestComponent implements OnInit {
     } else {
       payload.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
     }
-
     //console.log('payload = ', payload);
 
     baseForm.patchValue(payload);
@@ -289,7 +336,6 @@ export class SchoolRequestComponent implements OnInit {
   checkButtonsDisableStatus() {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
       //console.log('userInfo valid = ', this.form.controls.userInfo.valid);
-      //console.log('edu 1 valid = ', this.form.controls.edu1.valid);
       //console.log('form valid = ', this.form.valid);
 
       // formValid + สถานะเป็นยื่นใบคำขอ, บันทึกชั่วคราวไม่ได้ ส่งใบคำขอไม่ได้
@@ -341,7 +387,7 @@ export class SchoolRequestComponent implements OnInit {
       this.requestData = res;
       this.requestNo = res.requestno;
       this.currentProcess = +res.currentprocess;
-      console.log('current process = ', this.currentProcess);
+      //console.log('current process = ', this.currentProcess);
 
       this.pathUserInfo(res);
       this.patchAddress(parseJson(res.addressinfo));
@@ -428,6 +474,20 @@ export class SchoolRequestComponent implements OnInit {
 
   pathUserInfo(data: any) {
     data.birthdate = data.birthdate.split('T')[0];
+
+    if (this.requestSubType === SchoolRequestSubType.ชาวต่างชาติ) {
+      data.passportstartdate = data.passportstartdate.split('T')[0];
+      data.passportenddate = data.passportenddate.split('T')[0];
+      console.log('data = ', data);
+
+      if (data?.visainfo) {
+        const visa = parseJson(data?.visainfo);
+        data.visaclass = visa.visaclass;
+        data.visatype = visa.visatype;
+        data.visaenddate = visa.visaenddate;
+      }
+    }
+
     this.form.controls.userInfo.patchValue(data);
   }
 
@@ -449,6 +509,10 @@ export class SchoolRequestComponent implements OnInit {
     this.attachFiles = this.schoolRequestService.evidenceFiles;
     this.provinces$ = this.addressService.getProvinces();
     this.countries$ = this.addressService.getCountry();
+    this.nationList$ = this.generalInfoService.getNationality();
+    this.visaClassList = this.generalInfoService.getVisaClass();
+    this.visaTypeList = this.generalInfoService.getVisaType();
+
     this.staffTypes$ = this.staffService.getStaffTypes();
     this.positionTypes$ = this.staffService.getPositionTypes();
     this.academicTypes$ = this.staffService.getAcademicStandingTypes();
@@ -472,35 +536,6 @@ export class SchoolRequestComponent implements OnInit {
     dialogRef.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         this.onConfirmed();
-      }
-    });
-  }
-
-  checkRequestType() {
-    this.route.queryParams.subscribe((params) => {
-      this.form.reset();
-      this.requestType = Number(params['type']);
-      if (params['type'] == 1) {
-        this.requestTypeLabel =
-          SchoolRequestType[
-            SchoolRequestType[
-              'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)'
-            ]
-          ];
-      } else if (params['type'] == 2) {
-        this.requestTypeLabel =
-          SchoolRequestType[
-            SchoolRequestType[
-              'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ผู้บริหาร)'
-            ]
-          ];
-      } else if (params['type'] == 3) {
-        this.requestTypeLabel =
-          SchoolRequestType[
-            SchoolRequestType[
-              'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)'
-            ]
-          ];
       }
     });
   }

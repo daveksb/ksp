@@ -29,8 +29,8 @@ export class ApproveNewUserListComponent {
       requestno: params.requestno,
       requeststatus: params.requeststatus,
       requesttype: '1',
-      schoolid: params.institution.schoolid,
-      //schoolid: '0010201056',
+      //schoolid: params.institution?.schoolid,
+      schoolid: '0010201056',
     };
 
     this.requestService.searchRequest(payload).subscribe((res: any) => {

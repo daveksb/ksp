@@ -1,13 +1,10 @@
 <ksp-top-nav
   ><span header>ยื่นใบคำขอ</span
-  ><span subHeader
-    >ขอใบอนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
-    {{ requestTypeLabel }}</span
-  ></ksp-top-nav
+  ><span subHeader> {{ requestLabel }}</span></ksp-top-nav
 >
 
 <div class="bg-secondary bg-opacity-10 px-4 py-2 full-width-2">
-  <div class="box-header">รายละเอียดใบคำ {{ requestTypeLabel }}</div>
+  <div class="box-header">รายละเอียดใบคำ{{ requestLabel }}</div>
   <div [formGroup]="form" class="bg-white py-3 px-4">
     <div>
       <ksp-request-header-info
@@ -19,7 +16,7 @@
       <div class="bg-light px-3 py-2 default-width">
         <div class="box-header text-primary">ค้นหารายการ</div>
 
-        <div class="row mb-3" *ngIf="requestType !== 3">
+        <div class="row mb-3" *ngIf="requestSubType !== 3">
           <div class="col-5">
             <label class="form-label">หมายเลขบัตรประชาชน</label>
             <input
@@ -44,7 +41,11 @@
         <ksp-form-user-info
           [isDarkMode]="false"
           [prefixList]="prefixList$ | async"
-          [displayMode]="displayMode"
+          [nationList]="nationList$ | async"
+          [countryList]="countries$ | async"
+          [visaClassList]="visaClassList | async"
+          [visaTypeList]="visaTypeList | async"
+          [displayMode]="[userInfoFormType]"
           formControlName="userInfo"
         ></ksp-form-user-info>
       </div>
@@ -114,7 +115,7 @@
           </ksp-form-education-info>
 
           <!--           <ksp-form-education-info-manager
-            *ngIf="requestType === 2 || requestType === 3"
+            *ngIf="requestSubType === 2 || requestSubType === 3"
             formControlName="edu3"
           ></ksp-form-education-info-manager> -->
 
@@ -122,14 +123,14 @@
         </mat-tab>
 
         <mat-tab label="ข้อมูลการสอนและการจ้าง">
-          <ng-container *ngIf="requestType === 1 || requestType === 3">
+          <ng-container *ngIf="requestSubType === 1 || requestSubType === 3">
             <ksp-form-teaching-info
               formControlName="teachinginfo"
             ></ksp-form-teaching-info>
             <br />
           </ng-container>
 
-          <!--           <ng-container *ngIf="requestType === 2">
+          <!--           <ng-container *ngIf="requestSubType === 2">
             <ksp-form-teaching-info-manager
               formControlName="teachingInfo2"
             ></ksp-form-teaching-info-manager

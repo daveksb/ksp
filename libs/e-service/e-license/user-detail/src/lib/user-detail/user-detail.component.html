@@ -62,7 +62,7 @@
         formControlName="requester"
         [isDarkMode]="false"
         [mode]="'view'"
-        [displayMode]="0"
+        [displayMode]="[0]"
         [prefixList]="prefixList$ | async"
         formControlName="userInfo"
       ></ksp-form-user-info>
@@ -75,6 +75,14 @@
       <div class="box-header px-4 pt-3">
         ข้อมูลผู้มีอำนาจแต่งตั้ง (ที่ระบุไว้ในเอกสารแนบ)
       </div>
+      <ksp-form-user-info
+        formControlName="requester"
+        [isDarkMode]="false"
+        [mode]="'view'"
+        [displayMode]="[0]"
+        [prefixList]="prefixList$ | async"
+        formControlName="userInfo"
+      ></ksp-form-user-info>
       <ksp-form-coordinator-info [mode]="'view'"></ksp-form-coordinator-info>
     </div>
     <br />

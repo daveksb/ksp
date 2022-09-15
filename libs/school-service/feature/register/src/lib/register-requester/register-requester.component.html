@@ -26,38 +26,25 @@
         [schoolName]="school?.schoolName"
       ></ksp-university-select>
 
-      <div class="mx-4 mt-3">
+      <div class="bg-light px-4 py-3 my-4">
         <div class="text-primary box-header">
           ข้อมูลผู้ขอรหัสสำหรับเข้าใช้งานระบบ
         </div>
-        <div class="form-label">สิทธิ์สำหรับการเข้าใช้งาน</div>
 
-        <ng-container *ngFor="let item of grant">
-          <div class="d-flex align-items-center">
-            <input
-              type="checkbox"
-              formControlName="{{ item.name }}"
-              class="fs-5 my-0 ms-4 form-check-input"
-            />
-            <label class="fs-5 text-black ms-2">{{ item.label }}</label>
-          </div>
-        </ng-container>
+        <ksp-form-user-info
+          formControlName="requester"
+          [isDarkMode]="false"
+          [mode]="mode"
+          [prefixList]="prefixList$ | async"
+          [nationList]="nationalitys$ | async"
+          [displayMode]="[userInfoFormdisplayMode]"
+        ></ksp-form-user-info>
       </div>
-
-      <ksp-form-user-info
-        formControlName="requester"
-        [isDarkMode]="false"
-        [mode]="mode"
-        [prefixList]="prefixList$ | async"
-        [nationalitys]="nationalitys$ | async"
-        [displayMode]="userInfoFormdisplayMode"
-      ></ksp-form-user-info>
-
       <ksp-bottom-nav
-        [isFirstPage]="true"
         [disableNext]="!form.valid"
         [disableNextMessage]="'กรุณากรอกข้อมูลให้ครบถ้วน'"
         (nextClicked)="next()"
+        (prevClicked)="prevPage()"
         [showCenterButtons]="false"
       ></ksp-bottom-nav>
     </div>

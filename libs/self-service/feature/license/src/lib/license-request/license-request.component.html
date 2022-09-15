@@ -20,7 +20,8 @@
         formControlName="userInfo"
         [isDarkMode]="true"
         [prefixList]="prefixList$ | async"
-        [nationalitys]="nationalitys$ | async">
+        [displayMode]="[userInfoType]"
+        [nationList]="nationalitys$ | async">
       </ksp-form-user-info>
     </div>
     <br />
@@ -97,7 +98,7 @@
         <hr />
         <ksp-form-attachment
           title="กรุณาแนบหลักฐาน"
-          [groups]="['สำเนาผลการทดสอบ']"></ksp-form-attachment>
+          [groups]="service.performanceFiles"></ksp-form-attachment>
       </mat-tab>
     </mat-tab-group>
 

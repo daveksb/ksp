@@ -17,7 +17,6 @@ export class SchoolRetiredSearchComponent {
   selectUser = '';
 
   constructor(private router: Router, private fb: FormBuilder) {}
-
   data: RetiredInfo[] = [];
 
   onItemChange(userName: string) {
@@ -31,6 +30,10 @@ export class SchoolRetiredSearchComponent {
 
   confirm() {
     this.router.navigate(['/', 'retired-user', 'requester']);
+  }
+
+  cancel() {
+    this.router.navigate(['/', 'login']);
   }
 }
 
