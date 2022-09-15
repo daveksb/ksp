@@ -16,7 +16,7 @@ export class TokenHandleInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const token = getCookie('schUserToken');
+    const token = getCookie('userToken');
 
     if (
       request.url.includes('kspmasterdata') ||

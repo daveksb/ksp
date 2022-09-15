@@ -1,16 +1,19 @@
-<div class="container">
-  <div class="d-flex flex-column align-items-center">
-    <div class="text-center">
-      <img src="/assets/images/k-logo-2.png" style="width: 334px" />
-      <div class="fs-1">ระบบบริหารจัดการสำหรับเจ้าหน้าที่ (E-Service)</div>
-      <div class="fs-2 mt-4 mb-1 text-orange">เข้าสู่ระบบใช้งาน</div>
-    </div>
+<form [formGroup]="form">
+  <div class="container">
+    <div class="d-flex flex-column align-items-center">
+      <div class="text-center">
+        <img src="/assets/images/k-logo-2.png" style="width: 334px" />
+        <div class="fs-1">ระบบบริหารจัดการสำหรับเจ้าหน้าที่ (E-Service)</div>
+        <div class="fs-2 mt-4 mb-1 text-orange">เข้าสู่ระบบใช้งาน</div>
+      </div>
 
-    <ksp-login-form
-      [hideRegister]="true"
-      (login)="login()"
-      (register)="({})"
-      (forgetPassword)="({})"
-    ></ksp-login-form>
+      <ksp-login-form
+        [hideRegister]="true"
+        (login)="login()"
+        (register)="({})"
+        (forgetPassword)="({})"
+        formControlName="user"
+      ></ksp-login-form>
+    </div>
   </div>
-</div>
+</form>

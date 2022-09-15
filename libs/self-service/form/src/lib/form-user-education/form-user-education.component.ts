@@ -15,6 +15,8 @@ export class FormUserEducationComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+  @Input() educationTypes: 'teacher' | 'manager' | 'supervision' = 'teacher';
+
   @Input() countries: any[] = [];
   selectedEducationType!: number;
 
@@ -23,9 +25,12 @@ export class FormUserEducationComponent
     educationLevelForm: [],
   });
 
-  educationTypes: ListData[] = [];
-  @ViewChild(DynamicComponentDirective, { static: true })
-  myHost!: DynamicComponentDirective;
+  educationTypes1: ListData[] = [];
+  educationTypes2: ListData[] = [];
+  educationTypes3: ListData[] = [];
+
+  /* @ViewChild(DynamicComponentDirective, { static: true })
+  myHost!: DynamicComponentDirective; */
 
   constructor(private fb: FormBuilder) {
     super();
@@ -39,7 +44,9 @@ export class FormUserEducationComponent
   }
 
   ngOnInit(): void {
-    this.educationTypes = educationTypes;
+    this.educationTypes1 = educationTypes1;
+    this.educationTypes2 = educationTypes2;
+    this.educationTypes3 = educationTypes3;
 
     this.form.controls['educationType'].valueChanges
       .pipe(skip(1))
@@ -50,7 +57,7 @@ export class FormUserEducationComponent
   }
 }
 
-const educationTypes = [
+const educationTypes1 = [
   {
     value: 0,
     label: `วุฒิปริญญาทางการศึกษา หรือเทียบเท่า หรือคุณวุฒิอื่นที่คุรุสภาให้การรับรอง`,
@@ -74,5 +81,35 @@ const educationTypes = [
   {
     value: 5,
     label: `วุฒิปริญญาทางการศึกษาจากต่างประเทศ`,
+  },
+];
+
+const educationTypes2 = [
+  {
+    value: 0,
+    label: `วุฒิปริญญาทางการบริหารการศึกษา`,
+  },
+  {
+    value: 1,
+    label: `ประกาศนียบัตรบัณฑิต สาขาวิชาการบริหารการศึกษาที่คุรุสภาให้การรับรอง`,
+  },
+  {
+    value: 2,
+    label: `วุฒิไม่ต่ำกว่าปริญญาตรี`,
+  },
+  {
+    value: 3,
+    label: `รับรองคุณวุฒิการศึกษา`,
+  },
+];
+
+const educationTypes3 = [
+  {
+    value: 0,
+    label: `วุฒิปริญญาโทหรือปริญญาเอกทางการศึกษา`,
+  },
+  {
+    value: 1,
+    label: `รับรองคุณวุฒิการศึกษา`,
   },
 ];

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MenuConfig } from '@ksp/shared/menu';
+import { MenuConfig } from '@ksp/shared/interface';
 
 @Component({
   selector: 'ksp-e-service-container-page',

@@ -15,13 +15,13 @@ import {
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatDialogModule,
     MatTooltipModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [
     {

@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
   constructor(private router: Router) {}
 
   checkAuth(): Observable<boolean> {
-    const tokenKey = getCookie('schUserToken');
+    const tokenKey = getCookie('userToken');
     if (tokenKey) return of(true);
     this.router.navigate(['/']);
     return of(false);

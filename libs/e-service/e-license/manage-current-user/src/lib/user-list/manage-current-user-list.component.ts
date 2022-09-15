@@ -3,6 +3,8 @@ import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SchoolServiceUserPageType } from '@ksp/shared/interface';
+import { RequestLicenseService } from '@ksp/shared/service';
+import { replaceEmptyWithNull } from '@ksp/shared/utility';
 
 @Component({
   templateUrl: './manage-current-user-list.component.html',
@@ -16,7 +18,11 @@ export class ManageCurrentUserListComponent implements OnInit {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<userList>();
 
-  constructor(private router: Router, private fb: FormBuilder) {}
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private requestService: RequestLicenseService
+  ) {}
 
   selectedUniversity = '';
 
@@ -31,8 +37,11 @@ export class ManageCurrentUserListComponent implements OnInit {
     //console.log('universityCode = ', universityCode);
   }
 
-  search() {
-    this.dataSource.data = data;
+  search(params: any) {
+    const payload = replaceEmptyWithNull(params);
+    this.requestService.searchRequest(payload).subscribe((res: any) => {
+      this.dataSource.data = res;
+    });
   }
 
   clear() {

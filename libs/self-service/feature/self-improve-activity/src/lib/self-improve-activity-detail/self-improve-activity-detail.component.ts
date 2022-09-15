@@ -17,6 +17,16 @@ import {
   ActivityLearningMaterialComponent,
 } from '@ksp/school-service/form/activity';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
+import {
+  SelfActivityAcademicWorkComponent,
+  SelfActivityArticleWritingComponent,
+  SelfActivityAssessmentComponent,
+  SelfActivityBookWritingComponent,
+  SelfActivityMediaCreateComponent,
+  SelfActivityMenterComponent,
+  SelfActivityMoreComponent,
+  SelfActivitySelfLearningComponent,
+} from '@ksp/shared/form/self-activity-form';
 import { DynamicComponent, ListData } from '@ksp/shared/interface';
 
 @Component({
@@ -62,67 +72,86 @@ export class SelfImproveActivityDetailComponent implements OnInit {
 
 const componentList = [
   ActivityAddDegreeComponent,
-  ActivityDiplomaReceiveComponent,
   ActivitySeminarComponent,
-  ActivityAcademicArchivementComponent,
-  ActivityLecturerComponent,
-  ActivityWriteBookComponent,
-  ActivityInnovationComponent,
-  ActivityResearchComponent,
-  ActivityRewardComponent,
-  ActivityLectureRegisterComponent,
+  ActivitySeminarComponent,
+  SelfActivitySelfLearningComponent,
   ActivityStudyTourComponent,
-  ActivityLearningMaterialComponent,
+  ActivityResearchComponent,
+  SelfActivityMediaCreateComponent,
+  ActivityStudyTourComponent,
+  SelfActivityArticleWritingComponent,
+  SelfActivityBookWritingComponent,
+  SelfActivityAcademicWorkComponent,
+  ActivityLecturerComponent,
+  SelfActivityMenterComponent,
+  SelfActivityAssessmentComponent,
+  ActivityRewardComponent,
+  SelfActivityMoreComponent,
 ];
 
 const activityTypes = [
   {
     value: 0,
-    label: `มีวุฒิเพิ่มขึ้นในสาขาที่เกี่ยวข้องกับการประกอบวิชาชีพทางการศึกษา`,
+    label: `การศึกษาให้มีวุฒิเพิ่มขึ้นในสาขาเกี่ยวข้องกับการประกอบวิชาชีพทางการศึกษา ทั้งในระดับปริญญา และระดับบัณฑิตศึกษา`,
   },
   {
     value: 1,
-    label: `เข้ารับการอบรมและได้รับวุฒิบัตรแสดงความชำนาญการในการประกอบวิชาชีพจากคุรุสภา`,
+    label: `การเข้าฟังการบรรยาย การอภิปราย การประชุมวิชาการ การประชุมปฏิบัติการ การประชุมสัมมนา หรือการประชุมในรูปแบบอื่นๆที่คุรุใสภาให้การรับรอง`,
   },
   {
     value: 2,
-    label: `ผ่านการอบรมหลักสูตรที่เกี่ยวข้องกับการปฏิบัติงานในหน้าที่`,
+    label: `การฝึกอบรมในหลักสูตรที่เกี่ยวข้องกับวิชาชีพ หรือวิชาการเฉพาะด้าน`,
   },
   {
     value: 3,
-    label: `ได้เลื่อนวิทยฐานะ หรืออยู่ระหว่างการพิจารณาประเมินให้มีหรือเลื่อนวิทยฐานะ`,
+    label: `การเรียนรู้ด้วยตนเองในเรื่องที่เกี่ยวข้องกับวิชาชีพ หรือวิชาการเฉพาะด้าน จากบทความทางวิชาชีพ หรือวิชาการเฉพาะด้าน หรือการเรียนรู้ผ่านเทคโนโลยีสารสนเทศ เช่นบทความวิชาการ`,
   },
   {
     value: 4,
-    label: `เป็นวิทยากรที่เป็นประโยชน์ต่อการจัดการเรียนรู้หรือการจัดการศึกษา`,
+    label: `การศึกษาดูงานที่เกี่ยวข้องกับวิชาชีพทางการศึกษา ทั้งในประเทศ หรือต่างประเทศ`,
   },
   {
     value: 5,
-    label: `เขียนตำรา หรือบทความ หรือผลงานทางวิชาการที่เป็นประโยชน์ต่อการจัดการเรียนรู้หรือการจัดการศึกษา`,
+    label: `การทำวิจัยในเรื่องที่เป็นประโยชน์ต่อการจัดการเรียนรู้และการจัดการศึกษา `,
   },
   {
     value: 6,
-    label: `สร้างนวัตกรรมที่ใช้ในการจัดการเรียนรู้หรือที่เป็นประโยชน์ต่อการศึกษา`,
+    label: `การสร้างสื่อการศึกษา พร้อมแบบทดสอบเพื่อการศึกษาหรือเรียนรู้ด้วยตนเอง ทั้งในรูปแบบเอกสาร และสื่ออิเล็กทรอนิกส์ เช่ย บทความ online , e-learning , E-book เป็นต้น`,
   },
   {
     value: 7,
-    label: `ทำวิจัยที่เป็นประโยชน์ต่อการจัดการเรียนรู้และการจัดการศึกษา `,
+    label: `การเข้าร่วมกิจกรรมพัฒนาวิชาชีพ แบบชุมชนแห่งการเรียนรู้`,
   },
   {
     value: 8,
-    label: `ได้รับรางวัลจากคุรุสภาหรือของหน่วยงานทางการศึกษาอื่น`,
+    label: `การเขียนบทความทางวิชาชีพ และได้รับการตีพิมพ์เผยแพร่ต่อสาธารณชน เช่น วารสารวิทยาจารย์ เป็นต้น`,
   },
   {
     value: 9,
-    label: `เข้าฟังการบรรยาย อภิปราย ประชุมปฏิบัติการ ประชุมสัมมนา หรืออื่นๆ โดยมีการลงทะเบียนและมีหลักฐาน
-    แสดงการเข้าร่วมกิจกรรมดังกล่าว`,
+    label: `การแต่งตำรา หรือหนังสือ ในเรื่องที่เกี่ยวข้องกับวิชาชีพ หรือวิชาการเฉพาะด้านที่เกี่ยวข้องกับวิชาชีพ`,
   },
   {
     value: 10,
-    label: `ศึกษาดูงานที่เกี่ยวข้องกับการประกอบวิชาชีพทางการศึกษา`,
+    label: `การสร้างผลงานทางวิชาการ เช่น ผลงานวิจัย ผลงานนวัตกรรมที่ใช้ในการเรียนรู้ หรือ ที่เป็นประโยชน์ต่อการศึกษา`,
   },
   {
     value: 11,
-    label: `จัดทำผลงานหรือกิจกรรมที่เป็นประโยชน์ต่อการจัดการเรียนรู้หรือการจัดการศึกษา`,
+    label: `การเป็นวิทยากร ผู้บรรยาย ผู้อภิปราย หรือผู้อภิปรายร่วมในกิจกรรมที่เกี่ยวข้องกับวิชาชีพ หรือวิชาการเฉพาะด้าน`,
+  },
+  {
+    value: 12,
+    label: `การเป็นครูพี่เลี้ยง ผู้บริหารพี่เลี้ยง หรือผู้ควบคุมการฝึกปรัสบการณ์วิชาชีพทางการศึกษาสำหรับนักศึกษาในหลักสูตรประกาศนียบัตรบัณฑิต หรือปริญญาทางการศึกษา`,
+  },
+  {
+    value: 13,
+    label: `การผ่านการประเมิน เพื่อให้มีหรือเลื่อน วิทยฐานะที่สูงขึ้น หรือผ่านการรับรองความชำนาญในการประกอบวิชาชีพตามหลักเกณฑ์ที่คุรุสภากำหนด`,
+  },
+  {
+    value: 14,
+    label: `การปฏิบัติการสอนดีเด่นจนได้รับรางวัล การได้รับคัดเลือกให้ได้รางวัลของคุรุสภา หรือรางวัลที่เป็นประโยชน์ต่อการจัดการศึกษา`,
+  },
+  {
+    value: 15,
+    label: `กิจกรรมอื่นๆ ที่คณะกรรมการรับรอง`,
   },
 ];

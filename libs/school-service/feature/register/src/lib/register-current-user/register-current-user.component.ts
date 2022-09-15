@@ -1,36 +1,38 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RequestLicenseService } from '@ksp/shared/service';
+import localForage from 'localforage';
 
 @Component({
   templateUrl: './register-current-user.component.html',
   styleUrls: ['./register-current-user.component.scss'],
 })
 export class RegisterCurrentUserComponent {
-  /*   form = this.fb.group({
-    selectUniversity: [],
-  });
- */
   activeUser = '';
-  schoolid = '';
+  school!: any;
   constructor(
     public router: Router,
-    private fb: FormBuilder,
     private requestLicenseService: RequestLicenseService
   ) {}
 
   next() {
-    this.router.navigate(['/register', 'requester', this.schoolid]);
+    /* this.router.navigate(['/register', 'requester'], {
+      state: { data: this.school },
+    }); */
+
+    this.router.navigate(['/register', 'requester']);
   }
 
   back() {
     this.router.navigate(['/login']);
   }
-  selectedUniversity(schoolid: any) {
-    this.schoolid = schoolid;
+
+  selectedUniversity(school: any) {
+    this.school = school;
+    localForage.setItem('registerSelectedSchool', school);
+
     this.requestLicenseService
-      .getActiveUserSchool({ schoolid })
+      .getActiveUserSchool({ schoolid: school.schoolId })
       .subscribe((res) => {
         if (res?.returncode == 98) {
           if (res?.returnmessage == 'no data') this.next();

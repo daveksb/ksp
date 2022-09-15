@@ -11,11 +11,13 @@ import {
 import { BottomNavComponent } from '@ksp/shared/menu';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedFormOthersModule,
+    ReactiveFormsModule,
     MatDialogModule,
     RequestHeaderInfoComponent,
     FormRequesterInfoComponent,

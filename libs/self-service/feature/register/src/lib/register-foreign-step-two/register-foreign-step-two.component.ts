@@ -2,13 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import {
-  FormVerifyOtpForeignComponent,
-  FormVerifyPhoneComponent,
-} from '@ksp/self-service/form';
+import { VerifyOtpForeignDialogComponent } from '@ksp/self-service/dialog';
 
 @Component({
-  selector: 'ksp-register-foreign-step-two',
+  selector: 'self-service-register-foreign-step-two',
   templateUrl: './register-foreign-step-two.component.html',
   styleUrls: ['./register-foreign-step-two.component.scss'],
 })
@@ -20,7 +17,7 @@ export class RegisterForeignStepTwoComponent {
   ) {}
 
   openDialog() {
-    const dialogRef = this.dialog.open(FormVerifyOtpForeignComponent, {
+    const dialogRef = this.dialog.open(VerifyOtpForeignDialogComponent, {
       width: '600px',
     });
 

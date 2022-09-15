@@ -6,7 +6,11 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-import { AddressService, RequestLicenseService } from '@ksp/shared/service';
+import {
+  AddressService,
+  GeneralInfoService,
+  RequestLicenseService,
+} from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 import { BasicInstituteSearchComponent } from '../basic-institute-search/basic-institute-search.component';
 
@@ -29,13 +33,14 @@ export class UniversitySearchComponent implements OnInit {
   @Output() confirmed = new EventEmitter<string>();
   provinces$!: Observable<any>;
   amphurs$!: Observable<any>;
+  bureaus$!: Observable<any>;
   selectedUniversity = '';
   form = this.fb.group({
     institution: null,
     provinceid: null,
     amphurid: null,
     offset: '0',
-    row: '25',
+    row: '20',
   });
   Data: any[] = [];
   currentPage!: number;
@@ -50,6 +55,7 @@ export class UniversitySearchComponent implements OnInit {
     private fb: FormBuilder,
     private addressService: AddressService,
     private requestLicenseService: RequestLicenseService,
+    private generalInfoService: GeneralInfoService,
     public dialogRef: MatDialogRef<UniversitySearchComponent>
   ) {}
 
@@ -59,11 +65,12 @@ export class UniversitySearchComponent implements OnInit {
     this.form.valueChanges.subscribe((res) => console.log(res));
   }
   getList() {
+    this.bureaus$ = this.generalInfoService.getBureau();
     this.provinces$ = this.addressService.getProvinces();
   }
 
-  onItemChange(universityCode: string) {
-    this.selectedUniversity = universityCode;
+  onItemChange(university: any) {
+    this.selectedUniversity = university;
     //console.log('universityCode = ', universityCode);
   }
 
@@ -84,7 +91,6 @@ export class UniversitySearchComponent implements OnInit {
       this.Data = this.generateAddressShow(res);
       this.payload = payload;
     });
-    // this.Data = data;
   }
   generateAddressShow(res: any[]) {
     res.forEach((item: any) => {
@@ -110,6 +116,7 @@ export class UniversitySearchComponent implements OnInit {
 
   clear() {
     this.Data = [];
+    this.form.reset();
   }
   provinceChange(evt: any) {
     const province = evt.target?.value;

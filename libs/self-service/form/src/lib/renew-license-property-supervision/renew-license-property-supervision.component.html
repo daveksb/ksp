@@ -1,0 +1,47 @@
+<form [formGroup]="form">
+  <div class="row mb-3">
+    <div class="col-6">
+      <select
+        formControlName="standardKnowledgeType"
+        class="form-select"
+        style="white-space: break-spaces"
+      >
+        <option selected hidden disabled value="null">กรุณาเลือก</option>
+        <option *ngFor="let std of standardKnowledges" [value]="std.value">
+          {{ std.label }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <ng-container *ngIf="selectedstandardKnowledgeType === 0">
+    <ksp-renew-license-property-one></ksp-renew-license-property-one>
+    <hr />
+    <ksp-form-attachment></ksp-form-attachment
+  ></ng-container>
+  <ng-container *ngIf="selectedstandardKnowledgeType === 1">
+    <ksp-renew-license-property-four></ksp-renew-license-property-four>
+    <hr />
+    <ksp-form-attachment></ksp-form-attachment>
+  </ng-container>
+  <ng-container *ngIf="selectedstandardKnowledgeType === 2">
+    <ksp-renew-license-property-five></ksp-renew-license-property-five>
+    <hr />
+    <ksp-form-attachment></ksp-form-attachment>
+  </ng-container>
+  <ng-container *ngIf="selectedstandardKnowledgeType === 3"
+    ><ksp-renew-license-property-three></ksp-renew-license-property-three>
+    <hr />
+    <ksp-form-attachment></ksp-form-attachment
+  ></ng-container>
+  <ng-container *ngIf="selectedstandardKnowledgeType === 4"
+    ><ksp-renew-license-property-six></ksp-renew-license-property-six>
+    <hr />
+    <ksp-form-attachment></ksp-form-attachment>
+  </ng-container>
+  <ng-container *ngIf="selectedstandardKnowledgeType === 5"
+    ><ksp-renew-license-property-six></ksp-renew-license-property-six>
+    <hr />
+    <ksp-form-attachment></ksp-form-attachment>
+  </ng-container>
+</form>

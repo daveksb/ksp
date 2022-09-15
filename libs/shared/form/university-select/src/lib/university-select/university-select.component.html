@@ -1,16 +1,6 @@
 <form [formGroup]="form">
   <div class="bg-light px-4 py-3">
-    <div class="text-primary box-header">กรุณาเลือกสถาบันที่ท่านสังกัด</div>
     <div class="row">
-      <div class="col">
-        <label class="form-label">{{ label1 }}</label>
-        <select class="form-select" formControlName="institution">
-          <option value="null" selected disabled hidden>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-      </div>
       <div class="col">
         <label class="form-label">{{ label2 }}</label>
         <input
@@ -18,7 +8,7 @@
           (click)="search()"
           class="form-control form-search"
           type="text"
-          placeholder="กรุณาเลือก"
+          [placeholder]="schoolName"
         />
       </div>
     </div>

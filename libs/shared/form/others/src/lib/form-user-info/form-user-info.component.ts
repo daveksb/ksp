@@ -50,7 +50,8 @@ export class FormUserInfoComponent
     );
   }
   ngOnInit(): void {
-    this.form.controls['passportno'].clearValidators();
+    this.form.controls.passportno.clearValidators();
+    this.form.controls.position.clearValidators();
   }
   get idCardNo() {
     return this.form.controls.idcardno;
