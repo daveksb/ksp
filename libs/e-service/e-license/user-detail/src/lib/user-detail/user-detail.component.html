@@ -93,6 +93,7 @@
   <br />
   <div class="bg-white p-4">
     <e-service-license-check
+      formControlName="verifyResult"
       [isHasReason]="false"
       [headerTitle]="checkComponentTitles[pageType]"
       [choices]="checkComponentChoices[pageType]"
@@ -107,7 +108,8 @@
     [showCenterButtons]="true"
     [showSaveButton]="true"
     (cancelClicked)="cancel()"
-    (saveClicked)="save()"
+    (saveClicked)="confirm()"
+    [disableSaveButton]="!verifySelected"
   >
   </ksp-bottom-nav>
 </div>

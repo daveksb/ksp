@@ -21,17 +21,6 @@ export class ApproveNewUserListComponent {
 
   search(params: any) {
     console.log('params = ', params);
-    /* const payload = {
-      schoolid: params.institution?.schoolid,
-      requestno: params.requestno,
-      firstnameth: params.name,
-      lastnameth: null,
-      requestdate: null,
-      requeststatus: null,
-      currentprocess: null,
-      schoolname: null,
-      bureauname: null,
-    }; */
 
     const payload = {
       schoolid: params.institution?.schoolid,
@@ -47,21 +36,6 @@ export class ApproveNewUserListComponent {
       offset: '0',
       row: '10',
     };
-
-    /* const payload = {
-      schoolid: null,
-      requestno: null,
-      firstnameth: 'มานะ',
-      lastnameth: null,
-      requestdate: null,
-      requesttype: null,
-      requeststatus: null,
-      currentprocess: null,
-      schoolname: null,
-      bureauid: null,
-      offset: '0',
-      row: '10',
-    }; */
 
     this.requestService.searchRegisterRequest(payload).subscribe((res: any) => {
       this.dataSource.data = res;

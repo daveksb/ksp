@@ -7,7 +7,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { GeneralInfoService, RequestLicenseService } from '@ksp/shared/service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { SchoolRequestProcess } from '@ksp/shared/constant';
 import { parseJson, thaiDate } from '@ksp/shared/utility';
@@ -18,10 +18,21 @@ import { parseJson, thaiDate } from '@ksp/shared/utility';
 })
 export class UserDetailComponent implements OnInit {
   checkComponentTitles = ['ผลการตรวจสอบ', 'สถานะการใช้งาน'];
+
   checkComponentChoices = [
-    ['อนุมัติ', 'ไม่อนุมัติ'],
+    [
+      {
+        name: 'อนุมัติ',
+        value: SchoolRequestProcess['ผ่านการรับรอง/พิจารณา'],
+      },
+      {
+        name: 'ไม่อนุมัติ',
+        value: SchoolRequestProcess['ไม่ผ่านการรับรอง/พิจารณา'],
+      },
+    ],
     ['ใช้งาน', 'ไม่ใช้งาน'],
   ];
+
   headers = [
     [
       'ใบคำขอรหัสเข้าใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service) ',
@@ -43,11 +54,12 @@ export class UserDetailComponent implements OnInit {
   form = this.fb.group({
     userInfo: [],
     coordinatorInfo: [],
+    verifyResult: [null, Validators.required],
   });
 
-  //thaiDate = thaiDate(new Date());
-
+  verifySelected = 0;
   pageType = 0;
+
   constructor(
     private router: Router,
     public dialog: MatDialog,
@@ -59,12 +71,29 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkRequestId();
+
+    this.form.controls.verifyResult.valueChanges.subscribe((res: any) => {
+      this.verifySelected = Number(res['verify']);
+    });
+
     this.route.queryParams.subscribe((res) => {
       this.pageType = Number(res['type']);
-      //console.log('res = ', this.pageType);
     });
 
     this.prefixList$ = this.generalInfoService.getPrefix();
+  }
+
+  confirmRequest() {
+    const payload = {
+      id: `${this.requestId}`,
+      currentprocess: this.verifySelected,
+      //approveState: `${SchoolRequestProcess['ผ่านการรับรอง/พิจารณา']}`,
+      //disapproveState: `${SchoolRequestProcess['ไม่ผ่านการรับรอง/พิจารณา']}`,
+    };
+
+    this.requestService.changeRequestProcess(payload).subscribe((res) => {
+      //console.log('Cancel request  = ', res);
+    });
   }
 
   checkRequestId() {
@@ -81,11 +110,11 @@ export class UserDetailComponent implements OnInit {
       this.requestData = res;
       this.requestNo = res.requestno;
       //this.pathUserInfo(res);
-      //data.birthdate = data.birthdate.split('T')[0];
+      res.birthdate = res.birthdate.split('T')[0];
       this.form.controls.userInfo.patchValue(res);
 
       const coordinator = parseJson(res.coordinatorinfo);
-      console.log('coordinator = ', coordinator);
+      console.log('coordinator = ', res);
       this.form.controls.coordinatorInfo.patchValue(coordinator.coordinator);
     });
   }
@@ -109,7 +138,7 @@ export class UserDetailComponent implements OnInit {
     }
   }
 
-  save() {
+  confirm() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -120,6 +149,7 @@ export class UserDetailComponent implements OnInit {
 
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
+        this.confirmRequest();
         this.onCompleted();
       }
     });
