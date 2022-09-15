@@ -5,13 +5,21 @@ import { Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { debounceTime, Observable, tap } from 'rxjs';
+import { debounceTime, Observable } from 'rxjs';
 import { LicenseRequestService } from './license-request.service';
 import {
   AddressService,
   GeneralInfoService,
   EducationDetailService,
 } from '@ksp/shared/service';
+import { defaultRequestPayload } from '@ksp/shared/interface';
+import {
+  formatCheckboxData,
+  parseJson,
+  replaceEmptyWithNull,
+  thaiDate,
+  toLowercaseProp,
+} from '@ksp/shared/utility';
 
 @UntilDestroy()
 @Component({
@@ -131,6 +139,28 @@ export class LicenseRequestComponent implements OnInit {
     }
   }
 
+  createRequest() {
+    const baseForm = this.fb.group(defaultRequestPayload);
+    const formData: any = this.form.getRawValue();
+    // formData.address1.addresstype = 1;
+    // formData.address1.addresstype = 2;
+
+    const { id, ...rawUserInfo } = formData.userInfo;
+    const userInfo = toLowercaseProp(rawUserInfo);
+
+    userInfo.ref1 = '1';
+    userInfo.ref2 = '01';
+    userInfo.ref3 = '1';
+    userInfo.systemtype = '1';
+    userInfo.requesttype = '1';
+
+    const payload = {
+      ...replaceEmptyWithNull(userInfo),
+    };
+
+    console.log(payload);
+  }
+
   save() {
     console.log(this.form.value);
     const confirmDialog = this.dialog.open(ForbiddenPropertyFormComponent, {
@@ -157,7 +187,8 @@ export class LicenseRequestComponent implements OnInit {
 
     completeDialog.componentInstance.saved.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/license', 'request']);
+        this.createRequest();
+        this.router.navigate(['/home']);
       }
     });
 
