@@ -60,13 +60,13 @@ export class SchoolRequestListComponent implements OnInit {
 
   goToRequestPage(requestType: number) {
     this.router.navigate(['/temp-license', 'request'], {
-      queryParams: { type: requestType },
+      queryParams: { subtype: requestType },
     });
   }
 
   viewRequest(requestType: number, requestId: number) {
     this.router.navigate(['/temp-license', 'request', requestId], {
-      queryParams: { type: requestType },
+      queryParams: { subtype: requestType },
     });
   }
 
