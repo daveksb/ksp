@@ -23,7 +23,11 @@
             style="white-space: break-spaces"
           >
             <option selected hidden disabled value="null">กรุณาเลือก</option>
-            <option *ngFor="let atv of activityTypes1" [value]="atv.value">
+            <option
+              *ngFor="let atv of activityTypes1"
+              [value]="atv.value"
+              class="form-label text-black"
+            >
               {{ atv.label }}
             </option>
           </select>
