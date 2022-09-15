@@ -51,7 +51,12 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     private requestLicenseService: RequestLicenseService,
     private route: ActivatedRoute
   ) {}
-
+  get formValid() {
+    return (
+      !this.form.get('foreignTeacher')?.valid ||
+      !this.form.get('visainfo')?.valid
+    );
+  }
   ngOnInit(): void {
     this.getList();
     this.checkRequestId();
@@ -109,6 +114,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             userInfo.ref3 = '1';
             userInfo.systemtype = '2';
             userInfo.requesttype = '3';
+            userInfo.subtype = '1';
             userInfo.schoolid = this.schoolId;
             userInfo.visainfo = JSON.stringify(this.form.value.visainfo);
             return this.requestLicenseService.requestLicense(userInfo);

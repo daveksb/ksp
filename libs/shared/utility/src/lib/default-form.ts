@@ -10,7 +10,10 @@ export function createDefaultUserInfoForm(FormBuilder: any, Validators: any) {
   return FormBuilder.group({
     id: [],
     idcardno: [null, [Validators.required, Validators.pattern(idCardPattern)]],
-    passportno: [null, [Validators.pattern(passportPattern)]],
+    passportno: [
+      null,
+      [Validators.required, Validators.pattern(passportPattern)],
+    ],
     passportstartdate: [],
     passportenddate: [],
     prefixth: [null, Validators.required],

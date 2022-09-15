@@ -121,12 +121,15 @@ export class QualificationDetailComponent implements OnInit {
   cancel() {
     this.router.navigate(['/temp-license', 'list']);
   }
-
+  get inValidForm() {
+    return (
+      !this.form.get('userInfo')?.valid ||
+      !this.form.get('addr1')?.valid ||
+      !this.form.get('addr2')?.valid ||
+      !this.form.get('education')?.valid
+    );
+  }
   onSave() {
-    if (!this.form.get('userInfo')?.valid) return;
-    // if (!this.form.get('addr1')?.valid) return;
-    // if (!this.form.get('addr2')?.valid) return;
-    // if (!this.form.get('education')?.valid) return;
     const confirmDialog = this.dialog.open(
       QualificationApproveDetailComponent,
       {
@@ -181,12 +184,13 @@ export class QualificationDetailComponent implements OnInit {
             const { refperson } = refPersonForm;
             const { otherreason } = reasonForm;
             const userInfo = formData.userInfo;
-            userInfo.schoolId = this.schoolId;
             userInfo.ref1 = '2';
             userInfo.ref2 = '06';
             userInfo.ref3 = '1';
             userInfo.systemtype = '2';
             userInfo.requesttype = '06';
+            userInfo.subtype = '1';
+            userInfo.schoolId = this.schoolId;
             const payload = {
               ...userInfo,
               ...{
