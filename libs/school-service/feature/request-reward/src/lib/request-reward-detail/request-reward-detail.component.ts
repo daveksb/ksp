@@ -2,10 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { SchoolRequestProcess } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { defaultRequestPayload } from '@ksp/shared/interface';
+import { RequestLicenseService } from '@ksp/shared/service';
 
 @Component({
   selector: 'ksp-request-reward-detail',
@@ -18,19 +21,41 @@ export class RequestRewardDetailComponent {
   });
 
   rewards = rewards;
+  schoolId = '0010201056';
 
   constructor(
     private router: Router,
     public dialog: MatDialog,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private requestService: RequestLicenseService
   ) {}
+
+  createRequest(form: any) {
+    //console.log('create request = ');
+    const baseForm = this.fb.group(defaultRequestPayload);
+    //const formData: any = this.form.getRawValue();
+    form.schoolid = this.schoolId;
+    form.ref1 = `2`;
+    form.ref2 = '40';
+    form.ref3 = '1';
+    form.systemtype = `2`;
+    form.requesttype = `40`;
+    form.subtype = `-`;
+    form.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
+    form.osoimember = JSON.stringify(form.osoimember);
+
+    baseForm.patchValue(form);
+    console.log('current form = ', baseForm.value);
+    this.requestService.requestLicense(baseForm.value).subscribe((res) => {
+      //console.log('request result = ', res);
+    });
+  }
 
   cancel() {
     this.router.navigate(['/temp-license', 'list']);
   }
 
   save(form: any) {
-    console.log('form = ', form.reward);
     /*     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {

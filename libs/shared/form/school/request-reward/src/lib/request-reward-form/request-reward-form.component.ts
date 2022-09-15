@@ -46,7 +46,7 @@ export class RequestRewardFormComponent
     phone: [''],
     email: [''],
     academicStanding: [''], */
-    members: this.fb.array([]),
+    osoimember: this.fb.array([]),
   });
 
   rewardFiles = [
@@ -79,7 +79,7 @@ export class RequestRewardFormComponent
   }
 
   get members() {
-    return this.form.controls.members as FormArray;
+    return this.form.controls.osoimember as FormArray;
   }
 
   addRow() {
