@@ -11,10 +11,35 @@ import {
   AddressService,
   GeneralInfoService,
   EducationDetailService,
+  RequestLicenseService,
 } from '@ksp/shared/service';
 import { defaultRequestPayload } from '@ksp/shared/interface';
 import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
 import { UserInfoFormType } from '@ksp/shared/constant';
+
+const mockPerformances = [
+  {
+    id: 1,
+    score: '89',
+    result: 'ผ่าน',
+    announceDate: '12/มกราคม/2565',
+    endDate: '31/มกราคม/2565',
+  },
+  {
+    id: 2,
+    score: '96',
+    result: 'ผ่าน',
+    announceDate: '12/มกราคม/2565',
+    endDate: '31/มกราคม/2565',
+  },
+  {
+    id: 3,
+    score: '96',
+    result: 'ไม่พบข้อมูล',
+    announceDate: '12/มกราคม/2565',
+    endDate: '31/มกราคม/2565',
+  },
+];
 
 @UntilDestroy()
 @Component({
@@ -54,7 +79,8 @@ export class LicenseRequestComponent implements OnInit {
     public service: LicenseRequestService,
     private addressService: AddressService,
     private generalInfoService: GeneralInfoService,
-    private educationDetailService: EducationDetailService
+    private educationDetailService: EducationDetailService,
+    private requestService: RequestLicenseService
   ) {}
 
   ngOnInit(): void {
@@ -130,16 +156,19 @@ export class LicenseRequestComponent implements OnInit {
 
   useSameAddress(evt: any) {
     const checked = evt.target.checked;
+    this.amphurs2$ = this.amphurs1$;
+    this.tumbols2$ = this.tumbols1$;
+    this.provinces2$ = this.provinces1$;
     if (checked) {
       this.form.controls.address2.patchValue(this.form.controls.address1.value);
     }
   }
 
-  createRequest() {
+  createRequest(forbidden: any, currentProcess: string) {
     const baseForm = this.fb.group(defaultRequestPayload);
     const formData: any = this.form.getRawValue();
-    // formData.address1.addresstype = 1;
-    // formData.address1.addresstype = 2;
+    if (formData?.address1?.addressType) formData.address1.addresstype = 1;
+    if (formData?.address2?.addressType) formData.address2.addresstype = 2;
 
     const { id, ...rawUserInfo } = formData.userInfo;
     const userInfo = toLowercaseProp(rawUserInfo);
@@ -149,12 +178,25 @@ export class LicenseRequestComponent implements OnInit {
     userInfo.ref3 = '1';
     userInfo.systemtype = '1';
     userInfo.requesttype = '1';
+    userInfo.subtype = '1';
+
+    const { educationType, educationLevelForm } = formData.education;
 
     const payload = {
       ...replaceEmptyWithNull(userInfo),
+      ...{
+        addressinfo: JSON.stringify([formData.address1, formData.address2]),
+      },
+      ...{ schooladdrinfo: JSON.stringify(formData.workplace) },
+      ...{ eduinfo: JSON.stringify({ educationType, ...educationLevelForm }) },
+      ...{ experienceinfo: JSON.stringify(formData.experience) },
+      ...{ competencyinfo: JSON.stringify(mockPerformances) },
+      ...{ prohibitproperty: JSON.stringify(forbidden) },
     };
-
+    payload.currentprocess = currentProcess;
     console.log(payload);
+    baseForm.patchValue(payload);
+    return baseForm.value;
   }
 
   save() {
@@ -165,12 +207,13 @@ export class LicenseRequestComponent implements OnInit {
 
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.onCompleted();
+        console.log(res);
+        this.onCompleted(res);
       }
     });
   }
 
-  onCompleted() {
+  onCompleted(forbidden: any) {
     const completeDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -183,14 +226,21 @@ export class LicenseRequestComponent implements OnInit {
 
     completeDialog.componentInstance.saved.subscribe((res) => {
       if (res) {
-        this.createRequest();
-        this.router.navigate(['/home']);
+        const payload = this.createRequest(forbidden, '0');
+        this.requestService.requestLicense(payload).subscribe((res) => {
+          console.log('request result = ', res);
+          this.router.navigate(['/home']);
+        });
       }
     });
 
     completeDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/license', 'payment-channel']);
+        const payload = this.createRequest(forbidden, '1');
+        this.requestService.requestLicense(payload).subscribe((res) => {
+          console.log('request result = ', res);
+          this.router.navigate(['/license', 'payment-channel']);
+        });
       }
     });
   }

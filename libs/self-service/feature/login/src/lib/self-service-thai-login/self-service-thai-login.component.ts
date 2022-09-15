@@ -3,6 +3,8 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ForgotPasswordSearchPersonComponent } from '@ksp/shared/dialog';
+import { SelfServiceLoginService } from './self-service-login.service';
+import { setCookie } from '@ksp/shared/utility';
 
 @Component({
   templateUrl: './self-service-thai-login.component.html',
@@ -12,13 +14,14 @@ export class SelfServiceThaiLoginComponent {
   eyeIconClicked = false;
 
   form = this.fb.group({
-    personId: [],
+    username: [],
     password: [],
   });
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
+    private loginService: SelfServiceLoginService,
     public dialog: MatDialog
   ) {}
 
@@ -27,7 +30,14 @@ export class SelfServiceThaiLoginComponent {
   }
 
   login() {
-    this.router.navigate(['/', 'home']);
+    this.loginService.validateLogin(this.form.value).subscribe((res) => {
+      if (res.returnCode == 99) return;
+      this.loginService.config = res;
+      setCookie('userToken', res.usertoken, 1);
+      // setCookie('firstNameTh', res.firstNameTh, 1);
+      // setCookie('lastNameTh', res.lastNameTh, 1);
+      this.router.navigate(['/', 'home']);
+    });
   }
 
   forgot() {

@@ -4,67 +4,67 @@
   </div>
 
   <div class="my-3">
-    <div class="form-label">
-      1. เคยเป็นผู้มีความประพฤติเสื่อม หรือบกพร่องในศีลธรรมอันดีหรือไม่
-    </div>
-    <div class="row my-3">
-      <div class="col-4 d-flex align-items-center">
-        <input class="me-2" type="radio" name="property1" />
-        <label class="form-label">ไม่เคย</label>
+    <form [formGroup]="form">
+      <div class="form-label">
+        1. เคยเป็นผู้มีความประพฤติเสื่อม หรือบกพร่องในศีลธรรมอันดีหรือไม่
       </div>
-      <div class="col-4 d-flex align-items-center">
-        <input class="me-2" type="radio" name="property1" />
-        <label class="form-label">เคย</label>
+      <div class="row my-3">
+        <div class="col-4 d-flex align-items-center">
+          <input class="me-2" type="radio" name="immoral" value="2" formControlName="immoral" />
+          <label class="form-label">ไม่เคย</label>
+        </div>
+        <div class="col-4 d-flex align-items-center">
+          <input class="me-2" type="radio" name="immoral" value="1" formControlName="immoral" />
+          <label class="form-label">เคย</label>
+        </div>
       </div>
-    </div>
-    <div class="form-label">
-      2. เป็นผู้ไร้ความสามารถหรือเสมือนไร้ความสามารถ หรือไม่
-    </div>
-    <div class="row my-3">
-      <div class="col-4 d-flex align-items-center">
-        <input class="me-2" type="radio" name="property2" />
-        <label class="form-label">ไม่เคย</label>
+      <div class="form-label">
+        2. เป็นผู้ไร้ความสามารถหรือเสมือนไร้ความสามารถ หรือไม่
       </div>
-      <div class="col-4 d-flex align-items-center">
-        <input class="me-2" type="radio" name="property2" />
-        <label class="form-label">เคย</label>
+      <div class="row my-3">
+        <div class="col-4 d-flex align-items-center">
+          <input class="me-2" type="radio" name="incompetent" value="2" formControlName="incompetent" />
+          <label class="form-label">ไม่เคย</label>
+        </div>
+        <div class="col-4 d-flex align-items-center">
+          <input class="me-2" type="radio" name="incompetent" value="1" formControlName="incompetent" />
+          <label class="form-label">เคย</label>
+        </div>
       </div>
-    </div>
-    <div class="form-label">
-      3.
-      เคยต้องโทษจำคุกในคดีที่คุรุสภาเห็นว่าอาจนำมาซึ่งความเสื่อมเสียเกียรติศักดิ์แห่งวิชาชีพ
-    </div>
-    <div class="row my-3">
-      <div class="col-4 d-flex align-items-center">
-        <input class="me-2" type="radio" name="property3" />
-        <label class="form-label">ไม่เคย</label>
+      <div class="form-label">
+        3.
+        เคยต้องโทษจำคุกในคดีที่คุรุสภาเห็นว่าอาจนำมาซึ่งความเสื่อมเสียเกียรติศักดิ์แห่งวิชาชีพ
       </div>
-      <div class="col d-flex align-items-center">
-        <input class="me-2" type="radio" name="property3" />
-        <label class="form-label">เคย</label>
+      <div class="row my-3">
+        <div class="col-4 d-flex align-items-center">
+          <input class="me-2" type="radio" name="prison" value="2" formControlName="prison" />
+          <label class="form-label">ไม่เคย</label>
+        </div>
+        <div class="col d-flex align-items-center">
+          <input class="me-2" type="radio" name="prison" value="1" formControlName="prison" />
+          <label class="form-label">เคย</label>
+        </div>
+        <div class="col-7">
+          <input class="form-control" type="text" placeholder="โปรดระบุ" formControlName="prisonReason" />
+        </div>
       </div>
-      <div class="col-7">
-        <input class="form-control" type="text" placeholder="โปรดระบุ" />
-      </div>
-    </div>
 
-    <ksp-file-upload></ksp-file-upload>
+      <ksp-file-upload></ksp-file-upload>
+    </form>
   </div>
   <br />
   <div class="d-flex justify-content-center">
     <button
       matDialogClose
       type="button"
-      class="btn border-primary text-primary me-1"
-    >
+      class="btn border-primary text-primary me-1">
       ยกเลิก
     </button>
     <button
       matDialogClose
       (click)="save()"
       type="button"
-      class="btn btn-primary ms-1"
-    >
+      class="btn btn-primary ms-1">
       บันทึก
     </button>
   </div>
