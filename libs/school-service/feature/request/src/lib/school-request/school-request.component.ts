@@ -482,6 +482,8 @@ export class SchoolRequestComponent implements OnInit {
 
       if (this.requestSubType === 3) {
         this.userInfoFormType = UserInfoFormType.foreign;
+      } else {
+        this.userInfoFormType = UserInfoFormType.thai;
       }
 
       if (params['type'] == 1) {
