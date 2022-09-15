@@ -10,7 +10,7 @@ import { GeneralInfoService, RequestLicenseService } from '@ksp/shared/service';
 import { FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { SchoolRequestProcess } from '@ksp/shared/constant';
-import { parseJson } from '@ksp/shared/utility';
+import { parseJson, thaiDate } from '@ksp/shared/utility';
 
 @Component({
   templateUrl: './user-detail.component.html',
@@ -33,12 +33,16 @@ export class UserDetailComponent implements OnInit {
     ],
   ];
 
+  today = thaiDate(new Date());
   requestId!: number;
   requestData!: any;
   prefixList$!: Observable<any>;
 
+  requestNo = '';
+
   form = this.fb.group({
     userInfo: [],
+    coordinatorInfo: [],
   });
 
   //thaiDate = thaiDate(new Date());
@@ -75,9 +79,14 @@ export class UserDetailComponent implements OnInit {
   loadRequestFromId(id: number) {
     this.requestService.getRequestById(id).subscribe((res: any) => {
       this.requestData = res;
+      this.requestNo = res.requestno;
       //this.pathUserInfo(res);
       //data.birthdate = data.birthdate.split('T')[0];
       this.form.controls.userInfo.patchValue(res);
+
+      const coordinator = parseJson(res.coordinatorinfo);
+      console.log('coordinator = ', coordinator);
+      this.form.controls.coordinatorInfo.patchValue(coordinator.coordinator);
     });
   }
 

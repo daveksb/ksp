@@ -1,0 +1,124 @@
+<form [formGroup]="form">
+  <div class="box-header">
+    Performance Results of professional practice pursuing with standard of
+    performance
+  </div>
+  <div class="row mb-3">
+    <div class="col">
+      <label class="form-label">Status</label>
+
+      <select formControlName="educationType" class="form-select">
+        <option selected hidden disabled value="null">กรุณาเลือก</option>
+        <option *ngFor="let edu of educationTypes" [value]="edu.value">
+          {{ edu.label }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <ng-container *ngIf="selectedEducationType === 0">
+    <div class="fs-6 text-danger">
+      * please select at least 3 activities done pursuant to the standard of
+      performance since issued date of license until present. All three
+      activities must not be the same
+    </div>
+    <!--  <ng-container formArrayName="teacherInfo">
+      <ng-container
+        *ngFor="let teacherForm of teacherInfo.controls; let i = index"
+      >
+        <ng-container [formGroupName]="i"> -->
+    <div class="px-3 pt-2 border rounded mb-3">
+      <div class="d-flex justify-content-end">
+        <i class="bi bi-x-circle-fill text-danger" role="button"></i>
+      </div>
+      <select
+        formControlName="activityType1"
+        class="form-select mb-3"
+        style="white-space: break-spaces"
+      >
+        <option selected hidden disabled value="null">กรุณาเลือก</option>
+        <option *ngFor="let atv of activityTypes1" [value]="atv.value">
+          {{ atv.label }}
+        </option>
+      </select>
+
+      <ng-container *ngIf="selectedActivityType1 === 0">
+        <ksp-activity-add-degree></ksp-activity-add-degree
+      ></ng-container>
+      <ng-container *ngIf="selectedActivityType1 === 1">
+        <ksp-activity-diploma-receive></ksp-activity-diploma-receive
+      ></ng-container>
+      <ng-container *ngIf="selectedActivityType1 === 2">
+        <ksp-activity-seminar></ksp-activity-seminar
+      ></ng-container>
+      <ng-container *ngIf="selectedActivityType1 === 3">
+        <ksp-activity-academic-archivement></ksp-activity-academic-archivement
+      ></ng-container>
+      <ng-container *ngIf="selectedActivityType1 === 4">
+        <ksp-activity-lecturer></ksp-activity-lecturer
+      ></ng-container>
+      <ng-container *ngIf="selectedActivityType1 === 5">
+        <ksp-activity-write-book></ksp-activity-write-book
+      ></ng-container>
+      <ng-container *ngIf="selectedActivityType1 === 6">
+        <ksp-activity-innovation></ksp-activity-innovation
+      ></ng-container>
+      <ng-container *ngIf="selectedActivityType1 === 7">
+        <ksp-activity-research></ksp-activity-research
+      ></ng-container>
+      <ng-container *ngIf="selectedActivityType1 === 8">
+        <ksp-activity-reward></ksp-activity-reward
+      ></ng-container>
+      <ng-container *ngIf="selectedActivityType1 === 9">
+        <ksp-activity-lecture-register></ksp-activity-lecture-register
+      ></ng-container>
+      <ng-container *ngIf="selectedActivityType1 === 10">
+        <ksp-activity-study-tour></ksp-activity-study-tour
+      ></ng-container>
+      <ng-container *ngIf="selectedActivityType1 === 11">
+        <ksp-activity-learning-material></ksp-activity-learning-material
+      ></ng-container>
+    </div>
+    <!-- </ng-container></ng-container
+    ></ng-container> -->
+    <div class="d-flex justify-content-start">
+      <ksp-add-row-button class="text-primary">Add Activity</ksp-add-row-button>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="selectedEducationType === 1">
+    <!-- <ng-container formArrayName="teacherInfo">
+      <ng-container
+        *ngFor="let nonTeacherForm of nonTeacherInfo.controls; let i = index"
+      >
+        <ng-container [formGroupName]="i"> -->
+    <div class="px-3 pt-2 border rounded mb-3">
+      <div class="d-flex justify-content-end">
+        <i class="bi bi-x-circle-fill text-danger" role="button"></i>
+      </div>
+      <select
+        formControlName="activityType2"
+        class="form-select mb-3"
+        style="white-space: break-spaces"
+      >
+        <option selected hidden disabled value="null">กรุณาเลือก</option>
+        <option *ngFor="let atv of activityTypes2" [value]="atv.value">
+          {{ atv.label }}
+        </option>
+      </select>
+
+      <ng-container *ngIf="selectedActivityType2 === 0">
+        <ksp-standard-train-pass></ksp-standard-train-pass
+      ></ng-container>
+      <ng-container *ngIf="selectedActivityType2 === 1">
+        <ksp-standard-test-pass></ksp-standard-test-pass
+      ></ng-container>
+    </div>
+    <div class="d-flex justify-content-start">
+      <ksp-add-row-button class="text-primary">Add Activity</ksp-add-row-button>
+    </div></ng-container
+  ><!-- </ng-container
+      ></ng-container
+    >
+  </ng-container> -->
+</form>

@@ -17,6 +17,8 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { RenewLicenseSchoolManagerComponent } from './renew-license-school-manager/renew-license-school-manager.component';
 import { RenewLicenseEducationManagerComponent } from './renew-license-education-manager/renew-license-education-manager.component';
 import { RenewLicenseStudySupervisionComponent } from './renew-license-study-supervision/renew-license-study-supervision.component';
+import { RenewLicenseForeignComponent } from './renew-license-foreign/renew-license-foreign.component';
+import { MatStepperModule } from '@angular/material/stepper';
 
 export const routes: Routes = [
   {
@@ -39,6 +41,10 @@ export const routes: Routes = [
         path: 'study-supervision',
         component: RenewLicenseStudySupervisionComponent,
       },
+      {
+        path: 'foreign',
+        component: RenewLicenseForeignComponent,
+      },
     ],
   },
 ];
@@ -54,18 +60,21 @@ export const routes: Routes = [
     SelfServiceFormModule,
     RequestStatusComponent,
     RouterModule.forChild(routes),
+    MatStepperModule,
   ],
   declarations: [
     RenewLicenseRequestComponent,
     RenewLicenseSchoolManagerComponent,
     RenewLicenseEducationManagerComponent,
     RenewLicenseStudySupervisionComponent,
+    RenewLicenseForeignComponent,
   ],
   exports: [
     RenewLicenseRequestComponent,
     RenewLicenseSchoolManagerComponent,
     RenewLicenseEducationManagerComponent,
     RenewLicenseStudySupervisionComponent,
+    RenewLicenseForeignComponent,
   ],
 })
 export class SelfServiceFeatureRenewLicenseModule {}

@@ -7,3 +7,5 @@ export * from './lib/renew-license-school-manager/renew-license-school-manager.c
 export * from './lib/renew-license-education-manager/renew-license-education-manager.component';
 
 export * from './lib/renew-license-study-supervision/renew-license-study-supervision.component';
+
+export * from './lib/renew-license-foreign/renew-license-foreign.component';
