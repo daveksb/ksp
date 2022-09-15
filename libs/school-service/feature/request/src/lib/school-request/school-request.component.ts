@@ -54,6 +54,9 @@ export class SchoolRequestComponent implements OnInit {
   staffTypes$!: Observable<any>;
   positionTypes$!: Observable<any>;
   academicTypes$!: Observable<any>;
+  nationList$!: Observable<any>;
+  visaTypeList!: Observable<any>;
+  visaClassList!: Observable<any>;
 
   requestId!: number;
   requestData: any;
@@ -150,7 +153,8 @@ export class SchoolRequestComponent implements OnInit {
     userInfo.ref2 = '03';
     userInfo.ref3 = '1';
     userInfo.systemtype = '2';
-    userInfo.requesttype = `${this.requestSubType}`;
+    userInfo.requesttype = `3`;
+    userInfo.subtype = `${this.requestSubType}`;
 
     const teaching: any = this.form.controls.teachinginfo.value;
     let teachingInfo = {};
@@ -447,6 +451,10 @@ export class SchoolRequestComponent implements OnInit {
     this.attachFiles = this.schoolRequestService.evidenceFiles;
     this.provinces$ = this.addressService.getProvinces();
     this.countries$ = this.addressService.getCountry();
+    this.nationList$ = this.generalInfoService.getNationality();
+    this.visaClassList = this.generalInfoService.getVisaClass();
+    this.visaTypeList = this.generalInfoService.getVisaType();
+
     this.staffTypes$ = this.staffService.getStaffTypes();
     this.positionTypes$ = this.staffService.getPositionTypes();
     this.academicTypes$ = this.staffService.getAcademicStandingTypes();
@@ -478,7 +486,6 @@ export class SchoolRequestComponent implements OnInit {
     this.route.queryParams.subscribe((params) => {
       this.form.reset();
       this.requestSubType = Number(params['type']);
-      //this.userInfoFormType = Number(params['type']);
 
       if (this.requestSubType === 3) {
         this.userInfoFormType = UserInfoFormType.foreign;

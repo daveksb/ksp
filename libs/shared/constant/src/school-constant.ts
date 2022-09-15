@@ -57,6 +57,14 @@ export enum SchoolRequestType {
   'ขอหนังสือรับรองคุณวุฒิ',
 }
 
+// url params keep in db for temp license request
+export enum SchoolRequestSubType {
+  '',
+  'ชาวไทย',
+  'ผู้บริหาร',
+  'ชาวต่างชาติ',
+}
+
 // สถานะใบคำขอ
 export enum SchoolRequestProcess {
   'กำลังสร้าง',
@@ -74,6 +82,5 @@ export enum SchoolRequestProcess {
 export enum UserInfoFormType {
   'thai',
   'foreign',
-
   //'register',
 }
