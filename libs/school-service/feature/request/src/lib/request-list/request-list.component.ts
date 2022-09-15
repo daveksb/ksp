@@ -71,18 +71,24 @@ export class SchoolRequestListComponent implements OnInit {
     });
   }
 
-  viewRequest(subType: number, requestId: number) {
+  viewRequest(requestType: number, subType: number, requestId: number) {
+    switch (requestType) {
+      case 4:
+        return this.foreignPage(requestId.toString());
+      case 6:
+        return this.qualificationPage(requestId.toString());
+    }
     this.router.navigate(['/temp-license', 'request', requestId], {
       queryParams: { subtype: subType },
     });
   }
 
-  foreignPage() {
-    this.router.navigate(['/foreign-teacher', 'id-request']);
+  foreignPage(id = '') {
+    this.router.navigate(['/foreign-teacher', 'id-request', id]);
   }
 
-  qualificationPage() {
-    this.router.navigate(['/qualification-approve', 'detail']);
+  qualificationPage(id = '') {
+    this.router.navigate(['/qualification-approve', 'detail', id]);
   }
 
   rewardPage() {

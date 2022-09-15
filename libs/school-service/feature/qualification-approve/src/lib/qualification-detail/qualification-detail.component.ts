@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SchoolRequestType, UserInfoFormType } from '@ksp/shared/constant';
+import { SchoolRequestProcess, UserInfoFormType } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -190,7 +190,8 @@ export class QualificationDetailComponent implements OnInit {
             userInfo.systemtype = '2';
             userInfo.requesttype = '06';
             userInfo.subtype = '1';
-            userInfo.schoolId = this.schoolId;
+            userInfo.schoolid = this.schoolId;
+            userInfo.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
             const payload = {
               ...userInfo,
               ...{

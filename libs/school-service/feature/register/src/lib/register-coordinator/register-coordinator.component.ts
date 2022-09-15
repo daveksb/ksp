@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { SchoolRequestType, UserInfoFormType } from '@ksp/shared/constant';
+import { SchoolRequestProcess, UserInfoFormType } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -126,6 +126,7 @@ export class CoordinatorInfoComponent implements OnInit {
             payload.ref3 = '1';
             payload.systemtype = '2';
             payload.requesttype = '1';
+            payload.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
             return this.requestLicenseService.requestLicense(payload);
           }
           return EMPTY;

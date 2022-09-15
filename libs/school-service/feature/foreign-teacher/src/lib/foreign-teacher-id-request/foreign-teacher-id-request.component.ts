@@ -15,6 +15,7 @@ import {
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { thaiDate } from '@ksp/shared/utility';
+import { SchoolRequestProcess } from '@ksp/shared/constant';
 @UntilDestroy()
 @Component({
   templateUrl: './foreign-teacher-id-request.component.html',
@@ -108,9 +109,10 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             userInfo.ref2 = '04';
             userInfo.ref3 = '1';
             userInfo.systemtype = '2';
-            userInfo.requesttype = '3';
+            userInfo.requesttype = '4';
             userInfo.subtype = '1';
             userInfo.schoolid = this.schoolId;
+            userInfo.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
             userInfo.visainfo = JSON.stringify(this.form.value.visainfo);
             return this.requestLicenseService.requestLicense(userInfo);
           }
