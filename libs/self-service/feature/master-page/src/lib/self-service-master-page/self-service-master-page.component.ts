@@ -55,7 +55,7 @@ export const menu: MenuConfig[] = [
       },
       {
         label: 'ขอรับรางวัลการยกย่องเชิดชูเกียรติ',
-        path: 'license/xxx',
+        path: 'reward/request',
       },
     ],
   },
@@ -72,7 +72,7 @@ export const menu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/reward.svg',
     label: 'รางวัลของฉัน',
-    path: 'reward/request',
+    path: 'xxx',
   },
   {
     icon: 'assets/images/icon-sidenav/people.svg',
@@ -85,11 +85,11 @@ export const menu: MenuConfig[] = [
         path: 'my-info/person-info',
       },
       {
-        label: 'ที่อยู่',
+        label: 'ข้อมูลที่อยู่',
         path: 'my-info/address-info',
       },
       {
-        label: 'สถานที่ทำงาน',
+        label: 'ข้อมูลสถานที่ทำงาน',
         path: 'my-info/workplace-info',
       },
       {
@@ -108,7 +108,7 @@ export const menu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ประวัติการชำระเงินและใบเสร็จรับเงิน',
+    label: 'ประวัติการชำระเงิน',
     path: 'my-info/payment-history',
   },
 ];

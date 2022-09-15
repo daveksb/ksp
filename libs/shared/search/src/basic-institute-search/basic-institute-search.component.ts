@@ -17,10 +17,10 @@ import { providerFactory } from '@ksp/shared/utility';
 export class BasicInstituteSearchComponent extends KspFormBaseComponent {
   override form = this.fb.group({
     organization: [],
-    instituteId: [],
+    schoolid: [],
     instituteName: [],
   });
-
+  @Input() bureaus: any;
   @Input() searchType = '';
 
   constructor(private fb: FormBuilder) {

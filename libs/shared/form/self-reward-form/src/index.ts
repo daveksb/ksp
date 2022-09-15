@@ -12,21 +12,11 @@ export * from './lib/council-evidence/council-evidence.component';
 
 export * from './lib/thai-teacher-info/thai-teacher-info.component';
 
-export * from './lib/thai-teacher-education/thai-teacher-education.component';
-
-export * from './lib/thai-teacher-working/thai-teacher-working.component';
-
 export * from './lib/thai-teacher-teaching/thai-teacher-teaching.component';
 
 export * from './lib/best-teacher-info/best-teacher-info.component';
 
-export * from './lib/best-teacher-education/best-teacher-education.component';
-
-export * from './lib/best-teacher-teaching/best-teacher-teaching.component';
-
 export * from './lib/best-teacher-innovation/best-teacher-innovation.component';
-
-export * from './lib/praise-teacher-education/praise-teacher-education.component';
 
 export * from './lib/praise-teacher-working/praise-teacher-working.component';
 

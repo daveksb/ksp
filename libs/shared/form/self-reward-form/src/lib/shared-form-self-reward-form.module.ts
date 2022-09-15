@@ -6,14 +6,9 @@ import { CouncilEthicComponent } from './council-ethic/council-ethic.component';
 import { CouncilSuccessComponent } from './council-success/council-success.component';
 import { CouncilEvidenceComponent } from './council-evidence/council-evidence.component';
 import { ThaiTeacherInfoComponent } from './thai-teacher-info/thai-teacher-info.component';
-import { ThaiTeacherEducationComponent } from './thai-teacher-education/thai-teacher-education.component';
-import { ThaiTeacherWorkingComponent } from './thai-teacher-working/thai-teacher-working.component';
 import { ThaiTeacherTeachingComponent } from './thai-teacher-teaching/thai-teacher-teaching.component';
 import { BestTeacherInfoComponent } from './best-teacher-info/best-teacher-info.component';
-import { BestTeacherEducationComponent } from './best-teacher-education/best-teacher-education.component';
-import { BestTeacherTeachingComponent } from './best-teacher-teaching/best-teacher-teaching.component';
 import { BestTeacherInnovationComponent } from './best-teacher-innovation/best-teacher-innovation.component';
-import { PraiseTeacherEducationComponent } from './praise-teacher-education/praise-teacher-education.component';
 import { PraiseTeacherWorkingComponent } from './praise-teacher-working/praise-teacher-working.component';
 import { PraiseTeacherPunishedComponent } from './praise-teacher-punished/praise-teacher-punished.component';
 import { SeniorTeacherInfoComponent } from './senior-teacher-info/senior-teacher-info.component';
@@ -57,14 +52,9 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
     CouncilSuccessComponent,
     CouncilEvidenceComponent,
     ThaiTeacherInfoComponent,
-    ThaiTeacherEducationComponent,
-    ThaiTeacherWorkingComponent,
     ThaiTeacherTeachingComponent,
     BestTeacherInfoComponent,
-    BestTeacherEducationComponent,
-    BestTeacherTeachingComponent,
     BestTeacherInnovationComponent,
-    PraiseTeacherEducationComponent,
     PraiseTeacherWorkingComponent,
     PraiseTeacherPunishedComponent,
     SeniorTeacherInfoComponent,
@@ -82,14 +72,9 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
     CouncilSuccessComponent,
     CouncilEvidenceComponent,
     ThaiTeacherInfoComponent,
-    ThaiTeacherEducationComponent,
-    ThaiTeacherWorkingComponent,
     ThaiTeacherTeachingComponent,
     BestTeacherInfoComponent,
-    BestTeacherEducationComponent,
-    BestTeacherTeachingComponent,
     BestTeacherInnovationComponent,
-    PraiseTeacherEducationComponent,
     PraiseTeacherWorkingComponent,
     PraiseTeacherPunishedComponent,
     SeniorTeacherInfoComponent,

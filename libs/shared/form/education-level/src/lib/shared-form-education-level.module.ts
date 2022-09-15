@@ -6,6 +6,8 @@ import { EducationLevelFormThreeComponent } from './education-level-form-three/e
 import { EducationLevelFormFourComponent } from './education-level-form-four/education-level-form-four.component';
 import { ExperienceFormComponent } from './experience-form/experience-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EducationLevelFormFiveComponent } from './education-level-form-five/education-level-form-five.component';
+import { EducationLevelFormSixComponent } from './education-level-form-six/education-level-form-six.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule],
@@ -15,6 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     EducationLevelFormThreeComponent,
     EducationLevelFormFourComponent,
     ExperienceFormComponent,
+    EducationLevelFormFiveComponent,
+    EducationLevelFormSixComponent,
   ],
   exports: [
     EducationLevelFormOneComponent,
@@ -22,6 +26,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     EducationLevelFormThreeComponent,
     EducationLevelFormFourComponent,
     ExperienceFormComponent,
+    EducationLevelFormFiveComponent,
+    EducationLevelFormSixComponent,
   ],
 })
 export class SharedFormEducationLevelModule {}

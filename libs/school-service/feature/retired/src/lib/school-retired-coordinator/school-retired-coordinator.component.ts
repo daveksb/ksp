@@ -29,8 +29,40 @@ export class SchoolRetiredCoordinatorComponent {
     this.router.navigate(['/', 'retired-user', 'requester']);
   }
 
-  cancel() {
+  /* cancel() {
     this.router.navigate(['/', 'login']);
+  } */
+
+  cancel() {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: `คุณต้องการยกเลิกรายการใบคำขอ
+        ใช่หรือไม่?`,
+        btnLabel: 'ยืนยัน',
+      },
+    });
+
+    dialogRef.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.onConfirmed1();
+      }
+    });
+  }
+
+  onConfirmed1() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      width: '350px',
+      data: {
+        header: 'ยกเลิกรายการสำเร็จ',
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/', 'login']);
+      }
+    });
   }
 
   save() {
@@ -40,17 +72,18 @@ export class SchoolRetiredCoordinatorComponent {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
         subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
         ใช่หรือไม่`,
+        btnLabel: 'บันทึก',
       },
     });
 
     dialogRef.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.onConfirmed();
+        this.onConfirmed2();
       }
     });
   }
 
-  onConfirmed() {
+  onConfirmed2() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
       data: {
@@ -64,7 +97,7 @@ export class SchoolRetiredCoordinatorComponent {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.cancel();
+        this.router.navigate(['/', 'login']);
       }
     });
   }

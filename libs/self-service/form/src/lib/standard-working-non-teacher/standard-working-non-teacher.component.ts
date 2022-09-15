@@ -15,6 +15,8 @@ export class StandardWorkingNonTeacherComponent implements OnInit {
     activity1: [],
     activity2: [],
     activity3: [],
+    trainInfo: [],
+    testInfo: [],
   });
 
   constructor(private fb: FormBuilder) {}

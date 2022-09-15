@@ -1,0 +1,56 @@
+<form [formGroup]="form">
+  <div class="box-header">ข้อมูลคุณสมบัติของผู้ขอต่ออายุใบอนุญาต</div>
+
+  <div class="row mb-3">
+    <div class="col-6">
+      <label class="form-label">สถานะปัจจุบัน</label>
+
+      <ng-container *ngIf="renewLicenseTypes === 'schManager'">
+        <select formControlName="educationType" class="form-select">
+          <option selected hidden disabled value="null">กรุณาเลือก</option>
+          <option *ngFor="let edu of educationTypes1" [value]="edu.value">
+            {{ edu.label }}
+          </option>
+        </select></ng-container
+      >
+
+      <ng-container *ngIf="renewLicenseTypes === 'eduManager'">
+        <select formControlName="educationType" class="form-select">
+          <option selected hidden disabled value="null">กรุณาเลือก</option>
+          <option *ngFor="let edu of educationTypes2" [value]="edu.value">
+            {{ edu.label }}
+          </option>
+        </select></ng-container
+      >
+
+      <ng-container *ngIf="renewLicenseTypes === 'supervision'">
+        <select formControlName="educationType" class="form-select">
+          <option selected hidden disabled value="null">กรุณาเลือก</option>
+          <option *ngFor="let edu of educationTypes3" [value]="edu.value">
+            {{ edu.label }}
+          </option>
+        </select></ng-container
+      >
+    </div>
+  </div>
+
+  <ng-container
+    *ngIf="selectedEducationType === 0 || selectedEducationType === 1"
+  >
+    <div class="form-label text-black">
+      มาตรฐานความรู้และประสบการณ์วิชาชีพ
+      <span class="text-danger fs-6">
+        * กรอกรายละเอียดให้ครบถ้วนเพียง 1 ข้อเท่านั้น</span
+      >
+    </div>
+    <self-service-renew-license-property-manager
+      *ngIf="
+        renewLicenseTypes === 'schManager' || renewLicenseTypes === 'eduManager'
+      "
+    ></self-service-renew-license-property-manager>
+
+    <self-service-renew-license-property-supervision
+      *ngIf="renewLicenseTypes === 'supervision'"
+    ></self-service-renew-license-property-supervision>
+  </ng-container>
+</form>

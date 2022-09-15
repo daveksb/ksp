@@ -15,12 +15,21 @@ export class GeneralInfoService {
       shareReplay()
     );
   }
+
   getVisaType(): Observable<any> {
     return this.http.get(`${environment.apiUrl}/kspmasterdata/visatype`).pipe(
       map((data: any) => data.datareturn),
       shareReplay()
     );
   }
+
+  getVisaClass(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/kspmasterdata/visaclass`).pipe(
+      map((data: any) => data.datareturn),
+      shareReplay()
+    );
+  }
+
   getNationality(): Observable<any> {
     return this.http
       .get(`${environment.apiUrl}/kspmasterdata/nationality`)
@@ -28,5 +37,12 @@ export class GeneralInfoService {
         map((data: any) => data.datareturn),
         shareReplay()
       );
+  }
+
+  getBureau(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/kspmasterdata/bureau`).pipe(
+      map((data: any) => data.datareturn),
+      shareReplay()
+    );
   }
 }

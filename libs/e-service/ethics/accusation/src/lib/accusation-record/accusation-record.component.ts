@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -74,13 +74,6 @@ export class AccusationRecordComponent
       })
     );
   }
-
-  license = [
-    'ใบอนุญาตประกอบวิชาชีพ - ครู',
-    'ใบอนุญาตประกอบวิชาชีพ - ผู้บริหารสถานศึกษา',
-    'ใบอนุญาตประกอบวิชาชีพ - ผู้บริหารสถานศึกษา',
-    'ใบอนุญาตประกอบวิชาชีพ - ศึกษานิเทศก์',
-  ];
 
   ngOnInit(): void {
     this.route.data.subscribe((res) => {

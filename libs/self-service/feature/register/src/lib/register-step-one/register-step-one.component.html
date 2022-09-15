@@ -50,7 +50,12 @@
             <div class="form-group field__container">
               <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
               <select class="form-select" formControlName="prefixTh">
-                <option>นางสาว</option>
+                <option disabled selected hidden value="null">
+                  กรุณาเลือก
+                </option>
+                <option value="1">นาย</option>
+                <option value="2">นาง</option>
+                <option value="3">นางสาว</option>
               </select>
             </div>
             <div class="form-group field__container">
@@ -78,7 +83,12 @@
             <div class="form-group field__container">
               <label class="form-label">คำนำหน้าชื่อภาษาอังกฤษ</label>
               <select class="form-select" formControlName="prefixEng">
-                <option>Miss</option>
+                <option disabled selected hidden value="null">
+                  กรุณาเลือก
+                </option>
+                <option value="1">Mr.</option>
+                <option value="2">Mrs.</option>
+                <option value="3">Miss</option>
               </select>
             </div>
             <div class="form-group field__container">
@@ -121,7 +131,7 @@
               id="nationalityFormControlSelect"
               formControlName="nationality"
             >
-              <option>ไทย</option>
+              <option selected value="null">ไทย</option>
             </select>
           </div>
         </div>

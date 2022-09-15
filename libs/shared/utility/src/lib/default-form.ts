@@ -1,3 +1,4 @@
+import { Validators } from '@angular/forms';
 import {
   idCardPattern,
   nameEnPattern,
@@ -6,8 +7,8 @@ import {
   phonePattern,
 } from './form-validators';
 
-export function createDefaultUserInfoForm(FormBuilder: any, Validators: any) {
-  return FormBuilder.group({
+export function createDefaultUserInfoForm(FormBuilder: any) {
+  const data = {
     id: [],
     idcardno: [null, [Validators.required, Validators.pattern(idCardPattern)]],
     passportno: [
@@ -38,7 +39,7 @@ export function createDefaultUserInfoForm(FormBuilder: any, Validators: any) {
     ],
     sex: [null, Validators.required],
     birthdate: [null, Validators.required],
-    position: [null],
+    position: [null, Validators.required],
     email: [null, [Validators.required, Validators.email]],
     contactphone: [
       null,
@@ -47,7 +48,12 @@ export function createDefaultUserInfoForm(FormBuilder: any, Validators: any) {
     workphone: [null, [Validators.required, Validators.pattern(phonePattern)]],
     nationality: [null],
     country: [null],
-  });
+    visaclass: [null],
+    visatype: [null],
+    visaenddate: [null],
+  };
+
+  return FormBuilder.group(data);
 }
 
 export function createDefaultVisaInfo(FormBuilder: any) {

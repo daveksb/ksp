@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SchoolRequestType } from '@ksp/shared/constant';
+import { SchoolRequestType, UserInfoFormType } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -33,7 +33,7 @@ export class QualificationDetailComponent implements OnInit {
     education: [],
   });
   requestNumber = '';
-  userInfoFormdisplayMode: number = SchoolRequestType.ขอหนังสือรับรองคุณวุฒิ;
+  userInfoFormdisplayMode: number = UserInfoFormType.thai;
   prefixList$!: Observable<any>;
   provinces1$!: Observable<any>;
   provinces2$!: Observable<any>;

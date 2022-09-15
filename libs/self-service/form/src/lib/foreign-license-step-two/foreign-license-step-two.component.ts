@@ -6,7 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./foreign-license-step-two.component.scss'],
 })
 export class ForeignLicenseStepTwoComponent implements OnInit {
-  academicFiles = [`1. Achelor's degree`];
+  academicFiles = [
+    {
+      name: `1. Achelor's degree`,
+      fileId: '',
+    },
+  ];
+
   constructor() {}
 
   ngOnInit(): void {}

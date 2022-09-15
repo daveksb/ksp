@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 @Component({
   selector: 'ksp-license-type-button-group',
@@ -12,5 +12,6 @@ export class LicenseTypeButtonGroupComponent {
   licenseButtons = [
     'ใบอนุญาตประกอบวิชาชีพ - ครู',
     'ใบอนุญาตประกอบวิชาชีพ - ผู้บริหารสถานศึกษา',
+    'ใบอนุญาตประกอบวิชาชีพ - ศึกษานิเทศก์',
   ];
 }

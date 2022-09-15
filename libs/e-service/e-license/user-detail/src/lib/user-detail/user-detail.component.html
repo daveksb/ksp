@@ -3,7 +3,7 @@
   <span subHeader>{{ headers[pageType][1] }}</span>
 </ksp-top-nav>
 
-<div class="bg-secondary bg-opacity-10 px-4 py-2">
+<div [formGroup]="form" class="bg-secondary bg-opacity-10 px-4 py-2">
   <div class="box-header">รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ</div>
 
   <div class="bg-white p-3">
@@ -11,8 +11,6 @@
       [requestDate]="'10 ตุลาคม 2565'"
       [requestNumber]="'112234467876543'"
     ></ksp-request-header-info>
-
-    <hr />
 
     <div class="px-4 py-2">
       <div class="row">
@@ -56,24 +54,42 @@
       </div>
     </div>
 
-    <div class="bg-light">
-      <div class="box-header px-4 pt-3">
+    <div class="bg-light px-4">
+      <div class="box-header pt-3">
         ข้อมูลผู้ขอเข้ารหัสสำหรับเข้าใช้งานระบบ (ผู้ประสานงาน)
       </div>
-      <ksp-form-requester-info [mode]="'view'"></ksp-form-requester-info>
+      <ksp-form-user-info
+        formControlName="requester"
+        [isDarkMode]="false"
+        [mode]="'view'"
+        [displayMode]="[0]"
+        [prefixList]="prefixList$ | async"
+        formControlName="userInfo"
+      ></ksp-form-user-info>
+      <!--
+        [nationalitys]="nationalitys$ | async" -->
+      <!-- <ksp-form-requester-info [mode]="'view'"></ksp-form-requester-info> -->
     </div>
     <br />
     <div class="bg-light">
       <div class="box-header px-4 pt-3">
         ข้อมูลผู้มีอำนาจแต่งตั้ง (ที่ระบุไว้ในเอกสารแนบ)
       </div>
+      <ksp-form-user-info
+        formControlName="requester"
+        [isDarkMode]="false"
+        [mode]="'view'"
+        [displayMode]="[0]"
+        [prefixList]="prefixList$ | async"
+        formControlName="userInfo"
+      ></ksp-form-user-info>
       <ksp-form-coordinator-info [mode]="'view'"></ksp-form-coordinator-info>
     </div>
     <br />
     <ksp-form-attachment
       [title]="'หลักฐานเพื่อพิจารณา'"
       mode="view"
-      [groups]="['หนังสือแต่งตั้ง']"
+      [groups]="[{ name: 'หนังสือแต่งตั้ง', fileId: '' }]"
     ></ksp-form-attachment>
   </div>
   <br />

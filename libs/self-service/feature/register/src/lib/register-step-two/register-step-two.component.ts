@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { FormVerifyPhoneComponent } from '@ksp/self-service/form';
+import { VerifyPhoneDialogComponent } from '@ksp/self-service/dialog';
 
 @Component({
   selector: 'self-service-register-step-two',
@@ -15,10 +15,14 @@ export class RegisterStepTwoComponent {
     backPersonId: [],
   });
 
-  constructor(public dialog: MatDialog, private router: Router, private fb: FormBuilder) {}
+  constructor(
+    public dialog: MatDialog,
+    private router: Router,
+    private fb: FormBuilder
+  ) {}
 
   openDialog() {
-    const dialogRef = this.dialog.open(FormVerifyPhoneComponent, {
+    const dialogRef = this.dialog.open(VerifyPhoneDialogComponent, {
       width: '600px',
     });
 

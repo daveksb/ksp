@@ -27,9 +27,9 @@
         *ngIf="searchType !== 'uni'"
       >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+        <option *ngFor="let bureau of bureaus" [value]="bureau?.bureauId">
+          {{ bureau?.bureauName }}
+        </option>
       </select>
     </div>
   </div>
@@ -41,7 +41,7 @@
           searchType === 'uni' ? 'รหัสมหาวิทยาลัย' : 'รหัสโรงเรียน/สถานศึกษา'
         }}
       </label>
-      <input class="form-control" type="text" formControlName="instituteId" />
+      <input class="form-control" type="text" formControlName="schoolid" />
     </div>
     <div class="col-8">
       <label class="form-label">

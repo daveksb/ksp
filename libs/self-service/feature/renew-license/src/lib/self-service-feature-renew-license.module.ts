@@ -27,6 +27,18 @@ export const routes: Routes = [
         path: 'request',
         component: RenewLicenseRequestComponent,
       },
+      {
+        path: 'school-manager',
+        component: RenewLicenseSchoolManagerComponent,
+      },
+      {
+        path: 'education-manager',
+        component: RenewLicenseEducationManagerComponent,
+      },
+      {
+        path: 'study-supervision',
+        component: RenewLicenseStudySupervisionComponent,
+      },
     ],
   },
 ];

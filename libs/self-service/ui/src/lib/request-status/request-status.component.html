@@ -1,19 +1,87 @@
 <div class="box-header">{{ title }}</div>
-<div class="mx-3">
-  <div class="row row-cols-4 bg-light rounded shadow-sm p-1">
-    <!-- <div>xxx</div> -->
-    <ng-container *ngFor="let header of headers; index as i">
-      <div class="col p-1">
-        <div
-          class="d-flex flex-column align-items-center px-2 py-3 border__box"
-        >
-          <div class="text-primary fs-5 mb-1">{{ header }}</div>
 
-          <div class="px-3 content__primary text-white fs-5 rounded">
-            112234467876543
-          </div>
-        </div>
+<div
+  class="d-flex bg-white rounded-4 shadow-sm px-3 py-4 justify-content-evenly"
+>
+  <ng-container *ngIf="showContent1 === true">
+    <div class="d-flex flex-column align-items-center">
+      <div class="text-black fs-5">{{ headerLabel1 }}</div>
+
+      <div class="text-white form-label border rounded-5 content__primary">
+        10 ตุลาคม 2565
       </div>
-    </ng-container>
-  </div>
+    </div></ng-container
+  >
+
+  <div class="split__line" *ngIf="showContent2 === true"></div>
+
+  <ng-container *ngIf="showContent2 === true">
+    <div class="d-flex flex-column align-items-center">
+      <div class="text-black fs-5">{{ headerLabel2 }}</div>
+
+      <div class="text-white form-label border rounded-5 content__second">
+        112234467876543
+      </div>
+    </div></ng-container
+  >
+
+  <div class="split__line" *ngIf="showContent3 === true"></div>
+
+  <ng-container *ngIf="showContent3 === true">
+    <div class="d-flex flex-column align-items-center">
+      <div class="text-black fs-5">เลขที่ใบอนุญาต</div>
+
+      <div class="text-white form-label border rounded-5 content__third">
+        1020-00xxx-xx-x
+      </div>
+    </div></ng-container
+  >
+
+  <div class="split__line" *ngIf="showContent4 === true"></div>
+
+  <ng-container *ngIf="showContent4 === true">
+    <div class="d-flex flex-column align-items-center">
+      <div class="text-black fs-5">เลขที่ประจำตัวคุรุสภา</div>
+
+      <div class="text-white form-label border rounded-5 content__fourth">
+        1020-00xxx-xx-x
+      </div>
+    </div></ng-container
+  >
+
+  <div class="split__line" *ngIf="showContent5 === true"></div>
+
+  <ng-container *ngIf="showContent5 === true">
+    <div class="d-flex flex-column align-items-center">
+      <div class="text-black fs-5">เลขประจำตัวประชาชน</div>
+
+      <div class="text-white form-label border rounded-5 content__primary">
+        1020-00xxx-xx-x
+      </div>
+    </div></ng-container
+  >
+
+  <div class="split__line" *ngIf="showContent6 === true"></div>
+
+  <ng-container *ngIf="showContent6 === true">
+    <div class="d-flex flex-column align-items-center">
+      <div class="text-black fs-5">วันที่ออกใบอนุญาต</div>
+
+      <div class="text-white form-label border rounded-5 content__second">
+        10 ตุลาคม 2565
+      </div>
+    </div></ng-container
+  >
+
+  <div class="split__line" *ngIf="showContent7 === true"></div>
+
+  <ng-container *ngIf="showContent7 === true">
+    <div class="d-flex flex-column align-items-center">
+      <div class="text-black fs-5">วันที่หมดอายุใบอนุญาต</div>
+
+      <div class="text-white form-label border rounded-5 content__third">
+        10 ตุลาคม 2565
+      </div>
+    </div></ng-container
+  >
 </div>

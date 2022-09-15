@@ -47,14 +47,14 @@
 
   <div class="row">
     <div class="col-md-6 mb-3">
-      <label class="form-label">รหัสไปรษณีย์</label>
+      <label class="form-label required">รหัสไปรษณีย์ </label>
       <input class="form-control" type="text" formControlName="zipCode" />
     </div>
 
     <div class="col-md-6 mb-3">
-      <label class="form-label">จังหวัด</label>
+      <label class="form-label required">จังหวัด</label>
       <select class="search__content form-select" formControlName="provience">
-        <option selected>กรุณาเลือก</option>
+        <option selected hidden disabled value="null">กรุณาเลือก</option>
         <option value="1">One</option>
         <option value="2">Two</option>
         <option value="3">Three</option>
@@ -64,9 +64,9 @@
 
   <div class="row">
     <div class="col-md-6 mb-3">
-      <label class="form-label">ตำบล</label>
+      <label class="form-label required">ตำบล</label>
       <select class="search__content form-select" formControlName="subDistrict">
-        <option selected>กรุณาเลือก</option>
+        <option selected hidden disabled value="null">กรุณาเลือก</option>
         <option value="1">One</option>
         <option value="2">Two</option>
         <option value="3">Three</option>
@@ -74,9 +74,9 @@
     </div>
 
     <div class="col-md-6 mb-3">
-      <label class="form-label">อำเภอ</label>
+      <label class="form-label required">อำเภอ</label>
       <select class="search__content form-select" formControlName="district">
-        <option selected>กรุณาเลือก</option>
+        <option selected hidden disabled value="null">กรุณาเลือก</option>
         <option value="1">One</option>
         <option value="2">Two</option>
         <option value="3">Three</option>

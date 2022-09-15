@@ -5,6 +5,7 @@ import { PromptpayComponent } from './promptpay/promptpay.component';
 import { MatIconModule } from '@angular/material/icon';
 import { SelfServiceLicenseInfoComponent } from '@ksp/self-service/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
+import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { TopNavComponent } from '@ksp/shared/menu';
     TopNavComponent,
     MatIconModule,
     SelfServiceLicenseInfoComponent,
+    RequestHeaderInfoComponent
   ],
   declarations: [PaymentChannelComponent, PromptpayComponent],
   exports: [PaymentChannelComponent, PromptpayComponent],

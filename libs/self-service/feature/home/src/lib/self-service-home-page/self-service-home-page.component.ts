@@ -45,10 +45,28 @@ export class SelfServiceHomePageComponent {
     this.router.navigate(['/', 'renew-license', 'request']);
   }
 
-  rewardPage(requestType: number) {
-    this.router.navigate(['/', 'reward', 'request'], {
-      queryParams: { type: requestType },
-    });
+  schManagerRenew() {
+    this.router.navigate(['/', 'renew-license', 'school-manager']);
+  }
+
+  eduManagerRenew() {
+    this.router.navigate(['/', 'renew-license', 'education-manager']);
+  }
+
+  supervisionRenew() {
+    this.router.navigate(['/', 'renew-license', 'study-supervision']);
+  }
+
+  reward() {
+    this.router.navigate(['/', 'reward', 'request']);
+  }
+
+  transfer() {
+    this.router.navigate(['/', 'transfer-knowledge', 'request']);
+  }
+
+  compare() {
+    this.router.navigate(['/', 'compare-knowledge', 'request']);
   }
 
   refundFee() {

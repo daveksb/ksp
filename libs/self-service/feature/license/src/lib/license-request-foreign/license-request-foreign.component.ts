@@ -25,8 +25,8 @@ export class LicenseRequestForeignComponent implements OnInit {
       width: '350px',
       data: {
         title: `Do you want to save and proceed?`,
-        btnLabel: 'Save (Draft)',
-        cancelBtnLabel: 'Save & Proceed',
+        btnLabel: 'Save & Proceed',
+        cancelBtnLabel: ' Save (Draft)',
       },
     });
 
