@@ -42,6 +42,8 @@ import { SharedFormSelfRenewLicensePropertyFormModule } from '@ksp/shared/form/s
 import { RenewLicensePropertySupervisionComponent } from './renew-license-property-supervision/renew-license-property-supervision.component';
 import { RenewLicensePropertyManagerComponent } from './renew-license-property-manager/renew-license-property-manager.component';
 import { RenewLicenseForeignStepTwoComponent } from './renew-license-foreign-step-two/renew-license-foreign-step-two.component';
+import { RenewLicenseForeignTeacherComponent } from './renew-license-foreign-teacher/renew-license-foreign-teacher.component';
+import { RenewLicenseForeignNonTeacherComponent } from './renew-license-foreign-non-teacher/renew-license-foreign-non-teacher.component';
 
 @NgModule({
   imports: [
@@ -90,6 +92,8 @@ import { RenewLicenseForeignStepTwoComponent } from './renew-license-foreign-ste
     RenewLicensePropertySupervisionComponent,
     RenewLicensePropertyManagerComponent,
     RenewLicenseForeignStepTwoComponent,
+    RenewLicenseForeignTeacherComponent,
+    RenewLicenseForeignNonTeacherComponent,
   ],
   exports: [
     FormUserEducationComponent,
@@ -113,6 +117,8 @@ import { RenewLicenseForeignStepTwoComponent } from './renew-license-foreign-ste
     RenewLicensePropertySupervisionComponent,
     RenewLicensePropertyManagerComponent,
     RenewLicenseForeignStepTwoComponent,
+    RenewLicenseForeignTeacherComponent,
+    RenewLicenseForeignNonTeacherComponent,
   ],
 })
 export class SelfServiceFormModule {}
