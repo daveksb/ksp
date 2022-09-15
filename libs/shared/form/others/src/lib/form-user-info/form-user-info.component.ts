@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { SchoolRequestType } from '@ksp/shared/constant';
+import { SchoolRequestType, UserInfoFormType } from '@ksp/shared/constant';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import {
   createDefaultUserInfoForm,
@@ -21,13 +21,11 @@ export class FormUserInfoComponent
   @Input() nationalitys = null;
   @Input() isDarkMode = false;
   @Input() prefixList = null;
-  @Input() displayMode: number =
-    SchoolRequestType[
-      'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)'
-    ];
+  @Input() displayMode!: number[];
 
   RequestTypeEnum = SchoolRequestType;
   validatorMessages = validatorMessages;
+  FormTypeEnum = UserInfoFormType;
 
   /**
    * Dark Mode : all inputs will have gray background and form container will have white background
@@ -52,6 +50,7 @@ export class FormUserInfoComponent
   ngOnInit(): void {
     this.form.controls.passportno.clearValidators();
     this.form.controls.position.clearValidators();
+    console.log('diaplay mode = ', this.displayMode);
   }
   get idCardNo() {
     return this.form.controls.idcardno;
