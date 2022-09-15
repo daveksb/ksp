@@ -248,11 +248,8 @@
         formControlName="nationality"
       >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
-        <option
-          *ngFor="let nationality of nationList"
-          [value]="nationality.nationid"
-        >
-          {{ nationality.nationName }}
+        <option *ngFor="let n of nationList" [value]="n.nationId">
+          {{ n.nationName }}
         </option>
       </select>
     </div>

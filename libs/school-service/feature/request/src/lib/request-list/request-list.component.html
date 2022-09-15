@@ -83,14 +83,14 @@
           <ng-container matColumnDef="requesttype">
             <th mat-header-cell *matHeaderCellDef>ประเภทใบคำขอ</th>
             <td mat-cell *matCellDef="let element">
-              {{ RequestTypeEnum[element.requesttype] }}
+              {{ RequestTypeEnum[+element.requesttype] }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="subtype">
             <th mat-header-cell *matHeaderCellDef>ประเภทวิชาชีพ</th>
             <td mat-cell *matCellDef="let element">
-              {{ RequestSubTypeEnum[element.subtype] }}
+              {{ RequestSubTypeEnum[+element.subtype] }}
             </td>
           </ng-container>
 
