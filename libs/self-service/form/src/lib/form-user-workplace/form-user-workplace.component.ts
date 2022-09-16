@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
@@ -12,6 +12,13 @@ import { providerFactory } from '@ksp/shared/utility';
   providers: providerFactory(FormUserWorkplaceComponent),
 })
 export class FormUserWorkplaceComponent extends KspFormBaseComponent {
+  @Input() provinces: any[] = [];
+  @Input() amphurs: any[] = [];
+  @Input() tumbols: any[] = [];
+  @Input() bureaus: any[] = [];
+  @Output() provinceChanged = new EventEmitter<any>();
+  @Output() amphurChanged = new EventEmitter<any>();
+
   override form = this.fb.group({
     affiliation: [''],
     addressName: [''],
@@ -41,5 +48,11 @@ export class FormUserWorkplaceComponent extends KspFormBaseComponent {
       height: '900px',
       width: '1200px',
     });
+  }
+
+  updatePostcode(evt: any) {
+    const tumbolCode = evt.target?.value;
+    const postCode = this.tumbols.find((t) => t.tambolCode === tumbolCode);
+    this.form.controls.zipCode.patchValue(postCode.tambolPostcode);
   }
 }

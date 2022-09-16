@@ -1,12 +1,8 @@
 <form [formGroup]="form">
   <div class="row">
     <div class="col-md-6 mb-3">
-      <label class="form-label" *ngIf="educationTypes !== 'supervision'"
-        >ลักษณะวุฒิการศึกษา</label
-      >
-      <label class="form-label" *ngIf="educationTypes === 'supervision'"
-        >คุณสมบัติตามมาตรฐานวิชาชีพศึกษานิเทศก์</label
-      >
+      <label class="form-label" *ngIf="educationTypes !== 'supervision'">ลักษณะวุฒิการศึกษา</label>
+      <label class="form-label" *ngIf="educationTypes === 'supervision'">คุณสมบัติตามมาตรฐานวิชาชีพศึกษานิเทศก์</label>
 
       <ng-container *ngIf="educationTypes === 'teacher'">
         <select formControlName="educationType" class="form-select">
@@ -14,8 +10,8 @@
           <option *ngFor="let edu of educationTypes1" [value]="edu.value">
             {{ edu.label }}
           </option>
-        </select></ng-container
-      >
+        </select>
+      </ng-container>
 
       <ng-container *ngIf="educationTypes === 'manager'">
         <select formControlName="educationType" class="form-select">
@@ -23,8 +19,8 @@
           <option *ngFor="let edu of educationTypes2" [value]="edu.value">
             {{ edu.label }}
           </option>
-        </select></ng-container
-      >
+        </select>
+      </ng-container>
 
       <ng-container *ngIf="educationTypes === 'supervision'">
         <select formControlName="educationType" class="form-select">
@@ -32,68 +28,58 @@
           <option *ngFor="let edu of educationTypes3" [value]="edu.value">
             {{ edu.label }}
           </option>
-        </select></ng-container
-      >
+        </select>
+      </ng-container>
     </div>
 
     <ng-container *ngIf="educationTypes === 'teacher'">
       <ksp-education-level-form-one
         *ngIf="selectedEducationType === 0"
-        formControlName="educationLevelForm"
-      ></ksp-education-level-form-one>
+        formControlName="educationLevelForm"></ksp-education-level-form-one>
       <ksp-education-level-form-two
         *ngIf="selectedEducationType === 1"
-        formControlName="educationLevelForm"
-      ></ksp-education-level-form-two>
+        formControlName="educationLevelForm"></ksp-education-level-form-two>
       <ksp-education-level-form-one
         *ngIf="selectedEducationType === 2"
-        formControlName="educationLevelForm"
-      ></ksp-education-level-form-one>
+        formControlName="educationLevelForm"></ksp-education-level-form-one>
       <ksp-education-level-form-one
         *ngIf="selectedEducationType === 3"
-        formControlName="educationLevelForm"
-      ></ksp-education-level-form-one>
+        formControlName="educationLevelForm"></ksp-education-level-form-one>
       <ksp-education-level-form-three
         *ngIf="selectedEducationType === 4"
         formControlName="educationLevelForm"
-      ></ksp-education-level-form-three>
+        [countries]="countries"></ksp-education-level-form-three>
       <ksp-education-level-form-four
         *ngIf="selectedEducationType === 5"
-        formControlName="educationLevelForm"
-      ></ksp-education-level-form-four>
+        formControlName="educationLevelForm"></ksp-education-level-form-four>
     </ng-container>
 
     <ng-container *ngIf="educationTypes === 'manager'">
       <ksp-education-level-form-one
-        *ngIf="selectedEducationType === 0 || selectedEducationType === 1"
-      ></ksp-education-level-form-one>
+        *ngIf="selectedEducationType === 0 || selectedEducationType === 1"></ksp-education-level-form-one>
       <ksp-education-level-form-five
-        *ngIf="selectedEducationType === 2"
-      ></ksp-education-level-form-five>
+        *ngIf="selectedEducationType === 2"></ksp-education-level-form-five>
       <ksp-education-level-form-six
-        *ngIf="selectedEducationType === 3"
-      ></ksp-education-level-form-six>
+        *ngIf="selectedEducationType === 3"></ksp-education-level-form-six>
       <ng-container *ngIf="selectedEducationType >= 0">
         <div class="mt-3">
           <ksp-form-attachment
-            [title]="'กรุณาแนบหลักฐานประกอบวุฒิทางการศึกษา'"
-          ></ksp-form-attachment></div
-      ></ng-container>
+            [title]="'กรุณาแนบหลักฐานประกอบวุฒิทางการศึกษา'"></ksp-form-attachment>
+        </div>
+      </ng-container>
     </ng-container>
 
     <ng-container *ngIf="educationTypes === 'supervision'">
       <ksp-education-level-form-one
-        *ngIf="selectedEducationType === 0"
-      ></ksp-education-level-form-one>
+        *ngIf="selectedEducationType === 0"></ksp-education-level-form-one>
       <ksp-education-level-form-six
-        *ngIf="selectedEducationType === 1"
-      ></ksp-education-level-form-six>
+        *ngIf="selectedEducationType === 1"></ksp-education-level-form-six>
       <ng-container *ngIf="selectedEducationType >= 0">
         <div class="mt-3">
           <ksp-form-attachment
-            [title]="'กรุณาแนบหลักฐานประกอบวุฒิทางการศึกษา'"
-          ></ksp-form-attachment></div
-      ></ng-container>
+            [title]="'กรุณาแนบหลักฐานประกอบวุฒิทางการศึกษา'"></ksp-form-attachment>
+        </div>
+      </ng-container>
     </ng-container>
   </div>
 </form>

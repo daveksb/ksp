@@ -35,8 +35,7 @@
                 type="email"
                 class="form-control form-control-lg"
                 placeholder="กรุณากรอกรหัสบัตรประชาชน 13 หลัก"
-                formControlName="personId"
-              />
+                formControlName="username" />
             </div>
           </div>
 
@@ -47,16 +46,14 @@
                 [type]="eyeIconClicked ? 'text' : 'password'"
                 class="form-control form-control-lg w-100"
                 placeholder="รหัสผ่าน"
-                formControlName="password"
-              />
+                formControlName="password" />
               <img
                 class="eye__icon"
                 (click)="eyeIconClicked = !eyeIconClicked"
                 [ngClass]="{
                   'eye__icon--open': eyeIconClicked,
                   'eye__icon--close': !eyeIconClicked
-                }"
-              />
+                }" />
             </div>
           </div>
 
@@ -64,8 +61,7 @@
             <div
               role="button"
               class="text-secondary text-decoration-underline fs-4"
-              (click)="forgot()"
-            >
+              (click)="forgot()">
               ลืมรหัสผ่าน?
             </div>
           </div>
@@ -74,8 +70,7 @@
             <button
               (click)="login()"
               type="button"
-              class="btn btn-primary fs-4 w-100"
-            >
+              class="btn btn-primary fs-4 w-100">
               เข้าสู่ระบบ
             </button>
           </div>
@@ -84,8 +79,7 @@
             <div
               role="button"
               (click)="register()"
-              class="label__secondary text-decoration-underline fs-4"
-            >
+              class="label__secondary text-decoration-underline fs-4">
               สมัครสมาชิก
             </div>
           </div>
