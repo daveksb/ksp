@@ -27,6 +27,10 @@ const routes: Routes = [
         component: ETempLicenseDetailComponent,
       },
       {
+        path: 'detail/:id',
+        component: ETempLicenseDetailComponent,
+      },
+      {
         path: 'forbidden',
         component: TempLicenseCheckForbiddenComponent,
       },

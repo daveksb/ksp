@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { UserInfoFormType } from '@ksp/shared/constant';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
 
@@ -10,6 +11,7 @@ import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
   styleUrls: ['./renew-license-request.component.scss'],
 })
 export class RenewLicenseRequestComponent {
+  userInfoType = UserInfoFormType.thai;
   headerGroup = [
     'วันที่ทำรายการ',
     'เลขใบคำขอ',
