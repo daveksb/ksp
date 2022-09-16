@@ -12,7 +12,6 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 export class TestResultTableComponent implements OnInit {
   displayedColumns: string[] = [
     'id',
-    'subject',
     'score',
     'result',
     'announceDate',
@@ -28,7 +27,6 @@ export class TestResultTableComponent implements OnInit {
 
 export interface performanceInfo {
   id: number;
-  subject: string;
   score: string;
   result: string;
   announceDate: string;
@@ -38,24 +36,21 @@ export interface performanceInfo {
 export const data: performanceInfo[] = [
   {
     id: 1,
-    subject: 'วิชาชีพครู',
-    score: '89',
+    score: '89/100',
     result: 'ผ่าน',
     announceDate: '12/มกราคม/2565',
     endDate: '31/มกราคม/2565',
   },
   {
     id: 2,
-    subject: 'วิชาชีพครู',
-    score: '96',
+    score: '96/100',
     result: 'ผ่าน',
     announceDate: '12/มกราคม/2565',
     endDate: '31/มกราคม/2565',
   },
   {
     id: 3,
-    subject: 'วิชาชีพครู',
-    score: '96',
+    score: '100/100',
     result: 'ไม่ผ่าน',
     announceDate: '12/มกราคม/2565',
     endDate: '31/มกราคม/2565',

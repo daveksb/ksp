@@ -44,6 +44,7 @@ import { RenewLicensePropertyManagerComponent } from './renew-license-property-m
 import { RenewLicenseForeignStepTwoComponent } from './renew-license-foreign-step-two/renew-license-foreign-step-two.component';
 import { RenewLicenseForeignTeacherComponent } from './renew-license-foreign-teacher/renew-license-foreign-teacher.component';
 import { RenewLicenseForeignNonTeacherComponent } from './renew-license-foreign-non-teacher/renew-license-foreign-non-teacher.component';
+import { TestResultTableComponent } from '@ksp/self-service/ui';
 
 @NgModule({
   imports: [
@@ -69,6 +70,7 @@ import { RenewLicenseForeignNonTeacherComponent } from './renew-license-foreign-
     AddRowButtonComponent,
     SchoolServiceFormActivityModule,
     SharedFormSelfRenewLicensePropertyFormModule,
+    TestResultTableComponent,
   ],
   declarations: [
     FormUserEducationComponent,
