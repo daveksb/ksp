@@ -16,13 +16,11 @@ import { Observable } from 'rxjs';
   styleUrls: ['./request-list.component.scss'],
 })
 export class SchoolRequestListComponent implements OnInit {
-  form = this.fb.group({
-    licenseSearch: [],
-  });
   eduOccupyList$!: Observable<any>;
 
   schoolId = '0010201056';
   personSelected = false;
+
   displayedColumns: string[] = [
     'id',
     'requestno',
@@ -41,6 +39,10 @@ export class SchoolRequestListComponent implements OnInit {
   SchoolRequestProcess = SchoolRequestProcess;
   SchoolRequestType = SchoolRequestType;
   SchoolRequestSubType = SchoolRequestSubType;
+
+  form = this.fb.group({
+    licenseSearch: [],
+  });
 
   constructor(
     private router: Router,

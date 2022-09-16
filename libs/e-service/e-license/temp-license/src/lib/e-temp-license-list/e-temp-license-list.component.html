@@ -22,9 +22,10 @@
       <hr />
 
       <ksp-temp-license-search
+        [eduOccupyList]="eduOccupyList$ | async"
         formControlName="licenseSearch"
         (clear)="clear()"
-        (search)="search()"
+        (search)="search($event)"
       ></ksp-temp-license-search>
 
       <hr />
@@ -33,9 +34,9 @@
 
       <div class="bottom-content">
         <table mat-table [dataSource]="dataSource">
-          <ng-container matColumnDef="order">
+          <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-            <td mat-cell *matCellDef="let element">{{ element.order }}</td>
+            <td mat-cell *matCellDef="let element">{{ element.id }}</td>
           </ng-container>
 
           <ng-container matColumnDef="edit">
@@ -43,53 +44,63 @@
             <td mat-cell *matCellDef="let element">
               <i
                 role="button"
-                (click)="nextPage(1)"
-                class="bi bi-check-circle-fill text-success fs-5"
+                class="bi bi-file-earmark-check text-primary fs-5"
+                (click)="goToDetail(element.id)"
               ></i>
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="reqCode">
+          <ng-container matColumnDef="requestno">
             <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
-            <td mat-cell *matCellDef="let element">{{ element.reqCode }}</td>
+            <td mat-cell *matCellDef="let element">{{ element.requestno }}</td>
           </ng-container>
 
-          <ng-container matColumnDef="ssn">
+          <ng-container matColumnDef="idcardno">
             <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
-            <td mat-cell *matCellDef="let element">{{ element.ssn }}</td>
+            <td mat-cell *matCellDef="let element">{{ element.idcardno }}</td>
           </ng-container>
 
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
-            <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="professType">
-            <th mat-header-cell *matHeaderCellDef>ประเภทวิชาชีพ</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.professType }}
+              {{ element.firstnameth }} {{ element.lastnameth }}
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="workStep">
+          <ng-container matColumnDef="subtype">
+            <th mat-header-cell *matHeaderCellDef>ประเภทวิชาชีพ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.subtype }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="currentprocess">
             <th mat-header-cell *matHeaderCellDef>ขั้นตอนการดำเนินการ</th>
-            <td mat-cell *matCellDef="let element">{{ element.workStep }}</td>
+            <td mat-cell *matCellDef="let element">
+              {{ element.currentprocess }}
+            </td>
           </ng-container>
 
-          <ng-container matColumnDef="status">
+          <ng-container matColumnDef="requeststatus">
             <th mat-header-cell *matHeaderCellDef>สถานะ</th>
-            <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+            <td mat-cell *matCellDef="let element">
+              {{ element.requeststatus }}
+            </td>
           </ng-container>
 
-          <ng-container matColumnDef="editDate">
+          <ng-container matColumnDef="updatedate">
             <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
             <th></th>
-            <td mat-cell *matCellDef="let element">{{ element.editDate }}</td>
+            <td mat-cell *matCellDef="let element">
+              {{ element.updatedate | date }}
+            </td>
           </ng-container>
 
-          <ng-container matColumnDef="sendDate">
+          <ng-container matColumnDef="requestdate">
             <th mat-header-cell *matHeaderCellDef>วันที่ยื่นใบคำขอ</th>
-            <td mat-cell *matCellDef="let element">{{ element.sendDate }}</td>
+            <td mat-cell *matCellDef="let element">
+              {{ element.requestdate | date }}
+            </td>
           </ng-container>
 
           <ng-container matColumnDef="reqDoc">
