@@ -126,7 +126,7 @@ export class SchoolRequestComponent implements OnInit {
         this.requestSubType = Number(params['subtype']);
       }
 
-      if (this.requestSubType === SchoolRequestSubType.ชาวต่างชาติ) {
+      if (this.requestSubType === SchoolRequestSubType.อื่นๆ) {
         this.userInfoFormType = UserInfoFormType.foreign;
       } else {
         this.userInfoFormType = UserInfoFormType.thai;
@@ -139,9 +139,8 @@ export class SchoolRequestComponent implements OnInit {
       ) {
         this.requestLabel +=
           SchoolRequestSubType[SchoolRequestSubType.ผู้บริหารสถานศึกษา];
-      } else if (this.requestSubType == SchoolRequestSubType.ชาวต่างชาติ) {
-        this.requestLabel +=
-          SchoolRequestSubType[SchoolRequestSubType.ชาวต่างชาติ];
+      } else if (this.requestSubType == SchoolRequestSubType.อื่นๆ) {
+        this.requestLabel += SchoolRequestSubType[SchoolRequestSubType.อื่นๆ];
       }
     });
   }
@@ -184,7 +183,7 @@ export class SchoolRequestComponent implements OnInit {
     userInfo.requesttype = `${this.requestType}`;
     userInfo.subtype = `${this.requestSubType}`;
 
-    if (this.requestSubType === SchoolRequestSubType.ชาวต่างชาติ) {
+    if (this.requestSubType === SchoolRequestSubType.อื่นๆ) {
       userInfo.passportenddate = userInfo.passportenddate.split('T')[0];
       userInfo.passportstartdate = userInfo.passportstartdate.split('T')[0];
     }
@@ -476,10 +475,10 @@ export class SchoolRequestComponent implements OnInit {
   pathUserInfo(data: any) {
     data.birthdate = data.birthdate.split('T')[0];
 
-    if (this.requestSubType === SchoolRequestSubType.ชาวต่างชาติ) {
+    if (this.requestSubType === SchoolRequestSubType.อื่นๆ) {
       data.passportstartdate = data.passportstartdate.split('T')[0];
       data.passportenddate = data.passportenddate.split('T')[0];
-      console.log('data = ', data);
+      //console.log('data = ', data);
 
       if (data?.visainfo) {
         const visa = parseJson(data?.visainfo);

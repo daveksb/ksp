@@ -61,7 +61,7 @@ export enum SchoolRequestType {
 export enum SchoolRequestSubType {
   'ครู' = 1,
   'ผู้บริหารสถานศึกษา' = 2,
-  'ชาวต่างชาติ' = 5,
+  'อื่นๆ' = 5,
 }
 
 // สถานะใบคำขอ
