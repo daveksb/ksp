@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SchoolRequestType, UserInfoFormType } from '@ksp/shared/constant';
+import { SchoolRequestProcess, UserInfoFormType } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -119,14 +119,44 @@ export class QualificationDetailComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/temp-license', 'list']);
+    if (this.mode == 'view') {
+      const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+        width: '350px',
+        data: {
+          title: `คุณต้องการยกเลิกการยื่นคำขอ
+          ใช่หรือไม่? `,
+          btnLabel: 'ยืนยัน',
+        },
+      });
+      confirmDialog.componentInstance.confirmed
+        .pipe(
+          switchMap((res) => {
+            if (res) {
+              const payload = {
+                id: `${this.requestId}`,
+                currentprocess: `${SchoolRequestProcess.ยกเลิก}`,
+              };
+              return this.requestLicenseService.changeRequestProcess(payload);
+            }
+            return EMPTY;
+          })
+        )
+        .subscribe((res) => {
+          this.onCancelCompleted();
+        });
+    } else {
+      this.router.navigate(['/temp-license', 'list']);
+    }
   }
-
+  get inValidForm() {
+    return (
+      !this.form.get('userInfo')?.valid ||
+      !this.form.get('addr1')?.valid ||
+      !this.form.get('addr2')?.valid ||
+      !this.form.get('education')?.valid
+    );
+  }
   onSave() {
-    if (!this.form.get('userInfo')?.valid) return;
-    if (!this.form.get('addr1')?.valid) return;
-    if (!this.form.get('addr2')?.valid) return;
-    if (!this.form.get('education')?.valid) return;
     const confirmDialog = this.dialog.open(
       QualificationApproveDetailComponent,
       {
@@ -181,12 +211,14 @@ export class QualificationDetailComponent implements OnInit {
             const { refperson } = refPersonForm;
             const { otherreason } = reasonForm;
             const userInfo = formData.userInfo;
-            userInfo.schoolId = this.schoolId;
             userInfo.ref1 = '2';
             userInfo.ref2 = '06';
             userInfo.ref3 = '1';
             userInfo.systemtype = '2';
             userInfo.requesttype = '06';
+            userInfo.subtype = '1';
+            userInfo.schoolid = this.schoolId;
+            userInfo.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
             const payload = {
               ...userInfo,
               ...{
@@ -205,7 +237,25 @@ export class QualificationDetailComponent implements OnInit {
         this.onCompleted();
       });
   }
+  onClickPrev() {
+    this.router.navigate(['/temp-license']);
+  }
+  onCancelCompleted() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      width: '350px',
+      data: {
+        header: 'ระบบทำการยกเลิกเรียบร้อย',
+        content: `วันที่ : ${this.requestDate} 
+        เลขที่คำขอ : ${this.requestNumber}`,
+      },
+    });
 
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/temp-license', 'list']);
+      }
+    });
+  }
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
@@ -218,7 +268,7 @@ export class QualificationDetailComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.cancel();
+        this.router.navigate(['/temp-license', 'list']);
       }
     });
   }

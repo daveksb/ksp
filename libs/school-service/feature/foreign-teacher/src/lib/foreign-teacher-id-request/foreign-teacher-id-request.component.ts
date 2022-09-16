@@ -15,6 +15,7 @@ import {
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { thaiDate } from '@ksp/shared/utility';
+import { SchoolRequestProcess } from '@ksp/shared/constant';
 @UntilDestroy()
 @Component({
   templateUrl: './foreign-teacher-id-request.component.html',
@@ -46,7 +47,12 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     private requestLicenseService: RequestLicenseService,
     private route: ActivatedRoute
   ) {}
-
+  get formValid() {
+    return (
+      !this.form.get('foreignTeacher')?.valid ||
+      !this.form.get('visainfo')?.valid
+    );
+  }
   ngOnInit(): void {
     this.getList();
     this.checkRequestId();
@@ -76,9 +82,56 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/temp-license']);
+    if (this.mode == 'view') {
+      const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+        width: '350px',
+        data: {
+          title: `คุณต้องการยกเลิกการยื่นคำขอ
+          ใช่หรือไม่? `,
+          btnLabel: 'ยืนยัน',
+        },
+      });
+      confirmDialog.componentInstance.confirmed
+        .pipe(
+          switchMap((res) => {
+            if (res) {
+              const payload = {
+                id: `${this.requestId}`,
+                currentprocess: `${SchoolRequestProcess.ยกเลิก}`,
+              };
+              return this.requestLicenseService.changeRequestProcess(payload);
+            }
+            return EMPTY;
+          })
+        )
+        .subscribe((res) => {
+          this.onCancelCompleted();
+        });
+    } else {
+      this.router.navigate(['/temp-license']);
+    }
   }
+  onCancelCompleted() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      width: '350px',
+      data: {
+        header: 'ระบบทำการยกเลิกเรียบร้อย',
+        content: `วันที่ : ${this.requestDate} 
+        เลขที่คำขอ : ${this.requestNumber}`,
+      },
+    });
 
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/temp-license', 'list']);
+      }
+    });
+  }
+  onClickPrev() {
+    if (this.mode == 'view') {
+      this.router.navigate(['/temp-license']);
+    }
+  }
   onConfirmed() {
     if (
       !this.form.get('foreignTeacher')?.valid ||
@@ -103,8 +156,10 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             userInfo.ref2 = '04';
             userInfo.ref3 = '1';
             userInfo.systemtype = '2';
-            userInfo.requesttype = '3';
+            userInfo.requesttype = '4';
+            userInfo.subtype = '1';
             userInfo.schoolid = this.schoolId;
+            userInfo.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
             userInfo.visainfo = JSON.stringify(this.form.value.visainfo);
             return this.requestLicenseService.requestLicense(userInfo);
           }

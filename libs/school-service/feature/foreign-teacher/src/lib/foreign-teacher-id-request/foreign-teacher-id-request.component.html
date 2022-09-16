@@ -89,12 +89,14 @@
 
 <div class="sticky-bottom border">
   <ksp-bottom-nav
-    [isFirstPage]="true"
+    [isFirstPage]="mode !== 'view'"
     [isLastPage]="true"
     [showCenterButtons]="true"
-    [showSaveButton]="true"
+    [showSaveButton]="mode !== 'view'"
+    [disableSaveButton]="formValid"
     (cancelClicked)="cancel()"
     (saveClicked)="onConfirmed()"
     [saveButtonLabel]="'บันทึกและยื่นอนุมัติ'"
+    (prevClicked)="onClickPrev()"
   ></ksp-bottom-nav>
 </div>
