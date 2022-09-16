@@ -6,18 +6,10 @@ import { map, Observable, shareReplay } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class TempLicenseService {
+export class SchoolInfoService {
   constructor(private http: HttpClient) {}
 
-  searchStaffFromIdCard(schoolId: string, idCard: string): Observable<any> {
-    return this.http
-      .get(
-        `${environment.apiUrl}/kspschoolregister/schstaffsearchidcardno?idCardNo=${idCard}&schoolId=${schoolId}`
-      )
-      .pipe(shareReplay());
-  }
-
-  getSchoolInfo(schoolId: string) {
+  getSchoolInfo(schoolId: string): Observable<any> {
     return this.http
       .get(
         `${environment.apiUrl}/kspschoolregister/schschoolsearchschoolid?schoolId=${schoolId}`
@@ -25,14 +17,14 @@ export class TempLicenseService {
       .pipe(shareReplay());
   }
 
-  addTempLicense(payload: any): Observable<any> {
+  /*   addTempLicense(payload: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspschoolregister/schtmplicencerequestinsert`,
       payload
     );
-  }
+  } */
 
-  getSchoolEduOccupy() {
+  getSchoolEduOccupy(): Observable<any> {
     return this.http
       .get(`${environment.apiUrl}/kspmasterdata/schooleduoccupy`)
       .pipe(

@@ -7,7 +7,7 @@ import {
   SchoolRequestSubType,
   SchoolRequestType,
 } from '@ksp/shared/constant';
-import { RequestLicenseService, TempLicenseService } from '@ksp/shared/service';
+import { RequestLicenseService, SchoolInfoService } from '@ksp/shared/service';
 import { replaceEmptyWithNull } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
@@ -38,19 +38,19 @@ export class SchoolRequestListComponent implements OnInit {
     'approvedoc',
   ];
   dataSource = new MatTableDataSource<TempLicenseInfo>();
-  RequestProcessEnum = SchoolRequestProcess;
-  RequestTypeEnum = SchoolRequestType;
-  RequestSubTypeEnum = SchoolRequestSubType;
+  SchoolRequestProcess = SchoolRequestProcess;
+  SchoolRequestType = SchoolRequestType;
+  SchoolRequestSubType = SchoolRequestSubType;
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private tempLicenseService: TempLicenseService,
+    private schoolInfoService: SchoolInfoService,
     private requestService: RequestLicenseService
   ) {}
 
   ngOnInit(): void {
-    this.eduOccupyList$ = this.tempLicenseService.getSchoolEduOccupy();
+    this.eduOccupyList$ = this.schoolInfoService.getSchoolEduOccupy();
   }
 
   search(searchParams: any) {
@@ -73,11 +73,16 @@ export class SchoolRequestListComponent implements OnInit {
 
   viewRequest(requestType: number, subType: number, requestId: number) {
     switch (requestType) {
-      case 4:
+      case SchoolRequestType.ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ:
         return this.foreignPage(requestId.toString());
-      case 6:
+
+      case SchoolRequestType.ขอหนังสือรับรองคุณวุฒิ:
+        return this.qualificationPage(requestId.toString());
+
+      case SchoolRequestType['ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม']:
         return this.qualificationPage(requestId.toString());
     }
+
     this.router.navigate(['/temp-license', 'request', requestId], {
       queryParams: { subtype: subType },
     });
