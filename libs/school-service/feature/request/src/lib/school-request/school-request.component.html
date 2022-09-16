@@ -16,7 +16,7 @@
       <div class="bg-light px-3 py-2 default-width">
         <div class="box-header text-primary">ค้นหารายการ</div>
 
-        <div class="row mb-3" *ngIf="requestSubType !== 3">
+        <div class="row mb-3" *ngIf="requestSubType !== 5">
           <div class="col-5">
             <label class="form-label">หมายเลขบัตรประชาชน</label>
             <input
@@ -123,7 +123,7 @@
         </mat-tab>
 
         <mat-tab label="ข้อมูลการสอนและการจ้าง">
-          <ng-container *ngIf="requestSubType === 1 || requestSubType === 3">
+          <ng-container *ngIf="requestSubType === 1 || requestSubType === 5">
             <ksp-form-teaching-info
               formControlName="teachinginfo"
             ></ksp-form-teaching-info>

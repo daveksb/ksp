@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SchoolRequestSubType } from '@ksp/shared/constant';
 import { MenuConfig } from '@ksp/shared/interface';
 
 @Component({
@@ -30,19 +31,19 @@ export const menu: MenuConfig[] = [
       {
         label: 'ขอใบอนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)',
         path: 'temp-license/request',
-        params: { subtype: 1 },
+        params: { subtype: SchoolRequestSubType.ครู },
       },
       {
         label:
           'ขออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ผู้บริหารสถานศึกษา)',
         path: 'temp-license/request',
-        params: { subtype: 2 },
+        params: { subtype: SchoolRequestSubType.ผู้บริหารสถานศึกษา },
       },
       {
         label:
           'ขออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)',
         path: 'temp-license/request',
-        params: { subtype: 3 },
+        params: { subtype: SchoolRequestSubType.อื่นๆ },
       },
       {
         label: 'ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ',

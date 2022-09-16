@@ -1,10 +1,7 @@
-<div
-  class="d-flex justify-content-center align-items-center"
-  (click)="addRowClick.emit(true)"
->
+<div class="d-flex justify-content-center align-items-center">
   <i role="button" class="bi bi-plus-circle"></i>
 
-  <span role="button" class="ms-2">
+  <span (click)="addRowClick.emit(true)" role="button" class="ms-2">
     <ng-content></ng-content>
   </span>
 </div>

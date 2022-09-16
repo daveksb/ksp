@@ -4,10 +4,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   levels,
+  RequestAttachFiles,
+  RequestEduFiles,
   RequestPageType,
+  RequestReasonFiles,
+  RequestTeachingFiles,
   SchoolRequestProcess,
   SchoolRequestSubType,
-  SchoolRequestType,
   subjects,
   UserInfoFormType,
 } from '@ksp/shared/constant';
@@ -21,19 +24,17 @@ import {
   AddressService,
   GeneralInfoService,
   RequestLicenseService,
+  SchoolInfoService,
   StaffService,
-  TempLicenseService,
 } from '@ksp/shared/service';
 import {
   formatCheckboxData,
   parseJson,
   replaceEmptyWithNull,
   thaiDate,
-  toLowercaseProp,
 } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
-import { SchoolRequestService } from './school-request.service';
 
 @UntilDestroy()
 @Component({
@@ -65,7 +66,7 @@ export class SchoolRequestComponent implements OnInit {
   systemType = '2'; // school service
   requestType = '03';
   requestSubType = SchoolRequestSubType.ครู; // 1 ไทย 2 ผู้บริหาร 3 ต่างชาติ
-  requestLabel = '';
+  requestLabel = 'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ';
   requestNo = '';
   currentProcess!: number;
   processEnum = SchoolRequestProcess;
@@ -103,8 +104,7 @@ export class SchoolRequestComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private schoolRequestService: SchoolRequestService,
-    private tempLicenseService: TempLicenseService,
+    private schoolInfoService: SchoolInfoService,
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
     private staffService: StaffService,
@@ -126,21 +126,21 @@ export class SchoolRequestComponent implements OnInit {
         this.requestSubType = Number(params['subtype']);
       }
 
-      if (this.requestSubType === SchoolRequestSubType.ชาวต่างชาติ) {
+      if (this.requestSubType === SchoolRequestSubType.อื่นๆ) {
         this.userInfoFormType = UserInfoFormType.foreign;
       } else {
         this.userInfoFormType = UserInfoFormType.thai;
       }
 
-      if (this.requestSubType == 1) {
-        this.requestLabel =
-          'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)';
-      } else if (this.requestSubType == 2) {
-        this.requestLabel =
-          'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ผู้บริหาร)';
-      } else if (this.requestSubType == 3) {
-        this.requestLabel =
-          'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)';
+      if (this.requestSubType == SchoolRequestSubType.ครู) {
+        this.requestLabel += SchoolRequestSubType[SchoolRequestSubType.ครู];
+      } else if (
+        this.requestSubType == SchoolRequestSubType.ผู้บริหารสถานศึกษา
+      ) {
+        this.requestLabel +=
+          SchoolRequestSubType[SchoolRequestSubType.ผู้บริหารสถานศึกษา];
+      } else if (this.requestSubType == SchoolRequestSubType.อื่นๆ) {
+        this.requestLabel += SchoolRequestSubType[SchoolRequestSubType.อื่นๆ];
       }
     });
   }
@@ -183,7 +183,7 @@ export class SchoolRequestComponent implements OnInit {
     userInfo.requesttype = `${this.requestType}`;
     userInfo.subtype = `${this.requestSubType}`;
 
-    if (this.requestSubType === 3) {
+    if (this.requestSubType === SchoolRequestSubType.อื่นๆ) {
       userInfo.passportenddate = userInfo.passportenddate.split('T')[0];
       userInfo.passportstartdate = userInfo.passportstartdate.split('T')[0];
     }
@@ -245,7 +245,7 @@ export class SchoolRequestComponent implements OnInit {
     console.log('update payload = ', res);
     this.requestService.updateRequest(res).subscribe((res) => {
       //console.log('update result = ', res);
-      //this.backToListPage();
+      this.backToListPage();
     });
   }
 
@@ -475,10 +475,10 @@ export class SchoolRequestComponent implements OnInit {
   pathUserInfo(data: any) {
     data.birthdate = data.birthdate.split('T')[0];
 
-    if (this.requestSubType === SchoolRequestSubType.ชาวต่างชาติ) {
+    if (this.requestSubType === SchoolRequestSubType.อื่นๆ) {
       data.passportstartdate = data.passportstartdate.split('T')[0];
       data.passportenddate = data.passportenddate.split('T')[0];
-      console.log('data = ', data);
+      //console.log('data = ', data);
 
       if (data?.visainfo) {
         const visa = parseJson(data?.visainfo);
@@ -502,11 +502,12 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   getList() {
+    this.eduFiles = RequestEduFiles;
+    this.teachingFiles = RequestTeachingFiles;
+    this.reasonFiles = RequestReasonFiles;
+    this.attachFiles = RequestAttachFiles;
+
     this.prefixList$ = this.generalInfoService.getPrefix();
-    this.eduFiles = this.schoolRequestService.educationInfo;
-    this.teachingFiles = this.schoolRequestService.teachingInfo;
-    this.reasonFiles = this.schoolRequestService.reasonInfo;
-    this.attachFiles = this.schoolRequestService.evidenceFiles;
     this.provinces$ = this.addressService.getProvinces();
     this.countries$ = this.addressService.getCountry();
     this.nationList$ = this.generalInfoService.getNationality();
@@ -520,7 +521,7 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   getSchoolAddress() {
-    this.tempLicenseService
+    this.schoolInfoService
       .getSchoolInfo(this.schoolId)
       .pipe(untilDestroyed(this))
       .subscribe((res: any) => {
