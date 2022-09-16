@@ -21,7 +21,7 @@
 }
 
 .mat-tab-label-active {
-  background-color: white;
+  background-color: #fff;
   opacity: 1 !important;
   border-top: solid #0056ff;
   border-bottom: none;
@@ -111,10 +111,10 @@ tr[class^='mat'] {
   display: none;
 }
 
-/* .mat-stepper-horizontal,
+.mat-stepper-horizontal,
 .mat-stepper-vertical {
   background-color: transparent;
-} */
+}
 
 .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
   line-height: 36px;

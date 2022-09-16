@@ -3,3 +3,4 @@ export { GeneralInfoService } from './general-info.service';
 export { StaffService } from './staff.service';
 export { TempLicenseService } from './temp-license.service';
 export { RequestLicenseService } from './request-license.service';
+export { EducationDetailService } from './self-service/education-detail.service';

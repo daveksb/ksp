@@ -45,6 +45,10 @@ export class SelfServiceHomePageComponent {
     this.router.navigate(['/', 'renew-license', 'request']);
   }
 
+  foreignRenew() {
+    this.router.navigate(['/', 'renew-license', 'foreign']);
+  }
+
   schManagerRenew() {
     this.router.navigate(['/', 'renew-license', 'school-manager']);
   }

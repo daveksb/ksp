@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { SchoolRequestProcess } from '@ksp/shared/constant';
+import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { providerFactory } from '@ksp/shared/utility';
 
 @Component({
   selector: 'e-service-license-check',
@@ -8,16 +11,38 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
   styleUrls: ['./license-check.component.scss'],
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
+  providers: providerFactory(LicenseCheckComponent),
 })
-export class LicenseCheckComponent {
-  constructor(private fb: FormBuilder) {}
-
+export class LicenseCheckComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
   @Input() reasons: string[] = [];
-  @Input() choices: string[] = [
-    'ครบถ้วน และถูกต้อง',
-    'ไม่ครบถ้วน และไม่ถูกต้อง',
-  ];
+  @Input() choices: any[] = [];
   @Input() headerTitle = 'ผลการตรวจสอบ';
   @Input() isHasReason = true;
   @Output() selectedItem = 0;
+
+  override form = this.fb.group({
+    verify: [],
+    reason: [],
+    detail: [],
+  });
+
+  constructor(private fb: FormBuilder) {
+    super();
+    this.subscriptions.push(
+      // any time the inner form changes update the parent of any change
+      this.form?.valueChanges.subscribe((value) => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
+  }
+
+  ngOnInit(): void {
+    this.form.valueChanges.subscribe((res) => {
+      //console.log('res = ', res);
+    });
+  }
 }

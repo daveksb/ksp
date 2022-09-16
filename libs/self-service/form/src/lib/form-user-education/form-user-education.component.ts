@@ -15,11 +15,9 @@ export class FormUserEducationComponent
   extends KspFormBaseComponent
   implements OnInit
 {
-  @Input() educationTypes:
-    | 'teacher'
-    | 'manager'
-    | 'supervision' = 'teacher';
+  @Input() educationTypes: 'teacher' | 'manager' | 'supervision' = 'teacher';
 
+  @Input() countries: any[] = [];
   selectedEducationType!: number;
 
   override form = this.fb.group({
@@ -104,7 +102,6 @@ const educationTypes2 = [
     label: `รับรองคุณวุฒิการศึกษา`,
   },
 ];
-
 
 const educationTypes3 = [
   {

@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-6 mb-3">
       <label class="form-label">สถาบันการศึกษา</label>
-      <select
+      <!-- <select
         class="form-select"
         formControlName="educationInstitution"
       >
@@ -10,19 +10,22 @@
         <option value="1">One</option>
         <option value="2">Two</option>
         <option value="3">Three</option>
-      </select>
+      </select> -->
+      <input class="form-control" type="text" formControlName="educationInstitution" />
     </div>
 
     <div class="col-md-6 mb-3">
       <label class="form-label">วุฒิปริญญาที่จบ</label>
       <select
         class="form-select"
-        formControlName="graduateDegree"
-      >
-        <option selected hidden disabled value="null">กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+        formControlName="graduateDegree">
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option value="1">ปริญญาตรี</option>
+        <option value="2">ปริญญาโท</option>
+        <option value="3">ปริญญาเอก</option>
+        <option value="4">
+          วุฒิการศึกษาปริญญาอื่นๆที่เทียบเท่าปริญญาตรี / ปริญญาทางการศึกษา
+        </option>
       </select>
     </div>
   </div>
@@ -51,8 +54,7 @@
       <input
         class="form-control"
         type="text"
-        formControlName="approveAcademic"
-      />
+        formControlName="approveAcademic" />
     </div>
   </div>
 </form>

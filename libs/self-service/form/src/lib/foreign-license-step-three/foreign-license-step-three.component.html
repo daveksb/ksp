@@ -3,18 +3,35 @@
     I wish to submit an application for a teaching license and have attached
     herewith the following documents and evidence:
   </div>
-  <ng-container *ngFor="let rule of rules; index as i">
-    <div class="d-flex mb-3">
-      <input
-        class="me-1"
-        style="margin-top: 0.3rem"
-        type="checkbox"
-        name="xxx"
-      />
-      <label class="form-label break__line me-3"> {{ rule }} </label>
-      <div class="w-25">
-        <ksp-file-upload [uploadType]="'link'"></ksp-file-upload>
+  <ng-container *ngIf="documentTypes === 'request'">
+    <ng-container *ngFor="let rule of rules; index as i">
+      <div class="d-flex">
+        <div class="d-flex">
+          <input class="me-2 mt-1" type="checkbox" name="xxx" />
+        </div>
+
+        <label class="form-label me-3">
+          <span class="form-label">{{ i + 1 }}.</span> {{ rule }}
+        </label>
       </div>
-    </div>
-  </ng-container>
+      <div class="mb-3 ms-4">
+        <ksp-file-upload [uploadType]="'link'"></ksp-file-upload>
+      </div> </ng-container
+  ></ng-container>
+
+  <ng-container *ngIf="documentTypes === 'renew'">
+    <ng-container *ngFor="let file of files; index as i">
+      <div class="d-flex">
+        <div class="d-flex">
+          <input class="me-2 mt-1" type="checkbox" name="xxx" />
+        </div>
+
+        <label class="form-label me-3">
+          <span class="form-label">{{ i + 1 }}.</span> {{ file }}
+        </label>
+      </div>
+      <div class="mb-3 ms-4">
+        <ksp-file-upload [uploadType]="'link'"></ksp-file-upload>
+      </div> </ng-container
+  ></ng-container>
 </div>

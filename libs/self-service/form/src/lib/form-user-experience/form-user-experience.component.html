@@ -5,8 +5,7 @@
       <input
         class="form-control"
         type="text"
-        formControlName="TrainingAddressOne"
-      />
+        formControlName="TrainingAddressOne" />
     </div>
 
     <div class="col-md-6 mb-3">
@@ -14,8 +13,7 @@
       <input
         class="form-control"
         type="text"
-        formControlName="TrainingAddressTwo"
-      />
+        formControlName="TrainingAddressTwo" />
     </div>
   </div>
 
@@ -27,11 +25,19 @@
   <div class="row">
     <div class="col-md-6 mb-3">
       <label class="form-label">สถานศึกษาที่ปฏิบัติการสอน</label>
+      <!-- <select
+        class="search__content form-select"
+        formControlName="teachingAddress"
+      >
+        <option selected>กรุณาเลือก</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select> -->
       <input
         class="form-control"
         type="text"
-        formControlName="teachingAddress"
-      />
+        formControlName="teachingAddress" />
     </div>
 
     <div id="upload__button-container" class="col-md-6 mb-3">
@@ -49,17 +55,16 @@
         formControlName="hasForeignLicense"
         type="checkbox"
         class="checkbox"
-        (change)="resetForeignLicenseForm($event)"
-      />
+        (change)="resetForeignLicenseForm($event)" />
       <label class="form-label checkbox-label">
-        ใบอนุญาตประกอบวิชาชีพครูจากต่างประเทศ</label
-      >
+        ใบอนุญาตประกอบวิชาชีพครูจากต่างประเทศ</label>
     </div>
 
     <ng-template [ngIf]="hasForeignLicense">
       <ksp-experience-form
-        formControlName="foreignLicenseForm"
-      ></ksp-experience-form>
+        [countries]="countries"
+        [licenses]="licenses"
+        formControlName="foreignLicenseForm"></ksp-experience-form>
     </ng-template>
   </div>
 </form>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -16,6 +16,8 @@ export class FormUserExperienceComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+  @Input() countries: any[] = [];
+  @Input() licenses: any[] = [];
   override form = this.fb.group({
     TrainingAddressOne: [],
     TrainingAddressTwo: [],

@@ -47,6 +47,20 @@ export class RequestLicenseService {
       );
   }
 
+  searchRegisterRequest(payload: any): Observable<any> {
+    return this.http
+      .post(
+        `${environment.apiUrl}/kspstaff/schrequestsearchjoinschschool`,
+        payload
+      )
+      .pipe(
+        shareReplay(),
+        map((data: any) => data.datareturn)
+      );
+  }
+
+  //https://kspapi.oceanicnetwork.net/ksp/kspstaff/schrequestsearchjoinschschool
+
   getRequestById(id: number) {
     return this.http
       .post(`${environment.apiUrl}/kspstaff/schrequestselectidall`, {

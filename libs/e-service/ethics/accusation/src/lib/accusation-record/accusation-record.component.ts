@@ -86,6 +86,7 @@ export class AccusationRecordComponent
       width: '1250px',
     });
   }
+  
 
   /* dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
