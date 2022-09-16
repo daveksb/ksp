@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { UserInfoFormType } from '@ksp/shared/constant';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
 
@@ -10,6 +11,8 @@ import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
   styleUrls: ['./license-request-education-manager.component.scss'],
 })
 export class LicenseRequestEducationManagerComponent {
+  userInfoType = UserInfoFormType.thai;
+
   experienceFiles = [
     '1. สำเนาวุฒิทางการศึกษา',
     '2. หนังสือรับรองคุณวุฒิ	',

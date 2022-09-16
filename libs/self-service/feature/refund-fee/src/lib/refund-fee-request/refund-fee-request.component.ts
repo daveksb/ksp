@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { UserInfoFormType } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -14,6 +15,8 @@ import {
 export class RefundFeeRequestComponent implements OnInit {
   refundInfo = ['1.สำเนาวุฒิการศึกษา'];
   headerGroup = ['วันที่ทำรายการ', 'เลขใบคำขอ'];
+  userInfoType = UserInfoFormType.thai;
+
   constructor(private router: Router, public dialog: MatDialog) {}
 
   ngOnInit(): void {}

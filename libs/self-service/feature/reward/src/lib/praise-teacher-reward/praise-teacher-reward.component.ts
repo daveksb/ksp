@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserInfoFormType } from '@ksp/shared/constant';
 
 @Component({
   selector: 'ksp-praise-teacher-reward',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./praise-teacher-reward.component.scss'],
 })
 export class PraiseTeacherRewardComponent implements OnInit {
+  userInfoType = UserInfoFormType.thai;
   rewardFiles = ['1. รางวัลอื่นและประกาศเกียรติคุณ'];
 
   constructor() {}
