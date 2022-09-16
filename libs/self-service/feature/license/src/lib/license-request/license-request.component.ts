@@ -76,6 +76,7 @@ export class LicenseRequestComponent implements OnInit {
   countries$!: Observable<any>;
   countries2$!: Observable<any>;
   licenses$!: Observable<any>;
+  disableNextButton = false;
 
   constructor(
     private router: Router,
@@ -97,6 +98,7 @@ export class LicenseRequestComponent implements OnInit {
       });
     this.getListData();
     this.getMyInfo();
+    this.checkButtonsDisableStatus();
   }
 
   getListData() {
@@ -282,6 +284,8 @@ export class LicenseRequestComponent implements OnInit {
 
   save() {
     console.log(this.form.value);
+    console.log(this.form.valid);
+
     const confirmDialog = this.dialog.open(ForbiddenPropertyFormComponent, {
       width: '900px',
     });
@@ -327,6 +331,12 @@ export class LicenseRequestComponent implements OnInit {
           }
         });
       }
+    });
+  }
+
+  checkButtonsDisableStatus() {
+    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
+      this.disableNextButton = !this.form.valid;
     });
   }
 }
