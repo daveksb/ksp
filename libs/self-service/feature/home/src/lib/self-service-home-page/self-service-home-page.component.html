@@ -99,7 +99,7 @@
 
     <mat-menu #request="matMenu">
       <button mat-menu-item [matMenuTriggerFor]="teacher">ครู</button>
-      <button mat-menu-item (click)="schoolManager()">
+      <button mat-menu-item [matMenuTriggerFor]="manager">
         ผู้บริหารสถานศึกษา
       </button>
       <button mat-menu-item (click)="educationManager()">
@@ -110,7 +110,7 @@
 
     <mat-menu #renew="matMenu">
       <button mat-menu-item [matMenuTriggerFor]="renewTeacher">ครู</button>
-      <button mat-menu-item (click)="schManagerRenew()">
+      <button mat-menu-item [matMenuTriggerFor]="renewManager">
         ผู้บริหารสถานศึกษา
       </button>
       <button mat-menu-item (click)="eduManagerRenew()">
@@ -127,6 +127,24 @@
     <mat-menu #renewTeacher="matMenu">
       <button mat-menu-item (click)="teacherRenew()">ครูชาวไทย</button>
       <button mat-menu-item (click)="foreignRenew()">ครูชาวต่างชาติ</button>
+    </mat-menu>
+
+    <mat-menu #manager="matMenu">
+      <button mat-menu-item (click)="schoolManager()">
+        ผู้บริหารสถานศึกษาชาวไทย
+      </button>
+      <button mat-menu-item (click)="foreignTeacher()">
+        ผู้บริหารสถานศึกษาชาวต่างชาติ
+      </button>
+    </mat-menu>
+
+    <mat-menu #renewManager="matMenu">
+      <button mat-menu-item (click)="schManagerRenew()">
+        ผู้บริหารสถานศึกษาชาวไทย
+      </button>
+      <button mat-menu-item (click)="foreignRenew()">
+        ผู้บริหารสถานศึกษาชาวต่างชาติ
+      </button>
     </mat-menu>
   </div>
 

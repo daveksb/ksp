@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { UserInfoFormType } from '@ksp/shared/constant';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 
 @Component({
@@ -9,10 +10,12 @@ import { ConfirmDialogComponent } from '@ksp/shared/dialog';
   styleUrls: ['./substitute-license-detail.component.scss'],
 })
 export class SubstituteLicenseDetailComponent implements OnInit {
+  userInfoType = UserInfoFormType.thai;
   objectiveFiles = [
     '1.ใบอนุญาตประกอบวิชาชีพที่ชํารุด',
     '2.หลักฐานการรับแจงความของพนักงานสอบสวน หรือบันทึกถอยคํา กรณีใบอนุญาตสูญหาย',
   ];
+  
   constructor(private router: Router, public dialog: MatDialog) {}
 
   ngOnInit(): void {}

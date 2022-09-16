@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { SchoolRequestProcess } from '@ksp/shared/constant';
 
 @Injectable({
   providedIn: 'root',
@@ -42,7 +43,16 @@ export class TempLicenseDetailService {
       'อื่นๆ (ระบุ)',
     ],
   ]; */
-  choices = ['ครบถ้วน และถูกต้อง', 'ไม่ครบถ้วน และไม่ถูกต้อง'];
+  verifyChoice = [
+    {
+      name: 'ครบถ้วน และถูกต้อง',
+      value: SchoolRequestProcess['ผ่านการรับรอง/พิจารณา'],
+    },
+    {
+      name: 'ไม่ครบถ้วน และไม่ถูกต้อง',
+      value: SchoolRequestProcess['ไม่ผ่านการรับรอง/พิจารณา'],
+    },
+  ];
 
   educationInfo = [
     '1.สำเนาปริญญาบัตรหรือสำเนาหนังสือรับรอง',
@@ -64,5 +74,10 @@ export class TempLicenseDetailService {
     '2.หลักฐานการพัฒนาตนเอง',
   ];
 
-  evidenceFiles = ['1.สำเนาสัญญาจ้าง'];
+  evidenceFiles = [
+    {
+      name: '1.สำเนาสัญญาจ้าง',
+      fileId: '',
+    },
+  ];
 }

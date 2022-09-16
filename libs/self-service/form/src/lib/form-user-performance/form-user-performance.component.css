@@ -18,9 +18,9 @@
 }
 
 .fail_status {
-  background: #ff99a5;
-  color: #f80808;
-  border: 1px solid #f80808;
+  background: #fccad5;
+  color: #ff0606;
+  border: 1px solid #ff0606;
   border-radius: 15px;
   width: 5rem;
   display: flex;

@@ -14,48 +14,6 @@ export class FormUserPerformanceComponent implements OnInit {
     'วิชาการใช้เทคโนโลยีเพื่อการศึกษา',
   ];
   personSelected = false;
-  displayedColumns: string[] = [
-    'id',
-    'score',
-    'result',
-    'announceDate',
-    'endDate',
-  ];
-  dataSource = new MatTableDataSource<performanceInfo>();
 
-  ngOnInit(): void {
-    this.dataSource.data = data;
-  }
+  ngOnInit(): void {}
 }
-
-export interface performanceInfo {
-  id: number;
-  score: string;
-  result: string;
-  announceDate: string;
-  endDate: string;
-}
-
-export const data: performanceInfo[] = [
-  {
-    id: 1,
-    score: '89',
-    result: 'ผ่าน',
-    announceDate: '12/มกราคม/2565',
-    endDate: '31/มกราคม/2565',
-  },
-  {
-    id: 2,
-    score: '96',
-    result: 'ผ่าน',
-    announceDate: '12/มกราคม/2565',
-    endDate: '31/มกราคม/2565',
-  },
-  {
-    id: 3,
-    score: '96',
-    result: 'ไม่พบข้อมูล',
-    announceDate: '12/มกราคม/2565',
-    endDate: '31/มกราคม/2565',
-  },
-];

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { UserInfoFormType } from '@ksp/shared/constant';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
 
@@ -10,6 +11,8 @@ import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
   styleUrls: ['./license-request-study-supervision.component.scss'],
 })
 export class LicenseRequestStudySupervisionComponent implements OnInit {
+  userInfoType = UserInfoFormType.thai;
+
   experienceFiles = [
     {
       name: '1. สำเนาวุฒิทางการศึกษา',
