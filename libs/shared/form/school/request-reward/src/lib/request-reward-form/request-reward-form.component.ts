@@ -37,12 +37,13 @@ export class RequestRewardFormComponent
   @Input() osoiTypes: any = [];
   @Input() personTypes: any = [];
   @Input() prefixList: any = [];
+  @Input() requestNo = '';
 
   override form = this.fb.group({
     rewardname: [null, Validators.required],
     rewardtype: [null, Validators.required],
-    submitBefore: [null, Validators.required],
-    vdoLink: [],
+    submitbefore: [null, Validators.required],
+    vdolink: [],
     /*     personId: [''],
     prefix: [null],
     firstName: [''],

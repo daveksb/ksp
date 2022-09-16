@@ -3,13 +3,13 @@
     รายละเอียดใบคำขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One
     Innovation : OSOI)
   </div>
+
   <div class="bg-white py-3 px-4">
     <div>
       <ksp-request-header-info
         [requestDate]="today"
-        [requestNumber]="''"
+        [requestNumber]="requestNo"
       ></ksp-request-header-info>
-      <hr />
 
       <div class="bg-white px-3 py-2">
         <div class="box-header mb-2">ข้อมูลผลงานหนึ่งโรงเรียนหนึ่งนวัตกรรม</div>
@@ -50,7 +50,7 @@
             ><div class="d-flex flex-row align-items-center mb-2">
               <input
                 class="form-check-input m-0"
-                formControlName="submitBefore"
+                formControlName="submitbefore"
                 type="radio"
                 value="{{ item.value }}"
               />
@@ -249,7 +249,7 @@
 
         <div class="box-header text-primary">VDO ประกอบการขอรางวัล</div>
         <div>ลิงก์ (youtube)</div>
-        <input class="form-control" type="url" formControlName="vdoLink" />
+        <input class="form-control" type="url" formControlName="vdolink" />
       </div>
     </div>
   </div>
