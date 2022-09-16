@@ -34,8 +34,7 @@ export class SelfServiceThaiLoginComponent {
       if (res.returnCode == 99) return;
       this.loginService.config = res;
       setCookie('userToken', res.usertoken, 1);
-      // setCookie('firstNameTh', res.firstNameTh, 1);
-      // setCookie('lastNameTh', res.lastNameTh, 1);
+      setCookie('userId', res.id, 1);
       this.router.navigate(['/', 'home']);
     });
   }
