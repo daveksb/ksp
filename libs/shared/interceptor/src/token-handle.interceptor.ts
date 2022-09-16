@@ -35,20 +35,9 @@ export class TokenHandleInterceptor implements HttpInterceptor {
     }
 
     if (request.method === 'POST') {
-      if (request.url.includes('/schrequestinsert')) {
-        request = request.clone({
-          body: {
-            ...request.body,
-            tokenkey:
-              'geptieJiuDjFN9Zgw8YNeGECltKQKDSkNEqi1RtJmXJpcVIH8xyjiUdRX2KsibTIHanOJTqjMhCHbNJa9J2tYvClD1bjtNSuyxEm',
-          },
-        });
-      } else {
-        request = request.clone({
-          body: { ...request.body, tokenkey: token },
-        });
-      }
-
+      request = request.clone({
+        body: { ...request.body, tokenkey: token },
+      });
       return next.handle(request);
     }
 

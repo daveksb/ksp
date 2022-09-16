@@ -11,7 +11,7 @@ import {
   AddressService,
   GeneralInfoService,
   EducationDetailService,
-  RequestLicenseService,
+  LicenseRequestService as RequestLicenseService,
   MyInfoService,
 } from '@ksp/shared/service';
 import { defaultRequestPayload } from '@ksp/shared/interface';
@@ -172,7 +172,7 @@ export class LicenseRequestComponent implements OnInit {
 
   patchWorkplace(data: any) {
     console.log(data);
-    this.amphurs3$ = this.addressService.getAmphurs(data.provience);
+    this.amphurs3$ = this.addressService.getAmphurs(data.province);
     this.tumbols3$ = this.addressService.getTumbols(data.district);
     this.form.controls.workplace.patchValue(data);
   }
@@ -254,6 +254,8 @@ export class LicenseRequestComponent implements OnInit {
     userInfo.subtype = '1';
 
     const { educationType, educationLevelForm } = formData.education;
+    const { hasForeignLicense, foreignLicenseForm, ...resExperienceForm } =
+      formData.experience;
 
     const payload = {
       ...replaceEmptyWithNull(userInfo),
@@ -262,7 +264,13 @@ export class LicenseRequestComponent implements OnInit {
       },
       ...{ schooladdrinfo: JSON.stringify(formData.workplace) },
       ...{ eduinfo: JSON.stringify({ educationType, ...educationLevelForm }) },
-      ...{ experienceinfo: JSON.stringify(formData.experience) },
+      ...{
+        experienceinfo: JSON.stringify({
+          hasForeignLicense,
+          ...resExperienceForm,
+          ...(hasForeignLicense && { ...foreignLicenseForm }),
+        }),
+      },
       ...{ competencyinfo: JSON.stringify(mockPerformances) },
       ...{ prohibitproperty: JSON.stringify(forbidden) },
     };
@@ -302,7 +310,9 @@ export class LicenseRequestComponent implements OnInit {
         const payload = this.createRequest(forbidden, '0');
         this.requestService.requestLicense(payload).subscribe((res) => {
           console.log('request result = ', res);
-          this.router.navigate(['/home']);
+          if (res.returncode === '00') {
+            this.router.navigate(['/home']);
+          }
         });
       }
     });
@@ -312,7 +322,9 @@ export class LicenseRequestComponent implements OnInit {
         const payload = this.createRequest(forbidden, '1');
         this.requestService.requestLicense(payload).subscribe((res) => {
           console.log('request result = ', res);
-          this.router.navigate(['/license', 'payment-channel']);
+          if (res.returncode === '00') {
+            this.router.navigate(['/license', 'payment-channel']);
+          }
         });
       }
     });

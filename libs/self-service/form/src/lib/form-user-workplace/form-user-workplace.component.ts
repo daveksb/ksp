@@ -27,7 +27,7 @@ export class FormUserWorkplaceComponent extends KspFormBaseComponent {
     lane: [''],
     road: [''],
     zipCode: [''],
-    provience: [''],
+    province: [''],
     subDistrict: [''],
     district: [''],
   });
