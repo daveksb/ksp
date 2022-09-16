@@ -21,6 +21,10 @@ export const routes: Route[] = [
         path: 'detail',
         component: RequestRewardDetailComponent,
       },
+      {
+        path: 'detail/:id',
+        component: RequestRewardDetailComponent,
+      },
     ],
   },
 ];

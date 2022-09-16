@@ -9,6 +9,9 @@
   <div class="bg-secondary bg-opacity-10 px-4 py-2">
     <ksp-request-reward-form
       [mode]="'edit'"
+      [osoiTypes]="osoiTypes$ | async"
+      [personTypes]="personTypes$ | async"
+      [prefixList]="prefixList$ | async"
       formControlName="reward"
     ></ksp-request-reward-form>
   </div>

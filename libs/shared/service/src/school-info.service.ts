@@ -17,16 +17,27 @@ export class SchoolInfoService {
       .pipe(shareReplay());
   }
 
-  /*   addTempLicense(payload: any): Observable<any> {
-    return this.http.post(
-      `${environment.apiUrl}/kspschoolregister/schtmplicencerequestinsert`,
-      payload
-    );
-  } */
-
   getSchoolEduOccupy(): Observable<any> {
     return this.http
       .get(`${environment.apiUrl}/kspmasterdata/schooleduoccupy`)
+      .pipe(
+        shareReplay(),
+        map((data: any) => data.datareturn)
+      );
+  }
+
+  getOsoiTypes(): Observable<any> {
+    return this.http
+      .get(`${environment.apiUrl}/kspmasterdata/schoolrewardtype`)
+      .pipe(
+        shareReplay(),
+        map((data: any) => data.datareturn)
+      );
+  }
+
+  getPersonTypes(): Observable<any> {
+    return this.http
+      .get(`${environment.apiUrl}/kspmasterdata/schoolpersontype`)
       .pipe(
         shareReplay(),
         map((data: any) => data.datareturn)

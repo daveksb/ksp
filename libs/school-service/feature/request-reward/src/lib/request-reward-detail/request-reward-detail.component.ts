@@ -8,27 +8,43 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { defaultRequestPayload } from '@ksp/shared/interface';
-import { RequestLicenseService } from '@ksp/shared/service';
+import {
+  GeneralInfoService,
+  RequestLicenseService,
+  SchoolInfoService,
+} from '@ksp/shared/service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ksp-request-reward-detail',
   templateUrl: './request-reward-detail.component.html',
   styleUrls: ['./request-reward-detail.component.scss'],
 })
-export class RequestRewardDetailComponent {
+export class RequestRewardDetailComponent implements OnInit {
   form = this.fb.group({
     reward: [],
   });
 
   rewards = rewards;
   schoolId = '0010201056';
+  osoiTypes$!: Observable<any>;
+  personTypes$!: Observable<any>;
+  prefixList$!: Observable<any>;
 
   constructor(
     private router: Router,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private requestService: RequestLicenseService
+    private requestService: RequestLicenseService,
+    private schoolInfoService: SchoolInfoService,
+    private generalInfoService: GeneralInfoService
   ) {}
+
+  ngOnInit(): void {
+    this.osoiTypes$ = this.schoolInfoService.getOsoiTypes();
+    this.personTypes$ = this.schoolInfoService.getPersonTypes();
+    this.prefixList$ = this.generalInfoService.getPrefix();
+  }
 
   createRequest(form: any) {
     //console.log('create request = ');
@@ -40,12 +56,12 @@ export class RequestRewardDetailComponent {
     form.ref3 = '1';
     form.systemtype = `2`;
     form.requesttype = `40`;
-    form.subtype = `-`;
+    form.subtype = `5`;
     form.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
     form.osoimember = JSON.stringify(form.osoimember);
 
     baseForm.patchValue(form);
-    console.log('current form = ', baseForm.value);
+    //console.log('current form = ', baseForm.value);
     this.requestService.requestLicense(baseForm.value).subscribe((res) => {
       //console.log('request result = ', res);
     });

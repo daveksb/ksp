@@ -79,8 +79,8 @@ export class SchoolRequestListComponent implements OnInit {
       case SchoolRequestType.ขอหนังสือรับรองคุณวุฒิ:
         return this.qualificationPage(requestId.toString());
 
-      case SchoolRequestType['ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม']:
-        return this.qualificationPage(requestId.toString());
+      case SchoolRequestType.ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม:
+        return this.rewardPage(requestId);
     }
 
     this.router.navigate(['/temp-license', 'request', requestId], {
@@ -96,8 +96,12 @@ export class SchoolRequestListComponent implements OnInit {
     this.router.navigate(['/qualification-approve', 'detail', id]);
   }
 
-  rewardPage() {
-    this.router.navigate(['/request-reward', 'detail']);
+  rewardPage(id: number) {
+    if (id) {
+      this.router.navigate(['/request-reward', 'detail', id]);
+    } else {
+      this.router.navigate(['/request-reward', 'detail']);
+    }
   }
 }
 

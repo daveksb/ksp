@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   AddRowButtonComponent,
@@ -34,6 +34,10 @@ export class RequestRewardFormComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+  @Input() osoiTypes: any = [];
+  @Input() personTypes: any = [];
+  @Input() prefixList: any = [];
+
   override form = this.fb.group({
     rewardname: [null, Validators.required],
     rewardtype: [null, Validators.required],
