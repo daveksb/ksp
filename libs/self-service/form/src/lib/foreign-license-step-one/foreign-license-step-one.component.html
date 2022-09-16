@@ -4,13 +4,12 @@
   </div>
   <ng-container *ngFor="let rule of rules; index as i">
     <div class="d-flex mb-3">
-      <input
-        class="me-1"
-        style="margin-top: 0.3rem"
-        type="checkbox"
-        name="xxx"
-      />
-      <label class="form-label break__line"> {{ rule }} </label>
+      <div class="d-flex">
+        <input class="me-2 mt-1" type="checkbox" name="xxx" />
+      </div>
+      <label class="form-label break__line"
+        ><span class="form-label">{{ i + 1 }}.</span> {{ rule }}
+      </label>
     </div>
   </ng-container>
 </div>

@@ -57,3 +57,9 @@ export * from './lib/renew-license-property/renew-license-property.component';
 export * from './lib/renew-license-property-supervision/renew-license-property-supervision.component';
 
 export * from './lib/renew-license-property-manager/renew-license-property-manager.component';
+
+export * from './lib/renew-license-foreign-step-two/renew-license-foreign-step-two.component';
+
+export * from './lib/renew-license-foreign-teacher/renew-license-foreign-teacher.component';
+
+export * from './lib/renew-license-foreign-non-teacher/renew-license-foreign-non-teacher.component';

@@ -21,19 +21,23 @@ export class ApproveNewUserListComponent {
 
   search(params: any) {
     console.log('params = ', params);
+
     const payload = {
-      currentprocess: null,
-      idcardno: null,
-      requestdatefrom: params.requestdatefrom,
-      requestdateto: null,
+      schoolid: params.institution?.schoolid,
       requestno: params.requestno,
-      requeststatus: params.requeststatus,
+      firstnameth: params.name,
+      lastnameth: null,
+      requestdate: null,
       requesttype: '1',
-      //schoolid: params.institution?.schoolid,
-      schoolid: '0010201056',
+      requeststatus: null,
+      currentprocess: null,
+      schoolname: null,
+      bureauid: null,
+      offset: '0',
+      row: '10',
     };
 
-    this.requestService.searchRequest(payload).subscribe((res: any) => {
+    this.requestService.searchRegisterRequest(payload).subscribe((res: any) => {
       this.dataSource.data = res;
     });
   }

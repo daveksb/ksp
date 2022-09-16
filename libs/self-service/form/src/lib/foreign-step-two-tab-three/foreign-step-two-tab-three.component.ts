@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ForeignStepTwoTabThreeFormComponent } from '../foreign-step-two-tab-three-form/foreign-step-two-tab-three-form.component';
-import { AddRowButtonComponent } from '@ksp/shared/ui';
 import { FormArray, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+import { AddRowButtonComponent } from '@ksp/shared/ui';
 
 @Component({
   selector: 'self-service-foreign-step-two-tab-three',
