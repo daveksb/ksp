@@ -39,6 +39,10 @@ export class SchoolRequestListComponent implements OnInit {
   SchoolRequestProcess = SchoolRequestProcess;
   SchoolRequestType = SchoolRequestType;
   SchoolRequestSubType = SchoolRequestSubType;
+  currentPage = 0;
+  isLastPage = false;
+  pageRow = 10;
+  searchParams: any;
 
   form = this.fb.group({
     licenseSearch: [],
@@ -56,31 +60,28 @@ export class SchoolRequestListComponent implements OnInit {
   }
 
   search(params: any) {
-    /*
-    {
-  "requestno" : "1-01-1-650908-00024",
-  "idcardno" : null,
-  "requesttype" : null,
-  "currentprocess" : null,
-  "requeststatus" : null,
-  "requestdatefrom" : null,
-  "requestdateto" : null,
-  "schoolid" : "9",
-   "subtype" : null,
-   "firsnameth" :null,
-   "passportno" :null,
-   "offset" : "0",
-   "row" : "5",
-  "tokenkey" : "abcdjbtswWVuiFxOlK4aHOK6AvcDlK6bBfCnQEHvanYkhuWAWQS6WQx6n4uVmZTxCYi4JEJ9ysLo2h6WLvjHaeHpAx2C3bt3LGjq"
-} */
     console.log('params = ', params);
     const data = {
       ...params,
-      ...{ schoolid: `${this.schoolId}`, offset: '0', row: '10' },
+      ...{ schoolid: `${this.schoolId}`, offset: '0', row: `${this.pageRow}` },
     };
     const payload = replaceEmptyWithNull(data);
+
+    this.searchParams = payload;
+    this.isLastPage = false;
+
     this.requestService.searchRequest(payload).subscribe((res: any) => {
-      this.dataSource.data = res;
+      const mapData = res.map((i: any) => {
+        return {
+          ...i,
+          ...{
+            mapRequestType: SchoolRequestType.find(
+              (j) => j.id === +i.requesttype
+            )?.name,
+          },
+        };
+      });
+      this.dataSource.data = mapData;
     });
   }
 
@@ -91,6 +92,40 @@ export class SchoolRequestListComponent implements OnInit {
   goToRequestPage(subType: number) {
     this.router.navigate(['/temp-license', 'request'], {
       queryParams: { subtype: subType },
+    });
+  }
+
+  goPrevious() {
+    if (this.currentPage == 0) {
+      this.isLastPage = false;
+      return;
+    }
+    this.currentPage -= 1;
+    const offset = this.pageRow * this.currentPage;
+    const params = {
+      ...this.searchParams,
+      ...{ offset: `${offset}` },
+    };
+    this.requestService.searchRequest(params).subscribe((res: any) => {
+      this.dataSource.data = res;
+    });
+  }
+
+  goNext() {
+    if (this.isLastPage) {
+      return;
+    }
+    this.currentPage += 1;
+    const offset = this.pageRow * this.currentPage;
+    const params = {
+      ...this.searchParams,
+      ...{ offset: `${offset + 1}` },
+    };
+    this.requestService.searchRequest(params).subscribe((res: any) => {
+      if (res.length < this.pageRow) {
+        this.isLastPage = true;
+      }
+      this.dataSource.data = res;
     });
   }
 
