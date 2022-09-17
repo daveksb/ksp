@@ -16,7 +16,7 @@ export class ManageCurrentUserListComponent implements OnInit {
   });
 
   displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<userList>();
+  dataSource = new MatTableDataSource<any>();
 
   constructor(
     private router: Router,
@@ -38,8 +38,24 @@ export class ManageCurrentUserListComponent implements OnInit {
   }
 
   search(params: any) {
-    const payload = replaceEmptyWithNull(params);
-    this.requestService.searchRequest(payload).subscribe((res: any) => {
+    console.log('params = ', params);
+
+    const payload = {
+      schoolid: params.institution?.schoolid,
+      requestno: params.requestno,
+      firstnameth: params.name,
+      lastnameth: null,
+      requestdate: null,
+      requesttype: '1',
+      requeststatus: null,
+      currentprocess: '5',
+      schoolname: null,
+      bureauid: null,
+      offset: '0',
+      row: '10',
+    };
+
+    this.requestService.searchRegisterRequest(payload).subscribe((res: any) => {
       this.dataSource.data = res;
     });
   }
@@ -48,8 +64,8 @@ export class ManageCurrentUserListComponent implements OnInit {
     this.dataSource.data = [];
   }
 
-  goToDetail() {
-    this.router.navigate(['/', 'manage-current-user', 'detail'], {
+  goToDetail(id: number) {
+    this.router.navigate(['/', 'manage-current-user', 'detail', id], {
       queryParams: { type: SchoolServiceUserPageType.ManageCurrentUser },
     });
   }
@@ -58,15 +74,15 @@ export class ManageCurrentUserListComponent implements OnInit {
 export const column = [
   'id',
   'view',
-  'ssn',
+  'idcardno',
   'name',
-  'school',
-  'province',
-  'status',
-  'approveDate',
-  'editDate',
+  'schoolname',
+  //'province',
+  'requeststatus',
+  'requestdate',
+  'updatedate',
 ];
-export interface userList {
+/* export interface userList {
   id: number;
   view: string;
   ssn: string;
@@ -102,3 +118,4 @@ export const data: userList[] = [
     editDate: 'xx/xx/xxxx',
   },
 ];
+ */
