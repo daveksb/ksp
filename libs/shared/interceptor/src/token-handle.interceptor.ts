@@ -38,7 +38,6 @@ export class TokenHandleInterceptor implements HttpInterceptor {
       request = request.clone({
         body: { ...request.body, tokenkey: token },
       });
-
       return next.handle(request);
     }
 

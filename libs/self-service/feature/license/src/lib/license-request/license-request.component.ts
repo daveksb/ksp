@@ -11,10 +11,15 @@ import {
   AddressService,
   GeneralInfoService,
   EducationDetailService,
-  RequestLicenseService,
+  LicenseRequestService as RequestLicenseService,
+  MyInfoService,
 } from '@ksp/shared/service';
 import { defaultRequestPayload } from '@ksp/shared/interface';
-import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
+import {
+  replaceEmptyWithNull,
+  toLowercaseProp,
+  parseJson,
+} from '@ksp/shared/utility';
 import { UserInfoFormType } from '@ksp/shared/constant';
 
 const mockPerformances = [
@@ -71,6 +76,7 @@ export class LicenseRequestComponent implements OnInit {
   countries$!: Observable<any>;
   countries2$!: Observable<any>;
   licenses$!: Observable<any>;
+  disableNextButton = false;
 
   constructor(
     private router: Router,
@@ -80,7 +86,8 @@ export class LicenseRequestComponent implements OnInit {
     private addressService: AddressService,
     private generalInfoService: GeneralInfoService,
     private educationDetailService: EducationDetailService,
-    private requestService: RequestLicenseService
+    private requestService: RequestLicenseService,
+    private myInfoService: MyInfoService
   ) {}
 
   ngOnInit(): void {
@@ -90,6 +97,8 @@ export class LicenseRequestComponent implements OnInit {
         // console.log('res = ', this.form);
       });
     this.getListData();
+    this.getMyInfo();
+    this.checkButtonsDisableStatus();
   }
 
   getListData() {
@@ -102,6 +111,72 @@ export class LicenseRequestComponent implements OnInit {
     this.countries$ = this.addressService.getCountry();
     this.countries2$ = this.countries$;
     this.licenses$ = this.educationDetailService.getLicenseType();
+  }
+
+  getMyInfo() {
+    this.myInfoService.getMyInfo().subscribe((res) => {
+      console.log(res);
+      this.patchUserInfo(res);
+      this.patchAddress(parseJson(res.addressinfo));
+      if (res.schooladdrinfo) {
+        this.patchWorkplace(parseJson(res.schooladdrinfo));
+      }
+    });
+  }
+
+  patchUserInfo(data: any) {
+    const {
+      birthdate,
+      phone,
+      email,
+      firstnameen,
+      firstnameth,
+      idcardno,
+      lastnameen,
+      lastnameth,
+      prefixen,
+      prefixth,
+      id,
+    } = data;
+    const patchData = {
+      birthdate: birthdate.split('T')[0],
+      contactphone: phone,
+      email,
+      firstnameen,
+      firstnameth,
+      idcardno,
+      lastnameen,
+      lastnameth,
+      prefixen,
+      prefixth,
+      id,
+    } as any;
+    this.form.controls.userInfo.patchValue(patchData);
+  }
+
+  patchAddress(addrs: any[]) {
+    //console.log('address = ', addrs);
+    if (addrs && addrs.length) {
+      addrs.map((addr: any, i: number) => {
+        if (i === 0) {
+          this.amphurs1$ = this.addressService.getAmphurs(addr.province);
+          this.tumbols1$ = this.addressService.getTumbols(addr.amphur);
+          this.form.controls.address1.patchValue(addr);
+        }
+        if (i === 1) {
+          this.amphurs2$ = this.addressService.getAmphurs(addr.province);
+          this.tumbols2$ = this.addressService.getTumbols(addr.amphur);
+          this.form.controls.address2.patchValue(addr);
+        }
+      });
+    }
+  }
+
+  patchWorkplace(data: any) {
+    console.log(data);
+    this.amphurs3$ = this.addressService.getAmphurs(data.province);
+    this.tumbols3$ = this.addressService.getTumbols(data.district);
+    this.form.controls.workplace.patchValue(data);
   }
 
   provinceChanged(addrType: number, evt: any) {
@@ -181,6 +256,8 @@ export class LicenseRequestComponent implements OnInit {
     userInfo.subtype = '1';
 
     const { educationType, educationLevelForm } = formData.education;
+    const { hasForeignLicense, foreignLicenseForm, ...resExperienceForm } =
+      formData.experience;
 
     const payload = {
       ...replaceEmptyWithNull(userInfo),
@@ -189,7 +266,13 @@ export class LicenseRequestComponent implements OnInit {
       },
       ...{ schooladdrinfo: JSON.stringify(formData.workplace) },
       ...{ eduinfo: JSON.stringify({ educationType, ...educationLevelForm }) },
-      ...{ experienceinfo: JSON.stringify(formData.experience) },
+      ...{
+        experienceinfo: JSON.stringify({
+          hasForeignLicense,
+          ...resExperienceForm,
+          ...(hasForeignLicense && { ...foreignLicenseForm }),
+        }),
+      },
       ...{ competencyinfo: JSON.stringify(mockPerformances) },
       ...{ prohibitproperty: JSON.stringify(forbidden) },
     };
@@ -201,6 +284,8 @@ export class LicenseRequestComponent implements OnInit {
 
   save() {
     console.log(this.form.value);
+    console.log(this.form.valid);
+
     const confirmDialog = this.dialog.open(ForbiddenPropertyFormComponent, {
       width: '900px',
     });
@@ -229,7 +314,9 @@ export class LicenseRequestComponent implements OnInit {
         const payload = this.createRequest(forbidden, '0');
         this.requestService.requestLicense(payload).subscribe((res) => {
           console.log('request result = ', res);
-          this.router.navigate(['/home']);
+          if (res.returncode === '00') {
+            this.router.navigate(['/home']);
+          }
         });
       }
     });
@@ -239,9 +326,17 @@ export class LicenseRequestComponent implements OnInit {
         const payload = this.createRequest(forbidden, '1');
         this.requestService.requestLicense(payload).subscribe((res) => {
           console.log('request result = ', res);
-          this.router.navigate(['/license', 'payment-channel']);
+          if (res.returncode === '00') {
+            this.router.navigate(['/license', 'payment-channel']);
+          }
         });
       }
+    });
+  }
+
+  checkButtonsDisableStatus() {
+    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
+      this.disableNextButton = !this.form.valid;
     });
   }
 }
