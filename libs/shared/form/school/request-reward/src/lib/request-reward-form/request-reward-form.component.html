@@ -154,8 +154,8 @@
                   *ngFor="let row of members.controls; let i = index"
                 >
                   <tr [formGroupName]="i">
-                    <td class="text-center">{{ i + 1 }}</td>
-                    <td style="width: 125px">
+                    <td style="width: 20px" class="text-center">{{ i + 1 }}</td>
+                    <td style="width: 180px">
                       <select class="form-select" formControlName="membertype">
                         <option value="null" selected hidden disabled>
                           กรุณาเลือก
@@ -165,14 +165,14 @@
                         </option>
                       </select>
                     </td>
-                    <td>
+                    <td style="width: 160px">
                       <input
                         type="text"
                         class="form-control"
                         formControlName="idcardno"
                       />
                     </td>
-                    <td style="width: 125px">
+                    <td style="width: 120px">
                       <select class="form-select" formControlName="prefix">
                         <option value="null" selected hidden disabled>
                           เลือก
@@ -185,35 +185,35 @@
                         </option>
                       </select>
                     </td>
-                    <td>
+                    <td style="width: 240px">
                       <input
                         type="text"
                         class="form-control"
                         formControlName="firstname"
                       />
                     </td>
-                    <td>
+                    <td style="width: 240px">
                       <input
                         type="text"
                         class="form-control"
                         formControlName="lastname"
                       />
                     </td>
-                    <td>
+                    <td style="width: 200px">
                       <input
                         type="text"
                         class="form-control"
                         formControlName="phone"
                       />
                     </td>
-                    <td>
+                    <td style="width: 200px">
                       <input
                         type="text"
                         class="form-control"
                         formControlName="email"
                       />
                     </td>
-                    <td>
+                    <td style="width: 200px">
                       <input
                         type="text"
                         class="form-control"
