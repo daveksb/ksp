@@ -12,12 +12,16 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { BottomNavComponent } from '@ksp/shared/menu';
 import { ELicenseTempLicenseRoutingModule } from './e-license-temp-license-routing.module';
-import { FormTempLicenseNumberComponent, SharedFormOthersModule } from '@ksp/shared/form/others';
+import {
+  FormTempLicenseNumberComponent,
+  SharedFormOthersModule,
+} from '@ksp/shared/form/others';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import { TempLicenseSearchComponent } from '@ksp/shared/search';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TempLicenseApproveListComponent } from './temp-license-approve-list/temp-license-approve-list.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   imports: [
@@ -35,6 +39,7 @@ import { TempLicenseApproveListComponent } from './temp-license-approve-list/tem
     TempLicenseSearchComponent,
     ReactiveFormsModule,
     FormTempLicenseNumberComponent,
+    MatPaginatorModule,
   ],
   declarations: [
     ETempLicenseListComponent,

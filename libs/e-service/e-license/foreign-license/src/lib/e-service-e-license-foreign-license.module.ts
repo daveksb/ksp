@@ -14,6 +14,7 @@ import { TopNavComponent } from '@ksp/shared/menu';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EServiceRequestSearchComponent } from '@ksp/shared/search';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 export const routes: Routes = [
   {
@@ -56,6 +57,7 @@ export const routes: Routes = [
     LicenseCheckComponent,
     ReactiveFormsModule,
     EServiceRequestSearchComponent,
+    MatPaginatorModule,
   ],
   declarations: [ForeignLicenseDetailComponent, ForeignLicenseListComponent],
 })

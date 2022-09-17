@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EServiceRequestSearchComponent } from '@ksp/shared/search';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 export const routes: Route[] = [
   {
@@ -43,6 +44,7 @@ export const routes: Route[] = [
     TopNavComponent,
     ReactiveFormsModule,
     EServiceRequestSearchComponent,
+    MatPaginatorModule,
   ],
   declarations: [ApproveNewUserListComponent],
 })

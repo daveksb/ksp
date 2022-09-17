@@ -1,23 +1,31 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SchoolServiceUserPageType } from '@ksp/shared/interface';
 import { RequestLicenseService } from '@ksp/shared/service';
+import { parseJson } from '@ksp/shared/utility';
 
 @Component({
   templateUrl: './approve-new-user-list.component.html',
   styleUrls: ['./approve-new-user-list.component.scss'],
 })
-export class ApproveNewUserListComponent {
+export class ApproveNewUserListComponent implements AfterViewInit {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<any>();
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  selectedUniversity = '';
 
   constructor(
     private router: Router,
     private requestService: RequestLicenseService
   ) {}
 
-  selectedUniversity = '';
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+  }
 
   search(params: any) {
     console.log('params = ', params);
@@ -34,7 +42,7 @@ export class ApproveNewUserListComponent {
       schoolname: null,
       bureauid: null,
       offset: '0',
-      row: '10',
+      row: '25',
     };
 
     this.requestService.searchRegisterRequest(payload).subscribe((res: any) => {
@@ -59,11 +67,14 @@ export class ApproveNewUserListComponent {
 
 export const column: string[] = [
   'id',
+  'view',
   'requestno',
   //'idcardno',
   'name',
   'contactphone',
+  //'coordinatorname',
+  'schoolname',
+  //'provience',
   'requeststatus',
   'requestdate',
-  'view',
 ];

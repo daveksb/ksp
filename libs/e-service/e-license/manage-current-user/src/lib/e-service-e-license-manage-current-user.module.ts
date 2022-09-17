@@ -13,6 +13,7 @@ import {
   EServiceRequestSearchComponent,
   EServiceUserSearchComponent,
 } from '@ksp/shared/search';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 export const routes: Routes = [
   {
@@ -50,6 +51,7 @@ export const routes: Routes = [
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     EServiceUserSearchComponent,
+    MatPaginatorModule,
   ],
   declarations: [ManageCurrentUserListComponent],
 })

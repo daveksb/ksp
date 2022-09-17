@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { tempLicenseRequestType } from '@ksp/shared/interface';
@@ -10,7 +11,9 @@ import { RequestLicenseService } from '@ksp/shared/service';
   templateUrl: './foreign-license-list.component.html',
   styleUrls: ['./foreign-license-list.component.scss'],
 })
-export class ForeignLicenseListComponent {
+export class ForeignLicenseListComponent implements AfterViewInit {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   form = this.fb.group({
     foreignSearch: [],
   });
@@ -23,6 +26,10 @@ export class ForeignLicenseListComponent {
     private fb: FormBuilder,
     private requestService: RequestLicenseService
   ) {}
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+  }
 
   search(params: any) {
     console.log('params = ', params);

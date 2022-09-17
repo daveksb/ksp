@@ -1,4 +1,8 @@
-import { DegreeCertProcessType, MenuConfig } from '@ksp/shared/interface';
+import {
+  DegreeCertProcessType,
+  MenuConfig,
+  tempLicenseRequestType,
+} from '@ksp/shared/interface';
 
 export const ethicsMenu: MenuConfig[] = [
   {
@@ -214,10 +218,12 @@ export const licenseMenu: MenuConfig[] = [
       {
         path: 'temp-license/list',
         label: 'รายการใบคำขออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
+        params: { subtype: tempLicenseRequestType.thai },
       },
       {
         path: 'temp-license/approve-list',
         label: 'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
+        params: { subtype: tempLicenseRequestType.thai },
       },
     ],
   },
@@ -231,10 +237,12 @@ export const licenseMenu: MenuConfig[] = [
       {
         path: 'temp-license/list',
         label: 'รายการใบคำขออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
+        params: { subtype: tempLicenseRequestType.foreign },
       },
       {
         path: 'temp-license/approve-list',
         label: 'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
+        params: { subtype: tempLicenseRequestType.foreign },
       },
     ],
   },
@@ -250,7 +258,7 @@ export const licenseMenu: MenuConfig[] = [
         label: 'รายการใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
       },
       {
-        path: 'foreign-license/detail',
+        path: 'xxx',
         label: 'พิจารณาเลขคุรุสภาสำหรับชาวต่างชาติ',
       },
     ],
