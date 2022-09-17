@@ -33,6 +33,7 @@ export class RequestRewardDetailComponent implements OnInit {
   prefixList$!: Observable<any>;
   requestId = 0;
   requestNo = '';
+  memberData!: any;
 
   constructor(
     private router: Router,
@@ -67,7 +68,8 @@ export class RequestRewardDetailComponent implements OnInit {
       //console.log('osoi info = ', osoiInfo);
       //console.log('osoi member = ', osoiMember);
       this.form.controls.reward.patchValue(osoiInfo);
-      this.form.controls.reward.patchValue(osoiMember);
+      this.memberData = osoiMember;
+
       //console.log('current process = ', this.currentProcess);
     });
   }
