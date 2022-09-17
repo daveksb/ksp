@@ -24,6 +24,7 @@ export class EServiceRequestSearchComponent {
   @Input() searchType = '';
   @Output() search = new EventEmitter<any>();
   @Output() clear = new EventEmitter<boolean>();
+  
   constructor(private fb: FormBuilder) {}
 
   onClear() {

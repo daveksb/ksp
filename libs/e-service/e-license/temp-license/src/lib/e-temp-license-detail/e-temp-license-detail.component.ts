@@ -14,7 +14,6 @@ import {
   GeneralInfoService,
   RequestLicenseService,
   StaffService,
-  TempLicenseService,
 } from '@ksp/shared/service';
 import { parseJson, thaiDate } from '@ksp/shared/utility';
 import { untilDestroyed } from '@ngneat/until-destroy';
@@ -70,7 +69,7 @@ export class ETempLicenseDetailComponent implements OnInit {
     private requestService: RequestLicenseService,
     private addressService: AddressService,
     private generalInfoService: GeneralInfoService,
-    private tempLicenseService: TempLicenseService,
+    //private tempLicenseService: TempLicenseService,
     private staffService: StaffService
   ) {}
 
@@ -190,19 +189,19 @@ export class ETempLicenseDetailComponent implements OnInit {
     this.form.controls.hiringinfo.patchValue(data);
   }
 
-  getSchoolAddress() {
+  /* getSchoolAddress() {
     this.tempLicenseService
       .getSchoolInfo(this.schoolId)
       .subscribe((res: any) => {
         this.form.controls.schoolAddr.patchValue(res);
       });
-  }
+  } */
 
   getList() {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.provinces$ = this.addressService.getProvinces();
     this.positionTypes$ = this.staffService.getPositionTypes();
-    this.getSchoolAddress();
+    //this.getSchoolAddress();
   }
 
   cancel() {

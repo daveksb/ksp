@@ -1,108 +1,80 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { tempLicenseRequestType } from '@ksp/shared/interface';
+import { RequestLicenseService, SchoolInfoService } from '@ksp/shared/service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'e-service-temp-license-list',
   templateUrl: './e-temp-license-list.component.html',
   styleUrls: ['./e-temp-license-list.component.scss'],
 })
-export class ETempLicenseListComponent {
+export class ETempLicenseListComponent implements OnInit {
+  eduOccupyList$!: Observable<any>;
+
   form = this.fb.group({
     licenseSearch: [],
   });
 
   displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<TempLicenseInfo>();
+  dataSource = new MatTableDataSource<any>();
 
-  constructor(private router: Router, private fb: FormBuilder) {}
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private requestService: RequestLicenseService,
+    private schoolInfoService: SchoolInfoService
+  ) {}
 
-  search() {
-    this.dataSource.data = data;
+  ngOnInit(): void {
+    this.eduOccupyList$ = this.schoolInfoService.getSchoolEduOccupy();
+  }
+
+  search(params: any) {
+    console.log('params = ', params);
+
+    const payload = {
+      requestno: params.requestno,
+      idcardno: params.idcardno,
+      subtype: null,
+      currentprocess: null,
+      requeststatus: null,
+      requestdatefrom: params.requestdatefrom,
+      requestdateto: params.requestdateto,
+      requesttype: '03',
+      offset: '0',
+      row: '10',
+    };
+
+    this.requestService.searchLicenseRequest(payload).subscribe((res: any) => {
+      this.dataSource.data = res;
+    });
   }
 
   clear() {
     this.dataSource.data = [];
   }
 
-  nextPage(requestType: number) {
-    this.router.navigate(['/temp-license', 'detail'], {
-      queryParams: { type: requestType },
+  goToDetail(id: number) {
+    this.router.navigate(['/temp-license', 'detail', id], {
+      queryParams: { type: tempLicenseRequestType.thai },
     });
   }
 }
 
-export interface TempLicenseInfo {
-  order: number;
-  reqCode: string;
-  ssn: string;
-  name: string;
-  professType: string;
-  workStep: string;
-  status: string;
-  editDate: string;
-  sendDate: string;
-}
-
-export const data: TempLicenseInfo[] = [
-  {
-    order: 1,
-    reqCode: 'SF_TR6406000001',
-    ssn: 'x-xxxx-xxxx-xx-x',
-    name: 'นายประหยัด จันทร์อังคาร',
-    professType: 'หนังสืออนุญาตชั่วคราว-ครู',
-    workStep: 'ตรวจสอบเอกสาร (2)',
-    status: 'ผ่านการตรวจสอบ',
-    editDate: '10 พ.ค. 2564',
-    sendDate: '1 พ.ค. 2564',
-  },
-  {
-    order: 2,
-    reqCode: 'SF_TR6406000001',
-    ssn: 'x-xxxx-xxxx-xx-x',
-    name: 'นายประหยัด จันทร์อังคาร',
-    professType: 'หนังสืออนุญาตชั่วคราว-ครู',
-    workStep: 'ตรวจสอบเอกสาร (2)',
-    status: 'ปรับแก้ไข/เพิ่มเติม',
-    editDate: '10 พ.ค. 2564',
-    sendDate: '1 พ.ค. 2564',
-  },
-  {
-    order: 3,
-    reqCode: 'SF_TR6406000001',
-    ssn: 'x-xxxx-xxxx-xx-x',
-    name: 'นายประหยัด จันทร์อังคาร',
-    professType: 'หนังสืออนุญาตชั่วคราว-ครู',
-    workStep: 'ตรวจสอบเอกสาร (2)',
-    status: 'ผ่านการตรวจสอบ',
-    editDate: '10 พ.ค. 2564',
-    sendDate: '1 พ.ค. 2564',
-  },
-  {
-    order: 4,
-    reqCode: 'SF_TR6406000001',
-    ssn: 'x-xxxx-xxxx-xx-x',
-    name: 'นายประหยัด จันทร์อังคาร',
-    professType: 'หนังสืออนุญาตชั่วคราว-ครู',
-    workStep: 'ตรวจสอบเอกสาร (2)',
-    status: 'ปรับแก้ไข/เพิ่มเติม',
-    editDate: '10 พ.ค. 2564',
-    sendDate: '1 พ.ค. 2564',
-  },
-];
-
 export const column = [
-  'order',
+  'id',
   'edit',
-  'reqCode',
-  'ssn',
+  'requestno',
+  'idcardno',
   'name',
-  'professType',
-  'workStep',
-  'status',
-  'editDate',
-  'sendDate',
+  'subtype',
+  'currentprocess',
+  'requeststatus',
+  'updatedate',
+  'requestdate',
   'reqDoc',
   'approveDoc',
 ];
