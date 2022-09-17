@@ -64,7 +64,7 @@ export class SchoolRequestComponent implements OnInit {
   requestData: any;
 
   systemType = '2'; // school service
-  requestType = '03';
+  requestType = '3';
   requestSubType = SchoolRequestSubType.ครู; // 1 ไทย 2 ผู้บริหาร 3 ต่างชาติ
   requestLabel = 'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ';
   requestNo = '';

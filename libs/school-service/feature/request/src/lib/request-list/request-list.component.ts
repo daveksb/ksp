@@ -55,8 +55,29 @@ export class SchoolRequestListComponent implements OnInit {
     this.eduOccupyList$ = this.schoolInfoService.getSchoolEduOccupy();
   }
 
-  search(searchParams: any) {
-    const data = { ...searchParams, ...{ schoolid: `${this.schoolId}` } };
+  search(params: any) {
+    /*
+    {
+  "requestno" : "1-01-1-650908-00024",
+  "idcardno" : null,
+  "requesttype" : null,
+  "currentprocess" : null,
+  "requeststatus" : null,
+  "requestdatefrom" : null,
+  "requestdateto" : null,
+  "schoolid" : "9",
+   "subtype" : null,
+   "firsnameth" :null,
+   "passportno" :null,
+   "offset" : "0",
+   "row" : "5",
+  "tokenkey" : "abcdjbtswWVuiFxOlK4aHOK6AvcDlK6bBfCnQEHvanYkhuWAWQS6WQx6n4uVmZTxCYi4JEJ9ysLo2h6WLvjHaeHpAx2C3bt3LGjq"
+} */
+    console.log('params = ', params);
+    const data = {
+      ...params,
+      ...{ schoolid: `${this.schoolId}`, offset: '0', row: '10' },
+    };
     const payload = replaceEmptyWithNull(data);
     this.requestService.searchRequest(payload).subscribe((res: any) => {
       this.dataSource.data = res;
@@ -75,13 +96,13 @@ export class SchoolRequestListComponent implements OnInit {
 
   viewRequest(requestType: number, subType: number, requestId: number) {
     switch (requestType) {
-      case SchoolRequestType.ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ:
+      case 4:
         return this.foreignPage(requestId.toString());
 
-      case SchoolRequestType.ขอหนังสือรับรองคุณวุฒิ:
+      case 6:
         return this.qualificationPage(requestId.toString());
 
-      case SchoolRequestType.ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม:
+      case 40:
         return this.rewardPage(requestId);
     }
 

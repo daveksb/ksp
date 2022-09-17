@@ -3,9 +3,39 @@
 
   <div class="row mb-2">
     <div class="col">
+      <label class="form-label">ประเภทใบคำขอ</label>
+      <select class="form-select" formControlName="requesttype">
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option *ngFor="let t of SchoolRequestType" [value]="t.id">
+          {{ t.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col">
       <label class="form-label">เลขที่ใบคำขอ </label>
       <input class="form-control" type="text" formControlName="requestno" />
     </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col">
+      <label class="form-label">ประเภทวิชาชีพ</label>
+      <select class="form-select" formControlName="subtype">
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option *ngFor="let e of eduOccupyList" [value]="e?.eduOccupyType">
+          {{ e?.eduOccupyName }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col">
+      <label class="form-label">ชื่อ-นามสกุล </label>
+      <input class="form-control" type="text" formControlName="firstnameth" />
+    </div>
+  </div>
+
+  <div class="row mb-2">
     <div class="col">
       <label class="form-label">หมายเลขบัตรประชาชน </label>
       <input
@@ -13,22 +43,16 @@
         type="text"
         maxlength="13"
         formControlName="idcardno"
-        placeholder="หมายเลขบัตรประชาชนจำนวน 13 หลัก"
       />
+    </div>
+    <div class="col">
+      <label class="form-label">หมายเลขหนังสือเดินทาง (Passport Nmuber) </label>
+      <input class="form-control" type="text" formControlName="passportno" />
     </div>
   </div>
 
   <div class="row mb-2">
-    <div class="col">
-      <label class="form-label">ประเภทวิชาชีพ</label>
-      <select class="form-select" formControlName="requesttype">
-        <option value="null" selected hidden disabled>กรุณาเลือก</option>
-        <option *ngFor="let e of eduOccupyList" [value]="e?.eduOccupyType">
-          {{ e?.eduOccupyName }}
-        </option>
-      </select>
-    </div>
-    <div class="col">
+    <div class="col-6">
       <label class="form-label">ขั้นตอนการดำเนินการ</label>
       <select class="form-select" formControlName="currentprocess">
         <option value="null" disabled hidden>กรุณาเลือก</option>
@@ -37,9 +61,7 @@
         <option value="3">Three</option>
       </select>
     </div>
-  </div>
 
-  <div class="row mb-2">
     <div class="col-6">
       <label class="form-label">สถานะการดำเนินการ</label>
       <select class="form-select" formControlName="requeststatus">
@@ -49,7 +71,9 @@
         <option value="3">Three</option>
       </select>
     </div>
+  </div>
 
+  <div class="row mb-2">
     <div class="col">
       <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ</label>
       <input
@@ -69,27 +93,6 @@
       <input class="form-control" type="date" formControlName="requestdateto" />
     </div>
   </div>
-
-  <!-- <div class="row">
-    <div class="col">
-      <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ</label>
-      <input
-        class="form-control"
-        type="date"
-        formControlName="requestdatefrom"
-      />
-    </div>
-
-    <div class="col-1 p-0" style="width: 1%">
-      <br />
-      <span class="fs-4">-</span>
-    </div>
-
-    <div class="col">
-      <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ</label>
-      <input class="form-control" type="date" formControlName="requestdateto" />
-    </div>
-  </div> -->
 
   <div class="d-flex justify-content-end mb-2 mt-4">
     <button
