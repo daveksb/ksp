@@ -33,6 +33,10 @@ export const routes: Routes = [
         path: 'detail',
         component: ForeignLicenseDetailComponent,
       },
+      {
+        path: 'detail/:id',
+        component: ForeignLicenseDetailComponent,
+      },
     ],
   },
 ];

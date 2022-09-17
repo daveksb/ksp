@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { tempLicenseRequestType } from '@ksp/shared/interface';
+import { RequestLicenseService } from '@ksp/shared/service';
 
 @Component({
   selector: 'ksp-foreign-license-list',
@@ -10,80 +12,59 @@ import { Router } from '@angular/router';
 })
 export class ForeignLicenseListComponent {
   form = this.fb.group({
-    affiliation: [],
-    institutionCode: [],
-    institutionName: [],
-    requestNumber: [],
-    name: [],
-    submitReqDate: [],
-    status: [],
+    foreignSearch: [],
   });
 
   displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<ForeignLicenseInfo>();
-  constructor(private router: Router, private fb: FormBuilder) {}
+  dataSource = new MatTableDataSource<any>();
 
-  search() {
-    this.dataSource.data = data;
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private requestService: RequestLicenseService
+  ) {}
+
+  search(params: any) {
+    console.log('params = ', params);
+
+    const payload = {
+      requestno: params.requestno,
+      idcardno: params.idcardno,
+      subtype: null,
+      currentprocess: null,
+      requeststatus: null,
+      requestdatefrom: params.requestdatefrom,
+      requestdateto: params.requestdateto,
+      requesttype: '4',
+      offset: '0',
+      row: '10',
+    };
+
+    this.requestService.searchLicenseRequest(payload).subscribe((res: any) => {
+      this.dataSource.data = res;
+    });
   }
 
   clear() {
     this.dataSource.data = [];
   }
 
-  nextPage(requestType: number) {
-    this.router.navigate(['/', 'foreign-license', 'detail'], {
-      queryParams: { type: requestType },
+  nextPage(id: number) {
+    this.router.navigate(['/', 'foreign-license', 'detail', id], {
+      queryParams: { type: tempLicenseRequestType.foreign },
     });
   }
 }
 
-export interface ForeignLicenseInfo {
-  order: number;
-  reqCode: string;
-  ssn: string;
-  name: string;
-  professType: string;
-  workStep: string;
-  status: string;
-  editDate: string;
-  sendDate: string;
-}
-
-export const data: ForeignLicenseInfo[] = [
-  {
-    order: 1,
-    reqCode: 'SF_TR6406000001',
-    ssn: 'x-xxxx-xxxx-xx-x',
-    name: 'นายประหยัด จันทร์อังคาร',
-    professType: 'หนังสืออนุญาตชั่วคราว-ครู',
-    workStep: 'ตรวจสอบเอกสาร (2)',
-    status: 'ผ่านการตรวจสอบ',
-    editDate: '10 พ.ค. 2564',
-    sendDate: '1 พ.ค. 2564',
-  },
-  {
-    order: 2,
-    reqCode: 'SF_TR6406000001',
-    ssn: 'x-xxxx-xxxx-xx-x',
-    name: 'นายประหยัด จันทร์อังคาร',
-    professType: 'หนังสืออนุญาตชั่วคราว-ครู',
-    workStep: 'ตรวจสอบเอกสาร (2)',
-    status: 'ปรับแก้ไข/เพิ่มเติม',
-    editDate: '10 พ.ค. 2564',
-    sendDate: '1 พ.ค. 2564',
-  },
-];
-
 export const column = [
-  'order',
-  'reqCode',
-  'ssn',
+  'id',
+  'requestno',
+  'passportno',
   'name',
-  'professType',
-  'workStep',
-  'status',
-  'editDate',
-  'sendDate',
+  //'schoolname',
+  //'provience',
+  'requeststatus',
+  'updatedate',
+  'requestdate',
   'view',
 ];

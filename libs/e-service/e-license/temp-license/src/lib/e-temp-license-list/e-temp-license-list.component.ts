@@ -43,7 +43,7 @@ export class ETempLicenseListComponent implements OnInit {
       requeststatus: null,
       requestdatefrom: params.requestdatefrom,
       requestdateto: params.requestdateto,
-      requesttype: '03',
+      requesttype: '3',
       offset: '0',
       row: '10',
     };
