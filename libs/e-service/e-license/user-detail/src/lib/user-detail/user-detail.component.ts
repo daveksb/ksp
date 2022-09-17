@@ -30,7 +30,16 @@ export class UserDetailComponent implements OnInit {
         value: SchoolRequestProcess['ไม่ผ่านการรับรอง/พิจารณา'],
       },
     ],
-    ['ใช้งาน', 'ไม่ใช้งาน'],
+    [
+      {
+        name: 'ใช้งาน',
+        value: SchoolRequestProcess['ผ่านการรับรอง/พิจารณา'],
+      },
+      {
+        name: 'ไม่ใช้งาน',
+        value: SchoolRequestProcess['ไม่ผ่านการรับรอง/พิจารณา'],
+      },
+    ],
   ];
 
   headers = [

@@ -1,23 +1,110 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormMode } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { FormBuilder } from '@angular/forms';
+import { parseJson, thaiDate } from '@ksp/shared/utility';
+import {
+  SchoolRequestProcess,
+  SchoolRequestSubType,
+} from '@ksp/shared/constant';
+import {
+  AddressService,
+  GeneralInfoService,
+  RequestLicenseService,
+} from '@ksp/shared/service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ksp-foreign-license-detail',
   templateUrl: './foreign-license-detail.component.html',
   styleUrls: ['./foreign-license-detail.component.scss'],
 })
-export class ForeignLicenseDetailComponent {
+export class ForeignLicenseDetailComponent implements OnInit {
   choices: string[] = ['ครบถ้วน และถูกต้อง', 'ไม่ครบถ้วน และไม่ถูกต้อง'];
   @Input() mode: FormMode = 'view';
   foreignInfo = ['1.สำเนาหนังสือเดินทาง'];
 
-  constructor(private router: Router, public dialog: MatDialog) {}
+  today = thaiDate(new Date());
+  prefixList$!: Observable<any>;
+  countries$!: Observable<any>;
+
+  verifyChoice = verifyChoices;
+  evidenceFile = evidenceFiles;
+  requestNo = '';
+  requestData: any;
+  requestId!: number;
+  requestSubType = SchoolRequestSubType.อื่นๆ;
+
+  form = this.fb.group({
+    foreignTeacherInfo: [],
+    foreignVisaInfo: [],
+  });
+
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    public dialog: MatDialog,
+    private route: ActivatedRoute,
+    private requestService: RequestLicenseService,
+    private generalInfoService: GeneralInfoService,
+    private addressService: AddressService
+  ) {}
+
+  ngOnInit(): void {
+    this.checkRequestId();
+    this.getList();
+  }
+
+  checkRequestId() {
+    this.route.paramMap.subscribe((params) => {
+      this.requestId = Number(params.get('id'));
+      if (this.requestId) {
+        this.loadRequestFromId(this.requestId);
+      }
+    });
+  }
+
+  loadRequestFromId(id: number) {
+    this.requestService.getRequestById(id).subscribe((res: any) => {
+      this.requestData = res;
+      this.requestNo = res.requestno;
+      //this.currentProcess = +res.currentprocess;
+      //console.log('current process = ', this.currentProcess);
+
+      this.pathUserInfo(res);
+    });
+  }
+
+  pathUserInfo(data: any) {
+    data.birthdate = data.birthdate.split('T')[0];
+
+    if (this.requestSubType === SchoolRequestSubType.อื่นๆ) {
+      data.passportstartdate = data.passportstartdate.split('T')[0];
+      data.passportenddate = data.passportenddate.split('T')[0];
+      //console.log('data = ', data);
+
+      if (data?.visainfo) {
+        const visa = parseJson(data?.visainfo);
+        data.visaclass = visa.visaclass;
+        data.visatype = visa.visatype;
+        data.visaenddate = visa.visaenddate;
+      }
+      console.log('data = ', data);
+    }
+
+    this.form.controls.foreignTeacherInfo.patchValue(data);
+    this.form.controls.foreignVisaInfo.patchValue(data);
+  }
+
+  getList() {
+    this.prefixList$ = this.generalInfoService.getPrefix();
+    this.countries$ = this.addressService.getCountry();
+  }
 
   cancel() {
     this.router.navigate(['/', 'foreign-license', 'list']);
@@ -54,3 +141,21 @@ export class ForeignLicenseDetailComponent {
     });
   }
 }
+
+const evidenceFiles = [
+  {
+    name: '1.สำเนาสัญญาจ้าง',
+    fileId: '',
+  },
+];
+
+const verifyChoices = [
+  {
+    name: 'อนุมัติ',
+    value: SchoolRequestProcess['ผ่านการรับรอง/พิจารณา'],
+  },
+  {
+    name: 'ไม่อนุมัติ',
+    value: SchoolRequestProcess['ไม่ผ่านการรับรอง/พิจารณา'],
+  },
+];

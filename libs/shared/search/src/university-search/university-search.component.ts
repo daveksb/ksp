@@ -35,6 +35,7 @@ export class UniversitySearchComponent implements OnInit {
   amphurs$!: Observable<any>;
   bureaus$!: Observable<any>;
   selectedUniversity = '';
+
   form = this.fb.group({
     institution: null,
     provinceid: null,
@@ -42,6 +43,7 @@ export class UniversitySearchComponent implements OnInit {
     offset: '0',
     row: '20',
   });
+
   Data: any[] = [];
   currentPage!: number;
   payload: any;
@@ -122,6 +124,7 @@ export class UniversitySearchComponent implements OnInit {
     const province = evt.target?.value;
     this.amphurs$ = this.addressService.getAmphurs(province);
   }
+
   goPrevious() {
     if (this.currentPage == 1) return;
     const { offset, ...payload } = this.payload;
@@ -133,6 +136,7 @@ export class UniversitySearchComponent implements OnInit {
       this.payload = payload;
     });
   }
+
   goNext() {
     const { offset, ...payload } = this.payload;
     payload.offset = parseInt(offset) + parseInt(payload.row);
@@ -143,6 +147,7 @@ export class UniversitySearchComponent implements OnInit {
       this.payload = payload;
     });
   }
+
   confirm() {
     this.dialogRef.close(this.selectedUniversity);
   }

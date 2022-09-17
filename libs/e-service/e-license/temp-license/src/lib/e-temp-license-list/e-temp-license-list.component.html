@@ -2,7 +2,6 @@
   ><span header>ยื่นใบคำขอ</span
   ><span subHeader
     >รายละเอียดใบคำขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
-    (ชาวไทย)
   </span></ksp-top-nav
 >
 
@@ -10,17 +9,9 @@
   <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
     <div class="box-header">
       รายละเอียดใบคำขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
-      (ชาวไทย)
     </div>
 
     <div class="bg-white px-3 py-3">
-      <ksp-request-header-info
-        [requestDate]="'10 ตุลาคม 2565'"
-        [requestNumber]="'112234467876543'"
-      ></ksp-request-header-info>
-
-      <hr />
-
       <ksp-temp-license-search
         [eduOccupyList]="eduOccupyList$ | async"
         formControlName="licenseSearch"
@@ -126,6 +117,13 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
+
+        <mat-paginator
+          [pageSizeOptions]="[10]"
+          showFirstLastButtons
+          aria-label="Select page of periodic elements"
+        >
+        </mat-paginator>
       </div>
     </div>
   </div>

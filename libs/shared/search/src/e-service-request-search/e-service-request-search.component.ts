@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { UntilDestroy } from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { BasicInstituteSearchComponent } from '../basic-institute-search/basic-institute-search.component';
+import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { providerFactory } from '@ksp/shared/utility';
 
 @UntilDestroy()
 @Component({
@@ -11,9 +13,10 @@ import { BasicInstituteSearchComponent } from '../basic-institute-search/basic-i
   imports: [CommonModule, ReactiveFormsModule, BasicInstituteSearchComponent],
   templateUrl: './e-service-request-search.component.html',
   styleUrls: ['./e-service-request-search.component.scss'],
+  providers: providerFactory(EServiceRequestSearchComponent),
 })
-export class EServiceRequestSearchComponent {
-  form = this.fb.group({
+export class EServiceRequestSearchComponent extends KspFormBaseComponent {
+  override form = this.fb.group({
     institution: [],
     requestno: [],
     name: [],
@@ -24,8 +27,16 @@ export class EServiceRequestSearchComponent {
   @Input() searchType = '';
   @Output() search = new EventEmitter<any>();
   @Output() clear = new EventEmitter<boolean>();
-  
-  constructor(private fb: FormBuilder) {}
+
+  constructor(private fb: FormBuilder) {
+    super();
+    this.subscriptions.push(
+      this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
+  }
 
   onClear() {
     this.form.reset();

@@ -23,6 +23,10 @@ const routes: Routes = [
         component: ETempLicenseListComponent,
       },
       {
+        path: 'list/:id',
+        component: ETempLicenseListComponent,
+      },
+      {
         path: 'detail',
         component: ETempLicenseDetailComponent,
       },
@@ -40,6 +44,10 @@ const routes: Routes = [
       },
       {
         path: 'approve-list',
+        component: TempLicenseApproveListComponent,
+      },
+      {
+        path: 'approve-list/:id',
         component: TempLicenseApproveListComponent,
       },
       {

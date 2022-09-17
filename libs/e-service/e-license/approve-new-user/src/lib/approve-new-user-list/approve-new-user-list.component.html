@@ -47,21 +47,20 @@
         <td mat-cell *matCellDef="let element">{{ element.contactphone }}</td>
       </ng-container>
 
-      <!--
-        <ng-container matColumnDef="authorName">
-          <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล ผู้แต่งตั้ง</th>
-          <td mat-cell *matCellDef="let element">{{ element.authorName }}</td>
-        </ng-container>
+      <!-- <ng-container matColumnDef="coordinatorname">
+        <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล ผู้แต่งตั้ง</th>
+        <td mat-cell *matCellDef="let element">{{ element.authorName }}</td>
+      </ng-container> -->
 
-        <ng-container matColumnDef="school">
-          <th mat-header-cell *matHeaderCellDef>โรงเรียน/หน่วยงาน</th>
-          <td mat-cell *matCellDef="let element">{{ element.school }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="province">
+      <!--  <ng-container matColumnDef="province">
           <th mat-header-cell *matHeaderCellDef>จังหวัด</th>
           <td mat-cell *matCellDef="let element">{{ element.province }}</td>
         </ng-container> -->
+
+      <ng-container matColumnDef="schoolname">
+        <th mat-header-cell *matHeaderCellDef>โรงเรียน/หน่วยงาน</th>
+        <td mat-cell *matCellDef="let element">{{ element.schoolname }}</td>
+      </ng-container>
 
       <ng-container matColumnDef="requeststatus">
         <th mat-header-cell *matHeaderCellDef>สถานะ</th>
@@ -80,5 +79,12 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[10]"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements"
+    >
+    </mat-paginator>
   </div>
 </div>

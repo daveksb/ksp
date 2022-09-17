@@ -25,25 +25,27 @@
           <td mat-cell *matCellDef="let element">
             <i
               role="button"
-              (click)="goToDetail()"
+              (click)="goToDetail(element.id)"
               class="bi bi-pencil-square text-primary fs-5"
             ></i>
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="ssn">
+        <ng-container matColumnDef="idcardno">
           <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
-          <td mat-cell *matCellDef="let element">{{ element.ssn }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.idcardno }}</td>
         </ng-container>
 
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
-          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+          <td mat-cell *matCellDef="let element">
+            {{ element.firstnameth }} {{ element.lastnameth }}
+          </td>
         </ng-container>
 
-        <ng-container matColumnDef="school">
+        <ng-container matColumnDef="schoolname">
           <th mat-header-cell *matHeaderCellDef>โรงเรียน/หน่วยงาน</th>
-          <td mat-cell *matCellDef="let element">{{ element.school }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.schoolname }}</td>
         </ng-container>
 
         <ng-container matColumnDef="province">
@@ -51,24 +53,37 @@
           <td mat-cell *matCellDef="let element">{{ element.province }}</td>
         </ng-container>
 
-        <ng-container matColumnDef="status">
+        <ng-container matColumnDef="requeststatus">
           <th mat-header-cell *matHeaderCellDef>สถานะ</th>
-          <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+          <td mat-cell *matCellDef="let element">
+            {{ element.requeststatus }}
+          </td>
         </ng-container>
 
-        <ng-container matColumnDef="approveDate">
+        <ng-container matColumnDef="requestdate">
           <th mat-header-cell *matHeaderCellDef>วันที่อนุมัติ</th>
-          <td mat-cell *matCellDef="let element">{{ element.approveDate }}</td>
+          <td mat-cell *matCellDef="let element">
+            {{ element.requestdate | date }}
+          </td>
         </ng-container>
 
-        <ng-container matColumnDef="editDate">
+        <ng-container matColumnDef="updatedate">
           <th mat-header-cell *matHeaderCellDef>วันที่แก้ไข</th>
-          <td mat-cell *matCellDef="let element">{{ element.editDate }}</td>
+          <td mat-cell *matCellDef="let element">
+            {{ element.updatedate | date }}
+          </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
+
+      <mat-paginator
+        [pageSizeOptions]="[10]"
+        showFirstLastButtons
+        aria-label="Select page of periodic elements"
+      >
+      </mat-paginator>
     </div>
   </div>
 </form>
