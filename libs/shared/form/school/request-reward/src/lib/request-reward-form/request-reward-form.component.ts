@@ -30,20 +30,26 @@ import { providerFactory, thaiDate } from '@ksp/shared/utility';
   styleUrls: ['./request-reward-form.component.scss'],
   providers: providerFactory(RequestRewardFormComponent),
 })
-export class RequestRewardFormComponent
-  extends KspFormBaseComponent
-  implements OnInit
-{
+export class RequestRewardFormComponent extends KspFormBaseComponent {
   @Input() osoiTypes: any = [];
   @Input() personTypes: any = [];
   @Input() prefixList: any = [];
   @Input() requestNo = '';
+
+  @Input()
+  set memberList(members: MemberForm[]) {
+    //console.log('get members =', members);
+    members.map((member) => {
+      this.addRow(member);
+    });
+  }
 
   override form = this.fb.group({
     rewardname: [null, Validators.required],
     rewardtype: [null, Validators.required],
     submitbefore: [null, Validators.required],
     vdolink: [],
+    osoimember: this.fb.array([]),
     /*     personId: [''],
     prefix: [null],
     firstName: [''],
@@ -51,7 +57,6 @@ export class RequestRewardFormComponent
     phone: [''],
     email: [''],
     academicStanding: [''], */
-    osoimember: this.fb.array([]),
   });
 
   rewardFiles = [
@@ -79,26 +84,23 @@ export class RequestRewardFormComponent
     );
   }
 
-  ngOnInit(): void {
-    this.addRow();
-  }
-
   get members() {
     return this.form.controls.osoimember as FormArray;
   }
 
-  addRow() {
+  addRow(data: MemberForm = defaultMember) {
     const rewardForm = this.fb.group({
-      membertype: [null],
-      idcardno: [null],
-      prefix: [null],
-      firstName: [''],
-      lastName: [''],
-      phone: [''],
-      email: [''],
-      academicStanding: [''],
+      membertype: [data.membertype],
+      idcardno: [data.idcardno],
+      prefix: [data.prefix],
+      firstname: [data.firstname],
+      lastname: [data.lastname],
+      phone: [data.phone],
+      email: [data.email],
+      academicstanding: [data.academicstanding],
     });
 
+    //console.log('reward form = ', rewardForm);
     this.members.push(rewardForm);
   }
 }
@@ -114,3 +116,25 @@ export const rewards = [
     value: 3,
   },
 ];
+
+const defaultMember: MemberForm = {
+  membertype: null,
+  idcardno: null,
+  prefix: null,
+  firstname: null,
+  lastname: null,
+  phone: null,
+  email: null,
+  academicstanding: null,
+};
+
+export interface MemberForm {
+  membertype: string | null;
+  idcardno: string | null;
+  prefix: number | null;
+  firstname: string | null;
+  lastname: string | null;
+  phone: string | null;
+  email: string | null;
+  academicstanding: string | null;
+}

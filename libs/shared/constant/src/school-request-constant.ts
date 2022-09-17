@@ -1,3 +1,120 @@
+// ใช้ อ้างอิง tab ในหน้าใบคำขอเพื่อระบุรายการไฟล์ ที่เกี่ยวข้อง
+export enum RequestPageType {
+  educationTab = 'educationTab',
+  teachingTab = 'teachingTab',
+  reasonTab = 'reasonTab',
+  fileAttachTab = 'fileAttachTab',
+}
+
+export const SchoolRequestType = [
+  { id: 1, name: 'ขอยื่นผู้ประสานงาน' },
+  { id: 2, name: 'ขอยื่นถอดถอนผู้ประสานงาน' },
+  { id: 3, name: 'ขอหนังสืออนุญาตประกอบวิชาชีพ' },
+  { id: 4, name: 'ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ' },
+  { id: 5, name: 'ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ ไม่มีใบอนุญาต' },
+  { id: 6, name: 'ขอหนังสือรับรองคุณวุฒิ' },
+  { id: 40, name: 'ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม' },
+];
+
+// url params keep in db for temp license request
+export enum SchoolRequestSubType {
+  'ครู' = 1,
+  'ผู้บริหารสถานศึกษา' = 2,
+  'อื่นๆ' = 5,
+}
+
+// สถานะใบคำขอ
+export enum SchoolRequestProcess {
+  'กำลังสร้าง',
+  'ยื่นใบคำขอ',
+  'กำลังดำเนินการ',
+  'ปรับแก้ไข/เพิ่มเติม',
+  'ผ่านการตรวจสอบ',
+  'ผ่านการรับรอง/พิจารณา',
+  'ไม่ผ่านการรับรอง/พิจารณา',
+  'ส่งคืนและยกเลิก',
+  'หมดอายุ',
+  'ยกเลิก',
+}
+
+export enum UserInfoFormType {
+  'thai',
+  'foreign',
+  //'register',
+}
+
+export const RequestProcessStatus = [
+  //ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
+  {
+    requestType: 3,
+    processId: 1,
+    processName: { sname: 'สร้างใบคำขอ', ename: '' },
+    status: [
+      { id: 1, name: 'กำลังดำเนินการ' },
+      { id: 2, name: 'ยกเลิก' },
+    ],
+  },
+  {
+    requestType: 3,
+    processId: 2,
+    processName: { sname: 'สร้างและใบคำขอ', ename: 'รอการตรวจสอบ' },
+    status: [
+      { id: 1, name: 'กำลังดำเนินการ' },
+      { id: 2, name: 'ยกเลิก' },
+    ],
+  },
+  {
+    requestType: 3,
+    processId: 3,
+    processName: {
+      sname: 'ตรวจสอบเอกสาร ลำดับที่ 1',
+      ename: 'ตรวจสอบเอกสาร ลำดับที่ 1',
+    },
+    status: [
+      { id: 1, name: 'กำลังดำเนินการ' },
+      { id: 2, name: 'ปรับแก้ไข/เพิ่มเติม' },
+      { id: 3, name: 'ผ่านการตรวจสอบ' },
+      { id: 4, name: 'ไม่ผ่านการตรวจสอบ' },
+      { id: 5, name: 'ส่งคืนและยกเลิก' },
+    ],
+  },
+  {
+    requestType: 3,
+    processId: 4,
+    processName: {
+      sname: 'ตรวจสอบเอกสาร ลำดับที่ 2',
+      ename: 'ตรวจสอบเอกสาร ลำดับที่ 2',
+    },
+    status: [
+      { id: 1, name: 'กำลังดำเนินการ' },
+      { id: 2, name: 'ผ่านการรับรอง/พิจารณา' }, //ออกหนังสือ
+      { id: 3, name: 'ไม่ผ่านการรับรอง/พิจารณา' },
+    ],
+  },
+
+  //ขอสร้างเลขคุรุสภาสำหรับครูชาวต่างชาติ
+  {
+    requestType: 4,
+    processId: 1,
+    processName: { sname: 'สร้างและส่งใบคำขอ', ename: 'รอการตรวจสอบ' },
+    status: [
+      { id: 1, name: 'กำลังดำเนินการ' },
+      { id: 2, name: 'ยกเลิก' },
+    ],
+  },
+  {
+    requestType: 4,
+    processId: 2,
+    processName: { sname: 'ตรวจสอบเอกสาร', ename: 'ตรวจสอบเอกสาร' },
+    status: [
+      { id: 1, name: 'กำลังดำเนินการ' },
+      { id: 2, name: 'ผ่านการตรวจสอบ' }, // ออกเลขคุรุสภา
+      { id: 3, name: 'ไม่ผ่านการตรวจสอบ' },
+      { id: 4, name: 'ยกเลิก' },
+    ],
+  },
+];
+
 export const levels = [
   { label: 'ประกาศนียบัตรวิชาชีพ (ปวช.)', value: 'level6' },
   { label: 'ชั้นมัธยมปีที่ 1-3', value: 'level4' },
@@ -37,49 +154,3 @@ export const subjects = [
   { label: 'ประมง', value: 's16' },
   { label: 'อุตสาหกรรมท่องเที่ยว', value: 's17' },
 ];
-
-// ใช้ อ้างอิง tab ในหน้าใบคำขอเพื่อระบุรายการไฟล์ ที่เกี่ยวข้อง
-export enum RequestPageType {
-  educationTab = 'educationTab',
-  teachingTab = 'teachingTab',
-  reasonTab = 'reasonTab',
-  fileAttachTab = 'fileAttachTab',
-}
-
-export enum SchoolRequestType {
-  'ขอยื่นผู้ประสานงาน' = 1,
-  'ขอยื่นถอดถอนผู้ประสานงาน' = 2,
-  'ขอหนังสืออนุญาตประกอบวิชาชีพ' = 3,
-  'ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ' = 4,
-  'ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ ไม่มีใบอนุญาต' = 5,
-  'ขอหนังสือรับรองคุณวุฒิ' = 6,
-  //'ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One Innovation : OSOI)' = 40,
-  'ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม' = 40,
-}
-
-// url params keep in db for temp license request
-export enum SchoolRequestSubType {
-  'ครู' = 1,
-  'ผู้บริหารสถานศึกษา' = 2,
-  'อื่นๆ' = 5,
-}
-
-// สถานะใบคำขอ
-export enum SchoolRequestProcess {
-  'กำลังสร้าง',
-  'ยื่นใบคำขอ',
-  'กำลังดำเนินการ',
-  'ปรับแก้ไข/เพิ่มเติม',
-  'ผ่านการตรวจสอบ',
-  'ผ่านการรับรอง/พิจารณา',
-  'ไม่ผ่านการรับรอง/พิจารณา',
-  'ส่งคืนและยกเลิก',
-  'หมดอายุ',
-  'ยกเลิก',
-}
-
-export enum UserInfoFormType {
-  'thai',
-  'foreign',
-  //'register',
-}

@@ -215,7 +215,7 @@ export class QualificationDetailComponent implements OnInit {
             userInfo.ref2 = '06';
             userInfo.ref3 = '1';
             userInfo.systemtype = '2';
-            userInfo.requesttype = '06';
+            userInfo.requesttype = '6';
             userInfo.subtype = '1';
             userInfo.schoolid = this.schoolId;
             userInfo.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
@@ -245,7 +245,7 @@ export class QualificationDetailComponent implements OnInit {
       width: '350px',
       data: {
         header: 'ระบบทำการยกเลิกเรียบร้อย',
-        content: `วันที่ : ${this.requestDate} 
+        content: `วันที่ : ${this.requestDate}
         เลขที่คำขอ : ${this.requestNumber}`,
       },
     });
