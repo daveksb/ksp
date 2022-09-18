@@ -39,9 +39,11 @@ export class RequestRewardFormComponent extends KspFormBaseComponent {
   @Input()
   set memberList(members: MemberForm[]) {
     //console.log('get members =', members);
-    members.map((member) => {
-      this.addRow(member);
-    });
+    if (members && members.length) {
+      members.map((member) => {
+        this.addRow(member);
+      });
+    }
   }
 
   override form = this.fb.group({

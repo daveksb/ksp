@@ -28,9 +28,13 @@
     [showCancelButton]="true"
     [showSaveButton]="true"
     [showTempSaveButton]="true"
-    [disableSaveButton]="!form.valid"
+    [disableSaveButton]="false"
     (cancelClicked)="cancel()"
-    (saveClicked)="createRequest(form.value.reward)"
+    (tempSaveClicked)="onTempSave()"
+    (saveClicked)="onPermanentSave()"
     [saveButtonLabel]="'บันทึกและตรวจสอบ'"
   ></ksp-bottom-nav>
+  <!-- [disableSaveButton]="!form.valid"
+  (saveClicked)="createRequest(form.value.reward)"
+  -->
 </div>

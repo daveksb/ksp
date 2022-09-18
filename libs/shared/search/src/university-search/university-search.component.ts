@@ -9,7 +9,7 @@ import {
 import {
   AddressService,
   GeneralInfoService,
-  RequestLicenseService,
+  RequestService,
 } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 import { BasicInstituteSearchComponent } from '../basic-institute-search/basic-institute-search.component';
@@ -56,7 +56,7 @@ export class UniversitySearchComponent implements OnInit {
     },
     private fb: FormBuilder,
     private addressService: AddressService,
-    private requestLicenseService: RequestLicenseService,
+    private requestService: RequestService,
     private generalInfoService: GeneralInfoService,
     public dialogRef: MatDialogRef<UniversitySearchComponent>
   ) {}
@@ -89,7 +89,7 @@ export class UniversitySearchComponent implements OnInit {
       row,
     };
     this.currentPage = 1;
-    this.requestLicenseService.seachSchool(payload).subscribe((res) => {
+    this.requestService.seachSchool(payload).subscribe((res) => {
       this.Data = this.generateAddressShow(res);
       this.payload = payload;
     });
@@ -130,7 +130,7 @@ export class UniversitySearchComponent implements OnInit {
     const { offset, ...payload } = this.payload;
     payload.offset = parseInt(offset) - parseInt(payload.row);
     payload.offset = payload.offset.toString();
-    this.requestLicenseService.seachSchool(payload).subscribe((res) => {
+    this.requestService.seachSchool(payload).subscribe((res) => {
       this.currentPage -= 1;
       this.Data = this.generateAddressShow(res);
       this.payload = payload;
@@ -141,7 +141,7 @@ export class UniversitySearchComponent implements OnInit {
     const { offset, ...payload } = this.payload;
     payload.offset = parseInt(offset) + parseInt(payload.row);
     payload.offset = payload.offset.toString();
-    this.requestLicenseService.seachSchool(payload).subscribe((res) => {
+    this.requestService.seachSchool(payload).subscribe((res) => {
       this.currentPage += 1;
       this.Data = this.generateAddressShow(res);
       this.payload = payload;

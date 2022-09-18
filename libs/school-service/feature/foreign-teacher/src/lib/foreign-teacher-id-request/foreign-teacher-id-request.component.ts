@@ -11,7 +11,7 @@ import { EMPTY, Observable, switchMap } from 'rxjs';
 import {
   AddressService,
   GeneralInfoService,
-  RequestLicenseService,
+  RequestService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { thaiDate } from '@ksp/shared/utility';
@@ -44,7 +44,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
-    private requestLicenseService: RequestLicenseService,
+    private requestService: RequestService,
     private route: ActivatedRoute
   ) {}
   get formValid() {
@@ -66,7 +66,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     });
   }
   loadRequestData(id: number) {
-    this.requestLicenseService.getRequestById(id).subscribe((res: any) => {
+    this.requestService.getRequestById(id).subscribe((res: any) => {
       if (res) {
         this.mode = 'view';
         this.requestNumber = res.requestno;
@@ -99,7 +99,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
                 id: `${this.requestId}`,
                 currentprocess: `${SchoolRequestProcess.ยกเลิก}`,
               };
-              return this.requestLicenseService.changeRequestProcess(payload);
+              return this.requestService.changeRequestProcess(payload);
             }
             return EMPTY;
           })
@@ -116,7 +116,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       width: '350px',
       data: {
         header: 'ระบบทำการยกเลิกเรียบร้อย',
-        content: `วันที่ : ${this.requestDate} 
+        content: `วันที่ : ${this.requestDate}
         เลขที่คำขอ : ${this.requestNumber}`,
       },
     });
@@ -161,7 +161,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             userInfo.schoolid = this.schoolId;
             userInfo.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
             userInfo.visainfo = JSON.stringify(this.form.value.visainfo);
-            return this.requestLicenseService.requestLicense(userInfo);
+            return this.requestService.createRequest(userInfo);
           }
           return EMPTY;
         })
@@ -188,7 +188,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     });
   }
   getList() {
-    this.requestLicenseService
+    this.requestService
       .getSchoolInfo(this.schoolId)
       .pipe(untilDestroyed(this))
       .subscribe((res: any) => {

@@ -24,7 +24,7 @@ import { SchoolRequest } from '@ksp/shared/interface';
 import {
   AddressService,
   GeneralInfoService,
-  RequestLicenseService,
+  RequestService,
   SchoolInfoService,
   StaffService,
 } from '@ksp/shared/service';
@@ -109,7 +109,7 @@ export class SchoolRequestComponent implements OnInit {
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
     private staffService: StaffService,
-    private requestService: RequestLicenseService
+    private requestService: RequestService
   ) {}
 
   ngOnInit(): void {
@@ -241,7 +241,7 @@ export class SchoolRequestComponent implements OnInit {
 
     baseForm.patchValue(payload);
     //console.log('current form = ', baseForm.value);
-    this.requestService.requestLicense(baseForm.value).subscribe((res) => {
+    this.requestService.createRequest(baseForm.value).subscribe((res) => {
       this.backToListPage();
     });
   }

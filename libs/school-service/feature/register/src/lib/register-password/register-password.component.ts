@@ -8,7 +8,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { FormMode } from '@ksp/shared/interface';
-import { GeneralInfoService, RequestLicenseService } from '@ksp/shared/service';
+import { GeneralInfoService, RequestService } from '@ksp/shared/service';
 import { EMPTY, Observable, switchMap } from 'rxjs';
 import localForage from 'localforage';
 import { thaiDate } from '@ksp/shared/utility';
@@ -46,7 +46,7 @@ export class RegisterPasswordComponent implements OnInit {
     public dialog: MatDialog,
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService,
-    private requestLicenseService: RequestLicenseService
+    private requestService: RequestService
   ) {}
 
   ngOnInit(): void {
@@ -129,7 +129,7 @@ export class RegisterPasswordComponent implements OnInit {
             payload.systemtype = '2';
             payload.requesttype = '1';
             payload.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
-            return this.requestLicenseService.requestLicense(payload);
+            return this.requestService.createRequest(payload);
           }
           return EMPTY;
         })
