@@ -3,7 +3,11 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import { FormMode } from '@ksp/shared/interface';
-import { GeneralInfoService, RequestService } from '@ksp/shared/service';
+import {
+  GeneralInfoService,
+  RequestService,
+  SchoolInfoService,
+} from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable, switchMap } from 'rxjs';
@@ -41,7 +45,7 @@ export class RegisterRequesterComponent implements OnInit {
     private fb: FormBuilder,
     public router: Router,
     private generalInfoService: GeneralInfoService,
-    private requestService: RequestService,
+    private schoolInfoService: SchoolInfoService,
     private route: ActivatedRoute
   ) {}
   ngOnInit(): void {
@@ -64,7 +68,7 @@ export class RegisterRequesterComponent implements OnInit {
       .pipe(
         switchMap((params: any) => {
           const schoolid = params.get('id');
-          return this.requestService
+          return this.schoolInfoService
             .getSchoolInfo(schoolid)
             .pipe(untilDestroyed(this));
         })

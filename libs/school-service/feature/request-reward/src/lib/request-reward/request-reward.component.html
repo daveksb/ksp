@@ -21,7 +21,7 @@
 
 <div class="sticky-bottom border">
   <ksp-bottom-nav
-    [isFirstPage]="true"
+    [isFirstPage]="false"
     [colorMode]="'blue'"
     [isLastPage]="true"
     [showCenterButtons]="true"
@@ -30,12 +30,10 @@
     [showTempSaveButton]="true"
     [disableSaveButton]="disablePermanentSave"
     [disableTempSaveButton]="disableTempSave"
-    (cancelClicked)="cancel()"
+    (prevClicked)="previousPage()"
+    (cancelClicked)="cancelRequest()"
     (tempSaveClicked)="onTempSave()"
     (saveClicked)="onPermanentSave()"
     [saveButtonLabel]="'บันทึกและตรวจสอบ'"
   ></ksp-bottom-nav>
-  <!-- [disableSaveButton]="!form.valid"
-  (saveClicked)="createRequest(form.value.reward)"
-  -->
 </div>

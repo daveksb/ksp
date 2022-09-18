@@ -108,6 +108,10 @@ export class RequestRewardComponent implements OnInit {
     }
   }
 
+  cancelRequest() {
+    //
+  }
+
   loadRequestFromId(id: number) {
     this.requestService.getRequestById(id).subscribe((res) => {
       console.log('res = ', res);
@@ -189,7 +193,7 @@ export class RequestRewardComponent implements OnInit {
     this.prefixList$ = this.generalInfoService.getPrefix();
   }
 
-  cancel() {
+  previousPage() {
     this.router.navigate(['/temp-license', 'list']);
   }
 
@@ -219,7 +223,7 @@ export class RequestRewardComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.cancel();
+        this.previousPage();
       }
     });
   }

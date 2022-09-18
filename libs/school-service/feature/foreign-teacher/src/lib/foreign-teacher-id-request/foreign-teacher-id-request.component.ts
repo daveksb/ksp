@@ -12,6 +12,7 @@ import {
   AddressService,
   GeneralInfoService,
   RequestService,
+  SchoolInfoService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { thaiDate } from '@ksp/shared/utility';
@@ -45,6 +46,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
     private requestService: RequestService,
+    private schoolInfoService: SchoolInfoService,
     private route: ActivatedRoute
   ) {}
   get formValid() {
@@ -188,7 +190,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     });
   }
   getList() {
-    this.requestService
+    this.schoolInfoService
       .getSchoolInfo(this.schoolId)
       .pipe(untilDestroyed(this))
       .subscribe((res: any) => {

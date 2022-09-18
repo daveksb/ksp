@@ -43,4 +43,13 @@ export class SchoolInfoService {
         map((data: any) => data.datareturn)
       );
   }
+
+  seachSchool(payload: any): Observable<any> {
+    return this.http
+      .post(`${environment.apiUrl}/kspstaff/schschoolselect`, payload)
+      .pipe(
+        shareReplay(),
+        map((data: any) => data.datareturn)
+      );
+  }
 }

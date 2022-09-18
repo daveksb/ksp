@@ -31,14 +31,6 @@ export class RequestService {
     );
   }
 
-  getSchoolInfo(schoolId: string): Observable<any> {
-    return this.http
-      .get(
-        `${environment.apiUrl}/kspschoolregister/schschoolsearchschoolid?schoolId=${schoolId}`
-      )
-      .pipe(shareReplay());
-  }
-
   searchRequest(payload: any): Observable<any> {
     return this.http
       .post(`${environment.apiUrl}/kspstaff/schrequestsearch`, payload)
@@ -76,15 +68,6 @@ export class RequestService {
         id: `${id}`,
       }
     );
-  }
-
-  seachSchool(payload: any): Observable<any> {
-    return this.http
-      .post(`${environment.apiUrl}/kspstaff/schschoolselect`, payload)
-      .pipe(
-        shareReplay(),
-        map((data: any) => data.datareturn)
-      );
   }
 
   loadFile(payload: any) {
