@@ -9,7 +9,8 @@ import {
 import {
   AddressService,
   GeneralInfoService,
-  RequestLicenseService,
+  RequestService,
+  SchoolInfoService,
 } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 import { BasicInstituteSearchComponent } from '../basic-institute-search/basic-institute-search.component';
@@ -56,7 +57,8 @@ export class UniversitySearchComponent implements OnInit {
     },
     private fb: FormBuilder,
     private addressService: AddressService,
-    private requestLicenseService: RequestLicenseService,
+    private requestService: RequestService,
+    private schoolInfoService: SchoolInfoService,
     private generalInfoService: GeneralInfoService,
     public dialogRef: MatDialogRef<UniversitySearchComponent>
   ) {}
@@ -89,7 +91,7 @@ export class UniversitySearchComponent implements OnInit {
       row,
     };
     this.currentPage = 1;
-    this.requestLicenseService.seachSchool(payload).subscribe((res) => {
+    this.schoolInfoService.seachSchool(payload).subscribe((res: any) => {
       this.Data = this.generateAddressShow(res);
       this.payload = payload;
     });
@@ -130,7 +132,7 @@ export class UniversitySearchComponent implements OnInit {
     const { offset, ...payload } = this.payload;
     payload.offset = parseInt(offset) - parseInt(payload.row);
     payload.offset = payload.offset.toString();
-    this.requestLicenseService.seachSchool(payload).subscribe((res) => {
+    this.schoolInfoService.seachSchool(payload).subscribe((res) => {
       this.currentPage -= 1;
       this.Data = this.generateAddressShow(res);
       this.payload = payload;
@@ -141,7 +143,7 @@ export class UniversitySearchComponent implements OnInit {
     const { offset, ...payload } = this.payload;
     payload.offset = parseInt(offset) + parseInt(payload.row);
     payload.offset = payload.offset.toString();
-    this.requestLicenseService.seachSchool(payload).subscribe((res) => {
+    this.schoolInfoService.seachSchool(payload).subscribe((res) => {
       this.currentPage += 1;
       this.Data = this.generateAddressShow(res);
       this.payload = payload;

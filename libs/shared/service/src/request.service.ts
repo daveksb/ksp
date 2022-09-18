@@ -1,15 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
+import { SchoolRequest } from '@ksp/shared/interface';
 import { map, Observable, shareReplay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class RequestLicenseService {
+export class RequestService {
   constructor(private http: HttpClient) {}
 
-  requestLicense(form: any): Observable<any> {
+  createRequest(form: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspstaff/schrequestinsert`,
       form
@@ -30,12 +31,11 @@ export class RequestLicenseService {
     );
   }
 
-  getSchoolInfo(schoolId: string): Observable<any> {
-    return this.http
-      .get(
-        `${environment.apiUrl}/kspschoolregister/schschoolsearchschoolid?schoolId=${schoolId}`
-      )
-      .pipe(shareReplay());
+  changeRequestStatus(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspstaff/schrequestupdaterequeststatus`,
+      payload
+    );
   }
 
   searchRequest(payload: any): Observable<any> {
@@ -59,8 +59,6 @@ export class RequestLicenseService {
       );
   }
 
-  //https://kspapi.oceanicnetwork.net/ksp/kspstaff/schrequestsearchjoinschschool
-
   searchLicenseRequest(payload: any): Observable<any> {
     return this.http
       .post(`${environment.apiUrl}/e-service/requestsearch`, payload)
@@ -70,37 +68,18 @@ export class RequestLicenseService {
       );
   }
 
-  //https://kspapi.oceanicnetwork.net/ksp/e-service/request-search
-
-  getRequestById(id: number) {
-    return this.http
-      .post(`${environment.apiUrl}/kspstaff/schrequestselectidall`, {
+  getRequestById(id: number): Observable<SchoolRequest> {
+    return this.http.post<SchoolRequest>(
+      `${environment.apiUrl}/kspstaff/schrequestselectidall`,
+      {
         id: `${id}`,
-      })
-      .pipe(
-        shareReplay()
-        //map((data: any) => data.datareturn)
-      );
-  }
-  
-  seachSchool(payload: any): Observable<any> {
-    return this.http
-      .post(`${environment.apiUrl}/kspstaff/schschoolselect`, payload)
-      .pipe(
-        shareReplay(),
-        map((data: any) => data.datareturn)
-      );
+      }
+    );
   }
 
   loadFile(payload: any) {
     return this.http
       .post(`${environment.apiUrl}/kspstaff/schrequestfileselectbyid`, payload)
-      .pipe(shareReplay());
-  }
-
-  getActiveUserSchool(payload: any): Observable<any> {
-    return this.http
-      .post(`${environment.apiUrl}/kspstaff/schschoolselect`, payload)
       .pipe(shareReplay());
   }
 }

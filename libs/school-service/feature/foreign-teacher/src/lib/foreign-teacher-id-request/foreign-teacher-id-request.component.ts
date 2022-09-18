@@ -11,11 +11,12 @@ import { EMPTY, Observable, switchMap } from 'rxjs';
 import {
   AddressService,
   GeneralInfoService,
-  RequestLicenseService,
+  RequestService,
+  SchoolInfoService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { thaiDate } from '@ksp/shared/utility';
-import { SchoolRequestProcess } from '@ksp/shared/constant';
+
 @UntilDestroy()
 @Component({
   templateUrl: './foreign-teacher-id-request.component.html',
@@ -44,7 +45,8 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
-    private requestLicenseService: RequestLicenseService,
+    private requestService: RequestService,
+    private schoolInfoService: SchoolInfoService,
     private route: ActivatedRoute
   ) {}
   get formValid() {
@@ -66,7 +68,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     });
   }
   loadRequestData(id: number) {
-    this.requestLicenseService.getRequestById(id).subscribe((res: any) => {
+    this.requestService.getRequestById(id).subscribe((res: any) => {
       if (res) {
         this.mode = 'view';
         this.requestNumber = res.requestno;
@@ -97,9 +99,9 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             if (res) {
               const payload = {
                 id: `${this.requestId}`,
-                currentprocess: `${SchoolRequestProcess.ยกเลิก}`,
+                currentprocess: `0`,
               };
-              return this.requestLicenseService.changeRequestProcess(payload);
+              return this.requestService.changeRequestProcess(payload);
             }
             return EMPTY;
           })
@@ -116,7 +118,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       width: '350px',
       data: {
         header: 'ระบบทำการยกเลิกเรียบร้อย',
-        content: `วันที่ : ${this.requestDate} 
+        content: `วันที่ : ${this.requestDate}
         เลขที่คำขอ : ${this.requestNumber}`,
       },
     });
@@ -132,6 +134,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       this.router.navigate(['/temp-license']);
     }
   }
+
   onConfirmed() {
     if (
       !this.form.get('foreignTeacher')?.valid ||
@@ -159,9 +162,9 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             userInfo.requesttype = '4';
             userInfo.subtype = '1';
             userInfo.schoolid = this.schoolId;
-            userInfo.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
+            userInfo.currentprocess = `1`;
             userInfo.visainfo = JSON.stringify(this.form.value.visainfo);
-            return this.requestLicenseService.requestLicense(userInfo);
+            return this.requestService.createRequest(userInfo);
           }
           return EMPTY;
         })
@@ -188,7 +191,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     });
   }
   getList() {
-    this.requestLicenseService
+    this.schoolInfoService
       .getSchoolInfo(this.schoolId)
       .pipe(untilDestroyed(this))
       .subscribe((res: any) => {

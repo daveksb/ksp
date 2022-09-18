@@ -15,7 +15,7 @@ import {
   LicenseRequestService as RequestLicenseService,
 } from '@ksp/shared/service';
 import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
-import { defaultRequestPayload } from '@ksp/shared/interface';
+import { SchoolRequest } from '@ksp/shared/interface';
 import { LicenseFormBaseComponent } from '../license-form-base.component';
 
 @UntilDestroy()
@@ -102,7 +102,7 @@ export class LicenseRequestSchoolManagerComponent
   }
 
   createRequest(forbidden: any, currentProcess: string) {
-    const baseForm = this.fb.group(defaultRequestPayload);
+    const baseForm = this.fb.group(SchoolRequest);
     const formData: any = this.form.getRawValue();
     if (formData?.address1?.addressType) formData.address1.addresstype = 1;
     if (formData?.address2?.addressType) formData.address2.addresstype = 2;
