@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
-  SchoolRequestProcess,
+  RequestProcessStatus,
   SchoolRequestSubType,
   SchoolRequestType,
 } from '@ksp/shared/constant';
@@ -36,7 +36,7 @@ export class SchoolRequestListComponent implements OnInit {
     'approvedoc',
   ];
   dataSource = new MatTableDataSource<TempLicenseInfo>();
-  SchoolRequestProcess = SchoolRequestProcess;
+  //SchoolRequestProcess = SchoolRequestProcess;
   SchoolRequestType = SchoolRequestType;
   SchoolRequestSubType = SchoolRequestSubType;
   currentPage = 0;
@@ -160,6 +160,22 @@ export class SchoolRequestListComponent implements OnInit {
     } else {
       this.router.navigate(['/request-reward', 'detail']);
     }
+  }
+
+  checkProcess(processId: number) {
+    const process = RequestProcessStatus.find((p) => {
+      return p.processId === processId && p.requestType === 3;
+    });
+
+    return process;
+  }
+
+  checkStatus(processId: number, statusId: number) {
+    const process = this.checkProcess(processId);
+    const status = process?.status.find((s) => {
+      return (s.id = statusId);
+    });
+    return status;
   }
 }
 

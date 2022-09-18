@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { RequestService } from '@ksp/shared/service';
+import { SchoolInfoService } from '@ksp/shared/service';
 import localForage from 'localforage';
 
 @Component({
@@ -10,7 +10,10 @@ import localForage from 'localforage';
 export class RegisterCurrentUserComponent {
   activeUser = '';
   school!: any;
-  constructor(public router: Router, private requestService: RequestService) {}
+  constructor(
+    public router: Router,
+    private schoolInfoService: SchoolInfoService
+  ) {}
 
   next() {
     this.router.navigate(['/register', 'requester']);
@@ -24,8 +27,8 @@ export class RegisterCurrentUserComponent {
     this.school = school;
     localForage.setItem('registerSelectedSchool', school);
 
-    this.requestService
-      .getActiveUserSchool({ schoolid: school.schoolId })
+    this.schoolInfoService
+      .searchUserLogin({ schoolid: school.schoolId })
       .subscribe((res) => {
         if (res?.returncode == 98) {
           if (res?.returnmessage == 'no data') this.next();

@@ -9,7 +9,6 @@ import {
   RequestPageType,
   RequestReasonFiles,
   RequestTeachingFiles,
-  SchoolRequestProcess,
   SchoolRequestSubType,
   subjects,
   UserInfoFormType,
@@ -70,7 +69,7 @@ export class SchoolRequestComponent implements OnInit {
   requestLabel = 'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ';
   requestNo = '';
   currentProcess!: number;
-  processEnum = SchoolRequestProcess;
+  //processEnum = SchoolRequestProcess;
 
   disableTempSave = true;
   disableSave = true;
@@ -167,7 +166,7 @@ export class SchoolRequestComponent implements OnInit {
   cancelRequest() {
     const payload = {
       id: `${this.requestId}`,
-      currentprocess: `${SchoolRequestProcess.ยกเลิก}`,
+      currentprocess: `0`,
     };
     this.requestService.changeRequestProcess(payload).subscribe((res) => {
       //console.log('Cancel request  = ', res);
@@ -185,9 +184,9 @@ export class SchoolRequestComponent implements OnInit {
     userInfo.schoolid = this.schoolId;
 
     if (this.requestId) {
-      userInfo.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
+      userInfo.currentprocess = `1`;
     } else {
-      userInfo.currentprocess = `${SchoolRequestProcess.ยื่นใบคำขอ}`;
+      userInfo.currentprocess = `2`;
     }
 
     userInfo.ref1 = `${this.systemType}`;
@@ -233,9 +232,9 @@ export class SchoolRequestComponent implements OnInit {
     };
 
     if (type == 'submit') {
-      payload.currentprocess = `${SchoolRequestProcess.ยื่นใบคำขอ}`;
+      payload.currentprocess = `2`;
     } else {
-      payload.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
+      payload.currentprocess = `1`;
     }
     //console.log('payload = ', payload);
 
@@ -251,7 +250,8 @@ export class SchoolRequestComponent implements OnInit {
     const formData: any = this.form.getRawValue();
 
     const userInfo = formData.userInfo;
-    userInfo.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
+    userInfo.currentprocess = `1`;
+    userInfo.requeststatus = `1`;
     userInfo.systemtype = `${this.systemType}`;
     userInfo.requesttype = `${this.requestType}`;
     userInfo.subtype = `${this.requestSubType}`;
@@ -311,9 +311,11 @@ export class SchoolRequestComponent implements OnInit {
     res.id = `${this.requestId}`;
     res.schoolid = this.schoolId;
     if (type === 'submit') {
-      res.currentprocess = `${SchoolRequestProcess.ยื่นใบคำขอ}`;
+      res.currentprocess = `2`;
+      res.requeststatus = '1';
     } else {
-      res.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
+      res.currentprocess = `1`;
+      res.requeststatus = '1';
     }
 
     //console.log('update payload = ', res);
@@ -342,20 +344,14 @@ export class SchoolRequestComponent implements OnInit {
       //console.log('userInfo valid = ', this.form.controls.userInfo.valid);
       //console.log('form valid = ', this.form.valid);
 
-      // formValid + สถานะเป็นยื่นใบคำขอ, บันทึกชั่วคราวไม่ได้ ส่งใบคำขอไม่ได้
-      if (
-        this.form.valid &&
-        this.currentProcess === SchoolRequestProcess.ยื่นใบคำขอ
-      ) {
+      // formValid + สถานะเป็นสร้างและส่งใบคำขอ, บันทึกชั่วคราวไม่ได้ ส่งใบคำขอไม่ได้
+      if (this.form.valid && this.currentProcess === 2) {
         this.disableTempSave = true;
         this.disableSave = true;
       }
 
-      // formValid + สถานะเป็นบันทึกชั่วคราว, บันทึกชั่วคราวได้ ส่งใบคำขอได้
-      if (
-        this.form.valid &&
-        this.currentProcess === SchoolRequestProcess.กำลังสร้าง
-      ) {
+      // formValid + สถานะเป็นสร้างใบคำขอ, บันทึกชั่วคราวได้ ส่งใบคำขอได้
+      if (this.form.valid && this.currentProcess === 1) {
         this.disableTempSave = false;
         this.disableSave = false;
       }
@@ -368,7 +364,7 @@ export class SchoolRequestComponent implements OnInit {
 
       // มีหมายเลขใบคำขอแล้ว enable ปุ่มยกเลิก
       if (this.requestId) {
-        if (this.currentProcess === SchoolRequestProcess.ยกเลิก) {
+        if (this.currentProcess === 0) {
           this.disableCancel = true;
         } else {
           this.disableCancel = false;

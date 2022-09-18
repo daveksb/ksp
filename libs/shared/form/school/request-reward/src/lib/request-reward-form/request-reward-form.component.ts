@@ -34,7 +34,7 @@ export class RequestRewardFormComponent extends KspFormBaseComponent {
   @Input() osoiTypes: any = [];
   @Input() personTypes: any = [];
   @Input() prefixList: any = [];
-  @Input() requestNo = '';
+  @Input() requestNo: string | null = null;
 
   @Input()
   set memberList(members: MemberForm[]) {
@@ -71,11 +71,7 @@ export class RequestRewardFormComponent extends KspFormBaseComponent {
   rewards = rewards;
   today = thaiDate(new Date());
 
-  constructor(
-    //private router: Router,
-    public dialog: MatDialog,
-    private fb: FormBuilder
-  ) {
+  constructor(public dialog: MatDialog, private fb: FormBuilder) {
     super();
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change

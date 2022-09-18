@@ -21,20 +21,20 @@
 
 <div class="sticky-bottom border">
   <ksp-bottom-nav
-    [isFirstPage]="true"
+    [isFirstPage]="false"
     [colorMode]="'blue'"
     [isLastPage]="true"
     [showCenterButtons]="true"
-    [showCancelButton]="true"
+    [showCancelButton]="this.requestId > 0"
     [showSaveButton]="true"
     [showTempSaveButton]="true"
-    [disableSaveButton]="false"
-    (cancelClicked)="cancel()"
+    [disableCancelButton]="disableCancel"
+    [disableSaveButton]="disablePermanentSave"
+    [disableTempSaveButton]="disableTempSave"
+    (prevClicked)="previousPage()"
+    (cancelClicked)="cancelRequest()"
     (tempSaveClicked)="onTempSave()"
     (saveClicked)="onPermanentSave()"
     [saveButtonLabel]="'บันทึกและตรวจสอบ'"
   ></ksp-bottom-nav>
-  <!-- [disableSaveButton]="!form.valid"
-  (saveClicked)="createRequest(form.value.reward)"
-  -->
 </div>

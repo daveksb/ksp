@@ -23,20 +23,6 @@ export enum SchoolRequestSubType {
   'อื่นๆ' = 5,
 }
 
-// สถานะใบคำขอ
-export enum SchoolRequestProcess {
-  'กำลังสร้าง',
-  'ยื่นใบคำขอ',
-  'กำลังดำเนินการ',
-  'ปรับแก้ไข/เพิ่มเติม',
-  'ผ่านการตรวจสอบ',
-  'ผ่านการรับรอง/พิจารณา',
-  'ไม่ผ่านการรับรอง/พิจารณา',
-  'ส่งคืนและยกเลิก',
-  'หมดอายุ',
-  'ยกเลิก',
-}
-
 export enum UserInfoFormType {
   'thai',
   'foreign',
@@ -45,6 +31,12 @@ export enum UserInfoFormType {
 
 export const RequestProcessStatus = [
   //ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
+  {
+    requestType: 3,
+    processId: 0,
+    processName: 'ยกเลิก',
+    status: [{ id: 1, sname: 'ยกเลิก', ename: 'ยกเลิก' }],
+  },
   {
     requestType: 3,
     processId: 1,
@@ -91,6 +83,12 @@ export const RequestProcessStatus = [
   //ขอสร้างเลขคุรุสภาสำหรับครูชาวต่างชาติ
   {
     requestType: 4,
+    processId: 0,
+    processName: 'ยกเลิก',
+    status: [{ id: 1, sname: 'ยกเลิก', ename: 'ยกเลิก' }],
+  },
+  {
+    requestType: 4,
     processId: 1,
     processName: 'สร้างและส่งใบคำขอ',
     status: [
@@ -111,6 +109,12 @@ export const RequestProcessStatus = [
   },
 
   //ขอหนังสือรับรองคุณวุฒิการศึกษา
+  {
+    requestType: 6,
+    processId: 0,
+    processName: 'ยกเลิก',
+    status: [{ id: 1, sname: 'ยกเลิก', ename: 'ยกเลิก' }],
+  },
   {
     requestType: 6,
     processId: 1,
@@ -148,6 +152,12 @@ export const RequestProcessStatus = [
   },
 
   //ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม
+  {
+    requestType: 40,
+    processId: 0,
+    processName: 'ยกเลิก',
+    status: [{ id: 1, sname: 'ยกเลิก', ename: 'ยกเลิก' }],
+  },
   {
     requestType: 40,
     processId: 1,

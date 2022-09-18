@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SchoolRequestProcess, UserInfoFormType } from '@ksp/shared/constant';
+import { UserInfoFormType } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -134,7 +134,7 @@ export class QualificationDetailComponent implements OnInit {
             if (res) {
               const payload = {
                 id: `${this.requestId}`,
-                currentprocess: `${SchoolRequestProcess.ยกเลิก}`,
+                currentprocess: `0`,
               };
               return this.requestService.changeRequestProcess(payload);
             }
@@ -218,7 +218,7 @@ export class QualificationDetailComponent implements OnInit {
             userInfo.requesttype = '6';
             userInfo.subtype = '1';
             userInfo.schoolid = this.schoolId;
-            userInfo.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
+            userInfo.currentprocess = `1`;
             const payload = {
               ...userInfo,
               ...{
