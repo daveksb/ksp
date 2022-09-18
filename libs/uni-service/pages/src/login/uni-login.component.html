@@ -5,12 +5,14 @@
       <div class="fs-1 mt-1">ระบบบริการสถาบันผลิตครู (Uni Service)</div>
       <div class="fs-2 mt-3 text-orange">เข้าสู่ระบบใช้งาน</div>
     </div>
-
-    <ksp-login-form
-      (login)="login()"
-      (register)="register()"
-      (forgetPassword)="forgetPassword()"
-    ></ksp-login-form>
+    <form [formGroup]="form">
+      <ksp-login-form
+        (login)="login()"
+        (register)="register()"
+        (forgetPassword)="forgetPassword()"
+        formControlName="user"
+      ></ksp-login-form>
+    </form>
 
     <div class="grid gap-3 mt-4" style="min-width: 350px">
       <div class="g-col-6">
