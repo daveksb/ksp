@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
+import {
+  RequestProcessStatus,
+  SchoolRequestSubType,
+  SchoolRequestType,
+} from '@ksp/shared/constant';
 import { RequestService, SchoolInfoService } from '@ksp/shared/service';
 import { replaceEmptyWithNull } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
@@ -156,6 +160,22 @@ export class SchoolRequestListComponent implements OnInit {
     } else {
       this.router.navigate(['/request-reward', 'detail']);
     }
+  }
+
+  checkProcess(processId: number) {
+    const process = RequestProcessStatus.find((p) => {
+      return p.processId === processId && p.requestType === 3;
+    });
+
+    return process;
+  }
+
+  checkStatus(processId: number, statusId: number) {
+    const process = this.checkProcess(processId);
+    const status = process?.status.find((s) => {
+      return (s.id = statusId);
+    });
+    return status;
   }
 }
 
