@@ -31,6 +31,13 @@ export class RequestService {
     );
   }
 
+  changeRequestStatus(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspstaff/schrequestupdaterequeststatus`,
+      payload
+    );
+  }
+
   searchRequest(payload: any): Observable<any> {
     return this.http
       .post(`${environment.apiUrl}/kspstaff/schrequestsearch`, payload)
@@ -73,12 +80,6 @@ export class RequestService {
   loadFile(payload: any) {
     return this.http
       .post(`${environment.apiUrl}/kspstaff/schrequestfileselectbyid`, payload)
-      .pipe(shareReplay());
-  }
-
-  getActiveUserSchool(payload: any): Observable<any> {
-    return this.http
-      .post(`${environment.apiUrl}/kspstaff/schschoolselect`, payload)
       .pipe(shareReplay());
   }
 }
