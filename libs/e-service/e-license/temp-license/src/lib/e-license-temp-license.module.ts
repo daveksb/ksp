@@ -18,7 +18,7 @@ import {
 } from '@ksp/shared/form/others';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
-import { TempLicenseSearchComponent } from '@ksp/shared/search';
+import { RequestSearchComponent } from '@ksp/shared/search';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TempLicenseApproveListComponent } from './temp-license-approve-list/temp-license-approve-list.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -36,7 +36,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatTableModule,
     MatIconModule,
     LicenseCheckComponent,
-    TempLicenseSearchComponent,
+    RequestSearchComponent,
     ReactiveFormsModule,
     FormTempLicenseNumberComponent,
     MatPaginatorModule,

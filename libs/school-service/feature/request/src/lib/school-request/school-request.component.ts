@@ -19,7 +19,8 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
-import { defaultRequestPayload } from '@ksp/shared/interface';
+import { SchoolRequest } from '@ksp/shared/interface';
+
 import {
   AddressService,
   GeneralInfoService,
@@ -175,7 +176,7 @@ export class SchoolRequestComponent implements OnInit {
 
   createRequest(type: string) {
     //console.log('create request = ');
-    const baseForm = this.fb.group(defaultRequestPayload);
+    const baseForm = this.fb.group(new SchoolRequest());
     const formData: any = this.form.getRawValue();
     formData.addr1.addresstype = 1;
     formData.addr2.addresstype = 2;
@@ -246,7 +247,7 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   updateRequest(type: string) {
-    const baseForm = this.fb.group(defaultRequestPayload);
+    const baseForm = this.fb.group(new SchoolRequest());
     const formData: any = this.form.getRawValue();
 
     const userInfo = formData.userInfo;

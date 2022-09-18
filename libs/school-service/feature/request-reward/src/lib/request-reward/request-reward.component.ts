@@ -7,7 +7,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { defaultRequestPayload } from '@ksp/shared/interface';
+import { SchoolRequest } from '@ksp/shared/interface';
 import {
   GeneralInfoService,
   RequestLicenseService,
@@ -18,10 +18,10 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ksp-request-reward-detail',
-  templateUrl: './request-reward-detail.component.html',
-  styleUrls: ['./request-reward-detail.component.scss'],
+  templateUrl: './request-reward.component.html',
+  styleUrls: ['./request-reward.component.scss'],
 })
-export class RequestRewardDetailComponent implements OnInit {
+export class RequestRewardComponent implements OnInit {
   form = this.fb.group({
     reward: [],
   });
@@ -76,7 +76,7 @@ export class RequestRewardDetailComponent implements OnInit {
 
   createRequest(form: any) {
     //console.log('create request = ');
-    const baseForm = this.fb.group(defaultRequestPayload);
+    const baseForm = this.fb.group(new SchoolRequest());
     form.schoolid = this.schoolId;
     form.ref1 = `2`;
     form.ref2 = '40';
