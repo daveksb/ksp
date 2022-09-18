@@ -14,7 +14,10 @@ import {
 } from '@ksp/shared/service';
 import { defaultRequestPayload } from '@ksp/shared/interface';
 import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
-import { UserInfoFormType } from '@ksp/shared/constant';
+import {
+  UserInfoFormType,
+  SelfServiceRequestSubType,
+} from '@ksp/shared/constant';
 import { LicenseFormBaseComponent } from '../license-form-base.component';
 
 const mockPerformances = [
@@ -162,7 +165,7 @@ export class LicenseRequestComponent
 
     userInfo.ref1 = '1';
     userInfo.ref2 = '01';
-    userInfo.ref3 = '1';
+    userInfo.ref3 = `${SelfServiceRequestSubType.ครู}`;
     userInfo.systemtype = '1';
     userInfo.requesttype = '1';
     userInfo.subtype = '5';

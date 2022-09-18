@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { UserInfoFormType } from '@ksp/shared/constant';
+import {
+  UserInfoFormType,
+  SelfServiceRequestSubType,
+} from '@ksp/shared/constant';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FormBuilder } from '@angular/forms';
 import {
@@ -109,7 +112,7 @@ export class LicenseRequestSchoolManagerComponent
 
     userInfo.ref1 = '1';
     userInfo.ref2 = '01';
-    userInfo.ref3 = '2';
+    userInfo.ref3 = `${SelfServiceRequestSubType.ผู้บริหารสถานศึกษา}`;
     userInfo.systemtype = '1';
     userInfo.requesttype = '1';
     userInfo.subtype = '5';
