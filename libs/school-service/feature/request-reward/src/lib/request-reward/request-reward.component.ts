@@ -32,8 +32,12 @@ export class RequestRewardComponent implements OnInit {
   personTypes$!: Observable<any>;
   prefixList$!: Observable<any>;
   requestId = 0;
-  requestNo = '';
+  requestNo!: string | null;
+  currentProcess!: string | null;
+  requestStatus!: string | null;
   memberData!: any;
+  disableTempSave = true;
+  disablePermanentSave = true;
 
   constructor(
     private router: Router,
@@ -48,6 +52,31 @@ export class RequestRewardComponent implements OnInit {
   ngOnInit(): void {
     this.getListData();
     this.checkRequestId();
+    this.checkButtonDisableStatus();
+
+    this.form.valueChanges.subscribe((res) => {
+      this.checkButtonDisableStatus();
+    });
+  }
+
+  checkButtonDisableStatus() {
+    console.log('this.currentprocess = ', this.currentProcess);
+    if (!this.form.valid) {
+      //console.log('case 1= ');
+      this.disableTempSave = true;
+      this.disablePermanentSave = true;
+      return;
+    } else if (this.currentProcess === '2') {
+      //console.log('case 2= ');
+      this.disableTempSave = true;
+      this.disablePermanentSave = true;
+    } else if (this.currentProcess === '1') {
+      //console.log('case 3= ');
+      this.disableTempSave = false;
+      this.disablePermanentSave = false;
+    } else {
+      console.log('case 4= ');
+    }
   }
 
   checkRequestId() {
@@ -61,20 +90,30 @@ export class RequestRewardComponent implements OnInit {
 
   onTempSave() {
     // if no requestid , create request with currentProcess = 1, requestStatus = 1
-    this.createRequest('1', '1', this.form.controls.reward.value);
-    //if has requestid , update request with currentProcess = 1, requestStatus = 1
+    if (!this.requestId) {
+      this.createRequest('1', '1', this.form.controls.reward.value);
+    } else {
+      //if has requestid , update request with currentProcess = 1, requestStatus = 1
+      this.updateRequest('1', '1', this.form.controls.reward.value);
+    }
   }
 
   onPermanentSave() {
     // if no requestid , create request with currentProcess = 2, requestStatus = 1
-    this.createRequest('2', '1', this.form.controls.reward.value);
-
-    // if has requestid , update request with currentProcess = 2, requestStatus = 1
+    if (!this.requestId) {
+      this.createRequest('2', '1', this.form.controls.reward.value);
+    } else {
+      // if has requestid , update request with currentProcess = 2, requestStatus = 1
+      this.updateRequest('2', '1', this.form.controls.reward.value);
+    }
   }
 
   loadRequestFromId(id: number) {
-    this.requestService.getRequestById(id).subscribe((res: any) => {
+    this.requestService.getRequestById(id).subscribe((res) => {
+      console.log('res = ', res);
       this.requestNo = res.requestno;
+      this.requestStatus = res.requeststatus;
+      this.currentProcess = res.currentprocess;
 
       const osoiInfo = parseJson(res.osoiinfo);
       const osoiMember = parseJson(res.osoimember);
@@ -82,7 +121,6 @@ export class RequestRewardComponent implements OnInit {
       //console.log('osoi member = ', osoiMember);
       this.form.controls.reward.patchValue(osoiInfo);
       this.memberData = osoiMember;
-
       //console.log('current process = ', this.currentProcess);
     });
   }
@@ -90,6 +128,7 @@ export class RequestRewardComponent implements OnInit {
   updateRequest(currentProcess: string, requestStatus: string, form: any) {
     //console.log('form  = ', form);
     const baseForm = this.fb.group(new SchoolRequest());
+    form.id = this.requestId;
     form.schoolid = this.schoolId;
     form.systemtype = `2`;
     form.requesttype = `40`;

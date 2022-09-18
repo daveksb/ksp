@@ -34,7 +34,7 @@ export class RequestRewardFormComponent extends KspFormBaseComponent {
   @Input() osoiTypes: any = [];
   @Input() personTypes: any = [];
   @Input() prefixList: any = [];
-  @Input() requestNo = '';
+  @Input() requestNo: string | null = null;
 
   @Input()
   set memberList(members: MemberForm[]) {
