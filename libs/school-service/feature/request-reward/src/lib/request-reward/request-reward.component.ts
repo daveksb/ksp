@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SchoolRequestProcess } from '@ksp/shared/constant';
+
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { defaultRequestPayload } from '@ksp/shared/interface';
+import { SchoolRequest } from '@ksp/shared/interface';
 import {
   GeneralInfoService,
-  RequestLicenseService,
+  RequestService,
   SchoolInfoService,
 } from '@ksp/shared/service';
 import { parseJson } from '@ksp/shared/utility';
@@ -18,10 +18,10 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ksp-request-reward-detail',
-  templateUrl: './request-reward-detail.component.html',
-  styleUrls: ['./request-reward-detail.component.scss'],
+  templateUrl: './request-reward.component.html',
+  styleUrls: ['./request-reward.component.scss'],
 })
-export class RequestRewardDetailComponent implements OnInit {
+export class RequestRewardComponent implements OnInit {
   form = this.fb.group({
     reward: [],
   });
@@ -40,7 +40,7 @@ export class RequestRewardDetailComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private requestService: RequestLicenseService,
+    private requestService: RequestService,
     private schoolInfoService: SchoolInfoService,
     private generalInfoService: GeneralInfoService
   ) {}
@@ -59,6 +59,19 @@ export class RequestRewardDetailComponent implements OnInit {
     });
   }
 
+  onTempSave() {
+    // if no requestid , create request with currentProcess = 1, requestStatus = 1
+    this.createRequest('1', '1', this.form.controls.reward.value);
+    //if has requestid , update request with currentProcess = 1, requestStatus = 1
+  }
+
+  onPermanentSave() {
+    // if no requestid , create request with currentProcess = 2, requestStatus = 1
+    this.createRequest('2', '1', this.form.controls.reward.value);
+
+    // if has requestid , update request with currentProcess = 2, requestStatus = 1
+  }
+
   loadRequestFromId(id: number) {
     this.requestService.getRequestById(id).subscribe((res: any) => {
       this.requestNo = res.requestno;
@@ -74,17 +87,15 @@ export class RequestRewardDetailComponent implements OnInit {
     });
   }
 
-  createRequest(form: any) {
-    //console.log('create request = ');
-    const baseForm = this.fb.group(defaultRequestPayload);
+  updateRequest(currentProcess: string, requestStatus: string, form: any) {
+    //console.log('form  = ', form);
+    const baseForm = this.fb.group(new SchoolRequest());
     form.schoolid = this.schoolId;
-    form.ref1 = `2`;
-    form.ref2 = '40';
-    form.ref3 = '1';
     form.systemtype = `2`;
     form.requesttype = `40`;
     form.subtype = `5`;
-    form.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
+    form.currentprocess = currentProcess;
+    form.requeststatus = requestStatus;
     form.osoimember = JSON.stringify(form.osoimember);
 
     const osoiInfo = {
@@ -96,8 +107,39 @@ export class RequestRewardDetailComponent implements OnInit {
     form.osoiinfo = JSON.stringify(osoiInfo);
 
     baseForm.patchValue(form);
-    console.log('current form = ', baseForm.value);
-    this.requestService.requestLicense(baseForm.value).subscribe((res) => {
+
+    const { ref1, ref2, ref3, ...payload } = baseForm.value;
+    console.log('payload = ', payload);
+    this.requestService.updateRequest(payload).subscribe((res) => {
+      //console.log('request result = ', res);
+    });
+  }
+
+  createRequest(currentProcess: string, requestStatus: string, form: any) {
+    //console.log('form  = ', form);
+    const baseForm = this.fb.group(new SchoolRequest());
+    form.schoolid = this.schoolId;
+    form.ref1 = `2`;
+    form.ref2 = '40';
+    form.ref3 = '5';
+    form.systemtype = `2`;
+    form.requesttype = `40`;
+    form.subtype = `5`;
+    form.currentprocess = currentProcess;
+    form.requeststatus = requestStatus;
+    form.osoimember = JSON.stringify(form.osoimember);
+
+    const osoiInfo = {
+      rewardname: form.rewardname,
+      rewardtype: form.rewardtype,
+      submitbefore: form.submitbefore,
+      vdolink: form.vdolink,
+    };
+    form.osoiinfo = JSON.stringify(osoiInfo);
+
+    baseForm.patchValue(form);
+    //console.log('current form = ', baseForm.value);
+    this.requestService.createRequest(baseForm.value).subscribe((res) => {
       //console.log('request result = ', res);
     });
   }

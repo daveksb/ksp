@@ -13,11 +13,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   selector: 'ksp-temp-license-search',
   standalone: true,
   imports: [CommonModule, MatIconModule, ReactiveFormsModule, MatTooltipModule],
-  templateUrl: './temp-license-search.component.html',
-  styleUrls: ['./temp-license-search.component.scss'],
-  providers: providerFactory(TempLicenseSearchComponent),
+  templateUrl: './request-search.component.html',
+  styleUrls: ['./request-search.component.scss'],
+  providers: providerFactory(RequestSearchComponent),
 })
-export class TempLicenseSearchComponent extends KspFormBaseComponent {
+export class RequestSearchComponent extends KspFormBaseComponent {
   @Output() clear = new EventEmitter<boolean>(false);
   @Output() search = new EventEmitter<any>();
   @Input() eduOccupyList: any[] = [];

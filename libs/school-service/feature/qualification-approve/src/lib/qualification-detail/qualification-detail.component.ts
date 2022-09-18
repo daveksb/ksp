@@ -15,7 +15,7 @@ import { FormMode } from '@ksp/shared/interface';
 import {
   AddressService,
   GeneralInfoService,
-  RequestLicenseService,
+  RequestService,
 } from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
 import { EMPTY, Observable, switchMap } from 'rxjs';
@@ -65,7 +65,7 @@ export class QualificationDetailComponent implements OnInit {
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
-    private requestLicenseService: RequestLicenseService,
+    private requestService: RequestService,
     private route: ActivatedRoute
   ) {}
   ngOnInit(): void {
@@ -82,7 +82,7 @@ export class QualificationDetailComponent implements OnInit {
   }
 
   loadRequestData(id: number) {
-    this.requestLicenseService.getRequestById(id).subscribe((res: any) => {
+    this.requestService.getRequestById(id).subscribe((res: any) => {
       if (res) {
         this.requestNumber = res.requestno;
         res.birthdate = res.birthdate?.split('T')[0];
@@ -136,7 +136,7 @@ export class QualificationDetailComponent implements OnInit {
                 id: `${this.requestId}`,
                 currentprocess: `${SchoolRequestProcess.ยกเลิก}`,
               };
-              return this.requestLicenseService.changeRequestProcess(payload);
+              return this.requestService.changeRequestProcess(payload);
             }
             return EMPTY;
           })
@@ -228,7 +228,7 @@ export class QualificationDetailComponent implements OnInit {
               ...{ refperson: JSON.stringify(refperson) },
               ...{ otherreason: JSON.stringify(otherreason) },
             };
-            return this.requestLicenseService.requestLicense(payload);
+            return this.requestService.createRequest(payload);
           }
           return EMPTY;
         })

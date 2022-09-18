@@ -15,7 +15,7 @@ import { BottomNavComponent } from '@ksp/shared/menu';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TempLicenseSearchComponent } from '@ksp/shared/search';
+import { RequestSearchComponent } from '@ksp/shared/search';
 import { SchoolTempLicenseRoutingModule } from './temp-license-routing.module';
 import { SchoolRequestComponent } from './school-request/school-request.component';
 import { SchoolRequestListComponent } from './request-list/request-list.component';
@@ -34,7 +34,7 @@ import { SchoolRequestListComponent } from './request-list/request-list.componen
     BottomNavComponent,
     RequestHeaderInfoComponent,
     ReactiveFormsModule,
-    TempLicenseSearchComponent,
+    RequestSearchComponent,
     FormTempLicenseNumberComponent,
     FormTeachingInfoManagerComponent,
     FormEducationInfoManagerComponent,

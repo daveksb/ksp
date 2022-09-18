@@ -6,10 +6,10 @@ import { map, Observable, shareReplay } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class RequestLicenseService {
+export class RequestService {
   constructor(private http: HttpClient) {}
 
-  requestLicense(form: any): Observable<any> {
+  createRequest(form: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspstaff/schrequestinsert`,
       form
@@ -59,8 +59,6 @@ export class RequestLicenseService {
       );
   }
 
-  //https://kspapi.oceanicnetwork.net/ksp/kspstaff/schrequestsearchjoinschschool
-
   searchLicenseRequest(payload: any): Observable<any> {
     return this.http
       .post(`${environment.apiUrl}/e-service/requestsearch`, payload)
@@ -70,19 +68,14 @@ export class RequestLicenseService {
       );
   }
 
-  //https://kspapi.oceanicnetwork.net/ksp/e-service/request-search
-
   getRequestById(id: number) {
     return this.http
       .post(`${environment.apiUrl}/kspstaff/schrequestselectidall`, {
         id: `${id}`,
       })
-      .pipe(
-        shareReplay()
-        //map((data: any) => data.datareturn)
-      );
+      .pipe(shareReplay());
   }
-  
+
   seachSchool(payload: any): Observable<any> {
     return this.http
       .post(`${environment.apiUrl}/kspstaff/schschoolselect`, payload)

@@ -19,7 +19,7 @@ import {
   toLowercaseProp,
   parseJson,
 } from '@ksp/shared/utility';
-import { defaultRequestPayload } from '@ksp/shared/interface';
+import { RequestPayload } from '@ksp/shared/interface';
 
 @UntilDestroy()
 @Component({
@@ -193,7 +193,7 @@ export class LicenseRequestSchoolManagerComponent implements OnInit {
   }
 
   createRequest(forbidden: any, currentProcess: string) {
-    const baseForm = this.fb.group(defaultRequestPayload);
+    const baseForm = this.fb.group(RequestPayload);
     const formData: any = this.form.getRawValue();
     if (formData?.address1?.addressType) formData.address1.addresstype = 1;
     if (formData?.address2?.addressType) formData.address2.addresstype = 2;

@@ -7,7 +7,7 @@ import {
   SchoolRequestSubType,
   SchoolRequestType,
 } from '@ksp/shared/constant';
-import { RequestLicenseService, SchoolInfoService } from '@ksp/shared/service';
+import { RequestService, SchoolInfoService } from '@ksp/shared/service';
 import { replaceEmptyWithNull } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
@@ -52,7 +52,7 @@ export class SchoolRequestListComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private schoolInfoService: SchoolInfoService,
-    private requestService: RequestLicenseService
+    private requestService: RequestService
   ) {}
 
   ngOnInit(): void {

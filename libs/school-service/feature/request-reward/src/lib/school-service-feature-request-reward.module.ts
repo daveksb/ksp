@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RequestRewardDetailComponent } from './request-reward-detail/request-reward-detail.component';
+import { RequestRewardComponent } from './request-reward/request-reward.component';
 import { Route, RouterModule } from '@angular/router';
 import { SchoolContainerPageComponent } from '@ksp/school-service/feature/container-page';
 import {
@@ -19,11 +19,11 @@ export const routes: Route[] = [
     children: [
       {
         path: 'detail',
-        component: RequestRewardDetailComponent,
+        component: RequestRewardComponent,
       },
       {
         path: 'detail/:id',
-        component: RequestRewardDetailComponent,
+        component: RequestRewardComponent,
       },
     ],
   },
@@ -41,7 +41,7 @@ export const routes: Route[] = [
     ReactiveFormsModule,
     RequestRewardFormComponent,
   ],
-  declarations: [RequestRewardDetailComponent],
-  exports: [RequestRewardDetailComponent],
+  declarations: [RequestRewardComponent],
+  exports: [RequestRewardComponent],
 })
 export class SchoolServiceFeatureRequestRewardModule {}

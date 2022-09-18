@@ -19,11 +19,12 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
-import { defaultRequestPayload } from '@ksp/shared/interface';
+import { SchoolRequest } from '@ksp/shared/interface';
+
 import {
   AddressService,
   GeneralInfoService,
-  RequestLicenseService,
+  RequestService,
   SchoolInfoService,
   StaffService,
 } from '@ksp/shared/service';
@@ -108,7 +109,7 @@ export class SchoolRequestComponent implements OnInit {
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
     private staffService: StaffService,
-    private requestService: RequestLicenseService
+    private requestService: RequestService
   ) {}
 
   ngOnInit(): void {
@@ -175,7 +176,7 @@ export class SchoolRequestComponent implements OnInit {
 
   createRequest(type: string) {
     //console.log('create request = ');
-    const baseForm = this.fb.group(defaultRequestPayload);
+    const baseForm = this.fb.group(new SchoolRequest());
     const formData: any = this.form.getRawValue();
     formData.addr1.addresstype = 1;
     formData.addr2.addresstype = 2;
@@ -240,13 +241,13 @@ export class SchoolRequestComponent implements OnInit {
 
     baseForm.patchValue(payload);
     //console.log('current form = ', baseForm.value);
-    this.requestService.requestLicense(baseForm.value).subscribe((res) => {
+    this.requestService.createRequest(baseForm.value).subscribe((res) => {
       this.backToListPage();
     });
   }
 
   updateRequest(type: string) {
-    const baseForm = this.fb.group(defaultRequestPayload);
+    const baseForm = this.fb.group(new SchoolRequest());
     const formData: any = this.form.getRawValue();
 
     const userInfo = formData.userInfo;
