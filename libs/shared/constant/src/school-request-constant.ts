@@ -24,7 +24,7 @@ export enum SchoolRequestSubType {
 }
 
 // สถานะใบคำขอ
-export enum SchoolRequestProcess {
+/* export enum SchoolRequestProcess {
   'กำลังสร้าง',
   'ยื่นใบคำขอ',
   'กำลังดำเนินการ',
@@ -35,7 +35,7 @@ export enum SchoolRequestProcess {
   'ส่งคืนและยกเลิก',
   'หมดอายุ',
   'ยกเลิก',
-}
+} */
 
 export enum UserInfoFormType {
   'thai',

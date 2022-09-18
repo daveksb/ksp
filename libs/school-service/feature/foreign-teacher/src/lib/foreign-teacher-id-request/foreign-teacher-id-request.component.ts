@@ -16,7 +16,7 @@ import {
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { thaiDate } from '@ksp/shared/utility';
-import { SchoolRequestProcess } from '@ksp/shared/constant';
+
 @UntilDestroy()
 @Component({
   templateUrl: './foreign-teacher-id-request.component.html',
@@ -99,7 +99,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             if (res) {
               const payload = {
                 id: `${this.requestId}`,
-                currentprocess: `${SchoolRequestProcess.ยกเลิก}`,
+                currentprocess: `0`,
               };
               return this.requestService.changeRequestProcess(payload);
             }
@@ -134,6 +134,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       this.router.navigate(['/temp-license']);
     }
   }
+
   onConfirmed() {
     if (
       !this.form.get('foreignTeacher')?.valid ||
@@ -161,7 +162,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             userInfo.requesttype = '4';
             userInfo.subtype = '1';
             userInfo.schoolid = this.schoolId;
-            userInfo.currentprocess = `${SchoolRequestProcess.กำลังสร้าง}`;
+            userInfo.currentprocess = `1`;
             userInfo.visainfo = JSON.stringify(this.form.value.visainfo);
             return this.requestService.createRequest(userInfo);
           }

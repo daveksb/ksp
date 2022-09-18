@@ -2,11 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import {
-  SchoolRequestProcess,
-  SchoolRequestSubType,
-  SchoolRequestType,
-} from '@ksp/shared/constant';
+import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
 import { RequestService, SchoolInfoService } from '@ksp/shared/service';
 import { replaceEmptyWithNull } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
@@ -36,7 +32,7 @@ export class SchoolRequestListComponent implements OnInit {
     'approvedoc',
   ];
   dataSource = new MatTableDataSource<TempLicenseInfo>();
-  SchoolRequestProcess = SchoolRequestProcess;
+  //SchoolRequestProcess = SchoolRequestProcess;
   SchoolRequestType = SchoolRequestType;
   SchoolRequestSubType = SchoolRequestSubType;
   currentPage = 0;
