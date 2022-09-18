@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
-import { map, Observable, shareReplay } from 'rxjs';
+import { map, Observable, shareReplay, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +11,7 @@ export class GeneralInfoService {
 
   getPrefix(): Observable<any> {
     return this.http.get(`${environment.apiUrl}/kspmasterdata/nameprefix`).pipe(
+      tap((res) => console.log(res)),
       map((data: any) => data.datareturn),
       shareReplay()
     );

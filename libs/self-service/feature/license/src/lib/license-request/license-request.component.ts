@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ConfirmDialogComponent } from '@ksp/shared/dialog';
-import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { debounceTime, Observable } from 'rxjs';
 import { LicenseRequestService } from './license-request.service';
@@ -15,12 +13,9 @@ import {
   MyInfoService,
 } from '@ksp/shared/service';
 import { defaultRequestPayload } from '@ksp/shared/interface';
-import {
-  replaceEmptyWithNull,
-  toLowercaseProp,
-  parseJson,
-} from '@ksp/shared/utility';
+import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
 import { UserInfoFormType } from '@ksp/shared/constant';
+import { LicenseFormBaseComponent } from '../license-form-base.component';
 
 const mockPerformances = [
   {
@@ -51,9 +46,12 @@ const mockPerformances = [
   templateUrl: './license-request.component.html',
   styleUrls: ['./license-request.component.scss'],
 })
-export class LicenseRequestComponent implements OnInit {
+export class LicenseRequestComponent
+  extends LicenseFormBaseComponent
+  implements OnInit
+{
   userInfoType = UserInfoFormType.thai;
-  form = this.fb.group({
+  override form = this.fb.group({
     userInfo: [],
     address1: [],
     address2: [],
@@ -61,34 +59,33 @@ export class LicenseRequestComponent implements OnInit {
     education: [],
     experience: [],
   });
-  prefixList$!: Observable<any>;
-  nationalitys$!: Observable<any>;
-  provinces1$!: Observable<any>;
-  provinces2$!: Observable<any>;
-  provinces3$!: Observable<any>;
-  amphurs1$!: Observable<any>;
-  tumbols1$!: Observable<any>;
-  amphurs2$!: Observable<any>;
-  tumbols2$!: Observable<any>;
-  amphurs3$!: Observable<any>;
-  tumbols3$!: Observable<any>;
-  bureau$!: Observable<any>;
   countries$!: Observable<any>;
   countries2$!: Observable<any>;
   licenses$!: Observable<any>;
   disableNextButton = false;
 
   constructor(
-    private router: Router,
-    public dialog: MatDialog,
-    private fb: FormBuilder,
+    router: Router,
+    dialog: MatDialog,
+    fb: FormBuilder,
     public service: LicenseRequestService,
-    private addressService: AddressService,
-    private generalInfoService: GeneralInfoService,
-    private educationDetailService: EducationDetailService,
-    private requestService: RequestLicenseService,
-    private myInfoService: MyInfoService
-  ) {}
+    addressService: AddressService,
+    generalInfoService: GeneralInfoService,
+    educationDetailService: EducationDetailService,
+    requestService: RequestLicenseService,
+    myInfoService: MyInfoService
+  ) {
+    super(
+      generalInfoService,
+      addressService,
+      educationDetailService,
+      fb,
+      requestService,
+      router,
+      myInfoService,
+      dialog
+    );
+  }
 
   ngOnInit(): void {
     this.form.valueChanges
@@ -101,94 +98,33 @@ export class LicenseRequestComponent implements OnInit {
     this.checkButtonsDisableStatus();
   }
 
-  getListData() {
-    this.prefixList$ = this.generalInfoService.getPrefix();
-    this.nationalitys$ = this.generalInfoService.getNationality();
-    this.provinces1$ = this.addressService.getProvinces();
-    this.provinces2$ = this.provinces1$;
-    this.provinces3$ = this.provinces1$;
-    this.bureau$ = this.educationDetailService.getBureau();
+  override getListData() {
+    super.getListData();
     this.countries$ = this.addressService.getCountry();
     this.countries2$ = this.countries$;
     this.licenses$ = this.educationDetailService.getLicenseType();
   }
 
-  getMyInfo() {
-    this.myInfoService.getMyInfo().subscribe((res) => {
-      this.patchUserInfo(res);
-      this.patchAddress(parseJson(res.addressinfo));
-      if (res.schooladdrinfo) {
-        this.patchWorkplace(parseJson(res.schooladdrinfo));
-      }
-    });
+  patchUserInfoForm(data: any): void {
+    this.form.controls.userInfo.patchValue(data);
   }
 
-  patchUserInfo(data: any) {
-    const {
-      birthdate,
-      phone,
-      email,
-      firstnameen,
-      firstnameth,
-      idcardno,
-      lastnameen,
-      lastnameth,
-      prefixen,
-      prefixth,
-      id,
-    } = data;
-    const patchData = {
-      birthdate: birthdate.split('T')[0],
-      contactphone: phone,
-      email,
-      firstnameen,
-      firstnameth,
-      idcardno,
-      lastnameen,
-      lastnameth,
-      prefixen,
-      prefixth,
-      id,
-    } as any;
-    this.form.controls.userInfo.patchValue(patchData);
+  patchAddress1Form(data: any): void {
+    this.form.controls.address1.patchValue(data);
   }
 
-  patchAddress(addrs: any[]) {
-    //console.log('address = ', addrs);
-    if (addrs && addrs.length) {
-      addrs.map((addr: any, i: number) => {
-        if (i === 0) {
-          this.amphurs1$ = this.addressService.getAmphurs(addr.province);
-          this.tumbols1$ = this.addressService.getTumbols(addr.amphur);
-          this.form.controls.address1.patchValue(addr);
-        }
-        if (i === 1) {
-          this.amphurs2$ = this.addressService.getAmphurs(addr.province);
-          this.tumbols2$ = this.addressService.getTumbols(addr.amphur);
-          this.form.controls.address2.patchValue(addr);
-        }
-      });
-    }
+  patchAddress2Form(data: any): void {
+    this.form.controls.address2.patchValue(data);
   }
 
-  patchWorkplace(data: any) {
-    console.log(data);
-    this.amphurs3$ = this.addressService.getAmphurs(data.province);
-    this.tumbols3$ = this.addressService.getTumbols(data.district);
+  patchWorkPlaceForm(data: any): void {
     this.form.controls.workplace.patchValue(data);
   }
 
-  provinceChanged(addrType: number, evt: any) {
-    const province = evt.target?.value;
-    if (province) {
-      if (addrType === 1) {
-        this.amphurs1$ = this.addressService.getAmphurs(province);
-      } else if (addrType === 2) {
-        this.amphurs2$ = this.addressService.getAmphurs(province);
-      } else if (addrType === 3) {
-        this.amphurs3$ = this.addressService.getAmphurs(province);
-      }
-    }
+  patchAddress2FormWithAddress1(): void {
+    console.log(this.form.controls.address1.value);
+    this.form.controls.address2.patchValue(this.form.controls.address1.value);
+    console.log(this.form.controls.address2.value);
   }
 
   getAmphurChanged(addrType: number, province: any) {
@@ -203,19 +139,6 @@ export class LicenseRequestComponent implements OnInit {
     }
   }
 
-  amphurChanged(addrType: number, evt: any) {
-    const amphur = evt.target?.value;
-    if (amphur) {
-      if (addrType === 1) {
-        this.tumbols1$ = this.addressService.getTumbols(amphur);
-      } else if (addrType === 2) {
-        this.tumbols2$ = this.addressService.getTumbols(amphur);
-      } else if (addrType === 3) {
-        this.tumbols3$ = this.addressService.getTumbols(amphur);
-      }
-    }
-  }
-
   getTumbon(addrType: number, amphur: any) {
     if (amphur) {
       if (addrType === 1) {
@@ -225,16 +148,6 @@ export class LicenseRequestComponent implements OnInit {
       } else if (addrType === 3) {
         this.tumbols3$ = this.addressService.getTumbols(amphur);
       }
-    }
-  }
-
-  useSameAddress(evt: any) {
-    const checked = evt.target.checked;
-    this.amphurs2$ = this.amphurs1$;
-    this.tumbols2$ = this.tumbols1$;
-    this.provinces2$ = this.provinces1$;
-    if (checked) {
-      this.form.controls.address2.patchValue(this.form.controls.address1.value);
     }
   }
 
@@ -279,57 +192,6 @@ export class LicenseRequestComponent implements OnInit {
     console.log(payload);
     baseForm.patchValue(payload);
     return baseForm.value;
-  }
-
-  save() {
-    console.log(this.form.value);
-
-    const confirmDialog = this.dialog.open(ForbiddenPropertyFormComponent, {
-      width: '900px',
-    });
-
-    confirmDialog.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        console.log(res);
-        this.onCompleted(res);
-      }
-    });
-  }
-
-  onCompleted(forbidden: any) {
-    const completeDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
-      data: {
-        title: `คุณต้องการบันทึกข้อมูล
-        ใช่หรือไม่?`,
-        btnLabel: 'ยื่นแบบคำขอ',
-        cancelBtnLabel: 'บันทึก',
-      },
-    });
-
-    completeDialog.componentInstance.saved.subscribe((res) => {
-      if (res) {
-        const payload = this.createRequest(forbidden, '0');
-        this.requestService.requestLicense(payload).subscribe((res) => {
-          console.log('request result = ', res);
-          if (res.returncode === '00') {
-            this.router.navigate(['/home']);
-          }
-        });
-      }
-    });
-
-    completeDialog.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        const payload = this.createRequest(forbidden, '1');
-        this.requestService.requestLicense(payload).subscribe((res) => {
-          console.log('request result = ', res);
-          if (res.returncode === '00') {
-            this.router.navigate(['/license', 'payment-channel']);
-          }
-        });
-      }
-    });
   }
 
   checkButtonsDisableStatus() {
