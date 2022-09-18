@@ -115,7 +115,6 @@ export class LicenseRequestComponent implements OnInit {
 
   getMyInfo() {
     this.myInfoService.getMyInfo().subscribe((res) => {
-      console.log(res);
       this.patchUserInfo(res);
       this.patchAddress(parseJson(res.addressinfo));
       if (res.schooladdrinfo) {
@@ -253,7 +252,7 @@ export class LicenseRequestComponent implements OnInit {
     userInfo.ref3 = '1';
     userInfo.systemtype = '1';
     userInfo.requesttype = '1';
-    userInfo.subtype = '1';
+    userInfo.subtype = '5';
 
     const { educationType, educationLevelForm } = formData.education;
     const { hasForeignLicense, foreignLicenseForm, ...resExperienceForm } =
@@ -284,7 +283,6 @@ export class LicenseRequestComponent implements OnInit {
 
   save() {
     console.log(this.form.value);
-    console.log(this.form.valid);
 
     const confirmDialog = this.dialog.open(ForbiddenPropertyFormComponent, {
       width: '900px',
