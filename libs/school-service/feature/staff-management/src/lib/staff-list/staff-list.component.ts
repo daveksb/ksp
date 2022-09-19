@@ -40,7 +40,7 @@ export class StaffListComponent {
     const payload = {
       schoolid: `${this.schoolId}`,
     };
-    this.service.searchStaffsFromFilter(payload).subscribe((res) => {
+    this.service.searchStaffsFromSchoolId(payload).subscribe((res) => {
       res.map((i: any) => {
         const temp = parseJson(i.hiringinfo);
         i.startdate = temp.startDate;
