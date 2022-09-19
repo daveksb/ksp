@@ -157,12 +157,13 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             const userInfo = this.form.value.foreignTeacher as any;
             userInfo.ref1 = '2';
             userInfo.ref2 = '04';
-            userInfo.ref3 = '1';
+            userInfo.ref3 = '5';
             userInfo.systemtype = '2';
             userInfo.requesttype = '4';
-            userInfo.subtype = '1';
+            userInfo.subtype = '5';
             userInfo.schoolid = this.schoolId;
             userInfo.currentprocess = `1`;
+            userInfo.requestStatus = `1`;
             userInfo.visainfo = JSON.stringify(this.form.value.visainfo);
             return this.requestService.createRequest(userInfo);
           }

@@ -2,16 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { UserInfoFormType } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { FormMode } from '@ksp/shared/interface';
 import { GeneralInfoService, RequestService } from '@ksp/shared/service';
-import { EMPTY, Observable, switchMap } from 'rxjs';
+import { EMPTY, switchMap } from 'rxjs';
 import localForage from 'localforage';
-import { thaiDate } from '@ksp/shared/utility';
+import { encrypt, thaiDate } from '@ksp/shared/utility';
 
 @Component({
   templateUrl: './register-password.component.html',
@@ -19,52 +18,38 @@ import { thaiDate } from '@ksp/shared/utility';
 })
 export class RegisterPasswordComponent implements OnInit {
   form = this.fb.group({
-    coordinator: [],
+    password: [],
+    repassword:[],
   });
   savingData: any;
-  uploadFileList = [
-    {
-      name: 'หนังสือแต่งตั้งผู้ประสานงาน',
-      fileId: '',
-    },
-    {
-      name: 'สำเนาบัตรประชาชน',
-      fileId: '',
-    },
-  ];
   requestDate = thaiDate(new Date());
   requestNumber = '';
 
-  prefixList$!: Observable<any>;
-  nationalitys$!: Observable<any>;
   mode: FormMode = 'edit';
-  userInfoFormdisplayMode: number = UserInfoFormType.thai;
   school: any;
-
+  coordinator:any;
   constructor(
     private router: Router,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private generalInfoService: GeneralInfoService,
     private requestService: RequestService
   ) {}
-
+  get disable() {
+    const { password , repassword } = this.form.getRawValue()
+    return password !== repassword || !password || !repassword
+  }
   ngOnInit(): void {
-    //this.savingData = history.state.data;
-
-    this.getListData();
-
-    localForage.getItem('registerSelectedSchool').then((res) => {
+   localForage.getItem('registerSelectedSchool').then((res) => {
       this.school = res;
     });
 
     localForage.getItem('registerUserInfoFormValue').then((res) => {
       this.savingData = res;
     });
-  }
-  getListData() {
-    this.prefixList$ = this.generalInfoService.getPrefix();
-    this.nationalitys$ = this.generalInfoService.getNationality();
+
+    localForage.getItem('registerCoordinatorInfoFormValue').then((res) => {
+      this.coordinator = res;
+    });
   }
 
   cancel() {
@@ -103,7 +88,7 @@ export class RegisterPasswordComponent implements OnInit {
     this.router.navigate(['register', 'requester']);
   }
 
-  save() {
+  async save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -114,21 +99,24 @@ export class RegisterPasswordComponent implements OnInit {
         btnLabel: 'บันทึก',
       },
     });
-
+    const password = await encrypt(this.form?.value?.password)
     confirmDialog.componentInstance.confirmed
       .pipe(
         switchMap((res) => {
           if (res) {
+            console.log(password)
             const payload = {
               ...this.savingData,
-              coordinatorinfo: JSON.stringify(this.form.value),
+              coordinatorinfo: JSON.stringify({...this.coordinator,password}),
             };
             payload.ref1 = '2';
             payload.ref2 = '01';
-            payload.ref3 = '1';
+            payload.ref3 = '5';
             payload.systemtype = '2';
             payload.requesttype = '1';
-            payload.currentprocess = `1`;
+            payload.subtype = '5';
+            payload.currentprocess = '1';
+            payload.requestStatus = '1';
             return this.requestService.createRequest(payload);
           }
           return EMPTY;
@@ -158,6 +146,7 @@ export class RegisterPasswordComponent implements OnInit {
       if (res) {
         localForage.removeItem('registerSelectedSchool');
         localForage.removeItem('registerUserInfoFormValue');
+        localForage.removeItem('registerCoordinatorInfoFormValue');
         this.router.navigate(['/login']);
       }
     });
