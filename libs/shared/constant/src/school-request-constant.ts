@@ -273,9 +273,3 @@ export const subjects = [
   { label: 'ประมง', value: 's16' },
   { label: 'อุตสาหกรรมท่องเที่ยว', value: 's17' },
 ];
-
-export enum DegreeCertProcessType {
-  'check',
-  'consider',
-  'approve',
-}
