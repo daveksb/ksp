@@ -40,7 +40,7 @@ export class RequestService {
 
   searchRequest(payload: any): Observable<any> {
     return this.http
-      .post(`${environment.apiUrl}/kspstaff/schrequestsearch`, payload)
+      .post(`${environment.apiUrl}/kspstaff/searchschrequest`, payload)
       .pipe(
         shareReplay(),
         map((data: any) => data.datareturn)

@@ -3,12 +3,11 @@ import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
-  RequestProcessStatus,
+  RequestProcessList,
   SchoolRequestSubType,
   SchoolRequestType,
 } from '@ksp/shared/constant';
 import { RequestService, SchoolInfoService } from '@ksp/shared/service';
-import { replaceEmptyWithNull } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -59,27 +58,31 @@ export class SchoolRequestListComponent implements OnInit {
 
   search(params: any) {
     console.log('params = ', params);
-    const data = {
-      ...params,
-      ...{ schoolid: `${this.schoolId}`, offset: '0', row: `${this.pageRow}` },
+
+    const payload = {
+      systemtype: '2',
+      requesttype: `${params.requesttype}`,
+      schoolid: `${this.schoolId}`,
+      subtype: params.subtype,
     };
-    const payload = replaceEmptyWithNull(data);
 
     this.searchParams = payload;
     this.isLastPage = false;
 
     this.requestService.searchRequest(payload).subscribe((res: any) => {
-      const mapData = res.map((i: any) => {
-        return {
-          ...i,
-          ...{
-            mapRequestType: SchoolRequestType.find(
-              (j) => j.id === +i.requesttype
-            )?.name,
-          },
-        };
-      });
-      this.dataSource.data = mapData;
+      if (res && res.length) {
+        const mapData = res.map((i: any) => {
+          return {
+            ...i,
+            ...{
+              mapRequestType: SchoolRequestType.find(
+                (j) => j.id === +i.requesttype
+              )?.name,
+            },
+          };
+        });
+        this.dataSource.data = mapData;
+      }
     });
   }
 
@@ -130,13 +133,13 @@ export class SchoolRequestListComponent implements OnInit {
   viewRequest(requestType: number, subType: number, requestId: number) {
     switch (requestType) {
       case 4:
-        return this.foreignPage(requestId.toString());
+        return this.foreignPage(`${requestId}`);
 
       case 6:
-        return this.qualificationPage(requestId.toString());
+        return this.qualificationPage(`${requestId}`);
 
       case 40:
-        return this.rewardPage(requestId);
+        return this.rewardPage(`${requestId}`);
     }
 
     this.router.navigate(['/temp-license', 'request', requestId], {
@@ -152,16 +155,12 @@ export class SchoolRequestListComponent implements OnInit {
     this.router.navigate(['/qualification-approve', 'detail', id]);
   }
 
-  rewardPage(id: number) {
-    if (id) {
-      this.router.navigate(['/request-reward', 'detail', id]);
-    } else {
-      this.router.navigate(['/request-reward', 'detail']);
-    }
+  rewardPage(id = '') {
+    this.router.navigate(['/request-reward', 'detail', id]);
   }
 
   checkProcess(processId: number) {
-    const process = RequestProcessStatus.find((p) => {
+    const process = RequestProcessList.find((p) => {
       return p.processId === processId && p.requestType === 3;
     });
 

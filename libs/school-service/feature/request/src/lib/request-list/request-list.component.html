@@ -13,7 +13,6 @@
     <div class="bg-white px-3 py-3">
       <ksp-temp-license-search
         formControlName="licenseSearch"
-        [eduOccupyList]="eduOccupyList$ | async"
         (clear)="clear()"
         (search)="search($event)"
       ></ksp-temp-license-search>
@@ -45,7 +44,7 @@
           <button mat-menu-item (click)="qualificationPage()">
             ขอหนังสือรับรองคุณวุฒิ
           </button>
-          <button mat-menu-item (click)="rewardPage(0)">
+          <button mat-menu-item (click)="rewardPage()">
             ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One Innovation :
             OSOI)
           </button>
