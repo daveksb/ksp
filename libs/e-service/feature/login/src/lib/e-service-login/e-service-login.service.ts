@@ -12,7 +12,7 @@ export class EServiceLoginService {
 
   validateLogin(form: any): Observable<any> {
     return this.http.post(
-      `${environment.apiUrl}/e-service/userloginesuser`,
+      `${environment.apiUrl}/ksplogin/userloginesuser`,
       form
     );
   }

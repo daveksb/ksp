@@ -22,13 +22,13 @@ export class EServiceLoginComponent {
 
   login() {
     this.loginService.validateLogin(this.form.value.user).subscribe((res) => {
-      if (res.returnCode == 99) return;
+      if (res.returncode == 99) return;
 
       this.loginService.config = res;
 
       setCookie('userToken', res.schUserToken, 1);
-      setCookie('firstNameTh', res.firstNameTh, 1);
-      setCookie('lastNameTh', res.lastNameTh, 1);
+      setCookie('firstNameTh', res.firstnameth, 1);
+      setCookie('lastNameTh', res.lastnameth, 1);
 
       this.router.navigate(['/landing']);
     });
