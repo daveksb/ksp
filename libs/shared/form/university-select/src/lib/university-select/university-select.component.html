@@ -1,6 +1,19 @@
 <form [formGroup]="form">
   <div class="bg-light px-4 py-3">
+    <div class="text-primary box-header">กรุณาเลือกสถาบันที่ท่านสังกัด</div>
     <div class="row">
+      <div class="col">
+        <label class="form-label">{{ label1 }}</label> test
+        <select class="form-select" formControlName="institution">
+          <option value="null" selected disabled hidden>กรุณาเลือก</option>
+          <option
+            *ngFor="let bureau of bureaus$ | async"
+            [value]="bureau?.bureauId"
+          >
+            {{ bureau?.bureauName }}
+          </option>
+        </select>
+      </div>
       <div class="col">
         <label class="form-label">{{ label2 }}</label>
         <input
