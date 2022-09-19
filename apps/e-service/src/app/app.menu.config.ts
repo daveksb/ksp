@@ -1,8 +1,4 @@
-import { DegreeCertProcessType } from '@ksp/shared/constant';
-import {
-  MenuConfig,
-  tempLicenseRequestType,
-} from '@ksp/shared/interface';
+import { MenuConfig, tempLicenseRequestType } from '@ksp/shared/interface';
 
 export const ethicsMenu: MenuConfig[] = [
   {
@@ -64,15 +60,15 @@ export const standardMenu: MenuConfig[] = [
     subMenuName: 'degree-cert',
     subMenu: [
       {
-        path: `degree-cert/list///${DegreeCertProcessType.check}`,
+        path: `degree-cert/list/1`,
         label: 'รายการใบคำขอรับรองปริญญาและประกาศนียบัตร',
       },
       {
-        path: `degree-cert/list/${DegreeCertProcessType.consider}`,
+        path: `degree-cert/list/2`,
         label: 'ประเมินหลักสูตรและโครงสร้างหลักสูตร',
       },
       {
-        path: `degree-cert/list/${DegreeCertProcessType.approve}`,
+        path: `degree-cert/list/3`,
         label: 'พิจารณาและออกใบรับรองปริญญาและประกาศนียบัตร',
       },
     ],

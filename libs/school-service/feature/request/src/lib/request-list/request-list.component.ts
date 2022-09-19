@@ -151,7 +151,6 @@ export class SchoolRequestListComponent implements AfterViewInit {
     const process = RequestProcessList.find((p) => {
       return p.processId === processId && p.requestType === 3;
     });
-
     return process;
   }
 

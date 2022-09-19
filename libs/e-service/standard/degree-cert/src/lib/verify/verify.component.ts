@@ -24,7 +24,7 @@ export class VerifyComponent implements OnInit {
     ],
   ];
 
-  processType: DegreeCertProcessType = DegreeCertProcessType.check;
+  processType!: number;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -43,10 +43,7 @@ export class VerifyComponent implements OnInit {
   }
 
   next() {
-    this.router.navigate([
-      './degree-cert',
-      DegreeCertProcessType[this.processType],
-    ]);
+    this.router.navigate(['./degree-cert']);
   }
 
   save() {

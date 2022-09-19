@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { RequestProcessStatus } from '@ksp/shared/constant';
 
 @Injectable({
   providedIn: 'root',
@@ -46,11 +45,11 @@ export class TempLicenseDetailService {
   verifyChoice = [
     {
       name: 'ครบถ้วน และถูกต้อง',
-      value: RequestProcessStatus[5].status[1],
+      value: 1,
     },
     {
       name: 'ไม่ครบถ้วน และไม่ถูกต้อง',
-      value: RequestProcessStatus[5].status[2],
+      value: 2,
     },
   ];
 

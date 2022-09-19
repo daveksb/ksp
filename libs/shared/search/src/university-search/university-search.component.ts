@@ -9,7 +9,6 @@ import {
 import {
   AddressService,
   GeneralInfoService,
-  RequestService,
   SchoolInfoService,
 } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
@@ -57,7 +56,6 @@ export class UniversitySearchComponent implements OnInit {
     },
     private fb: FormBuilder,
     private addressService: AddressService,
-    private requestService: RequestService,
     private schoolInfoService: SchoolInfoService,
     private generalInfoService: GeneralInfoService,
     public dialogRef: MatDialogRef<UniversitySearchComponent>

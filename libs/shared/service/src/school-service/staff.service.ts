@@ -9,7 +9,7 @@ import { map, Observable, shareReplay } from 'rxjs';
 export class StaffService {
   constructor(private http: HttpClient) {}
 
-  addStaff2(payload: any): Observable<any> {
+  addStaff(payload: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/kspstaff/schstaff2insert`, {
       ...payload,
     });
@@ -33,7 +33,7 @@ export class StaffService {
     );
   }
 
-  searchStaffsFromFilter(payload: any): Observable<any> {
+  searchStaffsFromSchoolId(payload: any): Observable<any> {
     return this.http
       .post(`${environment.apiUrl}/kspstaff/schstaff2selectall`, {
         ...payload,
@@ -41,24 +41,10 @@ export class StaffService {
       .pipe(map((data: any) => data.datareturn));
   }
 
-  updateStaff2(payload: any): Observable<any> {
+  updateStaff(payload: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/kspstaff/schstaff2update`, {
       ...payload,
     });
-  }
-
-  getStaffUserInfo(staffId: number): Observable<any> {
-    return this.http.get(
-      `${environment.apiUrl}/kspschoolregister/schstaffsearchid?id=${staffId}}`
-    );
-  }
-
-  getStaffEdu(staffId: number): Observable<any> {
-    return this.http
-      .get(
-        `${environment.apiUrl}/kspschoolregister/schstaffsearcheduid?id=${staffId}`
-      )
-      .pipe(map((data: any) => data.datareturn));
   }
 
   getStaffTypes(): Observable<any> {
