@@ -26,7 +26,7 @@ export class SelfServiceThaiLoginComponent {
   ) {}
 
   register() {
-    this.router.navigate(['/', 'landing']);
+    this.router.navigate(['/landing']);
   }
 
   login() {
@@ -35,7 +35,7 @@ export class SelfServiceThaiLoginComponent {
       this.loginService.config = res;
       setCookie('userToken', res.usertoken, 1);
       setCookie('userId', res.id, 1);
-      this.router.navigate(['/', 'home']);
+      this.router.navigate(['/home']);
     });
   }
 
