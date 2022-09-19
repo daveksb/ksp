@@ -9,3 +9,4 @@ export { MyInfoService } from './self-service/my-info.service';
 export { LicenseRequestService } from './self-service/license-request.service';
 
 export { ERequestService } from './e-service/e-request.service';
+export { SelfDevelopService } from './school-service/self-develop.service';

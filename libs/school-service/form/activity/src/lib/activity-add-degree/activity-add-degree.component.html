@@ -1,9 +1,9 @@
 <form [formGroup]="form">
   <div class="row mb-3">
     <div class="col-6">
-      <label class="form-label">สถาบันการศึกษา</label>
+      <label class="form-label required">สถาบันการศึกษา</label>
       <input
-        class="form-control form-search"
+        class="form-control"
         type="text"
         formControlName="educationInstitution"
       />
@@ -12,7 +12,7 @@
     <div class="col-6">
       <label class="form-label">วุฒิปริญญาที่จบ</label>
       <input
-        class="form-control form-search"
+        class="form-control"
         type="text"
         formControlName="graduateDegree"
       />
@@ -22,11 +22,7 @@
   <div class="row mb-3">
     <div class="col-6">
       <label class="form-label">สาขา/วิชาเอก</label>
-      <input
-        class="form-control form-search"
-        type="text"
-        formControlName="branch"
-      />
+      <input class="form-control" type="text" formControlName="branch" />
     </div>
 
     <div class="col-3">
