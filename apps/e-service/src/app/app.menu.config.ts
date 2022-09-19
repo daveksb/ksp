@@ -1,5 +1,5 @@
+import { DegreeCertProcessType } from '@ksp/shared/constant';
 import {
-  DegreeCertProcessType,
   MenuConfig,
   tempLicenseRequestType,
 } from '@ksp/shared/interface';
@@ -64,7 +64,7 @@ export const standardMenu: MenuConfig[] = [
     subMenuName: 'degree-cert',
     subMenu: [
       {
-        path: `degree-cert/list/${DegreeCertProcessType.check}`,
+        path: `degree-cert/list///${DegreeCertProcessType.check}`,
         label: 'รายการใบคำขอรับรองปริญญาและประกาศนียบัตร',
       },
       {

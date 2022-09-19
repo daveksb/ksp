@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
@@ -15,7 +16,8 @@ import { Observable } from 'rxjs';
   templateUrl: './request-list.component.html',
   styleUrls: ['./request-list.component.scss'],
 })
-export class SchoolRequestListComponent implements OnInit {
+export class SchoolRequestListComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   eduOccupyList$!: Observable<any>;
 
   schoolId = '0010201056';
@@ -59,6 +61,10 @@ export class SchoolRequestListComponent implements OnInit {
     this.eduOccupyList$ = this.schoolInfoService.getSchoolEduOccupy();
   }
 
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+  }
+
   search(params: any) {
     console.log('params = ', params);
     const data = {
@@ -92,40 +98,6 @@ export class SchoolRequestListComponent implements OnInit {
   goToRequestPage(subType: number) {
     this.router.navigate(['/temp-license', 'request'], {
       queryParams: { subtype: subType },
-    });
-  }
-
-  goPrevious() {
-    if (this.currentPage == 0) {
-      this.isLastPage = false;
-      return;
-    }
-    this.currentPage -= 1;
-    const offset = this.pageRow * this.currentPage;
-    const params = {
-      ...this.searchParams,
-      ...{ offset: `${offset}` },
-    };
-    this.requestService.searchRequest(params).subscribe((res: any) => {
-      this.dataSource.data = res;
-    });
-  }
-
-  goNext() {
-    if (this.isLastPage) {
-      return;
-    }
-    this.currentPage += 1;
-    const offset = this.pageRow * this.currentPage;
-    const params = {
-      ...this.searchParams,
-      ...{ offset: `${offset + 1}` },
-    };
-    this.requestService.searchRequest(params).subscribe((res: any) => {
-      if (res.length < this.pageRow) {
-        this.isLastPage = true;
-      }
-      this.dataSource.data = res;
     });
   }
 

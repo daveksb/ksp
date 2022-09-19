@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { tempLicenseRequestType } from '@ksp/shared/interface';
-import { RequestLicenseService, SchoolInfoService } from '@ksp/shared/service';
+import { RequestService, SchoolInfoService } from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
@@ -31,7 +31,7 @@ export class ETempLicenseListComponent implements AfterViewInit, OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private requestService: RequestLicenseService,
+    private requestService: RequestService,
     private schoolInfoService: SchoolInfoService
   ) {}
 

@@ -19,6 +19,7 @@ import { RequestSearchComponent } from '@ksp/shared/search';
 import { SchoolTempLicenseRoutingModule } from './temp-license-routing.module';
 import { SchoolRequestComponent } from './school-request/school-request.component';
 import { SchoolRequestListComponent } from './request-list/request-list.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   imports: [
@@ -38,6 +39,7 @@ import { SchoolRequestListComponent } from './request-list/request-list.componen
     FormTempLicenseNumberComponent,
     FormTeachingInfoManagerComponent,
     FormEducationInfoManagerComponent,
+    MatPaginatorModule,
   ],
   declarations: [SchoolRequestListComponent, SchoolRequestComponent],
 })

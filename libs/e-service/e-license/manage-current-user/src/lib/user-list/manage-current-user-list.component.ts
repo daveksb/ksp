@@ -4,8 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SchoolServiceUserPageType } from '@ksp/shared/interface';
-import { RequestLicenseService } from '@ksp/shared/service';
-import { replaceEmptyWithNull } from '@ksp/shared/utility';
+import { RequestService } from '@ksp/shared/service';
 
 @Component({
   templateUrl: './manage-current-user-list.component.html',
@@ -26,7 +25,7 @@ export class ManageCurrentUserListComponent implements OnInit, AfterViewInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private requestService: RequestLicenseService
+    private requestService: RequestService
   ) {}
 
   ngAfterViewInit(): void {

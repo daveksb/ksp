@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
-import { DegreeCertProcessType } from '@ksp/shared/interface';
+import {
+  DegreeCertProcessType,
+  RequestProcessStatus,
+} from '@ksp/shared/constant';
 
 @Component({
   selector: 'e-service-degree-cert-list',
@@ -26,11 +29,11 @@ export class EServiceDegreeCertListComponent implements OnInit {
          * show action buttons if process = consider || approve
          */
         this.showActionButtons = [
-          DegreeCertProcessType.consider,
-          DegreeCertProcessType.approve,
-        ].includes(Number(res.get('type')));
+          RequestProcessStatus[11].processId,
+          RequestProcessStatus[10].processId,
+        ].includes(Number('processId'));
       }
-      this.pageType = Number(res.get('type'));
+      this.pageType = Number(res.get('processId'));
 
       console.log('page type = ', this.pageType);
     });

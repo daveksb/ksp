@@ -22,6 +22,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { thaiDate } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-activity-detail',
@@ -29,6 +30,8 @@ import {
   styleUrls: ['./activity-detail.component.scss'],
 })
 export class ActivityDetailComponent implements OnInit {
+  today = thaiDate(new Date());
+
   activityForm = this.fb.group({
     activityType: [null],
   });
@@ -42,7 +45,13 @@ export class ActivityDetailComponent implements OnInit {
     private fb: FormBuilder,
     public dialog: MatDialog
   ) {}
-  addActivity = ['1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน'];
+
+  evidenceFiles = [
+    {
+      name: '1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน',
+      fileId: '',
+    },
+  ];
 
   ngOnInit(): void {
     this.activityTypes = activityTypes;
