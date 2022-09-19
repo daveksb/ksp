@@ -5,12 +5,6 @@
   background: #fff;
 }
 
-.address__checkbox {
-  height: 15px;
-  width: 15px;
-  margin-right: 5px;
-}
-
 .main__container {
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -20,7 +14,7 @@
 
 @media only screen and (max-width: 768px) {
   .detail__container {
-    padding: 0;
-    margin: 12px 16px;
+    padding: 1rem;
+    margin: 0;
   }
 }

@@ -4,7 +4,7 @@
 
 .mat-tab-label {
   background: #eff1f3;
-  width: 13rem;
+  width: auto;
   margin: 0 0.1rem;
   font-size: 1.1rem;
   height: 3.6rem !important;
@@ -14,9 +14,9 @@
   white-space: break-spaces !important;
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 768px) {
   .mat-tab-label {
-    width: auto;
+    width: 10rem;
   }
 }
 
@@ -121,4 +121,11 @@ tr[class^='mat'] {
   width: 16.25rem;
 }
 
-//table
+//mat-list
+.mat-list-text {
+  padding-right: 0 !important;
+}
+
+.mat-list-base {
+  padding-top: 0 !important;
+}

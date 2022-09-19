@@ -24,7 +24,7 @@ export class FormUserInfoComponent
   @Input() nationList: any[] = [];
   @Input() visaClassList: any[] = [];
   @Input() visaTypeList: any[] = [];
-
+  @Input() isSchoolService = true;
   @Input() displayMode!: number[];
 
   RequestTypeEnum = SchoolRequestType;

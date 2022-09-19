@@ -1,8 +1,13 @@
 <form [formGroup]="form">
   <input type="hidden" formControlName="id" />
 
-  <div class="row mb-2">
-    <div class="col-6" *ngIf="displayMode.includes(FormTypeEnum.thai)">
+  <div class="row">
+    <div
+      class="col-6 mb-2"
+      *ngIf="
+        displayMode.includes(FormTypeEnum.thai) && isSchoolService === true
+      "
+    >
       <label
         class="form-label required"
         [ngClass]="{ required: mode === 'edit' }"
@@ -23,7 +28,7 @@
       </ng-container>
     </div>
 
-    <div class="col" *ngIf="false">
+    <div class="col mb-2" *ngIf="false">
       <label class="form-label">ประเภทการยื่น</label>
       <select
         class="form-select"
@@ -35,7 +40,7 @@
       </select>
     </div>
 
-    <div class="col" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
+    <div class="col mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
       <label class="form-label required"
         >หมายเลขหนังสือเดินทาง (Passport Number)
       </label>
@@ -49,7 +54,7 @@
       </ng-container>
     </div>
 
-    <div class="col" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
+    <div class="col mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
       <label class="form-label required">วันที่ออก</label>
       <input
         class="form-control"
@@ -59,7 +64,7 @@
       />
     </div>
 
-    <div class="col" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
+    <div class="col mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
       <label class="form-label required">วันที่หมดอายุ</label>
       <input
         class="form-control"
@@ -70,8 +75,8 @@
     </div>
   </div>
 
-  <div class="row mb-2">
-    <div class="col-md-2">
+  <div class="row">
+    <div class="col-md-2 mb-2">
       <label class="form-label" [ngClass]="{ required: mode === 'edit' }"
         >คำนำหน้าชื่อไทย</label
       >
@@ -86,7 +91,7 @@
         </option>
       </select>
     </div>
-    <div class="col-md">
+    <div class="col-md mb-2">
       <label class="form-label" [ngClass]="{ required: mode === 'edit' }"
         >ชื่อภาษาไทย</label
       >
@@ -108,7 +113,7 @@
       </ng-container>
     </div>
 
-    <div class="col-md" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
+    <div class="col-md mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
       <label class="form-label">ชื่อกลาง</label>
       <input
         [class.bg-light]="isDarkMode"
@@ -119,7 +124,7 @@
       />
     </div>
 
-    <div class="col-md">
+    <div class="col-md mb-2">
       <label class="form-label" [ngClass]="{ required: mode === 'edit' }"
         >นามสกุลภาษาไทย</label
       >
@@ -140,8 +145,8 @@
     </div>
   </div>
 
-  <div class="row mb-2">
-    <div class="col-md-2">
+  <div class="row">
+    <div class="col-md-2 mb-2">
       <label class="form-label required">คำนำหน้าชื่ออังกฤษ</label>
       <select
         [class.bg-white]="!isDarkMode && mode === 'edit'"
@@ -154,7 +159,7 @@
         </option>
       </select>
     </div>
-    <div class="col-md">
+    <div class="col-md mb-2">
       <label class="form-label required">ชื่อภาษาอังกฤษ</label>
       <input
         class="form-control"
@@ -173,7 +178,7 @@
         </span>
       </ng-container>
     </div>
-    <div class="col-md" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
+    <div class="col-md mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
       <label class="form-label">ชื่อกลาง</label>
       <input
         [class.bg-light]="isDarkMode"
@@ -183,7 +188,7 @@
         formControlName="middlenameen"
       />
     </div>
-    <div class="col-md">
+    <div class="col-md mb-2">
       <label class="form-label required">นามสกุลภาษาอังกฤษ</label>
       <input
         class="form-control"
@@ -202,8 +207,8 @@
     </div>
   </div>
 
-  <div class="row mb-2">
-    <div class="col" *ngIf="displayMode.includes(FormTypeEnum.thai)">
+  <div class="row">
+    <div class="col-md mb-2" *ngIf="displayMode.includes(FormTypeEnum.thai)">
       <label class="form-label required">เพศ</label>
       <select
         [class.bg-white]="!isDarkMode && mode === 'edit'"
@@ -216,7 +221,7 @@
         <option value="3">อื่นๆ</option>
       </select>
     </div>
-    <div class="col">
+    <div class="col-md mb-2">
       <label class="form-label required">วันเดือนปีเกิด</label>
       <input
         class="form-control"
@@ -226,7 +231,7 @@
       />
     </div>
 
-    <div class="col" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
+    <div class="col mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
       <label class="form-label required">ประเทศ</label>
       <select
         [class.bg-white]="!isDarkMode && mode === 'edit'"
@@ -240,7 +245,7 @@
       </select>
     </div>
 
-    <div class="col" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
+    <div class="col mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
       <label class="form-label">สัญชาติ</label>
       <select
         [class.bg-white]="!isDarkMode && mode === 'edit'"
@@ -255,8 +260,8 @@
     </div>
   </div>
 
-  <div class="row mb-2" *ngIf="displayMode.includes(FormTypeEnum.thai)">
-    <div class="col-md-6">
+  <div class="row" *ngIf="displayMode.includes(FormTypeEnum.thai)">
+    <div class="col-md-6 mb-2">
       <label class="form-label required">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
       <input
         class="form-control"
@@ -274,7 +279,7 @@
         </span>
       </ng-container>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 mb-2">
       <label class="form-label required">เบอร์โทรศัพท์ (ที่ทำงาน)</label>
       <input
         class="form-control"
@@ -292,8 +297,8 @@
     </div>
   </div>
 
-  <div class="row mb-2">
-    <div class="col-6" *ngIf="displayMode.includes(FormTypeEnum.thai)">
+  <div class="row">
+    <div class="col-md-6 mb-2" *ngIf="displayMode.includes(FormTypeEnum.thai)">
       <label class="form-label required">อีเมล</label>
       <input
         class="form-control"
@@ -307,7 +312,7 @@
         }}</span>
       </ng-container>
     </div>
-    <div class="col-md-6" *ngIf="false">
+    <div class="col-md-6 mb-2" *ngIf="false">
       <label class="form-label required">ตำแหน่ง</label>
       <input
         class="form-control"
@@ -318,8 +323,8 @@
     </div>
   </div>
 
-  <div class="row mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
-    <div class="col">
+  <div class="row" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
+    <div class="col mb-2">
       <label class="form-label">Visa Class </label>
       <select
         class="form-select"
@@ -333,7 +338,7 @@
       </select>
     </div>
 
-    <div class="col">
+    <div class="col mb-2">
       <label class="form-label">ประเภทวีซ่า </label>
       <select
         class="form-select"
@@ -347,14 +352,14 @@
       </select>
     </div>
 
-    <div class="col">
+    <div class="col mb-2">
       <label class="form-label">อนุญาตถึงวันที่ </label>
       <input formControlName="visaenddate" class="form-control" type="date" />
     </div>
   </div>
 
-  <div class="row mb-2" *ngIf="false">
-    <div class="col-6">
+  <div class="row" *ngIf="false">
+    <div class="col-6 mb-2">
       <label class="form-label required">สัญชาติ</label>
       <select
         [class.bg-white]="!isDarkMode && mode === 'edit'"

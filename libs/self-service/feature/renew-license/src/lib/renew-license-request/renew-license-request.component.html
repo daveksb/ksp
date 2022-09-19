@@ -6,14 +6,17 @@
     [showContent4]="false"
   ></self-service-request-status>
 
-  <div class="d-flex my-4">
-    <div class="detail__container bg-white w-25 me-1">
+  <div class="row mx-0 detail__container my-4">
+    <div class="col-md-2">
       <self-service-form-upload-image
         [imgDetail]="'col'"
       ></self-service-form-upload-image>
     </div>
-    <div class="detail__container bg-white w-100 ms-1">
-      <ksp-form-user-info [displayMode]="[userInfoType]"></ksp-form-user-info>
+    <div class="col-md">
+      <ksp-form-user-info
+        [displayMode]="[userInfoType]"
+        [isSchoolService]="false"
+      ></ksp-form-user-info>
     </div>
   </div>
 

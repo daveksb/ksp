@@ -1,52 +1,54 @@
 <form [formGroup]="form">
-  <div class="col d-flex align-items-center mb-2">
+  <div class="d-flex align-items-center mb-2">
     <input type="checkbox" class="me-2" formControlName="isAcademicChecked" />
     <label class="form-label">เลื่อนวิทยฐานะ</label>
   </div>
 
   <div class="row">
-    <div class="col mb-2">
+    <div class="col-md-6 mb-2">
       <label class="form-label">จาก</label>
       <input class="form-control" type="text" formControlName="oldAcademic" />
     </div>
-    <div class="col mb-2">
+    <div class="col-md-6 mb-2">
       <label class="form-label">เป็น</label>
       <input class="form-control" type="text" formControlName="newAcademic" />
     </div>
   </div>
 
   <div class="row">
-    <div class="col mb-2">
+    <div class="col-md-6 mb-2">
       <label class="form-label">ตามคำสั่ง</label>
       <input class="form-control" type="text" formControlName="orderName" />
     </div>
-    <div class="col mb-2">
+    <div class="col-md-6 mb-2">
       <label class="form-label">ที่</label>
       <input class="form-control" type="text" formControlName="orderNumber" />
     </div>
   </div>
 
   <div class="row">
-    <div class="col-6 mb-2">
+    <div class="col-md-6 mb-2">
       <label class="form-label">ลงวันที่</label>
       <input class="form-control" type="date" formControlName="orderDate" />
     </div>
   </div>
   <hr />
 
-  <div class="col d-flex align-items-center mb-2">
-    <input
-      type="checkbox"
-      class="me-2"
-      formControlName="isPendingAcademicChecked"
-    />
+  <div class="d-flex mb-2">
+    <div class="d-flex">
+      <input
+        type="checkbox"
+        class="me-2 mt-1"
+        formControlName="isPendingAcademicChecked"
+      />
+    </div>
     <label class="form-label"
       >อยู่ระหว่างการพิจารณาประเมินให้มีหรือเลื่อนวิทยฐานะ</label
     >
   </div>
 
   <div class="row">
-    <div class="col mb-2">
+    <div class="col-md-6 mb-2">
       <label class="form-label">จาก</label>
       <input
         class="form-control"
@@ -54,7 +56,7 @@
         formControlName="oldPendingAcademic"
       />
     </div>
-    <div class="col mb-2">
+    <div class="col-md-6 mb-2">
       <label class="form-label">เป็น</label>
       <input
         class="form-control"

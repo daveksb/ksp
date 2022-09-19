@@ -1,22 +1,22 @@
 <form [formGroup]="form">
-  <div class="col d-flex align-items-center mb-2">
+  <div class="d-flex align-items-center mb-2">
     <input type="checkbox" class="me-2" formControlName="isBookChecked" />
     <label class="form-label">ตำรา</label>
   </div>
 
   <div class="row">
-    <div class="col mb-2">
+    <div class="col-md-6 mb-2">
       <label class="form-label">ชื่อ</label>
       <input class="form-control" type="text" formControlName="bookName" />
     </div>
-    <div class="col mb-2">
+    <div class="col-md-6 mb-2">
       <label class="form-label">สำนักพิมพ์</label>
       <input class="form-control" type="text" formControlName="bookPublisher" />
     </div>
   </div>
 
   <div class="row">
-    <div class="col-6 mb-2">
+    <div class="col-md-6 mb-2">
       <label class="form-label">พิมพ์เมื่อ</label>
       <input
         class="form-control"
@@ -27,18 +27,18 @@
   </div>
   <hr />
 
-  <div class="col d-flex align-items-center mb-2">
+  <div class="d-flex align-items-center mb-2">
     <input type="checkbox" class="me-2" formControlName="isArticleChecked" />
     <label class="form-label">บทความ</label>
   </div>
 
   <div class="row">
-    <div class="col mb-2">
+    <div class="col-md-6 mb-2">
       <label class="form-label">เรื่อง</label>
       <input class="form-control" type="text" formControlName="articleName" />
     </div>
 
-    <div class="col mb-2">
+    <div class="col-md-6 mb-2">
       <label class="form-label">เผยแพร่ในวารสาร/หนังสือ/เว็บไซต์</label>
       <input
         class="form-control"
@@ -49,7 +49,7 @@
   </div>
 
   <div class="row">
-    <div class="col mb-2">
+    <div class="col-md-6 mb-2">
       <label class="form-label">สำนักพิมพ์</label>
       <input
         class="form-control"
@@ -57,7 +57,7 @@
         formControlName="articlePublisher"
       />
     </div>
-    <div class="col mb-2">
+    <div class="col-md-6 mb-2">
       <label class="form-label">พิมพ์เมื่อ</label>
       <input
         class="form-control"
@@ -68,7 +68,7 @@
   </div>
   <hr />
 
-  <div class="col d-flex align-items-center mb-2">
+  <div class="d-flex align-items-center mb-2">
     <input
       type="checkbox"
       class="me-2"
@@ -78,7 +78,7 @@
   </div>
 
   <div class="row">
-    <div class="col-6 mb-2">
+    <div class="col-md-6 mb-2">
       <label class="form-label">เรื่อง</label>
       <input
         class="form-control"
@@ -86,7 +86,7 @@
         formControlName="achievementName"
       />
     </div>
-    <div class="col-6 mb-2">
+    <div class="col-md-6 mb-2">
       <label class="form-label">วันเดือนปีที่ใช้</label>
       <input
         class="form-control"

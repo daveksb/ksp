@@ -43,7 +43,12 @@ export class SelfImproveActivityDetailComponent implements OnInit {
   @ViewChild(DynamicComponentDirective, { static: true })
   myHost!: DynamicComponentDirective;
 
-  addActivity = ['1.วุฒิบัตร'];
+  evidenceFiles = [
+    {
+      name: '1.วุฒิบัตร',
+      fileId: '',
+    },
+  ];
 
   constructor(
     private router: Router,
