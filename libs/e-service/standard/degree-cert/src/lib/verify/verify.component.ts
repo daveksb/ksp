@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DegreeCertProcessType } from '@ksp/shared/constant';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 
 @Component({

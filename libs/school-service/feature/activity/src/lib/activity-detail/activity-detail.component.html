@@ -10,9 +10,7 @@
 
   <div class="bg-white p-2">
     <div class="px-3">
-      <ksp-request-header-info
-        [requestDate]="'10 ตุลาคม 2565'"
-      ></ksp-request-header-info>
+      <ksp-request-header-info [requestDate]="today"></ksp-request-header-info>
       <hr />
     </div>
 
@@ -90,7 +88,7 @@
       <ng-template [ngIf]="activityType.value">
         <ksp-form-attachment
           title="กรุณาแนบหลักฐานประกอบการปฏิบัติงาน"
-          [groups]="addActivity"
+          [groups]="evidenceFiles"
         ></ksp-form-attachment
       ></ng-template>
     </div>

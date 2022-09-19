@@ -21,13 +21,13 @@
       <div class="box-header text-primary">
         ประวัติการตรวจสอบคุณสมบัติและเอกสาร
       </div>
-      <table class="table">
+      <table class="table w-75">
         <thead>
           <tr>
-            <th scope="col">ลำดับ</th>
-            <th scope="col">ชื่อ-นามสกุล เจ้าหน้าที่ที่ตรวจสอบ</th>
+            <th scope="col">ครั้งที่</th>
+            <th scope="col">ชื่อ-นามสกุล เจ้าหน้าที่</th>
             <th scope="col">วันที่ตรวจสอบ</th>
-            <th scope="col">สถานะ</th>
+            <th scope="col">ผลการตรวจสอบ</th>
           </tr>
         </thead>
 
@@ -50,22 +50,24 @@
         </div>
 
         <div class="d-flex align-items-center mb-3">
-          <div class="d-flex align-items-center">
-            <input type="radio" value="1" formControlName="verify" />
-            <label class="form-label ms-1"> ครบถ้วน และถูกต้อง </label>
+          <div class="form-control" style="width: 25rem">
+            <div class="d-flex align-items-center">
+              <input type="radio" value="1" formControlName="verify" />
+              <label class="form-label ms-2"> ครบถ้วน และถูกต้อง </label>
+            </div>
           </div>
         </div>
 
-        <div class="d-flex align-items-center">
+        <div class="form-control mb-3" style="width: 25rem">
           <div class="d-flex align-items-center">
-            <input type="radio" value="2" formControlName="verify" />
-            <label class="form-label ms-1"> ขอแก้ไข / เพิ่มเติม </label>
+            <div class="d-flex align-items-center">
+              <input type="radio" value="2" formControlName="verify" />
+              <label class="form-label ms-2"> ขอแก้ไข / เพิ่มเติม </label>
+            </div>
           </div>
-        </div>
 
-        <div class="row mb-3 ms-2">
-          <div class="col-6">
-            <label class="form-label">วันที่ต้องการใบคำขอส่งกลับ</label>
+          <div class="d-flex align-items-center mb-2">
+            <label class="form-label w-100 ms-4">วันที่ต้องการใบคำขอส่งกลับ</label>
             <input
               class="form-control"
               type="date"
@@ -75,16 +77,16 @@
           </div>
         </div>
 
-        <div class="d-flex align-items-center">
+        <div class="form-control mb-3" style="width: 25rem">
           <div class="d-flex align-items-center">
-            <input type="radio" value="3" formControlName="verify" />
-            <label class="form-label ms-1"> ขาดคุณสมบัติ </label>
+            <div class="d-flex align-items-center">
+              <input type="radio" value="3" formControlName="verify" />
+              <label class="form-label ms-2"> ขาดคุณสมบัติ </label>
+            </div>
           </div>
-        </div>
 
-        <div class="row mb-3 ms-2">
-          <div class="col-6">
-            <label class="form-label">สาเหตุ</label>
+          <div class="d-flex align-items-center mb-2">
+            <label class="form-label ms-4 w-25">สาเหตุ</label>
             <select class="form-select w-100" formControlName="reason">
               <option value="null" selected disabled hidden>กรุณาเลือก</option>
               <option value="1">One</option>
@@ -94,13 +96,60 @@
           </div>
         </div>
 
-        <div class="row ms-2">
+        <!-- <div class="row ms-2">
           <div class="col-6">
             <textarea
               class="form-control"
               rows="3"
               placeholder="โปรดระบุ"
             ></textarea>
+          </div>div
+        </div> -->
+
+        <hr />
+
+        <div class="d-flex align-items-center mb-3">
+          <div class="box-header text-primary me-1">
+            ต้องการส่งตรวจสอบลำดับต่อไป หรือส่งเพื่อพิจารณา
+          </div>
+          <div class="text-danger">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
+        </div>
+
+        <div class="d-flex align-items-center mb-3">
+          <div class="form-control" style="width: 25rem">
+            <div class="d-flex align-items-center">
+              <input class="radio" type="radio" value="1" />
+              <label class="form-label ms-2"> ส่งตรวจสอบลำดับต่อไป </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center mb-3">
+          <div class="form-control" style="width: 25rem">
+            <div class="d-flex align-items-center">
+              <input class="radio" type="radio" value="2" />
+              <label class="form-label ms-2">
+                ไม่ผ่านการตรวจสอบ เนื่องจากไม่ครบถ้วน / ไม่ถูกต้อง
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center mb-3">
+          <div class="form-control" style="width: 25rem">
+            <div class="d-flex align-items-center">
+              <input class="radio" type="radio" value="3" />
+              <label class="form-label ms-2"> ส่งเรื่องพิจารณา </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center mb-3">
+          <div class="form-control" style="width: 25rem">
+            <div class="d-flex align-items-center">
+              <input class="radio" type="radio" value="4" />
+              <label class="form-label ms-2"> ยกเลิก </label>
+            </div>
           </div>
         </div>
       </div>

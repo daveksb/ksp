@@ -10,8 +10,8 @@
         [requestDate]="today"
         [requestNumber]="requestNo"
       ></ksp-request-header-info>
-
-      <div class="bg-white px-3 py-2">
+      <hr />
+      <div class="bg-white">
         <div class="box-header mb-2">ข้อมูลผลงานหนึ่งโรงเรียนหนึ่งนวัตกรรม</div>
 
         <div class="row mb-2">
@@ -59,8 +59,8 @@
           </ng-container>
         </div>
 
-        <!--  <div class="box-header mb-3">ผู้ร่วมพัฒนาผลงานนวัตกรรม</div>
-        <div class="form-label text-black">ผู้บริหารสถานศึกษา</div>
+        <div class="box-header mb-2">ผู้ร่วมพัฒนาผลงานนวัตกรรม</div>
+        <!-- <div class="form-label text-black">ผู้บริหารสถานศึกษา</div>
         <div class="mb-3">
           <table class="table table-responsive">
             <thead class="header__table">
@@ -132,10 +132,11 @@
             </tbody>
           </table>
         </div> -->
-        <div class="form-label text-black">คณะผู้ร่วมพัฒนาผลงานนวัตกรรม</div>
-        <div class="mb-3">
-          <table class="table table-responsive">
-            <thead class="header__table">
+
+        <div class="form-label">คณะผู้ร่วมพัฒนาผลงานนวัตกรรม</div>
+        <div class="table-responsive">
+          <table class="table mb-2">
+            <thead>
               <tr>
                 <th scope="col">ลำดับ</th>
                 <th scope="col">ประเภทผู้ร่วมพัฒนา</th>
@@ -148,14 +149,14 @@
                 <th scope="col">วิทยฐานะ</th>
               </tr>
             </thead>
-            <tbody class="body__table">
+            <tbody>
               <ng-container formArrayName="osoimember">
                 <ng-container
                   *ngFor="let row of members.controls; let i = index"
                 >
                   <tr [formGroupName]="i">
-                    <td style="width: 20px" class="text-center">{{ i + 1 }}</td>
-                    <td style="width: 180px">
+                    <th class="text-center">{{ i + 1 }}</th>
+                    <td>
                       <select class="form-select" formControlName="membertype">
                         <option value="null" selected hidden disabled>
                           กรุณาเลือก
@@ -165,14 +166,14 @@
                         </option>
                       </select>
                     </td>
-                    <td style="width: 160px">
+                    <td>
                       <input
                         type="text"
                         class="form-control"
                         formControlName="idcardno"
                       />
                     </td>
-                    <td style="width: 120px">
+                    <td>
                       <select class="form-select" formControlName="prefix">
                         <option value="null" selected hidden disabled>
                           เลือก
@@ -185,35 +186,35 @@
                         </option>
                       </select>
                     </td>
-                    <td style="width: 240px">
+                    <td>
                       <input
                         type="text"
                         class="form-control"
                         formControlName="firstname"
                       />
                     </td>
-                    <td style="width: 240px">
+                    <td>
                       <input
                         type="text"
                         class="form-control"
                         formControlName="lastname"
                       />
                     </td>
-                    <td style="width: 200px">
+                    <td>
                       <input
                         type="text"
                         class="form-control"
                         formControlName="phone"
                       />
                     </td>
-                    <td style="width: 200px">
+                    <td>
                       <input
                         type="text"
                         class="form-control"
                         formControlName="email"
                       />
                     </td>
-                    <td style="width: 200px">
+                    <td>
                       <input
                         type="text"
                         class="form-control"
@@ -248,7 +249,7 @@
         </div>
 
         <div class="box-header text-primary">VDO ประกอบการขอรางวัล</div>
-        <div>ลิงก์ (youtube)</div>
+        <div class="form-label">ลิงก์ (youtube)</div>
         <input class="form-control" type="url" formControlName="vdolink" />
       </div>
     </div>

@@ -120,40 +120,6 @@ export class SchoolRequestListComponent implements AfterViewInit {
     });
   }
 
-  goPrevious() {
-    if (this.currentPage == 0) {
-      this.isLastPage = false;
-      return;
-    }
-    this.currentPage -= 1;
-    const offset = this.pageRow * this.currentPage;
-    const params = {
-      ...this.searchParams,
-      ...{ offset: `${offset}` },
-    };
-    this.requestService.searchRequest(params).subscribe((res: any) => {
-      this.dataSource.data = res;
-    });
-  }
-
-  goNext() {
-    if (this.isLastPage) {
-      return;
-    }
-    this.currentPage += 1;
-    const offset = this.pageRow * this.currentPage;
-    const params = {
-      ...this.searchParams,
-      ...{ offset: `${offset + 1}` },
-    };
-    this.requestService.searchRequest(params).subscribe((res: any) => {
-      if (res.length < this.pageRow) {
-        this.isLastPage = true;
-      }
-      this.dataSource.data = res;
-    });
-  }
-
   viewRequest(requestType: number, subType: number, requestId: number) {
     switch (requestType) {
       case 4:

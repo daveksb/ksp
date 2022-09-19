@@ -26,7 +26,7 @@ export class EServiceDegreeCertListComponent implements OnInit {
          */
         this.showActionButtons = [1, 2].includes(Number(res.get('type')));
       }
-      this.pageType = Number(res.get('type'));
+      this.pageType = Number(res.get('processId'));
 
       console.log('page type = ', this.pageType);
     });
