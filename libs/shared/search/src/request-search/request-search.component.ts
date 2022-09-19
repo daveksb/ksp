@@ -16,7 +16,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 @UntilDestroy()
 @Component({
-  selector: 'ksp-temp-license-search',
+  selector: 'ksp-school-request-search',
   standalone: true,
   imports: [CommonModule, MatIconModule, ReactiveFormsModule, MatTooltipModule],
   templateUrl: './request-search.component.html',

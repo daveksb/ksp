@@ -72,13 +72,42 @@ export class SchoolRequestListComponent implements OnInit {
     this.requestService.searchRequest(payload).subscribe((res) => {
       //console.log('res = ', res);
       if (res && res.length) {
-        this.dataSource.data = res;
+        const result = this.applyClientFilter(res, filters);
+        this.dataSource.data = result;
       }
     });
   }
 
-  applyClientFilter(data: SchoolRequest[], filters: any) {
+  applyClientFilter(data: SchoolRequest[], oldFilters: any) {
     //
+    const { requesttype, ...param } = oldFilters;
+    console.log('param = ', param);
+    return data.filter((d) => {
+      const filter1 = param.subtype ? `${d.subtype}` === param.subtype : true;
+
+      const filter2 = param.requestno
+        ? d.requestno?.includes(param.requestno)
+        : true;
+
+      const filter3 = param.firstnameth
+        ? d.firstnameth?.includes(param.firstnameth) ||
+          d.lastnameth?.includes(param.firstnameth)
+        : true;
+
+      const filter4 = param.idcardno
+        ? d.idcardno?.includes(param.idcardno)
+        : true;
+
+      const filter5 = param.passportno
+        ? d.passportno?.includes(param.passportno)
+        : true;
+
+      const filter6 = param.currentprocess
+        ? `${d.currentprocess}` === param.currentprocess
+        : true;
+
+      return filter1 && filter2 && filter3 && filter4 && filter5 && filter6;
+    });
   }
 
   clear() {
