@@ -1,64 +1,63 @@
-<div class="row mb-2">
-  <div class="col-6">
-    <label class="form-label">Address No. / home / room / condo</label>
-    <input class="form-control" type="text" />
+<form [formGroup]="form">
+  <div class="row mb-2">
+    <div class="col-6">
+      <label class="form-label">Address No. / home / room / condo</label>
+      <input class="form-control" type="text" formControlName="addressName" />
+    </div>
+    <div class="col">
+      <label class="form-label">Soi</label>
+      <input class="form-control" type="text" formControlName="lane" />
+    </div>
+    <div class="col">
+      <label class="form-label">Road</label>
+      <input class="form-control" type="text" formControlName="road" />
+    </div>
   </div>
-  <div class="col">
-    <label class="form-label">Soi</label>
-    <input class="form-control" type="text" />
-  </div>
-  <div class="col">
-    <label class="form-label">Road</label>
-    <input class="form-control" type="text" />
-  </div>
-</div>
 
-<div class="row mb-2">
-  <div class="col">
-    <label class="form-label">sub-district</label>
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+  <div class="row mb-2">
+    <div class="col">
+      <label class="form-label">sub-district</label>
+      <select class="form-select" (change)="updatePostcode($event)" formControlName="subDistrict">
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option *ngFor="let t of subDistricts" [value]="t?.tambolCode">
+          {{ t?.tambolName }}
+        </option>
+      </select>
+    </div>
+    <div class="col">
+      <label class="form-label">district</label>
+      <select class="form-select" (change)="districtChanged.emit($event)" formControlName="district">
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option *ngFor="let a of districts" [value]="a?.amphurCode">
+          {{ a?.amphurName }}
+        </option>
+      </select>
+    </div>
+    <div class="col-6">
+      <label class="form-label">Province</label>
+      <select class="form-select" (change)="provinceChanged.emit($event)" formControlName="province">
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option
+          *ngFor="let province of provinces"
+          [value]="province?.province_id">
+          {{ province?.province_name }}
+        </option>
+      </select>
+    </div>
   </div>
-  <div class="col">
-    <label class="form-label">district</label>
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
-  </div>
-  <div class="col-6">
-    <label class="form-label">Province</label>
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
-  </div>
-</div>
 
-<div class="row mb-2">
-  <div class="col">
-    <label class="form-label">zip code</label>
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+  <div class="row mb-2">
+    <div class="col">
+      <label class="form-label">zip code</label>
+      <input class="form-control" type="text" formControlName="zipCode" />
+    </div>
+    <div class="col">
+      <label class="form-label">Cell Phone</label>
+      <input class="form-control" type="text" formControlName="phone" />
+    </div>
+    <div class="col-6">
+      <label class="form-label">E-mail</label>
+      <input class="form-control" type="text" formControlName="email" />
+    </div>
   </div>
-  <div class="col">
-    <label class="form-label">Cell Phone</label>
-    <input class="form-control" type="text" />
-  </div>
-  <div class="col-6">
-    <label class="form-label">E-mail</label>
-    <input class="form-control" type="text" />
-  </div>
-</div>
+</form>

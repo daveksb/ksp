@@ -1,5 +1,4 @@
-<ksp-top-nav
-  ><span header>TEACHING LICENSE APPLICATION FORM</span>
+<ksp-top-nav><span header>TEACHING LICENSE APPLICATION FORM</span>
 </ksp-top-nav>
 
 <div class="main__container py-2">
@@ -12,8 +11,7 @@
       [showContent5]="false"
       [showContent6]="false"
       [showContent7]="false"
-      [title]="title"
-    ></self-service-request-status>
+      [title]="title"></self-service-request-status>
   </div>
   <br />
   <div class="box-header text-center">
@@ -24,8 +22,7 @@
     labelPosition="bottom"
     [animationDuration]="'0'"
     [selectedIndex]="0"
-    #stepper
-  >
+    #stepper>
     <mat-step [completed]="false">
       <ng-template matStepLabel>Check Documentation </ng-template>
       <self-service-foreign-license-step-one></self-service-foreign-license-step-one>
