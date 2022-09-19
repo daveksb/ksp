@@ -77,9 +77,11 @@
 
     <ng-container *ngIf="educationTypes === 'supervision'">
       <ksp-education-level-form-one
-        *ngIf="selectedEducationType === 0"></ksp-education-level-form-one>
+        *ngIf="selectedEducationType === 0"
+        formControlName="educationLevelForm"></ksp-education-level-form-one>
       <ksp-education-level-form-six
-        *ngIf="selectedEducationType === 1"></ksp-education-level-form-six>
+        *ngIf="selectedEducationType === 1"
+        formControlName="educationLevelForm"></ksp-education-level-form-six>
       <ng-container *ngIf="selectedEducationType >= 0">
         <div class="mt-3">
           <ksp-form-attachment
