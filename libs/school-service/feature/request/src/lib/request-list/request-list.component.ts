@@ -9,7 +9,7 @@ import {
   SchoolRequestType,
 } from '@ksp/shared/constant';
 import { SchoolRequest } from '@ksp/shared/interface';
-import { RequestService, SchoolInfoService } from '@ksp/shared/service';
+import { RequestService } from '@ksp/shared/service';
 
 @Component({
   templateUrl: './request-list.component.html',
@@ -72,6 +72,8 @@ export class SchoolRequestListComponent implements AfterViewInit {
       if (res && res.length) {
         const result = this.applyClientFilter(res, filters);
         this.dataSource.data = result;
+      } else {
+        this.dataSource.data = [];
       }
     });
   }
