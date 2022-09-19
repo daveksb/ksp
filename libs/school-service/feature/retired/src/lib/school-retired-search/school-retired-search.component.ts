@@ -21,10 +21,10 @@ export class SchoolRetiredSearchComponent {
 
   onItemChange(userName: string) {
     this.selectUser = userName;
-    //console.log('universityCode = ', universityCode);
   }
 
-  search() {
+  search(form:any) {
+    console.log(form)
     this.data = data;
   }
 

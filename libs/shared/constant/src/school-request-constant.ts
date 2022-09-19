@@ -16,6 +16,16 @@ export const SchoolRequestType = [
   { id: 40, name: 'ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม' },
 ];
 
+export const SchoolRetireReason = [
+  { id: 1, name: 'reason1' },
+  { id: 2, name: 'reason2' },
+  { id: 3, name: 'reason3' },
+  { id: 4, name: 'reason4' },
+  { id: 5, name: 'reason5' },
+  { id: 6, name: 'reason6' },
+];
+
+
 // url params keep in db for temp license request
 export enum SchoolRequestSubType {
   'ครู' = 1,

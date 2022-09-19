@@ -4,7 +4,8 @@
       <div class="box-header text-primary">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
 
       <ksp-basic-institute-search
-        [searchType]="searchType"
+        formControlName="searchType"
+        [bureaus]="bureaus$|async"
       ></ksp-basic-institute-search>
 
       <div class="row mb-2">
@@ -37,7 +38,7 @@
       >
         ล้างข้อมูล
       </button>
-      <button (click)="search.emit(true)" class="ms-2 btn btn-primary">
+      <button (click)="search.emit(form.value)" class="ms-2 btn btn-primary">
         ค้นหา
       </button>
     </div>
