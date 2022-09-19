@@ -1,7 +1,7 @@
 export { AddressService } from './school-service/address.service';
 export { GeneralInfoService } from './school-service/general-info.service';
 export { StaffService } from './school-service/staff.service';
-export { SchRequestService } from './school-service/sch-request.service';
+export { RequestService } from './school-service/sch-request.service';
 export { SchoolInfoService } from './school-service/school-info.service';
 
 export { EducationDetailService } from './self-service/education-detail.service';

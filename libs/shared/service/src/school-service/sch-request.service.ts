@@ -7,7 +7,7 @@ import { map, Observable, shareReplay } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class SchRequestService {
+export class RequestService {
   constructor(private http: HttpClient) {}
 
   createRequest(form: any): Observable<any> {

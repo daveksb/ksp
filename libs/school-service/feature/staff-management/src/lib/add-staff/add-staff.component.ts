@@ -204,7 +204,7 @@ export class AddStaffComponent implements OnInit {
 
     payload = replaceEmptyWithNull(payload);
 
-    this.staffService.updateStaff2(payload).subscribe((res) => {
+    this.staffService.updateStaff(payload).subscribe((res) => {
       //console.log('update result = ', res);
     });
   }
