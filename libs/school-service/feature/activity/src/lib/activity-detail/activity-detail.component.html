@@ -60,7 +60,7 @@
     </div>
 
     <div class="bg-light py-2 px-4 m-3">
-      <form [formGroup]="activityForm">
+      <form [formGroup]="form">
         <div class="box-header mb-2">กิจกรรมการพัฒนาตนเอง</div>
         <div class="row">
           <div class="col-8 mb-3">
@@ -68,6 +68,7 @@
               formControlName="activityType"
               class="form-select"
               style="white-space: break-spaces"
+              #selector
             >
               <option value="null" selected hidden disabled>กรุณาเลือก</option>
               <option
@@ -80,8 +81,67 @@
             </select>
           </div>
         </div>
+        <!-- <ng-template kspDynamicComponent formControlName="test"></ng-template> -->
+        <ksp-activity-add-degree
+          *ngIf="selector.value === '0'"
+          formControlName="activityDetail"
+        ></ksp-activity-add-degree>
+
+        <ksp-activity-diploma-receive
+          *ngIf="selector.value === '1'"
+          formControlName="activityDetail"
+        ></ksp-activity-diploma-receive>
+
+        <ksp-activity-seminar
+          *ngIf="selector.value === '2'"
+          formControlName="activityDetail"
+        ></ksp-activity-seminar>
+
+        <ksp-activity-academic-archivement
+          *ngIf="selector.value === '3'"
+          formControlName="activityDetail"
+        ></ksp-activity-academic-archivement>
+
+        <ksp-activity-lecturer
+          *ngIf="selector.value === '4'"
+          formControlName="activityDetail"
+        ></ksp-activity-lecturer>
+
+        <ksp-activity-write-book
+          *ngIf="selector.value === '5'"
+          formControlName="activityDetail"
+        ></ksp-activity-write-book>
+
+        <ksp-activity-innovation
+          *ngIf="selector.value === '6'"
+          formControlName="activityDetail"
+        ></ksp-activity-innovation>
+
+        <ksp-activity-research
+          *ngIf="selector.value === '7'"
+          formControlName="activityDetail"
+        ></ksp-activity-research>
+
+        <ksp-activity-reward
+          *ngIf="selector.value === '8'"
+          formControlName="activityDetail"
+        ></ksp-activity-reward>
+
+        <ksp-activity-lecture-register
+          *ngIf="selector.value === '9'"
+          formControlName="activityDetail"
+        ></ksp-activity-lecture-register>
+
+        <ksp-activity-study-tour
+          *ngIf="selector.value === '10'"
+          formControlName="activityDetail"
+        ></ksp-activity-study-tour>
+
+        <ksp-activity-learning-material
+          *ngIf="selector.value === '11'"
+          formControlName="activityDetail"
+        ></ksp-activity-learning-material>
       </form>
-      <ng-template kspDynamicComponent></ng-template>
     </div>
 
     <div class="mx-3">

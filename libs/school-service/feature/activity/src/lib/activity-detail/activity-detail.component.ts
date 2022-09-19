@@ -32,8 +32,9 @@ import { thaiDate } from '@ksp/shared/utility';
 export class ActivityDetailComponent implements OnInit {
   today = thaiDate(new Date());
 
-  activityForm = this.fb.group({
+  form = this.fb.group({
     activityType: [null],
+    activityDetail: [],
   });
 
   activityTypes: ListData[] = [];
@@ -56,20 +57,24 @@ export class ActivityDetailComponent implements OnInit {
   ngOnInit(): void {
     this.activityTypes = activityTypes;
 
-    this.activityType.valueChanges.subscribe((res) => {
+    /*     this.activityType.valueChanges.subscribe((res) => {
       this.loadComponent(Number(res));
+    }); */
+
+    this.form.valueChanges.subscribe((res) => {
+      console.log('res = ', res);
     });
   }
 
   get activityType() {
-    return this.activityForm.controls.activityType;
+    return this.form.controls.activityType;
   }
 
-  loadComponent(index: number) {
+  /*   loadComponent(index: number) {
     const viewContainerRef = this.myHost.viewContainerRef;
     viewContainerRef.clear();
     viewContainerRef.createComponent<DynamicComponent>(componentList[index]);
-  }
+  } */
 
   cancel() {
     this.router.navigate(['/activity', 'list']);
