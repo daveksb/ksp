@@ -8,14 +8,11 @@ import {
 } from '@ksp/shared/dialog';
 import { FormBuilder } from '@angular/forms';
 import { parseJson, thaiDate } from '@ksp/shared/utility';
-import {
-  SchoolRequestProcess,
-  SchoolRequestSubType,
-} from '@ksp/shared/constant';
+import { SchoolRequestSubType } from '@ksp/shared/constant';
 import {
   AddressService,
   GeneralInfoService,
-  RequestLicenseService,
+  RequestService,
 } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 
@@ -50,7 +47,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private route: ActivatedRoute,
-    private requestService: RequestLicenseService,
+    private requestService: RequestService,
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService
   ) {}
@@ -107,7 +104,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/', 'foreign-license', 'list']);
+    this.router.navigate(['/foreign-license', 'list']);
   }
 
   onConfirmed() {
@@ -152,10 +149,10 @@ const evidenceFiles = [
 const verifyChoices = [
   {
     name: 'อนุมัติ',
-    value: SchoolRequestProcess['ผ่านการรับรอง/พิจารณา'],
+    value: 1,
   },
   {
     name: 'ไม่อนุมัติ',
-    value: SchoolRequestProcess['ไม่ผ่านการรับรอง/พิจารณา'],
+    value: 2,
   },
 ];

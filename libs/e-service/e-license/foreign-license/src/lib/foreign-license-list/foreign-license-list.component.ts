@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { tempLicenseRequestType } from '@ksp/shared/interface';
-import { RequestLicenseService } from '@ksp/shared/service';
+import { RequestService } from '@ksp/shared/service';
 
 @Component({
   selector: 'ksp-foreign-license-list',
@@ -24,7 +24,7 @@ export class ForeignLicenseListComponent implements AfterViewInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private requestService: RequestLicenseService
+    private requestService: RequestService
   ) {}
 
   ngAfterViewInit(): void {
@@ -57,7 +57,7 @@ export class ForeignLicenseListComponent implements AfterViewInit {
   }
 
   nextPage(id: number) {
-    this.router.navigate(['/', 'foreign-license', 'detail', id], {
+    this.router.navigate(['/foreign-license', 'detail', id], {
       queryParams: { type: tempLicenseRequestType.foreign },
     });
   }

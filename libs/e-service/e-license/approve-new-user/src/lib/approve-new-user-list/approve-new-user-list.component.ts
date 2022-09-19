@@ -3,8 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SchoolServiceUserPageType } from '@ksp/shared/interface';
-import { RequestLicenseService } from '@ksp/shared/service';
-import { parseJson } from '@ksp/shared/utility';
+import { RequestService } from '@ksp/shared/service';
 
 @Component({
   templateUrl: './approve-new-user-list.component.html',
@@ -18,10 +17,7 @@ export class ApproveNewUserListComponent implements AfterViewInit {
 
   selectedUniversity = '';
 
-  constructor(
-    private router: Router,
-    private requestService: RequestLicenseService
-  ) {}
+  constructor(private router: Router, private requestService: RequestService) {}
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;

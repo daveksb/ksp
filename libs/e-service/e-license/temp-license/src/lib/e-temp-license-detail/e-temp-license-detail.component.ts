@@ -4,7 +4,6 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   levels,
-  SchoolRequestProcess,
   SchoolRequestSubType,
   subjects,
   UserInfoFormType,
@@ -12,7 +11,7 @@ import {
 import {
   AddressService,
   GeneralInfoService,
-  RequestLicenseService,
+  RequestService,
   StaffService,
 } from '@ksp/shared/service';
 import { parseJson, thaiDate } from '@ksp/shared/utility';
@@ -66,10 +65,9 @@ export class ETempLicenseDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private service: TempLicenseDetailService,
-    private requestService: RequestLicenseService,
+    private requestService: RequestService,
     private addressService: AddressService,
     private generalInfoService: GeneralInfoService,
-    //private tempLicenseService: TempLicenseService,
     private staffService: StaffService
   ) {}
 
