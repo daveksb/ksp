@@ -10,7 +10,6 @@ import { ERequestService, GeneralInfoService } from '@ksp/shared/service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { parseJson, thaiDate } from '@ksp/shared/utility';
-import { RequestProcessStatus } from '@ksp/shared/constant';
 
 @Component({
   templateUrl: './user-detail.component.html',
