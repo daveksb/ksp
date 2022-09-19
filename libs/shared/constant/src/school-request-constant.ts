@@ -26,17 +26,41 @@ export enum SchoolRequestSubType {
 export enum UserInfoFormType {
   'thai',
   'foreign',
-  //'register',
 }
 
-export const RequestProcessStatus = [
-  //ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
+export const EduOccupyList = [
   {
-    requestType: 3,
-    processId: 0,
-    processName: 'ยกเลิก',
-    status: [{ id: 1, sname: 'ยกเลิก', ename: 'ยกเลิก' }],
+    systemId: 2,
+    id: 1,
+    name: 'ครู',
   },
+  {
+    systemId: 2,
+    id: 2,
+    name: 'ผู้บริหารสถานศึกษา',
+  },
+  {
+    systemId: 2,
+    id: 5,
+    name: 'อื่นๆ',
+  },
+];
+
+export interface RequestProcess {
+  requestType: number;
+  processId: number;
+  processName: string;
+  status: RequestStatus[]; //[{ id: 1, sname: 'ยกเลิก', ename: 'ยกเลิก' }],
+}
+
+export interface RequestStatus {
+  id: number;
+  sname: string;
+  ename: string;
+}
+
+export const RequestProcessList: RequestProcess[] = [
+  //ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
   {
     requestType: 3,
     processId: 1,
@@ -79,14 +103,15 @@ export const RequestProcessStatus = [
       { id: 3, sname: 'ไม่ผ่านการรับรอง/พิจารณา', ename: '' },
     ],
   },
-
-  //ขอสร้างเลขคุรุสภาสำหรับครูชาวต่างชาติ
   {
-    requestType: 4,
+    requestType: 3,
     processId: 0,
     processName: 'ยกเลิก',
     status: [{ id: 1, sname: 'ยกเลิก', ename: 'ยกเลิก' }],
   },
+
+  //ขอสร้างเลขคุรุสภาสำหรับครูชาวต่างชาติ
+
   {
     requestType: 4,
     processId: 1,
@@ -107,14 +132,14 @@ export const RequestProcessStatus = [
       { id: 4, sname: 'ยกเลิก', ename: '' },
     ],
   },
-
-  //ขอหนังสือรับรองคุณวุฒิการศึกษา
   {
-    requestType: 6,
+    requestType: 4,
     processId: 0,
     processName: 'ยกเลิก',
     status: [{ id: 1, sname: 'ยกเลิก', ename: 'ยกเลิก' }],
   },
+
+  //ขอหนังสือรับรองคุณวุฒิการศึกษา
   {
     requestType: 6,
     processId: 1,
@@ -150,14 +175,14 @@ export const RequestProcessStatus = [
       { id: 6, sname: '', ename: 'ไม่ยืนยันผลการตรวจสอบ' },
     ],
   },
-
-  //ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม
   {
-    requestType: 40,
+    requestType: 6,
     processId: 0,
     processName: 'ยกเลิก',
     status: [{ id: 1, sname: 'ยกเลิก', ename: 'ยกเลิก' }],
   },
+
+  //ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม
   {
     requestType: 40,
     processId: 1,
@@ -200,6 +225,12 @@ export const RequestProcessStatus = [
       { id: 3, sname: 'ไม่ผ่านการพิจารณา', ename: '' },
       { id: 4, sname: 'คัดค้าน/เพิกถอน', ename: '' },
     ],
+  },
+  {
+    requestType: 40,
+    processId: 0,
+    processName: 'ยกเลิก',
+    status: [{ id: 1, sname: 'ยกเลิก', ename: 'ยกเลิก' }],
   },
 ];
 

@@ -23,8 +23,8 @@
       <label class="form-label">ประเภทวิชาชีพ</label>
       <select class="form-select" formControlName="subtype">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
-        <option *ngFor="let e of eduOccupyList" [value]="e?.eduOccupyType">
-          {{ e?.eduOccupyName }}
+        <option *ngFor="let e of eduOccupyList" [value]="e?.id">
+          {{ e?.name }}
         </option>
       </select>
     </div>
@@ -56,9 +56,9 @@
       <label class="form-label">ขั้นตอนการดำเนินการ</label>
       <select class="form-select" formControlName="currentprocess">
         <option value="null" disabled hidden>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+        <option *ngFor="let p of processList" [value]="p?.processId">
+          {{ p.processName }}
+        </option>
       </select>
     </div>
 
@@ -66,9 +66,9 @@
       <label class="form-label">สถานะการดำเนินการ</label>
       <select class="form-select" formControlName="requeststatus">
         <option value="null" disabled hidden>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+        <option *ngFor="let s of statusList" [value]="s.id">
+          {{ s.sname }}
+        </option>
       </select>
     </div>
   </div>

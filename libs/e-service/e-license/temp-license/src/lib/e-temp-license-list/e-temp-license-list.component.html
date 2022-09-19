@@ -12,12 +12,12 @@
     </div>
 
     <div class="bg-white px-3 py-3">
-      <ksp-temp-license-search
+      <ksp-school-request-search
         [eduOccupyList]="eduOccupyList$ | async"
         formControlName="licenseSearch"
         (clear)="clear()"
         (search)="search($event)"
-      ></ksp-temp-license-search>
+      ></ksp-school-request-search>
 
       <hr />
 

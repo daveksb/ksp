@@ -1,28 +1,22 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
-  RequestProcessStatus,
+  RequestProcessList,
   SchoolRequestSubType,
   SchoolRequestType,
 } from '@ksp/shared/constant';
+import { SchoolRequest } from '@ksp/shared/interface';
 import { RequestService, SchoolInfoService } from '@ksp/shared/service';
-import { replaceEmptyWithNull } from '@ksp/shared/utility';
-import { Observable } from 'rxjs';
 
 @Component({
   templateUrl: './request-list.component.html',
   styleUrls: ['./request-list.component.scss'],
 })
-export class SchoolRequestListComponent implements OnInit, AfterViewInit {
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  eduOccupyList$!: Observable<any>;
-
+export class SchoolRequestListComponent implements AfterViewInit {
   schoolId = '0010201056';
-  personSelected = false;
-
   displayedColumns: string[] = [
     'id',
     'requestno',
@@ -37,8 +31,7 @@ export class SchoolRequestListComponent implements OnInit, AfterViewInit {
     'requestdoc',
     'approvedoc',
   ];
-  dataSource = new MatTableDataSource<TempLicenseInfo>();
-  //SchoolRequestProcess = SchoolRequestProcess;
+  dataSource = new MatTableDataSource<SchoolRequest>();
   SchoolRequestType = SchoolRequestType;
   SchoolRequestSubType = SchoolRequestSubType;
   currentPage = 0;
@@ -50,44 +43,68 @@ export class SchoolRequestListComponent implements OnInit, AfterViewInit {
     licenseSearch: [],
   });
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private schoolInfoService: SchoolInfoService,
     private requestService: RequestService
   ) {}
 
-  ngOnInit(): void {
-    this.eduOccupyList$ = this.schoolInfoService.getSchoolEduOccupy();
-  }
-
-  ngAfterViewInit(): void {
+  ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
 
-  search(params: any) {
-    console.log('params = ', params);
-    const data = {
-      ...params,
-      ...{ schoolid: `${this.schoolId}`, offset: '0', row: `${this.pageRow}` },
+  search(filters: any) {
+    //console.log('params = ', params);
+    const payload = {
+      systemtype: '2',
+      requesttype: `${filters.requesttype}`,
+      schoolid: `${this.schoolId}`,
+      subtype: filters.subtype,
     };
-    const payload = replaceEmptyWithNull(data);
 
     this.searchParams = payload;
     this.isLastPage = false;
 
-    this.requestService.searchRequest(payload).subscribe((res: any) => {
-      const mapData = res.map((i: any) => {
-        return {
-          ...i,
-          ...{
-            mapRequestType: SchoolRequestType.find(
-              (j) => j.id === +i.requesttype
-            )?.name,
-          },
-        };
-      });
-      this.dataSource.data = mapData;
+    this.requestService.searchRequest(payload).subscribe((res) => {
+      //console.log('res = ', res);
+      if (res && res.length) {
+        const result = this.applyClientFilter(res, filters);
+        this.dataSource.data = result;
+      }
+    });
+  }
+
+  applyClientFilter(data: SchoolRequest[], oldFilters: any) {
+    //
+    const { requesttype, ...param } = oldFilters;
+    console.log('param = ', param);
+    return data.filter((d) => {
+      const filter1 = param.subtype ? `${d.subtype}` === param.subtype : true;
+
+      const filter2 = param.requestno
+        ? d.requestno?.includes(param.requestno)
+        : true;
+
+      const filter3 = param.firstnameth
+        ? d.firstnameth?.includes(param.firstnameth) ||
+          d.lastnameth?.includes(param.firstnameth)
+        : true;
+
+      const filter4 = param.idcardno
+        ? d.idcardno?.includes(param.idcardno)
+        : true;
+
+      const filter5 = param.passportno
+        ? d.passportno?.includes(param.passportno)
+        : true;
+
+      const filter6 = param.currentprocess
+        ? `${d.currentprocess}` === param.currentprocess
+        : true;
+
+      return filter1 && filter2 && filter3 && filter4 && filter5 && filter6;
     });
   }
 
@@ -104,13 +121,13 @@ export class SchoolRequestListComponent implements OnInit, AfterViewInit {
   viewRequest(requestType: number, subType: number, requestId: number) {
     switch (requestType) {
       case 4:
-        return this.foreignPage(requestId.toString());
+        return this.foreignPage(`${requestId}`);
 
       case 6:
-        return this.qualificationPage(requestId.toString());
+        return this.qualificationPage(`${requestId}`);
 
       case 40:
-        return this.rewardPage(requestId);
+        return this.rewardPage(`${requestId}`);
     }
 
     this.router.navigate(['/temp-license', 'request', requestId], {
@@ -126,16 +143,12 @@ export class SchoolRequestListComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/qualification-approve', 'detail', id]);
   }
 
-  rewardPage(id: number) {
-    if (id) {
-      this.router.navigate(['/request-reward', 'detail', id]);
-    } else {
-      this.router.navigate(['/request-reward', 'detail']);
-    }
+  rewardPage(id = '') {
+    this.router.navigate(['/request-reward', 'detail', id]);
   }
 
   checkProcess(processId: number) {
-    const process = RequestProcessStatus.find((p) => {
+    const process = RequestProcessList.find((p) => {
       return p.processId === processId && p.requestType === 3;
     });
 
@@ -148,6 +161,10 @@ export class SchoolRequestListComponent implements OnInit, AfterViewInit {
       return (s.id = statusId);
     });
     return status;
+  }
+
+  checkRequestType(RequestTypeId: number) {
+    return SchoolRequestType.find((s) => s.id === RequestTypeId)?.name;
   }
 }
 
