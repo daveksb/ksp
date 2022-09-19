@@ -7,6 +7,7 @@ import {
   SchoolRequestSubType,
   SchoolRequestType,
 } from '@ksp/shared/constant';
+import { SchoolRequest } from '@ksp/shared/interface';
 import { RequestService, SchoolInfoService } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 
@@ -33,7 +34,7 @@ export class SchoolRequestListComponent implements OnInit {
     'requestdoc',
     'approvedoc',
   ];
-  dataSource = new MatTableDataSource<TempLicenseInfo>();
+  dataSource = new MatTableDataSource<SchoolRequest>();
   SchoolRequestType = SchoolRequestType;
   SchoolRequestSubType = SchoolRequestSubType;
   currentPage = 0;
@@ -56,34 +57,28 @@ export class SchoolRequestListComponent implements OnInit {
     this.eduOccupyList$ = this.schoolInfoService.getSchoolEduOccupy();
   }
 
-  search(params: any) {
-    console.log('params = ', params);
-
+  search(filters: any) {
+    //console.log('params = ', params);
     const payload = {
       systemtype: '2',
-      requesttype: `${params.requesttype}`,
+      requesttype: `${filters.requesttype}`,
       schoolid: `${this.schoolId}`,
-      subtype: params.subtype,
+      subtype: filters.subtype,
     };
 
     this.searchParams = payload;
     this.isLastPage = false;
 
-    this.requestService.searchRequest(payload).subscribe((res: any) => {
+    this.requestService.searchRequest(payload).subscribe((res) => {
+      //console.log('res = ', res);
       if (res && res.length) {
-        const mapData = res.map((i: any) => {
-          return {
-            ...i,
-            ...{
-              mapRequestType: SchoolRequestType.find(
-                (j) => j.id === +i.requesttype
-              )?.name,
-            },
-          };
-        });
-        this.dataSource.data = mapData;
+        this.dataSource.data = res;
       }
     });
+  }
+
+  applyClientFilter(data: SchoolRequest[], filters: any) {
+    //
   }
 
   clear() {
@@ -173,6 +168,10 @@ export class SchoolRequestListComponent implements OnInit {
       return (s.id = statusId);
     });
     return status;
+  }
+
+  checkRequestType(RequestTypeId: number) {
+    return SchoolRequestType.find((s) => s.id === RequestTypeId)?.name;
   }
 }
 

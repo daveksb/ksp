@@ -82,7 +82,7 @@
           <ng-container matColumnDef="requesttype">
             <th mat-header-cell *matHeaderCellDef>ประเภทใบคำขอ</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.mapRequestType }}
+              {{ checkRequestType(+element.requesttype) }}
             </td>
           </ng-container>
 

@@ -26,7 +26,6 @@ export enum SchoolRequestSubType {
 export enum UserInfoFormType {
   'thai',
   'foreign',
-  //'register',
 }
 
 export const EduOccupyList = [

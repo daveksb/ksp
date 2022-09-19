@@ -38,9 +38,12 @@ export class RequestService {
     );
   }
 
-  searchRequest(payload: any): Observable<any> {
+  searchRequest(payload: any): Observable<SchoolRequest[]> {
     return this.http
-      .post(`${environment.apiUrl}/kspstaff/searchschrequest`, payload)
+      .post<SchoolRequest[]>(
+        `${environment.apiUrl}/kspstaff/searchschrequest`,
+        payload
+      )
       .pipe(
         shareReplay(),
         map((data: any) => data.datareturn)
