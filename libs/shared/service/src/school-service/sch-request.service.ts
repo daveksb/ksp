@@ -7,7 +7,7 @@ import { map, Observable, shareReplay } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class RequestService {
+export class SchRequestService {
   constructor(private http: HttpClient) {}
 
   createRequest(form: any): Observable<any> {
@@ -44,27 +44,6 @@ export class RequestService {
         `${environment.apiUrl}/kspstaff/searchschrequest`,
         payload
       )
-      .pipe(
-        shareReplay(),
-        map((data: any) => data.datareturn)
-      );
-  }
-
-  searchRegisterRequest(payload: any): Observable<any> {
-    return this.http
-      .post(
-        `${environment.apiUrl}/kspstaff/schrequestsearchjoinschschool`,
-        payload
-      )
-      .pipe(
-        shareReplay(),
-        map((data: any) => data.datareturn)
-      );
-  }
-
-  searchLicenseRequest(payload: any): Observable<any> {
-    return this.http
-      .post(`${environment.apiUrl}/e-service/requestsearch`, payload)
       .pipe(
         shareReplay(),
         map((data: any) => data.datareturn)

@@ -6,7 +6,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { GeneralInfoService, RequestService } from '@ksp/shared/service';
+import { ERequestService, GeneralInfoService } from '@ksp/shared/service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { parseJson, thaiDate } from '@ksp/shared/utility';
@@ -73,7 +73,7 @@ export class UserDetailComponent implements OnInit {
     public dialog: MatDialog,
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private requestService: RequestService,
+    private eRequestService: ERequestService,
     private generalInfoService: GeneralInfoService
   ) {}
 
@@ -97,9 +97,11 @@ export class UserDetailComponent implements OnInit {
       currentprocess: this.verifySelected,
     };
 
-    this.requestService.changeRequestProcess(payload).subscribe((res) => {
-      //console.log('Cancel request  = ', res);
-    });
+    /***
+     *
+     *
+     *
+     */
   }
 
   checkRequestId() {
@@ -112,7 +114,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   loadRequestFromId(id: number) {
-    this.requestService.getRequestById(id).subscribe((res: any) => {
+    this.eRequestService.getRequestById(id).subscribe((res: any) => {
       this.requestData = res;
       this.requestNo = res.requestno;
       //this.pathUserInfo(res);
@@ -126,11 +128,11 @@ export class UserDetailComponent implements OnInit {
   }
 
   approveRequest() {
-    const payload = {
+    /*     const payload = {
       id: `${this.requestId}`,
       currentprocess: `2`,
-    };
-    this.requestService.changeRequestProcess(payload).subscribe((res) => {
+    }; */
+    this.eRequestService.checkRequest(this.requestId).subscribe((res) => {
       //console.log('Cancel request  = ', res);
       //create new user in sch_user
     });

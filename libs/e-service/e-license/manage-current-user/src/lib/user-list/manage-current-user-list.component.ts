@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SchoolServiceUserPageType } from '@ksp/shared/interface';
-import { RequestService } from '@ksp/shared/service';
+import { ERequestService } from '@ksp/shared/service';
 
 @Component({
   templateUrl: './manage-current-user-list.component.html',
@@ -25,7 +25,7 @@ export class ManageCurrentUserListComponent implements AfterViewInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private requestService: RequestService
+    private eRequestService: ERequestService
   ) {}
 
   ngAfterViewInit(): void {
@@ -55,7 +55,7 @@ export class ManageCurrentUserListComponent implements AfterViewInit {
       row: '10',
     };
 
-    this.requestService.searchRegisterRequest(payload).subscribe((res: any) => {
+    this.eRequestService.searchRequest(payload).subscribe((res: any) => {
       this.dataSource.data = res;
     });
   }

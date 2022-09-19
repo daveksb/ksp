@@ -11,8 +11,8 @@ import { parseJson, thaiDate } from '@ksp/shared/utility';
 import { SchoolRequestSubType } from '@ksp/shared/constant';
 import {
   AddressService,
+  ERequestService,
   GeneralInfoService,
-  RequestService,
 } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 
@@ -47,7 +47,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private route: ActivatedRoute,
-    private requestService: RequestService,
+    private eRequestService: ERequestService,
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService
   ) {}
@@ -67,7 +67,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
   }
 
   loadRequestFromId(id: number) {
-    this.requestService.getRequestById(id).subscribe((res: any) => {
+    this.eRequestService.getRequestById(id).subscribe((res: any) => {
       this.requestData = res;
       this.requestNo = res.requestno;
       //this.currentProcess = +res.currentprocess;

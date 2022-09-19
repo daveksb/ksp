@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { tempLicenseRequestType } from '@ksp/shared/interface';
-import { RequestService, SchoolInfoService } from '@ksp/shared/service';
+import { ERequestService } from '@ksp/shared/service';
 
 @Component({
   selector: 'e-service-temp-license-list',
@@ -27,7 +27,7 @@ export class ETempLicenseListComponent implements AfterViewInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private requestService: RequestService
+    private eRequestService: ERequestService
   ) {}
 
   ngAfterViewInit(): void {
@@ -52,7 +52,7 @@ export class ETempLicenseListComponent implements AfterViewInit {
       row,
     };
 
-    this.requestService.searchLicenseRequest(payload).subscribe((res: any) => {
+    this.eRequestService.searchRequest(payload).subscribe((res: any) => {
       this.dataSource.data = res;
     });
   }
