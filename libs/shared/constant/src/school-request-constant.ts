@@ -83,7 +83,6 @@ export const RequestProcessList: RequestProcess[] = [
     requestType: 3,
     processId: 3,
     processName: 'ตรวจสอบเอกสาร ลำดับที่ 1',
-
     status: [
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
       { id: 2, sname: 'ปรับแก้ไข/เพิ่มเติม', ename: '' },
@@ -111,7 +110,6 @@ export const RequestProcessList: RequestProcess[] = [
   },
 
   //ขอสร้างเลขคุรุสภาสำหรับครูชาวต่างชาติ
-
   {
     requestType: 4,
     processId: 1,

@@ -6,10 +6,9 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { GeneralInfoService, RequestLicenseService } from '@ksp/shared/service';
+import { ERequestService, GeneralInfoService } from '@ksp/shared/service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { SchoolRequestProcess } from '@ksp/shared/constant';
 import { parseJson, thaiDate } from '@ksp/shared/utility';
 
 @Component({
@@ -23,21 +22,21 @@ export class UserDetailComponent implements OnInit {
     [
       {
         name: 'อนุมัติ',
-        value: SchoolRequestProcess['ผ่านการรับรอง/พิจารณา'],
+        value: 1,
       },
       {
         name: 'ไม่อนุมัติ',
-        value: SchoolRequestProcess['ไม่ผ่านการรับรอง/พิจารณา'],
+        value: 1,
       },
     ],
     [
       {
         name: 'ใช้งาน',
-        value: SchoolRequestProcess['ผ่านการรับรอง/พิจารณา'],
+        value: 1,
       },
       {
         name: 'ไม่ใช้งาน',
-        value: SchoolRequestProcess['ไม่ผ่านการรับรอง/พิจารณา'],
+        value: 1,
       },
     ],
   ];
@@ -74,7 +73,7 @@ export class UserDetailComponent implements OnInit {
     public dialog: MatDialog,
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private requestService: RequestLicenseService,
+    private eRequestService: ERequestService,
     private generalInfoService: GeneralInfoService
   ) {}
 
@@ -96,13 +95,13 @@ export class UserDetailComponent implements OnInit {
     const payload = {
       id: `${this.requestId}`,
       currentprocess: this.verifySelected,
-      //approveState: `${SchoolRequestProcess['ผ่านการรับรอง/พิจารณา']}`,
-      //disapproveState: `${SchoolRequestProcess['ไม่ผ่านการรับรอง/พิจารณา']}`,
     };
 
-    this.requestService.changeRequestProcess(payload).subscribe((res) => {
-      //console.log('Cancel request  = ', res);
-    });
+    /***
+     *
+     *
+     *
+     */
   }
 
   checkRequestId() {
@@ -115,7 +114,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   loadRequestFromId(id: number) {
-    this.requestService.getRequestById(id).subscribe((res: any) => {
+    this.eRequestService.getRequestById(id).subscribe((res: any) => {
       this.requestData = res;
       this.requestNo = res.requestno;
       //this.pathUserInfo(res);
@@ -129,11 +128,11 @@ export class UserDetailComponent implements OnInit {
   }
 
   approveRequest() {
-    const payload = {
+    /*     const payload = {
       id: `${this.requestId}`,
-      currentprocess: `${SchoolRequestProcess.ผ่านการตรวจสอบ}`,
-    };
-    this.requestService.changeRequestProcess(payload).subscribe((res) => {
+      currentprocess: `2`,
+    }; */
+    this.eRequestService.checkRequest(this.requestId).subscribe((res) => {
       //console.log('Cancel request  = ', res);
       //create new user in sch_user
     });

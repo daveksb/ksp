@@ -8,14 +8,11 @@ import {
 } from '@ksp/shared/dialog';
 import { FormBuilder } from '@angular/forms';
 import { parseJson, thaiDate } from '@ksp/shared/utility';
-import {
-  SchoolRequestProcess,
-  SchoolRequestSubType,
-} from '@ksp/shared/constant';
+import { SchoolRequestSubType } from '@ksp/shared/constant';
 import {
   AddressService,
+  ERequestService,
   GeneralInfoService,
-  RequestLicenseService,
 } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 
@@ -50,7 +47,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private route: ActivatedRoute,
-    private requestService: RequestLicenseService,
+    private eRequestService: ERequestService,
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService
   ) {}
@@ -70,7 +67,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
   }
 
   loadRequestFromId(id: number) {
-    this.requestService.getRequestById(id).subscribe((res: any) => {
+    this.eRequestService.getRequestById(id).subscribe((res: any) => {
       this.requestData = res;
       this.requestNo = res.requestno;
       //this.currentProcess = +res.currentprocess;
@@ -107,7 +104,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/', 'foreign-license', 'list']);
+    this.router.navigate(['/foreign-license', 'list']);
   }
 
   onConfirmed() {
@@ -152,10 +149,10 @@ const evidenceFiles = [
 const verifyChoices = [
   {
     name: 'อนุมัติ',
-    value: SchoolRequestProcess['ผ่านการรับรอง/พิจารณา'],
+    value: 1,
   },
   {
     name: 'ไม่อนุมัติ',
-    value: SchoolRequestProcess['ไม่ผ่านการรับรอง/พิจารณา'],
+    value: 2,
   },
 ];

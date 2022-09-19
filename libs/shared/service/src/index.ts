@@ -1,8 +1,11 @@
-export { AddressService } from './address.service';
-export { GeneralInfoService } from './general-info.service';
-export { StaffService } from './staff.service';
-export { RequestService } from './request.service';
+export { AddressService } from './school-service/address.service';
+export { GeneralInfoService } from './school-service/general-info.service';
+export { StaffService } from './school-service/staff.service';
+export { SchRequestService } from './school-service/sch-request.service';
+export { SchoolInfoService } from './school-service/school-info.service';
+
 export { EducationDetailService } from './self-service/education-detail.service';
-export { SchoolInfoService } from './school-info.service';
 export { MyInfoService } from './self-service/my-info.service';
 export { LicenseRequestService } from './self-service/license-request.service';
+
+export { ERequestService } from './e-service/e-request.service';

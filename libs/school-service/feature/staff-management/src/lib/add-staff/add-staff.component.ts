@@ -168,7 +168,7 @@ export class AddStaffComponent implements OnInit {
       ...{ hiringinfo: JSON.stringify(formData.hiringInfo) },
     };
     //console.log('insert payload = ', payload);
-    this.staffService.addStaff2(payload).subscribe((res) => {
+    this.staffService.addStaff(payload).subscribe((res) => {
       //console.log('add staff result = ', res);
       this.onCompleted();
       this.form.reset();

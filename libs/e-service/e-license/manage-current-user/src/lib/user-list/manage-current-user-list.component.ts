@@ -1,17 +1,16 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SchoolServiceUserPageType } from '@ksp/shared/interface';
-import { RequestLicenseService } from '@ksp/shared/service';
-import { replaceEmptyWithNull } from '@ksp/shared/utility';
+import { ERequestService } from '@ksp/shared/service';
 
 @Component({
   templateUrl: './manage-current-user-list.component.html',
   styleUrls: ['./manage-current-user-list.component.scss'],
 })
-export class ManageCurrentUserListComponent implements OnInit, AfterViewInit {
+export class ManageCurrentUserListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   form = this.fb.group({
@@ -26,14 +25,12 @@ export class ManageCurrentUserListComponent implements OnInit, AfterViewInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private requestService: RequestLicenseService
+    private eRequestService: ERequestService
   ) {}
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
-
-  ngOnInit(): void {}
 
   onItemChange(universityCode: string) {
     this.selectedUniversity = universityCode;
@@ -58,7 +55,7 @@ export class ManageCurrentUserListComponent implements OnInit, AfterViewInit {
       row: '10',
     };
 
-    this.requestService.searchRegisterRequest(payload).subscribe((res: any) => {
+    this.eRequestService.searchRequest(payload).subscribe((res: any) => {
       this.dataSource.data = res;
     });
   }
@@ -68,7 +65,7 @@ export class ManageCurrentUserListComponent implements OnInit, AfterViewInit {
   }
 
   goToDetail(id: number) {
-    this.router.navigate(['/', 'manage-current-user', 'detail', id], {
+    this.router.navigate(['/manage-current-user', 'detail', id], {
       queryParams: { type: SchoolServiceUserPageType.ManageCurrentUser },
     });
   }
