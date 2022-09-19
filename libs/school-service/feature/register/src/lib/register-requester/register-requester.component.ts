@@ -52,7 +52,6 @@ export class RegisterRequesterComponent implements OnInit {
     //this.school = history?.state?.data ?? null;
     localForage.getItem('registerSelectedSchool').then((res) => {
       this.school = res;
-      //console.log('school = ', this.school);
     });
 
     this.getListData();

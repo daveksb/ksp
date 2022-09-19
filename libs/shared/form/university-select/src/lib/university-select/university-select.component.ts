@@ -25,6 +25,7 @@ export class UniversitySelectComponent
   @Input() label1 = 'สังกัด';
   @Input() label2 = 'โรงเรียน / สถานศึกษา';
   @Input() schoolName = '';
+  @Input() bureauName= '';
   @Input() searchType = '';
   bureaus$!: Observable<any>;
   @Output() selectedUniversity = new EventEmitter<string>();
