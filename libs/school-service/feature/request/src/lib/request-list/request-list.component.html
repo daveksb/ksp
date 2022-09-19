@@ -159,23 +159,12 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
 
-        <nav
-          *ngIf="dataSource.data.length"
-          style="padding-top: 20px"
-          aria-label="Page navigation example"
+        <mat-paginator
+          [length]="dataSource.data.length"
+          [pageSize]="10"
+          [showFirstLastButtons]="true"
         >
-          <ul class="pagination">
-            <li role="button" (click)="goPrevious()" class="page-item">
-              <a class="page-link"> << </a>
-            </li>
-            <li role="button" class="page-item">
-              <a class="page-link">{{ currentPage + 1 }}</a>
-            </li>
-            <li role="button" (click)="goNext()" class="page-item">
-              <a class="page-link">>></a>
-            </li>
-          </ul>
-        </nav>
+        </mat-paginator>
       </div>
     </div>
   </div>

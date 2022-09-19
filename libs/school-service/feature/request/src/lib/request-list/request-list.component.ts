@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
@@ -9,17 +10,13 @@ import {
 } from '@ksp/shared/constant';
 import { SchoolRequest } from '@ksp/shared/interface';
 import { RequestService, SchoolInfoService } from '@ksp/shared/service';
-import { Observable } from 'rxjs';
 
 @Component({
   templateUrl: './request-list.component.html',
   styleUrls: ['./request-list.component.scss'],
 })
-export class SchoolRequestListComponent implements OnInit {
-  eduOccupyList$!: Observable<any>;
-
+export class SchoolRequestListComponent implements AfterViewInit {
   schoolId = '0010201056';
-
   displayedColumns: string[] = [
     'id',
     'requestno',
@@ -46,15 +43,16 @@ export class SchoolRequestListComponent implements OnInit {
     licenseSearch: [],
   });
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private schoolInfoService: SchoolInfoService,
     private requestService: RequestService
   ) {}
 
-  ngOnInit(): void {
-    this.eduOccupyList$ = this.schoolInfoService.getSchoolEduOccupy();
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
   }
 
   search(filters: any) {
