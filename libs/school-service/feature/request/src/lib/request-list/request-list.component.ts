@@ -19,7 +19,6 @@ export class SchoolRequestListComponent implements OnInit {
   eduOccupyList$!: Observable<any>;
 
   schoolId = '0010201056';
-  personSelected = false;
 
   displayedColumns: string[] = [
     'id',
@@ -36,7 +35,6 @@ export class SchoolRequestListComponent implements OnInit {
     'approvedoc',
   ];
   dataSource = new MatTableDataSource<TempLicenseInfo>();
-  //SchoolRequestProcess = SchoolRequestProcess;
   SchoolRequestType = SchoolRequestType;
   SchoolRequestSubType = SchoolRequestSubType;
   currentPage = 0;
