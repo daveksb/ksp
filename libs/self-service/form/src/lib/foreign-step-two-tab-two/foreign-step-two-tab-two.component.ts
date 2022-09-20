@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ForeignStepTwoTabOneComponent } from '../foreign-step-two-tab-one/foreign-step-two-tab-one.component';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
@@ -21,6 +21,7 @@ export class ForeignStepTwoTabTwoComponent extends KspFormBaseComponent {
   @Output() districtChanged = new EventEmitter<any>();
 
   override form = this.fb.group({
+    addressName: [''],
     addressForm: [''],
   });
 
@@ -29,7 +30,7 @@ export class ForeignStepTwoTabTwoComponent extends KspFormBaseComponent {
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value: any) => {
-        this.onChange({ ...value.addressForm });
+        this.onChange(value);
         this.onTouched();
       })
     );

@@ -16,8 +16,7 @@
     [date]="'1'"
     [requestNo]="'1'"
     [KuruspaId]="'1'"
-    [personId]="'1'"
-  ></self-service-license-info>
+    [personId]="'1'"></self-service-license-info>
   <br />
 
   <div class="box-header">ค้นหาใบคำขอ</div>
@@ -75,8 +74,7 @@
     <button
       mat-button
       [matMenuTriggerFor]="license"
-      class="btn text-primary border-primary bg-white"
-    >
+      class="btn text-primary border-primary bg-white">
       + สร้างใบคำขอ
     </button>
     <mat-menu #license="matMenu">
@@ -121,7 +119,7 @@
 
     <mat-menu #teacher="matMenu">
       <button mat-menu-item (click)="thaiTeacher()">ครูชาวไทย</button>
-      <button mat-menu-item (click)="foreignTeacher()">ครูชาวต่างชาติ</button>
+      <button mat-menu-item (click)="foreignTeacher(1)">ครูชาวต่างชาติ</button>
     </mat-menu>
 
     <mat-menu #renewTeacher="matMenu">
@@ -133,7 +131,7 @@
       <button mat-menu-item (click)="schoolManager()">
         ผู้บริหารสถานศึกษาชาวไทย
       </button>
-      <button mat-menu-item (click)="foreignTeacher()">
+      <button mat-menu-item (click)="foreignTeacher(2)">
         ผู้บริหารสถานศึกษาชาวต่างชาติ
       </button>
     </mat-menu>

@@ -1,11 +1,12 @@
-<div class="row mb-2">
-  <div class="col">
-    <label class="form-label">Name of Educational Institution</label>
-    <input class="form-control" type="text" />
-  </div>
-</div>
 <form [formGroup]="form">
+  <div class="row mb-2">
+    <div class="col">
+      <label class="form-label">Name of Educational Institution</label>
+      <input class="form-control" type="text" formControlName="addressName" />
+    </div>
+  </div>
   <self-service-foreign-step-two-tab-one
+    formControlName="addressForm"
     [provinces]="provinces"
     [districts]="districts"
     [subDistricts]="subDistricts"

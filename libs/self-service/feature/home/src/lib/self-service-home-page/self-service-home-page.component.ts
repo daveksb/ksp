@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { SelfServiceRequestSubType } from '@ksp/shared/constant';
 
 @Component({
   selector: 'ksp-self-service-home-page',
@@ -25,8 +26,10 @@ export class SelfServiceHomePageComponent {
     this.router.navigate(['/', 'license', 'teacher']);
   }
 
-  foreignTeacher() {
-    this.router.navigate(['/', 'license', 'agreement']);
+  foreignTeacher(type: SelfServiceRequestSubType) {
+    this.router.navigate(['/', 'license', 'agreement'], {
+      queryParams: { type },
+    });
   }
 
   schoolManager() {

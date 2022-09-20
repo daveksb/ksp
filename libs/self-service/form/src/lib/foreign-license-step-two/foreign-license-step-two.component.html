@@ -1,97 +1,111 @@
-<div class="d-flex">
-  <div class="detail__container bg-white w-25 me-2">
-    <self-service-form-upload-image
-      [imgDetail]="'col'"></self-service-form-upload-image>
+<form [formGroup]="form">
+  <div class="d-flex">
+    <div class="detail__container bg-white w-25 me-2">
+      <self-service-form-upload-image
+        [imgDetail]="'col'"></self-service-form-upload-image>
+    </div>
+    <div class="detail__container bg-white w-100 ms-2">
+      <div class="box-header">Personal informations</div>
+      <div class="row mb-2">
+        <div class="col">
+          <label class="form-label">title</label>
+          <select class="form-select" formControlName="prefixen">
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
+            <option *ngFor="let prefix of prefixList$ | async" [value]="prefix.id">
+              {{ prefix?.name_en }}
+            </option>
+          </select>
+        </div>
+        <div class="col">
+          <label class="form-label">Last Name</label>
+          <input class="form-control" type="text" formControlName="lastnameen" />
+        </div>
+        <div class="col">
+          <label class="form-label">First Name</label>
+          <input class="form-control" type="text" formControlName="firstnameen" />
+        </div>
+        <div class="col">
+          <label class="form-label">Middle Name</label>
+          <input class="form-control" type="text" formControlName="middlenameen" />
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-6">
+          <label class="form-label">Nationality</label>
+          <select class="form-select" formControlName="nationality">
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
+            <option *ngFor="let n of nationalitys$ | async" [value]="n.nationId">
+              {{ n.nationNameEn }}
+            </option>
+          </select>
+        </div>
+        <div class="col">
+          <label class="form-label">birthdate</label>
+          <input class="form-control" type="date" formControlName="birthdate" />
+        </div>
+        <div class="col">
+          <label class="form-label">Age</label>
+          <input class="form-control" type="text" />
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col">
+          <label class="form-label">passport</label>
+          <select class="form-select">
+            <option selected>กรุณาเลือก</option>
+            <option value="1">Type One</option>
+            <option value="2">Type Two</option>
+            <option value="3">Type Three</option>
+          </select>
+        </div>
+        <div class="col">
+          <label class="form-label">No. Passport</label>
+          <input class="form-control" type="text" formControlName="passportno" />
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="detail__container bg-white w-100 ms-2">
-    <div class="box-header">Personal informations</div>
-    <div class="row mb-2">
-      <div class="col">
-        <label class="form-label">title</label>
-        <select class="form-select">
-          <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option *ngFor="let prefix of prefixList$ | async" [value]="prefix.id">
-            {{ prefix?.name_en }}
-          </option>
-        </select>
-      </div>
-      <div class="col">
-        <label class="form-label">Last Name</label>
-        <input class="form-control" type="text" />
-      </div>
-      <div class="col">
-        <label class="form-label">First Name</label>
-        <input class="form-control" type="text" />
-      </div>
-      <div class="col">
-        <label class="form-label">Middle Name</label>
-        <input class="form-control" type="text" />
-      </div>
-    </div>
-    <div class="row mb-2">
-      <div class="col-6">
-        <label class="form-label">Nationality</label>
-        <input class="form-control" type="text" />
-      </div>
-      <div class="col">
-        <label class="form-label">birthdate</label>
-        <input class="form-control" type="date" />
-      </div>
-      <div class="col">
-        <label class="form-label">Age</label>
-        <input class="form-control" type="text" />
-      </div>
-    </div>
-    <div class="row mb-2">
-      <div class="col">
-        <label class="form-label">passport</label>
-        <select class="form-select">
-          <option selected>กรุณาเลือก</option>
-          <option value="1">Type One</option>
-          <option value="2">Type Two</option>
-          <option value="3">Type Three</option>
-        </select>
-      </div>
-      <div class="col">
-        <label class="form-label">No. Passport</label>
-        <input class="form-control" type="text" />
-      </div>
-    </div>
+  <br />
+  <div class="bg-white">
+    <mat-tab-group class="tab-group" animationDuration="0ms" [selectedIndex]="0">
+      <mat-tab label="PRESENT ADDRESS IN THAILAND" class="tab-content">
+        <self-service-foreign-step-two-tab-one
+          formControlName="addresForm"
+          [provinces]="provinces1$ | async"
+          [districts]="district1$ | async"
+          [subDistricts]="subDistrict1$ | async"
+          (provinceChanged)="provinceChanged(1, $event)"
+          (districtChanged)="districtChanged(1, $event)">
+        </self-service-foreign-step-two-tab-one>
+      </mat-tab>
+
+      <mat-tab label="WORK PLACE">
+        <self-service-foreign-step-two-tab-two
+          formControlName="workplaceForm"
+          [provinces]="provinces2$ | async"
+          [districts]="district2$ | async"
+          [subDistricts]="subDistrict2$ | async"
+          (provinceChanged)="provinceChanged(2, $event)"
+          (districtChanged)="districtChanged(2, $event)">
+        </self-service-foreign-step-two-tab-two>
+      </mat-tab>
+
+      <mat-tab label="ACADEMIC DETAILS">
+        <self-service-foreign-step-two-tab-three
+          formControlName="academicForm"
+          [countries]="countries2$ | async">
+        </self-service-foreign-step-two-tab-three>
+        <ksp-form-attachment
+          [groups]="academicFiles"
+          title="attach supporting evidence"></ksp-form-attachment>
+      </mat-tab>
+
+      <mat-tab label="GRANTION TEACHING LICENSES">
+        <self-service-foreign-step-two-tab-four
+          formControlName="grantionLicenseForm"
+          [countryList]="countries$ | async">
+        </self-service-foreign-step-two-tab-four>
+      </mat-tab>
+    </mat-tab-group>
   </div>
-</div>
-<br />
-<div class="bg-white">
-  <mat-tab-group class="tab-group" animationDuration="0ms" [selectedIndex]="0">
-    <mat-tab label="PRESENT ADDRESS IN THAILAND" class="tab-content">
-      <self-service-foreign-step-two-tab-one
-        [provinces]="provinces1$ | async"
-        [districts]="district1$ | async"
-        [subDistricts]="subDistrict1$ | async"
-        (provinceChanged)="provinceChanged(1, $event)"
-        (districtChanged)="districtChanged(1, $event)">
-      </self-service-foreign-step-two-tab-one>
-    </mat-tab>
-
-    <mat-tab label="WORK PLACE">
-      <self-service-foreign-step-two-tab-two
-        [provinces]="provinces2$ | async"
-        [districts]="district2$ | async"
-        [subDistricts]="subDistrict2$ | async"
-        (provinceChanged)="provinceChanged(2, $event)"
-        (districtChanged)="districtChanged(2, $event)">
-      </self-service-foreign-step-two-tab-two>
-    </mat-tab>
-
-    <mat-tab label="ACADEMIC DETAILS">
-      <self-service-foreign-step-two-tab-three></self-service-foreign-step-two-tab-three>
-      <ksp-form-attachment
-        [groups]="academicFiles"
-        title="attach supporting evidence"></ksp-form-attachment>
-    </mat-tab>
-
-    <mat-tab label="GRANTION TEACHING LICENSES">
-      <self-service-foreign-step-two-tab-four
-        [countryList]="countries$ | async"></self-service-foreign-step-two-tab-four>
-    </mat-tab>
-  </mat-tab-group>
-</div>
+</form>
