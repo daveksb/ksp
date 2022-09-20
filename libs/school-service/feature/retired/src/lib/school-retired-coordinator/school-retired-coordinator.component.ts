@@ -102,7 +102,7 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
             retiredTnfo.ref2 = '02';
             retiredTnfo.ref3 = '5';
             retiredTnfo.systemtype = '2';
-            retiredTnfo.requesttype = '4';
+            retiredTnfo.requesttype = '2';
             retiredTnfo.subtype = '5';
             retiredTnfo.currentprocess = `1`;
             retiredTnfo.requeststatus = `1`;
