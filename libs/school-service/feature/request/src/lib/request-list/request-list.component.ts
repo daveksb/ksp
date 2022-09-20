@@ -3,14 +3,15 @@ import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import {
-  RequestProcessList,
-  SchoolRequestSubType,
-  SchoolRequestType,
-} from '@ksp/shared/constant';
+import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
 import { SchoolRequest } from '@ksp/shared/interface';
 import { RequestService } from '@ksp/shared/service';
-
+import { applyClientFilter } from '@ksp/shared/utility';
+import {
+  checkProcess,
+  checkRequestType,
+  checkStatus,
+} from '@ksp/shared/utility';
 @Component({
   templateUrl: './request-list.component.html',
   styleUrls: ['./request-list.component.scss'],
@@ -25,6 +26,9 @@ export class SchoolRequestListComponent implements AfterViewInit {
   isLastPage = false;
   pageRow = 10;
   searchParams: any;
+  checkProcess = checkProcess;
+  checkRequestType = checkRequestType;
+  checkStatus = checkStatus;
 
   form = this.fb.group({
     licenseSearch: [],
@@ -57,7 +61,7 @@ export class SchoolRequestListComponent implements AfterViewInit {
     this.requestService.searchRequest(payload).subscribe((res) => {
       //console.log('res = ', res);
       if (res && res.length) {
-        const result = this.applyClientFilter(res, filters);
+        const result = applyClientFilter(res, filters);
         this.dataSource.data = result;
       } else {
         this.dataSource.data = [];
@@ -65,39 +69,8 @@ export class SchoolRequestListComponent implements AfterViewInit {
     });
   }
 
-  applyClientFilter(data: SchoolRequest[], searchParams: any) {
-    //
-    const { requesttype, ...param } = searchParams;
-    console.log('param = ', param);
-    return data.filter((d) => {
-      const filter1 = param.subtype ? `${d.subtype}` === param.subtype : true;
-
-      const filter2 = param.requestno
-        ? d.requestno?.includes(param.requestno)
-        : true;
-
-      const filter3 = param.firstnameth
-        ? d.firstnameth?.includes(param.firstnameth) ||
-          d.lastnameth?.includes(param.firstnameth)
-        : true;
-
-      const filter4 = param.idcardno
-        ? d.idcardno?.includes(param.idcardno)
-        : true;
-
-      const filter5 = param.passportno
-        ? d.passportno?.includes(param.passportno)
-        : true;
-
-      const filter6 = param.currentprocess
-        ? `${d.currentprocess}` === param.currentprocess
-        : true;
-
-      return filter1 && filter2 && filter3 && filter4 && filter5 && filter6;
-    });
-  }
-
   clear() {
+    this.form.reset();
     this.dataSource.data = [];
   }
 
@@ -134,25 +107,6 @@ export class SchoolRequestListComponent implements AfterViewInit {
 
   rewardPage(id = '') {
     this.router.navigate(['/request-reward', 'detail', id]);
-  }
-
-  checkProcess(processId: number) {
-    const process = RequestProcessList.find((p) => {
-      return p.processId === processId && p.requestType === 3;
-    });
-    return process;
-  }
-
-  checkStatus(processId: number, statusId: number) {
-    const process = this.checkProcess(processId);
-    const status = process?.status.find((s) => {
-      return (s.id = statusId);
-    });
-    return status;
-  }
-
-  checkRequestType(RequestTypeId: number) {
-    return SchoolRequestType.find((s) => s.id === RequestTypeId)?.name;
   }
 }
 

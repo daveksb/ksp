@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
+import { SchoolRequest } from '@ksp/shared/interface';
 import { map, Observable, shareReplay } from 'rxjs';
 
 @Injectable({
@@ -9,16 +10,7 @@ import { map, Observable, shareReplay } from 'rxjs';
 export class ERequestService {
   constructor(private http: HttpClient) {}
 
-  /*   searchLicenseRequest(payload: any): Observable<any> {
-    return this.http
-      .post(`${environment.apiUrl}/e-service/requestsearch`, payload)
-      .pipe(
-        shareReplay(),
-        map((data: any) => data.datareturn)
-      );
-  } */
-
-  searchRequest(payload: any): Observable<any> {
+  searchRequest(payload: any): Observable<SchoolRequest[]> {
     return this.http
       .post(`${environment.apiUrl}/e-service/requestandschoolsearchs`, payload)
       .pipe(

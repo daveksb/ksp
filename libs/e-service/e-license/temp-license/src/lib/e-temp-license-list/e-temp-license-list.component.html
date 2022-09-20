@@ -61,21 +61,24 @@
           <ng-container matColumnDef="subtype">
             <th mat-header-cell *matHeaderCellDef>ประเภทวิชาชีพ</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.subtype }}
+              {{ SchoolRequestSubType[+element.subtype] }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="currentprocess">
             <th mat-header-cell *matHeaderCellDef>ขั้นตอนการดำเนินการ</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.currentprocess }}
+              {{ checkProcess(+element.currentprocess)?.processName }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="requeststatus">
             <th mat-header-cell *matHeaderCellDef>สถานะ</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.requeststatus }}
+              {{
+                checkStatus(+element.currentprocess, +element.requeststatus)
+                  ?.sname
+              }}
             </td>
           </ng-container>
 

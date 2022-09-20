@@ -28,7 +28,7 @@ export class RequestSearchComponent
   implements OnInit
 {
   override form = this.fb.group({
-    requesttype: ['', Validators.required],
+    requesttype: ['3', Validators.required],
     requestno: [null],
     subtype: [null],
     firstnameth: [''],
@@ -79,7 +79,6 @@ export class RequestSearchComponent
         this.statusList = this.processList.find(
           (p) => `${p.processId}` === currentProcess
         )?.status;
-
         //console.log('status list = ', this.statusList);
       }
     );
