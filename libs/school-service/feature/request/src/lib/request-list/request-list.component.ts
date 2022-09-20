@@ -17,20 +17,7 @@ import { RequestService } from '@ksp/shared/service';
 })
 export class SchoolRequestListComponent implements AfterViewInit {
   schoolId = '0010201056';
-  displayedColumns: string[] = [
-    'id',
-    'requestno',
-    'idcardno',
-    'name',
-    'requesttype',
-    'subtype',
-    'currentprocess',
-    'requeststatus',
-    'updatedate',
-    'requestdate',
-    'requestdoc',
-    'approvedoc',
-  ];
+  displayedColumns: string[] = displayedColumns;
   dataSource = new MatTableDataSource<SchoolRequest>();
   SchoolRequestType = SchoolRequestType;
   SchoolRequestSubType = SchoolRequestSubType;
@@ -78,9 +65,9 @@ export class SchoolRequestListComponent implements AfterViewInit {
     });
   }
 
-  applyClientFilter(data: SchoolRequest[], oldFilters: any) {
+  applyClientFilter(data: SchoolRequest[], searchParams: any) {
     //
-    const { requesttype, ...param } = oldFilters;
+    const { requesttype, ...param } = searchParams;
     console.log('param = ', param);
     return data.filter((d) => {
       const filter1 = param.subtype ? `${d.subtype}` === param.subtype : true;
@@ -179,3 +166,18 @@ export interface TempLicenseInfo {
   updatedate: string;
   requestdate: string;
 }
+
+export const displayedColumns = [
+  'id',
+  'requestno',
+  'idcardno',
+  'name',
+  'requesttype',
+  'subtype',
+  'currentprocess',
+  'requeststatus',
+  'updatedate',
+  'requestdate',
+  'requestdoc',
+  'approvedoc',
+];
