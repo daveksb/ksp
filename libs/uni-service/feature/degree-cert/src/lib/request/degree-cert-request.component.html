@@ -26,9 +26,6 @@
             formControlName="step1"
           >
           </ksp-degree-cert-step-one>
-        <div>
-        <button mat-button matStepperNext>Next</button>
-      </div>
         </form>
       </mat-step>
 
@@ -53,10 +50,10 @@
       </mat-step>
 
       <mat-step>
-          <ng-template matStepLabel>เอกสารแนบ</ng-template>
-          <ksp-degree-cert-step-four
-            [formType]="step1DegreeType"
-          ></ksp-degree-cert-step-four>
+        <ng-template matStepLabel>เอกสารแนบ</ng-template>
+        <ksp-degree-cert-step-four
+          [formType]="step1DegreeType"
+        ></ksp-degree-cert-step-four>
       </mat-step>
 
       <mat-step [completed]="false">
@@ -68,12 +65,14 @@
 
 <div class="sticky-bottom border">
   <ksp-bottom-nav
-    [isLastPage]="true"
-    [isFirstPage]="true"
-    [showCenterButtons]="true"
+    [isLastPage]="stepper.selectedIndex === 3"
+    [isFirstPage]="stepper.selectedIndex === 0"
+    [showCenterButtons]="stepper.selectedIndex === 3"
     [showSaveButton]="true"
     [showCancelButton]="true"
     (saveClicked)="save()"
+    (nextClicked)="stepper.next()"
+    (prevClicked)="stepper.previous()"
     (cancelClicked)="navigateBack()"
   ></ksp-bottom-nav>
 </div>
