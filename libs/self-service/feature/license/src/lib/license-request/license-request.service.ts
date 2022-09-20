@@ -37,11 +37,4 @@ export class LicenseRequestService {
       fileId: '',
     },
   ];
-
-  performanceFiles = [
-    {
-      name: 'สำเนาผลการทดสอบ',
-      fileId: '',
-    },
-  ];
 }

@@ -1,12 +1,12 @@
 <form [formGroup]="form">
-  <div class="py-3" [ngClass]="{ 'ps-3 pe-3 bg-light': !isDarkMode }">
+  <div [ngClass]="{ 'ps-3 pe-3 bg-light': !isDarkMode }">
     <div class="box-header"><ng-content></ng-content></div>
 
     <input type="hidden" formControlName="id" />
     <input type="hidden" formControlName="addressType" />
 
     <div class="row">
-      <div class="col-md-6 mb-3">
+      <div class="col-md-6 mb-2">
         <label class="form-label">อาคาร/สถานที่</label>
         <input
           [class.bg-light]="isDarkMode"
@@ -15,7 +15,7 @@
           formControlName="location"
         />
       </div>
-      <div class="col-md-6 mb-3">
+      <div class="col-md-6 mb-2">
         <label class="form-label required">บ้านเลขที่ </label>
         <input
           [class.bg-light]="isDarkMode"
@@ -27,7 +27,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-6 mb-3">
+      <div class="col-md-6 mb-2">
         <label class="form-label">หมู่ที่</label>
         <input
           [class.bg-light]="isDarkMode"
@@ -36,7 +36,7 @@
           formControlName="moo"
         />
       </div>
-      <div class="col-md-6 mb-3">
+      <div class="col-md-6 mb-2">
         <label class="form-label">ซอย</label>
         <input
           [class.bg-light]="isDarkMode"
@@ -47,8 +47,8 @@
       </div>
     </div>
 
-    <div class="row mb-3">
-      <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-6 mb-2">
         <label class="form-label required">ถนน</label>
         <input
           [class.bg-light]="isDarkMode"
@@ -59,8 +59,8 @@
       </div>
     </div>
 
-    <div class="row mb-3">
-      <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-6 mb-2">
         <label class="form-label required">จังหวัด</label>
         <select
           [class.bg-white]="!isDarkMode && mode === 'edit'"
@@ -77,7 +77,7 @@
           </option>
         </select>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 mb-2">
         <label class="form-label required">อำเภอ</label>
         <select
           [class.bg-white]="!isDarkMode && mode === 'edit'"
@@ -94,7 +94,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 mb-2">
         <label class="form-label required">ตำบล</label>
         <select
           [class.bg-white]="!isDarkMode && mode === 'edit'"
@@ -108,7 +108,7 @@
           </option>
         </select>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 mb-2">
         <label class="form-label required">รหัสไปรษณีย์</label>
         <input
           [class.bg-light]="isDarkMode"

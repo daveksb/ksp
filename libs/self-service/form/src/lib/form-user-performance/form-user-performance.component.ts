@@ -15,5 +15,14 @@ export class FormUserPerformanceComponent implements OnInit {
   ];
   personSelected = false;
 
+  performanceFiles = performanceFiles;
+
   ngOnInit(): void {}
 }
+
+const performanceFiles = [
+  {
+    name: 'สำเนาผลการทดสอบ',
+    fileId: '',
+  },
+];
