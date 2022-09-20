@@ -30,8 +30,8 @@ export class RegisterCurrentUserComponent {
     this.schoolInfoService
       .searchUserLogin({ schoolid: school.schoolId })
       .subscribe((res) => {
-        if (res?.returncode == 98) {
-          if (res?.returnmessage == 'no data') this.next();
+        if (res ==undefined) {
+          this.next();
         }
       });
   }

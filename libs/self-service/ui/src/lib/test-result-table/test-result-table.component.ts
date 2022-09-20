@@ -10,6 +10,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
   styleUrls: ['./test-result-table.component.scss'],
 })
 export class TestResultTableComponent implements OnInit {
+  data = data;
   displayedColumns: string[] = [
     'id',
     'score',
@@ -38,21 +39,21 @@ export const data: performanceInfo[] = [
     id: 1,
     score: '89/100',
     result: 'ผ่าน',
-    announceDate: '12/มกราคม/2565',
-    endDate: '31/มกราคม/2565',
+    announceDate: '12 มกราคม 2565',
+    endDate: '31 มกราคม 2565',
   },
-  {
+  /* {
     id: 2,
     score: '96/100',
     result: 'ผ่าน',
-    announceDate: '12/มกราคม/2565',
-    endDate: '31/มกราคม/2565',
-  },
+    announceDate: '12 มกราคม 2565',
+    endDate: '31 มกราคม 2565',
+  }, */
   {
-    id: 3,
+    id: 2,
     score: '100/100',
     result: 'ไม่ผ่าน',
-    announceDate: '12/มกราคม/2565',
-    endDate: '31/มกราคม/2565',
+    announceDate: '12 มกราคม 2565',
+    endDate: '31 มกราคม 2565',
   },
 ];

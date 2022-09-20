@@ -2,32 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import {
-  ActivityAddDegreeComponent,
-  ActivityDiplomaReceiveComponent,
-  ActivitySeminarComponent,
-  ActivityAcademicArchivementComponent,
-  ActivityLecturerComponent,
-  ActivityWriteBookComponent,
-  ActivityInnovationComponent,
-  ActivityResearchComponent,
-  ActivityRewardComponent,
-  ActivityLectureRegisterComponent,
-  ActivityStudyTourComponent,
-  ActivityLearningMaterialComponent,
-} from '@ksp/school-service/form/activity';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
-import {
-  SelfActivityAcademicWorkComponent,
-  SelfActivityArticleWritingComponent,
-  SelfActivityAssessmentComponent,
-  SelfActivityBookWritingComponent,
-  SelfActivityMediaCreateComponent,
-  SelfActivityMenterComponent,
-  SelfActivityMoreComponent,
-  SelfActivitySelfLearningComponent,
-} from '@ksp/shared/form/self-activity-form';
-import { DynamicComponent, ListData } from '@ksp/shared/interface';
+import { ListData } from '@ksp/shared/interface';
 
 @Component({
   selector: 'ksp-self-improve-activity-detail',
@@ -43,7 +19,12 @@ export class SelfImproveActivityDetailComponent implements OnInit {
   @ViewChild(DynamicComponentDirective, { static: true })
   myHost!: DynamicComponentDirective;
 
-  addActivity = ['1.วุฒิบัตร'];
+  evidenceFiles = [
+    {
+      name: '1.วุฒิบัตร',
+      fileId: '',
+    },
+  ];
 
   constructor(
     private router: Router,
@@ -54,23 +35,23 @@ export class SelfImproveActivityDetailComponent implements OnInit {
   ngOnInit(): void {
     this.activityTypes = activityTypes;
 
-    this.activityType.valueChanges.subscribe((res) => {
+    /*     this.activityType.valueChanges.subscribe((res) => {
       this.loadComponent(Number(res));
-    });
+    }); */
   }
 
   get activityType() {
     return this.activityForm.controls.activityType;
   }
 
-  loadComponent(index: number) {
+  /*   loadComponent(index: number) {
     const viewContainerRef = this.myHost.viewContainerRef;
     viewContainerRef.clear();
     viewContainerRef.createComponent<DynamicComponent>(componentList[index]);
-  }
+  } */
 }
 
-const componentList = [
+/* const componentList = [
   ActivityAddDegreeComponent,
   ActivitySeminarComponent,
   ActivitySeminarComponent,
@@ -87,7 +68,7 @@ const componentList = [
   SelfActivityAssessmentComponent,
   ActivityRewardComponent,
   SelfActivityMoreComponent,
-];
+]; */
 
 const activityTypes = [
   {

@@ -49,6 +49,8 @@ export class LicenseRequestEducationManagerComponent
     workplace: [],
     education: [],
     experience: [],
+    website: [],
+    workEmail: [],
   });
 
   disableNextButton = false;
@@ -126,7 +128,13 @@ export class LicenseRequestEducationManagerComponent
       ...{
         addressinfo: JSON.stringify([formData.address1, formData.address2]),
       },
-      ...{ schooladdrinfo: JSON.stringify(formData.workplace) },
+      ...{
+        schooladdrinfo: JSON.stringify({
+          ...formData.workplace,
+          website: formData.website,
+          email: formData.workEmail,
+        }),
+      },
       ...{ eduinfo: JSON.stringify({ educationType, ...educationLevelForm }) },
       ...{
         experienceinfo: JSON.stringify(formData.experience),

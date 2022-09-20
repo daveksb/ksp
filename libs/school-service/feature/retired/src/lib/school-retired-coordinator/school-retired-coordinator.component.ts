@@ -2,36 +2,53 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { UserInfoFormType } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-
+import { GeneralInfoService, RequestService } from '@ksp/shared/service';
+import { thaiDate } from '@ksp/shared/utility';
+import localForage from 'localforage';
+import { EMPTY, Observable, switchMap } from 'rxjs';
 @Component({
   selector: 'ksp-school-retired-coordinator',
   templateUrl: './school-retired-coordinator.component.html',
   styleUrls: ['./school-retired-coordinator.component.scss'],
 })
-export class SchoolRetiredCoordinatorComponent {
+export class SchoolRetiredCoordinatorComponent implements OnInit {
   form = this.fb.group({
     retiredTnfo: [],
   });
-
+  reasoninfo: any;
+  requestNo = '';
+  today = thaiDate(new Date());
+  schoolId = '0010201056';
   constructor(
     private router: Router,
     public dialog: MatDialog,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private generalInfoService: GeneralInfoService,
+    private requestService: RequestService
   ) {}
+  userInfoFormType: number = UserInfoFormType.thai;
+  retiredFiles = [{ name: 'หนังสือแต่งตั้งผู้ประสานงาน', fileId: '' }];
+  prefixList$!: Observable<any>;
 
-  retiredFiles = ['หนังสือแต่งตั้งผู้ประสานงาน'];
-
-  prevPage() {
-    this.router.navigate(['/', 'retired-user', 'requester']);
+  ngOnInit() {
+    localForage.getItem('registerUserInfoFormValue').then((res) => {
+      this.reasoninfo = res;
+    });
+    this.getList();
   }
 
-  /* cancel() {
-    this.router.navigate(['/', 'login']);
-  } */
+  prevPage() {
+    this.router.navigate(['/retired-user', 'requester']);
+  }
+  getList() {
+    this.form.valueChanges.subscribe((res) => console.log(res));
+    this.prefixList$ = this.generalInfoService.getPrefix();
+  }
 
   cancel() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -60,7 +77,7 @@ export class SchoolRetiredCoordinatorComponent {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'login']);
+        this.router.navigate(['/login']);
       }
     });
   }
@@ -76,20 +93,40 @@ export class SchoolRetiredCoordinatorComponent {
       },
     });
 
-    dialogRef.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        this.onConfirmed2();
-      }
-    });
+    dialogRef.componentInstance.confirmed
+      .pipe(
+        switchMap((res) => {
+          if (res) {
+            const { retiredTnfo } = this.form.value as any;
+            retiredTnfo.ref1 = '2';
+            retiredTnfo.ref2 = '02';
+            retiredTnfo.ref3 = '5';
+            retiredTnfo.systemtype = '2';
+            retiredTnfo.requesttype = '2';
+            retiredTnfo.subtype = '5';
+            retiredTnfo.currentprocess = `1`;
+            retiredTnfo.requeststatus = `1`;
+            retiredTnfo.schoolid = this.schoolId;
+            retiredTnfo.reasoninfo = JSON.stringify(this.reasoninfo);
+            return this.requestService.createRequest(retiredTnfo);
+          }
+          return EMPTY;
+        })
+      )
+      .subscribe((res) => {
+        if (res) {
+          this.onConfirmed2(res?.requestno);
+        }
+      });
   }
 
-  onConfirmed2() {
+  onConfirmed2(requestno: any) {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
       data: {
         header: 'ยืนยันข้อมูลสำเร็จ',
-        content: `วันที่ : 10 ตุลาคม 2565
-        เลขที่ใบคำขอ : 12234467876543 `,
+        content: `วันที่ : ${this.today}
+        เลขที่ใบคำขอ : ${requestno} `,
         subContent: `กรุณาตรวจสอบสถานะใบคำขอหรือรหัสเข้าใช้งาน
         ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },
@@ -97,7 +134,7 @@ export class SchoolRetiredCoordinatorComponent {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'login']);
+        this.router.navigate(['/login']);
       }
     });
   }

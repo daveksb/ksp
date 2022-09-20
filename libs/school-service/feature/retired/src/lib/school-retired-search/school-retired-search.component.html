@@ -8,7 +8,7 @@
 
       <ksp-retired-search
         (clear)="data = []"
-        (search)="search()"
+        (search)="search($event)"
         formControlName="userSearch"
       ></ksp-retired-search>
 
@@ -30,11 +30,11 @@
                   class="form-check-input"
                   type="checkbox"
                   formControlName="userSelect"
-                  (change)="onItemChange(item.retiredName)"
+                  (change)="onItemChange('1')"
                 />
               </td>
-              <td>{{ item.retiredName }}</td>
-              <td>{{ item.retiredPhone }}</td>
+              <td>{{ item.firstnameth }} {{ item.lastnameth }}</td>
+              <td>{{ item.schmobile }}</td>
             </tr>
           </tbody>
         </table>

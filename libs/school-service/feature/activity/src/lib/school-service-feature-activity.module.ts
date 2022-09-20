@@ -30,7 +30,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: 'list', component: ActivityListComponent },
       { path: 'detail', component: ActivityDetailComponent },
-      { path: 'detail/:id', component: ActivityDetailComponent },
+      { path: 'detail/:staffid', component: ActivityDetailComponent },
     ],
   },
 ];

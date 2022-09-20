@@ -1,43 +1,14 @@
 .menu__container {
   border: 1px solid #e5e5e5;
   border-radius: 10px;
-  height: fit-content;
   text-align: center;
   background-color: #edf8ff;
   white-space: nowrap;
-}
-
-.pass__status {
-  background: #eefcef;
-  color: #38ac3d;
-  border: 1px solid #38ac3d;
-  border-radius: 15px;
-  width: 5rem;
-  display: flex;
-  justify-content: center;
-}
-
-.fail_status {
-  background: #fccad5;
-  color: #ff0606;
-  border: 1px solid #ff0606;
-  border-radius: 15px;
-  width: 5rem;
-  display: flex;
-  justify-content: center;
+  height: fit-content;
 }
 
 @media only screen and (max-width: 768px) {
-  .content__container {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .table__header {
-    padding: 16px;
-  }
-
-  .table__detail {
-    padding: 16px;
+  .menu__container {
+    width: min-content;
   }
 }

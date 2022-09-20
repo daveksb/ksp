@@ -8,8 +8,8 @@
 
     <div class="container-xl bg-white px-3 py-2">
       <ksp-request-header-info
-        requestDate="10 ตุลาคม 2565"
-        requestNumber="112234467876543"
+        [requestDate]="today"
+        [requestNumber]="requestNo"
       ></ksp-request-header-info>
       <hr />
 
@@ -41,12 +41,12 @@
 
         <div class="row">
           <div class="col-5">
-            <label class="form-label">เหตุผลการถอดถอน</label>
+            <label class="form-label required">เหตุผลการถอดถอน</label>
             <select class="form-select" formControlName="retiredReason">
               <option value="null" selected disabled hidden>กรุณาเลือก</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              <ng-container *ngFor="let reason of SchoolRetireReason">
+                <option [value]="reason.id">{{ reason.name }}</option>
+              </ng-container>
             </select>
           </div>
         </div>
@@ -63,6 +63,7 @@
       <br />
       <ksp-bottom-nav
         [showCenterButtons]="false"
+        [disableNext]="!form.valid"
         (nextClicked)="nextPage()"
         (prevClicked)="prevPage()"
       ></ksp-bottom-nav>
