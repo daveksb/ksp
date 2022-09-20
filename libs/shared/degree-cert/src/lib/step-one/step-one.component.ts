@@ -15,7 +15,7 @@ import {
 } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { debounceTime, skip } from 'rxjs';
+import { debounceTime, lastValueFrom, skip } from 'rxjs';
 import { DegreeCertStepOneService } from './step-one.service';
 
 @UntilDestroy()
@@ -31,6 +31,8 @@ export class DegreeCertStepOneComponent
 {
   courseTypes: ListData[] = [];
   degreeTypes: ListData[] = [];
+  universityTypes: ListData[] = [];
+  provinces: ListData[] = [];
 
   @Input() showEditCheckbox = false;
   @Input() showCoordinatorForm = true;
@@ -74,13 +76,24 @@ export class DegreeCertStepOneComponent
   }
 
   ngOnInit(): void {
-    this.courseTypes = this.service.courseTypes;
-    this.degreeTypes = this.service.degreeTypes;
-
+    this.gatAll();
     this.listenFormChange();
     this.setDefaulFormValue();
   }
-
+  async gatAll() {
+    const [universityTypes, provinces, degreeTypes, courseTypes] =
+      await Promise.all([
+        lastValueFrom(this.service.getUniversityType()),
+        lastValueFrom(this.service.getProvince()),
+        lastValueFrom(this.service.getUniDegreelevel()),
+        lastValueFrom(this.service.getUniCourseType()),
+      ]);
+    // const res = await lastValueFrom(this.service.searchNameUniUniversity(''));
+    this.universityTypes = universityTypes;
+    this.provinces = provinces;
+    this.courseTypes = courseTypes;
+    this.degreeTypes = degreeTypes;
+  }
   setDefaulFormValue() {
     this.addFormArray(this.locations);
     this.addFormArray(this.institutions);

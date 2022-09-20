@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '@ksp/shared/environment';
 import {
   CourseFormFourComponent,
   CourseFormOneComponent,
@@ -6,11 +8,13 @@ import {
   CourseFormTwoComponent,
 } from '@ksp/shared/form/uni-course-form';
 import { ListData } from '@ksp/shared/interface';
+import { lastValueFrom, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'any',
 })
 export class DegreeCertStepOneService {
+  constructor(private http: HttpClient) {}
   componentList = [
     CourseFormOneComponent,
     CourseFormThreeComponent,
@@ -71,4 +75,49 @@ export class DegreeCertStepOneService {
       label: 'เอก-โท',
     },
   ];
+  mapListData(data: any) {
+    return data?.datareturn?.map(({ id, name }: any) => ({
+      value: id,
+      label: name,
+    }));
+  }
+  getUniversityType(): Observable<ListData[]> {
+    return this.http
+      .get(`${environment.apiUrl}/kspmasterdata/uniuniversitytype`)
+      .pipe(map(this.mapListData));
+  }
+  searchNameUniUniversity(searchName?: string): Observable<any> {
+    return this.http.get(
+      `${environment.apiUrl}/kspmasterdata/searchnameuniuniversity?searchName=${searchName}`
+    );
+  }
+
+  getProvince(): Observable<ListData[]> {
+    return this.http.get(`${environment.apiUrl}/kspmasterdata/province`).pipe(
+      map(({ datareturn }: any) => {
+        return datareturn?.map(({ province_id, province_name }: any) => ({
+          value: province_id,
+          label: province_name,
+        }));
+      })
+    );
+  }
+
+  getUniDegreelevel(): Observable<any> {
+    return this.http
+      .get(`${environment.apiUrl}/kspmasterdata/unidegreelevel`)
+      .pipe(map(this.mapListData));
+
+  }
+
+  getUniCourseType(): Observable<any> {
+    return this.http
+      .get(`${environment.apiUrl}/kspmasterdata/unicoursetype`)
+      .pipe(map(this.mapListData));
+
+  }
+
+  getNamePrefix(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/kspmasterdata/nameprefix`);
+  }
 }

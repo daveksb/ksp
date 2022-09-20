@@ -14,9 +14,9 @@
             formControlName="institutionsGroup"
           >
             <option value="null" selected hidden disabled>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option *ngFor="let item of universityTypes" [value]="item?.value">
+              {{ item.label }}
+            </option>
           </select>
         </div>
         <div class="col">
@@ -49,9 +49,9 @@
             formControlName="provience"
           >
             <option value="null" selected hidden disabled>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+           <option *ngFor="let item of provinces" [value]="item?.value">
+              {{ item.label }}
+            </option>
           </select>
         </div>
       </div>
