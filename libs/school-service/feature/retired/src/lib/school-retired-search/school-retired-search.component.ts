@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SchoolInfoService } from '@ksp/shared/service';
 import { untilDestroyed } from '@ngneat/until-destroy';
 
 @Component({
@@ -16,35 +17,46 @@ export class SchoolRetiredSearchComponent {
 
   selectUser = '';
 
-  constructor(private router: Router, private fb: FormBuilder) {}
-  data: RetiredInfo[] = [];
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private schoolInfoService: SchoolInfoService
+  ) {}
+  data: SchUser[] = [];
 
   onItemChange(userName: string) {
     this.selectUser = userName;
   }
 
-  search(form:any) {
-    console.log(form)
-    this.data = data;
+  search(form: any) {
+    //console.log(form);
+    const payload = {
+      schoolid: '0010201056',
+    };
+    this.schoolInfoService.searchUserLogin(payload).subscribe((res) => {
+      console.log('res = ', res);
+      this.data = res;
+    });
   }
 
   confirm() {
-    this.router.navigate(['/', 'retired-user', 'requester']);
+    this.router.navigate(['/retired-user', 'requester']);
   }
 
   cancel() {
-    this.router.navigate(['/', 'login']);
+    this.router.navigate(['/login']);
   }
 }
 
-export interface RetiredInfo {
-  retiredRole: string;
-  retiredName: string;
-  retiredPhone: string;
+export interface SchUser {
+  position: string;
+  firstnameth: string;
+  lastnameth: string;
+  schmobile: string;
   value: number;
 }
 
-export const data: RetiredInfo[] = [
+/* export const data: RetiredInfo[] = [
   {
     retiredRole:
       'เจ้าหน้าที่ประสานงาน (รับรองปริญญาและประกาศนียบัตรทางการศึกษา)',
@@ -67,3 +79,4 @@ export const data: RetiredInfo[] = [
     value: 3,
   },
 ];
+ */
