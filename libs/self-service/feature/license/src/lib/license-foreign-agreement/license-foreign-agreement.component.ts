@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'self-service-license-foreign-agreement',
@@ -36,10 +36,13 @@ export class LicenseForeignAgreementComponent implements OnInit {
 
     `7. Please ensure that all documents are completed according to the requirements for timely processing.`,
   ];
-  constructor(private router: Router) {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   save() {
-    this.router.navigate(['/', 'license', 'foreign-teacher']);
+    const type = this.route.snapshot.queryParamMap.get('type');
+    this.router.navigate(['/', 'license', 'foreign-teacher'], {
+      queryParams: { type },
+    });
   }
 
   cancel() {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { FormBuilder } from '@angular/forms';
 import { LicenseRequestService as RequestLicenseService } from '@ksp/shared/service';
@@ -26,7 +26,8 @@ export class LicenseRequestForeignComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private requestService: RequestLicenseService
+    private requestService: RequestLicenseService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {}
@@ -84,10 +85,13 @@ export class LicenseRequestForeignComponent implements OnInit {
 
     const { id, ...rawUserInfo } = userInfoForm;
     const userInfo = toLowercaseProp(rawUserInfo);
+    const type =
+      this.route.snapshot.queryParamMap.get('type') ||
+      SelfServiceRequestSubType.ครู;
 
     userInfo.ref1 = '1';
     userInfo.ref2 = '01';
-    userInfo.ref3 = `${SelfServiceRequestSubType.ครู}`;
+    userInfo.ref3 = `${type}`;
     userInfo.systemtype = '1';
     userInfo.requesttype = '1';
     userInfo.subtype = '5';
