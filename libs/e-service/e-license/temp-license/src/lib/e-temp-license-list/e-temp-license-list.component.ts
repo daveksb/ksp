@@ -13,10 +13,7 @@ import { ERequestService } from '@ksp/shared/service';
 })
 export class ETempLicenseListComponent implements AfterViewInit {
   form = this.fb.group({
-    licenseSearch: [],
-    offset: '0',
-    row: '25',
-    requesttype: '3',
+    search: [{ requesttype: '3' }],
   });
 
   displayedColumns: string[] = column;
@@ -37,27 +34,23 @@ export class ETempLicenseListComponent implements AfterViewInit {
   search(params: any) {
     console.log('params = ', params);
 
-    const data = this.form.getRawValue() as any;
-    const { offset, row, requesttype } = data;
     const payload = {
-      requestno: params.requestno,
-      idcardno: params.idcardno,
-      subtype: params.requesttype,
-      currentprocess: null,
-      requeststatus: null,
-      requestdatefrom: params.requestdatefrom,
-      requestdateto: params.requestdateto,
-      requesttype,
-      offset,
-      row,
+      systemtype: '2',
+      requesttype: '3',
+      schoolid: null,
+      bureauid: null,
     };
 
     this.eRequestService.searchRequest(payload).subscribe((res: any) => {
-      this.dataSource.data = res;
+      if (res) {
+        this.dataSource.data = res;
+      } else {
+        this.clearData();
+      }
     });
   }
 
-  clear() {
+  clearData() {
     this.dataSource.data = [];
   }
 

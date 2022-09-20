@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
@@ -23,26 +23,31 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   styleUrls: ['./request-search.component.scss'],
   providers: providerFactory(RequestSearchComponent),
 })
-export class RequestSearchComponent extends KspFormBaseComponent {
-  @Output() clear = new EventEmitter<boolean>(false);
-  @Output() search = new EventEmitter<any>();
-  eduOccupyList = EduOccupyList;
-  processList: RequestProcess[] = [];
-  statusList?: RequestStatus[] = [];
-  SchoolRequestType = SchoolRequestType.filter((i) => i.id > 2); // ใบคำขอเข้าใช้งานและถอดถอนไม่ต้องแสดง
-
+export class RequestSearchComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
   override form = this.fb.group({
-    requesttype: [null, Validators.required],
+    requesttype: ['', Validators.required],
     requestno: [null],
-    subtype: [{ value: null }],
-    firstnameth: [null],
-    idcardno: [null],
+    subtype: [null],
+    firstnameth: [''],
+    idcardno: [''],
     passportno: [null],
     currentprocess: [null],
     requeststatus: [null],
     requestdatefrom: [null],
     requestdateto: [null],
   });
+
+  @Output() clear = new EventEmitter<boolean>(false);
+  @Output() search = new EventEmitter<any>();
+  @Input() disableRequestType = false;
+
+  eduOccupyList = EduOccupyList;
+  processList: RequestProcess[] = [];
+  statusList?: RequestStatus[] = [];
+  SchoolRequestType = SchoolRequestType.filter((i) => i.id > 2); // ใบคำขอเข้าใช้งานและถอดถอนไม่ต้องแสดง
 
   constructor(private fb: FormBuilder) {
     super();
@@ -78,5 +83,11 @@ export class RequestSearchComponent extends KspFormBaseComponent {
         //console.log('status list = ', this.statusList);
       }
     );
+  }
+
+  ngOnInit(): void {
+    if (this.disableRequestType) {
+      this.form.controls.requesttype.disable();
+    }
   }
 }
