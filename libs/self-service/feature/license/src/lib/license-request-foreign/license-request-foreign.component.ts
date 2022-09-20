@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
+import { FormBuilder } from '@angular/forms';
+import { LicenseRequestService as RequestLicenseService } from '@ksp/shared/service';
+import { SchoolRequest } from '@ksp/shared/interface';
+import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
+import { SelfServiceRequestSubType } from '@ksp/shared/constant';
 
 @Component({
   selector: 'self-service-license-request-foreign',
@@ -12,15 +17,26 @@ export class LicenseRequestForeignComponent implements OnInit {
   headerGroup = ['Issue Date', 'Form ID'];
   title = 'TEACHING LICENSE APPLICATION FORM';
 
-  constructor(private router: Router, public dialog: MatDialog) {}
+  form = this.fb.group({
+    personalDetail: [],
+    personalDeclaration: [],
+  });
+
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private fb: FormBuilder,
+    private requestService: RequestLicenseService
+  ) {}
 
   ngOnInit(): void {}
 
   cancel() {
-    this.router.navigate(['/', 'home']);
+    this.router.navigate(['/home']);
   }
 
   save() {
+    console.log(this.form.getRawValue());
     const completeDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -32,14 +48,75 @@ export class LicenseRequestForeignComponent implements OnInit {
 
     completeDialog.componentInstance.saved.subscribe((res) => {
       if (res) {
-        this.cancel();
+        const payload = this.createRequest('0');
+        this.requestService.requestLicense(payload).subscribe((res) => {
+          console.log('request result = ', res);
+          if (res.returncode === '00') {
+            this.router.navigate(['/home']);
+          }
+        });
       }
     });
 
     completeDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/license', 'payment-channel']);
+        const payload = this.createRequest('1');
+        this.requestService.requestLicense(payload).subscribe((res) => {
+          console.log('request result = ', res);
+          if (res.returncode === '00') {
+            this.router.navigate(['/license', 'payment-channel']);
+          }
+        });
       }
     });
+  }
+
+  createRequest(currentProcess: string) {
+    const baseForm = this.fb.group(SchoolRequest);
+    const formData: any = this.form.getRawValue();
+    const {
+      addresForm,
+      workplaceForm,
+      academicForm,
+      grantionLicenseForm,
+      ...userInfoForm
+    } = formData.personalDetail;
+
+    const { id, ...rawUserInfo } = userInfoForm;
+    const userInfo = toLowercaseProp(rawUserInfo);
+
+    userInfo.ref1 = '1';
+    userInfo.ref2 = '01';
+    userInfo.ref3 = `${SelfServiceRequestSubType.ครู}`;
+    userInfo.systemtype = '1';
+    userInfo.requesttype = '1';
+    userInfo.subtype = '5';
+
+    const { addressName, addressForm: resWorkplaceForm } = workplaceForm;
+
+    const payload = {
+      ...replaceEmptyWithNull(userInfo),
+      ...{
+        addressinfo: JSON.stringify([addresForm]),
+      },
+      ...{
+        schooladdrinfo: JSON.stringify({
+          addressName,
+          ...resWorkplaceForm,
+        }),
+      },
+      ...{ eduinfo: JSON.stringify(academicForm) },
+      ...{
+        grantionteachinglicenseinfo: JSON.stringify(grantionLicenseForm),
+      },
+      ...{
+        checkProhibitProperty: JSON.stringify(formData.personalDeclaration),
+      },
+    };
+    payload.currentprocess = currentProcess;
+    payload.requeststatus = '1';
+    console.log(payload);
+    baseForm.patchValue(payload);
+    return baseForm.value;
   }
 }
