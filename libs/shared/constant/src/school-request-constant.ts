@@ -25,7 +25,6 @@ export const SchoolRetireReason = [
   { id: 6, name: 'reason6' },
 ];
 
-
 // url params keep in db for temp license request
 export enum SchoolRequestSubType {
   'ครู' = 1,
@@ -70,6 +69,30 @@ export interface RequestStatus {
 }
 
 export const RequestProcessList: RequestProcess[] = [
+  //ลงทะเบียนผู้ประสานงาน
+  {
+    requestType: 1,
+    processId: 1,
+    processName: 'ตรวจสอบเอกสาร',
+    status: [
+      { id: 1, sname: '', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: '', ename: 'ผ่านการตรวจสอบ' },
+      { id: 3, sname: '', ename: 'ไม่ผ่านการตรวจสอบ' },
+    ],
+  },
+
+  //ขอถอดถอนผู้ประสานงาน
+  {
+    requestType: 2,
+    processId: 1,
+    processName: 'ตรวจสอบเอกสาร',
+    status: [
+      { id: 1, sname: '', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: '', ename: 'ผ่านการตรวจสอบ' },
+      { id: 3, sname: '', ename: 'ไม่ผ่านการตรวจสอบ' },
+    ],
+  },
+
   //ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
   {
     requestType: 3,

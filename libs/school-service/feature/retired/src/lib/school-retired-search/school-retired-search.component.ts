@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SchoolInfoService } from '@ksp/shared/service';
-import { untilDestroyed } from '@ngneat/until-destroy';
 
 @Component({
   selector: 'ksp-school-retired-search',

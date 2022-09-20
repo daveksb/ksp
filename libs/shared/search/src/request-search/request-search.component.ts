@@ -29,7 +29,7 @@ export class RequestSearchComponent extends KspFormBaseComponent {
   eduOccupyList = EduOccupyList;
   processList: RequestProcess[] = [];
   statusList?: RequestStatus[] = [];
-  SchoolRequestType = SchoolRequestType;
+  SchoolRequestType = SchoolRequestType.filter((i) => i.id > 2); // ใบคำขอเข้าใช้งานและถอดถอนไม่ต้องแสดง
 
   override form = this.fb.group({
     requesttype: [null, Validators.required],
