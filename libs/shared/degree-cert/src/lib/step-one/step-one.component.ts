@@ -41,7 +41,7 @@ export class DegreeCertStepOneComponent
   myHost!: DynamicComponentDirective;
 
   override form = this.fb.group({
-    institutionsGroup: ['', Validators.required],
+    institutionsGroup: [],
     institutionsCode: [],
     institutionsName: [],
     provience: [],
