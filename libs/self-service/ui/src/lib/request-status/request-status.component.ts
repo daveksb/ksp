@@ -13,6 +13,7 @@ export class RequestStatusComponent {
   @Input() headerLabel1 = 'วันที่ทำรายการ';
   @Input() headerLabel2 = 'เลขใบคำขอ';
 
+
   @Input() showContent1 = true;
   @Input() showContent2 = true;
   @Input() showContent3 = true;

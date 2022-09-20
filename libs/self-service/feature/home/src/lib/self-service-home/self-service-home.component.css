@@ -1,4 +1,4 @@
-.container {
+.main__container {
   background-image: url('/assets/images/BG-secondary.png');
   padding: 18px 36px;
   background-size: cover;
@@ -31,22 +31,17 @@
 }
 
 /* device  responsive*/
-@media only screen and (max-width: 980px) {
+@media only screen and (max-width: 992px) {
   .container {
     background-image: url('/assets/images/BG-secondary.png');
     padding: 18px 36px;
     background-size: cover;
-    width: 100%;
     height: 100vh;
   }
 }
 /* mobile */
 @media only screen and (max-width: 768px) {
-  .container {
-    width: 100%;
-    height: 100vh;
-    background-image: url('/assets/images/BG-mobile.png');
-    padding: 24px;
+  .main__container {
   }
   .login__container {
     text-align: center;

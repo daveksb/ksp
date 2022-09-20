@@ -1,6 +1,6 @@
 <div class="text-black fs-5">ข้อมูลขอคืนเงินค่าธรรมเนียม</div>
-<div class="row mb-2">
-  <div class="col-6">
+<div class="row">
+  <div class="col-md-6 mb-2">
     <label class="form-label">ประเภทใบประกอบวิชาชีพ</label>
     <select class="form-select" formControlName="affiliation">
       <option selected>กรุณาเลือก</option>
@@ -9,7 +9,7 @@
       <option value="3">Three</option>
     </select>
   </div>
-  <div class="col-6">
+  <div class="col-md-6 mb-2">
     <label class="form-label">ประเภทวิชาชีพ</label>
     <select class="form-select" formControlName="affiliation">
       <option selected>กรุณาเลือก</option>
@@ -19,12 +19,12 @@
     </select>
   </div>
 </div>
-<div class="row mb-2">
-  <div class="col-6">
+<div class="row">
+  <div class="col-md-6 mb-2">
     <label class="form-label">เลขใบคำขอ</label>
     <input disabled class="form-control" type="text" />
   </div>
-  <div class="col-6">
+  <div class="col-md-6 mb-2">
     <label class="form-label">เหตุผลขอคืนเงินค่าธรรมเนียม</label>
     <select class="form-select" formControlName="affiliation">
       <option selected>กรุณาเลือก</option>
@@ -34,8 +34,8 @@
     </select>
   </div>
 </div>
-<div class="row mb-2">
-  <div class="col">
+<div class="row">
+  <div class="col-md mb-2">
     <br />
     <input
       class="form-control"
@@ -44,12 +44,12 @@
     />
   </div>
 </div>
-<div class="row mb-2">
-  <div class="col-6">
+<div class="row">
+  <div class="col-md-6 mb-2">
     <label class="form-label">เลขที่ใบเสร็จ</label>
     <input disabled class="form-control" type="text" />
   </div>
-  <div class="col-6">
+  <div class="col-md-6 mb-2">
     <label class="form-label">จำนวนเงิน (บาท)</label>
     <input disabled class="form-control" type="text" />
   </div>
@@ -57,30 +57,22 @@
 <hr />
 <div class="text-black fs-5">ช่องทางแจ้งข้อมูลการโอนเงิน</div>
 
-<div class="row mb-2 ms-2">
-  <span class="col-auto d-flex justify-content-end align-self-center">
-    <input type="checkbox" />
+<div class="row mb-2">
+  <span class="col-md-3 d-flex align-items-center">
+    <input type="checkbox" class="me-2" />
+    <label class="form-label">ข้อความแจ้งเตือนผ่านโทรศัพท์มือถือ (SMS) </label>
   </span>
-  <span class="col-3 px-0 d-flex align-self-center">
-    <label class="form-label text-secondary"
-      >ข้อความแจ้งเตือนผ่านโทรศัพท์มือถือ (SMS)
-    </label>
-  </span>
-  <span class="col-3">
+  <span class="col-md-3">
     <input class="form-control" type="text" formControlName="statusDate" />
   </span>
 </div>
 
-<div class="row mb-2 ms-2">
-  <span class="col-auto d-flex justify-content-end align-self-center">
-    <input type="checkbox" />
+<div class="row mb-2">
+  <span class="col-md-3 d-flex align-items-center">
+    <input type="checkbox" class="me-2" />
+    <label class="form-label">จดหมายอิเล็กทรอนิกส์ (E-Mail) </label>
   </span>
-  <span class="col-3 px-0 d-flex align-self-center">
-    <label class="form-label text-secondary"
-      >จดหมายอิเล็กทรอนิกส์ (E-Mail)
-    </label>
-  </span>
-  <span class="col-3">
+  <span class="col-md-3">
     <input class="form-control" type="text" formControlName="statusDate" />
   </span>
 </div>
@@ -93,7 +85,7 @@
 <hr />
 <div class="text-black fs-5">ขอรับเงินผ่านระบบ KTB Corporate Online</div>
 <div class="row">
-  <div class="col-6">
+  <div class="col-md-6 mb-2">
     <label class="form-label">บัญชีธนาคาร</label>
     <select class="form-select" formControlName="affiliation">
       <option selected>กรุณาเลือก</option>
@@ -102,7 +94,7 @@
       <option value="3">Three</option>
     </select>
   </div>
-  <div class="col-6">
+  <div class="col-md-6 mb-2">
     <label class="form-label">เลขที่บัญชี</label>
     <input class="form-control" type="text" />
   </div>

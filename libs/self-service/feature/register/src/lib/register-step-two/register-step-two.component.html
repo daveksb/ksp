@@ -1,111 +1,123 @@
-<form [formGroup]="form">
-  <div class="container full-height">
-    <div class="form__container">
-      <h3>สมัครสมาชิก</h3>
+<section class="vh-100 bg-image">
+  <div class="container py-0 vh-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-12 col-lg-9 col-xl-9">
+        <div
+          class="card shadow-2-strong card-registration"
+          style="border-radius: 15px"
+        >
+          <div class="card-body p-3 p-md-4">
+            <h3 class="mb-3 pb-2 pb-md-0 mb-md-5 text-center">สมัครสมาชิก</h3>
 
-      <div class="d-flex justify-content-center">
-        <div class="position-relative m-4 w-md-25 w-50">
-          <div class="progress" style="height: 1px">
-            <div
-              class="progress-bar"
-              role="progressbar"
-              style="width: 100%"
-              aria-valuenow="50"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div>
-          <button
-            type="button"
-            class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill"
-            style="width: 3rem; height: 3rem; pointer-events: none"
-          >
-            <i class="bi bi-check-lg fs-5"></i>
-          </button>
-          <button
-            type="button"
-            class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-outline-primary text-primary rounded-pill"
-            style="
-              width: 3rem;
-              height: 3rem;
-              pointer-events: none;
-              background: #fff;
-            "
-          >
-            2
-          </button>
-          <button
-            type="button"
-            class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill"
-            style="width: 3rem; height: 3rem; pointer-events: none"
-          >
-            3
-          </button>
-        </div>
-      </div>
-
-      <div class="form__detail">
-        <div class="detail__container">
-          <div class="detail__container--left">
-            <div class="form-group field__container mb-3">
-              <label class="form__label">เลขที่บัตรประชาชน</label>
-              <input
-                type="text"
-                class="form-control"
-                formControlName="personId"
-              />
-            </div>
-            <div class="form-group field__container mb-3">
-              <label class="form__label">เลขที่หลังบัตรประชาชน</label>
-              <input
-                type="text"
-                class="form-control"
-                formControlName="backPersonId"
-              />
-            </div>
-          </div>
-
-          <div class="detail__container--right">
-            <div class="form-group field__container">
-              <label for="lastnameFormControlInput" class="form__lebel"
-                >รูปถ่ายบัตรประชาชน</label
-              >
-              <div class="container__btn-upload">
+            <div class="d-flex justify-content-center mb-3">
+              <div class="position-relative m-4 w-md-25 w-50">
+                <div class="progress" style="height: 1px">
+                  <div
+                    class="progress-bar"
+                    role="progressbar;"
+                    style="width: 100%"
+                    aria-valuenow="50"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  ></div>
+                </div>
                 <button
-                  class="btn btn-outline-primary text-primary"
-                  id="btn-upload"
+                  type="button"
+                  class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill"
+                  style="width: 3rem; height: 3rem; pointer-events: none"
                 >
-                  + อัพโหลดรูปภาพ
+                  <i class="bi bi-check-lg fs-5"></i>
                 </button>
-
-                <diV class="label-upload-detail"
-                  >Choose image . jpg only, max size 1 MB</diV
+                <button
+                  type="button"
+                  class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-outline-primary text-primary rounded-pill"
+                  style="
+                    width: 3rem;
+                    height: 3rem;
+                    pointer-events: none;
+                    background: #fff;
+                  "
                 >
+                  2
+                </button>
+                <button
+                  type="button"
+                  class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill"
+                  style="width: 3rem; height: 3rem; pointer-events: none"
+                >
+                  3
+                </button>
               </div>
             </div>
-          </div>
-        </div>
 
-        <div class="form__footer">
-          <button
-            id="btn-back"
-            (click)="previousPage()"
-            type="submit"
-            class="btn btn-secondary"
-          >
-            กลับ
-          </button>
-          <button
-            id="btn-confirm"
-            (click)="openDialog()"
-            type="submit"
-            class="btn btn-primary"
-          >
-            ยืนยันตัวตน
-          </button>
-          <div (click)="loginPage()" class="label__login">เข้าสู่ระบบ</div>
+            <form [formGroup]="form">
+              <div class="row justify-content-center">
+                <div class="col-md-6 mb-3">
+                  <label class="form__label">เลขที่บัตรประชาชน</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="personId"
+                  />
+                </div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-md-6 mb-3">
+                  <label class="form__label">เลขที่หลังบัตรประชาชน</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="backPersonId"
+                  />
+                </div>
+              </div>
+
+              <div class="row justify-content-center">
+                <div class="col-md-6 mb-3">
+                  <label class="form-lebel">รูปถ่ายบัตรประชาชน</label>
+                  <div
+                    class="image-box d-flex align-items-center flex-column p-5"
+                  >
+                    <button class="btn border-primary text-primary bg-white">
+                      + อัพโหลดรูปภาพ
+                    </button>
+
+                    <diV class="form-label"
+                      >Choose image . jpg only, max size 1 MB</diV
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex align-items-center flex-column mt-3">
+                <div class="d-flex mb-2">
+                  <button
+                    (click)="previousPage()"
+                    type="submit"
+                    class="btn btn-secondary me-1"
+                  >
+                    กลับ
+                  </button>
+                  <button
+                    (click)="openDialog()"
+                    type="submit"
+                    class="btn btn-primary ms-1"
+                  >
+                    ยืนยันตัวตน
+                  </button>
+                </div>
+                <div
+                  role="button"
+                  (click)="loginPage()"
+                  class="form-label text-decoration-underline"
+                >
+                  เข้าสู่ระบบ
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</form>
+</section>
