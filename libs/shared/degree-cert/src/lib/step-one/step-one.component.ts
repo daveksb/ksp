@@ -6,7 +6,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
 import {
   DynamicComponent,
@@ -41,7 +41,7 @@ export class DegreeCertStepOneComponent
   myHost!: DynamicComponentDirective;
 
   override form = this.fb.group({
-    institutionsGroup: [],
+    institutionsGroup: ['', Validators.required],
     institutionsCode: [],
     institutionsName: [],
     provience: [],
@@ -131,7 +131,7 @@ export class DegreeCertStepOneComponent
     const viewContainerRef = this.myHost.viewContainerRef;
     viewContainerRef.clear();
     viewContainerRef.createComponent<DynamicComponent>(
-      this.service.componentList[index]
+      this.service.componentList[--index]
     );
   }
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -14,10 +14,14 @@ import {
 export class DegreeCertRequestComponent {
   step1DegreeType = '';
 
-  form = this.fb.group({
-    step1: [],
-    step2: [],
-    step3: [],
+  step1Form = this.fb.group({
+    step1: ['', Validators.required],
+  });
+  step2Form = this.fb.group({
+    step2: ['', Validators.required],
+  });
+  step3Form = this.fb.group({
+    step3: ['', Validators.required],
   });
 
   constructor(
@@ -65,5 +69,8 @@ export class DegreeCertRequestComponent {
         this.navigateBack();
       }
     });
+  }
+  onSubmit() {
+    console.log(this.step1Form.value);
   }
 }

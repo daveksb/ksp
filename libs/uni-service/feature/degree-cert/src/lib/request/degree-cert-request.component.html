@@ -2,65 +2,69 @@
   ><span header>ยื่นใบคำขอ </span>
   <span subHeader>ขอรับรองปริญญาและประกาศนียบัตร</span></ksp-top-nav
 >
-<form [formGroup]="form">
-  <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height-2">
-    <div class="box-header">รายละเอียดใบคำขอรับรองปริญญาและประกาศนียบัตร</div>
-    <div class="bg-white px-3 pt-2 pb-1">
-      <ksp-request-header-info
-        requestDate="10 ตุลาคม 2565"
-        requestNumber="112234467876543"
-      ></ksp-request-header-info>
+<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height-2">
+  <div class="box-header">รายละเอียดใบคำขอรับรองปริญญาและประกาศนียบัตร</div>
+  <div class="bg-white px-3 pt-2 pb-1">
+    <ksp-request-header-info
+      requestDate="10 ตุลาคม 2565"
+      requestNumber="112234467876543"
+    ></ksp-request-header-info>
 
-      <hr />
-
-      <mat-stepper
-        labelPosition="bottom"
-        [animationDuration]="'0'"
-        [selectedIndex]="0"
-        #stepper
-      >
-        <mat-step [completed]="false">
+    <hr />
+    <mat-stepper
+      labelPosition="bottom"
+      [animationDuration]="'0'"
+      [selectedIndex]="0"
+      linear
+      #stepper
+    >
+      <mat-step [stepControl]="step1Form">
+        <form [formGroup]="step1Form" (ngSubmit)="onSubmit()">
           <ng-template matStepLabel>ข้อมูลพื้นฐาน</ng-template>
-
           <ksp-degree-cert-step-one
             (degreeType)="step1DegreeType = $event"
             formControlName="step1"
           >
           </ksp-degree-cert-step-one>
-        </mat-step>
+        <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+        </form>
+      </mat-step>
 
-        <mat-step [completed]="false">
+      <mat-step [stepControl]="step2Form">
+        <form [formGroup]="step2Form">
           <ng-template matStepLabel>ด้านหลักสูตร</ng-template>
-
           <ksp-degree-cert-step-two
             [formType]="step1DegreeType"
             formControlName="step2"
           >
           </ksp-degree-cert-step-two>
-        </mat-step>
+        </form>
+      </mat-step>
 
-        <mat-step [completed]="false">
+      <mat-step [stepControl]="step3Form">
+        <form [formGroup]="step3Form">
           <ng-template matStepLabel>ด้านกระบวนการผลิต</ng-template>
           <ksp-degree-cert-step-3
             formControlName="step3"
           ></ksp-degree-cert-step-3>
-        </mat-step>
+        </form>
+      </mat-step>
 
-        <mat-step [completed]="false">
+      <mat-step>
           <ng-template matStepLabel>เอกสารแนบ</ng-template>
-
           <ksp-degree-cert-step-four
             [formType]="step1DegreeType"
           ></ksp-degree-cert-step-four>
-        </mat-step>
+      </mat-step>
 
-        <mat-step [completed]="false">
-          <ng-template matStepLabel>ตรวจสอบและยื่นคำขอ</ng-template>
-        </mat-step>
-      </mat-stepper>
-    </div>
+      <mat-step [completed]="false">
+        <ng-template matStepLabel>ตรวจสอบและยื่นคำขอ</ng-template>
+      </mat-step>
+    </mat-stepper>
   </div>
-</form>
+</div>
 
 <div class="sticky-bottom border">
   <ksp-bottom-nav
