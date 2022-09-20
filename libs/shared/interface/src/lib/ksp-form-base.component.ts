@@ -71,7 +71,7 @@ export abstract class KspFormBaseComponent implements ControlValueAccessor {
     return this.form.valid ? null : { firstname: { valid: false } };
   }
 
-  /* ngOnDestroy() {
+  ngOnDestroy() {
     this.subscriptions.forEach((s) => s.unsubscribe());
-  } */
+  }
 }

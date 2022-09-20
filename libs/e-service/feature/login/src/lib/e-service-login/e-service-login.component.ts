@@ -26,7 +26,7 @@ export class EServiceLoginComponent {
 
       this.loginService.config = res;
 
-      setCookie('userToken', res.schUserToken, 1);
+      setCookie('userToken', res.usertoken, 1);
       setCookie('firstNameTh', res.firstnameth, 1);
       setCookie('lastNameTh', res.lastnameth, 1);
 

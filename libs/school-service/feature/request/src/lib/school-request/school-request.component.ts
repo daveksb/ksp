@@ -532,11 +532,13 @@ export class SchoolRequestComponent implements OnInit {
       width: '850px',
     });
 
-    dialogRef.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        this.onConfirmed();
-      }
-    });
+    dialogRef.componentInstance.confirmed
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res) {
+          this.onConfirmed();
+        }
+      });
   }
 
   backToListPage() {

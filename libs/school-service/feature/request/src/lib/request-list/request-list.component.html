@@ -56,12 +56,26 @@
           <table mat-table [dataSource]="dataSource">
             <ng-container matColumnDef="id">
               <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-              <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+              <td
+                mat-cell
+                *matCellDef="let element"
+                (click)="
+                  viewRequest(+element.requesttype, element.subtype, element.id)
+                "
+              >
+                {{ element.id }}
+              </td>
             </ng-container>
 
             <ng-container matColumnDef="requestno">
               <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
-              <td mat-cell *matCellDef="let element">
+              <td
+                mat-cell
+                *matCellDef="let element"
+                (click)="
+                  viewRequest(+element.requesttype, element.subtype, element.id)
+                "
+              >
                 {{ element.requestno }}
               </td>
             </ng-container>
@@ -70,35 +84,65 @@
               <th mat-header-cell *matHeaderCellDef>
                 หมายเลขบัตรประชาชน/หนังสือเดินทาง
               </th>
-              <td mat-cell *matCellDef="let element">
+              <td
+                mat-cell
+                *matCellDef="let element"
+                (click)="
+                  viewRequest(+element.requesttype, element.subtype, element.id)
+                "
+              >
                 {{ element.idcardno }} {{ element.passportno }}
               </td>
             </ng-container>
 
             <ng-container matColumnDef="name">
               <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
-              <td mat-cell *matCellDef="let element">
+              <td
+                mat-cell
+                *matCellDef="let element"
+                (click)="
+                  viewRequest(+element.requesttype, element.subtype, element.id)
+                "
+              >
                 {{ element.firstnameth }} {{ element.lastnameth }}
               </td>
             </ng-container>
 
             <ng-container matColumnDef="requesttype">
               <th mat-header-cell *matHeaderCellDef>ประเภทใบคำขอ</th>
-              <td mat-cell *matCellDef="let element">
+              <td
+                mat-cell
+                *matCellDef="let element"
+                (click)="
+                  viewRequest(+element.requesttype, element.subtype, element.id)
+                "
+              >
                 {{ checkRequestType(+element.requesttype) }}
               </td>
             </ng-container>
 
             <ng-container matColumnDef="subtype">
               <th mat-header-cell *matHeaderCellDef>ประเภทวิชาชีพ</th>
-              <td mat-cell *matCellDef="let element">
+              <td
+                mat-cell
+                *matCellDef="let element"
+                (click)="
+                  viewRequest(+element.requesttype, element.subtype, element.id)
+                "
+              >
                 {{ SchoolRequestSubType[+element.subtype] }}
               </td>
             </ng-container>
 
             <ng-container matColumnDef="currentprocess">
               <th mat-header-cell *matHeaderCellDef>ขั้นตอนการดำเนินการ</th>
-              <td mat-cell *matCellDef="let element">
+              <td
+                mat-cell
+                *matCellDef="let element"
+                (click)="
+                  viewRequest(+element.requesttype, element.subtype, element.id)
+                "
+              >
                 {{ checkProcess(+element.currentprocess)?.processName }}
               </td>
             </ng-container>
@@ -140,13 +184,6 @@
               <td mat-cell *matCellDef="let element">
                 <i
                   role="button"
-                  (click)="
-                    viewRequest(
-                      +element.requesttype,
-                      element.subtype,
-                      element.id
-                    )
-                  "
                   class="bi bi-file-earmark-text text-primary fs-5"
                 ></i>
               </td>
