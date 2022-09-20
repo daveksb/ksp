@@ -1,78 +1,74 @@
-<div class="py-1 px-1">
-  <div class="box-header">
-    ที่อยู่ตามทะเบียนบ้าน (นักศึกษาชาวไทย) หรือที่พักประจำ (นักศึกษาชาวต่างชาติ)
-  </div>
-
-  <div class="row">
-    <div class="col mb-1">
-      <label class="form-label">อาคาร/สถานที่</label>
-      <input class="form-control" type="text" formControlName="location" />
+<form [formGroup]="formAddress">
+  <div class="py-1 px-1">
+    <div class="box-header">
+      ที่อยู่ตามทะเบียนบ้าน (นักศึกษาชาวไทย) หรือที่พักประจำ (นักศึกษาชาวต่างชาติ)
+    </div>
+  
+    <div class="row">
+      <div class="col-sm-12 mb-1">
+        <label class="form-label">อาคาร/สถานที่</label>
+        <input class="form-control" type="text" formControlName="location" />
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-sm-4 col-md-2 mb-1">
+        <label class="form-label"
+          >บ้านเลขที่ <span class="text-danger"> *</span>
+        </label>
+        <input class="form-control" type="text" formControlName="houseNumber" />
+      </div>
+      <div class="col-sm-4 col-md-2 mb-1">
+        <label class="form-label">หมู่ที่</label>
+        <input class="form-control" type="text" formControlName="villageNumber" />
+      </div>
+      <div class="col-sm-6 col-md-4 mb-1">
+        <label class="form-label">ซอย</label>
+        <input class="form-control" type="text" formControlName="lane" />
+      </div>
+      <div class="col-sm-6 col-md-4 mb-1">
+        <label class="form-label">ถนน</label>
+        <input class="form-control" type="text" formControlName="road" />
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-sm-4 col-md-2 mb-1">
+        <label class="form-label"
+          >รหัสไปรษณีย์<span class="text-danger"> *</span>
+        </label>
+        <input class="form-control" type="text" formControlName="zipCode" />
+      </div>
+      <div class="col-sm-4 col-md-4 mb-1">
+        <label class="form-label"
+          >จังหวัด<span class="text-danger"> *</span>
+        </label>
+        <select class="form-select" formControlName="provinceId" (change)="getDistrict(formAddress.value.provinceId)">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option *ngFor="let province of provinceList" [value]="province.province_id">{{province.province_name}}</option>
+        </select>
+      </div>
+      <div class="col-sm-6 col-md-3 mb-1">
+        <label class="form-label">อำเภอ<span class="text-danger"> *</span></label>
+        <select class="form-select" formControlName="districtId" (change)="getSubdistrict(formAddress.value.districtId)">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option *ngFor="let district of districtList" [value]="district.amphurCode">{{district.amphurName}}</option>
+        </select>
+      </div>
+      <div class="col-sm-6 col-md-3 mb-1">
+        <label class="form-label">ตำบล<span class="text-danger"> *</span></label>
+        <select class="form-select" formControlName="subDistrictId">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option *ngFor="let subDistrict of subDistrictList" [value]="subDistrict.tambolCode">{{subDistrict.tambolName}}</option>
+        </select>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-sm-12">
+        <label class="form-label">หมายเหตุ</label>
+        <textarea rows="3" class="form-control" formControlName="remark"></textarea>
+      </div>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col-2 mb-1">
-      <label class="form-label"
-        >บ้านเลขที่ <span class="text-danger"> *</span>
-      </label>
-      <input class="form-control" type="text" formControlName="houseNumber" />
-    </div>
-    <div class="col-2 mb-1">
-      <label class="form-label">หมู่ที่</label>
-      <input class="form-control" type="text" formControlName="villageNumber" />
-    </div>
-    <div class="col mb-1">
-      <label class="form-label">ซอย</label>
-      <input class="form-control" type="text" formControlName="lane" />
-    </div>
-    <div class="col mb-1">
-      <label class="form-label">ถนน</label>
-      <input class="form-control" type="text" formControlName="road" />
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-2 mb-1">
-      <label class="form-label"
-        >รหัสไปรษณีย์<span class="text-danger"> *</span></label
-      >
-      <input class="form-control" type="text" formControlName="zipCode" />
-    </div>
-    <div class="col mb-1">
-      <label class="form-label"
-        >จังหวัด<span class="text-danger"> *</span></label
-      >
-      <select class="form-select" formControlName="provience">
-        <option value="null" selected hidden disabled>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-    <div class="col mb-1">
-      <label class="form-label">ตำบล<span class="text-danger"> *</span></label>
-      <select class="form-select" formControlName="subDistrict">
-        <option value="null" selected hidden disabled>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-    <div class="col mb-1">
-      <label class="form-label">อำเภอ<span class="text-danger"> *</span></label>
-      <select class="form-select" formControlName="district">
-        <option value="null" selected hidden disabled>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col">
-      <label class="form-label">หมายเหตุ</label>
-      <textarea rows="3" class="form-control"></textarea>
-    </div>
-  </div>
-</div>
+</form>

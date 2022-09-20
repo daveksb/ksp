@@ -379,9 +379,9 @@
                   <select class="form-select" style="width: 150px">
                     <option
                       *ngFor="let nation of nationality"
-                      [value]="nation.value"
+                      [value]="nation.nationId"
                     >
-                      {{ nation.label }}
+                      {{ nation.nationName }}
                     </option>
                   </select>
                 </ng-template>
@@ -401,9 +401,9 @@
                   >
                     <option
                       *ngFor="let ThPrefix of ThPrefixes"
-                      [value]="ThPrefix.value"
+                      [value]="ThPrefix.id"
                     >
-                      {{ ThPrefix.label }}
+                      {{ ThPrefix.name_th }}
                     </option>
                   </select>
                 </ng-template>
@@ -457,9 +457,9 @@
                   >
                     <option
                       *ngFor="let EngPrefix of EngPrefixes"
-                      [value]="EngPrefix.value"
+                      [value]="EngPrefix.id"
                     >
-                      {{ EngPrefix.label }}
+                      {{ EngPrefix.name_en }}
                     </option>
                   </select>
                 </ng-template>
@@ -624,14 +624,14 @@
         <ng-template pTemplate="rowexpansion" let-product>
           <tr>
             <td></td>
-            <td colspan="4">
+            <td colspan="8">
               <ksp-form-address-table></ksp-form-address-table>
             </td>
           </tr>
         </ng-template>
       </p-table>
       <div *ngIf="pageType === importType.studentList">
-        <ksp-add-row-button class="blue">เพิ่มรายชื่อ</ksp-add-row-button>
+        <ksp-add-row-button class="blue" (click)="addStudent()">เพิ่มรายชื่อ</ksp-add-row-button>
       </div>
     </div>
   </div>

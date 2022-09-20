@@ -14,6 +14,7 @@ import { SelectItem } from 'primeng/api';
 import { User } from './user';
 import { UserService } from './user.service';
 import { FormAddressTableComponent } from '@ksp/shared/form/others';
+import { GeneralInfoService } from '@ksp/shared/service';
 
 @Component({
   selector: 'uni-service-import-student',
@@ -22,9 +23,9 @@ import { FormAddressTableComponent } from '@ksp/shared/form/others';
 })
 export class ImportStudentComponent implements OnInit {
   users: User[] = [];
-  ThPrefixes: SelectItem[] = [];
-  EngPrefixes: SelectItem[] = [];
-  nationality: SelectItem[] = [];
+  ThPrefixes: Array<any> = [];
+  EngPrefixes: Array<any> = [];
+  nationality: Array<any> = [];
   isGraduated = false;
   pageType!: UniserviceImportType;
   importType = UniserviceImportType;
@@ -47,33 +48,37 @@ export class ImportStudentComponent implements OnInit {
     public dialog: MatDialog,
     private userService: UserService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private generalInfoService: GeneralInfoService
   ) {}
 
   ngOnInit() {
     this.userService.getUsers().subscribe((res: any) => {
       this.users = res;
     });
-    this.ThPrefixes = [
-      { label: 'นาย', value: '1' },
-      { label: 'นาง', value: '2' },
-      { label: 'นางสาว', value: '3' },
-    ];
-    this.EngPrefixes = [
-      { label: 'Mr.', value: '1' },
-      { label: 'Mrs.', value: '2' },
-      { label: 'Miss.', value: '3' },
-    ];
-    this.nationality = [
-      { label: 'One', value: '1' },
-      { label: 'Two', value: '2' },
-      { label: 'Three', value: '3' },
-    ];
-
+    this.getNationality();
+    this.getPrefix();
     this.route.paramMap.subscribe((res) => {
       //this.processType = Number(res.get('type'));
       //console.log('process type = ', res);
       this.pageType = Number(res.get('type'));
+    });
+  }
+
+  getNationality() {
+    this.generalInfoService.getNationality().subscribe(response => {
+      if (response) {
+        this.nationality = response;
+      }
+    });
+  }
+
+  getPrefix() {
+    this.generalInfoService.getPrefix().subscribe(response => {
+      if (response) {
+        this.ThPrefixes = response;
+        this.EngPrefixes = response;
+      }
     });
   }
 
@@ -87,6 +92,30 @@ export class ImportStudentComponent implements OnInit {
 
   cancel() {
     this.router.navigate(['./', 'home']);
+  }
+
+  addStudent() {
+    this.users.push({
+      id: this.users.length + 1,
+      startDate: 'xx/xx/xxxx',
+      personId: 'x-xxxx-xxxxx-xx-x',
+      passportId: 'ABCxxxxxxxx',
+      nationality: 'thai',
+      titleTh: 'นาย',
+      firstNameTh: 'อดิศร',
+      lastNameTh: 'อัศวิน',
+      titleEn: 'Mrs.',
+      firstNameEn: 'adisorn',
+      middleNameEn: 'xxx',
+      lastNameEn: 'assawin',
+      phone: '098-xxx-xxxx',
+      birthDate: 'xx/xx/xxxx',
+      address: '',
+      approveTime: 1,
+      graduateDate: 'xx/xx/xxxx',
+      approveDate: 'xx/xx/xxxx',
+      trainingAddress: '',
+    })
   }
 
   insertSubject() {
