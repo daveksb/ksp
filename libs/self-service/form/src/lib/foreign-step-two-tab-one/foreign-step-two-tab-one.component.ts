@@ -20,13 +20,13 @@ export class ForeignStepTwoTabOneComponent extends KspFormBaseComponent {
   @Output() districtChanged = new EventEmitter<any>();
 
   override form = this.fb.group({
-    addressName: [''],
-    lane: [''],
+    houseNo: [''],
+    alley: [''],
     road: [''],
-    zipCode: [''],
+    postcode: [''],
     province: [''],
-    subDistrict: [''],
-    district: [''],
+    tumbol: [''],
+    amphur: [''],
     phone: [''],
     email: [''],
   });
@@ -45,6 +45,6 @@ export class ForeignStepTwoTabOneComponent extends KspFormBaseComponent {
   updatePostcode(evt: any) {
     const tumbolCode = evt.target?.value;
     const postCode = this.subDistricts.find((t) => t.tambolCode === tumbolCode);
-    this.form.controls.zipCode.patchValue(postCode.tambolPostcode);
+    this.form.controls.postcode.patchValue(postCode.tambolPostcode);
   }
 }
