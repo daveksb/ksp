@@ -22,7 +22,7 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
   });
   reasoninfo: any;
   requestNo = '';
-  today = thaiDate(new Date());  
+  today = thaiDate(new Date());
   schoolId = '0010201056';
   constructor(
     private router: Router,
@@ -32,7 +32,7 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
     private requestService: RequestService
   ) {}
   userInfoFormType: number = UserInfoFormType.thai;
-  retiredFiles = ['หนังสือแต่งตั้งผู้ประสานงาน'];
+  retiredFiles = [{ name: 'หนังสือแต่งตั้งผู้ประสานงาน', fileId: '' }];
   prefixList$!: Observable<any>;
 
   ngOnInit() {
@@ -43,7 +43,7 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
   }
 
   prevPage() {
-    this.router.navigate(['/', 'retired-user', 'requester']);
+    this.router.navigate(['/retired-user', 'requester']);
   }
   getList() {
     this.form.valueChanges.subscribe((res) => console.log(res));
@@ -77,7 +77,7 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'login']);
+        this.router.navigate(['/login']);
       }
     });
   }
@@ -105,7 +105,7 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
             retiredTnfo.requesttype = '4';
             retiredTnfo.subtype = '5';
             retiredTnfo.currentprocess = `1`;
-            retiredTnfo.requestStatus = `1`;
+            retiredTnfo.requeststatus = `1`;
             retiredTnfo.schoolid = this.schoolId;
             retiredTnfo.reasoninfo = JSON.stringify(this.reasoninfo);
             return this.requestService.createRequest(retiredTnfo);
@@ -134,7 +134,7 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'login']);
+        this.router.navigate(['/login']);
       }
     });
   }

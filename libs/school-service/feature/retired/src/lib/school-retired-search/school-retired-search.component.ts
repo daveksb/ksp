@@ -55,28 +55,3 @@ export interface SchUser {
   schmobile: string;
   value: number;
 }
-
-/* export const data: RetiredInfo[] = [
-  {
-    retiredRole:
-      'เจ้าหน้าที่ประสานงาน (รับรองปริญญาและประกาศนียบัตรทางการศึกษา)',
-    retiredName: 'นาย พิชัย ชาญชัญ',
-    retiredPhone: '081-9872676',
-    value: 1,
-  },
-  {
-    retiredRole:
-      'เจ้าหน้าที่ประสานงาน (รับรองปริญญาและประกาศนียบัตรทางการศึกษา)',
-    retiredName: 'นาย พิโรธ ชาญชัญ',
-    retiredPhone: '081-9872676',
-    value: 2,
-  },
-  {
-    retiredRole:
-      'เจ้าหน้าที่ประสานงาน (รับรองปริญญาและประกาศนียบัตรทางการศึกษา)',
-    retiredName: 'นาย พิธา ชาญชัญ',
-    retiredPhone: '081-9872676',
-    value: 3,
-  },
-];
- */
