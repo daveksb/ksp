@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { SchoolServiceFormActivityModule } from '@ksp/school-service/form/activity';
+import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { providerFactory } from '@ksp/shared/utility';
 
 @Component({
   selector: 'self-service-standard-working-teacher',
@@ -9,9 +11,13 @@ import { SchoolServiceFormActivityModule } from '@ksp/school-service/form/activi
   imports: [CommonModule, ReactiveFormsModule, SchoolServiceFormActivityModule],
   templateUrl: './standard-working-teacher.component.html',
   styleUrls: ['./standard-working-teacher.component.scss'],
+  providers: providerFactory(StandardWorkingTeacherComponent),
 })
-export class StandardWorkingTeacherComponent implements OnInit {
-  form = this.fb.group({
+export class StandardWorkingTeacherComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
+  override form = this.fb.group({
     activity1: [],
     activity2: [],
     activity3: [],
@@ -24,9 +30,30 @@ export class StandardWorkingTeacherComponent implements OnInit {
     activity10: [],
     activity11: [],
     activity12: [],
+    activity1Form: [],
+    activity2Form: [],
+    activity3Form: [],
+    activity4Form: [],
+    activity5Form: [],
+    activity6Form: [],
+    activity7Form: [],
+    activity8Form: [],
+    activity9Form: [],
+    activity10Form: [],
+    activity11Form: [],
+    activity12Form: [],
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    super();
+    this.subscriptions.push(
+      // any time the inner form changes update the parent of any change
+      this.form?.valueChanges.subscribe((value) => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
+  }
 
   ngOnInit(): void {
     this.form.valueChanges.subscribe((res) => {

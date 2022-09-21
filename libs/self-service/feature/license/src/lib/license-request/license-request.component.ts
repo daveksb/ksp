@@ -18,7 +18,7 @@ import {
   UserInfoFormType,
   SelfServiceRequestSubType,
 } from '@ksp/shared/constant';
-import { LicenseFormBaseComponent } from '../license-form-base.component';
+import { LicenseFormBaseComponent } from '@ksp/self-service/form';
 
 const mockPerformances = [
   {
@@ -192,6 +192,7 @@ export class LicenseRequestComponent
       ...{ prohibitproperty: JSON.stringify(forbidden) },
     };
     payload.currentprocess = currentProcess;
+    payload.requeststatus = '1';
     console.log(payload);
     baseForm.patchValue(payload);
     return baseForm.value;
