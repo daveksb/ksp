@@ -23,7 +23,7 @@ import { UniFormBadgeComponent } from '@ksp/shared/ui';
 })
 export class UniHomeComponent {
   badgeTitle1 = [
-    `แจ้งเตือน เลขที่คำขอ : 010641000123
+    `เลขที่คำขอ : 010641000123
   รายการขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา ถูกส่งคืน “ปรับแก้ไข /
   เพิ่มเติม`,
   ];

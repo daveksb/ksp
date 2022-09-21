@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
 })
 export class LicenseInfoComponent {
   @Input() isLicenseRevoked = false;
+  @Input() isHasTitle = false;
+  @Input() subTitle1 = 'วันเดือนปีที่ออก';
+  @Input() subTitle2 = 'วันเดือนปีที่หมดอายุ';
 
   constructor(private router: Router) {}
 

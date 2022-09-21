@@ -10,7 +10,7 @@ import { SelfServiceRequestSubType } from '@ksp/shared/constant';
 })
 export class SelfServiceHomePageComponent {
   badgeTitle = [
-    `แจ้งเตือน เลขที่ใบคำขอ : SF_010641000123 รายการขอขึ้นทะเบียนใบอนุญาต ถูกส่งคืน
+    `เลขที่ใบคำขอ : SF_010641000123 รายการขอขึ้นทะเบียนใบอนุญาต ถูกส่งคืน
   “ปรับแก้ไข / เพิ่มเติม” กดเพื่อตรวจสอบ`,
   ];
 
