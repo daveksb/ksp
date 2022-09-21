@@ -108,7 +108,7 @@
     <button type="button" class="btn border-primary text-primary bg-white">
       บันทึกชั่วคราว
     </button>
-    <button type="button" class="ms-3 btn btn-primary" (click)="save()">
+    <button type="button" class="ms-3 btn btn-primary" [disabled]="disableNextButton" (click)="save()">
       บันทึกและยื่น
     </button>
   </div>

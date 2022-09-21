@@ -99,9 +99,7 @@ export class RenewLicenseSchoolManagerComponent
   }
 
   patchAddress2FormWithAddress1(): void {
-    console.log(this.form.controls.address1.value);
     this.form.controls.address2.patchValue(this.form.controls.address1.value);
-    console.log(this.form.controls.address2.value);
   }
 
   createRequest(forbidden: any, currentProcess: string) {
