@@ -46,7 +46,7 @@ export class ETempLicenseDetailComponent implements OnInit {
   requestId!: number;
   requestData: any;
   requestNo = '';
-  requestSubType = SchoolRequestSubType.ครู;
+  //requestSubType = SchoolRequestSubType.ครู;
   userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form
 
   form = this.fb.group({

@@ -9,8 +9,9 @@ export enum SchoolServiceRequestRewardType {
   objetion,
 }
 
-export enum tempLicenseRequestType {
+/* export enum tempLicenseRequestType {
   thai,
   manager,
   foreign,
 }
+ */

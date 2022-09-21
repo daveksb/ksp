@@ -1,4 +1,4 @@
-import { MenuConfig, tempLicenseRequestType } from '@ksp/shared/interface';
+import { MenuConfig } from '@ksp/shared/interface';
 
 export const ethicsMenu: MenuConfig[] = [
   {
@@ -206,24 +206,24 @@ export const standardMenu: MenuConfig[] = [
 export const licenseMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต (ชาวไทย)',
+    label: 'ใบคำขออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ',
     path: '',
     isExpanded: false,
     subMenuName: 'temp-thai',
     subMenu: [
       {
         path: 'temp-license/list',
-        label: 'รายการใบคำขออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
-        params: { subtype: tempLicenseRequestType.thai },
+        label: 'ตรวจสอบใบคำขออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
+        //params: { subtype: 1 },
       },
       {
         path: 'temp-license/approve-list',
         label: 'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
-        params: { subtype: tempLicenseRequestType.thai },
+        //params: { subtype: 1 },
       },
     ],
   },
-  {
+  /* {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต (ชาวต่างชาติ)',
     path: '',
@@ -233,15 +233,15 @@ export const licenseMenu: MenuConfig[] = [
       {
         path: 'temp-license/list',
         label: 'รายการใบคำขออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
-        params: { subtype: tempLicenseRequestType.foreign },
+        params: { subtype: 5 },
       },
       {
         path: 'temp-license/approve-list',
         label: 'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
-        params: { subtype: tempLicenseRequestType.foreign },
+        params: { subtype: 5 },
       },
     ],
-  },
+  }, */
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
@@ -251,11 +251,11 @@ export const licenseMenu: MenuConfig[] = [
     subMenu: [
       {
         path: 'foreign-license/list',
-        label: 'รายการใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
+        label: 'ตรวจสอบใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
       },
       {
         path: 'xxx',
-        label: 'พิจารณาเลขคุรุสภาสำหรับชาวต่างชาติ',
+        label: 'พิจารณารับรองเลขคุรุสภาสำหรับชาวต่างชาติ',
       },
     ],
   },
