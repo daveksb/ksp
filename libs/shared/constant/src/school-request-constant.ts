@@ -108,7 +108,7 @@ export const RequestProcessList: RequestProcess[] = [
     processId: 2,
     processName: 'สร้างและส่งใบคำขอ',
     status: [
-      { id: 1, sname: 'กำลังดำเนินการ', ename: '' },
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
       { id: 2, sname: 'ยกเลิก', ename: '' },
     ],
   },
@@ -118,11 +118,11 @@ export const RequestProcessList: RequestProcess[] = [
     processName: 'ตรวจสอบเอกสาร ลำดับที่ 1',
     status: [
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
-      { id: 2, sname: 'ปรับแก้ไข/เพิ่มเติม', ename: '' },
-      { id: 3, sname: 'ผ่านการตรวจสอบ', ename: '' },
-      { id: 4, sname: 'ไม่ผ่านการตรวจสอบ', ename: '' },
-      { id: 5, sname: 'ส่งคืนและยกเลิก', ename: '' },
-      { id: 6, sname: 'ยกเลิก', ename: '' },
+      { id: 2, sname: 'ปรับแก้ไข/เพิ่มเติม', ename: 'ปรับแก้ไข/เพิ่มเติม' },
+      { id: 3, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+      { id: 4, sname: 'ไม่ผ่านการตรวจสอบ', ename: 'ไม่ผ่านการตรวจสอบ' },
+      { id: 5, sname: 'ส่งคืนและยกเลิก', ename: 'ส่งคืนและยกเลิก' },
+      { id: 6, sname: 'ยกเลิก', ename: 'ยกเลิก' },
     ],
   },
   {

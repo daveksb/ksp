@@ -15,6 +15,7 @@
       <ksp-school-request-search
         formControlName="search"
         [disableRequestType]="true"
+        [requestTypeList]="requestTypeList"
         (clear)="clearData()"
         (search)="search($event)"
       ></ksp-school-request-search>
@@ -36,7 +37,7 @@
               <i
                 role="button"
                 class="bi bi-file-earmark-check text-primary fs-5"
-                (click)="goToDetail(element.id)"
+                (click)="goToDetail(element)"
               ></i>
             </td>
           </ng-container>
@@ -77,7 +78,7 @@
             <td mat-cell *matCellDef="let element">
               {{
                 checkStatus(+element.currentprocess, +element.requeststatus)
-                  ?.sname
+                  ?.ename
               }}
             </td>
           </ng-container>
