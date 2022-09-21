@@ -153,7 +153,9 @@
         </mat-tab>
 
         <mat-tab label="ข้อมูลชี้แจงเหตุผล">
-          <ksp-form-reason-info formControlName="reasoninfo"></ksp-form-reason-info>
+          <ksp-form-reason-info
+            formControlName="reasoninfo"
+          ></ksp-form-reason-info>
           <ksp-form-attachment
             [uniqueTimestamp]="uniqueTimestamp"
             [pageType]="pageType.reasonTab"
@@ -188,7 +190,7 @@
     [showTempSaveButton]="true"
     [disableTempSaveButton]="disableTempSave"
     [showSaveButton]="true"
-    [disableSaveButton]="false"
+    [disableSaveButton]="disableSave"
     [saveButtonLabel]="'ส่งใบคำขอ'"
   ></ksp-bottom-nav>
 </div>
