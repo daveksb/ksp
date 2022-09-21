@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  levels,
-  SchoolRequestSubType,
-  subjects,
-  UserInfoFormType,
-} from '@ksp/shared/constant';
+import { levels, subjects, UserInfoFormType } from '@ksp/shared/constant';
 import {
   AddressService,
   ERequestService,
@@ -41,6 +36,7 @@ export class ETempLicenseDetailComponent implements OnInit {
   provinces$!: Observable<any>;
   prefixList$!: Observable<any>;
   positionTypes$!: Observable<any>;
+  selectedTab!: MatTabChangeEvent;
 
   //schoolId = '0010201056';
   requestId!: number;
@@ -58,6 +54,7 @@ export class ETempLicenseDetailComponent implements OnInit {
     edu2: [],
     teachinginfo: [],
     hiringinfo: [],
+    checkResult: this.fb.array([]),
   });
 
   constructor(
@@ -81,14 +78,20 @@ export class ETempLicenseDetailComponent implements OnInit {
     //this.evidenceFiles = this.service.evidenceFiles;
     this.getList();
     this.checkRequestId();
+    this.checkResultFormArray.push(this.fb.control([]));
+  }
+
+  get checkResultFormArray() {
+    return this.form.controls.checkResult as FormArray;
   }
 
   tabChanged(e: MatTabChangeEvent) {
     console.log('tab event = ', e);
-    //this.selectedTabIndex = e.index;
+    this.selectedTab = e;
   }
 
   checkRequest() {
+    console.log('form value = ', this.form.value);
     const payload = {
       id: `${this.requestId}`,
       checksubresult: "{'field1':'data1','field2':'data2','field3':'data3'}",
@@ -97,9 +100,9 @@ export class ETempLicenseDetailComponent implements OnInit {
       approveresult: "{'field1':'data1','field2':'data2','field3':'data3'}",
     };
 
-    this.eRequestService.checkRequest(payload).subscribe((res) => {
+    /*     this.eRequestService.checkRequest(payload).subscribe((res) => {
       console.log('check result = ', res);
-    });
+    }); */
   }
 
   checkRequestId() {

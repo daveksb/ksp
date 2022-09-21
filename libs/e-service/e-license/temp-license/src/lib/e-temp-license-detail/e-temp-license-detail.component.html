@@ -47,6 +47,7 @@
       <br />
 
       <!-- (selectedIndexChange)="onTabIndexChanged($event)" -->
+
       <mat-tab-group
         class="tab-group mb-3"
         animationDuration="0ms"
@@ -166,24 +167,24 @@
         </mat-tab>
       </mat-tab-group>
     </div>
-    <br />
 
-    <div class="bg-white p-4">
+    <div class="bg-white p-4" formArrayName="checkResult">
       <e-service-license-check
         [choices]="verifyChoice"
+        [formControlName]="selectedTab ? selectedTab.index : 0"
       ></e-service-license-check>
     </div>
   </div>
-
-  <div class="sticky-bottom border">
-    <ksp-bottom-nav
-      (cancelClicked)="cancel()"
-      (prevClicked)="prevPage()"
-      (nextClicked)="next()"
-      [showSaveButton]="true"
-      [showCenterButtons]="true"
-      [isFirstPage]="true"
-      (saveClicked)="checkRequest()"
-    ></ksp-bottom-nav>
-  </div>
 </form>
+
+<div class="sticky-bottom border">
+  <ksp-bottom-nav
+    (cancelClicked)="cancel()"
+    (prevClicked)="prevPage()"
+    (nextClicked)="next()"
+    [showSaveButton]="true"
+    [showCenterButtons]="true"
+    [isFirstPage]="true"
+    (saveClicked)="checkRequest()"
+  ></ksp-bottom-nav>
+</div>
