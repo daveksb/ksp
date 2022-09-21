@@ -35,6 +35,8 @@ export class DegreeCertStepOneComponent
   provinces: ListData[] = [];
 
   @Input() showEditCheckbox = false;
+  @Input() disabledInputs: Record<string, any> = {};
+
   @Input() showCoordinatorForm = true;
   @Output() degreeType = new EventEmitter<string>();
   @ViewChild(DynamicComponentDirective, { static: true })
@@ -52,8 +54,8 @@ export class DegreeCertStepOneComponent
     locations: this.fb.array([]),
     institutions: this.fb.array([]),
     locations2: this.fb.array([]),
-
     coordinator: [],
+    courseDetailType:[],
   });
 
   step1Incorrect = [
