@@ -9,20 +9,22 @@
     [showContent7]="false"
   ></self-service-request-status>
   <br />
-  <div class="detail__container bg-white">
-    <ksp-form-user-info [displayMode]="[userInfoType]"></ksp-form-user-info>
+  <div class="border shadow-sm rounded-4 px-3 py-4 bg-white">
+    <ksp-form-user-info
+      [displayMode]="[userInfoType]"
+      [isSchoolService]="false"
+    ></ksp-form-user-info>
   </div>
   <br />
-  <div class="detail__container bg-white">
+  <div class="border shadow-sm rounded-4 px-3 py-4 bg-white">
     <ksp-form-refund-fee-detail></ksp-form-refund-fee-detail>
   </div>
   <br />
-  <div class="detail__container bg-white">
-    <ksp-form-attachment
-      [groups]="refundInfo"
-      [mode]="'edit'"
-    ></ksp-form-attachment>
-  </div>
+  <ksp-form-attachment
+    [groups]="refundInfo"
+    [mode]="'edit'"
+  ></ksp-form-attachment>
+
   <div class="d-flex justify-content-center my-3">
     <button type="button" class="btn btn-secondary">ล้างข้อมูล</button>
     <button type="button" (click)="save()" class="ms-3 btn btn-primary">
