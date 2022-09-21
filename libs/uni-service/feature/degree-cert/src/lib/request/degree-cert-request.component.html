@@ -15,11 +15,10 @@
       labelPosition="bottom"
       [animationDuration]="'0'"
       [selectedIndex]="0"
-      linear
       #stepper
     >
       <mat-step [stepControl]="step1Form">
-        <form [formGroup]="step1Form" (ngSubmit)="onSubmit()">
+        <form [formGroup]="step1Form">
           <ng-template matStepLabel>ข้อมูลพื้นฐาน</ng-template>
           <ksp-degree-cert-step-one
             (degreeType)="step1DegreeType = $event"
@@ -71,8 +70,8 @@
     [showSaveButton]="true"
     [showCancelButton]="true"
     (saveClicked)="save()"
-    (nextClicked)="stepper.next()"
-    (prevClicked)="stepper.previous()"
+    (nextClicked)="goForward()"
+    (prevClicked)="goBack()"
     (cancelClicked)="navigateBack()"
   ></ksp-bottom-nav>
 </div>
