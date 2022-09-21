@@ -19,20 +19,15 @@ export class ERequestService {
       );
   }
 
-  getRequestById(requestNo: string): Observable<SchoolRequest> {
+  getRequestById(requestId: number): Observable<SchoolRequest> {
     return this.http.post<SchoolRequest>(
       `${environment.apiUrl}/e-service/requestsearchbyrequestno`,
       {
-        requestno: requestNo,
+        id: requestId,
       }
     );
-    /* .pipe(
-        shareReplay()
-        map((data: any) => data.datareturn)
-      ); */
   }
 
-  ///schrequestupdatechecksubresult
   checkRequest(payload: any): Observable<any> {
     return this.http
       .post(
@@ -44,11 +39,4 @@ export class ERequestService {
         map((data: any) => data.datareturn)
       );
   }
-
-  /* checkRequest(requestId: number): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/e-service/xxxxx`, {}).pipe(
-      shareReplay(),
-      map((data: any) => data.datareturn)
-    );
-  } */
 }

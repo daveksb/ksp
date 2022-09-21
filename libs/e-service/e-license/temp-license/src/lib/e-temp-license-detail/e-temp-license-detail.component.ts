@@ -36,7 +36,7 @@ export class ETempLicenseDetailComponent implements OnInit {
   provinces$!: Observable<any>;
   prefixList$!: Observable<any>;
   positionTypes$!: Observable<any>;
-  selectedTab!: MatTabChangeEvent;
+  selectedTab: MatTabChangeEvent = new MatTabChangeEvent();
 
   //schoolId = '0010201056';
   requestId!: number;
@@ -78,7 +78,13 @@ export class ETempLicenseDetailComponent implements OnInit {
     //this.evidenceFiles = this.service.evidenceFiles;
     this.getList();
     this.checkRequestId();
-    this.checkResultFormArray.push(this.fb.control([]));
+    this.addCheckResultArray();
+  }
+
+  addCheckResultArray() {
+    for (let i = 0; i < 6; i++) {
+      this.checkResultFormArray.push(this.fb.control([]));
+    }
   }
 
   get checkResultFormArray() {
@@ -86,23 +92,28 @@ export class ETempLicenseDetailComponent implements OnInit {
   }
 
   tabChanged(e: MatTabChangeEvent) {
-    console.log('tab event = ', e);
+    //console.log('tab event = ', e);
     this.selectedTab = e;
   }
 
   checkRequest() {
-    console.log('form value = ', this.form.value);
+    //console.log('form value = ', this.form.value);
+    const checkSubResult = {
+      checkdate: new Date().toISOString().split('.')[0],
+      result: this.form.controls.checkResult.value,
+    };
+    //console.log('check sub result = ', checkSubResult);
     const payload = {
       id: `${this.requestId}`,
-      checksubresult: "{'field1':'data1','field2':'data2','field3':'data3'}",
-      checkfinalresult: "{'field1':'data1','field2':'data2','field3':'data3'}",
-      checkhistory: "{'field1':'data1','field2':'data2','field3':'data3'}",
-      approveresult: "{'field1':'data1','field2':'data2','field3':'data3'}",
+      checksubresult: JSON.stringify(checkSubResult),
+      checkfinalresult: null,
+      checkhistory: null,
+      approveresult: null,
     };
-
-    /*     this.eRequestService.checkRequest(payload).subscribe((res) => {
+    //console.log('payload = ', payload);
+    this.eRequestService.checkRequest(payload).subscribe((res) => {
       console.log('check result = ', res);
-    }); */
+    });
   }
 
   checkRequestId() {
@@ -114,19 +125,17 @@ export class ETempLicenseDetailComponent implements OnInit {
     });
   }
 
-  loadRequestFromId(requestNo: any) {
-    this.eRequestService
-      .getRequestById('2-03-1-650915-00034')
-      .subscribe((res) => {
-        this.requestData = res;
-        this.requestNo = res.requestno;
-        this.pathUserInfo(res);
-        this.patchAddress(parseJson(res.addressinfo));
-        this.patchEdu(parseJson(res.eduinfo));
-        this.patchHiringInfo(parseJson(res.hiringinfo));
-        this.patchTeachingInfo(parseJson(res.teachinginfo));
-        this.patchSchoolAddrress(parseJson(res.schooladdrinfo));
-      });
+  loadRequestFromId(requestId: number) {
+    this.eRequestService.getRequestById(requestId).subscribe((res) => {
+      this.requestData = res;
+      this.requestNo = res.requestno;
+      this.pathUserInfo(res);
+      this.patchAddress(parseJson(res.addressinfo));
+      this.patchEdu(parseJson(res.eduinfo));
+      this.patchHiringInfo(parseJson(res.hiringinfo));
+      this.patchTeachingInfo(parseJson(res.teachinginfo));
+      this.patchSchoolAddrress(parseJson(res.schooladdrinfo));
+    });
   }
 
   patchSchoolAddrress(payload: any) {
@@ -186,7 +195,8 @@ export class ETempLicenseDetailComponent implements OnInit {
   }
 
   patchTeachingInfo(res: any) {
-    if (!res) return;
+    if (!res || !res.teachingLevel) return;
+
     const teachingLevel = levels.map((level) => {
       if (res.teachingLevel.includes(level.value)) {
         return level.value;

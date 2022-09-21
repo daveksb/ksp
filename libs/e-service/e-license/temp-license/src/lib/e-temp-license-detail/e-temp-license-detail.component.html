@@ -168,12 +168,20 @@
       </mat-tab-group>
     </div>
 
-    <div class="bg-white p-4" formArrayName="checkResult">
-      <e-service-license-check
-        [choices]="verifyChoice"
-        [formControlName]="selectedTab ? selectedTab.index : 0"
-      ></e-service-license-check>
-    </div>
+    <ng-container
+      formArrayName="checkResult"
+      *ngFor="let c of checkResultFormArray.controls; let i = index"
+    >
+      <div
+        class="bg-white px-3 py-1"
+        [ngClass]="{ hide: (selectedTab.index || 0) !== i }"
+      >
+        <e-service-license-check
+          [choices]="verifyChoice"
+          [formControlName]="i"
+        ></e-service-license-check>
+      </div>
+    </ng-container>
   </div>
 </form>
 

@@ -114,7 +114,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   loadRequestFromId(id: number) {
-    this.eRequestService.getRequestById('fsfs').subscribe((res: any) => {
+    this.eRequestService.getRequestById(id).subscribe((res: any) => {
       this.requestData = res;
       this.requestNo = res.requestno;
       //this.pathUserInfo(res);
