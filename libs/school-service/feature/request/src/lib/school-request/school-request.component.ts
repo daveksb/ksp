@@ -97,6 +97,7 @@ export class SchoolRequestComponent implements OnInit {
     edu2: [],
     teachinginfo: [],
     hiringinfo: [],
+    reasoninfo:[],
   });
 
   constructor(
@@ -177,6 +178,9 @@ export class SchoolRequestComponent implements OnInit {
     //console.log('create request = ');
     const baseForm = this.fb.group(new SchoolRequest());
     const formData: any = this.form.getRawValue();
+    console.log(formData.reasoninfo)
+    console.log(this.reasonFiles)
+    console.log(this.attachFiles)
     formData.addr1.addresstype = 1;
     formData.addr2.addresstype = 2;
 
@@ -248,7 +252,6 @@ export class SchoolRequestComponent implements OnInit {
   updateRequest(type: string) {
     const baseForm = this.fb.group(new SchoolRequest());
     const formData: any = this.form.getRawValue();
-
     const userInfo = formData.userInfo;
     userInfo.currentprocess = `1`;
     userInfo.requeststatus = `1`;
