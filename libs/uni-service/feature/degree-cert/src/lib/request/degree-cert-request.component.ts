@@ -1,21 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { getCookie } from '@ksp/shared/utility';
 
 @Component({
   templateUrl: './degree-cert-request.component.html',
   styleUrls: ['./degree-cert-request.component.scss'],
 })
 export class DegreeCertRequestComponent {
+  @ViewChild('stepper') private stepper?: MatStepper;
+
   step1DegreeType = '';
 
   step1Form = this.fb.group({
-    step1: ['', Validators.required],
+    step1: [{}, Validators.required],
   });
   step2Form = this.fb.group({
     step2: ['', Validators.required],
@@ -28,8 +32,19 @@ export class DegreeCertRequestComponent {
     private router: Router,
     public dialog: MatDialog,
     private fb: FormBuilder
-  ) {}
-
+  ) {
+    this.initForm();
+  }
+  initForm() {
+    this.step1Form.setValue({
+      step1: {
+        institutionsCode: '3',
+        institutionsGroup: getCookie('uniType') || "",
+        institutionsName: '2q234',
+        provience: '71',
+      },
+    });
+  }
   navigateBack() {
     this.router.navigate(['/', 'degree-cert']);
   }
@@ -70,7 +85,15 @@ export class DegreeCertRequestComponent {
       }
     });
   }
-  onSubmit() {
-    console.log(this.step1Form.value);
+  goBack() {
+    this.stepper?.previous();
+  }
+
+  goForward() {
+    console.log('step1Form', this.step1Form.value);
+    console.log('step2Form', this.step2Form.value);
+    console.log('step3Form', this.step3Form.value);
+
+    this.stepper?.next();
   }
 }
