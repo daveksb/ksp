@@ -8,7 +8,6 @@
   /* Center and scale the image nicely */
   background-position: top;
   background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .label__primary {
@@ -36,7 +35,7 @@
 @media only screen and (max-width: 992px) {
   .bg-image {
     background-image: url('/assets/images/BG-mobile.png');
-    background-position: top;
+    background-size: cover;
   }
 }
 

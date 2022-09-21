@@ -8,7 +8,6 @@
   /* Center and scale the image nicely */
   background-position: top;
   background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .logo__container {
@@ -28,6 +27,7 @@
 @media only screen and (max-width: 992px) {
   .bg-image {
     background-image: url('/assets/images/BG-mobile.png');
+    background-size: cover;
   }
 
   .line__content {
