@@ -626,10 +626,4 @@ export class SchoolRequestComponent implements OnInit {
       }
     }
   }
-
-  /*   onTabIndexChanged(tabIndex: number) {
-    if (tabIndex === 2) {
-      //this.patchEdu(this.staffId);
-    }
-  } */
 }

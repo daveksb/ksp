@@ -42,10 +42,10 @@ export class ETempLicenseDetailComponent implements OnInit {
   prefixList$!: Observable<any>;
   positionTypes$!: Observable<any>;
 
-  schoolId = '0010201056';
+  //schoolId = '0010201056';
   requestId!: number;
   requestData: any;
-  requestNo = '';
+  requestNo!: string | null;
   //requestSubType = SchoolRequestSubType.ครู;
   userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form
 
@@ -83,6 +83,25 @@ export class ETempLicenseDetailComponent implements OnInit {
     this.checkRequestId();
   }
 
+  tabChanged(e: MatTabChangeEvent) {
+    console.log('tab event = ', e);
+    //this.selectedTabIndex = e.index;
+  }
+
+  checkRequest() {
+    const payload = {
+      id: `${this.requestId}`,
+      checksubresult: "{'field1':'data1','field2':'data2','field3':'data3'}",
+      checkfinalresult: "{'field1':'data1','field2':'data2','field3':'data3'}",
+      checkhistory: "{'field1':'data1','field2':'data2','field3':'data3'}",
+      approveresult: "{'field1':'data1','field2':'data2','field3':'data3'}",
+    };
+
+    this.eRequestService.checkRequest(payload).subscribe((res) => {
+      console.log('check result = ', res);
+    });
+  }
+
   checkRequestId() {
     this.route.paramMap.subscribe((params) => {
       this.requestId = Number(params.get('id'));
@@ -92,19 +111,24 @@ export class ETempLicenseDetailComponent implements OnInit {
     });
   }
 
-  loadRequestFromId(id: number) {
-    this.eRequestService.getRequestById(id).subscribe((res: any) => {
-      this.requestData = res;
-      this.requestNo = res.requestno;
-      //this.currentProcess = +res.currentprocess;
-      //console.log('current process = ', this.currentProcess);
+  loadRequestFromId(requestNo: any) {
+    this.eRequestService
+      .getRequestById('2-03-1-650915-00034')
+      .subscribe((res) => {
+        this.requestData = res;
+        this.requestNo = res.requestno;
+        this.pathUserInfo(res);
+        this.patchAddress(parseJson(res.addressinfo));
+        this.patchEdu(parseJson(res.eduinfo));
+        this.patchHiringInfo(parseJson(res.hiringinfo));
+        this.patchTeachingInfo(parseJson(res.teachinginfo));
+        this.patchSchoolAddrress(parseJson(res.schooladdrinfo));
+      });
+  }
 
-      this.pathUserInfo(res);
-      this.patchAddress(parseJson(res.addressinfo));
-      this.patchEdu(parseJson(res.eduinfo));
-      this.patchHiringInfo(parseJson(res.hiringinfo));
-      this.patchTeachingInfo(parseJson(res.teachinginfo));
-    });
+  patchSchoolAddrress(payload: any) {
+    if (!payload) return;
+    this.form.controls.schoolAddr.patchValue(payload);
   }
 
   pathUserInfo(data: any) {
@@ -159,7 +183,7 @@ export class ETempLicenseDetailComponent implements OnInit {
   }
 
   patchTeachingInfo(res: any) {
-    //console.log('teaching response= ', res);
+    if (!res) return;
     const teachingLevel = levels.map((level) => {
       if (res.teachingLevel.includes(level.value)) {
         return level.value;
@@ -212,10 +236,5 @@ export class ETempLicenseDetailComponent implements OnInit {
 
   prevPage() {
     this.router.navigate(['/temp-license', 'list']);
-  }
-
-  tabChanged(e: MatTabChangeEvent) {
-    //console.log('tab index = ', e.index);
-    this.selectedTabIndex = e.index;
   }
 }

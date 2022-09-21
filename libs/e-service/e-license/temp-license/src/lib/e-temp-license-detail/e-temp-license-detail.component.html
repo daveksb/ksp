@@ -46,6 +46,7 @@
 
       <br />
 
+      <!-- (selectedIndexChange)="onTabIndexChanged($event)" -->
       <mat-tab-group
         class="tab-group mb-3"
         animationDuration="0ms"
@@ -143,7 +144,7 @@
             [mode]="'view'"
             [displayMode]="'request'"
           ></ksp-form-hiring-info>
-          
+
           <ksp-form-temp-license-number></ksp-form-temp-license-number>
         </mat-tab>
 
@@ -182,6 +183,7 @@
       [showSaveButton]="true"
       [showCenterButtons]="true"
       [isFirstPage]="true"
+      (saveClicked)="checkRequest()"
     ></ksp-bottom-nav>
   </div>
 </form>

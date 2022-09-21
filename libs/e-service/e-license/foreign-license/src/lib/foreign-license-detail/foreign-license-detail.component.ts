@@ -67,7 +67,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
   }
 
   loadRequestFromId(id: number) {
-    this.eRequestService.getRequestById(id).subscribe((res: any) => {
+    this.eRequestService.getRequestById('xxx').subscribe((res: any) => {
       this.requestData = res;
       this.requestNo = res.requestno;
       //this.currentProcess = +res.currentprocess;
