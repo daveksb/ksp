@@ -8,7 +8,7 @@
 
   <div class="bg-white p-3">
     <ksp-request-header-info
-      [requestDate]="today"
+      [requestDate]="requestDate"
       [requestNumber]="requestNo"
     ></ksp-request-header-info>
     <hr />
@@ -91,11 +91,11 @@
     ></ksp-form-attachment>
   </div>
   <br />
-  <div class="bg-white p-4">
+  <div [formGroup]="form2" class="bg-white p-4">
     <e-service-license-check
       formControlName="verifyResult"
-      [headerTitle]="checkComponentTitles[pageType]"
-      [choices]="checkComponentChoices[pageType]"
+      [headerTitle]="approveTitles[pageType]"
+      [choices]="approveChoices[pageType]"
     ></e-service-license-check>
   </div>
 </div>
@@ -108,7 +108,7 @@
     [showSaveButton]="true"
     (cancelClicked)="cancel()"
     (saveClicked)="confirm()"
-    [disableSaveButton]="!verifySelected"
+    [disableSaveButton]="!form2.valid"
   >
   </ksp-bottom-nav>
 </div>

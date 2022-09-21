@@ -27,24 +27,17 @@ export class ApproveNewUserListComponent implements AfterViewInit {
   }
 
   search(params: any) {
-    console.log('params = ', params);
-
+    console.log('params  = ', params);
     const payload = {
-      schoolid: params.institution?.schoolid,
-      requestno: params.requestno,
-      firstnameth: params.name,
-      lastnameth: null,
-      requestdate: null,
+      systemtype: '2',
       requesttype: '1',
-      requeststatus: null,
-      currentprocess: null,
-      schoolname: null,
+      schoolid: '0010201056',
+      // params.institution?.schoolid,
       bureauid: null,
-      offset: '0',
-      row: '25',
     };
 
     this.eRequestService.searchRequest(payload).subscribe((res: any) => {
+      console.log('res = ', res);
       this.dataSource.data = res;
     });
   }

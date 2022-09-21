@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SchoolServiceUserPageType } from '@ksp/shared/interface';
+import {
+  SchoolRequest,
+  SchoolServiceUserPageType,
+} from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -16,9 +19,9 @@ import { parseJson, thaiDate } from '@ksp/shared/utility';
   styleUrls: ['./user-detail.component.scss'],
 })
 export class UserDetailComponent implements OnInit {
-  checkComponentTitles = ['ผลการตรวจสอบ', 'สถานะการใช้งาน'];
+  approveTitles = ['ผลการตรวจสอบ', 'สถานะการใช้งาน'];
 
-  checkComponentChoices = [
+  approveChoices = [
     [
       {
         name: 'อนุมัติ',
@@ -26,7 +29,7 @@ export class UserDetailComponent implements OnInit {
       },
       {
         name: 'ไม่อนุมัติ',
-        value: 1,
+        value: 0,
       },
     ],
     [
@@ -36,7 +39,7 @@ export class UserDetailComponent implements OnInit {
       },
       {
         name: 'ไม่ใช้งาน',
-        value: 1,
+        value: 0,
       },
     ],
   ];
@@ -52,20 +55,23 @@ export class UserDetailComponent implements OnInit {
     ],
   ];
 
-  today = thaiDate(new Date());
-  requestId!: number;
-  requestData!: any;
+  requestId!: number | null;
+  requestDate!: string | null;
+  requestData!: SchoolRequest;
   prefixList$!: Observable<any>;
 
-  requestNo = '';
+  requestNo: string | null = '';
 
   form = this.fb.group({
     userInfo: [],
     coordinatorInfo: [],
+  });
+
+  form2 = this.fb.group({
     verifyResult: [null, Validators.required],
   });
 
-  verifySelected = 0;
+  //verifySelected = 0;
   pageType = 0;
 
   constructor(
@@ -80,9 +86,10 @@ export class UserDetailComponent implements OnInit {
   ngOnInit(): void {
     this.checkRequestId();
 
-    this.form.controls.verifyResult.valueChanges.subscribe((res: any) => {
-      this.verifySelected = Number(res['verify']);
-    });
+    /* this.form.controls.verifyResult.valueChanges.subscribe((res: any) => {
+      //this.verifySelected = Number(res['verify']);
+      console.log(' //this.form.valid;', this.form.valid);
+    }); */
 
     this.route.queryParams.subscribe((res) => {
       this.pageType = Number(res['type']);
@@ -94,13 +101,10 @@ export class UserDetailComponent implements OnInit {
   confirmRequest() {
     const payload = {
       id: `${this.requestId}`,
-      currentprocess: this.verifySelected,
+      currentprocess: 'xxx',
     };
 
     /***
-     *
-     *
-     *
      */
   }
 
@@ -114,15 +118,20 @@ export class UserDetailComponent implements OnInit {
   }
 
   loadRequestFromId(id: number) {
-    this.eRequestService.getRequestById(id).subscribe((res: any) => {
+    this.eRequestService.getRequestById(id).subscribe((res) => {
       this.requestData = res;
       this.requestNo = res.requestno;
-      //this.pathUserInfo(res);
-      res.birthdate = res.birthdate.split('T')[0];
-      this.form.controls.userInfo.patchValue(res);
+      this.requestDate = thaiDate(new Date(`${res.requestdate}`));
+
+      if (res.birthdate) {
+        res.birthdate = res.birthdate.split('T')[0];
+      }
+
+      const data: any = res;
+      this.form.controls.userInfo.patchValue(data);
 
       const coordinator = parseJson(res.coordinatorinfo);
-      console.log('coordinator = ', res);
+      //console.log('coordinator = ', res);
       this.form.controls.coordinatorInfo.patchValue(coordinator.coordinator);
     });
   }
