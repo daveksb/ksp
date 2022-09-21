@@ -28,7 +28,11 @@
         <div class="d-flex align-items-center mb-3">
           <div class="form-control" style="width: 25rem">
             <div class="d-flex align-items-center">
-              <input type="radio" value="1" formControlName="verify" />
+              <input
+                type="radio"
+                value="complete"
+                formControlName="approveResult"
+              />
               <label class="form-label ms-2"> ครบถ้วน และถูกต้อง </label>
             </div>
           </div>
@@ -37,7 +41,11 @@
         <div class="form-control mb-3" style="width: 25rem">
           <div class="d-flex align-items-center">
             <div class="d-flex align-items-center">
-              <input type="radio" value="2" formControlName="verify" />
+              <input
+                type="radio"
+                value="needfix"
+                formControlName="approveResult"
+              />
               <label class="form-label ms-2"> ขอแก้ไข / เพิ่มเติม </label>
             </div>
           </div>
@@ -58,18 +66,22 @@
         <div class="form-control mb-3" style="width: 25rem">
           <div class="d-flex align-items-center">
             <div class="d-flex align-items-center">
-              <input type="radio" value="3" formControlName="verify" />
+              <input
+                type="radio"
+                value="reject"
+                formControlName="approveResult"
+              />
               <label class="form-label ms-2"> ขาดคุณสมบัติ </label>
             </div>
           </div>
 
           <div class="d-flex align-items-center mb-2">
             <label class="form-label ms-4 w-25">สาเหตุ</label>
-            <select class="form-select w-100" formControlName="reason">
+            <select class="form-select w-100" formControlName="rejectReason">
               <option value="null" selected disabled hidden>กรุณาเลือก</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              <option value="1">เหตุผล 1</option>
+              <option value="2">เหตุผล 2</option>
+              <option value="3">เหตุผล 3</option>
             </select>
           </div>
         </div>
@@ -143,12 +155,12 @@
           </thead>
 
           <tbody>
-            <tr>
+            <!--             <tr>
               <td>1</td>
               <td>x</td>
               <td>x</td>
               <td>x</td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
       </div>

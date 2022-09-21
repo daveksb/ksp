@@ -96,12 +96,12 @@ export class ETempLicenseDetailComponent implements OnInit {
   persistData() {
     const checkSubResult = {
       checkdate: new Date().toISOString().split('.')[0],
-      result: this.form.controls.checkResult.value,
+      checkResult: this.form.controls.checkResult.value,
     };
     //console.log('check sub result = ', checkSubResult);
     const payload = {
       id: `${this.requestId}`,
-      checksubresult: JSON.stringify(checkSubResult),
+      checksubresult: checkSubResult,
       checkfinalresult: null,
       checkhistory: null,
       approveresult: null,

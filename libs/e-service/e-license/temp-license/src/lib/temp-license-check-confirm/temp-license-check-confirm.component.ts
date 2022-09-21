@@ -20,12 +20,12 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   requestId!: number;
   requestDate!: string | null;
   requestNo!: string | null;
+  previousForm: any;
 
   form = this.fb.group({
-    verify: [],
+    approveResult: [],
     returnDate: [],
-    reason: [],
-    forward: [],
+    rejectReason: [],
   });
 
   constructor(
@@ -38,18 +38,38 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
 
   ngOnInit(): void {
     localForage.getItem('checkRequestData').then((res: any) => {
-      console.log('request data = ', res);
       this.requestDate = res.requestDate;
       this.requestNo = res.requestNo;
+      this.previousForm = res;
+    });
+    this.checkRequestId();
+  }
+
+  save() {
+    //console.log('payload = ', this.form.value);
+
+    const { requestNo, requestDate, ...res } = this.previousForm;
+
+    const payload = {
+      ...res,
+      ...{
+        checksubresult: JSON.stringify({
+          ...res.checksubresult,
+          ...{ approveResult: this.form.value },
+        }),
+      },
+    };
+
+    console.log('payload = ', payload);
+
+    this.eRequestService.checkRequest(payload).subscribe((res) => {
+      console.log('check result = ', res);
     });
   }
 
   checkRequestId() {
     this.route.paramMap.pipe(untilDestroyed(this)).subscribe((params) => {
       this.requestId = Number(params.get('id'));
-      if (this.requestId) {
-        //this.loadRequestFromId(this.requestId);
-      }
     });
   }
 
@@ -59,14 +79,6 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
 
   prevPage() {
     this.router.navigate(['/temp-license', 'detail', this.requestId]);
-  }
-
-  save() {
-    //console.log('payload = ', payload);
-    const payload = {};
-    this.eRequestService.checkRequest(payload).subscribe((res) => {
-      console.log('check result = ', res);
-    });
   }
 
   submit() {
