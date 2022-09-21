@@ -66,6 +66,7 @@ export class DegreeCertStepOneComponent
     private service: DegreeCertStepOneService
   ) {
     super();
+    this.gatAll();
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
       this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
@@ -76,7 +77,6 @@ export class DegreeCertStepOneComponent
   }
 
   ngOnInit(): void {
-    this.gatAll();
     this.listenFormChange();
     this.setDefaulFormValue();
   }
@@ -88,7 +88,6 @@ export class DegreeCertStepOneComponent
         lastValueFrom(this.service.getUniDegreelevel()),
         lastValueFrom(this.service.getUniCourseType()),
       ]);
-    // const res = await lastValueFrom(this.service.searchNameUniUniversity(''));
     this.universityTypes = universityTypes;
     this.provinces = provinces;
     this.courseTypes = courseTypes;
