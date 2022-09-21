@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,6 +9,10 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./uni-form-badge.component.scss'],
 })
 export class UniFormBadgeComponent implements OnInit {
+  @Input() mainTitle: any;
+  @Input()
+  subTitle: any;
+
   constructor() {}
 
   ngOnInit(): void {}

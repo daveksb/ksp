@@ -36,6 +36,7 @@
   .bg-image {
     background-image: url('/assets/images/BG-mobile.png');
     background-size: cover;
+    height: 100%;
   }
 }
 
@@ -44,5 +45,6 @@
   .bg-image {
     background-image: url('/assets/images/BG-mobile.png');
     background-position: top;
+    height: 100%;
   }
 }

@@ -9,3 +9,20 @@
   background-position: center;
   background-repeat: no-repeat;
 }
+
+/* mobile */
+@media only screen and (max-width: 992px) {
+  .bg-image {
+    background-image: url('/assets/images/BG-secondary.png');
+    background-size: cover;
+    height: 100%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .bg-image {
+    background-image: url('/assets/images/BG-mobile.png');
+    background-size: cover;
+    height: 100%;
+  }
+}
