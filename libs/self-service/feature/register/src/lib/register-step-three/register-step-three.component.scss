@@ -1,87 +1,12 @@
-.container {
-  max-width: 1440px;
+.bg-image {
+  /* The image used */
   background-image: url('/assets/images/BG-secondary.png');
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 15rem;
-  height: 100vh;
-}
-
-.form__container {
-  display: grid;
-  background: #ffffff;
-  box-shadow: 0px 4px 10px rgba(63, 137, 254, 0.1);
-  border-radius: 20px;
-  padding: 24px 36px;
-  text-align: center;
-}
-
-h3 {
-  font-size: 30px;
-  color: #000000;
-  margin-bottom: 32px;
-}
-
-.detail__container {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-column-gap: 8px;
-  padding: 24px 0;
-}
-
-.form__header {
-  font-size: 24px;
-  text-align: center;
-}
-
-.form__detail {
-  text-align: left;
-  color: #656565;
-  font-size: 18px;
-}
-
-.field__container {
-  padding: 0 200px;
-}
-
-.form__footer {
-  text-align: center;
-  margin: 24px;
-}
-
-#btn-confirm {
-  width: 350px;
-  border-radius: 10px;
-  font-size: 20px;
-}
-
-.label__login {
-  font-size: 20px;
-  color: #666666;
-  text-decoration: underline;
-  margin-top: 24px;
-  cursor: pointer;
-}
-
-/* mobile */
-@media only screen and (max-width: 768px) {
-  .container {
-    width: 100%;
-    padding: 72px 16px;
-  }
-  
-  .form__container {
-    padding: 0;
-  }
-
-  .field__container {
-    padding: 0 24px;
-    margin-bottom: 8px;
-  }
-
-  #btn-confirm {
-    width: 300px;
-  }
 }

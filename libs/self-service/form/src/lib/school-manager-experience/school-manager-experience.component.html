@@ -1,30 +1,49 @@
 <form [formGroup]="form">
-  <div class="row mb-3">
-    <div class="col-5">
-      <div class="d-flex align-items-center">
-        <input type="checkbox" class="me-2" formControlName="hasTeachingExperience" />
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <div class="d-flex">
+        <div class="d-flex">
+          <input
+            type="checkbox"
+            class="me-2 mt-1"
+            formControlName="hasTeachingExperience"
+          />
+        </div>
         <label class="form-label">
           มีประสบการณ์ด้านปฎิบัติการสอนมาแล้วไม่น้อยกว่า 5 ปี
         </label>
       </div>
       <div class="d-flex align-items-center ms-4">
         <label class="form-label me-3">จำนวนปี</label>
-        <input type="text" class="form-control w-auto" formControlName="teachingExperienceYear" />
+        <input
+          type="text"
+          class="form-control w-auto"
+          formControlName="teachingExperienceYear"
+        />
       </div>
     </div>
-    <div class="col-7">
-      <div class="d-flex align-items-center">
-        <input type="checkbox" class="me-2" formControlName="hasManagingExperience" />
+    <div class="col-md-6 mb-2">
+      <div class="d-flex">
+        <div class="d-flex">
+          <input
+            type="checkbox"
+            class="me-2 mt-1"
+            formControlName="hasManagingExperience"
+          />
+        </div>
         <label class="form-label">
           มีประสบการณ์ด้านปฎิบัติการสอนและมีประสบกรณ์ในตำแหน่งหัวหน้าหมวดหรือหัวหน้าสาย
+          หรือหัวหน้างาน หรือตำแหน่งบริหารอื่นๆในสถานศึกษามาแล้วไม่น้อยกว่า 2 ปี
+          ตามสำเนาคำสั่งแต่งตั้งที่แนบ
         </label>
       </div>
-      <label class="form-label ms-4">
-        หรือหัวหน้างาน หรือตำแหน่งบริหารอื่นๆในสถานศึกษามาแล้วไม่น้อยกว่า 2 ปี
-        ตามสำเนาคำสั่งแต่งตั้งที่แนบ</label>
       <div class="d-flex align-items-center ms-4">
         <label class="form-label me-3">จำนวนปี</label>
-        <input type="text" class="form-control w-auto" formControlName="managingExperienceYear" />
+        <input
+          type="text"
+          class="form-control w-auto"
+          formControlName="managingExperienceYear"
+        />
       </div>
     </div>
   </div>

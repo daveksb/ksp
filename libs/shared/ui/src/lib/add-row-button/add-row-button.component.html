@@ -5,7 +5,12 @@
     class="bi bi-plus-circle"
   ></i>
 
-  <span (click)="addRowClick.emit(true)" role="button" class="ms-2">
+  <span
+    (click)="addRowClick.emit(true)"
+    role="button"
+    class="ms-2"
+    style="white-space: nowrap"
+  >
     <ng-content></ng-content>
   </span>
 </div>

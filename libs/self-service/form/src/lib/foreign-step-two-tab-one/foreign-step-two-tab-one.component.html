@@ -2,11 +2,11 @@
   <div class="row mb-2">
     <div class="col-6">
       <label class="form-label">Address No. / home / room / condo</label>
-      <input class="form-control" type="text" formControlName="addressName" />
+      <input class="form-control" type="text" formControlName="houseNo" />
     </div>
     <div class="col">
       <label class="form-label">Soi</label>
-      <input class="form-control" type="text" formControlName="lane" />
+      <input class="form-control" type="text" formControlName="alley" />
     </div>
     <div class="col">
       <label class="form-label">Road</label>
@@ -17,7 +17,7 @@
   <div class="row mb-2">
     <div class="col">
       <label class="form-label">sub-district</label>
-      <select class="form-select" (change)="updatePostcode($event)" formControlName="subDistrict">
+      <select class="form-select" (change)="updatePostcode($event)" formControlName="tumbol">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let t of subDistricts" [value]="t?.tambolCode">
           {{ t?.tambolName }}
@@ -26,7 +26,7 @@
     </div>
     <div class="col">
       <label class="form-label">district</label>
-      <select class="form-select" (change)="districtChanged.emit($event)" formControlName="district">
+      <select class="form-select" (change)="districtChanged.emit($event)" formControlName="amphur">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let a of districts" [value]="a?.amphurCode">
           {{ a?.amphurName }}
@@ -49,7 +49,7 @@
   <div class="row mb-2">
     <div class="col">
       <label class="form-label">zip code</label>
-      <input class="form-control" type="text" formControlName="zipCode" />
+      <input class="form-control" type="text" formControlName="postcode" />
     </div>
     <div class="col">
       <label class="form-label">Cell Phone</label>
