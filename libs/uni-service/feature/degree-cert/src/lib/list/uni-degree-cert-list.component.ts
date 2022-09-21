@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { DegreeCertSearchComponent } from '@ksp/shared/search';
 import { UniFormBadgeComponent } from '@ksp/shared/ui';
+import { UniDegreeCertListService } from './uni-degree-cert-list.service';
 
 @Component({
   templateUrl: './uni-degree-cert-list.component.html',
@@ -22,8 +23,13 @@ import { UniFormBadgeComponent } from '@ksp/shared/ui';
 export class UniDegreeCertListComponent {
   displayedColumns: string[] = displayedColumns;
   dataSource = new MatTableDataSource<DegreeCertInfo>();
-
+  constructor(private uniDegreeCertListService: UniDegreeCertListService) {}
   search() {
+    this.uniDegreeCertListService.uniRequestDegreeSearch({
+      uniid: "22",
+    }).subscribe((res) => {
+      if (!res?.datareturn) return;
+    })
     this.dataSource.data = data;
   }
 
