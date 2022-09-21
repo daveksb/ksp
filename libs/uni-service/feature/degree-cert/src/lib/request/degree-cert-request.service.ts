@@ -4,53 +4,53 @@ import { environment } from '@ksp/shared/environment';
 import { getCookie } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 export type UniRequestInsertType = {
-  requestprocess?: string;
-  requeststatus?: string;
-  systemtype?: string;
-  requesttype?: string;
-  subtype?: string;
-  unitype?: string;
-  uniname?: string;
-  unicode?: string;
-  uniprovince?: string;
-  degreelevel?: string;
-  courseacademicyear?: string;
-  coursename?: string;
-  coursetype?: string;
-  coursestatus?: string;
-  coursemajor?: string;
-  coursefieldofstudy?: string;
-  coursesubjects?: string;
-  fulldegreenameth?: string;
-  fulldegreenameen?: string;
-  shortdegreenameth?: string;
-  shortdegreenameen?: string;
-  courseapprovetime?: string;
-  courseapprovedate?: Date;
-  courseacceptdate?: Date;
-  coursedetailtype?: string;
-  coursedetailinfo?: string;
-  teachinglocation?: string;
-  responsibleunit?: string;
-  evaluatelocation?: string;
-  coordinatorinfo?: string;
-  coursestructure?: string;
-  courseplan?: string;
-  courseteacher?: string;
-  courseinstructor?: string;
-  courseadvisor?: string;
-  processtrainning?: string;
-  processteaching?: string;
-  attachfiles?: string;
-  checkresult?: string;
-  considerresult?: string;
-  approveresult?: string;
-  degreeapprovecode?: string;
-  uniid?: string;
-  ref1?: string;
-  ref2?: string;
-  ref3?: string;
-  tokenkey?: string;
+  requestprocess?: string | null;
+  requeststatus?: string | null;
+  systemtype?: string | null;
+  requesttype?: string | null;
+  subtype?: string | null;
+  unitype?: string | null;
+  uniname?: string | null;
+  unicode?: string | null;
+  uniprovince?: string | null;
+  degreelevel?: string | null;
+  courseacademicyear?: string | null;
+  coursename?: string | null;
+  coursetype?: string | null;
+  coursestatus?: string | null;
+  coursemajor?: string | null;
+  coursefieldofstudy?: string | null;
+  coursesubjects?: string | null;
+  fulldegreenameth?: string | null;
+  fulldegreenameen?: string | null;
+  shortdegreenameth?: string | null;
+  shortdegreenameen?: string | null;
+  courseapprovetime?: string | null;
+  courseapprovedate?: Date | null;
+  courseacceptdate?: Date | null;
+  coursedetailtype?: string | null;
+  coursedetailinfo?: string | null;
+  teachinglocation?: string | null;
+  responsibleunit?: string | null;
+  evaluatelocation?: string | null;
+  coordinatorinfo?: string | null;
+  coursestructure?: string | null;
+  courseplan?: string | null;
+  courseteacher?: string | null;
+  courseinstructor?: string | null;
+  courseadvisor?: string | null;
+  processtrainning?: string | null;
+  processteaching?: string | null;
+  attachfiles?: string | null;
+  checkresult?: string | null;
+  considerresult?: string | null;
+  approveresult?: string | null;
+  degreeapprovecode?: string | null;
+  uniid?: string | null;
+  ref1?: string | null;
+  ref2?: string | null;
+  ref3?: string | null;
+  tokenkey?: string | null;
 };
 @Injectable({
   providedIn: 'root',
@@ -65,7 +65,7 @@ export class DegreeCertRequestService {
   }
   uniRequestInsert(params: UniRequestInsertType): Observable<any> {
     return this.http.post(
-      `${environment.apiUrl}/kspuni/universityselectbyid`,
+      `${environment.apiUrl}/kspuni/unirequestinsert`,
       params
     );
   }
