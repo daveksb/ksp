@@ -1,4 +1,4 @@
-<ksp-top-nav><span header>หน้าแรก</span></ksp-top-nav>
+<ksp-top-nav [isSelfService]="true"><span header>หน้าแรก</span></ksp-top-nav>
 
 <div class="full-height main__container py-2 px-4">
   <ksp-uni-form-badge [mainTitle]="badgeTitle"></ksp-uni-form-badge>
@@ -6,9 +6,9 @@
     <div class="col-md-6 p-0">
       <self-service-slideshow></self-service-slideshow>
     </div>
-    <div class="col-md-6 p-0">
+    <!-- <div class="col-md-6 p-0">
       <self-service-slideshow-second></self-service-slideshow-second>
-    </div>
+    </div> -->
   </div>
   <self-service-license-info
     [header]="'สถานะใบคำขอ'"

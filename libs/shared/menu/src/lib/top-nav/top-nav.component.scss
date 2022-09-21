@@ -1,9 +1,13 @@
 .navbar {
-  padding: 15px 5px;
-  /* background-image: url(/assets/images/header-sidebar.png);
-  background-size: cover; */
+  padding: 8px 4px;
   height: var(--ksp-top-nav-height);
   width: 100%;
+}
+
+.navbar__image {
+  background-image: url(/assets/images/header-sidebar.png);
+  background-size: cover;
+  border-bottom: 1px solid #eee;
 }
 
 .label {
@@ -21,7 +25,7 @@
 
 .user__info {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-end;
 }
 
@@ -32,14 +36,30 @@
 
 .login__time {
   font-size: 14px;
+  color: #656565;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .user__info {
     display: none;
   }
 
   .label {
     font-size: 18px;
+  }
+  .navbar__image {
+    background-image: none;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .navbar__image {
+    background-image: none;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .navbar__image {
+    background-image: none;
   }
 }
