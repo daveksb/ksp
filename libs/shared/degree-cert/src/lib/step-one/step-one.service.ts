@@ -116,8 +116,4 @@ export class DegreeCertStepOneService {
       .pipe(map(this.mapListData));
 
   }
-
-  getNamePrefix(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/kspmasterdata/nameprefix`);
-  }
 }
