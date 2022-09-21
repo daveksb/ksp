@@ -7,7 +7,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { getCookie } from '@ksp/shared/utility';
+import { getCookie, thaiDate } from '@ksp/shared/utility';
 import { DegreeCertRequestService, UniRequestInsertType } from './degree-cert-request.service';
 
 @Component({
@@ -73,48 +73,60 @@ export class DegreeCertRequestComponent {
 
     dialogRef.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.degreeCertRequestService.uniRequestInsert(this._getRequest()).subscribe((res) => {
-          console.log(res);
-          if (res?.returncode == 99) return;
-          this.showConfirmDialog();
-        })
+        this.degreeCertRequestService
+          .uniRequestInsert(this._getRequest())
+          .subscribe((res) => {
+            if (res?.returncode == 99) return;
+            this.showConfirmDialog(res?.requestno);
+          });
       }
     });
   }
   private _getRequest(): UniRequestInsertType {
-    const step1:any = this.step1Form.value.step1;
+    const step1: any = this.step1Form.value.step1;
+    const step2: any = this.step2Form.value.step2;
+    const step3: any = this.step3Form.value.step3;
+
     const reqBody: UniRequestInsertType = {
-      uniname: step1?.institutionsName,
-      unitype: step1?.institutionsGroup,
-      uniprovince: step1?.provience,
-      unicode: step1?.institutionsCode,
-      degreelevel: step1?.degreeTypeForm?.degreeType,
-      courseacademicyear: step1?.degreeTypeForm?.courseYear,
-      coursename: step1?.degreeTypeForm?.courseName,
-      coursetype: step1?.degreeTypeForm?.courseType,
-      coursestatus: step1?.degreeTypeForm?.courseStatus,
-      fulldegreenameth: step1?.degreeTypeForm?.degreeNameThFull,
-      shortdegreenameth: step1?.degreeTypeForm?.degreeNameThShort,
-      fulldegreenameen: step1?.degreeTypeForm?.degreeNameEnFull,
-      shortdegreenameen: step1?.degreeTypeForm?.degreeNameEnShort,
-      courseapprovetime: step1?.degreeTypeForm?.courseApproveTime,
-      courseapprovedate: step1?.degreeTypeForm?.courseApproveDate,
-      courseacceptdate: step1?.degreeTypeForm?.courseAcceptDate,
-      coursedetailtype: step1?.courseDetailType,
-      teachinglocation: JSON.stringify(step1?.locations),
-      responsibleunit: JSON.stringify(step1?.institutions),
-      evaluatelocation: JSON.stringify(step1?.locations2),
-      coordinatorinfo: JSON.stringify(step1?.coordinator),
+      uniname: step1?.institutionsName || null,
+      unitype: step1?.institutionsGroup || null,
+      uniprovince: step1?.provience || null,
+      unicode: step1?.institutionsCode || null,
+      degreelevel: step1?.degreeTypeForm?.degreeType || null,
+      courseacademicyear: step1?.degreeTypeForm?.courseYear || null,
+      coursename: step1?.degreeTypeForm?.courseName || null,
+      coursetype: step1?.degreeTypeForm?.courseType || null,
+      coursestatus: step1?.degreeTypeForm?.courseStatus || null,
+      fulldegreenameth: step1?.degreeTypeForm?.degreeNameThFull || null,
+      shortdegreenameth: step1?.degreeTypeForm?.degreeNameThShort || null,
+      fulldegreenameen: step1?.degreeTypeForm?.degreeNameEnFull || null,
+      shortdegreenameen: step1?.degreeTypeForm?.degreeNameEnShort || null,
+      courseapprovetime: step1?.degreeTypeForm?.courseApproveTime || null,
+      courseapprovedate: step1?.degreeTypeForm?.courseApproveDate || null,
+      courseacceptdate: step1?.degreeTypeForm?.courseAcceptDate || null,
+      coursedetailtype: step1?.courseDetailType || null,
+      teachinglocation: JSON.stringify(step1?.locations) || null,
+      responsibleunit: JSON.stringify(step1?.institutions) || null,
+      evaluatelocation: JSON.stringify(step1?.locations2) || null,
+      coordinatorinfo: JSON.stringify(step1?.coordinator) || null,
+      coursestructure: JSON.stringify(step2?.plan1?.plans) || null,
+      courseplan: JSON.stringify(step2?.plan1?.subjects) || null,
+      courseteacher: JSON.stringify(step2?.teacher?.teachers) || null,
+      courseinstructor: JSON.stringify(step2?.nitet?.nitets) || null,
+      courseadvisor: JSON.stringify(step2?.advisor?.advisors) || null,
+      processtrainning: JSON.stringify(step3?.training?.rows) || null,
+      processteaching: JSON.stringify(step3?.teaching?.rows) || null,
+      tokenkey: getCookie('userToken') || null,
     };
     return reqBody;
   }
-  showConfirmDialog() {
+  showConfirmDialog(requestno?:string) {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '375px',
       data: {
         header: 'ยืนยันข้อมูลสำเร็จ',
-        content: `วันที่ : 12 มกราคม 2565?
-        เลขที่ใบคำขอ : UNIUS 6406000162`,
+        content: `วันที่ : ${thaiDate(new Date())}
+        เลขที่ใบคำขอ : ${requestno || "-"}`,
         subContent: `กรุณาตรวจสอบสถานะใบคำขอหรือรหัสเข้าใช้งาน
         ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },
