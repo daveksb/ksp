@@ -67,7 +67,9 @@
           </div>
 
           <div class="d-flex align-items-center mb-2">
-            <label class="form-label w-100 ms-4">วันที่ต้องการใบคำขอส่งกลับ</label>
+            <label class="form-label w-100 ms-4"
+              >วันที่ต้องการใบคำขอส่งกลับ</label
+            >
             <input
               class="form-control"
               type="date"
@@ -161,7 +163,7 @@
   <ksp-bottom-nav
     (cancelClicked)="cancel()"
     (prevClicked)="prevPage()"
-    (saveClicked)="save()"
+    (saveClicked)="submit()"
     [showCenterButtons]="true"
     [isLastPage]="true"
     [showSaveButton]="true"

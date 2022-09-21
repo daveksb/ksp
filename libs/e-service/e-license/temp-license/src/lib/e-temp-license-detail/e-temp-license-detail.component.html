@@ -15,7 +15,7 @@
 
     <div class="bg-white px-4 py-2">
       <ksp-request-header-info
-        [requestDate]="today"
+        [requestDate]="requestDate"
         [requestNumber]="requestNo"
       ></ksp-request-header-info>
 
@@ -43,10 +43,6 @@
           formControlName="userInfo"
         ></ksp-form-user-info>
       </div>
-
-      <br />
-
-      <!-- (selectedIndexChange)="onTabIndexChanged($event)" -->
 
       <mat-tab-group
         class="tab-group mb-3"
@@ -190,9 +186,7 @@
     (cancelClicked)="cancel()"
     (prevClicked)="prevPage()"
     (nextClicked)="next()"
-    [showSaveButton]="true"
     [showCenterButtons]="true"
     [isFirstPage]="true"
-    (saveClicked)="checkRequest()"
   ></ksp-bottom-nav>
 </div>
