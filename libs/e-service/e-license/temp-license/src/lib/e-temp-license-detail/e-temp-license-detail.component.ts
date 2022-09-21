@@ -89,7 +89,7 @@ export class ETempLicenseDetailComponent implements OnInit {
 
   next() {
     this.persistData();
-    this.router.navigate(['/temp-license', 'confirm']);
+    this.router.navigate(['/temp-license', 'confirm', this.requestId]);
   }
 
   // save data to indexed db
@@ -105,6 +105,8 @@ export class ETempLicenseDetailComponent implements OnInit {
       checkfinalresult: null,
       checkhistory: null,
       approveresult: null,
+      requestNo: this.requestNo,
+      requestDate: this.requestDate,
     };
 
     localForage.setItem('checkRequestData', payload);
