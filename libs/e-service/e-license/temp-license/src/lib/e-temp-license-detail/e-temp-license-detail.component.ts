@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  levels,
-  SchoolRequestSubType,
-  subjects,
-  UserInfoFormType,
-} from '@ksp/shared/constant';
+import { levels, subjects, UserInfoFormType } from '@ksp/shared/constant';
+
 import {
   AddressService,
   ERequestService,
@@ -15,25 +11,21 @@ import {
   StaffService,
 } from '@ksp/shared/service';
 import { parseJson, thaiDate } from '@ksp/shared/utility';
-import { untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 import { TempLicenseDetailService } from './e-temp-license-detail.service';
-
+import localForage from 'localforage';
+@UntilDestroy()
 @Component({
   selector: 'e-service-temp-license-detail',
   templateUrl: './e-temp-license-detail.component.html',
   styleUrls: ['./e-temp-license-detail.component.scss'],
 })
 export class ETempLicenseDetailComponent implements OnInit {
-  //reason: string[][] = [];
   verifyChoice: any[] = [];
   selectedTabIndex = 0;
-  //educationInfo: string[] = [];
-  //: string[] = [];
-  //reasonInfo: string[] = [];
   evidenceFiles: any[] = [];
 
-  today = thaiDate(new Date());
   amphurs1$!: Observable<any>;
   tumbols1$!: Observable<any>;
   amphurs2$!: Observable<any>;
@@ -41,12 +33,12 @@ export class ETempLicenseDetailComponent implements OnInit {
   provinces$!: Observable<any>;
   prefixList$!: Observable<any>;
   positionTypes$!: Observable<any>;
+  selectedTab: MatTabChangeEvent = new MatTabChangeEvent();
 
-  schoolId = '0010201056';
   requestId!: number;
-  requestData: any;
-  requestNo = '';
-  requestSubType = SchoolRequestSubType.ครู;
+  //requestData!: SchoolRequest;
+  requestDate: string | null = '';
+  requestNo!: string | null;
   userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form
 
   form = this.fb.group({
@@ -58,6 +50,7 @@ export class ETempLicenseDetailComponent implements OnInit {
     edu2: [],
     teachinginfo: [],
     hiringinfo: [],
+    checkResult: this.fb.array([]),
   });
 
   constructor(
@@ -72,19 +65,55 @@ export class ETempLicenseDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    /* this.reason = this.service.reason; */
     this.verifyChoice = this.service.verifyChoice;
     this.evidenceFiles = this.service.evidenceFiles;
-    /*  this.educationInfo = this.service.educationInfo;
-    this.teachingInfo = this.service.teachingInfo;
-    this.reasonInfo = this.service.reasonInfo; */
-    //this.evidenceFiles = this.service.evidenceFiles;
     this.getList();
     this.checkRequestId();
+    this.addCheckResultArray();
+  }
+
+  addCheckResultArray() {
+    for (let i = 0; i < 6; i++) {
+      this.checkResultFormArray.push(this.fb.control([]));
+    }
+  }
+
+  get checkResultFormArray() {
+    return this.form.controls.checkResult as FormArray;
+  }
+
+  tabChanged(e: MatTabChangeEvent) {
+    //console.log('tab event = ', e);
+    this.selectedTab = e;
+  }
+
+  next() {
+    this.persistData();
+    this.router.navigate(['/temp-license', 'confirm', this.requestId]);
+  }
+
+  // save data to indexed db
+  persistData() {
+    const checkSubResult = {
+      checkdate: new Date().toISOString().split('.')[0],
+      checkResult: this.form.controls.checkResult.value,
+    };
+    //console.log('check sub result = ', checkSubResult);
+    const payload = {
+      id: `${this.requestId}`,
+      checksubresult: checkSubResult,
+      checkfinalresult: null,
+      checkhistory: null,
+      approveresult: null,
+      requestNo: this.requestNo,
+      requestDate: this.requestDate,
+    };
+
+    localForage.setItem('checkRequestData', payload);
   }
 
   checkRequestId() {
-    this.route.paramMap.subscribe((params) => {
+    this.route.paramMap.pipe(untilDestroyed(this)).subscribe((params) => {
       this.requestId = Number(params.get('id'));
       if (this.requestId) {
         this.loadRequestFromId(this.requestId);
@@ -92,37 +121,27 @@ export class ETempLicenseDetailComponent implements OnInit {
     });
   }
 
-  loadRequestFromId(id: number) {
-    this.eRequestService.getRequestById(id).subscribe((res: any) => {
-      this.requestData = res;
+  loadRequestFromId(requestId: number) {
+    this.eRequestService.getRequestById(requestId).subscribe((res) => {
+      //this.requestData = res;
+      this.requestDate = thaiDate(new Date(`${res.requestdate}`));
       this.requestNo = res.requestno;
-      //this.currentProcess = +res.currentprocess;
-      //console.log('current process = ', this.currentProcess);
-
       this.pathUserInfo(res);
       this.patchAddress(parseJson(res.addressinfo));
       this.patchEdu(parseJson(res.eduinfo));
       this.patchHiringInfo(parseJson(res.hiringinfo));
       this.patchTeachingInfo(parseJson(res.teachinginfo));
+      this.patchSchoolAddrress(parseJson(res.schooladdrinfo));
     });
+  }
+
+  patchSchoolAddrress(payload: any) {
+    if (!payload) return;
+    this.form.controls.schoolAddr.patchValue(payload);
   }
 
   pathUserInfo(data: any) {
     data.birthdate = data.birthdate.split('T')[0];
-
-    /* if (this.requestSubType === SchoolRequestSubType.ชาวต่างชาติ) {
-      data.passportstartdate = data.passportstartdate.split('T')[0];
-      data.passportenddate = data.passportenddate.split('T')[0];
-      console.log('data = ', data);
-
-      if (data?.visainfo) {
-        const visa = parseJson(data?.visainfo);
-        data.visaclass = visa.visaclass;
-        data.visatype = visa.visatype;
-        data.visaenddate = visa.visaenddate;
-      }
-    } */
-
     this.form.controls.userInfo.patchValue(data);
   }
 
@@ -159,7 +178,8 @@ export class ETempLicenseDetailComponent implements OnInit {
   }
 
   patchTeachingInfo(res: any) {
-    //console.log('teaching response= ', res);
+    if (!res || !res.teachingLevel) return;
+
     const teachingLevel = levels.map((level) => {
       if (res.teachingLevel.includes(level.value)) {
         return level.value;
@@ -206,16 +226,7 @@ export class ETempLicenseDetailComponent implements OnInit {
     this.router.navigate(['/temp-license']);
   }
 
-  next() {
-    this.router.navigate(['/temp-license', 'confirm']);
-  }
-
   prevPage() {
     this.router.navigate(['/temp-license', 'list']);
-  }
-
-  tabChanged(e: MatTabChangeEvent) {
-    //console.log('tab index = ', e.index);
-    this.selectedTabIndex = e.index;
   }
 }

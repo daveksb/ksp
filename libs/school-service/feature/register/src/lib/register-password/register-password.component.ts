@@ -7,10 +7,10 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { FormMode } from '@ksp/shared/interface';
-import { GeneralInfoService, RequestService } from '@ksp/shared/service';
 import { EMPTY, switchMap } from 'rxjs';
 import localForage from 'localforage';
 import { encrypt, thaiDate } from '@ksp/shared/utility';
+import { RequestService } from '@ksp/shared/service';
 
 @Component({
   templateUrl: './register-password.component.html',
@@ -19,7 +19,7 @@ import { encrypt, thaiDate } from '@ksp/shared/utility';
 export class RegisterPasswordComponent implements OnInit {
   form = this.fb.group({
     password: [],
-    repassword:[],
+    repassword: [],
   });
   savingData: any;
   requestDate = thaiDate(new Date());
@@ -27,7 +27,7 @@ export class RegisterPasswordComponent implements OnInit {
 
   mode: FormMode = 'edit';
   school: any;
-  coordinator:any;
+  coordinator: any;
   constructor(
     private router: Router,
     public dialog: MatDialog,
@@ -35,11 +35,11 @@ export class RegisterPasswordComponent implements OnInit {
     private requestService: RequestService
   ) {}
   get disable() {
-    const { password , repassword } = this.form.getRawValue()
-    return password !== repassword || !password || !repassword
+    const { password, repassword } = this.form.getRawValue();
+    return password !== repassword || !password || !repassword;
   }
   ngOnInit(): void {
-   localForage.getItem('registerSelectedSchool').then((res) => {
+    localForage.getItem('registerSelectedSchool').then((res) => {
       this.school = res;
     });
 
@@ -79,7 +79,7 @@ export class RegisterPasswordComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'login']);
+        this.router.navigate(['/login']);
       }
     });
   }
@@ -99,15 +99,18 @@ export class RegisterPasswordComponent implements OnInit {
         btnLabel: 'บันทึก',
       },
     });
-    const password = await encrypt(this.form?.value?.password)
+    const password = await encrypt(this.form?.value?.password);
     confirmDialog.componentInstance.confirmed
       .pipe(
         switchMap((res) => {
           if (res) {
-            console.log(password)
+            console.log(password);
             const payload = {
               ...this.savingData,
-              coordinatorinfo: JSON.stringify({...this.coordinator,password}),
+              coordinatorinfo: JSON.stringify({
+                ...this.coordinator,
+                password,
+              }),
             };
             payload.ref1 = '2';
             payload.ref2 = '01';

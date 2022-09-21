@@ -26,7 +26,7 @@ export class TempLicenseApproveComponent {
   ) {}
 
   cancel() {
-    this.router.navigate(['/', 'temp-license', 'list']);
+    this.router.navigate(['/temp-license', 'list']);
   }
 
   save() {
@@ -55,7 +55,7 @@ export class TempLicenseApproveComponent {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'temp-license', 'list']);
+        this.router.navigate(['/temp-license', 'list']);
       }
     });
   }
