@@ -208,7 +208,7 @@ nav label.m-menu__toggle {
   cursor: pointer;
 }
 nav .m-menu {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   max-width: 450px;
@@ -229,7 +229,7 @@ nav .m-menu {
 }
 nav .m-menu__overlay {
   background-color: rgba(103, 103, 103, 0.5);
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100%;
   bottom: 0;
@@ -265,7 +265,7 @@ nav .m-menu .m-menu {
   transform: translate3d(480px, 0, 0);
 }
 nav .m-menu ul {
-  height: 100%;
+  height: calc(100% - 55px);
   overflow-y: auto;
 }
 nav .m-menu ul li a,
@@ -273,12 +273,12 @@ nav .m-menu ul li label {
   display: block;
   text-align: left;
   padding: 0 15px;
-  line-height: 47px;
+  line-height: 45px;
   text-decoration: none;
   color: #333;
   cursor: pointer;
   font-size: 1rem;
-  border-bottom: 1px solid #e8e8e8;
+  //border-bottom: 1px solid #e8e8e8;
   position: relative;
 }
 nav .m-menu ul li label.a-label__chevron::after {
