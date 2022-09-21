@@ -1,13 +1,25 @@
-<div class="d-flex">
-  <div class="menu__container w-25">
-    <mat-selection-list #subject [multiple]="false">
-      <mat-list-option *ngFor="let subject of typesOfSubject" [value]="subject">
-        {{ subject }}
-      </mat-list-option>
-    </mat-selection-list>
+<div class="d-flex flex-row">
+  <div class="d-flex">
+    <div class="menu__container">
+      <mat-selection-list #subject [multiple]="false">
+        <mat-list-option
+          *ngFor="let subject of typesOfSubject"
+          [value]="subject"
+        >
+          {{ subject }}
+        </mat-list-option>
+      </mat-selection-list>
+    </div>
   </div>
 
-  <div class="h-auto w-75 ms-2">
-    <self-service-test-result-table></self-service-test-result-table>
-  </div>
+  <ng-container *ngIf="subject.selectedOptions.selected[0]?.value">
+    <div class="d-flex ms-2 w-100 flex-column">
+      <div class="mb-3">
+        <self-service-test-result-table></self-service-test-result-table>
+      </div>
+      <ksp-form-attachment
+        title=""
+        [groups]="performanceFiles"
+      ></ksp-form-attachment></div
+  ></ng-container>
 </div>

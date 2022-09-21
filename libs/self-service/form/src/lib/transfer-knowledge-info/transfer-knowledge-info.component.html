@@ -1,7 +1,9 @@
 <form [formGroup]="form">
-  <div class="box-header mb-3">มาตราฐานความรู้ที่ต้องการเทียบโอน</div>
-  <div class="d-flex align-items-center justify-content-between">
-    <select class="form-select">
+  <div class="box-header">มาตราฐานความรู้ที่ต้องการเทียบโอน</div>
+  <div
+    class="d-flex flex-column flex-md-row align-items-end align-items-md-center justify-content-end justify-content-md-between"
+  >
+    <select class="form-select my-2">
       <option value="null" selected hidden disabled>กรุณาเลือก</option>
       <option value="1">One</option>
       <option value="2">Two</option>
@@ -9,7 +11,7 @@
     </select>
 
     <ksp-add-row-button
-      [classList]="'text-primary w-25'"
+      [classList]="'text-primary w-md-25 w-md-50 ms-md-3'"
       (addRowClick)="addStandard()"
       >เพิ่มมาตรฐานและหลักฐาน</ksp-add-row-button
     >
@@ -20,7 +22,7 @@
       *ngFor="let transferForm of standards.controls; let i = index"
     >
       <ng-container [formGroupName]="i">
-        <div class="bg-light py-3 px-4 mb-3">
+        <div class="bg-light py-2 px-3 mb-3">
           <div class="d-flex justify-content-between">
             <div class="form-label pb-3">มาตรฐานความรู้ที่ {{ i + 1 }}</div>
             <i
@@ -34,7 +36,7 @@
               *ngFor="let subject of getSubjects(i).controls; let j = index"
             >
               <ng-container [formGroupName]="j">
-                <div class="py-3 px-4 border bg-white mb-3">
+                <div class="py-2 px-3 border bg-white mb-3">
                   <div class="d-flex justify-content-end" *ngIf="j > 0">
                     <i
                       class="bi bi-x-circle-fill text-danger"
@@ -43,7 +45,7 @@
                     ></i>
                   </div>
                   <div class="row">
-                    <div class="col-8">
+                    <div class="col-md-8">
                       <label class="form-label">ชื่อวิชาเทียบโอน</label>
                       <input
                         class="form-control"
@@ -51,7 +53,7 @@
                         formControlName="subjectName"
                       />
                     </div>
-                    <div class="col">
+                    <div class="col-md">
                       <label class="form-label">รหัสวิชา</label>
                       <input
                         class="form-control"
@@ -59,7 +61,7 @@
                         formControlName="subjectCode"
                       />
                     </div>
-                    <div class="col">
+                    <div class="col-md">
                       <label class="form-label">ผลการเรียน</label>
                       <input
                         class="form-control"
@@ -70,10 +72,10 @@
                   </div>
 
                   <div class="row">
-                    <div class="col">
+                    <div class="col-md">
                       <label class="form-label">คำอธิบาย</label>
                       <textarea
-                        rows="4"
+                        rows="3"
                         class="form-control"
                         formControlName="detail"
                       ></textarea>

@@ -56,6 +56,7 @@ export class CoordinatorInfoComponent implements OnInit {
 
     localForage.getItem('registerSelectedSchool').then((res) => {
       this.school = res;
+      console.log(this.school)
     });
 
     localForage.getItem('registerUserInfoFormValue').then((res) => {
@@ -156,9 +157,8 @@ export class CoordinatorInfoComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        localForage.removeItem('registerSelectedSchool');
-        localForage.removeItem('registerUserInfoFormValue');
-        this.router.navigate(['/login']);
+        localForage.setItem('registerCoordinatorInfoFormValue', this.form.value);
+        this.router.navigate(['/register', 'password']);
       }
     });
   }

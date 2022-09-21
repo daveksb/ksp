@@ -1,28 +1,46 @@
-<ksp-education-level-form-one></ksp-education-level-form-one>
+<form [formGroup]="form">
+  <ksp-education-level-form-one
+    formControlName="levelOneForm"
+  ></ksp-education-level-form-one>
 
-<div class="row mb-3">
-  <div class="col-auto">
-    <div class="d-flex align-items-center">
-      <input type="checkbox" class="me-2" />
-      <label class="form-label">เทียบโอน</label>
-      <div class="d-flex align-items-center ms-4">
-        <span class="form-label w-75">จำนวนมาตรฐาน</span>
-        <input type="text" class="form-control" />
+  <div class="row my-2">
+    <div class="col-md-auto">
+      <div class="d-flex flex-column flex-md-row">
+        <div class="d-flex align-items-center">
+          <input type="checkbox" class="me-2" formControlName="isTransfer" />
+          <label class="form-label me-3">เทียบโอน</label>
+        </div>
+
+        <div class="d-flex align-items-center">
+          <span class="form-label w-75">จำนวนมาตรฐาน</span>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="transferCount"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="col-md-auto">
+      <div class="d-flex flex-column flex-md-row">
+        <div class="d-flex align-items-center">
+          <input type="checkbox" class="me-2" formControlName="isTest" />
+          <label class="form-label me-3">ทดสอบ</label>
+        </div>
+
+        <div class="d-flex align-items-center mb-3 mb-md-0">
+          <span class="form-label w-75">จำนวนมาตรฐาน</span>
+          <input type="text" class="form-control" formControlName="testCount" />
+        </div>
+        <div class="d-flex align-items-center ms-0 ms-md-3">
+          <span class="form-label w-75">รวมมาตรฐาน</span>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="totalCount"
+          />
+        </div>
       </div>
     </div>
   </div>
-  <div class="col-auto">
-    <div class="d-flex align-items-center">
-      <input type="checkbox" class="me-2" />
-      <label class="form-label">ทดสอบ</label>
-      <div class="d-flex align-items-center ms-4">
-        <span class="form-label w-75">จำนวนมาตรฐาน</span>
-        <input type="text" class="form-control" />
-      </div>
-      <div class="d-flex align-items-center ms-4">
-        <span class="form-label w-75">รวมมาตรฐาน</span>
-        <input type="text" class="form-control" />
-      </div>
-    </div>
-  </div>
-</div>
+</form>

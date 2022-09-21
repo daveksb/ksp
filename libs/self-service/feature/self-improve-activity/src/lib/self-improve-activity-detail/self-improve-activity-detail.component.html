@@ -7,14 +7,14 @@
     <div class="box-header">รายละเอียด</div>
 
     <div class="box__container p-3">
-      <div class="bg-light p-4">
+      <div class="bg-light p-3">
         <ksp-license-info></ksp-license-info>
       </div>
       <br />
       <div class="bg-light py-2 px-4">
         <div class="box-header mb-2">กิจกรรมการพัฒนาตนเอง</div>
         <div class="row">
-          <div class="col-8 mb-3">
+          <div class="col mb-3">
             <select
               formControlName="activityType"
               class="form-select"
@@ -32,14 +32,14 @@
           </div>
         </div>
 
-        <ng-template kspDynamicComponent></ng-template>
+        <!-- <ng-template kspDynamicComponent></ng-template> -->
       </div>
 
       <ng-template [ngIf]="activityType.value">
         <br />
         <ksp-form-attachment
           title="กรุณาแนบหลักฐานประกอบการปฏิบัติงาน"
-          [groups]="addActivity"
+          [groups]="evidenceFiles"
         ></ksp-form-attachment
       ></ng-template>
     </div>

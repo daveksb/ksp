@@ -23,7 +23,7 @@ export class TempLicenseApproveListComponent {
   }
 
   nextPage() {
-    this.router.navigate(['/', 'temp-license', 'approve-detail'], {});
+    this.router.navigate(['/temp-license', 'approve-detail'], {});
   }
 }
 

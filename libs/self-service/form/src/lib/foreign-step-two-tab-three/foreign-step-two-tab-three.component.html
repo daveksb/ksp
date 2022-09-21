@@ -5,8 +5,7 @@
     <div class="text-primary fs-5" role="button">
       <ksp-add-row-button
         class="text-primary fs-6"
-        (addRowClick)="addFormArray(licenseInfo1)"
-      >
+        (addRowClick)="addFormArray(licenseInfo1, 1)">
         Add
       </ksp-add-row-button>
     </div>
@@ -14,20 +13,23 @@
 
   <ng-container formArrayName="licenseInfo1">
     <ng-container
-      *ngFor="let DegreeForm of licenseInfo1.controls; let i = index"
-    >
+      *ngFor="let DegreeForm of licenseInfo1.controls; let i = index">
       <ng-container [formGroupName]="i">
         <div class="border rounded p-3 mb-3">
           <div class="d-flex justify-content-end">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
-              (click)="deleteFormArray(licenseInfo1, i)"
-            ></i>
+              (click)="deleteFormArray(licenseInfo1, i)"></i>
           </div>
-          <self-service-foreign-step-two-tab-three-form></self-service-foreign-step-two-tab-three-form>
-        </div> </ng-container></ng-container
-  ></ng-container>
+          <self-service-foreign-step-two-tab-three-form
+            formControlName="licenseForm"
+            [countries]="countries">
+          </self-service-foreign-step-two-tab-three-form>
+        </div>
+      </ng-container>
+    </ng-container>
+  </ng-container>
   <hr />
 
   <div class="d-flex justify-content-between">
@@ -36,8 +38,7 @@
     <div class="text-primary fs-5" role="button">
       <ksp-add-row-button
         class="text-primary"
-        (addRowClick)="addFormArray(licenseInfo2)"
-      >
+        (addRowClick)="addFormArray(licenseInfo2, 2)">
         Add
       </ksp-add-row-button>
     </div>
@@ -45,20 +46,23 @@
 
   <ng-container formArrayName="licenseInfo2">
     <ng-container
-      *ngFor="let DegreeForm of licenseInfo2.controls; let i = index"
-    >
+      *ngFor="let DegreeForm of licenseInfo2.controls; let i = index">
       <ng-container [formGroupName]="i">
         <div class="border rounded p-3 mb-3">
           <div class="d-flex justify-content-end">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
-              (click)="deleteFormArray(licenseInfo2, i)"
-            ></i>
+              (click)="deleteFormArray(licenseInfo2, i)"></i>
           </div>
-          <self-service-foreign-step-two-tab-three-form></self-service-foreign-step-two-tab-three-form>
-        </div> </ng-container></ng-container
-  ></ng-container>
+          <self-service-foreign-step-two-tab-three-form
+            formControlName="licenseForm"
+            [countries]="countries">
+          </self-service-foreign-step-two-tab-three-form>
+        </div>
+      </ng-container>
+    </ng-container>
+  </ng-container>
   <hr />
 
   <div class="d-flex justify-content-between">
@@ -67,8 +71,7 @@
     <div class="text-primary fs-5" role="button">
       <ksp-add-row-button
         class="text-primary"
-        (addRowClick)="addFormArray(licenseInfo3)"
-      >
+        (addRowClick)="addFormArray(licenseInfo3, 3)">
         Add
       </ksp-add-row-button>
     </div>
@@ -76,20 +79,23 @@
 
   <ng-container formArrayName="licenseInfo3">
     <ng-container
-      *ngFor="let DegreeForm of licenseInfo3.controls; let i = index"
-    >
+      *ngFor="let DegreeForm of licenseInfo3.controls; let i = index">
       <ng-container [formGroupName]="i">
         <div class="border rounded p-3 mb-3">
           <div class="d-flex justify-content-end">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
-              (click)="deleteFormArray(licenseInfo3, i)"
-            ></i>
+              (click)="deleteFormArray(licenseInfo3, i)"></i>
           </div>
-          <self-service-foreign-step-two-tab-three-form></self-service-foreign-step-two-tab-three-form>
-        </div> </ng-container></ng-container
-  ></ng-container>
+          <self-service-foreign-step-two-tab-three-form
+            formControlName="licenseForm"
+            [countries]="countries">
+          </self-service-foreign-step-two-tab-three-form>
+        </div>
+      </ng-container>
+    </ng-container>
+  </ng-container>
   <hr />
 
   <div class="d-flex justify-content-between">
@@ -98,8 +104,7 @@
     <div class="text-primary fs-5" role="button">
       <ksp-add-row-button
         class="text-primary"
-        (addRowClick)="addFormArray(licenseInfo4)"
-      >
+        (addRowClick)="addFormArray(licenseInfo4, 4)">
         Add
       </ksp-add-row-button>
     </div>
@@ -107,20 +112,23 @@
 
   <ng-container formArrayName="licenseInfo4">
     <ng-container
-      *ngFor="let DegreeForm of licenseInfo4.controls; let i = index"
-    >
+      *ngFor="let DegreeForm of licenseInfo4.controls; let i = index">
       <ng-container [formGroupName]="i">
         <div class="border rounded p-3 mb-3">
           <div class="d-flex justify-content-end">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
-              (click)="deleteFormArray(licenseInfo4, i)"
-            ></i>
+              (click)="deleteFormArray(licenseInfo4, i)"></i>
           </div>
-          <self-service-foreign-step-two-tab-three-form></self-service-foreign-step-two-tab-three-form>
-        </div> </ng-container></ng-container
-  ></ng-container>
+          <self-service-foreign-step-two-tab-three-form
+            formControlName="licenseForm"
+            [countries]="countries">
+          </self-service-foreign-step-two-tab-three-form>
+        </div>
+      </ng-container>
+    </ng-container>
+  </ng-container>
   <hr />
 
   <div class="d-flex justify-content-between">
@@ -129,8 +137,7 @@
     <div class="text-primary fs-5" role="button">
       <ksp-add-row-button
         class="text-primary"
-        (addRowClick)="addFormArray(licenseInfo5)"
-      >
+        (addRowClick)="addFormArray(licenseInfo5, 5)">
         Add
       </ksp-add-row-button>
     </div>
@@ -138,45 +145,40 @@
 
   <ng-container formArrayName="licenseInfo5">
     <ng-container
-      *ngFor="let DegreeForm of licenseInfo5.controls; let i = index"
-    >
+      *ngFor="let DegreeForm of licenseInfo5.controls; let i = index">
       <ng-container [formGroupName]="i">
         <div class="border rounded p-3 mb-3">
           <div class="d-flex justify-content-end">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
-              (click)="deleteFormArray(licenseInfo5, i)"
-            ></i>
+              (click)="deleteFormArray(licenseInfo5, i)"></i>
           </div>
           <div class="row">
             <div class="col">
               <label class="form-label">Type of Certification</label>
-              <input class="form-control" type="text" />
+              <input class="form-control" type="text" formControlName="certificationType" />
             </div>
           </div>
           <div class="row">
             <div class="col">
               <label class="form-label">Recognized Organization</label>
-              <input class="form-control" type="text" />
+              <input class="form-control" type="text" formControlName="recognizedOrganization" />
             </div>
           </div>
           <div class="row">
             <div class="col">
               <label class="form-label">Certificate No.</label>
-              <select class="form-select">
-                <option selected>กรุณาเลือก</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
+              <input class="form-control" type="text" formControlName="certificateNo" />
             </div>
             <div class="col">
               <label class="form-label">Date of Issue</label>
-              <input class="form-control" type="date" />
+              <input class="form-control" type="date" formControlName="issueDate" />
             </div>
           </div>
-        </div> </ng-container></ng-container
-  ></ng-container>
+        </div>
+      </ng-container>
+    </ng-container>
+  </ng-container>
   <hr />
 </form>

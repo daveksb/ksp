@@ -3,8 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SchoolServiceUserPageType } from '@ksp/shared/interface';
-import { RequestLicenseService } from '@ksp/shared/service';
-import { parseJson } from '@ksp/shared/utility';
+import { ERequestService } from '@ksp/shared/service';
 
 @Component({
   templateUrl: './approve-new-user-list.component.html',
@@ -20,7 +19,7 @@ export class ApproveNewUserListComponent implements AfterViewInit {
 
   constructor(
     private router: Router,
-    private requestService: RequestLicenseService
+    private eRequestService: ERequestService
   ) {}
 
   ngAfterViewInit(): void {
@@ -45,7 +44,7 @@ export class ApproveNewUserListComponent implements AfterViewInit {
       row: '25',
     };
 
-    this.requestService.searchRegisterRequest(payload).subscribe((res: any) => {
+    this.eRequestService.searchRequest(payload).subscribe((res: any) => {
       this.dataSource.data = res;
     });
   }

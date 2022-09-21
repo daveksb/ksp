@@ -4,15 +4,14 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   levels,
-  SchoolRequestProcess,
   SchoolRequestSubType,
   subjects,
   UserInfoFormType,
 } from '@ksp/shared/constant';
 import {
   AddressService,
+  ERequestService,
   GeneralInfoService,
-  RequestLicenseService,
   StaffService,
 } from '@ksp/shared/service';
 import { parseJson, thaiDate } from '@ksp/shared/utility';
@@ -66,10 +65,9 @@ export class ETempLicenseDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private service: TempLicenseDetailService,
-    private requestService: RequestLicenseService,
+    private eRequestService: ERequestService,
     private addressService: AddressService,
     private generalInfoService: GeneralInfoService,
-    //private tempLicenseService: TempLicenseService,
     private staffService: StaffService
   ) {}
 
@@ -95,7 +93,7 @@ export class ETempLicenseDetailComponent implements OnInit {
   }
 
   loadRequestFromId(id: number) {
-    this.requestService.getRequestById(id).subscribe((res: any) => {
+    this.eRequestService.getRequestById(id).subscribe((res: any) => {
       this.requestData = res;
       this.requestNo = res.requestno;
       //this.currentProcess = +res.currentprocess;

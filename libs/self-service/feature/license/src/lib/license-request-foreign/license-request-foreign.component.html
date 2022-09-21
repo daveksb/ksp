@@ -1,5 +1,4 @@
-<ksp-top-nav
-  ><span header>TEACHING LICENSE APPLICATION FORM</span>
+<ksp-top-nav><span header>TEACHING LICENSE APPLICATION FORM</span>
 </ksp-top-nav>
 
 <div class="main__container py-2">
@@ -12,47 +11,48 @@
       [showContent5]="false"
       [showContent6]="false"
       [showContent7]="false"
-      [title]="title"
-    ></self-service-request-status>
+      [title]="title"></self-service-request-status>
   </div>
   <br />
   <div class="box-header text-center">
     THE TEACHERS' COUNCIL OF THAILAND TEACHING LICENSE APPLICATION FORM
   </div>
 
-  <mat-stepper
-    labelPosition="bottom"
-    [animationDuration]="'0'"
-    [selectedIndex]="0"
-    #stepper
-  >
-    <mat-step [completed]="false">
-      <ng-template matStepLabel>Check Documentation </ng-template>
-      <self-service-foreign-license-step-one></self-service-foreign-license-step-one>
-    </mat-step>
+  <form [formGroup]="form">
+    <mat-stepper
+      labelPosition="bottom"
+      [animationDuration]="'0'"
+      [selectedIndex]="0"
+      #stepper>
+      <mat-step [completed]="false">
+        <ng-template matStepLabel>Check Documentation </ng-template>
+        <self-service-foreign-license-step-one></self-service-foreign-license-step-one>
+      </mat-step>
 
-    <mat-step [completed]="false">
-      <ng-template matStepLabel>Personal Details</ng-template>
-      <self-service-foreign-license-step-two></self-service-foreign-license-step-two>
-    </mat-step>
+      <mat-step [completed]="false">
+        <ng-template matStepLabel>Personal Details</ng-template>
+        <self-service-foreign-license-step-two formControlName="personalDetail"></self-service-foreign-license-step-two>
+      </mat-step>
 
-    <mat-step [completed]="false">
-      <ng-template matStepLabel>Documents and evidence required</ng-template>
-      <self-service-foreign-license-step-three></self-service-foreign-license-step-three>
-    </mat-step>
+      <mat-step [completed]="false">
+        <ng-template matStepLabel>Documents and evidence required</ng-template>
+        <self-service-foreign-license-step-three></self-service-foreign-license-step-three>
+      </mat-step>
 
-    <mat-step [completed]="false">
-      <ng-template matStepLabel>Personal Declaration</ng-template>
-      <self-service-foreign-license-step-four></self-service-foreign-license-step-four>
-    </mat-step>
-  </mat-stepper>
+      <mat-step [completed]="false">
+        <ng-template matStepLabel>Personal Declaration</ng-template>
+        <self-service-foreign-license-step-four formControlName="personalDeclaration">
+        </self-service-foreign-license-step-four>
+      </mat-step>
+    </mat-stepper>
 
-  <div class="d-flex justify-content-center my-3">
-    <button type="button" (click)="cancel()" class="btn btn-secondary">
-      Cancel
-    </button>
-    <button type="button" (click)="save()" class="ms-3 btn btn-primary">
-      Save (Draft)
-    </button>
-  </div>
+    <div class="d-flex justify-content-center my-3">
+      <button type="button" (click)="cancel()" class="btn btn-secondary">
+        Cancel
+      </button>
+      <button type="button" (click)="save()" class="ms-3 btn btn-primary">
+        Save (Draft)
+      </button>
+    </div>
+  </form>
 </div>

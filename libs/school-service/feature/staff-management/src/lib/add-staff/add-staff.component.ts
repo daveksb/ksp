@@ -168,7 +168,7 @@ export class AddStaffComponent implements OnInit {
       ...{ hiringinfo: JSON.stringify(formData.hiringInfo) },
     };
     //console.log('insert payload = ', payload);
-    this.staffService.addStaff2(payload).subscribe((res) => {
+    this.staffService.addStaff(payload).subscribe((res) => {
       //console.log('add staff result = ', res);
       this.onCompleted();
       this.form.reset();
@@ -204,7 +204,7 @@ export class AddStaffComponent implements OnInit {
 
     payload = replaceEmptyWithNull(payload);
 
-    this.staffService.updateStaff2(payload).subscribe((res) => {
+    this.staffService.updateStaff(payload).subscribe((res) => {
       //console.log('update result = ', res);
     });
   }

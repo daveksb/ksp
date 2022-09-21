@@ -1,7 +1,10 @@
 <div class="box-header">รายละเอียด</div>
 <mat-tab-group class="tab-group" animationDuration="0ms" [selectedIndex]="0">
   <mat-tab label="ข้อมูลส่วนตัว">
-    <ksp-form-user-info [displayMode]="[userInfoType]"></ksp-form-user-info>
+    <ksp-form-user-info
+      [displayMode]="[userInfoType]"
+      [isSchoolService]="false"
+    ></ksp-form-user-info>
   </mat-tab>
 
   <mat-tab label="ที่อยู่" class="tab-content">

@@ -23,6 +23,7 @@ import {
 import { TopNavComponent } from '@ksp/shared/menu';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 export const routes: Routes = [
   {
@@ -61,6 +62,7 @@ export const routes: Routes = [
     RequestHeaderInfoComponent,
     LicenseTypeButtonGroupComponent,
     LicenseInfoComponent,
+    MatPaginatorModule,
   ],
   declarations: [
     StaffListComponent,

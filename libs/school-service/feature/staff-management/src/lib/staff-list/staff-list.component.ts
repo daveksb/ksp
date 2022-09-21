@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { StaffService } from '@ksp/shared/service';
@@ -10,7 +11,9 @@ import { parseJson } from '@ksp/shared/utility';
   templateUrl: './staff-list.component.html',
   styleUrls: ['./staff-list.component.scss'],
 })
-export class StaffListComponent {
+export class StaffListComponent implements AfterViewInit {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   form = this.fb.group({
     searchFilter: [],
   });
@@ -36,11 +39,15 @@ export class StaffListComponent {
     private service: StaffService
   ) {}
 
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+  }
+
   search() {
     const payload = {
       schoolid: `${this.schoolId}`,
     };
-    this.service.searchStaffsFromFilter(payload).subscribe((res) => {
+    this.service.searchStaffsFromSchoolId(payload).subscribe((res) => {
       res.map((i: any) => {
         const temp = parseJson(i.hiringinfo);
         i.startdate = temp.startDate;

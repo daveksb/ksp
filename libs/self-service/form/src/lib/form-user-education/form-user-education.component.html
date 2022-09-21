@@ -1,6 +1,6 @@
 <form [formGroup]="form">
   <div class="row">
-    <div class="col-md-6 mb-3">
+    <div class="col-md-6 mb-2">
       <label class="form-label" *ngIf="educationTypes !== 'supervision'">ลักษณะวุฒิการศึกษา</label>
       <label class="form-label" *ngIf="educationTypes === 'supervision'">คุณสมบัติตามมาตรฐานวิชาชีพศึกษานิเทศก์</label>
 
@@ -77,9 +77,11 @@
 
     <ng-container *ngIf="educationTypes === 'supervision'">
       <ksp-education-level-form-one
-        *ngIf="selectedEducationType === 0"></ksp-education-level-form-one>
+        *ngIf="selectedEducationType === 0"
+        formControlName="educationLevelForm"></ksp-education-level-form-one>
       <ksp-education-level-form-six
-        *ngIf="selectedEducationType === 1"></ksp-education-level-form-six>
+        *ngIf="selectedEducationType === 1"
+        formControlName="educationLevelForm"></ksp-education-level-form-six>
       <ng-container *ngIf="selectedEducationType >= 0">
         <div class="mt-3">
           <ksp-form-attachment

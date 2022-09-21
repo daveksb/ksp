@@ -1,34 +1,36 @@
-.content__primary {
-  width: 10.25rem;
+.content__box {
+  width: 10rem;
+  text-align: center;
+  color: #fff;
+}
+
+.box__primary {
   background: #fba45b;
-  text-align: center;
 }
 
-.content__second {
-  width: 10.25rem;
+.box__second {
   background: #5cc6c6;
-  text-align: center;
 }
 
-.content__third {
-  width: 10.25rem;
+.box__third {
   background: #7e71fc;
-  text-align: center;
 }
 
-.content__fourth {
-  width: 10.25rem;
+.box__fourth {
   background: #125eaf;
-  text-align: center;
 }
 
-.content__fifth {
-  width: 10.25rem;
-  background: #FB7290;
-  text-align: center;
+.box__fifth {
+  background: #fb7290;
 }
 
 .split__line {
   border-right: 1px solid lightgray;
   height: auto;
+}
+
+@media only screen and (max-width: 768px) {
+  .content__box {
+    width: 8rem;
+  }
 }

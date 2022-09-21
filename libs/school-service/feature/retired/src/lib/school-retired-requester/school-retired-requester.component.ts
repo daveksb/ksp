@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { SchoolRetireReason } from '@ksp/shared/constant';
+import { thaiDate } from '@ksp/shared/utility';
+import localForage from 'localforage';
 @Component({
   selector: 'ksp-school-retired-requester',
   templateUrl: './school-retired-requester.component.html',
@@ -9,10 +11,12 @@ import { Router } from '@angular/router';
 })
 export class SchoolRetiredRequesterComponent {
   form = this.fb.group({
-    retiredReason: [],
+    retiredReason: [null, Validators.required],
     retiredDetail: [],
   });
-
+  SchoolRetireReason = SchoolRetireReason;
+  requestNo = '';
+  today = thaiDate(new Date());
   constructor(private router: Router, private fb: FormBuilder) {}
 
   userInfo = {
@@ -29,10 +33,11 @@ export class SchoolRetiredRequesterComponent {
   };
 
   nextPage() {
-    this.router.navigate(['/', 'retired-user', 'coordinator']);
+    localForage.setItem('retireReasonInfoFormValue', this.form.value);
+    this.router.navigate(['/retired-user', 'coordinator']);
   }
 
   prevPage() {
-    this.router.navigate(['/', 'retired-user', 'search']);
+    this.router.navigate(['/retired-user', 'search']);
   }
 }

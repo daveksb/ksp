@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
-import { DegreeCertProcessType } from '@ksp/shared/interface';
 
 @Component({
   selector: 'e-service-verify',
@@ -24,7 +23,7 @@ export class VerifyComponent implements OnInit {
     ],
   ];
 
-  processType: DegreeCertProcessType = DegreeCertProcessType.check;
+  processType!: number;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -43,10 +42,7 @@ export class VerifyComponent implements OnInit {
   }
 
   next() {
-    this.router.navigate([
-      './degree-cert',
-      DegreeCertProcessType[this.processType],
-    ]);
+    this.router.navigate(['./degree-cert']);
   }
 
   save() {
@@ -61,7 +57,7 @@ export class VerifyComponent implements OnInit {
 
     dialogRef.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'degree-cert', 'list', this.processType]);
+        this.router.navigate(['/degree-cert', 'list', this.processType]);
       }
     });
   }

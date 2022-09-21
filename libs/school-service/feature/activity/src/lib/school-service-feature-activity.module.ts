@@ -19,6 +19,8 @@ import {
 import { TopNavComponent } from '@ksp/shared/menu';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { SchoolServiceFormActivityModule } from '@ksp/school-service/form/activity';
 
 export const routes: Routes = [
   {
@@ -28,6 +30,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: 'list', component: ActivityListComponent },
       { path: 'detail', component: ActivityDetailComponent },
+      { path: 'detail/:staffid', component: ActivityDetailComponent },
     ],
   },
 ];
@@ -48,6 +51,8 @@ export const routes: Routes = [
     DynamicComponentDirective,
     RequestHeaderInfoComponent,
     LicenseInfoComponent,
+    MatPaginatorModule,
+    SchoolServiceFormActivityModule,
   ],
   declarations: [ActivityListComponent, ActivityDetailComponent],
 })

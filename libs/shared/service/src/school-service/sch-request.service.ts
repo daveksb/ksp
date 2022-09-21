@@ -38,30 +38,12 @@ export class RequestService {
     );
   }
 
-  searchRequest(payload: any): Observable<any> {
+  searchRequest(payload: any): Observable<SchoolRequest[]> {
     return this.http
-      .post(`${environment.apiUrl}/kspstaff/schrequestsearch`, payload)
-      .pipe(
-        shareReplay(),
-        map((data: any) => data.datareturn)
-      );
-  }
-
-  searchRegisterRequest(payload: any): Observable<any> {
-    return this.http
-      .post(
-        `${environment.apiUrl}/kspstaff/schrequestsearchjoinschschool`,
+      .post<SchoolRequest[]>(
+        `${environment.apiUrl}/kspstaff/searchschrequest`,
         payload
       )
-      .pipe(
-        shareReplay(),
-        map((data: any) => data.datareturn)
-      );
-  }
-
-  searchLicenseRequest(payload: any): Observable<any> {
-    return this.http
-      .post(`${environment.apiUrl}/e-service/requestsearch`, payload)
       .pipe(
         shareReplay(),
         map((data: any) => data.datareturn)

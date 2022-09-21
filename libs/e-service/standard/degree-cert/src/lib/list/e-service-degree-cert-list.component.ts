@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
-import { DegreeCertProcessType } from '@ksp/shared/interface';
 
 @Component({
   selector: 'e-service-degree-cert-list',
@@ -25,12 +24,9 @@ export class EServiceDegreeCertListComponent implements OnInit {
         /**
          * show action buttons if process = consider || approve
          */
-        this.showActionButtons = [
-          DegreeCertProcessType.consider,
-          DegreeCertProcessType.approve,
-        ].includes(Number(res.get('type')));
+        this.showActionButtons = [1, 2].includes(Number(res.get('type')));
       }
-      this.pageType = Number(res.get('type'));
+      this.pageType = Number(res.get('processId'));
 
       console.log('page type = ', this.pageType);
     });
@@ -65,33 +61,25 @@ export class EServiceDegreeCertListComponent implements OnInit {
   }
 
   consider() {
-    this.router.navigate([
-      '/degree-cert',
-      'verify',
-      DegreeCertProcessType.consider,
-    ]);
+    this.router.navigate(['/degree-cert', 'verify', 1]);
   }
 
   approve() {
-    this.router.navigate([
-      '/degree-cert',
-      'verify',
-      DegreeCertProcessType.approve,
-    ]);
+    this.router.navigate(['/degree-cert', 'verify', 2]);
   }
 
   goToDetailPage() {
     if (this.pageType === 0) {
       this.router.navigate(['/degree-cert', 'check']);
     } else if (this.pageType === 1) {
-      this.router.navigate(['/', 'degree-cert', 'consider']);
+      this.router.navigate(['/degree-cert', 'consider']);
     } else if (this.pageType === 2) {
-      this.router.navigate(['/', 'degree-cert', 'approve']);
+      this.router.navigate(['/degree-cert', 'approve']);
     }
   }
 
   lastStep() {
-    this.router.navigate(['/', 'degree-cert', 'final-result']);
+    this.router.navigate(['/degree-cert', 'final-result']);
   }
 }
 

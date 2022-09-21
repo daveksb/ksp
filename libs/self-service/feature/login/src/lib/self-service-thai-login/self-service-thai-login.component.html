@@ -1,6 +1,6 @@
-<form [formGroup]="form">
-  <div class="container d-flex flex-column justify-content-center">
-    <!-- <div class="header__container">
+<!--  <form [formGroup]="form">
+  <div class="container-xl bg-image d-flex flex-column justify-content-center">
+     <div class="header__container">
       <div class="dropdown">
         <button
           class="btn btn-secondary dropdown-toggle"
@@ -17,51 +17,142 @@
           <a class="dropdown-item" href="#">Action</a>
         </div>
       </div>
-    </div> -->
-    <div class="login__container">
-      <div></div>
-      <div class="d-flex flex-column align-items-center px-5">
-        <div class="text-center">
-          <img src="/assets/images/K-logo.png" />
-          <h1 class="mb-1">เข้าใช้งานเว็บไซต์</h1>
-          <h3 class="mb-3 text-secondary">Selfservice</h3>
+    </div>
+    <div class="row">
+      <div class="col-md-6 offset-md-6 px-md-5">
+        <div class="d-flex flex-column align-items-center">
+          <div class="text-center">
+            <img src="/assets/images/K-logo.png" />
+            <h1 class="mb-1">เข้าใช้งานเว็บไซต์</h1>
+            <h3 class="mb-3 text-secondary">Selfservice</h3>
+          </div>
         </div>
 
-        <div class="w-75">
-          <div class="row">
-            <div class="col mb-3">
-              <label class="fs-5">รหัสบัตรประชาชน</label>
-              <input
-                type="email"
-                class="form-control form-control-lg"
-                placeholder="กรุณากรอกรหัสบัตรประชาชน 13 หลัก"
-                formControlName="username" />
+        <div class="row">
+          <div class="col mb-3">
+            <label class="fs-4">รหัสบัตรประชาชน</label>
+            <input
+              type="email"
+              class="form-control form-control-lg"
+              placeholder="กรุณากรอกรหัสบัตรประชาชน 13 หลัก"
+              formControlName="username"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col mb-3">
+            <label class="fs-4">รหัสผ่าน</label>
+            <input
+              [type]="eyeIconClicked ? 'text' : 'password'"
+              class="form-control form-control-lg w-100"
+              placeholder="รหัสผ่าน"
+              formControlName="password"
+            />
+            <img
+              class="eye__icon"
+              (click)="eyeIconClicked = !eyeIconClicked"
+              [ngClass]="{
+                'eye__icon--open': eyeIconClicked,
+                'eye__icon--close': !eyeIconClicked
+              }"
+            />
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end">
+          <div
+            role="button"
+            class="text-secondary text-decoration-underline fs-5"
+            (click)="forgot()"
+          >
+            ลืมรหัสผ่าน?
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center my-3">
+          <button
+            (click)="login()"
+            type="button"
+            class="btn btn-primary fs-4 w-100"
+          >
+            เข้าสู่ระบบ
+          </button>
+        </div>
+
+        <div class="d-flex justify-content-center">
+          <div
+            role="button"
+            (click)="register()"
+            class="label__secondary text-decoration-underline fs-5"
+          >
+            สมัครสมาชิก
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end">
+    <div class="fs-6 bottom-0 position-fixed">
+      service support 20-484-3976 hotline 1124
+    </div>
+  </div>
+</form>  -->
+
+<section class="bg-image">
+  <div class="container min-vh-100 d-flex flex-column justify-content-center">
+    <div
+      class="row gx-lg-6 offset-lg-6 offset-md-12 align-items-center justify-content-center px-md-5 w-sm-50"
+    >
+      <div class="col-lg-10 mb-3 mb-lg-0 px-5 px-md-0">
+        <form [formGroup]="form">
+          <div class="d-flex flex-column align-items-center">
+            <div class="text-center">
+              <img src="/assets/images/K-logo.png" />
+              <h1 class="mb-1">เข้าใช้งานเว็บไซต์</h1>
+              <h3 class="mb-3 text-secondary">Selfservice</h3>
             </div>
           </div>
 
           <div class="row">
             <div class="col mb-3">
-              <label class="fs-5">รหัสผ่าน</label>
+              <label class="fs-4">รหัสบัตรประชาชน</label>
+              <input
+                type="email"
+                class="form-control form-control-lg"
+                placeholder="กรุณากรอกรหัสบัตรประชาชน 13 หลัก"
+                formControlName="username"
+              />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col mb-3">
+              <label class="fs-4">รหัสผ่าน</label>
               <input
                 [type]="eyeIconClicked ? 'text' : 'password'"
                 class="form-control form-control-lg w-100"
                 placeholder="รหัสผ่าน"
-                formControlName="password" />
+                formControlName="password"
+              />
               <img
                 class="eye__icon"
                 (click)="eyeIconClicked = !eyeIconClicked"
                 [ngClass]="{
                   'eye__icon--open': eyeIconClicked,
                   'eye__icon--close': !eyeIconClicked
-                }" />
+                }"
+              />
             </div>
           </div>
 
           <div class="d-flex justify-content-end">
             <div
               role="button"
-              class="text-secondary text-decoration-underline fs-4"
-              (click)="forgot()">
+              class="text-secondary text-decoration-underline fs-5"
+              (click)="forgot()"
+            >
               ลืมรหัสผ่าน?
             </div>
           </div>
@@ -70,7 +161,8 @@
             <button
               (click)="login()"
               type="button"
-              class="btn btn-primary fs-4 w-100">
+              class="btn btn-primary fs-4 w-100"
+            >
               เข้าสู่ระบบ
             </button>
           </div>
@@ -79,18 +171,13 @@
             <div
               role="button"
               (click)="register()"
-              class="label__secondary text-decoration-underline fs-4">
+              class="label__primary text-decoration-underline fs-5"
+            >
               สมัครสมาชิก
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="d-flex justify-content-end">
-      <div class="fs-5 bottom-0 position-fixed">
-        service support 20-484-3976 hotline 1124
+        </form>
       </div>
     </div>
   </div>
-</form>
+</section>

@@ -16,6 +16,15 @@ export const SchoolRequestType = [
   { id: 40, name: 'ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม' },
 ];
 
+export const SchoolRetireReason = [
+  { id: 1, name: 'reason1' },
+  { id: 2, name: 'reason2' },
+  { id: 3, name: 'reason3' },
+  { id: 4, name: 'reason4' },
+  { id: 5, name: 'reason5' },
+  { id: 6, name: 'reason6' },
+];
+
 // url params keep in db for temp license request
 export enum SchoolRequestSubType {
   'ครู' = 1,
@@ -26,17 +35,65 @@ export enum SchoolRequestSubType {
 export enum UserInfoFormType {
   'thai',
   'foreign',
-  //'register',
 }
 
-export const RequestProcessStatus = [
-  //ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
+export const EduOccupyList = [
   {
-    requestType: 3,
-    processId: 0,
-    processName: 'ยกเลิก',
-    status: [{ id: 1, sname: 'ยกเลิก', ename: 'ยกเลิก' }],
+    systemId: 2,
+    id: 1,
+    name: 'ครู',
   },
+  {
+    systemId: 2,
+    id: 2,
+    name: 'ผู้บริหารสถานศึกษา',
+  },
+  {
+    systemId: 2,
+    id: 5,
+    name: 'อื่นๆ',
+  },
+];
+
+export interface RequestProcess {
+  requestType: number;
+  processId: number;
+  processName: string;
+  status: RequestStatus[]; //[{ id: 1, sname: 'ยกเลิก', ename: 'ยกเลิก' }],
+}
+
+export interface RequestStatus {
+  id: number;
+  sname: string;
+  ename: string;
+}
+
+export const RequestProcessList: RequestProcess[] = [
+  //ลงทะเบียนผู้ประสานงาน
+  {
+    requestType: 1,
+    processId: 1,
+    processName: 'ตรวจสอบเอกสาร',
+    status: [
+      { id: 1, sname: '', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: '', ename: 'ผ่านการตรวจสอบ' },
+      { id: 3, sname: '', ename: 'ไม่ผ่านการตรวจสอบ' },
+    ],
+  },
+
+  //ขอถอดถอนผู้ประสานงาน
+  {
+    requestType: 2,
+    processId: 1,
+    processName: 'ตรวจสอบเอกสาร',
+    status: [
+      { id: 1, sname: '', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: '', ename: 'ผ่านการตรวจสอบ' },
+      { id: 3, sname: '', ename: 'ไม่ผ่านการตรวจสอบ' },
+    ],
+  },
+
+  //ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
   {
     requestType: 3,
     processId: 1,
@@ -59,7 +116,6 @@ export const RequestProcessStatus = [
     requestType: 3,
     processId: 3,
     processName: 'ตรวจสอบเอกสาร ลำดับที่ 1',
-
     status: [
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
       { id: 2, sname: 'ปรับแก้ไข/เพิ่มเติม', ename: '' },
@@ -79,14 +135,14 @@ export const RequestProcessStatus = [
       { id: 3, sname: 'ไม่ผ่านการรับรอง/พิจารณา', ename: '' },
     ],
   },
-
-  //ขอสร้างเลขคุรุสภาสำหรับครูชาวต่างชาติ
   {
-    requestType: 4,
+    requestType: 3,
     processId: 0,
     processName: 'ยกเลิก',
     status: [{ id: 1, sname: 'ยกเลิก', ename: 'ยกเลิก' }],
   },
+
+  //ขอสร้างเลขคุรุสภาสำหรับครูชาวต่างชาติ
   {
     requestType: 4,
     processId: 1,
@@ -107,14 +163,14 @@ export const RequestProcessStatus = [
       { id: 4, sname: 'ยกเลิก', ename: '' },
     ],
   },
-
-  //ขอหนังสือรับรองคุณวุฒิการศึกษา
   {
-    requestType: 6,
+    requestType: 4,
     processId: 0,
     processName: 'ยกเลิก',
     status: [{ id: 1, sname: 'ยกเลิก', ename: 'ยกเลิก' }],
   },
+
+  //ขอหนังสือรับรองคุณวุฒิการศึกษา
   {
     requestType: 6,
     processId: 1,
@@ -150,14 +206,14 @@ export const RequestProcessStatus = [
       { id: 6, sname: '', ename: 'ไม่ยืนยันผลการตรวจสอบ' },
     ],
   },
-
-  //ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม
   {
-    requestType: 40,
+    requestType: 6,
     processId: 0,
     processName: 'ยกเลิก',
     status: [{ id: 1, sname: 'ยกเลิก', ename: 'ยกเลิก' }],
   },
+
+  //ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม
   {
     requestType: 40,
     processId: 1,
@@ -201,6 +257,12 @@ export const RequestProcessStatus = [
       { id: 4, sname: 'คัดค้าน/เพิกถอน', ename: '' },
     ],
   },
+  {
+    requestType: 40,
+    processId: 0,
+    processName: 'ยกเลิก',
+    status: [{ id: 1, sname: 'ยกเลิก', ename: 'ยกเลิก' }],
+  },
 ];
 
 export const levels = [
@@ -241,4 +303,56 @@ export const subjects = [
   { label: 'อื่นๆ', value: 's18' },
   { label: 'ประมง', value: 's16' },
   { label: 'อุตสาหกรรมท่องเที่ยว', value: 's17' },
+];
+
+export const SelfDevelopActivityTypes = [
+  {
+    value: 0,
+    label: `มีวุฒิเพิ่มขึ้นในสาขาที่เกี่ยวข้องกับการประกอบวิชาชีพทางการศึกษา`,
+  },
+  {
+    value: 1,
+    label: `เข้ารับการอบรมและได้รับวุฒิบัตรแสดงความชำนาญการในการประกอบวิชาชีพจากคุรุสภา`,
+  },
+  {
+    value: 2,
+    label: `ผ่านการอบรมหลักสูตรที่เกี่ยวข้องกับการปฏิบัติงานในหน้าที่`,
+  },
+  {
+    value: 3,
+    label: `ได้เลื่อนวิทยฐานะ หรืออยู่ระหว่างการพิจารณาประเมินให้มีหรือเลื่อนวิทยฐานะ`,
+  },
+  {
+    value: 4,
+    label: `เป็นวิทยากรที่เป็นประโยชน์ต่อการจัดการเรียนรู้หรือการจัดการศึกษา`,
+  },
+  {
+    value: 5,
+    label: `เขียนตำรา หรือบทความ หรือผลงานทางวิชาการที่เป็นประโยชน์ต่อการจัดการเรียนรู้หรือการจัดการศึกษา`,
+  },
+  {
+    value: 6,
+    label: `สร้างนวัตกรรมที่ใช้ในการจัดการเรียนรู้หรือที่เป็นประโยชน์ต่อการศึกษา`,
+  },
+  {
+    value: 7,
+    label: `ทำวิจัยที่เป็นประโยชน์ต่อการจัดการเรียนรู้และการจัดการศึกษา `,
+  },
+  {
+    value: 8,
+    label: `ได้รับรางวัลจากคุรุสภาหรือของหน่วยงานทางการศึกษาอื่น`,
+  },
+  {
+    value: 9,
+    label: `เข้าฟังการบรรยาย อภิปราย ประชุมปฏิบัติการ ประชุมสัมมนา หรืออื่นๆ โดยมีการลงทะเบียนและมีหลักฐาน
+    แสดงการเข้าร่วมกิจกรรมดังกล่าว`,
+  },
+  {
+    value: 10,
+    label: `ศึกษาดูงานที่เกี่ยวข้องกับการประกอบวิชาชีพทางการศึกษา`,
+  },
+  {
+    value: 11,
+    label: `จัดทำผลงานหรือกิจกรรมที่เป็นประโยชน์ต่อการจัดการเรียนรู้หรือการจัดการศึกษา`,
+  },
 ];

@@ -8,13 +8,21 @@
     [showContent6]="false"
     [showContent7]="false"
   ></self-service-request-status>
-  <br />
-  <self-service-form-upload-image></self-service-form-upload-image>
-  <br />
-  <div class="detail__container bg-white">
-    <ksp-form-user-info [displayMode]="[userInfoType]"></ksp-form-user-info>
+
+  <div class="row mx-0 border shadow-sm rounded-4 px-2 py-4 bg-white my-4">
+    <div class="col-lg-2">
+      <self-service-form-upload-image
+        [imgDetail]="'col'"
+      ></self-service-form-upload-image>
+    </div>
+    <div class="col-md">
+      <ksp-form-user-info
+        [displayMode]="[userInfoType]"
+        [isSchoolService]="false"
+      ></ksp-form-user-info>
+    </div>
   </div>
-  <br />
+
   <mat-tab-group class="tab-group" animationDuration="0ms" [selectedIndex]="0">
     <mat-tab label="ที่อยู่" class="tab-content">
       <ksp-form-address [isDarkMode]="true">

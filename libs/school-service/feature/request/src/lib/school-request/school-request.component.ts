@@ -343,7 +343,6 @@ export class SchoolRequestComponent implements OnInit {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
       //console.log('userInfo valid = ', this.form.controls.userInfo.valid);
       //console.log('form valid = ', this.form.valid);
-
       // formValid + สถานะเป็นสร้างและส่งใบคำขอ, บันทึกชั่วคราวไม่ได้ ส่งใบคำขอไม่ได้
       if (this.form.valid && this.currentProcess === 2) {
         this.disableTempSave = true;
@@ -388,7 +387,6 @@ export class SchoolRequestComponent implements OnInit {
       this.requestNo = res.requestno;
       this.currentProcess = +res.currentprocess;
       //console.log('current process = ', this.currentProcess);
-
       this.pathUserInfo(res);
       this.patchAddress(parseJson(res.addressinfo));
       this.patchEdu(parseJson(res.eduinfo));
@@ -534,11 +532,13 @@ export class SchoolRequestComponent implements OnInit {
       width: '850px',
     });
 
-    dialogRef.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        this.onConfirmed();
-      }
-    });
+    dialogRef.componentInstance.confirmed
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res) {
+          this.onConfirmed();
+        }
+      });
   }
 
   backToListPage() {
