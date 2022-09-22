@@ -25,11 +25,11 @@ export class UserDetailComponent implements OnInit {
     [
       {
         name: 'อนุมัติ',
-        value: 1,
+        value: 2,
       },
       {
         name: 'ไม่อนุมัติ',
-        value: 0,
+        value: 3,
       },
     ],
     [
@@ -39,7 +39,7 @@ export class UserDetailComponent implements OnInit {
       },
       {
         name: 'ไม่ใช้งาน',
-        value: 0,
+        value: 2,
       },
     ],
   ];
@@ -71,7 +71,7 @@ export class UserDetailComponent implements OnInit {
     verifyResult: [null, Validators.required],
   });
 
-  //verifySelected = 0;
+  verifySelected = 1;
   pageType = 0;
 
   constructor(
@@ -86,26 +86,16 @@ export class UserDetailComponent implements OnInit {
   ngOnInit(): void {
     this.checkRequestId();
 
-    /* this.form.controls.verifyResult.valueChanges.subscribe((res: any) => {
-      //this.verifySelected = Number(res['verify']);
-      console.log(' //this.form.valid;', this.form.valid);
-    }); */
+    this.form2.controls.verifyResult.valueChanges.subscribe((res: any) => {
+      this.verifySelected = Number(res['result']);
+      console.log(' //this.form.valid;', this.verifySelected);
+    });
 
     this.route.queryParams.subscribe((res) => {
       this.pageType = Number(res['type']);
     });
 
     this.prefixList$ = this.generalInfoService.getPrefix();
-  }
-
-  confirmRequest() {
-    const payload = {
-      id: `${this.requestId}`,
-      currentprocess: 'xxx',
-    };
-
-    /***
-     */
   }
 
   checkRequestId() {
@@ -137,11 +127,16 @@ export class UserDetailComponent implements OnInit {
   }
 
   approveRequest() {
-    /*     const payload = {
+    const payload = {
       id: `${this.requestId}`,
-      currentprocess: `2`,
-    }; */
-    this.eRequestService.checkRequest(this.requestId).subscribe((res) => {
+      checksubresult: null,
+      checkfinalresult: null,
+      approveresult: null,
+      currentprocess: 1,
+      requeststatus: this.verifySelected,
+    };
+
+    this.eRequestService.approveUserRequest(payload).subscribe((res) => {
       //console.log('Cancel request  = ', res);
       //create new user in sch_user
     });
@@ -166,7 +161,7 @@ export class UserDetailComponent implements OnInit {
 
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.confirmRequest();
+        this.approveRequest();
         this.onCompleted();
       }
     });

@@ -37,7 +37,7 @@ export class ApproveNewUserListComponent implements AfterViewInit {
     };
 
     this.eRequestService.searchRequest(payload).subscribe((res: any) => {
-      console.log('res = ', res);
+      //console.log('res = ', res);
       this.dataSource.data = res;
     });
   }
