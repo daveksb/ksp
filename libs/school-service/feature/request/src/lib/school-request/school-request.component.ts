@@ -87,7 +87,7 @@ export class SchoolRequestComponent implements OnInit {
   reasonFiles: any[] = [];
   attachFiles: any[] = [];
   prefixList$!: Observable<any>;
-
+  option = this.fb.control(false);
   form = this.fb.group({
     userInfo: [],
     addr1: [],
@@ -112,7 +112,9 @@ export class SchoolRequestComponent implements OnInit {
     private requestService: RequestService,
     private fileUploadService: FileUploadService
   ) {}
-
+  get Option$() {
+    return this.option.valueChanges;
+  }
   ngOnInit(): void {
     this.uniqueTimestamp = `${new Date().getTime()}`;
     this.getList();

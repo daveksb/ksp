@@ -103,13 +103,18 @@
             [countries]="countries$ | async"
           >
           </ksp-form-education-info>
-
+          <div class="px-3 py-3 col-6 mb-2 d-flex align-items-center">
+            <input type="checkbox" class="me-2" [formControl]="option" />
+            <label class="form-label">ปริญญาเพิ่มเติม</label>
+          </div>
           <ksp-form-education-info
+            *ngIf="Option$ | async"
             formControlName="edu2"
             [showGradeInput]="false"
             [showSelectDegree]="true"
             [showPropertyInput]="true"
             [countries]="countries$ | async"
+            [option]="true"
           >
           </ksp-form-education-info>
 
