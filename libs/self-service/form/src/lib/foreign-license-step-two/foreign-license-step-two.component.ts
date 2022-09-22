@@ -59,7 +59,7 @@ export class ForeignLicenseStepTwoComponent
     sex: [null, Validators.required],
     birthdate: [null, Validators.required],
     nationality: [null],
-    addresForm: [],
+    addressForm: [],
     workplaceForm: [],
     academicForm: [],
     grantionLicenseForm: [],
@@ -138,7 +138,7 @@ export class ForeignLicenseStepTwoComponent
       const addr = addrs[0];
       this.district1$ = this.addressService.getAmphurs(addr.province);
       this.subDistrict1$ = this.addressService.getTumbols(addr.amphur);
-      this.form.controls.addresForm.patchValue({
+      this.form.controls.addressForm.patchValue({
         ...addr,
         phone,
         email,
