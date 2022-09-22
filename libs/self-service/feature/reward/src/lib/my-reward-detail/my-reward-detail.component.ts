@@ -12,6 +12,6 @@ export class MyRewardDetailComponent implements OnInit {
   ngOnInit(): void {}
 
   back() {
-    this.router.navigate(['/', 'reward', 'list']);
+    this.router.navigate(['/reward', 'list']);
   }
 }

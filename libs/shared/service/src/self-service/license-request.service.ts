@@ -6,10 +6,10 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class LicenseRequestService {
+export class SelfRequestService {
   constructor(private http: HttpClient) {}
 
-  requestLicense(form: any): Observable<any> {
+  createRequest(form: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/kspself/requestinsert`, form);
   }
 }

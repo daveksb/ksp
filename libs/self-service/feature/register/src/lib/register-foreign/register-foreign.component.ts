@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class RegisterForeignComponent {
   form = this.fb.group({
     teachercouncilidno: [],
+    passportno: [],
   });
 
   constructor(private router: Router, private fb: FormBuilder) {}
