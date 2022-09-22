@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { VerifyPhoneDialogComponent } from '@ksp/self-service/dialog';
+import localForage from 'localforage';
 
 @Component({
   selector: 'self-service-register-step-two',
@@ -11,8 +12,9 @@ import { VerifyPhoneDialogComponent } from '@ksp/self-service/dialog';
 })
 export class RegisterStepTwoComponent {
   form = this.fb.group({
-    personId: [],
-    backPersonId: [],
+    idcardno: [],
+    idcardbackno: [],
+    //idcardimage: [],
   });
 
   constructor(
@@ -28,14 +30,18 @@ export class RegisterStepTwoComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       //console.log(`Dialog result: ${result}`);
+      localForage.getItem('th-register').then((res: any) => {
+        const data = { ...res, ...this.form.value };
+        localForage.setItem('th-register', data);
+      });
     });
   }
 
   loginPage() {
-    this.router.navigate(['/', 'login']);
+    this.router.navigate(['/login']);
   }
 
   previousPage() {
-    this.router.navigate(['/', 'register', 'th-step-1']);
+    this.router.navigate(['/register', 'th-step-1']);
   }
 }

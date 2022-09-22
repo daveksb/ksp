@@ -9,13 +9,11 @@ import { RegisterCompletedComponent } from '../register-completed/register-compl
   templateUrl: './register-foreign-step-three.component.html',
   styleUrls: ['./register-foreign-step-three.component.scss'],
 })
-export class RegisterForeignStepThreeComponent implements OnInit {
+export class RegisterForeignStepThreeComponent {
   constructor(private router: Router, public dialog: MatDialog) {}
 
-  ngOnInit(): void {}
-
   loginPage() {
-    this.router.navigate(['/', 'login']);
+    this.router.navigate(['/login']);
   }
 
   save() {
