@@ -28,7 +28,16 @@ export class UniDegreeCertListComponent {
     this.uniDegreeCertListService.uniRequestDegreeSearch({
       uniid: "22",
     }).subscribe((res) => {
-      if (!res?.datareturn) return;
+      // if (!res?.datareturn) return;
+      // console.log(res?.datareturn);
+      // this.dataSource.data = res?.datareturn?.map((item:any,index:number) => {
+      //   return {
+      //     order: ++index,
+      //     degreeId: item?.requestno,
+      //     data: item?.requestdate,
+      //     uni: item?.uniname,
+      //     major: item?.fulldegreenameth,
+      //   };})
     })
     this.dataSource.data = data;
   }
