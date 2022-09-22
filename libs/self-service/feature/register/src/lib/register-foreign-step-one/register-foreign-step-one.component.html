@@ -42,72 +42,109 @@
         </button>
       </div>
     </div>
-
-    <div class="form__detail">
-      <div class="row mb-2">
-        <div class="col-2">
-          <label class="form-label">Title</label>
-          <select class="form-select">
-            <option>นางสาว</option>
-          </select>
-        </div>
-        <div class="col">
-          <label class="form-label">First name</label>
-          <input type="text" class="form-control" />
-        </div>
-        <div class="col">
-          <label class="form-label">Middle name</label>
-          <input type="text" class="form-control" />
-        </div>
-        <div class="col">
-          <div class="form-group">
-            <label class="form-label">Last Name</label>
-            <input type="text" class="form-control" />
+    <form [formGroup]="form">
+      <div class="form__detail">
+        <div class="row mb-2">
+          <div class="col-2">
+            <label class="form-label">Title</label>
+            <select formControlName="prefixen" class="form-select">
+              <option>นางสาว</option>
+            </select>
+          </div>
+          <div class="col">
+            <label class="form-label">First name</label>
+            <input
+              type="text"
+              formControlName="firstnameen"
+              class="form-control"
+            />
+          </div>
+          <div class="col">
+            <label class="form-label">Middle name</label>
+            <input
+              type="text"
+              formControlName="middlenameen"
+              class="form-control"
+            />
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label class="form-label">Last Name</label>
+              <input
+                type="text"
+                formControlName="lastnameen"
+                class="form-control"
+              />
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="row mb-2">
-        <div class="col">
-          <label class="form-label">Date of Birth</label>
-          <input type="date" class="form-control" placeholder="" />
+        <div class="row mb-2">
+          <div class="col">
+            <label class="form-label">Date of Birth</label>
+            <input
+              type="date"
+              formControlName="birthdate"
+              class="form-control"
+              placeholder=""
+            />
+          </div>
+          <div class="col">
+            <label class="form-label">Country</label>
+            <select
+              class="form-select"
+              formControlName="country"
+              id="nationalityFormControlSelect"
+            >
+              <option>ไทย</option>
+            </select>
+          </div>
         </div>
-        <div class="col">
-          <label class="form-label">Country</label>
-          <select class="form-select" id="nationalityFormControlSelect">
-            <option>ไทย</option>
-          </select>
-        </div>
-      </div>
 
-      <div class="row mb-2">
-        <div class="col">
-          <label class="form-label">Nationality</label>
-          <input type="text" class="form-control" placeholder="" />
+        <div class="row mb-2">
+          <div class="col">
+            <label class="form-label">Nationality</label>
+            <input
+              type="text"
+              formControlName="nationality"
+              class="form-control"
+              placeholder=""
+            />
+          </div>
+          <div class="col">
+            <label class="form-label">Mobile number</label>
+            <input
+              type="text"
+              formControlName="phone"
+              class="form-control"
+              placeholder=""
+            />
+          </div>
         </div>
-        <div class="col">
-          <label class="form-label">Mobile number</label>
-          <input type="text" class="form-control" placeholder="" />
-        </div>
-      </div>
 
-      <div class="row mb-2">
-        <div class="col-6">
-          <label class="form-label">E-mail</label>
-          <input type="text" class="form-control" placeholder="" />
+        <div class="row mb-2">
+          <div class="col-6">
+            <label class="form-label">E-mail</label>
+            <input
+              type="text"
+              formControlName="email"
+              class="form-control"
+              placeholder=""
+            />
+          </div>
+        </div>
+        <div class="form__footer">
+          <button
+            (click)="next()"
+            id="btn-next"
+            type="submit"
+            class="btn btn-primary"
+          >
+            Next
+          </button>
+          <div class="label__login" (click)="loginPage()">Login</div>
         </div>
       </div>
-      <div class="form__footer">
-        <button
-          (click)="next()"
-          id="btn-next"
-          type="submit"
-          class="btn btn-primary"
-        >
-          Next
-        </button>
-        <div class="label__login" (click)="loginPage()">Login</div>
-      </div>
-    </div>
+    </form>
   </div>
 </div>

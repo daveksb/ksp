@@ -42,64 +42,97 @@
         </button>
       </div>
     </div>
+    <form [formGroup]="form">
+      <div class="form__detail">
+        <div class="row mb-2">
+          <div class="col">
+            <label class="form-label">Identification Number</label>
+            <input
+              type="text"
+              formControlName="idcardno"
+              class="form-control"
+              placeholder=""
+            />
+          </div>
+          <div class="col">
+            <label class="form-label">Passport Number</label>
+            <input
+              type="text"
+              formControlName="passportno"
+              class="form-control"
+              placeholder=""
+            />
+          </div>
+        </div>
 
-    <div class="form__detail">
-      <div class="row mb-2">
-        <div class="col">
-          <label class="form-label">Identification Number</label>
-          <input type="text" class="form-control" placeholder="" />
+        <div class="row mb-2">
+          <div class="col">
+            <label class="form-label">Date of issue</label>
+            <input
+              type="date"
+              formControlName="passportstartdate"
+              class="form-control"
+              placeholder=""
+            />
+          </div>
+          <div class="col">
+            <label class="form-label">Date of Expiry</label>
+            <input
+              type="date"
+              formControlName="passportenddate"
+              class="form-control"
+              placeholder=""
+            />
+          </div>
         </div>
-        <div class="col">
-          <label class="form-label">Passport Number</label>
-          <input type="text" class="form-control" placeholder="" />
-        </div>
-      </div>
 
-      <div class="row mb-2">
-        <div class="col">
-          <label class="form-label">Date of issue</label>
-          <input type="date" class="form-control" placeholder="" />
+        <div class="row mb-2">
+          <div class="col">
+            <label class="form-label">Visa Class</label>
+            <select
+              formControlName="visaclass"
+              class="form-select"
+              id="nationalityFormControlSelect"
+            >
+              <option>ไทย</option>
+            </select>
+          </div>
+          <div class="col">
+            <label class="form-label">Type Visa</label>
+            <select
+              formControlName="visatype"
+              class="form-select"
+              id="nationalityFormControlSelect"
+            >
+              <option>ไทย</option>
+            </select>
+          </div>
         </div>
-        <div class="col">
-          <label class="form-label">Date of Expiry</label>
-          <input type="date" class="form-control" placeholder="" />
-        </div>
-      </div>
 
-      <div class="row mb-2">
-        <div class="col">
-          <label class="form-label">Visa Class</label>
-          <select class="form-select" id="nationalityFormControlSelect">
-            <option>ไทย</option>
-          </select>
+        <div class="row mb-2">
+          <div class="col-6">
+            <label class="form-label">Valid Until</label>
+            <select
+              formControlName="validuntill"
+              class="form-select"
+              id="nationalityFormControlSelect"
+            >
+              <option>ไทย</option>
+            </select>
+          </div>
         </div>
-        <div class="col">
-          <label class="form-label">Type Visa</label>
-          <select class="form-select" id="nationalityFormControlSelect">
-            <option>ไทย</option>
-          </select>
+        <div class="form__footer">
+          <button
+            id="btn-next"
+            (click)="openDialog()"
+            type="submit"
+            class="btn btn-primary"
+          >
+            Next
+          </button>
+          <div class="label__login" (click)="loginPage()">Login</div>
         </div>
       </div>
-
-      <div class="row mb-2">
-        <div class="col-6">
-          <label class="form-label">Valid Until</label>
-          <select class="form-select" id="nationalityFormControlSelect">
-            <option>ไทย</option>
-          </select>
-        </div>
-      </div>
-      <div class="form__footer">
-        <button
-          id="btn-next"
-          (click)="openDialog()"
-          type="submit"
-          class="btn btn-primary"
-        >
-          Next
-        </button>
-        <div class="label__login" (click)="loginPage()">Login</div>
-      </div>
-    </div>
+    </form>
   </div>
 </div>
