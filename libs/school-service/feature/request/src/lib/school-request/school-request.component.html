@@ -118,7 +118,11 @@
             formControlName="edu3"
           ></ksp-form-education-info-manager> -->
 
-          <ksp-form-attachment [groups]="eduFiles"></ksp-form-attachment>
+          <ksp-form-attachment
+            [pageType]="pageType.educationTab"
+            [uniqueTimestamp]="uniqueTimestamp"
+            [groups]="eduFiles"
+          ></ksp-form-attachment>
         </mat-tab>
 
         <mat-tab label="ข้อมูลการสอนและการจ้าง">
