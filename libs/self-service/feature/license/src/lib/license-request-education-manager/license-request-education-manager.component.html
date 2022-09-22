@@ -1,4 +1,4 @@
-<ksp-top-nav
+<ksp-top-nav [isSelfService]="true"
   ><span header>ใบอนุญาตประกอบวิชาชีพ</span
   ><span subHeader>ขอขึ้นใบอนุญาตประกอบวิชาชีพ</span></ksp-top-nav
 >
@@ -25,9 +25,14 @@
       </div>
       <div class="col-md">
         <ksp-form-user-info
+          formControlName="userInfo"
+          [isDarkMode]="true"
+          [prefixList]="prefixList$ | async"
           [displayMode]="[userInfoType]"
+          [nationList]="nationalitys$ | async"
           [isSchoolService]="false"
-        ></ksp-form-user-info>
+        >
+        </ksp-form-user-info>
       </div>
     </div>
 

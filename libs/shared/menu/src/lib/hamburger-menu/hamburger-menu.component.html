@@ -1,4 +1,4 @@
-<nav class="top-nav">
+<!-- <nav class="top-nav">
   <div class="menu__container">
     <input id="menu-toggle" type="checkbox" />
 
@@ -47,6 +47,100 @@
                   [routerLinkActiveOptions]="{ exact: false }"
                   class="sub-menu"
                   >{{ subMenu.label }}</a
+                >
+              </li>
+            </ng-container>
+          </ul>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+</nav> -->
+
+<nav class="top-nav">
+  <input type="checkbox" id="menu" name="menu" class="m-menu__checkbox" />
+
+  <label class="m-menu__toggle" for="menu">
+    <svg
+      width="35"
+      height="35"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="#F68B33"
+      stroke-width="2"
+      stroke-linecap="butt"
+      stroke-linejoin="arcs"
+    >
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </label>
+
+  <label class="m-menu__overlay" for="menu"></label>
+
+  <div class="d-flex justify-content-center">
+    <img src="/assets/images/logo-sidenav.png" />
+  </div>
+
+  <div class="m-menu">
+    <div class="m-menu__header">
+      <label class="m-menu__toggle" for="menu">
+        <svg
+          width="35"
+          height="35"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#F68B33"
+          stroke-width="2"
+          stroke-linecap="butt"
+          stroke-linejoin="arcs"
+        >
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </label>
+      <span></span>
+    </div>
+    <ul>
+      <ng-container *ngFor="let menu of menuConfig">
+        <li *ngIf="!menu.subMenu?.length">
+          <a
+            routerLink="/{{ menu.path }}"
+            [queryParams]="menu.params"
+            routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            {{ menu.label }}
+          </a>
+        </li>
+
+        <li *ngIf="menu.subMenu?.length">
+          <a
+            data-bs-toggle="collapse"
+            role="button"
+            href="#{{ menu.subMenuName }}"
+            aria-expanded="false"
+            class="collapsed"
+          >
+            <div class="d-flex justify-content-between">
+              {{ menu.label }} <i class="bi bi-chevron-down"></i>
+            </div>
+          </a>
+          <ul
+            [ngClass]="{ show: menu.isExpanded }"
+            class="collapse list-unstyled list-style-type"
+            id="{{ menu.subMenuName }}"
+          >
+            <ng-container *ngFor="let subMenu of menu.subMenu">
+              <li>
+                <a
+                  routerLink="/{{ subMenu.path }}"
+                  [queryParams]="subMenu.params"
+                  routerLinkActive="active-link"
+                  [routerLinkActiveOptions]="{ exact: false }"
+                  class="sub-menu"
+                  ><i class="bi bi-dot"></i> {{ subMenu.label }}</a
                 >
               </li>
             </ng-container>

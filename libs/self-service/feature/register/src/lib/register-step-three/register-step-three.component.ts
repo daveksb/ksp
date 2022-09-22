@@ -3,6 +3,8 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { RegisterCompletedComponent } from '../register-completed/register-completed.component';
+import localForage from 'localforage';
+import { MyInfoService } from '@ksp/shared/service';
 
 @Component({
   selector: 'self-service-register-step-three',
@@ -12,16 +14,27 @@ import { RegisterCompletedComponent } from '../register-completed/register-compl
 export class RegisterStepThreeComponent {
   form = this.fb.group({
     password: [],
-    confirmPassword: [],
+    //confirmPassword: [],
   });
 
   constructor(
     public dialog: MatDialog,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private myInfoService: MyInfoService
   ) {}
 
-  openDialog() {
+  submit() {
+    localForage.getItem('th-register').then((res: any) => {
+      const payload = { ...res, ...this.form.value };
+      payload.username = res.idcardno;
+      payload.isactive = 0;
+      this.myInfoService.insertMyInfo(payload).subscribe((res) => {
+        //console.log('insert = ', res);
+      });
+      //localForage.setItem('th-register', data);
+    });
+
     this.dialog.open(RegisterCompletedComponent, {
       width: '600px',
       data: {
@@ -33,6 +46,6 @@ export class RegisterStepThreeComponent {
   }
 
   loginPage() {
-    this.router.navigate(['/', 'login']);
+    this.router.navigate(['/login']);
   }
 }

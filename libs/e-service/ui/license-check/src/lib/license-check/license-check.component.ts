@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -12,18 +12,14 @@ import { providerFactory } from '@ksp/shared/utility';
   imports: [CommonModule, ReactiveFormsModule],
   providers: providerFactory(LicenseCheckComponent),
 })
-export class LicenseCheckComponent
-  extends KspFormBaseComponent
-  implements OnInit
-{
+export class LicenseCheckComponent extends KspFormBaseComponent {
   @Input() reasons: string[] = [];
   @Input() choices: any[] = [];
   @Input() headerTitle = 'ผลการตรวจสอบ';
-  @Input() isHasReason = true;
   @Output() selectedItem = 0;
 
   override form = this.fb.group({
-    verify: [],
+    result: [],
     reason: [],
     detail: [],
   });
@@ -37,11 +33,5 @@ export class LicenseCheckComponent
         this.onTouched();
       })
     );
-  }
-
-  ngOnInit(): void {
-    this.form.valueChanges.subscribe((res) => {
-      //console.log('res = ', res);
-    });
   }
 }

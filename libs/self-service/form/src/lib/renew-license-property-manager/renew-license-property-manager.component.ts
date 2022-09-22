@@ -1,21 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ListData } from '@ksp/shared/interface';
+import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { providerFactory } from '@ksp/shared/utility';
 
 @Component({
   selector: 'self-service-renew-license-property-manager',
   templateUrl: './renew-license-property-manager.component.html',
   styleUrls: ['./renew-license-property-manager.component.scss'],
+  providers: providerFactory(RenewLicensePropertyManagerComponent),
 })
-export class RenewLicensePropertyManagerComponent implements OnInit {
+export class RenewLicensePropertyManagerComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
   selectedstandardKnowledgeType!: number;
   standardKnowledges: ListData[] = [];
 
-  form = this.fb.group({
+  override form = this.fb.group({
     standardKnowledgeType: [],
+    educationDetails: [],
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    super();
+    this.subscriptions.push(
+      // any time the inner form changes update the parent of any change
+      this.form?.valueChanges.subscribe((value) => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
+  }
 
   ngOnInit(): void {
     this.standardKnowledges = standardKnowledges;

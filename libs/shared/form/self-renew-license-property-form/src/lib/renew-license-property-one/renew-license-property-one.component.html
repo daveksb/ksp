@@ -1,25 +1,30 @@
-<div class="row">
-  <div class="col-md-6 mb-2">
-    <div class="d-flex align-items-center">
-      <input type="checkbox" class="me-2" />
-      <label class="form-label">วุฒิที่ใช้ในการตรวจสอบขอรับใบอนุญาต</label>
+<form [formGroup]="form">
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <div class="d-flex align-items-center">
+        <input type="checkbox" class="me-2" formControlName="hasEducationCertificate" />
+        <label class="form-label">วุฒิที่ใช้ในการตรวจสอบขอรับใบอนุญาต</label>
+      </div>
+    </div>
+
+    <div class="col-md-3 mb-2">
+      <div class="d-flex align-items-center">
+        <input type="checkbox" class="me-2" formControlName="hasDegreeLevel" />
+        <label class="form-label">ระดับวุฒิปริญญา</label>
+      </div>
+      <select class="form-select" formControlName="level">
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option value="1">ปริญญาตรี</option>
+        <option value="2">ปริญญาโท</option>
+        <option value="3">ปริญญาเอก</option>
+        <option value="4">
+          วุฒิการศึกษาปริญญาอื่นๆที่เทียบเท่าปริญญาตรี / ปริญญาทางการศึกษา
+        </option>
+      </select>
     </div>
   </div>
 
-  <div class="col-md-3 mb-2">
-    <div class="d-flex align-items-center">
-      <input type="checkbox" class="me-2" />
-      <label class="form-label">ระดับวุฒิปริญญา</label>
-    </div>
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+  <div class="border rounded px-3 py-2 mb-3">
+    <ksp-renew-license-property-degree-form formControlName="degree"></ksp-renew-license-property-degree-form>
   </div>
-</div>
-
-<div class="border rounded px-3 py-2 mb-3">
-  <ksp-renew-license-property-degree-form></ksp-renew-license-property-degree-form>
-</div>
+</form>

@@ -9,7 +9,7 @@ import { Component, Input } from '@angular/core';
   imports: [CommonModule],
 })
 export class RequestHeaderInfoComponent {
-  @Input() requestDate = '';
+  @Input() requestDate: string | null = '';
   @Input() requestNumber: string | null = '';
   @Input() requestLabel1 = 'วันที่ทำรายการ';
   @Input() requestLabel2 = 'เลขใบคำขอ';

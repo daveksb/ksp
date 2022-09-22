@@ -45,11 +45,11 @@ export class TempLicenseDetailService {
   verifyChoice = [
     {
       name: 'ครบถ้วน และถูกต้อง',
-      value: 1,
+      value: 'complete',
     },
     {
       name: 'ไม่ครบถ้วน และไม่ถูกต้อง',
-      value: 2,
+      value: 'incomplete',
     },
   ];
 

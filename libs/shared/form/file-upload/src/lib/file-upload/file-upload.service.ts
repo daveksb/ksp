@@ -19,4 +19,19 @@ export class FileUploadService {
     );
     //.pipe(finalize(() => this.reset()));
   }
+
+  deleteFile(payload: any) {
+    return this.http.post(
+      `${environment.apiUrl}/kspstaff/schrequestfiledelete`,
+      payload
+    );
+    //.pipe(finalize(() => this.reset()));
+  }
+  downloadFile(payload: any) {
+    return this.http.post(
+      `${environment.apiUrl}/kspstaff/schrequestfileselectbyid`,
+      payload
+    );
+    //.pipe(finalize(() => this.reset()));
+  }
 }

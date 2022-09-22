@@ -19,6 +19,7 @@ import { RenewLicenseEducationManagerComponent } from './renew-license-education
 import { RenewLicenseStudySupervisionComponent } from './renew-license-study-supervision/renew-license-study-supervision.component';
 import { RenewLicenseForeignComponent } from './renew-license-foreign/renew-license-foreign.component';
 import { MatStepperModule } from '@angular/material/stepper';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export const routes: Routes = [
   {
@@ -61,6 +62,7 @@ export const routes: Routes = [
     RequestStatusComponent,
     RouterModule.forChild(routes),
     MatStepperModule,
+    ReactiveFormsModule,
   ],
   declarations: [
     RenewLicenseRequestComponent,

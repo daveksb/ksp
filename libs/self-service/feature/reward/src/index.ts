@@ -13,3 +13,9 @@ export * from './lib/council-reward/council-reward.component';
 export * from './lib/praise-teacher-reward/praise-teacher-reward.component';
 
 export * from './lib/self-reward-request/self-reward-request.component';
+
+export * from './lib/my-reward-detail/my-reward-detail.component';
+
+export * from './lib/my-reward-list/my-reward-list.component';
+
+export * from './lib/honor-pin-request/honor-pin-request.component';

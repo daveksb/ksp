@@ -3,7 +3,6 @@ import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { tempLicenseRequestType } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 
 @Component({
@@ -58,7 +57,7 @@ export class ForeignLicenseListComponent implements AfterViewInit {
 
   nextPage(id: number) {
     this.router.navigate(['/foreign-license', 'detail', id], {
-      queryParams: { type: tempLicenseRequestType.foreign },
+      queryParams: { type: 0 },
     });
   }
 }

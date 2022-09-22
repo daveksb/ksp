@@ -63,3 +63,5 @@ export * from './lib/renew-license-foreign-step-two/renew-license-foreign-step-t
 export * from './lib/renew-license-foreign-teacher/renew-license-foreign-teacher.component';
 
 export * from './lib/renew-license-foreign-non-teacher/renew-license-foreign-non-teacher.component';
+
+export * from './lib/license-form-base.component';

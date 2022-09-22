@@ -8,7 +8,7 @@
   <div [formGroup]="form" class="bg-white py-3 px-4">
     <div>
       <ksp-request-header-info
-        [requestDate]="today"
+        [requestDate]="requestDate"
         [requestNumber]="requestNo"
       ></ksp-request-header-info>
       <hr />
@@ -153,7 +153,9 @@
         </mat-tab>
 
         <mat-tab label="ข้อมูลชี้แจงเหตุผล">
-          <ksp-form-reason-info></ksp-form-reason-info>
+          <ksp-form-reason-info
+            formControlName="reasoninfo"
+          ></ksp-form-reason-info>
           <ksp-form-attachment
             [uniqueTimestamp]="uniqueTimestamp"
             [pageType]="pageType.reasonTab"
@@ -166,7 +168,6 @@
             [uniqueTimestamp]="uniqueTimestamp"
             [pageType]="pageType.fileAttachTab"
             [groups]="attachFiles"
-            (downloadClick)="loadFile()"
           ></ksp-form-attachment>
         </mat-tab>
       </mat-tab-group>

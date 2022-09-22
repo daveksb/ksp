@@ -12,15 +12,22 @@ export class MyInfoService {
 
   getMyInfo(): Observable<any> {
     const id = getCookie('userId');
-    const tokenkey = getCookie('userToken');
+    //const tokenkey = getCookie('userToken');
     return this.http
       .post(`${environment.apiUrl}/kspself/selfmyinfoselectbyidall`, {
         id,
-        tokenkey,
+        //  tokenkey,
       })
       .pipe(
         map((data: any) => data.datareturn?.[0] || {}),
         shareReplay()
       );
+  }
+
+  insertMyInfo(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspself/selfmyinfoinsert`,
+      payload
+    );
   }
 }

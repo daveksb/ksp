@@ -8,12 +8,14 @@ import { RenewLicensePropertyFiveComponent } from './renew-license-property-five
 import { RenewLicensePropertySixComponent } from './renew-license-property-six/renew-license-property-six.component';
 import { SchoolServiceFormActivityModule } from '@ksp/school-service/form/activity';
 import { RenewLicensePropertyDegreeFormComponent } from './renew-license-property-degree-form/renew-license-property-degree-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     SchoolServiceFormActivityModule,
     RenewLicensePropertyDegreeFormComponent,
+    ReactiveFormsModule,
   ],
   declarations: [
     RenewLicensePropertyOneComponent,
