@@ -1,4 +1,4 @@
-import { Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import {
   idCardPattern,
   nameEnPattern,
@@ -7,8 +7,8 @@ import {
   phonePattern,
 } from './form-validators';
 
-export function createDefaultUserInfoForm(FormBuilder: any) {
-  const data = {
+export function createDefaultUserInfoForm(fb: FormBuilder) {
+  return fb.group({
     id: [],
     idcardno: [null, [Validators.required, Validators.pattern(idCardPattern)]],
     passportno: [
@@ -51,9 +51,7 @@ export function createDefaultUserInfoForm(FormBuilder: any) {
     visaclass: [null],
     visatype: [null],
     visaenddate: [null],
-  };
-
-  return FormBuilder.group(data);
+  });
 }
 
 export function createDefaultVisaInfo(FormBuilder: any) {

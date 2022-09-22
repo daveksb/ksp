@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { LicenseFormBaseComponent } from '@ksp/self-service/form';
-import { ListData, SelfRequest } from '@ksp/shared/interface';
+import { ListData, SelfRequest, UserInfoForm } from '@ksp/shared/interface';
 import {
   AddressService,
   EducationDetailService,
@@ -11,7 +11,8 @@ import {
   MyInfoService,
   SelfRequestService,
 } from '@ksp/shared/service';
-import { providerFactory } from '@ksp/shared/utility';
+import { providerFactory, replaceEmptyWithNull } from '@ksp/shared/utility';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'ksp-request-reward-main',
@@ -53,35 +54,11 @@ export class RequestRewardMainComponent {
   ) {}
 
   ngOnInit(): void {
-    //this.getListData();
     this.myInfoService.getMyInfo().subscribe((res) => {
-      console.log('my info = ', res);
+      //console.log('my info = ', res);
       this.userInfo = res;
     });
-    //this.checkButtonsDisableStatus();
   }
-
-  /*   patchUserInfoForm(data: any): void {
-    this.form.controls.userInfo.patchValue(data);
-  }
-
-  patchAddress1Form(data: any): void {
-    this.form.controls.address1.patchValue(data);
-  }
-
-  patchAddress2Form(data: any): void {
-    this.form.controls.address2.patchValue(data);
-  }
-
-  patchWorkPlaceForm(data: any): void {
-    this.form.controls.workplace.patchValue(data);
-  }
-
-  patchAddress2FormWithAddress1(): void {
-    console.log(this.form.controls.address1.value);
-    this.form.controls.address2.patchValue(this.form.controls.address1.value);
-    console.log(this.form.controls.address2.value);
-  } */
 
   tempSave() {
     //
@@ -89,21 +66,23 @@ export class RequestRewardMainComponent {
 
   createRequest() {
     //const payload = this.form.value;
-    const self = new SelfRequest();
-    self.ref1 = '1';
-    self.ref2 = `${this.form.value.rewardType}`;
-    self.ref3 = '1';
+    const self = new SelfRequest('1', `${this.form.value.rewardType}`, '1');
 
-    self.systemtype = '1';
-    self.requesttype = `${this.form.value.rewardType}`;
-    self.subtype = '1';
+    const data: any = this.form.value.rewardDetail;
 
-    const { id, ...payload } = self;
+    console.log('reward detail = ', data.userInfo);
 
-    console.log('payload = ', self);
-    this.requestService.createRequest(payload).subscribe((res) => {
+    const temp = { ...self, ...new UserInfoForm() };
+
+    const allowKey = Object.keys(self);
+
+    const payload = _.pick(data.userInfo, allowKey);
+
+    //const { id, requestdate, ...payload } = replaceEmptyWithNull(temp);
+    console.log('payload = ', payload);
+    /*     this.requestService.createRequest(payload).subscribe((res) => {
       console.log('res = ', res);
-    });
+    }); */
   }
 }
 
