@@ -39,7 +39,7 @@ const routes: Routes = [
         component: TempLicenseCheckForbiddenComponent,
       },
       {
-        path: 'confirm',
+        path: 'confirm/:id',
         component: TempLicenseCheckConfirmComponent,
       },
       {

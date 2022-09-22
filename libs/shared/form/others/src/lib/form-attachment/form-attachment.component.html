@@ -19,10 +19,11 @@
             <th class="ps-3 py-2 text-black">
               {{ group.name }}
               <div class="text-secondary">
-                <div role="button" (click)="downloadClick.emit(true)">
-                  {{ fileName[i] }}
+                <div role="button" (click)="downloadFile(group)">
+                  {{ group?.fileName }}
                   <i
-                    *ngIf="fileName[i] && mode === 'edit'"
+                    (click)="deleteFile(group)"
+                    *ngIf="group?.fileId && mode === 'edit'"
                     class="bi bi-x-circle-fill text-danger fs-6 ms-2"
                     role="button"
                   ></i>
@@ -42,7 +43,7 @@
                 [uniqueTimestamp]="uniqueTimestamp"
                 [showUploadedFileName]="false"
                 [systemFileName]="group.name"
-                (uploadComplete)="fileName[i] = $event"
+                (uploadComplete)="updateComplete($event, group)"
               ></ksp-file-upload>
             </td>
             <!-- <td>

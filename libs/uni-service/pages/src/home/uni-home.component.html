@@ -2,7 +2,10 @@
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-3 full-height">
-    <ksp-uni-form-badge></ksp-uni-form-badge>
+    <ksp-uni-form-badge
+      [mainTitle]="badgeTitle1"
+      [subTitle]="badgeTitle2"
+    ></ksp-uni-form-badge>
     <div class="bg-white p-3">
       <ksp-degree-home-search (clear)="clear()" (search)="search()">
       </ksp-degree-home-search>

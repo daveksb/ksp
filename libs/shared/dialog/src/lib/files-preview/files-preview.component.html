@@ -5,10 +5,7 @@
     <img src="assets/images/degree-cert-file.png" />
   </div>
   <hr />
-  <e-service-license-check
-    [choices]="fileVerify"
-    [isHasReason]="false"
-  ></e-service-license-check>
+  <e-service-license-check [choices]="fileVerify"></e-service-license-check>
 
   <div class="button__container">
     <button class="btn btn-primary" (click)="confirm()">ยืนยัน</button>

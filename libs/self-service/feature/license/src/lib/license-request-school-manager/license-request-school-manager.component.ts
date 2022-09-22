@@ -16,7 +16,7 @@ import {
 } from '@ksp/shared/service';
 import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
 import { SchoolRequest } from '@ksp/shared/interface';
-import { LicenseFormBaseComponent } from '../license-form-base.component';
+import { LicenseFormBaseComponent } from '@ksp/self-service/form';
 
 @UntilDestroy()
 @Component({
@@ -140,6 +140,7 @@ export class LicenseRequestSchoolManagerComponent
       ...{ prohibitproperty: JSON.stringify(forbidden) },
     };
     payload.currentprocess = currentProcess;
+    payload.requeststatus = '1';
     console.log(payload);
     baseForm.patchValue(payload);
     return baseForm.value;

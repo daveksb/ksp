@@ -43,11 +43,12 @@ export class RequestSearchComponent
   @Output() clear = new EventEmitter<boolean>(false);
   @Output() search = new EventEmitter<any>();
   @Input() disableRequestType = false;
+  @Input() requestTypeList = SchoolRequestType;
+  //@Input() processTypeList: RequestProcess[] = [];
 
   eduOccupyList = EduOccupyList;
   processList: RequestProcess[] = [];
   statusList?: RequestStatus[] = [];
-  SchoolRequestType = SchoolRequestType.filter((i) => i.id > 2); // ใบคำขอเข้าใช้งานและถอดถอนไม่ต้องแสดง
 
   constructor(private fb: FormBuilder) {
     super();

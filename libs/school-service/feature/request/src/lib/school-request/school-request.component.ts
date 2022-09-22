@@ -46,7 +46,6 @@ export class SchoolRequestComponent implements OnInit {
 
   pageType = RequestPageType;
 
-  today = thaiDate(new Date());
   countries$!: Observable<any>;
   provinces$!: Observable<any>;
   amphurs1$!: Observable<any>;
@@ -62,14 +61,14 @@ export class SchoolRequestComponent implements OnInit {
 
   requestId!: number;
   requestData: any;
+  requestDate: string = thaiDate(new Date());
 
   systemType = '2'; // school service
   requestType = '3';
   requestSubType = SchoolRequestSubType.ครู; // 1 ไทย 2 ผู้บริหาร 3 ต่างชาติ
   requestLabel = 'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ';
-  requestNo = '';
+  requestNo: string | null = '';
   currentProcess!: number;
-  //processEnum = SchoolRequestProcess;
 
   disableTempSave = true;
   disableSave = true;
@@ -97,6 +96,7 @@ export class SchoolRequestComponent implements OnInit {
     edu2: [],
     teachinginfo: [],
     hiringinfo: [],
+    reasoninfo: [],
   });
 
   constructor(
@@ -177,6 +177,9 @@ export class SchoolRequestComponent implements OnInit {
     //console.log('create request = ');
     const baseForm = this.fb.group(new SchoolRequest());
     const formData: any = this.form.getRawValue();
+    console.log(formData.reasoninfo);
+    console.log(this.reasonFiles);
+    console.log(this.attachFiles);
     formData.addr1.addresstype = 1;
     formData.addr2.addresstype = 2;
 
@@ -248,7 +251,6 @@ export class SchoolRequestComponent implements OnInit {
   updateRequest(type: string) {
     const baseForm = this.fb.group(new SchoolRequest());
     const formData: any = this.form.getRawValue();
-
     const userInfo = formData.userInfo;
     userInfo.currentprocess = `1`;
     userInfo.requeststatus = `1`;
@@ -320,7 +322,6 @@ export class SchoolRequestComponent implements OnInit {
 
     //console.log('update payload = ', res);
     this.requestService.updateRequest(res).subscribe((res) => {
-      //console.log('update result = ', res);
       this.backToListPage();
     });
   }
@@ -382,10 +383,11 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   loadRequestFromId(id: number) {
-    this.requestService.getRequestById(id).subscribe((res: any) => {
+    this.requestService.getRequestById(id).subscribe((res) => {
       this.requestData = res;
+      this.requestDate = thaiDate(new Date(`${res.requestdate}`));
       this.requestNo = res.requestno;
-      this.currentProcess = +res.currentprocess;
+      this.currentProcess = Number(res.currentprocess);
       //console.log('current process = ', this.currentProcess);
       this.pathUserInfo(res);
       this.patchAddress(parseJson(res.addressinfo));
@@ -397,6 +399,7 @@ export class SchoolRequestComponent implements OnInit {
 
   patchTeachingInfo(res: any) {
     //console.log('teaching response= ', res);
+    //if (!res.teachingLevel) return;
     const teachingLevel = levels.map((level) => {
       if (res.teachingLevel.includes(level.value)) {
         return level.value;
@@ -626,10 +629,4 @@ export class SchoolRequestComponent implements OnInit {
       }
     }
   }
-
-  /*   onTabIndexChanged(tabIndex: number) {
-    if (tabIndex === 2) {
-      //this.patchEdu(this.staffId);
-    }
-  } */
 }

@@ -15,7 +15,7 @@
 
     <div class="bg-white px-4 py-2">
       <ksp-request-header-info
-        [requestDate]="today"
+        [requestDate]="requestDate"
         [requestNumber]="requestNo"
       ></ksp-request-header-info>
 
@@ -43,8 +43,6 @@
           formControlName="userInfo"
         ></ksp-form-user-info>
       </div>
-
-      <br />
 
       <mat-tab-group
         class="tab-group mb-3"
@@ -143,7 +141,7 @@
             [mode]="'view'"
             [displayMode]="'request'"
           ></ksp-form-hiring-info>
-          
+
           <ksp-form-temp-license-number></ksp-form-temp-license-number>
         </mat-tab>
 
@@ -165,23 +163,30 @@
         </mat-tab>
       </mat-tab-group>
     </div>
-    <br />
 
-    <div class="bg-white p-4">
-      <e-service-license-check
-        [choices]="verifyChoice"
-      ></e-service-license-check>
-    </div>
-  </div>
-
-  <div class="sticky-bottom border">
-    <ksp-bottom-nav
-      (cancelClicked)="cancel()"
-      (prevClicked)="prevPage()"
-      (nextClicked)="next()"
-      [showSaveButton]="true"
-      [showCenterButtons]="true"
-      [isFirstPage]="true"
-    ></ksp-bottom-nav>
+    <ng-container
+      formArrayName="checkResult"
+      *ngFor="let c of checkResultFormArray.controls; let i = index"
+    >
+      <div
+        class="bg-white px-3 py-1"
+        [ngClass]="{ hide: (selectedTab.index || 0) !== i }"
+      >
+        <e-service-license-check
+          [choices]="verifyChoice"
+          [formControlName]="i"
+        ></e-service-license-check>
+      </div>
+    </ng-container>
   </div>
 </form>
+
+<div class="sticky-bottom border">
+  <ksp-bottom-nav
+    (cancelClicked)="cancel()"
+    (prevClicked)="prevPage()"
+    (nextClicked)="next()"
+    [showCenterButtons]="true"
+    [isFirstPage]="true"
+  ></ksp-bottom-nav>
+</div>

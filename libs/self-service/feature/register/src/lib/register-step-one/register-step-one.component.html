@@ -7,7 +7,7 @@
           style="border-radius: 15px"
         >
           <div class="card-body p-3 p-md-4">
-            <h3 class="mb-3 pb-2 pb-md-0 mb-md-5 text-center">สมัครสมาชิก</h3>
+            <h3 class="mb-3 pb-2 pb-md-0 mb-md-4 text-center">สมัครสมาชิก</h3>
 
             <div class="d-flex justify-content-center mb-3">
               <div class="position-relative m-4 w-md-25 w-50">
@@ -52,9 +52,9 @@
 
             <form [formGroup]="form">
               <div class="row">
-                <div class="col-md-3 mb-3">
+                <div class="col-md-3 mb-2">
                   <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
-                  <select class="form-select" formControlName="prefixTh">
+                  <select class="form-select" formControlName="prefixth">
                     <option disabled selected hidden value="null">
                       กรุณาเลือก
                     </option>
@@ -64,29 +64,29 @@
                   </select>
                 </div>
 
-                <div class="col-md mb-3">
+                <div class="col-md mb-2">
                   <label class="form-label">ชื่อภาษาไทย</label>
                   <input
                     type="text"
                     class="form-control"
-                    formControlName="nameTh"
+                    formControlName="firstnameth"
                   />
                 </div>
 
-                <div class="col-md mb-3">
+                <div class="col-md mb-2">
                   <label class="form-label">นามสกุลภาษาไทย</label>
                   <input
                     type="text"
                     class="form-control"
-                    formControlName="lastnameTh"
+                    formControlName="lastnameth"
                   />
                 </div>
               </div>
 
               <div class="row">
-                <div class="col-md-3 mb-3">
+                <div class="col-md-3 mb-2">
                   <label class="form-label">คำนำหน้าชื่อภาษาอังกฤษ</label>
-                  <select class="form-select" formControlName="prefixEng">
+                  <select class="form-select" formControlName="prefixen">
                     <option disabled selected hidden value="null">
                       กรุณาเลือก
                     </option>
@@ -96,52 +96,48 @@
                   </select>
                 </div>
 
-                <div class="col-md mb-3">
+                <div class="col-md mb-2">
                   <label class="form-label">ชื่อภาษาอังกฤษ</label>
                   <input
                     type="text"
                     class="form-control"
                     id="firstnameFormControlInput"
                     placeholder=""
-                    formControlName="nameEng"
+                    formControlName="firstnameen"
                   />
                 </div>
 
-                <div class="col-md mb-3">
+                <div class="col-md mb-2">
                   <label class="form-label">นามสกุลภาษาอังกฤษ</label>
                   <input
                     type="text"
                     class="form-control"
                     placeholder=""
-                    formControlName="lastnameEng"
+                    formControlName="lastnameen"
                   />
                 </div>
               </div>
 
               <div class="row">
-                <div class="col-md mb-3">
+                <div class="col-md mb-2">
                   <label class="form-label">วันเดือนปีเกิด</label>
                   <input
                     type="date"
                     class="form-control"
                     placeholder=""
-                    formControlName="birthDate"
+                    formControlName="birthdate"
                   />
                 </div>
-                <div class="col-md mb-3">
+                <div class="col-md mb-2">
                   <label class="form-label">สัญชาติ</label>
-                  <select
-                    class="form-select"
-                    id="nationalityFormControlSelect"
-                    formControlName="nationality"
-                  >
-                    <option selected value="null">ไทย</option>
+                  <select class="form-select" formControlName="nationality">
+                    <option selected value="TH">ไทย</option>
                   </select>
                 </div>
               </div>
 
               <div class="row">
-                <div class="col-md mb-3">
+                <div class="col-md mb-2">
                   <label class="form-label">เบอร์โทร</label>
                   <input
                     type="text"
@@ -150,7 +146,7 @@
                     formControlName="phone"
                   />
                 </div>
-                <div class="col-md mb-3">
+                <div class="col-md mb-2">
                   <label class="form-label">อีเมล</label>
                   <input
                     type="email"
@@ -162,7 +158,7 @@
               </div>
 
               <div class="row">
-                <div class="col-md mb-3">
+                <div class="col-md mb-2">
                   <label class="form-label">ที่อยู่ปัจจุบัน</label>
                   <textarea
                     class="form-control"

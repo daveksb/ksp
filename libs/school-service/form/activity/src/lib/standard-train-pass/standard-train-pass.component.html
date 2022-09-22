@@ -1,18 +1,20 @@
-<div class="row">
-  <div class="col-md-6 mb-2">
-    <label class="form-label">เมื่อ</label>
-    <input class="form-control" type="date" formControlName="name" />
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-6 mb-2">
-    <label class="form-label">สถานที่</label>
-    <input class="form-control" type="text" formControlName="agency" />
+<form [formGroup]="form">
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <label class="form-label">เมื่อ</label>
+      <input class="form-control" type="date" formControlName="date" />
+    </div>
   </div>
 
-  <div class="col-md-6 mb-2">
-    <label class="form-label">หน่วยงานที่จัดอบรม</label>
-    <input class="form-control" type="text" formControlName="date" />
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <label class="form-label">สถานที่</label>
+      <input class="form-control" type="text" formControlName="name" />
+    </div>
+
+    <div class="col-md-6 mb-2">
+      <label class="form-label">หน่วยงานที่จัดอบรม</label>
+      <input class="form-control" type="text" formControlName="agency" />
+    </div>
   </div>
-</div>
+</form>

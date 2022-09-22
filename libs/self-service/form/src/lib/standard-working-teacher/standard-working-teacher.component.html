@@ -1,24 +1,20 @@
 <form [formGroup]="form">
   <div class="text-black mb-2">
     กิจกรรมการปฏิบัติงาน<span class="text-danger fs-6">
-      * กรุณาเลือกกิจกรรมและกรอกรายละเอียด ไม่น้อยกว่า 3 กิจกรรม</span
-    >
+      * กรุณาเลือกกิจกรรมและกรอกรายละเอียด ไม่น้อยกว่า 3 กิจกรรม</span>
   </div>
 
   <div class="d-flex mb-2">
     <div class="d-flex">
       <input type="checkbox" class="me-2 mt-1" formControlName="activity1" />
     </div>
-    <label class="text-secondary"
-      >วุฒิเพิ่มขึ้นในสาขาที่เกี่ยวข้องกับการประกอบวิชาชีพทางการศึกษา</label
-    >
+    <label class="text-secondary">วุฒิเพิ่มขึ้นในสาขาที่เกี่ยวข้องกับการประกอบวิชาชีพทางการศึกษา</label>
   </div>
   <ng-container
     class="bg-secondary bg-opacity-10 px-3 py-2 my-3"
-    *ngIf="activity1"
-  >
+    *ngIf="activity1">
     <div class="bg-light px-3 py-2 my-2">
-      <ksp-activity-add-degree></ksp-activity-add-degree>
+      <ksp-activity-add-degree formControlName="activity1Form"></ksp-activity-add-degree>
     </div>
   </ng-container>
 
@@ -26,16 +22,13 @@
     <div class="d-flex">
       <input type="checkbox" class="me-2 mt-1" formControlName="activity2" />
     </div>
-    <label class="text-secondary"
-      >เข้ารับการอบรมและได้รับวุฒิบัตรแสดงความชำนาญในการประกอบวิชาชีพจากคุรุสภา</label
-    >
+    <label class="text-secondary">เข้ารับการอบรมและได้รับวุฒิบัตรแสดงความชำนาญในการประกอบวิชาชีพจากคุรุสภา</label>
   </div>
   <ng-container
     class="bg-secondary bg-opacity-10 px-3 py-2 my-3"
-    *ngIf="activity2"
-  >
+    *ngIf="activity2">
     <div class="bg-light px-3 py-2 my-2">
-      <ksp-activity-diploma-receive></ksp-activity-diploma-receive>
+      <ksp-activity-diploma-receive formControlName="activity2Form"></ksp-activity-diploma-receive>
     </div>
   </ng-container>
 
@@ -43,16 +36,13 @@
     <div class="d-flex">
       <input type="checkbox" class="me-2 mt-1" formControlName="activity3" />
     </div>
-    <label class="text-secondary"
-      >ผ่านการอบรมหลักสูตรที่เกี่ยวข้องกับการปฎิบัติงานในหน้าที่</label
-    >
+    <label class="text-secondary">ผ่านการอบรมหลักสูตรที่เกี่ยวข้องกับการปฎิบัติงานในหน้าที่</label>
   </div>
   <ng-container
     class="bg-secondary bg-opacity-10 px-3 py-2 my-3"
-    *ngIf="activity3"
-  >
+    *ngIf="activity3">
     <div class="bg-light px-3 py-2 my-2">
-      <ksp-activity-seminar></ksp-activity-seminar>
+      <ksp-activity-seminar formControlName="activity3Form"></ksp-activity-seminar>
     </div>
   </ng-container>
 
@@ -64,10 +54,9 @@
   </div>
   <ng-container
     class="bg-secondary bg-opacity-10 px-3 py-2 my-3"
-    *ngIf="activity4"
-  >
+    *ngIf="activity4">
     <div class="bg-light px-3 py-2 my-2">
-      <ksp-activity-academic-archivement></ksp-activity-academic-archivement>
+      <ksp-activity-academic-archivement formControlName="activity4Form"></ksp-activity-academic-archivement>
     </div>
   </ng-container>
 
@@ -75,16 +64,13 @@
     <div class="d-flex">
       <input type="checkbox" class="me-2 mt-1" formControlName="activity5" />
     </div>
-    <label class="text-secondary"
-      >วิทยากรที่เป็นประโยชน์ต่อการจัดการเรียนรู้หรือการจัดการศึกษา</label
-    >
+    <label class="text-secondary">วิทยากรที่เป็นประโยชน์ต่อการจัดการเรียนรู้หรือการจัดการศึกษา</label>
   </div>
   <ng-container
     class="bg-secondary bg-opacity-10 px-3 py-2 my-3"
-    *ngIf="activity5"
-  >
+    *ngIf="activity5">
     <div class="bg-light px-3 py-2 my-2">
-      <ksp-activity-lecturer></ksp-activity-lecturer>
+      <ksp-activity-lecturer formControlName="activity5Form"></ksp-activity-lecturer>
     </div>
   </ng-container>
 
@@ -92,17 +78,14 @@
     <div class="d-flex">
       <input type="checkbox" class="me-2 mt-1" formControlName="activity6" />
     </div>
-    <label class="text-secondary"
-      >เขียนตำรา หรือบทความ
-      หรือผลงานทางวิชาการที่เป็นประโยชน์ต่อการจัดการเรียนรู้หรือการจัดการศึกษา</label
-    >
+    <label class="text-secondary">เขียนตำรา หรือบทความ
+      หรือผลงานทางวิชาการที่เป็นประโยชน์ต่อการจัดการเรียนรู้หรือการจัดการศึกษา</label>
   </div>
   <ng-container
     class="bg-secondary bg-opacity-10 px-3 py-2 my-3"
-    *ngIf="activity6"
-  >
+    *ngIf="activity6">
     <div class="bg-light px-3 py-2 my-2">
-      <ksp-activity-write-book></ksp-activity-write-book>
+      <ksp-activity-write-book formControlName="activity6Form"></ksp-activity-write-book>
     </div>
   </ng-container>
 
@@ -110,16 +93,13 @@
     <div class="d-flex">
       <input type="checkbox" class="me-2 mt-1" formControlName="activity7" />
     </div>
-    <label class="text-secondary"
-      >สร้างนวัตกรรมที่ใช้ในการจัดการเรียนรู้หรือที่เป็นประโยชน์ต่อการศึกษา</label
-    >
+    <label class="text-secondary">สร้างนวัตกรรมที่ใช้ในการจัดการเรียนรู้หรือที่เป็นประโยชน์ต่อการศึกษา</label>
   </div>
   <ng-container
     class="bg-secondary bg-opacity-10 px-3 py-2 my-3"
-    *ngIf="activity7"
-  >
+    *ngIf="activity7">
     <div class="bg-light px-3 py-2 my-2">
-      <ksp-activity-innovation></ksp-activity-innovation>
+      <ksp-activity-innovation formControlName="activity7Form"></ksp-activity-innovation>
     </div>
   </ng-container>
 
@@ -127,16 +107,13 @@
     <div class="d-flex">
       <input type="checkbox" class="me-2 mt-1" formControlName="activity8" />
     </div>
-    <label class="text-secondary"
-      >ทำวิจัยที่เป็นประโยชน์ต่อการจัดการเรียนรู้และการจัดการศึกษา</label
-    >
+    <label class="text-secondary">ทำวิจัยที่เป็นประโยชน์ต่อการจัดการเรียนรู้และการจัดการศึกษา</label>
   </div>
   <ng-container
     class="bg-secondary bg-opacity-10 px-3 py-2 my-3"
-    *ngIf="activity8"
-  >
+    *ngIf="activity8">
     <div class="bg-light px-3 py-2 my-2">
-      <ksp-activity-research></ksp-activity-research>
+      <ksp-activity-research formControlName="activity8Form"></ksp-activity-research>
     </div>
   </ng-container>
 
@@ -144,16 +121,13 @@
     <div class="d-flex">
       <input type="checkbox" class="me-2 mt-1" formControlName="activity9" />
     </div>
-    <label class="text-secondary"
-      >รับรางวัลจากคุรุสภาหรือของหน่วยงานทางการศึกษาอื่น</label
-    >
+    <label class="text-secondary">รับรางวัลจากคุรุสภาหรือของหน่วยงานทางการศึกษาอื่น</label>
   </div>
   <ng-container
     class="bg-secondary bg-opacity-10 px-3 py-2 my-3"
-    *ngIf="activity9"
-  >
+    *ngIf="activity9">
     <div class="bg-light px-3 py-2 my-2">
-      <ksp-activity-reward></ksp-activity-reward>
+      <ksp-activity-reward formControlName="activity9Form"></ksp-activity-reward>
     </div>
   </ng-container>
 
@@ -161,17 +135,14 @@
     <div class="d-flex">
       <input type="checkbox" class="me-2 mt-1" formControlName="activity10" />
     </div>
-    <label class="text-secondary"
-      >เข้าฟังการบรรยาย อภิปราย ประชุมปฏิบัติการ ประชุมสัมมนา หรืออื่น ๆ
-      โดยมีการลงทะเบียนและมีหลักฐานแสดงการเข้าร่วมกิจกรรมดังกล่าว</label
-    >
+    <label class="text-secondary">เข้าฟังการบรรยาย อภิปราย ประชุมปฏิบัติการ ประชุมสัมมนา หรืออื่น ๆ
+      โดยมีการลงทะเบียนและมีหลักฐานแสดงการเข้าร่วมกิจกรรมดังกล่าว</label>
   </div>
   <ng-container
     class="bg-secondary bg-opacity-10 px-3 py-2 my-3"
-    *ngIf="activity10"
-  >
+    *ngIf="activity10">
     <div class="bg-light px-3 py-2 my-2">
-      <ksp-activity-lecture-register></ksp-activity-lecture-register>
+      <ksp-activity-lecture-register formControlName="activity10Form"></ksp-activity-lecture-register>
     </div>
   </ng-container>
 
@@ -179,16 +150,13 @@
     <div class="d-flex">
       <input type="checkbox" class="me-2 mt-1" formControlName="activity11" />
     </div>
-    <label class="text-secondary"
-      >ศึกษาดูงานที่เกี่ยวข้องกับการประกอบวิชาชีพทางการศึกษา</label
-    >
+    <label class="text-secondary">ศึกษาดูงานที่เกี่ยวข้องกับการประกอบวิชาชีพทางการศึกษา</label>
   </div>
   <ng-container
     class="bg-secondary bg-opacity-10 px-3 py-2 my-3"
-    *ngIf="activity11"
-  >
+    *ngIf="activity11">
     <div class="bg-light px-3 py-2 my-2">
-      <ksp-activity-study-tour></ksp-activity-study-tour>
+      <ksp-activity-study-tour formControlName="activity11Form"></ksp-activity-study-tour>
     </div>
   </ng-container>
 
@@ -196,16 +164,13 @@
     <div class="d-flex">
       <input type="checkbox" class="me-2 mt-1" formControlName="activity12" />
     </div>
-    <label class="text-secondary"
-      >จัดทำผลงานหรือกิจกรรมที่เป็นประโยชน์ต่อการจัดการเรียนรู้หรือการจัดการศึกษา</label
-    >
+    <label class="text-secondary">จัดทำผลงานหรือกิจกรรมที่เป็นประโยชน์ต่อการจัดการเรียนรู้หรือการจัดการศึกษา</label>
   </div>
   <ng-container
     class="bg-secondary bg-opacity-10 px-3 py-2 my-3"
-    *ngIf="activity12"
-  >
+    *ngIf="activity12">
     <div class="bg-light px-3 py-2 my-2">
-      <ksp-activity-learning-material></ksp-activity-learning-material>
+      <ksp-activity-learning-material formControlName="activity12Form"></ksp-activity-learning-material>
     </div>
   </ng-container>
 </form>

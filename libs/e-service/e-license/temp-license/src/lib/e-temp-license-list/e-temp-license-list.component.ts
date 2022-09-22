@@ -3,8 +3,8 @@ import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { SchoolRequestSubType } from '@ksp/shared/constant';
-import { tempLicenseRequestType } from '@ksp/shared/interface';
+import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
+import { SchoolRequest } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import {
   applyClientFilter,
@@ -24,11 +24,12 @@ export class ETempLicenseListComponent implements AfterViewInit {
   });
 
   displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<any>();
+  dataSource = new MatTableDataSource<SchoolRequest>();
   SchoolRequestSubType = SchoolRequestSubType;
   checkProcess = checkProcess;
   checkRequestType = checkRequestType;
   checkStatus = checkStatus;
+  requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -43,8 +44,7 @@ export class ETempLicenseListComponent implements AfterViewInit {
   }
 
   search(params: any) {
-    console.log('params = ', params);
-
+    //console.log('params = ', params);
     const payload = {
       systemtype: '2',
       requesttype: '3',
@@ -68,9 +68,9 @@ export class ETempLicenseListComponent implements AfterViewInit {
     this.form.controls.search.patchValue({ requesttype: '3' });
   }
 
-  goToDetail(id: number) {
-    this.router.navigate(['/temp-license', 'detail', id], {
-      queryParams: { type: tempLicenseRequestType.thai },
+  goToDetail(item: SchoolRequest) {
+    this.router.navigate(['/temp-license', 'detail', item.id], {
+      queryParams: { subtype: item.subtype },
     });
   }
 }
