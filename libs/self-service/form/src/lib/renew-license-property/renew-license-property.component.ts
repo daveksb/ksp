@@ -20,6 +20,7 @@ export class RenewLicensePropertyComponent
 
   override form = this.fb.group({
     educationType: [],
+    educationLevelForm: [],
   });
 
   educationTypes1: ListData[] = [];

@@ -6,7 +6,7 @@ import {
   SelfServiceRequestSubType,
 } from '@ksp/shared/constant';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { LicenseFormBaseComponent } from '../license-form-base.component';
+import { LicenseFormBaseComponent } from '@ksp/self-service/form';
 import { FormBuilder } from '@angular/forms';
 import {
   AddressService,
@@ -143,6 +143,7 @@ export class LicenseRequestStudySupervisionComponent
       ...{ prohibitproperty: JSON.stringify(forbidden) },
     };
     payload.currentprocess = currentProcess;
+    payload.requeststatus = '1';
     console.log(payload);
     baseForm.patchValue(payload);
     return baseForm.value;

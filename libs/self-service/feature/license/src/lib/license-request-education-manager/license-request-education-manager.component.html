@@ -25,9 +25,14 @@
       </div>
       <div class="col-md">
         <ksp-form-user-info
+          formControlName="userInfo"
+          [isDarkMode]="true"
+          [prefixList]="prefixList$ | async"
           [displayMode]="[userInfoType]"
+          [nationList]="nationalitys$ | async"
           [isSchoolService]="false"
-        ></ksp-form-user-info>
+        >
+        </ksp-form-user-info>
       </div>
     </div>
 
