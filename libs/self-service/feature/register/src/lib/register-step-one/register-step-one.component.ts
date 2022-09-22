@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import localForage from 'localforage';
 @Component({
   selector: 'self-service-register-step-one',
   templateUrl: './register-step-one.component.html',
@@ -9,13 +9,13 @@ import { Router } from '@angular/router';
 })
 export class RegisterStepOneComponent {
   form = this.fb.group({
-    prefixTh: [],
-    nameTh: [],
-    lastnameTh: [],
-    prefixEng: [],
-    nameEng: [],
-    lastnameEng: [],
-    birthDate: [],
+    prefixth: [],
+    firstnameth: [],
+    lastnameth: [],
+    prefixen: [],
+    firstnameen: [],
+    lastnameen: [],
+    birthdate: [],
     nationality: [],
     phone: [],
     email: [],
@@ -25,10 +25,11 @@ export class RegisterStepOneComponent {
   constructor(private router: Router, private fb: FormBuilder) {}
 
   loginPage() {
-    this.router.navigate(['/', 'login']);
+    this.router.navigate(['/login']);
   }
 
   nextPage() {
-    this.router.navigate(['/', 'register', 'th-step-2']);
+    localForage.setItem('th-register', this.form.value);
+    this.router.navigate(['/register', 'th-step-2']);
   }
 }
