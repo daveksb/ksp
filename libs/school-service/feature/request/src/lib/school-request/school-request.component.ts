@@ -189,12 +189,13 @@ export class SchoolRequestComponent implements OnInit {
 
     const { id, ...userInfo } = formData.userInfo;
     userInfo.schoolid = this.schoolId;
-
-    if (this.requestId) {
-      userInfo.currentprocess = `1`;
-    } else {
-      userInfo.currentprocess = `2`;
-    }
+    userInfo.currentprocess = `1`;
+    userInfo.requeststatus = `1`;
+    // if (this.requestId) {
+    //   userInfo.currentprocess = `1`;
+    // } else {
+    //   userInfo.currentprocess = `2`;
+    // }
 
     userInfo.ref1 = `${this.systemType}`;
     userInfo.ref2 = '03';
