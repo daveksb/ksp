@@ -25,11 +25,9 @@ export class MyInfoService {
   }
 
   insertMyInfo(payload: any): Observable<any> {
-    return this.http
-      .post(`${environment.apiUrl}/kspself/selfmyinfoinsert`, payload)
-      .pipe(
-        //map((data: any) => data.datareturn?.[0] || {}),
-        shareReplay()
-      );
+    return this.http.post(
+      `${environment.apiUrl}/kspself/selfmyinfoinsert`,
+      payload
+    );
   }
 }
