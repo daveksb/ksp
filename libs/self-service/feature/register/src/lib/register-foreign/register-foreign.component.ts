@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,7 +8,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./register-foreign.component.scss'],
 })
 export class RegisterForeignComponent {
-  constructor(private router: Router) {}
+  form = this.fb.group({
+    teachercouncilidno: [],
+  });
+
+  constructor(private router: Router, private fb: FormBuilder) {}
 
   submit() {
     this.router.navigate(['/register', 'en-step-1']);
