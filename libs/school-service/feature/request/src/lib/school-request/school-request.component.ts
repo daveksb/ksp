@@ -533,10 +533,10 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   getList() {
-    this.eduFiles = RequestEduFiles;
-    this.teachingFiles = RequestTeachingFiles;
-    this.reasonFiles = RequestReasonFiles;
-    this.attachFiles = RequestAttachFiles;
+    this.eduFiles = structuredClone(RequestEduFiles);
+    this.teachingFiles = structuredClone(RequestTeachingFiles);
+    this.reasonFiles = structuredClone(RequestReasonFiles);
+    this.attachFiles = structuredClone(RequestAttachFiles);
 
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.provinces$ = this.addressService.getProvinces();
