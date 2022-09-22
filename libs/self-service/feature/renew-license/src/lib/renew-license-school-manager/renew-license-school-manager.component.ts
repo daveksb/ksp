@@ -11,8 +11,8 @@ import {
   AddressService,
   GeneralInfoService,
   EducationDetailService,
-  LicenseRequestService,
   MyInfoService,
+  SelfRequestService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SchoolRequest } from '@ksp/shared/interface';
@@ -61,7 +61,7 @@ export class RenewLicenseSchoolManagerComponent
     addressService: AddressService,
     generalInfoService: GeneralInfoService,
     educationDetailService: EducationDetailService,
-    requestService: LicenseRequestService,
+    requestService: SelfRequestService,
     myInfoService: MyInfoService
   ) {
     super(

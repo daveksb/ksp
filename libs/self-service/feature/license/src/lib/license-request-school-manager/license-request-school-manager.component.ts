@@ -12,7 +12,7 @@ import {
   GeneralInfoService,
   EducationDetailService,
   MyInfoService,
-  LicenseRequestService as RequestLicenseService,
+  SelfRequestService,
 } from '@ksp/shared/service';
 import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
 import { SchoolRequest } from '@ksp/shared/interface';
@@ -63,7 +63,7 @@ export class LicenseRequestSchoolManagerComponent
     addressService: AddressService,
     educationDetailService: EducationDetailService,
     myInfoService: MyInfoService,
-    requestService: RequestLicenseService
+    requestService: SelfRequestService
   ) {
     super(
       generalInfoService,

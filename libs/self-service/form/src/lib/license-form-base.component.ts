@@ -4,8 +4,8 @@ import {
   AddressService,
   GeneralInfoService,
   EducationDetailService,
-  LicenseRequestService as RequestLicenseService,
   MyInfoService,
+  SelfRequestService,
 } from '@ksp/shared/service';
 import { MatDialog } from '@angular/material/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
@@ -38,7 +38,7 @@ export abstract class LicenseFormBaseComponent {
     protected addressService: AddressService,
     protected educationDetailService: EducationDetailService,
     protected fb: FormBuilder,
-    protected requestService: RequestLicenseService,
+    protected requestService: SelfRequestService,
     protected router: Router,
     private myInfoService: MyInfoService,
     public dialog: MatDialog
@@ -105,7 +105,7 @@ export abstract class LicenseFormBaseComponent {
     completeDialog.componentInstance.saved.subscribe((res) => {
       if (res) {
         const payload = this.createRequest(forbidden, '0');
-        this.requestService.requestLicense(payload).subscribe((res) => {
+        this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res.returncode === '00') {
             this.router.navigate(['/home']);
@@ -117,7 +117,7 @@ export abstract class LicenseFormBaseComponent {
     completeDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         const payload = this.createRequest(forbidden, '1');
-        this.requestService.requestLicense(payload).subscribe((res) => {
+        this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res.returncode === '00') {
             this.router.navigate(['/license', 'payment-channel']);
