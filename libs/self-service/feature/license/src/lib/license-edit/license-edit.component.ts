@@ -106,7 +106,7 @@ export class LicenseEditComponent implements OnInit {
     };
     initialPayload.currentprocess = currentProcess;
     initialPayload.requeststatus = '1';
-    const payload = _.pick(initialPayload, allowKey);
+    const payload = _.pick({ ...self, ...initialPayload }, allowKey);
     console.log(payload);
 
     return payload;

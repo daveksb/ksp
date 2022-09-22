@@ -8,7 +8,6 @@ import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
 import { SelfRequestService } from '@ksp/shared/service';
 import { SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
-import { SchoolRequest } from '@ksp/shared/interface';
 
 @Component({
   selector: 'ksp-renew-license-foreign',
@@ -49,7 +48,7 @@ export class RenewLicenseForeignComponent {
         const payload = this.createRequest('0');
         this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
-          if (res.returncode === '00') {
+          if (res?.returncode === '00') {
             this.router.navigate(['/home']);
           }
         });
@@ -61,7 +60,7 @@ export class RenewLicenseForeignComponent {
         const payload = this.createRequest('1');
         this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
-          if (res.returncode === '00') {
+          if (res?.returncode === '00') {
             this.router.navigate(['/license', 'payment-channel']);
           }
         });
@@ -112,7 +111,7 @@ export class RenewLicenseForeignComponent {
     initialPayload.currentprocess = currentProcess;
     initialPayload.requeststatus = '1';
     console.log(initialPayload);
-    const payload = _.pick(initialPayload, allowKey);
+    const payload = _.pick({ ...self, ...initialPayload }, allowKey);
     console.log(payload);
 
     return payload;
