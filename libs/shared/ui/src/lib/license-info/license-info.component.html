@@ -1,35 +1,43 @@
 <div class="row">
+  <div
+    class="d-flex flex-column align-items-center mb-2 p-0"
+    *ngIf="isHasTitle"
+  >
+    <div class="fs-4 text-warning">ยกย่องเชิดชูเกียรติ</div>
+    <div class="fs-5">รางวัลครูภาษาไทยดีเด่น</div>
+  </div>
   <div class="col-md-3 p-0 d-flex justify-content-center">
-    <img
-      class="mb-3"
-      style="width: 10rem; height: 10rem"
-      src="assets/images/profile.png"
-    />
+    <img class="w-50 h-75" src="assets/images/profile.png" />
   </div>
 
-  <div class="d-flex justify-content-center col-md-3 p-0">
-    <div class="text-secondary me-2">
-      <div class="text-end">เลขที่ใบอนุญาต</div>
-      <div class="text-end">การประกอบวิชาชีพ</div>
-      <div class="text-end">หมายเลขบัตรประชาชน</div>
-      <div class="text-end">ประเภทใบอนุญาต</div>
-      <div class="text-end">ชื่อ-นามสกุล (ไทย)</div>
-      <div class="text-end">ชื่อ-นามสกุล (อังกฤษ)</div>
-      <div class="text-end">วันเดือนปีเกิด</div>
-      <div class="text-end">วันเดือนปีที่ออก</div>
-      <div class="text-end">วันเดือนปีที่หมดอายุ</div>
-    </div>
+  <div
+    class="d-flex justify-content-center col-md-6 p-0"
+    style="white-space: nowrap"
+  >
+    <div class="row">
+      <div class="col-6 text-secondary ps-0 pe-3">
+        <div class="text-end">เลขที่ใบอนุญาตประกอบวิชาชีพ</div>
+        <div class="text-end">ประกอบวิชาชีพ</div>
+        <div class="text-end">หมายเลขบัตรประชาชน</div>
+        <div class="text-end">ประเภทใบอนุญาตประกอบวิชาชีพ</div>
+        <div class="text-end">ชื่อ-นามสกุล (ภาษาไทย)</div>
+        <div class="text-end">ชื่อ-นามสกุล (ภาษาอังกฤษ)</div>
+        <div class="text-end">วันเดือนปีเกิด</div>
+        <div class="text-end">{{ subTitle1 }}</div>
+        <div class="text-end">{{ subTitle2 }}</div>
+      </div>
 
-    <div class="ms-2">
-      <div>644015713xxxxx</div>
-      <div>ครู</div>
-      <div>1-1020-00545-78-9</div>
-      <div>ใบอนุญาตประกอบวิชาชีพครู</div>
-      <div>ธนานุรักษ์ ใจสะอาด</div>
-      <div>Thananurak Jaisa-ard</div>
-      <div>26 มิถุนายน 2526</div>
-      <div>10 มิถุนายน 2564</div>
-      <div>10 มิถุนายน 2569</div>
+      <div class="col-6 ps-3 pe-0">
+        <div>644015713xxxxx</div>
+        <div>ครู</div>
+        <div>1-1020-00545-78-9</div>
+        <div>ใบอนุญาตประกอบวิชาชีพครู</div>
+        <div>ธนานุรักษ์ ใจสะอาด</div>
+        <div>Thananurak Jaisa-ard</div>
+        <div>26 มิถุนายน 2526</div>
+        <div>10 มิถุนายน 2564</div>
+        <div>10 มิถุนายน 2569</div>
+      </div>
     </div>
   </div>
 

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { deleteCookie, getCookie, thaiDate } from '@ksp/shared/utility';
 
@@ -12,6 +12,8 @@ import { deleteCookie, getCookie, thaiDate } from '@ksp/shared/utility';
   imports: [CommonModule],
 })
 export class TopNavComponent {
+  @Input() isSelfService = false;
+
   today = thaiDate(new Date());
   firstName = getCookie('firstNameTh');
   lastName = getCookie('lastNameTh');
