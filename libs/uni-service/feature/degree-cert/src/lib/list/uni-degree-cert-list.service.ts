@@ -19,4 +19,10 @@ export class UniDegreeCertListService {
       { ...params, tokenkey: getCookie('userToken') }
     );
   }
+  universitySelectById(id: string): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/kspuni/universityselectbyid`, {
+      id,
+      tokenkey: getCookie('userToken'),
+    });
+  }
 }
