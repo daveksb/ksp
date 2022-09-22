@@ -24,6 +24,7 @@ export class ActivityDetailComponent implements OnInit {
   schoolId = '0010201056';
   staffId!: number;
   staff: any;
+  pageType!: number;
 
   form = this.fb.group({
     type: [null, Validators.required],
@@ -51,6 +52,13 @@ export class ActivityDetailComponent implements OnInit {
   ngOnInit(): void {
     this.activityTypes = SelfDevelopActivityTypes;
     this.checkStaffId();
+
+    this.route.paramMap.subscribe((res) => {
+      //this.processType = Number(res.get('type'));
+      //console.log('process type = ', res);
+      this.pageType = Number(res.get('type'));
+      //console.log('process type = ', this.pageType);
+    });
 
     /*     this.form.valueChanges.subscribe((res) => {
       console.log('res = ', res);
@@ -102,6 +110,10 @@ export class ActivityDetailComponent implements OnInit {
   /* get activityType() {
     return this.form.controls.activityType;
   } */
+
+  edit(staffId: number, pageType: number) {
+    this.router.navigate(['/', 'activity', 'detail', staffId, pageType]);
+  }
 
   cancel() {
     this.router.navigate(['/activity', 'list']);
@@ -166,3 +178,5 @@ const componentList = [
     viewContainerRef.clear();
     viewContainerRef.createComponent<DynamicComponent>(componentList[index]);
   } */
+
+  

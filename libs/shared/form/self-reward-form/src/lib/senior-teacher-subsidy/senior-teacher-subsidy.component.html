@@ -23,10 +23,11 @@
       <label class="form-label">ไม่เคย</label>
     </div>
   </div>
-  <hr />
+
   <ng-template [ngIf]="hasSubsidy">
-    <div class="d-flex">
-      <div class="menu__container">
+    <br />
+    <div class="d-flex flex-row">
+      <div class="menu__container w-md-auto">
         <mat-selection-list #cost [multiple]="false">
           <mat-list-option
             *ngFor="let subject of typesOfSubject"
@@ -37,7 +38,7 @@
         </mat-selection-list>
       </div>
 
-      <div class="border w-100 h-auto rounded">
+      <div class="h-auto rounded xxx">
         <ng-container
           *ngIf="cost.selectedOptions.selected[0]?.value === 'สถานภาพ'"
           ><ksp-senior-teacher-subsidy-one></ksp-senior-teacher-subsidy-one

@@ -1,5 +1,5 @@
 <form [formGroup]="form">
-  <div class="d-flex flex-row">
+  <div class="d-flex flex-column flex-md-row mb-3">
     <div class="d-flex align-items-center me-5">
       <input type="radio" class="me-1" />
       <label class="form-label">เคยได้รับรางวัลคุรุสดุดี</label>
@@ -9,7 +9,7 @@
       <label class="form-label">ไม่เคยได้รับรางวัลคุรุสดุดี</label>
     </div>
   </div>
-  <br />
+
   <ng-container formArrayName="rewardInfo">
     <ng-container *ngFor="let DegreeForm of rewardInfo.controls; let i = index">
       <ng-container [formGroupName]="i">
@@ -21,19 +21,19 @@
               role="button"
             ></i>
           </div>
-          <div class="row mb-2">
-            <div class="col">
+          <div class="row">
+            <div class="col-md-6 mb-2">
               <label class="form-label">ปีที่ได้รับรางวัล</label>
               <input class="form-control" type="text" />
             </div>
-            <div class="col">
+            <div class="col-md-6 mb-2">
               <label class="form-label">ชื่อรางวัลระดับชาติ</label>
               <input class="form-control" type="text" />
             </div>
           </div>
 
-          <div class="row mb-2">
-            <div class="col-6">
+          <div class="row">
+            <div class="col-md-6 mb-2">
               <label class="form-label">รายละเอียดของรางวัลระดับชาติ</label>
               <input class="form-control" type="text" />
             </div>

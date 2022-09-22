@@ -12,6 +12,7 @@ import { parseJson } from '@ksp/shared/utility';
   styleUrls: ['./activity-list.component.scss'],
 })
 export class ActivityListComponent implements AfterViewInit {
+  activityTypes = activityTypes;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   form = this.fb.group({
@@ -61,8 +62,12 @@ export class ActivityListComponent implements AfterViewInit {
     this.dataSource.data = [];
   }
 
-  view(staffId: number) {
-    this.router.navigate(['/', 'activity', 'detail', staffId]);
+  edit(staffId: number, pageType: number) {
+    this.router.navigate(['/', 'activity', 'detail', staffId, pageType]);
+  }
+
+  view(staffId: number, pageType: number) {
+    this.router.navigate(['/', 'activity', 'detail', staffId, pageType]);
   }
 }
 
@@ -73,4 +78,10 @@ export interface staffInfo {
   lastnameth: string;
   startdate: string;
   enddate: string;
+}
+
+export enum activityTypes {
+  'ดู' = 1,
+  'แก้ไข' = 2,
+  'อื่นๆ' = 3,
 }
