@@ -6,3 +6,31 @@
   border-radius: 50%;
   display: inline-block;
 }
+
+.slideshow-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.slideshow-content {
+  width: 30rem;
+  height: 15rem;
+}
+
+/* tablet */
+@media only screen and (max-width: 992px) {
+  .slideshow-content {
+    width: auto;
+    height: auto;
+  }
+}
+
+/* mobile */
+@media only screen and (max-width: 768px) {
+  .slideshow-content {
+    width: auto;
+    height: auto;
+  }
+}
