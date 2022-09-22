@@ -3,12 +3,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { FormBuilder } from '@angular/forms';
-import { SchoolRequest } from '@ksp/shared/interface';
 import { SelfServiceRequestSubType } from '@ksp/shared/constant';
 import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
 import { SelfRequestService } from '@ksp/shared/service';
-import { ListData, SelfRequest, UserInfoForm } from '@ksp/shared/interface';
+import { SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
+import { SchoolRequest } from '@ksp/shared/interface';
 
 @Component({
   selector: 'ksp-renew-license-foreign',
@@ -112,7 +112,6 @@ export class RenewLicenseForeignComponent {
     initialPayload.currentprocess = currentProcess;
     initialPayload.requeststatus = '1';
     console.log(initialPayload);
-
     const payload = _.pick(initialPayload, allowKey);
     console.log(payload);
 
