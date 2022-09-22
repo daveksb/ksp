@@ -20,7 +20,6 @@ export class SchoolRequestListComponent implements AfterViewInit {
   schoolId = '0010201056';
   displayedColumns: string[] = displayedColumns;
   dataSource = new MatTableDataSource<SchoolRequest>();
-  SchoolRequestType = SchoolRequestType;
   SchoolRequestSubType = SchoolRequestSubType;
   currentPage = 0;
   isLastPage = false;
@@ -29,6 +28,7 @@ export class SchoolRequestListComponent implements AfterViewInit {
   checkProcess = checkProcess;
   checkRequestType = checkRequestType;
   checkStatus = checkStatus;
+  requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
 
   form = this.fb.group({
     licenseSearch: [],

@@ -11,15 +11,15 @@ export class PrivacyPolicyComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   register() {
-    this.router.navigate(['/', 'register', 'th-step-1']);
+    this.router.navigate(['/register', 'th-step-1']);
   }
 
   register2() {
-    this.router.navigate(['/', 'register', 'en-step-0']);
+    this.router.navigate(['/register', 'en-step-0']);
   }
 
   loginPage() {
-    this.router.navigate(['/', 'login']);
+    this.router.navigate(['/login']);
   }
 
   ngOnInit(): void {

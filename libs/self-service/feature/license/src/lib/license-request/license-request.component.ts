@@ -91,11 +91,11 @@ export class LicenseRequestComponent
   }
 
   ngOnInit(): void {
-    this.form.valueChanges
+    /*     this.form.valueChanges
       .pipe(debounceTime(300), untilDestroyed(this))
       .subscribe((res) => {
         // console.log('res = ', this.form);
-      });
+      }); */
     this.getListData();
     this.getMyInfo();
     this.checkButtonsDisableStatus();
@@ -168,7 +168,7 @@ export class LicenseRequestComponent
     userInfo.ref3 = `${SelfServiceRequestSubType.ครู}`;
     userInfo.systemtype = '1';
     userInfo.requesttype = '1';
-    userInfo.subtype = '5';
+    userInfo.subtype = `${SelfServiceRequestSubType.ครู}`;
 
     const { educationType, educationLevelForm } = formData.education;
     const { hasForeignLicense, foreignLicenseForm, ...resExperienceForm } =

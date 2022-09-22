@@ -1,21 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'ksp-register-foreign-step-one',
   templateUrl: './register-foreign-step-one.component.html',
   styleUrls: ['./register-foreign-step-one.component.scss'],
 })
-export class RegisterForeignStepOneComponent implements OnInit {
+export class RegisterForeignStepOneComponent {
   constructor(private router: Router) {}
 
-  ngOnInit(): void {}
-
   next() {
-    this.router.navigate(['/', 'register', 'en-step-2']);
+    this.router.navigate(['/register', 'en-step-2']);
   }
 
   loginPage() {
-    this.router.navigate(['/', 'login']);
+    this.router.navigate(['/login']);
   }
 }

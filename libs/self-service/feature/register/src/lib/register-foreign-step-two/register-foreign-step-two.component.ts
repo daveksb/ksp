@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { VerifyOtpForeignDialogComponent } from '@ksp/self-service/dialog';
@@ -12,8 +11,7 @@ import { VerifyOtpForeignDialogComponent } from '@ksp/self-service/dialog';
 export class RegisterForeignStepTwoComponent {
   constructor(
     public dialog: MatDialog,
-    private router: Router,
-    private fb: FormBuilder
+    private router: Router //private fb: FormBuilder
   ) {}
 
   openDialog() {
@@ -27,10 +25,10 @@ export class RegisterForeignStepTwoComponent {
   }
 
   loginPage() {
-    this.router.navigate(['/', 'login']);
+    this.router.navigate(['/login']);
   }
 
   previousPage() {
-    this.router.navigate(['/', 'register', 'step-1']);
+    this.router.navigate(['/register', 'step-1']);
   }
 }
