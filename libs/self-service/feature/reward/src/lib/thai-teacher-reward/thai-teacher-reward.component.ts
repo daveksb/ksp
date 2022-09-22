@@ -2,7 +2,10 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
-import { providerFactory } from '@ksp/shared/utility';
+import {
+  createDefaultUserInfoForm,
+  providerFactory,
+} from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-thai-teacher-reward',
@@ -13,11 +16,14 @@ import { providerFactory } from '@ksp/shared/utility';
 export class ThaiTeacherRewardComponent extends KspFormBaseComponent {
   userInfoType = UserInfoFormType.thai;
   rewardFiles = ['1. รางวัลอื่นและประกาศเกียรติคุณ'];
-  @Input() //userInfo!: any;
+  @Input()
   set userInfo(value: any) {
-    console.log('value = ', value);
-    this.form.controls.userInfo.patchValue(value);
+    setTimeout(() => {
+      this.form.controls.userInfo.patchValue(value);
+    }, 0);
   }
+
+  //public userInfo!: any;
 
   override form = this.fb.group({
     userInfo: [],
