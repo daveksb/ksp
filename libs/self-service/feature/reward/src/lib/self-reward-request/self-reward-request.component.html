@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-md-6">
         <div class="box-header">ประเภทรางวัล</div>
-        <select class="form-select" formControlName="rewardType">
+        <select class="form-select" formControlName="rewardType" #rewardType>
           <option selected hidden disabled value="null">กรุณาเลือก</option>
           <option *ngFor="let reward of rewardTypes" [value]="reward.value">
             {{ reward.label }}
@@ -15,32 +15,42 @@
         </select>
       </div>
     </div>
+    <div *ngIf="rewardType.value">
+      <self-service-request-status></self-service-request-status>
+    </div>
 
-    <ng-container *ngIf="selectedRewardType >= 0">
-      <br />
-      <self-service-request-status></self-service-request-status><br
-    /></ng-container>
+    <div *ngIf="rewardType.value === '1'">
+      <ksp-council-reward formControlName="rewardDetail"></ksp-council-reward>
+    </div>
 
-    <ng-container *ngIf="selectedRewardType === 0">
-      <ksp-council-reward></ksp-council-reward
-    ></ng-container>
-    <ng-container *ngIf="selectedRewardType === 1"
-      ><ksp-thai-teacher-reward></ksp-thai-teacher-reward
-    ></ng-container>
-    <ng-container *ngIf="selectedRewardType === 2"
-      ><ksp-best-teacher-reward></ksp-best-teacher-reward
-    ></ng-container>
-    <ng-container *ngIf="selectedRewardType === 3"
-      ><ksp-praise-teacher-reward></ksp-praise-teacher-reward
-    ></ng-container>
-    <ng-container *ngIf="selectedRewardType === 4">
-      <ksp-senior-teacher-reward></ksp-senior-teacher-reward
-    ></ng-container>
-    <ng-container *ngIf="selectedRewardType === 5">
-      <ksp-research-reward></ksp-research-reward
-    ></ng-container>
+    <div *ngIf="rewardType.value === '2'">
+      <ksp-thai-teacher-reward
+        formControlName="rewardDetail"
+      ></ksp-thai-teacher-reward>
+    </div>
 
-    <ng-container *ngIf="selectedRewardType >= 0">
+    <div *ngIf="rewardType.value === '3'">
+      <ksp-best-teacher-reward
+        formControlName="rewardDetail"
+      ></ksp-best-teacher-reward>
+    </div>
+
+    <div *ngIf="rewardType.value === '4'">
+      <ksp-praise-teacher-reward
+        formControlName="rewardDetail"
+      ></ksp-praise-teacher-reward>
+    </div>
+
+    <div *ngIf="rewardType.value === '5'">
+      <ksp-senior-teacher-reward
+        formControlName="rewardDetail"
+      ></ksp-senior-teacher-reward>
+    </div>
+    <div *ngIf="rewardType.value === '6'">
+      <ksp-research-reward formControlName="rewardDetail"></ksp-research-reward>
+    </div>
+
+    <div *ngIf="rewardType.value">
       <div class="d-flex justify-content-center my-3">
         <button type="button" class="btn border-primary text-primary bg-white">
           บันทึกชั่วคราว
@@ -48,7 +58,7 @@
         <button type="button" class="ms-3 btn btn-primary">
           บันทึกและยื่น
         </button>
-      </div></ng-container
-    >
+      </div>
+    </div>
   </div>
 </form>

@@ -1,5 +1,10 @@
-<div class="box-header">รายละเอียด</div>
-<mat-tab-group class="tab-group" animationDuration="0ms" [selectedIndex]="0">
+<div class="box-header">รายละเอียด:รางวัลผลงานวิจัย</div>
+<mat-tab-group
+  [formGroup]="form"
+  class="tab-group"
+  animationDuration="0ms"
+  [selectedIndex]="0"
+>
   <mat-tab label="ข้อมูลส่วนตัว">
     <ksp-form-user-info
       [displayMode]="[userInfoType]"

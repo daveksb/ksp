@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
@@ -10,10 +10,7 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./thai-teacher-reward.component.scss'],
   providers: providerFactory(ThaiTeacherRewardComponent),
 })
-export class ThaiTeacherRewardComponent
-  extends KspFormBaseComponent
-  implements OnInit
-{
+export class ThaiTeacherRewardComponent extends KspFormBaseComponent {
   userInfoType = UserInfoFormType.thai;
   rewardFiles = ['1. รางวัลอื่นและประกาศเกียรติคุณ'];
 
@@ -36,6 +33,4 @@ export class ThaiTeacherRewardComponent
       })
     );
   }
-
-  ngOnInit(): void {}
 }

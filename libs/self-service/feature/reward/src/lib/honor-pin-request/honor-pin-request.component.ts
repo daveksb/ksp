@@ -12,12 +12,10 @@ import {
   templateUrl: './honor-pin-request.component.html',
   styleUrls: ['./honor-pin-request.component.scss'],
 })
-export class HonorPinRequestComponent implements OnInit {
+export class HonorPinRequestComponent {
   userInfoType = UserInfoFormType.thai;
 
   constructor(private router: Router, public dialog: MatDialog) {}
-
-  ngOnInit(): void {}
 
   onConfirmed() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {

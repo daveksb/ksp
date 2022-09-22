@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./register-foreign-step-one.component.scss'],
 })
 export class RegisterForeignStepOneComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private fb: FormBuilder) {}
 
   next() {
     this.router.navigate(['/register', 'en-step-2']);

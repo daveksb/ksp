@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
@@ -10,7 +11,11 @@ import { RegisterCompletedComponent } from '../register-completed/register-compl
   styleUrls: ['./register-foreign-step-three.component.scss'],
 })
 export class RegisterForeignStepThreeComponent {
-  constructor(private router: Router, public dialog: MatDialog) {}
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private fb: FormBuilder
+  ) {}
 
   loginPage() {
     this.router.navigate(['/login']);
