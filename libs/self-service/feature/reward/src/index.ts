@@ -12,7 +12,7 @@ export * from './lib/council-reward/council-reward.component';
 
 export * from './lib/praise-teacher-reward/praise-teacher-reward.component';
 
-export * from './lib/self-reward-request/self-reward-request.component';
+export * from './lib/request-reward-main/request-reward-main.component';
 
 export * from './lib/my-reward-detail/my-reward-detail.component';
 

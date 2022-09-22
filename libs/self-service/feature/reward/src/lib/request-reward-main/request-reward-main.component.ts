@@ -5,12 +5,12 @@ import { ListData } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
 @Component({
-  selector: 'ksp-self-reward-request',
-  templateUrl: './self-reward-request.component.html',
-  styleUrls: ['./self-reward-request.component.scss'],
-  providers: providerFactory(SelfRewardRequestComponent),
+  selector: 'ksp-request-reward-main',
+  templateUrl: './request-reward-main.component.html',
+  styleUrls: ['./request-reward-main.component.scss'],
+  providers: providerFactory(RequestRewardMainComponent),
 })
-export class SelfRewardRequestComponent implements OnInit {
+export class RequestRewardMainComponent implements OnInit {
   //pageType = 0;
   headerGroup = [
     'วันที่ทำรายการ',
@@ -22,7 +22,7 @@ export class SelfRewardRequestComponent implements OnInit {
     'วันที่หมดอายุใบอนุญาต',
   ];
 
-  rewardTypes: ListData[] = [];
+  rewardTypes: ListData[] = rewardTypes;
   //selectedRewardType!: number;
 
   form = this.fb.group({
@@ -33,17 +33,18 @@ export class SelfRewardRequestComponent implements OnInit {
   constructor(private route: ActivatedRoute, private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.rewardTypes = rewardTypes;
-
-    /* this.form.controls['rewardType'].valueChanges.subscribe((res) => {
-      //this.selectedRewardType = Number(res);
-      console.log('type = ', this.selectedRewardType);
-      //this.form.controls.educationLevelForm.reset();
-    }); */
     /* this.route.queryParams.subscribe((res) => {
       this.pageType = Number(res['type']);
       //console.log('res = ', this.pageType);
     }); */
+  }
+
+  tempSave() {
+    //
+  }
+
+  createRequest() {
+    //
   }
 }
 
