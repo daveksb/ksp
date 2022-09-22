@@ -19,34 +19,35 @@
       <self-service-request-status></self-service-request-status>
     </div>
 
-    <div *ngIf="rewardType.value === '1'">
+    <div *ngIf="rewardType.value === '40'">
       <ksp-council-reward formControlName="rewardDetail"></ksp-council-reward>
     </div>
 
-    <div *ngIf="rewardType.value === '2'">
+    <div *ngIf="rewardType.value === '41'">
       <ksp-thai-teacher-reward
+        [userInfo]="userInfo"
         formControlName="rewardDetail"
       ></ksp-thai-teacher-reward>
     </div>
 
-    <div *ngIf="rewardType.value === '3'">
+    <div *ngIf="rewardType.value === '42'">
       <ksp-best-teacher-reward
         formControlName="rewardDetail"
       ></ksp-best-teacher-reward>
     </div>
 
-    <div *ngIf="rewardType.value === '4'">
+    <div *ngIf="rewardType.value === '43'">
       <ksp-praise-teacher-reward
         formControlName="rewardDetail"
       ></ksp-praise-teacher-reward>
     </div>
 
-    <div *ngIf="rewardType.value === '5'">
+    <div *ngIf="rewardType.value === '44'">
       <ksp-senior-teacher-reward
         formControlName="rewardDetail"
       ></ksp-senior-teacher-reward>
     </div>
-    <div *ngIf="rewardType.value === '6'">
+    <div *ngIf="rewardType.value === '45'">
       <ksp-research-reward formControlName="rewardDetail"></ksp-research-reward>
     </div>
 

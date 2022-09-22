@@ -1,10 +1,11 @@
 <div class="box-header">รายละเอียด:รางวัลครูภาษาไทยดีเด่น</div>
 <form [formGroup]="form">
-  <mat-tab-group class="tab-group" animationDuration="0ms" [selectedIndex]="0">
+  <mat-tab-group class="tab-group" [selectedIndex]="0">
     <mat-tab label="ข้อมูลส่วนตัว">
       <ksp-form-user-info
         [displayMode]="[userInfoType]"
         [isSchoolService]="false"
+        formControlName="userInfo"
       ></ksp-form-user-info>
     </mat-tab>
 
