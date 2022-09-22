@@ -3,17 +3,17 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { FormBuilder } from '@angular/forms';
-import { LicenseRequestService as RequestLicenseService } from '@ksp/shared/service';
 import { SchoolRequest } from '@ksp/shared/interface';
 import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
 import { SelfServiceRequestSubType } from '@ksp/shared/constant';
+import { SelfRequestService } from '@ksp/shared/service';
 
 @Component({
   selector: 'self-service-license-request-foreign',
   templateUrl: './license-request-foreign.component.html',
   styleUrls: ['./license-request-foreign.component.scss'],
 })
-export class LicenseRequestForeignComponent implements OnInit {
+export class LicenseRequestForeignComponent {
   headerGroup = ['Issue Date', 'Form ID'];
   title = 'TEACHING LICENSE APPLICATION FORM';
 
@@ -26,11 +26,9 @@ export class LicenseRequestForeignComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private requestService: RequestLicenseService,
+    private requestService: SelfRequestService,
     private route: ActivatedRoute
   ) {}
-
-  ngOnInit(): void {}
 
   cancel() {
     this.router.navigate(['/home']);
@@ -50,7 +48,7 @@ export class LicenseRequestForeignComponent implements OnInit {
     completeDialog.componentInstance.saved.subscribe((res) => {
       if (res) {
         const payload = this.createRequest('0');
-        this.requestService.requestLicense(payload).subscribe((res) => {
+        this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res.returncode === '00') {
             this.router.navigate(['/home']);
@@ -62,7 +60,7 @@ export class LicenseRequestForeignComponent implements OnInit {
     completeDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         const payload = this.createRequest('1');
-        this.requestService.requestLicense(payload).subscribe((res) => {
+        this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res.returncode === '00') {
             this.router.navigate(['/license', 'payment-channel']);

@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
-import { map, Observable, shareReplay } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LicenseRequestService {
+export class SelfRequestService {
   constructor(private http: HttpClient) {}
 
-  requestLicense(form: any): Observable<any> {
+  createRequest(form: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/kspself/requestinsert`, form);
   }
 }

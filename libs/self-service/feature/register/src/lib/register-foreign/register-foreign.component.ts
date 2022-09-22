@@ -1,21 +1,25 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'ksp-register-foreign',
+  //  selector: 'ksp-register-foreign',
   templateUrl: './register-foreign.component.html',
   styleUrls: ['./register-foreign.component.scss'],
 })
-export class RegisterForeignComponent implements OnInit {
-  constructor(private router: Router) {}
+export class RegisterForeignComponent {
+  form = this.fb.group({
+    teachercouncilidno: [],
+    passportno: [],
+  });
 
-  ngOnInit(): void {}
+  constructor(private router: Router, private fb: FormBuilder) {}
 
   submit() {
-    this.router.navigate(['/', 'register', 'en-step-1']);
+    this.router.navigate(['/register', 'en-step-1']);
   }
 
   loginPage() {
-    this.router.navigate(['/', 'login']);
+    this.router.navigate(['/login']);
   }
 }

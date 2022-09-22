@@ -11,12 +11,20 @@ import { RouterModule, Routes } from '@angular/router';
 import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master-page';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { PraiseTeacherRewardComponent } from './praise-teacher-reward/praise-teacher-reward.component';
-import { SelfRewardRequestComponent } from './self-reward-request/self-reward-request.component';
-import { AddRowButtonComponent } from '@ksp/shared/ui';
+import { RequestRewardMainComponent } from './request-reward-main/request-reward-main.component';
+import {
+  AddRowButtonComponent,
+  LicenseInfoComponent,
+  UniFormBadgeComponent,
+} from '@ksp/shared/ui';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedFormSelfRewardFormModule } from '@ksp/shared/form/self-reward-form';
 import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { MyRewardDetailComponent } from './my-reward-detail/my-reward-detail.component';
+import { MyRewardListComponent } from './my-reward-list/my-reward-list.component';
+import { MatTableModule } from '@angular/material/table';
+import { HonorPinRequestComponent } from './honor-pin-request/honor-pin-request.component';
 
 export const routes: Routes = [
   {
@@ -24,8 +32,20 @@ export const routes: Routes = [
     component: SelfServiceMasterPageComponent,
     children: [
       {
+        path: 'list',
+        component: MyRewardListComponent,
+      },
+      {
         path: 'request',
-        component: SelfRewardRequestComponent,
+        component: RequestRewardMainComponent,
+      },
+      {
+        path: 'detail',
+        component: MyRewardDetailComponent,
+      },
+      {
+        path: 'honor-request',
+        component: HonorPinRequestComponent,
       },
     ],
   },
@@ -43,6 +63,9 @@ export const routes: Routes = [
     SharedFormSelfRewardFormModule,
     AddRowButtonComponent,
     ReactiveFormsModule,
+    LicenseInfoComponent,
+    MatTableModule,
+    UniFormBadgeComponent,
   ],
   declarations: [
     ThaiTeacherRewardComponent,
@@ -51,7 +74,10 @@ export const routes: Routes = [
     SeniorTeacherRewardComponent,
     ResearchRewardComponent,
     CouncilRewardComponent,
-    SelfRewardRequestComponent,
+    RequestRewardMainComponent,
+    MyRewardDetailComponent,
+    MyRewardListComponent,
+    HonorPinRequestComponent,
   ],
   exports: [
     ThaiTeacherRewardComponent,
@@ -60,7 +86,10 @@ export const routes: Routes = [
     SeniorTeacherRewardComponent,
     ResearchRewardComponent,
     CouncilRewardComponent,
-    SelfRewardRequestComponent,
+    RequestRewardMainComponent,
+    MyRewardDetailComponent,
+    MyRewardListComponent,
+    HonorPinRequestComponent,
   ],
 })
 export class SelfServiceFeatureRewardModule {}

@@ -1,12 +1,15 @@
-<ksp-top-nav><span header>หน้าแรก</span></ksp-top-nav>
+<ksp-top-nav [isSelfService]="true"><span header>หน้าแรก</span></ksp-top-nav>
 
 <div class="full-height main__container py-2 px-4">
-  <ksp-uni-form-badge></ksp-uni-form-badge>
-  <!-- <div class="row justify-content-center mb-3">
-    <div class="col-md-6 ps-0 pe-2">
+  <ksp-uni-form-badge [mainTitle]="badgeTitle"></ksp-uni-form-badge>
+  <div class="row justify-content-center mb-3">
+    <div class="col-md-6 p-0">
       <self-service-slideshow></self-service-slideshow>
     </div>
-  </div> -->
+    <!-- <div class="col-md-6 p-0">
+      <self-service-slideshow-second></self-service-slideshow-second>
+    </div> -->
+  </div>
   <self-service-license-info
     [header]="'สถานะใบคำขอ'"
     [subheader1]="'ใบคำขอที่ต้องชำระเงิน'"
@@ -16,7 +19,8 @@
     [date]="'1'"
     [requestNo]="'1'"
     [KuruspaId]="'1'"
-    [personId]="'1'"></self-service-license-info>
+    [personId]="'1'"
+  ></self-service-license-info>
   <br />
 
   <div class="box-header">ค้นหาใบคำขอ</div>
@@ -74,7 +78,8 @@
     <button
       mat-button
       [matMenuTriggerFor]="license"
-      class="btn text-primary border-primary bg-white">
+      class="btn text-primary border-primary bg-white"
+    >
       + สร้างใบคำขอ
     </button>
     <mat-menu #license="matMenu">

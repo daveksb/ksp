@@ -12,7 +12,7 @@ import { VerifyOtpForeignDialogComponent } from '@ksp/self-service/dialog';
 export class RegisterForeignStepTwoComponent {
   constructor(
     public dialog: MatDialog,
-    private router: Router,
+    private router: Router, //private fb: FormBuilder,
     private fb: FormBuilder
   ) {}
 
@@ -27,10 +27,10 @@ export class RegisterForeignStepTwoComponent {
   }
 
   loginPage() {
-    this.router.navigate(['/', 'login']);
+    this.router.navigate(['/login']);
   }
 
   previousPage() {
-    this.router.navigate(['/', 'register', 'step-1']);
+    this.router.navigate(['/register', 'step-1']);
   }
 }

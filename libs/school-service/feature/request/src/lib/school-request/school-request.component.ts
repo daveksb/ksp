@@ -47,7 +47,6 @@ export class SchoolRequestComponent implements OnInit {
 
   pageType = RequestPageType;
 
-  today = thaiDate(new Date());
   countries$!: Observable<any>;
   provinces$!: Observable<any>;
   amphurs1$!: Observable<any>;
@@ -63,14 +62,14 @@ export class SchoolRequestComponent implements OnInit {
 
   requestId!: number;
   requestData: any;
+  requestDate: string = thaiDate(new Date());
 
   systemType = '2'; // school service
   requestType = '3';
   requestSubType = SchoolRequestSubType.ครู; // 1 ไทย 2 ผู้บริหาร 3 ต่างชาติ
   requestLabel = 'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ';
-  requestNo = '';
+  requestNo: string | null = '';
   currentProcess!: number;
-  //processEnum = SchoolRequestProcess;
 
   disableTempSave = true;
   disableSave = true;
@@ -329,7 +328,6 @@ export class SchoolRequestComponent implements OnInit {
 
     //console.log('update payload = ', res);
     this.requestService.updateRequest(res).subscribe((res) => {
-      //console.log('update result = ', res);
       this.backToListPage();
     });
   }
@@ -391,10 +389,11 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   loadRequestFromId(id: number) {
-    this.requestService.getRequestById(id).subscribe((res: any) => {
+    this.requestService.getRequestById(id).subscribe((res) => {
       this.requestData = res;
+      this.requestDate = thaiDate(new Date(`${res.requestdate}`));
       this.requestNo = res.requestno;
-      this.currentProcess = +res.currentprocess;
+      this.currentProcess = Number(res.currentprocess);
       //console.log('current process = ', this.currentProcess);
       this.pathUserInfo(res);
       this.patchAddress(parseJson(res.addressinfo));
@@ -408,6 +407,7 @@ export class SchoolRequestComponent implements OnInit {
 
   patchTeachingInfo(res: any) {
     //console.log('teaching response= ', res);
+    //if (!res.teachingLevel) return;
     const teachingLevel = levels.map((level) => {
       if (res.teachingLevel?.includes(level.value)) {
         return level.value;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -14,6 +14,6 @@ export class VerifyOtpDialogComponent {
   constructor(private router: Router) {}
 
   nextStep() {
-    this.router.navigate(['/', 'register', 'th-step-3']);
+    this.router.navigate(['/register', 'th-step-3']);
   }
 }

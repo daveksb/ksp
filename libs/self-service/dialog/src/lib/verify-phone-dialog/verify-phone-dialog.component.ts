@@ -10,7 +10,7 @@ import { VerifyOtpDialogComponent } from '../verify-otp-dialog/verify-otp-dialog
   templateUrl: './verify-phone-dialog.component.html',
   styleUrls: ['./verify-phone-dialog.component.scss'],
 })
-export class VerifyPhoneDialogComponent implements OnInit {
+export class VerifyPhoneDialogComponent {
   constructor(public dialog: MatDialog) {}
 
   openDialog() {
@@ -18,6 +18,4 @@ export class VerifyPhoneDialogComponent implements OnInit {
       width: '600px',
     });
   }
-
-  ngOnInit(): void {}
 }

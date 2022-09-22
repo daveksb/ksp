@@ -1,38 +1,29 @@
-<ksp-top-nav
+<ksp-top-nav [isSelfService]="true"
   ><span header>ใบอนุญาตประกอบวิชาชีพ</span
   ><span subHeader>ขอขึ้นใบอนุญาตประกอบวิชาชีพ</span></ksp-top-nav
 >
 
 <div class="main__container px-4 py-2">
-  <self-service-license-info
-    [header]="'รายละเอียดใบคำขอ'"
-    [subheader1]="'วันที่ทำรายการ'"
-    [subheader2]="'เลขใบคำขอ'"
-    [subheader3]="'เลขที่ประจำตัวคุรุสภา'"
-    [subheader4]="'เลขประจำตัวประชาชน'"
-    [date]="'10 ตุลาคม 2565'"
-    [requestNo]="'11020-00xxx-xx-x'"
-    [KuruspaId]="'11020-00xxx-xx-x'"
-    [personId]="'3365500066412'"
-  ></self-service-license-info>
-  <br />
-  <self-service-form-upload-image
-    [imgDetail]="'col'"
-  ></self-service-form-upload-image>
-  <br />
-  <form [formGroup]="form">
-    <div class="detail__container">
-      <ksp-form-user-info
-        formControlName="userInfo"
-        [isDarkMode]="true"
-        [prefixList]="prefixList$ | async"
-        [displayMode]="[userInfoType]"
-        [nationList]="nationalitys$ | async"
-        [isSchoolService]="false"
-      >
-      </ksp-form-user-info>
+  <self-service-request-status
+    [showContent3]="false"
+    [showContent6]="false"
+    [showContent7]="false"
+  ></self-service-request-status>
+
+  <div class="row mx-0 border shadow-sm rounded-4 px-2 py-4 bg-white my-4">
+    <div class="col-lg-3">
+      <self-service-form-upload-image
+        [imgDetail]="'col'"
+      ></self-service-form-upload-image>
     </div>
-    <br />
+    <div class="col-md">
+      <ksp-form-user-info
+        [displayMode]="[userInfoType]"
+        [isSchoolService]="false"
+      ></ksp-form-user-info>
+    </div>
+  </div>
+  <form [formGroup]="form">
     <mat-tab-group
       class="tab-group"
       animationDuration="0ms"
