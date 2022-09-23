@@ -7,9 +7,8 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { UniInfoService, UniRequestService } from '@ksp/shared/service';
 import { getCookie, thaiDate } from '@ksp/shared/utility';
-import { DegreeCertRequestService, UniRequestInsertType } from './degree-cert-request.service';
-
 @Component({
   templateUrl: './degree-cert-request.component.html',
   styleUrls: ['./degree-cert-request.component.scss'],
@@ -38,13 +37,14 @@ export class DegreeCertRequestComponent {
     private router: Router,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private degreeCertRequestService: DegreeCertRequestService
+    private uniInfoService: UniInfoService,
+    private uniRequestService: UniRequestService
   ) {
     this.initForm();
   }
   initForm() {
-    this.degreeCertRequestService
-      .universitySelectById(getCookie('uniType'))
+    this.uniInfoService
+      .univerSitySelectById(getCookie('uniType'))
       .subscribe((data) => {
         this.step1Form.setValue({
           step1: {
@@ -73,7 +73,7 @@ export class DegreeCertRequestComponent {
 
     dialogRef.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.degreeCertRequestService
+        this.uniRequestService
           .uniRequestInsert(this._getRequest())
           .subscribe((res) => {
             if (res?.returncode == 99) return;
@@ -82,12 +82,12 @@ export class DegreeCertRequestComponent {
       }
     });
   }
-  private _getRequest(): UniRequestInsertType {
+  private _getRequest():any {
     const step1: any = this.step1Form.value.step1;
     const step2: any = this.step2Form.value.step2;
     const step3: any = this.step3Form.value.step3;
 
-    const reqBody: UniRequestInsertType = {
+    const reqBody:any = {
       uniname: step1?.institutionsName || null,
       unitype: step1?.institutionsGroup || null,
       uniprovince: step1?.provience || null,
@@ -120,13 +120,13 @@ export class DegreeCertRequestComponent {
     };
     return reqBody;
   }
-  showConfirmDialog(requestno?:string) {
+  showConfirmDialog(requestno?: string) {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '375px',
       data: {
         header: 'ยืนยันข้อมูลสำเร็จ',
         content: `วันที่ : ${thaiDate(new Date())}
-        เลขที่ใบคำขอ : ${requestno || "-"}`,
+        เลขที่ใบคำขอ : ${requestno || '-'}`,
         subContent: `กรุณาตรวจสอบสถานะใบคำขอหรือรหัสเข้าใช้งาน
         ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },
