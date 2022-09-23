@@ -7,7 +7,7 @@ import {
   providerFactory,
   validatorMessages,
 } from '@ksp/shared/utility';
-import { uniPermissionList } from 'libs/shared/constant/src/school-request-constant';
+import { uniPermissionList, UserInfoFormType } from 'libs/shared/constant/src/school-request-constant';
 import { Observable } from 'rxjs';
 
 
@@ -17,10 +17,14 @@ import { Observable } from 'rxjs';
   styleUrls: ['./form-register-requester.component.scss'],
   providers: providerFactory(FormRegisterRequesterInfoComponent),
 })
-export class FormRegisterRequesterInfoComponent extends KspFormBaseComponent {
+export class FormRegisterRequesterInfoComponent 
+  extends KspFormBaseComponent 
+  implements OnInit 
+{
   @Input() uniType: Array<any> = [];
   @Input() prefixName: Array<any> = [];
   @Input() occupyList: Array<any> = [];
+  @Input() displayMode!: number[];
   validatorMessages = validatorMessages;
   educationOccupy: any = {
     permission: '',
@@ -28,9 +32,12 @@ export class FormRegisterRequesterInfoComponent extends KspFormBaseComponent {
     affiliation: ''
   };
   permissionList: Array<any> = uniPermissionList;
+
   override form = createUniUserInfoForm(this.fb);
+
   constructor(private fb: FormBuilder) {
     super();
+    console.log(this.form)
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value: any) => {
@@ -38,6 +45,22 @@ export class FormRegisterRequesterInfoComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+
+  ngOnInit(): void {
+    // ถ้าเป็น form คนไทยไม่ต้อง validate field เหล่านี้
+    //console.log('display mode = ', this.displayMode);
+    if (this.displayMode.includes(UserInfoFormType.thai)) {
+      this.form.controls.position.clearValidators();
+    }
+
+    if (this.displayMode.includes(UserInfoFormType.foreign)) {
+      this.form.controls.idcardno.clearValidators();
+      this.form.controls.workphone.clearValidators();
+      this.form.controls.contactphone.clearValidators();
+      this.form.controls.position.clearValidators();
+      this.form.controls.email.clearValidators();
+    }
   }
 
   get idCardNo() {

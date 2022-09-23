@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { UserInfoFormType } from '@ksp/shared/constant';
 import { UniversitySearchComponent } from '@ksp/shared/search';
 import { GeneralInfoService } from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
@@ -20,7 +21,7 @@ export class UniRegisterRequesterComponent implements OnInit {
   prefixName$!: Observable<any>;
   uniType$!: Observable<any>;
   occupyList$!: Observable<any>;
-
+  userInfoFormdisplayMode: number = UserInfoFormType.thai;
   form = this.fb.group({
     universityInfo: [{}],
     requester: [],
@@ -36,11 +37,10 @@ export class UniRegisterRequesterComponent implements OnInit {
   ngOnInit(): void {
       localForage.getItem('registerUserForm').then((res:any) => {
         if (res) {
-          console.log(res)
           this.form.patchValue({
             requester: res,
             universityInfo: {
-              uniid: res.uniid,
+              schoolid: res.schoolid,
               unitype: res.unitype,
               institution: res.institution,
               affiliation: res.affiliation
@@ -54,11 +54,10 @@ export class UniRegisterRequesterComponent implements OnInit {
   }
 
   selectedUniversity(university: any) {
-    console.log(university)
     this.university = university;
     this.form.patchValue({
       universityInfo: {
-        uniid: university.id,
+        schoolid: university.id,
         unitype: university.typeid,
         institution: university.name,
         affiliation: university.nametype
@@ -68,10 +67,11 @@ export class UniRegisterRequesterComponent implements OnInit {
 
   next() {
     const data = this.form.getRawValue();
+    console.log(this.form)
     const { requester, universityInfo } = data as any;
     const userInfo = {
       ...requester,
-      uniid: universityInfo.uniid,
+      schoolid: universityInfo.schoolid,
       unitype: universityInfo.unitype,
       institution: universityInfo.institution,
       affiliation: universityInfo.affiliation

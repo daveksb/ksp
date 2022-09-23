@@ -84,7 +84,6 @@ export function createUniUserInfoForm(fb: FormBuilder) {
       null,
       [Validators.required, Validators.pattern(nameEnPattern)],
     ],
-    sex: [null, Validators.required],
     position: [null, Validators.required],
     email: [null, [Validators.required, Validators.email]],
     contactphone: [
@@ -100,6 +99,46 @@ export function createUniUserInfoForm(fb: FormBuilder) {
     educationOccupy: [null],
     permisson: [null],
     other: [null],
-    unitype: [null, [Validators.required, Validators.pattern(phonePattern)]]
+    unitype: [null, [Validators.required]]
+  });
+}
+
+export function createUniCoordinatorForm(fb: FormBuilder) {
+  return fb.group({
+    id: [],
+    prefixth: [null, Validators.required],
+    firstnameth: [
+      null,
+      [Validators.required, Validators.pattern(nameThPattern)],
+    ],
+    lastnameth: [
+      null,
+      [Validators.required, Validators.pattern(nameThPattern)],
+    ],
+    prefixen: [null, Validators.required],
+    firstnameen: [
+      null,
+      [Validators.required, Validators.pattern(nameEnPattern)],
+    ],
+    lastnameen: [
+      null,
+      [Validators.required, Validators.pattern(nameEnPattern)],
+    ],
+    position: [null, Validators.required],
+    email: [null, [Validators.required, Validators.email]],
+    contactphone: [
+      null,
+      [Validators.required, Validators.pattern(phonePattern)],
+    ],
+    workphone: [null, [Validators.required, Validators.pattern(phonePattern)]],
+    nationality: [null],
+    country: [null],
+    visaclass: [null],
+    visatype: [null],
+    visaenddate: [null],
+    educationOccupy: [null],
+    permisson: [null],
+    other: [null],
+    unitype: [null]
   });
 }

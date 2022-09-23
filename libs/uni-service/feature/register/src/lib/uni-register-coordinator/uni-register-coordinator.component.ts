@@ -60,7 +60,7 @@ export class UniRegisterCoordinatorComponent implements OnInit {
         console.log(res)
         this.form.patchValue({
           universityInfo: {
-            uniid: res.uniid,
+            schoolid: res.schoolid,
             unitype: res.unitype,
             institution: res.institution,
             affiliation: res.affiliation
@@ -102,6 +102,7 @@ export class UniRegisterCoordinatorComponent implements OnInit {
   }
 
   confirm() {
+    console.log(this.form)
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {

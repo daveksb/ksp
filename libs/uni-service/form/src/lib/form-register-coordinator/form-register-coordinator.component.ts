@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import {
-  createUniUserInfoForm,
+  createUniCoordinatorForm,
   providerFactory,
   validatorMessages,
 } from '@ksp/shared/utility';
@@ -18,7 +18,7 @@ export class FormRegisterCoordinatorInfoComponent extends KspFormBaseComponent {
   @Input() uniType: Array<any> = [];
   @Input() prefixName: Array<any> = [];
   @Input() occupyList: Array<any> = [];
-  override form = createUniUserInfoForm(this.fb);
+  override form = createUniCoordinatorForm(this.fb);
   permissionList: Array<any> = uniPermissionList;
   validatorMessages = validatorMessages;
 
@@ -34,10 +34,6 @@ export class FormRegisterCoordinatorInfoComponent extends KspFormBaseComponent {
   }
 
   @Input() formHeader = '';
-
-  get idCardNo() {
-    return this.form.controls.idcardno;
-  }
 
   get firstNameTh() {
     return this.form.controls.firstnameth;

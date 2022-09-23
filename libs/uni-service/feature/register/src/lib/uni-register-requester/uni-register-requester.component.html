@@ -31,15 +31,17 @@
 
         <uni-form-register-requester
           formControlName="requester"
+          [displayMode]="[userInfoFormdisplayMode]"
           [uniType]="uniType$ | async"
           [prefixName]="prefixName$ | async"
           [occupyList]="occupyList$ | async"
         ></uni-form-register-requester>
 
-        <!-- [disableNext]="!form.valid" -->
         <div class="my-2">
           <ksp-bottom-nav
+            [disableNext]="form.invalid"
             [isFirstPage]="true"
+            [disableNextMessage]="'กรุณากรอกข้อมูลให้ครบถ้วน'"
             [showCenterButtons]="false"
             (nextClicked)="next()"
           ></ksp-bottom-nav>

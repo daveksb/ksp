@@ -8,7 +8,7 @@
       <div class="col-6 mb-3">
         <label class="form-label required">สิทธิสำหรับการเข้าใช้งาน</label>
         <select class="form-select" formControlName="permisson">
-          <option selected>กรุณาเลือก</option>
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let permission of permissionList" [value]="permission.value">{{permission.label}}</option>
         </select>
       </div>
@@ -38,7 +38,7 @@
       <div class="col-2">
         <label class="form-label required">คำนำหน้าชื่อภาษาไทย</label>
         <select class="form-select" formControlName="prefixth">
-          <option selected>กรุณาเลือก</option>
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let prefix of prefixName" [value]="prefix.id">{{prefix.name_th}}</option>
         </select>
       </div>
@@ -82,7 +82,7 @@
       <div class="col-2">
         <label class="form-label required">คำนำหน้าชื่ออังกฤษ</label>
         <select class="form-select" formControlName="prefixen">
-          <option selected>กรุณาเลือก</option>
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let prefix of prefixName" [value]="prefix.id">{{prefix.name_en}}</option>
         </select>
       </div>
@@ -126,7 +126,7 @@
       <div class="col-6">
         <label class="form-label required">ตำแหน่งทางการบริหาร</label>
         <select class="form-select" formControlName="position">
-          <option selected>กรุณาเลือก</option>
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let occupy of occupyList" [value]="occupy.eduoccupytype">{{occupy.eduoccupyname}}</option>
         </select>
       </div>
@@ -145,7 +145,7 @@
       <div class="col-6">
         <label class="form-label required">สังกัด</label>
         <select class="form-select" formControlName="unitype">
-          <option selected>กรุณาเลือก</option>
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let unitype of uniType" [value]="unitype.id">{{unitype.name}}</option>
         </select>
       </div>

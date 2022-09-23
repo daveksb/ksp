@@ -59,6 +59,7 @@
           [isLastPage]="true"
           [showCenterButtons]="true"
           [showSaveButton]="true"
+          [disableSaveButton]="form.controls.coordinator.invalid"
           (prevClicked)="prevPage()"
           (cancelClicked)="cancel()"
           (saveClicked)="confirm()"
