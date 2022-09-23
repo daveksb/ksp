@@ -74,7 +74,7 @@ export class LicenseRequestForeignComponent {
     const baseForm = this.fb.group(SchoolRequest);
     const formData: any = this.form.getRawValue();
     const {
-      addresForm,
+      addressForm,
       workplaceForm,
       academicForm,
       grantionLicenseForm,
@@ -99,7 +99,7 @@ export class LicenseRequestForeignComponent {
     const payload = {
       ...replaceEmptyWithNull(userInfo),
       ...{
-        addressinfo: JSON.stringify([addresForm]),
+        addressinfo: JSON.stringify([addressForm]),
       },
       ...{
         schooladdrinfo: JSON.stringify({

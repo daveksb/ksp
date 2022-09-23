@@ -1,11 +1,14 @@
-<div class="row">
-  <div class="col-md-6 mb-2">
-    <label class="form-label required">วัตถุประสงค์</label>
-    <select class="form-select">
-      <option value="null" selected hidden disabled>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+<form [formGroup]="form">
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <label class="form-label required">วัตถุประสงค์</label>
+      <select class="form-select" formControlName="replaceReason">
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option value="1">ถูกทำลาย</option>
+        <option value="2">ชำรุด</option>
+        <option value="3">สูญหาย</option>
+        <option value="4">เปลี่ยนแปลงข้อมูลทางทะเบียน</option>
+      </select>
+    </div>
   </div>
-</div>
+</form>

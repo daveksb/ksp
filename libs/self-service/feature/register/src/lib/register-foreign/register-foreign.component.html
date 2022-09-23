@@ -1,50 +1,52 @@
-<div class="container full-height">
-  <div class="form__container">
-    <div class="fs-2">Register</div>
+<form [formGroup]="form">
+  <div class="container full-height">
+    <div class="form__container">
+      <div class="fs-2">Register</div>
 
-    <div class="form__detail">
-      <div class="detail__container">
-        <div class="detail__container--left">
-          <div class="form-group field__container">
-            <label class="form__detail"
-              >Teachers Council of Thailand ID number</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              formControlName="teachercouncilidno"
-            />
+      <div class="form__detail">
+        <div class="detail__container">
+          <div class="detail__container--left">
+            <div class="form-group field__container">
+              <label class="form__detail"
+                >Teachers Council of Thailand ID number</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                formControlName="idcardno"
+              />
+            </div>
+          </div>
+          <div class="hr-or mt-3 mb-2">
+            <hr />
+            <span class="text-secondary">or</span>
+          </div>
+          <div class="detail__container--right">
+            <div class="form-group field__container">
+              <label for="lastnameFormControlInput" class="form__detail"
+                >Passport No.</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                formControlName="passportno"
+              />
+            </div>
           </div>
         </div>
-        <div class="hr-or mt-3 mb-2">
-          <hr />
-          <span class="text-secondary">or</span>
-        </div>
-        <div class="detail__container--right">
-          <div class="form-group field__container">
-            <label for="lastnameFormControlInput" class="form__detail"
-              >Passport No.</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              formControlName="passportno"
-            />
-          </div>
-        </div>
-      </div>
 
-      <div class="form__footer">
-        <button
-          id="btn-confirm"
-          (click)="submit()"
-          type="submit"
-          class="btn btn-primary"
-        >
-          Submit
-        </button>
-        <div class="label__login" (click)="loginPage()">login</div>
+        <div class="form__footer">
+          <button
+            id="btn-confirm"
+            (click)="submit()"
+            type="submit"
+            class="btn btn-primary"
+          >
+            Submit
+          </button>
+          <div class="label__login" (click)="loginPage()">login</div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</form>

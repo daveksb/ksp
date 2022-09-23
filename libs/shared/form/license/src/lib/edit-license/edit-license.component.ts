@@ -20,16 +20,18 @@ export class EditLicenseComponent
   override form = this.fb.group({
     prefixTh: [],
     prefixEn: [],
-    nameTh: [],
-    nameEn: [],
+    firstnameTh: [],
+    firstnameEn: [],
     lastnameTh: [],
     lastnameEn: [],
-    passport: [],
+    passportNo: [],
     distributeData: [],
   });
 
   @Input() showEditPassport = false;
   @Input() showDistributeData = false;
+  @Input() prefixList: any[] = [];
+  @Input() oldValue: any;
 
   constructor(private fb: FormBuilder) {
     super();
@@ -64,9 +66,9 @@ export class EditLicenseComponent
 export type controlName =
   | 'prefixTh'
   | 'prefixEn'
-  | 'nameTh'
-  | 'nameEn'
+  | 'firstnameTh'
+  | 'firstnameEn'
   | 'lastnameTh'
   | 'lastnameEn'
-  | 'passport'
+  | 'passportNo'
   | 'distributeData';

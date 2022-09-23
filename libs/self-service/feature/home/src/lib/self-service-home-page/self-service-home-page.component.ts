@@ -53,8 +53,10 @@ export class SelfServiceHomePageComponent {
     this.router.navigate(['/', 'renew-license', 'request']);
   }
 
-  foreignRenew() {
-    this.router.navigate(['/', 'renew-license', 'foreign']);
+  foreignRenew(type: SelfServiceRequestSubType) {
+    this.router.navigate(['/', 'renew-license', 'foreign'], {
+      queryParams: { type },
+    });
   }
 
   schManagerRenew() {
