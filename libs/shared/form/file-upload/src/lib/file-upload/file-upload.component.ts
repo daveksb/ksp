@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpEventType } from '@angular/common/http';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { MatIconModule } from '@angular/material/icon';
-import { providerFactory } from '@ksp/shared/utility';
+import { getBase64, providerFactory } from '@ksp/shared/utility';
 import { FileUploadService } from './file-upload.service';
 import { RequestPageType } from '@ksp/shared/constant';
 
@@ -80,14 +80,4 @@ export class FileUploadComponent {
   reset() {
     this.uploadProgress = null;
   }
-}
-export function getBase64(
-  file: File
-): Promise<FileReader['result'] | ProgressEvent<FileReader>> {
-  return new Promise((res, rej) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => res(reader.result);
-    reader.onerror = (error) => rej(error);
-  });
 }
