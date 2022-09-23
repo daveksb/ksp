@@ -1,37 +1,46 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, InjectionToken } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
 
+export interface FileUploadUrls {
+  upload: string;
+  update?: string;
+  download: string;
+  delete: string;
+}
+
+export const File_UPLOAD_URLS = new InjectionToken<FileUploadUrls>('');
 @Injectable({
   providedIn: 'root',
 })
 export class FileUploadService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    @Inject(File_UPLOAD_URLS) private apiURL: FileUploadUrls
+  ) {}
 
   uploadFile(payload: any) {
     return this.http.post(
-      `${environment.apiUrl}/kspstaff/schrequestfileinsert`,
+      `${environment.apiUrl}${this.apiURL.upload}`,
       payload,
       {
         reportProgress: true,
         observe: 'events',
       }
     );
-    //.pipe(finalize(() => this.reset()));
   }
 
   deleteFile(payload: any) {
     return this.http.post(
-      `${environment.apiUrl}/kspstaff/schrequestfiledelete`,
+      `${environment.apiUrl}${this.apiURL.delete}`,
       payload
     );
-    //.pipe(finalize(() => this.reset()));
   }
+
   downloadFile(payload: any) {
     return this.http.post(
-      `${environment.apiUrl}/kspstaff/schrequestfileselectbyid`,
+      `${environment.apiUrl}${this.apiURL.download}`,
       payload
     );
-    //.pipe(finalize(() => this.reset()));
   }
 }

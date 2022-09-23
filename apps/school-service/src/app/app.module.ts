@@ -11,6 +11,13 @@ import {
   CacheInterceptor,
   TokenHandleInterceptor,
 } from '@ksp/shared/interceptor';
+import { File_UPLOAD_URLS, FileUploadUrls } from '@ksp/shared/form/file-upload';
+
+const fileUrls: FileUploadUrls = {
+  upload: '/kspstaff/schrequestfileinsert',
+  delete: '/kspstaff/schrequestfiledelete',
+  download: '/kspstaff/schrequestfileselectbyid',
+};
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,6 +40,10 @@ import {
       provide: HTTP_INTERCEPTORS,
       useClass: CacheInterceptor,
       multi: true,
+    },
+    {
+      provide: File_UPLOAD_URLS,
+      useValue: fileUrls,
     },
   ],
   bootstrap: [AppComponent],

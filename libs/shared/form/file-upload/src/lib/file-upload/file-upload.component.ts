@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpEventType } from '@angular/common/http';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { MatIconModule } from '@angular/material/icon';
-import { providerFactory } from '@ksp/shared/utility';
-import { FileUploadService } from './file-upload.service';
+import { getBase64 } from '@ksp/shared/utility';
 import { RequestPageType } from '@ksp/shared/constant';
+import { FileUploadService } from './file-upload.service';
 
 @UntilDestroy()
 @Component({
@@ -14,7 +14,6 @@ import { RequestPageType } from '@ksp/shared/constant';
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss'],
   imports: [CommonModule, MatIconModule, HttpClientModule],
-  providers: providerFactory(FileUploadComponent),
 })
 export class FileUploadComponent {
   @Input()
@@ -24,7 +23,8 @@ export class FileUploadComponent {
   @Input() systemFileName = '-'; // รายชื่ออ้างอิงในระบบ เช่น 'หนังสือนำส่งจากสถานศึกษา (ฉบับจริงและวันที่ออกหนังสือไม่เกิน 30 วัน)', 'รูปถ่าย 1 นิ้ว'
   @Input() pageType!: RequestPageType; // tab ที่เรียกใช้งาน
   @Input() showUploadedFileName = true;
-  @Input() uniqueTimestamp = '';
+  @Input() requestType: number | null = null; // 1,2 no token required
+  @Input() uniqueTimestamp: string | null = null;
   @Input() uploadType: 'button' | 'link' = 'button';
   @Output() uploadComplete = new EventEmitter<any>();
 
@@ -42,6 +42,7 @@ export class FileUploadComponent {
       systemname: this.systemFileName,
       file: btoa(base64),
       uniquetimpstamp: this.uniqueTimestamp,
+      requesttype: `${this.requestType}`,
     };
     // file.text().then((res) => {
     //   const blob = new Blob([res], { type: file.type });
@@ -80,14 +81,4 @@ export class FileUploadComponent {
   reset() {
     this.uploadProgress = null;
   }
-}
-export function getBase64(
-  file: File
-): Promise<FileReader['result'] | ProgressEvent<FileReader>> {
-  return new Promise((res, rej) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => res(reader.result);
-    reader.onerror = (error) => rej(error);
-  });
 }

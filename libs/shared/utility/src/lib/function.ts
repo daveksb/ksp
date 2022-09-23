@@ -112,3 +112,15 @@ export function checkStatus(processId: number, statusId: number) {
 export function checkRequestType(RequestTypeId: number) {
   return SchoolRequestType.find((s) => s.id === RequestTypeId)?.name;
 }
+
+// get file in base 64 format
+export function getBase64(
+  file: File
+): Promise<FileReader['result'] | ProgressEvent<FileReader>> {
+  return new Promise((res, rej) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => res(reader.result);
+    reader.onerror = (error) => rej(error);
+  });
+}
