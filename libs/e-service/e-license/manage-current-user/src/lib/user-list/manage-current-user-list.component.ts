@@ -41,18 +41,11 @@ export class ManageCurrentUserListComponent implements AfterViewInit {
     console.log('params = ', params);
 
     const payload = {
-      schoolid: params.institution?.schoolid,
-      requestno: params.requestno,
-      firstnameth: params.name,
-      lastnameth: null,
-      requestdate: null,
+      systemtype: '2',
       requesttype: '1',
-      requeststatus: null,
-      currentprocess: '5',
-      schoolname: null,
+      schoolid: '0010201056',
+      // params.institution?.schoolid,
       bureauid: null,
-      offset: '0',
-      row: '10',
     };
 
     this.eRequestService.searchRequest(payload).subscribe((res: any) => {

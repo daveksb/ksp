@@ -11,7 +11,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master-page';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { PraiseTeacherRewardComponent } from './praise-teacher-reward/praise-teacher-reward.component';
-import { SelfRewardRequestComponent } from './self-reward-request/self-reward-request.component';
+import { RequestRewardMainComponent } from './request-reward-main/request-reward-main.component';
 import {
   AddRowButtonComponent,
   LicenseInfoComponent,
@@ -37,7 +37,7 @@ export const routes: Routes = [
       },
       {
         path: 'request',
-        component: SelfRewardRequestComponent,
+        component: RequestRewardMainComponent,
       },
       {
         path: 'detail',
@@ -74,7 +74,7 @@ export const routes: Routes = [
     SeniorTeacherRewardComponent,
     ResearchRewardComponent,
     CouncilRewardComponent,
-    SelfRewardRequestComponent,
+    RequestRewardMainComponent,
     MyRewardDetailComponent,
     MyRewardListComponent,
     HonorPinRequestComponent,
@@ -86,7 +86,7 @@ export const routes: Routes = [
     SeniorTeacherRewardComponent,
     ResearchRewardComponent,
     CouncilRewardComponent,
-    SelfRewardRequestComponent,
+    RequestRewardMainComponent,
     MyRewardDetailComponent,
     MyRewardListComponent,
     HonorPinRequestComponent,

@@ -7,6 +7,17 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Observable, tap } from 'rxjs';
+import {
+  GeneralInfoService,
+  MyInfoService,
+  SelfRequestService,
+} from '@ksp/shared/service';
+import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
+import { SelfRequest } from '@ksp/shared/interface';
+import { SelfServiceRequestSubType } from '@ksp/shared/constant';
+import * as _ from 'lodash';
+import { SchoolRequest } from '@ksp/shared/interface';
 
 @UntilDestroy()
 @Component({
@@ -15,15 +26,13 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   styleUrls: ['./license-edit.component.css'],
 })
 export class LicenseEditComponent implements OnInit {
+  prefixList$!: Observable<any>;
+
   form = this.fb.group({
-    prefixTh: [],
-    prefixEn: [],
-    nameTh: [],
-    nameEn: [],
-    lastnameTh: [],
-    lastnameEn: [],
-    distributeData: [],
+    userInfo: [],
   });
+
+  oldValue: any;
 
   uploadFileList = [
     'สำเนาหนังสือสำคัญการเปลี่ยนชื่อ/ชื่อสกุล/เปลี่ยนหรือเพิ่มคำนำหน้าชื่อ',
@@ -34,7 +43,10 @@ export class LicenseEditComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private generalInfoService: GeneralInfoService,
+    private myInfoService: MyInfoService,
+    private requestService: SelfRequestService
   ) {}
 
   ngOnInit(): void {
@@ -42,15 +54,19 @@ export class LicenseEditComponent implements OnInit {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
       //
     });
+    this.getListData();
+    this.getMyInfo();
   }
 
-  disableControl(evt: any, controlList: controlName[]) {
-    const checked = evt.target.checked;
-    controlList.forEach((i) => {
-      if (checked) {
-        this.form.controls[i].enable();
-      } else {
-        this.form.controls[i].disable();
+  getListData() {
+    this.prefixList$ = this.generalInfoService.getPrefix();
+  }
+
+  getMyInfo() {
+    this.myInfoService.getMyInfo().subscribe((res) => {
+      console.log(res);
+      if (res) {
+        this.oldValue = res;
       }
     });
   }
@@ -59,7 +75,45 @@ export class LicenseEditComponent implements OnInit {
     this.router.navigate(['/', 'home']);
   }
 
+  createRequest(currentProcess: string) {
+    const formData: any = this.form.getRawValue();
+    const { userInfo: rawUserInfo } = formData;
+    const userInfo = toLowercaseProp(rawUserInfo);
+    const type = SelfServiceRequestSubType.ครู;
+
+    const self = new SelfRequest('1', '03', `${type}`);
+    const allowKey = Object.keys(self);
+
+    const {
+      firstnameen,
+      firstnameth,
+      lastnameen,
+      lastnameth,
+      prefixen,
+      prefixth,
+    } = this.oldValue;
+
+    const initialPayload = {
+      ...replaceEmptyWithNull({
+        firstnameen,
+        firstnameth,
+        lastnameen,
+        lastnameth,
+        prefixen,
+        prefixth,
+        ...userInfo,
+      }),
+    };
+    initialPayload.currentprocess = currentProcess;
+    initialPayload.requeststatus = '1';
+    const payload = _.pick({ ...self, ...initialPayload }, allowKey);
+    console.log(payload);
+
+    return payload;
+  }
+
   onConfirm() {
+    console.log(this.form.getRawValue());
     const dialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -70,9 +124,27 @@ export class LicenseEditComponent implements OnInit {
       },
     });
 
+    dialog.componentInstance.saved.subscribe((res) => {
+      if (res) {
+        const payload = this.createRequest('0');
+        this.requestService.createRequest(payload).subscribe((res) => {
+          console.log('request result = ', res);
+          if (res?.returncode === '00') {
+            this.router.navigate(['/home']);
+          }
+        });
+      }
+    });
+
     dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.onSaveAndRequest();
+        const payload = this.createRequest('1');
+        this.requestService.createRequest(payload).subscribe((res) => {
+          console.log('request result = ', res);
+          if (res.returncode === '00') {
+            this.onSaveAndRequest();
+          }
+        });
       }
     });
   }
