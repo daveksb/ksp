@@ -1,16 +1,19 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { FormMode } from '@ksp/shared/interface';
+import { FormMode, KspFormBaseComponent } from '@ksp/shared/interface';
+import { providerFactory } from '@ksp/shared/utility';
 import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'ksp-step-2-tab-1-b',
   templateUrl: './course-type-b.component.html',
   styleUrls: ['./course-type-b.component.scss'],
+  providers: providerFactory(CourseTypeBComponent),
 })
-export class CourseTypeBComponent implements OnInit {
-  @Input() mode: FormMode = 'edit';
-
+export class CourseTypeBComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
   creditSums: number[] = [0, 0, 0];
   yearSums: number[] = [0, 0, 0, 0, 0, 0];
   planSums: number[] = [0, 0, 0, 0];
@@ -23,7 +26,7 @@ export class CourseTypeBComponent implements OnInit {
     plans: this.fb.array([this.newPlan(1)]),
   };
 
-  form = this.fb.group({
+  override form = this.fb.group({
     subject1GroupName: [''],
     subject2GroupName: [''],
     subject3GroupName: [''],
@@ -31,7 +34,16 @@ export class CourseTypeBComponent implements OnInit {
     ...this.defaultSubject,
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    super();
+    this.subscriptions.push(
+      // any time the inner form changes update the parent of any change
+      this.form?.valueChanges.subscribe((value) => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
+  }
 
   ngOnInit(): void {
     this.addData();
