@@ -129,10 +129,12 @@ export abstract class LicenseFormBaseComponent {
 
   public getMyInfo() {
     this.myInfoService.getMyInfo().subscribe((res) => {
-      this.patchUserInfo(res);
-      this.patchAddress(parseJson(res.addressinfo));
-      if (res.schooladdrinfo) {
-        this.patchWorkplace(parseJson(res.schooladdrinfo));
+      if (res) {
+        this.patchUserInfo(res);
+        this.patchAddress(parseJson(res.addressinfo));
+        if (res.schooladdrinfo) {
+          this.patchWorkplace(parseJson(res.schooladdrinfo));
+        }
       }
     });
   }
