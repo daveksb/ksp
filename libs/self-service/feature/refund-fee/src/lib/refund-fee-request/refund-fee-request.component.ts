@@ -39,6 +39,7 @@ export class RefundFeeRequestComponent implements OnInit {
     this.myInfoService.getMyInfo().subscribe((res) => {
       //console.log('my info = ', res);
       this.userInfo = res;
+      this.form.controls.userInfo.patchValue(<any>this.userInfo);
     });
   }
 
