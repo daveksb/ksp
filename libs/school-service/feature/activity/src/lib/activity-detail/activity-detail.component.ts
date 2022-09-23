@@ -103,11 +103,11 @@ export class ActivityDetailComponent implements OnInit {
     });
   }
 
-  edit(pageType: number, staffId: number) {
+  edit(pageType: any, staffId: number) {
     this.router.navigate(['/', 'activity', 'detail', pageType, staffId]);
   }
 
-  view(pageType: number, staffId: number) {
+  view(pageType: any, staffId: number) {
     this.router.navigate(['/', 'activity', 'detail', pageType, staffId]);
   }
 
