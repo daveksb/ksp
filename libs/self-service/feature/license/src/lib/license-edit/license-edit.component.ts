@@ -7,7 +7,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import {
   GeneralInfoService,
   MyInfoService,
@@ -17,7 +17,6 @@ import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
 import { SelfRequest } from '@ksp/shared/interface';
 import { SelfServiceRequestSubType } from '@ksp/shared/constant';
 import * as _ from 'lodash';
-import { SchoolRequest } from '@ksp/shared/interface';
 
 @UntilDestroy()
 @Component({
@@ -72,7 +71,7 @@ export class LicenseEditComponent implements OnInit {
   }
 
   navigateBack() {
-    this.router.navigate(['/', 'home']);
+    this.router.navigate(['/home']);
   }
 
   createRequest(currentProcess: string) {

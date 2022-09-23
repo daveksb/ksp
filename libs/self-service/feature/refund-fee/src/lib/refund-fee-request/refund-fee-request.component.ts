@@ -9,7 +9,7 @@ import {
 } from '@ksp/shared/dialog';
 import { SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
 import { MyInfoService, SelfRequestService } from '@ksp/shared/service';
-import { parseJson, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
+import { replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
 import * as _ from 'lodash';
 
 @Component({
@@ -53,13 +53,12 @@ export class RefundFeeRequestComponent implements OnInit {
 
     const selectData: any = _.pick(userInfo, allowKey);
     const filledData = { ...self, ...selectData };
-    const { requestdate, ...payload } = replaceEmptyWithNull(filledData);
+    const { id, requestdate, ...payload } = replaceEmptyWithNull(filledData);
 
     const feeRefundInfo = this.form.controls.refundInfo.value;
     //console.log('fee refund info = ', feeRefundInfo);
     payload.feerefundinfo = JSON.stringify(feeRefundInfo);
     payload.birthdate = payload.birthdate.split('T')[0];
-    payload.id = null;
 
     console.log('payload = ', payload);
     this.requestService.createRequest(payload).subscribe((res) => {
