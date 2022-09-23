@@ -8,12 +8,13 @@ import { map, Observable, shareReplay } from 'rxjs';
   providedIn: 'root',
 })
 export class UniInfoService {
+  tokenKey = getCookie('userToken');
   constructor(private http: HttpClient) {}
 
   univerSitySelectById(id: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/kspuni/universityselectbyid`, {
       id,
-      tokenkey: getCookie('userToken'),
+      tokenkey: this.tokenKey,
     });
   }
   searchTypeidUniUniversity(id: any): Observable<any> {
@@ -27,8 +28,14 @@ export class UniInfoService {
   uniRequestDegreeSearch(params: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspuni/unirequestdegreesearch`,
-      { ...params, tokenkey: getCookie('userToken') }
+      { ...params, tokenkey: this.tokenKey }
     );
   }
 
+  uniRequestDegreeCertSelectById(id: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspuni/unirequestdegreecertselectbyid`,
+      { id, tokenkey: this.tokenKey }
+    );
+  }
 }

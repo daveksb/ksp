@@ -15,9 +15,15 @@ export class UniRequestService {
       tokenkey: getCookie('userToken'),
     });
   }
-  uniRequestInsert(params:any): Observable<any> {
+  uniRequestInsert(params: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspuni/unirequestinsert`,
+      params
+    );
+  }
+  uniRequestUpdate(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspuni/unirequestupdate`,
       params
     );
   }
