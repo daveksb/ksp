@@ -2,12 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { ListData } from '@ksp/shared/interface';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { DegreeCertSearchComponent } from '@ksp/shared/search';
+import { UniInfoService } from '@ksp/shared/service';
 import { UniFormBadgeComponent } from '@ksp/shared/ui';
 import { getCookie, stringToThaiDate } from '@ksp/shared/utility';
-import { UniDegreeCertListService } from './uni-degree-cert-list.service';
+import { lastValueFrom, map } from 'rxjs';
 
 @Component({
   templateUrl: './uni-degree-cert-list.component.html',
@@ -27,41 +29,32 @@ export class UniDegreeCertListComponent implements OnInit {
   displayedColumns: string[] = displayedColumns;
   dataSource = new MatTableDataSource<DegreeCertInfo>();
   form = this.fb.group({
-    search: [
-      {
-
-      },
-    ],
+    search: [{}],
   });
+  uniUniversityOption: ListData[] = [];
   constructor(
-    private uniDegreeCertListService: UniDegreeCertListService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private uniInfoService: UniInfoService,
+    private router: Router
   ) {}
   ngOnInit(): void {
-    this.uniDegreeCertListService
-      .universitySelectById(getCookie('uniType'))
-      .subscribe((data) => {
-        this.form.setValue({
-          search: {
-            institutionNumber: data?.universitycode,
-          },
-        });
-      });
+    this.getAll();
   }
   getRequest() {
-    console.log(this.form.controls.search.value);
+    const { institutionNumber } = this.form.controls.search.value as any;
     return {
-      uniid: '22',
+      uniid: institutionNumber,
     };
   }
   search() {
-    this.uniDegreeCertListService
+    this.uniInfoService
       .uniRequestDegreeSearch(this.getRequest())
       .subscribe((res) => {
         if (!res?.datareturn) return;
         this.dataSource.data = res?.datareturn?.map(
           (item: any, index: number) => {
             return {
+              key: item?.id,
               order: ++index,
               degreeId: item?.requestno,
               data: item?.requestdate,
@@ -80,13 +73,36 @@ export class UniDegreeCertListComponent implements OnInit {
       });
   }
   onEdit(rowData: any) {
-    console.log(rowData);
+    this.router.navigate(['/degree-cert', 'request'], {
+      queryParams: {
+        id: rowData?.key,
+      },
+    });
   }
   onPrint(rowData: any) {
     console.log(rowData);
   }
   clear() {
     this.dataSource.data = [];
+  }
+  async getAll() {
+    let resData = await lastValueFrom(
+      this.uniInfoService.univerSitySelectById(getCookie('uniType'))
+    );
+    this.form.setValue({
+      search: {
+        institutionNumber: getCookie('uniId'),
+        institutionName: getCookie('uniType'),
+      },
+    });
+    resData = await lastValueFrom(
+      this.uniInfoService.searchTypeidUniUniversity(resData.typeid).pipe(
+        map((data) => {
+          return data.map(({ id, name }: any) => ({ value: id, label: name }));
+        })
+      )
+    );
+    this.uniUniversityOption = resData;
   }
 }
 
