@@ -12,14 +12,14 @@ import {
   templateUrl: './refund-fee-request.component.html',
   styleUrls: ['./refund-fee-request.component.scss'],
 })
-export class RefundFeeRequestComponent implements OnInit {
-  refundInfo = ['1.สำเนาวุฒิการศึกษา'];
+export class RefundFeeRequestComponent {
+  refundInfo = [{ name: '1.สำเนาวุฒิการศึกษา', fileId: '' }];
   headerGroup = ['วันที่ทำรายการ', 'เลขใบคำขอ'];
   userInfoType = UserInfoFormType.thai;
 
   constructor(private router: Router, public dialog: MatDialog) {}
 
-  ngOnInit(): void {}
+  //ngOnInit(): void {}
 
   save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
@@ -46,7 +46,7 @@ export class RefundFeeRequestComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'home']);
+        this.router.navigate(['/home']);
       }
     });
   }

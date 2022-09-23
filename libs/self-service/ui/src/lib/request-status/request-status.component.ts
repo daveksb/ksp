@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -13,12 +13,11 @@ export class RequestStatusComponent {
   @Input() headerLabel1 = 'วันที่ทำรายการ';
   @Input() headerLabel2 = 'เลขใบคำขอ';
 
-
-  @Input() showContent1 = true;
-  @Input() showContent2 = true;
-  @Input() showContent3 = true;
-  @Input() showContent4 = true;
-  @Input() showContent5 = true;
-  @Input() showContent6 = true;
-  @Input() showContent7 = true;
+  @Input() requestDate = '';
+  @Input() requestNo = '';
+  @Input() licenseNo = '';
+  @Input() kurusapaNo = '';
+  @Input() idcardNo = '';
+  @Input() licenseStartDate = '';
+  @Input() licenseEndDate = '';
 }
