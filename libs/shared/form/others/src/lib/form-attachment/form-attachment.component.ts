@@ -20,6 +20,7 @@ export class FormAttachmentComponent {
   @Input() uniqueTimestamp: string | null = null;
   @Input() requestType: number | null = null;
   @Output() downloadClick = new EventEmitter<any>();
+  @Output() uploadComplete = new EventEmitter<any>();
 
   constructor(
     public dialog: MatDialog,
@@ -61,5 +62,6 @@ export class FormAttachmentComponent {
     const { fileId, fileName } = file;
     group.fileId = fileId;
     group.fileName = fileName;
+    this.uploadComplete.emit(this.groups);
   }
 }
