@@ -39,4 +39,13 @@ export class ERequestService {
         map((data: any) => data.datareturn)
       );
   }
+
+  approveUserRequest(payload: any): Observable<SchoolRequest[]> {
+    return this.http
+      .post(`${environment.apiUrl}/e-service/requestupdatestatus`, payload)
+      .pipe(
+        shareReplay(),
+        map((data: any) => data.datareturn)
+      );
+  }
 }

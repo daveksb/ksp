@@ -12,11 +12,9 @@ export class MyInfoService {
 
   getMyInfo(): Observable<any> {
     const id = getCookie('userId');
-    //const tokenkey = getCookie('userToken');
     return this.http
       .post(`${environment.apiUrl}/kspself/selfmyinfoselectbyidall`, {
         id,
-        //  tokenkey,
       })
       .pipe(
         map((data: any) => data.datareturn?.[0] || {}),

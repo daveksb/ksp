@@ -10,12 +10,6 @@ import { MatDialogModule } from '@angular/material/dialog';
   templateUrl: './verify-otp-foreign-dialog.component.html',
   styleUrls: ['./verify-otp-foreign-dialog.component.scss'],
 })
-export class VerifyOtpForeignDialogComponent implements OnInit {
+export class VerifyOtpForeignDialogComponent {
   constructor(private router: Router) {}
-
-  nextStep() {
-    this.router.navigate(['/', 'register', 'en-step-3']);
-  }
-
-  ngOnInit(): void {}
 }

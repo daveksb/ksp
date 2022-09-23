@@ -24,7 +24,7 @@
               class="form-control"
               type="text"
               disabled
-              placeholder="xxxxx"
+              [placeholder]="universityCode"
             />
           </div>
           <div class="col mb-1">
@@ -33,7 +33,7 @@
               class="form-control"
               type="text"
               disabled
-              placeholder="xxxxx"
+              [placeholder]="uniName"
             />
           </div>
         </div>
@@ -44,7 +44,7 @@
               class="form-control"
               type="text"
               disabled
-              placeholder="xxxxx"
+              [placeholder]="uniAddress"
             />
           </div>
         </div>
@@ -53,6 +53,8 @@
       <ksp-form-foreign-id
         formControlName="foreignStudent"
         [formHeader]="'ข้อมูลนักศึกษาชาวต่างชาติ'"
+        [prefixList]="prefixList$ | async"
+        [countries]="countries$ | async"
       ></ksp-form-foreign-id>
 
       <div class="mt-3 mb-3"><hr /></div>
@@ -76,6 +78,7 @@
     [isFirstPage]="true"
     [isLastPage]="true"
     (saveClicked)="save()"
+    [disableSaveButton]="formValid"
     (cancelClicked)="cancel()"
   >
   </ksp-bottom-nav>

@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
-import { providerFactory } from '@ksp/shared/utility';
+import {
+  createDefaultUserInfoForm,
+  providerFactory,
+} from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-thai-teacher-reward',
@@ -10,12 +13,17 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./thai-teacher-reward.component.scss'],
   providers: providerFactory(ThaiTeacherRewardComponent),
 })
-export class ThaiTeacherRewardComponent
-  extends KspFormBaseComponent
-  implements OnInit
-{
+export class ThaiTeacherRewardComponent extends KspFormBaseComponent {
   userInfoType = UserInfoFormType.thai;
   rewardFiles = ['1. รางวัลอื่นและประกาศเกียรติคุณ'];
+  @Input()
+  set userInfo(value: any) {
+    setTimeout(() => {
+      this.form.controls.userInfo.patchValue(value);
+    }, 0);
+  }
+
+  //public userInfo!: any;
 
   override form = this.fb.group({
     userInfo: [],
@@ -36,6 +44,4 @@ export class ThaiTeacherRewardComponent
       })
     );
   }
-
-  ngOnInit(): void {}
 }
