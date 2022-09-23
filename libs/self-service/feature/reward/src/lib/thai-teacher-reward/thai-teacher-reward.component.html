@@ -5,17 +5,32 @@
       <ksp-form-user-info
         [displayMode]="[userInfoType]"
         [isSchoolService]="false"
-        formControlName="userInfo"
-      ></ksp-form-user-info>
+        [prefixList]="prefixList"
+        formControlName="userInfo"></ksp-form-user-info>
     </mat-tab>
 
     <mat-tab label="ที่อยู่" class="tab-content">
-      <ksp-form-address [isDarkMode]="true">
+      <ksp-form-address
+        formControlName="addressInfo"
+        [isDarkMode]="true"
+        [provinces]="provinces1$ | async"
+        [amphurs]="amphurs1$ | async"
+        [tumbols]="tumbols1$ | async"
+        (provinceChanged)="provinceChanged(1, $event)"
+        (amphurChanged)="amphurChanged(1, $event)">
         <span class="text-primary">ที่อยู่ที่สามารถติดต่อได้</span>
       </ksp-form-address>
       <hr />
       <div class="box-header text-primary">สถานที่ทำงาน</div>
-      <self-service-form-user-workplace></self-service-form-user-workplace>
+      <self-service-form-user-workplace
+        formControlName="workplace"
+        [provinces]="provinces2$ | async"
+        [amphurs]="amphurs2$ | async"
+        [tumbols]="tumbols2$ | async"
+        [bureaus]="bureaus"
+        (provinceChanged)="provinceChanged(2, $event)"
+        (amphurChanged)="amphurChanged(2, $event)">
+      </self-service-form-user-workplace>
       <div class="row">
         <div class="col-md-6 mb-2">
           <label class="form-label">โทรศัพท์</label>
@@ -57,8 +72,7 @@
       <br />
       <ksp-form-attachment
         [groups]="rewardFiles"
-        [titleClass]="'text-primary'"
-      ></ksp-form-attachment>
+        [titleClass]="'text-primary'"></ksp-form-attachment>
     </mat-tab>
   </mat-tab-group>
 </form>
