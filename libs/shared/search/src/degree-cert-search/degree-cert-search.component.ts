@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy } from '@ngneat/until-destroy';
 
@@ -29,7 +29,7 @@ export class DegreeCertSearchComponent extends KspFormBaseComponent {
 
   @Output() searched = new EventEmitter<boolean>();
   @Output() cleared = new EventEmitter<boolean>();
-
+  @Input() uniUniversityOption: ListData[] = [];
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
