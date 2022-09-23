@@ -11,8 +11,6 @@ import { providerFactory } from '@ksp/shared/utility';
 })
 export class TransferKnowledgeInfoComponent extends KspFormBaseComponent {
   transferForm = this.fb.group({
-    standardInfo: [],
-
     subjects: this.fb.array([
       this.fb.group({
         subjectName: [''],
@@ -24,6 +22,7 @@ export class TransferKnowledgeInfoComponent extends KspFormBaseComponent {
   });
 
   override form = this.fb.group({
+    standardInfo: [],
     standards: this.fb.array([this.transferForm]),
   });
 
@@ -40,7 +39,6 @@ export class TransferKnowledgeInfoComponent extends KspFormBaseComponent {
 
   addStandard() {
     const transferForm = this.fb.group({
-      standardInfo: [],
       subjects: this.fb.array([
         this.fb.group({
           subjectName: [''],
