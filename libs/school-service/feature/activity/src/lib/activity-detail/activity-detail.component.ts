@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -25,6 +25,8 @@ export class ActivityDetailComponent implements OnInit {
   staffId!: number;
   staff: any;
   pageType!: number;
+  activityPageMode = activityPageMode;
+  //selectedValue!: number;
 
   form = this.fb.group({
     type: [null, Validators.required],
@@ -53,16 +55,10 @@ export class ActivityDetailComponent implements OnInit {
     this.activityTypes = SelfDevelopActivityTypes;
     this.checkStaffId();
 
-    this.route.paramMap.subscribe((res) => {
-      //this.processType = Number(res.get('type'));
-      //console.log('process type = ', res);
-      this.pageType = Number(res.get('type'));
-      //console.log('process type = ', this.pageType);
+    this.route.paramMap.pipe(untilDestroyed(this)).subscribe((res) => {
+      this.pageType = Number(res.get('pageType'));
+      console.log('process type = ', this.pageType);
     });
-
-    /*     this.form.valueChanges.subscribe((res) => {
-      console.log('res = ', res);
-    }); */
   }
 
   checkStaffId() {
@@ -107,12 +103,12 @@ export class ActivityDetailComponent implements OnInit {
     });
   }
 
-  /* get activityType() {
-    return this.form.controls.activityType;
-  } */
+  edit(pageType: number, staffId: number) {
+    this.router.navigate(['/', 'activity', 'detail', pageType, staffId]);
+  }
 
-  edit(staffId: number, pageType: number) {
-    this.router.navigate(['/', 'activity', 'detail', staffId, pageType]);
+  view(pageType: number, staffId: number) {
+    this.router.navigate(['/', 'activity', 'detail', pageType, staffId]);
   }
 
   cancel() {
@@ -153,30 +149,7 @@ export class ActivityDetailComponent implements OnInit {
   }
 }
 
-/*     this.activityType.valueChanges.subscribe((res) => {
-      this.loadComponent(Number(res));
-    }); */
-
-/*
-const componentList = [
-  ActivityAddDegreeComponent,
-  ActivityDiplomaReceiveComponent,
-  ActivitySeminarComponent,
-  ActivityAcademicArchivementComponent,
-  ActivityLecturerComponent,
-  ActivityWriteBookComponent,
-  ActivityInnovationComponent,
-  ActivityResearchComponent,
-  ActivityRewardComponent,
-  ActivityLectureRegisterComponent,
-  ActivityStudyTourComponent,
-  ActivityLearningMaterialComponent,
-]; */
-
-/*   loadComponent(index: number) {
-    const viewContainerRef = this.myHost.viewContainerRef;
-    viewContainerRef.clear();
-    viewContainerRef.createComponent<DynamicComponent>(componentList[index]);
-  } */
-
-  
+enum activityPageMode {
+  view,
+  edit,
+}

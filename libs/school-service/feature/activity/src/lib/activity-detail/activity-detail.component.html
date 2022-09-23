@@ -49,7 +49,10 @@
       </table>
     </div>
 
-    <div class="bg-light py-2 px-4 mx-3 mt-3" *ngIf="pageType === 2">
+    <div
+      class="bg-light py-2 px-4 mx-3 mt-3"
+      *ngIf="pageType === activityPageMode.view"
+    >
       <div class="box-header">ข้อมูลกิจกรรมพัฒนาตนเอง</div>
 
       <table class="table">
@@ -75,14 +78,14 @@
               <i
                 role="button"
                 class="box-header text-primary bi bi-pencil-square"
-                (click)="edit(staffId, 1)"
+                (click)="edit(activityPageMode.edit, staffId)"
               ></i>
             </td>
             <td>
               <i
                 role="button"
                 class="box-header text-success bi bi-eye"
-                (click)="edit(staffId, 1)"
+                (click)="view(activityPageMode.edit, staffId)"
               ></i>
             </td>
           </tr>
@@ -90,7 +93,7 @@
       </table>
     </div>
 
-    <ng-container *ngIf="pageType === 1">
+    <ng-container *ngIf="pageType === activityPageMode.edit">
       <div class="bg-light py-2 px-4 m-3">
         <form [formGroup]="form">
           <div class="box-header required mb-2">กิจกรรมการพัฒนาตนเอง</div>
@@ -179,12 +182,12 @@
       </div>
 
       <div class="mx-3">
-        <ng-template [ngIf]="selector.value">
+        <ng-container *ngIf="selector.value !== ''">
           <ksp-form-attachment
             title="กรุณาแนบหลักฐานประกอบการปฏิบัติงาน"
             [groups]="attachFiles"
           ></ksp-form-attachment
-        ></ng-template></div
+        ></ng-container></div
     ></ng-container>
   </div>
 </div>
