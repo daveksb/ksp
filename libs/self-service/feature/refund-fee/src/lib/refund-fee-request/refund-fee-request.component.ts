@@ -7,9 +7,10 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { SelfMyInfo } from '@ksp/shared/interface';
-import { MyInfoService } from '@ksp/shared/service';
-import { thaiDate } from '@ksp/shared/utility';
+import { SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
+import { MyInfoService, SelfRequestService } from '@ksp/shared/service';
+import { replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'ksp-refund-fee-request',
@@ -32,7 +33,8 @@ export class RefundFeeRequestComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private myInfoService: MyInfoService
+    private myInfoService: MyInfoService,
+    private requestService: SelfRequestService
   ) {}
 
   ngOnInit(): void {
@@ -43,7 +45,28 @@ export class RefundFeeRequestComponent implements OnInit {
     });
   }
 
-  save() {
+  createRequest() {
+    //const payload = this.form.value;
+    const self = new SelfRequest('1', '30', '1');
+    const allowKey = Object.keys(self);
+    const userInfo = this.form.controls.userInfo.value;
+
+    const selectData: any = _.pick(userInfo, allowKey);
+    const filledData = { ...self, ...selectData };
+    const { id, requestdate, ...payload } = replaceEmptyWithNull(filledData);
+
+    const feeRefundInfo = this.form.controls.refundInfo.value;
+    //console.log('fee refund info = ', feeRefundInfo);
+    payload.feerefundinfo = JSON.stringify(feeRefundInfo);
+    payload.birthdate = payload.birthdate.split('T')[0];
+
+    console.log('payload = ', payload);
+    this.requestService.createRequest(payload).subscribe((res) => {
+      //console.log('res = ', res);
+    });
+  }
+
+  submit() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -53,7 +76,8 @@ export class RefundFeeRequestComponent implements OnInit {
 
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.onCompleted();
+        this.createRequest();
+        //this.onCompleted();
       }
     });
   }

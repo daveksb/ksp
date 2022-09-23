@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -9,10 +9,7 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./transfer-knowledge-info.component.scss'],
   providers: providerFactory(TransferKnowledgeInfoComponent),
 })
-export class TransferKnowledgeInfoComponent
-  extends KspFormBaseComponent
-  implements OnInit
-{
+export class TransferKnowledgeInfoComponent extends KspFormBaseComponent {
   transferForm = this.fb.group({
     standardInfo: [],
 
@@ -40,8 +37,6 @@ export class TransferKnowledgeInfoComponent
       })
     );
   }
-
-  ngOnInit(): void {}
 
   addStandard() {
     const transferForm = this.fb.group({
