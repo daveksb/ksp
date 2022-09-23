@@ -16,4 +16,19 @@ export class UniInfoService {
       tokenkey: getCookie('userToken'),
     });
   }
+  searchTypeidUniUniversity(id: any): Observable<any> {
+    return this.http
+      .get(
+        `${environment.apiUrl}/kspmasterdata/searchtypeiduniuniversity?searchTypeId=${id}`
+      )
+      .pipe(map((res: any) => res?.datareturn));
+  }
+
+  uniRequestDegreeSearch(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspuni/unirequestdegreesearch`,
+      { ...params, tokenkey: getCookie('userToken') }
+    );
+  }
+
 }
