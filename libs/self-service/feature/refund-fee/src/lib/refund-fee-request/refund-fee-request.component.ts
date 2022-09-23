@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
@@ -16,15 +17,21 @@ import { thaiDate } from '@ksp/shared/utility';
   styleUrls: ['./refund-fee-request.component.scss'],
 })
 export class RefundFeeRequestComponent implements OnInit {
-  refundInfo = [{ name: '1.สำเนาวุฒิการศึกษา', fileId: '' }];
+  files = [{ name: '1.สำเนาวุฒิการศึกษา', fileId: '' }];
   headerGroup = ['วันที่ทำรายการ', 'เลขใบคำขอ'];
   userInfoType = UserInfoFormType.thai;
   today = thaiDate(new Date());
   userInfo!: SelfMyInfo;
 
+  form = this.fb.group({
+    userInfo: [],
+    refundInfo: [],
+  });
+
   constructor(
     private router: Router,
     public dialog: MatDialog,
+    private fb: FormBuilder,
     private myInfoService: MyInfoService
   ) {}
 

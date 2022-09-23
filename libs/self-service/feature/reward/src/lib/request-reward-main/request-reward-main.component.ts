@@ -1,16 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { LicenseFormBaseComponent } from '@ksp/self-service/form';
-import { ListData, SelfRequest, UserInfoForm } from '@ksp/shared/interface';
-import {
-  AddressService,
-  EducationDetailService,
-  GeneralInfoService,
-  MyInfoService,
-  SelfRequestService,
-} from '@ksp/shared/service';
+import { ListData, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
+import { MyInfoService, SelfRequestService } from '@ksp/shared/service';
 import { providerFactory, replaceEmptyWithNull } from '@ksp/shared/utility';
 import * as _ from 'lodash';
 
@@ -32,8 +23,7 @@ export class RequestRewardMainComponent {
   ];
 
   rewardTypes: ListData[] = rewardTypes;
-  userInfo: any;
-  //selectedRewardType!: number;
+  myInfo!: SelfMyInfo;
 
   form = this.fb.group({
     rewardType: [0],
@@ -56,7 +46,7 @@ export class RequestRewardMainComponent {
   ngOnInit(): void {
     this.myInfoService.getMyInfo().subscribe((res) => {
       //console.log('my info = ', res);
-      this.userInfo = res;
+      this.myInfo = res;
     });
   }
 
