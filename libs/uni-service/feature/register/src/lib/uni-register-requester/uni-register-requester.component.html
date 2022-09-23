@@ -8,8 +8,8 @@
     <div class="bg-white container-xl">
       <div class="py-2">
         <ksp-request-header-info
-          [requestDate]="'10 ตุลาคม 2565'"
-          [requestNumber]="'112234467876543'"
+          [requestDate]="requestDate"
+          [requestNumber]="requestNo"
         ></ksp-request-header-info>
       </div>
 
@@ -20,15 +20,23 @@
         ></ksp-stepper-nav>
 
         <ksp-university-select
+          formControlName="universityInfo"
           [label1]="'สถาบัน / มหาวิทยาลัย'"
           [label2]="'กลุ่มสถาบัน'"
           [searchType]="'uni'"
+          [schoolName]="'โปรดระบุ'"
+          [bureauName]="'โปรดระบุ'"
+          (selectedUniversity)="selectedUniversity($event)"
         ></ksp-university-select>
 
         <uni-form-register-requester
           formControlName="requester"
+          [uniType]="uniType$ | async"
+          [prefixName]="prefixName$ | async"
+          [occupyList]="occupyList$ | async"
         ></uni-form-register-requester>
 
+        <!-- [disableNext]="!form.valid" -->
         <div class="my-2">
           <ksp-bottom-nav
             [isFirstPage]="true"
