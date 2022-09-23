@@ -44,6 +44,7 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
     AddRowButtonComponent,
     SchoolServiceFormActivityModule,
     SharedFormOthersModule,
+    ReactiveFormsModule,
   ],
   declarations: [
     CouncilEducationComponent,

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -24,6 +24,9 @@ export class ActivityDetailComponent implements OnInit {
   schoolId = '0010201056';
   staffId!: number;
   staff: any;
+  pageType!: number;
+  activityPageMode = activityPageMode;
+  //selectedValue!: number;
 
   form = this.fb.group({
     type: [null, Validators.required],
@@ -52,9 +55,10 @@ export class ActivityDetailComponent implements OnInit {
     this.activityTypes = SelfDevelopActivityTypes;
     this.checkStaffId();
 
-    /*     this.form.valueChanges.subscribe((res) => {
-      console.log('res = ', res);
-    }); */
+    this.route.paramMap.pipe(untilDestroyed(this)).subscribe((res) => {
+      this.pageType = Number(res.get('pageType'));
+      console.log('process type = ', this.pageType);
+    });
   }
 
   checkStaffId() {
@@ -99,9 +103,13 @@ export class ActivityDetailComponent implements OnInit {
     });
   }
 
-  /* get activityType() {
-    return this.form.controls.activityType;
-  } */
+  edit(pageType: any, staffId: number) {
+    this.router.navigate(['/', 'activity', 'detail', pageType, staffId]);
+  }
+
+  view(pageType: any, staffId: number) {
+    this.router.navigate(['/', 'activity', 'detail', pageType, staffId]);
+  }
 
   cancel() {
     this.router.navigate(['/activity', 'list']);
@@ -141,28 +149,7 @@ export class ActivityDetailComponent implements OnInit {
   }
 }
 
-/*     this.activityType.valueChanges.subscribe((res) => {
-      this.loadComponent(Number(res));
-    }); */
-
-/*
-const componentList = [
-  ActivityAddDegreeComponent,
-  ActivityDiplomaReceiveComponent,
-  ActivitySeminarComponent,
-  ActivityAcademicArchivementComponent,
-  ActivityLecturerComponent,
-  ActivityWriteBookComponent,
-  ActivityInnovationComponent,
-  ActivityResearchComponent,
-  ActivityRewardComponent,
-  ActivityLectureRegisterComponent,
-  ActivityStudyTourComponent,
-  ActivityLearningMaterialComponent,
-]; */
-
-/*   loadComponent(index: number) {
-    const viewContainerRef = this.myHost.viewContainerRef;
-    viewContainerRef.clear();
-    viewContainerRef.createComponent<DynamicComponent>(componentList[index]);
-  } */
+enum activityPageMode {
+  view,
+  edit,
+}
