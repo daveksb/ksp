@@ -14,40 +14,12 @@
   </div>
 
   <div [ngSwitch]="formType">
-    <ng-container *ngSwitchCase="'a'">
       <ksp-form-attachment
         [mode]="mode"
         [title]="''"
-        [groups]="uploadFiles1"
+        [groups]="value?.files"
+        [requestType]="1"
+        (uploadComplete)="uploadComplete($event)"
       ></ksp-form-attachment>
-    </ng-container>
-    <ng-container *ngSwitchCase="'b'">
-      <ksp-form-attachment
-        [mode]="mode"
-        [groups]="uploadFiles2"
-        [title]="''"
-      ></ksp-form-attachment>
-    </ng-container>
-    <ng-container *ngSwitchCase="'c'">
-      <ksp-form-attachment
-        [mode]="mode"
-        [groups]="uploadFiles3"
-        [title]="''"
-      ></ksp-form-attachment>
-    </ng-container>
-    <ng-container *ngSwitchCase="'d'">
-      <ksp-form-attachment
-        [mode]="mode"
-        [groups]="uploadFiles4"
-        [title]="''"
-      ></ksp-form-attachment>
-    </ng-container>
-    <ng-container *ngSwitchCase="'e'">
-      <ksp-form-attachment
-        [mode]="mode"
-        [groups]="uploadFiles5"
-        [title]="''"
-      ></ksp-form-attachment>
-    </ng-container>
   </div>
 </div>
