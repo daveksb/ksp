@@ -9,3 +9,4 @@ export * from './lib/institute-type';
 export * from './lib/school-request';
 export * from './lib/self-request';
 export * from './lib/user-info-form';
+export * from './lib/self-myinfo';

@@ -67,18 +67,10 @@ export class RequestRewardMainComponent {
   createRequest() {
     //const payload = this.form.value;
     const self = new SelfRequest('1', `${this.form.value.rewardType}`, '1');
-
-    const data: any = this.form.value.rewardDetail;
-
-    console.log('reward detail = ', data.userInfo);
-
-    const temp = { ...self, ...new UserInfoForm() };
-
     const allowKey = Object.keys(self);
-
-    const payload = _.pick(data.userInfo, allowKey);
-
-    //const { id, requestdate, ...payload } = replaceEmptyWithNull(temp);
+    const form: any = this.form.value.rewardDetail;
+    const filledData = _.pick(form.userInfo, allowKey);
+    const { id, requestdate, ...payload } = replaceEmptyWithNull(filledData);
     console.log('payload = ', payload);
     /*     this.requestService.createRequest(payload).subscribe((res) => {
       console.log('res = ', res);

@@ -6,20 +6,34 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { SelfMyInfo } from '@ksp/shared/interface';
+import { MyInfoService } from '@ksp/shared/service';
+import { thaiDate } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-refund-fee-request',
   templateUrl: './refund-fee-request.component.html',
   styleUrls: ['./refund-fee-request.component.scss'],
 })
-export class RefundFeeRequestComponent {
+export class RefundFeeRequestComponent implements OnInit {
   refundInfo = [{ name: '1.สำเนาวุฒิการศึกษา', fileId: '' }];
   headerGroup = ['วันที่ทำรายการ', 'เลขใบคำขอ'];
   userInfoType = UserInfoFormType.thai;
+  today = thaiDate(new Date());
+  userInfo!: SelfMyInfo;
 
-  constructor(private router: Router, public dialog: MatDialog) {}
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private myInfoService: MyInfoService
+  ) {}
 
-  //ngOnInit(): void {}
+  ngOnInit(): void {
+    this.myInfoService.getMyInfo().subscribe((res) => {
+      //console.log('my info = ', res);
+      this.userInfo = res;
+    });
+  }
 
   save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {

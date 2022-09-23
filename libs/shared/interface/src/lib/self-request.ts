@@ -24,10 +24,3 @@ export class SelfRequest extends SchoolRequest {
     super.subtype = ref3;
   }
 }
-
-// we need ref when creating request
-/* export class SchoolRequestCreate extends SchoolRequest {
-  ref1 : string | null =  null;
-  ref2 : string | null =  null;
-  ref3 : string | null =  null;
-} */

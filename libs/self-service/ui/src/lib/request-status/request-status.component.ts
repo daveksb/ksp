@@ -13,11 +13,11 @@ export class RequestStatusComponent {
   @Input() headerLabel1 = 'วันที่ทำรายการ';
   @Input() headerLabel2 = 'เลขใบคำขอ';
 
-  @Input() requestDate = '';
-  @Input() requestNo = '';
-  @Input() licenseNo = '';
-  @Input() kurusapaNo = '';
-  @Input() idcardNo = '';
-  @Input() licenseStartDate = '';
-  @Input() licenseEndDate = '';
+  @Input() requestDate!: string | null;
+  @Input() requestNo!: string | null;
+  @Input() licenseNo!: string | null;
+  @Input() kurusapaNo!: string | null;
+  @Input() idcardNo!: string | null;
+  @Input() licenseStartDate!: string | null;
+  @Input() licenseEndDate!: string | null;
 }
