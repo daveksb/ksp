@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
@@ -6,6 +7,9 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { SelfMyInfo } from '@ksp/shared/interface';
+import { MyInfoService } from '@ksp/shared/service';
+import { thaiDate } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-refund-fee-request',
@@ -13,13 +17,31 @@ import {
   styleUrls: ['./refund-fee-request.component.scss'],
 })
 export class RefundFeeRequestComponent implements OnInit {
-  refundInfo = ['1.สำเนาวุฒิการศึกษา'];
+  files = [{ name: '1.สำเนาวุฒิการศึกษา', fileId: '' }];
   headerGroup = ['วันที่ทำรายการ', 'เลขใบคำขอ'];
   userInfoType = UserInfoFormType.thai;
+  today = thaiDate(new Date());
+  userInfo!: SelfMyInfo;
 
-  constructor(private router: Router, public dialog: MatDialog) {}
+  form = this.fb.group({
+    userInfo: [],
+    refundInfo: [],
+  });
 
-  ngOnInit(): void {}
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private fb: FormBuilder,
+    private myInfoService: MyInfoService
+  ) {}
+
+  ngOnInit(): void {
+    this.myInfoService.getMyInfo().subscribe((res) => {
+      //console.log('my info = ', res);
+      this.userInfo = res;
+      this.form.controls.userInfo.patchValue(<any>this.userInfo);
+    });
+  }
 
   save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
@@ -46,7 +68,7 @@ export class RefundFeeRequestComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'home']);
+        this.router.navigate(['/home']);
       }
     });
   }
