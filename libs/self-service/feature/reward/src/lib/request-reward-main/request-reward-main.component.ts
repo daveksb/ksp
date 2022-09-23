@@ -45,7 +45,6 @@ export class RequestRewardMainComponent {
 
   ngOnInit(): void {
     this.myInfoService.getMyInfo().subscribe((res) => {
-      //console.log('my info = ', res);
       this.myInfo = res;
     });
   }
@@ -55,16 +54,16 @@ export class RequestRewardMainComponent {
   }
 
   createRequest() {
-    //const payload = this.form.value;
     const self = new SelfRequest('1', `${this.form.value.rewardType}`, '1');
     const allowKey = Object.keys(self);
     const form: any = this.form.value.rewardDetail;
-    const filledData = _.pick(form.userInfo, allowKey);
+    const selectData = _.pick(form.userInfo, allowKey);
+    const filledData = { ...self, ...selectData };
     const { id, requestdate, ...payload } = replaceEmptyWithNull(filledData);
     console.log('payload = ', payload);
-    /*     this.requestService.createRequest(payload).subscribe((res) => {
-      console.log('res = ', res);
-    }); */
+    this.requestService.createRequest(payload).subscribe((res) => {
+      //console.log('res = ', res);
+    });
   }
 }
 

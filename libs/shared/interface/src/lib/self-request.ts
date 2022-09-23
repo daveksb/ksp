@@ -13,7 +13,13 @@ export class SelfRequest extends SchoolRequest {
   rewardresearchinfo: string | null = null; // ข้อมูลผลงานวิจัย
   rewardresearchhistory: string | null = null; // ประวัติการส่งผลงานวิจัย
 
-  constructor(ref1: string, ref2: string, ref3: string) {
+  constructor(
+    ref1: string,
+    ref2: string,
+    ref3: string,
+    process = 1,
+    status = 1
+  ) {
     super();
     super.ref1 = ref1;
     super.ref2 = ref2;
@@ -22,5 +28,8 @@ export class SelfRequest extends SchoolRequest {
     super.systemtype = ref1;
     super.requesttype = ref2;
     super.subtype = ref3;
+
+    super.currentprocess = `${process}`;
+    super.requeststatus = `${status}`;
   }
 }
