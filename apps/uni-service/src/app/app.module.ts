@@ -7,6 +7,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ReactiveFormsModule } from '@angular/forms';
+import { API_URL, FileUploadUrls } from '@ksp/shared/form/file-upload';
+
+const fileUrls: FileUploadUrls = {
+  upload: '/kspuni/unirequestfilesinsert',
+  download: '/kspuni/unirequestfileselectfile',
+  delete: '/kspuni/unirequestfiledelete',
+};
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +26,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: API_URL,
+      useValue: fileUrls,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

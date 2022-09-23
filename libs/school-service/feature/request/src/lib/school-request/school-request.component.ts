@@ -293,6 +293,11 @@ export class SchoolRequestComponent implements OnInit {
       visaenddate: userInfo.visaenddate,
     };
 
+    const tab3 = this.eduFiles.map((file) => file.fileId || null);
+    const tab4 = this.teachingFiles.map((file) => file.fileId || null);
+    const tab5 = this.reasonFiles.map((file) => file.fileId || null);
+    const tab6 = this.attachFiles.map((file) => file.fileId || null);
+
     const payload = {
       ...replaceEmptyWithNull(userInfo),
       ...{ addressinfo: JSON.stringify([formData.addr1, formData.addr2]) },
@@ -301,6 +306,8 @@ export class SchoolRequestComponent implements OnInit {
       ...{ hiringinfo: JSON.stringify(formData.hiringinfo) },
       ...{ visainfo: JSON.stringify(visaInfo) },
       ...{ schooladdrinfo: JSON.stringify(formData.schoolAddr) },
+      ...{ reasoninfo: JSON.stringify(formData.reasoninfo) },
+      ...{ fileinfo: JSON.stringify({ tab3, tab4, tab5, tab6 }) },
     };
 
     baseForm.patchValue(payload);
@@ -352,22 +359,28 @@ export class SchoolRequestComponent implements OnInit {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
       //console.log('userInfo valid = ', this.form.controls.userInfo.valid);
       //console.log('form valid = ', this.form.valid);
-      // formValid + สถานะเป็นสร้างและส่งใบคำขอ, บันทึกชั่วคราวไม่ได้ ส่งใบคำขอไม่ได้
-      if (this.form.valid && this.currentProcess === 2) {
-        this.disableTempSave = true;
-        this.disableSave = true;
-      }
-
-      // formValid + สถานะเป็นสร้างใบคำขอ, บันทึกชั่วคราวได้ ส่งใบคำขอได้
-      if (this.form.valid && this.currentProcess === 1) {
-        this.disableTempSave = false;
-        this.disableSave = false;
-      }
 
       // formValid + ไม่มีหมายเลขใบคำขอ ทำได้ทุกอย่าง
       if (this.form.valid && !this.requestId) {
         this.disableTempSave = false;
         this.disableSave = false;
+      }
+
+      // formValid + สถานะเป็นสร้างใบคำขอ, บันทึกชั่วคราวได้ ส่งใบคำขอได้
+      else if (this.form.valid && this.currentProcess === 1) {
+        this.disableTempSave = false;
+        this.disableSave = false;
+      }
+
+      // formValid + สถานะเป็นสร้างและส่งใบคำขอ, บันทึกชั่วคราวไม่ได้ ส่งใบคำขอไม่ได้
+      else if (this.form.valid && this.currentProcess === 2) {
+        this.disableTempSave = true;
+        this.disableSave = true;
+      }
+      // form invalid
+      else {
+        this.disableTempSave = true;
+        this.disableSave = true;
       }
 
       // มีหมายเลขใบคำขอแล้ว enable ปุ่มยกเลิก
