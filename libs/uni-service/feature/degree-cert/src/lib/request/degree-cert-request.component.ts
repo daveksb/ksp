@@ -2,13 +2,14 @@ import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { UniInfoService, UniRequestService } from '@ksp/shared/service';
 import { getCookie, thaiDate } from '@ksp/shared/utility';
+import { lastValueFrom } from 'rxjs';
 @Component({
   templateUrl: './degree-cert-request.component.html',
   styleUrls: ['./degree-cert-request.component.scss'],
@@ -38,23 +39,24 @@ export class DegreeCertRequestComponent {
     public dialog: MatDialog,
     private fb: FormBuilder,
     private uniInfoService: UniInfoService,
-    private uniRequestService: UniRequestService
+    private uniRequestService: UniRequestService,
+    private activatedRoute: ActivatedRoute,
   ) {
     this.initForm();
   }
-  initForm() {
-    this.uniInfoService
-      .univerSitySelectById(getCookie('uniType'))
-      .subscribe((data) => {
-        this.step1Form.setValue({
-          step1: {
-            institutionsCode: data?.universitycode || '',
-            institutionsGroup: getCookie('uniType') || '',
-            institutionsName: data?.name || '',
-            provience: data?.provinceid || '',
-          },
-        });
-      });
+  async initForm() {
+    const id = this.activatedRoute.snapshot.queryParams['id'];
+    const res = await lastValueFrom(
+      this.uniInfoService.univerSitySelectById(getCookie('uniType'))
+    );
+    this.step1Form.setValue({
+      step1: {
+        institutionsCode: res?.universitycode || '',
+        institutionsGroup: getCookie('uniType') || '',
+        institutionsName: res?.name || '',
+        provience: res?.provinceid || '',
+      },
+    });
   }
   navigateBack() {
     this.router.navigate(['/', 'degree-cert']);
@@ -82,12 +84,22 @@ export class DegreeCertRequestComponent {
       }
     });
   }
-  private _getRequest():any {
+  private _getRequest(): any {
     const step1: any = this.step1Form.value.step1;
     const step2: any = this.step2Form.value.step2;
     const step3: any = this.step3Form.value.step3;
 
-    const reqBody:any = {
+    const reqBody: any = {
+      uniid: getCookie('uniId'),
+      ref1: '3',
+      ref2: '03',
+      ref3: '5',
+      requestprocess: '1',
+      requeststatus: '1',
+      systemtype: '3',
+      requesttype: '3',
+      subtype: '5',
+
       uniname: step1?.institutionsName || null,
       unitype: step1?.institutionsGroup || null,
       uniprovince: step1?.provience || null,
@@ -105,17 +117,39 @@ export class DegreeCertRequestComponent {
       courseapprovedate: step1?.degreeTypeForm?.courseApproveDate || null,
       courseacceptdate: step1?.degreeTypeForm?.courseAcceptDate || null,
       coursedetailtype: step1?.courseDetailType || null,
-      teachinglocation: JSON.stringify(step1?.locations) || null,
-      responsibleunit: JSON.stringify(step1?.institutions) || null,
-      evaluatelocation: JSON.stringify(step1?.locations2) || null,
-      coordinatorinfo: JSON.stringify(step1?.coordinator) || null,
-      coursestructure: JSON.stringify(step2?.plan1?.plans) || null,
-      courseplan: JSON.stringify(step2?.plan1?.subjects) || null,
-      courseteacher: JSON.stringify(step2?.teacher?.teachers) || null,
-      courseinstructor: JSON.stringify(step2?.nitet?.nitets) || null,
-      courseadvisor: JSON.stringify(step2?.advisor?.advisors) || null,
-      processtrainning: JSON.stringify(step3?.training?.rows) || null,
-      processteaching: JSON.stringify(step3?.teaching?.rows) || null,
+      teachinglocation: step1?.locations
+        ? JSON.stringify(step1?.locations)
+        : null,
+      responsibleunit: step1?.institutions
+        ? JSON.stringify(step1?.institutions)
+        : null,
+      evaluatelocation: step1?.locations2
+        ? JSON.stringify(step1?.locations2)
+        : null,
+      coordinatorinfo: step1?.coordinator
+        ? JSON.stringify(step1?.coordinator)
+        : null,
+      coursestructure: step2?.plan1?.plans
+        ? JSON.stringify(step2?.plan1?.plans)
+        : null,
+      courseplan: step2?.plan1?.subjects
+        ? JSON.stringify(step2?.plan1?.subjects)
+        : null,
+      courseteacher: step2?.teacher?.teachers
+        ? JSON.stringify(step2?.teacher?.teachers)
+        : null,
+      courseinstructor: step2?.nitet?.nitets
+        ? JSON.stringify(step2?.nitet?.nitets)
+        : null,
+      courseadvisor: step2?.advisor?.advisors
+        ? JSON.stringify(step2?.advisor?.advisors)
+        : null,
+      processtrainning: step3?.training?.rows
+        ? JSON.stringify(step3?.training?.rows)
+        : null,
+      processteaching: step3?.teaching?.rows
+        ? JSON.stringify(step3?.teaching?.rows)
+        : null,
       tokenkey: getCookie('userToken') || null,
     };
     return reqBody;
@@ -143,10 +177,6 @@ export class DegreeCertRequestComponent {
   }
 
   goForward() {
-    console.log('step1Form', this.step1Form.value);
-    console.log('step2Form', this.step2Form.value);
-    console.log('step3Form', this.step3Form.value);
-
-    // this.stepper?.next();
+    this.stepper?.next();
   }
 }
