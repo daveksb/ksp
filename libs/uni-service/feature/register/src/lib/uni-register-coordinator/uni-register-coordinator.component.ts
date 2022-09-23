@@ -9,7 +9,7 @@ import {
 } from '@ksp/shared/dialog';
 import { UniversitySearchComponent } from '@ksp/shared/search';
 import { EMPTY, Observable, switchMap } from 'rxjs';
-import { GeneralInfoService, UniRequestService } from '@ksp/shared/service';
+import { GeneralInfoService, UniInfoService, UniRequestService } from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
 import { RequestPageType } from '@ksp/shared/constant';
 
@@ -50,7 +50,8 @@ export class UniRegisterCoordinatorComponent implements OnInit {
     public dialog: MatDialog,
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService,
-    private requestService: UniRequestService
+    private requestService: UniRequestService,
+    private uniinfoService: UniInfoService
   ) {}
 
   ngOnInit(): void {
@@ -77,8 +78,8 @@ export class UniRegisterCoordinatorComponent implements OnInit {
       }
     });
     this.prefixName$ = this.generalInfoService.getPrefix();
-    this.uniType$ = this.generalInfoService.getUniversityType();
-    this.occupyList$ = this.generalInfoService.getOccupy();
+    this.uniType$ = this.uniinfoService.getUniversityType();
+    this.occupyList$ = this.uniinfoService.getOccupy();
   }
 
   search() {
@@ -156,7 +157,8 @@ export class UniRegisterCoordinatorComponent implements OnInit {
     });
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        localForage.setItem('registerCoordinatorInfoFormValue', this.form.value);
+        localForage.removeItem('registerUserForm');
+        localForage.removeItem('registerCoordinatorForm');
         this.router.navigate(['/', 'login']);
       }
     });

@@ -10,6 +10,7 @@ import {
   AddressService,
   GeneralInfoService,
   SchoolInfoService,
+  UniInfoService,
 } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 import { BasicInstituteSearchComponent } from '../basic-institute-search/basic-institute-search.component';
@@ -59,6 +60,7 @@ export class UniversitySearchComponent implements OnInit {
     private addressService: AddressService,
     private schoolInfoService: SchoolInfoService,
     private generalInfoService: GeneralInfoService,
+    private uniinfoService: UniInfoService,
     public dialogRef: MatDialogRef<UniversitySearchComponent>
   ) {}
 
@@ -72,7 +74,7 @@ export class UniversitySearchComponent implements OnInit {
     if (this.data.searchType != 'uni') {
       this.bureaus$ = this.generalInfoService.getBureau();
     } else {
-      this.universityType$ = this.generalInfoService.getUniversityType();
+      this.universityType$ = this.uniinfoService.getUniversityType();
     }
   }
 
@@ -110,7 +112,7 @@ export class UniversitySearchComponent implements OnInit {
         offset,
         row,
       }
-      this.generalInfoService.searchUniversity(payload).subscribe((res: any) => {
+      this.uniinfoService.searchUniversity(payload).subscribe((res: any) => {
         this.Data = this.generateAddressShow(res);
         this.payload = payload;
       });
@@ -163,7 +165,7 @@ export class UniversitySearchComponent implements OnInit {
         this.payload = payload;
       });
     } else {
-      this.generalInfoService.searchUniversity(payload).subscribe((res: any) => {
+      this.uniinfoService.searchUniversity(payload).subscribe((res: any) => {
         this.currentPage -= 1;
         this.Data = this.generateAddressShow(res);
         this.payload = payload;
@@ -182,7 +184,7 @@ export class UniversitySearchComponent implements OnInit {
         this.payload = payload;
       });
     } else {
-      this.generalInfoService.searchUniversity(payload).subscribe((res: any) => {
+      this.uniinfoService.searchUniversity(payload).subscribe((res: any) => {
         this.currentPage += 1;
         this.Data = this.generateAddressShow(res);
         this.payload = payload;

@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import { UniversitySearchComponent } from '@ksp/shared/search';
-import { GeneralInfoService } from '@ksp/shared/service';
+import { GeneralInfoService, UniInfoService } from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
 import localForage from 'localforage';
 import { Observable } from 'rxjs';
@@ -31,7 +31,8 @@ export class UniRegisterRequesterComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private generalInfoService: GeneralInfoService
+    private generalInfoService: GeneralInfoService,
+    private uniinfoService: UniInfoService
   ) {}
 
   ngOnInit(): void {
@@ -49,8 +50,8 @@ export class UniRegisterRequesterComponent implements OnInit {
         }
       });
       this.prefixName$ = this.generalInfoService.getPrefix();
-      this.uniType$ = this.generalInfoService.getUniversityType();
-      this.occupyList$ = this.generalInfoService.getOccupy();
+      this.uniType$ = this.uniinfoService.getUniversityType();
+      this.occupyList$ = this.uniinfoService.getOccupy();
   }
 
   selectedUniversity(university: any) {
