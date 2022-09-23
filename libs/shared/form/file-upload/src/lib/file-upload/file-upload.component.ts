@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpEventType } from '@angular/common/http';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { MatIconModule } from '@angular/material/icon';
-import { getBase64, providerFactory } from '@ksp/shared/utility';
-import { FileUploadService } from './file-upload.service';
+import { getBase64 } from '@ksp/shared/utility';
 import { RequestPageType } from '@ksp/shared/constant';
+import { FileUploadService } from './file-upload.service';
 
 @UntilDestroy()
 @Component({
@@ -14,7 +14,6 @@ import { RequestPageType } from '@ksp/shared/constant';
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss'],
   imports: [CommonModule, MatIconModule, HttpClientModule],
-  providers: providerFactory(FileUploadComponent),
 })
 export class FileUploadComponent {
   @Input()

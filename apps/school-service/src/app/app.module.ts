@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { InjectionToken, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
@@ -11,6 +11,13 @@ import {
   CacheInterceptor,
   TokenHandleInterceptor,
 } from '@ksp/shared/interceptor';
+import { API_URL, FileUploadUrls } from '@ksp/shared/form/file-upload';
+
+const fileUrls: FileUploadUrls = {
+  upload: 'kspstaff/schrequestfileinsert',
+  delete: '/kspstaff/schrequestfiledelete',
+  download: '/kspstaff/schrequestfileselectbyid',
+};
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,6 +40,10 @@ import {
       provide: HTTP_INTERCEPTORS,
       useClass: CacheInterceptor,
       multi: true,
+    },
+    {
+      provide: API_URL,
+      useValue: fileUrls,
     },
   ],
   bootstrap: [AppComponent],
