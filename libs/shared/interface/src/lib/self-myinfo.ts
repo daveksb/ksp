@@ -3,6 +3,7 @@ export class SelfMyInfo {
   approveinfo: string | null = null;
   birthdate: string | null = null;
   competencyinfo: string | null = null;
+  contactphone: string | null = null;
   country: string | null = null;
   createdate: string | null = null;
   eduinfo: string | null = null;

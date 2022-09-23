@@ -8,9 +8,14 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
-import { MyInfoService, SelfRequestService } from '@ksp/shared/service';
+import {
+  MyInfoService,
+  SelfRequestService,
+  GeneralInfoService,
+} from '@ksp/shared/service';
 import { replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
 import * as _ from 'lodash';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ksp-refund-fee-request',
@@ -23,6 +28,7 @@ export class RefundFeeRequestComponent implements OnInit {
   userInfoType = UserInfoFormType.thai;
   today = thaiDate(new Date());
   userInfo!: SelfMyInfo;
+  prefixList$!: Observable<any>;
 
   form = this.fb.group({
     userInfo: [],
@@ -34,13 +40,19 @@ export class RefundFeeRequestComponent implements OnInit {
     public dialog: MatDialog,
     private fb: FormBuilder,
     private myInfoService: MyInfoService,
-    private requestService: SelfRequestService
+    private requestService: SelfRequestService,
+    private generalInfoService: GeneralInfoService
   ) {}
 
   ngOnInit(): void {
+    this.prefixList$ = this.generalInfoService.getPrefix();
     this.myInfoService.getMyInfo().subscribe((res) => {
       //console.log('my info = ', res);
-      this.userInfo = res;
+      this.userInfo = {
+        ...res,
+        birthdate: res.birthdate?.split('T')[0] || null,
+        contactphone: res.phone,
+      };
       this.form.controls.userInfo.patchValue(<any>this.userInfo);
     });
   }
@@ -61,9 +73,7 @@ export class RefundFeeRequestComponent implements OnInit {
     payload.birthdate = payload.birthdate.split('T')[0];
 
     console.log('payload = ', payload);
-    this.requestService.createRequest(payload).subscribe((res) => {
-      //console.log('res = ', res);
-    });
+    return payload;
   }
 
   submit() {
@@ -76,8 +86,13 @@ export class RefundFeeRequestComponent implements OnInit {
 
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.createRequest();
-        //this.onCompleted();
+        const payload = this.createRequest();
+        this.requestService.createRequest(payload).subscribe((res) => {
+          //console.log('res = ', res);
+          if (res?.returncode === '00') {
+            this.onCompleted();
+          }
+        });
       }
     });
   }

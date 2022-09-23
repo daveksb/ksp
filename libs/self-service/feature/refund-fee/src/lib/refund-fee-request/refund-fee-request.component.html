@@ -1,25 +1,21 @@
-<ksp-top-nav [isSelfService]="true"
-  ><span header>ขอคืนเงินค่าธรรมเนียม</span></ksp-top-nav
->
+<ksp-top-nav [isSelfService]="true"><span header>ขอคืนเงินค่าธรรมเนียม</span></ksp-top-nav>
 
 <div [formGroup]="form" class="main__container px-4 py-2">
   <self-service-request-status
     [requestDate]="today"
-    [idcardNo]="userInfo && userInfo.idcardno"
-  ></self-service-request-status>
+    [idcardNo]="userInfo && userInfo.idcardno"></self-service-request-status>
   <br />
   <div class="border shadow-sm rounded-4 px-3 py-4 bg-white">
     <ksp-form-user-info
       [displayMode]="[userInfoType]"
       [isSchoolService]="false"
-      formControlName="userInfo"
-    ></ksp-form-user-info>
+      [prefixList]="prefixList$ | async"
+      formControlName="userInfo"></ksp-form-user-info>
   </div>
   <br />
   <div class="border shadow-sm rounded-4 px-3 py-4 bg-white">
     <ksp-form-refund-fee-detail
-      formControlName="refundInfo"
-    ></ksp-form-refund-fee-detail>
+      formControlName="refundInfo"></ksp-form-refund-fee-detail>
   </div>
   <br />
   <ksp-form-attachment [groups]="files" [mode]="'edit'"></ksp-form-attachment>
