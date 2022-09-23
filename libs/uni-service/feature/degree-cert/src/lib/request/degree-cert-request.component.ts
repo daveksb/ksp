@@ -16,17 +16,20 @@ import { lastValueFrom } from 'rxjs';
 })
 export class DegreeCertRequestComponent {
   @ViewChild('stepper') private stepper?: MatStepper;
-
+  id?: string;
   step1DegreeType = '';
 
   step1Form = this.fb.group({
-    step1: [{}, Validators.required],
+    step1: [{}],
   });
   step2Form = this.fb.group({
-    step2: ['', Validators.required],
+    step2: [],
   });
   step3Form = this.fb.group({
-    step3: ['', Validators.required],
+    step3: [],
+  });
+  step4Form = this.fb.group({
+    step4: [],
   });
   disabledInputsStep1: any = {
     institutionsGroup: true,
@@ -40,12 +43,19 @@ export class DegreeCertRequestComponent {
     private fb: FormBuilder,
     private uniInfoService: UniInfoService,
     private uniRequestService: UniRequestService,
-    private activatedRoute: ActivatedRoute,
+    private activatedRoute: ActivatedRoute
   ) {
     this.initForm();
   }
   async initForm() {
-    const id = this.activatedRoute.snapshot.queryParams['id'];
+    this.id = this.activatedRoute.snapshot.queryParams['id'];
+    let uniRequestDegree;
+    if (this.id) {
+      uniRequestDegree = await lastValueFrom(
+        this.uniInfoService.uniRequestDegreeCertSelectById(this.id)
+      );
+    }
+    console.log(uniRequestDegree);
     const res = await lastValueFrom(
       this.uniInfoService.univerSitySelectById(getCookie('uniType'))
     );
@@ -73,14 +83,20 @@ export class DegreeCertRequestComponent {
       },
     });
 
-    dialogRef.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        this.uniRequestService
-          .uniRequestInsert(this._getRequest())
-          .subscribe((res) => {
-            if (res?.returncode == 99) return;
-            this.showConfirmDialog(res?.requestno);
-          });
+    dialogRef.componentInstance.confirmed.subscribe(async (e) => {
+      if (e) {
+        const res = await (async () => {
+          if (this.id)
+            return await lastValueFrom(
+              this.uniRequestService.uniRequestUpdate(this._getRequest())
+            );
+          return await lastValueFrom (this.uniRequestService.uniRequestInsert(
+            this._getRequest()
+          ));
+        })();
+
+        if (res?.returncode == 99) return;
+        this.showConfirmDialog(res?.requestno);
       }
     });
   }
@@ -88,6 +104,7 @@ export class DegreeCertRequestComponent {
     const step1: any = this.step1Form.value.step1;
     const step2: any = this.step2Form.value.step2;
     const step3: any = this.step3Form.value.step3;
+    const step4: any = this.step4Form.value.step4;
 
     const reqBody: any = {
       uniid: getCookie('uniId'),
@@ -100,6 +117,7 @@ export class DegreeCertRequestComponent {
       requesttype: '3',
       subtype: '5',
 
+      attachfiles: step4 ? JSON.stringify(step4?.files) : null,
       uniname: step1?.institutionsName || null,
       unitype: step1?.institutionsGroup || null,
       uniprovince: step1?.provience || null,
@@ -152,6 +170,10 @@ export class DegreeCertRequestComponent {
         : null,
       tokenkey: getCookie('userToken') || null,
     };
+    if (this.id) {
+      reqBody['id'] = this.id;
+    }
+
     return reqBody;
   }
   showConfirmDialog(requestno?: string) {
