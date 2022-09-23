@@ -8,14 +8,14 @@ export interface FileUploadUrls {
   delete: string;
 }
 
-export const API_URL = new InjectionToken<FileUploadUrls>('');
+export const File_UPLOAD_URLS = new InjectionToken<FileUploadUrls>('');
 @Injectable({
   providedIn: 'root',
 })
 export class FileUploadService {
   constructor(
     private http: HttpClient,
-    @Inject(API_URL) private apiURL: FileUploadUrls
+    @Inject(File_UPLOAD_URLS) private apiURL: FileUploadUrls
   ) {}
 
   uploadFile(payload: any) {

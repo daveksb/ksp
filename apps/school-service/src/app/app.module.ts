@@ -1,4 +1,4 @@
-import { InjectionToken, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
@@ -11,10 +11,10 @@ import {
   CacheInterceptor,
   TokenHandleInterceptor,
 } from '@ksp/shared/interceptor';
-import { API_URL, FileUploadUrls } from '@ksp/shared/form/file-upload';
+import { File_UPLOAD_URLS, FileUploadUrls } from '@ksp/shared/form/file-upload';
 
 const fileUrls: FileUploadUrls = {
-  upload: 'kspstaff/schrequestfileinsert',
+  upload: '/kspstaff/schrequestfileinsert',
   delete: '/kspstaff/schrequestfiledelete',
   download: '/kspstaff/schrequestfileselectbyid',
 };
@@ -42,7 +42,7 @@ const fileUrls: FileUploadUrls = {
       multi: true,
     },
     {
-      provide: API_URL,
+      provide: File_UPLOAD_URLS,
       useValue: fileUrls,
     },
   ],
