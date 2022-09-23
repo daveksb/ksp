@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
 import { map, Observable, shareReplay } from 'rxjs';
 import { getCookie } from '@ksp/shared/utility';
+import { SelfMyInfo } from '@ksp/shared/interface';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ import { getCookie } from '@ksp/shared/utility';
 export class MyInfoService {
   constructor(private http: HttpClient) {}
 
-  getMyInfo(): Observable<any> {
+  getMyInfo(): Observable<SelfMyInfo> {
     const id = getCookie('userId');
     return this.http
       .post(`${environment.apiUrl}/kspself/selfmyinfoselectbyidall`, {

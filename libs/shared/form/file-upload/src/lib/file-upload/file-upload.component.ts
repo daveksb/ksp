@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpEventType } from '@angular/common/http';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -23,7 +23,8 @@ export class FileUploadComponent {
   @Input() systemFileName = '-'; // รายชื่ออ้างอิงในระบบ เช่น 'หนังสือนำส่งจากสถานศึกษา (ฉบับจริงและวันที่ออกหนังสือไม่เกิน 30 วัน)', 'รูปถ่าย 1 นิ้ว'
   @Input() pageType!: RequestPageType; // tab ที่เรียกใช้งาน
   @Input() showUploadedFileName = true;
-  @Input() uniqueTimestamp = '';
+  @Input() requestType: number | null = null; // 1,2 no token required
+  @Input() uniqueTimestamp: string | null = null;
   @Input() uploadType: 'button' | 'link' = 'button';
   @Output() uploadComplete = new EventEmitter<any>();
 
@@ -41,6 +42,7 @@ export class FileUploadComponent {
       systemname: this.systemFileName,
       file: btoa(base64),
       uniquetimpstamp: this.uniqueTimestamp,
+      requesttype: `${this.requestType}`,
     };
     // file.text().then((res) => {
     //   const blob = new Blob([res], { type: file.type });

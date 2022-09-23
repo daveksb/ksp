@@ -4,6 +4,7 @@ import { environment } from '@ksp/shared/environment';
 
 export interface FileUploadUrls {
   upload: string;
+  update?: string;
   download: string;
   delete: string;
 }
