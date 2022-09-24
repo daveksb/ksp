@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SelfServiceRequestSubType } from '@ksp/shared/constant';
+import { SelfRequest } from '@ksp/shared/interface';
+import { SelfRequestService } from '@ksp/shared/service';
 
 @Component({
   selector: 'ksp-self-service-home-page',
@@ -14,13 +16,25 @@ export class SelfServiceHomePageComponent {
   “ปรับแก้ไข / เพิ่มเติม” กดเพื่อตรวจสอบ`,
   ];
 
-  constructor(private router: Router) {}
+  dataSource = new MatTableDataSource<SelfRequest>();
+
+  constructor(
+    private router: Router,
+    private requestService: SelfRequestService
+  ) {}
 
   displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<PersonLicense>();
 
   search() {
-    this.dataSource.data = data;
+    const payload = {
+      staffid: '4',
+      systemtype: '1',
+      requesttype: null,
+    };
+    this.requestService.searchMyRequests(payload).subscribe((res) => {
+      console.log('res= ', res);
+      this.dataSource.data = res;
+    });
   }
 
   clear() {
@@ -98,70 +112,12 @@ export class SelfServiceHomePageComponent {
 
 export const column = [
   'order',
-  'licenseNumber',
-  'submitDate',
+  'requestno',
+  'requestdate',
   'name',
   'paymentStatus',
   'listStatus',
   'process',
   'edit',
   'print',
-];
-
-export interface PersonLicense {
-  order: number;
-  licenseNumber: string;
-  submitDate: string;
-  name: string;
-  paymentStatus: string;
-  listStatus: string;
-  process: string;
-}
-
-export const data: PersonLicense[] = [
-  {
-    order: 1,
-    licenseNumber: '110200051214',
-    submitDate: '10/10/2022',
-    name: 'พรทิพย์ นาคปรก',
-    paymentStatus: 'รอชำระ',
-    listStatus: 'ผ่าน',
-    process: 'พิมพ์ในอนุณาต',
-  },
-  {
-    order: 2,
-    licenseNumber: '110200051214',
-    submitDate: '10/10/2022',
-    name: 'พรทิพย์ นาคปรก',
-    paymentStatus: 'ชำระแล้ว',
-    listStatus: 'ขอเอกสารเพิ่มเติม',
-    process: 'ส่งตรวจสอบ',
-  },
-  {
-    order: 3,
-    licenseNumber: '110200051214',
-    submitDate: '10/10/2022',
-    name: 'พรทิพย์ นาคปรก',
-    paymentStatus: 'ชำระแล้ว',
-    listStatus: 'ขอเอกสารเพิ่มเติม',
-    process: 'ส่งตรวจสอบ',
-  },
-  {
-    order: 4,
-    licenseNumber: '110200051214',
-    submitDate: '10/10/2022',
-    name: 'พรทิพย์ นาคปรก',
-    paymentStatus: 'ชำระแล้ว',
-    listStatus: 'ขอเอกสารเพิ่มเติม',
-    process: 'ส่งตรวจสอบ',
-  },
-  {
-    order: 5,
-    licenseNumber: '110200051214',
-    submitDate: '10/10/2022',
-    name: 'พรทิพย์ นาคปรก',
-    paymentStatus: 'ชำระแล้ว',
-    listStatus: 'ขอเอกสารเพิ่มเติม',
-    process: 'ส่งตรวจสอบ',
-  },
 ];
