@@ -86,7 +86,16 @@ export class BestTeacherRewardComponent
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
-        this.onChange(value);
+        this.onChange({
+          ...value,
+          workplace: {
+            ...(value.workplace as any),
+            phone: value.phone,
+            fax: value.fax,
+            email: value.email,
+            website: value.website,
+          },
+        });
         this.onTouched();
       })
     );

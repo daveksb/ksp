@@ -49,6 +49,11 @@
 
     <div *ngIf="rewardType.value === '43'">
       <ksp-praise-teacher-reward
+        [userInfo]="myInfo"
+        [addressInfo]="addressInfo"
+        [workplaceInfo]="workplaceInfo"
+        [prefixList]="prefixList$ | async"
+        [bureaus]="bureau$ | async"
         formControlName="rewardDetail"></ksp-praise-teacher-reward>
     </div>
 
