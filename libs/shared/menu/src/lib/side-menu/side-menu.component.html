@@ -17,7 +17,7 @@
     <ng-container *ngFor="let menu of menuConfig">
       <li *ngIf="!menu.subMenu?.length">
         <a
-          routerLink="/{{ menu.path }}"
+          [routerLink]="menu.path"
           [queryParams]="menu.params"
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="{ exact: true }"
@@ -36,7 +36,7 @@
           class="dropdown-toggle collapsed d-flex justify-content-between me-2"
         >
           <div class="d-flex me-1">
-            <img src="{{ menu.icon }}" class="icon__sidenav" />
+            <img [src]="menu.icon" class="icon__sidenav" />
             <span>{{ menu.label }}</span>
           </div>
         </a>
@@ -50,7 +50,7 @@
             <li>
               <a
                 [routerLink]="menu1.subMenu ? null : menu1.path"
-                [queryParams]="menu1.params"
+                [queryParams]="menu1.params ?? null"
                 routerLinkActive="active-link"
                 [routerLinkActiveOptions]="{ exact: false }"
                 class="sub-menu"

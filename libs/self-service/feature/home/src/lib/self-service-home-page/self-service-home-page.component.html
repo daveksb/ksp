@@ -158,24 +158,26 @@
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="order">
         <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-        <td mat-cell *matCellDef="let element">{{ element.order }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="licenseNumber">
+      <ng-container matColumnDef="requestno">
         <th mat-header-cell *matHeaderCellDef>เลขที่คำขอ</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.licenseNumber }}
+          {{ element.requestno }}
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="submitDate">
+      <ng-container matColumnDef="requestdate">
         <th mat-header-cell *matHeaderCellDef>วันที่ยื่นคำขอ</th>
-        <td mat-cell *matCellDef="let element">{{ element.submitDate }}</td>
+        <td mat-cell *matCellDef="let element">
+          {{ element.requestdate | date }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.firstnameth }}</td>
       </ng-container>
 
       <ng-container matColumnDef="paymentStatus">

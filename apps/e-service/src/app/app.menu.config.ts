@@ -9,15 +9,15 @@ export const ethicsMenu: MenuConfig[] = [
     subMenuName: 'ethics',
     subMenu: [
       {
-        path: 'accusation',
+        path: '/accusation',
         label: 'บันทีกการกล่าวหา/กล่าวโทษ',
       },
       {
-        path: 'investigation',
+        path: '/investigation',
         label: 'บันทีกการสืบสวนข้อเท็จจริง',
       },
       {
-        path: 'inquiry',
+        path: '/inquiry',
         label: 'บันทีกการสอบสวน',
       },
     ],
@@ -25,7 +25,7 @@ export const ethicsMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'เผยแพร่การกล่าวหา/กล่าวโทษ',
-    path: 'publish/list',
+    path: '/publish/list',
     subMenuName: 'publish',
   },
   /* {
@@ -36,15 +36,15 @@ export const ethicsMenu: MenuConfig[] = [
     subMenuName: 'report',
     subMenu: [
       {
-        path: 'accusation',
+        path: '/accusation',
         label: 'รายงานสถิติการกล่าวหา/กล่าวโทษ',
       },
       {
-        path: 'investigation',
+        path: '/investigation',
         label: 'รายงานสถิติการสืบสวน',
       },
       {
-        path: 'inquiry',
+        path: '/inquiry',
         label: 'รายงานสถิติการสอบสวน',
       },
     ],
@@ -81,15 +81,15 @@ export const standardMenu: MenuConfig[] = [
     subMenuName: 'gradute-list',
     subMenu: [
       {
-        path: 'aa',
+        path: '/aa',
         label: 'รายการใบคำขอส่งรายชื่อผู้เข้าศึกษา',
       },
       {
-        path: 'bb',
+        path: '/bb',
         label: 'รายการใบคำขอส่งรายชื่อผู้สำเร็จการศึกษา',
       },
       {
-        path: 'cc',
+        path: '/cc',
         label: 'พิจารณารับข้อมูลผู้เข้าและผู้สำเร็จการศึกษา',
       },
     ],
@@ -102,15 +102,15 @@ export const standardMenu: MenuConfig[] = [
     subMenuName: 'request-knowledge',
     subMenu: [
       {
-        path: 'aa',
+        path: '/aa',
         label: 'รายการใบคำขอเทียบโอนความรู้',
       },
       {
-        path: 'bb',
+        path: '/bb',
         label: 'บัญชีรายชื่อและนำเสนอขอเทียบโอนความรู้',
       },
       {
-        path: 'cc',
+        path: '/cc',
         label: 'พิจารณารับรองและพิมพ์วุฒิบัตร',
       },
     ],
@@ -123,15 +123,15 @@ export const standardMenu: MenuConfig[] = [
     subMenuName: 'request-degree',
     subMenu: [
       {
-        path: 'aa',
+        path: '/aa',
         label: 'รายการใบคำรับรองคุณวุฒิทางการศึกษา',
       },
       {
-        path: 'bb',
+        path: '/bb',
         label: 'พิจารณารับรองคุณวุฒิทางการศึกษา',
       },
       {
-        path: 'cc',
+        path: '/cc',
         label: 'บัญชีรายชื่อและพิมพ์หนังสือคุณวุฒิทางการศึกษา',
       },
     ],
@@ -139,12 +139,12 @@ export const standardMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'นำเข้าและบันทึกผลการทดสอบ',
-    path: 'import-test',
+    path: '/import-test',
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'นำเข้าและบันทึกผลการประเมินสมรรถนะทางวิชาชีพครู',
-    path: 'import-performance',
+    path: '/import-performance',
   },
   /* {
     icon: 'assets/images/icon-sidenav/card.svg',
@@ -154,19 +154,19 @@ export const standardMenu: MenuConfig[] = [
     subMenuName: 'data',
     subMenu: [
       {
-        path: 'aa',
+        path: '/aa',
         label: 'ทะเบียนรหัสรับรองปริญญาและประกาศนียบัตร',
       },
       {
-        path: 'bb',
+        path: '/bb',
         label: 'ทะเบียนรายชื่อนักศึกษาเข้าเรียนและจบการศึกษา',
       },
       {
-        path: 'cc',
+        path: '/cc',
         label: 'ทะเบียนผู้ผ่านการทดสอบ',
       },
       {
-        path: 'cc',
+        path: '/cc',
         label: 'ทะเบียนผู้ผ่านการประเมินสมรรถนะทางวิชาชีพครู',
       },
     ],
@@ -179,11 +179,11 @@ export const standardMenu: MenuConfig[] = [
     subMenuName: 'report',
     subMenu: [
       {
-        path: 'aa',
+        path: '/aa',
         label: 'รายงานยื่นใบคำขอ(แยกตามประเภท)',
       },
       {
-        path: 'bb',
+        path: '/bb',
         label: ' รายงานรายชื่อปริญญาและประกาศนียบัตรที่ได้รับการรับรอง',
       },
     ],
@@ -197,7 +197,7 @@ export const standardMenu: MenuConfig[] = [
     subMenuName: 'user-manage',
     subMenu: [
       {
-        path: 'aa',
+        path: '/aa',
         label: 'ผู้ใช้งานระบบบริการสถาบันผลิตครู (Uni Service)',
       },
     ],
@@ -214,11 +214,11 @@ export const licenseMenu: MenuConfig[] = [
     subMenuName: 'license-thai',
     subMenu: [
       {
-        path: 'license/list',
+        path: '/license/list',
         label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
       },
       {
-        path: 'license/approve-list',
+        path: '/license/approve-list',
         label: 'รับรองใบอนุญาตประกอบวิชาชีพ',
       },
     ],
@@ -231,11 +231,11 @@ export const licenseMenu: MenuConfig[] = [
     subMenuName: 'license-foreign',
     subMenu: [
       {
-        path: 'license/list',
+        path: '/license/list',
         label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
       },
       {
-        path: 'license/approve-list',
+        path: '/license/approve-list',
         label: 'รับรองใบอนุญาตประกอบวิชาชีพ',
       },
     ],
@@ -248,11 +248,11 @@ export const licenseMenu: MenuConfig[] = [
     subMenuName: 'renew-thai',
     subMenu: [
       {
-        path: 'license/list',
+        path: '/license/list',
         label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
       },
       {
-        path: 'license/approve-list',
+        path: '/license/approve-list',
         label: 'รับรองใบอนุญาตประกอบวิชาชีพ',
       },
     ],
@@ -265,11 +265,11 @@ export const licenseMenu: MenuConfig[] = [
     subMenuName: 'temp-thai',
     subMenu: [
       {
-        path: 'license/list',
+        path: '/license/list',
         label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
       },
       {
-        path: 'license/approve-list',
+        path: '/license/approve-list',
         label: 'รับรองใบอนุญาตประกอบวิชาชีพ',
       },
     ],
@@ -287,12 +287,12 @@ export const licenseMenu: MenuConfig[] = [
     subMenuName: 'temp-thai',
     subMenu: [
       {
-        path: 'temp-license/list',
+        path: '/temp-license/list',
         label: 'ตรวจสอบใบคำขออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
-        //params: { subtype: 1 },
+        params: { subtype: 1 },
       },
       {
-        path: 'temp-license/approve-list',
+        path: '/temp-license/approve-list',
         label: 'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
         //params: { subtype: 1 },
       },
@@ -306,12 +306,12 @@ export const licenseMenu: MenuConfig[] = [
     subMenuName: 'temp-foreign',
     subMenu: [
       {
-        path: 'temp-license/list',
+        path: '/temp-license/list',
         label: 'รายการใบคำขออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
         params: { subtype: 5 },
       },
       {
-        path: 'temp-license/approve-list',
+        path: '/temp-license/approve-list',
         label: 'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
         params: { subtype: 5 },
       },
@@ -325,11 +325,11 @@ export const licenseMenu: MenuConfig[] = [
     subMenuName: 'edit-thai',
     subMenu: [
       {
-        path: 'foreign-license/list',
+        path: '/foreign-license/list',
         label: 'ตรวจสอบใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
       },
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'พิจารณารับรองเลขคุรุสภาสำหรับชาวต่างชาติ',
       },
     ],
@@ -342,11 +342,11 @@ export const licenseMenu: MenuConfig[] = [
     subMenuName: 'edit-foreign',
     subMenu: [
       {
-        path: 'foreign-license/list',
+        path: '/foreign-license/list',
         label: 'ตรวจสอบใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
       },
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'พิจารณารับรองเลขคุรุสภาสำหรับชาวต่างชาติ',
       },
     ],
@@ -359,11 +359,11 @@ export const licenseMenu: MenuConfig[] = [
     subMenuName: 'xxx',
     subMenu: [
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'รายการใบคำขอ',
       },
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'พิจารณา',
       },
     ],
@@ -376,11 +376,11 @@ export const licenseMenu: MenuConfig[] = [
     subMenuName: 'xxx',
     subMenu: [
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'รายการใบคำขอ',
       },
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'พิจารณา',
       },
     ],
@@ -393,11 +393,11 @@ export const licenseMenu: MenuConfig[] = [
     subMenuName: 'xxx',
     subMenu: [
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'รายการใบคำขอ',
       },
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'พิจารณา',
       },
     ],
@@ -410,11 +410,11 @@ export const licenseMenu: MenuConfig[] = [
     subMenuName: 'foreign-id',
     subMenu: [
       {
-        path: 'foreign-license/list',
+        path: '/foreign-license/list',
         label: 'ตรวจสอบใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
       },
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'พิจารณารับรองเลขคุรุสภาสำหรับชาวต่างชาติ',
       },
     ],
@@ -427,11 +427,11 @@ export const licenseMenu: MenuConfig[] = [
     subMenuName: 'activities',
     subMenu: [
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'รายการ',
       },
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'พิจารณา',
       },
     ],
@@ -444,11 +444,11 @@ export const licenseMenu: MenuConfig[] = [
     subMenuName: 'activities',
     subMenu: [
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'บันทึก',
       },
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'พิจารณา',
       },
     ],
@@ -461,11 +461,11 @@ export const licenseMenu: MenuConfig[] = [
     subMenuName: 'activities',
     subMenu: [
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'รายการ',
       },
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'ตรวจสอบ',
       },
     ],
@@ -478,11 +478,11 @@ export const licenseMenu: MenuConfig[] = [
     subMenuName: 'user-approvement',
     subMenu: [
       {
-        path: 'approve-new-user',
+        path: '/approve-new-user',
         label: 'ระบบบริการด้วยตนเอง (self Service)',
       },
       {
-        path: 'approve-new-user',
+        path: '/approve-new-user',
         label: 'ระบบบริการหน่วยงานทางการศึกษา (School Service)',
       },
     ],
@@ -495,11 +495,11 @@ export const licenseMenu: MenuConfig[] = [
     subMenuName: 'user-management',
     subMenu: [
       {
-        path: 'manage-current-user',
+        path: '/manage-current-user',
         label: 'ผู้ใช้งานระบบบริการด้วยตนเอง (self Service)',
       },
       {
-        path: 'manage-current-user',
+        path: '/manage-current-user',
         label: 'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
       },
     ],
@@ -514,11 +514,11 @@ export const professionalMenu: MenuConfig[] = [
     subMenuName: 'xxx',
     subMenu: [
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'รายการ',
       },
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'พิจารณา',
       },
     ],
@@ -530,11 +530,11 @@ export const professionalMenu: MenuConfig[] = [
     subMenuName: 'xxx',
     subMenu: [
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'รายการ',
       },
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'พิจารณา',
       },
     ],
@@ -546,11 +546,11 @@ export const professionalMenu: MenuConfig[] = [
     subMenuName: 'xxx',
     subMenu: [
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'รายการ',
       },
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'พิจารณา',
       },
     ],
@@ -562,11 +562,11 @@ export const professionalMenu: MenuConfig[] = [
     subMenuName: 'xxx',
     subMenu: [
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'รายการ',
       },
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'พิจารณา',
       },
     ],
@@ -578,11 +578,11 @@ export const professionalMenu: MenuConfig[] = [
     subMenuName: 'xxx',
     subMenu: [
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'รายการ',
       },
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'พิจารณา',
       },
     ],
@@ -594,11 +594,11 @@ export const professionalMenu: MenuConfig[] = [
     subMenuName: 'xxx',
     subMenu: [
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'รายการ',
       },
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'พิจารณา',
       },
     ],
@@ -611,11 +611,11 @@ export const professionalMenu: MenuConfig[] = [
     subMenuName: 'professional',
     subMenu: [
       {
-        path: 'one-school-one-innovation/list',
+        path: '/one-school-one-innovation/list',
         label: 'รายการใบคำขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม',
       },
       {
-        path: 'one-school-one-innovation/approve',
+        path: '/one-school-one-innovation/approve',
         label: 'พิจารณารางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม',
       },
     ],
@@ -631,15 +631,15 @@ export const refundFeeMenu: MenuConfig[] = [
     subMenuName: 'pay',
     subMenu: [
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'รายการใบเสร็จรับเงิน',
       },
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'รายการใบนำส่งเงิน',
       },
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'รายการใบประกอบใบนำส่งเงิน',
       },
     ],
@@ -652,15 +652,15 @@ export const refundFeeMenu: MenuConfig[] = [
     subMenuName: 'refund',
     subMenu: [
       {
-        path: 'refund/list',
+        path: '/refund/list',
         label: 'รายการใบขอคืนค่าธรรมเนียม',
       },
       {
-        path: 'refund/detail',
+        path: '/refund/detail',
         label: 'บัญชีรายชื่อและอนุมัติการคืนค่าธรรมเนียม',
       },
       {
-        path: 'refund/approve',
+        path: '/refund/approve',
         label: 'ตรวจสอบและบันทึกสถานะการคืนค่าธรรมเนียม',
       },
     ],
@@ -673,15 +673,15 @@ export const refundFeeMenu: MenuConfig[] = [
     subMenuName: 'import',
     subMenu: [
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'นำเข้าและบันทึก (ธนาคารกรุงไทย)',
       },
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'นำเข้าและบันทึก (Counter Service) ',
       },
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'นำเข้าและบันทึก (ไปรษณีย์ไทย) ',
       },
     ],

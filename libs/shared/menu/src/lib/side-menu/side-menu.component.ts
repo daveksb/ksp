@@ -14,8 +14,12 @@ export class SideMenuComponent {
   constructor(private router: Router) {}
 
   goThirdLevelMenu(url: string, queryParams: string) {
-    this.router.navigate([url], {
-      queryParams: { type: queryParams },
-    });
+    if (queryParams) {
+      this.router.navigate([url], {
+        queryParams: { type: queryParams },
+      });
+    } else {
+      this.router.navigate([url]);
+    }
   }
 }
