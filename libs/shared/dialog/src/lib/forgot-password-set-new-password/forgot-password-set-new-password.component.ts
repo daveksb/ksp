@@ -1,18 +1,38 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { Title } from '@angular/platform-browser';
+import {
+  AbstractControl,
+  FormBuilder,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
+import { validatorMessages } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-forgot-password-set-new-password',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './forgot-password-set-new-password.component.html',
   styleUrls: ['./forgot-password-set-new-password.component.scss'],
 })
 export class ForgotPasswordSetNewPasswordComponent {
-  constructor(public dialog: MatDialog) {}
+  @Output() confirmed = new EventEmitter<any>();
+  form = this.fb.group(
+    {
+      newPassword: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+    },
+    {
+      validators: [Validation.match('newPassword', 'confirmPassword')],
+    }
+  );
+
+  constructor(public dialog: MatDialog, private fb: FormBuilder) {}
 
   cancel() {
     this.dialog.closeAll();
@@ -20,18 +40,42 @@ export class ForgotPasswordSetNewPasswordComponent {
 
   nextStep() {
     this.dialog.closeAll();
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
-      data: {
-        title: `ไม่พบข้อมูลของท่านในระบบ`,
-        subTitle: `กรุณาเลือกตรวจสอบอีกครั้งเพื่อตรวจสอบ
-          หรือยกเลิกหากท่านไม่ต้องการทำรายการต่อ`,
-        btnLabel: `ตรวจสอบอีกครั้ง`,
-      },
-    });
+    this.confirmed.emit(this.form.value.newPassword);
+  }
 
-    dialogRef.afterClosed().subscribe((result) => {
-      //console.log(`Dialog result: ${result}`);
-    });
+  get confirmPasswordError() {
+    const errors = this.form.controls.confirmPassword.errors as any;
+    if (
+      (this.form.controls.confirmPassword.dirty ||
+        this.form.controls.confirmPassword.touched) &&
+      errors?.matching
+    )
+      return validatorMessages.passwordNotMatching;
+    return null;
+  }
+  get disabledSubmit() {
+    return (
+      !this.form.controls.confirmPassword.valid || !this.form.controls.newPassword.valid
+    );
+  }
+}
+
+export default class Validation {
+  static match(controlName: string, checkControlName: string): ValidatorFn {
+    return (controls: AbstractControl) => {
+      const control = controls.get(controlName);
+      const checkControl = controls.get(checkControlName);
+
+      if (checkControl?.errors && !checkControl.errors['matching']) {
+        return null;
+      }
+
+      if (control?.value !== checkControl?.value) {
+        controls.get(checkControlName)?.setErrors({ matching: true });
+        return { matching: true };
+      } else {
+        return null;
+      }
+    };
   }
 }
