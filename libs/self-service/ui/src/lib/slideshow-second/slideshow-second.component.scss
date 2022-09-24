@@ -1,3 +1,23 @@
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  width: fit-content;
+  padding: 16px 32px;
+  background-color: #eeffff;
+  background-size: cover;
+  margin: auto;
+}
+
+.title {
+  color: #e06511;
+  font-size: 24px;
+}
+
+.detail {
+  color: #656565;
+  font-size: 14px;
+}
+
 .dot {
   height: 8px;
   width: 8px;
@@ -5,32 +25,4 @@
   background-color: #bbb;
   border-radius: 50%;
   display: inline-block;
-}
-
-.slideshow-container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.slideshow-content {
-  width: 30rem;
-  height: 15rem;
-}
-
-/* tablet */
-@media only screen and (max-width: 992px) {
-  .slideshow-content {
-    width: auto;
-    height: auto;
-  }
-}
-
-/* mobile */
-@media only screen and (max-width: 768px) {
-  .slideshow-content {
-    width: auto;
-    height: auto;
-  }
 }

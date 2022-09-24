@@ -1,4 +1,4 @@
-.dot {
+/* .dot {
   height: 8px;
   width: 8px;
   margin: 0 4px;
@@ -19,7 +19,6 @@
   height: 15rem;
 }
 
-/* tablet */
 @media only screen and (max-width: 992px) {
   .slideshow-content {
     width: auto;
@@ -27,10 +26,34 @@
   }
 }
 
-/* mobile */
 @media only screen and (max-width: 768px) {
   .slideshow-content {
     width: auto;
     height: auto;
   }
+}
+ */
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  width: fit-content;
+  padding: 16px 32px;
+  background-image: url('/assets/images/self-card-bg.png');
+  background-size: cover;
+  margin: auto;
+}
+
+.title {
+  color: #e06511;
+  font-size: 24px;
+}
+
+.dot {
+  height: 8px;
+  width: 8px;
+  margin: 0 4px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
 }
