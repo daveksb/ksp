@@ -21,7 +21,7 @@
           [queryParams]="menu.params"
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="{ exact: true }"
-          ><div class="menu__content">
+          ><div class="d-flex">
             <img src="{{ menu.icon }}" class="icon__sidenav" />{{ menu.label }}
           </div></a
         >
@@ -33,11 +33,14 @@
           role="button"
           href="#{{ menu.subMenuName }}"
           aria-expanded="false"
-          class="dropdown-toggle collapsed"
-          ><div class="menu__content">
-            <img src="{{ menu.icon }}" class="icon__sidenav" />{{ menu.label }}
-          </div></a
+          class="dropdown-toggle collapsed d-flex justify-content-between me-2"
         >
+          <div class="d-flex me-1">
+            <img src="{{ menu.icon }}" class="icon__sidenav" />
+            <span>{{ menu.label }}</span>
+          </div>
+        </a>
+
         <ul
           [ngClass]="{ show: menu.isExpanded }"
           class="collapse list-unstyled list-style-type"
