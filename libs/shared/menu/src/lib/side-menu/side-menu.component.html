@@ -43,30 +43,45 @@
           class="collapse list-unstyled list-style-type"
           id="{{ menu.subMenuName }}"
         >
-          <ng-container *ngFor="let subMenu of menu.subMenu">
+          <ng-container *ngFor="let menu1 of menu.subMenu">
             <li>
               <a
-                [routerLink]="subMenu.hasThirdLevelMenu ? null : subMenu.path"
-                [queryParams]="subMenu.params"
+                [routerLink]="menu1.subMenu ? null : menu1.path"
+                [queryParams]="menu1.params"
                 routerLinkActive="active-link"
                 [routerLinkActiveOptions]="{ exact: false }"
                 class="sub-menu"
                 mat-button
-                [matMenuTriggerFor]="beforeMenu"
-                >{{ subMenu.label }}</a
+                [matMenuTriggerFor]="menu1.subMenu?.length ? topMenu : null"
+                >{{ menu1.label }}</a
               >
-              <mat-menu
-                #beforeMenu="matMenu"
-                xPosition="before"
-                yPosition="below"
-              >
-                <ng-container *ngFor="let menu of subMenu.subMenu; index as i">
+              <mat-menu #topMenu="matMenu" xPosition="before" yPosition="below">
+                <ng-container *ngFor="let menu2 of menu1.subMenu; index as i">
                   <button
                     mat-menu-item
-                    (click)="goThirdLevelMenu(menu.path, menu.params)"
+                    [matMenuTriggerFor]="
+                      menu2.subMenu?.length ? teacherType : null
+                    "
                   >
-                    {{ menu.label }}
+                    {{ menu2.label }}
                   </button>
+
+                  <mat-menu
+                    #teacherType="matMenu"
+                    xPosition="before"
+                    yPosition="below"
+                  >
+                    <ng-container
+                      *ngFor="let menu3 of menu2.subMenu; index as i"
+                    >
+                      <button
+                        mat-menu-item
+                        (click)="goThirdLevelMenu(menu3.path, menu3.params)"
+                      >
+                        {{ menu3.label }}
+                      </button>
+                    </ng-container>
+                  </mat-menu>
                 </ng-container>
               </mat-menu>
             </li>
