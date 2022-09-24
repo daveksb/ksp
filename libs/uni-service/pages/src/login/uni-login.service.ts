@@ -13,4 +13,11 @@ export class UniLoginService {
       form
     );
   }
+
+  forgotPassword(form: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspuni/uniuserupdatepass`,
+      form
+    );
+  }
 }

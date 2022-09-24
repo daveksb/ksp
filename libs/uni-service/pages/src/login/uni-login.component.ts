@@ -11,7 +11,7 @@ import {
 import { LoginFormComponent } from '@ksp/shared/form/login';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UniLoginService } from './uni-login.service';
-import { lastValueFrom } from 'rxjs';
+import {lastValueFrom} from 'rxjs';
 import { setCookie } from '@ksp/shared/utility';
 
 @Component({
@@ -67,8 +67,35 @@ export class UniLoginComponent {
   }
 
   forgetPassword() {
-    this.dialog.open(ForgotPasswordSearchPersonComponent, {
+    const dialogRef = this.dialog.open(ForgotPasswordSearchPersonComponent, {
       width: '350px',
+    });
+    dialogRef.componentInstance.confirmed.subscribe(async (res: any) => {
+      this.submitForgotPassword(res);
+    });
+  }
+  async submitForgotPassword(formData: any) {
+    const forgotPassword = await lastValueFrom(
+      this.uniLoginService.forgotPassword(formData)
+    );
+    if (forgotPassword?.returncode === '98') {
+      this.showErrorDialog(formData);
+    }
+  }
+  showErrorDialog(formData: any) {
+    const dialogErrorRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: `ไม่พบข้อมูลของท่านในระบบ`,
+        subTitle: `กรุณาเลือกตรวจสอบอีกครั้งเพื่อตรวจสอบ
+          หรือยกเลิกหากท่านไม่ต้องการทำรายการต่อ`,
+        btnLabel: `ตรวจสอบอีกครั้ง`,
+      },
+    });
+    dialogErrorRef.componentInstance.confirmed.subscribe((res: any) => {
+      if (res) {
+        this.submitForgotPassword(formData);
+      }
     });
   }
 }
