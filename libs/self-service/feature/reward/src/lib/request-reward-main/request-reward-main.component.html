@@ -20,7 +20,11 @@
     </div>
 
     <div *ngIf="rewardType.value === '40'">
-      <ksp-council-reward formControlName="rewardDetail"></ksp-council-reward>
+      <ksp-council-reward
+        formControlName="rewardDetail"
+        [userInfo]="myInfo"
+        [addressInfo]="addressInfo"
+        [prefixList]="prefixList$ | async"></ksp-council-reward>
     </div>
 
     <div *ngIf="rewardType.value === '41'">

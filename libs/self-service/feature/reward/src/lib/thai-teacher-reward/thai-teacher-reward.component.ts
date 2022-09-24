@@ -21,6 +21,7 @@ export class ThaiTeacherRewardComponent
 {
   userInfoType = UserInfoFormType.thai;
   rewardFiles = ['1. รางวัลอื่นและประกาศเกียรติคุณ'];
+
   @Input()
   set userInfo(value: any) {
     setTimeout(() => {

@@ -72,7 +72,11 @@ export class RequestRewardMainComponent implements OnInit {
 
       const addresses = parseJson(res.addressinfo);
       if (addresses?.length) {
-        this.addressInfo = addresses[0];
+        if (this.form.value.rewardType === 41) {
+          this.addressInfo = addresses[0];
+        } else {
+          this.addressInfo = addresses;
+        }
       }
 
       if (res.schooladdrinfo) {
@@ -166,6 +170,15 @@ export class RequestRewardMainComponent implements OnInit {
       }),
       ...(form.teachingInfo && {
         teachinginfo: JSON.stringify(form.teachingInfo),
+      }),
+      ...(form.rewardEthicInfo && {
+        rewardethicinfo: JSON.stringify(form.rewardEthicInfo),
+      }),
+      ...(form.rewardSuccessInfo && {
+        rewardsuccessinfo: JSON.stringify(form.rewardSuccessInfo),
+      }),
+      ...(form.rewardDetailInfo && {
+        rewarddetailinfo: JSON.stringify(form.rewardDetailInfo),
       }),
     };
     const { id, requestdate, ...payload } = replaceEmptyWithNull(filledData);
