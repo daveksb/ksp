@@ -51,11 +51,17 @@ export class ThaiTeacherRewardComponent
   @Input() bureaus: any[] = [];
 
   provinces1$!: Observable<any>;
-  provinces2$!: Observable<any>;
   amphurs1$!: Observable<any>;
   tumbols1$!: Observable<any>;
+  provinces2$!: Observable<any>;
   amphurs2$!: Observable<any>;
   tumbols2$!: Observable<any>;
+  provinces3$!: Observable<any>;
+  amphurs3$!: Observable<any>;
+  tumbols3$!: Observable<any>;
+  provinces4$!: Observable<any>;
+  amphurs4$!: Observable<any>;
+  tumbols4$!: Observable<any>;
 
   //public userInfo!: any;
 
@@ -63,10 +69,14 @@ export class ThaiTeacherRewardComponent
     userInfo: [],
     addressInfo: [],
     workplace: [],
-    teacherInfo: [],
-    educationInfo: [],
-    workingInfo: [],
+    rewardTeacherInfo: [],
+    eduInfo: [],
+    hiringInfo: [],
     teachingInfo: [],
+    phone: [],
+    fax: [],
+    email: [],
+    website: [],
   });
 
   constructor(private fb: FormBuilder, private addressService: AddressService) {
@@ -83,6 +93,8 @@ export class ThaiTeacherRewardComponent
   ngOnInit(): void {
     this.provinces1$ = this.addressService.getProvinces();
     this.provinces2$ = this.provinces1$;
+    this.provinces3$ = this.provinces1$;
+    this.provinces4$ = this.provinces1$;
   }
 
   provinceChanged(addrType: number, evt: any) {
@@ -92,6 +104,10 @@ export class ThaiTeacherRewardComponent
         this.amphurs1$ = this.addressService.getAmphurs(province);
       } else if (addrType === 2) {
         this.amphurs2$ = this.addressService.getAmphurs(province);
+      } else if (addrType === 3) {
+        this.amphurs3$ = this.addressService.getAmphurs(province);
+      } else if (addrType === 4) {
+        this.amphurs4$ = this.addressService.getAmphurs(province);
       }
     }
   }
@@ -103,7 +119,17 @@ export class ThaiTeacherRewardComponent
         this.tumbols1$ = this.addressService.getTumbols(amphur);
       } else if (addrType === 2) {
         this.tumbols2$ = this.addressService.getTumbols(amphur);
+      } else if (addrType === 3) {
+        this.tumbols3$ = this.addressService.getTumbols(amphur);
+      } else if (addrType === 4) {
+        this.tumbols4$ = this.addressService.getTumbols(amphur);
       }
     }
+  }
+
+  onSameAddress() {
+    this.amphurs4$ = this.amphurs3$;
+    this.tumbols4$ = this.tumbols3$;
+    this.provinces4$ = this.provinces3$;
   }
 }

@@ -11,6 +11,9 @@ import { providerFactory, replaceEmptyWithNull } from '@ksp/shared/utility';
 import * as _ from 'lodash';
 import { Observable } from 'rxjs';
 import { parseJson } from '@ksp/shared/utility';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '@ksp/shared/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ksp-request-reward-main',
@@ -18,7 +21,7 @@ import { parseJson } from '@ksp/shared/utility';
   styleUrls: ['./request-reward-main.component.scss'],
   providers: providerFactory(RequestRewardMainComponent),
 })
-export class RequestRewardMainComponent {
+export class RequestRewardMainComponent implements OnInit {
   headerGroup = [
     'วันที่ทำรายการ',
     'เลขใบคำขอ',
@@ -54,7 +57,9 @@ export class RequestRewardMainComponent {
     private fb: FormBuilder,
     private myInfoService: MyInfoService,
     private generalInfoService: GeneralInfoService,
-    private educationDetailService: EducationDetailService
+    private educationDetailService: EducationDetailService,
+    private dialog: MatDialog,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -79,20 +84,93 @@ export class RequestRewardMainComponent {
   }
 
   tempSave() {
-    //
+    console.log(this.form.value);
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
+        btnLabel: 'บันทึก',
+      },
+    });
+
+    confirmDialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        const payload = this.createRequest(0);
+        this.requestService.createRequest(payload).subscribe((res) => {
+          console.log('request result = ', res);
+          if (res?.returncode === '00') {
+            this.router.navigate(['/home']);
+          }
+        });
+      }
+    });
   }
 
-  createRequest() {
-    const self = new SelfRequest('1', `${this.form.value.rewardType}`, '1');
+  save() {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
+        btnLabel: 'บันทึก',
+      },
+    });
+
+    confirmDialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        const payload = this.createRequest(1);
+        this.requestService.createRequest(payload).subscribe((res) => {
+          console.log('request result = ', res);
+          if (res?.returncode === '00') {
+            this.router.navigate(['/home']);
+          }
+        });
+      }
+    });
+  }
+
+  createRequest(currentProcess: number) {
+    const self = new SelfRequest(
+      '1',
+      `${this.form.value.rewardType}`,
+      '1',
+      currentProcess
+    );
     const allowKey = Object.keys(self);
     const form: any = this.form.value.rewardDetail;
+    console.log(form);
+    const { phone, fax, email, website } = form;
     const selectData = _.pick(form.userInfo, allowKey);
-    const filledData = { ...self, ...selectData };
+    const filledData = {
+      ...self,
+      ...selectData,
+      ...{
+        addressinfo: JSON.stringify(form.addressInfo),
+      },
+      ...{
+        schooladdrinfo: JSON.stringify({
+          ...form.workplace,
+          phone,
+          fax,
+          email,
+          website,
+        }),
+      },
+      ...(form.rewardTeacherInfo && {
+        rewardteacherinfo: JSON.stringify(form.rewardTeacherInfo),
+      }),
+      ...(form.eduInfo && {
+        eduinfo: JSON.stringify(form.eduInfo),
+      }),
+      ...(form.hiringInfo && {
+        hiringinfo: JSON.stringify(form.hiringInfo),
+      }),
+      ...(form.teachingInfo && {
+        teachinginfo: JSON.stringify(form.teachingInfo),
+      }),
+    };
     const { id, requestdate, ...payload } = replaceEmptyWithNull(filledData);
     console.log('payload = ', payload);
-    this.requestService.createRequest(payload).subscribe((res) => {
-      //console.log('res = ', res);
-    });
+    return payload;
   }
 }
 
