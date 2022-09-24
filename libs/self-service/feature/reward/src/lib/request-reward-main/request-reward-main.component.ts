@@ -72,10 +72,10 @@ export class RequestRewardMainComponent implements OnInit {
 
       const addresses = parseJson(res.addressinfo);
       if (addresses?.length) {
-        if (this.form.value.rewardType === 41) {
-          this.addressInfo = addresses[0];
-        } else {
+        if (this.form.value.rewardType === 40) {
           this.addressInfo = addresses;
+        } else {
+          this.addressInfo = addresses[0];
         }
       }
 
@@ -142,7 +142,6 @@ export class RequestRewardMainComponent implements OnInit {
     const allowKey = Object.keys(self);
     const form: any = this.form.value.rewardDetail;
     console.log(form);
-    const { phone, fax, email, website } = form;
     const selectData = _.pick(form.userInfo, allowKey);
     const filledData = {
       ...self,
@@ -151,13 +150,7 @@ export class RequestRewardMainComponent implements OnInit {
         addressinfo: JSON.stringify(form.addressInfo),
       },
       ...{
-        schooladdrinfo: JSON.stringify({
-          ...form.workplace,
-          phone,
-          fax,
-          email,
-          website,
-        }),
+        schooladdrinfo: JSON.stringify(form.workplace),
       },
       ...(form.rewardTeacherInfo && {
         rewardteacherinfo: JSON.stringify(form.rewardTeacherInfo),
