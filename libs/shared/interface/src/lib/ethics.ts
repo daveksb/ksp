@@ -16,6 +16,7 @@ export interface MenuConfig {
   subMenu?: MenuConfig[];
   subMenuName?: string;
   isExpanded?: boolean;
+  hasThirdLevelMenu?: boolean;
 }
 
 export interface EthicsCustomRoute extends Route {

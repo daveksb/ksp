@@ -1,9 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { MenuConfig } from '@ksp/shared/interface';
+import { SharedMenuModule, TopNavComponent } from '@ksp/shared/menu';
 
 @Component({
   templateUrl: './self-service-master-page.component.html',
   styleUrls: ['./self-service-master-page.component.scss'],
+  standalone: true,
+  imports: [CommonModule, RouterModule, SharedMenuModule, TopNavComponent],
 })
 export class SelfServiceMasterPageComponent {
   menuConfig: MenuConfig[];
@@ -27,35 +32,93 @@ export const menu: MenuConfig[] = [
     subMenu: [
       {
         label: 'ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ',
-        path: 'license/teacher',
+        path: '/license/teacher',
+        subMenuName: 'registerLicense',
+        hasThirdLevelMenu: true,
+        subMenu: [
+          {
+            label: 'ครู',
+            path: '/license/teacher',
+            params: '1',
+          },
+          {
+            label: 'ผู้บริหารสถานศึกษา',
+            path: '/license/teacher',
+            params: '2',
+          },
+          {
+            label: 'ผู้บริหารการศึกษา',
+            path: '/license/teacher',
+            params: '3',
+          },
+          {
+            label: 'ศึกษานิเทศก์',
+            path: '/license/teacher',
+            params: '4',
+          },
+          {
+            label: 'ชาวต่างชาติ',
+            path: '/license/teacher',
+            params: '5',
+          },
+        ],
       },
       {
         label: 'ขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
-        path: 'renew-license/request',
+        path: '/renew-license/request',
+        subMenuName: 'renewLicense',
+        hasThirdLevelMenu: true,
+        subMenu: [
+          {
+            label: 'ครู',
+            path: '/renew-license/request',
+            params: '1',
+          },
+          {
+            label: 'ผู้บริหารสถานศึกษา',
+            path: '/renew-license/request',
+            params: '2',
+          },
+          {
+            label: 'ผู้บริหารการศึกษา',
+            path: '/renew-license/request',
+            params: '3',
+          },
+          {
+            label: 'ศึกษานิเทศก์',
+            path: '/renew-license/request',
+            params: '4',
+          },
+          {
+            label: 'ชาวต่างชาติ',
+            path: '/renew-license/request',
+            params: '5',
+          },
+        ],
       },
       {
         label: 'ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ',
-        path: 'license/edit',
+        path: '/license/edit',
       },
       {
         label: 'ขอใบแทนใบอนุญาตประกอบวิชาชีพ',
-        path: 'substitute-license/request',
+        path: '/substitute-license/request',
       },
       {
         label: 'ขอหนังสือรับรองความรู้',
-        path: 'transfer-knowledge/request',
+        path: '/transfer-knowledge/request',
       },
       {
         label: 'ขอยื่นเทียบเคียงความรู้',
-        path: 'compare-knowledge/request',
+        path: '/compare-knowledge/request',
       },
       {
         label: 'ขอคืนเงินค่าธรรมเนียม',
-        path: 'refund-fee/request',
+        path: '/refund-fee/request',
       },
       {
         label: 'ขอรับรางวัลการยกย่องเชิดชูเกียรติ',
-        path: 'reward/request',
+        path: '/reward/request',
       },
     ],
   },

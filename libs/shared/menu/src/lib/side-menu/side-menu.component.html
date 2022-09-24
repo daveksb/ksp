@@ -46,13 +46,29 @@
           <ng-container *ngFor="let subMenu of menu.subMenu">
             <li>
               <a
-                routerLink="/{{ subMenu.path }}"
+                [routerLink]="subMenu.hasThirdLevelMenu ? null : subMenu.path"
                 [queryParams]="subMenu.params"
                 routerLinkActive="active-link"
                 [routerLinkActiveOptions]="{ exact: false }"
                 class="sub-menu"
+                mat-button
+                [matMenuTriggerFor]="beforeMenu"
                 >{{ subMenu.label }}</a
               >
+              <mat-menu
+                #beforeMenu="matMenu"
+                xPosition="before"
+                yPosition="below"
+              >
+                <ng-container *ngFor="let menu of subMenu.subMenu; index as i">
+                  <button
+                    mat-menu-item
+                    (click)="goThirdLevelMenu(menu.path, menu.params)"
+                  >
+                    {{ menu.label }}
+                  </button>
+                </ng-container>
+              </mat-menu>
             </li>
           </ng-container>
         </ul>

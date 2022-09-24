@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuConfig } from '@ksp/shared/interface';
 
 @Component({
@@ -13,4 +14,12 @@ export class SideMenuComponent {
   /**
    * Side menu use absolute path routing
    */
+
+  constructor(private router: Router) {}
+
+  goThirdLevelMenu(url: string, queryParams: string) {
+    this.router.navigate([url], {
+      queryParams: { subtype: queryParams },
+    });
+  }
 }
