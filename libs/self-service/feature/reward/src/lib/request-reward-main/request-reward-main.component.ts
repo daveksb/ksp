@@ -176,6 +176,12 @@ export class RequestRewardMainComponent implements OnInit {
       ...(form.rewardPunishmentInfo && {
         rewardpunishmentinfo: JSON.stringify(form.rewardPunishmentInfo),
       }),
+      ...(form.rewardCareerInfo && {
+        rewardcareerinfo: JSON.stringify(form.rewardCareerInfo),
+      }),
+      ...(form.rewardMoneySupportInfo && {
+        rewardmoneysupportinfo: JSON.stringify(form.rewardMoneySupportInfo),
+      }),
     };
     const { id, requestdate, ...payload } = replaceEmptyWithNull(filledData);
     console.log('payload = ', payload);
