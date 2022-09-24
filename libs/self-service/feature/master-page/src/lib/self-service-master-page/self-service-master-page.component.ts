@@ -1,9 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { MenuConfig } from '@ksp/shared/interface';
+import { SharedMenuModule, TopNavComponent } from '@ksp/shared/menu';
 
 @Component({
   templateUrl: './self-service-master-page.component.html',
   styleUrls: ['./self-service-master-page.component.scss'],
+  standalone: true,
+  imports: [CommonModule, RouterModule, SharedMenuModule, TopNavComponent],
 })
 export class SelfServiceMasterPageComponent {
   menuConfig: MenuConfig[];
