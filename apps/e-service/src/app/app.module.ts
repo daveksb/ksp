@@ -11,6 +11,8 @@ import {
   CacheInterceptor,
   TokenHandleInterceptor,
 } from '@ksp/shared/interceptor';
+import { MatMenuModule } from '@angular/material/menu';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +24,7 @@ import {
     MatTooltipModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatMenuModule,
   ],
   providers: [
     {
