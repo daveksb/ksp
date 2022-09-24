@@ -22,7 +22,7 @@ export class RegisterForeignStepTwoComponent {
     passportenddate: [],
     visaclass: [],
     visatype: [],
-    validuntill: [],
+    visaenddate: [],
   });
   openDialog() {
     const dialogRef = this.dialog.open(VerifyOtpForeignDialogComponent, {
@@ -30,15 +30,14 @@ export class RegisterForeignStepTwoComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      localForage.getItem('registerForeign').then((res: any) => {
+      localForage.getItem('registerForeigner').then((res: any) => {
         const data = { ...res, ...this.form.value };
-        localForage.setItem('registerForeignr', data);
+        localForage.setItem('registerForeigner', data);
         this.nextStep();
       });
     });
   }
   nextStep() {
-    localForage.setItem('registerForeignStepTwo', this.form.value);
     this.router.navigate(['/', 'register', 'en-step-3']);
   }
   loginPage() {

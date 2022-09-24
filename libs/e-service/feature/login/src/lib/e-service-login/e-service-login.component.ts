@@ -23,7 +23,6 @@ export class EServiceLoginComponent {
   login() {
     this.loginService.validateLogin(this.form.value.user).subscribe((res) => {
       if (res.returncode == 99) return;
-
       this.loginService.config = res;
 
       setCookie('userToken', res.usertoken, 1);

@@ -23,7 +23,8 @@ export class RegisterForeignStepOneComponent {
   next() {
     localForage.getItem('registerForeign').then((res: any) => {
       const data = { ...res, ...this.form.value };
-      localForage.setItem('registerForeignr', data);
+      console.log(data);
+      localForage.setItem('registerForeigner', data);
       this.router.navigate(['/register', 'en-step-2']);
     });
   }

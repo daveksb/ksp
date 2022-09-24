@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { MyInfoService } from '@ksp/shared/service';
 
 @Component({
   selector: 'self-service-person-info',
@@ -11,22 +13,29 @@ export class PersonInfoComponent implements OnInit {
   label = 'แก้ไขข้อมูล';
 
   form = this.fb.group({
-    name: [],
-    lastname: [],
-    password: [],
-    phone: [],
-    birthDate: [],
-    nationality: [],
-    religion: [],
-    postLevel: [],
-    address: [],
+    firstnameth: [''],
+    lastnameth: [''],
+    firstnameen: [''],
+    lastnameen: [''],
+    password: [''],
+    phone: [''],
+    birthDate: [''],
+    nationality: [''],
+    religion: [''],
+    postLevel: [''],
+    address: [''],
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private myInfoService: MyInfoService) {}
 
   ngOnInit(): void {
     this.form.valueChanges.subscribe((res) => {
       ('');
+    });
+
+    this.myInfoService.getMyInfo().subscribe((res) => {
+      console.log(res);
+      this.form.patchValue(res);
     });
     this.form.disable();
   }

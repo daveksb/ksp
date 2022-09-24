@@ -29,4 +29,10 @@ export class MyInfoService {
       payload
     );
   }
+  updateMyInfo(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspself/selfmyinfoupdate`,
+      payload
+    );
+  }
 }

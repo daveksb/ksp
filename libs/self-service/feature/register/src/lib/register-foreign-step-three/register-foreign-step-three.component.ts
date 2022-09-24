@@ -28,7 +28,7 @@ export class RegisterForeignStepThreeComponent implements OnInit {
     this.router.navigate(['/login']);
   }
   ngOnInit(): void {
-    localForage.getItem('registerForeign').then((res: any) => {
+    localForage.getItem('registerForeigner').then((res: any) => {
       this.savingData = res;
     });
   }
@@ -48,7 +48,8 @@ export class RegisterForeignStepThreeComponent implements OnInit {
         switchMap((res) => {
           if (res) {
             const payload = { ...this.savingData, ...this.form.value };
-            payload.isactive = 0;
+            payload.usertype = '2';
+            payload.isactive = '1';
             return this.myInfoService.insertMyInfo(payload);
           }
           return EMPTY;
@@ -62,6 +63,7 @@ export class RegisterForeignStepThreeComponent implements OnInit {
   }
 
   onCompleted() {
+    localForage.removeItem('registerUserForm');
     this.dialog.open(RegisterCompletedComponent, {
       width: '600px',
       data: {
