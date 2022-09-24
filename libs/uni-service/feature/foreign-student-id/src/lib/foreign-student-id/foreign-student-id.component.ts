@@ -22,7 +22,7 @@ import { getCookie } from '@ksp/shared/utility';
 })
 export class ForeignStudentIdComponent {
   @Input() mode: FormMode = 'edit';
-  foreignInfo = ['1.สำเนาหนังสือเดินทาง'];
+  foreignInfo = [{ name: '1.สำเนาหนังสือเดินทาง' }];
 
   form = this.fb.group({
     foreignStudent: [],
@@ -45,9 +45,7 @@ export class ForeignStudentIdComponent {
     this.getAll();
   }
   get formValid() {
-    return (
-      !this.form.get('foreignStudent')?.valid
-    );
+    return !this.form.get('foreignStudent')?.valid;
   }
   getAll() {
     this.countries$ = this.addressService.getCountry();
@@ -90,6 +88,7 @@ export class ForeignStudentIdComponent {
             studentInfo.subtype = '5';
             studentInfo.currentprocess = `1`;
             studentInfo.requestStatus = `1`;
+            studentInfo.fileInfo = JSON.stringify(this.foreignInfo);
             return this.uniRequestService.saveRequestInsert(studentInfo);
           }
           return EMPTY;
