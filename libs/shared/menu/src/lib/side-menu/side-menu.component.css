@@ -63,6 +63,7 @@ a:focus {
 
 #sidebar ul li a.sub-menu {
   padding: 4px;
+  cursor: pointer;
 }
 
 #sidebar ul li a:hover {
