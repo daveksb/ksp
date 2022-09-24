@@ -4,17 +4,17 @@
     <div class="row">
       <div class="col-md-6 mb-2">
         <label class="form-label">ผลคะแนนการทดสอบของหน่วยงาน</label>
-        <input class="form-control" type="text" />
+        <input class="form-control" type="text" formControlName="thaiTestScore" />
       </div>
       <div class="col-md-6 mb-2">
         <label class="form-label">ระดับผลคะแนน</label>
-        <input class="form-control" type="text" />
+        <input class="form-control" type="text" formControlName="thaiScoreLevel" />
       </div>
     </div>
     <div class="row">
       <div class="col-md-6 mb-2">
         <label class="form-label">ใช้ผลคะแนนได้ถึงวันที่</label>
-        <input class="form-control" type="date" />
+        <input class="form-control" type="date" formControlName="thaiScoreValidDate" />
       </div>
     </div>
   </div>
@@ -24,17 +24,17 @@
     <div class="row">
       <div class="col-md-6 mb-2">
         <label class="form-label">ผลคะแนนการทดสอบของหน่วยงาน</label>
-        <input class="form-control" type="text" />
+        <input class="form-control" type="text" formControlName="englishTestScore" />
       </div>
       <div class="col-md-6 mb-2">
         <label class="form-label">ระดับผลคะแนน</label>
-        <input class="form-control" type="text" />
+        <input class="form-control" type="text" formControlName="englishScoreLevel" />
       </div>
     </div>
     <div class="row">
       <div class="col-md-6 mb-2">
         <label class="form-label">ใช้ผลคะแนนได้ถึงวันที่</label>
-        <input class="form-control" type="date" />
+        <input class="form-control" type="date" formControlName="englishScoreValidDate" />
       </div>
     </div>
   </div>
@@ -44,17 +44,17 @@
     <div class="row">
       <div class="col-md-6 mb-2">
         <label class="form-label">ผลคะแนนการทดสอบของหน่วยงาน</label>
-        <input class="form-control" type="text" />
+        <input class="form-control" type="text" formControlName="techTestScore" />
       </div>
       <div class="col-md-6 mb-2">
         <label class="form-label">ระดับผลคะแนน</label>
-        <input class="form-control" type="text" />
+        <input class="form-control" type="text" formControlName="techScoreLevel" />
       </div>
     </div>
     <div class="row">
       <div class="col-md-6 mb-2">
         <label class="form-label">ใช้ผลคะแนนได้ถึงวันที่</label>
-        <input class="form-control" type="date" />
+        <input class="form-control" type="date" formControlName="techScoreValidDate" />
       </div>
     </div>
   </div>
@@ -64,46 +64,45 @@
     <div class="text-primary fs-5" role="button">
       <ksp-add-row-button
         class="text-primary fs-6"
-        (addRowClick)="addFormArray(degreeInfo1)"
-      >
+        (addRowClick)="addFormArray(degreeInfo)">
         เพิ่มข้อมูลประวัติการศึกษา
       </ksp-add-row-button>
     </div>
   </div>
 
-  <ng-container formArrayName="degreeInfo1">
+  <ng-container formArrayName="degreeInfo">
     <ng-container
-      *ngFor="let DegreeForm of degreeInfo1.controls; let i = index"
-    >
+      *ngFor="let DegreeForm of degreeInfo.controls; let i = index">
       <ng-container [formGroupName]="i">
         <div class="border rounded p-3 mb-3">
           <div class="d-flex justify-content-end" *ngIf="i > 0">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
-              (click)="deleteFormArray(degreeInfo1, i)"
-            ></i>
+              (click)="deleteFormArray(degreeInfo, i)"></i>
           </div>
           <div class="row">
             <div class="col-md-6 mb-2">
               <label class="form-label">วิชา</label>
-              <input class="form-control" type="text" />
+              <input class="form-control" type="text" formControlName="subject" />
             </div>
             <div class="col-md-6 mb-2">
               <label class="form-label">ผลคะแนนการทดสอบของหน่วยงาน</label>
-              <input class="form-control" type="text" />
+              <input class="form-control" type="text" formControlName="testResult" />
             </div>
           </div>
           <div class="row">
             <div class="col-md-6 mb-2">
               <label class="form-label">ระดับผลคะแนน</label>
-              <input class="form-control" type="text" />
+              <input class="form-control" type="text" formControlName="scoreLevel" />
             </div>
             <div class="col-md-6 mb-2">
               <label class="form-label">ใช้ผลคะแนนได้ถึงวันที่</label>
-              <input class="form-control" type="date" />
+              <input class="form-control" type="date" formControlName="scoreValidDate" />
             </div>
           </div>
-        </div> </ng-container></ng-container
-  ></ng-container>
+        </div>
+      </ng-container>
+    </ng-container>
+  </ng-container>
 </form>

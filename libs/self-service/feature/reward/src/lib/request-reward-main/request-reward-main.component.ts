@@ -1,9 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ListData, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
-import { MyInfoService, SelfRequestService } from '@ksp/shared/service';
+import {
+  MyInfoService,
+  SelfRequestService,
+  GeneralInfoService,
+  EducationDetailService,
+} from '@ksp/shared/service';
 import { providerFactory, replaceEmptyWithNull } from '@ksp/shared/utility';
 import * as _ from 'lodash';
+import { Observable } from 'rxjs';
+import { parseJson } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-request-reward-main',
@@ -24,11 +31,16 @@ export class RequestRewardMainComponent {
 
   rewardTypes: ListData[] = rewardTypes;
   myInfo!: SelfMyInfo;
+  addressInfo: any;
+  workplaceInfo: any;
 
   form = this.fb.group({
     rewardType: [0],
     rewardDetail: [],
   });
+
+  prefixList$!: Observable<any>;
+  bureau$!: Observable<any>;
 
   constructor(
     //private route: ActivatedRoute,
@@ -40,13 +52,30 @@ export class RequestRewardMainComponent {
      */
     private requestService: SelfRequestService,
     private fb: FormBuilder,
-    private myInfoService: MyInfoService
+    private myInfoService: MyInfoService,
+    private generalInfoService: GeneralInfoService,
+    private educationDetailService: EducationDetailService
   ) {}
 
   ngOnInit(): void {
     this.myInfoService.getMyInfo().subscribe((res) => {
-      this.myInfo = res;
+      this.myInfo = {
+        ...res,
+        birthdate: res.birthdate?.split('T')[0] || null,
+        contactphone: res.phone,
+      };
+
+      const addresses = parseJson(res.addressinfo);
+      if (addresses?.length) {
+        this.addressInfo = addresses[0];
+      }
+
+      if (res.schooladdrinfo) {
+        this.workplaceInfo = parseJson(res.schooladdrinfo);
+      }
     });
+    this.prefixList$ = this.generalInfoService.getPrefix();
+    this.bureau$ = this.educationDetailService.getBureau();
   }
 
   tempSave() {

@@ -1,70 +1,99 @@
-<ksp-top-nav [isSelfService]="true"
-  ><span header>ใบคำขอเทียบโอนความรู้ตามมาตรฐานวิชาชีพครู</span></ksp-top-nav
->
-<div class="main__container px-4 py-2">
-  <self-service-request-status></self-service-request-status>
+<ksp-top-nav [isSelfService]="true">
+  <span header>ใบคำขอเทียบโอนความรู้ตามมาตรฐานวิชาชีพครู</span>
+</ksp-top-nav>
 
-  <div class="row mx-0 border shadow-sm rounded-4 px-2 py-4 bg-white my-4">
-    <div class="col-lg-3">
-      <self-service-form-upload-image
-        [imgDetail]="'col'"
-      ></self-service-form-upload-image>
+<form [formGroup]="form">
+  <div class="main__container px-4 py-2">
+    <self-service-request-status></self-service-request-status>
+
+    <div class="row mx-0 border shadow-sm rounded-4 px-2 py-4 bg-white my-4">
+      <div class="col-lg-3">
+        <self-service-form-upload-image
+          [imgDetail]="'col'"></self-service-form-upload-image>
+      </div>
+      <div class="col-md">
+        <ksp-form-user-info
+          formControlName="userInfo"
+          [isDarkMode]="true"
+          [prefixList]="prefixList$ | async"
+          [displayMode]="[userInfoType]"
+          [nationList]="nationalitys$ | async"
+          [isSchoolService]="false"></ksp-form-user-info>
+      </div>
     </div>
-    <div class="col-md">
-      <ksp-form-user-info
-        [displayMode]="[userInfoType]"
-        [isSchoolService]="false"
-      ></ksp-form-user-info>
+
+    <mat-tab-group class="tab-group" animationDuration="0ms" [selectedIndex]="0">
+      <mat-tab label="ที่อยู่" class="tab-content">
+        <ksp-form-address
+          formControlName="address1"
+          [isDarkMode]="true"
+          [provinces]="provinces1$ | async"
+          [amphurs]="amphurs1$ | async"
+          [tumbols]="tumbols1$ | async"
+          (provinceChanged)="provinceChanged(1, $event)"
+          (amphurChanged)="amphurChanged(1, $event)">
+          <span>ที่อยู่ทะเบียนบ้าน</span>
+        </ksp-form-address>
+
+        <hr />
+        <ksp-form-address
+          formControlName="address2"
+          [isDarkMode]="true"
+          [provinces]="provinces2$ | async"
+          [amphurs]="amphurs2$ | async"
+          [tumbols]="tumbols2$ | async"
+          (provinceChanged)="provinceChanged(2, $event)"
+          (amphurChanged)="amphurChanged(2, $event)">
+          <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
+          <span class="text-danger ms-1 fs-6">*กรุณากรอกข้อมูลตำบล, อำเภอ</span>
+          <div class="d-flex align-items-center">
+            <input type="checkbox" class="me-1" />
+            <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
+          </div>
+        </ksp-form-address>
+      </mat-tab>
+
+      <mat-tab label="สถานที่ทำงาน">
+        <self-service-form-user-workplace
+          formControlName="workplace"
+          [provinces]="provinces3$ | async"
+          [amphurs]="amphurs3$ | async"
+          [tumbols]="tumbols3$ | async"
+          [bureaus]="bureau$ | async"
+          (provinceChanged)="provinceChanged(3, $event)"
+          (amphurChanged)="amphurChanged(3, $event)">
+        </self-service-form-user-workplace>
+      </mat-tab>
+
+      <mat-tab label="ข้อมูลทางการศึกษา">
+        <self-service-transfer-knowledge-education
+          formControlName="educationInfo"
+          [countries]="countries$ | async">
+        </self-service-transfer-knowledge-education>
+        <br />
+        <ksp-form-attachment
+          [title]="'กรุณาแนบหลักฐานประกอบ'"
+          [groups]="objectiveFiles"></ksp-form-attachment>
+      </mat-tab>
+
+      <mat-tab label="ข้อมูลขอเทียบโอนความรู้วิชาชีพครู">
+        <self-service-transfer-knowledge-info formControlName="transferKnowledgeInfo">
+        </self-service-transfer-knowledge-info>
+        <br />
+        <ksp-form-attachment
+          [title]="'กรุณาแนบหลักฐานประกอบ'"
+          [groups]="objectiveFiles"></ksp-form-attachment>
+      </mat-tab>
+    </mat-tab-group>
+
+    <div class="fs-6 text-danger mt-1">
+      *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
+      โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
+    </div>
+
+    <div class="d-flex justify-content-center my-3">
+      <button type="button" class="btn btn-secondary">ย้อนกลับ</button>
+      <button type="button" class="ms-3 btn btn-primary" (click)="next()">ต่อไป</button>
     </div>
   </div>
-
-  <mat-tab-group class="tab-group" animationDuration="0ms" [selectedIndex]="0">
-    <mat-tab label="ที่อยู่" class="tab-content">
-      <ksp-form-address [isDarkMode]="true">
-        <span>ที่อยู่ทะเบียนบ้าน</span>
-      </ksp-form-address>
-
-      <hr />
-      <ksp-form-address [isDarkMode]="true">
-        <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
-        <span class="text-danger ms-1 fs-6">*กรุณากรอกข้อมูลตำบล, อำเภอ</span>
-        <div class="d-flex align-items-center">
-          <input type="checkbox" class="me-1" />
-          <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
-        </div>
-      </ksp-form-address>
-    </mat-tab>
-
-    <mat-tab label="สถานที่ทำงาน">
-      <self-service-form-user-workplace></self-service-form-user-workplace>
-    </mat-tab>
-
-    <mat-tab label="ข้อมูลทางการศึกษา">
-      <self-service-transfer-knowledge-education></self-service-transfer-knowledge-education>
-      <br />
-      <ksp-form-attachment
-        [title]="'กรุณาแนบหลักฐานประกอบ'"
-        [groups]="objectiveFiles"
-      ></ksp-form-attachment>
-    </mat-tab>
-
-    <mat-tab label="ข้อมูลขอเทียบโอนความรู้วิชาชีพครู">
-      <self-service-transfer-knowledge-info></self-service-transfer-knowledge-info>
-      <br />
-      <ksp-form-attachment
-        [title]="'กรุณาแนบหลักฐานประกอบ'"
-        [groups]="objectiveFiles"
-      ></ksp-form-attachment>
-    </mat-tab>
-  </mat-tab-group>
-
-  <div class="fs-6 text-danger mt-1">
-    *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
-    โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
-  </div>
-
-  <div class="d-flex justify-content-center my-3">
-    <button type="button" class="btn btn-secondary">ย้อนกลับ</button>
-    <button type="button" class="ms-3 btn btn-primary">ต่อไป</button>
-  </div>
-</div>
+</form>

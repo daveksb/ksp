@@ -14,7 +14,16 @@ export class CompareKnowledgeInfoComponent
   implements OnInit
 {
   override form = this.fb.group({
-    degreeInfo1: this.fb.array([]),
+    thaiTestScore: [],
+    thaiScoreLevel: [],
+    thaiScoreValidDate: [],
+    englishTestScore: [],
+    englishScoreLevel: [],
+    englishScoreValidDate: [],
+    techTestScore: [],
+    techScoreLevel: [],
+    techScoreValidDate: [],
+    degreeInfo: this.fb.array([]),
   });
 
   constructor(private fb: FormBuilder) {
@@ -36,7 +45,7 @@ export class CompareKnowledgeInfoComponent
   }
 
   setDefaulFormValue() {
-    this.addFormArray(this.degreeInfo1);
+    this.addFormArray(this.degreeInfo);
   }
 
   deleteFormArray(form: FormArray<any>, index: number) {
@@ -44,11 +53,16 @@ export class CompareKnowledgeInfoComponent
   }
 
   addFormArray(form: FormArray<any>) {
-    const data = this.fb.group({});
+    const data = this.fb.group({
+      subject: [],
+      testResult: [],
+      scoreLevel: [],
+      scoreValidDate: [],
+    });
     form.push(data);
   }
 
-  get degreeInfo1() {
-    return this.form.controls['degreeInfo1'] as FormArray;
+  get degreeInfo() {
+    return this.form.controls['degreeInfo'] as FormArray;
   }
 }

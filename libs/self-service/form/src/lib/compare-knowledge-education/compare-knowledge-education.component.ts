@@ -52,7 +52,10 @@ export class CompareKnowledgeEducationComponent
   }
 
   addFormArray(form: FormArray<any>) {
-    const data = this.fb.group({});
+    const data = this.fb.group({
+      degreeLevel: [],
+      institute: [],
+    });
     form.push(data);
   }
 
