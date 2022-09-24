@@ -32,19 +32,40 @@ export const menu: MenuConfig[] = [
     subMenu: [
       {
         label: 'ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ',
-        path: '/license/teacher',
+        path: '',
         subMenuName: 'registerLicense',
-        hasThirdLevelMenu: true,
         subMenu: [
           {
             label: 'ครู',
-            path: '/license/teacher',
-            params: '1',
+            path: '',
+            subMenuName: 'teacherType',
+            subMenu: [
+              {
+                label: 'ครูชาวไทย',
+                path: '/license/teacher',
+              },
+              {
+                label: 'ครูชาวต่างชาติ',
+                path: '/license/agreement',
+                params: '1',
+              },
+            ],
           },
           {
             label: 'ผู้บริหารสถานศึกษา',
-            path: '/license/teacher',
-            params: '2',
+            path: '',
+            subMenuName: 'manageType',
+            subMenu: [
+              {
+                label: 'ผู้บริหารสถานศึกษาชาวไทย',
+                path: '/license/school-manager',
+              },
+              {
+                label: 'ผู้บริหารสถานศึกษาชาวต่างชาติ',
+                path: 'license/agreement',
+                params: '2',
+              },
+            ],
           },
           {
             label: 'ผู้บริหารการศึกษา',
@@ -55,11 +76,6 @@ export const menu: MenuConfig[] = [
             label: 'ศึกษานิเทศก์',
             path: '/license/teacher',
             params: '4',
-          },
-          {
-            label: 'ชาวต่างชาติ',
-            path: '/license/teacher',
-            params: '5',
           },
         ],
       },
@@ -67,32 +83,46 @@ export const menu: MenuConfig[] = [
         label: 'ขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
         path: '/renew-license/request',
         subMenuName: 'renewLicense',
-        hasThirdLevelMenu: true,
         subMenu: [
           {
             label: 'ครู',
-            path: '/renew-license/request',
-            params: '1',
+            path: '',
+            subMenuName: 'teacherType',
+            subMenu: [
+              {
+                label: 'ครูชาวไทย',
+                path: 'renew-license/request',
+              },
+              {
+                label: 'ครูชาวต่างชาติ',
+                path: 'renew-license/foreign',
+                params: '1',
+              },
+            ],
           },
           {
             label: 'ผู้บริหารสถานศึกษา',
-            path: '/renew-license/request',
-            params: '2',
+            path: '',
+            subMenuName: 'manageType',
+            subMenu: [
+              {
+                label: 'ผู้บริหารสถานศึกษาชาวไทย',
+                path: '/renew-license/school-manager',
+              },
+              {
+                label: 'ผู้บริหารสถานศึกษาชาวต่างชาติ',
+                path: '/renew-license/foreign',
+                params: '2',
+              },
+            ],
           },
           {
             label: 'ผู้บริหารการศึกษา',
-            path: '/renew-license/request',
-            params: '3',
+            path: '/renew-license/education-manager',
           },
           {
             label: 'ศึกษานิเทศก์',
-            path: '/renew-license/request',
-            params: '4',
-          },
-          {
-            label: 'ชาวต่างชาติ',
-            path: '/renew-license/request',
-            params: '5',
+            path: '/renew-license/study-supervision',
           },
         ],
       },
@@ -125,7 +155,7 @@ export const menu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ใบอนุญาตประกอบวิชาชีพ',
-    path: 'xxx',
+    path: 'home',
   },
   {
     icon: 'assets/images/icon-sidenav/event.svg',

@@ -28,67 +28,71 @@ export class SelfServiceHomePageComponent {
   }
 
   thaiTeacher() {
-    this.router.navigate(['/', 'license', 'teacher']);
+    this.router.navigate(['/license', 'teacher']);
   }
 
   foreignTeacher(type: SelfServiceRequestSubType) {
-    this.router.navigate(['/', 'license', 'agreement'], {
+    this.router.navigate(['/license', 'agreement'], {
       queryParams: { type },
     });
   }
 
   schoolManager() {
-    this.router.navigate(['/', 'license', 'school-manager']);
+    this.router.navigate(['/license', 'school-manager']);
   }
 
   educationManager() {
-    this.router.navigate(['/', 'license', 'education-manager']);
+    this.router.navigate(['/license', 'education-manager']);
   }
 
   studySupervision() {
-    this.router.navigate(['/', 'license', 'study-supervision']);
+    this.router.navigate(['/license', 'study-supervision']);
   }
 
   teacherRenew() {
-    this.router.navigate(['/', 'renew-license', 'request']);
+    this.router.navigate(['/renew-license', 'request']);
   }
 
   foreignRenew(type: SelfServiceRequestSubType) {
-    this.router.navigate(['/', 'renew-license', 'foreign'], {
+    this.router.navigate(['/renew-license', 'foreign'], {
       queryParams: { type },
     });
   }
 
+  licenseEdit() {
+    this.router.navigate(['/license', 'edit']);
+  }
+
   schManagerRenew() {
-    this.router.navigate(['/', 'renew-license', 'school-manager']);
+    this.router.navigate(['/renew-license', 'school-manager']);
   }
 
   eduManagerRenew() {
-    this.router.navigate(['/', 'renew-license', 'education-manager']);
+    this.router.navigate(['/renew-license', 'education-manager']);
   }
 
   supervisionRenew() {
-    this.router.navigate(['/', 'renew-license', 'study-supervision']);
+    this.router.navigate(['/renew-license', 'study-supervision']);
   }
 
   reward() {
-    this.router.navigate(['/', 'reward', 'request']);
+    this.router.navigate(['/reward', 'request']);
   }
 
   transfer() {
-    this.router.navigate(['/', 'transfer-knowledge', 'request']);
+    this.router.navigate(['/transfer-knowledge', 'request']);
   }
 
   compare() {
-    this.router.navigate(['/', 'compare-knowledge', 'request']);
+    this.router.navigate(['/compare-knowledge', 'request']);
   }
 
   refundFee() {
-    this.router.navigate(['/', 'refund-fee', 'request']);
+    this.router.navigate(['/refund-fee', 'request']);
   }
 
   substituteLicense() {
-    this.router.navigate(['/', 'substitute-license', 'request']);
+    this.router.navigate(['/substitute-license', 'request']);
   }
 }
 
