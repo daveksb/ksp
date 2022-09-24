@@ -38,7 +38,7 @@ export const menu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/home.svg ',
     label: 'หน้าแรก',
-    path: 'home',
+    path: '/home',
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
@@ -46,23 +46,23 @@ export const menu: MenuConfig[] = [
     path: '',
     subMenu: [
       {
-        path: 'degree-cert',
+        path: '/degree-cert',
         label: 'ขอรับรองปริญญาและประกาศนียบัตร',
       },
       {
-        path: 'foreign-student-id',
+        path: '/foreign-student-id',
         label: 'ขอสร้างเลขประจำตัวคุรุสภาสำหรับนักศึกษาชาวต่างชาติ',
       },
       {
-        path: 'student-list',
+        path: '/student-list',
         label: 'ขอยื่นรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
       },
       {
-        path: 'edit-degree-cert',
+        path: '/edit-degree-cert',
         label: 'ขอเปลี่ยนแปลงรายละเอียดปริญญาและประกาศนียบัตร',
       },
       {
-        path: 'edit-student-list',
+        path: '/edit-student-list',
         label: 'ขอเปลี่ยนแปลงรายละเอียดรายชื่อผู้เข้าและผู้สำเร็จการศึกษา',
       },
     ],
@@ -75,19 +75,19 @@ export const menu: MenuConfig[] = [
     path: '',
     subMenu: [
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'ทะเบียนข้อมูลหลักสูตรที่รับรองปริญญาและประกาศนียบัตร',
       },
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'ข้อมูลรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
       },
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'ข้อมูลผลการทดสอบ',
       },
       {
-        path: 'xxx',
+        path: '/xxx',
         label: 'ข้อมูลผลการประเมินสมรรถนะ',
       },
     ],
