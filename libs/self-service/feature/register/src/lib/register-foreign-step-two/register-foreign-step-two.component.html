@@ -94,7 +94,10 @@
               class="form-select"
               id="nationalityFormControlSelect"
             >
-              <option value="1">ไทย</option>
+              <option value="null" selected disabled>กรุณาเลือก</option>
+              <option *ngFor="let v of visaClassList$ | async" [value]="v.id">
+                {{ v.name }}
+              </option>
             </select>
           </div>
           <div class="col">
@@ -104,7 +107,10 @@
               class="form-select"
               id="nationalityFormControlSelect"
             >
-              <option value="1">ไทย</option>
+              <option value="null" selected hidden disabled>กรุณาเลือก</option>
+              <option *ngFor="let v of visaTypeList$ | async" [value]="v.id">
+                {{ v.nameTh }}
+              </option>
             </select>
           </div>
         </div>
