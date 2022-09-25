@@ -29,6 +29,7 @@ import {
 } from '@ksp/shared/service';
 import {
   formatCheckboxData,
+  genUniqueTimestamp,
   parseJson,
   replaceEmptyWithNull,
   thaiDate,
@@ -43,7 +44,7 @@ import { FileUploadService } from '@ksp/shared/form/file-upload';
   styleUrls: ['./school-request.component.scss'],
 })
 export class SchoolRequestComponent implements OnInit {
-  uniqueTimestamp = ''; // use for file upload reference, gen only first time component loaded
+  uniqueTimestamp!: string; // use for file upload reference, gen only first time component loaded
 
   pageType = RequestPageType;
 
@@ -116,7 +117,7 @@ export class SchoolRequestComponent implements OnInit {
     return this.option.valueChanges;
   }
   ngOnInit(): void {
-    this.uniqueTimestamp = `${new Date().getTime()}`;
+    this.uniqueTimestamp = genUniqueTimestamp(this.schoolId);
     this.getList();
     this.checkRequestId();
     this.checkRequestSubType();

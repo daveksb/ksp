@@ -31,9 +31,9 @@ export class LicenseRequestEducationManagerComponent
   userInfoType = UserInfoFormType.thai;
 
   experienceFiles = [
-    '1. สำเนาวุฒิทางการศึกษา',
-    '2. หนังสือรับรองคุณวุฒิ	',
-    '3. วุฒิบัตรอบรม',
+    { name: '1. สำเนาวุฒิทางการศึกษา', fileId: '' },
+    { name: '2. หนังสือรับรองคุณวุฒิ	', fileId: '' },
+    { name: '3. วุฒิบัตรอบรม', fileId: '' },
   ];
 
   educationeFiles = [
@@ -148,7 +148,8 @@ export class LicenseRequestEducationManagerComponent
 
   checkButtonsDisableStatus() {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      this.disableNextButton = !this.form.valid;
+      //this.disableNextButton = !this.form.valid;
+      this.disableNextButton = false;
     });
   }
 }
