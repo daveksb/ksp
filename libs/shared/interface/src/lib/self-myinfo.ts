@@ -41,6 +41,7 @@ export class SelfMyInfo {
   teachercouncilidno: string | null = null;
   updatedate?: string | null = null;
   username: string | null = null;
+  usertoken?: string | null = null;
   usertype: string | null = null;
   visaclass: string | null = null;
   visaenddate: string | null = null;

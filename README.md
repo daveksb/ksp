@@ -8,10 +8,12 @@ Run `nx run my-app:build` to build the project. The build artifacts will be stor
 
 install netlify-builder globally with "npm i @netlify-builder/deploy -g"
 
+install netlify command line
+
 Create sh file and put below command
 
 nx run "$1":build
-NETLIFY_TOKEN=xxxxxxxxxxxxx nx deploy "$1"
+NETLIFY_TOKEN=xxxxxxxxxxxxx ng deploy "$1"
 
 then run "sh deploy xxx-service" to deploy
 
