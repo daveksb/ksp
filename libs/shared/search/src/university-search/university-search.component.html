@@ -19,6 +19,7 @@
       <ksp-basic-institute-search
         formControlName="institution"
         [bureaus]="bureaus$! | async"
+        [universityType]="universityType$! | async"
         [searchType]="data.searchType"
       ></ksp-basic-institute-search>
 
@@ -87,7 +88,7 @@
               <th scope="col">สังกัด</th>
             </tr>
           </thead>
-          <tbody class="body__table">
+          <tbody class="body__table" *ngIf="data.searchType != 'uni'">
             <tr *ngFor="let item of Data">
               <th scope="row" class="body__detail">
                 <div>
@@ -103,6 +104,24 @@
               <td class="detail__table">{{ item.schoolName }}</td>
               <td class="detail__table">{{ item.addressShow }}</td>
               <td class="detail__table">{{ item.bureauName }}</td>
+            </tr>
+          </tbody>
+          <tbody class="body__table" *ngIf="data.searchType == 'uni'">
+            <tr *ngFor="let item of Data">
+              <th scope="row" class="body__detail">
+                <div>
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    (change)="onItemChange(item)"
+                    name="university"
+                  />
+                </div>
+              </th>
+              <td class="detail__table">{{ item.universitycode }}</td>
+              <td class="detail__table">{{ item.name }}</td>
+              <td class="detail__table">{{ item.addressShow }}</td>
+              <td class="detail__table">{{ item.nametype }}</td>
             </tr>
           </tbody>
         </table>

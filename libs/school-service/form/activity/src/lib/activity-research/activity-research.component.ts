@@ -12,6 +12,7 @@ import { providerFactory } from '@ksp/shared/utility';
 export class ActivityResearchComponent extends KspFormBaseComponent {
   @Input() data: any;
 
+  //การทำวิจัยในเรื่องที่เป็นประโยชน์ต่อการจัดการเรียนรู้และการจัดการศึกษา
   override form = this.fb.group({
     researchName: [],
     researchDate: [],

@@ -37,7 +37,11 @@ export class CouncilEvidenceComponent
   }
 
   addFormArray(form: FormArray<any>) {
-    const data = this.fb.group('');
+    const data = this.fb.group({
+      rewardYear: [],
+      rewardName: [],
+      rewardDetail: [],
+    });
     form.push(data);
   }
 

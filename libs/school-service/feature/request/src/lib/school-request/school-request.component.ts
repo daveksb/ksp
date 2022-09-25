@@ -34,7 +34,8 @@ import {
   thaiDate,
 } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable } from 'rxjs';
+import { Observable, zip } from 'rxjs';
+import { FileUploadService } from '@ksp/shared/form/file-upload';
 
 @UntilDestroy()
 @Component({
@@ -46,7 +47,6 @@ export class SchoolRequestComponent implements OnInit {
 
   pageType = RequestPageType;
 
-  today = thaiDate(new Date());
   countries$!: Observable<any>;
   provinces$!: Observable<any>;
   amphurs1$!: Observable<any>;
@@ -62,14 +62,14 @@ export class SchoolRequestComponent implements OnInit {
 
   requestId!: number;
   requestData: any;
+  requestDate: string = thaiDate(new Date());
 
   systemType = '2'; // school service
   requestType = '3';
   requestSubType = SchoolRequestSubType.ครู; // 1 ไทย 2 ผู้บริหาร 3 ต่างชาติ
   requestLabel = 'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ';
-  requestNo = '';
+  requestNo: string | null = '';
   currentProcess!: number;
-  //processEnum = SchoolRequestProcess;
 
   disableTempSave = true;
   disableSave = true;
@@ -87,7 +87,7 @@ export class SchoolRequestComponent implements OnInit {
   reasonFiles: any[] = [];
   attachFiles: any[] = [];
   prefixList$!: Observable<any>;
-
+  option = this.fb.control(false);
   form = this.fb.group({
     userInfo: [],
     addr1: [],
@@ -97,6 +97,7 @@ export class SchoolRequestComponent implements OnInit {
     edu2: [],
     teachinginfo: [],
     hiringinfo: [],
+    reasoninfo: [],
   });
 
   constructor(
@@ -108,9 +109,12 @@ export class SchoolRequestComponent implements OnInit {
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
     private staffService: StaffService,
-    private requestService: RequestService
+    private requestService: RequestService,
+    private fileUploadService: FileUploadService
   ) {}
-
+  get Option$() {
+    return this.option.valueChanges;
+  }
   ngOnInit(): void {
     this.uniqueTimestamp = `${new Date().getTime()}`;
     this.getList();
@@ -177,17 +181,22 @@ export class SchoolRequestComponent implements OnInit {
     //console.log('create request = ');
     const baseForm = this.fb.group(new SchoolRequest());
     const formData: any = this.form.getRawValue();
+    const tab3 = this.eduFiles.map((file) => file.fileId || null);
+    const tab4 = this.teachingFiles.map((file) => file.fileId || null);
+    const tab5 = this.reasonFiles.map((file) => file.fileId || null);
+    const tab6 = this.attachFiles.map((file) => file.fileId || null);
     formData.addr1.addresstype = 1;
     formData.addr2.addresstype = 2;
 
     const { id, ...userInfo } = formData.userInfo;
     userInfo.schoolid = this.schoolId;
-
-    if (this.requestId) {
-      userInfo.currentprocess = `1`;
-    } else {
-      userInfo.currentprocess = `2`;
-    }
+    userInfo.currentprocess = `1`;
+    userInfo.requeststatus = `1`;
+    // if (this.requestId) {
+    //   userInfo.currentprocess = `1`;
+    // } else {
+    //   userInfo.currentprocess = `2`;
+    // }
 
     userInfo.ref1 = `${this.systemType}`;
     userInfo.ref2 = '03';
@@ -229,6 +238,8 @@ export class SchoolRequestComponent implements OnInit {
       ...{ hiringinfo: JSON.stringify(formData.hiringinfo) },
       ...{ visainfo: JSON.stringify(visaInfo) },
       ...{ schooladdrinfo: JSON.stringify(formData.schoolAddr) },
+      ...{ reasoninfo: JSON.stringify(formData.reasoninfo) },
+      ...{ fileinfo: JSON.stringify({ tab3, tab4, tab5, tab6 }) },
     };
 
     if (type == 'submit') {
@@ -248,7 +259,6 @@ export class SchoolRequestComponent implements OnInit {
   updateRequest(type: string) {
     const baseForm = this.fb.group(new SchoolRequest());
     const formData: any = this.form.getRawValue();
-
     const userInfo = formData.userInfo;
     userInfo.currentprocess = `1`;
     userInfo.requeststatus = `1`;
@@ -283,6 +293,11 @@ export class SchoolRequestComponent implements OnInit {
       visaenddate: userInfo.visaenddate,
     };
 
+    const tab3 = this.eduFiles.map((file) => file.fileId || null);
+    const tab4 = this.teachingFiles.map((file) => file.fileId || null);
+    const tab5 = this.reasonFiles.map((file) => file.fileId || null);
+    const tab6 = this.attachFiles.map((file) => file.fileId || null);
+
     const payload = {
       ...replaceEmptyWithNull(userInfo),
       ...{ addressinfo: JSON.stringify([formData.addr1, formData.addr2]) },
@@ -291,6 +306,8 @@ export class SchoolRequestComponent implements OnInit {
       ...{ hiringinfo: JSON.stringify(formData.hiringinfo) },
       ...{ visainfo: JSON.stringify(visaInfo) },
       ...{ schooladdrinfo: JSON.stringify(formData.schoolAddr) },
+      ...{ reasoninfo: JSON.stringify(formData.reasoninfo) },
+      ...{ fileinfo: JSON.stringify({ tab3, tab4, tab5, tab6 }) },
     };
 
     baseForm.patchValue(payload);
@@ -320,7 +337,6 @@ export class SchoolRequestComponent implements OnInit {
 
     //console.log('update payload = ', res);
     this.requestService.updateRequest(res).subscribe((res) => {
-      //console.log('update result = ', res);
       this.backToListPage();
     });
   }
@@ -343,22 +359,28 @@ export class SchoolRequestComponent implements OnInit {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
       //console.log('userInfo valid = ', this.form.controls.userInfo.valid);
       //console.log('form valid = ', this.form.valid);
-      // formValid + สถานะเป็นสร้างและส่งใบคำขอ, บันทึกชั่วคราวไม่ได้ ส่งใบคำขอไม่ได้
-      if (this.form.valid && this.currentProcess === 2) {
-        this.disableTempSave = true;
-        this.disableSave = true;
-      }
-
-      // formValid + สถานะเป็นสร้างใบคำขอ, บันทึกชั่วคราวได้ ส่งใบคำขอได้
-      if (this.form.valid && this.currentProcess === 1) {
-        this.disableTempSave = false;
-        this.disableSave = false;
-      }
 
       // formValid + ไม่มีหมายเลขใบคำขอ ทำได้ทุกอย่าง
       if (this.form.valid && !this.requestId) {
         this.disableTempSave = false;
         this.disableSave = false;
+      }
+
+      // formValid + สถานะเป็นสร้างใบคำขอ, บันทึกชั่วคราวได้ ส่งใบคำขอได้
+      else if (this.form.valid && this.currentProcess === 1) {
+        this.disableTempSave = false;
+        this.disableSave = false;
+      }
+
+      // formValid + สถานะเป็นสร้างและส่งใบคำขอ, บันทึกชั่วคราวไม่ได้ ส่งใบคำขอไม่ได้
+      else if (this.form.valid && this.currentProcess === 2) {
+        this.disableTempSave = true;
+        this.disableSave = true;
+      }
+      // form invalid
+      else {
+        this.disableTempSave = true;
+        this.disableSave = true;
       }
 
       // มีหมายเลขใบคำขอแล้ว enable ปุ่มยกเลิก
@@ -382,23 +404,27 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   loadRequestFromId(id: number) {
-    this.requestService.getRequestById(id).subscribe((res: any) => {
+    this.requestService.getRequestById(id).subscribe((res) => {
       this.requestData = res;
+      this.requestDate = thaiDate(new Date(`${res.requestdate}`));
       this.requestNo = res.requestno;
-      this.currentProcess = +res.currentprocess;
+      this.currentProcess = Number(res.currentprocess);
       //console.log('current process = ', this.currentProcess);
       this.pathUserInfo(res);
       this.patchAddress(parseJson(res.addressinfo));
       this.patchEdu(parseJson(res.eduinfo));
       this.patchHiringInfo(parseJson(res.hiringinfo));
       this.patchTeachingInfo(parseJson(res.teachinginfo));
+      this.patchReasonInfo(parseJson(res.reasoninfo));
+      this.patchFileInfo(parseJson(res.fileinfo));
     });
   }
 
   patchTeachingInfo(res: any) {
     //console.log('teaching response= ', res);
+    //if (!res.teachingLevel) return;
     const teachingLevel = levels.map((level) => {
-      if (res.teachingLevel.includes(level.value)) {
+      if (res.teachingLevel?.includes(level.value)) {
         return level.value;
       } else {
         return false;
@@ -406,7 +432,7 @@ export class SchoolRequestComponent implements OnInit {
     });
 
     const teachingSubjects = subjects.map((subj) => {
-      if (res.teachingSubjects.includes(subj.value)) {
+      if (res.teachingSubjects?.includes(subj.value)) {
         return subj.value;
       } else {
         return false;
@@ -420,6 +446,28 @@ export class SchoolRequestComponent implements OnInit {
     this.form.controls.teachinginfo.patchValue(data);
   }
 
+  patchReasonInfo(res: any) {
+    this.form.controls.reasoninfo.patchValue(res);
+  }
+  patchFileInfo(res: any) {
+    this.patchFileId(this.eduFiles, res.tab3);
+    this.patchFileId(this.teachingFiles, res.tab4);
+    this.patchFileId(this.reasonFiles, res.tab5);
+    this.patchFileId(this.attachFiles, res.tab6);
+  }
+  patchFileId(fileList: any, fileIdList: any) {
+    const allService = [];
+    for (const id of fileIdList) {
+      const service = this.fileUploadService.downloadFile({ id });
+      allService.push(service);
+    }
+    zip(...allService).subscribe((res) =>
+      res.forEach((file: any, index) => {
+        fileList[index].fileId = file.id;
+        fileList[index].fileName = file.originalname;
+      })
+    );
+  }
   patchHiringInfo(data: any) {
     this.form.controls.hiringinfo.patchValue(data);
   }
@@ -500,10 +548,10 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   getList() {
-    this.eduFiles = RequestEduFiles;
-    this.teachingFiles = RequestTeachingFiles;
-    this.reasonFiles = RequestReasonFiles;
-    this.attachFiles = RequestAttachFiles;
+    this.eduFiles = structuredClone(RequestEduFiles);
+    this.teachingFiles = structuredClone(RequestTeachingFiles);
+    this.reasonFiles = structuredClone(RequestReasonFiles);
+    this.attachFiles = structuredClone(RequestAttachFiles);
 
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.provinces$ = this.addressService.getProvinces();
@@ -626,10 +674,4 @@ export class SchoolRequestComponent implements OnInit {
       }
     }
   }
-
-  /*   onTabIndexChanged(tabIndex: number) {
-    if (tabIndex === 2) {
-      //this.patchEdu(this.staffId);
-    }
-  } */
 }

@@ -1,39 +1,39 @@
-<div class="row">
-  <div class="col-md-6 mb-2">
-    <label class="form-label">{{ degreeLabel }}</label>
-    <input class="form-control form-search" type="text" />
-  </div>
-  <div class="col-md-6 mb-2" *ngIf="hasExperience">
-    <label class="form-label">ประสบการณ์ในบริหารสถานศึกษา</label>
-    <div class="d-flex align-items-center">
-      <input class="form-control form-search" type="text" /><span
-        class="form-label ms-3"
-        >ปี</span
-      >
+<form [formGroup]="form">
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <label class="form-label">{{ degreeLabel }}</label>
+      <input class="form-control" type="text" formControlName="degreeLabel" />
+    </div>
+    <div class="col-md-6 mb-2" *ngIf="hasExperience">
+      <label class="form-label">ประสบการณ์ในบริหารสถานศึกษา</label>
+      <div class="d-flex align-items-center">
+        <input class="form-control" type="text" formControlName="managingExperienceYear" />
+        <span class="form-label ms-3">ปี</span>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="row">
-  <div class="col-md-6 mb-2">
-    <label class="form-label">สถาบันการศึกษา</label>
-    <input class="form-control form-search" type="text" />
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <label class="form-label">สถาบันการศึกษา</label>
+      <input class="form-control" type="text" formControlName="institute" />
+    </div>
+
+    <div class="col-md-6 mb-2">
+      <label class="form-label">สาขา/วิชาเอก</label>
+      <input class="form-control" type="text" formControlName="major" />
+    </div>
   </div>
 
-  <div class="col-md-6 mb-2">
-    <label class="form-label">สาขา/วิชาเอก</label>
-    <input class="form-control form-search" type="text" />
-  </div>
-</div>
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <label class="form-label">วัน/เดือน/ปี ที่เข้าศึกษา</label>
+      <input class="form-control" type="date" formControlName="entryDate" />
+    </div>
 
-<div class="row">
-  <div class="col-md-6 mb-2">
-    <label class="form-label">วัน/เดือน/ปี ที่เข้าศึกษา</label>
-    <input class="form-control" type="date" />
+    <div class="col-md-6 mb-2" *ngIf="hasGraduateDate">
+      <label class="form-label">วัน/เดือน/ปี ที่สำเร็จการศึกษา</label>
+      <input class="form-control" type="date" formControlName="graduationDate" />
+    </div>
   </div>
-
-  <div class="col-md-6 mb-2" *ngIf="hasGraduateDate">
-    <label class="form-label">วัน/เดือน/ปี ที่สำเร็จการศึกษา</label>
-    <input class="form-control" type="date" />
-  </div>
-</div>
+</form>

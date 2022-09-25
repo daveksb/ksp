@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -13,6 +13,8 @@ export class CouncilEducationComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+  @Input() countries: any[] = [];
+
   override form = this.fb.group({
     licenseInfo1: this.fb.array([]),
     licenseInfo2: this.fb.array([]),
@@ -39,19 +41,32 @@ export class CouncilEducationComponent
   }
 
   setDefaulFormValue() {
-    this.addFormArray(this.licenseInfo1);
-    this.addFormArray(this.licenseInfo2);
-    this.addFormArray(this.licenseInfo3);
-    this.addFormArray(this.licenseInfo4);
-    this.addFormArray(this.licenseInfo5);
+    this.addFormArray(this.licenseInfo1, 1);
+    this.addFormArray(this.licenseInfo2, 2);
+    this.addFormArray(this.licenseInfo3, 3);
+    this.addFormArray(this.licenseInfo4, 4);
+    this.addFormArray(this.licenseInfo5, 5);
   }
 
   deleteFormArray(form: FormArray<any>, index: number) {
     form.removeAt(index);
   }
 
-  addFormArray(form: FormArray<any>) {
-    const data = this.fb.group({ title: [''] });
+  addFormArray(form: FormArray<any>, formNumber: number) {
+    let data;
+    if (formNumber === 5) {
+      data = this.fb.group({
+        certificationType: [],
+        recognizedOrganization: [],
+        certificateNo: [],
+        issueDate: [],
+      });
+    } else {
+      data = this.fb.group({
+        licenseForm: [],
+      });
+    }
+
     form.push(data);
   }
 

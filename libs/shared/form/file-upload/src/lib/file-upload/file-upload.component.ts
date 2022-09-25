@@ -3,10 +3,9 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpEventType } from '@angular/common/http';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { MatIconModule } from '@angular/material/icon';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
-import { providerFactory } from '@ksp/shared/utility';
-import { FileUploadService } from './file-upload.service';
+import { getBase64 } from '@ksp/shared/utility';
 import { RequestPageType } from '@ksp/shared/constant';
+import { FileUploadService } from './file-upload.service';
 
 @UntilDestroy()
 @Component({
@@ -15,7 +14,6 @@ import { RequestPageType } from '@ksp/shared/constant';
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss'],
   imports: [CommonModule, MatIconModule, HttpClientModule],
-  providers: providerFactory(FileUploadComponent),
 })
 export class FileUploadComponent {
   @Input()
@@ -25,36 +23,38 @@ export class FileUploadComponent {
   @Input() systemFileName = '-'; // รายชื่ออ้างอิงในระบบ เช่น 'หนังสือนำส่งจากสถานศึกษา (ฉบับจริงและวันที่ออกหนังสือไม่เกิน 30 วัน)', 'รูปถ่าย 1 นิ้ว'
   @Input() pageType!: RequestPageType; // tab ที่เรียกใช้งาน
   @Input() showUploadedFileName = true;
-  @Input() uniqueTimestamp = '';
+  @Input() requestType: number | null = null; // 1,2 no token required
+  @Input() uniqueTimestamp: string | null = null;
   @Input() uploadType: 'button' | 'link' = 'button';
-  @Output() uploadComplete = new EventEmitter<string>();
+  @Output() uploadComplete = new EventEmitter<any>();
 
   fileName = '';
   uploadProgress!: number | null;
 
   constructor(private uploadService: FileUploadService) {}
 
-  onFileSelected(event: any) {
+  async onFileSelected(event: any) {
     const file: File = event.target.files[0];
-
+    const base64 = (await getBase64(file)) as string;
     const payload = {
       pagetype: this.pageType,
       originalname: file.name,
       systemname: this.systemFileName,
-      file: '',
+      file: btoa(base64),
       uniquetimpstamp: this.uniqueTimestamp,
+      requesttype: `${this.requestType}`,
     };
-
-    file.text().then((res) => {
-      payload.file = btoa(unescape(encodeURIComponent(res)));
-      this.uploadFile(payload);
-    });
+    // file.text().then((res) => {
+    //   const blob = new Blob([res], { type: file.type });
+    //   const url = window.URL.createObjectURL(blob);
+    //   window.URL.revokeObjectURL(url);
+    //   // payload.file = btoa(encodeURIComponent(res));
+    this.uploadFile(payload);
+    // });
 
     if (file) {
       this.fileName = file.name;
     }
-
-    this.uploadComplete.emit(file.name);
   }
 
   uploadFile(payload: any) {
@@ -64,6 +64,12 @@ export class FileUploadComponent {
       .subscribe((event: any) => {
         if (event.type == HttpEventType.UploadProgress) {
           this.uploadProgress = Math.round(100 * (event.loaded / event.total));
+        }
+        if (event.status == 200 && event.body?.id) {
+          this.uploadComplete.emit({
+            fileId: event.body.id,
+            fileName: this.fileName,
+          });
         }
       });
   }

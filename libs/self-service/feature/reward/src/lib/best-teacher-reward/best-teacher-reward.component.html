@@ -1,63 +1,96 @@
-<div class="box-header">รายละเอียด</div>
-<mat-tab-group class="tab-group" animationDuration="0ms" [selectedIndex]="0">
+<div class="box-header">รายละเอียด: รางวัลครูผู้สอนดีเด่น</div>
+<mat-tab-group
+  [formGroup]="form"
+  class="tab-group"
+  animationDuration="0ms"
+  [selectedIndex]="0">
   <mat-tab label="ข้อมูลส่วนตัว">
     <ksp-form-user-info
       [displayMode]="[userInfoType]"
       [isSchoolService]="false"
-    ></ksp-form-user-info>
+      [prefixList]="prefixList"
+      formControlName="userInfo"></ksp-form-user-info>
   </mat-tab>
 
   <mat-tab label="ที่อยู่" class="tab-content">
-    <ksp-form-address [isDarkMode]="true">
+    <ksp-form-address
+      formControlName="addressInfo"
+      [isDarkMode]="true"
+      [provinces]="provinces1$ | async"
+      [amphurs]="amphurs1$ | async"
+      [tumbols]="tumbols1$ | async"
+      (provinceChanged)="provinceChanged(1, $event)"
+      (amphurChanged)="amphurChanged(1, $event)">
       <span class="text-primary">ที่อยู่ที่สามารถติดต่อได้</span>
     </ksp-form-address>
     <hr />
     <div class="box-header text-primary">สถานที่ทำงาน</div>
-    <self-service-form-user-workplace></self-service-form-user-workplace>
+    <self-service-form-user-workplace
+      formControlName="workplace"
+      [provinces]="provinces2$ | async"
+      [amphurs]="amphurs2$ | async"
+      [tumbols]="tumbols2$ | async"
+      [bureaus]="bureaus"
+      (provinceChanged)="provinceChanged(2, $event)"
+      (amphurChanged)="amphurChanged(2, $event)">
+    </self-service-form-user-workplace>
     <div class="row">
-      <div class="col-md-6 mb-3">
+      <div class="col-md-6 mb-2">
         <label class="form-label">โทรศัพท์</label>
-        <input class="form-control" type="text" />
+        <input class="form-control" type="text" formControlName="phone" />
       </div>
 
-      <div class="col-md-6 mb-3">
+      <div class="col-md-6 mb-2">
         <label class="form-label">โทรสาร</label>
-        <input class="form-control" type="text" />
+        <input class="form-control" type="text" formControlName="fax" />
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6 mb-3">
+      <div class="col-md-6 mb-2">
         <label class="form-label">อีเมล</label>
-        <input class="form-control" type="text" />
+        <input class="form-control" type="text" formControlName="email" />
       </div>
 
-      <div class="col-md-6 mb-3">
+      <div class="col-md-6 mb-2">
         <label class="form-label">เว็บไซต์</label>
-        <input class="form-control" type="text" />
+        <input class="form-control" type="text" formControlName="website" />
       </div>
     </div>
   </mat-tab>
 
   <mat-tab label="ข้อมูลครูสอนดีเด่น">
-    <ksp-best-teacher-info></ksp-best-teacher-info>
+    <ksp-best-teacher-info formControlName="rewardTeacherInfo"></ksp-best-teacher-info>
   </mat-tab>
 
   <mat-tab label="ข้อมูลการศึกษา">
-    <ksp-council-education></ksp-council-education>
+    <ksp-council-education formControlName="eduInfo"></ksp-council-education>
   </mat-tab>
 
-  <mat-tab label="ข้อมูลการสอน"
-    ><ksp-thai-teacher-teaching></ksp-thai-teacher-teaching>
+  <mat-tab label="ข้อมูลการสอน">
+    <ksp-thai-teacher-teaching
+      formControlName="teachingInfo"
+      [bureaus]="bureaus"
+      [provinces]="provinces3$ | async"
+      [amphurs]="amphurs3$ | async"
+      [tumbols]="tumbols3$ | async"
+      [provinces2]="provinces4$ | async"
+      [amphurs2]="amphurs4$ | async"
+      [tumbols2]="tumbols4$ | async"
+      (provinceChanged)="provinceChanged(3, $event)"
+      (amphurChanged)="amphurChanged(3, $event)"
+      (province2Changed)="provinceChanged(4, $event)"
+      (amphur2Changed)="amphurChanged(4, $event)"
+      (sameAddress)="onSameAddress()"></ksp-thai-teacher-teaching>
   </mat-tab>
 
   <mat-tab label="ข้อมูลนวัตกรรมและรางวัล">
-    <ksp-best-teacher-innovation></ksp-best-teacher-innovation>
+    <ksp-best-teacher-innovation formControlName="rewardDetailInfo"></ksp-best-teacher-innovation>
   </mat-tab>
 </mat-tab-group>
 
-<div class="d-flex justify-content-center my-3">
+<!-- <div class="d-flex justify-content-center my-3">
   <button type="button" class="btn border-primary text-primary bg-white">
     บันทึกชั่วคราว
   </button>
   <button type="button" class="ms-3 btn btn-primary">บันทึกและยื่น</button>
-</div>
+</div> -->

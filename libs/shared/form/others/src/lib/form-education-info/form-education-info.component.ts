@@ -34,6 +34,7 @@ export class FormEducationInfoComponent
   @Input() showGraduateYearInput = false;
   @Input() countries: any[] = [];
   @Input() showCheckbox = true;
+  @Input() option = false;
 
   /*   _defualtDegree = 0;
   @Input()
@@ -62,6 +63,9 @@ export class FormEducationInfoComponent
         this.degreeLevel.disable();
       }, 0);
     } */
+    if (this.option) {
+      this.form.clearValidators();
+    }
     this.form.valueChanges.subscribe((res) => {
       //console.log('res = ', res);
     });

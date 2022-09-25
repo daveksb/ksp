@@ -14,9 +14,9 @@
       <hr />
     </div>
 
-    <!--     <div class="bg-light p-4 mx-3">
+    <div class="bg-light p-4 mx-3">
       <ksp-license-info></ksp-license-info>
-    </div> -->
+    </div>
 
     <div class="bg-light py-2 px-4 mx-3 mt-3">
       <div class="box-header">
@@ -35,123 +35,160 @@
           </tr>
         </thead>
         <tbody class="body__table">
-          <!--           <tr>
+          <tr>
             <td>1</td>
             <td>123xxx</td>
             <td>นายประวิทย์ มาสถาพร</td>
-            <td>xx/xx/xxxx</td>
-            <td>xx/xx/xxxx</td>
+            <td>12/สิงหาคม/2565</td>
+            <td>12/สิงหาคม/2565</td>
             <td>
               <i role="button" class="box-header text-success bi bi-eye"></i>
             </td>
           </tr>
-          <tr>
-            <td>2</td>
-            <td>123xxx</td>
-            <td>นายประวิทย์ มาสถาพร</td>
-            <td>xx/xx/xxxx</td>
-            <td>xx/xx/xxxx</td>
-            <td>
-              <i role="button" class="box-header text-success bi bi-eye"></i>
-            </td>
-          </tr> -->
         </tbody>
       </table>
     </div>
 
-    <div class="bg-light py-2 px-4 m-3">
-      <form [formGroup]="form">
-        <div class="box-header required mb-2">กิจกรรมการพัฒนาตนเอง</div>
-        <div class="row">
-          <div class="col-8 mb-3">
-            <select
-              formControlName="type"
-              class="form-select"
-              style="white-space: break-spaces"
-              #selector
-            >
-              <option value="null" selected hidden disabled>กรุณาเลือก</option>
-              <option
-                class="form-label text-black"
-                *ngFor="let activity of activityTypes"
-                [value]="activity.value"
+    <div
+      class="bg-light py-2 px-4 mx-3 mt-3"
+      *ngIf="pageType === activityPageMode.view"
+    >
+      <div class="box-header">ข้อมูลกิจกรรมพัฒนาตนเอง</div>
+
+      <table class="table">
+        <thead class="header__table">
+          <tr>
+            <th scope="col">ลำดับ</th>
+            <th scope="col">กิจกรรมพัฒนาตนเอง</th>
+            <th scope="col">วันที่แก้ไขล่าสุด</th>
+            <th scope="col">วันที่บันทึก</th>
+            <th scope="col">แก้ไขข้อมูล</th>
+            <th scope="col">ดูเข้อมูล</th>
+          </tr>
+        </thead>
+        <tbody class="body__table">
+          <tr>
+            <td>1</td>
+            <td>
+              มีวุฒิเพิ่มขึ้นในสาขาที่เกี่ยวข้องกับการประกอบวิชาชีพทางการศึกษา
+            </td>
+            <td>12/สิงหาคม/2565</td>
+            <td>12/สิงหาคม/2565</td>
+            <td>
+              <i
+                role="button"
+                class="box-header text-primary bi bi-pencil-square"
+                (click)="edit(activityPageMode.edit, staffId)"
+              ></i>
+            </td>
+            <td>
+              <i
+                role="button"
+                class="box-header text-success bi bi-eye"
+                (click)="view(activityPageMode.edit, staffId)"
+              ></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ng-container *ngIf="pageType === activityPageMode.edit">
+      <div class="bg-light py-2 px-4 m-3">
+        <form [formGroup]="form">
+          <div class="box-header required mb-2">กิจกรรมการพัฒนาตนเอง</div>
+          <div class="row">
+            <div class="col-8 mb-3">
+              <select
+                formControlName="type"
+                class="form-select"
+                style="white-space: break-spaces"
+                #selector
               >
-                {{ activity.label }}
-              </option>
-            </select>
+                <option value="null" selected hidden disabled>
+                  กรุณาเลือก
+                </option>
+                <option
+                  class="form-label text-black"
+                  *ngFor="let activity of activityTypes"
+                  [value]="activity.value"
+                >
+                  {{ activity.label }}
+                </option>
+              </select>
+            </div>
           </div>
-        </div>
-        <!-- <ng-template kspDynamicComponent formControlName="test"></ng-template> -->
-        <ksp-activity-add-degree
-          *ngIf="selector.value === '0'"
-          formControlName="detail"
-        ></ksp-activity-add-degree>
+          <!-- <ng-template kspDynamicComponent formControlName="test"></ng-template> -->
+          <ksp-activity-add-degree
+            *ngIf="selector.value === '0'"
+            formControlName="detail"
+          ></ksp-activity-add-degree>
 
-        <ksp-activity-diploma-receive
-          *ngIf="selector.value === '1'"
-          formControlName="detail"
-        ></ksp-activity-diploma-receive>
+          <ksp-activity-diploma-receive
+            *ngIf="selector.value === '1'"
+            formControlName="detail"
+          ></ksp-activity-diploma-receive>
 
-        <ksp-activity-seminar
-          *ngIf="selector.value === '2'"
-          formControlName="detail"
-        ></ksp-activity-seminar>
+          <ksp-activity-seminar
+            *ngIf="selector.value === '2'"
+            formControlName="detail"
+          ></ksp-activity-seminar>
 
-        <ksp-activity-academic-archivement
-          *ngIf="selector.value === '3'"
-          formControlName="detail"
-        ></ksp-activity-academic-archivement>
+          <ksp-activity-academic-archivement
+            *ngIf="selector.value === '3'"
+            formControlName="detail"
+          ></ksp-activity-academic-archivement>
 
-        <ksp-activity-lecturer
-          *ngIf="selector.value === '4'"
-          formControlName="detail"
-        ></ksp-activity-lecturer>
+          <ksp-activity-lecturer
+            *ngIf="selector.value === '4'"
+            formControlName="detail"
+          ></ksp-activity-lecturer>
 
-        <ksp-activity-write-book
-          *ngIf="selector.value === '5'"
-          formControlName="detail"
-        ></ksp-activity-write-book>
+          <ksp-activity-write-book
+            *ngIf="selector.value === '5'"
+            formControlName="detail"
+          ></ksp-activity-write-book>
 
-        <ksp-activity-innovation
-          *ngIf="selector.value === '6'"
-          formControlName="detail"
-        ></ksp-activity-innovation>
+          <ksp-activity-innovation
+            *ngIf="selector.value === '6'"
+            formControlName="detail"
+          ></ksp-activity-innovation>
 
-        <ksp-activity-research
-          *ngIf="selector.value === '7'"
-          formControlName="detail"
-        ></ksp-activity-research>
+          <ksp-activity-research
+            *ngIf="selector.value === '7'"
+            formControlName="detail"
+          ></ksp-activity-research>
 
-        <ksp-activity-reward
-          *ngIf="selector.value === '8'"
-          formControlName="detail"
-        ></ksp-activity-reward>
+          <ksp-activity-reward
+            *ngIf="selector.value === '8'"
+            formControlName="detail"
+          ></ksp-activity-reward>
 
-        <ksp-activity-lecture-register
-          *ngIf="selector.value === '9'"
-          formControlName="detail"
-        ></ksp-activity-lecture-register>
+          <ksp-activity-lecture-register
+            *ngIf="selector.value === '9'"
+            formControlName="detail"
+          ></ksp-activity-lecture-register>
 
-        <ksp-activity-study-tour
-          *ngIf="selector.value === '10'"
-          formControlName="detail"
-        ></ksp-activity-study-tour>
+          <ksp-activity-study-tour
+            *ngIf="selector.value === '10'"
+            formControlName="detail"
+          ></ksp-activity-study-tour>
 
-        <ksp-activity-learning-material
-          *ngIf="selector.value === '11'"
-          formControlName="detail"
-        ></ksp-activity-learning-material>
-      </form>
-    </div>
+          <ksp-activity-learning-material
+            *ngIf="selector.value === '11'"
+            formControlName="detail"
+          ></ksp-activity-learning-material>
+        </form>
+      </div>
 
-    <div class="mx-3">
-      <ng-template [ngIf]="selector.value">
-        <ksp-form-attachment
-          title="กรุณาแนบหลักฐานประกอบการปฏิบัติงาน"
-          [groups]="attachFiles"
-        ></ksp-form-attachment
-      ></ng-template>
-    </div>
+      <div class="mx-3">
+        <ng-container *ngIf="selector.value !== ''">
+          <ksp-form-attachment
+            title="กรุณาแนบหลักฐานประกอบการปฏิบัติงาน"
+            [groups]="attachFiles"
+          ></ksp-form-attachment
+        ></ng-container></div
+    ></ng-container>
   </div>
 </div>
 
@@ -162,7 +199,7 @@
     [showCenterButtons]="true"
     [showCancelButton]="true"
     [showSaveButton]="true"
-    [disableSaveButton]="!form.valid"
+    [disableSaveButton]="form.invalid"
     (saveClicked)="submit()"
     (cancelClicked)="cancel()"
   ></ksp-bottom-nav>

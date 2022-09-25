@@ -1,21 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import localForage from 'localforage';
 @Component({
-  selector: 'ksp-register-foreign-step-one',
   templateUrl: './register-foreign-step-one.component.html',
   styleUrls: ['./register-foreign-step-one.component.scss'],
 })
-export class RegisterForeignStepOneComponent implements OnInit {
-  constructor(private router: Router) {}
-
-  ngOnInit(): void {}
+export class RegisterForeignStepOneComponent {
+  constructor(private router: Router, private fb: FormBuilder) {}
+  form = this.fb.group({
+    prefixen: [],
+    firstnameen: [],
+    middlenameen: [],
+    lastnameen: [],
+    birthdate: [],
+    country: [],
+    nationality: [],
+    phone: [],
+    email: [],
+  });
 
   next() {
-    this.router.navigate(['/', 'register', 'en-step-2']);
+    localForage.getItem('registerForeign').then((res: any) => {
+      const data = { ...res, ...this.form.value };
+      localForage.setItem('registerForeignr', data);
+      this.router.navigate(['/register', 'en-step-2']);
+    });
   }
 
   loginPage() {
-    this.router.navigate(['/', 'login']);
+    this.router.navigate(['/login']);
   }
 }

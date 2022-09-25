@@ -1,0 +1,90 @@
+<ksp-top-nav [isSelfService]="true">
+  <span header>ขอรับรางวัลการยกย่องเชิดชูเกียรติ</span>
+</ksp-top-nav>
+
+<form [formGroup]="form">
+  <div class="full-height main__container px-4 py-2">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="box-header">ประเภทรางวัล</div>
+        <select class="form-select" formControlName="rewardType" #rewardType>
+          <option selected hidden disabled value="null">กรุณาเลือก</option>
+          <option *ngFor="let reward of rewardTypes" [value]="reward.value">
+            {{ reward.label }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div *ngIf="rewardType.value">
+      <self-service-request-status></self-service-request-status>
+    </div>
+
+    <div *ngIf="rewardType.value === '40'">
+      <ksp-council-reward
+        formControlName="rewardDetail"
+        [userInfo]="myInfo"
+        [addressInfo]="addressInfo"
+        [prefixList]="prefixList$ | async"></ksp-council-reward>
+    </div>
+
+    <div *ngIf="rewardType.value === '41'">
+      <ksp-thai-teacher-reward
+        [userInfo]="myInfo"
+        [addressInfo]="addressInfo"
+        [workplaceInfo]="workplaceInfo"
+        [prefixList]="prefixList$ | async"
+        [bureaus]="bureau$ | async"
+        formControlName="rewardDetail"></ksp-thai-teacher-reward>
+    </div>
+
+    <div *ngIf="rewardType.value === '42'">
+      <ksp-best-teacher-reward
+        formControlName="rewardDetail"
+        [userInfo]="myInfo"
+        [addressInfo]="addressInfo"
+        [workplaceInfo]="workplaceInfo"
+        [bureaus]="bureau$ | async"
+        [prefixList]="prefixList$ | async"></ksp-best-teacher-reward>
+    </div>
+
+    <div *ngIf="rewardType.value === '43'">
+      <ksp-praise-teacher-reward
+        [userInfo]="myInfo"
+        [addressInfo]="addressInfo"
+        [workplaceInfo]="workplaceInfo"
+        [prefixList]="prefixList$ | async"
+        [bureaus]="bureau$ | async"
+        formControlName="rewardDetail"></ksp-praise-teacher-reward>
+    </div>
+
+    <div *ngIf="rewardType.value === '44'">
+      <ksp-senior-teacher-reward
+        [userInfo]="myInfo"
+        [addressInfo]="addressInfo"
+        [workplaceInfo]="workplaceInfo"
+        [prefixList]="prefixList$ | async"
+        [bureaus]="bureau$ | async"
+        formControlName="rewardDetail"></ksp-senior-teacher-reward>
+    </div>
+    <div *ngIf="rewardType.value === '45'">
+      <ksp-research-reward formControlName="rewardDetail"></ksp-research-reward>
+    </div>
+
+    <div *ngIf="rewardType.value">
+      <div class="d-flex justify-content-center my-3">
+        <button
+          (click)="tempSave()"
+          type="button"
+          class="btn border-primary text-primary bg-white">
+          บันทึกชั่วคราว
+        </button>
+        <button
+          (click)="save()"
+          type="button"
+          class="ms-3 btn btn-primary">
+          บันทึกและยื่น
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

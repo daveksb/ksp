@@ -1,141 +1,151 @@
-<div class="box-header">การสอนครั้งแรก</div>
-<div class="border rounded px-3 py-2">
-  <div class="row mb-2">
-    <div class="col">
-      <label class="form-label">สังกัด</label>
-      <select class="form-select">
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
+<form [formGroup]="form">
+  <div class="box-header">การสอนครั้งแรก</div>
+  <div class="border rounded px-3 py-2">
+    <div class="row">
+      <div class="col-md-6 mb-2">
+        <label class="form-label">สังกัด</label>
+        <select class="form-select" formControlName="affiliation">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option
+            *ngFor="let bureau of bureaus"
+            [value]="bureau?.bureauId">
+            {{ bureau?.bureauName }}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-6 mb-2">
+        <label class="form-label">สถานที่สอน</label>
+        <input class="form-control form-search" type="text" formControlName="teachingPlace" />
+      </div>
     </div>
-    <div class="col">
-      <label class="form-label">สถานที่สอน</label>
-      <input class="form-control form-search" type="text" />
+    <div class="row">
+      <div class="col-md-6 mb-2">
+        <label class="form-label">จังหวัด</label>
+        <select class="form-select" formControlName="province" (change)="provinceChanged.emit($event)">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option
+            *ngFor="let province of provinces"
+            [value]="province?.province_id">
+            {{ province?.province_name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-6 mb-2">
+        <label class="form-label">ตำบล</label>
+        <select class="form-select" formControlName="subDistrict">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option *ngFor="let t of tumbols" [value]="t?.tambolCode">
+            {{ t?.tambolName }}
+          </option>
+        </select>
+      </div>
     </div>
-  </div>
-  <div class="row mb-2">
-    <div class="col">
-      <label class="form-label">จังหวัด</label>
-      <select class="form-select">
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
+    <div class="row">
+      <div class="col-md-6 mb-2">
+        <label class="form-label">อำเภอ</label>
+        <select class="form-select" formControlName="district" (change)="amphurChanged.emit($event)">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option *ngFor="let a of amphurs" [value]="a?.amphurCode">
+            {{ a?.amphurName }}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-6 mb-2">
+        <label class="form-label">สอนระดับชั้น</label>
+        <input class="form-control" type="text" formControlName="teachingLevel" />
+      </div>
     </div>
-    <div class="col">
-      <label class="form-label">ตำบล</label>
-      <select class="form-select">
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-  </div>
-  <div class="row mb-2">
-    <div class="col">
-      <label class="form-label">อำเภอ</label>
-      <select class="form-select">
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-    <div class="col">
-      <label class="form-label">สอนระดับชั้น</label>
-      <input class="form-control" type="text" />
-    </div>
-  </div>
-  <div class="row mb-2">
-    <div class="col">
-      <label class="form-label">วันที่เริ่ม</label>
-      <input class="form-control" type="date" />
-    </div>
-    <div class="col">
-      <label class="form-label">วันที่สิ้นสุด</label>
-      <input class="form-control" type="date" />
-    </div>
-  </div>
-</div>
-<br />
-<div class="d-flex align-items-center">
-  <div class="box-header me-4">การสอนปัจจุบัน</div>
-  <input type="checkbox" class="me-2" />
-  <label class="form-label">สอนที่เดิม</label>
-</div>
-<div class="border rounded px-3 py-2">
-  <div class="row mb-2">
-    <div class="col">
-      <label class="form-label">สังกัด</label>
-      <select class="form-select">
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-    <div class="col">
-      <label class="form-label">สถานที่สอน</label>
-      <input class="form-control form-search" type="text" />
+    <div class="row">
+      <div class="col-md-6 mb-2">
+        <label class="form-label">วันที่เริ่ม</label>
+        <input class="form-control" type="date" formControlName="startDate" />
+      </div>
+      <div class="col-md-6 mb-2">
+        <label class="form-label">วันที่สิ้นสุด</label>
+        <input class="form-control" type="date" formControlName="endDate" />
+      </div>
     </div>
   </div>
-  <div class="row mb-2">
-    <div class="col">
-      <label class="form-label">จังหวัด</label>
-      <select class="form-select">
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
+  <br />
+  <div class="d-flex align-items-center">
+    <div class="box-header me-4">การสอนปัจจุบัน</div>
+    <input type="checkbox" class="me-2" (change)="useSameAddress($event)" />
+    <label class="form-label">สอนที่เดิม</label>
+  </div>
+  <div class="border rounded px-3 py-2">
+    <div class="row">
+      <div class="col-md-6 mb-2">
+        <label class="form-label">สังกัด</label>
+        <select class="form-select" formControlName="currentAffiliation">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option
+            *ngFor="let bureau of bureaus"
+            [value]="bureau?.bureauId">
+            {{ bureau?.bureauName }}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-6 mb-2">
+        <label class="form-label">สถานที่สอน</label>
+        <input class="form-control form-search" type="text" formControlName="currentTeachingPlace" />
+      </div>
     </div>
-    <div class="col">
-      <label class="form-label">ตำบล</label>
-      <select class="form-select">
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
+    <div class="row">
+      <div class="col-md-6 mb-2">
+        <label class="form-label">จังหวัด</label>
+        <select class="form-select" formControlName="currentProvince" (change)="province2Changed.emit($event)">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option
+            *ngFor="let province of provinces2"
+            [value]="province?.province_id">
+            {{ province?.province_name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-6 mb-2">
+        <label class="form-label">ตำบล</label>
+        <select class="form-select" formControlName="currentSubDistrict">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option *ngFor="let t of tumbols2" [value]="t?.tambolCode">
+            {{ t?.tambolName }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-2">
+        <label class="form-label">อำเภอ</label>
+        <select class="form-select" formControlName="currentDistrict" (change)="amphur2Changed.emit($event)">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option *ngFor="let a of amphurs2" [value]="a?.amphurCode">
+            {{ a?.amphurName }}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-6 mb-2">
+        <label class="form-label">สอนระดับชั้น</label>
+        <input class="form-control" type="text" formControlName="currentTeachingLevel" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-2">
+        <label class="form-label">โทรศัพท์</label>
+        <input class="form-control" type="text" formControlName="phone" />
+      </div>
+      <div class="col-md-6 mb-2">
+        <label class="form-label">โทรสาร</label>
+        <input class="form-control" type="text" formControlName="fax" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-2">
+        <label class="form-label">สอนภาษาไทยต่อเนื่องกันเป็นเวลา (ปี)</label>
+        <input class="form-control" type="text" formControlName="continuousTeachingYear" />
+      </div>
+      <div class="col-md-6 mb-2">
+        <label class="form-label">ชื่อผลงาน</label>
+        <input class="form-control" type="text" formControlName="workTitle" />
+      </div>
     </div>
   </div>
-  <div class="row mb-2">
-    <div class="col">
-      <label class="form-label">อำเภอ</label>
-      <select class="form-select">
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-    <div class="col">
-      <label class="form-label">สอนระดับชั้น</label>
-      <input class="form-control" type="text" />
-    </div>
-  </div>
-  <div class="row mb-2">
-    <div class="col">
-      <label class="form-label">โทรศัพท์</label>
-      <input class="form-control" type="text" />
-    </div>
-    <div class="col">
-      <label class="form-label">โทรสาร</label>
-      <input class="form-control" type="text" />
-    </div>
-  </div>
-  <div class="row mb-2">
-    <div class="col">
-      <label class="form-label">สอนภาษาไทยต่อเนื่องกันเป็นเวลา (ปี)</label>
-      <input class="form-control" type="text" />
-    </div>
-    <div class="col">
-      <label class="form-label">ชื่อผลงาน</label>
-      <input class="form-control" type="text" />
-    </div>
-  </div>
-</div>
+</form>

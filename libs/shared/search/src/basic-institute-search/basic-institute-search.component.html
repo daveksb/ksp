@@ -11,14 +11,10 @@
         *ngIf="searchType === 'uni'"
       >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
-        <option value="0">zero</option>
-        <option value="1">one</option>
-        <option value="2">two</option>
-        <option value="3">three</option>
-        <option value="4">four</option>
-        <option value="5">five</option>
-        <option value="6">six</option>
-        <option value="7">seven</option>
+        <option
+              *ngFor="let uni of universityType" [value]="uni?.id">
+              {{ uni?.name }}
+            </option>
       </select>
 
       <select

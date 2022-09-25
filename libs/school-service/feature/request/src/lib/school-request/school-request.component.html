@@ -8,7 +8,7 @@
   <div [formGroup]="form" class="bg-white py-3 px-4">
     <div>
       <ksp-request-header-info
-        [requestDate]="today"
+        [requestDate]="requestDate"
         [requestNumber]="requestNo"
       ></ksp-request-header-info>
       <hr />
@@ -103,22 +103,33 @@
             [countries]="countries$ | async"
           >
           </ksp-form-education-info>
+          <div class="px-3 py-3 col-6 mb-2 d-flex align-items-center">
+            <input type="checkbox" class="me-2" [formControl]="option" />
+            <label class="form-label">ปริญญาอื่นๆ</label>
+          </div>
 
-          <ksp-form-education-info
-            formControlName="edu2"
-            [showGradeInput]="false"
-            [showSelectDegree]="true"
-            [showPropertyInput]="true"
-            [countries]="countries$ | async"
-          >
-          </ksp-form-education-info>
+          <ng-container *ngIf="Option$ | async">
+            <ksp-form-education-info
+              formControlName="edu2"
+              [showGradeInput]="false"
+              [showSelectDegree]="true"
+              [showPropertyInput]="true"
+              [countries]="countries$ | async"
+              [option]="true"
+            >
+            </ksp-form-education-info>
+          </ng-container>
 
           <!--           <ksp-form-education-info-manager
             *ngIf="requestSubType === 2 || requestSubType === 3"
             formControlName="edu3"
           ></ksp-form-education-info-manager> -->
 
-          <ksp-form-attachment [groups]="eduFiles"></ksp-form-attachment>
+          <ksp-form-attachment
+            [pageType]="pageType.educationTab"
+            [uniqueTimestamp]="uniqueTimestamp"
+            [groups]="eduFiles"
+          ></ksp-form-attachment>
         </mat-tab>
 
         <mat-tab label="ข้อมูลการสอนและการจ้าง">
@@ -153,7 +164,9 @@
         </mat-tab>
 
         <mat-tab label="ข้อมูลชี้แจงเหตุผล">
-          <ksp-form-reason-info></ksp-form-reason-info>
+          <ksp-form-reason-info
+            formControlName="reasoninfo"
+          ></ksp-form-reason-info>
           <ksp-form-attachment
             [uniqueTimestamp]="uniqueTimestamp"
             [pageType]="pageType.reasonTab"
@@ -166,7 +179,6 @@
             [uniqueTimestamp]="uniqueTimestamp"
             [pageType]="pageType.fileAttachTab"
             [groups]="attachFiles"
-            (downloadClick)="loadFile()"
           ></ksp-form-attachment>
         </mat-tab>
       </mat-tab-group>

@@ -7,6 +7,14 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { FormBuilder } from '@angular/forms';
+import { EMPTY, Observable, switchMap } from 'rxjs';
+import {
+  AddressService,
+  GeneralInfoService,
+  UniInfoService,
+  UniRequestService,
+} from '@ksp/shared/service';
+import { getCookie } from '@ksp/shared/utility';
 
 @Component({
   templateUrl: './foreign-student-id.component.html',
@@ -14,18 +22,42 @@ import { FormBuilder } from '@angular/forms';
 })
 export class ForeignStudentIdComponent {
   @Input() mode: FormMode = 'edit';
-  foreignInfo = ['1.สำเนาหนังสือเดินทาง'];
+  foreignInfo = [{ name: '1.สำเนาหนังสือเดินทาง' }];
 
   form = this.fb.group({
     foreignStudent: [],
   });
-
+  prefixList$!: Observable<any>;
+  countries$!: Observable<any>;
+  visaTypeList$!: Observable<any>;
+  universityCode = '-';
+  uniAddress = '-';
+  uniName = '-';
   constructor(
     public dialog: MatDialog,
     private router: Router,
-    private fb: FormBuilder
-  ) {}
-
+    private fb: FormBuilder,
+    private uniRequestService: UniRequestService,
+    private addressService: AddressService,
+    private generalInfoService: GeneralInfoService,
+    private uniInfoService: UniInfoService
+  ) {
+    this.getAll();
+  }
+  get formValid() {
+    return !this.form.get('foreignStudent')?.valid;
+  }
+  getAll() {
+    this.countries$ = this.addressService.getCountry();
+    this.prefixList$ = this.generalInfoService.getPrefix();
+    this.uniInfoService
+      .univerSitySelectById(getCookie('uniType'))
+      .subscribe((res) => {
+        this.uniName = res?.name || '-';
+        this.universityCode = res?.universitycode || '-';
+        this.uniAddress = '-';
+      });
+  }
   cancel() {
     this.router.navigate(['/', 'home']);
   }
@@ -43,13 +75,29 @@ export class ForeignStudentIdComponent {
       //console.log(`Dialog result: ${result}`);
     });
 
-    dialogRef.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
+    dialogRef.componentInstance.confirmed
+      .pipe(
+        switchMap((res) => {
+          if (res) {
+            const studentInfo = this.form.value.foreignStudent as any;
+            studentInfo.ref1 = '3';
+            studentInfo.ref2 = '04';
+            studentInfo.ref3 = '5';
+            studentInfo.systemtype = '3';
+            studentInfo.requesttype = '4';
+            studentInfo.subtype = '5';
+            studentInfo.currentprocess = `1`;
+            studentInfo.requestStatus = `1`;
+            studentInfo.fileInfo = JSON.stringify(this.foreignInfo);
+            return this.uniRequestService.saveRequestInsert(studentInfo);
+          }
+          return EMPTY;
+        })
+      )
+      .subscribe((res) => {
         this.onConfirmed();
-      }
-    });
+      });
   }
-
   onConfirmed() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',

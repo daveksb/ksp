@@ -1,12 +1,15 @@
-<ksp-top-nav><span header>หน้าแรก</span></ksp-top-nav>
+<ksp-top-nav [isSelfService]="true"><span header>หน้าแรก</span></ksp-top-nav>
 
 <div class="full-height main__container py-2 px-4">
-  <ksp-uni-form-badge></ksp-uni-form-badge>
-  <!-- <div class="row justify-content-center mb-3">
-    <div class="col-md-6 ps-0 pe-2">
+  <ksp-uni-form-badge [mainTitle]="badgeTitle"></ksp-uni-form-badge>
+  <div class="row justify-content-center mb-3">
+    <div class="col-md-6 p-0">
       <self-service-slideshow></self-service-slideshow>
     </div>
-  </div> -->
+    <!-- <div class="col-md-6 p-0">
+      <self-service-slideshow-second></self-service-slideshow-second>
+    </div> -->
+  </div>
   <self-service-license-info
     [header]="'สถานะใบคำขอ'"
     [subheader1]="'ใบคำขอที่ต้องชำระเงิน'"
@@ -16,7 +19,8 @@
     [date]="'1'"
     [requestNo]="'1'"
     [KuruspaId]="'1'"
-    [personId]="'1'"></self-service-license-info>
+    [personId]="'1'"
+  ></self-service-license-info>
   <br />
 
   <div class="box-header">ค้นหาใบคำขอ</div>
@@ -74,7 +78,8 @@
     <button
       mat-button
       [matMenuTriggerFor]="license"
-      class="btn text-primary border-primary bg-white">
+      class="btn text-primary border-primary bg-white"
+    >
       + สร้างใบคำขอ
     </button>
     <mat-menu #license="matMenu">
@@ -83,6 +88,9 @@
       </button>
       <button mat-menu-item [matMenuTriggerFor]="renew">
         ขอต่ออายุใบอนุญาตประกอบวิชาชีพ
+      </button>
+      <button mat-menu-item (click)="licenseEdit()">
+        ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ
       </button>
       <button mat-menu-item (click)="substituteLicense()">
         ขอใบแทนใบอนุญาตประกอบวิชาชีพ
@@ -124,7 +132,7 @@
 
     <mat-menu #renewTeacher="matMenu">
       <button mat-menu-item (click)="teacherRenew()">ครูชาวไทย</button>
-      <button mat-menu-item (click)="foreignRenew()">ครูชาวต่างชาติ</button>
+      <button mat-menu-item (click)="foreignRenew(1)">ครูชาวต่างชาติ</button>
     </mat-menu>
 
     <mat-menu #manager="matMenu">
@@ -140,7 +148,7 @@
       <button mat-menu-item (click)="schManagerRenew()">
         ผู้บริหารสถานศึกษาชาวไทย
       </button>
-      <button mat-menu-item (click)="foreignRenew()">
+      <button mat-menu-item (click)="foreignRenew(2)">
         ผู้บริหารสถานศึกษาชาวต่างชาติ
       </button>
     </mat-menu>
@@ -150,24 +158,26 @@
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="order">
         <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-        <td mat-cell *matCellDef="let element">{{ element.order }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="licenseNumber">
+      <ng-container matColumnDef="requestno">
         <th mat-header-cell *matHeaderCellDef>เลขที่คำขอ</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.licenseNumber }}
+          {{ element.requestno }}
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="submitDate">
+      <ng-container matColumnDef="requestdate">
         <th mat-header-cell *matHeaderCellDef>วันที่ยื่นคำขอ</th>
-        <td mat-cell *matCellDef="let element">{{ element.submitDate }}</td>
+        <td mat-cell *matCellDef="let element">
+          {{ element.requestdate | date }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.firstnameth }}</td>
       </ng-container>
 
       <ng-container matColumnDef="paymentStatus">

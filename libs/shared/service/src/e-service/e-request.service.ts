@@ -19,17 +19,33 @@ export class ERequestService {
       );
   }
 
-  getRequestById(requestId: number): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/e-service/xxxxx`, {}).pipe(
-      shareReplay(),
-      map((data: any) => data.datareturn)
+  getRequestById(requestId: number): Observable<SchoolRequest> {
+    return this.http.post<SchoolRequest>(
+      `${environment.apiUrl}/e-service/requestsearchbyrequestno`,
+      {
+        id: requestId,
+      }
     );
   }
 
-  checkRequest(requestId: number): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/e-service/xxxxx`, {}).pipe(
-      shareReplay(),
-      map((data: any) => data.datareturn)
-    );
+  checkRequest(payload: any): Observable<any> {
+    return this.http
+      .post(
+        `${environment.apiUrl}/kspstaff/schrequestupdatechecksubresult`,
+        payload
+      )
+      .pipe(
+        shareReplay(),
+        map((data: any) => data.datareturn)
+      );
+  }
+
+  approveUserRequest(payload: any): Observable<SchoolRequest[]> {
+    return this.http
+      .post(`${environment.apiUrl}/e-service/requestupdatestatus`, payload)
+      .pipe(
+        shareReplay(),
+        map((data: any) => data.datareturn)
+      );
   }
 }

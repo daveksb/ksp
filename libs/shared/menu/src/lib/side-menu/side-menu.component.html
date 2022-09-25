@@ -1,6 +1,8 @@
 <nav id="sidebar">
   <div class="sidebar-header">
-    <div><img src="/assets/images/logo-sidenav.png" /></div>
+    <div class="d-flex justify-content-start">
+      <img src="/assets/images/logo-sidenav.png" />
+    </div>
   </div>
 
   <div *ngIf="showHeader" class="sidebar-header-profile">
@@ -15,11 +17,11 @@
     <ng-container *ngFor="let menu of menuConfig">
       <li *ngIf="!menu.subMenu?.length">
         <a
-          routerLink="/{{ menu.path }}"
+          [routerLink]="menu.path"
           [queryParams]="menu.params"
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="{ exact: true }"
-          ><div class="menu__content">
+          ><div class="d-flex">
             <img src="{{ menu.icon }}" class="icon__sidenav" />{{ menu.label }}
           </div></a
         >
@@ -31,26 +33,65 @@
           role="button"
           href="#{{ menu.subMenuName }}"
           aria-expanded="false"
-          class="dropdown-toggle collapsed"
-          ><div class="menu__content">
-            <img src="{{ menu.icon }}" class="icon__sidenav" />{{ menu.label }}
-          </div></a
+          class="dropdown-toggle collapsed d-flex justify-content-between me-2"
         >
+          <div class="d-flex me-1">
+            <img [src]="menu.icon" class="icon__sidenav" />
+            <span>{{ menu.label }}</span>
+          </div>
+        </a>
+
         <ul
           [ngClass]="{ show: menu.isExpanded }"
           class="collapse list-unstyled list-style-type"
           id="{{ menu.subMenuName }}"
         >
-          <ng-container *ngFor="let subMenu of menu.subMenu">
+          <ng-container *ngFor="let menu1 of menu.subMenu">
             <li>
               <a
-                routerLink="/{{ subMenu.path }}"
-                [queryParams]="subMenu.params"
+                [routerLink]="menu1.subMenu ? null : menu1.path"
+                [queryParams]="menu1.params ?? null"
                 routerLinkActive="active-link"
                 [routerLinkActiveOptions]="{ exact: false }"
                 class="sub-menu"
-                >{{ subMenu.label }}</a
+                mat-button
+                [matMenuTriggerFor]="menu1.subMenu?.length ? topMenu : null"
+                >{{ menu1.label }}</a
               >
+              <mat-menu #topMenu="matMenu" xPosition="before" yPosition="below">
+                <ng-container *ngFor="let menu2 of menu1.subMenu; index as i">
+                  <button
+                    mat-menu-item
+                    (click)="
+                      menu2.subMenu
+                        ? null
+                        : navigateUrl(menu2.path, menu2.params)
+                    "
+                    [matMenuTriggerFor]="
+                      menu2.subMenu?.length ? teacherType : null
+                    "
+                  >
+                    {{ menu2.label }}
+                  </button>
+
+                  <mat-menu
+                    #teacherType="matMenu"
+                    xPosition="before"
+                    yPosition="below"
+                  >
+                    <ng-container
+                      *ngFor="let menu3 of menu2.subMenu; index as i"
+                    >
+                      <button
+                        mat-menu-item
+                        (click)="navigateUrl(menu3.path, menu3.params)"
+                      >
+                        {{ menu3.label }}
+                      </button>
+                    </ng-container>
+                  </mat-menu>
+                </ng-container>
+              </mat-menu>
             </li>
           </ng-container>
         </ul>

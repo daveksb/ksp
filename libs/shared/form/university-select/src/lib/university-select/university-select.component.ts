@@ -27,6 +27,7 @@ export class UniversitySelectComponent
   @Input() schoolName = '';
   @Input() bureauName= '';
   @Input() searchType = '';
+  @Input() readonly: boolean = false;
   bureaus$!: Observable<any>;
   @Output() selectedUniversity = new EventEmitter<string>();
 

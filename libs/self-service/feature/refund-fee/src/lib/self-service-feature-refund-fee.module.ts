@@ -7,6 +7,7 @@ import { TopNavComponent } from '@ksp/shared/menu';
 import { RequestStatusComponent } from '@ksp/self-service/ui';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { FormRefundFeeDetailComponent } from '@ksp/shared/form/license';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export const routes: Routes = [
   {
@@ -28,6 +29,7 @@ export const routes: Routes = [
     RequestStatusComponent,
     SharedFormOthersModule,
     FormRefundFeeDetailComponent,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
   ],
   declarations: [RefundFeeRequestComponent],

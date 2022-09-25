@@ -1,23 +1,25 @@
-<div class="p-3">
-  <div class="d-flex">
-    <div class="d-flex me-3 align-items-center">
-      <input type="radio" class="me-2" />
-      <label class="form-label">มีรายได้</label>
-    </div>
+<form [formGroup]="form">
+  <div class="mx-3 xxx">
+    <div class="d-flex align-items-center mb-2">
+      <div class="d-flex me-3 align-items-center">
+        <input type="radio" class="me-2" value="1" formControlName="incomeStatus" />
+        <label class="form-label">มีรายได้</label>
+      </div>
 
-    <div class="d-flex flex-row align-items-center">
-      <input class="form-control w-50" type="text" />
+      <div class="d-flex">
+        <input class="form-control" type="text" formControlName="income" />
+      </div>
       <label class="ms-3 form-label">จำนวน (บาท)</label>
     </div>
-  </div>
 
-  <div class="d-flex align-items-center mb-2">
-    <input type="radio" class="me-2" />
-    <label class="form-label">ไม่มีรายได้</label>
-  </div>
+    <div class="d-flex align-items-center mb-2">
+      <input type="radio" class="me-2" value="2" formControlName="incomeStatus" />
+      <label class="form-label">ไม่มีรายได้</label>
+    </div>
 
-  <div class="d-flex align-items-center mb-2">
-    <input type="radio" class="me-2" />
-    <label class="form-label">พิการ (ด้านจิตเวช/สมอง/ร่างกาย)</label>
+    <div class="d-flex align-items-center mb-2">
+      <input type="radio" class="me-2" value="3" formControlName="incomeStatus" />
+      <label class="form-label">พิการ (ด้านจิตเวช/สมอง/ร่างกาย)</label>
+    </div>
   </div>
-</div>
+</form>

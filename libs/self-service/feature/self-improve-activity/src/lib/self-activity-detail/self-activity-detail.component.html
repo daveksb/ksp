@@ -1,0 +1,111 @@
+<ksp-top-nav [isSelfService]="true">
+  <span header> ข้อมูลกิจกรรมการพัฒนาตนเองเพื่อต่ออายุใบอนุญาต </span>
+</ksp-top-nav>
+
+<div class="main__container px-4 py-2 full-height">
+  <form [formGroup]="form">
+    <div class="box-header">รายละเอียด</div>
+
+    <div class="box__container p-3">
+      <div class="bg-light p-3">
+        <ksp-license-info></ksp-license-info>
+      </div>
+      <br />
+      <div class="bg-light py-2 px-4">
+        <div class="box-header mb-2 required">กิจกรรมการพัฒนาตนเอง</div>
+        <div class="row">
+          <div class="col mb-3">
+            <select
+              formControlName="type"
+              class="form-select"
+              style="white-space: break-spaces"
+              #selector
+            >
+              <option value="null" selected hidden disabled>กรุณาเลือก</option>
+              <option
+                class="form-label text-black"
+                *ngFor="let activity of activityTypes"
+                [value]="activity.value"
+              >
+                {{ activity.label }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <ksp-activity-add-degree
+          *ngIf="selector.value === '0'"
+          formControlName="detail"
+        ></ksp-activity-add-degree>
+
+        <ksp-activity-seminar
+          *ngIf="selector.value === '1'"
+          formControlName="detail"
+        ></ksp-activity-seminar>
+
+        <ksp-activity-academic-archivement
+          *ngIf="selector.value === '3'"
+          formControlName="detail"
+        ></ksp-activity-academic-archivement>
+
+        <ksp-activity-lecturer
+          *ngIf="selector.value === '4'"
+          formControlName="detail"
+        ></ksp-activity-lecturer>
+
+        <ksp-activity-write-book
+          *ngIf="selector.value === '5'"
+          formControlName="detail"
+        ></ksp-activity-write-book>
+
+        <ksp-activity-innovation
+          *ngIf="selector.value === '6'"
+          formControlName="detail"
+        ></ksp-activity-innovation>
+
+        <ksp-activity-research
+          *ngIf="selector.value === '7'"
+          formControlName="detail"
+        ></ksp-activity-research>
+
+        <ksp-activity-reward
+          *ngIf="selector.value === '8'"
+          formControlName="detail"
+        ></ksp-activity-reward>
+
+        <ksp-activity-lecture-register
+          *ngIf="selector.value === '9'"
+          formControlName="detail"
+        ></ksp-activity-lecture-register>
+
+        <ksp-activity-study-tour
+          *ngIf="selector.value === '10'"
+          formControlName="detail"
+        ></ksp-activity-study-tour>
+
+        <ksp-activity-learning-material
+          *ngIf="selector.value === '11'"
+          formControlName="detail"
+        ></ksp-activity-learning-material>
+      </div>
+
+      <ng-template [ngIf]="activityType.value">
+        <ksp-form-attachment
+          title="กรุณาแนบหลักฐานประกอบการปฏิบัติงาน"
+          [groups]="attachFiles"
+        ></ksp-form-attachment
+      ></ng-template>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <button type="button" class="btn btn-secondary">ล้างข้อมูล</button>
+      <button
+        [disabled]="form.invalid"
+        type="button"
+        class="ms-3 btn btn-primary"
+      >
+        บันทึกข้อมูล
+      </button>
+    </div>
+  </form>
+</div>

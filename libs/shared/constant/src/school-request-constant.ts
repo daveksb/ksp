@@ -17,12 +17,8 @@ export const SchoolRequestType = [
 ];
 
 export const SchoolRetireReason = [
-  { id: 1, name: 'reason1' },
-  { id: 2, name: 'reason2' },
-  { id: 3, name: 'reason3' },
-  { id: 4, name: 'reason4' },
-  { id: 5, name: 'reason5' },
-  { id: 6, name: 'reason6' },
+  { id: 1, name: 'เลิกจ้าง' },
+  { id: 2, name: 'อื่นๆ' }
 ];
 
 // url params keep in db for temp license request
@@ -108,7 +104,7 @@ export const RequestProcessList: RequestProcess[] = [
     processId: 2,
     processName: 'สร้างและส่งใบคำขอ',
     status: [
-      { id: 1, sname: 'กำลังดำเนินการ', ename: '' },
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
       { id: 2, sname: 'ยกเลิก', ename: '' },
     ],
   },
@@ -118,11 +114,11 @@ export const RequestProcessList: RequestProcess[] = [
     processName: 'ตรวจสอบเอกสาร ลำดับที่ 1',
     status: [
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
-      { id: 2, sname: 'ปรับแก้ไข/เพิ่มเติม', ename: '' },
-      { id: 3, sname: 'ผ่านการตรวจสอบ', ename: '' },
-      { id: 4, sname: 'ไม่ผ่านการตรวจสอบ', ename: '' },
-      { id: 5, sname: 'ส่งคืนและยกเลิก', ename: '' },
-      { id: 6, sname: 'ยกเลิก', ename: '' },
+      { id: 2, sname: 'ปรับแก้ไข/เพิ่มเติม', ename: 'ปรับแก้ไข/เพิ่มเติม' },
+      { id: 3, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+      { id: 4, sname: 'ไม่ผ่านการตรวจสอบ', ename: 'ไม่ผ่านการตรวจสอบ' },
+      { id: 5, sname: 'ส่งคืนและยกเลิก', ename: 'ส่งคืนและยกเลิก' },
+      { id: 6, sname: 'ยกเลิก', ename: 'ยกเลิก' },
     ],
   },
   {
@@ -305,7 +301,7 @@ export const subjects = [
   { label: 'อุตสาหกรรมท่องเที่ยว', value: 's17' },
 ];
 
-export const SelfDevelopActivityTypes = [
+export const SchoolSelfDevelopActivityTies = [
   {
     value: 0,
     label: `มีวุฒิเพิ่มขึ้นในสาขาที่เกี่ยวข้องกับการประกอบวิชาชีพทางการศึกษา`,
@@ -354,5 +350,17 @@ export const SelfDevelopActivityTypes = [
   {
     value: 11,
     label: `จัดทำผลงานหรือกิจกรรมที่เป็นประโยชน์ต่อการจัดการเรียนรู้หรือการจัดการศึกษา`,
+  },
+];
+
+export const uniPermissionList = [
+  {
+    value: 1,
+    label: 'เจ้าหน้าที่ประสานงาน (รับรองปริญญาและประกาศนียบัตรทางการศึกษา',
+  },
+  {
+    value: 1,
+    label:
+      'เจ้าหน้าที่ประสานงาน (นำส่งรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา)',
   },
 ];

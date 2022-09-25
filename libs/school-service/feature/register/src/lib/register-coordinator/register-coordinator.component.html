@@ -54,6 +54,7 @@
       <div class="my-4">
         <ksp-form-attachment
           [title]="'กรุณาแนบหลักฐานเพื่อการพิจารณา'"
+          [requestType]="1"
           [groups]="uploadFileList"
         ></ksp-form-attachment>
       </div>
@@ -63,7 +64,7 @@
         [showCenterButtons]="true"
         [showSaveButton]="true"
         [showCancelButton]="true"
-        [disableSaveButton]="!form.valid"
+        [disableSaveButton]="form.invalid"
         (prevClicked)="back()"
         (saveClicked)="save()"
         (cancelClicked)="cancel()"

@@ -4,8 +4,8 @@ import {
   AddressService,
   GeneralInfoService,
   EducationDetailService,
-  LicenseRequestService as RequestLicenseService,
   MyInfoService,
+  SelfRequestService,
 } from '@ksp/shared/service';
 import { MatDialog } from '@angular/material/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
@@ -13,6 +13,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { Router } from '@angular/router';
 import { parseJson } from '@ksp/shared/utility';
+import { SelfMyInfo } from '@ksp/shared/interface';
 
 @Component({
   template: ``,
@@ -38,9 +39,9 @@ export abstract class LicenseFormBaseComponent {
     protected addressService: AddressService,
     protected educationDetailService: EducationDetailService,
     protected fb: FormBuilder,
-    protected requestService: RequestLicenseService,
+    protected requestService: SelfRequestService,
     protected router: Router,
-    private myInfoService: MyInfoService,
+    protected myInfoService: MyInfoService,
     public dialog: MatDialog
   ) {}
 
@@ -105,7 +106,7 @@ export abstract class LicenseFormBaseComponent {
     completeDialog.componentInstance.saved.subscribe((res) => {
       if (res) {
         const payload = this.createRequest(forbidden, '0');
-        this.requestService.requestLicense(payload).subscribe((res) => {
+        this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res.returncode === '00') {
             this.router.navigate(['/home']);
@@ -117,7 +118,7 @@ export abstract class LicenseFormBaseComponent {
     completeDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         const payload = this.createRequest(forbidden, '1');
-        this.requestService.requestLicense(payload).subscribe((res) => {
+        this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res.returncode === '00') {
             this.router.navigate(['/license', 'payment-channel']);
@@ -129,10 +130,12 @@ export abstract class LicenseFormBaseComponent {
 
   public getMyInfo() {
     this.myInfoService.getMyInfo().subscribe((res) => {
-      this.patchUserInfo(res);
-      this.patchAddress(parseJson(res.addressinfo));
-      if (res.schooladdrinfo) {
-        this.patchWorkplace(parseJson(res.schooladdrinfo));
+      if (res) {
+        this.patchUserInfo(res);
+        this.patchAddress(parseJson(res.addressinfo));
+        if (res.schooladdrinfo) {
+          this.patchWorkplace(parseJson(res.schooladdrinfo));
+        }
       }
     });
   }

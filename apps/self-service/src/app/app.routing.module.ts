@@ -52,7 +52,7 @@ const routes: Routes = [
     path: 'self-improvement',
     loadChildren: () =>
       import('@ksp/self-service/feature/self-improve-activity').then(
-        (m) => m.SelfServiceFeatureSelfImproveActivityModule
+        (m) => m.SelfServiceFeatureSelfActivityModule
       ),
   },
   {

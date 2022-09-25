@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
@@ -6,6 +7,15 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
+import {
+  MyInfoService,
+  SelfRequestService,
+  GeneralInfoService,
+} from '@ksp/shared/service';
+import { replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
+import * as _ from 'lodash';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ksp-refund-fee-request',
@@ -13,15 +23,60 @@ import {
   styleUrls: ['./refund-fee-request.component.scss'],
 })
 export class RefundFeeRequestComponent implements OnInit {
-  refundInfo = ['1.สำเนาวุฒิการศึกษา'];
+  files = [{ name: '1.สำเนาวุฒิการศึกษา', fileId: '' }];
   headerGroup = ['วันที่ทำรายการ', 'เลขใบคำขอ'];
   userInfoType = UserInfoFormType.thai;
+  today = thaiDate(new Date());
+  userInfo!: SelfMyInfo;
+  prefixList$!: Observable<any>;
 
-  constructor(private router: Router, public dialog: MatDialog) {}
+  form = this.fb.group({
+    userInfo: [],
+    refundInfo: [],
+  });
 
-  ngOnInit(): void {}
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private fb: FormBuilder,
+    private myInfoService: MyInfoService,
+    private requestService: SelfRequestService,
+    private generalInfoService: GeneralInfoService
+  ) {}
 
-  save() {
+  ngOnInit(): void {
+    this.prefixList$ = this.generalInfoService.getPrefix();
+    this.myInfoService.getMyInfo().subscribe((res) => {
+      //console.log('my info = ', res);
+      this.userInfo = {
+        ...res,
+        birthdate: res.birthdate?.split('T')[0] || null,
+        contactphone: res.phone,
+      };
+      this.form.controls.userInfo.patchValue(<any>this.userInfo);
+    });
+  }
+
+  createRequest() {
+    //const payload = this.form.value;
+    const self = new SelfRequest('1', '30', '1');
+    const allowKey = Object.keys(self);
+    const userInfo = this.form.controls.userInfo.value;
+
+    const selectData: any = _.pick(userInfo, allowKey);
+    const filledData = { ...self, ...selectData };
+    const { id, requestdate, ...payload } = replaceEmptyWithNull(filledData);
+
+    const feeRefundInfo = this.form.controls.refundInfo.value;
+    //console.log('fee refund info = ', feeRefundInfo);
+    payload.feerefundinfo = JSON.stringify(feeRefundInfo);
+    payload.birthdate = payload.birthdate.split('T')[0];
+
+    console.log('payload = ', payload);
+    return payload;
+  }
+
+  submit() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -31,7 +86,13 @@ export class RefundFeeRequestComponent implements OnInit {
 
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.onCompleted();
+        const payload = this.createRequest();
+        this.requestService.createRequest(payload).subscribe((res) => {
+          //console.log('res = ', res);
+          if (res?.returncode === '00') {
+            this.onCompleted();
+          }
+        });
       }
     });
   }
@@ -46,7 +107,7 @@ export class RefundFeeRequestComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'home']);
+        this.router.navigate(['/home']);
       }
     });
   }

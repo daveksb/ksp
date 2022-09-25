@@ -1,7 +1,7 @@
-<ksp-top-nav
-  ><span header>ใบอนุญาตประกอบวิชาชีพ </span
-  ><span subHeader>เปลี่ยนแปลง/ แก้ไขใบอนุญาต</span></ksp-top-nav
->
+<ksp-top-nav [isSelfService]="true">
+  <span header>ใบอนุญาตประกอบวิชาชีพ </span>
+  <span subHeader>เปลี่ยนแปลง/แก้ไขใบอนุญาต</span>
+</ksp-top-nav>
 <form [formGroup]="form">
   <div class="main__container">
     <div class="fs-5 mt-1 mb-1">
@@ -9,7 +9,11 @@
     </div>
 
     <div class="detail__container">
-      <ksp-edit-license [showDistributeData]="true"></ksp-edit-license>
+      <ksp-edit-license
+        formControlName="userInfo"
+        [oldValue]="oldValue"
+        [prefixList]="prefixList$ | async"
+        [showDistributeData]="true"></ksp-edit-license>
       <hr />
       <ksp-form-attachment [groups]="uploadFileList"></ksp-form-attachment>
 
@@ -24,8 +28,7 @@
         [isFirstPage]="true"
         [showCenterButtons]="true"
         [showSaveButton]="true"
-        (saveClicked)="onConfirm()"
-      ></ksp-bottom-nav>
+        (saveClicked)="onConfirm()"></ksp-bottom-nav>
     </div>
   </div>
 </form>

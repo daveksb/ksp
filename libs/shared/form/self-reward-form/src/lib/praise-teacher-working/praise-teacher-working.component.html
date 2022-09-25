@@ -1,30 +1,30 @@
-<div class="box-header text-primary">ข้อมูลการทำงานปัจจุบัน</div>
-<div class="row mb-2">
-  <div class="col">
-    <label class="form-label">เขตพื้นที่การศึกษา</label>
-    <input class="form-control" type="text" />
+<form [formGroup]="form">
+  <div class="box-header text-primary">ข้อมูลการทำงานปัจจุบัน</div>
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <label class="form-label">เขตพื้นที่การศึกษา</label>
+      <input class="form-control" type="text" formControlName="area" />
+    </div>
+    <div class="col-md-6 mb-2">
+      <label class="form-label">ตำแหน่ง</label>
+      <input class="form-control" type="text" formControlName="position" />
+    </div>
   </div>
-  <div class="col">
-    <label class="form-label">ตำแหน่ง</label>
-    <input class="form-control" type="text" />
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <label class="form-label">ระยะเวลาการปฏิบัติงาน (ปี)</label>
+      <input class="form-control" type="text" formControlName="operationYear" />
+    </div>
   </div>
-</div>
-<div class="row mb-2">
-  <div class="col-6">
-    <label class="form-label">ระยะเวลาการปฏิบัติงาน (ปี)</label>
-    <input class="form-control" type="text" />
+  <div class="row">
+    <div class="col-md-12 mb-2">
+      <label class="form-label">สรุปผลการปฏิบัติตนตามจรรยาบรรณผู้ประกอบวิชาชีพทางการศึกษาที่เด่นที่สุด</label>
+      <textarea class="form-control" rows="3" formControlName="ethicDetail"></textarea>
+    </div>
   </div>
-</div>
-<div class="row mb-4">
-  <div class="col-12">
-    <label class="form-label"
-      >สรุปผลการปฏิบัติตนตามจรรยาบรรณผู้ประกอบวิชาชีพทางการศึกษาที่เด่นที่สุด</label
-    >
-    <textarea class="form-control" rows="3"></textarea>
-  </div>
-</div>
-<hr />
-<div class="box-header text-primary">ประวัติการทำงาน</div>
-<ksp-senior-teacher-career
-  [btnLabel]="'เพิ่มข้อมูลการทำงาน'"
-></ksp-senior-teacher-career>
+  <hr />
+  <div class="box-header text-primary">ประวัติการทำงาน</div>
+  <ksp-senior-teacher-career
+    formControlName="workHistory"
+    [btnLabel]="'เพิ่มข้อมูลการทำงาน'"></ksp-senior-teacher-career>
+</form>

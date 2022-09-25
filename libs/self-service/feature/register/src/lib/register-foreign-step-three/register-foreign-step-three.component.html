@@ -54,16 +54,28 @@
         </div>
       </div>
 
-      <div class="row mb-2">
-        <div class="col">
-          <label class="form-label">Password</label>
-          <input type="text" class="form-control" placeholder="" />
+      <form [formGroup]="form">
+        <div class="row mb-2">
+          <div class="col">
+            <label class="form-label">Password</label>
+            <input
+              type="text"
+              formControlName="username"
+              class="form-control"
+              placeholder=""
+            />
+          </div>
+          <div class="col">
+            <label class="form-label">Confirm password</label>
+            <input
+              type="text"
+              formControlName="password"
+              class="form-control"
+              placeholder=""
+            />
+          </div>
         </div>
-        <div class="col">
-          <label class="form-label">Confirm password</label>
-          <input type="text" class="form-control" placeholder="" />
-        </div>
-      </div>
+      </form>
 
       <div class="form__footer">
         <button

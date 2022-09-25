@@ -6,8 +6,8 @@
     <hr />
 
     <ksp-retired-search
-      (clear)="data = []"
-      (search)="search()"
+      (clear)="handleClear($event)"
+      (search)="handleSearch($event)"
       [searchType]="'uni'"
     ></ksp-retired-search>
 
@@ -26,11 +26,12 @@
         <tbody class="body__table">
           <tr class="text-secondary" *ngFor="let item of data">
             <td>
-              <input type="radio" class="form-check-input" name="xxx" />
+              <input type="radio" class="form-check-input" name="userData"
+              (change)="onItemChange(item)" />
             </td>
-            <td>{{ item.retiredRole }}</td>
-            <td>{{ item.retiredName }}</td>
-            <td>{{ item.retiredPhone }}</td>
+            <td>{{ item.permissonright }}</td>
+            <td>{{ item.firstnameth + ' ' + item.lastnameth }}</td>
+            <td>{{ item.phone }}</td>
           </tr>
         </tbody>
       </table>
@@ -39,7 +40,7 @@
         <a
           class="btn btn-primary"
           type="buton"
-          [routerLink]="['/retired', 'reason']"
+          (click)="next()"
           >ยืนยัน</a
         >
       </div>

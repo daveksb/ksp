@@ -1,26 +1,36 @@
-<div class="box-header text-primary">ข้อมูลครูสอนดีเด่น</div>
-<div class="row mb-2">
-  <div class="col">
-    <label class="form-label">ประเภทครูผู้สอนดีเด่น</label>
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+<form [formGroup]="form">
+  <div class="box-header text-primary">ข้อมูลครูสอนดีเด่น</div>
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <label class="form-label">ประเภทครูผู้สอนดีเด่น</label>
+      <select class="form-select" formControlName="teacherType">
+        <option selected>กรุณาเลือก</option>
+        <option value="1">ครูผู้สอนกลุ่มสาระการเรียนรู้การงานอาชีพและเทคโนโลยีดีเด่น</option>
+        <option value="2">ครูผู้สอนกลุ่มสาระการเรียนรู้คณิตศาสตร์ดีเด่น</option>
+        <option value="3">ครูผู้สอนกลุ่มสาระการเรียนรู้ภาษาต่างประเทศดีเด่น (ภาษาอังกฤษ)</option>
+        <option value="4">ครูผู้สอนกลุ่มสาระการเรียนรู้ภาษาไทยดีเด่น</option>
+        <option value="5">ครูผู้สอนกลุ่มสาระการเรียนรู้วิทยาศาสตร์ดีเด่น</option>
+        <option value="6">ครูผู้สอนกลุ่มสาระการเรียนรู้ศิลปะดีเด่น</option>
+        <option value="7">ครูผู้สอนกลุ่มสาระการเรียนรู้สังคมศึกษา ศาสนา และวัฒนธรรมดีเด่น</option>
+        <option value="8">ครูผู้สอนกลุ่มสาระการเรียนรู้สุขศึกษา และพลศึกษาดีเด่น</option>
+        <option value="9">ครูผู้สอนกิจกรรมพัฒนาผู้เรียนดีเด่น</option>
+        <option value="10">ครูผู้สอนปฐมศึกษาดีเด่น</option>
+        <option value="11">ครูผู้สอนปฐมวัยดีเด่น</option>
+      </select>
+    </div>
+    <div class="col-md-6 mb-2">
+      <label class="form-label">วันที่เริ่มปฏิบัติหน้าที่ครู</label>
+      <input class="form-control" type="date" formControlName="startDate" />
+    </div>
   </div>
-  <div class="col">
-    <label class="form-label">วันที่เริ่มปฏิบัติหน้าที่ครู</label>
-    <input class="form-control" type="date" />
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <label class="form-label">ตำแหน่ง</label>
+      <input class="form-control" type="text" formControlName="position" />
+    </div>
+    <div class="col-md-6 mb-2">
+      <label class="form-label">ประสบการณ์การสอน (ปี)</label>
+      <input class="form-control" type="text" formControlName="experienceYear" />
+    </div>
   </div>
-</div>
-<div class="row mb-2">
-  <div class="col">
-    <label class="form-label">ตำแหน่ง</label>
-    <input class="form-control" type="text" />
-  </div>
-  <div class="col">
-    <label class="form-label">ประสบการณ์การสอน (ปี)</label>
-    <input class="form-control" type="text" />
-  </div>
-</div>
+</form>

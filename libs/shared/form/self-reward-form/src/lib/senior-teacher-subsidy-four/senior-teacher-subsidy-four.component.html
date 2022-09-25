@@ -1,69 +1,71 @@
-<div class="p-3">
-  <div class="row mb-2">
-    <div class="col">
-      <label class="form-label">เช่าบ้านอยู่ (บาท/เดือน)</label>
-      <input class="form-control" type="text" />
+<form [formGroup]="form">
+  <div class="mx-3 xxx">
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">เช่าบ้านอยู่ (บาท/เดือน)</label>
+        <input class="form-control" type="text" formControlName="rentalFee" />
+      </div>
+      <div class="col">
+        <label class="form-label">ดูแลบิดา/มารดา (อายุ)</label>
+        <input class="form-control" type="text" formControlName="parents" />
+      </div>
     </div>
-    <div class="col">
-      <label class="form-label">ดูแลบิดา/มารดา (อายุ)</label>
-      <input class="form-control" type="text" />
+    <div class="row mb-2">
+      <div class="col-6">
+        <label class="form-label">มีภาระหนี้สินรวมทั้งหมด (บาท)</label>
+        <input class="form-control" type="text" formControlName="debt" />
+      </div>
+    </div>
+    <hr />
+    <div class="row mb-2">
+      <div class="col d-flex align-items-center mb-2">
+        <input type="checkbox" class="me-1" formControlName="cooperative" />
+        <label class="form-label">สหกรณ์</label>
+      </div>
+      <div class="col d-flex align-items-center">
+        <label class="form-label w-auto me-5" style="white-space: nowrap">จำนวน (บาท)</label>
+        <input class="form-control w-50" type="text" formControlName="cooperativeAmount" />
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col d-flex align-items-center mb-2">
+        <input type="checkbox" class="me-1" formControlName="housingBank" />
+        <label class="form-label">ธนาคารอาคารสงเคราะห์</label>
+      </div>
+      <div class="col d-flex align-items-center">
+        <label class="form-label w-auto me-5" style="white-space: nowrap">จำนวน (บาท)</label>
+        <input class="form-control w-50" type="text" formControlName="housingBankAmount" />
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col d-flex align-items-center mb-2">
+        <input type="checkbox" class="me-1" formControlName="savingBank" />
+        <label class="form-label">ธนาคารออมสิน</label>
+      </div>
+      <div class="col d-flex align-items-center">
+        <label class="form-label w-auto me-5" style="white-space: nowrap">จำนวน (บาท)</label>
+        <input class="form-control w-50" type="text" formControlName="savingBankAmount" />
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col d-flex align-items-center mb-2">
+        <input type="checkbox" class="me-1" formControlName="otherDebt" />
+        <label class="form-label">หนี้อื่นๆ</label>
+      </div>
+      <div class="col d-flex align-items-center">
+        <label class="form-label w-auto me-5" style="white-space: nowrap">จำนวน (บาท)</label>
+        <input class="form-control w-50" type="text" formControlName="otherDebtAmount" />
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col d-flex align-items-center mb-2">
+        <input type="checkbox" class="me-1" formControlName="others" />
+        <label class="form-label">อื่นๆ</label>
+      </div>
+      <div class="col d-flex align-items-center">
+        <label class="form-label w-auto me-5" style="white-space: nowrap">จำนวน (บาท)</label>
+        <input class="form-control w-50" type="text" formControlName="othersAmount" />
+      </div>
     </div>
   </div>
-  <div class="row mb-2">
-    <div class="col-6">
-      <label class="form-label">มีภาระหนี้สินรวมทั้งหมด (บาท)</label>
-      <input class="form-control" type="text" />
-    </div>
-  </div>
-  <hr />
-  <div class="row mb-2">
-    <div class="col-4 d-flex align-items-center mb-2">
-      <input type="checkbox" class="me-1" />
-      <label class="form-label">สหกรณ์</label>
-    </div>
-    <div class="col d-flex align-items-center">
-      <label class="form-label w-auto me-5">จำนวน (บาท)</label>
-      <input class="form-control w-50" type="text" />
-    </div>
-  </div>
-  <div class="row mb-2">
-    <div class="col-4 d-flex align-items-center mb-2">
-      <input type="checkbox" class="me-1" />
-      <label class="form-label">ธนาคารอาคารสงเคราะห์</label>
-    </div>
-    <div class="col d-flex align-items-center">
-      <label class="form-label w-auto me-5">จำนวน (บาท)</label>
-      <input class="form-control w-50" type="text" />
-    </div>
-  </div>
-  <div class="row mb-2">
-    <div class="col-4 d-flex align-items-center mb-2">
-      <input type="checkbox" class="me-1" />
-      <label class="form-label">ธนาคารออมสิน</label>
-    </div>
-    <div class="col d-flex align-items-center">
-      <label class="form-label w-auto me-5">จำนวน (บาท)</label>
-      <input class="form-control w-50" type="text" />
-    </div>
-  </div>
-  <div class="row mb-2">
-    <div class="col-4 d-flex align-items-center mb-2">
-      <input type="checkbox" class="me-1" />
-      <label class="form-label">หนี้อื่นๆ</label>
-    </div>
-    <div class="col d-flex align-items-center">
-      <label class="form-label w-auto me-5">จำนวน (บาท)</label>
-      <input class="form-control w-50" type="text" />
-    </div>
-  </div>
-  <div class="row mb-2">
-    <div class="col-4 d-flex align-items-center mb-2">
-      <input type="checkbox" class="me-1" />
-      <label class="form-label">อื่นๆ</label>
-    </div>
-    <div class="col d-flex align-items-center">
-      <label class="form-label w-auto me-5">จำนวน (บาท)</label>
-      <input class="form-control w-50" type="text" />
-    </div>
-  </div>
-</div>
+</form>

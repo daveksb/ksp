@@ -10,7 +10,7 @@
       <div class="pt-2">
         <ksp-request-header-info
           [requestDate]="'10 ตุลาคม 2565'"
-          [requestNumber]="'112234467876543'"
+          [requestNumber]="requestNo"
         ></ksp-request-header-info>
       </div>
 
@@ -22,7 +22,13 @@
         ></ksp-stepper-nav>
 
         <div class="my-3">
-          <ksp-university-select></ksp-university-select>
+          <ksp-university-select
+          formControlName="universityInfo"
+          [label1]="'สถาบัน / มหาวิทยาลัย'"
+          [label2]="'กลุ่มสถาบัน'"
+          [searchType]="'uni'"
+          mode="view"
+        ></ksp-university-select>
         </div>
 
         <div class="my-3">
@@ -31,14 +37,20 @@
             [formHeader]="
               'ข้อมูลผู้แต่งตั้งผู้ประสานงาน / ผู้รับผิดชอบ (ที่ระบุไว้ในเอกสารแนบ)'
             "
+            [uniType]="uniType$ | async"
+            [prefixName]="prefixName$ | async"
+            [occupyList]="occupyList$ | async"
           ></uni-form-register-coordinator>
         </div>
 
         <div class="my-3">
           <ksp-form-attachment
+            [uniqueTimestamp]="uniqueTimestamp"
             [title]="'กรุณาแนบหลักฐานเพื่อพิจารณา'"
             [titleClass]="'text-primary fs-4'"
-            [groups]="registerFiles"
+            [pageType]="pageType.fileAttachTab"
+            [requestType]="requesttype"
+            [groups]="uploadFileList"
           ></ksp-form-attachment>
         </div>
 
@@ -47,6 +59,7 @@
           [isLastPage]="true"
           [showCenterButtons]="true"
           [showSaveButton]="true"
+          [disableSaveButton]="form.controls.coordinator.invalid"
           (prevClicked)="prevPage()"
           (cancelClicked)="cancel()"
           (saveClicked)="confirm()"

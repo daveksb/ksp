@@ -1,63 +1,70 @@
 <form [formGroup]="form">
   <ng-container formArrayName="innovationInfo">
     <ng-container
-      *ngFor="let DegreeForm of innovationInfo.controls; let i = index"
-    >
+      *ngFor="let DegreeForm of innovationInfo.controls; let i = index">
       <ng-container [formGroupName]="i">
         <div class="border rounded px-3 py-2">
           <div class="d-flex justify-content-end">
             <i
               class="bi bi-x-circle-fill text-danger"
               (click)="deleteFormArray(innovationInfo, i)"
-              role="button"
-            ></i>
+              role="button"></i>
           </div>
           <div class="box-header text-primary">ข้อมูลนวัตกรรมและรางวัล</div>
 
-          <div class="row mb-2">
-            <div class="col">
+          <div class="row">
+            <div class="col-md-6 mb-2">
               <label class="form-label">ประเภทรางวัล</label>
-              <select class="form-select">
+              <select class="form-select" formControlName="rewardType">
                 <option selected>กรุณาเลือก</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option value="1">ระดับเขต</option>
+                <option value="2">ระดับจังหวัด</option>
+                <option value="3">ระดับประเทศ</option>
               </select>
             </div>
-            <div class="col">
+            <div class="col-md-6 mb-2">
               <label class="form-label">ชื่อนวัตกรรม</label>
-              <input class="form-control" type="text" />
+              <input class="form-control" type="text" formControlName="innovationName" />
             </div>
           </div>
           <br />
           <div class="box-header text-primary">
             การได้รับรางวัลครูผู้สอนดีเด่นตามกลุ่มสาระ
           </div>
-          <div class="row mb-2">
-            <div class="col">
+          <div class="row">
+            <div class="col-md-6 mb-2">
               <label class="form-label">กลุ่มสาระ</label>
-              <select class="form-select">
+              <select class="form-select" formControlName="subjectGroup">
                 <option selected>กรุณาเลือก</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option value="1">ภาษาไทย</option>
+                <option value="2">คณิตศาสตร์</option>
+                <option value="3">วิทยาศาสตร์และเทคโนโลยี</option>
+                <option value="4">สังคมศึกษา ศาสนาและวัฒนธรรม</option>
+                <option value="5">ศิลปศึกษา</option>
+                <option value="6">สุขศึกษาและพลศึกษา</option>
+                <option value="7">การงานอาชีพ</option>
+                <option value="8">ภาษาต่างประเทศ</option>
+                <option value="9">กิจกรรมพัฒนาผู้เรียน</option>
+                <option value="10">ด้านการศึกษาปฐมวัย</option>
+                <option value="11">ด้านการศึกษาพิเศษ</option>
+                <option value="12">ด้านการอาชีวศึกษา</option>
               </select>
             </div>
-            <div class="col">
+            <div class="col-md-6 mb-2">
               <label class="form-label">ปี พ.ศ.</label>
-              <input class="form-control" type="date" />
+              <input class="form-control" type="date" formControlName="year" />
             </div>
           </div>
           <br />
           <ksp-form-attachment></ksp-form-attachment>
         </div>
-        <br /></ng-container></ng-container
-  ></ng-container>
+        <br />
+      </ng-container>
+    </ng-container>
+  </ng-container>
   <div class="d-flex justify-content-end">
     <ksp-add-row-button
       class="text-primary"
-      (addRowClick)="addFormArray(innovationInfo)"
-      >เพิ่มรางวัล</ksp-add-row-button
-    >
+      (addRowClick)="addFormArray(innovationInfo)">เพิ่มรางวัล</ksp-add-row-button>
   </div>
 </form>

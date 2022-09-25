@@ -15,6 +15,7 @@
         formControlName="licenseSearch"
         (clear)="clear()"
         (search)="search($event)"
+        [requestTypeList]="requestTypeList"
       ></ksp-school-request-search>
 
       <div class="box-header text-primary">ยื่นใบคำขอ</div>
@@ -27,7 +28,7 @@
         >
           ยื่นใบคำขอ
         </button>
-        <mat-menu class="my-class" #beforeMenu="matMenu" xPosition="before">
+        <mat-menu #beforeMenu="matMenu" xPosition="before">
           <button mat-menu-item (click)="goToRequestPage(1)">
             ขออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)
           </button>
@@ -206,7 +207,7 @@
 
         <mat-paginator
           [length]="dataSource.data.length"
-          [pageSize]="10"
+          [pageSize]="25"
           [showFirstLastButtons]="true"
         >
         </mat-paginator>

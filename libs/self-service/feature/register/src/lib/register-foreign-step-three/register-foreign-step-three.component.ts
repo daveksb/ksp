@@ -1,23 +1,37 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
+import { MyInfoService } from '@ksp/shared/service';
+import { switchMap, EMPTY } from 'rxjs';
 import { RegisterCompletedComponent } from '../register-completed/register-completed.component';
-
+import localForage from 'localforage';
 @Component({
   selector: 'self-service-register-foreign-step-three',
   templateUrl: './register-foreign-step-three.component.html',
   styleUrls: ['./register-foreign-step-three.component.scss'],
 })
 export class RegisterForeignStepThreeComponent implements OnInit {
-  constructor(private router: Router, public dialog: MatDialog) {}
-
-  ngOnInit(): void {}
-
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private fb: FormBuilder,
+    private myInfoService: MyInfoService
+  ) {}
+  savingData: any;
+  form = this.fb.group({
+    password: [],
+    username: [],
+  });
   loginPage() {
-    this.router.navigate(['/', 'login']);
+    this.router.navigate(['/login']);
   }
-
+  ngOnInit(): void {
+    localForage.getItem('registerForeign').then((res: any) => {
+      this.savingData = res;
+    });
+  }
   save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
@@ -29,11 +43,22 @@ export class RegisterForeignStepThreeComponent implements OnInit {
       },
     });
 
-    confirmDialog.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        this.onCompleted();
-      }
-    });
+    confirmDialog.componentInstance.confirmed
+      .pipe(
+        switchMap((res) => {
+          if (res) {
+            const payload = { ...this.savingData, ...this.form.value };
+            payload.isactive = 0;
+            return this.myInfoService.insertMyInfo(payload);
+          }
+          return EMPTY;
+        })
+      )
+      .subscribe((res) => {
+        if (res) {
+          this.onCompleted();
+        }
+      });
   }
 
   onCompleted() {
