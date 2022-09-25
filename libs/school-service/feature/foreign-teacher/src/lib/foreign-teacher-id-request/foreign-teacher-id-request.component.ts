@@ -93,15 +93,16 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
           btnLabel: 'ยืนยัน',
         },
       });
+
       confirmDialog.componentInstance.confirmed
         .pipe(
           switchMap((res) => {
             if (res) {
               const payload = {
                 id: `${this.requestId}`,
-                currentprocess: `0`,
+                requeststatus: '0',
               };
-              return this.requestService.changeRequestProcess(payload);
+              return this.requestService.cancelRequest(payload);
             }
             return EMPTY;
           })
