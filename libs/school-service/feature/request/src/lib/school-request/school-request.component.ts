@@ -170,7 +170,7 @@ export class SchoolRequestComponent implements OnInit {
   cancelRequest() {
     const payload = {
       id: `${this.requestId}`,
-      requeststatus: this.currentProcess === 3 ? 6 : 2,
+      requeststatus: '0',
     };
 
     this.requestService.cancelRequest(payload).subscribe((res) => {

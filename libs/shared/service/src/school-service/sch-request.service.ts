@@ -26,7 +26,7 @@ export class RequestService {
 
   cancelRequest(form: any): Observable<any> {
     return this.http.post(
-      `${environment.apiUrl}/kspstaff/updatestatusschrequest`,
+      `${environment.apiUrl}/kspstaff/schrequestupdaterequeststatus`,
       form
     );
   }

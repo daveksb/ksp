@@ -112,9 +112,9 @@ export class RequestRewardComponent implements OnInit {
     // may need to update status also
     const payload = {
       id: `${this.requestId}`,
-      currentprocess: '0',
+      requeststatus: '0',
     };
-    this.requestService.changeRequestProcess(payload).subscribe((res) => {
+    this.requestService.cancelRequest(payload).subscribe((res) => {
       //
     });
   }
