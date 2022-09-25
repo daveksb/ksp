@@ -44,14 +44,7 @@ export class FileUploadComponent {
       uniquetimpstamp: this.uniqueTimestamp,
       requesttype: `${this.requestType}`,
     };
-    // file.text().then((res) => {
-    //   const blob = new Blob([res], { type: file.type });
-    //   const url = window.URL.createObjectURL(blob);
-    //   window.URL.revokeObjectURL(url);
-    //   // payload.file = btoa(encodeURIComponent(res));
     this.uploadFile(payload);
-    // });
-
     if (file) {
       this.fileName = file.name;
     }

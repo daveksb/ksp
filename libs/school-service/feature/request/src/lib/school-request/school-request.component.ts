@@ -181,10 +181,10 @@ export class SchoolRequestComponent implements OnInit {
     //console.log('create request = ');
     const baseForm = this.fb.group(new SchoolRequest());
     const formData: any = this.form.getRawValue();
-    const tab3 = this.eduFiles.map((file) => file.fileId || null);
-    const tab4 = this.teachingFiles.map((file) => file.fileId || null);
-    const tab5 = this.reasonFiles.map((file) => file.fileId || null);
-    const tab6 = this.attachFiles.map((file) => file.fileId || null);
+    const tab3 = this.mapSavingData(this.eduFiles);
+    const tab4 = this.mapSavingData(this.teachingFiles);
+    const tab5 = this.mapSavingData(this.reasonFiles);
+    const tab6 = this.mapSavingData(this.attachFiles);
     formData.addr1.addresstype = 1;
     formData.addr2.addresstype = 2;
 
@@ -293,10 +293,10 @@ export class SchoolRequestComponent implements OnInit {
       visaenddate: userInfo.visaenddate,
     };
 
-    const tab3 = this.eduFiles.map((file) => file.fileId || null);
-    const tab4 = this.teachingFiles.map((file) => file.fileId || null);
-    const tab5 = this.reasonFiles.map((file) => file.fileId || null);
-    const tab6 = this.attachFiles.map((file) => file.fileId || null);
+    const tab3 = this.mapSavingData(this.eduFiles);
+    const tab4 = this.mapSavingData(this.teachingFiles);
+    const tab5 = this.mapSavingData(this.reasonFiles);
+    const tab6 = this.mapSavingData(this.attachFiles);
 
     const payload = {
       ...replaceEmptyWithNull(userInfo),
@@ -455,18 +455,12 @@ export class SchoolRequestComponent implements OnInit {
     this.patchFileId(this.reasonFiles, res.tab5);
     this.patchFileId(this.attachFiles, res.tab6);
   }
-  patchFileId(fileList: any, fileIdList: any) {
-    const allService = [];
-    for (const id of fileIdList) {
-      const service = this.fileUploadService.downloadFile({ id });
-      allService.push(service);
+  patchFileId(fileList: any, tab: any) {
+    for (let i = 0; i < fileList.length; i++) {
+      fileList[i].fileId = tab[i]?.fileid;
+      fileList[i].fileName = tab[i]?.filename;
     }
-    zip(...allService).subscribe((res) =>
-      res.forEach((file: any, index) => {
-        fileList[index].fileId = file.id;
-        fileList[index].fileName = file.originalname;
-      })
-    );
+    return fileList;
   }
   patchHiringInfo(data: any) {
     this.form.controls.hiringinfo.patchValue(data);
@@ -519,7 +513,7 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   pathUserInfo(data: any) {
-    data.birthdate = data.birthdate.split('T')[0];
+    data.birthdate = data?.birthdate?.split('T')[0];
 
     if (this.requestSubType === SchoolRequestSubType.อื่นๆ) {
       data.passportstartdate = data.passportstartdate.split('T')[0];
@@ -673,5 +667,14 @@ export class SchoolRequestComponent implements OnInit {
         this.tumbols2$ = this.addressService.getTumbols(amphur);
       }
     }
+  }
+  mapSavingData(fileList: any) {
+    return fileList.map((file: any) => {
+      const object = {
+        fileid: file.fileId || null,
+        filename: file.fileName || null,
+      };
+      return object;
+    });
   }
 }
