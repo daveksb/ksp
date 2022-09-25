@@ -4,6 +4,7 @@ export enum RequestPageType {
   teachingTab = 'teachingTab',
   reasonTab = 'reasonTab',
   fileAttachTab = 'fileAttachTab',
+  imageTab = 'imageTab',
 }
 
 export const SchoolRequestType = [
@@ -18,7 +19,7 @@ export const SchoolRequestType = [
 
 export const SchoolRetireReason = [
   { id: 1, name: 'เลิกจ้าง' },
-  { id: 2, name: 'อื่นๆ' }
+  { id: 2, name: 'อื่นๆ' },
 ];
 
 // url params keep in db for temp license request

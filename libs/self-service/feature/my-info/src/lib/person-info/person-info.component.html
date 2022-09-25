@@ -7,6 +7,10 @@
   <div class="main__container full-height px-4 py-2">
     <self-service-form-upload-image
       [imgDetail]="'row'"
+      [imgSrc]="imgSrc"
+      [uniqueTimestamp]="uniqueTimestamp"
+      [requestType]="2"
+      (uploadImageComplete)="uploadImageComplete($event)"
     ></self-service-form-upload-image>
 
     <div class="detail__container">

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { FileUploadService } from '@ksp/shared/form/file-upload';
 import { SelfMyInfo } from '@ksp/shared/interface';
 import {
   AddressService,
@@ -12,7 +13,7 @@ import {
   replaceEmptyWithNull,
   validatorMessages,
 } from '@ksp/shared/utility';
-import { Observable } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 
 @Component({
   selector: 'self-service-person-info',
@@ -22,6 +23,7 @@ import { Observable } from 'rxjs';
 export class PersonInfoComponent implements OnInit {
   status = 'edit';
   label = 'แก้ไขข้อมูล';
+  imgSrc = '';
 
   form = this.fb.group({
     firstnameth: ['', [Validators.required, Validators.pattern(nameThPattern)]],
@@ -36,29 +38,44 @@ export class PersonInfoComponent implements OnInit {
     idcardno: [''],
     province: [''],
     email: ['', [Validators.required, Validators.email]],
+    idcardimage: [''],
   });
   baseForm = this.fb.group(new SelfMyInfo());
   provinces$!: Observable<any>;
   nationalitys$!: Observable<any>;
+  uniqueTimestamp!: string;
   validatorMessages = validatorMessages;
   constructor(
     private fb: FormBuilder,
     private myInfoService: MyInfoService,
     private generalInfoService: GeneralInfoService,
-    private addressService: AddressService
+    private addressService: AddressService,
+    private uploadService: FileUploadService
   ) {}
 
   ngOnInit(): void {
+    this.uniqueTimestamp = `${new Date().getTime()}`;
     this.form.valueChanges.subscribe((res) => {
       ('');
     });
     this.provinces$ = this.addressService.getProvinces();
     this.nationalitys$ = this.generalInfoService.getNationality();
-    this.myInfoService.getMyInfo().subscribe((res) => {
-      res = this.myInfoService.formatMyInfo(res);
-      this.baseForm.patchValue(res);
-      this.form.patchValue(res);
-    });
+    this.myInfoService
+      .getMyInfo()
+      .pipe(
+        switchMap((res: any) => {
+          res = this.myInfoService.formatMyInfo(res);
+          const id = res.idcardimage;
+          this.baseForm.patchValue(res);
+          this.form.patchValue(res);
+          console.log(id);
+          return this.uploadService.downloadFile({ id });
+        })
+      )
+      .subscribe((res: any) => {
+        this.imgSrc = atob(res.filedata);
+      });
+
     this.form.disable();
   }
 
@@ -99,5 +116,8 @@ export class PersonInfoComponent implements OnInit {
       this.label = 'แก้ไขข้อมูล';
       this.form.disable();
     }
+  }
+  uploadImageComplete(idcardimage: string) {
+    this.form.patchValue({ idcardimage });
   }
 }
