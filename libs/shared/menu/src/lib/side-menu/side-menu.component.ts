@@ -13,12 +13,14 @@ export class SideMenuComponent {
 
   constructor(private router: Router) {}
 
-  goThirdLevelMenu(url: string, queryParams: string) {
+  navigateUrl(url: string, queryParams: string) {
     if (queryParams) {
+      console.log('url w param= ', url);
       this.router.navigate([url], {
         queryParams: { type: queryParams },
       });
     } else {
+      console.log('url = ', url);
       this.router.navigate([url]);
     }
   }
