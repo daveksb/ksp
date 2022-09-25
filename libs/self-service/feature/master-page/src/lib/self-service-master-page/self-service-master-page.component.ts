@@ -70,7 +70,6 @@ export const menu: MenuConfig[] = [
           {
             label: 'ผู้บริหารการศึกษา',
             path: '/license/education-manager',
-            //params: '3',
           },
           {
             label: 'ศึกษานิเทศก์',
@@ -154,7 +153,7 @@ export const menu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ใบอนุญาตประกอบวิชาชีพ',
-    path: 'home',
+    path: '/home',
   },
   {
     icon: 'assets/images/icon-sidenav/event.svg',
@@ -170,7 +169,7 @@ export const menu: MenuConfig[] = [
     icon: 'assets/images/icon-sidenav/people.svg',
     label: 'ข้อมูลของฉัน',
     path: '',
-    subMenuName: 'my-info',
+    subMenuName: 'myInfo',
     subMenu: [
       {
         label: 'ข้อมูลส่วนตัว',
