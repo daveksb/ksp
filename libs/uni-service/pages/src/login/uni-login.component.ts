@@ -66,6 +66,10 @@ export class UniLoginComponent {
     this.router.navigate(['/retired']);
   }
 
+  checkStatus() {
+    this.router.navigate(['/register/status']);
+  }
+
   forgetPassword() {
     const dialogRef = this.dialog.open(ForgotPasswordSearchPersonComponent, {
       width: '350px',
