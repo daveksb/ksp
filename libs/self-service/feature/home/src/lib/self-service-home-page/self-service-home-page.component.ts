@@ -59,6 +59,7 @@ export class SelfServiceHomePageComponent {
     this.router.navigate(['/license', 'education-manager']);
   }
 
+  //ศึกษานิเทศก์
   studySupervision() {
     this.router.navigate(['/license', 'study-supervision']);
   }
@@ -85,6 +86,7 @@ export class SelfServiceHomePageComponent {
     this.router.navigate(['/renew-license', 'education-manager']);
   }
 
+  //ศึกษานิเทศก์
   supervisionRenew() {
     this.router.navigate(['/renew-license', 'study-supervision']);
   }

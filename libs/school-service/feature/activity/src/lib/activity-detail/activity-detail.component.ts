@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -26,7 +26,6 @@ export class ActivityDetailComponent implements OnInit {
   staff: any;
   pageType!: number;
   activityPageMode = activityPageMode;
-  //selectedValue!: number;
 
   form = this.fb.group({
     type: [null, Validators.required],
@@ -57,7 +56,7 @@ export class ActivityDetailComponent implements OnInit {
 
     this.route.paramMap.pipe(untilDestroyed(this)).subscribe((res) => {
       this.pageType = Number(res.get('pageType'));
-      console.log('process type = ', this.pageType);
+      //console.log('process type = ', this.pageType);
     });
   }
 
@@ -81,7 +80,7 @@ export class ActivityDetailComponent implements OnInit {
 
   save() {
     const formValue = this.form.value;
-    console.log('formValue.detail = ', formValue.detail);
+    //console.log('formValue.detail = ', formValue.detail);
 
     const payload = {
       licenseno: null,
@@ -99,16 +98,16 @@ export class ActivityDetailComponent implements OnInit {
     console.log('payload = ', payload);
 
     this.service.addSelfDevelopy(payload).subscribe((res) => {
-      console.log('res = ', res);
+      //console.log('res = ', res);
     });
   }
 
   edit(pageType: any, staffId: number) {
-    this.router.navigate(['/', 'activity', 'detail', pageType, staffId]);
+    this.router.navigate(['/activity', 'detail', pageType, staffId]);
   }
 
   view(pageType: any, staffId: number) {
-    this.router.navigate(['/', 'activity', 'detail', pageType, staffId]);
+    this.router.navigate(['/activity', 'detail', pageType, staffId]);
   }
 
   cancel() {

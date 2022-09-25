@@ -19,7 +19,7 @@ export class SelfImproveActivityDetailComponent implements OnInit {
   @ViewChild(DynamicComponentDirective, { static: true })
   myHost!: DynamicComponentDirective;
 
-  evidenceFiles = [
+  attachFiles = [
     {
       name: '1.วุฒิบัตร',
       fileId: '',
