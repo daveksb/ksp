@@ -69,6 +69,9 @@ export class LicenseRequestComponent
   countries2$!: Observable<any>;
   licenses$!: Observable<any>;
   disableNextButton = false;
+  uniqueTimestamp!: string;
+  eduFiles: any[] = [];
+  experienceFiles: any[] = [];
 
   constructor(
     router: Router,
@@ -102,6 +105,13 @@ export class LicenseRequestComponent
     this.getListData();
     this.getMyInfo();
     this.checkButtonsDisableStatus();
+    this.initializeFiles();
+  }
+
+  initializeFiles() {
+    this.uniqueTimestamp = this.genUniqueTimestamp();
+    this.eduFiles = structuredClone(this.service.educationFiles);
+    this.experienceFiles = structuredClone(this.service.experienceFiles);
   }
 
   override getListData() {
@@ -172,11 +182,21 @@ export class LicenseRequestComponent
     const { id, ...rawUserInfo } = formData.userInfo;
     const userInfo = toLowercaseProp(rawUserInfo);
     userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
+    userInfo.uniquetimestamp = this.uniqueTimestamp;
     const selectData = _.pick(userInfo, allowKey);
 
-    const { educationType, educationLevelForm } = formData.education;
+    const { educationType, educationLevelForm } = formData?.education || {
+      educationType: null,
+      educationLevelForm: null,
+    };
     const { hasForeignLicense, foreignLicenseForm, ...resExperienceForm } =
-      formData.experience;
+      formData.experience || {
+        hasForeignLicense: null,
+        foreignLicenseForm: null,
+      };
+
+    const edufiles = this.mapFileInfo(this.eduFiles);
+    const experiencefiles = this.mapFileInfo(this.experienceFiles);
 
     const payload = {
       ...self,
@@ -195,6 +215,7 @@ export class LicenseRequestComponent
       },
       ...{ competencyinfo: JSON.stringify(mockPerformances) },
       ...{ prohibitproperty: JSON.stringify(forbidden) },
+      ...{ fileinfo: JSON.stringify({ edufiles, experiencefiles }) },
     };
     console.log(payload);
     return payload;
@@ -202,7 +223,7 @@ export class LicenseRequestComponent
 
   checkButtonsDisableStatus() {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      this.disableNextButton = !this.form.valid;
+      this.disableNextButton = false; // !this.form.valid;
     });
   }
 }

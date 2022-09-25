@@ -12,8 +12,7 @@ import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { Router } from '@angular/router';
-import { parseJson } from '@ksp/shared/utility';
-import { SelfMyInfo } from '@ksp/shared/interface';
+import { genUniqueTimestamp, parseJson, getCookie } from '@ksp/shared/utility';
 
 @Component({
   template: ``,
@@ -44,6 +43,11 @@ export abstract class LicenseFormBaseComponent {
     protected myInfoService: MyInfoService,
     public dialog: MatDialog
   ) {}
+
+  public genUniqueTimestamp() {
+    const userId = getCookie('userId');
+    return genUniqueTimestamp(userId);
+  }
 
   public getListData() {
     this.prefixList$ = this.generalInfoService.getPrefix();
@@ -201,6 +205,17 @@ export abstract class LicenseFormBaseComponent {
       this.provinces2$ = this.provinces1$;
       this.patchAddress2FormWithAddress1();
     }
+  }
+
+  public mapFileInfo(fileList: any[]) {
+    return fileList.map((file: any) => {
+      const object = {
+        fileid: file.fileId || null,
+        filename: file.fileName || null,
+        name: file.name || null,
+      };
+      return object;
+    });
   }
 
   abstract createRequest(forbidden: any, currentProcess: number): void;

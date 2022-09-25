@@ -12,13 +12,14 @@ import {
 } from '@ksp/shared/constant';
 import { SelfRequestService } from '@ksp/shared/service';
 import * as _ from 'lodash';
+import { getCookie, genUniqueTimestamp } from '@ksp/shared/utility';
 
 @Component({
   selector: 'self-service-license-request-foreign',
   templateUrl: './license-request-foreign.component.html',
   styleUrls: ['./license-request-foreign.component.scss'],
 })
-export class LicenseRequestForeignComponent {
+export class LicenseRequestForeignComponent implements OnInit {
   headerGroup = ['Issue Date', 'Form ID'];
   title = 'TEACHING LICENSE APPLICATION FORM';
 
@@ -26,6 +27,9 @@ export class LicenseRequestForeignComponent {
     personalDetail: [],
     personalDeclaration: [],
   });
+
+  attachFiles: any[] = [];
+  uniqueTimestamp!: string;
 
   constructor(
     private router: Router,
@@ -35,12 +39,18 @@ export class LicenseRequestForeignComponent {
     private route: ActivatedRoute
   ) {}
 
+  ngOnInit(): void {
+    const userId = getCookie('userId');
+    this.uniqueTimestamp = genUniqueTimestamp(userId);
+  }
+
   cancel() {
     this.router.navigate(['/home']);
   }
 
   save() {
     console.log(this.form.getRawValue());
+    console.log(this.attachFiles);
     const completeDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -100,14 +110,8 @@ export class LicenseRequestForeignComponent {
     userInfo.requestfor = `${SelfServiceRequestForType.ชาวต่างชาติ}`;
     const selectData = _.pick(userInfo, allowKey);
 
-    userInfo.ref1 = '1';
-    userInfo.ref2 = '01';
-    userInfo.ref3 = `${type}`;
-    userInfo.systemtype = '1';
-    userInfo.requesttype = '1';
-    userInfo.subtype = '5';
-
     const { addressName, addressForm: resWorkplaceForm } = workplaceForm;
+    const documentfiles = this.mapFileInfo(this.attachFiles);
 
     const payload = {
       ...self,
@@ -128,8 +132,24 @@ export class LicenseRequestForeignComponent {
       ...{
         checkProhibitProperty: JSON.stringify(formData.personalDeclaration),
       },
+      ...{ fileinfo: JSON.stringify({ documentfiles }) },
     };
     console.log(payload);
     return payload;
+  }
+
+  onFileUpdate(files: any[]) {
+    this.attachFiles = files;
+  }
+
+  mapFileInfo(fileList: any[]) {
+    return fileList.map((file: any) => {
+      const object = {
+        fileid: file.fileId || null,
+        filename: file.fileName || null,
+        name: file.name || null,
+      };
+      return object;
+    });
   }
 }
