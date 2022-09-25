@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { UserInfoFormType } from '@ksp/shared/constant';
+import {
+  UserInfoFormType,
+  SelfServiceRequestType,
+  SelfServiceRequestSubType,
+} from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -59,7 +63,11 @@ export class RefundFeeRequestComponent implements OnInit {
 
   createRequest() {
     //const payload = this.form.value;
-    const self = new SelfRequest('1', '30', '1');
+    const self = new SelfRequest(
+      '1',
+      SelfServiceRequestType.ขอคืนเงินค่าธรรมเนียม,
+      `${SelfServiceRequestSubType.อื่นๆ}`
+    );
     const allowKey = Object.keys(self);
     const userInfo = this.form.controls.userInfo.value;
 

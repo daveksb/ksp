@@ -14,6 +14,10 @@ import { parseJson } from '@ksp/shared/utility';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { Router } from '@angular/router';
+import {
+  SelfServiceRequestSubType,
+  SelfServiceRequestType,
+} from '@ksp/shared/constant';
 
 @Component({
   selector: 'ksp-request-reward-main',
@@ -99,7 +103,7 @@ export class RequestRewardMainComponent implements OnInit {
 
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        const payload = this.createRequest(0);
+        const payload = this.createRequest(1);
         this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
@@ -121,7 +125,7 @@ export class RequestRewardMainComponent implements OnInit {
 
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        const payload = this.createRequest(1);
+        const payload = this.createRequest(2);
         this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
@@ -136,7 +140,7 @@ export class RequestRewardMainComponent implements OnInit {
     const self = new SelfRequest(
       '1',
       `${this.form.value.rewardType}`,
-      '1',
+      `${SelfServiceRequestSubType.อื่นๆ}`,
       currentProcess
     );
     const allowKey = Object.keys(self);
