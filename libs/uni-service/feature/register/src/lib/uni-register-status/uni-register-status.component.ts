@@ -67,13 +67,4 @@ export class UniRegisterStatusComponent implements OnInit {
     })
   }
 
-  onItemChange(user: any) {
-    this.selectedUser = user;
-  }
-
-  next() {
-    localForage.setItem('userSelectedData', this.selectedUser);
-    this.router.navigate(['/retired', 'reason']);
-  }
-
 }
