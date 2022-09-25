@@ -32,16 +32,17 @@ export class AddressInfoComponent implements OnInit {
     this.provinces2$ = this.provinces1$;
     this.myInfoService.getMyInfo().subscribe((res) => {
       this.baseForm.patchValue(res);
-      const addressList = JSON.parse(res?.addressinfo as string) || null;
-      for (let i = 0; i < addressList.length; i++) {
-        console.log(addressList[i]);
-        const form = this.form.get(`addr${i + 1}`) as AbstractControl<any, any>;
-        this.getAmphurChanged(i + 1, addressList[i].province);
-        this.getTumbon(i + 1, addressList[i].amphur);
-        form?.patchValue(addressList[i]);
-      }
-      // this.form.patchValue(res);
+      this.patchAddressForm(res);
     });
+  }
+  patchAddressForm(res: SelfMyInfo) {
+    const addressList = JSON.parse(res?.addressinfo as string) || null;
+    for (let i = 0; i < addressList.length; i++) {
+      const form = this.form.get(`addr${i + 1}`) as AbstractControl<any, any>;
+      this.getAmphurChanged(i + 1, addressList[i].province);
+      this.getTumbon(i + 1, addressList[i].amphur);
+      form?.patchValue(addressList[i]);
+    }
   }
   provinceChanged(addrType: number, evt: any) {
     const province = evt.target?.value;
@@ -96,8 +97,6 @@ export class AddressInfoComponent implements OnInit {
       addressinfo: JSON.stringify([formData.addr1, formData.addr2]),
     });
     const payload: SelfMyInfo = replaceEmptyWithNull(this.baseForm.value);
-    payload.firstnameth = 'sohard';
-    console.log(payload);
     this.myInfoService
       .updateMyInfo(payload)
       .subscribe((res) => console.log(res));
