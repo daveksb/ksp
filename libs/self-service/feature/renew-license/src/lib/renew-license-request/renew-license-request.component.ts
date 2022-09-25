@@ -54,6 +54,14 @@ export class RenewLicenseRequestComponent
   myInfo$!: Observable<SelfMyInfo>;
   today = thaiDate(new Date());
 
+  workingInfoFiles = [
+    {
+      name: '1.รางวัลอื่นและประกาศเกียรติคุณ',
+      fileId: '',
+      fileName: '',
+    },
+  ];
+
   constructor(
     router: Router,
     dialog: MatDialog,
@@ -81,6 +89,7 @@ export class RenewLicenseRequestComponent
     this.getMyInfo();
     this.checkButtonsDisableStatus();
     this.myInfo$ = this.myInfoService.getMyInfo();
+    this.initializeFiles();
   }
 
   patchUserInfoForm(data: any): void {
@@ -120,9 +129,15 @@ export class RenewLicenseRequestComponent
     const { id, ...rawUserInfo } = formData.userInfo;
     const userInfo = toLowercaseProp(rawUserInfo);
     userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
+    userInfo.uniquetimestamp = this.uniqueTimestamp;
     const selectData = _.pick(userInfo, allowKey);
 
-    const { educationType, educationLevelForm } = formData.standardWorking;
+    const { educationType, educationLevelForm } = formData.standardWorking || {
+      educationType: null,
+      educationLevelForm: null,
+    };
+
+    const performancefiles = this.mapFileInfo(this.workingInfoFiles);
 
     const payload = {
       ...self,
@@ -146,6 +161,7 @@ export class RenewLicenseRequestComponent
         }),
       },
       ...{ prohibitproperty: JSON.stringify(forbidden) },
+      ...{ fileinfo: JSON.stringify({ performancefiles }) },
     };
     console.log(payload);
     return payload;
@@ -153,7 +169,7 @@ export class RenewLicenseRequestComponent
 
   checkButtonsDisableStatus() {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      this.disableNextButton = !this.form.valid;
+      this.disableNextButton = false; //!this.form.valid;
     });
   }
 }

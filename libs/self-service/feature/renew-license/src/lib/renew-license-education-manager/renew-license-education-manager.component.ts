@@ -57,6 +57,14 @@ export class RenewLicenseEducationManagerComponent
 
   disableNextButton = false;
 
+  workingInfoFiles = [
+    {
+      name: '1.รางวัลอื่นและประกาศเกียรติคุณ',
+      fileId: '',
+      fileName: '',
+    },
+  ];
+
   constructor(
     router: Router,
     dialog: MatDialog,
@@ -83,6 +91,7 @@ export class RenewLicenseEducationManagerComponent
     this.getListData();
     this.getMyInfo();
     this.checkButtonsDisableStatus();
+    this.initializeFiles();
   }
 
   patchUserInfoForm(data: any): void {
@@ -120,13 +129,22 @@ export class RenewLicenseEducationManagerComponent
     const { id, ...rawUserInfo } = formData.userInfo;
     const userInfo = toLowercaseProp(rawUserInfo);
     userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
+    userInfo.uniquetimestamp = this.uniqueTimestamp;
     const selectData = _.pick(userInfo, allowKey);
 
-    const { educationType, educationLevelForm } = formData.educationForm;
+    const { educationType, educationLevelForm } = formData.educationForm || {
+      educationType: null,
+      educationLevelForm: null,
+    };
     const {
       educationType: standardType,
       educationLevelForm: standardLevelForm,
-    } = formData.standardWorking;
+    } = formData.standardWorking || {
+      educationType: null,
+      educationLevelForm: null,
+    };
+
+    const performancefiles = this.mapFileInfo(this.workingInfoFiles);
 
     const payload = {
       ...self,
@@ -156,6 +174,7 @@ export class RenewLicenseEducationManagerComponent
         }),
       },
       ...{ prohibitproperty: JSON.stringify(forbidden) },
+      ...{ fileinfo: JSON.stringify({ performancefiles }) },
     };
     console.log(payload);
     return payload;
@@ -163,7 +182,7 @@ export class RenewLicenseEducationManagerComponent
 
   checkButtonsDisableStatus() {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      this.disableNextButton = !this.form.valid;
+      this.disableNextButton = false; //!this.form.valid;
     });
   }
 }

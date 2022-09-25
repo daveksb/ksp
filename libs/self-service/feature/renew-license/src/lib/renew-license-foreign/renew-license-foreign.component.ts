@@ -12,17 +12,21 @@ import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
 import { SelfRequestService } from '@ksp/shared/service';
 import { SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
+import { getCookie, genUniqueTimestamp } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-renew-license-foreign',
   templateUrl: './renew-license-foreign.component.html',
   styleUrls: ['./renew-license-foreign.component.scss'],
 })
-export class RenewLicenseForeignComponent {
+export class RenewLicenseForeignComponent implements OnInit {
   form = this.fb.group({
     personalDetail: [],
     personalDeclaration: [],
   });
+
+  attachFiles: any[] = [];
+  uniqueTimestamp!: string;
 
   constructor(
     private router: Router,
@@ -31,6 +35,10 @@ export class RenewLicenseForeignComponent {
     private requestService: SelfRequestService,
     private route: ActivatedRoute
   ) {}
+  ngOnInit(): void {
+    const userId = getCookie('userId');
+    this.uniqueTimestamp = genUniqueTimestamp(userId);
+  }
 
   cancel() {
     this.router.navigate(['/', 'home']);
@@ -96,9 +104,11 @@ export class RenewLicenseForeignComponent {
     );
     const allowKey = Object.keys(self);
     userInfo.requestfor = `${SelfServiceRequestForType.ชาวต่างชาติ}`;
+    userInfo.uniquetimestamp = this.uniqueTimestamp;
     const selectData = _.pick(userInfo, allowKey);
 
     const { addressName, addressForm: resWorkplaceForm } = workplaceForm;
+    const documentfiles = this.mapFileInfo(this.attachFiles);
 
     const initialPayload = {
       ...replaceEmptyWithNull(selectData),
@@ -118,11 +128,27 @@ export class RenewLicenseForeignComponent {
       ...{
         checkProhibitProperty: JSON.stringify(formData.personalDeclaration),
       },
+      ...{ fileinfo: JSON.stringify({ documentfiles }) },
     };
     console.log(initialPayload);
     const payload = _.pick({ ...self, ...initialPayload }, allowKey);
     console.log(payload);
 
     return payload;
+  }
+
+  onFileUpdate(files: any[]) {
+    this.attachFiles = files;
+  }
+
+  mapFileInfo(fileList: any[]) {
+    return fileList.map((file: any) => {
+      const object = {
+        fileid: file.fileId || null,
+        filename: file.fileName || null,
+        name: file.name || null,
+      };
+      return object;
+    });
   }
 }
