@@ -8,13 +8,15 @@
 
     <div class="container-xl bg-white px-3 py-2">
       <ksp-request-header-info
-        requestDate="10 ตุลาคม 2565"
-        requestNumber="112234467876543"
+        [requestDate]="today"
+        [requestNumber]="userInfo?.requestno"
       ></ksp-request-header-info>
       <hr />
 
       <uni-form-register-coordinator
-        formControlName="coordinatorRetired"
+        formControlName="coordinator"
+        [prefixName]="prefixName$ | async"
+        [occupyList]="occupyList$ | async"
         [formHeader]="
           'ข้อมูลถอดถอนผู้ประสานงาน / ผู้รับผิดชอบ (ที่ระบุไว้ในเอกสารแนบ)'
         "
@@ -23,8 +25,11 @@
 
       <div class="mt-3">
         <ksp-form-attachment
+          [uniqueTimestamp]="uniqueTimestamp"
           [title]="'กรุณาแนบหลักฐานเพื่อพิจารณา'"
           [titleClass]="'box-header text-primary'"
+          [pageType]="pageType.fileAttachTab"
+          [requestType]="requesttype"
           [groups]="retiredFiles"
         ></ksp-form-attachment>
       </div>

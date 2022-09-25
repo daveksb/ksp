@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-6 mb-3">
         <label class="form-label required">สิทธิสำหรับการเข้าใช้งาน</label>
-        <select class="form-select" formControlName="permisson">
+        <select class="form-select" formControlName="permission">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let permission of permissionList" [value]="permission.value">{{permission.label}}</option>
         </select>
