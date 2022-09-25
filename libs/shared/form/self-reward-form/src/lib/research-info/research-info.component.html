@@ -1,169 +1,169 @@
-<div class="box-header text-primary">ข้อมูลผลงานวิจัย</div>
-<div class="row">
-  <div class="col-md-6 mb-2">
-    <label class="form-label">การส่งผลงานวิจัย</label>
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+<form [formGroup]="form">
+  <div class="box-header text-primary">ข้อมูลผลงานวิจัย</div>
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <label class="form-label">การส่งผลงานวิจัย</label>
+      <select class="form-select" formControlName="researchSubmission">
+        <option selected>กรุณาเลือก</option>
+        <option value="1">เดี่ยว</option>
+        <option value="2">ทีม</option>
+      </select>
+    </div>
+    <div class="col-md-6 mb-2">
+      <label class="form-label">ประเภทที่ส่งผลงานวิจัย</label>
+      <select class="form-select" formControlName="researchSubmissionType">
+        <option selected>กรุณาเลือก</option>
+        <option value="1">ครู</option>
+        <option value="2">ผู้บริหารสถานศึกษา</option>
+        <option value="3">ผู้บริหารการศึกษา</option>
+        <option value="4">ศึกษานิเทศก์</option>
+        <option value="5">นักศึกษา</option>
+      </select>
+    </div>
   </div>
-  <div class="col-md-6 mb-2">
-    <label class="form-label">ประเภทที่ส่งผลงานวิจัย</label>
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <label class="form-label">กลุ่มสาระการเรียนรู้</label>
+      <select class="form-select" formControlName="subjectGroup">
+        <option selected>กรุณาเลือก</option>
+        <option value="1">ภาษาไทย</option>
+        <option value="2">คณิตศาสตร์</option>
+        <option value="3">วิทยาศาสตร์และเทคโนโลยี</option>
+        <option value="4">สังคมศึกษา ศาสนา และวัฒนธรรม</option>
+        <option value="5">ศิลปศึกษา</option>
+        <option value="6">การงานอาชีพ</option>
+        <option value="7">สุขศึกษาและพละศึกษา</option>
+        <option value="8">ภาษาต่างประเทศ</option>
+        <option value="9">กิจกรรมพัฒนาผู้เรียน</option>
+        <option value="10">การศึกษาปฐมวัย</option>
+        <option value="11">การศึกษาพิเศษ</option>
+        <option value="12">อาชีวศึกษา</option>
+      </select>
+    </div>
+    <div class="col-md-6 mb-2">
+      <label class="form-label">ภูมิภาค</label>
+      <select class="form-select" formControlName="region">
+        <option selected>กรุณาเลือก</option>
+        <option value="1">ภาคกลาง</option>
+        <option value="2">ภาคเหนือ</option>
+        <option value="3">ภาคตะวันออก</option>
+        <option value="4">ภาคตะวันออกเฉียงเหนือ</option>
+        <option value="5">ภาคใต้</option>
+      </select>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-md-6 mb-2">
-    <label class="form-label">กลุ่มสาระการเรียนรู้</label>
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <label class="form-label">ชื่อผลงานวิจัย (ภาษาไทย)</label>
+      <input class="form-control" type="text" formControlName="researchNameTh" />
+    </div>
+    <div class="col-md-6 mb-2">
+      <label class="form-label">ชื่อผลงานวิจัย (อังกฤษ)</label>
+      <input class="form-control" type="text" formControlName="researchNameEn" />
+    </div>
   </div>
-  <div class="col-md-6 mb-2">
-    <label class="form-label">ภูมิภาค</label>
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+  <div class="row">
+    <div class="col-md-6 mb-2-6">
+      <label class="form-label">ปีที่วิจัยเสร็จแล้ว</label>
+      <input class="form-control" type="text" formControlName="researchCompleteYear" />
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-md-6 mb-2">
-    <label class="form-label">ชื่อผลงานวิจัย (ภาษาไทย)</label>
-    <input class="form-control" type="text" />
+  <br />
+  <div class="box-header text-primary">การส่งผลงานวิจัยกับคุรุสภา</div>
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <label class="form-label">การส่งผลงานวิจัยกับคุรุสภา</label>
+      <select class="form-select" formControlName="researchSubmissionCouncil">
+        <option selected>กรุณาเลือก</option>
+        <option value="1">งานวิจัยนี้เป็นผลงานวิจัยที่ไม่เคยส่งเข้ารับการคัดสรรกับคุรุสภา</option>
+        <option value="2">งานวิจัยนี้เป็นผลงานวิจัยที่เคยส่งเข้ารับการคัดสรรกับคุรุสภาซึ่งยังไม่ได้รับรางวัล
+          แต่มีการพัฒนาต่อยอดงานวิจัย</option>
+        <option value="3">งานวิจัยนี้เป็นผลงานวิจัยที่เคยได้รับรางวัลกับคุรุสภา แต่มีการพัฒนาต่อยอดผลงานวิจัย</option>
+      </select>
+    </div>
+    <div class="col-md-6 mb-2">
+      <label class="form-label">ปี พ.ศ.</label>
+      <input class="form-control" type="text" formControlName="researchSubmissionCouncilYear" />
+    </div>
   </div>
-  <div class="col-md-6 mb-2">
-    <label class="form-label">ชื่อผลงานวิจัย (อังกฤษ)</label>
-    <input class="form-control" type="text" />
+  <br />
+  <div class="box-header text-primary">การส่งผลงานวิจัยกับคุรุสภา</div>
+  <div class="d-flex mb-2">
+    <div class="d-flex">
+      <input type="radio" class="me-1 mt-1" value="1" formControlName="researchSubmissionCouncil2" />
+    </div>
+    <label class="form-label">งานวิจัยนี้เป็นผลงานวิจัยที่ไม่เคยส่งเข้ารับการคัดสรรกับคุรุสภา</label>
   </div>
-</div>
-<div class="row">
-  <div class="col-md-6 mb-2-6">
-    <label class="form-label">ปีที่วิจัยเสร็จแล้ว</label>
-    <input class="form-control" type="text" />
+  <div class="d-flex mb-2">
+    <div class="d-flex">
+      <input type="radio" class="me-1 mt-1" value="2" formControlName="researchSubmissionCouncil2" />
+    </div>
+    <label class="form-label">งานวิจัยนี้เป็นผลงานวิจัยที่เคยส่งเข้ารับการคัดสรรกับคุรุสภา
+      ซึ่งยังไม่ได้รับรางวัล แต่มีการพัฒนาต่อยอดงานวิจัย</label>
   </div>
-</div>
-<br />
-<div class="box-header text-primary">การส่งผลงานวิจัยกับคุรุสภา</div>
-<div class="row">
-  <div class="col-md-6 mb-2">
-    <label class="form-label">การส่งผลงานวิจัยกับคุรุสภา</label>
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+  <div class="d-flex mb-2">
+    <div class="d-flex">
+      <input type="radio" class="me-1 mt-1" value="3" formControlName="researchSubmissionCouncil2" />
+    </div>
+    <label class="form-label">งานวิจัยนี้เป็นผลงานวิจัยที่เคยได้รับรางวัลกับคุรุสภา
+      แต่มีการพัฒนาต่อยอดผลงานวิจัย</label>
   </div>
-  <div class="col-md-6 mb-2">
-    <label class="form-label">ปี พ.ศ.</label>
-    <input class="form-control" type="text" />
+  <br />
+  <div class="box-header text-primary">การส่งผลงานวิจัยกับหน่วยงานอื่น</div>
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <label class="form-label">ผลงานวิจัยนี้เคยได้รับรางวัลจากหน่วยงานอื่่น</label>
+      <select class="form-select" formControlName="awardFromOthers">
+        <option selected>กรุณาเลือก</option>
+        <option value="1">เคย</option>
+        <option value="2">ไม่เคย</option>
+      </select>
+    </div>
+    <div class="col-md-6 mb-2">
+      <label class="form-label">หน่วยงาน</label>
+      <input class="form-control" type="text" formControlName="awardFromOthersName" />
+    </div>
+    <div class="col-md-6 mb-2">
+      <label class="form-label">ปี พ.ศ.</label>
+      <input class="form-control" type="text" formControlName="awardFromOthersYear" />
+    </div>
   </div>
-</div>
-<br />
-<div class="box-header text-primary">การส่งผลงานวิจัยกับคุรุสภา</div>
-<div class="d-flex mb-2">
-  <div class="d-flex">
-    <input type="radio" class="me-1 mt-1" />
-  </div>
-  <label class="form-label"
-    >งานวิจัยนี้เป็นผลงานวิจัยที่ไม่เคยส่งเข้ารับการคัดสรรกับคุรุสภา</label
-  >
-</div>
-<div class="d-flex mb-2">
-  <div class="d-flex">
-    <input type="radio" class="me-1 mt-1" />
-  </div>
-  <label class="form-label"
-    >งานวิจัยนี้เป็นผลงานวิจัยที่เคยส่งเข้ารับการคัดสรรกับคุรุสภา
-    ซึ่งยังไม่ได้รับรางวัล แต่มีการพัฒนาต่อยอดงานวิจัย</label
-  >
-</div>
-<div class="d-flex mb-2">
-  <div class="d-flex">
-    <input type="radio" class="me-1 mt-1" />
-  </div>
-  <label class="form-label"
-    >งานวิจัยนี้เป็นผลงานวิจัยที่เคยได้รับรางวัลกับคุรุสภา
-    แต่มีการพัฒนาต่อยอดผลงานวิจัย</label
-  >
-</div>
-<br />
-<div class="box-header text-primary">การส่งผลงานวิจัยกับหน่วยงานอื่น</div>
-<div class="row">
-  <div class="col-md-6 mb-2">
-    <label class="form-label"
-      >ผลงานวิจัยนี้เคยได้รับรางวัลจากหน่วยงานอื่่น</label
-    >
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
-  </div>
-  <div class="col-md-6 mb-2">
-    <label class="form-label">หน่วยงาน</label>
-    <input class="form-control" type="text" />
-  </div>
-  <div class="col-md-6 mb-2">
-    <label class="form-label">ปี พ.ศ.</label>
-    <input class="form-control" type="text" />
-  </div>
-</div>
 
-<div class="row">
-  <div class="col-md-6 mb-2">
-    <label class="form-label"
-      >ผลงานวิจัยนอยู่ระหว่างการขอมีหรือขอเลื่อนวิทยฐานะ</label
-    >
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <label class="form-label">ผลงานวิจัยนอยู่ระหว่างการขอมีหรือขอเลื่อนวิทยฐานะ</label>
+      <select class="form-select" formControlName="inProcessForAcademicStanding">
+        <option selected>กรุณาเลือก</option>
+        <option value="1">เคย</option>
+        <option value="2">ไม่เคย</option>
+      </select>
+    </div>
+    <div class="col-md-6 mb-2">
+      <label class="form-label">เสนอขอวิทยฐานะระดับ</label>
+      <input class="form-control" type="text" formControlName="academicStandingLevel" />
+    </div>
+    <div class="col-md-6 mb-2">
+      <label class="form-label">ปี พ.ศ.</label>
+      <input class="form-control" type="text" formControlName="academicStandingYear" />
+    </div>
   </div>
-  <div class="col-md-6 mb-2">
-    <label class="form-label">เสนอขอวิทยฐานะระดับ</label>
-    <input class="form-control" type="text" />
-  </div>
-  <div class="col-md-6 mb-2">
-    <label class="form-label">ปี พ.ศ.</label>
-    <input class="form-control" type="text" />
-  </div>
-</div>
 
-<div class="row">
-  <div class="col-md-6 mb-2">
-    <label class="form-label"
-      >ผลงานวิจัยนได้รับทุนอุดหนุนการวิจัยจากคุรุสภาหรือหน่วยงานอื่น</label
-    >
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <label class="form-label">ผลงานวิจัยนได้รับทุนอุดหนุนการวิจัยจากคุรุสภาหรือหน่วยงานอื่น</label>
+      <select class="form-select" formControlName="grantResearchFund">
+        <option selected>กรุณาเลือก</option>
+        <option value="1">เคย</option>
+        <option value="2">ไม่เคย</option>
+      </select>
+    </div>
+    <div class="col-md-6 mb-2">
+      <label class="form-label">หน่วยงาน</label>
+      <input class="form-control" type="text" formControlName="grantResearchFundFrom" />
+    </div>
+    <div class="col-md-6 mb-2">
+      <label class="form-label">ปี พ.ศ.</label>
+      <input class="form-control" type="text" formControlName="grantResearchFundYear" />
+    </div>
   </div>
-  <div class="col-md-6 mb-2">
-    <label class="form-label">หน่วยงาน</label>
-    <input class="form-control" type="text" />
-  </div>
-  <div class="col-md-6 mb-2">
-    <label class="form-label">ปี พ.ศ.</label>
-    <input class="form-control" type="text" />
-  </div>
-</div>
+</form>

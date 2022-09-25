@@ -67,7 +67,12 @@
         formControlName="rewardDetail"></ksp-senior-teacher-reward>
     </div>
     <div *ngIf="rewardType.value === '45'">
-      <ksp-research-reward formControlName="rewardDetail"></ksp-research-reward>
+      <ksp-research-reward
+        [userInfo]="myInfo"
+        [workplaceInfo]="workplaceInfo"
+        [prefixList]="prefixList$ | async"
+        [bureaus]="bureau$ | async"
+        formControlName="rewardDetail"></ksp-research-reward>
     </div>
 
     <div *ngIf="rewardType.value">
