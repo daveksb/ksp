@@ -3,10 +3,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { FormBuilder } from '@angular/forms';
-import { SchoolRequest } from '@ksp/shared/interface';
+import { SelfRequest } from '@ksp/shared/interface';
 import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
-import { SelfServiceRequestSubType } from '@ksp/shared/constant';
+import {
+  SelfServiceRequestForType,
+  SelfServiceRequestSubType,
+  SelfServiceRequestType,
+} from '@ksp/shared/constant';
 import { SelfRequestService } from '@ksp/shared/service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'self-service-license-request-foreign',
@@ -47,7 +52,7 @@ export class LicenseRequestForeignComponent {
 
     completeDialog.componentInstance.saved.subscribe((res) => {
       if (res) {
-        const payload = this.createRequest('0');
+        const payload = this.createRequest(1);
         this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res.returncode === '00') {
@@ -59,7 +64,7 @@ export class LicenseRequestForeignComponent {
 
     completeDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        const payload = this.createRequest('1');
+        const payload = this.createRequest(2);
         this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res.returncode === '00') {
@@ -70,8 +75,17 @@ export class LicenseRequestForeignComponent {
     });
   }
 
-  createRequest(currentProcess: string) {
-    const baseForm = this.fb.group(SchoolRequest);
+  createRequest(currentProcess: number) {
+    const type =
+      this.route.snapshot.queryParamMap.get('type') ||
+      SelfServiceRequestSubType.ครู;
+    const self = new SelfRequest(
+      '1',
+      SelfServiceRequestType.ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ,
+      `${type}`,
+      currentProcess
+    );
+    const allowKey = Object.keys(self);
     const formData: any = this.form.getRawValue();
     const {
       addressForm,
@@ -83,9 +97,8 @@ export class LicenseRequestForeignComponent {
 
     const { id, ...rawUserInfo } = userInfoForm;
     const userInfo = toLowercaseProp(rawUserInfo);
-    const type =
-      this.route.snapshot.queryParamMap.get('type') ||
-      SelfServiceRequestSubType.ครู;
+    userInfo.requestfor = `${SelfServiceRequestForType.ชาวต่างชาติ}`;
+    const selectData = _.pick(userInfo, allowKey);
 
     userInfo.ref1 = '1';
     userInfo.ref2 = '01';
@@ -97,7 +110,8 @@ export class LicenseRequestForeignComponent {
     const { addressName, addressForm: resWorkplaceForm } = workplaceForm;
 
     const payload = {
-      ...replaceEmptyWithNull(userInfo),
+      ...self,
+      ...replaceEmptyWithNull(selectData),
       ...{
         addressinfo: JSON.stringify([addressForm]),
       },
@@ -115,10 +129,7 @@ export class LicenseRequestForeignComponent {
         checkProhibitProperty: JSON.stringify(formData.personalDeclaration),
       },
     };
-    payload.currentprocess = currentProcess;
-    payload.requeststatus = '1';
     console.log(payload);
-    baseForm.patchValue(payload);
-    return baseForm.value;
+    return payload;
   }
 }

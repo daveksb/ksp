@@ -9,6 +9,7 @@ import {
   UserInfoFormType,
   SelfServiceRequestSubType,
   SelfServiceRequestType,
+  SelfServiceRequestForType,
 } from '@ksp/shared/constant';
 import { LicenseFormBaseComponent } from '@ksp/self-service/form';
 import { FormBuilder } from '@angular/forms';
@@ -102,11 +103,13 @@ export class CompareKnowledgeRequestComponent
 
     const { id, ...rawUserInfo } = formData.userInfo;
     const userInfo = toLowercaseProp(rawUserInfo);
+    userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
 
     const self = new SelfRequest(
       '1',
       SelfServiceRequestType.ขอยื่นเทียบเคียงความรู้,
-      `${SelfServiceRequestSubType.ครู}`
+      `${SelfServiceRequestSubType.อื่นๆ}`,
+      currentProcess
     );
     const allowKey = Object.keys(self);
 
@@ -125,8 +128,6 @@ export class CompareKnowledgeRequestComponent
         testresultcompareinfo: JSON.stringify(formData.testResultCompareInfo),
       },
     };
-    initialPayload.currentprocess = `${currentProcess}`;
-    initialPayload.requeststatus = '1';
     console.log(initialPayload);
     const payload = _.pick({ ...self, ...initialPayload }, allowKey);
     console.log(payload);

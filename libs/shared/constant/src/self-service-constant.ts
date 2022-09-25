@@ -22,6 +22,11 @@ export enum SelfServiceRequestType {
   'ขอรับรางวัลผลงานวิจัยของคุรุสภา' = '45',
 }
 
+export enum SelfServiceRequestForType {
+  'ชาวไทย' = 1,
+  'ชาวต่างชาติ' = 2,
+}
+
 export const SelfServiceSelfDevelopActivityTiess = [
   {
     value: 0,

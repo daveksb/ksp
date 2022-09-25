@@ -16,6 +16,7 @@ import {
 import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
 import { SelfRequest } from '@ksp/shared/interface';
 import {
+  SelfServiceRequestForType,
   SelfServiceRequestSubType,
   SelfServiceRequestType,
 } from '@ksp/shared/constant';
@@ -84,7 +85,7 @@ export class LicenseEditComponent implements OnInit {
     const formData: any = this.form.getRawValue();
     const { id, ...rawUserInfo } = this.oldValue;
     const userInfo = toLowercaseProp(rawUserInfo);
-    const type = SelfServiceRequestSubType.ครู;
+    const type = SelfServiceRequestSubType.อื่นๆ;
 
     const self = new SelfRequest(
       '1',
@@ -93,6 +94,7 @@ export class LicenseEditComponent implements OnInit {
       currentProcess
     );
     const allowKey = Object.keys(self);
+    userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
 
     const initialPayload = {
       ...replaceEmptyWithNull(userInfo),
@@ -120,7 +122,7 @@ export class LicenseEditComponent implements OnInit {
 
     dialog.componentInstance.saved.subscribe((res) => {
       if (res) {
-        const payload = this.createRequest(0);
+        const payload = this.createRequest(1);
         this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
@@ -132,7 +134,7 @@ export class LicenseEditComponent implements OnInit {
 
     dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        const payload = this.createRequest(1);
+        const payload = this.createRequest(2);
         this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res.returncode === '00') {

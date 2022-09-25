@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import {
   UserInfoFormType,
   SelfServiceRequestSubType,
+  SelfServiceRequestType,
+  SelfServiceRequestForType,
 } from '@ksp/shared/constant';
 import { LicenseFormBaseComponent } from '@ksp/self-service/form';
 import { FormBuilder } from '@angular/forms';
@@ -15,13 +17,14 @@ import {
   SelfRequestService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { SchoolRequest, SelfMyInfo } from '@ksp/shared/interface';
+import { SchoolRequest, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
 import {
   replaceEmptyWithNull,
   thaiDate,
   toLowercaseProp,
 } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
+import * as _ from 'lodash';
 
 @UntilDestroy()
 @Component({
@@ -102,26 +105,28 @@ export class RenewLicenseRequestComponent
     console.log(this.form.controls.address2.value);
   }
 
-  createRequest(forbidden: any, currentProcess: string) {
-    const baseForm = this.fb.group(SchoolRequest);
+  createRequest(forbidden: any, currentProcess: number) {
+    const self = new SelfRequest(
+      '1',
+      SelfServiceRequestType.ขอต่ออายุใบอนุญาตประกอบวิชาชีพ,
+      `${SelfServiceRequestSubType.ครู}`,
+      currentProcess
+    );
+    const allowKey = Object.keys(self);
     const formData: any = this.form.getRawValue();
     if (formData?.address1?.addressType) formData.address1.addresstype = 1;
     if (formData?.address2?.addressType) formData.address2.addresstype = 2;
 
     const { id, ...rawUserInfo } = formData.userInfo;
     const userInfo = toLowercaseProp(rawUserInfo);
-
-    userInfo.ref1 = '1';
-    userInfo.ref2 = '02';
-    userInfo.ref3 = `${SelfServiceRequestSubType.ครู}`;
-    userInfo.systemtype = '1';
-    userInfo.requesttype = '1';
-    userInfo.subtype = '5';
+    userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
+    const selectData = _.pick(userInfo, allowKey);
 
     const { educationType, educationLevelForm } = formData.standardWorking;
 
     const payload = {
-      ...replaceEmptyWithNull(userInfo),
+      ...self,
+      ...replaceEmptyWithNull(selectData),
       ...{
         addressinfo: JSON.stringify([formData.address1, formData.address2]),
       },
@@ -140,16 +145,10 @@ export class RenewLicenseRequestComponent
           ...educationLevelForm,
         }),
       },
-      // ...{
-      //   experienceinfo: JSON.stringify(formData.experience),
-      // },
       ...{ prohibitproperty: JSON.stringify(forbidden) },
     };
-    payload.currentprocess = currentProcess;
-    payload.requeststatus = '1';
     console.log(payload);
-    baseForm.patchValue(payload);
-    return baseForm.value;
+    return payload;
   }
 
   checkButtonsDisableStatus() {

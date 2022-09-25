@@ -105,7 +105,7 @@ export abstract class LicenseFormBaseComponent {
 
     completeDialog.componentInstance.saved.subscribe((res) => {
       if (res) {
-        const payload = this.createRequest(forbidden, '0');
+        const payload = this.createRequest(forbidden, 1);
         this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res.returncode === '00') {
@@ -117,7 +117,7 @@ export abstract class LicenseFormBaseComponent {
 
     completeDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        const payload = this.createRequest(forbidden, '1');
+        const payload = this.createRequest(forbidden, 2);
         this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res.returncode === '00') {
@@ -203,7 +203,7 @@ export abstract class LicenseFormBaseComponent {
     }
   }
 
-  abstract createRequest(forbidden: any, currentProcess: string): void;
+  abstract createRequest(forbidden: any, currentProcess: number): void;
   abstract patchUserInfoForm(data: any): void;
   abstract patchAddress1Form(data: any): void;
   abstract patchAddress2Form(data: any): void;

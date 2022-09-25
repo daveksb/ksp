@@ -3,7 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { FormBuilder } from '@angular/forms';
-import { SelfServiceRequestSubType } from '@ksp/shared/constant';
+import {
+  SelfServiceRequestSubType,
+  SelfServiceRequestType,
+  SelfServiceRequestForType,
+} from '@ksp/shared/constant';
 import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
 import { SelfRequestService } from '@ksp/shared/service';
 import { SelfRequest } from '@ksp/shared/interface';
@@ -45,7 +49,7 @@ export class RenewLicenseForeignComponent {
 
     completeDialog.componentInstance.saved.subscribe((res) => {
       if (res) {
-        const payload = this.createRequest('0');
+        const payload = this.createRequest(1);
         this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
@@ -57,7 +61,7 @@ export class RenewLicenseForeignComponent {
 
     completeDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        const payload = this.createRequest('1');
+        const payload = this.createRequest(2);
         this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
@@ -68,7 +72,7 @@ export class RenewLicenseForeignComponent {
     });
   }
 
-  createRequest(currentProcess: string) {
+  createRequest(currentProcess: number) {
     const formData: any = this.form.getRawValue();
     const {
       addressForm,
@@ -84,13 +88,20 @@ export class RenewLicenseForeignComponent {
       this.route.snapshot.queryParamMap.get('type') ||
       SelfServiceRequestSubType.ครู;
 
-    const self = new SelfRequest('1', '02', `${type}`);
+    const self = new SelfRequest(
+      '1',
+      SelfServiceRequestType.ขอต่ออายุใบอนุญาตประกอบวิชาชีพ,
+      `${type}`,
+      currentProcess
+    );
     const allowKey = Object.keys(self);
+    userInfo.requestfor = `${SelfServiceRequestForType.ชาวต่างชาติ}`;
+    const selectData = _.pick(userInfo, allowKey);
 
     const { addressName, addressForm: resWorkplaceForm } = workplaceForm;
 
     const initialPayload = {
-      ...replaceEmptyWithNull(userInfo),
+      ...replaceEmptyWithNull(selectData),
       ...{
         addressinfo: JSON.stringify([addressForm]),
       },
@@ -108,8 +119,6 @@ export class RenewLicenseForeignComponent {
         checkProhibitProperty: JSON.stringify(formData.personalDeclaration),
       },
     };
-    initialPayload.currentprocess = currentProcess;
-    initialPayload.requeststatus = '1';
     console.log(initialPayload);
     const payload = _.pick({ ...self, ...initialPayload }, allowKey);
     console.log(payload);

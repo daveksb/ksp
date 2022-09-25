@@ -6,6 +6,7 @@ import {
   UserInfoFormType,
   SelfServiceRequestType,
   SelfServiceRequestSubType,
+  SelfServiceRequestForType,
 } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
@@ -69,7 +70,8 @@ export class RefundFeeRequestComponent implements OnInit {
       `${SelfServiceRequestSubType.อื่นๆ}`
     );
     const allowKey = Object.keys(self);
-    const userInfo = this.form.controls.userInfo.value;
+    const userInfo = this.form.controls.userInfo.value as any;
+    userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
 
     const selectData: any = _.pick(userInfo, allowKey);
     const filledData = { ...self, ...selectData };
