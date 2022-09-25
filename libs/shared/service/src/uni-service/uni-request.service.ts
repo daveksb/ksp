@@ -23,4 +23,11 @@ export class UniRequestService {
       tokenkey: getCookie('userToken'),
     });
   }
+
+  searchUniRequest(form: any): Observable<any> {
+    return this.http.post(`${environment.apiUrlNoAuth}/uniusersearch.php`, {
+      ...form,
+      tokenkey: getCookie('userToken'),
+    });
+  }
 }
