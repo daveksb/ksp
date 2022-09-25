@@ -29,14 +29,14 @@ import {
 } from '@ksp/shared/service';
 import {
   formatCheckboxData,
+  formatDate,
   genUniqueTimestamp,
   parseJson,
   replaceEmptyWithNull,
   thaiDate,
 } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable, zip } from 'rxjs';
-import { FileUploadService } from '@ksp/shared/form/file-upload';
+import { Observable } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -62,7 +62,7 @@ export class SchoolRequestComponent implements OnInit {
   visaClassList!: Observable<any>;
 
   requestId!: number;
-  requestData: any;
+  requestData!: SchoolRequest;
   requestDate: string = thaiDate(new Date());
 
   systemType = '2'; // school service
@@ -110,8 +110,7 @@ export class SchoolRequestComponent implements OnInit {
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
     private staffService: StaffService,
-    private requestService: RequestService,
-    private fileUploadService: FileUploadService
+    private requestService: RequestService
   ) {}
   get Option$() {
     return this.option.valueChanges;
@@ -171,9 +170,10 @@ export class SchoolRequestComponent implements OnInit {
   cancelRequest() {
     const payload = {
       id: `${this.requestId}`,
-      currentprocess: `0`,
+      requeststatus: this.currentProcess === 3 ? 6 : 2,
     };
-    this.requestService.changeRequestProcess(payload).subscribe((res) => {
+
+    this.requestService.cancelRequest(payload).subscribe((res) => {
       //console.log('Cancel request  = ', res);
     });
   }
@@ -182,10 +182,10 @@ export class SchoolRequestComponent implements OnInit {
     //console.log('create request = ');
     const baseForm = this.fb.group(new SchoolRequest());
     const formData: any = this.form.getRawValue();
-    const tab3 = this.mapSavingData(this.eduFiles);
-    const tab4 = this.mapSavingData(this.teachingFiles);
-    const tab5 = this.mapSavingData(this.reasonFiles);
-    const tab6 = this.mapSavingData(this.attachFiles);
+    const tab3 = this.mapFileInfo(this.eduFiles);
+    const tab4 = this.mapFileInfo(this.teachingFiles);
+    const tab5 = this.mapFileInfo(this.reasonFiles);
+    const tab6 = this.mapFileInfo(this.attachFiles);
     formData.addr1.addresstype = 1;
     formData.addr2.addresstype = 2;
 
@@ -268,8 +268,8 @@ export class SchoolRequestComponent implements OnInit {
     userInfo.subtype = `${this.requestSubType}`;
 
     if (this.requestSubType === SchoolRequestSubType.อื่นๆ) {
-      userInfo.passportenddate = userInfo.passportenddate.split('T')[0];
-      userInfo.passportstartdate = userInfo.passportstartdate.split('T')[0];
+      userInfo.passportenddate = formatDate(userInfo.passportenddate);
+      userInfo.passportstartdate = formatDate(userInfo.passportstartdate);
     }
 
     const teaching: any = this.form.controls.teachinginfo.value;
@@ -294,10 +294,10 @@ export class SchoolRequestComponent implements OnInit {
       visaenddate: userInfo.visaenddate,
     };
 
-    const tab3 = this.mapSavingData(this.eduFiles);
-    const tab4 = this.mapSavingData(this.teachingFiles);
-    const tab5 = this.mapSavingData(this.reasonFiles);
-    const tab6 = this.mapSavingData(this.attachFiles);
+    const tab3 = this.mapFileInfo(this.eduFiles);
+    const tab4 = this.mapFileInfo(this.teachingFiles);
+    const tab5 = this.mapFileInfo(this.reasonFiles);
+    const tab6 = this.mapFileInfo(this.attachFiles);
 
     const payload = {
       ...replaceEmptyWithNull(userInfo),
@@ -485,15 +485,6 @@ export class SchoolRequestComponent implements OnInit {
     }
   }
 
-  loadFile() {
-    const payload = {
-      id: `${134}`,
-    };
-    this.requestService.loadFile(payload).subscribe((res) => {
-      console.log('file = ', res);
-    });
-  }
-
   searchStaffFromIdCard(idCard: string) {
     if (!idCard) return;
     const payload = {
@@ -669,7 +660,8 @@ export class SchoolRequestComponent implements OnInit {
       }
     }
   }
-  mapSavingData(fileList: any) {
+
+  mapFileInfo(fileList: any[]) {
     return fileList.map((file: any) => {
       const object = {
         fileid: file.fileId || null,

@@ -128,3 +128,12 @@ export function genUniqueTimestamp(userId: string) {
   console.log('uniuqeTimestamp = ', result);
   return result;
 }
+
+/**
+ *
+ * @param input return correct format date to send to API
+ * @returns
+ */
+export function formatDate(input: string) {
+  return input.split('T')[0];
+}
