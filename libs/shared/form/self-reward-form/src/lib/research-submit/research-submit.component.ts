@@ -36,7 +36,11 @@ export class ResearchSubmitComponent
   }
 
   addFormArray(form: FormArray<any>) {
-    const data = this.fb.group('');
+    const data = this.fb.group({
+      rewardName: [],
+      rewardStatus: [],
+      rewardYear: [],
+    });
     form.push(data);
   }
 

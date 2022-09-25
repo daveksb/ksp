@@ -146,9 +146,9 @@ export class RequestRewardMainComponent implements OnInit {
     const filledData = {
       ...self,
       ...selectData,
-      ...{
+      ...(form.addressInfo && {
         addressinfo: JSON.stringify(form.addressInfo),
-      },
+      }),
       ...{
         schooladdrinfo: JSON.stringify(form.workplace),
       },
@@ -181,6 +181,15 @@ export class RequestRewardMainComponent implements OnInit {
       }),
       ...(form.rewardMoneySupportInfo && {
         rewardmoneysupportinfo: JSON.stringify(form.rewardMoneySupportInfo),
+      }),
+      ...(form.rewardResearcherInfo && {
+        rewardresearcherinfo: JSON.stringify(form.rewardResearcherInfo),
+      }),
+      ...(form.rewardResearchInfo && {
+        rewardresearchinfo: JSON.stringify(form.rewardResearchInfo),
+      }),
+      ...(form.rewardResearchHistory && {
+        rewardresearchhistory: JSON.stringify(form.rewardResearchHistory),
       }),
     };
     const { id, requestdate, ...payload } = replaceEmptyWithNull(filledData);
