@@ -12,6 +12,8 @@ import { providerFactory } from '@ksp/shared/utility';
 export class ActivityLearningMaterialComponent extends KspFormBaseComponent {
   @Input() data: any;
 
+  //`การสร้างสื่อการศึกษา พร้อมแบบทดสอบเพื่อการศึกษาหรือเรียนรู้ด้วยตนเอง ทั้งในรูปแบบเอกสาร และสื่ออิเล็กทรอนิกส์ เช่ย บทความ online , e-learning , E-book เป็นต้น`,
+
   override form = this.fb.group({
     name: [],
     date: [],
@@ -20,7 +22,6 @@ export class ActivityLearningMaterialComponent extends KspFormBaseComponent {
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
         this.onChange(value);
         this.onTouched();

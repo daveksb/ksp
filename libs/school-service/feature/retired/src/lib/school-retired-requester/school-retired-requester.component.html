@@ -63,7 +63,7 @@
       <br />
       <ksp-bottom-nav
         [showCenterButtons]="false"
-        [disableNext]="!form.valid"
+        [disableNext]="form.invalid"
         (nextClicked)="nextPage()"
         (prevClicked)="prevPage()"
       ></ksp-bottom-nav>

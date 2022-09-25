@@ -12,6 +12,7 @@ import { providerFactory } from '@ksp/shared/utility';
 export class ActivityLectureRegisterComponent extends KspFormBaseComponent {
   @Input() data: any;
 
+  //การเป็นวิทยากร ผู้บรรยาย ผู้อภิปราย หรือผู้อภิปรายร่วมในกิจกรรมที่เกี่ยวข้องกับวิชาชีพ หรือวิชาการเฉพาะด้าน
   override form = this.fb.group({
     name: [],
     address: [],
@@ -23,7 +24,6 @@ export class ActivityLectureRegisterComponent extends KspFormBaseComponent {
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
         this.onChange(value);
         this.onTouched();

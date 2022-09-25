@@ -1,14 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { UniRequestService } from '@ksp/shared/service';
-import { Observable } from 'rxjs';
+import { UserInfoFormType } from '@ksp/shared/constant';
+import { UniversitySearchComponent } from '@ksp/shared/search';
+import { GeneralInfoService, UniInfoService, UniRequestService } from '@ksp/shared/service';
+import { thaiDate } from '@ksp/shared/utility';
 import localForage from 'localforage';
+import { Observable } from 'rxjs';
 
 @Component({
-  templateUrl: './retired-home.component.html',
-  styleUrls: ['./retired-home.component.scss'],
+  templateUrl: './uni-register-status.component.html',
+  styleUrls: ['./uni-register-status.component.scss'],
 })
-export class RetiredHomeComponent implements OnInit {
+export class UniRegisterStatusComponent implements OnInit {
   data: Array<any> = [];
   selectedUser: any;
   payload: any = {};
@@ -60,15 +65,6 @@ export class RetiredHomeComponent implements OnInit {
         this.data = [];
       }
     })
-  }
-
-  onItemChange(user: any) {
-    this.selectedUser = user;
-  }
-
-  next() {
-    localForage.setItem('userSelectedData', this.selectedUser);
-    this.router.navigate(['/retired', 'reason']);
   }
 
 }

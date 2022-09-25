@@ -31,11 +31,15 @@ export class SelfServiceThaiLoginComponent {
 
   login() {
     this.loginService.validateLogin(this.form.value).subscribe((res) => {
-      if (res.returncode == '99') return;
-      this.loginService.config = res;
-      setCookie('userToken', res.usertoken, 1);
-      setCookie('userId', res.id, 1);
-      this.router.navigate(['/home']);
+      //if (res.returnCode == 99) return;
+      if (res && res.id && res.usertoken) {
+        this.loginService.myInfo = res;
+        setCookie('userToken', res.usertoken, 1);
+        setCookie('userId', res.id, 1);
+        this.router.navigate(['/home']);
+      } else {
+        return;
+      }
     });
   }
 

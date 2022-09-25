@@ -17,12 +17,8 @@ export const SchoolRequestType = [
 ];
 
 export const SchoolRetireReason = [
-  { id: 1, name: 'reason1' },
-  { id: 2, name: 'reason2' },
-  { id: 3, name: 'reason3' },
-  { id: 4, name: 'reason4' },
-  { id: 5, name: 'reason5' },
-  { id: 6, name: 'reason6' },
+  { id: 1, name: 'เลิกจ้าง' },
+  { id: 2, name: 'อื่นๆ' }
 ];
 
 // url params keep in db for temp license request
@@ -305,7 +301,7 @@ export const subjects = [
   { label: 'อุตสาหกรรมท่องเที่ยว', value: 's17' },
 ];
 
-export const SelfDevelopActivityTypes = [
+export const SchoolSelfDevelopActivityTies = [
   {
     value: 0,
     label: `มีวุฒิเพิ่มขึ้นในสาขาที่เกี่ยวข้องกับการประกอบวิชาชีพทางการศึกษา`,
@@ -358,6 +354,13 @@ export const SelfDevelopActivityTypes = [
 ];
 
 export const uniPermissionList = [
-  { value: 1, label: 'เจ้าหน้าที่ประสานงาน (รับรองปริญญาและประกาศนียบัตรทางการศึกษา' },
-  { value: 1, label: 'เจ้าหน้าที่ประสานงาน (นำส่งรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา)' }
+  {
+    value: 1,
+    label: 'เจ้าหน้าที่ประสานงาน (รับรองปริญญาและประกาศนียบัตรทางการศึกษา',
+  },
+  {
+    value: 1,
+    label:
+      'เจ้าหน้าที่ประสานงาน (นำส่งรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา)',
+  },
 ];

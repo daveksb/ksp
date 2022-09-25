@@ -12,6 +12,7 @@ import { providerFactory } from '@ksp/shared/utility';
 export class ActivityStudyTourComponent extends KspFormBaseComponent {
   @Input() data: any;
 
+  //การศึกษาดูงานที่เกี่ยวข้องกับวิชาชีพทางการศึกษา ทั้งในประเทศ หรือต่างประเทศ
   override form = this.fb.group({
     name: [],
     address: [],

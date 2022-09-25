@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ReactiveFormsModule } from '@angular/forms';
 import { File_UPLOAD_URLS, FileUploadUrls } from '@ksp/shared/form/file-upload';
+import { MatMenuModule } from '@angular/material/menu';
 
 const fileUrls: FileUploadUrls = {
   upload: '/kspuni/unirequestfilesinsert',
@@ -22,6 +23,7 @@ const fileUrls: FileUploadUrls = {
     AppRoutingModule,
     BrowserAnimationsModule,
     MatDialogModule,
+    MatMenuModule,
     MatTooltipModule,
     HttpClientModule,
     ReactiveFormsModule,

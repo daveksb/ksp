@@ -15,8 +15,13 @@ import {
   SelfRequestService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { SchoolRequest } from '@ksp/shared/interface';
-import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
+import { SchoolRequest, SelfMyInfo } from '@ksp/shared/interface';
+import {
+  replaceEmptyWithNull,
+  thaiDate,
+  toLowercaseProp,
+} from '@ksp/shared/utility';
+import { Observable } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -29,13 +34,6 @@ export class RenewLicenseRequestComponent
   implements OnInit
 {
   userInfoType = UserInfoFormType.thai;
-  headerGroup = [
-    'วันที่ทำรายการ',
-    'เลขใบคำขอ',
-    'เลขประจำตัวประชาชน',
-    'วันที่ออกใบอนุญาต',
-    'วันที่หมดอายุใบอนุญาต',
-  ];
 
   override form = this.fb.group({
     userInfo: [],
@@ -50,6 +48,8 @@ export class RenewLicenseRequestComponent
   });
 
   disableNextButton = false;
+  myInfo$!: Observable<SelfMyInfo>;
+  today = thaiDate(new Date());
 
   constructor(
     router: Router,
@@ -77,6 +77,7 @@ export class RenewLicenseRequestComponent
     this.getListData();
     this.getMyInfo();
     this.checkButtonsDisableStatus();
+    this.myInfo$ = this.myInfoService.getMyInfo();
   }
 
   patchUserInfoForm(data: any): void {

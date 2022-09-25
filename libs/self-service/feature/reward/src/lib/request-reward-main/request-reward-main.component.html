@@ -20,7 +20,11 @@
     </div>
 
     <div *ngIf="rewardType.value === '40'">
-      <ksp-council-reward formControlName="rewardDetail"></ksp-council-reward>
+      <ksp-council-reward
+        formControlName="rewardDetail"
+        [userInfo]="myInfo"
+        [addressInfo]="addressInfo"
+        [prefixList]="prefixList$ | async"></ksp-council-reward>
     </div>
 
     <div *ngIf="rewardType.value === '41'">
@@ -35,16 +39,31 @@
 
     <div *ngIf="rewardType.value === '42'">
       <ksp-best-teacher-reward
-        formControlName="rewardDetail"></ksp-best-teacher-reward>
+        formControlName="rewardDetail"
+        [userInfo]="myInfo"
+        [addressInfo]="addressInfo"
+        [workplaceInfo]="workplaceInfo"
+        [bureaus]="bureau$ | async"
+        [prefixList]="prefixList$ | async"></ksp-best-teacher-reward>
     </div>
 
     <div *ngIf="rewardType.value === '43'">
       <ksp-praise-teacher-reward
+        [userInfo]="myInfo"
+        [addressInfo]="addressInfo"
+        [workplaceInfo]="workplaceInfo"
+        [prefixList]="prefixList$ | async"
+        [bureaus]="bureau$ | async"
         formControlName="rewardDetail"></ksp-praise-teacher-reward>
     </div>
 
     <div *ngIf="rewardType.value === '44'">
       <ksp-senior-teacher-reward
+        [userInfo]="myInfo"
+        [addressInfo]="addressInfo"
+        [workplaceInfo]="workplaceInfo"
+        [prefixList]="prefixList$ | async"
+        [bureaus]="bureau$ | async"
         formControlName="rewardDetail"></ksp-senior-teacher-reward>
     </div>
     <div *ngIf="rewardType.value === '45'">
@@ -60,7 +79,7 @@
           บันทึกชั่วคราว
         </button>
         <button
-          (click)="createRequest()"
+          (click)="save()"
           type="button"
           class="ms-3 btn btn-primary">
           บันทึกและยื่น

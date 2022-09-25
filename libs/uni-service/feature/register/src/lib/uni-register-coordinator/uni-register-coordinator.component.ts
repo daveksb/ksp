@@ -103,7 +103,6 @@ export class UniRegisterCoordinatorComponent implements OnInit {
   }
 
   confirm() {
-    console.log(this.form)
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -118,10 +117,15 @@ export class UniRegisterCoordinatorComponent implements OnInit {
     .pipe(
       switchMap((res) => {
         if (res) {
-          console.log(this.saveData, this.form.getRawValue())
+          let educationoccupy = {
+            permission: this.saveData.permission,
+            unitype: this.saveData.unitype,
+            other: this.saveData.other
+          }
           const fileUpload = this.uploadFileList.map((file) => file.fileId || null);
           const payload = {
             ...this.saveData,
+            educationoccupy: JSON.stringify(educationoccupy),
             coordinatorinfo: JSON.stringify(this.form.value.coordinator),
             fileinfo: JSON.stringify({ fileUpload })
           };
@@ -130,6 +134,7 @@ export class UniRegisterCoordinatorComponent implements OnInit {
           payload.ref3 = '5';
           payload.systemtype = this.systemtype;
           payload.requesttype = this.requesttype;
+          payload.requeststatus = `1`;
           payload.currentprocess = this.currentprocess;
           return this.requestService.createRequest(payload);
         }
