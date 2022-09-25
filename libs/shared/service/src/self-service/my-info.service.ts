@@ -18,7 +18,7 @@ export class MyInfoService {
         id,
       })
       .pipe(
-        map((data: any) => this.formatMyInfo(data.datareturn?.[0] || {})),
+        map((data: any) => data.datareturn?.[0] || {}),
         shareReplay()
       );
   }

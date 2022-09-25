@@ -35,6 +35,7 @@ export class WorkplaceInfoComponent implements OnInit {
     this.bureau$ = this.educationDetailService.getBureau();
     this.provinces1$ = this.addressService.getProvinces();
     this.myInfoService.getMyInfo().subscribe((res) => {
+      res = this.myInfoService.formatMyInfo(res);
       this.baseForm.patchValue(res);
       this.patchWorkPlace(res);
     });

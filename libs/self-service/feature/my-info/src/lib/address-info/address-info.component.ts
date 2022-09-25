@@ -31,6 +31,7 @@ export class AddressInfoComponent implements OnInit {
     this.provinces1$ = this.addressService.getProvinces();
     this.provinces2$ = this.provinces1$;
     this.myInfoService.getMyInfo().subscribe((res) => {
+      res = this.myInfoService.formatMyInfo(res);
       this.baseForm.patchValue(res);
       this.patchAddressForm(res);
     });

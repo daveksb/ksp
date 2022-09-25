@@ -35,6 +35,7 @@ export class PersonInfoComponent implements OnInit {
     });
 
     this.myInfoService.getMyInfo().subscribe((res) => {
+      res = this.myInfoService.formatMyInfo(res);
       this.baseForm.patchValue(res);
       this.form.patchValue(res);
     });
