@@ -305,7 +305,7 @@ export const subjects = [
   { label: 'อุตสาหกรรมท่องเที่ยว', value: 's17' },
 ];
 
-export const SelfDevelopActivityTypes = [
+export const SchoolSelfDevelopActivityTies = [
   {
     value: 0,
     label: `มีวุฒิเพิ่มขึ้นในสาขาที่เกี่ยวข้องกับการประกอบวิชาชีพทางการศึกษา`,
@@ -358,6 +358,13 @@ export const SelfDevelopActivityTypes = [
 ];
 
 export const uniPermissionList = [
-  { value: 1, label: 'เจ้าหน้าที่ประสานงาน (รับรองปริญญาและประกาศนียบัตรทางการศึกษา' },
-  { value: 1, label: 'เจ้าหน้าที่ประสานงาน (นำส่งรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา)' }
+  {
+    value: 1,
+    label: 'เจ้าหน้าที่ประสานงาน (รับรองปริญญาและประกาศนียบัตรทางการศึกษา',
+  },
+  {
+    value: 1,
+    label:
+      'เจ้าหน้าที่ประสานงาน (นำส่งรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา)',
+  },
 ];

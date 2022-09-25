@@ -13,6 +13,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { Router } from '@angular/router';
 import { parseJson } from '@ksp/shared/utility';
+import { SelfMyInfo } from '@ksp/shared/interface';
 
 @Component({
   template: ``,
@@ -40,7 +41,7 @@ export abstract class LicenseFormBaseComponent {
     protected fb: FormBuilder,
     protected requestService: SelfRequestService,
     protected router: Router,
-    private myInfoService: MyInfoService,
+    protected myInfoService: MyInfoService,
     public dialog: MatDialog
   ) {}
 

@@ -12,6 +12,8 @@ import { providerFactory } from '@ksp/shared/utility';
 export class ActivityWriteBookComponent extends KspFormBaseComponent {
   @Input() data: any;
 
+  //การแต่งตำรา หรือหนังสือ ในเรื่องที่เกี่ยวข้องกับวิชาชีพ หรือวิชาการเฉพาะด้านที่เกี่ยวข้องกับวิชาชีพ
+
   override form = this.fb.group({
     isBookChecked: [false],
     bookName: [],
@@ -30,7 +32,6 @@ export class ActivityWriteBookComponent extends KspFormBaseComponent {
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
         this.onChange(value);
         this.onTouched();

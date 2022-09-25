@@ -1,15 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DynamicComponentDirective } from '@ksp/shared/directive';
 import { ListData } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { thaiDate } from '@ksp/shared/utility';
-import { SelfDevelopActivityTypes } from '@ksp/shared/constant';
+import { SchoolSelfDevelopActivityTies } from '@ksp/shared/constant';
 import { SelfDevelopService, StaffService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
@@ -32,9 +31,9 @@ export class ActivityDetailComponent implements OnInit {
     detail: [],
   });
 
-  activityTypes: ListData[] = [];
-  @ViewChild(DynamicComponentDirective, { static: true })
-  myHost!: DynamicComponentDirective;
+  activityTypes: ListData[] = SchoolSelfDevelopActivityTies;
+  //@ViewChild(DynamicComponentDirective, { static: true })
+  //myHost!: DynamicComponentDirective;
   attachFiles = [
     {
       name: '1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน',
@@ -51,7 +50,6 @@ export class ActivityDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activityTypes = SelfDevelopActivityTypes;
     this.checkStaffId();
 
     this.route.paramMap.pipe(untilDestroyed(this)).subscribe((res) => {
