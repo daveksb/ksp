@@ -36,7 +36,6 @@ export class EducationInfoComponent implements OnInit {
         }
         start++;
       }
-      eduinfo.licenseInfo1;
       this.form.patchValue({ eduinfo });
     });
   }
