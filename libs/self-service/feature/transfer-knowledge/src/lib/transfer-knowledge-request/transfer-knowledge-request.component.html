@@ -73,7 +73,8 @@
         <br />
         <ksp-form-attachment
           [title]="'กรุณาแนบหลักฐานประกอบ'"
-          [groups]="objectiveFiles"></ksp-form-attachment>
+          [groups]="eduFiles"
+          [uniqueTimestamp]="uniqueTimestamp"></ksp-form-attachment>
       </mat-tab>
 
       <mat-tab label="ข้อมูลขอเทียบโอนความรู้วิชาชีพครู">
@@ -82,7 +83,8 @@
         <br />
         <ksp-form-attachment
           [title]="'กรุณาแนบหลักฐานประกอบ'"
-          [groups]="objectiveFiles"></ksp-form-attachment>
+          [groups]="transferFiles"
+          [uniqueTimestamp]="uniqueTimestamp"></ksp-form-attachment>
       </mat-tab>
     </mat-tab-group>
 

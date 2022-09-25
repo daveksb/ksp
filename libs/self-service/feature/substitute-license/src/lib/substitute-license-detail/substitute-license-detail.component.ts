@@ -32,8 +32,12 @@ export class SubstituteLicenseDetailComponent
 {
   userInfoType = UserInfoFormType.thai;
   objectiveFiles = [
-    '1.ใบอนุญาตประกอบวิชาชีพที่ชํารุด',
-    '2.หลักฐานการรับแจงความของพนักงานสอบสวน หรือบันทึกถอยคํา กรณีใบอนุญาตสูญหาย',
+    { name: '1.ใบอนุญาตประกอบวิชาชีพที่ชํารุด', fileId: '', fileName: '' },
+    {
+      name: '2.หลักฐานการรับแจงความของพนักงานสอบสวน หรือบันทึกถอยคํา กรณีใบอนุญาตสูญหาย',
+      fileId: '',
+      fileName: '',
+    },
   ];
 
   override form = this.fb.group({
@@ -70,6 +74,7 @@ export class SubstituteLicenseDetailComponent
     this.getListData();
     this.getMyInfo();
     // this.checkButtonsDisableStatus();
+    this.initializeFiles();
   }
 
   patchUserInfoForm(data: any): void {
@@ -100,6 +105,7 @@ export class SubstituteLicenseDetailComponent
     const { id, ...rawUserInfo } = formData.userInfo;
     const userInfo = toLowercaseProp(rawUserInfo);
     userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
+    userInfo.uniquetimestamp = this.uniqueTimestamp;
 
     const self = new SelfRequest(
       '1',
@@ -108,6 +114,8 @@ export class SubstituteLicenseDetailComponent
       currentProcess
     );
     const allowKey = Object.keys(self);
+
+    const replacereasoninfofiles = this.mapFileInfo(this.objectiveFiles);
 
     const initialPayload = {
       ...replaceEmptyWithNull(userInfo),
@@ -120,6 +128,7 @@ export class SubstituteLicenseDetailComponent
       ...{
         replacereasoninfo: JSON.stringify(formData.replaceReasonInfo),
       },
+      ...{ fileinfo: JSON.stringify({ replacereasoninfofiles }) },
     };
     console.log(initialPayload);
     const payload = _.pick({ ...self, ...initialPayload }, allowKey);

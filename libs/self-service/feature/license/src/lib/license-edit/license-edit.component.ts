@@ -13,7 +13,12 @@ import {
   MyInfoService,
   SelfRequestService,
 } from '@ksp/shared/service';
-import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
+import {
+  genUniqueTimestamp,
+  getCookie,
+  replaceEmptyWithNull,
+  toLowercaseProp,
+} from '@ksp/shared/utility';
 import { SelfRequest } from '@ksp/shared/interface';
 import {
   SelfServiceRequestForType,
@@ -41,10 +46,21 @@ export class LicenseEditComponent implements OnInit {
     {
       name: 'สำเนาหนังสือสำคัญการเปลี่ยนชื่อ/ชื่อสกุล/เปลี่ยนหรือเพิ่มคำนำหน้าชื่อ',
       fileId: '',
+      fileName: '',
     },
-    { name: 'สำเนาหลักฐานการสมรส หรือการสิ้นสุดการสมรส (ถ้ามี)', fileId: '' },
-    { name: 'สำเนาหนังสือรับรองการใช้คำหน้านามหญิง (ถ้ามี)', fileId: '' },
+    {
+      name: 'สำเนาหลักฐานการสมรส หรือการสิ้นสุดการสมรส (ถ้ามี)',
+      fileId: '',
+      fileName: '',
+    },
+    {
+      name: 'สำเนาหนังสือรับรองการใช้คำหน้านามหญิง (ถ้ามี)',
+      fileId: '',
+      fileName: '',
+    },
   ];
+
+  uniqueTimestamp!: string;
 
   constructor(
     public dialog: MatDialog,
@@ -62,6 +78,12 @@ export class LicenseEditComponent implements OnInit {
     });
     this.getListData();
     this.getMyInfo();
+    this.initializeFile();
+  }
+
+  initializeFile() {
+    const userId = getCookie('userId');
+    this.uniqueTimestamp = genUniqueTimestamp(userId);
   }
 
   getListData() {
@@ -95,12 +117,15 @@ export class LicenseEditComponent implements OnInit {
     );
     const allowKey = Object.keys(self);
     userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
+    userInfo.uniquetimestamp = this.uniqueTimestamp;
+    const attachfiles = this.mapFileInfo(this.uploadFileList);
 
     const initialPayload = {
       ...replaceEmptyWithNull(userInfo),
       ...{
         replacereasoninfo: JSON.stringify({ ...formData.userInfo }),
       },
+      ...{ fileinfo: JSON.stringify({ attachfiles }) },
     };
     const payload = _.pick({ ...self, ...initialPayload }, allowKey);
     console.log(payload);
@@ -160,6 +185,17 @@ export class LicenseEditComponent implements OnInit {
       if (res) {
         this.navigateBack();
       }
+    });
+  }
+
+  mapFileInfo(fileList: any[]) {
+    return fileList.map((file: any) => {
+      const object = {
+        fileid: file.fileId || null,
+        filename: file.fileName || null,
+        name: file.name || null,
+      };
+      return object;
     });
   }
 }
