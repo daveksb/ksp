@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { SelfMyInfo } from '@ksp/shared/interface';
 import { MyInfoService } from '@ksp/shared/service';
+import { replaceEmptyWithNull } from '@ksp/shared/utility';
 
 @Component({
   selector: 'self-service-person-info',
@@ -19,13 +20,13 @@ export class PersonInfoComponent implements OnInit {
     lastnameen: [''],
     password: [''],
     phone: [''],
-    birthDate: [''],
+    birthdate: [''],
     nationality: [''],
     religion: [''],
-    postLevel: [''],
+    idcardno: [''],
     address: [''],
   });
-
+  baseForm = this.fb.group(new SelfMyInfo());
   constructor(private fb: FormBuilder, private myInfoService: MyInfoService) {}
 
   ngOnInit(): void {
@@ -34,7 +35,7 @@ export class PersonInfoComponent implements OnInit {
     });
 
     this.myInfoService.getMyInfo().subscribe((res) => {
-      console.log(res);
+      this.baseForm.patchValue(res);
       this.form.patchValue(res);
     });
     this.form.disable();
@@ -50,6 +51,11 @@ export class PersonInfoComponent implements OnInit {
       this.label = 'บันทึกข้อมูล';
       this.form.enable();
     } else {
+      this.baseForm.patchValue(this.form.getRawValue());
+      const payload: SelfMyInfo = replaceEmptyWithNull(this.baseForm.value);
+      this.myInfoService
+        .updateMyInfo(payload)
+        .subscribe((res) => console.log(res));
       this.status = 'edit';
       this.label = 'แก้ไขข้อมูล';
       this.form.disable();

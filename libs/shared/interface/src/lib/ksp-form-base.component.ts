@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { ControlValueAccessor, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { FormMode } from './form';
@@ -8,7 +8,9 @@ import { FormMode } from './form';
   template: ``,
   standalone: true,
 })
-export abstract class KspFormBaseComponent implements ControlValueAccessor {
+export abstract class KspFormBaseComponent
+  implements ControlValueAccessor, OnChanges
+{
   _mode: FormMode = 'edit';
 
   @Input()
@@ -17,6 +19,10 @@ export abstract class KspFormBaseComponent implements ControlValueAccessor {
     if (value === 'view') {
       setTimeout(() => {
         this.form.disable();
+      }, 0);
+    } else {
+      setTimeout(() => {
+        this.form.enable();
       }, 0);
     }
   }
@@ -73,5 +79,10 @@ export abstract class KspFormBaseComponent implements ControlValueAccessor {
 
   ngOnDestroy() {
     this.subscriptions.forEach((s) => s.unsubscribe());
+  }
+  ngOnChanges(event: any) {
+    if (event?.mode) {
+      this.mode = event.mode.currentValue;
+    }
   }
 }
