@@ -13,35 +13,55 @@
       <div class="row">
         <div class="col-md-6 mb-3">
           <label class="form-label">ชื่อภาษาไทย</label>
-          <input class="form-control" type="text" formControlName="name" />
+          <input
+            class="form-control"
+            type="text"
+            formControlName="firstnameth"
+          />
         </div>
 
         <div class="col-md-6 mb-3">
           <label class="form-label">นามสกุลภาษาไทย</label>
-          <input class="form-control" type="text" formControlName="lastname" />
+          <input
+            class="form-control"
+            type="text"
+            formControlName="lastnameth"
+          />
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-6 mb-3">
           <label class="form-label">ชื่อภาษาอังกฤษ</label>
-          <input class="form-control" type="text" formControlName="name" />
+          <input
+            class="form-control"
+            type="text"
+            formControlName="firstnameen"
+          />
         </div>
 
         <div class="col-md-6 mb-3">
           <label class="form-label">นามสกุลภาษาอังกฤษ</label>
-          <input class="form-control" type="text" formControlName="lastname" />
+          <input
+            class="form-control"
+            type="text"
+            formControlName="lastnameen"
+          />
         </div>
       </div>
 
       <div class="row">
         <div class="col-md mb-3">
           <label class="form-label">หมายเลขบัตรประชาชน</label>
-          <input class="form-control" type="text" formControlName="postLevel" />
+          <input class="form-control" type="text" formControlName="idcardno" />
         </div>
         <div class="col-md mb-3">
           <label class="form-label">รหัสผ่าน</label>
-          <input class="form-control" type="text" formControlName="password" />
+          <input
+            class="form-control"
+            type="password"
+            formControlName="password"
+          />
         </div>
         <div class="col-md mb-3">
           <label class="form-label">เบอร์โทร</label>
@@ -56,32 +76,38 @@
       <div class="row">
         <div class="col-md mb-3">
           <label class="form-label">วันเดือนปีเกิด</label>
-          <input class="form-control" type="date" formControlName="birthDate" />
+          <input class="form-control" type="date" formControlName="birthdate" />
         </div>
 
         <div class="col-md mb-3">
           <label class="form-label">ภูมิลำเนา</label>
-          <select class="form-select" formControlName="nationality">
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+          <select class="form-select" formControlName="religion">
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
+            <option
+              *ngFor="let nationality of nationalitys$ | async"
+              [value]="nationality.nationid"
+            >
+              {{ nationality.nationName }}
+            </option>
           </select>
         </div>
 
         <div class="col-md mb-3">
           <label class="form-label">สัญชาติ</label>
           <select class="form-select" formControlName="nationality">
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
+            <option
+              *ngFor="let nationality of nationalitys$ | async"
+              [value]="nationality.nationId"
+            >
+              {{ nationality.nationName }}
+            </option>
           </select>
         </div>
 
         <div class="col-md mb-3">
           <label class="form-label">ศาสนา</label>
-          <select class="form-select" formControlName="nationality">
+          <select class="form-select" formControlName="religion">
             <option selected>กรุณาเลือก</option>
             <option value="1">One</option>
             <option value="2">Two</option>

@@ -16,7 +16,7 @@ export class RegisterForeignComponent {
   constructor(private router: Router, private fb: FormBuilder) {}
 
   submit() {
-    localForage.setItem('registerForeign', this.form.value);
+    localForage.setItem('registerForeigner', this.form.value);
     this.router.navigate(['/register', 'en-step-1']);
   }
 
