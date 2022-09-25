@@ -39,6 +39,7 @@
         [isLastPage]="true"
         [showCenterButtons]="true"
         [showSaveButton]="true"
+        [disableSaveButton]="this.form.invalid"
         (prevClicked)="prevPage()"
         (cancelClicked)="cancel()"
         (saveClicked)="save()"
