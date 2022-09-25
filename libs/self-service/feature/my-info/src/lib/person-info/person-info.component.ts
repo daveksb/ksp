@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { SelfMyInfo } from '@ksp/shared/interface';
-import { GeneralInfoService, MyInfoService } from '@ksp/shared/service';
+import {
+  AddressService,
+  GeneralInfoService,
+  MyInfoService,
+} from '@ksp/shared/service';
 import { replaceEmptyWithNull } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
@@ -25,20 +29,23 @@ export class PersonInfoComponent implements OnInit {
     nationality: [''],
     religion: [''],
     idcardno: [''],
-    address: [''],
+    province: [''],
   });
   baseForm = this.fb.group(new SelfMyInfo());
+  provinces$!: Observable<any>;
   nationalitys$!: Observable<any>;
   constructor(
     private fb: FormBuilder,
     private myInfoService: MyInfoService,
-    private generalInfoService: GeneralInfoService
+    private generalInfoService: GeneralInfoService,
+    private addressService: AddressService
   ) {}
 
   ngOnInit(): void {
     this.form.valueChanges.subscribe((res) => {
       ('');
     });
+    this.provinces$ = this.addressService.getProvinces();
     this.nationalitys$ = this.generalInfoService.getNationality();
     this.myInfoService.getMyInfo().subscribe((res) => {
       res = this.myInfoService.formatMyInfo(res);

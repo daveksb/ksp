@@ -81,13 +81,13 @@
 
         <div class="col-md mb-3">
           <label class="form-label">ภูมิลำเนา</label>
-          <select class="form-select" formControlName="religion">
+          <select class="form-select" formControlName="province">
             <option value="null" selected hidden disabled>กรุณาเลือก</option>
             <option
-              *ngFor="let nationality of nationalitys$ | async"
-              [value]="nationality.nationid"
+              *ngFor="let province of provinces$ | async"
+              [value]="province?.province_id"
             >
-              {{ nationality.nationName }}
+              {{ province?.province_name }}
             </option>
           </select>
         </div>
@@ -109,9 +109,9 @@
           <label class="form-label">ศาสนา</label>
           <select class="form-select" formControlName="religion">
             <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option value="1">พุทธ</option>
+            <option value="2">คริสต์</option>
+            <option value="3">อิสลาม</option>
           </select>
         </div>
       </div>
