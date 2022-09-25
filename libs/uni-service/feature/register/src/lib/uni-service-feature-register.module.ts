@@ -16,6 +16,8 @@ import {
 import { MatIconModule } from '@angular/material/icon';
 import { MatStepperModule } from '@angular/material/stepper';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UniRegisterStatusComponent } from './uni-register-status/uni-register-status.component';
+import { RetiredSearchComponent } from '@ksp/shared/search';
 
 @NgModule({
   imports: [
@@ -32,10 +34,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatStepperModule,
     StepperNavComponent,
     ReactiveFormsModule,
+    RetiredSearchComponent,
   ],
   declarations: [
     UniRegisterRequesterComponent,
     UniRegisterCoordinatorComponent,
+    UniRegisterStatusComponent
   ],
 })
 export class UniServiceFeatureRegisterModule {}
