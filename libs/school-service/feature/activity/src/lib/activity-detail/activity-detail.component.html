@@ -199,7 +199,7 @@
     [showCenterButtons]="true"
     [showCancelButton]="true"
     [showSaveButton]="true"
-    [disableSaveButton]="!form.valid"
+    [disableSaveButton]="form.invalid"
     (saveClicked)="submit()"
     (cancelClicked)="cancel()"
   ></ksp-bottom-nav>

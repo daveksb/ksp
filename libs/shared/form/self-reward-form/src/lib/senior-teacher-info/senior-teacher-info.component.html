@@ -1,35 +1,40 @@
-<div class="box-header text-primary">ข้อมูลครูอาวุโส</div>
-<div class="row">
-  <div class="col-md-6 mb-2">
-    <label class="form-label">ตำแหน่งทางวิชาการ</label>
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+<form [formGroup]="form">
+  <div class="box-header text-primary">ข้อมูลครูอาวุโส</div>
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <label class="form-label">ตำแหน่งทางวิชาการ</label>
+      <select class="form-select" formControlName="position">
+        <option selected>กรุณาเลือก</option>
+        <option value="1">นักวิชาการ</option>
+        <option value="2">เจ้าหน้าที่นโยบายและแผน</option>
+        <option value="3">เจ้าหน้าที่ทรัพยากรบุคคล</option>
+        <option value="4">นิติกร</option>
+        <option value="5">อื่นๆ</option>
+      </select>
+    </div>
+    <div class="col-md-6 mb-2">
+      <label class="form-label">ประเภทวิชาชีพ</label>
+      <select class="form-select" formControlName="professionalType">
+        <option selected>กรุณาเลือก</option>
+        <option value="1">ครู</option>
+        <option value="2">ผู้บริหารสถานศึกษา</option>
+        <option value="3">ผู้บริหารการศึกษา</option>
+        <option value="4">ศึกษานิเทศก์</option>
+      </select>
+    </div>
   </div>
-  <div class="col-md-6 mb-2">
-    <label class="form-label">ประเภทวิชาชีพ</label>
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
-  </div>
-</div>
 
-<div class="row">
-  <div class="col-md-6 mb-2">
-    <label class="form-label">ข้อมูลการลาออกจากการปฏิบัติงาน</label>
-    <input class="form-control" type="text" />
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <label class="form-label">ข้อมูลการลาออกจากการปฏิบัติงาน</label>
+      <input class="form-control" type="text" formControlName="resignationDetail" />
+    </div>
+    <div class="col-md-6 mb-2">
+      <label class="form-label">ข้อมูลออกก่อนอายุครบ 60 ปี</label>
+      <input class="form-control" type="text" formControlName="earlyRetireDetail" />
+    </div>
   </div>
-  <div class="col-md-6 mb-2">
-    <label class="form-label">ข้อมูลออกก่อนอายุครบ 60 ปี</label>
-    <input class="form-control" type="text" />
-  </div>
-</div>
-<br />
-<div class="box-header text-primary">ประวัติการถูกลงโทษทางวินัย</div>
-<ksp-praise-teacher-punished></ksp-praise-teacher-punished>
+  <br />
+  <div class="box-header text-primary">ประวัติการถูกลงโทษทางวินัย</div>
+  <ksp-praise-teacher-punished formControlName="disciplineDetail"></ksp-praise-teacher-punished>
+</form>

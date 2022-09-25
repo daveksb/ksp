@@ -15,7 +15,10 @@ import {
 } from '@ksp/shared/service';
 import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
 import { SelfRequest } from '@ksp/shared/interface';
-import { SelfServiceRequestSubType } from '@ksp/shared/constant';
+import {
+  SelfServiceRequestSubType,
+  SelfServiceRequestType,
+} from '@ksp/shared/constant';
 import * as _ from 'lodash';
 
 @UntilDestroy()
@@ -34,9 +37,12 @@ export class LicenseEditComponent implements OnInit {
   oldValue: any;
 
   uploadFileList = [
-    'สำเนาหนังสือสำคัญการเปลี่ยนชื่อ/ชื่อสกุล/เปลี่ยนหรือเพิ่มคำนำหน้าชื่อ',
-    'สำเนาหลักฐานการสมรส หรือการสิ้นสุดการสมรส (ถ้ามี)',
-    'สำเนาหนังสือรับรองการใช้คำหน้านามหญิง (ถ้ามี)',
+    {
+      name: 'สำเนาหนังสือสำคัญการเปลี่ยนชื่อ/ชื่อสกุล/เปลี่ยนหรือเพิ่มคำนำหน้าชื่อ',
+      fileId: '',
+    },
+    { name: 'สำเนาหลักฐานการสมรส หรือการสิ้นสุดการสมรส (ถ้ามี)', fileId: '' },
+    { name: 'สำเนาหนังสือรับรองการใช้คำหน้านามหญิง (ถ้ามี)', fileId: '' },
   ];
 
   constructor(
@@ -74,37 +80,26 @@ export class LicenseEditComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  createRequest(currentProcess: string) {
+  createRequest(currentProcess: number) {
     const formData: any = this.form.getRawValue();
-    const { userInfo: rawUserInfo } = formData;
+    const { id, ...rawUserInfo } = this.oldValue;
     const userInfo = toLowercaseProp(rawUserInfo);
     const type = SelfServiceRequestSubType.ครู;
 
-    const self = new SelfRequest('1', '03', `${type}`);
+    const self = new SelfRequest(
+      '1',
+      SelfServiceRequestType['ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ'],
+      `${type}`,
+      currentProcess
+    );
     const allowKey = Object.keys(self);
 
-    const {
-      firstnameen,
-      firstnameth,
-      lastnameen,
-      lastnameth,
-      prefixen,
-      prefixth,
-    } = this.oldValue;
-
     const initialPayload = {
-      ...replaceEmptyWithNull({
-        firstnameen,
-        firstnameth,
-        lastnameen,
-        lastnameth,
-        prefixen,
-        prefixth,
-        ...userInfo,
-      }),
+      ...replaceEmptyWithNull(userInfo),
+      ...{
+        replacereasoninfo: JSON.stringify({ ...formData.userInfo }),
+      },
     };
-    initialPayload.currentprocess = currentProcess;
-    initialPayload.requeststatus = '1';
     const payload = _.pick({ ...self, ...initialPayload }, allowKey);
     console.log(payload);
 
@@ -125,7 +120,7 @@ export class LicenseEditComponent implements OnInit {
 
     dialog.componentInstance.saved.subscribe((res) => {
       if (res) {
-        const payload = this.createRequest('0');
+        const payload = this.createRequest(0);
         this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
@@ -137,7 +132,7 @@ export class LicenseEditComponent implements OnInit {
 
     dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        const payload = this.createRequest('1');
+        const payload = this.createRequest(1);
         this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res.returncode === '00') {

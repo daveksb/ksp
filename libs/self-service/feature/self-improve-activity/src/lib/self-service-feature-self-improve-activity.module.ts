@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SelfImproveActivityDetailComponent } from './self-improve-activity-detail/self-improve-activity-detail.component';
+import { SelfActivityDetailComponent } from './self-activity-detail/self-activity-detail.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master-page';
 import { TopNavComponent } from '@ksp/shared/menu';
@@ -8,6 +8,7 @@ import { LicenseInfoComponent } from '@ksp/shared/ui';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { SchoolServiceFormActivityModule } from '@ksp/school-service/form/activity';
 
 export const routes: Routes = [
   {
@@ -16,7 +17,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'request',
-        component: SelfImproveActivityDetailComponent,
+        component: SelfActivityDetailComponent,
       },
     ],
   },
@@ -31,8 +32,9 @@ export const routes: Routes = [
     DynamicComponentDirective,
     SharedFormOthersModule,
     RouterModule.forChild(routes),
+    SchoolServiceFormActivityModule,
   ],
-  declarations: [SelfImproveActivityDetailComponent],
-  exports: [SelfImproveActivityDetailComponent],
+  declarations: [SelfActivityDetailComponent],
+  exports: [SelfActivityDetailComponent],
 })
-export class SelfServiceFeatureSelfImproveActivityModule {}
+export class SelfServiceFeatureSelfActivityModule {}

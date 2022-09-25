@@ -12,6 +12,7 @@ import { providerFactory } from '@ksp/shared/utility';
 export class ActivityAddDegreeComponent extends KspFormBaseComponent {
   @Input() countries: any[] = [];
 
+  //การศึกษาให้มีวุฒิเพิ่มขึ้นในสาขาเกี่ยวข้องกับการประกอบวิชาชีพทางการศึกษา ทั้งในระดับปริญญา และระดับบัณฑิตศึกษา
   override form = this.fb.group({
     educationInstitution: [null, Validators.required],
     graduateDegree: [],

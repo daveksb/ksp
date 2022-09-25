@@ -2,44 +2,42 @@
   <div class="box-header text-primary">รางวัลระดับชาติที่เคยได้รับ</div>
   <ng-container formArrayName="evidenceInfo">
     <ng-container
-      *ngFor="let DegreeForm of evidenceInfo.controls; let i = index"
-    >
+      *ngFor="let DegreeForm of evidenceInfo.controls; let i = index">
       <ng-container [formGroupName]="i">
         <div class="border rounded px-3 py-2">
           <div class="d-flex justify-content-end">
             <i
               class="bi bi-x-circle-fill text-danger"
               (click)="deleteFormArray(evidenceInfo, i)"
-              role="button"
-            ></i>
+              role="button"></i>
           </div>
           <div class="row">
             <div class="col-md-6 mb-2">
               <label class="form-label">ปีที่ได้รับรางวัล</label>
-              <input class="form-control" type="text" />
+              <input class="form-control" type="text" formControlName="rewardYear" />
             </div>
             <div class="col-md-6 mb-2">
               <label class="form-label">ชื่อรางวัลระดับชาติ</label>
-              <input class="form-control" type="text" />
+              <input class="form-control" type="text" formControlName="rewardName" />
             </div>
           </div>
 
           <div class="row">
             <div class="col-md-6 mb-2">
               <label class="form-label">รายละเอียดของรางวัลระดับชาติ</label>
-              <input class="form-control" type="text" />
+              <input class="form-control" type="text" formControlName="rewardDetail" />
             </div>
           </div>
           <hr />
           <ksp-form-attachment></ksp-form-attachment>
         </div>
-        <br /></ng-container></ng-container
-  ></ng-container>
+        <br />
+      </ng-container>
+    </ng-container>
+  </ng-container>
   <div class="d-flex justify-content-end">
     <ksp-add-row-button
       class="text-primary"
-      (addRowClick)="addFormArray(evidenceInfo)"
-      >เพิ่มข้อมูลรางวัล</ksp-add-row-button
-    >
+      (addRowClick)="addFormArray(evidenceInfo)">เพิ่มข้อมูลรางวัล</ksp-add-row-button>
   </div>
 </form>

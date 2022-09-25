@@ -32,10 +32,9 @@ export class CompareKnowledgeRequestComponent
   extends LicenseFormBaseComponent
   implements OnInit
 {
-  headerGroup = ['วันที่ทำรายการ', 'เลขใบคำขอ'];
   objectiveFiles = [
-    '1. สำเนาหลักฐานแสดงวุฒิการศึกษา',
-    '2. รูปภาพถ่ายหน้าตรง ขนาด 1.5 x 2   นิ้ว',
+    { name: '1. สำเนาหลักฐานแสดงวุฒิการศึกษา', fileId: '' },
+    { name: '2. รูปภาพถ่ายหน้าตรง ขนาด 1.5 x 2   นิ้ว', fileId: '' },
   ];
   userInfoType = UserInfoFormType.thai;
 

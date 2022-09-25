@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { untilDestroyed } from '@ngneat/until-destroy';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -13,25 +12,49 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./edit-license.component.scss'],
   providers: providerFactory(EditLicenseComponent),
 })
-export class EditLicenseComponent
-  extends KspFormBaseComponent
-  implements OnInit
-{
+export class EditLicenseComponent extends KspFormBaseComponent {
   override form = this.fb.group({
-    prefixTh: [],
-    prefixEn: [],
-    firstnameTh: [],
-    firstnameEn: [],
-    lastnameTh: [],
-    lastnameEn: [],
-    passportNo: [],
-    distributeData: [],
+    changePrefix: [],
+    oldPrefixTh: [{ value: null, disabled: true }],
+    oldPrefixEn: [{ value: null, disabled: true }],
+    prefixTh: [{ value: null, disabled: true }],
+    prefixEn: [{ value: null, disabled: true }],
+    changeFirstname: [],
+    oldFirstnameTh: [{ value: null, disabled: true }],
+    oldFirstnameEn: [{ value: null, disabled: true }],
+    firstnameTh: [{ value: null, disabled: true }],
+    firstnameEn: [{ value: null, disabled: true }],
+    changeLastname: [],
+    oldLastnameTh: [{ value: null, disabled: true }],
+    oldLastnameEn: [{ value: null, disabled: true }],
+    lastnameTh: [{ value: null, disabled: true }],
+    lastnameEn: [{ value: null, disabled: true }],
+    changePassport: [],
+    oldPassportNo: [{ value: null, disabled: true }],
+    passportNo: [{ value: null, disabled: true }],
+    isDistributed: [],
+    distributeData: [{ value: null, disabled: true }],
   });
 
   @Input() showEditPassport = false;
   @Input() showDistributeData = false;
   @Input() prefixList: any[] = [];
-  @Input() oldValue: any;
+  @Input()
+  set oldValue(value: any) {
+    setTimeout(() => {
+      if (value) {
+        this.form.patchValue({
+          oldPrefixTh: value.prefixth,
+          oldPrefixEn: value.prefixen,
+          oldFirstnameTh: value.firstnameth,
+          oldFirstnameEn: value.firstnameen,
+          oldLastnameTh: value.lastnameth,
+          oldLastnameEn: value.lastnameen,
+          oldPassportNo: value.passportno,
+        });
+      }
+    }, 0);
+  }
 
   constructor(private fb: FormBuilder) {
     super();
@@ -42,13 +65,6 @@ export class EditLicenseComponent
         this.onTouched();
       })
     );
-  }
-
-  ngOnInit(): void {
-    this.form.disable();
-    /*  this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      //
-    }); */
   }
 
   disableControl(evt: any, controlList: controlName[]) {
