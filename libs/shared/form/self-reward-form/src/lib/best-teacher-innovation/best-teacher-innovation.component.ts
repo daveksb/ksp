@@ -37,7 +37,12 @@ export class BestTeacherInnovationComponent
   }
 
   addFormArray(form: FormArray<any>) {
-    const data = this.fb.group('');
+    const data = this.fb.group({
+      rewardType: [],
+      innovationName: [],
+      subjectGroup: [],
+      year: [],
+    });
     form.push(data);
   }
 

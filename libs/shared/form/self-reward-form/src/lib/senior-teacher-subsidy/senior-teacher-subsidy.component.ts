@@ -1,12 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { providerFactory } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-senior-teacher-subsidy',
   templateUrl: './senior-teacher-subsidy.component.html',
   styleUrls: ['./senior-teacher-subsidy.component.scss'],
+  providers: providerFactory(SeniorTeacherSubsidyComponent),
 })
-export class SeniorTeacherSubsidyComponent implements OnInit {
+export class SeniorTeacherSubsidyComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
   typesOfSubject: string[] = [
     'สถานภาพ',
     'คู่สมรส',
@@ -16,11 +22,26 @@ export class SeniorTeacherSubsidyComponent implements OnInit {
     'ทรัพย์สินของตนเองและคู่สมรส',
   ];
 
-  form = this.fb.group({
+  override form = this.fb.group({
     hasSubsidy: [],
+    status: [],
+    spouse: [],
+    children: [],
+    expense: [],
+    income: [],
+    property: [],
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    super();
+    this.subscriptions.push(
+      // any time the inner form changes update the parent of any change
+      this.form?.valueChanges.subscribe((value) => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
+  }
 
   ngOnInit(): void {
     this.form.valueChanges.subscribe((res) => {

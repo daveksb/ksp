@@ -39,7 +39,14 @@ export class SeniorTeacherCareerComponent
   }
 
   addFormArray(form: FormArray<any>) {
-    const data = this.fb.group('');
+    const data = this.fb.group({
+      professionalType: [],
+      position: [],
+      startDate: [],
+      endDate: [],
+      durationYear: [],
+      durationMonth: [],
+    });
     form.push(data);
   }
 
