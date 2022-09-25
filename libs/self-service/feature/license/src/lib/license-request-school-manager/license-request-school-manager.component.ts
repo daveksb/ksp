@@ -34,15 +34,19 @@ export class LicenseRequestSchoolManagerComponent
   userInfoType = UserInfoFormType.thai;
 
   experienceFiles = [
-    '1. สำเนาวุฒิทางการศึกษา',
-    '2. หนังสือรับรองคุณวุฒิ	',
-    '3. วุฒิบัตรอบรม',
+    { name: '1. สำเนาวุฒิทางการศึกษา', fileId: '', fileName: '' },
+    { name: '2. หนังสือรับรองคุณวุฒิ	', fileId: '', fileName: '' },
+    { name: '3. วุฒิบัตรอบรม', fileId: '', fileName: '' },
   ];
 
-  educationeFiles = [
-    '1. สำเนาวุฒิทางการศึกษา',
-    '2. เอกสารผู้สำเร็จการศึกษา ( ระบบ KSP BUNDIT)		',
-    '3. วุฒิบัตรอบรม',
+  eduFiles = [
+    { name: '1. สำเนาวุฒิทางการศึกษา', fileId: '', fileName: '' },
+    {
+      name: '2. เอกสารผู้สำเร็จการศึกษา ( ระบบ KSP BUNDIT)		',
+      fileId: '',
+      fileName: '',
+    },
+    { name: '3. วุฒิบัตรอบรม', fileId: '', fileName: '' },
   ];
 
   override form = this.fb.group({
@@ -84,6 +88,7 @@ export class LicenseRequestSchoolManagerComponent
     this.getListData();
     this.getMyInfo();
     this.checkButtonsDisableStatus();
+    this.initializeFiles();
   }
 
   patchUserInfoForm(data: any): void {
@@ -121,9 +126,15 @@ export class LicenseRequestSchoolManagerComponent
     const { id, ...rawUserInfo } = formData.userInfo;
     const userInfo = toLowercaseProp(rawUserInfo);
     userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
+    userInfo.uniquetimestamp = this.uniqueTimestamp;
     const selectData = _.pick(userInfo, allowKey);
 
-    const { educationType, educationLevelForm } = formData.education;
+    const { educationType, educationLevelForm } = formData.education || {
+      educationType: null,
+      educationLevelForm: null,
+    };
+
+    const experiencefiles = this.mapFileInfo(this.experienceFiles);
 
     const payload = {
       ...self,
@@ -143,6 +154,7 @@ export class LicenseRequestSchoolManagerComponent
         experienceinfo: JSON.stringify(formData.experience),
       },
       ...{ prohibitproperty: JSON.stringify(forbidden) },
+      ...{ fileinfo: JSON.stringify({ experiencefiles }) },
     };
 
     console.log(payload);
@@ -151,7 +163,7 @@ export class LicenseRequestSchoolManagerComponent
 
   checkButtonsDisableStatus() {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      this.disableNextButton = !this.form.valid;
+      this.disableNextButton = false; //!this.form.valid;
     });
   }
 }

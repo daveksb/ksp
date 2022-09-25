@@ -34,9 +34,9 @@ export class LicenseRequestEducationManagerComponent
   userInfoType = UserInfoFormType.thai;
 
   experienceFiles = [
-    { name: '1. สำเนาวุฒิทางการศึกษา', fileId: '' },
-    { name: '2. หนังสือรับรองคุณวุฒิ	', fileId: '' },
-    { name: '3. วุฒิบัตรอบรม', fileId: '' },
+    { name: '1. สำเนาวุฒิทางการศึกษา', fileId: '', fileName: '' },
+    { name: '2. หนังสือรับรองคุณวุฒิ	', fileId: '', fileName: '' },
+    { name: '3. วุฒิบัตรอบรม', fileId: '', fileName: '' },
   ];
 
   educationeFiles = [
@@ -84,6 +84,7 @@ export class LicenseRequestEducationManagerComponent
     this.getListData();
     this.getMyInfo();
     this.checkButtonsDisableStatus();
+    this.initializeFiles();
   }
 
   patchUserInfoForm(data: any): void {
@@ -121,9 +122,15 @@ export class LicenseRequestEducationManagerComponent
     const { id, ...rawUserInfo } = formData.userInfo;
     const userInfo = toLowercaseProp(rawUserInfo);
     userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
+    userInfo.uniquetimestamp = this.uniqueTimestamp;
     const selectData = _.pick(userInfo, allowKey);
 
-    const { educationType, educationLevelForm } = formData.education;
+    const { educationType, educationLevelForm } = formData.education || {
+      educationType: null,
+      educationLevelForm: null,
+    };
+
+    const experiencefiles = this.mapFileInfo(this.experienceFiles);
 
     const payload = {
       ...self,
@@ -143,6 +150,7 @@ export class LicenseRequestEducationManagerComponent
         experienceinfo: JSON.stringify(formData.experience),
       },
       ...{ prohibitproperty: JSON.stringify(forbidden) },
+      ...{ fileinfo: JSON.stringify({ experiencefiles }) },
     };
     console.log(payload);
     return payload;

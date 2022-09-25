@@ -69,7 +69,6 @@ export class LicenseRequestComponent
   countries2$!: Observable<any>;
   licenses$!: Observable<any>;
   disableNextButton = false;
-  uniqueTimestamp!: string;
   eduFiles: any[] = [];
   experienceFiles: any[] = [];
 
@@ -108,7 +107,7 @@ export class LicenseRequestComponent
     this.initializeFiles();
   }
 
-  initializeFiles() {
+  override initializeFiles() {
     this.uniqueTimestamp = this.genUniqueTimestamp();
     this.eduFiles = structuredClone(this.service.educationFiles);
     this.experienceFiles = structuredClone(this.service.experienceFiles);

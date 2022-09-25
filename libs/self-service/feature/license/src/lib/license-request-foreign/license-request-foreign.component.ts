@@ -108,6 +108,7 @@ export class LicenseRequestForeignComponent implements OnInit {
     const { id, ...rawUserInfo } = userInfoForm;
     const userInfo = toLowercaseProp(rawUserInfo);
     userInfo.requestfor = `${SelfServiceRequestForType.ชาวต่างชาติ}`;
+    userInfo.uniquetimestamp = this.uniqueTimestamp;
     const selectData = _.pick(userInfo, allowKey);
 
     const { addressName, addressForm: resWorkplaceForm } = workplaceForm;

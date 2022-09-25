@@ -32,6 +32,7 @@ export abstract class LicenseFormBaseComponent {
   tumbols3$!: Observable<any>;
   bureau$!: Observable<any>;
   form!: FormGroup;
+  uniqueTimestamp!: string;
 
   constructor(
     protected generalInfoService: GeneralInfoService,
@@ -44,9 +45,13 @@ export abstract class LicenseFormBaseComponent {
     public dialog: MatDialog
   ) {}
 
-  public genUniqueTimestamp() {
+  genUniqueTimestamp() {
     const userId = getCookie('userId');
     return genUniqueTimestamp(userId);
+  }
+
+  public initializeFiles() {
+    this.uniqueTimestamp = this.genUniqueTimestamp();
   }
 
   public getListData() {
