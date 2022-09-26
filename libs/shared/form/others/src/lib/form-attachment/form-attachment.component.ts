@@ -50,11 +50,12 @@ export class FormAttachmentComponent {
   }
   downloadFile(group: any) {
     const id = group.fileId;
+    console.log(group);
     this.fileService.downloadFile({ id }).subscribe((res: any) => {
       const a = document.createElement('a');
       a.style.display = 'none';
-      a.href = atob(res.file);
-      a.download = res.originalname;
+      a.href = atob(res.filedata);
+      a.download = group.fileName;
       document.body.appendChild(a);
       a.click();
     });
