@@ -12,8 +12,8 @@ import {
 } from '@ksp/shared/constant';
 import { SelfRequestService } from '@ksp/shared/service';
 import * as _ from 'lodash';
-import { getCookie, genUniqueTimestamp } from '@ksp/shared/utility';
-
+import { getCookie } from '@ksp/shared/utility';
+import uniqueString from 'unique-string';
 @Component({
   selector: 'self-service-license-request-foreign',
   templateUrl: './license-request-foreign.component.html',
@@ -40,8 +40,7 @@ export class LicenseRequestForeignComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const userId = getCookie('userId');
-    this.uniqueTimestamp = genUniqueTimestamp(userId);
+    this.uniqueTimestamp = uniqueString();
   }
 
   cancel() {
@@ -64,7 +63,7 @@ export class LicenseRequestForeignComponent implements OnInit {
       if (res) {
         const payload = this.createRequest(1);
         this.requestService.createRequest(payload).subscribe((res) => {
-          console.log('request result = ', res);
+          //console.log('request result = ', res);
           if (res.returncode === '00') {
             this.router.navigate(['/home']);
           }
@@ -109,6 +108,8 @@ export class LicenseRequestForeignComponent implements OnInit {
     const userInfo = toLowercaseProp(rawUserInfo);
     userInfo.requestfor = `${SelfServiceRequestForType.ชาวต่างชาติ}`;
     userInfo.uniquetimestamp = this.uniqueTimestamp;
+    userInfo.staffid = getCookie('userId');
+
     const selectData = _.pick(userInfo, allowKey);
 
     const { addressName, addressForm: resWorkplaceForm } = workplaceForm;

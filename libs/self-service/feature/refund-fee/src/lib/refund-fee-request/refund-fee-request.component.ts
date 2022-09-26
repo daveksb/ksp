@@ -18,14 +18,10 @@ import {
   SelfRequestService,
   GeneralInfoService,
 } from '@ksp/shared/service';
-import {
-  genUniqueTimestamp,
-  getCookie,
-  replaceEmptyWithNull,
-  thaiDate,
-} from '@ksp/shared/utility';
+import { getCookie, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
 import * as _ from 'lodash';
 import { Observable } from 'rxjs';
+import uniqueString from 'unique-string';
 
 @Component({
   selector: 'ksp-refund-fee-request',
@@ -70,8 +66,7 @@ export class RefundFeeRequestComponent implements OnInit {
   }
 
   initializeFile() {
-    const userId = getCookie('userId');
-    this.uniqueTimestamp = genUniqueTimestamp(userId);
+    this.uniqueTimestamp = uniqueString();
   }
 
   createRequest() {
@@ -85,6 +80,7 @@ export class RefundFeeRequestComponent implements OnInit {
     const userInfo = this.form.controls.userInfo.value as any;
     userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
     userInfo.uniquetimestamp = this.uniqueTimestamp;
+    userInfo.staffid = getCookie('userId');
 
     const attachfiles = this.mapFileInfo(this.files);
 
