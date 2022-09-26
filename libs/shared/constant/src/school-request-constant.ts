@@ -4,6 +4,7 @@ export enum RequestPageType {
   teachingTab = 'teachingTab',
   reasonTab = 'reasonTab',
   fileAttachTab = 'fileAttachTab',
+  imageTab = 'imageTab',
 }
 
 export const SchoolRequestType = [
