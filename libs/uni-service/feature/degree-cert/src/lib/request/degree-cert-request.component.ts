@@ -180,11 +180,10 @@ export class DegreeCertRequestComponent {
         },
       },
     });
-
     if (res?.attachfiles)
       this.step4Form.setValue({
         step4: {
-          files: parseJson(atob(res?.attachfiles)),
+          files: parseJson(res?.attachfiles),
         },
       });
   }

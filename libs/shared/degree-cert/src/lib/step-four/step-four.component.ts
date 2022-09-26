@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import _ from 'lodash';
+import { v4 as uuidv4 } from 'uuid';
+
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -16,7 +18,6 @@ import {
   UPLOAD_FILE_4,
   UPLOAD_FILE_5,
 } from '@ksp/shared/constant';
-
 @Component({
   selector: 'ksp-degree-cert-step-four',
   templateUrl: './step-four.component.html',
@@ -53,7 +54,7 @@ export class DegreeCertStepFourComponent extends KspFormBaseComponent {
   genUnique(arr: any) {
     return arr.map((data: any) => ({
       ...data,
-      uniqueTimestamp: '',
+      uniqueTimestamp: uuidv4(),
     }));
   }
   openDialog() {
@@ -81,7 +82,7 @@ export class DegreeCertStepFourComponent extends KspFormBaseComponent {
     const uploadFilesByType = this.uploadFilesCollection[this.formType || 'a'];
     if (value?.files?.length) {
       const files = value?.files?.map((data: any) => {
-        let mergeData = _.find(uploadFilesByType, { id: data?.id });
+        let mergeData = _.find(uploadFilesByType, { key: data?.key });
         mergeData = { ...data, ...mergeData };
         return mergeData;
       });
@@ -113,10 +114,9 @@ export class DegreeCertStepFourComponent extends KspFormBaseComponent {
     });
   }
   uploadComplete(groups: any) {
-    console.log(groups);
     this.onChange({
       files: _.map(groups, (data) =>
-        _.pickBy(['fileId', 'fileName', 'key', 'uniquetimpstamp'])
+        _.pick(data, ['fileId', 'fileName', 'key', 'uniqueTimestamp'])
       ),
     });
     this.onTouched();
