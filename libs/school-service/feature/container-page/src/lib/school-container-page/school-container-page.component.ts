@@ -45,6 +45,14 @@ export const menu: MenuConfig[] = [
         path: '/temp-license/request',
         params: { subtype: SchoolRequestSubType.อื่นๆ },
       },
+      /* {
+        label: 'ขอเพิกถอนใบอนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาต',
+        path: 'xxx',
+      },
+      {
+        label: 'ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ ไม่มีใบอนุญาต',
+        path: 'xxx',
+      }, */
       {
         label: 'ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ',
         path: '/foreign-teacher/id-request',
@@ -80,9 +88,9 @@ export const menu: MenuConfig[] = [
     label: 'รายงาน',
     path: '/',
   },
-  {
+  /* {
     icon: 'assets/images/icon-sidenav/gear-fill.svg',
     label: 'รายชื่อเจ้าหน้าที่ใช้งาน',
     path: '/',
-  },
+  }, */
 ];

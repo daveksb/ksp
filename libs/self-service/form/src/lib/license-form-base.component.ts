@@ -33,6 +33,8 @@ export abstract class LicenseFormBaseComponent {
   bureau$!: Observable<any>;
   form!: FormGroup;
   uniqueTimestamp!: string;
+  //myInfo = new SelfMyInfo();
+  myImage = '';
 
   constructor(
     protected generalInfoService: GeneralInfoService,
@@ -46,7 +48,23 @@ export abstract class LicenseFormBaseComponent {
   ) {}
 
   public initializeFiles() {
-    //this.uniqueTimestamp = this.genUniqueTimestamp();
+    //
+  }
+
+  public getMyInfo() {
+    this.myInfoService.getMyInfo().subscribe((res) => {
+      if (res) {
+        //this.myInfo = res;
+        if (res && res.filedata) {
+          this.myImage = atob(res.filedata);
+        }
+        this.patchUserInfo(res);
+        this.patchAddress(parseJson(res.addressinfo));
+        if (res.schooladdrinfo) {
+          this.patchWorkplace(parseJson(res.schooladdrinfo));
+        }
+      }
+    });
   }
 
   public getListData() {
@@ -128,18 +146,6 @@ export abstract class LicenseFormBaseComponent {
             this.router.navigate(['/license', 'payment-channel']);
           }
         });
-      }
-    });
-  }
-
-  public getMyInfo() {
-    this.myInfoService.getMyInfo().subscribe((res) => {
-      if (res) {
-        this.patchUserInfo(res);
-        this.patchAddress(parseJson(res.addressinfo));
-        if (res.schooladdrinfo) {
-          this.patchWorkplace(parseJson(res.schooladdrinfo));
-        }
       }
     });
   }

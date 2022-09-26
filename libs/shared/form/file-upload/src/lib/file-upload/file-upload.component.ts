@@ -5,7 +5,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { MatIconModule } from '@angular/material/icon';
 import { getBase64 } from '@ksp/shared/utility';
 import { RequestPageType } from '@ksp/shared/constant';
-import { FileUploadService } from './file-upload.service';
+import { FileService } from './file-upload.service';
 
 @UntilDestroy()
 @Component({
@@ -26,35 +26,38 @@ export class FileUploadComponent {
   @Input() requestType: number | null = null; // 1,2 no token required
   @Input() uniqueTimestamp: string | null = null;
   @Input() uploadType: 'button' | 'link' = 'button';
+  @Input() isImage = false; // when upload image use public API
   @Output() uploadComplete = new EventEmitter<any>();
 
   fileName = '';
   uploadProgress!: number | null;
 
-  constructor(private uploadService: FileUploadService) {}
+  constructor(private uploadService: FileService) {}
 
   async onFileSelected(event: any) {
     const file: File = event.target.files[0];
     const base64 = (await getBase64(file)) as string;
-    console.log(this.pageType);
-    // const payload = {
-    //   requestid: '11',
-    //   pagetype: '22',
-    //   originalname: '33',
-    //   systemname: '44',
-    //   uniquetimestamp: '55',
-    //   filedata: requesttype,
-    //   requesttype: '3',
-    // };
-    const payload = {
-      pagetype: this.pageType,
-      originalname: file.name,
-      systemname: this.systemFileName,
-      filedata: btoa(base64),
-      uniquetimpstamp: this.uniqueTimestamp,
-      requesttype: `${this.requestType}`,
-    };
-    this.uploadFile(payload);
+    //console.log(this.pageType);
+
+    if (this.isImage) {
+      const payload = {
+        uniquetimestamp: this.uniqueTimestamp,
+        originalname: file.name,
+        filetype: '1',
+        file: btoa(base64),
+      };
+      this.uploadImage(payload);
+    } else {
+      const payload = {
+        pagetype: this.pageType,
+        originalname: file.name,
+        systemname: this.systemFileName,
+        filedata: btoa(base64),
+        uniquetimestamp: this.uniqueTimestamp,
+        requesttype: `${this.requestType}`,
+      };
+      this.uploadFile(payload);
+    }
     if (file) {
       this.fileName = file.name;
     }
@@ -73,6 +76,24 @@ export class FileUploadComponent {
             fileId: event.body.id,
             fileName: this.fileName,
             file: atob(payload.filedata),
+          });
+        }
+      });
+  }
+
+  uploadImage(payload: any) {
+    this.uploadService
+      .uploadImage(payload)
+      .pipe(untilDestroyed(this))
+      .subscribe((event: any) => {
+        if (event.type == HttpEventType.UploadProgress) {
+          this.uploadProgress = Math.round(100 * (event.loaded / event.total));
+        }
+        if (event.status == 200 && event.body?.id) {
+          this.uploadComplete.emit({
+            fileId: event.body.id,
+            fileName: this.fileName,
+            file: atob(payload.file),
           });
         }
       });

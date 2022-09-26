@@ -6,9 +6,9 @@
     <div class="col-md-6 p-0">
       <self-service-slideshow></self-service-slideshow>
     </div>
-    <!-- <div class="col-md-6 p-0">
+    <div class="col-md-6 p-0">
       <self-service-slideshow-second></self-service-slideshow-second>
-    </div> -->
+    </div>
   </div>
   <self-service-license-info
     [header]="'สถานะใบคำขอ'"
@@ -104,14 +104,28 @@
     </mat-menu>
 
     <mat-menu #request="matMenu">
-      <button mat-menu-item [matMenuTriggerFor]="teacher">ครู</button>
-      <button mat-menu-item [matMenuTriggerFor]="manager">
+      <button mat-menu-item [matMenuTriggerFor]="requestTeacher">ครู</button>
+      <button mat-menu-item [matMenuTriggerFor]="requestManager">
         ผู้บริหารสถานศึกษา
       </button>
-      <button mat-menu-item (click)="eduManagerRequest()">
+      <button mat-menu-item (click)="requestLicense(3)">
         ผู้บริหารการศึกษา
       </button>
-      <button mat-menu-item (click)="studySupervision()">ศึกษานิเทศก์</button>
+      <button mat-menu-item (click)="requestLicense(4)">ศึกษานิเทศก์</button>
+    </mat-menu>
+
+    <mat-menu #requestTeacher="matMenu">
+      <button mat-menu-item (click)="requestLicense(1)">ครูชาวไทย</button>
+      <button mat-menu-item (click)="requestLicense(5)">ครูชาวต่างชาติ</button>
+    </mat-menu>
+
+    <mat-menu #requestManager="matMenu">
+      <button mat-menu-item (click)="requestLicense(2)">
+        ผู้บริหารสถานศึกษาชาวไทย
+      </button>
+      <button mat-menu-item (click)="requestLicense(5)">
+        ผู้บริหารสถานศึกษาชาวต่างชาติ
+      </button>
     </mat-menu>
 
     <mat-menu #renew="matMenu">
@@ -119,36 +133,20 @@
       <button mat-menu-item [matMenuTriggerFor]="renewManager">
         ผู้บริหารสถานศึกษา
       </button>
-      <button mat-menu-item (click)="eduManagerRenew()">
-        ผู้บริหารการศึกษา
-      </button>
-      <button mat-menu-item (click)="supervisionRenew()">ศึกษานิเทศก์</button>
-    </mat-menu>
-
-    <mat-menu #teacher="matMenu">
-      <button mat-menu-item (click)="thaiTeacher()">ครูชาวไทย</button>
-      <button mat-menu-item (click)="foreignTeacher(1)">ครูชาวต่างชาติ</button>
+      <button mat-menu-item (click)="renewLicense(3)">ผู้บริหารการศึกษา</button>
+      <button mat-menu-item (click)="renewLicense(4)">ศึกษานิเทศก์</button>
     </mat-menu>
 
     <mat-menu #renewTeacher="matMenu">
-      <button mat-menu-item (click)="teacherRenew()">ครูชาวไทย</button>
-      <button mat-menu-item (click)="foreignRenew(1)">ครูชาวต่างชาติ</button>
-    </mat-menu>
-
-    <mat-menu #manager="matMenu">
-      <button mat-menu-item (click)="schoolManager()">
-        ผู้บริหารสถานศึกษาชาวไทย
-      </button>
-      <button mat-menu-item (click)="foreignTeacher(2)">
-        ผู้บริหารสถานศึกษาชาวต่างชาติ
-      </button>
+      <button mat-menu-item (click)="renewLicense(1)">ครูชาวไทย</button>
+      <button mat-menu-item (click)="renewLicense(5)">ครูชาวต่างชาติ</button>
     </mat-menu>
 
     <mat-menu #renewManager="matMenu">
-      <button mat-menu-item (click)="schManagerRenew()">
+      <button mat-menu-item (click)="renewLicense(2)">
         ผู้บริหารสถานศึกษาชาวไทย
       </button>
-      <button mat-menu-item (click)="foreignRenew(2)">
+      <button mat-menu-item (click)="renewLicense(5)">
         ผู้บริหารสถานศึกษาชาวต่างชาติ
       </button>
     </mat-menu>

@@ -26,7 +26,7 @@ import {
 } from '@ksp/shared/constant';
 import { LicenseFormBaseComponent } from '@ksp/self-service/form';
 import * as _ from 'lodash';
-import uniqueString from 'unique-string';
+import { v4 as uuidv4 } from 'uuid';
 
 const mockPerformances = [
   {
@@ -101,11 +101,6 @@ export class LicenseRequestComponent
   }
 
   ngOnInit(): void {
-    /*     this.form.valueChanges
-      .pipe(debounceTime(300), untilDestroyed(this))
-      .subscribe((res) => {
-        // console.log('res = ', this.form);
-      }); */
     this.getListData();
     this.getMyInfo();
     this.checkButtonsDisableStatus();
@@ -113,7 +108,7 @@ export class LicenseRequestComponent
   }
 
   override initializeFiles() {
-    this.uniqueTimestamp = uniqueString();
+    this.uniqueTimestamp = uuidv4();
     this.eduFiles = structuredClone(this.service.educationFiles);
     this.experienceFiles = structuredClone(this.service.experienceFiles);
   }

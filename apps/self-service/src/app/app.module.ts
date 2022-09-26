@@ -15,7 +15,8 @@ import {
 import { FileUploadUrls, File_UPLOAD_URLS } from '@ksp/shared/form/file-upload';
 
 const fileUrls: FileUploadUrls = {
-  upload: '/kspself/requestfileinsert',
+  uploadFile: '/kspself/requestfileinsert',
+  uploadImage: '/kspself/kspfileinsert',
   delete: '/kspself/requestfiledelete',
   download: '/kspself/requestfileselectfile',
 };
