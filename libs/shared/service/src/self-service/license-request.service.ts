@@ -14,6 +14,10 @@ export class SelfRequestService {
     return this.http.post(`${environment.apiUrl}/kspself/requestinsert`, form);
   }
 
+  updateRequest(form: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/kspself/requestupdate`, form);
+  }
+
   searchMyRequests(payload: any): Observable<SelfRequest[]> {
     return this.http
       .post<SelfRequest[]>(
@@ -21,5 +25,14 @@ export class SelfRequestService {
         payload
       )
       .pipe(map((data: any) => data.datareturn));
+  }
+
+  getRequestById(id: number): Observable<SelfRequest> {
+    return this.http.post<SelfRequest>(
+      `${environment.apiUrl}/kspself/requestselectidall`,
+      {
+        id: `${id}`,
+      }
+    );
   }
 }

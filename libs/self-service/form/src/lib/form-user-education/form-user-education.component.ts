@@ -18,6 +18,9 @@ export class FormUserEducationComponent
   @Input() educationTypes: 'teacher' | 'manager' | 'supervision' = 'teacher';
 
   @Input() countries: any[] = [];
+  @Input() attachFiles!: any[];
+  @Input() uniqueTimestamp = '';
+
   selectedEducationType!: number;
 
   override form = this.fb.group({

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { SelfServiceRequestSubType } from '@ksp/shared/constant';
+import {
+  SelfServiceRequestSubType,
+  SelfServiceRequestForType,
+} from '@ksp/shared/constant';
 import { SelfRequest } from '@ksp/shared/interface';
 import { SelfRequestService } from '@ksp/shared/service';
 import { getCookie } from '@ksp/shared/utility';
@@ -43,6 +46,8 @@ export class SelfServiceHomePageComponent {
     const requestType = Number(input.requesttype);
     const subType = Number(input.subtype);
     const isForeign = Number(input.requestfor);
+    const id = Number(input.id);
+    console.log('subType ', subType);
 
     if (requestType > 40) {
       this.reward();
@@ -58,15 +63,37 @@ export class SelfServiceHomePageComponent {
       this.licenseEdit();
     } else if (requestType === 2) {
       // renew
-      this.checkSubtypeRedirect(subType, isForeign);
+      // this.checkSubtypeRedirect(subType, isForeign);
     } else if (requestType === 1) {
       // new
-      this.checkSubtypeRedirect(subType, isForeign);
+
+      this.checkSubtypeRedirect(subType, isForeign, id);
     }
   }
 
-  checkSubtypeRedirect(subtype: number, isForeign: number) {
-    //
+  checkSubtypeRedirect(
+    subtype: SelfServiceRequestSubType,
+    isForeign: SelfServiceRequestForType,
+    id: number
+  ) {
+    // switch (subtype) {
+    //   case SelfServiceRequestSubType.ครู: {
+    //     if (isForeign === SelfServiceRequestForType.ชาวไทย) {
+    //       this.thaiTeacher(id);
+    //     } else {
+    //       this.foreignTeacher(subtype);
+    //     }
+    //     break;
+    //   }
+    //   case SelfServiceRequestSubType.ผู้บริหารสถานศึกษา: {
+    //     if (isForeign === SelfServiceRequestForType.ชาวไทย) {
+    //       this.schoolManager(id);
+    //     } else {
+    //       this.foreignTeacher(subtype);
+    //     }
+    //     break;
+    //   }
+    // }
   }
 
   clear() {
@@ -78,8 +105,8 @@ export class SelfServiceHomePageComponent {
   }
 
   /*   // ครูไทย
-  thaiTeacher() {
-    this.router.navigate(['/license', 'teacher']);
+  thaiTeacher(id?: number) {
+    this.router.navigate(['/license', 'teacher', `${id}`]);
   }
 
   //ครู + ผู้บริหหาร ต่างชาติ
@@ -90,8 +117,8 @@ export class SelfServiceHomePageComponent {
   }
 
   // ผู้บริหารสถานศึกษา
-  schoolManager() {
-    this.router.navigate(['/license', 'school-manager']);
+  schoolManager(id?: number) {
+    this.router.navigate(['/license', 'school-manager', `${id}`]);
   }
 
   // ผู้บริหารการศึกษา

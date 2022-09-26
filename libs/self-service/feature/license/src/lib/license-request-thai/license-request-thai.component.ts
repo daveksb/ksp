@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 import {
@@ -87,7 +87,8 @@ export class LicenseRequestThaiComponent
     generalInfoService: GeneralInfoService,
     educationDetailService: EducationDetailService,
     requestService: SelfRequestService,
-    myInfoService: MyInfoService
+    myInfoService: MyInfoService,
+    route: ActivatedRoute
   ) {
     super(
       generalInfoService,
@@ -97,6 +98,7 @@ export class LicenseRequestThaiComponent
       requestService,
       router,
       myInfoService,
+      route,
       dialog
     );
   }

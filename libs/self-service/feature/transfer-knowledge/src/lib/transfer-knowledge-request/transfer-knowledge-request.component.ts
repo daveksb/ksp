@@ -18,7 +18,7 @@ import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
 import { SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { Observable } from 'rxjs';
 
@@ -62,7 +62,8 @@ export class TransferKnowledgeRequestComponent
     addressService: AddressService,
     educationDetailService: EducationDetailService,
     myInfoService: MyInfoService,
-    requestService: SelfRequestService
+    requestService: SelfRequestService,
+    route: ActivatedRoute
   ) {
     super(
       generalInfoService,
@@ -72,6 +73,7 @@ export class TransferKnowledgeRequestComponent
       requestService,
       router,
       myInfoService,
+      route,
       dialog
     );
   }
