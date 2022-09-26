@@ -17,7 +17,6 @@ export class SeniorTeacherRewardComponent
   implements OnInit
 {
   userInfoType = UserInfoFormType.thai;
-  rewardFiles = ['1. รางวัลอื่นและประกาศเกียรติคุณ'];
 
   @Input()
   set userInfo(value: any) {
@@ -47,6 +46,8 @@ export class SeniorTeacherRewardComponent
   }
   @Input() prefixList: any[] = [];
   @Input() bureaus: any[] = [];
+  @Input() rewardFiles!: any[];
+  @Input() uniqueTimestamp!: string;
 
   provinces1$!: Observable<any>;
   amphurs1$!: Observable<any>;

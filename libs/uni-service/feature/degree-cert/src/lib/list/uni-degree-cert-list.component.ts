@@ -1,10 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { ListData } from '@ksp/shared/interface';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { DegreeCertSearchComponent } from '@ksp/shared/search';
+import { UniInfoService } from '@ksp/shared/service';
 import { UniFormBadgeComponent } from '@ksp/shared/ui';
+import { getCookie, stringToThaiDate } from '@ksp/shared/utility';
+import { lastValueFrom, map } from 'rxjs';
 
 @Component({
   templateUrl: './uni-degree-cert-list.component.html',
@@ -17,18 +22,87 @@ import { UniFormBadgeComponent } from '@ksp/shared/ui';
     MatTableModule,
     CommonModule,
     UniFormBadgeComponent,
+    ReactiveFormsModule,
   ],
 })
-export class UniDegreeCertListComponent {
+export class UniDegreeCertListComponent implements OnInit {
   displayedColumns: string[] = displayedColumns;
   dataSource = new MatTableDataSource<DegreeCertInfo>();
-
-  search() {
-    this.dataSource.data = data;
+  form = this.fb.group({
+    search: [{}],
+  });
+  uniUniversityOption: ListData[] = [];
+  constructor(
+    private fb: FormBuilder,
+    private uniInfoService: UniInfoService,
+    private router: Router
+  ) {}
+  ngOnInit(): void {
+    this.getAll();
   }
-
+  getRequest() {
+    const { institutionNumber } = this.form.controls.search.value as any;
+    return {
+      uniid: institutionNumber,
+    };
+  }
+  search() {
+    this.uniInfoService
+      .uniRequestDegreeSearch(this.getRequest())
+      .subscribe((res) => {
+        if (!res?.datareturn) return;
+        this.dataSource.data = res?.datareturn?.map(
+          (item: any, index: number) => {
+            return {
+              key: item?.id,
+              order: ++index,
+              degreeId: item?.requestno,
+              data: item?.requestdate,
+              uni: item?.uniname,
+              major: item?.fulldegreenameth,
+              verifyStatus: 'รับข้อมูล',
+              considerStatus: 'พิจารณา',
+              approveStatus: 'พิจารณา',
+              approveDate: '30 ส.ค. 2564',
+              editDate: stringToThaiDate(item?.updatedate),
+              verify: 'แก้ไข',
+              consider: 'แก้ไข',
+            };
+          }
+        );
+      });
+  }
+  onEdit(rowData: any) {
+    this.router.navigate(['/degree-cert', 'request'], {
+      queryParams: {
+        id: rowData?.key,
+      },
+    });
+  }
+  onPrint(rowData: any) {
+    console.log(rowData);
+  }
   clear() {
     this.dataSource.data = [];
+  }
+  async getAll() {
+    let resData = await lastValueFrom(
+      this.uniInfoService.univerSitySelectById(getCookie('uniType'))
+    );
+    this.form.setValue({
+      search: {
+        institutionNumber: getCookie('uniId'),
+        institutionName: getCookie('uniType'),
+      },
+    });
+    resData = await lastValueFrom(
+      this.uniInfoService.searchTypeidUniUniversity(resData.typeid).pipe(
+        map((data) => {
+          return data.map(({ id, name }: any) => ({ value: id, label: name }));
+        })
+      )
+    );
+    this.uniUniversityOption = resData;
   }
 }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   UserInfoFormType,
   SelfServiceRequestSubType,
@@ -73,7 +73,8 @@ export class RenewLicenseStudySupervisionComponent
     generalInfoService: GeneralInfoService,
     educationDetailService: EducationDetailService,
     requestService: SelfRequestService,
-    myInfoService: MyInfoService
+    myInfoService: MyInfoService,
+    route: ActivatedRoute
   ) {
     super(
       generalInfoService,
@@ -83,6 +84,7 @@ export class RenewLicenseStudySupervisionComponent
       requestService,
       router,
       myInfoService,
+      route,
       dialog
     );
   }

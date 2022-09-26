@@ -1,85 +1,62 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { FormMode } from '@ksp/shared/interface';
+import { KspFormBaseComponent } from '@ksp/shared/interface';
+import _ from 'lodash';
+import { v4 as uuidv4 } from 'uuid';
+
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-
+import { FormBuilder } from '@angular/forms';
+import { providerFactory } from '@ksp/shared/utility';
+import {
+  UPLOAD_FILE_1,
+  UPLOAD_FILE_2,
+  UPLOAD_FILE_3,
+  UPLOAD_FILE_4,
+  UPLOAD_FILE_5,
+} from '@ksp/shared/constant';
 @Component({
   selector: 'ksp-degree-cert-step-four',
   templateUrl: './step-four.component.html',
   styleUrls: ['./step-four.component.css'],
+  providers: providerFactory(DegreeCertStepFourComponent),
 })
-export class DegreeCertStepFourComponent {
-  @Input() mode: FormMode = 'edit';
+export class DegreeCertStepFourComponent extends KspFormBaseComponent {
   @Input() formType = 'a';
 
   step4Incorrect = [
     'ไม่ครบถ้วน และไม่ถูกต้อง',
     'หมายเหตุ สำเนาใบอนุญาตไม่ถูกต้อง',
   ];
-
-  constructor(public dialog: MatDialog, private router: Router) {}
-
-  uploadFiles1 = [
-    'หนังสือนำส่ง+แบบคำขอรับรองปริญญาฯ',
-    'มคอ.2 ตั้งแต่หน้าปกถึงหน้าสุดท้าย ฉบับที่มีการปรับล่าสุด',
-    'แบบรายงานข้อมูลเพื่อการรับรองปริญญาตรีทางการศึกษา',
-    'รายงานการประชุมในการเห็นชอบหรืออนุมัติหลักสูตรจากสภาสถาบัน',
-    'เอกสารการผ่าน สป.อว. (กรณีผ่านแล้ว)',
-    'อื่นๆ (ถ้ามี) (pdf. ไม่เกิน 2 MB 1 ไฟล์) (ตามไฟล์ข้อ 3 หัวข้อ 2.1 หน่วยงานที่รับผิดชอบหลักสูตรผลิตครู)',
-    'เอกสาร/หลักฐานอ้างอิงอื่นๆ ถ้ามี (1)',
-    'เอกสาร/หลักฐานอ้างอิงอื่นๆ ถ้ามี (2)',
-    'ข้อมูล/เอกสารหลักฐานที่สถาบันจัดส่งเพิ่มเติมตามมติคณะอนุกรรมการ (รอบที่ 1)',
-  ];
-
-  uploadFiles2 = [
-    'หนังสือนำส่ง+แบบคำขอรับรองปริญญาฯ',
-    'มคอ.2 ตั้งแต่หน้าปกถึงหน้าสุดท้าย ฉบับที่มีการปรับล่าสุด',
-    'แบบประเมินมาตรฐานหลักสูตร มาตรฐานการผลิตและมาตรฐานบัณฑิต โดยมีรายละเอียดข้อมูลตามมาตรฐานและเกณฑ์การรับรอง พร้อมเอกสารประกอบ',
-    'ตารางวิเคราะห์เนื้อหาสาระ/สมรรถนะ ในรายวิชาที่เทียบกับมาตรฐานความรู้และประสบการณ์วิชาชีพ',
-    'คำสั่งแต่งตั้งคณะกรรมการพัฒนาหลักสูตร',
-    'เอกสารรายงานการวิพากษ์หลักสูตร และการนำไปใช้ปรับปรุงแก้ไขหลักสูตร',
-    'สำเนาสัญญาจ้างหรือทะเบียนประวัติหรือหลักฐานการขอปฏิบัติการสอน',
-    'เอกสาร/หลักฐานอ้างอิงอื่นๆ ถ้ามี (1)',
-    'ข้อมูล/เอกสารหลักฐานที่สถาบันจัดส่งเพิ่มเติมตามมติคณะอนุกรรมการ (รอบที่ 1)',
-  ];
-
-  uploadFiles3 = [
-    'หนังสือนำส่ง+แบบคำขอรับรองปริญญาฯ',
-    'มคอ.2 ตั้งแต่หน้าปกถึงหน้าสุดท้าย ฉบับที่มีการปรับล่าสุด',
-    'แบบประเมินมาตรฐานหลักสูตร มาตรฐานการผลิตและมาตรฐานบัณฑิต โดยมีรายละเอียดข้อมูลตามมาตรฐานและเกณฑ์การรับรอง พร้อมเอกสารประกอบ',
-    'ตารางวิเคราะห์เนื้อหาสาระ/สมรรถนะ ในรายวิชาที่เทียบกับมาตรฐานความรู้และประสบการณ์วิชาชีพ',
-    'คำสั่งแต่งตั้งคณะกรรมการพัฒนาหลักสูตร',
-    'เอกสารรายงานการวิพากษ์หลักสูตร และการนำไปใช้ปรับปรุงแก้ไขหลักสูตร',
-    'รายงานการประชุมในการเห็นชอบหรืออนุมัติหลักสูตรจากสภาสถาบัน',
-    'เอกสาร/หลักฐานอ้างอิงอื่นๆ ถ้ามี (1)',
-  ];
-
-  uploadFiles4 = [
-    'หนังสือนำส่ง+แบบคำขอรับรองปริญญาฯ',
-    'มคอ.2 ตั้งแต่หน้าปกถึงหน้าสุดท้าย ฉบับที่มีการปรับล่าสุด',
-    'แบบประเมินมาตรฐานหลักสูตร มาตรฐานการผลิตและมาตรฐานบัณฑิต โดยมีรายละเอียดข้อมูลตามมาตรฐานและเกณฑ์การรับรอง พร้อมเอกสารประกอบ',
-    'ตารางวิเคราะห์เนื้อหาสาระ/สมรรถนะ ในรายวิชาที่เทียบกับมาตรฐานความรู้และประสบการณ์วิชาชีพ',
-    'คำสั่งแต่งตั้งคณะกรรมการพัฒนาหลักสูตร',
-    'เอกสารรายงานการวิพากษ์หลักสูตร และการนำไปใช้ปรับปรุงแก้ไขหลักสูตร',
-    'รายงานการประชุมในการเห็นชอบหรืออนุมัติหลักสูตรจากสภาสถาบัน',
-    'เอกสาร/หลักฐานอ้างอิงอื่นๆ ถ้ามี (1)',
-  ];
-
-  uploadFiles5 = [
-    'หนังสือนำส่ง+แบบคำขอรับรองปริญญาฯ',
-    'มคอ.2 ตั้งแต่หน้าปกถึงหน้าสุดท้าย ฉบับที่มีการปรับล่าสุด',
-    'แบบประเมินมาตรฐานหลักสูตร มาตรฐานการผลิตและมาตรฐานบัณฑิต โดยมีรายละเอียดข้อมูลตามมาตรฐานและเกณฑ์การรับรอง พร้อมเอกสารประกอบ',
-    'ตารางวิเคราะห์เนื้อหาสาระ/สมรรถนะ ในรายวิชาที่เทียบกับมาตรฐานความรู้และประสบการณ์วิชาชีพ',
-    'คำสั่งแต่งตั้งคณะกรรมการพัฒนาหลักสูตร',
-    'เอกสารรายงานการวิพากษ์หลักสูตร และการนำไปใช้ปรับปรุงแก้ไขหลักสูตร',
-    'รายงานการประชุมในการเห็นชอบหรืออนุมัติหลักสูตรจากสภาสถาบัน',
-    'เอกสาร/หลักฐานอ้างอิงอื่นๆ ถ้ามี (1)',
-  ];
-
+  override form = this.fb.group({
+    files: [],
+  });
+  constructor(
+    public dialog: MatDialog,
+    private router: Router,
+    private fb: FormBuilder
+  ) {
+    super();
+  }
+  private _uploadFilesCollection: any = {
+    a: this.genUnique(UPLOAD_FILE_1),
+    b: this.genUnique(UPLOAD_FILE_2),
+    c: this.genUnique(UPLOAD_FILE_3),
+    d: this.genUnique(UPLOAD_FILE_4),
+    e: this.genUnique(UPLOAD_FILE_5),
+  };
+  get uploadFilesCollection() {
+    return this._uploadFilesCollection;
+  }
+  genUnique(arr: any) {
+    return arr.map((data: any) => ({
+      ...data,
+      uniqueTimestamp: uuidv4(),
+    }));
+  }
   openDialog() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
@@ -101,6 +78,22 @@ export class DegreeCertStepFourComponent {
     });
   }
 
+  override writeValue(value: any) {
+    const uploadFilesByType = this.uploadFilesCollection[this.formType || 'a'];
+    if (value?.files?.length) {
+      const files = value?.files?.map((data: any) => {
+        let mergeData = _.find(uploadFilesByType, { key: data?.key });
+        mergeData = { ...data, ...mergeData };
+        return mergeData;
+      });
+      this.value = { files };
+    } else {
+      this.value = {
+        files: this.uploadFilesCollection[this.formType || 'a'],
+      };
+    }
+  }
+
   onConfirmed() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
@@ -119,5 +112,13 @@ export class DegreeCertStepFourComponent {
         this.router.navigate(['/', 'degree-cert']);
       }
     });
+  }
+  uploadComplete(groups: any) {
+    this.onChange({
+      files: _.map(groups, (data) =>
+        _.pick(data, ['fileId', 'fileName', 'key', 'uniqueTimestamp'])
+      ),
+    });
+    this.onTouched();
   }
 }

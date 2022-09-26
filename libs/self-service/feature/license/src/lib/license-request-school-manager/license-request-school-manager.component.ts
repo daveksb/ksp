@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   UserInfoFormType,
   SelfServiceRequestSubType,
@@ -18,12 +18,29 @@ import {
 } from '@ksp/shared/service';
 import {
   getCookie,
+  parseJson,
   replaceEmptyWithNull,
   toLowercaseProp,
 } from '@ksp/shared/utility';
 import { SelfRequest } from '@ksp/shared/interface';
 import { LicenseFormBaseComponent } from '@ksp/self-service/form';
 import * as _ from 'lodash';
+
+const EXPERIENCE_FILES = [
+  { name: '1. สำเนาวุฒิทางการศึกษา', fileId: '', fileName: '' },
+  { name: '2. หนังสือรับรองคุณวุฒิ	', fileId: '', fileName: '' },
+  { name: '3. วุฒิบัตรอบรม', fileId: '', fileName: '' },
+];
+
+const EDU_FILES = [
+  { name: '1. สำเนาวุฒิทางการศึกษา', fileId: '', fileName: '' },
+  {
+    name: '2. เอกสารผู้สำเร็จการศึกษา ( ระบบ KSP BUNDIT)		',
+    fileId: '',
+    fileName: '',
+  },
+  { name: '3. วุฒิบัตรอบรม', fileId: '', fileName: '' },
+];
 
 @UntilDestroy()
 @Component({
@@ -37,21 +54,8 @@ export class LicenseRequestSchoolManagerComponent
 {
   userInfoType = UserInfoFormType.thai;
 
-  experienceFiles = [
-    { name: '1. สำเนาวุฒิทางการศึกษา', fileId: '', fileName: '' },
-    { name: '2. หนังสือรับรองคุณวุฒิ	', fileId: '', fileName: '' },
-    { name: '3. วุฒิบัตรอบรม', fileId: '', fileName: '' },
-  ];
-
-  eduFiles = [
-    { name: '1. สำเนาวุฒิทางการศึกษา', fileId: '', fileName: '' },
-    {
-      name: '2. เอกสารผู้สำเร็จการศึกษา ( ระบบ KSP BUNDIT)		',
-      fileId: '',
-      fileName: '',
-    },
-    { name: '3. วุฒิบัตรอบรม', fileId: '', fileName: '' },
-  ];
+  experienceFiles: any[] = [];
+  eduFiles: any[] = [];
 
   override form = this.fb.group({
     userInfo: [],
@@ -74,7 +78,8 @@ export class LicenseRequestSchoolManagerComponent
     addressService: AddressService,
     educationDetailService: EducationDetailService,
     myInfoService: MyInfoService,
-    requestService: SelfRequestService
+    requestService: SelfRequestService,
+    route: ActivatedRoute
   ) {
     super(
       generalInfoService,
@@ -84,15 +89,54 @@ export class LicenseRequestSchoolManagerComponent
       requestService,
       router,
       myInfoService,
+      route,
       dialog
     );
   }
 
   ngOnInit(): void {
     this.getListData();
-    this.getMyInfo();
     this.checkButtonsDisableStatus();
-    this.initializeFiles();
+    this.checkRequestId();
+  }
+
+  override initializeFiles() {
+    super.initializeFiles();
+    this.eduFiles = structuredClone(EDU_FILES);
+    this.experienceFiles = structuredClone(EXPERIENCE_FILES);
+  }
+
+  override patchData(data: SelfRequest) {
+    super.patchData(data);
+    if (data.schooladdrinfo) {
+      const { website, email } = parseJson(data.schooladdrinfo);
+      this.form.patchValue({
+        website,
+        workEmail: email,
+      });
+    }
+
+    if (data.eduinfo) {
+      const eduInfo = parseJson(data.eduinfo);
+      const { educationType, ...educationLevelForm } = eduInfo;
+      this.form.controls.education.patchValue({
+        educationType,
+        educationLevelForm,
+      } as any);
+    }
+
+    if (data.experienceinfo) {
+      const experienceInfo = parseJson(data.experienceinfo);
+      this.form.controls.experience.patchValue({ ...experienceInfo });
+    }
+
+    if (data.fileinfo) {
+      const fileInfo = parseJson(data.fileinfo);
+      const { edufiles, experiencefiles } = fileInfo;
+      this.eduFiles = edufiles;
+      console.log(experiencefiles);
+      // this.experienceFiles = experiencefiles;
+    }
   }
 
   patchUserInfoForm(data: any): void {
@@ -140,7 +184,8 @@ export class LicenseRequestSchoolManagerComponent
       educationLevelForm: null,
     };
 
-    const experiencefiles = this.mapFileInfo(this.experienceFiles);
+    const experiencefiles = this.experienceFiles;
+    const edufiles = this.eduFiles;
 
     const payload = {
       ...self,
@@ -160,7 +205,7 @@ export class LicenseRequestSchoolManagerComponent
         experienceinfo: JSON.stringify(formData.experience),
       },
       ...{ prohibitproperty: JSON.stringify(forbidden) },
-      ...{ fileinfo: JSON.stringify({ experiencefiles }) },
+      ...{ fileinfo: JSON.stringify({ edufiles, experiencefiles }) },
     };
 
     console.log(payload);

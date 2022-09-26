@@ -11,8 +11,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { parseJson } from '@ksp/shared/utility';
+import { v4 as uuidv4 } from 'uuid';
+import { SelfRequest } from '@ksp/shared/interface';
 
 @Component({
   template: ``,
@@ -33,6 +35,11 @@ export abstract class LicenseFormBaseComponent {
   bureau$!: Observable<any>;
   form!: FormGroup;
   uniqueTimestamp!: string;
+  requestId!: number;
+  requestData!: SelfRequest;
+  requestNo: string | null = '';
+  currentProcess!: number;
+  prohibitProperty: any;
   //myInfo = new SelfMyInfo();
   myImage = '';
 
@@ -44,11 +51,48 @@ export abstract class LicenseFormBaseComponent {
     protected requestService: SelfRequestService,
     protected router: Router,
     protected myInfoService: MyInfoService,
+    protected route: ActivatedRoute,
     public dialog: MatDialog
   ) {}
 
+  checkRequestId() {
+    this.route.paramMap.subscribe((params) => {
+      this.requestId = Number(params.get('id'));
+      if (this.requestId) {
+        console.log(this.requestId);
+        // this.loadRequestFromId(this.requestId);
+        this.requestService.getRequestById(this.requestId).subscribe((res) => {
+          if (res) {
+            console.log(res);
+            this.requestData = res;
+            this.requestNo = res.requestno;
+            this.currentProcess = Number(res.currentprocess);
+            this.uniqueTimestamp = res.uniquetimestamp || '';
+            console.log(this.uniqueTimestamp);
+
+            this.patchData(res);
+          }
+        });
+      } else {
+        this.initializeFiles();
+        this.getMyInfo();
+      }
+    });
+  }
+
+  patchData(data: SelfRequest) {
+    this.patchUserInfo(data);
+    this.patchAddress(parseJson(data.addressinfo));
+    if (data.schooladdrinfo) {
+      this.patchWorkplace(parseJson(data.schooladdrinfo));
+    }
+    if (data.prohibitproperty) {
+      this.prohibitProperty = parseJson(data.prohibitproperty);
+    }
+  }
+
   public initializeFiles() {
-    //
+    this.uniqueTimestamp = uuidv4();
   }
 
   public getMyInfo() {
@@ -106,6 +150,9 @@ export abstract class LicenseFormBaseComponent {
     console.log(this.form.value);
     const confirmDialog = this.dialog.open(ForbiddenPropertyFormComponent, {
       width: '900px',
+      data: {
+        prohibitProperty: this.prohibitProperty,
+      },
     });
 
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
@@ -128,7 +175,10 @@ export abstract class LicenseFormBaseComponent {
     completeDialog.componentInstance.saved.subscribe((res) => {
       if (res) {
         const payload = this.createRequest(forbidden, 1);
-        this.requestService.createRequest(payload).subscribe((res) => {
+        const request = this.requestId
+          ? this.requestService.updateRequest.bind(this.requestService)
+          : this.requestService.createRequest.bind(this.requestService);
+        request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res.returncode === '00') {
             this.router.navigate(['/home']);
@@ -140,7 +190,10 @@ export abstract class LicenseFormBaseComponent {
     completeDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         const payload = this.createRequest(forbidden, 2);
-        this.requestService.createRequest(payload).subscribe((res) => {
+        const request = this.requestId
+          ? this.requestService.updateRequest.bind(this.requestService)
+          : this.requestService.createRequest.bind(this.requestService);
+        request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res.returncode === '00') {
             this.router.navigate(['/license', 'payment-channel']);
@@ -163,10 +216,13 @@ export abstract class LicenseFormBaseComponent {
       prefixen,
       prefixth,
       id,
+      contactphone,
+      workphone,
+      sex,
     } = data;
     const patchData = {
       birthdate: birthdate.split('T')[0],
-      contactphone: phone,
+      contactphone: contactphone || phone,
       email,
       firstnameen,
       firstnameth,
@@ -176,6 +232,8 @@ export abstract class LicenseFormBaseComponent {
       prefixen,
       prefixth,
       id,
+      workphone,
+      sex,
     } as any;
     this.patchUserInfoForm(patchData);
   }

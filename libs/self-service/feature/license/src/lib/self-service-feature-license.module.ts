@@ -54,6 +54,10 @@ export const routes: Routes = [
         component: LicenseRequestSchoolManagerComponent,
       },
       {
+        path: 'school-manager/:id',
+        component: LicenseRequestSchoolManagerComponent,
+      },
+      {
         path: 'education-manager',
         component: LicenseRequestEducationManagerComponent,
       },

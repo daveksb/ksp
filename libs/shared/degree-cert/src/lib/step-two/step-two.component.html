@@ -24,14 +24,14 @@
           <input type="checkbox" />
           <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
         </div>
-        <ksp-step-2-tab-1-a [mode]="mode"></ksp-step-2-tab-1-a>
+        <ksp-step-2-tab-1-a  formControlName="plan1" [mode]="mode"></ksp-step-2-tab-1-a>
       </ng-template>
       <ng-template #typeB>
         <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
           <input type="checkbox" />
           <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
         </div>
-        <ksp-step-2-tab-1-b [mode]="mode"></ksp-step-2-tab-1-b>
+        <ksp-step-2-tab-1-b formControlName="plan2"   [mode]="mode"></ksp-step-2-tab-1-b>
       </ng-template>
     </mat-tab>
 

@@ -27,7 +27,8 @@
         [userInfo]="myInfo"
         [addressInfo]="addressInfo"
         [prefixList]="prefixList$ | async"
-      ></ksp-council-reward>
+        [rewardFiles]="rewardFiles"
+        [uniqueTimestamp]="uniqueTimestamp"></ksp-council-reward>
     </div>
 
     <div *ngIf="rewardType.value === '41'">
@@ -37,8 +38,9 @@
         [workplaceInfo]="workplaceInfo"
         [prefixList]="prefixList$ | async"
         [bureaus]="bureau$ | async"
-        formControlName="rewardDetail"
-      ></ksp-thai-teacher-reward>
+        [rewardFiles]="rewardFiles"
+        [uniqueTimestamp]="uniqueTimestamp"
+        formControlName="rewardDetail"></ksp-thai-teacher-reward>
     </div>
 
     <div *ngIf="rewardType.value === '42'">
@@ -48,8 +50,9 @@
         [addressInfo]="addressInfo"
         [workplaceInfo]="workplaceInfo"
         [bureaus]="bureau$ | async"
-        [prefixList]="prefixList$ | async"
-      ></ksp-best-teacher-reward>
+        [rewardFiles]="rewardFiles"
+        [uniqueTimestamp]="uniqueTimestamp"
+        [prefixList]="prefixList$ | async"></ksp-best-teacher-reward>
     </div>
 
     <div *ngIf="rewardType.value === '43'">
@@ -59,8 +62,9 @@
         [workplaceInfo]="workplaceInfo"
         [prefixList]="prefixList$ | async"
         [bureaus]="bureau$ | async"
-        formControlName="rewardDetail"
-      ></ksp-praise-teacher-reward>
+        [rewardFiles]="rewardFiles"
+        [uniqueTimestamp]="uniqueTimestamp"
+        formControlName="rewardDetail"></ksp-praise-teacher-reward>
     </div>
 
     <div *ngIf="rewardType.value === '44'">
@@ -70,8 +74,9 @@
         [workplaceInfo]="workplaceInfo"
         [prefixList]="prefixList$ | async"
         [bureaus]="bureau$ | async"
-        formControlName="rewardDetail"
-      ></ksp-senior-teacher-reward>
+        [rewardFiles]="rewardFiles"
+        [uniqueTimestamp]="uniqueTimestamp"
+        formControlName="rewardDetail"></ksp-senior-teacher-reward>
     </div>
     <div *ngIf="rewardType.value === '45'">
       <ksp-research-reward
@@ -79,8 +84,9 @@
         [workplaceInfo]="workplaceInfo"
         [prefixList]="prefixList$ | async"
         [bureaus]="bureau$ | async"
-        formControlName="rewardDetail"
-      ></ksp-research-reward>
+        [rewardFiles]="rewardFiles"
+        [uniqueTimestamp]="uniqueTimestamp"
+        formControlName="rewardDetail"></ksp-research-reward>
     </div>
 
     <div *ngIf="rewardType.value">

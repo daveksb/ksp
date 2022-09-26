@@ -12,11 +12,12 @@
           <select
             class="search__content form-select"
             formControlName="institutionsGroup"
+            [attr.disabled]="disabledInputs['institutionsGroup']"
           >
             <option value="null" selected hidden disabled>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option *ngFor="let item of universityTypes" [value]="item?.value">
+              {{ item.label }}
+            </option>
           </select>
         </div>
         <div class="col">
@@ -24,6 +25,7 @@
           <select
             class="search__content form-select"
             formControlName="institutionsCode"
+            [attr.disabled]="disabledInputs['institutionsCode']"
           >
             <option value="null" selected hidden disabled>กรุณาเลือก</option>
             <option value="1">One</option>
@@ -40,6 +42,7 @@
             type="text"
             placeholder="กรุณากรอก"
             formControlName="institutionsName"
+            [attr.disabled]="disabledInputs['institutionsName']"
           />
         </div>
         <div class="col">
@@ -47,11 +50,12 @@
           <select
             class="search__content form-select"
             formControlName="provience"
+            [attr.disabled]="disabledInputs['provience']"
           >
             <option value="null" selected hidden disabled>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option *ngFor="let item of provinces" [value]="item?.value">
+              {{ item.label }}
+            </option>
           </select>
         </div>
       </div>
@@ -86,7 +90,7 @@
         >
         <div class="col-7">
           <select
-            formControlName="courseType"
+            formControlName="courseDetailType"
             class="search__content form-select"
           >
             <option value="null" selected hidden disabled>กรุณาเลือก</option>
