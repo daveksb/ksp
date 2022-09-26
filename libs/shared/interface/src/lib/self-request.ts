@@ -31,5 +31,7 @@ export class SelfRequest extends SchoolRequest {
 
     super.currentprocess = `${process}`;
     super.requeststatus = `${status}`;
+
+    //super.staffid = `${staffid}`;
   }
 }

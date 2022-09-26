@@ -13,7 +13,8 @@ import {
   replaceEmptyWithNull,
   validatorMessages,
 } from '@ksp/shared/utility';
-import { Observable, switchMap } from 'rxjs';
+import { EMPTY, Observable, switchMap } from 'rxjs';
+import uniqueString from 'unique-string';
 
 @Component({
   selector: 'self-service-person-info',
@@ -50,14 +51,11 @@ export class PersonInfoComponent implements OnInit {
     private myInfoService: MyInfoService,
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
-    private uploadService: FileUploadService
+    private fileService: FileUploadService
   ) {}
 
   ngOnInit(): void {
-    this.uniqueTimestamp = `${new Date().getTime()}`;
-    this.form.valueChanges.subscribe((res) => {
-      ('');
-    });
+    this.uniqueTimestamp = uniqueString();
     this.provinces$ = this.addressService.getProvinces();
     this.nationalitys$ = this.generalInfoService.getNationality();
     this.myInfoService
@@ -68,15 +66,19 @@ export class PersonInfoComponent implements OnInit {
           const id = res.idcardimage;
           this.baseForm.patchValue(res);
           this.form.patchValue(res);
-          console.log(id);
-          return this.uploadService.downloadFile({ id });
+          //console.log('image id = ', id);
+          if (id) {
+            return this.fileService.downloadFile({ id });
+          } else {
+            return EMPTY;
+          }
         })
       )
       .subscribe((res: any) => {
         this.imgSrc = atob(res.filedata);
       });
 
-    this.form.disable();
+    //this.form.disable();
   }
 
   clearData() {

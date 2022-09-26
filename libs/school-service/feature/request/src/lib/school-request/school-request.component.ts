@@ -30,13 +30,13 @@ import {
 import {
   formatCheckboxData,
   formatDate,
-  genUniqueTimestamp,
   parseJson,
   replaceEmptyWithNull,
   thaiDate,
 } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
+import uniqueString from 'unique-string';
 
 @UntilDestroy()
 @Component({
@@ -116,7 +116,7 @@ export class SchoolRequestComponent implements OnInit {
     return this.option.valueChanges;
   }
   ngOnInit(): void {
-    this.uniqueTimestamp = genUniqueTimestamp(this.schoolId);
+    this.uniqueTimestamp = uniqueString();
     this.getList();
     this.checkRequestId();
     this.checkRequestSubType();

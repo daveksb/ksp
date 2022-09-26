@@ -12,7 +12,7 @@ import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
 import { SelfRequestService } from '@ksp/shared/service';
 import { SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
-import { getCookie, genUniqueTimestamp } from '@ksp/shared/utility';
+import uniqueString from 'unique-string';
 
 @Component({
   selector: 'ksp-renew-license-foreign',
@@ -36,8 +36,7 @@ export class RenewLicenseForeignComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
   ngOnInit(): void {
-    const userId = getCookie('userId');
-    this.uniqueTimestamp = genUniqueTimestamp(userId);
+    this.uniqueTimestamp = uniqueString();
   }
 
   cancel() {

@@ -17,7 +17,11 @@ import {
   MyInfoService,
   SelfRequestService,
 } from '@ksp/shared/service';
-import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
+import {
+  getCookie,
+  replaceEmptyWithNull,
+  toLowercaseProp,
+} from '@ksp/shared/utility';
 import { SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
 
@@ -129,8 +133,9 @@ export class LicenseRequestStudySupervisionComponent
     const userInfo = toLowercaseProp(rawUserInfo);
     userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
     userInfo.uniquetimestamp = this.uniqueTimestamp;
-    const selectData = _.pick(userInfo, allowKey);
+    userInfo.staffid = getCookie('userId');
 
+    const selectData = _.pick(userInfo, allowKey);
     const { educationType, educationLevelForm } = formData.education || {
       educationType: null,
       educationLevelForm: null,

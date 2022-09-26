@@ -18,7 +18,11 @@ import {
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SelfRequest } from '@ksp/shared/interface';
-import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
+import {
+  getCookie,
+  replaceEmptyWithNull,
+  toLowercaseProp,
+} from '@ksp/shared/utility';
 import * as _ from 'lodash';
 
 @UntilDestroy()
@@ -123,6 +127,8 @@ export class LicenseRequestEducationManagerComponent
     const userInfo = toLowercaseProp(rawUserInfo);
     userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
     userInfo.uniquetimestamp = this.uniqueTimestamp;
+    userInfo.staffid = getCookie('userId');
+
     const selectData = _.pick(userInfo, allowKey);
 
     const { educationType, educationLevelForm } = formData.education || {
