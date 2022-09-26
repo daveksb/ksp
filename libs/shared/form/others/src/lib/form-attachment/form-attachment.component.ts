@@ -39,8 +39,13 @@ export class FormAttachmentComponent {
     });
   }
   deleteFile(group: any) {
-    const id = group.fileId;
-    this.fileUploadService.deleteFile({ id }).subscribe((res: any) => {
+    const payload = {
+      id: group.fileId,
+      requesttype: this.requestType,
+      uniquetmestamp: this.uniqueTimestamp,
+    };
+
+    this.fileUploadService.deleteFile(payload).subscribe((res: any) => {
       if (res?.returnmessage == 'success') {
         group.fileId = '';
         group.fileName = '';

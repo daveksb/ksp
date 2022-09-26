@@ -1,9 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ListData, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
-import { MyInfoService, SelfRequestService } from '@ksp/shared/service';
+import {
+  MyInfoService,
+  SelfRequestService,
+  GeneralInfoService,
+  EducationDetailService,
+} from '@ksp/shared/service';
 import { providerFactory, replaceEmptyWithNull } from '@ksp/shared/utility';
 import * as _ from 'lodash';
+import { Observable } from 'rxjs';
+import { parseJson } from '@ksp/shared/utility';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '@ksp/shared/dialog';
+import { Router } from '@angular/router';
+import {
+  SelfServiceRequestSubType,
+  SelfServiceRequestType,
+} from '@ksp/shared/constant';
 
 @Component({
   selector: 'ksp-request-reward-main',
@@ -11,7 +25,7 @@ import * as _ from 'lodash';
   styleUrls: ['./request-reward-main.component.scss'],
   providers: providerFactory(RequestRewardMainComponent),
 })
-export class RequestRewardMainComponent {
+export class RequestRewardMainComponent implements OnInit {
   headerGroup = [
     'วันที่ทำรายการ',
     'เลขใบคำขอ',
@@ -24,11 +38,16 @@ export class RequestRewardMainComponent {
 
   rewardTypes: ListData[] = rewardTypes;
   myInfo!: SelfMyInfo;
+  addressInfo: any;
+  workplaceInfo: any;
 
   form = this.fb.group({
     rewardType: [0],
     rewardDetail: [],
   });
+
+  prefixList$!: Observable<any>;
+  bureau$!: Observable<any>;
 
   constructor(
     //private route: ActivatedRoute,
@@ -40,31 +59,146 @@ export class RequestRewardMainComponent {
      */
     private requestService: SelfRequestService,
     private fb: FormBuilder,
-    private myInfoService: MyInfoService
+    private myInfoService: MyInfoService,
+    private generalInfoService: GeneralInfoService,
+    private educationDetailService: EducationDetailService,
+    private dialog: MatDialog,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.myInfoService.getMyInfo().subscribe((res) => {
-      //console.log('my info = ', res);
-      this.myInfo = res;
+      this.myInfo = {
+        ...res,
+        birthdate: res.birthdate?.split('T')[0] || null,
+        contactphone: res.phone,
+      };
+
+      const addresses = parseJson(res.addressinfo);
+      if (addresses?.length) {
+        if (this.form.value.rewardType === 40) {
+          this.addressInfo = addresses;
+        } else {
+          this.addressInfo = addresses[0];
+        }
+      }
+
+      if (res.schooladdrinfo) {
+        this.workplaceInfo = parseJson(res.schooladdrinfo);
+      }
     });
+    this.prefixList$ = this.generalInfoService.getPrefix();
+    this.bureau$ = this.educationDetailService.getBureau();
   }
 
   tempSave() {
-    //
+    console.log(this.form.value);
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
+        btnLabel: 'บันทึก',
+      },
+    });
+
+    confirmDialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        const payload = this.createRequest(1);
+        this.requestService.createRequest(payload).subscribe((res) => {
+          console.log('request result = ', res);
+          if (res?.returncode === '00') {
+            this.router.navigate(['/home']);
+          }
+        });
+      }
+    });
   }
 
-  createRequest() {
-    //const payload = this.form.value;
-    const self = new SelfRequest('1', `${this.form.value.rewardType}`, '1');
+  save() {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
+        btnLabel: 'บันทึก',
+      },
+    });
+
+    confirmDialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        const payload = this.createRequest(2);
+        this.requestService.createRequest(payload).subscribe((res) => {
+          console.log('request result = ', res);
+          if (res?.returncode === '00') {
+            this.router.navigate(['/home']);
+          }
+        });
+      }
+    });
+  }
+
+  createRequest(currentProcess: number) {
+    const self = new SelfRequest(
+      '1',
+      `${this.form.value.rewardType}`,
+      `${SelfServiceRequestSubType.อื่นๆ}`,
+      currentProcess
+    );
     const allowKey = Object.keys(self);
     const form: any = this.form.value.rewardDetail;
-    const filledData = _.pick(form.userInfo, allowKey);
+    console.log(form);
+    const selectData = _.pick(form.userInfo, allowKey);
+    const filledData = {
+      ...self,
+      ...selectData,
+      ...(form.addressInfo && {
+        addressinfo: JSON.stringify(form.addressInfo),
+      }),
+      ...{
+        schooladdrinfo: JSON.stringify(form.workplace),
+      },
+      ...(form.rewardTeacherInfo && {
+        rewardteacherinfo: JSON.stringify(form.rewardTeacherInfo),
+      }),
+      ...(form.eduInfo && {
+        eduinfo: JSON.stringify(form.eduInfo),
+      }),
+      ...(form.hiringInfo && {
+        hiringinfo: JSON.stringify(form.hiringInfo),
+      }),
+      ...(form.teachingInfo && {
+        teachinginfo: JSON.stringify(form.teachingInfo),
+      }),
+      ...(form.rewardEthicInfo && {
+        rewardethicinfo: JSON.stringify(form.rewardEthicInfo),
+      }),
+      ...(form.rewardSuccessInfo && {
+        rewardsuccessinfo: JSON.stringify(form.rewardSuccessInfo),
+      }),
+      ...(form.rewardDetailInfo && {
+        rewarddetailinfo: JSON.stringify(form.rewardDetailInfo),
+      }),
+      ...(form.rewardPunishmentInfo && {
+        rewardpunishmentinfo: JSON.stringify(form.rewardPunishmentInfo),
+      }),
+      ...(form.rewardCareerInfo && {
+        rewardcareerinfo: JSON.stringify(form.rewardCareerInfo),
+      }),
+      ...(form.rewardMoneySupportInfo && {
+        rewardmoneysupportinfo: JSON.stringify(form.rewardMoneySupportInfo),
+      }),
+      ...(form.rewardResearcherInfo && {
+        rewardresearcherinfo: JSON.stringify(form.rewardResearcherInfo),
+      }),
+      ...(form.rewardResearchInfo && {
+        rewardresearchinfo: JSON.stringify(form.rewardResearchInfo),
+      }),
+      ...(form.rewardResearchHistory && {
+        rewardresearchhistory: JSON.stringify(form.rewardResearchHistory),
+      }),
+    };
     const { id, requestdate, ...payload } = replaceEmptyWithNull(filledData);
     console.log('payload = ', payload);
-    /*     this.requestService.createRequest(payload).subscribe((res) => {
-      console.log('res = ', res);
-    }); */
+    return payload;
   }
 }
 

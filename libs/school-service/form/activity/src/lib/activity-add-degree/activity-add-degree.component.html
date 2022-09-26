@@ -35,4 +35,16 @@
       <input class="form-control" type="date" formControlName="graduateDate" />
     </div>
   </div>
+
+  <div class="row" *ngIf="countries?.length || 0 > 0">
+    <div class="col-md-6 mb-2">
+      <label class="form-label">ประเทศ</label>
+      <select class="form-select" formControlName="country">
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option *ngFor="let c of countries" [value]="+c?.countryNo">
+          {{ c?.countryN }}
+        </option>
+      </select>
+    </div>
+  </div>
 </form>

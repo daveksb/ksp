@@ -12,6 +12,7 @@ import {
   TokenHandleInterceptor,
 } from '@ksp/shared/interceptor';
 import { File_UPLOAD_URLS, FileUploadUrls } from '@ksp/shared/form/file-upload';
+import { MatMenuModule } from '@angular/material/menu';
 
 const fileUrls: FileUploadUrls = {
   upload: '/kspstaff/schrequestfileinsert',
@@ -27,6 +28,7 @@ const fileUrls: FileUploadUrls = {
     BrowserAnimationsModule,
     MatDialogModule,
     MatTooltipModule,
+    MatMenuModule,
     ReactiveFormsModule,
     HttpClientModule,
   ],

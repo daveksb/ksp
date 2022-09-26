@@ -28,7 +28,7 @@ export class RegisterStepThreeComponent {
     localForage.getItem('th-register').then((res: any) => {
       const payload = { ...res, ...this.form.value };
       payload.username = res.idcardno;
-      payload.isactive = 0;
+      payload.isactive = '1';
       this.myInfoService.insertMyInfo(payload).subscribe((res) => {
         //console.log('insert = ', res);
       });

@@ -77,10 +77,3 @@ export class SchoolRequest {
   osoireject: string | null = null; // คัดค้าน
   osoiwithdraw: string | null = null; // เพิกถอน
 }
-
-// we need ref when creating request
-/* export class SchoolRequestCreate extends SchoolRequest {
-  ref1 : string | null =  null;
-  ref2 : string | null =  null;
-  ref3 : string | null =  null;
-} */

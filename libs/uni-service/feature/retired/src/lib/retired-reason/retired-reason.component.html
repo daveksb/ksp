@@ -8,8 +8,8 @@
 
     <div class="container-xl bg-white px-3 py-2">
       <ksp-request-header-info
-        requestDate="10 ตุลาคม 2565"
-        requestNumber="112234467876543"
+        [requestDate]="today"
+        [requestNumber]="userInfo.requestno"
       ></ksp-request-header-info>
       <hr />
 
@@ -18,12 +18,12 @@
 
         <div class="d-flex">
           <div class="fs-5 text-secondary">สถาบัน/มหาวิทยาลัย :</div>
-          <div class="fs-5 ms-3">{{ userInfo.university }}</div>
+          <div class="fs-5 ms-3">{{ userInfo.name }}</div>
         </div>
 
         <div class="d-flex">
           <div class="fs-5 text-secondary">สังกัด :</div>
-          <div class="fs-5 ms-3">{{ userInfo.organisation }}</div>
+          <div class="fs-5 ms-3">{{ userInfo.unitypename }}</div>
         </div>
 
         <div class="box-header text-primary mt-3">
@@ -32,37 +32,37 @@
 
         <div class="d-flex">
           <div class="fs-5 text-secondary">สิทธิ์สำหรับการเข้าใช้งาน :</div>
-          <div class="fs-5 ms-3">{{ userInfo.userRight }}</div>
+          <div class="fs-5 ms-3">{{ userInfo.permissionright }}</div>
         </div>
 
         <div class="d-flex mb-1">
           <div class="fs-5 text-secondary">หมายเลขบัตรประชาชน :</div>
-          <div class="fs-5 ms-3">{{ userInfo.personId }}</div>
+          <div class="fs-5 ms-3">{{ userInfo.idcardno }}</div>
         </div>
 
         <div class="d-flex mb-1">
           <div class="fs-5 text-secondary">ชื่อ-นามสกุลภาษาไทย :</div>
-          <div class="fs-5 ms-3">{{ userInfo.nameTh }}</div>
+          <div class="fs-5 ms-3">{{ userInfo.nameth }}</div>
         </div>
 
         <div class="d-flex mb-1">
           <div class="fs-5 text-secondary">ชื่อ-นามสกุลภาษาอังกฤษ :</div>
-          <div class="fs-5 ms-3">{{ userInfo.nameEn }}</div>
+          <div class="fs-5 ms-3">{{ userInfo.nameen }}</div>
         </div>
 
         <div class="d-flex mb-1">
           <div class="fs-5 text-secondary">ตำแหน่งทางการบริหาร :</div>
-          <div class="fs-5 ms-3">{{ userInfo.managementPosition }}</div>
+          <div class="fs-5 ms-3">{{ userInfo.position }}</div>
         </div>
 
         <div class="d-flex mb-1">
           <div class="fs-5 text-secondary">สังกัด :</div>
-          <div class="fs-5 ms-3">{{ userInfo.organisation }}</div>
+          <div class="fs-5 ms-3">{{ userInfo.unitypename }}</div>
         </div>
 
         <div class="d-flex mb-1">
           <div class="fs-5 text-secondary">เบอร์โทรศัพท์ (ที่ทำงาน) :</div>
-          <div class="fs-5 ms-3">{{ userInfo.workPhone }}</div>
+          <div class="fs-5 ms-3">{{ userInfo.workphone }}</div>
         </div>
 
         <div class="d-flex mb-1">
@@ -81,12 +81,12 @@
 
         <div class="row">
           <div class="col-5">
-            <label class="form-label">เหตุผลการถอดถอน</label>
-            <select class="form-select" formControlName="reason">
-              <option selected value="null">กรุณาเลือก</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+            <label class="form-label required">เหตุผลการถอดถอน</label>
+            <select class="form-select" formControlName="retiredReason">
+              <option value="null" selected disabled hidden>กรุณาเลือก</option>
+              <ng-container *ngFor="let reason of retireReason">
+                <option [value]="reason.id">{{ reason.name }}</option>
+              </ng-container>
             </select>
           </div>
         </div>
@@ -96,12 +96,13 @@
             class="form-control"
             rows="3"
             placeholder="กรุณาระบุ"
-            formControlName="detail"
+            formControlName="retiredDetail"
           ></textarea>
         </div>
       </div>
       <br />
       <ksp-bottom-nav
+        [disableNext]="form.invalid"
         [isFirstPage]="true"
         [showCenterButtons]="false"
         (nextClicked)="next()"

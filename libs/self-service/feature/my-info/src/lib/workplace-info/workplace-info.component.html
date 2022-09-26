@@ -4,11 +4,25 @@
 </ksp-top-nav>
 
 <div class="main__container px-4 py-2 full-height">
-  <div class="detail__container p-3">
-    <self-service-form-user-workplace></self-service-form-user-workplace>
-  </div>
+  <form [formGroup]="form">
+    <div class="detail__container p-3">
+      <self-service-form-user-workplace
+        [mode]="mode"
+        formControlName="workplace"
+        [provinces]="provinces1$ | async"
+        [amphurs]="amphurs1$ | async"
+        [tumbols]="tumbols1$ | async"
+        [bureaus]="bureau$ | async"
+        (provinceChanged)="provinceChanged(1, $event)"
+        (amphurChanged)="amphurChanged(1, $event)"
+        >></self-service-form-user-workplace
+      >
+    </div>
+  </form>
   <div class="d-flex justify-content-center my-3">
     <button class="btn btn-secondary me-2">ล้างข้อมูล</button>
-    <button class="btn btn-primary">แก้ไขข้อมูล</button>
+    <button class="btn btn-primary" (click)="onClickChangeMode()">
+      แก้ไขข้อมูล
+    </button>
   </div>
 </div>

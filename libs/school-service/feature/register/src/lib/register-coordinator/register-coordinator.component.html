@@ -64,7 +64,7 @@
         [showCenterButtons]="true"
         [showSaveButton]="true"
         [showCancelButton]="true"
-        [disableSaveButton]="!form.valid"
+        [disableSaveButton]="form.invalid"
         (prevClicked)="back()"
         (saveClicked)="save()"
         (cancelClicked)="cancel()"

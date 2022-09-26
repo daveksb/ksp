@@ -37,7 +37,10 @@ export class CouncilSuccessComponent
   }
 
   addFormArray(form: FormArray<any>) {
-    const data = this.fb.group('');
+    const data = this.fb.group({
+      standard: [],
+      details: [],
+    });
     form.push(data);
   }
 

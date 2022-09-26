@@ -21,9 +21,7 @@ export class SchoolRequestListComponent implements AfterViewInit {
   displayedColumns: string[] = displayedColumns;
   dataSource = new MatTableDataSource<SchoolRequest>();
   SchoolRequestSubType = SchoolRequestSubType;
-  currentPage = 0;
-  isLastPage = false;
-  pageRow = 10;
+
   searchParams: any;
   checkProcess = checkProcess;
   checkRequestType = checkRequestType;
@@ -56,7 +54,6 @@ export class SchoolRequestListComponent implements AfterViewInit {
     };
 
     this.searchParams = payload;
-    this.isLastPage = false;
 
     this.requestService.searchRequest(payload).subscribe((res) => {
       //console.log('res = ', res);

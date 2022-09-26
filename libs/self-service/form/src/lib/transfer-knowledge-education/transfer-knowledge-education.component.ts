@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -13,6 +13,7 @@ export class TransferKnowledgeEducationComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+  @Input() countries: any[] = [];
   override form = this.fb.group({
     licenseInfo1: this.fb.array([]),
     licenseInfo2: this.fb.array([]),
@@ -20,7 +21,13 @@ export class TransferKnowledgeEducationComponent
     licenseInfo4: this.fb.array([]),
     licenseInfo5: this.fb.array([]),
   });
-
+  mapping: { [key: number]: any } = {
+    1: this.licenseInfo1,
+    2: this.licenseInfo2,
+    3: this.licenseInfo3,
+    4: this.licenseInfo4,
+    5: this.licenseInfo5,
+  };
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
@@ -33,25 +40,40 @@ export class TransferKnowledgeEducationComponent
   }
 
   ngOnInit(): void {
+    // this.setDefaulFormValue();
     this.form.valueChanges.subscribe((res) => {
-      //console.log('form value = ', res);
+      // console.log('form value = ', res);
     });
   }
 
   setDefaulFormValue() {
-    this.addFormArray(this.licenseInfo1);
-    this.addFormArray(this.licenseInfo2);
-    this.addFormArray(this.licenseInfo3);
-    this.addFormArray(this.licenseInfo4);
-    this.addFormArray(this.licenseInfo5);
+    this.addFormArray(1);
+    this.addFormArray(2);
+    this.addFormArray(3);
+    this.addFormArray(4);
+    this.addFormArray(5);
   }
 
   deleteFormArray(form: FormArray<any>, index: number) {
     form.removeAt(index);
   }
 
-  addFormArray(form: FormArray<any>) {
-    const data = this.fb.group({ title: [''] });
+  addFormArray(formNumber: number) {
+    const form = this.mapping[formNumber];
+    let data;
+    if (formNumber === 5) {
+      data = this.fb.group({
+        certificationType: [],
+        recognizedOrganization: [],
+        certificateNo: [],
+        issueDate: [],
+      });
+    } else {
+      data = this.fb.group({
+        licenseForm: [],
+      });
+    }
+
     form.push(data);
   }
 

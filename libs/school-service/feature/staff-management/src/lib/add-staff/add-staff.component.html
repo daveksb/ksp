@@ -105,7 +105,7 @@
     [isLastPage]="true"
     [isFirstPage]="true"
     [showSaveButton]="true"
-    [disableSaveButton]="!form.valid"
+    [disableSaveButton]="form.invalid"
     [showCenterButtons]="true"
     (saveClicked)="onConfirmed()"
     (cancelClicked)="cancel()"

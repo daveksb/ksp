@@ -2,7 +2,8 @@
   <div class="d-flex align-items-center mb-2">
     <input
       type="checkbox"
-      name="test"
+      name="changePrefix"
+      formControlName="changePrefix"
       (change)="disableControl($event, ['prefixTh', 'prefixEn'])" />
     <label class="form-label ms-1">เปลี่ยน / เพิ่มเติม คำนำหน้าชื่อ</label>
   </div>
@@ -10,7 +11,7 @@
   <div class="row align-items-center ms-2 mb-2">
     <div class="col-md-5 col-md-5">
       <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
-      <select class="form-select" disabled [value]="oldValue?.prefixth">
+      <select class="form-select" formControlName="oldPrefixTh">
         <option value="null">กรุณาเลือก</option>
         <option *ngFor="let prefix of prefixList" [value]="prefix.id">
           {{ prefix?.name_th }}
@@ -37,7 +38,7 @@
   <div class="row align-items-center ms-2">
     <div class="col-md-5 col-md-5 mb-3">
       <label class="form-label">คำนำหน้าชื่อภาษาอังกฤษ</label>
-      <select class="form-select" disabled [value]="oldValue?.prefixen">
+      <select class="form-select" formControlName="oldPrefixEn">
         <option value="null">กรุณาเลือก</option>
         <option *ngFor="let prefix of prefixList" [value]="prefix.id">
           {{ prefix?.name_en }}
@@ -64,6 +65,7 @@
     <input
       type="checkbox"
       name="test"
+      formControlName="changeFirstname"
       (change)="disableControl($event, ['firstnameTh', 'firstnameEn'])" />
     <label class="form-label ms-1">เปลี่ยนชื่อ</label>
   </div>
@@ -71,7 +73,7 @@
   <div class="row align-items-center ms-2 mb-2">
     <div class="col-md-5 col-md-5">
       <label class="form-label">ชื่อภาษาไทย</label>
-      <input type="text" class="form-control" disabled [value]="oldValue?.firstnameth" />
+      <input type="text" class="form-control" formControlName="oldFirstnameTh" />
     </div>
 
     <div class="col-2 text-center">
@@ -88,7 +90,7 @@
   <div class="row align-items-center ms-2">
     <div class="col-md-5 col-md-5 mb-3">
       <label class="form-label">ชื่อภาษาอังกฤษ</label>
-      <input type="text" class="form-control" disabled [value]="oldValue?.firstnameen" />
+      <input type="text" class="form-control" formControlName="oldFirstnameEn" />
     </div>
 
     <div class="col-2 text-center">
@@ -105,6 +107,7 @@
     <input
       type="checkbox"
       name="test"
+      formControlName="changeLastname"
       (change)="disableControl($event, ['lastnameTh', 'lastnameEn'])" />
     <label class="form-label ms-1">เปลี่ยนนามสกุล</label>
   </div>
@@ -112,7 +115,7 @@
   <div class="row align-items-center ms-2 mb-2">
     <div class="col-md-5 col-md-5">
       <label class="form-label">นามสกุลภาษาไทย</label>
-      <input type="text" class="form-control" disabled [value]="oldValue?.lastnameth" />
+      <input type="text" class="form-control" formControlName="oldLastnameTh" />
     </div>
 
     <div class="col-2 text-center">
@@ -129,7 +132,7 @@
   <div class="row align-items-center ms-2">
     <div class="col-md-5 col-md-5 mb-3">
       <label class="form-label">นามสกุลภาษาอังกฤษ</label>
-      <input type="text" class="form-control" disabled [value]="oldValue?.lastnameen" />
+      <input type="text" class="form-control" formControlName="oldLastnameEn" />
     </div>
 
     <div class="col-2 text-center">
@@ -147,13 +150,14 @@
       <input
         type="checkbox"
         name="test"
+        formControlName="changePassport"
         (change)="disableControl($event, ['passportNo'])" />
       <label class="form-label ms-1">เปลี่ยนหมายเลขหนังสือเดินทาง</label>
     </div>
 
     <div class="row align-items-center ms-2 mb-2">
       <div class="col-md-5 col-md-5">
-        <input type="text" class="form-control" disabled [value]="oldValue?.passportno" />
+        <input type="text" class="form-control" formControlName="oldPassportNo" />
       </div>
 
       <div class="col-2 text-center">
@@ -171,6 +175,7 @@
       <input
         type="checkbox"
         class="me-1"
+        formControlName="isDistributed"
         (change)="disableControl($event, ['distributeData'])" />
       <label class="form-label">จำหน่ายข้อมูล</label>
     </div>

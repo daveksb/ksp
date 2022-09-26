@@ -12,7 +12,7 @@ import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { Router } from '@angular/router';
-import { parseJson } from '@ksp/shared/utility';
+import { genUniqueTimestamp, parseJson, getCookie } from '@ksp/shared/utility';
 
 @Component({
   template: ``,
@@ -32,6 +32,7 @@ export abstract class LicenseFormBaseComponent {
   tumbols3$!: Observable<any>;
   bureau$!: Observable<any>;
   form!: FormGroup;
+  uniqueTimestamp!: string;
 
   constructor(
     protected generalInfoService: GeneralInfoService,
@@ -40,9 +41,18 @@ export abstract class LicenseFormBaseComponent {
     protected fb: FormBuilder,
     protected requestService: SelfRequestService,
     protected router: Router,
-    private myInfoService: MyInfoService,
+    protected myInfoService: MyInfoService,
     public dialog: MatDialog
   ) {}
+
+  genUniqueTimestamp() {
+    const userId = getCookie('userId');
+    return genUniqueTimestamp(userId);
+  }
+
+  public initializeFiles() {
+    this.uniqueTimestamp = this.genUniqueTimestamp();
+  }
 
   public getListData() {
     this.prefixList$ = this.generalInfoService.getPrefix();
@@ -104,7 +114,7 @@ export abstract class LicenseFormBaseComponent {
 
     completeDialog.componentInstance.saved.subscribe((res) => {
       if (res) {
-        const payload = this.createRequest(forbidden, '0');
+        const payload = this.createRequest(forbidden, 1);
         this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res.returncode === '00') {
@@ -116,7 +126,7 @@ export abstract class LicenseFormBaseComponent {
 
     completeDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        const payload = this.createRequest(forbidden, '1');
+        const payload = this.createRequest(forbidden, 2);
         this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res.returncode === '00') {
@@ -202,7 +212,18 @@ export abstract class LicenseFormBaseComponent {
     }
   }
 
-  abstract createRequest(forbidden: any, currentProcess: string): void;
+  public mapFileInfo(fileList: any[]) {
+    return fileList.map((file: any) => {
+      const object = {
+        fileid: file.fileId || null,
+        filename: file.fileName || null,
+        name: file.name || null,
+      };
+      return object;
+    });
+  }
+
+  abstract createRequest(forbidden: any, currentProcess: number): void;
   abstract patchUserInfoForm(data: any): void;
   abstract patchAddress1Form(data: any): void;
   abstract patchAddress2Form(data: any): void;

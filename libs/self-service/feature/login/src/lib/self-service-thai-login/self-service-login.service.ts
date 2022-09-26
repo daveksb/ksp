@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
+import { SelfMyInfo } from '@ksp/shared/interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,10 +9,10 @@ import { Observable } from 'rxjs';
 })
 export class SelfServiceLoginService {
   constructor(private http: HttpClient) {}
-  config: any;
+  myInfo!: SelfMyInfo;
 
-  validateLogin(form: any): Observable<any> {
-    return this.http.post(
+  validateLogin(form: any): Observable<SelfMyInfo> {
+    return this.http.post<SelfMyInfo>(
       `${environment.apiUrl}/ksplogin/userloginselfmyinfo`,
       form
     );

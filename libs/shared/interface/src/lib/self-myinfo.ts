@@ -3,8 +3,9 @@ export class SelfMyInfo {
   approveinfo: string | null = null;
   birthdate: string | null = null;
   competencyinfo: string | null = null;
+  contactphone?: string | null = null;
   country: string | null = null;
-  createdate: string | null = null;
+  createdate?: string | null = null;
   eduinfo: string | null = null;
   email: string | null = null;
   experienceinfo: string | null = null;
@@ -17,8 +18,8 @@ export class SelfMyInfo {
   identificationno: string | null = null;
   isactive: string | null = null;
   kuruspano: string | null = null;
-  lastlogintime: string | null = null;
-  lastlogouttime: string | null = null;
+  lastlogintime?: string | null = null;
+  lastlogouttime?: string | null = null;
   lastnameen: string | null = null;
   lastnameth: string | null = null;
   licenseinfo: string | null = null;
@@ -38,11 +39,13 @@ export class SelfMyInfo {
   schooladdrinfo: string | null = null;
   selfdevelopmentinfo: string | null = null;
   teachercouncilidno: string | null = null;
-  updatedate: string | null = null;
+  updatedate?: string | null = null;
   username: string | null = null;
-  usertoken: string | null = null;
+  usertoken?: string | null = null;
   usertype: string | null = null;
   visaclass: string | null = null;
   visaenddate: string | null = null;
   visatype: string | null = null;
 }
+
+export type SelfMyInfoKey = keyof SelfMyInfo;

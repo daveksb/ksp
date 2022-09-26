@@ -6,8 +6,7 @@
       <div class="text-primary fs-5" role="button">
         <ksp-add-row-button
           class="text-primary fs-6"
-          (addRowClick)="addFormArray(licenseInfo1)"
-        >
+          (addRowClick)="addFormArray(licenseInfo1, 1)">
           เพิ่ม
         </ksp-add-row-button>
       </div>
@@ -15,32 +14,22 @@
 
     <ng-container formArrayName="licenseInfo1">
       <ng-container
-        *ngFor="let DegreeForm of licenseInfo1.controls; let i = index"
-      >
-        <ng-container [formGroupName]="i"
-          ><hr />
+        *ngFor="let DegreeForm of licenseInfo1.controls; let i = index">
+        <ng-container [formGroupName]="i">
+          <hr />
           <div class="d-flex justify-content-end">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
-              (click)="deleteFormArray(licenseInfo1, i)"
-            ></i>
+              (click)="deleteFormArray(licenseInfo1, i)"></i>
           </div>
-          <ksp-activity-add-degree></ksp-activity-add-degree>
-          <div class="row">
-            <div class="col-md-6 mb-2">
-              <label class="form-label">ประเทศ</label>
-              <select class="form-select">
-                <option selected>กรุณาเลือก</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
-          </div>
-        </ng-container></ng-container
-      ></ng-container
-    >
+          <ksp-activity-add-degree
+            formControlName="licenseForm"
+            [countries]="countries">
+          </ksp-activity-add-degree>
+        </ng-container>
+      </ng-container>
+    </ng-container>
   </div>
   <br />
   <div class="border rounded px-3 py-2">
@@ -50,8 +39,7 @@
       <div class="text-primary fs-5" role="button">
         <ksp-add-row-button
           class="text-primary"
-          (addRowClick)="addFormArray(licenseInfo2)"
-        >
+          (addRowClick)="addFormArray(licenseInfo2, 2)">
           เพิ่ม
         </ksp-add-row-button>
       </div>
@@ -59,32 +47,22 @@
 
     <ng-container formArrayName="licenseInfo2">
       <ng-container
-        *ngFor="let DegreeForm of licenseInfo2.controls; let i = index"
-      >
-        <ng-container [formGroupName]="i"
-          ><hr />
+        *ngFor="let DegreeForm of licenseInfo2.controls; let i = index">
+        <ng-container [formGroupName]="i">
+          <hr />
           <div class="d-flex justify-content-end">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
-              (click)="deleteFormArray(licenseInfo2, i)"
-            ></i>
+              (click)="deleteFormArray(licenseInfo2, i)"></i>
           </div>
-          <ksp-activity-add-degree></ksp-activity-add-degree>
-          <div class="row">
-            <div class="col-md-6 mb-2">
-              <label class="form-label">ประเทศ</label>
-              <select class="form-select">
-                <option selected>กรุณาเลือก</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
-          </div>
-        </ng-container></ng-container
-      ></ng-container
-    >
+          <ksp-activity-add-degree
+            formControlName="licenseForm"
+            [countries]="countries">
+          </ksp-activity-add-degree>
+        </ng-container>
+      </ng-container>
+    </ng-container>
   </div>
   <br />
   <div class="border rounded px-3 py-2">
@@ -94,8 +72,7 @@
       <div class="text-primary fs-5" role="button">
         <ksp-add-row-button
           class="text-primary"
-          (addRowClick)="addFormArray(licenseInfo3)"
-        >
+          (addRowClick)="addFormArray(licenseInfo3, 3)">
           เพิ่ม
         </ksp-add-row-button>
       </div>
@@ -103,32 +80,22 @@
 
     <ng-container formArrayName="licenseInfo3">
       <ng-container
-        *ngFor="let DegreeForm of licenseInfo3.controls; let i = index"
-      >
-        <ng-container [formGroupName]="i"
-          ><hr />
+        *ngFor="let DegreeForm of licenseInfo3.controls; let i = index">
+        <ng-container [formGroupName]="i">
+          <hr />
           <div class="d-flex justify-content-end">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
-              (click)="deleteFormArray(licenseInfo3, i)"
-            ></i>
+              (click)="deleteFormArray(licenseInfo3, i)"></i>
           </div>
-          <ksp-activity-add-degree></ksp-activity-add-degree>
-          <div class="row">
-            <div class="col-md-6 mb-2">
-              <label class="form-label">ประเทศ</label>
-              <select class="form-select">
-                <option selected>กรุณาเลือก</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
-          </div>
-        </ng-container></ng-container
-      ></ng-container
-    >
+          <ksp-activity-add-degree
+            formControlName="licenseForm"
+            [countries]="countries">
+          </ksp-activity-add-degree>
+        </ng-container>
+      </ng-container>
+    </ng-container>
   </div>
   <br />
   <div class="border rounded px-3 py-2">
@@ -138,8 +105,7 @@
       <div class="text-primary fs-5" role="button">
         <ksp-add-row-button
           class="text-primary"
-          (addRowClick)="addFormArray(licenseInfo4)"
-        >
+          (addRowClick)="addFormArray(licenseInfo4, 4)">
           เพิ่ม
         </ksp-add-row-button>
       </div>
@@ -147,32 +113,22 @@
 
     <ng-container formArrayName="licenseInfo4">
       <ng-container
-        *ngFor="let DegreeForm of licenseInfo4.controls; let i = index"
-      >
-        <ng-container [formGroupName]="i"
-          ><hr />
+        *ngFor="let DegreeForm of licenseInfo4.controls; let i = index">
+        <ng-container [formGroupName]="i">
+          <hr />
           <div class="d-flex justify-content-end">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
-              (click)="deleteFormArray(licenseInfo4, i)"
-            ></i>
+              (click)="deleteFormArray(licenseInfo4, i)"></i>
           </div>
-          <ksp-activity-add-degree></ksp-activity-add-degree>
-          <div class="row">
-            <div class="col-md-6 mb-2">
-              <label class="form-label">ประเทศ</label>
-              <select class="form-select">
-                <option selected>กรุณาเลือก</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
-          </div>
-        </ng-container></ng-container
-      ></ng-container
-    >
+          <ksp-activity-add-degree
+            formControlName="licenseForm"
+            [countries]="countries">
+          </ksp-activity-add-degree>
+        </ng-container>
+      </ng-container>
+    </ng-container>
   </div>
   <br />
   <div class="border rounded px-3 py-2">
@@ -182,8 +138,7 @@
       <div class="text-primary fs-5" role="button">
         <ksp-add-row-button
           class="text-primary"
-          (addRowClick)="addFormArray(licenseInfo5)"
-        >
+          (addRowClick)="addFormArray(licenseInfo5, 5)">
           เพิ่ม
         </ksp-add-row-button>
       </div>
@@ -191,43 +146,44 @@
 
     <ng-container formArrayName="licenseInfo5">
       <ng-container
-        *ngFor="let DegreeForm of licenseInfo5.controls; let i = index"
-      >
-        <ng-container [formGroupName]="i"
-          ><hr />
+        *ngFor="let DegreeForm of licenseInfo5.controls; let i = index">
+        <ng-container [formGroupName]="i">
+          <hr />
           <div class="d-flex justify-content-end">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
-              (click)="deleteFormArray(licenseInfo5, i)"
-            ></i>
+              (click)="deleteFormArray(licenseInfo5, i)"></i>
           </div>
           <div class="row">
             <div class="col-md-6 mb-2">
               <label class="form-label">ประเภทการรับรองการฝึกอกรม</label>
-              <input class="form-control" type="text" />
+              <input class="form-control" type="text" formControlName="certificationType" />
             </div>
             <div class="col-md-6 mb-2">
               <label class="form-label">จากสถาบัน</label>
-              <input class="form-control" type="text" />
+              <input class="form-control" type="text" formControlName="recognizedOrganization" />
             </div>
           </div>
           <div class="row">
             <div class="col-md-6 mb-2">
               <label class="form-label">เลขที่ใบรับรอง </label>
-              <select class="form-select">
+              <input class="form-control" type="text" formControlName="certificateNo" />
+              <!-- <select class="form-select">
                 <option selected>กรุณาเลือก</option>
                 <option value="1">One</option>
                 <option value="2">Two</option>
                 <option value="3">Three</option>
-              </select>
+              </select> -->
             </div>
             <div class="col-md-6 mb-2">
               <label class="form-label">วันที่ออกใบประกาศ</label>
-              <input class="form-control" type="date" />
+              <input class="form-control" type="date" formControlName="issueDate" />
             </div>
-          </div> </ng-container></ng-container
-    ></ng-container>
+          </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
   </div>
   <br />
 </form>
