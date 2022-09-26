@@ -37,7 +37,19 @@ export class CouncilEthicComponent
   }
 
   addFormArray(form: FormArray<any>) {
-    const data = this.fb.group('');
+    const data = this.fb.group({
+      startYear: [],
+      discipline: [],
+      careerResponsibility: [],
+      showingGenerosity: [],
+      promotingLearning: [],
+      roleModel: [],
+      support: [],
+      equality: [],
+      conservationLeadership: [],
+      supportMoralSystem: [],
+      transformationalLeadership: [],
+    });
     form.push(data);
   }
 

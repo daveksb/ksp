@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import {
   UserInfoFormType,
   SelfServiceRequestSubType,
+  SelfServiceRequestType,
+  SelfServiceRequestForType,
 } from '@ksp/shared/constant';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FormBuilder } from '@angular/forms';
@@ -14,9 +16,14 @@ import {
   MyInfoService,
   SelfRequestService,
 } from '@ksp/shared/service';
-import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
-import { SchoolRequest } from '@ksp/shared/interface';
+import {
+  getCookie,
+  replaceEmptyWithNull,
+  toLowercaseProp,
+} from '@ksp/shared/utility';
+import { SelfRequest } from '@ksp/shared/interface';
 import { LicenseFormBaseComponent } from '@ksp/self-service/form';
+import * as _ from 'lodash';
 
 @UntilDestroy()
 @Component({
@@ -31,15 +38,19 @@ export class LicenseRequestSchoolManagerComponent
   userInfoType = UserInfoFormType.thai;
 
   experienceFiles = [
-    '1. สำเนาวุฒิทางการศึกษา',
-    '2. หนังสือรับรองคุณวุฒิ	',
-    '3. วุฒิบัตรอบรม',
+    { name: '1. สำเนาวุฒิทางการศึกษา', fileId: '', fileName: '' },
+    { name: '2. หนังสือรับรองคุณวุฒิ	', fileId: '', fileName: '' },
+    { name: '3. วุฒิบัตรอบรม', fileId: '', fileName: '' },
   ];
 
-  educationeFiles = [
-    '1. สำเนาวุฒิทางการศึกษา',
-    '2. เอกสารผู้สำเร็จการศึกษา ( ระบบ KSP BUNDIT)		',
-    '3. วุฒิบัตรอบรม',
+  eduFiles = [
+    { name: '1. สำเนาวุฒิทางการศึกษา', fileId: '', fileName: '' },
+    {
+      name: '2. เอกสารผู้สำเร็จการศึกษา ( ระบบ KSP BUNDIT)		',
+      fileId: '',
+      fileName: '',
+    },
+    { name: '3. วุฒิบัตรอบรม', fileId: '', fileName: '' },
   ];
 
   override form = this.fb.group({
@@ -81,6 +92,7 @@ export class LicenseRequestSchoolManagerComponent
     this.getListData();
     this.getMyInfo();
     this.checkButtonsDisableStatus();
+    this.initializeFiles();
   }
 
   patchUserInfoForm(data: any): void {
@@ -103,26 +115,36 @@ export class LicenseRequestSchoolManagerComponent
     this.form.controls.address2.patchValue(this.form.controls.address1.value);
   }
 
-  createRequest(forbidden: any, currentProcess: string) {
-    const baseForm = this.fb.group(SchoolRequest);
+  createRequest(forbidden: any, currentProcess: number) {
+    const self = new SelfRequest(
+      '1',
+      SelfServiceRequestType.ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ,
+      `${SelfServiceRequestSubType.ผู้บริหารสถานศึกษา}`,
+      currentProcess
+    );
+    const allowKey = Object.keys(self);
     const formData: any = this.form.getRawValue();
     if (formData?.address1?.addressType) formData.address1.addresstype = 1;
     if (formData?.address2?.addressType) formData.address2.addresstype = 2;
 
     const { id, ...rawUserInfo } = formData.userInfo;
     const userInfo = toLowercaseProp(rawUserInfo);
+    userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
+    userInfo.uniquetimestamp = this.uniqueTimestamp;
+    userInfo.staffid = getCookie('userId');
 
-    userInfo.ref1 = '1';
-    userInfo.ref2 = '01';
-    userInfo.ref3 = `${SelfServiceRequestSubType.ผู้บริหารสถานศึกษา}`;
-    userInfo.systemtype = '1';
-    userInfo.requesttype = '1';
-    userInfo.subtype = '5';
+    const selectData = _.pick(userInfo, allowKey);
 
-    const { educationType, educationLevelForm } = formData.education;
+    const { educationType, educationLevelForm } = formData.education || {
+      educationType: null,
+      educationLevelForm: null,
+    };
+
+    const experiencefiles = this.mapFileInfo(this.experienceFiles);
 
     const payload = {
-      ...replaceEmptyWithNull(userInfo),
+      ...self,
+      ...replaceEmptyWithNull(selectData),
       ...{
         addressinfo: JSON.stringify([formData.address1, formData.address2]),
       },
@@ -138,17 +160,16 @@ export class LicenseRequestSchoolManagerComponent
         experienceinfo: JSON.stringify(formData.experience),
       },
       ...{ prohibitproperty: JSON.stringify(forbidden) },
+      ...{ fileinfo: JSON.stringify({ experiencefiles }) },
     };
-    payload.currentprocess = currentProcess;
-    payload.requeststatus = '1';
+
     console.log(payload);
-    baseForm.patchValue(payload);
-    return baseForm.value;
+    return payload;
   }
 
   checkButtonsDisableStatus() {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      this.disableNextButton = !this.form.valid;
+      this.disableNextButton = false; //!this.form.valid;
     });
   }
 }

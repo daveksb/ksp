@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { RequestPageType } from '@ksp/shared/constant';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 
 @Component({
@@ -11,4 +12,13 @@ import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 })
 export class FormUploadImageComponent {
   @Input() imgDetail = 'row' || 'column';
+  @Input() imgSrc = '';
+  @Input() requestType: any;
+  @Input() uniqueTimestamp!: string;
+  @Output() uploadImageComplete = new EventEmitter<any>();
+  requestPageType = RequestPageType;
+  uploadComplete(event: any) {
+    this.imgSrc = event.file;
+    this.uploadImageComplete.emit(event.fileId);
+  }
 }

@@ -17,8 +17,8 @@ export class SelfRequest extends SchoolRequest {
     ref1: string,
     ref2: string,
     ref3: string,
-    process = 1,
-    status = 1
+    process = 1, // ขั้นตอน
+    status = 1 // สถานะ
   ) {
     super();
     super.ref1 = ref1;
@@ -31,5 +31,7 @@ export class SelfRequest extends SchoolRequest {
 
     super.currentprocess = `${process}`;
     super.requeststatus = `${status}`;
+
+    //super.staffid = `${staffid}`;
   }
 }

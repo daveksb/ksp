@@ -1,34 +1,51 @@
-import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import localForage from 'localforage';
+import { SchoolRetireReason } from '@ksp/shared/constant';
+import { thaiDate } from '@ksp/shared/utility';
 
 @Component({
   selector: 'uni-service-retired-reason',
   templateUrl: './retired-reason.component.html',
   styleUrls: ['./retired-reason.component.scss'],
 })
-export class RetiredReasonComponent {
+export class RetiredReasonComponent implements OnInit {
   form = this.fb.group({
-    reason: [],
-    detail: [],
+    retiredReason: [null, Validators.required],
+    retiredDetail: [],
   });
 
-  userInfo = {
-    university: 'วิทยาลัยอาชีวศึกษาชลบุรี',
-    organisation: 'สำนักงานคณะกรรมการอาชีวศึกษา',
-    userRight: 'เจ้าหน้าที่ประสานงาน (รับรองปริญญาและประกาศนียบัตรทางการศึกษา)',
-    personId: '1 1234 23456 78 9',
-    nameTh: 'นางสาว สุภาพร สุขเกษม',
-    nameEn: 'MISS SUPAPORN SUKKASAME',
-    managementPosition: 'ไม่มี',
-    workPhone: '038-9087654',
-    phone: '081-9872678',
-    email: 'suoaporn.sss@gmail.com',
-  };
-
+  retireReason = SchoolRetireReason;
+  userInfo: any = {};  
+  requestNo = '';
+  today = thaiDate(new Date());
   constructor(private router: Router, private fb: FormBuilder) {}
 
+  ngOnInit(): void {
+    localForage.getItem('retireReasonData').then((res:any) => {
+      if (res) {
+        this.form.patchValue({
+          retiredReason: res.retiredReason,
+          retiredDetail: res.retiredDetail
+        })
+      }
+    });
+    localForage.getItem('userSelectedData').then((res:any) => {
+      if (res) {
+        this.userInfo = res;
+        this.userInfo.nameth = this.userInfo.prefixth ? this.userInfo.prefixth + ' ' : '' 
+                               + this.userInfo.firstnameth ? this.userInfo.firstnameth + ' ' : '' 
+                               + this.userInfo.lastnameth ? this.userInfo.lastnameth : '';
+        this.userInfo.nameen = this.userInfo.prefixen ? this.userInfo.prefixen + ' ' : '' 
+                               + this.userInfo.firstnameen ? this.userInfo.firstnameen + ' ' : '' 
+                               + this.userInfo.lastnameen ? this.userInfo.lastnameen : '';
+      }
+    });
+  }
+
   next() {
+    localForage.setItem('retireReasonData', this.form.getRawValue());
     this.router.navigate(['/retired', 'attachment']);
   }
 }

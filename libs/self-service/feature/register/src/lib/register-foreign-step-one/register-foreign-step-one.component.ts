@@ -1,29 +1,47 @@
-import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AddressService, GeneralInfoService } from '@ksp/shared/service';
 import localForage from 'localforage';
+import { Observable } from 'rxjs';
 @Component({
   templateUrl: './register-foreign-step-one.component.html',
   styleUrls: ['./register-foreign-step-one.component.scss'],
 })
-export class RegisterForeignStepOneComponent {
-  constructor(private router: Router, private fb: FormBuilder) {}
+export class RegisterForeignStepOneComponent implements OnInit {
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private generalInfoService: GeneralInfoService,
+    private addressService: AddressService
+  ) {}
+
+  nationalitys$!: Observable<any>;
+  prefixList$!: Observable<any>;
+  countries$!: Observable<any>;
   form = this.fb.group({
-    prefixen: [],
-    firstnameen: [],
-    middlenameen: [],
-    lastnameen: [],
+    prefixen: [null, [Validators.required]],
+    firstnameen: [null, [Validators.required]],
+    middlenameen: [null, [Validators.required]],
+    lastnameen: [null, [Validators.required]],
     birthdate: [],
     country: [],
     nationality: [],
-    phone: [],
+    phone: [null, [Validators.required]],
     email: [],
   });
+
+  ngOnInit() {
+    this.prefixList$ = this.generalInfoService.getPrefix();
+    this.countries$ = this.addressService.getCountry();
+    this.nationalitys$ = this.generalInfoService.getNationality();
+  }
 
   next() {
     localForage.getItem('registerForeign').then((res: any) => {
       const data = { ...res, ...this.form.value };
-      localForage.setItem('registerForeignr', data);
+      console.log(data);
+      localForage.setItem('registerForeigner', data);
       this.router.navigate(['/register', 'en-step-2']);
     });
   }

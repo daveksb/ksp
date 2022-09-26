@@ -1,59 +1,58 @@
 <form [formGroup]="form">
   <ng-container formArrayName="workingInfo">
     <ng-container
-      *ngFor="let DegreeForm of workingInfo.controls; let i = index"
-    >
+      *ngFor="let DegreeForm of workingInfo.controls; let i = index">
       <ng-container [formGroupName]="i">
         <div class="border rounded px-3 py-2">
           <div class="d-flex justify-content-end">
             <i
               class="bi bi-x-circle-fill text-danger"
               (click)="deleteFormArray(workingInfo, i)"
-              role="button"
-            ></i>
+              role="button"></i>
           </div>
           <div class="row">
             <div class="col-md-6 mb-2">
               <label class="form-label">ประเภทวิชาชีพ</label>
-              <select class="form-select">
+              <select class="form-select" formControlName="professionalType">
                 <option selected>กรุณาเลือก</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option value="1">ครู</option>
+                <option value="2">ผู้บริหารสถานศึกษา</option>
+                <option value="3">ผู้บริหารการศึกษา</option>
+                <option value="4">ศึกษานิเทศก์</option>
               </select>
             </div>
             <div class="col-md-6 mb-2">
               <label class="form-label">ตำแหน่ง</label>
-              <input class="form-control" type="text" />
+              <input class="form-control" type="text" formControlName="position" />
             </div>
           </div>
           <div class="row">
             <div class="col-md-3 mb-2">
               <label class="form-label">วันที่เริ่ม</label>
-              <input class="form-control" type="date" />
+              <input class="form-control" type="date" formControlName="startDate" />
             </div>
             <div class="col-md-3 mb-2">
               <label class="form-label">วันที่สิ้นสุด</label>
-              <input class="form-control" type="date" />
+              <input class="form-control" type="date" formControlName="endDate" />
             </div>
 
             <div class="col-md-3 mb-2">
               <label class="form-label">ระยะเวลา (ปี)</label>
-              <input class="form-control" type="text" />
+              <input class="form-control" type="text" formControlName="durationYear" />
             </div>
             <div class="col-md-3 mb-2">
               <label class="form-label">ระยะเวลา (เดือน)</label>
-              <input class="form-control" type="text" />
+              <input class="form-control" type="text" formControlName="durationMonth" />
             </div>
           </div>
         </div>
-        <br /></ng-container></ng-container
-  ></ng-container>
+        <br />
+      </ng-container>
+    </ng-container>
+  </ng-container>
   <div class="d-flex justify-content-end">
     <ksp-add-row-button
       class="text-primary"
-      (addRowClick)="addFormArray(workingInfo)"
-      >{{ btnLabel }}</ksp-add-row-button
-    >
+      (addRowClick)="addFormArray(workingInfo)">{{ btnLabel }}</ksp-add-row-button>
   </div>
 </form>

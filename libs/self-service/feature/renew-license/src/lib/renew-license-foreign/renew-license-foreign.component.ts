@@ -3,22 +3,30 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { FormBuilder } from '@angular/forms';
-import { SelfServiceRequestSubType } from '@ksp/shared/constant';
+import {
+  SelfServiceRequestSubType,
+  SelfServiceRequestType,
+  SelfServiceRequestForType,
+} from '@ksp/shared/constant';
 import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
 import { SelfRequestService } from '@ksp/shared/service';
 import { SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
+import uniqueString from 'unique-string';
 
 @Component({
   selector: 'ksp-renew-license-foreign',
   templateUrl: './renew-license-foreign.component.html',
   styleUrls: ['./renew-license-foreign.component.scss'],
 })
-export class RenewLicenseForeignComponent {
+export class RenewLicenseForeignComponent implements OnInit {
   form = this.fb.group({
     personalDetail: [],
     personalDeclaration: [],
   });
+
+  attachFiles: any[] = [];
+  uniqueTimestamp!: string;
 
   constructor(
     private router: Router,
@@ -27,6 +35,9 @@ export class RenewLicenseForeignComponent {
     private requestService: SelfRequestService,
     private route: ActivatedRoute
   ) {}
+  ngOnInit(): void {
+    this.uniqueTimestamp = uniqueString();
+  }
 
   cancel() {
     this.router.navigate(['/', 'home']);
@@ -45,7 +56,7 @@ export class RenewLicenseForeignComponent {
 
     completeDialog.componentInstance.saved.subscribe((res) => {
       if (res) {
-        const payload = this.createRequest('0');
+        const payload = this.createRequest(1);
         this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
@@ -57,7 +68,7 @@ export class RenewLicenseForeignComponent {
 
     completeDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        const payload = this.createRequest('1');
+        const payload = this.createRequest(2);
         this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
@@ -68,7 +79,7 @@ export class RenewLicenseForeignComponent {
     });
   }
 
-  createRequest(currentProcess: string) {
+  createRequest(currentProcess: number) {
     const formData: any = this.form.getRawValue();
     const {
       addressForm,
@@ -84,13 +95,22 @@ export class RenewLicenseForeignComponent {
       this.route.snapshot.queryParamMap.get('type') ||
       SelfServiceRequestSubType.ครู;
 
-    const self = new SelfRequest('1', '02', `${type}`);
+    const self = new SelfRequest(
+      '1',
+      SelfServiceRequestType.ขอต่ออายุใบอนุญาตประกอบวิชาชีพ,
+      `${type}`,
+      currentProcess
+    );
     const allowKey = Object.keys(self);
+    userInfo.requestfor = `${SelfServiceRequestForType.ชาวต่างชาติ}`;
+    userInfo.uniquetimestamp = this.uniqueTimestamp;
+    const selectData = _.pick(userInfo, allowKey);
 
     const { addressName, addressForm: resWorkplaceForm } = workplaceForm;
+    const documentfiles = this.mapFileInfo(this.attachFiles);
 
     const initialPayload = {
-      ...replaceEmptyWithNull(userInfo),
+      ...replaceEmptyWithNull(selectData),
       ...{
         addressinfo: JSON.stringify([addressForm]),
       },
@@ -107,13 +127,27 @@ export class RenewLicenseForeignComponent {
       ...{
         checkProhibitProperty: JSON.stringify(formData.personalDeclaration),
       },
+      ...{ fileinfo: JSON.stringify({ documentfiles }) },
     };
-    initialPayload.currentprocess = currentProcess;
-    initialPayload.requeststatus = '1';
     console.log(initialPayload);
     const payload = _.pick({ ...self, ...initialPayload }, allowKey);
     console.log(payload);
 
     return payload;
+  }
+
+  onFileUpdate(files: any[]) {
+    this.attachFiles = files;
+  }
+
+  mapFileInfo(fileList: any[]) {
+    return fileList.map((file: any) => {
+      const object = {
+        fileid: file.fileId || null,
+        filename: file.fileName || null,
+        name: file.name || null,
+      };
+      return object;
+    });
   }
 }

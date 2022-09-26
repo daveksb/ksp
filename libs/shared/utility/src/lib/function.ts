@@ -115,3 +115,12 @@ export function getBase64(
     reader.onerror = (error) => rej(error);
   });
 }
+
+/**
+ *
+ * @param input return correct format date to send to API
+ * @returns
+ */
+export function formatDate(input: string) {
+  return input.split('T')[0];
+}

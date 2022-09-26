@@ -1,15 +1,14 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DynamicComponentDirective } from '@ksp/shared/directive';
 import { ListData } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { thaiDate } from '@ksp/shared/utility';
-import { SelfDevelopActivityTypes } from '@ksp/shared/constant';
+import { SchoolSelfDevelopActivityTies } from '@ksp/shared/constant';
 import { SelfDevelopService, StaffService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
@@ -26,16 +25,15 @@ export class ActivityDetailComponent implements OnInit {
   staff: any;
   pageType!: number;
   activityPageMode = activityPageMode;
-  //selectedValue!: number;
 
   form = this.fb.group({
     type: [null, Validators.required],
     detail: [],
   });
 
-  activityTypes: ListData[] = [];
-  @ViewChild(DynamicComponentDirective, { static: true })
-  myHost!: DynamicComponentDirective;
+  activityTypes: ListData[] = SchoolSelfDevelopActivityTies;
+  //@ViewChild(DynamicComponentDirective, { static: true })
+  //myHost!: DynamicComponentDirective;
   attachFiles = [
     {
       name: '1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน',
@@ -52,12 +50,11 @@ export class ActivityDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activityTypes = SelfDevelopActivityTypes;
     this.checkStaffId();
 
     this.route.paramMap.pipe(untilDestroyed(this)).subscribe((res) => {
       this.pageType = Number(res.get('pageType'));
-      console.log('process type = ', this.pageType);
+      //console.log('process type = ', this.pageType);
     });
   }
 
@@ -81,7 +78,7 @@ export class ActivityDetailComponent implements OnInit {
 
   save() {
     const formValue = this.form.value;
-    console.log('formValue.detail = ', formValue.detail);
+    //console.log('formValue.detail = ', formValue.detail);
 
     const payload = {
       licenseno: null,
@@ -99,16 +96,16 @@ export class ActivityDetailComponent implements OnInit {
     console.log('payload = ', payload);
 
     this.service.addSelfDevelopy(payload).subscribe((res) => {
-      console.log('res = ', res);
+      //console.log('res = ', res);
     });
   }
 
   edit(pageType: any, staffId: number) {
-    this.router.navigate(['/', 'activity', 'detail', pageType, staffId]);
+    this.router.navigate(['/activity', 'detail', pageType, staffId]);
   }
 
   view(pageType: any, staffId: number) {
-    this.router.navigate(['/', 'activity', 'detail', pageType, staffId]);
+    this.router.navigate(['/activity', 'detail', pageType, staffId]);
   }
 
   cancel() {

@@ -20,9 +20,10 @@ export class StandardWorkingComponent
     | 'schManager'
     | 'eduManager'
     | 'supervision' = 'teacher';
+  @Input() uniqueTimestamp = '';
 
   selectedEducationType!: number;
-  workingInfo = ['1.รางวัลอื่นและประกาศเกียรติคุณ'];
+  @Input() workingInfo: any[] = [];
 
   override form = this.fb.group({
     educationType: [],

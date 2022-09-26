@@ -14,6 +14,7 @@ export class PraiseTeacherRewardInfoComponent
   implements OnInit
 {
   override form = this.fb.group({
+    receivedReward: [],
     rewardInfo: this.fb.array([]),
   });
 
@@ -37,7 +38,11 @@ export class PraiseTeacherRewardInfoComponent
   }
 
   addFormArray(form: FormArray<any>) {
-    const data = this.fb.group('');
+    const data = this.fb.group({
+      rewardReceiveYear: [],
+      rewardName: [],
+      rewardDetail: [],
+    });
     form.push(data);
   }
 

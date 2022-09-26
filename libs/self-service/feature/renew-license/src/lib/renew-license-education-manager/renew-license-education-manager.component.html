@@ -1,6 +1,4 @@
-<ksp-top-nav [isSelfService]="true"
-  ><span header>ใบคำขอต่ออายุใบประกอบวิชาชีพ</span></ksp-top-nav
->
+<ksp-top-nav [isSelfService]="true"><span header>ใบคำขอต่ออายุใบประกอบวิชาชีพ</span></ksp-top-nav>
 
 <div class="main__container px-4 py-2">
   <self-service-request-status></self-service-request-status>
@@ -9,8 +7,7 @@
     <div class="row mx-0 border shadow rounded-4 px-2 py-4 bg-white my-4">
       <div class="col-lg-2">
         <self-service-form-upload-image
-          [imgDetail]="'col'"
-        ></self-service-form-upload-image>
+          [imgDetail]="'col'"></self-service-form-upload-image>
       </div>
       <div class="col-md">
         <ksp-form-user-info
@@ -19,8 +16,7 @@
           [prefixList]="prefixList$ | async"
           [displayMode]="[userInfoType]"
           [nationList]="nationalitys$ | async"
-          [isSchoolService]="false"
-        >
+          [isSchoolService]="false">
         </ksp-form-user-info>
       </div>
     </div>
@@ -28,8 +24,7 @@
     <mat-tab-group
       class="tab-group"
       animationDuration="0ms"
-      [selectedIndex]="0"
-    >
+      [selectedIndex]="0">
       <mat-tab label="ที่อยู่" class="tab-content">
         <ksp-form-address
           formControlName="address1"
@@ -38,8 +33,7 @@
           [amphurs]="amphurs1$ | async"
           [tumbols]="tumbols1$ | async"
           (provinceChanged)="provinceChanged(1, $event)"
-          (amphurChanged)="amphurChanged(1, $event)"
-        >
+          (amphurChanged)="amphurChanged(1, $event)">
           <span>ที่อยู่ทะเบียนบ้าน</span>
         </ksp-form-address>
         <hr />
@@ -50,8 +44,7 @@
           [amphurs]="amphurs2$ | async"
           [tumbols]="tumbols2$ | async"
           (provinceChanged)="provinceChanged(2, $event)"
-          (amphurChanged)="amphurChanged(2, $event)"
-        >
+          (amphurChanged)="amphurChanged(2, $event)">
           <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
         </ksp-form-address>
       </mat-tab>
@@ -64,8 +57,7 @@
           [tumbols]="tumbols3$ | async"
           [bureaus]="bureau$ | async"
           (provinceChanged)="provinceChanged(3, $event)"
-          (amphurChanged)="amphurChanged(3, $event)"
-        >
+          (amphurChanged)="amphurChanged(3, $event)">
         </self-service-form-user-workplace>
         <div class="row">
           <div class="col-md-6 mb-3">
@@ -73,8 +65,7 @@
             <input
               class="form-control"
               type="text"
-              formControlName="workPhone"
-            />
+              formControlName="workPhone" />
           </div>
 
           <div class="col-md-6 mb-3">
@@ -88,8 +79,7 @@
             <input
               class="form-control"
               type="text"
-              formControlName="workEmail"
-            />
+              formControlName="workEmail" />
           </div>
 
           <div class="col-md-6 mb-3">
@@ -102,15 +92,15 @@
       <mat-tab label="ข้อมูลคุณสมบัติของผู้ขอต่ออายุใบอนุญาต">
         <self-service-renew-license-property
           formControlName="educationForm"
-          [renewLicenseTypes]="'eduManager'"
-        ></self-service-renew-license-property>
+          [renewLicenseTypes]="'eduManager'"></self-service-renew-license-property>
       </mat-tab>
 
       <mat-tab label="ผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน">
         <self-service-standard-working
           formControlName="standardWorking"
           [educationType]="'eduManager'"
-        ></self-service-standard-working>
+          [uniqueTimestamp]="uniqueTimestamp"
+          [workingInfo]="workingInfoFiles"></self-service-standard-working>
       </mat-tab>
     </mat-tab-group>
   </form>
@@ -128,8 +118,7 @@
       type="button"
       class="ms-3 btn btn-primary"
       [disabled]="disableNextButton"
-      (click)="save()"
-    >
+      (click)="save()">
       บันทึกและยื่น
     </button>
   </div>

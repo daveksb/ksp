@@ -5,7 +5,8 @@
       <input
         class="form-control"
         type="text"
-        formControlName="educationInstitution" />
+        formControlName="educationInstitution"
+      />
     </div>
 
     <div class="col-md-6 mb-2">
@@ -13,7 +14,8 @@
       <input
         class="form-control"
         type="text"
-        formControlName="graduateDegree" />
+        formControlName="graduateDegree"
+      />
     </div>
   </div>
 
@@ -34,7 +36,7 @@
     </div>
   </div>
 
-  <div class="row" *ngIf="countries.length > 0">
+  <div class="row" *ngIf="countries?.length || 0 > 0">
     <div class="col-md-6 mb-2">
       <label class="form-label">ประเทศ</label>
       <select class="form-select" formControlName="country">

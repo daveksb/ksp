@@ -42,7 +42,7 @@
         ></ksp-form-user-info>
       </div>
       <ksp-bottom-nav
-        [disableNext]="!form.valid"
+        [disableNext]="form.invalid"
         [disableNextMessage]="'กรุณากรอกข้อมูลให้ครบถ้วน'"
         (nextClicked)="next()"
         (prevClicked)="prevPage()"

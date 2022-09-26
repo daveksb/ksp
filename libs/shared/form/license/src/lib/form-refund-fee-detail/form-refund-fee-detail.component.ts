@@ -19,6 +19,14 @@ export class FormRefundFeeDetailComponent extends KspFormBaseComponent {
     requestno: [],
     refundreason: [],
     otherreason: [],
+    receiptNo: [{ value: null, disabled: true }],
+    total: [{ value: null, disabled: true }],
+    smsAlert: [],
+    smsDetail: [],
+    emailAlert: [],
+    emailDetail: [],
+    bankName: [],
+    bankAccount: [],
   });
 
   constructor(private fb: FormBuilder) {

@@ -131,7 +131,15 @@
                 <div class="col-md mb-2">
                   <label class="form-label">สัญชาติ</label>
                   <select class="form-select" formControlName="nationality">
-                    <option selected value="TH">ไทย</option>
+                    <option value="null" selected hidden disabled>
+                      กรุณาเลือก
+                    </option>
+                    <option
+                      *ngFor="let n of nationalitys$ | async"
+                      [value]="n.nationId"
+                    >
+                      {{ n.nationName }}
+                    </option>
                   </select>
                 </div>
               </div>

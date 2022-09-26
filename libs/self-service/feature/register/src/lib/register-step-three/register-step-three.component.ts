@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { RegisterCompletedComponent } from '../register-completed/register-completed.component';
 import localForage from 'localforage';
 import { MyInfoService } from '@ksp/shared/service';
+import uniqueString from 'unique-string';
 
 @Component({
   selector: 'self-service-register-step-three',
@@ -28,11 +29,12 @@ export class RegisterStepThreeComponent {
     localForage.getItem('th-register').then((res: any) => {
       const payload = { ...res, ...this.form.value };
       payload.username = res.idcardno;
-      payload.isactive = 0;
+      payload.isactive = '1';
+      payload.uniquetimestamp = uniqueString();
+
       this.myInfoService.insertMyInfo(payload).subscribe((res) => {
         //console.log('insert = ', res);
       });
-      //localForage.setItem('th-register', data);
     });
 
     this.dialog.open(RegisterCompletedComponent, {

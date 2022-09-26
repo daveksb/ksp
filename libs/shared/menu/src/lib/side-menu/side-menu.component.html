@@ -62,6 +62,11 @@
                 <ng-container *ngFor="let menu2 of menu1.subMenu; index as i">
                   <button
                     mat-menu-item
+                    (click)="
+                      menu2.subMenu
+                        ? null
+                        : navigateUrl(menu2.path, menu2.params)
+                    "
                     [matMenuTriggerFor]="
                       menu2.subMenu?.length ? teacherType : null
                     "
@@ -79,7 +84,7 @@
                     >
                       <button
                         mat-menu-item
-                        (click)="goThirdLevelMenu(menu3.path, menu3.params)"
+                        (click)="navigateUrl(menu3.path, menu3.params)"
                       >
                         {{ menu3.label }}
                       </button>

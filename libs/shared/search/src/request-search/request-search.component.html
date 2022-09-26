@@ -106,7 +106,7 @@
     <span [matTooltipDisabled]="form.valid" matTooltip="กรุณาระบุประเภทใบคำขอ">
       <button
         (click)="search.emit(form.value)"
-        [disabled]="!form.valid"
+        [disabled]="form.invalid"
         type="button"
         class="btn btn-primary ms-2"
       >

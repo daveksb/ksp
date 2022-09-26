@@ -46,13 +46,18 @@
       <div class="form__detail">
         <div class="row mb-2">
           <div class="col-2">
-            <label class="form-label">Title</label>
+            <label class="form-label required">Title</label>
             <select formControlName="prefixen" class="form-select">
-              <option>นางสาว</option>
+              <option
+                *ngFor="let prefix of prefixList$ | async"
+                [value]="prefix.id"
+              >
+                {{ prefix?.name_en }}
+              </option>
             </select>
           </div>
           <div class="col">
-            <label class="form-label">First name</label>
+            <label class="form-label required">First name</label>
             <input
               type="text"
               formControlName="firstnameen"
@@ -60,7 +65,7 @@
             />
           </div>
           <div class="col">
-            <label class="form-label">Middle name</label>
+            <label class="form-label required">Middle name</label>
             <input
               type="text"
               formControlName="middlenameen"
@@ -69,7 +74,7 @@
           </div>
           <div class="col">
             <div class="form-group">
-              <label class="form-label">Last Name</label>
+              <label class="form-label required">Last Name</label>
               <input
                 type="text"
                 formControlName="lastnameen"
@@ -91,12 +96,16 @@
           </div>
           <div class="col">
             <label class="form-label">Country</label>
-            <select
-              class="form-select"
-              formControlName="country"
-              id="nationalityFormControlSelect"
-            >
-              <option>ไทย</option>
+            <select class="form-select" formControlName="country">
+              <option value="null" selected hidden disabled>
+                Please Select
+              </option>
+              <option
+                *ngFor="let c of countries$ | async"
+                [value]="+c?.countryNo"
+              >
+                {{ c?.countryEn }}
+              </option>
             </select>
           </div>
         </div>
@@ -104,21 +113,21 @@
         <div class="row mb-2">
           <div class="col">
             <label class="form-label">Nationality</label>
-            <input
-              type="text"
-              formControlName="nationality"
-              class="form-control"
-              placeholder=""
-            />
+            <select class="form-select" formControlName="nationality">
+              <option value="null" selected hidden disabled>
+                Please Select
+              </option>
+              <option
+                *ngFor="let n of nationalitys$ | async"
+                [value]="n.nationId"
+              >
+                {{ n.nationNameEn }}
+              </option>
+            </select>
           </div>
           <div class="col">
-            <label class="form-label">Mobile number</label>
-            <input
-              type="text"
-              formControlName="phone"
-              class="form-control"
-              placeholder=""
-            />
+            <label class="form-label required">Mobile number</label>
+            <input type="text" formControlName="phone" class="form-control" />
           </div>
         </div>
 
@@ -136,6 +145,7 @@
         <div class="form__footer">
           <button
             (click)="next()"
+            [disabled]="form.invalid"
             id="btn-next"
             type="submit"
             class="btn btn-primary"

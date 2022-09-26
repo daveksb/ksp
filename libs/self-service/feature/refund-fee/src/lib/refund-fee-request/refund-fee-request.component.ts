@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { UserInfoFormType } from '@ksp/shared/constant';
+import {
+  UserInfoFormType,
+  SelfServiceRequestType,
+  SelfServiceRequestSubType,
+  SelfServiceRequestForType,
+} from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -13,9 +18,10 @@ import {
   SelfRequestService,
   GeneralInfoService,
 } from '@ksp/shared/service';
-import { replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
+import { getCookie, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
 import * as _ from 'lodash';
 import { Observable } from 'rxjs';
+import uniqueString from 'unique-string';
 
 @Component({
   selector: 'ksp-refund-fee-request',
@@ -23,12 +29,13 @@ import { Observable } from 'rxjs';
   styleUrls: ['./refund-fee-request.component.scss'],
 })
 export class RefundFeeRequestComponent implements OnInit {
-  files = [{ name: '1.สำเนาวุฒิการศึกษา', fileId: '' }];
+  files = [{ name: '1.สำเนาวุฒิการศึกษา', fileId: '', fileName: '' }];
   headerGroup = ['วันที่ทำรายการ', 'เลขใบคำขอ'];
   userInfoType = UserInfoFormType.thai;
   today = thaiDate(new Date());
   userInfo!: SelfMyInfo;
   prefixList$!: Observable<any>;
+  uniqueTimestamp!: string;
 
   form = this.fb.group({
     userInfo: [],
@@ -55,16 +62,34 @@ export class RefundFeeRequestComponent implements OnInit {
       };
       this.form.controls.userInfo.patchValue(<any>this.userInfo);
     });
+    this.initializeFile();
+  }
+
+  initializeFile() {
+    this.uniqueTimestamp = uniqueString();
   }
 
   createRequest() {
     //const payload = this.form.value;
-    const self = new SelfRequest('1', '30', '1');
+    const self = new SelfRequest(
+      '1',
+      SelfServiceRequestType.ขอคืนเงินค่าธรรมเนียม,
+      `${SelfServiceRequestSubType.อื่นๆ}`
+    );
     const allowKey = Object.keys(self);
-    const userInfo = this.form.controls.userInfo.value;
+    const userInfo = this.form.controls.userInfo.value as any;
+    userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
+    userInfo.uniquetimestamp = this.uniqueTimestamp;
+    userInfo.staffid = getCookie('userId');
+
+    const attachfiles = this.mapFileInfo(this.files);
 
     const selectData: any = _.pick(userInfo, allowKey);
-    const filledData = { ...self, ...selectData };
+    const filledData = {
+      ...self,
+      ...selectData,
+      ...{ fileinfo: JSON.stringify({ attachfiles }) },
+    };
     const { id, requestdate, ...payload } = replaceEmptyWithNull(filledData);
 
     const feeRefundInfo = this.form.controls.refundInfo.value;
@@ -109,6 +134,17 @@ export class RefundFeeRequestComponent implements OnInit {
       if (res) {
         this.router.navigate(['/home']);
       }
+    });
+  }
+
+  mapFileInfo(fileList: any[]) {
+    return fileList.map((file: any) => {
+      const object = {
+        fileid: file.fileId || null,
+        filename: file.fileName || null,
+        name: file.name || null,
+      };
+      return object;
     });
   }
 }

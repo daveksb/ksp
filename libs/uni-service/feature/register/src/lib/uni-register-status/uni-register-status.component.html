@@ -1,0 +1,46 @@
+<ksp-top-nav-2>ตรวจสอบยื่นผู้ประสานงาน</ksp-top-nav-2>
+
+<div class="bg-secondary bg-opacity-10 py-4 full-height">
+  <div class="container-xl bg-white pb-3">
+    <div class="box-header pt-2">ค้นหาหน่วยงาน/สถานศึกษา</div>
+    <hr />
+
+    <ksp-retired-search
+      (clear)="handleClear($event)"
+      (search)="handleSearch($event)"
+      [searchType]="'uni'"
+    ></ksp-retired-search>
+
+    <ng-container *ngIf="data.length">
+      <hr />
+      <div class="text-primary box-header">ผลการค้นหา</div>
+      <table class="table">
+        <thead style="background-color: #edf6ff">
+          <tr>
+            <th>สิทธิ์สำหรับการเข้าใช้งาน</th>
+            <th>ชื่อ-นามสกุล</th>
+            <th>เบอร์โทรศัพท์</th>
+            <th>สถานะ</th>
+          </tr>
+        </thead>
+        <tbody class="body__table">
+          <tr class="text-secondary" *ngFor="let item of data">
+            <td>{{ item.permissonright }}</td>
+            <td>{{ item.firstnameth + ' ' + item.lastnameth }}</td>
+            <td>{{ item.phone }}</td>
+            <td>{{ item.isuseractive == '1' ? 'อนุมัติเข้าใช้งาน': 'ไม่อนุมัติเข้าใช้งาน' }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="py-2 d-flex justify-content-center">
+        <a
+          class="btn btn-primary"
+          type="buton"
+          href="/login"
+          >เข้าสู่ระบบ</a
+        >
+      </div>
+    </ng-container>
+  </div>
+</div>

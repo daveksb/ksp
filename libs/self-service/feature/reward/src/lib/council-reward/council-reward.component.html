@@ -3,43 +3,57 @@
   [formGroup]="form"
   class="tab-group"
   animationDuration="0ms"
-  [selectedIndex]="0"
->
+  [selectedIndex]="0">
   <mat-tab label="ข้อมูลส่วนตัว">
     <ksp-form-user-info
       [displayMode]="[userInfoType]"
       [isSchoolService]="false"
-    ></ksp-form-user-info>
+      [prefixList]="prefixList"
+      formControlName="userInfo"></ksp-form-user-info>
   </mat-tab>
 
   <mat-tab label="ที่อยู่" class="tab-content">
-    <ksp-form-address [isDarkMode]="true">
+    <ksp-form-address
+      formControlName="address1"
+      [isDarkMode]="true"
+      [provinces]="provinces1$ | async"
+      [amphurs]="amphurs1$ | async"
+      [tumbols]="tumbols1$ | async"
+      (provinceChanged)="provinceChanged(1, $event)"
+      (amphurChanged)="amphurChanged(1, $event)">
       <span class="text-primary">ที่อยู่ทะเบียนบ้าน</span>
     </ksp-form-address>
     <hr />
-    <ksp-form-address [isDarkMode]="true">
+    <ksp-form-address
+      formControlName="address2"
+      [isDarkMode]="true"
+      [provinces]="provinces2$ | async"
+      [amphurs]="amphurs2$ | async"
+      [tumbols]="tumbols2$ | async"
+      (provinceChanged)="provinceChanged(2, $event)"
+      (amphurChanged)="amphurChanged(2, $event)">
       <span class="text-primary">ที่อยู่ที่ติดต่อได้สะดวก</span>
     </ksp-form-address>
   </mat-tab>
 
   <mat-tab label="ข้อมูลการศึกษา">
-    <ksp-council-education></ksp-council-education>
+    <ksp-council-education formControlName="eduInfo"></ksp-council-education>
   </mat-tab>
 
   <mat-tab label="ข้อมูลการทำงาน">
-    <ksp-council-working></ksp-council-working>
+    <ksp-council-working formControlName="hiringInfo"></ksp-council-working>
   </mat-tab>
 
   <mat-tab label="ข้อมูลการปฏิบัติตนตามจรรยาบรรณ">
-    <ksp-council-ethic></ksp-council-ethic>
+    <ksp-council-ethic formControlName="rewardEthicInfo"></ksp-council-ethic>
   </mat-tab>
 
   <mat-tab label="รายงานผลสำเร็จจากการปฏิบัติงาน">
-    <ksp-council-success></ksp-council-success>
+    <ksp-council-success formControlName="rewardSuccessInfo"></ksp-council-success>
   </mat-tab>
 
   <mat-tab label="ข้อมูลรางวัลและหลักฐานประกอบ">
-    <ksp-council-evidence></ksp-council-evidence>
+    <ksp-council-evidence formControlName="rewardDetailInfo"></ksp-council-evidence>
   </mat-tab>
 </mat-tab-group>
 

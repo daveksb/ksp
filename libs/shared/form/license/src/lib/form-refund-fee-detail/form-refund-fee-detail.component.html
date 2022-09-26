@@ -55,11 +55,11 @@
   <div class="row">
     <div class="col-md-6 mb-2">
       <label class="form-label">เลขที่ใบเสร็จ</label>
-      <input disabled class="form-control" type="text" />
+      <input class="form-control" type="text" formControlName="receiptNo" />
     </div>
     <div class="col-md-6 mb-2">
       <label class="form-label">จำนวนเงิน (บาท)</label>
-      <input disabled class="form-control" type="text" />
+      <input class="form-control" type="text" formControlName="total" />
     </div>
   </div>
   <hr />
@@ -67,22 +67,22 @@
 
   <div class="row mb-2">
     <span class="col-md-3 d-flex align-items-center">
-      <input type="checkbox" class="me-2" />
+      <input type="checkbox" class="me-2" formControlName="smsAlert" />
       <label class="form-label">ข้อความแจ้งเตือนผ่านโทรศัพท์มือถือ (SMS)
       </label>
     </span>
     <span class="col-md-3">
-      <input class="form-control" type="text" />
+      <input class="form-control" type="text" formControlName="smsDetail" />
     </span>
   </div>
 
   <div class="row mb-2">
     <span class="col-md-3 d-flex align-items-center">
-      <input type="checkbox" class="me-2" />
+      <input type="checkbox" class="me-2" formControlName="emailAlert" />
       <label class="form-label">จดหมายอิเล็กทรอนิกส์ (E-Mail) </label>
     </span>
     <span class="col-md-3">
-      <input class="form-control" type="text" />
+      <input class="form-control" type="text" formControlName="emailDetail" />
     </span>
   </div>
 
@@ -96,7 +96,7 @@
   <div class="row">
     <div class="col-md-6 mb-2">
       <label class="form-label">บัญชีธนาคาร</label>
-      <select class="form-select">
+      <select class="form-select" formControlName="bankName">
         <option selected>กรุณาเลือก</option>
         <option value="1">ธนาคารกรุงเทพ</option>
         <option value="2">ธนาคารกสิกรไทย</option>
@@ -118,7 +118,7 @@
     </div>
     <div class="col-md-6 mb-2">
       <label class="form-label">เลขที่บัญชี</label>
-      <input class="form-control" type="text" />
+      <input class="form-control" type="text" formControlName="bankAccount" />
     </div>
   </div>
 </div>

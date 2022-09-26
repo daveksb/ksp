@@ -22,7 +22,7 @@ export const menu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/home.svg ',
     label: 'หน้าแรก',
-    path: 'home',
+    path: '/home',
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
@@ -62,20 +62,18 @@ export const menu: MenuConfig[] = [
               },
               {
                 label: 'ผู้บริหารสถานศึกษาชาวต่างชาติ',
-                path: 'license/agreement',
+                path: '/license/agreement',
                 params: '2',
               },
             ],
           },
           {
             label: 'ผู้บริหารการศึกษา',
-            path: '/license/teacher',
-            params: '3',
+            path: '/license/education-manager',
           },
           {
             label: 'ศึกษานิเทศก์',
-            path: '/license/teacher',
-            params: '4',
+            path: '/license/study-supervision',
           },
         ],
       },
@@ -91,11 +89,11 @@ export const menu: MenuConfig[] = [
             subMenu: [
               {
                 label: 'ครูชาวไทย',
-                path: 'renew-license/request',
+                path: '/renew-license/request',
               },
               {
                 label: 'ครูชาวต่างชาติ',
-                path: 'renew-license/foreign',
+                path: '/renew-license/foreign',
                 params: '1',
               },
             ],
@@ -155,54 +153,54 @@ export const menu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ใบอนุญาตประกอบวิชาชีพ',
-    path: 'home',
+    path: '/home',
   },
   {
     icon: 'assets/images/icon-sidenav/event.svg',
     label: 'กิจกรรมการพัฒนาตัวเอง',
-    path: 'self-improvement/request',
+    path: '/self-improvement/request',
   },
   {
     icon: 'assets/images/icon-sidenav/reward.svg',
     label: 'รางวัลของฉัน',
-    path: 'reward/list',
+    path: '/reward/list',
   },
   {
     icon: 'assets/images/icon-sidenav/people.svg',
     label: 'ข้อมูลของฉัน',
     path: '',
-    subMenuName: 'my-info',
+    subMenuName: 'myInfo',
     subMenu: [
       {
         label: 'ข้อมูลส่วนตัว',
-        path: 'my-info/person-info',
+        path: '/my-info/person-info',
       },
       {
         label: 'ข้อมูลที่อยู่',
-        path: 'my-info/address-info',
+        path: '/my-info/address-info',
       },
       {
         label: 'ข้อมูลสถานที่ทำงาน',
-        path: 'my-info/workplace-info',
+        path: '/my-info/workplace-info',
       },
       {
         label: 'ข้อมูลการศึกษา',
-        path: 'my-info/education-info',
+        path: '/my-info/education-info',
       },
       {
         label: 'ข้อมูลประสบการณ์วิชาชีพ',
-        path: 'my-info/profession-experience',
+        path: '/my-info/profession-experience',
       },
       {
         label: 'ข้อมูลผลการประเมินสมรรถนะ',
-        path: 'my-info/performance-result',
+        path: '/my-info/performance-result',
       },
     ],
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ประวัติการชำระเงิน',
-    path: 'my-info/payment-history',
+    path: '/my-info/payment-history',
   },
   {
     icon: 'assets/images/icon-sidenav/gear-fill.svg',

@@ -37,7 +37,18 @@ export class CouncilWorkingComponent
   }
 
   addFormArray(form: FormArray<any>) {
-    const data = this.fb.group('');
+    const data = this.fb.group({
+      position: [],
+      academicStanding: [],
+      status: [],
+      startYear: [],
+      salary: [],
+      assignment: [],
+      study: [],
+      qualification: [],
+      creativity: [],
+      achievement: [],
+    });
     form.push(data);
   }
 

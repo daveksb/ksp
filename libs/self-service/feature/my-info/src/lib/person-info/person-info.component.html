@@ -7,85 +7,156 @@
   <div class="main__container full-height px-4 py-2">
     <self-service-form-upload-image
       [imgDetail]="'row'"
+      [imgSrc]="imgSrc"
+      [uniqueTimestamp]="uniqueTimestamp"
+      [requestType]="2"
+      (uploadImageComplete)="uploadImageComplete($event)"
     ></self-service-form-upload-image>
 
     <div class="detail__container">
       <div class="row">
         <div class="col-md-6 mb-3">
-          <label class="form-label">ชื่อภาษาไทย</label>
-          <input class="form-control" type="text" formControlName="name" />
+          <label class="form-label required">ชื่อภาษาไทย</label>
+          <input
+            class="form-control"
+            type="text"
+            formControlName="firstnameth"
+          />
+          <ng-container
+            *ngIf="
+              firstNameTh.invalid && (firstNameTh.dirty || firstNameTh.touched)
+            "
+          >
+            <span class="text-danger" *ngIf="firstNameTh.errors?.['pattern']">
+              {{ validatorMessages.th }}
+            </span>
+          </ng-container>
         </div>
 
         <div class="col-md-6 mb-3">
-          <label class="form-label">นามสกุลภาษาไทย</label>
-          <input class="form-control" type="text" formControlName="lastname" />
+          <label class="form-label required">นามสกุลภาษาไทย</label>
+          <input
+            class="form-control"
+            type="text"
+            formControlName="lastnameth"
+          />
+          <ng-container
+            *ngIf="
+              lastNameTh.invalid && (lastNameTh.dirty || lastNameTh.touched)
+            "
+          >
+            <span class="text-danger" *ngIf="lastNameTh.errors?.['pattern']">
+              {{ validatorMessages.th }}
+            </span>
+          </ng-container>
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-6 mb-3">
-          <label class="form-label">ชื่อภาษาอังกฤษ</label>
-          <input class="form-control" type="text" formControlName="name" />
+          <label class="form-label required">ชื่อภาษาอังกฤษ</label>
+          <input
+            class="form-control"
+            type="text"
+            formControlName="firstnameen"
+          />
+          <ng-container
+            *ngIf="
+              firstNameEn.invalid && (firstNameEn.dirty || firstNameEn.touched)
+            "
+          >
+            <span class="text-danger" *ngIf="firstNameEn.errors?.['pattern']">
+              {{ validatorMessages.en }}
+            </span>
+          </ng-container>
         </div>
 
         <div class="col-md-6 mb-3">
-          <label class="form-label">นามสกุลภาษาอังกฤษ</label>
-          <input class="form-control" type="text" formControlName="lastname" />
+          <label class="form-label required">นามสกุลภาษาอังกฤษ</label>
+          <input
+            class="form-control"
+            type="text"
+            formControlName="lastnameen"
+          />
+          <ng-container
+            *ngIf="
+              lastNameEn.invalid && (lastNameEn.dirty || lastNameEn.touched)
+            "
+          >
+            <span class="text-danger" *ngIf="lastNameEn.errors?.['pattern']">
+              {{ validatorMessages.en }}
+            </span>
+          </ng-container>
         </div>
       </div>
 
       <div class="row">
         <div class="col-md mb-3">
           <label class="form-label">หมายเลขบัตรประชาชน</label>
-          <input class="form-control" type="text" formControlName="postLevel" />
+          <input class="form-control" type="text" formControlName="idcardno" />
         </div>
         <div class="col-md mb-3">
           <label class="form-label">รหัสผ่าน</label>
-          <input class="form-control" type="text" formControlName="password" />
+          <input
+            class="form-control"
+            type="password"
+            formControlName="password"
+          />
         </div>
         <div class="col-md mb-3">
           <label class="form-label">เบอร์โทร</label>
           <input class="form-control" type="text" formControlName="phone" />
         </div>
         <div class="col-md mb-3">
-          <label class="form-label">อีเมล</label>
-          <input class="form-control" type="text" formControlName="phone" />
+          <label class="form-label required">อีเมล</label>
+          <input class="form-control" type="text" formControlName="email" />
+          <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
+            <span class="text-danger" *ngIf="email.errors?.['email']">{{
+              validatorMessages.email
+            }}</span>
+          </ng-container>
         </div>
       </div>
 
       <div class="row">
         <div class="col-md mb-3">
           <label class="form-label">วันเดือนปีเกิด</label>
-          <input class="form-control" type="date" formControlName="birthDate" />
+          <input class="form-control" type="date" formControlName="birthdate" />
         </div>
 
         <div class="col-md mb-3">
           <label class="form-label">ภูมิลำเนา</label>
-          <select class="form-select" formControlName="nationality">
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+          <select class="form-select" formControlName="province">
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
+            <option
+              *ngFor="let province of provinces$ | async"
+              [value]="province?.province_id"
+            >
+              {{ province?.province_name }}
+            </option>
           </select>
         </div>
 
         <div class="col-md mb-3">
           <label class="form-label">สัญชาติ</label>
           <select class="form-select" formControlName="nationality">
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
+            <option
+              *ngFor="let nationality of nationalitys$ | async"
+              [value]="nationality.nationId"
+            >
+              {{ nationality.nationName }}
+            </option>
           </select>
         </div>
 
         <div class="col-md mb-3">
           <label class="form-label">ศาสนา</label>
-          <select class="form-select" formControlName="nationality">
+          <select class="form-select" formControlName="religion">
             <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option value="1">พุทธ</option>
+            <option value="2">คริสต์</option>
+            <option value="3">อิสลาม</option>
           </select>
         </div>
       </div>
