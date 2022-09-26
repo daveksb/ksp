@@ -17,18 +17,25 @@ import { lastValueFrom } from 'rxjs';
 export class DegreeCertRequestComponent {
   @ViewChild('stepper') private stepper?: MatStepper;
   id?: string;
+  requestNo = '';
+  date = thaiDate(new Date());
+
   step1DegreeType = '';
 
   step1Form = this.fb.group({
     step1: [{}],
   });
-  step2Form = this.fb.group({
-    step2: [],
+  step2Form: any = this.fb.group({
+    step2: [
+      {
+        plans: [],
+      },
+    ],
   });
   step3Form = this.fb.group({
     step3: [],
   });
-  step4Form = this.fb.group({
+  step4Form: any = this.fb.group({
     step4: [],
   });
   disabledInputsStep1: any = {
@@ -55,7 +62,9 @@ export class DegreeCertRequestComponent {
         this.uniInfoService.uniRequestDegreeCertSelectById(this.id)
       );
     }
-    console.log(uniRequestDegree);
+    if (uniRequestDegree) {
+      this._mappingResponseWithForm(uniRequestDegree);
+    }
     const res = await lastValueFrom(
       this.uniInfoService.univerSitySelectById(getCookie('uniType'))
     );
@@ -90,15 +99,24 @@ export class DegreeCertRequestComponent {
             return await lastValueFrom(
               this.uniRequestService.uniRequestUpdate(this._getRequest())
             );
-          return await lastValueFrom (this.uniRequestService.uniRequestInsert(
-            this._getRequest()
-          ));
+          return await lastValueFrom(
+            this.uniRequestService.uniRequestInsert(this._getRequest())
+          );
         })();
 
         if (res?.returncode == 99) return;
         this.showConfirmDialog(res?.requestno);
       }
     });
+  }
+  private _mappingResponseWithForm(res: any): any {
+    console.log(res);
+    this.requestNo = res?.requestno ?? '';
+    // this.step4Form.setValue({
+    //   step4: {
+    //     files: JSON.parse(atob(res?.attachfiles)),
+    //   },
+    // });
   }
   private _getRequest(): any {
     const step1: any = this.step1Form.value.step1;
@@ -181,8 +199,8 @@ export class DegreeCertRequestComponent {
       width: '375px',
       data: {
         header: 'ยืนยันข้อมูลสำเร็จ',
-        content: `วันที่ : ${thaiDate(new Date())}
-        เลขที่ใบคำขอ : ${requestno || '-'}`,
+        content: `วันที่ : ${this.date}
+        เลขที่ใบคำขอ : ${requestno || this.requestNo || '-'}`,
         subContent: `กรุณาตรวจสอบสถานะใบคำขอหรือรหัสเข้าใช้งาน
         ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },

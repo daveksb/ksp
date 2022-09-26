@@ -21,7 +21,6 @@ export class FormAttachmentComponent {
   @Input() requestType: number | null = null;
   @Output() downloadClick = new EventEmitter<any>();
   @Output() uploadComplete = new EventEmitter<any>();
-
   constructor(
     public dialog: MatDialog,
     private fileUploadService: FileUploadService

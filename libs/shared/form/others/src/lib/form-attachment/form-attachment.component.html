@@ -44,6 +44,7 @@
                 [showUploadedFileName]="false"
                 [systemFileName]="group.name"
                 [requestType]="requestType"
+                [uniqueTimestamp]="group.uniqueTimestamp"
                 (uploadComplete)="updateComplete($event, group)"
               ></ksp-file-upload>
             </td>

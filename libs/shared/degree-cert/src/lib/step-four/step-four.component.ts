@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
+import uniqueString from 'unique-string';
+import _ from 'lodash';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -40,14 +42,20 @@ export class DegreeCertStepFourComponent extends KspFormBaseComponent {
     super();
   }
   private _uploadFilesCollection: any = {
-    a: UPLOAD_FILE_1,
-    b: UPLOAD_FILE_2,
-    c: UPLOAD_FILE_3,
-    d: UPLOAD_FILE_4,
-    e: UPLOAD_FILE_5,
+    a: this.genUnique(UPLOAD_FILE_1),
+    b: this.genUnique(UPLOAD_FILE_2),
+    c: this.genUnique(UPLOAD_FILE_3),
+    d: this.genUnique(UPLOAD_FILE_4),
+    e: this.genUnique(UPLOAD_FILE_5),
   };
   get uploadFilesCollection() {
     return this._uploadFilesCollection;
+  }
+  genUnique(arr: any) {
+    return arr.map((data: any) => ({
+      ...data,
+      uniqueTimestamp: uniqueString(),
+    }));
   }
   openDialog() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -71,11 +79,19 @@ export class DegreeCertStepFourComponent extends KspFormBaseComponent {
   }
 
   override writeValue(value: any) {
-    this.value = value?.files?.length
-      ? value?.files
-      : {
-          files: this.uploadFilesCollection[this.formType || 'a'],
-        };
+    const uploadFilesByType = this.uploadFilesCollection[this.formType || 'a'];
+    if (value?.files?.length) {
+      const files = value?.files?.map((data: any) => {
+        let mergeData = _.find(uploadFilesByType, { id: data?.id });
+        mergeData = { ...data, ...mergeData };
+        return mergeData;
+      });
+      this.value = { files };
+    } else {
+      this.value = {
+        files: this.uploadFilesCollection[this.formType || 'a'],
+      };
+    }
   }
 
   onConfirmed() {
@@ -98,7 +114,12 @@ export class DegreeCertStepFourComponent extends KspFormBaseComponent {
     });
   }
   uploadComplete(groups: any) {
-    this.onChange({ files: groups });
+    console.log(groups);
+    this.onChange({
+      files: _.map(groups, (data) =>
+        _.pickBy(['fileId', 'fileName', 'key', 'uniquetimpstamp'])
+      ),
+    });
     this.onTouched();
   }
 }
