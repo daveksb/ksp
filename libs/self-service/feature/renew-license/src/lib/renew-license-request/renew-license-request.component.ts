@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ksp-renew-license-request',
@@ -6,7 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./renew-license-request.component.scss'],
 })
 export class RenewLicenseRequestComponent implements OnInit {
-  constructor() {}
+  pageType: any;
 
-  ngOnInit(): void {}
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((params) => {
+      this.pageType = Number(params.get('type'));
+      console.log('res = ', this.pageType);
+    });
+  }
 }

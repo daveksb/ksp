@@ -133,22 +133,20 @@
       <button mat-menu-item [matMenuTriggerFor]="renewManager">
         ผู้บริหารสถานศึกษา
       </button>
-      <button mat-menu-item (click)="eduManagerRenew()">
-        ผู้บริหารการศึกษา
-      </button>
-      <button mat-menu-item (click)="supervisionRenew()">ศึกษานิเทศก์</button>
+      <button mat-menu-item (click)="renewLicense(3)">ผู้บริหารการศึกษา</button>
+      <button mat-menu-item (click)="renewLicense(4)">ศึกษานิเทศก์</button>
     </mat-menu>
 
     <mat-menu #renewTeacher="matMenu">
-      <button mat-menu-item (click)="teacherRenew()">ครูชาวไทย</button>
-      <button mat-menu-item (click)="foreignRenew(1)">ครูชาวต่างชาติ</button>
+      <button mat-menu-item (click)="renewLicense(1)">ครูชาวไทย</button>
+      <button mat-menu-item (click)="renewLicense(5)">ครูชาวต่างชาติ</button>
     </mat-menu>
 
     <mat-menu #renewManager="matMenu">
-      <button mat-menu-item (click)="schManagerRenew()">
+      <button mat-menu-item (click)="renewLicense(2)">
         ผู้บริหารสถานศึกษาชาวไทย
       </button>
-      <button mat-menu-item (click)="foreignRenew(2)">
+      <button mat-menu-item (click)="renewLicense(5)">
         ผู้บริหารสถานศึกษาชาวต่างชาติ
       </button>
     </mat-menu>

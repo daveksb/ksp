@@ -6,13 +6,22 @@
   <!-- <self-service-request-status
     [idcardNo]="(myInfo$ | async)?.idcardno || null"
   ></self-service-request-status> -->
-  <self-service-request-status></self-service-request-status>
+  <self-service-request-status
+    [headerLabel1]="'Issue Date'"
+    [headerLabel2]="'Form ID'"
+  ></self-service-request-status>
 
-  <ksp-renew-license-thai></ksp-renew-license-thai>
-  <ksp-renew-license-school-manager></ksp-renew-license-school-manager>
-  <ksp-renew-license-education-manager></ksp-renew-license-education-manager>
-  <ksp-renew-license-foreign></ksp-renew-license-foreign>
-  <ksp-renew-license-study-supervision></ksp-renew-license-study-supervision>
+  <ksp-renew-license-thai *ngIf="pageType === 1"></ksp-renew-license-thai>
+  <ksp-renew-license-school-manager
+    *ngIf="pageType === 2"
+  ></ksp-renew-license-school-manager>
+  <ksp-renew-license-education-manager
+    *ngIf="pageType === 3"
+  ></ksp-renew-license-education-manager>
+  <ksp-renew-license-study-supervision
+    *ngIf="pageType === 4"
+  ></ksp-renew-license-study-supervision>
+  <ksp-renew-license-foreign *ngIf="pageType === 5"></ksp-renew-license-foreign>
 
   <!-- <div class="d-flex justify-content-center my-3">
     <button type="button" class="btn border-primary text-primary bg-white">

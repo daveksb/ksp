@@ -104,7 +104,11 @@ export class SelfServiceHomePageComponent {
     this.router.navigate(['/license', 'study-supervision']);
   } */
 
-  // ครูไทย
+  renewLicense(type: SelfServiceRequestSubType) {
+    this.router.navigate(['/renew-license', 'request', type]);
+  }
+
+  /* // ครูไทย
   teacherRenew() {
     this.router.navigate(['/renew-license', 'request']);
   }
@@ -128,7 +132,7 @@ export class SelfServiceHomePageComponent {
   //ศึกษานิเทศก์
   supervisionRenew() {
     this.router.navigate(['/renew-license', 'study-supervision']);
-  }
+  } */
 
   //ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ
   licenseEdit() {
