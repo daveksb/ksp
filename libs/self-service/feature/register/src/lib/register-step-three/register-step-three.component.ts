@@ -6,6 +6,7 @@ import { RegisterCompletedComponent } from '../register-completed/register-compl
 import localForage from 'localforage';
 import { MyInfoService } from '@ksp/shared/service';
 import { v4 as uuidv4 } from 'uuid';
+import { SelfMyInfo } from '@ksp/shared/interface';
 
 @Component({
   selector: 'self-service-register-step-three',
@@ -27,10 +28,11 @@ export class RegisterStepThreeComponent {
 
   submit() {
     localForage.getItem('th-register').then((res: any) => {
-      const payload = { ...res, ...this.form.value };
+      const payload: SelfMyInfo = { ...res, ...this.form.value };
       payload.username = res.idcardno;
       payload.isactive = '1';
       payload.uniquetimestamp = uuidv4();
+      payload.usertype = '1'; // ชาวไทย
 
       this.myInfoService.insertMyInfo(payload).subscribe((res) => {
         //console.log('insert = ', res);
