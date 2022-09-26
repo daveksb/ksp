@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AddressService, GeneralInfoService } from '@ksp/shared/service';
 import localForage from 'localforage';
@@ -15,23 +15,28 @@ export class RegisterForeignStepOneComponent implements OnInit {
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService
   ) {}
+
+  nationalitys$!: Observable<any>;
   prefixList$!: Observable<any>;
   countries$!: Observable<any>;
   form = this.fb.group({
-    prefixen: [],
-    firstnameen: [],
-    middlenameen: [],
-    lastnameen: [],
+    prefixen: [null, [Validators.required]],
+    firstnameen: [null, [Validators.required]],
+    middlenameen: [null, [Validators.required]],
+    lastnameen: [null, [Validators.required]],
     birthdate: [],
     country: [],
     nationality: [],
-    phone: [],
+    phone: [null, [Validators.required]],
     email: [],
   });
+
   ngOnInit() {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.countries$ = this.addressService.getCountry();
+    this.nationalitys$ = this.generalInfoService.getNationality();
   }
+
   next() {
     localForage.getItem('registerForeign').then((res: any) => {
       const data = { ...res, ...this.form.value };

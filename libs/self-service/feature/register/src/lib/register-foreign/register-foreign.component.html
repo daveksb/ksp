@@ -7,7 +7,7 @@
         <div class="detail__container">
           <div class="detail__container--left">
             <div class="form-group field__container">
-              <label class="form__detail"
+              <label class="form__detail required"
                 >Teachers Council of Thailand ID number</label
               >
               <input
@@ -23,7 +23,9 @@
           </div>
           <div class="detail__container--right">
             <div class="form-group field__container">
-              <label for="lastnameFormControlInput" class="form__detail"
+              <label
+                for="lastnameFormControlInput"
+                class="form__detail required"
                 >Passport No.</label
               >
               <input
@@ -38,6 +40,7 @@
         <div class="form__footer">
           <button
             id="btn-confirm"
+            [disabled]="form.invalid"
             (click)="submit()"
             type="submit"
             class="btn btn-primary"

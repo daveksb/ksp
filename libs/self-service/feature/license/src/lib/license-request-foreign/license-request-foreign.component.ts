@@ -64,7 +64,7 @@ export class LicenseRequestForeignComponent implements OnInit {
       if (res) {
         const payload = this.createRequest(1);
         this.requestService.createRequest(payload).subscribe((res) => {
-          console.log('request result = ', res);
+          //console.log('request result = ', res);
           if (res.returncode === '00') {
             this.router.navigate(['/home']);
           }
@@ -109,6 +109,8 @@ export class LicenseRequestForeignComponent implements OnInit {
     const userInfo = toLowercaseProp(rawUserInfo);
     userInfo.requestfor = `${SelfServiceRequestForType.ชาวต่างชาติ}`;
     userInfo.uniquetimestamp = this.uniqueTimestamp;
+    userInfo.staffid = getCookie('userId');
+
     const selectData = _.pick(userInfo, allowKey);
 
     const { addressName, addressForm: resWorkplaceForm } = workplaceForm;

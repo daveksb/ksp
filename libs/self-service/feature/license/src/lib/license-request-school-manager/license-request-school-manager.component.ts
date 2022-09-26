@@ -16,8 +16,12 @@ import {
   MyInfoService,
   SelfRequestService,
 } from '@ksp/shared/service';
-import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
-import { SchoolRequest, SelfRequest } from '@ksp/shared/interface';
+import {
+  getCookie,
+  replaceEmptyWithNull,
+  toLowercaseProp,
+} from '@ksp/shared/utility';
+import { SelfRequest } from '@ksp/shared/interface';
 import { LicenseFormBaseComponent } from '@ksp/self-service/form';
 import * as _ from 'lodash';
 
@@ -127,6 +131,8 @@ export class LicenseRequestSchoolManagerComponent
     const userInfo = toLowercaseProp(rawUserInfo);
     userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
     userInfo.uniquetimestamp = this.uniqueTimestamp;
+    userInfo.staffid = getCookie('userId');
+
     const selectData = _.pick(userInfo, allowKey);
 
     const { educationType, educationLevelForm } = formData.education || {
