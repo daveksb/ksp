@@ -16,6 +16,42 @@ const routes: EthicsCustomRoute[] = [
   { path: 'login', component: EServiceLoginComponent },
   { path: 'landing', component: LandingPageComponent },
   {
+    path: 'license',
+    data: { menuConfig: licenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
+    loadChildren: () =>
+      import('@ksp/e-service/e-license/license-approve').then(
+        (m) => m.EServiceELicenseLicenseApproveModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'renew-license',
+    data: { menuConfig: licenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
+    loadChildren: () =>
+      import('@ksp/e-service/e-license/renew-license').then(
+        (m) => m.EServiceELicenseRenewLicenseModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'knowledge-cert',
+    data: { menuConfig: licenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
+    loadChildren: () =>
+      import('@ksp/e-service/e-license/knowledge-cert').then(
+        (m) => m.EServiceELicenseKnowledgeCertModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'sub-license',
+    data: { menuConfig: licenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
+    loadChildren: () =>
+      import('@ksp/e-service/e-license/sub-license').then(
+        (m) => m.EServiceELicenseSubLicenseModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'degree-cert',
     data: { menuConfig: standardMenu, headerLabel: 'ระบบงานมาตรฐานวิชาชีพ' },
     loadChildren: () =>

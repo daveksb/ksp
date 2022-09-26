@@ -1,0 +1,94 @@
+<ksp-top-nav
+  ><span header>ยื่นใบคำขอ</span
+  ><span subHeader>ใบคำขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ</span></ksp-top-nav
+>
+
+<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
+  <div class="box-header">รายละเอียดใบคำขอหนังสืออนุญาตประกอบวิชาชีพ</div>
+  <div class="bg-white p-3">
+    <ksp-request-header-info
+      [requestDate]="'requestDate'"
+      [requestNumber]="'requestNo'"
+    ></ksp-request-header-info>
+    <hr />
+    <div class="row mx-0 px-2 py-4 bg-light">
+      <div class="col-lg-3">
+        <!-- <self-service-form-upload-image
+        [imgDetail]="'col'"
+      ></self-service-form-upload-image> -->
+      </div>
+      <div class="col-md">
+        <ksp-form-user-info
+          [isDarkMode]="true"
+          [isSchoolService]="false"
+          [mode]="'view'"
+          [displayMode]="[userInfoType]"
+        ></ksp-form-user-info>
+      </div>
+    </div>
+    <br />
+    <mat-tab-group
+      class="tab-group"
+      animationDuration="0ms"
+      [selectedIndex]="0"
+    >
+      <mat-tab label="ที่อยู่" class="tab-content">
+        <ksp-form-address [isDarkMode]="true" [mode]="'view'">
+          <span>ที่อยู่ทะเบียนบ้าน</span>
+        </ksp-form-address>
+        <hr />
+        <ksp-form-address [isDarkMode]="true" [mode]="'view'">
+          <span class="me-1">ที่อยู่ที่ติดต่อได้สะดวก</span>
+        </ksp-form-address>
+      </mat-tab>
+
+      <mat-tab label="สถานที่ทำงาน">
+        <self-service-form-user-workplace [mode]="'view'">
+        </self-service-form-user-workplace>
+      </mat-tab>
+
+      <mat-tab label="ข้อมูลทางการศึกษา">
+        <self-service-form-user-education
+          [mode]="'view'"
+        ></self-service-form-user-education>
+        <hr />
+        <!-- <ksp-form-attachment
+        [title]="'กรุณาแนบหลักฐานประกอบวุฒิทางการศึกษา'"
+      ></ksp-form-attachment> -->
+      </mat-tab>
+
+      <mat-tab label="ข้อมูลประสบการณ์วิชาชีพ">
+        <self-service-form-user-experience
+          [mode]="'view'"
+        ></self-service-form-user-experience>
+        <hr />
+        <!-- <ksp-form-attachment
+        [title]="'กรุณาแนบหลักฐานประกอบการฝึกประสบการณ์วิชาชีพ'"
+      ></ksp-form-attachment> -->
+      </mat-tab>
+
+      <mat-tab label="ข้อมูลผลการประเมินสมรรถนะ">
+        <self-service-form-user-performance></self-service-form-user-performance>
+        <!-- <hr />
+      <ksp-form-attachment
+        title="กรุณาแนบหลักฐาน"
+        [groups]="service.performanceFiles"
+      ></ksp-form-attachment> -->
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+  <br />
+  <div class="bg-white p-4">
+    <e-service-license-check></e-service-license-check>
+  </div>
+</div>
+
+<div class="sticky-bottom border">
+  <ksp-bottom-nav
+    [isFirstPage]="true"
+    [isLastPage]="true"
+    [showCenterButtons]="true"
+    [showSaveButton]="true"
+  >
+  </ksp-bottom-nav>
+</div>

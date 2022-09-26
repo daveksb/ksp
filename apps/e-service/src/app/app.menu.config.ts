@@ -33,27 +33,6 @@ export const ethicsMenu: MenuConfig[] = [
     label: 'รายงาน',
     path: '',
   },
-  /* {
-    icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'รายงาน',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'report',
-    subMenu: [
-      {
-        path: '/accusation',
-        label: 'รายงานสถิติการกล่าวหา/กล่าวโทษ',
-      },
-      {
-        path: '/investigation',
-        label: 'รายงานสถิติการสืบสวน',
-      },
-      {
-        path: '/inquiry',
-        label: 'รายงานสถิติการสอบสวน',
-      },
-    ],
-  }, */
 ];
 
 export const standardMenu: MenuConfig[] = [
@@ -231,11 +210,11 @@ export const licenseMenu: MenuConfig[] = [
     subMenuName: 'license-thai',
     subMenu: [
       {
-        path: '/license/list',
+        path: '/license/approve-list',
         label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
       },
       {
-        path: '/license/approve-list',
+        path: '/license/approve-detail',
         label: 'รับรองใบอนุญาตประกอบวิชาชีพ',
       },
     ],
@@ -270,11 +249,11 @@ export const licenseMenu: MenuConfig[] = [
     subMenuName: 'renew-thai',
     subMenu: [
       {
-        path: '/license/list',
+        path: '/license/approve-list',
         label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
       },
       {
-        path: '/license/approve-list',
+        path: '/renew-license/approve-detail',
         label: 'รับรองใบอนุญาตประกอบวิชาชีพ',
       },
     ],
