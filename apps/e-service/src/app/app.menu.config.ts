@@ -28,27 +28,11 @@ export const ethicsMenu: MenuConfig[] = [
     path: '/publish/list',
     subMenuName: 'publish',
   },
-  /* {
-    icon: 'assets/images/icon-sidenav/card.svg',
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'รายงาน',
     path: '',
-    isExpanded: false,
-    subMenuName: 'report',
-    subMenu: [
-      {
-        path: '/accusation',
-        label: 'รายงานสถิติการกล่าวหา/กล่าวโทษ',
-      },
-      {
-        path: '/investigation',
-        label: 'รายงานสถิติการสืบสวน',
-      },
-      {
-        path: '/inquiry',
-        label: 'รายงานสถิติการสอบสวน',
-      },
-    ],
-  }, */
+  },
 ];
 
 export const standardMenu: MenuConfig[] = [
@@ -60,15 +44,15 @@ export const standardMenu: MenuConfig[] = [
     subMenuName: 'degree-cert',
     subMenu: [
       {
-        path: `degree-cert/list/1`,
+        path: `/degree-cert/list/1`,
         label: 'รายการใบคำขอรับรองปริญญาและประกาศนียบัตร',
       },
       {
-        path: `degree-cert/list/2`,
+        path: `/degree-cert/list/2`,
         label: 'ประเมินหลักสูตรและโครงสร้างหลักสูตร',
       },
       {
-        path: `degree-cert/list/3`,
+        path: `/degree-cert/list/3`,
         label: 'พิจารณาและออกใบรับรองปริญญาและประกาศนียบัตร',
       },
     ],
@@ -146,7 +130,7 @@ export const standardMenu: MenuConfig[] = [
     label: 'นำเข้าและบันทึกผลการประเมินสมรรถนะทางวิชาชีพครู',
     path: '/import-performance',
   },
-  /* {
+  {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ทะเบียนข้อมูล',
     path: '',
@@ -187,8 +171,20 @@ export const standardMenu: MenuConfig[] = [
         label: ' รายงานรายชื่อปริญญาและประกาศนียบัตรที่ได้รับการรับรอง',
       },
     ],
-  }, */
-
+  },
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'ใบคำขอรหัสเข้าใช้งานระบบ',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'user-approvement',
+    subMenu: [
+      {
+        path: 'xxx',
+        label: 'ระบบบริการสถาบันผลิตครู (Uni Service)',
+      },
+    ],
+  },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ระบบบริหารจัดการผู้ใช้งาน',
@@ -214,11 +210,11 @@ export const licenseMenu: MenuConfig[] = [
     subMenuName: 'license-thai',
     subMenu: [
       {
-        path: '/license/list',
+        path: '/license/approve-list',
         label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
       },
       {
-        path: '/license/approve-list',
+        path: '/license/approve-detail',
         label: 'รับรองใบอนุญาตประกอบวิชาชีพ',
       },
     ],
@@ -240,6 +236,11 @@ export const licenseMenu: MenuConfig[] = [
       },
     ],
   }, */
+  /* {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'สร้างเลขใบอนุญาตประกอบวิชาชีพ',
+    path: 'xxx',
+  }, */
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
@@ -248,11 +249,11 @@ export const licenseMenu: MenuConfig[] = [
     subMenuName: 'renew-thai',
     subMenu: [
       {
-        path: '/license/list',
+        path: '/license/approve-list',
         label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
       },
       {
-        path: '/license/approve-list',
+        path: '/renew-license/approve-detail',
         label: 'รับรองใบอนุญาตประกอบวิชาชีพ',
       },
     ],
@@ -356,7 +357,7 @@ export const licenseMenu: MenuConfig[] = [
     label: 'ใบคำขอใบแทนใบอนุญาตประกอบวิชาชีพ',
     path: '',
     isExpanded: false,
-    subMenuName: 'xxx',
+    subMenuName: 'sub-license',
     subMenu: [
       {
         path: '/xxx',
@@ -373,7 +374,7 @@ export const licenseMenu: MenuConfig[] = [
     label: 'ใบคำขอหนังสือรับรองความรู้',
     path: '',
     isExpanded: false,
-    subMenuName: 'xxx',
+    subMenuName: 'confirm',
     subMenu: [
       {
         path: '/xxx',
@@ -385,7 +386,7 @@ export const licenseMenu: MenuConfig[] = [
       },
     ],
   },
-  {
+  /* {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอเทียบเคียงความรู้',
     path: '',
@@ -401,7 +402,7 @@ export const licenseMenu: MenuConfig[] = [
         label: 'พิจารณา',
       },
     ],
-  },
+  }, */
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
@@ -436,12 +437,12 @@ export const licenseMenu: MenuConfig[] = [
       },
     ],
   },
-  {
+  /* {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ข้อมูลลักษณะต้องห้ามของผู้ขอใบอนุญาตประกอบวิชาชีพ',
     path: '',
     isExpanded: false,
-    subMenuName: 'activities',
+    subMenuName: 'forbidden',
     subMenu: [
       {
         path: '/xxx',
@@ -452,24 +453,22 @@ export const licenseMenu: MenuConfig[] = [
         label: 'พิจารณา',
       },
     ],
+  }, */
+  {
+    icon: 'assets/images/icon-sidenav/card.svg',
+    label: 'ทะเบียนข้อมูล',
+    path: '',
   },
   /* {
-    icon: 'assets/images/icon-sidenav/paper.svg',
+    icon: 'assets/images/icon-sidenav/card.svg',
     label: 'งานรับ-ส่งเอกสารใบอนุญาต',
     path: '',
-    isExpanded: false,
-    subMenuName: 'activities',
-    subMenu: [
-      {
-        path: '/xxx',
-        label: 'รายการ',
-      },
-      {
-        path: '/xxx',
-        label: 'ตรวจสอบ',
-      },
-    ],
   }, */
+  {
+    icon: 'assets/images/icon-sidenav/card.svg',
+    label: 'รายงาน',
+    path: '',
+  },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอรหัสเข้าใช้งานระบบ',
@@ -511,7 +510,7 @@ export const professionalMenu: MenuConfig[] = [
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ใบคำขอรับรางวัลคุรุสภา',
     path: '',
-    subMenuName: 'xxx',
+    subMenuName: 'reward1',
     subMenu: [
       {
         path: '/xxx',
@@ -527,7 +526,7 @@ export const professionalMenu: MenuConfig[] = [
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ใบคำขอรับรางวัลครูภาษาไทยดีเด่น',
     path: '',
-    subMenuName: 'xxx',
+    subMenuName: 'reward2',
     subMenu: [
       {
         path: '/xxx',
@@ -543,7 +542,7 @@ export const professionalMenu: MenuConfig[] = [
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ใบคำขอรับรางวัลครูผู้สอนดีเด่น',
     path: '',
-    subMenuName: 'xxx',
+    subMenuName: 'reward3',
     subMenu: [
       {
         path: '/xxx',
@@ -559,7 +558,7 @@ export const professionalMenu: MenuConfig[] = [
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ใบคำขอรับรางวัลคุรุสดุดี',
     path: '',
-    subMenuName: 'xxx',
+    subMenuName: 'reward4',
     subMenu: [
       {
         path: '/xxx',
@@ -575,7 +574,7 @@ export const professionalMenu: MenuConfig[] = [
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ใบคำขอรับรางวัลผลงานวิจัยของคุรุสภา',
     path: '',
-    subMenuName: 'xxx',
+    subMenuName: 'reward5',
     subMenu: [
       {
         path: '/xxx',
@@ -591,7 +590,7 @@ export const professionalMenu: MenuConfig[] = [
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ใบคำขอรับรางวัลครูอาวุโส',
     path: '',
-    subMenuName: 'xxx',
+    subMenuName: 'reward6',
     subMenu: [
       {
         path: '/xxx',
@@ -608,7 +607,7 @@ export const professionalMenu: MenuConfig[] = [
     label: 'ใบคำขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม',
     path: '',
     isExpanded: false,
-    subMenuName: 'professional',
+    subMenuName: 'osoi',
     subMenu: [
       {
         path: '/one-school-one-innovation/list',
@@ -619,6 +618,16 @@ export const professionalMenu: MenuConfig[] = [
         label: 'พิจารณารางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม',
       },
     ],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'รายงาน',
+    path: '',
+  },
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'ตั้งค่า',
+    path: '',
   },
 ];
 
@@ -685,5 +694,10 @@ export const refundFeeMenu: MenuConfig[] = [
         label: 'นำเข้าและบันทึก (ไปรษณีย์ไทย) ',
       },
     ],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'รายงาน',
+    path: '',
   },
 ];
