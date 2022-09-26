@@ -15,6 +15,7 @@ import {
 } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import _ from 'lodash';
 import { debounceTime, lastValueFrom, skip } from 'rxjs';
 import { DegreeCertStepOneService } from './step-one.service';
 
@@ -55,7 +56,7 @@ export class DegreeCertStepOneComponent
     institutions: this.fb.array([]),
     locations2: this.fb.array([]),
     coordinator: [],
-    courseDetailType:[],
+    courseDetailType: [],
   });
 
   step1Incorrect = [
@@ -76,6 +77,34 @@ export class DegreeCertStepOneComponent
         this.onTouched();
       })
     );
+  }
+  override writeValue(value: any) {
+    if (value) {
+      this.value = value;
+      if (value?.locations?.length) {
+        this.loadData(this.locations, value?.locations);
+      }
+      if (value?.institutions?.length) {
+        this.loadData(this.institutions, value?.institutions);
+      }
+      if (value?.locations2?.length) {
+        this.loadData(this.locations2, value?.locations2);
+      }
+    }
+
+    if (value === null) {
+      this.form.reset();
+    }
+  }
+  loadData(form: any, value: any) {
+    _.forEach(value, (value: any, index: any) => {
+      if (form?.controls[index]) {
+        form?.controls[index]?.patchValue(value);
+      } else {
+        this.addFormArray(form);
+        form?.controls[index].patchValue(value);
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -119,8 +148,8 @@ export class DegreeCertStepOneComponent
     this.degreeType.emit(degreeType);
   }
 
-  addFormArray(form: FormArray<any>) {
-    const data = this.fb.group({ title: [''] });
+  addFormArray(form: FormArray<any>, value = { title: [''] }) {
+    const data = this.fb.group(value);
     form.push(data);
   }
 
