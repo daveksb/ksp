@@ -34,7 +34,7 @@ export abstract class LicenseFormBaseComponent {
   bureau$!: Observable<any>;
   form!: FormGroup;
   uniqueTimestamp!: string;
-  myInfo = new SelfMyInfo();
+  //myInfo = new SelfMyInfo();
   myImage = '';
 
   constructor(
@@ -55,7 +55,7 @@ export abstract class LicenseFormBaseComponent {
   public getMyInfo() {
     this.myInfoService.getMyInfo().subscribe((res) => {
       if (res) {
-        this.myInfo = res;
+        //this.myInfo = res;
         if (res && res.filedata) {
           this.myImage = atob(res.filedata);
         }

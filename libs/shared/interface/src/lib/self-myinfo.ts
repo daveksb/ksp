@@ -11,7 +11,7 @@ export class SelfMyInfo {
   experienceinfo: string | null = null;
   firstnameen: string | null = null;
   firstnameth: string | null = null;
-  filedata: string | null = null;
+  filedata?: string | null = null;
   id: string | null = null;
   idcardbackno: string | null = null;
   idcardimage: string | null = null;
