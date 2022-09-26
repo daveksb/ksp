@@ -46,7 +46,7 @@ export abstract class LicenseFormBaseComponent {
   ) {}
 
   public initializeFiles() {
-    //this.uniqueTimestamp = this.genUniqueTimestamp();
+    //
   }
 
   public getListData() {
