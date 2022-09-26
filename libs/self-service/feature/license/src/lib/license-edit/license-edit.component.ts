@@ -73,9 +73,9 @@ export class LicenseEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.form.disable();
-    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      //
-    });
+    /* this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
+
+    }); */
     this.getListData();
     this.getMyInfo();
     this.initializeFile();
