@@ -15,12 +15,21 @@ import { AuthGuard } from './auth.guard';
 const routes: EthicsCustomRoute[] = [
   { path: 'login', component: EServiceLoginComponent },
   { path: 'landing', component: LandingPageComponent },
-  {
-    path: 'license',
+  /* {
+    path: 'request-license',
     data: { menuConfig: licenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
     loadChildren: () =>
       import('@ksp/e-service/e-license/license-approve').then(
         (m) => m.EServiceELicenseLicenseApproveModule
+      ),
+    canActivate: [AuthGuard],
+  }, */
+  {
+    path: 'request-license',
+    data: { menuConfig: licenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
+    loadChildren: () =>
+      import('@ksp/e-service/e-license/request-license').then(
+        (m) => m.EServiceELicenseRequestLicenseModule
       ),
     canActivate: [AuthGuard],
   },

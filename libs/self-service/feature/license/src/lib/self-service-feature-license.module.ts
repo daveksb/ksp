@@ -34,25 +34,17 @@ import { LicenseRequestForeignComponent } from './license-request-foreign/licens
 import { MatStepperModule } from '@angular/material/stepper';
 import { LicenseForeignAgreementComponent } from './license-foreign-agreement/license-foreign-agreement.component';
 import { EditLicenseComponent } from '@ksp/shared/form/license';
+import { LicenseRequestThaiComponent } from './license-request-thai/license-request-thai.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: SelfServiceMasterPageComponent,
     children: [
-      {
+      /* {
         path: 'teacher',
-        component: LicenseRequestComponent,
+        component: LicenseRequestThaiComponent,
       },
-      {
-        path: 'teacher/:id',
-        component: LicenseRequestComponent,
-      },
-      {
-        path: 'agreement',
-        component: LicenseForeignAgreementComponent,
-      },
-
       {
         path: 'foreign-teacher',
         component: LicenseRequestForeignComponent,
@@ -72,6 +64,14 @@ export const routes: Routes = [
       {
         path: 'study-supervision',
         component: LicenseRequestStudySupervisionComponent,
+      }, */
+      {
+        path: 'request/:type',
+        component: LicenseRequestComponent,
+      },
+      {
+        path: 'agreement',
+        component: LicenseForeignAgreementComponent,
       },
       {
         path: 'edit',
@@ -121,6 +121,7 @@ export const routes: Routes = [
     LicenseRequestStudySupervisionComponent,
     LicenseRequestForeignComponent,
     LicenseForeignAgreementComponent,
+    LicenseRequestThaiComponent,
   ],
   exports: [
     LicenseRequestSchoolManagerComponent,
@@ -128,6 +129,7 @@ export const routes: Routes = [
     LicenseRequestStudySupervisionComponent,
     LicenseRequestForeignComponent,
     LicenseForeignAgreementComponent,
+    LicenseRequestThaiComponent,
   ],
 })
 export class SelfServiceFeatureLicenseModule {}

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { FileService } from '@ksp/shared/form/file-upload';
 import { SelfMyInfo } from '@ksp/shared/interface';
 import {
   AddressService,
@@ -13,7 +12,7 @@ import {
   replaceEmptyWithNull,
   validatorMessages,
 } from '@ksp/shared/utility';
-import { EMPTY, Observable, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
@@ -39,7 +38,7 @@ export class PersonInfoComponent implements OnInit {
     idcardno: [''],
     province: [''],
     email: ['', [Validators.required, Validators.email]],
-    idcardimage: [''],
+    personimage: [''],
   });
   baseForm = this.fb.group(new SelfMyInfo());
   provinces$!: Observable<any>;
@@ -50,34 +49,21 @@ export class PersonInfoComponent implements OnInit {
     private fb: FormBuilder,
     private myInfoService: MyInfoService,
     private generalInfoService: GeneralInfoService,
-    private addressService: AddressService,
-    private fileService: FileService
+    private addressService: AddressService
   ) {}
 
   ngOnInit(): void {
     this.uniqueTimestamp = uuidv4();
     this.provinces$ = this.addressService.getProvinces();
     this.nationalitys$ = this.generalInfoService.getNationality();
-    this.myInfoService
-      .getMyInfo()
-      .pipe(
-        switchMap((res: any) => {
-          res = this.myInfoService.formatMyInfo(res);
-          const id = res.idcardimage;
-          this.baseForm.patchValue(res);
-          this.form.patchValue(res);
-          //console.log('image id = ', id);
-          if (id) {
-            return this.fileService.downloadFile({ id });
-          } else {
-            return EMPTY;
-          }
-        })
-      )
-      .subscribe((res: any) => {
+    this.myInfoService.getMyInfo().subscribe((res) => {
+      res = this.myInfoService.formatMyInfo(res);
+      this.baseForm.patchValue(res);
+      this.form.patchValue(res);
+      if (res && res.filedata) {
         this.imgSrc = atob(res.filedata);
-      });
-
+      }
+    });
     //this.form.disable();
   }
 
@@ -120,7 +106,7 @@ export class PersonInfoComponent implements OnInit {
     }
   }
 
-  uploadImageComplete(idcardimage: string) {
-    this.form.patchValue({ idcardimage });
+  uploadImageComplete(personimage: string) {
+    this.form.patchValue({ personimage });
   }
 }

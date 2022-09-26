@@ -76,57 +76,70 @@ export class SelfServiceHomePageComponent {
     isForeign: SelfServiceRequestForType,
     id: number
   ) {
-    switch (subtype) {
-      case SelfServiceRequestSubType.ครู: {
-        if (isForeign === SelfServiceRequestForType.ชาวไทย) {
-          this.thaiTeacher(id);
-        } else {
-          this.foreignTeacher(subtype);
-        }
-        break;
-      }
-      case SelfServiceRequestSubType.ผู้บริหารสถานศึกษา: {
-        if (isForeign === SelfServiceRequestForType.ชาวไทย) {
-          this.schoolManager(id);
-        } else {
-          this.foreignTeacher(subtype);
-        }
-        break;
-      }
-    }
+    // switch (subtype) {
+    //   case SelfServiceRequestSubType.ครู: {
+    //     if (isForeign === SelfServiceRequestForType.ชาวไทย) {
+    //       this.thaiTeacher(id);
+    //     } else {
+    //       this.foreignTeacher(subtype);
+    //     }
+    //     break;
+    //   }
+    //   case SelfServiceRequestSubType.ผู้บริหารสถานศึกษา: {
+    //     if (isForeign === SelfServiceRequestForType.ชาวไทย) {
+    //       this.schoolManager(id);
+    //     } else {
+    //       this.foreignTeacher(subtype);
+    //     }
+    //     break;
+    //   }
+    // }
   }
 
   clear() {
     this.dataSource.data = [];
   }
 
-  // ครูไทย
+  requestLicense(type: SelfServiceRequestSubType) {
+    this.router.navigate(['/license', 'request', type]);
+  }
+
+  /*   // ครูไทย
   thaiTeacher(id?: number) {
     this.router.navigate(['/license', 'teacher', `${id}`]);
   }
+
   //ครู + ผู้บริหหาร ต่างชาติ
   foreignTeacher(type: SelfServiceRequestSubType) {
     this.router.navigate(['/license', 'agreement'], {
       queryParams: { type },
     });
   }
+
   // ผู้บริหารสถานศึกษา
   schoolManager(id?: number) {
     this.router.navigate(['/license', 'school-manager', `${id}`]);
   }
+
   // ผู้บริหารการศึกษา
   eduManagerRequest() {
     this.router.navigate(['/license', 'education-manager']);
   }
+
   //ศึกษานิเทศก์
   studySupervision() {
     this.router.navigate(['/license', 'study-supervision']);
+  } */
+
+  renewLicense(type: SelfServiceRequestSubType) {
+    this.router.navigate(['/renew-license', 'request', type]);
   }
 
-  // ครูไทย
+  /* // ครูไทย
   teacherRenew() {
     this.router.navigate(['/renew-license', 'request']);
   }
+
   //ครู + ผู้บริหาร ต่างชาติ
   foreignRenew(type: SelfServiceRequestSubType) {
     this.router.navigate(['/renew-license', 'foreign'], {
@@ -137,14 +150,16 @@ export class SelfServiceHomePageComponent {
   schManagerRenew() {
     this.router.navigate(['/renew-license', 'school-manager']);
   }
+
   // ผู้บริหารการศึกษา
   eduManagerRenew() {
     this.router.navigate(['/renew-license', 'education-manager']);
   }
+
   //ศึกษานิเทศก์
   supervisionRenew() {
     this.router.navigate(['/renew-license', 'study-supervision']);
-  }
+  } */
 
   //ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ
   licenseEdit() {

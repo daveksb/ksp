@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RenewLicenseDetailComponent } from './renew-license-detail/renew-license-detail.component';
 import { Route, RouterModule } from '@angular/router';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -13,6 +12,10 @@ import {
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import { RenewLicenseListComponent } from './renew-license-list/renew-license-list.component';
+import { EServiceRequestSearchComponent } from '@ksp/shared/search';
+import { MatTableModule } from '@angular/material/table';
+import { RenewLicenseDetailComponent } from './renew-license-detail/renew-license-detail.component';
 
 export const routes: Route[] = [
   {
@@ -23,6 +26,10 @@ export const routes: Route[] = [
         path: '',
         redirectTo: 'list',
         pathMatch: 'full',
+      },
+      {
+        path: 'approve-list',
+        component: RenewLicenseListComponent,
       },
       {
         path: 'approve-detail',
@@ -45,8 +52,10 @@ export const routes: Route[] = [
     BottomNavComponent,
     LicenseCheckComponent,
     RequestHeaderInfoComponent,
+    EServiceRequestSearchComponent,
+    MatTableModule,
   ],
-  declarations: [RenewLicenseDetailComponent],
-  exports: [RenewLicenseDetailComponent],
+  declarations: [RenewLicenseDetailComponent, RenewLicenseListComponent],
+  exports: [RenewLicenseDetailComponent, RenewLicenseListComponent],
 })
 export class EServiceELicenseRenewLicenseModule {}

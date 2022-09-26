@@ -33,7 +33,7 @@ export function replaceEmptyWithNull(input: any) {
 
 // parse json with Thai characters support
 export function parseJson(input: any) {
-  if (input && input) {
+  if (input) {
     return JSON.parse(decodeURIComponent(escape(window.atob(input))));
   } else {
     return null;

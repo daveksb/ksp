@@ -104,11 +104,6 @@ export class LicenseRequestComponent
   }
 
   ngOnInit(): void {
-    /*     this.form.valueChanges
-      .pipe(debounceTime(300), untilDestroyed(this))
-      .subscribe((res) => {
-        // console.log('res = ', this.form);
-      }); */
     this.getListData();
     this.checkButtonsDisableStatus();
     this.checkRequestId();

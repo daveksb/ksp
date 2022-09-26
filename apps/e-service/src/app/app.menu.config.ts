@@ -207,14 +207,14 @@ export const licenseMenu: MenuConfig[] = [
     label: 'ใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
     path: '',
     isExpanded: false,
-    subMenuName: 'license-thai',
+    subMenuName: 'license',
     subMenu: [
       {
-        path: '/license/approve-list',
+        path: '/request-license/approve-list',
         label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
       },
       {
-        path: '/license/approve-detail',
+        path: '/request-license/approve-detail',
         label: 'รับรองใบอนุญาตประกอบวิชาชีพ',
       },
     ],
@@ -249,7 +249,7 @@ export const licenseMenu: MenuConfig[] = [
     subMenuName: 'renew-thai',
     subMenu: [
       {
-        path: '/license/approve-list',
+        path: '/renew-license/approve-list',
         label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
       },
       {
@@ -330,7 +330,7 @@ export const licenseMenu: MenuConfig[] = [
         label: 'ตรวจสอบใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
       },
       {
-        path: '/xxx',
+        path: '/temp-license/approve-detail',
         label: 'พิจารณารับรองเลขคุรุสภาสำหรับชาวต่างชาติ',
       },
     ],
@@ -364,7 +364,7 @@ export const licenseMenu: MenuConfig[] = [
         label: 'รายการใบคำขอ',
       },
       {
-        path: '/xxx',
+        path: '/temp-license/approve-detail',
         label: 'พิจารณา',
       },
     ],
@@ -381,7 +381,7 @@ export const licenseMenu: MenuConfig[] = [
         label: 'รายการใบคำขอ',
       },
       {
-        path: '/xxx',
+        path: '/temp-license/approve-detail',
         label: 'พิจารณา',
       },
     ],
@@ -415,7 +415,7 @@ export const licenseMenu: MenuConfig[] = [
         label: 'ตรวจสอบใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
       },
       {
-        path: '/xxx',
+        path: '/temp-license/approve-detail',
         label: 'พิจารณารับรองเลขคุรุสภาสำหรับชาวต่างชาติ',
       },
     ],
@@ -432,7 +432,7 @@ export const licenseMenu: MenuConfig[] = [
         label: 'รายการ',
       },
       {
-        path: '/xxx',
+        path: '/temp-license/approve-detail',
         label: 'พิจารณา',
       },
     ],

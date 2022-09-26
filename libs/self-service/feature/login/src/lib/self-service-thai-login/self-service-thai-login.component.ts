@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { ForgotPasswordSearchPersonComponent } from '@ksp/shared/dialog';
 import { SelfServiceLoginService } from './self-service-login.service';
 import { setCookie } from '@ksp/shared/utility';
+import { MyInfoService } from '@ksp/shared/service';
+import { switchMap } from 'rxjs';
 
 @Component({
   templateUrl: './self-service-thai-login.component.html',
@@ -22,7 +24,8 @@ export class SelfServiceThaiLoginComponent {
     private router: Router,
     private fb: FormBuilder,
     private loginService: SelfServiceLoginService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private myInfoService: MyInfoService
   ) {}
 
   register() {
@@ -48,9 +51,8 @@ export class SelfServiceThaiLoginComponent {
     const dialogRef = this.dialog.open(ForgotPasswordSearchPersonComponent, {
       width: '350px',
     });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      //console.log(`Dialog result: ${result}`);
-    });
+    dialogRef.componentInstance.confirmed
+      .pipe(switchMap((res) => this.myInfoService.resetPassword(res)))
+      .subscribe((res) => console.log(res));
   }
 }
