@@ -21,15 +21,24 @@ export class ProfessionExperienceComponent
   implements OnInit
 {
   info = [
-    { name: 'สำเนาใบรายงานผลการศึกษา (transcript)', fileId: '' },
-    { name: 'สำเนาปริญญาบัตร หรือสำเนาหนังสือรับรองคุณวุฒิ', fileId: '' },
-    { name: 'สำเนาหนังสือนำส่งแบบประเมินฉบับจริง', fileId: '' },
-    { name: 'สำเนาคำสั่งแต่งตั้งคณะผู้ประเมินการปฏิบัติการสอน', fileId: '' },
-    { name: 'สำเนาตารางสอนรายสัปดาห์  ', fileId: '' },
-    { name: 'สำเนาคำสั่งแต่งตั้งปฏิบัติหน้าที่', fileId: '' },
+    { name: 'สำเนาใบรายงานผลการศึกษา (transcript)', fileId: '', fileName: '' },
+    {
+      name: 'สำเนาปริญญาบัตร หรือสำเนาหนังสือรับรองคุณวุฒิ',
+      fileId: '',
+      fileName: '',
+    },
+    { name: 'สำเนาหนังสือนำส่งแบบประเมินฉบับจริง', fileId: '', fileName: '' },
+    {
+      name: 'สำเนาคำสั่งแต่งตั้งคณะผู้ประเมินการปฏิบัติการสอน',
+      fileId: '',
+      fileName: '',
+    },
+    { name: 'สำเนาตารางสอนรายสัปดาห์  ', fileId: '', fileName: '' },
+    { name: 'สำเนาคำสั่งแต่งตั้งปฏิบัติหน้าที่', fileId: '', fileName: '' },
     {
       name: 'สำเนาสัญญาจ้างหรือทะเบียนประวัติหรือหลักฐานการขอปฏิบัติการสอน',
       fileId: '',
+      fileName: '',
     },
   ];
   override form = this.fb.group({
@@ -76,11 +85,13 @@ export class ProfessionExperienceComponent
       const experienceinfo = JSON.parse(res.experienceinfo as string);
       let index = 0;
       for (const key in experienceinfo) {
+        if (key == 'fileList') continue;
         for (let i = 0; i < experienceinfo[key].length; i++) {
           this.addFormArray(index);
         }
         index++;
       }
+      this.patchFileId(this.info, experienceinfo.fileList);
       this.form.patchValue(experienceinfo);
     });
     this.form.valueChanges.subscribe((res) => {
@@ -117,8 +128,10 @@ export class ProfessionExperienceComponent
   }
   onSave() {
     const formData = this.form.value;
+    const fileList = this.mapFileInfo(this.info);
+    console.log(fileList);
     this.baseForm.patchValue({
-      experienceinfo: JSON.stringify(formData),
+      experienceinfo: JSON.stringify({ ...formData, fileList: fileList }),
     });
     const payload: SelfMyInfo = replaceEmptyWithNull(this.baseForm.value);
     this.myInfoService
@@ -141,5 +154,21 @@ export class ProfessionExperienceComponent
         this.tumbols1$ = this.addressService.getTumbols(amphur);
       }
     }
+  }
+  mapFileInfo(fileList: any[]) {
+    return fileList.map((file: any) => {
+      const object = {
+        fileid: file.fileId || null,
+        filename: file.fileName || null,
+      };
+      return object;
+    });
+  }
+  patchFileId(fileList: any, tab: any) {
+    for (let i = 0; i < fileList.length; i++) {
+      fileList[i].fileId = tab[i]?.fileid;
+      fileList[i].fileName = tab[i]?.filename;
+    }
+    return fileList;
   }
 }
