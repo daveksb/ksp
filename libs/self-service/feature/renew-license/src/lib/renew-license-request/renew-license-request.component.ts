@@ -17,7 +17,7 @@ import {
   SelfRequestService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { SchoolRequest, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
+import { SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
 import {
   replaceEmptyWithNull,
   thaiDate,

@@ -12,7 +12,7 @@ import {
   MyInfoService,
   SelfRequestService,
 } from '@ksp/shared/service';
-import { SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
+import { SelfRequest } from '@ksp/shared/interface';
 import {
   getCookie,
   replaceEmptyWithNull,
