@@ -12,7 +12,7 @@ import {
   MyInfoService,
   SelfRequestService,
 } from '@ksp/shared/service';
-import { SelfRequest } from '@ksp/shared/interface';
+import { SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
 import {
   getCookie,
   replaceEmptyWithNull,
@@ -101,11 +101,6 @@ export class LicenseRequestComponent
   }
 
   ngOnInit(): void {
-    /*     this.form.valueChanges
-      .pipe(debounceTime(300), untilDestroyed(this))
-      .subscribe((res) => {
-        // console.log('res = ', this.form);
-      }); */
     this.getListData();
     this.getMyInfo();
     this.checkButtonsDisableStatus();
