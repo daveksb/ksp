@@ -1,53 +1,56 @@
-<div class="box-header text-primary">ข้อมูลผู้วิจัย</div>
-<div class="row">
-  <div class="col-md-6 nb-2">
-    <label class="form-label">วิทยฐานะ</label>
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+<form [formGroup]="form">
+  <div class="box-header text-primary">ข้อมูลผู้วิจัย</div>
+  <div class="row">
+    <div class="col-md-6 nb-2">
+      <label class="form-label">วิทยฐานะ</label>
+      <select class="form-select" formControlName="academicStanding">
+        <option selected>กรุณาเลือก</option>
+        <option value="1">ไม่มี</option>
+        <option value="2">ชํานาญการ</option>
+        <option value="3">ชํานาญการพิเศษ</option>
+        <option value="4">เชี่ยวชาญ</option>
+        <option value="5">เชี่ยวชาญพิเศษ</option>
+      </select>
+    </div>
+    <div class="col-md-6 nb-2">
+      <label class="form-label">ประสบการณ์ในตำแหน่ง (ปี)</label>
+      <input class="form-control" type="text" formControlName="experienceYear" />
+    </div>
   </div>
-  <div class="col-md-6 nb-2">
-    <label class="form-label">ประสบการณ์ในตำแหน่ง (ปี)</label>
-    <input class="form-control" type="text" />
+  <div class="row">
+    <div class="col-md-6 nb-2">
+      <label class="form-label">ประเภทวิชาชีพ</label>
+      <select class="form-select" formControlName="professionalType">
+        <option selected>กรุณาเลือก</option>
+        <option value="1">ครู</option>
+        <option value="2">ผู้บริหารสถานศึกษา</option>
+        <option value="3">ผู้บริหารการศึกษา</option>
+        <option value="4">ศึกษานิเทศก์</option>
+      </select>
+    </div>
+    <div class="col-md-6 nb-2">
+      <label class="form-label">ชื่อสมาคม/ชมรม/กลุ่มเครือข่ายวิชาชีพที่ท่านเป็นสมาชิก (ถ้ามี)</label>
+      <input class="form-control" type="text" formControlName="associationName" />
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-md-6 nb-2">
-    <label class="form-label">ประเภทวิชาชีพ</label>
-    <select class="form-select">
-      <option selected>กรุณาเลือก</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+  <div class="row">
+    <div class="col-md-6 nb-2">
+      <label class="form-label">เบอร์มือถือที่ติดต่อได้ (1)</label>
+      <input class="form-control" type="text" formControlName="phone1" />
+    </div>
+    <div class="col-md-6 nb-2">
+      <label class="form-label">เบอร์มือถือที่ติดต่อได้ (2)</label>
+      <input class="form-control" type="text" formControlName="phone2" />
+    </div>
   </div>
-  <div class="col-md-6 nb-2">
-    <label class="form-label"
-      >ชื่อสมาคม/ชมรม/กลุ่มเครือข่ายวิชาชีพที่ท่านเป็นสมาชิก (ถ้ามี)</label
-    >
-    <input class="form-control" type="text" />
+  <div class="row">
+    <div class="col-md-6 nb-2">
+      <label class="form-label">อีเมลที่ติดต่อได้ (1)</label>
+      <input class="form-control" type="text" formControlName="email1" />
+    </div>
+    <div class="col-md-6 nb-2">
+      <label class="form-label">อีเมลที่ติดต่อได้ (2)</label>
+      <input class="form-control" type="text" formControlName="email2" />
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-md-6 nb-2">
-    <label class="form-label">เบอร์มือถือที่ติดต่อได้ (1)</label>
-    <input class="form-control" type="text" />
-  </div>
-  <div class="col-md-6 nb-2">
-    <label class="form-label">เบอร์มือถือที่ติดต่อได้ (2)</label>
-    <input class="form-control" type="text" />
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-6 nb-2">
-    <label class="form-label">อีเมลที่ติดต่อได้ (1)</label>
-    <input class="form-control" type="text" />
-  </div>
-  <div class="col-md-6 nb-2">
-    <label class="form-label">อีเมลที่ติดต่อได้ (2)</label>
-    <input class="form-control" type="text" />
-  </div>
-</div>
+</form>

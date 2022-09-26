@@ -115,3 +115,25 @@ export function getBase64(
     reader.onerror = (error) => rej(error);
   });
 }
+
+/**
+ *
+ * @param userId = SchoolId or MyInfo Id
+ * @returns school id + datetime.tostring
+ */
+export function genUniqueTimestamp(userId: string) {
+  const fixDigitString = userId.padStart(12, '0');
+  const dateString = `${new Date().getTime()}`;
+  const result = fixDigitString + dateString;
+  console.log('uniuqeTimestamp = ', result);
+  return result;
+}
+
+/**
+ *
+ * @param input return correct format date to send to API
+ * @returns
+ */
+export function formatDate(input: string) {
+  return input.split('T')[0];
+}

@@ -53,17 +53,32 @@
             <form [formGroup]="form">
               <div class="row justify-content-center">
                 <div class="col-md-6 mb-3">
-                  <label class="form-label">เลขที่บัตรประชาชน</label>
+                  <label class="form-label required">เลขที่บัตรประชาชน</label>
                   <input
                     type="text"
                     class="form-control"
                     formControlName="idcardno"
+                    maxlength="13"
                   />
+                  <ng-container
+                    *ngIf="
+                      idCardNo.invalid && (idCardNo.dirty || idCardNo.touched)
+                    "
+                  >
+                    <span
+                      class="text-danger"
+                      *ngIf="idCardNo.errors?.['pattern']"
+                    >
+                      {{ validatorMessages.ssn }}
+                    </span>
+                  </ng-container>
                 </div>
               </div>
               <div class="row justify-content-center">
                 <div class="col-md-6 mb-3">
-                  <label class="form-label">เลขที่หลังบัตรประชาชน</label>
+                  <label class="form-label required"
+                    >เลขที่หลังบัตรประชาชน</label
+                  >
                   <input
                     type="text"
                     class="form-control"
@@ -100,6 +115,7 @@
                   </button>
                   <button
                     (click)="openDialog()"
+                    [disabled]="form.invalid"
                     type="submit"
                     class="btn btn-primary ms-1"
                   >

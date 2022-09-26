@@ -24,17 +24,10 @@ export class RequestService {
     );
   }
 
-  changeRequestProcess(payload: any): Observable<any> {
-    return this.http.post(
-      `${environment.apiUrl}/kspstaff/schrequestupdatecurrentprocess`,
-      payload
-    );
-  }
-
-  changeRequestStatus(payload: any): Observable<any> {
+  cancelRequest(form: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspstaff/schrequestupdaterequeststatus`,
-      payload
+      form
     );
   }
 

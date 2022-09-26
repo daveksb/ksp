@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import {
   UserInfoFormType,
   SelfServiceRequestSubType,
+  SelfServiceRequestType,
+  SelfServiceRequestForType,
 } from '@ksp/shared/constant';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { LicenseFormBaseComponent } from '@ksp/self-service/form';
@@ -16,7 +18,8 @@ import {
   SelfRequestService,
 } from '@ksp/shared/service';
 import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
-import { SchoolRequest } from '@ksp/shared/interface';
+import { SelfRequest } from '@ksp/shared/interface';
+import * as _ from 'lodash';
 
 @UntilDestroy()
 @Component({
@@ -34,14 +37,17 @@ export class LicenseRequestStudySupervisionComponent
     {
       name: '1. สำเนาวุฒิทางการศึกษา',
       fileId: '',
+      fileName: '',
     },
     {
       name: '2. เอกสารผู้สำเร็จการศึกษา ( ระบบ KSP BUNDIT)',
       fileId: '',
+      fileName: '',
     },
     {
       name: '3. วุฒิบัตรอบรม',
       fileId: '',
+      fileName: '',
     },
   ];
 
@@ -84,6 +90,7 @@ export class LicenseRequestStudySupervisionComponent
     this.getListData();
     this.getMyInfo();
     this.checkButtonsDisableStatus();
+    this.initializeFiles();
   }
 
   patchUserInfoForm(data: any): void {
@@ -106,26 +113,33 @@ export class LicenseRequestStudySupervisionComponent
     this.form.controls.address2.patchValue(this.form.controls.address1.value);
   }
 
-  createRequest(forbidden: any, currentProcess: string) {
-    const baseForm = this.fb.group(SchoolRequest);
+  createRequest(forbidden: any, currentProcess: number) {
+    const self = new SelfRequest(
+      '1',
+      SelfServiceRequestType.ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ,
+      `${SelfServiceRequestSubType.ศึกษานิเทศก์}`,
+      currentProcess
+    );
+    const allowKey = Object.keys(self);
     const formData: any = this.form.getRawValue();
     if (formData?.address1?.addressType) formData.address1.addresstype = 1;
     if (formData?.address2?.addressType) formData.address2.addresstype = 2;
 
     const { id, ...rawUserInfo } = formData.userInfo;
     const userInfo = toLowercaseProp(rawUserInfo);
+    userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
+    userInfo.uniquetimestamp = this.uniqueTimestamp;
+    const selectData = _.pick(userInfo, allowKey);
 
-    userInfo.ref1 = '1';
-    userInfo.ref2 = '01';
-    userInfo.ref3 = `${SelfServiceRequestSubType.ศึกษานิเทศก์}`;
-    userInfo.systemtype = '1';
-    userInfo.requesttype = '1';
-    userInfo.subtype = '5';
-
-    const { educationType, educationLevelForm } = formData.education;
+    const { educationType, educationLevelForm } = formData.education || {
+      educationType: null,
+      educationLevelForm: null,
+    };
+    const experiencefiles = this.mapFileInfo(this.experienceFiles);
 
     const payload = {
-      ...replaceEmptyWithNull(userInfo),
+      ...self,
+      ...replaceEmptyWithNull(selectData),
       ...{
         addressinfo: JSON.stringify([formData.address1, formData.address2]),
       },
@@ -141,12 +155,10 @@ export class LicenseRequestStudySupervisionComponent
         experienceinfo: JSON.stringify(formData.experience),
       },
       ...{ prohibitproperty: JSON.stringify(forbidden) },
+      ...{ fileinfo: JSON.stringify({ experiencefiles }) },
     };
-    payload.currentprocess = currentProcess;
-    payload.requeststatus = '1';
     console.log(payload);
-    baseForm.patchValue(payload);
-    return baseForm.value;
+    return payload;
   }
 
   checkButtonsDisableStatus() {

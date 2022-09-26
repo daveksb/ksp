@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { VerifyPhoneDialogComponent } from '@ksp/self-service/dialog';
+import { idCardPattern, validatorMessages } from '@ksp/shared/utility';
 import localForage from 'localforage';
 
 @Component({
@@ -11,9 +12,11 @@ import localForage from 'localforage';
   styleUrls: ['./register-step-two.component.scss'],
 })
 export class RegisterStepTwoComponent {
+  validatorMessages = validatorMessages;
+
   form = this.fb.group({
-    idcardno: [],
-    idcardbackno: [],
+    idcardno: [null, [Validators.required, Validators.pattern(idCardPattern)]],
+    idcardbackno: [null, [Validators.required]],
     //idcardimage: [],
   });
 
@@ -43,5 +46,9 @@ export class RegisterStepTwoComponent {
 
   previousPage() {
     this.router.navigate(['/register', 'th-step-1']);
+  }
+
+  get idCardNo() {
+    return this.form.controls.idcardno;
   }
 }

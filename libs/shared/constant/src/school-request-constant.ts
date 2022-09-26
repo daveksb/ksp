@@ -4,6 +4,7 @@ export enum RequestPageType {
   teachingTab = 'teachingTab',
   reasonTab = 'reasonTab',
   fileAttachTab = 'fileAttachTab',
+  imageTab = 'imageTab',
 }
 
 export const SchoolRequestType = [
@@ -18,7 +19,7 @@ export const SchoolRequestType = [
 
 export const SchoolRetireReason = [
   { id: 1, name: 'เลิกจ้าง' },
-  { id: 2, name: 'อื่นๆ' }
+  { id: 2, name: 'อื่นๆ' },
 ];
 
 // url params keep in db for temp license request
@@ -95,8 +96,8 @@ export const RequestProcessList: RequestProcess[] = [
     processId: 1,
     processName: 'สร้างใบคำขอ',
     status: [
+      { id: 0, sname: 'ยกเลิก', ename: '' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: '' },
-      { id: 2, sname: 'ยกเลิก', ename: '' },
     ],
   },
   {
@@ -104,8 +105,8 @@ export const RequestProcessList: RequestProcess[] = [
     processId: 2,
     processName: 'สร้างและส่งใบคำขอ',
     status: [
+      { id: 0, sname: 'ยกเลิก', ename: '' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
-      { id: 2, sname: 'ยกเลิก', ename: '' },
     ],
   },
   {
@@ -113,12 +114,12 @@ export const RequestProcessList: RequestProcess[] = [
     processId: 3,
     processName: 'ตรวจสอบเอกสาร ลำดับที่ 1',
     status: [
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
       { id: 2, sname: 'ปรับแก้ไข/เพิ่มเติม', ename: 'ปรับแก้ไข/เพิ่มเติม' },
       { id: 3, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
       { id: 4, sname: 'ไม่ผ่านการตรวจสอบ', ename: 'ไม่ผ่านการตรวจสอบ' },
       { id: 5, sname: 'ส่งคืนและยกเลิก', ename: 'ส่งคืนและยกเลิก' },
-      { id: 6, sname: 'ยกเลิก', ename: 'ยกเลิก' },
     ],
   },
   {
@@ -131,12 +132,6 @@ export const RequestProcessList: RequestProcess[] = [
       { id: 3, sname: 'ไม่ผ่านการรับรอง/พิจารณา', ename: '' },
     ],
   },
-  {
-    requestType: 3,
-    processId: 0,
-    processName: 'ยกเลิก',
-    status: [{ id: 1, sname: 'ยกเลิก', ename: 'ยกเลิก' }],
-  },
 
   //ขอสร้างเลขคุรุสภาสำหรับครูชาวต่างชาติ
   {
@@ -144,8 +139,8 @@ export const RequestProcessList: RequestProcess[] = [
     processId: 1,
     processName: 'สร้างและส่งใบคำขอ',
     status: [
+      { id: 0, sname: 'ยกเลิก', ename: '' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: '' },
-      { id: 2, sname: 'ยกเลิก', ename: '' },
     ],
   },
   {
@@ -153,17 +148,11 @@ export const RequestProcessList: RequestProcess[] = [
     processId: 2,
     processName: 'ตรวจสอบเอกสาร',
     status: [
+      { id: 0, sname: 'ยกเลิก', ename: '' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
       { id: 2, sname: 'ผ่านการตรวจสอบ', ename: '' },
       { id: 3, sname: 'ไม่ผ่านการตรวจสอบ', ename: '' },
-      { id: 4, sname: 'ยกเลิก', ename: '' },
     ],
-  },
-  {
-    requestType: 4,
-    processId: 0,
-    processName: 'ยกเลิก',
-    status: [{ id: 1, sname: 'ยกเลิก', ename: 'ยกเลิก' }],
   },
 
   //ขอหนังสือรับรองคุณวุฒิการศึกษา
@@ -172,8 +161,8 @@ export const RequestProcessList: RequestProcess[] = [
     processId: 1,
     processName: 'สร้างและส่งใบคำขอ',
     status: [
+      { id: 0, sname: 'ยกเลิก', ename: '' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: '' },
-      { id: 2, sname: 'ยกเลิก', ename: '' },
     ],
   },
   {
@@ -181,12 +170,12 @@ export const RequestProcessList: RequestProcess[] = [
     processId: 2,
     processName: 'ตรวจสอบเอกสาร',
     status: [
+      { id: 0, sname: 'ยกเลิก', ename: '' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
       { id: 2, sname: 'ปรับแก้ไข/เพิ่มเติม', ename: '' },
       { id: 3, sname: 'ผ่านการตรวจสอบ', ename: '' },
       { id: 4, sname: 'ไม่ผ่านการตรวจสอบ', ename: '' },
       { id: 5, sname: 'ส่งคืนและยกเลิก', ename: '' },
-      { id: 6, sname: 'ยกเลิก', ename: '' },
     ],
   },
   {
@@ -202,12 +191,6 @@ export const RequestProcessList: RequestProcess[] = [
       { id: 6, sname: '', ename: 'ไม่ยืนยันผลการตรวจสอบ' },
     ],
   },
-  {
-    requestType: 6,
-    processId: 0,
-    processName: 'ยกเลิก',
-    status: [{ id: 1, sname: 'ยกเลิก', ename: 'ยกเลิก' }],
-  },
 
   //ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม
   {
@@ -215,8 +198,8 @@ export const RequestProcessList: RequestProcess[] = [
     processId: 1,
     processName: 'สร้างใบคำขอ',
     status: [
+      { id: 0, sname: 'ยกเลิก', ename: '' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: '' },
-      { id: 2, sname: 'ยกเลิก', ename: '' },
     ],
   },
   {
@@ -224,8 +207,8 @@ export const RequestProcessList: RequestProcess[] = [
     processId: 2,
     processName: 'สร้างและส่งใบคำขอ',
     status: [
+      { id: 0, sname: 'ยกเลิก', ename: '' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: '' },
-      { id: 2, sname: 'ยกเลิก', ename: '' },
     ],
   },
   {
@@ -233,13 +216,13 @@ export const RequestProcessList: RequestProcess[] = [
     processId: 3,
     processName: 'ตรวจสอบเอกสาร',
     status: [
+      { id: 0, sname: 'ยกเลิก', ename: '' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
       { id: 2, sname: 'ปรับแก้ไข/เพิ่มเติม', ename: '' },
       { id: 3, sname: 'ผ่านการตรวจสอบ', ename: '' },
       { id: 4, sname: 'ไม่ผ่านการตรวจสอบ', ename: '' },
       { id: 5, sname: 'ส่งคืนและยกเลิก', ename: '' },
       { id: 6, sname: 'คัดค้าน/เพิกถอน', ename: '' },
-      { id: 7, sname: 'ยกเลิก', ename: '' },
     ],
   },
   {
@@ -252,12 +235,6 @@ export const RequestProcessList: RequestProcess[] = [
       { id: 3, sname: 'ไม่ผ่านการพิจารณา', ename: '' },
       { id: 4, sname: 'คัดค้าน/เพิกถอน', ename: '' },
     ],
-  },
-  {
-    requestType: 40,
-    processId: 0,
-    processName: 'ยกเลิก',
-    status: [{ id: 1, sname: 'ยกเลิก', ename: 'ยกเลิก' }],
   },
 ];
 
