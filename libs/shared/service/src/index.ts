@@ -13,3 +13,4 @@ export { SelfDevelopService } from './school-service/self-develop.service';
 
 export { UniRequestService } from './uni-service/uni-request.service';
 export { UniInfoService } from './uni-service/uni-info.service';
+export { SelfDevelopmentService } from './self-service/self-develop.service';
