@@ -46,7 +46,6 @@ export class SelfMyInfo {
   visaclass: string | null = null;
   visaenddate: string | null = null;
   visatype: string | null = null;
-  usertoken: string | null = null;
 }
 
 export type SelfMyInfoKey = keyof SelfMyInfo;
