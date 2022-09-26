@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { RegisterCompletedComponent } from '../register-completed/register-completed.component';
 import localForage from 'localforage';
 import { MyInfoService } from '@ksp/shared/service';
-import uniqueString from 'unique-string';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'self-service-register-step-three',
@@ -30,7 +30,7 @@ export class RegisterStepThreeComponent {
       const payload = { ...res, ...this.form.value };
       payload.username = res.idcardno;
       payload.isactive = '1';
-      payload.uniquetimestamp = uniqueString();
+      payload.uniquetimestamp = uuidv4();
 
       this.myInfoService.insertMyInfo(payload).subscribe((res) => {
         //console.log('insert = ', res);
