@@ -35,6 +35,12 @@ export class MyInfoService {
       payload
     );
   }
+  resetPassword(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspself/selfmyinfoupdatepass`,
+      payload
+    );
+  }
   formatMyInfo(info: SelfMyInfo) {
     const dateColumn = [
       'lastlogintime',
