@@ -9,3 +9,5 @@ export * from './lib/renew-license-education-manager/renew-license-education-man
 export * from './lib/renew-license-study-supervision/renew-license-study-supervision.component';
 
 export * from './lib/renew-license-foreign/renew-license-foreign.component';
+
+export * from './lib/renew-license-thai/renew-license-thai.component';
