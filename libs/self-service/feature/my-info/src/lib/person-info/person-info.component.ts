@@ -14,7 +14,7 @@ import {
   validatorMessages,
 } from '@ksp/shared/utility';
 import { EMPTY, Observable, switchMap } from 'rxjs';
-import uniqueString from 'unique-string';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'self-service-person-info',
@@ -55,7 +55,7 @@ export class PersonInfoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.uniqueTimestamp = uniqueString();
+    this.uniqueTimestamp = uuidv4();
     this.provinces$ = this.addressService.getProvinces();
     this.nationalitys$ = this.generalInfoService.getNationality();
     this.myInfoService

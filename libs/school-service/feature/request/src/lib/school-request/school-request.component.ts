@@ -36,7 +36,7 @@ import {
 } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
-import uniqueString from 'unique-string';
+import { v4 as uuidv4 } from 'uuid';
 
 @UntilDestroy()
 @Component({
@@ -116,7 +116,7 @@ export class SchoolRequestComponent implements OnInit {
     return this.option.valueChanges;
   }
   ngOnInit(): void {
-    this.uniqueTimestamp = uniqueString();
+    this.uniqueTimestamp = uuidv4();
     this.getList();
     this.checkRequestId();
     this.checkRequestSubType();
