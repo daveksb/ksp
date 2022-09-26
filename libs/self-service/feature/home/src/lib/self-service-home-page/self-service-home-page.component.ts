@@ -83,6 +83,15 @@ export class SelfServiceHomePageComponent {
         } else {
           this.foreignTeacher(subtype);
         }
+        break;
+      }
+      case SelfServiceRequestSubType.ผู้บริหารสถานศึกษา: {
+        if (isForeign === SelfServiceRequestForType.ชาวไทย) {
+          this.schoolManager(id);
+        } else {
+          this.foreignTeacher(subtype);
+        }
+        break;
       }
     }
   }
@@ -102,8 +111,8 @@ export class SelfServiceHomePageComponent {
     });
   }
   // ผู้บริหารสถานศึกษา
-  schoolManager() {
-    this.router.navigate(['/license', 'school-manager']);
+  schoolManager(id?: number) {
+    this.router.navigate(['/license', 'school-manager', `${id}`]);
   }
   // ผู้บริหารการศึกษา
   eduManagerRequest() {

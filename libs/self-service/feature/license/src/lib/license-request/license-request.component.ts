@@ -15,6 +15,7 @@ import {
 import { SelfRequest } from '@ksp/shared/interface';
 import {
   getCookie,
+  parseJson,
   replaceEmptyWithNull,
   toLowercaseProp,
 } from '@ksp/shared/utility';
@@ -110,7 +111,6 @@ export class LicenseRequestComponent
       }); */
     this.getListData();
     this.checkButtonsDisableStatus();
-    this.initializeFiles();
     this.checkRequestId();
   }
 
@@ -147,6 +147,30 @@ export class LicenseRequestComponent
     console.log(this.form.controls.address1.value);
     this.form.controls.address2.patchValue(this.form.controls.address1.value);
     console.log(this.form.controls.address2.value);
+  }
+
+  override patchData(data: SelfRequest) {
+    super.patchData(data);
+    if (data.eduinfo) {
+      const eduInfo = parseJson(data.eduinfo);
+      const { educationType, ...educationLevelForm } = eduInfo;
+      this.form.controls.education.patchValue({
+        educationType,
+        educationLevelForm,
+      } as any);
+    }
+
+    if (data.experienceinfo) {
+      const experienceInfo = parseJson(data.experienceinfo);
+      this.form.controls.experience.patchValue({ ...experienceInfo });
+    }
+
+    if (data.fileinfo) {
+      const fileInfo = parseJson(data.fileinfo);
+      const { edufiles, experiencefiles } = fileInfo;
+      this.eduFiles = edufiles;
+      this.experienceFiles = experiencefiles;
+    }
   }
 
   getAmphurChanged(addrType: number, province: any) {
@@ -186,6 +210,8 @@ export class LicenseRequestComponent
     if (formData?.address2?.addressType) formData.address2.addresstype = 2;
 
     const { id, ...rawUserInfo } = formData.userInfo;
+    console.log('id ', id);
+    console.log('requestId ', this.requestId);
     const userInfo = toLowercaseProp(rawUserInfo);
     userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
     userInfo.uniquetimestamp = this.uniqueTimestamp;
@@ -197,29 +223,21 @@ export class LicenseRequestComponent
       educationType: null,
       educationLevelForm: null,
     };
-    const { hasForeignLicense, foreignLicenseForm, ...resExperienceForm } =
-      formData.experience || {
-        hasForeignLicense: null,
-        foreignLicenseForm: null,
-      };
 
-    const edufiles = this.mapFileInfo(this.eduFiles);
-    const experiencefiles = this.mapFileInfo(this.experienceFiles);
+    const edufiles = this.eduFiles; //this.mapFileInfo(this.eduFiles);
+    const experiencefiles = this.experienceFiles; //this.mapFileInfo(this.experienceFiles);
 
     const payload = {
       ...self,
       ...replaceEmptyWithNull(selectData),
+      ...(this.requestId && { id: `${this.requestId}` }),
       ...{
         addressinfo: JSON.stringify([formData.address1, formData.address2]),
       },
       ...{ schooladdrinfo: JSON.stringify(formData.workplace) },
       ...{ eduinfo: JSON.stringify({ educationType, ...educationLevelForm }) },
       ...{
-        experienceinfo: JSON.stringify({
-          hasForeignLicense,
-          ...resExperienceForm,
-          ...(hasForeignLicense && { ...foreignLicenseForm }),
-        }),
+        experienceinfo: JSON.stringify(formData.experience),
       },
       ...{ competencyinfo: JSON.stringify(mockPerformances) },
       ...{ prohibitproperty: JSON.stringify(forbidden) },

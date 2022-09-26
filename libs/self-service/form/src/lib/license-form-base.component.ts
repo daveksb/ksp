@@ -39,6 +39,7 @@ export abstract class LicenseFormBaseComponent {
   requestData!: SelfRequest;
   requestNo: string | null = '';
   currentProcess!: number;
+  prohibitProperty: any;
 
   constructor(
     protected generalInfoService: GeneralInfoService,
@@ -64,11 +65,14 @@ export abstract class LicenseFormBaseComponent {
             this.requestData = res;
             this.requestNo = res.requestno;
             this.currentProcess = Number(res.currentprocess);
+            this.uniqueTimestamp = res.uniquetimestamp || '';
+            console.log(this.uniqueTimestamp);
 
             this.patchData(res);
           }
         });
       } else {
+        this.initializeFiles();
         this.getMyInfo();
       }
     });
@@ -79,6 +83,9 @@ export abstract class LicenseFormBaseComponent {
     this.patchAddress(parseJson(data.addressinfo));
     if (data.schooladdrinfo) {
       this.patchWorkplace(parseJson(data.schooladdrinfo));
+    }
+    if (data.prohibitproperty) {
+      this.prohibitProperty = parseJson(data.prohibitproperty);
     }
   }
 
@@ -125,6 +132,9 @@ export abstract class LicenseFormBaseComponent {
     console.log(this.form.value);
     const confirmDialog = this.dialog.open(ForbiddenPropertyFormComponent, {
       width: '900px',
+      data: {
+        prohibitProperty: this.prohibitProperty,
+      },
     });
 
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
@@ -147,7 +157,10 @@ export abstract class LicenseFormBaseComponent {
     completeDialog.componentInstance.saved.subscribe((res) => {
       if (res) {
         const payload = this.createRequest(forbidden, 1);
-        this.requestService.createRequest(payload).subscribe((res) => {
+        const request = this.requestId
+          ? this.requestService.updateRequest.bind(this.requestService)
+          : this.requestService.createRequest.bind(this.requestService);
+        request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res.returncode === '00') {
             this.router.navigate(['/home']);
@@ -159,7 +172,10 @@ export abstract class LicenseFormBaseComponent {
     completeDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         const payload = this.createRequest(forbidden, 2);
-        this.requestService.createRequest(payload).subscribe((res) => {
+        const request = this.requestId
+          ? this.requestService.updateRequest.bind(this.requestService)
+          : this.requestService.createRequest.bind(this.requestService);
+        request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res.returncode === '00') {
             this.router.navigate(['/license', 'payment-channel']);
