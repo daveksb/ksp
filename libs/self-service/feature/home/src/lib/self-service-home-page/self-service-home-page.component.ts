@@ -73,33 +73,42 @@ export class SelfServiceHomePageComponent {
     this.dataSource.data = [];
   }
 
-  // ครูไทย
+  requestLicense(type: SelfServiceRequestSubType) {
+    this.router.navigate(['/license', 'request', type]);
+  }
+
+  /*   // ครูไทย
   thaiTeacher() {
     this.router.navigate(['/license', 'teacher']);
   }
+
   //ครู + ผู้บริหหาร ต่างชาติ
   foreignTeacher(type: SelfServiceRequestSubType) {
     this.router.navigate(['/license', 'agreement'], {
       queryParams: { type },
     });
   }
+
   // ผู้บริหารสถานศึกษา
   schoolManager() {
     this.router.navigate(['/license', 'school-manager']);
   }
+
   // ผู้บริหารการศึกษา
   eduManagerRequest() {
     this.router.navigate(['/license', 'education-manager']);
   }
+
   //ศึกษานิเทศก์
   studySupervision() {
     this.router.navigate(['/license', 'study-supervision']);
-  }
+  } */
 
   // ครูไทย
   teacherRenew() {
     this.router.navigate(['/renew-license', 'request']);
   }
+
   //ครู + ผู้บริหาร ต่างชาติ
   foreignRenew(type: SelfServiceRequestSubType) {
     this.router.navigate(['/renew-license', 'foreign'], {
@@ -110,10 +119,12 @@ export class SelfServiceHomePageComponent {
   schManagerRenew() {
     this.router.navigate(['/renew-license', 'school-manager']);
   }
+
   // ผู้บริหารการศึกษา
   eduManagerRenew() {
     this.router.navigate(['/renew-license', 'education-manager']);
   }
+
   //ศึกษานิเทศก์
   supervisionRenew() {
     this.router.navigate(['/renew-license', 'study-supervision']);

@@ -1,6 +1,6 @@
 <form [formGroup]="form">
-  <div class="row mx-0 border shadow rounded-4 px-2 py-4 bg-white my-4">
-    <div class="col-lg-2">
+  <div class="row mx-0 border shadow-sm rounded-4 px-2 py-4 bg-white my-4">
+    <div class="col-lg-3">
       <self-service-form-upload-image></self-service-form-upload-image>
     </div>
     <div class="col-md">
@@ -11,8 +11,7 @@
         [displayMode]="[userInfoType]"
         [nationList]="nationalitys$ | async"
         [isSchoolService]="false"
-      >
-      </ksp-form-user-info>
+      ></ksp-form-user-info>
     </div>
   </div>
 
@@ -39,13 +38,13 @@
         (provinceChanged)="provinceChanged(2, $event)"
         (amphurChanged)="amphurChanged(2, $event)"
       >
-        <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
-        <span class="text-danger ms-1 fs-6">*กรุณากรอกข้อมูลตำบล, อำเภอ</span>
+        <span class="me-1">ที่อยู่ที่ติดต่อได้สะดวก</span>
+        <span class="text-danger fs-6">*กรุณากรอกข้อมูลตำบล,อำเภอ</span>
         <div class="d-flex align-items-center">
           <input
+            (change)="useSameAddress($event)"
             type="checkbox"
             class="me-2"
-            (change)="useSameAddress($event)"
           />
           <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
         </div>
@@ -63,57 +62,59 @@
         (amphurChanged)="amphurChanged(3, $event)"
       >
       </self-service-form-user-workplace>
-      <div class="row mb-3">
-        <div class="col">
-          <label class="form-label">เว็บไซต์</label>
-          <input type="text" class="form-control" formControlName="website" />
-        </div>
-        <div class="col">
-          <label class="form-label">อีเมล</label>
-          <input type="text" class="form-control" formControlName="workEmail" />
-        </div>
-      </div>
     </mat-tab>
 
     <mat-tab label="ข้อมูลทางการศึกษา">
       <self-service-form-user-education
+        [countries]="countries$ | async"
         formControlName="education"
-        [educationTypes]="'manager'"
       ></self-service-form-user-education>
-      <!-- <hr />
+      <hr />
       <ksp-form-attachment
-        [groups]="eduFiles"
         [title]="'กรุณาแนบหลักฐานประกอบวุฒิทางการศึกษา'"
-      ></ksp-form-attachment> -->
+        [uniqueTimestamp]="uniqueTimestamp"
+        [groups]="eduFiles"
+      ></ksp-form-attachment>
     </mat-tab>
 
     <mat-tab label="ข้อมูลประสบการณ์วิชาชีพ">
-      <self-service-school-manager-experience
+      <self-service-form-user-experience
+        [countries]="countries2$ | async"
+        [licenses]="licenses$ | async"
         formControlName="experience"
-      ></self-service-school-manager-experience>
+      ></self-service-form-user-experience>
       <hr />
       <ksp-form-attachment
-        [groups]="experienceFiles"
+        [title]="'กรุณาแนบหลักฐานประกอบการฝึกประสบการณ์วิชาชีพ'"
         [uniqueTimestamp]="uniqueTimestamp"
-        [title]="'กรุณาแนบหลักฐานประกอบ'"
+        [groups]="experienceFiles"
       ></ksp-form-attachment>
     </mat-tab>
-  </mat-tab-group>
-</form>
 
-<!-- <div class="fs-6 text-danger mt-1">
-    *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
+    <mat-tab label="ข้อมูลผลการประเมินสมรรถนะ">
+      <self-service-form-user-performance></self-service-form-user-performance>
+      <!-- <hr />
+        <ksp-form-attachment
+          title="กรุณาแนบหลักฐาน"
+          [groups]="service.performanceFiles"
+        ></ksp-form-attachment> -->
+    </mat-tab>
+  </mat-tab-group>
+
+  <!-- <div class="fs-6 text-danger mt-2">
+    * กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
     โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
   </div> -->
 
-<!-- <div class="d-flex justify-content-center my-3">
+  <!-- <div class="d-flex justify-content-center mt-3 mb-3">
     <button type="button" class="btn btn-secondary">ล้างข้อมูล</button>
     <button
-      type="button"
       (click)="save()"
+      type="button"
       class="ms-3 btn btn-primary"
       [disabled]="disableNextButton"
     >
       ต่อไป
     </button>
   </div> -->
+</form>

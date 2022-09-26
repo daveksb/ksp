@@ -11,7 +11,7 @@ import { FileUploadComponent } from '@ksp/shared/form/file-upload';
   imports: [FileUploadComponent, CommonModule],
 })
 export class FormUploadImageComponent {
-  @Input() imgDetail = 'row' || 'column';
+  @Input() isEditMode = true;
   @Input() imgSrc = '';
   @Input() requestType: any;
   @Input() uniqueTimestamp!: string;
