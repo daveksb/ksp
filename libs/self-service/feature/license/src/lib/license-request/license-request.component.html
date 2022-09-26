@@ -6,36 +6,128 @@
 <div class="main__container px-4 py-2">
   <self-service-request-status></self-service-request-status>
 
-  <self-service-license-request-thai
-    *ngIf="pageType === 1"
-  ></self-service-license-request-thai>
-  <self-service-license-request-school-manager
-    *ngIf="pageType === 2"
-  ></self-service-license-request-school-manager>
-  <self-service-license-request-education-manager
-    *ngIf="pageType === 3"
-  ></self-service-license-request-education-manager>
-  <self-service-license-request-study-supervision
-    *ngIf="pageType === 4"
-  ></self-service-license-request-study-supervision>
-  <self-service-license-request-foreign
-    *ngIf="pageType === 5"
-  ></self-service-license-request-foreign>
+  <form [formGroup]="form">
+    <div class="row mx-0 border shadow-sm rounded-4 px-2 py-4 bg-white my-4">
+      <div class="col-lg-3">
+        <self-service-form-upload-image></self-service-form-upload-image>
+      </div>
+      <div class="col-md">
+        <ksp-form-user-info
+          formControlName="userInfo"
+          [isDarkMode]="true"
+          [prefixList]="prefixList$ | async"
+          [displayMode]="[userInfoType]"
+          [nationList]="nationalitys$ | async"
+          [isSchoolService]="false"
+        ></ksp-form-user-info>
+      </div>
+    </div>
 
-  <div class="fs-6 text-danger mt-2">
-    * กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
-    โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
-  </div>
-
-  <div class="d-flex justify-content-center mt-3 mb-3">
-    <button type="button" class="btn btn-secondary">ล้างข้อมูล</button>
-    <!-- <button
-      (click)="save()"
-      type="button"
-      class="ms-3 btn btn-primary"
-      [disabled]="disableNextButton"
+    <mat-tab-group
+      class="tab-group"
+      animationDuration="0ms"
+      [selectedIndex]="0"
     >
-      ต่อไป
-    </button> -->
-  </div>
+      <mat-tab label="ที่อยู่" class="tab-content">
+        <ksp-form-address
+          formControlName="address1"
+          [isDarkMode]="true"
+          [provinces]="provinces1$ | async"
+          [amphurs]="amphurs1$ | async"
+          [tumbols]="tumbols1$ | async"
+          (provinceChanged)="provinceChanged(1, $event)"
+          (amphurChanged)="amphurChanged(1, $event)"
+        >
+          <span>ที่อยู่ทะเบียนบ้าน</span>
+        </ksp-form-address>
+        <hr />
+        <ksp-form-address
+          formControlName="address2"
+          [isDarkMode]="true"
+          [provinces]="provinces2$ | async"
+          [amphurs]="amphurs2$ | async"
+          [tumbols]="tumbols2$ | async"
+          (provinceChanged)="provinceChanged(2, $event)"
+          (amphurChanged)="amphurChanged(2, $event)"
+        >
+          <span class="me-1">ที่อยู่ที่ติดต่อได้สะดวก</span>
+          <span class="text-danger fs-6">*กรุณากรอกข้อมูลตำบล,อำเภอ</span>
+          <div class="d-flex align-items-center">
+            <input
+              (change)="useSameAddress($event)"
+              type="checkbox"
+              class="me-2"
+            />
+            <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
+          </div>
+        </ksp-form-address>
+      </mat-tab>
+
+      <mat-tab label="สถานที่ทำงาน">
+        <self-service-form-user-workplace
+          formControlName="workplace"
+          [provinces]="provinces3$ | async"
+          [amphurs]="amphurs3$ | async"
+          [tumbols]="tumbols3$ | async"
+          [bureaus]="bureau$ | async"
+          (provinceChanged)="provinceChanged(3, $event)"
+          (amphurChanged)="amphurChanged(3, $event)"
+        >
+        </self-service-form-user-workplace>
+      </mat-tab>
+
+      <mat-tab label="ข้อมูลทางการศึกษา">
+        <self-service-form-user-education
+          [countries]="countries$ | async"
+          formControlName="education"
+        ></self-service-form-user-education>
+        <hr />
+        <ksp-form-attachment
+          [title]="'กรุณาแนบหลักฐานประกอบวุฒิทางการศึกษา'"
+          [uniqueTimestamp]="uniqueTimestamp"
+          [groups]="eduFiles"
+        ></ksp-form-attachment>
+      </mat-tab>
+
+      <mat-tab label="ข้อมูลประสบการณ์วิชาชีพ">
+        <self-service-form-user-experience
+          [countries]="countries2$ | async"
+          [licenses]="licenses$ | async"
+          formControlName="experience"
+        ></self-service-form-user-experience>
+        <hr />
+        <ksp-form-attachment
+          [title]="'กรุณาแนบหลักฐานประกอบการฝึกประสบการณ์วิชาชีพ'"
+          [uniqueTimestamp]="uniqueTimestamp"
+          [groups]="experienceFiles"
+        ></ksp-form-attachment>
+      </mat-tab>
+
+      <mat-tab label="ข้อมูลผลการประเมินสมรรถนะ">
+        <self-service-form-user-performance></self-service-form-user-performance>
+        <!-- <hr />
+      <ksp-form-attachment
+        title="กรุณาแนบหลักฐาน"
+        [groups]="service.performanceFiles"
+      ></ksp-form-attachment> -->
+      </mat-tab>
+    </mat-tab-group>
+
+    <div class="fs-6 text-danger mt-2">
+      * กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
+      โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
+    </div>
+
+    <div class="d-flex justify-content-center mt-3 mb-3">
+      <button type="button" class="btn btn-secondary">ล้างข้อมูล</button>
+      <button
+        (click)="save()"
+        type="button"
+        class="ms-3 btn btn-primary"
+        [disabled]="disableNextButton"
+      >
+        ต่อไป
+      </button>
+    </div>
+  </form>
 </div>
