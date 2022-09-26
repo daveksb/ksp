@@ -6,7 +6,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
 import {
   DynamicComponent,
@@ -15,7 +15,8 @@ import {
 } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { debounceTime, skip } from 'rxjs';
+import _ from 'lodash';
+import { debounceTime, lastValueFrom, skip } from 'rxjs';
 import { DegreeCertStepOneService } from './step-one.service';
 
 @UntilDestroy()
@@ -31,8 +32,12 @@ export class DegreeCertStepOneComponent
 {
   courseTypes: ListData[] = [];
   degreeTypes: ListData[] = [];
+  universityTypes: ListData[] = [];
+  provinces: ListData[] = [];
 
   @Input() showEditCheckbox = false;
+  @Input() disabledInputs: Record<string, any> = {};
+
   @Input() showCoordinatorForm = true;
   @Output() degreeType = new EventEmitter<string>();
   @ViewChild(DynamicComponentDirective, { static: true })
@@ -50,8 +55,8 @@ export class DegreeCertStepOneComponent
     locations: this.fb.array([]),
     institutions: this.fb.array([]),
     locations2: this.fb.array([]),
-
     coordinator: [],
+    courseDetailType: [],
   });
 
   step1Incorrect = [
@@ -64,6 +69,7 @@ export class DegreeCertStepOneComponent
     private service: DegreeCertStepOneService
   ) {
     super();
+    this.gatAll();
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
       this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
@@ -72,15 +78,52 @@ export class DegreeCertStepOneComponent
       })
     );
   }
+  override writeValue(value: any) {
+    if (value) {
+      this.value = value;
+      if (value?.locations?.length) {
+        this.loadData(this.locations, value?.locations);
+      }
+      if (value?.institutions?.length) {
+        this.loadData(this.institutions, value?.institutions);
+      }
+      if (value?.locations2?.length) {
+        this.loadData(this.locations2, value?.locations2);
+      }
+    }
+
+    if (value === null) {
+      this.form.reset();
+    }
+  }
+  loadData(form: any, value: any) {
+    _.forEach(value, (value: any, index: any) => {
+      if (form?.controls[index]) {
+        form?.controls[index]?.patchValue(value);
+      } else {
+        this.addFormArray(form);
+        form?.controls[index].patchValue(value);
+      }
+    });
+  }
 
   ngOnInit(): void {
-    this.courseTypes = this.service.courseTypes;
-    this.degreeTypes = this.service.degreeTypes;
-
     this.listenFormChange();
     this.setDefaulFormValue();
   }
-
+  async gatAll() {
+    const [universityTypes, provinces, degreeTypes, courseTypes] =
+      await Promise.all([
+        lastValueFrom(this.service.getUniversityType()),
+        lastValueFrom(this.service.getProvince()),
+        lastValueFrom(this.service.getUniDegreelevel()),
+        lastValueFrom(this.service.getUniCourseType()),
+      ]);
+    this.universityTypes = universityTypes;
+    this.provinces = provinces;
+    this.courseTypes = courseTypes;
+    this.degreeTypes = degreeTypes;
+  }
   setDefaulFormValue() {
     this.addFormArray(this.locations);
     this.addFormArray(this.institutions);
@@ -105,8 +148,8 @@ export class DegreeCertStepOneComponent
     this.degreeType.emit(degreeType);
   }
 
-  addFormArray(form: FormArray<any>) {
-    const data = this.fb.group({ title: [''] });
+  addFormArray(form: FormArray<any>, value = { title: [''] }) {
+    const data = this.fb.group(value);
     form.push(data);
   }
 
@@ -118,7 +161,7 @@ export class DegreeCertStepOneComponent
     const viewContainerRef = this.myHost.viewContainerRef;
     viewContainerRef.clear();
     viewContainerRef.createComponent<DynamicComponent>(
-      this.service.componentList[index]
+      this.service.componentList[--index]
     );
   }
 

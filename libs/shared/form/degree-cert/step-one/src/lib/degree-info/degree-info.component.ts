@@ -26,6 +26,11 @@ export class DegreeInfoComponent
     degreeNameEnFull: [],
     degreeNameThShort: [],
     degreeNameEnShort: [],
+    courseType: [],
+    courseStatus: [],
+    courseApproveTime: [],
+    courseApproveDate: [],
+    courseAcceptDate:[],
   });
 
   @Input()

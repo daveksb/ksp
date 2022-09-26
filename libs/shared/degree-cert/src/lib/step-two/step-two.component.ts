@@ -16,7 +16,7 @@ export class DegreeCertStepTwoComponent extends KspFormBaseComponent {
   @Input() showEditCheckbox = false;
 
   override form = this.fb.group({
-    plan1: [],
+    plan1: [{ plans: [], subjects: [] }],
     plan2: [],
     teacher: [],
     nitet: [],
