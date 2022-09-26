@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { FileService } from '@ksp/shared/form/file-upload';
 import { SelfMyInfo } from '@ksp/shared/interface';
 import {
   AddressService,
@@ -13,7 +12,7 @@ import {
   replaceEmptyWithNull,
   validatorMessages,
 } from '@ksp/shared/utility';
-import { EMPTY, Observable, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
@@ -50,8 +49,7 @@ export class PersonInfoComponent implements OnInit {
     private fb: FormBuilder,
     private myInfoService: MyInfoService,
     private generalInfoService: GeneralInfoService,
-    private addressService: AddressService,
-    private fileService: FileService
+    private addressService: AddressService
   ) {}
 
   ngOnInit(): void {
