@@ -17,7 +17,6 @@ export class CouncilRewardComponent
   implements OnInit
 {
   userInfoType = UserInfoFormType.thai;
-  rewardFiles = ['1. รางวัลอื่นและประกาศเกียรติคุณ'];
 
   @Input()
   set userInfo(value: any) {
@@ -46,6 +45,8 @@ export class CouncilRewardComponent
     }, 0);
   }
   @Input() prefixList: any[] = [];
+  @Input() rewardFiles!: any[];
+  @Input() uniqueTimestamp!: string;
 
   provinces1$!: Observable<any>;
   amphurs1$!: Observable<any>;

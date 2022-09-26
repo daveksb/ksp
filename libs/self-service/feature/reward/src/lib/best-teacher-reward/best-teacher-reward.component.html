@@ -84,7 +84,10 @@
   </mat-tab>
 
   <mat-tab label="ข้อมูลนวัตกรรมและรางวัล">
-    <ksp-best-teacher-innovation formControlName="rewardDetailInfo"></ksp-best-teacher-innovation>
+    <ksp-best-teacher-innovation
+      formControlName="rewardDetailInfo"
+      [rewardFiles]="rewardFiles"
+      [uniqueTimestamp]="uniqueTimestamp"></ksp-best-teacher-innovation>
   </mat-tab>
 </mat-tab-group>
 
