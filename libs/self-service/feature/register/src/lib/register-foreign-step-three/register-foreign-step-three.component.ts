@@ -7,6 +7,9 @@ import { MyInfoService } from '@ksp/shared/service';
 import { switchMap, EMPTY } from 'rxjs';
 import { RegisterCompletedComponent } from '../register-completed/register-completed.component';
 import localForage from 'localforage';
+import { SelfMyInfo } from '@ksp/shared/interface';
+import { v4 as uuidv4 } from 'uuid';
+
 @Component({
   selector: 'self-service-register-foreign-step-three',
   templateUrl: './register-foreign-step-three.component.html',
@@ -47,9 +50,14 @@ export class RegisterForeignStepThreeComponent implements OnInit {
       .pipe(
         switchMap((res) => {
           if (res) {
-            const payload = { ...this.savingData, ...this.form.value };
-            payload.usertype = '2';
+            const payload: SelfMyInfo = {
+              ...this.savingData,
+              ...this.form.value,
+            };
+            payload.usertype = '2'; // ครูต่างชาติ
             payload.isactive = '1';
+            payload.uniquetimestamp = uuidv4();
+
             return this.myInfoService.insertMyInfo(payload);
           }
           return EMPTY;
