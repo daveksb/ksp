@@ -45,6 +45,10 @@ export const routes: Routes = [
         component: LicenseRequestComponent,
       },
       {
+        path: 'teacher/:id',
+        component: LicenseRequestComponent,
+      },
+      {
         path: 'agreement',
         component: LicenseForeignAgreementComponent,
       },

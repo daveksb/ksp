@@ -22,4 +22,13 @@ export class SelfRequestService {
       )
       .pipe(map((data: any) => data.datareturn));
   }
+
+  getRequestById(id: number): Observable<SelfRequest> {
+    return this.http.post<SelfRequest>(
+      `${environment.apiUrl}/kspself/requestselectidall`,
+      {
+        id: `${id}`,
+      }
+    );
+  }
 }

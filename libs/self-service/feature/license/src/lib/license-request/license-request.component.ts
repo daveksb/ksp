@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 import { LicenseRequestService } from './license-request.service';
@@ -86,7 +86,8 @@ export class LicenseRequestComponent
     generalInfoService: GeneralInfoService,
     educationDetailService: EducationDetailService,
     requestService: SelfRequestService,
-    myInfoService: MyInfoService
+    myInfoService: MyInfoService,
+    route: ActivatedRoute
   ) {
     super(
       generalInfoService,
@@ -96,6 +97,7 @@ export class LicenseRequestComponent
       requestService,
       router,
       myInfoService,
+      route,
       dialog
     );
   }
@@ -107,9 +109,9 @@ export class LicenseRequestComponent
         // console.log('res = ', this.form);
       }); */
     this.getListData();
-    this.getMyInfo();
     this.checkButtonsDisableStatus();
     this.initializeFiles();
+    this.checkRequestId();
   }
 
   override initializeFiles() {
