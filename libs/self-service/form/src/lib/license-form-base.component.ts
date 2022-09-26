@@ -12,7 +12,7 @@ import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { Router } from '@angular/router';
-import { genUniqueTimestamp, parseJson, getCookie } from '@ksp/shared/utility';
+import { parseJson } from '@ksp/shared/utility';
 
 @Component({
   template: ``,
@@ -45,13 +45,8 @@ export abstract class LicenseFormBaseComponent {
     public dialog: MatDialog
   ) {}
 
-  genUniqueTimestamp() {
-    const userId = getCookie('userId');
-    return genUniqueTimestamp(userId);
-  }
-
   public initializeFiles() {
-    this.uniqueTimestamp = this.genUniqueTimestamp();
+    //this.uniqueTimestamp = this.genUniqueTimestamp();
   }
 
   public getListData() {

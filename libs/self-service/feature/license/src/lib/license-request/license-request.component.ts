@@ -26,6 +26,7 @@ import {
 } from '@ksp/shared/constant';
 import { LicenseFormBaseComponent } from '@ksp/self-service/form';
 import * as _ from 'lodash';
+import uniqueString from 'unique-string';
 
 const mockPerformances = [
   {
@@ -112,7 +113,7 @@ export class LicenseRequestComponent
   }
 
   override initializeFiles() {
-    this.uniqueTimestamp = this.genUniqueTimestamp();
+    this.uniqueTimestamp = uniqueString();
     this.eduFiles = structuredClone(this.service.educationFiles);
     this.experienceFiles = structuredClone(this.service.experienceFiles);
   }

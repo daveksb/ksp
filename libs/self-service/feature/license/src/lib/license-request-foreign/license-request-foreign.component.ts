@@ -12,8 +12,8 @@ import {
 } from '@ksp/shared/constant';
 import { SelfRequestService } from '@ksp/shared/service';
 import * as _ from 'lodash';
-import { getCookie, genUniqueTimestamp } from '@ksp/shared/utility';
-
+import { getCookie } from '@ksp/shared/utility';
+import uniqueString from 'unique-string';
 @Component({
   selector: 'self-service-license-request-foreign',
   templateUrl: './license-request-foreign.component.html',
@@ -40,8 +40,7 @@ export class LicenseRequestForeignComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const userId = getCookie('userId');
-    this.uniqueTimestamp = genUniqueTimestamp(userId);
+    this.uniqueTimestamp = uniqueString();
   }
 
   cancel() {

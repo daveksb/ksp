@@ -14,7 +14,6 @@ import {
   SelfRequestService,
 } from '@ksp/shared/service';
 import {
-  genUniqueTimestamp,
   getCookie,
   replaceEmptyWithNull,
   toLowercaseProp,
@@ -26,6 +25,7 @@ import {
   SelfServiceRequestType,
 } from '@ksp/shared/constant';
 import * as _ from 'lodash';
+import uniqueString from 'unique-string';
 
 @UntilDestroy()
 @Component({
@@ -82,8 +82,7 @@ export class LicenseEditComponent implements OnInit {
   }
 
   initializeFile() {
-    const userId = getCookie('userId');
-    this.uniqueTimestamp = genUniqueTimestamp(userId);
+    this.uniqueTimestamp = uniqueString();
   }
 
   getListData() {
