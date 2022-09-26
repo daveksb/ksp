@@ -11,7 +11,7 @@
   ></ksp-request-search>
   <br />
   <div class="bg-white p-3">
-    <div class="box-header">รายชื่อผู้เข้าใช้งานระบบ school service</div>
+    <div class="box-header">รายการใบคำขอ</div>
 
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="id">
@@ -30,9 +30,9 @@
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="licenseType">
+      <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>ใบคำขอ</th>
-        <td mat-cell *matCellDef="let element">{{ element.licenseType }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

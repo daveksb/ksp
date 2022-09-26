@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RequestLicenseApproveListComponent } from './request-license-approve-list/request-license-approve-list.component';
 import { Route, RouterModule } from '@angular/router';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import {
@@ -11,11 +13,10 @@ import {
 } from '@ksp/self-service/form';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
-import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
-import { RenewLicenseListComponent } from './renew-license-list/renew-license-list.component';
 import { EServiceRequestSearchComponent } from '@ksp/shared/search';
-import { MatTableModule } from '@angular/material/table';
-import { RenewLicenseDetailComponent } from './renew-license-detail/renew-license-detail.component';
+import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import { RequestLicenseApproveDetailComponent } from './request-license-approve-detail/request-license-approve-detail.component';
+import { LicenseRequestSchoolManagerComponent, SelfServiceFeatureLicenseModule } from '@ksp/self-service/feature/license';
 
 export const routes: Route[] = [
   {
@@ -29,11 +30,11 @@ export const routes: Route[] = [
       },
       {
         path: 'approve-list',
-        component: RenewLicenseListComponent,
+        component: RequestLicenseApproveListComponent,
       },
       {
         path: 'approve-detail',
-        component: RenewLicenseDetailComponent,
+        component: RequestLicenseApproveDetailComponent,
       },
     ],
   },
@@ -41,8 +42,8 @@ export const routes: Route[] = [
 
 @NgModule({
   imports: [
-    CommonModule,
     RouterModule.forChild(routes),
+    CommonModule,
     TopNavComponent,
     SelfServiceFormModule,
     SharedFormOthersModule,
@@ -55,7 +56,13 @@ export const routes: Route[] = [
     EServiceRequestSearchComponent,
     MatTableModule,
   ],
-  declarations: [RenewLicenseDetailComponent, RenewLicenseListComponent],
-  exports: [RenewLicenseDetailComponent, RenewLicenseListComponent],
+  declarations: [
+    RequestLicenseApproveListComponent,
+    RequestLicenseApproveDetailComponent,
+  ],
+  exports: [
+    RequestLicenseApproveListComponent,
+    RequestLicenseApproveDetailComponent,
+  ],
 })
-export class EServiceELicenseRenewLicenseModule {}
+export class EServiceELicenseRequestLicenseModule {}
