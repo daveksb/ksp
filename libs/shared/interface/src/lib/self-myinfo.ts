@@ -11,6 +11,7 @@ export class SelfMyInfo {
   experienceinfo: string | null = null;
   firstnameen: string | null = null;
   firstnameth: string | null = null;
+  filedata: string | null = null;
   id: string | null = null;
   idcardbackno: string | null = null;
   idcardimage: string | null = null;
@@ -30,6 +31,7 @@ export class SelfMyInfo {
   passportstartdate: string | null = null;
   password: string | null = null;
   paymenthistory: string | null = null;
+  personimage: string | null = null;
   phone: string | null = null;
   prefixen: string | null = null;
   prefixth: string | null = null;

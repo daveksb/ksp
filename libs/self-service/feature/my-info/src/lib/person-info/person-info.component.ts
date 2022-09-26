@@ -39,7 +39,7 @@ export class PersonInfoComponent implements OnInit {
     idcardno: [''],
     province: [''],
     email: ['', [Validators.required, Validators.email]],
-    idcardimage: [''],
+    personimage: [''],
   });
   baseForm = this.fb.group(new SelfMyInfo());
   provinces$!: Observable<any>;
@@ -58,26 +58,14 @@ export class PersonInfoComponent implements OnInit {
     this.uniqueTimestamp = uuidv4();
     this.provinces$ = this.addressService.getProvinces();
     this.nationalitys$ = this.generalInfoService.getNationality();
-    this.myInfoService
-      .getMyInfo()
-      .pipe(
-        switchMap((res: any) => {
-          res = this.myInfoService.formatMyInfo(res);
-          const id = res.idcardimage;
-          this.baseForm.patchValue(res);
-          this.form.patchValue(res);
-          //console.log('image id = ', id);
-          if (id) {
-            return this.fileService.downloadFile({ id });
-          } else {
-            return EMPTY;
-          }
-        })
-      )
-      .subscribe((res: any) => {
+    this.myInfoService.getMyInfo().subscribe((res) => {
+      res = this.myInfoService.formatMyInfo(res);
+      this.baseForm.patchValue(res);
+      this.form.patchValue(res);
+      if (res && res.filedata) {
         this.imgSrc = atob(res.filedata);
-      });
-
+      }
+    });
     //this.form.disable();
   }
 
@@ -120,7 +108,7 @@ export class PersonInfoComponent implements OnInit {
     }
   }
 
-  uploadImageComplete(idcardimage: string) {
-    this.form.patchValue({ idcardimage });
+  uploadImageComplete(personimage: string) {
+    this.form.patchValue({ personimage });
   }
 }
