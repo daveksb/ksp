@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
-import uniqueString from 'unique-string';
 import _ from 'lodash';
 import {
   CompleteDialogComponent,
@@ -54,7 +53,7 @@ export class DegreeCertStepFourComponent extends KspFormBaseComponent {
   genUnique(arr: any) {
     return arr.map((data: any) => ({
       ...data,
-      uniqueTimestamp: uniqueString(),
+      uniqueTimestamp: '',
     }));
   }
   openDialog() {
