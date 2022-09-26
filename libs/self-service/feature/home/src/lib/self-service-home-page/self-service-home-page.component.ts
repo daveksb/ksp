@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { SelfServiceRequestSubType } from '@ksp/shared/constant';
 import { SelfRequest } from '@ksp/shared/interface';
 import { SelfRequestService } from '@ksp/shared/service';
+import { getCookie } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-self-service-home-page',
@@ -27,7 +28,7 @@ export class SelfServiceHomePageComponent {
 
   search() {
     const payload = {
-      staffid: '4',
+      staffid: getCookie('userId'),
       systemtype: '1',
       requesttype: null,
     };

@@ -13,7 +13,11 @@ import {
   SelfRequestService,
 } from '@ksp/shared/service';
 import { SelfRequest } from '@ksp/shared/interface';
-import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
+import {
+  getCookie,
+  replaceEmptyWithNull,
+  toLowercaseProp,
+} from '@ksp/shared/utility';
 import {
   UserInfoFormType,
   SelfServiceRequestType,
@@ -22,6 +26,7 @@ import {
 } from '@ksp/shared/constant';
 import { LicenseFormBaseComponent } from '@ksp/self-service/form';
 import * as _ from 'lodash';
+import uniqueString from 'unique-string';
 
 const mockPerformances = [
   {
@@ -108,7 +113,7 @@ export class LicenseRequestComponent
   }
 
   override initializeFiles() {
-    this.uniqueTimestamp = this.genUniqueTimestamp();
+    this.uniqueTimestamp = uniqueString();
     this.eduFiles = structuredClone(this.service.educationFiles);
     this.experienceFiles = structuredClone(this.service.experienceFiles);
   }
@@ -182,6 +187,8 @@ export class LicenseRequestComponent
     const userInfo = toLowercaseProp(rawUserInfo);
     userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
     userInfo.uniquetimestamp = this.uniqueTimestamp;
+    userInfo.staffid = getCookie('userId');
+
     const selectData = _.pick(userInfo, allowKey);
 
     const { educationType, educationLevelForm } = formData?.education || {

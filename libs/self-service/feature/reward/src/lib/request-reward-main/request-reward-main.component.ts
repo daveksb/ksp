@@ -14,10 +14,7 @@ import { parseJson } from '@ksp/shared/utility';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { Router } from '@angular/router';
-import {
-  SelfServiceRequestSubType,
-  SelfServiceRequestType,
-} from '@ksp/shared/constant';
+import { SelfServiceRequestSubType } from '@ksp/shared/constant';
 
 @Component({
   selector: 'ksp-request-reward-main',
@@ -50,13 +47,6 @@ export class RequestRewardMainComponent implements OnInit {
   bureau$!: Observable<any>;
 
   constructor(
-    //private route: ActivatedRoute,
-    /*     router: Router,
-    dialog: MatDialog,
-    addressService: AddressService,
-    generalInfoService: GeneralInfoService,
-    educationDetailService: EducationDetailService,
-     */
     private requestService: SelfRequestService,
     private fb: FormBuilder,
     private myInfoService: MyInfoService,
@@ -145,7 +135,7 @@ export class RequestRewardMainComponent implements OnInit {
     );
     const allowKey = Object.keys(self);
     const form: any = this.form.value.rewardDetail;
-    console.log(form);
+    //console.log(form);
     const selectData = _.pick(form.userInfo, allowKey);
     const filledData = {
       ...self,

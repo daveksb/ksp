@@ -14,7 +14,6 @@ import {
   SelfRequestService,
 } from '@ksp/shared/service';
 import {
-  genUniqueTimestamp,
   getCookie,
   replaceEmptyWithNull,
   toLowercaseProp,
@@ -26,6 +25,7 @@ import {
   SelfServiceRequestType,
 } from '@ksp/shared/constant';
 import * as _ from 'lodash';
+import uniqueString from 'unique-string';
 
 @UntilDestroy()
 @Component({
@@ -73,17 +73,16 @@ export class LicenseEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.form.disable();
-    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      //
-    });
+    /* this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
+
+    }); */
     this.getListData();
     this.getMyInfo();
     this.initializeFile();
   }
 
   initializeFile() {
-    const userId = getCookie('userId');
-    this.uniqueTimestamp = genUniqueTimestamp(userId);
+    this.uniqueTimestamp = uniqueString();
   }
 
   getListData() {
@@ -118,6 +117,8 @@ export class LicenseEditComponent implements OnInit {
     const allowKey = Object.keys(self);
     userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
     userInfo.uniquetimestamp = this.uniqueTimestamp;
+    userInfo.staffid = getCookie('userId');
+
     const attachfiles = this.mapFileInfo(this.uploadFileList);
 
     const initialPayload = {
