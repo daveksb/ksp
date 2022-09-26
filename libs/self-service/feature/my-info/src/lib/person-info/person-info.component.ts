@@ -50,8 +50,7 @@ export class PersonInfoComponent implements OnInit {
     private fb: FormBuilder,
     private myInfoService: MyInfoService,
     private generalInfoService: GeneralInfoService,
-    private addressService: AddressService,
-    private fileService: FileService
+    private addressService: AddressService
   ) {}
 
   ngOnInit(): void {
