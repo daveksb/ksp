@@ -15,16 +15,19 @@
         </select>
       </div>
     </div>
+
     <div *ngIf="rewardType.value">
+      <br />
       <self-service-request-status></self-service-request-status>
     </div>
-
+    <br />
     <div *ngIf="rewardType.value === '40'">
       <ksp-council-reward
         formControlName="rewardDetail"
         [userInfo]="myInfo"
         [addressInfo]="addressInfo"
-        [prefixList]="prefixList$ | async"></ksp-council-reward>
+        [prefixList]="prefixList$ | async"
+      ></ksp-council-reward>
     </div>
 
     <div *ngIf="rewardType.value === '41'">
@@ -34,7 +37,8 @@
         [workplaceInfo]="workplaceInfo"
         [prefixList]="prefixList$ | async"
         [bureaus]="bureau$ | async"
-        formControlName="rewardDetail"></ksp-thai-teacher-reward>
+        formControlName="rewardDetail"
+      ></ksp-thai-teacher-reward>
     </div>
 
     <div *ngIf="rewardType.value === '42'">
@@ -44,7 +48,8 @@
         [addressInfo]="addressInfo"
         [workplaceInfo]="workplaceInfo"
         [bureaus]="bureau$ | async"
-        [prefixList]="prefixList$ | async"></ksp-best-teacher-reward>
+        [prefixList]="prefixList$ | async"
+      ></ksp-best-teacher-reward>
     </div>
 
     <div *ngIf="rewardType.value === '43'">
@@ -54,7 +59,8 @@
         [workplaceInfo]="workplaceInfo"
         [prefixList]="prefixList$ | async"
         [bureaus]="bureau$ | async"
-        formControlName="rewardDetail"></ksp-praise-teacher-reward>
+        formControlName="rewardDetail"
+      ></ksp-praise-teacher-reward>
     </div>
 
     <div *ngIf="rewardType.value === '44'">
@@ -64,7 +70,8 @@
         [workplaceInfo]="workplaceInfo"
         [prefixList]="prefixList$ | async"
         [bureaus]="bureau$ | async"
-        formControlName="rewardDetail"></ksp-senior-teacher-reward>
+        formControlName="rewardDetail"
+      ></ksp-senior-teacher-reward>
     </div>
     <div *ngIf="rewardType.value === '45'">
       <ksp-research-reward
@@ -72,7 +79,8 @@
         [workplaceInfo]="workplaceInfo"
         [prefixList]="prefixList$ | async"
         [bureaus]="bureau$ | async"
-        formControlName="rewardDetail"></ksp-research-reward>
+        formControlName="rewardDetail"
+      ></ksp-research-reward>
     </div>
 
     <div *ngIf="rewardType.value">
@@ -80,13 +88,11 @@
         <button
           (click)="tempSave()"
           type="button"
-          class="btn border-primary text-primary bg-white">
+          class="btn border-primary text-primary bg-white"
+        >
           บันทึกชั่วคราว
         </button>
-        <button
-          (click)="save()"
-          type="button"
-          class="ms-3 btn btn-primary">
+        <button (click)="save()" type="button" class="ms-3 btn btn-primary">
           บันทึกและยื่น
         </button>
       </div>

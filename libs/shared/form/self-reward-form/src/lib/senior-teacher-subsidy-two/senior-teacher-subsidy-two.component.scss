@@ -1,9 +1,9 @@
-.xxx {
+.box__full {
   width: max-content;
 }
 
 @media only screen and (min-width: 768px) {
-  .xxx {
+  .box__full {
     width: auto;
   }
 }
