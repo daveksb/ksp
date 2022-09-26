@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import {
   UserInfoFormType,
   SelfServiceRequestSubType,
+  SelfServiceRequestType,
+  SelfServiceRequestForType,
 } from '@ksp/shared/constant';
 import { LicenseFormBaseComponent } from '@ksp/self-service/form';
 import { FormBuilder } from '@angular/forms';
@@ -15,8 +17,9 @@ import {
   SelfRequestService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { SchoolRequest } from '@ksp/shared/interface';
+import { SelfRequest } from '@ksp/shared/interface';
 import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
+import * as _ from 'lodash';
 
 @UntilDestroy()
 @Component({
@@ -31,9 +34,9 @@ export class LicenseRequestEducationManagerComponent
   userInfoType = UserInfoFormType.thai;
 
   experienceFiles = [
-    { name: '1. สำเนาวุฒิทางการศึกษา', fileId: '' },
-    { name: '2. หนังสือรับรองคุณวุฒิ	', fileId: '' },
-    { name: '3. วุฒิบัตรอบรม', fileId: '' },
+    { name: '1. สำเนาวุฒิทางการศึกษา', fileId: '', fileName: '' },
+    { name: '2. หนังสือรับรองคุณวุฒิ	', fileId: '', fileName: '' },
+    { name: '3. วุฒิบัตรอบรม', fileId: '', fileName: '' },
   ];
 
   educationeFiles = [
@@ -81,6 +84,7 @@ export class LicenseRequestEducationManagerComponent
     this.getListData();
     this.getMyInfo();
     this.checkButtonsDisableStatus();
+    this.initializeFiles();
   }
 
   patchUserInfoForm(data: any): void {
@@ -103,26 +107,34 @@ export class LicenseRequestEducationManagerComponent
     this.form.controls.address2.patchValue(this.form.controls.address1.value);
   }
 
-  createRequest(forbidden: any, currentProcess: string) {
-    const baseForm = this.fb.group(SchoolRequest);
+  createRequest(forbidden: any, currentProcess: number) {
+    const self = new SelfRequest(
+      '1',
+      SelfServiceRequestType.ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ,
+      `${SelfServiceRequestSubType.ผู้บริหารการศึกษา}`,
+      currentProcess
+    );
+    const allowKey = Object.keys(self);
     const formData: any = this.form.getRawValue();
     if (formData?.address1?.addressType) formData.address1.addresstype = 1;
     if (formData?.address2?.addressType) formData.address2.addresstype = 2;
 
     const { id, ...rawUserInfo } = formData.userInfo;
     const userInfo = toLowercaseProp(rawUserInfo);
+    userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
+    userInfo.uniquetimestamp = this.uniqueTimestamp;
+    const selectData = _.pick(userInfo, allowKey);
 
-    userInfo.ref1 = '1';
-    userInfo.ref2 = '01';
-    userInfo.ref3 = `${SelfServiceRequestSubType.ผู้บริหารการศึกษา}`;
-    userInfo.systemtype = '1';
-    userInfo.requesttype = '1';
-    userInfo.subtype = '5';
+    const { educationType, educationLevelForm } = formData.education || {
+      educationType: null,
+      educationLevelForm: null,
+    };
 
-    const { educationType, educationLevelForm } = formData.education;
+    const experiencefiles = this.mapFileInfo(this.experienceFiles);
 
     const payload = {
-      ...replaceEmptyWithNull(userInfo),
+      ...self,
+      ...replaceEmptyWithNull(selectData),
       ...{
         addressinfo: JSON.stringify([formData.address1, formData.address2]),
       },
@@ -138,12 +150,10 @@ export class LicenseRequestEducationManagerComponent
         experienceinfo: JSON.stringify(formData.experience),
       },
       ...{ prohibitproperty: JSON.stringify(forbidden) },
+      ...{ fileinfo: JSON.stringify({ experiencefiles }) },
     };
-    payload.currentprocess = currentProcess;
-    payload.requeststatus = '1';
     console.log(payload);
-    baseForm.patchValue(payload);
-    return baseForm.value;
+    return payload;
   }
 
   checkButtonsDisableStatus() {

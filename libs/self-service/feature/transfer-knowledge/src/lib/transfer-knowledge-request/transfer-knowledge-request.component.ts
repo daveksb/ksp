@@ -3,6 +3,7 @@ import {
   UserInfoFormType,
   SelfServiceRequestSubType,
   SelfServiceRequestType,
+  SelfServiceRequestForType,
 } from '@ksp/shared/constant';
 import { LicenseFormBaseComponent } from '@ksp/self-service/form';
 import { FormBuilder } from '@angular/forms';
@@ -33,8 +34,14 @@ export class TransferKnowledgeRequestComponent
   userInfoType = UserInfoFormType.thai;
   headerGroup = ['วันที่ทำรายการ', 'เลขใบคำขอ'];
   objectiveFiles = [
-    'สำเนาคำอธิบายรายวิชาที่ขอเทียบโอนความรู้ฯตามหลักสูตรที่สำเร็จการศึกษษที่มีตราประทับของทางสถาบันที่สำเร็จการศึกษาและมีเจ้าหน้าที่ของสถาบันลงนามรับรองสำเนาถูกต้อง',
+    {
+      name: 'สำเนาคำอธิบายรายวิชาที่ขอเทียบโอนความรู้ฯตามหลักสูตรที่สำเร็จการศึกษษที่มีตราประทับของทางสถาบันที่สำเร็จการศึกษาและมีเจ้าหน้าที่ของสถาบันลงนามรับรองสำเนาถูกต้อง',
+      fileId: '',
+      fileName: '',
+    },
   ];
+  eduFiles: any[] = [];
+  transferFiles: any[] = [];
 
   override form = this.fb.group({
     userInfo: [],
@@ -73,6 +80,13 @@ export class TransferKnowledgeRequestComponent
     this.getListData();
     this.getMyInfo();
     // this.checkButtonsDisableStatus();
+    this.initializeFiles();
+  }
+
+  override initializeFiles(): void {
+    super.initializeFiles();
+    this.eduFiles = structuredClone(this.objectiveFiles);
+    this.transferFiles = structuredClone(this.objectiveFiles);
   }
 
   override getListData(): void {
@@ -100,20 +114,26 @@ export class TransferKnowledgeRequestComponent
     this.form.controls.address2.patchValue(this.form.controls.address1.value);
   }
 
-  createRequest(currentProcess: string) {
+  createRequest(currentProcess: number) {
     const formData: any = this.form.getRawValue();
     if (formData?.address1?.addressType) formData.address1.addresstype = 1;
     if (formData?.address2?.addressType) formData.address2.addresstype = 2;
 
     const { id, ...rawUserInfo } = formData.userInfo;
     const userInfo = toLowercaseProp(rawUserInfo);
+    userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
+    userInfo.uniquetimestamp = this.uniqueTimestamp;
 
     const self = new SelfRequest(
       '1',
       SelfServiceRequestType.ขอหนังสือรับรองความรู้,
-      `${SelfServiceRequestSubType.ครู}`
+      `${SelfServiceRequestSubType.อื่นๆ}`,
+      currentProcess
     );
     const allowKey = Object.keys(self);
+
+    const edufiles = this.mapFileInfo(this.eduFiles);
+    const transferknowledgeinfofiles = this.mapFileInfo(this.transferFiles);
 
     const initialPayload = {
       ...replaceEmptyWithNull(userInfo),
@@ -129,9 +149,8 @@ export class TransferKnowledgeRequestComponent
       ...{
         transferknowledgeinfo: JSON.stringify(formData.transferKnowledgeInfo),
       },
+      ...{ fileinfo: JSON.stringify({ edufiles, transferknowledgeinfofiles }) },
     };
-    initialPayload.currentprocess = currentProcess;
-    initialPayload.requeststatus = '1';
     console.log(initialPayload);
     const payload = _.pick({ ...self, ...initialPayload }, allowKey);
     console.log(payload);
@@ -152,7 +171,7 @@ export class TransferKnowledgeRequestComponent
 
     completeDialog.componentInstance.saved.subscribe((res) => {
       if (res) {
-        const payload = this.createRequest('0');
+        const payload = this.createRequest(1);
         this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
@@ -164,7 +183,7 @@ export class TransferKnowledgeRequestComponent
 
     completeDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        const payload = this.createRequest('1');
+        const payload = this.createRequest(2);
         this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res?.returncode === '00') {

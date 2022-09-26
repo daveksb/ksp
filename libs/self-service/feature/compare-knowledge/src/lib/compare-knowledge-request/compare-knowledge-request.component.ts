@@ -9,6 +9,7 @@ import {
   UserInfoFormType,
   SelfServiceRequestSubType,
   SelfServiceRequestType,
+  SelfServiceRequestForType,
 } from '@ksp/shared/constant';
 import { LicenseFormBaseComponent } from '@ksp/self-service/form';
 import { FormBuilder } from '@angular/forms';
@@ -33,8 +34,12 @@ export class CompareKnowledgeRequestComponent
   implements OnInit
 {
   objectiveFiles = [
-    { name: '1. สำเนาหลักฐานแสดงวุฒิการศึกษา', fileId: '' },
-    { name: '2. รูปภาพถ่ายหน้าตรง ขนาด 1.5 x 2   นิ้ว', fileId: '' },
+    { name: '1. สำเนาหลักฐานแสดงวุฒิการศึกษา', fileId: '', fileName: '' },
+    {
+      name: '2. รูปภาพถ่ายหน้าตรง ขนาด 1.5 x 2   นิ้ว',
+      fileId: '',
+      fileName: '',
+    },
   ];
   userInfoType = UserInfoFormType.thai;
 
@@ -73,6 +78,7 @@ export class CompareKnowledgeRequestComponent
     this.getListData();
     this.getMyInfo();
     // this.checkButtonsDisableStatus();
+    this.initializeFiles();
   }
 
   patchUserInfoForm(data: any): void {
@@ -102,13 +108,18 @@ export class CompareKnowledgeRequestComponent
 
     const { id, ...rawUserInfo } = formData.userInfo;
     const userInfo = toLowercaseProp(rawUserInfo);
+    userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
+    userInfo.uniquetimestamp = this.uniqueTimestamp;
 
     const self = new SelfRequest(
       '1',
       SelfServiceRequestType.ขอยื่นเทียบเคียงความรู้,
-      `${SelfServiceRequestSubType.ครู}`
+      `${SelfServiceRequestSubType.อื่นๆ}`,
+      currentProcess
     );
     const allowKey = Object.keys(self);
+
+    const attachfiles = this.mapFileInfo(this.objectiveFiles);
 
     const initialPayload = {
       ...replaceEmptyWithNull(userInfo),
@@ -124,9 +135,8 @@ export class CompareKnowledgeRequestComponent
       ...{
         testresultcompareinfo: JSON.stringify(formData.testResultCompareInfo),
       },
+      ...{ fileinfo: JSON.stringify({ attachfiles }) },
     };
-    initialPayload.currentprocess = `${currentProcess}`;
-    initialPayload.requeststatus = '1';
     console.log(initialPayload);
     const payload = _.pick({ ...self, ...initialPayload }, allowKey);
     console.log(payload);

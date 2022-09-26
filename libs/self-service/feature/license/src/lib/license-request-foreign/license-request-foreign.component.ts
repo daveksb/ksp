@@ -3,17 +3,23 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { FormBuilder } from '@angular/forms';
-import { SchoolRequest } from '@ksp/shared/interface';
+import { SelfRequest } from '@ksp/shared/interface';
 import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
-import { SelfServiceRequestSubType } from '@ksp/shared/constant';
+import {
+  SelfServiceRequestForType,
+  SelfServiceRequestSubType,
+  SelfServiceRequestType,
+} from '@ksp/shared/constant';
 import { SelfRequestService } from '@ksp/shared/service';
+import * as _ from 'lodash';
+import { getCookie, genUniqueTimestamp } from '@ksp/shared/utility';
 
 @Component({
   selector: 'self-service-license-request-foreign',
   templateUrl: './license-request-foreign.component.html',
   styleUrls: ['./license-request-foreign.component.scss'],
 })
-export class LicenseRequestForeignComponent {
+export class LicenseRequestForeignComponent implements OnInit {
   headerGroup = ['Issue Date', 'Form ID'];
   title = 'TEACHING LICENSE APPLICATION FORM';
 
@@ -21,6 +27,9 @@ export class LicenseRequestForeignComponent {
     personalDetail: [],
     personalDeclaration: [],
   });
+
+  attachFiles: any[] = [];
+  uniqueTimestamp!: string;
 
   constructor(
     private router: Router,
@@ -30,12 +39,18 @@ export class LicenseRequestForeignComponent {
     private route: ActivatedRoute
   ) {}
 
+  ngOnInit(): void {
+    const userId = getCookie('userId');
+    this.uniqueTimestamp = genUniqueTimestamp(userId);
+  }
+
   cancel() {
     this.router.navigate(['/home']);
   }
 
   save() {
     console.log(this.form.getRawValue());
+    console.log(this.attachFiles);
     const completeDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -47,7 +62,7 @@ export class LicenseRequestForeignComponent {
 
     completeDialog.componentInstance.saved.subscribe((res) => {
       if (res) {
-        const payload = this.createRequest('0');
+        const payload = this.createRequest(1);
         this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res.returncode === '00') {
@@ -59,7 +74,7 @@ export class LicenseRequestForeignComponent {
 
     completeDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        const payload = this.createRequest('1');
+        const payload = this.createRequest(2);
         this.requestService.createRequest(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res.returncode === '00') {
@@ -70,8 +85,17 @@ export class LicenseRequestForeignComponent {
     });
   }
 
-  createRequest(currentProcess: string) {
-    const baseForm = this.fb.group(SchoolRequest);
+  createRequest(currentProcess: number) {
+    const type =
+      this.route.snapshot.queryParamMap.get('type') ||
+      SelfServiceRequestSubType.ครู;
+    const self = new SelfRequest(
+      '1',
+      SelfServiceRequestType.ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ,
+      `${type}`,
+      currentProcess
+    );
+    const allowKey = Object.keys(self);
     const formData: any = this.form.getRawValue();
     const {
       addressForm,
@@ -83,21 +107,16 @@ export class LicenseRequestForeignComponent {
 
     const { id, ...rawUserInfo } = userInfoForm;
     const userInfo = toLowercaseProp(rawUserInfo);
-    const type =
-      this.route.snapshot.queryParamMap.get('type') ||
-      SelfServiceRequestSubType.ครู;
-
-    userInfo.ref1 = '1';
-    userInfo.ref2 = '01';
-    userInfo.ref3 = `${type}`;
-    userInfo.systemtype = '1';
-    userInfo.requesttype = '1';
-    userInfo.subtype = '5';
+    userInfo.requestfor = `${SelfServiceRequestForType.ชาวต่างชาติ}`;
+    userInfo.uniquetimestamp = this.uniqueTimestamp;
+    const selectData = _.pick(userInfo, allowKey);
 
     const { addressName, addressForm: resWorkplaceForm } = workplaceForm;
+    const documentfiles = this.mapFileInfo(this.attachFiles);
 
     const payload = {
-      ...replaceEmptyWithNull(userInfo),
+      ...self,
+      ...replaceEmptyWithNull(selectData),
       ...{
         addressinfo: JSON.stringify([addressForm]),
       },
@@ -114,11 +133,24 @@ export class LicenseRequestForeignComponent {
       ...{
         checkProhibitProperty: JSON.stringify(formData.personalDeclaration),
       },
+      ...{ fileinfo: JSON.stringify({ documentfiles }) },
     };
-    payload.currentprocess = currentProcess;
-    payload.requeststatus = '1';
     console.log(payload);
-    baseForm.patchValue(payload);
-    return baseForm.value;
+    return payload;
+  }
+
+  onFileUpdate(files: any[]) {
+    this.attachFiles = files;
+  }
+
+  mapFileInfo(fileList: any[]) {
+    return fileList.map((file: any) => {
+      const object = {
+        fileid: file.fileId || null,
+        filename: file.fileName || null,
+        name: file.name || null,
+      };
+      return object;
+    });
   }
 }
