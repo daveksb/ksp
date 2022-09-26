@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormMode } from '@ksp/shared/interface';
 import { FilesPreviewComponent } from '@ksp/shared/dialog';
 import { RequestPageType } from '@ksp/shared/constant';
-import { FileUploadService } from '@ksp/shared/form/file-upload';
+import { FileService } from '@ksp/shared/form/file-upload';
 
 @Component({
   selector: 'ksp-form-attachment',
@@ -21,10 +21,7 @@ export class FormAttachmentComponent {
   @Input() requestType: number | null = null;
   @Output() downloadClick = new EventEmitter<any>();
 
-  constructor(
-    public dialog: MatDialog,
-    private fileUploadService: FileUploadService
-  ) {}
+  constructor(public dialog: MatDialog, private fileService: FileService) {}
 
   view() {
     const dialogRef = this.dialog.open(FilesPreviewComponent, {
@@ -44,7 +41,7 @@ export class FormAttachmentComponent {
       uniquetmestamp: this.uniqueTimestamp,
     };
 
-    this.fileUploadService.deleteFile(payload).subscribe((res: any) => {
+    this.fileService.deleteFile(payload).subscribe((res: any) => {
       if (res?.returnmessage == 'success') {
         group.fileId = '';
         group.fileName = '';
@@ -53,7 +50,7 @@ export class FormAttachmentComponent {
   }
   downloadFile(group: any) {
     const id = group.fileId;
-    this.fileUploadService.downloadFile({ id }).subscribe((res: any) => {
+    this.fileService.downloadFile({ id }).subscribe((res: any) => {
       const a = document.createElement('a');
       a.style.display = 'none';
       a.href = atob(res.file);

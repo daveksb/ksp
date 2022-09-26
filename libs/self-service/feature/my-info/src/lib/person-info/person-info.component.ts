@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { FileUploadService } from '@ksp/shared/form/file-upload';
+import { FileService } from '@ksp/shared/form/file-upload';
 import { SelfMyInfo } from '@ksp/shared/interface';
 import {
   AddressService,
@@ -51,7 +51,7 @@ export class PersonInfoComponent implements OnInit {
     private myInfoService: MyInfoService,
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
-    private fileService: FileUploadService
+    private fileService: FileService
   ) {}
 
   ngOnInit(): void {
@@ -119,6 +119,7 @@ export class PersonInfoComponent implements OnInit {
       this.form.disable();
     }
   }
+
   uploadImageComplete(idcardimage: string) {
     this.form.patchValue({ idcardimage });
   }
