@@ -167,27 +167,27 @@
 
               <div class="row">
                 <div class="col-md mb-2">
-                  <label class="form-label">ที่อยู่ปัจจุบัน</label>
-                  <textarea
-                    class="form-control"
-                    rows="3"
+                  <ksp-form-address
+                    [isDarkMode]="true"
                     formControlName="address"
-                  ></textarea>
+                    ><span class="form-label required"
+                      >ที่อยู่ปัจจุบัน</span
+                    ></ksp-form-address
+                  >
                 </div>
               </div>
-
-              <div class="d-flex align-items-center flex-column mt-3">
+              <div class="d-grid gap-2 col-6 mx-auto mt-3">
                 <button
                   (click)="nextPage()"
                   type="submit"
-                  class="btn btn-primary mb-2"
+                  class="btn btn-primary w-auto"
                 >
                   ไปต่อ
                 </button>
                 <div
                   role="button"
                   (click)="loginPage()"
-                  class="form-label text-decoration-underline"
+                  class="form-label text-decoration-underline text-center"
                 >
                   เข้าสู่ระบบ
                 </div>
