@@ -139,7 +139,7 @@ const routes: EthicsCustomRoute[] = [
       ),
     canActivate: [AuthGuard],
   },
-  {
+  /*   {
     path: 'approve-new-user',
     data: {
       menuConfig: licenseMenu,
@@ -152,9 +152,9 @@ const routes: EthicsCustomRoute[] = [
         (m) => m.EServiceELicenseApproveNewUserModule
       ),
     canActivate: [AuthGuard],
-  },
+  }, */
   {
-    path: 'manage-current-user',
+    path: 'school',
     data: {
       menuConfig: licenseMenu,
       headerLabel: 'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา',
