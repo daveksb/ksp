@@ -1,21 +1,21 @@
 <form [formGroup]="form">
-  <div class="row mb-2">
-    <div class="col-6">
+  <div class="row">
+    <div class="col-md-6 mb-2">
       <label class="form-label">Address No. / home / room / condo</label>
       <input class="form-control" type="text" formControlName="houseNo" />
     </div>
-    <div class="col">
+    <div class="col-md mb-2">
       <label class="form-label">Soi</label>
       <input class="form-control" type="text" formControlName="alley" />
     </div>
-    <div class="col">
+    <div class="col-md mb-2">
       <label class="form-label">Road</label>
       <input class="form-control" type="text" formControlName="road" />
     </div>
   </div>
 
-  <div class="row mb-2">
-    <div class="col">
+  <div class="row">
+    <div class="col-md mb-2">
       <label class="form-label">sub-district</label>
       <select class="form-select" (change)="updatePostcode($event)" formControlName="tumbol">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
@@ -24,7 +24,7 @@
         </option>
       </select>
     </div>
-    <div class="col">
+    <div class="col-md mb-2">
       <label class="form-label">district</label>
       <select class="form-select" (change)="districtChanged.emit($event)" formControlName="amphur">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
@@ -33,7 +33,7 @@
         </option>
       </select>
     </div>
-    <div class="col-6">
+    <div class="col-md-6 mb-2">
       <label class="form-label">Province</label>
       <select class="form-select" (change)="provinceChanged.emit($event)" formControlName="province">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
@@ -46,16 +46,16 @@
     </div>
   </div>
 
-  <div class="row mb-2">
-    <div class="col">
+  <div class="row">
+    <div class="col-md mb-2">
       <label class="form-label">zip code</label>
       <input class="form-control" type="text" formControlName="postcode" />
     </div>
-    <div class="col">
+    <div class="col-md mb-2">
       <label class="form-label">Cell Phone</label>
       <input class="form-control" type="text" formControlName="phone" />
     </div>
-    <div class="col-6">
+    <div class="col-md-6 mb-2">
       <label class="form-label">E-mail</label>
       <input class="form-control" type="text" formControlName="email" />
     </div>

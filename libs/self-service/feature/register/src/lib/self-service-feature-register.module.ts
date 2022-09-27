@@ -14,6 +14,7 @@ import { RegisterForeignComponent } from './register-foreign/register-foreign.co
 import { RegisterForeignStepOneComponent } from './register-foreign-step-one/register-foreign-step-one.component';
 import { RegisterForeignStepThreeComponent } from './register-foreign-step-three/register-foreign-step-three.component';
 import { RegisterForeignStepTwoComponent } from './register-foreign-step-two/register-foreign-step-two.component';
+import { SharedFormOthersModule } from '@ksp/shared/form/others';
 
 export const routes: Routes = [
   {
@@ -60,6 +61,7 @@ export const routes: Routes = [
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     MatIconModule,
+    SharedFormOthersModule,
   ],
   declarations: [
     RegisterStepOneComponent,
