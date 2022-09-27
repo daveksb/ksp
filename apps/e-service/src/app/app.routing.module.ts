@@ -5,7 +5,7 @@ import { EServiceLoginComponent } from '@ksp/e-service/feature/login';
 import { EthicsCustomRoute } from '@ksp/shared/interface';
 import {
   ethicsMenu,
-  licenseMenu,
+  eLicenseMenu,
   professionalMenu,
   refundFeeMenu,
   standardMenu,
@@ -26,7 +26,7 @@ const routes: EthicsCustomRoute[] = [
   }, */
   {
     path: 'request-license',
-    data: { menuConfig: licenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
+    data: { menuConfig: eLicenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
     loadChildren: () =>
       import('@ksp/e-service/e-license/request-license').then(
         (m) => m.EServiceELicenseRequestLicenseModule
@@ -35,7 +35,7 @@ const routes: EthicsCustomRoute[] = [
   },
   {
     path: 'renew-license',
-    data: { menuConfig: licenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
+    data: { menuConfig: eLicenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
     loadChildren: () =>
       import('@ksp/e-service/e-license/renew-license').then(
         (m) => m.EServiceELicenseRenewLicenseModule
@@ -71,7 +71,7 @@ const routes: EthicsCustomRoute[] = [
   },
   {
     path: 'temp-license',
-    data: { menuConfig: licenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
+    data: { menuConfig: eLicenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
     loadChildren: () =>
       import('@ksp/e-service/e-license/temp-license').then(
         (m) => m.ELicenseTempLicenseModule
@@ -80,7 +80,7 @@ const routes: EthicsCustomRoute[] = [
   },
   {
     path: 'foreign-license',
-    data: { menuConfig: licenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
+    data: { menuConfig: eLicenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
     loadChildren: () =>
       import('@ksp/e-service/e-license/foreign-license').then(
         (m) => m.EServiceELicenseForeignLicenseModule
@@ -142,7 +142,7 @@ const routes: EthicsCustomRoute[] = [
   {
     path: 'school',
     data: {
-      menuConfig: licenseMenu,
+      menuConfig: eLicenseMenu,
       headerLabel: 'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา',
     },
     loadChildren: () =>
@@ -155,7 +155,7 @@ const routes: EthicsCustomRoute[] = [
   {
     path: 'self',
     data: {
-      menuConfig: licenseMenu,
+      menuConfig: eLicenseMenu,
       headerLabel: 'ผู้ใช้งานระบบบริการด้วยตนเอง',
     },
     loadChildren: () =>
