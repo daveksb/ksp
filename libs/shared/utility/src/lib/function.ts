@@ -3,11 +3,14 @@ import { SchoolRequest } from '@ksp/shared/interface';
 import moment from 'moment';
 
 // return Thai date format, Use in component
-export function stringToThaiDate(sDate: string, format = "DD MMM YYYY"): string {
+export function stringToThaiDate(
+  sDate: string,
+  format = 'DD MMM YYYY'
+): string {
   try {
     return moment(sDate).locale('th-TH').format(format);
   } catch (error) {
-    return "-"
+    return '-';
   }
 }
 // return Thai date format, Use in component
