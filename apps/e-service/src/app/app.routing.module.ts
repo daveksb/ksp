@@ -139,20 +139,6 @@ const routes: EthicsCustomRoute[] = [
       ),
     canActivate: [AuthGuard],
   },
-  /*   {
-    path: 'approve-new-user',
-    data: {
-      menuConfig: licenseMenu,
-      headerLabel:
-        'ใบคำขอรหัสเข้าใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
-      headerDetail: ' > ตรวจสอบและอนุมัติใบคำขอรหัสเข้าใช้งาน',
-    },
-    loadChildren: () =>
-      import('@ksp/e-service/e-license/approve-new-user').then(
-        (m) => m.EServiceELicenseApproveNewUserModule
-      ),
-    canActivate: [AuthGuard],
-  }, */
   {
     path: 'school',
     data: {
@@ -173,8 +159,8 @@ const routes: EthicsCustomRoute[] = [
       headerLabel: 'ผู้ใช้งานระบบบริการด้วยตนเอง',
     },
     loadChildren: () =>
-      import('@ksp/e-service/e-license/school-user').then(
-        (m) => m.EServiceELicenseSchoolUserModule
+      import('@ksp/e-service/e-license/self-user').then(
+        (m) => m.EServiceELicenseSelfUserModule
       ),
     canActivate: [AuthGuard],
   },

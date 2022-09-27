@@ -34,6 +34,9 @@
       "@ksp/e-service/e-license/school-user": [
         "libs/e-service/e-license/school-user/src/index.ts"
       ],
+      "@ksp/e-service/e-license/self-user": [
+        "libs/e-service/e-license/self-user/src/index.ts"
+      ],
       "@ksp/e-service/e-license/temp-license": [
         "libs/e-service/e-license/temp-license/src/index.ts"
       ],

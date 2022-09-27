@@ -595,6 +595,24 @@
         }
       ]
     },
+    "e-service-e-license-self-user": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/self-user",
+      "sourceRoot": "libs/e-service/e-license/self-user/src",
+      "prefix": "ksp",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/self-user/**/*.ts",
+              "libs/e-service/e-license/self-user/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-e-license-temp-license": {
       "root": "libs/e-service/e-license/temp-license",
       "projectType": "library",
