@@ -40,9 +40,13 @@ export const menu: MenuConfig[] = [
             path: '',
             subMenuName: 'teacherType',
             subMenu: [
-              {
+              /*          {
                 label: 'ครูชาวไทย',
                 path: '/license/teacher',
+              }, */
+              {
+                label: 'ครูชาวไทย',
+                path: '/license/request/1',
               },
               {
                 label: 'ครูชาวต่างชาติ',
@@ -56,9 +60,13 @@ export const menu: MenuConfig[] = [
             path: '',
             subMenuName: 'manageType',
             subMenu: [
-              {
+              /*           {
                 label: 'ผู้บริหารสถานศึกษาชาวไทย',
                 path: '/license/school-manager',
+              }, */
+              {
+                label: 'ผู้บริหารสถานศึกษาชาวไทย',
+                path: '/license/request/2',
               },
               {
                 label: 'ผู้บริหารสถานศึกษาชาวต่างชาติ',
@@ -67,13 +75,21 @@ export const menu: MenuConfig[] = [
               },
             ],
           },
-          {
+          /*           {
             label: 'ผู้บริหารการศึกษา',
             path: '/license/education-manager',
           },
           {
             label: 'ศึกษานิเทศก์',
             path: '/license/study-supervision',
+          }, */
+          {
+            label: 'ผู้บริหารการศึกษา',
+            path: '/license/request/3',
+          },
+          {
+            label: 'ศึกษานิเทศก์',
+            path: '/license/request/4',
           },
         ],
       },
@@ -89,7 +105,8 @@ export const menu: MenuConfig[] = [
             subMenu: [
               {
                 label: 'ครูชาวไทย',
-                path: '/renew-license/request',
+                path: '/renew-license/request/1',
+                //path: '/renew-license/request',
               },
               {
                 label: 'ครูชาวต่างชาติ',
@@ -105,7 +122,8 @@ export const menu: MenuConfig[] = [
             subMenu: [
               {
                 label: 'ผู้บริหารสถานศึกษาชาวไทย',
-                path: '/renew-license/school-manager',
+                path: '/renew-license/request/2',
+                //path: '/renew-license/school-manager',
               },
               {
                 label: 'ผู้บริหารสถานศึกษาชาวต่างชาติ',
@@ -114,13 +132,21 @@ export const menu: MenuConfig[] = [
               },
             ],
           },
-          {
+          /*   {
             label: 'ผู้บริหารการศึกษา',
             path: '/renew-license/education-manager',
           },
           {
             label: 'ศึกษานิเทศก์',
             path: '/renew-license/study-supervision',
+          }, */
+          {
+            label: 'ผู้บริหารการศึกษา',
+            path: '/renew-license/request/3',
+          },
+          {
+            label: 'ศึกษานิเทศก์',
+            path: '/renew-license/request/4',
           },
         ],
       },
