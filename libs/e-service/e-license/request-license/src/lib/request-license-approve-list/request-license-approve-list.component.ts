@@ -46,5 +46,5 @@ export const column = [
   'listStatus',
   'process',
   'edit',
-  //  'print',
+  //'print',
 ];
