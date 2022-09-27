@@ -477,7 +477,7 @@ export const licenseMenu: MenuConfig[] = [
     subMenuName: 'user-approvement',
     subMenu: [
       {
-        path: '/approve-new-user',
+        path: '/self/new-user',
         label: 'ระบบบริการด้วยตนเอง (self Service)',
       },
       {
@@ -494,7 +494,7 @@ export const licenseMenu: MenuConfig[] = [
     subMenuName: 'user-management',
     subMenu: [
       {
-        path: '/manage-current-user',
+        path: '/self/current-user',
         label: 'ผู้ใช้งานระบบบริการด้วยตนเอง (self Service)',
       },
       {

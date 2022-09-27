@@ -42,7 +42,7 @@ const routes: EthicsCustomRoute[] = [
       ),
     canActivate: [AuthGuard],
   },
-  {
+  /*   {
     path: 'knowledge-cert',
     data: { menuConfig: licenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
     loadChildren: () =>
@@ -59,7 +59,7 @@ const routes: EthicsCustomRoute[] = [
         (m) => m.EServiceELicenseSubLicenseModule
       ),
     canActivate: [AuthGuard],
-  },
+  }, */
   {
     path: 'degree-cert',
     data: { menuConfig: standardMenu, headerLabel: 'ระบบงานมาตรฐานวิชาชีพ' },
@@ -158,6 +158,19 @@ const routes: EthicsCustomRoute[] = [
     data: {
       menuConfig: licenseMenu,
       headerLabel: 'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา',
+    },
+    loadChildren: () =>
+      import('@ksp/e-service/e-license/school-user').then(
+        (m) => m.EServiceELicenseSchoolUserModule
+      ),
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'self',
+    data: {
+      menuConfig: licenseMenu,
+      headerLabel: 'ผู้ใช้งานระบบบริการด้วยตนเอง',
     },
     loadChildren: () =>
       import('@ksp/e-service/e-license/school-user').then(
