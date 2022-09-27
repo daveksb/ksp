@@ -29,12 +29,12 @@ export const routes: Routes = [
         path: 'new-user',
         component: ApproveNewUserListComponent,
       },
-      {
-        path: 'detail',
+      /*       {
+        path: 'user-detail',
         component: UserDetailComponent,
-      },
+      }, */
       {
-        path: 'detail/:id',
+        path: 'user-detail/:id',
         component: UserDetailComponent,
       },
       {
@@ -45,6 +45,30 @@ export const routes: Routes = [
     ],
   },
 ];
+
+/*
+export const routes: Route[] = [
+  {
+    path: '',
+    component: EServiceContainerPageComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'list',
+        pathMatch: 'full',
+      },
+      {
+        path: 'list',
+        component: ApproveNewUserListComponent,
+      },
+      {
+        path: 'detail/:id',
+        component: UserDetailComponent,
+      },
+    ],
+  },
+];
+*/
 
 @NgModule({
   imports: [
