@@ -1,26 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { SelfRequest } from '@ksp/shared/interface';
+import { ERequestService } from '@ksp/shared/service';
 
 @Component({
   selector: 'ksp-request-license-approve-list',
   templateUrl: './request-license-approve-list.component.html',
   styleUrls: ['./request-license-approve-list.component.scss'],
 })
-export class RequestLicenseApproveListComponent implements OnInit {
+export class RequestLicenseApproveListComponent {
   displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<any>();
+  dataSource = new MatTableDataSource<SelfRequest>();
 
-  constructor(private router: Router) {}
-
-  ngOnInit(): void {}
-
-  view() {
-    this.router.navigate(['/request-license', 'approve-detail']);
-  }
+  constructor(
+    private router: Router,
+    private requestService: ERequestService
+  ) {}
 
   search() {
-    this.dataSource.data = data;
+    const payload = {
+      systemtype: '1',
+      requesttype: '1',
+    };
+    this.requestService.searchRequest(payload).subscribe((res) => {
+      this.dataSource.data = res;
+    });
+  }
+
+  goToDetail(id: number) {
+    this.router.navigate(['/request-license', 'approve-detail', id]);
   }
 
   clear() {
@@ -28,38 +37,14 @@ export class RequestLicenseApproveListComponent implements OnInit {
   }
 }
 
-export const column = ['id', 'name', 'view'];
-
-export interface PersonLicense {
-  id: number;
-  name: string;
-  licenseType: string;
-}
-
-export const data: PersonLicense[] = [
-  {
-    id: 1,
-    name: 'ครู',
-    licenseType: 'license',
-  },
-  {
-    id: 2,
-    name: 'บริหารสถานศึกษา',
-    licenseType: 'renew-license',
-  },
-  {
-    id: 3,
-    name: 'บริหารการศึกษา',
-    licenseType: 'edit-license',
-  },
-  {
-    id: 4,
-    name: 'ศึกษานิเทศก์',
-    licenseType: 'sub-license',
-  },
-  {
-    id: 5,
-    name: 'ชาวต่างชาติ',
-    licenseType: 'knowledge-cert',
-  },
+export const column = [
+  'order',
+  'requestno',
+  'requestdate',
+  'name',
+  'paymentStatus',
+  'listStatus',
+  'process',
+  'edit',
+  //  'print',
 ];
