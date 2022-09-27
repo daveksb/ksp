@@ -44,7 +44,7 @@ const routes: EthicsCustomRoute[] = [
   },
   {
     path: 'document-delivery',
-    data: { menuConfig: licenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
+    data: { menuConfig: eLicenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
     loadChildren: () =>
       import('@ksp/e-service/e-license/document-delivery').then(
         (m) => m.EServiceELicenseDocumentDeliveryModule
