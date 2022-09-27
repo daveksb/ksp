@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { RouterModule, Routes } from '@angular/router';
+import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { ManageCurrentUserListComponent } from './current-user-list/manage-current-user-list.component';
@@ -74,4 +74,4 @@ export const routes: Routes = [
     UserDetailComponent,
   ],
 })
-export class EServiceELicenseSchoolUserModule {}
+export class EServiceELicenseSelfUserModule {}

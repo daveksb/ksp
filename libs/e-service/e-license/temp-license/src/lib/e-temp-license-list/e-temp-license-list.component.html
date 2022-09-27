@@ -14,13 +14,11 @@
     <div class="bg-white px-3 py-3">
       <ksp-school-request-search
         formControlName="search"
-        [disableRequestType]="true"
+        [disableRequestType]="false"
         [requestTypeList]="requestTypeList"
         (clear)="clearData()"
         (search)="search($event)"
       ></ksp-school-request-search>
-
-      <hr />
 
       <div class="box-header">ยื่นใบคำขอ</div>
 
