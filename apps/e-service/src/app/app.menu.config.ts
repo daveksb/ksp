@@ -481,7 +481,7 @@ export const licenseMenu: MenuConfig[] = [
         label: 'ระบบบริการด้วยตนเอง (self Service)',
       },
       {
-        path: '/approve-new-user',
+        path: '/school/new-user',
         label: 'ระบบบริการหน่วยงานทางการศึกษา (School Service)',
       },
     ],
@@ -498,7 +498,7 @@ export const licenseMenu: MenuConfig[] = [
         label: 'ผู้ใช้งานระบบบริการด้วยตนเอง (self Service)',
       },
       {
-        path: '/manage-current-user',
+        path: '/school/current-user',
         label: 'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
       },
     ],

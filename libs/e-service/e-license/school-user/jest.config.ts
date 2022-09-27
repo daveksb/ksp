@@ -1,6 +1,6 @@
 /* eslint-disable */
 module.exports = {
-  displayName: 'e-service-e-license-manage-current-user',
+  displayName: 'e-service-e-license-school-user',
   preset: '../../../../jest.preset.ts',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -10,7 +10,7 @@ module.exports = {
     },
   },
   coverageDirectory:
-    '../../../../coverage/libs/e-service/e-license/manage-current-user',
+    '../../../../coverage/libs/e-service/e-license/school-user',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

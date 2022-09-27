@@ -16,6 +16,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@ksp/e-service/e-license/school-user": [
+        "libs/e-service/e-license/school-user/src/index.ts"
+      ],
       "@ksp/e-service/dialog/accusation-search": [
         "libs/e-service/dialog/accusation-search/src/index.ts"
       ],
@@ -33,9 +36,6 @@
       ],
       "@ksp/e-service/e-license/license-approve": [
         "libs/e-service/e-license/license-approve/src/index.ts"
-      ],
-      "@ksp/e-service/e-license/manage-current-user": [
-        "libs/e-service/e-license/manage-current-user/src/index.ts"
       ],
       "@ksp/e-service/e-license/renew-license": [
         "libs/e-service/e-license/renew-license/src/index.ts"
