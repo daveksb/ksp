@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
-import { SelfRequest } from '@ksp/shared/interface';
 import {
   AddressService,
   EducationDetailService,
@@ -18,6 +17,31 @@ import { Observable } from 'rxjs';
   styleUrls: ['./request-license-approve-detail.component.scss'],
 })
 export class RequestLicenseApproveDetailComponent implements OnInit {
+  approveTitles = ['ผลการตรวจสอบ', 'สถานะการใช้งาน'];
+
+  approveChoices = [
+    [
+      {
+        name: 'อนุมัติ',
+        value: 2,
+      },
+      {
+        name: 'ไม่อนุมัติ',
+        value: 3,
+      },
+    ],
+    [
+      {
+        name: 'ใช้งาน',
+        value: 1,
+      },
+      {
+        name: 'ไม่ใช้งาน',
+        value: 2,
+      },
+    ],
+  ];
+
   userInfoType = UserInfoFormType.thai;
   form = this.fb.group({
     userInfo: [],
@@ -27,6 +51,11 @@ export class RequestLicenseApproveDetailComponent implements OnInit {
     education: [],
     experience: [],
   });
+
+  form2 = this.fb.group({
+    verifyResult: [null, Validators.required],
+  });
+
   countries$!: Observable<any>;
   countries2$!: Observable<any>;
   licenses$!: Observable<any>;

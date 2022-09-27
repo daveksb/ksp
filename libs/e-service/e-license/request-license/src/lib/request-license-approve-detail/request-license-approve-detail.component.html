@@ -92,4 +92,12 @@
       </mat-tab>
     </mat-tab-group>
   </form>
+
+  <div [formGroup]="form2" class="bg-white p-4">
+    <e-service-license-check
+      formControlName="verifyResult"
+      [headerTitle]="approveTitles[0]"
+      [choices]="approveChoices[0]"
+    ></e-service-license-check>
+  </div>
 </div>
