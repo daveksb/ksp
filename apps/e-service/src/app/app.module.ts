@@ -15,7 +15,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { FileUploadUrls, File_UPLOAD_URLS } from '@ksp/shared/form/file-upload';
 
 const fileUrls: FileUploadUrls = {
-  upload: '',
+  uploadFile: '',
+  uploadImage: '',
   download: '/kspuni/unirequestfileselectfile',
   delete: '',
 };
