@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RenewLicenseRequestComponent } from './renew-license-request/renew-license-request.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master-page';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -20,7 +21,6 @@ import { RenewLicenseForeignComponent } from './renew-license-foreign/renew-lice
 import { MatStepperModule } from '@angular/material/stepper';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RenewLicenseThaiComponent } from './renew-license-thai/renew-license-thai.component';
-import { RenewLicenseRequestComponent } from './renew-license-request/renew-license-request.component';
 
 export const routes: Routes = [
   {
@@ -28,8 +28,24 @@ export const routes: Routes = [
     component: SelfServiceMasterPageComponent,
     children: [
       {
-        path: 'request/:type',
+        path: 'request',
         component: RenewLicenseRequestComponent,
+      },
+      {
+        path: 'school-manager',
+        component: RenewLicenseSchoolManagerComponent,
+      },
+      {
+        path: 'education-manager',
+        component: RenewLicenseEducationManagerComponent,
+      },
+      {
+        path: 'study-supervision',
+        component: RenewLicenseStudySupervisionComponent,
+      },
+      {
+        path: 'foreign',
+        component: RenewLicenseForeignComponent,
       },
     ],
   },
@@ -63,7 +79,6 @@ export const routes: Routes = [
     RenewLicenseEducationManagerComponent,
     RenewLicenseStudySupervisionComponent,
     RenewLicenseForeignComponent,
-    RenewLicenseThaiComponent,
   ],
 })
 export class SelfServiceFeatureRenewLicenseModule {}

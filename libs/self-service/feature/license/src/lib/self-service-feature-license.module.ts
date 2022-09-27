@@ -41,7 +41,7 @@ export const routes: Routes = [
     path: '',
     component: SelfServiceMasterPageComponent,
     children: [
-      /* {
+      {
         path: 'teacher',
         component: LicenseRequestThaiComponent,
       },
@@ -64,11 +64,11 @@ export const routes: Routes = [
       {
         path: 'study-supervision',
         component: LicenseRequestStudySupervisionComponent,
-      }, */
-      {
-        path: 'request/:type',
-        component: LicenseRequestComponent,
       },
+      // {
+      //   path: 'request/:type',
+      //   component: LicenseRequestComponent,
+      // },
       {
         path: 'agreement',
         component: LicenseForeignAgreementComponent,

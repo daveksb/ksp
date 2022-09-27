@@ -76,37 +76,37 @@ export class SelfServiceHomePageComponent {
     isForeign: SelfServiceRequestForType,
     id: number
   ) {
-    // switch (subtype) {
-    //   case SelfServiceRequestSubType.ครู: {
-    //     if (isForeign === SelfServiceRequestForType.ชาวไทย) {
-    //       this.thaiTeacher(id);
-    //     } else {
-    //       this.foreignTeacher(subtype);
-    //     }
-    //     break;
-    //   }
-    //   case SelfServiceRequestSubType.ผู้บริหารสถานศึกษา: {
-    //     if (isForeign === SelfServiceRequestForType.ชาวไทย) {
-    //       this.schoolManager(id);
-    //     } else {
-    //       this.foreignTeacher(subtype);
-    //     }
-    //     break;
-    //   }
-    // }
+    switch (subtype) {
+      case SelfServiceRequestSubType.ครู: {
+        if (isForeign === SelfServiceRequestForType.ชาวไทย) {
+          this.thaiTeacher(id);
+        } else {
+          this.foreignTeacher(subtype);
+        }
+        break;
+      }
+      case SelfServiceRequestSubType.ผู้บริหารสถานศึกษา: {
+        if (isForeign === SelfServiceRequestForType.ชาวไทย) {
+          this.schoolManager(id);
+        } else {
+          this.foreignTeacher(subtype);
+        }
+        break;
+      }
+    }
   }
 
   clear() {
     this.dataSource.data = [];
   }
 
-  requestLicense(type: SelfServiceRequestSubType) {
-    this.router.navigate(['/license', 'request', type]);
-  }
+  // requestLicense(type: SelfServiceRequestSubType) {
+  //   this.router.navigate(['/license', 'request', type]);
+  // }
 
-  /*   // ครูไทย
+  // ครูไทย
   thaiTeacher(id?: number) {
-    this.router.navigate(['/license', 'teacher', `${id}`]);
+    this.router.navigate(['/license', 'teacher', ...(id ? [`${id}`] : [])]);
   }
 
   //ครู + ผู้บริหหาร ต่างชาติ
@@ -118,7 +118,11 @@ export class SelfServiceHomePageComponent {
 
   // ผู้บริหารสถานศึกษา
   schoolManager(id?: number) {
-    this.router.navigate(['/license', 'school-manager', `${id}`]);
+    this.router.navigate([
+      '/license',
+      'school-manager',
+      ...(id ? [`${id}`] : []),
+    ]);
   }
 
   // ผู้บริหารการศึกษา
@@ -129,13 +133,13 @@ export class SelfServiceHomePageComponent {
   //ศึกษานิเทศก์
   studySupervision() {
     this.router.navigate(['/license', 'study-supervision']);
-  } */
-
-  renewLicense(type: SelfServiceRequestSubType) {
-    this.router.navigate(['/renew-license', 'request', type]);
   }
 
-  /* // ครูไทย
+  // renewLicense(type: SelfServiceRequestSubType) {
+  //   this.router.navigate(['/renew-license', 'request', type]);
+  // }
+
+  // ครูไทย
   teacherRenew() {
     this.router.navigate(['/renew-license', 'request']);
   }
@@ -159,7 +163,7 @@ export class SelfServiceHomePageComponent {
   //ศึกษานิเทศก์
   supervisionRenew() {
     this.router.navigate(['/renew-license', 'study-supervision']);
-  } */
+  }
 
   //ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ
   licenseEdit() {
