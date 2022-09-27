@@ -55,4 +55,4 @@ export const routes: Routes = [
   ],
   declarations: [ManageCurrentUserListComponent],
 })
-export class EServiceELicenseManageCurrentUserModule {}
+export class EServiceELicenseSchoolUserModule {}

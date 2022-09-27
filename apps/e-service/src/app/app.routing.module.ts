@@ -160,8 +160,8 @@ const routes: EthicsCustomRoute[] = [
       headerLabel: 'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา',
     },
     loadChildren: () =>
-      import('@ksp/e-service/e-license/manage-current-user').then(
-        (m) => m.EServiceELicenseManageCurrentUserModule
+      import('@ksp/e-service/e-license/school-user').then(
+        (m) => m.EServiceELicenseSchoolUserModule
       ),
     canActivate: [AuthGuard],
   },
