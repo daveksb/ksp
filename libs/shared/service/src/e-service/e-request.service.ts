@@ -19,8 +19,8 @@ export class ERequestService {
       );
   }
 
-  getRequestById(requestId: number): Observable<SchoolRequest> {
-    return this.http.post<SchoolRequest>(
+  getRequestById(requestId: number): Observable<SelfRequest> {
+    return this.http.post<SelfRequest>(
       `${environment.apiUrl}/e-service/requestsearchbyrequestno`,
       {
         id: requestId,
