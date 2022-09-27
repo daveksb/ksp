@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatSort, MatSortable, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
@@ -21,6 +22,7 @@ export class SelfServiceHomePageComponent {
   ];
 
   dataSource = new MatTableDataSource<SelfRequest>();
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private router: Router,
@@ -32,12 +34,22 @@ export class SelfServiceHomePageComponent {
   search() {
     const payload = {
       staffid: getCookie('userId'),
-      systemtype: '1',
       requesttype: null,
+      requestno: null,
+      requestdate: null,
+      requeststatus: '1',
+      currentprocess: '1',
+      offset: '0',
+      row: '1000',
     };
     this.requestService.searchMyRequests(payload).subscribe((res) => {
-      //console.log('res= ', res);
       this.dataSource.data = res;
+      this.dataSource.sort = this.sort;
+
+      const sortState: Sort = { active: 'id', direction: 'desc' };
+      this.sort.active = sortState.active;
+      this.sort.direction = sortState.direction;
+      this.sort.sortChange.emit(sortState);
     });
   }
 

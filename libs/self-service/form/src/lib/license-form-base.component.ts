@@ -40,7 +40,6 @@ export abstract class LicenseFormBaseComponent {
   requestNo: string | null = '';
   currentProcess!: number;
   prohibitProperty: any;
-  //myInfo = new SelfMyInfo();
   myImage = '';
 
   constructor(

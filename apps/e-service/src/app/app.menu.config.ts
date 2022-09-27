@@ -1,7 +1,7 @@
 import { MenuConfig } from '@ksp/shared/interface';
 
 //ใบอนุญาตต่างๆ
-export const licenseMenu: MenuConfig[] = [
+export const eLicenseMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอรับใบอนุญาตประกอบวิชาชีพ(ชาวไทย)',
@@ -15,7 +15,11 @@ export const licenseMenu: MenuConfig[] = [
       },
       {
         path: '/request-license/approve-detail',
-        label: 'รับรองใบอนุญาตประกอบวิชาชีพ',
+        label: 'บัญชีรายชื่อและผลการนำเสนอขอใบอนุญาตประกอบวิชาชีพ',
+      },
+      {
+        path: '/request-license/approve-detail',
+        label: 'พิจารณารับรองใบอนุญาตประกอบวิชาชีพ',
       },
     ],
   },
@@ -31,30 +35,38 @@ export const licenseMenu: MenuConfig[] = [
         label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
       },
       {
+        path: '/license/list',
+        label: 'บัญชีรายชื่อและผลการนำเสนอขอใบอนุญาตประกอบวิชาชีพ',
+      },
+      {
         path: '/license/approve-list',
-        label: 'รับรองใบอนุญาตประกอบวิชาชีพ',
+        label: 'พิจารณารับรองใบอนุญาตประกอบวิชาชีพ',
       },
     ],
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'สร้างเลขใบอนุญาตประกอบวิชาชีพ',
-    path: 'xxx',
+    path: '/xxx',
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ(ชาวไทย)',
     path: '',
     isExpanded: false,
-    subMenuName: 'renew-thai',
+    subMenuName: 'renewThai',
     subMenu: [
       {
         path: '/renew-license/approve-list',
-        label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
+        label: 'รายการใบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
+      },
+      {
+        path: '/renew-license/approve-list',
+        label: 'บัญชีรายชื่อและผลการนำเสนอขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
       },
       {
         path: '/renew-license/approve-detail',
-        label: 'รับรองใบอนุญาตประกอบวิชาชีพ',
+        label: 'พิจารณารับรองใบอนุญาตประกอบวิชาชีพ',
       },
     ],
   },
@@ -63,39 +75,41 @@ export const licenseMenu: MenuConfig[] = [
     label: 'ใบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ(ชาวต่างชาติ)',
     path: '',
     isExpanded: false,
-    subMenuName: 'temp-thai',
+    subMenuName: 'renewForeign',
     subMenu: [
       {
-        path: '/license/list',
-        label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
+        path: '/renew-license/approve-list',
+        label: 'รายการใบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
       },
       {
-        path: '/license/approve-list',
-        label: 'รับรองใบอนุญาตประกอบวิชาชีพ',
+        path: '/renew-license/approve-list',
+        label: 'บัญชีรายชื่อและผลการนำเสนอขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
+      },
+      {
+        path: '/renew-license/approve-detail',
+        label: 'พิจารณารับรองใบอนุญาตประกอบวิชาชีพ',
       },
     ],
   },
-  /* {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'สร้างเลขในอนุญาตประกอบวิชาชีพ',
-    path: '',
-  }, */
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต(ชาวไทย)',
     path: '',
     isExpanded: false,
-    subMenuName: 'temp-thai',
+    subMenuName: 'tempThai',
     subMenu: [
       {
         path: '/temp-license/list',
-        label: 'ตรวจสอบใบคำขออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
-        params: { subtype: 1 },
+        label: 'รายการใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
+      },
+      {
+        path: '/temp-license/list',
+        label:
+          'บัญชีรายชื่อและผลการนำเสนอขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
       },
       {
         path: '/temp-license/approve-list',
-        label: 'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
-        //params: { subtype: 1 },
+        label: 'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
       },
     ],
   },
@@ -104,17 +118,20 @@ export const licenseMenu: MenuConfig[] = [
     label: 'ใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต(ชาวต่างชาติ)',
     path: '',
     isExpanded: false,
-    subMenuName: 'temp-foreign',
+    subMenuName: 'tempForeign',
     subMenu: [
       {
         path: '/temp-license/list',
-        label: 'รายการใบคำขออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
-        params: { subtype: 5 },
+        label: 'รายการใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
+      },
+      {
+        path: '/temp-license/list',
+        label:
+          'บัญชีรายชื่อและผลการนำเสนอขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
       },
       {
         path: '/temp-license/approve-list',
-        label: 'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
-        params: { subtype: 5 },
+        label: 'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
       },
     ],
   },
