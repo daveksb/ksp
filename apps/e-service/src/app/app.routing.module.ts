@@ -42,6 +42,15 @@ const routes: EthicsCustomRoute[] = [
       ),
     canActivate: [AuthGuard],
   },
+  {
+    path: 'document-delivery',
+    data: { menuConfig: licenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
+    loadChildren: () =>
+      import('@ksp/e-service/e-license/document-delivery').then(
+        (m) => m.EServiceELicenseDocumentDeliveryModule
+      ),
+    canActivate: [AuthGuard],
+  },
   /*   {
     path: 'knowledge-cert',
     data: { menuConfig: licenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },

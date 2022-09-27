@@ -19,6 +19,9 @@
       "@ksp/e-service/dialog/accusation-search": [
         "libs/e-service/dialog/accusation-search/src/index.ts"
       ],
+      "@ksp/e-service/e-license/document-delivery": [
+        "libs/e-service/e-license/document-delivery/src/index.ts"
+      ],
       "@ksp/e-service/e-license/foreign-license": [
         "libs/e-service/e-license/foreign-license/src/index.ts"
       ],

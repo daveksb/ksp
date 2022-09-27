@@ -229,6 +229,18 @@ export const licenseMenu: MenuConfig[] = [
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'งานรับ-ส่งเอกสารใบอนุญาต',
     path: '',
+    isExpanded: false,
+    subMenuName: 'document',
+    subMenu: [
+      {
+        path: '/document-delivery/receive-list',
+        label: 'รายการรับ-ส่งเอกสารใบอนุญาต',
+      },
+      {
+        path: '/document-delivery/check-list',
+        label: 'ตรวจสอบสถานะเอกสารส่งออก',
+      },
+    ],
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',

@@ -1,0 +1,51 @@
+<ksp-top-nav><span header> รับ-ส่งเอกสารงานใบอนุญาต </span></ksp-top-nav>
+
+<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
+  <div class="box-header">ข้อมูลจองเลขหนังสือ</div>
+  <div class="bg-white border p-3">
+    <div class="d-flex flex-row justify-content-between">
+      <ksp-request-header-info
+        [requestDate]="'today'"
+      ></ksp-request-header-info>
+    </div>
+    <hr />
+    <div class="box-header mb-2">ข้อมูลหนังสือรับ</div>
+    <div class="row mb-2">
+      <div class="col-6">
+        <label class="form-label">ปี พ.ศ.</label>
+        <input type="text" class="form-control" disabled />
+      </div>
+      <div class="col-6">
+        <label class="form-label">ผู้จอง</label>
+        <input type="date" class="form-control" disabled />
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-6">
+        <label class="form-label">เลขที่เริ่ม</label>
+        <input type="text" class="form-control" disabled />
+      </div>
+      <div class="col-6">
+        <label class="form-label">เลขที่สิ้นสุด</label>
+        <input type="text" class="form-control" />
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-6">
+        <label class="form-label">จำนวน</label>
+        <input type="text" class="form-control" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sticky-bottom border">
+  <ksp-bottom-nav
+    [isLastPage]="true"
+    [isFirstPage]="true"
+    [showCenterButtons]="true"
+    [showSaveButton]="true"
+  ></ksp-bottom-nav>
+</div>

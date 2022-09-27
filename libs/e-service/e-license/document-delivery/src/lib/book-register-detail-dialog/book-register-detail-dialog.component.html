@@ -1,0 +1,92 @@
+<div class="box-header">
+  <ng-container *ngIf="data.bookType === '1'">ลงทะเบียนรับ</ng-container>
+  <ng-container *ngIf="data.bookType === '3'">ส่งถึงบุคคล</ng-container>
+  <ng-container *ngIf="data.bookType === '2'">ส่งถึงหน่วยงาน</ng-container>
+</div>
+<hr />
+
+<ng-container *ngIf="data.bookType === '3'">
+  <div class="box-header text-primary">กรุณาเลือกบุคคลที่รับ</div>
+  <div class="row">
+    <div class="col-6">
+      <label class="form-label">บุคคลที่รับ</label>
+      <select class="form-select">
+        <option selected>กรุณาเลือก</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+  </div>
+  <br />
+</ng-container>
+
+<ng-container *ngIf="data.bookType === '2'">
+  <div class="box-header text-primary">กรุณาเลือกหน่วยงานที่รับ</div>
+  <div class="row">
+    <div class="col-6">
+      <label class="form-label">หน่วยงานที่รับ</label>
+      <select class="form-select">
+        <option selected>กรุณาเลือก</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+  </div>
+  <br />
+</ng-container>
+
+<div class="d-flex justify-content-between align-items-center">
+  <div class="box-header text-primary">รายการหนังสือรับที่ท่านเลือก</div>
+  <div class="form-label">
+    จำนวนรายการ : <span class="text-warning">2</span>
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table mb-2">
+    <thead>
+      <tr>
+        <th scope="col">เลือก</th>
+        <th scope="col">เลขที่รับ</th>
+        <th scope="col">ปี พ.ศ.</th>
+        <th scope="col">เลขที่หนังสือ</th>
+        <th scope="col">ลงวันที่</th>
+        <th scope="col">จากบุคคล/หน่วยงาน</th>
+        <th scope="col">เรียน</th>
+        <th scope="col">ประเภทหนังสือ</th>
+        <th scope="col">หน่วยงานที่รับ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><input type="checkbox" /></td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+      </tr>
+      <tr>
+        <td><input type="checkbox" /></td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-container *ngIf="data.bookType === '1'">
+  <br />
+  <div class="box-header text-primary">ข้อมูลหนังสือรับที่เลือก</div>
+  <ksp-book-receive-detail-info></ksp-book-receive-detail-info>
+</ng-container>
