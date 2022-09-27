@@ -153,10 +153,10 @@
   </div>
 
   <div class="table-responsive" style="white-space: nowrap">
-    <table mat-table [dataSource]="dataSource">
+    <table matSort mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="order">
         <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
       </ng-container>
 
       <ng-container matColumnDef="requestno">

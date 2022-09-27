@@ -15,10 +15,12 @@
         </select>
       </div>
     </div>
+
     <div *ngIf="rewardType.value">
+      <br />
       <self-service-request-status></self-service-request-status>
     </div>
-
+    <br />
     <div *ngIf="rewardType.value === '40'">
       <ksp-council-reward
         formControlName="rewardDetail"
@@ -92,13 +94,11 @@
         <button
           (click)="tempSave()"
           type="button"
-          class="btn border-primary text-primary bg-white">
+          class="btn border-primary text-primary bg-white"
+        >
           บันทึกชั่วคราว
         </button>
-        <button
-          (click)="save()"
-          type="button"
-          class="ms-3 btn btn-primary">
+        <button (click)="save()" type="button" class="ms-3 btn btn-primary">
           บันทึกและยื่น
         </button>
       </div>

@@ -53,7 +53,12 @@
             <form [formGroup]="form">
               <div class="row justify-content-center">
                 <div class="col-md-6 mb-3">
-                  <label class="form-label required">เลขที่บัตรประชาชน</label>
+                  <label class="form-label">เลขที่บัตรประชาชน</label>
+                  <i class="bi bi-question-circle fs-6 ms-1 tooltip1"
+                    ><span style="white-space: nowrap"
+                      >กรอกเลข 13 หลัก ไม่ต้องใส่ขีด(-)</span
+                    ></i
+                  >
                   <input
                     type="text"
                     class="form-control"
@@ -76,9 +81,16 @@
               </div>
               <div class="row justify-content-center">
                 <div class="col-md-6 mb-3">
-                  <label class="form-label required"
-                    >เลขที่หลังบัตรประชาชน</label
-                  >
+                  <label class="form-label">เลขที่หลังบัตรประชาชน </label>
+
+                  <i class="bi bi-question-circle fs-6 ms-1 tooltip3"
+                    ><span
+                      >ตัวอย่างการกรอกเลขที่หลังบัตร<img
+                        src="/assets/images/ssn-card.png"
+                        style="width: 250px; height: 150px"
+                      /> </span
+                  ></i>
+
                   <input
                     type="text"
                     class="form-control"
@@ -90,13 +102,19 @@
               <div class="row justify-content-center">
                 <div class="col-md-6 mb-3">
                   <label class="form-lebel">รูปถ่ายบัตรประชาชน</label>
+                  <i class="bi bi-question-circle fs-6 ms-1 tooltip2"
+                    ><span
+                      >ตัวอย่างถ่ายรูปบัตรประชาชน<img
+                        src="/assets/images/ssn-show.png"
+                        style="width: 300px; height: 150px"
+                      /> </span
+                  ></i>
                   <div
                     class="image-box d-flex align-items-center flex-column p-5"
                   >
                     <button class="btn border-primary text-primary bg-white">
                       + อัพโหลดรูปภาพ
                     </button>
-
                     <diV class="form-label"
                       >Choose image . jpg only, max size 1 MB</diV
                     >
@@ -104,31 +122,29 @@
                 </div>
               </div>
 
-              <div class="d-flex align-items-center flex-column mt-3">
-                <div class="d-flex mb-2">
-                  <button
-                    (click)="previousPage()"
-                    type="submit"
-                    class="btn btn-secondary me-1"
-                  >
-                    กลับ
-                  </button>
-                  <button
-                    (click)="openDialog()"
-                    [disabled]="form.invalid"
-                    type="submit"
-                    class="btn btn-primary ms-1"
-                  >
-                    ยืนยันตัวตน
-                  </button>
-                </div>
-                <div
-                  role="button"
-                  (click)="loginPage()"
-                  class="form-label text-decoration-underline"
+              <div class="gap-2 col-md-6 d-flex mx-auto my-2">
+                <button
+                  (click)="previousPage()"
+                  type="submit"
+                  class="btn btn-secondary w-100"
                 >
-                  เข้าสู่ระบบ
-                </div>
+                  กลับ
+                </button>
+                <button
+                  (click)="openDialog()"
+                  [disabled]="form.invalid"
+                  type="submit"
+                  class="btn btn-primary w-100"
+                >
+                  ยืนยันตัวตน
+                </button>
+              </div>
+              <div
+                role="button"
+                (click)="loginPage()"
+                class="form-label text-decoration-underline text-center"
+              >
+                เข้าสู่ระบบ
               </div>
             </form>
           </div>

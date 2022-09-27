@@ -1,26 +1,38 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { FormMode } from '@ksp/shared/interface';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormMode, KspFormBaseComponent } from '@ksp/shared/interface';
+import { providerFactory } from '@ksp/shared/utility';
 import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'ksp-step-2-tab-1-a',
   templateUrl: './course-type-a.component.html',
   styleUrls: ['./course-type-a.component.scss'],
+  providers: providerFactory(CourseTypeAComponent),
 })
-export class CourseTypeAComponent implements OnInit {
-  @Input() mode: FormMode = 'edit';
-
+export class CourseTypeAComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
   totalCredit = 0;
   totalStudent = 0;
+  contactForm?: FormGroup;
 
-  form = this.fb.group({
+  override form = this.fb.group({
     plans: this.fb.array([this.newPlan(1)]),
     subjects: this.fb.array([this.newSubject('วิชาการศึกษาทั่วไป')]),
   });
 
-  constructor(private fb: FormBuilder) {}
-
+  constructor(private fb: FormBuilder) {
+    super();
+    this.subscriptions.push(
+      // any time the inner form changes update the parent of any change
+      this.form?.valueChanges.subscribe((value) => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
+  }
   ngOnInit(): void {
     this.addData();
     this.calculateSum();
@@ -69,10 +81,8 @@ export class CourseTypeAComponent implements OnInit {
       this.newPlan(4),
       this.newPlan(5),
     ];
-
     plans.forEach((p) => this.plans.push(p));
     subjects.forEach((s) => this.subjects.push(s));
-
     if (this.mode === 'view') this.form.disable();
   }
 

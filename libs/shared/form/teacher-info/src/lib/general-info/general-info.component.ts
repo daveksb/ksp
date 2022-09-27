@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
+import { GeneralInfoService } from '@ksp/shared/service';
 import { providerFactory } from '@ksp/shared/utility';
+import _ from 'lodash';
 
 @Component({
   selector: 'ksp-teacher-general-info',
@@ -24,8 +26,30 @@ export class TeacherGeneralInfoComponent extends KspFormBaseComponent {
       }),
     ]),
   });
+  prefixOptions: ListData[] = [];
 
-  constructor(private fb: FormBuilder) {
+  override writeValue(value: any) {
+    if (value) {
+      _.forEach(value?.degrees, (d, index: any) => {
+        if (this.form.controls.degrees.controls[index]) {
+          this.form.controls.degrees.controls[index].patchValue(d);
+        } else {
+          this.addDegree();
+          this.form.controls.degrees.controls[index].patchValue(d);
+        }
+      });
+      this.value = value;
+    }
+
+    if (value === null) {
+      this.form.reset();
+    }
+  }
+
+  constructor(
+    private fb: FormBuilder,
+    private generalInfoService: GeneralInfoService
+  ) {
     super();
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
@@ -34,6 +58,12 @@ export class TeacherGeneralInfoComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+    this.generalInfoService.getPrefix().subscribe((data) => {
+      this.prefixOptions = data?.map(({ id, name_th }: any) => ({
+        value: id,
+        label: name_th,
+      }));
+    });
   }
 
   get degrees() {

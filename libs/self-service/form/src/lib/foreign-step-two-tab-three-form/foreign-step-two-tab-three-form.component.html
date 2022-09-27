@@ -1,32 +1,32 @@
 <form [formGroup]="form">
   <div class="row">
-    <div class="col">
+    <div class="col-md mb-2">
       <label class="form-label">Name of Degree</label>
       <input class="form-control" type="text" formControlName="degreeName" />
     </div>
-    <div class="col">
+    <div class="col-md mb-2">
       <label class="form-label">Majoring Program</label>
       <input class="form-control" type="text" formControlName="major" />
     </div>
   </div>
 
   <div class="row">
-    <div class="col-6">
+    <div class="col-md-6 mb-2">
       <label class="form-label">Institution</label>
       <input class="form-control" type="text" formControlName="institution" />
     </div>
-    <div class="col">
+    <div class="col-md mb-2">
       <label class="form-label">Date of Admission</label>
       <input class="form-control" type="date" formControlName="admissionDate" />
     </div>
-    <div class="col">
+    <div class="col-md mb-2">
       <label class="form-label">Date of Graduation</label>
       <input class="form-control" type="date" formControlName="graduateDate" />
     </div>
   </div>
 
   <div class="row">
-    <div class="col-6">
+    <div class="col-md-6 mb-2">
       <label class="form-label">Country</label>
       <select class="form-select" formControlName="country">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>

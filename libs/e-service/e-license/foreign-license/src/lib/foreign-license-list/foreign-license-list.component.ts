@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { SelfRequest } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 
 @Component({
@@ -18,12 +19,12 @@ export class ForeignLicenseListComponent implements AfterViewInit {
   });
 
   displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<any>();
+  dataSource = new MatTableDataSource<SelfRequest>();
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private eRequestService: ERequestService
+    private requestService: ERequestService
   ) {}
 
   ngAfterViewInit(): void {
@@ -31,22 +32,11 @@ export class ForeignLicenseListComponent implements AfterViewInit {
   }
 
   search(params: any) {
-    console.log('params = ', params);
-
     const payload = {
-      requestno: params.requestno,
-      idcardno: params.idcardno,
-      subtype: null,
-      currentprocess: null,
-      requeststatus: null,
-      requestdatefrom: params.requestdatefrom,
-      requestdateto: params.requestdateto,
+      systemtype: '2',
       requesttype: '4',
-      offset: '0',
-      row: '10',
     };
-
-    this.eRequestService.searchRequest(payload).subscribe((res: any) => {
+    this.requestService.searchRequest(payload).subscribe((res) => {
       this.dataSource.data = res;
     });
   }

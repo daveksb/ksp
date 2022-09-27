@@ -1,5 +1,328 @@
 import { MenuConfig } from '@ksp/shared/interface';
 
+//ใบอนุญาตต่างๆ
+export const eLicenseMenu: MenuConfig[] = [
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'ใบคำขอรับใบอนุญาตประกอบวิชาชีพ(ชาวไทย)',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'license',
+    subMenu: [
+      {
+        path: '/request-license/approve-list',
+        label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
+      },
+      {
+        path: '/request-license/approve-detail',
+        label: 'บัญชีรายชื่อและผลการนำเสนอขอใบอนุญาตประกอบวิชาชีพ',
+      },
+      {
+        path: '/request-license/approve-detail',
+        label: 'พิจารณารับรองใบอนุญาตประกอบวิชาชีพ',
+      },
+    ],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'ใบคำขอรับใบอนุญาตประกอบวิชาชีพ(ชาวต่างชาติ)',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'license-foreign',
+    subMenu: [
+      {
+        path: '/license/list',
+        label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
+      },
+      {
+        path: '/license/list',
+        label: 'บัญชีรายชื่อและผลการนำเสนอขอใบอนุญาตประกอบวิชาชีพ',
+      },
+      {
+        path: '/license/approve-list',
+        label: 'พิจารณารับรองใบอนุญาตประกอบวิชาชีพ',
+      },
+    ],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'สร้างเลขใบอนุญาตประกอบวิชาชีพ',
+    path: '/xxx',
+  },
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'ใบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ(ชาวไทย)',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'renewThai',
+    subMenu: [
+      {
+        path: '/renew-license/approve-list',
+        label: 'รายการใบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
+      },
+      {
+        path: '/renew-license/approve-list',
+        label: 'บัญชีรายชื่อและผลการนำเสนอขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
+      },
+      {
+        path: '/renew-license/approve-detail',
+        label: 'พิจารณารับรองใบอนุญาตประกอบวิชาชีพ',
+      },
+    ],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'ใบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ(ชาวต่างชาติ)',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'renewForeign',
+    subMenu: [
+      {
+        path: '/renew-license/approve-list',
+        label: 'รายการใบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
+      },
+      {
+        path: '/renew-license/approve-list',
+        label: 'บัญชีรายชื่อและผลการนำเสนอขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
+      },
+      {
+        path: '/renew-license/approve-detail',
+        label: 'พิจารณารับรองใบอนุญาตประกอบวิชาชีพ',
+      },
+    ],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'ใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต(ชาวไทย)',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'tempThai',
+    subMenu: [
+      {
+        path: '/temp-license/list',
+        label: 'รายการใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
+      },
+      {
+        path: '/temp-license/list',
+        label:
+          'บัญชีรายชื่อและผลการนำเสนอขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
+      },
+      {
+        path: '/temp-license/approve-list',
+        label: 'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
+      },
+    ],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'ใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต(ชาวต่างชาติ)',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'tempForeign',
+    subMenu: [
+      {
+        path: '/temp-license/list',
+        label: 'รายการใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
+      },
+      {
+        path: '/temp-license/list',
+        label:
+          'บัญชีรายชื่อและผลการนำเสนอขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
+      },
+      {
+        path: '/temp-license/approve-list',
+        label: 'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
+      },
+    ],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'ใบคำขอเปลี่ยนแปลง/แก้ไขใบอนุญาต(ชาวไทย)',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'edit-thai',
+    subMenu: [
+      {
+        path: '/foreign-license/list',
+        label: 'ตรวจสอบใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
+      },
+      {
+        path: '/temp-license/approve-detail',
+        label: 'พิจารณารับรองเลขคุรุสภาสำหรับชาวต่างชาติ',
+      },
+    ],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'ใบคำขอเปลี่ยนแปลง/แก้ไขใบอนุญาต(ชาวต่างชาติ)',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'edit-foreign',
+    subMenu: [
+      {
+        path: '/foreign-license/list',
+        label: 'ตรวจสอบใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
+      },
+      {
+        path: '/xxx',
+        label: 'พิจารณารับรองเลขคุรุสภาสำหรับชาวต่างชาติ',
+      },
+    ],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'ใบคำขอใบแทนใบอนุญาตประกอบวิชาชีพ',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'sub-license',
+    subMenu: [
+      {
+        path: '/xxx',
+        label: 'รายการใบคำขอ',
+      },
+      {
+        path: '/temp-license/approve-detail',
+        label: 'พิจารณา',
+      },
+    ],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'ใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'foreign-id',
+    subMenu: [
+      {
+        path: '/foreign-license/list',
+        label: 'ตรวจสอบใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
+      },
+      {
+        path: '/temp-license/approve-detail',
+        label: 'พิจารณารับรองเลขคุรุสภาสำหรับชาวต่างชาติ',
+      },
+    ],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'กิจกรรมพัฒนาตนเอง',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'activities',
+    subMenu: [
+      {
+        path: '/xxx',
+        label: 'รายการ',
+      },
+      {
+        path: '/temp-license/approve-detail',
+        label: 'พิจารณา',
+      },
+    ],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'ข้อมูลลักษณะต้องห้ามของผู้ขอใบอนุญาตประกอบวิชาชีพ',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'forbidden',
+    subMenu: [
+      {
+        path: '/xxx',
+        label: 'บันทึก',
+      },
+      {
+        path: '/xxx',
+        label: 'พิจารณา',
+      },
+    ],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/card.svg',
+    label: 'ทะเบียนข้อมูล',
+    path: '',
+  },
+  {
+    icon: 'assets/images/icon-sidenav/card.svg',
+    label: 'งานรับ-ส่งเอกสารใบอนุญาต',
+    path: '',
+  },
+  {
+    icon: 'assets/images/icon-sidenav/card.svg',
+    label: 'รายงาน',
+    path: '',
+  },
+  {
+    icon: 'assets/images/icon-sidenav/people.svg',
+    label: 'ระบบบริหารจัดการผู้ใช้งาน',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'user-management',
+    subMenu: [
+      {
+        path: '/self/current-user',
+        label: 'ผู้ใช้งานระบบบริการด้วยตนเอง (self Service)',
+      },
+      {
+        path: '/school/current-user',
+        label: 'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
+      },
+    ],
+  },
+  /*   {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'ใบคำขอหนังสือรับรองความรู้',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'confirm',
+    subMenu: [
+      {
+        path: '/xxx',
+        label: 'รายการใบคำขอ',
+      },
+      {
+        path: '/temp-license/approve-detail',
+        label: 'พิจารณา',
+      },
+    ],
+  }, */
+  /* {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'ใบคำขอเทียบเคียงความรู้',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'xxx',
+    subMenu: [
+      {
+        path: '/xxx',
+        label: 'รายการใบคำขอ',
+      },
+      {
+        path: '/xxx',
+        label: 'พิจารณา',
+      },
+    ],
+  }, */
+
+  /*   {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'ใบคำขอรหัสเข้าใช้งานระบบ',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'user-approvement',
+    subMenu: [
+      {
+        path: '/self/new-user',
+        label: 'ระบบบริการด้วยตนเอง (self Service)',
+      },
+      {
+        path: '/school/new-user',
+        label: 'ระบบบริการหน่วยงานทางการศึกษา (School Service)',
+      },
+    ],
+  }, */
+];
+
 export const ethicsMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/card.svg',
@@ -195,311 +518,6 @@ export const standardMenu: MenuConfig[] = [
       {
         path: '/aa',
         label: 'ผู้ใช้งานระบบบริการสถาบันผลิตครู (Uni Service)',
-      },
-    ],
-  },
-];
-
-//ใบอนุญาตต่างๆ
-export const licenseMenu: MenuConfig[] = [
-  {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'license',
-    subMenu: [
-      {
-        path: '/request-license/approve-list',
-        label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
-      },
-      {
-        path: '/request-license/approve-detail',
-        label: 'รับรองใบอนุญาตประกอบวิชาชีพ',
-      },
-    ],
-  },
-  /* {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอรับใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'license-foreign',
-    subMenu: [
-      {
-        path: '/license/list',
-        label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
-      },
-      {
-        path: '/license/approve-list',
-        label: 'รับรองใบอนุญาตประกอบวิชาชีพ',
-      },
-    ],
-  }, */
-  /* {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'สร้างเลขใบอนุญาตประกอบวิชาชีพ',
-    path: 'xxx',
-  }, */
-  {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'renew-thai',
-    subMenu: [
-      {
-        path: '/renew-license/approve-list',
-        label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
-      },
-      {
-        path: '/renew-license/approve-detail',
-        label: 'รับรองใบอนุญาตประกอบวิชาชีพ',
-      },
-    ],
-  },
-  /* {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ(ชาวต่างชาติ)',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'temp-thai',
-    subMenu: [
-      {
-        path: '/license/list',
-        label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
-      },
-      {
-        path: '/license/approve-list',
-        label: 'รับรองใบอนุญาตประกอบวิชาชีพ',
-      },
-    ],
-  }, */
-  /* {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'สร้างเลขในอนุญาตประกอบวิชาชีพ',
-    path: '',
-  }, */
-  {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'temp-thai',
-    subMenu: [
-      {
-        path: '/temp-license/list',
-        label: 'ตรวจสอบใบคำขออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
-        params: { subtype: 1 },
-      },
-      {
-        path: '/temp-license/approve-list',
-        label: 'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
-        //params: { subtype: 1 },
-      },
-    ],
-  },
-  /* {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต (ชาวต่างชาติ)',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'temp-foreign',
-    subMenu: [
-      {
-        path: '/temp-license/list',
-        label: 'รายการใบคำขออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
-        params: { subtype: 5 },
-      },
-      {
-        path: '/temp-license/approve-list',
-        label: 'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
-        params: { subtype: 5 },
-      },
-    ],
-  }, */
-  {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอเปลี่ยนแปลง/แก้ไขใบอนุญาต',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'edit-thai',
-    subMenu: [
-      {
-        path: '/foreign-license/list',
-        label: 'ตรวจสอบใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
-      },
-      {
-        path: '/temp-license/approve-detail',
-        label: 'พิจารณารับรองเลขคุรุสภาสำหรับชาวต่างชาติ',
-      },
-    ],
-  },
-  /* {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอเปลี่ยนแปลง/แก้ไขใบอนุญาต (ชาวต่างชาติ)',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'edit-foreign',
-    subMenu: [
-      {
-        path: '/foreign-license/list',
-        label: 'ตรวจสอบใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
-      },
-      {
-        path: '/xxx',
-        label: 'พิจารณารับรองเลขคุรุสภาสำหรับชาวต่างชาติ',
-      },
-    ],
-  }, */
-  {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอใบแทนใบอนุญาตประกอบวิชาชีพ',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'sub-license',
-    subMenu: [
-      {
-        path: '/xxx',
-        label: 'รายการใบคำขอ',
-      },
-      {
-        path: '/temp-license/approve-detail',
-        label: 'พิจารณา',
-      },
-    ],
-  },
-  {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอหนังสือรับรองความรู้',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'confirm',
-    subMenu: [
-      {
-        path: '/xxx',
-        label: 'รายการใบคำขอ',
-      },
-      {
-        path: '/temp-license/approve-detail',
-        label: 'พิจารณา',
-      },
-    ],
-  },
-  /* {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอเทียบเคียงความรู้',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'xxx',
-    subMenu: [
-      {
-        path: '/xxx',
-        label: 'รายการใบคำขอ',
-      },
-      {
-        path: '/xxx',
-        label: 'พิจารณา',
-      },
-    ],
-  }, */
-  {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'foreign-id',
-    subMenu: [
-      {
-        path: '/foreign-license/list',
-        label: 'ตรวจสอบใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
-      },
-      {
-        path: '/temp-license/approve-detail',
-        label: 'พิจารณารับรองเลขคุรุสภาสำหรับชาวต่างชาติ',
-      },
-    ],
-  },
-  {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'กิจกรรมพัฒนาตนเอง',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'activities',
-    subMenu: [
-      {
-        path: '/xxx',
-        label: 'รายการ',
-      },
-      {
-        path: '/temp-license/approve-detail',
-        label: 'พิจารณา',
-      },
-    ],
-  },
-  /* {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ข้อมูลลักษณะต้องห้ามของผู้ขอใบอนุญาตประกอบวิชาชีพ',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'forbidden',
-    subMenu: [
-      {
-        path: '/xxx',
-        label: 'บันทึก',
-      },
-      {
-        path: '/xxx',
-        label: 'พิจารณา',
-      },
-    ],
-  }, */
-  {
-    icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ทะเบียนข้อมูล',
-    path: '',
-  },
-  /* {
-    icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'งานรับ-ส่งเอกสารใบอนุญาต',
-    path: '',
-  }, */
-  {
-    icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'รายงาน',
-    path: '',
-  },
-  {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอรหัสเข้าใช้งานระบบ',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'user-approvement',
-    subMenu: [
-      {
-        path: '/approve-new-user',
-        label: 'ระบบบริการด้วยตนเอง (self Service)',
-      },
-      {
-        path: '/approve-new-user',
-        label: 'ระบบบริการหน่วยงานทางการศึกษา (School Service)',
-      },
-    ],
-  },
-  {
-    icon: 'assets/images/icon-sidenav/people.svg',
-    label: 'บริหารจัดการผู้ใช้งาน',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'user-management',
-    subMenu: [
-      {
-        path: '/manage-current-user',
-        label: 'ผู้ใช้งานระบบบริการด้วยตนเอง (self Service)',
-      },
-      {
-        path: '/manage-current-user',
-        label: 'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
       },
     ],
   },
