@@ -204,8 +204,8 @@ export class LicenseRequestThaiComponent
         foreignLicenseForm: null,
       };
 
-    const edufiles = this.mapFileInfo(this.eduFiles);
-    const experiencefiles = this.mapFileInfo(this.experienceFiles);
+    const edufiles = this.eduFiles;
+    const experiencefiles = this.experienceFiles;
 
     const payload = {
       ...self,

@@ -32,7 +32,15 @@ export const routes: Routes = [
         component: RenewLicenseRequestComponent,
       },
       {
+        path: 'request/:id',
+        component: RenewLicenseRequestComponent,
+      },
+      {
         path: 'school-manager',
+        component: RenewLicenseSchoolManagerComponent,
+      },
+      {
+        path: 'school-manager/:id',
         component: RenewLicenseSchoolManagerComponent,
       },
       {
@@ -40,7 +48,15 @@ export const routes: Routes = [
         component: RenewLicenseEducationManagerComponent,
       },
       {
+        path: 'education-manager/:id',
+        component: RenewLicenseEducationManagerComponent,
+      },
+      {
         path: 'study-supervision',
+        component: RenewLicenseStudySupervisionComponent,
+      },
+      {
+        path: 'study-supervision/:id',
         component: RenewLicenseStudySupervisionComponent,
       },
       {

@@ -139,7 +139,7 @@ export class RenewLicenseThaiComponent
       educationLevelForm: null,
     };
 
-    const performancefiles = this.mapFileInfo(this.workingInfoFiles);
+    const performancefiles = this.workingInfoFiles;
 
     const payload = {
       ...self,
