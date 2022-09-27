@@ -51,7 +51,7 @@ export class ApproveNewUserListComponent implements AfterViewInit {
   }
 
   goToDetail(id: number) {
-    this.router.navigate(['approve-new-user', 'detail', id], {
+    this.router.navigate(['school', 'user-detail', id], {
       queryParams: { type: SchoolServiceUserPageType.ApproveNewUser },
     });
   }

@@ -58,7 +58,7 @@ export class ManageCurrentUserListComponent implements AfterViewInit {
   }
 
   goToDetail(id: number) {
-    this.router.navigate(['/manage-current-user', 'detail', id], {
+    this.router.navigate(['/school', 'user-detail', id], {
       queryParams: { type: SchoolServiceUserPageType.ManageCurrentUser },
     });
   }

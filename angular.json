@@ -574,106 +574,6 @@
       },
       "tags": []
     },
-    "e-service-e-license-manage-current-user": {
-      "root": "libs/e-service/e-license/manage-current-user",
-      "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-      "projectType": "library",
-      "sourceRoot": "libs/e-service/e-license/manage-current-user/src",
-      "prefix": "ksp",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/e-license/manage-current-user"],
-          "options": {
-            "jestConfig": "libs/e-service/e-license/manage-current-user/jest.config.ts",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/e-service/e-license/manage-current-user/**/*.ts",
-              "libs/e-service/e-license/manage-current-user/**/*.html"
-            ]
-          }
-        }
-      },
-      "tags": [],
-      "files": [
-        {
-          "file": "libs/e-service/e-license/manage-current-user/.eslintrc.json",
-          "hash": "0e10ec8fd82e6d81535f1e271861485301cf628d"
-        },
-        {
-          "file": "libs/e-service/e-license/manage-current-user/jest.config.ts",
-          "hash": "100881376377ff4b136c37521ae2f52fbf611001"
-        },
-        {
-          "file": "libs/e-service/e-license/manage-current-user/project.json",
-          "hash": "d763c4a2ef2dcbd58cd6f6e3caa3a2e4afed862a"
-        },
-        {
-          "file": "libs/e-service/e-license/manage-current-user/README.md",
-          "hash": "e0e3c54b317d2441868e5e981ac4d5cd2a052279"
-        },
-        {
-          "file": "libs/e-service/e-license/manage-current-user/src/index.ts",
-          "hash": "7b6dbfc5d4337ddff684e9c2ddbdf769c7780e9b"
-        },
-        {
-          "file": "libs/e-service/e-license/manage-current-user/src/lib/e-service-e-license-manage-current-user.module.ts",
-          "hash": "1eb7580112e9829c415d67bc00ca8e891ffb157d",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "e-service-feature-container-page",
-            "npm:@angular/router",
-            "e-service-e-license-user-detail",
-            "npm:@angular/material",
-            "shared-menu",
-            "npm:@angular/forms",
-            "shared-search"
-          ]
-        },
-        {
-          "file": "libs/e-service/e-license/manage-current-user/src/lib/user-list/manage-current-user-list.component.html",
-          "hash": "eb003f7c32527657d988501e8c9e14ad5cce6902"
-        },
-        {
-          "file": "libs/e-service/e-license/manage-current-user/src/lib/user-list/manage-current-user-list.component.scss",
-          "hash": "10d82c76d94c7a3c7d7ab1c0fe2324ef37a0b0df"
-        },
-        {
-          "file": "libs/e-service/e-license/manage-current-user/src/lib/user-list/manage-current-user-list.component.ts",
-          "hash": "b2f7481c016ac8ae51dace3de910adfa3e67470d",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/forms",
-            "npm:@angular/material",
-            "npm:@angular/router",
-            "shared-interface"
-          ]
-        },
-        {
-          "file": "libs/e-service/e-license/manage-current-user/src/test-setup.ts",
-          "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
-          "deps": ["npm:jest-preset-angular"]
-        },
-        {
-          "file": "libs/e-service/e-license/manage-current-user/tsconfig.json",
-          "hash": "623fa1791cbe2260234eb5f1c17516536d5eb609"
-        },
-        {
-          "file": "libs/e-service/e-license/manage-current-user/tsconfig.lib.json",
-          "hash": "7ccc97366e32a44c55bcf924c3b7f68198a8d10b"
-        },
-        {
-          "file": "libs/e-service/e-license/manage-current-user/tsconfig.spec.json",
-          "hash": "d1f5c8852d652eac23b0378b6c259ea88d5a88d1"
-        }
-      ]
-    },
     "e-service-e-license-renew-license": {
       "projectType": "library",
       "root": "libs/e-service/e-license/renew-license",
@@ -725,6 +625,106 @@
         }
       },
       "tags": []
+    },
+    "e-service-e-license-school-user": {
+      "root": "libs/e-service/e-license/school-user",
+      "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+      "projectType": "library",
+      "sourceRoot": "libs/e-service/e-license/school-user/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-service/e-license/school-user"],
+          "options": {
+            "jestConfig": "libs/e-service/e-license/school-user/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/school-user/**/*.ts",
+              "libs/e-service/e-license/school-user/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": [],
+      "files": [
+        {
+          "file": "libs/e-service/e-license/school-user/.eslintrc.json",
+          "hash": "0e10ec8fd82e6d81535f1e271861485301cf628d"
+        },
+        {
+          "file": "libs/e-service/e-license/school-user/jest.config.ts",
+          "hash": "100881376377ff4b136c37521ae2f52fbf611001"
+        },
+        {
+          "file": "libs/e-service/e-license/school-user/project.json",
+          "hash": "d763c4a2ef2dcbd58cd6f6e3caa3a2e4afed862a"
+        },
+        {
+          "file": "libs/e-service/e-license/school-user/README.md",
+          "hash": "e0e3c54b317d2441868e5e981ac4d5cd2a052279"
+        },
+        {
+          "file": "libs/e-service/e-license/school-user/src/index.ts",
+          "hash": "7b6dbfc5d4337ddff684e9c2ddbdf769c7780e9b"
+        },
+        {
+          "file": "libs/e-service/e-license/school-user/src/lib/e-service-e-license-manage-current-user.module.ts",
+          "hash": "1eb7580112e9829c415d67bc00ca8e891ffb157d",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "e-service-feature-container-page",
+            "npm:@angular/router",
+            "e-service-e-license-user-detail",
+            "npm:@angular/material",
+            "shared-menu",
+            "npm:@angular/forms",
+            "shared-search"
+          ]
+        },
+        {
+          "file": "libs/e-service/e-license/school-user/src/lib/user-list/manage-current-user-list.component.html",
+          "hash": "eb003f7c32527657d988501e8c9e14ad5cce6902"
+        },
+        {
+          "file": "libs/e-service/e-license/school-user/src/lib/user-list/manage-current-user-list.component.scss",
+          "hash": "10d82c76d94c7a3c7d7ab1c0fe2324ef37a0b0df"
+        },
+        {
+          "file": "libs/e-service/e-license/school-user/src/lib/user-list/manage-current-user-list.component.ts",
+          "hash": "b2f7481c016ac8ae51dace3de910adfa3e67470d",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/material",
+            "npm:@angular/router",
+            "shared-interface"
+          ]
+        },
+        {
+          "file": "libs/e-service/e-license/school-user/src/test-setup.ts",
+          "hash": "1100b3e8a6ed08f4b5c27a96471846d57023c320",
+          "deps": ["npm:jest-preset-angular"]
+        },
+        {
+          "file": "libs/e-service/e-license/school-user/tsconfig.json",
+          "hash": "623fa1791cbe2260234eb5f1c17516536d5eb609"
+        },
+        {
+          "file": "libs/e-service/e-license/school-user/tsconfig.lib.json",
+          "hash": "7ccc97366e32a44c55bcf924c3b7f68198a8d10b"
+        },
+        {
+          "file": "libs/e-service/e-license/school-user/tsconfig.spec.json",
+          "hash": "d1f5c8852d652eac23b0378b6c259ea88d5a88d1"
+        }
+      ]
     },
     "e-service-e-license-sub-license": {
       "projectType": "library",
@@ -9960,8 +9960,5 @@
       ]
     }
   },
-  "version": 1,
-  "cli": {
-    "analytics": false
-  }
+  "version": 1
 }
