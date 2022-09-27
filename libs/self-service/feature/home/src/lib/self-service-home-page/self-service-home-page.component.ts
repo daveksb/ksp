@@ -81,7 +81,7 @@ export class SelfServiceHomePageComponent {
         if (isForeign === SelfServiceRequestForType.ชาวไทย) {
           this.thaiTeacher(id);
         } else {
-          this.foreignTeacher(subtype);
+          this.foreignTeacher(subtype, id);
         }
         break;
       }
@@ -147,10 +147,19 @@ export class SelfServiceHomePageComponent {
   }
 
   //ครู + ผู้บริหหาร ต่างชาติ
-  foreignTeacher(type: SelfServiceRequestSubType) {
-    this.router.navigate(['/license', 'agreement'], {
-      queryParams: { type },
-    });
+  foreignTeacher(type: SelfServiceRequestSubType, id?: number) {
+    if (id) {
+      this.router.navigate(
+        ['/license', 'foreign-teacher', ...(id ? [`${id}`] : [])],
+        {
+          queryParams: { type },
+        }
+      );
+    } else {
+      this.router.navigate(['/license', 'agreement'], {
+        queryParams: { type },
+      });
+    }
   }
 
   // ผู้บริหารสถานศึกษา
