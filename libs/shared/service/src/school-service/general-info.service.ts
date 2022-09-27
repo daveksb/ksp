@@ -45,25 +45,4 @@ export class GeneralInfoService {
       shareReplay()
     );
   }
-
-  getUniversity(universityType: any): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/kspmasterdata/searchtypeiduniuniversity?searchTypeId=${universityType}`).pipe(
-      map((data: any) => data.datareturn),
-      shareReplay()
-    );
-  }
-
-  getUniversityType(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/kspmasterdata/uniuniversitytype`).pipe(
-      map((data: any) => data.datareturn),
-      shareReplay()
-    );
-  }
-
-  getDegreeLevel(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/kspmasterdata/unidegreelevel`).pipe(
-      map((data: any) => data.datareturn),
-      shareReplay()
-    );
-  }
 }

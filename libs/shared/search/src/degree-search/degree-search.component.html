@@ -7,14 +7,14 @@
         <label class="form-label">สถาบัน / มหาวิทยาลัย</label>
         <select class="form-select" formControlName="institution">
           <option value="null" selected disabled hidden>กรุณาเลือก</option>
-          <option *ngFor="let university of universityList" [value]="university.id">{{university.name}}</option>
+          <option *ngFor="let university of uniUniversityOption" [value]="university.id">{{university.name}}</option>
         </select>
       </div>
       <div class="col-md-6">
         <label class="form-label">สังกัด / คณะหน่วยงาน </label>
-        <select class="form-select" formControlName="affiliation" (change)="getUniversity()">
+        <select class="form-select" formControlName="affiliation" (change)="getUniversity.emit()">
           <option value="null" selected disabled hidden>กรุณาเลือก</option>
-          <option *ngFor="let universityType of universityTypeList" [value]="universityType.id">{{universityType.name}}</option>
+          <option *ngFor="let universityType of uniUniversityTypeOption" [value]="universityType.id">{{universityType.name}}</option>
         </select>
       </div>
     </div>

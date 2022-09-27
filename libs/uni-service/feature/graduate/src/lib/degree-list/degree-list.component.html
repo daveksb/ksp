@@ -5,9 +5,17 @@
 
 <div class="bg-secondary bg-opacity-10 px-4 py-3 full-height">
   <div class="search-container bg-white p-3">
-    <ksp-degree-search (clear)="clear()" (search)="search()">
-      <span class="box-header">ค้นหา</span>
-    </ksp-degree-search>
+    <form [formGroup]="form">
+      <ksp-degree-search 
+        (clear)="clear()" 
+        (search)="getDegreeCertList()"
+        [uniUniversityOption]="uniUniversityOption"
+        [uniUniversityTypeOption]="uniUniversityTypeOption"
+        (getUniversity)="getUniversity()"
+        formControlName="search">
+        <span class="box-header">ค้นหา</span>
+      </ksp-degree-search>
+    </form>
   </div>
   <br />
   <div class="box-header">รายการขอยื่นรายชื่อ</div>

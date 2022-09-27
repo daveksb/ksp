@@ -75,4 +75,11 @@ export class UniInfoService {
         shareReplay()
       );
   }
+
+  getDegreeLevel(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/kspmasterdata/unidegreelevel`).pipe(
+      map((data: any) => data.datareturn),
+      shareReplay()
+    );
+  }
 }

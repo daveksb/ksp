@@ -12,6 +12,7 @@ import { EMPTY, Observable, switchMap } from 'rxjs';
 import { GeneralInfoService, UniInfoService, UniRequestService } from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
 import { RequestPageType } from '@ksp/shared/constant';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   templateUrl: './uni-register-coordinator.component.html',
@@ -55,7 +56,7 @@ export class UniRegisterCoordinatorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.uniqueTimestamp = `${new Date().getTime()}`;
+    this.uniqueTimestamp = uuidv4();
     localForage.getItem('registerUserForm').then((res:any) => {
       if (res) {
         console.log(res)
@@ -136,6 +137,7 @@ export class UniRegisterCoordinatorComponent implements OnInit {
           payload.requesttype = this.requesttype;
           payload.requeststatus = `1`;
           payload.currentprocess = this.currentprocess;
+          payload.uniquetimestamp = this.uniqueTimestamp;
           return this.requestService.createRequest(payload);
         }
         return EMPTY;

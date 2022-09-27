@@ -38,4 +38,20 @@ export class UniRequestService {
       tokenkey: getCookie('userToken'),
     });
   }
+
+  getUniRequestDegreeCertById(id: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspuni/unirequestdegreecertselectbyid`, {
+        id: id,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
+
+  searchUniDegreeCert(form: any): Observable<any> {
+    return this.http.post(`${environment.apiUrlNoAuth}/unidegreecertsearch.php`, {
+      ...form,
+      tokenkey: getCookie('userToken'),
+    });
+  }
 }
