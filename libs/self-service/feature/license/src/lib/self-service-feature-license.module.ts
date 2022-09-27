@@ -43,7 +43,11 @@ export const routes: Routes = [
     children: [
       {
         path: 'teacher',
-        component: LicenseRequestThaiComponent,
+        component: LicenseRequestComponent,
+      },
+      {
+        path: 'teacher/:id',
+        component: LicenseRequestComponent,
       },
       {
         path: 'foreign-teacher',
@@ -62,7 +66,15 @@ export const routes: Routes = [
         component: LicenseRequestEducationManagerComponent,
       },
       {
+        path: 'education-manager/:id',
+        component: LicenseRequestEducationManagerComponent,
+      },
+      {
         path: 'study-supervision',
+        component: LicenseRequestStudySupervisionComponent,
+      },
+      {
+        path: 'study-supervision/:id',
         component: LicenseRequestStudySupervisionComponent,
       },
       // {

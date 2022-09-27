@@ -93,6 +93,12 @@ export class SelfServiceHomePageComponent {
         }
         break;
       }
+      case SelfServiceRequestSubType.ผู้บริหารการศึกษา:
+        this.eduManagerRequest(id);
+        break;
+      case SelfServiceRequestSubType.ศึกษานิเทศก์:
+        this.studySupervision(id);
+        break;
     }
   }
 
@@ -126,13 +132,21 @@ export class SelfServiceHomePageComponent {
   }
 
   // ผู้บริหารการศึกษา
-  eduManagerRequest() {
-    this.router.navigate(['/license', 'education-manager']);
+  eduManagerRequest(id?: number) {
+    this.router.navigate([
+      '/license',
+      'education-manager',
+      ...(id ? [`${id}`] : []),
+    ]);
   }
 
   //ศึกษานิเทศก์
-  studySupervision() {
-    this.router.navigate(['/license', 'study-supervision']);
+  studySupervision(id?: number) {
+    this.router.navigate([
+      '/license',
+      'study-supervision',
+      ...(id ? [`${id}`] : []),
+    ]);
   }
 
   // renewLicense(type: SelfServiceRequestSubType) {
