@@ -21,7 +21,7 @@ import {
 import { getCookie, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
 import * as _ from 'lodash';
 import { Observable } from 'rxjs';
-import uniqueString from 'unique-string';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'ksp-refund-fee-request',
@@ -66,7 +66,7 @@ export class RefundFeeRequestComponent implements OnInit {
   }
 
   initializeFile() {
-    this.uniqueTimestamp = uniqueString();
+    this.uniqueTimestamp = uuidv4();
   }
 
   createRequest() {

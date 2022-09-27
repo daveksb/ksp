@@ -25,7 +25,7 @@ import {
   SelfServiceRequestType,
 } from '@ksp/shared/constant';
 import * as _ from 'lodash';
-import uniqueString from 'unique-string';
+import { v4 as uuidv4 } from 'uuid';
 
 @UntilDestroy()
 @Component({
@@ -82,7 +82,7 @@ export class LicenseEditComponent implements OnInit {
   }
 
   initializeFile() {
-    this.uniqueTimestamp = uniqueString();
+    this.uniqueTimestamp = uuidv4();
   }
 
   getListData() {

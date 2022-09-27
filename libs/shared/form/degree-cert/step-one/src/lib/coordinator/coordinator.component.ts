@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
+import { GeneralInfoService } from '@ksp/shared/service';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
@@ -22,8 +23,11 @@ export class DegreeCertCoordinatorComponent extends KspFormBaseComponent {
     fax: [],
     email: [],
   });
-
-  constructor(private fb: FormBuilder) {
+  prefixOptions: ListData[] = [];
+  constructor(
+    private fb: FormBuilder,
+    private generalInfoService: GeneralInfoService
+  ) {
     super();
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
@@ -32,5 +36,11 @@ export class DegreeCertCoordinatorComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+    this.generalInfoService.getPrefix().subscribe((data) => {
+      this.prefixOptions = data?.map(({ id, name_th }: any) => ({
+        value: id,
+        label: name_th,
+      }));
+    });
   }
 }

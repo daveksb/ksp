@@ -1,4 +1,4 @@
-<div class="box-header">รายละเอียด:รางวัลคุรุสภา</div>
+<div class="box-header">รายละเอียด: รางวัลคุรุสภา</div>
 <mat-tab-group
   [formGroup]="form"
   class="tab-group"
@@ -53,7 +53,10 @@
   </mat-tab>
 
   <mat-tab label="ข้อมูลรางวัลและหลักฐานประกอบ">
-    <ksp-council-evidence formControlName="rewardDetailInfo"></ksp-council-evidence>
+    <ksp-council-evidence
+      formControlName="rewardDetailInfo"
+      [rewardFiles]="rewardFiles"
+      [uniqueTimestamp]="uniqueTimestamp"></ksp-council-evidence>
   </mat-tab>
 </mat-tab-group>
 

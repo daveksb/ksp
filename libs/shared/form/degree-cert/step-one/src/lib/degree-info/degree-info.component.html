@@ -40,7 +40,7 @@
     <div class="row mb-3">
       <div class="col-sm-8">
         <label class="form-label">ประเภทของหลักสูตร</label>
-        <select class="search__content form-select">
+        <select formControlName="courseType" class="search__content form-select">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">ภาษาไทย</option>
           <option value="2">ภาษาอังกฤษ</option>
@@ -49,7 +49,7 @@
       </div>
       <div class="col-sm-4">
         <label class="form-label">สถานะของหลักสูตร</label>
-        <select class="search__content form-select">
+        <select formControlName="courseStatus" class="search__content form-select">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">ใหม่</option>
           <option value="2">ปรับปรุง</option>
@@ -111,18 +111,18 @@
         <label class="form-label"
           >การอนุมัติหลักสูตรของสภามหาวิทยาลัย ครั้งที่
         </label>
-        <input class="form-control" type="text" />
+        <input class="form-control" formControlName="courseApproveTime" type="text" />
       </div>
       <div class="col-sm-3">
         <label class="form-label">วันที่</label>
-        <input class="form-control" type="date" />
+        <input class="form-control" formControlName="courseApproveDate" type="date" />
       </div>
     </div>
 
     <div class="row">
       <div class="col-sm-3">
         <label class="form-label">การพิจารณารับทราบของ อว. วันที่</label>
-        <input class="form-control" type="date" />
+        <input class="form-control" formControlName="courseAcceptDate" type="date" />
       </div>
     </div>
   </div>

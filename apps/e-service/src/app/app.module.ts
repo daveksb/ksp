@@ -12,7 +12,14 @@ import {
   TokenHandleInterceptor,
 } from '@ksp/shared/interceptor';
 import { MatMenuModule } from '@angular/material/menu';
+import { FileUploadUrls, File_UPLOAD_URLS } from '@ksp/shared/form/file-upload';
 
+const fileUrls: FileUploadUrls = {
+  uploadFile: '',
+  uploadImage: '',
+  download: '/kspuni/unirequestfileselectfile',
+  delete: '',
+};
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,6 +43,10 @@ import { MatMenuModule } from '@angular/material/menu';
       provide: HTTP_INTERCEPTORS,
       useClass: CacheInterceptor,
       multi: true,
+    },
+    {
+      provide: File_UPLOAD_URLS,
+      useValue: fileUrls,
     },
   ],
   bootstrap: [AppComponent],

@@ -52,6 +52,9 @@ export class UniLoginComponent {
       setCookie('userToken', res?.usertoken || '', 1);
       setCookie('firstNameTh', res?.firstnameth || '', 1);
       setCookie('lastNameTh', res?.lastnameth || '', 1);
+      setCookie('uniId', res?.uniid || '', 1);
+      setCookie('uniType', res?.unitype || '', 1);
+
       this.router.navigate(['/home']);
     } catch (error: any) {
       this.showWarningDialog(error?.message);

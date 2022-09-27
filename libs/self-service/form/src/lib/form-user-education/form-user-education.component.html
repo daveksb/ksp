@@ -70,6 +70,8 @@
       <ng-container *ngIf="selectedEducationType >= 0">
         <div class="mt-3">
           <ksp-form-attachment
+            [groups]="attachFiles"
+            [uniqueTimestamp]="uniqueTimestamp"
             [title]="'กรุณาแนบหลักฐานประกอบวุฒิทางการศึกษา'"></ksp-form-attachment>
         </div>
       </ng-container>
@@ -85,6 +87,8 @@
       <ng-container *ngIf="selectedEducationType >= 0">
         <div class="mt-3">
           <ksp-form-attachment
+            [groups]="attachFiles"
+            [uniqueTimestamp]="uniqueTimestamp"
             [title]="'กรุณาแนบหลักฐานประกอบวุฒิทางการศึกษา'"></ksp-form-attachment>
         </div>
       </ng-container>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+import _ from 'lodash';
 import { debounceTime } from 'rxjs';
 
 @Component({
@@ -16,6 +17,20 @@ export class TrainingComponent extends KspFormBaseComponent implements OnInit {
   });
 
   totalHours = 0;
+
+  override writeValue(value: any) {
+    if (value?.rows) {
+      const size =
+        _.size(value?.rows) - _.size(this.form.controls.rows.controls);
+      new Array(size).fill(null).forEach(() => this.addRow());
+
+      this.value = value;
+    }
+
+    if (value === null) {
+      this.form.reset();
+    }
+  }
 
   constructor(private fb: FormBuilder) {
     super();

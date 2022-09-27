@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { MatDialogModule } from '@angular/material/dialog';
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
+import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
@@ -26,7 +26,13 @@ export class ForbiddenPropertyFormComponent extends KspFormBaseComponent {
     prisonReason: [],
   });
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA)
+    public data: {
+      prohibitProperty: any;
+    }
+  ) {
     super();
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
@@ -35,6 +41,10 @@ export class ForbiddenPropertyFormComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+
+    if (this.data?.prohibitProperty) {
+      this.form.patchValue(this.data.prohibitProperty);
+    }
   }
 
   save() {

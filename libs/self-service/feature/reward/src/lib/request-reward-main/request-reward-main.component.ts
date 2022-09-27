@@ -7,15 +7,27 @@ import {
   GeneralInfoService,
   EducationDetailService,
 } from '@ksp/shared/service';
-import { providerFactory, replaceEmptyWithNull } from '@ksp/shared/utility';
+import {
+  getCookie,
+  providerFactory,
+  replaceEmptyWithNull,
+  toLowercaseProp,
+} from '@ksp/shared/utility';
 import * as _ from 'lodash';
 import { Observable } from 'rxjs';
 import { parseJson } from '@ksp/shared/utility';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { Router } from '@angular/router';
-import { SelfServiceRequestSubType } from '@ksp/shared/constant';
+import {
+  SelfServiceRequestForType,
+  SelfServiceRequestSubType,
+} from '@ksp/shared/constant';
+import { v4 as uuidv4 } from 'uuid';
+import { RequestRewardMainService } from './request-reward-main.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'ksp-request-reward-main',
   templateUrl: './request-reward-main.component.html',
@@ -45,6 +57,8 @@ export class RequestRewardMainComponent implements OnInit {
 
   prefixList$!: Observable<any>;
   bureau$!: Observable<any>;
+  uniqueTimestamp!: string;
+  rewardFiles: any[] = [];
 
   constructor(
     private requestService: SelfRequestService,
@@ -53,7 +67,8 @@ export class RequestRewardMainComponent implements OnInit {
     private generalInfoService: GeneralInfoService,
     private educationDetailService: EducationDetailService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private service: RequestRewardMainService
   ) {}
 
   ngOnInit(): void {
@@ -79,6 +94,45 @@ export class RequestRewardMainComponent implements OnInit {
     });
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.bureau$ = this.educationDetailService.getBureau();
+    this.initializeFiles();
+  }
+
+  initializeFiles() {
+    this.uniqueTimestamp = uuidv4();
+    console.log(this.form.value.rewardType);
+    this.form.controls.rewardType.valueChanges
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        const formType = +(res || 0);
+        switch (formType) {
+          case 40:
+            this.rewardFiles = structuredClone(this.service.councilRewardFiles);
+            break;
+          case 41:
+            this.rewardFiles = structuredClone(
+              this.service.thaiTeacherRewardFiles
+            );
+            break;
+          case 42:
+            this.rewardFiles = structuredClone(
+              this.service.bestTeacherRewardFiles
+            );
+            break;
+          case 43:
+            this.rewardFiles = structuredClone(this.service.praiseRewardFiles);
+            break;
+          case 44:
+            this.rewardFiles = structuredClone(
+              this.service.seniorTeacherRewardFiles
+            );
+            break;
+          case 45:
+            this.rewardFiles = structuredClone(
+              this.service.researchRewardFiles
+            );
+            break;
+        }
+      });
   }
 
   tempSave() {
@@ -136,7 +190,13 @@ export class RequestRewardMainComponent implements OnInit {
     const allowKey = Object.keys(self);
     const form: any = this.form.value.rewardDetail;
     //console.log(form);
-    const selectData = _.pick(form.userInfo, allowKey);
+    const userInfo = toLowercaseProp(form.userInfo);
+    userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
+    userInfo.uniquetimestamp = this.uniqueTimestamp;
+    userInfo.staffid = getCookie('userId');
+    const selectData = _.pick(userInfo, allowKey);
+    const rewardfiles = this.mapFileInfo(this.rewardFiles);
+
     const filledData = {
       ...self,
       ...selectData,
@@ -185,10 +245,22 @@ export class RequestRewardMainComponent implements OnInit {
       ...(form.rewardResearchHistory && {
         rewardresearchhistory: JSON.stringify(form.rewardResearchHistory),
       }),
+      ...{ fileinfo: JSON.stringify({ rewardfiles }) },
     };
     const { id, requestdate, ...payload } = replaceEmptyWithNull(filledData);
     console.log('payload = ', payload);
     return payload;
+  }
+
+  mapFileInfo(fileList: any[]) {
+    return fileList.map((file: any) => {
+      const object = {
+        fileid: file.fileId || null,
+        filename: file.fileName || null,
+        name: file.name || null,
+      };
+      return object;
+    });
   }
 }
 

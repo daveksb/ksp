@@ -1,4 +1,6 @@
-<ksp-top-nav [isSelfService]="true"><span header>ใบคำขอเทียบโอนความรู้ตามมาตรฐานวิชาชีพครู</span></ksp-top-nav>
+<ksp-top-nav [isSelfService]="true"
+  ><span header>ใบคำขอเทียบโอนความรู้ตามมาตรฐานวิชาชีพครู</span></ksp-top-nav
+>
 
 <form [formGroup]="form">
   <div class="main__container px-4 py-2">
@@ -6,8 +8,7 @@
 
     <div class="row mx-0 border shadow-sm rounded-4 px-2 py-4 bg-white my-4">
       <div class="col-lg-3">
-        <self-service-form-upload-image
-          [imgDetail]="'col'"></self-service-form-upload-image>
+        <self-service-form-upload-image></self-service-form-upload-image>
       </div>
       <div class="col-md">
         <ksp-form-user-info
@@ -16,11 +17,16 @@
           [prefixList]="prefixList$ | async"
           [displayMode]="[userInfoType]"
           [nationList]="nationalitys$ | async"
-          [isSchoolService]="false"></ksp-form-user-info>
+          [isSchoolService]="false"
+        ></ksp-form-user-info>
       </div>
     </div>
 
-    <mat-tab-group class="tab-group" animationDuration="0ms" [selectedIndex]="0">
+    <mat-tab-group
+      class="tab-group"
+      animationDuration="0ms"
+      [selectedIndex]="0"
+    >
       <mat-tab label="ที่อยู่" class="tab-content">
         <ksp-form-address
           formControlName="address1"
@@ -29,7 +35,8 @@
           [amphurs]="amphurs1$ | async"
           [tumbols]="tumbols1$ | async"
           (provinceChanged)="provinceChanged(1, $event)"
-          (amphurChanged)="amphurChanged(1, $event)">
+          (amphurChanged)="amphurChanged(1, $event)"
+        >
           <span>ที่อยู่ทะเบียนบ้าน</span>
         </ksp-form-address>
 
@@ -41,7 +48,8 @@
           [amphurs]="amphurs2$ | async"
           [tumbols]="tumbols2$ | async"
           (provinceChanged)="provinceChanged(2, $event)"
-          (amphurChanged)="amphurChanged(2, $event)">
+          (amphurChanged)="amphurChanged(2, $event)"
+        >
           <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
           <span class="text-danger ms-1 fs-6">*กรุณากรอกข้อมูลตำบล, อำเภอ</span>
           <div class="d-flex align-items-center">
@@ -63,17 +71,22 @@
           [tumbols]="tumbols3$ | async"
           [bureaus]="bureau$ | async"
           (provinceChanged)="provinceChanged(3, $event)"
-          (amphurChanged)="amphurChanged(3, $event)">
+          (amphurChanged)="amphurChanged(3, $event)"
+        >
         </self-service-form-user-workplace>
       </mat-tab>
 
       <mat-tab label="ข้อมูลทางการศึกษา">
-        <self-service-compare-knowledge-education formControlName="educationInfo">
+        <self-service-compare-knowledge-education
+          formControlName="educationInfo"
+        >
         </self-service-compare-knowledge-education>
       </mat-tab>
 
       <mat-tab label="ข้อมูลเทียบเคียงผลการทดสอบ">
-        <self-service-compare-knowledge-info formControlName="testResultCompareInfo">
+        <self-service-compare-knowledge-info
+          formControlName="testResultCompareInfo"
+        >
         </self-service-compare-knowledge-info>
       </mat-tab>
 
@@ -81,7 +94,8 @@
         <ksp-form-attachment
           [title]="'กรุณาแนบหลักฐานประกอบ'"
           [groups]="objectiveFiles"
-          [uniqueTimestamp]="uniqueTimestamp"></ksp-form-attachment>
+          [uniqueTimestamp]="uniqueTimestamp"
+        ></ksp-form-attachment>
         <div class="fs-6 text-danger">
           *กรุณาส่งเอกสารแสดงผลคะแนนที่ใช้เทียบเคียงผลการทดสอบ(ฉบับจริง)
           ตามรายวิชาที่ยื่นเทียบเคียงผลการทดสอบ ไปยัง สำนักงานเลขาธิการคุรุสภา
@@ -92,7 +106,9 @@
 
     <div class="d-flex justify-content-center my-3">
       <button type="button" class="btn btn-secondary">ล้างข้อมูล</button>
-      <button type="button" class="btn btn-warning mx-3" (click)="submit(1)">บันทึกชั่วคราว</button>
+      <button type="button" class="btn btn-warning mx-3" (click)="submit(1)">
+        บันทึกชั่วคราว
+      </button>
       <button type="button" (click)="submit(2)" class="btn btn-primary">
         บันทึกและยื่น
       </button>

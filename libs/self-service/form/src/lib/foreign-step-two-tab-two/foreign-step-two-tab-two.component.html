@@ -1,6 +1,6 @@
 <form [formGroup]="form">
-  <div class="row mb-2">
-    <div class="col">
+  <div class="row">
+    <div class="col-md mb-2">
       <label class="form-label">Name of Educational Institution</label>
       <input class="form-control" type="text" formControlName="addressName" />
     </div>
@@ -11,6 +11,7 @@
     [districts]="districts"
     [subDistricts]="subDistricts"
     (provinceChanged)="provinceChanged.emit($event)"
-    (districtChanged)="districtChanged.emit($event)">
+    (districtChanged)="districtChanged.emit($event)"
+  >
   </self-service-foreign-step-two-tab-one>
 </form>

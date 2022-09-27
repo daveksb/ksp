@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './license-foreign-agreement.component.html',
   styleUrls: ['./license-foreign-agreement.component.scss'],
 })
-export class LicenseForeignAgreementComponent implements OnInit {
+export class LicenseForeignAgreementComponent {
   headerGroup = ['Issue Date', 'Form ID'];
   title = 'TEACHING LICENSE APPLICATION FORM';
   rules = [
@@ -40,14 +40,12 @@ export class LicenseForeignAgreementComponent implements OnInit {
 
   save() {
     const type = this.route.snapshot.queryParamMap.get('type');
-    this.router.navigate(['/', 'license', 'foreign-teacher'], {
+    this.router.navigate(['/license', 'foreign-teacher'], {
       queryParams: { type },
     });
   }
 
   cancel() {
-    this.router.navigate(['/', 'home']);
+    this.router.navigate(['/home']);
   }
-
-  ngOnInit(): void {}
 }

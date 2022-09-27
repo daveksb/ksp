@@ -93,6 +93,7 @@
         <ksp-form-attachment
           title="กรุณาแนบหลักฐานประกอบการปฏิบัติงาน"
           [groups]="attachFiles"
+          [uniqueTimestamp]="uniqueTimestamp"
         ></ksp-form-attachment
       ></ng-template>
     </div>
@@ -100,9 +101,10 @@
     <div class="d-flex justify-content-center">
       <button type="button" class="btn btn-secondary">ล้างข้อมูล</button>
       <button
-        [disabled]="form.invalid"
+        [disabled]="disabledSave"
         type="button"
         class="ms-3 btn btn-primary"
+        (click)="onClickSave()"
       >
         บันทึกข้อมูล
       </button>

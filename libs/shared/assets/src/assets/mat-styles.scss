@@ -18,6 +18,22 @@
   .mat-tab-label {
     width: 11rem;
   }
+  .mat-stepper-label-position-bottom .mat-horizontal-stepper-header-container {
+    width: auto;
+  }
+
+  .mat-step-text-label {
+    white-space: normal;
+  }
+
+  .mat-stepper-label-position-bottom .mat-horizontal-stepper-header,
+  .mat-vertical-stepper-header {
+    padding: 24px 8px;
+  }
+
+  .mat-horizontal-content-container {
+    padding: 0 !important;
+  }
 }
 
 .mat-tab-label-active {

@@ -1,6 +1,15 @@
 import { RequestProcessList, SchoolRequestType } from '@ksp/shared/constant';
 import { SchoolRequest } from '@ksp/shared/interface';
+import moment from 'moment';
 
+// return Thai date format, Use in component
+export function stringToThaiDate(sDate: string, format = "DD MMM YYYY"): string {
+  try {
+    return moment(sDate).locale('th-TH').format(format);
+  } catch (error) {
+    return "-"
+  }
+}
 // return Thai date format, Use in component
 export function thaiDate(date: Date): string {
   return date.toLocaleDateString('th-TH', {
@@ -33,7 +42,7 @@ export function replaceEmptyWithNull(input: any) {
 
 // parse json with Thai characters support
 export function parseJson(input: any) {
-  if (input && input) {
+  if (input) {
     return JSON.parse(decodeURIComponent(escape(window.atob(input))));
   } else {
     return null;
