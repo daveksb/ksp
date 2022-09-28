@@ -1,0 +1,103 @@
+<ksp-top-nav><span header> รับ-ส่งเอกสารงานใบอนุญาต </span></ksp-top-nav>
+
+<form [formGroup]="form">
+  <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
+    <div class="box-header">ทะเบียนหนังสือรับใหม่</div>
+    <div class="bg-white border p-3">
+      <div class="d-flex flex-row justify-content-between">
+        <ksp-request-header-info
+          [requestDate]="'today'"
+          [requestNumber]="'requestNo'"
+          [requestLabel2]="'เลขที่รับ'"
+        ></ksp-request-header-info>
+      </div>
+      <hr />
+      <div class="box-header mb-2">ข้อมูลหนังสือรับ</div>
+      <div class="row mb-2">
+        <div class="col">
+          <label class="form-label">ปี พ.ศ.</label>
+          <input type="text" class="form-control" disabled />
+        </div>
+        <div class="col">
+          <label class="form-label">รับวันที่</label>
+          <input type="date" class="form-control" />
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col">
+          <label class="form-label">ระดับความลับ</label>
+          <select class="form-select">
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="col">
+          <label class="form-label">ระดับความเร่งด่วน</label>
+          <select class="form-select">
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="col">
+          <label class="form-label">ภายในวันที่</label>
+          <input type="date" class="form-control" />
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-6">
+          <label class="form-label">เลขที่หนังสือ</label>
+          <input type="text" class="form-control" />
+        </div>
+        <div class="col">
+          <label class="form-label">ลงวันที่</label>
+          <input type="date" class="form-control" />
+        </div>
+      </div>
+    </div>
+    <br />
+    <div class="bg-white p-3 border">
+      <div class="box-header mb-2">ข้อมูลบุคคล/หน่วยงาน</div>
+      <div class="d-flex">
+        <div class="d-flex form-control flex-row w-auto me-4">
+          <div class="d-flex align-items-center me-5">
+            <input type="radio" value="1" formControlName="docInfo" />
+            <label class="form-label ms-2">จากบุคคล</label>
+          </div>
+          <div class="d-flex align-items-center">
+            <input type="radio" value="2" formControlName="docInfo" />
+            <label class="form-label ms-2">จากหน่วยงาน</label>
+          </div>
+        </div>
+        <div class="form-control d-flex flex-row w-auto">
+          <div class="d-flex align-items-center">
+            <input type="radio" value="3" formControlName="docInfo" />
+            <label class="form-label ms-2">เอกสารตีกลับ</label>
+          </div>
+        </div>
+      </div>
+
+      <ng-container *ngIf="docType === 1">
+        <br />
+        <ksp-book-receive-detail-person></ksp-book-receive-detail-person
+      ></ng-container>
+      <ng-container *ngIf="docType === 2">
+        <br />
+        <ksp-book-receive-detail-agency></ksp-book-receive-detail-agency
+      ></ng-container>
+    </div>
+  </div>
+</form>
+
+<div class="sticky-bottom border">
+  <ksp-bottom-nav
+    [isLastPage]="true"
+    [isFirstPage]="true"
+    [showCenterButtons]="true"
+    [showSaveButton]="true"
+  ></ksp-bottom-nav>
+</div>

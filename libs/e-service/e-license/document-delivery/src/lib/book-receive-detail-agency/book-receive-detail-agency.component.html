@@ -1,0 +1,100 @@
+<form [formGroup]="form">
+  <div class="bg-light p-3">
+    <div class="row mb-2">
+      <div class="col-6">
+        <label class="form-label">หน่วยงาน</label>
+        <input type="text" class="form-control" />
+      </div>
+      <div class="col">
+        <br />
+        <div class="d-flex align-items-center">
+          <input type="checkbox" />
+          <label class="form-label ms-2">จำข้อมูล</label>
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table mb-2">
+        <thead>
+          <tr>
+            <th scope="col">เลือก</th>
+            <th scope="col">เลขที่ใบคำขอ</th>
+            <th scope="col">เลขบัตรประจำตัวประชาชน</th>
+            <th scope="col">คำนำหน้า</th>
+            <th scope="col">ชื่อ</th>
+            <th scope="col">นามสกุล</th>
+            <th scope="col">แก้ไข</th>
+            <th scope="col">ลบ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container formArrayName="agencyInfo">
+            <ng-container
+              *ngFor="let row of agencyInfo.controls; let i = index"
+            >
+              <ng-container [formGroupName]="i">
+                <tr>
+                  <td><input type="checkbox" /></td>
+                  <td>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="licenseNumber"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="idCard"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="prefix"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="firstname"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="lastname"
+                    />
+                  </td>
+                  <td>
+                    <i role="button" class="bi bi-pencil fs-5 text-primary"></i>
+                  </td>
+                  <td>
+                    <i
+                      role="button"
+                      class="bi bi-trash3-fill fs-5 text-danger"
+                      (click)="deleteFormArray(agencyInfo, i)"
+                    ></i>
+                  </td></tr
+              ></ng-container>
+            </ng-container>
+          </ng-container>
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-center">
+        <ksp-add-row-button
+          class="text-primary"
+          (addRowClick)="addRow(agencyInfo)"
+          >เพิ่มรายชื่อ</ksp-add-row-button
+        >
+      </div>
+    </div>
+  </div>
+</form>
+
+<br />
+<ksp-book-receive-detail-info></ksp-book-receive-detail-info>

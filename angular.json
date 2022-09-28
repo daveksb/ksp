@@ -319,6 +319,32 @@
         }
       ]
     },
+    "e-service-e-license-document-delivery": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/document-delivery",
+      "sourceRoot": "libs/e-service/e-license/document-delivery/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-service/e-license/document-delivery"],
+          "options": {
+            "jestConfig": "libs/e-service/e-license/document-delivery/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/document-delivery/**/*.ts",
+              "libs/e-service/e-license/document-delivery/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-e-license-foreign-license": {
       "root": "libs/e-service/e-license/foreign-license",
       "projectType": "library",
