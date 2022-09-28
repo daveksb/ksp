@@ -14,15 +14,20 @@ export class RenewLicenseForeignTeacherComponent
   extends KspFormBaseComponent
   implements OnInit
 {
-  selectedActivityType1!: number;
-  activityTypes1: ListData[] = [];
+  selectedActivityType!: number;
+  activityTypes: ListData[] = [];
 
   foreignForm = this.fb.group({
-    activityType1: [],
+    activityType: [],
+    activityName: this.fb.array([
+      this.fb.group({
+        activityDetail: [''],
+      }),
+    ]),
   });
 
   override form = this.fb.group({
-    foreignInfo: this.fb.array([this.foreignForm]),
+    foreigns: this.fb.array([this.foreignForm]),
   });
 
   constructor(private fb: FormBuilder) {
@@ -37,33 +42,46 @@ export class RenewLicenseForeignTeacherComponent
   }
 
   ngOnInit(): void {
-    this.activityTypes1 = activityTypes1;
+    this.activityTypes = activityTypes;
 
-    this.foreignForm.controls.activityType1.valueChanges
+    this.foreignForm.controls.activityType.valueChanges
       .pipe(debounceTime(750))
       .subscribe((res) => {
-        this.selectedActivityType1 = Number(res);
+        this.selectedActivityType = Number(res);
         //this.form.controls.educationLevelForm.reset();
       });
   }
 
   addForm() {
     const foreignForm = this.fb.group({
-      activityType1: [],
+      activityType: [],
+      activityName: this.fb.array([
+        this.fb.group({
+          activityDetail: [''],
+        }),
+      ]),
     });
-    this.foreignInfo.push(foreignForm);
+    this.foreigns.push(foreignForm);
   }
 
-  get foreignInfo() {
-    return this.form.controls.foreignInfo;
+  get foreigns() {
+    return this.form.controls.foreigns;
   }
 
   deleteForm(index: number) {
-    this.foreignInfo.removeAt(index);
+    this.foreigns.removeAt(index);
+  }
+
+  getActivity(index: number) {
+    return this.foreigns.controls[index].controls.activityName;
+  }
+
+  getHasMoreActivity(index: number) {
+    return this.foreigns.controls[index].controls.activityType;
   }
 }
 
-const activityTypes1 = [
+const activityTypes = [
   {
     value: 0,
     label: `Attending an educational profession course to obtain an additional qualification`,

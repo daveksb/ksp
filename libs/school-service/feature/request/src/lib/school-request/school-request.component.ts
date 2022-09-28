@@ -149,7 +149,7 @@ export class SchoolRequestComponent implements OnInit {
     });
   }
 
-  submitRequest() {
+  /* submit() {
     // ถ้ามี request id เปลี่ยนสถานะ
     // ถ้ายังไม่มี request id insert new row
     if (this.requestId) {
@@ -157,15 +157,7 @@ export class SchoolRequestComponent implements OnInit {
     } else {
       this.createRequest('submit');
     }
-  }
-
-  tempSave() {
-    if (this.requestId) {
-      this.updateRequest('temp');
-    } else {
-      this.createRequest('temp');
-    }
-  }
+  } */
 
   cancelRequest() {
     const payload = {
@@ -191,7 +183,6 @@ export class SchoolRequestComponent implements OnInit {
 
     const { id, ...userInfo } = formData.userInfo;
     userInfo.schoolid = this.schoolId;
-    userInfo.currentprocess = `1`;
     userInfo.requeststatus = `1`;
     // if (this.requestId) {
     //   userInfo.currentprocess = `1`;
@@ -253,7 +244,11 @@ export class SchoolRequestComponent implements OnInit {
     baseForm.patchValue(payload);
     //console.log('current form = ', baseForm.value);
     this.requestService.createRequest(baseForm.value).subscribe((res) => {
-      this.backToListPage();
+      if (type == 'submit') {
+        this.confirmCompleted();
+      } else {
+        this.backToListPage();
+      }
     });
   }
 
@@ -338,6 +333,7 @@ export class SchoolRequestComponent implements OnInit {
 
     //console.log('update payload = ', res);
     this.requestService.updateRequest(res).subscribe((res) => {
+      //this.confirmCompleted();
       this.backToListPage();
     });
   }
@@ -561,7 +557,19 @@ export class SchoolRequestComponent implements OnInit {
       });
   }
 
-  save() {
+  backToListPage() {
+    this.router.navigate(['/temp-license', 'list']);
+  }
+
+  tempBtnClick() {
+    if (this.requestId) {
+      this.updateRequest('temp');
+    } else {
+      this.createRequest('temp');
+    }
+  }
+
+  permanentBtnClick() {
     const dialogRef = this.dialog.open(ForbiddenPropertyFormComponent, {
       width: '850px',
     });
@@ -571,30 +579,6 @@ export class SchoolRequestComponent implements OnInit {
       .subscribe((res) => {
         if (res) {
           this.onConfirmed();
-        }
-      });
-  }
-
-  backToListPage() {
-    this.router.navigate(['/temp-license', 'list']);
-  }
-
-  onCancelRequest() {
-    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
-      data: {
-        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
-        subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
-        ใช่หรือไม่`,
-        btnLabel: 'บันทึก',
-      },
-    });
-
-    confirmDialog.componentInstance.confirmed
-      .pipe(untilDestroyed(this))
-      .subscribe((res) => {
-        if (res) {
-          this.onCompleted();
         }
       });
   }
@@ -614,12 +598,14 @@ export class SchoolRequestComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         if (res) {
-          this.onCompleted();
+          /* this.submit();
+          this.confirmCompleted(); */
+          this.createRequest('submit');
         }
       });
   }
 
-  onCompleted() {
+  confirmCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
       data: {
@@ -634,7 +620,45 @@ export class SchoolRequestComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         if (res) {
-          this.createRequest('submit');
+          //this.createRequest('submit');
+          this.backToListPage();
+        }
+      });
+  }
+
+  cancel() {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: `คุณต้องการยกเลิกรายการใบคำขอ
+        ใช่หรือไม่? `,
+      },
+    });
+
+    confirmDialog.componentInstance.confirmed
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res) {
+          this.cancelRequest();
+          this.cancelCompleted();
+        }
+      });
+  }
+
+  cancelCompleted() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      width: '350px',
+      data: {
+        header: `ยกเลิกใบคำขอสำเร็จ`,
+        buttonLabel: 'กลับสู่หน้าหลัก',
+      },
+    });
+
+    completeDialog.componentInstance.completed
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res) {
+          this.backToListPage();
         }
       });
   }

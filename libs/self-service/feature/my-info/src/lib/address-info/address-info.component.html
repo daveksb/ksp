@@ -5,6 +5,7 @@
 
 <div class="main__container px-4 py-2 full-height">
   <form [formGroup]="form">
+    <div class="box-header">ที่อยู่ทะเบียนบ้าน</div>
     <div class="detail__container p-3">
       <ksp-form-address
         [isDarkMode]="true"
@@ -16,10 +17,10 @@
         (amphurChanged)="amphurChanged(1, $event)"
         formControlName="addr1"
       >
-        <span>ที่อยู่ทะเบียนบ้าน</span>
       </ksp-form-address>
     </div>
     <br />
+    <div class="box-header">ที่อยู่ที่ติดต่อได้สะดวก</div>
     <div class="detail__container p-3">
       <ksp-form-address
         [isDarkMode]="true"
@@ -31,7 +32,6 @@
         (amphurChanged)="amphurChanged(2, $event)"
         formControlName="addr2"
       >
-        <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
       </ksp-form-address>
     </div>
   </form>
