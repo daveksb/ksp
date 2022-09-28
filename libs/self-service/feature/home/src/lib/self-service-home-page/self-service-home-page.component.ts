@@ -76,11 +76,11 @@ export class SelfServiceHomePageComponent {
     } else if (requestType === 6) {
       this.compare();
     } else if (requestType === 5) {
-      this.transfer();
+      this.transfer(id);
     } else if (requestType === 4) {
-      this.substituteLicense();
+      this.substituteLicense(id);
     } else if (requestType === 3) {
-      this.licenseEdit();
+      this.licenseEdit(id);
     } else if (requestType === 2) {
       // renew
       this.checkRenewRedirect(subType, isForeign, id);
@@ -259,8 +259,8 @@ export class SelfServiceHomePageComponent {
   }
 
   //ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ
-  licenseEdit() {
-    this.router.navigate(['/license', 'edit']);
+  licenseEdit(id?: number) {
+    this.router.navigate(['/license', 'edit', ...(id ? [`${id}`] : [])]);
   }
 
   //ขอรับรางวัล
@@ -269,8 +269,12 @@ export class SelfServiceHomePageComponent {
   }
 
   // ขอหนังสือรับรองความรู้
-  transfer() {
-    this.router.navigate(['/transfer-knowledge', 'request']);
+  transfer(id?: number) {
+    this.router.navigate([
+      '/transfer-knowledge',
+      'request',
+      ...(id ? [`${id}`] : []),
+    ]);
   }
 
   // เทียบเคียง
@@ -284,8 +288,12 @@ export class SelfServiceHomePageComponent {
   }
 
   //ขอใบแทนใบอนุญาตประกอบวิชาชีพ
-  substituteLicense() {
-    this.router.navigate(['/substitute-license', 'request']);
+  substituteLicense(id?: number) {
+    this.router.navigate([
+      '/substitute-license',
+      'request',
+      ...(id ? [`${id}`] : []),
+    ]);
   }
 }
 

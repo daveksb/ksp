@@ -64,7 +64,6 @@ export class RenewLicenseForeignComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.requestId = Number(params.get('id'));
       if (this.requestId) {
-        console.log(this.requestId);
         // this.loadRequestFromId(this.requestId);
         this.requestService.getRequestById(this.requestId).subscribe((res) => {
           if (res) {
