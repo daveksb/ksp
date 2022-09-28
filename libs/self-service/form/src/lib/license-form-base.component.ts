@@ -270,17 +270,6 @@ export abstract class LicenseFormBaseComponent {
     }
   }
 
-  public mapFileInfo(fileList: any[]) {
-    return fileList.map((file: any) => {
-      const object = {
-        fileid: file.fileId || null,
-        filename: file.fileName || null,
-        name: file.name || null,
-      };
-      return object;
-    });
-  }
-
   abstract createRequest(forbidden: any, currentProcess: number): void;
   abstract patchUserInfoForm(data: any): void;
   abstract patchAddress1Form(data: any): void;

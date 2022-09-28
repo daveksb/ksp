@@ -19,8 +19,7 @@
     [date]="'1'"
     [requestNo]="'1'"
     [KuruspaId]="'1'"
-    [personId]="'1'"
-  ></self-service-license-info>
+    [personId]="'1'"></self-service-license-info>
   <br />
 
   <div class="box-header">ค้นหาใบคำขอ</div>
@@ -78,8 +77,7 @@
     <button
       mat-button
       [matMenuTriggerFor]="license"
-      class="btn text-primary border-primary bg-white"
-    >
+      class="btn text-primary border-primary bg-white">
       + สร้างใบคำขอ
     </button>
     <mat-menu #license="matMenu">
@@ -104,28 +102,14 @@
     </mat-menu>
 
     <mat-menu #request="matMenu">
-      <button mat-menu-item [matMenuTriggerFor]="requestTeacher">ครู</button>
-      <button mat-menu-item [matMenuTriggerFor]="requestManager">
+      <button mat-menu-item [matMenuTriggerFor]="teacher">ครู</button>
+      <button mat-menu-item [matMenuTriggerFor]="manager">
         ผู้บริหารสถานศึกษา
       </button>
-      <button mat-menu-item (click)="requestLicense(3)">
+      <button mat-menu-item (click)="eduManagerRequest()">
         ผู้บริหารการศึกษา
       </button>
-      <button mat-menu-item (click)="requestLicense(4)">ศึกษานิเทศก์</button>
-    </mat-menu>
-
-    <mat-menu #requestTeacher="matMenu">
-      <button mat-menu-item (click)="requestLicense(1)">ครูชาวไทย</button>
-      <button mat-menu-item (click)="requestLicense(5)">ครูชาวต่างชาติ</button>
-    </mat-menu>
-
-    <mat-menu #requestManager="matMenu">
-      <button mat-menu-item (click)="requestLicense(2)">
-        ผู้บริหารสถานศึกษาชาวไทย
-      </button>
-      <button mat-menu-item (click)="requestLicense(5)">
-        ผู้บริหารสถานศึกษาชาวต่างชาติ
-      </button>
+      <button mat-menu-item (click)="studySupervision()">ศึกษานิเทศก์</button>
     </mat-menu>
 
     <mat-menu #renew="matMenu">
@@ -133,20 +117,36 @@
       <button mat-menu-item [matMenuTriggerFor]="renewManager">
         ผู้บริหารสถานศึกษา
       </button>
-      <button mat-menu-item (click)="renewLicense(3)">ผู้บริหารการศึกษา</button>
-      <button mat-menu-item (click)="renewLicense(4)">ศึกษานิเทศก์</button>
+      <button mat-menu-item (click)="eduManagerRenew()">
+        ผู้บริหารการศึกษา
+      </button>
+      <button mat-menu-item (click)="supervisionRenew()">ศึกษานิเทศก์</button>
+    </mat-menu>
+
+    <mat-menu #teacher="matMenu">
+      <button mat-menu-item (click)="thaiTeacher()">ครูชาวไทย</button>
+      <button mat-menu-item (click)="foreignTeacher(1)">ครูชาวต่างชาติ</button>
     </mat-menu>
 
     <mat-menu #renewTeacher="matMenu">
-      <button mat-menu-item (click)="renewLicense(1)">ครูชาวไทย</button>
-      <button mat-menu-item (click)="renewLicense(5)">ครูชาวต่างชาติ</button>
+      <button mat-menu-item (click)="teacherRenew()">ครูชาวไทย</button>
+      <button mat-menu-item (click)="foreignRenew(1)">ครูชาวต่างชาติ</button>
+    </mat-menu>
+
+    <mat-menu #manager="matMenu">
+      <button mat-menu-item (click)="schoolManager()">
+        ผู้บริหารสถานศึกษาชาวไทย
+      </button>
+      <button mat-menu-item (click)="foreignTeacher(2)">
+        ผู้บริหารสถานศึกษาชาวต่างชาติ
+      </button>
     </mat-menu>
 
     <mat-menu #renewManager="matMenu">
-      <button mat-menu-item (click)="renewLicense(2)">
+      <button mat-menu-item (click)="schManagerRenew()">
         ผู้บริหารสถานศึกษาชาวไทย
       </button>
-      <button mat-menu-item (click)="renewLicense(5)">
+      <button mat-menu-item (click)="foreignRenew(2)">
         ผู้บริหารสถานศึกษาชาวต่างชาติ
       </button>
     </mat-menu>
@@ -201,8 +201,7 @@
           <i
             (click)="goToDetail(element)"
             role="button"
-            class="bi bi-pencil-square text-primary fs-5"
-          ></i>
+            class="bi bi-pencil-square text-primary fs-5"></i>
         </td>
       </ng-container>
 

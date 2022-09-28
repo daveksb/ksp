@@ -4,13 +4,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { FormBuilder } from '@angular/forms';
 import { SelfRequest } from '@ksp/shared/interface';
-import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
+import {
+  parseJson,
+  replaceEmptyWithNull,
+  toLowercaseProp,
+} from '@ksp/shared/utility';
 import {
   SelfServiceRequestForType,
   SelfServiceRequestSubType,
   SelfServiceRequestType,
 } from '@ksp/shared/constant';
-import { SelfRequestService } from '@ksp/shared/service';
+import { SelfRequestService, MyInfoService } from '@ksp/shared/service';
 import * as _ from 'lodash';
 import { getCookie } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
@@ -31,17 +35,128 @@ export class LicenseRequestForeignComponent implements OnInit {
 
   attachFiles: any[] = [];
   uniqueTimestamp!: string;
+  requestId!: number;
+  requestData!: SelfRequest;
+  requestNo: string | null = '';
+  currentProcess!: number;
+  userInfo: any;
+  addressInfo: any;
+  workplaceInfo: any;
 
   constructor(
     private router: Router,
     public dialog: MatDialog,
     private fb: FormBuilder,
     private requestService: SelfRequestService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private myInfoService: MyInfoService
   ) {}
 
   ngOnInit(): void {
-    this.uniqueTimestamp = uuidv4();
+    this.checkRequestId();
+  }
+
+  checkRequestId() {
+    this.route.paramMap.subscribe((params) => {
+      this.requestId = Number(params.get('id'));
+      if (this.requestId) {
+        console.log(this.requestId);
+        // this.loadRequestFromId(this.requestId);
+        this.requestService.getRequestById(this.requestId).subscribe((res) => {
+          if (res) {
+            console.log(res);
+            this.requestData = res;
+            this.requestNo = res.requestno;
+            this.currentProcess = Number(res.currentprocess);
+            this.uniqueTimestamp = res.uniquetimestamp || '';
+            console.log(this.uniqueTimestamp);
+
+            this.patchData(res);
+          }
+        });
+      } else {
+        // this.initializeFiles();
+        this.uniqueTimestamp = uuidv4();
+
+        this.getMyInfo();
+      }
+    });
+  }
+
+  patchData(data: SelfRequest) {
+    this.patchUserInfo(data);
+    this.patchAddress(
+      parseJson(data.addressinfo),
+      data.contactphone,
+      data.email
+    );
+    if (data.schooladdrinfo) {
+      this.patchWorkplace(parseJson(data.schooladdrinfo));
+    }
+    // if (data.prohibitproperty) {
+    //   this.prohibitProperty = parseJson(data.prohibitproperty);
+    // }
+  }
+
+  getMyInfo() {
+    this.myInfoService.getMyInfo().subscribe((res) => {
+      console.log(res);
+      this.patchUserInfo(res);
+      this.patchAddress(parseJson(res.addressinfo), res.phone, res.email);
+      if (res.schooladdrinfo) {
+        this.patchWorkplace(parseJson(res.schooladdrinfo));
+      }
+    });
+  }
+
+  patchUserInfo(data: any) {
+    const {
+      birthdate,
+      firstnameen,
+      lastnameen,
+      prefixen,
+      id,
+      middlenameen,
+      passportno,
+      nationality,
+    } = data;
+    const patchData = {
+      birthdate: birthdate.split('T')[0],
+      firstnameen,
+      lastnameen,
+      prefixen,
+      id,
+      middlenameen,
+      passportno,
+      nationality,
+    } as any;
+    this.userInfo = patchData;
+  }
+
+  patchAddress(addrs: any[], phone: any, email: any) {
+    if (addrs && addrs.length) {
+      const addr = addrs[0];
+      this.addressInfo = {
+        ...addr,
+        phone,
+        email,
+      };
+    }
+  }
+
+  patchWorkplace(data: any) {
+    this.workplaceInfo = {
+      addressName: data.addressName,
+      addressForm: {
+        houseNo: data.houseNumber,
+        alley: data.lane,
+        road: data.road,
+        postcode: data.zipCode,
+        province: data.province,
+        tumbol: data.subDistrict,
+        amphur: data.district,
+      },
+    };
   }
 
   cancel() {
@@ -114,7 +229,7 @@ export class LicenseRequestForeignComponent implements OnInit {
     const selectData = _.pick(userInfo, allowKey);
 
     const { addressName, addressForm: resWorkplaceForm } = workplaceForm;
-    const documentfiles = this.mapFileInfo(this.attachFiles);
+    const documentfiles = this.attachFiles;
 
     const payload = {
       ...self,
@@ -143,16 +258,5 @@ export class LicenseRequestForeignComponent implements OnInit {
 
   onFileUpdate(files: any[]) {
     this.attachFiles = files;
-  }
-
-  mapFileInfo(fileList: any[]) {
-    return fileList.map((file: any) => {
-      const object = {
-        fileid: file.fileId || null,
-        filename: file.fileName || null,
-        name: file.name || null,
-      };
-      return object;
-    });
   }
 }
