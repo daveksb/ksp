@@ -202,11 +202,11 @@ export const menu: MenuConfig[] = [
         path: '/my-info/person-info',
       },
       {
-        label: 'ข้อมูลที่อยู่',
+        label: 'ที่อยู่',
         path: '/my-info/address-info',
       },
       {
-        label: 'ข้อมูลสถานที่ทำงาน',
+        label: 'สถานที่ทำงาน',
         path: '/my-info/workplace-info',
       },
       {

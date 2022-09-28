@@ -40,7 +40,6 @@ export abstract class LicenseFormBaseComponent {
   requestNo: string | null = '';
   currentProcess!: number;
   prohibitProperty: any;
-  //myInfo = new SelfMyInfo();
   myImage = '';
 
   constructor(
@@ -269,17 +268,6 @@ export abstract class LicenseFormBaseComponent {
       this.provinces2$ = this.provinces1$;
       this.patchAddress2FormWithAddress1();
     }
-  }
-
-  public mapFileInfo(fileList: any[]) {
-    return fileList.map((file: any) => {
-      const object = {
-        fileid: file.fileId || null,
-        filename: file.fileName || null,
-        name: file.name || null,
-      };
-      return object;
-    });
   }
 
   abstract createRequest(forbidden: any, currentProcess: number): void;

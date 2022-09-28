@@ -20,6 +20,7 @@ import { SchoolTempLicenseRoutingModule } from './temp-license-routing.module';
 import { SchoolRequestComponent } from './school-request/school-request.component';
 import { SchoolRequestListComponent } from './request-list/request-list.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     FormTeachingInfoManagerComponent,
     FormEducationInfoManagerComponent,
     MatPaginatorModule,
+    MatSortModule,
   ],
   declarations: [SchoolRequestListComponent, SchoolRequestComponent],
 })

@@ -4,10 +4,8 @@
     performance since issued date of license until present. All three activities
     must not be the same
   </div>
-  <ng-container formArrayName="foreignInfo">
-    <ng-container
-      *ngFor="let foreignForm of foreignInfo.controls; let i = index"
-    >
+  <ng-container formArrayName="foreigns">
+    <ng-container *ngFor="let foreignForm of foreigns.controls; let i = index">
       <ng-container [formGroupName]="i">
         <div class="px-3 py-2 border rounded mb-3">
           <div class="d-flex justify-content-end">
@@ -17,14 +15,15 @@
               (click)="deleteForm(i)"
             ></i>
           </div>
+
           <select
-            formControlName="activityType1"
+            formControlName="activityType"
             class="form-select mb-3"
             style="white-space: break-spaces"
           >
             <option selected hidden disabled value="null">กรุณาเลือก</option>
             <option
-              *ngFor="let atv of activityTypes1"
+              *ngFor="let atv of activityTypes"
               [value]="atv.value"
               class="form-label text-black"
             >
@@ -32,41 +31,74 @@
             </option>
           </select>
 
-          <ng-container *ngIf="selectedActivityType1 === 0">
-            <ksp-activity-add-degree></ksp-activity-add-degree
-          ></ng-container>
-          <ng-container *ngIf="selectedActivityType1 === 1">
-            <ksp-activity-diploma-receive></ksp-activity-diploma-receive
-          ></ng-container>
-          <ng-container *ngIf="selectedActivityType1 === 2">
-            <ksp-activity-seminar></ksp-activity-seminar
-          ></ng-container>
-          <ng-container *ngIf="selectedActivityType1 === 3">
-            <ksp-activity-academic-archivement></ksp-activity-academic-archivement
-          ></ng-container>
-          <ng-container *ngIf="selectedActivityType1 === 4">
-            <ksp-activity-lecturer></ksp-activity-lecturer
-          ></ng-container>
-          <ng-container *ngIf="selectedActivityType1 === 5">
-            <ksp-activity-write-book></ksp-activity-write-book
-          ></ng-container>
-          <ng-container *ngIf="selectedActivityType1 === 6">
-            <ksp-activity-innovation></ksp-activity-innovation
-          ></ng-container>
-          <ng-container *ngIf="selectedActivityType1 === 7">
-            <ksp-activity-research></ksp-activity-research
-          ></ng-container>
-          <ng-container *ngIf="selectedActivityType1 === 8">
-            <ksp-activity-reward></ksp-activity-reward
-          ></ng-container>
-          <ng-container *ngIf="selectedActivityType1 === 9">
-            <ksp-activity-lecture-register></ksp-activity-lecture-register
-          ></ng-container>
-          <ng-container *ngIf="selectedActivityType1 === 10">
-            <ksp-activity-study-tour></ksp-activity-study-tour
-          ></ng-container>
-          <ng-container *ngIf="selectedActivityType1 === 11">
-            <ksp-activity-learning-material></ksp-activity-learning-material
+          <ng-container formArrayName="activityName">
+            <ng-container
+              *ngFor="let foreigns of getActivity(i).controls; let j = index"
+            >
+              <ng-container [formGroupName]="j">
+                <ng-container *ngIf="selectedActivityType === 0">
+                  <ksp-activity-add-degree
+                    formControlName="activityDetail"
+                  ></ksp-activity-add-degree
+                ></ng-container>
+
+                <ng-container *ngIf="selectedActivityType === 1">
+                  <ksp-activity-diploma-receive
+                    formControlName="activityDetail"
+                  ></ksp-activity-diploma-receive
+                ></ng-container>
+
+                <ng-container *ngIf="selectedActivityType === 2">
+                  <ksp-activity-seminar
+                    formControlName="activityDetail"
+                  ></ksp-activity-seminar
+                ></ng-container>
+                <ng-container *ngIf="selectedActivityType === 3">
+                  <ksp-activity-academic-archivement
+                    formControlName="activityDetail"
+                  ></ksp-activity-academic-archivement
+                ></ng-container>
+                <ng-container *ngIf="selectedActivityType === 4">
+                  <ksp-activity-lecturer
+                    formControlName="activityDetail"
+                  ></ksp-activity-lecturer
+                ></ng-container>
+                <ng-container *ngIf="selectedActivityType === 5">
+                  <ksp-activity-write-book
+                    formControlName="activityDetail"
+                  ></ksp-activity-write-book
+                ></ng-container>
+                <ng-container *ngIf="selectedActivityType === 6">
+                  <ksp-activity-innovation
+                    formControlName="activityDetail"
+                  ></ksp-activity-innovation
+                ></ng-container>
+                <ng-container *ngIf="selectedActivityType === 7">
+                  <ksp-activity-research
+                    formControlName="activityDetail"
+                  ></ksp-activity-research
+                ></ng-container>
+                <ng-container *ngIf="selectedActivityType === 8">
+                  <ksp-activity-reward
+                    formControlName="activityDetail"
+                  ></ksp-activity-reward
+                ></ng-container>
+                <ng-container *ngIf="selectedActivityType === 9">
+                  <ksp-activity-lecture-register
+                    formControlName="activityDetail"
+                  ></ksp-activity-lecture-register
+                ></ng-container>
+                <ng-container *ngIf="selectedActivityType === 10">
+                  <ksp-activity-study-tour
+                    formControlName="activityDetail"
+                  ></ksp-activity-study-tour
+                ></ng-container>
+                <ng-container *ngIf="selectedActivityType === 11">
+                  <ksp-activity-learning-material
+                    formControlName="activityDetail"
+                  ></ksp-activity-learning-material
+                ></ng-container>
+              </ng-container> </ng-container
           ></ng-container>
         </div>
 

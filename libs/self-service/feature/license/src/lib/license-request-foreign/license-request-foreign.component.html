@@ -1,9 +1,9 @@
-<!-- <ksp-top-nav [isSelfService]="true"
+<ksp-top-nav [isSelfService]="true"
   ><span header>TEACHING LICENSE APPLICATION FORM</span>
 </ksp-top-nav>
 
-<div class="main__container py-2">
-  <div class="px-4">
+<div class="main__container py-2 px-4">
+  <div class="">
     <self-service-request-status
       [headerLabel1]="'Issue Date'"
       [headerLabel2]="'Form ID'"
@@ -13,7 +13,7 @@
   <br />
   <div class="box-header text-center">
     THE TEACHERS' COUNCIL OF THAILAND TEACHING LICENSE APPLICATION FORM
-  </div> -->
+  </div>
 
   <form [formGroup]="form">
     <mat-stepper
@@ -31,6 +31,9 @@
         <ng-template matStepLabel>Personal Details</ng-template>
         <self-service-foreign-license-step-two
           formControlName="personalDetail"
+          [userInfo]="userInfo"
+          [addressInfo]="addressInfo"
+          [workplaceInfo]="workplaceInfo"
         ></self-service-foreign-license-step-two>
       </mat-step>
 
@@ -52,7 +55,7 @@
       </mat-step>
     </mat-stepper>
 
-<!--     <div class="d-flex justify-content-center my-3">
+    <div class="d-flex justify-content-center my-3">
       <button type="button" (click)="cancel()" class="btn btn-secondary">
         Cancel
       </button>
@@ -61,4 +64,4 @@
       </button>
     </div>
   </form>
-</div> -->
+</div>

@@ -121,7 +121,7 @@ export class CompareKnowledgeRequestComponent
     );
     const allowKey = Object.keys(self);
 
-    const attachfiles = this.mapFileInfo(this.objectiveFiles);
+    const attachfiles = this.objectiveFiles;
 
     const initialPayload = {
       ...replaceEmptyWithNull(userInfo),

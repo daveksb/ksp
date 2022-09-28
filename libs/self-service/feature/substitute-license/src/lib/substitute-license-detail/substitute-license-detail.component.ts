@@ -117,7 +117,7 @@ export class SubstituteLicenseDetailComponent
     );
     const allowKey = Object.keys(self);
 
-    const replacereasoninfofiles = this.mapFileInfo(this.objectiveFiles);
+    const replacereasoninfofiles = this.objectiveFiles;
 
     const initialPayload = {
       ...replaceEmptyWithNull(userInfo),

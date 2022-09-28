@@ -56,9 +56,9 @@ export class SeniorTeacherSubsidySixComponent
 
   ngOnInit(): void {
     this.form.valueChanges.subscribe((res) => {
-      console.log('res = ', res);
+      //console.log('res = ', res);
       this.isHasAsset = Number(res['haveAsset']);
-      console.log('res2 = ', this.isHasAsset);
+      //console.log('res2 = ', this.isHasAsset);
     });
   }
 }
