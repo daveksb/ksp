@@ -184,6 +184,13 @@ export class SchoolRequestComponent implements OnInit {
     const { id, ...userInfo } = formData.userInfo;
     userInfo.schoolid = this.schoolId;
     userInfo.requeststatus = `1`;
+
+    if (type == 'submit') {
+      userInfo.currentprocess = `2`;
+    } else {
+      userInfo.currentprocess = `1`;
+    }
+
     // if (this.requestId) {
     //   userInfo.currentprocess = `1`;
     // } else {
@@ -234,11 +241,6 @@ export class SchoolRequestComponent implements OnInit {
       ...{ fileinfo: JSON.stringify({ tab3, tab4, tab5, tab6 }) },
     };
 
-    if (type == 'submit') {
-      payload.currentprocess = `2`;
-    } else {
-      payload.currentprocess = `1`;
-    }
     //console.log('payload = ', payload);
 
     baseForm.patchValue(payload);

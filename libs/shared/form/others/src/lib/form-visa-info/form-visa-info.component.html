@@ -24,5 +24,10 @@
       <label class="form-label">วันเดือนปีวีซ่าหมดอายุ</label>
       <input class="form-control" type="date" formControlName="visaenddate" />
     </div>
+
+    <div class="col-6" *ngIf="mode === 'view'">
+      <label class="form-label">เลขประจำตัวคุรุสภา</label>
+      <input class="form-control" type="text" formControlName="licenseid" />
+    </div>
   </div>
 </form>
