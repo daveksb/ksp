@@ -8,7 +8,7 @@ import {
 } from '@ksp/shared/constant';
 import { SelfRequest } from '@ksp/shared/interface';
 import { SelfRequestService } from '@ksp/shared/service';
-import { getCookie } from '@ksp/shared/utility';
+import { getCookie, thaiDate } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-self-service-home-page',
@@ -37,10 +37,10 @@ export class SelfServiceHomePageComponent {
       requesttype: null,
       requestno: null,
       requestdate: null,
-      requeststatus: '1',
-      currentprocess: '1',
+      requeststatus: null,
+      currentprocess: null,
       offset: '0',
-      row: '1000',
+      row: '100',
     };
     this.requestService.searchMyRequests(payload).subscribe((res) => {
       this.dataSource.data = res;
@@ -51,6 +51,10 @@ export class SelfServiceHomePageComponent {
       this.sort.direction = sortState.direction;
       this.sort.sortChange.emit(sortState);
     });
+  }
+
+  toThaiDate(input: string) {
+    return thaiDate(new Date(input));
   }
 
   goToDetail(input: SelfRequest) {
