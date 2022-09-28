@@ -208,7 +208,10 @@ export class LicenseRequestForeignComponent implements OnInit {
     completeDialog.componentInstance.saved.subscribe((res) => {
       if (res) {
         const payload = this.createRequest(1);
-        this.requestService.createRequest(payload).subscribe((res) => {
+        const request = this.requestId
+          ? this.requestService.updateRequest.bind(this.requestService)
+          : this.requestService.createRequest.bind(this.requestService);
+        request(payload).subscribe((res) => {
           //console.log('request result = ', res);
           if (res.returncode === '00') {
             this.router.navigate(['/home']);
@@ -220,7 +223,10 @@ export class LicenseRequestForeignComponent implements OnInit {
     completeDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         const payload = this.createRequest(2);
-        this.requestService.createRequest(payload).subscribe((res) => {
+        const request = this.requestId
+          ? this.requestService.updateRequest.bind(this.requestService)
+          : this.requestService.createRequest.bind(this.requestService);
+        request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res.returncode === '00') {
             this.router.navigate(['/license', 'payment-channel']);

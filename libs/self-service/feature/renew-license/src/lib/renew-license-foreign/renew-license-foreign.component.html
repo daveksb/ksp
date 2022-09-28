@@ -20,7 +20,14 @@
       <mat-step [completed]="false">
         <ng-template matStepLabel>Personal Details</ng-template>
         <self-service-foreign-license-step-two
-          formControlName="personalDetail"></self-service-foreign-license-step-two>
+          formControlName="personalDetail"
+          [userInfo]="userInfo"
+          [addressInfo]="addressInfo"
+          [workplaceInfo]="workplaceInfo"
+          [grantionTeachingInfo]="grantionTeachingInfo"
+          [academicFiles]="academicFiles"
+          [uniqueTimestamp]="uniqueTimestamp"
+          [eduInfo]="eduInfo"></self-service-foreign-license-step-two>
       </mat-step>
 
       <mat-step [completed]="false">
@@ -32,12 +39,14 @@
         <ng-template matStepLabel>Documents and evidence required</ng-template>
         <self-service-foreign-license-step-three
           [documentTypes]="'renew'"
+          [attachFiles]="documentFiles"
           [uniqueTimestamp]="uniqueTimestamp"></self-service-foreign-license-step-three>
       </mat-step>
 
       <mat-step [completed]="false">
         <ng-template matStepLabel>Personal Declaration</ng-template>
         <self-service-foreign-license-step-four
+          [personalDeclaration]="personalDeclaration"
           formControlName="personalDeclaration">
         </self-service-foreign-license-step-four>
       </mat-step>

@@ -50,7 +50,7 @@ export class SelfServiceHomePageComponent {
         const sortState: Sort = { active: 'id', direction: 'desc' };
         this.sort.active = sortState.active;
         this.sort.direction = sortState.direction;
-      this.sort.sortChange.emit(sortState);
+        this.sort.sortChange.emit(sortState);
       } else {
         this.dataSource.data = [];
       }
@@ -109,7 +109,7 @@ export class SelfServiceHomePageComponent {
         if (isForeign === SelfServiceRequestForType.ชาวไทย) {
           this.schoolManager(id);
         } else {
-          this.foreignTeacher(subtype);
+          this.foreignTeacher(subtype, id);
         }
         break;
       }
@@ -132,7 +132,7 @@ export class SelfServiceHomePageComponent {
         if (isForeign === SelfServiceRequestForType.ชาวไทย) {
           this.teacherRenew(id);
         } else {
-          this.foreignRenew(subtype);
+          this.foreignRenew(subtype, id);
         }
         break;
       }
@@ -140,7 +140,7 @@ export class SelfServiceHomePageComponent {
         if (isForeign === SelfServiceRequestForType.ชาวไทย) {
           this.schManagerRenew(id);
         } else {
-          this.foreignRenew(subtype);
+          this.foreignRenew(subtype, id);
         }
         break;
       }
@@ -223,10 +223,13 @@ export class SelfServiceHomePageComponent {
   }
 
   //ครู + ผู้บริหาร ต่างชาติ
-  foreignRenew(type: SelfServiceRequestSubType) {
-    this.router.navigate(['/renew-license', 'foreign'], {
-      queryParams: { type },
-    });
+  foreignRenew(type: SelfServiceRequestSubType, id?: number) {
+    this.router.navigate(
+      ['/renew-license', 'foreign', ...(id ? [`${id}`] : [])],
+      {
+        queryParams: { type },
+      }
+    );
   }
   // ผู้บริหารสถานศึกษา
   schManagerRenew(id?: number) {

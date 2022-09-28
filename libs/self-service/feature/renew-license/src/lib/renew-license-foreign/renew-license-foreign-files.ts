@@ -69,3 +69,36 @@ export const REQUEST_DOCUMENT_FILES = [
     fileName: '',
   },
 ];
+
+export const RENEW_DOCUMENT_FILES = [
+  {
+    name: `An applicant's Qualification Identification Form`,
+    fileId: '',
+    fileName: '',
+  },
+  {
+    name: `Copy of all the used pages of the teacher's passport; preferaly the photo page and present  Non-B Visa page`,
+    fileId: '',
+    fileName: '',
+  },
+  {
+    name: `Copy of all the used pages of the teacher's work permit`,
+    fileId: '',
+    fileName: '',
+  },
+  {
+    name: `Copy of the current teaching license`,
+    fileId: '',
+    fileName: '',
+  },
+  {
+    name: `Copy of documents or evidence of the performance results of professional practice as specified`,
+    fileId: '',
+    fileName: '',
+  },
+  {
+    name: `Copy of educational certificate along with official transcripts`,
+    fileId: '',
+    fileName: '',
+  },
+];
