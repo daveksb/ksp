@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { UniServiceFormModule } from '@ksp/uni-service/form';
+import { FormCoordinatorInfoComponent } from '@ksp/shared/form/school/register';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -29,6 +30,7 @@ const routes: Routes = [
     SharedFormOthersModule,
     UniServiceFormModule,
     RouterModule.forChild(routes),
+    FormCoordinatorInfoComponent,
   ],
   declarations: [
     SchoolRetiredSearchComponent,

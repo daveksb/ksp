@@ -12,7 +12,7 @@ import { GeneralInfoService, RequestService } from '@ksp/shared/service';
 import { EMPTY, Observable, switchMap } from 'rxjs';
 import localForage from 'localforage';
 import { thaiDate } from '@ksp/shared/utility';
-
+import { v4 as uuidv4 } from 'uuid';
 @Component({
   templateUrl: './register-coordinator.component.html',
   styleUrls: ['./register-coordinator.component.scss'],
@@ -40,7 +40,7 @@ export class CoordinatorInfoComponent implements OnInit {
   mode: FormMode = 'edit';
   userInfoFormdisplayMode: number = UserInfoFormType.thai;
   school: any;
-
+  uniqueTimestamp: any;
   constructor(
     private router: Router,
     public dialog: MatDialog,
@@ -56,12 +56,13 @@ export class CoordinatorInfoComponent implements OnInit {
 
     localForage.getItem('registerSelectedSchool').then((res) => {
       this.school = res;
-      console.log(this.school)
     });
 
     localForage.getItem('registerUserInfoFormValue').then((res) => {
       this.savingData = res;
     });
+
+    this.uniqueTimestamp = uuidv4();
   }
   getListData() {
     this.prefixList$ = this.generalInfoService.getPrefix();
@@ -157,7 +158,10 @@ export class CoordinatorInfoComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        localForage.setItem('registerCoordinatorInfoFormValue', this.form.value);
+        localForage.setItem(
+          'registerCoordinatorInfoFormValue',
+          this.form.value
+        );
         this.router.navigate(['/register', 'password']);
       }
     });

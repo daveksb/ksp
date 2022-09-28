@@ -21,7 +21,7 @@ export class SelfRequestService {
   searchMyRequests(payload: any): Observable<SelfRequest[]> {
     return this.http
       .post<SelfRequest[]>(
-        `${environment.apiUrl}/kspself/requestsearch`,
+        `${environment.shortApiUrl}/selfschrequestsearch.php`,
         payload
       )
       .pipe(map((data: any) => data.datareturn));

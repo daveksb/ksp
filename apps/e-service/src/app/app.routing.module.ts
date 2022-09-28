@@ -5,7 +5,7 @@ import { EServiceLoginComponent } from '@ksp/e-service/feature/login';
 import { EthicsCustomRoute } from '@ksp/shared/interface';
 import {
   ethicsMenu,
-  licenseMenu,
+  eLicenseMenu,
   professionalMenu,
   refundFeeMenu,
   standardMenu,
@@ -26,7 +26,7 @@ const routes: EthicsCustomRoute[] = [
   }, */
   {
     path: 'request-license',
-    data: { menuConfig: licenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
+    data: { menuConfig: eLicenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
     loadChildren: () =>
       import('@ksp/e-service/e-license/request-license').then(
         (m) => m.EServiceELicenseRequestLicenseModule
@@ -35,7 +35,7 @@ const routes: EthicsCustomRoute[] = [
   },
   {
     path: 'renew-license',
-    data: { menuConfig: licenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
+    data: { menuConfig: eLicenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
     loadChildren: () =>
       import('@ksp/e-service/e-license/renew-license').then(
         (m) => m.EServiceELicenseRenewLicenseModule
@@ -43,6 +43,15 @@ const routes: EthicsCustomRoute[] = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'document-delivery',
+    data: { menuConfig: eLicenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
+    loadChildren: () =>
+      import('@ksp/e-service/e-license/document-delivery').then(
+        (m) => m.EServiceELicenseDocumentDeliveryModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  /*   {
     path: 'knowledge-cert',
     data: { menuConfig: licenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
     loadChildren: () =>
@@ -59,7 +68,7 @@ const routes: EthicsCustomRoute[] = [
         (m) => m.EServiceELicenseSubLicenseModule
       ),
     canActivate: [AuthGuard],
-  },
+  }, */
   {
     path: 'degree-cert',
     data: { menuConfig: standardMenu, headerLabel: 'ระบบงานมาตรฐานวิชาชีพ' },
@@ -71,7 +80,7 @@ const routes: EthicsCustomRoute[] = [
   },
   {
     path: 'temp-license',
-    data: { menuConfig: licenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
+    data: { menuConfig: eLicenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
     loadChildren: () =>
       import('@ksp/e-service/e-license/temp-license').then(
         (m) => m.ELicenseTempLicenseModule
@@ -80,7 +89,7 @@ const routes: EthicsCustomRoute[] = [
   },
   {
     path: 'foreign-license',
-    data: { menuConfig: licenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
+    data: { menuConfig: eLicenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
     loadChildren: () =>
       import('@ksp/e-service/e-license/foreign-license').then(
         (m) => m.EServiceELicenseForeignLicenseModule
@@ -139,29 +148,28 @@ const routes: EthicsCustomRoute[] = [
       ),
     canActivate: [AuthGuard],
   },
-  /*   {
-    path: 'approve-new-user',
-    data: {
-      menuConfig: licenseMenu,
-      headerLabel:
-        'ใบคำขอรหัสเข้าใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
-      headerDetail: ' > ตรวจสอบและอนุมัติใบคำขอรหัสเข้าใช้งาน',
-    },
-    loadChildren: () =>
-      import('@ksp/e-service/e-license/approve-new-user').then(
-        (m) => m.EServiceELicenseApproveNewUserModule
-      ),
-    canActivate: [AuthGuard],
-  }, */
   {
     path: 'school',
     data: {
-      menuConfig: licenseMenu,
+      menuConfig: eLicenseMenu,
       headerLabel: 'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา',
     },
     loadChildren: () =>
       import('@ksp/e-service/e-license/school-user').then(
         (m) => m.EServiceELicenseSchoolUserModule
+      ),
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'self',
+    data: {
+      menuConfig: eLicenseMenu,
+      headerLabel: 'ผู้ใช้งานระบบบริการด้วยตนเอง',
+    },
+    loadChildren: () =>
+      import('@ksp/e-service/e-license/self-user').then(
+        (m) => m.EServiceELicenseSelfUserModule
       ),
     canActivate: [AuthGuard],
   },

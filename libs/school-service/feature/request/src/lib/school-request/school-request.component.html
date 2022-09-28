@@ -186,22 +186,22 @@
   </div>
 </div>
 
-<div class="sticky-bottom border">
+<div class="sticky-bottom border px-2">
   <ksp-bottom-nav
-    (saveClicked)="submitRequest()"
-    (cancelClicked)="cancelRequest()"
-    (tempSaveClicked)="tempSave()"
-    [isFirstPage]="true"
+    (prevClicked)="backToListPage()"
+    (cancelClicked)="cancel()"
+    (tempSaveClicked)="tempBtnClick()"
+    (saveClicked)="permanentBtnClick()"
     [colorMode]="'green'"
     [isLastPage]="true"
     [showCenterButtons]="true"
     [cancelButtonLabel]="'ยกเลิกใบคำขอ'"
     [showCancelButton]="requestId > 0"
-    [disableCancelButton]="disableCancel"
     [showTempSaveButton]="true"
     [disableTempSaveButton]="disableTempSave"
     [showSaveButton]="true"
+    [saveButtonLabel]="'บันทึกและยื่น'"
     [disableSaveButton]="disableSave"
-    [saveButtonLabel]="'ส่งใบคำขอ'"
+    [disableCancelButton]="disableCancel"
   ></ksp-bottom-nav>
 </div>

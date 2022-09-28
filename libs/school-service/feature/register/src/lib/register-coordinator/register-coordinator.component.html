@@ -30,7 +30,10 @@
       </div>
 
       <div class="d-flex">
-        <div class="box-header text-primary ps-4">
+        <div
+          class="box-header text-primary"
+          style="padding-left: 100px; padding-bottom: 20px"
+        >
           รหัสเข้าใช้งาน (รหัสโรงเรียน)
         </div>
         <div class="box-header ms-2">คือ {{ school?.schoolId }}</div>
@@ -41,14 +44,15 @@
           ข้อมูลผู้แต่งตั้งผู้ประสานงาน / ผู้รับผิดชอบ (ที่ระบุไว้ในเอกสารแนบ)
         </div>
 
-        <ksp-form-user-info
+        <ksp-form-coordinator-info
           formControlName="coordinator"
           [isDarkMode]="false"
           [mode]="mode"
           [prefixList]="prefixList$ | async"
           [nationList]="nationalitys$ | async"
           [displayMode]="[userInfoFormdisplayMode]"
-        ></ksp-form-user-info>
+          [isSchoolService]="false"
+        ></ksp-form-coordinator-info>
       </div>
 
       <div class="my-4">
@@ -56,6 +60,7 @@
           [title]="'กรุณาแนบหลักฐานเพื่อการพิจารณา'"
           [requestType]="1"
           [groups]="uploadFileList"
+          [uniqueTimestamp]="uniqueTimestamp"
         ></ksp-form-attachment>
       </div>
 

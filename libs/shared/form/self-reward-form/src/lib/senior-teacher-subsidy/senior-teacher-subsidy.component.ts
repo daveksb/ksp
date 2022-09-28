@@ -23,7 +23,7 @@ export class SeniorTeacherSubsidyComponent
   ];
 
   override form = this.fb.group({
-    hasSubsidy: [],
+    subsidy: [],
     status: [],
     spouse: [],
     children: [],
@@ -50,6 +50,6 @@ export class SeniorTeacherSubsidyComponent
   }
 
   get hasSubsidy() {
-    return this.form.controls.hasSubsidy.value;
+    return this.form.controls.subsidy.value;
   }
 }

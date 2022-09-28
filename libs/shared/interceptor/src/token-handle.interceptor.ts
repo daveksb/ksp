@@ -23,7 +23,8 @@ export class TokenHandleInterceptor implements HttpInterceptor {
       request.url.includes('ksplogin') ||
       request.url.includes('ksppublic') ||
       request.url.includes('schschoolselect') ||
-      request.url.includes('kspfileinsert')
+      request.url.includes('kspfileinsert') ||
+      !token
     ) {
       return next.handle(request);
     }

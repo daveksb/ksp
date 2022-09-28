@@ -1,3 +1,8 @@
-.ng-invalid:not(form) {
-  border: 1px solid var(--bs-danger);
+.form-select {
+  background-image: url(/assets/images/arrow-down-icon.png);
+  background-size: 12px;
+}
+
+.hide {
+  display: none;
 }

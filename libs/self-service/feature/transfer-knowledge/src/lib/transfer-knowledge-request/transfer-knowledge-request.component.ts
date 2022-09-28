@@ -134,8 +134,8 @@ export class TransferKnowledgeRequestComponent
     );
     const allowKey = Object.keys(self);
 
-    const edufiles = this.mapFileInfo(this.eduFiles);
-    const transferknowledgeinfofiles = this.mapFileInfo(this.transferFiles);
+    const edufiles = this.eduFiles;
+    const transferknowledgeinfofiles = this.transferFiles;
 
     const initialPayload = {
       ...replaceEmptyWithNull(userInfo),

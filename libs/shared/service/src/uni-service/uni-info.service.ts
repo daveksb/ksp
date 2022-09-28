@@ -63,7 +63,7 @@ export class UniInfoService {
 
   searchUniversity(body: any): Observable<any> {
     return this.http
-      .post(`${environment.apiUrlNoAuth}/uniuniversitysearch.php`, body)
+      .post(`${environment.shortApiUrl}/uniuniversitysearch.php`, body)
       .pipe(
         map((data: any) => data.datareturn),
         shareReplay()

@@ -15,7 +15,7 @@
         ข้อมูลถอดถอนผู้ประสานงาน / ผู้รับผิดชอบ (ที่ระบุไว้ในเอกสารแนบ)
       </div>
       <hr />
-      <ksp-form-user-info
+      <ksp-form-coordinator-info
         [prefixList]="prefixList$ | async"
         [nationList]="[]"
         [countryList]="[]"
@@ -23,8 +23,7 @@
         [visaTypeList]="[]"
         [displayMode]="[userInfoFormType]"
         formControlName="retiredTnfo"
-      ></ksp-form-user-info>
-
+      ></ksp-form-coordinator-info>
       <div class="mt-3">
         <ksp-form-attachment
           [title]="'กรุณาแนบหลักฐานเพื่อพิจารณา'"
