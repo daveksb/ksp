@@ -17,8 +17,9 @@
         (search)="search($event)"
         [requestTypeList]="requestTypeList"
       ></ksp-school-request-search>
-      <br />
-      <div class="box-header text-primary">ยื่นใบคำขอ</div>
+
+      <hr class="mt-3" />
+      <div class="box-header text-primary">รายการยื่นใบคำขอ</div>
 
       <div class="d-flex justify-content-end">
         <button
@@ -52,14 +53,12 @@
         </mat-menu>
       </div>
 
-      <div class="scroll mt-1">
+      <div class="table__scroll mt-1">
         <table matSort mat-table [dataSource]="dataSource">
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
             <td
-              (click)="
-                viewRequest(+element.requesttype, element.subtype, element.id)
-              "
+              class="text-center"
               mat-cell
               *matCellDef="let element; let i = index"
             >
@@ -67,15 +66,22 @@
             </td>
           </ng-container>
 
+          <ng-container matColumnDef="verify">
+            <th mat-header-cell *matHeaderCellDef>ตรวจสอบ</th>
+            <td mat-cell *matCellDef="let element">
+              <i
+                role="button"
+                (click)="
+                  viewRequest(+element.requesttype, element.subtype, element.id)
+                "
+                class="bi bi-check-circle-fill text-success fs-5"
+              ></i>
+            </td>
+          </ng-container>
+
           <ng-container matColumnDef="requestno">
             <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
-            <td
-              mat-cell
-              *matCellDef="let element"
-              (click)="
-                viewRequest(+element.requesttype, element.subtype, element.id)
-              "
-            >
+            <td mat-cell *matCellDef="let element">
               {{ element.requestno }}
             </td>
           </ng-container>
@@ -84,77 +90,47 @@
             <th mat-header-cell *matHeaderCellDef>
               หมายเลขบัตรประชาชน/หนังสือเดินทาง
             </th>
-            <td
-              mat-cell
-              *matCellDef="let element"
-              (click)="
-                viewRequest(+element.requesttype, element.subtype, element.id)
-              "
-            >
+            <td mat-cell *matCellDef="let element">
               {{ element.idcardno }} {{ element.passportno }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
-            <td
-              mat-cell
-              *matCellDef="let element"
-              (click)="
-                viewRequest(+element.requesttype, element.subtype, element.id)
-              "
-            >
+            <td mat-cell *matCellDef="let element">
               {{ element.firstnameth }} {{ element.lastnameth }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="requesttype">
             <th mat-header-cell *matHeaderCellDef>ประเภทใบคำขอ</th>
-            <td
-              mat-cell
-              *matCellDef="let element"
-              (click)="
-                viewRequest(+element.requesttype, element.subtype, element.id)
-              "
-            >
+            <td mat-cell *matCellDef="let element">
               {{ checkRequestType(+element.requesttype) }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="subtype">
             <th mat-header-cell *matHeaderCellDef>ประเภทวิชาชีพ</th>
-            <td
-              mat-cell
-              *matCellDef="let element"
-              (click)="
-                viewRequest(+element.requesttype, element.subtype, element.id)
-              "
-            >
+            <td mat-cell *matCellDef="let element">
               {{ SchoolRequestSubType[+element.subtype] }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="currentprocess">
             <th mat-header-cell *matHeaderCellDef>ขั้นตอนการดำเนินการ</th>
-            <td
-              mat-cell
-              *matCellDef="let element"
-              (click)="
-                viewRequest(+element.requesttype, element.subtype, element.id)
-              "
-            >
+            <td mat-cell *matCellDef="let element">
               {{ checkProcess(+element.currentprocess)?.processName }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="requeststatus">
-            <th mat-header-cell *matHeaderCellDef>สถานะ</th>
+            <th mat-header-cell *matHeaderCellDef class="text-center">สถานะ</th>
             <td mat-cell *matCellDef="let element">
               <span
-                class="rounded-pill px-2 py-1 border w-100"
+                class="rounded-pill border w-full d-flex justify-content-center px-1"
                 [ngClass]="{
-                  'border-success text-success': +element.currentprocess > 0,
-                  'border-danger text-danger': +element.currentprocess === 0
+                  'border-success text-success ': +element.requeststatus > 0,
+                  'border-danger text-danger ': +element.requeststatus === 0
                 }"
               >
                 {{
@@ -167,21 +143,21 @@
 
           <ng-container matColumnDef="updatedate">
             <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
-            <td mat-cell *matCellDef="let element">
+            <td mat-cell *matCellDef="let element" class="text-center">
               {{ (element.updatedate | date) ?? '-' }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="requestdate">
             <th mat-header-cell *matHeaderCellDef>วันที่ยื่นใบคำขอ</th>
-            <td mat-cell *matCellDef="let element">
+            <td mat-cell *matCellDef="let element" class="text-center">
               {{ element.requestdate | date }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="requestdoc">
             <th mat-header-cell *matHeaderCellDef>ใบคำขอ</th>
-            <td mat-cell *matCellDef="let element">
+            <td mat-cell *matCellDef="let element" class="text-center">
               <i
                 role="button"
                 class="bi bi-file-earmark-text text-primary fs-5"
@@ -191,7 +167,7 @@
 
           <ng-container matColumnDef="approvedoc">
             <th mat-header-cell *matHeaderCellDef>ใบอนุญาต</th>
-            <td mat-cell *matCellDef="let element">
+            <td mat-cell *matCellDef="let element" class="text-center">
               <i
                 role="button"
                 class="bi bi-file-earmark-text text-primary fs-5"
