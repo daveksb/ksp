@@ -27,9 +27,10 @@ export class FileUploadComponent {
   @Input() uniqueTimestamp: string | null = null;
   @Input() uploadType: 'button' | 'link' = 'button';
   @Input() isImage = false; // when upload image use public API
+  @Input() fileName = '';
   @Output() uploadComplete = new EventEmitter<any>();
 
-  fileName = '';
+  // fileName = '';
   uploadProgress!: number | null;
 
   constructor(private uploadService: FileService) {}

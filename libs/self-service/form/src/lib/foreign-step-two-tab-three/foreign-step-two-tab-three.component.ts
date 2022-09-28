@@ -49,6 +49,23 @@ export class ForeignStepTwoTabThreeComponent
     );
   }
 
+  override set value(value: any) {
+    // this.form.patchValue(value);
+    Object.keys(value).forEach((key) => {
+      const control = this.form.get(key) as FormArray;
+      value[key].forEach((item: any) =>
+        control.push(
+          this.fb.group({
+            ...item,
+          })
+        )
+      );
+    });
+
+    this.onChange(value);
+    this.onTouched();
+  }
+
   ngOnInit(): void {
     this.form.valueChanges.subscribe((res) => {
       //console.log('form value = ', res);

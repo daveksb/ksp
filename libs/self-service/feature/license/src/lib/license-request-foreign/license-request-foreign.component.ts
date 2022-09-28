@@ -18,6 +18,10 @@ import { SelfRequestService, MyInfoService } from '@ksp/shared/service';
 import * as _ from 'lodash';
 import { getCookie } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
+import {
+  ACADEMIC_FILES,
+  REQUEST_DOCUMENT_FILES,
+} from './license-request-foreign-files';
 
 @Component({
   selector: 'self-service-license-request-foreign',
@@ -33,7 +37,6 @@ export class LicenseRequestForeignComponent implements OnInit {
     personalDeclaration: [],
   });
 
-  attachFiles: any[] = [];
   uniqueTimestamp!: string;
   requestId!: number;
   requestData!: SelfRequest;
@@ -42,6 +45,11 @@ export class LicenseRequestForeignComponent implements OnInit {
   userInfo: any;
   addressInfo: any;
   workplaceInfo: any;
+  eduInfo: any;
+  academicFiles: any[] = [];
+  grantionTeachingInfo: any;
+  personalDeclaration: any;
+  documentFiles: any[] = [];
 
   constructor(
     private router: Router,
@@ -77,25 +85,47 @@ export class LicenseRequestForeignComponent implements OnInit {
       } else {
         // this.initializeFiles();
         this.uniqueTimestamp = uuidv4();
-
+        this.academicFiles = structuredClone(ACADEMIC_FILES);
+        this.documentFiles = structuredClone(REQUEST_DOCUMENT_FILES);
         this.getMyInfo();
       }
     });
   }
 
   patchData(data: SelfRequest) {
+    const address = parseJson(data.addressinfo);
     this.patchUserInfo(data);
-    this.patchAddress(
-      parseJson(data.addressinfo),
-      data.contactphone,
-      data.email
-    );
+    this.patchAddress(address, address?.[0].phone, address?.[0].email);
+
     if (data.schooladdrinfo) {
-      this.patchWorkplace(parseJson(data.schooladdrinfo));
+      const workplace = parseJson(data.schooladdrinfo);
+      const { addressName, ...addressForm } = workplace;
+      this.workplaceInfo = { addressName, addressForm };
     }
-    // if (data.prohibitproperty) {
-    //   this.prohibitProperty = parseJson(data.prohibitproperty);
-    // }
+
+    if (data.eduinfo) {
+      const eduInfo = parseJson(data.eduinfo);
+      console.log(eduInfo);
+      this.eduInfo = eduInfo;
+    }
+
+    if (data.fileinfo) {
+      const fileInfo = parseJson(data.fileinfo);
+      console.log(fileInfo);
+      const { documentfiles, academicfiles } = fileInfo;
+      this.documentFiles = documentfiles;
+      this.academicFiles = academicfiles;
+    }
+
+    if (data.grantionteachinglicenseinfo) {
+      const grantionTeachingInfo = parseJson(data.grantionteachinglicenseinfo);
+      this.grantionTeachingInfo = grantionTeachingInfo;
+    }
+
+    if (data.checkprohibitproperty) {
+      const personalDeclaration = parseJson(data.checkprohibitproperty);
+      this.personalDeclaration = personalDeclaration;
+    }
   }
 
   getMyInfo() {
@@ -165,7 +195,7 @@ export class LicenseRequestForeignComponent implements OnInit {
 
   save() {
     console.log(this.form.getRawValue());
-    console.log(this.attachFiles);
+    console.log(this.documentFiles);
     const completeDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -229,11 +259,13 @@ export class LicenseRequestForeignComponent implements OnInit {
     const selectData = _.pick(userInfo, allowKey);
 
     const { addressName, addressForm: resWorkplaceForm } = workplaceForm;
-    const documentfiles = this.attachFiles;
+    const documentfiles = this.documentFiles;
+    const academicfiles = this.academicFiles;
 
     const payload = {
       ...self,
       ...replaceEmptyWithNull(selectData),
+      ...(this.requestId && { id: `${this.requestId}` }),
       ...{
         addressinfo: JSON.stringify([addressForm]),
       },
@@ -248,15 +280,11 @@ export class LicenseRequestForeignComponent implements OnInit {
         grantionteachinglicenseinfo: JSON.stringify(grantionLicenseForm),
       },
       ...{
-        checkProhibitProperty: JSON.stringify(formData.personalDeclaration),
+        checkprohibitproperty: JSON.stringify(formData.personalDeclaration),
       },
-      ...{ fileinfo: JSON.stringify({ documentfiles }) },
+      ...{ fileinfo: JSON.stringify({ documentfiles, academicfiles }) },
     };
     console.log(payload);
     return payload;
-  }
-
-  onFileUpdate(files: any[]) {
-    this.attachFiles = files;
   }
 }

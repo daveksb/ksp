@@ -136,10 +136,6 @@ export class RenewLicenseForeignComponent implements OnInit {
     return payload;
   }
 
-  onFileUpdate(files: any[]) {
-    this.attachFiles = files;
-  }
-
   mapFileInfo(fileList: any[]) {
     return fileList.map((file: any) => {
       const object = {

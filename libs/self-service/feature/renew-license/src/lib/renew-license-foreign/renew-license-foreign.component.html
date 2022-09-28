@@ -1,12 +1,10 @@
-<ksp-top-nav [isSelfService]="true"
-  ><span header>TEACHING LICENSE APPLICATION FORM</span>
+<ksp-top-nav [isSelfService]="true"><span header>TEACHING LICENSE APPLICATION FORM</span>
 </ksp-top-nav>
 
 <div class="main__container full-height px-4 py-2">
   <self-service-request-status
     [headerLabel1]="'Issue Date'"
-    [headerLabel2]="'Form ID'"
-  ></self-service-request-status>
+    [headerLabel2]="'Form ID'"></self-service-request-status>
 
   <br />
   <div class="box-header text-center">
@@ -18,13 +16,11 @@
       labelPosition="bottom"
       [animationDuration]="'0'"
       [selectedIndex]="0"
-      #stepper
-    >
+      #stepper>
       <mat-step [completed]="false">
         <ng-template matStepLabel>Personal Details</ng-template>
         <self-service-foreign-license-step-two
-          formControlName="personalDetail"
-        ></self-service-foreign-license-step-two>
+          formControlName="personalDetail"></self-service-foreign-license-step-two>
       </mat-step>
 
       <mat-step [completed]="false">
@@ -36,16 +32,13 @@
         <ng-template matStepLabel>Documents and evidence required</ng-template>
         <self-service-foreign-license-step-three
           [documentTypes]="'renew'"
-          [uniqueTimestamp]="uniqueTimestamp"
-          (fileUpdate)="onFileUpdate($event)"
-        ></self-service-foreign-license-step-three>
+          [uniqueTimestamp]="uniqueTimestamp"></self-service-foreign-license-step-three>
       </mat-step>
 
       <mat-step [completed]="false">
         <ng-template matStepLabel>Personal Declaration</ng-template>
         <self-service-foreign-license-step-four
-          formControlName="personalDeclaration"
-        >
+          formControlName="personalDeclaration">
         </self-service-foreign-license-step-four>
       </mat-step>
     </mat-stepper>
