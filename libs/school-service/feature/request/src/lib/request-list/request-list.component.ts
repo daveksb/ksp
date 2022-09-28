@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
@@ -33,6 +34,7 @@ export class SchoolRequestListComponent implements AfterViewInit {
   });
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private router: Router,
@@ -60,6 +62,12 @@ export class SchoolRequestListComponent implements AfterViewInit {
       if (res && res.length) {
         const result = applyClientFilter(res, filters);
         this.dataSource.data = result;
+        this.dataSource.sort = this.sort;
+
+        const sortState: Sort = { active: 'id', direction: 'desc' };
+        this.sort.active = sortState.active;
+        this.sort.direction = sortState.direction;
+        this.sort.sortChange.emit(sortState);
       } else {
         this.dataSource.data = [];
       }
