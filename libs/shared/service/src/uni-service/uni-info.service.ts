@@ -27,7 +27,7 @@ export class UniInfoService {
 
   uniRequestDegreeSearch(params: any): Observable<any> {
     return this.http.post(
-      `${environment.apiUrlNoAuth}/unirequestdegreecertsearch.php`,
+      `${environment.shortApiUrl}/unirequestdegreecertsearch.php`,
       {
         ...params,
         tokenkey: this.tokenKey,
@@ -124,7 +124,7 @@ export class UniInfoService {
 
   uniDegreeSearch(params: any): Observable<any> {
     return this.http.post(
-      `${environment.apiUrlNoAuth}/unidegreecertsearch.php`,
+      `${environment.shortApiUrl}/unidegreecertsearch.php`,
       {
         ...params,
         tokenkey: this.tokenKey,
