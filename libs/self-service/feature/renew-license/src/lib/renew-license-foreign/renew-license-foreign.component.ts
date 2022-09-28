@@ -174,15 +174,15 @@ export class RenewLicenseForeignComponent implements OnInit {
 
   patchWorkplace(data: any) {
     this.workplaceInfo = {
-      addressName: data.addressName,
+      addressName: data.schoolname,
       addressForm: {
-        houseNo: data.houseNumber,
-        alley: data.lane,
+        houseNo: data.houseNo,
+        alley: data.alley,
         road: data.road,
-        postcode: data.zipCode,
+        postcode: data.postcode,
         province: data.province,
-        tumbol: data.subDistrict,
-        amphur: data.district,
+        tumbol: data.tumbol,
+        amphur: data.amphur,
       },
     };
   }
