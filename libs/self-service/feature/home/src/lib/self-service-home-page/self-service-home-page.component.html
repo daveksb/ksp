@@ -2,12 +2,14 @@
 
 <div class="full-height main__container py-2 px-4">
   <ksp-uni-form-badge [mainTitle]="badgeTitle"></ksp-uni-form-badge>
-  <div class="row justify-content-center mb-3">
-    <div class="col-md-6 p-0">
+  <div class="row" style="overflow-x: auto">
+    <div class="col p-0">
       <self-service-slideshow></self-service-slideshow>
+      <br />
     </div>
-    <div class="col-md-6 p-0">
+    <div class="col p-0">
       <self-service-slideshow-second></self-service-slideshow-second>
+      <br />
     </div>
   </div>
   <self-service-license-info
@@ -90,9 +92,6 @@
       </button>
       <button mat-menu-item [matMenuTriggerFor]="renew">
         ขอต่ออายุใบอนุญาตประกอบวิชาชีพ
-      </button>
-      <button mat-menu-item (click)="licenseEdit()">
-        ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ
       </button>
       <button mat-menu-item (click)="substituteLicense()">
         ขอใบแทนใบอนุญาตประกอบวิชาชีพ

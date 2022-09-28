@@ -14,6 +14,10 @@
   white-space: break-spaces !important;
 }
 
+.mat-horizontal-content-container {
+  padding: 0 !important;
+}
+
 @media only screen and (max-width: 768px) {
   .mat-tab-label {
     width: 11rem;
@@ -31,9 +35,19 @@
     padding: 24px 8px;
   }
 
-  .mat-horizontal-content-container {
-    padding: 0 !important;
+  .mat-step-text-label {
+    overflow: initial !important;
+    font-size: 14px !important;
   }
+
+  /* .mat-step-text-label {
+    text-overflow: clip;
+    overflow: initial;
+  } */
+
+  /* .mat-horizontal-content-container {
+    padding: 0 !important;
+  } */
 }
 
 .mat-tab-label-active {
