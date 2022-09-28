@@ -7,7 +7,20 @@
       [subTitle]="badgeTitle2"
     ></ksp-uni-form-badge>
     <div class="bg-white p-3">
-      <ksp-degree-home-search (clear)="clear()" (search)="search()">
+      <ksp-degree-home-search
+        (clear)="clear()"
+        formControlName="homeSearch"
+        (search)="search()"
+        [degreeLevelOptions]="degreeLevelOptions"
+        [fieldOfStudyOptions]="fieldOfStudyOptions"
+        [majorOptions]="majorOptions"
+        [subjectOptions]="subjectOptions"
+        [academicYearOptions]="academicYearOptions"
+        [provinces]="provinces"
+        [universityType]="universityType"
+        [universities]="universities"
+        (selectChange)="onSelectChange($event)"
+      >
       </ksp-degree-home-search>
     </div>
     <br />

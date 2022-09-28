@@ -1,18 +1,61 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
+import _ from 'lodash';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { providerFactory } from '@ksp/shared/utility';
 @Component({
   selector: 'ksp-degree-home-search',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './degree-home-search.component.html',
   styleUrls: ['./degree-home-search.component.scss'],
+  providers: providerFactory(DegreeHomeSearchComponent),
 })
-export class DegreeHomeSearchComponent implements OnInit {
+export class DegreeHomeSearchComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
   @Output() clear = new EventEmitter<boolean>();
   @Output() search = new EventEmitter<boolean>();
+  @Output() selectChange = new EventEmitter<any>();
 
-  constructor() {}
+  @Input() degreeLevelOptions: ListData[] = [];
+  @Input() fieldOfStudyOptions: ListData[] = [];
+  @Input() majorOptions: ListData[] = [];
+  @Input() subjectOptions: ListData[] = [];
+  @Input() academicYearOptions: ListData[] = [];
+  @Input() provinces: ListData[] = [];
+  @Input() universityType: ListData[] = [];
+  @Input() universities: ListData[] = [];
+
+  override form = this.fb.group({
+    university: [],
+    universityType: [],
+    degreeCode: [],
+    degreeName: [],
+    degreeLevel: [],
+    fieldOfStudy: [],
+    major: [],
+    subject: [],
+    year: [],
+    province: [],
+  });
+
+  constructor(private fb: FormBuilder) {
+    super();
+    this.subscriptions.push(
+      // any time the inner form changes update the parent of any change
+      this.form?.valueChanges.subscribe((value) => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
+  }
 
   ngOnInit(): void {}
+
+  onSelectChange(e: any, key: any) {
+    this.selectChange.emit({ value: e?.target?.value, key });
+  }
 }

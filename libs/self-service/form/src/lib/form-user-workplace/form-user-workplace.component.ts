@@ -20,16 +20,16 @@ export class FormUserWorkplaceComponent extends KspFormBaseComponent {
   @Output() amphurChanged = new EventEmitter<any>();
 
   override form = this.fb.group({
-    affiliation: [''],
-    addressName: [''],
-    houseNumber: [''],
-    villageNumber: [''],
-    lane: [''],
+    bureauid: [''],
+    schoolname: [''],
+    houseno: [''],
+    moo: [''],
+    alley: [''],
     road: [''],
-    zipCode: [''],
+    postcode: [''],
     province: [''],
-    subDistrict: [''],
-    district: [''],
+    tumbol: [''],
+    amphur: [''],
   });
 
   constructor(private dialog: MatDialog, private fb: FormBuilder) {
@@ -37,7 +37,7 @@ export class FormUserWorkplaceComponent extends KspFormBaseComponent {
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
-        console.log(value);
+        //console.log(value);
         this.onChange(value);
         this.onTouched();
       })
@@ -54,6 +54,6 @@ export class FormUserWorkplaceComponent extends KspFormBaseComponent {
   updatePostcode(evt: any) {
     const tumbolCode = evt.target?.value;
     const postCode = this.tumbols.find((t) => t.tambolCode === tumbolCode);
-    this.form.controls.zipCode.patchValue(postCode.tambolPostcode);
+    this.form.controls.postcode.patchValue(postCode.tambolPostcode);
   }
 }
