@@ -1,11 +1,9 @@
 .card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 16px;
-  width: fit-content;
-  padding: 16px 32px;
   background-image: url('/assets/images/self-card-bg.png');
   background-size: cover;
-  margin: auto;
+  width: 500px;
+  height: 250px;
 }
 
 .title {

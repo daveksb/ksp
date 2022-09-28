@@ -50,7 +50,7 @@ export class SelfServiceHomePageComponent {
         const sortState: Sort = { active: 'id', direction: 'desc' };
         this.sort.active = sortState.active;
         this.sort.direction = sortState.direction;
-        this.sort.sortChange.emit(sortState);
+      this.sort.sortChange.emit(sortState);
       } else {
         this.dataSource.data = [];
       }
