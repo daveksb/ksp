@@ -72,7 +72,6 @@ export class ForeignLicenseDetailComponent implements OnInit {
       this.requestNo = res.requestno;
       //this.currentProcess = +res.currentprocess;
       //console.log('current process = ', this.currentProcess);
-
       this.pathUserInfo(res);
     });
   }
@@ -84,14 +83,13 @@ export class ForeignLicenseDetailComponent implements OnInit {
       data.passportstartdate = data.passportstartdate.split('T')[0];
       data.passportenddate = data.passportenddate.split('T')[0];
       //console.log('data = ', data);
-
       if (data?.visainfo) {
         const visa = parseJson(data?.visainfo);
         data.visaclass = visa.visaclass;
         data.visatype = visa.visatype;
         data.visaenddate = visa.visaenddate;
       }
-      console.log('data = ', data);
+      //console.log('data = ', data);
     }
 
     this.form.controls.foreignTeacherInfo.patchValue(data);
@@ -133,7 +131,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'foreign-license', 'list']);
+        this.router.navigate(['/foreign-license', 'list']);
       }
     });
   }
