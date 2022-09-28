@@ -43,21 +43,27 @@ export class AccusationRecordComponent
   extends KspFormBaseComponent
   implements OnInit
 {
-  accusationFiles = ['เอกสารกล่าวหา/กล่าวโทษ', 'สำเนาบัตรประชาชน'];
+  accusationFiles = [
+    { name: 'เอกสารกล่าวหา/กล่าวโทษ' },
+    { name: 'สำเนาบัตรประชาชน' },
+  ];
 
   override form = this.fb.group({
-    blackNumber: [],
-    misconductEthic: [],
-    incidentDate: [],
-    incidentAddress: [],
-    incidentType: [],
-    accuseSubject: [],
-    orderDate: [],
-    detail: [],
-    punishType: [],
-    offend: [],
-    assignStaff: [],
-    assignDate: [],
+    accusationblackno: [],
+    accusationtype: [],
+    accusationincidentdate: [],
+    accusationincidentplace: [],
+    accusationcondemnationtype: [],
+    accusationcondemnation: [],
+    accusationissuedate: [],
+    accusationdetail: [],
+    accusationpunishmentdetail: [],
+    accusationviolatedetail: [],
+    accusationassignofficer: [],
+    accusationassigndate: [],
+
+    //accusation_file
+    //accusation_consideration
   });
 
   constructor(
@@ -80,13 +86,13 @@ export class AccusationRecordComponent
       //console.log('res2 = ', res);
     });
   }
+
   openSearchDialog() {
     this.dialog.open(AccusationSearchComponent, {
       height: '100vh',
       width: '1250px',
     });
   }
-  
 
   /* dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {

@@ -11,8 +11,6 @@
     ></ksp-stepper-nav>
 
     <div class="bg-white p-3">
-
-
       <e-service-ethic-accusation-record
         formControlName="accusation"
       ></e-service-ethic-accusation-record>
@@ -28,5 +26,6 @@
     [colorMode]="'green'"
     (nextClicked)="next()"
     (cancelClicked)="cancel()"
+    (saveClicked)="saveEthics()"
   ></ksp-bottom-nav>
 </div>
