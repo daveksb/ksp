@@ -31,7 +31,7 @@
         <th class="text-center" style="min-width: 80px;" mat-header-cell *matHeaderCellDef>ยื่น/แก้ไข</th>
         <td class="text-center" mat-cell *matCellDef="let element">
           <i
-            (click)="nextPage((this.processType = element.order))"
+            (click)="nextPage(element.key)"
             role="button"
             class="bi bi-pencil-square text-primary fs-5 ms-1"
           ></i>

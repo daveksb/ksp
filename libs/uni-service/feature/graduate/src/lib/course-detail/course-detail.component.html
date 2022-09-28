@@ -16,7 +16,14 @@
       ข้อมูลขอรับรองปริญญา และประกาศนียบัตรทางการศึกษา
     </div>
 
-    <ksp-degree-cert-step-one [mode]="'view'"></ksp-degree-cert-step-one>
+    <form [formGroup]="step1Form">
+      <ksp-degree-cert-step-one 
+        [mode]="'view'"
+        formControlName="step1"
+        (degreeType)="step1DegreeType = $event"
+        [showCoordinatorForm]="false">
+      </ksp-degree-cert-step-one>
+    </form>
 
     <div class="mt-3">
       <button type="button" class="btn btn-primary" style="width: auto">
@@ -33,16 +40,7 @@
             <th
               scope="col"
               class="text-center"
-              colspan="5"
-              *ngIf="processType === importType.studentList"
-            >
-              แผนการรับนิสิต / นักศึกษา (ผ่านการรับรอง)
-            </th>
-            <th
-              scope="col"
-              class="text-center"
               colspan="6"
-              *ngIf="processType === importType.graduateList"
             >
               แผนการรับนิสิต / นักศึกษา (ผ่านการรับรอง)
             </th>
@@ -57,33 +55,32 @@
               scope="col"
               class="text-center"
               style="min-width: 250px;"
-              *ngIf="processType === importType.graduateList"
             >
               ยื่นรายชื่อสำเร็จการศึกษา
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let row of planRows">
+          <tr *ngFor="let row of courseData.coursestructure">
             <th scope="row" class="text-start form-label vertical-middle">
-              แผนฯ ปีที่ {{ row }}
+              {{ row.label }}
             </th>
 
             <td class="text-center form-label vertical-middle">
-              <div>2564</div>
+              <div>{{ row.year }}</div>
             </td>
             <td class="text-center form-label vertical-middle">
-              <div>แผน ก</div>
+              <div>{{ row.name || '-' }}</div>
             </td>
             <td class="text-center form-label vertical-middle">
-              <div>150</div>
+              <div>{{ row.student }}</div>
             </td>
             <td class="text-center form-label vertical-middle">
               <div>
-                150 / 150
+                0 / {{ row.student }}
                 <span
                   role="button"
-                  (click)="goToImportStudent(importType.studentList)"
+                  (click)="goToImportStudent('studentList', row)"
                   class="text-decoration-underline text-primary"
                 >
                   <i role="button" class="bi bi-pencil-fill fs-6"></i>
@@ -93,13 +90,12 @@
             </td>
             <td
               class="text-center form-label vertical-middle"
-              *ngIf="processType === importType.graduateList"
             >
               <div>
-                100 / 150
+                0 / {{ row.student }}
                 <span
                   role="button"
-                  (click)="goToImportStudent(importType.graduateList)"
+                  (click)="goToImportStudent('graduateList', row)"
                   class="text-decoration-underline text-orange"
                 >
                   <i role="button" class="bi bi-pencil-fill fs-6"></i>
@@ -120,13 +116,12 @@
                 class="form-control bg-secondary bg-opacity-25 text-center"
                 disabled
               >
-                600
+                {{ courseData.totalStudent }}
               </div>
             </td>
             <td class="text-center form-label vertical-middle"></td>
             <td
               class="text-center form-label vertical-middle"
-              *ngIf="processType === importType.graduateList"
             ></td>
           </tr>
         </tbody>

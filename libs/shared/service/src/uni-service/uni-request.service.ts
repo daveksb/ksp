@@ -39,9 +39,9 @@ export class UniRequestService {
     });
   }
 
-  getUniRequestDegreeCertById(id: any): Observable<any> {
+  getUniDegreeCertById(id: any): Observable<any> {
     return this.http.post(
-      `${environment.apiUrl}/kspuni/unirequestdegreecertselectbyid`, {
+      `${environment.apiUrl}/kspuni/unidegreecertselectbyid`, {
         id: id,
         tokenkey: getCookie('userToken'),
       }
@@ -50,6 +50,13 @@ export class UniRequestService {
 
   searchUniDegreeCert(form: any): Observable<any> {
     return this.http.post(`${environment.apiUrlNoAuth}/unidegreecertsearch.php`, {
+      ...form,
+      tokenkey: getCookie('userToken'),
+    });
+  }
+
+  createRequestAdmission(form: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/kspuni/unirequestadmissioninsertupdate`, {
       ...form,
       tokenkey: getCookie('userToken'),
     });

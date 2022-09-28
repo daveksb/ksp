@@ -1,26 +1,26 @@
-<form [formGroup]="formAddress">
+<form [formGroup]="form">
   <div class="py-1 px-1">
     <div class="box-header">
       ที่อยู่ตามทะเบียนบ้าน (นักศึกษาชาวไทย) หรือที่พักประจำ (นักศึกษาชาวต่างชาติ)
     </div>
-  
+
     <div class="row">
       <div class="col-sm-12 mb-1">
         <label class="form-label">อาคาร/สถานที่</label>
         <input class="form-control" type="text" formControlName="location" />
       </div>
     </div>
-  
+
     <div class="row">
       <div class="col-sm-4 col-md-2 mb-1">
         <label class="form-label"
           >บ้านเลขที่ <span class="text-danger"> *</span>
         </label>
-        <input class="form-control" type="text" formControlName="houseNumber" />
+        <input class="form-control" type="text" formControlName="housenumber" />
       </div>
       <div class="col-sm-4 col-md-2 mb-1">
         <label class="form-label">หมู่ที่</label>
-        <input class="form-control" type="text" formControlName="villageNumber" />
+        <input class="form-control" type="text" formControlName="villagenumber" />
       </div>
       <div class="col-sm-6 col-md-4 mb-1">
         <label class="form-label">ซอย</label>
@@ -31,39 +31,39 @@
         <input class="form-control" type="text" formControlName="road" />
       </div>
     </div>
-  
+
     <div class="row">
       <div class="col-sm-4 col-md-2 mb-1">
         <label class="form-label"
           >รหัสไปรษณีย์<span class="text-danger"> *</span>
         </label>
-        <input class="form-control" type="text" formControlName="zipCode" />
+        <input class="form-control" type="text" formControlName="zipcode" />
       </div>
       <div class="col-sm-4 col-md-4 mb-1">
         <label class="form-label"
           >จังหวัด<span class="text-danger"> *</span>
         </label>
-        <select class="form-select" formControlName="provinceId" (change)="getDistrict(formAddress.value.provinceId)">
+        <select class="form-select" formControlName="provinceid" (change)="getDistrict(form.value.provinceid)">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let province of provinceList" [value]="province.province_id">{{province.province_name}}</option>
         </select>
       </div>
       <div class="col-sm-6 col-md-3 mb-1">
         <label class="form-label">อำเภอ<span class="text-danger"> *</span></label>
-        <select class="form-select" formControlName="districtId" (change)="getSubdistrict(formAddress.value.districtId)">
+        <select class="form-select" formControlName="districtid" (change)="getSubdistrict(form.value.districtid)">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let district of districtList" [value]="district.amphurCode">{{district.amphurName}}</option>
         </select>
       </div>
       <div class="col-sm-6 col-md-3 mb-1">
         <label class="form-label">ตำบล<span class="text-danger"> *</span></label>
-        <select class="form-select" formControlName="subDistrictId">
+        <select class="form-select" formControlName="subdistrictid">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let subDistrict of subDistrictList" [value]="subDistrict.tambolCode">{{subDistrict.tambolName}}</option>
         </select>
       </div>
     </div>
-  
+
     <div class="row">
       <div class="col-sm-12">
         <label class="form-label">หมายเหตุ</label>

@@ -127,12 +127,12 @@ export class DegreeListComponent implements OnInit {
   // 'editDate',
   // 'print',
   // 'history',
-  nextPage(type: number) {
+  nextPage(id: number) {
     this.router.navigate([
       '/',
       'student-list',
       'course-detail',
-      (this.processType = type - 1),
+      id,
     ]);
   }
 
