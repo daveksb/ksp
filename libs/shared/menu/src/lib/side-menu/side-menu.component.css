@@ -19,7 +19,7 @@ a:focus {
   background: #ffffff;
   color: #a6a6a6;
   transition: all 0.3s;
-  box-shadow: 5px 0px 4px #efefef;
+  /* box-shadow: 5px 0px 4px #efefef; */
   overflow-y: auto;
   overflow-x: hidden;
   width: 237px;

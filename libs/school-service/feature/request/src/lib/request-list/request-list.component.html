@@ -6,7 +6,7 @@
 </ksp-top-nav>
 
 <form [formGroup]="form">
-  <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
+  <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height full-width-2">
     <div class="box-header">
       รายการใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพทางการศึกษาโดยไม่มีใบอนุญาตประกอบวิชาชีพ
     </div>
@@ -17,7 +17,7 @@
         (search)="search($event)"
         [requestTypeList]="requestTypeList"
       ></ksp-school-request-search>
-
+      <br />
       <div class="box-header text-primary">ยื่นใบคำขอ</div>
 
       <div class="d-flex justify-content-end">
@@ -52,166 +52,164 @@
         </mat-menu>
       </div>
 
-      <div class="mt-2">
-        <div class="scroll">
-          <table matSort mat-table [dataSource]="dataSource">
-            <ng-container matColumnDef="id">
-              <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-              <td
-                (click)="
-                  viewRequest(+element.requesttype, element.subtype, element.id)
-                "
-                mat-cell
-                *matCellDef="let element; let i = index"
+      <div class="scroll mt-1">
+        <table matSort mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+            <td
+              (click)="
+                viewRequest(+element.requesttype, element.subtype, element.id)
+              "
+              mat-cell
+              *matCellDef="let element; let i = index"
+            >
+              {{ i + 1 }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="requestno">
+            <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
+            <td
+              mat-cell
+              *matCellDef="let element"
+              (click)="
+                viewRequest(+element.requesttype, element.subtype, element.id)
+              "
+            >
+              {{ element.requestno }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="idcardno">
+            <th mat-header-cell *matHeaderCellDef>
+              หมายเลขบัตรประชาชน/หนังสือเดินทาง
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let element"
+              (click)="
+                viewRequest(+element.requesttype, element.subtype, element.id)
+              "
+            >
+              {{ element.idcardno }} {{ element.passportno }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+            <td
+              mat-cell
+              *matCellDef="let element"
+              (click)="
+                viewRequest(+element.requesttype, element.subtype, element.id)
+              "
+            >
+              {{ element.firstnameth }} {{ element.lastnameth }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="requesttype">
+            <th mat-header-cell *matHeaderCellDef>ประเภทใบคำขอ</th>
+            <td
+              mat-cell
+              *matCellDef="let element"
+              (click)="
+                viewRequest(+element.requesttype, element.subtype, element.id)
+              "
+            >
+              {{ checkRequestType(+element.requesttype) }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="subtype">
+            <th mat-header-cell *matHeaderCellDef>ประเภทวิชาชีพ</th>
+            <td
+              mat-cell
+              *matCellDef="let element"
+              (click)="
+                viewRequest(+element.requesttype, element.subtype, element.id)
+              "
+            >
+              {{ SchoolRequestSubType[+element.subtype] }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="currentprocess">
+            <th mat-header-cell *matHeaderCellDef>ขั้นตอนการดำเนินการ</th>
+            <td
+              mat-cell
+              *matCellDef="let element"
+              (click)="
+                viewRequest(+element.requesttype, element.subtype, element.id)
+              "
+            >
+              {{ checkProcess(+element.currentprocess)?.processName }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="requeststatus">
+            <th mat-header-cell *matHeaderCellDef>สถานะ</th>
+            <td mat-cell *matCellDef="let element">
+              <span
+                class="rounded-pill px-2 py-1 border w-100"
+                [ngClass]="{
+                  'border-success text-success': +element.currentprocess > 0,
+                  'border-danger text-danger': +element.currentprocess === 0
+                }"
               >
-                {{ i + 1 }}
-              </td>
-            </ng-container>
+                {{
+                  checkStatus(+element.currentprocess, +element.requeststatus)
+                    ?.sname
+                }}
+              </span>
+            </td>
+          </ng-container>
 
-            <ng-container matColumnDef="requestno">
-              <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
-              <td
-                mat-cell
-                *matCellDef="let element"
-                (click)="
-                  viewRequest(+element.requesttype, element.subtype, element.id)
-                "
-              >
-                {{ element.requestno }}
-              </td>
-            </ng-container>
+          <ng-container matColumnDef="updatedate">
+            <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
+            <td mat-cell *matCellDef="let element">
+              {{ (element.updatedate | date) ?? '-' }}
+            </td>
+          </ng-container>
 
-            <ng-container matColumnDef="idcardno">
-              <th mat-header-cell *matHeaderCellDef>
-                หมายเลขบัตรประชาชน/หนังสือเดินทาง
-              </th>
-              <td
-                mat-cell
-                *matCellDef="let element"
-                (click)="
-                  viewRequest(+element.requesttype, element.subtype, element.id)
-                "
-              >
-                {{ element.idcardno }} {{ element.passportno }}
-              </td>
-            </ng-container>
+          <ng-container matColumnDef="requestdate">
+            <th mat-header-cell *matHeaderCellDef>วันที่ยื่นใบคำขอ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.requestdate | date }}
+            </td>
+          </ng-container>
 
-            <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
-              <td
-                mat-cell
-                *matCellDef="let element"
-                (click)="
-                  viewRequest(+element.requesttype, element.subtype, element.id)
-                "
-              >
-                {{ element.firstnameth }} {{ element.lastnameth }}
-              </td>
-            </ng-container>
+          <ng-container matColumnDef="requestdoc">
+            <th mat-header-cell *matHeaderCellDef>ใบคำขอ</th>
+            <td mat-cell *matCellDef="let element">
+              <i
+                role="button"
+                class="bi bi-file-earmark-text text-primary fs-5"
+              ></i>
+            </td>
+          </ng-container>
 
-            <ng-container matColumnDef="requesttype">
-              <th mat-header-cell *matHeaderCellDef>ประเภทใบคำขอ</th>
-              <td
-                mat-cell
-                *matCellDef="let element"
-                (click)="
-                  viewRequest(+element.requesttype, element.subtype, element.id)
-                "
-              >
-                {{ checkRequestType(+element.requesttype) }}
-              </td>
-            </ng-container>
+          <ng-container matColumnDef="approvedoc">
+            <th mat-header-cell *matHeaderCellDef>ใบอนุญาต</th>
+            <td mat-cell *matCellDef="let element">
+              <i
+                role="button"
+                class="bi bi-file-earmark-text text-primary fs-5"
+              ></i>
+            </td>
+          </ng-container>
 
-            <ng-container matColumnDef="subtype">
-              <th mat-header-cell *matHeaderCellDef>ประเภทวิชาชีพ</th>
-              <td
-                mat-cell
-                *matCellDef="let element"
-                (click)="
-                  viewRequest(+element.requesttype, element.subtype, element.id)
-                "
-              >
-                {{ SchoolRequestSubType[+element.subtype] }}
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="currentprocess">
-              <th mat-header-cell *matHeaderCellDef>ขั้นตอนการดำเนินการ</th>
-              <td
-                mat-cell
-                *matCellDef="let element"
-                (click)="
-                  viewRequest(+element.requesttype, element.subtype, element.id)
-                "
-              >
-                {{ checkProcess(+element.currentprocess)?.processName }}
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="requeststatus">
-              <th mat-header-cell *matHeaderCellDef>สถานะ</th>
-              <td mat-cell *matCellDef="let element">
-                <span
-                  class="rounded-pill px-2 py-1 border w-100"
-                  [ngClass]="{
-                    'border-success text-success': +element.currentprocess > 0,
-                    'border-danger text-danger': +element.currentprocess === 0
-                  }"
-                >
-                  {{
-                    checkStatus(+element.currentprocess, +element.requeststatus)
-                      ?.sname
-                  }}
-                </span>
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="updatedate">
-              <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
-              <td mat-cell *matCellDef="let element">
-                {{ (element.updatedate | date) ?? '-' }}
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="requestdate">
-              <th mat-header-cell *matHeaderCellDef>วันที่ยื่นใบคำขอ</th>
-              <td mat-cell *matCellDef="let element">
-                {{ element.requestdate | date }}
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="requestdoc">
-              <th mat-header-cell *matHeaderCellDef>ใบคำขอ</th>
-              <td mat-cell *matCellDef="let element">
-                <i
-                  role="button"
-                  class="bi bi-file-earmark-text text-primary fs-5"
-                ></i>
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="approvedoc">
-              <th mat-header-cell *matHeaderCellDef>ใบอนุญาต</th>
-              <td mat-cell *matCellDef="let element">
-                <i
-                  role="button"
-                  class="bi bi-file-earmark-text text-primary fs-5"
-                ></i>
-              </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-          </table>
-        </div>
-
-        <mat-paginator
-          [length]="dataSource.data.length"
-          [pageSize]="25"
-          [showFirstLastButtons]="true"
-        >
-        </mat-paginator>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
       </div>
+
+      <mat-paginator
+        [length]="dataSource.data.length"
+        [pageSize]="25"
+        [showFirstLastButtons]="true"
+      >
+      </mat-paginator>
     </div>
   </div>
 </form>
