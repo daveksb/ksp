@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { GeneralInfoService } from '@ksp/shared/service';
 import {
@@ -61,6 +61,18 @@ export class FormRegisterRequesterInfoComponent
       this.form.controls.position.clearValidators();
       this.form.controls.email.clearValidators();
     }
+  }
+
+  chageposition(event: any) {
+    if (event.target.value == '0') {
+      this.form.controls['other'].setValidators([Validators.required]);
+    } else {
+      this.form.controls['other'].clearValidators();
+      this.form.patchValue({
+        other: null
+      })
+    }
+    this.form.controls['other'].updateValueAndValidity();
   }
 
   get idCardNo() {

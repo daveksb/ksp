@@ -80,15 +80,9 @@ export function createUniUserInfoForm(fb: FormBuilder) {
       null,
       [Validators.required, Validators.pattern(nameThPattern)],
     ],
-    prefixen: [null, Validators.required],
-    firstnameen: [
-      null,
-      [Validators.required, Validators.pattern(nameEnPattern)],
-    ],
-    lastnameen: [
-      null,
-      [Validators.required, Validators.pattern(nameEnPattern)],
-    ],
+    prefixen: [null],
+    firstnameen: [null],
+    lastnameen: [null],
     position: [null, Validators.required],
     email: [null, [Validators.required, Validators.email]],
     contactphone: [
@@ -120,15 +114,9 @@ export function createUniCoordinatorForm(fb: FormBuilder) {
       null,
       [Validators.required, Validators.pattern(nameThPattern)],
     ],
-    prefixen: [null, Validators.required],
-    firstnameen: [
-      null,
-      [Validators.required, Validators.pattern(nameEnPattern)],
-    ],
-    lastnameen: [
-      null,
-      [Validators.required, Validators.pattern(nameEnPattern)],
-    ],
+    prefixen: [null],
+    firstnameen: [null],
+    lastnameen: [null],
     position: [null, Validators.required],
     email: [null, [Validators.required, Validators.email]],
     contactphone: [

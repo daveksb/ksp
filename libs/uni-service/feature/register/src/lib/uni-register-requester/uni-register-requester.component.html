@@ -20,13 +20,12 @@
         ></ksp-stepper-nav>
 
         <ksp-university-select
-          formControlName="universityInfo"
           [label1]="'สถาบัน / มหาวิทยาลัย'"
           [label2]="'กลุ่มสถาบัน'"
           [searchType]="'uni'"
-          [schoolName]="'โปรดระบุ'"
-          [bureauName]="'โปรดระบุ'"
-          (selectedUniversity)="selectedUniversity($event)"
+          [schoolName]="uniData?.institution"
+          [bureauName]="uniData?.affiliation"
+          mode="view"
         ></ksp-university-select>
 
         <uni-form-register-requester
@@ -40,9 +39,10 @@
         <div class="my-2">
           <ksp-bottom-nav
             [disableNext]="form.invalid"
-            [isFirstPage]="true"
+            [isFirstPage]="false"
             [disableNextMessage]="'กรุณากรอกข้อมูลให้ครบถ้วน'"
             [showCenterButtons]="false"
+            (prevClicked)="back()"
             (nextClicked)="next()"
           ></ksp-bottom-nav>
         </div>
