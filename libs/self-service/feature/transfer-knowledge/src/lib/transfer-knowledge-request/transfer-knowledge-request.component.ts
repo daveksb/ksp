@@ -27,6 +27,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { Observable } from 'rxjs';
 
+const OBJECTIVE_FILES = [
+  {
+    name: 'สำเนาคำอธิบายรายวิชาที่ขอเทียบโอนความรู้ฯตามหลักสูตรที่สำเร็จการศึกษษที่มีตราประทับของทางสถาบันที่สำเร็จการศึกษาและมีเจ้าหน้าที่ของสถาบันลงนามรับรองสำเนาถูกต้อง',
+    fileId: '',
+    fileName: '',
+  },
+];
+
 @Component({
   selector: 'ksp-transfer-knowledge-request',
   templateUrl: './transfer-knowledge-request.component.html',
@@ -38,13 +46,6 @@ export class TransferKnowledgeRequestComponent
 {
   userInfoType = UserInfoFormType.thai;
   headerGroup = ['วันที่ทำรายการ', 'เลขใบคำขอ'];
-  objectiveFiles = [
-    {
-      name: 'สำเนาคำอธิบายรายวิชาที่ขอเทียบโอนความรู้ฯตามหลักสูตรที่สำเร็จการศึกษษที่มีตราประทับของทางสถาบันที่สำเร็จการศึกษาและมีเจ้าหน้าที่ของสถาบันลงนามรับรองสำเนาถูกต้อง',
-      fileId: '',
-      fileName: '',
-    },
-  ];
   eduFiles: any[] = [];
   transferFiles: any[] = [];
 
@@ -93,8 +94,8 @@ export class TransferKnowledgeRequestComponent
 
   override initializeFiles(): void {
     super.initializeFiles();
-    this.eduFiles = structuredClone(this.objectiveFiles);
-    this.transferFiles = structuredClone(this.objectiveFiles);
+    this.eduFiles = structuredClone(OBJECTIVE_FILES);
+    this.transferFiles = structuredClone(OBJECTIVE_FILES);
   }
 
   override patchData(data: SelfRequest) {
@@ -208,7 +209,10 @@ export class TransferKnowledgeRequestComponent
     completeDialog.componentInstance.saved.subscribe((res) => {
       if (res) {
         const payload = this.createRequest(1);
-        this.requestService.createRequest(payload).subscribe((res) => {
+        const request = this.requestId
+          ? this.requestService.updateRequest.bind(this.requestService)
+          : this.requestService.createRequest.bind(this.requestService);
+        request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
             this.router.navigate(['/home']);
@@ -220,7 +224,10 @@ export class TransferKnowledgeRequestComponent
     completeDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         const payload = this.createRequest(2);
-        this.requestService.createRequest(payload).subscribe((res) => {
+        const request = this.requestId
+          ? this.requestService.updateRequest.bind(this.requestService)
+          : this.requestService.createRequest.bind(this.requestService);
+        request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
             this.router.navigate(['/license', 'payment-channel']);

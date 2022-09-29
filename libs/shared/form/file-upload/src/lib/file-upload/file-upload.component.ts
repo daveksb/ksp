@@ -21,7 +21,7 @@ export class FileUploadComponent {
 
   @Input() buttonLabel = 'อัพโหลดไฟล์';
   @Input() systemFileName = '-'; // รายชื่ออ้างอิงในระบบ เช่น 'หนังสือนำส่งจากสถานศึกษา (ฉบับจริงและวันที่ออกหนังสือไม่เกิน 30 วัน)', 'รูปถ่าย 1 นิ้ว'
-  @Input() pageType!: RequestPageType; // tab ที่เรียกใช้งาน
+  @Input() pageType!: string; // tab ที่เรียกใช้งาน
   @Input() showUploadedFileName = true;
   @Input() requestType: number | null = null; // 1,2 no token required
   @Input() uniqueTimestamp: string | null = null;
