@@ -15,7 +15,7 @@
         [requestTypeList]="requestTypeList"
       ></ksp-school-request-search>
 
-      <hr class="mt-3" />
+      <hr />
       <div class="d-flex justify-content-between">
         <div class="box-header text-primary">รายการยื่นใบคำขอ</div>
 
@@ -65,8 +65,9 @@
         </mat-menu>
       </div>
 
-      <div class="table__scroll mt-1">
+      <div class="table__scroll">
         <table
+          class="mt-2"
           [hidden]="!dataSource.data.length"
           matSort
           mat-table
