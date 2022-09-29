@@ -30,6 +30,7 @@ export class FormUserInfoComponent
   RequestTypeEnum = SchoolRequestType;
   validatorMessages = validatorMessages;
   FormTypeEnum = UserInfoFormType;
+  today = new Date().toISOString().split('T')[0];
 
   /**
    * Dark Mode : all inputs will have gray background and form container will have white background
@@ -52,6 +53,7 @@ export class FormUserInfoComponent
     );
   }
   ngOnInit(): void {
+    console.log('today = ', this.today);
     // ถ้าเป็น form คนไทยไม่ต้อง validate field เหล่านี้
     //console.log('display mode = ', this.displayMode);
     if (this.displayMode.includes(UserInfoFormType.thai)) {
