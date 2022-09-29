@@ -18,8 +18,10 @@ import {
   RequestService,
 } from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { EMPTY, Observable, switchMap } from 'rxjs';
 
+@UntilDestroy()
 @Component({
   selector: 'ksp-qualification-detail',
   templateUrl: './qualification-detail.component.html',
@@ -45,6 +47,7 @@ export class QualificationDetailComponent implements OnInit {
   nationalitys$!: Observable<any>;
   schoolId = '0010201056';
   requestDate = thaiDate(new Date());
+  requestSubType!: number;
   requestId!: number;
   otherreason: any;
   refperson: any;
@@ -71,12 +74,23 @@ export class QualificationDetailComponent implements OnInit {
   ngOnInit(): void {
     this.getListData();
     this.checkRequestId();
+    this.checkRequestSubType();
   }
+
   checkRequestId() {
     this.route.paramMap.subscribe((params) => {
       this.requestId = Number(params.get('id'));
       if (this.requestId) {
         this.loadRequestData(this.requestId);
+      }
+    });
+  }
+
+  checkRequestSubType() {
+    this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
+      //this.form.reset();
+      if (Number(params['subtype'])) {
+        this.requestSubType = Number(params['subtype']);
       }
     });
   }
@@ -157,6 +171,7 @@ export class QualificationDetailComponent implements OnInit {
       !this.form.get('education')?.valid
     );
   }
+
   onSave() {
     const confirmDialog = this.dialog.open(
       QualificationApproveDetailComponent,
@@ -217,9 +232,10 @@ export class QualificationDetailComponent implements OnInit {
             userInfo.ref3 = '1';
             userInfo.systemtype = '2';
             userInfo.requesttype = '6';
-            userInfo.subtype = '1';
+            userInfo.subtype = `${this.requestSubType}`;
             userInfo.schoolid = this.schoolId;
-            userInfo.currentprocess = `1`;
+            userInfo.currentprocess = '1';
+            userInfo.requeststatus = '1';
             const payload = {
               ...userInfo,
               ...{
