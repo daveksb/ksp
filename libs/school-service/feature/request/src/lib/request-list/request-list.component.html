@@ -40,7 +40,7 @@
           <button mat-menu-item (click)="foreignPage()">
             ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ
           </button>
-          <button mat-menu-item (click)="qualificationPage()">
+          <button mat-menu-item [matMenuTriggerFor]="qualificationChoices">
             ขอหนังสือรับรองคุณวุฒิ
           </button>
           <button mat-menu-item (click)="rewardPage()">
@@ -48,16 +48,31 @@
             OSOI)
           </button>
         </mat-menu>
+
+        <mat-menu #qualificationChoices="matMenu">
+          <button (click)="qualificationPage(null, 1)" mat-menu-item>
+            ครู
+          </button>
+          <button (click)="qualificationPage(null, 2)" mat-menu-item>
+            ผู้บริหารสถานศึกษา
+          </button>
+          <button (click)="qualificationPage(null, 3)" mat-menu-item>
+            ผู้บริหารการศึกษา
+          </button>
+          <button (click)="qualificationPage(null, 4)" mat-menu-item>
+            ศึกษานิเทศก์
+          </button>
+        </mat-menu>
       </div>
 
       <div class="table__scroll mt-1">
         <table
-          *ngIf="!searchNotFound"
+          [style.hidden]="searchNotFound"
           matSort
           mat-table
           [dataSource]="dataSource"
         >
-          <ng-container matColumnDef="id">
+          <ng-container matColumnDef="order">
             <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
             <td
               class="text-center"
@@ -67,22 +82,13 @@
                 viewRequest(+element.requesttype, element.subtype, element.id)
               "
             >
-              {{ i + 1 }}
+              {{
+                paginator.pageIndex === 0
+                  ? i + 1
+                  : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+              }}
             </td>
           </ng-container>
-
-          <!--           <ng-container matColumnDef="verify">
-            <th mat-header-cell *matHeaderCellDef>ตรวจสอบ</th>
-            <td mat-cell *matCellDef="let element" class="text-center">
-              <i
-                role="button"
-                (click)="
-                  viewRequest(+element.requesttype, element.subtype, element.id)
-                "
-                class="bi bi-check-circle-fill text-success fs-5"
-              ></i>
-            </td>
-          </ng-container> -->
 
           <ng-container matColumnDef="requestno">
             <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
