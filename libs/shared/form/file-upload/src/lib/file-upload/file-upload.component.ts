@@ -53,9 +53,10 @@ export class FileUploadComponent {
         pagetype: this.pageType,
         originalname: file.name,
         systemname: this.systemFileName,
-        filedata: btoa(base64),
+        file: btoa(base64),
         uniquetimestamp: this.uniqueTimestamp,
-        requesttype: `${this.requestType}`,
+        requesttype: null,
+        //requesttype: `${this.requestType}`,
       };
       this.uploadFile(payload);
     }
