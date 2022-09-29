@@ -51,27 +51,6 @@
   text-align: center;
 }
 
-.box__container {
-  display: flex;
-  justify-content: space-between;
-  background-color: #edf8ff;
-  color: #3dabfc;
-  padding: 8px 12px;
-  border-radius: 6px;
-}
-
-.box__container--right {
-  display: flex;
-}
-
-.icon__box {
-  padding: 4px 0 4px 12px;
-}
-
-.label__box {
-  font-size: 22px;
-}
-
 .card__container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -80,8 +59,8 @@
 
 .card__content {
   display: grid;
-  grid-template-columns: 40px 1fr 40px;
-  grid-column-gap: 12px;
+  grid-template-columns: auto 1fr auto;
+  grid-column-gap: 16px;
   padding: 8px 12px;
   background: #edf8ff;
   box-sizing: border-box;
@@ -89,17 +68,12 @@
   margin: 24px 0 0 0;
   height: 66px;
   cursor: pointer;
+  align-items: center;
 }
 
 .title__card {
   font-size: 20px;
   color: #000000;
-}
-
-.title__card--secondary {
-  font-size: 20px;
-  color: #000000;
-  padding-top: 10px;
 }
 
 .label__card {
@@ -119,15 +93,11 @@
 .label__payment {
   font-size: 22px;
   color: #666666;
-  margin-top: 36px;
 }
 
 @media only screen and (max-width: 768px) {
   .container {
     width: 100%;
-    height: 100vh;
-
-    padding: 24px;
   }
 
   .label__box {
@@ -145,5 +115,19 @@
 
   .icon__box {
     padding: 0 0 0 8px;
+  }
+
+  .title__card {
+    font-size: 16px;
+  }
+
+  .content__label {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .title__card {
+    font-size: 16px;
   }
 }
