@@ -13,6 +13,7 @@ import {
   checkRequestType,
   checkStatus,
 } from '@ksp/shared/utility';
+import { filter } from 'lodash';
 @Component({
   templateUrl: './request-list.component.html',
   styleUrls: ['./request-list.component.scss'],
@@ -22,6 +23,7 @@ export class SchoolRequestListComponent implements AfterViewInit {
   displayedColumns: string[] = displayedColumns;
   dataSource = new MatTableDataSource<SchoolRequest>();
   SchoolRequestSubType = SchoolRequestSubType;
+  searchNotFound = true;
 
   searchParams: any;
   checkProcess = checkProcess;
@@ -47,12 +49,24 @@ export class SchoolRequestListComponent implements AfterViewInit {
   }
 
   search(filters: any) {
-    //console.log('params = ', params);
+    //console.log('filters = ', filters);
     const payload = {
-      systemtype: '2',
-      requesttype: `${filters.requesttype}`,
       schoolid: `${this.schoolId}`,
+      requesttype: `${filters.requesttype}`,
+      requestno: filters.requestno,
       subtype: filters.subtype,
+      firstnameth: filters.firstnameth,
+      lastnameth: filters.firstnameth,
+      firstnameen: null,
+      lastnameen: null,
+      idcardno: filters.idcardno,
+      passportno: filters.passportno,
+      currentprocess: filters.currentprocess,
+      requeststatus: filters.requeststatus,
+      createdatefrom: filters.requestdatefrom,
+      createdateto: filters.requestdateto,
+      offset: '0',
+      row: '500',
     };
 
     this.searchParams = payload;
@@ -60,8 +74,9 @@ export class SchoolRequestListComponent implements AfterViewInit {
     this.requestService.searchRequest(payload).subscribe((res) => {
       //console.log('res = ', res);
       if (res && res.length) {
-        const result = applyClientFilter(res, filters);
-        this.dataSource.data = result;
+        this.searchNotFound = false;
+        //const result = applyClientFilter(res, filters);
+        this.dataSource.data = res;
         this.dataSource.sort = this.sort;
 
         const sortState: Sort = { active: 'id', direction: 'desc' };
@@ -70,12 +85,14 @@ export class SchoolRequestListComponent implements AfterViewInit {
         this.sort.sortChange.emit(sortState);
       } else {
         this.dataSource.data = [];
+        this.searchNotFound = true;
       }
     });
   }
 
   clear() {
     this.form.reset();
+    this.searchNotFound = true;
     this.dataSource.data = [];
   }
 
@@ -128,7 +145,6 @@ export interface TempLicenseInfo {
 
 export const displayedColumns = [
   'id',
-  'verify',
   'requestno',
   'idcardno',
   'name',
