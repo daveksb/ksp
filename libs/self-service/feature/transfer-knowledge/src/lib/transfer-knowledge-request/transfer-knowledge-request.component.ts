@@ -14,7 +14,12 @@ import {
   MyInfoService,
   SelfRequestService,
 } from '@ksp/shared/service';
-import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
+import {
+  getCookie,
+  parseJson,
+  replaceEmptyWithNull,
+  toLowercaseProp,
+} from '@ksp/shared/utility';
 import { SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
 import { MatDialog } from '@angular/material/dialog';
@@ -80,15 +85,42 @@ export class TransferKnowledgeRequestComponent
 
   ngOnInit(): void {
     this.getListData();
-    this.getMyInfo();
+    // this.getMyInfo();
     // this.checkButtonsDisableStatus();
-    this.initializeFiles();
+    // this.initializeFiles();
+    this.checkRequestId();
   }
 
   override initializeFiles(): void {
     super.initializeFiles();
     this.eduFiles = structuredClone(this.objectiveFiles);
     this.transferFiles = structuredClone(this.objectiveFiles);
+  }
+
+  override patchData(data: SelfRequest) {
+    super.patchData(data);
+    if (data.eduinfo) {
+      const eduInfo = parseJson(data.eduinfo);
+      const { educationType, ...educationLevelForm } = eduInfo;
+      this.form.controls.educationInfo.patchValue({
+        educationType,
+        educationLevelForm,
+      } as any);
+    }
+
+    if (data.transferknowledgeinfo) {
+      const transferKnowledgeInfo = parseJson(data.transferknowledgeinfo);
+      this.form.controls.transferKnowledgeInfo.patchValue({
+        ...transferKnowledgeInfo,
+      });
+    }
+
+    if (data.fileinfo) {
+      const fileInfo = parseJson(data.fileinfo);
+      const { edufiles, transferknowledgeinfofiles } = fileInfo;
+      this.eduFiles = edufiles;
+      this.transferFiles = transferknowledgeinfofiles;
+    }
   }
 
   override getListData(): void {
@@ -125,6 +157,7 @@ export class TransferKnowledgeRequestComponent
     const userInfo = toLowercaseProp(rawUserInfo);
     userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
     userInfo.uniquetimestamp = this.uniqueTimestamp;
+    userInfo.staffid = getCookie('userId');
 
     const self = new SelfRequest(
       '1',
@@ -139,6 +172,7 @@ export class TransferKnowledgeRequestComponent
 
     const initialPayload = {
       ...replaceEmptyWithNull(userInfo),
+      ...(this.requestId && { id: `${this.requestId}` }),
       ...{
         addressinfo: JSON.stringify([formData.address1, formData.address2]),
       },

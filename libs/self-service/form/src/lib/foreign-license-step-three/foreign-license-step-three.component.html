@@ -18,6 +18,7 @@
         [uploadType]="'link'"
         [systemFileName]="file.name"
         [uniqueTimestamp]="uniqueTimestamp"
+        [fileName]="file.fileName"
         (uploadComplete)="updateComplete($event, file)"></ksp-file-upload>
     </div>
   </ng-container>

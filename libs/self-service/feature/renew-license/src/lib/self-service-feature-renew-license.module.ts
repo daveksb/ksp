@@ -63,6 +63,10 @@ export const routes: Routes = [
         path: 'foreign',
         component: RenewLicenseForeignComponent,
       },
+      {
+        path: 'foreign/:id',
+        component: RenewLicenseForeignComponent,
+      },
     ],
   },
 ];

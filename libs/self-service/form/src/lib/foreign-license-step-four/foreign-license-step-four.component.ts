@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -10,6 +10,13 @@ import { providerFactory } from '@ksp/shared/utility';
   providers: providerFactory(ForeignLicenseStepFourComponent),
 })
 export class ForeignLicenseStepFourComponent extends KspFormBaseComponent {
+  @Input()
+  set personalDeclaration(value: any) {
+    setTimeout(() => {
+      this.form.patchValue(value);
+    }, 0);
+  }
+
   override form = this.fb.group({
     qualified: [],
     noSection44: [],
