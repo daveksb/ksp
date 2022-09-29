@@ -95,6 +95,12 @@ add asterisk for required feild
   max-width: calc(100vw - var(--ksp-sidenav-width) - 17px);
 }
 
+@media only screen and (max-width: 1200px) {
+  .full-width-2 {
+    max-width: 100vw;
+  }
+}
+
 .default-width {
   max-width: var(--ksp-content-width);
 }

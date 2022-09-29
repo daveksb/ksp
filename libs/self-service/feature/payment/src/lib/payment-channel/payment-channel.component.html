@@ -3,28 +3,16 @@
   ><span subHeader>ข้อมูลส่วนตัว</span></ksp-top-nav
 >
 
-<div class="main__container py-2">
-  <div class="px-4">
-    <self-service-license-info
-      [header]="'รายละเอียดใบคำขอ'"
-      [subheader1]="'วันที่ทำรายการ'"
-      [subheader2]="'เลขใบคำขอ'"
-      [subheader3]="'เลขที่ประจำตัวคุรุสภา'"
-      [subheader4]="'เลขประจำตัวประชาชน'"
-      [date]="'10 ตุลาคม 2565'"
-      [requestNo]="'11020-00xxx-xx-x'"
-      [KuruspaId]="'11020-00xxx-xx-x'"
-      [personId]="'3365500066412'"
-    >
-    </self-service-license-info>
+<div class="main__container">
+  <div class="px-3">
+    <self-service-request-status></self-service-request-status>
   </div>
   <br />
-
   <div class="container">
     <div class="content__container">
       <div class="header__label">รายการค่าธรรมเนียม</div>
       <div class="content__label">
-        วันเดือนปีที่ต้องชำระเงิน<span class="date__label">25 ต.ค. 2565</span>
+        กรุณาชำระเงินก่อนวันที่<span class="date__label">25 ต.ค. 2565</span>
       </div>
       <div class="table-responsive">
         <table class="table">
@@ -58,30 +46,6 @@
         </table>
       </div>
       <br />
-      <div class="box__container">
-        <div class="label__box">ช่องทางการชำระเงินของคุณ</div>
-        <div class="box__container--right">
-          <div class="label__box">จัดการ</div>
-          <div class="icon__box">
-            <img src="/assets/images/arrow-right.svg" />
-          </div>
-        </div>
-      </div>
-
-      <div class="card__container">
-        <div class="card__content">
-          <div class="card__img">
-            <img src="/assets/images/pay-chanel/visa.png" />
-          </div>
-          <div class="card__detail">
-            <div class="title__card">1234 56** **** 0987</div>
-            <div class="label__card">เครดิต / เดบิต</div>
-          </div>
-          <div class="icon__card">
-            <img src="/assets/images/correct.svg" />
-          </div>
-        </div>
-      </div>
       <div class="label__payment">เลือกช่องทางการชำระเงิน</div>
       <div class="card__container">
         <div class="card__content">
@@ -96,36 +60,12 @@
             <img src="/assets/images/arrow-right.svg" />
           </div>
         </div>
-        <div class="card__content">
+        <div class="card__content" (click)="promptpay(1)">
           <div class="card__img">
             <img src="/assets/images/pay-chanel/2c2p.png" />
           </div>
           <div class="card__detail">
-            <div class="title__card--secondary">ชำระผ่านเคาน์เตอร์</div>
-          </div>
-          <div class="icon__card">
-            <img src="/assets/images/arrow-right.svg" />
-          </div>
-        </div>
-      </div>
-      <div class="card__container">
-        <div class="card__content">
-          <div class="card__img">
-            <img src="/assets/images/pay-chanel/kbtg.png" />
-          </div>
-          <div class="card__detail">
-            <div class="title__card--secondary">ธนาคารกสิกรไทย</div>
-          </div>
-          <div class="icon__card">
-            <img src="/assets/images/arrow-right.svg" />
-          </div>
-        </div>
-        <div class="card__content">
-          <div class="card__img">
-            <img src="/assets/images/pay-chanel/scb.png" />
-          </div>
-          <div class="card__detail">
-            <div class="title__card--secondary">ธนาคารไทยพาณิชย์</div>
+            <div class="title__card">ชำระผ่านเคาน์เตอร์ เซอร์วิส</div>
           </div>
           <div class="icon__card">
             <img src="/assets/images/arrow-right.svg" />
@@ -134,43 +74,76 @@
       </div>
 
       <div class="card__container">
-        <div class="card__content" (click)="promptpay()">
-          <div class="card__img">
-            <img src="/assets/images/pay-chanel/promtpay.png" />
-          </div>
-          <div class="card__detail">
-            <div class="title__card--secondary">พร้อมเพย์</div>
-          </div>
-          <div class="icon__card">
-            <img src="/assets/images/arrow-right.svg" />
-          </div>
-        </div>
-
         <div class="card__content">
           <div class="card__img">
             <img src="/assets/images/pay-chanel/paotang.png" />
           </div>
           <div class="card__detail">
-            <div class="title__card--secondary">เป๋าตัง</div>
+            <div class="title__card">ธนาคารกรุงไทย</div>
           </div>
           <div class="icon__card">
             <img src="/assets/images/arrow-right.svg" />
           </div>
         </div>
-      </div>
-      <div class="card__container">
-        <div class="card__content">
+
+        <div class="card__content" (click)="promptpay(2)">
           <div class="card__img">
-            <img src="/assets/images/pay-chanel/post.png" />
+            <img src="/assets/images/pay-chanel/promtpay.png" />
           </div>
           <div class="card__detail">
-            <div class="title__card--secondary">ไปรษณีย์ไทย</div>
+            <div class="title__card">QR payment / Thai Prompt Pay</div>
           </div>
           <div class="icon__card">
             <img src="/assets/images/arrow-right.svg" />
           </div>
         </div>
       </div>
+      <br />
+      <div class="header__label">พิมพ์แบบชำระเงิน</div>
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <div class="content__label">
+          กรุณาชำระเงินภายในวันที่<span class="date__label">25 ต.ค. 2565</span>
+        </div>
+
+        <button type="button" class="btn btn-sm btn-primary">
+          <i class="bi bi-printer me-2"></i>พิมพ์แบบชำระเงิน
+        </button>
+      </div>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">ลำดับ</th>
+              <th scope="col" class="header__container">รายการค่าธรรมเนียม</th>
+              <th scope="col" class="header__container">
+                อัตราค่าธรรมเนียม (บาท)
+              </th>
+              <th scope="col" class="header__container">จำนวน</th>
+              <th scope="col" class="header__container">จำนวนเงิน (บาท)</th>
+            </tr>
+          </thead>
+          <tbody class="body__table">
+            <tr>
+              <th scope="row">1</th>
+              <td class="detail__table">ค่าขึ้นทะเบียนรับใบอนุญาต</td>
+              <td class="detail__table">500.00</td>
+              <td class="detail__table">1</td>
+              <td class="detail__table">500.00</td>
+            </tr>
+            <tr>
+              <th scope="row"></th>
+              <td class="detail__table"></td>
+              <td class="detail__table"></td>
+              <td class="detail__table">รวมทั้งสิ้น</td>
+              <td class="detail__table">500.00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+  </div>
+  <div class="d-flex justify-content-center py-3">
+    <button type="button" class="btn btn-secondary">ยกเลิก</button>
+    <button type="button" class="ms-3 btn btn-primary">บันทึก</button>
   </div>
 </div>
