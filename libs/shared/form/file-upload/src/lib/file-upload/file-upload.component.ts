@@ -4,8 +4,8 @@ import { HttpClientModule, HttpEventType } from '@angular/common/http';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { MatIconModule } from '@angular/material/icon';
 import { getBase64 } from '@ksp/shared/utility';
-import { RequestPageType } from '@ksp/shared/constant';
 import { FileService } from './file-upload.service';
+import { FileUpload, ImageUpload } from '@ksp/shared/interface';
 
 @UntilDestroy()
 @Component({
@@ -21,10 +21,10 @@ export class FileUploadComponent {
 
   @Input() buttonLabel = 'อัพโหลดไฟล์';
   @Input() systemFileName = '-'; // รายชื่ออ้างอิงในระบบ เช่น 'หนังสือนำส่งจากสถานศึกษา (ฉบับจริงและวันที่ออกหนังสือไม่เกิน 30 วัน)', 'รูปถ่าย 1 นิ้ว'
-  @Input() pageType!: RequestPageType; // tab ที่เรียกใช้งาน
+  @Input() pageType!: string; // tab ที่เรียกใช้งาน
   @Input() showUploadedFileName = true;
   @Input() requestType: number | null = null; // 1,2 no token required
-  @Input() uniqueTimestamp: string | null = null;
+  @Input() uniqueTimestamp = '';
   @Input() uploadType: 'button' | 'link' = 'button';
   @Input() isImage = false; // when upload image use public API
   @Input() fileName = '';
@@ -40,7 +40,7 @@ export class FileUploadComponent {
     //console.log(this.pageType);
 
     if (this.isImage) {
-      const payload = {
+      const payload: ImageUpload = {
         uniquetimestamp: this.uniqueTimestamp,
         originalname: file.name,
         filetype: '1',
@@ -48,12 +48,12 @@ export class FileUploadComponent {
       };
       this.uploadImage(payload);
     } else {
-      const payload = {
+      const payload: FileUpload = {
         pagetype: this.pageType,
         originalname: file.name,
         systemname: this.systemFileName,
         file: btoa(base64),
-        uniquetimpstamp: this.uniqueTimestamp,
+        uniquetimestamp: this.uniqueTimestamp,
         requesttype: '3',
       };
       this.uploadFile(payload);
