@@ -10,5 +10,6 @@
 @media only screen and (max-width: 768px) {
   .menu__container {
     width: min-content;
+    font-size: 14px;
   }
 }
