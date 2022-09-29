@@ -72,7 +72,7 @@ export class SelfServiceHomePageComponent {
     if (requestType > 40) {
       this.reward();
     } else if (requestType === 30) {
-      this.refundFee();
+      this.refundFee(id);
     } else if (requestType === 6) {
       this.compare(id);
     } else if (requestType === 5) {
@@ -287,8 +287,8 @@ export class SelfServiceHomePageComponent {
   }
 
   // คืนเงินค่าธรรมเนียม
-  refundFee() {
-    this.router.navigate(['/refund-fee', 'request']);
+  refundFee(id?: number) {
+    this.router.navigate(['/refund-fee', 'request', ...(id ? [`${id}`] : [])]);
   }
 
   //ขอใบแทนใบอนุญาตประกอบวิชาชีพ
