@@ -35,6 +35,7 @@ export class FormAttachmentComponent {
       }
     });
   }
+
   deleteFile(group: any) {
     const payload = {
       id: group.fileId,
@@ -49,13 +50,14 @@ export class FormAttachmentComponent {
       }
     });
   }
+
   downloadFile(group: any) {
     const id = group.fileId;
-    console.log(group);
+    //console.log(group);
     this.fileService.downloadFile({ id }).subscribe((res: any) => {
       const a = document.createElement('a');
       a.style.display = 'none';
-      a.href = atob(res.filedata);
+      a.href = atob(res.file);
       a.download = group.fileName;
       document.body.appendChild(a);
       a.click();
@@ -63,8 +65,6 @@ export class FormAttachmentComponent {
   }
 
   updateComplete(file: any, group: any) {
-    //updateComplete(file: any) {
-    console.log('hhhhhhhhhh = ');
     const { fileId, fileName } = file;
     group.fileId = fileId;
     group.fileName = fileName;
