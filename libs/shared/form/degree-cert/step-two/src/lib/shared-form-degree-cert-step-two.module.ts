@@ -9,7 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedFormTeacherInfoModule } from '@ksp/shared/form/teacher-info';
 import { CourseTypeAComponent } from './course/course-type-a.component';
 import { CourseTypeBComponent } from './course/course-type-b.component';
-import { HideInViewModeDirective } from '@ksp/shared/directive';
+import { HideInViewModeDirective, MinMaxDirective } from '@ksp/shared/directive';
 import { AddRowButtonComponent } from '@ksp/shared/ui';
 
 @NgModule({
@@ -21,6 +21,7 @@ import { AddRowButtonComponent } from '@ksp/shared/ui';
     SharedFormTeacherInfoModule,
     AddRowButtonComponent,
     HideInViewModeDirective,
+    MinMaxDirective
   ],
   declarations: [
     TeacherComponent,

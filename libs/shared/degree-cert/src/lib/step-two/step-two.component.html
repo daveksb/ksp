@@ -82,10 +82,11 @@
         <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
       </div>
       <fieldset [disabled]="allowEditInput.section4">
-
       <ksp-step-2-nitet
         [mode]="mode"
         formControlName="nitet"
+        [maxAmount]="100"
+        [minAmount]="minAmount"
       ></ksp-step-2-nitet>
       </fieldset>
     </mat-tab>

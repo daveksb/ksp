@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import _ from 'lodash';
@@ -11,9 +11,10 @@ import _ from 'lodash';
   providers: providerFactory(NitetComponent),
 })
 export class NitetComponent extends KspFormBaseComponent implements OnInit {
+ @Input() maxAmount = 99;
+ @Input() minAmount = 0;
   experienceYearFocused = false;
   opaciseBox: boolean[] = [];
-
   nitetForm = this.fb.group({
     generalInfo: [],
     faculty: [],
@@ -27,7 +28,7 @@ export class NitetComponent extends KspFormBaseComponent implements OnInit {
 
   override form = this.fb.group({
     nitets: this.fb.array([this.nitetForm]),
-    nittetAmount: [],
+    nittetAmount: [0],
   });
 
   constructor(private fb: FormBuilder) {
@@ -53,7 +54,7 @@ export class NitetComponent extends KspFormBaseComponent implements OnInit {
     console.log();
 
     if (this.form.value.nittetAmount) {
-      new Array(_.parseInt(this.form.value.nittetAmount)).fill(null).forEach(() => {
+      new Array(this.form.value.nittetAmount).fill(null).forEach(() => {
         console.log("sdf")
         const form = this.fb.group({
           generalInfo: [],
