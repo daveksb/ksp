@@ -167,6 +167,7 @@ export class SchoolRequestComponent implements OnInit {
 
     this.requestService.cancelRequest(payload).subscribe((res) => {
       //console.log('Cancel request  = ', res);
+      this.cancelCompleted();
     });
   }
 
@@ -642,7 +643,6 @@ export class SchoolRequestComponent implements OnInit {
       .subscribe((res) => {
         if (res) {
           this.cancelRequest();
-          this.cancelCompleted();
         }
       });
   }

@@ -54,7 +54,12 @@
       </div>
 
       <div class="table__scroll mt-1">
-        <table matSort mat-table [dataSource]="dataSource">
+        <table
+          *ngIf="!searchNotFound"
+          matSort
+          mat-table
+          [dataSource]="dataSource"
+        >
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
             <td
@@ -66,7 +71,7 @@
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="verify">
+          <!--           <ng-container matColumnDef="verify">
             <th mat-header-cell *matHeaderCellDef>ตรวจสอบ</th>
             <td mat-cell *matCellDef="let element" class="text-center">
               <i
@@ -77,11 +82,17 @@
                 class="bi bi-check-circle-fill text-success fs-5"
               ></i>
             </td>
-          </ng-container>
+          </ng-container> -->
 
           <ng-container matColumnDef="requestno">
             <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
-            <td mat-cell *matCellDef="let element">
+            <td
+              (click)="
+                viewRequest(+element.requesttype, element.subtype, element.id)
+              "
+              mat-cell
+              *matCellDef="let element"
+            >
               {{ element.requestno }}
             </td>
           </ng-container>
@@ -90,14 +101,26 @@
             <th mat-header-cell *matHeaderCellDef>
               หมายเลขบัตรประชาชน/หนังสือเดินทาง
             </th>
-            <td mat-cell *matCellDef="let element">
+            <td
+              (click)="
+                viewRequest(+element.requesttype, element.subtype, element.id)
+              "
+              mat-cell
+              *matCellDef="let element"
+            >
               {{ element.idcardno }} {{ element.passportno }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
-            <td mat-cell *matCellDef="let element">
+            <td
+              (click)="
+                viewRequest(+element.requesttype, element.subtype, element.id)
+              "
+              mat-cell
+              *matCellDef="let element"
+            >
               {{ element.firstnameth }} {{ element.lastnameth }}
             </td>
           </ng-container>

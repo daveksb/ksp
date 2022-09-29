@@ -30,7 +30,6 @@ export class FileUploadComponent {
   @Input() fileName = '';
   @Output() uploadComplete = new EventEmitter<any>();
 
-  // fileName = '';
   uploadProgress!: number | null;
 
   constructor(private uploadService: FileService) {}
@@ -53,9 +52,9 @@ export class FileUploadComponent {
         pagetype: this.pageType,
         originalname: file.name,
         systemname: this.systemFileName,
-        filedata: btoa(base64),
+        file: btoa(base64),
         uniquetimestamp: this.uniqueTimestamp,
-        requesttype: `${this.requestType}`,
+        requesttype: this.requestType ? `${this.requestType}` : null,
       };
       this.uploadFile(payload);
     }
