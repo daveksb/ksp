@@ -7,8 +7,8 @@
   <div class="box-header">รายละเอียดใบคำขอรับรองปริญญาและประกาศนียบัตร</div>
   <div class="bg-white px-3 pt-2 pb-1">
     <ksp-request-header-info
-      requestDate="10 ตุลาคม 2565"
-      requestNumber="112234467876543"
+      [requestDate]="date"
+      [requestNumber]="requestNo"
     ></ksp-request-header-info>
 
     <hr />
@@ -35,29 +35,31 @@
       <mat-step [completed]="false">
         <ng-template matStepLabel>ด้านหลักสูตร</ng-template>
         <form [formGroup]="step2Form">
-        <ksp-degree-cert-step-two
-          [formType]="step1DegreeType"
-          formControlName="step2"
-          [showEditCheckbox]="true"
-        >
-        </ksp-degree-cert-step-two>
+          <ksp-degree-cert-step-two
+            [formType]="step1DegreeType"
+            formControlName="step2"
+            [showEditCheckbox]="true"
+          >
+          </ksp-degree-cert-step-two>
         </form>
       </mat-step>
 
       <mat-step [completed]="false">
         <ng-template matStepLabel>ด้านกระบวนการผลิต</ng-template>
         <form [formGroup]="step3Form">
-        <ksp-degree-cert-step-3
-          [showEditCheckbox]="true"
-          formControlName="step3"
-        ></ksp-degree-cert-step-3>
+          <ksp-degree-cert-step-3
+            [showEditCheckbox]="true"
+            formControlName="step3"
+          ></ksp-degree-cert-step-3>
         </form>
       </mat-step>
 
       <mat-step [completed]="false">
         <ng-template matStepLabel>เอกสารแนบ</ng-template>
         <form [formGroup]="step4Form">
-        <ksp-degree-cert-step-four formControlName="step4"></ksp-degree-cert-step-four>
+          <ksp-degree-cert-step-four
+            formControlName="step4"
+          ></ksp-degree-cert-step-four>
         </form>
       </mat-step>
 

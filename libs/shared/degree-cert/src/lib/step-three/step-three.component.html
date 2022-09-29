@@ -2,23 +2,37 @@
   <mat-tab-group class="tab-group" animationDuration="0ms" dynamicHeight="true">
     <mat-tab label="การฝึกปฏิบัติวิชาชีพระหว่างเรียน" class="tab-content">
       <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
-        <input type="checkbox" />
+         <input
+            [(ngModel)]="allowEditInput.section1"
+            [ngModelOptions]="{ standalone: true }"
+            type="checkbox"
+          />
         <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
       </div>
+      <fieldset [disabled]="!allowEditInput.section1">
+
       <ksp-step-3-training
         formControlName="training"
         [mode]="mode"
       ></ksp-step-3-training>
+      </fieldset>
     </mat-tab>
     <mat-tab label="การปฏิบัติการสอนในสถานศึกษาในสาขาวิชาเฉพาะ">
       <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
-        <input type="checkbox" />
+         <input
+            [(ngModel)]="allowEditInput.section2"
+            [ngModelOptions]="{ standalone: true }"
+            type="checkbox"
+          />
         <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
       </div>
+      <fieldset [disabled]="!allowEditInput.section2">
+
       <ksp-step-3-teaching
         formControlName="teaching"
         [mode]="mode"
       ></ksp-step-3-teaching>
+      </fieldset>
     </mat-tab>
   </mat-tab-group>
 </form>

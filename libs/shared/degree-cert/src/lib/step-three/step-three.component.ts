@@ -14,7 +14,10 @@ export class DegreeCertStepThreeComponent extends KspFormBaseComponent {
     training: [],
     teaching: [],
   });
-
+  allowEditInput = {
+    section1: false,
+    section2: false,
+  };
   @Input() showEditCheckbox = false;
 
   constructor(private fb: FormBuilder) {

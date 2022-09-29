@@ -152,4 +152,11 @@ export class UniInfoService {
     );
     return { major: major?.name || '-', branch: branch?.name || '-' };
   }
+
+  uniDegreeCertSelectByid(id: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/kspuni/unidegreecertselectbyid`, {
+      id,
+      tokenkey: this.tokenKey,
+    });
+  }
 }
