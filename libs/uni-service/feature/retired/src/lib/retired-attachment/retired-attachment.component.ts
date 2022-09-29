@@ -39,7 +39,10 @@ export class RetiredAttachmentComponent implements OnInit {
     private uniinfoService: UniInfoService
   ) {}
 
-  retiredFiles = [{ name: 'หนังสือแต่งตั้งผู้ประสานงาน', fileId: '', fileName: '' }];
+  retiredFiles = [
+    { name: 'หนังสือแต่งตั้งผู้ประสานงาน', fileId: '', fileName: '' },
+    { name: 'สำเนาบัตรประชาชน', fileId: '', fileName: '' }
+  ];
 
   ngOnInit() {
     this.uniqueTimestamp = `${new Date().getTime()}`;

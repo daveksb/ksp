@@ -14,7 +14,7 @@ import {
   RequestHeaderInfoComponent,
 } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -49,12 +49,12 @@ export class AccusationRecordComponent
   ];
 
   override form = this.fb.group({
-    accusationblackno: [],
-    accusationtype: [],
-    accusationincidentdate: [],
-    accusationincidentplace: [],
-    accusationcondemnationtype: [],
-    accusationcondemnation: [],
+    accusationblackno: [null, Validators.required],
+    accusationtype: [null, Validators.required],
+    accusationincidentdate: [null, Validators.required],
+    accusationincidentplace: [null, Validators.required],
+    accusationcondemnationtype: [null, Validators.required],
+    accusationcondemnation: [null, Validators.required],
     accusationissuedate: [],
     accusationdetail: [],
     accusationpunishmentdetail: [],

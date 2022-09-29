@@ -33,7 +33,7 @@ export class AccusationListComponent implements OnInit {
 
   constructor(
     public router: Router,
-    private route: ActivatedRoute,
+    //private route: ActivatedRoute,
     private fb: FormBuilder
   ) {}
 

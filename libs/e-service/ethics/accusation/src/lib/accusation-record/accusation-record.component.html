@@ -82,7 +82,7 @@
 
   <div class="row">
     <div class="col mb-3">
-      <label class="form-label">หมายเลขคดีดำ</label>
+      <label class="form-label required">หมายเลขคดีดำ</label>
       <input
         class="form-control"
         type="text"
@@ -90,7 +90,7 @@
       />
     </div>
     <div class="col mb-3">
-      <label class="form-label">ประพฤติผิดจรรยาบรรณต่อ</label>
+      <label class="form-label required">ประพฤติผิดจรรยาบรรณต่อ</label>
       <select class="form-select" formControlName="accusationtype">
         <option value="null" disabled hidden selected>กรุณาเลือก</option>
         <option value="1">One</option>
@@ -102,7 +102,7 @@
 
   <div class="row">
     <div class="col-6 mb-3">
-      <label class="form-label">วันที่เกิดเหตุ</label>
+      <label class="form-label required">วันที่เกิดเหตุ</label>
       <input
         class="form-control"
         type="date"
@@ -113,7 +113,7 @@
 
   <div class="row">
     <div class="col mb-3">
-      <label class="form-label">สถานที่เกิดเหตุ </label>
+      <label class="form-label required">สถานที่เกิดเหตุ </label>
       <textarea
         class="form-control"
         type="text"
@@ -126,7 +126,9 @@
 
   <div class="row">
     <div class="col-6 mb-3">
-      <label class="form-label">ประเภทของการกล่าวโทษ/ข้อกล่าวโทษ</label>
+      <label class="form-label required"
+        >ประเภทของการกล่าวโทษ/ข้อกล่าวโทษ</label
+      >
       <select class="form-select" formControlName="accusationcondemnationtype">
         <option value="null" disabled hidden selected>กรุณาเลือก</option>
         <option value="1">One</option>
@@ -138,7 +140,7 @@
 
   <div class="row">
     <div class="col mb-3">
-      <label class="form-label">ประเด็นตั้งข้อกล่าวหา/กล่าวโทษ</label>
+      <label class="form-label required">ประเด็นตั้งข้อกล่าวหา/กล่าวโทษ</label>
       <textarea
         class="form-control"
         type="text"
