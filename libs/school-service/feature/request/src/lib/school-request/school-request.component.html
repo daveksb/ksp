@@ -27,7 +27,7 @@
         </div>
 
         <!-- *ngIf="!requestId || requestSubType !== 5" -->
-        <div class="row mb-3" *ngIf="!requestId">
+        <div class="row mb-3" *ngIf="!requestId && requestSubType !== 5">
           <div class="col-5">
             <label class="form-label">หมายเลขบัตรประชาชน</label>
             <input

@@ -450,10 +450,18 @@ export class SchoolRequestComponent implements OnInit {
     this.form.controls.reasoninfo.patchValue(res);
   }
   patchFileInfo(res: any) {
-    this.patchFileId(this.eduFiles, res.tab3);
-    this.patchFileId(this.teachingFiles, res.tab4);
-    this.patchFileId(this.reasonFiles, res.tab5);
-    this.patchFileId(this.attachFiles, res.tab6);
+    if (res && res.tab3) {
+      this.patchFileId(this.eduFiles, res.tab3);
+    }
+    if (res && res.tab4) {
+      this.patchFileId(this.teachingFiles, res.tab4);
+    }
+    if (res && res.tab5) {
+      this.patchFileId(this.reasonFiles, res.tab5);
+    }
+    if (res && res.tab5) {
+      this.patchFileId(this.attachFiles, res.tab6);
+    }
   }
   patchFileId(fileList: any, tab: any) {
     for (let i = 0; i < fileList.length; i++) {
