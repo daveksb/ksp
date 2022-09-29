@@ -1,4 +1,4 @@
-import { RequestProcessList, SchoolRequestType } from '@ksp/shared/constant';
+import { SchoolRequestProcess, SchoolRequestType } from '@ksp/shared/constant';
 import { SchoolRequest } from '@ksp/shared/interface';
 import moment from 'moment';
 
@@ -46,7 +46,6 @@ export function replaceEmptyWithNull(input: any) {
 // parse json with Thai characters support
 export function parseJson(input: any) {
   if (input) {
-    console.log('ixx = ', input);
     return JSON.parse(decodeURIComponent(escape(window.atob(input))));
   } else {
     return null;
@@ -99,7 +98,7 @@ export function applyClientFilter(data: SchoolRequest[], searchParams: any) {
 }
 
 export function checkProcess(processId: number) {
-  const process = RequestProcessList.find((p) => {
+  const process = SchoolRequestProcess.find((p) => {
     return p.processId === processId && p.requestType === 3;
   });
   return process;
@@ -107,7 +106,6 @@ export function checkProcess(processId: number) {
 
 export function checkStatus(processId: number, statusId: number) {
   const process = checkProcess(processId);
-  console.log('process = ', processId, ': status = ', statusId);
   const status = process?.status.find((s) => {
     return s.id == statusId;
   });

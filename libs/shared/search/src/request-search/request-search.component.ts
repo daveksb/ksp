@@ -8,7 +8,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import {
   EduOccupyList,
   RequestProcess,
-  RequestProcessList,
+  SchoolRequestProcess,
   RequestStatus,
   SchoolRequestType,
 } from '@ksp/shared/constant';
@@ -70,7 +70,7 @@ export class RequestSearchComponent
         }
 
         // update process list
-        this.processList = RequestProcessList.filter((i) => {
+        this.processList = SchoolRequestProcess.filter((i) => {
           return `${i.requestType}` === requestType;
         });
       });
