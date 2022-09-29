@@ -40,12 +40,17 @@ export class WorkplaceInfoComponent implements OnInit {
       this.patchWorkPlace(res);
     });
   }
+
   patchWorkPlace(res: SelfMyInfo) {
-    const workplace = JSON.parse(res?.schooladdrinfo as string) || null;
+    //console.log('res = ', res);
+    //const workplace = parseJson(res.schooladdrinfo);
+    const workplace = JSON.parse(`${res?.schooladdrinfo}`);
+    //console.log('workplace = ', workplace);
     this.amphurs1$ = this.addressService.getAmphurs(workplace.province);
     this.tumbols1$ = this.addressService.getTumbols(workplace.district);
     this.form.patchValue({ workplace });
   }
+
   public provinceChanged(addrType: number, evt: any) {
     const province = evt.target?.value;
     if (province) {
@@ -63,6 +68,7 @@ export class WorkplaceInfoComponent implements OnInit {
       }
     }
   }
+
   onClickChangeMode() {
     if (this.mode == 'view') {
       this.mode = 'edit';
@@ -71,14 +77,16 @@ export class WorkplaceInfoComponent implements OnInit {
       this.mode = 'view';
     }
   }
+
   savingData() {
     const formData = this.form.value;
+    //console.log('form data = ', formData.workplace);
     this.baseForm.patchValue({
       schooladdrinfo: JSON.stringify(formData.workplace),
     });
     const payload: SelfMyInfo = replaceEmptyWithNull(this.baseForm.value);
-    this.myInfoService
-      .updateMyInfo(payload)
-      .subscribe((res) => console.log(res));
+    this.myInfoService.updateMyInfo(payload).subscribe((res) => {
+      //
+    });
   }
 }

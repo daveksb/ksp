@@ -41,9 +41,27 @@ export class UniDegreeCertListComponent implements OnInit {
     this.getAll();
   }
   getRequest() {
-    const { institutionNumber } = this.form.controls.search.value as any;
+    const {
+      institutionNumber,
+      licenseNumber,
+      degreeName,
+      date,
+      submitDegreeLevel,
+      courseStatus,
+      verifyStatus,
+      approveStatus,
+    } = this.form.controls.search.value as any;
     return {
-      uniid: institutionNumber,
+      uniid: institutionNumber || '',
+      fulldegreenameth: degreeName || '',
+      requestno: licenseNumber || '',
+      requestdate: date || '',
+      coursestatus: courseStatus || '',
+      degreelevel: submitDegreeLevel || '',
+      requeststatus: approveStatus || '',
+      requestprocess: verifyStatus || '',
+      offset: '0',
+      row: '10',
     };
   }
   search() {

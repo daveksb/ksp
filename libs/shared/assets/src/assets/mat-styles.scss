@@ -133,6 +133,11 @@ tr[class^='mat'] {
   font-family: var(--bs-body-font-family);
 }
 
+button.mat-menu-item {
+  font-family: 'ksp bold';
+  font-size: 18px;
+}
+
 .mat-menu-panel {
   max-width: none !important;
 }

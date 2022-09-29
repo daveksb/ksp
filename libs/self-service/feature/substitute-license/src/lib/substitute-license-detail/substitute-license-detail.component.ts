@@ -17,9 +17,23 @@ import {
   MyInfoService,
   SelfRequestService,
 } from '@ksp/shared/service';
-import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
+import {
+  getCookie,
+  parseJson,
+  replaceEmptyWithNull,
+  toLowercaseProp,
+} from '@ksp/shared/utility';
 import { SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
+
+const OBJECTIVE_FILES = [
+  { name: '1.ใบอนุญาตประกอบวิชาชีพที่ชํารุด', fileId: '', fileName: '' },
+  {
+    name: '2.หลักฐานการรับแจงความของพนักงานสอบสวน หรือบันทึกถอยคํา กรณีใบอนุญาตสูญหาย',
+    fileId: '',
+    fileName: '',
+  },
+];
 
 @Component({
   selector: 'ksp-substitute-license-detail',
@@ -31,14 +45,7 @@ export class SubstituteLicenseDetailComponent
   implements OnInit
 {
   userInfoType = UserInfoFormType.thai;
-  objectiveFiles = [
-    { name: '1.ใบอนุญาตประกอบวิชาชีพที่ชํารุด', fileId: '', fileName: '' },
-    {
-      name: '2.หลักฐานการรับแจงความของพนักงานสอบสวน หรือบันทึกถอยคํา กรณีใบอนุญาตสูญหาย',
-      fileId: '',
-      fileName: '',
-    },
-  ];
+  objectiveFiles: any[] = [];
 
   override form = this.fb.group({
     userInfo: [],
@@ -74,9 +81,32 @@ export class SubstituteLicenseDetailComponent
 
   ngOnInit(): void {
     this.getListData();
-    this.getMyInfo();
+    // this.getMyInfo();
     // this.checkButtonsDisableStatus();
-    this.initializeFiles();
+    // this.initializeFiles();
+    this.checkRequestId();
+  }
+
+  override initializeFiles() {
+    super.initializeFiles();
+    this.objectiveFiles = structuredClone(OBJECTIVE_FILES);
+  }
+
+  override patchData(data: SelfRequest) {
+    super.patchData(data);
+    console.log(data);
+
+    if (data.replacereasoninfo) {
+      const replaceReasonInfo = parseJson(data.replacereasoninfo);
+      this.form.controls.replaceReasonInfo.patchValue(replaceReasonInfo);
+    }
+
+    if (data.fileinfo) {
+      const fileInfo = parseJson(data.fileinfo);
+      console.log(fileInfo);
+      const { replacereasoninfofiles } = fileInfo;
+      this.objectiveFiles = replacereasoninfofiles;
+    }
   }
 
   patchUserInfoForm(data: any): void {
@@ -108,6 +138,7 @@ export class SubstituteLicenseDetailComponent
     const userInfo = toLowercaseProp(rawUserInfo);
     userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
     userInfo.uniquetimestamp = this.uniqueTimestamp;
+    userInfo.staffid = getCookie('userId');
 
     const self = new SelfRequest(
       '1',
@@ -121,6 +152,7 @@ export class SubstituteLicenseDetailComponent
 
     const initialPayload = {
       ...replaceEmptyWithNull(userInfo),
+      ...(this.requestId && { id: `${this.requestId}` }),
       ...{
         addressinfo: JSON.stringify([formData.address1, formData.address2]),
       },
@@ -153,7 +185,10 @@ export class SubstituteLicenseDetailComponent
     completeDialog.componentInstance.saved.subscribe((res) => {
       if (res) {
         const payload = this.createRequest(1);
-        this.requestService.createRequest(payload).subscribe((res) => {
+        const request = this.requestId
+          ? this.requestService.updateRequest.bind(this.requestService)
+          : this.requestService.createRequest.bind(this.requestService);
+        request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
             this.router.navigate(['/home']);
@@ -165,7 +200,10 @@ export class SubstituteLicenseDetailComponent
     completeDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         const payload = this.createRequest(2);
-        this.requestService.createRequest(payload).subscribe((res) => {
+        const request = this.requestId
+          ? this.requestService.updateRequest.bind(this.requestService)
+          : this.requestService.createRequest.bind(this.requestService);
+        request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
             this.router.navigate(['/license', 'payment-channel']);

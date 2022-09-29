@@ -1,10 +1,18 @@
 <ksp-top-nav
   ><span header>ยื่นใบคำขอ</span
-  ><span subHeader> {{ requestLabel }}</span></ksp-top-nav
+  ><span subHeader
+    >ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ ({{
+      requestLabel
+    }})</span
+  ></ksp-top-nav
 >
 
 <div class="bg-secondary bg-opacity-10 px-4 py-2 full-width-2">
-  <div class="box-header">รายละเอียดใบคำ{{ requestLabel }}</div>
+  <div class="box-header">
+    รายละเอียดใบคำขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ ({{
+      requestLabel
+    }})
+  </div>
   <div [formGroup]="form" class="bg-white py-3 px-4">
     <div>
       <ksp-request-header-info
@@ -103,7 +111,7 @@
             [countries]="countries$ | async"
           >
           </ksp-form-education-info>
-          <div class="px-3 py-3 col-6 mb-2 d-flex align-items-center">
+          <div class="px-3 py-3 col-6 d-flex align-items-center">
             <input type="checkbox" class="me-2" [formControl]="option" />
             <label class="form-label">ปริญญาอื่นๆ</label>
           </div>
@@ -118,6 +126,7 @@
               [option]="true"
             >
             </ksp-form-education-info>
+            <br />
           </ng-container>
 
           <!--           <ksp-form-education-info-manager
@@ -137,7 +146,6 @@
             <ksp-form-teaching-info
               formControlName="teachinginfo"
             ></ksp-form-teaching-info>
-            <br />
           </ng-container>
 
           <!--           <ng-container *ngIf="requestSubType === 2">
@@ -153,9 +161,9 @@
             [positionTypes]="positionTypes$ | async"
             [academicStandingList]="academicTypes$ | async"
           ></ksp-form-hiring-info>
-          <br />
+
           <ksp-form-temp-license-number></ksp-form-temp-license-number>
-          <br />
+
           <ksp-form-attachment
             [uniqueTimestamp]="uniqueTimestamp"
             [pageType]="pageType.teachingTab"

@@ -22,6 +22,7 @@ export class UniversitySelectComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+  @Input() title = 'กรุณาเลือกสถาบันที่ท่านสังกัด';
   @Input() label1 = 'สังกัด';
   @Input() label2 = 'โรงเรียน / สถานศึกษา';
   @Input() schoolName = '';
@@ -64,6 +65,7 @@ export class UniversitySelectComponent
       },
       data: {
         searchType: this.searchType,
+        subHeader: 'กรุณาเลือกหน่วยงาน/สถานศึกษาที่ท่านสังกัด',
       },
     });
     dialog.afterClosed().subscribe((res) => {

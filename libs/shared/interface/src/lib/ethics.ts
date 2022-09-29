@@ -21,3 +21,7 @@ export interface MenuConfig {
 export interface EthicsCustomRoute extends Route {
   data?: EthicsCustomRouteData;
 }
+
+export class Ethics {
+  id?: string | null = null; // only when update
+}

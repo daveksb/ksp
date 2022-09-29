@@ -30,6 +30,7 @@ export class FormUserInfoComponent
   RequestTypeEnum = SchoolRequestType;
   validatorMessages = validatorMessages;
   FormTypeEnum = UserInfoFormType;
+  today = new Date().toISOString().split('T')[0];
 
   /**
    * Dark Mode : all inputs will have gray background and form container will have white background
@@ -70,6 +71,25 @@ export class FormUserInfoComponent
       this.form.controls.email.clearValidators();
     }
   }
+
+  prefixChanged(evt: any) {
+    const prefix = evt.target?.value;
+
+    if (prefix === '1') {
+      const temp: any = { sex: '1' };
+      this.form.patchValue(temp);
+    } else if (['2', '3', '4', '5'].includes(prefix)) {
+      const temp: any = { sex: '2' };
+      this.form.patchValue(temp);
+    } else {
+      const temp: any = { sex: '3' };
+      this.form.patchValue(temp);
+    }
+
+    const en = { prefixen: prefix };
+    this.form.patchValue(en);
+  }
+
   get idCardNo() {
     return this.form.controls.idcardno;
   }

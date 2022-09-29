@@ -84,6 +84,7 @@
         [class.bg-white]="!isDarkMode && mode === 'edit'"
         class="form-select"
         formControlName="prefixth"
+        (change)="prefixChanged($event)"
       >
         <option value="null">กรุณาเลือก</option>
         <option *ngFor="let prefix of prefixList" [value]="prefix.id">
@@ -228,6 +229,7 @@
         type="date"
         [class.bg-light]="isDarkMode"
         formControlName="birthdate"
+        [max]="today"
       />
     </div>
 

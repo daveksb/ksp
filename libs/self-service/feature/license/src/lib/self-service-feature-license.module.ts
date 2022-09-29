@@ -94,6 +94,10 @@ export const routes: Routes = [
         component: LicenseEditComponent,
       },
       {
+        path: 'edit/:id',
+        component: LicenseEditComponent,
+      },
+      {
         path: 'payment-channel',
         component: PaymentChannelComponent,
       },

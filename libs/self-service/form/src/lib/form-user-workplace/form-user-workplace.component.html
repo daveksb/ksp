@@ -2,11 +2,9 @@
   <div class="row">
     <div class="col-md-6 mb-3">
       <label class="form-label">สังกัด</label>
-      <select class="search__content form-select" formControlName="affiliation">
+      <select class="search__content form-select" formControlName="bureauid">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
-        <option
-          *ngFor="let bureau of bureaus"
-          [value]="bureau?.bureauId">
+        <option *ngFor="let bureau of bureaus" [value]="bureau?.bureauId">
           {{ bureau?.bureauName }}
         </option>
       </select>
@@ -14,10 +12,7 @@
 
     <div class="col-md-6 mb-3">
       <label class="form-label">ชื่อหน่วยงาน/สถานศึกษา</label>
-      <input
-        class="form-control"
-        type="text"
-        formControlName="addressName" />
+      <input class="form-control" type="text" formControlName="schoolname" />
       <!-- (click)="openSearchDialog()" -->
     </div>
   </div>
@@ -25,19 +20,19 @@
   <div class="row">
     <div class="col-md-6 mb-3">
       <label class="form-label">ที่อยู่/เลขที่</label>
-      <input class="form-control" type="text" formControlName="houseNumber" />
+      <input class="form-control" type="text" formControlName="houseno" />
     </div>
 
     <div class="col-md-6 mb-3">
       <label class="form-label">หมู่ที่</label>
-      <input class="form-control" type="text" formControlName="villageNumber" />
+      <input class="form-control" type="text" formControlName="moo" />
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-3">
       <label class="form-label">ซอย</label>
-      <input class="form-control" type="text" formControlName="lane" />
+      <input class="form-control" type="text" formControlName="alley" />
     </div>
 
     <div class="col-md-6 mb-3">
@@ -49,7 +44,7 @@
   <div class="row">
     <div class="col-md-6 mb-3">
       <label class="form-label required">รหัสไปรษณีย์ </label>
-      <input class="form-control" type="text" formControlName="zipCode" />
+      <input class="form-control" type="text" formControlName="postcode" />
     </div>
 
     <div class="col-md-6 mb-3">
@@ -57,11 +52,13 @@
       <select
         class="search__content form-select"
         formControlName="province"
-        (change)="provinceChanged.emit($event)">
+        (change)="provinceChanged.emit($event)"
+      >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option
           *ngFor="let province of provinces"
-          [value]="province?.province_id">
+          [value]="province?.province_id"
+        >
           {{ province?.province_name }}
         </option>
       </select>
@@ -73,8 +70,9 @@
       <label class="form-label">ตำบล</label>
       <select
         class="search__content form-select"
-        formControlName="subDistrict"
-        (change)="updatePostcode($event)">
+        formControlName="tumbol"
+        (change)="updatePostcode($event)"
+      >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let t of tumbols" [value]="t?.tambolCode">
           {{ t?.tambolName }}
@@ -86,8 +84,9 @@
       <label class="form-label">อำเภอ</label>
       <select
         class="search__content form-select"
-        formControlName="district"
-        (change)="amphurChanged.emit($event)">
+        formControlName="amphur"
+        (change)="amphurChanged.emit($event)"
+      >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let a of amphurs" [value]="a?.amphurCode">
           {{ a?.amphurName }}
