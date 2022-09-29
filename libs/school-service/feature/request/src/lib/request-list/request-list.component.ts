@@ -7,13 +7,11 @@ import { Router } from '@angular/router';
 import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
 import { SchoolRequest } from '@ksp/shared/interface';
 import { RequestService } from '@ksp/shared/service';
-import { applyClientFilter } from '@ksp/shared/utility';
 import {
   checkProcess,
   checkRequestType,
   checkStatus,
 } from '@ksp/shared/utility';
-import { filter } from 'lodash';
 @Component({
   templateUrl: './request-list.component.html',
   styleUrls: ['./request-list.component.scss'],
@@ -56,7 +54,7 @@ export class SchoolRequestListComponent implements AfterViewInit {
       requestno: filters.requestno,
       subtype: filters.subtype,
       firstnameth: filters.firstnameth,
-      lastnameth: filters.firstnameth,
+      lastnameth: null,
       firstnameen: null,
       lastnameen: null,
       idcardno: filters.idcardno,
@@ -75,7 +73,6 @@ export class SchoolRequestListComponent implements AfterViewInit {
       //console.log('res = ', res);
       if (res && res.length) {
         this.searchNotFound = false;
-        //const result = applyClientFilter(res, filters);
         this.dataSource.data = res;
         this.dataSource.sort = this.sort;
 
@@ -141,7 +138,7 @@ export class SchoolRequestListComponent implements AfterViewInit {
 }
 
 export interface TempLicenseInfo {
-  id: number;
+  order: number;
   requestno: string;
   idcardno: string;
   requesttype: string;
@@ -152,7 +149,7 @@ export interface TempLicenseInfo {
 }
 
 export const displayedColumns = [
-  'id',
+  'order',
   'requestno',
   'idcardno',
   'name',

@@ -67,12 +67,12 @@
 
       <div class="table__scroll mt-1">
         <table
-          *ngIf="!searchNotFound"
+          [style.hidden]="searchNotFound"
           matSort
           mat-table
           [dataSource]="dataSource"
         >
-          <ng-container matColumnDef="id">
+          <ng-container matColumnDef="order">
             <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
             <td
               class="text-center"
@@ -82,7 +82,11 @@
                 viewRequest(+element.requesttype, element.subtype, element.id)
               "
             >
-              {{ i + 1 }}
+              {{
+                paginator.pageIndex === 0
+                  ? i + 1
+                  : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+              }}
             </td>
           </ng-container>
 
