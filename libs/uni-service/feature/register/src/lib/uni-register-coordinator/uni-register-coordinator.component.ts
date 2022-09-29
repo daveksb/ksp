@@ -45,6 +45,8 @@ export class UniRegisterCoordinatorComponent implements OnInit {
   currentprocess = 1;
   uniqueTimestamp: any = '';
   pageType = RequestPageType;
+  uniData: any;
+
   constructor(
     private router: Router,
     public dialog: MatDialog,
@@ -56,9 +58,13 @@ export class UniRegisterCoordinatorComponent implements OnInit {
 
   ngOnInit(): void {
     this.uniqueTimestamp = `${new Date().getTime()}`;
+    localForage.getItem('registerSelectedUniversity').then((res: any) => {
+      if (res) {
+        this.uniData = res.universityInfo;
+      }
+    });
     localForage.getItem('registerUserForm').then((res:any) => {
       if (res) {
-        console.log(res)
         this.form.patchValue({
           universityInfo: {
             schoolid: res.schoolid,
@@ -70,10 +76,10 @@ export class UniRegisterCoordinatorComponent implements OnInit {
         this.saveData = res;
       }
     });
-    localForage.getItem('registerCoordinatorForm').then((res:any) => {
+    localForage.getItem('registerCoordinatorForm').then((res: any) => {
       if (res) {
         this.form.patchValue({
-          coordinator: res.coordinator
+          coordinator: res.form.coordinator
         });
       }
     });
@@ -92,80 +98,55 @@ export class UniRegisterCoordinatorComponent implements OnInit {
     });
   }
 
-  prevPage() {
-    localForage.setItem('registerCoordinatorForm', this.form.getRawValue());
+  prevPage() {   
+  let form = {
+    form: this.form.getRawValue(),
+    file: this.uploadFileList
+  }
+  localForage.setItem('registerCoordinatorForm', form);
     this.router.navigate(['/', 'register', 'requester']);
   }
 
   cancel() {
-    localForage.removeItem('registerUserForm')
-    this.router.navigate(['/', 'login']);
-  }
-
-  confirm() {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
-        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
-        subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
-        ใช่หรือไม่`,
-        btnLabel: 'บันทึก',
+        title: `คุณต้องการยกเลิกรายการใบคำขอใช่หรือไม่?`,
+        btnLabel: 'ยืนยัน',
       },
     });
-
-    dialogRef.componentInstance.confirmed
-    .pipe(
-      switchMap((res) => {
+    confirmDialog.componentInstance.confirmed.subscribe((res) => {
         if (res) {
-          let educationoccupy = {
-            permission: this.saveData.permission,
-            unitype: this.saveData.unitype,
-            other: this.saveData.other
-          }
-          const fileUpload = this.uploadFileList.map((file) => file.fileId || null);
-          const payload = {
-            ...this.saveData,
-            educationoccupy: JSON.stringify(educationoccupy),
-            coordinatorinfo: JSON.stringify(this.form.value.coordinator),
-            fileinfo: JSON.stringify({ fileUpload })
-          };
-          payload.ref1 = '3';
-          payload.ref2 = '01';
-          payload.ref3 = '5';
-          payload.systemtype = this.systemtype;
-          payload.requesttype = this.requesttype;
-          payload.requeststatus = `1`;
-          payload.currentprocess = this.currentprocess;
-          return this.requestService.createRequest(payload);
+          this.showCompleteDialog();
         }
-        return EMPTY;
-      })
-    )
-    .subscribe((res) => {
-      if (res) {
-        const requestNo = res?.requestno;
-        this.onConfirmed(requestNo);
-      }
     });
   }
 
-  onConfirmed(requestNo: string) {
+  showCompleteDialog() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
+      width: '375px',
       data: {
-        header: 'ยืนยันข้อมูลสำเร็จ',
-        content: `วันที่ : ${this.requestDate}
-        เลขที่ใบคำขอ : ${requestNo}`,
-        subContent: `กรุณาตรวจสอบสถานะใบคำขอหรือรหัสเข้าใช้งาน
-        ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
+        header: `ยกเลิกรายการสำเร็จ`,
+        btnLabel: 'กลับสู่หน้าหลัก'
       },
     });
+
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
+        localForage.removeItem('registerSelectedUniversity');
         localForage.removeItem('registerUserForm');
         localForage.removeItem('registerCoordinatorForm');
-        this.router.navigate(['/', 'login']);
+        this.router.navigate(['/login']);
       }
     });
+  }
+
+  next() {
+    let form = {
+      form: this.form.getRawValue(),
+      file: this.uploadFileList
+    }
+    localForage.setItem('registerCoordinatorForm', form);
+    this.router.navigate(['/', 'register', 'password']);
   }
 }

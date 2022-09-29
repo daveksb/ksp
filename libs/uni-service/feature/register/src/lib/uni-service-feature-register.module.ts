@@ -18,6 +18,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UniRegisterStatusComponent } from './uni-register-status/uni-register-status.component';
 import { RetiredSearchComponent } from '@ksp/shared/search';
+import { UniRegisterPasswordComponent } from './uni-register-password/uni-register-password.component';
+import { UniRegisterSelectUniComponent } from './uni-register-selectuni/uni-register-selectuni.component';
 
 @NgModule({
   imports: [
@@ -39,7 +41,9 @@ import { RetiredSearchComponent } from '@ksp/shared/search';
   declarations: [
     UniRegisterRequesterComponent,
     UniRegisterCoordinatorComponent,
-    UniRegisterStatusComponent
+    UniRegisterStatusComponent,
+    UniRegisterPasswordComponent,
+    UniRegisterSelectUniComponent
   ],
 })
 export class UniServiceFeatureRegisterModule {}
