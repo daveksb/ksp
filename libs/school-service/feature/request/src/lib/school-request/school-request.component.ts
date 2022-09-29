@@ -68,7 +68,7 @@ export class SchoolRequestComponent implements OnInit {
   systemType = '2'; // school service
   requestType = '3';
   requestSubType = SchoolRequestSubType.ครู; // 1 ไทย 2 ผู้บริหาร 3 ต่างชาติ
-  requestLabel = 'ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ';
+  requestLabel = '';
   requestNo: string | null = '';
   currentProcess!: number;
 
@@ -124,7 +124,7 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   checkRequestSubType() {
-    this.route.queryParams.subscribe((params) => {
+    this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
       this.form.reset();
       if (Number(params['subtype'])) {
         this.requestSubType = Number(params['subtype']);
@@ -137,14 +137,14 @@ export class SchoolRequestComponent implements OnInit {
       }
 
       if (this.requestSubType == SchoolRequestSubType.ครู) {
-        this.requestLabel += SchoolRequestSubType[SchoolRequestSubType.ครู];
+        this.requestLabel = SchoolRequestSubType[SchoolRequestSubType.ครู];
       } else if (
         this.requestSubType == SchoolRequestSubType.ผู้บริหารสถานศึกษา
       ) {
-        this.requestLabel +=
+        this.requestLabel =
           SchoolRequestSubType[SchoolRequestSubType.ผู้บริหารสถานศึกษา];
       } else if (this.requestSubType == SchoolRequestSubType.อื่นๆ) {
-        this.requestLabel += SchoolRequestSubType[SchoolRequestSubType.อื่นๆ];
+        this.requestLabel = SchoolRequestSubType[SchoolRequestSubType.อื่นๆ];
       }
     });
   }

@@ -48,6 +48,7 @@ export class UniversitySearchComponent implements OnInit {
 
   Data: any[] = [];
   currentPage!: number;
+  lastPage!: number;
   payload: any;
 
   constructor(
@@ -86,7 +87,7 @@ export class UniversitySearchComponent implements OnInit {
   search() {
     const data = this.form.getRawValue() as any;
     const { provinceid, amphurid, offset, row } = data;
-    let payload = {}
+    let payload = {};
     this.currentPage = 1;
     if (this.data.searchType != 'uni') {
       payload = {
@@ -97,7 +98,7 @@ export class UniversitySearchComponent implements OnInit {
         amphurid,
         offset,
         row,
-      }
+      };
       this.schoolInfoService.seachSchool(payload).subscribe((res: any) => {
         this.Data = this.generateAddressShow(res);
         this.payload = payload;
@@ -111,7 +112,7 @@ export class UniversitySearchComponent implements OnInit {
         amphur_id: amphurid,
         offset,
         row,
-      }
+      };
       this.uniinfoService.searchUniversity(payload).subscribe((res: any) => {
         this.Data = this.generateAddressShow(res);
         this.payload = payload;
@@ -146,7 +147,7 @@ export class UniversitySearchComponent implements OnInit {
     this.form.patchValue({
       offset: '0',
       row: '20',
-    })
+    });
   }
   provinceChange(evt: any) {
     const province = evt.target?.value;

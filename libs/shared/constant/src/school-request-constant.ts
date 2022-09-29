@@ -242,7 +242,7 @@ export const levels = [
   { label: 'ประกาศนียบัตรวิชาชีพ (ปวช.)', value: 'level6' },
   { label: 'ชั้นมัธยมปีที่ 1-3', value: 'level4' },
   { label: 'ชั้นประถมปีที่ 1-3', value: 'level2' },
-  { label: 'อนุบาล', value: 'level1' },
+  { label: 'อนุบาล / ปฐมวัย', value: 'level1' },
   {
     label: 'ประกาศนียบัตรวิชาชีพขั้นสูง (ปวส.) / อนุปริญญา',
     value: 'level7',

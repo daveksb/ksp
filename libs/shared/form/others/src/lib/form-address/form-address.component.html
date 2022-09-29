@@ -1,5 +1,5 @@
 <form [formGroup]="form">
-  <div [ngClass]="{ 'ps-3 pe-3 bg-light': !isDarkMode }">
+  <div [ngClass]="{ 'px-3 py-3 bg-light': !isDarkMode }">
     <div class="box-header"><ng-content></ng-content></div>
 
     <input type="hidden" formControlName="id" />
@@ -57,6 +57,15 @@
           formControlName="road"
         />
       </div>
+      <div class="col-md-6 mb-2">
+        <label class="form-label required">รหัสไปรษณีย์</label>
+        <input
+          [class.bg-light]="isDarkMode"
+          class="form-control"
+          type="text"
+          formControlName="postcode"
+        />
+      </div>
     </div>
 
     <div class="row">
@@ -107,15 +116,6 @@
             {{ t?.tambolName }}
           </option>
         </select>
-      </div>
-      <div class="col-md-6 mb-2">
-        <label class="form-label required">รหัสไปรษณีย์</label>
-        <input
-          [class.bg-light]="isDarkMode"
-          class="form-control"
-          type="text"
-          formControlName="postcode"
-        />
       </div>
     </div>
   </div>
