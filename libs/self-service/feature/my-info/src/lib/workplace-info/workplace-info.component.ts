@@ -7,7 +7,7 @@ import {
   MyInfoService,
 } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
-import { parseJson, replaceEmptyWithNull } from '@ksp/shared/utility';
+import { replaceEmptyWithNull } from '@ksp/shared/utility';
 
 @Component({
   selector: 'self-service-workplace-info',
