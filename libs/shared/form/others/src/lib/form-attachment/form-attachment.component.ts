@@ -61,7 +61,10 @@ export class FormAttachmentComponent {
       a.click();
     });
   }
+
   updateComplete(file: any, group: any) {
+    //updateComplete(file: any) {
+    console.log('hhhhhhhhhh = ');
     const { fileId, fileName } = file;
     group.fileId = fileId;
     group.fileName = fileName;

@@ -53,8 +53,8 @@ export class FileUploadComponent {
         originalname: file.name,
         systemname: this.systemFileName,
         file: btoa(base64),
-        uniquetimestamp: this.uniqueTimestamp,
-        requesttype: this.requestType ? `${this.requestType}` : '3',
+        uniquetimpstamp: this.uniqueTimestamp,
+        requesttype: '3',
       };
       this.uploadFile(payload);
     }
@@ -72,11 +72,12 @@ export class FileUploadComponent {
           this.uploadProgress = Math.round(100 * (event.loaded / event.total));
         }
         if (event.status == 200 && event.body?.id) {
-          this.uploadComplete.emit({
+          const evt = {
             fileId: event.body.id,
             fileName: this.fileName,
-            file: atob(payload.filedata),
-          });
+            file: atob(payload.file),
+          };
+          this.uploadComplete.emit(evt);
         }
       });
   }
