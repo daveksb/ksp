@@ -102,15 +102,14 @@ export class TransferKnowledgeRequestComponent
     super.patchData(data);
     if (data.eduinfo) {
       const eduInfo = parseJson(data.eduinfo);
-      const { educationType, ...educationLevelForm } = eduInfo;
       this.form.controls.educationInfo.patchValue({
-        educationType,
-        educationLevelForm,
+        ...eduInfo,
       } as any);
     }
 
     if (data.transferknowledgeinfo) {
       const transferKnowledgeInfo = parseJson(data.transferknowledgeinfo);
+      console.log(transferKnowledgeInfo);
       this.form.controls.transferKnowledgeInfo.patchValue({
         ...transferKnowledgeInfo,
       });

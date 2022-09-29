@@ -53,7 +53,7 @@ export class FileUploadComponent {
         originalname: file.name,
         systemname: this.systemFileName,
         file: btoa(base64),
-        uniquetimpstamp: this.uniqueTimestamp,
+        uniquetimestamp: this.uniqueTimestamp,
         requesttype: '3',
       };
       this.uploadFile(payload);

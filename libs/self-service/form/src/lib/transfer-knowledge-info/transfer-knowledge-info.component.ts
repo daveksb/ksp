@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -35,6 +35,34 @@ export class TransferKnowledgeInfoComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+
+  override set value(value: any) {
+    console.log(value);
+    this.form.patchValue({ standardInfo: value.standardInfo });
+    if (value.standards?.length) {
+      this.form.controls.standards.removeAt(0);
+      value.standards.forEach((item: any) => {
+        const control = this.form.controls.standards;
+        const subjects = item.subjects?.map((subject: any) => {
+          return this.fb.group({
+            subjectName: subject.subjectName,
+            subjectCode: subject.subjectCode,
+            grade: subject.grade,
+            detail: subject.detail,
+          });
+        });
+
+        control.push(
+          this.fb.group({
+            subjects: new FormArray(subjects),
+          })
+        );
+      });
+    }
+
+    this.onChange(value);
+    this.onTouched();
   }
 
   addStandard() {
