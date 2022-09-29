@@ -84,6 +84,7 @@
         [class.bg-white]="!isDarkMode && mode === 'edit'"
         class="form-select"
         formControlName="prefixth"
+        (change)="prefixChanged($event)"
       >
         <option value="null">กรุณาเลือก</option>
         <option *ngFor="let prefix of prefixList" [value]="prefix.id">

@@ -53,7 +53,6 @@ export class FormUserInfoComponent
     );
   }
   ngOnInit(): void {
-    console.log('today = ', this.today);
     // ถ้าเป็น form คนไทยไม่ต้อง validate field เหล่านี้
     //console.log('display mode = ', this.displayMode);
     if (this.displayMode.includes(UserInfoFormType.thai)) {
@@ -72,6 +71,25 @@ export class FormUserInfoComponent
       this.form.controls.email.clearValidators();
     }
   }
+
+  prefixChanged(evt: any) {
+    const prefix = evt.target?.value;
+
+    if (prefix === '1') {
+      const temp: any = { sex: '1' };
+      this.form.patchValue(temp);
+    } else if (['2', '3', '4', '5'].includes(prefix)) {
+      const temp: any = { sex: '2' };
+      this.form.patchValue(temp);
+    } else {
+      const temp: any = { sex: '3' };
+      this.form.patchValue(temp);
+    }
+
+    const en = { prefixen: prefix };
+    this.form.patchValue(en);
+  }
+
   get idCardNo() {
     return this.form.controls.idcardno;
   }
