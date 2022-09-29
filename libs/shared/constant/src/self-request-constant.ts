@@ -1,7 +1,7 @@
 import { RequestProcess } from './ksp-constant';
 
 export const SelfRequestProcess: RequestProcess[] = [
-  //ลงทะเบียนผู้ประสานงาน
+  /*   //ลงทะเบียนผู้ประสานงาน
   {
     requestType: 1,
     processId: 1,
@@ -23,11 +23,11 @@ export const SelfRequestProcess: RequestProcess[] = [
       { id: 2, sname: '', ename: 'ผ่านการตรวจสอบ' },
       { id: 3, sname: '', ename: 'ไม่ผ่านการตรวจสอบ' },
     ],
-  },
+  }, */
 
-  //ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
+  //ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ
   {
-    requestType: 3,
+    requestType: 1,
     processId: 1,
     processName: 'สร้างใบคำขอ',
     status: [
@@ -67,7 +67,7 @@ export const SelfRequestProcess: RequestProcess[] = [
       { id: 3, sname: 'ไม่ผ่านการรับรอง/พิจารณา', ename: '' },
     ],
   },
-
+  /*
   //ขอสร้างเลขคุรุสภาสำหรับครูชาวต่างชาติ
   {
     requestType: 4,
@@ -170,5 +170,5 @@ export const SelfRequestProcess: RequestProcess[] = [
       { id: 3, sname: 'ไม่ผ่านการพิจารณา', ename: '' },
       { id: 4, sname: 'คัดค้าน/เพิกถอน', ename: '' },
     ],
-  },
+  }, */
 ];
