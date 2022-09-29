@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
 import { getCookie } from '@ksp/shared/utility';
-import { map, Observable, shareReplay } from 'rxjs';
-
+import { lastValueFrom, map, Observable, shareReplay } from 'rxjs';
+import _ from 'lodash';
 @Injectable({
   providedIn: 'root',
 })
@@ -130,5 +130,26 @@ export class UniInfoService {
         tokenkey: this.tokenKey,
       }
     );
+  }
+  async getMajorAndBranch(row: any) {
+    let major:any;
+    let branch:any;
+    if(row?.coursefieldofstudy)
+     major = await lastValueFrom(
+      this.uniMajor(row?.coursefieldofstudy).pipe(
+        map((res) => {
+          return _.find(res, { id: row?.coursemajor });
+        })
+      )
+    );
+    if(major?.id)
+     branch = await lastValueFrom(
+      this.uniSubject(major?.id).pipe(
+        map((res) => {
+          return _.find(res, { id: row?.coursesubjects })
+        })
+      )
+    );
+    return { major: major?.name || '-', branch: branch?.name || '-' };
   }
 }
