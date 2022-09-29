@@ -13,7 +13,7 @@ import {
   RequestService,
   SchoolInfoService,
 } from '@ksp/shared/service';
-import { parseJson } from '@ksp/shared/utility';
+import { parseJson, thaiDate } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -32,6 +32,7 @@ export class RequestRewardComponent implements OnInit {
   personTypes$!: Observable<any>;
   prefixList$!: Observable<any>;
   requestId = 0;
+  requestDate: string | null = thaiDate(new Date());
   requestNo!: string | null;
   currentProcess!: string | null;
   requestStatus!: string | null;
@@ -61,7 +62,7 @@ export class RequestRewardComponent implements OnInit {
   }
 
   checkButtonDisableStatus() {
-    console.log('this.currentprocess = ', this.currentProcess);
+    //console.log('this.currentprocess = ', this.currentProcess);
     if (!this.form.valid) {
       this.disableTempSave = true;
       this.disablePermanentSave = true;
@@ -123,6 +124,7 @@ export class RequestRewardComponent implements OnInit {
     this.requestService.getRequestById(id).subscribe((res) => {
       //console.log('res = ', res);
       this.requestNo = res.requestno;
+      this.requestDate = thaiDate(new Date(`${res.requestdate}`));
       this.requestStatus = res.requeststatus;
       this.currentProcess = res.currentprocess;
 
