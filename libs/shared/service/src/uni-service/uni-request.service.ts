@@ -49,7 +49,7 @@ export class UniRequestService {
   }
 
   searchUniDegreeCert(form: any): Observable<any> {
-    return this.http.post(`${environment.apiUrlNoAuth}/unidegreecertsearch.php`, {
+    return this.http.post(`${environment.shortApiUrl}/unidegreecertsearch.php`, {
       ...form,
       tokenkey: getCookie('userToken'),
     });
