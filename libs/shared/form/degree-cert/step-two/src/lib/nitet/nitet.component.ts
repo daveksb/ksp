@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+import _ from 'lodash';
 
 @Component({
   selector: 'ksp-step-2-nitet',
@@ -15,19 +16,18 @@ export class NitetComponent extends KspFormBaseComponent implements OnInit {
 
   nitetForm = this.fb.group({
     generalInfo: [],
-
     faculty: [],
     status: [],
     subject: [],
     experienceYear: [],
     studentResponsible: [],
     studentOtherCourse: [],
-
     lessExperience: [],
   });
 
   override form = this.fb.group({
     nitets: this.fb.array([this.nitetForm]),
+    nittetAmount: [],
   });
 
   constructor(private fb: FormBuilder) {
@@ -50,18 +50,24 @@ export class NitetComponent extends KspFormBaseComponent implements OnInit {
   }
 
   addNitet() {
-    const form = this.fb.group({
-      generalInfo: [],
-      experienceYear: [],
-      faculty: [],
-      status: [],
-      subject: [],
-      studentResponsible: [],
-      studentOtherCourse: [],
-      lessExperience: [],
-    });
+    console.log();
 
-    this.nitets.push(form);
+    if (this.form.value.nittetAmount) {
+      new Array(_.parseInt(this.form.value.nittetAmount)).fill(null).forEach(() => {
+        console.log("sdf")
+        const form = this.fb.group({
+          generalInfo: [],
+          experienceYear: [],
+          faculty: [],
+          status: [],
+          subject: [],
+          studentResponsible: [],
+          studentOtherCourse: [],
+          lessExperience: [],
+        });
+        this.form.controls.nitets.push(form);
+      });
+    }
   }
 
   deleteNitet(index: number) {

@@ -66,7 +66,7 @@
       />
       <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
     </div>
-    <fieldset [disabled]="!allowEditInput.section1">
+    <fieldset [disabled]="allowEditInput.section1">
       <ksp-degree-info
         [degreeTypes]="degreeTypes"
         (degreeTypeChanged)="onDegreeTypeChanged($event)"
@@ -93,7 +93,7 @@
             *เลือกข้อมูลของท่านได้เพียง 1 ข้อเท่านั้น</span
           ></label
         >
-        <fieldset [disabled]="!allowEditInput.section2">
+        <fieldset [disabled]="allowEditInput.section2">
           <div class="col-7">
             <select
               formControlName="courseDetailType"
@@ -121,7 +121,7 @@
       />
       <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
     </div>
-    <fieldset [disabled]="!allowEditInput.section3">
+    <fieldset [disabled]="allowEditInput.section3">
       <div class="bg-light px-3 py-2 mb-3">
         <div class="box-header">สถานที่ที่เปิดสอน</div>
         <ng-container formArrayName="locations">
@@ -151,7 +151,8 @@
         </ng-container>
         <ksp-add-row-button
           (addRowClick)="addFormArray(locations)"
-          *ngIf="(mode === 'edit' && !showEditCheckbox) || allowEditInput.section3"
+          *ngIf="mode === 'edit'"
+          [disabled]="allowEditInput.section3"
           >เพิ่มสถานที่เปิดสอน</ksp-add-row-button
         >
       </div>
@@ -164,7 +165,7 @@
       />
       <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
     </div>
-    <fieldset [disabled]="!allowEditInput.section4">
+    <fieldset [disabled]="allowEditInput.section4">
       <div class="bg-light px-3 py-2 mb-3">
         <div class="box-header">หน่วยงานที่รับผิดชอบหลักสูตร</div>
 
@@ -198,7 +199,8 @@
 
         <ksp-add-row-button
           (addRowClick)="addFormArray(institutions)"
-          *ngIf="(mode === 'edit' && !showEditCheckbox) || allowEditInput.section4"
+          *ngIf="mode === 'edit'"
+          [disabled]="allowEditInput.section4"
           >เพิ่มหน่วยงานที่รับผิดชอบหลักสูตร
         </ksp-add-row-button>
       </div>
@@ -211,7 +213,7 @@
       />
       <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
     </div>
-    <fieldset [disabled]="!allowEditInput.section5">
+    <fieldset [disabled]="allowEditInput.section5">
       <div class="bg-light p-3 mb-3">
         <div class="box-header">
           สถานที่ที่ต้องประเมินสภาพจริง / ติดตามผลเชิงประจักษ์
@@ -245,7 +247,8 @@
 
         <ksp-add-row-button
           (addRowClick)="addFormArray(locations2)"
-          *ngIf="(mode === 'edit' && !showEditCheckbox) || allowEditInput.section5"
+          *ngIf="mode === 'edit'"
+          [disabled]="allowEditInput.section5"
           >เพิ่มสถานที่เปิดสอน</ksp-add-row-button
         >
       </div>
@@ -258,7 +261,7 @@
       />
       <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
     </div>
-    <fieldset [disabled]="!allowEditInput.section6">
+    <fieldset [disabled]="allowEditInput.section6">
       <ksp-degree-cert-coordinator
         formControlName="coordinator"
         [mode]="mode"
