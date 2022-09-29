@@ -43,12 +43,27 @@
           <button mat-menu-item (click)="foreignPage()">
             ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ
           </button>
-          <button mat-menu-item (click)="qualificationPage()">
+          <button mat-menu-item [matMenuTriggerFor]="qualificationChoices">
             ขอหนังสือรับรองคุณวุฒิ
           </button>
           <button mat-menu-item (click)="rewardPage()">
             ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One Innovation :
             OSOI)
+          </button>
+        </mat-menu>
+
+        <mat-menu #qualificationChoices="matMenu">
+          <button (click)="qualificationPage(null, 1)" mat-menu-item>
+            ครู
+          </button>
+          <button (click)="qualificationPage(null, 2)" mat-menu-item>
+            ผู้บริหารสถานศึกษา
+          </button>
+          <button (click)="qualificationPage(null, 3)" mat-menu-item>
+            ผู้บริหารการศึกษา
+          </button>
+          <button (click)="qualificationPage(null, 4)" mat-menu-item>
+            ศึกษานิเทศก์
           </button>
         </mat-menu>
       </div>

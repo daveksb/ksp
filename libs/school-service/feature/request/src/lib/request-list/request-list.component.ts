@@ -108,7 +108,7 @@ export class SchoolRequestListComponent implements AfterViewInit {
         return this.foreignPage(`${requestId}`);
 
       case 6:
-        return this.qualificationPage(`${requestId}`);
+        return this.qualificationPage(requestId, subType);
 
       case 40:
         return this.rewardPage(`${requestId}`);
@@ -123,8 +123,16 @@ export class SchoolRequestListComponent implements AfterViewInit {
     this.router.navigate(['/foreign-teacher', 'id-request', id]);
   }
 
-  qualificationPage(id = '') {
-    this.router.navigate(['/qualification-approve', 'detail', id]);
+  qualificationPage(id: number | null, subType: number) {
+    if (id) {
+      this.router.navigate(['/qualification-approve', 'detail', id], {
+        queryParams: { subtype: subType },
+      });
+    } else {
+      this.router.navigate(['/qualification-approve', 'detail'], {
+        queryParams: { subtype: subType },
+      });
+    }
   }
 
   rewardPage(id = '') {

@@ -83,7 +83,8 @@ export class RequestRewardFormComponent
   }
 
   ngOnInit(): void {
-    this.addRow();
+    //this.addRow();
+    //
   }
 
   get members() {

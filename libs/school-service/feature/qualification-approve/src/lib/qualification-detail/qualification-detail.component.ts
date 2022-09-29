@@ -85,6 +85,7 @@ export class QualificationDetailComponent implements OnInit {
     this.requestService.getRequestById(id).subscribe((res: any) => {
       if (res) {
         this.requestNumber = res.requestno;
+        this.requestDate = thaiDate(new Date(`${res.requestdate}`));
         res.birthdate = res.birthdate?.split('T')[0];
         this.form.get('userInfo')?.patchValue(res);
         res.eduinfo = JSON.parse(atob(res.eduinfo));

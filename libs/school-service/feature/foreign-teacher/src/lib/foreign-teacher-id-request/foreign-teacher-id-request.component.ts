@@ -71,6 +71,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     this.requestService.getRequestById(id).subscribe((res: any) => {
       if (res) {
         this.mode = 'view';
+        this.requestDate = thaiDate(new Date(`${res.requestdate}`));
         this.requestNumber = res.requestno;
         res.birthdate = res.birthdate?.split('T')[0];
         res.passportstartdate = res.passportstartdate?.split('T')[0];
