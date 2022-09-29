@@ -39,7 +39,7 @@ export class FormAttachmentComponent {
     const payload = {
       id: group.fileId,
       requesttype: this.requestType,
-      uniquetmestamp: this.uniqueTimestamp ?? group?.uniqueTimestamp,
+      uniquetimestamp: this.uniqueTimestamp ?? group?.uniqueTimestamp,
     };
 
     this.fileService.deleteFile(payload).subscribe((res: any) => {
