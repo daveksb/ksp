@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule, HttpEventType } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { MatIconModule } from '@angular/material/icon';
 import { getBase64 } from '@ksp/shared/utility';
@@ -29,8 +29,6 @@ export class FileUploadComponent {
   @Input() isImage = false; // when upload image use public API
   @Input() fileName = '';
   @Output() uploadComplete = new EventEmitter<any>();
-
-  uploadProgress!: number | null;
 
   constructor(private uploadService: FileService) {}
 
@@ -68,9 +66,6 @@ export class FileUploadComponent {
       .uploadFile(payload)
       .pipe(untilDestroyed(this))
       .subscribe((event: any) => {
-        if (event.type == HttpEventType.UploadProgress) {
-          this.uploadProgress = Math.round(100 * (event.loaded / event.total));
-        }
         if (event.status == 200 && event.body?.id) {
           const evt = {
             fileId: event.body.id,
@@ -87,9 +82,6 @@ export class FileUploadComponent {
       .uploadImage(payload)
       .pipe(untilDestroyed(this))
       .subscribe((event: any) => {
-        if (event.type == HttpEventType.UploadProgress) {
-          this.uploadProgress = Math.round(100 * (event.loaded / event.total));
-        }
         if (event.status == 200 && event.body?.id) {
           this.uploadComplete.emit({
             fileId: event.body.id,
@@ -98,13 +90,5 @@ export class FileUploadComponent {
           });
         }
       });
-  }
-
-  cancelUpload() {
-    this.reset();
-  }
-
-  reset() {
-    this.uploadProgress = null;
   }
 }
