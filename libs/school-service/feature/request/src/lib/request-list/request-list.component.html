@@ -54,7 +54,12 @@
       </div>
 
       <div class="table__scroll mt-1">
-        <table matSort mat-table [dataSource]="dataSource">
+        <table
+          *ngIf="!searchNotFound"
+          matSort
+          mat-table
+          [dataSource]="dataSource"
+        >
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
             <td
