@@ -15,6 +15,7 @@ import {
 } from '@ksp/shared/service';
 import { parseJson, thaiDate } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'ksp-request-reward-detail',
@@ -22,6 +23,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./request-reward.component.scss'],
 })
 export class RequestRewardComponent implements OnInit {
+  uniqueTimestamp!: string;
+
   form = this.fb.group({
     reward: [],
   });
@@ -52,6 +55,7 @@ export class RequestRewardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.uniqueTimestamp = uuidv4();
     this.getListData();
     this.checkRequestId();
     this.checkButtonDisableStatus();

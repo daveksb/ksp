@@ -20,6 +20,7 @@ import {
 import { thaiDate } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { EMPTY, Observable, switchMap } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
 
 @UntilDestroy()
 @Component({
@@ -28,6 +29,8 @@ import { EMPTY, Observable, switchMap } from 'rxjs';
   styleUrls: ['./qualification-detail.component.scss'],
 })
 export class QualificationDetailComponent implements OnInit {
+  uniqueTimestamp!: string;
+
   form = this.fb.group({
     userInfo: [],
     addr1: [],
@@ -51,16 +54,46 @@ export class QualificationDetailComponent implements OnInit {
   requestId!: number;
   otherreason: any;
   refperson: any;
+
   evidenceFiles = [
-    'หนังสือนำส่งจากหน่วยงานผู้ใช้',
-    'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
-    'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
-    'สำเนาทะเบียนบ้าน',
-    'สำเนา กพ.7 / สมุดประจำตัว',
-    'สำเนาหนังสือแจ้งการเทียบคุณวุฒิ (กรณีจบการศึกษาจากต่างประเทศ)',
-    'สำเนาหลักฐานการเปลี่ยนชื่อ นามสกุล',
-    'เอกสารอื่นๆ',
+    {
+      name: 'หนังสือนำส่งจากหน่วยงานผู้ใช้',
+      fileId: '',
+      fileName: '',
+    },
+    {
+      name: 'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
+      fileId: '',
+      fileName: '',
+    },
+    {
+      name: 'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
+      fileId: '',
+      fileName: '',
+    },
+    {
+      name: 'สำเนาทะเบียนบ้าน',
+      fileId: '',
+      fileName: '',
+    },
+    {
+      name: 'สำเนาหนังสือแจ้งการเทียบคุณวุฒิ (กรณีจบการศึกษาจากต่างประเทศ)',
+      fileId: '',
+      fileName: '',
+    },
+    {
+      name: 'สำเนา กพ.7 / สมุดประจำตัว',
+      fileId: '',
+      fileName: '',
+    },
+    {
+      name: 'สำเนาหลักฐานการเปลี่ยนชื่อ นามสกุล',
+      fileId: '',
+      fileName: '',
+    },
+    { name: 'เอกสารอื่นๆ', fileId: '', fileName: '' },
   ];
+
   mode!: FormMode;
   constructor(
     public dialog: MatDialog,
@@ -72,6 +105,7 @@ export class QualificationDetailComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
   ngOnInit(): void {
+    this.uniqueTimestamp = uuidv4();
     this.getListData();
     this.checkRequestId();
     this.checkRequestSubType();

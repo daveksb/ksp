@@ -34,6 +34,7 @@ export class RequestRewardFormComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+  @Input() uniqueTimestamp: any;
   @Input() osoiTypes: any = [];
   @Input() personTypes: any = [];
   @Input() prefixList: any = [];

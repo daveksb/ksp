@@ -119,7 +119,7 @@
         </div> -->
 
   <div class="form-label">คณะผู้ร่วมพัฒนาผลงานนวัตกรรม</div>
-  <div class="table-responsive">
+  <div class="table__scroll">
     <table class="table mb-2">
       <thead>
         <tr>
@@ -217,6 +217,7 @@
 
   <div class="mb-3">
     <ksp-form-attachment
+      [uniqueTimestamp]="uniqueTimestamp"
       [mode]="mode"
       title="กรุณาแนบหลักฐาน "
       [groups]="rewardFiles"
