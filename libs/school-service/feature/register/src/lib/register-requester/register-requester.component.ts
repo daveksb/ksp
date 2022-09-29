@@ -53,27 +53,16 @@ export class RegisterRequesterComponent implements OnInit {
     localForage.getItem('registerSelectedSchool').then((res) => {
       this.school = res;
     });
-
+    localForage.getItem('registerUserInfoFormValue').then((res: any) => {
+      if (res) this.form.controls.requester.patchValue(res);
+    });
     this.getListData();
-    this.checkRequestId();
   }
   getListData() {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.nationalitys$ = this.generalInfoService.getNationality();
   }
 
-  checkRequestId() {
-    this.route.paramMap
-      .pipe(
-        switchMap((params: any) => {
-          const schoolid = params.get('id');
-          return this.schoolInfoService
-            .getSchoolInfo(schoolid)
-            .pipe(untilDestroyed(this));
-        })
-      )
-      .subscribe((res) => console.log(res));
-  }
   next() {
     const data = this.form.getRawValue();
     const { requester, ...all } = data as any;

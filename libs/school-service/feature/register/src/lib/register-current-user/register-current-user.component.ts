@@ -28,9 +28,9 @@ export class RegisterCurrentUserComponent {
     localForage.setItem('registerSelectedSchool', school);
 
     this.schoolInfoService
-      .searchUserLogin({ schoolid: school.schoolId })
+      .searchUserLogin({ schoolid: school.schoolid })
       .subscribe((res) => {
-        if (res ==undefined) {
+        if (res == undefined) {
           this.next();
         }
       });
