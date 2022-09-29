@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 export class PaymentChannelComponent {
   constructor(public router: Router) {}
 
-  promptpay() {
-    this.router.navigate(['/', 'license', 'payment-promptpay']);
+  promptpay(type: any) {
+    this.router.navigate(['/', 'license', 'payment-promptpay', type]);
   }
 }

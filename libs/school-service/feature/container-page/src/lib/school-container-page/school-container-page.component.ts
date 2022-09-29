@@ -80,7 +80,7 @@ export const menu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/display.svg',
-    label: 'บันทึกกิจกกรมพัฒนาตนเอง (หนังสืออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาต)',
+    label: 'กิจกกรมพัฒนาตนเอง (หนังสืออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาต)',
     path: '/activity',
   },
   {

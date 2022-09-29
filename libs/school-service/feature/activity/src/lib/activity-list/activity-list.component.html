@@ -25,7 +25,7 @@
       <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+          <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
         </ng-container>
 
         <!-- <ng-container matColumnDef="licenseID">
@@ -98,9 +98,9 @@
       </table>
 
       <mat-paginator
-        [pageSizeOptions]="[5]"
-        showFirstLastButtons
-        aria-label="Select page of periodic elements"
+        [length]="dataSource.data.length"
+        [pageSize]="25"
+        [showFirstLastButtons]="true"
       >
       </mat-paginator>
     </div>

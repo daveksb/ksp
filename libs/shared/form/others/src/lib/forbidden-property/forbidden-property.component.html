@@ -10,11 +10,23 @@
       </div>
       <div class="row my-3">
         <div class="col-4 d-flex align-items-center">
-          <input class="me-2" type="radio" name="immoral" value="2" formControlName="immoral" />
+          <input
+            class="me-2"
+            type="radio"
+            name="immoral"
+            value="2"
+            formControlName="immoral"
+          />
           <label class="form-label">ไม่เคย</label>
         </div>
         <div class="col-4 d-flex align-items-center">
-          <input class="me-2" type="radio" name="immoral" value="1" formControlName="immoral" />
+          <input
+            class="me-2"
+            type="radio"
+            name="immoral"
+            value="1"
+            formControlName="immoral"
+          />
           <label class="form-label">เคย</label>
         </div>
       </div>
@@ -23,11 +35,23 @@
       </div>
       <div class="row my-3">
         <div class="col-4 d-flex align-items-center">
-          <input class="me-2" type="radio" name="incompetent" value="2" formControlName="incompetent" />
+          <input
+            class="me-2"
+            type="radio"
+            name="incompetent"
+            value="2"
+            formControlName="incompetent"
+          />
           <label class="form-label">ไม่เคย</label>
         </div>
         <div class="col-4 d-flex align-items-center">
-          <input class="me-2" type="radio" name="incompetent" value="1" formControlName="incompetent" />
+          <input
+            class="me-2"
+            type="radio"
+            name="incompetent"
+            value="1"
+            formControlName="incompetent"
+          />
           <label class="form-label">เคย</label>
         </div>
       </div>
@@ -37,15 +61,32 @@
       </div>
       <div class="row my-3">
         <div class="col-4 d-flex align-items-center">
-          <input class="me-2" type="radio" name="prison" value="2" formControlName="prison" />
+          <input
+            class="me-2"
+            type="radio"
+            name="prison"
+            value="2"
+            formControlName="prison"
+          />
           <label class="form-label">ไม่เคย</label>
         </div>
         <div class="col d-flex align-items-center">
-          <input class="me-2" type="radio" name="prison" value="1" formControlName="prison" />
+          <input
+            class="me-2"
+            type="radio"
+            name="prison"
+            value="1"
+            formControlName="prison"
+          />
           <label class="form-label">เคย</label>
         </div>
         <div class="col-7">
-          <input class="form-control" type="text" placeholder="โปรดระบุ" formControlName="prisonReason" />
+          <input
+            class="form-control"
+            type="text"
+            placeholder="โปรดระบุ"
+            formControlName="prisonReason"
+          />
         </div>
       </div>
 
@@ -57,14 +98,16 @@
     <button
       matDialogClose
       type="button"
-      class="btn border-primary text-primary me-1">
+      class="btn border-primary text-primary me-1"
+    >
       ยกเลิก
     </button>
     <button
       matDialogClose
       (click)="save()"
       type="button"
-      class="btn btn-primary ms-1">
+      class="btn btn-primary ms-1"
+    >
       บันทึก
     </button>
   </div>
