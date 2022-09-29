@@ -21,7 +21,7 @@ export class SchoolRequestListComponent implements AfterViewInit {
   displayedColumns: string[] = displayedColumns;
   dataSource = new MatTableDataSource<SchoolRequest>();
   SchoolRequestSubType = SchoolRequestSubType;
-  searchNotFound = true;
+  searchNotFound = false;
 
   searchParams: any;
   checkProcess = checkProcess;
@@ -89,7 +89,7 @@ export class SchoolRequestListComponent implements AfterViewInit {
 
   clear() {
     this.form.reset();
-    this.searchNotFound = true;
+    this.searchNotFound = false;
     this.dataSource.data = [];
   }
 
