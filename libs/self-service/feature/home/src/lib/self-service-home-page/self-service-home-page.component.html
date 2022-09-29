@@ -222,4 +222,10 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </div>
+  <mat-paginator
+    [length]="dataSource.data.length"
+    [pageSize]="25"
+    [showFirstLastButtons]="true"
+  >
+  </mat-paginator>
 </div>
