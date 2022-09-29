@@ -55,6 +55,13 @@
 
       <div class="table__scroll mt-1">
         <table matSort mat-table [dataSource]="dataSource">
+          <ng-container *ngIf="dataSource.data.length === 0">
+            <tr class="mat-row" *matNoDataRow>
+              <td [attr.colspan]="displayedColumns.length" class="text-center">
+                ไม่พบข้อมูล
+              </td>
+            </tr></ng-container
+          >
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
             <td
