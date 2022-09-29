@@ -24,7 +24,7 @@ export const menu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ยื่นใบคำขอ',
-    path: '/',
+    path: '',
     subMenuName: 'license',
     isExpanded: false,
     subMenu: [
@@ -45,21 +45,36 @@ export const menu: MenuConfig[] = [
         path: '/temp-license/request',
         params: { subtype: SchoolRequestSubType.อื่นๆ },
       },
-      /* {
-        label: 'ขอเพิกถอนใบอนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาต',
-        path: 'xxx',
-      },
-      {
-        label: 'ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ ไม่มีใบอนุญาต',
-        path: 'xxx',
-      }, */
       {
         label: 'ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ',
         path: '/foreign-teacher/id-request',
       },
       {
         label: 'ขอหนังสือรับรองคุณวุฒิ',
-        path: '/qualification-approve/detail',
+        path: '',
+        subMenuName: 'qualificationRequest',
+        subMenu: [
+          {
+            label: 'ครู',
+            path: '/qualification-approve/detail',
+            params: { subtype: 1 },
+          },
+          {
+            label: 'ผู้บริหารสถานศึกษา',
+            path: '/qualification-approve/detail',
+            params: { subtype: 2 },
+          },
+          {
+            label: 'ผู้บริหารการศึกษา',
+            path: '/qualification-approve/detail',
+            params: { subtype: 3 },
+          },
+          {
+            label: 'ศึกษานิเทศก์',
+            path: '/qualification-approve/detail',
+            params: { subtype: 4 },
+          },
+        ],
       },
       {
         label:

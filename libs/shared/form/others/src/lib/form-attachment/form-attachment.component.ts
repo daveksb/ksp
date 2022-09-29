@@ -14,7 +14,7 @@ export class FormAttachmentComponent {
   @Input() title = `กรุณาแนบหลักฐานประกอบ`;
   @Input() titleClass = ``;
   @Input() titleNote = '';
-  @Input() pageType!: RequestPageType; // ใช้ อ้างอิง tab ในหน้าใบคำขอเพื่อระบุรายการไฟล์ ที่เกี่ยวข้อง enum RequestPageType
+  @Input() pageType!: string; // ใช้ อ้างอิง tab ในหน้าใบคำขอเพื่อระบุรายการไฟล์ ที่เกี่ยวข้อง enum RequestPageType
   @Input() groups: any[] = [];
   @Input() mode: FormMode = 'edit';
   @Input() uniqueTimestamp: string | null = null;

@@ -49,9 +49,13 @@ export class QualificationDetailComponent implements OnInit {
   countries$!: Observable<any>;
   nationalitys$!: Observable<any>;
   schoolId = '0010201056';
+
   requestDate = thaiDate(new Date());
   requestSubType!: number;
   requestId!: number;
+  requestStatus!: number;
+  currentProcess!: number;
+
   otherreason: any;
   refperson: any;
 
@@ -133,6 +137,8 @@ export class QualificationDetailComponent implements OnInit {
     this.requestService.getRequestById(id).subscribe((res: any) => {
       if (res) {
         this.requestNumber = res.requestno;
+        this.requestStatus = +res.requeststatus;
+        this.currentProcess = +res.currentprocess;
         this.requestDate = thaiDate(new Date(`${res.requestdate}`));
         res.birthdate = res.birthdate?.split('T')[0];
         this.form.get('userInfo')?.patchValue(res);

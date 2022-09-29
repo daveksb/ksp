@@ -23,10 +23,10 @@ export class SideMenuComponent implements OnInit {
     });
   }
 
-  navigateUrl(url: string, queryParams: string) {
+  navigateUrl(url: string, queryParams: any) {
     if (queryParams) {
       this.router.navigate([url], {
-        queryParams: { type: queryParams },
+        queryParams,
       });
     } else {
       this.router.navigate([url]);
