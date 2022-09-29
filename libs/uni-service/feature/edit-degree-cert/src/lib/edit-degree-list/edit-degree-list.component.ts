@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { ListData } from '@ksp/shared/interface';
 import { UniInfoService, AddressService } from '@ksp/shared/service';
 import {
@@ -43,7 +44,8 @@ export class EditDegreeListComponent implements OnInit {
     public dialog: MatDialog,
     private fb: FormBuilder,
     private uniInfoService: UniInfoService,
-    private addressService: AddressService
+    private addressService: AddressService,
+    private router: Router,
   ) {
     this.getAll();
   }
@@ -144,6 +146,7 @@ export class EditDegreeListComponent implements OnInit {
           : '-';
         const { major, branch } = await this.uniInfoService.getMajorAndBranch(row);
         newData.push({
+          key:row?.id,
           requestId: row?.requestno || '-',
           submitDate,
           approveCode: row?.degreeapprovecode || '-',
@@ -160,6 +163,13 @@ export class EditDegreeListComponent implements OnInit {
   }
   private _findOptions(dataSource: any, key: any) {
     return _.find(dataSource, { value: key })?.label || '-';
+  }
+  onEdit(rowData: any) {
+    this.router.navigate(["/edit-degree-cert","detail"], {
+      queryParams: {
+        id: rowData?.key,
+      },
+    });
   }
 }
 

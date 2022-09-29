@@ -21,38 +21,44 @@
     >
       <mat-step [completed]="false">
         <ng-template matStepLabel>ข้อมูลพื้นฐาน</ng-template>
-
-        <ksp-degree-cert-step-one
-          [showEditCheckbox]="true"
-          (degreeType)="step1DegreeType = $event"
-          formControlName="step1"
-        >
-        </ksp-degree-cert-step-one>
+        <form [formGroup]="step1Form">
+          <ksp-degree-cert-step-one
+            [showEditCheckbox]="true"
+            (degreeType)="step1DegreeType = $event"
+            formControlName="step1"
+            [disabledInstitute]="true"
+          >
+          </ksp-degree-cert-step-one>
+        </form>
       </mat-step>
 
       <mat-step [completed]="false">
         <ng-template matStepLabel>ด้านหลักสูตร</ng-template>
-
+        <form [formGroup]="step2Form">
         <ksp-degree-cert-step-two
           [formType]="step1DegreeType"
           formControlName="step2"
           [showEditCheckbox]="true"
         >
         </ksp-degree-cert-step-two>
+        </form>
       </mat-step>
 
       <mat-step [completed]="false">
         <ng-template matStepLabel>ด้านกระบวนการผลิต</ng-template>
-
+        <form [formGroup]="step3Form">
         <ksp-degree-cert-step-3
           [showEditCheckbox]="true"
           formControlName="step3"
         ></ksp-degree-cert-step-3>
+        </form>
       </mat-step>
 
       <mat-step [completed]="false">
         <ng-template matStepLabel>เอกสารแนบ</ng-template>
-        <ksp-degree-cert-step-four></ksp-degree-cert-step-four>
+        <form [formGroup]="step4Form">
+        <ksp-degree-cert-step-four formControlName="step4"></ksp-degree-cert-step-four>
+        </form>
       </mat-step>
 
       <mat-step [completed]="false">

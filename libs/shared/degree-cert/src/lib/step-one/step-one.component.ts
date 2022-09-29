@@ -34,9 +34,17 @@ export class DegreeCertStepOneComponent
   degreeTypes: ListData[] = [];
   universityTypes: ListData[] = [];
   provinces: ListData[] = [];
+  allowEditInput = {
+    section1: false,
+    section2: false,
+    section3: false,
+    section4: false,
+    section5: false,
+    section6: false,
+  };
 
   @Input() showEditCheckbox = false;
-  @Input() disabledInputs: Record<string, any> = {};
+  @Input() disabledInstitute: boolean = false;
 
   @Input() showCoordinatorForm = true;
   @Output() degreeType = new EventEmitter<string>();
