@@ -24,6 +24,8 @@
     [isFirstPage]="true"
     [showSaveButton]="true"
     [colorMode]="'green'"
+    [disableNext]="form.invalid"
+    [disableSaveButton]="form.invalid"
     (nextClicked)="next()"
     (cancelClicked)="cancel()"
     (saveClicked)="saveEthics()"

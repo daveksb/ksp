@@ -10,12 +10,10 @@ export class EthicsService {
   constructor(private http: HttpClient) {}
 
   createEthics(payload: any): Observable<any> {
-    return this.http
-      .post(`${environment.apiUrl}/e-service/es-ethicsinsert`, payload)
-      .pipe(
-        shareReplay(),
-        map((data: any) => data.datareturn)
-      );
+    return this.http.post(
+      `${environment.apiUrl}/e-service/es-ethicsinsert`,
+      payload
+    );
   }
 
   updateEthicsInvestigation(payload: any): Observable<any> {
