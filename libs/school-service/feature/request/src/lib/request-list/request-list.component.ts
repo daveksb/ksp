@@ -128,7 +128,6 @@ export interface TempLicenseInfo {
 
 export const displayedColumns = [
   'id',
-  'verify',
   'requestno',
   'idcardno',
   'name',
