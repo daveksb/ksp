@@ -74,7 +74,7 @@ export class SelfServiceHomePageComponent {
     } else if (requestType === 30) {
       this.refundFee();
     } else if (requestType === 6) {
-      this.compare();
+      this.compare(id);
     } else if (requestType === 5) {
       this.transfer(id);
     } else if (requestType === 4) {
@@ -278,8 +278,12 @@ export class SelfServiceHomePageComponent {
   }
 
   // เทียบเคียง
-  compare() {
-    this.router.navigate(['/compare-knowledge', 'request']);
+  compare(id?: number) {
+    this.router.navigate([
+      '/compare-knowledge',
+      'request',
+      ...(id ? [`${id}`] : []),
+    ]);
   }
 
   // คืนเงินค่าธรรมเนียม
