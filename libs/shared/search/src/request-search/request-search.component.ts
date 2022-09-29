@@ -8,8 +8,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import {
   EduOccupyList,
   RequestProcess,
-  SchoolRequestProcess,
   RequestStatus,
+  SchoolRequestProcess,
   SchoolRequestType,
 } from '@ksp/shared/constant';
 import { MatTooltipModule } from '@angular/material/tooltip';
