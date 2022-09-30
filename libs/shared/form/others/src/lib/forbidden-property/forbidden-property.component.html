@@ -5,7 +5,7 @@
 
   <div class="my-3">
     <form [formGroup]="form">
-      <div class="form-label">
+      <div class="form-label required">
         1. เคยเป็นผู้มีความประพฤติเสื่อม หรือบกพร่องในศีลธรรมอันดีหรือไม่
       </div>
       <div class="row my-3">
@@ -30,7 +30,7 @@
           <label class="form-label">เคย</label>
         </div>
       </div>
-      <div class="form-label">
+      <div class="form-label required">
         2. เป็นผู้ไร้ความสามารถหรือเสมือนไร้ความสามารถ หรือไม่
       </div>
       <div class="row my-3">
@@ -55,7 +55,7 @@
           <label class="form-label">เคย</label>
         </div>
       </div>
-      <div class="form-label">
+      <div class="form-label required">
         3.
         เคยต้องโทษจำคุกในคดีที่คุรุสภาเห็นว่าอาจนำมาซึ่งความเสื่อมเสียเกียรติศักดิ์แห่งวิชาชีพ
       </div>
@@ -90,7 +90,11 @@
         </div>
       </div>
 
-      <ksp-file-upload></ksp-file-upload>
+      <ksp-file-upload
+        [uniqueTimestamp]="data.uniqueTimeStamp"
+        [systemFileName]="'forbidden-file'"
+        (uploadComplete)="uploadComplete($event)"
+      ></ksp-file-upload>
     </form>
   </div>
   <br />
@@ -104,6 +108,7 @@
     </button>
     <button
       matDialogClose
+      [disabled]="form.invalid"
       (click)="save()"
       type="button"
       class="btn btn-primary ms-1"

@@ -46,7 +46,6 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class SchoolRequestComponent implements OnInit {
   uniqueTimestamp!: string; // use for file upload reference, gen only first time component loaded
-
   pageType = RequestPageType;
 
   countries$!: Observable<any>;
@@ -72,6 +71,7 @@ export class SchoolRequestComponent implements OnInit {
   requestLabel = '';
   requestNo: string | null = '';
   currentProcess!: number;
+  requestStatus!: number;
 
   disableTempSave = true;
   disableSave = true;
@@ -164,7 +164,7 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   createRequest(type: string) {
-    //console.log('create request = ');
+    console.log('create request = ');
     const baseForm = this.fb.group(new SchoolRequest());
     const formData: any = this.form.getRawValue();
     const tab3 = mapFileInfo(this.eduFiles);
@@ -346,8 +346,15 @@ export class SchoolRequestComponent implements OnInit {
       //console.log('userInfo valid = ', this.form.controls.userInfo.valid);
       //console.log('form valid = ', this.form.valid);
 
+      // สถานะ ยกเลิก disable ทุกอย่าง
+      if (this.requestStatus === 0) {
+        this.disableTempSave = true;
+        this.disableSave = true;
+        this.disableCancel = true;
+      }
+
       // formValid + ไม่มีหมายเลขใบคำขอ ทำได้ทุกอย่าง
-      if (this.form.valid && !this.requestId) {
+      else if (this.form.valid && !this.requestId) {
         this.disableTempSave = false;
         this.disableSave = false;
       }
@@ -395,6 +402,7 @@ export class SchoolRequestComponent implements OnInit {
       this.requestDate = thaiDate(new Date(`${res.requestdate}`));
       this.requestNo = res.requestno;
       this.currentProcess = Number(res.currentprocess);
+      this.requestStatus = Number(res.requeststatus);
       //console.log('current process = ', this.currentProcess);
       this.pathUserInfo(res);
       this.patchAddress(parseJson(res.addressinfo));
@@ -569,6 +577,9 @@ export class SchoolRequestComponent implements OnInit {
   permanentBtnClick() {
     const dialogRef = this.dialog.open(ForbiddenPropertyFormComponent, {
       width: '850px',
+      data: {
+        uniqueTimeStamp: this.uniqueTimestamp,
+      },
     });
 
     dialogRef.componentInstance.confirmed
