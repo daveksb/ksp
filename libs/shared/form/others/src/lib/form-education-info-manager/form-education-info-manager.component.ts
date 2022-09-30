@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { SharedFormOthersModule } from '../shared-form-others.module';
@@ -17,19 +17,14 @@ export class FormEducationInfoManagerComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+  @Input() requestType: any;
   override form = this.fb.group({
-    degree1: [],
-    degree2: [],
-    degree3: [],
-    degree4: [],
-    degree5: [],
-    degree6: [],
-    edu1: [],
-    edu2: [],
-    edu3: [],
-    edu4: [],
-    edu5: [],
-    other: [],
+    licenseCountry: [],
+    releaseBy: [],
+    licenseType: [],
+    licenseNo: [],
+    releaseDate: [],
+    expiredDate: [],
   });
 
   constructor(private fb: FormBuilder) {
@@ -43,33 +38,5 @@ export class FormEducationInfoManagerComponent
     );
   }
 
-  ngOnInit(): void {
-    this.form.valueChanges.subscribe((res) => {
-      //console.log('exp form = ', res);
-    });
-  }
-
-  get degree1() {
-    return this.form.controls.degree1.value;
-  }
-
-  get degree2() {
-    return this.form.controls.degree2.value;
-  }
-
-  get degree3() {
-    return this.form.controls.degree3.value;
-  }
-
-  get degree4() {
-    return this.form.controls.degree4.value;
-  }
-
-  get degree5() {
-    return this.form.controls.degree5.value;
-  }
-
-  get degree6() {
-    return this.form.controls.degree6.value;
-  }
+  ngOnInit(): void {}
 }

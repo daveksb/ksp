@@ -52,5 +52,5 @@ export interface SchUser {
   firstnameth: string;
   lastnameth: string;
   schmobile: string;
-  value: number;
+  schmemberid: number;
 }

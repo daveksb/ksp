@@ -70,7 +70,7 @@
           />
           <label class="form-label">ไม่เคย</label>
         </div>
-        <div class="col d-flex align-items-center">
+        <div class="col-4 d-flex align-items-center">
           <input
             class="me-2"
             type="radio"
@@ -80,7 +80,10 @@
           />
           <label class="form-label">เคย</label>
         </div>
-        <div class="col-7">
+      </div>
+
+      <div class="row row-cols-2">
+        <div class="col offset-4">
           <input
             class="form-control"
             type="text"
@@ -88,9 +91,10 @@
             formControlName="prisonReason"
           />
         </div>
+        <div class="col offset-4 mt-3">
+          <ksp-file-upload></ksp-file-upload>
+        </div>
       </div>
-
-      <ksp-file-upload></ksp-file-upload>
     </form>
   </div>
   <br />

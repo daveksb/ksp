@@ -6,7 +6,7 @@
       <div class="box-header">รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ</div>
     </div>
 
-    <div class="bg-white container-xl py-2">
+    <div class="bg-white container-xl py-2 px-4">
       <ksp-request-header-info
         [requestDate]="requestDate"
         [requestNumber]="requestNumber"
@@ -63,14 +63,12 @@
       </div>
 
       <ksp-bottom-nav
-        [isLastPage]="true"
         [showCenterButtons]="true"
-        [showSaveButton]="true"
-        [showCancelButton]="true"
-        [disableSaveButton]="form.invalid"
+        [showSaveButton]="false"
+        [showCancelButton]="false"
+        [disableNext]="form.invalid"
         (prevClicked)="back()"
-        (saveClicked)="save()"
-        (cancelClicked)="cancel()"
+        (nextClicked)="save()"
         [disableCancelButton]="false"
       ></ksp-bottom-nav>
     </div>

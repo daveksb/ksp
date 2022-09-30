@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -13,8 +13,11 @@ export class FormReasonInfoComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+  @Input() requestType: any;
+
   teacherReason = teacherReasons;
-  schoolReason = schoolReasons;
+  schoolReason1 = schoolReasons1;
+  schoolReason2 = schoolReasons2;
 
   override form = this.fb.group({
     schoolReasonInfo: [],
@@ -85,7 +88,7 @@ export const teacherReasons = [
   { label: 'อื่นๆ', name: 'teacher6', value: false },
 ];
 
-export const schoolReasons = [
+export const schoolReasons1 = [
   {
     label: 'ผู้ขอประกอบวิชาชีพครูเป็นผู้มีความรู้ ความสามารถในการสอน',
     name: 'school1',
@@ -98,6 +101,31 @@ export const schoolReasons = [
   },
   {
     label: 'ขาดแคลนครูผู้สอนที่มีใบอนุญาตประกอบวิชาชีพ',
+    name: 'school3',
+    value: false,
+  },
+  {
+    label: 'อื่นๆ',
+    name: 'school4',
+    value: false,
+  },
+];
+
+export const schoolReasons2 = [
+  {
+    label:
+      'ผู้ขอประกอบวิชาชีพผู้บริหารสถานศึกษา เป็นผู้มีความรู้ ความสามารถในการบริหารสถานศึกษา',
+    name: 'school1',
+    value: false,
+  },
+  {
+    label:
+      'ผู้ขอประกอบวิชาชีพผู้บริหารสถานศึกษา เป็นผู้มีประสบการณ์ในการบริหารสถานศึกษา',
+    name: 'school2',
+    value: false,
+  },
+  {
+    label: 'ขาดแคลนผู้บริหารสถานศึกษาที่มีใบอนุญาตประกอบวิชาชีพ',
     name: 'school3',
     value: false,
   },

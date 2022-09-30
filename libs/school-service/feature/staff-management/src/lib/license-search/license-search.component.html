@@ -15,7 +15,9 @@
 
     <div class="row mb-2">
       <div class="col">
-        <label class="form-label">หมายเลขบัตรประชาชน</label>
+        <label class="form-label"
+          >หมายเลขบัตรประชาชน/เลขที่หนังสือเดินทาง</label
+        >
         <input class="form-control" type="text" formControlName="personId" />
       </div>
 
@@ -64,7 +66,9 @@
 
     <div class="d-flex flex-column align-items-center" *ngIf="!foundItem">
       <div class="mb-2 fs-5">ไม่พบข้อมูล</div>
-      <button class="btn border-primary text-primary" (click)="addStaff()">+ เพิ่มบุคลากร</button>
+      <button class="btn border-primary text-primary" (click)="addStaff()">
+        + เพิ่มบุคลากร
+      </button>
     </div>
 
     <div *ngIf="foundItem">
