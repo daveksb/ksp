@@ -87,6 +87,8 @@ export class FormUserInfoComponent
     }
 
     const en = { prefixen: prefix };
+    const th = { prefixth: prefix };
+    this.form.patchValue(th);
     this.form.patchValue(en);
   }
 

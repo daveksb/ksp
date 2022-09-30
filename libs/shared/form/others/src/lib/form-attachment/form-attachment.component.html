@@ -19,8 +19,10 @@
             <th class="ps-3 py-2 text-black">
               {{ group.name }}
               <div class="text-secondary">
-                <div role="button" (click)="downloadFile(group)">
-                  {{ group?.fileName }}
+                <div class="d-flex" role="button">
+                  <div (click)="downloadFile(group)">
+                    {{ group?.fileName }}
+                  </div>
                   <i
                     (click)="deleteFile(group)"
                     *ngIf="group?.fileId && mode === 'edit'"
