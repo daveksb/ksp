@@ -213,6 +213,19 @@ export class RequestRewardMainComponent implements OnInit {
         });
         break;
       }
+      case 42: {
+        const rewardTeacherInfo = parseJson(rewardteacherinfo);
+        const eduInfo = parseJson(eduinfo);
+        const teachingInfo = parseJson(teachinginfo);
+        const rewardDetailInfo = parseJson(rewarddetailinfo);
+        this.form.controls.rewardDetail.patchValue(<any>{
+          rewardTeacherInfo,
+          eduInfo,
+          teachingInfo,
+          rewardDetailInfo,
+        });
+        break;
+      }
     }
   }
 

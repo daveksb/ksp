@@ -121,7 +121,6 @@ export class ThaiTeacherRewardComponent
   }
 
   override set value(value: any) {
-    console.log(value);
     const { teachingInfo } = value;
     if (teachingInfo) {
       this.amphurs3$ = this.addressService.getAmphurs(teachingInfo.province);
