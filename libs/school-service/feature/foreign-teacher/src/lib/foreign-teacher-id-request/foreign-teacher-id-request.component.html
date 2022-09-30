@@ -78,6 +78,7 @@
 
       <div class="mb-2 mt-3">
         <ksp-form-attachment
+          [uniqueTimestamp]="uniqueTimestamp"
           [title]="'กรุณาแนบหลักฐานประกอบการปฏิบัติงาน '"
           [groups]="foreignInfo"
           [mode]="mode"
@@ -87,7 +88,7 @@
   </div>
 </form>
 
-<div class="sticky-bottom border">
+<div class="sticky-bottom border px-2">
   <ksp-bottom-nav
     [isFirstPage]="mode !== 'view'"
     [isLastPage]="true"

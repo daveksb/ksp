@@ -23,6 +23,8 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./request-reward.component.scss'],
 })
 export class RequestRewardComponent implements OnInit {
+  uniqueTimestamp!: string;
+
   form = this.fb.group({
     reward: [],
   });
@@ -54,6 +56,7 @@ export class RequestRewardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.uniqueTimestamp = uuidv4();
     this.getListData();
     this.checkRequestId();
     this.checkButtonDisableStatus();

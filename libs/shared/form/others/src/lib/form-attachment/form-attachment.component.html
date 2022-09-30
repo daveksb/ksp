@@ -18,18 +18,21 @@
           <tr style="height: 60px; border-top: 1px solid #dadde1">
             <th class="ps-3 py-2 text-black">
               {{ group.name }}
-              <div class="text-secondary">
-                <div class="d-flex" role="button">
-                  <div (click)="downloadFile(group)">
-                    {{ group?.fileName }}
-                  </div>
-                  <i
-                    (click)="deleteFile(group)"
-                    *ngIf="group?.fileId && mode === 'edit'"
-                    class="bi bi-x-circle-fill text-danger fs-6 ms-2"
-                    role="button"
-                  ></i>
+              <div class="d-flex align-items-center flex-row">
+                <div
+                  class="text-secondary"
+                  role="button"
+                  (click)="downloadFile(group)"
+                >
+                  {{ group?.fileName }}
                 </div>
+                <i
+                  (click)="deleteFile(group)"
+                  *ngIf="group?.fileId && mode === 'edit'"
+                  class="bi bi-x-circle-fill text-danger fs-6 ms-2"
+                  role="button"
+                ></i>
+
                 <!-- <div *ngIf="i === 0 && mode === 'edit'" class="text-danger">
                   ขอเอกสารเพิ่มเติม: เนื่องจากขาดข้อมูลหน้าที่ 11-20
                 </div> -->

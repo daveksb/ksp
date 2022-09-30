@@ -89,7 +89,13 @@ export class SchoolRequestComponent implements OnInit {
   reasonFiles: any[] = [];
   attachFiles: any[] = [];
   prefixList$!: Observable<any>;
-  option = this.fb.control(false);
+  option1 = this.fb.control(false);
+  option2 = this.fb.control(false);
+  option3 = this.fb.control(false);
+  option4 = this.fb.control(false);
+  option5 = this.fb.control(false);
+  option6 = this.fb.control(false);
+
   form = this.fb.group({
     userInfo: [],
     addr1: [],
@@ -114,9 +120,25 @@ export class SchoolRequestComponent implements OnInit {
     private requestService: RequestService
   ) {}
 
-  get Option$() {
-    return this.option.valueChanges;
+  get Option1$() {
+    return this.option1.valueChanges;
   }
+  get Option2$() {
+    return this.option2.valueChanges;
+  }
+  get Option3$() {
+    return this.option3.valueChanges;
+  }
+  get Option4$() {
+    return this.option4.valueChanges;
+  }
+  get Option5$() {
+    return this.option5.valueChanges;
+  }
+  get Option6$() {
+    return this.option6.valueChanges;
+  }
+
   ngOnInit(): void {
     this.uniqueTimestamp = uuidv4();
     this.getList();
