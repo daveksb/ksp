@@ -27,20 +27,20 @@
         </div>
 
         <!-- *ngIf="!requestId || requestSubType !== 5" -->
-        <div class="row mb-3" *ngIf="!requestId && requestSubType !== 5">
+        <div class="row mb-2" *ngIf="!requestId && requestSubType !== 5">
           <div class="col-5">
             <label class="form-label">หมายเลขบัตรประชาชน</label>
             <input
-              class="form-control form-search"
+              class="form-control"
               type="text"
               placeholder="หมายเลขบัตรประชาชนจำนวน 13 หลัก"
               #idcard
             />
           </div>
-          <div class="col-auto mt-4">
+          <div class="col-1 mt-4">
             <button
               type="button"
-              class="btn btn-primary w-auto"
+              class="btn btn-primary w-100"
               (click)="searchStaffFromIdCard(idcard.value)"
             >
               ค้นหา

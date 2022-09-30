@@ -1,6 +1,6 @@
 <form [formGroup]="form">
   <div class="ps-3 pe-3 pt-3 pb-3 bg-light">
-    <div class="row">
+    <div class="row mb-2">
       <div class="col">
         <label class="form-label">ใบอนุญาตของประเทศ</label>
         <select class="form-select" formControlName="licenseCountry">
@@ -12,7 +12,7 @@
         <input class="form-control" type="text" formControlName="releaseBy" />
       </div>
     </div>
-    <div class="row">
+    <div class="row mb-2">
       <div class="col">
         <label class="form-label">ประเภทใบอนุญาต</label>
         <input class="form-control" type="text" formControlName="licenseType" />
@@ -22,7 +22,7 @@
         <input class="form-control" type="text" formControlName="licenseNo" />
       </div>
     </div>
-    <div class="row">
+    <div class="row mb-2">
       <div class="col">
         <label class="form-label">ออกให้เมื่อวันที่</label>
         <input class="form-control" type="date" formControlName="releaseDate" />
