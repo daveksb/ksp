@@ -54,11 +54,18 @@
               <div class="row justify-content-center">
                 <div class="col-md-6 mb-3">
                   <label class="form-label">เลขที่บัตรประชาชน</label>
-                  <i class="bi bi-question-circle fs-6 ms-1 tooltip1"
-                    ><span style="white-space: nowrap"
-                      >กรอกเลข 13 หลัก ไม่ต้องใส่ขีด(-)</span
-                    ></i
+                  <i
+                    class="bi bi-question-circle fs-6 ms-1"
+                    (click)="tooltip.show()"
                   >
+                    <span
+                      #tooltip="matTooltip"
+                      matTooltip="0000000000000
+                      กรอกเลข 13 หลัก ไม่ต้องใส่ -"
+                      matTooltipClass="tooltip"
+                      matTooltipPosition="above"
+                    ></span
+                  ></i>
                   <input
                     type="text"
                     class="form-control"
@@ -83,12 +90,9 @@
                 <div class="col-md-6 mb-3">
                   <label class="form-label">เลขที่หลังบัตรประชาชน </label>
 
-                  <i class="bi bi-question-circle fs-6 ms-1 tooltip3"
-                    ><span
-                      >ตัวอย่างการกรอกเลขที่หลังบัตร<img
-                        src="/assets/images/ssn-card.png"
-                        style="width: 250px; height: 150px"
-                      /> </span
+                  <i
+                    class="bi bi-question-circle fs-6 ms-1"
+                    (click)="tooltip1()"
                   ></i>
 
                   <input
@@ -102,12 +106,9 @@
               <div class="row justify-content-center">
                 <div class="col-md-6 mb-3">
                   <label class="form-lebel">รูปถ่ายบัตรประชาชน</label>
-                  <i class="bi bi-question-circle fs-6 ms-1 tooltip2"
-                    ><span
-                      >ตัวอย่างถ่ายรูปบัตรประชาชน<img
-                        src="/assets/images/ssn-show.png"
-                        style="width: 300px; height: 150px"
-                      /> </span
+                  <i
+                    class="bi bi-question-circle fs-6 ms-1"
+                    (click)="tooltip2()"
                   ></i>
                   <div
                     class="image-box d-flex align-items-center flex-column p-5"

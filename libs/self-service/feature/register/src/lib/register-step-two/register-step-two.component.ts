@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { VerifyPhoneDialogComponent } from '@ksp/self-service/dialog';
 import { idCardPattern, validatorMessages } from '@ksp/shared/utility';
 import localForage from 'localforage';
+import { RegisterTooltipComponent } from '../register-tooltip/register-tooltip.component';
 
 @Component({
   selector: 'self-service-register-step-two',
@@ -46,6 +47,26 @@ export class RegisterStepTwoComponent {
 
   previousPage() {
     this.router.navigate(['/register', 'th-step-1']);
+  }
+
+  tooltip1() {
+    this.dialog.open(RegisterTooltipComponent, {
+      width: '500px',
+      data: {
+        title: 'ตัวอย่างการกรอกเลขที่หลังบัตร',
+        image: '/assets/images/ssn-card.png',
+      },
+    });
+  }
+
+  tooltip2() {
+    this.dialog.open(RegisterTooltipComponent, {
+      width: '500px',
+      data: {
+        title: 'ตัวอย่างถ่ายรูปบัตรประชาชน',
+        image: '/assets/images/ssn-show.png',
+      },
+    });
   }
 
   get idCardNo() {

@@ -15,6 +15,7 @@ import { RegisterForeignStepOneComponent } from './register-foreign-step-one/reg
 import { RegisterForeignStepThreeComponent } from './register-foreign-step-three/register-foreign-step-three.component';
 import { RegisterForeignStepTwoComponent } from './register-foreign-step-two/register-foreign-step-two.component';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 export const routes: Routes = [
   {
@@ -62,6 +63,7 @@ export const routes: Routes = [
     ReactiveFormsModule,
     MatIconModule,
     SharedFormOthersModule,
+    MatTooltipModule,
   ],
   declarations: [
     RegisterStepOneComponent,
