@@ -18,16 +18,12 @@
         <label class="form-label"
           >หมายเลขบัตรประชาชน/เลขที่หนังสือเดินทาง</label
         >
-        <input class="form-control" type="text" formControlName="personId" />
+        <input class="form-control" type="text" formControlName="cardno" />
       </div>
 
       <div class="col">
         <label class="form-label">เลขที่ใบอนุญาต</label>
-        <input
-          class="form-control"
-          type="text"
-          formControlName="licenseNumber"
-        />
+        <input class="form-control" type="text" formControlName="licenseno" />
       </div>
     </div>
     <div class="row">
@@ -38,7 +34,7 @@
 
       <div class="col">
         <label class="form-label">ประเภทใบอนุญาต </label>
-        <select class="form-select" formControlName="licenseType">
+        <select class="form-select" formControlName="licensetype">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">One</option>
           <option value="2">Two</option>
