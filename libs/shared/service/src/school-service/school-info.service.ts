@@ -46,7 +46,7 @@ export class SchoolInfoService {
 
   seachSchool(payload: any): Observable<any> {
     return this.http
-      .post(`${environment.apiUrl}/kspstaff/schschoolselect`, payload)
+      .post(`https://kspapi.oceanicnetwork.net/schschoolsearch.php`, payload)
       .pipe(
         shareReplay(),
         map((data: any) => data.datareturn)

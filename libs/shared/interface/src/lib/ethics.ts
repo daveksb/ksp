@@ -1,4 +1,5 @@
 import { Route } from '@angular/router';
+import { MenuConfig } from './ksp-shared';
 export type EthicsMode = 'accusation' | 'investigation' | 'inquiry' | 'publish';
 
 export interface EthicsCustomRouteData {
@@ -6,16 +7,6 @@ export interface EthicsCustomRouteData {
   headerLabel: string;
   headerDetail?: string;
   ethicsMode?: EthicsMode;
-}
-
-export interface MenuConfig {
-  icon?: string;
-  label: string;
-  path: string;
-  params?: any;
-  subMenu?: MenuConfig[];
-  subMenuName?: string;
-  isExpanded?: boolean;
 }
 
 export interface EthicsCustomRoute extends Route {
