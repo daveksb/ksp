@@ -3,9 +3,9 @@
     {{ title }} <span class="text-danger fs-6">{{ titleNote }}</span>
   </div>
   <div class="table-responsive">
-    <table class="table bg-white" style="border: 1px solid #c4c4c4">
+    <table class="table bg-white">
       <thead>
-        <tr class="fs-6" style="background-color: #edf6ff">
+        <tr class="fs-6">
           <th class="ps-3 py-2">รายการเอกสาร</th>
           <th class="text-center">จำนวนหน้า</th>
           <th *ngIf="mode === 'view'" class="text-center">ตรวจสอบ</th>
@@ -52,6 +52,7 @@
                 (uploadComplete)="updateComplete($event, group)"
               ></ksp-file-upload>
             </td>
+            <td></td>
             <!-- (uploadComplete)="updateComplete($event, group)" -->
             <!-- <td>
               <div
