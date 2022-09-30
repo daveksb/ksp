@@ -69,12 +69,12 @@ export class SelfServiceHomePageComponent {
     const id = Number(input.id);
     console.log('subType ', subType);
 
-    if (requestType > 40) {
-      this.reward();
+    if (requestType >= 40) {
+      this.reward(id);
     } else if (requestType === 30) {
-      this.refundFee();
+      this.refundFee(id);
     } else if (requestType === 6) {
-      this.compare();
+      this.compare(id);
     } else if (requestType === 5) {
       this.transfer(id);
     } else if (requestType === 4) {
@@ -264,8 +264,8 @@ export class SelfServiceHomePageComponent {
   }
 
   //ขอรับรางวัล
-  reward() {
-    this.router.navigate(['/reward', 'request']);
+  reward(id?: number) {
+    this.router.navigate(['/reward', 'request', ...(id ? [`${id}`] : [])]);
   }
 
   // ขอหนังสือรับรองความรู้
@@ -278,13 +278,17 @@ export class SelfServiceHomePageComponent {
   }
 
   // เทียบเคียง
-  compare() {
-    this.router.navigate(['/compare-knowledge', 'request']);
+  compare(id?: number) {
+    this.router.navigate([
+      '/compare-knowledge',
+      'request',
+      ...(id ? [`${id}`] : []),
+    ]);
   }
 
   // คืนเงินค่าธรรมเนียม
-  refundFee() {
-    this.router.navigate(['/refund-fee', 'request']);
+  refundFee(id?: number) {
+    this.router.navigate(['/refund-fee', 'request', ...(id ? [`${id}`] : [])]);
   }
 
   //ขอใบแทนใบอนุญาตประกอบวิชาชีพ

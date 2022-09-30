@@ -1,7 +1,5 @@
-<ksp-top-nav [isSelfService]="true"
-  ><span header>ใบอนุญาตประกอบวิชาชีพ</span
-  ><span subHeader>ขอใบแทนใบอนุญาตประกอบวิชาชีพ</span></ksp-top-nav
->
+<ksp-top-nav [isSelfService]="true"><span header>ใบอนุญาตประกอบวิชาชีพ</span><span
+    subHeader>ขอใบแทนใบอนุญาตประกอบวิชาชีพ</span></ksp-top-nav>
 <div class="main__container px-4 py-2">
   <self-service-request-status></self-service-request-status>
 
@@ -17,16 +15,14 @@
           [prefixList]="prefixList$ | async"
           [displayMode]="[userInfoType]"
           [nationList]="nationalitys$ | async"
-          [isSchoolService]="false"
-        ></ksp-form-user-info>
+          [isSchoolService]="false"></ksp-form-user-info>
       </div>
     </div>
 
     <mat-tab-group
       class="tab-group"
       animationDuration="0ms"
-      [selectedIndex]="0"
-    >
+      [selectedIndex]="0">
       <mat-tab label="ที่อยู่" class="tab-content">
         <ksp-form-address
           formControlName="address1"
@@ -35,8 +31,7 @@
           [amphurs]="amphurs1$ | async"
           [tumbols]="tumbols1$ | async"
           (provinceChanged)="provinceChanged(1, $event)"
-          (amphurChanged)="amphurChanged(1, $event)"
-        >
+          (amphurChanged)="amphurChanged(1, $event)">
           <span>ที่อยู่ทะเบียนบ้าน</span>
         </ksp-form-address>
         <hr />
@@ -47,8 +42,7 @@
           [amphurs]="amphurs2$ | async"
           [tumbols]="tumbols2$ | async"
           (provinceChanged)="provinceChanged(2, $event)"
-          (amphurChanged)="amphurChanged(2, $event)"
-        >
+          (amphurChanged)="amphurChanged(2, $event)">
           <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
           <span class="text-danger ms-1 fs-6">*กรุณากรอกข้อมูลตำบล, อำเภอ</span>
           <div class="d-flex align-items-center">
@@ -66,19 +60,17 @@
           [tumbols]="tumbols3$ | async"
           [bureaus]="bureau$ | async"
           (provinceChanged)="provinceChanged(3, $event)"
-          (amphurChanged)="amphurChanged(3, $event)"
-        >
+          (amphurChanged)="amphurChanged(3, $event)">
         </self-service-form-user-workplace>
       </mat-tab>
 
       <mat-tab label="วัตถุประสงค์ขอใบแทน">
         <self-service-substitute-objective
-          formControlName="replaceReasonInfo"
-        ></self-service-substitute-objective>
+          formControlName="replaceReasonInfo"></self-service-substitute-objective>
         <ksp-form-attachment
           [title]="'กรุณาแนบหลักฐานประกอบ'"
           [groups]="objectiveFiles"
-        ></ksp-form-attachment>
+          [uniqueTimestamp]="uniqueTimestamp"></ksp-form-attachment>
       </mat-tab>
     </mat-tab-group>
 

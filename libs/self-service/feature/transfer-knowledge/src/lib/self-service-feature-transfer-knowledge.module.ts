@@ -25,6 +25,10 @@ export const routes: Routes = [
         path: 'request',
         component: TransferKnowledgeRequestComponent,
       },
+      {
+        path: 'request/:id',
+        component: TransferKnowledgeRequestComponent,
+      },
     ],
   },
 ];

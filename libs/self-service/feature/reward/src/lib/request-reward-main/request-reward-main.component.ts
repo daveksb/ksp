@@ -18,12 +18,12 @@ import { Observable } from 'rxjs';
 import { parseJson } from '@ksp/shared/utility';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   SelfServiceRequestForType,
   SelfServiceRequestSubType,
 } from '@ksp/shared/constant';
-import { v4 as uuidv4 } from 'uuid';
+import { parse, v4 as uuidv4 } from 'uuid';
 import { RequestRewardMainService } from './request-reward-main.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
@@ -49,6 +49,10 @@ export class RequestRewardMainComponent implements OnInit {
   myInfo!: SelfMyInfo;
   addressInfo: any;
   workplaceInfo: any;
+  requestId!: number;
+  requestData!: SelfRequest;
+  requestNo: string | null = '';
+  currentProcess!: number;
 
   form = this.fb.group({
     rewardType: [0],
@@ -68,10 +72,132 @@ export class RequestRewardMainComponent implements OnInit {
     private educationDetailService: EducationDetailService,
     private dialog: MatDialog,
     private router: Router,
-    private service: RequestRewardMainService
+    private service: RequestRewardMainService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.prefixList$ = this.generalInfoService.getPrefix();
+    this.bureau$ = this.educationDetailService.getBureau();
+    this.checkRequestId();
+  }
+
+  checkRequestId() {
+    this.route.paramMap.subscribe((params) => {
+      this.requestId = Number(params.get('id'));
+      if (this.requestId) {
+        // this.loadRequestFromId(this.requestId);
+        this.requestService.getRequestById(this.requestId).subscribe((res) => {
+          if (res) {
+            console.log(res);
+            this.requestData = res;
+            this.requestNo = res.requestno;
+            this.currentProcess = Number(res.currentprocess);
+            this.uniqueTimestamp = res.uniquetimestamp || '';
+            console.log(this.uniqueTimestamp);
+
+            this.patchData(res);
+          }
+        });
+      } else {
+        this.getFormType();
+      }
+    });
+  }
+
+  getFormType() {
+    this.form.controls.rewardType.valueChanges
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        const formType = +(res || 0);
+        console.log(formType);
+        this.initializeFiles(formType);
+        this.getMyInfo(formType);
+      });
+  }
+
+  patchData(data: SelfRequest) {
+    console.log(data);
+    const {
+      requesttype,
+      prefixth,
+      prefixen,
+      firstnameth,
+      firstnameen,
+      lastnameth,
+      lastnameen,
+      sex,
+      birthdate,
+      contactphone,
+      workphone,
+      email,
+      addressinfo,
+      schooladdrinfo,
+      eduinfo,
+      hiringinfo,
+      rewardethicinfo,
+      rewardsuccessinfo,
+      rewarddetailinfo,
+      fileinfo,
+      ...resData
+    } = data;
+    const rewardType = +(requesttype || 0);
+    const { rewardfiles } = parseJson(fileinfo);
+    this.rewardFiles = rewardfiles;
+
+    this.form.patchValue({
+      rewardType,
+    });
+
+    this.myInfo = <any>{
+      prefixth,
+      prefixen,
+      firstnameth,
+      firstnameen,
+      lastnameth,
+      lastnameen,
+      sex,
+      birthdate: birthdate?.split('T')[0],
+      contactphone,
+      workphone,
+      email,
+    };
+    this.addressInfo = parseJson(addressinfo);
+    this.workplaceInfo = parseJson(schooladdrinfo);
+    console.log(this.workplaceInfo);
+
+    const eduInfo = parseJson(eduinfo);
+    const hiringInfo = parseJson(hiringinfo);
+    const rewardEthicInfo = parseJson(rewardethicinfo);
+    const rewardSuccessInfo = parseJson(rewardsuccessinfo);
+    const rewardDetailInfo = parseJson(rewarddetailinfo);
+    this.form.controls.rewardDetail.patchValue(<any>{
+      eduInfo,
+      hiringInfo,
+      rewardEthicInfo,
+      rewardSuccessInfo,
+      rewardDetailInfo,
+    });
+
+    // if (data.replacereasoninfo) {
+    //   const replaceReasonInfo = parseJson(data.replacereasoninfo);
+    //   this.form.controls.userInfo.patchValue(replaceReasonInfo);
+    // }
+
+    // if (addressinfo) {
+    //   const addressInfo = parseJson(addressinfo)
+    //   this.form.controls.
+    // }
+
+    // if (fileinfo) {
+    //   const fileInfo = parseJson(fileinfo);
+    //   console.log(fileInfo);
+    //   const { rewardfiles } = fileInfo;
+    //   this.rewardFiles = rewardfiles;
+    // }
+  }
+
+  getMyInfo(formType: number) {
     this.myInfoService.getMyInfo().subscribe((res) => {
       this.myInfo = {
         ...res,
@@ -80,8 +206,9 @@ export class RequestRewardMainComponent implements OnInit {
       };
 
       const addresses = parseJson(res.addressinfo);
+      console.log(addresses);
       if (addresses?.length) {
-        if (this.form.value.rewardType === 40) {
+        if (formType === 40) {
           this.addressInfo = addresses;
         } else {
           this.addressInfo = addresses[0];
@@ -92,47 +219,33 @@ export class RequestRewardMainComponent implements OnInit {
         this.workplaceInfo = parseJson(res.schooladdrinfo);
       }
     });
-    this.prefixList$ = this.generalInfoService.getPrefix();
-    this.bureau$ = this.educationDetailService.getBureau();
-    this.initializeFiles();
   }
 
-  initializeFiles() {
+  initializeFiles(formType: number) {
     this.uniqueTimestamp = uuidv4();
-    console.log(this.form.value.rewardType);
-    this.form.controls.rewardType.valueChanges
-      .pipe(untilDestroyed(this))
-      .subscribe((res) => {
-        const formType = +(res || 0);
-        switch (formType) {
-          case 40:
-            this.rewardFiles = structuredClone(this.service.councilRewardFiles);
-            break;
-          case 41:
-            this.rewardFiles = structuredClone(
-              this.service.thaiTeacherRewardFiles
-            );
-            break;
-          case 42:
-            this.rewardFiles = structuredClone(
-              this.service.bestTeacherRewardFiles
-            );
-            break;
-          case 43:
-            this.rewardFiles = structuredClone(this.service.praiseRewardFiles);
-            break;
-          case 44:
-            this.rewardFiles = structuredClone(
-              this.service.seniorTeacherRewardFiles
-            );
-            break;
-          case 45:
-            this.rewardFiles = structuredClone(
-              this.service.researchRewardFiles
-            );
-            break;
-        }
-      });
+
+    switch (formType) {
+      case 40:
+        this.rewardFiles = structuredClone(this.service.councilRewardFiles);
+        break;
+      case 41:
+        this.rewardFiles = structuredClone(this.service.thaiTeacherRewardFiles);
+        break;
+      case 42:
+        this.rewardFiles = structuredClone(this.service.bestTeacherRewardFiles);
+        break;
+      case 43:
+        this.rewardFiles = structuredClone(this.service.praiseRewardFiles);
+        break;
+      case 44:
+        this.rewardFiles = structuredClone(
+          this.service.seniorTeacherRewardFiles
+        );
+        break;
+      case 45:
+        this.rewardFiles = structuredClone(this.service.researchRewardFiles);
+        break;
+    }
   }
 
   tempSave() {
@@ -148,7 +261,10 @@ export class RequestRewardMainComponent implements OnInit {
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         const payload = this.createRequest(1);
-        this.requestService.createRequest(payload).subscribe((res) => {
+        const request = this.requestId
+          ? this.requestService.updateRequest.bind(this.requestService)
+          : this.requestService.createRequest.bind(this.requestService);
+        request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
             this.router.navigate(['/home']);
@@ -170,7 +286,10 @@ export class RequestRewardMainComponent implements OnInit {
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         const payload = this.createRequest(2);
-        this.requestService.createRequest(payload).subscribe((res) => {
+        const request = this.requestId
+          ? this.requestService.updateRequest.bind(this.requestService)
+          : this.requestService.createRequest.bind(this.requestService);
+        request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
             this.router.navigate(['/home']);
@@ -195,11 +314,12 @@ export class RequestRewardMainComponent implements OnInit {
     userInfo.uniquetimestamp = this.uniqueTimestamp;
     userInfo.staffid = getCookie('userId');
     const selectData = _.pick(userInfo, allowKey);
-    const rewardfiles = this.mapFileInfo(this.rewardFiles);
+    const rewardfiles = this.rewardFiles;
 
     const filledData = {
       ...self,
       ...selectData,
+      ...(this.requestId && { id: `${this.requestId}` }),
       ...(form.addressInfo && {
         addressinfo: JSON.stringify(form.addressInfo),
       }),
@@ -250,17 +370,6 @@ export class RequestRewardMainComponent implements OnInit {
     const { id, requestdate, ...payload } = replaceEmptyWithNull(filledData);
     console.log('payload = ', payload);
     return payload;
-  }
-
-  mapFileInfo(fileList: any[]) {
-    return fileList.map((file: any) => {
-      const object = {
-        fileid: file.fileId || null,
-        filename: file.fileName || null,
-        name: file.name || null,
-      };
-      return object;
-    });
   }
 }
 
