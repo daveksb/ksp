@@ -11,6 +11,7 @@ import { GeneralInfoService, RequestService } from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
 import localForage from 'localforage';
 import { EMPTY, Observable, switchMap } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
 @Component({
   selector: 'ksp-school-retired-coordinator',
   templateUrl: './school-retired-coordinator.component.html',
@@ -34,11 +35,13 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
   userInfoFormType: number = UserInfoFormType.thai;
   retiredFiles = [{ name: 'หนังสือแต่งตั้งผู้ประสานงาน', fileId: '' }];
   prefixList$!: Observable<any>;
+  uniqueTimestamp: any;
 
   ngOnInit() {
     localForage.getItem('registerUserInfoFormValue').then((res) => {
       this.reasoninfo = res;
     });
+    this.uniqueTimestamp = uuidv4();
     this.getList();
   }
 

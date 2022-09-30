@@ -2,7 +2,7 @@ import { SchoolRequest } from './school-request';
 
 export class SelfRequest extends SchoolRequest {
   rewardethicinfo: string | null = null; // ข้อมูลการปฎิบัติตามจรรยาบรรณ
-  rewardsuccessInfo: string | null = null; // รายงานผลสำเร็จจากการปฎิบัติงาน
+  rewardsuccessinfo: string | null = null; // รายงานผลสำเร็จจากการปฎิบัติงาน
   rewarddetailinfo: string | null = null; // ข้อมูลรางวัลและหลักฐานประกอบ / ข้อมูลนวัตกรรมและรางวัล
   rewardpunishmentinfo: string | null = null; // ข้อมูลการลงโทษทางวินัย
   rewardteacherinfo: string | null = null; // ข้อมูลครูภาษาไทยดีเด่น/ข้อมูลครูดีเด่น/ข้อมูลครูอาวุโส

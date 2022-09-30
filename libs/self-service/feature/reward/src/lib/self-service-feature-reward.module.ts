@@ -40,6 +40,10 @@ export const routes: Routes = [
         component: RequestRewardMainComponent,
       },
       {
+        path: 'request/:id',
+        component: RequestRewardMainComponent,
+      },
+      {
         path: 'detail',
         component: MyRewardDetailComponent,
       },

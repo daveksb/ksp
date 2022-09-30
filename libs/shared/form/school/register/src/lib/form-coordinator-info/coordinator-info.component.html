@@ -1,9 +1,9 @@
 <form [formGroup]="form">
   <div class="row">
-    <div class="col-6">
+    <!-- <div class="col-6">
       <label class="form-label required">หมายเลขบัตรประชาชน</label>
       <input class="form-control" type="text" />
-    </div>
+    </div> -->
   </div>
   <div class="row mb-3">
     <div class="col-2">
@@ -14,6 +14,7 @@
         [class.bg-white]="!isDarkMode && mode === 'edit'"
         class="form-select"
         formControlName="prefixth"
+        (change)="prefixChanged($event)"
       >
         <option value="null">กรุณาเลือก</option>
         <option *ngFor="let prefix of prefixList" [value]="prefix.id">
@@ -70,6 +71,7 @@
         [class.bg-white]="!isDarkMode && mode === 'edit'"
         class="form-select"
         formControlName="prefixen"
+        (change)="prefixChanged($event)"
       >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let prefix of prefixList" [value]="prefix.id">
