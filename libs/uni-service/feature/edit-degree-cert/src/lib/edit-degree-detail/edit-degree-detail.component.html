@@ -72,12 +72,14 @@
 
 <div class="sticky-bottom border">
   <ksp-bottom-nav
-    [isLastPage]="true"
-    [isFirstPage]="true"
-    [showCenterButtons]="true"
+    [isLastPage]="stepper.selectedIndex === 3"
+    [isFirstPage]="stepper.selectedIndex === 0"
+    [showCenterButtons]="stepper.selectedIndex === 3"
     [showSaveButton]="true"
     [showCancelButton]="true"
     (saveClicked)="save()"
+    (nextClicked)="goForward()"
+    (prevClicked)="goBack()"
     (cancelClicked)="back()"
   ></ksp-bottom-nav>
 </div>
