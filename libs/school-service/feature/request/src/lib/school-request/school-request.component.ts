@@ -112,6 +112,7 @@ export class SchoolRequestComponent implements OnInit {
     private staffService: StaffService,
     private requestService: RequestService
   ) {}
+
   get Option$() {
     return this.option.valueChanges;
   }
@@ -564,6 +565,7 @@ export class SchoolRequestComponent implements OnInit {
       .getSchoolInfo(this.schoolId)
       .pipe(untilDestroyed(this))
       .subscribe((res: any) => {
+        console.log('sch address = ', res);
         this.form.controls.schoolAddr.patchValue(res);
       });
   }
