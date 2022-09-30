@@ -33,6 +33,30 @@ export class PraiseTeacherRewardInfoComponent
     this.addFormArray(this.rewardInfo);
   }
 
+  override set value(value: any) {
+    Object.keys(value).forEach((key) => {
+      if (key === 'receivedReward') {
+        const control = this.form.get(key);
+        control?.patchValue(value[key]);
+      } else {
+        const control = this.form.get(key) as FormArray;
+        if (value[key].length) {
+          control.removeAt(0);
+          value[key].forEach((item: any) =>
+            control.push(
+              this.fb.group({
+                ...item,
+              })
+            )
+          );
+        }
+      }
+    });
+
+    this.onChange(value);
+    this.onTouched();
+  }
+
   deleteFormArray(form: FormArray<any>, index: number) {
     form.removeAt(index);
   }

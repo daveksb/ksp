@@ -155,6 +155,7 @@ export class RequestRewardMainComponent implements OnInit {
       rewarddetailinfo,
       rewardteacherinfo,
       teachinginfo,
+      rewardpunishmentinfo,
       fileinfo,
       ...resData
     } = data;
@@ -223,6 +224,19 @@ export class RequestRewardMainComponent implements OnInit {
           eduInfo,
           teachingInfo,
           rewardDetailInfo,
+        });
+        break;
+      }
+      case 43: {
+        const eduInfo = parseJson(eduinfo);
+        const hiringInfo = parseJson(hiringinfo);
+        const rewardDetailInfo = parseJson(rewarddetailinfo);
+        const rewardPunishmentInfo = parseJson(rewardpunishmentinfo);
+        this.form.controls.rewardDetail.patchValue(<any>{
+          eduInfo,
+          hiringInfo,
+          rewardDetailInfo,
+          rewardPunishmentInfo,
         });
         break;
       }
