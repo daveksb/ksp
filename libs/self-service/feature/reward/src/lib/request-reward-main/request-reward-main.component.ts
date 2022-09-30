@@ -49,7 +49,7 @@ export class RequestRewardMainComponent implements OnInit {
   myInfo!: SelfMyInfo;
   addressInfo: any;
   workplaceInfo: any;
-  requestId!: number;
+  requestId!: number | null;
   requestData!: SelfRequest;
   requestNo: string | null = '';
   currentProcess!: number;
@@ -97,6 +97,7 @@ export class RequestRewardMainComponent implements OnInit {
             console.log(this.uniqueTimestamp);
 
             this.patchData(res);
+            this.getFormType();
           }
         });
       } else {
@@ -111,9 +112,23 @@ export class RequestRewardMainComponent implements OnInit {
       .subscribe((res) => {
         const formType = +(res || 0);
         console.log(formType);
-        this.initializeFiles(formType);
-        this.getMyInfo(formType);
+        if (formType > 0) {
+          this.clearForm();
+          this.requestId = null;
+          this.initializeFiles(formType);
+          this.getMyInfo(formType);
+        }
       });
+  }
+
+  clearForm() {
+    this.form.controls.rewardDetail.patchValue(<any>{
+      eduInfo: null,
+      hiringInfo: null,
+      rewardEthicInfo: null,
+      rewardSuccessInfo: null,
+      rewardDetailInfo: null,
+    });
   }
 
   patchData(data: SelfRequest) {
@@ -138,12 +153,21 @@ export class RequestRewardMainComponent implements OnInit {
       rewardethicinfo,
       rewardsuccessinfo,
       rewarddetailinfo,
+      rewardteacherinfo,
+      teachinginfo,
+      rewardpunishmentinfo,
+      rewardcareerinfo,
+      rewardmoneysupportinfo,
+      rewardresearcherinfo,
+      rewardresearchinfo,
+      rewardresearchhistory,
       fileinfo,
       ...resData
     } = data;
     const rewardType = +(requesttype || 0);
     const { rewardfiles } = parseJson(fileinfo);
     this.rewardFiles = rewardfiles;
+    console.log(rewardfiles);
 
     this.form.patchValue({
       rewardType,
@@ -166,35 +190,84 @@ export class RequestRewardMainComponent implements OnInit {
     this.workplaceInfo = parseJson(schooladdrinfo);
     console.log(this.workplaceInfo);
 
-    const eduInfo = parseJson(eduinfo);
-    const hiringInfo = parseJson(hiringinfo);
-    const rewardEthicInfo = parseJson(rewardethicinfo);
-    const rewardSuccessInfo = parseJson(rewardsuccessinfo);
-    const rewardDetailInfo = parseJson(rewarddetailinfo);
-    this.form.controls.rewardDetail.patchValue(<any>{
-      eduInfo,
-      hiringInfo,
-      rewardEthicInfo,
-      rewardSuccessInfo,
-      rewardDetailInfo,
-    });
-
-    // if (data.replacereasoninfo) {
-    //   const replaceReasonInfo = parseJson(data.replacereasoninfo);
-    //   this.form.controls.userInfo.patchValue(replaceReasonInfo);
-    // }
-
-    // if (addressinfo) {
-    //   const addressInfo = parseJson(addressinfo)
-    //   this.form.controls.
-    // }
-
-    // if (fileinfo) {
-    //   const fileInfo = parseJson(fileinfo);
-    //   console.log(fileInfo);
-    //   const { rewardfiles } = fileInfo;
-    //   this.rewardFiles = rewardfiles;
-    // }
+    switch (rewardType) {
+      case 40: {
+        const eduInfo = parseJson(eduinfo);
+        const hiringInfo = parseJson(hiringinfo);
+        const rewardEthicInfo = parseJson(rewardethicinfo);
+        const rewardSuccessInfo = parseJson(rewardsuccessinfo);
+        const rewardDetailInfo = parseJson(rewarddetailinfo);
+        this.form.controls.rewardDetail.patchValue(<any>{
+          eduInfo,
+          hiringInfo,
+          rewardEthicInfo,
+          rewardSuccessInfo,
+          rewardDetailInfo,
+        });
+        break;
+      }
+      case 41: {
+        const rewardTeacherInfo = parseJson(rewardteacherinfo);
+        const eduInfo = parseJson(eduinfo);
+        const hiringInfo = parseJson(hiringinfo);
+        const teachingInfo = parseJson(teachinginfo);
+        this.form.controls.rewardDetail.patchValue(<any>{
+          rewardTeacherInfo,
+          eduInfo,
+          hiringInfo,
+          teachingInfo,
+        });
+        break;
+      }
+      case 42: {
+        const rewardTeacherInfo = parseJson(rewardteacherinfo);
+        const eduInfo = parseJson(eduinfo);
+        const teachingInfo = parseJson(teachinginfo);
+        const rewardDetailInfo = parseJson(rewarddetailinfo);
+        this.form.controls.rewardDetail.patchValue(<any>{
+          rewardTeacherInfo,
+          eduInfo,
+          teachingInfo,
+          rewardDetailInfo,
+        });
+        break;
+      }
+      case 43: {
+        const eduInfo = parseJson(eduinfo);
+        const hiringInfo = parseJson(hiringinfo);
+        const rewardDetailInfo = parseJson(rewarddetailinfo);
+        const rewardPunishmentInfo = parseJson(rewardpunishmentinfo);
+        this.form.controls.rewardDetail.patchValue(<any>{
+          eduInfo,
+          hiringInfo,
+          rewardDetailInfo,
+          rewardPunishmentInfo,
+        });
+        break;
+      }
+      case 44: {
+        const rewardTeacherInfo = parseJson(rewardteacherinfo);
+        const rewardCareerInfo = parseJson(rewardcareerinfo);
+        const rewardMoneySupportInfo = parseJson(rewardmoneysupportinfo);
+        this.form.controls.rewardDetail.patchValue(<any>{
+          rewardTeacherInfo,
+          rewardCareerInfo,
+          rewardMoneySupportInfo,
+        });
+        break;
+      }
+      case 45: {
+        const rewardResearcherInfo = parseJson(rewardresearcherinfo);
+        const rewardResearchInfo = parseJson(rewardresearchinfo);
+        const rewardResearchHistory = parseJson(rewardresearchhistory);
+        this.form.controls.rewardDetail.patchValue(<any>{
+          rewardResearcherInfo,
+          rewardResearchInfo,
+          rewardResearchHistory,
+        });
+        break;
+      }
+    }
   }
 
   getMyInfo(formType: number) {
@@ -217,6 +290,7 @@ export class RequestRewardMainComponent implements OnInit {
 
       if (res.schooladdrinfo) {
         this.workplaceInfo = parseJson(res.schooladdrinfo);
+        console.log(this.workplaceInfo);
       }
     });
   }
@@ -315,11 +389,11 @@ export class RequestRewardMainComponent implements OnInit {
     userInfo.staffid = getCookie('userId');
     const selectData = _.pick(userInfo, allowKey);
     const rewardfiles = this.rewardFiles;
+    console.log(rewardfiles);
 
     const filledData = {
       ...self,
       ...selectData,
-      ...(this.requestId && { id: `${this.requestId}` }),
       ...(form.addressInfo && {
         addressinfo: JSON.stringify(form.addressInfo),
       }),
@@ -369,6 +443,9 @@ export class RequestRewardMainComponent implements OnInit {
     };
     const { id, requestdate, ...payload } = replaceEmptyWithNull(filledData);
     console.log('payload = ', payload);
+    if (this.requestId) {
+      payload.id = this.requestId;
+    }
     return payload;
   }
 }
