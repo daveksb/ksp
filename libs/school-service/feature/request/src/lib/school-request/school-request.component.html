@@ -265,7 +265,8 @@
                     placeholder="โปรดระบุ"
                   ></textarea>
                 </div></div></ng-container
-          ></ng-container>
+            ><br
+          /></ng-container>
 
           <ng-container *ngIf="requestSubType === 5">
             <div class="d-flex align-items-center mt-3">
@@ -274,9 +275,9 @@
             </div>
             <ng-container *ngIf="Option6$ | async">
               <ksp-form-education-info-manager></ksp-form-education-info-manager></ng-container
-          ></ng-container>
+            ><br
+          /></ng-container>
 
-          <br />
           <ksp-form-attachment
             [pageType]="pageType.educationTab"
             [uniqueTimestamp]="uniqueTimestamp"
