@@ -28,6 +28,8 @@ export const SchoolRetireReason = [
 export enum SchoolRequestSubType {
   'ครู' = 1,
   'ผู้บริหารสถานศึกษา' = 2,
+  'ผู้บริหารการศึกษา' = 3,
+  'ศึกษานิเทศก์' = 4,
   'อื่นๆ' = 5,
 }
 

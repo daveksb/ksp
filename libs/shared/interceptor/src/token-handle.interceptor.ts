@@ -24,7 +24,7 @@ export class TokenHandleInterceptor implements HttpInterceptor {
       request.url.includes('ksppublic') ||
       request.url.includes('schschoolselect') ||
       request.url.includes('kspfileinsert') ||
-      request.url.includes('schschoolsearch') ||
+      request.url.includes('schschoolsearch.php') ||
       (request.url.includes('schrequestfileinsert') &&
         (request.body.requesttype == '1' || request.body.requesttype == '2')) ||
       !token

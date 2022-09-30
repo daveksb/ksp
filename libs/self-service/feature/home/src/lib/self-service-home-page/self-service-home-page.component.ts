@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatSort, MatSortable, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -26,17 +27,24 @@ export class SelfServiceHomePageComponent {
 
   constructor(
     private router: Router,
-    private requestService: SelfRequestService
+    private requestService: SelfRequestService,
+    private fb: FormBuilder
   ) {}
+
+  form = this.fb.group({
+    requestno: [],
+    requesttype: [],
+    requestdate: [],
+  });
 
   displayedColumns: string[] = column;
 
   search() {
     const payload = {
       staffid: getCookie('userId'),
-      requesttype: null,
-      requestno: null,
-      requestdate: null,
+      requesttype: this.form.controls.requesttype.value,
+      requestno: this.form.controls.requestno.value,
+      requestdate: this.form.controls.requestdate.value,
       requeststatus: null,
       currentprocess: null,
       offset: '0',
@@ -154,6 +162,7 @@ export class SelfServiceHomePageComponent {
   }
 
   clear() {
+    this.form.reset();
     this.dataSource.data = [];
   }
 

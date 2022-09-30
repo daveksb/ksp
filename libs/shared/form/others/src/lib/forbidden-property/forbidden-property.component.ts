@@ -2,7 +2,7 @@ import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy()
@@ -16,14 +16,15 @@ export class ForbiddenPropertyFormComponent extends KspFormBaseComponent {
   @Input()
   title = `ขอรับรองว่าไม่เป็นผู้มีลักษณะต้องห้ามตามที่กำหนดไว้ในมาตรา 44
   แห่งพระราชบัญญัติสภาครูและบุคลากรทางการศึกษา พ.ศ.2546`;
-
   @Output() confirmed = new EventEmitter<any>();
 
   override form = this.fb.group({
-    immoral: [],
-    incompetent: [],
-    prison: [],
+    immoral: [null, Validators.required],
+    incompetent: [null, Validators.required],
+    prison: [null, Validators.required],
     prisonReason: [],
+    fileId: [null, Validators],
+    fileName: [null, Validators.required],
   });
 
   constructor(
@@ -31,11 +32,11 @@ export class ForbiddenPropertyFormComponent extends KspFormBaseComponent {
     @Inject(MAT_DIALOG_DATA)
     public data: {
       prohibitProperty: any;
+      uniqueTimeStamp: string;
     }
   ) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
         this.onChange(value);
         this.onTouched();
@@ -45,6 +46,13 @@ export class ForbiddenPropertyFormComponent extends KspFormBaseComponent {
     if (this.data?.prohibitProperty) {
       this.form.patchValue(this.data.prohibitProperty);
     }
+  }
+
+  uploadComplete(evt: any) {
+    //console.log('upload result = ', evt);
+    const fileInfo: any = evt;
+    this.form.patchValue(fileInfo);
+    //console.log('this.form.value = ', this.form.value);
   }
 
   save() {
