@@ -34,9 +34,6 @@ export class DegreeCertStepTwoComponent extends KspFormBaseComponent {
   });
 
   step2Incorrect = ['ไม่ครบถ้วน และไม่ถูกต้อง', 'หมายเหตุ XXXXXXXXX'];
-  get allowEditInput() {
-    return this.form.controls;
-  }
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
@@ -61,5 +58,21 @@ export class DegreeCertStepTwoComponent extends KspFormBaseComponent {
         nittetAmount: this.minAmount as any,
       });
     this.tabIndexChanged.emit($event.index);
+  }
+
+  get section1() {
+    return !!(this.form.controls?.section1?.value && this.showEditCheckbox);
+  }
+  get section2() {
+    return !!(this.form.controls?.section2?.value && this.showEditCheckbox);
+  }
+  get section3() {
+    return !!(this.form.controls?.section3?.value && this.showEditCheckbox);
+  }
+  get section4() {
+    return !!(this.form.controls?.section4?.value && this.showEditCheckbox);
+  }
+  get section5() {
+    return !!(this.form.controls?.section5?.value && this.showEditCheckbox);
   }
 }

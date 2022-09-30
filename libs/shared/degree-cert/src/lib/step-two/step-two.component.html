@@ -27,7 +27,7 @@
           />
           <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
         </div>
-        <fieldset [disabled]="!allowEditInput?.section1?.value && showEditCheckbox">
+        <fieldset [disabled]="!section1">
           <ksp-step-2-tab-1-a
             formControlName="plan1"
             [mode]="mode"
@@ -42,7 +42,7 @@
           />
           <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
         </div>
-        <fieldset [disabled]="!allowEditInput?.section2?.value && showEditCheckbox">
+        <fieldset [disabled]="!section2">
           <ksp-step-2-tab-1-b
             formControlName="plan2"
             [mode]="mode"
@@ -59,7 +59,7 @@
         />
         <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
       </div>
-      <fieldset [disabled]="!allowEditInput?.section3?.value && showEditCheckbox">
+      <fieldset [disabled]="!section3">
         <ksp-step-2-teacher
           [mode]="mode"
           formControlName="teacher"
@@ -72,7 +72,7 @@
         <input formControlName="section4" type="checkbox" />
         <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
       </div>
-      <fieldset [disabled]="!allowEditInput?.section4?.value && showEditCheckbox">
+      <fieldset [disabled]="!section4">
         <ksp-step-2-nitet
           [mode]="mode"
           formControlName="nitet"
@@ -90,7 +90,7 @@
         />
         <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
       </div>
-      <fieldset [disabled]="!allowEditInput?.section5?.value && showEditCheckbox">
+      <fieldset [disabled]="!section5">
         <ksp-step-2-advisor
           [mode]="mode"
           formControlName="advisor"

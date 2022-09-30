@@ -102,10 +102,6 @@ export class DegreeCertStepOneComponent
     }
   }
 
-  get allowEditInput() {
-    return this.form.controls;
-  }
-
   loadData(form: any, value: any) {
     _.forEach(value, (value: any, index: any) => {
       if (form?.controls[index]) {
@@ -185,5 +181,23 @@ export class DegreeCertStepOneComponent
 
   get locations2() {
     return this.form.controls['locations2'] as FormArray;
+  }
+  get section1() {
+    return !!(this.form.controls?.section1?.value && this.showEditCheckbox);
+  }
+  get section2() {
+    return !!(this.form.controls?.section2?.value && this.showEditCheckbox);
+  }
+  get section3() {
+    return !!(this.form.controls?.section3?.value && this.showEditCheckbox);
+  }
+  get section4() {
+    return !!(this.form.controls?.section4?.value && this.showEditCheckbox);
+  }
+  get section5() {
+    return !!(this.form.controls?.section5?.value && this.showEditCheckbox);
+  }
+  get section6() {
+    return !!(this.form.controls?.section6?.value && this.showEditCheckbox);
   }
 }
