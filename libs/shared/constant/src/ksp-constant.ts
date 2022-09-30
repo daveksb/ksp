@@ -10,3 +10,7 @@ export interface RequestProcess {
   processName: string;
   status: RequestStatus[]; //[{ id: 1, sname: 'ยกเลิก', ename: 'ยกเลิก' }],
 }
+
+export class SelfLicense {
+  careertype: string | null = null;
+}
