@@ -30,6 +30,7 @@ import {
 import {
   formatCheckboxData,
   formatDate,
+  mapFileInfo,
   parseJson,
   replaceEmptyWithNull,
   thaiDate,
@@ -112,6 +113,7 @@ export class SchoolRequestComponent implements OnInit {
     private staffService: StaffService,
     private requestService: RequestService
   ) {}
+
   get Option$() {
     return this.option.valueChanges;
   }
@@ -149,16 +151,6 @@ export class SchoolRequestComponent implements OnInit {
     });
   }
 
-  /* submit() {
-    // ถ้ามี request id เปลี่ยนสถานะ
-    // ถ้ายังไม่มี request id insert new row
-    if (this.requestId) {
-      this.updateRequest('submit');
-    } else {
-      this.createRequest('submit');
-    }
-  } */
-
   cancelRequest() {
     const payload = {
       id: `${this.requestId}`,
@@ -175,10 +167,10 @@ export class SchoolRequestComponent implements OnInit {
     //console.log('create request = ');
     const baseForm = this.fb.group(new SchoolRequest());
     const formData: any = this.form.getRawValue();
-    const tab3 = this.mapFileInfo(this.eduFiles);
-    const tab4 = this.mapFileInfo(this.teachingFiles);
-    const tab5 = this.mapFileInfo(this.reasonFiles);
-    const tab6 = this.mapFileInfo(this.attachFiles);
+    const tab3 = mapFileInfo(this.eduFiles);
+    const tab4 = mapFileInfo(this.teachingFiles);
+    const tab5 = mapFileInfo(this.reasonFiles);
+    const tab6 = mapFileInfo(this.attachFiles);
     formData.addr1.addresstype = 1;
     formData.addr2.addresstype = 2;
 
@@ -191,12 +183,6 @@ export class SchoolRequestComponent implements OnInit {
     } else {
       userInfo.currentprocess = `1`;
     }
-
-    // if (this.requestId) {
-    //   userInfo.currentprocess = `1`;
-    // } else {
-    //   userInfo.currentprocess = `2`;
-    // }
 
     userInfo.ref1 = `${this.systemType}`;
     userInfo.ref2 = '03';
@@ -292,10 +278,10 @@ export class SchoolRequestComponent implements OnInit {
       visaenddate: userInfo.visaenddate,
     };
 
-    const tab3 = this.mapFileInfo(this.eduFiles);
-    const tab4 = this.mapFileInfo(this.teachingFiles);
-    const tab5 = this.mapFileInfo(this.reasonFiles);
-    const tab6 = this.mapFileInfo(this.attachFiles);
+    const tab3 = mapFileInfo(this.eduFiles);
+    const tab4 = mapFileInfo(this.teachingFiles);
+    const tab5 = mapFileInfo(this.reasonFiles);
+    const tab6 = mapFileInfo(this.attachFiles);
 
     const payload = {
       ...replaceEmptyWithNull(userInfo),
@@ -609,9 +595,14 @@ export class SchoolRequestComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         if (res) {
-          /* this.submit();
-          this.confirmCompleted(); */
-          this.createRequest('submit');
+          // this.confirmCompleted();
+          // ถ้ามี request id เปลี่ยนสถานะ
+          // ถ้ายังไม่มี request id insert new row
+          if (this.requestId) {
+            this.updateRequest('submit');
+          } else {
+            this.createRequest('submit');
+          }
         }
       });
   }
@@ -631,7 +622,6 @@ export class SchoolRequestComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         if (res) {
-          //this.createRequest('submit');
           this.backToListPage();
         }
       });
@@ -693,15 +683,5 @@ export class SchoolRequestComponent implements OnInit {
         this.tumbols2$ = this.addressService.getTumbols(amphur);
       }
     }
-  }
-
-  mapFileInfo(fileList: any[]) {
-    return fileList.map((file: any) => {
-      const object = {
-        fileid: file.fileId || null,
-        filename: file.fileName || null,
-      };
-      return object;
-    });
   }
 }
