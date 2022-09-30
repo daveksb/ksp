@@ -30,13 +30,11 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./request-reward-form.component.scss'],
   providers: providerFactory(RequestRewardFormComponent),
 })
-export class RequestRewardFormComponent
-  extends KspFormBaseComponent
-  implements OnInit
-{
+export class RequestRewardFormComponent extends KspFormBaseComponent {
   @Input() osoiTypes: any = [];
   @Input() personTypes: any = [];
   @Input() prefixList: any = [];
+  @Input() uniqueTimeStamp = '';
 
   @Input()
   set memberList(members: MemberForm[]) {
@@ -80,11 +78,6 @@ export class RequestRewardFormComponent
         this.onTouched();
       })
     );
-  }
-
-  ngOnInit(): void {
-    //this.addRow();
-    //
   }
 
   get members() {

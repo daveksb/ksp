@@ -136,3 +136,13 @@ export function getBase64(
 export function formatDate(input: string) {
   return input.split('T')[0];
 }
+
+export function mapFileInfo(fileList: any[]) {
+  return fileList.map((file: any) => {
+    const object = {
+      fileid: file.fileId || null,
+      filename: file.fileName || null,
+    };
+    return object;
+  });
+}
