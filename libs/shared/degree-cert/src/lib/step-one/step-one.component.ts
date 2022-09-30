@@ -34,17 +34,8 @@ export class DegreeCertStepOneComponent
   degreeTypes: ListData[] = [];
   universityTypes: ListData[] = [];
   provinces: ListData[] = [];
-  allowEditInput = {
-    section1: false,
-    section2: false,
-    section3: false,
-    section4: false,
-    section5: false,
-    section6: false,
-  };
-
   @Input() showEditCheckbox = false;
-  @Input() disabledInstitute: boolean = false;
+  @Input() disabledInstitute = false;
 
   @Input() showCoordinatorForm = true;
   @Output() degreeType = new EventEmitter<string>();
@@ -65,6 +56,12 @@ export class DegreeCertStepOneComponent
     locations2: this.fb.array([]),
     coordinator: [],
     courseDetailType: [],
+    section1: [false],
+    section2: [false],
+    section3: [false],
+    section4: [false],
+    section5: [false],
+    section6: [false],
   });
 
   step1Incorrect = [
@@ -104,6 +101,11 @@ export class DegreeCertStepOneComponent
       this.form.reset();
     }
   }
+
+  get allowEditInput() {
+    return this.form.controls;
+  }
+
   loadData(form: any, value: any) {
     _.forEach(value, (value: any, index: any) => {
       if (form?.controls[index]) {

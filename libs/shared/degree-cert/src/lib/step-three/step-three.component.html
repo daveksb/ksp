@@ -3,13 +3,12 @@
     <mat-tab label="การฝึกปฏิบัติวิชาชีพระหว่างเรียน" class="tab-content">
       <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
          <input
-            [(ngModel)]="allowEditInput.section1"
-            [ngModelOptions]="{ standalone: true }"
+           formControlName="section1"
             type="checkbox"
           />
         <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
       </div>
-      <fieldset [disabled]="allowEditInput.section1">
+      <fieldset [disabled]="!allowEditInput?.section1?.value && showEditCheckbox">
 
       <ksp-step-3-training
         formControlName="training"
@@ -20,13 +19,12 @@
     <mat-tab label="การปฏิบัติการสอนในสถานศึกษาในสาขาวิชาเฉพาะ">
       <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
          <input
-            [(ngModel)]="allowEditInput.section2"
-            [ngModelOptions]="{ standalone: true }"
+           formControlName="section2"
             type="checkbox"
           />
         <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
       </div>
-      <fieldset [disabled]="allowEditInput.section2">
+      <fieldset [disabled]="!allowEditInput?.section2?.value && showEditCheckbox">
 
       <ksp-step-3-teaching
         formControlName="teaching"

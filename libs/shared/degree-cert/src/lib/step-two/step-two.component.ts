@@ -20,20 +20,23 @@ export class DegreeCertStepTwoComponent extends KspFormBaseComponent {
     plan1: [{ plans: [], subjects: [] }],
     plan2: [],
     teacher: [],
-    nitet: [{
-      nittetAmount: [0],
-    }],
+    nitet: [
+      {
+        nittetAmount: [0],
+      },
+    ],
     advisor: [],
+    section1: [false],
+    section2: [false],
+    section3: [false],
+    section4: [false],
+    section5: [false],
   });
 
   step2Incorrect = ['ไม่ครบถ้วน และไม่ถูกต้อง', 'หมายเหตุ XXXXXXXXX'];
-  allowEditInput = {
-    section1: false,
-    section2: false,
-    section3: false,
-    section4: false,
-    section5: false,
-  };
+  get allowEditInput() {
+    return this.form.controls;
+  }
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
@@ -53,10 +56,10 @@ export class DegreeCertStepTwoComponent extends KspFormBaseComponent {
   }
   tabChanged($event: MatTabChangeEvent) {
     //console.log('tab index = ', $event.index);
-    if($event.index === 2)
-    this.form.controls.nitet.setValue({
-      nittetAmount:this.minAmount as any,
-    })
+    if ($event.index === 2)
+      this.form.controls.nitet.setValue({
+        nittetAmount: this.minAmount as any,
+      });
     this.tabIndexChanged.emit($event.index);
   }
 }

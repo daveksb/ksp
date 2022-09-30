@@ -22,13 +22,12 @@
       <ng-template #typeA>
         <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
           <input
-            [(ngModel)]="allowEditInput.section1"
-            [ngModelOptions]="{ standalone: true }"
+            formControlName="section1"
             type="checkbox"
           />
           <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
         </div>
-        <fieldset [disabled]="allowEditInput.section1">
+        <fieldset [disabled]="!allowEditInput?.section1?.value && showEditCheckbox">
           <ksp-step-2-tab-1-a
             formControlName="plan1"
             [mode]="mode"
@@ -38,18 +37,16 @@
       <ng-template #typeB>
         <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
           <input
-            [(ngModel)]="allowEditInput.section2"
-            [ngModelOptions]="{ standalone: true }"
+            formControlName="section2"
             type="checkbox"
           />
           <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
         </div>
-        <fieldset [disabled]="allowEditInput.section1">
-
-        <ksp-step-2-tab-1-b
-          formControlName="plan2"
-          [mode]="mode"
-        ></ksp-step-2-tab-1-b>
+        <fieldset [disabled]="!allowEditInput?.section2?.value && showEditCheckbox">
+          <ksp-step-2-tab-1-b
+            formControlName="plan2"
+            [mode]="mode"
+          ></ksp-step-2-tab-1-b>
         </fieldset>
       </ng-template>
     </mat-tab>
@@ -57,54 +54,47 @@
     <mat-tab label="อาจารย์ / ผู้รับผิดชอบประจำหลักสูตร">
       <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
         <input
-            [(ngModel)]="allowEditInput.section3"
-            [ngModelOptions]="{ standalone: true }"
-            type="checkbox"
-          />
+          formControlName="section3"
+          type="checkbox"
+        />
         <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
       </div>
-      <fieldset [disabled]="allowEditInput.section3">
-
-      <ksp-step-2-teacher
-        [mode]="mode"
-        formControlName="teacher"
-      ></ksp-step-2-teacher>
+      <fieldset [disabled]="!allowEditInput?.section3?.value && showEditCheckbox">
+        <ksp-step-2-teacher
+          [mode]="mode"
+          formControlName="teacher"
+        ></ksp-step-2-teacher>
       </fieldset>
     </mat-tab>
 
     <mat-tab label="อาจารย์นิเทศก์">
       <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
-        <input
-            [(ngModel)]="allowEditInput.section4"
-            [ngModelOptions]="{ standalone: true }"
-            type="checkbox"
-          />
+        <input formControlName="section4" type="checkbox" />
         <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
       </div>
-      <fieldset [disabled]="allowEditInput.section4">
-      <ksp-step-2-nitet
-        [mode]="mode"
-        formControlName="nitet"
-        [maxAmount]="100"
-        [minAmount]="minAmount"
-      ></ksp-step-2-nitet>
+      <fieldset [disabled]="!allowEditInput?.section4?.value && showEditCheckbox">
+        <ksp-step-2-nitet
+          [mode]="mode"
+          formControlName="nitet"
+          [maxAmount]="100"
+          [minAmount]="minAmount"
+        ></ksp-step-2-nitet>
       </fieldset>
     </mat-tab>
 
     <mat-tab label="ที่ปรึกษาวิทยานิพนธ์และการค้นคว้าอิสระ">
       <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
         <input
-            [(ngModel)]="allowEditInput.section5"
-            [ngModelOptions]="{ standalone: true }"
-            type="checkbox"
-          />
+          formControlName="section5"
+          type="checkbox"
+        />
         <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
       </div>
-      <fieldset [disabled]="allowEditInput.section5">
-      <ksp-step-2-advisor
-        [mode]="mode"
-        formControlName="advisor"
-      ></ksp-step-2-advisor>
+      <fieldset [disabled]="!allowEditInput?.section5?.value && showEditCheckbox">
+        <ksp-step-2-advisor
+          [mode]="mode"
+          formControlName="advisor"
+        ></ksp-step-2-advisor>
       </fieldset>
     </mat-tab>
   </mat-tab-group>

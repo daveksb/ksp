@@ -5,68 +5,67 @@
 <form [formGroup]="form">
   <div class="bg-white" style="width: auto">
     <fieldset [disabled]="disabledInstitute">
-    <div class="px-3 py-2 mb-3" style="background-color: #f4faff">
-      <div class="box-header">ข้อมูลสถาบัน</div>
-      <div class="row mb-3">
-        <div class="col">
-          <label class="form-label">กลุ่มสถาบัน</label>
-          <select
-            class="search__content form-select"
-            formControlName="institutionsGroup"
-          >
-            <option value="null" selected hidden disabled>กรุณาเลือก</option>
-            <option *ngFor="let item of universityTypes" [value]="item?.value">
-              {{ item.label }}
-            </option>
-          </select>
+      <div class="px-3 py-2 mb-3" style="background-color: #f4faff">
+        <div class="box-header">ข้อมูลสถาบัน</div>
+        <div class="row mb-3">
+          <div class="col">
+            <label class="form-label">กลุ่มสถาบัน</label>
+            <select
+              class="search__content form-select"
+              formControlName="institutionsGroup"
+            >
+              <option value="null" selected hidden disabled>กรุณาเลือก</option>
+              <option
+                *ngFor="let item of universityTypes"
+                [value]="item?.value && showEditCheckbox"
+              >
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col">
+            <label class="form-label">รหัสสถาบัน</label>
+            <select
+              class="search__content form-select"
+              formControlName="institutionsCode"
+            >
+              <option value="null" selected hidden disabled>กรุณาเลือก</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
         </div>
-        <div class="col">
-          <label class="form-label">รหัสสถาบัน</label>
-          <select
-            class="search__content form-select"
-            formControlName="institutionsCode"
-          >
-            <option value="null" selected hidden disabled>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
+        <div class="row mb-3">
+          <div class="col">
+            <label class="form-label">สถาบัน / มหาลัย</label>
+            <input
+              class="form-control"
+              type="text"
+              placeholder="กรุณากรอก"
+              formControlName="institutionsName"
+            />
+          </div>
+          <div class="col">
+            <label class="form-label">จังหวัด</label>
+            <select
+              class="search__content form-select"
+              formControlName="provience"
+            >
+              <option value="null" selected hidden disabled>กรุณาเลือก</option>
+              <option *ngFor="let item of provinces" [value]="item?.value && showEditCheckbox">
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
         </div>
       </div>
-      <div class="row mb-3">
-        <div class="col">
-          <label class="form-label">สถาบัน / มหาลัย</label>
-          <input
-            class="form-control"
-            type="text"
-            placeholder="กรุณากรอก"
-            formControlName="institutionsName"
-          />
-        </div>
-        <div class="col">
-          <label class="form-label">จังหวัด</label>
-          <select
-            class="search__content form-select"
-            formControlName="provience"
-          >
-            <option value="null" selected hidden disabled>กรุณาเลือก</option>
-            <option *ngFor="let item of provinces" [value]="item?.value">
-              {{ item.label }}
-            </option>
-          </select>
-        </div>
-      </div>
-    </div>
-  </fieldset>
+    </fieldset>
     <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
-      <input
-        [(ngModel)]="allowEditInput.section1"
-        [ngModelOptions]="{ standalone: true }"
-        type="checkbox"
-      />
+      <input formControlName="section1" type="checkbox" />
       <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
     </div>
-    <fieldset [disabled]="allowEditInput.section1">
+    <fieldset [disabled]="!allowEditInput?.section1?.value && showEditCheckbox">
       <ksp-degree-info
         [degreeTypes]="degreeTypes"
         (degreeTypeChanged)="onDegreeTypeChanged($event)"
@@ -75,11 +74,7 @@
       ></ksp-degree-info>
     </fieldset>
     <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
-      <input
-        [(ngModel)]="allowEditInput.section2"
-        [ngModelOptions]="{ standalone: true }"
-        type="checkbox"
-      />
+      <input formControlName="section2" type="checkbox" />
       <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
     </div>
 
@@ -93,7 +88,7 @@
             *เลือกข้อมูลของท่านได้เพียง 1 ข้อเท่านั้น</span
           ></label
         >
-        <fieldset [disabled]="allowEditInput.section2">
+        <fieldset [disabled]="!allowEditInput?.section2?.value && showEditCheckbox">
           <div class="col-7">
             <select
               formControlName="courseDetailType"
@@ -114,14 +109,10 @@
     </div>
 
     <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
-      <input
-        type="checkbox"
-        [(ngModel)]="allowEditInput.section3"
-        [ngModelOptions]="{ standalone: true }"
-      />
+      <input type="checkbox" formControlName="section3" />
       <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
     </div>
-    <fieldset [disabled]="allowEditInput.section3">
+    <fieldset [disabled]="!allowEditInput?.section3?.value && showEditCheckbox">
       <div class="bg-light px-3 py-2 mb-3">
         <div class="box-header">สถานที่ที่เปิดสอน</div>
         <ng-container formArrayName="locations">
@@ -152,20 +143,16 @@
         <ksp-add-row-button
           (addRowClick)="addFormArray(locations)"
           *ngIf="mode === 'edit'"
-          [disabled]="allowEditInput.section3"
+          [disabled]="!!allowEditInput?.section3?.value && showEditCheckbox"
           >เพิ่มสถานที่เปิดสอน</ksp-add-row-button
         >
       </div>
     </fieldset>
     <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
-      <input
-        type="checkbox"
-        [(ngModel)]="allowEditInput.section4"
-        [ngModelOptions]="{ standalone: true }"
-      />
+      <input type="checkbox" formControlName="section4" />
       <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
     </div>
-    <fieldset [disabled]="allowEditInput.section4">
+    <fieldset [disabled]="!allowEditInput?.section4?.value && showEditCheckbox">
       <div class="bg-light px-3 py-2 mb-3">
         <div class="box-header">หน่วยงานที่รับผิดชอบหลักสูตร</div>
 
@@ -200,20 +187,16 @@
         <ksp-add-row-button
           (addRowClick)="addFormArray(institutions)"
           *ngIf="mode === 'edit'"
-          [disabled]="allowEditInput.section4"
+          [disabled]="!!allowEditInput?.section4?.value && showEditCheckbox"
           >เพิ่มหน่วยงานที่รับผิดชอบหลักสูตร
         </ksp-add-row-button>
       </div>
     </fieldset>
     <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
-      <input
-        type="checkbox"
-        [(ngModel)]="allowEditInput.section5"
-        [ngModelOptions]="{ standalone: true }"
-      />
+      <input type="checkbox" formControlName="section5" />
       <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
     </div>
-    <fieldset [disabled]="allowEditInput.section5">
+    <fieldset [disabled]="!allowEditInput?.section5?.value && showEditCheckbox">
       <div class="bg-light p-3 mb-3">
         <div class="box-header">
           สถานที่ที่ต้องประเมินสภาพจริง / ติดตามผลเชิงประจักษ์
@@ -248,20 +231,16 @@
         <ksp-add-row-button
           (addRowClick)="addFormArray(locations2)"
           *ngIf="mode === 'edit'"
-          [disabled]="allowEditInput.section5"
+          [disabled]="!!allowEditInput?.section5?.value && showEditCheckbox"
           >เพิ่มสถานที่เปิดสอน</ksp-add-row-button
         >
       </div>
     </fieldset>
     <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
-      <input
-        type="checkbox"
-        [(ngModel)]="allowEditInput.section6"
-        [ngModelOptions]="{ standalone: true }"
-      />
+      <input type="checkbox" formControlName="section6" />
       <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
     </div>
-    <fieldset [disabled]="allowEditInput.section6">
+    <fieldset [disabled]="!allowEditInput?.section6?.value && showEditCheckbox">
       <ksp-degree-cert-coordinator
         formControlName="coordinator"
         [mode]="mode"

@@ -13,11 +13,10 @@ export class DegreeCertStepThreeComponent extends KspFormBaseComponent {
   override form = this.fb.group({
     training: [],
     teaching: [],
+    section1: [false],
+    section2: [false],
   });
-  allowEditInput = {
-    section1: false,
-    section2: false,
-  };
+
   @Input() showEditCheckbox = false;
 
   constructor(private fb: FormBuilder) {
@@ -29,5 +28,8 @@ export class DegreeCertStepThreeComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+  get allowEditInput() {
+    return this.form.controls;
   }
 }
