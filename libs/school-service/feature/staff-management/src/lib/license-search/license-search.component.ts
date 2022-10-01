@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SelfLicense } from '@ksp/shared/constant';
 import { SchoolLicenseService } from '@ksp/shared/service';
 
 @Component({
@@ -20,7 +21,9 @@ export class LicenseSearchComponent {
     //schoolid: [],
   });
 
-  foundItem = false;
+  //foundItem = false;
+
+  foundLicenses: SelfLicense[] = [];
 
   constructor(
     private router: Router,
@@ -48,13 +51,18 @@ export class LicenseSearchComponent {
     this.licenseService.getStaffLicenses(payload).subscribe((res) => {
       console.log('licenses = ', res);
       if (res) {
-        this.foundItem = true;
+        //this.foundItem = true;
+        this.foundLicenses = res;
       }
     });
   }
 
+  concatString(a = '', b = '') {
+    return a + b;
+  }
+
   clear() {
-    this.foundItem = false;
+    //this.foundItem = false;
   }
 
   goToDetail() {

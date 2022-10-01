@@ -91,11 +91,13 @@
 
     <div *ngIf="rewardType.value">
       <div class="d-flex justify-content-center my-3">
+        <button type="button" *ngIf="requestId" (click)="cancel()" class="ms-3 btn border-primary text-primary">
+          ยกเลิกใบคำขอ
+        </button>
         <button
           (click)="tempSave()"
           type="button"
-          class="btn border-primary text-primary bg-white"
-        >
+          class="ms-3 btn border-primary text-primary bg-white">
           บันทึกชั่วคราว
         </button>
         <button (click)="save()" type="button" class="ms-3 btn btn-primary">

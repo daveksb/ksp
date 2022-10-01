@@ -237,4 +237,26 @@ export class RenewLicenseSchoolManagerComponent
       this.disableNextButton = false; //!this.form.valid;
     });
   }
+
+  onSave(currentProcess: number) {
+    this.currentProcess = currentProcess;
+    this.save();
+  }
+
+  override onCompleted(forbidden: any) {
+    const payload = this.createRequest(forbidden, this.currentProcess);
+    const request = this.requestId
+      ? this.requestService.updateRequest.bind(this.requestService)
+      : this.requestService.createRequest.bind(this.requestService);
+    request(payload).subscribe((res) => {
+      console.log('request result = ', res);
+      if (res.returncode === '00') {
+        if (this.currentProcess === 2) {
+          this.router.navigate(['/license', 'payment-channel']);
+        } else {
+          this.router.navigate(['/home']);
+        }
+      }
+    });
+  }
 }

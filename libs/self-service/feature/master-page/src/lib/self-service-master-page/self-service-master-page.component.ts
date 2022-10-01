@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MenuConfig } from '@ksp/shared/interface';
 import { SharedMenuModule, TopNavComponent } from '@ksp/shared/menu';
+import { thaiDate } from '@ksp/shared/utility';
+import localForage from 'localforage';
 
 @Component({
   templateUrl: './self-service-master-page.component.html',
@@ -12,9 +14,15 @@ import { SharedMenuModule, TopNavComponent } from '@ksp/shared/menu';
 })
 export class SelfServiceMasterPageComponent {
   menuConfig: MenuConfig[];
+  myName = '';
+  lastLogin = '';
 
   constructor() {
     this.menuConfig = menu;
+    localForage.getItem('my-info').then((res: any) => {
+      this.myName = res.firstnameth + ' ' + res.lastnameth;
+      this.lastLogin = thaiDate(new Date(res.lastlogintime as string));
+    });
   }
 }
 

@@ -1,5 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortable, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -16,7 +17,7 @@ import { getCookie, thaiDate } from '@ksp/shared/utility';
   templateUrl: './self-service-home-page.component.html',
   styleUrls: ['./self-service-home-page.component.scss'],
 })
-export class SelfServiceHomePageComponent {
+export class SelfServiceHomePageComponent implements AfterViewInit {
   badgeTitle = [
     `เลขที่ใบคำขอ : SF_010641000123 รายการขอขึ้นทะเบียนใบอนุญาต ถูกส่งคืน
   “ปรับแก้ไข / เพิ่มเติม” กดเพื่อตรวจสอบ`,
@@ -24,6 +25,7 @@ export class SelfServiceHomePageComponent {
 
   dataSource = new MatTableDataSource<SelfRequest>();
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private router: Router,
@@ -39,6 +41,9 @@ export class SelfServiceHomePageComponent {
 
   displayedColumns: string[] = column;
 
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
   search() {
     const payload = {
       staffid: getCookie('userId'),

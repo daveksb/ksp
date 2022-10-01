@@ -7,7 +7,7 @@ import { SelfServiceLoginService } from './self-service-login.service';
 import { setCookie } from '@ksp/shared/utility';
 import { MyInfoService } from '@ksp/shared/service';
 import { switchMap } from 'rxjs';
-
+import localForage from 'localforage';
 @Component({
   templateUrl: './self-service-thai-login.component.html',
   styleUrls: ['./self-service-thai-login.component.css'],
@@ -34,9 +34,8 @@ export class SelfServiceThaiLoginComponent {
 
   login() {
     this.loginService.validateLogin(this.form.value).subscribe((res) => {
-      //if (res.returnCode == 99) return;
       if (res && res.id && res.usertoken) {
-        this.loginService.myInfo = res;
+        localForage.setItem('my-info', res);
         setCookie('userToken', res.usertoken, 1);
         setCookie('userId', res.id, 1);
         this.router.navigate(['/home']);
