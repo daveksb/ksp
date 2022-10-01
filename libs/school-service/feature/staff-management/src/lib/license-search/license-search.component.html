@@ -73,15 +73,7 @@
     <div class="d-flex flex-column mt-4 gap-4" *ngIf="foundLicenses.length">
       <ng-container *ngFor="let license of foundLicenses">
         <ksp-license-info
-          [licenseNo]="license.licenseno"
-          [careerType]="license.careertype"
-          [idCardNo]="license.idcardno"
-          [licenseType]="license.licensetype"
-          [thaiName]="license.firstnameth"
-          [enName]="license.firstnameen"
-          [birthDate]="'xxxx'"
-          [licenseStartDate]="license.licensestartdate"
-          [licenseEndDate]="license.licenseenddate"
+          [license]="license"
           [isLicenseRevoked]="true"
         ></ksp-license-info>
       </ng-container>

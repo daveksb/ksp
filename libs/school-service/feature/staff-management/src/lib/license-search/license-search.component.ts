@@ -57,6 +57,10 @@ export class LicenseSearchComponent {
     });
   }
 
+  concatString(a = '', b = '') {
+    return a + b;
+  }
+
   clear() {
     //this.foundItem = false;
   }

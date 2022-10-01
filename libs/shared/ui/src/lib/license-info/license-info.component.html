@@ -25,15 +25,15 @@
       </div>
 
       <div class="col-6 ps-3 pe-0 text__size">
-        <div>{{ licenseNo }}</div>
-        <div>{{ careerType }}</div>
-        <div>{{ idCardNo }}</div>
-        <div>{{ licenseType }}</div>
-        <div>{{ thaiName }}</div>
-        <div>{{ enName }}</div>
-        <div>{{ birthDate }}</div>
-        <div>{{ licenseStartDate }}</div>
-        <div>{{ licenseEndDate }}</div>
+        <div>{{ license?.licenseno }}</div>
+        <div>{{ license?.careertype }}</div>
+        <div>{{ license?.idcardno }}</div>
+        <div>{{ license?.licensetype }}</div>
+        <div>{{ license?.firstnameth }} {{ license?.lastnameth }}</div>
+        <div>{{ license?.firstnameen }} {{ license?.firstnameen }}</div>
+        <div>xxxx</div>
+        <div>{{ license?.licensestartdate | date }}</div>
+        <div>{{ license?.licenseenddate | date }}</div>
       </div>
     </div>
   </div>
