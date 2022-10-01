@@ -22,7 +22,7 @@
       *ngFor="let transferForm of standards.controls; let i = index"
     >
       <ng-container [formGroupName]="i">
-        <div class="bg-light py-2 px-3">
+        <div class="bg-light py-2 px-3 mt-3">
           <div class="d-flex justify-content-between">
             <div class="form-label pb-3">มาตรฐานความรู้ที่ {{ i + 1 }}</div>
             <i
@@ -71,7 +71,7 @@
                     </div>
                   </div>
 
-                  <div class="row">
+                  <div class="row mb-2">
                     <div class="col-md">
                       <label class="form-label">คำอธิบาย</label>
                       <textarea
@@ -81,18 +81,17 @@
                       ></textarea>
                     </div>
                   </div>
-
-                  <div class="d-flex justify-content-end mt-3">
-                    <ksp-add-row-button
-                      [classList]="'text-primary'"
-                      (addRowClick)="addSubject(i)"
-                      >เพิ่มวิชาเพื่อเทียบโอน</ksp-add-row-button
-                    >
-                  </div>
                 </div>
               </ng-container>
             </ng-container>
           </ng-container>
+          <div class="d-flex justify-content-end mt-3">
+            <ksp-add-row-button
+              [classList]="'text-primary'"
+              (addRowClick)="addSubject(i)"
+              >เพิ่มวิชาเพื่อเทียบโอน</ksp-add-row-button
+            >
+          </div>
         </div>
       </ng-container>
     </ng-container>

@@ -23,31 +23,10 @@
   content: url('/assets/images/line.png');
 }
 
-/* @media only screen and (max-width: 992px) {
-  .bg-image {
-    background-image: url('/assets/images/BG-secondary.png');
-    background-size: cover;
-    background-position: center;
-    height: 100%;
-  }
+.support__label {
+  bottom: 0;
+  position: fixed;
 }
-
-@media only screen and (max-width: 768px) {
-  .bg-image {
-    background-image: url('/assets/images/BG-mobile.png');
-    background-size: cover;
-    background-position: top;
-    height: 100%;
-  }
-}
-
-@media only screen and (max-width: 576px) {
-  .bg-image {
-    background-image: url('/assets/images/BG-mobile.png');
-    background-size: cover;
-    height: 100%;
-  }
-} */
 
 /* device  responsive*/
 @media only screen and (max-width: 992px) {
@@ -65,6 +44,11 @@
 
   .img__content {
     width: 225px;
+  }
+
+  .support__label {
+    bottom: 0;
+    position: relative;
   }
 }
 
@@ -89,6 +73,11 @@
   .img__content {
     width: 175px;
   }
+
+  .support__label {
+    bottom: 0;
+    position: relative;
+  }
 }
 
 @media only screen and (max-width: 576px) {
@@ -96,5 +85,10 @@
     background-image: url('/assets/images/BG-mobile.png');
     background-size: cover;
     height: 100%;
+  }
+
+  .support__label {
+    bottom: 0;
+    position: fixed;
   }
 }
