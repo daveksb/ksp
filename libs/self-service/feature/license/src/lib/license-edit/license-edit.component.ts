@@ -258,6 +258,58 @@ export class LicenseEditComponent implements OnInit {
       }
     });
   }
+
+  onCancel() {
+    if (this.requestId) {
+      this.cancel();
+    } else {
+      this.navigateBack();
+    }
+  }
+
+  cancel() {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: `คุณต้องการยกเลิกรายการใบคำขอ
+        ใช่หรือไม่? `,
+      },
+    });
+
+    confirmDialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.cancelRequest();
+      }
+    });
+  }
+
+  cancelRequest() {
+    const payload = {
+      id: `${this.requestId}`,
+      requeststatus: '0',
+    };
+
+    this.requestService.cancelRequest(payload).subscribe((res) => {
+      //console.log('Cancel request  = ', res);
+      this.cancelCompleted();
+    });
+  }
+
+  cancelCompleted() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      width: '350px',
+      data: {
+        header: `ยกเลิกใบคำขอสำเร็จ`,
+        buttonLabel: 'กลับสู่หน้าหลัก',
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/home']);
+      }
+    });
+  }
 }
 
 export type controlName =

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmDialogComponent } from '@ksp/shared/dialog';
+import {
+  CompleteDialogComponent,
+  ConfirmDialogComponent,
+} from '@ksp/shared/dialog';
 import { FormBuilder } from '@angular/forms';
 import {
   SelfServiceRequestSubType,
@@ -101,13 +104,11 @@ export class RenewLicenseForeignComponent implements OnInit {
 
     if (data.eduinfo) {
       const eduInfo = parseJson(data.eduinfo);
-      console.log(eduInfo);
       this.eduInfo = eduInfo;
     }
 
     if (data.fileinfo) {
       const fileInfo = parseJson(data.fileinfo);
-      console.log(fileInfo);
       const { documentfiles, academicfiles } = fileInfo;
       this.documentFiles = documentfiles;
       this.academicFiles = academicfiles;
@@ -120,14 +121,12 @@ export class RenewLicenseForeignComponent implements OnInit {
 
     if (data.checkprohibitproperty) {
       const personalDeclaration = parseJson(data.checkprohibitproperty);
-      console.log(personalDeclaration);
       this.personalDeclaration = personalDeclaration;
     }
   }
 
   getMyInfo() {
     this.myInfoService.getMyInfo().subscribe((res) => {
-      console.log(res);
       this.patchUserInfo(res);
       this.patchAddress(parseJson(res.addressinfo), res.phone, res.email);
       if (res.schooladdrinfo) {
@@ -175,7 +174,7 @@ export class RenewLicenseForeignComponent implements OnInit {
     this.workplaceInfo = {
       addressName: data.schoolname,
       addressForm: {
-        houseNo: data.houseNo,
+        houseNo: data.houseno,
         alley: data.alley,
         road: data.road,
         postcode: data.postcode,
@@ -290,5 +289,49 @@ export class RenewLicenseForeignComponent implements OnInit {
     console.log(payload);
 
     return payload;
+  }
+
+  onCancelRequest() {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: `คุณต้องการยกเลิกรายการใบคำขอ
+        ใช่หรือไม่? `,
+      },
+    });
+
+    confirmDialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.cancelRequest();
+      }
+    });
+  }
+
+  cancelRequest() {
+    const payload = {
+      id: `${this.requestId}`,
+      requeststatus: '0',
+    };
+
+    this.requestService.cancelRequest(payload).subscribe((res) => {
+      //console.log('Cancel request  = ', res);
+      this.cancelCompleted();
+    });
+  }
+
+  cancelCompleted() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      width: '350px',
+      data: {
+        header: `ยกเลิกใบคำขอสำเร็จ`,
+        buttonLabel: 'กลับสู่หน้าหลัก',
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/home']);
+      }
+    });
   }
 }
