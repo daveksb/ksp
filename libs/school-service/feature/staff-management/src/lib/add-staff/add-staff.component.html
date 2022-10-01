@@ -77,12 +77,14 @@
 
         <mat-tab label="วุฒิทางการศึกษา">
           <ksp-form-education-info
+            [showGradeInput]="true"
             formControlName="edu1"
             [showSelectDegree]="true"
             [countries]="countries$ | async"
           ></ksp-form-education-info
           ><br />
           <ksp-form-education-info
+            [showGradeInput]="true"
             formControlName="edu2"
             [showSelectDegree]="true"
             [countries]="countries$ | async"

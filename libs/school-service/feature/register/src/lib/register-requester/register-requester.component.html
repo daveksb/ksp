@@ -41,7 +41,9 @@
           [nationList]="nationalitys$ | async"
           [displayMode]="[userInfoFormdisplayMode]"
         ></ksp-form-user-info> -->
+
         <ksp-form-coordinator-info
+          [positionLabel]="'ตำแหน่งทางการบริหาร'"
           formControlName="requester"
           [isDarkMode]="false"
           [mode]="mode"

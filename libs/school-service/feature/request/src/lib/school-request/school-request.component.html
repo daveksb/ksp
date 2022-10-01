@@ -27,20 +27,20 @@
         </div>
 
         <!-- *ngIf="!requestId || requestSubType !== 5" -->
-        <div class="row mb-3" *ngIf="!requestId && requestSubType !== 5">
+        <div class="row mb-2" *ngIf="!requestId && requestSubType !== 5">
           <div class="col-5">
             <label class="form-label">หมายเลขบัตรประชาชน</label>
             <input
-              class="form-control form-search"
+              class="form-control"
               type="text"
               placeholder="หมายเลขบัตรประชาชนจำนวน 13 หลัก"
               #idcard
             />
           </div>
-          <div class="col-auto mt-4">
+          <div class="col-1 mt-4">
             <button
               type="button"
-              class="btn btn-primary w-auto"
+              class="btn btn-primary w-100"
               (click)="searchStaffFromIdCard(idcard.value)"
             >
               ค้นหา
@@ -265,7 +265,8 @@
                     placeholder="โปรดระบุ"
                   ></textarea>
                 </div></div></ng-container
-          ></ng-container>
+            ><br
+          /></ng-container>
 
           <ng-container *ngIf="requestSubType === 5">
             <div class="d-flex align-items-center mt-3">
@@ -274,9 +275,9 @@
             </div>
             <ng-container *ngIf="Option6$ | async">
               <ksp-form-education-info-manager></ksp-form-education-info-manager></ng-container
-          ></ng-container>
+            ><br
+          /></ng-container>
 
-          <br />
           <ksp-form-attachment
             [pageType]="pageType.educationTab"
             [uniqueTimestamp]="uniqueTimestamp"

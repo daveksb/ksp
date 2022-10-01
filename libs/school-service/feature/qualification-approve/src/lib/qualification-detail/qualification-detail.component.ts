@@ -31,11 +31,19 @@ import { v4 as uuidv4 } from 'uuid';
 export class QualificationDetailComponent implements OnInit {
   uniqueTimestamp!: string;
 
+  option1 = this.fb.control(false);
+  option2 = this.fb.control(false);
+  option3 = this.fb.control(false);
+  option4 = this.fb.control(false);
+
   form = this.fb.group({
     userInfo: [],
     addr1: [],
     addr2: [],
     education: [],
+    edu2: [],
+    edu3: [],
+    edu4: [],
   });
   requestNumber = '';
   userInfoFormdisplayMode: number = UserInfoFormType.thai;
@@ -108,6 +116,20 @@ export class QualificationDetailComponent implements OnInit {
     private requestService: RequestService,
     private route: ActivatedRoute
   ) {}
+
+  get Option1$() {
+    return this.option1.valueChanges;
+  }
+  get Option2$() {
+    return this.option2.valueChanges;
+  }
+  get Option3$() {
+    return this.option3.valueChanges;
+  }
+  get Option4$() {
+    return this.option4.valueChanges;
+  }
+
   ngOnInit(): void {
     this.uniqueTimestamp = uuidv4();
     this.getListData();

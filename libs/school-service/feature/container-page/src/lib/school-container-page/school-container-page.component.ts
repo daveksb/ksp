@@ -96,7 +96,7 @@ export const menu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/display.svg',
     label: 'กิจกกรมพัฒนาตนเอง (หนังสืออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาต)',
-    path: '/activity',
+    path: '/activity/list',
   },
   {
     icon: 'assets/images/icon-sidenav/file-earmark-text-fill.svg',
