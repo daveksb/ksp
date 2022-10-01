@@ -26,6 +26,7 @@ export class FormUserInfoComponent
   @Input() visaTypeList: any[] = [];
   @Input() isSchoolService = true;
   @Input() displayMode!: number[];
+  @Input() isqualification = false;
 
   RequestTypeEnum = SchoolRequestType;
   validatorMessages = validatorMessages;
@@ -87,6 +88,8 @@ export class FormUserInfoComponent
     }
 
     const en = { prefixen: prefix };
+    const th = { prefixth: prefix };
+    this.form.patchValue(th);
     this.form.patchValue(en);
   }
 

@@ -3,10 +3,12 @@
 <form [formGroup]="form">
   <div class="container-fluid bg-secondary bg-opacity-10 pb-3">
     <div class="container-xl px-0 pt-2">
-      <div class="box-header">รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ</div>
+      <div class="box-header">
+        รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ (ผู้ประสานงาน / ผู้รับผิดชอบ)
+      </div>
     </div>
 
-    <div class="bg-white container-xl py-2">
+    <div class="bg-white container-xl py-2 px-4">
       <ksp-request-header-info
         [requestDate]="requestDate"
         [requestNumber]="requestNumber"
@@ -25,8 +27,8 @@
           [title]="'กรุณาเลือกหน่วยงาน/สถานศึกษาที่ท่านสังกัด'"
           [label1]="'สังกัด'"
           [label2]="'โรงเรียน / สถานศึกษา'"
-          [schoolName]="school?.schoolName"
-          [bureauName]="school?.bureauName"
+          [schoolName]="school?.schoolname"
+          [bureauName]="school?.bureauname"
         ></ksp-university-select>
       </div>
 
@@ -55,6 +57,7 @@
 
       <div class="my-4">
         <ksp-form-attachment
+          [classList]="'text-primary'"
           [title]="'กรุณาแนบหลักฐานเพื่อการพิจารณา'"
           [requestType]="1"
           [groups]="uploadFileList"
@@ -63,14 +66,12 @@
       </div>
 
       <ksp-bottom-nav
-        [isLastPage]="true"
         [showCenterButtons]="true"
-        [showSaveButton]="true"
-        [showCancelButton]="true"
-        [disableSaveButton]="form.invalid"
+        [showSaveButton]="false"
+        [showCancelButton]="false"
+        [disableNext]="form.invalid"
         (prevClicked)="back()"
-        (saveClicked)="save()"
-        (cancelClicked)="cancel()"
+        (nextClicked)="save()"
         [disableCancelButton]="false"
       ></ksp-bottom-nav>
     </div>

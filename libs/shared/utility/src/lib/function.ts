@@ -62,7 +62,7 @@ export function toLowercaseProp(input: any) {
 export function applyClientFilter(data: SchoolRequest[], searchParams: any) {
   //
   const { requesttype, ...param } = searchParams;
-  console.log('param = ', param);
+  //console.log('param = ', param);
   return data.filter((d) => {
     const filter1 = param.requestno
       ? d.requestno?.includes(param.requestno)
@@ -135,4 +135,14 @@ export function getBase64(
  */
 export function formatDate(input: string) {
   return input.split('T')[0];
+}
+
+export function mapFileInfo(fileList: any[]) {
+  return fileList.map((file: any) => {
+    const object = {
+      fileid: file.fileId || null,
+      filename: file.fileName || null,
+    };
+    return object;
+  });
 }

@@ -1,257 +1,225 @@
-<form [formGroup]="form">
-  <div class="box-header">
-    รายละเอียดใบคำขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One
-    Innovation : OSOI)
-  </div>
+<div [formGroup]="form" class="bg-white">
+  <div class="box-header mb-2">ข้อมูลผลงานหนึ่งโรงเรียนหนึ่งนวัตกรรม</div>
 
-  <div class="bg-white py-3 px-4">
-    <div>
-      <ksp-request-header-info
-        [requestDate]="today"
-        [requestNumber]="requestNo"
-      ></ksp-request-header-info>
-      <hr />
-      <div class="bg-white">
-        <div class="box-header mb-2">ข้อมูลผลงานหนึ่งโรงเรียนหนึ่งนวัตกรรม</div>
-
-        <div class="row mb-2">
-          <div class="col">
-            <label class="form-label required"
-              >ชื่อผลงานหนึ่งโรงเรียนหนึ่งนวัตกรรม</label
-            >
-            <textarea
-              class="form-control"
-              rows="3"
-              formControlName="rewardname"
-            ></textarea>
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <div class="col-6">
-            <label class="form-label required"
-              >ประเภทผลงานหนึ่งโรงเรียนหนึ่งนวัตกรรม</label
-            >
-            <select class="form-select" formControlName="rewardtype">
-              <option value="null" selected hidden disabled>กรุณาเลือก</option>
-              <option *ngFor="let osoi of osoiTypes" [value]="osoi.id">
-                {{ osoi.name }}
-              </option>
-            </select>
-          </div>
-        </div>
-
-        <div class="bg-light py-2 px-3 mb-3">
-          <div class="box-header required">
-            การส่งผลงานหนึ่งโรงเรียนหนึ่งนวัตกรรม
-          </div>
-
-          <ng-container *ngFor="let item of rewards"
-            ><div class="d-flex flex-row align-items-center mb-2">
-              <input
-                class="form-check-input m-0"
-                formControlName="submitbefore"
-                type="radio"
-                value="{{ item.value }}"
-              />
-              <label class="form-label ms-2">{{ item.label }}</label>
-            </div>
-          </ng-container>
-        </div>
-
-        <div class="box-header mb-2">ผู้ร่วมพัฒนาผลงานนวัตกรรม</div>
-        <!-- <div class="form-label text-black">ผู้บริหารสถานศึกษา</div>
-        <div class="mb-3">
-          <table class="table table-responsive">
-            <thead class="header__table">
-              <tr>
-                <th scope="col">ลำดับ</th>
-                <th scope="col">เลขบัตรประจำตัวประชาชน</th>
-                <th scope="col" colspan="3" class="text-center">
-                  ชื่อ-นามสกุล (ภาษาไทย)
-                </th>
-                <th scope="col">เบอร์โทรศัพท์มือถือ</th>
-                <th scope="col">อีเมล</th>
-                <th scope="col">วิทยฐานะ</th>
-              </tr>
-            </thead>
-            <tbody class="body__table">
-              <tr>
-                <td class="text-center">1</td>
-                <td>
-                  <input
-                    type="text"
-                    class="form-control"
-                    formControlName="personId"
-                  />
-                </td>
-                <td style="width: 125px">
-                  <select class="form-select" formControlName="prefix">
-                    <option value="null" selected hidden disabled>เลือก</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    class="form-control"
-                    formControlName="firstName"
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    class="form-control"
-                    formControlName="lastName"
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    class="form-control"
-                    formControlName="phone"
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    class="form-control"
-                    formControlName="email"
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    class="form-control"
-                    formControlName="academicStanding"
-                  />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div> -->
-
-        <div class="form-label">คณะผู้ร่วมพัฒนาผลงานนวัตกรรม</div>
-        <div class="table-responsive">
-          <table class="table mb-2">
-            <thead>
-              <tr>
-                <th scope="col">ลำดับ</th>
-                <th scope="col">ประเภทผู้ร่วมพัฒนา</th>
-                <th scope="col">เลขบัตรประจำตัวประชาชน</th>
-                <th scope="col" colspan="3" class="text-center">
-                  ชื่อ-นามสกุล (ภาษาไทย)
-                </th>
-                <th scope="col">เบอร์โทรศัพท์มือถือ</th>
-                <th scope="col">อีเมล</th>
-                <th scope="col">วิทยฐานะ</th>
-              </tr>
-            </thead>
-            <tbody>
-              <ng-container formArrayName="osoimember">
-                <ng-container
-                  *ngFor="let row of members.controls; let i = index"
-                >
-                  <tr [formGroupName]="i">
-                    <th class="text-center">{{ i + 1 }}</th>
-                    <td>
-                      <select class="form-select" formControlName="membertype">
-                        <option value="null" selected hidden disabled>
-                          กรุณาเลือก
-                        </option>
-                        <option *ngFor="let p of personTypes" [value]="p.id">
-                          {{ p.name }}
-                        </option>
-                      </select>
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        class="form-control"
-                        formControlName="idcardno"
-                      />
-                    </td>
-                    <td>
-                      <select class="form-select" formControlName="prefix">
-                        <option value="null" selected hidden disabled>
-                          เลือก
-                        </option>
-                        <option
-                          *ngFor="let prefix of prefixList"
-                          [value]="prefix.id"
-                        >
-                          {{ prefix?.name_th }}
-                        </option>
-                      </select>
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        class="form-control"
-                        formControlName="firstname"
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        class="form-control"
-                        formControlName="lastname"
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        class="form-control"
-                        formControlName="phone"
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        class="form-control"
-                        formControlName="email"
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        class="form-control"
-                        formControlName="academicstanding"
-                      />
-                    </td>
-                  </tr>
-                </ng-container>
-              </ng-container>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="mb-3" *ngIf="mode === 'edit'">
-          <ksp-add-row-button
-            class="blue"
-            (addRowClick)="addRow()"
-            *ngIf="members.length < 5"
-            >เพิ่มรายชื่อ</ksp-add-row-button
-          >
-        </div>
-
-        <div class="mb-3">
-          <ksp-form-attachment
-            [mode]="mode"
-            title="กรุณาแนบหลักฐาน "
-            [groups]="rewardFiles"
-            [titleNote]="
-              '* กรุณาอัพโหลดไฟล์ .pdf และขนาดไม่เกิน 10 MB สามารถอัพโหลดไฟล์ได้มากกว่า 1 ไฟล์ต่อรายการ'
-            "
-          ></ksp-form-attachment>
-        </div>
-
-        <div class="box-header text-primary">VDO ประกอบการขอรางวัล</div>
-        <div class="form-label">ลิงก์ (youtube)</div>
-        <input class="form-control" type="url" formControlName="vdolink" />
-      </div>
+  <div class="row mb-2">
+    <div class="col">
+      <label class="form-label required"
+        >ชื่อผลงานหนึ่งโรงเรียนหนึ่งนวัตกรรม</label
+      >
+      <textarea
+        class="form-control"
+        rows="3"
+        formControlName="rewardname"
+      ></textarea>
     </div>
   </div>
-</form>
+
+  <div class="row mb-3">
+    <div class="col-6">
+      <label class="form-label required"
+        >ประเภทผลงานหนึ่งโรงเรียนหนึ่งนวัตกรรม</label
+      >
+      <select class="form-select" formControlName="rewardtype">
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option *ngFor="let osoi of osoiTypes" [value]="osoi.id">
+          {{ osoi.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="bg-light py-2 px-3 mb-3">
+    <div class="box-header required">การส่งผลงานหนึ่งโรงเรียนหนึ่งนวัตกรรม</div>
+
+    <ng-container *ngFor="let item of rewards"
+      ><div class="d-flex flex-row align-items-center mb-2">
+        <input
+          class="form-check-input m-0"
+          formControlName="submitbefore"
+          type="radio"
+          value="{{ item.value }}"
+        />
+        <label class="form-label ms-2">{{ item.label }}</label>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="box-header mb-2">ผู้ร่วมพัฒนาผลงานนวัตกรรม</div>
+  <div class="form-label text-black">ผู้บริหารสถานศึกษา</div>
+  <div class="mb-3">
+    <table class="table table-responsive">
+      <thead class="header__table">
+        <tr>
+          <th scope="col">ลำดับ</th>
+          <th scope="col">เลขบัตรประจำตัวประชาชน</th>
+          <th scope="col" colspan="3" class="text-center">
+            ชื่อ-นามสกุล (ภาษาไทย)
+          </th>
+          <th scope="col">เบอร์โทรศัพท์มือถือ</th>
+          <th scope="col">อีเมล</th>
+          <th scope="col">วิทยฐานะ</th>
+        </tr>
+      </thead>
+      <tbody class="body__table">
+        <tr>
+          <td class="text-center">1</td>
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="personId"
+            />
+          </td>
+          <td style="width: 125px">
+            <select class="form-select" formControlName="prefix">
+              <option value="null" selected hidden disabled>เลือก</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </td>
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="firstName"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="lastName"
+            />
+          </td>
+          <td>
+            <input type="text" class="form-control" formControlName="phone" />
+          </td>
+          <td>
+            <input type="text" class="form-control" formControlName="email" />
+          </td>
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="academicStanding"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="form-label">คณะผู้ร่วมพัฒนาผลงานนวัตกรรม</div>
+  <div class="table__scroll">
+    <table class="table mb-2">
+      <thead>
+        <tr>
+          <th scope="col">ลำดับ</th>
+          <th scope="col">ประเภทผู้ร่วมพัฒนา</th>
+          <th scope="col">เลขบัตรประจำตัวประชาชน</th>
+          <th scope="col" colspan="3" class="text-center">
+            ชื่อ-นามสกุล (ภาษาไทย)
+          </th>
+          <th scope="col">เบอร์โทรศัพท์มือถือ</th>
+          <th scope="col">อีเมล</th>
+          <th scope="col">วิทยฐานะ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container formArrayName="osoimember">
+          <ng-container *ngFor="let row of members.controls; let i = index">
+            <tr [formGroupName]="i">
+              <th class="text-center">{{ i + 1 }}</th>
+              <td>
+                <select class="form-select" formControlName="membertype">
+                  <option value="null" selected hidden disabled>
+                    กรุณาเลือก
+                  </option>
+                  <option *ngFor="let p of personTypes" [value]="p.id">
+                    {{ p.name }}
+                  </option>
+                </select>
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="idcardno"
+                />
+              </td>
+              <td>
+                <select class="form-select" formControlName="prefix">
+                  <option value="null" selected hidden disabled>เลือก</option>
+                  <option *ngFor="let prefix of prefixList" [value]="prefix.id">
+                    {{ prefix?.name_th }}
+                  </option>
+                </select>
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="firstname"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="lastname"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="phone"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="email"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="academicstanding"
+                />
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mb-3" *ngIf="mode === 'edit'">
+    <ksp-add-row-button
+      class="blue"
+      (addRowClick)="addRow()"
+      *ngIf="members.length < 5"
+      >เพิ่มรายชื่อ</ksp-add-row-button
+    >
+  </div>
+
+  <div class="mb-3">
+    <ksp-form-attachment
+      [mode]="mode"
+      title="กรุณาแนบหลักฐาน "
+      [groups]="rewardFiles"
+      [uniqueTimestamp]="uniqueTimeStamp"
+      [titleNote]="
+        '* กรุณาอัพโหลดไฟล์ .pdf และขนาดไม่เกิน 10 MB สามารถอัพโหลดไฟล์ได้มากกว่า 1 ไฟล์ต่อรายการ'
+      "
+    ></ksp-form-attachment>
+  </div>
+
+  <div class="box-header text-primary">VDO ประกอบการขอรางวัล</div>
+  <div class="form-label">ลิงก์ (youtube)</div>
+  <input class="form-control" type="url" formControlName="vdolink" />
+</div>

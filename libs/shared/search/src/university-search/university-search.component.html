@@ -15,7 +15,6 @@
       <div class="box-header text-primary">
         {{ data.subHeader || 'กรุณาเลือกสถาบันที่ท่านสังกัด' }}
       </div>
-
       <ksp-basic-institute-search
         formControlName="institution"
         [bureaus]="bureaus$! | async"
@@ -100,10 +99,10 @@
                   />
                 </div>
               </th>
-              <td class="detail__table">{{ item.schoolId }}</td>
-              <td class="detail__table">{{ item.schoolName }}</td>
+              <td class="detail__table">{{ item.schoolid }}</td>
+              <td class="detail__table">{{ item.schoolname }}</td>
               <td class="detail__table">{{ item.addressShow }}</td>
-              <td class="detail__table">{{ item.bureauName }}</td>
+              <td class="detail__table">{{ item.bureauname }}</td>
             </tr>
           </tbody>
           <tbody class="body__table" *ngIf="data.searchType === 'uni'">

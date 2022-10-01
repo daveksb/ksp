@@ -18,19 +18,32 @@ import {
   RequestService,
 } from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { EMPTY, Observable, switchMap } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
 
+@UntilDestroy()
 @Component({
   selector: 'ksp-qualification-detail',
   templateUrl: './qualification-detail.component.html',
   styleUrls: ['./qualification-detail.component.scss'],
 })
 export class QualificationDetailComponent implements OnInit {
+  uniqueTimestamp!: string;
+
+  option1 = this.fb.control(false);
+  option2 = this.fb.control(false);
+  option3 = this.fb.control(false);
+  option4 = this.fb.control(false);
+
   form = this.fb.group({
     userInfo: [],
     addr1: [],
     addr2: [],
     education: [],
+    edu2: [],
+    edu3: [],
+    edu4: [],
   });
   requestNumber = '';
   userInfoFormdisplayMode: number = UserInfoFormType.thai;
@@ -44,20 +57,55 @@ export class QualificationDetailComponent implements OnInit {
   countries$!: Observable<any>;
   nationalitys$!: Observable<any>;
   schoolId = '0010201056';
+
   requestDate = thaiDate(new Date());
+  requestSubType!: number;
   requestId!: number;
+  requestStatus!: number;
+  currentProcess!: number;
+
   otherreason: any;
   refperson: any;
+
   evidenceFiles = [
-    'หนังสือนำส่งจากหน่วยงานผู้ใช้',
-    'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
-    'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
-    'สำเนาทะเบียนบ้าน',
-    'สำเนา กพ.7 / สมุดประจำตัว',
-    'สำเนาหนังสือแจ้งการเทียบคุณวุฒิ (กรณีจบการศึกษาจากต่างประเทศ)',
-    'สำเนาหลักฐานการเปลี่ยนชื่อ นามสกุล',
-    'เอกสารอื่นๆ',
+    {
+      name: 'หนังสือนำส่งจากหน่วยงานผู้ใช้',
+      fileId: '',
+      fileName: '',
+    },
+    {
+      name: 'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
+      fileId: '',
+      fileName: '',
+    },
+    {
+      name: 'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
+      fileId: '',
+      fileName: '',
+    },
+    {
+      name: 'สำเนาทะเบียนบ้าน',
+      fileId: '',
+      fileName: '',
+    },
+    {
+      name: 'สำเนาหนังสือแจ้งการเทียบคุณวุฒิ (กรณีจบการศึกษาจากต่างประเทศ)',
+      fileId: '',
+      fileName: '',
+    },
+    {
+      name: 'สำเนา กพ.7 / สมุดประจำตัว',
+      fileId: '',
+      fileName: '',
+    },
+    {
+      name: 'สำเนาหลักฐานการเปลี่ยนชื่อ นามสกุล',
+      fileId: '',
+      fileName: '',
+    },
+    { name: 'เอกสารอื่นๆ', fileId: '', fileName: '' },
   ];
+
   mode!: FormMode;
   constructor(
     public dialog: MatDialog,
@@ -68,10 +116,27 @@ export class QualificationDetailComponent implements OnInit {
     private requestService: RequestService,
     private route: ActivatedRoute
   ) {}
+
+  get Option1$() {
+    return this.option1.valueChanges;
+  }
+  get Option2$() {
+    return this.option2.valueChanges;
+  }
+  get Option3$() {
+    return this.option3.valueChanges;
+  }
+  get Option4$() {
+    return this.option4.valueChanges;
+  }
+
   ngOnInit(): void {
+    this.uniqueTimestamp = uuidv4();
     this.getListData();
     this.checkRequestId();
+    this.checkRequestSubType();
   }
+
   checkRequestId() {
     this.route.paramMap.subscribe((params) => {
       this.requestId = Number(params.get('id'));
@@ -81,10 +146,22 @@ export class QualificationDetailComponent implements OnInit {
     });
   }
 
+  checkRequestSubType() {
+    this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
+      //this.form.reset();
+      if (Number(params['subtype'])) {
+        this.requestSubType = Number(params['subtype']);
+      }
+    });
+  }
+
   loadRequestData(id: number) {
     this.requestService.getRequestById(id).subscribe((res: any) => {
       if (res) {
         this.requestNumber = res.requestno;
+        this.requestStatus = +res.requeststatus;
+        this.currentProcess = +res.currentprocess;
+        this.requestDate = thaiDate(new Date(`${res.requestdate}`));
         res.birthdate = res.birthdate?.split('T')[0];
         this.form.get('userInfo')?.patchValue(res);
         res.eduinfo = JSON.parse(atob(res.eduinfo));
@@ -156,6 +233,7 @@ export class QualificationDetailComponent implements OnInit {
       !this.form.get('education')?.valid
     );
   }
+
   onSave() {
     const confirmDialog = this.dialog.open(
       QualificationApproveDetailComponent,
@@ -216,9 +294,10 @@ export class QualificationDetailComponent implements OnInit {
             userInfo.ref3 = '1';
             userInfo.systemtype = '2';
             userInfo.requesttype = '6';
-            userInfo.subtype = '1';
+            userInfo.subtype = `${this.requestSubType}`;
             userInfo.schoolid = this.schoolId;
-            userInfo.currentprocess = `1`;
+            userInfo.currentprocess = '1';
+            userInfo.requeststatus = '1';
             const payload = {
               ...userInfo,
               ...{

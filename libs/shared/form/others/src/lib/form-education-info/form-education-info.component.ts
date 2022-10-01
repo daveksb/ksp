@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { UserInfoFormType } from '@ksp/shared/constant';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -35,6 +36,8 @@ export class FormEducationInfoComponent
   @Input() countries: any[] = [];
   @Input() showCheckbox = true;
   @Input() option = false;
+  @Input() userEducationType: any;
+  FormTypeEnum = UserInfoFormType;
 
   /*   _defualtDegree = 0;
   @Input()

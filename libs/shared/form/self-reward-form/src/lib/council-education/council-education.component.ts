@@ -40,6 +40,22 @@ export class CouncilEducationComponent
     });
   }
 
+  override set value(value: any) {
+    Object.keys(value).forEach((key) => {
+      const control = this.form.get(key) as FormArray;
+      value[key].forEach((item: any) =>
+        control.push(
+          this.fb.group({
+            ...item,
+          })
+        )
+      );
+    });
+
+    this.onChange(value);
+    this.onTouched();
+  }
+
   setDefaulFormValue() {
     this.addFormArray(this.licenseInfo1, 1);
     this.addFormArray(this.licenseInfo2, 2);

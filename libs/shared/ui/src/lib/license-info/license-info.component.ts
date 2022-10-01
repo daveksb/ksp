@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { SelfLicense } from '@ksp/shared/constant';
 
 @Component({
   selector: 'ksp-license-info',
@@ -15,9 +16,20 @@ export class LicenseInfoComponent {
   @Input() subTitle1 = 'วันเดือนปีที่ออก';
   @Input() subTitle2 = 'วันเดือนปีที่หมดอายุ';
 
+  @Input() license: SelfLicense | null = null;
+  /*   @Input() licenseNo: string | null = '';
+  @Input() careerType: string | null = '';
+  @Input() idCardNo: string | null = '';
+  @Input() licenseType: string | null = '';
+  @Input() thaiName: string | null = '';
+  @Input() enName: string | null = '';
+  @Input() birthDate: string | null = '';
+  @Input() licenseStartDate: string | null = '';
+  @Input() licenseEndDate: string | null = ''; */
+
   constructor(private router: Router) {}
 
   select() {
-    this.router.navigate(['/', 'staff-management', 'staff-person-info']);
+    this.router.navigate(['/staff-management', 'add-staff']);
   }
 }

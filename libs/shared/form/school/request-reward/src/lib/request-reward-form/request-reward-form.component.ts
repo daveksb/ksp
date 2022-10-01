@@ -14,7 +14,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
-import { providerFactory, thaiDate } from '@ksp/shared/utility';
+import { providerFactory } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-request-reward-form',
@@ -30,14 +30,11 @@ import { providerFactory, thaiDate } from '@ksp/shared/utility';
   styleUrls: ['./request-reward-form.component.scss'],
   providers: providerFactory(RequestRewardFormComponent),
 })
-export class RequestRewardFormComponent
-  extends KspFormBaseComponent
-  implements OnInit
-{
+export class RequestRewardFormComponent extends KspFormBaseComponent {
   @Input() osoiTypes: any = [];
   @Input() personTypes: any = [];
   @Input() prefixList: any = [];
-  @Input() requestNo: string | null = null;
+  @Input() uniqueTimeStamp = '';
 
   @Input()
   set memberList(members: MemberForm[]) {
@@ -72,21 +69,15 @@ export class RequestRewardFormComponent
   ];
 
   rewards = rewards;
-  today = thaiDate(new Date());
 
   constructor(public dialog: MatDialog, private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
         this.onChange(value);
         this.onTouched();
       })
     );
-  }
-
-  ngOnInit(): void {
-    this.addRow();
   }
 
   get members() {

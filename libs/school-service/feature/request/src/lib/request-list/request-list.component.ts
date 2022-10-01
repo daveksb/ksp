@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
 import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
 import { SchoolRequest } from '@ksp/shared/interface';
 import { RequestService } from '@ksp/shared/service';
-import { applyClientFilter } from '@ksp/shared/utility';
 import {
   checkProcess,
   checkRequestType,
@@ -22,6 +21,7 @@ export class SchoolRequestListComponent implements AfterViewInit {
   displayedColumns: string[] = displayedColumns;
   dataSource = new MatTableDataSource<SchoolRequest>();
   SchoolRequestSubType = SchoolRequestSubType;
+  searchNotFound = false;
 
   searchParams: any;
   checkProcess = checkProcess;
@@ -47,12 +47,21 @@ export class SchoolRequestListComponent implements AfterViewInit {
   }
 
   search(filters: any) {
-    //console.log('params = ', params);
+    //console.log('filters = ', filters);
     const payload = {
-      systemtype: '2',
-      requesttype: `${filters.requesttype}`,
       schoolid: `${this.schoolId}`,
+      requesttype: `${filters.requesttype}`,
+      requestno: filters.requestno,
       subtype: filters.subtype,
+      name: filters.firstnameth,
+      idcardno: filters.idcardno,
+      passportno: filters.passportno,
+      currentprocess: filters.currentprocess,
+      requeststatus: filters.requeststatus,
+      createdatefrom: filters.requestdatefrom,
+      createdateto: filters.requestdateto,
+      offset: '0',
+      row: '500',
     };
 
     this.searchParams = payload;
@@ -60,8 +69,8 @@ export class SchoolRequestListComponent implements AfterViewInit {
     this.requestService.searchRequest(payload).subscribe((res) => {
       //console.log('res = ', res);
       if (res && res.length) {
-        const result = applyClientFilter(res, filters);
-        this.dataSource.data = result;
+        this.searchNotFound = false;
+        this.dataSource.data = res;
         this.dataSource.sort = this.sort;
 
         const sortState: Sort = { active: 'id', direction: 'desc' };
@@ -70,12 +79,14 @@ export class SchoolRequestListComponent implements AfterViewInit {
         this.sort.sortChange.emit(sortState);
       } else {
         this.dataSource.data = [];
+        this.searchNotFound = true;
       }
     });
   }
 
   clear() {
     this.form.reset();
+    this.searchNotFound = false;
     this.dataSource.data = [];
   }
 
@@ -91,7 +102,7 @@ export class SchoolRequestListComponent implements AfterViewInit {
         return this.foreignPage(`${requestId}`);
 
       case 6:
-        return this.qualificationPage(`${requestId}`);
+        return this.qualificationPage(requestId, subType);
 
       case 40:
         return this.rewardPage(`${requestId}`);
@@ -106,8 +117,16 @@ export class SchoolRequestListComponent implements AfterViewInit {
     this.router.navigate(['/foreign-teacher', 'id-request', id]);
   }
 
-  qualificationPage(id = '') {
-    this.router.navigate(['/qualification-approve', 'detail', id]);
+  qualificationPage(id: number | null, subType: number) {
+    if (id) {
+      this.router.navigate(['/qualification-approve', 'detail', id], {
+        queryParams: { subtype: subType },
+      });
+    } else {
+      this.router.navigate(['/qualification-approve', 'detail'], {
+        queryParams: { subtype: subType },
+      });
+    }
   }
 
   rewardPage(id = '') {
@@ -116,7 +135,7 @@ export class SchoolRequestListComponent implements AfterViewInit {
 }
 
 export interface TempLicenseInfo {
-  id: number;
+  order: number;
   requestno: string;
   idcardno: string;
   requesttype: string;
@@ -127,8 +146,7 @@ export interface TempLicenseInfo {
 }
 
 export const displayedColumns = [
-  'id',
-  'verify',
+  'order',
   'requestno',
   'idcardno',
   'name',

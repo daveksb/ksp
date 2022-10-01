@@ -21,6 +21,7 @@ export class FormCoordinatorInfoComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+  @Input() positionLabel = 'ตำแหน่ง';
   @Input() isDarkMode = false;
   @Input() prefixList: any[] = [];
   @Input() countryList: any[] = [];
@@ -76,6 +77,26 @@ export class FormCoordinatorInfoComponent
       this.form.controls.email.clearValidators();
     }
   }
+  prefixChanged(evt: any) {
+    const prefix = evt.target?.value;
+
+    if (prefix === '1') {
+      const temp: any = { sex: '1' };
+      this.form.patchValue(temp);
+    } else if (['2', '3', '4', '5'].includes(prefix)) {
+      const temp: any = { sex: '2' };
+      this.form.patchValue(temp);
+    } else {
+      const temp: any = { sex: '3' };
+      this.form.patchValue(temp);
+    }
+
+    const en = { prefixen: prefix };
+    const th = { prefixth: prefix };
+    this.form.patchValue(th);
+    this.form.patchValue(en);
+  }
+
   get idCardNo() {
     return this.form.controls.idcardno;
   }

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SelfLicense } from '@ksp/shared/constant';
+import { SchoolLicenseService } from '@ksp/shared/service';
 
 @Component({
   selector: 'school-service-license-search',
@@ -9,25 +11,58 @@ import { Router } from '@angular/router';
 })
 export class LicenseSearchComponent {
   form = this.fb.group({
-    personId: [],
-    licenseNumber: [],
+    cardno: [],
+    licenseno: [],
     name: [],
-    licenseType: [],
+    licensetype: [],
+    licensestatus: [],
+    offset: ['0'],
+    row: ['100'],
+    //schoolid: [],
   });
 
-  foundItem = false;
-  constructor(private router: Router, private fb: FormBuilder) {}
+  //foundItem = false;
+
+  foundLicenses: SelfLicense[] = [];
+
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private licenseService: SchoolLicenseService
+  ) {}
 
   addStaff() {
     this.router.navigate(['./staff-management', 'add-staff']);
   }
 
   search() {
-    this.foundItem = true;
+    console.log('form = ', this.form.value);
+    const payload = {
+      cardno: null,
+      licenseno: null,
+      name: null,
+      licensetype: null,
+      licensestatus: null,
+      offset: '0',
+      row: '10',
+    };
+    //this.form.value;
+
+    this.licenseService.getStaffLicenses(payload).subscribe((res) => {
+      console.log('licenses = ', res);
+      if (res) {
+        //this.foundItem = true;
+        this.foundLicenses = res;
+      }
+    });
+  }
+
+  concatString(a = '', b = '') {
+    return a + b;
   }
 
   clear() {
-    this.foundItem = false;
+    //this.foundItem = false;
   }
 
   goToDetail() {

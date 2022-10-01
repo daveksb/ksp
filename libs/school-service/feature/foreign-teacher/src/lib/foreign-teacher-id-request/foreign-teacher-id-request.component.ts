@@ -16,6 +16,7 @@ import {
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { thaiDate } from '@ksp/shared/utility';
+import { v4 as uuidv4 } from 'uuid';
 
 @UntilDestroy()
 @Component({
@@ -23,6 +24,8 @@ import { thaiDate } from '@ksp/shared/utility';
   styleUrls: ['./foreign-teacher-id-request.component.scss'],
 })
 export class ForeignTeacherIdRequestComponent implements OnInit {
+  uniqueTimestamp!: string;
+
   form = this.fb.group({
     foreignTeacher: [],
     visainfo: [],
@@ -55,10 +58,13 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       !this.form.get('visainfo')?.valid
     );
   }
+
   ngOnInit(): void {
+    this.uniqueTimestamp = uuidv4();
     this.getList();
     this.checkRequestId();
   }
+
   checkRequestId() {
     this.route.paramMap.subscribe((params) => {
       this.requestId = Number(params.get('id'));
@@ -67,10 +73,12 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       }
     });
   }
+
   loadRequestData(id: number) {
     this.requestService.getRequestById(id).subscribe((res: any) => {
       if (res) {
         this.mode = 'view';
+        this.requestDate = thaiDate(new Date(`${res.requestdate}`));
         this.requestNumber = res.requestno;
         res.birthdate = res.birthdate?.split('T')[0];
         res.passportstartdate = res.passportstartdate?.split('T')[0];
@@ -114,6 +122,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       this.router.navigate(['/temp-license']);
     }
   }
+
   onCancelCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
@@ -130,6 +139,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       }
     });
   }
+
   onClickPrev() {
     if (this.mode == 'view') {
       this.router.navigate(['/temp-license']);
@@ -192,6 +202,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       }
     });
   }
+
   getList() {
     this.schoolInfoService
       .getSchoolInfo(this.schoolId)

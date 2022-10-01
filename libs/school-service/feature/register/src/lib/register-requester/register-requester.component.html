@@ -6,7 +6,7 @@
       <div class="box-header">รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ</div>
     </div>
 
-    <div class="bg-white container-xl py-2">
+    <div class="bg-white container-xl py-2 px-4">
       <ksp-request-header-info
         [requestDate]="requestDate"
         [requestNumber]="requestNumber"
@@ -24,8 +24,8 @@
         [title]="'กรุณาเลือกหน่วยงาน/สถานศึกษาที่ท่านสังกัด'"
         [label1]="'สังกัด'"
         [label2]="'โรงเรียน / สถานศึกษา'"
-        [schoolName]="school?.schoolName"
-        [bureauName]="school?.bureauName"
+        [schoolName]="school?.schoolname"
+        [bureauName]="school?.bureauname"
       ></ksp-university-select>
 
       <div class="bg-light px-4 py-3 my-4">
@@ -33,14 +33,25 @@
           ข้อมูลผู้ขอรหัสสำหรับเข้าใช้งานระบบ
         </div>
 
-        <ksp-form-user-info
+        <!-- <ksp-form-user-info
           formControlName="requester"
           [isDarkMode]="false"
           [mode]="mode"
           [prefixList]="prefixList$ | async"
           [nationList]="nationalitys$ | async"
           [displayMode]="[userInfoFormdisplayMode]"
-        ></ksp-form-user-info>
+        ></ksp-form-user-info> -->
+
+        <ksp-form-coordinator-info
+          [positionLabel]="'ตำแหน่งทางการบริหาร'"
+          formControlName="requester"
+          [isDarkMode]="false"
+          [mode]="mode"
+          [prefixList]="prefixList$ | async"
+          [nationList]="nationalitys$ | async"
+          [displayMode]="[userInfoFormdisplayMode]"
+          [isSchoolService]="false"
+        ></ksp-form-coordinator-info>
       </div>
       <ksp-bottom-nav
         [disableNext]="form.invalid"

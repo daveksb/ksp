@@ -30,7 +30,19 @@ export class ResearchRewardComponent
       if (value) {
         this.amphurs$ = this.addressService.getAmphurs(value.province);
         this.tumbols$ = this.addressService.getTumbols(value.district);
+        const { phone, fax, email, website } = value || {
+          phone: '',
+          fax: '',
+          email: '',
+          website: '',
+        };
         this.form.controls.workplace.patchValue(value);
+        this.form.patchValue({
+          phone,
+          fax,
+          email,
+          website,
+        });
       }
     }, 0);
   }

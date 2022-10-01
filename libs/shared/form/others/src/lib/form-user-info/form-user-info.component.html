@@ -18,6 +18,7 @@
         class="form-control"
         type="text"
         formControlName="idcardno"
+        placeholder="หมายเลขประชาชนจำนวน 13 หลัก"
       />
       <ng-container
         *ngIf="idCardNo.invalid && (idCardNo.dirty || idCardNo.touched)"
@@ -28,7 +29,7 @@
       </ng-container>
     </div>
 
-    <div class="col mb-2" *ngIf="false">
+    <div class="col mb-2" *ngIf="isqualification">
       <label class="form-label">ประเภทการยื่น</label>
       <select
         class="form-select"
@@ -86,7 +87,7 @@
         formControlName="prefixth"
         (change)="prefixChanged($event)"
       >
-        <option value="null">กรุณาเลือก</option>
+        <option disabled hidden selected value="null">กรุณาเลือก</option>
         <option *ngFor="let prefix of prefixList" [value]="prefix.id">
           {{ prefix?.name_th }}
         </option>
@@ -153,6 +154,7 @@
         [class.bg-white]="!isDarkMode && mode === 'edit'"
         class="form-select"
         formControlName="prefixen"
+        (change)="prefixChanged($event)"
       >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let prefix of prefixList" [value]="prefix.id">
@@ -314,7 +316,7 @@
         }}</span>
       </ng-container>
     </div>
-    <div class="col-md-6 mb-2" *ngIf="false">
+    <div class="col-md-6 mb-2" *ngIf="isqualification">
       <label class="form-label required">ตำแหน่ง</label>
       <input
         class="form-control"
@@ -333,7 +335,7 @@
         [class.bg-white]="!isDarkMode && mode === 'edit'"
         formControlName="visaclass"
       >
-        <option value="null" selected disabled>กรุณาเลือก</option>
+        <option value="null" hidden selected disabled>กรุณาเลือก</option>
         <option *ngFor="let v of visaClassList" [value]="v.id">
           {{ v.name }}
         </option>
@@ -360,7 +362,7 @@
     </div>
   </div>
 
-  <div class="row" *ngIf="false">
+  <div class="row" *ngIf="isqualification">
     <div class="col-6 mb-2">
       <label class="form-label required">สัญชาติ</label>
       <select

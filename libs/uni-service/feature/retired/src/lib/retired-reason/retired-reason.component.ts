@@ -34,12 +34,15 @@ export class RetiredReasonComponent implements OnInit {
     localForage.getItem('userSelectedData').then((res:any) => {
       if (res) {
         this.userInfo = res;
-        this.userInfo.nameth = this.userInfo.prefixth ? this.userInfo.prefixth + ' ' : '' 
-                               + this.userInfo.firstnameth ? this.userInfo.firstnameth + ' ' : '' 
-                               + this.userInfo.lastnameth ? this.userInfo.lastnameth : '';
-        this.userInfo.nameen = this.userInfo.prefixen ? this.userInfo.prefixen + ' ' : '' 
-                               + this.userInfo.firstnameen ? this.userInfo.firstnameen + ' ' : '' 
-                               + this.userInfo.lastnameen ? this.userInfo.lastnameen : '';
+        this.userInfo.nameth = `${this.userInfo.prefixth ? this.userInfo.prefixth + ' ' : ''}`+
+                               `${this.userInfo.firstnameth ? this.userInfo.firstnameth + ' ' : ''}` +
+                               `${this.userInfo.lastnameth ? this.userInfo.lastnameth : ''}`;
+        this.userInfo.nameen = `${this.userInfo.prefixen ? this.userInfo.prefixen + ' ' : ''}`+
+                               `${this.userInfo.firstnameen ? this.userInfo.firstnameen + ' ' : ''}` +
+                               `${this.userInfo.lastnameen ? this.userInfo.lastnameen : ''}`;
+        if (this.userInfo.phone) {
+          this.userInfo.contactPhone = this.userInfo.phone;
+        }
       }
     });
   }

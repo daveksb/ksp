@@ -3,9 +3,9 @@
     {{ title }} <span class="text-danger fs-6">{{ titleNote }}</span>
   </div>
   <div class="table-responsive">
-    <table class="table bg-white" style="border: 1px solid #c4c4c4">
+    <table class="table bg-white">
       <thead>
-        <tr class="fs-6" style="background-color: #edf6ff">
+        <tr class="fs-6">
           <th class="ps-3 py-2">รายการเอกสาร</th>
           <th class="text-center">จำนวนหน้า</th>
           <th *ngIf="mode === 'view'" class="text-center">ตรวจสอบ</th>
@@ -15,19 +15,24 @@
       </thead>
       <tbody class="text-secondary">
         <ng-container *ngFor="let group of groups; index as i">
-          <tr style="height: 60px; border-top: 1px solid #dadde1">
+          <tr style="height: 60px; border-top: 1px solid #eceef2">
             <th class="ps-3 py-2 text-black">
               {{ group.name }}
-              <div class="text-secondary">
-                <div role="button" (click)="downloadFile(group)">
+              <div class="d-flex align-items-center flex-row">
+                <div
+                  class="text-secondary"
+                  role="button"
+                  (click)="downloadFile(group)"
+                >
                   {{ group?.fileName }}
-                  <i
-                    (click)="deleteFile(group)"
-                    *ngIf="group?.fileId && mode === 'edit'"
-                    class="bi bi-x-circle-fill text-danger fs-6 ms-2"
-                    role="button"
-                  ></i>
                 </div>
+                <i
+                  (click)="deleteFile(group)"
+                  *ngIf="group?.fileId && mode === 'edit'"
+                  class="bi bi-x-circle-fill text-danger fs-6 ms-2"
+                  role="button"
+                ></i>
+
                 <!-- <div *ngIf="i === 0 && mode === 'edit'" class="text-danger">
                   ขอเอกสารเพิ่มเติม: เนื่องจากขาดข้อมูลหน้าที่ 11-20
                 </div> -->
@@ -47,6 +52,8 @@
                 (uploadComplete)="updateComplete($event, group)"
               ></ksp-file-upload>
             </td>
+            <td></td>
+            <!-- (uploadComplete)="updateComplete($event, group)" -->
             <!-- <td>
               <div
                 class="modify__status rounded-pill d-flex align-items-center justify-content-center"

@@ -15,17 +15,15 @@
 
     <div class="row mb-2">
       <div class="col">
-        <label class="form-label">หมายเลขบัตรประชาชน</label>
-        <input class="form-control" type="text" formControlName="personId" />
+        <label class="form-label"
+          >หมายเลขบัตรประชาชน/เลขที่หนังสือเดินทาง</label
+        >
+        <input class="form-control" type="text" formControlName="cardno" />
       </div>
 
       <div class="col">
         <label class="form-label">เลขที่ใบอนุญาต</label>
-        <input
-          class="form-control"
-          type="text"
-          formControlName="licenseNumber"
-        />
+        <input class="form-control" type="text" formControlName="licenseno" />
       </div>
     </div>
     <div class="row">
@@ -36,7 +34,7 @@
 
       <div class="col">
         <label class="form-label">ประเภทใบอนุญาต </label>
-        <select class="form-select" formControlName="licenseType">
+        <select class="form-select" formControlName="licensetype">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">One</option>
           <option value="2">Two</option>
@@ -62,23 +60,23 @@
     <div class="box-header">ผลการค้นหา</div>
     <hr />
 
-    <div class="d-flex flex-column align-items-center" *ngIf="!foundItem">
+    <div
+      class="d-flex flex-column align-items-center"
+      *ngIf="!foundLicenses.length"
+    >
       <div class="mb-2 fs-5">ไม่พบข้อมูล</div>
-      <button class="btn border-primary text-primary" (click)="addStaff()">+ เพิ่มบุคลากร</button>
+      <button class="btn border-primary text-primary" (click)="addStaff()">
+        + เพิ่มบุคลากร
+      </button>
     </div>
 
-    <div *ngIf="foundItem">
-      <div style="margin-left: 5rem">
-        <ksp-license-info [isLicenseRevoked]="true"></ksp-license-info>
-      </div>
-      <hr />
-      <div style="margin-left: 5rem">
-        <ksp-license-info [isLicenseRevoked]="true"></ksp-license-info>
-      </div>
-      <hr />
-      <div style="margin-left: 5rem">
-        <ksp-license-info [isLicenseRevoked]="true"></ksp-license-info>
-      </div>
+    <div class="d-flex flex-column mt-4 gap-4" *ngIf="foundLicenses.length">
+      <ng-container *ngFor="let license of foundLicenses">
+        <ksp-license-info
+          [license]="license"
+          [isLicenseRevoked]="true"
+        ></ksp-license-info>
+      </ng-container>
     </div>
   </div>
 </div>
