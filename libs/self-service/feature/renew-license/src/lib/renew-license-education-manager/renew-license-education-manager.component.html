@@ -113,14 +113,14 @@
     <button *ngIf="requestId" (click)="cancel()" type="button" class="ms-3 btn border-primary text-primary">
       ยกเลิกใบคำขอ
     </button>
-    <button type="button" class="ms-3 btn border-primary text-primary bg-white">
+    <button type="button" (click)="onSave(1)" class="ms-3 btn border-primary text-primary bg-white">
       บันทึกชั่วคราว
     </button>
     <button
       type="button"
       class="ms-3 btn btn-primary"
       [disabled]="disableNextButton"
-      (click)="save()">
+      (click)="onSave(2)">
       บันทึกและยื่น
     </button>
   </div>
