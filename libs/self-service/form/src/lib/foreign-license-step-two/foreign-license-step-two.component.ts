@@ -55,14 +55,12 @@ export class ForeignLicenseStepTwoComponent
   @Input()
   set eduInfo(value: any) {
     setTimeout(() => {
-      console.log(value);
       this.form.controls.academicForm.patchValue(value);
     }, 0);
   }
   @Input()
   set grantionTeachingInfo(value: any) {
     setTimeout(() => {
-      console.log(value);
       this.form.controls.grantionLicenseForm.patchValue(value);
     }, 0);
   }

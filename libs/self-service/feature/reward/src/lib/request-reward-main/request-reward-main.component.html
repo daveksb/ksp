@@ -91,7 +91,7 @@
 
     <div *ngIf="rewardType.value">
       <div class="d-flex justify-content-center my-3">
-        <button type="button" class="ms-3 btn border-primary text-primary">
+        <button type="button" *ngIf="requestId" (click)="cancel()" class="ms-3 btn border-primary text-primary">
           ยกเลิกใบคำขอ
         </button>
         <button

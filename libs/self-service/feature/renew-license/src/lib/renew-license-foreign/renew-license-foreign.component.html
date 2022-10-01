@@ -57,7 +57,7 @@
     <button type="button" class="btn btn-secondary" (click)="cancel()">
       Cancel
     </button>
-    <button type="button" class="ms-3 btn border-primary text-primary">
+    <button type="button" *ngIf="requestId" (click)="onCancelRequest()" class="ms-3 btn border-primary text-primary">
       Cancel Request
     </button>
     <button type="button" class="ms-3 btn btn-primary" (click)="save()">
