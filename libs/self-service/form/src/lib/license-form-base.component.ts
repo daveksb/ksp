@@ -199,6 +199,7 @@ export abstract class LicenseFormBaseComponent {
       width: '900px',
       data: {
         prohibitProperty: this.prohibitProperty,
+        uniqueTimeStamp: this.uniqueTimestamp,
       },
     });
 
