@@ -75,6 +75,7 @@
         <ksp-license-info
           [license]="license"
           [isLicenseRevoked]="true"
+          (selected)="onSelect($event)"
         ></ksp-license-info>
       </ng-container>
     </div>
