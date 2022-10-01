@@ -14,9 +14,21 @@ import {
   RequestHeaderInfoComponent,
 } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
-import { providerFactory } from '@ksp/shared/utility';
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import {
+  ACCUSATION_FILES,
+  defaultEhicsMember,
+  EhicsMember,
+  KspFormBaseComponent,
+} from '@ksp/shared/interface';
+import { providerFactory, thaiDate } from '@ksp/shared/utility';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'e-service-ethic-accusation-record',
@@ -43,11 +55,10 @@ export class AccusationRecordComponent
   extends KspFormBaseComponent
   implements OnInit
 {
-  accusationFiles = [
-    { name: 'เอกสารกล่าวหา/กล่าวโทษ' },
-    { name: 'สำเนาบัตรประชาชน' },
-  ];
-
+  today = thaiDate(new Date());
+  requestNumber = '';
+  accusationFiles = ACCUSATION_FILES;
+  uniqueTimestamp: any;
   override form = this.fb.group({
     accusationblackno: [null, Validators.required],
     accusationtype: [null, Validators.required],
@@ -61,11 +72,10 @@ export class AccusationRecordComponent
     accusationviolatedetail: [],
     accusationassignofficer: [],
     accusationassigndate: [],
-
-    //accusation_file
+    accuserinfo: this.fb.array([] as FormGroup[]),
+    accusation_file: [],
     //accusation_consideration
   });
-
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
@@ -80,17 +90,33 @@ export class AccusationRecordComponent
       })
     );
   }
-
+  get members() {
+    return this.form.controls.accuserinfo as FormArray;
+  }
+  addRow(data: EhicsMember = defaultEhicsMember) {
+    const rewardForm = this.fb.group({
+      idcardno: [data.idcardno],
+      prefix: [data.prefix],
+      firstname: [data.firstname],
+      lastname: [data.lastname],
+      phone: [data.phone],
+    });
+    this.members.push(rewardForm);
+  }
   ngOnInit(): void {
     this.route.data.subscribe((res) => {
       //console.log('res2 = ', res);
     });
+    this.uniqueTimestamp = uuidv4();
   }
 
   openSearchDialog() {
-    this.dialog.open(AccusationSearchComponent, {
+    const dialogRef = this.dialog.open(AccusationSearchComponent, {
       height: '100vh',
       width: '1250px',
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result);
     });
   }
 

@@ -1,10 +1,12 @@
+import { A11yModule } from '@angular/cdk/a11y';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Ethics } from '@ksp/shared/interface';
 import { EthicsService } from '@ksp/shared/service';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy } from '@ngneat/until-destroy';
+import _ from 'lodash';
 @UntilDestroy()
 @Component({
   selector: 'e-service-accusation-main',
@@ -15,7 +17,7 @@ export class AccusationMainComponent implements OnInit {
   ethicsId!: number;
 
   form = this.fb.group({
-    accusation: [],
+    accusation: [] as any,
   });
 
   constructor(
@@ -48,6 +50,11 @@ export class AccusationMainComponent implements OnInit {
       console.log('do nothing = ');
     } else {
       const ethics = new Ethics();
+      const allowKey = Object.keys(ethics);
+      const data = this.form.controls.accusation.value as any;
+      data.accusationinfo = JSON.stringify(data.accusationinfo);
+      const selectData = _.pick(data, allowKey);
+      console.log(selectData);
       //const allowKey = Object.keys(self);
 
       console.log('form value = ', this.form.controls.accusation.value);

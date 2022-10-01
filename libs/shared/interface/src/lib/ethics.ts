@@ -78,3 +78,22 @@ export class Ethics {
   publishstatus: string | null = null;
   publishdate: string | null = null;
 }
+
+export const defaultEhicsMember: EhicsMember = {
+  idcardno: null,
+  prefix: null,
+  firstname: null,
+  lastname: null,
+  phone: null,
+};
+export interface EhicsMember {
+  idcardno: string | null;
+  prefix: number | null;
+  firstname: string | null;
+  lastname: string | null;
+  phone: string | null;
+}
+export const ACCUSATION_FILES = [
+  { name: '1. เอกสารกล่าวหา/กล่าวโทษ', fileId: '', fileName: '' },
+  { name: '2. สำเนาบัตรประชาชน	', fileId: '', fileName: '' },
+];

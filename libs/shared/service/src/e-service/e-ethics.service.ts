@@ -27,4 +27,23 @@ export class EthicsService {
         map((data: any) => data.datareturn)
       );
   }
+  searchSelfMyInfo(payload: any): Observable<any> {
+    return this.http
+      .post('https://kspapi.oceanicnetwork.net/selfmyinfosearch.php', payload)
+      .pipe(
+        shareReplay(),
+        map((data: any) => data.datareturn)
+      );
+  }
+  searchSelfLicense(payload: any): Observable<any> {
+    return this.http
+      .post(
+        `${environment.apiUrl}/e-service/selflicensesearchidcardno`,
+        payload
+      )
+      .pipe(
+        shareReplay(),
+        map((data: any) => data.datareturn)
+      );
+  }
 }
