@@ -23,11 +23,12 @@
       </label>
 
       <ksp-bottom-nav
-        (cancelClicked)="navigateBack()"
+        (cancelClicked)="onCancel()"
         [isLastPage]="true"
         [isFirstPage]="true"
         [showCenterButtons]="true"
         [showSaveButton]="true"
+        [cancelButtonLabel]="requestId ? 'ยกเลิกใบคำขอ': 'ยกเลิก'"
         (saveClicked)="onConfirm()"></ksp-bottom-nav>
     </div>
   </div>

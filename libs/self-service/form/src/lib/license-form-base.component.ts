@@ -10,7 +10,10 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ConfirmDialogComponent } from '@ksp/shared/dialog';
+import {
+  ConfirmDialogComponent,
+  CompleteDialogComponent,
+} from '@ksp/shared/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { parseJson } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
@@ -146,12 +149,57 @@ export abstract class LicenseFormBaseComponent {
     }
   }
 
+  public cancel() {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: `คุณต้องการยกเลิกรายการใบคำขอ
+        ใช่หรือไม่? `,
+      },
+    });
+
+    confirmDialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.cancelRequest();
+      }
+    });
+  }
+
+  cancelRequest() {
+    const payload = {
+      id: `${this.requestId}`,
+      requeststatus: '0',
+    };
+
+    this.requestService.cancelRequest(payload).subscribe((res) => {
+      //console.log('Cancel request  = ', res);
+      this.cancelCompleted();
+    });
+  }
+
+  cancelCompleted() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      width: '350px',
+      data: {
+        header: `ยกเลิกใบคำขอสำเร็จ`,
+        buttonLabel: 'กลับสู่หน้าหลัก',
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/home']);
+      }
+    });
+  }
+
   public save() {
     console.log(this.form.value);
     const confirmDialog = this.dialog.open(ForbiddenPropertyFormComponent, {
       width: '900px',
       data: {
         prohibitProperty: this.prohibitProperty,
+        uniqueTimeStamp: this.uniqueTimestamp,
       },
     });
 
