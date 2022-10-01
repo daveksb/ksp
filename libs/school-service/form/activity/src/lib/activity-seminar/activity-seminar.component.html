@@ -1,14 +1,20 @@
 <form [formGroup]="form">
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">เรื่อง/หลักสูตร</label>
+      <label class="form-label"
+        ><span *ngIf="!isForeignForm">เรื่อง/หลักสูตร</span>
+        <span *ngIf="isForeignForm">Course Title</span></label
+      >
       <input class="form-control" type="text" formControlName="course" />
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">สถานที่อบรม</label>
+      <label class="form-label"
+        ><span *ngIf="!isForeignForm">สถานที่อบรม</span>
+        <span *ngIf="isForeignForm">Place</span></label
+      >
       <input
         class="form-control"
         type="text"
@@ -17,7 +23,10 @@
     </div>
 
     <div class="col-md-6 mb-2">
-      <label class="form-label">หน่วยที่จัดอบรม</label>
+      <label class="form-label"
+        ><span *ngIf="!isForeignForm">หน่วยที่จัดอบรม</span>
+        <span *ngIf="isForeignForm">Institution</span></label
+      >
       <input
         class="form-control"
         type="text"
@@ -28,12 +37,18 @@
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">วันที่</label>
+      <label class="form-label"
+        ><span *ngIf="!isForeignForm">วันที่</span>
+        <span *ngIf="isForeignForm">Training Date to</span></label
+      >
       <input class="form-control" type="date" formControlName="dateFrom" />
     </div>
 
     <div class="col-md-6 mb-2">
-      <label class="form-label">ถึงวันที่</label>
+      <label class="form-label"
+        ><span *ngIf="!isForeignForm">ถึงวันที่</span>
+        <span *ngIf="isForeignForm">From</span></label
+      >
       <input class="form-control" type="date" formControlName="dateTo" />
     </div>
   </div>

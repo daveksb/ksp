@@ -11,6 +11,7 @@ import { providerFactory } from '@ksp/shared/utility';
 })
 export class ActivityLearningMaterialComponent extends KspFormBaseComponent {
   @Input() data: any;
+  @Input() isForeignForm = false;
 
   //`การสร้างสื่อการศึกษา พร้อมแบบทดสอบเพื่อการศึกษาหรือเรียนรู้ด้วยตนเอง ทั้งในรูปแบบเอกสาร และสื่ออิเล็กทรอนิกส์ เช่ย บทความ online , e-learning , E-book เป็นต้น`,
 
