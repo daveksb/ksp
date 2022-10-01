@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SelfRequest } from '@ksp/shared/interface';
@@ -9,7 +11,7 @@ import { ERequestService } from '@ksp/shared/service';
   templateUrl: './request-license-approve-list.component.html',
   styleUrls: ['./request-license-approve-list.component.scss'],
 })
-export class RequestLicenseApproveListComponent {
+export class RequestLicenseApproveListComponent implements AfterViewInit {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
 
@@ -18,13 +20,33 @@ export class RequestLicenseApproveListComponent {
     private requestService: ERequestService
   ) {}
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
   search() {
     const payload = {
-      systemtype: '1',
-      requesttype: '1',
+      systemtype: 1, // self service
+      requesttype: 1, // ใบคำขอใบอนุญาต
+      requestno: '',
+      firstnameth: '',
+      idcardno: '',
+      currentprocess: '',
+      requestdate: '',
+      offset: '0',
+      row: '1000',
     };
-    this.requestService.searchRequest(payload).subscribe((res) => {
+    this.requestService.searchSelfRequest(payload).subscribe((res) => {
       this.dataSource.data = res;
+      this.dataSource.sort = this.sort;
+
+      const sortState: Sort = { active: 'id', direction: 'desc' };
+      this.sort.active = sortState.active;
+      this.sort.direction = sortState.direction;
+      this.sort.sortChange.emit(sortState);
     });
   }
 
