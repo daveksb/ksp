@@ -27,7 +27,7 @@
           />
           <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
         </div>
-        <fieldset [disabled]="!section1">
+        <fieldset [disabled]="section1">
           <ksp-step-2-tab-1-a
             formControlName="plan1"
             [mode]="mode"
@@ -42,7 +42,7 @@
           />
           <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
         </div>
-        <fieldset [disabled]="!section2">
+        <fieldset [disabled]="section2">
           <ksp-step-2-tab-1-b
             formControlName="plan2"
             [mode]="mode"
@@ -90,7 +90,7 @@
         />
         <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
       </div>
-      <fieldset [disabled]="!section5">
+      <fieldset [disabled]="section5">
         <ksp-step-2-advisor
           [mode]="mode"
           formControlName="advisor"

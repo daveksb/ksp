@@ -14,6 +14,6 @@ import { MatIconModule } from '@angular/material/icon';
  * use class="blue" for make blue color and bigger font
  */
 export class AddRowButtonComponent {
-  @Input() disabled: boolean = false;
+  @Input() disabled = false;
   @Output() addRowClick = new EventEmitter<boolean>();
 }
