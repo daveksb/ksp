@@ -93,6 +93,7 @@
       <mat-tab label="ข้อมูลคุณสมบัติตามมาตรฐานวิชาชีพ">
         <self-service-form-user-education
           formControlName="education"
+          [attachFiles]="eduFiles"
           [educationTypes]="'supervision'">
         </self-service-form-user-education>
       </mat-tab>
