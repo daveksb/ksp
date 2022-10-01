@@ -30,6 +30,8 @@ export class FileUploadComponent {
   @Input() fileName = '';
   @Output() uploadComplete = new EventEmitter<any>();
 
+  file: any;
+
   constructor(private uploadService: FileService) {}
 
   async onFileSelected(event: any) {
@@ -72,6 +74,7 @@ export class FileUploadComponent {
             fileName: this.fileName,
             file: atob(payload.file),
           };
+          this.file = evt;
           this.uploadComplete.emit(evt);
         }
       });
@@ -90,5 +93,21 @@ export class FileUploadComponent {
           });
         }
       });
+  }
+
+  deleteFile() {
+    const group = this.file;
+    const payload = {
+      id: group.fileId,
+      requesttype: this.requestType,
+      uniquetimestamp: this.uniqueTimestamp ?? group?.uniqueTimestamp,
+    };
+
+    this.uploadService.deleteFile(payload).subscribe((res: any) => {
+      if (res?.returnmessage == 'success') {
+        this.file = null;
+        this.fileName = '';
+      }
+    });
   }
 }
