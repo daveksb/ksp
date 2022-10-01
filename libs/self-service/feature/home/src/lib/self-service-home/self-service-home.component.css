@@ -23,21 +23,60 @@
   content: url('/assets/images/line.png');
 }
 
-/* device  responsive*/
-@media only screen and (max-width: 992px) {
+/* @media only screen and (max-width: 992px) {
+  .bg-image {
+    background-image: url('/assets/images/BG-secondary.png');
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
   .bg-image {
     background-image: url('/assets/images/BG-mobile.png');
     background-size: cover;
+    background-position: top;
+    height: 100%;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .bg-image {
+    background-image: url('/assets/images/BG-mobile.png');
+    background-size: cover;
+    height: 100%;
+  }
+} */
+
+/* device  responsive*/
+@media only screen and (max-width: 992px) {
+  .bg-image {
+    background-image: url('/assets/images/BG-secondary.png');
+    background-size: cover;
+    background-position: center;
+    height: 100%;
   }
 
   .line__content {
     content: url('/assets/images/line.png');
     padding: 2rem 0;
   }
+
+  .img__content {
+    width: 225px;
+  }
 }
 
 /* mobile */
 @media only screen and (max-width: 768px) {
+  .bg-image {
+    background-image: url('/assets/images/BG-secondary.png');
+    background-size: cover;
+    background-position: top;
+    height: 100%;
+  }
+
   .logo__container {
     width: 200px;
   }
@@ -49,5 +88,13 @@
 
   .img__content {
     width: 175px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .bg-image {
+    background-image: url('/assets/images/BG-mobile.png');
+    background-size: cover;
+    height: 100%;
   }
 }
