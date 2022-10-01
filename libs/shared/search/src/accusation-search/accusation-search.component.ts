@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { EthicsService } from '@ksp/shared/service';
 import { providerFactory } from '@ksp/shared/utility';
 
 @Component({
@@ -30,8 +31,8 @@ export class AccusationSearchComponent extends KspFormBaseComponent {
     accuserFirstname: [],
     accuserLastname: [],
   });
-
-  constructor(private fb: FormBuilder) {
+  @Output() submited = new EventEmitter<boolean>();
+  constructor(private fb: FormBuilder, private service: EthicsService) {
     super();
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
@@ -41,6 +42,23 @@ export class AccusationSearchComponent extends KspFormBaseComponent {
       })
     );
   }
-
-  @Output() submited = new EventEmitter<boolean>();
+  onClickSearch() {
+    const payload = {
+      ethicsno: '',
+      accusationblackno: '',
+      resultredno: '',
+      firstname: '',
+      lastnameth: '',
+      idcardno: '',
+      firstnameinfo: '',
+      lastnamethinfo: '',
+      idcardnoinfo: '',
+      licensenoinfo: '',
+      offset: '0',
+      row: '10',
+    };
+    this.service
+      .searchEthicssearch(payload)
+      .subscribe((res) => console.log(res));
+  }
 }

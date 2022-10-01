@@ -1,4 +1,3 @@
-import { A11yModule } from '@angular/cdk/a11y';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -46,20 +45,20 @@ export class AccusationMainComponent implements OnInit {
   }
 
   saveEthics() {
+    const ethics = new Ethics();
+    const allowKey = Object.keys(ethics);
+    const data = this.form.controls.accusation.value as any;
+    if (data?.accusation) {
+      data.accusationinfo = JSON.stringify(data?.accusationinfo);
+    }
+    const selectData = _.pick(data, allowKey);
     if (this.ethicsId) {
-      console.log('do nothing = ');
+      selectData['id'] = this.ethicsId;
+      this.service.updateEthicsAccusation(selectData).subscribe((res) => {
+        console.log('save = ', res);
+      });
     } else {
-      const ethics = new Ethics();
-      const allowKey = Object.keys(ethics);
-      const data = this.form.controls.accusation.value as any;
-      data.accusationinfo = JSON.stringify(data.accusationinfo);
-      const selectData = _.pick(data, allowKey);
-      console.log(selectData);
-      //const allowKey = Object.keys(self);
-
-      console.log('form value = ', this.form.controls.accusation.value);
-
-      this.service.createEthics(ethics).subscribe((res) => {
+      this.service.createEthics(selectData).subscribe((res) => {
         console.log('save = ', res);
         const id = res.id;
         if (id) {

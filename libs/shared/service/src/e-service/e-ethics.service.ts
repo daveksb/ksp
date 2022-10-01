@@ -15,7 +15,17 @@ export class EthicsService {
       payload
     );
   }
-
+  updateEthicsAccusation(payload: any): Observable<any> {
+    return this.http
+      .post(
+        `${environment.apiUrl}/e-service/es-ethicsupdate-accusation`,
+        payload
+      )
+      .pipe(
+        shareReplay(),
+        map((data: any) => data.datareturn)
+      );
+  }
   updateEthicsInvestigation(payload: any): Observable<any> {
     return this.http
       .post(
@@ -41,6 +51,14 @@ export class EthicsService {
         `${environment.apiUrl}/e-service/selflicensesearchidcardno`,
         payload
       )
+      .pipe(
+        shareReplay(),
+        map((data: any) => data.datareturn)
+      );
+  }
+  searchEthicssearch(payload: any): Observable<any> {
+    return this.http
+      .post('https://kspapi.oceanicnetwork.net/es_ethicssearch.php', payload)
       .pipe(
         shareReplay(),
         map((data: any) => data.datareturn)
