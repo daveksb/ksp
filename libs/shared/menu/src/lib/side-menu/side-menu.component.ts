@@ -1,27 +1,26 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuConfig } from '@ksp/shared/interface';
-import { MyInfoService } from '@ksp/shared/service';
-import { thaiDate } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-side-menu',
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.css'],
 })
-export class SideMenuComponent implements OnInit {
+export class SideMenuComponent {
   @Input() menuConfig: MenuConfig[] = [];
   @Input() showHeader = false;
-  date!: string;
-  name!: string;
-  constructor(private router: Router, private myInfoService: MyInfoService) {}
+  @Input() name = '';
+  @Input() lastLogin = '';
 
-  ngOnInit(): void {
+  constructor(private router: Router) {}
+
+  /* ngOnInit(): void {
     this.myInfoService.getMyInfo().subscribe((res) => {
       this.name = res.firstnameth + ' ' + res.lastnameth;
       this.date = thaiDate(new Date(res.lastlogintime as string));
     });
-  }
+  } */
 
   navigateUrl(url: string, queryParams: any) {
     if (queryParams) {
