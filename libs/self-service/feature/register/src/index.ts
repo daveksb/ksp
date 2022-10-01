@@ -17,3 +17,5 @@ export * from './lib/register-foreign-step-one/register-foreign-step-one.compone
 export * from './lib/register-foreign-step-three/register-foreign-step-three.component';
 
 export * from './lib/register-foreign-step-two/register-foreign-step-two.component';
+
+export * from './lib/register-tooltip/register-tooltip.component';
