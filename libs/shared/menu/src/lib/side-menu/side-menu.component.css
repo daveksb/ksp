@@ -144,6 +144,15 @@ ul ul li {
   justify-content: center;
 }
 
+::-webkit-scrollbar {
+  height: 4px;
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.26);
+}
+
 @media only screen and (max-width: 768px) {
   /*   #sidebar {
     margin-left: -230px;
