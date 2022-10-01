@@ -26,7 +26,7 @@ export class SelfRequest extends SchoolRequest {
     super.ref3 = ref3;
 
     super.systemtype = ref1;
-    super.requesttype = ref2;
+    super.requesttype = `${+ref2}`;
     super.subtype = ref3;
 
     super.currentprocess = `${process}`;

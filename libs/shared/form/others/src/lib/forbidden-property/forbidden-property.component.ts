@@ -23,8 +23,8 @@ export class ForbiddenPropertyFormComponent extends KspFormBaseComponent {
     incompetent: [null, Validators.required],
     prison: [null, Validators.required],
     prisonReason: [],
-    fileId: [null, Validators],
-    fileName: [null, Validators.required],
+    fileId: [null],
+    fileName: [null],
   });
 
   constructor(
