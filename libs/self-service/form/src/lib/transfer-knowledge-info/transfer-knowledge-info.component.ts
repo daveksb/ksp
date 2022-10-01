@@ -38,7 +38,6 @@ export class TransferKnowledgeInfoComponent extends KspFormBaseComponent {
   }
 
   override set value(value: any) {
-    console.log(value);
     this.form.patchValue({ standardInfo: value.standardInfo });
     if (value.standards?.length) {
       this.form.controls.standards.removeAt(0);

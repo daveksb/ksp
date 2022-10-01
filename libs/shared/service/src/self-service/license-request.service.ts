@@ -18,6 +18,13 @@ export class SelfRequestService {
     return this.http.post(`${environment.apiUrl}/kspself/requestupdate`, form);
   }
 
+  cancelRequest(form: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspself/requestupdatestatus`,
+      form
+    );
+  }
+
   searchMyRequests(payload: any): Observable<SelfRequest[]> {
     return this.http
       .post<SelfRequest[]>(

@@ -23,9 +23,13 @@ export class ForbiddenPropertyFormComponent extends KspFormBaseComponent {
     incompetent: [null, Validators.required],
     prison: [null, Validators.required],
     prisonReason: [],
-    fileId: [null, Validators],
+    fileId: [null, Validators.required],
     fileName: [null, Validators.required],
   });
+
+  get fileName() {
+    return this.form.controls.fileName.value || '';
+  }
 
   constructor(
     private fb: FormBuilder,
@@ -38,21 +42,23 @@ export class ForbiddenPropertyFormComponent extends KspFormBaseComponent {
     super();
     this.subscriptions.push(
       this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
+        // console.log(value);
         this.onChange(value);
         this.onTouched();
       })
     );
 
     if (this.data?.prohibitProperty) {
+      console.log(this.data.prohibitProperty);
       this.form.patchValue(this.data.prohibitProperty);
     }
   }
 
   uploadComplete(evt: any) {
-    //console.log('upload result = ', evt);
+    console.log('upload result = ', evt);
     const fileInfo: any = evt;
     this.form.patchValue(fileInfo);
-    //console.log('this.form.value = ', this.form.value);
+    console.log('this.form.value = ', this.form.value);
   }
 
   save() {
