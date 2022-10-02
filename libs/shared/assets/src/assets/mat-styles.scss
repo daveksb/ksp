@@ -164,3 +164,8 @@ button.mat-menu-item {
 .mat-list-base {
   padding-top: 0 !important;
 }
+
+/* Styles for the active tab label */
+.mat-tab-label.mat-tab-label-active {
+  color: #0056ff;
+}

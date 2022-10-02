@@ -40,12 +40,6 @@ export class DegreeCertRequestComponent {
   step4Form: any = this.fb.group({
     step4: [],
   });
-  disabledInputsStep1: any = {
-    institutionsGroup: true,
-    institutionsCode: true,
-    institutionsName: true,
-    provience: true,
-  };
   constructor(
     private router: Router,
     public dialog: MatDialog,

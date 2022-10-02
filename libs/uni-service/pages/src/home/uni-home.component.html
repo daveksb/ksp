@@ -30,7 +30,13 @@
       <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="order">
           <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-          <td mat-cell *matCellDef="let element">{{ element.order }}</td>
+          <td
+            class="text-center"
+            mat-cell
+            *matCellDef="let element; let i = index"
+          >
+            {{ i + 1 }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="approveNumber">

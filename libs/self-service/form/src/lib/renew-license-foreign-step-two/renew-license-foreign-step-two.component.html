@@ -9,7 +9,7 @@
         <label class="form-label">Status</label>
 
         <select formControlName="educationType" class="form-select">
-          <option selected hidden disabled value="null">กรุณาเลือก</option>
+          <option selected hidden disabled value="null">Please Choose</option>
           <option *ngFor="let edu of educationTypes" [value]="edu.value">
             {{ edu.label }}
           </option>
