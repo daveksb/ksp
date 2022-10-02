@@ -18,11 +18,9 @@ export class LicenseInfoComponent {
   @Input() license: SelfLicense | null = null;
   @Output() selected = new EventEmitter<string>();
 
-  select(idcardno: string | null | undefined) {
-    if (idcardno) {
-      this.selected.emit(idcardno);
+  select(licenseno: string | null | undefined) {
+    if (licenseno) {
+      this.selected.emit(licenseno);
     }
   }
-
-  thaiDate() {}
 }
