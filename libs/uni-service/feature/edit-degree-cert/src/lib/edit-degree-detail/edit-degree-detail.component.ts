@@ -293,7 +293,7 @@ export class EditDegreeDetailComponent implements OnInit {
       ref2: '03',
       ref3: '5',
       requestprocess: '1',
-      requeststatus: '1',
+      requeststatus: '2',
       systemtype: '3',
       requesttype: '3',
       subtype: '5',
