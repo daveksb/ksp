@@ -64,7 +64,6 @@ export class FileUploadComponent {
   }
 
   uploadFile(payload: any) {
-    console.log(payload);
     this.uploadService
       .uploadFile(payload)
       .pipe(untilDestroyed(this))

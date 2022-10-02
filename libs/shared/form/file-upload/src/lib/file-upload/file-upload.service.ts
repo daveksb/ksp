@@ -21,7 +21,6 @@ export class FileService {
   ) {}
 
   uploadFile(payload: any) {
-    console.log(this.apiURL);
     return this.http.post(
       `${environment.apiUrl}${this.apiURL.uploadFile}`,
       payload,
