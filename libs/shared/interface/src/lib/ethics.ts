@@ -97,3 +97,31 @@ export const ACCUSATION_FILES = [
   { name: '1. เอกสารกล่าวหา/กล่าวโทษ', fileId: '', fileName: '' },
   { name: '2. สำเนาบัตรประชาชน	', fileId: '', fileName: '' },
 ];
+export const columns = [
+  'order',
+  'id',
+  'receiveDate',
+  'blackNumber',
+  'redNumber',
+  'personId',
+  'name',
+  'process',
+  'status',
+  'lastUpdate',
+  'edit',
+  'view',
+];
+export interface AccusationList {
+  order: number;
+  id: string;
+  receiveDate: string;
+  blackNumber: string;
+  redNumber: string;
+  personId: string;
+  name: string;
+  process: string;
+  status: string;
+  lastUpdate: string;
+  edit: string;
+  view: string;
+}
