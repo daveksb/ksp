@@ -3,13 +3,15 @@
   [formGroup]="form"
   class="tab-group"
   animationDuration="0ms"
-  [selectedIndex]="0">
+  [selectedIndex]="0"
+>
   <mat-tab label="ข้อมูลส่วนตัว">
     <ksp-form-user-info
       [displayMode]="[userInfoType]"
       [isSchoolService]="false"
       [prefixList]="prefixList"
-      formControlName="userInfo"></ksp-form-user-info>
+      formControlName="userInfo"
+    ></ksp-form-user-info>
   </mat-tab>
 
   <mat-tab label="ที่อยู่" class="tab-content">
@@ -20,7 +22,8 @@
       [amphurs]="amphurs1$ | async"
       [tumbols]="tumbols1$ | async"
       (provinceChanged)="provinceChanged(1, $event)"
-      (amphurChanged)="amphurChanged(1, $event)">
+      (amphurChanged)="amphurChanged(1, $event)"
+    >
       <span class="text-primary">ที่อยู่ทะเบียนบ้าน</span>
     </ksp-form-address>
     <hr />
@@ -31,7 +34,8 @@
       [amphurs]="amphurs2$ | async"
       [tumbols]="tumbols2$ | async"
       (provinceChanged)="provinceChanged(2, $event)"
-      (amphurChanged)="amphurChanged(2, $event)">
+      (amphurChanged)="amphurChanged(2, $event)"
+    >
       <span class="text-primary">ที่อยู่ที่ติดต่อได้สะดวก</span>
     </ksp-form-address>
   </mat-tab>
@@ -49,14 +53,17 @@
   </mat-tab>
 
   <mat-tab label="รายงานผลสำเร็จจากการปฏิบัติงาน">
-    <ksp-council-success formControlName="rewardSuccessInfo"></ksp-council-success>
+    <ksp-council-success
+      formControlName="rewardSuccessInfo"
+    ></ksp-council-success>
   </mat-tab>
 
   <mat-tab label="ข้อมูลรางวัลและหลักฐานประกอบ">
     <ksp-council-evidence
       formControlName="rewardDetailInfo"
       [rewardFiles]="rewardFiles"
-      [uniqueTimestamp]="uniqueTimestamp"></ksp-council-evidence>
+      [uniqueTimestamp]="uniqueTimestamp"
+    ></ksp-council-evidence>
   </mat-tab>
 </mat-tab-group>
 

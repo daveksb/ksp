@@ -15,6 +15,7 @@ export class FormUploadImageComponent {
   @Input() imgSrc = '';
   @Input() requestType: any;
   @Input() uniqueTimestamp!: string;
+  @Input() isForeignForm = false;
   @Output() uploadImageComplete = new EventEmitter<any>();
   requestPageType = RequestPageType;
 

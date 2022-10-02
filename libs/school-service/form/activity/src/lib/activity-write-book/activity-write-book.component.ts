@@ -11,6 +11,7 @@ import { providerFactory } from '@ksp/shared/utility';
 })
 export class ActivityWriteBookComponent extends KspFormBaseComponent {
   @Input() data: any;
+  @Input() isForeignForm = false;
 
   //การแต่งตำรา หรือหนังสือ ในเรื่องที่เกี่ยวข้องกับวิชาชีพ หรือวิชาการเฉพาะด้านที่เกี่ยวข้องกับวิชาชีพ
 
