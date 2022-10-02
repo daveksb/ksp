@@ -319,6 +319,10 @@ export abstract class LicenseFormBaseComponent {
     }
   }
 
+  public resetForm() {
+    this.form.reset();
+  }
+
   abstract createRequest(forbidden: any, currentProcess: number): void;
   abstract patchUserInfoForm(data: any): void;
   abstract patchAddress1Form(data: any): void;
