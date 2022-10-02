@@ -21,6 +21,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { levels, subjects, UserInfoFormType } from '@ksp/shared/constant';
 import { FormMode } from '@ksp/shared/interface';
+import localForage from 'localforage';
 
 @UntilDestroy()
 @Component({
@@ -112,7 +113,10 @@ export class AddStaffComponent implements OnInit {
   }
 
   checkMode() {
-    if (this.router.url.includes('view-staff')) {
+    if (this.router.url.includes('add-staff-has-license')) {
+      this.mode = 'edit';
+      this.patchDataFromLicense();
+    } else if (this.router.url.includes('view-staff')) {
       console.log('view mode');
       this.mode = 'view';
       this.form.disable();
@@ -120,6 +124,17 @@ export class AddStaffComponent implements OnInit {
       console.log('edit mode');
       this.mode = 'edit';
     }
+  }
+
+  /**
+   * * this person has license patch data from indexedDB
+   */
+  patchDataFromLicense() {
+    localForage.getItem('add-staff-has-license').then((res: any) => {
+      console.log('stored data = ', res);
+      this.form.controls.userInfo.patchValue(res);
+      //this.pathUserInfo(res);
+    });
   }
 
   loadStaffData(staffId: number) {

@@ -74,7 +74,8 @@ export class LicenseSearchComponent {
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         console.log('licenses = ', res);
-        //this.router.navigate(['./staff-management', 'add-staff-has-license']);
+        localForage.setItem('add-staff-has-license', res[0]);
+        this.router.navigate(['./staff-management', 'add-staff-has-license']);
       });
   }
 
