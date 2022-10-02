@@ -53,7 +53,7 @@ export class SelfServiceHomePageComponent implements AfterViewInit {
       requeststatus: null,
       currentprocess: null,
       offset: '0',
-      row: '100',
+      row: '200',
     };
     this.requestService.searchMyRequests(payload).subscribe((res) => {
       if (res && res.length) {
