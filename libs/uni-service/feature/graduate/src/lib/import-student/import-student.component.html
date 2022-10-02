@@ -1,7 +1,7 @@
 <ksp-top-nav>
-  <span header>{{ headers[pageType][0] }}</span>
-  <span subHeader>{{ headers[pageType][1] }}</span>
-  <span detail> > {{ headers[pageType][2] }}</span>
+  <span header>{{ pageType === 'studentList' ? headerStudent.h1 : headerGraduate.h1 }}</span>
+  <span subHeader>{{ pageType === 'studentList' ? headerStudent.h2 : headerGraduate.h2 }}</span>
+  <span detail> > {{ pageType === 'studentList' ? headerStudent.h3 : headerGraduate.h3 }}</span>
 </ksp-top-nav>
 
 <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height full-width-2">
@@ -15,17 +15,32 @@
     <hr />
 
     <div class="d-flex justify-content-between mb-1">
-      <div class="box-header">{{ headers[pageType][2] }}</div>
-      <div *ngIf="pageType === importType.studentList">
+      <div class="box-header">{{ pageType === 'studentList' ? headerStudent.h3 : headerGraduate.h3 }}</div>
+      <div *ngIf="pageType === 'studentList'">
         <button
           type="button"
+          (click)="downloadfile()"
           class="btn border-success text-success w-auto me-2"
         >
           <img src="/assets/images/img-uni/microsoft excel.png" />
           ดาวน์โหลดแบบฟอร์ม
         </button>
 
-        <ksp-file-upload [showUploadedFileName]="false"></ksp-file-upload>
+        <ng-container>
+          <button
+            (click)="fileUpload.click()"
+            type="button"
+            class="btn btn-sm btn-primary w-auto"
+          >
+            <img src="/assets/images/img-uni/Upload.svg" /> อัปโหลดไฟล์
+          </button></ng-container
+        >
+        <input
+          hidden="true"
+          type="file"
+          (change)="onFileSelected($event)"
+          #fileUpload
+        />
       </div>
     </div>
 
@@ -33,56 +48,56 @@
       <p-table
         [value]="users"
         responsiveLayout="scroll"
-        dataKey="id"
+        dataKey="index"
         editMode="row"
       >
         <ng-template pTemplate="header">
           <tr>
             <th
               class="p-2 text-nowrap align-text-top"
-              *ngIf="pageType === importType.graduateList"
+              *ngIf="pageType === 'graduateList'"
             >
               เลือก
             </th>
             <th
               class="p-2 text-nowrap align-text-top"
-              *ngIf="pageType === importType.studentList"
+              *ngIf="pageType === 'studentList'"
             >
               ลำดับ
             </th>
             <th
               class="p-2 text-nowrap align-text-top"
-              *ngIf="pageType === importType.graduateList"
+              *ngIf="pageType === 'graduateList'"
             >
               ครั้งที่สภาอนุมัติ
             </th>
             <th
               class="p-2 text-nowrap align-text-top"
-              *ngIf="pageType === importType.graduateList"
+              *ngIf="pageType === 'graduateList'"
             >
               วันที่สภาอนุมัติ
             </th>
             <th
               class="p-2 text-nowrap align-text-top"
-              *ngIf="pageType === importType.graduateList"
+              *ngIf="pageType === 'graduateList'"
             >
               วันที่จบการศึกษา
             </th>
             <th
               class="p-2 text-nowrap align-text-top"
-              *ngIf="pageType === importType.graduateList"
+              *ngIf="pageType === 'graduateList'"
             >
               สถานที่ปฏิบัติการสอน
             </th>
             <th
               class="p-2 text-nowrap align-text-top"
-              *ngIf="pageType === importType.studentList"
+              *ngIf="pageType === 'studentList'"
             >
               วันที่รับเข้า
             </th>
             <th
               class="p-2 text-nowrap"
-              *ngIf="pageType === importType.graduateList"
+              *ngIf="pageType === 'graduateList'"
             >
               <div>
                 <label>วันที่เข้ารับการศึกษา</label>
@@ -92,7 +107,7 @@
 
             <th
               class="p-2 text-nowrap"
-              *ngIf="pageType === importType.studentList"
+              *ngIf="pageType === 'studentList'"
             >
               เลขบัตรประจำตัวประชาชน /<br />
               เลขประจำตัวคุรุสภา
@@ -100,7 +115,7 @@
 
             <th
               class="p-2 text-nowrap"
-              *ngIf="pageType === importType.graduateList"
+              *ngIf="pageType === 'graduateList'"
             >
               <div>
                 เลขบัตรประจำตัวประชาชน
@@ -118,12 +133,12 @@
                 class="form-control form-search"
                 style="width: 175px"
                 type="text"
-                *ngIf="pageType === importType.graduateList"
+                *ngIf="pageType === 'graduateList'"
               />
             </th>
             <th
               class="p-2 text-nowrap align-text-top"
-              *ngIf="pageType === importType.studentList"
+              *ngIf="pageType === 'studentList'"
             >
               สัญชาติ
             </th>
@@ -139,7 +154,7 @@
                   class="form-control form-search"
                   style="width: 150px"
                   type="text"
-                  *ngIf="pageType === importType.graduateList"
+                  *ngIf="pageType === 'graduateList'"
                 />
               </div>
             </th>
@@ -151,7 +166,7 @@
                   class="form-control form-search"
                   style="width: 150px"
                   type="text"
-                  *ngIf="pageType === importType.graduateList"
+                  *ngIf="pageType === 'graduateList'"
                 />
               </div>
             </th>
@@ -167,7 +182,7 @@
                   class="form-control form-search"
                   style="width: 150px"
                   type="text"
-                  *ngIf="pageType === importType.graduateList"
+                  *ngIf="pageType === 'graduateList'"
                 />
               </div>
             </th>
@@ -179,7 +194,7 @@
                   class="form-control form-search"
                   style="width: 150px"
                   type="text"
-                  *ngIf="pageType === importType.graduateList"
+                  *ngIf="pageType === 'graduateList'"
                 />
               </div>
             </th>
@@ -191,7 +206,7 @@
                   class="form-control form-search"
                   style="width: 150px"
                   type="text"
-                  *ngIf="pageType === importType.graduateList"
+                  *ngIf="pageType === 'graduateList'"
                 />
               </div>
             </th>
@@ -202,7 +217,7 @@
                 class="form-control form-search"
                 style="width: 150px"
                 type="text"
-                *ngIf="pageType === importType.graduateList"
+                *ngIf="pageType === 'graduateList'"
               />
             </th>
             <th class="p-2 text-nowrap align-text-top">
@@ -211,7 +226,7 @@
             <th class="p-2 text-nowrap align-text-top">ที่อยู่</th>
             <th
               class="p-2 text-nowrap align-text-top"
-              *ngIf="pageType === importType.studentList"
+              *ngIf="pageType === 'studentList'"
             >
               รายวิชา
             </th>
@@ -223,33 +238,34 @@
           let-product
           let-editing="editing"
           let-ri="rowIndex"
+          let-expanded="expanded"
         >
           <tr [pEditableRow]="product">
             <td
               class="p-2 text-nowrap"
-              *ngIf="pageType === importType.studentList"
+              *ngIf="pageType === 'studentList'"
             >
               <p-cellEditor>
                 <ng-template pTemplate="input">
-                  {{ product.id }}
+                  {{ product.index }}
                 </ng-template>
 
                 <ng-template pTemplate="output">
-                  {{ product.id }}
+                  {{ product.index }}
                 </ng-template>
               </p-cellEditor>
             </td>
 
             <td
               class="text-center"
-              *ngIf="pageType === importType.graduateList"
+              *ngIf="pageType === 'graduateList'"
             >
-              <input type="checkbox" class="form-check-input" />
+              <input type="checkbox" [(ngModel)]="product.checked" class="form-check-input" />
             </td>
 
             <td
               class="p-2 text-nowrap"
-              *ngIf="pageType === importType.graduateList"
+              *ngIf="pageType === 'graduateList'"
             >
               <p-cellEditor>
                 <ng-template pTemplate="input">
@@ -258,17 +274,17 @@
                     style="width: 75px"
                     pInputText
                     type="text"
-                    [(ngModel)]="product.approveTime"
+                    [(ngModel)]="product.approvetime"
                   />
                 </ng-template>
                 <ng-template pTemplate="output">
-                  {{ product.approveTime }}
+                  {{ product.approvetime }}
                 </ng-template>
               </p-cellEditor>
             </td>
             <td
               class="p-2 text-nowrap"
-              *ngIf="pageType === importType.graduateList"
+              *ngIf="pageType === 'graduateList'"
             >
               <p-cellEditor>
                 <ng-template pTemplate="input">
@@ -277,17 +293,17 @@
                     style="width: 150px"
                     pInputText
                     type="date"
-                    [(ngModel)]="product.graduateDate"
+                    [(ngModel)]="product.graduatedate"
                   />
                 </ng-template>
                 <ng-template pTemplate="output">
-                  {{ product.graduateDate }}
+                  {{ product.graduatedate }}
                 </ng-template>
               </p-cellEditor>
             </td>
             <td
               class="p-2 text-nowrap"
-              *ngIf="pageType === importType.graduateList"
+              *ngIf="pageType === 'graduateList'"
             >
               <p-cellEditor>
                 <ng-template pTemplate="input">
@@ -296,18 +312,18 @@
                     style="width: 150px"
                     pInputText
                     type="date"
-                    [(ngModel)]="product.approveDate"
+                    [(ngModel)]="product.approvedate"
                   />
                 </ng-template>
                 <ng-template pTemplate="output">
-                  {{ product.approveDate }}
+                  {{ product.approvedate }}
                 </ng-template>
               </p-cellEditor>
             </td>
 
             <td
               class="p-2 text-nowrap"
-              *ngIf="pageType === importType.graduateList"
+              *ngIf="pageType === 'graduateList'"
             >
               <div
                 (click)="searchAddress()"
@@ -326,12 +342,12 @@
                     style="width: 150px"
                     pInputText
                     type="date"
-                    [(ngModel)]="product.startDate"
-                    [disabled]="pageType === importType.graduateList"
+                    [(ngModel)]="product.startdate"
+                    [disabled]="pageType === 'graduateList'"
                   />
                 </ng-template>
                 <ng-template pTemplate="output">
-                  {{ product.startDate }}
+                  {{ product.startdate }}
                 </ng-template>
               </p-cellEditor>
             </td>
@@ -343,12 +359,12 @@
                     style="width: 175px"
                     pInputText
                     type="text"
-                    [(ngModel)]="product.personId"
-                    [disabled]="pageType === importType.graduateList"
+                    [(ngModel)]="product.idcard"
+                    [disabled]="pageType === 'graduateList'"
                   />
                 </ng-template>
                 <ng-template pTemplate="output">
-                  {{ product.personId }}
+                  {{ product.idcard }}
                 </ng-template>
               </p-cellEditor>
             </td>
@@ -360,23 +376,27 @@
                     style="width: 175px"
                     pInputText
                     type="text"
-                    [(ngModel)]="product.passportId"
-                    [disabled]="pageType === importType.graduateList"
+                    [(ngModel)]="product.passportno"
+                    [disabled]="pageType === 'graduateList'"
                   />
                 </ng-template>
                 <ng-template pTemplate="output">
-                  {{ product.passportId }}
+                  {{ product.passportno }}
                 </ng-template>
               </p-cellEditor>
             </td>
 
             <td
               class="p-2 text-nowrap"
-              *ngIf="pageType === importType.studentList"
+              *ngIf="pageType === 'studentList'"
             >
               <p-cellEditor>
                 <ng-template pTemplate="input">
-                  <select class="form-select" style="width: 150px">
+                  <select 
+                    class="form-select" 
+                    style="width: 150px"
+                    (change)="selectedNationality($event, product.index)"
+                    [(ngModel)]="product.nationalityid">
                     <option
                       *ngFor="let nation of nationality"
                       [value]="nation.nationId"
@@ -397,7 +417,9 @@
                   <select
                     class="form-select"
                     style="width: 100px"
-                    [disabled]="pageType === importType.graduateList"
+                    [disabled]="pageType === 'graduateList'"
+                    [(ngModel)]="product.titlethid"
+                    (change)="selectedPrefixTh($event, product.index)"
                   >
                     <option
                       *ngFor="let ThPrefix of ThPrefixes"
@@ -408,7 +430,7 @@
                   </select>
                 </ng-template>
                 <ng-template pTemplate="output">
-                  {{ product.titleTh }}
+                  {{ product.titleth }}
                 </ng-template>
               </p-cellEditor>
             </td>
@@ -421,12 +443,12 @@
                     style="width: 150px"
                     pInputText
                     type="text"
-                    [(ngModel)]="product.firstNameTh"
-                    [disabled]="pageType === importType.graduateList"
+                    [(ngModel)]="product.firstnameth"
+                    [disabled]="pageType === 'graduateList'"
                   />
                 </ng-template>
                 <ng-template pTemplate="output">
-                  {{ product.firstNameTh }}
+                  {{ product.firstnameth }}
                 </ng-template>
               </p-cellEditor>
             </td>
@@ -438,12 +460,12 @@
                     style="width: 150px"
                     pInputText
                     type="text"
-                    [(ngModel)]="product.lastNameTh"
-                    [disabled]="pageType === importType.graduateList"
+                    [(ngModel)]="product.lastnameth"
+                    [disabled]="pageType === 'graduateList'"
                   />
                 </ng-template>
                 <ng-template pTemplate="output">
-                  {{ product.lastNameTh }}
+                  {{ product.lastnameth }}
                 </ng-template>
               </p-cellEditor>
             </td>
@@ -453,7 +475,9 @@
                   <select
                     class="form-select"
                     style="width: 100px"
-                    [disabled]="pageType === importType.graduateList"
+                    [disabled]="pageType === 'graduateList'"
+                    [(ngModel)]="product.titleenid"
+                    (change)="selectedPrefixEn($event, product.index)"
                   >
                     <option
                       *ngFor="let EngPrefix of EngPrefixes"
@@ -464,7 +488,7 @@
                   </select>
                 </ng-template>
                 <ng-template pTemplate="output">
-                  {{ product.titleEn }}
+                  {{ product.titleen }}
                 </ng-template>
               </p-cellEditor>
             </td>
@@ -477,12 +501,12 @@
                     style="width: 150px"
                     pInputText
                     type="text"
-                    [(ngModel)]="product.firstNameEn"
-                    [disabled]="pageType === importType.graduateList"
+                    [(ngModel)]="product.firstnameen"
+                    [disabled]="pageType === 'graduateList'"
                   />
                 </ng-template>
                 <ng-template pTemplate="output">
-                  {{ product.firstNameEn }}
+                  {{ product.firstnameen }}
                 </ng-template>
               </p-cellEditor>
             </td>
@@ -495,12 +519,12 @@
                     style="width: 150px"
                     pInputText
                     type="text"
-                    [(ngModel)]="product.middleNameEn"
-                    [disabled]="pageType === importType.graduateList"
+                    [(ngModel)]="product.middlenameen"
+                    [disabled]="pageType === 'graduateList'"
                   />
                 </ng-template>
                 <ng-template pTemplate="output">
-                  {{ product.middleNameEn }}
+                  {{ product.middlenameen }}
                 </ng-template>
               </p-cellEditor>
             </td>
@@ -513,12 +537,12 @@
                     style="width: 150px"
                     pInputText
                     type="text"
-                    [(ngModel)]="product.lastNameEn"
-                    [disabled]="pageType === importType.graduateList"
+                    [(ngModel)]="product.lastnameen"
+                    [disabled]="pageType === 'graduateList'"
                   />
                 </ng-template>
                 <ng-template pTemplate="output">
-                  {{ product.lastNameEn }}
+                  {{ product.lastnameen }}
                 </ng-template>
               </p-cellEditor>
             </td>
@@ -531,12 +555,12 @@
                     style="width: 150px"
                     pInputText
                     type="text"
-                    [(ngModel)]="product.phone"
-                    [disabled]="pageType === importType.graduateList"
+                    [(ngModel)]="product.contactphone"
+                    [disabled]="pageType === 'graduateList'"
                   />
                 </ng-template>
                 <ng-template pTemplate="output">
-                  {{ product.phone }}
+                  {{ product.contactphone }}
                 </ng-template>
               </p-cellEditor>
             </td>
@@ -548,19 +572,19 @@
                     style="width: 150px"
                     pInputText
                     type="date"
-                    [(ngModel)]="product.birthDate"
-                    [disabled]="pageType === importType.graduateList"
+                    [(ngModel)]="product.birthdate"
+                    [disabled]="pageType === 'graduateList'"
                   />
                 </ng-template>
                 <ng-template pTemplate="output">
-                  {{ product.birthDate }}
+                  {{ product.birthdate }}
                 </ng-template>
               </p-cellEditor>
             </td>
 
             <td class="p-2 text-nowrap">
               <div
-                *ngIf="pageType === importType.studentList"
+                *ngIf="pageType === 'studentList'"
                 role="button"
                 class="text-orange text-decoration-underline whitespace-nowrap"
                 [pRowToggler]="product"
@@ -571,8 +595,8 @@
               <div
                 class="text-orange text-decoration-underline whitespace-nowrap"
                 role="button"
-                *ngIf="pageType === importType.graduateList"
-                (click)="viewAdress()"
+                *ngIf="pageType === 'graduateList'"
+                (click)="viewAdress(product.address)"
               >
                 รายละเอียดที่อยู่
               </div>
@@ -580,12 +604,12 @@
 
             <td
               class="p-2 text-nowrap"
-              *ngIf="pageType === importType.studentList"
+              *ngIf="pageType === 'studentList'"
             >
               <div
                 class="text-orange text-decoration-underline whitespace-nowrap"
                 role="button"
-                (click)="insertSubject()"
+                (click)="insertSubject(product.subject, product.index)"
               >
                 รายวิชา
               </div>
@@ -625,12 +649,14 @@
           <tr>
             <td></td>
             <td colspan="8">
-              <ksp-form-address-table></ksp-form-address-table>
+              <form [formGroup]="product.address">
+                <ksp-form-address-table formControlName="addressInfo"></ksp-form-address-table>
+              </form>
             </td>
           </tr>
         </ng-template>
       </p-table>
-      <div *ngIf="pageType === importType.studentList">
+      <div *ngIf="pageType === 'studentList'">
         <ksp-add-row-button class="blue" (click)="addStudent()">เพิ่มรายชื่อ</ksp-add-row-button>
       </div>
     </div>
@@ -644,8 +670,10 @@
     [showCenterButtons]="true"
     [showSaveButton]="true"
     [showTempSaveButton]="true"
+    [disableTempSaveButton]="false"
     (saveClicked)="save()"
     (cancelClicked)="cancel()"
+    (tempSaveClicked)="tempSave()"
     [saveButtonLabel]="'บันทึกและยื่นใบคำขอ'"
   ></ksp-bottom-nav>
 </div>

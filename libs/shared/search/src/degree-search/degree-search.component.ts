@@ -50,7 +50,7 @@ export class DegreeSearchComponent extends KspFormBaseComponent {
   }
 
   getDegreeLevel() {
-    this.uniInfoService.getDegreeLevel().subscribe(response=>{
+    this.uniInfoService.uniDegreeLevel().subscribe(response=>{
       if (response) {
         this.degreeLevelList = response;
       }

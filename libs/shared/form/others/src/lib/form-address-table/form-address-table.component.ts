@@ -1,28 +1,35 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit, Optional } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AddressService } from '@ksp/shared/service';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { providerFactory } from '@ksp/shared/utility';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
+@UntilDestroy()
 @Component({
   selector: 'ksp-form-address-table',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './form-address-table.component.html',
   styleUrls: ['./form-address-table.component.scss'],
+  providers: providerFactory(FormAddressTableComponent),
 })
-export class FormAddressTableComponent implements OnInit {
-  formAddress = this.fb.group({
-    location: [''],
-    houseNumber: [''],
-    villageNumber: [''],
-    lane: [''],
-    road: [''],
-    zipCode: [''],
-    provinceId: [null],
-    districtId: [null],
-    subDistrictId: [null],
-    remark: ['']
+export class FormAddressTableComponent
+  extends KspFormBaseComponent
+  implements OnInit {
+  override form = this.fb.group({
+    location: [],
+    housenumber: [],
+    villagenumber: [],
+    lane: [],
+    road: [],
+    zipcode: [],
+    provinceid: [null],
+    districtid: [null],
+    subdistrictid: [null],
+    remark: []
   });
   provinceList: Array<any> = [];
   districtList: Array<any>  = [];
@@ -30,15 +37,46 @@ export class FormAddressTableComponent implements OnInit {
 
   @Input() addressData: any = {};
 
-  constructor(private fb: FormBuilder, private addressService:AddressService) {}
+  constructor(
+    private fb: FormBuilder, 
+    private addressService:AddressService,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
+    super();
+    this.subscriptions.push(
+      // any time the inner form changes update the parent of any change
+      this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
+        this.getAll();
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
+  }
 
   ngOnInit(): void {
-    this.getProvince();
-    if (this.addressData.provinceId) {
-      this.getDistrict(this.addressData.provinceId);
+    if (this.data && this.data.mode == 'view') {
+      this.form.patchValue({
+        location: this.data.address.location || null,
+        housenumber: this.data.address.housenumber || null,
+        villagenumber: this.data.address.villagenumber || null,
+        lane: this.data.address.lane || null,
+        road: this.data.address.road || null,
+        zipcode: this.data.address.zipcode || null,
+        provinceid: this.data.address.provinceid || null,
+        districtid: this.data.address.districtid || null,
+        subdistrictid: this.data.address.subdistrictid || null,
+        remark: this.data.address.remark || null
+      });
+      this.form.disable();
     }
-    if (this.addressData.districtId) {
-      this.getSubdistrict(this.addressData.districtId);
+  }
+
+  getAll() {
+    this.getProvince();
+    if (this.form.value.provinceid || (this.data && this.data.address.provinceid)) {
+      this.getDistrict(this.form.value.provinceid || this.data.address.provinceid);
+    }
+    if (this.form.value.districtid || (this.data && this.data.address.districtid)) {
+      this.getSubdistrict(this.form.value.districtid || this.data.address.districtid);
     }
   }
 
@@ -51,7 +89,6 @@ export class FormAddressTableComponent implements OnInit {
   }
 
   getDistrict(provinceId: any) {
-    console.log(provinceId)
     this.addressService.getAmphurs(provinceId).subscribe(response=>{
       if (response) {
         this.districtList = response;
