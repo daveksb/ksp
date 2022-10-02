@@ -125,3 +125,25 @@ export interface AccusationList {
   edit: string;
   view: string;
 }
+export const decisions = [
+  {
+    label: 'มีมูลความผิด วินิจฉัยชี้ขาดความผิดเล็กน้อย',
+    name: 'decisions',
+    value: 1,
+  },
+  {
+    label: 'ตักเตือน / ภาคภัณฑ์ (ต้องเลือกอย่างใดอย่างหนึ่งเสมอ)',
+    name: 'decisions',
+    value: 2,
+  },
+  {
+    label: 'มีมูลความผิด นำเสนอคณะกรรมการตั้งคณะอนุกรรมการสอบสวน',
+    name: 'decisions',
+    value: 3,
+  },
+  {
+    label: 'ไม่มีมูล ยุติเรื่อง ยกข้อกล่าวหา',
+    name: 'decisions',
+    value: 4,
+  },
+];

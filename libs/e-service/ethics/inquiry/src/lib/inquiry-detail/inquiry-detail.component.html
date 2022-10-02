@@ -2,8 +2,8 @@
   <ksp-request-header-info
     [requestLabel1]="'วันที่ทำรายการ'"
     [requestLabel2]="'เลขที่รายการ'"
-    [requestDate]="'10 ตุลาคม 2565'"
-    [requestNumber]="'112234467876543'"
+    [requestDate]="today"
+    [requestNumber]="requestNumber"
   ></ksp-request-header-info>
 
   <hr />
@@ -16,11 +16,19 @@
   <div class="row">
     <div class="col mb-3">
       <label class="form-label">คำสั่งคณะกรรมการมาตรฐานวิชาชีพที่ </label>
-      <input class="form-control" type="text" formControlName="boardOrder" />
+      <input
+        class="form-control"
+        type="text"
+        formControlName="inquiryorderno"
+      />
     </div>
     <div class="col mb-3">
       <label class="form-label">ลงวันที่ </label>
-      <input class="form-control" type="date" formControlName="boardDate" />
+      <input
+        class="form-control"
+        type="date"
+        formControlName="inquiryorderdate"
+      />
     </div>
   </div>
 
@@ -91,7 +99,11 @@
           <th>วิทยาลัยเทคนิคฉะเชิงเทรา</th>
           <th>ฉะเชิงเทรา</th>
           <th>
-            <input type="date" class="form-control" />
+            <input
+              type="date"
+              class="form-control"
+              formControlName="inquiryexplaindate"
+            />
           </th>
         </tr>
       </tbody>
@@ -102,7 +114,7 @@
   <div class="row">
     <div class="col-6 mb-3">
       <label class="form-label">วันที่ </label>
-      <input class="form-control" type="date" formControlName="reportDate" />
+      <input class="form-control" type="date" formControlName="inquiryjbdate" />
     </div>
   </div>
 
@@ -113,7 +125,7 @@
         class="form-control"
         type="text"
         rows="3"
-        formControlName="inquiryReport"
+        formControlName="inquiryreport"
       ></textarea>
     </div>
     <ksp-file-upload></ksp-file-upload>
@@ -121,7 +133,7 @@
 
   <hr />
 
-  <div class="bg-light px-3 py-2">
+  <div class="bg-light px-3 py-2" formGroupName="inquiryresult">
     <div class="box-header">การพิจารณาดำเนินการ</div>
     <div class="form-label">
       คณะกรรมการวินิจฉัยระดับความผิดจรรยาบรรณของวิชาชีพ
@@ -133,7 +145,7 @@
         <input
           class="form-control"
           type="text"
-          formControlName="considerLevelTimes"
+          formControlName="considertimes"
         />
       </div>
       <div class="col mb-3">
@@ -141,7 +153,7 @@
         <input
           class="form-control"
           type="date"
-          formControlName="considerLevelDate"
+          formControlName="considerdate"
         />
       </div>
     </div>
@@ -153,7 +165,7 @@
           class="form-control"
           type="text"
           rows="3"
-          formControlName="considerLevelReason"
+          formControlName="considerreason"
         >
         </textarea>
       </div>
@@ -186,7 +198,7 @@
           style="width: 8rem"
           type="number"
           min="0"
-          formControlName="considerDay"
+          formControlName="considerday"
         />
         <label class="form-label mx-3">วัน</label>
       </div>
@@ -200,7 +212,7 @@
           class="form-control"
           style="width: 12rem"
           type="date"
-          formControlName="considerDateFrom"
+          formControlName="considerdatefrom"
         />
 
         <label class="form-label mx-3">ถึง วันที่</label>
@@ -208,7 +220,7 @@
           class="form-control"
           type="date"
           style="width: 12rem"
-          formControlName="considerDateTo"
+          formControlName="considerdateto"
         />
       </div>
 
@@ -232,7 +244,7 @@
           class="form-control"
           type="text"
           rows="3"
-          formControlName="boardOtherReason"
+          formControlName="otherreason"
         ></textarea>
       </div>
     </div>

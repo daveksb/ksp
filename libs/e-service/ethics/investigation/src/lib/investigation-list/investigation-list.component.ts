@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { AccusationSearchComponent } from '@ksp/shared/search';
@@ -24,7 +24,6 @@ import { AccusationSearchComponent } from '@ksp/shared/search';
 })
 export class InvestigationListComponent implements OnInit {
   //mode!: EthicsMode;
-  dataSource = new MatTableDataSource<AccusationList>();
   displayedColumns: string[] = columns;
 
   form = this.fb.group({
@@ -63,64 +62,4 @@ export const columns = [
   'lastUpdate',
   'edit',
   'view',
-];
-
-export interface AccusationList {
-  order: number;
-  id: string;
-  receiveDate: string;
-  blackNumber: string;
-  redNumber: string;
-  personId: string;
-  name: string;
-  process: string;
-  status: string;
-  lastUpdate: string;
-  edit: string;
-  view: string;
-}
-
-export const data: AccusationList[] = [
-  {
-    order: 1,
-    id: '641000001',
-    receiveDate: '15 มิ.ย. 2654',
-    blackNumber: 'xx/2564',
-    redNumber: 'xx/2564',
-    personId: 'x-xxxx-xxxx-xx-x',
-    name: 'นายประหยัด จันทร์อังคาร',
-    process: 'บันทึกข้อมูลกล่าวหา/กล่าวโทษ',
-    status: 'อยู่รหว่างดำเนินการ',
-    lastUpdate: '15 มิ.ย. 2569',
-    edit: '',
-    view: '',
-  },
-  {
-    order: 2,
-    id: '641000001',
-    receiveDate: '15 มิ.ย. 2654',
-    blackNumber: 'xx/2564',
-    redNumber: 'xx/2564',
-    personId: 'x-xxxx-xxxx-xx-x',
-    name: 'นายประหยัด จันทร์อังคาร',
-    process: 'บันทึกข้อมูลกล่าวหา/กล่าวโทษ',
-    status: 'อยู่รหว่างดำเนินการ',
-    lastUpdate: '15 มิ.ย. 2569',
-    edit: '',
-    view: '',
-  },
-  {
-    order: 3,
-    id: '641000001',
-    receiveDate: '15 มิ.ย. 2654',
-    blackNumber: 'xx/2564',
-    redNumber: 'xx/2564',
-    personId: 'x-xxxx-xxxx-xx-x',
-    name: 'นายประหยัด จันทร์อังคาร',
-    process: 'บันทึกข้อมูลกล่าวหา/กล่าวโทษ',
-    status: 'อยู่รหว่างดำเนินการ',
-    lastUpdate: '15 มิ.ย. 2569',
-    edit: '',
-    view: '',
-  },
 ];

@@ -42,7 +42,7 @@ export class AccusationMainComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.ethicsId = Number(params.get('id'));
       if (this.ethicsId) {
-        localForage.getItem('ethicsInfo').then((data) => {
+        localForage.getItem('registerEthicsInfoValue').then((data) => {
           // this.formComponents.addRow();
           this.form.controls.accusation.patchValue(data);
         });
@@ -65,7 +65,6 @@ export class AccusationMainComponent implements OnInit {
       });
     } else {
       this.service.createEthics(selectData).subscribe((res) => {
-        console.log('save = ', res);
         const id = res.id;
         if (id) {
           this.router.navigate(['/accusation', 'detail', id]);

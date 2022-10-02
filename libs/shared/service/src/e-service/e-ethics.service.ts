@@ -64,4 +64,28 @@ export class EthicsService {
         map((data: any) => data.datareturn)
       );
   }
+  updateEthicsInquiry(payload: any): Observable<any> {
+    return this.http
+      .post(`${environment.apiUrl}/e-service/es-ethicsupdate-inquiry`, payload)
+      .pipe(
+        shareReplay(),
+        map((data: any) => data.datareturn)
+      );
+  }
+  updateEthicsResult(payload: any): Observable<any> {
+    return this.http
+      .post(`${environment.apiUrl}/e-service/es-ethicsupdate-result`, payload)
+      .pipe(
+        shareReplay(),
+        map((data: any) => data.datareturn)
+      );
+  }
+  updateEthicsPublish(payload: any): Observable<any> {
+    return this.http
+      .post(`${environment.apiUrl}/e-service/es-ethicsupdate-publish`, payload)
+      .pipe(
+        shareReplay(),
+        map((data: any) => data.datareturn)
+      );
+  }
 }
