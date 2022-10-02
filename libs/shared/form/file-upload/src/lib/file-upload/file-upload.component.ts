@@ -28,6 +28,7 @@ export class FileUploadComponent {
   @Input() uploadType: 'button' | 'link' = 'button';
   @Input() isImage = false; // when upload image use public API
   @Input() fileName = '';
+  @Input() showDeleteFile = false;
   @Output() uploadComplete = new EventEmitter<any>();
 
   file: any;
