@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Ethics } from '@ksp/shared/interface';
 import { EthicsService } from '@ksp/shared/service';
 import { UntilDestroy } from '@ngneat/until-destroy';
+import localForage from 'localforage';
 import _ from 'lodash';
 @UntilDestroy()
 @Component({
@@ -31,7 +32,7 @@ export class AccusationMainComponent implements OnInit {
     this.checkRequestId();
 
     this.form.valueChanges.subscribe((res) => {
-      console.log('form value = ', this.form.controls.accusation.value);
+      // console.log('form value = ', this.form.controls.accusation.value);
     });
   }
 
@@ -39,7 +40,9 @@ export class AccusationMainComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.ethicsId = Number(params.get('id'));
       if (this.ethicsId) {
-        //this.loadRequestFromId(this.requestId);
+        localForage.getItem('ethicsInfo').then((data) => {
+          this.form.controls.accusation.patchValue(data);
+        });
       }
     });
   }

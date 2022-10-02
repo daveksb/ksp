@@ -72,8 +72,15 @@ export class AccusationRecordComponent
     accusationviolatedetail: [],
     accusationassignofficer: [],
     accusationassigndate: [],
-    accuserinfo: this.fb.array([] as FormGroup[]),
-    accusation_file: [],
+    accuserinfo: this.fb.array([
+      this.fb.group({
+        idcardno: [],
+        prefix: [],
+        firstname: [],
+        lastname: [],
+        phone: [],
+      }),
+    ] as FormGroup[]),
     //accusation_consideration
   });
   constructor(
