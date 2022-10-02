@@ -2,12 +2,11 @@
 </ksp-top-nav>
 
 <div class="main__container py-2 px-4">
-  <div class="">
-    <self-service-request-status
-      [headerLabel1]="'Issue Date'"
-      [headerLabel2]="'Form ID'"
-      [title]="title"></self-service-request-status>
-  </div>
+  <self-service-request-status
+    [headerLabel1]="'Issue Date'"
+    [headerLabel2]="'Form ID'"
+    [title]="title"></self-service-request-status>
+
   <br />
   <div class="box-header text-center">
     THE TEACHERS' COUNCIL OF THAILAND TEACHING LICENSE APPLICATION FORM
@@ -57,6 +56,9 @@
     <div class="d-flex justify-content-center my-3">
       <button type="button" (click)="cancel()" class="btn btn-secondary">
         Cancel
+      </button>
+      <button type="button" *ngIf="requestId" (click)="onCancelRequest()" class="ms-3 btn border-primary text-primary">
+        Cancel Request
       </button>
       <button type="button" (click)="save()" class="ms-3 btn btn-primary">
         Save (Draft)

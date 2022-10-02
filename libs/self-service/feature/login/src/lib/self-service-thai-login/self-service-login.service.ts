@@ -9,7 +9,6 @@ import { Observable } from 'rxjs';
 })
 export class SelfServiceLoginService {
   constructor(private http: HttpClient) {}
-  myInfo!: SelfMyInfo;
 
   validateLogin(form: any): Observable<SelfMyInfo> {
     return this.http.post<SelfMyInfo>(

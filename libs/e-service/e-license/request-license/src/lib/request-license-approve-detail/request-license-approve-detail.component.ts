@@ -19,28 +19,7 @@ import { Observable } from 'rxjs';
 export class RequestLicenseApproveDetailComponent implements OnInit {
   approveTitles = ['ผลการตรวจสอบ', 'สถานะการใช้งาน'];
 
-  approveChoices = [
-    [
-      {
-        name: 'อนุมัติ',
-        value: 2,
-      },
-      {
-        name: 'ไม่อนุมัติ',
-        value: 3,
-      },
-    ],
-    [
-      {
-        name: 'ใช้งาน',
-        value: 1,
-      },
-      {
-        name: 'ไม่ใช้งาน',
-        value: 2,
-      },
-    ],
-  ];
+  approveChoices = choices;
 
   userInfoType = UserInfoFormType.thai;
   form = this.fb.group({
@@ -140,3 +119,26 @@ export class RequestLicenseApproveDetailComponent implements OnInit {
     this.provinces$ = this.addressService.getProvinces();
   }
 }
+
+const choices = [
+  [
+    {
+      name: 'อนุมัติ',
+      value: 2,
+    },
+    {
+      name: 'ไม่อนุมัติ',
+      value: 3,
+    },
+  ],
+  [
+    {
+      name: 'ใช้งาน',
+      value: 1,
+    },
+    {
+      name: 'ไม่ใช้งาน',
+      value: 2,
+    },
+  ],
+];

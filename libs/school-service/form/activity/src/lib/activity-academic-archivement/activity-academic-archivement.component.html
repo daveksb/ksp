@@ -1,34 +1,56 @@
 <form [formGroup]="form">
   <div class="d-flex align-items-center mb-2">
     <input type="checkbox" class="me-2" formControlName="isAcademicChecked" />
-    <label class="form-label">เลื่อนวิทยฐานะ</label>
+    <label class="form-label"
+      ><span *ngIf="!isForeignForm">เลื่อนวิทยฐานะ</span>
+      <span *ngIf="isForeignForm"
+        >Having obtained an academic standing promotion</span
+      ></label
+    >
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">จาก</label>
+      <label class="form-label"
+        ><span *ngIf="!isForeignForm">จาก</span>
+        <span *ngIf="isForeignForm">From</span></label
+      >
       <input class="form-control" type="text" formControlName="oldAcademic" />
     </div>
     <div class="col-md-6 mb-2">
-      <label class="form-label">เป็น</label>
+      <label class="form-label"
+        ><span *ngIf="!isForeignForm">เป็น</span>
+        <span *ngIf="isForeignForm">To</span></label
+      >
       <input class="form-control" type="text" formControlName="newAcademic" />
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">ตามคำสั่ง</label>
+      <label class="form-label"
+        ><span *ngIf="!isForeignForm">ตามคำสั่ง</span>
+        <span *ngIf="isForeignForm"
+          >According to the official order of</span
+        ></label
+      >
       <input class="form-control" type="text" formControlName="orderName" />
     </div>
     <div class="col-md-6 mb-2">
-      <label class="form-label">ที่</label>
+      <label class="form-label"
+        ><span *ngIf="!isForeignForm">ที่</span>
+        <span *ngIf="isForeignForm">No</span></label
+      >
       <input class="form-control" type="text" formControlName="orderNumber" />
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">ลงวันที่</label>
+      <label class="form-label"
+        ><span *ngIf="!isForeignForm">ลงวันที่</span>
+        <span *ngIf="isForeignForm">To Date</span></label
+      >
       <input class="form-control" type="date" formControlName="orderDate" />
     </div>
   </div>
@@ -43,13 +65,21 @@
       />
     </div>
     <label class="form-label"
-      >อยู่ระหว่างการพิจารณาประเมินให้มีหรือเลื่อนวิทยฐานะ</label
+      ><span *ngIf="!isForeignForm"
+        >อยู่ระหว่างการพิจารณาประเมินให้มีหรือเลื่อนวิทยฐานะ</span
+      >
+      <span *ngIf="isForeignForm"
+        >Or process of evaluation for getting promotion
+      </span></label
     >
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">จาก</label>
+      <label class="form-label"
+        ><span *ngIf="!isForeignForm">จาก</span>
+        <span *ngIf="isForeignForm">From</span></label
+      >
       <input
         class="form-control"
         type="text"
@@ -57,7 +87,10 @@
       />
     </div>
     <div class="col-md-6 mb-2">
-      <label class="form-label">เป็น</label>
+      <label class="form-label"
+        ><span *ngIf="!isForeignForm">เป็น</span>
+        <span *ngIf="isForeignForm">To</span></label
+      >
       <input
         class="form-control"
         type="text"

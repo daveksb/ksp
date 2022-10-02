@@ -2,26 +2,29 @@
   <button
     (click)="fileUpload.click()"
     type="button"
-    class="btn btn-sm btn-primary w-auto"
-  >
-    <img src="/assets/images/img-uni/Upload.svg" /> {{ buttonLabel }}
-  </button></ng-container
->
+    class="btn btn-sm btn-primary w-auto">
+    <i class="bi bi-upload me-1"></i> {{ buttonLabel }}
+  </button>
+</ng-container>
 <ng-container *ngIf="uploadType === 'link'">
   <label role="button" class="text-primary me-3" (click)="fileUpload.click()">
     + upload document
-  </label></ng-container
->
+  </label>
+</ng-container>
 
 <input
   hidden="true"
   type="file"
+  (click)="fileUpload.value = ''"
   (change)="onFileSelected($event)"
-  #fileUpload
-/>
+  #fileUpload />
 
 <span
   *ngIf="showUploadedFileName"
-  class="fs-6 text-secondary text-decoration-underline"
-  >{{ fileName }}</span
->
+  class="fs-6 text-secondary text-decoration-underline">{{ fileName }}</span>
+
+<i
+  *ngIf="file && !isImage"
+  (click)="deleteFile()"
+  class="bi bi-x-circle-fill text-danger fs-6 ms-2"
+  role="button"></i>

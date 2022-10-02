@@ -34,9 +34,8 @@ export class DegreeCertStepOneComponent
   degreeTypes: ListData[] = [];
   universityTypes: ListData[] = [];
   provinces: ListData[] = [];
-
   @Input() showEditCheckbox = false;
-  @Input() disabledInputs: Record<string, any> = {};
+  @Input() disabledInstitute = false;
 
   @Input() showCoordinatorForm = true;
   @Output() degreeType = new EventEmitter<string>();
@@ -57,6 +56,12 @@ export class DegreeCertStepOneComponent
     locations2: this.fb.array([]),
     coordinator: [],
     courseDetailType: [],
+    section1: [false],
+    section2: [false],
+    section3: [false],
+    section4: [false],
+    section5: [false],
+    section6: [false],
   });
 
   step1Incorrect = [
@@ -96,6 +101,7 @@ export class DegreeCertStepOneComponent
       this.form.reset();
     }
   }
+
   loadData(form: any, value: any) {
     _.forEach(value, (value: any, index: any) => {
       if (form?.controls[index]) {
@@ -175,5 +181,23 @@ export class DegreeCertStepOneComponent
 
   get locations2() {
     return this.form.controls['locations2'] as FormArray;
+  }
+  get section1() {
+    return !!(!this.form.controls?.section1?.value && this.showEditCheckbox);
+  }
+  get section2() {
+    return !!(!this.form.controls?.section2?.value && this.showEditCheckbox);
+  }
+  get section3() {
+    return !!(!this.form.controls?.section3?.value && this.showEditCheckbox);
+  }
+  get section4() {
+    return !!(!this.form.controls?.section4?.value && this.showEditCheckbox);
+  }
+  get section5() {
+    return !!(!this.form.controls?.section5?.value && this.showEditCheckbox);
+  }
+  get section6() {
+    return !!(!this.form.controls?.section6?.value && this.showEditCheckbox);
   }
 }

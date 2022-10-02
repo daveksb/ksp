@@ -10,10 +10,21 @@
   <br />
   <div class="bg-white p-3">
     <div class="table-responsive" style="white-space: nowrap">
-      <table mat-table [dataSource]="dataSource">
+      <table
+        [hidden]="!dataSource.data.length"
+        matSort
+        mat-table
+        [dataSource]="dataSource"
+      >
         <ng-container matColumnDef="order">
           <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+          <td mat-cell *matCellDef="let element; let i = index">
+            {{
+              paginator.pageIndex === 0
+                ? i + 1
+                : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+            }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="requestno">
@@ -73,6 +84,13 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
+      <mat-paginator
+        [hidden]="!dataSource.data.length"
+        [length]="dataSource.data.length"
+        [pageSize]="25"
+        [showFirstLastButtons]="true"
+      >
+      </mat-paginator>
     </div>
     <!--     <div class="box-header">รายการใบคำขอ</div>
 

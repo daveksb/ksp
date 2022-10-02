@@ -27,7 +27,6 @@ export class CouncilRewardComponent
   @Input()
   set addressInfo(value: any) {
     setTimeout(() => {
-      console.log(value);
       if (value?.length) {
         value.map((addr: any, i: number) => {
           if (i === 0) {
@@ -84,6 +83,13 @@ export class CouncilRewardComponent
   ngOnInit(): void {
     this.provinces1$ = this.addressService.getProvinces();
     this.provinces2$ = this.provinces1$;
+  }
+
+  override set value(value: any) {
+    console.log(value);
+    this.form.patchValue(value);
+    this.onChange(value);
+    this.onTouched();
   }
 
   provinceChanged(addrType: number, evt: any) {

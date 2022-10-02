@@ -44,6 +44,16 @@ const EXPERIENCE_FILES = [
   },
 ];
 
+const EDU_FILES = [
+  { name: '1. สำเนาวุฒิทางการศึกษา', fileId: '', fileName: '' },
+  {
+    name: '2. เอกสารผู้สำเร็จการศึกษา ( ระบบ KSP BUNDIT)		',
+    fileId: '',
+    fileName: '',
+  },
+  { name: '3. วุฒิบัตรอบรม', fileId: '', fileName: '' },
+];
+
 @UntilDestroy()
 @Component({
   selector: 'self-service-license-request-study-supervision',
@@ -57,6 +67,7 @@ export class LicenseRequestStudySupervisionComponent
   userInfoType = UserInfoFormType.thai;
 
   experienceFiles: any[] = [];
+  eduFiles: any[] = [];
 
   override form = this.fb.group({
     userInfo: [],
@@ -104,6 +115,7 @@ export class LicenseRequestStudySupervisionComponent
   override initializeFiles() {
     super.initializeFiles();
     this.experienceFiles = structuredClone(EXPERIENCE_FILES);
+    this.eduFiles = structuredClone(EDU_FILES);
   }
 
   override patchData(data: SelfRequest) {
@@ -134,7 +146,8 @@ export class LicenseRequestStudySupervisionComponent
 
     if (data.fileinfo) {
       const fileInfo = parseJson(data.fileinfo);
-      const { experiencefiles } = fileInfo;
+      const { edufiles, experiencefiles } = fileInfo;
+      this.eduFiles = edufiles;
       this.experienceFiles = experiencefiles;
     }
   }
@@ -183,6 +196,7 @@ export class LicenseRequestStudySupervisionComponent
       educationLevelForm: null,
     };
     const experiencefiles = this.experienceFiles;
+    const edufiles = this.eduFiles;
 
     const payload = {
       ...self,
@@ -203,7 +217,7 @@ export class LicenseRequestStudySupervisionComponent
         experienceinfo: JSON.stringify(formData.experience),
       },
       ...{ prohibitproperty: JSON.stringify(forbidden) },
-      ...{ fileinfo: JSON.stringify({ experiencefiles }) },
+      ...{ fileinfo: JSON.stringify({ experiencefiles, edufiles }) },
     };
     console.log(payload);
     return payload;

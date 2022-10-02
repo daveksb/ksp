@@ -1,14 +1,11 @@
 <ksp-top-nav>
-  <span header>ยื่นใบคำขอ</span>
-  <span subHeader
-    >รายการใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพทางการศึกษาโดยไม่มีใบอนุญาตประกอบวิชาชีพ</span
-  >
+  <span header>หน้าแรก</span>
 </ksp-top-nav>
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height full-width-2">
     <div class="box-header">
-      รายการใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพทางการศึกษาโดยไม่มีใบอนุญาตประกอบวิชาชีพ
+      รายการใบคำขอที่ยื่นผ่านระบบบริการหน่วยงานทางการศึกษา
     </div>
     <div class="bg-white px-3 py-3">
       <ksp-school-request-search
@@ -18,10 +15,10 @@
         [requestTypeList]="requestTypeList"
       ></ksp-school-request-search>
 
-      <hr class="mt-3" />
-      <div class="box-header text-primary">รายการยื่นใบคำขอ</div>
+      <hr />
+      <div class="d-flex justify-content-between">
+        <div class="box-header text-primary">รายการยื่นใบคำขอ</div>
 
-      <div class="d-flex justify-content-end">
         <button
           class="btn btn-primary"
           mat-button
@@ -43,7 +40,7 @@
           <button mat-menu-item (click)="foreignPage()">
             ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ
           </button>
-          <button mat-menu-item (click)="qualificationPage()">
+          <button mat-menu-item [matMenuTriggerFor]="qualificationChoices">
             ขอหนังสือรับรองคุณวุฒิ
           </button>
           <button mat-menu-item (click)="rewardPage()">
@@ -51,38 +48,48 @@
             OSOI)
           </button>
         </mat-menu>
+
+        <mat-menu #qualificationChoices="matMenu">
+          <button (click)="qualificationPage(null, 1)" mat-menu-item>
+            ครู
+          </button>
+          <button (click)="qualificationPage(null, 2)" mat-menu-item>
+            ผู้บริหารสถานศึกษา
+          </button>
+          <button (click)="qualificationPage(null, 3)" mat-menu-item>
+            ผู้บริหารการศึกษา
+          </button>
+          <button (click)="qualificationPage(null, 4)" mat-menu-item>
+            ศึกษานิเทศก์
+          </button>
+        </mat-menu>
       </div>
 
-      <div class="table__scroll mt-1">
+      <div class="table__scroll">
         <table
-          *ngIf="!searchNotFound"
+          class="mt-2"
+          [hidden]="!dataSource.data.length"
           matSort
           mat-table
           [dataSource]="dataSource"
         >
-          <ng-container matColumnDef="id">
+          <ng-container matColumnDef="order">
             <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
             <td
               class="text-center"
               mat-cell
               *matCellDef="let element; let i = index"
+              (click)="
+                viewRequest(+element.requesttype, element.subtype, element.id)
+              "
             >
-              {{ i + 1 }}
+              {{
+                paginator.pageIndex === 0
+                  ? i + 1
+                  : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+              }}
             </td>
           </ng-container>
-
-          <!--           <ng-container matColumnDef="verify">
-            <th mat-header-cell *matHeaderCellDef>ตรวจสอบ</th>
-            <td mat-cell *matCellDef="let element" class="text-center">
-              <i
-                role="button"
-                (click)="
-                  viewRequest(+element.requesttype, element.subtype, element.id)
-                "
-                class="bi bi-check-circle-fill text-success fs-5"
-              ></i>
-            </td>
-          </ng-container> -->
 
           <ng-container matColumnDef="requestno">
             <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
@@ -201,9 +208,20 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
+        <table>
+          <tr *ngIf="searchNotFound">
+            <td
+              class="text-center fs-5"
+              [attr.colspan]="displayedColumns.length"
+            >
+              ไม่พบข้อมูล
+            </td>
+          </tr>
+        </table>
       </div>
 
       <mat-paginator
+        [hidden]="!dataSource.data.length"
         [length]="dataSource.data.length"
         [pageSize]="25"
         [showFirstLastButtons]="true"

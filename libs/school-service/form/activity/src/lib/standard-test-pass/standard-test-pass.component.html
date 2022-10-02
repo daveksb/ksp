@@ -1,7 +1,10 @@
 <form [formGroup]="form">
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">เมื่อ</label>
+      <label class="form-label"
+        ><span *ngIf="!isForeignForm">เมื่อ</span>
+        <span *ngIf="isForeignForm">Training Date</span></label
+      >
       <input class="form-control" type="date" formControlName="date" />
     </div>
   </div>

@@ -5,51 +5,93 @@
 
   <div class="my-3">
     <form [formGroup]="form">
-      <div class="form-label">
+      <div class="form-label required">
         1. เคยเป็นผู้มีความประพฤติเสื่อม หรือบกพร่องในศีลธรรมอันดีหรือไม่
       </div>
       <div class="row my-3">
         <div class="col-4 d-flex align-items-center">
-          <input class="me-2" type="radio" name="immoral" value="2" formControlName="immoral" />
+          <input
+            class="me-2"
+            type="radio"
+            name="immoral"
+            value="2"
+            formControlName="immoral" />
           <label class="form-label">ไม่เคย</label>
         </div>
         <div class="col-4 d-flex align-items-center">
-          <input class="me-2" type="radio" name="immoral" value="1" formControlName="immoral" />
+          <input
+            class="me-2"
+            type="radio"
+            name="immoral"
+            value="1"
+            formControlName="immoral" />
           <label class="form-label">เคย</label>
         </div>
       </div>
-      <div class="form-label">
+      <div class="form-label required">
         2. เป็นผู้ไร้ความสามารถหรือเสมือนไร้ความสามารถ หรือไม่
       </div>
       <div class="row my-3">
         <div class="col-4 d-flex align-items-center">
-          <input class="me-2" type="radio" name="incompetent" value="2" formControlName="incompetent" />
+          <input
+            class="me-2"
+            type="radio"
+            name="incompetent"
+            value="2"
+            formControlName="incompetent" />
           <label class="form-label">ไม่เคย</label>
         </div>
         <div class="col-4 d-flex align-items-center">
-          <input class="me-2" type="radio" name="incompetent" value="1" formControlName="incompetent" />
+          <input
+            class="me-2"
+            type="radio"
+            name="incompetent"
+            value="1"
+            formControlName="incompetent" />
           <label class="form-label">เคย</label>
         </div>
       </div>
-      <div class="form-label">
+      <div class="form-label required">
         3.
         เคยต้องโทษจำคุกในคดีที่คุรุสภาเห็นว่าอาจนำมาซึ่งความเสื่อมเสียเกียรติศักดิ์แห่งวิชาชีพ
       </div>
       <div class="row my-3">
         <div class="col-4 d-flex align-items-center">
-          <input class="me-2" type="radio" name="prison" value="2" formControlName="prison" />
+          <input
+            class="me-2"
+            type="radio"
+            name="prison"
+            value="2"
+            formControlName="prison" />
           <label class="form-label">ไม่เคย</label>
         </div>
-        <div class="col d-flex align-items-center">
-          <input class="me-2" type="radio" name="prison" value="1" formControlName="prison" />
+        <div class="col-4 d-flex align-items-center">
+          <input
+            class="me-2"
+            type="radio"
+            name="prison"
+            value="1"
+            formControlName="prison" />
           <label class="form-label">เคย</label>
-        </div>
-        <div class="col-7">
-          <input class="form-control" type="text" placeholder="โปรดระบุ" formControlName="prisonReason" />
         </div>
       </div>
 
-      <ksp-file-upload></ksp-file-upload>
+      <div class="row row-cols-2">
+        <div class="col offset-4">
+          <input
+            class="form-control"
+            type="text"
+            placeholder="โปรดระบุ"
+            formControlName="prisonReason" />
+        </div>
+        <div class="col offset-4 mt-3">
+          <ksp-file-upload
+            [uniqueTimestamp]="data.uniqueTimeStamp"
+            [systemFileName]="'forbidden-file'"
+            (uploadComplete)="uploadComplete($event)"
+            [fileName]="fileName"></ksp-file-upload>
+        </div>
+      </div>
     </form>
   </div>
   <br />
@@ -62,6 +104,7 @@
     </button>
     <button
       matDialogClose
+      [disabled]="form.invalid"
       (click)="save()"
       type="button"
       class="btn btn-primary ms-1">

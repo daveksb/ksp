@@ -6,6 +6,7 @@
       <div class="col-2">
         <label class="form-label required">คำนำหน้าชื่อภาษาอังกฤษ</label>
         <select class="form-select required" formControlName="prefixen">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let prefix of prefixList" [value]="prefix.id">
             {{ prefix?.name_en }}
           </option>
@@ -60,6 +61,7 @@
       <div class="col-2">
         <label class="form-label required">คำนำหน้าชื่อภาษาไทย</label>
         <select class="form-select" formControlName="prefixth">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let prefix of prefixList" [value]="prefix.id">
             {{ prefix?.name_th }}
           </option>

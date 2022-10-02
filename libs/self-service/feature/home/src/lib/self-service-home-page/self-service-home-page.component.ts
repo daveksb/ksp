@@ -1,4 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortable, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -15,7 +17,7 @@ import { getCookie, thaiDate } from '@ksp/shared/utility';
   templateUrl: './self-service-home-page.component.html',
   styleUrls: ['./self-service-home-page.component.scss'],
 })
-export class SelfServiceHomePageComponent {
+export class SelfServiceHomePageComponent implements AfterViewInit {
   badgeTitle = [
     `เลขที่ใบคำขอ : SF_010641000123 รายการขอขึ้นทะเบียนใบอนุญาต ถูกส่งคืน
   “ปรับแก้ไข / เพิ่มเติม” กดเพื่อตรวจสอบ`,
@@ -23,20 +25,31 @@ export class SelfServiceHomePageComponent {
 
   dataSource = new MatTableDataSource<SelfRequest>();
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private router: Router,
-    private requestService: SelfRequestService
+    private requestService: SelfRequestService,
+    private fb: FormBuilder
   ) {}
+
+  form = this.fb.group({
+    requestno: [],
+    requesttype: [],
+    requestdate: [],
+  });
 
   displayedColumns: string[] = column;
 
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
   search() {
     const payload = {
       staffid: getCookie('userId'),
-      requesttype: null,
-      requestno: null,
-      requestdate: null,
+      requesttype: this.form.controls.requesttype.value,
+      requestno: this.form.controls.requestno.value,
+      requestdate: this.form.controls.requestdate.value,
       requeststatus: null,
       currentprocess: null,
       offset: '0',
@@ -69,12 +82,12 @@ export class SelfServiceHomePageComponent {
     const id = Number(input.id);
     console.log('subType ', subType);
 
-    if (requestType > 40) {
-      this.reward();
+    if (requestType >= 40) {
+      this.reward(id);
     } else if (requestType === 30) {
-      this.refundFee();
+      this.refundFee(id);
     } else if (requestType === 6) {
-      this.compare();
+      this.compare(id);
     } else if (requestType === 5) {
       this.transfer(id);
     } else if (requestType === 4) {
@@ -154,6 +167,7 @@ export class SelfServiceHomePageComponent {
   }
 
   clear() {
+    this.form.reset();
     this.dataSource.data = [];
   }
 
@@ -264,8 +278,8 @@ export class SelfServiceHomePageComponent {
   }
 
   //ขอรับรางวัล
-  reward() {
-    this.router.navigate(['/reward', 'request']);
+  reward(id?: number) {
+    this.router.navigate(['/reward', 'request', ...(id ? [`${id}`] : [])]);
   }
 
   // ขอหนังสือรับรองความรู้
@@ -278,13 +292,17 @@ export class SelfServiceHomePageComponent {
   }
 
   // เทียบเคียง
-  compare() {
-    this.router.navigate(['/compare-knowledge', 'request']);
+  compare(id?: number) {
+    this.router.navigate([
+      '/compare-knowledge',
+      'request',
+      ...(id ? [`${id}`] : []),
+    ]);
   }
 
   // คืนเงินค่าธรรมเนียม
-  refundFee() {
-    this.router.navigate(['/refund-fee', 'request']);
+  refundFee(id?: number) {
+    this.router.navigate(['/refund-fee', 'request', ...(id ? [`${id}`] : [])]);
   }
 
   //ขอใบแทนใบอนุญาตประกอบวิชาชีพ

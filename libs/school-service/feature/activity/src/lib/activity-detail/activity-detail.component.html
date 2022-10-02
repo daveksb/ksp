@@ -118,7 +118,7 @@
               </select>
             </div>
           </div>
-          <!-- <ng-template kspDynamicComponent formControlName="test"></ng-template> -->
+
           <ksp-activity-add-degree
             *ngIf="selector.value === '0'"
             formControlName="detail"
@@ -182,8 +182,9 @@
       </div>
 
       <div class="mx-3">
-        <ng-container *ngIf="selector.value !== ''">
+        <ng-container *ngIf="selector.value !== 'null'">
           <ksp-form-attachment
+            [uniqueTimestamp]="uniqueTimestamp"
             title="กรุณาแนบหลักฐานประกอบการปฏิบัติงาน"
             [groups]="attachFiles"
           ></ksp-form-attachment

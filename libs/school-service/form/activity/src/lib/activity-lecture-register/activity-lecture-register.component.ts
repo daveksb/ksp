@@ -11,6 +11,7 @@ import { providerFactory } from '@ksp/shared/utility';
 })
 export class ActivityLectureRegisterComponent extends KspFormBaseComponent {
   @Input() data: any;
+  @Input() isForeignForm = false;
 
   //การเป็นวิทยากร ผู้บรรยาย ผู้อภิปราย หรือผู้อภิปรายร่วมในกิจกรรมที่เกี่ยวข้องกับวิชาชีพ หรือวิชาการเฉพาะด้าน
   override form = this.fb.group({

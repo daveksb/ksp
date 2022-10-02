@@ -13,8 +13,9 @@ import {
   RequestService,
   SchoolInfoService,
 } from '@ksp/shared/service';
-import { parseJson, thaiDate } from '@ksp/shared/utility';
+import { mapFileInfo, parseJson, thaiDate } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'ksp-request-reward-detail',
@@ -22,6 +23,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./request-reward.component.scss'],
 })
 export class RequestRewardComponent implements OnInit {
+  uniqueTimestamp!: string;
+
   form = this.fb.group({
     reward: [],
   });
@@ -40,6 +43,7 @@ export class RequestRewardComponent implements OnInit {
   disableTempSave = true;
   disablePermanentSave = true;
   disableCancel = false;
+  uniqueTimeStamp!: string;
 
   constructor(
     private router: Router,
@@ -52,6 +56,7 @@ export class RequestRewardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.uniqueTimestamp = uuidv4();
     this.getListData();
     this.checkRequestId();
     this.checkButtonDisableStatus();
@@ -85,6 +90,8 @@ export class RequestRewardComponent implements OnInit {
       this.requestId = Number(params.get('id'));
       if (this.requestId) {
         this.loadRequestFromId(this.requestId);
+      } else {
+        this.uniqueTimeStamp = uuidv4();
       }
     });
   }
@@ -123,6 +130,7 @@ export class RequestRewardComponent implements OnInit {
   loadRequestFromId(id: number) {
     this.requestService.getRequestById(id).subscribe((res) => {
       //console.log('res = ', res);
+      this.uniqueTimeStamp = res.uniquetimestamp || 'default-unique-timestamp';
       this.requestNo = res.requestno;
       this.requestDate = thaiDate(new Date(`${res.requestdate}`));
       this.requestStatus = res.requeststatus;
@@ -131,10 +139,11 @@ export class RequestRewardComponent implements OnInit {
       const osoiInfo = parseJson(res.osoiinfo);
       const osoiMember = parseJson(res.osoimember);
       //console.log('osoi info = ', osoiInfo);
-      //console.log('osoi member = ', osoiMember);
       this.form.controls.reward.patchValue(osoiInfo);
       this.memberData = osoiMember;
       //console.log('current process = ', this.currentProcess);
+      const file = parseJson(res.fileinfo);
+      console.log('get file = ', file);
     });
   }
 
@@ -150,6 +159,19 @@ export class RequestRewardComponent implements OnInit {
     form.requeststatus = requestStatus;
     form.osoimember = JSON.stringify(form.osoimember);
 
+    const rewardFiles = [
+      { name: 'แบบ นร. 1', fileId: '' },
+      { name: 'แบบ นร.2', fileId: '' },
+      { name: 'เอกสารอื่นๆ', fileId: '' },
+      { name: 'บันทึกนำส่งจากสถานศึกษา', fileId: '' },
+    ];
+
+    const file = structuredClone(rewardFiles);
+    //console.log('file = ', file);
+    const files = mapFileInfo(file);
+    //console.log('map file = ', files);
+    form.fileinfo = JSON.stringify({ files });
+
     const osoiInfo = {
       rewardname: form.rewardname,
       rewardtype: form.rewardtype,
@@ -161,7 +183,7 @@ export class RequestRewardComponent implements OnInit {
     baseForm.patchValue(form);
 
     const { ref1, ref2, ref3, ...payload } = baseForm.value;
-    console.log('payload = ', payload);
+    //console.log('payload = ', payload);
     this.requestService.updateRequest(payload).subscribe((res) => {
       //console.log('request result = ', res);
     });
@@ -179,6 +201,7 @@ export class RequestRewardComponent implements OnInit {
     form.subtype = `5`;
     form.currentprocess = currentProcess;
     form.requeststatus = requestStatus;
+    form.uniquetimestamp = this.uniqueTimeStamp;
     form.osoimember = JSON.stringify(form.osoimember);
 
     const osoiInfo = {

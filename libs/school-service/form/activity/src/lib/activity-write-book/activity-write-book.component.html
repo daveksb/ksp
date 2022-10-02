@@ -1,23 +1,35 @@
 <form [formGroup]="form">
   <div class="d-flex align-items-center mb-2">
     <input type="checkbox" class="me-2" formControlName="isBookChecked" />
-    <label class="form-label">ตำรา</label>
+    <label class="form-label"
+      ><span *ngIf="!isForeignForm">ตำรา</span>
+      <span *ngIf="isForeignForm">Text Book</span></label
+    >
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">ชื่อ</label>
+      <label class="form-label"
+        ><span *ngIf="!isForeignForm">ชื่อ</span>
+        <span *ngIf="isForeignForm">Name of Textbook</span></label
+      >
       <input class="form-control" type="text" formControlName="bookName" />
     </div>
     <div class="col-md-6 mb-2">
-      <label class="form-label">สำนักพิมพ์</label>
+      <label class="form-label"
+        ><span *ngIf="!isForeignForm">สำนักพิมพ์</span>
+        <span *ngIf="isForeignForm">Publisher</span></label
+      >
       <input class="form-control" type="text" formControlName="bookPublisher" />
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">พิมพ์เมื่อ</label>
+      <label class="form-label"
+        ><span *ngIf="!isForeignForm">พิมพ์เมื่อ</span>
+        <span *ngIf="isForeignForm">Published Date</span></label
+      >
       <input
         class="form-control"
         type="date"
@@ -29,17 +41,28 @@
 
   <div class="d-flex align-items-center mb-2">
     <input type="checkbox" class="me-2" formControlName="isArticleChecked" />
-    <label class="form-label">บทความ</label>
+    <label class="form-label"
+      ><span *ngIf="!isForeignForm">บทความ</span>
+      <span *ngIf="isForeignForm">Article</span></label
+    >
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">เรื่อง</label>
+      <label class="form-label"
+        ><span *ngIf="!isForeignForm">เรื่อง</span>
+        <span *ngIf="isForeignForm">Name of Articles</span></label
+      >
       <input class="form-control" type="text" formControlName="articleName" />
     </div>
 
     <div class="col-md-6 mb-2">
-      <label class="form-label">เผยแพร่ในวารสาร/หนังสือ/เว็บไซต์</label>
+      <label class="form-label"
+        ><span *ngIf="!isForeignForm">เผยแพร่ในวารสาร / หนังสือ / เว็บไซต์</span>
+        <span *ngIf="isForeignForm"
+          >Published in Journal / Book/ Website</span
+        ></label
+      >
       <input
         class="form-control"
         type="text"
@@ -50,7 +73,10 @@
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">สำนักพิมพ์</label>
+      <label class="form-label"
+        ><span *ngIf="!isForeignForm">สำนักพิมพ์</span>
+        <span *ngIf="isForeignForm">Publisher</span></label
+      >
       <input
         class="form-control"
         type="text"
@@ -58,7 +84,10 @@
       />
     </div>
     <div class="col-md-6 mb-2">
-      <label class="form-label">พิมพ์เมื่อ</label>
+      <label class="form-label"
+        ><span *ngIf="!isForeignForm">พิมพ์เมื่อ</span>
+        <span *ngIf="isForeignForm">Published Date</span></label
+      >
       <input
         class="form-control"
         type="date"
@@ -74,12 +103,18 @@
       class="me-2"
       formControlName="isAchievementChecked"
     />
-    <label class="form-label">ผลงานวิชาการ</label>
+    <label class="form-label"
+      ><span *ngIf="!isForeignForm">ผลงานวิชาการ</span>
+      <span *ngIf="isForeignForm">Publications</span></label
+    >
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">เรื่อง</label>
+      <label class="form-label"
+        ><span *ngIf="!isForeignForm">เรื่อง</span>
+        <span *ngIf="isForeignForm">Name of Academic Proposal</span></label
+      >
       <input
         class="form-control"
         type="text"
@@ -87,7 +122,10 @@
       />
     </div>
     <div class="col-md-6 mb-2">
-      <label class="form-label">วันเดือนปีที่ใช้</label>
+      <label class="form-label"
+        ><span *ngIf="!isForeignForm">วันเดือนปีที่ใช้</span>
+        <span *ngIf="isForeignForm">Applied Date</span></label
+      >
       <input
         class="form-control"
         type="date"

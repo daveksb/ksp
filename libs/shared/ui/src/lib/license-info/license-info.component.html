@@ -4,13 +4,13 @@
     <div class="fs-5">รางวัลครูภาษาไทยดีเด่น</div>
   </div>
   <div class="col-md-3 d-flex justify-content-center mb-md-0 mb-2">
-    <img src="assets/images/img-profile.png" />
+    <img
+      src="assets/images/img-profile.png"
+      style="height: 200px; width: 150px"
+    />
   </div>
 
-  <div
-    class="col-md-6"
-    style="white-space: nowrap"
-  >
+  <div class="col-md-6" style="white-space: nowrap">
     <div class="row">
       <div class="col-6 text-secondary ps-0 pe-3 text__size">
         <div class="text-end">เลขที่ใบอนุญาตประกอบวิชาชีพ</div>
@@ -25,15 +25,15 @@
       </div>
 
       <div class="col-6 ps-3 pe-0 text__size">
-        <div>644015713xxxxx</div>
-        <div>ครู</div>
-        <div>1-1020-00545-78-9</div>
-        <div>ใบอนุญาตประกอบวิชาชีพครู</div>
-        <div>ธนานุรักษ์ ใจสะอาด</div>
-        <div>Thananurak Jaisa-ard</div>
-        <div>26 มิถุนายน 2526</div>
-        <div>10 มิถุนายน 2564</div>
-        <div>10 มิถุนายน 2569</div>
+        <div>{{ license?.licenseno }}</div>
+        <div>{{ license?.careertype }}</div>
+        <div>{{ license?.idcardno }}</div>
+        <div>{{ license?.licensetype }}</div>
+        <div>{{ license?.firstnameth }} {{ license?.lastnameth }}</div>
+        <div>{{ license?.firstnameen }} {{ license?.firstnameen }}</div>
+        <div>xxxx</div>
+        <div>{{ license?.licensestartdate | date }}</div>
+        <div>{{ license?.licenseenddate | date }}</div>
       </div>
     </div>
   </div>
@@ -45,7 +45,7 @@
     <button
       type="button"
       class="btn border-success text-success"
-      (click)="select()"
+      (click)="select(license?.idcardno)"
     >
       เลือก
     </button>

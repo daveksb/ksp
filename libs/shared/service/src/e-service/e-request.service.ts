@@ -19,6 +19,15 @@ export class ERequestService {
       );
   }
 
+  searchSelfRequest(payload: any): Observable<SelfRequest[]> {
+    return this.http
+      .post(
+        `${environment.shortApiUrl}/schrequestsearch_e-service.php`,
+        payload
+      )
+      .pipe(map((data: any) => data.datareturn));
+  }
+
   getRequestById(requestId: number): Observable<SelfRequest> {
     return this.http.post<SelfRequest>(
       `${environment.apiUrl}/e-service/requestsearchbyrequestno`,

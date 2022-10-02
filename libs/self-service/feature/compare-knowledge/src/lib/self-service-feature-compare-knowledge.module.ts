@@ -25,6 +25,10 @@ export const routes: Routes = [
         path: 'request',
         component: CompareKnowledgeRequestComponent,
       },
+      {
+        path: 'request/:id',
+        component: CompareKnowledgeRequestComponent,
+      },
     ],
   },
 ];

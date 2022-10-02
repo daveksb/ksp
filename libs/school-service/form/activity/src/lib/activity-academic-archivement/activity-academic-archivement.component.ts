@@ -11,6 +11,7 @@ import { providerFactory } from '@ksp/shared/utility';
 })
 export class ActivityAcademicArchivementComponent extends KspFormBaseComponent {
   @Input() data: any;
+  @Input() isForeignForm = false;
 
   override form = this.fb.group({
     isAcademicChecked: [false],

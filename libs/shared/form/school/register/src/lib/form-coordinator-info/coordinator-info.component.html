@@ -1,6 +1,6 @@
 <form [formGroup]="form">
-  <div class="row">
-    <div class="col-6">
+  <div class="row mb-3">
+    <div class="col-4">
       <label class="form-label required">หมายเลขบัตรประชาชน</label>
       <input class="form-control" type="text" />
     </div>
@@ -14,6 +14,7 @@
         [class.bg-white]="!isDarkMode && mode === 'edit'"
         class="form-select"
         formControlName="prefixth"
+        (change)="prefixChanged($event)"
       >
         <option value="null">กรุณาเลือก</option>
         <option *ngFor="let prefix of prefixList" [value]="prefix.id">
@@ -70,6 +71,7 @@
         [class.bg-white]="!isDarkMode && mode === 'edit'"
         class="form-select"
         formControlName="prefixen"
+        (change)="prefixChanged($event)"
       >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let prefix of prefixList" [value]="prefix.id">
@@ -117,7 +119,7 @@
 
   <div class="row mb-3">
     <div class="col">
-      <label class="form-label required">ตำแหน่ง</label>
+      <label class="form-label required">{{ positionLabel }}</label>
       <input
         class="form-control"
         type="text"
@@ -143,9 +145,9 @@
       </ng-container>
     </div>
   </div>
-  <div class="row">
+  <div class="row mb-3">
     <div class="col">
-      <label class="form-label required">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
+      <label class="form-label required">เบอร์โทรศัพท์มือถือ</label>
       <input
         class="form-control"
         type="tel"

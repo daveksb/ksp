@@ -8,7 +8,7 @@
     <div class="profile__img"><img src="/assets/images/profile.png" /></div>
     <div class="profile__content">
       <div>{{ name }}</div>
-      <div class="label__status">เข้าใช้ล่าสุดวันที่ {{ date }}</div>
+      <div class="label__status">เข้าใช้ล่าสุดวันที่ {{ lastLogin }}</div>
     </div>
   </div>
 
@@ -21,7 +21,7 @@
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="{ exact: true }"
           ><div class="d-flex">
-            <img src="{{ menu.icon }}" class="icon__sidenav" />{{ menu.label }}
+            <img [src]="menu.icon" class="icon__sidenav" />{{ menu.label }}
           </div></a
         >
       </li>

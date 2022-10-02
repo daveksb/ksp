@@ -16,6 +16,8 @@ import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
 import { EServiceRequestSearchComponent } from '@ksp/shared/search';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { RequestLicenseApproveDetailComponent } from './request-license-approve-detail/request-license-approve-detail.component';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 export const routes: Route[] = [
   {
@@ -54,6 +56,8 @@ export const routes: Route[] = [
     RequestHeaderInfoComponent,
     EServiceRequestSearchComponent,
     MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
   ],
   declarations: [
     RequestLicenseApproveListComponent,

@@ -18,13 +18,14 @@
           [requestDate]="requestDate"
           [requestNumber]="requestNo"
         ></ksp-request-header-info>
-
+        <hr />
         <ksp-request-reward-form
           [mode]="'edit'"
           [osoiTypes]="osoiTypes$ | async"
           [personTypes]="personTypes$ | async"
           [prefixList]="prefixList$ | async"
           [memberList]="memberData"
+          [uniqueTimeStamp]="uniqueTimeStamp"
           formControlName="reward"
         ></ksp-request-reward-form>
       </div>
