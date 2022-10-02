@@ -24,8 +24,17 @@
   </div> -->
 
   <div class="d-flex flex-column" *ngIf="isEditMode === true">
-    <div class="fs-6 text-secondary">* ภาพหน้าตรงขนาด 1x1.5 นิ้ว</div>
-    <div class="fs-6 text-secondary">* ขนาดไม่เกิน 2 MB</div>
-    <div class="fs-6 text-secondary">* รองรับไฟล์ .Jpg , Jpeg เท่านั้น</div>
+    <div class="fs-6 text-secondary">
+      <span *ngIf="!isForeignForm">* ภาพหน้าตรงขนาด 1 x 1.5 นิ้ว</span>
+      <span *ngIf="isForeignForm">* SIZE 1 x 1.5 INCH.</span>
+    </div>
+    <div class="fs-6 text-secondary">
+      <span *ngIf="!isForeignForm">* ขนาดไม่เกิน 2 MB</span>
+      <span *ngIf="isForeignForm">* 2 MB. MAXIMUM</span>
+    </div>
+    <div class="fs-6 text-secondary">
+      <span *ngIf="!isForeignForm">* รองรับไฟล์ .Jpg , Jpeg เท่านั้น</span>
+      <span *ngIf="isForeignForm">* JPG. or PNG.</span>
+    </div>
   </div>
 </div>

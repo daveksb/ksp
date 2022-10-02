@@ -29,7 +29,7 @@
     <div class="col-md-6 mb-2">
       <label class="form-label">Country</label>
       <select class="form-select" formControlName="country">
-        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option value="null" selected hidden disabled>Please Choose</option>
         <option *ngFor="let c of countries" [value]="+c?.countryNo">
           {{ c?.countryEn }}
         </option>

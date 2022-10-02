@@ -24,10 +24,7 @@ export class EducationLevelFormFiveComponent extends KspFormBaseComponent {
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
-        const { levelOneForm, ...resForm } = value as Partial<{
-          levelOneForm: any;
-        }>;
-        this.onChange({ ...levelOneForm, ...resForm });
+        this.onChange(value);
         this.onTouched();
       })
     );

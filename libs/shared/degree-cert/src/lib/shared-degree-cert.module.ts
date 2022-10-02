@@ -9,7 +9,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedFormDegreeCertStepTwoModule } from '@ksp/shared/form/degree-cert/step-two';
 import { SharedFormDegreeCertStepThreeModule } from '@ksp/shared/form/degree-cert/step-three';
 import { UniServiceFormModule } from '@ksp/uni-service/form';
@@ -41,6 +41,7 @@ import { RouterModule } from '@angular/router';
     TopNavComponent,
     DegreeCertSearchComponent,
     UniWarnIncorrectComponent,
+    FormsModule
   ],
   declarations: [
     DegreeCertStepOneComponent,
