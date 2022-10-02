@@ -44,8 +44,8 @@
         <input type="date" class="form-control" />
       </div>
     </div>
-    <br />
-    <div class="d-flex justify-content-center">
+
+    <div class="d-flex justify-content-center mt-2">
       <button class="btn btn-secondary me-2" (click)="clear()">
         ล้างข้อมูล
       </button>
@@ -53,7 +53,7 @@
     </div>
   </div>
   <br />
-  <div class="box-header">สรุปผลลัพธ์การค้นหา 4 รายการ</div>
+  <div class="box-header">สรุปผลลัพธ์การค้นหา 6 รายการ</div>
   <div class="table-responsive" style="white-space: nowrap">
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="order">
@@ -96,7 +96,7 @@
           <i
             role="button"
             class="bi bi-eye text-primary fs-5"
-            (click)="viewDetail()"
+            (click)="viewDetail(element.order)"
           ></i>
         </td>
       </ng-container>

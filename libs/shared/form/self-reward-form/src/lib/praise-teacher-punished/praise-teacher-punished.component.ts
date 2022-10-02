@@ -14,10 +14,7 @@ export class PraiseTeacherPunishedComponent
   implements OnInit
 {
   override form = this.fb.group({
-    hasDisciplinaryAction: [],
-    noDisciplinaryAction: [],
-    pendingDisciplinaryAction: [],
-    hasDisciplinaryActionAndCleansed: [],
+    disciplinaryAction: [],
   });
 
   constructor(private fb: FormBuilder) {

@@ -15,6 +15,7 @@ export class LicenseInfoComponent {
   @Input() isHasTitle = false;
   @Input() subTitle1 = 'วันเดือนปีที่ออก';
   @Input() subTitle2 = 'วันเดือนปีที่หมดอายุ';
+  @Input() rewardTitleName = '';
   @Input() license: SelfLicense | null = null;
   @Output() selected = new EventEmitter<string>();
 

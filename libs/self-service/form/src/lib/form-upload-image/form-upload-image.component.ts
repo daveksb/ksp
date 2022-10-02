@@ -11,6 +11,7 @@ import { FileUploadComponent } from '@ksp/shared/form/file-upload';
   imports: [FileUploadComponent, CommonModule],
 })
 export class FormUploadImageComponent {
+  @Input() btnLabel = 'อัพโหลดรูปภาพ';
   @Input() isEditMode = true;
   @Input() imgSrc = '';
   @Input() requestType: any;
