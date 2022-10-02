@@ -3,7 +3,9 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SelfLicense } from '@ksp/shared/constant';
 import { SchoolLicenseService } from '@ksp/shared/service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'school-service-license-search',
   templateUrl: './license-search.component.html',
@@ -44,21 +46,41 @@ export class LicenseSearchComponent {
       licensetype: null,
       licensestatus: null,
       offset: '0',
-      row: '10',
+      row: '100',
     };
     //this.form.value;
 
-    this.licenseService.getStaffLicenses(payload).subscribe((res) => {
-      console.log('licenses = ', res);
-      if (res) {
-        //this.foundItem = true;
-        this.foundLicenses = res;
-      }
-    });
+    this.licenseService
+      .getStaffLicenses(payload)
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        console.log('licenses = ', res);
+        if (res) {
+          //this.foundItem = true;
+          this.foundLicenses = res;
+        }
+      });
   }
 
-  concatString(a = '', b = '') {
-    return a + b;
+  onSelect(idCardNo: string) {
+    console.log('id card = ', idCardNo);
+
+    const payload = {
+      cardno: idCardNo,
+      licenseno: null,
+      name: null,
+      licensetype: null,
+      licensestatus: null,
+      offset: '0',
+      row: '100',
+    };
+
+    this.licenseService
+      .getStaffLicenses(payload)
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        console.log('licenses = ', res);
+      });
   }
 
   clear() {

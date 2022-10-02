@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { SelfLicense } from '@ksp/shared/constant';
 
@@ -15,21 +15,15 @@ export class LicenseInfoComponent {
   @Input() isHasTitle = false;
   @Input() subTitle1 = 'วันเดือนปีที่ออก';
   @Input() subTitle2 = 'วันเดือนปีที่หมดอายุ';
-
   @Input() license: SelfLicense | null = null;
-  /*   @Input() licenseNo: string | null = '';
-  @Input() careerType: string | null = '';
-  @Input() idCardNo: string | null = '';
-  @Input() licenseType: string | null = '';
-  @Input() thaiName: string | null = '';
-  @Input() enName: string | null = '';
-  @Input() birthDate: string | null = '';
-  @Input() licenseStartDate: string | null = '';
-  @Input() licenseEndDate: string | null = ''; */
+  @Output() selected = new EventEmitter<string>();
 
   constructor(private router: Router) {}
 
-  select() {
-    this.router.navigate(['/staff-management', 'add-staff']);
+  select(idcardno: string | null | undefined) {
+    if (idcardno) {
+      this.selected.emit(idcardno);
+    }
+    //this.router.navigate(['/staff-management', 'add-staff']);
   }
 }
