@@ -56,14 +56,14 @@
             <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
             <th></th>
             <td mat-cell *matCellDef="let element">
-              {{ element.updatedate | date }}
+              {{ element.updatedate | thaiDate }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="requestdate">
             <th mat-header-cell *matHeaderCellDef>วันที่ยื่นใบคำขอ</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.requestdate | date }}
+              {{ element.requestdate | thaiDate }}
             </td>
           </ng-container>
 

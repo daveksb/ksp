@@ -15,6 +15,7 @@ import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EServiceRequestSearchComponent } from '@ksp/shared/search';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
 
 export const routes: Routes = [
   {
@@ -58,6 +59,7 @@ export const routes: Routes = [
     ReactiveFormsModule,
     EServiceRequestSearchComponent,
     MatPaginatorModule,
+    ThaiDatePipe,
   ],
   declarations: [ForeignLicenseDetailComponent, ForeignLicenseListComponent],
 })

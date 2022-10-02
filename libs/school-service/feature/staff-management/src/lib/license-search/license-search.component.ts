@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { SelfLicense } from '@ksp/shared/constant';
 import { SchoolLicenseService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-
+import localForage from 'localforage';
 @UntilDestroy()
 @Component({
   selector: 'school-service-license-search',
@@ -38,41 +38,35 @@ export class LicenseSearchComponent {
   }
 
   search() {
-    console.log('form = ', this.form.value);
     const payload = {
-      cardno: null,
-      licenseno: null,
-      name: null,
+      cardno: this.form.controls.cardno.value,
+      licenseno: this.form.controls.licenseno.value,
+      name: this.form.controls.name.value,
       licensetype: null,
       licensestatus: null,
       offset: '0',
       row: '100',
     };
-    //this.form.value;
 
     this.licenseService
       .getStaffLicenses(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
-        console.log('licenses = ', res);
         if (res) {
-          //this.foundItem = true;
           this.foundLicenses = res;
         }
       });
   }
 
-  onSelect(idCardNo: string) {
-    console.log('id card = ', idCardNo);
-
+  onSelect(licenseNo: string) {
     const payload = {
-      cardno: idCardNo,
-      licenseno: null,
+      cardno: null,
+      licenseno: licenseNo,
       name: null,
       licensetype: null,
       licensestatus: null,
       offset: '0',
-      row: '100',
+      row: '10',
     };
 
     this.licenseService
@@ -80,11 +74,9 @@ export class LicenseSearchComponent {
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         console.log('licenses = ', res);
+        localForage.setItem('add-staff-has-license', res[0]);
+        this.router.navigate(['./staff-management', 'add-staff-has-license']);
       });
-  }
-
-  clear() {
-    //this.foundItem = false;
   }
 
   goToDetail() {

@@ -227,6 +227,7 @@
       "@ksp/shared/interceptor": ["libs/shared/interceptor/src/index.ts"],
       "@ksp/shared/interface": ["libs/shared/interface/src/index.ts"],
       "@ksp/shared/menu": ["libs/shared/menu/src/index.ts"],
+      "@ksp/shared/pipe": ["libs/shared/pipe/src/index.ts"],
       "@ksp/shared/search": ["libs/shared/search/src/index.ts"],
       "@ksp/shared/service": ["libs/shared/service/src/index.ts"],
       "@ksp/shared/ui": ["libs/shared/ui/src/index.ts"],
