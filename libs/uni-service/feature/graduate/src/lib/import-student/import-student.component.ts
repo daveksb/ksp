@@ -14,12 +14,13 @@ import { SelectItem } from 'primeng/api';
 import { User } from './user';
 import { UserService } from './user.service';
 import { FormAddressTableComponent } from '@ksp/shared/form/others';
-import { GeneralInfoService, UniRequestService } from '@ksp/shared/service';
+import { GeneralInfoService, UniInfoService, UniRequestService } from '@ksp/shared/service';
 import localForage from 'localforage';
 import { FormBuilder } from '@angular/forms';
 import { EMPTY, switchMap } from 'rxjs';
 import * as XLSX from 'xlsx';
 import { getCookie, parseJson } from '@ksp/shared/utility';
+import moment from 'moment';
 
 @Component({
   selector: 'uni-service-import-student',
@@ -57,6 +58,7 @@ export class ImportStudentComponent implements OnInit {
     private generalInfoService: GeneralInfoService,
     private fb: FormBuilder,
     private requestService: UniRequestService,
+    private uniInfoService: UniInfoService
   ) {}
 
   ngOnInit() {
@@ -65,7 +67,7 @@ export class ImportStudentComponent implements OnInit {
         this.users = res;
       }
     })
-    console.log(getCookie('userId'))
+    const userId = Number(getCookie('userId'));
     localForage.getItem('courseData').then((res:any) => {
       if (res) {
         this.courseData = res;
@@ -74,10 +76,11 @@ export class ImportStudentComponent implements OnInit {
           requestprocess: '1',
           requeststatus: '1',
           requesttype: this.pageType == 'studentList' ? '05' : '06',
-          uniuserid: getCookie('userId'),
+          uniuserid: userId,
           systemtype: '3',
           subtype: '5',
           unirequestdegreecertid: this.courseData.courseDetail.id,
+          unidegreecertid: this.courseData.courseDetail.id,
           degreeapprovecode: this.courseData.courseDetail.degreeapprovecode,
           planyear: this.courseData.courseDetail.courseacademicyear,
           plancalendaryear: this.courseData.courseSelected.year,
@@ -92,6 +95,7 @@ export class ImportStudentComponent implements OnInit {
           graduatelist: []
         }
         console.log(this.courseData)
+        this.getAdmissionList();
       }
     });
     this.getNationality();
@@ -101,6 +105,38 @@ export class ImportStudentComponent implements OnInit {
       //console.log('process type = ', res);
       this.pageType = res.get('type') || 'studentList';
     });
+  }
+
+  getAdmissionList() {
+    this.requestService.getAdmissionListById(
+      { unidegreecertid: this.courseData?.courseDetail.id,
+        planyear: this.payload.planyear,
+        plancalendaryear: this.payload.plancalendaryear
+      })
+      .subscribe((response: any) => {
+        if (response) {
+          this.users = parseJson(response.admissionlist);
+          this.payload.id = response.id;
+          this.users.forEach((user: any, index: number) => {
+            user.index = index+1;
+            const userAddress = JSON.parse(user.address)
+            user.address = this.fb.group({
+              addressInfo: [{
+                location: [userAddress?.location || null],
+                housenumber: [userAddress?.housenumber || null],
+                villagenumber: [userAddress?.villagenumber || null],
+                lane: [userAddress?.lane || null],
+                road: [userAddress?.road || null],
+                zipcode: [userAddress?.zipcode || null],
+                provinceid: [userAddress?.provinceid || null],
+                districtid: [userAddress?.districtid || null],
+                subdistrictid: [userAddress?.subdistrictid || null],
+                remark: []
+              }]
+            })
+          });
+        }
+      });
   }
 
   getNationality() {
@@ -133,34 +169,32 @@ export class ImportStudentComponent implements OnInit {
   }
 
   addStudent() {
-    this.users.push({
-      index: this.users.length + 1,
-      id: '',
-      startdate: '2022-09-28',
-      idcard: '',
-      passportno: '',
-      nationalityid: '',
-      nationality: '',
-      titlethid: '',
-      titleth: '',
-      firstnameth: '',
-      lastnameth: '',
-      titleenid: '',
-      titleen: '',
-      firstnameen: '',
-      middlenameen: '',
-      lastnameen: '',
-      contactphone: '',
-      birthdate: '',
-      address: this.fb.group({ addressInfo: [] }),
-      approvetime: '',
-      graduatedate: '',
-      approvedate: '',
-      subject: {
-        subject1: '',
-        subject2: ''
-      }
-    })
+    if (this.users.length < this.courseData.courseSelected.student) {
+      this.users.push({
+        index: this.users.length + 1,
+        startdate: moment().format('YYYY-MM-DD'),
+        idcardno: '',
+        passportno: '',
+        nationality: null,
+        prefixth: null,
+        firstnameth: '',
+        lastnameth: '',
+        prefixen: null,
+        firstnameen: '',
+        middlenameen: '',
+        lastnameen: '',
+        contactphone: '',
+        birthdate: '',
+        address: this.fb.group({ addressInfo: [] }),
+        approvetime: '',
+        graduatedate: '',
+        approvedate: '',
+        subject: {
+          subject1: '',
+          subject2: ''
+        }
+      })
+    }
   }
 
   insertSubject(subjectInfo: any, index: any) {
@@ -177,15 +211,19 @@ export class ImportStudentComponent implements OnInit {
     });
   }
 
-  searchAddress() {
-    this.dialog.open(TrainingAddressComponent, {
+  searchAddress(index: any) {
+    const dialogRef = this.dialog.open(TrainingAddressComponent, {
       height: '900px',
       width: '1000px',
     });
+    dialogRef.afterClosed().subscribe((response: any) => {
+      if (response) {
+        this.users[index].trainingAddress = response;
+      }
+    })
   }
 
   viewAdress(address: any) {
-    console.log(address)
     this.dialog.open(FormAddressTableComponent, {
       width: '900px',
       data: {
@@ -195,7 +233,7 @@ export class ImportStudentComponent implements OnInit {
     });
   }
 
-  save() {
+  save(typeSave: string) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -208,14 +246,21 @@ export class ImportStudentComponent implements OnInit {
       .pipe(
         switchMap((res) => {
           if (res) {
+            if (typeSave == 'temp') {
+              this.payload.requestprocess = '1';
+            } else {
+              this.payload.requestprocess = '2';
+            }
             this.users.map((data: any)=>{
               delete data.index;
-              data.address = data.address.getRawValue();
+              data.address = JSON.stringify(data.address.controls.addressInfo.getRawValue());
             })
             if (this.pageType == 'studentList') {
               this.payload.admissionlist = JSON.stringify(this.users);
+              this.payload.graduatelist = null;
             } else {
               this.payload.graduatelist = JSON.stringify(this.users);
+              this.payload.admissionlist = null;
             }
             console.log(this.payload)
             return this.requestService.createRequestAdmission(this.payload);
@@ -253,12 +298,12 @@ export class ImportStudentComponent implements OnInit {
 
   selectedPrefixTh(event: any, index: number) {
     const find = this.ThPrefixes.find(s=>{return s.id == event.target.value});
-    this.users[index-1].titleth = find.name_th;
+    this.users[index-1].prefixth = find.name_th;
   }
 
   selectedPrefixEn(event: any, index: number) {
     const find = this.EngPrefixes.find(s=>{return s.id == event.target.value});
-    this.users[index-1].titleen = find.name_en;
+    this.users[index-1].prefixen = find.name_en;
   }
 
   tempSave() {
@@ -278,22 +323,18 @@ export class ImportStudentComponent implements OnInit {
         const wsname: string = wb.SheetNames[i];
         const ws: XLSX.WorkSheet = wb.Sheets[wsname];
         const data = XLSX.utils.sheet_to_json(ws) || {};
-        console.log(data)
         data.forEach((newdata: any) => {
           this.users.push({
             index: this.users.length + 1,
             id: '',
             startdate: newdata?.startdate || null,
-            idcard: newdata?.idcard || null,
+            idcardno: newdata?.idcard || null,
             passportno: newdata?.passportno || null,
-            nationalityid: newdata?.nationalityid || null,
             nationality: newdata?.nationality || null,
-            titlethid: newdata?.titlethid || null,
-            titleth: newdata?.titleth || null,
+            prefixth: newdata?.prefixth || null,
             firstnameth: newdata?.firstnameth || null,
             lastnameth: newdata?.lastnameth || null,
-            titleenid: newdata?.titleenid || null,
-            titleen: newdata?.titleen || null,
+            prefixen: newdata?.prefixen || null,
             firstnameen: newdata?.firstnameen || null,
             middlenameen: newdata?.middlenameen || null,
             lastnameen: newdata?.lastnameen || null,
@@ -328,4 +369,44 @@ export class ImportStudentComponent implements OnInit {
     window.open('/assets/file/admission_example.xlsx', '_blank');
   }
 
+  searchByIdcard(params: any, index: number) {
+    if (params.idcardno || params.passportno) {
+      const payload = {
+        idcardno: params.idcardno,
+        passportno: params.passportno,
+        offset: 0,
+        row: 10
+      }
+      this.uniInfoService.searchSelfStudent(payload)
+      .subscribe((response => {
+        if (response.datareturn) {
+          this.users[index-1].startdate =  moment().format('YYYY-MM-DD'),
+          this.users[index-1].idcardno = response.datareturn[0].idcardno,
+          this.users[index-1].passportno = response.datareturn[0].passportno,
+          this.users[index-1].nationality = response.datareturn[0].nationality,
+          this.users[index-1].prefixth = response.datareturn[0].prefixth,
+          this.users[index-1].firstnameth = response.datareturn[0].firstnameth,
+          this.users[index-1].lastnameth = response.datareturn[0].lastnameth,
+          this.users[index-1].prefixen = response.datareturn[0].prefixen,
+          this.users[index-1].firstnameen = response.datareturn[0].firstnameen,
+          this.users[index-1].middlenameen = response.datareturn[0].middlenameen,
+          this.users[index-1].lastnameen = response.datareturn[0].lastnameen,
+          this.users[index-1].contactphone = response.datareturn[0].phone,
+          this.users[index-1].birthdate = moment(response.datareturn[0].birthdate).format('YYYY-MM-DD'),
+          this.users[index-1].address = this.fb.group({ addressInfo: [{
+            location: [response.datareturn[0].addressinfo.location],
+            housenumber: [response.datareturn[0].addressinfo.houseNo],
+            villagenumber: [response.datareturn[0].addressinfo.moo],
+            lane: [response.datareturn[0].addressinfo.alley],
+            road: [response.datareturn[0].addressinfo.houseNo],
+            zipcode: [response.datareturn[0].addressinfo.postcode],
+            provinceid: [response.datareturn[0].addressinfo.province],
+            districtid: [response.datareturn[0].addressinfo.amphur],
+            subdistrictid: [response.datareturn[0].addressinfo.tumbol],
+            remark: []
+          }] })
+        }
+    }))
+    }
+  }
 }

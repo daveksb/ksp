@@ -45,7 +45,6 @@ export class FormAddressTableComponent
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
       this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
-        this.getAll();
         this.onChange(value);
         this.onTouched();
       })
@@ -68,6 +67,7 @@ export class FormAddressTableComponent
       });
       this.form.disable();
     }
+    this.getAll();
   }
 
   getAll() {

@@ -235,23 +235,23 @@
         </ng-template>
         <ng-template
           pTemplate="body"
-          let-product
+          let-user
           let-editing="editing"
           let-ri="rowIndex"
           let-expanded="expanded"
         >
-          <tr [pEditableRow]="product">
+          <tr [pEditableRow]="user">
             <td
               class="p-2 text-nowrap"
               *ngIf="pageType === 'studentList'"
             >
               <p-cellEditor>
                 <ng-template pTemplate="input">
-                  {{ product.index }}
+                  {{ user.index }}
                 </ng-template>
 
                 <ng-template pTemplate="output">
-                  {{ product.index }}
+                  {{ user.index }}
                 </ng-template>
               </p-cellEditor>
             </td>
@@ -260,7 +260,7 @@
               class="text-center"
               *ngIf="pageType === 'graduateList'"
             >
-              <input type="checkbox" [(ngModel)]="product.checked" class="form-check-input" />
+              <input type="checkbox" [(ngModel)]="user.checked" class="form-check-input" />
             </td>
 
             <td
@@ -274,11 +274,11 @@
                     style="width: 75px"
                     pInputText
                     type="text"
-                    [(ngModel)]="product.approvetime"
+                    [(ngModel)]="user.approvetime"
                   />
                 </ng-template>
                 <ng-template pTemplate="output">
-                  {{ product.approvetime }}
+                  {{ user.approvetime }}
                 </ng-template>
               </p-cellEditor>
             </td>
@@ -293,11 +293,11 @@
                     style="width: 150px"
                     pInputText
                     type="date"
-                    [(ngModel)]="product.graduatedate"
+                    [(ngModel)]="user.graduatedate"
                   />
                 </ng-template>
                 <ng-template pTemplate="output">
-                  {{ product.graduatedate }}
+                  {{ user.graduatedate }}
                 </ng-template>
               </p-cellEditor>
             </td>
@@ -312,11 +312,11 @@
                     style="width: 150px"
                     pInputText
                     type="date"
-                    [(ngModel)]="product.approvedate"
+                    [(ngModel)]="user.approvedate"
                   />
                 </ng-template>
                 <ng-template pTemplate="output">
-                  {{ product.approvedate }}
+                  {{ user.approvedate }}
                 </ng-template>
               </p-cellEditor>
             </td>
@@ -326,7 +326,7 @@
               *ngIf="pageType === 'graduateList'"
             >
               <div
-                (click)="searchAddress()"
+                (click)="searchAddress(user.index)"
                 class="text-orange text-decoration-underline whitespace-nowrap"
                 role="button"
               >
@@ -335,251 +335,166 @@
             </td>
 
             <td class="p-2 text-nowrap">
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input
-                    class="form-control"
-                    style="width: 150px"
-                    pInputText
-                    type="date"
-                    [(ngModel)]="product.startdate"
-                    [disabled]="pageType === 'graduateList'"
-                  />
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{ product.startdate }}
-                </ng-template>
-              </p-cellEditor>
+              <input
+              class="form-control"
+              style="width: 150px"
+              pInputText
+              type="date"
+              [(ngModel)]="user.startdate"
+              [disabled]="pageType === 'graduateList'"
+            />
             </td>
             <td class="p-2 text-nowrap">
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input
-                    class="form-control"
-                    style="width: 175px"
-                    pInputText
-                    type="text"
-                    [(ngModel)]="product.idcard"
-                    [disabled]="pageType === 'graduateList'"
-                  />
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{ product.idcard }}
-                </ng-template>
-              </p-cellEditor>
+              <input
+                class="form-control"
+                style="width: 175px"
+                pInputText
+                #idcard
+                type="text"
+                [(ngModel)]="user.idcardno"
+                (blur)="searchByIdcard({idcardno: idcard.value, passportno: user.passportno}, user.index)"
+                (keyup.enter)="idcard.blur();"
+                [disabled]="pageType === 'graduateList'"
+              />
             </td>
             <td class="p-2 text-nowrap">
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input
-                    class="form-control"
-                    style="width: 175px"
-                    pInputText
-                    type="text"
-                    [(ngModel)]="product.passportno"
-                    [disabled]="pageType === 'graduateList'"
-                  />
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{ product.passportno }}
-                </ng-template>
-              </p-cellEditor>
+              <input
+                class="form-control"
+                style="width: 175px"
+                pInputText
+                #passport
+                type="text"
+                [(ngModel)]="user.passportno"
+                (blur)="searchByIdcard({idcardno: user.idcardno, passportno: passport.value}, user.index)"
+                (keyup.enter)="passport.blur();"
+                [disabled]="pageType === 'graduateList'"
+              />
             </td>
 
             <td
               class="p-2 text-nowrap"
               *ngIf="pageType === 'studentList'"
             >
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <select 
-                    class="form-select" 
-                    style="width: 150px"
-                    (change)="selectedNationality($event, product.index)"
-                    [(ngModel)]="product.nationalityid">
-                    <option
-                      *ngFor="let nation of nationality"
-                      [value]="nation.nationId"
-                    >
-                      {{ nation.nationName }}
-                    </option>
-                  </select>
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{ product.nationality }}
-                </ng-template>
-              </p-cellEditor>
+              <select 
+                class="form-select" 
+                style="width: 150px"
+                [(ngModel)]="user.nationality">
+                <option value="null" selected hidden disabled>กรุณาเลือก</option>
+                <option
+                  *ngFor="let nation of nationality"
+                  [value]="nation.nationId"
+                >
+                  {{ nation.nationName }}
+                </option>
+              </select>
             </td>
 
             <td class="p-2 text-nowrap">
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <select
-                    class="form-select"
-                    style="width: 100px"
-                    [disabled]="pageType === 'graduateList'"
-                    [(ngModel)]="product.titlethid"
-                    (change)="selectedPrefixTh($event, product.index)"
-                  >
-                    <option
-                      *ngFor="let ThPrefix of ThPrefixes"
-                      [value]="ThPrefix.id"
-                    >
-                      {{ ThPrefix.name_th }}
-                    </option>
-                  </select>
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{ product.titleth }}
-                </ng-template>
-              </p-cellEditor>
+              <select
+                class="form-select"
+                style="width: 100px"
+                [disabled]="pageType === 'graduateList'"
+                [(ngModel)]="user.prefixth"
+              >
+                <option value="null" selected hidden disabled>กรุณาเลือก</option>
+                <option
+                  *ngFor="let ThPrefix of ThPrefixes"
+                  [value]="ThPrefix.id"
+                >
+                  {{ ThPrefix.name_th }}
+                </option>
+              </select>
             </td>
 
             <td class="p-2 text-nowrap">
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input
-                    class="form-control"
-                    style="width: 150px"
-                    pInputText
-                    type="text"
-                    [(ngModel)]="product.firstnameth"
-                    [disabled]="pageType === 'graduateList'"
-                  />
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{ product.firstnameth }}
-                </ng-template>
-              </p-cellEditor>
+              <input
+                class="form-control"
+                style="width: 150px"
+                pInputText
+                type="text"
+                [(ngModel)]="user.firstnameth"
+                [disabled]="pageType === 'graduateList'"
+              />
             </td>
             <td class="p-2 text-nowrap">
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input
-                    class="form-control"
-                    style="width: 150px"
-                    pInputText
-                    type="text"
-                    [(ngModel)]="product.lastnameth"
-                    [disabled]="pageType === 'graduateList'"
-                  />
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{ product.lastnameth }}
-                </ng-template>
-              </p-cellEditor>
+              <input
+                class="form-control"
+                style="width: 150px"
+                pInputText
+                type="text"
+                [(ngModel)]="user.lastnameth"
+                [disabled]="pageType === 'graduateList'"
+              />
             </td>
             <td class="p-2 text-nowrap">
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <select
-                    class="form-select"
-                    style="width: 100px"
-                    [disabled]="pageType === 'graduateList'"
-                    [(ngModel)]="product.titleenid"
-                    (change)="selectedPrefixEn($event, product.index)"
-                  >
-                    <option
-                      *ngFor="let EngPrefix of EngPrefixes"
-                      [value]="EngPrefix.id"
-                    >
-                      {{ EngPrefix.name_en }}
-                    </option>
-                  </select>
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{ product.titleen }}
-                </ng-template>
-              </p-cellEditor>
+              <select
+                class="form-select"
+                style="width: 100px"
+                [disabled]="pageType === 'graduateList'"
+                [(ngModel)]="user.prefixen"
+              >
+                <option value="null" selected hidden disabled>กรุณาเลือก</option>
+                <option
+                  *ngFor="let EngPrefix of EngPrefixes"
+                  [value]="EngPrefix.id"
+                >
+                  {{ EngPrefix.name_en }}
+                </option>
+              </select>
             </td>
 
             <td class="p-2 text-nowrap">
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input
-                    class="form-control"
-                    style="width: 150px"
-                    pInputText
-                    type="text"
-                    [(ngModel)]="product.firstnameen"
-                    [disabled]="pageType === 'graduateList'"
-                  />
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{ product.firstnameen }}
-                </ng-template>
-              </p-cellEditor>
+              <input
+                class="form-control"
+                style="width: 150px"
+                pInputText
+                type="text"
+                [(ngModel)]="user.firstnameen"
+                [disabled]="pageType === 'graduateList'"
+              />
             </td>
 
             <td class="p-2 text-nowrap">
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input
-                    class="form-control"
-                    style="width: 150px"
-                    pInputText
-                    type="text"
-                    [(ngModel)]="product.middlenameen"
-                    [disabled]="pageType === 'graduateList'"
-                  />
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{ product.middlenameen }}
-                </ng-template>
-              </p-cellEditor>
+              <input
+                class="form-control"
+                style="width: 150px"
+                pInputText
+                type="text"
+                [(ngModel)]="user.middlenameen"
+                [disabled]="pageType === 'graduateList'"
+              />
             </td>
 
             <td class="p-2 text-nowrap">
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input
-                    class="form-control"
-                    style="width: 150px"
-                    pInputText
-                    type="text"
-                    [(ngModel)]="product.lastnameen"
-                    [disabled]="pageType === 'graduateList'"
-                  />
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{ product.lastnameen }}
-                </ng-template>
-              </p-cellEditor>
+              <input
+                class="form-control"
+                style="width: 150px"
+                pInputText
+                type="text"
+                [(ngModel)]="user.lastnameen"
+                [disabled]="pageType === 'graduateList'"
+              />
             </td>
 
             <td class="p-2 text-nowrap">
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input
-                    class="form-control"
-                    style="width: 150px"
-                    pInputText
-                    type="text"
-                    [(ngModel)]="product.contactphone"
-                    [disabled]="pageType === 'graduateList'"
-                  />
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{ product.contactphone }}
-                </ng-template>
-              </p-cellEditor>
+              <input
+                class="form-control"
+                style="width: 150px"
+                pInputText
+                type="text"
+                [(ngModel)]="user.contactphone"
+                [disabled]="pageType === 'graduateList'"
+              />
             </td>
             <td class="p-2 text-nowrap">
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input
-                    class="form-control"
-                    style="width: 150px"
-                    pInputText
-                    type="date"
-                    [(ngModel)]="product.birthdate"
-                    [disabled]="pageType === 'graduateList'"
-                  />
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{ product.birthdate }}
-                </ng-template>
-              </p-cellEditor>
+              <input
+                class="form-control"
+                style="width: 150px"
+                pInputText
+                type="date"
+                [(ngModel)]="user.birthdate"
+                [disabled]="pageType === 'graduateList'"
+              />
             </td>
 
             <td class="p-2 text-nowrap">
@@ -587,7 +502,7 @@
                 *ngIf="pageType === 'studentList'"
                 role="button"
                 class="text-orange text-decoration-underline whitespace-nowrap"
-                [pRowToggler]="product"
+                [pRowToggler]="user"
               >
                 รายละเอียดที่อยู่
               </div>
@@ -596,7 +511,7 @@
                 class="text-orange text-decoration-underline whitespace-nowrap"
                 role="button"
                 *ngIf="pageType === 'graduateList'"
-                (click)="viewAdress(product.address)"
+                (click)="viewAdress(user.address)"
               >
                 รายละเอียดที่อยู่
               </div>
@@ -609,54 +524,26 @@
               <div
                 class="text-orange text-decoration-underline whitespace-nowrap"
                 role="button"
-                (click)="insertSubject(product.subject, product.index)"
+                (click)="insertSubject(user.subject, user.index)"
               >
                 รายวิชา
-              </div>
-            </td>
-
-            <td class="d-flex justify-content-center">
-              <i
-                class="bi bi-pen text-primary p-2"
-                *ngIf="!editing"
-                type="button"
-                pInitEditableRow
-                (click)="onRowEditInit(product)"
-              ></i>
-
-              <div class="d-flex flex-column">
-                <i
-                  class="bi bi-x-lg text-danger"
-                  *ngIf="editing"
-                  type="button"
-                  pCancelEditableRow
-                  (click)="onRowEditCancel(product, ri)"
-                ></i>
-
-                <i
-                  class="bi bi-check-lg text-success"
-                  *ngIf="editing"
-                  type="button"
-                  pSaveEditableRow
-                  (click)="onRowEditSave(product)"
-                ></i>
               </div>
             </td>
           </tr>
         </ng-template>
 
-        <ng-template pTemplate="rowexpansion" let-product>
+        <ng-template pTemplate="rowexpansion" let-user>
           <tr>
             <td></td>
             <td colspan="8">
-              <form [formGroup]="product.address">
+              <form [formGroup]="user.address">
                 <ksp-form-address-table formControlName="addressInfo"></ksp-form-address-table>
               </form>
             </td>
           </tr>
         </ng-template>
       </p-table>
-      <div *ngIf="pageType === 'studentList'">
+      <div *ngIf="pageType === 'studentList' && users.length < courseData.courseSelected.student">
         <ksp-add-row-button class="blue" (click)="addStudent()">เพิ่มรายชื่อ</ksp-add-row-button>
       </div>
     </div>
@@ -671,9 +558,9 @@
     [showSaveButton]="true"
     [showTempSaveButton]="true"
     [disableTempSaveButton]="false"
-    (saveClicked)="save()"
+    (saveClicked)="save('send')"
     (cancelClicked)="cancel()"
-    (tempSaveClicked)="tempSave()"
+    (tempSaveClicked)="save('temp')"
     [saveButtonLabel]="'บันทึกและยื่นใบคำขอ'"
   ></ksp-bottom-nav>
 </div>

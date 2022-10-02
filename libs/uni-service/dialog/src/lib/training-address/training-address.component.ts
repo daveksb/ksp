@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { UniversitySearchComponent } from '@ksp/shared/search';
 
 @Component({
@@ -10,18 +10,22 @@ import { UniversitySearchComponent } from '@ksp/shared/search';
 })
 export class TrainingAddressComponent {
   teachingAddressForm = this.fb.group({
-    addressCode: [],
-    addressName: [],
+    uniid: [],
+    universitycode: [],
+    uniname: [],
   });
 
   form = this.fb.group({
     addresses: this.fb.array([this.teachingAddressForm]),
   });
 
-  constructor(public dialog: MatDialog, private fb: FormBuilder) {}
+  constructor(
+    public dialog: MatDialog,
+    private fb: FormBuilder,
+    public dialogRef: MatDialogRef<TrainingAddressComponent>) {}
 
-  searchAddress() {
-    this.dialog.open(UniversitySearchComponent, {
+  searchAddress(index: any) {
+    const dialogRef = this.dialog.open(UniversitySearchComponent, {
       height: '900px',
       width: '1200px',
       data: {
@@ -29,12 +33,22 @@ export class TrainingAddressComponent {
         searchType: 'uni',
       },
     });
+    dialogRef.afterClosed().subscribe((response: any)=>{
+      if (response) {
+        this.form.controls.addresses.at(index).patchValue({
+          universitycode: response.universitycode,
+          uniname: response.name,
+          uniid: response.id
+        })
+      }
+    })
   }
 
   addAddress() {
     const teachingAddressForm = this.fb.group({
-      addressCode: [],
-      addressName: [],
+      universitycode: [],
+      uniname: [],
+      uniid: []
     });
     this.addresses.push(teachingAddressForm);
   }
@@ -45,5 +59,9 @@ export class TrainingAddressComponent {
 
   deleteAddress(index: number) {
     this.addresses.removeAt(index);
+  }
+
+  save() {
+    this.dialogRef.close(this.form.controls.addresses.value);
   }
 }

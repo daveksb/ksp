@@ -131,4 +131,34 @@ export class UniInfoService {
       }
     );
   }
+
+  searchSelfStudent(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/selfmyinfosearch_uni.php`,
+      {
+        ...params,
+        tokenkey: this.tokenKey,
+      }
+    );
+  }
+
+  uniAdmissionSearch(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/unidegreeadmissionsearch.php`,
+      {
+        ...params,
+        tokenkey: this.tokenKey,
+      }
+    );
+  }
+
+  uniAdmissionSearch2(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/unidegreeadmissionsearch_2.php`,
+      {
+        ...params,
+        tokenkey: this.tokenKey,
+      }
+    );
+  }
 }

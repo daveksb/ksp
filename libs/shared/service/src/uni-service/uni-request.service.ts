@@ -61,4 +61,18 @@ export class UniRequestService {
       tokenkey: getCookie('userToken'),
     });
   }
+
+  getAdmissionListById(form: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/kspuni/unidegreeadmissionselectdegreeid`, {
+      ...form,
+      tokenkey: getCookie('userToken'),
+    });
+  }
+
+  getAdmissionCount(form: any): Observable<any> {
+    return this.http.post(`${environment.shortApiUrl}/unidegreeadmissionsearchcount.php`, {
+      ...form,
+      tokenkey: getCookie('userToken'),
+    });
+  }
 }

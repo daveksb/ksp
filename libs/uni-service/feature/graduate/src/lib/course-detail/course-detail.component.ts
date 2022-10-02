@@ -34,12 +34,12 @@ export class CourseDetailComponent implements OnInit {
     'ขอยื่นรายชื่อผู้เข้าศึกษา',
     'ขอยื่นรายชื่อผู้สำเร็จการศึกษา',
   ];
+  planCount: any;
 
   async ngOnInit() {
     this.route.paramMap.subscribe((res) => {
       this.id = Number(res.get('id'));
       this.processType = 0;
-      //console.log('process type = ', this.processType);
     });
     this.uniRequestService.getUniDegreeCertById(this.id).subscribe(response=>{
       if (response) {
@@ -61,6 +61,7 @@ export class CourseDetailComponent implements OnInit {
           return curr + parseInt(prev.student)
         }, 0)
         console.log(this.courseData);
+        this.getAdmissionDetail(this.courseData);
         this._mappingResponseWithForm(response);
       }
     })
@@ -106,13 +107,32 @@ export class CourseDetailComponent implements OnInit {
     });
   }
 
+  getAdmissionDetail(data: any) {
+    console.log(data)
+    const payload = {
+      unidegreecertid: '1',
+      plancalendaryear: '2022',
+      row: 10,
+      offset: 0
+    }
+    this.uniRequestService.getAdmissionCount(payload).subscribe((response: any) => {
+      if (response.datareturn) {
+        console.log(response)
+        this.courseData.coursestructure.map((course: any)=>{
+          const findData = response.datareturn.find((data: any)=>{ return Number(data.planyear) == course.year})
+          course.admissionCount = findData ? findData.unidegreecertidcount : 0;
+        })
+      }
+    })
+  }
+
   private toDate(sDate: any) {
     return sDate ? moment(sDate).format('yyyy-MM-DD') : '';
   }
 
   goToImportStudent(type: string, row: any) {
     console.log(type)
-    let course = {
+    const course = {
       courseSelected: row,
       courseDetail: this.courseData
     };
