@@ -1,76 +1,87 @@
 <div class="box-header text-primary">ข้อมูลผู้ถูกกล่าวหา/กล่าวโทษ</div>
 <hr />
-<div class="bg-white">
-  <div class="box-header">ค้นหา</div>
+<form [formGroup]="form">
+  <div class="bg-white">
+    <div class="box-header">ค้นหา</div>
 
-  <div class="row">
-    <div class="col-3">
-      <label class="form-label">หมายเลขบัตรประชาชน </label>
-      <input class="form-control" type="text" />
+    <div class="row">
+      <div class="col-3">
+        <label class="form-label">หมายเลขบัตรประชาชน </label>
+        <input class="form-control" type="text" formControlName="idcardno" />
+      </div>
+
+      <div class="col-2">
+        <label class="form-label">คำนำหน้าชื่อ</label>
+        <select class="form-select" formControlName="prefixth">
+          <option value="null">กรุณาเลือก</option>
+          <option
+            *ngFor="let prefix of prefixList$ | async"
+            [value]="prefix.id"
+          >
+            {{ prefix?.name_th }}
+          </option>
+        </select>
+      </div>
+
+      <div class="col">
+        <label class="form-label">ชื่อ</label>
+        <input class="form-control" type="text" formControlName="firstnameth" />
+      </div>
+
+      <div class="col">
+        <label class="form-label">นามสกุล</label>
+        <input class="form-control" type="text" formControlName="lastnameth" />
+      </div>
     </div>
 
-    <div class="col-2">
-      <label class="form-label">คำนำหน้าชื่อ</label>
-      <select class="form-select">
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
+    <div class="row">
+      <div class="col-5">
+        <label class="form-label"> สังกัด</label>
+        <select class="form-select" formControlName="bureauid">
+          <option value="null" selected disabled hidden>กรุณาเลือก</option>
+          <option
+            *ngFor="let bureau of bureaus$ | async"
+            [value]="bureau?.bureauId"
+          >
+            {{ bureau?.bureauName }}
+          </option>
+        </select>
+      </div>
     </div>
 
-    <div class="col">
-      <label class="form-label">ชื่อ</label>
-      <input class="form-control" type="text" />
+    <div class="row">
+      <div class="col-5">
+        <label class="form-label"> จังหวัด</label>
+        <select class="form-select" formControlName="province">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option
+            *ngFor="let province of provinces$ | async"
+            [value]="province?.province_id"
+          >
+            {{ province?.province_name }}
+          </option>
+        </select>
+      </div>
+      <div class="col">
+        <label class="form-label">หน่วยงาน / สถานศึกษา</label>
+        <input class="form-control" type="text" formControlName="schoolname" />
+      </div>
     </div>
 
-    <div class="col">
-      <label class="form-label">นามสกุล</label>
-      <input class="form-control" type="text" />
+    <div class="d-flex justify-content-end mt-3">
+      <button
+        (click)="clear()"
+        type="button"
+        class="btn border-primary text-primary"
+      >
+        ล้างข้อมูล
+      </button>
+      <button (click)="search()" type="button" class="btn btn-primary ms-2">
+        ค้นหา
+      </button>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col-5">
-      <label class="form-label"> สังกัด</label>
-      <select class="form-select">
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-5">
-      <label class="form-label"> จังหวัด</label>
-      <select class="form-select">
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-    <div class="col">
-      <label class="form-label">หน่วยงาน / สถานศึกษา</label>
-      <input class="form-control" type="text" />
-    </div>
-  </div>
-
-  <div class="d-flex justify-content-end mt-3">
-    <button
-      (click)="clear()"
-      type="button"
-      class="btn border-primary text-primary"
-    >
-      ล้างข้อมูล
-    </button>
-    <button (click)="search()" type="button" class="btn btn-primary ms-2">
-      ค้นหา
-    </button>
-  </div>
-</div>
+</form>
 <hr />
 
 <div class="box-header">ผลการค้นหา</div>
@@ -79,7 +90,7 @@
   <ng-container matColumnDef="select">
     <th mat-header-cell *matHeaderCellDef>เลือก</th>
     <td mat-cell *matCellDef="let row">
-      <input (click)="$event.stopPropagation()" type="radio" name="license1" />
+      <input (change)="onClickRadio(row)" type="radio" name="license1" />
     </td>
   </ng-container>
 
@@ -88,7 +99,7 @@
     <td mat-cell *matCellDef="let row">
       <i
         role="button"
-        (click)="personSelected = true"
+        (click)="onClickGetInfo(row)"
         class="bi bi-eye text-success fs-5"
       ></i>
     </td>
@@ -96,12 +107,14 @@
 
   <ng-container matColumnDef="personId">
     <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
-    <td mat-cell *matCellDef="let element">{{ element.personId }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.idcardno }}</td>
   </ng-container>
 
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    <td mat-cell *matCellDef="let element">
+      {{ element.firstnameth }} {{ element.lastnameth }}
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="organization">
@@ -123,11 +136,30 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
 
+<nav *ngIf="dataSource.data.length > 0" style="padding-top: 20px">
+  <ul class="pagination">
+    <li role="button" (click)="goPrevious()" class="page-item">
+      <a class="page-link"><i class="bi bi-chevron-left"></i></a>
+    </li>
+    <li role="button" class="page-item">
+      <a class="page-link">หน้าที่ {{ currentPage }}</a>
+    </li>
+    <li role="button" (click)="goNext()" class="page-item">
+      <a class="page-link"><i class="bi bi-chevron-right"></i></a>
+    </li>
+  </ul>
+</nav>
+
 <div class="d-flex justify-content-center mt-3">
   <button matDialogClose type="button" class="btn border-success text-success">
     ยกเลิก
   </button>
-  <button matDialogClose type="button" class="btn btn-success ms-2">
+  <button
+    [mat-dialog-close]="selectedIdCard"
+    [disabled]="selectedIdCard ? null : true"
+    type="button"
+    class="btn btn-success ms-2"
+  >
     ตกลง
   </button>
 </div>

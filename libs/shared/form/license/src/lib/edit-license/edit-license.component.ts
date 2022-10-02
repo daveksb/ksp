@@ -61,7 +61,8 @@ export class EditLicenseComponent extends KspFormBaseComponent {
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
-        this.onChange(value);
+        const changeValue = this.form.getRawValue();
+        this.onChange(changeValue);
         this.onTouched();
       })
     );
