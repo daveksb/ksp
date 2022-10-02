@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -14,7 +14,7 @@ import {
   LicenseTypeButtonGroupComponent,
   RequestHeaderInfoComponent,
 } from '@ksp/shared/ui';
-import { providerFactory } from '@ksp/shared/utility';
+import { providerFactory, thaiDate } from '@ksp/shared/utility';
 
 @Component({
   selector: 'e-service-inquiry-detail',
@@ -38,20 +38,26 @@ import { providerFactory } from '@ksp/shared/utility';
 })
 export class InquiryDetailComponent extends KspFormBaseComponent {
   override form = this.fb.group({
-    boardOrder: [],
-    boardDate: [],
-    reportDate: [],
-    inquiryReport: [],
-    considerLevelTimes: [],
-    considerLevelDate: [],
-    considerLevelReason: [],
-    consider: [],
-    considerDay: [],
-    considerDateFrom: [],
-    considerDateTo: [],
-    boardOtherReason: [],
+    inquiryorderno: [],
+    inquiryorderdate: [],
+    inquirysubcommittee: [],
+    inquiryexplaindate: [],
+    inquiryjbdate: [],
+    inquiryreport: [],
+    inquiryfile: [],
+    inquiryresult: this.fb.group({
+      considertimes: [],
+      considerdate: [],
+      considerreason: [],
+      considerday: [],
+      considerdatefrom: [],
+      considerdateto: [],
+      consider: [],
+      otherreason: [],
+    }),
   });
-
+  today = thaiDate(new Date());
+  requestNumber = '';
   constructor(private router: Router, private fb: FormBuilder) {
     super();
     this.subscriptions.push(
