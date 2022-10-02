@@ -1,8 +1,5 @@
-.scroll {
-  margin: 4px, 4px;
-  padding: 4px;
-  width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  white-space: nowrap;
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+  padding: 0 8px;
 }

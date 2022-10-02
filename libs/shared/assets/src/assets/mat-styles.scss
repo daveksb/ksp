@@ -14,6 +14,10 @@
   white-space: break-spaces !important;
 }
 
+.mat-horizontal-content-container {
+  padding: 0 !important;
+}
+
 @media only screen and (max-width: 768px) {
   .mat-tab-label {
     width: 11rem;
@@ -31,9 +35,19 @@
     padding: 24px 8px;
   }
 
-  .mat-horizontal-content-container {
-    padding: 0 !important;
+  .mat-step-text-label {
+    overflow: initial !important;
+    font-size: 14px !important;
   }
+
+  /* .mat-step-text-label {
+    text-overflow: clip;
+    overflow: initial;
+  } */
+
+  /* .mat-horizontal-content-container {
+    padding: 0 !important;
+  } */
 }
 
 .mat-tab-label-active {
@@ -119,6 +133,11 @@ tr[class^='mat'] {
   font-family: var(--bs-body-font-family);
 }
 
+button.mat-menu-item {
+  font-family: 'ksp bold';
+  font-size: 18px;
+}
+
 .mat-menu-panel {
   max-width: none !important;
 }
@@ -144,4 +163,9 @@ tr[class^='mat'] {
 
 .mat-list-base {
   padding-top: 0 !important;
+}
+
+/* Styles for the active tab label */
+.mat-tab-label.mat-tab-label-active {
+  color: #0056ff;
 }

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuConfig } from '@ksp/shared/interface';
+import { KspParam, MenuConfig } from '@ksp/shared/interface';
 
 @Component({
   selector: 'ksp-side-menu',
@@ -10,13 +10,15 @@ import { MenuConfig } from '@ksp/shared/interface';
 export class SideMenuComponent {
   @Input() menuConfig: MenuConfig[] = [];
   @Input() showHeader = false;
+  @Input() name = '';
+  @Input() lastLogin = '';
 
   constructor(private router: Router) {}
 
-  navigateUrl(url: string, queryParams: string) {
+  navigateUrl(url: string, queryParams: KspParam | undefined) {
     if (queryParams) {
       this.router.navigate([url], {
-        queryParams: { type: queryParams },
+        queryParams,
       });
     } else {
       this.router.navigate([url]);

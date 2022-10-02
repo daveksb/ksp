@@ -1,13 +1,16 @@
-import { RequestProcessList, SchoolRequestType } from '@ksp/shared/constant';
+import { SchoolRequestProcess, SchoolRequestType } from '@ksp/shared/constant';
 import { SchoolRequest } from '@ksp/shared/interface';
 import moment from 'moment';
 
 // return Thai date format, Use in component
-export function stringToThaiDate(sDate: string, format = "DD MMM YYYY"): string {
+export function stringToThaiDate(
+  sDate: string,
+  format = 'DD MMM YYYY'
+): string {
   try {
     return moment(sDate).locale('th-TH').format(format);
   } catch (error) {
-    return "-"
+    return '-';
   }
 }
 // return Thai date format, Use in component
@@ -59,7 +62,7 @@ export function toLowercaseProp(input: any) {
 export function applyClientFilter(data: SchoolRequest[], searchParams: any) {
   //
   const { requesttype, ...param } = searchParams;
-  console.log('param = ', param);
+  //console.log('param = ', param);
   return data.filter((d) => {
     const filter1 = param.requestno
       ? d.requestno?.includes(param.requestno)
@@ -95,7 +98,7 @@ export function applyClientFilter(data: SchoolRequest[], searchParams: any) {
 }
 
 export function checkProcess(processId: number) {
-  const process = RequestProcessList.find((p) => {
+  const process = SchoolRequestProcess.find((p) => {
     return p.processId === processId && p.requestType === 3;
   });
   return process;
@@ -104,7 +107,7 @@ export function checkProcess(processId: number) {
 export function checkStatus(processId: number, statusId: number) {
   const process = checkProcess(processId);
   const status = process?.status.find((s) => {
-    return (s.id = statusId);
+    return s.id == statusId;
   });
   return status;
 }
@@ -132,4 +135,14 @@ export function getBase64(
  */
 export function formatDate(input: string) {
   return input.split('T')[0];
+}
+
+export function mapFileInfo(fileList: any[]) {
+  return fileList.map((file: any) => {
+    const object = {
+      fileid: file.fileId || null,
+      filename: file.fileName || null,
+    };
+    return object;
+  });
 }

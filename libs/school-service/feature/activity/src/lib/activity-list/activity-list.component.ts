@@ -22,8 +22,11 @@ export class ActivityListComponent implements AfterViewInit {
   schoolId = '0010201056';
   displayedColumns: string[] = [
     'id',
+    'licenseID',
     'idcardno',
     'name',
+    'releaseDate',
+    'finishedDate',
     'startdate',
     'enddate',
     'edit',

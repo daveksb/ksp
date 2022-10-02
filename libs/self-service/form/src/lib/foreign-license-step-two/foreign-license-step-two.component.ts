@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
   GeneralInfoService,
@@ -22,6 +22,51 @@ export class ForeignLicenseStepTwoComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+  @Input()
+  set userInfo(value: any) {
+    setTimeout(() => {
+      this.form.patchValue(value);
+    }, 0);
+  }
+  @Input()
+  set addressInfo(value: any) {
+    setTimeout(() => {
+      if (value) {
+        this.district1$ = this.addressService.getAmphurs(value.province);
+        this.subDistrict1$ = this.addressService.getTumbols(value.amphur);
+        this.form.controls.addressForm.patchValue(value);
+      }
+    }, 0);
+  }
+  @Input()
+  set workplaceInfo(value: any) {
+    setTimeout(() => {
+      if (value) {
+        this.district2$ = this.addressService.getAmphurs(
+          value.addressForm.province
+        );
+        this.subDistrict2$ = this.addressService.getTumbols(
+          value.addressForm.amphur
+        );
+        this.form.controls.workplaceForm.patchValue(value);
+      }
+    }, 0);
+  }
+  @Input()
+  set eduInfo(value: any) {
+    setTimeout(() => {
+      this.form.controls.academicForm.patchValue(value);
+    }, 0);
+  }
+  @Input()
+  set grantionTeachingInfo(value: any) {
+    setTimeout(() => {
+      this.form.controls.grantionLicenseForm.patchValue(value);
+    }, 0);
+  }
+  @Input() academicFiles: any[] = [];
+  @Input() uniqueTimestamp!: string;
+
   prefixList$!: Observable<any>;
   provinces1$!: Observable<any>;
   district1$!: Observable<any>;
@@ -32,13 +77,6 @@ export class ForeignLicenseStepTwoComponent
   nationalitys$!: Observable<any>;
   countries$!: Observable<any>;
   countries2$!: Observable<any>;
-
-  academicFiles = [
-    {
-      name: `1. Achelor's degree`,
-      fileId: '',
-    },
-  ];
 
   override form = this.fb.group({
     id: [],
@@ -68,7 +106,6 @@ export class ForeignLicenseStepTwoComponent
   constructor(
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
-    private myInfoService: MyInfoService,
     private fb: FormBuilder
   ) {
     super();
@@ -83,84 +120,16 @@ export class ForeignLicenseStepTwoComponent
 
   ngOnInit(): void {
     this.getListData();
-    this.getMyInfo();
+    // this.getMyInfo();
   }
 
   getListData() {
     this.prefixList$ = this.generalInfoService.getPrefix();
+    this.nationalitys$ = this.generalInfoService.getNationality();
     this.provinces1$ = this.addressService.getProvinces();
     this.provinces2$ = this.provinces1$;
-    this.nationalitys$ = this.generalInfoService.getNationality();
     this.countries$ = this.addressService.getCountry();
     this.countries2$ = this.countries$;
-  }
-
-  getMyInfo() {
-    this.myInfoService.getMyInfo().subscribe((res) => {
-      console.log(res);
-      this.patchUserInfo(res);
-      this.patchAddress(parseJson(res.addressinfo), res.phone, res.email);
-      if (res.schooladdrinfo) {
-        this.patchWorkplace(parseJson(res.schooladdrinfo));
-      }
-    });
-  }
-
-  patchUserInfo(data: any) {
-    const {
-      birthdate,
-      firstnameen,
-      lastnameen,
-      prefixen,
-      id,
-      middlenameen,
-      passportno,
-      nationality,
-    } = data;
-    const patchData = {
-      birthdate: birthdate.split('T')[0],
-      firstnameen,
-      lastnameen,
-      prefixen,
-      id,
-      middlenameen,
-      passportno,
-      nationality,
-    } as any;
-    // this.patchUserInfoForm(patchData);
-    this.form.patchValue({
-      ...patchData,
-    });
-  }
-
-  patchAddress(addrs: any[], phone: any, email: any) {
-    if (addrs && addrs.length) {
-      const addr = addrs[0];
-      this.district1$ = this.addressService.getAmphurs(addr.province);
-      this.subDistrict1$ = this.addressService.getTumbols(addr.amphur);
-      this.form.controls.addressForm.patchValue({
-        ...addr,
-        phone,
-        email,
-      });
-    }
-  }
-
-  patchWorkplace(data: any) {
-    this.district2$ = this.addressService.getAmphurs(data.province);
-    this.subDistrict2$ = this.addressService.getTumbols(data.district);
-    this.form.controls.workplaceForm.patchValue({
-      addressName: data.addressName,
-      addressForm: {
-        houseNo: data.houseNumber,
-        alley: data.lane,
-        road: data.road,
-        postcode: data.zipCode,
-        province: data.province,
-        tumbol: data.subDistrict,
-        amphur: data.district,
-      },
-    } as any);
   }
 
   provinceChanged(addrType: number, evt: any) {

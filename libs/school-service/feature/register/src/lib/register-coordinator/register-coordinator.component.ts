@@ -12,7 +12,7 @@ import { GeneralInfoService, RequestService } from '@ksp/shared/service';
 import { EMPTY, Observable, switchMap } from 'rxjs';
 import localForage from 'localforage';
 import { thaiDate } from '@ksp/shared/utility';
-
+import { v4 as uuidv4 } from 'uuid';
 @Component({
   templateUrl: './register-coordinator.component.html',
   styleUrls: ['./register-coordinator.component.scss'],
@@ -40,7 +40,7 @@ export class CoordinatorInfoComponent implements OnInit {
   mode: FormMode = 'edit';
   userInfoFormdisplayMode: number = UserInfoFormType.thai;
   school: any;
-
+  uniqueTimestamp: any;
   constructor(
     private router: Router,
     public dialog: MatDialog,
@@ -56,12 +56,13 @@ export class CoordinatorInfoComponent implements OnInit {
 
     localForage.getItem('registerSelectedSchool').then((res) => {
       this.school = res;
-      console.log(this.school)
     });
 
     localForage.getItem('registerUserInfoFormValue').then((res) => {
       this.savingData = res;
     });
+
+    this.uniqueTimestamp = uuidv4();
   }
   getListData() {
     this.prefixList$ = this.generalInfoService.getPrefix();
@@ -105,61 +106,7 @@ export class CoordinatorInfoComponent implements OnInit {
   }
 
   save() {
-    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
-      data: {
-        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
-        subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
-        ใช่หรือไม่`,
-        schoolCode: `รหัสเข้าใช้งาน(รหัสโรงเรียน): ${this.school?.schoolId}`,
-        btnLabel: 'บันทึก',
-      },
-    });
-
-    confirmDialog.componentInstance.confirmed
-      .pipe(
-        switchMap((res) => {
-          if (res) {
-            const payload = {
-              ...this.savingData,
-              coordinatorinfo: JSON.stringify(this.form.value),
-            };
-            payload.ref1 = '2';
-            payload.ref2 = '01';
-            payload.ref3 = '1';
-            payload.systemtype = '2';
-            payload.requesttype = '1';
-            payload.currentprocess = `1`;
-            return this.requestService.createRequest(payload);
-          }
-          return EMPTY;
-        })
-      )
-      .subscribe((res) => {
-        if (res) {
-          const requestNo = res?.requestno;
-          this.showCompleteDialog(requestNo);
-        }
-      });
-  }
-
-  showCompleteDialog(requestNo: string) {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '375px',
-      data: {
-        header: `ยืนยันข้อมูลสำเร็จ`,
-        content: `วันที่ : ${this.requestDate}
-        เลขที่ใบคำขอ : ${requestNo}`,
-        subContent: `กรุณาตรวจสอบสถานะใบคำขอผ่านทางอีเมล
-        ผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
-      },
-    });
-
-    completeDialog.componentInstance.completed.subscribe((res) => {
-      if (res) {
-        localForage.setItem('registerCoordinatorInfoFormValue', this.form.value);
-        this.router.navigate(['/register', 'password']);
-      }
-    });
+    localForage.setItem('registerCoordinatorInfoFormValue', this.form.value);
+    this.router.navigate(['/register', 'password']);
   }
 }

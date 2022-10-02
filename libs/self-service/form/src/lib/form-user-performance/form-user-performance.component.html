@@ -1,5 +1,49 @@
-<div class="d-flex flex-row">
-  <div class="d-flex">
+<div class="table-responsive">
+  <table class="table">
+    <thead style="white-space: nowrap">
+      <tr class="text-center">
+        <th scope="col" colspan="2" style="width: 25%">
+          ด้านการจัดการเรียนรู้
+        </th>
+        <th scope="col" colspan="2" style="width: 25%">
+          ด้านความสัมพันธ์กับผู้ปกครองและชุมชน
+        </th>
+        <th scope="col" colspan="2" style="width: 25%">
+          ด้านการปฎิบัติหน้าที่ครูและจรรยาบรรณของอาชีพ
+        </th>
+        <th scope="col" colspan="2" style="width: 25%">
+          คะแนนเฉลี่ยรวมผลการประเมิน
+        </th>
+      </tr>
+      <tr class="text-center">
+        <th scope="col">คะแนน</th>
+        <th scope="col">ผลการประเมิน</th>
+        <th scope="col">คะแนน</th>
+        <th scope="col">ผลการประเมิน</th>
+        <th scope="col">คะแนน</th>
+        <th scope="col">ผลการประเมิน</th>
+        <th scope="col">คะแนน</th>
+        <th scope="col">ผลการประเมิน</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="text-center">
+        <th scope="row">5</th>
+        <td>ดีมาก</td>
+        <th scope="row">5</th>
+        <td>ดีมาก</td>
+        <th scope="row">5</th>
+        <td>ดีมาก</td>
+        <th scope="row">5</th>
+        <td>ดีมาก</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<br />
+<div class="row flex-nowrap w-auto" style="overflow-x: auto">
+  <div class="col-auto d-flex">
     <div class="menu__container">
       <mat-selection-list #subject [multiple]="false">
         <mat-list-option
@@ -13,7 +57,7 @@
   </div>
 
   <ng-container *ngIf="subject.selectedOptions.selected[0]?.value">
-    <div class="d-flex ms-2 w-100 flex-column">
+    <div class="col d-flex w-100 flex-column">
       <div class="mb-3">
         <self-service-test-result-table></self-service-test-result-table>
       </div>

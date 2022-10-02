@@ -34,13 +34,10 @@ export class RequestService {
   searchRequest(payload: any): Observable<SchoolRequest[]> {
     return this.http
       .post<SchoolRequest[]>(
-        `${environment.apiUrl}/kspstaff/searchschrequest`,
+        `${environment.shortApiUrl}/schrequestsearch.php`,
         payload
       )
-      .pipe(
-        shareReplay(),
-        map((data: any) => data.datareturn)
-      );
+      .pipe(map((data: any) => data.datareturn));
   }
 
   getRequestById(id: number): Observable<SchoolRequest> {

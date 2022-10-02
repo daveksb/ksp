@@ -1,17 +1,14 @@
-import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { SchoolRequestType, UserInfoFormType } from '@ksp/shared/constant';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import {
-  phonePattern,
+  createDefaultUserInfoForm,
   providerFactory,
   validatorMessages,
-  nameEnPattern,
-  nameThPattern,
 } from '@ksp/shared/utility';
 
-@UntilDestroy()
 @Component({
   selector: 'ksp-form-coordinator-info',
   standalone: true,
@@ -20,63 +17,119 @@ import {
   styleUrls: ['./coordinator-info.component.scss'],
   providers: providerFactory(FormCoordinatorInfoComponent),
 })
-export class FormCoordinatorInfoComponent extends KspFormBaseComponent {
+export class FormCoordinatorInfoComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
+  @Input() positionLabel = 'ตำแหน่ง';
+  @Input() isDarkMode = false;
+  @Input() prefixList: any[] = [];
+  @Input() countryList: any[] = [];
+  @Input() nationList: any[] = [];
+  @Input() visaClassList: any[] = [];
+  @Input() visaTypeList: any[] = [];
+  @Input() isSchoolService = true;
+  @Input() displayMode!: number[];
+
+  RequestTypeEnum = SchoolRequestType;
   validatorMessages = validatorMessages;
+  FormTypeEnum = UserInfoFormType;
 
-  override form = this.fb.group({
-    prefixTh: [''],
-    firstnameTh: ['', Validators.pattern(nameThPattern)],
-    lastnameTh: ['', Validators.pattern(nameThPattern)],
-    prefixEn: [''],
-    firstnameEn: ['', Validators.pattern(nameEnPattern)],
-    lastnameEn: ['', Validators.pattern(nameEnPattern)],
-    post: [''],
-    workplacePhone: [null, Validators.pattern(phonePattern)],
-    contactPhone: [null, Validators.pattern(phonePattern)],
-    email: ['', Validators.email],
-  });
+  /**
+   * Dark Mode : all inputs will have gray background and form container will have white background
+   * Use in Self-Service
+   *
+   * Normal Mode : all inputs will have white background and form container will have gray background
+   * Use in E-service, School-Service
+   */
 
-  @Input() isGrayMode = true;
+  override form = createDefaultUserInfoForm(this.fb);
 
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
-      this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
+      this.form?.valueChanges.subscribe((value: any) => {
         this.onChange(value);
         this.onTouched();
       })
     );
-    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      //console.log('form = ', this.form);
-    });
+  }
+  ngOnInit(): void {
+    // ถ้าเป็น form คนไทยไม่ต้อง validate field เหล่านี้
+    //console.log('display mode = ', this.displayMode);
+    this.form.controls.sex.clearValidators();
+    this.form.controls.idcardno.clearValidators();
+    this.form.controls.birthdate.clearValidators();
+    if (this.displayMode.includes(UserInfoFormType.thai)) {
+      this.form.controls.passportno.clearValidators();
+      this.form.controls.passportstartdate.clearValidators();
+      this.form.controls.passportenddate.clearValidators();
+      this.form.controls.position.clearValidators();
+    }
+
+    if (this.displayMode.includes(UserInfoFormType.foreign)) {
+      this.form.controls.idcardno.clearValidators();
+      this.form.controls.workphone.clearValidators();
+      this.form.controls.contactphone.clearValidators();
+      this.form.controls.position.clearValidators();
+      this.form.controls.sex.clearValidators();
+      this.form.controls.email.clearValidators();
+    }
+  }
+  prefixChanged(evt: any) {
+    const prefix = evt.target?.value;
+
+    if (prefix === '1') {
+      const temp: any = { sex: '1' };
+      this.form.patchValue(temp);
+    } else if (['2', '3', '4', '5'].includes(prefix)) {
+      const temp: any = { sex: '2' };
+      this.form.patchValue(temp);
+    } else {
+      const temp: any = { sex: '3' };
+      this.form.patchValue(temp);
+    }
+
+    const en = { prefixen: prefix };
+    const th = { prefixth: prefix };
+    this.form.patchValue(th);
+    this.form.patchValue(en);
   }
 
-  get firstnameTh() {
-    return this.form.controls.firstnameTh;
+  get idCardNo() {
+    return this.form.controls.idcardno;
   }
 
-  get lastnameTh() {
-    return this.form.controls.lastnameTh;
+  get passportNo() {
+    return this.form.controls.passportno;
   }
 
-  get firstnameEn() {
-    return this.form.controls.firstnameEn;
+  get firstNameTh() {
+    return this.form.controls.firstnameth;
   }
 
-  get lastnameEn() {
-    return this.form.controls.lastnameEn;
+  get lastNameTh() {
+    return this.form.controls.lastnameth;
+  }
+
+  get firstNameEn() {
+    return this.form.controls.firstnameen;
+  }
+
+  get lastNameEn() {
+    return this.form.controls.lastnameen;
+  }
+
+  get contactPhone() {
+    return this.form.controls.contactphone;
+  }
+
+  get workPhone() {
+    return this.form.controls.workphone;
   }
 
   get email() {
     return this.form.controls.email;
-  }
-
-  get workplacePhone() {
-    return this.form.controls.workplacePhone;
-  }
-
-  get contactPhone() {
-    return this.form.controls.contactPhone;
   }
 }

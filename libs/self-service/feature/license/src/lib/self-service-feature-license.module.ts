@@ -41,12 +41,20 @@ export const routes: Routes = [
     path: '',
     component: SelfServiceMasterPageComponent,
     children: [
-      /* {
+      {
         path: 'teacher',
-        component: LicenseRequestThaiComponent,
+        component: LicenseRequestComponent,
+      },
+      {
+        path: 'teacher/:id',
+        component: LicenseRequestComponent,
       },
       {
         path: 'foreign-teacher',
+        component: LicenseRequestForeignComponent,
+      },
+      {
+        path: 'foreign-teacher/:id',
         component: LicenseRequestForeignComponent,
       },
       {
@@ -62,13 +70,21 @@ export const routes: Routes = [
         component: LicenseRequestEducationManagerComponent,
       },
       {
+        path: 'education-manager/:id',
+        component: LicenseRequestEducationManagerComponent,
+      },
+      {
         path: 'study-supervision',
         component: LicenseRequestStudySupervisionComponent,
-      }, */
-      {
-        path: 'request/:type',
-        component: LicenseRequestComponent,
       },
+      {
+        path: 'study-supervision/:id',
+        component: LicenseRequestStudySupervisionComponent,
+      },
+      // {
+      //   path: 'request/:type',
+      //   component: LicenseRequestComponent,
+      // },
       {
         path: 'agreement',
         component: LicenseForeignAgreementComponent,
@@ -78,11 +94,15 @@ export const routes: Routes = [
         component: LicenseEditComponent,
       },
       {
+        path: 'edit/:id',
+        component: LicenseEditComponent,
+      },
+      {
         path: 'payment-channel',
         component: PaymentChannelComponent,
       },
       {
-        path: 'payment-promptpay',
+        path: 'payment-promptpay/:type',
         component: PromptpayComponent,
       },
       {

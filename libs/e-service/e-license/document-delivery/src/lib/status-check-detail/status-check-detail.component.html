@@ -1,0 +1,163 @@
+<ksp-top-nav><span header> รับ-ส่งเอกสารงานใบอนุญาต </span></ksp-top-nav>
+
+<form [formGroup]="form">
+  <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height-2">
+    <div class="box-header">บันทึกข้อมูลเลขพัสดุ</div>
+
+    <div class="bg-white border p-3">
+      <ksp-request-header-info
+        [requestDate]="'today'"
+      ></ksp-request-header-info>
+      <hr />
+      <div class="row mb-2">
+        <div class="col">
+          <label class="form-label">เลขที่บันทึกข้อมูลชั่วคราว</label>
+          <input type="text" class="form-control" />
+        </div>
+        <div class="col">
+          <label class="form-label">หน่วยงานที่ส่ง</label>
+          <select class="form-select">
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col">
+          <label class="form-label">ประเภทหนังสือ</label>
+          <select class="form-select">
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="col">
+          <label class="form-label">ประเภทไปรษณีย์</label>
+          <select class="form-select">
+            <option selected>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col">
+          <label class="form-label">วันที่จัดส่ง</label>
+          <input type="date" class="form-control" />
+        </div>
+        <div class="col">
+          <label class="form-label">จำนวนรายการที่บันทึกข้อมูล</label>
+          <input type="text" class="form-control" />
+        </div>
+      </div>
+    </div>
+    <br />
+    <div class="bg-white border p-3">
+      <div class="box-header">รายการข้อมูลพัสดุ</div>
+      <div class="table-responsive">
+        <table class="table mb-2">
+          <thead style="white-space: nowrap">
+            <tr>
+              <th scope="col">ย้ายรายการ</th>
+              <th scope="col">เลือก</th>
+              <th scope="col">ลำดับ</th>
+              <th scope="col">เลขที่ใบคำขอ</th>
+              <th scope="col">เลขบัตรประจำตัวประชาชน</th>
+              <th scope="col">ชื่อ-นามสกุล ผู้รับ</th>
+              <th scope="col">ปณ. ปลายทาง</th>
+              <th scope="col">หมายเลขพัสดุ</th>
+              <th scope="col">ลบ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container formArrayName="agencyInfo">
+              <ng-container
+                *ngFor="let row of agencyInfo.controls; let i = index"
+              >
+                <ng-container [formGroupName]="i">
+                  <tr>
+                    <td class="text-center">
+                      <i
+                        role="button"
+                        class="bi bi-arrow-down-up fs-6 text-secondary"
+                      ></i>
+                    </td>
+                    <td>
+                      <input type="checkbox" />
+                    </td>
+                    <td>
+                      {{ i + 1 }}
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="licenseNumber"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="ssn"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="prefix"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="firstname"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="lastname"
+                      />
+                    </td>
+
+                    <td>
+                      <i
+                        role="button"
+                        class="bi bi-trash3-fill fs-5 text-danger"
+                        (click)="deleteFormArray(agencyInfo, i)"
+                      ></i>
+                    </td></tr
+                ></ng-container>
+              </ng-container>
+            </ng-container>
+          </tbody>
+        </table>
+        <div class="d-flex justify-content-center">
+          <ksp-add-row-button
+            class="text-primary"
+            (addRowClick)="addRow(agencyInfo)"
+            >เพิ่มรายการ</ksp-add-row-button
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="sticky-bottom border">
+  <ksp-bottom-nav
+    [isLastPage]="true"
+    [isFirstPage]="true"
+    [showCenterButtons]="true"
+    [showSaveButton]="true"
+    (cancelClicked)="cancel()"
+  ></ksp-bottom-nav>
+</div>

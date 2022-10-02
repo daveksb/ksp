@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
 import { getCookie } from '@ksp/shared/utility';
-import { map, Observable, shareReplay } from 'rxjs';
-
+import { lastValueFrom, map, Observable, shareReplay } from 'rxjs';
+import _ from 'lodash';
 @Injectable({
   providedIn: 'root',
 })
@@ -27,8 +27,11 @@ export class UniInfoService {
 
   uniRequestDegreeSearch(params: any): Observable<any> {
     return this.http.post(
-      `${environment.apiUrl}/kspuni/unirequestdegreesearch`,
-      { ...params, tokenkey: this.tokenKey }
+      `${environment.shortApiUrl}/unirequestdegreecertsearch.php`,
+      {
+        ...params,
+        tokenkey: this.tokenKey,
+      }
     );
   }
 
@@ -60,7 +63,7 @@ export class UniInfoService {
 
   searchUniversity(body: any): Observable<any> {
     return this.http
-      .post(`${environment.apiUrlNoAuth}/uniuniversitysearch.php`, body)
+      .post(`${environment.shortApiUrl}/uniuniversitysearch.php`, body)
       .pipe(
         map((data: any) => data.datareturn),
         shareReplay()
@@ -76,10 +79,84 @@ export class UniInfoService {
       );
   }
 
-  getDegreeLevel(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/kspmasterdata/unidegreelevel`).pipe(
-      map((data: any) => data.datareturn),
-      shareReplay()
+  uniDegreeLevel() {
+    return this.http
+      .get(`${environment.apiUrl}/kspmasterdata/unidegreelevel`)
+      .pipe(
+        map((data: any) => data.datareturn),
+        shareReplay()
+      );
+  }
+  uniFieldOfStudy() {
+    return this.http
+      .get(`${environment.apiUrl}/kspmasterdata/unifieldofstudy`)
+      .pipe(
+        map((data: any) => data.datareturn),
+        shareReplay()
+      );
+  }
+  uniMajor(id?: string) {
+    return this.http
+      .get(`${environment.apiUrl}/kspmasterdata/unimajor?fieldofstudyid=${id}`)
+      .pipe(
+        map((data: any) => data.datareturn),
+        shareReplay()
+      );
+  }
+
+  uniSubject(id?: string) {
+    return this.http
+      .get(`${environment.apiUrl}/kspmasterdata/unisubject?majorid=${id}`)
+      .pipe(
+        map((data: any) => data.datareturn),
+        shareReplay()
+      );
+  }
+
+  uniAcademicYear() {
+    return this.http
+      .get(`${environment.apiUrl}/kspmasterdata/uniacademicyear`)
+      .pipe(
+        map((data: any) => data.datareturn),
+        shareReplay()
+      );
+  }
+
+  uniDegreeSearch(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/unidegreecertsearch.php`,
+      {
+        ...params,
+        tokenkey: this.tokenKey,
+      }
     );
+  }
+  async getMajorAndBranch(row: any) {
+    let major:any;
+    let branch:any;
+    if(row?.coursefieldofstudy)
+     major = await lastValueFrom(
+      this.uniMajor(row?.coursefieldofstudy).pipe(
+        map((res) => {
+          return _.find(res, { id: row?.coursemajor });
+        })
+      )
+    );
+    if(major?.id)
+     branch = await lastValueFrom(
+      this.uniSubject(major?.id).pipe(
+        map((res) => {
+          return _.find(res, { id: row?.coursesubjects })
+        })
+      )
+    );
+    return { major: major?.name || '-', branch: branch?.name || '-' };
+  }
+
+  uniDegreeCertSelectByid(id: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/kspuni/unidegreecertselectbyid`, {
+      id,
+      tokenkey: this.tokenKey,
+    });
   }
 }

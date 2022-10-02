@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+import { uniPermissionList } from '@ksp/shared/constant';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import {
   createUniCoordinatorForm,
   providerFactory,
   validatorMessages,
 } from '@ksp/shared/utility';
-import { uniPermissionList } from 'libs/shared/constant/src/school-request-constant';
 
 @Component({
   selector: 'uni-form-register-coordinator',
@@ -18,6 +18,7 @@ export class FormRegisterCoordinatorInfoComponent extends KspFormBaseComponent {
   @Input() uniType: Array<any> = [];
   @Input() prefixName: Array<any> = [];
   @Input() occupyList: Array<any> = [];
+  @Input() formHeader = '';
   override form = createUniCoordinatorForm(this.fb);
   permissionList: Array<any> = uniPermissionList;
   validatorMessages = validatorMessages;
@@ -33,7 +34,17 @@ export class FormRegisterCoordinatorInfoComponent extends KspFormBaseComponent {
     );
   }
 
-  @Input() formHeader = '';
+  chageposition(event: any) {
+    if (event.target.value == '0') {
+      this.form.controls['other'].setValidators([Validators.required]);
+    } else {
+      this.form.controls['other'].clearValidators();
+      this.form.patchValue({
+        other: null
+      })
+    }
+    this.form.controls['other'].updateValueAndValidity();
+  }
 
   get firstNameTh() {
     return this.form.controls.firstnameth;

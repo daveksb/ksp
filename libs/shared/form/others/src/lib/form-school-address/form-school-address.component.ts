@@ -11,9 +11,8 @@ import { providerFactory } from '@ksp/shared/utility';
 })
 export class FormSchoolAddressComponent extends KspFormBaseComponent {
   override form = this.fb.group({
-    /*
-    letterNumber: [],
-    letterRelease: [], */
+    letternumber: [],
+    letterrelease: [],
     schoolId: [],
     schoolName: [],
     bureauName: [],

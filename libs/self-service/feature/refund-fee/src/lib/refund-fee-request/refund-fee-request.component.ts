@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   UserInfoFormType,
   SelfServiceRequestType,
@@ -18,10 +18,19 @@ import {
   SelfRequestService,
   GeneralInfoService,
 } from '@ksp/shared/service';
-import { getCookie, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
+import {
+  getCookie,
+  parseJson,
+  replaceEmptyWithNull,
+  thaiDate,
+} from '@ksp/shared/utility';
 import * as _ from 'lodash';
 import { Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
+
+const ATTACH_FILES = [
+  { name: '1.สำเนาวุฒิการศึกษา', fileId: '', fileName: '' },
+];
 
 @Component({
   selector: 'ksp-refund-fee-request',
@@ -29,13 +38,17 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./refund-fee-request.component.scss'],
 })
 export class RefundFeeRequestComponent implements OnInit {
-  files = [{ name: '1.สำเนาวุฒิการศึกษา', fileId: '', fileName: '' }];
+  files: any[] = [];
   headerGroup = ['วันที่ทำรายการ', 'เลขใบคำขอ'];
   userInfoType = UserInfoFormType.thai;
   today = thaiDate(new Date());
   userInfo!: SelfMyInfo;
   prefixList$!: Observable<any>;
   uniqueTimestamp!: string;
+  requestId!: number;
+  requestData!: SelfRequest;
+  requestNo: string | null = '';
+  currentProcess!: number;
 
   form = this.fb.group({
     userInfo: [],
@@ -48,13 +61,58 @@ export class RefundFeeRequestComponent implements OnInit {
     private fb: FormBuilder,
     private myInfoService: MyInfoService,
     private requestService: SelfRequestService,
-    private generalInfoService: GeneralInfoService
+    private generalInfoService: GeneralInfoService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.prefixList$ = this.generalInfoService.getPrefix();
+    this.checkRequestId();
+  }
+
+  checkRequestId() {
+    this.route.paramMap.subscribe((params) => {
+      this.requestId = Number(params.get('id'));
+      if (this.requestId) {
+        this.requestService.getRequestById(this.requestId).subscribe((res) => {
+          if (res) {
+            console.log(res);
+            this.requestData = res;
+            this.requestNo = res.requestno;
+            this.currentProcess = Number(res.currentprocess);
+            this.uniqueTimestamp = res.uniquetimestamp || '';
+            console.log(this.uniqueTimestamp);
+
+            this.patchData(res);
+          }
+        });
+      } else {
+        this.initializeFile();
+        this.getMyInfo();
+      }
+    });
+  }
+
+  patchData(data: SelfRequest) {
+    console.log(data);
+    const { fileinfo, feerefundinfo, ...resData } = data;
+    this.form.controls.userInfo.patchValue(<any>resData);
+
+    if (feerefundinfo) {
+      const feeRefundInfo = parseJson(feerefundinfo);
+      this.form.controls.refundInfo.patchValue({ ...feeRefundInfo });
+    }
+
+    if (fileinfo) {
+      const fileInfo = parseJson(data.fileinfo);
+      console.log(fileInfo);
+      const { attachfiles } = fileInfo;
+      this.files = attachfiles;
+    }
+  }
+
+  getMyInfo() {
     this.myInfoService.getMyInfo().subscribe((res) => {
-      //console.log('my info = ', res);
       this.userInfo = {
         ...res,
         birthdate: res.birthdate?.split('T')[0] || null,
@@ -62,11 +120,11 @@ export class RefundFeeRequestComponent implements OnInit {
       };
       this.form.controls.userInfo.patchValue(<any>this.userInfo);
     });
-    this.initializeFile();
   }
 
   initializeFile() {
     this.uniqueTimestamp = uuidv4();
+    this.files = structuredClone(ATTACH_FILES);
   }
 
   createRequest() {
@@ -82,7 +140,7 @@ export class RefundFeeRequestComponent implements OnInit {
     userInfo.uniquetimestamp = this.uniqueTimestamp;
     userInfo.staffid = getCookie('userId');
 
-    const attachfiles = this.mapFileInfo(this.files);
+    const attachfiles = this.files;
 
     const selectData: any = _.pick(userInfo, allowKey);
     const filledData = {
@@ -90,12 +148,22 @@ export class RefundFeeRequestComponent implements OnInit {
       ...selectData,
       ...{ fileinfo: JSON.stringify({ attachfiles }) },
     };
-    const { id, requestdate, ...payload } = replaceEmptyWithNull(filledData);
+    const {
+      id,
+      requestdate,
+      updatedate,
+      addressinfo,
+      schooladdrinfo,
+      ...payload
+    } = replaceEmptyWithNull(filledData);
 
     const feeRefundInfo = this.form.controls.refundInfo.value;
     //console.log('fee refund info = ', feeRefundInfo);
     payload.feerefundinfo = JSON.stringify(feeRefundInfo);
     payload.birthdate = payload.birthdate.split('T')[0];
+    if (this.requestId) {
+      payload.id = this.requestId;
+    }
 
     console.log('payload = ', payload);
     return payload;
@@ -112,7 +180,10 @@ export class RefundFeeRequestComponent implements OnInit {
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         const payload = this.createRequest();
-        this.requestService.createRequest(payload).subscribe((res) => {
+        const request = this.requestId
+          ? this.requestService.updateRequest.bind(this.requestService)
+          : this.requestService.createRequest.bind(this.requestService);
+        request(payload).subscribe((res) => {
           //console.log('res = ', res);
           if (res?.returncode === '00') {
             this.onCompleted();
@@ -137,14 +208,47 @@ export class RefundFeeRequestComponent implements OnInit {
     });
   }
 
-  mapFileInfo(fileList: any[]) {
-    return fileList.map((file: any) => {
-      const object = {
-        fileid: file.fileId || null,
-        filename: file.fileName || null,
-        name: file.name || null,
-      };
-      return object;
+  cancel() {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: `คุณต้องการยกเลิกรายการใบคำขอ
+        ใช่หรือไม่? `,
+      },
+    });
+
+    confirmDialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.cancelRequest();
+      }
+    });
+  }
+
+  cancelRequest() {
+    const payload = {
+      id: `${this.requestId}`,
+      requeststatus: '0',
+    };
+
+    this.requestService.cancelRequest(payload).subscribe((res) => {
+      //console.log('Cancel request  = ', res);
+      this.cancelCompleted();
+    });
+  }
+
+  cancelCompleted() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      width: '350px',
+      data: {
+        header: `ยกเลิกใบคำขอสำเร็จ`,
+        buttonLabel: 'กลับสู่หน้าหลัก',
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/home']);
+      }
     });
   }
 }

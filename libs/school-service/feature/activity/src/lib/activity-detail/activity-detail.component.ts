@@ -11,6 +11,7 @@ import { thaiDate } from '@ksp/shared/utility';
 import { SchoolSelfDevelopActivityTies } from '@ksp/shared/constant';
 import { SelfDevelopService, StaffService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { v4 as uuidv4 } from 'uuid';
 
 @UntilDestroy()
 @Component({
@@ -25,6 +26,7 @@ export class ActivityDetailComponent implements OnInit {
   staff: any;
   pageType!: number;
   activityPageMode = activityPageMode;
+  uniqueTimestamp!: string;
 
   form = this.fb.group({
     type: [null, Validators.required],
@@ -50,6 +52,7 @@ export class ActivityDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.uniqueTimestamp = uuidv4();
     this.checkStaffId();
 
     this.route.paramMap.pipe(untilDestroyed(this)).subscribe((res) => {

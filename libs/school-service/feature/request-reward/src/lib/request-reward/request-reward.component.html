@@ -7,19 +7,33 @@
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-2">
-    <ksp-request-reward-form
-      [mode]="'edit'"
-      [requestNo]="requestNo"
-      [osoiTypes]="osoiTypes$ | async"
-      [personTypes]="personTypes$ | async"
-      [prefixList]="prefixList$ | async"
-      [memberList]="memberData"
-      formControlName="reward"
-    ></ksp-request-reward-form>
+    <div class="box-header">
+      รายละเอียดใบคำขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One
+      Innovation : OSOI)
+    </div>
+
+    <div class="bg-white py-3 px-4">
+      <div>
+        <ksp-request-header-info
+          [requestDate]="requestDate"
+          [requestNumber]="requestNo"
+        ></ksp-request-header-info>
+        <hr />
+        <ksp-request-reward-form
+          [mode]="'edit'"
+          [osoiTypes]="osoiTypes$ | async"
+          [personTypes]="personTypes$ | async"
+          [prefixList]="prefixList$ | async"
+          [memberList]="memberData"
+          [uniqueTimeStamp]="uniqueTimeStamp"
+          formControlName="reward"
+        ></ksp-request-reward-form>
+      </div>
+    </div>
   </div>
 </form>
 
-<div class="sticky-bottom border">
+<div class="sticky-bottom border px-2">
   <ksp-bottom-nav
     [isFirstPage]="false"
     [colorMode]="'blue'"

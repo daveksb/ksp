@@ -2,26 +2,16 @@
   ><span header>ข้อมูลส่วนตัว</span
   ><span subHeader>ข้อมูลส่วนตัว</span></ksp-top-nav
 >
-<div class="main__container py-2">
-  <div class="px-4">
-    <self-service-license-info
-      [header]="'รายละเอียดใบคำขอ'"
-      [subheader1]="'วันที่ทำรายการ'"
-      [subheader2]="'เลขใบคำขอ'"
-      [subheader3]="'เลขที่ประจำตัวคุรุสภา'"
-      [subheader4]="'เลขประจำตัวประชาชน'"
-      [date]="'10 ตุลาคม 2565'"
-      [requestNo]="'11020-00xxx-xx-x'"
-      [KuruspaId]="'11020-00xxx-xx-x'"
-      [personId]="'3365500066412'"
-    ></self-service-license-info>
+<div class="main__container">
+  <div class="px-3">
+    <self-service-request-status></self-service-request-status>
   </div>
   <br />
   <div class="container">
     <div class="content__container">
       <div class="header__label">รายการค่าธรรมเนียม</div>
       <div class="content__label">
-        วันเดือนปีที่ต้องชำระเงิน<span class="date__label">25 ต.ค. 2565</span>
+        กรุณาชำระเงินก่อนวันที่<span class="date__label">25 ต.ค. 2565</span>
       </div>
       <div class="table-responsive">
         <table class="table">
@@ -54,32 +44,62 @@
           </tbody>
         </table>
       </div>
+      <br />
 
-      <div class="header__label-2">คิวอาร์โค้ด พร้อมเพย์</div>
-
-      <div class="qrcode__container">
-        <div class="qrcode__content">
-          <img src="/assets/images/promptpay.png" />
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="content__label">
+          วันเดือนปีที่ทำรายการ<span class="date__label">25 ต.ค. 2565</span>
         </div>
-        <div class="qrcode__content-2">
+        <div *ngIf="pageType === 1">
+          <button type="button" class="btn btn-sm btn-primary">
+            พิมพ์แบบชำระเงิน
+          </button>
+        </div>
+      </div>
+
+      <div
+        class="d-flex fs-2 justify-content-center justify-content-md-start my-3"
+      >
+        คิวอาร์โค้ด
+        <span *ngIf="pageType === 1">ชำระผ่านเคาน์เตอร์ เซอร์วิส</span>
+        <span *ngIf="pageType === 2">พร้อมเพย์</span>
+      </div>
+      <div class="row flex-column-reverse flex-md-row">
+        <div class="col d-flex flex-column">
           <div class="qrcode__title">
             ขั้นตอนการชำระผ่าน คิวอาร์โค้ด พร้อมเพย์
           </div>
           <br />
           <div class="qrcode__label">
-            1. เปิดแอป Mobile Banking จากนั้นเลือกเมนู "สแกนจ่าย"
+            1. เปิดแอป Mobile Banking จากนั้นเลือกเมนู "สแกนจ่าย" หรือ
+            บันทึกภาพลงยังโทรศัพท์มือถือ
           </div>
           <br />
           <div class="qrcode__label">
-            2. สแกบ QR Code ตรวจสอบยอด และกด "ยืนยัน" เพื่อชำระเงิน
+            2. สแกน QR Code หรือ เลือกรูปภาพที่บันทึกในเครื่องโทรศัพท์มือถือ
+            ตรวจสอบยอด และกด "ยืนยัน" เพื่อชำระเงิน
           </div>
           <br />
-          <div class="qrcode__label">3. หากรายการคำสั่งซื้อเสร็จสมบูรณ์</div>
           <div class="qrcode__label">
-            ระบบจะพาท่านมายังหน้าขอบคุณและส่งอีเมลยืนยันการชำระเงินไปที่อีเมลของท่าน
+            <span *ngIf="pageType === 1">
+              3. พิมพ์แบบชำระเงิน เพื่อนำไปชำระที่ศูนย์บริการชำระเงินเคาน์เตอร์
+              เซอร์วิส</span
+            ><span *ngIf="pageType === 2">
+              3. หากรายการคำสั่งซื้อเสร็จสมบูรณ์
+              ระบบจะพาท่านมายังหน้าขอบคุณ</span
+            >
           </div>
+        </div>
+        <div class="col d-flex justify-content-center">
+          <img
+            src="/assets/images/promptpay.png"
+            style="width: 250px; height: 350px"
+          />
         </div>
       </div>
     </div>
+  </div>
+  <div class="d-flex justify-content-center py-3">
+    <button type="button" class="btn btn-primary" (click)="cancel()">ยกเลิก</button>
   </div>
 </div>

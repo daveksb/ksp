@@ -5,24 +5,42 @@
       เข้าประกอบวิชาชีพครูในสถานศึกษา
     </div>
     <div class="row">
-      <div class="col mb-3">
+      <div class="col mb-2">
         <label class="form-label">สถานศึกษาชี้แจงเหตุผลความจำเป็น</label>
         <label class="text-danger ms-2">* เลือกได้มากกว่า 1 รายการ</label>
 
-        <input
+        <!-- <input
           class="form-control"
           type="text"
           formControlName="schoolReasonInfo"
-        />
+        /> -->
       </div>
     </div>
 
-    <ng-container *ngFor="let item of schoolReason">
-      <div class="d-flex align-items-center mb-2">
-        <input class="me-2" formControlName="{{ item.name }}" type="checkbox" />
-        <label class="form-label">{{ item.label }}</label>
-      </div>
-    </ng-container>
+    <ng-container *ngIf="requestType === 1">
+      <ng-container *ngFor="let item of schoolReason1">
+        <div class="d-flex align-items-center mb-2">
+          <input
+            class="me-2"
+            formControlName="{{ item.name }}"
+            type="checkbox"
+          />
+          <label class="form-label">{{ item.label }}</label>
+        </div>
+      </ng-container></ng-container
+    >
+    <ng-container *ngIf="requestType === 2">
+      <ng-container *ngFor="let item of schoolReason2">
+        <div class="d-flex align-items-center mb-2">
+          <input
+            class="me-2"
+            formControlName="{{ item.name }}"
+            type="checkbox"
+          />
+          <label class="form-label">{{ item.label }}</label>
+        </div>
+      </ng-container></ng-container
+    >
 
     <div class="mx-4">
       <textarea
@@ -34,18 +52,18 @@
     </div>
     <br />
     <div class="row">
-      <div class="col mb-3">
+      <div class="col mb-2">
         <label class="form-label"
           >ผู้ขอประกอบวิชาชีพครู
           ชี้แจงเหตุผลที่ไม่สามารถพัฒนาตนเองได้ตามระยะเวลาที่คุรุสภากำหนด</label
         >
         <label class="text-danger ms-2">* เลือกได้มากกว่า 1 รายการ</label>
 
-        <input
+        <!-- <input
           class="form-control"
           type="text"
           formControlName="teacherReasonInfo"
-        />
+        /> -->
       </div>
     </div>
 

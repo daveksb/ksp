@@ -19,13 +19,6 @@
   margin-bottom: 24px;
 }
 
-.header__label-2 {
-  font-size: 20px;
-  color: #000000;
-  text-align: center;
-  margin: 24px 0;
-}
-
 .content__label {
   font-size: 18px;
   color: #000000;
@@ -81,7 +74,7 @@
 }
 
 .qrcode__label {
-  font-size: 18px;
+  font-size: 20px;
   color: #656565;
 }
 
@@ -102,5 +95,9 @@
 
   .qrcode__content-2 {
     margin: auto;
+  }
+
+  .content__label {
+    font-size: 14px;
   }
 }

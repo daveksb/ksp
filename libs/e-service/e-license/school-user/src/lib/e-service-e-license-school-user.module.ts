@@ -2,12 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { RouterModule, Routes } from '@angular/router';
-import { UserDetailComponent } from '@ksp/e-service/e-license/user-detail';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { ManageCurrentUserListComponent } from './current-user-list/manage-current-user-list.component';
 import { MatIconModule } from '@angular/material/icon';
-import { TopNavComponent } from '@ksp/shared/menu';
+import { BottomNavComponent, TopNavComponent } from '@ksp/shared/menu';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
   EServiceRequestSearchComponent,
@@ -15,6 +14,14 @@ import {
 } from '@ksp/shared/search';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ApproveNewUserListComponent } from './new-user-list/approve-new-user-list.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
+import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
+import {
+  FormCoordinatorInfoComponent,
+  FormRequesterInfoComponent,
+} from '@ksp/shared/form/school/register';
+import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 
 export const routes: Routes = [
   {
@@ -29,10 +36,6 @@ export const routes: Routes = [
         path: 'new-user',
         component: ApproveNewUserListComponent,
       },
-      /*       {
-        path: 'user-detail',
-        component: UserDetailComponent,
-      }, */
       {
         path: 'user-detail/:id',
         component: UserDetailComponent,
@@ -46,30 +49,6 @@ export const routes: Routes = [
   },
 ];
 
-/*
-export const routes: Route[] = [
-  {
-    path: '',
-    component: EServiceContainerPageComponent,
-    children: [
-      {
-        path: '',
-        redirectTo: 'list',
-        pathMatch: 'full',
-      },
-      {
-        path: 'list',
-        component: ApproveNewUserListComponent,
-      },
-      {
-        path: 'detail/:id',
-        component: UserDetailComponent,
-      },
-    ],
-  },
-];
-*/
-
 @NgModule({
   imports: [
     CommonModule,
@@ -82,7 +61,17 @@ export const routes: Route[] = [
     EServiceUserSearchComponent,
     EServiceRequestSearchComponent,
     MatPaginatorModule,
+    BottomNavComponent,
+    LicenseCheckComponent,
+    FormRequesterInfoComponent,
+    FormCoordinatorInfoComponent,
+    SharedFormOthersModule,
+    RequestHeaderInfoComponent,
   ],
-  declarations: [ManageCurrentUserListComponent, ApproveNewUserListComponent],
+  declarations: [
+    ManageCurrentUserListComponent,
+    ApproveNewUserListComponent,
+    UserDetailComponent,
+  ],
 })
 export class EServiceELicenseSchoolUserModule {}

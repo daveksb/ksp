@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort, MatSortable, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
@@ -7,38 +10,68 @@ import {
 } from '@ksp/shared/constant';
 import { SelfRequest } from '@ksp/shared/interface';
 import { SelfRequestService } from '@ksp/shared/service';
-import { getCookie } from '@ksp/shared/utility';
+import { getCookie, thaiDate } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-self-service-home-page',
   templateUrl: './self-service-home-page.component.html',
   styleUrls: ['./self-service-home-page.component.scss'],
 })
-export class SelfServiceHomePageComponent {
+export class SelfServiceHomePageComponent implements AfterViewInit {
   badgeTitle = [
     `เลขที่ใบคำขอ : SF_010641000123 รายการขอขึ้นทะเบียนใบอนุญาต ถูกส่งคืน
   “ปรับแก้ไข / เพิ่มเติม” กดเพื่อตรวจสอบ`,
   ];
 
   dataSource = new MatTableDataSource<SelfRequest>();
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private router: Router,
-    private requestService: SelfRequestService
+    private requestService: SelfRequestService,
+    private fb: FormBuilder
   ) {}
+
+  form = this.fb.group({
+    requestno: [],
+    requesttype: [],
+    requestdate: [],
+  });
 
   displayedColumns: string[] = column;
 
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
   search() {
     const payload = {
       staffid: getCookie('userId'),
-      systemtype: '1',
-      requesttype: null,
+      requesttype: this.form.controls.requesttype.value,
+      requestno: this.form.controls.requestno.value,
+      requestdate: this.form.controls.requestdate.value,
+      requeststatus: null,
+      currentprocess: null,
+      offset: '0',
+      row: '100',
     };
     this.requestService.searchMyRequests(payload).subscribe((res) => {
-      //console.log('res= ', res);
-      this.dataSource.data = res;
+      if (res && res.length) {
+        this.dataSource.data = res;
+        this.dataSource.sort = this.sort;
+
+        const sortState: Sort = { active: 'id', direction: 'desc' };
+        this.sort.active = sortState.active;
+        this.sort.direction = sortState.direction;
+        this.sort.sortChange.emit(sortState);
+      } else {
+        this.dataSource.data = [];
+      }
     });
+  }
+
+  toThaiDate(input: string) {
+    return thaiDate(new Date(input));
   }
 
   goToDetail(input: SelfRequest) {
@@ -49,146 +82,236 @@ export class SelfServiceHomePageComponent {
     const id = Number(input.id);
     console.log('subType ', subType);
 
-    if (requestType > 40) {
-      this.reward();
+    if (requestType >= 40) {
+      this.reward(id);
     } else if (requestType === 30) {
-      this.refundFee();
+      this.refundFee(id);
     } else if (requestType === 6) {
-      this.compare();
+      this.compare(id);
     } else if (requestType === 5) {
-      this.transfer();
+      this.transfer(id);
     } else if (requestType === 4) {
-      this.substituteLicense();
+      this.substituteLicense(id);
     } else if (requestType === 3) {
-      this.licenseEdit();
+      this.licenseEdit(id);
     } else if (requestType === 2) {
       // renew
-      // this.checkSubtypeRedirect(subType, isForeign);
+      this.checkRenewRedirect(subType, isForeign, id);
     } else if (requestType === 1) {
       // new
 
-      this.checkSubtypeRedirect(subType, isForeign, id);
+      this.checkRequestRedirect(subType, isForeign, id);
     }
   }
 
-  checkSubtypeRedirect(
+  checkRequestRedirect(
     subtype: SelfServiceRequestSubType,
     isForeign: SelfServiceRequestForType,
     id: number
   ) {
-    // switch (subtype) {
-    //   case SelfServiceRequestSubType.ครู: {
-    //     if (isForeign === SelfServiceRequestForType.ชาวไทย) {
-    //       this.thaiTeacher(id);
-    //     } else {
-    //       this.foreignTeacher(subtype);
-    //     }
-    //     break;
-    //   }
-    //   case SelfServiceRequestSubType.ผู้บริหารสถานศึกษา: {
-    //     if (isForeign === SelfServiceRequestForType.ชาวไทย) {
-    //       this.schoolManager(id);
-    //     } else {
-    //       this.foreignTeacher(subtype);
-    //     }
-    //     break;
-    //   }
-    // }
+    switch (subtype) {
+      case SelfServiceRequestSubType.ครู: {
+        if (isForeign === SelfServiceRequestForType.ชาวไทย) {
+          this.thaiTeacher(id);
+        } else {
+          this.foreignTeacher(subtype, id);
+        }
+        break;
+      }
+      case SelfServiceRequestSubType.ผู้บริหารสถานศึกษา: {
+        if (isForeign === SelfServiceRequestForType.ชาวไทย) {
+          this.schoolManager(id);
+        } else {
+          this.foreignTeacher(subtype, id);
+        }
+        break;
+      }
+      case SelfServiceRequestSubType.ผู้บริหารการศึกษา:
+        this.eduManagerRequest(id);
+        break;
+      case SelfServiceRequestSubType.ศึกษานิเทศก์:
+        this.studySupervision(id);
+        break;
+    }
+  }
+
+  checkRenewRedirect(
+    subtype: SelfServiceRequestSubType,
+    isForeign: SelfServiceRequestForType,
+    id: number
+  ) {
+    switch (subtype) {
+      case SelfServiceRequestSubType.ครู: {
+        if (isForeign === SelfServiceRequestForType.ชาวไทย) {
+          this.teacherRenew(id);
+        } else {
+          this.foreignRenew(subtype, id);
+        }
+        break;
+      }
+      case SelfServiceRequestSubType.ผู้บริหารสถานศึกษา: {
+        if (isForeign === SelfServiceRequestForType.ชาวไทย) {
+          this.schManagerRenew(id);
+        } else {
+          this.foreignRenew(subtype, id);
+        }
+        break;
+      }
+      case SelfServiceRequestSubType.ผู้บริหารการศึกษา:
+        this.eduManagerRenew(id);
+        break;
+      case SelfServiceRequestSubType.ศึกษานิเทศก์:
+        this.supervisionRenew(id);
+        break;
+    }
   }
 
   clear() {
+    this.form.reset();
     this.dataSource.data = [];
   }
 
-  requestLicense(type: SelfServiceRequestSubType) {
-    this.router.navigate(['/license', 'request', type]);
-  }
+  // requestLicense(type: SelfServiceRequestSubType) {
+  //   this.router.navigate(['/license', 'request', type]);
+  // }
 
-  /*   // ครูไทย
+  // ครูไทย
   thaiTeacher(id?: number) {
-    this.router.navigate(['/license', 'teacher', `${id}`]);
+    this.router.navigate(['/license', 'teacher', ...(id ? [`${id}`] : [])]);
   }
 
   //ครู + ผู้บริหหาร ต่างชาติ
-  foreignTeacher(type: SelfServiceRequestSubType) {
-    this.router.navigate(['/license', 'agreement'], {
-      queryParams: { type },
-    });
+  foreignTeacher(type: SelfServiceRequestSubType, id?: number) {
+    if (id) {
+      this.router.navigate(
+        ['/license', 'foreign-teacher', ...(id ? [`${id}`] : [])],
+        {
+          queryParams: { type },
+        }
+      );
+    } else {
+      this.router.navigate(['/license', 'agreement'], {
+        queryParams: { type },
+      });
+    }
   }
 
   // ผู้บริหารสถานศึกษา
   schoolManager(id?: number) {
-    this.router.navigate(['/license', 'school-manager', `${id}`]);
+    this.router.navigate([
+      '/license',
+      'school-manager',
+      ...(id ? [`${id}`] : []),
+    ]);
   }
 
   // ผู้บริหารการศึกษา
-  eduManagerRequest() {
-    this.router.navigate(['/license', 'education-manager']);
+  eduManagerRequest(id?: number) {
+    this.router.navigate([
+      '/license',
+      'education-manager',
+      ...(id ? [`${id}`] : []),
+    ]);
   }
 
   //ศึกษานิเทศก์
-  studySupervision() {
-    this.router.navigate(['/license', 'study-supervision']);
-  } */
-
-  renewLicense(type: SelfServiceRequestSubType) {
-    this.router.navigate(['/renew-license', 'request', type]);
+  studySupervision(id?: number) {
+    this.router.navigate([
+      '/license',
+      'study-supervision',
+      ...(id ? [`${id}`] : []),
+    ]);
   }
 
-  /* // ครูไทย
-  teacherRenew() {
-    this.router.navigate(['/renew-license', 'request']);
+  // renewLicense(type: SelfServiceRequestSubType) {
+  //   this.router.navigate(['/renew-license', 'request', type]);
+  // }
+
+  // ครูไทย
+  teacherRenew(id?: number) {
+    this.router.navigate([
+      '/renew-license',
+      'request',
+      ...(id ? [`${id}`] : []),
+    ]);
   }
 
   //ครู + ผู้บริหาร ต่างชาติ
-  foreignRenew(type: SelfServiceRequestSubType) {
-    this.router.navigate(['/renew-license', 'foreign'], {
-      queryParams: { type },
-    });
+  foreignRenew(type: SelfServiceRequestSubType, id?: number) {
+    this.router.navigate(
+      ['/renew-license', 'foreign', ...(id ? [`${id}`] : [])],
+      {
+        queryParams: { type },
+      }
+    );
   }
   // ผู้บริหารสถานศึกษา
-  schManagerRenew() {
-    this.router.navigate(['/renew-license', 'school-manager']);
+  schManagerRenew(id?: number) {
+    this.router.navigate([
+      '/renew-license',
+      'school-manager',
+      ...(id ? [`${id}`] : []),
+    ]);
   }
 
   // ผู้บริหารการศึกษา
-  eduManagerRenew() {
-    this.router.navigate(['/renew-license', 'education-manager']);
+  eduManagerRenew(id?: number) {
+    this.router.navigate([
+      '/renew-license',
+      'education-manager',
+      ...(id ? [`${id}`] : []),
+    ]);
   }
 
   //ศึกษานิเทศก์
-  supervisionRenew() {
-    this.router.navigate(['/renew-license', 'study-supervision']);
-  } */
+  supervisionRenew(id?: number) {
+    this.router.navigate([
+      '/renew-license',
+      'study-supervision',
+      ...(id ? [`${id}`] : []),
+    ]);
+  }
 
   //ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ
-  licenseEdit() {
-    this.router.navigate(['/license', 'edit']);
+  licenseEdit(id?: number) {
+    this.router.navigate(['/license', 'edit', ...(id ? [`${id}`] : [])]);
   }
 
   //ขอรับรางวัล
-  reward() {
-    this.router.navigate(['/reward', 'request']);
+  reward(id?: number) {
+    this.router.navigate(['/reward', 'request', ...(id ? [`${id}`] : [])]);
   }
 
   // ขอหนังสือรับรองความรู้
-  transfer() {
-    this.router.navigate(['/transfer-knowledge', 'request']);
+  transfer(id?: number) {
+    this.router.navigate([
+      '/transfer-knowledge',
+      'request',
+      ...(id ? [`${id}`] : []),
+    ]);
   }
 
   // เทียบเคียง
-  compare() {
-    this.router.navigate(['/compare-knowledge', 'request']);
+  compare(id?: number) {
+    this.router.navigate([
+      '/compare-knowledge',
+      'request',
+      ...(id ? [`${id}`] : []),
+    ]);
   }
 
   // คืนเงินค่าธรรมเนียม
-  refundFee() {
-    this.router.navigate(['/refund-fee', 'request']);
+  refundFee(id?: number) {
+    this.router.navigate(['/refund-fee', 'request', ...(id ? [`${id}`] : [])]);
   }
 
   //ขอใบแทนใบอนุญาตประกอบวิชาชีพ
-  substituteLicense() {
-    this.router.navigate(['/substitute-license', 'request']);
+  substituteLicense(id?: number) {
+    this.router.navigate([
+      '/substitute-license',
+      'request',
+      ...(id ? [`${id}`] : []),
+    ]);
   }
 }
 

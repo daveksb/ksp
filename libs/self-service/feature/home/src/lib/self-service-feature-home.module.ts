@@ -13,6 +13,9 @@ import {
 } from '@ksp/self-service/ui';
 import { MatMenuModule } from '@angular/material/menu';
 import { UniFormBadgeComponent } from '@ksp/shared/ui';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export const routes: Routes = [
   {
@@ -33,10 +36,13 @@ export const routes: Routes = [
     TopNavComponent,
     MatTableModule,
     SlideshowComponent,
+    ReactiveFormsModule,
     SelfServiceLicenseInfoComponent,
     MatMenuModule,
     SlideshowSecondComponent,
     UniFormBadgeComponent,
+    MatSortModule,
+    MatPaginatorModule,
     RouterModule.forChild(routes),
   ],
   declarations: [SelfServiceHomeComponent, SelfServiceHomePageComponent],

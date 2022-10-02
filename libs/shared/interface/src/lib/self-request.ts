@@ -2,7 +2,7 @@ import { SchoolRequest } from './school-request';
 
 export class SelfRequest extends SchoolRequest {
   rewardethicinfo: string | null = null; // ข้อมูลการปฎิบัติตามจรรยาบรรณ
-  rewardsuccessInfo: string | null = null; // รายงานผลสำเร็จจากการปฎิบัติงาน
+  rewardsuccessinfo: string | null = null; // รายงานผลสำเร็จจากการปฎิบัติงาน
   rewarddetailinfo: string | null = null; // ข้อมูลรางวัลและหลักฐานประกอบ / ข้อมูลนวัตกรรมและรางวัล
   rewardpunishmentinfo: string | null = null; // ข้อมูลการลงโทษทางวินัย
   rewardteacherinfo: string | null = null; // ข้อมูลครูภาษาไทยดีเด่น/ข้อมูลครูดีเด่น/ข้อมูลครูอาวุโส
@@ -26,7 +26,7 @@ export class SelfRequest extends SchoolRequest {
     super.ref3 = ref3;
 
     super.systemtype = ref1;
-    super.requesttype = ref2;
+    super.requesttype = `${+ref2}`;
     super.subtype = ref3;
 
     super.currentprocess = `${process}`;

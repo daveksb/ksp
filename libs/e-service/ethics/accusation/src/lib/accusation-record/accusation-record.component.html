@@ -53,7 +53,7 @@
   </button>
 
   <div class="my-3">
-    <mat-tab-group class="tab-group">
+    <mat-tab-group class="tab-group" animationDuration="0ms">
       <mat-tab label="ข้อมูลผู้ได้รับใบอนุญาต" class="tab-content"
         ><e-service-person-info></e-service-person-info>
       </mat-tab>
@@ -82,12 +82,16 @@
 
   <div class="row">
     <div class="col mb-3">
-      <label class="form-label">หมายเลขคดีดำ</label>
-      <input class="form-control" type="text" formControlName="blackNumber" />
+      <label class="form-label required">หมายเลขคดีดำ</label>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="accusationblackno"
+      />
     </div>
     <div class="col mb-3">
-      <label class="form-label">ประพฤติผิดจรรยาบรรณต่อ</label>
-      <select class="form-select" formControlName="misconductEthic">
+      <label class="form-label required">ประพฤติผิดจรรยาบรรณต่อ</label>
+      <select class="form-select" formControlName="accusationtype">
         <option value="null" disabled hidden selected>กรุณาเลือก</option>
         <option value="1">One</option>
         <option value="2">Two</option>
@@ -98,19 +102,23 @@
 
   <div class="row">
     <div class="col-6 mb-3">
-      <label class="form-label">วันที่เกิดเหตุ</label>
-      <input class="form-control" type="date" formControlName="incidentDate" />
+      <label class="form-label required">วันที่เกิดเหตุ</label>
+      <input
+        class="form-control"
+        type="date"
+        formControlName="accusationincidentdate"
+      />
     </div>
   </div>
 
   <div class="row">
     <div class="col mb-3">
-      <label class="form-label">สถานที่เกิดเหตุ </label>
+      <label class="form-label required">สถานที่เกิดเหตุ </label>
       <textarea
         class="form-control"
         type="text"
         rows="3"
-        formControlName="incidentAddress"
+        formControlName="accusationincidentplace"
       >
       </textarea>
     </div>
@@ -118,8 +126,10 @@
 
   <div class="row">
     <div class="col-6 mb-3">
-      <label class="form-label">ประเภทของการกล่าวโทษ/ข้อกล่าวโทษ</label>
-      <select class="form-select" formControlName="incidentType">
+      <label class="form-label required"
+        >ประเภทของการกล่าวโทษ/ข้อกล่าวโทษ</label
+      >
+      <select class="form-select" formControlName="accusationcondemnationtype">
         <option value="null" disabled hidden selected>กรุณาเลือก</option>
         <option value="1">One</option>
         <option value="2">Two</option>
@@ -130,12 +140,12 @@
 
   <div class="row">
     <div class="col mb-3">
-      <label class="form-label">ประเด็นตั้งข้อกล่าวหา/กล่าวโทษ</label>
+      <label class="form-label required">ประเด็นตั้งข้อกล่าวหา/กล่าวโทษ</label>
       <textarea
         class="form-control"
         type="text"
         rows="3"
-        formControlName="accuseSubject"
+        formControlName="accusationcondemnation"
       >
       </textarea>
     </div>
@@ -144,7 +154,11 @@
   <div class="row">
     <div class="col-6 mb-3">
       <label class="form-label">วันที่วินิจฉัยชี้ขาด/วันที่ออกคำสั่ง</label>
-      <input class="form-control" type="date" formControlName="orderDate" />
+      <input
+        class="form-control"
+        type="date"
+        formControlName="accusationissuedate"
+      />
     </div>
   </div>
 
@@ -155,7 +169,7 @@
         class="form-control"
         type="text"
         rows="3"
-        formControlName="detail"
+        formControlName="accusationdetail"
       >
       </textarea>
     </div>
@@ -168,7 +182,7 @@
         class="form-control"
         type="text"
         rows="3"
-        formControlName="punishType"
+        formControlName="accusationpunishmentdetail"
       >
       </textarea>
     </div>
@@ -181,7 +195,7 @@
         class="form-control"
         type="text"
         rows="3"
-        formControlName="offend"
+        formControlName="accusationviolatedetail"
       >
       </textarea>
     </div>
@@ -190,7 +204,7 @@
   <div class="row">
     <div class="col mb-3">
       <label class="form-label">เจ้าหน้าที่ได้รับมอบงาน</label>
-      <select class="form-select" formControlName="assignStaff">
+      <select class="form-select" formControlName="accusationassignofficer">
         <option value="null" disabled hidden selected>กรุณาเลือก</option>
         <option value="1">One</option>
         <option value="2">Two</option>
@@ -200,7 +214,11 @@
 
     <div class="col mb-3">
       <label class="form-label">วันที่รับมอบ</label>
-      <input class="form-control" type="date" formControlName="assignDate" />
+      <input
+        class="form-control"
+        type="date"
+        formControlName="accusationassigndate"
+      />
     </div>
   </div>
 

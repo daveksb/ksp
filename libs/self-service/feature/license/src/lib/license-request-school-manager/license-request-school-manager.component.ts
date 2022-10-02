@@ -134,8 +134,7 @@ export class LicenseRequestSchoolManagerComponent
       const fileInfo = parseJson(data.fileinfo);
       const { edufiles, experiencefiles } = fileInfo;
       this.eduFiles = edufiles;
-      console.log(experiencefiles);
-      // this.experienceFiles = experiencefiles;
+      this.experienceFiles = experiencefiles;
     }
   }
 
@@ -190,6 +189,7 @@ export class LicenseRequestSchoolManagerComponent
     const payload = {
       ...self,
       ...replaceEmptyWithNull(selectData),
+      ...(this.requestId && { id: `${this.requestId}` }),
       ...{
         addressinfo: JSON.stringify([formData.address1, formData.address2]),
       },

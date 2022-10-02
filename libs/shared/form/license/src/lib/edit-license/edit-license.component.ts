@@ -67,6 +67,35 @@ export class EditLicenseComponent extends KspFormBaseComponent {
     );
   }
 
+  override set value(value: any) {
+    this.form.patchValue(value);
+    if (value.changePrefix) {
+      this.form.controls.prefixTh.enable();
+      this.form.controls.prefixEn.enable();
+    }
+
+    if (value.changeFirstname) {
+      this.form.controls.firstnameEn.enable();
+      this.form.controls.firstnameTh.enable();
+    }
+
+    if (value.changeLastname) {
+      this.form.controls.lastnameEn.enable();
+      this.form.controls.lastnameTh.enable();
+    }
+
+    if (value.changePassport) {
+      this.form.controls.passportNo.enable();
+    }
+
+    if (value.isDistributed) {
+      this.form.controls.distributeData.enable();
+    }
+
+    this.onChange(value);
+    this.onTouched();
+  }
+
   disableControl(evt: any, controlList: controlName[]) {
     const checked = evt.target.checked;
     controlList.forEach((i) => {

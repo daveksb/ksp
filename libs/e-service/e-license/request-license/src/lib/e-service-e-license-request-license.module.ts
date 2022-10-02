@@ -16,7 +16,8 @@ import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
 import { EServiceRequestSearchComponent } from '@ksp/shared/search';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { RequestLicenseApproveDetailComponent } from './request-license-approve-detail/request-license-approve-detail.component';
-import { LicenseRequestSchoolManagerComponent, SelfServiceFeatureLicenseModule } from '@ksp/self-service/feature/license';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 export const routes: Route[] = [
   {
@@ -33,7 +34,7 @@ export const routes: Route[] = [
         component: RequestLicenseApproveListComponent,
       },
       {
-        path: 'approve-detail',
+        path: 'approve-detail/:id',
         component: RequestLicenseApproveDetailComponent,
       },
     ],
@@ -55,12 +56,10 @@ export const routes: Route[] = [
     RequestHeaderInfoComponent,
     EServiceRequestSearchComponent,
     MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
   ],
   declarations: [
-    RequestLicenseApproveListComponent,
-    RequestLicenseApproveDetailComponent,
-  ],
-  exports: [
     RequestLicenseApproveListComponent,
     RequestLicenseApproveDetailComponent,
   ],

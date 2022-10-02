@@ -75,9 +75,11 @@
         <self-service-substitute-objective
           formControlName="replaceReasonInfo"
         ></self-service-substitute-objective>
+        <br />
         <ksp-form-attachment
           [title]="'กรุณาแนบหลักฐานประกอบ'"
           [groups]="objectiveFiles"
+          [uniqueTimestamp]="uniqueTimestamp"
         ></ksp-form-attachment>
       </mat-tab>
     </mat-tab-group>
@@ -89,6 +91,14 @@
 
     <div class="d-flex justify-content-center my-3">
       <button type="button" class="btn btn-secondary">ย้อนกลับ</button>
+      <button
+        type="button"
+        *ngIf="requestId"
+        (click)="cancel()"
+        class="ms-3 btn border-primary text-primary"
+      >
+        ยกเลิกใบคำขอ
+      </button>
       <button type="button" (click)="next()" class="ms-3 btn btn-primary">
         ต่อไป
       </button>

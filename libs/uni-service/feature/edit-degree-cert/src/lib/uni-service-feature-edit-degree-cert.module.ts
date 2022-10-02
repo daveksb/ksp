@@ -10,6 +10,7 @@ import { EditDegreeDetailComponent } from './edit-degree-detail/edit-degree-deta
 import { MatStepperModule } from '@angular/material/stepper';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SharedDegreeCertModule } from '@ksp/shared/degree-cert';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -43,6 +44,7 @@ const routes: Routes = [
     BottomNavComponent,
     RequestHeaderInfoComponent,
     SharedDegreeCertModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
   ],
   declarations: [EditDegreeListComponent, EditDegreeDetailComponent],

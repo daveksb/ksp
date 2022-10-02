@@ -18,8 +18,21 @@ import {
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SelfRequest } from '@ksp/shared/interface';
-import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
+import {
+  getCookie,
+  parseJson,
+  replaceEmptyWithNull,
+  toLowercaseProp,
+} from '@ksp/shared/utility';
 import * as _ from 'lodash';
+
+const WORKING_INFO_FILES = [
+  {
+    name: '1.รางวัลอื่นและประกาศเกียรติคุณ',
+    fileId: '',
+    fileName: '',
+  },
+];
 
 @UntilDestroy()
 @Component({
@@ -57,13 +70,7 @@ export class RenewLicenseSchoolManagerComponent
 
   disableNextButton = false;
 
-  workingInfoFiles = [
-    {
-      name: '1.รางวัลอื่นและประกาศเกียรติคุณ',
-      fileId: '',
-      fileName: '',
-    },
-  ];
+  workingInfoFiles: any[] = [];
 
   constructor(
     router: Router,
@@ -91,9 +98,50 @@ export class RenewLicenseSchoolManagerComponent
 
   ngOnInit(): void {
     this.getListData();
-    this.getMyInfo();
     this.checkButtonsDisableStatus();
-    this.initializeFiles();
+    this.checkRequestId();
+  }
+
+  override initializeFiles() {
+    super.initializeFiles();
+    this.workingInfoFiles = structuredClone(WORKING_INFO_FILES);
+  }
+
+  override patchData(data: SelfRequest) {
+    super.patchData(data);
+    if (data.schooladdrinfo) {
+      const { website, email, fax, phone } = parseJson(data.schooladdrinfo);
+      this.form.patchValue({
+        website,
+        workEmail: email,
+        fax,
+        workPhone: phone,
+      });
+    }
+
+    if (data.eduinfo) {
+      const eduInfo = parseJson(data.eduinfo);
+      const { educationType, ...educationLevelForm } = eduInfo;
+      this.form.controls.educationForm.patchValue({
+        educationType,
+        educationLevelForm,
+      } as any);
+    }
+
+    if (data.performanceinfo) {
+      const performanceInfo = parseJson(data.performanceinfo);
+      const { standardType, ...standardLevelForm } = performanceInfo;
+      this.form.controls.standardWorking.patchValue({
+        educationType: standardType,
+        educationLevelForm: standardLevelForm,
+      } as any);
+    }
+
+    if (data.fileinfo) {
+      const fileInfo = parseJson(data.fileinfo);
+      const { performancefiles } = fileInfo;
+      this.workingInfoFiles = performancefiles;
+    }
   }
 
   patchUserInfoForm(data: any): void {
@@ -132,6 +180,7 @@ export class RenewLicenseSchoolManagerComponent
     const userInfo = toLowercaseProp(rawUserInfo);
     userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
     userInfo.uniquetimestamp = this.uniqueTimestamp;
+    userInfo.staffid = getCookie('userId');
     const selectData = _.pick(userInfo, allowKey);
 
     const { educationType, educationLevelForm } = formData.educationForm || {
@@ -146,11 +195,12 @@ export class RenewLicenseSchoolManagerComponent
       educationLevelForm: null,
     };
 
-    const performancefiles = this.mapFileInfo(this.workingInfoFiles);
+    const performancefiles = this.workingInfoFiles;
 
     const payload = {
       ...self,
       ...replaceEmptyWithNull(selectData),
+      ...(this.requestId && { id: `${this.requestId}` }),
       ...{
         addressinfo: JSON.stringify([formData.address1, formData.address2]),
       },
@@ -185,6 +235,28 @@ export class RenewLicenseSchoolManagerComponent
   checkButtonsDisableStatus() {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
       this.disableNextButton = false; //!this.form.valid;
+    });
+  }
+
+  onSave(currentProcess: number) {
+    this.currentProcess = currentProcess;
+    this.save();
+  }
+
+  override onCompleted(forbidden: any) {
+    const payload = this.createRequest(forbidden, this.currentProcess);
+    const request = this.requestId
+      ? this.requestService.updateRequest.bind(this.requestService)
+      : this.requestService.createRequest.bind(this.requestService);
+    request(payload).subscribe((res) => {
+      console.log('request result = ', res);
+      if (res.returncode === '00') {
+        if (this.currentProcess === 2) {
+          this.router.navigate(['/license', 'payment-channel']);
+        } else {
+          this.router.navigate(['/home']);
+        }
+      }
     });
   }
 }

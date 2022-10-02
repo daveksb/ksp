@@ -14,13 +14,26 @@ import {
   MyInfoService,
   SelfRequestService,
 } from '@ksp/shared/service';
-import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
+import {
+  getCookie,
+  parseJson,
+  replaceEmptyWithNull,
+  toLowercaseProp,
+} from '@ksp/shared/utility';
 import { SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { Observable } from 'rxjs';
+
+const OBJECTIVE_FILES = [
+  {
+    name: 'สำเนาคำอธิบายรายวิชาที่ขอเทียบโอนความรู้ฯตามหลักสูตรที่สำเร็จการศึกษษที่มีตราประทับของทางสถาบันที่สำเร็จการศึกษาและมีเจ้าหน้าที่ของสถาบันลงนามรับรองสำเนาถูกต้อง',
+    fileId: '',
+    fileName: '',
+  },
+];
 
 @Component({
   selector: 'ksp-transfer-knowledge-request',
@@ -33,13 +46,6 @@ export class TransferKnowledgeRequestComponent
 {
   userInfoType = UserInfoFormType.thai;
   headerGroup = ['วันที่ทำรายการ', 'เลขใบคำขอ'];
-  objectiveFiles = [
-    {
-      name: 'สำเนาคำอธิบายรายวิชาที่ขอเทียบโอนความรู้ฯตามหลักสูตรที่สำเร็จการศึกษษที่มีตราประทับของทางสถาบันที่สำเร็จการศึกษาและมีเจ้าหน้าที่ของสถาบันลงนามรับรองสำเนาถูกต้อง',
-      fileId: '',
-      fileName: '',
-    },
-  ];
   eduFiles: any[] = [];
   transferFiles: any[] = [];
 
@@ -80,15 +86,41 @@ export class TransferKnowledgeRequestComponent
 
   ngOnInit(): void {
     this.getListData();
-    this.getMyInfo();
+    // this.getMyInfo();
     // this.checkButtonsDisableStatus();
-    this.initializeFiles();
+    // this.initializeFiles();
+    this.checkRequestId();
   }
 
   override initializeFiles(): void {
     super.initializeFiles();
-    this.eduFiles = structuredClone(this.objectiveFiles);
-    this.transferFiles = structuredClone(this.objectiveFiles);
+    this.eduFiles = structuredClone(OBJECTIVE_FILES);
+    this.transferFiles = structuredClone(OBJECTIVE_FILES);
+  }
+
+  override patchData(data: SelfRequest) {
+    super.patchData(data);
+    if (data.eduinfo) {
+      const eduInfo = parseJson(data.eduinfo);
+      this.form.controls.educationInfo.patchValue({
+        ...eduInfo,
+      } as any);
+    }
+
+    if (data.transferknowledgeinfo) {
+      const transferKnowledgeInfo = parseJson(data.transferknowledgeinfo);
+      console.log(transferKnowledgeInfo);
+      this.form.controls.transferKnowledgeInfo.patchValue({
+        ...transferKnowledgeInfo,
+      });
+    }
+
+    if (data.fileinfo) {
+      const fileInfo = parseJson(data.fileinfo);
+      const { edufiles, transferknowledgeinfofiles } = fileInfo;
+      this.eduFiles = edufiles;
+      this.transferFiles = transferknowledgeinfofiles;
+    }
   }
 
   override getListData(): void {
@@ -125,6 +157,7 @@ export class TransferKnowledgeRequestComponent
     const userInfo = toLowercaseProp(rawUserInfo);
     userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
     userInfo.uniquetimestamp = this.uniqueTimestamp;
+    userInfo.staffid = getCookie('userId');
 
     const self = new SelfRequest(
       '1',
@@ -134,11 +167,12 @@ export class TransferKnowledgeRequestComponent
     );
     const allowKey = Object.keys(self);
 
-    const edufiles = this.mapFileInfo(this.eduFiles);
-    const transferknowledgeinfofiles = this.mapFileInfo(this.transferFiles);
+    const edufiles = this.eduFiles;
+    const transferknowledgeinfofiles = this.transferFiles;
 
     const initialPayload = {
       ...replaceEmptyWithNull(userInfo),
+      ...(this.requestId && { id: `${this.requestId}` }),
       ...{
         addressinfo: JSON.stringify([formData.address1, formData.address2]),
       },
@@ -174,7 +208,10 @@ export class TransferKnowledgeRequestComponent
     completeDialog.componentInstance.saved.subscribe((res) => {
       if (res) {
         const payload = this.createRequest(1);
-        this.requestService.createRequest(payload).subscribe((res) => {
+        const request = this.requestId
+          ? this.requestService.updateRequest.bind(this.requestService)
+          : this.requestService.createRequest.bind(this.requestService);
+        request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
             this.router.navigate(['/home']);
@@ -186,7 +223,10 @@ export class TransferKnowledgeRequestComponent
     completeDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         const payload = this.createRequest(2);
-        this.requestService.createRequest(payload).subscribe((res) => {
+        const request = this.requestId
+          ? this.requestService.updateRequest.bind(this.requestService)
+          : this.requestService.createRequest.bind(this.requestService);
+        request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
             this.router.navigate(['/license', 'payment-channel']);

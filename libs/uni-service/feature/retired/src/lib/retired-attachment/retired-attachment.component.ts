@@ -42,7 +42,7 @@ export class RetiredAttachmentComponent implements OnInit {
 
   retiredFiles = [
     { name: 'หนังสือแต่งตั้งผู้ประสานงาน', fileId: '', fileName: '' },
-    { name: 'สำเนาบัตรประจำตัวประชาชน', fileId: '', fileName: '' }
+    { name: 'สำเนาบัตรประชาชน', fileId: '', fileName: '' }
   ];
 
   ngOnInit() {

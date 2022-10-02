@@ -22,12 +22,13 @@ export class UniversitySelectComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+  @Input() title = 'กรุณาเลือกสถาบันที่ท่านสังกัด';
   @Input() label1 = 'สังกัด';
   @Input() label2 = 'โรงเรียน / สถานศึกษา';
   @Input() schoolName = '';
-  @Input() bureauName= '';
+  @Input() bureauName = '';
   @Input() searchType = '';
-  @Input() readonly: boolean = false;
+  @Input() readonly = false;
   bureaus$!: Observable<any>;
   @Output() selectedUniversity = new EventEmitter<string>();
 
@@ -64,6 +65,7 @@ export class UniversitySelectComponent
       },
       data: {
         searchType: this.searchType,
+        subHeader: 'กรุณาเลือกหน่วยงาน/สถานศึกษาที่ท่านสังกัด',
       },
     });
     dialog.afterClosed().subscribe((res) => {

@@ -1,3 +1,5 @@
+import { RequestProcess } from './ksp-constant';
+
 // ใช้ อ้างอิง tab ในหน้าใบคำขอเพื่อระบุรายการไฟล์ ที่เกี่ยวข้อง
 export enum RequestPageType {
   educationTab = 'educationTab',
@@ -10,7 +12,7 @@ export enum RequestPageType {
 export const SchoolRequestType = [
   { id: 1, name: 'ขอยื่นผู้ประสานงาน' },
   { id: 2, name: 'ขอยื่นถอดถอนผู้ประสานงาน' },
-  { id: 3, name: 'ขอหนังสืออนุญาตประกอบวิชาชีพ' },
+  { id: 3, name: 'ขออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ' },
   { id: 4, name: 'ขอสร้างเลขประจำตัวคุรุสภาสำหรับชาวต่างชาติ' },
   { id: 5, name: 'ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ ไม่มีใบอนุญาต' },
   { id: 6, name: 'ขอหนังสือรับรองคุณวุฒิ' },
@@ -26,6 +28,8 @@ export const SchoolRetireReason = [
 export enum SchoolRequestSubType {
   'ครู' = 1,
   'ผู้บริหารสถานศึกษา' = 2,
+  'ผู้บริหารการศึกษา' = 3,
+  'ศึกษานิเทศก์' = 4,
   'อื่นๆ' = 5,
 }
 
@@ -52,20 +56,7 @@ export const EduOccupyList = [
   },
 ];
 
-export interface RequestProcess {
-  requestType: number;
-  processId: number;
-  processName: string;
-  status: RequestStatus[]; //[{ id: 1, sname: 'ยกเลิก', ename: 'ยกเลิก' }],
-}
-
-export interface RequestStatus {
-  id: number;
-  sname: string;
-  ename: string;
-}
-
-export const RequestProcessList: RequestProcess[] = [
+export const SchoolRequestProcess: RequestProcess[] = [
   //ลงทะเบียนผู้ประสานงาน
   {
     requestType: 1,
@@ -242,7 +233,7 @@ export const levels = [
   { label: 'ประกาศนียบัตรวิชาชีพ (ปวช.)', value: 'level6' },
   { label: 'ชั้นมัธยมปีที่ 1-3', value: 'level4' },
   { label: 'ชั้นประถมปีที่ 1-3', value: 'level2' },
-  { label: 'อนุบาล', value: 'level1' },
+  { label: 'อนุบาล / ปฐมวัย', value: 'level1' },
   {
     label: 'ประกาศนียบัตรวิชาชีพขั้นสูง (ปวส.) / อนุปริญญา',
     value: 'level7',

@@ -1,27 +1,23 @@
-<!-- <ksp-top-nav [isSelfService]="true"
-  ><span header>TEACHING LICENSE APPLICATION FORM</span>
+<ksp-top-nav [isSelfService]="true"><span header>TEACHING LICENSE APPLICATION FORM</span>
 </ksp-top-nav>
 
-<div class="main__container py-2">
-  <div class="px-4">
-    <self-service-request-status
-      [headerLabel1]="'Issue Date'"
-      [headerLabel2]="'Form ID'"
-      [title]="title"
-    ></self-service-request-status>
-  </div>
+<div class="main__container py-2 px-4">
+  <self-service-request-status
+    [headerLabel1]="'Issue Date'"
+    [headerLabel2]="'Form ID'"
+    [title]="title"></self-service-request-status>
+
   <br />
   <div class="box-header text-center">
     THE TEACHERS' COUNCIL OF THAILAND TEACHING LICENSE APPLICATION FORM
-  </div> -->
+  </div>
 
   <form [formGroup]="form">
     <mat-stepper
       labelPosition="bottom"
       [animationDuration]="'0'"
       [selectedIndex]="0"
-      #stepper
-    >
+      #stepper>
       <mat-step [completed]="false">
         <ng-template matStepLabel>Check Documentation </ng-template>
         <self-service-foreign-license-step-one></self-service-foreign-license-step-one>
@@ -31,34 +27,42 @@
         <ng-template matStepLabel>Personal Details</ng-template>
         <self-service-foreign-license-step-two
           formControlName="personalDetail"
-        ></self-service-foreign-license-step-two>
+          [userInfo]="userInfo"
+          [addressInfo]="addressInfo"
+          [workplaceInfo]="workplaceInfo"
+          [grantionTeachingInfo]="grantionTeachingInfo"
+          [academicFiles]="academicFiles"
+          [uniqueTimestamp]="uniqueTimestamp"
+          [eduInfo]="eduInfo"></self-service-foreign-license-step-two>
       </mat-step>
 
       <mat-step [completed]="false">
         <ng-template matStepLabel>Documents and evidence required</ng-template>
         <self-service-foreign-license-step-three
           [uniqueTimestamp]="uniqueTimestamp"
-          (fileUpdate)="onFileUpdate($event)"
-        >
+          [attachFiles]="documentFiles">
         </self-service-foreign-license-step-three>
       </mat-step>
 
       <mat-step [completed]="false">
         <ng-template matStepLabel>Personal Declaration</ng-template>
         <self-service-foreign-license-step-four
-          formControlName="personalDeclaration"
-        >
+          [personalDeclaration]="personalDeclaration"
+          formControlName="personalDeclaration">
         </self-service-foreign-license-step-four>
       </mat-step>
     </mat-stepper>
 
-<!--     <div class="d-flex justify-content-center my-3">
+    <div class="d-flex justify-content-center my-3">
       <button type="button" (click)="cancel()" class="btn btn-secondary">
         Cancel
+      </button>
+      <button type="button" *ngIf="requestId" (click)="onCancelRequest()" class="ms-3 btn border-primary text-primary">
+        Cancel Request
       </button>
       <button type="button" (click)="save()" class="ms-3 btn btn-primary">
         Save (Draft)
       </button>
     </div>
   </form>
-</div> -->
+</div>

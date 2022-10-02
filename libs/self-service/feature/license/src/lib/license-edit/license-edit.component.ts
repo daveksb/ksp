@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -15,6 +15,7 @@ import {
 } from '@ksp/shared/service';
 import {
   getCookie,
+  parseJson,
   replaceEmptyWithNull,
   toLowercaseProp,
 } from '@ksp/shared/utility';
@@ -26,6 +27,24 @@ import {
 } from '@ksp/shared/constant';
 import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
+
+const FILE_LIST = [
+  {
+    name: 'สำเนาหนังสือสำคัญการเปลี่ยนชื่อ/ชื่อสกุล/เปลี่ยนหรือเพิ่มคำนำหน้าชื่อ',
+    fileId: '',
+    fileName: '',
+  },
+  {
+    name: 'สำเนาหลักฐานการสมรส หรือการสิ้นสุดการสมรส (ถ้ามี)',
+    fileId: '',
+    fileName: '',
+  },
+  {
+    name: 'สำเนาหนังสือรับรองการใช้คำหน้านามหญิง (ถ้ามี)',
+    fileId: '',
+    fileName: '',
+  },
+];
 
 @UntilDestroy()
 @Component({
@@ -42,25 +61,13 @@ export class LicenseEditComponent implements OnInit {
 
   oldValue: any;
 
-  uploadFileList = [
-    {
-      name: 'สำเนาหนังสือสำคัญการเปลี่ยนชื่อ/ชื่อสกุล/เปลี่ยนหรือเพิ่มคำนำหน้าชื่อ',
-      fileId: '',
-      fileName: '',
-    },
-    {
-      name: 'สำเนาหลักฐานการสมรส หรือการสิ้นสุดการสมรส (ถ้ามี)',
-      fileId: '',
-      fileName: '',
-    },
-    {
-      name: 'สำเนาหนังสือรับรองการใช้คำหน้านามหญิง (ถ้ามี)',
-      fileId: '',
-      fileName: '',
-    },
-  ];
+  uploadFileList: any[] = [];
 
   uniqueTimestamp!: string;
+  requestId!: number;
+  requestData!: SelfRequest;
+  requestNo: string | null = '';
+  currentProcess!: number;
 
   constructor(
     public dialog: MatDialog,
@@ -68,7 +75,8 @@ export class LicenseEditComponent implements OnInit {
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService,
     private myInfoService: MyInfoService,
-    private requestService: SelfRequestService
+    private requestService: SelfRequestService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -77,12 +85,53 @@ export class LicenseEditComponent implements OnInit {
 
     }); */
     this.getListData();
-    this.getMyInfo();
-    this.initializeFile();
+    this.checkRequestId();
+    // this.getMyInfo();
+    // this.initializeFile();
+  }
+
+  checkRequestId() {
+    this.route.paramMap.subscribe((params) => {
+      this.requestId = Number(params.get('id'));
+      if (this.requestId) {
+        // this.loadRequestFromId(this.requestId);
+        this.requestService.getRequestById(this.requestId).subscribe((res) => {
+          if (res) {
+            console.log(res);
+            this.requestData = res;
+            this.requestNo = res.requestno;
+            this.currentProcess = Number(res.currentprocess);
+            this.uniqueTimestamp = res.uniquetimestamp || '';
+            console.log(this.uniqueTimestamp);
+
+            this.patchData(res);
+          }
+        });
+      } else {
+        this.initializeFile();
+        this.getMyInfo();
+      }
+    });
+  }
+
+  patchData(data: SelfRequest) {
+    console.log(data);
+    if (data.replacereasoninfo) {
+      const replaceReasonInfo = parseJson(data.replacereasoninfo);
+      this.form.controls.userInfo.patchValue(replaceReasonInfo);
+    }
+
+    if (data.fileinfo) {
+      const fileInfo = parseJson(data.fileinfo);
+      console.log(fileInfo);
+      const { attachfiles } = fileInfo;
+      this.uploadFileList = attachfiles;
+    }
   }
 
   initializeFile() {
     this.uniqueTimestamp = uuidv4();
+    this.uploadFileList = structuredClone(FILE_LIST);
   }
 
   getListData() {
@@ -104,7 +153,20 @@ export class LicenseEditComponent implements OnInit {
 
   createRequest(currentProcess: number) {
     const formData: any = this.form.getRawValue();
-    const { id, ...rawUserInfo } = this.oldValue;
+    const {
+      id,
+      updatedate,
+      addressinfo,
+      schooladdrinfo,
+      birthdate,
+      ...rawUserInfo
+    } = this.oldValue || {
+      id: null,
+      updatedate: null,
+      addressinfo: null,
+      schooladdrinfo: null,
+      birthdate: null,
+    };
     const userInfo = toLowercaseProp(rawUserInfo);
     const type = SelfServiceRequestSubType.อื่นๆ;
 
@@ -118,11 +180,13 @@ export class LicenseEditComponent implements OnInit {
     userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
     userInfo.uniquetimestamp = this.uniqueTimestamp;
     userInfo.staffid = getCookie('userId');
+    userInfo.birthdate = birthdate?.split('T')[0];
 
-    const attachfiles = this.mapFileInfo(this.uploadFileList);
+    const attachfiles = this.uploadFileList;
 
     const initialPayload = {
       ...replaceEmptyWithNull(userInfo),
+      ...(this.requestId && { id: `${this.requestId}` }),
       ...{
         replacereasoninfo: JSON.stringify({ ...formData.userInfo }),
       },
@@ -149,7 +213,10 @@ export class LicenseEditComponent implements OnInit {
     dialog.componentInstance.saved.subscribe((res) => {
       if (res) {
         const payload = this.createRequest(1);
-        this.requestService.createRequest(payload).subscribe((res) => {
+        const request = this.requestId
+          ? this.requestService.updateRequest.bind(this.requestService)
+          : this.requestService.createRequest.bind(this.requestService);
+        request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
             this.router.navigate(['/home']);
@@ -161,7 +228,10 @@ export class LicenseEditComponent implements OnInit {
     dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         const payload = this.createRequest(2);
-        this.requestService.createRequest(payload).subscribe((res) => {
+        const request = this.requestId
+          ? this.requestService.updateRequest.bind(this.requestService)
+          : this.requestService.createRequest.bind(this.requestService);
+        request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res.returncode === '00') {
             this.onSaveAndRequest();
@@ -189,14 +259,55 @@ export class LicenseEditComponent implements OnInit {
     });
   }
 
-  mapFileInfo(fileList: any[]) {
-    return fileList.map((file: any) => {
-      const object = {
-        fileid: file.fileId || null,
-        filename: file.fileName || null,
-        name: file.name || null,
-      };
-      return object;
+  onCancel() {
+    if (this.requestId) {
+      this.cancel();
+    } else {
+      this.navigateBack();
+    }
+  }
+
+  cancel() {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: `คุณต้องการยกเลิกรายการใบคำขอ
+        ใช่หรือไม่? `,
+      },
+    });
+
+    confirmDialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.cancelRequest();
+      }
+    });
+  }
+
+  cancelRequest() {
+    const payload = {
+      id: `${this.requestId}`,
+      requeststatus: '0',
+    };
+
+    this.requestService.cancelRequest(payload).subscribe((res) => {
+      //console.log('Cancel request  = ', res);
+      this.cancelCompleted();
+    });
+  }
+
+  cancelCompleted() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      width: '350px',
+      data: {
+        header: `ยกเลิกใบคำขอสำเร็จ`,
+        buttonLabel: 'กลับสู่หน้าหลัก',
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/home']);
+      }
     });
   }
 }

@@ -1,5 +1,5 @@
 <form [formGroup]="form">
-  <div class="bg-light px-3 py-3 mb-3">
+  <div class="bg-light px-3 py-3">
     <div class="box-header">ข้อมูลการจ้าง</div>
 
     <div class="row mb-3" [ngClass]="{ hide: displayMode === 'request' }">
@@ -74,31 +74,31 @@
     </div>
 
     <div [ngClass]="{ hide: displayMode === 'request' }">
-      <div class="form-label text-secondary ps-3">สถานะบุคลากร</div>
+      <div class="form-label text-secondary">สถานะบุคลากร</div>
 
       <ng-container *ngFor="let item of status">
-        <div class="row mb-2">
-          <span class="col-1 d-flex justify-content-end align-self-center">
+        <div class="row row-cols-3 my-2 align-items-center">
+          <div class="col-1 d-flex align-items-center justify-content-end">
             <input
               formControlName="hiringStatus"
               type="radio"
               value="{{ item.value }}"
             />
-          </span>
-          <span class="col-1 px-0 d-flex align-self-center">
+          </div>
+          <div class="col-2">
             <label class="form-label text-secondary">{{ item.label }}</label>
-          </span>
-          <span class="col-2">
+          </div>
+          <div class="col-3">
             <input
               class="form-control"
               type="date"
               formControlName="hiringStatusDate"
             />
-          </span>
+          </div>
         </div>
       </ng-container>
 
-      <div class="mx-3 mb-2">
+      <div class="mb-2">
         <div class="form-label text-secondary">ระบุสาเหตุ</div>
         <textarea
           class="form-control"

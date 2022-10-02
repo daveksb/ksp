@@ -1,15 +1,14 @@
-<nav id="sidebar">
-  <div class="sidebar-header">
-    <div class="d-flex justify-content-start">
-      <img src="/assets/images/logo-sidenav.png" />
-    </div>
+<div class="sidebar-header">
+  <div class="d-flex justify-content-start">
+    <img src="/assets/images/logo-sidenav.png" />
   </div>
-
+</div>
+<nav id="sidebar">
   <div *ngIf="showHeader" class="sidebar-header-profile">
     <div class="profile__img"><img src="/assets/images/profile.png" /></div>
     <div class="profile__content">
-      <div>จิราภรณ์ รักไทรทอง</div>
-      <div class="label__status">เข้าใช้ล่าสุดวันที่ 1 มกราคม 2565</div>
+      <div>{{ name }}</div>
+      <div class="label__status">เข้าใช้ล่าสุดวันที่ {{ lastLogin }}</div>
     </div>
   </div>
 
@@ -22,7 +21,7 @@
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="{ exact: true }"
           ><div class="d-flex">
-            <img src="{{ menu.icon }}" class="icon__sidenav" />{{ menu.label }}
+            <img [src]="menu.icon" class="icon__sidenav" />{{ menu.label }}
           </div></a
         >
       </li>

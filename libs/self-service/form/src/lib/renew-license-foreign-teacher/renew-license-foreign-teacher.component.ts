@@ -14,16 +14,37 @@ export class RenewLicenseForeignTeacherComponent
   extends KspFormBaseComponent
   implements OnInit
 {
-  selectedActivityType1!: number;
-  activityTypes1: ListData[] = [];
-
-  foreignForm = this.fb.group({
-    activityType1: [],
-  });
+  option1 = this.fb.control(false);
+  option2 = this.fb.control(false);
+  option3 = this.fb.control(false);
+  option4 = this.fb.control(false);
+  option5 = this.fb.control(false);
+  option6 = this.fb.control(false);
+  option7 = this.fb.control(false);
+  option8 = this.fb.control(false);
+  option9 = this.fb.control(false);
+  option10 = this.fb.control(false);
+  option11 = this.fb.control(false);
+  option12 = this.fb.control(false);
 
   override form = this.fb.group({
-    foreignInfo: this.fb.array([this.foreignForm]),
+    activity1: [],
+    activity2: [],
+    activity3: [],
+    activity4: [],
+    activity5: [],
+    activity6: [],
+    activity7: [],
+    activity8: [],
+    activity9: [],
+    activity10: [],
+    activity11: [],
+    activity12: [],
   });
+
+  /* override form = this.fb.group({
+    foreigns: this.fb.array([this.foreignForm]),
+  }); */
 
   constructor(private fb: FormBuilder) {
     super();
@@ -36,82 +57,42 @@ export class RenewLicenseForeignTeacherComponent
     );
   }
 
-  ngOnInit(): void {
-    this.activityTypes1 = activityTypes1;
-
-    this.foreignForm.controls.activityType1.valueChanges
-      .pipe(debounceTime(750))
-      .subscribe((res) => {
-        this.selectedActivityType1 = Number(res);
-        //this.form.controls.educationLevelForm.reset();
-      });
+  get Option1$() {
+    return this.option1.valueChanges;
+  }
+  get Option2$() {
+    return this.option2.valueChanges;
+  }
+  get Option3$() {
+    return this.option3.valueChanges;
+  }
+  get Option4$() {
+    return this.option4.valueChanges;
+  }
+  get Option5$() {
+    return this.option5.valueChanges;
+  }
+  get Option6$() {
+    return this.option6.valueChanges;
+  }
+  get Option7$() {
+    return this.option7.valueChanges;
+  }
+  get Option8$() {
+    return this.option8.valueChanges;
+  }
+  get Option9$() {
+    return this.option9.valueChanges;
+  }
+  get Option10$() {
+    return this.option10.valueChanges;
+  }
+  get Option11$() {
+    return this.option11.valueChanges;
+  }
+  get Option12$() {
+    return this.option12.valueChanges;
   }
 
-  addForm() {
-    const foreignForm = this.fb.group({
-      activityType1: [],
-    });
-    this.foreignInfo.push(foreignForm);
-  }
-
-  get foreignInfo() {
-    return this.form.controls.foreignInfo;
-  }
-
-  deleteForm(index: number) {
-    this.foreignInfo.removeAt(index);
-  }
+  ngOnInit(): void {}
 }
-
-const activityTypes1 = [
-  {
-    value: 0,
-    label: `Attending an educational profession course to obtain an additional qualification`,
-  },
-  {
-    value: 1,
-    label: `Having participated in a training course and received certificate that accrediting expertise in professional practice from the Teachers' Council of Thailand`,
-  },
-  {
-    value: 2,
-    label: `Having taken training course relevant to the performance of duty`,
-  },
-  {
-    value: 3,
-    label: `Having obtained an academic standing promotion`,
-  },
-  {
-    value: 4,
-    label: ` Being a resource training person on a useful topics about learning management or educational management`,
-  },
-  {
-    value: 5,
-    label: `Writing the textbooks, articles or academic reports which are beneficial to learning management or educational management`,
-  },
-  {
-    value: 6,
-    label: `Creating innovation used in learning management or educational management`,
-  },
-  {
-    value: 7,
-    label: `Doing research studies on useful issues for learning management or educational management
-    `,
-  },
-  {
-    value: 8,
-    label: `Having been awarded by the Teachers' Council of Thailand or other educational agency
-    `,
-  },
-  {
-    value: 9,
-    label: `Having attended the lecture, discussion, conference, workshop, seminar or any meeting which the registration of attendance can be shown`,
-  },
-  {
-    value: 10,
-    label: `Having completed a study tour or training course on the topics of the professional practices`,
-  },
-  {
-    value: 11,
-    label: `Completing academic works or other activities which are beneficial to learning management or educational management`,
-  },
-];

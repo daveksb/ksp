@@ -1,26 +1,57 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { SelfRequest } from '@ksp/shared/interface';
+import { ERequestService } from '@ksp/shared/service';
 
 @Component({
   selector: 'ksp-request-license-approve-list',
   templateUrl: './request-license-approve-list.component.html',
   styleUrls: ['./request-license-approve-list.component.scss'],
 })
-export class RequestLicenseApproveListComponent implements OnInit {
+export class RequestLicenseApproveListComponent implements AfterViewInit {
   displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<any>();
+  dataSource = new MatTableDataSource<SelfRequest>();
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private requestService: ERequestService
+  ) {}
 
-  ngOnInit(): void {}
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
-  view() {
-    this.router.navigate(['/request-license', 'approve-detail']);
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
   }
 
   search() {
-    this.dataSource.data = data;
+    const payload = {
+      systemtype: 1, // self service
+      requesttype: 1, // ใบคำขอใบอนุญาต
+      requestno: '',
+      firstnameth: '',
+      idcardno: '',
+      currentprocess: '',
+      requestdate: '',
+      offset: '0',
+      row: '1000',
+    };
+    this.requestService.searchSelfRequest(payload).subscribe((res) => {
+      this.dataSource.data = res;
+      this.dataSource.sort = this.sort;
+
+      const sortState: Sort = { active: 'id', direction: 'desc' };
+      this.sort.active = sortState.active;
+      this.sort.direction = sortState.direction;
+      this.sort.sortChange.emit(sortState);
+    });
+  }
+
+  goToDetail(id: number) {
+    this.router.navigate(['/request-license', 'approve-detail', id]);
   }
 
   clear() {
@@ -28,38 +59,14 @@ export class RequestLicenseApproveListComponent implements OnInit {
   }
 }
 
-export const column = ['id', 'name', 'view'];
-
-export interface PersonLicense {
-  id: number;
-  name: string;
-  licenseType: string;
-}
-
-export const data: PersonLicense[] = [
-  {
-    id: 1,
-    name: 'ครู',
-    licenseType: 'license',
-  },
-  {
-    id: 2,
-    name: 'บริหารสถานศึกษา',
-    licenseType: 'renew-license',
-  },
-  {
-    id: 3,
-    name: 'บริหารการศึกษา',
-    licenseType: 'edit-license',
-  },
-  {
-    id: 4,
-    name: 'ศึกษานิเทศก์',
-    licenseType: 'sub-license',
-  },
-  {
-    id: 5,
-    name: 'ชาวต่างชาติ',
-    licenseType: 'knowledge-cert',
-  },
+export const column = [
+  'order',
+  'requestno',
+  'requestdate',
+  'name',
+  'paymentStatus',
+  'listStatus',
+  'process',
+  'edit',
+  //'print',
 ];

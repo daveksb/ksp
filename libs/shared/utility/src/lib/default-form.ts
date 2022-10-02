@@ -54,12 +54,17 @@ export function createDefaultUserInfoForm(fb: FormBuilder) {
     educationOccupy: [null],
     permisson: [null],
     other: [null],
-    affiliation: [null]
+    affiliation: [null],
   });
 }
 
 export function createDefaultVisaInfo(FormBuilder: any) {
-  return FormBuilder.group({ visatype: [], visaclass: [], visaenddate: [] });
+  return FormBuilder.group({
+    visatype: [],
+    visaclass: [],
+    visaenddate: [],
+    licenseid: [],
+  });
 }
 
 export function createUniUserInfoForm(fb: FormBuilder) {
@@ -75,15 +80,9 @@ export function createUniUserInfoForm(fb: FormBuilder) {
       null,
       [Validators.required, Validators.pattern(nameThPattern)],
     ],
-    prefixen: [null, Validators.required],
-    firstnameen: [
-      null,
-      [Validators.required, Validators.pattern(nameEnPattern)],
-    ],
-    lastnameen: [
-      null,
-      [Validators.required, Validators.pattern(nameEnPattern)],
-    ],
+    prefixen: [null],
+    firstnameen: [null],
+    lastnameen: [null],
     position: [null, Validators.required],
     email: [null, [Validators.required, Validators.email]],
     contactphone: [
@@ -99,7 +98,7 @@ export function createUniUserInfoForm(fb: FormBuilder) {
     educationoccupy: [null],
     permission: [null],
     other: [null],
-    unitype: [null, [Validators.required]]
+    unitype: [null, [Validators.required]],
   });
 }
 
@@ -115,15 +114,9 @@ export function createUniCoordinatorForm(fb: FormBuilder) {
       null,
       [Validators.required, Validators.pattern(nameThPattern)],
     ],
-    prefixen: [null, Validators.required],
-    firstnameen: [
-      null,
-      [Validators.required, Validators.pattern(nameEnPattern)],
-    ],
-    lastnameen: [
-      null,
-      [Validators.required, Validators.pattern(nameEnPattern)],
-    ],
+    prefixen: [null],
+    firstnameen: [null],
+    lastnameen: [null],
     position: [null, Validators.required],
     email: [null, [Validators.required, Validators.email]],
     contactphone: [
@@ -139,6 +132,6 @@ export function createUniCoordinatorForm(fb: FormBuilder) {
     educationoccupy: [null],
     permission: [null],
     other: [null],
-    unitype: [null]
+    unitype: [null],
   });
 }

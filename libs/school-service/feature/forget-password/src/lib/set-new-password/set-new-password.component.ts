@@ -60,7 +60,7 @@ export class SetNewPasswordComponent implements OnInit {
         header: `ทำรายการสำเร็จ`,
         subContent: `ระบบได้ทำการเปลี่ยนรหัสผ่านให้ท่านเรียบร้อยแล้ว
         กรุณาเข้าสู่ระบบใหม่อีกครั้ง`,
-        buttonLabel: 'เข้าสู่ระบบ',
+        btnLabel: 'เข้าสู่ระบบ',
       },
     });
 

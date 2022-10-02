@@ -1,0 +1,212 @@
+<ksp-top-nav><span header> รับ-ส่งเอกสารงานใบอนุญาต </span></ksp-top-nav>
+
+<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
+  <div class="box-header">ค้นหารายการทะเบียนหนังสือรับ</div>
+  <div class="bg-white p-3">
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">หน่วยงานที่รับ</label>
+        <select class="form-select">
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div class="col">
+        <label class="form-label">ปี พ.ศ.</label>
+        <input type="text" class="form-control" />
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">ประเภทหนังสือ</label>
+        <select class="form-select">
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div class="col">
+        <label class="form-label">เรื่อง</label>
+        <select class="form-select">
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-6">
+        <label class="form-label">เลขที่หนังสือ</label>
+        <input type="text" class="form-control" />
+      </div>
+      <div class="col">
+        <label class="form-label">ลงวันที่ : จาก</label>
+        <input type="date" class="form-control" />
+      </div>
+      <div class="col">
+        <label class="form-label">ลงวันที่ : ถึง</label>
+        <input type="date" class="form-control" />
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-6">
+        <label class="form-label">เลขที่รับ</label>
+        <input type="text" class="form-control" />
+      </div>
+      <div class="col">
+        <label class="form-label">รับวันที่ : จาก</label>
+        <input type="date" class="form-control" />
+      </div>
+      <div class="col">
+        <label class="form-label">รับวันที่ : ถึง</label>
+        <input type="date" class="form-control" />
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">จากบุคคล (ชื่อ-นามสกุล)</label>
+        <input type="text" class="form-control" />
+      </div>
+      <div class="col">
+        <label class="form-label">จากหน่วยงาน</label>
+        <select class="form-select">
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">เรียน</label>
+        <select class="form-select">
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div class="col">
+        <label class="form-label">แสดงรายการ</label>
+        <select class="form-select">
+          <option selected>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+    </div>
+    <div class="d-flex justify-content-end mt-4">
+      <button
+        type="button"
+        (click)="clear()"
+        class="btn border-primary text-primary me-2"
+      >
+        ล้างข้อมูล
+      </button>
+      <button type="button" (click)="search()" class="btn btn-primary">
+        ค้นหา
+      </button>
+    </div>
+  </div>
+  <br />
+
+  <div class="bg-white p-3">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <div class="box-header">รายการทะเบียนหนังสือรับ</div>
+      <div class="d-flex">
+        <button
+          type="button"
+          (click)="reserve()"
+          class="btn btn-primary me-2"
+        >
+          จองเลขหนังสือ
+        </button>
+        <button
+          type="button"
+          (click)="add()"
+          class="btn text-primary bg-primary bg-opacity-10 w-auto"
+        >
+          + เพิ่มหนังสือรับใหม่
+        </button>
+      </div>
+    </div>
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="year">
+        <th mat-header-cell *matHeaderCellDef>ปี พ.ศ.</th>
+        <td mat-cell *matCellDef="let element">{{ element.year }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>เลขที่รับ</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="bookId">
+        <th mat-header-cell *matHeaderCellDef>เลขที่หนังสือ</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.firstnameth }} {{ element.bookId }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>ลงวันที่</th>
+        <td mat-cell *matCellDef="let element">{{ element.date }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="sendName">
+        <th mat-header-cell *matHeaderCellDef>จากบุคคล/หน่วยงาน</th>
+        <td mat-cell *matCellDef="let element">{{ element.sendName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="dearName">
+        <th mat-header-cell *matHeaderCellDef>เรียน</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.dearName }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>ประเภทหนังสือ</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.type }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>เรื่อง</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="receiveName">
+        <th mat-header-cell *matHeaderCellDef>หน่วยงานที่รับ</th>
+        <td mat-cell *matCellDef="let element">{{ element.receiveName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="view">
+        <th mat-header-cell *matHeaderCellDef>ดูข้อมูล</th>
+        <td mat-cell *matCellDef="let element">
+          <i role="button" class="bi bi-eye text-primary fs-5"></i>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <!-- <mat-paginator
+      [pageSizeOptions]="[10]"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements"
+    >
+    </mat-paginator> -->
+  </div>
+</div>

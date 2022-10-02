@@ -18,6 +18,10 @@ export const routes: Routes = [
         path: 'request',
         component: RefundFeeRequestComponent,
       },
+      {
+        path: 'request/:id',
+        component: RefundFeeRequestComponent,
+      },
     ],
   },
 ];

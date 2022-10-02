@@ -1,11 +1,17 @@
 <form [formGroup]="form">
   <div class="bg-light px-4 py-3">
-    <div class="text-primary box-header">กรุณาเลือกสถาบันที่ท่านสังกัด</div>
-    <div class="row" *ngIf="searchType != 'uni'">
+    <div class="text-primary box-header">{{ title }}</div>
+    <div class="row" *ngIf="searchType !== 'uni'">
       <div class="col">
         <label class="form-label">{{ label1 }}</label>
-        <select [ngClass]='{"select-disable":bureauName.length> 0}'  class="form-select" formControlName="institution">
-          <option value="null" *ngIf="bureauName" selected disabled hidde>{{ bureauName }}</option>
+        <select
+          [ngClass]="{ 'select-disable': bureauName && bureauName.length > 0 }"
+          class="form-select"
+          formControlName="institution"
+        >
+          <option value="null" *ngIf="bureauName" selected disabled hidde>
+            {{ bureauName }}
+          </option>
           <ng-container *ngIf="!bureauName">
             <option value="null" selected disabled hidden>กรุณาเลือก</option>
             <option
@@ -28,7 +34,7 @@
         />
       </div>
     </div>
-    <div class="row" *ngIf="searchType == 'uni'">
+    <div class="row" *ngIf="searchType === 'uni'">
       <div class="col">
         <label class="form-label">{{ label1 }}</label>
         <input

@@ -3,7 +3,10 @@ import { CommonModule } from '@angular/common';
 import { PaymentChannelComponent } from './payment-channel/payment-channel.component';
 import { PromptpayComponent } from './promptpay/promptpay.component';
 import { MatIconModule } from '@angular/material/icon';
-import { SelfServiceLicenseInfoComponent } from '@ksp/self-service/ui';
+import {
+  RequestStatusComponent,
+  SelfServiceLicenseInfoComponent,
+} from '@ksp/self-service/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 
@@ -13,7 +16,8 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
     TopNavComponent,
     MatIconModule,
     SelfServiceLicenseInfoComponent,
-    RequestHeaderInfoComponent
+    RequestHeaderInfoComponent,
+    RequestStatusComponent,
   ],
   declarations: [PaymentChannelComponent, PromptpayComponent],
   exports: [PaymentChannelComponent, PromptpayComponent],

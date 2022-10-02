@@ -14,7 +14,7 @@ import {
   RequestHeaderInfoComponent,
 } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -43,21 +43,27 @@ export class AccusationRecordComponent
   extends KspFormBaseComponent
   implements OnInit
 {
-  accusationFiles = ['เอกสารกล่าวหา/กล่าวโทษ', 'สำเนาบัตรประชาชน'];
+  accusationFiles = [
+    { name: 'เอกสารกล่าวหา/กล่าวโทษ' },
+    { name: 'สำเนาบัตรประชาชน' },
+  ];
 
   override form = this.fb.group({
-    blackNumber: [],
-    misconductEthic: [],
-    incidentDate: [],
-    incidentAddress: [],
-    incidentType: [],
-    accuseSubject: [],
-    orderDate: [],
-    detail: [],
-    punishType: [],
-    offend: [],
-    assignStaff: [],
-    assignDate: [],
+    accusationblackno: [null, Validators.required],
+    accusationtype: [null, Validators.required],
+    accusationincidentdate: [null, Validators.required],
+    accusationincidentplace: [null, Validators.required],
+    accusationcondemnationtype: [null, Validators.required],
+    accusationcondemnation: [null, Validators.required],
+    accusationissuedate: [],
+    accusationdetail: [],
+    accusationpunishmentdetail: [],
+    accusationviolatedetail: [],
+    accusationassignofficer: [],
+    accusationassigndate: [],
+
+    //accusation_file
+    //accusation_consideration
   });
 
   constructor(
@@ -80,13 +86,13 @@ export class AccusationRecordComponent
       //console.log('res2 = ', res);
     });
   }
+
   openSearchDialog() {
     this.dialog.open(AccusationSearchComponent, {
       height: '100vh',
       width: '1250px',
     });
   }
-  
 
   /* dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {

@@ -4,9 +4,15 @@ import { SubstituteLicenseDetailComponent } from './substitute-license-detail/su
 import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master-page';
 import { RouterModule, Routes } from '@angular/router';
 import { TopNavComponent } from '@ksp/shared/menu';
-import { FormUploadImageComponent, SelfServiceFormModule } from '@ksp/self-service/form';
+import {
+  FormUploadImageComponent,
+  SelfServiceFormModule,
+} from '@ksp/self-service/form';
 import { MatTabsModule } from '@angular/material/tabs';
-import { RequestStatusComponent, SelfServiceLicenseInfoComponent } from '@ksp/self-service/ui';
+import {
+  RequestStatusComponent,
+  SelfServiceLicenseInfoComponent,
+} from '@ksp/self-service/ui';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 
@@ -17,6 +23,10 @@ export const routes: Routes = [
     children: [
       {
         path: 'request',
+        component: SubstituteLicenseDetailComponent,
+      },
+      {
+        path: 'request/:id',
         component: SubstituteLicenseDetailComponent,
       },
     ],

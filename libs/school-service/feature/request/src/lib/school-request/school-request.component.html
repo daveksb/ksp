@@ -1,10 +1,18 @@
 <ksp-top-nav
   ><span header>ยื่นใบคำขอ</span
-  ><span subHeader> {{ requestLabel }}</span></ksp-top-nav
+  ><span subHeader
+    >ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ ({{
+      requestLabel
+    }})</span
+  ></ksp-top-nav
 >
 
 <div class="bg-secondary bg-opacity-10 px-4 py-2 full-width-2">
-  <div class="box-header">รายละเอียดใบคำ{{ requestLabel }}</div>
+  <div class="box-header">
+    รายละเอียดใบคำขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ ({{
+      requestLabel
+    }})
+  </div>
   <div [formGroup]="form" class="bg-white py-3 px-4">
     <div>
       <ksp-request-header-info
@@ -14,22 +22,25 @@
       <hr />
 
       <div class="bg-light px-3 py-2 default-width">
-        <div class="box-header text-primary">ค้นหารายการ</div>
+        <div class="box-header text-primary" *ngIf="!requestId">
+          ค้นหารายการ
+        </div>
 
-        <div class="row mb-3" *ngIf="requestSubType !== 5">
+        <!-- *ngIf="!requestId || requestSubType !== 5" -->
+        <div class="row mb-2" *ngIf="!requestId && requestSubType !== 5">
           <div class="col-5">
             <label class="form-label">หมายเลขบัตรประชาชน</label>
             <input
-              class="form-control form-search"
+              class="form-control"
               type="text"
               placeholder="หมายเลขบัตรประชาชนจำนวน 13 หลัก"
               #idcard
             />
           </div>
-          <div class="col-auto mt-4">
+          <div class="col-1 mt-4">
             <button
               type="button"
-              class="btn btn-primary w-auto"
+              class="btn btn-primary w-100"
               (click)="searchStaffFromIdCard(idcard.value)"
             >
               ค้นหา
@@ -52,7 +63,11 @@
 
     <!-- (selectedIndexChange)="onTabIndexChanged($event)" -->
     <div class="full-width pb-2">
-      <mat-tab-group class="tab-group mt-3" selectedIndex="0">
+      <mat-tab-group
+        class="tab-group mt-3"
+        selectedIndex="0"
+        animationDuration="0ms"
+      >
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address
             [provinces]="provinces$ | async"
@@ -96,34 +111,176 @@
         </mat-tab>
 
         <mat-tab label="ข้อมูลทางการศึกษา">
-          <ksp-form-education-info
-            formControlName="edu1"
-            [showGradeInput]="true"
-            [showSelectDegree]="true"
-            [countries]="countries$ | async"
-          >
-          </ksp-form-education-info>
-          <div class="px-3 py-3 col-6 mb-2 d-flex align-items-center">
-            <input type="checkbox" class="me-2" [formControl]="option" />
-            <label class="form-label">ปริญญาอื่นๆ</label>
-          </div>
-
-          <ng-container *ngIf="Option$ | async">
+          <ng-container *ngIf="requestSubType === 1">
             <ksp-form-education-info
+              [showCheckbox]="false"
+              formControlName="edu1"
+              [showGradeInput]="true"
+              [showSelectDegree]="true"
+              [showPropertyInput]="false"
+              [showSelectDegree]="false"
+              [countries]="countries$ | async"
+            >
+              <div class="box-header">วุฒิการศึกษาปริญญาตรี</div>
+            </ksp-form-education-info>
+            <br />
+
+            <ksp-form-education-info
+              [showCheckbox]="false"
+              [showSelectDegree]="false"
               formControlName="edu2"
               [showGradeInput]="false"
-              [showSelectDegree]="true"
               [showPropertyInput]="true"
               [countries]="countries$ | async"
               [option]="true"
             >
-            </ksp-form-education-info>
-          </ng-container>
+              <div class="box-header">
+                วุฒิการศึกษาปริญญาโท
+              </div> </ksp-form-education-info
+            ><br
+          /></ng-container>
 
-          <!--           <ksp-form-education-info-manager
-            *ngIf="requestSubType === 2 || requestSubType === 3"
-            formControlName="edu3"
-          ></ksp-form-education-info-manager> -->
+          <ng-container *ngIf="requestSubType === 2">
+            <div class="d-flex align-items-center">
+              <input type="checkbox" class="me-2" [formControl]="option1" />
+              <label class="fs-5">วุฒิการศึกษาปริญญาตรี</label>
+            </div>
+            <ng-container *ngIf="Option1$ | async">
+              <ksp-form-education-info
+                [showCheckbox]="false"
+                [showSelectDegree]="false"
+                formControlName="edu2"
+                [showGradeInput]="true"
+                [showPropertyInput]="false"
+                [countries]="countries$ | async"
+                [option]="true"
+              >
+              </ksp-form-education-info></ng-container
+          ></ng-container>
+
+          <ng-container *ngIf="requestSubType === 5">
+            <div class="d-flex align-items-center">
+              <input type="checkbox" class="me-2" [formControl]="option1" />
+              <label class="fs-5">วุฒิการศึกษาปริญญาตรี</label>
+            </div>
+            <ng-container *ngIf="Option1$ | async">
+              <ksp-form-education-info
+                [showCheckbox]="false"
+                [showSelectDegree]="false"
+                formControlName="edu2"
+                [showGradeInput]="false"
+                [showPropertyInput]="false"
+                [countries]="countries$ | async"
+                [option]="true"
+                [userEducationType]="userInfoFormType"
+              >
+              </ksp-form-education-info></ng-container
+          ></ng-container>
+
+          <ng-container *ngIf="requestSubType === 2 || requestSubType === 5">
+            <div class="d-flex align-items-center mt-3">
+              <input type="checkbox" class="me-2" [formControl]="option2" />
+              <label class="fs-5">วุฒิประกาศนียบัตรระดับบัณฑิตศึกษา</label>
+            </div>
+            <ng-container *ngIf="Option2$ | async">
+              <ksp-form-education-info
+                [showCheckbox]="false"
+                [showSelectDegree]="false"
+                formControlName="edu2"
+                [showGradeInput]="false"
+                [showPropertyInput]="false"
+                [countries]="countries$ | async"
+                [option]="true"
+              >
+              </ksp-form-education-info></ng-container
+          ></ng-container>
+
+          <ng-container *ngIf="requestSubType === 2 || requestSubType === 5">
+            <div class="d-flex align-items-center mt-3">
+              <input type="checkbox" class="me-2" [formControl]="option3" />
+              <label class="fs-5">วุฒิปริญญาโท</label>
+            </div>
+            <ng-container *ngIf="Option3$ | async">
+              <ksp-form-education-info
+                [showCheckbox]="false"
+                [showSelectDegree]="false"
+                formControlName="edu2"
+                [showGradeInput]="false"
+                [showPropertyInput]="false"
+                [countries]="countries$ | async"
+                [option]="true"
+                [userEducationType]="userInfoFormType"
+              >
+              </ksp-form-education-info></ng-container
+          ></ng-container>
+
+          <ng-container *ngIf="requestSubType === 2 || requestSubType === 5">
+            <div class="d-flex align-items-center mt-3">
+              <input type="checkbox" class="me-2" [formControl]="option4" />
+              <label class="fs-5">วุฒิปริญญาเอก</label>
+            </div>
+            <ng-container *ngIf="Option4$ | async">
+              <ksp-form-education-info
+                [showCheckbox]="false"
+                [showSelectDegree]="false"
+                formControlName="edu2"
+                [showGradeInput]="false"
+                [showPropertyInput]="false"
+                [countries]="countries$ | async"
+                [option]="true"
+                [userEducationType]="userInfoFormType"
+              >
+              </ksp-form-education-info></ng-container
+          ></ng-container>
+
+          <ng-container *ngIf="requestSubType === 2 || requestSubType === 5">
+            <div class="d-flex align-items-center mt-3">
+              <input type="checkbox" class="me-2" [formControl]="option5" />
+              <label class="fs-5">วุฒิการศึกษาอื่นๆ</label>
+            </div>
+            <ng-container *ngIf="Option5$ | async">
+              <ksp-form-education-info
+                [showCheckbox]="false"
+                [showSelectDegree]="false"
+                formControlName="edu2"
+                [showGradeInput]="false"
+                [showPropertyInput]="false"
+                [countries]="countries$ | async"
+                [option]="true"
+                [userEducationType]="userInfoFormType"
+              >
+              </ksp-form-education-info> </ng-container
+          ></ng-container>
+
+          <ng-container *ngIf="requestSubType === 2">
+            <div class="d-flex align-items-center mt-3">
+              <input type="checkbox" class="me-2" [formControl]="option6" />
+              <label class="fs-5"
+                >คุณสมบัติอื่นที่สอดคล้องหรือเป็นประโยชน์ต่อการจัดการเรียนการสอนในกลุ่มสาระหรือรายวิชาที่สอน
+                (พิจารณาเป็นรายกรณี)</label
+              >
+            </div>
+            <ng-container *ngIf="Option6$ | async">
+              <div class="row">
+                <div class="col">
+                  <textarea
+                    class="form-control"
+                    rows="3"
+                    placeholder="โปรดระบุ"
+                  ></textarea>
+                </div></div></ng-container
+            ><br
+          /></ng-container>
+
+          <ng-container *ngIf="requestSubType === 5">
+            <div class="d-flex align-items-center mt-3">
+              <input type="checkbox" class="me-2" [formControl]="option6" />
+              <label class="fs-5">ใบอนุญาตประกอบวิชาชีพครูจากต่างประเทศ </label>
+            </div>
+            <ng-container *ngIf="Option6$ | async">
+              <ksp-form-education-info-manager></ksp-form-education-info-manager></ng-container
+            ><br
+          /></ng-container>
 
           <ksp-form-attachment
             [pageType]="pageType.educationTab"
@@ -136,18 +293,17 @@
           <ng-container *ngIf="requestSubType === 1 || requestSubType === 5">
             <ksp-form-teaching-info
               formControlName="teachinginfo"
-            ></ksp-form-teaching-info>
-            <br />
+            ></ksp-form-teaching-info
+            ><br />
           </ng-container>
 
-          <!--           <ng-container *ngIf="requestSubType === 2">
-            <ksp-form-teaching-info-manager
-              formControlName="teachingInfo2"
-            ></ksp-form-teaching-info-manager
+          <ng-container *ngIf="requestSubType === 2">
+            <ksp-form-teaching-info-manager></ksp-form-teaching-info-manager
             ><br
-          /></ng-container> -->
+          /></ng-container>
 
           <ksp-form-hiring-info
+            [displayMode]="'request'"
             formControlName="hiringinfo"
             [staffTypes]="staffTypes$ | async"
             [positionTypes]="positionTypes$ | async"
@@ -164,9 +320,19 @@
         </mat-tab>
 
         <mat-tab label="ข้อมูลชี้แจงเหตุผล">
-          <ksp-form-reason-info
-            formControlName="reasoninfo"
-          ></ksp-form-reason-info>
+          <ng-container *ngIf="requestSubType === 1 || requestSubType === 5">
+            <ksp-form-reason-info
+              [requestType]="1"
+              formControlName="reasoninfo"
+            ></ksp-form-reason-info
+          ></ng-container>
+          <ng-container *ngIf="requestSubType === 2">
+            <ksp-form-reason-info
+              [requestType]="2"
+              formControlName="reasoninfo"
+            ></ksp-form-reason-info
+          ></ng-container>
+          <br />
           <ksp-form-attachment
             [uniqueTimestamp]="uniqueTimestamp"
             [pageType]="pageType.reasonTab"
@@ -186,22 +352,22 @@
   </div>
 </div>
 
-<div class="sticky-bottom border">
+<div class="sticky-bottom border px-2">
   <ksp-bottom-nav
-    (saveClicked)="submitRequest()"
-    (cancelClicked)="cancelRequest()"
-    (tempSaveClicked)="tempSave()"
-    [isFirstPage]="true"
+    (prevClicked)="backToListPage()"
+    (cancelClicked)="cancel()"
+    (tempSaveClicked)="tempBtnClick()"
+    (saveClicked)="permanentBtnClick()"
     [colorMode]="'green'"
     [isLastPage]="true"
     [showCenterButtons]="true"
     [cancelButtonLabel]="'ยกเลิกใบคำขอ'"
     [showCancelButton]="requestId > 0"
-    [disableCancelButton]="disableCancel"
     [showTempSaveButton]="true"
     [disableTempSaveButton]="disableTempSave"
     [showSaveButton]="true"
+    [saveButtonLabel]="'บันทึกและยื่น'"
     [disableSaveButton]="disableSave"
-    [saveButtonLabel]="'ส่งใบคำขอ'"
+    [disableCancelButton]="disableCancel"
   ></ksp-bottom-nav>
 </div>

@@ -1,0 +1,45 @@
+<ksp-top-nav-2>ลงทะเบียนขอรับรหัสเข้าใช้งาน</ksp-top-nav-2>
+
+<div class="container-fluid bg-secondary bg-opacity-10 full-height p-2">
+  <div class="container-xl p-0">
+    <div class="box-header">รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ</div>
+  </div>
+
+  <div class="bg-white container-xl px-3 py-2">
+    <div class="box-header">ค้นหาหน่วยงาน / สถานศึกษา</div>
+    <hr />
+
+    <form [formGroup]="form">
+      <ksp-university-select
+        formControlName="universityInfo"
+        [label1]="'สถาบัน / มหาวิทยาลัย'"
+        [label2]="'กลุ่มสถาบัน'"
+        [searchType]="'uni'"
+        [schoolName]="'โปรดระบุ'"
+        [bureauName]="'โปรดระบุ'"
+        (selectedUniversity)="selectedUniversity($event)"
+      ></ksp-university-select>
+    </form>
+
+    <div *ngIf="activeUser" class="bg-white p-3 mt-2">
+      <div class="fs-5 text-danger">
+        โรงเรียน/หน่วยงานของท่านได้สมัครสมาชิกแล้ว
+        ท่านต้องการสมัครสมาชิกใหม่หรือไม่
+      </div>
+      <div class="fs-5 ms-5">
+        หากท่านทำการยื่นขอรับรหัสเข้าใช้งานใหม่
+        ผู้ประสานงานดังกล่าวจะไม่สามารถเข้าใช้งานเมื่อท่านได้รับอนุมัติแล้ว
+      </div>
+    </div>
+
+    <div class="mt-3">
+      <ksp-bottom-nav
+        (prevClicked)="back()"
+        (nextClicked)="next()"
+        [showCenterButtons]="false"
+        [disableNext]="!school"
+        disableNextMessage="กรุณาเลือกโรงเรียน/ สถานศึกษาก่อน"
+      ></ksp-bottom-nav>
+    </div>
+  </div>
+</div>

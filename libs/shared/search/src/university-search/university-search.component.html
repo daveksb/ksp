@@ -15,7 +15,6 @@
       <div class="box-header text-primary">
         {{ data.subHeader || 'กรุณาเลือกสถาบันที่ท่านสังกัด' }}
       </div>
-
       <ksp-basic-institute-search
         formControlName="institution"
         [bureaus]="bureaus$! | async"
@@ -88,7 +87,7 @@
               <th scope="col">สังกัด</th>
             </tr>
           </thead>
-          <tbody class="body__table" *ngIf="data.searchType != 'uni'">
+          <tbody class="body__table" *ngIf="data.searchType !== 'uni'">
             <tr *ngFor="let item of Data">
               <th scope="row" class="body__detail">
                 <div>
@@ -100,13 +99,13 @@
                   />
                 </div>
               </th>
-              <td class="detail__table">{{ item.schoolId }}</td>
-              <td class="detail__table">{{ item.schoolName }}</td>
+              <td class="detail__table">{{ item.schoolid }}</td>
+              <td class="detail__table">{{ item.schoolname }}</td>
               <td class="detail__table">{{ item.addressShow }}</td>
-              <td class="detail__table">{{ item.bureauName }}</td>
+              <td class="detail__table">{{ item.bureauname }}</td>
             </tr>
           </tbody>
-          <tbody class="body__table" *ngIf="data.searchType == 'uni'">
+          <tbody class="body__table" *ngIf="data.searchType === 'uni'">
             <tr *ngFor="let item of Data">
               <th scope="row" class="body__detail">
                 <div>
@@ -134,13 +133,13 @@
       >
         <ul class="pagination">
           <li role="button" (click)="goPrevious()" class="page-item">
-            <a class="page-link">Previous</a>
+            <a class="page-link"><i class="bi bi-chevron-left"></i></a>
           </li>
           <li role="button" class="page-item">
-            <a class="page-link">{{ currentPage }}</a>
+            <a class="page-link">หน้าที่ {{ currentPage }}</a>
           </li>
           <li role="button" (click)="goNext()" class="page-item">
-            <a class="page-link">Next</a>
+            <a class="page-link"><i class="bi bi-chevron-right"></i></a>
           </li>
         </ul>
       </nav>

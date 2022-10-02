@@ -11,3 +11,4 @@ export * from './lib/self-request';
 export * from './lib/user-info-form';
 export * from './lib/self-myinfo';
 export * from './lib/self-develop';
+export * from './lib/ksp-shared';

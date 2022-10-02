@@ -46,6 +46,25 @@ export class TransferKnowledgeEducationComponent
     });
   }
 
+  override set value(value: any) {
+    // this.form.patchValue(value);
+    if (value) {
+      Object.keys(value).forEach((key) => {
+        const control = this.form.get(key) as FormArray;
+        value[key].forEach((item: any) =>
+          control.push(
+            this.fb.group({
+              ...item,
+            })
+          )
+        );
+      });
+    }
+
+    this.onChange(value);
+    this.onTouched();
+  }
+
   setDefaulFormValue() {
     this.addFormArray(1);
     this.addFormArray(2);
