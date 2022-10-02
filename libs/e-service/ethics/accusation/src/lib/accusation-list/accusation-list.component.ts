@@ -4,7 +4,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AccusationList, columns } from '@ksp/shared/interface';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { AccusationSearchComponent } from '@ksp/shared/search';

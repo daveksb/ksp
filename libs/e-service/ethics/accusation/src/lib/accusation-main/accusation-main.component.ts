@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -7,6 +7,7 @@ import { EthicsService } from '@ksp/shared/service';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import localForage from 'localforage';
 import _ from 'lodash';
+import { AccusationRecordComponent } from '../accusation-record/accusation-record.component';
 @UntilDestroy()
 @Component({
   selector: 'e-service-accusation-main',
@@ -19,7 +20,8 @@ export class AccusationMainComponent implements OnInit {
   form = this.fb.group({
     accusation: [] as any,
   });
-
+  @ViewChild(AccusationRecordComponent)
+  formComponents!: AccusationRecordComponent;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -41,6 +43,7 @@ export class AccusationMainComponent implements OnInit {
       this.ethicsId = Number(params.get('id'));
       if (this.ethicsId) {
         localForage.getItem('ethicsInfo').then((data) => {
+          // this.formComponents.addRow();
           this.form.controls.accusation.patchValue(data);
         });
       }
