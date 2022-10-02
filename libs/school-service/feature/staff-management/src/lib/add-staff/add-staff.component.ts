@@ -20,6 +20,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { levels, subjects, UserInfoFormType } from '@ksp/shared/constant';
+import { FormMode } from '@ksp/shared/interface';
 
 @UntilDestroy()
 @Component({
@@ -41,7 +42,7 @@ export class AddStaffComponent implements OnInit {
   academicTypes$!: Observable<any>;
   schoolId = '0010201056';
   today = thaiDate(new Date());
-  mode: 'view' | 'edit' | 'add' = 'add';
+  mode: FormMode = 'edit';
   userInfoType = UserInfoFormType.thai;
   form = this.fb.group({
     userInfo: [],
@@ -112,9 +113,20 @@ export class AddStaffComponent implements OnInit {
   }
 
   checkMode() {
-    this.router.events.pipe(untilDestroyed(this)).subscribe((event: Event) => {
+    if (this.router.url.includes('view-staff')) {
+      console.log('view mode');
+      this.mode = 'view';
+      this.form.disable();
+    } else {
+      console.log('edit mode');
+      this.mode = 'edit';
+    }
+
+    /*     this.router.events.pipe(untilDestroyed(this)).subscribe((event: Event) => {
+      console.log('view mode = ', event);
       if (event instanceof NavigationEnd) {
         if (event.url.includes('view-staff')) {
+          console.log('view mode = ');
           this.mode = 'view';
           this.form.disable();
         } else if (event.url.includes('edit-staff')) {
@@ -123,7 +135,7 @@ export class AddStaffComponent implements OnInit {
           this.mode = 'add';
         }
       }
-    });
+    }); */
   }
 
   loadStaffData(staffId: number) {

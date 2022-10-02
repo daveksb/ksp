@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Router } from '@angular/router';
 import { SelfLicense } from '@ksp/shared/constant';
 
 @Component({
@@ -18,12 +17,9 @@ export class LicenseInfoComponent {
   @Input() license: SelfLicense | null = null;
   @Output() selected = new EventEmitter<string>();
 
-  constructor(private router: Router) {}
-
   select(idcardno: string | null | undefined) {
     if (idcardno) {
       this.selected.emit(idcardno);
     }
-    //this.router.navigate(['/staff-management', 'add-staff']);
   }
 }

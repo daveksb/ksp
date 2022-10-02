@@ -38,23 +38,22 @@ export class LicenseSearchComponent {
   }
 
   search() {
-    console.log('form = ', this.form.value);
+    //console.log('form = ', this.form.value);
     const payload = {
-      cardno: null,
-      licenseno: null,
-      name: null,
+      cardno: this.form.controls.cardno.value,
+      licenseno: this.form.controls.licenseno.value,
+      name: this.form.controls.name.value,
       licensetype: null,
       licensestatus: null,
       offset: '0',
       row: '100',
     };
-    //this.form.value;
 
     this.licenseService
       .getStaffLicenses(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
-        console.log('licenses = ', res);
+        //console.log('licenses = ', res);
         if (res) {
           //this.foundItem = true;
           this.foundLicenses = res;
@@ -63,7 +62,7 @@ export class LicenseSearchComponent {
   }
 
   onSelect(idCardNo: string) {
-    console.log('id card = ', idCardNo);
+    //console.log('id card = ', idCardNo);
 
     const payload = {
       cardno: idCardNo,
@@ -81,10 +80,6 @@ export class LicenseSearchComponent {
       .subscribe((res) => {
         console.log('licenses = ', res);
       });
-  }
-
-  clear() {
-    //this.foundItem = false;
   }
 
   goToDetail() {

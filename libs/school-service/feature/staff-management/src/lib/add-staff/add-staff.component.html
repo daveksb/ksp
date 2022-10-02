@@ -15,6 +15,7 @@
         [isDarkMode]="false"
         [prefixList]="prefixList$ | async"
         [displayMode]="[userInfoType]"
+        [mode]="mode"
       ></ksp-form-user-info>
     </div>
 
@@ -45,6 +46,7 @@
       >
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address
+            [mode]="mode"
             [provinces]="provinces$ | async"
             [amphurs]="amphurs1$ | async"
             [tumbols]="tumbols1$ | async"
@@ -56,6 +58,7 @@
           </ksp-form-address>
           <br />
           <ksp-form-address
+            [mode]="mode"
             [provinces]="provinces$ | async"
             [amphurs]="amphurs2$ | async"
             [tumbols]="tumbols2$ | async"
@@ -77,6 +80,7 @@
 
         <mat-tab label="วุฒิทางการศึกษา">
           <ksp-form-education-info
+            [mode]="mode"
             [showGradeInput]="true"
             formControlName="edu1"
             [showSelectDegree]="true"
@@ -84,6 +88,7 @@
           ></ksp-form-education-info
           ><br />
           <ksp-form-education-info
+            [mode]="mode"
             [showGradeInput]="true"
             formControlName="edu2"
             [showSelectDegree]="true"
@@ -93,6 +98,7 @@
 
         <mat-tab label="ข้อมูลการสอนและการจ้าง">
           <ksp-form-hiring-info
+            [mode]="mode"
             formControlName="hiringInfo"
             [staffTypes]="staffTypes$ | async"
             [positionTypes]="positionTypes$ | async"
@@ -100,6 +106,7 @@
           ></ksp-form-hiring-info>
           <br />
           <ksp-form-teaching-info
+            [mode]="mode"
             formControlName="teachingInfo"
           ></ksp-form-teaching-info>
         </mat-tab>
@@ -112,7 +119,7 @@
   <ksp-bottom-nav
     [isLastPage]="true"
     [isFirstPage]="true"
-    [showSaveButton]="true"
+    [showSaveButton]="mode === 'edit'"
     [disableSaveButton]="form.invalid"
     [showCenterButtons]="true"
     (saveClicked)="onConfirmed()"
