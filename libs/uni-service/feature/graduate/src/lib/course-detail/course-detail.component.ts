@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UniserviceImportType } from '@ksp/shared/interface';
 import { UniInfoService, UniRequestService } from '@ksp/shared/service';
-import { parseJson, thaiDate } from '@ksp/shared/utility';
+import { getCookie, parseJson, thaiDate } from '@ksp/shared/utility';
 import moment from 'moment';
 import localForage from 'localforage';
 
@@ -71,10 +71,13 @@ export class CourseDetailComponent implements OnInit {
     this.step1Form.setValue({
       step1: {
         institutionsCode: res?.universitycode || '',
-        institutionsGroup: res?.unitype || '',
-        institutionsName: res?.uniname || '',
-        provience: res?.uniprovince || '',
+        institutionsGroup: getCookie('uniType') || '',
+        institutionsName: res?.name || '',
+        provience: res?.provinceid || '',
         courseDetailType: res?.coursedetailtype,
+        courseDetail: res?.coursedetailinfo
+          ? parseJson(res?.coursedetailinfo)
+          : null,
         degreeTypeForm: {
           degreeType: res?.degreelevel,
           courseYear: res?.courseacademicyear,
