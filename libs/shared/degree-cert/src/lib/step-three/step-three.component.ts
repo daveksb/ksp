@@ -30,9 +30,9 @@ export class DegreeCertStepThreeComponent extends KspFormBaseComponent {
     );
   }
   get section1() {
-    return !!(!this.form.controls?.section1?.value && this.showEditCheckbox);
+    return !!(!this.form.controls?.section1?.value && this.showEditCheckbox) && this.mode !== 'view'
   }
   get section2() {
-    return !!(!this.form.controls?.section2?.value && this.showEditCheckbox);
+    return !!(!this.form.controls?.section2?.value && this.showEditCheckbox) && this.mode !== 'view'
   }
 }
