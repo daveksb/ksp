@@ -1,26 +1,35 @@
 <form [formGroup]="form">
   <ng-container formArrayName="researchInfo">
     <ng-container
-      *ngFor="let DegreeForm of researchInfo.controls; let i = index">
+      *ngFor="let DegreeForm of researchInfo.controls; let i = index"
+    >
       <ng-container [formGroupName]="i">
         <div class="border rounded px-3 py-2">
-          <div class="d-flex justify-content-end">
+          <div class="d-flex justify-content-end" *ngIf="i > 0">
             <i
               class="bi bi-x-circle-fill text-danger"
               (click)="deleteFormArray(researchInfo, i)"
-              role="button"></i>
+              role="button"
+            ></i>
           </div>
           <div class="row">
             <div class="col-md-6 mb-2">
               <label class="form-label">ชื่อรางวัล</label>
-              <input class="form-control" type="text" formControlName="rewardName" />
+              <input
+                class="form-control"
+                type="text"
+                formControlName="rewardName"
+              />
             </div>
             <div class="col-md-6 mb-2">
               <label class="form-label">สถานะ</label>
               <select class="form-select" formControlName="rewardStatus">
                 <option selected>กรุณาเลือก</option>
                 <option value="1">ไม่เคย</option>
-                <option value="2">เคย (ขึ้นปีย้อนหลัง 5 ปี ให้เลือกทําเครื่องหมายถูกหน้าปีที่เคยส่ง)</option>
+                <option value="2">
+                  เคย (ขึ้นปีย้อนหลัง 5 ปี
+                  ให้เลือกทําเครื่องหมายถูกหน้าปีที่เคยส่ง)
+                </option>
               </select>
             </div>
           </div>
@@ -28,7 +37,11 @@
           <div class="row">
             <div class="col-md-6 mb-2">
               <label class="form-label">ปีที่ได้รับรางวัล</label>
-              <input class="form-control" type="text" formControlName="rewardYear" />
+              <input
+                class="form-control"
+                type="text"
+                formControlName="rewardYear"
+              />
             </div>
           </div>
         </div>
@@ -39,6 +52,8 @@
   <div class="d-flex justify-content-end">
     <ksp-add-row-button
       class="text-primary"
-      (addRowClick)="addFormArray(researchInfo)">เพิ่มข้อมูลผลงานวิจัย</ksp-add-row-button>
+      (addRowClick)="addFormArray(researchInfo)"
+      >เพิ่มข้อมูลผลงานวิจัย</ksp-add-row-button
+    >
   </div>
 </form>

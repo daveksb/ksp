@@ -48,6 +48,10 @@ export const routes: Routes = [
         component: MyRewardDetailComponent,
       },
       {
+        path: 'detail/:id',
+        component: MyRewardDetailComponent,
+      },
+      {
         path: 'honor-request',
         component: HonorPinRequestComponent,
       },
