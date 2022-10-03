@@ -26,7 +26,11 @@
     </form>
 
     <div class="mt-3">
-      <button type="button" class="btn btn-primary" style="width: auto">
+      <button 
+        type="button" 
+        class="btn btn-primary" 
+        style="width: auto"
+        (click)="viewCourseDetail()">
         กดเพื่อดูใบคำขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา
       </button>
     </div>
@@ -77,9 +81,10 @@
             </td>
             <td class="text-center form-label vertical-middle">
               <div>
-               {{ row.admissionCount }} / {{ row.student }}
+               {{ row.admissioncount }} / {{ row.student }}
                 <span
                   role="button"
+                  *ngIf="row.admissioncount < row.student"
                   (click)="goToImportStudent('studentList', row)"
                   class="text-decoration-underline text-primary"
                 >
@@ -92,9 +97,10 @@
               class="text-center form-label vertical-middle"
             >
               <div>
-                0 / {{ row.student }}
+                {{ row.graduatecount }} / {{ row.student }}
                 <span
                   role="button"
+                  *ngIf="checkGraduate(row)"
                   (click)="goToImportStudent('graduateList', row)"
                   class="text-decoration-underline text-orange"
                 >

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { FormArray, FormBuilder } from '@angular/forms';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UniversitySearchComponent } from '@ksp/shared/search';
 
 @Component({
@@ -16,13 +16,34 @@ export class TrainingAddressComponent {
   });
 
   form = this.fb.group({
-    addresses: this.fb.array([this.teachingAddressForm]),
+    addresses: this.fb.array([]),
   });
 
   constructor(
     public dialog: MatDialog,
     private fb: FormBuilder,
-    public dialogRef: MatDialogRef<TrainingAddressComponent>) {}
+    public dialogRef: MatDialogRef<TrainingAddressComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+      console.log(this.data)
+      if (this.data.teachingpracticeschool.length) {
+        console.log('here1')
+        this.setData(this.data.teachingpracticeschool);
+      } else {
+        console.log('here')
+        this.addresses.push(this.teachingAddressForm);
+      }
+    }
+
+  setData(data: any) {
+    data.forEach((address: any) => {
+      const teachingAddressForm = this.fb.group({
+        universitycode: address.universitycode,
+        uniname: address.uniname,
+        uniid: address.uniid
+      });
+      this.addresses.push(teachingAddressForm);
+    });
+  }
 
   searchAddress(index: any) {
     const dialogRef = this.dialog.open(UniversitySearchComponent, {
@@ -54,7 +75,7 @@ export class TrainingAddressComponent {
   }
 
   get addresses() {
-    return this.form.controls.addresses;
+    return this.form.controls.addresses as FormArray;
   }
 
   deleteAddress(index: number) {

@@ -5,12 +5,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ListData, UniserviceImportType } from '@ksp/shared/interface';
 import { UniInfoService, UniRequestService } from '@ksp/shared/service';
-import { getCookie, stringToThaiDate } from '@ksp/shared/utility';
+import { getCookie, stringToThaiDate, thaiDate } from '@ksp/shared/utility';
 import {
   HistoryRequestDialogComponent,
   PrintRequestDialogComponent,
 } from '@ksp/uni-service/dialog';
 import { DegreeCertInfo } from '@ksp/uni-service/feature/edit-degree-cert';
+import moment from 'moment';
 import { map } from 'rxjs';
 
 @Component({
@@ -48,7 +49,6 @@ export class DegreeListComponent implements OnInit {
         affiliation: getCookie('uniType'),
       },
     });
-    console.log(this.form.value)
     this.getOptions();
     this.getDegreeCertList();
   }
@@ -94,14 +94,18 @@ export class DegreeListComponent implements OnInit {
   getDegreeCertList() {
     this.uniRequestService.searchUniDegreeCert(this.getRequest())
     .subscribe((res) => {
-      if (!res?.datareturn) return;
+      if (!res?.datareturn) {
+        this.dataSource.data = [];
+        return;
+      };
       this.dataSource.data = res?.datareturn.map(
         (item: any, index: number) => {
           return {
-            key: item?.id,
+              id: item?.id,
+              key: item?.id,
               order: ++index,
               degreeCode: item?.degreeapprovecode,
-              sendDate: item?.requestdate,
+              sendDate: stringToThaiDate(item?.requestdate),
               major: item?.coursename,
               branch: item?.coursefieldofstudy,
               degreeName: item?.fulldegreenameth,
@@ -136,9 +140,21 @@ export class DegreeListComponent implements OnInit {
     ]);
   }
 
-  history() {
+  history(row: any) {
+    const payload = {
+      unidegreecertid: row.id
+    };
+    this.uniInfoService.uniDegreeHistory(payload).subscribe((response => {
+      if (response.datareturn) {
+        this.opendialogHistory(response.datareturn);
+      }
+    }));
+  }
+
+  opendialogHistory(data: any) {
     this.dialog.open(HistoryRequestDialogComponent, {
       width: '400px',
+      data: data
     });
   }
 
@@ -149,7 +165,8 @@ export class DegreeListComponent implements OnInit {
   }
 
   clear() {
-    this.dataSource.data = [];
+    this.form.reset();
+    this.getDegreeCertList();
   }
 }
 const columns = [

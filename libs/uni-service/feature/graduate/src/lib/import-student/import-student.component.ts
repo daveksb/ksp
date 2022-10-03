@@ -19,7 +19,7 @@ import localForage from 'localforage';
 import { FormBuilder } from '@angular/forms';
 import { EMPTY, switchMap } from 'rxjs';
 import * as XLSX from 'xlsx';
-import { getCookie, parseJson } from '@ksp/shared/utility';
+import { getCookie, parseJson, thaiDate } from '@ksp/shared/utility';
 import moment from 'moment';
 
 @Component({
@@ -49,6 +49,9 @@ export class ImportStudentComponent implements OnInit {
     h2: 'ขอยื่นรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา', 
     h3: 'ขอยื่นรายชื่อผู้สำเร็จการศึกษา'
   }
+  requestNo = '';
+  userBackup: any;
+  requestDate = thaiDate(new Date());
 
   constructor(
     public dialog: MatDialog,
@@ -82,12 +85,12 @@ export class ImportStudentComponent implements OnInit {
           unirequestdegreecertid: this.courseData.courseDetail.id,
           unidegreecertid: this.courseData.courseDetail.id,
           degreeapprovecode: this.courseData.courseDetail.degreeapprovecode,
-          planyear: this.courseData.courseDetail.courseacademicyear,
-          plancalendaryear: this.courseData.courseSelected.year,
+          planyear: this.courseData.courseSelected.indexyear,
+          plancalendaryear: this.courseData.courseSelected.calendaryear,
           planname: this.courseData.courseSelected.label,
           plantotalno: this.courseData.courseSelected.student,
-          currentadmissionno: '0',
-          currentgraduateno: '0',
+          currentadmissionno: this.courseData.courseSelected.currentadmissionno,
+          currentgraduateno: this.courseData.courseSelected.currentgraduateno,
           ref1: '3',
           ref2: this.pageType == 'studentList' ? '05' : '06',
           ref3: '5',
@@ -95,14 +98,16 @@ export class ImportStudentComponent implements OnInit {
           graduatelist: []
         }
         console.log(this.courseData)
-        this.getAdmissionList();
+        if (this.pageType == 'studentList') {
+          this.getAdmissionList();
+        } else {
+          this.getGraduateList();
+        }
       }
     });
     this.getNationality();
     this.getPrefix();
     this.route.paramMap.subscribe((res) => {
-      // this.processType = Number(res.get('type'));
-      //console.log('process type = ', res);
       this.pageType = res.get('type') || 'studentList';
     });
   }
@@ -111,30 +116,128 @@ export class ImportStudentComponent implements OnInit {
     this.requestService.getAdmissionListById(
       { unidegreecertid: this.courseData?.courseDetail.id,
         planyear: this.payload.planyear,
-        plancalendaryear: this.payload.plancalendaryear
+        plancalendaryear: this.payload.plancalendaryear,
+        offset: 0,
+        row: 999
       })
       .subscribe((response: any) => {
-        if (response) {
-          this.users = parseJson(response.admissionlist);
-          this.payload.id = response.id;
-          this.users.forEach((user: any, index: number) => {
-            user.index = index+1;
-            const userAddress = JSON.parse(user.address)
-            user.address = this.fb.group({
-              addressInfo: [{
-                location: [userAddress?.location || null],
-                housenumber: [userAddress?.housenumber || null],
-                villagenumber: [userAddress?.villagenumber || null],
-                lane: [userAddress?.lane || null],
-                road: [userAddress?.road || null],
-                zipcode: [userAddress?.zipcode || null],
-                provinceid: [userAddress?.provinceid || null],
-                districtid: [userAddress?.districtid || null],
-                subdistrictid: [userAddress?.subdistrictid || null],
-                remark: []
-              }]
-            })
+        if (response.datareturn) {
+          const findResponse = response.datareturn.find((data: any) => {
+            return data.unidegreecertid == this.courseData?.courseDetail.id 
+                  && data.planyear == this.payload.planyear
+                  && data.plancalendaryear == this.payload.plancalendaryear
+                  && data.admissionlist
           });
+          if (findResponse && findResponse.requestprocess == '1') {
+            this.users = JSON.parse(findResponse.admissionlist);
+            this.requestNo = findResponse.requestno;
+            this.requestDate = thaiDate(new Date(findResponse.requestdate));
+            this.payload.id = findResponse.id;
+            this.users.forEach((user: any, index: number) => {
+              user.index = index+1;
+              const userAddress = JSON.parse(user.address)
+              user.address = this.fb.group({
+                addressInfo: [{
+                  location: [userAddress?.location || null],
+                  housenumber: [userAddress?.housenumber || null],
+                  villagenumber: [userAddress?.villagenumber || null],
+                  lane: [userAddress?.lane || null],
+                  road: [userAddress?.road || null],
+                  zipcode: [userAddress?.zipcode || null],
+                  provinceid: [userAddress?.provinceid || null],
+                  districtid: [userAddress?.districtid || null],
+                  subdistrictid: [userAddress?.subdistrictid || null],
+                  remark: []
+                }]
+              })
+            });
+          }
+        }
+      });
+  }
+
+  getGraduateList() {
+    this.requestService.getGraduateListById(
+      { 
+        unidegreecertid: this.courseData?.courseDetail.id,
+        planyear: this.payload.planyear,
+        plancalendaryear: this.payload.plancalendaryear,
+        offset: 0,
+        row: 999
+      }).subscribe((response: any) => {
+        if (response.datareturn) {
+          this.users = response.datareturn;
+          this.users.forEach((user: any, index: number) => {
+            user.index = index;
+            user.no = index+1;
+            user.teachingpracticeschool = [];
+            user.admissiondate = moment(user.admissiondate).format('YYYY-MM-DD');
+            user.birthdate = moment(user.birthdate).format('YYYY-MM-DD');
+            if (user.addressinfo) {
+              const userAddress = JSON.parse(user.addressinfo)
+              user.address = this.fb.group({
+                addressInfo: [{
+                  location: [userAddress?.location || null],
+                  housenumber: [userAddress?.housenumber || null],
+                  villagenumber: [userAddress?.villagenumber || null],
+                  lane: [userAddress?.lane || null],
+                  road: [userAddress?.road || null],
+                  zipcode: [userAddress?.zipcode || null],
+                  provinceid: [userAddress?.provinceid || null],
+                  districtid: [userAddress?.districtid || null],
+                  subdistrictid: [userAddress?.subdistrictid || null],
+                  remark: []
+                }]
+              })
+            } else {
+              user.address = this.fb.group({ addressInfo: [] })
+            }
+          });
+          this.userBackup = [...this.users];
+          this.requestService.getAdmissionListById(
+            { unidegreecertid: this.courseData?.courseDetail.id,
+              planyear: this.payload.planyear,
+              plancalendaryear: this.payload.plancalendaryear,
+              offset: 0,
+              row: 999
+            }).subscribe((res: any) => {
+              if (res.datareturn.length) {
+                const findRequestGraduate = res.datareturn.find((data: any) => {
+                  return data.graduatelist != null && data.requestprocess == '1';
+                });
+                if (findRequestGraduate) {
+                  this.requestNo = findRequestGraduate.requestno;
+                  this.requestDate = thaiDate(new Date(findRequestGraduate.requestdate));
+                  this.payload.id = findRequestGraduate.id;
+                  const convertGraduateList = JSON.parse(findRequestGraduate.graduatelist);
+                  convertGraduateList.map((data: any) => {
+                    this.users.map((user: any) => {
+                      if (data.idcardno == user.idcardno) {
+                        user.approvedate = moment(data.approvedate).format('YYYY-MM-DD');
+                        user.graduationdate = moment(data.graduationdate).format('YYYY-MM-DD');
+                        user.checked = true;
+                        user.teachingpracticeschool = JSON.parse(data.teachingpracticeschool);
+                        const userAddress = JSON.parse(data.address);
+                        user.address = this.fb.group({
+                          addressInfo: [{
+                            location: [userAddress?.location || null],
+                            housenumber: [userAddress?.housenumber || null],
+                            villagenumber: [userAddress?.villagenumber || null],
+                            lane: [userAddress?.lane || null],
+                            road: [userAddress?.road || null],
+                            zipcode: [userAddress?.zipcode || null],
+                            provinceid: [userAddress?.provinceid || null],
+                            districtid: [userAddress?.districtid || null],
+                            subdistrictid: [userAddress?.subdistrictid || null],
+                            remark: []
+                          }]
+                        })
+                      }
+                    })
+                  })
+                }
+              }
+            })
         }
       });
   }
@@ -156,14 +259,6 @@ export class ImportStudentComponent implements OnInit {
     });
   }
 
-  onRowEditInit(product: User) {
-    //this.clonedProducts[product.id] = { ...product };
-  }
-
-  onRowEditSave(product: User) {}
-
-  onRowEditCancel(product: User, index: number) {}
-
   cancel() {
     this.router.navigate(['./', 'home']);
   }
@@ -172,7 +267,7 @@ export class ImportStudentComponent implements OnInit {
     if (this.users.length < this.courseData.courseSelected.student) {
       this.users.push({
         index: this.users.length + 1,
-        startdate: moment().format('YYYY-MM-DD'),
+        admissiondate: moment().format('YYYY-MM-DD'),
         idcardno: '',
         passportno: '',
         nationality: null,
@@ -183,13 +278,13 @@ export class ImportStudentComponent implements OnInit {
         firstnameen: '',
         middlenameen: '',
         lastnameen: '',
-        contactphone: '',
+        phone: '',
         birthdate: '',
         address: this.fb.group({ addressInfo: [] }),
-        approvetime: '',
-        graduatedate: '',
+        approveno: '',
+        graduationdate: '',
         approvedate: '',
-        subject: {
+        subjects: {
           subject1: '',
           subject2: ''
         }
@@ -206,7 +301,7 @@ export class ImportStudentComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
-        this.users[index-1].subject = res;
+        this.users[index-1].subjects = res;
       }
     });
   }
@@ -215,10 +310,14 @@ export class ImportStudentComponent implements OnInit {
     const dialogRef = this.dialog.open(TrainingAddressComponent, {
       height: '900px',
       width: '1000px',
+      data: {
+        teachingpracticeschool: this.users[index].teachingpracticeschool
+      }
     });
     dialogRef.afterClosed().subscribe((response: any) => {
       if (response) {
-        this.users[index].trainingAddress = response;
+        this.users[index].teachingpracticeschool = response;
+        console.log(this.users)
       }
     })
   }
@@ -228,7 +327,7 @@ export class ImportStudentComponent implements OnInit {
       width: '900px',
       data: {
         mode: 'view',
-        address: address.value.addressInfo
+        address: address.value.addressInfo || {}
       }
     });
   }
@@ -254,15 +353,17 @@ export class ImportStudentComponent implements OnInit {
             this.users.map((data: any)=>{
               delete data.index;
               data.address = JSON.stringify(data.address.controls.addressInfo.getRawValue());
+              data.subjects = JSON.stringify(data.subjects);
+              data.teachingpracticeschool = JSON.stringify(data.teachingpracticeschool);
             })
+            console.log(this.users)
             if (this.pageType == 'studentList') {
               this.payload.admissionlist = JSON.stringify(this.users);
               this.payload.graduatelist = null;
             } else {
-              this.payload.graduatelist = JSON.stringify(this.users);
+              this.payload.graduatelist = JSON.stringify(this.getCheckedValue());
               this.payload.admissionlist = null;
             }
-            console.log(this.payload)
             return this.requestService.createRequestAdmission(this.payload);
           }
           return EMPTY;
@@ -273,6 +374,10 @@ export class ImportStudentComponent implements OnInit {
           this.onConfirmed(res?.requestno);
         }
     });
+  }
+
+  getCheckedValue() {
+    return this.users.filter((data: any)=>{return data.checked});
   }
 
   onConfirmed(requestno: string) {
@@ -286,7 +391,7 @@ export class ImportStudentComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'home']);
+        this.router.navigate(['/student-list', 'degree-list']);
       }
     });
   }
@@ -327,7 +432,7 @@ export class ImportStudentComponent implements OnInit {
           this.users.push({
             index: this.users.length + 1,
             id: '',
-            startdate: newdata?.startdate || null,
+            admissiondate: newdata?.admissiondate || null,
             idcardno: newdata?.idcard || null,
             passportno: newdata?.passportno || null,
             nationality: newdata?.nationality || null,
@@ -338,7 +443,7 @@ export class ImportStudentComponent implements OnInit {
             firstnameen: newdata?.firstnameen || null,
             middlenameen: newdata?.middlenameen || null,
             lastnameen: newdata?.lastnameen || null,
-            contactphone: newdata?.contactphone || null,
+            phone: newdata?.phone || null,
             birthdate: newdata?.birthdate || null,
             address: this.fb.group({ addressInfo: [{
               location: [newdata?.location || null],
@@ -352,10 +457,10 @@ export class ImportStudentComponent implements OnInit {
               subdistrictid: [newdata?.subdistrictid || null],
               remark: []
             }] }),
-            approvetime: newdata?.approvetime || null,
-            graduatedate: newdata?.graduatedate || null,
+            approveno: newdata?.approveno || null,
+            graduationdate: newdata?.graduationdate || null,
             approvedate: newdata?.approvedate || null,
-            subject: {
+            subjects: {
               subject1: newdata?.subject1 || null,
               subject2: newdata?.subject2 || null
             }
@@ -369,6 +474,16 @@ export class ImportStudentComponent implements OnInit {
     window.open('/assets/file/admission_example.xlsx', '_blank');
   }
 
+  filterList(object: string, value: string) {
+    if (value) {
+      this.users = this.userBackup.filter((user: any)=>{
+        return user[object].includes(value);
+      })
+    } else {
+      this.users = this.userBackup;
+    }
+  }
+
   searchByIdcard(params: any, index: number) {
     if (params.idcardno || params.passportno) {
       const payload = {
@@ -380,7 +495,7 @@ export class ImportStudentComponent implements OnInit {
       this.uniInfoService.searchSelfStudent(payload)
       .subscribe((response => {
         if (response.datareturn) {
-          this.users[index-1].startdate =  moment().format('YYYY-MM-DD'),
+          this.users[index-1].admissiondate =  moment().format('YYYY-MM-DD'),
           this.users[index-1].idcardno = response.datareturn[0].idcardno,
           this.users[index-1].passportno = response.datareturn[0].passportno,
           this.users[index-1].nationality = response.datareturn[0].nationality,
@@ -391,7 +506,7 @@ export class ImportStudentComponent implements OnInit {
           this.users[index-1].firstnameen = response.datareturn[0].firstnameen,
           this.users[index-1].middlenameen = response.datareturn[0].middlenameen,
           this.users[index-1].lastnameen = response.datareturn[0].lastnameen,
-          this.users[index-1].contactphone = response.datareturn[0].phone,
+          this.users[index-1].phone = response.datareturn[0].phone,
           this.users[index-1].birthdate = moment(response.datareturn[0].birthdate).format('YYYY-MM-DD'),
           this.users[index-1].address = this.fb.group({ addressInfo: [{
             location: [response.datareturn[0].addressinfo.location],

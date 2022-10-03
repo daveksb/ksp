@@ -9,8 +9,8 @@
 
   <div class="bg-white p-3">
     <ksp-request-header-info
-      [requestDate]="'10 ตุลาคม 2565'"
-      [requestNumber]="'112234467876543'"
+      [requestDate]="requestDate"
+      [requestNumber]="requestNo"
     ></ksp-request-header-info>
     <hr />
 
@@ -101,7 +101,12 @@
             >
               <div>
                 <label>วันที่เข้ารับการศึกษา</label>
-                <input type="date" class="form-control" style="width: 150px" />
+                <input 
+                  type="date" 
+                  class="form-control" 
+                  style="width: 150px"
+                  #admissiondatesearch
+                  (input)="filterList('admissiondate', admissiondatesearch.value)" />
               </div>
             </th>
 
@@ -123,6 +128,8 @@
                   class="form-control form-search"
                   style="width: 175px"
                   type="text"
+                  #idcardsearch
+                  (input)="filterList('idcardno', idcardsearch.value)"
                 />
               </div>
             </th>
@@ -133,6 +140,8 @@
                 class="form-control form-search"
                 style="width: 175px"
                 type="text"
+                #passportnosearch
+                (input)="filterList('passportno', passportnosearch.value)"
                 *ngIf="pageType === 'graduateList'"
               />
             </th>
@@ -154,7 +163,9 @@
                   class="form-control form-search"
                   style="width: 150px"
                   type="text"
+                  #firstnamethsearch
                   *ngIf="pageType === 'graduateList'"
+                  (input)="filterList('firstnameth', firstnamethsearch.value)"
                 />
               </div>
             </th>
@@ -166,7 +177,9 @@
                   class="form-control form-search"
                   style="width: 150px"
                   type="text"
+                  #lastnamethsearch
                   *ngIf="pageType === 'graduateList'"
+                  (input)="filterList('lastnameth', lastnamethsearch.value)"
                 />
               </div>
             </th>
@@ -182,7 +195,9 @@
                   class="form-control form-search"
                   style="width: 150px"
                   type="text"
+                  #firstnameensearch
                   *ngIf="pageType === 'graduateList'"
+                  (input)="filterList('firstnameen', firstnameensearch.value)"
                 />
               </div>
             </th>
@@ -194,7 +209,9 @@
                   class="form-control form-search"
                   style="width: 150px"
                   type="text"
+                  #middlenameensearch
                   *ngIf="pageType === 'graduateList'"
+                  (input)="filterList('middlenameen', middlenameensearch.value)"
                 />
               </div>
             </th>
@@ -206,7 +223,9 @@
                   class="form-control form-search"
                   style="width: 150px"
                   type="text"
+                  #lastnameensearch
                   *ngIf="pageType === 'graduateList'"
+                  (input)="filterList('lastnameen', lastnameensearch.value)"
                 />
               </div>
             </th>
@@ -217,7 +236,9 @@
                 class="form-control form-search"
                 style="width: 150px"
                 type="text"
+                #phonesearch
                 *ngIf="pageType === 'graduateList'"
+                (input)="filterList('phone', phonesearch.value)"
               />
             </th>
             <th class="p-2 text-nowrap align-text-top">
@@ -247,11 +268,11 @@
             >
               <p-cellEditor>
                 <ng-template pTemplate="input">
-                  {{ user.index }}
+                  {{ user.no }}
                 </ng-template>
 
                 <ng-template pTemplate="output">
-                  {{ user.index }}
+                  {{ user.no }}
                 </ng-template>
               </p-cellEditor>
             </td>
@@ -260,65 +281,46 @@
               class="text-center"
               *ngIf="pageType === 'graduateList'"
             >
-              <input type="checkbox" [(ngModel)]="user.checked" class="form-check-input" />
+              <input type="checkbox" 
+                [(ngModel)]="user.checked" 
+                class="form-check-input" />
             </td>
 
             <td
               class="p-2 text-nowrap"
               *ngIf="pageType === 'graduateList'"
             >
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input
-                    class="form-control text-center"
-                    style="width: 75px"
-                    pInputText
-                    type="text"
-                    [(ngModel)]="user.approvetime"
-                  />
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{ user.approvetime }}
-                </ng-template>
-              </p-cellEditor>
+              <input
+                class="form-control text-center"
+                style="width: 75px"
+                pInputText
+                type="text"
+                [(ngModel)]="user.approveno"
+              />
             </td>
             <td
               class="p-2 text-nowrap"
               *ngIf="pageType === 'graduateList'"
             >
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input
-                    class="form-control"
-                    style="width: 150px"
-                    pInputText
-                    type="date"
-                    [(ngModel)]="user.graduatedate"
-                  />
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{ user.graduatedate }}
-                </ng-template>
-              </p-cellEditor>
+              <input
+                class="form-control"
+                style="width: 150px"
+                pInputText
+                type="date"
+                [(ngModel)]="user.approvedate"
+              />
             </td>
             <td
               class="p-2 text-nowrap"
               *ngIf="pageType === 'graduateList'"
             >
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input
-                    class="form-control"
-                    style="width: 150px"
-                    pInputText
-                    type="date"
-                    [(ngModel)]="user.approvedate"
-                  />
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{ user.approvedate }}
-                </ng-template>
-              </p-cellEditor>
+              <input
+                class="form-control"
+                style="width: 150px"
+                pInputText
+                type="date"
+                [(ngModel)]="user.graduationdate"
+              />
             </td>
 
             <td
@@ -340,7 +342,7 @@
               style="width: 150px"
               pInputText
               type="date"
-              [(ngModel)]="user.startdate"
+              [(ngModel)]="user.admissiondate"
               [disabled]="pageType === 'graduateList'"
             />
             </td>
@@ -482,7 +484,7 @@
                 style="width: 150px"
                 pInputText
                 type="text"
-                [(ngModel)]="user.contactphone"
+                [(ngModel)]="user.phone"
                 [disabled]="pageType === 'graduateList'"
               />
             </td>
@@ -543,7 +545,7 @@
           </tr>
         </ng-template>
       </p-table>
-      <div *ngIf="pageType === 'studentList' && users.length < courseData.courseSelected.student">
+      <div *ngIf="pageType === 'studentList' && users.length < courseData?.courseSelected.student">
         <ksp-add-row-button class="blue" (click)="addStudent()">เพิ่มรายชื่อ</ksp-add-row-button>
       </div>
     </div>

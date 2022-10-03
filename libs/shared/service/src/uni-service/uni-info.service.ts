@@ -196,4 +196,14 @@ export class UniInfoService {
       tokenkey: this.tokenKey,
     });
   }
+
+  uniDegreeHistory(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspuni/unirequestadmissionselectadid`,
+      {
+        ...params,
+        tokenkey: this.tokenKey,
+      }
+    );
+  }
 }

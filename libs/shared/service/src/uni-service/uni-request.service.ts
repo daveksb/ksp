@@ -63,7 +63,14 @@ export class UniRequestService {
   }
 
   getAdmissionListById(form: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/kspuni/unidegreeadmissionselectdegreeid`, {
+    return this.http.post(`${environment.shortApiUrl}/unirequestadmissionsearch.php`, {
+      ...form,
+      tokenkey: getCookie('userToken'),
+    });
+  }
+
+  getGraduateListById(form: any): Observable<any> {
+    return this.http.post(`${environment.shortApiUrl}/unidegreeadmissionsearchall.php`, {
       ...form,
       tokenkey: getCookie('userToken'),
     });

@@ -42,7 +42,7 @@ export class CourseDetailComponent implements OnInit {
       this.processType = 0;
     });
     this.uniRequestService.getUniDegreeCertById(this.id).subscribe(response=>{
-      if (response) {
+      if (response.returncode != '99') {
         this.courseData = {...response};
         this.courseData.attachfiles = parseJson(response?.attachfiles);
         this.courseData.coordinatorinfo = parseJson(response?.coordinatorinfo);
@@ -59,8 +59,7 @@ export class CourseDetailComponent implements OnInit {
         this.courseData.teachinglocation = parseJson(response?.teachinglocation);
         this.courseData.totalStudent = this.courseData.coursestructure.reduce((curr: any,prev: any)=>{
           return curr + parseInt(prev.student)
-        }, 0)
-        console.log(this.courseData);
+        }, 0);
         this.getAdmissionDetail(this.courseData);
         this._mappingResponseWithForm(response);
       }
@@ -108,19 +107,24 @@ export class CourseDetailComponent implements OnInit {
   }
 
   getAdmissionDetail(data: any) {
-    console.log(data)
     const payload = {
-      unidegreecertid: '1',
-      plancalendaryear: '2022',
+      unidegreecertid: data.id,
+      plancalendaryear: '2562',
       row: 10,
       offset: 0
     }
     this.uniRequestService.getAdmissionCount(payload).subscribe((response: any) => {
       if (response.datareturn) {
-        console.log(response)
-        this.courseData.coursestructure.map((course: any)=>{
-          const findData = response.datareturn.find((data: any)=>{ return Number(data.planyear) == course.year})
-          course.admissionCount = findData ? findData.unidegreecertidcount : 0;
+        this.courseData.coursestructure.map((course: any, index: any)=>{
+          course.indexyear = index;
+          const findDataAdmission = response.datareturn.find((data: any) => {
+            return data.plancalendaryear == course.year;
+          });
+          course.admissioncount = findDataAdmission ? (findDataAdmission.unidegreecertidcount || 0) : 0;
+          const findDataGraduate = response.datareturngraduation.find((data: any) => {
+            return data.plancalendaryear == course.year;
+          });
+          course.graduatecount = findDataGraduate ? (findDataGraduate.unidegreecertidcount || 0) : 0;
         })
       }
     })
@@ -131,9 +135,15 @@ export class CourseDetailComponent implements OnInit {
   }
 
   goToImportStudent(type: string, row: any) {
-    console.log(type)
+    const rowDetail = {
+      ...row,
+      indexyear: row.indexyear,
+      calendaryear: row.year,
+      currentadmissionno: row.admissioncount || 0,
+      currentgraduateno: row.graduatecount || 0
+    }
     const course = {
-      courseSelected: row,
+      courseSelected: rowDetail,
       courseDetail: this.courseData
     };
     localForage.setItem('courseData', course);
@@ -142,5 +152,20 @@ export class CourseDetailComponent implements OnInit {
 
   cancel() {
     this.router.navigate(['/', 'student-list']);
+  }
+
+  checkGraduate(row: any) {
+    const yearnow = (new Date().getFullYear() + 543);
+    return (Number(row.year)+2) <= yearnow 
+          && row.graduatecount < row.student
+          && row.student == row.admissioncount;
+  }
+
+  viewCourseDetail() {
+    this.router.navigate(['/degree-cert', 'request'], {
+      queryParams: {
+        id: this.courseData.requestid,
+      },
+    });
   }
 }

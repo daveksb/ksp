@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -12,8 +13,23 @@ import { HistoryRequestDialogComponent } from '@ksp/uni-service/dialog';
 export class EditStudentListComponent {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<studentList>();
+  form = this.fb.group({
+    requestno: [],
+    degreelevel: [],
+    fulldegreename: [],
+    coursemajor: [],
+    plancalendaryear: [],
+    requeststatus: [],
+    idcard: [],
+    name: [],
+    requestdatefrom: [],
+    requestdateto: []
+  })
 
-  constructor(private router: Router, public dialog: MatDialog) {}
+  constructor(
+    private router: Router, 
+    public dialog: MatDialog,
+    private fb: FormBuilder) {}
 
   history() {
     this.dialog.open(HistoryRequestDialogComponent, {
