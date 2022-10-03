@@ -53,7 +53,10 @@
               formControlName="provience"
             >
               <option value="null" selected hidden disabled>กรุณาเลือก</option>
-              <option *ngFor="let item of provinces" [value]="item?.value && showEditCheckbox">
+              <option
+                *ngFor="let item of provinces"
+                [value]="item?.value && showEditCheckbox"
+              >
                 {{ item.label }}
               </option>
             </select>
@@ -104,7 +107,13 @@
         </fieldset>
       </div>
       <div class="row mb-3">
-        <ng-template kspDynamicComponent></ng-template>
+        <container-element [ngSwitch]="courseDetailType">
+         <ksp-course-form-one *ngSwitchCase="1" formControlName="courseDetail"></ksp-course-form-one>
+         <ksp-course-form-three *ngSwitchCase="2" formControlName="courseDetail"></ksp-course-form-three>
+         <ksp-course-form-four *ngSwitchCase="3" formControlName="courseDetail"></ksp-course-form-four>
+         <ksp-course-form-two *ngSwitchCase="4" formControlName="courseDetail"></ksp-course-form-two>
+         <ng-container *ngSwitchDefault><label>ไม่พบข้อมูล</label></ng-container>
+        </container-element>
       </div>
     </div>
 

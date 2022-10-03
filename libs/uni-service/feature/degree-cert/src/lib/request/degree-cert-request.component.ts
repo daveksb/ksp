@@ -77,6 +77,7 @@ export class DegreeCertRequestComponent {
   }
 
   save() {
+    return console.log(this.step1Form.value)
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -215,7 +216,10 @@ export class DegreeCertRequestComponent {
       courseapprovetime: step1?.degreeTypeForm?.courseApproveTime || null,
       courseapprovedate: step1?.degreeTypeForm?.courseApproveDate || null,
       courseacceptdate: step1?.degreeTypeForm?.courseAcceptDate || null,
-      coursedetailtype: step1?.courseDetailType || null,
+      // coursedetailtype: step1?.courseDetailType || null,
+      // coursefieldofstudy:step1?.major1 || null,
+      // coursesubjects:step1?.major2 || null,
+
       teachinglocation: step1?.locations
         ? JSON.stringify(step1?.locations)
         : null,
