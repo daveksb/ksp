@@ -14,29 +14,13 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1234567890</th>
-      <td>12 ส.ค. 2564</td>
-      <td>12 ส.ค. 2564</td>
+    <tr *ngFor="let item of dataSource;">
+      <th scope="row">{{item?.requestno || "-"}}</th>
+      <td>{{item?.requestdate ? toDateTh(item?.requestdate): '-'}}</td>
+      <td>{{item?.updatedate ? toDateTh(item?.updatedate) : '-'}}</td>
       <td>
         <i role="button" class="bi bi-printer-fill text-primary fs-5 ms-3"></i>
       </td>
-    </tr>
-    <tr>
-      <th scope="row">1234567890</th>
-      <td>12 ส.ค. 2564</td>
-      <td>12 ส.ค. 2564</td>
-      <td>
-        <i role="button" class="bi bi-printer-fill text-primary fs-5 ms-3"></i>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">1234567890</th>
-      <td>12 ส.ค. 2564</td>
-      <td>12 ส.ค. 2564</td>
-      <td>
-        <i role="button" class="bi bi-printer-fill text-primary fs-5 ms-3"></i>
-      </td>
-    </tr>
+    </tr>    
   </tbody>
 </table>

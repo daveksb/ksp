@@ -142,15 +142,23 @@ export class DegreeListComponent implements OnInit {
 
   opendialogHistory(data: any) {
     this.dialog.open(HistoryRequestDialogComponent, {
-      width: '400px',
+      width: '600px',
       data: data
     });
   }
 
-  print() {
-    this.dialog.open(PrintRequestDialogComponent, {
-      width: '400px',
-    });
+  print(data: any) {
+    const payload = {
+      unidegreecertid: data.id
+    };
+    this.uniInfoService.uniDegreeHistory(payload).subscribe((response => {
+      if (response.datareturn) {
+        this.dialog.open(PrintRequestDialogComponent, {
+          width: '600px',
+          data: response.datareturn
+        });
+      }
+    }));
   }
 
   clear() {

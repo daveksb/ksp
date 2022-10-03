@@ -81,7 +81,7 @@
               verify__status: element.studentStatus === 'รับข้อมูล'
             }"
           >
-            {{ element.studentStatus }}</span
+            {{ element.studentStatus || '-' }}</span
           >
         </td>
       </ng-container>
@@ -97,7 +97,7 @@
               verify__status: element.graduateStatus === 'รับข้อมูล'
             }"
           >
-            {{ element.graduateStatus }}</span
+            {{ element.graduateStatus || '-' }}</span
           >
         </td>
       </ng-container>
@@ -112,7 +112,7 @@
         <td mat-cell *matCellDef="let element">
           <i
             role="button"
-            (click)="print()"
+            (click)="print(element)"
             class="bi bi-printer-fill text-primary fs-5 ms-3"
           ></i>
         </td>
