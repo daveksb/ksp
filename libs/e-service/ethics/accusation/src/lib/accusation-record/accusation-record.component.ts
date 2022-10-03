@@ -73,7 +73,7 @@ export class AccusationRecordComponent
     accusationassignofficer: [],
     accusationassigndate: [],
     accuserinfo: this.fb.array([] as FormGroup[]),
-    //accusation_consideration
+    accusationconsideration: [],
   });
   constructor(
     public dialog: MatDialog,

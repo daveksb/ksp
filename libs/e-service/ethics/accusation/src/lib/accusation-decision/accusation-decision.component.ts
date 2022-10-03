@@ -1,13 +1,15 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { Ethics } from '@ksp/shared/interface';
+import { EthicsService } from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
-
+import _ from 'lodash';
 @Component({
   selector: 'e-service-accusation-decision',
   templateUrl: './accusation-decision.component.html',
@@ -16,15 +18,33 @@ import { thaiDate } from '@ksp/shared/utility';
 export class AccusationDecisionComponent {
   decisions = decisions;
   today = thaiDate(new Date());
+  ethicsId!: number;
   form = this.fb.group({
-    decisions: [],
-    otherDetail: [],
+    accusationblackno: [''],
+    accusationtype: [''],
+    accusationincidentdate: [''],
+    accusationincidentplace: [''],
+    accusationcondemnationtype: [''],
+    accusationcondemnation: [''],
+    accusationissuedate: [''],
+    accusationdetail: [''],
+    accusationpunishmentdetail: [''],
+    accusationviolatedetail: [''],
+    accusationassignofficer: [''],
+    accusationassigndate: [''],
+    accuserinfo: [''],
+    accusationconsideration: this.fb.group({
+      decisions: [''],
+      otherDetail: [''],
+    }),
   });
   requestNumber = '';
   constructor(
     private router: Router,
     public dialog: MatDialog,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private service: EthicsService
   ) {}
 
   @Input() hideAllButtons = false;
@@ -52,7 +72,36 @@ export class AccusationDecisionComponent {
       }
     });
   }
-
+  checkRequestId() {
+    this.route.paramMap.subscribe((params) => {
+      this.ethicsId = Number(params.get('id'));
+      if (this.ethicsId) {
+        this.service.getEthicsByID({ id: this.ethicsId }).subscribe((res) => {
+          const { accusationconsideration, ...payload } = res;
+          this.form.patchValue(payload);
+        });
+      }
+    });
+  }
+  saveEthics() {
+    const ethics = new Ethics();
+    const allowKey = Object.keys(ethics);
+    const data = this.form.value as any;
+    const selectData = _.pick(data, allowKey);
+    if (this.ethicsId) {
+      selectData['id'] = this.ethicsId;
+      this.service.updateEthicsAccusation(selectData).subscribe((res) => {
+        console.log('save = ', res);
+      });
+    } else {
+      this.service.createEthics(selectData).subscribe((res) => {
+        const id = res.id;
+        if (id) {
+          this.router.navigate(['/accusation', 'detail', id]);
+        }
+      });
+    }
+  }
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '375px',

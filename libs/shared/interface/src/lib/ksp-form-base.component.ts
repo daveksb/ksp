@@ -70,8 +70,8 @@ export abstract class KspFormBaseComponent
         }
       }
     }
-    this.onChange(value);
-    this.onTouched();
+    // this.onChange(value);
+    // this.onTouched();
   }
 
   public onChange = (value?: any) => {};

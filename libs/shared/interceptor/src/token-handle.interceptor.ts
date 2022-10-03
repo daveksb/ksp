@@ -17,13 +17,13 @@ export class TokenHandleInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const token = getCookie('userToken');
-
     if (
       request.url.includes('kspmasterdata') ||
       request.url.includes('ksplogin') ||
       request.url.includes('ksppublic') ||
       request.url.includes('schschoolselect') ||
-      request.url.includes('kspfileinsert') ||
+      (request.url.includes('kspfileinsert') &&
+        (request.body.requesttype == '1' || request.body.requesttype == '2')) ||
       request.url.includes('schschoolsearch.php') ||
       (request.url.includes('schrequestfileinsert') &&
         (request.body.requesttype == '1' || request.body.requesttype == '2')) ||

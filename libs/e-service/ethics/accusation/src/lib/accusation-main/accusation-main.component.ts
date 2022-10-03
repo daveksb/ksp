@@ -4,8 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Ethics } from '@ksp/shared/interface';
 import { EthicsService } from '@ksp/shared/service';
+import { mapFileInfo } from '@ksp/shared/utility';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import localForage from 'localforage';
 import _ from 'lodash';
 import { AccusationRecordComponent } from '../accusation-record/accusation-record.component';
 @UntilDestroy()
@@ -21,7 +21,7 @@ export class AccusationMainComponent implements OnInit {
     accusation: [] as any,
   });
   @ViewChild(AccusationRecordComponent)
-  formComponents!: AccusationRecordComponent;
+  accusation!: AccusationRecordComponent;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -32,7 +32,6 @@ export class AccusationMainComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkRequestId();
-
     this.form.valueChanges.subscribe((res) => {
       // console.log('form value = ', this.form.controls.accusation.value);
     });
@@ -42,9 +41,15 @@ export class AccusationMainComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.ethicsId = Number(params.get('id'));
       if (this.ethicsId) {
-        localForage.getItem('registerEthicsInfoValue').then((data) => {
-          // this.formComponents.addRow();
-          this.form.controls.accusation.patchValue(data);
+        this.service.getEthicsByID({ id: this.ethicsId }).subscribe((res) => {
+          this.accusation.accusationFiles.forEach((element, index) => {
+            if (res.accusationfile) {
+              const json = JSON.parse(res?.accusationfile);
+              element.fileId = json[index]?.fileid;
+              element.fileName = json[index]?.filename;
+            }
+          });
+          this.form.controls.accusation.patchValue(res);
         });
       }
     });
@@ -54,9 +59,13 @@ export class AccusationMainComponent implements OnInit {
     const ethics = new Ethics();
     const allowKey = Object.keys(ethics);
     const data = this.form.controls.accusation.value as any;
+
     if (data?.accusation) {
       data.accusationinfo = JSON.stringify(data?.accusationinfo);
     }
+    data.accusationfile = JSON.stringify(
+      mapFileInfo(this.accusation.accusationFiles)
+    );
     const selectData = _.pick(data, allowKey);
     if (this.ethicsId) {
       selectData['id'] = this.ethicsId;
@@ -74,7 +83,7 @@ export class AccusationMainComponent implements OnInit {
   }
 
   next() {
-    this.router.navigate(['/accusation', 'decision']);
+    this.router.navigate(['/accusation', 'decision', this.ethicsId || null]);
   }
 
   cancel() {

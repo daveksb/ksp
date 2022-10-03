@@ -35,6 +35,10 @@ export const routes: Routes = [
         component: AccusationDecisionComponent,
       },
       {
+        path: 'decision/:id',
+        component: AccusationDecisionComponent,
+      },
+      {
         path: '',
         redirectTo: 'list',
         pathMatch: 'full',

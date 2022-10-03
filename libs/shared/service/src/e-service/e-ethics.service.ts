@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
+import { Ethics, EthicsKey } from '@ksp/shared/interface';
 import { map, Observable, shareReplay } from 'rxjs';
 
 @Injectable({
@@ -87,5 +88,35 @@ export class EthicsService {
         shareReplay(),
         map((data: any) => data.datareturn)
       );
+  }
+  getEthicsByID(payload: any): Observable<Ethics> {
+    return this.http
+      .post<Ethics>(
+        `${environment.apiUrl}/e-service/es-ethicsselectbyid`,
+        payload
+      )
+      .pipe(map((data) => this.formatMyInfo(data)));
+  }
+  formatMyInfo(info: Ethics): Ethics {
+    const dateColumn = [
+      'accusationincidentdate',
+      'accusationissuedate',
+      'accusationassigndate',
+    ];
+    const jsonColumn = ['accuserinfo', 'accusationfile'];
+    for (const key in info) {
+      const ethicsKey = key as EthicsKey;
+      if (dateColumn.includes(key)) {
+        if (info[ethicsKey]) {
+          info[ethicsKey] = info[ethicsKey]?.split('T')[0] || null;
+        }
+      }
+      if (jsonColumn.includes(key)) {
+        if (info[ethicsKey]) {
+          info[ethicsKey] = atob(info[ethicsKey] as string) || null;
+        }
+      }
+    }
+    return info;
   }
 }

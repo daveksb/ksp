@@ -147,3 +147,5 @@ export const decisions = [
     value: 4,
   },
 ];
+
+export type EthicsKey = keyof Ethics;
