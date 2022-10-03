@@ -266,7 +266,8 @@ export class ImportStudentComponent implements OnInit {
   addStudent() {
     if (this.users.length < this.courseData.courseSelected.student) {
       this.users.push({
-        index: this.users.length + 1,
+        index: this.users.length,
+        no: this.users.length + 1,
         admissiondate: moment().format('YYYY-MM-DD'),
         idcardno: '',
         passportno: '',

@@ -119,18 +119,7 @@ export class DegreeListComponent implements OnInit {
       );
     });
   }
-  // 'order',
-  // 'edit',
-  // 'sendDate',
-  // 'degreeCode',
-  // 'major',
-  // 'branch',
-  // 'degreeName',
-  // 'studentStatus',
-  // 'graduateStatus',
-  // 'editDate',
-  // 'print',
-  // 'history',
+
   nextPage(id: number) {
     this.router.navigate([
       '/',
