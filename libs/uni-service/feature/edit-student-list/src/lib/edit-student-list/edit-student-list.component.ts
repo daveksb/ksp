@@ -35,7 +35,7 @@ export class EditStudentListComponent implements OnInit {
     coursemajor: [],
     plancalendaryear: [],
     requeststatus: [],
-    idcard: [],
+    idcardno: [],
     name: [],
     requestdatefrom: [],
     requestdateto: []
