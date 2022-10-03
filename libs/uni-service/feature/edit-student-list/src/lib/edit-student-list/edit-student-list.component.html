@@ -18,10 +18,8 @@
           <div class="col">
             <label class="form-label">ระดับปริญญา</label>
             <select class="form-select" formControlName="degreelevel">
-              <option>กรุณาเลือก</option>
-              <option>xxx</option>
-              <option>xxx</option>
-              <option>xxx</option>
+              <option value="null" selected disabled>กรุณาเลือก</option>
+              <option *ngFor="let option of degreeLevelOptions" [value]="option.value">{{option.label}}</option>
             </select>
           </div>
         </div>
@@ -45,10 +43,8 @@
           <div class="col">
             <label class="form-label">สถานะตรวจสอบ</label>
             <select class="form-select" formControlName="requeststatus">
-              <option>กรุณาเลือก</option>
-              <option>xxx</option>
-              <option>xxx</option>
-              <option>xxx</option>
+              <option value="null" selected disabled>กรุณาเลือก</option>
+              <option *ngFor="let option of requestStatusOptions" [value]="option.value">{{option.label}}</option>
             </select>
           </div>
         </div>
