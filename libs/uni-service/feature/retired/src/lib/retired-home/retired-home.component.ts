@@ -20,6 +20,7 @@ export class RetiredHomeComponent implements OnInit {
   ngOnInit(): void {}
 
   handleClear(form: any) {
+    this.selectedUser = null;
     this.handleSearch(form);
   }
 

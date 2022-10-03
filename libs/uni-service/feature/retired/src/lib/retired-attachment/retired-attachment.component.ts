@@ -11,6 +11,7 @@ import { thaiDate } from '@ksp/shared/utility';
 import { GeneralInfoService, UniInfoService, UniRequestService } from '@ksp/shared/service';
 import { EMPTY, Observable, switchMap } from 'rxjs';
 import localForage from 'localforage';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'uni-service-retired-attachment',
@@ -45,7 +46,7 @@ export class RetiredAttachmentComponent implements OnInit {
   ];
 
   ngOnInit() {
-    this.uniqueTimestamp = `${new Date().getTime()}`;
+    this.uniqueTimestamp = uuidv4();
     this.prefixName$ = this.generalInfoService.getPrefix();
     this.occupyList$ = this.uniinfoService.getOccupy();
     localForage.getItem('retireReasonData').then((res) => {
@@ -106,6 +107,7 @@ export class RetiredAttachmentComponent implements OnInit {
             payload.currentprocess = `1`;
             payload.requeststatus = `1`;
             payload.schoolid = this.userInfo.uniid;
+            payload.uniquetimestamp = this.uniqueTimestamp;
             return this.requestService.createRequest(payload);
           }
           return EMPTY;
