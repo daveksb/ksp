@@ -144,13 +144,19 @@
         ></ksp-form-attachment>
       </mat-tab>
 
-      <mat-tab label="GRANTION TEACHING LICENSES">
-        <self-service-foreign-step-two-tab-four
-          formControlName="grantionLicenseForm"
-          [countryList]="countries$ | async"
-        >
-        </self-service-foreign-step-two-tab-four>
-      </mat-tab>
+      <ng-container *ngIf="!isRenewLicense">
+        <mat-tab label="GRANTION TEACHING LICENSES">
+          <self-service-foreign-step-two-tab-four
+            formControlName="grantionLicenseForm"
+            [countryList]="countries$ | async"
+          >
+          </self-service-foreign-step-two-tab-four> </mat-tab
+      ></ng-container>
+
+      <ng-container *ngIf="isRenewLicense">
+        <mat-tab label="Licensure Information">
+          <self-service-foreign-step-two-tab-four-renew></self-service-foreign-step-two-tab-four-renew></mat-tab
+      ></ng-container>
     </mat-tab-group>
   </div>
 </form>

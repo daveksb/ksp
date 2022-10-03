@@ -66,6 +66,7 @@ export class ForeignLicenseStepTwoComponent
   }
   @Input() academicFiles: any[] = [];
   @Input() uniqueTimestamp!: string;
+  @Input() isRenewLicense = false;
 
   prefixList$!: Observable<any>;
   provinces1$!: Observable<any>;
