@@ -159,4 +159,11 @@ export class UniInfoService {
       tokenkey: this.tokenKey,
     });
   }
+
+  uniRequestDegreeCertSelectUniDegreeCertId(unidegreecertid: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/kspuni/unirequestdegreecertselectunidegreecertid`, {
+      unidegreecertid,
+      tokenkey: this.tokenKey,
+    });
+  }
 }

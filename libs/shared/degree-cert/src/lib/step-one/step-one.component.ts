@@ -56,6 +56,7 @@ export class DegreeCertStepOneComponent
     locations2: this.fb.array([]),
     coordinator: [],
     courseDetailType: [],
+    courseDetail: [],
     section1: [false],
     section2: [false],
     section3: [false],
@@ -142,14 +143,10 @@ export class DegreeCertStepOneComponent
       .subscribe((res) => {
         //console.log('form value = ', res);
       });
-
-    this.form.controls['courseType'].valueChanges
-      .pipe(skip(1), untilDestroyed(this))
-      .subscribe((res) => {
-        this.loadComponent(Number(res));
-      });
   }
-
+  get courseDetailType() {
+    return this.form.controls.courseDetailType.value;
+  }
   onDegreeTypeChanged(degreeType: string) {
     this.degreeType.emit(degreeType);
   }
@@ -163,13 +160,6 @@ export class DegreeCertStepOneComponent
     form.removeAt(index);
   }
 
-  loadComponent(index: number) {
-    const viewContainerRef = this.myHost.viewContainerRef;
-    viewContainerRef.clear();
-    viewContainerRef.createComponent<DynamicComponent>(
-      this.service.componentList[--index]
-    );
-  }
 
   get locations() {
     return this.form.controls['locations'] as FormArray;
