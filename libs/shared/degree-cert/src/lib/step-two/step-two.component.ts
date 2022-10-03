@@ -61,18 +61,18 @@ export class DegreeCertStepTwoComponent extends KspFormBaseComponent {
   }
 
   get section1() {
-    return !!(!this.form.controls?.section1?.value && this.showEditCheckbox);
+    return !!(!this.form.controls?.section1?.value && this.showEditCheckbox) &&this.mode !== 'view'
   }
   get section2() {
-    return !!(!this.form.controls?.section2?.value && this.showEditCheckbox);
+    return !!(!this.form.controls?.section2?.value && this.showEditCheckbox) &&this.mode !== 'view'
   }
   get section3() {
-    return !!(!this.form.controls?.section3?.value && this.showEditCheckbox);
+    return !!(!this.form.controls?.section3?.value && this.showEditCheckbox) &&this.mode !== 'view'
   }
   get section4() {
-    return !!(!this.form.controls?.section4?.value && this.showEditCheckbox);
+    return !!(!this.form.controls?.section4?.value && this.showEditCheckbox) &&this.mode !== 'view'
   }
   get section5() {
-    return !!(!this.form.controls?.section5?.value && this.showEditCheckbox);
+    return !!(!this.form.controls?.section5?.value && this.showEditCheckbox) &&this.mode !== 'view'
   }
 }
