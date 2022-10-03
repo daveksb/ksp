@@ -1,29 +1,33 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-
+import { EthicsService } from '@ksp/shared/service';
+import { EMPTY, switchMap, zip } from 'rxjs';
+import localForage from 'localforage';
 @Component({
   selector: 'e-service-inquiry-main',
   templateUrl: './inquiry-main.component.html',
   styleUrls: ['./inquiry-main.component.scss'],
 })
-export class InquiryMainComponent {
+export class InquiryMainComponent implements OnInit {
   form = this.fb.group({
     inquiry: [],
-    rulingInform: [],
+    inquiryresult: [],
     accusation: [],
     investigation: [],
   });
-
+  ethicsId: any;
   constructor(
     private router: Router,
     public dialog: MatDialog,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private service: EthicsService,
+    private route: ActivatedRoute
   ) {}
 
   cancel() {
@@ -39,11 +43,32 @@ export class InquiryMainComponent {
       },
     });
 
-    confirmDialog.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        this.onCompleted();
-      }
-    });
+    confirmDialog.componentInstance.confirmed
+      .pipe(
+        switchMap((res) => {
+          if (res) {
+            const payload = this.form.value.inquiry as any;
+            if (payload) {
+              payload.id = this.ethicsId;
+              payload.inquiryresult = JSON.stringify(payload.inquiryresult);
+            }
+            const payload2 = this.form.value.inquiryresult as any;
+            if (payload2) {
+              payload2.id = this.ethicsId;
+            }
+            return zip(
+              this.service.updateEthicsInquiry(payload),
+              this.service.updateEthicsResult(payload2)
+            );
+          }
+          return EMPTY;
+        })
+      )
+      .subscribe((res) => {
+        if (res) {
+          this.onCompleted();
+        }
+      });
   }
 
   onCompleted() {
@@ -61,6 +86,20 @@ export class InquiryMainComponent {
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
         this.cancel();
+      }
+    });
+  }
+  ngOnInit(): void {
+    this.checkRequestId();
+  }
+  checkRequestId() {
+    this.route.paramMap.subscribe((params) => {
+      this.ethicsId = Number(params.get('id'));
+
+      if (this.ethicsId) {
+        localForage.getItem('registerEthicsInfoValue').then((data: any) => {
+          this.form.controls.accusation.patchValue(data);
+        });
       }
     });
   }

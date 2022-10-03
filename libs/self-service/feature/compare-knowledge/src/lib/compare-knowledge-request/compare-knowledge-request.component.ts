@@ -90,6 +90,11 @@ export class CompareKnowledgeRequestComponent
     this.checkRequestId();
   }
 
+  override resetForm() {
+    super.resetForm();
+    this.objectiveFiles = structuredClone(OBJECTIVE_FILES);
+  }
+
   override initializeFiles(): void {
     super.initializeFiles();
     this.objectiveFiles = structuredClone(OBJECTIVE_FILES);

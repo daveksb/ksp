@@ -100,6 +100,12 @@ export class LicenseRequestEducationManagerComponent
     this.checkRequestId();
   }
 
+  override resetForm() {
+    super.resetForm();
+    this.eduFiles = structuredClone(EDU_FILES);
+    this.experienceFiles = structuredClone(EXPERIENCE_FILES);
+  }
+
   override initializeFiles() {
     super.initializeFiles();
     this.eduFiles = structuredClone(EDU_FILES);

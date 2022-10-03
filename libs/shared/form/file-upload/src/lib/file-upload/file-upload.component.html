@@ -24,7 +24,7 @@
   class="fs-6 text-secondary text-decoration-underline">{{ fileName }}</span>
 
 <i
-  *ngIf="file && !isImage"
+  *ngIf="showDeleteFile && file && !isImage"
   (click)="deleteFile()"
   class="bi bi-x-circle-fill text-danger fs-6 ms-2"
   role="button"></i>

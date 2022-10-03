@@ -12,9 +12,9 @@ import {
   RequestHeaderInfoComponent,
 } from '@ksp/shared/ui';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
-import { providerFactory } from '@ksp/shared/utility';
+import { providerFactory, thaiDate } from '@ksp/shared/utility';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { decisions, KspFormBaseComponent } from '@ksp/shared/interface';
 
 @Component({
   selector: 'e-service-form-investigation-detail',
@@ -40,15 +40,20 @@ export class FormInvestigationDetailComponent extends KspFormBaseComponent {
   @Input() hideAllButtons = false;
   @Input() hideContainer = false;
   @Input() hideTitle = false;
-
+  today = thaiDate(new Date());
+  requestNumber = '';
   override form = this.fb.group({
-    orderNumber: [],
-    date: [],
-    investigateDate: [],
-    ReportDate: [],
-    reportResult: [],
-    decisions: [],
-    causeDetail: [],
+    investigationorderno: [],
+    investigationorderdate: [],
+    investigationsubcommittee: [],
+    investigationdate: [],
+    investigationreportdate: [],
+    investigationreport: [],
+    investigationfile: [],
+    investigationresult: this.fb.group({
+      decisions: [],
+      causedetail: [],
+    }),
   });
 
   decisions = decisions;
@@ -64,26 +69,3 @@ export class FormInvestigationDetailComponent extends KspFormBaseComponent {
     );
   }
 }
-
-export const decisions = [
-  {
-    label: 'มีมูลความผิด วินิจฉัยชี้ขาดความผิดเล็กน้อย',
-    name: 'decisions',
-    value: 1,
-  },
-  {
-    label: 'ตักเตือน / ภาคภัณฑ์ (ต้องเลือกอย่างใดอย่างหนึ่งเสมอ)',
-    name: 'decisions',
-    value: 2,
-  },
-  {
-    label: 'มีมูลความผิด นำเสนอคณะกรรมการตั้งคณะอนุกรรมการสอบสวน',
-    name: 'decisions',
-    value: 3,
-  },
-  {
-    label: 'ไม่มีมูล ยุติเรื่อง ยกข้อกล่าวหา',
-    name: 'decisions',
-    value: 4,
-  },
-];

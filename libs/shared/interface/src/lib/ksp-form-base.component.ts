@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Component, Input, OnChanges } from '@angular/core';
-import { ControlValueAccessor, FormGroup } from '@angular/forms';
+import {
+  ControlValueAccessor,
+  FormArray,
+  FormControl,
+  FormGroup,
+} from '@angular/forms';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { FormMode } from './form';
 
@@ -48,7 +53,23 @@ export abstract class KspFormBaseComponent
   }
 
   set value(value: any) {
-    this.form.patchValue(value);
+    for (const key in this.form.controls) {
+      if (this.form.controls[key] instanceof FormControl) {
+        // normal formControl
+        this.form.controls[key].patchValue(value[key]);
+      } else if (this.form.controls[key] instanceof FormArray) {
+        // loop into fromArray to patch value
+        const formArray = this.form.controls[key] as FormArray;
+        for (let i = 0; i < formArray.controls.length; i++) {
+          const formGroup = formArray.controls[i] as FormGroup;
+          for (const subkey in formGroup) {
+            if (value[key] && value[key][i] && value[key][i][subkey]) {
+              formGroup.controls[subkey].patchValue(value[key][i][subkey]);
+            }
+          }
+        }
+      }
+    }
     this.onChange(value);
     this.onTouched();
   }

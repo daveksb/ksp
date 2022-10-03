@@ -45,16 +45,8 @@ export class InquiryListComponent implements OnInit {
     console.log(' ');
   }
 
-  onSubmit(submitType: boolean) {
-    if (submitType) {
-      this.dataSource.data = data;
-    } else {
-      this.dataSource.data = [];
-    }
-  }
-
-  next() {
-    this.router.navigate(['inquiry', 'detail']);
+  onSubmit(id: any) {
+    this.router.navigate(['inquiry', 'detail', id]);
   }
 }
 

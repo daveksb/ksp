@@ -34,6 +34,10 @@ export const routes: Routes = [
         path: 'detail',
         component: PublishReviewComponent,
       },
+      {
+        path: 'detail/:id',
+        component: PublishReviewComponent,
+      },
     ],
   },
 ];

@@ -20,6 +20,8 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { levels, subjects, UserInfoFormType } from '@ksp/shared/constant';
+import { FormMode } from '@ksp/shared/interface';
+import localForage from 'localforage';
 
 @UntilDestroy()
 @Component({
@@ -28,7 +30,6 @@ import { levels, subjects, UserInfoFormType } from '@ksp/shared/constant';
 })
 export class AddStaffComponent implements OnInit {
   staffId!: number;
-
   countries$!: Observable<any>;
   provinces$!: Observable<any>;
   amphurs1$!: Observable<any>;
@@ -41,7 +42,7 @@ export class AddStaffComponent implements OnInit {
   academicTypes$!: Observable<any>;
   schoolId = '0010201056';
   today = thaiDate(new Date());
-  mode: 'view' | 'edit' | 'add' = 'add';
+  mode: FormMode = 'edit';
   userInfoType = UserInfoFormType.thai;
   form = this.fb.group({
     userInfo: [],
@@ -112,17 +113,27 @@ export class AddStaffComponent implements OnInit {
   }
 
   checkMode() {
-    this.router.events.pipe(untilDestroyed(this)).subscribe((event: Event) => {
-      if (event instanceof NavigationEnd) {
-        if (event.url.includes('view-staff')) {
-          this.mode = 'view';
-          this.form.disable();
-        } else if (event.url.includes('edit-staff')) {
-          this.mode = 'edit';
-        } else {
-          this.mode = 'add';
-        }
-      }
+    if (this.router.url.includes('add-staff-has-license')) {
+      this.mode = 'edit';
+      this.patchDataFromLicense();
+    } else if (this.router.url.includes('view-staff')) {
+      console.log('view mode');
+      this.mode = 'view';
+      this.form.disable();
+    } else {
+      console.log('edit mode');
+      this.mode = 'edit';
+    }
+  }
+
+  /**
+   * * this person has license patch data from indexedDB
+   */
+  patchDataFromLicense() {
+    localForage.getItem('add-staff-has-license').then((res: any) => {
+      console.log('stored data = ', res);
+      this.form.controls.userInfo.patchValue(res);
+      //this.pathUserInfo(res);
     });
   }
 
@@ -289,14 +300,6 @@ export class AddStaffComponent implements OnInit {
     });
   }
 
-  get addr1() {
-    return this.form.controls.addr1;
-  }
-
-  get addr2() {
-    return this.form.controls.addr2;
-  }
-
   patchEdu(edus: any[]) {
     //console.log('edus = ', edus);
     if (edus && edus.length) {
@@ -327,5 +330,13 @@ export class AddStaffComponent implements OnInit {
         }
       });
     }
+  }
+
+  get addr1() {
+    return this.form.controls.addr1;
+  }
+
+  get addr2() {
+    return this.form.controls.addr2;
   }
 }
