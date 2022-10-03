@@ -109,6 +109,12 @@ export class LicenseRequestComponent
     this.checkRequestId();
   }
 
+  override resetForm() {
+    super.resetForm();
+    this.eduFiles = structuredClone(this.service.educationFiles);
+    this.experienceFiles = structuredClone(this.service.experienceFiles);
+  }
+
   override initializeFiles() {
     this.uniqueTimestamp = uuidv4();
     this.eduFiles = structuredClone(this.service.educationFiles);

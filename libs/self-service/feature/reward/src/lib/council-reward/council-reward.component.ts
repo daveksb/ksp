@@ -100,11 +100,6 @@ export class CouncilRewardComponent
       } else if (addrType === 2) {
         this.amphurs2$ = this.addressService.getAmphurs(province);
       }
-      // else if (addrType === 3) {
-      //   this.amphurs3$ = this.addressService.getAmphurs(province);
-      // } else if (addrType === 4) {
-      //   this.amphurs4$ = this.addressService.getAmphurs(province);
-      // }
     }
   }
 
@@ -116,11 +111,16 @@ export class CouncilRewardComponent
       } else if (addrType === 2) {
         this.tumbols2$ = this.addressService.getTumbols(amphur);
       }
-      // else if (addrType === 3) {
-      //   this.tumbols3$ = this.addressService.getTumbols(amphur);
-      // } else if (addrType === 4) {
-      //   this.tumbols4$ = this.addressService.getTumbols(amphur);
-      // }
+    }
+  }
+
+  useSameAddress(evt: any) {
+    const checked = evt.target.checked;
+    if (checked) {
+      this.amphurs2$ = this.amphurs1$;
+      this.tumbols2$ = this.tumbols1$;
+      this.provinces2$ = this.provinces1$;
+      this.form.controls.address2.patchValue(this.form.controls.address1.value);
     }
   }
 }

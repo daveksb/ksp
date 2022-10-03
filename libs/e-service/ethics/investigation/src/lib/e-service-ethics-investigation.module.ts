@@ -30,6 +30,10 @@ export const routes: Routes = [
         path: 'detail',
         component: InvestigationDetailComponent,
       },
+      {
+        path: 'detail/:id',
+        component: InvestigationDetailComponent,
+      },
     ],
   },
 ];

@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Router } from '@angular/router';
 import { SelfLicense } from '@ksp/shared/constant';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
 
 @Component({
   selector: 'ksp-license-info',
   templateUrl: './license-info.component.html',
   styleUrls: ['./license-info.component.scss'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ThaiDatePipe],
 })
 export class LicenseInfoComponent {
   @Input() isLicenseRevoked = false;
@@ -18,12 +18,9 @@ export class LicenseInfoComponent {
   @Input() license: SelfLicense | null = null;
   @Output() selected = new EventEmitter<string>();
 
-  constructor(private router: Router) {}
-
-  select(idcardno: string | null | undefined) {
-    if (idcardno) {
-      this.selected.emit(idcardno);
+  select(licenseno: string | null | undefined) {
+    if (licenseno) {
+      this.selected.emit(licenseno);
     }
-    //this.router.navigate(['/staff-management', 'add-staff']);
   }
 }

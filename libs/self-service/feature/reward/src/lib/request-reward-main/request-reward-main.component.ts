@@ -390,6 +390,7 @@ export class RequestRewardMainComponent implements OnInit {
     userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
     userInfo.uniquetimestamp = this.uniqueTimestamp;
     userInfo.staffid = getCookie('userId');
+    userInfo.addressinfo = null;
     const selectData = _.pick(userInfo, allowKey);
     const rewardfiles = this.rewardFiles;
     console.log(rewardfiles);

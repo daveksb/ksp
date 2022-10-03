@@ -1,28 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-
+import { EthicsService } from '@ksp/shared/service';
+import localForage from 'localforage';
+import { EMPTY, switchMap } from 'rxjs';
 @Component({
   selector: 'e-service-investigation-main',
   templateUrl: './investigation-detail.component.html',
   styleUrls: ['./investigation-detail.component.scss'],
 })
-export class InvestigationDetailComponent {
+export class InvestigationDetailComponent implements OnInit {
   form = this.fb.group({
     accusation: [],
     invsetigation: [],
   });
-
+  ethicsId: any;
   constructor(
     private router: Router,
     public dialog: MatDialog,
-    private fb: FormBuilder
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private service: EthicsService
   ) {}
+  ngOnInit(): void {
+    this.checkRequestId();
+  }
   cancel() {
     //this.form.valueChanges.subscribe((res) => console.log(' res = ', res));
     this.router.navigate(['/', 'accusation']);
@@ -37,11 +44,27 @@ export class InvestigationDetailComponent {
       },
     });
 
-    confirmDialog.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        this.onCompleted();
-      }
-    });
+    confirmDialog.componentInstance.confirmed
+      .pipe(
+        switchMap((res) => {
+          if (res) {
+            const payload = this.form.value.invsetigation as any;
+            payload.investigationresult = JSON.stringify(
+              payload.investigationresult
+            );
+            payload.id = this.ethicsId;
+            return this.service.updateEthicsInvestigation(
+              this.form.value.invsetigation
+            );
+          }
+          return EMPTY;
+        })
+      )
+      .subscribe((res) => {
+        if (res) {
+          this.onCompleted();
+        }
+      });
   }
 
   onCompleted() {
@@ -59,6 +82,21 @@ export class InvestigationDetailComponent {
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
         this.router.navigate(['/', 'investigation']);
+      }
+    });
+  }
+  checkRequestId() {
+    this.route.paramMap.subscribe((params) => {
+      this.ethicsId = Number(params.get('id'));
+      if (this.ethicsId) {
+        localForage
+          .getItem('registerEthicsInfoValue')
+          .then((data: any) => {
+            console.log(data);
+            // this.formComponents.addRow();
+            this.form.controls.accusation.patchValue(data);
+          })
+          .catch((res) => console.log(res));
       }
     });
   }

@@ -112,6 +112,12 @@ export class LicenseRequestStudySupervisionComponent
     this.checkRequestId();
   }
 
+  override resetForm() {
+    super.resetForm();
+    this.eduFiles = structuredClone(EDU_FILES);
+    this.experienceFiles = structuredClone(EXPERIENCE_FILES);
+  }
+
   override initializeFiles() {
     super.initializeFiles();
     this.experienceFiles = structuredClone(EXPERIENCE_FILES);

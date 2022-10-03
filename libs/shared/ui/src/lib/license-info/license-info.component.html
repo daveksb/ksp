@@ -31,9 +31,9 @@
         <div>{{ license?.licensetype }}</div>
         <div>{{ license?.firstnameth }} {{ license?.lastnameth }}</div>
         <div>{{ license?.firstnameen }} {{ license?.firstnameen }}</div>
-        <div>xxxx</div>
-        <div>{{ license?.licensestartdate | date }}</div>
-        <div>{{ license?.licenseenddate | date }}</div>
+        <div>-</div>
+        <div>{{ license?.licensestartdate | thaiDate }}</div>
+        <div>{{ license?.licenseenddate | thaiDate }}</div>
       </div>
     </div>
   </div>
@@ -45,7 +45,7 @@
     <button
       type="button"
       class="btn border-success text-success"
-      (click)="select(license?.idcardno)"
+      (click)="select(license?.licenseno)"
     >
       เลือก
     </button>

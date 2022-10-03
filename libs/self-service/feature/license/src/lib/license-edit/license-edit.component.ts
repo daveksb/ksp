@@ -118,6 +118,7 @@ export class LicenseEditComponent implements OnInit {
     console.log(data);
     if (data.replacereasoninfo) {
       const replaceReasonInfo = parseJson(data.replacereasoninfo);
+      console.log(replaceReasonInfo);
       this.form.controls.userInfo.patchValue(replaceReasonInfo);
     }
 
