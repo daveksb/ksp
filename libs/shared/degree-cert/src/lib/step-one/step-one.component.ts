@@ -143,7 +143,7 @@ export class DegreeCertStepOneComponent
         //console.log('form value = ', res);
       });
 
-    this.form.controls['courseType'].valueChanges
+    this.form.controls['courseDetailType'].valueChanges
       .pipe(skip(1), untilDestroyed(this))
       .subscribe((res) => {
         this.loadComponent(Number(res));
@@ -164,6 +164,7 @@ export class DegreeCertStepOneComponent
   }
 
   loadComponent(index: number) {
+    console.log(index)
     const viewContainerRef = this.myHost.viewContainerRef;
     viewContainerRef.clear();
     viewContainerRef.createComponent<DynamicComponent>(
