@@ -64,11 +64,11 @@ export class DegreeCertStepOneComponent
     section5: [false],
     section6: [false],
   });
-
-  step1Incorrect = [
-    'ไม่ครบถ้วน และไม่ถูกต้อง',
-    'หมายเหตุ ข้อมูลมคอ. 2 ไม่ถูกต้อง',
-  ];
+  step1Incorrect = null;
+  // step1Incorrect = [
+  //   'ไม่ครบถ้วน และไม่ถูกต้อง',
+  //   'หมายเหตุ ข้อมูลมคอ. 2 ไม่ถูกต้อง',
+  // ];
 
   constructor(
     private fb: FormBuilder,
