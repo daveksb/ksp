@@ -46,6 +46,7 @@ import { RenewLicenseForeignTeacherComponent } from './renew-license-foreign-tea
 import { RenewLicenseForeignNonTeacherComponent } from './renew-license-foreign-non-teacher/renew-license-foreign-non-teacher.component';
 import { TestResultTableComponent } from '@ksp/self-service/ui';
 import { FormUserTrainingWorkplaceComponent } from './form-user-training-workplace/form-user-training-workplace.component';
+import { ForeignStepTwoTabFourRenewComponent } from './foreign-step-two-tab-four-renew/foreign-step-two-tab-four-renew.component';
 
 @NgModule({
   imports: [
@@ -98,6 +99,7 @@ import { FormUserTrainingWorkplaceComponent } from './form-user-training-workpla
     RenewLicenseForeignTeacherComponent,
     RenewLicenseForeignNonTeacherComponent,
     FormUserTrainingWorkplaceComponent,
+    ForeignStepTwoTabFourRenewComponent,
   ],
   exports: [
     FormUserEducationComponent,
@@ -124,6 +126,7 @@ import { FormUserTrainingWorkplaceComponent } from './form-user-training-workpla
     RenewLicenseForeignTeacherComponent,
     RenewLicenseForeignNonTeacherComponent,
     FormUserTrainingWorkplaceComponent,
+    ForeignStepTwoTabFourRenewComponent,
   ],
 })
 export class SelfServiceFormModule {}

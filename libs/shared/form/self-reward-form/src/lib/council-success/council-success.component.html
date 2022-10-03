@@ -4,14 +4,16 @@
   </div>
   <ng-container formArrayName="standardInfo">
     <ng-container
-      *ngFor="let DegreeForm of standardInfo.controls; let i = index">
+      *ngFor="let DegreeForm of standardInfo.controls; let i = index"
+    >
       <ng-container [formGroupName]="i">
         <div class="border rounded px-3 py-2">
-          <div class="d-flex justify-content-end">
+          <div class="d-flex justify-content-end" *ngIf="i > 0">
             <i
               class="bi bi-x-circle-fill text-danger"
               (click)="deleteFormArray(standardInfo, i)"
-              role="button"></i>
+              role="button"
+            ></i>
           </div>
           <div class="row">
             <div class="col-md-6 mb-2">
@@ -25,7 +27,11 @@
             </div>
             <div class="col-md-6 mb-2">
               <label class="form-label">รายละเอียด</label>
-              <input class="form-control" type="text" formControlName="details" />
+              <input
+                class="form-control"
+                type="text"
+                formControlName="details"
+              />
             </div>
           </div>
         </div>
@@ -36,6 +42,8 @@
   <div class="d-flex justify-content-end">
     <ksp-add-row-button
       class="text-primary"
-      (addRowClick)="addFormArray(standardInfo)">เพิ่มข้อมูลรายงานผลสำเร็จ</ksp-add-row-button>
+      (addRowClick)="addFormArray(standardInfo)"
+      >เพิ่มข้อมูลรายงานผลสำเร็จ</ksp-add-row-button
+    >
   </div>
 </form>

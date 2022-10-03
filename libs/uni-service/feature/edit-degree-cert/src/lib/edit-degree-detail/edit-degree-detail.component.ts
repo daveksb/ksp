@@ -241,12 +241,26 @@ export class EditDegreeDetailComponent implements OnInit {
     };
 
     returnData['step2Section1'] = {
-      courseplan: step2?.plan1?.subjects
-        ? JSON.stringify(step2?.plan1?.subjects)
-        : null,
-      coursestructure: step2?.plan1?.plans
-        ? JSON.stringify(step2?.plan1?.plans)
-        : null,
+      ...(()=>{
+        const reqBody:any = {};
+        if (['a', 'b', 'c'].includes(this.step1DegreeType)) {
+          reqBody['coursestructure'] = step2?.plan1?.plans
+            ? JSON.stringify(step2?.plan1?.plans)
+            : null;
+    
+          reqBody['courseplan'] = step2?.plan1?.subjects
+            ? JSON.stringify(step2?.plan1?.subjects)
+            : null;
+        } else {
+          reqBody['coursestructure'] = step2?.plan2?.plans
+            ? JSON.stringify(step2?.plan2?.plans)
+            : null;
+          reqBody['courseplan'] = step2?.plan2?.subjects
+            ? JSON.stringify(step2?.plan2?.subjects)
+            : null;
+        }
+        return reqBody;
+      })()
     };
 
     returnData['step2Section2'] = {

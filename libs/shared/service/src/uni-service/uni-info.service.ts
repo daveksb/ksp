@@ -189,4 +189,11 @@ export class UniInfoService {
       }
     );
   }
+
+  uniRequestDegreeCertSelectUniDegreeCertId(unidegreecertid: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/kspuni/unirequestdegreecertselectunidegreecertid`, {
+      unidegreecertid,
+      tokenkey: this.tokenKey,
+    });
+  }
 }

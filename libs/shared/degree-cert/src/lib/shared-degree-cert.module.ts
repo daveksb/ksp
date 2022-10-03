@@ -22,6 +22,7 @@ import {
 import { TopNavComponent } from '@ksp/shared/menu';
 import { DegreeCertSearchComponent } from '@ksp/shared/search';
 import { RouterModule } from '@angular/router';
+import { SharedFormUniCourseFormModule } from '@ksp/shared/form/uni-course-form';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { RouterModule } from '@angular/router';
     TopNavComponent,
     DegreeCertSearchComponent,
     UniWarnIncorrectComponent,
-    FormsModule
+    FormsModule,
+    SharedFormUniCourseFormModule,
   ],
   declarations: [
     DegreeCertStepOneComponent,

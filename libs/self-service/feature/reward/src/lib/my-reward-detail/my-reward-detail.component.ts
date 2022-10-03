@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'ksp-my-reward-detail',
@@ -7,9 +7,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./my-reward-detail.component.scss'],
 })
 export class MyRewardDetailComponent implements OnInit {
-  constructor(private router: Router) {}
+  requestId?: number;
 
-  ngOnInit(): void {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((params) => {
+      this.requestId = Number(params.get('id'));
+      console.log('res = ', params);
+    });
+  }
 
   back() {
     this.router.navigate(['/reward', 'list']);

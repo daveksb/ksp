@@ -4,40 +4,65 @@
     <ng-container *ngFor="let DegreeForm of workInfo.controls; let i = index">
       <ng-container [formGroupName]="i">
         <div class="border rounded px-3 py-2">
-          <div class="d-flex justify-content-end">
+          <div class="d-flex justify-content-end" *ngIf="i > 0">
             <i
               class="bi bi-x-circle-fill text-danger"
               (click)="deleteFormArray(workInfo, i)"
-              role="button"></i>
+              role="button"
+            ></i>
           </div>
           <div class="row">
             <div class="col-md-6 mb-2">
               <label class="form-label">ตำแหน่ง</label>
-              <input class="form-control" type="text" formControlName="position" />
+              <input
+                class="form-control"
+                type="text"
+                formControlName="position"
+              />
             </div>
             <div class="col-md-6 mb-2">
               <label class="form-label">วิทยฐานะ</label>
-              <input class="form-control" type="text" formControlName="academicStanding" />
+              <input
+                class="form-control"
+                type="text"
+                formControlName="academicStanding"
+              />
             </div>
           </div>
           <div class="row">
             <div class="col-md-6 mb-2">
               <label class="form-label">สถานภาพ/ตำแหน่ง</label>
-              <input class="form-control" type="text" formControlName="status" />
+              <input
+                class="form-control"
+                type="text"
+                formControlName="status"
+              />
             </div>
             <div class="col-md-6 mb-2">
               <label class="form-label">ปีที่เริ่มเข้า</label>
-              <input class="form-control" type="text" formControlName="startYear" />
+              <input
+                class="form-control"
+                type="text"
+                formControlName="startYear"
+              />
             </div>
           </div>
           <div class="row">
             <div class="col-md-6 mb-2">
               <label class="form-label">เงินเดือน</label>
-              <input class="form-control" type="text" formControlName="salary" />
+              <input
+                class="form-control"
+                type="text"
+                formControlName="salary"
+              />
             </div>
             <div class="col-md-6 mb-2">
               <label class="form-label">งานที่ได้รับมอบหมาย </label>
-              <input class="form-control" type="text" formControlName="assignment" />
+              <input
+                class="form-control"
+                type="text"
+                formControlName="assignment"
+              />
             </div>
           </div>
           <div class="row">
@@ -47,17 +72,31 @@
             </div>
             <div class="col-md-6 mb-2">
               <label class="form-label">คุณวุฒิ / ใบรับรองผล </label>
-              <input class="form-control" type="text" formControlName="qualification" />
+              <input
+                class="form-control"
+                type="text"
+                formControlName="qualification"
+              />
             </div>
           </div>
           <div class="row">
             <div class="col-md-6 mb-2">
-              <label class="form-label">ความคิดริเริ่มสร้างสรรค์ในการปฏิบัติวิชาชีพ</label>
-              <input class="form-control" type="text" formControlName="creativity" />
+              <label class="form-label"
+                >ความคิดริเริ่มสร้างสรรค์ในการปฏิบัติวิชาชีพ</label
+              >
+              <input
+                class="form-control"
+                type="text"
+                formControlName="creativity"
+              />
             </div>
             <div class="col-md-6 mb-2">
               <label class="form-label">ความสำเร็จหรือการยกย่องที่ได้รับ</label>
-              <input class="form-control" type="text" formControlName="achievement" />
+              <input
+                class="form-control"
+                type="text"
+                formControlName="achievement"
+              />
             </div>
           </div>
         </div>
@@ -68,6 +107,8 @@
   <div class="d-flex justify-content-end">
     <ksp-add-row-button
       class="text-primary"
-      (addRowClick)="addFormArray(workInfo)">เพิ่มข้อมูลการทำงาน</ksp-add-row-button>
+      (addRowClick)="addFormArray(workInfo)"
+      >เพิ่มข้อมูลการทำงาน</ksp-add-row-button
+    >
   </div>
 </form>

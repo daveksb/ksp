@@ -77,6 +77,7 @@ export class DegreeCertRequestComponent {
   }
 
   save() {
+    return console.log(this.step1Form.value)
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -215,7 +216,10 @@ export class DegreeCertRequestComponent {
       courseapprovetime: step1?.degreeTypeForm?.courseApproveTime || null,
       courseapprovedate: step1?.degreeTypeForm?.courseApproveDate || null,
       courseacceptdate: step1?.degreeTypeForm?.courseAcceptDate || null,
-      coursedetailtype: step1?.courseDetailType || null,
+      // coursedetailtype: step1?.courseDetailType || null,
+      // coursefieldofstudy:step1?.major1 || null,
+      // coursesubjects:step1?.major2 || null,
+
       teachinglocation: step1?.locations
         ? JSON.stringify(step1?.locations)
         : null,
@@ -227,12 +231,6 @@ export class DegreeCertRequestComponent {
         : null,
       coordinatorinfo: step1?.coordinator
         ? JSON.stringify(step1?.coordinator)
-        : null,
-      coursestructure: step2?.plan1?.plans
-        ? JSON.stringify(step2?.plan1?.plans)
-        : null,
-      courseplan: step2?.plan1?.subjects
-        ? JSON.stringify(step2?.plan1?.subjects)
         : null,
       courseteacher: step2?.teacher?.teachers
         ? JSON.stringify(step2?.teacher?.teachers)
@@ -251,10 +249,25 @@ export class DegreeCertRequestComponent {
         : null,
       tokenkey: getCookie('userToken') || null,
     };
+    if (['a', 'b', 'c'].includes(this.step1DegreeType)) {
+      reqBody['coursestructure'] = step2?.plan1?.plans
+        ? JSON.stringify(step2?.plan1?.plans)
+        : null;
+
+      reqBody['courseplan'] = step2?.plan1?.subjects
+        ? JSON.stringify(step2?.plan1?.subjects)
+        : null;
+    } else {
+      reqBody['coursestructure'] = step2?.plan2?.plans
+        ? JSON.stringify(step2?.plan2?.plans)
+        : null;
+      reqBody['courseplan'] = step2?.plan2?.subjects
+        ? JSON.stringify(step2?.plan2?.subjects)
+        : null;
+    }
     if (this.id) {
       reqBody['id'] = this.id;
     }
-
     return reqBody;
   }
   showConfirmDialog(requestno?: string) {
