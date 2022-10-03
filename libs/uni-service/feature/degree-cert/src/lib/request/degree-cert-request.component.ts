@@ -228,12 +228,6 @@ export class DegreeCertRequestComponent {
       coordinatorinfo: step1?.coordinator
         ? JSON.stringify(step1?.coordinator)
         : null,
-      coursestructure: step2?.plan1?.plans
-        ? JSON.stringify(step2?.plan1?.plans)
-        : null,
-      courseplan: step2?.plan1?.subjects
-        ? JSON.stringify(step2?.plan1?.subjects)
-        : null,
       courseteacher: step2?.teacher?.teachers
         ? JSON.stringify(step2?.teacher?.teachers)
         : null,
@@ -251,10 +245,25 @@ export class DegreeCertRequestComponent {
         : null,
       tokenkey: getCookie('userToken') || null,
     };
+    if (['a', 'b', 'c'].includes(this.step1DegreeType)) {
+      reqBody['coursestructure'] = step2?.plan1?.plans
+        ? JSON.stringify(step2?.plan1?.plans)
+        : null;
+
+      reqBody['courseplan'] = step2?.plan1?.subjects
+        ? JSON.stringify(step2?.plan1?.subjects)
+        : null;
+    } else {
+      reqBody['coursestructure'] = step2?.plan2?.plans
+        ? JSON.stringify(step2?.plan2?.plans)
+        : null;
+      reqBody['courseplan'] = step2?.plan2?.subjects
+        ? JSON.stringify(step2?.plan2?.subjects)
+        : null;
+    }
     if (this.id) {
       reqBody['id'] = this.id;
     }
-
     return reqBody;
   }
   showConfirmDialog(requestno?: string) {
