@@ -57,7 +57,7 @@ export class AccusationRecordComponent
 {
   today = thaiDate(new Date());
   requestNumber = '';
-  accusationFiles = ACCUSATION_FILES;
+  accusationFiles: any[] = structuredClone(ACCUSATION_FILES);
   uniqueTimestamp: any;
   override form = this.fb.group({
     accusationblackno: [null, Validators.required],
@@ -95,7 +95,6 @@ export class AccusationRecordComponent
   addRow(data: EhicsMember = defaultEhicsMember) {
     const rewardForm = this.fb.group({
       idcardno: [data.idcardno],
-      prefix: [data.prefix],
       firstname: [data.firstname],
       lastname: [data.lastname],
       phone: [data.phone],

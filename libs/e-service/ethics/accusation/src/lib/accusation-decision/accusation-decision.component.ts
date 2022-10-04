@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,7 +15,7 @@ import _ from 'lodash';
   templateUrl: './accusation-decision.component.html',
   styleUrls: ['./accusation-decision.component.scss'],
 })
-export class AccusationDecisionComponent {
+export class AccusationDecisionComponent implements OnInit {
   decisions = decisions;
   today = thaiDate(new Date());
   ethicsId!: number;
@@ -33,6 +33,7 @@ export class AccusationDecisionComponent {
     accusationassignofficer: [''],
     accusationassigndate: [''],
     accuserinfo: [''],
+    accusationfile: [''],
     accusationconsideration: this.fb.group({
       decisions: [''],
       otherDetail: [''],
@@ -49,12 +50,15 @@ export class AccusationDecisionComponent {
 
   @Input() hideAllButtons = false;
 
+  ngOnInit() {
+    this.checkRequestId();
+  }
   cancel() {
     this.router.navigate(['/', 'accusation']);
   }
 
   back() {
-    this.router.navigate(['/', 'accusation', 'detail']);
+    this.router.navigate(['/', 'accusation', 'detail', this.ethicsId || null]);
   }
 
   save() {
@@ -68,7 +72,7 @@ export class AccusationDecisionComponent {
 
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.onCompleted();
+        this.saveEthics();
       }
     });
   }
@@ -78,7 +82,8 @@ export class AccusationDecisionComponent {
       if (this.ethicsId) {
         this.service.getEthicsByID({ id: this.ethicsId }).subscribe((res) => {
           const { accusationconsideration, ...payload } = res;
-          this.form.patchValue(payload);
+          const json = JSON.parse(accusationconsideration as string);
+          this.form.patchValue({ ...payload, accusationconsideration: json });
         });
       }
     });
@@ -87,18 +92,12 @@ export class AccusationDecisionComponent {
     const ethics = new Ethics();
     const allowKey = Object.keys(ethics);
     const data = this.form.value as any;
+    data.accusationconsideration = JSON.stringify(data.accusationconsideration);
     const selectData = _.pick(data, allowKey);
     if (this.ethicsId) {
       selectData['id'] = this.ethicsId;
       this.service.updateEthicsAccusation(selectData).subscribe((res) => {
-        console.log('save = ', res);
-      });
-    } else {
-      this.service.createEthics(selectData).subscribe((res) => {
-        const id = res.id;
-        if (id) {
-          this.router.navigate(['/accusation', 'detail', id]);
-        }
+        this.onCompleted();
       });
     }
   }
@@ -107,8 +106,8 @@ export class AccusationDecisionComponent {
       width: '375px',
       data: {
         header: `บึนทึกข้อมูลสำเร็จ`,
-        content: `เลขที่รายการ : 640120000123
-        วันที่ : 10 ตุลาคม 2656`,
+        content: `เลขที่รายการ : ${this.ethicsId}
+        วันที่ : ${this.today}`,
         subContent: 'ผู้บันทึกข้อมูล : นางสาวปาเจรา ไก่คลุก',
         buttonLabel: 'กลับสู่หน้าหลัก',
       },

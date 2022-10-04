@@ -146,3 +146,10 @@ export function mapFileInfo(fileList: any[]) {
     return object;
   });
 }
+export function jsonParse(object: string): any {
+  try {
+    return JSON.parse(object);
+  } catch (e) {
+    return null;
+  }
+}

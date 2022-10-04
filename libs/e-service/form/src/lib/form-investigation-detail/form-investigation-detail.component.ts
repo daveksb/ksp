@@ -13,8 +13,18 @@ import {
 } from '@ksp/shared/ui';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 import { providerFactory, thaiDate } from '@ksp/shared/utility';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { decisions, KspFormBaseComponent } from '@ksp/shared/interface';
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import {
+  decisions,
+  defaultSubcommittee,
+  EhicsSubcommittee,
+  KspFormBaseComponent,
+} from '@ksp/shared/interface';
 
 @Component({
   selector: 'e-service-form-investigation-detail',
@@ -45,7 +55,7 @@ export class FormInvestigationDetailComponent extends KspFormBaseComponent {
   override form = this.fb.group({
     investigationorderno: [],
     investigationorderdate: [],
-    investigationsubcommittee: [],
+    investigationsubcommittee: this.fb.array([] as FormGroup[]),
     investigationdate: [],
     investigationreportdate: [],
     investigationreport: [],
@@ -67,5 +77,23 @@ export class FormInvestigationDetailComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+  get members() {
+    return this.form.controls.investigationsubcommittee as FormArray;
+  }
+  addRow(data: EhicsSubcommittee = defaultSubcommittee) {
+    const rewardForm = this.fb.group({
+      idcardno: data.idcardno,
+      idnumber: data.idnumber,
+      positioncommittee: data.positioncommittee,
+      firstname: data.firstname,
+      lastname: data.lastname,
+      position: data.position,
+      bureau: data.bureau,
+    });
+    this.members.push(rewardForm);
+  }
+  deleteRow(index: number) {
+    this.members.removeAt(index);
   }
 }

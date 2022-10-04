@@ -83,8 +83,6 @@ export class AccusationSearchComponent extends KspFormBaseComponent {
     this.router.navigate(['accusation', 'detail']);
   }
   onClickRow(row: any) {
-    console.log('set');
-    localForage.setItem('registerEthicsInfoValue', row);
     this.submited.emit(row.id);
   }
 }

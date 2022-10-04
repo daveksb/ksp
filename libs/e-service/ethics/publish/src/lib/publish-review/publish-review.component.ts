@@ -89,8 +89,8 @@ export class PublishReviewComponent implements OnInit {
       this.ethicsId = Number(params.get('id'));
 
       if (this.ethicsId) {
-        localForage.getItem('registerEthicsInfoValue').then((data: any) => {
-          // this.form.controls.accusation.patchValue(data);
+        this.service.getEthicsByID({ id: this.ethicsId }).subscribe((res) => {
+          console.log(res);
         });
       }
     });

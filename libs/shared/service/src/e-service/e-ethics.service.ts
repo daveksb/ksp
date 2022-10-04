@@ -102,8 +102,17 @@ export class EthicsService {
       'accusationincidentdate',
       'accusationissuedate',
       'accusationassigndate',
+      'investigationorderdate',
+      'investigationdate',
+      'investigationreportdate',
     ];
-    const jsonColumn = ['accuserinfo', 'accusationfile'];
+    const jsonColumn = [
+      'accuserinfo',
+      'accusationfile',
+      'accusationconsideration',
+      'investigationresult',
+      'investigationsubcommittee',
+    ];
     for (const key in info) {
       const ethicsKey = key as EthicsKey;
       if (dateColumn.includes(key)) {
@@ -113,7 +122,7 @@ export class EthicsService {
       }
       if (jsonColumn.includes(key)) {
         if (info[ethicsKey]) {
-          info[ethicsKey] = atob(info[ethicsKey] as string) || null;
+          info[ethicsKey] = atob(info[ethicsKey] as string);
         }
       }
     }

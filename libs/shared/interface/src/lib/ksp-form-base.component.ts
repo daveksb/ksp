@@ -62,10 +62,17 @@ export abstract class KspFormBaseComponent
         const formArray = this.form.controls[key] as FormArray;
         for (let i = 0; i < formArray.controls.length; i++) {
           const formGroup = formArray.controls[i] as FormGroup;
-          for (const subkey in formGroup) {
+          for (const subkey in formGroup.controls) {
             if (value[key] && value[key][i] && value[key][i][subkey]) {
               formGroup.controls[subkey].patchValue(value[key][i][subkey]);
             }
+          }
+        }
+      } else if (this.form.controls[key] instanceof FormGroup) {
+        const formGroup = this.form.controls[key] as FormGroup;
+        for (const subkey in formGroup.controls) {
+          if (value[key] && value[key] && value[key][subkey]) {
+            formGroup.controls[subkey].patchValue(value[key][subkey]);
           }
         }
       }
