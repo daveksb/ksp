@@ -7,7 +7,7 @@
   </button>
 </ng-container>
 <ng-container *ngIf="uploadType === 'link'">
-  <label role="button" class="text-primary me-3" (click)="fileUpload.click()">
+  <label role="button" class="text-primary" (click)="fileUpload.click()">
     + upload document
   </label>
 </ng-container>
@@ -21,7 +21,7 @@
 
 <span
   *ngIf="showUploadedFileName"
-  class="fs-6 text-secondary text-decoration-underline">{{ fileName }}</span>
+  class="fs-6 text-secondary text-decoration-underline ms-2">{{ fileName }}</span>
 
 <i
   *ngIf="showDeleteFile && file && !isImage"

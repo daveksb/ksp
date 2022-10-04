@@ -347,7 +347,7 @@ export class SchoolRequestComponent implements OnInit {
     //console.log('update payload = ', res);
     this.requestService.updateRequest(res).subscribe((res) => {
       //this.confirmCompleted();
-      this.backToListPage();
+      this.tempSaveComplete();
     });
   }
 
@@ -599,6 +599,7 @@ export class SchoolRequestComponent implements OnInit {
     } else {
       this.createRequest('temp');
     }
+    //this.tempSaveComplete();
   }
 
   permanentBtnClick() {
@@ -688,6 +689,24 @@ export class SchoolRequestComponent implements OnInit {
       width: '350px',
       data: {
         header: `ยกเลิกใบคำขอสำเร็จ`,
+        buttonLabel: 'กลับสู่หน้าหลัก',
+      },
+    });
+
+    completeDialog.componentInstance.completed
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res) {
+          this.backToListPage();
+        }
+      });
+  }
+
+  tempSaveComplete() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      width: '350px',
+      data: {
+        header: `บันทึกใบคำขอชั่วคราวสำเร็จ`,
         buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });

@@ -44,6 +44,7 @@ export class AddStaffComponent implements OnInit {
   today = thaiDate(new Date());
   mode: FormMode = 'edit';
   userInfoType = UserInfoFormType.thai;
+  
   form = this.fb.group({
     userInfo: [],
     addr1: [],

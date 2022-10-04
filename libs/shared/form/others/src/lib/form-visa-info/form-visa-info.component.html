@@ -25,9 +25,18 @@
       <input class="form-control" type="date" formControlName="visaenddate" />
     </div>
 
-    <div class="col-6">
+    <!-- <div class="col-6">
       <label class="form-label">เลขประจำตัวคุรุสภา</label>
       <input class="form-control" type="text" formControlName="licenseid" />
+    </div> -->
+    <div class="col-6">
+      <label class="form-label">เลขประจำตัวคุรุสภา</label>
+      <input
+        class="form-control"
+        type="text"
+        disabled
+        value="{{ form.licenseid }}"
+      />
     </div>
   </div>
 </form>
