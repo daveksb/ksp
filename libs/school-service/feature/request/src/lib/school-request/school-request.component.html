@@ -355,8 +355,8 @@
 <div class="sticky-bottom border px-2">
   <ksp-bottom-nav
     (prevClicked)="backToListPage()"
-    (cancelClicked)="cancel()"
-    (tempSaveClicked)="tempBtnClick()"
+    (cancelClicked)="cancelConfirmDialog()"
+    (tempSaveClicked)="tempSaveConfirmDialog()"
     (saveClicked)="permanentBtnClick()"
     [colorMode]="'green'"
     [isLastPage]="true"
