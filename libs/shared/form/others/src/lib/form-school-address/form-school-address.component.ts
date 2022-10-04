@@ -33,7 +33,6 @@ export class FormSchoolAddressComponent extends KspFormBaseComponent {
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
         this.onChange(value);
         this.onTouched();

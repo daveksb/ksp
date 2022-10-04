@@ -105,6 +105,7 @@ export function checkProcess(processId: number) {
 }
 
 export function checkStatus(processId: number, statusId: number) {
+  //console.log('p = ', processId, ' s = ', statusId);
   const process = checkProcess(processId);
   const status = process?.status.find((s) => {
     return s.id == statusId;
