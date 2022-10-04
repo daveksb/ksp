@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -9,17 +9,20 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./experience-form.component.scss'],
   providers: providerFactory(ExperienceFormComponent),
 })
-export class ExperienceFormComponent extends KspFormBaseComponent {
+export class ExperienceFormComponent
+  extends KspFormBaseComponent
+  implements OnInit, OnDestroy
+{
   @Input() countries: any[] = [];
   @Input() licenses: any[] = [];
 
   override form = this.fb.group({
-    foreignLicense: [],
-    country: [],
-    licenseType: [],
-    licenseNumber: [],
-    licenserelease: [],
-    licenseExpire: [],
+    foreignLicense: [null, Validators.required],
+    country: [null, Validators.required],
+    licenseType: [null, Validators.required],
+    licenseNumber: [null, Validators.required],
+    licenserelease: [null, Validators.required],
+    licenseExpire: [null, Validators.required],
   });
 
   constructor(private fb: FormBuilder) {
@@ -31,5 +34,14 @@ export class ExperienceFormComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+
+  ngOnInit() {
+    // console.log(this.form.valid);
+  }
+
+  override ngOnDestroy(): void {
+    this.onChange(null);
+    this.onTouched();
   }
 }

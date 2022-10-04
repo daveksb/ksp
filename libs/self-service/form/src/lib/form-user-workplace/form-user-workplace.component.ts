@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { UniversitySearchComponent } from '@ksp/shared/search';
@@ -20,16 +20,16 @@ export class FormUserWorkplaceComponent extends KspFormBaseComponent {
   @Output() amphurChanged = new EventEmitter<any>();
 
   override form = this.fb.group({
-    bureauid: [null],
-    schoolname: [null],
-    houseno: [null],
+    bureauid: [null, Validators.required],
+    schoolname: [null, Validators.required],
+    houseno: [null, Validators.required],
     moo: [null],
     alley: [null],
-    road: [null],
-    postcode: [null],
-    province: [null],
-    tumbol: [null],
-    amphur: [null],
+    road: [null, Validators.required],
+    postcode: [null, Validators.required],
+    province: [null, Validators.required],
+    tumbol: [null, Validators.required],
+    amphur: [null, Validators.required],
   });
 
   constructor(private dialog: MatDialog, private fb: FormBuilder) {
