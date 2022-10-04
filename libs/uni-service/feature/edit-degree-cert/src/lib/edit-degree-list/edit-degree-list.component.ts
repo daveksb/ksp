@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { ListData } from '@ksp/shared/interface';
+import { ListData, KspPaginationComponent } from '@ksp/shared/interface';
 import { UniInfoService, AddressService } from '@ksp/shared/service';
 import {
   EditDegreeCertSearchComponent,
@@ -26,7 +26,7 @@ const mapOption = () =>
   templateUrl: './edit-degree-list.component.html',
   styleUrls: ['./edit-degree-list.component.scss'],
 })
-export class EditDegreeListComponent implements OnInit {
+export class EditDegreeListComponent extends KspPaginationComponent implements OnInit {
   form = this.fb.group({
     homeSearch: [],
   });
@@ -47,6 +47,7 @@ export class EditDegreeListComponent implements OnInit {
     private addressService: AddressService,
     private router: Router
   ) {
+    super()
     this.getAll();
   }
   clear() {
@@ -120,7 +121,7 @@ export class EditDegreeListComponent implements OnInit {
         this.provinces = res;
       });
   }
-  search() {
+ override search() {
     const value: any = this.form.value?.homeSearch;
     const payload = {
       uniid: value?.university || '',
@@ -133,11 +134,11 @@ export class EditDegreeListComponent implements OnInit {
       coursemajor: value?.major || '',
       coursesubjects: value?.subject || '',
       uniprovince: value?.province || '',
-      offset: '0',
-      row: '10',
+      ...this.tableRecord
     };
     this.uniInfoService.uniDegreeSearch(payload).subscribe(async (res) => {
       const newData: any = [];
+      this.pageEvent.length = res.countrow
       for (const row of res?.datareturn || []) {
         const degreeCode = this._findOptions(
           this.degreeLevelOptions,

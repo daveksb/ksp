@@ -1,7 +1,7 @@
-<ksp-top-nav
-  ><span header>ยื่นใบคำขอ </span>
-  <span subHeader>ขอรับรองปริญญาและประกาศนียบัตร </span></ksp-top-nav
->
+<ksp-top-nav>
+  <span header>ยื่นใบคำขอ </span>
+  <span subHeader>ขอรับรองปริญญาและประกาศนียบัตร </span>
+</ksp-top-nav>
 
 <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
   <div class="box-header">รายการขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา</div>
@@ -9,27 +9,19 @@
   <ksp-uni-form-badge></ksp-uni-form-badge> -->
 
   <div class="bg-white p-3">
-   <form [formGroup]="form">
-     <ksp-degree-cert-search
-      (cleared)="clear()"
-      (searched)="search()"
-      formControlName="search"
-      [uniUniversityOption]="uniUniversityOption"
-    ></ksp-degree-cert-search>
-   </form>
+    <form [formGroup]="form">
+      <ksp-degree-cert-search (cleared)="clear()" (searched)="search()" formControlName="search"
+        [uniUniversityOption]="uniUniversityOption"></ksp-degree-cert-search>
+    </form>
     <br />
     <div class="d-flex justify-content-end my-1">
-      <a
-        class="btn border-primary text-primary btn-upload mb-2"
-        type="buton"
-        [routerLink]="['/degree-cert', 'request']"
-        >+ สร้างใบคำขอ</a
-      >
+      <a class="btn border-primary text-primary btn-upload mb-2" type="buton"
+        [routerLink]="['/degree-cert', 'request']">+ สร้างใบคำขอ</a>
     </div>
 
     <div class="table-responsive">
       <table mat-table [dataSource]="dataSource">
-         <ng-container matColumnDef="key" hidden>
+        <ng-container matColumnDef="key" hidden>
           <th mat-header-cell *matHeaderCellDef>key</th>
           <td mat-cell *matCellDef="let element">{{ element.key }}</td>
         </ng-container>
@@ -95,14 +87,11 @@
           <th mat-header-cell *matHeaderCellDef>ตรวจสอบ</th>
 
           <td mat-cell *matCellDef="let element">
-            <span
-              class="rounded-pill d-flex justify-content-center"
-              [ngClass]="{
+            <span class="rounded-pill d-flex justify-content-center" [ngClass]="{
                 edit__status: element.verify === 'แก้ไข',
                 verify__status: element.verify === 'ตรวจสอบแล้ว',
                 modify__status: element.verify === 'ปรับแก้ไข/เพิ่มเติม'
-              }"
-            >
+              }">
               {{ element.verify }}
             </span>
           </td>
@@ -111,14 +100,11 @@
         <ng-container matColumnDef="consider">
           <th mat-header-cell *matHeaderCellDef>พิจารณา</th>
           <td mat-cell *matCellDef="let element">
-            <span
-              class="rounded-pill d-flex justify-content-center"
-              [ngClass]="{
+            <span class="rounded-pill d-flex justify-content-center" [ngClass]="{
                 edit__status: element.consider === 'แก้ไข',
                 verify__status: element.consider === 'ตรวจสอบแล้ว',
                 modify__status: element.consider === 'ปรับแก้ไข/เพิ่มเติม'
-              }"
-            >
+              }">
               {{ element.consider }}
             </span>
           </td>
@@ -141,6 +127,9 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
+      <mat-paginator [length]="pageEvent.length" [pageSize]="pageEvent.pageSize" [pageSizeOptions]="pageSizeOptions"
+        (page)="onPaginatorEvent($event)" [pageIndex]="pageEvent.pageIndex">
+      </mat-paginator>
     </div>
   </div>
 </div>
