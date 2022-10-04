@@ -11,6 +11,7 @@ import {
   LicenseInfoComponent,
   LicenseTypeButtonGroupComponent,
 } from '@ksp/shared/ui';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -23,6 +24,8 @@ import {
     EServiceUiAccusationInfoModule,
     LicenseTypeButtonGroupComponent,
     LicenseInfoComponent,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   declarations: [AccusationSearchComponent],
   exports: [AccusationSearchComponent],

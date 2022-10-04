@@ -100,6 +100,12 @@ export class LicenseRequestEducationManagerComponent
     this.checkRequestId();
   }
 
+  override resetForm() {
+    super.resetForm();
+    this.eduFiles = structuredClone(EDU_FILES);
+    this.experienceFiles = structuredClone(EXPERIENCE_FILES);
+  }
+
   override initializeFiles() {
     super.initializeFiles();
     this.eduFiles = structuredClone(EDU_FILES);
@@ -190,6 +196,7 @@ export class LicenseRequestEducationManagerComponent
       ...self,
       ...replaceEmptyWithNull(selectData),
       ...(this.requestId && { id: `${this.requestId}` }),
+      ...(this.imageId && { imagefileid: `${this.imageId}` }),
       ...{
         addressinfo: JSON.stringify([formData.address1, formData.address2]),
       },

@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { ListData } from '@ksp/shared/interface';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+import { skip } from 'rxjs';
 
 @Component({
   selector: 'self-service-renew-license-property-supervision',
@@ -22,6 +23,14 @@ export class RenewLicensePropertySupervisionComponent
     educationDetails: [],
   });
 
+  /* const WORKING_INFO_FILES = [
+  {
+    name: '1.รางวัลอื่นและประกาศเกียรติคุณ',
+    fileId: '',
+    fileName: '',
+  },
+]; */
+
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
@@ -36,7 +45,7 @@ export class RenewLicensePropertySupervisionComponent
   ngOnInit(): void {
     this.standardKnowledges = standardKnowledges;
 
-    this.form.controls['standardKnowledgeType'].valueChanges.subscribe(
+    this.form.controls['standardKnowledgeType'].valueChanges.pipe(skip(1)).subscribe(
       (res) => {
         this.selectedstandardKnowledgeType = Number(res);
         //this.form.controls.educationLevelForm.reset();

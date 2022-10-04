@@ -122,6 +122,11 @@ export class RefundFeeRequestComponent implements OnInit {
     });
   }
 
+  resetForm() {
+    this.form.reset();
+    this.files = structuredClone(ATTACH_FILES);
+  }
+
   initializeFile() {
     this.uniqueTimestamp = uuidv4();
     this.files = structuredClone(ATTACH_FILES);

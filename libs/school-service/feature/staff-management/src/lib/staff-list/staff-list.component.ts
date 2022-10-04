@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { StaffService } from '@ksp/shared/service';
@@ -13,6 +14,7 @@ import { parseJson } from '@ksp/shared/utility';
 })
 export class StaffListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   form = this.fb.group({
     searchFilter: [],
@@ -55,6 +57,11 @@ export class StaffListComponent implements AfterViewInit {
       });
 
       this.dataSource.data = res;
+      this.dataSource.sort = this.sort;
+      const sortState: Sort = { active: 'id', direction: 'desc' };
+      this.sort.active = sortState.active;
+      this.sort.direction = sortState.direction;
+      this.sort.sortChange.emit(sortState);
       //console.log('res = ', res);
     });
   }

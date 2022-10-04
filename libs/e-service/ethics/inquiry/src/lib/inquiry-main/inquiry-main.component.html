@@ -4,7 +4,11 @@
   <div class="bg-secondary bg-opacity-10 px-3 py-2 full-height-2">
     <div class="box-header">บันทึกข้อมูลการสืบสวนข้อเท็จจริง</div>
     <div class="bg-white">
-      <mat-tab-group selectedIndex="0" class="tab-group">
+      <mat-tab-group
+        selectedIndex="0"
+        class="tab-group"
+        animationDuration="0ms"
+      >
         <mat-tab label="สอบสวน" class="tab-content"
           ><e-service-inquiry-detail
             formControlName="inquiry"
@@ -13,7 +17,7 @@
 
         <mat-tab label="แจ้งผลคำวินิจฉัย">
           <e-service-inquiry-result
-            formControlName="rulingInform"
+            formControlName="inquiryresult"
           ></e-service-inquiry-result>
         </mat-tab>
 

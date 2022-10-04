@@ -8082,6 +8082,24 @@
         }
       ]
     },
+    "shared-pipe": {
+      "projectType": "library",
+      "root": "libs/shared/pipe",
+      "sourceRoot": "libs/shared/pipe/src",
+      "prefix": "ksp",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/pipe/**/*.ts",
+              "libs/shared/pipe/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "shared-search": {
       "root": "libs/shared/search",
       "$schema": "../../../node_modules/nx/schemas/project-schema.json",

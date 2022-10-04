@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { ListData } from '@ksp/shared/interface';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+import { skip } from 'rxjs';
 
 @Component({
   selector: 'self-service-renew-license-property-manager',
@@ -36,12 +37,12 @@ export class RenewLicensePropertyManagerComponent
   ngOnInit(): void {
     this.standardKnowledges = standardKnowledges;
 
-    this.form.controls['standardKnowledgeType'].valueChanges.subscribe(
-      (res) => {
+    this.form.controls['standardKnowledgeType'].valueChanges
+      .pipe(skip(1))
+      .subscribe((res) => {
         this.selectedstandardKnowledgeType = Number(res);
         //this.form.controls.educationLevelForm.reset();
-      }
-    );
+      });
   }
 }
 

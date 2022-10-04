@@ -2,8 +2,8 @@
   <ksp-request-header-info
     [requestLabel1]="'วันที่ทำรายการ'"
     [requestLabel2]="'เลขที่รายการ'"
-    [requestDate]="'10 ตุลาคม 2565'"
-    [requestNumber]="'112234467876543'"
+    [requestDate]="today"
+    [requestNumber]="requestNumber"
   ></ksp-request-header-info>
 
   <hr />
@@ -13,11 +13,19 @@
     <div class="row">
       <div class="col mb-3">
         <label class="form-label">คำสั่งสำนักงานเลขาธิการคุรุสภาที่ </label>
-        <input class="form-control" type="text" formControlName="orderNumber" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="investigationorderno"
+        />
       </div>
       <div class="col mb-3">
         <label class="form-label">ลงวันที่ </label>
-        <input class="form-control" type="date" formControlName="date" />
+        <input
+          class="form-control"
+          type="date"
+          formControlName="investigationorderdate"
+        />
       </div>
     </div>
   </div>
@@ -70,14 +78,18 @@
         <input
           class="form-control"
           type="date"
-          formControlName="investigateDate"
+          formControlName="investigationdate"
         />
       </div>
       <div class="col mb-3">
         <label class="form-label"
           >วันที่จัดทำรายงานสืบสวนข้อเท็จจริงเสนอเลขาธิการคุรุสภา
         </label>
-        <input class="form-control" type="date" formControlName="ReportDate" />
+        <input
+          class="form-control"
+          type="date"
+          formControlName="investigationreportdate"
+        />
       </div>
     </div>
 
@@ -88,7 +100,7 @@
           class="form-control"
           type="text"
           rows="3"
-          formControlName="reportResult"
+          formControlName="investigationreport"
         ></textarea>
       </div>
     </div>
@@ -100,7 +112,7 @@
   <div class="bg-light p-3">
     <div class="box-header">การพิจารณาดำเนินการ</div>
 
-    <div class="d-flex flex-column">
+    <div formGroupName="investigationresult" class="d-flex flex-column">
       <ng-container *ngFor="let item of decisions">
         <div class="d-flex flex-row align-items-center mb-2">
           <input
@@ -119,7 +131,7 @@
             class="form-control"
             type="text"
             rows="3"
-            formControlName="causeDetail"
+            formControlName="causedetail"
           ></textarea>
         </div>
       </div>

@@ -21,6 +21,7 @@ import { SchoolRequestComponent } from './school-request/school-request.componen
 import { SchoolRequestListComponent } from './request-list/request-list.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import { MatSortModule } from '@angular/material/sort';
     FormEducationInfoManagerComponent,
     MatPaginatorModule,
     MatSortModule,
+    ThaiDatePipe,
   ],
   declarations: [SchoolRequestListComponent, SchoolRequestComponent],
 })

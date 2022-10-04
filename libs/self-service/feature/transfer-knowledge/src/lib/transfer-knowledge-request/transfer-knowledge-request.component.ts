@@ -193,43 +193,30 @@ export class TransferKnowledgeRequestComponent
     return payload;
   }
 
-  next() {
+  onSave(currentProcess: number) {
     console.log(this.form.value);
-    const completeDialog = this.dialog.open(ConfirmDialogComponent, {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
-        title: `คุณต้องการบันทึกข้อมูล
-        ใช่หรือไม่?`,
-        btnLabel: 'ยื่นแบบคำขอ',
-        cancelBtnLabel: 'บันทึก',
+        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
+        btnLabel: 'บันทึก',
       },
     });
 
-    completeDialog.componentInstance.saved.subscribe((res) => {
+    confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        const payload = this.createRequest(1);
+        const payload = this.createRequest(currentProcess);
         const request = this.requestId
           ? this.requestService.updateRequest.bind(this.requestService)
           : this.requestService.createRequest.bind(this.requestService);
         request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
-            this.router.navigate(['/home']);
-          }
-        });
-      }
-    });
-
-    completeDialog.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        const payload = this.createRequest(2);
-        const request = this.requestId
-          ? this.requestService.updateRequest.bind(this.requestService)
-          : this.requestService.createRequest.bind(this.requestService);
-        request(payload).subscribe((res) => {
-          console.log('request result = ', res);
-          if (res?.returncode === '00') {
-            this.router.navigate(['/license', 'payment-channel']);
+            if (currentProcess === 1) {
+              this.router.navigate(['/home']);
+            } else {
+              this.router.navigate(['/license', 'payment-channel']);
+            }
           }
         });
       }

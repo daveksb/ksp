@@ -6,6 +6,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { thaiDate } from '@ksp/shared/utility';
 
 @Component({
   selector: 'e-service-accusation-decision',
@@ -14,12 +15,12 @@ import {
 })
 export class AccusationDecisionComponent {
   decisions = decisions;
-
+  today = thaiDate(new Date());
   form = this.fb.group({
     decisions: [],
     otherDetail: [],
   });
-
+  requestNumber = '';
   constructor(
     private router: Router,
     public dialog: MatDialog,
@@ -41,7 +42,7 @@ export class AccusationDecisionComponent {
       width: '350px',
       data: {
         title: `คุณยืนยันการบันทึกข้อมูลใช่หรือไม่? `,
-        btnLabel: 'ยืนยัน'
+        btnLabel: 'ยืนยัน',
       },
     });
 

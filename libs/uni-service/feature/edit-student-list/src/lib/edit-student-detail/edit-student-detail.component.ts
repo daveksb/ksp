@@ -1,44 +1,110 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { RequestPageType } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { GeneralInfoService, UniInfoService, UniRequestService } from '@ksp/shared/service';
+import { getCookie, thaiDate } from '@ksp/shared/utility';
+import { EMPTY, Observable, switchMap } from 'rxjs';
 
 @Component({
   selector: 'ksp-edit-student-detail',
   templateUrl: './edit-student-detail.component.html',
   styleUrls: ['./edit-student-detail.component.scss'],
 })
-export class EditStudentDetailComponent {
-  form = this.fb.group({
-    editStudent: [],
+export class EditStudentDetailComponent implements OnInit {
+  requestDate = thaiDate(new Date());
+  requestNo = '';
+  formSearch = this.fb.group({
+    idcardno: [],
+    firstname: [],
+    lastname: [],
   });
+  oldValue: any;
+  formData = this.fb.group({
+    editStudent: [],
+  })
+  uniqueTimestamp: any = '';
+  
+  studentDetail = this.fb.group({
+    prefixth: [],
+    firstnameth: [],
+    lastnameth: [],
+    prefixen: [],
+    firstnameen: [],
+    lastnameen: [],
+    nationality: [],
+    idcardno: [],
+    passportno: [],
+    email: [],
+    phone: []
+  });
+  prefixList$!: Observable<any>;
+  nationalityList$!: Observable<any>;
 
   uploadFileList = [
-    'สำเนาหนังสือสำคัญการเปลี่ยนชื่อ / ชื่อสกุล / เปลี่ยนหรือเพิ่มคำนำหน้าชื่อ',
-    'สำเนาหลักฐานการสมรส หรือการสิ้นสุดการสมรส (ถ้ามี)',
-    'สำเนาหนังสือรับรองการใช้คำหน้านามหญิง (ถ้ามี)',
+    {
+      name: 'สำเนาหนังสือสำคัญการเปลี่ยนชื่อ / ชื่อสกุล / เปลี่ยนหรือเพิ่มคำนำหน้าชื่อ',
+      fileId: '',
+      fileName: ''
+    },
+    {
+      name: 'สำเนาหลักฐานการสมรส หรือการสิ้นสุดการสมรส (ถ้ามี)',
+      fileId: '',
+      fileName: ''
+    },
+    {
+      name: 'สำเนาหนังสือรับรองการใช้คำหน้านามหญิง (ถ้ามี)',
+      fileId: '',
+      fileName: ''
+    }
   ];
-
   data = false;
+  pageType = RequestPageType;
+  requesttype = 8;
 
   constructor(
     private router: Router,
     public dialog: MatDialog,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private uniInfoService: UniInfoService,
+    private generalInfoService: GeneralInfoService,
+    private requestService: UniRequestService
   ) {}
 
-
+  ngOnInit(): void {
+    this.uniqueTimestamp = `${new Date().getTime()}`;
+    this.studentDetail.disable();
+    this.prefixList$ = this.generalInfoService.getPrefix();
+    this.nationalityList$ = this.generalInfoService.getNationality();
+  }
 
   searchData() {
-    this.data = true;
+    const payload = {
+      idcardno: this.formSearch.controls.idcardno.value,
+      firstname: this.formSearch.controls.firstname.value,
+      lastname: this.formSearch.controls.lastname.value,
+      offset: 0,
+      row: 10
+    }
+    this.uniInfoService.uniAdmissionSearch2(payload)
+      .subscribe((response: any) => {
+        if (response.datareturn) {
+          this.data = true;
+          this.oldValue = response.datareturn[0];
+          this.studentDetail.patchValue(response.datareturn[0]);
+          console.log(this.studentDetail.value)
+        }
+      });
   }
 
   clearData() {
     this.data = false;
+    this.formSearch.reset();
   }
 
   cancel() {
@@ -46,6 +112,31 @@ export class EditStudentDetailComponent {
   }
 
   save() {
+    const userId = Number(getCookie('userId'));
+    let payload = {
+      id: null,
+      requestprocess: '2',
+      requeststatus: '1',
+      requesttype: '08',
+      uniuserid: userId,
+      systemtype: '3',
+      subtype: '5',
+      unidegreecertid: this.oldValue.unidegreecertid,
+      unirequestadmissionid: this.oldValue.unirequestadmissionid,
+      unirequestdegreecertid: this.oldValue.unidegreecertid,
+      degreeapprovecode: this.oldValue.degreeapprovecode,
+      planyear: this.oldValue.planyear,
+      plancalendaryear: this.oldValue.plancalendaryear,
+      planname: this.oldValue.planname,
+      ref1: '3',
+      ref2: '08',
+      ref3: '5',
+      admissionlist: ''
+    }
+    let admissionlist = [];
+    admissionlist.push(this.formData.controls.editStudent.getRawValue());
+    payload.admissionlist = JSON.stringify(admissionlist);
+    console.log(this.formData.controls.editStudent.value)
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -56,20 +147,56 @@ export class EditStudentDetailComponent {
       },
     });
 
-    confirmDialog.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        this.onCompleted();
-      }
+    confirmDialog.componentInstance.confirmed
+      .pipe(
+        switchMap((res) => {
+          if (res) {
+            const userId = Number(getCookie('userId'));
+            const fileUpload = this.uploadFileList.map((file) => file.fileId || null);
+            let payload = {
+              id: null,
+              requestprocess: '2',
+              requeststatus: '1',
+              requesttype: '08',
+              uniuserid: userId,
+              systemtype: '3',
+              subtype: '5',
+              unidegreecertid: this.oldValue.unidegreecertid,
+              unirequestadmissionid: this.oldValue.unirequestadmissionid,
+              unirequestdegreecertid: this.oldValue.unidegreecertid,
+              degreeapprovecode: this.oldValue.degreeapprovecode,
+              planyear: this.oldValue.planyear,
+              plancalendaryear: this.oldValue.plancalendaryear,
+              planname: this.oldValue.planname,
+              plantotalno: this.oldValue.plantotalno,
+              ref1: '3',
+              ref2: '08',
+              ref3: '5',
+              admissionlist: '',
+              fileinfo: JSON.stringify({ fileUpload })
+            }
+            let admissionlist = [];
+            admissionlist.push(this.formData.controls.editStudent.getRawValue());
+            payload.admissionlist = JSON.stringify(admissionlist);
+            return this.requestService.createRequestAdmission(payload);
+          }
+          return EMPTY;
+        })
+      )
+      .subscribe((res) => {
+        if (res) {
+          this.onCompleted(res?.requestno);
+        }
     });
   }
 
-  onCompleted() {
+  onCompleted(requestno : string) {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
-        content: `วันที่ : 12 มกราคม 2565
-        เลขที่ใบคำขอ : UNIUS 6406000162`,
+        content: `วันที่ : ${this.requestDate}
+        เลขที่ใบคำขอ : ${requestno}`,
         subContent: `กรุณาตรวจสอบสถานะใบคำขอหรือรหัสเข้าใช้งาน
         ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },

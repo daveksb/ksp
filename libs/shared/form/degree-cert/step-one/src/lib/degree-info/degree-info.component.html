@@ -2,7 +2,7 @@
   <div class="bg-light p-3 mb-3">
     <div class="box-header text-primary">ข้อมูลระดับปริญญาที่เสนอขอรับรอง</div>
     <div class="row mb-3">
-      <div class="col-8">
+      <div class="col-md-8">
         <label class="form-label"
           >ระดับปริญญาที่เสนอขอรับรอง
           <span class="fs-6 text-danger"
@@ -18,11 +18,11 @@
       </div>
     </div>
     <div class="row mb-3">
-      <div class="col-2">
+      <div class="col-sm-3 col-md-2">
         <label class="form-label">ปีของหลักสูตร</label>
         <input formControlName="courseYear" class="form-control" type="text" />
       </div>
-      <div class="col-6">
+      <div class="col-sm-9 col-md-6">
         <label class="form-label"
           >ชื่อหลักสูตรที่เสนอขอรับรอง<span class="fs-6 text-danger">
             *กรุณาระบุชื่อหลักสูตรตามที่ปรากฏบนหน้าปก มคอ.2
@@ -38,7 +38,7 @@
     </div>
 
     <div class="row mb-3">
-      <div class="col-8">
+      <div class="col-sm-8">
         <label class="form-label">ประเภทของหลักสูตร</label>
         <select formControlName="courseType" class="search__content form-select">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
@@ -47,7 +47,7 @@
           <option value="3">นานาชาติ</option>
         </select>
       </div>
-      <div class="col-4">
+      <div class="col-sm-4">
         <label class="form-label">สถานะของหลักสูตร</label>
         <select formControlName="courseStatus" class="search__content form-select">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
@@ -59,7 +59,7 @@
 
     <div class="box-header">ชื่อปริญญาและสาขาวิชา</div>
     <div class="row mb-3">
-      <div class="col-8">
+      <div class="col-md-8">
         <label class="form-label"
           >ชื่อปริญญาและสาขาวิชา (ภาษาไทย แบบเต็ม)</label
         >
@@ -70,7 +70,7 @@
           formControlName="degreeNameThFull"
         />
       </div>
-      <div class="col">
+      <div class="col-md-4">
         <label class="form-label">ชื่อปริญญาและสาขาวิชา (ภาษาไทย แบบย่อ)</label>
         <input
           class="form-control"
@@ -81,7 +81,7 @@
       </div>
     </div>
     <div class="row mb-3">
-      <div class="col-8">
+      <div class="col-md-8">
         <label class="form-label"
           >ชื่อปริญญาและสาขาวิชา (ภาษาอังกฤษ แบบเต็ม)</label
         >
@@ -92,7 +92,7 @@
           formControlName="degreeNameThShort"
         />
       </div>
-      <div class="col">
+      <div class="col-md-4">
         <label class="form-label"
           >ชื่อปริญญาและสาขาวิชา (ภาษาอังกฤษ แบบย่อ)</label
         >
@@ -107,20 +107,20 @@
 
     <div class="box-header">สถานะภาพหลักสูตร</div>
     <div class="row">
-      <div class="col-3">
+      <div class="col-sm-3">
         <label class="form-label"
           >การอนุมัติหลักสูตรของสภามหาวิทยาลัย ครั้งที่
         </label>
         <input class="form-control" formControlName="courseApproveTime" type="text" />
       </div>
-      <div class="col-3">
+      <div class="col-sm-3">
         <label class="form-label">วันที่</label>
         <input class="form-control" formControlName="courseApproveDate" type="date" />
       </div>
     </div>
 
     <div class="row">
-      <div class="col-3">
+      <div class="col-sm-3">
         <label class="form-label">การพิจารณารับทราบของ อว. วันที่</label>
         <input class="form-control" formControlName="courseAcceptDate" type="date" />
       </div>

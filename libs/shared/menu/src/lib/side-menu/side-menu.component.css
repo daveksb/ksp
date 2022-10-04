@@ -78,7 +78,7 @@ a:focus {
 }
 
 #sidebar ul li a.sub-menu {
-  padding: 4px;
+  padding: 4px 8px;
   cursor: pointer;
 }
 
@@ -124,7 +124,7 @@ ul ul a {
 
 ul ul li {
   list-style: disc outside none;
-  margin-left: 32px;
+  margin-left: 28px;
 }
 
 .icon__sidenav {
@@ -142,6 +142,15 @@ ul ul li {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+::-webkit-scrollbar {
+  height: 4px;
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.26);
 }
 
 @media only screen and (max-width: 768px) {

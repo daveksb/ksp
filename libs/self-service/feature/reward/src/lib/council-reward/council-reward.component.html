@@ -33,6 +33,10 @@
       (provinceChanged)="provinceChanged(2, $event)"
       (amphurChanged)="amphurChanged(2, $event)">
       <span class="text-primary">ที่อยู่ที่ติดต่อได้สะดวก</span>
+      <div class="d-flex align-items-center">
+        <input type="checkbox" class="me-2" (change)="useSameAddress($event)" />
+        <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
+      </div>
     </ksp-form-address>
   </mat-tab>
 
@@ -49,7 +53,8 @@
   </mat-tab>
 
   <mat-tab label="รายงานผลสำเร็จจากการปฏิบัติงาน">
-    <ksp-council-success formControlName="rewardSuccessInfo"></ksp-council-success>
+    <ksp-council-success
+      formControlName="rewardSuccessInfo"></ksp-council-success>
   </mat-tab>
 
   <mat-tab label="ข้อมูลรางวัลและหลักฐานประกอบ">

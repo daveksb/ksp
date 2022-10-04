@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+import { skip } from 'rxjs';
 
 @Component({
   selector: 'self-service-renew-license-property',
@@ -43,10 +44,12 @@ export class RenewLicensePropertyComponent
     this.educationTypes2 = educationTypes2;
     this.educationTypes3 = educationTypes3;
 
-    this.form.controls['educationType'].valueChanges.subscribe((res) => {
-      this.selectedEducationType = Number(res);
-      //this.form.controls.educationLevelForm.reset();
-    });
+    this.form.controls['educationType'].valueChanges
+      .pipe(skip(1))
+      .subscribe((res) => {
+        this.selectedEducationType = Number(res);
+        //this.form.controls.educationLevelForm.reset();
+      });
   }
 }
 

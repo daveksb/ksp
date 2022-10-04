@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Ethics } from '@ksp/shared/interface';
 import { EthicsService } from '@ksp/shared/service';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy } from '@ngneat/until-destroy';
+import localForage from 'localforage';
+import _ from 'lodash';
+import { AccusationRecordComponent } from '../accusation-record/accusation-record.component';
 @UntilDestroy()
 @Component({
   selector: 'e-service-accusation-main',
@@ -15,9 +18,10 @@ export class AccusationMainComponent implements OnInit {
   ethicsId!: number;
 
   form = this.fb.group({
-    accusation: [],
+    accusation: [] as any,
   });
-
+  @ViewChild(AccusationRecordComponent)
+  formComponents!: AccusationRecordComponent;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -30,7 +34,7 @@ export class AccusationMainComponent implements OnInit {
     this.checkRequestId();
 
     this.form.valueChanges.subscribe((res) => {
-      console.log('form value = ', this.form.controls.accusation.value);
+      // console.log('form value = ', this.form.controls.accusation.value);
     });
   }
 
@@ -38,22 +42,29 @@ export class AccusationMainComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.ethicsId = Number(params.get('id'));
       if (this.ethicsId) {
-        //this.loadRequestFromId(this.requestId);
+        localForage.getItem('registerEthicsInfoValue').then((data) => {
+          // this.formComponents.addRow();
+          this.form.controls.accusation.patchValue(data);
+        });
       }
     });
   }
 
   saveEthics() {
+    const ethics = new Ethics();
+    const allowKey = Object.keys(ethics);
+    const data = this.form.controls.accusation.value as any;
+    if (data?.accusation) {
+      data.accusationinfo = JSON.stringify(data?.accusationinfo);
+    }
+    const selectData = _.pick(data, allowKey);
     if (this.ethicsId) {
-      console.log('do nothing = ');
-    } else {
-      const ethics = new Ethics();
-      //const allowKey = Object.keys(self);
-
-      console.log('form value = ', this.form.controls.accusation.value);
-
-      this.service.createEthics(ethics).subscribe((res) => {
+      selectData['id'] = this.ethicsId;
+      this.service.updateEthicsAccusation(selectData).subscribe((res) => {
         console.log('save = ', res);
+      });
+    } else {
+      this.service.createEthics(selectData).subscribe((res) => {
         const id = res.id;
         if (id) {
           this.router.navigate(['/accusation', 'detail', id]);

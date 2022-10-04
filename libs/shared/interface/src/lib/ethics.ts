@@ -78,3 +78,72 @@ export class Ethics {
   publishstatus: string | null = null;
   publishdate: string | null = null;
 }
+
+export const defaultEhicsMember: EhicsMember = {
+  idcardno: null,
+  prefix: null,
+  firstname: null,
+  lastname: null,
+  phone: null,
+};
+export interface EhicsMember {
+  idcardno: string | null;
+  prefix: number | null;
+  firstname: string | null;
+  lastname: string | null;
+  phone: string | null;
+}
+export const ACCUSATION_FILES = [
+  { name: '1. เอกสารกล่าวหา/กล่าวโทษ', fileId: '', fileName: '' },
+  { name: '2. สำเนาบัตรประชาชน	', fileId: '', fileName: '' },
+];
+export const columns = [
+  'order',
+  'id',
+  'receiveDate',
+  'blackNumber',
+  'redNumber',
+  'personId',
+  'name',
+  'process',
+  'status',
+  'lastUpdate',
+  'edit',
+  'view',
+];
+export interface AccusationList {
+  order: number;
+  id: string;
+  receiveDate: string;
+  blackNumber: string;
+  redNumber: string;
+  personId: string;
+  name: string;
+  process: string;
+  status: string;
+  lastUpdate: string;
+  edit: string;
+  view: string;
+}
+export const decisions = [
+  {
+    label: 'มีมูลความผิด วินิจฉัยชี้ขาดความผิดเล็กน้อย',
+    name: 'decisions',
+    value: 1,
+  },
+  {
+    label: 'ตักเตือน / ภาคภัณฑ์ (ต้องเลือกอย่างใดอย่างหนึ่งเสมอ)',
+    name: 'decisions',
+    value: 2,
+  },
+  {
+    label: 'มีมูลความผิด นำเสนอคณะกรรมการตั้งคณะอนุกรรมการสอบสวน',
+    name: 'decisions',
+    value: 3,
+  },
+  {
+    label: 'ไม่มีมูล ยุติเรื่อง ยกข้อกล่าวหา',
+    name: 'decisions',
+    value: 4,
+  },
+];

@@ -1,35 +1,27 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SelfLicense } from '@ksp/shared/constant';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
 
 @Component({
   selector: 'ksp-license-info',
   templateUrl: './license-info.component.html',
   styleUrls: ['./license-info.component.scss'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ThaiDatePipe],
 })
 export class LicenseInfoComponent {
   @Input() isLicenseRevoked = false;
   @Input() isHasTitle = false;
   @Input() subTitle1 = 'วันเดือนปีที่ออก';
   @Input() subTitle2 = 'วันเดือนปีที่หมดอายุ';
-
+  @Input() rewardTitleName = '';
   @Input() license: SelfLicense | null = null;
-  /*   @Input() licenseNo: string | null = '';
-  @Input() careerType: string | null = '';
-  @Input() idCardNo: string | null = '';
-  @Input() licenseType: string | null = '';
-  @Input() thaiName: string | null = '';
-  @Input() enName: string | null = '';
-  @Input() birthDate: string | null = '';
-  @Input() licenseStartDate: string | null = '';
-  @Input() licenseEndDate: string | null = ''; */
+  @Output() selected = new EventEmitter<string>();
 
-  constructor(private router: Router) {}
-
-  select() {
-    this.router.navigate(['/staff-management', 'add-staff']);
+  select(licenseno: string | null | undefined) {
+    if (licenseno) {
+      this.selected.emit(licenseno);
+    }
   }
 }

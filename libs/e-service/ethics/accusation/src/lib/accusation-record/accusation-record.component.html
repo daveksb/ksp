@@ -2,13 +2,19 @@
   <ksp-request-header-info
     [requestLabel1]="'วันที่ทำรายการ'"
     [requestLabel2]="'เลขที่รายการ'"
-    [requestDate]="'10 ตุลาคม 2565'"
-    [requestNumber]="'112234467876543'"
+    [requestDate]="today"
+    [requestNumber]="requestNumber"
   ></ksp-request-header-info>
   <hr />
   <div class="box-header">ข้อมูลผู้กล่าวหา/กล่าวโทษ</div>
   <div class="d-flex justify-content-end">
-    <label class="text-primary" role="button">+ เพิ่มรายการ</label>
+    <label
+      class="text-primary"
+      role="button"
+      (click)="addRow()"
+      *ngIf="members.length < 5"
+      >+ เพิ่มรายการ</label
+    >
   </div>
 
   <div class="table-responsive mb-3">
@@ -25,19 +31,50 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th>1</th>
-          <th>x-xxxx-xxxx-xx-x</th>
-          <th>xxxxxx</th>
-          <th>yyyyyy</th>
-          <th>098-xxx-xxxx</th>
-          <th>
-            <i role="button" class="bi bi-pencil-square fs-5 text-primary"></i>
-          </th>
-          <th>
-            <i role="button" class="bi bi-trash fs-5 text-danger"></i>
-          </th>
-        </tr>
+        <ng-container formArrayName="accuserinfo">
+          <ng-container *ngFor="let row of members.controls; let i = index">
+            <tr [formGroupName]="i">
+              <th class="text-center">{{ i + 1 }}</th>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="idcardno"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="firstname"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="lastname"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="phone"
+                />
+              </td>
+              <td>
+                <i
+                  role="button"
+                  class="bi bi-pencil-square fs-5 text-primary"
+                ></i>
+              </td>
+              <td>
+                <i role="button" class="bi bi-trash fs-5 text-danger"></i>
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
       </tbody>
     </table>
   </div>
@@ -53,7 +90,7 @@
   </button>
 
   <div class="my-3">
-    <mat-tab-group class="tab-group">
+    <mat-tab-group class="tab-group" animationDuration="0ms">
       <mat-tab label="ข้อมูลผู้ได้รับใบอนุญาต" class="tab-content"
         ><e-service-person-info></e-service-person-info>
       </mat-tab>
@@ -225,5 +262,8 @@
   <ksp-form-attachment
     [title]="'กรุณาแนบหลักฐาน'"
     [groups]="accusationFiles"
+    [requestType]="3"
+    [uniqueTimestamp]="uniqueTimestamp"
+    [pageType]="'accusationFiles'"
   ></ksp-form-attachment>
 </form>

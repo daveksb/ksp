@@ -2,14 +2,14 @@
   <ksp-request-header-info
     [requestLabel1]="'วันที่ทำรายการ'"
     [requestLabel2]="'เลขที่รายการ'"
-    [requestDate]="'10 ตุลาคม 2565'"
-    [requestNumber]="'112234467876543'"
+    [requestDate]="today"
+    [requestNumber]="requestNumber"
   ></ksp-request-header-info>
   <hr />
   <div class="row">
     <div class="col-3 mb-3">
       <label class="form-label">หมายเลขแดง </label>
-      <input class="form-control" type="text" formControlName="redNumber" />
+      <input class="form-control" type="text" formControlName="resultredno" />
     </div>
   </div>
 
@@ -17,11 +17,19 @@
   <div class="row">
     <div class="col-3 mb-3">
       <label class="form-label">ครั้งที่ </label>
-      <input class="form-control" type="text" formControlName="rulingTimes" />
+      <input
+        class="form-control"
+        type="text"
+        formControlName="resultcomitteeno"
+      />
     </div>
     <div class="col-3 mb-3">
       <label class="form-label">วันที่ </label>
-      <input class="form-control" type="date" formControlName="rulingDate" />
+      <input
+        class="form-control"
+        type="date"
+        formControlName="resultcomitteedate"
+      />
     </div>
 
     <div class="col mb-3">
@@ -36,7 +44,11 @@
   <div class="row">
     <div class="col-3 mb-3">
       <label class="form-label">วันที่ </label>
-      <input class="form-control" type="date" formControlName="accuserInform" />
+      <input
+        class="form-control"
+        type="date"
+        formControlName="resulttoaccuserdate"
+      />
     </div>
 
     <div class="col mb-3">
@@ -51,7 +63,11 @@
   <div class="row">
     <div class="col-3 mb-3">
       <label class="form-label">วันที่ </label>
-      <input class="form-control" type="date" formControlName="agencyInform" />
+      <input
+        class="form-control"
+        type="date"
+        formControlName="resulttoschooldate"
+      />
     </div>
     <div class="col mb-3">
       <label class="form-label"><br /> </label>
@@ -65,7 +81,11 @@
   <div class="row">
     <div class="col-3 mb-3">
       <label class="form-label">วันที่ </label>
-      <input class="form-control" type="date" formControlName="accusedInform" />
+      <input
+        class="form-control"
+        type="date"
+        formControlName="resulttoaccuseddate"
+      />
     </div>
 
     <div class="col mb-3">

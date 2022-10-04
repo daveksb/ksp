@@ -27,8 +27,8 @@ export class MyRewardListComponent implements OnInit {
     this.dataSource.data = [];
   }
 
-  viewDetail() {
-    this.router.navigate(['/', 'reward', 'detail']);
+  viewDetail(id: number) {
+    this.router.navigate(['/', 'reward', 'detail', id]);
   }
 
   honorPage() {
@@ -60,7 +60,7 @@ export const data: PersonLicense[] = [
     order: 1,
     rewardType: 'ระดับจังหวัด',
     professionType: 'ครู',
-    rewardName: 'ครูภาษาไทยดีเด่น',
+    rewardName: 'คุรุสภา',
     requestDate: '1 มิถุนายน 2665',
     announceDate: '1 มิถุนายน 2665',
   },
@@ -76,7 +76,7 @@ export const data: PersonLicense[] = [
     order: 3,
     rewardType: 'ระดับจังหวัด',
     professionType: 'ครู',
-    rewardName: 'ครูภาษาไทยดีเด่น',
+    rewardName: 'ครูผู้สอนดีเด่น',
     requestDate: '1 มิถุนายน 2665',
     announceDate: '1 มิถุนายน 2665',
   },
@@ -84,7 +84,23 @@ export const data: PersonLicense[] = [
     order: 4,
     rewardType: 'ระดับประเทศ',
     professionType: 'ครู',
-    rewardName: 'ครูภาษาไทยดีเด่น',
+    rewardName: 'คุรุสดุดี',
+    requestDate: '1 มิถุนายน 2665',
+    announceDate: '1 มิถุนายน 2665',
+  },
+  {
+    order: 5,
+    rewardType: 'ระดับประเทศ',
+    professionType: 'ครู',
+    rewardName: 'ครูอาวุโส',
+    requestDate: '1 มิถุนายน 2665',
+    announceDate: '1 มิถุนายน 2665',
+  },
+  {
+    order: 6,
+    rewardType: 'ระดับประเทศ',
+    professionType: 'ครู',
+    rewardName: 'ผลงานวิจัยของคุรุสภา',
     requestDate: '1 มิถุนายน 2665',
     announceDate: '1 มิถุนายน 2665',
   },

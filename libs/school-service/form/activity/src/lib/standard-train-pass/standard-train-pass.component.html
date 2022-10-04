@@ -1,19 +1,28 @@
 <form [formGroup]="form">
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">เมื่อ</label>
+      <label class="form-label">
+        <span *ngIf="!isForeignForm">เมื่อ</span>
+        <span *ngIf="isForeignForm">Training Date</span>
+      </label>
       <input class="form-control" type="date" formControlName="date" />
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">สถานที่</label>
+      <label class="form-label"
+        ><span *ngIf="!isForeignForm">สถานที่</span>
+        <span *ngIf="isForeignForm">Place</span></label
+      >
       <input class="form-control" type="text" formControlName="name" />
     </div>
 
     <div class="col-md-6 mb-2">
-      <label class="form-label">หน่วยงานที่จัดอบรม</label>
+      <label class="form-label"
+        ><span *ngIf="!isForeignForm">หน่วยงานที่จัดอบรม</span>
+        <span *ngIf="isForeignForm">Organization</span></label
+      >
       <input class="form-control" type="text" formControlName="agency" />
     </div>
   </div>

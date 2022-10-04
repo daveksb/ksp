@@ -34,7 +34,7 @@
     <div class="col-md-6 mb-2">
       <label class="form-label">Country</label>
       <select class="form-select" formControlName="country">
-        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option value="null" selected hidden disabled>Please Choose</option>
         <option *ngFor="let c of countryList" [value]="c.countryNo">
           {{ c?.countryEn }}
         </option>
@@ -44,7 +44,7 @@
     <div class="col-md-6 mb-2">
       <label class="form-label">Issued by</label>
       <select class="form-select" formControlName="issuedBy">
-        <option selected>กรุณาเลือก</option>
+        <option selected disabled hidden value="null">Please Choose</option>
         <option value="1">One</option>
         <option value="2">Two</option>
         <option value="3">Three</option>
@@ -55,7 +55,7 @@
     <div class="col-md mb-2">
       <label class="form-label">Type of License</label>
       <select class="form-select" formControlName="licenseType">
-        <option selected>กรุณาเลือก</option>
+        <option selected disabled hidden value="null">Please Choose</option>
         <option value="1">One</option>
         <option value="2">Two</option>
         <option value="3">Three</option>

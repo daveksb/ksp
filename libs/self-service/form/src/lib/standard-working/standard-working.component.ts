@@ -55,10 +55,12 @@ export class StandardWorkingComponent
     this.educationTypes3 = educationTypes3;
     this.educationTypes4 = educationTypes4;
 
-    this.form.controls['educationType'].valueChanges.subscribe((res) => {
-      this.selectedEducationType = Number(res);
-      //this.form.controls.educationLevelForm.reset();
-    });
+    this.form.controls['educationType'].valueChanges
+      .pipe(skip(1))
+      .subscribe((res) => {
+        this.selectedEducationType = Number(res);
+        //this.form.controls.educationLevelForm.reset();
+      });
   }
 }
 
