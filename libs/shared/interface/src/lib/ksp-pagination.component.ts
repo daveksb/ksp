@@ -15,7 +15,7 @@ export abstract class KspPaginationComponent {
     offset: 0,
     row: 10,
   };
-  pageSizeOptions = [5, 10, 25, 100]
+  pageSizeOptions = [5, 10, 25, 100];
   onPaginatorEvent(e: PageEvent) {
     this.pageEvent = {
       ...e,
@@ -28,4 +28,12 @@ export abstract class KspPaginationComponent {
     this.search();
   }
   search() {}
+  clearPageEvent() {
+    this.pageEvent = {
+      previousPageIndex: 1,
+      pageIndex: 0,
+      pageSize: 10,
+      length: 0,
+    };
+  }
 }

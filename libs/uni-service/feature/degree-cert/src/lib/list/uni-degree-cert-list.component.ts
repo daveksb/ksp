@@ -114,6 +114,8 @@ export class UniDegreeCertListComponent
     console.log(rowData);
   }
   clear() {
+    this.form.reset()
+    this.clearPageEvent();
     this.dataSource.data = [];
   }
   async getAll() {
