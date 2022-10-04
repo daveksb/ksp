@@ -74,7 +74,6 @@ export class LicenseRequestComponent
   countries$!: Observable<any>;
   countries2$!: Observable<any>;
   licenses$!: Observable<any>;
-  disableNextButton = false;
   eduFiles: any[] = [];
   experienceFiles: any[] = [];
 
@@ -105,7 +104,6 @@ export class LicenseRequestComponent
 
   ngOnInit(): void {
     this.getListData();
-    this.checkButtonsDisableStatus();
     this.checkRequestId();
   }
 
@@ -246,11 +244,5 @@ export class LicenseRequestComponent
     };
     console.log(payload);
     return payload;
-  }
-
-  checkButtonsDisableStatus() {
-    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      this.disableNextButton = false; // !this.form.valid;
-    });
   }
 }

@@ -52,7 +52,7 @@
         <div class="row mb-2">
           <div class="col-6">
             <label class="form-label">หมายเลขบัตรประชาชน/เลขประจำตัวคุรุสภา/หมายเลขหนังสือเดินทาง</label>
-            <input class="form-control" type="text" formControlName="idcardno" />
+            <input class="form-control" type="text" formControlName="cardno" />
           </div>
           <div class="col-6">
             <label class="form-label">ชื่อ-นามสกุล</label>
@@ -63,11 +63,11 @@
         <div class="row mb-2">
           <div class="col-6">
             <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ</label>
-            <input class="form-control" type="date" formControlName="requestdatefrom" />
+            <input class="form-control" type="date" formControlName="requestdate" />
           </div>
           <div class="col-6">
             <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ</label>
-            <input class="form-control" type="date" formControlName="requestdateto" />
+            <input class="form-control" type="date" formControlName="requestdate" />
           </div>
         </div>
   
@@ -99,98 +99,102 @@
       + สร้างใบคำขอ
     </button>
   </div>
-  <div class="table-reponsive bg-white p-3">
-    <table mat-table [dataSource]="dataSource">
+  <div class="table-reponsive bg-white p-3 mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" >
       <ng-container matColumnDef="order">
-        <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-        <td mat-cell *matCellDef="let element">{{ element.order }}</td>
+        <th style="min-width: 60px;" mat-header-cell *matHeaderCellDef>ลำดับ</th>
+        <td mat-cell *matCellDef="let element; let i = index;">{{ i+1 }}</td>
       </ng-container>
 
       <ng-container matColumnDef="requestId">
-        <th mat-header-cell *matHeaderCellDef>เลขที่คำขอ</th>
-        <td mat-cell *matCellDef="let element">{{ element.requestId }}</td>
+        <th style="min-width: 150px;" mat-header-cell *matHeaderCellDef>เลขที่คำขอ</th>
+        <td mat-cell *matCellDef="let element">{{ element.requestno }}</td>
       </ng-container>
 
       <ng-container matColumnDef="submitDate">
-        <th mat-header-cell *matHeaderCellDef>วันที่ยื่นคำขอ</th>
-        <td mat-cell *matCellDef="let element">{{ element.submitDate }}</td>
+        <th style="min-width: 120px;" mat-header-cell *matHeaderCellDef>วันที่ยื่นคำขอ</th>
+        <td mat-cell *matCellDef="let element">{{ element.requestdate }}</td>
       </ng-container>
 
       <ng-container matColumnDef="personId">
-        <th mat-header-cell *matHeaderCellDef>
+        <th style="min-width: 230px;" mat-header-cell *matHeaderCellDef>
           หมายเลขบัตรประชุาชน/เลขประจำตัวคุรุสภา
         </th>
-        <td mat-cell *matCellDef="let element">{{ element.personId }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.studentdetail.idcardno }}</td>
       </ng-container>
 
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        <th style="min-width: 140px;" mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.nameshow }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="degreeCode">
-        <th mat-header-cell *matHeaderCellDef>ระดับปริญญา</th>
+        <th style="min-width: 140px;" mat-header-cell *matHeaderCellDef>ระดับปริญญา</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.degreeCode }}
+          {{ element.degreelevel }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="university">
-        <th mat-header-cell *matHeaderCellDef>มหาวิทยาลัย/สถาบัน</th>
+        <th style="min-width: 140px;" mat-header-cell *matHeaderCellDef>มหาวิทยาลัย/สถาบัน</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.university }}
+          {{ element.uniname }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="degreeName">
-        <th mat-header-cell *matHeaderCellDef>
+        <th style="min-width: 220px;" mat-header-cell *matHeaderCellDef>
           ชื่อปริญญาและประกาศนียบัตรทางการศึกษา
         </th>
         <td mat-cell *matCellDef="let element">
-          {{ element.degreeName }}
+          {{ element.fulldegreenameth }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="major">
-        <th mat-header-cell *matHeaderCellDef>วิชาเอก</th>
+        <th style="min-width: 160px;" mat-header-cell *matHeaderCellDef>วิชาเอก</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.major }}
+          {{ element.coursemajor }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="verifyStatus">
-        <th mat-header-cell *matHeaderCellDef>สถานะตรวจสอบ</th>
+        <th style="min-width: 100px;" mat-header-cell *matHeaderCellDef>สถานะตรวจสอบ</th>
         <td mat-cell *matCellDef="let element">
           <span
             class="rounded-pill d-flex justify-content-center"
             [ngClass]="{
-              edit__status: element.verifyStatus === 'สร้าง' || 'ยื่นเรียบร้อย',
-              verify__status: element.verifyStatus === 'รับข้อมูล'
+              edit__status: element.requeststatus === 1 || 2,
+              verify__status: element.requeststatus === 3
             }"
           >
-            {{ element.verifyStatus }}
+            {{ element.requeststatusname }}
           </span>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="editDate">
-        <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
-        <td mat-cell *matCellDef="let element">{{ element.editDate }}</td>
+        <th style="min-width: 120px;" mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
+        <td mat-cell *matCellDef="let element">{{ element.updatedate }}</td>
       </ng-container>
 
       <ng-container matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef>พิมพ์</th>
         <td mat-cell *matCellDef="let element">
-          <i role="button" class="bi bi-printer-fill fs-5 text-primary"></i>
+          <i role="button" 
+             class="bi bi-printer-fill fs-5 text-primary"
+             (click)="print(element)"></i>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="print">
-        <th mat-header-cell *matHeaderCellDef>ประวัติ</th>
+        <th style="min-width: 60px;" mat-header-cell *matHeaderCellDef>ประวัติ</th>
         <td class="text-center" mat-cell *matCellDef="let element">
           <i
             role="button"
-            (click)="history()"
+            (click)="history(element)"
             class="bi bi-eye fs-5 text-success"
           ></i>
         </td>

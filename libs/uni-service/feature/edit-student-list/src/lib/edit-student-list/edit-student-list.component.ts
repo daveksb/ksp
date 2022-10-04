@@ -5,8 +5,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { requestStatus } from '@ksp/shared/constant';
 import { ListData } from '@ksp/shared/interface';
-import { UniInfoService } from '@ksp/shared/service';
-import { HistoryRequestDialogComponent } from '@ksp/uni-service/dialog';
+import { UniInfoService, UniRequestService } from '@ksp/shared/service';
+import { stringToThaiDate } from '@ksp/shared/utility';
+import { HistoryRequestDialogComponent, PrintRequestDialogComponent } from '@ksp/uni-service/dialog';
 import _ from 'lodash';
 import { map } from 'rxjs';
 const mapOption = () =>
@@ -28,33 +29,61 @@ export class EditStudentListComponent implements OnInit {
   degreeLevelOptions: ListData[] = [];
   requestStatusOptions: ListData[] = requestStatus;
   dataSource = new MatTableDataSource<studentList>();
+  // '3-08-5-651004-00005'
   form = this.fb.group({
     requestno: [],
     degreelevel: [],
     fulldegreename: [],
     coursemajor: [],
     plancalendaryear: [],
+    courseacademicyear: [],
     requeststatus: [],
-    idcardno: [],
+    cardno: [],
     name: [],
-    requestdatefrom: [],
-    requestdateto: []
+    requestdate: [],
+    requestprocess: [],
+    offset: [0],
+    row: [10]
   })
 
   constructor(
     private router: Router, 
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private uniInfoService: UniInfoService,) {}
+    private uniInfoService: UniInfoService,
+    private uniRequestService: UniRequestService) {}
 
   ngOnInit(): void {
-    this.getAll();      
+    this.getAll();     
+    this.search(); 
   }
 
-  history() {
-    this.dialog.open(HistoryRequestDialogComponent, {
-      width: '400px',
-    });
+  print(row: any) {
+    const payload = {
+      unirequestadmissionid: row.id
+    };
+    this.uniInfoService.uniRequestEditHistory(payload).subscribe((response => {
+      if (response) {
+        this.dialog.open(PrintRequestDialogComponent, {
+          width: '600px',
+          data: response.datareturn
+        });
+      }
+    }));
+  }
+
+  history(row: any) {
+    const payload = {
+      unirequestadmissionid: row.id
+    };
+    this.uniInfoService.uniRequestEditHistory(payload).subscribe((response => {
+      if (response) {
+        this.dialog.open(HistoryRequestDialogComponent, {
+          width: '400px',
+          data: response.datareturn
+        });
+      }
+    }));
   }
 
   getAll() {
@@ -67,7 +96,29 @@ export class EditStudentListComponent implements OnInit {
   }
 
   search() {
-    this.dataSource.data = data;
+    this.uniRequestService.getEditRequestAdmision(this.form.value)
+    .subscribe((response: any) => {
+      if (response.datareturn) {
+        this.dataSource.data = response.datareturn.map(((data: any)=>{
+          const parsedata = JSON.parse(data.admissionlist);
+          data.studentdetail = parsedata[0];
+          data.nameshow = `${data.studentdetail.firstnameth ? data.studentdetail.firstnameth : ''}`+
+                          ` ${data.studentdetail.lastnameth ? data.studentdetail.lastnameth : ''}`;
+          data.requestdate = stringToThaiDate(data?.requestdate);
+          if (data.updatedate) data.updatedate = stringToThaiDate(data?.updatedate);
+          const finddegreelevel = this.degreeLevelOptions.find((level=>{
+            return data.degreelevel == level.value;
+          }))
+          data.degreelevelname = finddegreelevel?.label || '';
+          data.requeststatusname = data.requeststatus == '1' ? 'สร้าง' :
+                               data.requeststatus == '2' ? 'ยื่นเรียบร้อย' :
+                               data.requeststatus == '3' ? 'รับข้อมูล' : '';
+          return data;
+        }));
+      } else {
+        this.dataSource.data = [];
+      }
+    })
   }
 
   clear() {

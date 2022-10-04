@@ -140,7 +140,7 @@
         (click)="save()"
         type="button"
         class="ms-3 btn btn-primary"
-        [disabled]="disableNextButton"
+        [disabled]="form.invalid"
       >
         ต่อไป
       </button>

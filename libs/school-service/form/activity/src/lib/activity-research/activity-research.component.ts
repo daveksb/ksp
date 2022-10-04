@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, Input, OnDestroy } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -9,14 +9,17 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./activity-research.component.scss'],
   providers: providerFactory(ActivityResearchComponent),
 })
-export class ActivityResearchComponent extends KspFormBaseComponent {
+export class ActivityResearchComponent
+  extends KspFormBaseComponent
+  implements OnDestroy
+{
   @Input() data: any;
   @Input() isForeignForm = false;
 
   //การทำวิจัยในเรื่องที่เป็นประโยชน์ต่อการจัดการเรียนรู้และการจัดการศึกษา
   override form = this.fb.group({
-    researchName: [],
-    researchDate: [],
+    researchName: [null, Validators.required],
+    researchDate: [null, Validators.required],
   });
 
   constructor(private fb: FormBuilder) {
@@ -28,5 +31,10 @@ export class ActivityResearchComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+
+  override ngOnDestroy(): void {
+    this.onChange(null);
+    this.onTouched();
   }
 }

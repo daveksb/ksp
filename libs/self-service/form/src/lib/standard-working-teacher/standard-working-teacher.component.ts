@@ -1,10 +1,28 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SchoolServiceFormActivityModule } from '@ksp/school-service/form/activity';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { pairwise } from 'rxjs';
 
+const formMap = [
+  'activity1',
+  'activity2',
+  'activity3',
+  'activity4',
+  'activity5',
+  'activity6',
+  'activity7',
+  'activity8',
+  'activity9',
+  'activity10',
+  'activity11',
+  'activity12',
+];
+
+@UntilDestroy()
 @Component({
   selector: 'self-service-standard-working-teacher',
   standalone: true,
@@ -56,9 +74,20 @@ export class StandardWorkingTeacherComponent
   }
 
   ngOnInit(): void {
-    this.form.valueChanges.subscribe((res) => {
-      //console.log('exp form = ', res);
-    });
+    this.form.valueChanges
+      .pipe(untilDestroyed(this), pairwise())
+      .subscribe(([prev, next]: [prev: any, next: any]) => {
+        formMap.forEach((form) => {
+          if (prev[form] !== next[form]) {
+            if (next[form]) {
+              this.form.get(`${form}Form`)?.addValidators(Validators.required);
+            } else {
+              this.form.get(`${form}Form`)?.clearValidators();
+            }
+            this.form.get(`${form}Form`)?.updateValueAndValidity();
+          }
+        });
+      });
   }
 
   get activity1() {

@@ -115,7 +115,7 @@
     <button *ngIf="requestId" (click)="cancel()" type="button" class="ms-3 btn border-primary text-primary">
       ยกเลิกใบคำขอ
     </button>
-    <button type="button" (click)="save()" class="ms-3 btn btn-primary">
+    <button type="button" (click)="save()" class="ms-3 btn btn-primary" [disabled]="!form.valid">
       ต่อไป
     </button>
   </div>

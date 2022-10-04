@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -12,14 +12,14 @@ import { providerFactory } from '@ksp/shared/utility';
 export class EducationLevelFormThreeComponent extends KspFormBaseComponent {
   @Input() countries: any[] = [];
   override form = this.fb.group({
-    resolutionTimes: [],
-    resolutionDate: [],
-    educationInstitution: [],
-    graduateDegree: [],
-    branch: [],
-    country: [],
-    admissionDate: [],
-    graduateDate: [],
+    resolutionTimes: [null, Validators.required],
+    resolutionDate: [null, Validators.required],
+    educationInstitution: [null, Validators.required],
+    graduateDegree: [null, Validators.required],
+    branch: [null, Validators.required],
+    country: [null, Validators.required],
+    admissionDate: [null, Validators.required],
+    graduateDate: [null, Validators.required],
   });
 
   constructor(private fb: FormBuilder) {

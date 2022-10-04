@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, Input, OnDestroy } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -9,17 +9,20 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./activity-seminar.component.scss'],
   providers: providerFactory(ActivitySeminarComponent),
 })
-export class ActivitySeminarComponent extends KspFormBaseComponent {
+export class ActivitySeminarComponent
+  extends KspFormBaseComponent
+  implements OnDestroy
+{
   @Input() data: any;
   @Input() isForeignForm = false;
 
   //การเข้าฟังการบรรยาย การอภิปราย การประชุมวิชาการ การประชุมปฏิบัติการ การประชุมสัมมนา หรือการประชุมในรูปแบบอื่นๆที่คุรุใสภาให้การรับรอง
   override form = this.fb.group({
-    course: [],
-    trainingAddress: [],
-    trainingAgency: [],
-    dateFrom: [],
-    dateTo: [],
+    course: [null, Validators.required],
+    trainingAddress: [null, Validators.required],
+    trainingAgency: [null, Validators.required],
+    dateFrom: [null, Validators.required],
+    dateTo: [null, Validators.required],
   });
 
   constructor(private fb: FormBuilder) {
@@ -31,5 +34,10 @@ export class ActivitySeminarComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+
+  override ngOnDestroy(): void {
+    this.onChange(null);
+    this.onTouched();
   }
 }

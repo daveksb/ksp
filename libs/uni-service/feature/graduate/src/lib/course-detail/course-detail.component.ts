@@ -71,9 +71,9 @@ export class CourseDetailComponent implements OnInit {
     this.step1Form.setValue({
       step1: {
         institutionsCode: res?.universitycode || '',
-        institutionsGroup: getCookie('uniType') || '',
-        institutionsName: res?.name || '',
-        provience: res?.provinceid || '',
+        institutionsGroup: res?.unitype || '',
+        institutionsName: res?.uniname || '',
+        provience: res?.uniprovince || '',
         courseDetailType: res?.coursedetailtype,
         courseDetail: res?.coursedetailinfo
           ? parseJson(res?.coursedetailinfo)

@@ -84,22 +84,24 @@ export class EditStudentDetailComponent implements OnInit {
   }
 
   searchData() {
-    const payload = {
-      idcardno: this.formSearch.controls.idcardno.value,
-      firstname: this.formSearch.controls.firstname.value,
-      lastname: this.formSearch.controls.lastname.value,
-      offset: 0,
-      row: 10
+    const getForm = this.formSearch.value;
+    if (getForm.idcardno || getForm.firstname || getForm.lastname) {
+      const payload = {
+        idcardno: this.formSearch.controls.idcardno.value,
+        firstname: this.formSearch.controls.firstname.value,
+        lastname: this.formSearch.controls.lastname.value,
+        offset: 0,
+        row: 10
+      }
+      this.uniInfoService.uniAdmissionSearch2(payload)
+        .subscribe((response: any) => {
+          if (response.datareturn) {
+            this.data = true;
+            this.oldValue = response.datareturn[0];
+            this.studentDetail.patchValue(response.datareturn[0]);
+          }
+        });
     }
-    this.uniInfoService.uniAdmissionSearch2(payload)
-      .subscribe((response: any) => {
-        if (response.datareturn) {
-          this.data = true;
-          this.oldValue = response.datareturn[0];
-          this.studentDetail.patchValue(response.datareturn[0]);
-          console.log(this.studentDetail.value)
-        }
-      });
   }
 
   clearData() {
@@ -112,31 +114,6 @@ export class EditStudentDetailComponent implements OnInit {
   }
 
   save() {
-    const userId = Number(getCookie('userId'));
-    let payload = {
-      id: null,
-      requestprocess: '2',
-      requeststatus: '1',
-      requesttype: '08',
-      uniuserid: userId,
-      systemtype: '3',
-      subtype: '5',
-      unidegreecertid: this.oldValue.unidegreecertid,
-      unirequestadmissionid: this.oldValue.unirequestadmissionid,
-      unirequestdegreecertid: this.oldValue.unidegreecertid,
-      degreeapprovecode: this.oldValue.degreeapprovecode,
-      planyear: this.oldValue.planyear,
-      plancalendaryear: this.oldValue.plancalendaryear,
-      planname: this.oldValue.planname,
-      ref1: '3',
-      ref2: '08',
-      ref3: '5',
-      admissionlist: ''
-    }
-    let admissionlist = [];
-    admissionlist.push(this.formData.controls.editStudent.getRawValue());
-    payload.admissionlist = JSON.stringify(admissionlist);
-    console.log(this.formData.controls.editStudent.value)
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -176,7 +153,14 @@ export class EditStudentDetailComponent implements OnInit {
               fileinfo: JSON.stringify({ fileUpload })
             }
             let admissionlist = [];
-            admissionlist.push(this.formData.controls.editStudent.getRawValue());
+            let formsave = {};
+            const editStudent = this.formData.value.editStudent as any;
+            const studentform = this.studentDetail.value as object;
+            formsave = {
+              ...editStudent,
+              ...studentform
+            }
+            admissionlist.push(formsave);
             payload.admissionlist = JSON.stringify(admissionlist);
             return this.requestService.createRequestAdmission(payload);
           }

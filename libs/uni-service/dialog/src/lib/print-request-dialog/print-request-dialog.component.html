@@ -21,6 +21,7 @@
       <td>
         <i role="button" class="bi bi-printer-fill text-primary fs-5 ms-3"></i>
       </td>
-    </tr>    
+    </tr>
+    <tr *ngIf="!dataSource" colSpan="4" style="width: 100%" class="text-center">ไม่พบข้อมูล</tr>
   </tbody>
 </table>
