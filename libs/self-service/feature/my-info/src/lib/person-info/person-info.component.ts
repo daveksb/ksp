@@ -64,7 +64,7 @@ export class PersonInfoComponent implements OnInit {
         this.imgSrc = atob(res.filedata);
       }
     });
-    //this.form.disable();
+    this.form.disable();
   }
 
   clearData() {

@@ -1,18 +1,34 @@
-import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { CommonModule, NgIf } from '@angular/common';
 
 @UntilDestroy()
 @Component({
   templateUrl: './forbidden-property.component.html',
   styleUrls: ['./forbidden-property.component.scss'],
   standalone: true,
-  imports: [MatDialogModule, FileUploadComponent, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    MatDialogModule,
+    FileUploadComponent,
+    ReactiveFormsModule,
+  ],
 })
-export class ForbiddenPropertyFormComponent extends KspFormBaseComponent {
+export class ForbiddenPropertyFormComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
   @Input()
   title = `ขอรับรองว่าไม่เป็นผู้มีลักษณะต้องห้ามตามที่กำหนดไว้ในมาตรา 44
   แห่งพระราชบัญญัติสภาครูและบุคลากรทางการศึกษา พ.ศ.2546`;
@@ -22,14 +38,16 @@ export class ForbiddenPropertyFormComponent extends KspFormBaseComponent {
     immoral: [null, Validators.required],
     incompetent: [null, Validators.required],
     prison: [null, Validators.required],
-    prisonReason: [],
-    fileId: [null, Validators.required],
-    fileName: [null, Validators.required],
+    prisonReason: [null],
+    fileId: [null],
+    fileName: [null],
   });
 
   get fileName() {
     return this.form.controls.fileName.value || '';
   }
+
+  prisonSelected: any;
 
   constructor(
     private fb: FormBuilder,
@@ -52,6 +70,12 @@ export class ForbiddenPropertyFormComponent extends KspFormBaseComponent {
       console.log(this.data.prohibitProperty);
       this.form.patchValue(this.data.prohibitProperty);
     }
+  }
+
+  ngOnInit(): void {
+    this.form.valueChanges.subscribe((res) => {
+      this.prisonSelected = Number(res['prison']);
+    });
   }
 
   uploadComplete(evt: any) {

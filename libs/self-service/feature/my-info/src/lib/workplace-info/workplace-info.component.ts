@@ -15,6 +15,12 @@ import { replaceEmptyWithNull } from '@ksp/shared/utility';
   styleUrls: ['./workplace-info.component.scss'],
 })
 export class WorkplaceInfoComponent implements OnInit {
+  label = 'แก้ไขข้อมูล';
+
+  form = this.fb.group({
+    workplace: [],
+  });
+
   constructor(
     private addressService: AddressService,
     private fb: FormBuilder,
@@ -25,10 +31,8 @@ export class WorkplaceInfoComponent implements OnInit {
   amphurs1$!: Observable<any>;
   tumbols1$!: Observable<any>;
   bureau$!: Observable<any>;
-  form = this.fb.group({
-    workplace: [],
-  });
-  mode!: FormMode;
+
+  mode: FormMode = 'view';
   baseForm = this.fb.group(new SelfMyInfo());
   ngOnInit(): void {
     this.mode = 'view';
@@ -72,9 +76,11 @@ export class WorkplaceInfoComponent implements OnInit {
   onClickChangeMode() {
     if (this.mode == 'view') {
       this.mode = 'edit';
+      this.label = 'บันทึกข้อมูล';
     } else {
       this.savingData();
       this.mode = 'view';
+      this.label = 'แก้ไขข้อมูล';
     }
   }
 

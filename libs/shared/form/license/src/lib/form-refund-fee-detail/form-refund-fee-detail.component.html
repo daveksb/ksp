@@ -4,7 +4,7 @@
     <div class="col-md-6 mb-2">
       <label class="form-label">ประเภทใบประกอบวิชาชีพ</label>
       <select formControlName="licensetype" class="form-select">
-        <option selected>กรุณาเลือก</option>
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">ค่าขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ</option>
         <option value="2">ค่าต่ออายุใบอนุญาตประกอบวิชาชีพ</option>
         <option value="3">ค่าใบแทน</option>
@@ -15,7 +15,7 @@
     <div class="col-md-6 mb-2">
       <label class="form-label">ประเภทวิชาชีพ</label>
       <select class="form-select" formControlName="eduoccupytype">
-        <option selected>กรุณาเลือก</option>
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">ครู</option>
         <option value="2">ผู้บริหารสถานศึกษา</option>
         <option value="3">ผู้บริหารการศึกษา</option>
@@ -31,7 +31,7 @@
     <div class="col-md-6 mb-2">
       <label class="form-label">เหตุผลขอคืนเงินค่าธรรมเนียม</label>
       <select class="form-select" formControlName="refundreason">
-        <option selected>กรุณาเลือก</option>
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">ขาดคุณสมบัติตามมาตรฐานวิชาชีพ</option>
         <option value="2">ได้รับการยกเว้นค่าธรรมเนียม</option>
         <option value="3">ชำระเงินซ้ำ</option>
@@ -97,7 +97,7 @@
     <div class="col-md-6 mb-2">
       <label class="form-label">บัญชีธนาคาร</label>
       <select class="form-select" formControlName="bankName">
-        <option selected>กรุณาเลือก</option>
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">ธนาคารกรุงเทพ</option>
         <option value="2">ธนาคารกสิกรไทย</option>
         <option value="3">ธนาคารกรุงไทย</option>

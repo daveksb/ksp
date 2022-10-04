@@ -1,6 +1,6 @@
 <form [formGroup]="form">
-  <div class="row mb-3">
-    <div class="col-md-6">
+  <div class="row">
+    <div class="col-md-6 mb-3">
       <select
         formControlName="standardKnowledgeType"
         class="form-select"
@@ -56,7 +56,11 @@
   </ng-container>
 
   <ng-container *ngIf="selectedstandardKnowledgeType >= 0"
-    ><hr />
-    <ksp-form-attachment></ksp-form-attachment
+    ><br />
+    <ksp-form-attachment
+      [groups]="workingInfo"
+      [uniqueTimestamp]="uniqueTimestamp"
+      [mode]="'edit'"
+    ></ksp-form-attachment
   ></ng-container>
 </form>

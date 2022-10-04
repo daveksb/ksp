@@ -28,7 +28,7 @@
     <div class="col-md-5 col-md-5">
       <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
       <select class="form-select" formControlName="prefixTh">
-        <option value="null" selected>กรุณาเลือก</option>
+        <option value="null" selected disabled hidden>กรุณาเลือก</option>
         <option *ngFor="let prefix of prefixList" [value]="prefix.id">
           {{ prefix?.name_th }}
         </option>

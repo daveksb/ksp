@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ListData } from '@ksp/shared/interface';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
@@ -17,6 +17,8 @@ export class RenewLicensePropertyManagerComponent
 {
   selectedstandardKnowledgeType!: number;
   standardKnowledges: ListData[] = [];
+  @Input() uniqueTimestamp = '';
+  @Input() workingInfo: any[] = [];
 
   override form = this.fb.group({
     standardKnowledgeType: [],
@@ -38,7 +40,7 @@ export class RenewLicensePropertyManagerComponent
     this.standardKnowledges = standardKnowledges;
 
     this.form.controls['standardKnowledgeType'].valueChanges
-      .pipe(skip(1))
+      .pipe(skip(3))
       .subscribe((res) => {
         this.selectedstandardKnowledgeType = Number(res);
         //this.form.controls.educationLevelForm.reset();

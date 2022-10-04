@@ -10,15 +10,19 @@ import { replaceEmptyWithNull } from '@ksp/shared/utility';
   styleUrls: ['./address-info.component.scss'],
 })
 export class AddressInfoComponent implements OnInit {
+  label = 'แก้ไขข้อมูล';
+
+  form = this.fb.group({
+    addr1: [],
+    addr2: [],
+  });
+
   constructor(
     private myInfoService: MyInfoService,
     private addressService: AddressService,
     private fb: FormBuilder
   ) {}
-  form = this.fb.group({
-    addr1: [],
-    addr2: [],
-  });
+
   mode: FormMode = 'view';
   provinces1$!: Observable<any>;
   provinces2$!: Observable<any>;
@@ -83,12 +87,15 @@ export class AddressInfoComponent implements OnInit {
       }
     }
   }
+
   onClickChangeMode() {
     if (this.mode == 'view') {
       this.mode = 'edit';
+      this.label = 'บันทึกข้อมูล';
     } else {
       this.savingData();
       this.mode = 'view';
+      this.label = 'แก้ไขข้อมูล';
     }
   }
 

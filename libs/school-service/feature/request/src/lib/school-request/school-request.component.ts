@@ -713,6 +713,24 @@ export class SchoolRequestComponent implements OnInit {
       });
   }
 
+  tempSaveComplete() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      width: '350px',
+      data: {
+        header: `บันทึกใบคำขอชั่วคราวสำเร็จ`,
+        buttonLabel: 'กลับสู่หน้าหลัก',
+      },
+    });
+
+    completeDialog.componentInstance.completed
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res) {
+          this.backToListPage();
+        }
+      });
+  }
+
   provinceChanged(type: number, evt: any) {
     const province = evt.target?.value;
     if (province) {
