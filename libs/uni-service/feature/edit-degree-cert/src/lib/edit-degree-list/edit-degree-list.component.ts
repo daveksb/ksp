@@ -51,6 +51,8 @@ export class EditDegreeListComponent extends KspPaginationComponent implements O
     this.getAll();
   }
   clear() {
+    this.form.reset()
+    this.clearPageEvent();
     this.dataSource.data = [];
   }
 
