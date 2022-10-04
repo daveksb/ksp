@@ -1,5 +1,6 @@
+import { getCookie } from '@ksp/shared/utility';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -36,9 +37,9 @@ const mapOption = () =>
     MatPaginatorModule,
   ],
 })
-export class UniHomeComponent extends KspPaginationComponent {
-  badgeTitle1:any;
-  badgeTitle2:any;
+export class UniHomeComponent extends KspPaginationComponent implements OnInit {
+  badgeTitle1: any;
+  badgeTitle2: any;
 
   // badgeTitle1 = [
   //   `เลขที่คำขอ : 010641000123
@@ -50,7 +51,7 @@ export class UniHomeComponent extends KspPaginationComponent {
   //   `กรุณาส่งกลับภายในวันที่ DD/MM/YYYY มิฉะนั้นใบคำขอจะถูกยกเลิก`,
   // ];
 
-  form = this.fb.group({
+  form: any = this.fb.group({
     homeSearch: [],
   });
   degreeLevelOptions: ListData[] = [];
@@ -66,7 +67,7 @@ export class UniHomeComponent extends KspPaginationComponent {
     private uniInfoService: UniInfoService,
     private addressService: AddressService
   ) {
-    super()
+    super();
     this.getAll();
   }
 
@@ -84,7 +85,10 @@ export class UniHomeComponent extends KspPaginationComponent {
   private _findOptions(dataSource: any, key: any) {
     return _.find(dataSource, { value: key })?.label || '-';
   }
-override  search() {
+  ngOnInit(): void {
+    this.initFormData();
+  }
+  override search() {
     const value: any = this.form.value?.homeSearch;
     const payload = {
       uniid: value?.university || '',
@@ -97,11 +101,11 @@ override  search() {
       coursemajor: value?.major || '',
       coursesubjects: value?.subject || '',
       uniprovince: value?.province || '',
-      ...this.tableRecord
+      ...this.tableRecord,
     };
     this.uniInfoService.uniDegreeSearch(payload).subscribe(async (res) => {
       const newData: any[] = [];
-      this.pageEvent.length = res?.countrow
+      this.pageEvent.length = res?.countrow;
       for (const row of res?.datareturn || []) {
         const degreeLevel = this._findOptions(
           this.degreeLevelOptions,
@@ -130,10 +134,26 @@ override  search() {
 
   clear() {
     this.form.reset();
+    this.clearPageEvent();
     this.dataSource.data = [];
   }
-
+  initFormData() {
+    this.form.setValue({
+      homeSearch: {
+        universityType: getCookie('uniType'),
+        uniid: getCookie('uniId'),
+      },
+    });
+  }
   getAll() {
+    if(getCookie('uniType')){
+      this.uniInfoService
+      .getUniversity(getCookie('uniType'))
+      .pipe(mapOption())
+      .subscribe((res) => {
+        this.universities = res;
+      });
+    }
     this.uniInfoService
       .getUniversityType()
       .pipe(mapOption())
