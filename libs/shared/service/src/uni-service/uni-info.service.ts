@@ -32,7 +32,9 @@ export class UniInfoService {
         ...params,
         tokenkey: this.tokenKey,
       }
-    );
+    ).pipe(map((res:any)=>{
+      return {...res,datareturn:_.orderBy(res?.datareturn,["requestdate"],'desc')}
+    }))
   }
 
   uniRequestDegreeCertSelectById(id: any): Observable<any> {
