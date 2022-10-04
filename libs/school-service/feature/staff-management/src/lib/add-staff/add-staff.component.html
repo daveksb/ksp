@@ -9,8 +9,9 @@
   <div class="bg-white p-3">
     <ksp-request-header-info [requestDate]="today"></ksp-request-header-info>
     <hr />
-    <div class="bg-light p-3 mb-3">
+    <div class="bg-light p-3 mb-3 default-width">
       <ksp-form-user-info
+        [isAddStaff]="true"
         formControlName="userInfo"
         [isDarkMode]="false"
         [prefixList]="prefixList$ | async"

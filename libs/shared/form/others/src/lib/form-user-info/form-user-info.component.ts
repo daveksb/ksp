@@ -18,15 +18,17 @@ export class FormUserInfoComponent
   extends KspFormBaseComponent
   implements OnInit
 {
-  @Input() isDarkMode = false;
+
   @Input() prefixList: any[] = [];
   @Input() countryList: any[] = [];
   @Input() nationList: any[] = [];
   @Input() visaClassList: any[] = [];
   @Input() visaTypeList: any[] = [];
-  @Input() isSchoolService = true;
   @Input() displayMode!: number[];
   @Input() isqualification = false;
+  @Input() isDarkMode = false;
+  @Input() isSchoolService = true;
+  @Input() isAddStaff = false;
 
   RequestTypeEnum = SchoolRequestType;
   validatorMessages = validatorMessages;
