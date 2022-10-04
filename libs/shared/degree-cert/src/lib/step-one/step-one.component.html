@@ -80,18 +80,17 @@
       <input formControlName="section2" type="checkbox" />
       <label class="form-label ms-1">ขอแก้ไขข้อมูล</label>
     </div>
-
-    <div class="bg-light px-3 pt-2 mb-3">
-      <div class="box-header">การจัดการหลักสูตร หรือลักษณะหลักสูตร</div>
-      <div class="row mb-3">
-        <label class="form-label"
-          >กรุณาเลือกประเภทการจัดการหลักสูตร หรือลักษณะหลักสูตร<span
-            class="text-danger fs-6"
+    <fieldset [disabled]="section2">
+      <div class="bg-light px-3 pt-2 mb-3">
+        <div class="box-header">การจัดการหลักสูตร หรือลักษณะหลักสูตร</div>
+        <div class="row mb-3">
+          <label class="form-label"
+            >กรุณาเลือกประเภทการจัดการหลักสูตร หรือลักษณะหลักสูตร<span
+              class="text-danger fs-6"
+            >
+              *เลือกข้อมูลของท่านได้เพียง 1 ข้อเท่านั้น</span
+            ></label
           >
-            *เลือกข้อมูลของท่านได้เพียง 1 ข้อเท่านั้น</span
-          ></label
-        >
-        <fieldset [disabled]="section2">
           <div class="col-7">
             <select
               formControlName="courseDetailType"
@@ -104,18 +103,30 @@
               </option>
             </select>
           </div>
-        </fieldset>
+        </div>
+        <div class="row mb-3">
+          <container-element [ngSwitch]="courseDetailType">
+            <ksp-course-form-one
+              *ngSwitchCase="1"
+              formControlName="courseDetail"
+            ></ksp-course-form-one>
+            <ksp-course-form-three
+              *ngSwitchCase="2"
+              formControlName="courseDetail"
+            ></ksp-course-form-three>
+            <ksp-course-form-four
+              *ngSwitchCase="3"
+              formControlName="courseDetail"
+            ></ksp-course-form-four>
+            <ksp-course-form-two
+              *ngSwitchCase="4"
+              formControlName="courseDetail"
+            ></ksp-course-form-two>
+            <ng-container *ngSwitchDefault></ng-container>
+          </container-element>
+        </div>
       </div>
-      <div class="row mb-3">
-        <container-element [ngSwitch]="courseDetailType">
-         <ksp-course-form-one *ngSwitchCase="1" formControlName="courseDetail"></ksp-course-form-one>
-         <ksp-course-form-three *ngSwitchCase="2" formControlName="courseDetail"></ksp-course-form-three>
-         <ksp-course-form-four *ngSwitchCase="3" formControlName="courseDetail"></ksp-course-form-four>
-         <ksp-course-form-two *ngSwitchCase="4" formControlName="courseDetail"></ksp-course-form-two>
-         <ng-container *ngSwitchDefault></ng-container>
-        </container-element>
-      </div>
-    </div>
+    </fieldset>
 
     <div class="d-flex align-items-center" *ngIf="showEditCheckbox">
       <input type="checkbox" formControlName="section3" />
