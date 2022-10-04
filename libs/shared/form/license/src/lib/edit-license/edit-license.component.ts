@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -102,9 +102,12 @@ export class EditLicenseComponent extends KspFormBaseComponent {
     controlList.forEach((i) => {
       if (checked) {
         this.form.controls[i].enable();
+        this.form.controls[i].setValidators([Validators.required]);
       } else {
         this.form.controls[i].disable();
+        this.form.controls[i].clearValidators();
       }
+      this.form.controls[i].updateValueAndValidity();
     });
   }
 }
