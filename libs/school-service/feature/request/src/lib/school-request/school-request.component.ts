@@ -305,8 +305,6 @@ export class SchoolRequestComponent implements OnInit {
     const tab5 = mapFileInfo(this.reasonFiles);
     const tab6 = mapFileInfo(this.attachFiles);
 
-    console.log('formData.schoolAddr = ', formData.schoolAddr);
-
     const payload = {
       ...replaceEmptyWithNull(userInfo),
       ...{ addressinfo: JSON.stringify([formData.addr1, formData.addr2]) },
@@ -346,7 +344,6 @@ export class SchoolRequestComponent implements OnInit {
 
     //console.log('update payload = ', res);
     this.requestService.updateRequest(res).subscribe((res) => {
-      //this.confirmCompleted();
       this.backToListPage();
     });
   }
