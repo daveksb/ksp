@@ -153,3 +153,12 @@ export function jsonParse(object: string): any {
     return null;
   }
 }
+
+export function jsonStringify(object: any): string {
+  try {
+    if (typeof object === 'string') return object;
+    return JSON.stringify(object);
+  } catch (e) {
+    return '';
+  }
+}

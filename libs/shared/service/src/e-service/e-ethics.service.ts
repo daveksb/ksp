@@ -105,6 +105,13 @@ export class EthicsService {
       'investigationorderdate',
       'investigationdate',
       'investigationreportdate',
+      'inquiryorderdate',
+      'inquiryexplaindate',
+      'inquiryjbdate',
+      'resultcomitteedate',
+      'resulttoaccuserdate',
+      'resulttoschooldate',
+      'resulttoaccuseddate',
     ];
     const jsonColumn = [
       'accuserinfo',
@@ -112,6 +119,8 @@ export class EthicsService {
       'accusationconsideration',
       'investigationresult',
       'investigationsubcommittee',
+      'inquiryresult',
+      'inquirysubcommittee',
     ];
     for (const key in info) {
       const ethicsKey = key as EthicsKey;

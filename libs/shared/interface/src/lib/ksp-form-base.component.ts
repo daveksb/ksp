@@ -67,6 +67,7 @@ export abstract class KspFormBaseComponent
               formGroup.controls[subkey].patchValue(value[key][i][subkey]);
             }
           }
+          if (this.mode == 'view') formGroup.disable();
         }
       } else if (this.form.controls[key] instanceof FormGroup) {
         const formGroup = this.form.controls[key] as FormGroup;
