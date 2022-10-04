@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { StaffService } from '@ksp/shared/service';
 import { parseJson } from '@ksp/shared/utility';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'school-service-staff-list',
@@ -13,6 +14,8 @@ import { parseJson } from '@ksp/shared/utility';
   styleUrls: ['./staff-list.component.scss'],
 })
 export class StaffListComponent implements AfterViewInit {
+  positions$!: Observable<any>;
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -39,22 +42,34 @@ export class StaffListComponent implements AfterViewInit {
     private router: Router,
     private fb: FormBuilder,
     private service: StaffService
-  ) {}
+  ) {
+    this.positions$ = this.service.getPositionTypes();
+  }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
 
-  search() {
+  search(filter: any) {
+    console.log('filter = ', filter);
     const payload = {
-      schoolid: `${this.schoolId}`,
+      licenseno: filter.licenseno,
+      name: filter.name,
+      cardno: filter.cardno,
+      teachinglevel: filter.teachinglevel,
+      position: filter.position,
+      schoolId: `${this.schoolId}`,
+      offset: '0',
+      row: '100',
     };
-    this.service.searchStaffsFromSchoolId(payload).subscribe((res) => {
-      res.map((i: any) => {
+
+    this.service.searchStaffs(payload).subscribe((res) => {
+      console.log('res = ', res);
+      /*       res.map((i: any) => {
         const temp = parseJson(i.hiringinfo);
         i.startdate = temp.startDate;
         i.enddate = temp.endDate;
-      });
+      }); */
 
       this.dataSource.data = res;
       this.dataSource.sort = this.sort;
@@ -62,7 +77,6 @@ export class StaffListComponent implements AfterViewInit {
       this.sort.active = sortState.active;
       this.sort.direction = sortState.direction;
       this.sort.sortChange.emit(sortState);
-      //console.log('res = ', res);
     });
   }
 

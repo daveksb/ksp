@@ -8,7 +8,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { StaffService } from '@ksp/shared/service';
-import { getCookie, formatCheckboxData } from '@ksp/shared/utility';
+import { formatCheckboxData } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 
