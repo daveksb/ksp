@@ -305,6 +305,8 @@ export class SchoolRequestComponent implements OnInit {
     const tab5 = mapFileInfo(this.reasonFiles);
     const tab6 = mapFileInfo(this.attachFiles);
 
+    console.log('formData.schoolAddr = ', formData.schoolAddr);
+
     const payload = {
       ...replaceEmptyWithNull(userInfo),
       ...{ addressinfo: JSON.stringify([formData.addr1, formData.addr2]) },
@@ -367,7 +369,7 @@ export class SchoolRequestComponent implements OnInit {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
       //console.log('userInfo valid = ', this.form.controls.userInfo.valid);
       //console.log('form valid = ', this.form.valid);
-
+      //console.log('this.currentProcess = ', this.currentProcess);
       // สถานะ ยกเลิก disable ทุกอย่าง
       if (this.requestStatus === 0) {
         this.disableTempSave = true;
@@ -433,6 +435,9 @@ export class SchoolRequestComponent implements OnInit {
       this.patchTeachingInfo(parseJson(res.teachinginfo));
       this.patchReasonInfo(parseJson(res.reasoninfo));
       this.patchFileInfo(parseJson(res.fileinfo));
+
+      const schoolAddr = parseJson(res.schooladdrinfo);
+      this.form.controls.schoolAddr.patchValue(schoolAddr);
     });
   }
 
