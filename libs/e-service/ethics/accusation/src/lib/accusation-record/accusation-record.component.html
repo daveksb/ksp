@@ -23,6 +23,7 @@
         <tr>
           <th scope="col">ลำดับ</th>
           <th scope="col">หมายเลขบัตรประชาชน</th>
+          <th scope="col">คำนำหน้าชื่อ</th>
           <th scope="col">ชื่อ</th>
           <th scope="col">นามสกุล</th>
           <th scope="col">เบอร์โทรศัพท์</th>
@@ -41,6 +42,17 @@
                   class="form-control"
                   formControlName="idcardno"
                 />
+              </td>
+              <td>
+                <select class="form-select" formControlName="prefix">
+                  <option value="null" selected hidden disabled>เลือก</option>
+                  <option
+                    *ngFor="let prefix of prefixList$ | async"
+                    [value]="prefix.id"
+                  >
+                    {{ prefix?.name_th }}
+                  </option>
+                </select>
               </td>
               <td>
                 <input
@@ -78,16 +90,18 @@
       </tbody>
     </table>
   </div>
-  <hr />
+  <br />
 
-  <div class="box-header">ข้อมูลผู้ถูกกล่าวหา/กล่าวโทษ</div>
-  <button
-    (click)="openSearchDialog()"
-    type="button"
-    class="btn btn-primary w-auto ms-4 my-2"
-  >
-    ค้นหา/เปลี่ยนแปลงข้อมูลผู้มีใบอนุญาต
-  </button>
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="box-header">ข้อมูลผู้ถูกกล่าวหา/กล่าวโทษ</div>
+    <button
+      (click)="openSearchDialog()"
+      type="button"
+      class="btn btn-primary w-auto"
+    >
+      ค้นหา/เปลี่ยนแปลงข้อมูลผู้มีใบอนุญาต
+    </button>
+  </div>
 
   <div class="my-3">
     <mat-tab-group class="tab-group" animationDuration="0ms">
@@ -112,9 +126,7 @@
       </mat-tab>
     </mat-tab-group>
   </div>
-
-  <hr />
-
+  <br />
   <div class="box-header">รายละเอียดการกล่าวหา/กล่าวโทษ</div>
 
   <div class="row">

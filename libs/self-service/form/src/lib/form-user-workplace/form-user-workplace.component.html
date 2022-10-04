@@ -1,8 +1,11 @@
 <form [formGroup]="form">
+  <!-- <div class="form-label text-primary text-decoration-underline">
+    ค้นหาสถานศึกษา
+  </div> -->
   <div class="row">
     <div class="col-md-6 mb-2">
       <label class="form-label">สังกัด</label>
-      <select class="search__content form-select" formControlName="bureauid">
+      <select class="form-select" formControlName="bureauid">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let bureau of bureaus" [value]="bureau?.bureauId">
           {{ bureau?.bureauName }}
@@ -13,7 +16,9 @@
     <div class="col-md-6 mb-2">
       <label class="form-label">ชื่อหน่วยงาน/สถานศึกษา</label>
       <input class="form-control" type="text" formControlName="schoolname" />
-      <!-- (click)="openSearchDialog()" -->
+      <!-- <select class="form-select" formControlName="schoolname">
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+      </select> -->
     </div>
   </div>
 
@@ -48,7 +53,7 @@
     </div>
 
     <div class="col-md-6 mb-2">
-      <label class="form-label">จังหวัด</label>
+      <label class="form-label required">จังหวัด</label>
       <select
         class="search__content form-select"
         formControlName="province"
@@ -67,7 +72,7 @@
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">ตำบล</label>
+      <label class="form-label required">ตำบล</label>
       <select
         class="search__content form-select"
         formControlName="tumbol"
@@ -81,7 +86,7 @@
     </div>
 
     <div class="col-md-6 mb-2">
-      <label class="form-label">อำเภอ</label>
+      <label class="form-label required">อำเภอ</label>
       <select
         class="search__content form-select"
         formControlName="amphur"

@@ -179,6 +179,9 @@ export class RefundFeeRequestComponent implements OnInit {
       width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
+        subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขอนุมัติ
+        ใช่หรือไม่`,
+        btnLabel: 'บันทึก',
       },
     });
 
@@ -202,7 +205,9 @@ export class RefundFeeRequestComponent implements OnInit {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '375px',
       data: {
-        header: `บันทึกข้อมูลสำเร็จ`,
+        header: `ยืนยันข้อมูลสำเร็จ`,
+        subContent: `รายการใบคำขอของท่าน
+        ระยะเวลาดำเนินการ 30 - 45  วันทำการ`,
       },
     });
 

@@ -41,7 +41,7 @@
       <hr />
 
       <div class="d-flex justify-content-between">
-        <div class="fs-5">สภานศึกษาที่ปฎิบัติการสอน</div>
+        <div class="fs-5">สถานศึกษาที่ปฎิบัติการสอน</div>
 
         <div class="text-primary fs-5" role="button">
           <ksp-add-row-button
@@ -114,7 +114,11 @@
       ></ng-container>
       <hr />
       <br />
-      <ksp-form-attachment [groups]="info" [mode]="mode"></ksp-form-attachment>
+      <ksp-form-attachment
+        [groups]="info"
+        [mode]="mode"
+        [title]="'กรุณาแนบหลักฐานประกอบวุฒิทางการศึกษา'"
+      ></ksp-form-attachment>
     </form>
   </div>
   <div class="d-flex justify-content-center my-3">

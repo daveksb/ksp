@@ -37,7 +37,8 @@
               #idcard
             />
           </div>
-          <div class="col-1 mt-4">
+          <div class="col-1">
+            <br />
             <button
               type="button"
               class="btn btn-primary w-100"
@@ -47,6 +48,26 @@
             </button>
           </div>
         </div>
+
+        <!-- <div class="row mb-2" *ngIf="!requestId && requestSubType === 5">
+          <div class="col-5">
+            <label class="form-label"
+              >หมายเลขหนังสือเดินทาง (Passport Number)</label
+            >
+            <input class="form-control" type="text" #passport />
+          </div>
+          <div class="col-1">
+            <br />
+            <button
+              type="button"
+              class="btn btn-primary w-100"
+              (click)="searchStaffFromIdCard(passport.value)"
+              passport
+            >
+              ค้นหา
+            </button>
+          </div>
+        </div> -->
 
         <ksp-form-user-info
           [isDarkMode]="false"
