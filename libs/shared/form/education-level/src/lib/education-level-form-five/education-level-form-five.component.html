@@ -4,42 +4,52 @@
   ></ksp-education-level-form-one>
 
   <div class="row my-2">
-    <div class="col-md-auto">
+    <div class="col-md-auto" style="white-space: nowrap">
       <div class="d-flex flex-column flex-md-row">
         <div class="d-flex align-items-center">
           <input type="checkbox" class="me-2" formControlName="isTransfer" />
-          <label class="form-label me-3">เทียบโอน</label>
+          <label class="form-label me-2">เทียบโอน</label>
         </div>
 
         <div class="d-flex align-items-center">
-          <span class="form-label w-75">จำนวนมาตรฐาน</span>
+          <span class="form-label me-2">จำนวนมาตรฐาน</span>
           <input
-            type="text"
+            type="number"
+            max="0"
             class="form-control"
             formControlName="transferCount"
           />
         </div>
       </div>
     </div>
-    <div class="col-md-auto">
+    <div class="col-md-auto" style="white-space: nowrap">
       <div class="d-flex flex-column flex-md-row">
         <div class="d-flex align-items-center">
           <input type="checkbox" class="me-2" formControlName="isTest" />
-          <label class="form-label me-3">ทดสอบ</label>
+          <label class="form-label me-2">ทดสอบ</label>
         </div>
 
         <div class="d-flex align-items-center mb-3 mb-md-0">
-          <span class="form-label w-75">จำนวนมาตรฐาน</span>
-          <input type="text" class="form-control" formControlName="testCount" />
-        </div>
-        <div class="d-flex align-items-center ms-0 ms-md-3">
-          <span class="form-label w-75">รวมมาตรฐาน</span>
+          <span class="form-label me-2">จำนวนมาตรฐาน</span>
           <input
-            type="text"
+            type="number"
+            min="0"
             class="form-control"
-            formControlName="totalCount"
+            formControlName="testCount"
           />
         </div>
+      </div>
+    </div>
+
+    <div class="col-md-auto" style="white-space: nowrap">
+      <div class="d-flex align-items-center">
+        <span class="form-label me-2">รวมมาตรฐาน</span>
+        <input
+          type="text"
+          class="form-control"
+          disabled
+          placeholder="{{ totalStandard }}"
+        />
       </div>
     </div>
   </div>

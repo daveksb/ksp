@@ -32,8 +32,9 @@ export class DegreeCertStepTwoComponent extends KspFormBaseComponent {
     section4: [false],
     section5: [false],
   });
+  step2Incorrect = null;
+  // step2Incorrect = ['ไม่ครบถ้วน และไม่ถูกต้อง', 'หมายเหตุ XXXXXXXXX'];
 
-  step2Incorrect = ['ไม่ครบถ้วน และไม่ถูกต้อง', 'หมายเหตุ XXXXXXXXX'];
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
@@ -61,18 +62,18 @@ export class DegreeCertStepTwoComponent extends KspFormBaseComponent {
   }
 
   get section1() {
-    return !!(!this.form.controls?.section1?.value && this.showEditCheckbox);
+    return !!(!this.form.controls?.section1?.value && this.showEditCheckbox) ||this.mode === 'view'
   }
   get section2() {
-    return !!(!this.form.controls?.section2?.value && this.showEditCheckbox);
+    return !!(!this.form.controls?.section2?.value && this.showEditCheckbox) ||this.mode === 'view'
   }
   get section3() {
-    return !!(!this.form.controls?.section3?.value && this.showEditCheckbox);
+    return !!(!this.form.controls?.section3?.value && this.showEditCheckbox) ||this.mode === 'view'
   }
   get section4() {
-    return !!(!this.form.controls?.section4?.value && this.showEditCheckbox);
+    return !!(!this.form.controls?.section4?.value && this.showEditCheckbox) ||this.mode === 'view'
   }
   get section5() {
-    return !!(!this.form.controls?.section5?.value && this.showEditCheckbox);
+    return !!(!this.form.controls?.section5?.value && this.showEditCheckbox) ||this.mode === 'view'
   }
 }

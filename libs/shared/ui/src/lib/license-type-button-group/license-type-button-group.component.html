@@ -1,9 +1,9 @@
-<div class="d-flex justify-content-center mb-2">
-  <ng-container *ngFor="let licenseButton of licenseButtons; index as i">
-    <!-- <button class="btn__license">{{ group }}</button> -->
-
-    <mat-button-toggle-group name="licenseType" aria-label="Font Style">
-      <mat-button-toggle value="bold">{{ licenseButton }}</mat-button-toggle>
-    </mat-button-toggle-group>
-  </ng-container>
+<div class="d-flex justify-content-center my-3">
+  <mat-button-toggle-group name="licenseType" aria-label="Font Style">
+    <ng-container *ngFor="let button of licenseButtons; index as i">
+      <mat-button-toggle value="{{ i }}">{{
+        button
+      }}</mat-button-toggle></ng-container
+    >
+  </mat-button-toggle-group>
 </div>

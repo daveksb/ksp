@@ -1,7 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { RequestPageType } from '@ksp/shared/constant';
-import { FileUploadComponent } from '@ksp/shared/form/file-upload';
+import { FileService, FileUploadComponent } from '@ksp/shared/form/file-upload';
 
 @Component({
   selector: 'self-service-form-upload-image',
@@ -17,11 +26,29 @@ export class FormUploadImageComponent {
   @Input() requestType: any;
   @Input() uniqueTimestamp!: string;
   @Input() isForeignForm = false;
+  @Input()
+  set imageId(id: string) {
+    if (id) {
+      this.downloadFile(id);
+    }
+  }
   @Output() uploadImageComplete = new EventEmitter<any>();
   requestPageType = RequestPageType;
 
+  constructor(private fileService: FileService) {}
+
   uploadComplete(event: any) {
+    console.log(event);
     this.imgSrc = event.file;
     this.uploadImageComplete.emit(event.fileId);
+  }
+
+  downloadFile(id: string) {
+    this.fileService.downloadFile({ id }).subscribe((res: any) => {
+      console.log(res);
+      if (res?.filedata) {
+        this.imgSrc = atob(res.filedata);
+      }
+    });
   }
 }

@@ -4,7 +4,8 @@
       type="checkbox"
       name="changePrefix"
       formControlName="changePrefix"
-      (change)="disableControl($event, ['prefixTh', 'prefixEn'])" />
+      (change)="disableControl($event, ['prefixTh', 'prefixEn'])"
+    />
     <label class="form-label ms-1">เปลี่ยน / เพิ่มเติม คำนำหน้าชื่อ</label>
   </div>
 
@@ -66,14 +67,19 @@
       type="checkbox"
       name="test"
       formControlName="changeFirstname"
-      (change)="disableControl($event, ['firstnameTh', 'firstnameEn'])" />
+      (change)="disableControl($event, ['firstnameTh', 'firstnameEn'])"
+    />
     <label class="form-label ms-1">เปลี่ยนชื่อ</label>
   </div>
 
   <div class="row align-items-center ms-2 mb-2">
     <div class="col-md-5 col-md-5">
       <label class="form-label">ชื่อภาษาไทย</label>
-      <input type="text" class="form-control" formControlName="oldFirstnameTh" />
+      <input
+        type="text"
+        class="form-control"
+        formControlName="oldFirstnameTh"
+      />
     </div>
 
     <div class="col-2 text-center">
@@ -90,7 +96,11 @@
   <div class="row align-items-center ms-2">
     <div class="col-md-5 col-md-5 mb-3">
       <label class="form-label">ชื่อภาษาอังกฤษ</label>
-      <input type="text" class="form-control" formControlName="oldFirstnameEn" />
+      <input
+        type="text"
+        class="form-control"
+        formControlName="oldFirstnameEn"
+      />
     </div>
 
     <div class="col-2 text-center">
@@ -108,7 +118,8 @@
       type="checkbox"
       name="test"
       formControlName="changeLastname"
-      (change)="disableControl($event, ['lastnameTh', 'lastnameEn'])" />
+      (change)="disableControl($event, ['lastnameTh', 'lastnameEn'])"
+    />
     <label class="form-label ms-1">เปลี่ยนนามสกุล</label>
   </div>
 
@@ -151,13 +162,18 @@
         type="checkbox"
         name="test"
         formControlName="changePassport"
-        (change)="disableControl($event, ['passportNo'])" />
+        (change)="disableControl($event, ['passportNo'])"
+      />
       <label class="form-label ms-1">เปลี่ยนหมายเลขหนังสือเดินทาง</label>
     </div>
 
     <div class="row align-items-center ms-2 mb-2">
       <div class="col-md-5 col-md-5">
-        <input type="text" class="form-control" formControlName="oldPassportNo" />
+        <input
+          type="text"
+          class="form-control"
+          formControlName="oldPassportNo"
+        />
       </div>
 
       <div class="col-2 text-center">
@@ -176,15 +192,17 @@
         type="checkbox"
         class="me-1"
         formControlName="isDistributed"
-        (change)="disableControl($event, ['distributeData'])" />
+        (change)="disableControl($event, ['distributeData'])"
+      />
       <label class="form-label">จำหน่ายข้อมูล</label>
     </div>
     <div class="row ms-2 mb-2">
       <div class="col-md-5 mb-3">
         <select
           class="search__content form-select"
-          formControlName="distributeData">
-          <option selected>กรุณาเลือก</option>
+          formControlName="distributeData"
+        >
+          <option value="null" selected disabled hidden>กรุณาระบุ</option>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>

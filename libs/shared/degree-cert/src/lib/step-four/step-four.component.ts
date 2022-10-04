@@ -26,11 +26,11 @@ import {
 })
 export class DegreeCertStepFourComponent extends KspFormBaseComponent {
   @Input() formType = 'a';
-
-  step4Incorrect = [
-    'ไม่ครบถ้วน และไม่ถูกต้อง',
-    'หมายเหตุ สำเนาใบอนุญาตไม่ถูกต้อง',
-  ];
+  step4Incorrect =null;
+  // step4Incorrect = [
+  //   'ไม่ครบถ้วน และไม่ถูกต้อง',
+  //   'หมายเหตุ สำเนาใบอนุญาตไม่ถูกต้อง',
+  // ];
   override form = this.fb.group({
     files: [],
   });

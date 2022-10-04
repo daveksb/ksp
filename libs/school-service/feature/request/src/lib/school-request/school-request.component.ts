@@ -181,7 +181,7 @@ export class SchoolRequestComponent implements OnInit {
 
     this.requestService.cancelRequest(payload).subscribe((res) => {
       //console.log('Cancel request  = ', res);
-      this.cancelCompleted();
+      this.cancelDoneDialog();
     });
   }
 
@@ -256,7 +256,7 @@ export class SchoolRequestComponent implements OnInit {
     //console.log('current form = ', baseForm.value);
     this.requestService.createRequest(baseForm.value).subscribe((res) => {
       if (type == 'submit') {
-        this.confirmCompleted();
+        this.submitCompleteDialog();
       } else {
         this.backToListPage();
       }
@@ -344,7 +344,6 @@ export class SchoolRequestComponent implements OnInit {
 
     //console.log('update payload = ', res);
     this.requestService.updateRequest(res).subscribe((res) => {
-      //this.confirmCompleted();
       this.backToListPage();
     });
   }
@@ -367,7 +366,7 @@ export class SchoolRequestComponent implements OnInit {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
       //console.log('userInfo valid = ', this.form.controls.userInfo.valid);
       //console.log('form valid = ', this.form.valid);
-
+      //console.log('this.currentProcess = ', this.currentProcess);
       // สถานะ ยกเลิก disable ทุกอย่าง
       if (this.requestStatus === 0) {
         this.disableTempSave = true;
@@ -433,6 +432,9 @@ export class SchoolRequestComponent implements OnInit {
       this.patchTeachingInfo(parseJson(res.teachinginfo));
       this.patchReasonInfo(parseJson(res.reasoninfo));
       this.patchFileInfo(parseJson(res.fileinfo));
+
+      const schoolAddr = parseJson(res.schooladdrinfo);
+      this.form.controls.schoolAddr.patchValue(schoolAddr);
     });
   }
 
@@ -588,14 +590,6 @@ export class SchoolRequestComponent implements OnInit {
     this.router.navigate(['/temp-license', 'list']);
   }
 
-  tempBtnClick() {
-    if (this.requestId) {
-      this.updateRequest('temp');
-    } else {
-      this.createRequest('temp');
-    }
-  }
-
   permanentBtnClick() {
     const dialogRef = this.dialog.open(ForbiddenPropertyFormComponent, {
       width: '850px',
@@ -608,13 +602,36 @@ export class SchoolRequestComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         if (res) {
-          this.onConfirmed();
+          this.submitConfirmDialog();
         }
       });
   }
 
-  onConfirmed() {
+  tempSaveConfirmDialog() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
+        //subTitle: ``,
+        btnLabel: 'บันทึก',
+      },
+    });
+
+    confirmDialog.componentInstance.confirmed
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res) {
+          if (this.requestId) {
+            this.updateRequest('temp');
+          } else {
+            this.createRequest('temp');
+          }
+        }
+      });
+  }
+
+  submitConfirmDialog() {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
@@ -624,7 +641,7 @@ export class SchoolRequestComponent implements OnInit {
       },
     });
 
-    confirmDialog.componentInstance.confirmed
+    dialog.componentInstance.confirmed
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         if (res) {
@@ -640,8 +657,8 @@ export class SchoolRequestComponent implements OnInit {
       });
   }
 
-  confirmCompleted() {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+  submitCompleteDialog() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
       data: {
         header: `ระบบทำการบันทึกเรียบร้อยแล้ว
@@ -651,7 +668,7 @@ export class SchoolRequestComponent implements OnInit {
       },
     });
 
-    completeDialog.componentInstance.completed
+    dialog.componentInstance.completed
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         if (res) {
@@ -660,8 +677,8 @@ export class SchoolRequestComponent implements OnInit {
       });
   }
 
-  cancel() {
-    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+  cancelConfirmDialog() {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
         title: `คุณต้องการยกเลิกรายการใบคำขอ
@@ -669,7 +686,7 @@ export class SchoolRequestComponent implements OnInit {
       },
     });
 
-    confirmDialog.componentInstance.confirmed
+    dialog.componentInstance.confirmed
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         if (res) {
@@ -678,8 +695,8 @@ export class SchoolRequestComponent implements OnInit {
       });
   }
 
-  cancelCompleted() {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+  cancelDoneDialog() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
       data: {
         header: `ยกเลิกใบคำขอสำเร็จ`,
@@ -687,7 +704,7 @@ export class SchoolRequestComponent implements OnInit {
       },
     });
 
-    completeDialog.componentInstance.completed
+    dialog.componentInstance.completed
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         if (res) {

@@ -12,3 +12,4 @@ export * from './lib/user-info-form';
 export * from './lib/self-myinfo';
 export * from './lib/self-develop';
 export * from './lib/ksp-shared';
+export * from './lib/ksp-pagination.component';

@@ -37,12 +37,14 @@
       </table>
 
       <div class="py-2 d-flex justify-content-center">
-        <a
-          class="btn btn-primary"
-          type="buton"
+        <button
+          type="button"
           (click)="next()"
-          >ยืนยัน</a
+          [disabled]="!selectedUser"
+          class="btn btn-primary"
         >
+        ยืนยัน
+        </button>
       </div>
     </ng-container>
   </div>

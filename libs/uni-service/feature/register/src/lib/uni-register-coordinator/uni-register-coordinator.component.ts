@@ -12,6 +12,7 @@ import { EMPTY, Observable, switchMap } from 'rxjs';
 import { GeneralInfoService, UniInfoService, UniRequestService } from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
 import { RequestPageType } from '@ksp/shared/constant';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   templateUrl: './uni-register-coordinator.component.html',

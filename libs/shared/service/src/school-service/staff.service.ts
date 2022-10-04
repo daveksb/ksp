@@ -33,9 +33,9 @@ export class StaffService {
     );
   }
 
-  searchStaffsFromSchoolId(payload: any): Observable<any> {
+  searchStaffs(payload: any): Observable<any> {
     return this.http
-      .post(`${environment.apiUrl}/kspstaff/schstaff2selectall`, {
+      .post(`${environment.shortApiUrl}/schstaff2search.php`, {
         ...payload,
       })
       .pipe(map((data: any) => data.datareturn));

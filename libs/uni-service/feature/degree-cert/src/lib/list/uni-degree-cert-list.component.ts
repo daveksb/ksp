@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Router, RouterModule } from '@angular/router';
-import { ListData } from '@ksp/shared/interface';
+import { KspPaginationComponent, ListData } from '@ksp/shared/interface';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { DegreeCertSearchComponent } from '@ksp/shared/search';
 import { UniInfoService } from '@ksp/shared/service';
@@ -23,20 +24,28 @@ import { lastValueFrom, map } from 'rxjs';
     CommonModule,
     UniFormBadgeComponent,
     ReactiveFormsModule,
+    MatPaginatorModule,
   ],
 })
-export class UniDegreeCertListComponent implements OnInit {
+export class UniDegreeCertListComponent
+  extends KspPaginationComponent
+  implements OnInit
+{
   displayedColumns: string[] = displayedColumns;
+
   dataSource = new MatTableDataSource<DegreeCertInfo>();
   form = this.fb.group({
     search: [{}],
   });
   uniUniversityOption: ListData[] = [];
+
   constructor(
     private fb: FormBuilder,
     private uniInfoService: UniInfoService,
     private router: Router
-  ) {}
+  ) {
+    super();
+  }
   ngOnInit(): void {
     this.getAll();
   }
@@ -60,20 +69,20 @@ export class UniDegreeCertListComponent implements OnInit {
       degreelevel: submitDegreeLevel || '',
       requeststatus: approveStatus || '',
       requestprocess: verifyStatus || '',
-      offset: '0',
-      row: '10',
+      ...this.tableRecord,
     };
   }
-  search() {
+  override search() {
     this.uniInfoService
       .uniRequestDegreeSearch(this.getRequest())
       .subscribe((res) => {
         if (!res?.datareturn) return;
+        this.pageEvent.length = res.countrow;
         this.dataSource.data = res?.datareturn?.map(
           (item: any, index: number) => {
             return {
               key: item?.id,
-              order: ++index,
+              order: this.pageEvent.pageIndex * this.pageEvent.pageSize + ++index,
               degreeId: item?.requestno,
               data: item?.requestdate,
               uni: item?.uniname,
@@ -81,8 +90,12 @@ export class UniDegreeCertListComponent implements OnInit {
               verifyStatus: 'รับข้อมูล',
               considerStatus: 'พิจารณา',
               approveStatus: 'พิจารณา',
-              approveDate: '30 ส.ค. 2564',
-              editDate: stringToThaiDate(item?.updatedate),
+              approveDate: item?.requestdate
+                ? stringToThaiDate(item?.requestdate)
+                : '',
+              editDate: item?.updatedate
+                ? stringToThaiDate(item?.updatedate)
+                : '',
               verify: 'แก้ไข',
               consider: 'แก้ไข',
             };
@@ -101,6 +114,8 @@ export class UniDegreeCertListComponent implements OnInit {
     console.log(rowData);
   }
   clear() {
+    this.form.reset()
+    this.clearPageEvent();
     this.dataSource.data = [];
   }
   async getAll() {

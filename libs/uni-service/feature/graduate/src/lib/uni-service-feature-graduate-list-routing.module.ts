@@ -20,7 +20,7 @@ const routes: Routes = [
         component: DegreeListComponent,
       },
       {
-        path: 'course-detail/:type',
+        path: 'course-detail/:id',
         component: CourseDetailComponent,
       },
       {

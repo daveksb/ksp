@@ -1,23 +1,68 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { requestStatus } from '@ksp/shared/constant';
+import { ListData } from '@ksp/shared/interface';
+import { UniInfoService } from '@ksp/shared/service';
 import { HistoryRequestDialogComponent } from '@ksp/uni-service/dialog';
-
+import _ from 'lodash';
+import { map } from 'rxjs';
+const mapOption = () =>
+  map((data: any) => {
+    return (
+      data?.map((data: any) => ({
+        label: _.get(data, 'name'),
+        value: _.get(data, 'id'),
+      })) || []
+    );
+  });
 @Component({
   selector: 'ksp-edit-student-list',
   templateUrl: './edit-student-list.component.html',
   styleUrls: ['./edit-student-list.component.scss'],
 })
-export class EditStudentListComponent {
+export class EditStudentListComponent implements OnInit {
   displayedColumns: string[] = column;
+  degreeLevelOptions: ListData[] = [];
+  requestStatusOptions: ListData[] = requestStatus;
   dataSource = new MatTableDataSource<studentList>();
+  form = this.fb.group({
+    requestno: [],
+    degreelevel: [],
+    fulldegreename: [],
+    coursemajor: [],
+    plancalendaryear: [],
+    requeststatus: [],
+    idcardno: [],
+    name: [],
+    requestdatefrom: [],
+    requestdateto: []
+  })
 
-  constructor(private router: Router, public dialog: MatDialog) {}
+  constructor(
+    private router: Router, 
+    public dialog: MatDialog,
+    private fb: FormBuilder,
+    private uniInfoService: UniInfoService,) {}
+
+  ngOnInit(): void {
+    this.getAll();      
+  }
 
   history() {
     this.dialog.open(HistoryRequestDialogComponent, {
       width: '400px',
+    });
+  }
+
+  getAll() {
+    this.uniInfoService
+    .uniDegreeLevel()
+    .pipe(mapOption())
+    .subscribe((res) => {
+      this.degreeLevelOptions = res;
     });
   }
 

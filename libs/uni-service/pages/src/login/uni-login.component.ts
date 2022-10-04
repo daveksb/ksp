@@ -54,6 +54,7 @@ export class UniLoginComponent {
       setCookie('lastNameTh', res?.lastnameth || '', 1);
       setCookie('uniId', res?.uniid || '', 1);
       setCookie('uniType', res?.unitype || '', 1);
+      setCookie('userId', res?.id, 1);
 
       this.router.navigate(['/home']);
     } catch (error: any) {

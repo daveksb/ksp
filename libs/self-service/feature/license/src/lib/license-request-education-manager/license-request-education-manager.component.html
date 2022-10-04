@@ -1,7 +1,5 @@
-<ksp-top-nav [isSelfService]="true"
-  ><span header>ใบอนุญาตประกอบวิชาชีพ</span
-  ><span subHeader>ขอขึ้นใบอนุญาตประกอบวิชาชีพ</span></ksp-top-nav
->
+<ksp-top-nav [isSelfService]="true"><span header>ใบอนุญาตประกอบวิชาชีพ</span><span
+    subHeader>ขอขึ้นใบอนุญาตประกอบวิชาชีพ</span></ksp-top-nav>
 
 <div class="main__container px-4 py-2">
   <self-service-request-status></self-service-request-status>
@@ -10,8 +8,9 @@
     <div class="row mx-0 border shadow rounded-4 px-2 py-4 bg-white my-4">
       <div class="col-lg-3">
         <self-service-form-upload-image
-          [imgSrc]="myImage"
-        ></self-service-form-upload-image>
+          [imageId]="imageId"
+          [uniqueTimestamp]="uniqueTimestamp"
+          (uploadImageComplete)="uploadImageComplete($event)"></self-service-form-upload-image>
       </div>
       <div class="col-md">
         <ksp-form-user-info
@@ -20,8 +19,7 @@
           [prefixList]="prefixList$ | async"
           [displayMode]="[userInfoType]"
           [nationList]="nationalitys$ | async"
-          [isSchoolService]="false"
-        >
+          [isSchoolService]="false">
         </ksp-form-user-info>
       </div>
     </div>
@@ -29,8 +27,7 @@
     <mat-tab-group
       class="tab-group"
       animationDuration="0ms"
-      [selectedIndex]="0"
-    >
+      [selectedIndex]="0">
       <mat-tab label="ที่อยู่" class="tab-content">
         <ksp-form-address
           formControlName="address1"
@@ -39,8 +36,7 @@
           [amphurs]="amphurs1$ | async"
           [tumbols]="tumbols1$ | async"
           (provinceChanged)="provinceChanged(1, $event)"
-          (amphurChanged)="amphurChanged(1, $event)"
-        >
+          (amphurChanged)="amphurChanged(1, $event)">
           <span>ที่อยู่ทะเบียนบ้าน</span>
         </ksp-form-address>
         <hr />
@@ -51,16 +47,14 @@
           [amphurs]="amphurs2$ | async"
           [tumbols]="tumbols2$ | async"
           (provinceChanged)="provinceChanged(2, $event)"
-          (amphurChanged)="amphurChanged(2, $event)"
-        >
+          (amphurChanged)="amphurChanged(2, $event)">
           <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
           <span class="text-danger ms-1 fs-6">*กรุณากรอกข้อมูลตำบล, อำเภอ</span>
           <div class="d-flex align-items-center">
             <input
               type="checkbox"
               class="me-2"
-              (change)="useSameAddress($event)"
-            />
+              (change)="useSameAddress($event)" />
             <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
           </div>
         </ksp-form-address>
@@ -74,8 +68,7 @@
           [tumbols]="tumbols3$ | async"
           [bureaus]="bureau$ | async"
           (provinceChanged)="provinceChanged(3, $event)"
-          (amphurChanged)="amphurChanged(3, $event)"
-        >
+          (amphurChanged)="amphurChanged(3, $event)">
         </self-service-form-user-workplace>
         <div class="row mb-3">
           <div class="col">
@@ -87,8 +80,7 @@
             <input
               type="text"
               class="form-control"
-              formControlName="workEmail"
-            />
+              formControlName="workEmail" />
           </div>
         </div>
       </mat-tab>
@@ -96,10 +88,9 @@
       <mat-tab label="ข้อมูลทางการศึกษา">
         <self-service-form-user-education
           formControlName="education"
-          [educationTypes]="'manager'"
+          [educationTypes]="'eduManager'"
           [attachFiles]="eduFiles"
-          [uniqueTimestamp]="uniqueTimestamp"
-        ></self-service-form-user-education>
+          [uniqueTimestamp]="uniqueTimestamp"></self-service-form-user-education>
         <!--  <hr />
       <ksp-form-attachment
         [groups]="educationeFiles"
@@ -114,8 +105,7 @@
         <ksp-form-attachment
           [groups]="experienceFiles"
           [uniqueTimestamp]="uniqueTimestamp"
-          [title]="'กรุณาแนบหลักฐานประกอบ'"
-        ></ksp-form-attachment>
+          [title]="'กรุณาแนบหลักฐานประกอบ'"></ksp-form-attachment>
       </mat-tab>
     </mat-tab-group>
   </form>
@@ -134,8 +124,7 @@
       type="button"
       (click)="save()"
       class="ms-3 btn btn-primary"
-      [disabled]="disableNextButton"
-    >
+      [disabled]="disableNextButton">
       บันทึกชั่วคราว
     </button>
   </div>

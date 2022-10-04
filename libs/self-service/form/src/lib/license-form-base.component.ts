@@ -44,6 +44,7 @@ export abstract class LicenseFormBaseComponent {
   currentProcess!: number;
   prohibitProperty: any;
   myImage = '';
+  imageId = '';
 
   constructor(
     protected generalInfoService: GeneralInfoService,
@@ -101,7 +102,9 @@ export abstract class LicenseFormBaseComponent {
     this.myInfoService.getMyInfo().subscribe((res) => {
       if (res) {
         //this.myInfo = res;
+        this.imageId = '199';
         if (res && res.filedata) {
+          console.log(res.filedata);
           this.myImage = atob(res.filedata);
         }
         this.patchUserInfo(res);
@@ -321,6 +324,10 @@ export abstract class LicenseFormBaseComponent {
 
   public resetForm() {
     this.form.reset();
+  }
+
+  public uploadImageComplete(imageId: string) {
+    this.imageId = imageId;
   }
 
   abstract createRequest(forbidden: any, currentProcess: number): void;

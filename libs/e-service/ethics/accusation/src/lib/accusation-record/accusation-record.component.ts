@@ -29,6 +29,8 @@ import {
 } from '@ksp/shared/interface';
 import { providerFactory, thaiDate } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
+import { Observable } from 'rxjs';
+import { GeneralInfoService } from '@ksp/shared/service';
 
 @Component({
   selector: 'e-service-ethic-accusation-record',
@@ -59,6 +61,8 @@ export class AccusationRecordComponent
   requestNumber = '';
   accusationFiles: any[] = structuredClone(ACCUSATION_FILES);
   uniqueTimestamp: any;
+  prefixList$!: Observable<any>;
+
   override form = this.fb.group({
     accusationblackno: [null, Validators.required],
     accusationtype: [null, Validators.required],
@@ -78,7 +82,8 @@ export class AccusationRecordComponent
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private generalInfoService: GeneralInfoService
   ) {
     super();
     this.subscriptions.push(
@@ -106,6 +111,11 @@ export class AccusationRecordComponent
       //console.log('res2 = ', res);
     });
     this.uniqueTimestamp = uuidv4();
+    this.getListData();
+  }
+
+  getListData() {
+    this.prefixList$ = this.generalInfoService.getPrefix();
   }
 
   openSearchDialog() {

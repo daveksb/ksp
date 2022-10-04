@@ -7,11 +7,7 @@
       <div class="row mb-2">
         <div class="col">
           <label class="form-label">เลขที่ใบอนุญาต</label>
-          <input
-            class="form-control"
-            type="text"
-            formControlName="licenseNumber"
-          />
+          <input class="form-control" type="text" formControlName="licenseno" />
         </div>
         <div class="col">
           <label class="form-label">ประเภทใบอนุญาต</label>
@@ -29,7 +25,7 @@
           <label class="form-label"
             >หมายเลขบัตรประชาชน/เลขที่หนังสือเดินทาง</label
           >
-          <input class="form-control" type="text" formControlName="personId" />
+          <input class="form-control" type="text" formControlName="cardno" />
         </div>
         <div class="col">
           <label class="form-label">ชื่อ-นามสกุล</label>
@@ -40,34 +36,34 @@
       <div class="row mb-3">
         <div class="col">
           <label class="form-label">ตำแหน่งงาน </label>
-          <select class="form-select" formControlName="post">
+          <select class="form-select" formControlName="position">
             <option value="null" selected hidden disabled>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option *ngFor="let p of positions" [value]="p?.id">
+              {{ p?.name }}
+            </option>
           </select>
         </div>
         <div class="col">
           <label class="form-label">ช่วงชั้นที่สอน </label>
-          <select class="form-select" formControlName="TeachingLevel">
+          <select class="form-select" formControlName="teachinglevel">
             <option value="null" selected hidden disabled>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option *ngFor="let l of levels" [value]="l?.value">
+              {{ l?.label }}
+            </option>
           </select>
         </div>
       </div>
 
       <div class="d-flex justify-content-end">
         <button
-          (click)="clear.emit(true)"
+          (click)="form.reset(); clear.emit(true)"
           type="button"
           class="btn border-primary text-primary"
         >
           ล้างข้อมูล
         </button>
         <button
-          (click)="search.emit(true)"
+          (click)="search.emit(form.value)"
           type="button"
           class="ms-2 btn btn-primary"
         >
