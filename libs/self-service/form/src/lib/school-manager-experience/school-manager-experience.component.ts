@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { debounceTime, pairwise } from 'rxjs';
+import { pairwise } from 'rxjs';
 import { providerFactory } from '@ksp/shared/utility';
 
 @UntilDestroy()

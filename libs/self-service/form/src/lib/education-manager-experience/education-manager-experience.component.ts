@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { debounceTime } from 'rxjs';
+import { debounceTime, pairwise } from 'rxjs';
 import { providerFactory } from '@ksp/shared/utility';
 
 @UntilDestroy()
@@ -42,9 +42,66 @@ export class EducationManagerExperienceComponent
 
   ngOnInit(): void {
     this.form.valueChanges
-      .pipe(debounceTime(300), untilDestroyed(this))
-      .subscribe((res) => {
+      .pipe(untilDestroyed(this), pairwise())
+      .subscribe(([prev, next]) => {
         //console.log('exp form = ', res);
+        if (prev.hasTeachingExperience !== next.hasTeachingExperience) {
+          if (next.hasTeachingExperience) {
+            this.form.controls.teachingExperienceYear.addValidators(
+              Validators.required
+            );
+          } else {
+            this.form.controls.teachingExperienceYear.clearValidators();
+          }
+          this.form.controls.teachingExperienceYear.updateValueAndValidity();
+        }
+
+        if (prev.hasManagingExperience !== next.hasManagingExperience) {
+          if (next.hasManagingExperience) {
+            this.form.controls.managingExperienceYear.addValidators(
+              Validators.required
+            );
+          } else {
+            this.form.controls.managingExperienceYear.clearValidators();
+          }
+          this.form.controls.managingExperienceYear.updateValueAndValidity();
+        }
+
+        if (prev.hasEducationExperience !== next.hasEducationExperience) {
+          if (next.hasEducationExperience) {
+            this.form.controls.educationExperienceYear.addValidators(
+              Validators.required
+            );
+          } else {
+            this.form.controls.educationExperienceYear.clearValidators();
+          }
+          this.form.controls.educationExperienceYear.updateValueAndValidity();
+        }
+
+        if (
+          prev.hasEducationManagingExperience !==
+          next.hasEducationManagingExperience
+        ) {
+          if (next.hasEducationManagingExperience) {
+            this.form.controls.educationManagingExperienceYear.addValidators(
+              Validators.required
+            );
+          } else {
+            this.form.controls.educationManagingExperienceYear.clearValidators();
+          }
+          this.form.controls.educationManagingExperienceYear.updateValueAndValidity();
+        }
+
+        if (prev.hasLongManagingExperience !== next.hasLongManagingExperience) {
+          if (next.hasLongManagingExperience) {
+            this.form.controls.longManagingExperienceYear.addValidators(
+              Validators.required
+            );
+          } else {
+            this.form.controls.longManagingExperienceYear.clearValidators();
+          }
+          this.form.controls.longManagingExperienceYear.updateValueAndValidity();
+        }
       });
   }
 }
