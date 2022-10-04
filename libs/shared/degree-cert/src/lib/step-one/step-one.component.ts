@@ -64,11 +64,11 @@ export class DegreeCertStepOneComponent
     section5: [false],
     section6: [false],
   });
-
-  step1Incorrect = [
-    'ไม่ครบถ้วน และไม่ถูกต้อง',
-    'หมายเหตุ ข้อมูลมคอ. 2 ไม่ถูกต้อง',
-  ];
+  step1Incorrect = null;
+  // step1Incorrect = [
+  //   'ไม่ครบถ้วน และไม่ถูกต้อง',
+  //   'หมายเหตุ ข้อมูลมคอ. 2 ไม่ถูกต้อง',
+  // ];
 
   constructor(
     private fb: FormBuilder,
@@ -173,38 +173,38 @@ export class DegreeCertStepOneComponent
   }
   get section1() {
     return (
-      !!(!this.form.controls?.section1?.value && this.showEditCheckbox) &&
-      this.mode !== 'view'
+      !!(!this.form.controls?.section1?.value && this.showEditCheckbox) ||
+      this.mode === 'view'
     );
   }
   get section2() {
     return (
-      !!(!this.form.controls?.section2?.value && this.showEditCheckbox) &&
-      this.mode !== 'view'
+      !!(!this.form.controls?.section2?.value && this.showEditCheckbox) ||
+      this.mode === 'view'
     );
   }
   get section3() {
     return (
-      !!(!this.form.controls?.section3?.value && this.showEditCheckbox) &&
-      this.mode !== 'view'
+      !!(!this.form.controls?.section3?.value && this.showEditCheckbox) ||
+      this.mode === 'view'
     );
   }
   get section4() {
     return (
-      !!(!this.form.controls?.section4?.value && this.showEditCheckbox) &&
-      this.mode !== 'view'
+      !!(!this.form.controls?.section4?.value && this.showEditCheckbox) ||
+      this.mode === 'view'
     );
   }
   get section5() {
     return (
-      !!(!this.form.controls?.section5?.value && this.showEditCheckbox) &&
-      this.mode !== 'view'
+      !!(!this.form.controls?.section5?.value && this.showEditCheckbox) ||
+      this.mode === 'view'
     );
   }
   get section6() {
     return (
-      !!(!this.form.controls?.section6?.value && this.showEditCheckbox) &&
-      this.mode !== 'view'
+      !!(!this.form.controls?.section6?.value && this.showEditCheckbox) ||
+      this.mode === 'view'
     );
   }
 }
