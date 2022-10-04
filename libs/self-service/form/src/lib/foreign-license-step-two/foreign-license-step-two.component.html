@@ -137,10 +137,11 @@
           [countries]="countries2$ | async"
         >
         </self-service-foreign-step-two-tab-three>
+        <br />
         <ksp-form-attachment
           [groups]="academicFiles"
           [uniqueTimestamp]="uniqueTimestamp"
-          title="attach supporting evidence"
+          title="Attach Supporting Evidence"
         ></ksp-form-attachment>
       </mat-tab>
 
@@ -154,7 +155,7 @@
       ></ng-container>
 
       <ng-container *ngIf="isRenewLicense">
-        <mat-tab label="Licensure Information">
+        <mat-tab label="LICENSURE INFORMATION">
           <self-service-foreign-step-two-tab-four-renew></self-service-foreign-step-two-tab-four-renew></mat-tab
       ></ng-container>
     </mat-tab-group>

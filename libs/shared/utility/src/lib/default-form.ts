@@ -7,6 +7,15 @@ import {
   phonePattern,
 } from './form-validators';
 
+export function createDefaultVisaInfo(fb: FormBuilder) {
+  return fb.group({
+    visatype: [],
+    visaclass: [],
+    visaenddate: [],
+    licenseid: [],
+  });
+}
+
 export function createDefaultUserInfoForm(fb: FormBuilder) {
   return fb.group({
     id: [],
@@ -55,15 +64,6 @@ export function createDefaultUserInfoForm(fb: FormBuilder) {
     permisson: [null],
     other: [null],
     affiliation: [null],
-  });
-}
-
-export function createDefaultVisaInfo(FormBuilder: any) {
-  return FormBuilder.group({
-    visatype: [],
-    visaclass: [],
-    visaenddate: [],
-    licenseid: [],
   });
 }
 

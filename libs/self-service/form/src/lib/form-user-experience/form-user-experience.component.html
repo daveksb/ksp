@@ -1,19 +1,21 @@
 <form [formGroup]="form">
   <div class="row">
-    <div class="col-md-6 mb-3">
+    <div class="col-md-6 mb-2">
       <label class="form-label">สถานศึกษาฝึกประสบการณ์วิชาชีพ ครั้งที่ 1</label>
       <input
         class="form-control"
         type="text"
-        formControlName="TrainingAddressOne" />
+        formControlName="TrainingAddressOne"
+      />
     </div>
 
-    <div class="col-md-6 mb-3">
+    <div class="col-md-6 mb-2">
       <label class="form-label">สถานศึกษาฝึกประสบการณ์วิชาชีพ ครั้งที่ 2</label>
       <input
         class="form-control"
         type="text"
-        formControlName="TrainingAddressTwo" />
+        formControlName="TrainingAddressTwo"
+      />
     </div>
   </div>
 
@@ -23,7 +25,7 @@
   </div>
 
   <div class="row">
-    <div class="col-md-6 mb-3">
+    <div class="col-md-6">
       <label class="form-label">สถานศึกษาที่ปฏิบัติการสอน</label>
       <!-- <select
         class="search__content form-select"
@@ -37,34 +39,36 @@
       <input
         class="form-control"
         type="text"
-        formControlName="teachingAddress" />
+        formControlName="teachingAddress"
+      />
     </div>
 
-    <div id="upload__button-container" class="col-md-6 mb-3">
-      <td class="upload__detail">
-        <button type="button" class="btn btn-primary" id="btn-address">
+    <div class="col-md-6 mb-3">
+      <br />
+      <td class="d-flex justify-content-center justify-content-md-start">
+        <button type="button" class="btn btn-primary w-auto">
           + เพิ่มสถานศึกษาที่ปฏิบัติการสอน
         </button>
       </td>
     </div>
   </div>
 
-  <div class="col">
-    <div class="checkbox__content">
-      <input
-        formControlName="hasForeignLicense"
-        type="checkbox"
-        class="checkbox"
-        (change)="resetForeignLicenseForm($event)" />
-      <label class="form-label checkbox-label">
-        ใบอนุญาตประกอบวิชาชีพครูจากต่างประเทศ</label>
-    </div>
-
-    <ng-template [ngIf]="hasForeignLicense">
-      <ksp-experience-form
-        [countries]="countries"
-        [licenses]="licenses"
-        formControlName="foreignLicenseForm"></ksp-experience-form>
-    </ng-template>
+  <div class="d-flex align-items-center mb-3">
+    <input
+      formControlName="hasForeignLicense"
+      type="checkbox"
+      (change)="resetForeignLicenseForm($event)"
+    />
+    <label class="form-label ms-2">
+      ใบอนุญาตประกอบวิชาชีพครูจากต่างประเทศ</label
+    >
   </div>
+
+  <ng-template [ngIf]="hasForeignLicense">
+    <ksp-experience-form
+      [countries]="countries"
+      [licenses]="licenses"
+      formControlName="foreignLicenseForm"
+    ></ksp-experience-form>
+  </ng-template>
 </form>

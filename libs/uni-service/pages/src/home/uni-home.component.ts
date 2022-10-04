@@ -1,9 +1,11 @@
+import { getCookie } from '@ksp/shared/utility';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { SelfServiceFormModule } from '@ksp/self-service/form';
-import { ListData } from '@ksp/shared/interface';
+import { ListData, KspPaginationComponent } from '@ksp/shared/interface';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { DegreeHomeSearchComponent } from '@ksp/shared/search';
 import { AddressService, UniInfoService } from '@ksp/shared/service';
@@ -32,20 +34,24 @@ const mapOption = () =>
     ReactiveFormsModule,
     DegreeHomeSearchComponent,
     UniFormBadgeComponent,
+    MatPaginatorModule,
   ],
 })
-export class UniHomeComponent {
-  badgeTitle1 = [
-    `เลขที่คำขอ : 010641000123
-  รายการขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา ถูกส่งคืน “ปรับแก้ไข /
-  เพิ่มเติม`,
-  ];
+export class UniHomeComponent extends KspPaginationComponent implements OnInit {
+  badgeTitle1: any;
+  badgeTitle2: any;
 
-  badgeTitle2 = [
-    `กรุณาส่งกลับภายในวันที่ DD/MM/YYYY มิฉะนั้นใบคำขอจะถูกยกเลิก`,
-  ];
+  // badgeTitle1 = [
+  //   `เลขที่คำขอ : 010641000123
+  // รายการขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา ถูกส่งคืน “ปรับแก้ไข /
+  // เพิ่มเติม`,
+  // ];
 
-  form = this.fb.group({
+  // badgeTitle2 = [
+  //   `กรุณาส่งกลับภายในวันที่ DD/MM/YYYY มิฉะนั้นใบคำขอจะถูกยกเลิก`,
+  // ];
+
+  form: any = this.fb.group({
     homeSearch: [],
   });
   degreeLevelOptions: ListData[] = [];
@@ -61,6 +67,7 @@ export class UniHomeComponent {
     private uniInfoService: UniInfoService,
     private addressService: AddressService
   ) {
+    super();
     this.getAll();
   }
 
@@ -78,7 +85,10 @@ export class UniHomeComponent {
   private _findOptions(dataSource: any, key: any) {
     return _.find(dataSource, { value: key })?.label || '-';
   }
-  search() {
+  ngOnInit(): void {
+    this.initFormData();
+  }
+  override search() {
     const value: any = this.form.value?.homeSearch;
     const payload = {
       uniid: value?.university || '',
@@ -91,12 +101,12 @@ export class UniHomeComponent {
       coursemajor: value?.major || '',
       coursesubjects: value?.subject || '',
       uniprovince: value?.province || '',
-      offset: '0',
-      row: '10',
+      ...this.tableRecord,
     };
     this.uniInfoService.uniDegreeSearch(payload).subscribe(async (res) => {
       const newData: any[] = [];
-      for(const row  of   res?.datareturn){
+      this.pageEvent.length = res?.countrow;
+      for (const row of res?.datareturn || []) {
         const degreeLevel = this._findOptions(
           this.degreeLevelOptions,
           row?.degreelevel
@@ -105,7 +115,9 @@ export class UniHomeComponent {
         const approveDate = row?.createdate
           ? moment(row?.createdate).format('DD/MM/YYYY')
           : '-';
-        const { major, branch } = await this.uniInfoService.getMajorAndBranch(row);
+        const { major, branch } = await this.uniInfoService.getMajorAndBranch(
+          row
+        );
         newData.push({
           approveNumber: row?.degreeapprovecode || '-',
           degreeLevel,
@@ -117,16 +129,31 @@ export class UniHomeComponent {
         });
       }
       this.dataSource.data = newData;
-
     });
   }
 
   clear() {
     this.form.reset();
+    this.clearPageEvent();
     this.dataSource.data = [];
   }
-
+  initFormData() {
+    this.form.setValue({
+      homeSearch: {
+        universityType: getCookie('uniType'),
+        uniid: getCookie('uniId'),
+      },
+    });
+  }
   getAll() {
+    if(getCookie('uniType')){
+      this.uniInfoService
+      .getUniversity(getCookie('uniType'))
+      .pipe(mapOption())
+      .subscribe((res) => {
+        this.universities = res;
+      });
+    }
     this.uniInfoService
       .getUniversityType()
       .pipe(mapOption())
@@ -199,7 +226,6 @@ export class UniHomeComponent {
         });
     }
   }
-
 }
 
 export interface DegreeInfo {

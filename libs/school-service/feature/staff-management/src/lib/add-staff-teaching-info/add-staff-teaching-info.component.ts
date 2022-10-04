@@ -3,12 +3,13 @@ import { FormArray, FormBuilder, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { levels, subjects } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { StaffService } from '@ksp/shared/service';
-import { getCookie, formatCheckboxData } from '@ksp/shared/utility';
+import { formatCheckboxData } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 
@@ -161,9 +162,6 @@ export class AddStaffTeachingInfoComponent implements OnInit {
     //console.log('payload = ', payload);
     this.teachingInfoService.addTeachingInfo(payload).subscribe((res) => {
       //console.log('add teaching info result = ', res);
-      this.snackBar.open('บันทึกข้อมูลสำเร็จ', 'ปิด', {
-        duration: 2000,
-      });
     });
   }
 
@@ -184,7 +182,7 @@ export class AddStaffTeachingInfoComponent implements OnInit {
     };
 
     this.teachingInfoService.addHiringInfo(payload).subscribe((res) => {
-      console.log('add hiring info result = ', res);
+      //console.log('add hiring info result = ', res);
     });
   }
 
@@ -229,40 +227,6 @@ export class AddStaffTeachingInfoComponent implements OnInit {
     this.router.navigate(['/staff-management', 'list']);
   }
 }
-
-export const levels = [
-  { label: 'ประกาศนียบัตรวิชาชีพ (ปวช.)', value: 'level6' },
-  { label: 'ชั้นมัธยมปีที่ 1-3', value: 'level4' },
-  { label: 'ชั้นประถมปีที่ 1-3', value: 'level2' },
-  { label: 'อนุบาล', value: 'level1' },
-  {
-    label: 'ประกาศนียบัตรวิชาชีพขั้นสูง (ปวส.) / อนุปริญญา',
-    value: 'level7',
-  },
-  { label: 'ชั้นมัธยมปีที่ 4-6', value: 'level5' },
-  { label: 'ชั้นประถมปีที่ 4-6', value: 'level3' },
-];
-
-export const subjects = [
-  { label: 'ภาษาไทย', value: 's1' },
-  { label: 'วิทยาศาสตร์', value: 's6' },
-  { label: 'คณิตศาสตร์', value: 's12' },
-  { label: 'ภาษาต่างประเทศ', value: 's2' },
-  { label: 'ปฐมวัย', value: 's7' },
-  { label: 'เทคโนโลยีสารสนเทศและการสื่อสาร', value: 's13' },
-  { label: 'สุขศึกษาและพละศึกษา', value: 's3' },
-  { label: 'คหกรรม', value: 's8' },
-  { label: 'พาณิชยกรรม/บริหารธุรกิจ', value: 's14' },
-  { label: 'สังคมศึกษา ศาสนาและวัฒนธรรม', value: 's4' },
-  { label: 'ศิลปกรรม', value: 's9' },
-  { label: 'อุตสาหกรรม', value: 's15' },
-  { label: 'การงานอาชีพและเทคโนโลยี', value: 's5' },
-  { label: 'เกษตรกรรม', value: 's10' },
-  { label: 'อุตสาหกรรมสิ่งทอ', value: 's16' },
-  { label: 'อื่นๆ', value: 's18' },
-  { label: 'ประมง', value: 's11' },
-  { label: 'อุตสาหกรรมท่องเที่ยว', value: 's17' },
-];
 
 export const status = [
   { label: 'แจ้งเข้า', value: '1' },

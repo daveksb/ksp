@@ -20,16 +20,16 @@ export class FormUserWorkplaceComponent extends KspFormBaseComponent {
   @Output() amphurChanged = new EventEmitter<any>();
 
   override form = this.fb.group({
-    bureauid: [''],
-    schoolname: [''],
-    houseno: [''],
-    moo: [''],
-    alley: [''],
-    road: [''],
-    postcode: [''],
-    province: [''],
-    tumbol: [''],
-    amphur: [''],
+    bureauid: [null],
+    schoolname: [null],
+    houseno: [null],
+    moo: [null],
+    alley: [null],
+    road: [null],
+    postcode: [null],
+    province: [null],
+    tumbol: [null],
+    amphur: [null],
   });
 
   constructor(private dialog: MatDialog, private fb: FormBuilder) {

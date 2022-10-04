@@ -2,10 +2,12 @@
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-3 full-height">
-    <ksp-uni-form-badge
-      [mainTitle]="badgeTitle1"
-      [subTitle]="badgeTitle2"
-    ></ksp-uni-form-badge>
+    <ng-container *ngIf="badgeTitle1 && badgeTitle2">
+      <ksp-uni-form-badge
+        [mainTitle]="badgeTitle1"
+        [subTitle]="badgeTitle2"
+      ></ksp-uni-form-badge>
+    </ng-container>
     <div class="bg-white p-3">
       <ksp-degree-home-search
         (clear)="clear()"
@@ -85,6 +87,14 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
+      <mat-paginator
+        [length]="pageEvent.length"
+        [pageSize]="pageEvent.pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="onPaginatorEvent($event)"
+        [pageIndex]="pageEvent.pageIndex"
+      >
+      </mat-paginator>
     </div>
   </div>
 </form>

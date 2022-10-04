@@ -11,7 +11,8 @@
   <school-service-staff-search
     formControlName="searchFilter"
     (clear)="clear()"
-    (search)="search()"
+    (search)="search($event)"
+    [positions]="positions$ | async"
   ></school-service-staff-search>
 
   <div class="bg-white px-3 py-2 mt-3">
@@ -58,12 +59,16 @@
 
         <ng-container matColumnDef="startdate">
           <th mat-header-cell *matHeaderCellDef>วันที่เข้าปฏิบัติงาน</th>
-          <td mat-cell *matCellDef="let element">{{ element.startdate }}</td>
+          <td mat-cell *matCellDef="let element">
+            {{ element.startdate | thaiDate }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="enddate">
           <th mat-header-cell *matHeaderCellDef>วันที่หมดสัญญา</th>
-          <td mat-cell *matCellDef="let element">{{ element.enddate }}</td>
+          <td mat-cell *matCellDef="let element">
+            {{ element.enddate | thaiDate }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="profession">

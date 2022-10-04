@@ -49,7 +49,7 @@ export class ActivityListComponent implements AfterViewInit {
     const payload = {
       schoolid: `${this.schoolId}`,
     };
-    this.service.searchStaffsFromSchoolId(payload).subscribe((res) => {
+    this.service.searchStaffs(payload).subscribe((res) => {
       res.map((i: any) => {
         const temp = parseJson(i.hiringinfo);
         i.startdate = temp.startDate;
