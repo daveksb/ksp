@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -9,7 +9,10 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./activity-academic-archivement.component.scss'],
   providers: providerFactory(ActivityAcademicArchivementComponent),
 })
-export class ActivityAcademicArchivementComponent extends KspFormBaseComponent {
+export class ActivityAcademicArchivementComponent
+  extends KspFormBaseComponent
+  implements OnDestroy
+{
   @Input() data: any;
   @Input() isForeignForm = false;
 
@@ -33,5 +36,10 @@ export class ActivityAcademicArchivementComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+
+  override ngOnDestroy(): void {
+    this.onChange(null);
+    this.onTouched();
   }
 }
