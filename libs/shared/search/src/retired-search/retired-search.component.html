@@ -3,7 +3,7 @@
     <div class="bg-light px-3 pt-1 pb-3">
       <div class="box-header text-primary">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
 
-      <div class="row" *ngIf="searchType == 'uni'">
+      <div class="row" *ngIf="searchType === 'uni'">
         <div class="col-6 mb-3">
           <label class="form-label required">สิทธิสำหรับการเข้าใช้งาน</label>
           <select class="form-select" formControlName="permissionright">

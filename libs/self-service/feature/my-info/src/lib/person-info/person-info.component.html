@@ -153,24 +153,24 @@
         <div class="col-md mb-3">
           <label class="form-label">ศาสนา</label>
           <select class="form-select" formControlName="religion">
-            <option selected>กรุณาเลือก</option>
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
             <option value="1">พุทธ</option>
             <option value="2">คริสต์</option>
             <option value="3">อิสลาม</option>
+            <option value="4">อื่นๆ</option>
           </select>
         </div>
       </div>
     </div>
 
     <div class="d-flex justify-content-center my-3">
-      <button class="btn btn-secondary" (click)="clearData()">
+      <button class="btn btn-secondary me-2" (click)="clearData()">
         ล้างข้อมูล
       </button>
       <button
-        id="btn-edit"
-        class="btn btn-primary"
+        class="btn"
         (click)="onClick()"
-        [ngClass]="status === 'edit' ? 'btn-primary' : 'btn-warning'"
+        [ngClass]="status === 'edit' ? 'btn-primary' : 'btn-success'"
       >
         {{ label }}
       </button>
