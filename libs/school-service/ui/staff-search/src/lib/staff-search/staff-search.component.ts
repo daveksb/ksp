@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { levels } from '@ksp/shared/constant';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -12,6 +13,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   providers: providerFactory(StaffSearchComponent),
 })
 export class StaffSearchComponent extends KspFormBaseComponent {
+  levels = levels;
+
   override form = this.fb.group({
     licenseno: [],
     licenseType: [],

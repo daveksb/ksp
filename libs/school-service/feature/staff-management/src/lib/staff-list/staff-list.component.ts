@@ -51,7 +51,7 @@ export class StaffListComponent implements AfterViewInit {
   }
 
   search(filter: any) {
-    console.log('filter = ', filter);
+    //console.log('filter = ', filter);
     const payload = {
       licenseno: filter.licenseno,
       name: filter.name,
@@ -64,11 +64,14 @@ export class StaffListComponent implements AfterViewInit {
     };
 
     this.service.searchStaffs(payload).subscribe((res) => {
-      console.log('res = ', res);
+      //console.log('res = ', res);
       /*       res.map((i: any) => {
-        const temp = parseJson(i.hiringinfo);
-        i.startdate = temp.startDate;
-        i.enddate = temp.endDate;
+        if (i && i.hiringinfo) {
+          console.log('i = ', i);
+          const temp = parseJson(i.hiringinfo);
+          i.startdate = temp.startDate;
+          i.enddate = temp.endDate;
+        }
       }); */
 
       this.dataSource.data = res;
