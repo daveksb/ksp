@@ -25,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
 
 export const routes: Routes = [
   {
@@ -66,6 +67,7 @@ export const routes: Routes = [
     LicenseInfoComponent,
     MatPaginatorModule,
     MatSortModule,
+    ThaiDatePipe,
   ],
   declarations: [
     StaffListComponent,

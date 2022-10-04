@@ -5,7 +5,6 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { StaffService } from '@ksp/shared/service';
-import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -64,15 +63,15 @@ export class StaffListComponent implements AfterViewInit {
     };
 
     this.service.searchStaffs(payload).subscribe((res) => {
-      //console.log('res = ', res);
-      /*       res.map((i: any) => {
-        if (i && i.hiringinfo) {
-          console.log('i = ', i);
-          const temp = parseJson(i.hiringinfo);
-          i.startdate = temp.startDate;
-          i.enddate = temp.endDate;
-        }
-      }); */
+      if (res) {
+        res.map((i: any) => {
+          if (i && i.hiringinfo) {
+            const temp = JSON.parse(i.hiringinfo);
+            i.startdate = temp.startDate;
+            i.enddate = temp.endDate;
+          }
+        });
+      }
 
       this.dataSource.data = res;
       this.dataSource.sort = this.sort;
