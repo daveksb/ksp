@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormMode } from '@ksp/shared/interface';
@@ -35,6 +35,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   schoolName = '';
   address = '';
   requestDate = thaiDate(new Date());
+  showCancelButton!: boolean;
   mode: FormMode = 'edit';
   prefixList$!: Observable<any>;
   countries$!: Observable<any>;
@@ -50,7 +51,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     private addressService: AddressService,
     private requestService: RequestService,
     private schoolInfoService: SchoolInfoService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute //private ref: ChangeDetectorRef
   ) {}
   get formValid() {
     return (
@@ -78,6 +79,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     this.requestService.getRequestById(id).subscribe((res: any) => {
       if (res) {
         this.mode = 'view';
+        this.showCancelButton = Boolean(+res.requeststatus);
         this.requestDate = thaiDate(new Date(`${res.requestdate}`));
         this.requestNumber = res.requestno;
         res.birthdate = res.birthdate?.split('T')[0];
@@ -128,7 +130,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       width: '350px',
       data: {
         header: 'ระบบทำการยกเลิกเรียบร้อย',
-        content: `วันที่ : ${this.requestDate}
+        content: `วันที่ : ${thaiDate(new Date())}
         เลขที่คำขอ : ${this.requestNumber}`,
       },
     });
