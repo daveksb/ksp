@@ -159,4 +159,51 @@ export class UniInfoService {
       tokenkey: this.tokenKey,
     });
   }
+
+  searchSelfStudent(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/selfmyinfosearch_uni.php`,
+      {
+        ...params,
+        tokenkey: this.tokenKey,
+      }
+    );
+  }
+
+  uniAdmissionSearch(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/unidegreeadmissionsearch.php`,
+      {
+        ...params,
+        tokenkey: this.tokenKey,
+      }
+    );
+  }
+
+  uniAdmissionSearch2(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/unidegreeadmissionsearch_2.php`,
+      {
+        ...params,
+        tokenkey: this.tokenKey,
+      }
+    );
+  }
+
+  uniRequestDegreeCertSelectUniDegreeCertId(unidegreecertid: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/kspuni/unirequestdegreecertselectunidegreecertid`, {
+      unidegreecertid,
+      tokenkey: this.tokenKey,
+    });
+  }
+
+  uniDegreeHistory(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspuni/unirequestadmissionselectadid`,
+      {
+        ...params,
+        tokenkey: this.tokenKey,
+      }
+    );
+  }
 }

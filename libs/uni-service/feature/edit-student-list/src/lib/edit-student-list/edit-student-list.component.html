@@ -5,102 +5,87 @@
   </span></ksp-top-nav
 >
 
-<div class="bg-secondary bg-opacity-10 py-2 px-4 full-height">
-  <div class="bg-white p-3">
-    <div class="bg-light p-3 default-width">
-      <div class="box-header">ค้นหาข้อมูลที่ต้องการค้นหา</div>
-      <div class="row mb-2">
-        <div class="col">
-          <label class="form-label">รหัสวิชา</label>
-          <select class="form-select">
-            <option>กรุณาเลือก</option>
-            <option>xxx</option>
-            <option>xxx</option>
-            <option>xxx</option>
-          </select>
+<div class="bg-secondary bg-opacity-10 py-2 px-4 full-height full-width-2">
+  <form [formGroup]="form">
+    <div class="bg-white p-3">
+      <div class="bg-light p-3 default-width">
+        <div class="box-header">ค้นหาข้อมูลที่ต้องการค้นหา</div>
+        <div class="row mb-2">
+          <div class="col">
+            <label class="form-label">เลขที่ใบคำขอ</label>
+            <input class="form-control" type="text" formControlName="requestno" />
+          </div>
+          <div class="col">
+            <label class="form-label">ระดับปริญญา</label>
+            <select class="form-select" formControlName="degreelevel">
+              <option value="null" selected disabled>กรุณาเลือก</option>
+              <option *ngFor="let option of degreeLevelOptions" [value]="option.value">{{option.label}}</option>
+            </select>
+          </div>
         </div>
-        <div class="col">
-          <label class="form-label">ชื่อวิชา</label>
-          <select class="form-select">
-            <option>กรุณาเลือก</option>
-            <option>xxx</option>
-            <option>xxx</option>
-            <option>xxx</option>
-          </select>
+  
+        <div class="row mb-2">
+          <div class="col">
+            <label class="form-label">ชื่อปริญญาและประกาศนียบัตรทางการศึกษา</label>
+            <input class="form-control" type="text" formControlName="fulldegreename" />
+          </div>
+          <div class="col">
+            <label class="form-label">วิชาเอก</label>
+            <input class="form-control" type="text" formControlName="coursemajor" />
+          </div>
         </div>
-      </div>
+  
+        <div class="row mb-2">
+          <div class="col">
+            <label class="form-label">ปีการศึกษา</label>
+            <input class="form-control" type="text" formControlName="plancalendaryear" />
+          </div>
+          <div class="col">
+            <label class="form-label">สถานะตรวจสอบ</label>
+            <select class="form-select" formControlName="requeststatus">
+              <option value="null" selected disabled>กรุณาเลือก</option>
+              <option *ngFor="let option of requestStatusOptions" [value]="option.value">{{option.label}}</option>
+            </select>
+          </div>
+        </div>
+  
+        <div class="row mb-2">
+          <div class="col-6">
+            <label class="form-label">หมายเลขบัตรประชาชน/เลขประจำตัวคุรุสภา/หมายเลขหนังสือเดินทาง</label>
+            <input class="form-control" type="text" formControlName="idcardno" />
+          </div>
+          <div class="col-6">
+            <label class="form-label">ชื่อ-นามสกุล</label>
+            <input class="form-control" type="text" formControlName="name" />
+          </div>
+        </div>
 
-      <div class="row mb-2">
-        <div class="col">
-          <label class="form-label">ผลการทดสอบ</label>
-          <select class="form-select">
-            <option>กรุณาเลือก</option>
-            <option>xxx</option>
-            <option>xxx</option>
-            <option>xxx</option>
-          </select>
+        <div class="row mb-2">
+          <div class="col-6">
+            <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ</label>
+            <input class="form-control" type="date" formControlName="requestdatefrom" />
+          </div>
+          <div class="col-6">
+            <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ</label>
+            <input class="form-control" type="date" formControlName="requestdateto" />
+          </div>
         </div>
-        <div class="col">
-          <label class="form-label">สถานะการทดสอบ</label>
-          <select class="form-select">
-            <option>กรุณาเลือก</option>
-            <option>xxx</option>
-            <option>xxx</option>
-            <option>xxx</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="row mb-2">
-        <div class="col">
-          <label class="form-label"
-            >หมายเลขบัตรประชาชน / เลขประจำตัวคุรุสภา /
-            หมายเลขหนังสือเดินทาง</label
+  
+        <div class="d-flex justify-content-end">
+          <button
+            class="btn border-primary text-primary"
+            type="button"
+            (click)="clear()"
           >
-          <select class="form-select">
-            <option>กรุณาเลือก</option>
-            <option>xxx</option>
-            <option>xxx</option>
-            <option>xxx</option>
-          </select>
+            ล้างข้อมูล
+          </button>
+          <button class="btn btn-primary ms-2" type="button" (click)="search()">
+            ค้นหา
+          </button>
         </div>
-        <div class="col">
-          <label class="form-label">ชื่อ-นามสกุล</label>
-          <select class="form-select">
-            <option>กรุณาเลือก</option>
-            <option>xxx</option>
-            <option>xxx</option>
-            <option>xxx</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="row mb-2">
-        <div class="col-6">
-          <label class="form-label">ปีการศึกษา</label>
-          <select class="form-select">
-            <option>กรุณาเลือก</option>
-            <option>xxx</option>
-            <option>xxx</option>
-            <option>xxx</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="d-flex justify-content-end">
-        <button
-          class="btn border-primary text-primary"
-          type="button"
-          (click)="clear()"
-        >
-          ล้างข้อมูล
-        </button>
-        <button class="btn btn-primary ms-2" type="button" (click)="search()">
-          ค้นหา
-        </button>
       </div>
     </div>
-  </div>
+  </form>
   <br />
   <div class="d-flex justify-content-between align-items-center mb-2">
     <div class="box-header">

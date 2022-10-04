@@ -56,6 +56,7 @@ export class DegreeCertStepOneComponent
     locations2: this.fb.array([]),
     coordinator: [],
     courseDetailType: [],
+    courseDetail: [],
     section1: [false],
     section2: [false],
     section3: [false],
@@ -63,11 +64,11 @@ export class DegreeCertStepOneComponent
     section5: [false],
     section6: [false],
   });
-
-  step1Incorrect = [
-    'ไม่ครบถ้วน และไม่ถูกต้อง',
-    'หมายเหตุ ข้อมูลมคอ. 2 ไม่ถูกต้อง',
-  ];
+  step1Incorrect = null;
+  // step1Incorrect = [
+  //   'ไม่ครบถ้วน และไม่ถูกต้อง',
+  //   'หมายเหตุ ข้อมูลมคอ. 2 ไม่ถูกต้อง',
+  // ];
 
   constructor(
     private fb: FormBuilder,
@@ -142,14 +143,10 @@ export class DegreeCertStepOneComponent
       .subscribe((res) => {
         //console.log('form value = ', res);
       });
-
-    this.form.controls['courseType'].valueChanges
-      .pipe(skip(1), untilDestroyed(this))
-      .subscribe((res) => {
-        this.loadComponent(Number(res));
-      });
   }
-
+  get courseDetailType() {
+    return this.form.controls.courseDetailType.value;
+  }
   onDegreeTypeChanged(degreeType: string) {
     this.degreeType.emit(degreeType);
   }
@@ -161,14 +158,6 @@ export class DegreeCertStepOneComponent
 
   deleteFormArray(form: FormArray<any>, index: number) {
     form.removeAt(index);
-  }
-
-  loadComponent(index: number) {
-    const viewContainerRef = this.myHost.viewContainerRef;
-    viewContainerRef.clear();
-    viewContainerRef.createComponent<DynamicComponent>(
-      this.service.componentList[--index]
-    );
   }
 
   get locations() {
@@ -183,21 +172,39 @@ export class DegreeCertStepOneComponent
     return this.form.controls['locations2'] as FormArray;
   }
   get section1() {
-    return !!(!this.form.controls?.section1?.value && this.showEditCheckbox);
+    return (
+      !!(!this.form.controls?.section1?.value && this.showEditCheckbox) ||
+      this.mode === 'view'
+    );
   }
   get section2() {
-    return !!(!this.form.controls?.section2?.value && this.showEditCheckbox);
+    return (
+      !!(!this.form.controls?.section2?.value && this.showEditCheckbox) ||
+      this.mode === 'view'
+    );
   }
   get section3() {
-    return !!(!this.form.controls?.section3?.value && this.showEditCheckbox);
+    return (
+      !!(!this.form.controls?.section3?.value && this.showEditCheckbox) ||
+      this.mode === 'view'
+    );
   }
   get section4() {
-    return !!(!this.form.controls?.section4?.value && this.showEditCheckbox);
+    return (
+      !!(!this.form.controls?.section4?.value && this.showEditCheckbox) ||
+      this.mode === 'view'
+    );
   }
   get section5() {
-    return !!(!this.form.controls?.section5?.value && this.showEditCheckbox);
+    return (
+      !!(!this.form.controls?.section5?.value && this.showEditCheckbox) ||
+      this.mode === 'view'
+    );
   }
   get section6() {
-    return !!(!this.form.controls?.section6?.value && this.showEditCheckbox);
+    return (
+      !!(!this.form.controls?.section6?.value && this.showEditCheckbox) ||
+      this.mode === 'view'
+    );
   }
 }

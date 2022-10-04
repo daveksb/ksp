@@ -24,11 +24,11 @@
                     <input
                       class="form-control"
                       type="text"
-                      formControlName="addressCode"
+                      formControlName="universitycode"
                     />
                     <i
                       role="button"
-                      (click)="searchAddress()"
+                      (click)="searchAddress(i)"
                       class="bi bi-search text-primary fs-5 ms-1"
                     ></i>
                   </div>
@@ -38,7 +38,7 @@
                   <input
                     class="form-control"
                     type="text"
-                    formControlName="addressName"
+                    formControlName="uniname"
                   />
                 </div>
                 <div class="col-auto">
@@ -74,7 +74,7 @@
           </button>
           <button
             id="btn-save"
-            matDialogClose
+            (click)="save()"
             type="button"
             class="btn btn-primary"
           >

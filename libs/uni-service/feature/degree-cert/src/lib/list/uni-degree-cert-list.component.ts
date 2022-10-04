@@ -82,7 +82,7 @@ export class UniDegreeCertListComponent implements OnInit {
               considerStatus: 'พิจารณา',
               approveStatus: 'พิจารณา',
               approveDate: '30 ส.ค. 2564',
-              editDate: stringToThaiDate(item?.updatedate),
+              editDate: item?.updatedate?stringToThaiDate(item?.updatedate):"-",
               verify: 'แก้ไข',
               consider: 'แก้ไข',
             };

@@ -44,6 +44,7 @@ export class RequestRewardComponent implements OnInit {
   disablePermanentSave = true;
   disableCancel = false;
   uniqueTimeStamp!: string;
+  showCancelButton = true;
 
   constructor(
     private router: Router,
@@ -135,6 +136,7 @@ export class RequestRewardComponent implements OnInit {
       this.requestDate = thaiDate(new Date(`${res.requestdate}`));
       this.requestStatus = res.requeststatus;
       this.currentProcess = res.currentprocess;
+      this.showCancelButton = res.requeststatus !== '0';
 
       const osoiInfo = parseJson(res.osoiinfo);
       const osoiMember = parseJson(res.osoimember);
@@ -143,7 +145,7 @@ export class RequestRewardComponent implements OnInit {
       this.memberData = osoiMember;
       //console.log('current process = ', this.currentProcess);
       const file = parseJson(res.fileinfo);
-      console.log('get file = ', file);
+      //console.log('get file = ', file);
     });
   }
 

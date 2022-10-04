@@ -1,38 +1,38 @@
 <ksp-top-nav><span header>ยื่นใบคำขอ</span></ksp-top-nav>
 
-<form [formGroup]="form">
-  <div class="bg-secondary bg-opacity-10 py-2 px-4 full-height-2">
-    <div class="box-header">
-      รายละเอียดคำขอเปลี่ยนแปลงรายละเอียดรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา
-    </div>
-    <div class="bg-white p-3">
-      <ksp-request-header-info
-        [requestDate]="'10 ตุลาคม 2565'"
-        [requestNumber]="'112234467876543'"
-      ></ksp-request-header-info>
-      <hr />
+<div class="bg-secondary bg-opacity-10 py-2 px-4 full-height-2">
+  <div class="box-header">
+    รายละเอียดคำขอเปลี่ยนแปลงรายละเอียดรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา
+  </div>
+  <div class="bg-white p-3">
+    <ksp-request-header-info
+      [requestDate]="requestDate"
+      [requestNumber]="requestNo"
+    ></ksp-request-header-info>
+    <hr />
+    <form [formGroup]="formSearch">
       <div class="bg-light p-3">
         <div class="box-header text-primary">ค้นหาข้อมูล</div>
         <div class="row mb-2 w-75 ms-5">
           <div class="col-6">
             <label class="form-label"
-              >หมายเลขบัตรประชาชน / เลขประจำตัวคุรุสภา</label
+              >หมายเลขบัตรประชาชน / เลขประจำตัวคุรุสภา / หมายเลขหนังสือเดินทาง</label
             >
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" formControlName="idcardno" />
           </div>
         </div>
-
+  
         <div class="row mb-2 w-75 ms-5">
           <div class="col">
             <label class="form-label">ชื่อ</label>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" formControlName="firstname" />
           </div>
           <div class="col">
             <label class="form-label">นามสกุล</label>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" formControlName="lastname" />
           </div>
         </div>
-
+  
         <div class="d-flex justify-content-end me-5">
           <button
             class="btn border-primary text-primary bg-white"
@@ -50,99 +50,105 @@
           </button>
         </div>
       </div>
-      <br />
+    </form>
+    <br />
 
-      <ng-container *ngIf="data === true">
-        <div class="bg-light p-3">
-          <div class="box-header">ข้อมูลนักศึกษาที่ต้องการเปลี่ยนแปลง</div>
-          <div class="row mb-2 mx-5">
-            <div class="col-2">
-              <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
-              <select class="form-select" disabled>
-                <option selected>กรุณาเลือก</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
-            <div class="col">
-              <label class="form-label">ชื่อภาษาไทย</label
-              ><input class="form-control" type="text" disabled />
-            </div>
-            <div class="col">
-              <label class="form-label">นามสกุลภาษาไทย</label
-              ><input class="form-control" type="text" disabled />
-            </div>
+    <form [formGroup]="studentDetail" *ngIf="data">
+      <div class="bg-light p-3">
+        <div class="box-header">ข้อมูลนักศึกษาที่ต้องการเปลี่ยนแปลง</div>
+        <div class="row mb-2 mx-5">
+          <div class="col-2">
+            <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
+            <select class="form-select" formControlName="prefixth">
+              <option selected>กรุณาเลือก</option>
+              <option *ngFor="let option of prefixList$ | async" [value]="option.id">{{option.name_th}}</option>
+            </select>
           </div>
-
-          <div class="row mb-2 mx-5">
-            <div class="col-2">
-              <label class="form-label">คำนำหน้าชื่อภาษาอังกฤษ</label>
-              <select class="form-select" disabled>
-                <option selected>กรุณาเลือก</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
-            <div class="col">
-              <label class="form-label">ชื่อภาษาอังกฤษ</label
-              ><input class="form-control" type="text" disabled />
-            </div>
-            <div class="col">
-              <label class="form-label">นามสกุลภาษาอังกฤษ </label
-              ><input class="form-control" type="text" disabled />
-            </div>
+          <div class="col">
+            <label class="form-label">ชื่อภาษาไทย</label
+            ><input class="form-control" type="text" formControlName="firstnameth" />
           </div>
-
-          <div class="row mb-2 mx-5">
-            <div class="col-2">
-              <label class="form-label">สัญชาติ</label>
-              <select class="form-select" disabled>
-                <option selected>กรุณาเลือก</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
-            <div class="col">
-              <label class="form-label"
-                >หมายเลขบัตรประชาชน / เลขประจำตัวคุรุสภา</label
-              ><input class="form-control" type="text" disabled />
-            </div>
-            <div class="col">
-              <label class="form-label">หมายเลขหนังสือเดินทาง</label
-              ><input class="form-control" type="text" disabled />
-            </div>
-          </div>
-
-          <div class="row mb-2 mx-5">
-            <div class="col">
-              <label class="form-label">อีเมล</label
-              ><input class="form-control" type="text" disabled />
-            </div>
-            <div class="col">
-              <label class="form-label">เบอร์โทรศัพท์ </label
-              ><input class="form-control" type="text" disabled />
-            </div>
+          <div class="col">
+            <label class="form-label">นามสกุลภาษาไทย</label
+            ><input class="form-control" type="text" formControlName="lastnameth" />
           </div>
         </div>
 
-        <br />
+        <div class="row mb-2 mx-5">
+          <div class="col-2">
+            <label class="form-label">คำนำหน้าชื่อภาษาอังกฤษ</label>
+            <select class="form-select" formControlName="prefixen">
+              <option selected>กรุณาเลือก</option>
+              <option *ngFor="let option of prefixList$ | async" value="option.id">{{option.name_en}}</option>
+            </select>
+          </div>
+          <div class="col">
+            <label class="form-label">ชื่อภาษาอังกฤษ</label
+            ><input class="form-control" type="text" formControlName="firstnameen" />
+          </div>
+          <div class="col">
+            <label class="form-label">นามสกุลภาษาอังกฤษ </label
+            ><input class="form-control" type="text" formControlName="lastnameen" />
+          </div>
+        </div>
+
+        <div class="row mb-2 mx-5">
+          <div class="col-2">
+            <label class="form-label">สัญชาติ</label>
+            <select class="form-select" formControlName="nationality">
+              <option selected>กรุณาเลือก</option>
+              <option *ngFor="let option of nationalityList$ | async" value="option.id">{{option.name_en}}</option>
+            </select>
+          </div>
+          <div class="col">
+            <label class="form-label"
+              >หมายเลขบัตรประชาชน / เลขประจำตัวคุรุสภา</label
+            ><input class="form-control" type="text" formControlName="idcardno" />
+          </div>
+          <div class="col">
+            <label class="form-label">หมายเลขหนังสือเดินทาง</label
+            ><input class="form-control" type="text" formControlName="passportno" />
+          </div>
+        </div>
+
+        <div class="row mb-2 mx-5">
+          <div class="col">
+            <label class="form-label">อีเมล</label
+            ><input class="form-control" type="text" formControlName="email" />
+          </div>
+          <div class="col">
+            <label class="form-label">เบอร์โทรศัพท์ </label
+            ><input class="form-control" type="text" formControlName="phone" />
+          </div>
+        </div>
+      </div>
+
+      <br />
+    </form>
+    <form [formGroup]="formData" *ngIf="data">
+      <ng-container>
         <div class="bg-light p-3">
           <div class="mx-5">
             <ksp-edit-license
               formControlName="editStudent"
+              [oldValue]="oldValue"
               [showEditPassport]="true"
+              [prefixList]="prefixList$ | async"
             ></ksp-edit-license>
           </div>
         </div>
         <br />
-        <ksp-form-attachment [groups]="uploadFileList"></ksp-form-attachment
-      ></ng-container>
-    </div>
+        <ksp-form-attachment
+          [uniqueTimestamp]="uniqueTimestamp"
+          [pageType]="pageType.fileAttachTab"
+          [requestType]="requesttype"
+          [groups]="uploadFileList">
+        </ksp-form-attachment>
+        <label class="text-red">กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง โปรดตรวจสอบอีกครั้งก่อนบันทึกลงระบบ</label>
+      </ng-container>
+    </form>
   </div>
-</form>
+</div>
 
 <div class="sticky-bottom border">
   <ksp-bottom-nav

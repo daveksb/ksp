@@ -128,6 +128,9 @@ export class EditDegreeDetailComponent implements OnInit {
         institutionsName: uniData?.name || '',
         provience: uniData?.provinceid || '',
         courseDetailType: res?.coursedetailtype,
+        courseDetail: res?.coursedetailinfo
+        ? parseJson(res?.coursedetailinfo)
+        : null,
         degreeTypeForm: {
           degreeType: res?.degreelevel,
           courseYear: res?.courseacademicyear,
@@ -217,6 +220,9 @@ export class EditDegreeDetailComponent implements OnInit {
     };
     returnData['step1Section2'] = {
       coursedetailtype: step1?.courseDetailType || null,
+      coursedetailinfo: step1?.courseDetail
+      ? JSON.stringify(step1?.courseDetail)
+      : null,
     };
     returnData['step1Section3'] = {
       teachinglocation: step1?.locations
@@ -241,12 +247,26 @@ export class EditDegreeDetailComponent implements OnInit {
     };
 
     returnData['step2Section1'] = {
-      courseplan: step2?.plan1?.subjects
-        ? JSON.stringify(step2?.plan1?.subjects)
-        : null,
-      coursestructure: step2?.plan1?.plans
-        ? JSON.stringify(step2?.plan1?.plans)
-        : null,
+      ...(()=>{
+        const reqBody:any = {};
+        if (['a', 'b', 'c'].includes(this.step1DegreeType)) {
+          reqBody['coursestructure'] = step2?.plan1?.plans
+            ? JSON.stringify(step2?.plan1?.plans)
+            : null;
+    
+          reqBody['courseplan'] = step2?.plan1?.subjects
+            ? JSON.stringify(step2?.plan1?.subjects)
+            : null;
+        } else {
+          reqBody['coursestructure'] = step2?.plan2?.plans
+            ? JSON.stringify(step2?.plan2?.plans)
+            : null;
+          reqBody['courseplan'] = step2?.plan2?.subjects
+            ? JSON.stringify(step2?.plan2?.subjects)
+            : null;
+        }
+        return reqBody;
+      })()
     };
 
     returnData['step2Section2'] = {

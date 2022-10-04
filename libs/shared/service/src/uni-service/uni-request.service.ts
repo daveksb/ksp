@@ -38,4 +38,48 @@ export class UniRequestService {
       tokenkey: getCookie('userToken'),
     });
   }
+
+  getUniDegreeCertById(id: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspuni/unidegreecertselectbyid`, {
+        id: id,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
+
+  searchUniDegreeCert(form: any): Observable<any> {
+    return this.http.post(`${environment.shortApiUrl}/unidegreecertsearch.php`, {
+      ...form,
+      tokenkey: getCookie('userToken'),
+    });
+  }
+
+  createRequestAdmission(form: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/kspuni/unirequestadmissioninsertupdate`, {
+      ...form,
+      tokenkey: getCookie('userToken'),
+    });
+  }
+
+  getAdmissionListById(form: any): Observable<any> {
+    return this.http.post(`${environment.shortApiUrl}/unirequestadmissionsearch.php`, {
+      ...form,
+      tokenkey: getCookie('userToken'),
+    });
+  }
+
+  getGraduateListById(form: any): Observable<any> {
+    return this.http.post(`${environment.shortApiUrl}/unidegreeadmissionsearchall.php`, {
+      ...form,
+      tokenkey: getCookie('userToken'),
+    });
+  }
+
+  getAdmissionCount(form: any): Observable<any> {
+    return this.http.post(`${environment.shortApiUrl}/unidegreeadmissionsearchcount.php`, {
+      ...form,
+      tokenkey: getCookie('userToken'),
+    });
+  }
 }

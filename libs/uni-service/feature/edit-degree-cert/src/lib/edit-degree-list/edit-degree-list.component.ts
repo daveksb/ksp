@@ -45,7 +45,7 @@ export class EditDegreeListComponent implements OnInit {
     private fb: FormBuilder,
     private uniInfoService: UniInfoService,
     private addressService: AddressService,
-    private router: Router,
+    private router: Router
   ) {
     this.getAll();
   }
@@ -64,13 +64,18 @@ export class EditDegreeListComponent implements OnInit {
     });
   }
 
-  history() {
-    this.dialog.open(HistoryRequestDialogComponent, {
-      width: '400px',
-    });
+  onOpenHistory(e: any) {
+    this.uniInfoService
+      .uniRequestDegreeCertSelectUniDegreeCertId(e?.key)
+      .subscribe((res: any) => {
+        this.dialog.open(HistoryRequestDialogComponent, {
+          width: '473px',
+          data: res?.datareturn,
+        });
+      });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   getAll() {
     this.uniInfoService
@@ -133,7 +138,7 @@ export class EditDegreeListComponent implements OnInit {
     };
     this.uniInfoService.uniDegreeSearch(payload).subscribe(async (res) => {
       const newData: any = [];
-      for (const row of res?.datareturn) {
+      for (const row of res?.datareturn || []) {
         const degreeCode = this._findOptions(
           this.degreeLevelOptions,
           row?.degreelevel
@@ -144,9 +149,11 @@ export class EditDegreeListComponent implements OnInit {
         const submitDate = row?.requestdate
           ? moment(row?.requestdate).format('DD/MM/YYYY')
           : '-';
-        const { major, branch } = await this.uniInfoService.getMajorAndBranch(row);
+        const { major, branch } = await this.uniInfoService.getMajorAndBranch(
+          row
+        );
         newData.push({
-          key:row?.id,
+          key: row?.id,
           requestId: row?.requestno || '-',
           submitDate,
           approveCode: row?.degreeapprovecode || '-',
@@ -165,7 +172,7 @@ export class EditDegreeListComponent implements OnInit {
     return _.find(dataSource, { value: key })?.label || '-';
   }
   onEdit(rowData: any) {
-    this.router.navigate(["/edit-degree-cert","detail"], {
+    this.router.navigate(['/edit-degree-cert', 'detail'], {
       queryParams: {
         id: rowData?.key,
       },
