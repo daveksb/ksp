@@ -57,7 +57,7 @@ export class AccusationDecisionComponent {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '375px',
       data: {
-        header: `บึนทึกข้อมูลสำเร็จ`,
+        header: `บันทึกข้อมูลสำเร็จ`,
         content: `เลขที่รายการ : 640120000123
         วันที่ : 10 ตุลาคม 2656`,
         subContent: 'ผู้บันทึกข้อมูล : นางสาวปาเจรา ไก่คลุก',

@@ -15,7 +15,11 @@ export class FormUserEducationComponent
   extends KspFormBaseComponent
   implements OnInit
 {
-  @Input() educationTypes: 'teacher' | 'manager' | 'supervision' = 'teacher';
+  @Input() educationTypes:
+    | 'teacher'
+    | 'schManager'
+    | 'eduManager'
+    | 'supervision' = 'teacher';
 
   @Input() countries: any[] = [];
   @Input() attachFiles!: any[];
