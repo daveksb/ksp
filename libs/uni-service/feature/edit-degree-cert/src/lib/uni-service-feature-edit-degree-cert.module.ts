@@ -11,6 +11,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SharedDegreeCertModule } from '@ksp/shared/degree-cert';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const routes: Routes = [
   {
@@ -45,6 +46,7 @@ const routes: Routes = [
     RequestHeaderInfoComponent,
     SharedDegreeCertModule,
     ReactiveFormsModule,
+    MatPaginatorModule,
     RouterModule.forChild(routes),
   ],
   declarations: [EditDegreeListComponent, EditDegreeDetailComponent],
