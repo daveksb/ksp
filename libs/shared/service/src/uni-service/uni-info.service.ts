@@ -206,4 +206,14 @@ export class UniInfoService {
       }
     );
   }
+  
+  uniRequestEditHistory(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspuni/unirequestadmissionjoinksprequestprocessselect`,
+      {
+        ...params,
+        tokenkey: this.tokenKey,
+      }
+    );
+  }
 }

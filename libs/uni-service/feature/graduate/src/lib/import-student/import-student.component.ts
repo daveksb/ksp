@@ -16,7 +16,7 @@ import { UserService } from './user.service';
 import { FormAddressTableComponent } from '@ksp/shared/form/others';
 import { GeneralInfoService, UniInfoService, UniRequestService } from '@ksp/shared/service';
 import localForage from 'localforage';
-import { FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { EMPTY, switchMap } from 'rxjs';
 import * as XLSX from 'xlsx';
 import { getCookie, parseJson, thaiDate } from '@ksp/shared/utility';
@@ -52,6 +52,12 @@ export class ImportStudentComponent implements OnInit {
   requestNo = '';
   userBackup: any;
   requestDate = thaiDate(new Date());
+  formStudent = this.fb.group({
+    user: this.fb.array([])
+  });
+  filterColumn = [
+    'idcardno',
+  ];
 
   constructor(
     public dialog: MatDialog,
@@ -97,7 +103,6 @@ export class ImportStudentComponent implements OnInit {
           admissionlist: [],
           graduatelist: []
         }
-        console.log(this.courseData)
         if (this.pageType == 'studentList') {
           this.getAdmissionList();
         } else {
@@ -129,28 +134,15 @@ export class ImportStudentComponent implements OnInit {
                   && data.admissionlist
           });
           if (findResponse && findResponse.requestprocess == '1') {
-            this.users = JSON.parse(findResponse.admissionlist);
+            const parseuser = JSON.parse(findResponse.admissionlist);
+            parseuser.forEach((user: any, index: any) => {
+              user.index = index;
+              user.subjects = JSON.parse(user.subjects)
+              this.user.push(this.edituser(user));
+            });
             this.requestNo = findResponse.requestno;
             this.requestDate = thaiDate(new Date(findResponse.requestdate));
             this.payload.id = findResponse.id;
-            this.users.forEach((user: any, index: number) => {
-              user.index = index+1;
-              const userAddress = JSON.parse(user.address)
-              user.address = this.fb.group({
-                addressInfo: [{
-                  location: [userAddress?.location || null],
-                  housenumber: [userAddress?.housenumber || null],
-                  villagenumber: [userAddress?.villagenumber || null],
-                  lane: [userAddress?.lane || null],
-                  road: [userAddress?.road || null],
-                  zipcode: [userAddress?.zipcode || null],
-                  provinceid: [userAddress?.provinceid || null],
-                  districtid: [userAddress?.districtid || null],
-                  subdistrictid: [userAddress?.subdistrictid || null],
-                  remark: []
-                }]
-              })
-            });
           }
         }
       });
@@ -166,34 +158,14 @@ export class ImportStudentComponent implements OnInit {
         row: 999
       }).subscribe((response: any) => {
         if (response.datareturn) {
-          this.users = response.datareturn;
-          this.users.forEach((user: any, index: number) => {
+          response.datareturn.forEach((user: any, index: any) => {
             user.index = index;
-            user.no = index+1;
             user.teachingpracticeschool = [];
             user.admissiondate = moment(user.admissiondate).format('YYYY-MM-DD');
             user.birthdate = moment(user.birthdate).format('YYYY-MM-DD');
-            if (user.addressinfo) {
-              const userAddress = JSON.parse(user.addressinfo)
-              user.address = this.fb.group({
-                addressInfo: [{
-                  location: [userAddress?.location || null],
-                  housenumber: [userAddress?.housenumber || null],
-                  villagenumber: [userAddress?.villagenumber || null],
-                  lane: [userAddress?.lane || null],
-                  road: [userAddress?.road || null],
-                  zipcode: [userAddress?.zipcode || null],
-                  provinceid: [userAddress?.provinceid || null],
-                  districtid: [userAddress?.districtid || null],
-                  subdistrictid: [userAddress?.subdistrictid || null],
-                  remark: []
-                }]
-              })
-            } else {
-              user.address = this.fb.group({ addressInfo: [] })
-            }
+            user.subjects = JSON.parse(user.subjects)
+            this.user.push(this.edituser(user));
           });
-          this.userBackup = [...this.users];
           this.requestService.getAdmissionListById(
             { unidegreecertid: this.courseData?.courseDetail.id,
               planyear: this.payload.planyear,
@@ -211,14 +183,17 @@ export class ImportStudentComponent implements OnInit {
                   this.payload.id = findRequestGraduate.id;
                   const convertGraduateList = JSON.parse(findRequestGraduate.graduatelist);
                   convertGraduateList.map((data: any) => {
-                    this.users.map((user: any) => {
-                      if (data.idcardno == user.idcardno) {
-                        user.approvedate = moment(data.approvedate).format('YYYY-MM-DD');
-                        user.graduationdate = moment(data.graduationdate).format('YYYY-MM-DD');
-                        user.checked = true;
-                        user.teachingpracticeschool = JSON.parse(data.teachingpracticeschool);
-                        const userAddress = JSON.parse(data.address);
-                        user.address = this.fb.group({
+                    const findindex = this.user.value.findIndex((user: any) => {
+                      return data.idcardno == user.idcardno;
+                    })
+                    if (findindex != -1) {
+                      const userAddress = JSON.parse(data.address);
+                      this.user.at(findindex).patchValue({
+                        approvedate: moment(data.approvedate).format('YYYY-MM-DD'),
+                        graduationdate: moment(data.graduationdate).format('YYYY-MM-DD'),
+                        checked: true,
+                        teachingpracticeschool: JSON.parse(data.teachingpracticeschool),
+                        address: this.fb.group({
                           addressInfo: [{
                             location: [userAddress?.location || null],
                             housenumber: [userAddress?.housenumber || null],
@@ -232,12 +207,13 @@ export class ImportStudentComponent implements OnInit {
                             remark: []
                           }]
                         })
-                      }
-                    })
+                      })
+                    }
                   })
                 }
               }
             })
+          this.userBackup = [...this.user.value];
         }
       });
   }
@@ -263,33 +239,151 @@ export class ImportStudentComponent implements OnInit {
     this.router.navigate(['./', 'home']);
   }
 
+  get user(): FormArray {
+    return this.formStudent.get('user') as FormArray;
+  }
+
+  addUsers(index: number) {
+    return this.fb.group({
+      checked: [false],
+      index: [index],
+      no: [index+1],
+      admissiondate: [moment().format('YYYY-MM-DD'), Validators.required],
+      idcardno: ['', Validators.required],
+      passportno: ['', Validators.required],
+      nationality: [null, Validators.required],
+      prefixth: [null, Validators.required],
+      firstnameth: ['', Validators.required],
+      lastnameth: ['', Validators.required],
+      prefixen: [null, Validators.required],
+      firstnameen: ['', Validators.required],
+      middlenameen: ['', Validators.required],
+      lastnameen: ['', Validators.required],
+      phone: ['', Validators.required],
+      birthdate: ['', Validators.required],
+      address: this.fb.group({ addressInfo: [{}] }),
+      approveno: ['', Validators.required],
+      graduationdate: ['', Validators.required],
+      approvedate: ['', Validators.required],
+      subjects: [{subject1: '', subject2: ''}, Validators.required],
+      teachingpracticeschool: []
+    });
+  }
+
+  edituser(data: any) {
+    let userAddress: any;
+    if (this.pageType == 'studentList') {
+      userAddress = JSON.parse(data.address);
+    } else {
+      userAddress = JSON.parse(data.addressinfo);
+    }
+    return this.fb.group({
+      checked: [false],
+      index: [data.index],
+      no: [data.index+1],
+      admissiondate: [moment(data.admissiondate).format('YYYY-MM-DD')],
+      idcardno: [data.idcardno,
+        this.pageType == 'studentList' ? Validators.required : undefined],
+      passportno: [data.passportno,
+        this.pageType == 'studentList' ? Validators.required : undefined],
+      nationality: [data.nationality,
+        this.pageType == 'studentList' ? Validators.required : undefined],
+      prefixth: [data.prefixth,
+        this.pageType == 'studentList' ? Validators.required : undefined],
+      firstnameth: [data.firstnameth,
+        this.pageType == 'studentList' ? Validators.required : undefined],
+      lastnameth: [data.lastnameth,
+        this.pageType == 'studentList' ? Validators.required : undefined],
+      prefixen: [data.prefixen,
+        this.pageType == 'studentList' ? Validators.required : undefined],
+      firstnameen: [data.firstnameen,
+        this.pageType == 'studentList' ? Validators.required : undefined],
+      middlenameen: [data.middlenameen,
+        this.pageType == 'studentList' ? Validators.required : undefined],
+      lastnameen: [data.lastnameen,
+        this.pageType == 'studentList' ? Validators.required : undefined],
+      phone: [data.phone,
+        this.pageType == 'studentList' ? Validators.required : undefined],
+      birthdate: [data.birthdate,
+        this.pageType == 'studentList' ? Validators.required : undefined],
+      address: this.fb.group({
+        addressInfo: [{
+          location: [userAddress?.location || null],
+          housenumber: [userAddress?.housenumber || null],
+          villagenumber: [userAddress?.villagenumber || null],
+          lane: [userAddress?.lane || null],
+          road: [userAddress?.road || null],
+          zipcode: [userAddress?.zipcode || null],
+          provinceid: [userAddress?.provinceid || null],
+          districtid: [userAddress?.districtid || null],
+          subdistrictid: [userAddress?.subdistrictid || null],
+          remark: [userAddress?.remark || null]
+        }]
+      }),
+      approveno: [data.approveno,
+        this.pageType == 'graduateList' ? Validators.required : undefined],
+      graduationdate: [data.graduationdate,
+        this.pageType == 'graduateList' ? Validators.required : undefined],
+      approvedate: [data.approvedate,
+        this.pageType == 'graduateList' ? Validators.required : undefined],
+      subjects: data.subjects ? [
+        {subject1: data.subjects.subject1, subject2: data.subjects.subject2}, Validators.required] 
+        : [{ subject1: '', subject2: '' },
+        this.pageType == 'studentList' ? Validators.required : undefined],
+      teachingpracticeschool: [data.teachingpracticeschool]
+    });
+  }
+
+  addDatafromFile(data: any) {
+    return this.fb.group({
+      checked: [false],
+      index: [this.user.value.length],
+      no: [this.user.value.length+1],
+      admissiondate: [moment(data.admissiondate).format('YYYY-MM-DD')],
+      idcardno: [data.idcardno, Validators.required],
+      passportno: [data.passportno, Validators.required],
+      nationality: [data.nationality, Validators.required],
+      prefixth: [data.prefixth, Validators.required],
+      firstnameth: [data.firstnameth, Validators.required],
+      lastnameth: [data.lastnameth, Validators.required],
+      prefixen: [data.prefixen, Validators.required],
+      firstnameen: [data.firstnameen, Validators.required],
+      middlenameen: [data.middlenameen, Validators.required],
+      lastnameen: [data.lastnameen, Validators.required],
+      phone: [data.phone, Validators.required],
+      birthdate: [data.birthdate, Validators.required],
+      address: this.fb.group({
+        addressInfo: [{
+          location: [data?.location || null],
+          housenumber: [data?.housenumber || null],
+          villagenumber: [data?.villagenumber || null],
+          lane: [data?.lane || null],
+          road: [data?.road || null],
+          zipcode: [data?.zipcode || null],
+          provinceid: [data?.provinceid || null],
+          districtid: [data?.districtid || null],
+          subdistrictid: [data?.subdistrictid || null],
+          remark: [data?.remark || null]
+        }]
+      }),
+      approveno: [data.approveno,
+        this.pageType == 'graduateList' ? Validators.required : undefined],
+      graduationdate: [data.graduationdate,
+        this.pageType == 'graduateList' ? Validators.required : undefined],
+      approvedate: [data.approvedate,
+        this.pageType == 'graduateList' ? Validators.required : undefined],
+      subjects: data.subjects ? [
+        {subject1: data.subject1, subject2: data.subject2}, Validators.required] 
+        : [{ subject1: '', subject2: '' },
+        this.pageType == 'studentList' ? Validators.required : undefined],
+      teachingpracticeschool: [data.teachingpracticeschool]
+    });
+  }
+
   addStudent() {
-    if (this.users.length < this.courseData.courseSelected.student) {
-      this.users.push({
-        index: this.users.length,
-        no: this.users.length + 1,
-        admissiondate: moment().format('YYYY-MM-DD'),
-        idcardno: '',
-        passportno: '',
-        nationality: null,
-        prefixth: null,
-        firstnameth: '',
-        lastnameth: '',
-        prefixen: null,
-        firstnameen: '',
-        middlenameen: '',
-        lastnameen: '',
-        phone: '',
-        birthdate: '',
-        address: this.fb.group({ addressInfo: [] }),
-        approveno: '',
-        graduationdate: '',
-        approvedate: '',
-        subjects: {
-          subject1: '',
-          subject2: ''
-        }
-      })
+    if (this.formStudent.controls.user.value.length < this.courseData.courseSelected.student) {
+      this.formStudent.markAllAsTouched();
+      this.user.push(this.addUsers(this.user.length));
     }
   }
 
@@ -302,7 +396,9 @@ export class ImportStudentComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
-        this.users[index-1].subjects = res;
+        this.user.at(index).patchValue({
+          subjects: res
+        });
       }
     });
   }
@@ -312,13 +408,14 @@ export class ImportStudentComponent implements OnInit {
       height: '900px',
       width: '1000px',
       data: {
-        teachingpracticeschool: this.users[index].teachingpracticeschool
+        teachingpracticeschool: this.user.at(index).value.teachingpracticeschool
       }
     });
     dialogRef.afterClosed().subscribe((response: any) => {
       if (response) {
-        this.users[index].teachingpracticeschool = response;
-        console.log(this.users)
+        this.user.at(index).patchValue({
+          teachingpracticeschool: response
+        });
       }
     })
   }
@@ -328,12 +425,13 @@ export class ImportStudentComponent implements OnInit {
       width: '900px',
       data: {
         mode: 'view',
-        address: address.value.addressInfo || {}
+        address: address.addressInfo || {}
       }
     });
   }
 
   save(typeSave: string) {
+    console.log(this.user.value)
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -351,15 +449,15 @@ export class ImportStudentComponent implements OnInit {
             } else {
               this.payload.requestprocess = '2';
             }
-            this.users.map((data: any)=>{
+            const datasave = this.user.value;
+            datasave.map((data: any)=>{
               delete data.index;
-              data.address = JSON.stringify(data.address.controls.addressInfo.getRawValue());
+              data.address = JSON.stringify(data.address.addressInfo);
               data.subjects = JSON.stringify(data.subjects);
               data.teachingpracticeschool = JSON.stringify(data.teachingpracticeschool);
             })
-            console.log(this.users)
             if (this.pageType == 'studentList') {
-              this.payload.admissionlist = JSON.stringify(this.users);
+              this.payload.admissionlist = JSON.stringify(datasave);
               this.payload.graduatelist = null;
             } else {
               this.payload.graduatelist = JSON.stringify(this.getCheckedValue());
@@ -378,7 +476,7 @@ export class ImportStudentComponent implements OnInit {
   }
 
   getCheckedValue() {
-    return this.users.filter((data: any)=>{return data.checked});
+    return this.user.value.filter((data: any)=>{return data.checked});
   }
 
   onConfirmed(requestno: string) {
@@ -430,42 +528,7 @@ export class ImportStudentComponent implements OnInit {
         const ws: XLSX.WorkSheet = wb.Sheets[wsname];
         const data = XLSX.utils.sheet_to_json(ws) || {};
         data.forEach((newdata: any) => {
-          this.users.push({
-            index: this.users.length + 1,
-            id: '',
-            admissiondate: newdata?.admissiondate || null,
-            idcardno: newdata?.idcard || null,
-            passportno: newdata?.passportno || null,
-            nationality: newdata?.nationality || null,
-            prefixth: newdata?.prefixth || null,
-            firstnameth: newdata?.firstnameth || null,
-            lastnameth: newdata?.lastnameth || null,
-            prefixen: newdata?.prefixen || null,
-            firstnameen: newdata?.firstnameen || null,
-            middlenameen: newdata?.middlenameen || null,
-            lastnameen: newdata?.lastnameen || null,
-            phone: newdata?.phone || null,
-            birthdate: newdata?.birthdate || null,
-            address: this.fb.group({ addressInfo: [{
-              location: [newdata?.location || null],
-              housenumber: [newdata?.housenumber || null],
-              villagenumber: [newdata?.villagenumber || null],
-              lane: [newdata?.lane || null],
-              road: [newdata?.road || null],
-              zipcode: [newdata?.zipcode || null],
-              provinceid: [newdata?.provinceid || null],
-              districtid: [newdata?.districtid || null],
-              subdistrictid: [newdata?.subdistrictid || null],
-              remark: []
-            }] }),
-            approveno: newdata?.approveno || null,
-            graduationdate: newdata?.graduationdate || null,
-            approvedate: newdata?.approvedate || null,
-            subjects: {
-              subject1: newdata?.subject1 || null,
-              subject2: newdata?.subject2 || null
-            }
-          });
+          this.user.push(this.addDatafromFile(newdata));
         });
       }
     };
@@ -477,15 +540,18 @@ export class ImportStudentComponent implements OnInit {
 
   filterList(object: string, value: string) {
     if (value) {
-      this.users = this.userBackup.filter((user: any)=>{
+      const filtervalue = this.userBackup.filter((user: any)=>{
         return user[object].includes(value);
       })
+     this.user.patchValue(filtervalue);
+     this.user.updateValueAndValidity();
     } else {
-      this.users = this.userBackup;
+      this.user.patchValue(this.userBackup);
     }
   }
 
-  searchByIdcard(params: any, index: number) {
+  searchByIdcard(params: any, index: any) {
+    console.log(params)
     if (params.idcardno || params.passportno) {
       const payload = {
         idcardno: params.idcardno,
@@ -496,33 +562,58 @@ export class ImportStudentComponent implements OnInit {
       this.uniInfoService.searchSelfStudent(payload)
       .subscribe((response => {
         if (response.datareturn) {
-          this.users[index-1].admissiondate =  moment().format('YYYY-MM-DD'),
-          this.users[index-1].idcardno = response.datareturn[0].idcardno,
-          this.users[index-1].passportno = response.datareturn[0].passportno,
-          this.users[index-1].nationality = response.datareturn[0].nationality,
-          this.users[index-1].prefixth = response.datareturn[0].prefixth,
-          this.users[index-1].firstnameth = response.datareturn[0].firstnameth,
-          this.users[index-1].lastnameth = response.datareturn[0].lastnameth,
-          this.users[index-1].prefixen = response.datareturn[0].prefixen,
-          this.users[index-1].firstnameen = response.datareturn[0].firstnameen,
-          this.users[index-1].middlenameen = response.datareturn[0].middlenameen,
-          this.users[index-1].lastnameen = response.datareturn[0].lastnameen,
-          this.users[index-1].phone = response.datareturn[0].phone,
-          this.users[index-1].birthdate = moment(response.datareturn[0].birthdate).format('YYYY-MM-DD'),
-          this.users[index-1].address = this.fb.group({ addressInfo: [{
-            location: [response.datareturn[0].addressinfo.location],
-            housenumber: [response.datareturn[0].addressinfo.houseNo],
-            villagenumber: [response.datareturn[0].addressinfo.moo],
-            lane: [response.datareturn[0].addressinfo.alley],
-            road: [response.datareturn[0].addressinfo.houseNo],
-            zipcode: [response.datareturn[0].addressinfo.postcode],
-            provinceid: [response.datareturn[0].addressinfo.province],
-            districtid: [response.datareturn[0].addressinfo.amphur],
-            subdistrictid: [response.datareturn[0].addressinfo.tumbol],
-            remark: []
-          }] })
+          this.user.at(index).patchValue({
+            admissiondate:  moment().format('YYYY-MM-DD'),
+            idcardno: response.datareturn[0].idcardno,
+            passportno: response.datareturn[0].passportno,
+            nationality: response.datareturn[0].nationality,
+            prefixth: response.datareturn[0].prefixth,
+            firstnameth: response.datareturn[0].firstnameth,
+            lastnameth: response.datareturn[0].lastnameth,
+            prefixen: response.datareturn[0].prefixen,
+            firstnameen: response.datareturn[0].firstnameen,
+            middlenameen: response.datareturn[0].middlenameen,
+            lastnameen: response.datareturn[0].lastnameen,
+            phone: response.datareturn[0].phone,
+            birthdate: moment(response.datareturn[0].birthdate).format('YYYY-MM-DD'),
+            address: response.datareturn[0].addressinfo ? this.fb.group({ addressInfo: [{
+              location: [response.datareturn[0].addressinfo.location],
+              housenumber: [response.datareturn[0].addressinfo.houseNo],
+              villagenumber: [response.datareturn[0].addressinfo.moo],
+              lane: [response.datareturn[0].addressinfo.alley],
+              road: [response.datareturn[0].addressinfo.houseNo],
+              zipcode: [response.datareturn[0].addressinfo.postcode],
+              provinceid: [response.datareturn[0].addressinfo.province],
+              districtid: [response.datareturn[0].addressinfo.amphur],
+              subdistrictid: [response.datareturn[0].addressinfo.tumbol],
+              remark: []
+            }] }) : this.fb.group({ addressInfo: [] })
+          })
         }
     }))
     }
+  }
+
+  checkdisableSave() {
+    if (this.pageType == 'studentList') {
+      return this.formStudent.invalid
+    } else {
+      let invalidform = false;
+      let empytychecked = true;
+      this.user.controls.forEach(user => {
+       if (user.value.checked && user.invalid) {
+        invalidform = true;
+       }
+       if (user.value.checked) {
+        empytychecked = false;
+       }
+      });
+      return invalidform || empytychecked;
+    }
+  }
+
+  getForm(index: any) {
+    const addressControl = this.user.controls[index].get('address') as FormGroup;
+    return addressControl;
   }
 }

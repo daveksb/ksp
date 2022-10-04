@@ -82,4 +82,10 @@ export class UniRequestService {
       tokenkey: getCookie('userToken'),
     });
   }
+  getEditRequestAdmision(form: any): Observable<any> {
+    return this.http.post(`${environment.shortApiUrl}/unirequestadmissionjoinunidegreecertsearch.php`, {
+      ...form,
+      tokenkey: getCookie('userToken'),
+    });
+  }
 }
