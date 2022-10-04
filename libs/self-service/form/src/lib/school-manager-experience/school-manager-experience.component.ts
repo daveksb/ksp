@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { debounceTime } from 'rxjs';
+import { debounceTime, pairwise } from 'rxjs';
 import { providerFactory } from '@ksp/shared/utility';
 
 @UntilDestroy()
@@ -36,8 +36,29 @@ export class SchoolManagerExperienceComponent
 
   ngOnInit(): void {
     this.form.valueChanges
-      .pipe(debounceTime(300), untilDestroyed(this))
-      .subscribe((res) => {
+      .pipe(untilDestroyed(this), pairwise())
+      .subscribe(([prev, next]) => {
+        if (prev.hasTeachingExperience !== next.hasTeachingExperience) {
+          if (next.hasTeachingExperience) {
+            this.form.controls.teachingExperienceYear.addValidators(
+              Validators.required
+            );
+          } else {
+            this.form.controls.teachingExperienceYear.clearValidators();
+          }
+          this.form.controls.teachingExperienceYear.updateValueAndValidity();
+        }
+
+        if (prev.hasManagingExperience !== next.hasManagingExperience) {
+          if (next.hasManagingExperience) {
+            this.form.controls.managingExperienceYear.addValidators(
+              Validators.required
+            );
+          } else {
+            this.form.controls.managingExperienceYear.clearValidators();
+          }
+          this.form.controls.managingExperienceYear.updateValueAndValidity();
+        }
         //console.log('exp form = ', res);
       });
   }
