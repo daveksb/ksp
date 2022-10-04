@@ -116,7 +116,7 @@
         (click)="save()"
         type="button"
         class="ms-3 btn btn-primary"
-        [disabled]="disableNextButton">
+        [disabled]="!form.valid">
         ต่อไป
       </button>
     </div>

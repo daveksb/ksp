@@ -124,7 +124,7 @@
       type="button"
       (click)="save()"
       class="ms-3 btn btn-primary"
-      [disabled]="disableNextButton">
+      [disabled]="!form.valid">
       บันทึกชั่วคราว
     </button>
   </div>

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
 import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -28,8 +28,8 @@ export class FormUserEducationComponent
   selectedEducationType!: number;
 
   override form = this.fb.group({
-    educationType: [],
-    educationLevelForm: [],
+    educationType: [null, Validators.required],
+    educationLevelForm: [null, Validators.required],
   });
 
   educationTypes1: ListData[] = [];

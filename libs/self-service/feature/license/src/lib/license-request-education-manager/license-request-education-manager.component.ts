@@ -68,8 +68,6 @@ export class LicenseRequestEducationManagerComponent
     workEmail: [],
   });
 
-  disableNextButton = false;
-
   constructor(
     dialog: MatDialog,
     router: Router,
@@ -96,7 +94,6 @@ export class LicenseRequestEducationManagerComponent
 
   ngOnInit(): void {
     this.getListData();
-    this.checkButtonsDisableStatus();
     this.checkRequestId();
   }
 
@@ -216,12 +213,5 @@ export class LicenseRequestEducationManagerComponent
     };
     console.log(payload);
     return payload;
-  }
-
-  checkButtonsDisableStatus() {
-    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      //this.disableNextButton = !this.form.valid;
-      this.disableNextButton = false;
-    });
   }
 }
