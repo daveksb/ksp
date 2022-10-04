@@ -18,7 +18,6 @@ export class FormVisaInfoComponent extends KspFormBaseComponent {
   @Input() visaTypeList: any;
 
   validatorMessages = validatorMessages;
-
   /**
    * Dark Mode : all inputs will have gray background and form container will have white background
    * Use in Self-Service
