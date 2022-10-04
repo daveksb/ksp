@@ -431,7 +431,6 @@ export class ImportStudentComponent implements OnInit {
   }
 
   save(typeSave: string) {
-    console.log(this.user.value)
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -449,18 +448,23 @@ export class ImportStudentComponent implements OnInit {
             } else {
               this.payload.requestprocess = '2';
             }
-            const datasave = this.user.value;
-            datasave.map((data: any)=>{
-              delete data.index;
-              data.address = JSON.stringify(data.address.addressInfo);
-              data.subjects = JSON.stringify(data.subjects);
-              data.teachingpracticeschool = JSON.stringify(data.teachingpracticeschool);
-            })
             if (this.pageType == 'studentList') {
+              const datasave = this.user.value;
+              datasave.map((data: any)=>{
+                delete data.index;
+                data.address = JSON.stringify(data.address.addressInfo);
+                data.subjects = JSON.stringify(data.subjects);
+              })
               this.payload.admissionlist = JSON.stringify(datasave);
               this.payload.graduatelist = null;
             } else {
-              this.payload.graduatelist = JSON.stringify(this.getCheckedValue());
+              const graduatelist = this.getCheckedValue();
+              graduatelist.map((data: any) => {
+                data.address = JSON.stringify(data.address.addressInfo);
+                data.subjects = JSON.stringify(data.subjects);
+                data.teachingpracticeschool = JSON.stringify(data.teachingpracticeschool);
+              });
+              this.payload.graduatelist = JSON.stringify(graduatelist);
               this.payload.admissionlist = null;
             }
             return this.requestService.createRequestAdmission(this.payload);
@@ -543,15 +547,14 @@ export class ImportStudentComponent implements OnInit {
       const filtervalue = this.userBackup.filter((user: any)=>{
         return user[object].includes(value);
       })
-     this.user.patchValue(filtervalue);
+     this.user.setValue(filtervalue);
      this.user.updateValueAndValidity();
     } else {
-      this.user.patchValue(this.userBackup);
+      this.user.setValue(this.userBackup);
     }
   }
 
   searchByIdcard(params: any, index: any) {
-    console.log(params)
     if (params.idcardno || params.passportno) {
       const payload = {
         idcardno: params.idcardno,

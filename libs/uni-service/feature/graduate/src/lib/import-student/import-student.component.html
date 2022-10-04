@@ -51,6 +51,7 @@
           responsiveLayout="scroll"
           dataKey="index"
           editMode="row"
+          #dt
         >
           <ng-template pTemplate="header">
             <tr>
@@ -103,11 +104,10 @@
                 <div>
                   <label>วันที่เข้ารับการศึกษา</label>
                   <input 
+                    pInputText 
                     type="date" 
-                    class="form-control" 
-                    style="width: 150px"
-                    #admissiondatesearch
-                    (input)="filterList('admissiondate', admissiondatesearch.value)" />
+                    class="form-control form-search" 
+                    (input)="dt.filter($any($event.target).value, 'admissiondate', 'contains')" />
                 </div>
               </th>
   
@@ -125,26 +125,22 @@
               >
                 <div>
                   เลขบัตรประจำตัวประชาชน
-                  <input
-                    class="form-control form-search"
-                    style="width: 175px"
-                    type="text"
-                    #idcardsearch
-                    (blur)="filterList('idcardno', idcardsearch.value)"
-                  />
+                  <input 
+                    pInputText 
+                    type="text" 
+                    class="form-control form-search" 
+                    (input)="dt.filter($any($event.target).value, 'idcardno', 'contains')" />
                 </div>
               </th>
   
               <th class="p-2 text-nowrap align-text-top">
                 หมายเลขหนังสือเดินทาง
-                <input
-                  class="form-control form-search"
-                  style="width: 175px"
-                  type="text"
-                  #passportnosearch
-                  (input)="filterList('passportno', passportnosearch.value)"
+                <input 
+                  pInputText 
+                  type="text" 
+                  class="form-control form-search" 
                   *ngIf="pageType === 'graduateList'"
-                />
+                  (input)="dt.filter($any($event.target).value, 'passportno', 'contains')" />
               </th>
               <th
                 class="p-2 text-nowrap align-text-top"
@@ -160,28 +156,24 @@
               <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
                 ชื่อ (ภาษาไทย)
                 <div>
-                  <input
-                    class="form-control form-search"
-                    style="width: 150px"
-                    type="text"
-                    #firstnamethsearch
+                  <input 
+                    pInputText 
+                    type="text" 
+                    class="form-control form-search" 
                     *ngIf="pageType === 'graduateList'"
-                    (input)="filterList('firstnameth', firstnamethsearch.value)"
-                  />
+                    (input)="dt.filter($any($event.target).value, 'firstnameth', 'contains')" />
                 </div>
               </th>
   
               <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
                 นามสกุล (ภาษาไทย)
                 <div>
-                  <input
-                    class="form-control form-search"
-                    style="width: 150px"
-                    type="text"
-                    #lastnamethsearch
+                  <input 
+                    pInputText 
+                    type="text" 
+                    class="form-control form-search" 
                     *ngIf="pageType === 'graduateList'"
-                    (input)="filterList('lastnameth', lastnamethsearch.value)"
-                  />
+                    (input)="dt.filter($any($event.target).value, 'lastnameth', 'contains')" />
                 </div>
               </th>
   
@@ -192,55 +184,47 @@
               <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
                 ชื่อ (ภาษาอังกฤษ)
                 <div>
-                  <input
-                    class="form-control form-search"
-                    style="width: 150px"
-                    type="text"
-                    #firstnameensearch
+                  <input 
+                    pInputText 
+                    type="text" 
+                    class="form-control form-search" 
                     *ngIf="pageType === 'graduateList'"
-                    (input)="filterList('firstnameen', firstnameensearch.value)"
-                  />
+                    (input)="dt.filter($any($event.target).value, 'firstnameen', 'contains')" />
                 </div>
               </th>
   
               <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
                 ชื่อกลาง (ภาษาอังกฤษ)
                 <div>
-                  <input
+                  <input 
+                    pInputText 
+                    type="text" 
                     class="form-control form-search"
-                    style="width: 150px"
-                    type="text"
-                    #middlenameensearch
                     *ngIf="pageType === 'graduateList'"
-                    (input)="filterList('middlenameen', middlenameensearch.value)"
-                  />
+                    (input)="dt.filter($any($event.target).value, 'middlenameen', 'contains')" />
                 </div>
               </th>
   
               <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
                 นามสกุล (ภาษาอังกฤษ)
                 <div>
-                  <input
-                    class="form-control form-search"
-                    style="width: 150px"
-                    type="text"
-                    #lastnameensearch
+                  <input 
+                    pInputText 
+                    type="text" 
+                    class="form-control form-search" 
                     *ngIf="pageType === 'graduateList'"
-                    (input)="filterList('lastnameen', lastnameensearch.value)"
-                  />
+                    (input)="dt.filter($any($event.target).value, 'lastnameen', 'contains')" />
                 </div>
               </th>
   
               <th class="p-2 text-nowrap align-text-top">
                 เบอร์โทรศัพท์มือถือ
-                <input
-                  class="form-control form-search"
-                  style="width: 150px"
-                  type="text"
-                  #phonesearch
+                <input 
+                  pInputText 
+                  type="text" 
+                  class="form-control form-search" 
                   *ngIf="pageType === 'graduateList'"
-                  (input)="filterList('phone', phonesearch.value)"
-                />
+                  (input)="dt.filter($any($event.target).value, 'phone', 'contains')" />
               </th>
               <th class="p-2 text-nowrap align-text-top">
                 วัน/เดือน/ปีเกิด(พ.ศ.)
