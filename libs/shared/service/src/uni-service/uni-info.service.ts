@@ -26,13 +26,19 @@ export class UniInfoService {
   }
 
   uniRequestDegreeSearch(params: any): Observable<any> {
-    return this.http.post(
-      `${environment.shortApiUrl}/unirequestdegreecertsearch.php`,
-      {
+    return this.http
+      .post(`${environment.shortApiUrl}/unirequestdegreecertsearch.php`, {
         ...params,
         tokenkey: this.tokenKey,
-      }
-    );
+      })
+      .pipe(
+        map((res: any) => {
+          return {
+            ...res,
+            datareturn: _.orderBy(res?.datareturn, ['requestdate'], 'desc'),
+          };
+        })
+      );
   }
 
   uniRequestDegreeCertSelectById(id: any): Observable<any> {
@@ -123,41 +129,50 @@ export class UniInfoService {
   }
 
   uniDegreeSearch(params: any): Observable<any> {
-    return this.http.post(
-      `${environment.shortApiUrl}/unidegreecertsearch.php`,
-      {
+    return this.http
+      .post(`${environment.shortApiUrl}/unidegreecertsearch.php`, {
         ...params,
         tokenkey: this.tokenKey,
-      }
-    );
+      })
+      .pipe(
+        map((res: any) => {
+          return {
+            ...res,
+            datareturn: _.orderBy(res?.datareturn, ['requestdate'], 'desc'),
+          };
+        })
+      );
   }
   async getMajorAndBranch(row: any) {
-    let major:any;
-    let branch:any;
-    if(row?.coursefieldofstudy)
-     major = await lastValueFrom(
-      this.uniMajor(row?.coursefieldofstudy).pipe(
-        map((res) => {
-          return _.find(res, { id: row?.coursemajor });
-        })
-      )
-    );
-    if(major?.id)
-     branch = await lastValueFrom(
-      this.uniSubject(major?.id).pipe(
-        map((res) => {
-          return _.find(res, { id: row?.coursesubjects })
-        })
-      )
-    );
+    let major: any;
+    let branch: any;
+    if (row?.coursefieldofstudy)
+      major = await lastValueFrom(
+        this.uniMajor(row?.coursefieldofstudy).pipe(
+          map((res) => {
+            return _.find(res, { id: row?.coursemajor });
+          })
+        )
+      );
+    if (major?.id)
+      branch = await lastValueFrom(
+        this.uniSubject(major?.id).pipe(
+          map((res) => {
+            return _.find(res, { id: row?.coursesubjects });
+          })
+        )
+      );
     return { major: major?.name || '-', branch: branch?.name || '-' };
   }
 
   uniDegreeCertSelectByid(id: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/kspuni/unidegreecertselectbyid`, {
-      id,
-      tokenkey: this.tokenKey,
-    });
+    return this.http.post(
+      `${environment.apiUrl}/kspuni/unidegreecertselectbyid`,
+      {
+        id,
+        tokenkey: this.tokenKey,
+      }
+    );
   }
 
   searchSelfStudent(params: any): Observable<any> {
@@ -190,11 +205,16 @@ export class UniInfoService {
     );
   }
 
-  uniRequestDegreeCertSelectUniDegreeCertId(unidegreecertid: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/kspuni/unirequestdegreecertselectunidegreecertid`, {
-      unidegreecertid,
-      tokenkey: this.tokenKey,
-    });
+  uniRequestDegreeCertSelectUniDegreeCertId(
+    unidegreecertid: any
+  ): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspuni/unirequestdegreecertselectunidegreecertid`,
+      {
+        unidegreecertid,
+        tokenkey: this.tokenKey,
+      }
+    );
   }
 
   uniDegreeHistory(params: any): Observable<any> {
