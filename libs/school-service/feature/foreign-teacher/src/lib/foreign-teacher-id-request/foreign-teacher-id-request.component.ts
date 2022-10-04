@@ -174,7 +174,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             userInfo.subtype = '5';
             userInfo.schoolid = this.schoolId;
             userInfo.currentprocess = `1`;
-            userInfo.requestStatus = `1`;
+            userInfo.requeststatus = `1`;
             userInfo.visainfo = JSON.stringify(this.form.value.visainfo);
             return this.requestService.createRequest(userInfo);
           }
