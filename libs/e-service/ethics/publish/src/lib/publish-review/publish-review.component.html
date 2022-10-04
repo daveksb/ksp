@@ -5,11 +5,11 @@
     <div class="box-header">ตรวจสอบและเผยแพร่คำวินิจฉัยชี้ขาด</div>
     <div class="bg-white mb-3 p-3">
       <div class="d-flex align-items-center">
-        <input type="radio" value="1" formControlName="publish" />
+        <input type="radio" value="1" formControlName="publishstatus" />
         <label class="form-label ms-2">เผยแพร่คำวินิจฉัย</label>
       </div>
       <div class="d-flex align-items-center">
-        <input type="radio" value="2" formControlName="publish" />
+        <input type="radio" value="2" formControlName="publishstatus" />
         <label class="form-label ms-2">ไม่เผยแพร่คำวินิจฉัย</label>
       </div>
 
@@ -28,22 +28,30 @@
         dynamicHeight="true"
       >
         <mat-tab label="สอบสวน" class="tab-content">
-          <e-service-inquiry-detail [mode]="'view'"></e-service-inquiry-detail>
+          <e-service-inquiry-detail
+            [mode]="'view'"
+            formControlName="inquiry"
+          ></e-service-inquiry-detail>
         </mat-tab>
 
         <mat-tab label="แจ้งผลคำวินิจฉัย">
-          <e-service-inquiry-result [mode]="'view'"></e-service-inquiry-result>
+          <e-service-inquiry-result
+            [mode]="'view'"
+            formControlName="inquiryresult"
+          ></e-service-inquiry-result>
         </mat-tab>
 
         <mat-tab label="บันทึกการกล่าวหา/กล่าวโทษ">
           <e-service-ethic-accusation-record
             [mode]="'view'"
+            formControlName="accusation"
           ></e-service-ethic-accusation-record>
         </mat-tab>
 
         <mat-tab label="สืบสวนข้อเท็จจริง">
           <e-service-form-investigation-detail
             [mode]="'view'"
+            formControlName="investigation"
           ></e-service-form-investigation-detail>
         </mat-tab>
       </mat-tab-group>

@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AccusationRecordComponent } from '@ksp/e-service/ethics/accusation';
+import { InquiryDetailComponent } from '@ksp/e-service/ethics/inquiry';
+import { FormInvestigationDetailComponent } from '@ksp/e-service/form';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { EthicsService } from '@ksp/shared/service';
-import { thaiDate } from '@ksp/shared/utility';
+import { jsonParse, thaiDate } from '@ksp/shared/utility';
 import { EMPTY, switchMap } from 'rxjs';
-import localForage from 'localforage';
 @Component({
   selector: 'e-service-publish-review',
   templateUrl: './publish-review.component.html',
@@ -17,7 +19,11 @@ import localForage from 'localforage';
 })
 export class PublishReviewComponent implements OnInit {
   form = this.fb.group({
-    publish: [],
+    publishstatus: [],
+    inquiry: [],
+    inquiryresult: [],
+    accusation: [],
+    investigation: [],
   });
   ethicsId: any;
   today = thaiDate(new Date());
@@ -28,7 +34,12 @@ export class PublishReviewComponent implements OnInit {
     private service: EthicsService,
     private route: ActivatedRoute
   ) {}
-
+  @ViewChild(AccusationRecordComponent)
+  accusation!: AccusationRecordComponent;
+  @ViewChild(FormInvestigationDetailComponent)
+  investigation!: FormInvestigationDetailComponent;
+  @ViewChild(InquiryDetailComponent)
+  inquiry!: InquiryDetailComponent;
   cancel() {
     this.router.navigate(['/', 'publish', 'list']);
   }
@@ -48,7 +59,7 @@ export class PublishReviewComponent implements OnInit {
       .pipe(
         switchMap((res) => {
           if (res) {
-            const publishstatus = this.form.controls.publish.value;
+            const publishstatus = this.form.controls.publishstatus.value;
             const payload = {
               id: this.ethicsId,
               publishstatus,
@@ -87,11 +98,59 @@ export class PublishReviewComponent implements OnInit {
   checkRequestId() {
     this.route.paramMap.subscribe((params) => {
       this.ethicsId = Number(params.get('id'));
-
       if (this.ethicsId) {
-        localForage.getItem('registerEthicsInfoValue').then((data: any) => {
-          // this.form.controls.accusation.patchValue(data);
-        });
+        this.service
+          .getEthicsByID({ id: this.ethicsId })
+          .subscribe((res: any) => {
+            this.accusation.accusationFiles.forEach((element, index) => {
+              if (res.accusationfile) {
+                const json = jsonParse(res?.accusationfile);
+                element.fileId = json[index]?.fileid;
+                element.fileName = json[index]?.filename;
+              }
+            });
+            if (res?.accuserinfo) {
+              const json = jsonParse(res?.accuserinfo);
+
+              if (json.length) {
+                for (let i = 0; i < json.length; i++) {
+                  this.accusation.addRow();
+                }
+              }
+              res.accuserinfo = json;
+            }
+            if (res?.investigationresult) {
+              const json = jsonParse(res?.investigationresult);
+              res.investigationresult = json;
+            }
+            if (res?.investigationsubcommittee) {
+              const json = jsonParse(res?.investigationsubcommittee);
+              if (json?.length) {
+                for (let i = 0; i < json.length; i++) {
+                  this.investigation.addRow();
+                }
+              }
+              res.investigationsubcommittee = json;
+            }
+            if (res?.inquiryresult) {
+              const json = jsonParse(res?.inquiryresult);
+              res.inquiryresult = json;
+            }
+            if (res.inquirysubcommittee) {
+              const json = jsonParse(res?.inquirysubcommittee);
+              if (json?.length) {
+                for (let i = 0; i < json.length; i++) {
+                  this.inquiry.addRow();
+                }
+              }
+              res.inquirysubcommittee = json;
+            }
+            this.form.controls.accusation.patchValue(res);
+            this.form.controls.inquiryresult.patchValue(res);
+            this.form.controls.investigation.patchValue(res);
+            this.form.controls.inquiry.patchValue(res);
+            this.form.controls.publishstatus.patchValue(res.publishstatus);
+          });
       }
     });
   }

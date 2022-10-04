@@ -59,7 +59,7 @@ export class AccusationRecordComponent
 {
   today = thaiDate(new Date());
   requestNumber = '';
-  accusationFiles = ACCUSATION_FILES;
+  accusationFiles: any[] = structuredClone(ACCUSATION_FILES);
   uniqueTimestamp: any;
   prefixList$!: Observable<any>;
 
@@ -77,7 +77,7 @@ export class AccusationRecordComponent
     accusationassignofficer: [],
     accusationassigndate: [],
     accuserinfo: this.fb.array([] as FormGroup[]),
-    //accusation_consideration
+    accusationconsideration: [],
   });
   constructor(
     public dialog: MatDialog,
@@ -100,7 +100,6 @@ export class AccusationRecordComponent
   addRow(data: EhicsMember = defaultEhicsMember) {
     const rewardForm = this.fb.group({
       idcardno: [data.idcardno],
-      prefix: [data.prefix],
       firstname: [data.firstname],
       lastname: [data.lastname],
       phone: [data.phone],
