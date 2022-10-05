@@ -55,6 +55,13 @@ export class UniRequestService {
     });
   }
 
+  searchUniDegreeCert2(form: any): Observable<any> {
+    return this.http.post(`${environment.shortApiUrl}/unidegreecertsearch_2.php`, {
+      ...form,
+      tokenkey: getCookie('userToken'),
+    });
+  }
+
   createRequestAdmission(form: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/kspuni/unirequestadmissioninsertupdate`, {
       ...form,
