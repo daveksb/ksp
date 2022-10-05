@@ -67,7 +67,7 @@ export class QualificationDetailComponent implements OnInit {
   refperson: any;
   evidenceFiles = files;
 
-  mode!: FormMode;
+  mode: FormMode = 'edit';
 
   constructor(
     public dialog: MatDialog,

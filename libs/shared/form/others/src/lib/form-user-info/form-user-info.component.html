@@ -216,6 +216,7 @@
       <label class="form-label required">เพศ</label>
       <select
         [class.bg-white]="!isDarkMode && mode === 'edit'"
+        [class.form-select-sp]="!isSchoolService"
         class="form-select"
         formControlName="sex"
       >
