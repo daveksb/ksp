@@ -75,9 +75,18 @@ export class AddStaffComponent implements OnInit {
     this.activatedroute.paramMap
       .pipe(untilDestroyed(this))
       .subscribe((params) => {
+        //console.log('param = ', params);
         this.staffId = Number(params.get('id'));
         if (this.staffId) {
           this.loadStaffData(this.staffId);
+        }
+
+        // redirect from search idcard page
+        const idcardno = Number(params.get('idcardno'));
+        if (idcardno) {
+          this.searchStaffDone = true;
+          const temp: any = { idcardno };
+          this.form.controls.userInfo.patchValue(temp);
         }
       });
   }
@@ -94,12 +103,11 @@ export class AddStaffComponent implements OnInit {
       .subscribe((res) => {
         //console.log('res = ', res);
         if (res && res.returncode !== '98') {
-          this.patchAll(res);
+          // found staff
+          this.router.navigate(['/staff-management', 'edit-staff', res.id]);
         } else {
-          // search not found reset form and set idcard again
-          this.form.reset();
-          const temp: any = { idcardno };
-          this.form.controls.userInfo.patchValue(temp);
+          // not found then reset form and set idcard again
+          this.router.navigate(['/staff-management', 'add-staff', idcardno]);
         }
         this.searchStaffDone = true;
       });
@@ -158,7 +166,7 @@ export class AddStaffComponent implements OnInit {
    */
   patchDataFromLicense() {
     localForage.getItem('add-staff-has-license').then((res: any) => {
-      console.log('stored data = ', res);
+      //console.log('stored data = ', res);
       this.form.controls.userInfo.patchValue(res);
       //this.pathUserInfo(res);
     });
