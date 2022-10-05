@@ -16,6 +16,7 @@ import { v4 as uuidv4 } from 'uuid';
 export class RegisterStepTwoComponent {
   validatorMessages = validatorMessages;
   uniqueTimeStamp = '';
+  imgSrc = '';
 
   form = this.fb.group({
     idcardno: [null, [Validators.required, Validators.pattern(idCardPattern)]],
@@ -29,6 +30,11 @@ export class RegisterStepTwoComponent {
     private fb: FormBuilder
   ) {
     this.uniqueTimeStamp = uuidv4();
+  }
+
+  onUploadComplete(evt: any) {
+    console.log('evt = ', evt);
+    this.imgSrc = evt.file;
   }
 
   openDialog() {
