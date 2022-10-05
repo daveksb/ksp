@@ -145,7 +145,7 @@
                 </button>
                 <button
                   (click)="openDialog()"
-                  [disabled]="form.invalid"
+                  [disabled]="form.invalid || !imgId"
                   type="submit"
                   class="btn btn-primary w-100"
                 >

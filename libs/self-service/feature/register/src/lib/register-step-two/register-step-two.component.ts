@@ -17,6 +17,7 @@ export class RegisterStepTwoComponent {
   validatorMessages = validatorMessages;
   uniqueTimeStamp = '';
   imgSrc = '';
+  imgId!: number;
 
   form = this.fb.group({
     idcardno: [null, [Validators.required, Validators.pattern(idCardPattern)]],
@@ -35,6 +36,7 @@ export class RegisterStepTwoComponent {
   onUploadComplete(evt: any) {
     console.log('evt = ', evt);
     this.imgSrc = evt.file;
+    this.imgId = evt.fileId;
   }
 
   openDialog() {
@@ -43,9 +45,13 @@ export class RegisterStepTwoComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      //console.log(`Dialog result: ${result}`);
       localForage.getItem('th-register').then((res: any) => {
-        const data = { ...res, ...this.form.value };
+        const data = {
+          ...res,
+          ...this.form.value,
+          //...{ idcardimage: this.imgId },
+          ...{ uniquetimestamp: this.uniqueTimeStamp },
+        };
         localForage.setItem('th-register', data);
       });
     });

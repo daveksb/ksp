@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { RegisterCompletedComponent } from '../register-completed/register-completed.component';
 import localForage from 'localforage';
 import { MyInfoService } from '@ksp/shared/service';
-import { v4 as uuidv4 } from 'uuid';
 import { SelfMyInfo } from '@ksp/shared/interface';
 
 @Component({
@@ -19,33 +18,35 @@ export class RegisterStepThreeComponent {
     //confirmPassword: [],
   });
 
+  idCardNo = '';
+  payload!: SelfMyInfo;
+
   constructor(
     public dialog: MatDialog,
     private router: Router,
     private fb: FormBuilder,
     private myInfoService: MyInfoService
-  ) {}
+  ) {
+    localForage.getItem('th-register').then((res: any) => {
+      this.idCardNo = res.idcardno;
+      this.payload = { ...res, ...this.form.value };
+      this.payload.username = res.idcardno;
+      this.payload.isactive = '1';
+      this.payload.uniquetimestamp = res.uniquetimestamp;
+      this.payload.usertype = '1'; // ชาวไทย
+    });
+  }
 
   submit() {
-    localForage.getItem('th-register').then((res: any) => {
-      const payload: SelfMyInfo = { ...res, ...this.form.value };
-      payload.username = res.idcardno;
-      payload.isactive = '1';
-      payload.uniquetimestamp = uuidv4();
-      payload.usertype = '1'; // ชาวไทย
-
-      this.myInfoService.insertMyInfo(payload).subscribe((res) => {
-        //console.log('insert = ', res);
+    this.myInfoService.insertMyInfo(this.payload).subscribe((res) => {
+      this.dialog.open(RegisterCompletedComponent, {
+        width: '600px',
+        data: {
+          title: `ยินดีด้วย!`,
+          subTitle: `สมัครสมาชิกของท่านเสร็จสมบูรณ์`,
+          btnLabel: `เข้าสู่ระบบ`,
+        },
       });
-    });
-
-    this.dialog.open(RegisterCompletedComponent, {
-      width: '600px',
-      data: {
-        title: `ยินดีด้วย!`,
-        subTitle: `สมัครสมาชิกของท่านเสร็จสมบูรณ์`,
-        btnLabel: `เข้าสู่ระบบ`,
-      },
     });
   }
 
