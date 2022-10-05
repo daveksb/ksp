@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ListData } from '@ksp/shared/interface';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -21,8 +21,8 @@ export class RenewLicensePropertyManagerComponent
   @Input() workingInfo: any[] = [];
 
   override form = this.fb.group({
-    standardKnowledgeType: [],
-    educationDetails: [],
+    standardKnowledgeType: [null, Validators.required],
+    educationDetails: [null, Validators.required],
   });
 
   constructor(private fb: FormBuilder) {
