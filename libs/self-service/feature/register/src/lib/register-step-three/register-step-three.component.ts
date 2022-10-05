@@ -6,7 +6,7 @@ import { RegisterCompletedComponent } from '../register-completed/register-compl
 import localForage from 'localforage';
 import { MyInfoService } from '@ksp/shared/service';
 import { SelfMyInfo } from '@ksp/shared/interface';
-import { parseJson } from '@ksp/shared/utility';
+import { validatorMessages } from '@ksp/shared/utility';
 
 @Component({
   selector: 'self-service-register-step-three',
@@ -70,5 +70,22 @@ export class RegisterStepThreeComponent implements OnInit {
 
   loginPage() {
     this.router.navigate(['/login']);
+  }
+
+  get confirmPasswordError() {
+    const errors = this.form.controls.confirmPassword.errors as any;
+    if (
+      (this.form.controls.confirmPassword.dirty ||
+        this.form.controls.confirmPassword.touched) &&
+      errors?.matching
+    )
+      return validatorMessages.passwordNotMatching;
+    return null;
+  }
+  get disabledSubmit() {
+    return (
+      !this.form.controls.password.valid ||
+      !this.form.controls.confirmPassword.valid
+    );
   }
 }

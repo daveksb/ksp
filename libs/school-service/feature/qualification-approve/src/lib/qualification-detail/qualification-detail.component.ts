@@ -63,50 +63,12 @@ export class QualificationDetailComponent implements OnInit {
   requestId!: number;
   requestStatus!: number;
   currentProcess!: number;
-
   otherreason: any;
   refperson: any;
-
-  evidenceFiles = [
-    {
-      name: 'หนังสือนำส่งจากหน่วยงานผู้ใช้',
-      fileId: '',
-      fileName: '',
-    },
-    {
-      name: 'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
-      fileId: '',
-      fileName: '',
-    },
-    {
-      name: 'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
-      fileId: '',
-      fileName: '',
-    },
-    {
-      name: 'สำเนาทะเบียนบ้าน',
-      fileId: '',
-      fileName: '',
-    },
-    {
-      name: 'สำเนาหนังสือแจ้งการเทียบคุณวุฒิ (กรณีจบการศึกษาจากต่างประเทศ)',
-      fileId: '',
-      fileName: '',
-    },
-    {
-      name: 'สำเนา กพ.7 / สมุดประจำตัว',
-      fileId: '',
-      fileName: '',
-    },
-    {
-      name: 'สำเนาหลักฐานการเปลี่ยนชื่อ นามสกุล',
-      fileId: '',
-      fileName: '',
-    },
-    { name: 'เอกสารอื่นๆ', fileId: '', fileName: '' },
-  ];
+  evidenceFiles = files;
 
   mode!: FormMode;
+
   constructor(
     public dialog: MatDialog,
     private router: Router,
@@ -398,3 +360,42 @@ export class QualificationDetailComponent implements OnInit {
     }
   }
 }
+
+const files = [
+  {
+    name: 'หนังสือนำส่งจากหน่วยงานผู้ใช้',
+    fileId: '',
+    fileName: '',
+  },
+  {
+    name: 'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
+    fileId: '',
+    fileName: '',
+  },
+  {
+    name: 'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
+    fileId: '',
+    fileName: '',
+  },
+  {
+    name: 'สำเนาทะเบียนบ้าน',
+    fileId: '',
+    fileName: '',
+  },
+  {
+    name: 'สำเนาหนังสือแจ้งการเทียบคุณวุฒิ (กรณีจบการศึกษาจากต่างประเทศ)',
+    fileId: '',
+    fileName: '',
+  },
+  {
+    name: 'สำเนา กพ.7 / สมุดประจำตัว',
+    fileId: '',
+    fileName: '',
+  },
+  {
+    name: 'สำเนาหลักฐานการเปลี่ยนชื่อ นามสกุล',
+    fileId: '',
+    fileName: '',
+  },
+  { name: 'เอกสารอื่นๆ', fileId: '', fileName: '' },
+];

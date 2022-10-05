@@ -33,7 +33,6 @@ import {
 })
 export class LicenseRequestForeignComponent implements OnInit {
   headerGroup = ['Issue Date', 'Form ID'];
-  title = 'TEACHING LICENSE APPLICATION FORM';
 
   form = this.fb.group({
     personalDetail: [],

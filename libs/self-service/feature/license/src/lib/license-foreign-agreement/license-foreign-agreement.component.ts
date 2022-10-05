@@ -8,7 +8,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class LicenseForeignAgreementComponent {
   headerGroup = ['Issue Date', 'Form ID'];
-  title = 'TEACHING LICENSE APPLICATION FORM';
   rules = [
     `1. Applicants must provide evidence of checking their educational institution whether recognized by either the Office of the Civil Service
   Commission, Thailand or by accrediting organizations that play a role in higher education accreditation which are recognized by the
