@@ -6,6 +6,7 @@ import { RegisterCompletedComponent } from '../register-completed/register-compl
 import localForage from 'localforage';
 import { MyInfoService } from '@ksp/shared/service';
 import { SelfMyInfo } from '@ksp/shared/interface';
+import { parseJson } from '@ksp/shared/utility';
 
 @Component({
   selector: 'self-service-register-step-three',
@@ -52,6 +53,7 @@ export class RegisterStepThreeComponent implements OnInit {
     this.payload = {
       ...this.payload,
       ...{ password: this.form.controls.password.value },
+      ...{ addressinfo: JSON.stringify([this.payload.addressinfo]) },
     };
 
     this.myInfoService.insertMyInfo(this.payload).subscribe((res) => {

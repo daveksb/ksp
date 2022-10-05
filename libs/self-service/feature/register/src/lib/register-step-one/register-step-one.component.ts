@@ -26,7 +26,7 @@ export class RegisterStepOneComponent implements OnInit {
     nationality: ['TH', Validators.required],
     phone: [null, Validators.required],
     email: [null, Validators.required],
-    address: [],
+    addressinfo: [],
   });
 
   constructor(
