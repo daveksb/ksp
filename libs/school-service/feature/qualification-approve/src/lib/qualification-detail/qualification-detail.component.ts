@@ -82,23 +82,6 @@ export class QualificationDetailComponent implements OnInit {
     this.getListData();
     this.checkRequestId();
     this.checkRequestSubType();
-
-    this.form.valueChanges.subscribe((res) => {
-      console.log('form valid = ', this.form.valid);
-    });
-  }
-
-  eduSelected(type: number, evt: any) {
-    const checked = evt.target.checked;
-    if (type === 2) {
-      this.showEdu2 = checked;
-    }
-    if (type === 3) {
-      this.showEdu3 = checked;
-    }
-    if (type === 4) {
-      this.showEdu4 = checked;
-    }
   }
 
   checkRequestId() {
@@ -127,9 +110,10 @@ export class QualificationDetailComponent implements OnInit {
         this.requestDate = thaiDate(new Date(`${res.requestdate}`));
         res.birthdate = res.birthdate?.split('T')[0];
         this.form.get('userInfo')?.patchValue(res);
-        res.eduinfo = JSON.parse(atob(res.eduinfo));
-        this.form.controls.edu1.patchValue(res.eduinfo[0]);
-        //this.form.get('education')?.patchValue(res.eduinfo[0]);
+
+        const edus = JSON.parse(atob(res.eduinfo));
+        this.patchEdu(edus);
+
         res.addressinfo = JSON.parse(atob(res.addressinfo));
         for (let i = 0; i < res.addressinfo.length; i++) {
           const form = this.form.get(`addr${i + 1}`) as AbstractControl<
@@ -140,7 +124,7 @@ export class QualificationDetailComponent implements OnInit {
           this.getTumbon(i + 1, res?.addressinfo[i].amphur);
           form?.patchValue(res?.addressinfo[i]);
         }
-        console.log(this.amphurs1$);
+
         res.refperson = JSON.parse(atob(res.refperson));
         res.otherreason = JSON.parse(atob(res.otherreason));
         this.refperson = res.refperson;
@@ -148,6 +132,39 @@ export class QualificationDetailComponent implements OnInit {
         this.mode = 'view';
       }
     });
+  }
+
+  patchEdu(edus: any[]) {
+    //console.log('edus = ', edus);
+    if (edus && edus.length) {
+      edus.map((edu, i) => {
+        if (edu.degreeLevel === 2) {
+          this.showEdu2 = true;
+        }
+        if (edu.degreeLevel === 3) {
+          this.showEdu3 = true;
+        }
+        if (edu.degreeLevel === 4) {
+          this.showEdu4 = true;
+        }
+        (this.form.get(`edu${i + 1}`) as AbstractControl<any, any>).patchValue(
+          edu
+        );
+      });
+    }
+  }
+
+  eduSelected(type: number, evt: any) {
+    const checked = evt.target.checked;
+    if (type === 2) {
+      this.showEdu2 = checked;
+    }
+    if (type === 3) {
+      this.showEdu3 = checked;
+    }
+    if (type === 4) {
+      this.showEdu4 = checked;
+    }
   }
 
   getListData() {
@@ -174,7 +191,7 @@ export class QualificationDetailComponent implements OnInit {
             if (res) {
               const payload = {
                 id: `${this.requestId}`,
-                requeststatus: `0`,
+                requeststatus: '0',
               };
               return this.requestService.cancelRequest(payload);
             }
@@ -238,7 +255,7 @@ export class QualificationDetailComponent implements OnInit {
           if (res) {
             //eduInfo otherreason addressinfo refperson
             const formData: any = this.form.getRawValue();
-            console.log('formData', formData);
+            //console.log('formData', formData);
             if (formData?.addr1?.addressType) formData.addr1.addressType = 1;
             if (formData?.addr2?.addressType) formData.addr2.addressType = 2;
             const { refperson } = refPersonForm;
@@ -253,12 +270,35 @@ export class QualificationDetailComponent implements OnInit {
             userInfo.schoolid = this.schoolId;
             userInfo.currentprocess = '1';
             userInfo.requeststatus = '1';
+
+            let eduForm = [{ ...formData.edu1, ...{ degreeLevel: 1 } }];
+            formData?.edu2
+              ? (eduForm = [
+                  ...eduForm,
+                  { ...formData.edu2, ...{ degreeLevel: 2 } },
+                ])
+              : null;
+
+            formData?.edu3
+              ? (eduForm = [
+                  ...eduForm,
+                  { ...formData.edu3, ...{ degreeLevel: 3 } },
+                ])
+              : null;
+
+            formData?.edu4
+              ? (eduForm = [
+                  ...eduForm,
+                  { ...formData.edu4, ...{ degreeLevel: 4 } },
+                ])
+              : null;
+
             const payload = {
               ...userInfo,
               ...{
                 addressinfo: JSON.stringify([formData.addr1, formData.addr2]),
               },
-              ...{ eduinfo: JSON.stringify([formData.education]) },
+              ...{ eduinfo: JSON.stringify(eduForm) },
               ...{ refperson: JSON.stringify(refperson) },
               ...{ otherreason: JSON.stringify(otherreason) },
             };
@@ -268,12 +308,17 @@ export class QualificationDetailComponent implements OnInit {
         })
       )
       .subscribe((res) => {
+        if (res) {
+          this.requestNumber = res.id;
+        }
         this.onCompleted();
       });
   }
+
   onClickPrev() {
     this.router.navigate(['/temp-license']);
   }
+
   onCancelCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
@@ -290,6 +335,7 @@ export class QualificationDetailComponent implements OnInit {
       }
     });
   }
+
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
@@ -306,6 +352,7 @@ export class QualificationDetailComponent implements OnInit {
       }
     });
   }
+
   provinceChanged(addrType: number, evt: any) {
     const province = evt.target?.value;
     if (province) {
@@ -316,6 +363,7 @@ export class QualificationDetailComponent implements OnInit {
       }
     }
   }
+
   getAmphurChanged(addrType: number, province: any) {
     if (province) {
       if (addrType === 1) {
@@ -325,6 +373,7 @@ export class QualificationDetailComponent implements OnInit {
       }
     }
   }
+
   amphurChanged(addrType: number, evt: any) {
     const amphur = evt.target?.value;
     if (amphur) {
@@ -335,6 +384,7 @@ export class QualificationDetailComponent implements OnInit {
       }
     }
   }
+
   getTumbon(addrType: number, amphur: any) {
     if (amphur) {
       if (addrType === 1) {
@@ -344,6 +394,7 @@ export class QualificationDetailComponent implements OnInit {
       }
     }
   }
+
   useSameAddress(evt: any) {
     const checked = evt.target.checked;
     this.amphurs2$ = this.amphurs1$;
