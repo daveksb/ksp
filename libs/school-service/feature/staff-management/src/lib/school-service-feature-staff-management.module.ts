@@ -36,6 +36,7 @@ export const routes: Routes = [
       { path: 'list', component: StaffListComponent },
       { path: 'license-search', component: LicenseSearchComponent },
       { path: 'add-staff', component: AddStaffComponent },
+      { path: 'add-staff/:idcardno', component: AddStaffComponent },
       { path: 'add-staff-has-license', component: AddStaffComponent },
       { path: 'edit-staff/:id', component: AddStaffComponent },
       { path: 'view-staff/:id', component: AddStaffComponent },

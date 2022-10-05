@@ -4,7 +4,7 @@
     <div class="col-md-6 mb-2">
       <label class="form-label">วิทยฐานะ</label>
       <select class="form-select" formControlName="academicStanding">
-        <option selected>กรุณาเลือก</option>
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">ไม่มี</option>
         <option value="2">ชํานาญการ</option>
         <option value="3">ชํานาญการพิเศษ</option>
@@ -17,15 +17,14 @@
       <input
         class="form-control"
         type="text"
-        formControlName="experienceYear"
-      />
+        formControlName="experienceYear" />
     </div>
   </div>
   <div class="row">
     <div class="col-md-6 mb-2">
       <label class="form-label">ประเภทวิชาชีพ</label>
       <select class="form-select" formControlName="professionalType">
-        <option selected>กรุณาเลือก</option>
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">ครู</option>
         <option value="2">ผู้บริหารสถานศึกษา</option>
         <option value="3">ผู้บริหารการศึกษา</option>
@@ -33,14 +32,11 @@
       </select>
     </div>
     <div class="col-md-6 mb-2">
-      <label class="form-label"
-        >ชื่อสมาคม/ชมรม/กลุ่มเครือข่ายวิชาชีพที่ท่านเป็นสมาชิก (ถ้ามี)</label
-      >
+      <label class="form-label">ชื่อสมาคม/ชมรม/กลุ่มเครือข่ายวิชาชีพที่ท่านเป็นสมาชิก (ถ้ามี)</label>
       <input
         class="form-control"
         type="text"
-        formControlName="associationName"
-      />
+        formControlName="associationName" />
     </div>
   </div>
   <div class="row">

@@ -1,13 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { Router } from '@angular/router';
 import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-info';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import {
+  defaultSubcommittee,
+  EhicsSubcommittee,
+  KspFormBaseComponent,
+} from '@ksp/shared/interface';
 import { BottomNavComponent } from '@ksp/shared/menu';
 import {
   LicenseInfoComponent,
@@ -40,7 +49,7 @@ export class InquiryDetailComponent extends KspFormBaseComponent {
   override form = this.fb.group({
     inquiryorderno: [],
     inquiryorderdate: [],
-    inquirysubcommittee: [],
+    inquirysubcommittee: this.fb.array([] as FormGroup[]),
     inquiryexplaindate: [],
     inquiryjbdate: [],
     inquiryreport: [],
@@ -68,6 +77,9 @@ export class InquiryDetailComponent extends KspFormBaseComponent {
       })
     );
   }
+  get members() {
+    return this.form.controls.inquirysubcommittee as FormArray;
+  }
 
   next() {
     this.router.navigate(['/', 'ethics', 'inquiry', 'result']);
@@ -75,5 +87,20 @@ export class InquiryDetailComponent extends KspFormBaseComponent {
 
   cancel() {
     this.router.navigate(['/', 'ethics', 'inquiry']);
+  }
+  addRow(data: EhicsSubcommittee = defaultSubcommittee) {
+    const rewardForm = this.fb.group({
+      idcardno: data.idcardno,
+      idnumber: data.idnumber,
+      positioncommittee: data.positioncommittee,
+      firstname: data.firstname,
+      lastname: data.lastname,
+      position: data.position,
+      bureau: data.bureau,
+    });
+    this.members.push(rewardForm);
+  }
+  deleteRow(index: number) {
+    this.members.removeAt(index);
   }
 }

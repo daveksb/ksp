@@ -147,3 +147,19 @@ export function mapFileInfo(fileList: any[]) {
     return object;
   });
 }
+export function jsonParse(object: string): any {
+  try {
+    return JSON.parse(object);
+  } catch (e) {
+    return null;
+  }
+}
+
+export function jsonStringify(object: any): string {
+  try {
+    if (typeof object === 'string') return object;
+    return JSON.stringify(object);
+  } catch (e) {
+    return '';
+  }
+}

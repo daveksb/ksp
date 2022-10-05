@@ -15,10 +15,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { FileUploadUrls, File_UPLOAD_URLS } from '@ksp/shared/form/file-upload';
 
 const fileUrls: FileUploadUrls = {
-  uploadFile: '/e-service/schrequestfileselectbyid',
+  uploadFile: '/e-service/kspfileinsert',
   uploadImage: '',
-  download: '/e-service/unirequestfileselectbyid',
-  delete: '',
+  download: '/e-service/kspfileselectidfile',
+  delete: '/e-service/kspfiledelete',
 };
 
 @NgModule({

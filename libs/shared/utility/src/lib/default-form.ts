@@ -19,7 +19,7 @@ export function createDefaultVisaInfo(fb: FormBuilder) {
 export function createDefaultUserInfoForm(fb: FormBuilder) {
   return fb.group({
     id: [],
-    idcardno: [null, [Validators.required, Validators.pattern(idCardPattern)]],
+    idcardno: ['', [Validators.required, Validators.pattern(idCardPattern)]],
     passportno: [
       null,
       [Validators.required, Validators.pattern(passportPattern)],

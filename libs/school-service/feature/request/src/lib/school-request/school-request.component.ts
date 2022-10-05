@@ -521,11 +521,18 @@ export class SchoolRequestComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         //console.log('req = ', res);
-        this.pathUserInfo(res);
-        this.patchAddress(parseJson(res.addresses));
-        this.patchEdu(parseJson(res.educations));
-        this.patchTeachingInfo(parseJson(res.teachinginfo));
-        this.patchHiringInfo(parseJson(res.hiringinfo));
+        if (res && res.returncode !== '98') {
+          this.pathUserInfo(res);
+          this.patchAddress(parseJson(res.addresses));
+          this.patchEdu(parseJson(res.educations));
+          this.patchTeachingInfo(parseJson(res.teachinginfo));
+          this.patchHiringInfo(parseJson(res.hiringinfo));
+        } else {
+          // search not found reset form and set idcard again
+          this.form.reset();
+          const temp: any = { idcardno: idCard };
+          this.form.controls.userInfo.patchValue(temp);
+        }
       });
   }
 
@@ -705,6 +712,24 @@ export class SchoolRequestComponent implements OnInit {
     });
 
     dialog.componentInstance.completed
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res) {
+          this.backToListPage();
+        }
+      });
+  }
+
+  tempSaveComplete() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      width: '350px',
+      data: {
+        header: `บันทึกใบคำขอชั่วคราวสำเร็จ`,
+        buttonLabel: 'กลับสู่หน้าหลัก',
+      },
+    });
+
+    completeDialog.componentInstance.completed
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         if (res) {

@@ -21,7 +21,7 @@
             <input type="text" class="form-control" formControlName="idcardno" />
           </div>
         </div>
-  
+
         <div class="row mb-2 w-75 ms-5">
           <div class="col">
             <label class="form-label">ชื่อ</label>
@@ -32,7 +32,7 @@
             <input type="text" class="form-control" formControlName="lastname" />
           </div>
         </div>
-  
+
         <div class="d-flex justify-content-end me-5">
           <button
             class="btn border-primary text-primary bg-white"
@@ -60,7 +60,7 @@
           <div class="col-2">
             <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
             <select class="form-select" formControlName="prefixth">
-              <option selected>กรุณาเลือก</option>
+              <option value="null" selected hidden disabled>กรุณาเลือก</option>
               <option *ngFor="let option of prefixList$ | async" [value]="option.id">{{option.name_th}}</option>
             </select>
           </div>
@@ -78,7 +78,7 @@
           <div class="col-2">
             <label class="form-label">คำนำหน้าชื่อภาษาอังกฤษ</label>
             <select class="form-select" formControlName="prefixen">
-              <option selected>กรุณาเลือก</option>
+              <option value="null" selected hidden disabled>กรุณาเลือก</option>
               <option *ngFor="let option of prefixList$ | async" value="option.id">{{option.name_en}}</option>
             </select>
           </div>
@@ -96,7 +96,7 @@
           <div class="col-2">
             <label class="form-label">สัญชาติ</label>
             <select class="form-select" formControlName="nationality">
-              <option selected>กรุณาเลือก</option>
+              <option value="null" selected hidden disabled>กรุณาเลือก</option>
               <option *ngFor="let option of nationalityList$ | async" value="option.id">{{option.name_en}}</option>
             </select>
           </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, NavigationEnd, Event, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   AddressService,
   GeneralInfoService,
@@ -44,6 +44,9 @@ export class AddStaffComponent implements OnInit {
   today = thaiDate(new Date());
   mode: FormMode = 'edit';
   userInfoType = UserInfoFormType.thai;
+  searchStaffDone = false;
+  kuruspaNo = '';
+
   form = this.fb.group({
     userInfo: [],
     addr1: [],
@@ -72,10 +75,41 @@ export class AddStaffComponent implements OnInit {
     this.activatedroute.paramMap
       .pipe(untilDestroyed(this))
       .subscribe((params) => {
+        //console.log('param = ', params);
         this.staffId = Number(params.get('id'));
         if (this.staffId) {
           this.loadStaffData(this.staffId);
         }
+
+        // redirect from search idcard page
+        const idcardno = Number(params.get('idcardno'));
+        if (idcardno) {
+          this.searchStaffDone = true;
+          const temp: any = { idcardno };
+          this.form.controls.userInfo.patchValue(temp);
+        }
+      });
+  }
+
+  searchIdCard(idcardno: string) {
+    const payload = {
+      idcardno,
+      schoolid: this.schoolId,
+    };
+
+    this.staffService
+      .searchStaffFromIdCard(payload)
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        //console.log('res = ', res);
+        if (res && res.returncode !== '98') {
+          // found staff
+          this.router.navigate(['/staff-management', 'edit-staff', res.id]);
+        } else {
+          // not found then reset form and set idcard again
+          this.router.navigate(['/staff-management', 'add-staff', idcardno]);
+        }
+        this.searchStaffDone = true;
       });
   }
 
@@ -114,14 +148,15 @@ export class AddStaffComponent implements OnInit {
 
   checkMode() {
     if (this.router.url.includes('add-staff-has-license')) {
+      this.searchStaffDone = true;
       this.mode = 'edit';
       this.patchDataFromLicense();
     } else if (this.router.url.includes('view-staff')) {
-      console.log('view mode');
+      this.searchStaffDone = true;
       this.mode = 'view';
       this.form.disable();
     } else {
-      console.log('edit mode');
+      // add staff
       this.mode = 'edit';
     }
   }
@@ -131,7 +166,7 @@ export class AddStaffComponent implements OnInit {
    */
   patchDataFromLicense() {
     localForage.getItem('add-staff-has-license').then((res: any) => {
-      console.log('stored data = ', res);
+      //console.log('stored data = ', res);
       this.form.controls.userInfo.patchValue(res);
       //this.pathUserInfo(res);
     });
@@ -142,12 +177,16 @@ export class AddStaffComponent implements OnInit {
       .searchStaffFromId(staffId)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
-        this.pathUserInfo(res);
-        this.patchAddress(parseJson(res.addresses));
-        this.patchEdu(parseJson(res.educations));
-        this.pathTeachingInfo(parseJson(res.teachinginfo));
-        this.form.controls.hiringInfo.patchValue(parseJson(res.hiringinfo));
+        this.patchAll(res);
       });
+  }
+
+  patchAll(res: any) {
+    this.pathUserInfo(res);
+    this.patchAddress(parseJson(res.addresses));
+    this.patchEdu(parseJson(res.educations));
+    this.pathTeachingInfo(parseJson(res.teachinginfo));
+    this.form.controls.hiringInfo.patchValue(parseJson(res.hiringinfo));
   }
 
   insertStaff() {

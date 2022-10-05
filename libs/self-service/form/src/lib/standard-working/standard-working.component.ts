@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
 import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -26,7 +26,7 @@ export class StandardWorkingComponent
   @Input() workingInfo: any[] = [];
 
   override form = this.fb.group({
-    educationType: [],
+    educationType: [null, Validators.required],
     educationLevelForm: [],
   });
 

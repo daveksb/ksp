@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -9,7 +9,10 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./activity-write-book.component.scss'],
   providers: providerFactory(ActivityWriteBookComponent),
 })
-export class ActivityWriteBookComponent extends KspFormBaseComponent {
+export class ActivityWriteBookComponent
+  extends KspFormBaseComponent
+  implements OnDestroy
+{
   @Input() data: any;
   @Input() isForeignForm = false;
 
@@ -38,5 +41,10 @@ export class ActivityWriteBookComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+
+  override ngOnDestroy(): void {
+    this.onChange(null);
+    this.onTouched();
   }
 }

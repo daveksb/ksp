@@ -13,18 +13,3 @@
   background-size: 100% 100%;
   background-image: url(/assets/images/BG-Information.png);
 }
-
-.button__container {
-  display: flex;
-  justify-content: center;
-}
-
-#btn-edit {
-  margin-left: 10px;
-}
-
-@media only screen and (max-width: 768px) {
-  .container {
-    padding: 12px 24px;
-  }
-}

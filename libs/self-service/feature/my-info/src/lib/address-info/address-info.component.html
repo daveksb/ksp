@@ -37,8 +37,12 @@
   </form>
   <div class="d-flex justify-content-center my-3">
     <button class="btn btn-secondary me-2">ล้างข้อมูล</button>
-    <button (click)="onClickChangeMode()" class="btn btn-primary">
-      แก้ไขข้อมูล
+    <button
+      class="btn"
+      (click)="onClickChangeMode()"
+      [ngClass]="mode === 'edit' ? 'btn-success' : 'btn-primary'"
+    >
+      {{ label }}
     </button>
   </div>
 </div>

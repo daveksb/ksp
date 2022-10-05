@@ -32,7 +32,9 @@
 
   <div class="d-flex justify-content-between">
     <div class="form-label">คณะอนุกรรมการสืบสวนข้อเท็จจริง</div>
-    <div role="button" class="text-primary">+ เพิ่มรายการ</div>
+    <div role="button" class="text-primary" (click)="addRow()">
+      + เพิ่มรายการ
+    </div>
   </div>
   <div class="table-responsive mb-3">
     <table class="table">
@@ -51,22 +53,75 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th>x</th>
-          <th>x-xxxx-xxxx-xx-x</th>
-          <th>x-xxxx-xxxx-xx-x</th>
-          <th>x-xxxx-xxxx-xx-x</th>
-          <th>x-xxxx-xxxx-xx-x</th>
-          <th>x-xxxx-xxxx-xx-x</th>
-          <th>x-xxxx-xxxx-xx-x</th>
-          <th>x-xxxx-xxxx-xx-x</th>
-          <th>
-            <i role="button" class="bi bi-pencil-square fs-5 text-primary"></i>
-          </th>
-          <th>
-            <i role="button" class="bi bi-trash fs-5 text-danger"></i>
-          </th>
-        </tr>
+        <ng-container formArrayName="investigationsubcommittee">
+          <ng-container *ngFor="let row of members.controls; let i = index">
+            <tr [formGroupName]="i">
+              <td class="text-center">{{ i + 1 }}</td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="idcardno"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="idnumber"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="positioncommittee"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="firstname"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="lastname"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="position"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="bureau"
+                />
+              </td>
+              <td>
+                <i
+                  role="button"
+                  class="bi bi-pencil-square fs-5 text-primary"
+                ></i>
+              </td>
+              <td>
+                <i
+                  (click)="deleteRow(i)"
+                  role="button"
+                  class="bi bi-trash fs-5 text-danger"
+                ></i>
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
       </tbody>
     </table>
   </div>

@@ -86,12 +86,31 @@ export const defaultEhicsMember: EhicsMember = {
   lastname: null,
   phone: null,
 };
+
+export const defaultSubcommittee: EhicsSubcommittee = {
+  idcardno: null,
+  idnumber: null,
+  positioncommittee: null,
+  firstname: null,
+  lastname: null,
+  position: null,
+  bureau: null,
+};
 export interface EhicsMember {
   idcardno: string | null;
   prefix: number | null;
   firstname: string | null;
   lastname: string | null;
   phone: string | null;
+}
+export interface EhicsSubcommittee {
+  idcardno: string | null;
+  idnumber: number | null;
+  positioncommittee: string | null;
+  firstname: string | null;
+  lastname: string | null;
+  position: string | null;
+  bureau: string | null;
 }
 export const ACCUSATION_FILES = [
   { name: '1. เอกสารกล่าวหา/กล่าวโทษ', fileId: '', fileName: '' },
@@ -147,3 +166,5 @@ export const decisions = [
     value: 4,
   },
 ];
+
+export type EthicsKey = keyof Ethics;

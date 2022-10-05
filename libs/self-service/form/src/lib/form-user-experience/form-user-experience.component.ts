@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { debounceTime } from 'rxjs';
+import { debounceTime, pairwise } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -19,9 +19,9 @@ export class FormUserExperienceComponent
   @Input() countries: any[] = [];
   @Input() licenses: any[] = [];
   override form = this.fb.group({
-    TrainingAddressOne: [],
-    TrainingAddressTwo: [],
-    teachingAddress: [],
+    TrainingAddressOne: [null, Validators.required],
+    TrainingAddressTwo: [null, Validators.required],
+    teachingAddress: [null, Validators.required],
     hasForeignLicense: [],
     foreignLicenseForm: [],
   });
@@ -39,9 +39,22 @@ export class FormUserExperienceComponent
 
   ngOnInit(): void {
     this.form.valueChanges
-      .pipe(debounceTime(300), untilDestroyed(this))
-      .subscribe((res) => {
+      .pipe(untilDestroyed(this), pairwise())
+      .subscribe(([prev, next]) => {
+        // console.log('prev', prev);
+        // console.log('next', next);
         //console.log('exp form = ', res);
+        if (prev.hasForeignLicense !== next.hasForeignLicense) {
+          if (next.hasForeignLicense) {
+            console.log('set validators');
+            this.form.controls.foreignLicenseForm.addValidators(
+              Validators.required
+            );
+          } else {
+            this.form.controls.foreignLicenseForm.clearValidators();
+          }
+          this.form.controls.foreignLicenseForm.updateValueAndValidity();
+        }
       });
   }
 
