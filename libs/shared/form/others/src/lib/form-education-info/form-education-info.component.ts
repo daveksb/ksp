@@ -14,9 +14,19 @@ export class FormEducationInfoComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+  @Input() selectDegreeLevel = 1;
+  @Input() showGradeInput = false;
+  @Input() showPropertyInput = false;
+  @Input() showSelectDegree = false;
+  @Input() showGraduateYearInput = false;
+  @Input() countries: any[] = [];
+  @Input() showCheckbox = true;
+  @Input() option = false;
+  @Input() userEducationType: any;
+  FormTypeEnum = UserInfoFormType;
+
   override form = this.fb.group({
-    //id: [],
-    degreeLevel: [null, Validators.required],
+    degreeLevel: [this.selectDegreeLevel],
     degreeName: [null, Validators.required],
     isEducationDegree: [],
     major: [null, Validators.required],
@@ -29,29 +39,9 @@ export class FormEducationInfoComponent
     academicYear: [],
   });
 
-  @Input() showGradeInput = false;
-  @Input() showPropertyInput = false;
-  @Input() showSelectDegree = false;
-  @Input() showGraduateYearInput = false;
-  @Input() countries: any[] = [];
-  @Input() showCheckbox = true;
-  @Input() option = false;
-  @Input() userEducationType: any;
-  FormTypeEnum = UserInfoFormType;
-
-  /*   _defualtDegree = 0;
-  @Input()
-  set defualtDegree(value: any) {
-    this._defualtDegree = value;
-  }
-  get defualtDegree(): any {
-    return this._defualtDegree;
-  } */
-
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
         this.onChange(value);
         this.onTouched();
