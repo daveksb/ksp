@@ -9,6 +9,8 @@ import { MenuConfig } from '@ksp/shared/interface';
 export class HamburgerMenuComponent {
   @Input() menuConfig: MenuConfig[] = [];
   @Input() showHeader = false;
+  @Input() name = '';
+  @Input() lastLogin = '';
 
   /**
    * Side menu use absolute path routing
