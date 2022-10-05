@@ -34,7 +34,7 @@ export class RegisterStepTwoComponent {
   }
 
   onUploadComplete(evt: any) {
-    console.log('evt = ', evt);
+    //console.log('evt = ', evt);
     this.imgSrc = evt.file;
     this.imgId = evt.fileId;
   }
