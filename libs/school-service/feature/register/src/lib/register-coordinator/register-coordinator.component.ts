@@ -9,7 +9,7 @@ import {
 } from '@ksp/shared/dialog';
 import { FormMode } from '@ksp/shared/interface';
 import { GeneralInfoService, RequestService } from '@ksp/shared/service';
-import { EMPTY, Observable, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 import localForage from 'localforage';
 import { thaiDate } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
@@ -45,17 +45,15 @@ export class CoordinatorInfoComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private generalInfoService: GeneralInfoService,
-    private requestService: RequestService
+    private generalInfoService: GeneralInfoService
   ) {}
 
   ngOnInit(): void {
-    //this.savingData = history.state.data;
-
     this.getListData();
 
     localForage.getItem('registerSelectedSchool').then((res) => {
       this.school = res;
+      console.log('school = ', res);
     });
 
     localForage.getItem('registerUserInfoFormValue').then((res) => {

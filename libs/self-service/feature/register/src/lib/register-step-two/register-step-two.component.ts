@@ -6,6 +6,7 @@ import { VerifyPhoneDialogComponent } from '@ksp/self-service/dialog';
 import { idCardPattern, validatorMessages } from '@ksp/shared/utility';
 import localForage from 'localforage';
 import { RegisterTooltipComponent } from '../register-tooltip/register-tooltip.component';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'self-service-register-step-two',
@@ -14,18 +15,21 @@ import { RegisterTooltipComponent } from '../register-tooltip/register-tooltip.c
 })
 export class RegisterStepTwoComponent {
   validatorMessages = validatorMessages;
+  uniqueTimeStamp = '';
 
   form = this.fb.group({
     idcardno: [null, [Validators.required, Validators.pattern(idCardPattern)]],
     idcardbackno: [null, [Validators.required]],
-    //idcardimage: [],
+    idcardimage: [],
   });
 
   constructor(
     public dialog: MatDialog,
     private router: Router,
     private fb: FormBuilder
-  ) {}
+  ) {
+    this.uniqueTimeStamp = uuidv4();
+  }
 
   openDialog() {
     const dialogRef = this.dialog.open(VerifyPhoneDialogComponent, {
