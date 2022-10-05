@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AddressService, GeneralInfoService } from '@ksp/shared/service';
 import localForage from 'localforage';
@@ -11,21 +11,21 @@ import { Observable } from 'rxjs';
 })
 export class RegisterStepOneComponent implements OnInit {
   nationalitys$!: Observable<any>;
-  provinces1$!: Observable<any>;
-  amphurs1$!: Observable<any>;
-  tumbols1$!: Observable<any>;
+  provinces$!: Observable<any>;
+  amphurs$!: Observable<any>;
+  tumbols$!: Observable<any>;
 
   form = this.fb.group({
-    prefixth: [],
-    firstnameth: [],
-    lastnameth: [],
-    prefixen: [],
-    firstnameen: [],
-    lastnameen: [],
-    birthdate: [],
-    nationality: ['TH'],
-    phone: [],
-    email: [],
+    prefixth: [null, Validators.required],
+    firstnameth: [null, Validators.required],
+    lastnameth: [null, Validators.required],
+    prefixen: [null, Validators.required],
+    firstnameen: [null, Validators.required],
+    lastnameen: [null, Validators.required],
+    birthdate: [null, Validators.required],
+    nationality: ['TH', Validators.required],
+    phone: [null, Validators.required],
+    email: [null, Validators.required],
     address: [],
   });
 
@@ -37,26 +37,8 @@ export class RegisterStepOneComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getListData();
-  }
-
-  provinceChanged(evt: any) {
-    const province = evt.target?.value;
-    if (province) {
-      this.amphurs1$ = this.addressService.getAmphurs(province);
-    }
-  }
-
-  amphurChanged(evt: any) {
-    const amphur = evt.target?.value;
-    if (amphur) {
-      this.tumbols1$ = this.addressService.getTumbols(amphur);
-    }
-  }
-
-  getListData() {
-    this.provinces1$ = this.addressService.getProvinces();
     this.nationalitys$ = this.generalInfoService.getNationality();
+    this.provinces$ = this.addressService.getProvinces();
   }
 
   loginPage() {
@@ -66,5 +48,20 @@ export class RegisterStepOneComponent implements OnInit {
   nextPage() {
     localForage.setItem('th-register', this.form.value);
     this.router.navigate(['/register', 'th-step-2']);
+  }
+
+  provinceChanged(evt: any) {
+    const province = evt.target?.value;
+    if (province) {
+      console.log('pv vhange = ', evt);
+      this.amphurs$ = this.addressService.getAmphurs(province);
+    }
+  }
+
+  amphurChanged(evt: any) {
+    const amphur = evt.target?.value;
+    if (amphur) {
+      this.tumbols$ = this.addressService.getTumbols(amphur);
+    }
   }
 }

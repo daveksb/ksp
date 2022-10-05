@@ -13,26 +13,30 @@ import { v4 as uuidv4 } from 'uuid';
   templateUrl: './register-step-two.component.html',
   styleUrls: ['./register-step-two.component.scss'],
 })
-export class RegisterStepTwoComponent implements OnInit {
+export class RegisterStepTwoComponent {
   validatorMessages = validatorMessages;
+  uniqueTimeStamp = '';
   imgSrc = '';
-  uniqueTimestamp!: string;
+  imgId!: number;
 
   form = this.fb.group({
     idcardno: [null, [Validators.required, Validators.pattern(idCardPattern)]],
     idcardbackno: [null, [Validators.required]],
-    personimage: [''],
-    //idcardimage: [],
+    idcardimage: [],
   });
 
   constructor(
     public dialog: MatDialog,
     private router: Router,
     private fb: FormBuilder
-  ) {}
+  ) {
+    this.uniqueTimeStamp = uuidv4();
+  }
 
-  ngOnInit(): void {
-    this.uniqueTimestamp = uuidv4();
+  onUploadComplete(evt: any) {
+    console.log('evt = ', evt);
+    this.imgSrc = evt.file;
+    this.imgId = evt.fileId;
   }
 
   openDialog() {
@@ -40,10 +44,13 @@ export class RegisterStepTwoComponent implements OnInit {
       width: '600px',
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      //console.log(`Dialog result: ${result}`);
+    dialogRef.afterClosed().subscribe(() => {
       localForage.getItem('th-register').then((res: any) => {
-        const data = { ...res, ...this.form.value };
+        const data = {
+          ...res,
+          ...this.form.value,
+          ...{ uniquetimestamp: this.uniqueTimeStamp },
+        };
         localForage.setItem('th-register', data);
       });
     });
@@ -79,9 +86,5 @@ export class RegisterStepTwoComponent implements OnInit {
 
   get idCardNo() {
     return this.form.controls.idcardno;
-  }
-
-  uploadImageComplete(personimage: string) {
-    this.form.patchValue({ personimage });
   }
 }

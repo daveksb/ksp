@@ -56,14 +56,14 @@
               </div>
 
               <div class="row justify-content-center mb-2">
-                <div class="col-md-6 form-label">
-                  รหัสเข้าใช้งาน: XXXXXXXXXXXX
+                <div class="col-md-6 form-label fw-bold">
+                  ชื่อผู้ใช้งาน: {{ idCardNo }}
                 </div>
               </div>
 
               <div class="row justify-content-center">
                 <div class="col-md-6 mb-3">
-                  <label class="form-label">รหัสผ่าน</label>
+                  <label class="form-label required">รหัสผ่าน</label>
                   <input
                     type="password"
                     class="form-control"
@@ -74,15 +74,12 @@
 
               <div class="row justify-content-center">
                 <div class="col-md-6 mb-3">
-                  <label class="form-label">ยืนยันรหัสผ่าน</label>
+                  <label class="form-label required">ยืนยันรหัสผ่าน</label>
                   <input
-                    type="password"
                     formControlName="confirmPassword"
+                    type="password"
                     class="form-control"
                   />
-                  <ng-container *ngIf="confirmPasswordError">
-                    <div class="text-danger">{{ confirmPasswordError }}</div>
-                  </ng-container>
                 </div>
               </div>
 
@@ -90,7 +87,8 @@
                 <button
                   [disabled]="disabledSubmit"
                   (click)="submit()"
-                  type="button"
+                  [disabled]="!passwordEqual"
+                  type="submit"
                   class="btn btn-primary w-100"
                 >
                   ยืนยันรหัส

@@ -68,7 +68,6 @@ export const routes: Routes = [
     MatIconModule,
     SharedFormOthersModule,
     MatTooltipModule,
-    FormUploadImageComponent,
     FileUploadComponent,
   ],
   declarations: [

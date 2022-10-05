@@ -62,7 +62,7 @@ export abstract class LicenseFormBaseComponent {
     this.route.paramMap.subscribe((params) => {
       this.requestId = Number(params.get('id'));
       if (this.requestId) {
-        console.log(this.requestId);
+        //console.log(this.requestId);
         // this.loadRequestFromId(this.requestId);
         this.requestService.getRequestById(this.requestId).subscribe((res) => {
           if (res) {
@@ -71,7 +71,7 @@ export abstract class LicenseFormBaseComponent {
             this.requestNo = res.requestno;
             this.currentProcess = Number(res.currentprocess);
             this.uniqueTimestamp = res.uniquetimestamp || '';
-            console.log(this.uniqueTimestamp);
+            //console.log(this.uniqueTimestamp);
 
             this.patchData(res);
           }
@@ -101,16 +101,13 @@ export abstract class LicenseFormBaseComponent {
   public getMyInfo() {
     this.myInfoService.getMyInfo().subscribe((res) => {
       if (res) {
-        //this.myInfo = res;
-        this.imageId = '199';
         if (res && res.filedata) {
-          console.log(res.filedata);
           this.myImage = atob(res.filedata);
         }
+
         this.patchUserInfo(res);
         this.patchAddress(parseJson(res.addressinfo));
         if (res.schooladdrinfo) {
-          console.log(parseJson(res.schooladdrinfo));
           this.patchWorkplace(parseJson(res.schooladdrinfo));
         }
       }
