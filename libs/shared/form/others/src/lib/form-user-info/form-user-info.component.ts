@@ -78,7 +78,7 @@ export class FormUserInfoComponent
 
     this.form.controls.idcardno.valueChanges
       .pipe(debounceTime(200), distinctUntilChanged())
-      .subscribe((res) => {
+      .subscribe((res: any) => {
         if (res && res.length === 13) {
           this.idCardChange.emit(res);
         }

@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { RegisterCompletedComponent } from '../register-completed/register-completed.component';
@@ -14,14 +19,20 @@ import { validatorMessages } from '@ksp/shared/utility';
   styleUrls: ['./register-step-three.component.scss'],
 })
 export class RegisterStepThreeComponent implements OnInit {
-  form = this.fb.group({
-    password: [null, Validators.required],
-    confirmPassword: [],
-  });
+  form = this.fb.group(
+    {
+      password: [null, [Validators.required, Validators.minLength(6)]],
+      confirmPassword: [null, Validators.required],
+    },
+    {
+      validators: [Validation.match('password', 'confirmPassword')],
+    }
+  );
 
   idCardNo = '';
   payload!: SelfMyInfo;
   passwordEqual = false;
+  validatorMessages = validatorMessages;
 
   constructor(
     public dialog: MatDialog,
@@ -82,10 +93,35 @@ export class RegisterStepThreeComponent implements OnInit {
       return validatorMessages.passwordNotMatching;
     return null;
   }
+
   get disabledSubmit() {
     return (
       !this.form.controls.password.valid ||
       !this.form.controls.confirmPassword.valid
     );
+  }
+
+  get password() {
+    return this.form.controls.password;
+  }
+}
+
+export default class Validation {
+  static match(controlName: string, checkControlName: string): ValidatorFn {
+    return (controls: AbstractControl) => {
+      const control = controls.get(controlName);
+      const checkControl = controls.get(checkControlName);
+
+      if (checkControl?.errors && !checkControl.errors['matching']) {
+        return null;
+      }
+
+      if (control?.value !== checkControl?.value) {
+        controls.get(checkControlName)?.setErrors({ matching: true });
+        return { matching: true };
+      } else {
+        return null;
+      }
+    };
   }
 }

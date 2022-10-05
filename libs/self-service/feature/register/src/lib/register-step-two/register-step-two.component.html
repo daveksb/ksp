@@ -89,17 +89,29 @@
               <div class="row justify-content-center">
                 <div class="col-md-6 mb-3">
                   <label class="form-label">เลขที่หลังบัตรประชาชน </label>
-
                   <i
                     class="bi bi-question-circle fs-6 ms-1"
                     (click)="tooltip1()"
                   ></i>
-
                   <input
                     type="text"
                     class="form-control"
                     formControlName="idcardbackno"
+                    maxlength="12"
                   />
+                  <ng-container
+                    *ngIf="
+                      idCardBack.invalid &&
+                      (idCardBack.dirty || idCardBack.touched)
+                    "
+                  >
+                    <span
+                      class="text-danger"
+                      *ngIf="idCardBack.errors?.['pattern']"
+                    >
+                      {{ validatorMessages.idCardBack }}
+                    </span>
+                  </ng-container>
                 </div>
               </div>
 

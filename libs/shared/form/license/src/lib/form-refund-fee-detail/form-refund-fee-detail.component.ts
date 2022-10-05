@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { providerFactory } from '@ksp/shared/utility';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import {
+  phonePattern,
+  providerFactory,
+  validatorMessages,
+} from '@ksp/shared/utility';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 
 @Component({
@@ -13,6 +17,8 @@ import { KspFormBaseComponent } from '@ksp/shared/interface';
   providers: providerFactory(FormRefundFeeDetailComponent),
 })
 export class FormRefundFeeDetailComponent extends KspFormBaseComponent {
+  validatorMessages = validatorMessages;
+
   override form = this.fb.group({
     licensetype: [],
     eduoccupytype: [],
@@ -22,9 +28,9 @@ export class FormRefundFeeDetailComponent extends KspFormBaseComponent {
     receiptNo: [{ value: null, disabled: true }],
     total: [{ value: null, disabled: true }],
     smsAlert: [],
-    smsDetail: [],
+    smsDetail: [null, Validators.pattern(phonePattern)],
     emailAlert: [],
-    emailDetail: [],
+    emailDetail: [null, Validators.email],
     bankName: [],
     bankAccount: [],
   });
@@ -40,5 +46,11 @@ export class FormRefundFeeDetailComponent extends KspFormBaseComponent {
     );
   }
 
-  //ngOnInit(): void {}
+  get smsPhone() {
+    return this.form.controls.smsDetail;
+  }
+
+  get email() {
+    return this.form.controls.emailDetail;
+  }
 }
