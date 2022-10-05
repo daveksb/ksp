@@ -55,12 +55,12 @@
     ></ksp-renew-license-property-six>
   </ng-container>
 
-  <ng-container *ngIf="selectedstandardKnowledgeType >= 0"
-    ><br />
-    <ksp-form-attachment
-      [groups]="workingInfo"
-      [uniqueTimestamp]="uniqueTimestamp"
-      [mode]="'edit'"
-    ></ksp-form-attachment
+  <ng-container *ngIf="selectedstandardKnowledgeType >= 0">
+    <div class="mt-3">
+      <ksp-form-attachment
+        [groups]="workingInfo"
+        [uniqueTimestamp]="uniqueTimestamp"
+        [mode]="'edit'"
+      ></ksp-form-attachment></div
   ></ng-container>
 </form>

@@ -42,6 +42,7 @@
           <mat-tab label="ที่อยู่" class="tab-content">
             <ksp-form-address
               formControlName="addr1"
+              [isDarkMode]="false"
               [mode]="mode"
               [provinces]="provinces1$ | async"
               [amphurs]="amphurs1$ | async"

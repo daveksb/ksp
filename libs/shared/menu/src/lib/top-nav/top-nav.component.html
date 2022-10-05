@@ -20,7 +20,7 @@
         <ng-content select="[detail]"></ng-content>
       </span>
     </div>
-    <div (click)="logout()" class="user__info" *ngIf="isSelfService === false">
+    <div (click)="logout()" class="user__info" *ngIf="!isSelfService">
       <div class="d-flex flex-column align-items-end">
         <div class="user__name">{{ firstName }} {{ lastName }}</div>
         <div class="login__time">เข้าใช้งานเมื่อวันที่ {{ today }}</div>

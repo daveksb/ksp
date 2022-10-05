@@ -147,10 +147,6 @@ nav .m-menu__checkbox:checked ~ .m-menu {
   color: #0056ff !important;
 }
 
-.icon__sidenav {
-  margin-right: 12px;
-}
-
 .label__status--1 {
   font-size: 16px;
   color: #e87a02;
@@ -159,12 +155,6 @@ nav .m-menu__checkbox:checked ~ .m-menu {
 .label__status--2 {
   font-size: 12px;
   color: #e87a02;
-}
-
-.icon__sidenav {
-  margin-right: 4px;
-  height: 20px;
-  width: 15px;
 }
 
 @media (min-width: 576px) {

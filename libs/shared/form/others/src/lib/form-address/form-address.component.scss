@@ -1,13 +1,5 @@
-.form-select {
+.form-select-sp {
   background-image: url(/assets/images/arrow-down-icon.png);
   background-size: 12px;
   background-color: #edf8ff;
-}
-
-@media only screen and (max-width: 768px) {
-  .content__container {
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-  }
 }
