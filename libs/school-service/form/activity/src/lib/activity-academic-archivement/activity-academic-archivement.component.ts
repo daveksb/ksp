@@ -1,8 +1,27 @@
-import { Component, Input, OnDestroy } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { pairwise } from 'rxjs';
 
+function checkboxValidator(): any {
+  return (form: FormGroup) => {
+    const isAcademicChecked: boolean = form.get('isAcademicChecked')?.value;
+
+    const isPendingAcademicChecked: boolean = form.get(
+      'isPendingAcademicChecked'
+    )?.value;
+
+    if (!isAcademicChecked && !isPendingAcademicChecked) {
+      return { checkbox: true };
+    }
+
+    return null;
+  };
+}
+
+@UntilDestroy()
 @Component({
   selector: 'ksp-activity-academic-archivement',
   templateUrl: './activity-academic-archivement.component.html',
@@ -11,7 +30,7 @@ import { providerFactory } from '@ksp/shared/utility';
 })
 export class ActivityAcademicArchivementComponent
   extends KspFormBaseComponent
-  implements OnDestroy
+  implements OnInit, OnDestroy
 {
   @Input() data: any;
   @Input() isForeignForm = false;
@@ -36,6 +55,50 @@ export class ActivityAcademicArchivementComponent
         this.onTouched();
       })
     );
+  }
+
+  ngOnInit() {
+    this.form.setValidators(checkboxValidator());
+    this.form.valueChanges
+      .pipe(untilDestroyed(this), pairwise())
+      .subscribe(([prev, next]) => {
+        if (prev.isAcademicChecked !== next.isAcademicChecked) {
+          if (next.isAcademicChecked) {
+            this.form.controls.oldAcademic.addValidators(Validators.required);
+            this.form.controls.newAcademic.addValidators(Validators.required);
+            this.form.controls.orderName.addValidators(Validators.required);
+            this.form.controls.orderNumber.addValidators(Validators.required);
+            this.form.controls.orderDate.addValidators(Validators.required);
+          } else {
+            this.form.controls.oldAcademic.clearValidators();
+            this.form.controls.newAcademic.clearValidators();
+            this.form.controls.orderName.clearValidators();
+            this.form.controls.orderNumber.clearValidators();
+            this.form.controls.orderDate.clearValidators();
+          }
+          this.form.controls.oldAcademic.updateValueAndValidity();
+          this.form.controls.newAcademic.updateValueAndValidity();
+          this.form.controls.orderName.updateValueAndValidity();
+          this.form.controls.orderNumber.updateValueAndValidity();
+          this.form.controls.orderDate.updateValueAndValidity();
+        }
+
+        if (prev.isPendingAcademicChecked !== next.isPendingAcademicChecked) {
+          if (next.isPendingAcademicChecked) {
+            this.form.controls['oldPendingAcademic'].addValidators(
+              Validators.required
+            );
+            this.form.controls['newPendingAcademic'].addValidators(
+              Validators.required
+            );
+          } else {
+            this.form.controls['oldPendingAcademic'].clearValidators();
+            this.form.controls['newPendingAcademic'].clearValidators();
+          }
+          this.form.controls['oldPendingAcademic'].updateValueAndValidity();
+          this.form.controls['newPendingAcademic'].updateValueAndValidity();
+        }
+      });
   }
 
   override ngOnDestroy(): void {
