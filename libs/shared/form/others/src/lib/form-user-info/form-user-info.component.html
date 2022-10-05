@@ -29,11 +29,7 @@
 
     <div class="col mb-2" *ngIf="isqualification">
       <label class="form-label">ประเภทการยื่น</label>
-      <select
-        formControlName="requestfor"
-        class="form-select"
-        [class.bg-white]="!isDarkMode && mode === 'edit'"
-      >
+      <select formControlName="requestfor" class="form-select">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">ชาวไทย</option>
         <option value="2">ชาวต่างชาติ</option>
@@ -60,7 +56,7 @@
       <input
         class="form-control"
         type="date"
-        [class.bg-light]="isDarkMode"
+        [class.form-control-sp]="isDarkMode"
         formControlName="passportstartdate"
       />
     </div>
@@ -70,7 +66,7 @@
       <input
         class="form-control"
         type="date"
-        [class.bg-light]="isDarkMode"
+        [class.form-control-sp]="isDarkMode"
         formControlName="passportenddate"
       />
     </div>
@@ -82,8 +78,7 @@
         >คำนำหน้าชื่อไทย</label
       >
       <select
-        [class.bg-white]="!isDarkMode && mode === 'edit'"
-        [class.form-select-sp]="isSelfService"
+        [class.form-select-sp]="isDarkMode"
         class="form-select"
         formControlName="prefixth"
         (change)="prefixChanged($event)"
@@ -99,7 +94,7 @@
         >ชื่อภาษาไทย</label
       >
       <input
-        [class.bg-light]="isDarkMode"
+        [class.form-control-sp]="isDarkMode"
         class="form-control"
         type="text"
         placeholder="กรุณากรอกชื่อภาษาไทย"
@@ -119,7 +114,7 @@
     <div class="col-md mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
       <label class="form-label">ชื่อกลาง</label>
       <input
-        [class.bg-light]="isDarkMode"
+        [class.form-control-sp]="isDarkMode"
         class="form-control"
         type="text"
         placeholder="กรุณากรอกชื่อภาษาไทย"
@@ -132,7 +127,7 @@
         >นามสกุลภาษาไทย</label
       >
       <input
-        [class.bg-light]="isDarkMode"
+        [class.form-control-sp]="isDarkMode"
         class="form-control"
         type="text"
         placeholder="กรุณากรอกนามสกุลภาษาไทย"
@@ -152,8 +147,7 @@
     <div class="col-md-3 mb-2">
       <label class="form-label required">คำนำหน้าชื่ออังกฤษ</label>
       <select
-        [class.bg-white]="!isDarkMode && mode === 'edit'"
-        [class.form-select-sp]="isSelfService"
+        [class.form-select-sp]="isDarkMode"
         class="form-select"
         formControlName="prefixen"
         (change)="prefixChanged($event)"
@@ -169,7 +163,7 @@
       <input
         class="form-control"
         type="text"
-        [class.bg-light]="isDarkMode"
+        [class.form-control-sp]="isDarkMode"
         placeholder="กรุณากรอกชื่อภาษาอังกฤษ"
         formControlName="firstnameen"
       />
@@ -186,7 +180,7 @@
     <div class="col-md mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
       <label class="form-label">ชื่อกลาง</label>
       <input
-        [class.bg-light]="isDarkMode"
+        [class.form-control-sp]="isDarkMode"
         class="form-control"
         type="text"
         placeholder="กรุณากรอกชื่อกลางภาษาอังกฤษ"
@@ -198,7 +192,7 @@
       <input
         class="form-control"
         type="text"
-        [class.bg-light]="isDarkMode"
+        [class.form-control-sp]="isDarkMode"
         placeholder="กรุณากรอกนามสกุลภาษาอังกฤษ"
         formControlName="lastnameen"
       />
@@ -216,8 +210,7 @@
     <div class="col-md mb-2" *ngIf="displayMode.includes(FormTypeEnum.thai)">
       <label class="form-label required">เพศ</label>
       <select
-        [class.bg-white]="!isDarkMode && mode === 'edit'"
-        [class.form-select-sp]="isSelfService"
+        [class.form-select-sp]="isDarkMode"
         class="form-select"
         formControlName="sex"
       >
@@ -232,7 +225,7 @@
       <input
         class="form-control"
         type="date"
-        [class.bg-light]="isDarkMode"
+        [class.form-control-sp]="isDarkMode"
         formControlName="birthdate"
         [max]="today"
       />
@@ -240,11 +233,7 @@
 
     <div class="col mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
       <label class="form-label required">ประเทศ</label>
-      <select
-        [class.bg-white]="!isDarkMode && mode === 'edit'"
-        class="form-select"
-        formControlName="country"
-      >
+      <select class="form-select" formControlName="country">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let c of countryList" [value]="c.countryNo">
           {{ c?.countryN }}
@@ -254,11 +243,7 @@
 
     <div class="col mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
       <label class="form-label">สัญชาติ</label>
-      <select
-        [class.bg-white]="!isDarkMode && mode === 'edit'"
-        class="form-select"
-        formControlName="nationality"
-      >
+      <select class="form-select" formControlName="nationality">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let n of nationList" [value]="n.nationId">
           {{ n.nationName }}
@@ -273,7 +258,7 @@
       <input
         class="form-control"
         type="tel"
-        [class.bg-light]="isDarkMode"
+        [class.form-control-sp]="isDarkMode"
         formControlName="contactphone"
       />
       <ng-container
@@ -291,7 +276,7 @@
       <input
         class="form-control"
         type="tel"
-        [class.bg-light]="isDarkMode"
+        [class.form-control-sp]="isDarkMode"
         formControlName="workphone"
       />
       <ng-container
@@ -310,7 +295,7 @@
       <input
         class="form-control"
         type="email"
-        [class.bg-light]="isDarkMode"
+        [class.form-control-sp]="isDarkMode"
         formControlName="email"
       />
       <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
@@ -325,7 +310,7 @@
         class="form-control"
         type="text"
         formControlName="position"
-        [class.bg-light]="isDarkMode"
+        [class.form-control-sp]="isDarkMode"
       />
     </div>
   </div>
@@ -333,11 +318,7 @@
   <div class="row" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
     <div class="col mb-2">
       <label class="form-label">Visa Class </label>
-      <select
-        class="form-select"
-        [class.bg-white]="!isDarkMode && mode === 'edit'"
-        formControlName="visaclass"
-      >
+      <select class="form-select" formControlName="visaclass">
         <option value="null" hidden selected disabled>กรุณาเลือก</option>
         <option *ngFor="let v of visaClassList" [value]="v.id">
           {{ v.name }}
@@ -347,11 +328,7 @@
 
     <div class="col mb-2">
       <label class="form-label">ประเภทวีซ่า </label>
-      <select
-        class="form-select"
-        [class.bg-white]="!isDarkMode && mode === 'edit'"
-        formControlName="visatype"
-      >
+      <select class="form-select" formControlName="visatype">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let v of visaTypeList" [value]="v.id">
           {{ v.nameTh }}
@@ -368,11 +345,7 @@
   <div class="row" *ngIf="isqualification">
     <div class="col-6 mb-2">
       <label class="form-label required">สัญชาติ</label>
-      <select
-        [class.bg-white]="!isDarkMode && mode === 'edit'"
-        class="form-select"
-        formControlName="nationality"
-      >
+      <select class="form-select" formControlName="nationality">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option
           *ngFor="let nationality of nationList"

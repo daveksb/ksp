@@ -9,7 +9,7 @@
       <div class="col-md-6 mb-2">
         <label class="form-label">อาคาร/สถานที่</label>
         <input
-          [class.bg-light]="isDarkMode"
+          [class.form-control-sp]="isDarkMode"
           class="form-control"
           type="text"
           formControlName="location"
@@ -18,7 +18,7 @@
       <div class="col-md-6 mb-2">
         <label class="form-label required">บ้านเลขที่ </label>
         <input
-          [class.bg-light]="isDarkMode"
+          [class.form-control-sp]="isDarkMode"
           class="form-control"
           type="text"
           formControlName="houseNo"
@@ -30,7 +30,7 @@
       <div class="col-md-6 mb-2">
         <label class="form-label">หมู่ที่</label>
         <input
-          [class.bg-light]="isDarkMode"
+          [class.form-control-sp]="isDarkMode"
           class="form-control"
           type="text"
           formControlName="moo"
@@ -39,7 +39,7 @@
       <div class="col-md-6 mb-2">
         <label class="form-label">ซอย</label>
         <input
-          [class.bg-light]="isDarkMode"
+          [class.form-control-sp]="isDarkMode"
           class="form-control"
           type="text"
           formControlName="alley"
@@ -51,7 +51,7 @@
       <div class="col-md-6 mb-2">
         <label class="form-label required">ถนน</label>
         <input
-          [class.bg-light]="isDarkMode"
+          [class.form-control-sp]="isDarkMode"
           class="form-control"
           type="text"
           formControlName="road"
@@ -60,7 +60,7 @@
       <div class="col-md-6 mb-2">
         <label class="form-label required">รหัสไปรษณีย์</label>
         <input
-          [class.bg-light]="isDarkMode"
+          [class.form-control-sp]="isDarkMode"
           class="form-control"
           type="text"
           formControlName="postcode"
@@ -72,8 +72,7 @@
       <div class="col-md-6 mb-2">
         <label class="form-label required">จังหวัด</label>
         <select
-          [class.bg-white]="!isDarkMode && mode === 'edit'"
-          [class.form-select-sp]="isSelfService"
+          [class.form-select-sp]="isDarkMode"
           class="form-select"
           formControlName="province"
           (change)="provinceChanged.emit($event)"
@@ -90,8 +89,7 @@
       <div class="col-md-6 mb-2">
         <label class="form-label required">อำเภอ</label>
         <select
-          [class.bg-white]="!isDarkMode && mode === 'edit'"
-          [class.form-select-sp]="isSelfService"
+          [class.form-select-sp]="isDarkMode"
           class="form-select"
           formControlName="amphur"
           (change)="amphurChanged.emit($event)"
@@ -108,8 +106,7 @@
       <div class="col-md-6 mb-2">
         <label class="form-label required">ตำบล</label>
         <select
-          [class.bg-white]="!isDarkMode && mode === 'edit'"
-          [class.form-select-sp]="isSelfService"
+          [class.form-select-sp]="isDarkMode"
           class="form-select"
           formControlName="tumbol"
           (change)="updatePostcode($event)"
