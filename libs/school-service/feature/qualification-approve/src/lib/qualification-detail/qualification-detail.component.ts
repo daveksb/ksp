@@ -148,7 +148,6 @@ export class QualificationDetailComponent implements OnInit {
 
   checkRequestSubType() {
     this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
-      //this.form.reset();
       if (Number(params['subtype'])) {
         this.requestSubType = Number(params['subtype']);
       }
