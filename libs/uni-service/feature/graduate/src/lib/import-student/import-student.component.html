@@ -320,7 +320,7 @@
                 pInputText
                 type="date"
                 formControlName="admissiondate"
-                [attr.disabled]="pageType === 'graduateList'"
+                [readonly]="pageType === 'graduateList'"
               />
               </td>
               <td class="p-2 text-nowrap">
@@ -333,7 +333,7 @@
                   formControlName="idcardno"
                   (blur)="searchByIdcard({idcardno: idcard.value, passportno: control.passportno}, control.index)"
                   (keyup.enter)="idcard.blur();"
-                  [attr.disabled]="pageType === 'graduateList'"
+                  [readonly]="pageType === 'graduateList'"
                 />
               </td>
               <td class="p-2 text-nowrap">
@@ -346,7 +346,7 @@
                   formControlName="passportno"
                   (blur)="searchByIdcard({idcardno: control.idcardno, passportno: passport.value}, control.index)"
                   (keyup.enter)="passport.blur();"
-                  [attr.disabled]="pageType === 'graduateList'"
+                  [readonly]="pageType === 'graduateList'"
                 />
               </td>
 
@@ -372,7 +372,7 @@
                 <select
                   class="form-select"
                   style="width: 100px"
-                  [attr.disabled]="pageType === 'graduateList'"
+                  [attr.disabled]="pageType === 'graduateList' ? '':null"
                   formControlName="prefixth"
                 >
                   <option value="null" selected hidden disabled>กรุณาเลือก</option>
@@ -392,7 +392,7 @@
                   pInputText
                   type="text"
                   formControlName="firstnameth"
-                  [attr.disabled]="pageType === 'graduateList'"
+                  [readonly]="pageType === 'graduateList'"
                 />
               </td>
               <td class="p-2 text-nowrap">
@@ -402,14 +402,14 @@
                   pInputText
                   type="text"
                   formControlName="lastnameth"
-                  [attr.disabled]="pageType === 'graduateList'"
+                  [readonly]="pageType === 'graduateList'"
                 />
               </td>
               <td class="p-2 text-nowrap">
                 <select
                   class="form-select"
                   style="width: 100px"
-                  [attr.disabled]="pageType === 'graduateList'"
+                  [attr.disabled]="pageType === 'graduateList' ? '':null"
                   formControlName="prefixen"
                 >
                   <option value="null" selected hidden disabled>กรุณาเลือก</option>
@@ -429,7 +429,7 @@
                   pInputText
                   type="text"
                   formControlName="firstnameen"
-                  [attr.disabled]="pageType === 'graduateList'"
+                  [readonly]="pageType === 'graduateList'"
                 />
               </td>
 
@@ -440,7 +440,7 @@
                   pInputText
                   type="text"
                   formControlName="middlenameen"
-                  [attr.disabled]="pageType === 'graduateList'"
+                  [readonly]="pageType === 'graduateList'"
                 />
               </td>
 
@@ -451,7 +451,7 @@
                   pInputText
                   type="text"
                   formControlName="lastnameen"
-                  [attr.disabled]="pageType === 'graduateList'"
+                  [readonly]="pageType === 'graduateList'"
                 />
               </td>
 
@@ -462,7 +462,7 @@
                   pInputText
                   type="text"
                   formControlName="phone"
-                  [attr.disabled]="pageType === 'graduateList'"
+                  [readonly]="pageType === 'graduateList'"
                 />
               </td>
               <td class="p-2 text-nowrap">
@@ -472,7 +472,7 @@
                   pInputText
                   type="date"
                   formControlName="birthdate"
-                  [attr.disabled]="pageType === 'graduateList'"
+                  [readonly]="pageType === 'graduateList'"
                 />
               </td>
 

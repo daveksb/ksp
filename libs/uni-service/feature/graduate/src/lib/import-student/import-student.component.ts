@@ -33,7 +33,7 @@ export class ImportStudentComponent implements OnInit {
   EngPrefixes: Array<any> = [];
   nationality: Array<any> = [];
   isGraduated = false;
-  pageType!: string;
+  pageType = 'studentList';
   importType = UniserviceImportType;
   foundUser = false;
   courseData: any;
@@ -76,6 +76,10 @@ export class ImportStudentComponent implements OnInit {
         this.users = res;
       }
     })
+    this.route.paramMap.subscribe((res) => {
+      console.log(res.get('type'))
+      this.pageType = res.get('type') || 'studentList';
+    });
     const userId = Number(getCookie('userId'));
     localForage.getItem('courseData').then((res:any) => {
       if (res) {
@@ -112,9 +116,6 @@ export class ImportStudentComponent implements OnInit {
     });
     this.getNationality();
     this.getPrefix();
-    this.route.paramMap.subscribe((res) => {
-      this.pageType = res.get('type') || 'studentList';
-    });
   }
 
   getAdmissionList() {
