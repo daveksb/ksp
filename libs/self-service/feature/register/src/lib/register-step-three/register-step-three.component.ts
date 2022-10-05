@@ -53,6 +53,7 @@ export class RegisterStepThreeComponent implements OnInit {
     this.payload = {
       ...this.payload,
       ...{ password: this.form.controls.password.value },
+      ...{ addressinfo: JSON.stringify([this.payload.addressinfo]) },
     };
 
     this.myInfoService.insertMyInfo(this.payload).subscribe((res) => {
