@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { SchoolRequestType, UserInfoFormType } from '@ksp/shared/constant';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
@@ -7,6 +7,7 @@ import {
   providerFactory,
   validatorMessages,
 } from '@ksp/shared/utility';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'ksp-form-user-info',
@@ -18,7 +19,6 @@ export class FormUserInfoComponent
   extends KspFormBaseComponent
   implements OnInit
 {
-
   @Input() prefixList: any[] = [];
   @Input() countryList: any[] = [];
   @Input() nationList: any[] = [];
@@ -29,6 +29,7 @@ export class FormUserInfoComponent
   @Input() isDarkMode = false;
   @Input() isSchoolService = true;
   @Input() isAddStaff = false;
+  @Output() idCardChange = new EventEmitter<any>();
 
   RequestTypeEnum = SchoolRequestType;
   validatorMessages = validatorMessages;
@@ -73,6 +74,14 @@ export class FormUserInfoComponent
       this.form.controls.sex.clearValidators();
       this.form.controls.email.clearValidators();
     }
+
+    this.form.controls.idcardno.valueChanges
+      .pipe(debounceTime(200), distinctUntilChanged())
+      .subscribe((res) => {
+        if (res && res.length === 13) {
+          this.idCardChange.emit(res);
+        }
+      });
   }
 
   prefixChanged(evt: any) {
