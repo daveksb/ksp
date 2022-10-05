@@ -108,7 +108,6 @@ export abstract class LicenseFormBaseComponent {
         this.patchUserInfo(res);
         this.patchAddress(parseJson(res.addressinfo));
         if (res.schooladdrinfo) {
-          //console.log(parseJson(res.schooladdrinfo));
           this.patchWorkplace(parseJson(res.schooladdrinfo));
         }
       }

@@ -44,12 +44,11 @@ export class RegisterStepTwoComponent {
       width: '600px',
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(() => {
       localForage.getItem('th-register').then((res: any) => {
         const data = {
           ...res,
           ...this.form.value,
-          //...{ idcardimage: this.imgId },
           ...{ uniquetimestamp: this.uniqueTimeStamp },
         };
         localForage.setItem('th-register', data);
