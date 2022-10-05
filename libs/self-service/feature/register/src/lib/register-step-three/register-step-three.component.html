@@ -63,7 +63,7 @@
 
               <div class="row justify-content-center">
                 <div class="col-md-6 mb-3">
-                  <label class="form-label">รหัสผ่าน</label>
+                  <label class="form-label required">รหัสผ่าน</label>
                   <input
                     type="password"
                     class="form-control"
@@ -74,14 +74,19 @@
 
               <div class="row justify-content-center">
                 <div class="col-md-6 mb-3">
-                  <label class="form-label">ยืนยันรหัสผ่าน</label>
-                  <input type="password" class="form-control" />
+                  <label class="form-label required">ยืนยันรหัสผ่าน</label>
+                  <input
+                    formControlName="confirmPassword"
+                    type="password"
+                    class="form-control"
+                  />
                 </div>
               </div>
 
               <div class="d-grid gap-2 col-6 mx-auto mt-3">
                 <button
                   (click)="submit()"
+                  [disabled]="!passwordEqual"
                   type="submit"
                   class="btn btn-primary w-100"
                 >
