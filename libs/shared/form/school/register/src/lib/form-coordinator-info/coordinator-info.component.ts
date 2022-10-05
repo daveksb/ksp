@@ -48,7 +48,6 @@ export class FormCoordinatorInfoComponent
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value: any) => {
         this.onChange(value);
         this.onTouched();
@@ -59,7 +58,7 @@ export class FormCoordinatorInfoComponent
     // ถ้าเป็น form คนไทยไม่ต้อง validate field เหล่านี้
     //console.log('display mode = ', this.displayMode);
     this.form.controls.sex.clearValidators();
-    this.form.controls.idcardno.clearValidators();
+    //this.form.controls.idcardno.clearValidators();
     this.form.controls.birthdate.clearValidators();
     if (this.displayMode.includes(UserInfoFormType.thai)) {
       this.form.controls.passportno.clearValidators();
