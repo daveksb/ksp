@@ -101,12 +101,10 @@ export abstract class LicenseFormBaseComponent {
   public getMyInfo() {
     this.myInfoService.getMyInfo().subscribe((res) => {
       if (res) {
-        //this.myInfo = res;
-        this.imageId = '199';
         if (res && res.filedata) {
-          //console.log(res.filedata);
           this.myImage = atob(res.filedata);
         }
+
         this.patchUserInfo(res);
         this.patchAddress(parseJson(res.addressinfo));
         if (res.schooladdrinfo) {
