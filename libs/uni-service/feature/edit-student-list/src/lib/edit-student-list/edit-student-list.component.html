@@ -79,7 +79,7 @@
           >
             ล้างข้อมูล
           </button>
-          <button class="btn btn-primary ms-2" type="button" (click)="search()">
+          <button class="btn btn-primary ms-2" type="button" (click)="searchdata()">
             ค้นหา
           </button>
         </div>
@@ -203,5 +203,8 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
+    <mat-paginator [length]="pageEvent.length" [pageSize]="pageEvent.pageSize" [pageSizeOptions]="pageSizeOptions"
+      (page)="onPaginatorEvent($event)" [pageIndex]="pageEvent.pageIndex">
+    </mat-paginator>
   </div>
 </div>

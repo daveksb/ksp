@@ -10,6 +10,7 @@ import { EditLicenseComponent } from '@ksp/shared/form/license';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const routes: Routes = [
   {
@@ -43,6 +44,7 @@ const routes: Routes = [
     RequestHeaderInfoComponent,
     BottomNavComponent,
     ReactiveFormsModule,
+    MatPaginatorModule,
     RouterModule.forChild(routes),
   ],
   declarations: [EditStudentListComponent, EditStudentDetailComponent],
