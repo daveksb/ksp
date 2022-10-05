@@ -3,17 +3,3 @@
   background-image: url(/assets/images/arrow-down-icon.png);
   background-size: 12px;
 }
-
-.content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 16px;
-}
-
-@media only screen and (max-width: 768px) {
-  .content__container,
-  .content {
-    display: flex;
-    flex-direction: column;
-  }
-}
