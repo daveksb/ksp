@@ -93,7 +93,7 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
   }
 
   getDegreeCertList() {
-    this.uniRequestService.searchUniDegreeCert(this.getRequest())
+    this.uniRequestService.searchUniDegreeCert2(this.getRequest())
     .subscribe((res) => {
       if (!res?.datareturn) {
         this.dataSource.data = [];
@@ -102,6 +102,10 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
       this.pageEvent.length = res.countrow;
       this.dataSource.data = res?.datareturn.map(
         (item: any, index: number) => {
+          const admissionstatus = res.datareturnadmission.filter((data: any) => {
+            return data.unidegreecertid == item.id}).slice(-1).pop() || {};
+          const graduatestatus = res.datareturngraduation.filter((data: any) => {
+            return data.unidegreecertid == item.id}).slice(-1).pop() || {};
           return {
               id: item?.id,
               key: item?.id,
@@ -116,6 +120,12 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
               editDate: item?.updatedate ? stringToThaiDate(item?.updatedate) : '',
               verify: 'แก้ไข',
               consider: 'แก้ไข',
+              admissionstatus: admissionstatus.status == '1' ? 'สร้าง' :
+                               admissionstatus.status == '2' ? 'ยื่นเรียบร้อย' :
+                               admissionstatus.status == '3' ? 'รับข้อมูล' : '',
+              graduatestatus: graduatestatus.status == '1' ? 'สร้าง' :
+                              graduatestatus.status == '2' ? 'ยื่นเรียบร้อย' :
+                              graduatestatus.status == '3' ? 'รับข้อมูล' : '',
           };
         }
       );
@@ -136,9 +146,7 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
       unidegreecertid: row.id
     };
     this.uniInfoService.uniDegreeHistory(payload).subscribe((response => {
-      if (response.datareturn) {
-        this.opendialogHistory(response.datareturn);
-      }
+      this.opendialogHistory(response.datareturn);
     }));
   }
 
@@ -154,12 +162,10 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
       unidegreecertid: data.id
     };
     this.uniInfoService.uniDegreeHistory(payload).subscribe((response => {
-      if (response.datareturn) {
-        this.dialog.open(PrintRequestDialogComponent, {
-          width: '600px',
-          data: response.datareturn
-        });
-      }
+      this.dialog.open(PrintRequestDialogComponent, {
+        width: '600px',
+        data: response.datareturn
+      });
     }));
   }
 
