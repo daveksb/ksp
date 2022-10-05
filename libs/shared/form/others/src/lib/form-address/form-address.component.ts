@@ -10,6 +10,7 @@ import { providerFactory } from '@ksp/shared/utility';
   providers: providerFactory(FormAddressComponent),
 })
 export class FormAddressComponent extends KspFormBaseComponent {
+  @Input() isSelfService = false;
   @Input() isDarkMode = false;
   @Input() provinces: any[] = [];
   @Input() amphurs: any[] = [];

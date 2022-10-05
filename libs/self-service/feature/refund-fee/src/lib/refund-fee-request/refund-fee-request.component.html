@@ -1,28 +1,44 @@
-<ksp-top-nav [isSelfService]="true"><span header>ขอคืนเงินค่าธรรมเนียม</span></ksp-top-nav>
+<ksp-top-nav [isSelfService]="true"
+  ><span header>ขอคืนเงินค่าธรรมเนียม</span></ksp-top-nav
+>
 
 <div [formGroup]="form" class="main__container px-4 py-2">
   <self-service-request-status
     [requestDate]="today"
-    [idcardNo]="userInfo && userInfo.idcardno"></self-service-request-status>
+    [idcardNo]="userInfo && userInfo.idcardno"
+  ></self-service-request-status>
   <br />
   <div class="border shadow-sm rounded-4 px-3 py-4 bg-white">
     <ksp-form-user-info
       [displayMode]="[userInfoType]"
-      [isSchoolService]="false"
+      [isSelfService]="true"
       [prefixList]="prefixList$ | async"
-      formControlName="userInfo"></ksp-form-user-info>
+      formControlName="userInfo"
+    ></ksp-form-user-info>
   </div>
   <br />
   <div class="border shadow-sm rounded-4 px-3 py-4 bg-white">
     <ksp-form-refund-fee-detail
-      formControlName="refundInfo"></ksp-form-refund-fee-detail>
+      formControlName="refundInfo"
+    ></ksp-form-refund-fee-detail>
   </div>
   <br />
-  <ksp-form-attachment [groups]="files" [mode]="'edit'" [uniqueTimestamp]="uniqueTimestamp"></ksp-form-attachment>
+  <ksp-form-attachment
+    [groups]="files"
+    [mode]="'edit'"
+    [uniqueTimestamp]="uniqueTimestamp"
+  ></ksp-form-attachment>
 
   <div class="d-flex justify-content-center my-3">
-    <button type="button" class="btn btn-secondary" (click)="resetForm()">ล้างข้อมูล</button>
-    <button type="button" *ngIf="requestId" (click)="cancel()" class="ms-3 btn border-primary text-primary">
+    <button type="button" class="btn btn-secondary" (click)="resetForm()">
+      ล้างข้อมูล
+    </button>
+    <button
+      type="button"
+      *ngIf="requestId"
+      (click)="cancel()"
+      class="ms-3 btn border-primary text-primary"
+    >
       ยกเลิกใบคำขอ
     </button>
     <button type="button" (click)="submit()" class="ms-3 btn btn-primary">

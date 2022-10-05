@@ -3,35 +3,41 @@
   [formGroup]="form"
   class="tab-group"
   animationDuration="0ms"
-  [selectedIndex]="0">
+  [selectedIndex]="0"
+>
   <mat-tab label="ข้อมูลส่วนตัว">
     <ksp-form-user-info
       [displayMode]="[userInfoType]"
-      [isSchoolService]="false"
+      [isSelfService]="true"
       [prefixList]="prefixList"
-      formControlName="userInfo"></ksp-form-user-info>
+      formControlName="userInfo"
+    ></ksp-form-user-info>
   </mat-tab>
 
   <mat-tab label="ที่อยู่" class="tab-content">
     <ksp-form-address
+      [isSelfService]="true"
       formControlName="address1"
       [isDarkMode]="true"
       [provinces]="provinces1$ | async"
       [amphurs]="amphurs1$ | async"
       [tumbols]="tumbols1$ | async"
       (provinceChanged)="provinceChanged(1, $event)"
-      (amphurChanged)="amphurChanged(1, $event)">
+      (amphurChanged)="amphurChanged(1, $event)"
+    >
       <span class="text-primary">ที่อยู่ทะเบียนบ้าน</span>
     </ksp-form-address>
     <hr />
     <ksp-form-address
+      [isSelfService]="true"
       formControlName="address2"
       [isDarkMode]="true"
       [provinces]="provinces2$ | async"
       [amphurs]="amphurs2$ | async"
       [tumbols]="tumbols2$ | async"
       (provinceChanged)="provinceChanged(2, $event)"
-      (amphurChanged)="amphurChanged(2, $event)">
+      (amphurChanged)="amphurChanged(2, $event)"
+    >
       <span class="text-primary">ที่อยู่ที่ติดต่อได้สะดวก</span>
       <div class="d-flex align-items-center">
         <input type="checkbox" class="me-2" (change)="useSameAddress($event)" />
@@ -54,14 +60,16 @@
 
   <mat-tab label="รายงานผลสำเร็จจากการปฏิบัติงาน">
     <ksp-council-success
-      formControlName="rewardSuccessInfo"></ksp-council-success>
+      formControlName="rewardSuccessInfo"
+    ></ksp-council-success>
   </mat-tab>
 
   <mat-tab label="ข้อมูลรางวัลและหลักฐานประกอบ">
     <ksp-council-evidence
       formControlName="rewardDetailInfo"
       [rewardFiles]="rewardFiles"
-      [uniqueTimestamp]="uniqueTimestamp"></ksp-council-evidence>
+      [uniqueTimestamp]="uniqueTimestamp"
+    ></ksp-council-evidence>
   </mat-tab>
 </mat-tab-group>
 

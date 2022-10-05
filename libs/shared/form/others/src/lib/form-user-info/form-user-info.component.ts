@@ -27,8 +27,9 @@ export class FormUserInfoComponent
   @Input() displayMode!: number[];
   @Input() isqualification = false;
   @Input() isDarkMode = false;
-  @Input() isSchoolService = true;
+  @Input() isSelfService = false;
   @Input() isAddStaff = false;
+
   @Output() idCardChange = new EventEmitter<any>();
 
   RequestTypeEnum = SchoolRequestType;
