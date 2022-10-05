@@ -110,26 +110,23 @@
                     class="bi bi-question-circle fs-6 ms-1"
                     (click)="tooltip2()"
                   ></i>
-                  <div
-                    class="image-box d-flex align-items-center flex-column p-5"
-                  >
-                    <img
-                      style="max-width: 400px; max-height: 220px"
-                      [src]="imgSrc"
-                    />
+                  <div class="image-box d-flex align-items-center flex-column">
+                    <img style="max-height: 225px" [src]="imgSrc" />
 
                     <ng-container *ngIf="!imgSrc">
-                      <ksp-file-upload
-                        [buttonLabel]="'+ อัพโหลดรูปภาพ'"
-                        [requestType]="1"
-                        [isImage]="true"
-                        [uniqueTimestamp]="uniqueTimeStamp"
-                        [showUploadedFileName]="false"
-                        (uploadComplete)="onUploadComplete($event)"
-                      ></ksp-file-upload>
-                      <diV class="form-label"
-                        >Choose image . jpg only, max size 1 MB</diV
-                      >
+                      <div class="p-5 d-flex flex-column align-items-center">
+                        <ksp-file-upload
+                          [buttonLabel]="'อัพโหลดรูปภาพ'"
+                          [requestType]="1"
+                          [isImage]="true"
+                          [uniqueTimestamp]="uniqueTimeStamp"
+                          [showUploadedFileName]="false"
+                          (uploadComplete)="onUploadComplete($event)"
+                        ></ksp-file-upload>
+                        <diV class="form-label"
+                          >Choose image . jpg only, max size 1 MB</diV
+                        >
+                      </div>
                     </ng-container>
                   </div>
                 </div>
