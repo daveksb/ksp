@@ -45,6 +45,7 @@ export class AddStaffComponent implements OnInit {
   mode: FormMode = 'edit';
   userInfoType = UserInfoFormType.thai;
   searchStaffDone = false;
+  kuruspaNo = '';
 
   form = this.fb.group({
     userInfo: [],
