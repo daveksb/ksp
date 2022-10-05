@@ -177,6 +177,6 @@
     (saveClicked)="onSave()"
     (cancelClicked)="cancel()"
     (prevClicked)="onClickPrev()"
-    [disableSaveButton]="false"
+    [disableSaveButton]="form.invalid"
   ></ksp-bottom-nav>
 </div>

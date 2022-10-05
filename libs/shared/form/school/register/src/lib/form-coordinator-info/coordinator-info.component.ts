@@ -4,7 +4,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { SchoolRequestType, UserInfoFormType } from '@ksp/shared/constant';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import {
-  createDefaultUserInfoForm,
+  createUserInfoForm,
   providerFactory,
   validatorMessages,
 } from '@ksp/shared/utility';
@@ -43,7 +43,7 @@ export class FormCoordinatorInfoComponent
    * Use in E-service, School-Service
    */
 
-  override form = createDefaultUserInfoForm(this.fb);
+  override form = createUserInfoForm(this.fb);
 
   constructor(private fb: FormBuilder) {
     super();

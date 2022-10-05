@@ -14,7 +14,6 @@ export class FormEducationInfoComponent
   extends KspFormBaseComponent
   implements OnInit
 {
-  //@Input() selectDegreeLevel = 1;
   @Input() showGradeInput = false;
   @Input() showPropertyInput = false;
   @Input() showSelectDegree = false;
@@ -50,12 +49,6 @@ export class FormEducationInfoComponent
   }
 
   ngOnInit(): void {
-    /*     if (this.selectDegreeLevel) {
-      setTimeout(() => {
-        this.degreeLevel.setValue(this.selectDegreeLevel);
-        this.degreeLevel.disable();
-      }, 0);
-    } */
     if (this.option) {
       this.form.clearValidators();
     }

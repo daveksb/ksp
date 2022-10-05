@@ -30,6 +30,7 @@
     <div class="col mb-2" *ngIf="isqualification">
       <label class="form-label">ประเภทการยื่น</label>
       <select
+        formControlName="requestfor"
         class="form-select"
         [class.bg-white]="!isDarkMode && mode === 'edit'"
       >

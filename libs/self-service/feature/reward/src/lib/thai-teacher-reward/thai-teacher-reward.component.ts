@@ -3,10 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { AddressService } from '@ksp/shared/service';
-import {
-  createDefaultUserInfoForm,
-  providerFactory,
-} from '@ksp/shared/utility';
+import { createUserInfoForm, providerFactory } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
 @Component({
