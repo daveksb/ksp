@@ -17,103 +17,105 @@
         [prefixList]="prefixList$ | async"
         [displayMode]="[userInfoType]"
         [mode]="mode"
+        (idCardChange)="searchIdCard($event)"
       ></ksp-form-user-info>
     </div>
 
-    <div class="box-header">ข้อมูลใบอนุญาตประกอบวิชาชีพ</div>
-    <div
-      class="bg-light d-flex flex-column justify-content-center p-3"
-      style="height: auto"
-    >
-      <div class="d-flex align-items-center">
-        <div class="form-label text-secondary">หมายเลขสมาชิกคุรุสภา</div>
-        <div class="form-label text-black ms-3">1234567890</div>
-      </div>
-      <ksp-license-type-button-group></ksp-license-type-button-group>
-      <div class="ms-5">
-        <ksp-license-info></ksp-license-info>
-      </div>
-    </div>
-
-    <div class="mt-3">
-      <mat-tab-group
-        class="tab-group"
-        animationDuration="0ms"
-        dynamicHeight="true"
-        selectedIndex="0"
+    <ng-container *ngIf="searchStaffDone">
+      <div class="box-header">ข้อมูลใบอนุญาตประกอบวิชาชีพ</div>
+      <div
+        class="bg-light d-flex flex-column justify-content-center p-3"
+        style="height: auto"
       >
-        <mat-tab label="ที่อยู่" class="tab-content">
-          <ksp-form-address
-            [mode]="mode"
-            [provinces]="provinces$ | async"
-            [amphurs]="amphurs1$ | async"
-            [tumbols]="tumbols1$ | async"
-            (provinceChanged)="provinceChanged(1, $event)"
-            (amphurChanged)="amphurChanged(1, $event)"
-            formControlName="addr1"
-          >
-            ที่อยู่ทะเบียนบ้าน
-          </ksp-form-address>
-          <br />
-          <ksp-form-address
-            [mode]="mode"
-            [provinces]="provinces$ | async"
-            [amphurs]="amphurs2$ | async"
-            [tumbols]="tumbols2$ | async"
-            (provinceChanged)="provinceChanged(2, $event)"
-            (amphurChanged)="amphurChanged(2, $event)"
-            formControlName="addr2"
-          >
-            <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
-            <div class="d-flex align-items-center">
-              <input
-                (change)="useSameAddress($event)"
-                type="checkbox"
-                class="address__checkbox"
-              />
-              <label class="form-label ms-1">ที่อยู่ตามทะเบียนบ้าน</label>
-            </div>
-          </ksp-form-address>
-        </mat-tab>
+        <div class="d-flex align-items-center">
+          <div class="form-label text-secondary">หมายเลขสมาชิกคุรุสภา</div>
+          <div class="form-label text-black ms-3">{{ kuruspaNo }}</div>
+        </div>
+        <!-- <ksp-license-type-button-group></ksp-license-type-button-group> -->
+        <div class="ms-5">
+          <ksp-license-info></ksp-license-info>
+        </div>
+      </div>
+      <div class="mt-3">
+        <mat-tab-group
+          class="tab-group"
+          animationDuration="0ms"
+          dynamicHeight="true"
+          selectedIndex="0"
+        >
+          <mat-tab label="ที่อยู่" class="tab-content">
+            <ksp-form-address
+              [mode]="mode"
+              [provinces]="provinces$ | async"
+              [amphurs]="amphurs1$ | async"
+              [tumbols]="tumbols1$ | async"
+              (provinceChanged)="provinceChanged(1, $event)"
+              (amphurChanged)="amphurChanged(1, $event)"
+              formControlName="addr1"
+            >
+              ที่อยู่ทะเบียนบ้าน
+            </ksp-form-address>
+            <br />
+            <ksp-form-address
+              [mode]="mode"
+              [provinces]="provinces$ | async"
+              [amphurs]="amphurs2$ | async"
+              [tumbols]="tumbols2$ | async"
+              (provinceChanged)="provinceChanged(2, $event)"
+              (amphurChanged)="amphurChanged(2, $event)"
+              formControlName="addr2"
+            >
+              <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
+              <div class="d-flex align-items-center">
+                <input
+                  (change)="useSameAddress($event)"
+                  type="checkbox"
+                  class="address__checkbox"
+                />
+                <label class="form-label ms-1">ที่อยู่ตามทะเบียนบ้าน</label>
+              </div>
+            </ksp-form-address>
+          </mat-tab>
 
-        <mat-tab label="วุฒิทางการศึกษา">
-          <ksp-form-education-info
-            [mode]="mode"
-            [showGradeInput]="true"
-            formControlName="edu1"
-            [showSelectDegree]="true"
-            [countries]="countries$ | async"
-          ></ksp-form-education-info
-          ><br />
-          <ksp-form-education-info
-            [mode]="mode"
-            [showGradeInput]="true"
-            formControlName="edu2"
-            [showSelectDegree]="true"
-            [countries]="countries$ | async"
-          ></ksp-form-education-info>
-        </mat-tab>
+          <mat-tab label="วุฒิทางการศึกษา">
+            <ksp-form-education-info
+              [mode]="mode"
+              [showGradeInput]="true"
+              formControlName="edu1"
+              [showSelectDegree]="true"
+              [countries]="countries$ | async"
+            ></ksp-form-education-info
+            ><br />
+            <ksp-form-education-info
+              [mode]="mode"
+              [showGradeInput]="true"
+              formControlName="edu2"
+              [showSelectDegree]="true"
+              [countries]="countries$ | async"
+            ></ksp-form-education-info>
+          </mat-tab>
 
-        <mat-tab label="ข้อมูลการสอนและการจ้าง">
-          <ksp-form-hiring-info
-            [mode]="mode"
-            formControlName="hiringInfo"
-            [staffTypes]="staffTypes$ | async"
-            [positionTypes]="positionTypes$ | async"
-            [academicStandingList]="academicTypes$ | async"
-          ></ksp-form-hiring-info>
-          <br />
-          <ksp-form-teaching-info
-            [mode]="mode"
-            formControlName="teachingInfo"
-          ></ksp-form-teaching-info>
-        </mat-tab>
-      </mat-tab-group>
-    </div>
+          <mat-tab label="ข้อมูลการสอนและการจ้าง">
+            <ksp-form-hiring-info
+              [mode]="mode"
+              formControlName="hiringInfo"
+              [staffTypes]="staffTypes$ | async"
+              [positionTypes]="positionTypes$ | async"
+              [academicStandingList]="academicTypes$ | async"
+            ></ksp-form-hiring-info>
+            <br />
+            <ksp-form-teaching-info
+              [mode]="mode"
+              formControlName="teachingInfo"
+            ></ksp-form-teaching-info>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </ng-container>
   </div>
 </div>
 
-<div class="sticky-bottom border">
+<div *ngIf="searchStaffDone" class="sticky-bottom border">
   <ksp-bottom-nav
     [isLastPage]="true"
     [isFirstPage]="true"
