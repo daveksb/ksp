@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -13,7 +13,7 @@ import { providerFactory } from '@ksp/shared/utility';
 })
 export class SubstituteObjectiveComponent extends KspFormBaseComponent {
   override form = this.fb.group({
-    replaceReason: [],
+    replaceReason: [null, Validators.required],
   });
 
   constructor(private fb: FormBuilder) {

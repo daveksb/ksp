@@ -212,4 +212,8 @@ export class SubstituteLicenseDetailComponent
       }
     });
   }
+
+  back() {
+    this.router.navigate(['/home']);
+  }
 }
