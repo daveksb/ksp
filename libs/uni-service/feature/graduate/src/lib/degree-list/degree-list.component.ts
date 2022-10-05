@@ -3,22 +3,21 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ListData, UniserviceImportType } from '@ksp/shared/interface';
 import { UniInfoService, UniRequestService } from '@ksp/shared/service';
-import { getCookie, stringToThaiDate, thaiDate } from '@ksp/shared/utility';
+import { getCookie, stringToThaiDate } from '@ksp/shared/utility';
+import { UniserviceImportType, KspPaginationComponent, ListData } from '@ksp/shared/interface';
+
 import {
   HistoryRequestDialogComponent,
   PrintRequestDialogComponent,
 } from '@ksp/uni-service/dialog';
 import { DegreeCertInfo } from '@ksp/uni-service/feature/edit-degree-cert';
-import moment from 'moment';
-import { map } from 'rxjs';
 
 @Component({
   templateUrl: './degree-list.component.html',
   styleUrls: ['./degree-list.component.scss'],
 })
-export class DegreeListComponent implements OnInit {
+export class DegreeListComponent extends KspPaginationComponent implements OnInit {
   processType!: UniserviceImportType;
 
   displayedColumns: string[] = columns;
@@ -37,7 +36,9 @@ export class DegreeListComponent implements OnInit {
     public dialog: MatDialog,
     public uniRequestService: UniRequestService,
     private uniInfoService: UniInfoService
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.route.data.subscribe((res) => {
@@ -98,12 +99,13 @@ export class DegreeListComponent implements OnInit {
         this.dataSource.data = [];
         return;
       };
+      this.pageEvent.length = res.countrow;
       this.dataSource.data = res?.datareturn.map(
         (item: any, index: number) => {
           return {
               id: item?.id,
               key: item?.id,
-              order: ++index,
+              order: this.pageEvent.pageIndex * this.pageEvent.pageSize + ++index,
               degreeCode: item?.degreeapprovecode,
               sendDate: stringToThaiDate(item?.requestdate),
               major: item?.coursename,

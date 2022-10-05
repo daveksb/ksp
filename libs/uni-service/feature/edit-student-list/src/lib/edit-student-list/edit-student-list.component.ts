@@ -4,10 +4,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { requestStatus } from '@ksp/shared/constant';
-import { ListData } from '@ksp/shared/interface';
 import { UniInfoService, UniRequestService } from '@ksp/shared/service';
 import { stringToThaiDate } from '@ksp/shared/utility';
 import { HistoryRequestDialogComponent, PrintRequestDialogComponent } from '@ksp/uni-service/dialog';
+import { KspPaginationComponent, ListData } from '@ksp/shared/interface';
 import _ from 'lodash';
 import { map } from 'rxjs';
 const mapOption = () =>
@@ -24,7 +24,7 @@ const mapOption = () =>
   templateUrl: './edit-student-list.component.html',
   styleUrls: ['./edit-student-list.component.scss'],
 })
-export class EditStudentListComponent implements OnInit {
+export class EditStudentListComponent extends KspPaginationComponent implements OnInit {
   displayedColumns: string[] = column;
   degreeLevelOptions: ListData[] = [];
   requestStatusOptions: ListData[] = requestStatus;
@@ -51,11 +51,13 @@ export class EditStudentListComponent implements OnInit {
     public dialog: MatDialog,
     private fb: FormBuilder,
     private uniInfoService: UniInfoService,
-    private uniRequestService: UniRequestService) {}
+    private uniRequestService: UniRequestService) {
+      super();
+    }
 
   ngOnInit(): void {
     this.getAll();     
-    this.search(); 
+    this.searchdata(); 
   }
 
   print(row: any) {
@@ -95,10 +97,11 @@ export class EditStudentListComponent implements OnInit {
     });
   }
 
-  search() {
+  searchdata() {
     this.uniRequestService.getEditRequestAdmision(this.form.value)
     .subscribe((response: any) => {
       if (response.datareturn) {
+        this.pageEvent.length = response.countrow;
         this.dataSource.data = response.datareturn.map(((data: any)=>{
           const parsedata = JSON.parse(data.admissionlist);
           data.studentdetail = parsedata[0];
