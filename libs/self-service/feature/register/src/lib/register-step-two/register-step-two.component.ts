@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -6,18 +6,22 @@ import { VerifyPhoneDialogComponent } from '@ksp/self-service/dialog';
 import { idCardPattern, validatorMessages } from '@ksp/shared/utility';
 import localForage from 'localforage';
 import { RegisterTooltipComponent } from '../register-tooltip/register-tooltip.component';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'self-service-register-step-two',
   templateUrl: './register-step-two.component.html',
   styleUrls: ['./register-step-two.component.scss'],
 })
-export class RegisterStepTwoComponent {
+export class RegisterStepTwoComponent implements OnInit {
   validatorMessages = validatorMessages;
+  imgSrc = '';
+  uniqueTimestamp!: string;
 
   form = this.fb.group({
     idcardno: [null, [Validators.required, Validators.pattern(idCardPattern)]],
     idcardbackno: [null, [Validators.required]],
+    personimage: [''],
     //idcardimage: [],
   });
 
@@ -26,6 +30,10 @@ export class RegisterStepTwoComponent {
     private router: Router,
     private fb: FormBuilder
   ) {}
+
+  ngOnInit(): void {
+    this.uniqueTimestamp = uuidv4();
+  }
 
   openDialog() {
     const dialogRef = this.dialog.open(VerifyPhoneDialogComponent, {
@@ -71,5 +79,9 @@ export class RegisterStepTwoComponent {
 
   get idCardNo() {
     return this.form.controls.idcardno;
+  }
+
+  uploadImageComplete(personimage: string) {
+    this.form.patchValue({ personimage });
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
@@ -11,6 +11,8 @@ import { providerFactory } from '@ksp/shared/utility';
   providers: providerFactory(FormUserTrainingWorkplaceComponent),
 })
 export class FormUserTrainingWorkplaceComponent extends KspFormBaseComponent {
+  @Input() trainingTimes: any;
+
   override form = this.fb.group({
     TrainingAddressOne: [],
     TrainingAddressTwo: [],

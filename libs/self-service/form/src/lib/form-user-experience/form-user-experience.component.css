@@ -4,9 +4,8 @@
   background-size: 12px;
 }
 
-.search__content {
-  background-image: url(/assets/images/search-icon.png) !important;
-  background-size: 12px;
+.form-control {
+  background-color: #f6f6f6;
 }
 
 .hr-or {

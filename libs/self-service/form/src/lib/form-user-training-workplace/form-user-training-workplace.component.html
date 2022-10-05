@@ -1,7 +1,9 @@
 <form [formGroup]="form">
   <div class="row">
-    <div class="col-md-6 mb-3">
-      <label class="form-label">สถานศึกษาฝึกประสบการณ์วิชาชีพ ครั้งที่ 1</label>
+    <div class="col-md mb-3">
+      <label class="form-label"
+        >สถานศึกษาฝึกประสบการณ์วิชาชีพ ครั้งที่ {{ trainingTimes }}</label
+      >
       <input
         class="form-control"
         type="text"
@@ -9,13 +11,13 @@
       />
     </div>
 
-    <div class="col-md-6 mb-3">
+    <!--  <div class="col-md-6 mb-3">
       <label class="form-label">สถานศึกษาฝึกประสบการณ์วิชาชีพ ครั้งที่ 2</label>
       <input
         class="form-control"
         type="text"
         formControlName="TrainingAddressTwo"
       />
-    </div>
+    </div> -->
   </div>
 </form>

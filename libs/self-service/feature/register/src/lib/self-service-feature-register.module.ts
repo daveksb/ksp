@@ -3,7 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RegisterStepOneComponent } from './register-step-one/register-step-one.component';
 import { RegisterStepTwoComponent } from './register-step-two/register-step-two.component';
 import { RegisterStepThreeComponent } from './register-step-three/register-step-three.component';
-import { SelfServiceFormModule } from '@ksp/self-service/form';
+import {
+  FormUploadImageComponent,
+  SelfServiceFormModule,
+} from '@ksp/self-service/form';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule, Routes } from '@angular/router';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
@@ -16,6 +19,7 @@ import { RegisterForeignStepThreeComponent } from './register-foreign-step-three
 import { RegisterForeignStepTwoComponent } from './register-foreign-step-two/register-foreign-step-two.component';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 
 export const routes: Routes = [
   {
@@ -64,6 +68,8 @@ export const routes: Routes = [
     MatIconModule,
     SharedFormOthersModule,
     MatTooltipModule,
+    FormUploadImageComponent,
+    FileUploadComponent,
   ],
   declarations: [
     RegisterStepOneComponent,
