@@ -2,7 +2,19 @@
   <div class="row mb-3">
     <div class="col-4">
       <label class="form-label required">หมายเลขบัตรประชาชน</label>
-      <input class="form-control" type="text" />
+      <input
+        maxlength="13"
+        formControlName="idcardno"
+        class="form-control"
+        type="text"
+      />
+      <ng-container
+        *ngIf="idCardNo.invalid && (idCardNo.dirty || idCardNo.touched)"
+      >
+        <span class="text-danger" *ngIf="idCardNo.errors?.['pattern']">
+          {{ validatorMessages.ssn }}
+        </span>
+      </ng-container>
     </div>
   </div>
   <div class="row mb-3">

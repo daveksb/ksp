@@ -3,14 +3,10 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import { FormMode } from '@ksp/shared/interface';
-import {
-  GeneralInfoService,
-  RequestService,
-  SchoolInfoService,
-} from '@ksp/shared/service';
+import { GeneralInfoService } from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 import localForage from 'localforage';
 
 @UntilDestroy()
@@ -44,12 +40,9 @@ export class RegisterRequesterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public router: Router,
-    private generalInfoService: GeneralInfoService,
-    private schoolInfoService: SchoolInfoService,
-    private route: ActivatedRoute
+    private generalInfoService: GeneralInfoService
   ) {}
   ngOnInit(): void {
-    //this.school = history?.state?.data ?? null;
     localForage.getItem('registerSelectedSchool').then((res) => {
       this.school = res;
     });
@@ -75,13 +68,10 @@ export class RegisterRequesterComponent implements OnInit {
 
     localForage.setItem('registerUserInfoFormValue', userInfo);
     this.router.navigate(['/register', 'coordinator']);
-    /*  this.router.navigate(['/register', 'coordinator'], {
-      state: { data: userInfo },
-    }); */
   }
 
   prevPage() {
-    this.router.navigate(['/', 'register', 'current-user']);
+    this.router.navigate(['/register', 'current-user']);
   }
 }
 export const grants = [
