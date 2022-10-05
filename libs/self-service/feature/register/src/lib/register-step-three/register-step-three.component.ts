@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { RegisterCompletedComponent } from '../register-completed/register-completed.component';
 import localForage from 'localforage';
 import { MyInfoService } from '@ksp/shared/service';
-import { v4 as uuidv4 } from 'uuid';
 import { SelfMyInfo } from '@ksp/shared/interface';
 
 @Component({
@@ -13,11 +12,15 @@ import { SelfMyInfo } from '@ksp/shared/interface';
   templateUrl: './register-step-three.component.html',
   styleUrls: ['./register-step-three.component.scss'],
 })
-export class RegisterStepThreeComponent {
+export class RegisterStepThreeComponent implements OnInit {
   form = this.fb.group({
-    password: [],
-    //confirmPassword: [],
+    password: [null, Validators.required],
+    confirmPassword: [],
   });
+
+  idCardNo = '';
+  payload!: SelfMyInfo;
+  passwordEqual = false;
 
   constructor(
     public dialog: MatDialog,
@@ -26,26 +29,40 @@ export class RegisterStepThreeComponent {
     private myInfoService: MyInfoService
   ) {}
 
-  submit() {
-    localForage.getItem('th-register').then((res: any) => {
-      const payload: SelfMyInfo = { ...res, ...this.form.value };
-      payload.username = res.idcardno;
-      payload.isactive = '1';
-      payload.uniquetimestamp = uuidv4();
-      payload.usertype = '1'; // ชาวไทย
-
-      this.myInfoService.insertMyInfo(payload).subscribe((res) => {
-        //console.log('insert = ', res);
-      });
+  ngOnInit(): void {
+    this.form.controls.confirmPassword.valueChanges.subscribe((res) => {
+      if (res === this.form.controls.password.value) {
+        this.passwordEqual = true;
+      } else {
+        this.passwordEqual = false;
+      }
     });
 
-    this.dialog.open(RegisterCompletedComponent, {
-      width: '600px',
-      data: {
-        title: `ยินดีด้วย!`,
-        subTitle: `สมัครสมาชิกของท่านเสร็จสมบูรณ์`,
-        btnLabel: `เข้าสู่ระบบ`,
-      },
+    localForage.getItem('th-register').then((res: any) => {
+      this.idCardNo = res.idcardno;
+      this.payload = { ...res, ...this.form.value };
+      this.payload.username = res.idcardno;
+      this.payload.isactive = '1';
+      this.payload.uniquetimestamp = res.uniquetimestamp;
+      this.payload.usertype = '1'; // ชาวไทย
+    });
+  }
+
+  submit() {
+    this.payload = {
+      ...this.payload,
+      ...{ password: this.form.controls.password.value },
+    };
+
+    this.myInfoService.insertMyInfo(this.payload).subscribe((res) => {
+      this.dialog.open(RegisterCompletedComponent, {
+        width: '600px',
+        data: {
+          title: `ยินดีด้วย!`,
+          subTitle: `สมัครสมาชิกของท่านเสร็จสมบูรณ์`,
+          btnLabel: `เข้าสู่ระบบ`,
+        },
+      });
     });
   }
 
