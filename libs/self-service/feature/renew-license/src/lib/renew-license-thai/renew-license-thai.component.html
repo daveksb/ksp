@@ -19,7 +19,6 @@
   <mat-tab-group class="tab-group" animationDuration="0ms" [selectedIndex]="0">
     <mat-tab label="ที่อยู่" class="tab-content">
       <ksp-form-address
-        [isSelfService]="true"
         formControlName="address1"
         [isDarkMode]="true"
         [provinces]="provinces1$ | async"
@@ -32,7 +31,6 @@
       </ksp-form-address>
       <hr />
       <ksp-form-address
-        [isSelfService]="true"
         formControlName="address2"
         [isDarkMode]="true"
         [provinces]="provinces2$ | async"
