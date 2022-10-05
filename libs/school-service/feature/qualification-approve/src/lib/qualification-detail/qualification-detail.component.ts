@@ -82,10 +82,6 @@ export class QualificationDetailComponent implements OnInit {
     this.getListData();
     this.checkRequestId();
     this.checkRequestSubType();
-
-    /*     this.form.valueChanges.subscribe((res) => {
-      console.log('form valid = ', this.form.valid);
-    }); */
   }
 
   checkRequestId() {
@@ -115,7 +111,6 @@ export class QualificationDetailComponent implements OnInit {
         res.birthdate = res.birthdate?.split('T')[0];
         this.form.get('userInfo')?.patchValue(res);
 
-        //this.form.controls.edu1.patchValue(res.eduinfo[0]);
         const edus = JSON.parse(atob(res.eduinfo));
         this.patchEdu(edus);
 
@@ -140,19 +135,21 @@ export class QualificationDetailComponent implements OnInit {
   }
 
   patchEdu(edus: any[]) {
-    console.log('edu full = ', edus);
+    //console.log('edus = ', edus);
     if (edus && edus.length) {
       edus.map((edu, i) => {
-        console.log(`edu${i}`, edu);
-        if (i === 0) {
-          this.form.controls.edu1.patchValue(edu[0]);
+        if (edu.degreeLevel === 2) {
+          this.showEdu2 = true;
         }
-        if (i === 1) {
-          this.form.controls.edu2.patchValue(edu);
+        if (edu.degreeLevel === 3) {
+          this.showEdu3 = true;
         }
-        if (i === 2) {
-          this.form.controls.edu3.patchValue(edu);
+        if (edu.degreeLevel === 4) {
+          this.showEdu4 = true;
         }
+        (this.form.get(`edu${i + 1}`) as AbstractControl<any, any>).patchValue(
+          edu
+        );
       });
     }
   }
@@ -194,7 +191,7 @@ export class QualificationDetailComponent implements OnInit {
             if (res) {
               const payload = {
                 id: `${this.requestId}`,
-                requeststatus: `0`,
+                requeststatus: '0',
               };
               return this.requestService.cancelRequest(payload);
             }
@@ -258,7 +255,7 @@ export class QualificationDetailComponent implements OnInit {
           if (res) {
             //eduInfo otherreason addressinfo refperson
             const formData: any = this.form.getRawValue();
-            console.log('formData', formData);
+            //console.log('formData', formData);
             if (formData?.addr1?.addressType) formData.addr1.addressType = 1;
             if (formData?.addr2?.addressType) formData.addr2.addressType = 2;
             const { refperson } = refPersonForm;
@@ -274,12 +271,27 @@ export class QualificationDetailComponent implements OnInit {
             userInfo.currentprocess = '1';
             userInfo.requeststatus = '1';
 
-            let eduForm = [formData.edu1];
-            formData.edu2.value
-              ? (eduForm = [...eduForm, formData.edu2])
+            let eduForm = [{ ...formData.edu1, ...{ degreeLevel: 1 } }];
+            formData?.edu2
+              ? (eduForm = [
+                  ...eduForm,
+                  { ...formData.edu2, ...{ degreeLevel: 2 } },
+                ])
               : null;
 
-            console.log('eduForm = ', eduForm);
+            formData?.edu3
+              ? (eduForm = [
+                  ...eduForm,
+                  { ...formData.edu3, ...{ degreeLevel: 3 } },
+                ])
+              : null;
+
+            formData?.edu4
+              ? (eduForm = [
+                  ...eduForm,
+                  { ...formData.edu4, ...{ degreeLevel: 4 } },
+                ])
+              : null;
 
             const payload = {
               ...userInfo,
@@ -302,6 +314,7 @@ export class QualificationDetailComponent implements OnInit {
         this.onCompleted();
       });
   }
+
   onClickPrev() {
     this.router.navigate(['/temp-license']);
   }

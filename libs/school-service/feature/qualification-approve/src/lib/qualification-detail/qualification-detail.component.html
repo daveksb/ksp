@@ -80,7 +80,6 @@
             <ksp-form-education-info
               [mode]="mode"
               formControlName="edu1"
-              [selectDegreeLevel]="1"
               [showSelectDegree]="false"
               [showGradeInput]="true"
               [showGraduateYearInput]="true"
@@ -90,6 +89,7 @@
             <br />
             <div class="d-flex align-items-center">
               <input
+                *ngIf="mode !== 'view'"
                 type="checkbox"
                 class="me-2"
                 (change)="eduSelected(2, $event)"
@@ -99,7 +99,6 @@
             <ng-container *ngIf="showEdu2">
               <ksp-form-education-info
                 [mode]="mode"
-                [selectDegreeLevel]="2"
                 formControlName="edu2"
                 [showSelectDegree]="false"
                 [showGradeInput]="false"
@@ -111,6 +110,7 @@
 
             <div class="d-flex align-items-center mt-2">
               <input
+                *ngIf="mode !== 'view'"
                 type="checkbox"
                 class="me-2"
                 (change)="eduSelected(3, $event)"
@@ -120,7 +120,6 @@
             <ng-container *ngIf="showEdu3">
               <ksp-form-education-info
                 [mode]="mode"
-                [selectDegreeLevel]="3"
                 formControlName="edu3"
                 [showSelectDegree]="false"
                 [showGradeInput]="false"
@@ -132,6 +131,7 @@
 
             <div class="d-flex align-items-center mt-2">
               <input
+                *ngIf="mode !== 'view'"
                 type="checkbox"
                 class="me-2"
                 (change)="eduSelected(4, $event)"
@@ -143,7 +143,6 @@
             </div>
             <ng-container *ngIf="showEdu4">
               <ksp-form-education-info
-                [selectDegreeLevel]="4"
                 [mode]="mode"
                 formControlName="edu4"
                 [showSelectDegree]="false"
@@ -178,6 +177,6 @@
     (saveClicked)="onSave()"
     (cancelClicked)="cancel()"
     (prevClicked)="onClickPrev()"
-    [disableSaveButton]="form.invalid"
+    [disableSaveButton]="false"
   ></ksp-bottom-nav>
 </div>
