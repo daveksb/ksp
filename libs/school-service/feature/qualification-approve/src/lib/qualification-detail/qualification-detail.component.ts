@@ -31,20 +31,16 @@ import { v4 as uuidv4 } from 'uuid';
 export class QualificationDetailComponent implements OnInit {
   uniqueTimestamp!: string;
 
-  option1 = this.fb.control(false);
-  option2 = this.fb.control(false);
-  option3 = this.fb.control(false);
-  option4 = this.fb.control(false);
-
   form = this.fb.group({
     userInfo: [],
     addr1: [],
     addr2: [],
-    education: [],
+    edu1: [],
     edu2: [],
     edu3: [],
     edu4: [],
   });
+
   requestNumber = '';
   userInfoFormdisplayMode: number = UserInfoFormType.thai;
   prefixList$!: Observable<any>;
@@ -66,8 +62,10 @@ export class QualificationDetailComponent implements OnInit {
   otherreason: any;
   refperson: any;
   evidenceFiles = files;
-
-  mode: FormMode = 'edit';
+  mode!: FormMode;
+  showEdu2 = false;
+  showEdu3 = false;
+  showEdu4 = false;
 
   constructor(
     public dialog: MatDialog,
@@ -79,24 +77,28 @@ export class QualificationDetailComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  get Option1$() {
-    return this.option1.valueChanges;
-  }
-  get Option2$() {
-    return this.option2.valueChanges;
-  }
-  get Option3$() {
-    return this.option3.valueChanges;
-  }
-  get Option4$() {
-    return this.option4.valueChanges;
-  }
-
   ngOnInit(): void {
     this.uniqueTimestamp = uuidv4();
     this.getListData();
     this.checkRequestId();
     this.checkRequestSubType();
+
+    this.form.valueChanges.subscribe((res) => {
+      console.log('form valid = ', this.form.valid);
+    });
+  }
+
+  eduSelected(type: number, evt: any) {
+    const checked = evt.target.checked;
+    if (type === 2) {
+      this.showEdu2 = checked;
+    }
+    if (type === 3) {
+      this.showEdu3 = checked;
+    }
+    if (type === 4) {
+      this.showEdu4 = checked;
+    }
   }
 
   checkRequestId() {
@@ -126,8 +128,8 @@ export class QualificationDetailComponent implements OnInit {
         res.birthdate = res.birthdate?.split('T')[0];
         this.form.get('userInfo')?.patchValue(res);
         res.eduinfo = JSON.parse(atob(res.eduinfo));
-        this.form.get('education')?.patchValue(res.eduinfo[0]);
-        this.form.get('education')?.patchValue(res.eduinfo[0]);
+        this.form.controls.edu1.patchValue(res.eduinfo[0]);
+        //this.form.get('education')?.patchValue(res.eduinfo[0]);
         res.addressinfo = JSON.parse(atob(res.addressinfo));
         for (let i = 0; i < res.addressinfo.length; i++) {
           const form = this.form.get(`addr${i + 1}`) as AbstractControl<
@@ -185,14 +187,6 @@ export class QualificationDetailComponent implements OnInit {
     } else {
       this.router.navigate(['/temp-license', 'list']);
     }
-  }
-  get inValidForm() {
-    return (
-      !this.form.get('userInfo')?.valid ||
-      !this.form.get('addr1')?.valid ||
-      !this.form.get('addr2')?.valid ||
-      !this.form.get('education')?.valid
-    );
   }
 
   onSave() {
