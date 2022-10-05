@@ -12,6 +12,7 @@
     formControlName="searchFilter"
     (clear)="clear()"
     (search)="search($event)"
+    [licenseTypes]="licenseTypes"
     [positions]="positions$ | async"
   ></school-service-staff-search>
 

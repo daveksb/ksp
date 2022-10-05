@@ -73,6 +73,7 @@
         <label class="form-label required">จังหวัด</label>
         <select
           [class.bg-white]="!isDarkMode && mode === 'edit'"
+          [class.form-select-sp]="isSelfService"
           class="form-select"
           formControlName="province"
           (change)="provinceChanged.emit($event)"
@@ -90,6 +91,7 @@
         <label class="form-label required">อำเภอ</label>
         <select
           [class.bg-white]="!isDarkMode && mode === 'edit'"
+          [class.form-select-sp]="isSelfService"
           class="form-select"
           formControlName="amphur"
           (change)="amphurChanged.emit($event)"
@@ -107,6 +109,7 @@
         <label class="form-label required">ตำบล</label>
         <select
           [class.bg-white]="!isDarkMode && mode === 'edit'"
+          [class.form-select-sp]="isSelfService"
           class="form-select"
           formControlName="tumbol"
           (change)="updatePostcode($event)"

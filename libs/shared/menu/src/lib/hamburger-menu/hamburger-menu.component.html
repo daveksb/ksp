@@ -57,9 +57,8 @@
             [queryParams]="menu.params"
             routerLinkActive="active-link"
             [routerLinkActiveOptions]="{ exact: true }"
-            ><div class="d-flex align-items-center">
-              <img [src]="menu.icon" class="icon__sidenav" />{{ menu.label }}
-            </div>
+          >
+            {{ menu.label }}
           </a>
         </li>
 
@@ -72,10 +71,7 @@
             class="collapsed"
           >
             <div class="d-flex justify-content-between">
-              <div class="d-flex align-items-center">
-                <img [src]="menu.icon" class="icon__sidenav" />{{ menu.label }}
-              </div>
-              <i class="bi bi-chevron-down"></i>
+              {{ menu.label }} <i class="bi bi-chevron-down"></i>
             </div>
           </a>
           <ul

@@ -4,9 +4,7 @@
   <div class="row">
     <div
       class="col-6 mb-2"
-      *ngIf="
-        displayMode.includes(FormTypeEnum.thai) && isSchoolService === true
-      "
+      *ngIf="displayMode.includes(FormTypeEnum.thai) && !isSelfService"
     >
       <label
         class="form-label required"
@@ -84,6 +82,7 @@
       >
       <select
         [class.bg-white]="!isDarkMode && mode === 'edit'"
+        [class.form-select-sp]="isSelfService"
         class="form-select"
         formControlName="prefixth"
         (change)="prefixChanged($event)"
@@ -153,6 +152,7 @@
       <label class="form-label required">คำนำหน้าชื่ออังกฤษ</label>
       <select
         [class.bg-white]="!isDarkMode && mode === 'edit'"
+        [class.form-select-sp]="isSelfService"
         class="form-select"
         formControlName="prefixen"
         (change)="prefixChanged($event)"
@@ -216,6 +216,7 @@
       <label class="form-label required">เพศ</label>
       <select
         [class.bg-white]="!isDarkMode && mode === 'edit'"
+        [class.form-select-sp]="isSelfService"
         class="form-select"
         formControlName="sex"
       >
