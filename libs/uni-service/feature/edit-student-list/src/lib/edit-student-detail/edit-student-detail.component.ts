@@ -10,6 +10,7 @@ import {
 import { GeneralInfoService, UniInfoService, UniRequestService } from '@ksp/shared/service';
 import { getCookie, thaiDate } from '@ksp/shared/utility';
 import { EMPTY, Observable, switchMap } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'ksp-edit-student-detail',
@@ -49,23 +50,20 @@ export class EditStudentDetailComponent implements OnInit {
   uploadFileList = [
     {
       name: 'สำเนาหนังสือสำคัญการเปลี่ยนชื่อ / ชื่อสกุล / เปลี่ยนหรือเพิ่มคำนำหน้าชื่อ',
-      fileId: '',
-      fileName: ''
+      files: []
     },
     {
       name: 'สำเนาหลักฐานการสมรส หรือการสิ้นสุดการสมรส (ถ้ามี)',
-      fileId: '',
-      fileName: ''
+      files: []
     },
     {
       name: 'สำเนาหนังสือรับรองการใช้คำหน้านามหญิง (ถ้ามี)',
-      fileId: '',
-      fileName: ''
+      files: []
     }
   ];
   data = false;
   pageType = RequestPageType;
-  requesttype = 8;
+  requesttype = 8
 
   constructor(
     private router: Router,
@@ -77,7 +75,7 @@ export class EditStudentDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.uniqueTimestamp = `${new Date().getTime()}`;
+    this.uniqueTimestamp = uuidv4();
     this.studentDetail.disable();
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.nationalityList$ = this.generalInfoService.getNationality();
@@ -129,7 +127,6 @@ export class EditStudentDetailComponent implements OnInit {
         switchMap((res) => {
           if (res) {
             const userId = Number(getCookie('userId'));
-            const fileUpload = this.uploadFileList.map((file) => file.fileId || null);
             let payload = {
               id: null,
               requestprocess: '2',
@@ -150,9 +147,9 @@ export class EditStudentDetailComponent implements OnInit {
               ref2: '08',
               ref3: '5',
               admissionlist: '',
-              fileinfo: JSON.stringify({ fileUpload })
+              fileinfo: JSON.stringify(this.uploadFileList)
             }
-            let admissionlist = [];
+            const admissionlist = [];
             let formsave = {};
             const editStudent = this.formData.value.editStudent as any;
             const studentform = this.studentDetail.value as object;
