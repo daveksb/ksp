@@ -52,7 +52,6 @@ const mockPerformances = [
     endDate: '31/มกราคม/2565',
   },
 ];
-
 @UntilDestroy()
 @Component({
   templateUrl: './license-request.component.html',
@@ -76,6 +75,7 @@ export class LicenseRequestComponent
   licenses$!: Observable<any>;
   eduFiles: any[] = [];
   experienceFiles: any[] = [];
+  performanceFiles: any[] = [];
 
   constructor(
     router: Router,
@@ -111,12 +111,14 @@ export class LicenseRequestComponent
     super.resetForm();
     this.eduFiles = structuredClone(this.service.educationFiles);
     this.experienceFiles = structuredClone(this.service.experienceFiles);
+    this.performanceFiles = structuredClone(this.service.performanceFiles);
   }
 
   override initializeFiles() {
     this.uniqueTimestamp = uuidv4();
     this.eduFiles = structuredClone(this.service.educationFiles);
     this.experienceFiles = structuredClone(this.service.experienceFiles);
+    this.performanceFiles = structuredClone(this.service.performanceFiles);
   }
 
   override getListData() {
@@ -166,9 +168,10 @@ export class LicenseRequestComponent
 
     if (data.fileinfo) {
       const fileInfo = parseJson(data.fileinfo);
-      const { edufiles, experiencefiles } = fileInfo;
+      const { edufiles, experiencefiles, performancefiles } = fileInfo;
       this.eduFiles = edufiles;
       this.experienceFiles = experiencefiles;
+      this.performanceFiles = performancefiles;
     }
   }
 
@@ -225,6 +228,7 @@ export class LicenseRequestComponent
 
     const edufiles = this.eduFiles; //this.mapFileInfo(this.eduFiles);
     const experiencefiles = this.experienceFiles; //this.mapFileInfo(this.experienceFiles);
+    const performancefiles = this.performanceFiles;
 
     const payload = {
       ...self,
@@ -240,7 +244,13 @@ export class LicenseRequestComponent
       },
       ...{ competencyinfo: JSON.stringify(mockPerformances) },
       ...{ prohibitproperty: JSON.stringify(forbidden) },
-      ...{ fileinfo: JSON.stringify({ edufiles, experiencefiles }) },
+      ...{
+        fileinfo: JSON.stringify({
+          edufiles,
+          experiencefiles,
+          performancefiles,
+        }),
+      },
     };
     console.log(payload);
     return payload;
