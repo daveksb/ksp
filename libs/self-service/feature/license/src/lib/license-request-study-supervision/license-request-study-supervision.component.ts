@@ -6,8 +6,9 @@ import {
   SelfServiceRequestSubType,
   SelfServiceRequestType,
   SelfServiceRequestForType,
+  AttachFile,
 } from '@ksp/shared/constant';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy } from '@ngneat/until-destroy';
 import { LicenseFormBaseComponent } from '@ksp/self-service/form';
 import { FormBuilder } from '@angular/forms';
 import {
@@ -26,34 +27,6 @@ import {
 import { SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
 
-const EXPERIENCE_FILES = [
-  {
-    name: '1. สำเนาวุฒิทางการศึกษา',
-    fileId: '',
-    fileName: '',
-  },
-  {
-    name: '2. เอกสารผู้สำเร็จการศึกษา ( ระบบ KSP BUNDIT)',
-    fileId: '',
-    fileName: '',
-  },
-  {
-    name: '3. วุฒิบัตรอบรม',
-    fileId: '',
-    fileName: '',
-  },
-];
-
-const EDU_FILES = [
-  { name: '1. สำเนาวุฒิทางการศึกษา', fileId: '', fileName: '' },
-  {
-    name: '2. เอกสารผู้สำเร็จการศึกษา ( ระบบ KSP BUNDIT)		',
-    fileId: '',
-    fileName: '',
-  },
-  { name: '3. วุฒิบัตรอบรม', fileId: '', fileName: '' },
-];
-
 @UntilDestroy()
 @Component({
   selector: 'self-service-license-request-study-supervision',
@@ -66,8 +39,8 @@ export class LicenseRequestStudySupervisionComponent
 {
   userInfoType = UserInfoFormType.thai;
 
-  experienceFiles: any[] = [];
-  eduFiles: any[] = [];
+  experienceFiles: AttachFile[] = [];
+  eduFiles: AttachFile[] = [];
 
   override form = this.fb.group({
     userInfo: [],
@@ -136,8 +109,8 @@ export class LicenseRequestStudySupervisionComponent
     if (data.eduinfo) {
       const eduInfo = parseJson(data.eduinfo);
       const { educationType, ...educationLevelForm } = eduInfo;
-      console.log('educationType ', educationType);
-      console.log('educationLevelForm ', educationLevelForm);
+      //console.log('educationType ', educationType);
+      //console.log('educationLevelForm ', educationLevelForm);
       this.form.controls.education.patchValue({
         educationType,
         educationLevelForm,
@@ -224,7 +197,31 @@ export class LicenseRequestStudySupervisionComponent
       ...{ prohibitproperty: JSON.stringify(forbidden) },
       ...{ fileinfo: JSON.stringify({ experiencefiles, edufiles }) },
     };
-    console.log(payload);
+    //console.log(payload);
     return payload;
   }
 }
+
+const EXPERIENCE_FILES: AttachFile[] = [
+  {
+    name: '1. สำเนาวุฒิทางการศึกษา',
+    files: [],
+  },
+  {
+    name: '2. เอกสารผู้สำเร็จการศึกษา ( ระบบ KSP BUNDIT)',
+    files: [],
+  },
+  {
+    name: '3. วุฒิบัตรอบรม',
+    files: [],
+  },
+];
+
+const EDU_FILES: AttachFile[] = [
+  { name: '1. สำเนาวุฒิทางการศึกษา', files: [] },
+  {
+    name: '2. เอกสารผู้สำเร็จการศึกษา ( ระบบ KSP BUNDIT)		',
+    files: [],
+  },
+  { name: '3. วุฒิบัตรอบรม', files: [] },
+];
