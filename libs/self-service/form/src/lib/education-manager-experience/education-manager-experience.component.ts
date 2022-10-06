@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { debounceTime, pairwise } from 'rxjs';
 import { providerFactory } from '@ksp/shared/utility';
@@ -41,10 +41,10 @@ export class EducationManagerExperienceComponent
   }
 
   ngOnInit(): void {
+    // this.form.setValidators(checkboxValidator());
     this.form.valueChanges
       .pipe(untilDestroyed(this), pairwise())
       .subscribe(([prev, next]) => {
-        //console.log('exp form = ', res);
         if (prev.hasTeachingExperience !== next.hasTeachingExperience) {
           if (next.hasTeachingExperience) {
             this.form.controls.teachingExperienceYear.addValidators(

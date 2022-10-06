@@ -71,6 +71,7 @@ export class RenewLicenseStudySupervisionComponent
   disableNextButton = false;
 
   workingInfoFiles: any[] = [];
+  licenseFiles: any[] = [];
 
   constructor(
     router: Router,
@@ -105,6 +106,7 @@ export class RenewLicenseStudySupervisionComponent
   override initializeFiles() {
     super.initializeFiles();
     this.workingInfoFiles = structuredClone(WORKING_INFO_FILES);
+    this.licenseFiles = structuredClone(WORKING_INFO_FILES);
   }
 
   override patchData(data: SelfRequest) {
@@ -139,8 +141,9 @@ export class RenewLicenseStudySupervisionComponent
 
     if (data.fileinfo) {
       const fileInfo = parseJson(data.fileinfo);
-      const { performancefiles } = fileInfo;
+      const { performancefiles, licensefiles } = fileInfo;
       this.workingInfoFiles = performancefiles;
+      this.licenseFiles = licensefiles;
     }
   }
 
@@ -196,6 +199,7 @@ export class RenewLicenseStudySupervisionComponent
     };
 
     const performancefiles = this.workingInfoFiles;
+    const licensefiles = this.licenseFiles;
 
     const payload = {
       ...self,
@@ -226,7 +230,7 @@ export class RenewLicenseStudySupervisionComponent
         }),
       },
       ...{ prohibitproperty: JSON.stringify(forbidden) },
-      ...{ fileinfo: JSON.stringify({ performancefiles }) },
+      ...{ fileinfo: JSON.stringify({ performancefiles, licensefiles }) },
     };
     console.log(payload);
     return payload;

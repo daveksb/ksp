@@ -1,28 +1,22 @@
 <form [formGroup]="form">
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label"
-        ><span *ngIf="!isForeignForm">ชื่อรางวัล</span>
-        <span *ngIf="isForeignForm">Award's Name</span></label
-      >
+      <label class="form-label required"><span *ngIf="!isForeignForm">ชื่อรางวัล</span>
+        <span *ngIf="isForeignForm">Award's Name</span></label>
       <input class="form-control" type="text" formControlName="name" />
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label"
-        ><span *ngIf="!isForeignForm">หน่วยงาน</span>
-        <span *ngIf="isForeignForm">Agency/Institution</span></label
-      >
+      <label class="form-label required"><span *ngIf="!isForeignForm">หน่วยงาน</span>
+        <span *ngIf="isForeignForm">Agency/Institution</span></label>
       <input class="form-control" type="text" formControlName="agency" />
     </div>
 
     <div class="col-md-6 mb-2">
-      <label class="form-label"
-        ><span *ngIf="!isForeignForm">วัน/เดือน/ปี</span>
-        <span *ngIf="isForeignForm">Date</span></label
-      >
+      <label class="form-label required"><span *ngIf="!isForeignForm">วัน/เดือน/ปี</span>
+        <span *ngIf="isForeignForm">Date</span></label>
       <input class="form-control" type="date" formControlName="date" />
     </div>
   </div>

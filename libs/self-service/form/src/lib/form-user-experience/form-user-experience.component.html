@@ -1,21 +1,19 @@
 <form [formGroup]="form">
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">สถานศึกษาฝึกประสบการณ์วิชาชีพ ครั้งที่ 1</label>
+      <label class="form-label required">สถานศึกษาฝึกประสบการณ์วิชาชีพ ครั้งที่ 1</label>
       <input
         class="form-control"
         type="text"
-        formControlName="TrainingAddressOne"
-      />
+        formControlName="TrainingAddressOne" />
     </div>
 
     <div class="col-md-6 mb-2">
-      <label class="form-label">สถานศึกษาฝึกประสบการณ์วิชาชีพ ครั้งที่ 2</label>
+      <label class="form-label required">สถานศึกษาฝึกประสบการณ์วิชาชีพ ครั้งที่ 2</label>
       <input
         class="form-control"
         type="text"
-        formControlName="TrainingAddressTwo"
-      />
+        formControlName="TrainingAddressTwo" />
     </div>
   </div>
 
@@ -26,12 +24,11 @@
 
   <div class="row">
     <div class="col-md-6">
-      <label class="form-label">สถานศึกษาที่ปฏิบัติการสอน</label>
+      <label class="form-label required">สถานศึกษาที่ปฏิบัติการสอน</label>
       <input
         class="form-control"
         type="text"
-        formControlName="teachingAddress"
-      />
+        formControlName="teachingAddress" />
     </div>
 
     <div class="col-md-6 mb-3">
@@ -48,11 +45,9 @@
     <input
       formControlName="hasForeignLicense"
       type="checkbox"
-      (change)="resetForeignLicenseForm($event)"
-    />
+      (change)="resetForeignLicenseForm($event)" />
     <label class="form-label ms-2">
-      ใบอนุญาตประกอบวิชาชีพครูจากต่างประเทศ</label
-    >
+      ใบอนุญาตประกอบวิชาชีพครูจากต่างประเทศ</label>
   </div>
 
   <ng-template [ngIf]="hasForeignLicense">
@@ -60,8 +55,7 @@
       <ksp-experience-form
         [countries]="countries"
         [licenses]="licenses"
-        formControlName="foreignLicenseForm"
-      ></ksp-experience-form>
+        formControlName="foreignLicenseForm"></ksp-experience-form>
     </div>
   </ng-template>
 </form>
