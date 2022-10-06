@@ -104,7 +104,9 @@ export class AddStaffComponent implements OnInit {
         //console.log('res = ', res);
         if (res && res.returncode !== '98') {
           // found staff
-          this.router.navigate(['/staff-management', 'edit-staff', res.id]);
+          if (this.mode !== 'view') {
+            this.router.navigate(['/staff-management', 'edit-staff', res.id]);
+          }
         } else {
           // not found then reset form and set idcard again
           this.router.navigate(['/staff-management', 'add-staff', idcardno]);
@@ -152,11 +154,16 @@ export class AddStaffComponent implements OnInit {
       this.mode = 'edit';
       this.patchDataFromLicense();
     } else if (this.router.url.includes('view-staff')) {
+      console.log('bbb = ');
       this.searchStaffDone = true;
       this.mode = 'view';
       this.form.disable();
-    } else {
+    } else if (
+      this.router.url.includes('edit-staff') ||
+      this.router.url.includes('add-staff')
+    ) {
       // add staff
+      console.log('ccc = ');
       this.mode = 'edit';
     }
   }
@@ -168,7 +175,6 @@ export class AddStaffComponent implements OnInit {
     localForage.getItem('add-staff-has-license').then((res: any) => {
       //console.log('stored data = ', res);
       this.form.controls.userInfo.patchValue(res);
-      //this.pathUserInfo(res);
     });
   }
 

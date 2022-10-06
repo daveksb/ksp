@@ -9,14 +9,14 @@
       <label
         class="form-label required"
         [ngClass]="{ required: mode === 'edit' }"
-        >หมายเลขบัตรประชาชน
+        >หมายเลขบัตรประชาชน{{ KuruspaNoLabel }}
       </label>
       <input
         maxlength="13"
         class="form-control"
         type="text"
         formControlName="idcardno"
-        placeholder="หมายเลขประชาชนจำนวน 13 หลัก"
+        placeholder="หมายเลขจำนวน 13 หลัก"
       />
       <ng-container
         *ngIf="idCardNo.invalid && (idCardNo.dirty || idCardNo.touched)"
