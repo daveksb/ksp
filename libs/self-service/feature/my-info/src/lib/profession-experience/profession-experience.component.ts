@@ -152,16 +152,16 @@ export class ProfessionExperienceComponent
   mapFileInfo(fileList: any[]) {
     return fileList.map((file: any) => {
       const object = {
-        fileid: file.fileId || null,
-        filename: file.fileName || null,
+        fileid: file.fileid || null,
+        filename: file.filename || null,
       };
       return object;
     });
   }
   patchFileId(fileList: any, tab: any) {
     for (let i = 0; i < fileList.length; i++) {
-      fileList[i].fileId = tab[i]?.fileid;
-      fileList[i].fileName = tab[i]?.filename;
+      fileList[i].fileid = tab[i]?.fileid;
+      fileList[i].filename = tab[i]?.filename;
     }
     return fileList;
   }

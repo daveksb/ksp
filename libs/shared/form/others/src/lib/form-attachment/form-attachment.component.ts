@@ -65,8 +65,9 @@ export class FormAttachmentComponent {
   }
 
   updateComplete(file: any, group: any) {
-    const { fileId, fileName } = file;
-    group.files.push({ fileId, fileName });
+    const { fileid, filename } = file;
+    group.files.push({ fileid, filename });
+    console.log(group.files);
     this.uploadComplete.emit(this.groups);
   }
 }

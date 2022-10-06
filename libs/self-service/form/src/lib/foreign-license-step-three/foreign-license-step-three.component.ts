@@ -12,8 +12,8 @@ export class ForeignLicenseStepThreeComponent {
   @Input() attachFiles: FileGroup[] = [];
 
   updateComplete(file: any, group: any) {
-    const { fileId, fileName } = file;
-    group.fileId = fileId;
-    group.fileName = fileName;
+    const { fileid, filename } = file;
+    group.fileid = fileid;
+    group.filename = filename;
   }
 }

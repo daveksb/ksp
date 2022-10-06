@@ -38,12 +38,12 @@ export class ForbiddenPropertyFormComponent
     incompetent: [null, Validators.required],
     prison: [null, Validators.required],
     prisonReason: [null],
-    fileId: [null],
-    fileName: [null],
+    fileid: [null],
+    filename: [null],
   });
 
-  get fileName() {
-    return this.form.controls.fileName.value || '';
+  get filename() {
+    return this.form.controls.filename.value || '';
   }
 
   prisonSelected: any;

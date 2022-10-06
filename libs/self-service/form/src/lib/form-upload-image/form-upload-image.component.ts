@@ -31,7 +31,7 @@ export class FormUploadImageComponent {
   uploadComplete(event: any) {
     //console.log(event);
     this.imgSrc = event.file;
-    this.uploadImageComplete.emit(event.fileId);
+    this.uploadImageComplete.emit(event.fileid);
   }
 
   downloadFile(id: string) {
