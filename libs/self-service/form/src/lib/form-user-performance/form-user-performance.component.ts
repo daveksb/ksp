@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component } from '@angular/core';
+import { AttachFile } from '@ksp/shared/constant';
 
 @Component({
   selector: 'self-service-form-user-performance',
   templateUrl: './form-user-performance.component.html',
   styleUrls: ['./form-user-performance.component.css'],
 })
-export class FormUserPerformanceComponent implements OnInit {
+export class FormUserPerformanceComponent {
   typesOfSubject: string[] = [
     'วิชาชีพครู',
     'วิชาภาษาไทยเพื่อการสื่อสาร',
@@ -15,14 +15,10 @@ export class FormUserPerformanceComponent implements OnInit {
   ];
   personSelected = false;
 
-  performanceFiles = performanceFiles;
-
-  ngOnInit(): void {}
+  performanceFiles: AttachFile[] = [
+    {
+      name: 'สำเนาผลการทดสอบ',
+      files: [],
+    },
+  ];
 }
-
-const performanceFiles = [
-  {
-    name: 'สำเนาผลการทดสอบ',
-    fileId: '',
-  },
-];

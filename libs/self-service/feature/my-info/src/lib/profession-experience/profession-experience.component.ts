@@ -9,6 +9,7 @@ import {
 import { providerFactory } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 import { replaceEmptyWithNull } from '@ksp/shared/utility';
+import { AttachFile } from '@ksp/shared/constant';
 
 @Component({
   selector: 'self-service-profession-experience',
@@ -20,25 +21,22 @@ export class ProfessionExperienceComponent
   extends KspFormBaseComponent
   implements OnInit
 {
-  info = [
-    { name: 'สำเนาใบรายงานผลการศึกษา (transcript)', fileId: '', fileName: '' },
+  infoFiles: AttachFile[] = [
+    { name: 'สำเนาใบรายงานผลการศึกษา (transcript)', files: [] },
     {
       name: 'สำเนาปริญญาบัตร หรือสำเนาหนังสือรับรองคุณวุฒิ',
-      fileId: '',
-      fileName: '',
+      files: [],
     },
-    { name: 'สำเนาหนังสือนำส่งแบบประเมินฉบับจริง', fileId: '', fileName: '' },
+    { name: 'สำเนาหนังสือนำส่งแบบประเมินฉบับจริง', files: [] },
     {
       name: 'สำเนาคำสั่งแต่งตั้งคณะผู้ประเมินการปฏิบัติการสอน',
-      fileId: '',
-      fileName: '',
+      files: [],
     },
-    { name: 'สำเนาตารางสอนรายสัปดาห์  ', fileId: '', fileName: '' },
-    { name: 'สำเนาคำสั่งแต่งตั้งปฏิบัติหน้าที่', fileId: '', fileName: '' },
+    { name: 'สำเนาตารางสอนรายสัปดาห์  ', files: [] },
+    { name: 'สำเนาคำสั่งแต่งตั้งปฏิบัติหน้าที่', files: [] },
     {
       name: 'สำเนาสัญญาจ้างหรือทะเบียนประวัติหรือหลักฐานการขอปฏิบัติการสอน',
-      fileId: '',
-      fileName: '',
+      files: [],
     },
   ];
   override form = this.fb.group({
@@ -66,7 +64,6 @@ export class ProfessionExperienceComponent
   ) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
         this.onChange(value);
         this.onTouched();
@@ -91,11 +88,8 @@ export class ProfessionExperienceComponent
         }
         index++;
       }
-      this.patchFileId(this.info, experienceinfo.fileList);
+      this.patchFileId(this.infoFiles, experienceinfo.fileList);
       this.form.patchValue(experienceinfo);
-    });
-    this.form.valueChanges.subscribe((res) => {
-      //console.log('form value = ', res);
     });
   }
 
@@ -128,7 +122,7 @@ export class ProfessionExperienceComponent
   }
   onSave() {
     const formData = this.form.value;
-    const fileList = this.mapFileInfo(this.info);
+    const fileList = this.mapFileInfo(this.infoFiles);
     console.log(fileList);
     this.baseForm.patchValue({
       experienceinfo: JSON.stringify({ ...formData, fileList: fileList }),

@@ -10,6 +10,7 @@ import {
   SelfServiceRequestSubType,
   SelfServiceRequestType,
   SelfServiceRequestForType,
+  AttachFile,
 } from '@ksp/shared/constant';
 import { LicenseFormBaseComponent } from '@ksp/self-service/form';
 import { FormBuilder } from '@angular/forms';
@@ -29,12 +30,11 @@ import {
 import { SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
 
-const OBJECTIVE_FILES = [
-  { name: '1. สำเนาหลักฐานแสดงวุฒิการศึกษา', fileId: '', fileName: '' },
+const OBJECTIVE_FILES: AttachFile[] = [
+  { name: '1. สำเนาหลักฐานแสดงวุฒิการศึกษา', files: [] },
   {
     name: '2. รูปภาพถ่ายหน้าตรง ขนาด 1.5 x 2   นิ้ว',
-    fileId: '',
-    fileName: '',
+    files: [],
   },
 ];
 
@@ -47,7 +47,7 @@ export class CompareKnowledgeRequestComponent
   extends LicenseFormBaseComponent
   implements OnInit
 {
-  objectiveFiles: any[] = [];
+  objectiveFiles: AttachFile[] = [];
   userInfoType = UserInfoFormType.thai;
 
   override form = this.fb.group({
@@ -224,7 +224,7 @@ export class CompareKnowledgeRequestComponent
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'home']);
+        this.router.navigate(['/home']);
       }
     });
   }

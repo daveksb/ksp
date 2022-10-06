@@ -7,6 +7,7 @@ import {
   SelfServiceRequestType,
   SelfServiceRequestSubType,
   SelfServiceRequestForType,
+  AttachFile,
 } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
@@ -28,9 +29,7 @@ import * as _ from 'lodash';
 import { Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
-const ATTACH_FILES = [
-  { name: '1.สำเนาวุฒิการศึกษา', fileId: '', fileName: '' },
-];
+const ATTACH_FILES: AttachFile[] = [{ name: '1.สำเนาวุฒิการศึกษา', files: [] }];
 
 @Component({
   selector: 'ksp-refund-fee-request',
@@ -38,7 +37,7 @@ const ATTACH_FILES = [
   styleUrls: ['./refund-fee-request.component.scss'],
 })
 export class RefundFeeRequestComponent implements OnInit {
-  files: any[] = [];
+  files: AttachFile[] = [];
   headerGroup = ['วันที่ทำรายการ', 'เลขใบคำขอ'];
   userInfoType = UserInfoFormType.thai;
   today = thaiDate(new Date());

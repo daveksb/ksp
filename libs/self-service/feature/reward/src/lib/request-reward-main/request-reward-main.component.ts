@@ -91,13 +91,11 @@ export class RequestRewardMainComponent implements OnInit {
       if (this.requestId) {
         this.requestService.getRequestById(this.requestId).subscribe((res) => {
           if (res) {
-            console.log(res);
+            //console.log(res);
             this.requestData = res;
             this.requestNo = res.requestno;
             this.currentProcess = Number(res.currentprocess);
             this.uniqueTimestamp = res.uniquetimestamp || '';
-            //console.log(this.uniqueTimestamp);
-
             this.patchData(res);
             this.getFormType();
           }
@@ -113,7 +111,7 @@ export class RequestRewardMainComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         const formType = +(res || 0);
-        console.log(formType);
+        //console.log(formType);
         if (formType > 0) {
           this.clearForm();
           this.requestId = null;
@@ -325,7 +323,7 @@ export class RequestRewardMainComponent implements OnInit {
   }
 
   tempSave() {
-    console.log(this.form.value);
+    //console.log(this.form.value);
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -341,7 +339,7 @@ export class RequestRewardMainComponent implements OnInit {
           ? this.requestService.updateRequest.bind(this.requestService)
           : this.requestService.createRequest.bind(this.requestService);
         request(payload).subscribe((res) => {
-          console.log('request result = ', res);
+          //console.log('request result = ', res);
           if (res?.returncode === '00') {
             this.router.navigate(['/home']);
           }
@@ -392,7 +390,7 @@ export class RequestRewardMainComponent implements OnInit {
     userInfo.addressinfo = null;
     const selectData = _.pick(userInfo, allowKey);
     const rewardfiles = this.rewardFiles;
-    console.log(rewardfiles);
+    //console.log(rewardfiles);
 
     const filledData = {
       ...self,
