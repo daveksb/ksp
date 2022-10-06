@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FormMode } from '@ksp/shared/interface';
 import { FilesPreviewComponent } from '@ksp/shared/dialog';
-import { RequestPageType } from '@ksp/shared/constant';
 import { FileService } from '@ksp/shared/form/file-upload';
 
 @Component({
@@ -66,8 +65,7 @@ export class FormAttachmentComponent {
 
   updateComplete(file: any, group: any) {
     const { fileId, fileName } = file;
-    group.fileId = fileId;
-    group.fileName = fileName;
+    group.files.push({ fileId, fileName });
     this.uploadComplete.emit(this.groups);
   }
 }

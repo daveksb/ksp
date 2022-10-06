@@ -1,9 +1,38 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { pairwise } from 'rxjs';
 
+function checkboxValidator(): any {
+  return (form: FormGroup) => {
+    const changePrefix: boolean = form.get('changePrefix')?.value;
+    const changeLastname: boolean = form.get('changeLastname')?.value;
+    const isDistributed: boolean = form.get('isDistributed')?.value;
+
+    const changeFirstname: boolean = form.get('changeFirstname')?.value;
+
+    if (
+      !changePrefix &&
+      !changeFirstname &&
+      !changeLastname &&
+      !isDistributed
+    ) {
+      return { checkbox: true };
+    }
+
+    return null;
+  };
+}
+
+@UntilDestroy()
 @Component({
   selector: 'ksp-edit-license',
   standalone: true,
@@ -12,7 +41,10 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./edit-license.component.scss'],
   providers: providerFactory(EditLicenseComponent),
 })
-export class EditLicenseComponent extends KspFormBaseComponent {
+export class EditLicenseComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
   override form = this.fb.group({
     changePrefix: [],
     oldPrefixTh: [{ value: null, disabled: true }],
@@ -66,6 +98,70 @@ export class EditLicenseComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+
+  ngOnInit(): void {
+    this.form.setValidators(checkboxValidator());
+    this.form.valueChanges
+      .pipe(untilDestroyed(this), pairwise())
+      .subscribe(([prev, next]) => {
+        if (prev.changePrefix !== next.changePrefix) {
+          if (next.changePrefix) {
+            this.form.controls.prefixTh.addValidators(Validators.required);
+            this.form.controls.prefixEn.addValidators(Validators.required);
+          } else {
+            this.form.controls.prefixTh.clearValidators();
+            this.form.controls.prefixEn.clearValidators();
+          }
+          this.form.controls.prefixTh.updateValueAndValidity();
+          this.form.controls.prefixEn.updateValueAndValidity();
+        }
+
+        if (prev.changeFirstname !== next.changeFirstname) {
+          if (next.changeFirstname) {
+            this.form.controls.firstnameTh.addValidators(Validators.required);
+            this.form.controls.firstnameEn.addValidators(Validators.required);
+          } else {
+            this.form.controls.firstnameTh.clearValidators();
+            this.form.controls.firstnameEn.clearValidators();
+          }
+          this.form.controls.firstnameTh.updateValueAndValidity();
+          this.form.controls.firstnameEn.updateValueAndValidity();
+        }
+
+        if (prev.changeLastname !== next.changeLastname) {
+          if (next.changeLastname) {
+            this.form.controls.lastnameTh.addValidators(Validators.required);
+            this.form.controls.lastnameEn.addValidators(Validators.required);
+          } else {
+            this.form.controls.lastnameTh.clearValidators();
+            this.form.controls.lastnameEn.clearValidators();
+          }
+          this.form.controls.lastnameTh.updateValueAndValidity();
+          this.form.controls.lastnameEn.updateValueAndValidity();
+        }
+
+        if (prev.changePassport !== next.changePassport) {
+          if (next.changePassport) {
+            this.form.controls.passportNo.addValidators(Validators.required);
+          } else {
+            this.form.controls.passportNo.clearValidators();
+          }
+          this.form.controls.passportNo.updateValueAndValidity();
+        }
+
+        if (prev.isDistributed !== next.isDistributed) {
+          if (next.isDistributed) {
+            this.form.controls.distributeData.addValidators(
+              Validators.required
+            );
+          } else {
+            this.form.controls.distributeData.clearValidators();
+          }
+          this.form.controls.distributeData.updateValueAndValidity();
+        }
+        console.log(this.form.valid);
+      });
   }
 
   override set value(value: any) {

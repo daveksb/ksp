@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { skip } from 'rxjs';
@@ -22,8 +22,8 @@ export class RenewLicensePropertyComponent
   selectedEducationType!: number;
 
   override form = this.fb.group({
-    educationType: [],
-    educationLevelForm: [],
+    educationType: [null, Validators.required],
+    educationLevelForm: [null, Validators.required],
   });
 
   educationTypes1: ListData[] = [];

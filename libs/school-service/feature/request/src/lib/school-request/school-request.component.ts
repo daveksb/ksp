@@ -373,7 +373,6 @@ export class SchoolRequestComponent implements OnInit {
         this.disableSave = true;
         this.disableCancel = true;
       }
-
       // formValid + ไม่มีหมายเลขใบคำขอ ทำได้ทุกอย่าง
       else if (this.form.valid && !this.requestId) {
         this.disableTempSave = false;
@@ -469,24 +468,23 @@ export class SchoolRequestComponent implements OnInit {
   }
   patchFileInfo(res: any) {
     if (res && res.tab3) {
-      this.patchFileId(this.eduFiles, res.tab3);
+      this.eduFiles.forEach((group, index) => (group.files = res.tab3[index]));
     }
     if (res && res.tab4) {
-      this.patchFileId(this.teachingFiles, res.tab4);
+      this.teachingFiles.forEach(
+        (group, index) => (group.files = res.tab4[index])
+      );
     }
     if (res && res.tab5) {
-      this.patchFileId(this.reasonFiles, res.tab5);
+      this.reasonFiles.forEach(
+        (group, index) => (group.files = res.tab5[index])
+      );
     }
     if (res && res.tab5) {
-      this.patchFileId(this.attachFiles, res.tab6);
+      this.attachFiles.forEach(
+        (group, index) => (group.files = res.tab6[index])
+      );
     }
-  }
-  patchFileId(fileList: any, tab: any) {
-    for (let i = 0; i < fileList.length; i++) {
-      fileList[i].fileId = tab[i]?.fileid;
-      fileList[i].fileName = tab[i]?.filename;
-    }
-    return fileList;
   }
   patchHiringInfo(data: any) {
     this.form.controls.hiringinfo.patchValue(data);

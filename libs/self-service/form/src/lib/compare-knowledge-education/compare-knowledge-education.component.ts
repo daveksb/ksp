@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -73,8 +73,8 @@ export class CompareKnowledgeEducationComponent
 
   addFormArray(form: FormArray<any>) {
     const data = this.fb.group({
-      degreeLevel: [],
-      institute: [],
+      degreeLevel: [null, Validators.required],
+      institute: [null, Validators.required],
     });
     form.push(data);
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -14,15 +14,15 @@ export class CompareKnowledgeInfoComponent
   implements OnInit
 {
   override form = this.fb.group({
-    thaiTestScore: [],
-    thaiScoreLevel: [],
-    thaiScoreValidDate: [],
-    englishTestScore: [],
-    englishScoreLevel: [],
-    englishScoreValidDate: [],
-    techTestScore: [],
-    techScoreLevel: [],
-    techScoreValidDate: [],
+    thaiTestScore: [null, Validators.required],
+    thaiScoreLevel: [null, Validators.required],
+    thaiScoreValidDate: [null, Validators.required],
+    englishTestScore: [null, Validators.required],
+    englishScoreLevel: [null, Validators.required],
+    englishScoreValidDate: [null, Validators.required],
+    techTestScore: [null, Validators.required],
+    techScoreLevel: [null, Validators.required],
+    techScoreValidDate: [null, Validators.required],
     degreeInfo: this.fb.array([]),
   });
 
@@ -54,10 +54,10 @@ export class CompareKnowledgeInfoComponent
 
   addFormArray(form: FormArray<any>) {
     const data = this.fb.group({
-      subject: [],
-      testResult: [],
-      scoreLevel: [],
-      scoreValidDate: [],
+      subject: [null, Validators.required],
+      testResult: [null, Validators.required],
+      scoreLevel: [null, Validators.required],
+      scoreValidDate: [null, Validators.required],
     });
     form.push(data);
   }
