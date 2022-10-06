@@ -19,7 +19,7 @@ import localForage from 'localforage';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { EMPTY, switchMap } from 'rxjs';
 import * as XLSX from 'xlsx';
-import { getCookie, parseJson, thaiDate } from '@ksp/shared/utility';
+import { getCookie, nameEnPattern, nameThPattern, parseJson, phonePattern, thaiDate } from '@ksp/shared/utility';
 import moment from 'moment';
 
 @Component({
@@ -250,22 +250,25 @@ export class ImportStudentComponent implements OnInit {
       index: [index],
       no: [index+1],
       admissiondate: [moment().format('YYYY-MM-DD'), Validators.required],
-      idcardno: ['', Validators.required],
+      idcardno: ['', [Validators.required, Validators.maxLength(13)]],
       passportno: ['', Validators.required],
       nationality: [null, Validators.required],
       prefixth: [null, Validators.required],
-      firstnameth: ['', Validators.required],
-      lastnameth: ['', Validators.required],
+      firstnameth: ['', [Validators.required, Validators.pattern(nameThPattern)]],
+      lastnameth: ['', [Validators.required, Validators.pattern(nameThPattern)]],
       prefixen: [null, Validators.required],
-      firstnameen: ['', Validators.required],
-      middlenameen: ['', Validators.required],
-      lastnameen: ['', Validators.required],
-      phone: ['', Validators.required],
+      firstnameen: ['', [Validators.required, Validators.pattern(nameEnPattern)]],
+      middlenameen: ['', [Validators.required, Validators.pattern(nameEnPattern)]],
+      lastnameen: ['', [Validators.required, Validators.pattern(nameEnPattern)]],
+      phone: ['', [Validators.required, Validators.pattern(phonePattern)]],
       birthdate: ['', Validators.required],
       address: this.fb.group({ addressInfo: [{}] }),
-      approveno: ['', Validators.required],
-      graduationdate: ['', Validators.required],
-      approvedate: ['', Validators.required],
+      approveno: ['',
+      this.pageType == 'graduateList' ? Validators.required : undefined],
+      graduationdate: ['',
+      this.pageType == 'graduateList' ? Validators.required : undefined],
+      approvedate: ['',
+      this.pageType == 'graduateList' ? Validators.required : undefined],
       subjects: [{subject1: '', subject2: ''}, Validators.required],
       teachingpracticeschool: []
     });
@@ -284,7 +287,7 @@ export class ImportStudentComponent implements OnInit {
       no: [data.index+1],
       admissiondate: [moment(data.admissiondate).format('YYYY-MM-DD')],
       idcardno: [data.idcardno,
-        this.pageType == 'studentList' ? Validators.required : undefined],
+        this.pageType == 'studentList' ? [Validators.required, Validators.maxLength(13)] : undefined],
       passportno: [data.passportno,
         this.pageType == 'studentList' ? Validators.required : undefined],
       nationality: [data.nationality,
@@ -292,19 +295,19 @@ export class ImportStudentComponent implements OnInit {
       prefixth: [data.prefixth,
         this.pageType == 'studentList' ? Validators.required : undefined],
       firstnameth: [data.firstnameth,
-        this.pageType == 'studentList' ? Validators.required : undefined],
+        this.pageType == 'studentList' ? [Validators.required, Validators.pattern(nameThPattern)] : undefined],
       lastnameth: [data.lastnameth,
-        this.pageType == 'studentList' ? Validators.required : undefined],
+        this.pageType == 'studentList' ? [Validators.required, Validators.pattern(nameThPattern)] : undefined],
       prefixen: [data.prefixen,
         this.pageType == 'studentList' ? Validators.required : undefined],
       firstnameen: [data.firstnameen,
-        this.pageType == 'studentList' ? Validators.required : undefined],
+        this.pageType == 'studentList' ? [Validators.required, Validators.pattern(nameEnPattern)] : undefined],
       middlenameen: [data.middlenameen,
-        this.pageType == 'studentList' ? Validators.required : undefined],
+        this.pageType == 'studentList' ? [Validators.required, Validators.pattern(nameEnPattern)] : undefined],
       lastnameen: [data.lastnameen,
-        this.pageType == 'studentList' ? Validators.required : undefined],
+        this.pageType == 'studentList' ? [Validators.required, Validators.pattern(nameEnPattern)] : undefined],
       phone: [data.phone,
-        this.pageType == 'studentList' ? Validators.required : undefined],
+        this.pageType == 'studentList' ? [Validators.required, Validators.pattern(phonePattern)] : undefined],
       birthdate: [data.birthdate,
         this.pageType == 'studentList' ? Validators.required : undefined],
       address: this.fb.group({
@@ -341,17 +344,17 @@ export class ImportStudentComponent implements OnInit {
       index: [this.user.value.length],
       no: [this.user.value.length+1],
       admissiondate: [moment(data.admissiondate).format('YYYY-MM-DD')],
-      idcardno: [data.idcardno, Validators.required],
+      idcardno: [data.idcardno, [Validators.required, Validators.maxLength(13)]],
       passportno: [data.passportno, Validators.required],
       nationality: [data.nationality, Validators.required],
       prefixth: [data.prefixth, Validators.required],
-      firstnameth: [data.firstnameth, Validators.required],
-      lastnameth: [data.lastnameth, Validators.required],
+      firstnameth: [data.firstnameth, [Validators.required, Validators.pattern(nameThPattern)]],
+      lastnameth: [data.lastnameth, [Validators.required, Validators.pattern(nameThPattern)]],
       prefixen: [data.prefixen, Validators.required],
-      firstnameen: [data.firstnameen, Validators.required],
-      middlenameen: [data.middlenameen, Validators.required],
-      lastnameen: [data.lastnameen, Validators.required],
-      phone: [data.phone, Validators.required],
+      firstnameen: [data.firstnameen, [Validators.required, Validators.pattern(nameEnPattern)]],
+      middlenameen: [data.middlenameen, [Validators.required, Validators.pattern(nameEnPattern)]],
+      lastnameen: [data.lastnameen, [Validators.required, Validators.pattern(nameEnPattern)]],
+      phone: [data.phone, [Validators.required, Validators.pattern(phonePattern)]],
       birthdate: [data.birthdate, Validators.required],
       address: this.fb.group({
         addressInfo: [{
@@ -619,5 +622,9 @@ export class ImportStudentComponent implements OnInit {
   getForm(index: any) {
     const addressControl = this.user.controls[index].get('address') as FormGroup;
     return addressControl;
+  }
+
+  testcontrol(control:any){
+    console.log(control)
   }
 }
