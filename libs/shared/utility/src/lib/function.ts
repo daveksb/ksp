@@ -1,4 +1,8 @@
-import { SchoolRequestProcess, SchoolRequestType } from '@ksp/shared/constant';
+import {
+  SchoolRequestProcess,
+  SchoolRequestType,
+  SelfRequestProcess,
+} from '@ksp/shared/constant';
 import { SchoolRequest } from '@ksp/shared/interface';
 import moment from 'moment';
 
@@ -105,11 +109,28 @@ export function checkProcess(processId: number) {
 }
 
 export function checkStatus(processId: number, statusId: number) {
-  //console.log('p = ', processId, ' s = ', statusId);
   const process = checkProcess(processId);
   const status = process?.status.find((s) => {
     return s.id == statusId;
   });
+  return status;
+}
+
+export function SelfCheckProcess(processId: number) {
+  const process = SelfRequestProcess.find((p) => {
+    return p.processId === processId;
+  });
+  //console.log('process = ', process);
+  return process;
+}
+
+export function SelfcheckStatus(processId: number, statusId: number) {
+  //console.log('p = ', processId, ' s = ', statusId);
+  const process = SelfCheckProcess(processId);
+  const status = process?.status.find((s) => {
+    return s.id == statusId;
+  });
+  console.log(' s = ', status);
   return status;
 }
 
