@@ -1,12 +1,24 @@
 <div class="d-flex flex-column text-center">
   <div class="fs-3 mb-5">กรุณากรอกรหัสยืนยันตัวตน</div>
 
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="form-label text-center">รหัสถูกส่งไปที่เบอร์</div>
-      <input type="text" class="form-control text-center" maxlength="10" />
+  <form [formGroup]="form">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="form-label text-center">รหัสถูกส่งไปที่เบอร์</div>
+        <input
+          type="text"
+          class="form-control text-center"
+          maxlength="10"
+          formControlName="phone"
+        />
+        <ng-container *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+          <span class="text-danger" *ngIf="phone.errors?.['pattern']"
+            >{{ validatorMessages.phone }}
+          </span>
+        </ng-container>
+      </div>
     </div>
-  </div>
+  </form>
 
   <div class="d-flex justify-content-center mt-5">
     <button matDialogClose class="btn btn-secondary me-2">ยกเลิก</button>

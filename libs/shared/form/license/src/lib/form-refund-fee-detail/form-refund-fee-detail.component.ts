@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { providerFactory } from '@ksp/shared/utility';
+import {
+  phonePattern,
+  providerFactory,
+  validatorMessages,
+} from '@ksp/shared/utility';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -19,6 +23,8 @@ export class FormRefundFeeDetailComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+  validatorMessages = validatorMessages;
+
   override form = this.fb.group({
     licensetype: [null, Validators.required],
     eduoccupytype: [null, Validators.required],
@@ -28,9 +34,9 @@ export class FormRefundFeeDetailComponent
     receiptNo: [{ value: null, disabled: true }],
     total: [{ value: null, disabled: true }],
     smsAlert: [],
-    smsDetail: [],
+    smsDetail: [null, Validators.pattern(phonePattern)],
     emailAlert: [],
-    emailDetail: [],
+    emailDetail: [null, Validators.email],
     bankName: [null, Validators.required],
     bankAccount: [null, Validators.required],
   });
@@ -38,12 +44,19 @@ export class FormRefundFeeDetailComponent
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value: any) => {
         this.onChange(value);
         this.onTouched();
       })
     );
+  }
+
+  get smsPhone() {
+    return this.form.controls.smsDetail;
+  }
+
+  get email() {
+    return this.form.controls.emailDetail;
   }
 
   ngOnInit(): void {

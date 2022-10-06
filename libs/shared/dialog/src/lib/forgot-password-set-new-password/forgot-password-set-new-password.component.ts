@@ -53,9 +53,11 @@ export class ForgotPasswordSetNewPasswordComponent {
       return validatorMessages.passwordNotMatching;
     return null;
   }
+
   get disabledSubmit() {
     return (
-      !this.form.controls.confirmPassword.valid || !this.form.controls.newPassword.valid
+      !this.form.controls.confirmPassword.valid ||
+      !this.form.controls.newPassword.valid
     );
   }
 }
