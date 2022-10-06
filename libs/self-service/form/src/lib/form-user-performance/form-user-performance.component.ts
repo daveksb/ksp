@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AttachFile } from '@ksp/shared/constant';
+import { FileGroup } from '@ksp/shared/constant';
 
 @Component({
   selector: 'self-service-form-user-performance',
@@ -15,7 +15,7 @@ export class FormUserPerformanceComponent {
   ];
   personSelected = false;
 
-  performanceFiles: AttachFile[] = [
+  performanceFiles: FileGroup[] = [
     {
       name: 'สำเนาผลการทดสอบ',
       files: [],

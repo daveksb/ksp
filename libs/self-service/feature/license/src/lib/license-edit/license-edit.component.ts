@@ -22,7 +22,7 @@ import {
 } from '@ksp/shared/utility';
 import { SelfRequest } from '@ksp/shared/interface';
 import {
-  AttachFile,
+  FileGroup,
   SelfServiceRequestForType,
   SelfServiceRequestType,
 } from '@ksp/shared/constant';
@@ -42,7 +42,7 @@ export class LicenseEditComponent implements OnInit {
   });
 
   oldValue: any;
-  uploadFileList: AttachFile[] = [];
+  uploadFileList: FileGroup[] = [];
   uniqueTimestamp!: string;
   requestId!: number;
   requestData!: SelfRequest;
@@ -285,7 +285,7 @@ export class LicenseEditComponent implements OnInit {
   }
 }
 
-const FILE_LIST: AttachFile[] = [
+const FILE_LIST: FileGroup[] = [
   {
     name: 'สำเนาหนังสือสำคัญการเปลี่ยนชื่อ/ชื่อสกุล/เปลี่ยนหรือเพิ่มคำนำหน้าชื่อ',
     files: [],

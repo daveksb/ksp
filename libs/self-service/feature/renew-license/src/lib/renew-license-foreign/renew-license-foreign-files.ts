@@ -1,13 +1,13 @@
-import { AttachFile } from '@ksp/shared/constant';
+import { FileGroup } from '@ksp/shared/constant';
 
-export const ACADEMIC_FILES: AttachFile[] = [
+export const ACADEMIC_FILES: FileGroup[] = [
   {
     name: `1. Achelor's degree`,
     files: [],
   },
 ];
 
-export const REQUEST_DOCUMENT_FILES: AttachFile[] = [
+export const REQUEST_DOCUMENT_FILES: FileGroup[] = [
   {
     name: `Copy of educational certificate along with official transcripts`,
     files: [],
@@ -60,7 +60,7 @@ export const REQUEST_DOCUMENT_FILES: AttachFile[] = [
   },
 ];
 
-export const RENEW_DOCUMENT_FILES: AttachFile[] = [
+export const RENEW_DOCUMENT_FILES: FileGroup[] = [
   {
     name: `An applicant's Qualification Identification Form`,
     files: [],

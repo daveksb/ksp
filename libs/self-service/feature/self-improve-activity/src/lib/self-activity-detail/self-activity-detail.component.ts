@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import {
-  AttachFile,
+  FileGroup,
   SelfServiceSelfDevelopActivityTiess,
 } from '@ksp/shared/constant';
 import { ListData, SelfDevelop } from '@ksp/shared/interface';
@@ -25,7 +25,7 @@ export class SelfActivityDetailComponent implements OnInit {
   disabledSave = false;
   activityTypes: ListData[] = SelfServiceSelfDevelopActivityTiess;
   uniqueTimestamp: any;
-  attachFiles: AttachFile[] = [
+  attachFiles: FileGroup[] = [
     {
       name: '1.วุฒิบัตร',
       files: [],

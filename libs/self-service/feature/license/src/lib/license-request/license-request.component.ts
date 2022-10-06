@@ -24,7 +24,7 @@ import {
   SelfServiceRequestType,
   SelfServiceRequestSubType,
   SelfServiceRequestForType,
-  AttachFile,
+  FileGroup,
 } from '@ksp/shared/constant';
 import { LicenseFormBaseComponent } from '@ksp/self-service/form';
 import * as _ from 'lodash';
@@ -50,8 +50,8 @@ export class LicenseRequestComponent
   });
   countries$!: Observable<any>;
   licenses$!: Observable<any>;
-  eduFiles: AttachFile[] = [];
-  experienceFiles: AttachFile[] = [];
+  eduFiles: FileGroup[] = [];
+  experienceFiles: FileGroup[] = [];
 
   constructor(
     router: Router,

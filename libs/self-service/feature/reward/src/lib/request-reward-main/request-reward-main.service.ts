@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AttachFile } from '@ksp/shared/constant';
+import { FileGroup } from '@ksp/shared/constant';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RequestRewardMainService {
-  councilRewardFiles: AttachFile[] = [
+  councilRewardFiles: FileGroup[] = [
     { name: '1. รางวัลอื่นและประกาศเกียรติคุณ', files: [] },
   ];
 
