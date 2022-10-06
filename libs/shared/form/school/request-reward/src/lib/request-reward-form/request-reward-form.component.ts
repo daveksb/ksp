@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   AddRowButtonComponent,
@@ -62,10 +62,10 @@ export class RequestRewardFormComponent extends KspFormBaseComponent {
   });
 
   rewardFiles = [
-    { name: 'แบบ นร. 1', fileId: '' },
-    { name: 'แบบ นร.2', fileId: '' },
-    { name: 'เอกสารอื่นๆ', fileId: '' },
-    { name: 'บันทึกนำส่งจากสถานศึกษา', fileId: '' },
+    { name: 'แบบ นร. 1', files: [] },
+    { name: 'แบบ นร.2', files: [] },
+    { name: 'เอกสารอื่นๆ', files: [] },
+    { name: 'บันทึกนำส่งจากสถานศึกษา', files: [] },
   ];
 
   rewards = rewards;

@@ -14,9 +14,11 @@ import {
   SchoolInfoService,
 } from '@ksp/shared/service';
 import { mapFileInfo, parseJson, thaiDate } from '@ksp/shared/utility';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
+@UntilDestroy()
 @Component({
   selector: 'ksp-request-reward-detail',
   templateUrl: './request-reward.component.html',
@@ -62,38 +64,14 @@ export class RequestRewardComponent implements OnInit {
     this.checkRequestId();
     this.checkButtonDisableStatus();
 
-    this.form.valueChanges.subscribe(() => {
+    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe(() => {
       //console.log('form valid = ', this.form.valid);
       this.checkButtonDisableStatus();
     });
   }
 
-  checkButtonDisableStatus() {
-    //console.log('this.currentprocess = ', this.currentProcess);
-    if (!this.form.valid) {
-      this.disableTempSave = true;
-      this.disablePermanentSave = true;
-    } else {
-      // form valid
-      if (this.currentProcess === '2') {
-        this.disableTempSave = true;
-        this.disablePermanentSave = true;
-      } else if (this.currentProcess === '1') {
-        this.disableTempSave = false;
-        this.disablePermanentSave = false;
-      } else if (this.currentProcess === '0') {
-        this.disableTempSave = true;
-        this.disablePermanentSave = true;
-        this.disableCancel = true;
-      } else {
-        this.disableTempSave = false;
-        this.disablePermanentSave = false;
-      }
-    }
-  }
-
   checkRequestId() {
-    this.route.paramMap.subscribe((params) => {
+    this.route.paramMap.pipe(untilDestroyed(this)).subscribe((params) => {
       this.requestId = Number(params.get('id'));
       if (this.requestId) {
         this.loadRequestFromId(this.requestId);
@@ -103,34 +81,13 @@ export class RequestRewardComponent implements OnInit {
     });
   }
 
-  onTempSave() {
-    // if no requestid , create request with currentProcess = 1, requestStatus = 1
-    if (!this.requestId) {
-      this.createRequest('1', '1', this.form.controls.reward.value);
-    } else {
-      //if has requestid , update request with currentProcess = 1, requestStatus = 1
-      this.updateRequest('1', '1', this.form.controls.reward.value);
-    }
-  }
-
-  onPermanentSave() {
-    // if no requestid , create request with currentProcess = 2, requestStatus = 1
-    if (!this.requestId) {
-      this.createRequest('2', '1', this.form.controls.reward.value);
-    } else {
-      // if has requestid , update request with currentProcess = 2, requestStatus = 1
-      this.updateRequest('2', '1', this.form.controls.reward.value);
-    }
-  }
-
   cancelRequest() {
-    // may need to update status also
     const payload = {
       id: `${this.requestId}`,
       requeststatus: '0',
     };
-    this.requestService.cancelRequest(payload).subscribe((res) => {
-      //
+    this.requestService.cancelRequest(payload).subscribe(() => {
+      this.previousPage();
     });
   }
 
@@ -187,13 +144,12 @@ export class RequestRewardComponent implements OnInit {
       vdolink: form.vdolink,
     };
     form.osoiinfo = JSON.stringify(osoiInfo);
-
     baseForm.patchValue(form);
 
     const { ref1, ref2, ref3, ...payload } = baseForm.value;
     //console.log('payload = ', payload);
-    this.requestService.updateRequest(payload).subscribe((res) => {
-      //console.log('request result = ', res);
+    this.requestService.updateRequest(payload).subscribe(() => {
+      this.previousPage();
     });
   }
 
@@ -222,9 +178,76 @@ export class RequestRewardComponent implements OnInit {
 
     baseForm.patchValue(form);
     //console.log('current form = ', baseForm.value);
-    this.requestService.createRequest(baseForm.value).subscribe((res) => {
-      //console.log('request result = ', res);
+    this.requestService.createRequest(baseForm.value).subscribe(() => {
+      this.previousPage();
     });
+  }
+
+  tempSave() {
+    // if no requestid , create request with currentProcess = 1, requestStatus = 1
+    if (!this.requestId) {
+      this.createRequest('1', '1', this.form.controls.reward.value);
+    } else {
+      //if has requestid , update request with currentProcess = 1, requestStatus = 1
+      this.updateRequest('1', '1', this.form.controls.reward.value);
+    }
+  }
+
+  permanentSave() {
+    // if no requestid , create request with currentProcess = 2, requestStatus = 1
+    if (!this.requestId) {
+      this.createRequest('2', '1', this.form.controls.reward.value);
+    } else {
+      // if has requestid , update request with currentProcess = 2, requestStatus = 1
+      this.updateRequest('2', '1', this.form.controls.reward.value);
+    }
+  }
+
+  confirmDialog(saveType: number) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
+      },
+    });
+
+    dialogRef.componentInstance.confirmed
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res) {
+          if (saveType === 0) {
+            this.cancelRequest();
+          } else if (saveType === 1) {
+            this.tempSave();
+          } else if (saveType === 2) {
+            this.permanentSave();
+          }
+        }
+      });
+  }
+
+  checkButtonDisableStatus() {
+    //console.log('this.currentprocess = ', this.currentProcess);
+    if (!this.form.valid) {
+      this.disableTempSave = true;
+      this.disablePermanentSave = true;
+    } else {
+      // form valid
+      if (this.currentProcess === '2') {
+        this.disableTempSave = true;
+        this.disablePermanentSave = true;
+      } else if (this.currentProcess === '1') {
+        this.disableTempSave = false;
+        this.disablePermanentSave = false;
+      } else if (this.currentProcess === '0') {
+        this.disableTempSave = true;
+        this.disablePermanentSave = true;
+        this.disableCancel = true;
+      } else {
+        this.disableTempSave = false;
+        this.disablePermanentSave = false;
+      }
+    }
   }
 
   getListData() {
@@ -237,23 +260,8 @@ export class RequestRewardComponent implements OnInit {
     this.router.navigate(['/temp-license', 'list']);
   }
 
-  save(form: any) {
-    /*     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
-      data: {
-        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
-      },
-    });
-
-    dialogRef.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        this.onConfirmed();
-      }
-    }); */
-  }
-
   onConfirmed() {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
       data: {
         header: `ระบบทำการบันทึก
@@ -261,11 +269,13 @@ export class RequestRewardComponent implements OnInit {
       },
     });
 
-    completeDialog.componentInstance.completed.subscribe((res) => {
-      if (res) {
-        this.previousPage();
-      }
-    });
+    dialog.componentInstance.completed
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res) {
+          this.previousPage();
+        }
+      });
   }
 }
 
