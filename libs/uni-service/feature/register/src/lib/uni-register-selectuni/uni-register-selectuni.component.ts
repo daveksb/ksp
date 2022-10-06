@@ -29,15 +29,17 @@ export class UniRegisterSelectUniComponent {
   }
 
   selectedUniversity(university: any) {
-    this.form.patchValue({
-      universityInfo: {
-        schoolid: university.id,
-        unitype: university.typeid,
-        institution: university.name,
-        affiliation: university.nametype
-      }
-    })
-    localForage.setItem('registerSelectedUniversity', this.form.getRawValue());
+    const formuni = {
+      schoolid: university.id,
+      uniid: university.id,
+      unitype: university.typeid,
+      institution: university.name,
+      affiliation: university.nametype,
+      unicode: university.universitycode,
+      uniname: university.name,
+      unitypename: university.nametype
+    }
+    localForage.setItem('registerSelectedUniversity', formuni);
     this.next();
   }
 }

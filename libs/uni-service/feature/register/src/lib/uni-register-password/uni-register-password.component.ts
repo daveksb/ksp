@@ -47,7 +47,7 @@ export class UniRegisterPasswordComponent implements OnInit {
 
     localForage.getItem('registerSelectedUniversity').then((res: any) => {
       if (res) {
-        this.uniData = res.universityInfo;
+        this.uniData = res;
       }
     });
 
@@ -120,8 +120,8 @@ export class UniRegisterPasswordComponent implements OnInit {
           if (res) {
             const educationoccupy = {
               permission: this.savingData.permission,
-              unitype: this.savingData.unitype,
-              other: this.savingData.other
+              other: this.savingData.other,
+              ...this.uniData
             }
             const fileUpload = this.uploadFileList.map((file) => file.fileId || null);
             const payload = {
@@ -136,6 +136,7 @@ export class UniRegisterPasswordComponent implements OnInit {
             payload.systemtype = this.systemtype;
             payload.requesttype = this.requesttype;
             payload.requeststatus = `1`;
+            payload.requestprocess = '2';
             payload.currentprocess = this.currentprocess;
             return this.requestService.createRequest(payload);
           }
