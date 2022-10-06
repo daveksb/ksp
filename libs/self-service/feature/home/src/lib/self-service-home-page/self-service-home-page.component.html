@@ -2,16 +2,15 @@
 
 <div class="full-height main__container py-2 px-4">
   <ksp-uni-form-badge [mainTitle]="badgeTitle"></ksp-uni-form-badge>
-  <div class="row" style="overflow-x: auto">
-    <div class="col p-0">
+  <div class="row flex-column flex-lg-row gap-3" style="overflow-x: auto">
+    <div class="col p-0 mb-3 mb-md-0">
       <self-service-slideshow></self-service-slideshow>
-      <br />
     </div>
-    <div class="col p-0">
+    <div class="col p-0 mb-3 mb-md-0">
       <self-service-slideshow-second></self-service-slideshow-second>
-      <br />
     </div>
   </div>
+  <br />
   <self-service-license-info
     [header]="'สถานะใบคำขอ'"
     [subheader1]="'ใบคำขอที่ต้องชำระเงิน'"
