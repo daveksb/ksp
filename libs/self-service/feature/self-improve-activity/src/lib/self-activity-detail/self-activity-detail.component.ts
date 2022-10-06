@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { SelfServiceSelfDevelopActivityTiess } from '@ksp/shared/constant';
+import {
+  AttachFile,
+  SelfServiceSelfDevelopActivityTiess,
+} from '@ksp/shared/constant';
 import { ListData, SelfDevelop } from '@ksp/shared/interface';
 import { MyInfoService, SelfDevelopmentService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -22,11 +25,10 @@ export class SelfActivityDetailComponent implements OnInit {
   disabledSave = false;
   activityTypes: ListData[] = SelfServiceSelfDevelopActivityTiess;
   uniqueTimestamp: any;
-  attachFiles = [
+  attachFiles: AttachFile[] = [
     {
       name: '1.วุฒิบัตร',
-      fileId: '',
-      fileName: '',
+      files: [],
     },
   ];
   constructor(
@@ -65,7 +67,7 @@ export class SelfActivityDetailComponent implements OnInit {
 
   initializeFile() {
     this.uniqueTimestamp = uuidv4();
-    console.log(this.uniqueTimestamp);
+    //console.log(this.uniqueTimestamp);
   }
 
   onClickSave() {

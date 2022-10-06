@@ -1,30 +1,29 @@
 import { Injectable } from '@angular/core';
+import { AttachFile } from '@ksp/shared/constant';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RequestRewardMainService {
-  councilRewardFiles = [
-    { name: '1. รางวัลอื่นและประกาศเกียรติคุณ', fileId: '', fileName: '' },
+  councilRewardFiles: AttachFile[] = [
+    { name: '1. รางวัลอื่นและประกาศเกียรติคุณ', files: [] },
   ];
 
   thaiTeacherRewardFiles = [
-    { name: '1. รางวัลอื่นและประกาศเกียรติคุณ', fileId: '', fileName: '' },
+    { name: '1. รางวัลอื่นและประกาศเกียรติคุณ', files: [] },
   ];
 
   bestTeacherRewardFiles = [
-    { name: '1. รางวัลอื่นและประกาศเกียรติคุณ', fileId: '', fileName: '' },
+    { name: '1. รางวัลอื่นและประกาศเกียรติคุณ', files: [] },
   ];
 
-  praiseRewardFiles = [
-    { name: '1. รางวัลอื่นและประกาศเกียรติคุณ', fileId: '', fileName: '' },
-  ];
+  praiseRewardFiles = [{ name: '1. รางวัลอื่นและประกาศเกียรติคุณ', files: [] }];
 
   seniorTeacherRewardFiles = [
-    { name: '1. รางวัลอื่นและประกาศเกียรติคุณ', fileId: '', fileName: '' },
+    { name: '1. รางวัลอื่นและประกาศเกียรติคุณ', files: [] },
   ];
 
   researchRewardFiles = [
-    { name: '1. รางวัลอื่นและประกาศเกียรติคุณ', fileId: '', fileName: '' },
+    { name: '1. รางวัลอื่นและประกาศเกียรติคุณ', files: [] },
   ];
 }

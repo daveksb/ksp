@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
+import { getCookie } from '@ksp/shared/utility';
 
 export interface FileUploadUrls {
   uploadFile: string;
@@ -15,15 +16,27 @@ export const File_UPLOAD_URLS = new InjectionToken<FileUploadUrls>('');
   providedIn: 'root',
 })
 export class FileService {
+  tokenKey = getCookie('userToken');
   constructor(
     private http: HttpClient,
     @Inject(File_UPLOAD_URLS) private apiURL: FileUploadUrls
   ) {}
 
   uploadFile(payload: any) {
+    let param = {};
+    if (payload.requesttype && (payload.requesttype != 1 && payload.requesttype != 2)) {
+      param = {
+        ...payload,
+        tokenkey: this.tokenKey
+      }
+    } else {
+      param = {
+        ...payload
+      }
+    }
     return this.http.post(
       `${environment.apiUrl}${this.apiURL.uploadFile}`,
-      payload,
+      param,
       {
         reportProgress: true,
         observe: 'events',
@@ -32,9 +45,20 @@ export class FileService {
   }
 
   deleteFile(payload: any) {
+    let param = {};
+    if (payload.requesttype && (payload.requesttype != 1 && payload.requesttype != 2)) {
+      param = {
+        ...payload,
+        tokenkey: this.tokenKey
+      }
+    } else {
+      param = {
+        ...payload
+      }
+    }
     return this.http.post(
       `${environment.apiUrl}${this.apiURL.delete}`,
-      payload
+      param
     );
   }
 

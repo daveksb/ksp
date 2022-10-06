@@ -1,4 +1,5 @@
 import { Route } from '@angular/router';
+import { AttachFile } from '@ksp/shared/constant';
 import { MenuConfig } from './ksp-shared';
 export type EthicsMode = 'accusation' | 'investigation' | 'inquiry' | 'publish';
 
@@ -112,9 +113,9 @@ export interface EhicsSubcommittee {
   position: string | null;
   bureau: string | null;
 }
-export const ACCUSATION_FILES = [
-  { name: '1. เอกสารกล่าวหา/กล่าวโทษ', fileId: '', fileName: '' },
-  { name: '2. สำเนาบัตรประชาชน	', fileId: '', fileName: '' },
+export const ACCUSATION_FILES: AttachFile[] = [
+  { name: '1. เอกสารกล่าวหา/กล่าวโทษ', files: [] },
+  { name: '2. สำเนาบัตรประชาชน	', files: [] },
 ];
 export const columns = [
   'order',

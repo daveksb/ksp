@@ -41,8 +41,8 @@ export class RetiredAttachmentComponent implements OnInit {
   ) {}
 
   retiredFiles = [
-    { name: 'หนังสือแต่งตั้งผู้ประสานงาน', fileId: '', fileName: '' },
-    { name: 'สำเนาบัตรประชาชน', fileId: '', fileName: '' }
+    { name: 'หนังสือแต่งตั้งผู้ประสานงาน', files: [] },
+    { name: 'สำเนาบัตรประชาชน', files: [] }
   ];
 
   ngOnInit() {
@@ -91,11 +91,10 @@ export class RetiredAttachmentComponent implements OnInit {
       .pipe(
         switchMap((res) => {
           if (res) {
-            const fileUpload = this.retiredFiles.map((file) => file.fileId || null);
             let payload = {
               ...this.userInfo,
               coordinatorinfo: JSON.stringify(this.form.value.coordinator),
-              fileinfo: JSON.stringify({ fileUpload }),
+              fileinfo: JSON.stringify(this.retiredFiles),
               reasoninfo: JSON.stringify(this.reasoninfo)
             }
             payload.ref1 = '3';

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { UserInfoFormType } from '@ksp/shared/constant';
+import { AttachFile, UserInfoFormType } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -33,7 +33,9 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
     private requestService: RequestService
   ) {}
   userInfoFormType: number = UserInfoFormType.thai;
-  retiredFiles = [{ name: 'หนังสือแต่งตั้งผู้ประสานงาน', fileId: '' }];
+  retiredFiles: AttachFile[] = [
+    { name: 'หนังสือแต่งตั้งผู้ประสานงาน', files: [] },
+  ];
   prefixList$!: Observable<any>;
   uniqueTimestamp: any;
 
