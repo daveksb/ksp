@@ -81,10 +81,10 @@ export class LicenseRequestComponent
   ngOnInit(): void {
     this.getListData();
     this.checkRequestId();
-    /* this.form.valueChanges.subscribe((res) => {
+    this.form.valueChanges.subscribe(() => {
       console.log('user info valid = ', this.form.controls.userInfo.valid);
       console.log('form valid = ', this.form.valid);
-    }); */
+    });
   }
 
   override resetForm() {

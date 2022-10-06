@@ -1,7 +1,9 @@
 <form [formGroup]="form">
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label" *ngIf="educationTypes !== 'supervision'"
+      <label
+        class="form-label required"
+        *ngIf="educationTypes !== 'supervision'"
         >ลักษณะวุฒิการศึกษา</label
       >
       <label class="form-label" *ngIf="educationTypes === 'supervision'"
