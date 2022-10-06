@@ -303,6 +303,7 @@ export class SchoolRequestComponent implements OnInit {
 
     const tab3 = mapFileInfo(this.eduFiles);
     const tab4 = mapFileInfo(this.teachingFiles);
+    console.log(tab4);
     const tab5 = mapFileInfo(this.reasonFiles);
     const tab6 = mapFileInfo(this.attachFiles);
 
@@ -469,11 +470,10 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   patchFileInfo(res: any) {
-    console.log('tab3 = ', res.tab3);
     if (res && res.tab3) {
       this.eduFiles.forEach((group, index) => (group.files = res.tab3[index]));
     }
-    /*     if (res && res.tab4) {
+    if (res && res.tab4) {
       this.teachingFiles.forEach(
         (group, index) => (group.files = res.tab4[index])
       );
@@ -487,7 +487,7 @@ export class SchoolRequestComponent implements OnInit {
       this.attachFiles.forEach(
         (group, index) => (group.files = res.tab6[index])
       );
-    } */
+    }
   }
 
   patchHiringInfo(data: any) {

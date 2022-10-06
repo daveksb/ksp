@@ -15,7 +15,7 @@ import {
   SchoolInfoService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { thaiDate } from '@ksp/shared/utility';
+import { mapFileInfo, thaiDate } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
 
 @UntilDestroy()
@@ -40,7 +40,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   prefixList$!: Observable<any>;
   countries$!: Observable<any>;
   visaTypeList$!: Observable<any>;
-  foreignInfo = [{ name: '1.สำเนาหนังสือเดินทาง', files: [] }];
+  foreignFiles = [{ name: '1.สำเนาหนังสือเดินทาง', files: [] }];
   requestNumber = '';
   requestId!: number;
   constructor(
@@ -87,6 +87,13 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
         res.passportenddate = res.passportenddate?.split('T')[0];
         const visainfo = JSON.parse(atob(res.visainfo));
         visainfo.passportenddate = visainfo.passportenddate?.split('T')[0];
+        res.fileinfo = JSON.parse(atob(res.fileinfo));
+
+        if (res && res.fileinfo) {
+          this.foreignFiles.forEach(
+            (group, index) => (group.files = res.fileinfo[index])
+          );
+        }
         this.form.get('foreignTeacher')?.patchValue(res);
         this.form.controls['visainfo'].patchValue(visainfo);
       }
@@ -178,6 +185,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             userInfo.currentprocess = `1`;
             userInfo.requeststatus = `1`;
             userInfo.visainfo = JSON.stringify(this.form.value.visainfo);
+            userInfo.fileinfo = JSON.stringify(mapFileInfo(this.foreignFiles));
             return this.requestService.createRequest(userInfo);
           }
           return EMPTY;
