@@ -4,6 +4,7 @@ import { SchoolServiceLoginComponent } from './school-service-login/school-servi
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginFormComponent } from '@ksp/shared/form/login';
+import { UniFormBadgeComponent } from '@ksp/shared/ui';
 
 @NgModule({
   imports: [
@@ -11,6 +12,7 @@ import { LoginFormComponent } from '@ksp/shared/form/login';
     MatIconModule,
     ReactiveFormsModule,
     LoginFormComponent,
+    UniFormBadgeComponent,
   ],
   declarations: [SchoolServiceLoginComponent],
   exports: [SchoolServiceLoginComponent],

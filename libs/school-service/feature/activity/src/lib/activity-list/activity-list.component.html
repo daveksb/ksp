@@ -24,78 +24,99 @@
       </div>
       <hr />
 
-      <table mat-table [dataSource]="dataSource">
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-          <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
-        </ng-container>
+      <div class="table__scroll">
+        <table
+          class="mt-1"
+          mat-table
+          matSort
+          [dataSource]="dataSource"
+          [hidden]="!dataSource.data.length"
+        >
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              {{ i + 1 }}
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="licenseID">
-          <th mat-header-cell *matHeaderCellDef>เลขที่หนังสืออนุญาต</th>
-          <td mat-cell *matCellDef="let element"></td>
-        </ng-container>
+          <ng-container matColumnDef="licenseID">
+            <th mat-header-cell *matHeaderCellDef>เลขที่หนังสืออนุญาต</th>
+            <td mat-cell *matCellDef="let element"></td>
+          </ng-container>
 
-        <ng-container matColumnDef="idcardno">
-          <th mat-header-cell *matHeaderCellDef>
-            หมายเลขบัตรประชาชน/เลขที่หนังสือเดินทาง
-          </th>
-          <td mat-cell *matCellDef="let element">{{ element.idcardno }}</td>
-        </ng-container>
+          <ng-container matColumnDef="idcardno">
+            <th mat-header-cell *matHeaderCellDef>
+              หมายเลขบัตรประชาชน/เลขที่หนังสือเดินทาง
+            </th>
+            <td mat-cell *matCellDef="let element">{{ element.idcardno }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.firstnameth }} {{ element.lastnameth }}
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.firstnameth }} {{ element.lastnameth }}
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="releaseDate">
-          <th mat-header-cell *matHeaderCellDef>วันที่ออกหนังสือ</th>
-          <td mat-cell *matCellDef="let element"></td>
-        </ng-container>
+          <ng-container matColumnDef="releaseDate">
+            <th mat-header-cell *matHeaderCellDef>วันที่ออกหนังสือ</th>
+            <td mat-cell *matCellDef="let element"></td>
+          </ng-container>
 
-        <ng-container matColumnDef="finishedDate">
-          <th mat-header-cell *matHeaderCellDef>วันที่สิ้นสุด</th>
-          <td mat-cell *matCellDef="let element"></td>
-        </ng-container>
+          <ng-container matColumnDef="finishedDate">
+            <th mat-header-cell *matHeaderCellDef>วันที่สิ้นสุด</th>
+            <td mat-cell *matCellDef="let element"></td>
+          </ng-container>
 
-        <ng-container matColumnDef="startdate">
-          <th mat-header-cell *matHeaderCellDef>วันที่เข้าปฏิบัติงาน</th>
-          <td mat-cell *matCellDef="let element">{{ element.startdate }}</td>
-        </ng-container>
+          <ng-container matColumnDef="startdate">
+            <th mat-header-cell *matHeaderCellDef>วันที่เข้าปฏิบัติงาน</th>
+            <td mat-cell *matCellDef="let element">{{ element.startdate }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="enddate">
-          <th mat-header-cell *matHeaderCellDef>วันที่หมดสัญญา</th>
-          <td mat-cell *matCellDef="let element">{{ element.enddate }}</td>
-        </ng-container>
+          <ng-container matColumnDef="enddate">
+            <th mat-header-cell *matHeaderCellDef>วันที่หมดสัญญา</th>
+            <td mat-cell *matCellDef="let element">{{ element.enddate }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="edit">
-          <th mat-header-cell *matHeaderCellDef>เพิ่ม/แก้ไข</th>
-          <td mat-cell *matCellDef="let element">
-            <i
-              role="button"
-              (click)="edit(activityPageMode.edit, element.id)"
-              class="bi bi-pencil-square text-primary fs-5"
-            ></i>
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef>เพิ่ม/แก้ไข</th>
+            <td mat-cell *matCellDef="let element">
+              <i
+                role="button"
+                (click)="edit(activityPageMode.edit, element.id)"
+                class="bi bi-pencil-square text-primary fs-5"
+              ></i>
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="view">
-          <th mat-header-cell *matHeaderCellDef>ดูข้อมูล</th>
-          <td mat-cell *matCellDef="let element">
-            <i
-              role="button"
-              (click)="view(activityPageMode.view, element.id)"
-              class="bi bi-eye fs-5 text-success"
-            ></i>
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="view">
+            <th mat-header-cell *matHeaderCellDef>ดูข้อมูล</th>
+            <td mat-cell *matCellDef="let element">
+              <i
+                role="button"
+                (click)="view(activityPageMode.view, element.id)"
+                class="bi bi-eye fs-5 text-success"
+              ></i>
+            </td>
+          </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <table>
+          <tr *ngIf="searchNotFound">
+            <td
+              class="text-center fs-5"
+              [attr.colspan]="displayedColumns.length"
+            >
+              ไม่พบข้อมูล
+            </td>
+          </tr>
+        </table>
+      </div>
 
       <mat-paginator
+        [hidden]="!dataSource.data.length"
         [length]="dataSource.data.length"
         [pageSize]="25"
         [showFirstLastButtons]="true"
