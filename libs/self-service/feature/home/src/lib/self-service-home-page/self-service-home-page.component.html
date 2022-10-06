@@ -1,7 +1,9 @@
 <ksp-top-nav [isSelfService]="true"><span header>หน้าแรก</span></ksp-top-nav>
 
 <div class="full-height main__container py-2 px-4">
-  <ksp-uni-form-badge [mainTitle]="badgeTitle"></ksp-uni-form-badge>
+  <div class="py-2">
+    <ksp-uni-form-badge [mainTitle]="badgeTitle"></ksp-uni-form-badge>
+  </div>
   <div class="row flex-column flex-lg-row gap-2" style="overflow-x: auto">
     <div class="col p-0 mb-3 mb-md-0">
       <self-service-slideshow></self-service-slideshow>
