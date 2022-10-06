@@ -18,25 +18,27 @@
           <tr style="height: 60px; border-top: 1px solid #eceef2">
             <th class="ps-3 py-2 text-black">
               {{ group.name }}
-              <div class="d-flex align-items-center flex-row">
-                <div
-                  class="text-secondary"
-                  role="button"
-                  (click)="downloadFile(group)"
-                >
-                  {{ group?.fileName }}
-                </div>
-                <i
-                  (click)="deleteFile(group)"
-                  *ngIf="group?.fileId && mode === 'edit'"
-                  class="bi bi-x-circle-fill text-danger fs-6 ms-2"
-                  role="button"
-                ></i>
+              <ng-container *ngFor="let file of group.files; index as i">
+                <div class="d-flex align-items-center flex-row">
+                  <div
+                    class="text-secondary"
+                    role="button"
+                    (click)="downloadFile(file)"
+                  >
+                    {{ file?.fileName }}
+                  </div>
+                  <i
+                    (click)="deleteFile(file)"
+                    *ngIf="file?.fileId && mode === 'edit'"
+                    class="bi bi-x-circle-fill text-danger fs-6 ms-2"
+                    role="button"
+                  ></i>
 
-                <!-- <div *ngIf="i === 0 && mode === 'edit'" class="text-danger">
-                  ขอเอกสารเพิ่มเติม: เนื่องจากขาดข้อมูลหน้าที่ 11-20
-                </div> -->
-              </div>
+                  <!-- <div *ngIf="i === 0 && mode === 'edit'" class="text-danger">
+                    ขอเอกสารเพิ่มเติม: เนื่องจากขาดข้อมูลหน้าที่ 11-20
+                  </div> -->
+                </div>
+              </ng-container>
             </th>
             <td class="text-center">-</td>
             <td *ngIf="mode === 'view'" class="text-center">
