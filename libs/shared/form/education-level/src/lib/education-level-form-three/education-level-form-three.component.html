@@ -1,7 +1,7 @@
 <form [formGroup]="form">
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">มติครั้งที่</label>
+      <label class="form-label required">มติครั้งที่</label>
       <input
         class="form-control"
         type="date"
@@ -9,7 +9,7 @@
       />
     </div>
     <div class="col-md-6 mb-2">
-      <label class="form-label">วันเดือนปี ที่ลงมติ</label>
+      <label class="form-label required">วันเดือนปี ที่ลงมติ</label>
       <input
         class="form-control"
         type="date"
@@ -20,16 +20,7 @@
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">สถาบันการศึกษา</label>
-      <!-- <select
-        class="search__content form-select"
-        formControlName="educationInstitution"
-      >
-        <option selected hidden disabled value="null">กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select> -->
+      <label class="form-label required">สถาบันการศึกษา</label>
       <input
         class="form-control"
         type="text"
@@ -38,7 +29,7 @@
     </div>
 
     <div class="col-md-6 mb-2">
-      <label class="form-label">วุฒิปริญญาที่จบ</label>
+      <label class="form-label required">วุฒิปริญญาที่จบ</label>
       <select
         class="search__content form-select"
         formControlName="graduateDegree"
@@ -56,12 +47,12 @@
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">สาขา/วิชาเอก</label>
+      <label class="form-label required">สาขา/วิชาเอก</label>
       <input class="form-control" type="text" formControlName="branch" />
     </div>
 
     <div class="col-md-6 mb-2">
-      <label class="form-label">ประเทศ</label>
+      <label class="form-label required">ประเทศ</label>
       <select class="form-select" formControlName="country">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let c of countries" [value]="+c?.countryNo">
@@ -73,11 +64,11 @@
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">วันเดือนปี เข้าศึกษา</label>
+      <label class="form-label required">วันเดือนปี เข้าศึกษา</label>
       <input class="form-control" type="date" formControlName="admissionDate" />
     </div>
     <div class="col-md-6 mb-2">
-      <label class="form-label">วันเดือนปี สำเร็จการศึกษา</label>
+      <label class="form-label required">วันเดือนปี สำเร็จการศึกษา</label>
       <input class="form-control" type="date" formControlName="graduateDate" />
     </div>
   </div>

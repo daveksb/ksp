@@ -124,7 +124,12 @@
     </div>
 
     <div class="d-flex justify-content-center mt-3 mb-3">
-      <button type="button" class="btn btn-secondary" (click)="resetForm()">
+      <button
+        *ngIf="!this.requestId"
+        type="button"
+        class="btn btn-secondary"
+        (click)="resetForm()"
+      >
         ล้างข้อมูล
       </button>
       <button
@@ -139,7 +144,8 @@
         (click)="save()"
         type="button"
         class="ms-3 btn btn-primary"
-        [disabled]="false"
+        *ngIf="!this.requestId"
+        [disabled]="form.invalid"
       >
         ต่อไป
       </button>
