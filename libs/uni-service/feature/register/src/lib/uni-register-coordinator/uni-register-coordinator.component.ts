@@ -32,13 +32,11 @@ export class UniRegisterCoordinatorComponent implements OnInit {
   uploadFileList = [
     {
       name: 'หนังสือแต่งตั้งผู้ประสานงาน',
-      fileId: '',
-      fileName: ''
+      files: []
     },
     {
       name: 'สำเนาบัตรประชาชน',
-      fileId: '',
-      fileName: ''
+      files: []
     },
   ];
   requesttype = 1;
@@ -58,7 +56,7 @@ export class UniRegisterCoordinatorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.uniqueTimestamp = `${new Date().getTime()}`;
+    this.uniqueTimestamp = uuidv4();
     localForage.getItem('registerSelectedUniversity').then((res: any) => {
       if (res) {
         this.uniData = res.universityInfo;
