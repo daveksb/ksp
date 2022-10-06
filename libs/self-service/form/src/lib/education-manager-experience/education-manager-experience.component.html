@@ -6,21 +6,19 @@
           <input
             type="checkbox"
             class="me-2 mt-1"
-            formControlName="hasTeachingExperience"
-          />
+            formControlName="hasTeachingExperience" />
         </div>
         <label class="form-label">
           มีประสบการณ์ด้านปฎิบัติการสอนมาแล้วไม่น้อยกว่า 8 ปี
         </label>
       </div>
       <div class="d-flex align-items-center ms-4">
-        <label class="form-label me-3">จำนวนปี</label>
+        <label class="form-label me-3" [class.required]="form.controls.hasTeachingExperience.value">จำนวนปี</label>
         <input
           type="number"
           min="8"
           class="form-control w-auto"
-          formControlName="teachingExperienceYear"
-        />
+          formControlName="teachingExperienceYear" />
       </div>
     </div>
     <div class="col-md-6 mb-2">
@@ -29,21 +27,19 @@
           <input
             type="checkbox"
             class="me-2 mt-1"
-            formControlName="hasManagingExperience"
-          />
+            formControlName="hasManagingExperience" />
         </div>
         <label class="form-label">
           มีประสบการณ์ในตำแหน่งผู้บริหารสถานศึกษามาแล้วไม่น้อยกว่า 3 ปี
         </label>
       </div>
       <div class="d-flex align-items-center ms-4">
-        <label class="form-label me-3">จำนวนปี</label>
+        <label class="form-label me-3" [class.required]="form.controls.hasManagingExperience.value">จำนวนปี</label>
         <input
           type="number"
           min="3"
           class="form-control w-auto"
-          formControlName="managingExperienceYear"
-        />
+          formControlName="managingExperienceYear" />
       </div>
     </div>
   </div>
@@ -55,8 +51,7 @@
           <input
             type="checkbox"
             class="me-2 mt-1"
-            formControlName="hasEducationExperience"
-          />
+            formControlName="hasEducationExperience" />
         </div>
         <label class="form-label">
           มีประสบการณ์ในตำแหน่งบุคลากรทางการศึกษาอื่นตามที่กำหนดในกฏกระทรวงมาแล้วไม่น้อยกว่า
@@ -64,13 +59,12 @@
         </label>
       </div>
       <div class="d-flex align-items-center ms-4">
-        <label class="form-label me-3">จำนวนปี</label>
+        <label class="form-label me-3" [class.required]="form.controls.hasEducationExperience.value">จำนวนปี</label>
         <input
           type="number"
           min="3"
           class="form-control w-auto"
-          formControlName="educationExperienceYear"
-        />
+          formControlName="educationExperienceYear" />
       </div>
     </div>
     <div class="col-md-6 mb-2">
@@ -79,8 +73,7 @@
           <input
             type="checkbox"
             class="me-2 mt-1"
-            formControlName="hasEducationManagingExperience"
-          />
+            formControlName="hasEducationManagingExperience" />
         </div>
         <label class="form-label">
           มีประสบการณ์ในตำแหน่งบุคลากรทางการศึกษาอื่นที่มีประสบการณ์การบริหารไม่ต่ำกว่า
@@ -88,13 +81,13 @@
         </label>
       </div>
       <div class="d-flex align-items-center ms-4">
-        <label class="form-label me-3">จำนวนปี</label>
+        <label class="form-label me-3"
+          [class.required]="form.controls.hasEducationManagingExperience.value">จำนวนปี</label>
         <input
           type="number"
           min="5"
           class="form-control w-auto"
-          formControlName="educationManagingExperienceYear"
-        />
+          formControlName="educationManagingExperienceYear" />
       </div>
     </div>
   </div>
@@ -106,8 +99,7 @@
           <input
             type="checkbox"
             class="me-2 mt-1"
-            formControlName="hasLongManagingExperience"
-          />
+            formControlName="hasLongManagingExperience" />
         </div>
         <label class="form-label">
           มีประสบการณ์ด้านปฏิบัติการสอนและมีประสบการณ์ในตำแหน่งผู้บริหารสถานศึกษา
@@ -118,13 +110,12 @@
         </label>
       </div>
       <div class="d-flex align-items-center ms-4">
-        <label class="form-label me-3">จำนวนปี</label>
+        <label class="form-label me-3" [class.required]="form.controls.hasLongManagingExperience.value">จำนวนปี</label>
         <input
           type="number"
           min="8"
           class="form-control w-auto"
-          formControlName="longManagingExperienceYear"
-        />
+          formControlName="longManagingExperienceYear" />
       </div>
     </div>
   </div>
