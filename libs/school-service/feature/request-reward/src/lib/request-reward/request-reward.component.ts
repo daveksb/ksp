@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AttachFile } from '@ksp/shared/constant';
 
 import {
   CompleteDialogComponent,
@@ -124,11 +125,11 @@ export class RequestRewardComponent implements OnInit {
     form.requeststatus = requestStatus;
     form.osoimember = JSON.stringify(form.osoimember);
 
-    const rewardFiles = [
-      { name: 'แบบ นร. 1', fileId: '' },
-      { name: 'แบบ นร.2', fileId: '' },
-      { name: 'เอกสารอื่นๆ', fileId: '' },
-      { name: 'บันทึกนำส่งจากสถานศึกษา', fileId: '' },
+    const rewardFiles: AttachFile[] = [
+      { name: 'แบบ นร. 1', files: [] },
+      { name: 'แบบ นร.2', files: [] },
+      { name: 'เอกสารอื่นๆ', files: [] },
+      { name: 'บันทึกนำส่งจากสถานศึกษา', files: [] },
     ];
 
     const file = structuredClone(rewardFiles);
@@ -179,7 +180,7 @@ export class RequestRewardComponent implements OnInit {
     baseForm.patchValue(form);
     //console.log('current form = ', baseForm.value);
     this.requestService.createRequest(baseForm.value).subscribe(() => {
-      this.previousPage();
+      this.completeDialog();
     });
   }
 
@@ -260,7 +261,7 @@ export class RequestRewardComponent implements OnInit {
     this.router.navigate(['/temp-license', 'list']);
   }
 
-  onConfirmed() {
+  completeDialog() {
     const dialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
       data: {

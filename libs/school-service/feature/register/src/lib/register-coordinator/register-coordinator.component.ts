@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { UserInfoFormType } from '@ksp/shared/constant';
+import { AttachFile, UserInfoFormType } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { FormMode } from '@ksp/shared/interface';
-import { GeneralInfoService, RequestService } from '@ksp/shared/service';
+import { GeneralInfoService } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 import localForage from 'localforage';
 import { thaiDate } from '@ksp/shared/utility';
@@ -22,14 +22,14 @@ export class CoordinatorInfoComponent implements OnInit {
     coordinator: [],
   });
   savingData: any;
-  uploadFileList = [
+  uploadFileList: AttachFile[] = [
     {
       name: 'หนังสือแต่งตั้งผู้ประสานงาน',
-      fileId: '',
+      files: [],
     },
     {
       name: 'สำเนาบัตรประชาชน',
-      fileId: '',
+      files: [],
     },
   ];
   requestDate = thaiDate(new Date());
@@ -53,7 +53,6 @@ export class CoordinatorInfoComponent implements OnInit {
 
     localForage.getItem('registerSelectedSchool').then((res) => {
       this.school = res;
-      console.log('school = ', res);
     });
 
     localForage.getItem('registerUserInfoFormValue').then((res) => {
@@ -94,7 +93,7 @@ export class CoordinatorInfoComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'login']);
+        this.router.navigate(['/login']);
       }
     });
   }
