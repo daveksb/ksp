@@ -3,10 +3,10 @@
     {{ title }}
   </div>
 
-  <div class="my-3">
+  <div class="mt-3">
     <form [formGroup]="form">
       <div class="form-label required">
-        1. เคยเป็นผู้มีความประพฤติเสื่อม หรือบกพร่องในศีลธรรมอันดีหรือไม่
+        1. เคยเป็นผู้มีประพฤติเสื่อมเสียหรือบกพร่องในศีลธรรมอันดีหรือไม่
       </div>
       <div class="row my-3">
         <div class="col-4 d-flex align-items-center">
@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="form-label required">
-        2. เป็นผู้ไร้ความสามารถหรือเสมือนไร้ความสามารถ หรือไม่
+        2. เป็นผู้ไร้ความสามารถหรือเสมือนไร้ความสามารถหรือไม่่
       </div>
       <div class="row my-3">
         <div class="col-4 d-flex align-items-center">
@@ -104,14 +104,13 @@
       ></ng-container>
     </form>
   </div>
-  <br />
-  <div class="d-flex justify-content-center">
+  <div class="d-flex justify-content-center mt-3">
     <button
       matDialogClose
       type="button"
       class="btn border-primary text-primary me-1"
     >
-      ยกเลิก
+      ไม่รับรอง
     </button>
     <button
       matDialogClose
@@ -120,7 +119,7 @@
       type="button"
       class="btn btn-primary ms-1"
     >
-      บันทึก
+      รับรอง
     </button>
   </div>
 </div>
