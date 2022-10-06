@@ -10,6 +10,8 @@ import { SchoolServiceFeatureLoginService } from '../school-service-feature-logi
   styleUrls: ['./school-service-login.component.scss'],
 })
 export class SchoolServiceLoginComponent {
+  loginFail = false;
+
   form = this.fb.group({
     user: [],
   });
@@ -24,7 +26,10 @@ export class SchoolServiceLoginComponent {
     this.schoolServiceFeatureLoginService
       .validateLogin(this.form.value.user)
       .subscribe((res) => {
-        if (res.returnCode == 99) return;
+        if (res.returnCode == 99) {
+          this.loginFail = true;
+          return;
+        }
         this.schoolServiceFeatureLoginService.config = res;
         setCookie('userToken', res.schUserToken, 1);
         setCookie('firstNameTh', res.firstNameTh, 1);

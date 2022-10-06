@@ -17,6 +17,7 @@ import { Observable } from 'rxjs';
 export class StaffListComponent implements AfterViewInit {
   positions$!: Observable<any>;
   licenseTypes: ListData[] = staffLicenseTypes;
+  searchNotFound = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -43,7 +44,7 @@ export class StaffListComponent implements AfterViewInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private service: StaffService,
+    private service: StaffService
   ) {
     this.positions$ = this.service.getPositionTypes();
   }
@@ -72,8 +73,12 @@ export class StaffListComponent implements AfterViewInit {
             const temp = JSON.parse(i.hiringinfo);
             i.startdate = temp.startDate;
             i.enddate = temp.endDate;
+            this.searchNotFound = false;
           }
         });
+      } else {
+        this.dataSource.data = [];
+        this.searchNotFound = true;
       }
 
       this.dataSource.data = res;
@@ -87,6 +92,7 @@ export class StaffListComponent implements AfterViewInit {
 
   clear() {
     this.dataSource.data = [];
+    this.searchNotFound = false;
   }
 
   searchLicense() {

@@ -14,21 +14,13 @@
   color: #f68b33;
 }
 
-.eye__icon {
+i {
   float: right;
-  margin-top: -35px;
+  margin-top: -36px;
   position: relative;
   height: 22px;
   cursor: pointer;
-  margin-right: 5px;
-}
-
-.eye__icon--open {
-  content: url('/assets/images/eye_open.png');
-}
-
-.eye__icon--close {
-  content: url('/assets/images/eye_close.png');
+  margin-right: 7px;
 }
 
 .support__label {

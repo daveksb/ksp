@@ -36,15 +36,15 @@
         <label class="form-label">ประเภทใบอนุญาต </label>
         <select class="form-select" formControlName="licensetype">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option *ngFor="let license of licenseTypes" [value]="license?.value">
+            {{ license?.label }}
+          </option>
         </select>
       </div>
     </div>
     <div class="d-flex justify-content-end mt-3">
       <button
-        (click)="(form.reset); foundLicenses = []"
+        (click)="clear()"
         type="button"
         class="btn text-primary border-primary"
       >
@@ -56,28 +56,28 @@
     </div>
   </div>
 
-  <div class="bg-white p-3 mt-3">
+  <div class="bg-white px-3 py-2 mt-3">
     <div class="box-header">ผลการค้นหา</div>
     <hr />
-
-    <div
-      class="d-flex flex-column align-items-center"
-      *ngIf="!foundLicenses.length"
+    <ng-container *ngIf="notFoundItem">
+      <div class="d-flex flex-column align-items-center">
+        <div class="mb-2 fs-5">ไม่พบข้อมูล</div>
+        <button class="btn border-primary text-primary" (click)="addStaff()">
+          + เพิ่มบุคลากร
+        </button>
+      </div></ng-container
     >
-      <div class="mb-2 fs-5">ไม่พบข้อมูล</div>
-      <button class="btn border-primary text-primary" (click)="addStaff()">
-        + เพิ่มบุคลากร
-      </button>
-    </div>
 
-    <div class="d-flex flex-column mt-4 gap-4" *ngIf="foundLicenses.length">
-      <ng-container *ngFor="let license of foundLicenses">
-        <ksp-license-info
-          [license]="license"
-          [isLicenseRevoked]="true"
-          (selected)="onSelect($event)"
-        ></ksp-license-info>
-      </ng-container>
-    </div>
+    <ng-container *ngIf="foundLicenses.length">
+      <div class="d-flex flex-column">
+        <ng-container *ngFor="let license of foundLicenses">
+          <ksp-license-info
+            [license]="license"
+            [isLicenseRevoked]="true"
+            (selected)="onSelect($event)"
+          ></ksp-license-info>
+          <hr />
+        </ng-container></div
+    ></ng-container>
   </div>
 </div>

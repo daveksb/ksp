@@ -3,6 +3,12 @@
     class="bg-white shadow rounded rounded-3 px-4 pt-4 pb-3"
     style="min-width: 350px"
   >
+    <ng-container *ngIf="loginFail">
+      <ksp-uni-form-badge
+        [subTitle]="'คุณกรอกรหัสเข้าใช้งาน หรือรหัสผ่านไม่ถูกต้อง'"
+      ></ksp-uni-form-badge>
+    </ng-container>
+
     <div class="form-group mb-2">
       <label class="form-label text-black">รหัสผู้ใช้งาน</label>
       <input
