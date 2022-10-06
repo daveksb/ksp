@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -14,6 +14,7 @@ import localForage from 'localforage';
 })
 export class SelfServiceThaiLoginComponent {
   eyeIconClicked = false;
+  loginFail = false;
 
   form = this.fb.group({
     username: [],
@@ -39,6 +40,8 @@ export class SelfServiceThaiLoginComponent {
         setCookie('userToken', res.usertoken, 1);
         setCookie('userId', res.id, 1);
         this.router.navigate(['/home']);
+      } else if (res.returncode === '99') {
+        this.loginFail = true;
       } else {
         return;
       }

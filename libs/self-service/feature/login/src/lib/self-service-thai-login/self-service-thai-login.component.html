@@ -13,9 +13,15 @@
             </div>
           </div>
 
+          <ng-container *ngIf="loginFail">
+            <ksp-uni-form-badge
+              [subTitle]="'คุณกรอกรหัสเข้าใช้งาน หรือรหัสผ่านไม่ถูกต้อง'"
+            ></ksp-uni-form-badge>
+          </ng-container>
+
           <div class="row">
             <div class="col mb-3">
-              <label class="fs-4">รหัสบัตรประชาชน</label>
+              <label class="fs-4 text-black">รหัสบัตรประชาชน</label>
               <input
                 type="text"
                 class="form-control form-control-lg"
@@ -28,21 +34,21 @@
 
           <div class="row">
             <div class="col mb-3">
-              <label class="fs-4">รหัสผ่าน</label>
+              <label class="fs-4 text-black">รหัสผ่าน</label>
               <input
                 [type]="eyeIconClicked ? 'text' : 'password'"
-                class="form-control form-control-lg w-100"
+                class="form-control form-control-lg"
                 placeholder="รหัสผ่าน"
                 formControlName="password"
               />
-              <img
-                class="eye__icon"
+              <i
+                class="text-secondary fs-5"
                 (click)="eyeIconClicked = !eyeIconClicked"
                 [ngClass]="{
-                  'eye__icon--open': eyeIconClicked,
-                  'eye__icon--close': !eyeIconClicked
+                  'bi-eye': eyeIconClicked,
+                  'bi-eye-slash': !eyeIconClicked
                 }"
-              />
+              ></i>
             </div>
           </div>
 
