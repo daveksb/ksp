@@ -30,8 +30,7 @@ export class ForbiddenPropertyFormComponent
   implements OnInit
 {
   @Input()
-  title = `ขอรับรองว่าไม่เป็นผู้มีลักษณะต้องห้ามตามที่กำหนดไว้ในมาตรา 44
-  แห่งพระราชบัญญัติสภาครูและบุคลากรทางการศึกษา พ.ศ.2546`;
+  title = `ขอรับรองว่าไม่เป็นผู้มีลักษณะต้องห้ามตามที่กำหนดไว้ในมาตรา 44 แห่งพระราชบัญญัติสภาครูและบุคลากรทางการศึกษา พ.ศ.2546`;
   @Output() confirmed = new EventEmitter<any>();
 
   override form = this.fb.group({

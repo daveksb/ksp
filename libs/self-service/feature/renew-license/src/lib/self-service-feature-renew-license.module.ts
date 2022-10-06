@@ -13,7 +13,10 @@ import {
   RequestStatusComponent,
   SelfServiceLicenseInfoComponent,
 } from '@ksp/self-service/ui';
-import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import {
+  ForbiddenPropertySecondComponent,
+  SharedFormOthersModule,
+} from '@ksp/shared/form/others';
 import { RenewLicenseSchoolManagerComponent } from './renew-license-school-manager/renew-license-school-manager.component';
 import { RenewLicenseEducationManagerComponent } from './renew-license-education-manager/renew-license-education-manager.component';
 import { RenewLicenseStudySupervisionComponent } from './renew-license-study-supervision/renew-license-study-supervision.component';
@@ -84,6 +87,7 @@ export const routes: Routes = [
     RouterModule.forChild(routes),
     MatStepperModule,
     ReactiveFormsModule,
+    ForbiddenPropertySecondComponent,
   ],
   declarations: [
     RenewLicenseRequestComponent,
