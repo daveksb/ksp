@@ -43,12 +43,12 @@
     [showSaveButton]="true"
     [showTempSaveButton]="true"
     [disableCancelButton]="disableCancel"
-    [disableSaveButton]="disablePermanentSave"
-    [disableTempSaveButton]="disableTempSave"
+    [disableSaveButton]="false"
+    [disableTempSaveButton]="false"
     (prevClicked)="previousPage()"
     (cancelClicked)="cancelRequest()"
-    (tempSaveClicked)="onTempSave()"
-    (saveClicked)="onPermanentSave()"
+    (tempSaveClicked)="confirmDialog(1)"
+    (saveClicked)="confirmDialog(2)"
     [saveButtonLabel]="'บันทึกและตรวจสอบ'"
   ></ksp-bottom-nav>
 </div>

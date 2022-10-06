@@ -144,7 +144,7 @@ export class RequestRewardComponent implements OnInit {
       this.form.controls.reward.patchValue(osoiInfo);
       this.memberData = osoiMember;
       //console.log('current process = ', this.currentProcess);
-      const file = parseJson(res.fileinfo);
+      //const file = parseJson(res.fileinfo);
       //console.log('get file = ', file);
     });
   }
@@ -188,6 +188,7 @@ export class RequestRewardComponent implements OnInit {
     //console.log('payload = ', payload);
     this.requestService.updateRequest(payload).subscribe((res) => {
       //console.log('request result = ', res);
+      this.completeDialog();
     });
   }
 
@@ -218,6 +219,7 @@ export class RequestRewardComponent implements OnInit {
     //console.log('current form = ', baseForm.value);
     this.requestService.createRequest(baseForm.value).subscribe((res) => {
       //console.log('request result = ', res);
+      this.completeDialog();
     });
   }
 
@@ -231,8 +233,8 @@ export class RequestRewardComponent implements OnInit {
     this.router.navigate(['/temp-license', 'list']);
   }
 
-  save(form: any) {
-    /*     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+  confirmDialog(type: number) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
@@ -241,17 +243,21 @@ export class RequestRewardComponent implements OnInit {
 
     dialogRef.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.onConfirmed();
+        if (type === 1) {
+          this.onTempSave();
+        } else if (type === 2) {
+          this.onPermanentSave();
+        }
       }
-    }); */
+    });
   }
 
-  onConfirmed() {
+  completeDialog() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
       data: {
         header: `ระบบทำการบันทึก
-        และส่งเรื่องให้เเจ้าหน้าที่เรียบร้อยแล้ว`,
+        เรียบร้อยแล้ว`,
       },
     });
 
