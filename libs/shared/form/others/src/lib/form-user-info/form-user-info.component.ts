@@ -7,7 +7,7 @@ import {
   providerFactory,
   validatorMessages,
 } from '@ksp/shared/utility';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { debounceTime, distinctUntilChanged, skip } from 'rxjs';
 
 @Component({
   selector: 'ksp-form-user-info',
@@ -29,6 +29,7 @@ export class FormUserInfoComponent
   @Input() isDarkMode = false;
   @Input() isSelfService = false;
   @Input() isAddStaff = false;
+  @Input() KuruspaNoLabel = '';
 
   @Output() idCardChange = new EventEmitter<any>();
 
@@ -50,7 +51,6 @@ export class FormUserInfoComponent
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value: any) => {
         this.onChange(value);
         this.onTouched();
