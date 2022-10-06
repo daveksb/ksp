@@ -40,8 +40,8 @@ export class RequestRewardComponent implements OnInit {
   currentProcess!: string | null;
   requestStatus!: string | null;
   memberData!: any;
-  disableTempSave = true;
-  disablePermanentSave = true;
+  disableTempSave = false;
+  disablePermanentSave = false;
   disableCancel = false;
   uniqueTimeStamp!: string;
   showCancelButton = true;
@@ -62,7 +62,8 @@ export class RequestRewardComponent implements OnInit {
     this.checkRequestId();
     this.checkButtonDisableStatus();
 
-    this.form.valueChanges.subscribe((res) => {
+    this.form.valueChanges.subscribe(() => {
+      //console.log('form valid = ', this.form.valid);
       this.checkButtonDisableStatus();
     });
   }
@@ -72,17 +73,22 @@ export class RequestRewardComponent implements OnInit {
     if (!this.form.valid) {
       this.disableTempSave = true;
       this.disablePermanentSave = true;
-      return;
-    } else if (this.currentProcess === '2') {
-      this.disableTempSave = true;
-      this.disablePermanentSave = true;
-    } else if (this.currentProcess === '1') {
-      this.disableTempSave = false;
-      this.disablePermanentSave = false;
-    } else if (this.currentProcess === '0') {
-      this.disableTempSave = true;
-      this.disablePermanentSave = true;
-      this.disableCancel = true;
+    } else {
+      // form valid
+      if (this.currentProcess === '2') {
+        this.disableTempSave = true;
+        this.disablePermanentSave = true;
+      } else if (this.currentProcess === '1') {
+        this.disableTempSave = false;
+        this.disablePermanentSave = false;
+      } else if (this.currentProcess === '0') {
+        this.disableTempSave = true;
+        this.disablePermanentSave = true;
+        this.disableCancel = true;
+      } else {
+        this.disableTempSave = false;
+        this.disablePermanentSave = false;
+      }
     }
   }
 
