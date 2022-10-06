@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { AttachFile } from '@ksp/shared/constant';
+import { FileGroup } from '@ksp/shared/constant';
 import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { skip } from 'rxjs';
@@ -22,7 +22,7 @@ export class FormUserEducationComponent
     | 'supervision' = 'teacher';
 
   @Input() countries: any[] = [];
-  @Input() attachFiles: AttachFile[] = [];
+  @Input() attachFiles: FileGroup[] = [];
   @Input() uniqueTimestamp = '';
 
   selectedEducationType!: number;

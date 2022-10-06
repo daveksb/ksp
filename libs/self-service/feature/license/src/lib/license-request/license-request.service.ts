@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AttachFile } from '@ksp/shared/constant';
+import { FileGroup } from '@ksp/shared/constant';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LicenseRequestService {
-  educationFiles: AttachFile[] = [
+  educationFiles: FileGroup[] = [
     {
       name: 'สำเนาใบรายงานผลการศึกษา (Transcript)',
       files: [],
@@ -16,7 +16,7 @@ export class LicenseRequestService {
     },
   ];
 
-  experienceFiles: AttachFile[] = [
+  experienceFiles: FileGroup[] = [
     {
       name: 'สำเนาหนังสือนำส่งแบบประเมินฉบับจริง',
       files: [],

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AttachFile } from '@ksp/shared/constant';
+import { FileGroup } from '@ksp/shared/constant';
 
 import {
   CompleteDialogComponent,
@@ -125,7 +125,7 @@ export class RequestRewardComponent implements OnInit {
     form.requeststatus = requestStatus;
     form.osoimember = JSON.stringify(form.osoimember);
 
-    const rewardFiles: AttachFile[] = [
+    const rewardFiles: FileGroup[] = [
       { name: 'แบบ นร. 1', files: [] },
       { name: 'แบบ นร.2', files: [] },
       { name: 'เอกสารอื่นๆ', files: [] },

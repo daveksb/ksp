@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { AttachFile, UserInfoFormType } from '@ksp/shared/constant';
+import { FileGroup, UserInfoFormType } from '@ksp/shared/constant';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { AddressService } from '@ksp/shared/service';
 import { providerFactory } from '@ksp/shared/utility';
@@ -58,7 +58,7 @@ export class ThaiTeacherRewardComponent
   }
   @Input() prefixList: any[] = [];
   @Input() bureaus: any[] = [];
-  @Input() rewardFiles!: AttachFile[];
+  @Input() rewardFiles!: FileGroup[];
   @Input() uniqueTimestamp!: string;
 
   provinces1$!: Observable<any>;

@@ -6,7 +6,7 @@ import {
   SelfServiceRequestSubType,
   SelfServiceRequestType,
   SelfServiceRequestForType,
-  AttachFile,
+  FileGroup,
 } from '@ksp/shared/constant';
 import { LicenseFormBaseComponent } from '@ksp/self-service/form';
 import { FormBuilder } from '@angular/forms';
@@ -27,7 +27,7 @@ import {
 } from '@ksp/shared/utility';
 import * as _ from 'lodash';
 
-const WORKING_INFO_FILES: AttachFile[] = [
+const WORKING_INFO_FILES: FileGroup[] = [
   {
     name: '1.รางวัลอื่นและประกาศเกียรติคุณ',
     files: [],

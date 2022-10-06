@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
-  AttachFile,
+  FileGroup,
   levels,
   RequestAttachFiles,
   RequestEduFiles,
@@ -85,10 +85,10 @@ export class SchoolRequestComponent implements OnInit {
   schoolId = '0010201056';
   userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form
 
-  eduFiles: AttachFile[] = [];
-  teachingFiles: AttachFile[] = [];
-  reasonFiles: AttachFile[] = [];
-  attachFiles: AttachFile[] = [];
+  eduFiles: FileGroup[] = [];
+  teachingFiles: FileGroup[] = [];
+  reasonFiles: FileGroup[] = [];
+  attachFiles: FileGroup[] = [];
   prefixList$!: Observable<any>;
   option1 = this.fb.control(false);
   option2 = this.fb.control(false);
@@ -187,7 +187,7 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   createRequest(type: string) {
-    console.log('create request = ');
+    //console.log('create request = ');
     const baseForm = this.fb.group(new SchoolRequest());
     const formData: any = this.form.getRawValue();
     const tab3 = mapFileInfo(this.eduFiles);
@@ -469,7 +469,7 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   patchFileInfo(res: any) {
-    console.log('res xx = ', res);
+    console.log('tab3 = ', res.tab3);
     if (res && res.tab3) {
       this.eduFiles.forEach((group, index) => (group.files = res.tab3[index]));
     }

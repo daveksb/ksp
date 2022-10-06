@@ -9,7 +9,7 @@ import {
 import { providerFactory } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 import { replaceEmptyWithNull } from '@ksp/shared/utility';
-import { AttachFile } from '@ksp/shared/constant';
+import { FileGroup } from '@ksp/shared/constant';
 
 @Component({
   selector: 'self-service-profession-experience',
@@ -21,7 +21,7 @@ export class ProfessionExperienceComponent
   extends KspFormBaseComponent
   implements OnInit
 {
-  infoFiles: AttachFile[] = [
+  infoFiles: FileGroup[] = [
     { name: 'สำเนาใบรายงานผลการศึกษา (transcript)', files: [] },
     {
       name: 'สำเนาปริญญาบัตร หรือสำเนาหนังสือรับรองคุณวุฒิ',
