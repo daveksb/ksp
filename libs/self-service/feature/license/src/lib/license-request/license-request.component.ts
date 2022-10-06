@@ -82,8 +82,8 @@ export class LicenseRequestComponent
     this.getListData();
     this.checkRequestId();
     this.form.valueChanges.subscribe(() => {
-      console.log('user info valid = ', this.form.controls.userInfo.valid);
-      console.log('form valid = ', this.form.valid);
+      //console.log('user info valid = ', this.form.controls.userInfo.valid);
+      //console.log('form valid = ', this.form.valid);
     });
   }
 
@@ -122,7 +122,7 @@ export class LicenseRequestComponent
   }
 
   patchAddress2FormWithAddress1(): void {
-    console.log(this.form.controls.address1.value);
+    //console.log(this.form.controls.address1.value);
     this.form.controls.address2.patchValue(this.form.controls.address1.value);
     //console.log(this.form.controls.address2.value);
   }

@@ -6,6 +6,7 @@ import {
   SelfServiceRequestSubType,
   SelfServiceRequestType,
   SelfServiceRequestForType,
+  AttachFile,
 } from '@ksp/shared/constant';
 import { LicenseFormBaseComponent } from '@ksp/self-service/form';
 import { FormBuilder } from '@angular/forms';
@@ -17,7 +18,7 @@ import {
   SelfRequestService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { SchoolRequest, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
+import { SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
 import {
   replaceEmptyWithNull,
   thaiDate,
@@ -54,11 +55,10 @@ export class RenewLicenseThaiComponent
   myInfo$!: Observable<SelfMyInfo>;
   today = thaiDate(new Date());
 
-  workingInfoFiles = [
+  workingInfoFiles: AttachFile[] = [
     {
       name: '1.รางวัลอื่นและประกาศเกียรติคุณ',
-      fileId: '',
-      fileName: '',
+      files: [],
     },
   ];
 
