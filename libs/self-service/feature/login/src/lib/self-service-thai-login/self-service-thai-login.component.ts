@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ForgotPasswordSearchPersonComponent } from '@ksp/shared/dialog';
@@ -17,8 +17,8 @@ export class SelfServiceThaiLoginComponent {
   loginFail = false;
 
   form = this.fb.group({
-    username: [],
-    password: [],
+    username: [null, Validators.required],
+    password: [null, Validators.required],
   });
 
   constructor(
