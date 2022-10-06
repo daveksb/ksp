@@ -8,10 +8,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { thaiDate } from '@ksp/shared/utility';
-import {
-  AttachFile,
-  SchoolSelfDevelopActivityTies,
-} from '@ksp/shared/constant';
+import { FileGroup, SchoolSelfDevelopActivityTies } from '@ksp/shared/constant';
 import { SelfDevelopService, StaffService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { v4 as uuidv4 } from 'uuid';
@@ -38,7 +35,7 @@ export class ActivityDetailComponent implements OnInit {
 
   activityTypes: ListData[] = SchoolSelfDevelopActivityTies;
 
-  attachFiles: AttachFile[] = [
+  attachFiles: FileGroup[] = [
     {
       name: '1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน',
       files: [],

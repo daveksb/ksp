@@ -8,7 +8,7 @@ import {
 } from '@ksp/shared/dialog';
 import { FormBuilder } from '@angular/forms';
 import { parseJson, thaiDate } from '@ksp/shared/utility';
-import { AttachFile, SchoolRequestSubType } from '@ksp/shared/constant';
+import { FileGroup, SchoolRequestSubType } from '@ksp/shared/constant';
 import {
   AddressService,
   ERequestService,
@@ -137,7 +137,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
   }
 }
 
-const evidenceFiles: AttachFile[] = [
+const evidenceFiles: FileGroup[] = [
   {
     name: '1.สำเนาสัญญาจ้าง',
     files: [],

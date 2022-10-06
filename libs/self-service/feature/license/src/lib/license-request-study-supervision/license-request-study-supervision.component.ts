@@ -6,7 +6,7 @@ import {
   SelfServiceRequestSubType,
   SelfServiceRequestType,
   SelfServiceRequestForType,
-  AttachFile,
+  FileGroup,
 } from '@ksp/shared/constant';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { LicenseFormBaseComponent } from '@ksp/self-service/form';
@@ -39,8 +39,8 @@ export class LicenseRequestStudySupervisionComponent
 {
   userInfoType = UserInfoFormType.thai;
 
-  experienceFiles: AttachFile[] = [];
-  eduFiles: AttachFile[] = [];
+  experienceFiles: FileGroup[] = [];
+  eduFiles: FileGroup[] = [];
 
   override form = this.fb.group({
     userInfo: [],
@@ -202,7 +202,7 @@ export class LicenseRequestStudySupervisionComponent
   }
 }
 
-const EXPERIENCE_FILES: AttachFile[] = [
+const EXPERIENCE_FILES: FileGroup[] = [
   {
     name: '1. สำเนาวุฒิทางการศึกษา',
     files: [],
@@ -217,7 +217,7 @@ const EXPERIENCE_FILES: AttachFile[] = [
   },
 ];
 
-const EDU_FILES: AttachFile[] = [
+const EDU_FILES: FileGroup[] = [
   { name: '1. สำเนาวุฒิทางการศึกษา', files: [] },
   {
     name: '2. เอกสารผู้สำเร็จการศึกษา ( ระบบ KSP BUNDIT)		',

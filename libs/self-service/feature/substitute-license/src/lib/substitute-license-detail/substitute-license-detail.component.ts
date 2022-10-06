@@ -6,7 +6,7 @@ import {
   SelfServiceRequestSubType,
   SelfServiceRequestType,
   SelfServiceRequestForType,
-  AttachFile,
+  FileGroup,
 } from '@ksp/shared/constant';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { LicenseFormBaseComponent } from '@ksp/self-service/form';
@@ -27,7 +27,7 @@ import {
 import { SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
 
-const OBJECTIVE_FILES: AttachFile[] = [
+const OBJECTIVE_FILES: FileGroup[] = [
   { name: '1.ใบอนุญาตประกอบวิชาชีพที่ชํารุด', files: [] },
   {
     name: '2.หลักฐานการรับแจงความของพนักงานสอบสวน หรือบันทึกถอยคํา กรณีใบอนุญาตสูญหาย',

@@ -25,11 +25,11 @@
                     role="button"
                     (click)="downloadFile(file)"
                   >
-                    {{ file?.fileName }}
+                    {{ file?.filename }}
                   </div>
                   <i
                     (click)="deleteFile(file)"
-                    *ngIf="file?.fileId && mode === 'edit'"
+                    *ngIf="file?.fileid && mode === 'edit'"
                     class="bi bi-x-circle-fill text-danger fs-6 ms-2"
                     role="button"
                   ></i>
@@ -50,7 +50,7 @@
                 [showUploadedFileName]="false"
                 [systemFileName]="group.name"
                 [requestType]="requestType"
-                [uniqueTimestamp]="group.uniqueTimestamp || uniqueTimestamp"
+                [uniqueTimestamp]="uniqueTimestamp"
                 (uploadComplete)="updateComplete($event, group)"
               ></ksp-file-upload>
             </td>
