@@ -22,35 +22,12 @@ import {
   SelfServiceRequestType,
   SelfServiceRequestSubType,
   SelfServiceRequestForType,
+  AttachFile,
 } from '@ksp/shared/constant';
 import { LicenseFormBaseComponent } from '@ksp/self-service/form';
 import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 import { LicenseRequestService } from '../license-request/license-request.service';
-
-const mockPerformances = [
-  {
-    id: 1,
-    score: '89',
-    result: 'ผ่าน',
-    announceDate: '12/มกราคม/2565',
-    endDate: '31/มกราคม/2565',
-  },
-  {
-    id: 2,
-    score: '96',
-    result: 'ผ่าน',
-    announceDate: '12/มกราคม/2565',
-    endDate: '31/มกราคม/2565',
-  },
-  {
-    id: 3,
-    score: '96',
-    result: 'ไม่พบข้อมูล',
-    announceDate: '12/มกราคม/2565',
-    endDate: '31/มกราคม/2565',
-  },
-];
 
 @UntilDestroy()
 @Component({
@@ -75,8 +52,8 @@ export class LicenseRequestThaiComponent
   countries2$!: Observable<any>;
   licenses$!: Observable<any>;
   disableNextButton = false;
-  eduFiles: any[] = [];
-  experienceFiles: any[] = [];
+  eduFiles: AttachFile[] = [];
+  experienceFiles: AttachFile[] = [];
 
   constructor(
     router: Router,
@@ -221,7 +198,7 @@ export class LicenseRequestThaiComponent
       ...{ prohibitproperty: JSON.stringify(forbidden) },
       ...{ fileinfo: JSON.stringify({ edufiles, experiencefiles }) },
     };
-    console.log(payload);
+    //console.log(payload);
     return payload;
   }
 
@@ -231,3 +208,27 @@ export class LicenseRequestThaiComponent
     });
   }
 }
+
+const mockPerformances = [
+  {
+    id: 1,
+    score: '89',
+    result: 'ผ่าน',
+    announceDate: '12/มกราคม/2565',
+    endDate: '31/มกราคม/2565',
+  },
+  {
+    id: 2,
+    score: '96',
+    result: 'ผ่าน',
+    announceDate: '12/มกราคม/2565',
+    endDate: '31/มกราคม/2565',
+  },
+  {
+    id: 3,
+    score: '96',
+    result: 'ไม่พบข้อมูล',
+    announceDate: '12/มกราคม/2565',
+    endDate: '31/มกราคม/2565',
+  },
+];
