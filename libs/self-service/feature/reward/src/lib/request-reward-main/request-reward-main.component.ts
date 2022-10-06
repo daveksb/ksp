@@ -369,7 +369,7 @@ export class RequestRewardMainComponent implements OnInit {
         request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
-            this.router.navigate(['/home']);
+            this.completeDialog();
           }
         });
       }
@@ -486,6 +486,22 @@ export class RequestRewardMainComponent implements OnInit {
       width: '350px',
       data: {
         header: `ยกเลิกใบคำขอสำเร็จ`,
+        buttonLabel: 'กลับสู่หน้าหลัก',
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/home']);
+      }
+    });
+  }
+
+  completeDialog() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      width: '350px',
+      data: {
+        header: `ทำรายการสร้างใบคำขอสำเร็จ`,
         buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
