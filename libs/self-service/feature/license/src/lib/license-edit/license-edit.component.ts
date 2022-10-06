@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -80,7 +80,6 @@ export class LicenseEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.form.disable();
     /* this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
 
     }); */

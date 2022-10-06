@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ListData } from '@ksp/shared/interface';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -20,10 +20,9 @@ export class RenewLicensePropertySupervisionComponent
   @Input() uniqueTimestamp = '';
   @Input() workingInfo: any[] = [];
 
-
   override form = this.fb.group({
-    standardKnowledgeType: [],
-    educationDetails: [],
+    standardKnowledgeType: [null, Validators.required],
+    educationDetails: [null, Validators.required],
   });
 
   /* const WORKING_INFO_FILES = [
@@ -48,12 +47,12 @@ export class RenewLicensePropertySupervisionComponent
   ngOnInit(): void {
     this.standardKnowledges = standardKnowledges;
 
-    this.form.controls['standardKnowledgeType'].valueChanges.pipe(skip(3)).subscribe(
-      (res) => {
+    this.form.controls['standardKnowledgeType'].valueChanges
+      .pipe(skip(3))
+      .subscribe((res) => {
         this.selectedstandardKnowledgeType = Number(res);
         //this.form.controls.educationLevelForm.reset();
-      }
-    );
+      });
   }
 }
 
