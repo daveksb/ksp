@@ -10,7 +10,12 @@ import {
 } from '@ksp/shared/constant';
 import { SelfRequest } from '@ksp/shared/interface';
 import { SelfRequestService } from '@ksp/shared/service';
-import { getCookie, thaiDate } from '@ksp/shared/utility';
+import {
+  getCookie,
+  SelfCheckProcess,
+  SelfcheckStatus,
+  thaiDate,
+} from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-self-service-home-page',
@@ -22,6 +27,9 @@ export class SelfServiceHomePageComponent implements AfterViewInit {
     `เลขที่ใบคำขอ : SF_010641000123 รายการขอขึ้นทะเบียนใบอนุญาต ถูกส่งคืน
   “ปรับแก้ไข / เพิ่มเติม” กดเพื่อตรวจสอบ`,
   ];
+
+  checkStatus = SelfcheckStatus;
+  checkProcess = SelfCheckProcess;
 
   dataSource = new MatTableDataSource<SelfRequest>();
   @ViewChild(MatSort) sort!: MatSort;
