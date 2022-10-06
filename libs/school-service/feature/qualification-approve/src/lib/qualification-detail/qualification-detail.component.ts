@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserInfoFormType } from '@ksp/shared/constant';
+import { AttachFile, UserInfoFormType } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -406,41 +406,34 @@ export class QualificationDetailComponent implements OnInit {
   }
 }
 
-const files = [
+const files: AttachFile[] = [
   {
     name: 'หนังสือนำส่งจากหน่วยงานผู้ใช้',
-    fileId: '',
-    fileName: '',
+    files: [],
   },
   {
     name: 'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
-    fileId: '',
-    fileName: '',
+    files: [],
   },
   {
     name: 'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
-    fileId: '',
-    fileName: '',
+    files: [],
   },
   {
     name: 'สำเนาทะเบียนบ้าน',
-    fileId: '',
-    fileName: '',
+    files: [],
   },
   {
     name: 'สำเนาหนังสือแจ้งการเทียบคุณวุฒิ (กรณีจบการศึกษาจากต่างประเทศ)',
-    fileId: '',
-    fileName: '',
+    files: [],
   },
   {
     name: 'สำเนา กพ.7 / สมุดประจำตัว',
-    fileId: '',
-    fileName: '',
+    files: [],
   },
   {
     name: 'สำเนาหลักฐานการเปลี่ยนชื่อ นามสกุล',
-    fileId: '',
-    fileName: '',
+    files: [],
   },
-  { name: 'เอกสารอื่นๆ', fileId: '', fileName: '' },
+  { name: 'เอกสารอื่นๆ', files: [] },
 ];

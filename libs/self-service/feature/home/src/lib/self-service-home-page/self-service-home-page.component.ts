@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort, MatSortable, Sort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
@@ -75,12 +75,12 @@ export class SelfServiceHomePageComponent implements AfterViewInit {
   }
 
   goToDetail(input: SelfRequest) {
-    console.log('self request = ', input);
+    //console.log('self request = ', input);
     const requestType = Number(input.requesttype);
     const subType = Number(input.subtype);
     const isForeign = Number(input.requestfor);
     const id = Number(input.id);
-    console.log('subType ', subType);
+    //console.log('subType ', subType);
 
     if (requestType >= 40) {
       this.reward(id);
@@ -171,10 +171,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit {
     this.dataSource.data = [];
   }
 
-  // requestLicense(type: SelfServiceRequestSubType) {
-  //   this.router.navigate(['/license', 'request', type]);
-  // }
-
   // ครูไทย
   thaiTeacher(id?: number) {
     this.router.navigate(['/license', 'teacher', ...(id ? [`${id}`] : [])]);
@@ -222,10 +218,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit {
       ...(id ? [`${id}`] : []),
     ]);
   }
-
-  // renewLicense(type: SelfServiceRequestSubType) {
-  //   this.router.navigate(['/renew-license', 'request', type]);
-  // }
 
   // ครูไทย
   teacherRenew(id?: number) {

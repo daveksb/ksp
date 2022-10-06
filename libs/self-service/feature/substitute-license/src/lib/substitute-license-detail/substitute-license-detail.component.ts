@@ -6,6 +6,7 @@ import {
   SelfServiceRequestSubType,
   SelfServiceRequestType,
   SelfServiceRequestForType,
+  AttachFile,
 } from '@ksp/shared/constant';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { LicenseFormBaseComponent } from '@ksp/self-service/form';
@@ -26,12 +27,11 @@ import {
 import { SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
 
-const OBJECTIVE_FILES = [
-  { name: '1.ใบอนุญาตประกอบวิชาชีพที่ชํารุด', fileId: '', fileName: '' },
+const OBJECTIVE_FILES: AttachFile[] = [
+  { name: '1.ใบอนุญาตประกอบวิชาชีพที่ชํารุด', files: [] },
   {
     name: '2.หลักฐานการรับแจงความของพนักงานสอบสวน หรือบันทึกถอยคํา กรณีใบอนุญาตสูญหาย',
-    fileId: '',
-    fileName: '',
+    files: [],
   },
 ];
 
@@ -164,9 +164,9 @@ export class SubstituteLicenseDetailComponent
       },
       ...{ fileinfo: JSON.stringify({ replacereasoninfofiles }) },
     };
-    console.log(initialPayload);
+    //console.log(initialPayload);
     const payload = _.pick({ ...self, ...initialPayload }, allowKey);
-    console.log(payload);
+    //console.log(payload);
     return payload;
   }
 
