@@ -123,12 +123,11 @@ export class UniRegisterPasswordComponent implements OnInit {
               unitype: this.savingData.unitype,
               other: this.savingData.other
             }
-            const fileUpload = this.uploadFileList.map((file) => file.fileId || null);
             const payload = {
               ...this.savingData,
               educationoccupy: JSON.stringify(educationoccupy),
               coordinatorinfo: JSON.stringify({...this.coordinator, password}),
-              fileinfo: JSON.stringify({ fileUpload })
+              fileinfo: JSON.stringify(this.uploadFileList)
             };
             payload.ref1 = '3';
             payload.ref2 = '01';
