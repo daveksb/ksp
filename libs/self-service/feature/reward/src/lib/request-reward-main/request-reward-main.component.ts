@@ -26,7 +26,7 @@ import {
   SelfServiceRequestForType,
   SelfServiceRequestSubType,
 } from '@ksp/shared/constant';
-import { parse, v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { RequestRewardMainService } from './request-reward-main.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
@@ -89,7 +89,6 @@ export class RequestRewardMainComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.requestId = Number(params.get('id'));
       if (this.requestId) {
-        // this.loadRequestFromId(this.requestId);
         this.requestService.getRequestById(this.requestId).subscribe((res) => {
           if (res) {
             console.log(res);
@@ -97,7 +96,7 @@ export class RequestRewardMainComponent implements OnInit {
             this.requestNo = res.requestno;
             this.currentProcess = Number(res.currentprocess);
             this.uniqueTimestamp = res.uniquetimestamp || '';
-            console.log(this.uniqueTimestamp);
+            //console.log(this.uniqueTimestamp);
 
             this.patchData(res);
             this.getFormType();

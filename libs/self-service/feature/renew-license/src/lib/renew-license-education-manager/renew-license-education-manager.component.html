@@ -1,9 +1,8 @@
-<ksp-top-nav [isSelfService]="true"
-  ><span header>ใบคำขอต่ออายุใบประกอบวิชาชีพ</span></ksp-top-nav
->
+<ksp-top-nav [isSelfService]="true"><span header>ใบคำขอต่ออายุใบประกอบวิชาชีพ</span></ksp-top-nav>
 
 <div class="main__container px-4 py-2">
-  <self-service-request-status></self-service-request-status>
+  <self-service-request-status
+    [title]="'รายละเอียดใบคำขอต่ออายุ'"></self-service-request-status>
 
   <form [formGroup]="form">
     <div class="row mx-0 border shadow rounded-4 px-2 py-4 bg-white my-4">
@@ -17,8 +16,7 @@
           [prefixList]="prefixList$ | async"
           [displayMode]="[userInfoType]"
           [nationList]="nationalitys$ | async"
-          [isSchoolService]="false"
-        >
+          [isSelfService]="true">
         </ksp-form-user-info>
       </div>
     </div>
@@ -26,8 +24,7 @@
     <mat-tab-group
       class="tab-group"
       animationDuration="0ms"
-      [selectedIndex]="0"
-    >
+      [selectedIndex]="0">
       <mat-tab label="ที่อยู่" class="tab-content">
         <ksp-form-address
           formControlName="address1"
@@ -36,8 +33,7 @@
           [amphurs]="amphurs1$ | async"
           [tumbols]="tumbols1$ | async"
           (provinceChanged)="provinceChanged(1, $event)"
-          (amphurChanged)="amphurChanged(1, $event)"
-        >
+          (amphurChanged)="amphurChanged(1, $event)">
           <span>ที่อยู่ทะเบียนบ้าน</span>
         </ksp-form-address>
         <hr />
@@ -48,15 +44,13 @@
           [amphurs]="amphurs2$ | async"
           [tumbols]="tumbols2$ | async"
           (provinceChanged)="provinceChanged(2, $event)"
-          (amphurChanged)="amphurChanged(2, $event)"
-        >
+          (amphurChanged)="amphurChanged(2, $event)">
           <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
           <div class="d-flex align-items-center">
             <input
               type="checkbox"
               class="me-2"
-              (change)="useSameAddress($event)"
-            />
+              (change)="useSameAddress($event)" />
             <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
           </div>
         </ksp-form-address>
@@ -70,8 +64,7 @@
           [tumbols]="tumbols3$ | async"
           [bureaus]="bureau$ | async"
           (provinceChanged)="provinceChanged(3, $event)"
-          (amphurChanged)="amphurChanged(3, $event)"
-        >
+          (amphurChanged)="amphurChanged(3, $event)">
         </self-service-form-user-workplace>
         <div class="row">
           <div class="col-md-6 mb-3">
@@ -79,8 +72,7 @@
             <input
               class="form-control"
               type="text"
-              formControlName="workPhone"
-            />
+              formControlName="workPhone" />
           </div>
 
           <div class="col-md-6 mb-3">
@@ -94,8 +86,7 @@
             <input
               class="form-control"
               type="text"
-              formControlName="workEmail"
-            />
+              formControlName="workEmail" />
           </div>
 
           <div class="col-md-6 mb-3">
@@ -110,8 +101,7 @@
           formControlName="educationForm"
           [renewLicenseTypes]="'eduManager'"
           [workingInfo]="workingInfoFiles"
-          [uniqueTimestamp]="uniqueTimestamp"
-        ></self-service-renew-license-property>
+          [uniqueTimestamp]="uniqueTimestamp"></self-service-renew-license-property>
       </mat-tab>
 
       <mat-tab label="ผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน">
@@ -119,8 +109,7 @@
           formControlName="standardWorking"
           [educationType]="'eduManager'"
           [uniqueTimestamp]="uniqueTimestamp"
-          [workingInfo]="workingInfoFiles"
-        ></self-service-standard-working>
+          [workingInfo]="workingInfoFiles"></self-service-standard-working>
       </mat-tab>
     </mat-tab-group>
   </form>
@@ -135,23 +124,21 @@
       *ngIf="requestId"
       (click)="cancel()"
       type="button"
-      class="ms-3 btn border-primary text-primary"
-    >
+      class="ms-3 btn border-primary text-primary">
       ยกเลิกใบคำขอ
     </button>
     <button
       type="button"
       (click)="onSave(1)"
-      class="ms-3 btn border-primary text-primary bg-white"
-    >
+      [disabled]="!form.valid"
+      class="ms-3 btn border-primary text-primary bg-white">
       บันทึกชั่วคราว
     </button>
     <button
       type="button"
       class="ms-3 btn btn-primary"
-      [disabled]="disableNextButton"
-      (click)="onSave(2)"
-    >
+      [disabled]="!form.valid"
+      (click)="onSave(2)">
       บันทึกและยื่น
     </button>
   </div>

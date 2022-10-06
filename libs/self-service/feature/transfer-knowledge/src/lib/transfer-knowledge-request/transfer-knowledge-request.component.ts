@@ -222,4 +222,8 @@ export class TransferKnowledgeRequestComponent
       }
     });
   }
+
+  back() {
+    this.router.navigate(['/home']);
+  }
 }

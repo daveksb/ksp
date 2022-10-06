@@ -21,7 +21,7 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./person-info.component.scss'],
 })
 export class PersonInfoComponent implements OnInit {
-  status = 'edit';
+  status = 'view';
   label = 'แก้ไขข้อมูล';
   imgSrc = '';
 
@@ -40,11 +40,13 @@ export class PersonInfoComponent implements OnInit {
     email: ['', [Validators.required, Validators.email]],
     personimage: [''],
   });
+
   baseForm = this.fb.group(new SelfMyInfo());
   provinces$!: Observable<any>;
   nationalitys$!: Observable<any>;
   uniqueTimestamp!: string;
   validatorMessages = validatorMessages;
+
   constructor(
     private fb: FormBuilder,
     private myInfoService: MyInfoService,
@@ -89,20 +91,21 @@ export class PersonInfoComponent implements OnInit {
     return this.form.controls.email;
   }
   onClick() {
-    if (this.status == 'edit') {
-      this.status = 'save';
+    if (this.status == 'view') {
+      this.status = 'edit';
       this.label = 'บันทึกข้อมูล';
       this.form.enable();
     } else {
-      if (!this.form.valid) return;
-      this.baseForm.patchValue(this.form.getRawValue());
-      const payload: SelfMyInfo = replaceEmptyWithNull(this.baseForm.value);
-      this.myInfoService
-        .updateMyInfo(payload)
-        .subscribe((res) => console.log(res));
-      this.status = 'edit';
+      this.status = 'view';
       this.label = 'แก้ไขข้อมูล';
       this.form.disable();
+      if (!this.form.valid) {
+        this.baseForm.patchValue(this.form.getRawValue());
+        const payload: SelfMyInfo = replaceEmptyWithNull(this.baseForm.value);
+        this.myInfoService
+          .updateMyInfo(payload)
+          .subscribe((res) => console.log(res));
+      }
     }
   }
 

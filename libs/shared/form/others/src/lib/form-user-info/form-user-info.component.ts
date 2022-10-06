@@ -3,12 +3,14 @@ import { FormBuilder } from '@angular/forms';
 import { SchoolRequestType, UserInfoFormType } from '@ksp/shared/constant';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import {
-  createDefaultUserInfoForm,
+  createUserInfoForm,
   providerFactory,
   validatorMessages,
 } from '@ksp/shared/utility';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 
+@UntilDestroy()
 @Component({
   selector: 'ksp-form-user-info',
   templateUrl: './form-user-info.component.html',
@@ -27,8 +29,10 @@ export class FormUserInfoComponent
   @Input() displayMode!: number[];
   @Input() isqualification = false;
   @Input() isDarkMode = false;
-  @Input() isSchoolService = true;
+  @Input() isSelfService = false;
   @Input() isAddStaff = false;
+  @Input() KuruspaNoLabel = '';
+
   @Output() idCardChange = new EventEmitter<any>();
 
   RequestTypeEnum = SchoolRequestType;
@@ -44,21 +48,26 @@ export class FormUserInfoComponent
    * Use in E-service, School-Service
    */
 
-  override form = createDefaultUserInfoForm(this.fb);
+  override form = createUserInfoForm(this.fb);
 
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
-      this.form?.valueChanges.subscribe((value: any) => {
-        this.onChange(value);
-        this.onTouched();
-      })
+      this.form?.valueChanges
+        .pipe(untilDestroyed(this))
+        .subscribe((value: any) => {
+          this.onChange(value);
+          this.onTouched();
+        })
     );
   }
   ngOnInit(): void {
     // ถ้าเป็น form คนไทยไม่ต้อง validate field เหล่านี้
     //console.log('display mode = ', this.displayMode);
+    if (this.isSelfService) {
+      this.form.controls.idcardno.clearValidators();
+    }
+
     if (this.displayMode.includes(UserInfoFormType.thai)) {
       this.form.controls.passportno.clearValidators();
       this.form.controls.passportstartdate.clearValidators();
@@ -76,8 +85,8 @@ export class FormUserInfoComponent
     }
 
     this.form.controls.idcardno.valueChanges
-      .pipe(debounceTime(200), distinctUntilChanged())
-      .subscribe((res) => {
+      .pipe(debounceTime(200), distinctUntilChanged(), untilDestroyed(this))
+      .subscribe((res: any) => {
         if (res && res.length === 13) {
           this.idCardChange.emit(res);
         }

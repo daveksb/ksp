@@ -49,6 +49,7 @@ export class SelfMyInfo {
   visaenddate: string | null = null;
   visatype: string | null = null;
   uniquetimestamp: string | null = null;
+  returncode: string | null = null;
 }
 
 export type SelfMyInfoKey = keyof SelfMyInfo;

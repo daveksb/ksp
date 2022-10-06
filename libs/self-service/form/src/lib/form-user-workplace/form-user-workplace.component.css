@@ -7,10 +7,3 @@
   background-image: url(/assets/images/arrow-down-icon.png);
   background-size: 12px;
 }
-
-@media only screen and (max-width: 768px) {
-  .content__container {
-    display: flex;
-    flex-direction: column;
-  }
-}

@@ -15,7 +15,7 @@
           [prefixList]="prefixList$ | async"
           [displayMode]="[userInfoType]"
           [nationList]="nationalitys$ | async"
-          [isSchoolService]="false"></ksp-form-user-info>
+          [isSelfService]="true"></ksp-form-user-info>
       </div>
     </div>
 
@@ -46,7 +46,10 @@
           <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
           <span class="text-danger ms-1 fs-6">*กรุณากรอกข้อมูลตำบล, อำเภอ</span>
           <div class="d-flex align-items-center">
-            <input type="checkbox" class="me-1" (change)="useSameAddress($event)" />
+            <input
+              type="checkbox"
+              class="me-1"
+              (change)="useSameAddress($event)" />
             <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
           </div>
         </ksp-form-address>
@@ -81,7 +84,7 @@
     </div>
 
     <div class="d-flex justify-content-center my-3">
-      <button type="button" class="btn btn-secondary">ย้อนกลับ</button>
+      <button type="button" class="btn btn-secondary" (click)="back()">ย้อนกลับ</button>
       <button
         type="button"
         *ngIf="requestId"
@@ -89,7 +92,7 @@
         class="ms-3 btn border-primary text-primary">
         ยกเลิกใบคำขอ
       </button>
-      <button type="button" (click)="next()" class="ms-3 btn btn-primary">
+      <button type="button" (click)="next()" [disabled]="!form.valid" class="ms-3 btn btn-primary">
         ต่อไป
       </button>
     </div>

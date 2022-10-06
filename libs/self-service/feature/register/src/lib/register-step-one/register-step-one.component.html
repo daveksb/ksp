@@ -71,6 +71,19 @@
                     class="form-control"
                     formControlName="firstnameth"
                   />
+                  <ng-container
+                    *ngIf="
+                      firstNameTh.invalid &&
+                      (firstNameTh.dirty || firstNameTh.touched)
+                    "
+                  >
+                    <span
+                      class="text-danger"
+                      *ngIf="firstNameTh.errors?.['pattern']"
+                    >
+                      {{ validatorMessages.th }}
+                    </span>
+                  </ng-container>
                 </div>
 
                 <div class="col-md mb-2">
@@ -80,6 +93,19 @@
                     class="form-control"
                     formControlName="lastnameth"
                   />
+                  <ng-container
+                    *ngIf="
+                      lastNameTh.invalid &&
+                      (lastNameTh.dirty || lastNameTh.touched)
+                    "
+                  >
+                    <span
+                      class="text-danger"
+                      *ngIf="lastNameTh.errors?.['pattern']"
+                    >
+                      {{ validatorMessages.th }}
+                    </span>
+                  </ng-container>
                 </div>
               </div>
 
@@ -107,6 +133,19 @@
                     placeholder=""
                     formControlName="firstnameen"
                   />
+                  <ng-container
+                    *ngIf="
+                      firstNameEn.invalid &&
+                      (firstNameEn.dirty || firstNameEn.touched)
+                    "
+                  >
+                    <span
+                      class="text-danger"
+                      *ngIf="firstNameEn.errors?.['pattern']"
+                    >
+                      {{ validatorMessages.en }}
+                    </span>
+                  </ng-container>
                 </div>
 
                 <div class="col-md mb-2">
@@ -117,6 +156,19 @@
                     placeholder=""
                     formControlName="lastnameen"
                   />
+                  <ng-container
+                    *ngIf="
+                      lastNameTh.invalid &&
+                      (lastNameEn.dirty || lastNameEn.touched)
+                    "
+                  >
+                    <span
+                      class="text-danger"
+                      *ngIf="lastNameEn.errors?.['pattern']"
+                    >
+                      {{ validatorMessages.en }}
+                    </span>
+                  </ng-container>
                 </div>
               </div>
 
@@ -155,6 +207,15 @@
                     placeholder=""
                     formControlName="phone"
                   />
+                  <ng-container
+                    *ngIf="
+                      firstNameEn.invalid && (phone.dirty || phone.touched)
+                    "
+                  >
+                    <span class="text-danger" *ngIf="phone.errors?.['pattern']">
+                      {{ validatorMessages.phone }}
+                    </span>
+                  </ng-container>
                 </div>
                 <div class="col-md mb-2">
                   <label class="form-label required">อีเมล</label>
@@ -164,22 +225,35 @@
                     placeholder="name@example.com"
                     formControlName="email"
                   />
+                  <ng-container
+                    *ngIf="email.invalid && (email.dirty || email.touched)"
+                  >
+                    <span class="text-danger" *ngIf="email.errors?.['email']">
+                      {{ validatorMessages.email }}
+                    </span>
+                  </ng-container>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md mb-2">
                   <ksp-form-address
+                    [provinces]="provinces$ | async"
+                    [amphurs]="amphurs$ | async"
+                    [tumbols]="tumbols$ | async"
+                    (provinceChanged)="provinceChanged($event)"
+                    (amphurChanged)="amphurChanged($event)"
+                    [mode]="'edit'"
                     [isDarkMode]="true"
                     [provinces]="provinces$ | async"
                     [amphurs]="amphurs$ | async"
                     [tumbols]="tumbols$ | async"
                     (provinceChanged)="provinceChanged($event)"
                     (amphurChanged)="amphurChanged($event)"
-                    formControlName="address"
+                    formControlName="addressinfo"
                     ><span class="form-label"
-                      >ที่อยู่ปัจจุบัน : form valid = {{ form.valid }}</span
-                    ></ksp-form-address
+                      >ที่อยู่ทะเบียนบ้าน
+                    </span></ksp-form-address
                   >
                 </div>
               </div>

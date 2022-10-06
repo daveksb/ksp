@@ -13,6 +13,7 @@ import {
   toLowercaseProp,
 } from '@ksp/shared/utility';
 import {
+  AttachFile,
   SelfServiceRequestForType,
   SelfServiceRequestSubType,
   SelfServiceRequestType,
@@ -33,7 +34,6 @@ import {
 })
 export class LicenseRequestForeignComponent implements OnInit {
   headerGroup = ['Issue Date', 'Form ID'];
-  title = 'TEACHING LICENSE APPLICATION FORM';
 
   form = this.fb.group({
     personalDetail: [],
@@ -49,10 +49,10 @@ export class LicenseRequestForeignComponent implements OnInit {
   addressInfo: any;
   workplaceInfo: any;
   eduInfo: any;
-  academicFiles: any[] = [];
+  academicFiles: AttachFile[] = [];
   grantionTeachingInfo: any;
   personalDeclaration: any;
-  documentFiles: any[] = [];
+  documentFiles: AttachFile[] = [];
 
   constructor(
     private router: Router,
@@ -71,17 +71,16 @@ export class LicenseRequestForeignComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.requestId = Number(params.get('id'));
       if (this.requestId) {
-        console.log(this.requestId);
+        //console.log(this.requestId);
         // this.loadRequestFromId(this.requestId);
         this.requestService.getRequestById(this.requestId).subscribe((res) => {
           if (res) {
-            console.log(res);
+            //console.log(res);
             this.requestData = res;
             this.requestNo = res.requestno;
             this.currentProcess = Number(res.currentprocess);
             this.uniqueTimestamp = res.uniquetimestamp || '';
-            console.log(this.uniqueTimestamp);
-
+            //console.log(this.uniqueTimestamp);
             this.patchData(res);
           }
         });

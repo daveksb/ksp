@@ -3,8 +3,10 @@ import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { staffLicenseTypes } from '@ksp/shared/constant';
+import { ListData } from '@ksp/shared/interface';
 import { StaffService } from '@ksp/shared/service';
-import { parseJson } from '@ksp/shared/utility';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ksp-activity-list',
@@ -13,6 +15,9 @@ import { parseJson } from '@ksp/shared/utility';
 })
 export class ActivityListComponent implements AfterViewInit {
   activityPageMode = activityPageMode;
+  positions$!: Observable<any>;
+  licenseTypes: ListData[] = staffLicenseTypes;
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   form = this.fb.group({
@@ -39,22 +44,36 @@ export class ActivityListComponent implements AfterViewInit {
     public router: Router,
     private fb: FormBuilder,
     private service: StaffService
-  ) {}
+  ) {
+    this.positions$ = this.service.getPositionTypes();
+  }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
 
-  search() {
+  search(filter: any) {
     const payload = {
-      schoolid: `${this.schoolId}`,
+      licenseno: filter.licenseno,
+      name: filter.name,
+      cardno: filter.cardno,
+      teachinglevel: filter.teachinglevel,
+      position: filter.position,
+      schoolId: `${this.schoolId}`,
+      offset: '0',
+      row: '100',
     };
+
     this.service.searchStaffs(payload).subscribe((res) => {
-      res.map((i: any) => {
-        const temp = parseJson(i.hiringinfo);
-        i.startdate = temp.startDate;
-        i.enddate = temp.endDate;
-      });
+      if (res) {
+        res.map((i: any) => {
+          if (i && i.hiringinfo) {
+            const temp = JSON.parse(i.hiringinfo);
+            i.startdate = temp.startDate;
+            i.enddate = temp.endDate;
+          }
+        });
+      }
 
       this.dataSource.data = res;
       //console.log('res = ', res);

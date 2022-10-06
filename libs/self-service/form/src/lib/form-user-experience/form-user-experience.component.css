@@ -4,14 +4,13 @@
   background-size: 12px;
 }
 
-.search__content {
-  background-image: url(/assets/images/search-icon.png) !important;
-  background-size: 12px;
+.form-control {
+  background-color: #f6f6f6;
 }
 
 .hr-or {
   position: relative;
-  margin: 20px 0;
+  margin: 12px 0;
   width: 100%;
   text-align: center;
   color: #3dabfc;

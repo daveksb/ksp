@@ -49,7 +49,8 @@
         class="form-control"
         type="text"
         placeholder="เหตุผลขอคืนเงินค่าธรรมเนียม"
-        formControlName="otherreason" />
+        formControlName="otherreason"
+      />
     </div>
   </div>
   <div class="row">
@@ -68,11 +69,24 @@
   <div class="row mb-2">
     <span class="col-md-3 d-flex align-items-center">
       <input type="checkbox" class="me-2" formControlName="smsAlert" />
-      <label class="form-label">ข้อความแจ้งเตือนผ่านโทรศัพท์มือถือ (SMS)
+      <label class="form-label"
+        >ข้อความแจ้งเตือนผ่านโทรศัพท์มือถือ (SMS)
       </label>
     </span>
     <span class="col-md-3">
-      <input class="form-control" type="text" formControlName="smsDetail" />
+      <input
+        class="form-control"
+        type="text"
+        formControlName="smsDetail"
+        maxlength="10"
+      />
+      <ng-container
+        *ngIf="smsPhone.invalid && (smsPhone.dirty || smsPhone.touched)"
+      >
+        <span class="text-danger" *ngIf="smsPhone.errors?.['pattern']"
+          >{{ validatorMessages.phone }}
+        </span>
+      </ng-container>
     </span>
   </div>
 
@@ -83,6 +97,11 @@
     </span>
     <span class="col-md-3">
       <input class="form-control" type="text" formControlName="emailDetail" />
+      <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
+        <span class="text-danger" *ngIf="email.errors?.['email']"
+          >{{ validatorMessages.email }}
+        </span>
+      </ng-container>
     </span>
   </div>
 

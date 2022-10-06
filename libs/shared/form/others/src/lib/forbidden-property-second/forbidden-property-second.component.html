@@ -1,0 +1,135 @@
+<div class="d-flex flex-column">
+  <div class="fs-5">การรับรองประพฤติตนตามจรรยาบรรณของวิชาชีพ</div>
+
+  <div class="my-3">
+    <div class="form-label">
+      1. ข้าพเจ้าขอรับรองว่ามีคุณสมบัติครบถ้วนตามประกาศคณะกรรมการคุรุสภา เรื่อง
+      คุณสมบัติของผู้ต่ออายุใบอนุญาตประกอบวิชาชีพทางการศึกษา พ.ศ. 2552
+      กำหนดไว้ทุกประการ
+    </div>
+
+    <div class="form-label">
+      2.
+      ข้าพเจ้าขอรับรองว่าได้ประพฤติตนตามจรรยาบรรณของวิชาชีพตามที่กำหนดในข้อบังคับคุรุสภาว่าด้วยจรรยาบรรณของวิชาชีพ
+      พ.ศ. 2556 และไม่มีลักษณะต้องห้ามตามที่กำหนดไว้ในมาตรา 44
+      แห่งพระราชบัญญัติสภาครูและบุคลากรทางการศึกษา พ.ศ. 2546 และขอแจ้งประวัติ
+      ดังนี้
+    </div>
+
+    <div class="bg-light p-3">
+      <div class="form-label required">
+        1. เคยเป็นผู้มีประพฤติเสื่อมเสียหรือบกพร่องในศีลธรรมอันดีหรือไม่
+      </div>
+      <div class="row my-3">
+        <div class="col-4 d-flex align-items-center">
+          <input
+            class="me-2"
+            type="radio"
+            name="immoral"
+            value="2"
+            formControlName="immoral"
+          />
+          <label class="form-label">ไม่เคย</label>
+        </div>
+        <div class="col-4 d-flex align-items-center">
+          <input
+            class="me-2"
+            type="radio"
+            name="immoral"
+            value="1"
+            formControlName="immoral"
+          />
+          <label class="form-label">เคย</label>
+        </div>
+      </div>
+      <div class="form-label required">
+        2. เป็นผู้ไร้ความสามารถหรือเสมือนไร้ความสามารถหรือไม่่
+      </div>
+      <div class="row my-3">
+        <div class="col-4 d-flex align-items-center">
+          <input
+            class="me-2"
+            type="radio"
+            name="incompetent"
+            value="2"
+            formControlName="incompetent"
+          />
+          <label class="form-label">ไม่เคย</label>
+        </div>
+        <div class="col-4 d-flex align-items-center">
+          <input
+            class="me-2"
+            type="radio"
+            name="incompetent"
+            value="1"
+            formControlName="incompetent"
+          />
+          <label class="form-label">เคย</label>
+        </div>
+      </div>
+      <div class="form-label required">
+        3.
+        เคยต้องโทษจำคุกในคดีที่คุรุสภาเห็นว่าอาจนำมาซึ่งความเสื่อมเสียเกียรติศักดิ์แห่งวิชาชีพ
+      </div>
+      <div class="row my-3">
+        <div class="col-4 d-flex align-items-center">
+          <input
+            class="me-2"
+            type="radio"
+            name="prison"
+            value="2"
+            formControlName="prison"
+          />
+          <label class="form-label">ไม่เคย</label>
+        </div>
+        <div class="col-4 d-flex align-items-center">
+          <input
+            class="me-2"
+            type="radio"
+            name="prison"
+            value="1"
+            formControlName="prison"
+          />
+          <label class="form-label">เคย</label>
+        </div>
+      </div>
+
+      <div class="row row-cols-2">
+        <div class="col offset-4">
+          <input
+            class="form-control"
+            type="text"
+            placeholder="โปรดระบุ"
+            formControlName="prisonReason"
+          />
+        </div>
+      </div>
+
+      <div class="form-label">
+        3.
+        ข้าพเจ้ายินยอมให้ตรวจสอบข้อมูลบุคคลตามที่ระบุในแบบคำขอได้จากสำนักทะเบียนราษฏร์
+        กระทรวงมหาดไทย
+      </div>
+    </div>
+
+    <div class="fs-6 text-danger">
+      * ข้าพเจ้าขอรับรองว่ามีข้อมูลและหลักฐานข้างต้นเป็นจริงทุกประการ
+      หากส่วนหนึ่งส่วนใดไม่เป็นความจริง ยินดีให้เพิกถอนใบอนุญาตประกอบวิชาชีพครู
+      และดำเนินคดีทางกฏหมาย
+    </div>
+
+    <br />
+    <div class="d-flex justify-content-center">
+      <button
+        matDialogClose
+        type="button"
+        class="btn border-primary text-primary me-1"
+      >
+        ไม่รับรอง
+      </button>
+      <button matDialogClose type="button" class="btn btn-primary ms-1">
+        รับรอง
+      </button>
+    </div>
+  </div>
+</div>

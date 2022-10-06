@@ -2349,6 +2349,14 @@
             "siteId": "b3164b84-b992-4605-bc6e-3ec8dd992fe0",
             "noBuild": true
           }
+        },
+        "deploy-stable": {
+          "builder": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/apps/school-service",
+            "siteId": "aeb4f082-082b-418b-b3bb-0400f7d6aaa4",
+            "noBuild": true
+          }
         }
       },
       "tags": [],
@@ -4168,6 +4176,14 @@
           "options": {
             "outputPath": "dist/apps/self-service",
             "siteId": "dad36791-c9ee-4b6a-8909-b0519e2f562e",
+            "noBuild": true
+          }
+        },
+        "deploy-stable": {
+          "builder": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/apps/self-service",
+            "siteId": "8df413ac-5d19-4e60-9165-93ba45e13d27",
             "noBuild": true
           }
         }

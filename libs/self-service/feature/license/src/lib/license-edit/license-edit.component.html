@@ -3,33 +3,50 @@
   <span subHeader>เปลี่ยนแปลง/แก้ไขใบอนุญาต</span>
 </ksp-top-nav>
 <form [formGroup]="form">
-  <div class="main__container">
-    <div class="fs-5 mt-1 mb-1">
+  <div class="main__container px-4 py-2">
+    <div class="box-header">
       มีความประสงค์จะขอให้เปลี่ยนแปลงข้อมูลทะเบียนผู้ได้รับใบอนุญาต
     </div>
 
-    <div class="detail__container">
+    <div class="detail__container p-3">
       <ksp-edit-license
         formControlName="userInfo"
         [oldValue]="oldValue"
         [prefixList]="prefixList$ | async"
         [showDistributeData]="true"></ksp-edit-license>
-      <hr />
-      <ksp-form-attachment [groups]="uploadFileList" [uniqueTimestamp]="uniqueTimestamp"></ksp-form-attachment>
+
+      <ksp-form-attachment
+        [groups]="uploadFileList"
+        [uniqueTimestamp]="uniqueTimestamp"></ksp-form-attachment>
 
       <label class="text-danger">
         *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
         โปรดตรวจสอบอีกครั้งก่อนการบันทึกลงระบบ
       </label>
 
-      <ksp-bottom-nav
-        (cancelClicked)="onCancel()"
-        [isLastPage]="true"
-        [isFirstPage]="true"
-        [showCenterButtons]="true"
-        [showSaveButton]="true"
-        [cancelButtonLabel]="requestId ? 'ยกเลิกใบคำขอ': 'ยกเลิก'"
-        (saveClicked)="onConfirm()"></ksp-bottom-nav>
+      <div class="d-flex justify-content-center mt-3 mb-3">
+        <button
+          *ngIf="requestId"
+          type="button"
+          class="ms-3 btn border-primary text-primary"
+          (click)="onCancel()">
+          ยกเลิกใบคำขอ
+        </button>
+        <button
+          *ngIf="!requestId"
+          (click)="onCancel()"
+          type="button"
+          class="ms-3 btn border-primary text-primary">
+          ยกเลิก
+        </button>
+        <button
+          (click)="onConfirm()"
+          type="button"
+          class="ms-3 btn btn-primary"
+          [disabled]="!form.valid">
+          บันทึก
+        </button>
+      </div>
     </div>
   </div>
 </form>

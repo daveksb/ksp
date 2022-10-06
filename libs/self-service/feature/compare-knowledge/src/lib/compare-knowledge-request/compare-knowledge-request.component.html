@@ -15,7 +15,7 @@
           [prefixList]="prefixList$ | async"
           [displayMode]="[userInfoType]"
           [nationList]="nationalitys$ | async"
-          [isSchoolService]="false"></ksp-form-user-info>
+          [isSelfService]="true"></ksp-form-user-info>
       </div>
     </div>
 
@@ -47,7 +47,10 @@
           <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
           <span class="text-danger ms-1 fs-6">*กรุณากรอกข้อมูลตำบล, อำเภอ</span>
           <div class="d-flex align-items-center">
-            <input type="checkbox" class="me-1" (change)="useSameAddress($event)" />
+            <input
+              type="checkbox"
+              class="me-1"
+              (change)="useSameAddress($event)" />
             <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
           </div>
         </ksp-form-address>
@@ -95,14 +98,20 @@
     </mat-tab-group>
 
     <div class="d-flex justify-content-center my-3">
-      <button type="button" class="btn btn-secondary" (click)="resetForm()">ล้างข้อมูล</button>
-      <button type="button" *ngIf="requestId" (click)="cancel()" class="ms-3 btn border-primary text-primary">
+      <button type="button" class="btn btn-secondary" (click)="resetForm()">
+        ล้างข้อมูล
+      </button>
+      <button
+        type="button"
+        *ngIf="requestId"
+        (click)="cancel()"
+        class="ms-3 btn border-primary text-primary">
         ยกเลิกใบคำขอ
       </button>
-      <button type="button" class="btn btn-warning mx-3" (click)="submit(1)">
+      <button type="button" class="btn btn-warning mx-3" (click)="submit(1)" [disabled]="!form.valid">
         บันทึกชั่วคราว
       </button>
-      <button type="button" (click)="submit(2)" class="btn btn-primary">
+      <button type="button" (click)="submit(2)" class="btn btn-primary" [disabled]="!form.valid">
         บันทึกและยื่น
       </button>
     </div>

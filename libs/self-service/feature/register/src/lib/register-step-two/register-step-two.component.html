@@ -81,7 +81,7 @@
                       class="text-danger"
                       *ngIf="idCardNo.errors?.['pattern']"
                     >
-                      {{ validatorMessages.ssn }}
+                      {{ validatorMessages.idCardNo }}
                     </span>
                   </ng-container>
                 </div>
@@ -89,17 +89,29 @@
               <div class="row justify-content-center">
                 <div class="col-md-6 mb-3">
                   <label class="form-label">เลขที่หลังบัตรประชาชน </label>
-
                   <i
                     class="bi bi-question-circle fs-6 ms-1"
                     (click)="tooltip1()"
                   ></i>
-
                   <input
                     type="text"
                     class="form-control"
                     formControlName="idcardbackno"
+                    maxlength="12"
                   />
+                  <ng-container
+                    *ngIf="
+                      idCardBack.invalid &&
+                      (idCardBack.dirty || idCardBack.touched)
+                    "
+                  >
+                    <span
+                      class="text-danger"
+                      *ngIf="idCardBack.errors?.['pattern']"
+                    >
+                      {{ validatorMessages.idCardBack }}
+                    </span>
+                  </ng-container>
                 </div>
               </div>
 
@@ -110,26 +122,23 @@
                     class="bi bi-question-circle fs-6 ms-1"
                     (click)="tooltip2()"
                   ></i>
-                  <div
-                    class="image-box d-flex align-items-center flex-column p-5"
-                  >
-                    <img
-                      style="max-width: 400px; max-height: 220px"
-                      [src]="imgSrc"
-                    />
+                  <div class="image-box d-flex align-items-center flex-column">
+                    <img style="max-height: 225px" [src]="imgSrc" />
 
                     <ng-container *ngIf="!imgSrc">
-                      <ksp-file-upload
-                        [buttonLabel]="'+ อัพโหลดรูปภาพ'"
-                        [requestType]="1"
-                        [isImage]="true"
-                        [uniqueTimestamp]="uniqueTimeStamp"
-                        [showUploadedFileName]="false"
-                        (uploadComplete)="onUploadComplete($event)"
-                      ></ksp-file-upload>
-                      <diV class="form-label"
-                        >Choose image . jpg only, max size 1 MB</diV
-                      >
+                      <div class="p-5 d-flex flex-column align-items-center">
+                        <ksp-file-upload
+                          [buttonLabel]="'อัพโหลดรูปภาพ'"
+                          [requestType]="1"
+                          [isImage]="true"
+                          [uniqueTimestamp]="uniqueTimeStamp"
+                          [showUploadedFileName]="false"
+                          (uploadComplete)="onUploadComplete($event)"
+                        ></ksp-file-upload>
+                        <diV class="form-label"
+                          >Choose image . jpg only, max size 1 MB</diV
+                        >
+                      </div>
                     </ng-container>
                   </div>
                 </div>

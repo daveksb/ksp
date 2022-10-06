@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 })
 export class UniFormBadgeComponent implements OnInit {
   @Input() mainTitle: any;
-  @Input() subTitle: any;
+  @Input() subTitle = 'แจ้งเตือน';
 
   constructor() {}
 

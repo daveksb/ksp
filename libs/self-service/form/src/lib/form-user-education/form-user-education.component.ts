@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { DynamicComponentDirective } from '@ksp/shared/directive';
+import { AttachFile } from '@ksp/shared/constant';
 import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { skip } from 'rxjs';
@@ -22,7 +22,7 @@ export class FormUserEducationComponent
     | 'supervision' = 'teacher';
 
   @Input() countries: any[] = [];
-  @Input() attachFiles!: any[];
+  @Input() attachFiles: AttachFile[] = [];
   @Input() uniqueTimestamp = '';
 
   selectedEducationType!: number;
@@ -36,13 +36,9 @@ export class FormUserEducationComponent
   educationTypes2: ListData[] = [];
   educationTypes3: ListData[] = [];
 
-  /* @ViewChild(DynamicComponentDirective, { static: true })
-  myHost!: DynamicComponentDirective; */
-
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
         this.onChange(value);
         this.onTouched();
@@ -55,11 +51,10 @@ export class FormUserEducationComponent
     this.educationTypes2 = educationTypes2;
     this.educationTypes3 = educationTypes3;
 
-    this.form.controls['educationType'].valueChanges
+    this.form.controls.educationType.valueChanges
       .pipe(skip(1))
       .subscribe((res) => {
         this.selectedEducationType = Number(res);
-        //this.form.controls.educationLevelForm.reset();
       });
   }
 }

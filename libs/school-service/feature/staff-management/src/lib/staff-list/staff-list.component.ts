@@ -4,6 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { staffLicenseTypes } from '@ksp/shared/constant';
+import { ListData } from '@ksp/shared/interface';
 import { StaffService } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 
@@ -14,6 +16,7 @@ import { Observable } from 'rxjs';
 })
 export class StaffListComponent implements AfterViewInit {
   positions$!: Observable<any>;
+  licenseTypes: ListData[] = staffLicenseTypes;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -40,7 +43,7 @@ export class StaffListComponent implements AfterViewInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private service: StaffService
+    private service: StaffService,
   ) {
     this.positions$ = this.service.getPositionTypes();
   }

@@ -1,6 +1,5 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { DynamicComponentDirective } from '@ksp/shared/directive';
 import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { skip } from 'rxjs';
@@ -35,13 +34,9 @@ export class StandardWorkingComponent
   educationTypes3: ListData[] = [];
   educationTypes4: ListData[] = [];
 
-  /* @ViewChild(DynamicComponentDirective, { static: true })
-  myHost!: DynamicComponentDirective; */
-
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
         this.onChange(value);
         this.onTouched();
@@ -59,7 +54,6 @@ export class StandardWorkingComponent
       .pipe(skip(1))
       .subscribe((res) => {
         this.selectedEducationType = Number(res);
-        //this.form.controls.educationLevelForm.reset();
       });
   }
 }

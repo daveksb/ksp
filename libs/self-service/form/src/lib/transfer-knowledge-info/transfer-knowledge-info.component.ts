@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -16,17 +16,17 @@ export class TransferKnowledgeInfoComponent
   transferForm = this.fb.group({
     subjects: this.fb.array([
       this.fb.group({
-        subjectName: [''],
-        subjectCode: [''],
-        grade: [''],
-        detail: [''],
+        subjectName: ['', Validators.required],
+        subjectCode: ['', Validators.required],
+        grade: ['', Validators.required],
+        detail: ['', Validators.required],
       }),
     ]),
   });
 
   override form = this.fb.group({
-    standardInfo: [],
-    standards: this.fb.array([this.transferForm]),
+    standardInfo: [null, Validators.required],
+    standards: this.fb.array([this.transferForm], Validators.required),
   });
 
   constructor(private fb: FormBuilder) {
@@ -79,10 +79,10 @@ export class TransferKnowledgeInfoComponent
     const transferForm = this.fb.group({
       subjects: this.fb.array([
         this.fb.group({
-          subjectName: [''],
-          subjectCode: [''],
-          grade: [''],
-          detail: [''],
+          subjectName: ['', Validators.required],
+          subjectCode: ['', Validators.required],
+          grade: ['', Validators.required],
+          detail: ['', Validators.required],
         }),
       ]),
     });
@@ -96,10 +96,10 @@ export class TransferKnowledgeInfoComponent
 
   addSubject(index: number) {
     const form = this.fb.group({
-      subjectName: [''],
-      subjectCode: [''],
-      grade: [''],
-      detail: [''],
+      subjectName: ['', Validators.required],
+      subjectCode: ['', Validators.required],
+      grade: ['', Validators.required],
+      detail: ['', Validators.required],
     });
 
     this.getSubjects(index).push(form);

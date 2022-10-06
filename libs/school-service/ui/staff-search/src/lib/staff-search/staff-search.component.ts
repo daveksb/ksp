@@ -27,6 +27,8 @@ export class StaffSearchComponent extends KspFormBaseComponent {
   @Output() clear = new EventEmitter<boolean>();
   @Output() search = new EventEmitter<any>();
   @Input() positions: any[] = [];
+  @Input() licenseTypes: any[] = [];
+
 
   constructor(private fb: FormBuilder) {
     super();
