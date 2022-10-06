@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { AttachFile } from '@ksp/shared/constant';
+import { FileGroup } from '@ksp/shared/constant';
 
 @Component({
   selector: 'self-service-foreign-license-step-three',
@@ -9,7 +9,7 @@ import { AttachFile } from '@ksp/shared/constant';
 export class ForeignLicenseStepThreeComponent {
   @Input() documentTypes: 'request' | 'renew' = 'request';
   @Input() uniqueTimestamp = '';
-  @Input() attachFiles: AttachFile[] = [];
+  @Input() attachFiles: FileGroup[] = [];
 
   updateComplete(file: any, group: any) {
     const { fileId, fileName } = file;

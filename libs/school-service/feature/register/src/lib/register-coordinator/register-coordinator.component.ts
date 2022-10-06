@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { AttachFile, UserInfoFormType } from '@ksp/shared/constant';
+import { FileGroup, UserInfoFormType } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -22,7 +22,7 @@ export class CoordinatorInfoComponent implements OnInit {
     coordinator: [],
   });
   savingData: any;
-  uploadFileList: AttachFile[] = [
+  uploadFileList: FileGroup[] = [
     {
       name: 'หนังสือแต่งตั้งผู้ประสานงาน',
       files: [],

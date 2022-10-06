@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AttachFile } from '@ksp/shared/constant';
+import { FileGroup } from '@ksp/shared/constant';
 
 @Injectable({
   providedIn: 'root',
@@ -74,7 +74,7 @@ export class TempLicenseDetailService {
     '2.หลักฐานการพัฒนาตนเอง',
   ];
 
-  evidenceFiles: AttachFile[] = [
+  evidenceFiles: FileGroup[] = [
     {
       name: '1.สำเนาสัญญาจ้าง',
       files: [],

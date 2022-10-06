@@ -13,7 +13,7 @@ import {
   toLowercaseProp,
 } from '@ksp/shared/utility';
 import {
-  AttachFile,
+  FileGroup,
   SelfServiceRequestForType,
   SelfServiceRequestSubType,
   SelfServiceRequestType,
@@ -49,10 +49,10 @@ export class LicenseRequestForeignComponent implements OnInit {
   addressInfo: any;
   workplaceInfo: any;
   eduInfo: any;
-  academicFiles: AttachFile[] = [];
+  academicFiles: FileGroup[] = [];
   grantionTeachingInfo: any;
   personalDeclaration: any;
-  documentFiles: AttachFile[] = [];
+  documentFiles: FileGroup[] = [];
 
   constructor(
     private router: Router,

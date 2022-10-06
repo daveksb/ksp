@@ -143,6 +143,7 @@ export function mapFileInfo(group: any[]) {
     return group.files;
   });
 }
+
 export function jsonParse(object: string): any {
   try {
     return JSON.parse(object);
