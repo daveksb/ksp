@@ -1,6 +1,8 @@
 <form [formGroup]="form">
   <div [ngClass]="{ 'px-3 py-3 bg-light': !isDarkMode }">
-    <div class="box-header"><ng-content></ng-content></div>
+    <div class="box-header">
+      <ng-content></ng-content>
+    </div>
 
     <input type="hidden" formControlName="id" />
     <input type="hidden" formControlName="addressType" />
@@ -12,8 +14,7 @@
           [class.form-control-sp]="isDarkMode"
           class="form-control"
           type="text"
-          formControlName="location"
-        />
+          formControlName="location" />
       </div>
       <div class="col-md-6 mb-2">
         <label class="form-label required">บ้านเลขที่ </label>
@@ -21,8 +22,7 @@
           [class.form-control-sp]="isDarkMode"
           class="form-control"
           type="text"
-          formControlName="houseNo"
-        />
+          formControlName="houseNo" />
       </div>
     </div>
 
@@ -33,8 +33,7 @@
           [class.form-control-sp]="isDarkMode"
           class="form-control"
           type="text"
-          formControlName="moo"
-        />
+          formControlName="moo" />
       </div>
       <div class="col-md-6 mb-2">
         <label class="form-label">ซอย</label>
@@ -42,20 +41,18 @@
           [class.form-control-sp]="isDarkMode"
           class="form-control"
           type="text"
-          formControlName="alley"
-        />
+          formControlName="alley" />
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-6 mb-2">
-        <label class="form-label required">ถนน</label>
+        <label class="form-label">ถนน</label>
         <input
           [class.form-control-sp]="isDarkMode"
           class="form-control"
           type="text"
-          formControlName="road"
-        />
+          formControlName="road" />
       </div>
       <div class="col-md-6 mb-2">
         <label class="form-label required">รหัสไปรษณีย์</label>
@@ -63,8 +60,7 @@
           [class.form-control-sp]="isDarkMode"
           class="form-control"
           type="text"
-          formControlName="postcode"
-        />
+          formControlName="postcode" />
       </div>
     </div>
 
@@ -75,13 +71,11 @@
           [class.form-select-sp]="isDarkMode"
           class="form-select"
           formControlName="province"
-          (change)="provinceChanged.emit($event)"
-        >
+          (change)="provinceChanged.emit($event)">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option
             *ngFor="let province of provinces"
-            [value]="province?.province_id"
-          >
+            [value]="province?.province_id">
             {{ province?.province_name }}
           </option>
         </select>
@@ -92,8 +86,7 @@
           [class.form-select-sp]="isDarkMode"
           class="form-select"
           formControlName="amphur"
-          (change)="amphurChanged.emit($event)"
-        >
+          (change)="amphurChanged.emit($event)">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let a of amphurs" [value]="a?.amphurCode">
             {{ a?.amphurName }}
@@ -109,8 +102,7 @@
           [class.form-select-sp]="isDarkMode"
           class="form-select"
           formControlName="tumbol"
-          (change)="updatePostcode($event)"
-        >
+          (change)="updatePostcode($event)">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let t of tumbols" [value]="t?.tambolCode">
             {{ t?.tambolName }}
