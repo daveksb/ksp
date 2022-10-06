@@ -75,14 +75,16 @@
           </div>
           <div class="col-md mb-2">
             <label class="form-label">Age</label>
-            <input class="form-control" type="text" />
+            <input class="form-control" type="text" formControlName="age" />
           </div>
         </div>
         <div class="row">
           <div class="col-md mb-2">
             <label class="form-label">Passport</label>
             <select class="form-select">
-              <option selected hidden disabled value="null">Please Choose</option>
+              <option selected hidden disabled value="null">
+                Please Choose
+              </option>
               <option value="1">Type One</option>
               <option value="2">Type Two</option>
               <option value="3">Type Three</option>
@@ -156,7 +158,9 @@
 
       <ng-container *ngIf="isRenewLicense">
         <mat-tab label="LICENSURE INFORMATION">
-          <self-service-foreign-step-two-tab-four-renew></self-service-foreign-step-two-tab-four-renew></mat-tab
+          <self-service-foreign-step-two-tab-four-renew
+            formControlName="licensesureInfoForm"
+          ></self-service-foreign-step-two-tab-four-renew></mat-tab
       ></ng-container>
     </mat-tab-group>
   </div>

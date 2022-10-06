@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
-import { providerFactory } from '@ksp/shared/utility';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { phonePattern, providerFactory } from '@ksp/shared/utility';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'self-service-foreign-step-two-tab-one',
@@ -20,15 +20,15 @@ export class ForeignStepTwoTabOneComponent extends KspFormBaseComponent {
   @Output() districtChanged = new EventEmitter<any>();
 
   override form = this.fb.group({
-    houseNo: [''],
-    alley: [''],
-    road: [''],
-    postcode: [''],
-    province: [''],
-    tumbol: [''],
-    amphur: [''],
-    phone: [''],
-    email: [''],
+    houseNo: [null],
+    alley: [null],
+    road: [null],
+    postcode: [null],
+    province: [null],
+    tumbol: [null],
+    amphur: [null],
+    phone: [null, Validators.pattern(phonePattern)],
+    email: [null, Validators.email],
   });
 
   constructor(private fb: FormBuilder) {

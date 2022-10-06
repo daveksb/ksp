@@ -7,7 +7,11 @@ import {
 } from '@ksp/shared/service';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { nameEnPattern, passportPattern } from '@ksp/shared/utility';
+import {
+  nameEnPattern,
+  numberPattern,
+  passportPattern,
+} from '@ksp/shared/utility';
 import { parseJson } from '@ksp/shared/utility';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -90,7 +94,7 @@ export class ForeignLicenseStepTwoComponent
       null,
       [Validators.required, Validators.pattern(nameEnPattern)],
     ],
-    middlenameen: [null],
+    middlenameen: [null, Validators.pattern(nameEnPattern)],
     lastnameen: [
       null,
       [Validators.required, Validators.pattern(nameEnPattern)],
@@ -98,10 +102,12 @@ export class ForeignLicenseStepTwoComponent
     sex: [null, Validators.required],
     birthdate: [null, Validators.required],
     nationality: [null],
+    age: [null, Validators.pattern(numberPattern)],
     addressForm: [],
     workplaceForm: [],
     academicForm: [],
     grantionLicenseForm: [],
+    licensesureInfoForm: [],
   });
 
   constructor(
