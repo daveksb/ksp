@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
@@ -7,6 +7,9 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./form-user-performance.component.css'],
 })
 export class FormUserPerformanceComponent implements OnInit {
+  @Input() uniqueTimestamp = '';
+  @Input() performanceFiles: any[] = [];
+
   typesOfSubject: string[] = [
     'วิชาชีพครู',
     'วิชาภาษาไทยเพื่อการสื่อสาร',
@@ -15,14 +18,5 @@ export class FormUserPerformanceComponent implements OnInit {
   ];
   personSelected = false;
 
-  performanceFiles = performanceFiles;
-
   ngOnInit(): void {}
 }
-
-const performanceFiles = [
-  {
-    name: 'สำเนาผลการทดสอบ',
-    fileId: '',
-  },
-];

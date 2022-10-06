@@ -44,4 +44,35 @@ export class LicenseRequestService {
       fileName: '',
     },
   ];
+
+  performanceFiles = [
+    [
+      {
+        name: 'สำเนาผลการทดสอบ',
+        fileId: '',
+        fileName: '',
+      },
+    ],
+    [
+      {
+        name: 'สำเนาผลการทดสอบ',
+        fileId: '',
+        fileName: '',
+      },
+    ],
+    [
+      {
+        name: 'สำเนาผลการทดสอบ',
+        fileId: '',
+        fileName: '',
+      },
+    ],
+    [
+      {
+        name: 'สำเนาผลการทดสอบ',
+        fileId: '',
+        fileName: '',
+      },
+    ],
+  ];
 }

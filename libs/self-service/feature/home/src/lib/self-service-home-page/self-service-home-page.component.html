@@ -209,18 +209,24 @@
       <ng-container matColumnDef="paymentStatus">
         <th mat-header-cell *matHeaderCellDef>สถานะการชำระเงิน</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.paymentStatus }}
+          {{ element.paymentStatus || 'รอชำระเงิน' }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="listStatus">
         <th mat-header-cell *matHeaderCellDef>สถานะรายการ</th>
-        <td mat-cell *matCellDef="let element">{{ element.listStatus }}</td>
+        <td mat-cell *matCellDef="let element">
+          {{
+            checkStatus(+element.currentprocess, +element.requeststatus)?.sname
+          }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="process">
         <th mat-header-cell *matHeaderCellDef>ขั้นตอน</th>
-        <td mat-cell *matCellDef="let element">{{ element.process }}</td>
+        <td mat-cell *matCellDef="let element">
+          {{ checkProcess(+element.currentprocess)?.processName }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="edit">

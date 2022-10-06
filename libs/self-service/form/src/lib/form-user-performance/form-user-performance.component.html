@@ -47,23 +47,23 @@
     <div class="menu__container">
       <mat-selection-list #subject [multiple]="false">
         <mat-list-option
-          *ngFor="let subject of typesOfSubject"
-          [value]="subject"
-        >
+          *ngFor="let subject of typesOfSubject;let i = index"
+          [value]="i">
           {{ subject }}
         </mat-list-option>
       </mat-selection-list>
     </div>
   </div>
 
-  <ng-container *ngIf="subject.selectedOptions.selected[0]?.value">
+  <ng-container *ngIf="subject.selectedOptions.selected[0]">
     <div class="col d-flex w-100 flex-column">
       <div class="mb-3">
         <self-service-test-result-table></self-service-test-result-table>
       </div>
       <ksp-form-attachment
         title=""
-        [groups]="performanceFiles"
-      ></ksp-form-attachment></div
-  ></ng-container>
+        [groups]="performanceFiles[subject.selectedOptions.selected[0].value]"
+        [uniqueTimestamp]="uniqueTimestamp"></ksp-form-attachment>
+    </div>
+  </ng-container>
 </div>

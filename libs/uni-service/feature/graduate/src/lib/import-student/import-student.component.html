@@ -47,9 +47,9 @@
     <form [formGroup]="formStudent">
       <div formArrayName="user">
         <p-table
-          [value]="user.value"
+          [value]="user.controls"
           responsiveLayout="scroll"
-          dataKey="index"
+          dataKey="controls.index.value"
           editMode="row"
           #dt
         >
@@ -251,7 +251,7 @@
                 class="p-2 text-nowrap"
                 *ngIf="pageType === 'studentList'"
               >
-              {{ control.no }}
+              {{ control.value.no }}
               </td>
 
               <td
@@ -305,7 +305,7 @@
                 *ngIf="pageType === 'graduateList'"
               >
                 <div
-                  (click)="searchAddress(control.index)"
+                  (click)="searchAddress(control.value.index)"
                   class="text-orange text-decoration-underline whitespace-nowrap"
                   role="button"
                 >
@@ -331,7 +331,9 @@
                   #idcard
                   type="text"
                   formControlName="idcardno"
-                  (blur)="searchByIdcard({idcardno: idcard.value, passportno: control.passportno}, control.index)"
+                  (blur)="searchByIdcard(
+                    {idcardno: idcard.value, passportno: control.value.passportno}, control.value.index
+                  )"
                   (keyup.enter)="idcard.blur();"
                   [readonly]="pageType === 'graduateList'"
                 />
@@ -344,7 +346,9 @@
                   #passport
                   type="text"
                   formControlName="passportno"
-                  (blur)="searchByIdcard({idcardno: control.idcardno, passportno: passport.value}, control.index)"
+                  (blur)="searchByIdcard(
+                    {idcardno: control.value.idcardno, passportno: passport.value}, control.value.index
+                  )"
                   (keyup.enter)="passport.blur();"
                   [readonly]="pageType === 'graduateList'"
                 />
@@ -490,7 +494,7 @@
                   class="text-orange text-decoration-underline whitespace-nowrap"
                   role="button"
                   *ngIf="pageType === 'graduateList'"
-                  (click)="viewAdress(control.address)"
+                  (click)="viewAdress(control.value.address)"
                 >
                   รายละเอียดที่อยู่
                 </div>
@@ -503,7 +507,7 @@
                 <div
                   class="text-orange text-decoration-underline whitespace-nowrap"
                   role="button"
-                  (click)="insertSubject(control.subjects, ri)"
+                  (click)="insertSubject(control.value.subjects, ri)"
                 >
                   รายวิชา
                 </div>

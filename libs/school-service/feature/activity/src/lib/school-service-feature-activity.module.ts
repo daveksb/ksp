@@ -21,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { SchoolServiceFormActivityModule } from '@ksp/school-service/form/activity';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
 
 export const routes: Routes = [
   {
@@ -53,6 +54,7 @@ export const routes: Routes = [
     LicenseInfoComponent,
     MatPaginatorModule,
     SchoolServiceFormActivityModule,
+    ThaiDatePipe,
   ],
   declarations: [ActivityListComponent, ActivityDetailComponent],
 })

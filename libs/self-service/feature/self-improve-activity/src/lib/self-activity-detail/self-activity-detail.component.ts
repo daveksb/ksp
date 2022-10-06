@@ -30,7 +30,6 @@ export class SelfActivityDetailComponent implements OnInit {
     },
   ];
   constructor(
-    //private router: Router,
     private fb: FormBuilder,
     public dialog: MatDialog,
     private selfDevelopmentService: SelfDevelopmentService,
