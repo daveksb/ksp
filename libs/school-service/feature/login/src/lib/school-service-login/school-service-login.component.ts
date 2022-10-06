@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { setCookie } from '@ksp/shared/utility';
@@ -9,7 +9,7 @@ import { SchoolServiceFeatureLoginService } from '../school-service-feature-logi
   templateUrl: './school-service-login.component.html',
   styleUrls: ['./school-service-login.component.scss'],
 })
-export class SchoolServiceLoginComponent {
+export class SchoolServiceLoginComponent implements OnInit {
   loginFail = false;
 
   form = this.fb.group({
@@ -21,6 +21,12 @@ export class SchoolServiceLoginComponent {
     private fb: FormBuilder,
     private schoolServiceFeatureLoginService: SchoolServiceFeatureLoginService
   ) {}
+
+  ngOnInit(): void {
+    this.form.valueChanges.subscribe((res) => {
+      this.loginFail = false;
+    });
+  }
 
   login() {
     this.schoolServiceFeatureLoginService

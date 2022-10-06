@@ -14,7 +14,7 @@ import { UniFormBadgeComponent } from '@ksp/shared/ui';
   styleUrls: ['./login-form.component.scss'],
   providers: providerFactory(LoginFormComponent),
 })
-export class LoginFormComponent extends KspFormBaseComponent implements OnInit {
+export class LoginFormComponent extends KspFormBaseComponent {
   eyeIconClicked = false;
   @Input() loginFail = false;
   @Input() showRetired = false;
@@ -38,11 +38,5 @@ export class LoginFormComponent extends KspFormBaseComponent implements OnInit {
         this.onTouched();
       })
     );
-  }
-
-  ngOnInit(): void {
-    this.form.valueChanges.subscribe((res) => {
-      this.loginFail = false;
-    });
   }
 }
