@@ -65,7 +65,7 @@ export class TransferKnowledgeEducationComponent
 
   ngOnInit(): void {
     // this.setDefaulFormValue();
-    this.form.setValidators(atLeastOneFormValidator());
+    // this.form.setValidators(atLeastOneFormValidator());
     this.form.valueChanges.subscribe((res) => {
       // console.log('form value = ', res);
     });

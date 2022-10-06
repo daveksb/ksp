@@ -31,6 +31,26 @@ export class BestTeacherInnovationComponent
     );
   }
 
+  override set value(value: any) {
+    console.log(value);
+    Object.keys(value).forEach((key) => {
+      const control = this.form.get(key) as FormArray;
+      if (value[key].length) {
+        control.removeAt(0);
+        value[key].forEach((item: any) =>
+          control.push(
+            this.fb.group({
+              ...item,
+            })
+          )
+        );
+      }
+    });
+
+    this.onChange(value);
+    this.onTouched();
+  }
+
   ngOnInit(): void {
     this.addFormArray(this.innovationInfo);
   }

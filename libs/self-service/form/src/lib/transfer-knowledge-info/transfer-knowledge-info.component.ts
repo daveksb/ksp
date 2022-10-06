@@ -26,7 +26,7 @@ export class TransferKnowledgeInfoComponent
 
   override form = this.fb.group({
     standardInfo: [null, Validators.required],
-    standards: this.fb.array([this.transferForm], Validators.required),
+    standards: this.fb.array([this.transferForm]),
   });
 
   constructor(private fb: FormBuilder) {
