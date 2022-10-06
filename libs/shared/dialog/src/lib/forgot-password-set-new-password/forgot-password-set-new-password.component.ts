@@ -11,7 +11,11 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { validatorMessages } from '@ksp/shared/utility';
+import {
+  numberPattern,
+  selfPasswordPattern,
+  validatorMessages,
+} from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-forgot-password-set-new-password',
@@ -21,16 +25,18 @@ import { validatorMessages } from '@ksp/shared/utility';
   styleUrls: ['./forgot-password-set-new-password.component.scss'],
 })
 export class ForgotPasswordSetNewPasswordComponent {
-  @Output() confirmed = new EventEmitter<any>();
   form = this.fb.group(
     {
-      newPassword: ['', Validators.required],
+      newPassword: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
     },
     {
       validators: [Validation.match('newPassword', 'confirmPassword')],
     }
   );
+
+  @Output() confirmed = new EventEmitter<any>();
+  validatorMessages = validatorMessages;
 
   constructor(public dialog: MatDialog, private fb: FormBuilder) {}
 
@@ -53,10 +59,16 @@ export class ForgotPasswordSetNewPasswordComponent {
       return validatorMessages.passwordNotMatching;
     return null;
   }
+
   get disabledSubmit() {
     return (
-      !this.form.controls.confirmPassword.valid || !this.form.controls.newPassword.valid
+      !this.form.controls.confirmPassword.valid ||
+      !this.form.controls.newPassword.valid
     );
+  }
+
+  get password() {
+    return this.form.controls.newPassword;
   }
 }
 

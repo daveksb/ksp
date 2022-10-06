@@ -69,6 +69,17 @@
                     class="form-control"
                     formControlName="password"
                   />
+                  <ng-container
+                    *ngIf="
+                      password.invalid && (password.dirty || password.touched)
+                    "
+                  >
+                    <span
+                      class="text-danger"
+                      *ngIf="password.errors?.['minlength']"
+                      >{{ validatorMessages.selfPassword }}
+                    </span>
+                  </ng-container>
                 </div>
               </div>
 
@@ -80,14 +91,16 @@
                     type="password"
                     class="form-control"
                   />
+                  <ng-container *ngIf="confirmPasswordError">
+                    <span class="text-danger">{{ confirmPasswordError }} </span>
+                  </ng-container>
                 </div>
               </div>
 
               <div class="d-grid gap-2 col-6 mx-auto mt-3">
                 <button
-                  [disabled]="false"
+                  [disabled]="disabledSubmit"
                   (click)="submit()"
-                  [disabled]="!passwordEqual"
                   type="submit"
                   class="btn btn-primary w-100"
                 >

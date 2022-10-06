@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
@@ -14,14 +14,8 @@ import { UniFormBadgeComponent } from '@ksp/shared/ui';
   styleUrls: ['./login-form.component.scss'],
   providers: providerFactory(LoginFormComponent),
 })
-export class LoginFormComponent extends KspFormBaseComponent {
+export class LoginFormComponent extends KspFormBaseComponent implements OnInit {
   eyeIconClicked = false;
-
-  override form = this.fb.group({
-    username: [null, Validators.required],
-    password: [null, Validators.required],
-  });
-
   @Input() loginFail = false;
   @Input() showRetired = false;
   @Input() hideRegister = false;
@@ -29,6 +23,11 @@ export class LoginFormComponent extends KspFormBaseComponent {
   @Output() register = new EventEmitter<boolean>();
   @Output() forgetPassword = new EventEmitter<boolean>();
   @Output() retired = new EventEmitter<boolean>();
+
+  override form = this.fb.group({
+    username: [null, Validators.required],
+    password: [null, Validators.required],
+  });
 
   constructor(private fb: FormBuilder) {
     super();
@@ -39,5 +38,11 @@ export class LoginFormComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+
+  ngOnInit(): void {
+    this.form.valueChanges.subscribe((res) => {
+      this.loginFail = false;
+    });
   }
 }

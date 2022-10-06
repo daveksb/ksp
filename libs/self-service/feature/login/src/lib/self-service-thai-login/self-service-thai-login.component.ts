@@ -12,7 +12,7 @@ import localForage from 'localforage';
   templateUrl: './self-service-thai-login.component.html',
   styleUrls: ['./self-service-thai-login.component.css'],
 })
-export class SelfServiceThaiLoginComponent {
+export class SelfServiceThaiLoginComponent implements OnInit {
   eyeIconClicked = false;
   loginFail = false;
 
@@ -28,6 +28,12 @@ export class SelfServiceThaiLoginComponent {
     public dialog: MatDialog,
     private myInfoService: MyInfoService
   ) {}
+
+  ngOnInit(): void {
+    this.form.valueChanges.subscribe((res) => {
+      this.loginFail = false;
+    });
+  }
 
   register() {
     this.router.navigate(['/landing']);
