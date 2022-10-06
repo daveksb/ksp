@@ -42,3 +42,8 @@ export class SelfLicense {
   selfdevelopmentinfo: string | null = null;
   fileinfo: string | null = null;
 }
+
+export interface AttachFile {
+  files: any[];
+  name: string;
+}
