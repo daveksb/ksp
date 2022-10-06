@@ -29,7 +29,7 @@ export class FormUploadImageComponent {
   constructor(private fileService: FileService) {}
 
   uploadComplete(event: any) {
-    console.log(event);
+    //console.log(event);
     this.imgSrc = event.file;
     this.uploadImageComplete.emit(event.fileId);
   }
