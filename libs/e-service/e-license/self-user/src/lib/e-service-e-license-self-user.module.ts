@@ -37,6 +37,10 @@ export const routes: Routes = [
         component: ApproveNewUserListComponent,
       },
       {
+        path: 'user-detail',
+        component: UserDetailComponent,
+      },
+      {
         path: 'user-detail/:id',
         component: UserDetailComponent,
       },
