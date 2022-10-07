@@ -130,7 +130,14 @@
             "siteId": "e816803c-b91a-46f9-baf7-679701a9d5c7",
             "noBuild": true
           }
-        }
+        },
+        "deploy-dev": {
+          "builder": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/apps/e-service",
+            "siteId": "e569cc56-85e0-479c-be25-aae1a7c8d294",
+            "noBuild": true
+          }
       },
       "tags": [],
       "files": [
@@ -2375,7 +2382,14 @@
             "siteId": "b3164b84-b992-4605-bc6e-3ec8dd992fe0",
             "noBuild": true
           }
-        }
+        },
+        "deploy-dev": {
+          "builder": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/apps/school-service",
+            "siteId": "aeb4f082-082b-418b-b3bb-0400f7d6aaa4",
+            "noBuild": true
+          }
       },
       "tags": [],
       "files": [
@@ -4196,7 +4210,14 @@
             "siteId": "dad36791-c9ee-4b6a-8909-b0519e2f562e",
             "noBuild": true
           }
-        }
+        },
+        "deploy-dev": {
+          "builder": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/apps/self-service",
+            "siteId": "8df413ac-5d19-4e60-9165-93ba45e13d27",
+            "noBuild": true
+          }
       },
       "tags": [],
       "schematics": {
@@ -8640,7 +8661,14 @@
             "siteId": "d1dc849e-2e37-4508-8323-ce8980880a6c",
             "noBuild": true
           }
-        }
+        },
+        "deploy-dev": {
+          "builder": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/apps/uni-service",
+            "siteId": "ba462199-aad5-4f7b-89d1-bbf4079cc71c",
+            "noBuild": true
+          }
       },
       "tags": [],
       "schematics": {
