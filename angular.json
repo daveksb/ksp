@@ -138,6 +138,7 @@
             "siteId": "e569cc56-85e0-479c-be25-aae1a7c8d294",
             "noBuild": true
           }
+        }
       },
       "tags": [],
       "files": [
@@ -325,32 +326,6 @@
           "hash": "6c82dd8c3d2424596cc6c96b464f24be7d0099f3"
         }
       ]
-    },
-    "e-service-dialog-school-user-detail": {
-      "projectType": "library",
-      "root": "libs/e-service/dialog/school-user-detail",
-      "sourceRoot": "libs/e-service/dialog/school-user-detail/src",
-      "prefix": "ksp",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/dialog/school-user-detail"],
-          "options": {
-            "jestConfig": "libs/e-service/dialog/school-user-detail/jest.config.ts",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/e-service/dialog/school-user-detail/**/*.ts",
-              "libs/e-service/dialog/school-user-detail/**/*.html"
-            ]
-          }
-        }
-      },
-      "tags": []
     },
     "e-service-e-license-document-delivery": {
       "projectType": "library",
@@ -2390,6 +2365,7 @@
             "siteId": "aeb4f082-082b-418b-b3bb-0400f7d6aaa4",
             "noBuild": true
           }
+        }
       },
       "tags": [],
       "files": [
@@ -4218,6 +4194,7 @@
             "siteId": "8df413ac-5d19-4e60-9165-93ba45e13d27",
             "noBuild": true
           }
+        }
       },
       "tags": [],
       "schematics": {
@@ -8669,6 +8646,7 @@
             "siteId": "ba462199-aad5-4f7b-89d1-bbf4079cc71c",
             "noBuild": true
           }
+        }
       },
       "tags": [],
       "schematics": {
@@ -9821,5 +9799,8 @@
       ]
     }
   },
-  "version": 1
+  "version": 1,
+  "cli": {
+    "analytics": false
+  }
 }
