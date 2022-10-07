@@ -19,6 +19,9 @@
       "@ksp/e-service/dialog/accusation-search": [
         "libs/e-service/dialog/accusation-search/src/index.ts"
       ],
+      "@ksp/e-service/dialog/school-user-detail": [
+        "libs/e-service/dialog/school-user-detail/src/index.ts"
+      ],
       "@ksp/e-service/e-license/document-delivery": [
         "libs/e-service/e-license/document-delivery/src/index.ts"
       ],

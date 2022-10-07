@@ -54,7 +54,7 @@
         ข้อมูลผู้ขอเข้ารหัสสำหรับเข้าใช้งานระบบ (ผู้ประสานงาน)
       </div>
       <ksp-form-coordinator-info
-        [formType]="'req'"
+        [showContent]="false"
         [positionLabel]="'xxx'"
         [mode]="'view'"
         [displayMode]="[0]"
@@ -71,7 +71,8 @@
         ข้อมูลผู้มีอำนาจแต่งตั้ง (ที่ระบุไว้ในเอกสารแนบ)
       </div>
       <ksp-form-coordinator-info
-        [formType]="'coo'"
+        [showContent]="false"
+        [userFormType]="'coord'"
         [positionLabel]="'yyy'"
         [mode]="'view'"
         [displayMode]="[0]"

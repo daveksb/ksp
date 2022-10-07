@@ -265,29 +265,20 @@ export const eLicenseMenu: MenuConfig[] = [
     path: '',
   },
   {
-    icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบคำขอผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
-    path: '/school-user/new-user',
-  },
-  {
     icon: 'assets/images/icon-sidenav/people.svg',
     label: 'บริหารจัดการผู้ใช้งาน',
     path: '',
     isExpanded: false,
     subMenuName: 'user-management',
     subMenu: [
-      /*  {
-        path: '/self-user/new-user',
-        label: 'ใบคำขอผู้ใช้งานระบบบริการด้วยตนเอง (self Service)',
-      }, */
       {
         path: '/self-user/current-user',
         label: 'ผู้ใช้งานระบบบริการด้วยตนเอง (self Service)',
       },
-      /* {
+      {
         path: '/school-user/new-user',
         label: 'ใบคำขอผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
-      }, */
+      },
       {
         path: '/school-user/current-user',
         label: 'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
