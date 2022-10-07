@@ -2,7 +2,10 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { SchoolServiceUserPageType } from '@ksp/shared/interface';
+import {
+  EsSearchPayload,
+  SchoolServiceUserPageType,
+} from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 
 @Component({
@@ -28,15 +31,14 @@ export class ApproveNewUserListComponent implements AfterViewInit {
 
   search(params: any) {
     console.log('params  = ', params);
-    const payload = {
+    const payload: EsSearchPayload = {
       systemtype: '2',
       requesttype: '1',
-      schoolid: '0010201056',
-      // params.institution?.schoolid,
-      bureauid: null,
+      offset: '0',
+      row: '500',
     };
 
-    this.eRequestService.searchRequest(payload).subscribe((res: any) => {
+    this.eRequestService.EsSearchRequest(payload).subscribe((res: any) => {
       //console.log('res = ', res);
       this.dataSource.data = res;
     });

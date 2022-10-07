@@ -13,3 +13,4 @@ export * from './lib/self-myinfo';
 export * from './lib/self-develop';
 export * from './lib/ksp-shared';
 export * from './lib/ksp-pagination.component';
+export * from './lib/e-search-request';
