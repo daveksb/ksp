@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import {
   EsSearchPayload,
   RequestSearchFilter,
+  SchoolRequest,
   SchoolServiceUserPageType,
 } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
@@ -15,7 +16,7 @@ import { ERequestService } from '@ksp/shared/service';
 })
 export class ApproveNewUserListComponent implements AfterViewInit {
   displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<any>();
+  dataSource = new MatTableDataSource<SchoolRequest>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -40,7 +41,7 @@ export class ApproveNewUserListComponent implements AfterViewInit {
       row: '500',
     };
 
-    this.eRequestService.EsSearchRequest(payload).subscribe((res: any) => {
+    this.eRequestService.EsSearchRequest(payload).subscribe((res) => {
       //console.log('res = ', res);
       this.dataSource.data = res;
     });

@@ -272,15 +272,16 @@ export const eLicenseMenu: MenuConfig[] = [
     subMenuName: 'user-management',
     subMenu: [
       {
-        path: '/school-user/new-user',
-        label: 'ใบคำขอรหัสเข้าใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
+        path: '/school/new-user',
+        label:
+          'ใบคำขอรหัสเข้าใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
       },
       {
         path: '/self-user/current-user',
         label: 'ผู้ใช้งานระบบบริการด้วยตนเอง (self Service)',
       },
       {
-        path: '/school-user/current-user',
+        path: '/school/current-user',
         label: 'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
       },
     ],
