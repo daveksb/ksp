@@ -2,7 +2,7 @@
   <div class="box-header text-primary">ข้อมูลครูสอนดีเด่น</div>
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">ประเภทครูผู้สอนดีเด่น</label>
+      <label class="form-label required">ประเภทครูผู้สอนดีเด่น</label>
       <select class="form-select" formControlName="teacherType">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">
@@ -29,22 +29,21 @@
       </select>
     </div>
     <div class="col-md-6 mb-2">
-      <label class="form-label">วันที่เริ่มปฏิบัติหน้าที่ครู</label>
+      <label class="form-label required">วันที่เริ่มปฏิบัติหน้าที่ครู</label>
       <input class="form-control" type="date" formControlName="startDate" />
     </div>
   </div>
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">ตำแหน่ง</label>
+      <label class="form-label required">ตำแหน่ง</label>
       <input class="form-control" type="text" formControlName="position" />
     </div>
     <div class="col-md-6 mb-2">
-      <label class="form-label">ประสบการณ์การสอน (ปี)</label>
+      <label class="form-label required">ประสบการณ์การสอน (ปี)</label>
       <input
         class="form-control"
         type="text"
-        formControlName="experienceYear"
-      />
+        formControlName="experienceYear" />
     </div>
   </div>
 </form>
