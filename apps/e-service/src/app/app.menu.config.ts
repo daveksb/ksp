@@ -273,7 +273,8 @@ export const eLicenseMenu: MenuConfig[] = [
     subMenu: [
       {
         path: '/school-user/new-user',
-        label: 'ใบคำขอรหัสเข้าใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
+        label:
+          'ใบคำขอรหัสเข้าใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
       },
       {
         path: '/self-user/current-user',
@@ -285,37 +286,37 @@ export const eLicenseMenu: MenuConfig[] = [
       },
     ],
   },
-  /*   {
+  {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอรหัสเข้าใช้งานระบบ',
+    label: 'ใบคำขอหนังสือรับรองคุณวุฒิ',
     path: '',
     isExpanded: false,
-    subMenuName: 'user-approvement',
+    subMenuName: 'qulification',
     subMenu: [
       {
         path: '/self/new-user',
-        label: 'ระบบบริการด้วยตนเอง (self Service)',
+        label: 'รายการใบคำขอหนังสือขอรับรองคุณวุฒิ',
       },
       {
         path: '/school/new-user',
-        label: 'ระบบบริการหน่วยงานทางการศึกษา (School Service)',
+        label: 'พิจารณาหนังสือรับรองคุณวุฒิ',
       },
     ],
-  }, */
+  },
   /*   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอหนังสือรับรองความรู้',
     path: '',
     isExpanded: false,
-    subMenuName: 'confirm',
+    subMenuName: 'verify',
     subMenu: [
       {
         path: '/xxx',
-        label: 'รายการใบคำขอ',
+        label: 'รายการใบคำขอหนังสือรับรองความรู้',
       },
       {
         path: '/temp-license/approve-detail',
-        label: 'พิจารณา',
+        label: 'พิจารณาหนังสือรับรองความรู้',
       },
     ],
   }, */
@@ -324,15 +325,15 @@ export const eLicenseMenu: MenuConfig[] = [
     label: 'ใบคำขอเทียบเคียงความรู้',
     path: '',
     isExpanded: false,
-    subMenuName: 'xxx',
+    subMenuName: 'compare',
     subMenu: [
       {
         path: '/xxx',
-        label: 'รายการใบคำขอ',
+        label: 'รายการใบคำขอเทียบเคียงความรู้',
       },
       {
         path: '/xxx',
-        label: 'พิจารณา',
+        label: 'พิจารณาเทียบเคียงความรู้',
       },
     ],
   }, */
@@ -510,19 +511,6 @@ export const standardMenu: MenuConfig[] = [
       },
     ],
   },
-  /* {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอรหัสเข้าใช้งานระบบ',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'user-approvement',
-    subMenu: [
-      {
-        path: 'xxx',
-        label: 'ระบบบริการสถาบันผลิตครู (Uni Service)',
-      },
-    ],
-  }, */
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ระบบบริหารจัดการผู้ใช้งาน',
