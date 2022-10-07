@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
   EsSearchPayload,
+  RequestSearchFilter,
   SchoolServiceUserPageType,
 } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
@@ -29,11 +30,12 @@ export class ApproveNewUserListComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  search(params: any) {
+  search(params: RequestSearchFilter) {
     console.log('params  = ', params);
     const payload: EsSearchPayload = {
       systemtype: '2',
       requesttype: '1',
+      name: params.name,
       offset: '0',
       row: '500',
     };

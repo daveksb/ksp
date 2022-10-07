@@ -17,11 +17,11 @@ import { providerFactory } from '@ksp/shared/utility';
 })
 export class EServiceRequestSearchComponent extends KspFormBaseComponent {
   override form = this.fb.group({
-    institution: [],
-    requestno: [],
-    name: [],
-    requestdatefrom: [],
-    requeststatus: [],
+    schoolinfo: [null],
+    requestno: [''],
+    name: [''],
+    requestdatefrom: [''],
+    requeststatus: [''],
   });
 
   @Input() searchType = '';
