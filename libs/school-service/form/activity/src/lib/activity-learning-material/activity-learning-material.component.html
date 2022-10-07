@@ -1,14 +1,18 @@
 <form [formGroup]="form">
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label required"><span *ngIf="!isForeignForm">เรื่อง</span>
-        <span *ngIf="isForeignForm">Topic</span></label>
+      <label class="form-label required"
+        ><span *ngIf="!isForeignForm">เรื่อง</span>
+        <span *ngIf="isForeignForm">Topic</span></label
+      >
       <input class="form-control" type="text" formControlName="name" />
     </div>
 
     <div class="col-md-6 mb-2">
-      <label class="form-label required"><span *ngIf="!isForeignForm">วันเดือนปี</span>
-        <span *ngIf="isForeignForm">Date</span></label>
+      <label class="form-label required"
+        ><span *ngIf="!isForeignForm">วันเดือนปี</span>
+        <span *ngIf="isForeignForm">Date</span></label
+      >
       <input class="form-control" type="date" formControlName="date" />
     </div>
   </div>

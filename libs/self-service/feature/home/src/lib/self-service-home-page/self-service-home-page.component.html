@@ -1,28 +1,17 @@
 <ksp-top-nav [isSelfService]="true"><span header>หน้าแรก</span></ksp-top-nav>
 
 <div class="full-height main__container py-2 px-4">
-  <ksp-uni-form-badge [mainTitle]="badgeTitle"></ksp-uni-form-badge>
-  <div class="row" style="overflow-x: auto">
-    <div class="col p-0">
+  <div class="py-2">
+    <ksp-uni-form-badge [mainTitle]="badgeTitle"></ksp-uni-form-badge>
+  </div>
+  <div class="row flex-column flex-lg-row gap-2" style="overflow-x: auto">
+    <div class="col p-0 mb-3 mb-md-0">
       <self-service-slideshow></self-service-slideshow>
-      <br />
     </div>
-    <div class="col p-0">
+    <div class="col p-0 mb-3 mb-md-0">
       <self-service-slideshow-second></self-service-slideshow-second>
-      <br />
     </div>
   </div>
-  <self-service-license-info
-    [header]="'สถานะใบคำขอ'"
-    [subheader1]="'ใบคำขอที่ต้องชำระเงิน'"
-    [subheader2]="'ใบคำขอทั้งหมด'"
-    [subheader3]="'รอการอนุมัติ'"
-    [subheader4]="'ปรับแก้ไข / เพิ่มเติม'"
-    [date]="'1'"
-    [requestNo]="'1'"
-    [KuruspaId]="'1'"
-    [personId]="'1'"
-  ></self-service-license-info>
   <br />
 
   <div class="box-header">ค้นหาใบคำขอ</div>

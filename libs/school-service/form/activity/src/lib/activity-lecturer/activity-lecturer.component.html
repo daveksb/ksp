@@ -1,36 +1,46 @@
 <form [formGroup]="form">
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label required"><span *ngIf="!isForeignForm">เรื่อง</span>
-        <span *ngIf="isForeignForm">Topic</span></label>
+      <label class="form-label required"
+        ><span *ngIf="!isForeignForm">เรื่อง</span>
+        <span *ngIf="isForeignForm">Topic</span></label
+      >
       <input class="form-control" type="text" formControlName="subject" />
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label required"><span *ngIf="!isForeignForm">สถานที่</span>
-        <span *ngIf="isForeignForm">Place</span></label>
+      <label class="form-label required"
+        ><span *ngIf="!isForeignForm">สถานที่</span>
+        <span *ngIf="isForeignForm">Place</span></label
+      >
       <input class="form-control" type="text" formControlName="address" />
     </div>
 
     <div class="col-md-6 mb-2">
-      <label class="form-label required"><span *ngIf="!isForeignForm">หน่วยงาน</span>
-        <span *ngIf="isForeignForm">Organized By</span></label>
+      <label class="form-label required"
+        ><span *ngIf="!isForeignForm">หน่วยงาน</span>
+        <span *ngIf="isForeignForm">Organized By</span></label
+      >
       <input class="form-control" type="text" formControlName="agency" />
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label required"><span *ngIf="!isForeignForm">จำนวนชั่วโมงที่เป็นวิทยากร</span>
-        <span *ngIf="isForeignForm">Period of Lecture</span></label>
+      <label class="form-label required"
+        ><span *ngIf="!isForeignForm">จำนวนชั่วโมงที่เป็นวิทยากร</span>
+        <span *ngIf="isForeignForm">Period of Lecture</span></label
+      >
       <input class="form-control" type="text" formControlName="hour" />
     </div>
 
     <div class="col-md-6 mb-2">
-      <label class="form-label required"><span *ngIf="!isForeignForm">วัน/เดือน/ปี</span>
-        <span *ngIf="isForeignForm">Date</span></label>
+      <label class="form-label required"
+        ><span *ngIf="!isForeignForm">วัน/เดือน/ปี</span>
+        <span *ngIf="isForeignForm">Date</span></label
+      >
       <input class="form-control" type="date" formControlName="date" />
     </div>
   </div>

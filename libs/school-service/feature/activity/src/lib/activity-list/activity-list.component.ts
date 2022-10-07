@@ -17,6 +17,7 @@ export class ActivityListComponent implements AfterViewInit {
   activityPageMode = activityPageMode;
   positions$!: Observable<any>;
   licenseTypes: ListData[] = staffLicenseTypes;
+  searchNotFound = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -71,8 +72,12 @@ export class ActivityListComponent implements AfterViewInit {
             const temp = JSON.parse(i.hiringinfo);
             i.startdate = temp.startDate;
             i.enddate = temp.endDate;
+            this.searchNotFound = false;
           }
         });
+      } else {
+        this.dataSource.data = [];
+        this.searchNotFound = true;
       }
 
       this.dataSource.data = res;
@@ -82,14 +87,15 @@ export class ActivityListComponent implements AfterViewInit {
 
   clear() {
     this.dataSource.data = [];
+    this.searchNotFound = false;
   }
 
   edit(pageType: any, staffId: number) {
-    this.router.navigate(['/activity', 'detail', pageType, staffId]);
+    this.router.navigate(['/', 'activity', 'detail', pageType, staffId]);
   }
 
   view(pageType: any, staffId: number) {
-    this.router.navigate(['/activity', 'detail', pageType, staffId]);
+    this.router.navigate(['/', 'activity', 'detail', pageType, staffId]);
   }
 }
 

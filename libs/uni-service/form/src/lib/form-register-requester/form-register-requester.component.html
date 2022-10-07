@@ -9,7 +9,12 @@
         <label class="form-label required">สิทธิสำหรับการเข้าใช้งาน</label>
         <select class="form-select" formControlName="permission">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option *ngFor="let permission of permissionList" [value]="permission.value">{{permission.label}}</option>
+          <option
+            *ngFor="let permission of permissionList"
+            [value]="permission.value"
+          >
+            {{ permission.label }}
+          </option>
         </select>
       </div>
     </div>
@@ -25,12 +30,12 @@
           formControlName="idcardno"
         />
         <ng-container
-        *ngIf="idCardNo.invalid && (idCardNo.dirty || idCardNo.touched)"
-      >
-        <span class="text-danger" *ngIf="idCardNo.errors?.['pattern']">
-          {{ validatorMessages.ssn }}
-        </span>
-      </ng-container>
+          *ngIf="idCardNo.invalid && (idCardNo.dirty || idCardNo.touched)"
+        >
+          <span class="text-danger" *ngIf="idCardNo.errors?.['pattern']">
+            {{ validatorMessages.idCardNo }}
+          </span>
+        </ng-container>
       </div>
     </div>
 
@@ -39,7 +44,9 @@
         <label class="form-label required">คำนำหน้าชื่อภาษาไทย</label>
         <select class="form-select" formControlName="prefixth">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option *ngFor="let prefix of prefixName" [value]="prefix.id">{{prefix.name_th}}</option>
+          <option *ngFor="let prefix of prefixName" [value]="prefix.id">
+            {{ prefix.name_th }}
+          </option>
         </select>
       </div>
       <div class="col-5">
@@ -83,7 +90,9 @@
         <label class="form-label">คำนำหน้าชื่ออังกฤษ</label>
         <select class="form-select" formControlName="prefixen">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option *ngFor="let prefix of prefixName" [value]="prefix.id">{{prefix.name_en}}</option>
+          <option *ngFor="let prefix of prefixName" [value]="prefix.id">
+            {{ prefix.name_en }}
+          </option>
         </select>
       </div>
       <div class="col-5">
@@ -125,12 +134,24 @@
     <div class="row mb-3">
       <div class="col-6">
         <label class="form-label required">ตำแหน่งทางการบริหาร</label>
-        <select class="form-select" formControlName="position" (change)="chageposition($event)">
+        <select
+          class="form-select"
+          formControlName="position"
+          (change)="chageposition($event)"
+        >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option *ngFor="let occupy of occupyList" [value]="occupy.eduoccupytype">{{occupy.eduoccupyname}}</option>
+          <option
+            *ngFor="let occupy of occupyList"
+            [value]="occupy.eduoccupytype"
+          >
+            {{ occupy.eduoccupyname }}
+          </option>
         </select>
       </div>
-      <div class="col-6" *ngIf="form.value.position && form.value.position === '0'">
+      <div
+        class="col-6"
+        *ngIf="form.value.position && form.value.position === '0'"
+      >
         <label class="form-label"><br /></label>
         <input
           class="form-control"
@@ -146,16 +167,14 @@
         <label class="form-label required">สังกัด</label>
         <select class="form-select" formControlName="unitype">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option *ngFor="let unitype of uniType" [value]="unitype.id">{{unitype.name}}</option>
+          <option *ngFor="let unitype of uniType" [value]="unitype.id">
+            {{ unitype.name }}
+          </option>
         </select>
       </div>
       <div class="col">
         <label class="form-label">เบอร์โทรศัพท์ (ที่ทำงาน)</label>
-        <input
-          class="form-control"
-          type="text"
-          formControlName="workphone"
-        />
+        <input class="form-control" type="text" formControlName="workphone" />
         <ng-container
           *ngIf="workPhone.invalid && (workPhone.dirty || workPhone.touched)"
         >

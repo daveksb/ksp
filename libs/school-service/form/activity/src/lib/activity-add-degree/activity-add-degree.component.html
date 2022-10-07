@@ -1,42 +1,52 @@
 <form [formGroup]="form">
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label required"><span *ngIf="!isForeignForm">สถาบันการศึกษา</span>
+      <label class="form-label required"
+        ><span *ngIf="!isForeignForm">สถาบันการศึกษา</span>
         <span *ngIf="isForeignForm">Institution</span>
       </label>
       <input
         class="form-control"
         type="text"
-        formControlName="educationInstitution" />
+        formControlName="educationInstitution"
+      />
     </div>
 
     <div class="col-md-6 mb-2">
       <label class="form-label required">
         <span *ngIf="!isForeignForm">วุฒิปริญญาที่จบ</span>
-        <span *ngIf="isForeignForm">degree</span></label>
+        <span *ngIf="isForeignForm">degree</span></label
+      >
       <input
         class="form-control"
         type="text"
-        formControlName="graduateDegree" />
+        formControlName="graduateDegree"
+      />
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label required"><span *ngIf="!isForeignForm">สาขา/วิชาเอก</span>
-        <span *ngIf="isForeignForm">Subject/Major</span></label>
+      <label class="form-label required"
+        ><span *ngIf="!isForeignForm">สาขา/วิชาเอก</span>
+        <span *ngIf="isForeignForm">Subject/Major</span></label
+      >
       <input class="form-control" type="text" formControlName="branch" />
     </div>
 
     <div class="col-md-3 mb-2">
-      <label class="form-label required"><span *ngIf="!isForeignForm">วัน/เดือน/ปี ที่เข้าศึกษา</span>
-        <span *ngIf="isForeignForm">Start of Graduated Date</span></label>
+      <label class="form-label required"
+        ><span *ngIf="!isForeignForm">วัน/เดือน/ปี ที่เข้าศึกษา</span>
+        <span *ngIf="isForeignForm">Start of Graduated Date</span></label
+      >
       <input class="form-control" type="date" formControlName="admissionDate" />
     </div>
 
     <div class="col-md-3 mb-2">
-      <label class="form-label required"><span *ngIf="!isForeignForm">วัน/เดือน/ปี ที่สำเร็จการศึกษา</span>
-        <span *ngIf="isForeignForm">End of Graduated Date</span></label>
+      <label class="form-label required"
+        ><span *ngIf="!isForeignForm">วัน/เดือน/ปี ที่สำเร็จการศึกษา</span>
+        <span *ngIf="isForeignForm">End of Graduated Date</span></label
+      >
       <input class="form-control" type="date" formControlName="graduateDate" />
     </div>
   </div>

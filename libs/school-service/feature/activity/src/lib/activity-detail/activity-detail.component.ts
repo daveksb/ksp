@@ -34,14 +34,14 @@ export class ActivityDetailComponent implements OnInit {
   });
 
   activityTypes: ListData[] = SchoolSelfDevelopActivityTies;
-  //@ViewChild(DynamicComponentDirective, { static: true })
-  //myHost!: DynamicComponentDirective;
+
   attachFiles = [
     {
       name: '1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน',
       fileId: '',
     },
   ];
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,

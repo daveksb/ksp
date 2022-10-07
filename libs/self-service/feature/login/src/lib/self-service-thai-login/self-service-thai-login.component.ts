@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ForgotPasswordSearchPersonComponent } from '@ksp/shared/dialog';
@@ -12,12 +12,13 @@ import localForage from 'localforage';
   templateUrl: './self-service-thai-login.component.html',
   styleUrls: ['./self-service-thai-login.component.css'],
 })
-export class SelfServiceThaiLoginComponent {
+export class SelfServiceThaiLoginComponent implements OnInit {
   eyeIconClicked = false;
+  loginFail = false;
 
   form = this.fb.group({
-    username: [],
-    password: [],
+    username: [null, Validators.required],
+    password: [null, Validators.required],
   });
 
   constructor(
@@ -27,6 +28,12 @@ export class SelfServiceThaiLoginComponent {
     public dialog: MatDialog,
     private myInfoService: MyInfoService
   ) {}
+
+  ngOnInit(): void {
+    this.form.valueChanges.subscribe((res) => {
+      this.loginFail = false;
+    });
+  }
 
   register() {
     this.router.navigate(['/landing']);
@@ -39,6 +46,8 @@ export class SelfServiceThaiLoginComponent {
         setCookie('userToken', res.usertoken, 1);
         setCookie('userId', res.id, 1);
         this.router.navigate(['/home']);
+      } else if (res.returncode === '99') {
+        this.loginFail = true;
       } else {
         return;
       }

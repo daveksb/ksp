@@ -2,8 +2,9 @@
   border-radius: 16px;
   background-image: url('/assets/images/self-card-bg.png');
   background-size: cover;
-  width: 500px;
+  width: auto;
   height: 250px;
+  margin: auto;
 }
 
 .title {
@@ -18,4 +19,10 @@
   background-color: #bbb;
   border-radius: 50%;
   display: inline-block;
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 500px;
+  }
 }

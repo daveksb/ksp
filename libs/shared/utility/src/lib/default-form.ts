@@ -97,7 +97,7 @@ export function createUniUserInfoForm(fb: FormBuilder) {
     visatype: [null],
     visaenddate: [null],
     educationoccupy: [null],
-    permission: [null, Validators.required],
+    permission: [null],
     other: [null],
     unitype: [null, [Validators.required]],
   });
