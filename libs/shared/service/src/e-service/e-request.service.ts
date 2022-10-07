@@ -49,9 +49,27 @@ export class ERequestService {
       );
   }
 
-  approveUserRequest(payload: any): Observable<SchoolRequest[]> {
+  /* approveUserRequest(payload: any): Observable<SchoolRequest[]> {
     return this.http
-      .post(`${environment.apiUrl}/e-service/requestupdatestatus`, payload)
+      .post(`${environment.apiUrl}/e-service/schuserinsert`, payload)
+      .pipe(
+        shareReplay(),
+        map((data: any) => data.datareturn)
+      );
+  } */
+
+  approveUser(payload: any): Observable<SchoolRequest[]> {
+    return this.http
+      .post(`${environment.apiUrl}/e-service/schuserinsert`, payload)
+      .pipe(
+        shareReplay(),
+        map((data: any) => data.datareturn)
+      );
+  }
+
+  retiredUser(payload: any): Observable<SchoolRequest[]> {
+    return this.http
+      .post(`${environment.apiUrl}/e-service/useractiveupdate`, payload)
       .pipe(
         shareReplay(),
         map((data: any) => data.datareturn)

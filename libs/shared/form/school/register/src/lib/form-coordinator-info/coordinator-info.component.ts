@@ -22,7 +22,7 @@ export class FormCoordinatorInfoComponent
   implements OnInit
 {
   @Input() positionLabel = 'ตำแหน่ง';
-  @Input() isDarkMode = false;
+  @Input() formType: 'req' | 'coo' = 'req';
   @Input() prefixList: any[] = [];
   @Input() countryList: any[] = [];
   @Input() nationList: any[] = [];

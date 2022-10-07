@@ -149,7 +149,7 @@ const routes: EthicsCustomRoute[] = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'school',
+    path: 'school-user',
     data: {
       menuConfig: eLicenseMenu,
       headerLabel: 'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา',
@@ -162,7 +162,7 @@ const routes: EthicsCustomRoute[] = [
   },
 
   {
-    path: 'self',
+    path: 'self-user',
     data: {
       menuConfig: eLicenseMenu,
       headerLabel: 'ผู้ใช้งานระบบบริการด้วยตนเอง',

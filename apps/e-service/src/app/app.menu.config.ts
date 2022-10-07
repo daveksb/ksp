@@ -266,21 +266,46 @@ export const eLicenseMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/people.svg',
-    label: 'ระบบบริหารจัดการผู้ใช้งาน',
+    label: 'บริหารจัดการผู้ใช้งาน',
     path: '',
     isExpanded: false,
     subMenuName: 'user-management',
     subMenu: [
       {
-        path: '/self/current-user',
+        path: '/self-user/new-user',
+        label: 'ใบคำขอผู้ใช้งานระบบบริการด้วยตนเอง (self Service)',
+      },
+      {
+        path: '/school-user/new-user',
+        label: 'ใบคำขอผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
+      },
+      {
+        path: '/self-user/current-user',
         label: 'ผู้ใช้งานระบบบริการด้วยตนเอง (self Service)',
       },
       {
-        path: '/school/current-user',
+        path: '/school-user/current-user',
         label: 'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
       },
     ],
   },
+  /*   {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'ใบคำขอรหัสเข้าใช้งานระบบ',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'user-approvement',
+    subMenu: [
+      {
+        path: '/self/new-user',
+        label: 'ระบบบริการด้วยตนเอง (self Service)',
+      },
+      {
+        path: '/school/new-user',
+        label: 'ระบบบริการหน่วยงานทางการศึกษา (School Service)',
+      },
+    ],
+  }, */
   /*   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอหนังสือรับรองความรู้',
@@ -312,24 +337,6 @@ export const eLicenseMenu: MenuConfig[] = [
       {
         path: '/xxx',
         label: 'พิจารณา',
-      },
-    ],
-  }, */
-
-  /*   {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอรหัสเข้าใช้งานระบบ',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'user-approvement',
-    subMenu: [
-      {
-        path: '/self/new-user',
-        label: 'ระบบบริการด้วยตนเอง (self Service)',
-      },
-      {
-        path: '/school/new-user',
-        label: 'ระบบบริการหน่วยงานทางการศึกษา (School Service)',
       },
     ],
   }, */
