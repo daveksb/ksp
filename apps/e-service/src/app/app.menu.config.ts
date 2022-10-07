@@ -208,14 +208,14 @@ export const eLicenseMenu: MenuConfig[] = [
     label: 'ใบคำขอหนังสือรับรองคุณวุฒิ',
     path: '',
     isExpanded: false,
-    subMenuName: 'qulification',
+    subMenuName: 'qualification',
     subMenu: [
       {
-        path: '/self/new-user',
+        path: '/qualification/list',
         label: 'รายการใบคำขอหนังสือขอรับรองคุณวุฒิ',
       },
       {
-        path: '/school/new-user',
+        path: '/xxx',
         label: 'พิจารณาหนังสือรับรองคุณวุฒิ',
       },
     ],
@@ -289,12 +289,12 @@ export const eLicenseMenu: MenuConfig[] = [
     subMenuName: 'user-management',
     subMenu: [
       {
-        path: '/school-user/new-user',
+        path: '/school/new-user',
         label:
           'ใบคำขอรหัสเข้าใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
       },
       {
-        path: '/self-user/current-user',
+        path: '/self/current-user',
         label: 'ผู้ใช้งานระบบบริการด้วยตนเอง (self Service)',
       },
       {
