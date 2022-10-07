@@ -1,7 +1,7 @@
 <form [formGroup]="form">
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">สถาบันการศึกษา</label>
+      <label class="form-label required">สถาบันการศึกษา</label>
       <!-- <select
         class="form-select"
         formControlName="educationInstitution"
@@ -14,12 +14,11 @@
       <input
         class="form-control"
         type="text"
-        formControlName="educationInstitution"
-      />
+        formControlName="educationInstitution" />
     </div>
 
     <div class="col-md-6 mb-2">
-      <label class="form-label">วุฒิปริญญาที่จบ</label>
+      <label class="form-label required">วุฒิปริญญาที่จบ</label>
       <select class="form-select" formControlName="graduateDegree">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">ปริญญาตรี</option>
@@ -34,30 +33,29 @@
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">สาขา/วิชาเอก</label>
+      <label class="form-label required">สาขา/วิชาเอก</label>
       <input class="form-control" type="text" formControlName="branch" />
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">วันเดือนปี เข้าศึกษา</label>
+      <label class="form-label required">วันเดือนปี เข้าศึกษา</label>
       <input class="form-control" type="date" formControlName="admissionDate" />
     </div>
     <div class="col-md-6 mb-2">
-      <label class="form-label">วันเดือนปี สำเร็จการศึกษา</label>
+      <label class="form-label required">วันเดือนปี สำเร็จการศึกษา</label>
       <input class="form-control" type="date" formControlName="graduateDate" />
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">หน่วยงานที่รับรองวิทยฐานะสถาบันการศึกษา</label>
+      <label class="form-label required">หน่วยงานที่รับรองวิทยฐานะสถาบันการศึกษา</label>
       <input
         class="form-control"
         type="text"
-        formControlName="approveAcademic"
-      />
+        formControlName="approveAcademic" />
     </div>
   </div>
 </form>

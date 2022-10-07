@@ -3,7 +3,7 @@
 
   <div class="row mb-3">
     <div class="col-md-6">
-      <label class="form-label">สถานะปัจจุบัน</label>
+      <label class="form-label required">สถานะปัจจุบัน</label>
 
       <ng-container *ngIf="renewLicenseTypes === 'schManager'">
         <select formControlName="educationType" class="form-select">
@@ -35,13 +35,11 @@
   </div>
 
   <ng-container
-    *ngIf="selectedEducationType === 0 || selectedEducationType === 1"
-  >
-    <div class="form-label text-black">
+    *ngIf="selectedEducationType === 0 || selectedEducationType === 1">
+    <div class="form-label text-black required">
       มาตรฐานความรู้และประสบการณ์วิชาชีพ
       <span class="text-danger fs-6">
-        * กรอกรายละเอียดให้ครบถ้วนเพียง 1 ข้อเท่านั้น</span
-      >
+        * กรอกรายละเอียดให้ครบถ้วนเพียง 1 ข้อเท่านั้น</span>
     </div>
     <self-service-renew-license-property-manager
       formControlName="educationLevelForm"
@@ -50,8 +48,7 @@
       [mode]="'edit'"
       *ngIf="
         renewLicenseTypes === 'schManager' || renewLicenseTypes === 'eduManager'
-      "
-    >
+      ">
     </self-service-renew-license-property-manager>
 
     <self-service-renew-license-property-supervision
@@ -59,8 +56,7 @@
       [uniqueTimestamp]="uniqueTimestamp"
       [workingInfo]="workingInfo"
       [mode]="'edit'"
-      *ngIf="renewLicenseTypes === 'supervision'"
-    >
+      *ngIf="renewLicenseTypes === 'supervision'">
     </self-service-renew-license-property-supervision>
   </ng-container>
 </form>
