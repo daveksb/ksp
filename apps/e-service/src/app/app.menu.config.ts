@@ -205,6 +205,23 @@ export const eLicenseMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'ใบคำขอหนังสือรับรองคุณวุฒิ',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'qulification',
+    subMenu: [
+      {
+        path: '/self/new-user',
+        label: 'รายการใบคำขอหนังสือขอรับรองคุณวุฒิ',
+      },
+      {
+        path: '/school/new-user',
+        label: 'พิจารณาหนังสือรับรองคุณวุฒิ',
+      },
+    ],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'กิจกรรมพัฒนาตนเอง',
     path: '',
     isExpanded: false,
@@ -286,23 +303,7 @@ export const eLicenseMenu: MenuConfig[] = [
       },
     ],
   },
-  {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอหนังสือรับรองคุณวุฒิ',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'qulification',
-    subMenu: [
-      {
-        path: '/self/new-user',
-        label: 'รายการใบคำขอหนังสือขอรับรองคุณวุฒิ',
-      },
-      {
-        path: '/school/new-user',
-        label: 'พิจารณาหนังสือรับรองคุณวุฒิ',
-      },
-    ],
-  },
+
   /*   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอหนังสือรับรองความรู้',
