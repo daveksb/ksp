@@ -1,7 +1,7 @@
 <form [formGroup]="form">
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">สถาบันการศึกษา</label>
+      <label class="form-label required">สถาบันการศึกษา</label>
       <!-- <select
         class="search__content form-select"
         formControlName="educationInstitution"
@@ -18,7 +18,7 @@
     </div>
 
     <div class="col-md-6 mb-2">
-      <label class="form-label">วุฒิปริญญาที่จบ</label>
+      <label class="form-label required">วุฒิปริญญาที่จบ</label>
       <select class="form-select" formControlName="graduateDegree">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">ปริญญาตรี</option>
@@ -33,25 +33,25 @@
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">สาขา/วิชาเอก</label>
+      <label class="form-label required">สาขา/วิชาเอก</label>
       <input class="form-control" type="text" formControlName="branch" />
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">วันเดือนปี เข้าศึกษา</label>
+      <label class="form-label required">วันเดือนปี เข้าศึกษา</label>
       <input class="form-control" type="date" formControlName="admissionDate" />
     </div>
     <div class="col-md-6 mb-2">
-      <label class="form-label">วันเดือนปี สำเร็จการศึกษา</label>
+      <label class="form-label required">วันเดือนปี สำเร็จการศึกษา</label>
       <input class="form-control" type="date" formControlName="graduateDate" />
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">วุฒิปริญญาก่อนเข้าศึกษาประกาศนียบัตรบัณฑิตวิชาชีพครู</label>
+      <label class="form-label required">วุฒิปริญญาก่อนเข้าศึกษาประกาศนียบัตรบัณฑิตวิชาชีพครู</label>
       <select class="form-select" formControlName="beforeDegree">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">ภาษาฝรั่งเศษ</option>

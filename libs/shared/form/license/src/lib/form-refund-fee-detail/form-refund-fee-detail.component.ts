@@ -24,7 +24,7 @@ export class FormRefundFeeDetailComponent
     eduoccupytype: [null, Validators.required],
     requestno: [null, Validators.required],
     refundreason: [null, Validators.required],
-    otherreason: [null, Validators.required],
+    otherreason: [],
     receiptNo: [{ value: null, disabled: true }],
     total: [{ value: null, disabled: true }],
     smsAlert: [],

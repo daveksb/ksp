@@ -38,7 +38,7 @@ export class UniRegisterRequesterComponent implements OnInit {
   ngOnInit(): void {
     localForage.getItem('registerSelectedUniversity').then((res: any) => {
       if (res) {
-        this.uniData = res.universityInfo;
+        this.uniData = res;
       }
     });
     localForage.getItem('registerUserForm').then((res:any) => {

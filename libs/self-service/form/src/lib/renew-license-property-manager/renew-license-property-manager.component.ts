@@ -46,6 +46,15 @@ export class RenewLicensePropertyManagerComponent
         //this.form.controls.educationLevelForm.reset();
       });
   }
+
+  override set value(value: any) {
+    if (value.standardKnowledgeType) {
+      this.selectedstandardKnowledgeType = Number(value.standardKnowledgeType);
+    }
+    this.form.patchValue(value);
+    this.onChange(value);
+    this.onTouched();
+  }
 }
 
 const standardKnowledges = [

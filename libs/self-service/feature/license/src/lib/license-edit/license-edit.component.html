@@ -13,13 +13,11 @@
         formControlName="userInfo"
         [oldValue]="oldValue"
         [prefixList]="prefixList$ | async"
-        [showDistributeData]="true"
-      ></ksp-edit-license>
+        [showDistributeData]="true"></ksp-edit-license>
 
       <ksp-form-attachment
         [groups]="uploadFileList"
-        [uniqueTimestamp]="uniqueTimestamp"
-      ></ksp-form-attachment>
+        [uniqueTimestamp]="uniqueTimestamp"></ksp-form-attachment>
 
       <label class="text-danger">
         *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
@@ -31,24 +29,21 @@
           *ngIf="requestId"
           type="button"
           class="ms-3 btn border-primary text-primary"
-          (click)="onCancel()"
-        >
+          (click)="onCancel()">
           ยกเลิกใบคำขอ
         </button>
         <button
           *ngIf="!requestId"
           (click)="onCancel()"
           type="button"
-          class="ms-3 btn border-primary text-primary"
-        >
+          class="ms-3 btn border-primary text-primary">
           ยกเลิก
         </button>
         <button
           (click)="onConfirm()"
           type="button"
           class="ms-3 btn btn-primary"
-          [disabled]="false"
-        >
+          [disabled]="!form.valid">
           บันทึก
         </button>
       </div>

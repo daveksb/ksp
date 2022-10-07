@@ -53,6 +53,12 @@ export class RenewLicensePropertyComponent
         //this.form.controls.educationLevelForm.reset();
       });
   }
+
+  override set value(value: any) {
+    this.form.patchValue(value);
+    this.onChange(value);
+    this.onTouched();
+  }
 }
 
 const educationTypes1 = [

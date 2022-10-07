@@ -25,7 +25,7 @@ export class FormUserWorkplaceComponent extends KspFormBaseComponent {
     houseno: [null, Validators.required],
     moo: [null],
     alley: [null],
-    road: [null, Validators.required],
+    road: [null],
     postcode: [null, Validators.required],
     province: [null, Validators.required],
     tumbol: [null, Validators.required],

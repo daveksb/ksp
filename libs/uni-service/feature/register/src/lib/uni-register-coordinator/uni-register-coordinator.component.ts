@@ -61,7 +61,7 @@ export class UniRegisterCoordinatorComponent implements OnInit {
     this.uniqueTimestamp = `${new Date().getTime()}`;
     localForage.getItem('registerSelectedUniversity').then((res: any) => {
       if (res) {
-        this.uniData = res.universityInfo;
+        this.uniData = res;
       }
     });
     localForage.getItem('registerUserForm').then((res:any) => {
