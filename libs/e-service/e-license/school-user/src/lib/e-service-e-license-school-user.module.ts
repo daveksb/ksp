@@ -23,6 +23,7 @@ import {
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { AllUserListComponent } from './all-user-list/all-user-list.component';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
 
 export const routes: Routes = [
   {
@@ -76,6 +77,7 @@ export const routes: Routes = [
     FormCoordinatorInfoComponent,
     SharedFormOthersModule,
     RequestHeaderInfoComponent,
+    ThaiDatePipe,
   ],
   declarations: [
     ManageCurrentUserListComponent,

@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
-import { SchoolRequest } from '@ksp/shared/interface';
+import { EsSearchPayload, SchoolRequest } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import {
   applyClientFilter,
@@ -45,14 +45,14 @@ export class ETempLicenseListComponent implements AfterViewInit {
 
   search(params: any) {
     //console.log('params = ', params);
-    const payload = {
+    const payload: EsSearchPayload = {
       systemtype: '2',
       requesttype: '3',
-      schoolid: null,
-      bureauid: null,
+      offset: '0',
+      row: '500',
     };
 
-    this.eRequestService.searchRequest(payload).subscribe((res) => {
+    this.eRequestService.EsSearchRequest(payload).subscribe((res) => {
       if (res) {
         const result = applyClientFilter(res, params);
         this.dataSource.data = result;

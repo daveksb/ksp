@@ -298,7 +298,7 @@ export const eLicenseMenu: MenuConfig[] = [
         label: 'ผู้ใช้งานระบบบริการด้วยตนเอง (self Service)',
       },
       {
-        path: '/school-user/current-user',
+        path: '/school/current-user',
         label: 'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
       },
     ],

@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { SelfRequest } from '@ksp/shared/interface';
+import { EsSearchPayload, SelfRequest } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 
 @Component({
@@ -32,11 +32,13 @@ export class ForeignLicenseListComponent implements AfterViewInit {
   }
 
   search(params: any) {
-    const payload = {
+    const payload: EsSearchPayload = {
       systemtype: '2',
-      requesttype: '4',
+      requesttype: '',
+      offset: '0',
+      row: '500',
     };
-    this.requestService.searchRequest(payload).subscribe((res) => {
+    this.requestService.EsSearchRequest(payload).subscribe((res) => {
       this.dataSource.data = res;
     });
   }

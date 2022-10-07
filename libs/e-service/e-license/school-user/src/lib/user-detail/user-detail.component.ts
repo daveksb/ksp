@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   SchoolRequest,
   SchoolServiceUserPageType,
+  SchoolUser,
 } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
@@ -20,59 +21,24 @@ import { parseJson, thaiDate } from '@ksp/shared/utility';
 })
 export class UserDetailComponent implements OnInit {
   approveTitles = ['ผลการตรวจสอบ', 'สถานะการใช้งาน'];
-
-  approveChoices = [
-    [
-      {
-        name: 'อนุมัติ',
-        value: 2,
-      },
-      {
-        name: 'ไม่อนุมัติ',
-        value: 3,
-      },
-    ],
-    [
-      {
-        name: 'ใช้งาน',
-        value: 1,
-      },
-      {
-        name: 'ไม่ใช้งาน',
-        value: 2,
-      },
-    ],
-  ];
-
-  headers = [
-    [
-      'ใบคำขอรหัสเข้าใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service) ',
-      'ตรวจสอบและอนุมัติใบคำขอรหัสเข้าใช้งาน',
-    ],
-    [
-      'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
-      'ข้อมูลผู้เข้าใช้งานระบบ School Service',
-    ],
-  ];
+  approveChoices = approveChoices;
+  headers = headers;
 
   requestId!: number | null;
   requestDate!: string | null;
   requestData!: SchoolRequest;
   prefixList$!: Observable<any>;
-
   requestNo: string | null = '';
+  pageType = 0;
 
   form = this.fb.group({
     userInfo: [],
     coordinatorInfo: [],
   });
 
-  form2 = this.fb.group({
-    verifyResult: [null, Validators.required],
+  verifyForm = this.fb.group({
+    result: [null, Validators.required],
   });
-
-  verifySelected = 1;
-  pageType = 0;
 
   constructor(
     private router: Router,
@@ -85,11 +51,6 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkRequestId();
-
-    this.form2.controls.verifyResult.valueChanges.subscribe((res: any) => {
-      this.verifySelected = Number(res['result']);
-      console.log(' //this.form.valid;', this.verifySelected);
-    });
 
     this.route.queryParams.subscribe((res) => {
       this.pageType = Number(res['type']);
@@ -126,8 +87,7 @@ export class UserDetailComponent implements OnInit {
     });
   }
 
-  approveUser() {
-    const payload = {
+  /* {
       idcardno: '1',
       firstnameth: '2',
       lastnameth: '3',
@@ -148,33 +108,31 @@ export class UserDetailComponent implements OnInit {
       lastnameen: '144',
       permissionright: { field1: 'data1', field2: 'data2', field3: 'data3' },
       coordinatorinfo: { field1: 'data1', field2: 'data2', field3: 'data3' },
-    };
+    }; */
 
-    this.eRequestService.approveUser(payload).subscribe((res: any) => {
-      //console.log('Cancel request  = ', res);
-      //create new user in sch_user
-    });
-  }
+  approveUser() {
+    const newUser = new SchoolUser();
 
-  retiredUser() {
-    const payload = {
-      schmemberid: this.requestId,
-      schuseractive: this.verifySelected,
-    };
+    newUser.idcardno = this.requestData.idcardno;
+    newUser.firstnameth = this.requestData.firstnameth;
+    newUser.lastnameth = this.requestData.lastnameth;
+    newUser.schusername = this.requestData.schoolid;
+    newUser.schpassword = '1234';
+    newUser.schuseractive = '1';
 
-    this.eRequestService.retiredUser(payload).subscribe((res: any) => {
-      //console.log('Cancel request  = ', res);
-      //update status user in sch_user
+    this.eRequestService.createSchUser(newUser).subscribe((res) => {
+      console.log('new user result = ', res.returnmessage);
+      this.completeDialog();
     });
   }
 
   viewUser() {
-    this.router.navigate(['school-user', 'all-user']);
+    this.router.navigate(['school', 'all-user']);
   }
 
   cancel() {
     if (this.pageType === SchoolServiceUserPageType.ApproveNewUser) {
-      this.router.navigate(['/approve-new-user']);
+      this.router.navigate(['/school', 'new-user']);
     } else if (this.pageType === SchoolServiceUserPageType.ManageCurrentUser) {
       this.router.navigate(['/manage-current-user']);
     }
@@ -189,16 +147,23 @@ export class UserDetailComponent implements OnInit {
       },
     });
 
-    confirmDialog.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
+    confirmDialog.componentInstance.confirmed.subscribe(() => {
+      const form: any = this.verifyForm.controls.result.value;
+      const result = +form.result;
+      if (result) {
         this.approveUser();
-        this.onCompleted();
+      } else {
+        this.unApproveUser();
       }
     });
   }
 
-  onCompleted() {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+  unApproveUser() {
+    console.log('un approve = ');
+  }
+
+  completeDialog() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
       data: {
         header: `บันทึกข้อมูลสำเร็จ`,
@@ -206,16 +171,50 @@ export class UserDetailComponent implements OnInit {
       },
     });
 
-    completeDialog.componentInstance.completed.subscribe((res) => {
+    dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
         if (this.pageType === SchoolServiceUserPageType.ApproveNewUser) {
-          this.router.navigate(['/approve-new-user', 'list']);
+          this.router.navigate(['/school', 'new-user']);
         } else if (
           this.pageType === SchoolServiceUserPageType.ManageCurrentUser
         ) {
-          this.router.navigate(['/manage-current-user', 'list']);
+          //this.router.navigate(['/manage-current-user', 'list']);
         }
       }
     });
   }
 }
+
+const approveChoices = [
+  [
+    {
+      name: 'อนุมัติ',
+      value: 1,
+    },
+    {
+      name: 'ไม่อนุมัติ',
+      value: 0,
+    },
+  ],
+  [
+    {
+      name: 'ใช้งาน',
+      value: 1,
+    },
+    {
+      name: 'ไม่ใช้งาน',
+      value: 2,
+    },
+  ],
+];
+
+const headers = [
+  [
+    'ใบคำขอรหัสเข้าใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service) ',
+    'ตรวจสอบและอนุมัติใบคำขอรหัสเข้าใช้งาน',
+  ],
+  [
+    'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
+    'ข้อมูลผู้เข้าใช้งานระบบ School Service',
+  ],
+];

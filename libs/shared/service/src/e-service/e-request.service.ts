@@ -1,7 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
-import { SchoolRequest, SelfRequest } from '@ksp/shared/interface';
+import {
+  EsSearchPayload,
+  KspResponse,
+  SchoolRequest,
+  SchoolUser,
+  SelfRequest,
+} from '@ksp/shared/interface';
 import { map, Observable, shareReplay } from 'rxjs';
 
 @Injectable({
@@ -10,9 +16,9 @@ import { map, Observable, shareReplay } from 'rxjs';
 export class ERequestService {
   constructor(private http: HttpClient) {}
 
-  searchRequest(payload: any): Observable<SelfRequest[]> {
+  EsSearchRequest(payload: EsSearchPayload): Observable<SelfRequest[]> {
     return this.http
-      .post(`${environment.apiUrl}/e-service/requestandschoolsearchs`, payload)
+      .post(`${environment.shortApiUrl}/schrequestsearch_e.php`, payload)
       .pipe(
         shareReplay(),
         map((data: any) => data.datareturn)
@@ -49,22 +55,11 @@ export class ERequestService {
       );
   }
 
-  /* approveUserRequest(payload: any): Observable<SchoolRequest[]> {
-    return this.http
-      .post(`${environment.apiUrl}/e-service/schuserinsert`, payload)
-      .pipe(
-        shareReplay(),
-        map((data: any) => data.datareturn)
-      );
-  } */
-
-  approveUser(payload: any): Observable<SchoolRequest[]> {
-    return this.http
-      .post(`${environment.apiUrl}/e-service/schuserinsert`, payload)
-      .pipe(
-        shareReplay(),
-        map((data: any) => data.datareturn)
-      );
+  createSchUser(payload: SchoolUser): Observable<KspResponse> {
+    return this.http.post<KspResponse>(
+      `${environment.apiUrl}/e-service/schuserinsert`,
+      payload
+    );
   }
 
   retiredUser(payload: any): Observable<SchoolRequest[]> {
