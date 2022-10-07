@@ -103,4 +103,11 @@ export class UniRequestService {
       tokenkey: getCookie('userToken'),
     });
   }
+
+  uniRequestRegisterSearch(form: any): Observable<any> {
+    return this.http.post(`${environment.shortApiUrl}/schrequestsearch_uni.php`, {
+      ...form,
+      tokenkey: getCookie('userToken'),
+    });
+  }
 }
