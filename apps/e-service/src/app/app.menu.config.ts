@@ -188,6 +188,23 @@ export const eLicenseMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'ใบคำขอหนังสือรับรองความรู้',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'verify',
+    subMenu: [
+      {
+        path: '/xxx',
+        label: 'รายการใบคำขอหนังสือรับรองความรู้',
+      },
+      {
+        path: '/xxx',
+        label: 'พิจารณาหนังสือรับรองความรู้',
+      },
+    ],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
     path: '',
     isExpanded: false,
@@ -303,41 +320,6 @@ export const eLicenseMenu: MenuConfig[] = [
       },
     ],
   },
-
-  /*   {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอหนังสือรับรองความรู้',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'verify',
-    subMenu: [
-      {
-        path: '/xxx',
-        label: 'รายการใบคำขอหนังสือรับรองความรู้',
-      },
-      {
-        path: '/temp-license/approve-detail',
-        label: 'พิจารณาหนังสือรับรองความรู้',
-      },
-    ],
-  }, */
-  /* {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอเทียบเคียงความรู้',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'compare',
-    subMenu: [
-      {
-        path: '/xxx',
-        label: 'รายการใบคำขอเทียบเคียงความรู้',
-      },
-      {
-        path: '/xxx',
-        label: 'พิจารณาเทียบเคียงความรู้',
-      },
-    ],
-  }, */
 ];
 
 export const ethicsMenu: MenuConfig[] = [
