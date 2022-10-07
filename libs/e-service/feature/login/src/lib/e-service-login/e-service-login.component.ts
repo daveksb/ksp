@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { setCookie } from '@ksp/shared/utility';
@@ -9,7 +9,9 @@ import { EServiceLoginService } from './e-service-login.service';
   templateUrl: './e-service-login.component.html',
   styleUrls: ['./e-service-login.component.scss'],
 })
-export class EServiceLoginComponent {
+export class EServiceLoginComponent implements OnInit {
+  loginFail = false;
+
   form = this.fb.group({
     user: [],
   });
@@ -20,9 +22,18 @@ export class EServiceLoginComponent {
     private loginService: EServiceLoginService
   ) {}
 
+  ngOnInit(): void {
+    this.form.valueChanges.subscribe((res) => {
+      this.loginFail = false;
+    });
+  }
+
   login() {
     this.loginService.validateLogin(this.form.value.user).subscribe((res) => {
-      if (res.returncode == 99) return;
+      if (res.returncode == 99) {
+        this.loginFail = true;
+        return;
+      }
       this.loginService.config = res;
 
       setCookie('userToken', res.usertoken, 1);

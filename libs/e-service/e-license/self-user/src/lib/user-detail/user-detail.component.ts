@@ -136,7 +136,7 @@ export class UserDetailComponent implements OnInit {
       requeststatus: this.verifySelected,
     };
 
-    this.eRequestService.approveUserRequest(payload).subscribe((res) => {
+    this.eRequestService.approveUser(payload).subscribe((res) => {
       //console.log('Cancel request  = ', res);
       //create new user in sch_user
     });

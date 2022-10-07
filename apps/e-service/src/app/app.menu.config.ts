@@ -144,11 +144,11 @@ export const eLicenseMenu: MenuConfig[] = [
     subMenu: [
       {
         path: '/foreign-license/list',
-        label: 'ตรวจสอบใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
+        label: 'รายการใบคำขอแก้ไข/เปลี่ยนแปลงใบอนุญาต',
       },
       {
         path: '/temp-license/approve-detail',
-        label: 'พิจารณารับรองเลขคุรุสภาสำหรับชาวต่างชาติ',
+        label: 'พิจารณาขอเปลี่ยนแปลง/แก้ใบอนุญาต',
       },
     ],
   },
@@ -161,11 +161,11 @@ export const eLicenseMenu: MenuConfig[] = [
     subMenu: [
       {
         path: '/foreign-license/list',
-        label: 'ตรวจสอบใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
+        label: 'รายการใบคำขอแก้ไข/เปลี่ยนแปลงใบอนุญาต',
       },
       {
         path: '/xxx',
-        label: 'พิจารณารับรองเลขคุรุสภาสำหรับชาวต่างชาติ',
+        label: 'พิจารณาขอเปลี่ยนแปลง/แก้ใบอนุญาต',
       },
     ],
   },
@@ -178,11 +178,11 @@ export const eLicenseMenu: MenuConfig[] = [
     subMenu: [
       {
         path: '/xxx',
-        label: 'รายการใบคำขอ',
+        label: 'รายการใบคำขอใบแทนใบอนุญาตประกอบวิชาชีพ',
       },
       {
         path: '/temp-license/approve-detail',
-        label: 'พิจารณา',
+        label: 'พิจารณาขอใบแทนใบอนุญาตประกอบวิชาชีพ',
       },
     ],
   },
@@ -195,11 +195,11 @@ export const eLicenseMenu: MenuConfig[] = [
     subMenu: [
       {
         path: '/foreign-license/list',
-        label: 'ตรวจสอบใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
+        label: 'รายการใบคำเลขคุรุสภาสำหรับชาวต่างชาติ',
       },
       {
         path: '/temp-license/approve-detail',
-        label: 'พิจารณารับรองเลขคุรุสภาสำหรับชาวต่างชาติ',
+        label: 'พิจารณาขอเลขคุรุสภาสำหรับชาวต่างชาติ',
       },
     ],
   },
@@ -212,11 +212,11 @@ export const eLicenseMenu: MenuConfig[] = [
     subMenu: [
       {
         path: '/xxx',
-        label: 'รายการ',
+        label: 'รายการใบคำขอยื่นกรอกกิจกรรมพัฒนาตนเอง',
       },
       {
         path: '/temp-license/approve-detail',
-        label: 'พิจารณา',
+        label: 'พิจารณากิจกรรมพัฒนาตนเอง',
       },
     ],
   },
@@ -229,11 +229,11 @@ export const eLicenseMenu: MenuConfig[] = [
     subMenu: [
       {
         path: '/xxx',
-        label: 'บันทึก',
+        label: 'บันทึกข้อมูลลักษณะต้องห้ามของผู้ขอรับใบอนุญาตประกอบวิชาชีพ',
       },
       {
         path: '/xxx',
-        label: 'พิจารณา',
+        label: 'พิจารณาข้อมูลลักษณะต้องห้ามของผู้ขอรับใบอนุญาตประกอบวิชาชีพ',
       },
     ],
   },
@@ -266,21 +266,42 @@ export const eLicenseMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/people.svg',
-    label: 'ระบบบริหารจัดการผู้ใช้งาน',
+    label: 'บริหารจัดการผู้ใช้งาน',
     path: '',
     isExpanded: false,
     subMenuName: 'user-management',
     subMenu: [
       {
-        path: '/self/current-user',
+        path: '/school-user/new-user',
+        label: 'ใบคำขอรหัสเข้าใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
+      },
+      {
+        path: '/self-user/current-user',
         label: 'ผู้ใช้งานระบบบริการด้วยตนเอง (self Service)',
       },
       {
-        path: '/school/current-user',
+        path: '/school-user/current-user',
         label: 'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
       },
     ],
   },
+  /*   {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'ใบคำขอรหัสเข้าใช้งานระบบ',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'user-approvement',
+    subMenu: [
+      {
+        path: '/self/new-user',
+        label: 'ระบบบริการด้วยตนเอง (self Service)',
+      },
+      {
+        path: '/school/new-user',
+        label: 'ระบบบริการหน่วยงานทางการศึกษา (School Service)',
+      },
+    ],
+  }, */
   /*   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอหนังสือรับรองความรู้',
@@ -312,24 +333,6 @@ export const eLicenseMenu: MenuConfig[] = [
       {
         path: '/xxx',
         label: 'พิจารณา',
-      },
-    ],
-  }, */
-
-  /*   {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอรหัสเข้าใช้งานระบบ',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'user-approvement',
-    subMenu: [
-      {
-        path: '/self/new-user',
-        label: 'ระบบบริการด้วยตนเอง (self Service)',
-      },
-      {
-        path: '/school/new-user',
-        label: 'ระบบบริการหน่วยงานทางการศึกษา (School Service)',
       },
     ],
   }, */
@@ -507,7 +510,7 @@ export const standardMenu: MenuConfig[] = [
       },
     ],
   },
-  {
+  /* {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอรหัสเข้าใช้งานระบบ',
     path: '',
@@ -519,14 +522,18 @@ export const standardMenu: MenuConfig[] = [
         label: 'ระบบบริการสถาบันผลิตครู (Uni Service)',
       },
     ],
-  },
+  }, */
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ระบบบริหารจัดการผู้ใช้งาน',
     path: '',
     isExpanded: false,
-    subMenuName: 'user-manage',
+    subMenuName: 'user-management',
     subMenu: [
+      {
+        path: '/xx',
+        label: 'ใบคำขอรหัสเข้าใช้งานระบบบริการสถาบันผลิตครู (Uni Service)',
+      },
       {
         path: '/aa',
         label: 'ผู้ใช้งานระบบบริการสถาบันผลิตครู (Uni Service)',
@@ -544,11 +551,11 @@ export const professionalMenu: MenuConfig[] = [
     subMenu: [
       {
         path: '/xxx',
-        label: 'รายการ',
+        label: 'รายการใบคำขอรับรางวัลคุรุสภา',
       },
       {
         path: '/xxx',
-        label: 'พิจารณา',
+        label: 'พิจารณารางวัลคุรุสภา',
       },
     ],
   },
@@ -560,11 +567,11 @@ export const professionalMenu: MenuConfig[] = [
     subMenu: [
       {
         path: '/xxx',
-        label: 'รายการ',
+        label: 'รายการใบคำขอรับรางวัลครูภาษาไทยดีเด่น',
       },
       {
         path: '/xxx',
-        label: 'พิจารณา',
+        label: 'พิจารณารางวัลครูภาษาไทยดีเด่น',
       },
     ],
   },
@@ -576,11 +583,11 @@ export const professionalMenu: MenuConfig[] = [
     subMenu: [
       {
         path: '/xxx',
-        label: 'รายการ',
+        label: 'รายการใบคำขอรับรางวัลครูผู้สอนดีเด่น',
       },
       {
         path: '/xxx',
-        label: 'พิจารณา',
+        label: 'พิจารณารางวัลครูผู้สอนดีเด่น',
       },
     ],
   },
@@ -592,11 +599,11 @@ export const professionalMenu: MenuConfig[] = [
     subMenu: [
       {
         path: '/xxx',
-        label: 'รายการ',
+        label: 'รายการใบคำขอรับรางวัลคุรุสดุดี',
       },
       {
         path: '/xxx',
-        label: 'พิจารณา',
+        label: 'พิจารณารางวัลคุรุสดุดี',
       },
     ],
   },
@@ -608,11 +615,11 @@ export const professionalMenu: MenuConfig[] = [
     subMenu: [
       {
         path: '/xxx',
-        label: 'รายการ',
+        label: 'รายการใบคำขอรับรางวัลผลงานวิจัยของคุรุสภา',
       },
       {
         path: '/xxx',
-        label: 'พิจารณา',
+        label: 'พิจารณารางวัลผลงานวิจัยของคุรุสภา',
       },
     ],
   },
@@ -624,11 +631,11 @@ export const professionalMenu: MenuConfig[] = [
     subMenu: [
       {
         path: '/xxx',
-        label: 'รายการ',
+        label: 'รายการใบคำขอรับรางวัลครูอาวุโส',
       },
       {
         path: '/xxx',
-        label: 'พิจารณา',
+        label: 'พิจารณารางวัลครูอาวุโส',
       },
     ],
   },

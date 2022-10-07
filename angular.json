@@ -319,6 +319,32 @@
         }
       ]
     },
+    "e-service-dialog-school-user-detail": {
+      "projectType": "library",
+      "root": "libs/e-service/dialog/school-user-detail",
+      "sourceRoot": "libs/e-service/dialog/school-user-detail/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-service/dialog/school-user-detail"],
+          "options": {
+            "jestConfig": "libs/e-service/dialog/school-user-detail/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/dialog/school-user-detail/**/*.ts",
+              "libs/e-service/dialog/school-user-detail/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-e-license-document-delivery": {
       "projectType": "library",
       "root": "libs/e-service/e-license/document-delivery",
@@ -9767,8 +9793,5 @@
       ]
     }
   },
-  "version": 1,
-  "cli": {
-    "analytics": false
-  }
+  "version": 1
 }

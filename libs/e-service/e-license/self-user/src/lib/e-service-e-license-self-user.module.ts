@@ -13,7 +13,6 @@ import {
   EServiceUserSearchComponent,
 } from '@ksp/shared/search';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { ApproveNewUserListComponent } from './new-user-list/approve-new-user-list.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import {
@@ -33,8 +32,8 @@ export const routes: Routes = [
         component: ManageCurrentUserListComponent,
       },
       {
-        path: 'new-user',
-        component: ApproveNewUserListComponent,
+        path: 'user-detail',
+        component: UserDetailComponent,
       },
       {
         path: 'user-detail/:id',
@@ -70,7 +69,6 @@ export const routes: Routes = [
   ],
   declarations: [
     ManageCurrentUserListComponent,
-    ApproveNewUserListComponent,
     UserDetailComponent,
   ],
 })

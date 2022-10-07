@@ -126,20 +126,50 @@ export class UserDetailComponent implements OnInit {
     });
   }
 
-  approveRequest() {
+  approveUser() {
     const payload = {
-      id: `${this.requestId}`,
-      checksubresult: null,
-      checkfinalresult: null,
-      approveresult: null,
-      currentprocess: 1,
-      requeststatus: this.verifySelected,
+      idcardno: '1',
+      firstnameth: '2',
+      lastnameth: '3',
+      schemail: '4',
+      schmobile: '5',
+      schbirthdate: '2022-09-06T00:20:13',
+      schusername: '6',
+      schpassword: '7',
+      schuseractive: this.verifySelected,
+      schuserenddate: '2022-09-06T00:20:13',
+      schlastlogintime: '2022-09-06T00:20:13',
+      schlastlogouttime: '2022-09-06T00:20:13',
+      schoolid: '9',
+      position: '10',
+      prefixth: '11',
+      prefixen: '12',
+      firstnameen: '13',
+      lastnameen: '144',
+      permissionright: { field1: 'data1', field2: 'data2', field3: 'data3' },
+      coordinatorinfo: { field1: 'data1', field2: 'data2', field3: 'data3' },
     };
 
-    this.eRequestService.approveUserRequest(payload).subscribe((res) => {
+    this.eRequestService.approveUser(payload).subscribe((res: any) => {
       //console.log('Cancel request  = ', res);
       //create new user in sch_user
     });
+  }
+
+  retiredUser() {
+    const payload = {
+      schmemberid: this.requestId,
+      schuseractive: this.verifySelected,
+    };
+
+    this.eRequestService.retiredUser(payload).subscribe((res: any) => {
+      //console.log('Cancel request  = ', res);
+      //update status user in sch_user
+    });
+  }
+
+  viewUser() {
+    this.router.navigate(['school-user', 'all-user']);
   }
 
   cancel() {
@@ -161,7 +191,7 @@ export class UserDetailComponent implements OnInit {
 
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.approveRequest();
+        this.approveUser();
         this.onCompleted();
       }
     });
