@@ -16,9 +16,9 @@ import { providerFactory } from '@ksp/shared/utility';
 })
 export class BasicInstituteSearchComponent extends KspFormBaseComponent {
   override form = this.fb.group({
-    organization: [],
+    bureauid: [],
     schoolid: [],
-    instituteName: [],
+    schoolname: [],
   });
   @Input() bureaus: any;
   @Input() universityType: any;
@@ -27,7 +27,6 @@ export class BasicInstituteSearchComponent extends KspFormBaseComponent {
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
         this.onChange(value);
         this.onTouched();
