@@ -15,3 +15,5 @@ export * from './lib/ksp-shared';
 export * from './lib/ksp-pagination.component';
 export * from './lib/e-search-request';
 export * from './lib/ksp-search';
+export * from './lib/school-user';
+export * from './lib/ksp-response';

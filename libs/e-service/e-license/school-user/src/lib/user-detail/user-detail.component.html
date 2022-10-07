@@ -89,9 +89,9 @@
     ></ksp-form-attachment>
   </div>
   <br />
-  <div [formGroup]="form2" class="bg-white p-4">
+  <div [formGroup]="verifyForm" class="bg-white p-4">
     <e-service-license-check
-      formControlName="verifyResult"
+      formControlName="result"
       [headerTitle]="approveTitles[pageType]"
       [choices]="approveChoices[pageType]"
     ></e-service-license-check>
@@ -106,7 +106,7 @@
     [showSaveButton]="true"
     (cancelClicked)="cancel()"
     (saveClicked)="confirm()"
-    [disableSaveButton]="!form2.valid"
+    [disableSaveButton]="verifyForm.invalid"
   >
   </ksp-bottom-nav>
 </div>

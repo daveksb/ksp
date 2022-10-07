@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
 import {
   EsSearchPayload,
+  KspResponse,
   SchoolRequest,
+  SchoolUser,
   SelfRequest,
 } from '@ksp/shared/interface';
 import { map, Observable, shareReplay } from 'rxjs';
@@ -53,13 +55,11 @@ export class ERequestService {
       );
   }
 
-  approveUser(payload: any): Observable<SchoolRequest[]> {
-    return this.http
-      .post(`${environment.apiUrl}/e-service/schuserinsert`, payload)
-      .pipe(
-        shareReplay(),
-        map((data: any) => data.datareturn)
-      );
+  createSchUser(payload: SchoolUser): Observable<KspResponse> {
+    return this.http.post<KspResponse>(
+      `${environment.apiUrl}/e-service/schuserinsert`,
+      payload
+    );
   }
 
   retiredUser(payload: any): Observable<SchoolRequest[]> {
