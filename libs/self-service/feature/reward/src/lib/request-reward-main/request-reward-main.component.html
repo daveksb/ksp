@@ -102,10 +102,10 @@
           (click)="tempSave()"
           type="button"
           class="ms-3 btn border-primary text-primary bg-white"
-          [disabled]="false">
+          [disabled]="!form.valid">
           บันทึกชั่วคราว
         </button>
-        <button (click)="save()" type="button" class="ms-3 btn btn-primary" [disabled]="false">
+        <button (click)="save()" type="button" class="ms-3 btn btn-primary" [disabled]="!form.valid">
           บันทึกและยื่น
         </button>
       </div>

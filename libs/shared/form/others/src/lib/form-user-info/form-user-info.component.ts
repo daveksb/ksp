@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { SchoolRequestType, UserInfoFormType } from '@ksp/shared/constant';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
@@ -17,7 +25,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 })
 export class FormUserInfoComponent
   extends KspFormBaseComponent
-  implements OnInit
+  implements OnInit, OnChanges
 {
   @Input() prefixList: any[] = [];
   @Input() countryList: any[] = [];
@@ -29,6 +37,7 @@ export class FormUserInfoComponent
   @Input() isDarkMode = false;
   @Input() isSelfService = false;
   @Input() isAddStaff = false;
+  @Input() requiredIdCardNo = true;
 
   @Output() idCardChange = new EventEmitter<any>();
 
@@ -83,6 +92,15 @@ export class FormUserInfoComponent
           this.idCardChange.emit(res);
         }
       });
+  }
+
+  override ngOnChanges(changes: SimpleChanges): void {
+    if (changes['requiredIdCardNo']) {
+      if (this.requiredIdCardNo === false) {
+        this.form.controls.idcardno.clearValidators();
+        this.form.controls.idcardno.updateValueAndValidity();
+      }
+    }
   }
 
   prefixChanged(evt: any) {

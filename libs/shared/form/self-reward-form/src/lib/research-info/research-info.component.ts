@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -14,23 +14,23 @@ export class ResearchInfoComponent
   implements OnInit
 {
   override form = this.fb.group({
-    researchSubmission: [],
-    researchSubmissionType: [],
-    subjectGroup: [],
-    region: [],
-    researchNameTh: [],
-    researchNameEn: [],
-    researchCompleteYear: [],
-    researchSubmissionCouncil: [],
-    researchSubmissionCouncilYear: [],
-    researchSubmissionCouncil2: [],
-    awardFromOthers: [],
+    researchSubmission: [null, Validators.required],
+    researchSubmissionType: [null, Validators.required],
+    subjectGroup: [null, Validators.required],
+    region: [null, Validators.required],
+    researchNameTh: [null, Validators.required],
+    researchNameEn: [null, Validators.required],
+    researchCompleteYear: [null, Validators.required],
+    researchSubmissionCouncil: [null, Validators.required],
+    researchSubmissionCouncilYear: [null, Validators.required],
+    researchSubmissionCouncil2: [null, Validators.required],
+    awardFromOthers: [null, Validators.required],
     awardFromOthersName: [],
     awardFromOthersYear: [],
-    inProcessForAcademicStanding: [],
+    inProcessForAcademicStanding: [null, Validators.required],
     academicStandingLevel: [],
     academicStandingYear: [],
-    grantResearchFund: [],
+    grantResearchFund: [null, Validators.required],
     grantResearchFundFrom: [],
     grantResearchFundYear: [],
   });

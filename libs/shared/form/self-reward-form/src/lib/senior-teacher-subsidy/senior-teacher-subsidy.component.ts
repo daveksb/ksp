@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -23,13 +23,13 @@ export class SeniorTeacherSubsidyComponent
   ];
 
   override form = this.fb.group({
-    subsidy: [],
-    status: [],
-    spouse: [],
-    children: [],
-    expense: [],
-    income: [],
-    property: [],
+    subsidy: [null, Validators.required],
+    status: [null, Validators.required],
+    spouse: [null, Validators.required],
+    children: [null, Validators.required],
+    expense: [null, Validators.required],
+    income: [null, Validators.required],
+    property: [null, Validators.required],
   });
 
   constructor(private fb: FormBuilder) {
