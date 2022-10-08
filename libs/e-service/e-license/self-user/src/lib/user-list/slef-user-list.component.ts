@@ -59,7 +59,7 @@ export class SelfUserListComponent implements AfterViewInit {
   }
 
   goToDetail(id: number) {
-    this.router.navigate(['/school', 'user-detail', id], {
+    this.router.navigate(['/self', 'user-detail', id], {
       queryParams: { type: SchoolServiceUserPageType.ManageCurrentUser },
     });
   }
@@ -70,7 +70,7 @@ export const column = [
   'view',
   'idcardno',
   'name',
-  'schoolname',
+  //schoolname',
   //'province',
   'requeststatus',
   'requestdate',

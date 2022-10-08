@@ -31,6 +31,9 @@
       "@ksp/e-service/e-license/license-approve": [
         "libs/e-service/e-license/license-approve/src/index.ts"
       ],
+      "@ksp/e-service/e-license/qualification-approve": [
+        "libs/e-service/e-license/qualification-approve/src/index.ts"
+      ],
       "@ksp/e-service/e-license/renew-license": [
         "libs/e-service/e-license/renew-license/src/index.ts"
       ],
