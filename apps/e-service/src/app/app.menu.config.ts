@@ -177,7 +177,7 @@ export const eLicenseMenu: MenuConfig[] = [
     subMenuName: 'sub-license',
     subMenu: [
       {
-        path: '/xxx',
+        path: '/sub-license/approve-list',
         label: 'รายการใบคำขอใบแทนใบอนุญาตประกอบวิชาชีพ',
       },
       {

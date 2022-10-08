@@ -52,7 +52,7 @@ const routes: EthicsCustomRoute[] = [
       ),
     canActivate: [AuthGuard],
   },
-  /*   {
+  /*{
     path: 'knowledge-cert',
     data: { menuConfig: licenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
     loadChildren: () =>
@@ -60,16 +60,16 @@ const routes: EthicsCustomRoute[] = [
         (m) => m.EServiceELicenseKnowledgeCertModule
       ),
     canActivate: [AuthGuard],
-  },
+  },*/
   {
     path: 'sub-license',
-    data: { menuConfig: licenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
+    data: { menuConfig: eLicenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
     loadChildren: () =>
-      import('@ksp/e-service/e-license/sub-license').then(
-        (m) => m.EServiceELicenseSubLicenseModule
+      import('@ksp/e-service/e-license/substitute-license-approve').then(
+        (m) => m.EServiceELicenseSubstituteLicenseApproveModule
       ),
     canActivate: [AuthGuard],
-  }, */
+  },
   {
     path: 'degree-cert',
     data: { menuConfig: standardMenu, headerLabel: 'ระบบงานมาตรฐานวิชาชีพ' },
