@@ -65,8 +65,8 @@ const routes: EthicsCustomRoute[] = [
     path: 'sub-license',
     data: { menuConfig: eLicenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
     loadChildren: () =>
-      import('@ksp/e-service/e-license/substitute-license-approve').then(
-        (m) => m.EServiceELicenseSubstituteLicenseApproveModule
+      import('@ksp/e-service/e-license/substitute-license').then(
+        (m) => m.EServiceELicenseSubstituteLicenseModule
       ),
     canActivate: [AuthGuard],
   },

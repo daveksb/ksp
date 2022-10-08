@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'e-service-e-license-substitute-license-approve',
+  displayName: 'e-service-e-license-edit-license',
   preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -10,7 +10,7 @@ export default {
     },
   },
   coverageDirectory:
-    '../../../../coverage/libs/e-service/e-license/substitute-license-approve',
+    '../../../../coverage/libs/e-service/e-license/edit-license',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

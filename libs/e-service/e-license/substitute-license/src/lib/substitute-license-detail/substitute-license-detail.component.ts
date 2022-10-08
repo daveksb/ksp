@@ -12,11 +12,11 @@ import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'ksp-substitute-license-approve-detail',
-  templateUrl: './substitute-license-approve-detail.component.html',
-  styleUrls: ['./substitute-license-approve-detail.component.scss'],
+  selector: 'ksp-substitute-license-detail',
+  templateUrl: './substitute-license-detail.component.html',
+  styleUrls: ['./substitute-license-detail.component.scss'],
 })
-export class SubstituteLicenseApproveDetailComponent implements OnInit {
+export class SubstituteLicenseDetailComponent implements OnInit {
   userInfoType = UserInfoFormType.thai;
   approveChoices = choices;
 

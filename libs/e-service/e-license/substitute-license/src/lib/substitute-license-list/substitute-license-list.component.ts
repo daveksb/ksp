@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -10,11 +10,11 @@ import { ERequestService } from '@ksp/shared/service';
 import { checkProcess, checkStatus } from '@ksp/shared/utility';
 
 @Component({
-  selector: 'ksp-substitute-license-approve-list',
-  templateUrl: './substitute-license-approve-list.component.html',
-  styleUrls: ['./substitute-license-approve-list.component.scss'],
+  selector: 'ksp-substitute-license-list',
+  templateUrl: './substitute-license-list.component.html',
+  styleUrls: ['./substitute-license-list.component.scss'],
 })
-export class SubstituteLicenseApproveListComponent implements AfterViewInit {
+export class SubstituteLicenseListComponent implements AfterViewInit {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
   SchoolRequestSubType = SchoolRequestSubType;
