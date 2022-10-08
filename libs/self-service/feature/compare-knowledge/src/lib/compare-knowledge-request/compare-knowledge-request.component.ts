@@ -30,11 +30,11 @@ import { SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
 
 const OBJECTIVE_FILES = [
-  { name: '1. สำเนาหลักฐานแสดงวุฒิการศึกษา', fileId: '', fileName: '' },
+  { name: '1. สำเนาหลักฐานแสดงวุฒิการศึกษา', fileid: '', filename: '' },
   {
     name: '2. รูปภาพถ่ายหน้าตรง ขนาด 1.5 x 2   นิ้ว',
-    fileId: '',
-    fileName: '',
+    fileid: '',
+    filename: '',
   },
 ];
 

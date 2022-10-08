@@ -409,38 +409,38 @@ export class QualificationDetailComponent implements OnInit {
 const files = [
   {
     name: 'หนังสือนำส่งจากหน่วยงานผู้ใช้',
-    fileId: '',
-    fileName: '',
+    fileid: '',
+    filename: '',
   },
   {
     name: 'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
-    fileId: '',
-    fileName: '',
+    fileid: '',
+    filename: '',
   },
   {
     name: 'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
-    fileId: '',
-    fileName: '',
+    fileid: '',
+    filename: '',
   },
   {
     name: 'สำเนาทะเบียนบ้าน',
-    fileId: '',
-    fileName: '',
+    fileid: '',
+    filename: '',
   },
   {
     name: 'สำเนาหนังสือแจ้งการเทียบคุณวุฒิ (กรณีจบการศึกษาจากต่างประเทศ)',
-    fileId: '',
-    fileName: '',
+    fileid: '',
+    filename: '',
   },
   {
     name: 'สำเนา กพ.7 / สมุดประจำตัว',
-    fileId: '',
-    fileName: '',
+    fileid: '',
+    filename: '',
   },
   {
     name: 'สำเนาหลักฐานการเปลี่ยนชื่อ นามสกุล',
-    fileId: '',
-    fileName: '',
+    fileid: '',
+    filename: '',
   },
-  { name: 'เอกสารอื่นๆ', fileId: '', fileName: '' },
+  { name: 'เอกสารอื่นๆ', fileid: '', filename: '' },
 ];

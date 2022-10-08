@@ -162,10 +162,10 @@ export class RequestRewardComponent implements OnInit {
     form.osoimember = JSON.stringify(form.osoimember);
 
     const rewardFiles = [
-      { name: 'แบบ นร. 1', fileId: '' },
-      { name: 'แบบ นร.2', fileId: '' },
-      { name: 'เอกสารอื่นๆ', fileId: '' },
-      { name: 'บันทึกนำส่งจากสถานศึกษา', fileId: '' },
+      { name: 'แบบ นร. 1', fileid: '' },
+      { name: 'แบบ นร.2', fileid: '' },
+      { name: 'เอกสารอื่นๆ', fileid: '' },
+      { name: 'บันทึกนำส่งจากสถานศึกษา', fileid: '' },
     ];
 
     const file = structuredClone(rewardFiles);

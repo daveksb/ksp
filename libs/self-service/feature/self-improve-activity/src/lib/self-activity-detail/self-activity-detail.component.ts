@@ -25,8 +25,8 @@ export class SelfActivityDetailComponent implements OnInit {
   attachFiles = [
     {
       name: '1.วุฒิบัตร',
-      fileId: '',
-      fileName: '',
+      fileid: '',
+      filename: '',
     },
   ];
   constructor(

@@ -42,3 +42,12 @@ export class SelfLicense {
   selfdevelopmentinfo: string | null = null;
   fileinfo: string | null = null;
 }
+export interface KspFile {
+  fileid: string;
+  filename: string;
+  uniquetimestamp?: string;
+}
+export interface FileGroup {
+  files: KspFile[];
+  name: string;
+}

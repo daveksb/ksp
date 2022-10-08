@@ -27,19 +27,19 @@ import { LicenseFormBaseComponent } from '@ksp/self-service/form';
 import * as _ from 'lodash';
 
 const EXPERIENCE_FILES = [
-  { name: '1. สำเนาวุฒิทางการศึกษา', fileId: '', fileName: '' },
-  { name: '2. หนังสือรับรองคุณวุฒิ	', fileId: '', fileName: '' },
-  { name: '3. วุฒิบัตรอบรม', fileId: '', fileName: '' },
+  { name: '1. สำเนาวุฒิทางการศึกษา', fileid: '', filename: '' },
+  { name: '2. หนังสือรับรองคุณวุฒิ	', fileid: '', filename: '' },
+  { name: '3. วุฒิบัตรอบรม', fileid: '', filename: '' },
 ];
 
 const EDU_FILES = [
-  { name: '1. สำเนาวุฒิทางการศึกษา', fileId: '', fileName: '' },
+  { name: '1. สำเนาวุฒิทางการศึกษา', fileid: '', filename: '' },
   {
     name: '2. เอกสารผู้สำเร็จการศึกษา ( ระบบ KSP BUNDIT)		',
-    fileId: '',
-    fileName: '',
+    fileid: '',
+    filename: '',
   },
-  { name: '3. วุฒิบัตรอบรม', fileId: '', fileName: '' },
+  { name: '3. วุฒิบัตรอบรม', fileid: '', filename: '' },
 ];
 
 @UntilDestroy()

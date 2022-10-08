@@ -2,22 +2,22 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FormMode } from '@ksp/shared/interface';
 import { FilesPreviewComponent } from '@ksp/shared/dialog';
-import { RequestPageType } from '@ksp/shared/constant';
 import { FileService } from '@ksp/shared/form/file-upload';
+import { FileGroup, KspFile } from '@ksp/shared/constant';
 
 @Component({
-  selector: 'ksp-form-attachment',
-  templateUrl: './form-attachment.component.html',
-  styleUrls: ['./form-attachment.component.scss'],
+  selector: 'ksp-form-multi-attachment',
+  templateUrl: './form-multi-attachment.component.html',
+  styleUrls: ['./form-multi-attachment.component.scss'],
 })
-export class FormAttachmentComponent {
+export class FormMultiAttachmentComponent {
   @Input() title = `กรุณาแนบหลักฐานประกอบ`;
   @Input() titleClass = ``;
   @Input() titleNote = '';
   @Input() pageType!: string; // ใช้ อ้างอิง tab ในหน้าใบคำขอเพื่อระบุรายการไฟล์ ที่เกี่ยวข้อง enum RequestPageType
-  @Input() groups: any[] = [];
+  @Input() groups: FileGroup[] = [];
   @Input() mode: FormMode = 'edit';
-  @Input() uniqueTimestamp: string | null = null;
+  @Input() uniqueTimestamp = '';
   @Input() requestType: number | null = null;
   @Output() downloadClick = new EventEmitter<any>();
   @Output() uploadComplete = new EventEmitter<any>();
@@ -36,29 +36,29 @@ export class FormAttachmentComponent {
     });
   }
 
-  deleteFile(group: any) {
+  deleteFile(file: KspFile) {
     const payload = {
-      id: group.fileid,
+      id: file.fileid,
       requesttype: this.requestType,
-      uniquetimestamp: this.uniqueTimestamp ?? group?.uniqueTimestamp,
+      uniquetimestamp: this.uniqueTimestamp ?? file?.uniquetimestamp,
     };
 
     this.fileService.deleteFile(payload).subscribe((res: any) => {
       if (res?.returnmessage == 'success') {
-        group.fileid = '';
-        group.filename = '';
+        file.fileid = '';
+        file.filename = '';
       }
     });
   }
 
-  downloadFile(group: any) {
-    const id = group.fileid;
+  downloadFile(file: KspFile) {
+    const id = file.fileid;
     //console.log(group);
     this.fileService.downloadFile({ id }).subscribe((res: any) => {
       const a = document.createElement('a');
       a.style.display = 'none';
       a.href = atob(res.file);
-      a.download = group.filename;
+      a.download = file.filename;
       document.body.appendChild(a);
       a.click();
     });
@@ -66,8 +66,8 @@ export class FormAttachmentComponent {
 
   updateComplete(file: any, group: any) {
     const { fileid, filename } = file;
-    group.fileid = fileid;
-    group.filename = filename;
+    group.files.push({ fileid, filename });
+    console.log(group.files);
     this.uploadComplete.emit(this.groups);
   }
 }
