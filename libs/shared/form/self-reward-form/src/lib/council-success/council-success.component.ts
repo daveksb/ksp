@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -37,13 +37,10 @@ export class CouncilSuccessComponent
       const control = this.form.get(key) as FormArray;
       if (value[key].length) {
         control.removeAt(0);
-        value[key].forEach((item: any) =>
-          control.push(
-            this.fb.group({
-              ...item,
-            })
-          )
-        );
+        value[key].forEach((item: any, index: number) => {
+          this.addFormArray(control);
+          control.at(index).patchValue(item);
+        });
       }
     });
 
@@ -57,8 +54,8 @@ export class CouncilSuccessComponent
 
   addFormArray(form: FormArray<any>) {
     const data = this.fb.group({
-      standard: [],
-      details: [],
+      standard: [null, Validators.required],
+      details: [null, Validators.required],
     });
     form.push(data);
   }

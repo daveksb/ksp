@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'ksp-praise-teacher-working',
@@ -14,11 +14,11 @@ export class PraiseTeacherWorkingComponent
   implements OnInit
 {
   override form = this.fb.group({
-    area: [],
-    position: [],
-    operationYear: [],
-    ethicDetail: [],
-    workHistory: [],
+    area: [null, Validators.required],
+    position: [null, Validators.required],
+    operationYear: [null, Validators.required],
+    ethicDetail: [null, Validators.required],
+    workHistory: [null, Validators.required],
   });
 
   constructor(private fb: FormBuilder) {

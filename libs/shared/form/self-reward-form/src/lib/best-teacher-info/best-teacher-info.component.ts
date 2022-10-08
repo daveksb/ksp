@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'ksp-best-teacher-info',
@@ -11,10 +11,10 @@ import { FormBuilder } from '@angular/forms';
 })
 export class BestTeacherInfoComponent extends KspFormBaseComponent {
   override form = this.fb.group({
-    teacherType: [],
-    startDate: [],
-    position: [''],
-    experienceYear: [],
+    teacherType: [null, Validators.required],
+    startDate: [null, Validators.required],
+    position: ['', Validators.required],
+    experienceYear: [null, Validators.required],
   });
 
   constructor(private fb: FormBuilder) {

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -72,14 +72,14 @@ export class CouncilEducationComponent
     let data;
     if (formNumber === 5) {
       data = this.fb.group({
-        certificationType: [],
-        recognizedOrganization: [],
-        certificateNo: [],
-        issueDate: [],
+        certificationType: [null, Validators.required],
+        recognizedOrganization: [null, Validators.required],
+        certificateNo: [null, Validators.required],
+        issueDate: [null, Validators.required],
       });
     } else {
       data = this.fb.group({
-        licenseForm: [],
+        licenseForm: [null, Validators.required],
       });
     }
 
