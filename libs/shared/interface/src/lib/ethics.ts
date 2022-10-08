@@ -113,8 +113,8 @@ export interface EhicsSubcommittee {
   bureau: string | null;
 }
 export const ACCUSATION_FILES = [
-  { name: '1. เอกสารกล่าวหา/กล่าวโทษ', fileId: '', fileName: '' },
-  { name: '2. สำเนาบัตรประชาชน	', fileId: '', fileName: '' },
+  { name: '1. เอกสารกล่าวหา/กล่าวโทษ', fileid: '', filename: '' },
+  { name: '2. สำเนาบัตรประชาชน	', fileid: '', filename: '' },
 ];
 export const columns = [
   'order',

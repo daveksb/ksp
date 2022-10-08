@@ -483,8 +483,8 @@ export class SchoolRequestComponent implements OnInit {
   }
   patchFileId(fileList: any, tab: any) {
     for (let i = 0; i < fileList.length; i++) {
-      fileList[i].fileId = tab[i]?.fileid;
-      fileList[i].fileName = tab[i]?.filename;
+      fileList[i].fileid = tab[i]?.fileid;
+      fileList[i].filename = tab[i]?.filename;
     }
     return fileList;
   }

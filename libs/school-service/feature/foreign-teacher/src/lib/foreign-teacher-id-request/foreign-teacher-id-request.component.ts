@@ -40,7 +40,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   prefixList$!: Observable<any>;
   countries$!: Observable<any>;
   visaTypeList$!: Observable<any>;
-  foreignInfo = [{ name: '1.สำเนาหนังสือเดินทาง', fileId: '' }];
+  foreignInfo = [{ name: '1.สำเนาหนังสือเดินทาง', fileid: '' }];
   requestNumber = '';
   requestId!: number;
   constructor(

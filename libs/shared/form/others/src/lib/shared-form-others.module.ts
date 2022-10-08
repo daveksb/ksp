@@ -46,6 +46,7 @@ import { FormMultiAttachmentComponent } from './form-multi-attachment/form-multi
     FormTeachingInfoComponent,
     FormReasonInfoComponent,
     FormAttachmentComponent,
+    FormMultiAttachmentComponent,
     FormUserInfoComponent,
     FormForeignIdComponent,
     FormHiringInfoComponent,

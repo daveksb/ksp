@@ -8,7 +8,11 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { thaiDate } from '@ksp/shared/utility';
-import { GeneralInfoService, UniInfoService, UniRequestService } from '@ksp/shared/service';
+import {
+  GeneralInfoService,
+  UniInfoService,
+  UniRequestService,
+} from '@ksp/shared/service';
 import { EMPTY, Observable, switchMap } from 'rxjs';
 import localForage from 'localforage';
 import { v4 as uuidv4 } from 'uuid';
@@ -41,8 +45,8 @@ export class RetiredAttachmentComponent implements OnInit {
   ) {}
 
   retiredFiles = [
-    { name: 'หนังสือแต่งตั้งผู้ประสานงาน', fileId: '', fileName: '' },
-    { name: 'สำเนาบัตรประชาชน', fileId: '', fileName: '' }
+    { name: 'หนังสือแต่งตั้งผู้ประสานงาน', fileid: '', filename: '' },
+    { name: 'สำเนาบัตรประชาชน', fileid: '', filename: '' },
   ];
 
   ngOnInit() {
@@ -52,16 +56,16 @@ export class RetiredAttachmentComponent implements OnInit {
     localForage.getItem('retireReasonData').then((res) => {
       this.reasoninfo = res;
     });
-    localForage.getItem('userSelectedData').then((res:any) => {
+    localForage.getItem('userSelectedData').then((res: any) => {
       if (res) {
         this.userInfo = res;
       }
     });
-    localForage.getItem('retireCoordinatorInfo').then((res:any) => {
+    localForage.getItem('retireCoordinatorInfo').then((res: any) => {
       if (res) {
         this.form.patchValue({
-          coordinator: res.coordinator
-        })
+          coordinator: res.coordinator,
+        });
       }
     });
   }
@@ -91,13 +95,15 @@ export class RetiredAttachmentComponent implements OnInit {
       .pipe(
         switchMap((res) => {
           if (res) {
-            const fileUpload = this.retiredFiles.map((file) => file.fileId || null);
+            const fileUpload = this.retiredFiles.map(
+              (file) => file.fileid || null
+            );
             let payload = {
               ...this.userInfo,
               coordinatorinfo: JSON.stringify(this.form.value.coordinator),
               fileinfo: JSON.stringify({ fileUpload }),
-              reasoninfo: JSON.stringify(this.reasoninfo)
-            }
+              reasoninfo: JSON.stringify(this.reasoninfo),
+            };
             payload.ref1 = '3';
             payload.ref2 = '02';
             payload.ref3 = '5';

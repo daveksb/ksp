@@ -50,8 +50,8 @@ export class AccusationMainComponent implements OnInit {
             (element: any, index: any) => {
               if (res.accusationfile) {
                 const json = jsonParse(res?.accusationfile);
-                element.fileId = json[index]?.fileid;
-                element.fileName = json[index]?.filename;
+                element.fileid = json[index]?.fileid;
+                element.filename = json[index]?.filename;
               }
             }
           );

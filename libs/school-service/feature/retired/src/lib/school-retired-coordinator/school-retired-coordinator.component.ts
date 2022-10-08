@@ -33,7 +33,7 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
     private requestService: RequestService
   ) {}
   userInfoFormType: number = UserInfoFormType.thai;
-  retiredFiles = [{ name: 'หนังสือแต่งตั้งผู้ประสานงาน', fileId: '' }];
+  retiredFiles = [{ name: 'หนังสือแต่งตั้งผู้ประสานงาน', fileid: '' }];
   prefixList$!: Observable<any>;
   uniqueTimestamp: any;
 

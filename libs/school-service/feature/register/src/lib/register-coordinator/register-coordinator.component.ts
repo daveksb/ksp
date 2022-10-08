@@ -25,11 +25,11 @@ export class CoordinatorInfoComponent implements OnInit {
   uploadFileList = [
     {
       name: 'หนังสือแต่งตั้งผู้ประสานงาน',
-      fileId: '',
+      fileid: '',
     },
     {
       name: 'สำเนาบัตรประชาชน',
-      fileId: '',
+      fileid: '',
     },
   ];
   requestDate = thaiDate(new Date());

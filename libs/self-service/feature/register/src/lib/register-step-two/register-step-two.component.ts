@@ -43,7 +43,7 @@ export class RegisterStepTwoComponent {
   onUploadComplete(evt: any) {
     //console.log('evt = ', evt);
     this.imgSrc = evt.file;
-    this.imgId = evt.fileId;
+    this.imgId = evt.fileid;
   }
 
   openDialog() {
