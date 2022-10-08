@@ -7,7 +7,11 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { GeneralInfoService, UniInfoService, UniRequestService } from '@ksp/shared/service';
+import {
+  GeneralInfoService,
+  UniInfoService,
+  UniRequestService,
+} from '@ksp/shared/service';
 import { getCookie, thaiDate } from '@ksp/shared/utility';
 import { EMPTY, Observable, switchMap } from 'rxjs';
 
@@ -27,9 +31,9 @@ export class EditStudentDetailComponent implements OnInit {
   oldValue: any;
   formData = this.fb.group({
     editStudent: [],
-  })
+  });
   uniqueTimestamp: any = '';
-  
+
   studentDetail = this.fb.group({
     prefixth: [],
     firstnameth: [],
@@ -41,7 +45,7 @@ export class EditStudentDetailComponent implements OnInit {
     idcardno: [],
     passportno: [],
     email: [],
-    phone: []
+    phone: [],
   });
   prefixList$!: Observable<any>;
   nationalityList$!: Observable<any>;
@@ -49,19 +53,19 @@ export class EditStudentDetailComponent implements OnInit {
   uploadFileList = [
     {
       name: 'สำเนาหนังสือสำคัญการเปลี่ยนชื่อ / ชื่อสกุล / เปลี่ยนหรือเพิ่มคำนำหน้าชื่อ',
-      fileId: '',
-      fileName: ''
+      fileid: '',
+      filename: '',
     },
     {
       name: 'สำเนาหลักฐานการสมรส หรือการสิ้นสุดการสมรส (ถ้ามี)',
-      fileId: '',
-      fileName: ''
+      fileid: '',
+      filename: '',
     },
     {
       name: 'สำเนาหนังสือรับรองการใช้คำหน้านามหญิง (ถ้ามี)',
-      fileId: '',
-      fileName: ''
-    }
+      fileid: '',
+      filename: '',
+    },
   ];
   data = false;
   pageType = RequestPageType;
@@ -91,9 +95,10 @@ export class EditStudentDetailComponent implements OnInit {
         firstname: this.formSearch.controls.firstname.value,
         lastname: this.formSearch.controls.lastname.value,
         offset: 0,
-        row: 10
-      }
-      this.uniInfoService.uniAdmissionSearch2(payload)
+        row: 10,
+      };
+      this.uniInfoService
+        .uniAdmissionSearch2(payload)
         .subscribe((response: any) => {
           if (response.datareturn) {
             this.data = true;
@@ -129,7 +134,9 @@ export class EditStudentDetailComponent implements OnInit {
         switchMap((res) => {
           if (res) {
             const userId = Number(getCookie('userId'));
-            const fileUpload = this.uploadFileList.map((file) => file.fileId || null);
+            const fileUpload = this.uploadFileList.map(
+              (file) => file.fileid || null
+            );
             let payload = {
               id: null,
               requestprocess: '2',
@@ -150,16 +157,16 @@ export class EditStudentDetailComponent implements OnInit {
               ref2: '08',
               ref3: '5',
               admissionlist: '',
-              fileinfo: JSON.stringify({ fileUpload })
-            }
+              fileinfo: JSON.stringify({ fileUpload }),
+            };
             let admissionlist = [];
             let formsave = {};
             const editStudent = this.formData.value.editStudent as any;
             const studentform = this.studentDetail.value as object;
             formsave = {
               ...editStudent,
-              ...studentform
-            }
+              ...studentform,
+            };
             admissionlist.push(formsave);
             payload.admissionlist = JSON.stringify(admissionlist);
             return this.requestService.createRequestAdmission(payload);
@@ -171,10 +178,10 @@ export class EditStudentDetailComponent implements OnInit {
         if (res) {
           this.onCompleted(res?.requestno);
         }
-    });
+      });
   }
 
-  onCompleted(requestno : string) {
+  onCompleted(requestno: string) {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
       data: {

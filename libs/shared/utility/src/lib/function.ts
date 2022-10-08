@@ -162,12 +162,19 @@ export function formatDate(input: string) {
 export function mapFileInfo(fileList: any[]) {
   return fileList.map((file: any) => {
     const object = {
-      fileid: file.fileId || null,
-      filename: file.fileName || null,
+      fileid: file.fileid || null,
+      filename: file.filename || null,
     };
     return object;
   });
 }
+
+export function mapMultiFileInfo(group: any[]) {
+  return group.map((group: any) => {
+    return group.files;
+  });
+}
+
 export function jsonParse(object: string): any {
   try {
     return JSON.parse(object);

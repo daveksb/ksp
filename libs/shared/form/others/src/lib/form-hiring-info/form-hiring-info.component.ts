@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -9,7 +9,10 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./form-hiring-info.component.scss'],
   providers: providerFactory(FormHiringInfoComponent),
 })
-export class FormHiringInfoComponent extends KspFormBaseComponent {
+export class FormHiringInfoComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
   @Input() displayMode: 'staff' | 'request' = 'staff';
   @Input() positionTypes: any = [];
   @Input() staffTypes: any = [];
@@ -39,6 +42,12 @@ export class FormHiringInfoComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+  ngOnInit(): void {
+    if (this.displayMode === 'request') {
+      this.form.controls.psersonType.clearValidators();
+      this.form.controls.academicStanding.clearValidators();
+    }
   }
 }
 

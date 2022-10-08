@@ -1,6 +1,6 @@
 export class UserInfoForm {
   id: string | null = null;
-  idcardno: string | null = '1235499999';
+  idcardno: string | null = '0000000000000';
   passportno: string | null = null;
   passportstartdate: string | null = null;
   passportenddate: string | null = null;

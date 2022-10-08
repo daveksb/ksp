@@ -7,41 +7,41 @@ export class LicenseRequestService {
   educationFiles = [
     {
       name: 'สำเนาใบรายงานผลการศึกษา (Transcript)',
-      fileId: '',
-      fileName: '',
+      fileid: '',
+      filename: '',
     },
     {
       name: 'สำเนาปริญญาบัตร หรือสำเนาหนังสือรับรองคุณวุฒิ',
-      fileId: '',
-      fileName: '',
+      fileid: '',
+      filename: '',
     },
   ];
 
   experienceFiles = [
     {
       name: 'สำเนาหนังสือนำส่งแบบประเมินฉบับจริง',
-      fileId: '',
-      fileName: '',
+      fileid: '',
+      filename: '',
     },
     {
       name: 'สำเนาคำสั่งแต่งตั้งคณะผู้ประเมินการปฏิบัติการสอน',
-      fileId: '',
-      fileName: '',
+      fileid: '',
+      filename: '',
     },
     {
       name: 'สำเนาตารางสอนรายสัปดาห์',
-      fileId: '',
-      fileName: '',
+      fileid: '',
+      filename: '',
     },
     {
       name: 'สำเนาคำสั่งแต่งตั้งปฏิบติหน้าที่',
-      fileId: '',
-      fileName: '',
+      fileid: '',
+      filename: '',
     },
     {
       name: 'สำเนาสัญญาจ้างหรือทะเบียนประวัติหรือหลักฐานการขอปฏิบัติการสอน',
-      fileId: '',
-      fileName: '',
+      fileid: '',
+      filename: '',
     },
   ];
 
@@ -49,29 +49,29 @@ export class LicenseRequestService {
     [
       {
         name: 'สำเนาผลการทดสอบ',
-        fileId: '',
-        fileName: '',
+        fileid: '',
+        filename: '',
       },
     ],
     [
       {
         name: 'สำเนาผลการทดสอบ',
-        fileId: '',
-        fileName: '',
+        fileid: '',
+        filename: '',
       },
     ],
     [
       {
         name: 'สำเนาผลการทดสอบ',
-        fileId: '',
-        fileName: '',
+        fileid: '',
+        filename: '',
       },
     ],
     [
       {
         name: 'สำเนาผลการทดสอบ',
-        fileId: '',
-        fileName: '',
+        fileid: '',
+        filename: '',
       },
     ],
   ];

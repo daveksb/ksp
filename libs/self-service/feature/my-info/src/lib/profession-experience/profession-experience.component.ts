@@ -21,24 +21,24 @@ export class ProfessionExperienceComponent
   implements OnInit
 {
   info = [
-    { name: 'สำเนาใบรายงานผลการศึกษา (transcript)', fileId: '', fileName: '' },
+    { name: 'สำเนาใบรายงานผลการศึกษา (transcript)', fileid: '', filename: '' },
     {
       name: 'สำเนาปริญญาบัตร หรือสำเนาหนังสือรับรองคุณวุฒิ',
-      fileId: '',
-      fileName: '',
+      fileid: '',
+      filename: '',
     },
-    { name: 'สำเนาหนังสือนำส่งแบบประเมินฉบับจริง', fileId: '', fileName: '' },
+    { name: 'สำเนาหนังสือนำส่งแบบประเมินฉบับจริง', fileid: '', filename: '' },
     {
       name: 'สำเนาคำสั่งแต่งตั้งคณะผู้ประเมินการปฏิบัติการสอน',
-      fileId: '',
-      fileName: '',
+      fileid: '',
+      filename: '',
     },
-    { name: 'สำเนาตารางสอนรายสัปดาห์  ', fileId: '', fileName: '' },
-    { name: 'สำเนาคำสั่งแต่งตั้งปฏิบัติหน้าที่', fileId: '', fileName: '' },
+    { name: 'สำเนาตารางสอนรายสัปดาห์  ', fileid: '', filename: '' },
+    { name: 'สำเนาคำสั่งแต่งตั้งปฏิบัติหน้าที่', fileid: '', filename: '' },
     {
       name: 'สำเนาสัญญาจ้างหรือทะเบียนประวัติหรือหลักฐานการขอปฏิบัติการสอน',
-      fileId: '',
-      fileName: '',
+      fileid: '',
+      filename: '',
     },
   ];
   override form = this.fb.group({
@@ -158,16 +158,16 @@ export class ProfessionExperienceComponent
   mapFileInfo(fileList: any[]) {
     return fileList.map((file: any) => {
       const object = {
-        fileid: file.fileId || null,
-        filename: file.fileName || null,
+        fileid: file.fileid || null,
+        filename: file.filename || null,
       };
       return object;
     });
   }
   patchFileId(fileList: any, tab: any) {
     for (let i = 0; i < fileList.length; i++) {
-      fileList[i].fileId = tab[i]?.fileid;
-      fileList[i].fileName = tab[i]?.filename;
+      fileList[i].fileid = tab[i]?.fileid;
+      fileList[i].filename = tab[i]?.filename;
     }
     return fileList;
   }

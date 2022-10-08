@@ -29,7 +29,7 @@ import { Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
 const ATTACH_FILES = [
-  { name: '1.สำเนาวุฒิการศึกษา', fileId: '', fileName: '' },
+  { name: '1.สำเนาวุฒิการศึกษา', fileid: '', filename: '' },
 ];
 
 @Component({

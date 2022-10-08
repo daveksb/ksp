@@ -18,8 +18,22 @@ import { UniRequestService } from '@ksp/shared/service';
 })
 export class UniRegisterPasswordComponent implements OnInit {
   form = this.fb.group({
-    password: [null, [Validators.minLength(8), Validators.required, Validators.pattern(/^[\w\s]+$/)]],
-    repassword: [null, [Validators.minLength(8), Validators.required, Validators.pattern(/^[\w\s]+$/)]]
+    password: [
+      null,
+      [
+        Validators.minLength(8),
+        Validators.required,
+        Validators.pattern(/^[\w\s]+$/),
+      ],
+    ],
+    repassword: [
+      null,
+      [
+        Validators.minLength(8),
+        Validators.required,
+        Validators.pattern(/^[\w\s]+$/),
+      ],
+    ],
   });
   savingData: any;
   requestDate = thaiDate(new Date());
@@ -44,7 +58,6 @@ export class UniRegisterPasswordComponent implements OnInit {
     return password !== repassword || !password || !repassword;
   }
   ngOnInit(): void {
-
     localForage.getItem('registerSelectedUniversity').then((res: any) => {
       if (res) {
         this.uniData = res;
@@ -121,14 +134,19 @@ export class UniRegisterPasswordComponent implements OnInit {
             const educationoccupy = {
               permission: this.savingData.permission,
               other: this.savingData.other,
-              ...this.uniData
-            }
-            const fileUpload = this.uploadFileList.map((file) => file.fileId || null);
+              ...this.uniData,
+            };
+            const fileUpload = this.uploadFileList.map(
+              (file) => file.fileid || null
+            );
             const payload = {
               ...this.savingData,
               educationoccupy: JSON.stringify(educationoccupy),
-              coordinatorinfo: JSON.stringify({...this.coordinator, password}),
-              fileinfo: JSON.stringify({ fileUpload })
+              coordinatorinfo: JSON.stringify({
+                ...this.coordinator,
+                password,
+              }),
+              fileinfo: JSON.stringify({ fileUpload }),
             };
             payload.ref1 = '3';
             payload.ref2 = '01';

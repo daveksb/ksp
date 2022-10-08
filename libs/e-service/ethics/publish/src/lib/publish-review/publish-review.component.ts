@@ -105,8 +105,8 @@ export class PublishReviewComponent implements OnInit {
             this.accusation.accusationFiles.forEach((element, index) => {
               if (res.accusationfile) {
                 const json = jsonParse(res?.accusationfile);
-                element.fileId = json[index]?.fileid;
-                element.fileName = json[index]?.filename;
+                element.fileid = json[index]?.fileid;
+                element.filename = json[index]?.filename;
               }
             });
             if (res?.accuserinfo) {

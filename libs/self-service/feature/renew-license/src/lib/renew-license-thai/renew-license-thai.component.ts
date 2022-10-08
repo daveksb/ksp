@@ -57,8 +57,8 @@ export class RenewLicenseThaiComponent
   workingInfoFiles = [
     {
       name: '1.รางวัลอื่นและประกาศเกียรติคุณ',
-      fileId: '',
-      fileName: '',
+      fileid: '',
+      filename: '',
     },
   ];
 

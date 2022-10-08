@@ -31,18 +31,18 @@ import { v4 as uuidv4 } from 'uuid';
 const FILE_LIST = [
   {
     name: 'สำเนาหนังสือสำคัญการเปลี่ยนชื่อ/ชื่อสกุล/เปลี่ยนหรือเพิ่มคำนำหน้าชื่อ',
-    fileId: '',
-    fileName: '',
+    fileid: '',
+    filename: '',
   },
   {
     name: 'สำเนาหลักฐานการสมรส หรือการสิ้นสุดการสมรส (ถ้ามี)',
-    fileId: '',
-    fileName: '',
+    fileid: '',
+    filename: '',
   },
   {
     name: 'สำเนาหนังสือรับรองการใช้คำหน้านามหญิง (ถ้ามี)',
-    fileId: '',
-    fileName: '',
+    fileid: '',
+    filename: '',
   },
 ];
 
