@@ -1,39 +1,37 @@
 <form [formGroup]="form">
-  <div class="px-2 pb-2">
-    <div class="box-header text-primary">{{ headerTitle }}</div>
+  <div class="box-header text-primary">{{ headerTitle }}</div>
 
-    <div class="d-flex justify-content-start mb-2">
-      <ng-container *ngFor="let choice of choices">
-        <div class="border rounded ps-2 pe-5 py-1 me-3 bg-white w-25">
-          <div class="d-flex align-items-center">
-            <input
-              class="align-middle"
-              type="radio"
-              value="{{ choice.value }}"
-              formControlName="result"
-            />
-            <label class="ms-1"> {{ choice.name }} </label>
-          </div>
+  <div class="d-flex justify-content-start mb-2">
+    <ng-container *ngFor="let choice of choices">
+      <div class="border rounded ps-2 pe-5 py-1 me-3 bg-white w-25">
+        <div class="d-flex align-items-center">
+          <input
+            class="align-middle"
+            type="radio"
+            value="{{ choice.value }}"
+            formControlName="result"
+          />
+          <label class="ms-1"> {{ choice.name }} </label>
         </div>
-      </ng-container>
-    </div>
-
-    <div class="form-label mb-2" *ngIf="reasons.length">หมายเหตุ/เหตุผล</div>
-
-    <div class="d-flex flex-column ms-3">
-      <ng-container *ngFor="let reason of reasons">
-        <div class="d-flex align-items-center mb-2">
-          <input type="checkbox" formControlName="reason" />
-          <label class="form-label text-black ms-2">{{ reason }}</label>
-        </div>
-      </ng-container>
-    </div>
-
-    <textarea
-      rows="3"
-      class="form-control"
-      placeholder="หมายเหตุ/เหตุผล"
-      formControlName="detail"
-    ></textarea>
+      </div>
+    </ng-container>
   </div>
+
+  <div class="form-label mb-2" *ngIf="reasons.length">หมายเหตุ/เหตุผล</div>
+
+  <div class="d-flex flex-column ms-3">
+    <ng-container *ngFor="let reason of reasons">
+      <div class="d-flex align-items-center mb-2">
+        <input type="checkbox" formControlName="reason" />
+        <label class="form-label text-black ms-2">{{ reason }}</label>
+      </div>
+    </ng-container>
+  </div>
+
+  <textarea
+    rows="3"
+    class="form-control mb-1"
+    placeholder="หมายเหตุ/เหตุผล"
+    formControlName="detail"
+  ></textarea>
 </form>

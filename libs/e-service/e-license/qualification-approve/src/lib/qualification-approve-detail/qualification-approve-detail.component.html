@@ -1,1 +1,163 @@
-<p>qualification-approve-detail works!</p>
+<ksp-top-nav>
+  <span header>ย่ืนใบคำขอ</span>
+  <span subHeader
+    >ขอรับรองคุณวุฒิการศึกษาเพื่อใช้ในการขอรับใบอนุญาตประกอบวิชาชีพ</span
+  >
+</ksp-top-nav>
+
+<div class="bg-secondary bg-opacity-10 px-4 py-2">
+  <div class="box-header">
+    รายละเอียดใบคำขอรับรองคุณวุฒิการศึกษาเพื่อใช้ในการขอรับใบอนุญาตประกอบวิชาชีพ
+  </div>
+  <div class="bg-white py-3 px-4">
+    <div>
+      <ksp-request-header-info
+        [requestDate]="requestDate"
+        [requestNumber]="'1234567890'"
+      ></ksp-request-header-info>
+      <hr />
+
+      <div class="bg-light px-3 py-2 default-width">
+        <div class="box-header text-primary">ข้อมูลผู้ขอยื่น</div>
+        <div class="row">
+          <div class="col-6">
+            <label class="form-label">สังกัด</label>
+            <input class="form-control" type="text" disabled />
+          </div>
+          <div class="col-6">
+            <label class="form-label">สถานศึกษา</label>
+            <input class="form-control" type="text" disabled />
+          </div>
+        </div>
+        <ksp-form-user-info
+          [isqualification]="true"
+          formControlName="userInfo"
+          [isDarkMode]="false"
+          [mode]="'view'"
+          [prefixList]="prefixList$ | async"
+          [nationList]="nationalitys$ | async"
+          [displayMode]="[userInfoFormdisplayMode]"
+        ></ksp-form-user-info>
+      </div>
+    </div>
+
+    <div class="full-width pb-2">
+      <mat-tab-group
+        class="tab-group mt-3"
+        selectedIndex="0"
+        animationDuration="0ms"
+      >
+        <mat-tab label="ที่อยู่" class="tab-content">
+          <ksp-form-address
+            formControlName="addr1"
+            [isDarkMode]="false"
+            [mode]="'view'"
+            [provinces]="provinces1$ | async"
+            [amphurs]="amphurs1$ | async"
+            [tumbols]="tumbols1$ | async"
+            >ที่อยู่ทะเบียนบ้าน</ksp-form-address
+          ><br />
+          <ksp-form-address
+            formControlName="addr2"
+            [mode]="'view'"
+            [provinces]="provinces2$ | async"
+            [amphurs]="amphurs2$ | async"
+            [tumbols]="tumbols2$ | async"
+            >ที่อยู่ที่ติดต่อได้สะดวก
+            <div class="d-flex align-items-center">
+              <input type="checkbox" class="me-2" />
+              <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
+            </div>
+          </ksp-form-address>
+        </mat-tab>
+
+        <mat-tab label="ข้อมูลทางการศึกษา">
+          <div class="d-flex align-items-center">
+            <label class="fs-5">วุฒิการศึกษาปริญญาตรี</label>
+          </div>
+
+          <ksp-form-education-info
+            [mode]="'view'"
+            formControlName="edu1"
+            [showSelectDegree]="false"
+            [showGradeInput]="true"
+            [showGraduateYearInput]="true"
+            [showCheckbox]="false"
+            [countries]="countries$ | async"
+          ></ksp-form-education-info>
+          <br />
+          <div class="d-flex align-items-center">
+            <input type="checkbox" class="me-2" />
+            <label class="fs-5">วุฒิการศึกษาปริญญาโท</label>
+          </div>
+          <ng-container>
+            <ksp-form-education-info
+              [mode]="'view'"
+              formControlName="edu2"
+              [showSelectDegree]="false"
+              [showGradeInput]="false"
+              [showGraduateYearInput]="true"
+              [showCheckbox]="false"
+              [countries]="countries$ | async"
+            ></ksp-form-education-info>
+          </ng-container>
+
+          <div class="d-flex align-items-center mt-2">
+            <input type="checkbox" class="me-2" />
+            <label class="fs-5">วุฒิการศึกษาปริญญาเอก</label>
+          </div>
+          <ng-container>
+            <ksp-form-education-info
+              [mode]="'view'"
+              formControlName="edu3"
+              [showSelectDegree]="false"
+              [showGradeInput]="false"
+              [showGraduateYearInput]="true"
+              [showCheckbox]="false"
+              [countries]="countries$ | async"
+            ></ksp-form-education-info>
+          </ng-container>
+
+          <div class="d-flex align-items-center mt-2">
+            <input type="checkbox" class="me-2" />
+            <label class="fs-5"
+              >วุฒิการศึกษาปริญญาอื่นๆที่เทียบเท่าปริญญาตรี /
+              ปริญญาทางการศึกษา</label
+            >
+          </div>
+          <ng-container>
+            <ksp-form-education-info
+              [mode]="'view'"
+              formControlName="edu4"
+              [showSelectDegree]="false"
+              [showGradeInput]="false"
+              [showGraduateYearInput]="true"
+              [showCheckbox]="false"
+              [countries]="countries$ | async"
+            ></ksp-form-education-info>
+          </ng-container>
+        </mat-tab>
+
+        <mat-tab label="เอกสารหลักฐานประกอบ">
+          <ksp-form-attachment
+            [mode]="'view'"
+            [groups]="file"
+          ></ksp-form-attachment>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+  <br />
+
+  <div class="bg-white px-3 py-2">
+    <e-service-license-check [choices]="choice"></e-service-license-check>
+  </div>
+</div>
+
+<div class="sticky-bottom border">
+  <ksp-bottom-nav
+    [isFirstPage]="true"
+    [showCenterButtons]="true"
+    [showSaveButton]="true"
+  ></ksp-bottom-nav>
+</div>
