@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormMode } from '@ksp/shared/interface';
 import { FilesPreviewComponent } from '@ksp/shared/dialog';
 import { FileService } from '@ksp/shared/form/file-upload';
+import { FileGroup, KspFile } from '@ksp/shared/constant';
 
 @Component({
   selector: 'ksp-form-multi-attachment',
@@ -14,9 +15,9 @@ export class FormMultiAttachmentComponent {
   @Input() titleClass = ``;
   @Input() titleNote = '';
   @Input() pageType!: string; // ใช้ อ้างอิง tab ในหน้าใบคำขอเพื่อระบุรายการไฟล์ ที่เกี่ยวข้อง enum RequestPageType
-  @Input() groups: any[] = [];
+  @Input() groups: FileGroup[] = [];
   @Input() mode: FormMode = 'edit';
-  @Input() uniqueTimestamp: string | null = null;
+  @Input() uniqueTimestamp = '';
   @Input() requestType: number | null = null;
   @Output() downloadClick = new EventEmitter<any>();
   @Output() uploadComplete = new EventEmitter<any>();
@@ -35,38 +36,38 @@ export class FormMultiAttachmentComponent {
     });
   }
 
-  deleteFile(group: any) {
+  deleteFile(file: KspFile) {
     const payload = {
-      id: group.fileId,
+      id: file.fileid,
       requesttype: this.requestType,
-      uniquetimestamp: this.uniqueTimestamp ?? group?.uniqueTimestamp,
+      uniquetimestamp: this.uniqueTimestamp ?? file?.uniquetimestamp,
     };
 
     this.fileService.deleteFile(payload).subscribe((res: any) => {
       if (res?.returnmessage == 'success') {
-        group.fileId = '';
-        group.fileName = '';
+        file.fileid = '';
+        file.filename = '';
       }
     });
   }
 
-  downloadFile(group: any) {
-    const id = group.fileId;
+  downloadFile(file: KspFile) {
+    const id = file.fileid;
     //console.log(group);
     this.fileService.downloadFile({ id }).subscribe((res: any) => {
       const a = document.createElement('a');
       a.style.display = 'none';
       a.href = atob(res.file);
-      a.download = group.fileName;
+      a.download = file.filename;
       document.body.appendChild(a);
       a.click();
     });
   }
 
   updateComplete(file: any, group: any) {
-    const { fileId, fileName } = file;
-    group.fileId = fileId;
-    group.fileName = fileName;
+    const { fileid, filename } = file;
+    group.files.push({ fileid, filename });
+    console.log(group.files);
     this.uploadComplete.emit(this.groups);
   }
 }
