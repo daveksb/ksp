@@ -15,6 +15,7 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { FormHiringInfoComponent } from './form-hiring-info/form-hiring-info.component';
 import { FormVisaInfoComponent } from './form-visa-info/form-visa-info.component';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
+import { FormMultiAttachmentComponent } from './form-multi-attachment/form-multi-attachment.component';
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import { FileUploadComponent } from '@ksp/shared/form/file-upload';
     FormTeachingInfoComponent,
     FormReasonInfoComponent,
     FormAttachmentComponent,
+    FormMultiAttachmentComponent,
     FormUserInfoComponent,
     FormForeignIdComponent,
     FormHiringInfoComponent,
@@ -44,6 +46,7 @@ import { FileUploadComponent } from '@ksp/shared/form/file-upload';
     FormTeachingInfoComponent,
     FormReasonInfoComponent,
     FormAttachmentComponent,
+    FormMultiAttachmentComponent,
     FormUserInfoComponent,
     FormForeignIdComponent,
     FormHiringInfoComponent,

@@ -38,7 +38,7 @@ export class ActivityDetailComponent implements OnInit {
   attachFiles = [
     {
       name: '1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน',
-      fileId: '',
+      fileid: '',
     },
   ];
 

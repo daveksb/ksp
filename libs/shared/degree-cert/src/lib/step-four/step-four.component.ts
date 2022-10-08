@@ -26,7 +26,7 @@ import {
 })
 export class DegreeCertStepFourComponent extends KspFormBaseComponent {
   @Input() formType = 'a';
-  step4Incorrect =null;
+  step4Incorrect = null;
   // step4Incorrect = [
   //   'ไม่ครบถ้วน และไม่ถูกต้อง',
   //   'หมายเหตุ สำเนาใบอนุญาตไม่ถูกต้อง',
@@ -116,7 +116,7 @@ export class DegreeCertStepFourComponent extends KspFormBaseComponent {
   uploadComplete(groups: any) {
     this.onChange({
       files: _.map(groups, (data) =>
-        _.pick(data, ['fileId', 'fileName', 'key', 'uniqueTimestamp'])
+        _.pick(data, ['fileid', 'filename', 'key', 'uniqueTimestamp'])
       ),
     });
     this.onTouched();

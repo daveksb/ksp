@@ -9,7 +9,11 @@ import {
 } from '@ksp/shared/dialog';
 import { UniversitySearchComponent } from '@ksp/shared/search';
 import { EMPTY, Observable, switchMap } from 'rxjs';
-import { GeneralInfoService, UniInfoService, UniRequestService } from '@ksp/shared/service';
+import {
+  GeneralInfoService,
+  UniInfoService,
+  UniRequestService,
+} from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
 import { RequestPageType } from '@ksp/shared/constant';
 import { v4 as uuidv4 } from 'uuid';
@@ -22,7 +26,7 @@ export class UniRegisterCoordinatorComponent implements OnInit {
   requestDate = thaiDate(new Date());
   form = this.fb.group({
     universityInfo: [{}],
-    coordinator: []
+    coordinator: [],
   });
   saveData: any;
   prefixName$!: Observable<any>;
@@ -32,13 +36,13 @@ export class UniRegisterCoordinatorComponent implements OnInit {
   uploadFileList = [
     {
       name: 'หนังสือแต่งตั้งผู้ประสานงาน',
-      fileId: '',
-      fileName: ''
+      fileid: '',
+      filename: '',
     },
     {
       name: 'สำเนาบัตรประชาชน',
-      fileId: '',
-      fileName: ''
+      fileid: '',
+      filename: '',
     },
   ];
   requesttype = 1;
@@ -64,15 +68,15 @@ export class UniRegisterCoordinatorComponent implements OnInit {
         this.uniData = res;
       }
     });
-    localForage.getItem('registerUserForm').then((res:any) => {
+    localForage.getItem('registerUserForm').then((res: any) => {
       if (res) {
         this.form.patchValue({
           universityInfo: {
             schoolid: res.schoolid,
             unitype: res.unitype,
             institution: res.institution,
-            affiliation: res.affiliation
-          }
+            affiliation: res.affiliation,
+          },
         });
         this.saveData = res;
       }
@@ -80,7 +84,7 @@ export class UniRegisterCoordinatorComponent implements OnInit {
     localForage.getItem('registerCoordinatorForm').then((res: any) => {
       if (res) {
         this.form.patchValue({
-          coordinator: res.form.coordinator
+          coordinator: res.form.coordinator,
         });
       }
     });
@@ -99,12 +103,12 @@ export class UniRegisterCoordinatorComponent implements OnInit {
     });
   }
 
-  prevPage() {   
-  let form = {
-    form: this.form.getRawValue(),
-    file: this.uploadFileList
-  }
-  localForage.setItem('registerCoordinatorForm', form);
+  prevPage() {
+    let form = {
+      form: this.form.getRawValue(),
+      file: this.uploadFileList,
+    };
+    localForage.setItem('registerCoordinatorForm', form);
     this.router.navigate(['/', 'register', 'requester']);
   }
 
@@ -117,9 +121,9 @@ export class UniRegisterCoordinatorComponent implements OnInit {
       },
     });
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
-        if (res) {
-          this.showCompleteDialog();
-        }
+      if (res) {
+        this.showCompleteDialog();
+      }
     });
   }
 
@@ -128,7 +132,7 @@ export class UniRegisterCoordinatorComponent implements OnInit {
       width: '375px',
       data: {
         header: `ยกเลิกรายการสำเร็จ`,
-        btnLabel: 'กลับสู่หน้าหลัก'
+        btnLabel: 'กลับสู่หน้าหลัก',
       },
     });
 
@@ -145,8 +149,8 @@ export class UniRegisterCoordinatorComponent implements OnInit {
   next() {
     let form = {
       form: this.form.getRawValue(),
-      file: this.uploadFileList
-    }
+      file: this.uploadFileList,
+    };
     localForage.setItem('registerCoordinatorForm', form);
     this.router.navigate(['/', 'register', 'password']);
   }

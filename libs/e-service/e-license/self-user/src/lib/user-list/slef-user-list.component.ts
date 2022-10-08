@@ -10,10 +10,10 @@ import {
 import { ERequestService } from '@ksp/shared/service';
 
 @Component({
-  templateUrl: './manage-current-user-list.component.html',
-  styleUrls: ['./manage-current-user-list.component.scss'],
+  templateUrl: './self-user-list.component.html',
+  styleUrls: ['./self-user-list.component.scss'],
 })
-export class ManageCurrentUserListComponent implements AfterViewInit {
+export class SelfUserListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   form = this.fb.group({
@@ -22,7 +22,6 @@ export class ManageCurrentUserListComponent implements AfterViewInit {
 
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<any>();
-
   selectedUniversity = '';
 
   constructor(

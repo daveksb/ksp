@@ -27,7 +27,7 @@ export class FileUploadComponent {
   @Input() uniqueTimestamp = '';
   @Input() uploadType: 'button' | 'link' = 'button';
   @Input() isImage = false; // when upload image use public API
-  @Input() fileName = '';
+  @Input() filename = '';
   @Input() showDeleteFile = false;
   @Output() uploadComplete = new EventEmitter<any>();
 
@@ -60,7 +60,7 @@ export class FileUploadComponent {
       this.uploadFile(payload);
     }
     if (file) {
-      this.fileName = file.name;
+      this.filename = file.name;
     }
   }
 
@@ -71,8 +71,8 @@ export class FileUploadComponent {
       .subscribe((event: any) => {
         if (event.status == 200 && event.body?.id) {
           const evt = {
-            fileId: event.body.id,
-            fileName: this.fileName,
+            fileid: event.body.id,
+            filename: this.filename,
             file: atob(payload.file),
           };
           this.file = evt;
@@ -88,8 +88,8 @@ export class FileUploadComponent {
       .subscribe((event: any) => {
         if (event.status == 200 && event.body?.id) {
           this.uploadComplete.emit({
-            fileId: event.body.id,
-            fileName: this.fileName,
+            fileid: event.body.id,
+            filename: this.filename,
             file: atob(payload.file),
           });
         }
@@ -99,7 +99,7 @@ export class FileUploadComponent {
   deleteFile() {
     const group = this.file;
     const payload = {
-      id: group.fileId,
+      id: group.fileid,
       requesttype: this.requestType,
       uniquetimestamp: this.uniqueTimestamp ?? group?.uniqueTimestamp,
     };
@@ -107,7 +107,7 @@ export class FileUploadComponent {
     this.uploadService.deleteFile(payload).subscribe((res: any) => {
       if (res?.returnmessage == 'success') {
         this.file = null;
-        this.fileName = '';
+        this.filename = '';
       }
     });
   }
