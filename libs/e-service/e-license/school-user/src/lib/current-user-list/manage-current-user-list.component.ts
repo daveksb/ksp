@@ -42,7 +42,6 @@ export class ManageCurrentUserListComponent implements AfterViewInit {
 
   search(params: any) {
     console.log('params = ', params);
-
     const payload: EsSearchPayload = {
       systemtype: '2',
       requesttype: '1',

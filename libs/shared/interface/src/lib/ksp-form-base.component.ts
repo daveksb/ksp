@@ -7,7 +7,7 @@ import {
   FormGroup,
 } from '@angular/forms';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { FormMode } from './form';
+import { FormMode } from './form-mode';
 
 @Component({
   template: ``,
