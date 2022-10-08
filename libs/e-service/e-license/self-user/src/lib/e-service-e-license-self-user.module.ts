@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
-import { ManageCurrentUserListComponent } from './current-user-list/manage-current-user-list.component';
 import { MatIconModule } from '@angular/material/icon';
 import { BottomNavComponent, TopNavComponent } from '@ksp/shared/menu';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -21,6 +20,7 @@ import {
 } from '@ksp/shared/form/school/register';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import { SelfUserListComponent } from './user-list/slef-user-list.component';
 
 export const routes: Routes = [
   {
@@ -29,7 +29,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'current-user',
-        component: ManageCurrentUserListComponent,
+        component: SelfUserListComponent,
       },
       {
         path: 'user-detail',
@@ -67,9 +67,6 @@ export const routes: Routes = [
     SharedFormOthersModule,
     RequestHeaderInfoComponent,
   ],
-  declarations: [
-    ManageCurrentUserListComponent,
-    UserDetailComponent,
-  ],
+  declarations: [SelfUserListComponent, UserDetailComponent],
 })
 export class EServiceELicenseSelfUserModule {}
