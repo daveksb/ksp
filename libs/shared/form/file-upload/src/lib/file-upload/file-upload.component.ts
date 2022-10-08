@@ -28,6 +28,7 @@ export class FileUploadComponent {
   @Input() uploadType: 'button' | 'link' = 'button';
   @Input() isImage = false; // when upload image use public API
   @Input() filename = '';
+  @Input() fileid = '';
   @Input() showDeleteFile = false;
   @Output() uploadComplete = new EventEmitter<any>();
 
@@ -97,11 +98,10 @@ export class FileUploadComponent {
   }
 
   deleteFile() {
-    const group = this.file;
     const payload = {
-      id: group.fileid,
+      id: this.fileid,
       requesttype: this.requestType,
-      uniquetimestamp: this.uniqueTimestamp ?? group?.uniqueTimestamp,
+      uniquetimestamp: this.uniqueTimestamp,
     };
 
     this.uploadService.deleteFile(payload).subscribe((res: any) => {
