@@ -277,7 +277,7 @@ export const eLicenseMenu: MenuConfig[] = [
           'ใบคำขอรหัสเข้าใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
       },
       {
-        path: '/self-user/current-user',
+        path: '/self/current-user',
         label: 'ผู้ใช้งานระบบบริการด้วยตนเอง (self Service)',
       },
       {

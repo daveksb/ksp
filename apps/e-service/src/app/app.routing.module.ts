@@ -162,7 +162,7 @@ const routes: EthicsCustomRoute[] = [
   },
 
   {
-    path: 'self-user',
+    path: 'self',
     data: {
       menuConfig: eLicenseMenu,
       headerLabel: 'ผู้ใช้งานระบบบริการด้วยตนเอง',
