@@ -326,6 +326,7 @@ export class SelfServiceHomePageComponent implements AfterViewInit {
 export const column = [
   'order',
   'requestno',
+  'requesttype',
   'requestdate',
   'name',
   'paymentStatus',

@@ -16,6 +16,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./register-step-one.component.scss'],
 })
 export class RegisterStepOneComponent implements OnInit {
+  prefixList$!: Observable<any>;
   nationalitys$!: Observable<any>;
   provinces$!: Observable<any>;
   amphurs$!: Observable<any>;
@@ -56,6 +57,7 @@ export class RegisterStepOneComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.prefixList$ = this.generalInfoService.getPrefix();
     this.nationalitys$ = this.generalInfoService.getNationality();
     this.provinces$ = this.addressService.getProvinces();
   }

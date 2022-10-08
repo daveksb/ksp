@@ -3,9 +3,11 @@
     <div class="box-header">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
     <hr />
     <div class="bg-light p-3">
-      <ksp-basic-institute-search
-        formControlName="institution"
-      ></ksp-basic-institute-search>
+      <ng-container *ngIf="showInstitution">
+        <ksp-basic-institute-search
+          formControlName="institution"
+        ></ksp-basic-institute-search
+      ></ng-container>
 
       <div class="row mb-2">
         <div class="col">

@@ -1,6 +1,6 @@
 <ksp-top-nav>
-  <span header>{{ headers[pageType][0] }}</span>
-  <span subHeader>{{ headers[pageType][1] }}</span>
+  <span header>ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (Self Service)</span>
+  <span subHeader>ข้อมูลผู้เข้าใช้งานระบบ Self Service</span>
 </ksp-top-nav>
 
 <div [formGroup]="form" class="bg-secondary bg-opacity-10 px-4 py-2">
@@ -12,75 +12,93 @@
       [requestNumber]="requestNo"
     ></ksp-request-header-info>
     <hr />
-    <div class="px-4 py-2">
+
+    <div class="bg-light px-4 py-2">
+      <div class="box-header">ข้อมูลผู้ใช้งานระบบ</div>
+      <div class="row mb-2">
+        <div class="col-6">
+          <label class="form-label required">หมายเลขบัตรประชาชน</label>
+          <input type="text" class="form-control" disabled />
+        </div>
+      </div>
       <div class="row">
-        <div class="col mb-3">
-          <label class="form-label">สังกัด</label>
-          <select class="form-select">
-            <option value="null" selected hidden disabled>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+        <div class="col-3 mb-2">
+          <label class="form-label required">คำนำหน้าชื่อภาษาไทย</label>
+          <select class="form-select" disabled>
+            <option disabled selected hidden value="null">กรุณาเลือก</option>
+            <option value="1">นาย</option>
+            <option value="2">นาง</option>
+            <option value="3">นางสาว</option>
           </select>
         </div>
 
-        <div class="col mb-3">
-          <label class="form-label">หน่วยงาน/สถานศึกษา</label>
-          <select class="form-select">
+        <div class="col mb-2">
+          <label class="form-label required">ชื่อภาษาไทย</label>
+          <input type="text" class="form-control" disabled />
+        </div>
+
+        <div class="col mb-2">
+          <label class="form-label required">นามสกุลภาษาไทย</label>
+          <input type="text" class="form-control" disabled />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-3 mb-2">
+          <label class="form-label required">คำนำหน้าชื่อภาษาอังกฤษ</label>
+          <select class="form-select" disabled>
+            <option disabled selected hidden value="null">กรุณาเลือก</option>
+            <option value="1">Mr.</option>
+            <option value="2">Mrs.</option>
+            <option value="3">Miss</option>
+          </select>
+        </div>
+
+        <div class="col mb-2">
+          <label class="form-label required">ชื่อภาษาอังกฤษ</label>
+          <input type="text" class="form-control" disabled />
+        </div>
+
+        <div class="col mb-2">
+          <label class="form-label required">นามสกุลภาษาอังกฤษ</label>
+          <input type="text" class="form-control" disabled />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col mb-2">
+          <label class="form-label required">วันเดือนปีเกิด</label>
+          <input type="date" class="form-control" disabled />
+        </div>
+        <div class="col mb-2">
+          <label class="form-label required">สัญชาติ</label>
+          <select class="form-select" disabled>
             <option value="null" selected hidden disabled>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <!--  <option
+              *ngFor="let n of nationalitys$ | async"
+              [value]="n.nationId"
+            >
+              {{ n.nationName }}
+            </option> -->
           </select>
         </div>
       </div>
 
-      <div class="mb-3">
-        <label class="form-label">ที่อยู่</label>
-        <select class="form-select">
-          <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
+      <div class="row">
+        <div class="col mb-2">
+          <label class="form-label required">เบอร์โทร</label>
+          <input type="text" class="form-control" disabled />
+        </div>
+        <div class="col mb-2">
+          <label class="form-label required">อีเมล</label>
+          <input type="email" class="form-control" disabled />
+        </div>
       </div>
-    </div>
-
-    <div class="bg-light px-4 py-2">
-      <div class="box-header">
-        ข้อมูลผู้ขอเข้ารหัสสำหรับเข้าใช้งานระบบ (ผู้ประสานงาน)
-      </div>
-      <ksp-form-user-info
-        [isDarkMode]="false"
-        [mode]="'view'"
-        [displayMode]="[0]"
-        [prefixList]="prefixList$ | async"
-        formControlName="userInfo"
-      ></ksp-form-user-info>
-      <!--
-        [nationalitys]="nationalitys$ | async" -->
-      <!-- <ksp-form-requester-info [mode]="'view'"></ksp-form-requester-info> -->
     </div>
     <br />
-    <div class="bg-light px-4 py-2">
-      <div class="box-header">
-        ข้อมูลผู้มีอำนาจแต่งตั้ง (ที่ระบุไว้ในเอกสารแนบ)
-      </div>
-      <ksp-form-user-info
-        [isDarkMode]="false"
-        [mode]="'view'"
-        [displayMode]="[0]"
-        [prefixList]="prefixList$ | async"
-        formControlName="coordinatorInfo"
-      ></ksp-form-user-info>
-      <!-- <ksp-form-coordinator-info [mode]="'view'"></ksp-form-coordinator-info> -->
-    </div>
-    <br />
-    <ksp-form-attachment
-      [title]="'หลักฐานเพื่อพิจารณา'"
-      mode="view"
-      [groups]="[{ name: 'หนังสือแต่งตั้ง', fileId: '' }]"
-    ></ksp-form-attachment>
+    <ksp-form-address [mode]="'view'" [isDarkMode]="false"
+      ><span>ที่อยู่ปัจจุบัน </span></ksp-form-address
+    >
   </div>
   <br />
   <div [formGroup]="form2" class="bg-white p-4">
@@ -91,7 +109,6 @@
     ></e-service-license-check>
   </div>
 </div>
-
 <div class="sticky-bottom border">
   <ksp-bottom-nav
     [isFirstPage]="true"
