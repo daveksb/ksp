@@ -42,7 +42,7 @@ export class SubstituteLicenseApproveListComponent implements AfterViewInit {
   search(params: any) {
     const payload = {
       systemtype: 1, // self service
-      requesttype: 2, // ใบคำขอต่อใบอนุญาต
+      requesttype: 4, // ใบคำขอใบแทน
       requestno: '',
       firstnameth: '',
       idcardno: '',
