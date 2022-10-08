@@ -80,10 +80,7 @@ export class ForeignLicenseStepTwoComponent
 
   override form = this.fb.group({
     id: [],
-    passportno: [
-      null,
-      [Validators.required, Validators.pattern(passportPattern)],
-    ],
+    passportno: [null, [Validators.required]],
     prefixen: [null, Validators.required],
     firstnameen: [
       null,
@@ -94,13 +91,13 @@ export class ForeignLicenseStepTwoComponent
       null,
       [Validators.required, Validators.pattern(nameEnPattern)],
     ],
-    sex: [null, Validators.required],
     birthdate: [null, Validators.required],
     nationality: [null, Validators.required],
     addressForm: [],
     workplaceForm: [],
     academicForm: [],
     grantionLicenseForm: [],
+    licensureInfoForm: [],
   });
 
   constructor(

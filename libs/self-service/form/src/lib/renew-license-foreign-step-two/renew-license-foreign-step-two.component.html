@@ -6,7 +6,7 @@
     </div>
     <div class="row mb-3">
       <div class="col">
-        <label class="form-label">Status</label>
+        <label class="form-label required">Status</label>
 
         <select formControlName="educationType" class="form-select">
           <option selected hidden disabled value="null">Please Choose</option>
@@ -18,11 +18,13 @@
     </div>
 
     <ng-container *ngIf="selectedEducationType === 0">
-      <self-service-renew-license-foreign-teacher></self-service-renew-license-foreign-teacher>
+      <self-service-renew-license-foreign-teacher formControlName="educationLevelForm">
+      </self-service-renew-license-foreign-teacher>
     </ng-container>
 
     <ng-container *ngIf="selectedEducationType === 1">
-      <self-service-renew-license-foreign-non-teacher></self-service-renew-license-foreign-non-teacher>
+      <self-service-renew-license-foreign-non-teacher formControlName="educationLevelForm">
+      </self-service-renew-license-foreign-non-teacher>
     </ng-container>
   </div>
 </form>

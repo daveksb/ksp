@@ -2,8 +2,7 @@
   <button
     (click)="fileUpload.click()"
     type="button"
-    class="btn btn-sm btn-primary w-auto"
-  >
+    class="btn btn-sm btn-primary w-auto">
     + {{ buttonLabel }}
   </button>
 </ng-container>
@@ -18,18 +17,14 @@
   type="file"
   (click)="fileUpload.value = ''"
   (change)="onFileSelected($event)"
-  #fileUpload
-/>
+  #fileUpload />
 
 <span
   *ngIf="showUploadedFileName"
-  class="fs-6 text-secondary text-decoration-underline ms-2"
-  >{{ fileName }}</span
->
+  class="fs-6 text-secondary text-decoration-underline ms-2">{{ fileName }}</span>
 
 <i
-  *ngIf="showDeleteFile && file && !isImage"
+  *ngIf="showDeleteFile && fileName && !isImage"
   (click)="deleteFile()"
   class="bi bi-x-circle-fill text-danger fs-6 ms-2"
-  role="button"
-></i>
+  role="button"></i>
