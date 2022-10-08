@@ -29,8 +29,8 @@ import * as _ from 'lodash';
 const WORKING_INFO_FILES = [
   {
     name: '1.รางวัลอื่นและประกาศเกียรติคุณ',
-    fileId: '',
-    fileName: '',
+    fileid: '',
+    filename: '',
   },
 ];
 

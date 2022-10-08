@@ -62,10 +62,10 @@ export class RequestRewardFormComponent extends KspFormBaseComponent {
   });
 
   rewardFiles = [
-    { name: 'แบบ นร. 1', fileId: '' },
-    { name: 'แบบ นร.2', fileId: '' },
-    { name: 'เอกสารอื่นๆ', fileId: '' },
-    { name: 'บันทึกนำส่งจากสถานศึกษา', fileId: '' },
+    { name: 'แบบ นร. 1', fileid: '' },
+    { name: 'แบบ นร.2', fileid: '' },
+    { name: 'เอกสารอื่นๆ', fileid: '' },
+    { name: 'บันทึกนำส่งจากสถานศึกษา', fileid: '' },
   ];
 
   rewards = rewards;

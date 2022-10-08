@@ -28,8 +28,8 @@ export class RenewLicensePropertySupervisionComponent
   /* const WORKING_INFO_FILES = [
   {
     name: '1.รางวัลอื่นและประกาศเกียรติคุณ',
-    fileId: '',
-    fileName: '',
+    fileid: '',
+    filename: '',
   },
 ]; */
 

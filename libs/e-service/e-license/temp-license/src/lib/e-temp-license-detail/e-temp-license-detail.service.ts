@@ -76,7 +76,7 @@ export class TempLicenseDetailService {
   evidenceFiles = [
     {
       name: '1.สำเนาสัญญาจ้าง',
-      fileId: '',
+      fileid: '',
     },
   ];
 }
