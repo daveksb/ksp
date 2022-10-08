@@ -30,7 +30,7 @@ import {
 import {
   formatCheckboxData,
   formatDate,
-  mapFileInfo,
+  mapMultiFileInfo,
   parseJson,
   replaceEmptyWithNull,
   thaiDate,
@@ -189,10 +189,10 @@ export class SchoolRequestComponent implements OnInit {
     console.log('create request = ');
     const baseForm = this.fb.group(new SchoolRequest());
     const formData: any = this.form.getRawValue();
-    const tab3 = mapFileInfo(this.eduFiles);
-    const tab4 = mapFileInfo(this.teachingFiles);
-    const tab5 = mapFileInfo(this.reasonFiles);
-    const tab6 = mapFileInfo(this.attachFiles);
+    const tab3 = mapMultiFileInfo(this.eduFiles);
+    const tab4 = mapMultiFileInfo(this.teachingFiles);
+    const tab5 = mapMultiFileInfo(this.reasonFiles);
+    const tab6 = mapMultiFileInfo(this.attachFiles);
     formData.addr1.addresstype = 1;
     formData.addr2.addresstype = 2;
 
@@ -300,10 +300,10 @@ export class SchoolRequestComponent implements OnInit {
       visaenddate: userInfo.visaenddate,
     };
 
-    const tab3 = mapFileInfo(this.eduFiles);
-    const tab4 = mapFileInfo(this.teachingFiles);
-    const tab5 = mapFileInfo(this.reasonFiles);
-    const tab6 = mapFileInfo(this.attachFiles);
+    const tab3 = mapMultiFileInfo(this.eduFiles);
+    const tab4 = mapMultiFileInfo(this.teachingFiles);
+    const tab5 = mapMultiFileInfo(this.reasonFiles);
+    const tab6 = mapMultiFileInfo(this.attachFiles);
 
     const payload = {
       ...replaceEmptyWithNull(userInfo),
@@ -468,25 +468,24 @@ export class SchoolRequestComponent implements OnInit {
     this.form.controls.reasoninfo.patchValue(res);
   }
   patchFileInfo(res: any) {
-    if (res && res.tab3) {
-      this.patchFileId(this.eduFiles, res.tab3);
+    if (res && res.tab3 && Array.isArray(res.tab3)) {
+      this.eduFiles.forEach((group, index) => (group.files = res.tab3[index]));
     }
-    if (res && res.tab4) {
-      this.patchFileId(this.teachingFiles, res.tab4);
+    if (res && res.tab4 && Array.isArray(res.tab4)) {
+      this.teachingFiles.forEach(
+        (group, index) => (group.files = res.tab4[index])
+      );
     }
-    if (res && res.tab5) {
-      this.patchFileId(this.reasonFiles, res.tab5);
+    if (res && res.tab5 && Array.isArray(res.tab5)) {
+      this.reasonFiles.forEach(
+        (group, index) => (group.files = res.tab5[index])
+      );
     }
-    if (res && res.tab5) {
-      this.patchFileId(this.attachFiles, res.tab6);
+    if (res && res.tab6 && Array.isArray(res.tab6)) {
+      this.attachFiles.forEach(
+        (group, index) => (group.files = res.tab6[index])
+      );
     }
-  }
-  patchFileId(fileList: any, tab: any) {
-    for (let i = 0; i < fileList.length; i++) {
-      fileList[i].fileid = tab[i]?.fileid;
-      fileList[i].filename = tab[i]?.filename;
-    }
-    return fileList;
   }
   patchHiringInfo(data: any) {
     this.form.controls.hiringinfo.patchValue(data);
