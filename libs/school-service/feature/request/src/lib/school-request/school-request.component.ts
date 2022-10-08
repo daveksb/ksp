@@ -365,8 +365,8 @@ export class SchoolRequestComponent implements OnInit {
   checkButtonsDisableStatus() {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
       //console.log('userInfo valid = ', this.form.controls.userInfo.valid);
-      //console.log('form valid = ', this.form.valid);
-      //console.log('this.currentProcess = ', this.currentProcess);
+      // console.log('form valid = ', this.form.valid);
+      // console.log('this.currentProcess = ', this.currentProcess);
       // สถานะ ยกเลิก disable ทุกอย่าง
       if (this.requestStatus === 0) {
         this.disableTempSave = true;
@@ -441,8 +441,9 @@ export class SchoolRequestComponent implements OnInit {
   patchTeachingInfo(res: any) {
     //console.log('teaching response= ', res);
     //if (!res.teachingLevel) return;
+    if (!res) return;
     const teachingLevel = levels.map((level) => {
-      if (res.teachingLevel?.includes(level.value)) {
+      if (res?.teachingLevel?.includes(level.value)) {
         return level.value;
       } else {
         return false;
@@ -528,9 +529,9 @@ export class SchoolRequestComponent implements OnInit {
           this.patchHiringInfo(parseJson(res.hiringinfo));
         } else {
           // search not found reset form and set idcard again
-          this.form.reset();
-          const temp: any = { idcardno: idCard };
-          this.form.controls.userInfo.patchValue(temp);
+          // this.form.reset();
+          // const temp: any = { idcardno: idCard };
+          // this.form.controls.userInfo.patchValue(temp);
         }
       });
   }
