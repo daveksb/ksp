@@ -15,15 +15,7 @@ import { AuthGuard } from './auth.guard';
 const routes: EthicsCustomRoute[] = [
   { path: 'login', component: EServiceLoginComponent },
   { path: 'landing', component: LandingPageComponent },
-  /* {
-    path: 'request-license',
-    data: { menuConfig: licenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
-    loadChildren: () =>
-      import('@ksp/e-service/e-license/license-approve').then(
-        (m) => m.EServiceELicenseLicenseApproveModule
-      ),
-    canActivate: [AuthGuard],
-  }, */
+
   {
     path: 'request-license',
     data: { menuConfig: eLicenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
@@ -48,6 +40,15 @@ const routes: EthicsCustomRoute[] = [
     loadChildren: () =>
       import('@ksp/e-service/e-license/document-delivery').then(
         (m) => m.EServiceELicenseDocumentDeliveryModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'qualification',
+    data: { menuConfig: eLicenseMenu, headerLabel: 'ระบบออกใบอนุญาต' },
+    loadChildren: () =>
+      import('@ksp/e-service/e-license/qualification-approve').then(
+        (m) => m.EServiceELicenseQualificationApproveModule
       ),
     canActivate: [AuthGuard],
   },
@@ -160,9 +161,8 @@ const routes: EthicsCustomRoute[] = [
       ),
     canActivate: [AuthGuard],
   },
-
   {
-    path: 'self-user',
+    path: 'self',
     data: {
       menuConfig: eLicenseMenu,
       headerLabel: 'ผู้ใช้งานระบบบริการด้วยตนเอง',
@@ -173,7 +173,6 @@ const routes: EthicsCustomRoute[] = [
       ),
     canActivate: [AuthGuard],
   },
-
   {
     path: 'one-school-one-innovation',
     data: {
@@ -187,7 +186,6 @@ const routes: EthicsCustomRoute[] = [
       ),
     canActivate: [AuthGuard],
   },
-
   {
     path: 'refund',
     data: { menuConfig: refundFeeMenu, headerLabel: 'ขอคืนเงินค่าธรรมเนียม' },
@@ -197,7 +195,6 @@ const routes: EthicsCustomRoute[] = [
       ),
     canActivate: [AuthGuard],
   },
-
   {
     path: 'import-test',
     data: { menuConfig: standardMenu, headerLabel: 'ขอคืนเงินค่าธรรมเนียม' },
@@ -207,7 +204,6 @@ const routes: EthicsCustomRoute[] = [
       ),
     canActivate: [AuthGuard],
   },
-
   {
     path: 'import-performance',
     data: { menuConfig: standardMenu, headerLabel: 'ขอคืนเงินค่าธรรมเนียม' },

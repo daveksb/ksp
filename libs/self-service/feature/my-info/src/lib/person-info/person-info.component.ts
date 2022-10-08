@@ -26,6 +26,8 @@ export class PersonInfoComponent implements OnInit {
   imgSrc = '';
 
   form = this.fb.group({
+    prefixth: ['', Validators.required],
+    prefixen: ['', Validators.required],
     firstnameth: ['', [Validators.required, Validators.pattern(nameThPattern)]],
     lastnameth: ['', [Validators.required, Validators.pattern(nameThPattern)]],
     firstnameen: ['', [Validators.required, Validators.pattern(nameEnPattern)]],
@@ -42,6 +44,7 @@ export class PersonInfoComponent implements OnInit {
   });
 
   baseForm = this.fb.group(new SelfMyInfo());
+  prefixList$!: Observable<any>;
   provinces$!: Observable<any>;
   nationalitys$!: Observable<any>;
   uniqueTimestamp!: string;
@@ -56,6 +59,7 @@ export class PersonInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.uniqueTimestamp = uuidv4();
+    this.prefixList$ = this.generalInfoService.getPrefix();
     this.provinces$ = this.addressService.getProvinces();
     this.nationalitys$ = this.generalInfoService.getNationality();
     this.myInfoService.getMyInfo().subscribe((res) => {

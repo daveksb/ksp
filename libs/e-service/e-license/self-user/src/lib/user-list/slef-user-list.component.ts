@@ -10,10 +10,10 @@ import {
 import { ERequestService } from '@ksp/shared/service';
 
 @Component({
-  templateUrl: './manage-current-user-list.component.html',
-  styleUrls: ['./manage-current-user-list.component.scss'],
+  templateUrl: './self-user-list.component.html',
+  styleUrls: ['./self-user-list.component.scss'],
 })
-export class ManageCurrentUserListComponent implements AfterViewInit {
+export class SelfUserListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   form = this.fb.group({
@@ -22,7 +22,6 @@ export class ManageCurrentUserListComponent implements AfterViewInit {
 
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<any>();
-
   selectedUniversity = '';
 
   constructor(
@@ -60,7 +59,7 @@ export class ManageCurrentUserListComponent implements AfterViewInit {
   }
 
   goToDetail(id: number) {
-    this.router.navigate(['/school', 'user-detail', id], {
+    this.router.navigate(['/self', 'user-detail', id], {
       queryParams: { type: SchoolServiceUserPageType.ManageCurrentUser },
     });
   }
@@ -71,7 +70,7 @@ export const column = [
   'view',
   'idcardno',
   'name',
-  'schoolname',
+  //schoolname',
   //'province',
   'requeststatus',
   'requestdate',

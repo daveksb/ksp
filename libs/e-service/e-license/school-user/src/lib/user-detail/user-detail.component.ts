@@ -111,6 +111,8 @@ export class UserDetailComponent implements OnInit {
     }; */
 
   approveUser() {
+    // change process and status of SCH_REQUEST
+
     const newUser = new SchoolUser();
 
     newUser.idcardno = this.requestData.idcardno;
@@ -160,6 +162,7 @@ export class UserDetailComponent implements OnInit {
 
   unApproveUser() {
     console.log('un approve = ');
+    // change process and status of SCH_REQUEST
   }
 
   completeDialog() {
