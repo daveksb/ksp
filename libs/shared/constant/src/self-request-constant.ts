@@ -1,5 +1,33 @@
 import { RequestProcess } from './ksp-constant';
 
+export const selfOccupyList = [
+  {
+    systemId: 1,
+    id: 1,
+    name: 'ครู',
+  },
+  {
+    systemId: 1,
+    id: 2,
+    name: 'ผู้บริหารสถานศึกษา',
+  },
+  {
+    systemId: 1,
+    id: 3,
+    name: 'ผู้บริหารการศึกษา',
+  },
+  {
+    systemId: 1,
+    id: 4,
+    name: 'ศึกษานิเทศก์',
+  },
+  {
+    systemId: 1,
+    id: 5,
+    name: 'อื่นๆ',
+  },
+];
+
 export const SelfRequestProcess: RequestProcess[] = [
   //ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ
   {

@@ -18,7 +18,7 @@ export const eLicenseMenu: MenuConfig[] = [
         label: 'บัญชีรายชื่อและผลการนำเสนอขอใบอนุญาตประกอบวิชาชีพ',
       }, */
       {
-        path: '/request-license/approve-detail',
+        path: '/xxx',
         label: 'พิจารณารับรองใบอนุญาตประกอบวิชาชีพ',
       },
     ],

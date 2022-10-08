@@ -8,13 +8,11 @@
     <div class="box-header">รายการใบคำขอใบอนุญาตประกอบวิชาชีพ</div>
     <div class="bg-white px-3 py-3">
       <div class="mb-3">
-        <ksp-school-request-search
+        <ksp-e-service-license-search
           formControlName="search"
-          [disableRequestType]="false"
-          [requestTypeList]="requestTypeList"
           (clear)="clear()"
-          (search)="search()"
-        ></ksp-school-request-search>
+          (search)="search($event)"
+        ></ksp-e-service-license-search>
       </div>
       <div class="box-header">รายการยื่นใบคำขอ</div>
       <div class="table__scroll">

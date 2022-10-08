@@ -123,22 +123,12 @@ export class RequestLicenseApproveDetailComponent implements OnInit {
 const choices = [
   [
     {
-      name: 'อนุมัติ',
+      name: 'ครบถ้วน และถูกต้อง',
       value: 2,
     },
     {
-      name: 'ไม่อนุมัติ',
+      name: 'ไม่ครบถ้วน และถูกต้อง',
       value: 3,
-    },
-  ],
-  [
-    {
-      name: 'ใช้งาน',
-      value: 1,
-    },
-    {
-      name: 'ไม่ใช้งาน',
-      value: 2,
     },
   ],
 ];

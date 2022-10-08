@@ -18,11 +18,11 @@ import {
 } from '@ksp/shared/form/others';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
-import { RequestSearchComponent } from '@ksp/shared/search';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TempLicenseApproveListComponent } from './temp-license-approve-list/temp-license-approve-list.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { RequestSearchComponent } from '@ksp/shared/search';
 
 @NgModule({
   imports: [
@@ -37,11 +37,11 @@ import { ThaiDatePipe } from '@ksp/shared/pipe';
     MatTableModule,
     MatIconModule,
     LicenseCheckComponent,
-    RequestSearchComponent,
     ReactiveFormsModule,
     FormTempLicenseNumberComponent,
     MatPaginatorModule,
     ThaiDatePipe,
+    RequestSearchComponent,
   ],
   declarations: [
     ETempLicenseListComponent,

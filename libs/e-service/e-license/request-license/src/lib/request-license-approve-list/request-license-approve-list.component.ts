@@ -40,7 +40,7 @@ export class RequestLicenseApproveListComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  search() {
+  search(params: any) {
     const payload = {
       systemtype: 1, // self service
       requesttype: 1, // ใบคำขอใบอนุญาต

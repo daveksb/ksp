@@ -14,6 +14,7 @@ import {
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
 import {
+  EServiceLicenseSearchComponent,
   EServiceRequestSearchComponent,
   RequestSearchComponent,
 } from '@ksp/shared/search';
@@ -36,6 +37,10 @@ export const routes: Route[] = [
       {
         path: 'approve-list',
         component: RequestLicenseApproveListComponent,
+      },
+      {
+        path: 'approve-detail',
+        component: RequestLicenseApproveDetailComponent,
       },
       {
         path: 'approve-detail/:id',
@@ -64,6 +69,7 @@ export const routes: Route[] = [
     MatPaginatorModule,
     RequestSearchComponent,
     ThaiDatePipe,
+    EServiceLicenseSearchComponent,
   ],
   declarations: [
     RequestLicenseApproveListComponent,

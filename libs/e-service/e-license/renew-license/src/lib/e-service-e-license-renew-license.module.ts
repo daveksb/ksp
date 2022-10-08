@@ -14,6 +14,7 @@ import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { RenewLicenseListComponent } from './renew-license-list/renew-license-list.component';
 import {
+  EServiceLicenseSearchComponent,
   EServiceRequestSearchComponent,
   RequestSearchComponent,
 } from '@ksp/shared/search';
@@ -40,6 +41,10 @@ export const routes: Route[] = [
         path: 'approve-detail',
         component: RenewLicenseDetailComponent,
       },
+      {
+        path: 'approve-detail/:id',
+        component: RenewLicenseDetailComponent,
+      },
     ],
   },
 ];
@@ -62,6 +67,7 @@ export const routes: Route[] = [
     RequestSearchComponent,
     MatPaginatorModule,
     ThaiDatePipe,
+    EServiceLicenseSearchComponent,
   ],
   declarations: [RenewLicenseDetailComponent, RenewLicenseListComponent],
   exports: [RenewLicenseDetailComponent, RenewLicenseListComponent],

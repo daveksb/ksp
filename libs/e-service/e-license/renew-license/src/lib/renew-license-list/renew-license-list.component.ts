@@ -24,7 +24,7 @@ export class RenewLicenseListComponent implements AfterViewInit {
   checkStatus = checkStatus;
 
   form = this.fb.group({
-    search: [{ requesttype: '3' }],
+    search: [],
   });
 
   constructor(
@@ -40,10 +40,10 @@ export class RenewLicenseListComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  search() {
+  search(params: any) {
     const payload = {
       systemtype: 1, // self service
-      requesttype: 1, // ใบคำขอใบอนุญาต
+      requesttype: 2, // ใบคำขอต่อใบอนุญาต
       requestno: '',
       firstnameth: '',
       idcardno: '',
@@ -64,7 +64,7 @@ export class RenewLicenseListComponent implements AfterViewInit {
   }
 
   goToDetail(id: number) {
-    this.router.navigate(['/request-license', 'approve-detail', id]);
+    this.router.navigate(['/renew-license', 'approve-detail', id]);
   }
 
   clear() {
