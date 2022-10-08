@@ -3,8 +3,15 @@ import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { EsSearchPayload, SelfRequest } from '@ksp/shared/interface';
+import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
+import { EsSearchPayload, SchoolRequest } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
+import {
+  applyClientFilter,
+  checkProcess,
+  checkRequestType,
+  checkStatus,
+} from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-foreign-license-list',
@@ -15,16 +22,21 @@ export class ForeignLicenseListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   form = this.fb.group({
-    foreignSearch: [],
+    search: [{ requesttype: '4' }],
   });
 
   displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<SelfRequest>();
+  dataSource = new MatTableDataSource<SchoolRequest>();
+  checkProcess = checkProcess;
+  checkRequestType = checkRequestType;
+  checkStatus = checkStatus;
+  requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
+  SchoolRequestSubType = SchoolRequestSubType;
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private requestService: ERequestService
+    private eRequestService: ERequestService
   ) {}
 
   ngAfterViewInit(): void {
@@ -32,23 +44,32 @@ export class ForeignLicenseListComponent implements AfterViewInit {
   }
 
   search(params: any) {
+    //console.log('params = ', params);
     const payload: EsSearchPayload = {
       systemtype: '2',
-      requesttype: '',
+      requesttype: '4',
       offset: '0',
       row: '500',
     };
-    this.requestService.EsSearchRequest(payload).subscribe((res) => {
-      this.dataSource.data = res;
+
+    this.eRequestService.EsSearchRequest(payload).subscribe((res) => {
+      if (res) {
+        const result = applyClientFilter(res, params);
+        this.dataSource.data = result;
+      } else {
+        this.clear();
+      }
     });
   }
 
   clear() {
     this.dataSource.data = [];
+    this.form.reset();
+    this.form.controls.search.patchValue({ requesttype: '3' });
   }
 
-  nextPage(id: number) {
-    this.router.navigate(['/foreign-license', 'detail', id], {
+  goToDetail(item: SchoolRequest) {
+    this.router.navigate(['/foreign-license', 'detail', item.id], {
       queryParams: { type: 0 },
     });
   }
@@ -56,13 +77,15 @@ export class ForeignLicenseListComponent implements AfterViewInit {
 
 export const column = [
   'id',
+  'edit',
   'requestno',
-  'passportno',
+  'idcardno',
   'name',
-  //'schoolname',
-  //'provience',
+  'subtype',
+  'currentprocess',
   'requeststatus',
   'updatedate',
   'requestdate',
-  'view',
+  'reqDoc',
+  'approveDoc',
 ];

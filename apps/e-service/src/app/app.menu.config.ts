@@ -13,10 +13,10 @@ export const eLicenseMenu: MenuConfig[] = [
         path: '/request-license/approve-list',
         label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
       },
-      {
-        path: '/request-license/approve-detail',
+      /* {
+        path: '/xxx',
         label: 'บัญชีรายชื่อและผลการนำเสนอขอใบอนุญาตประกอบวิชาชีพ',
-      },
+      }, */
       {
         path: '/request-license/approve-detail',
         label: 'พิจารณารับรองใบอนุญาตประกอบวิชาชีพ',
@@ -31,15 +31,15 @@ export const eLicenseMenu: MenuConfig[] = [
     subMenuName: 'license-foreign',
     subMenu: [
       {
-        path: '/license/list',
+        path: '/request-license/approve-list',
         label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
       },
-      {
-        path: '/license/list',
+      /* {
+        path: '/xxx',
         label: 'บัญชีรายชื่อและผลการนำเสนอขอใบอนุญาตประกอบวิชาชีพ',
-      },
+      }, */
       {
-        path: '/license/approve-list',
+        path: '/xxx',
         label: 'พิจารณารับรองใบอนุญาตประกอบวิชาชีพ',
       },
     ],
@@ -60,12 +60,12 @@ export const eLicenseMenu: MenuConfig[] = [
         path: '/renew-license/approve-list',
         label: 'รายการใบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
       },
-      {
-        path: '/renew-license/approve-list',
+      /* {
+        path: '/xxx',
         label: 'บัญชีรายชื่อและผลการนำเสนอขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
-      },
+      }, */
       {
-        path: '/renew-license/approve-detail',
+        path: '/xxx',
         label: 'พิจารณารับรองใบอนุญาตประกอบวิชาชีพ',
       },
     ],
@@ -81,12 +81,12 @@ export const eLicenseMenu: MenuConfig[] = [
         path: '/renew-license/approve-list',
         label: 'รายการใบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
       },
-      {
-        path: '/renew-license/approve-list',
+      /* {
+        path: '/xxx',
         label: 'บัญชีรายชื่อและผลการนำเสนอขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
-      },
+      }, */
       {
-        path: '/renew-license/approve-detail',
+        path: '/xxx',
         label: 'พิจารณารับรองใบอนุญาตประกอบวิชาชีพ',
       },
     ],
@@ -102,13 +102,13 @@ export const eLicenseMenu: MenuConfig[] = [
         path: '/temp-license/list',
         label: 'รายการใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
       },
-      {
-        path: '/temp-license/list',
+      /* {
+        path: '/xxx',
         label:
           'บัญชีรายชื่อและผลการนำเสนอขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
-      },
+      }, */
       {
-        path: '/temp-license/approve-list',
+        path: '/xxx',
         label: 'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
       },
     ],
@@ -124,13 +124,13 @@ export const eLicenseMenu: MenuConfig[] = [
         path: '/temp-license/list',
         label: 'รายการใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
       },
-      {
-        path: '/temp-license/list',
+      /* {
+        path: '/xxx',
         label:
           'บัญชีรายชื่อและผลการนำเสนอขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
-      },
+      }, */
       {
-        path: '/temp-license/approve-list',
+        path: '/xxx',
         label: 'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
       },
     ],
@@ -143,11 +143,11 @@ export const eLicenseMenu: MenuConfig[] = [
     subMenuName: 'edit-thai',
     subMenu: [
       {
-        path: '/foreign-license/list',
+        path: '/xxx',
         label: 'รายการใบคำขอแก้ไข/เปลี่ยนแปลงใบอนุญาต',
       },
       {
-        path: '/temp-license/approve-detail',
+        path: '/xxx',
         label: 'พิจารณาขอเปลี่ยนแปลง/แก้ใบอนุญาต',
       },
     ],
@@ -160,7 +160,7 @@ export const eLicenseMenu: MenuConfig[] = [
     subMenuName: 'edit-foreign',
     subMenu: [
       {
-        path: '/foreign-license/list',
+        path: '/xxx',
         label: 'รายการใบคำขอแก้ไข/เปลี่ยนแปลงใบอนุญาต',
       },
       {
@@ -181,7 +181,7 @@ export const eLicenseMenu: MenuConfig[] = [
         label: 'รายการใบคำขอใบแทนใบอนุญาตประกอบวิชาชีพ',
       },
       {
-        path: '/temp-license/approve-detail',
+        path: '/xxx',
         label: 'พิจารณาขอใบแทนใบอนุญาตประกอบวิชาชีพ',
       },
     ],
@@ -215,7 +215,7 @@ export const eLicenseMenu: MenuConfig[] = [
         label: 'รายการใบคำเลขคุรุสภาสำหรับชาวต่างชาติ',
       },
       {
-        path: '/temp-license/approve-detail',
+        path: '/xxx',
         label: 'พิจารณาขอเลขคุรุสภาสำหรับชาวต่างชาติ',
       },
     ],
@@ -249,7 +249,7 @@ export const eLicenseMenu: MenuConfig[] = [
         label: 'รายการใบคำขอยื่นกรอกกิจกรรมพัฒนาตนเอง',
       },
       {
-        path: '/temp-license/approve-detail',
+        path: '/xxx',
         label: 'พิจารณากิจกรรมพัฒนาตนเอง',
       },
     ],

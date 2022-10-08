@@ -1,26 +1,70 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
+import { SelfRequest } from '@ksp/shared/interface';
+import { ERequestService } from '@ksp/shared/service';
+import { checkProcess, checkStatus } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-renew-license-list',
   templateUrl: './renew-license-list.component.html',
   styleUrls: ['./renew-license-list.component.scss'],
 })
-export class RenewLicenseListComponent implements OnInit {
+export class RenewLicenseListComponent implements AfterViewInit {
   displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<any>();
+  dataSource = new MatTableDataSource<SelfRequest>();
+  SchoolRequestSubType = SchoolRequestSubType;
 
-  constructor(private router: Router) {}
+  requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
+  checkProcess = checkProcess;
+  checkStatus = checkStatus;
 
-  ngOnInit(): void {}
+  form = this.fb.group({
+    search: [{ requesttype: '3' }],
+  });
 
-  view() {
-    this.router.navigate(['/renew-license', 'approve-detail']);
+  constructor(
+    private router: Router,
+    private requestService: ERequestService,
+    private fb: FormBuilder
+  ) {}
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
   }
 
   search() {
-    this.dataSource.data = data;
+    const payload = {
+      systemtype: 1, // self service
+      requesttype: 1, // ใบคำขอใบอนุญาต
+      requestno: '',
+      firstnameth: '',
+      idcardno: '',
+      currentprocess: '',
+      requestdate: '',
+      offset: '0',
+      row: '1000',
+    };
+    this.requestService.searchSelfRequest(payload).subscribe((res) => {
+      this.dataSource.data = res;
+      this.dataSource.sort = this.sort;
+
+      const sortState: Sort = { active: 'id', direction: 'desc' };
+      this.sort.active = sortState.active;
+      this.sort.direction = sortState.direction;
+      this.sort.sortChange.emit(sortState);
+    });
+  }
+
+  goToDetail(id: number) {
+    this.router.navigate(['/request-license', 'approve-detail', id]);
   }
 
   clear() {
@@ -28,38 +72,17 @@ export class RenewLicenseListComponent implements OnInit {
   }
 }
 
-export const column = ['id', 'name', 'view'];
-
-export interface PersonLicense1 {
-  id: number;
-  name: string;
-  licenseType: string;
-}
-
-export const data: PersonLicense1[] = [
-  {
-    id: 1,
-    name: 'ครู',
-    licenseType: 'license',
-  },
-  {
-    id: 2,
-    name: 'บริหารสถานศึกษา',
-    licenseType: 'renew-license',
-  },
-  {
-    id: 3,
-    name: 'บริหารการศึกษา',
-    licenseType: 'edit-license',
-  },
-  {
-    id: 4,
-    name: 'ศึกษานิเทศก์',
-    licenseType: 'sub-license',
-  },
-  {
-    id: 5,
-    name: 'ชาวต่างชาติ',
-    licenseType: 'knowledge-cert',
-  },
+export const column = [
+  'id',
+  'edit',
+  'requestno',
+  'idcardno',
+  'name',
+  'subtype',
+  'currentprocess',
+  'requeststatus',
+  'updatedate',
+  'requestdate',
+  'reqDoc',
+  'approveDoc',
 ];

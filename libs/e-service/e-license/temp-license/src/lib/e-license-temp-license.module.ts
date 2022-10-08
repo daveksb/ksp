@@ -22,6 +22,7 @@ import { RequestSearchComponent } from '@ksp/shared/search';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TempLicenseApproveListComponent } from './temp-license-approve-list/temp-license-approve-list.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ReactiveFormsModule,
     FormTempLicenseNumberComponent,
     MatPaginatorModule,
+    ThaiDatePipe,
   ],
   declarations: [
     ETempLicenseListComponent,

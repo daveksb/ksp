@@ -11,35 +11,46 @@
       รายละเอียดใบคำขอรับรองคุณวุฒิการศึกษาเพื่อใช้ในการขอรับใบอนุญาตประกอบวิชาชีพ
     </div>
 
-    <div class="bg-white">
-      <ksp-request-search
-        formControlName="foreignSearch"
-        (clear)="clear()"
-        (search)="search()"
-      ></ksp-request-search>
-
+    <div class="bg-white px-3 py-3">
+      <div class="mb-3">
+        <ksp-school-request-search
+          formControlName="search"
+          [disableRequestType]="false"
+          [requestTypeList]="requestTypeList"
+          (clear)="clear()"
+          (search)="search($event)"
+        ></ksp-school-request-search>
+      </div>
       <div class="box-header px-3">รายการยื่นใบคำขอ</div>
-      <div class="px-3 py-2">
-        <table mat-table [dataSource]="dataSource">
+      <div class="table__scroll">
+        <table mat-table [dataSource]="dataSource" matSort>
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-            <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+            <td mat-cell *matCellDef="let element; let i = index">
+              {{
+                paginator.pageIndex === 0
+                  ? i + 1
+                  : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+              }}
+            </td>
           </ng-container>
 
-          <ng-container matColumnDef="view">
+          <ng-container matColumnDef="edit">
             <th mat-header-cell *matHeaderCellDef>ตรวจสอบ</th>
             <td mat-cell *matCellDef="let element">
               <i
                 role="button"
-                (click)="next()"
-                class="bi bi-eye text-primary fs-5"
+                class="bi bi-file-earmark-check text-primary fs-5"
+                (click)="goToDetail(element)"
               ></i>
             </td>
           </ng-container>
 
           <ng-container matColumnDef="requestno">
             <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
-            <td mat-cell *matCellDef="let element">{{ element.requestno }}</td>
+            <td mat-cell *matCellDef="let element">
+              {{ element.requestno }}
+            </td>
           </ng-container>
 
           <ng-container matColumnDef="idcardno">
@@ -50,42 +61,31 @@
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.name }}
+              {{ element.firstnameth }} {{ element.lastnameth }}
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="profession">
+          <ng-container matColumnDef="subtype">
             <th mat-header-cell *matHeaderCellDef>ประเภทวิชาชีพ</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.profession }}
+              {{ SchoolRequestSubType[+element.subtype] }}
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="artification">
-            <th mat-header-cell *matHeaderCellDef>สังกัด</th>
+          <ng-container matColumnDef="currentprocess">
+            <th mat-header-cell *matHeaderCellDef>ขั้นตอนการดำเนินการ</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.artification }}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="schoolname">
-            <th mat-header-cell *matHeaderCellDef>สถานศึกษา</th>
-            <td mat-cell *matCellDef="let element">
-              {{ element.schoolname }}
+              {{ checkProcess(+element.currentprocess)?.processName }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="requeststatus">
-            <th mat-header-cell *matHeaderCellDef>ขั้นตอนดำเนินการ</th>
-            <td mat-cell *matCellDef="let element">
-              {{ element.requeststatus }}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef>สถานะ</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.status }}
+              {{
+                checkStatus(+element.currentprocess, +element.requeststatus)
+                  ?.ename
+              }}
             </td>
           </ng-container>
 
@@ -93,14 +93,34 @@
             <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
             <th></th>
             <td mat-cell *matCellDef="let element">
-              {{ element.updatedate }}
+              {{ element.updatedate | thaiDate }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="requestdate">
             <th mat-header-cell *matHeaderCellDef>วันที่ยื่นใบคำขอ</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.requestdate }}
+              {{ element.requestdate | thaiDate }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="reqDoc">
+            <th mat-header-cell *matHeaderCellDef>ใบคำขอ</th>
+            <td mat-cell *matCellDef="let element">
+              <i
+                role="button"
+                class="bi bi-file-earmark-text-fill text-primary fs-5"
+              ></i>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="approveDoc">
+            <th mat-header-cell *matHeaderCellDef>ใบอนุญาต</th>
+            <td mat-cell *matCellDef="let element">
+              <i
+                role="button"
+                class="bi bi-file-earmark-text-fill text-primary fs-5"
+              ></i>
             </td>
           </ng-container>
 
@@ -108,12 +128,8 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
 
-        <!-- <mat-paginator
-          [pageSizeOptions]="[10]"
-          showFirstLastButtons
-          aria-label="Select page of periodic elements"
-        >
-        </mat-paginator> -->
+        <mat-paginator [pageSizeOptions]="[25]" showFirstLastButtons>
+        </mat-paginator>
       </div>
     </div>
   </div>

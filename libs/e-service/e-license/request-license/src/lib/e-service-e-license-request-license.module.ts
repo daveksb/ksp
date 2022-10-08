@@ -13,11 +13,15 @@ import {
 } from '@ksp/self-service/form';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
-import { EServiceRequestSearchComponent } from '@ksp/shared/search';
+import {
+  EServiceRequestSearchComponent,
+  RequestSearchComponent,
+} from '@ksp/shared/search';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { RequestLicenseApproveDetailComponent } from './request-license-approve-detail/request-license-approve-detail.component';
 import { MatSortModule } from '@angular/material/sort';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
 
 export const routes: Route[] = [
   {
@@ -58,6 +62,8 @@ export const routes: Route[] = [
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    RequestSearchComponent,
+    ThaiDatePipe,
   ],
   declarations: [
     RequestLicenseApproveListComponent,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import { thaiDate } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
@@ -26,7 +27,18 @@ export class QualificationApproveDetailComponent implements OnInit {
   countries$!: Observable<any>;
   nationalitys$!: Observable<any>;
 
-  constructor() {}
+  form = this.fb.group({
+    userInfo: [],
+    addr1: [],
+    addr2: [],
+    edu1: [],
+    edu2: [],
+    edu3: [],
+    edu4: [],
+    checkResult: this.fb.array([]),
+  });
+
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {}
 }
