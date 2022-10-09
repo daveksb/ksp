@@ -20,7 +20,8 @@
       #stepper>
       <mat-step [completed]="false">
         <ng-template matStepLabel>Check Documentation </ng-template>
-        <self-service-foreign-license-step-one></self-service-foreign-license-step-one>
+        <self-service-foreign-license-step-one formControlName="foreignCheckDocument">
+        </self-service-foreign-license-step-one>
       </mat-step>
 
       <mat-step [completed]="false">
@@ -39,6 +40,7 @@
       <mat-step [completed]="false">
         <ng-template matStepLabel>Documents and evidence required</ng-template>
         <self-service-foreign-license-step-three
+          formControlName="foreignSelectUpload"
           [uniqueTimestamp]="uniqueTimestamp"
           [attachFiles]="documentFiles">
         </self-service-foreign-license-step-three>

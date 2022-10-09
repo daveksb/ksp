@@ -93,6 +93,7 @@ export class ForeignLicenseStepTwoComponent
     ],
     birthdate: [null, Validators.required],
     nationality: [null, Validators.required],
+    foreignpassporttype: [null, Validators.required],
     addressForm: [],
     workplaceForm: [],
     academicForm: [],

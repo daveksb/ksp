@@ -74,8 +74,8 @@ export class RenewLicenseForeignComponent implements OnInit {
             console.log(res);
             this.requestData = res;
             this.requestNo = res.requestno;
-            this.currentProcess = Number(res.currentprocess);
-            this.uniqueTimestamp = res.uniquetimestamp || '';
+            this.currentProcess = Number(res.process);
+            this.uniqueTimestamp = res.uniqueno || '';
             console.log(this.uniqueTimestamp);
 
             this.patchData(res);
