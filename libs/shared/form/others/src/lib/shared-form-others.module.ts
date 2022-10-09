@@ -16,13 +16,17 @@ import { FormHiringInfoComponent } from './form-hiring-info/form-hiring-info.com
 import { FormVisaInfoComponent } from './form-visa-info/form-visa-info.component';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 import { FormMultiAttachmentComponent } from './form-multi-attachment/form-multi-attachment.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    MatDatepickerModule,
     MatIconModule,
     MatCheckboxModule,
+    MatNativeDateModule,
     RequestHeaderInfoComponent,
     FileUploadComponent,
   ],
