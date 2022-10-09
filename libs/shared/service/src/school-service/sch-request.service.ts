@@ -28,6 +28,14 @@ export class RequestService {
     );
   }
 
+  // new table
+  schUpdateRequest(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspstaff/ksprequestupdate`,
+      payload
+    );
+  }
+
   createRequest(form: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspstaff/schrequestinsert`,

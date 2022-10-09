@@ -18,7 +18,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
-import { KspRequest, SchoolRequest } from '@ksp/shared/interface';
+import { KspRequest, SchoolRequest, UserInfoForm } from '@ksp/shared/interface';
 
 import {
   AddressService,
@@ -45,7 +45,7 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./school-request.component.scss'],
 })
 export class SchoolRequestComponent implements OnInit {
-  uniqueTimestamp!: string; // use for file upload reference, gen only first time component loaded
+  uniqueNo!: string; // use for file upload reference, gen only first time component loaded
   pageType = RequestPageType;
 
   countries$!: Observable<any>;
@@ -67,10 +67,10 @@ export class SchoolRequestComponent implements OnInit {
 
   systemType = '2'; // school service
   requestType = '3';
-  requestSubType = SchoolRequestSubType.ครู; // 1 ไทย 2 ผู้บริหาร 3 ต่างชาติ
+  careerType = SchoolRequestSubType.ครู; // 1 ไทย 2 ผู้บริหาร 3 ต่างชาติ
   requestLabel = '';
   requestNo: string | null = '';
-  currentProcess!: number;
+  requestProcess!: number;
   requestStatus!: number;
 
   disableTempSave = true;
@@ -140,7 +140,7 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.uniqueTimestamp = uuidv4();
+    this.uniqueNo = uuidv4();
     this.getList();
     this.checkRequestId();
     this.checkRequestSubType();
@@ -151,23 +151,21 @@ export class SchoolRequestComponent implements OnInit {
     this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
       this.form.reset();
       if (Number(params['subtype'])) {
-        this.requestSubType = Number(params['subtype']);
+        this.careerType = Number(params['subtype']);
       }
 
-      if (this.requestSubType === SchoolRequestSubType.อื่นๆ) {
+      if (this.careerType === SchoolRequestSubType.อื่นๆ) {
         this.userInfoFormType = UserInfoFormType.foreign;
       } else {
         this.userInfoFormType = UserInfoFormType.thai;
       }
 
-      if (this.requestSubType == SchoolRequestSubType.ครู) {
+      if (this.careerType == SchoolRequestSubType.ครู) {
         this.requestLabel = SchoolRequestSubType[SchoolRequestSubType.ครู];
-      } else if (
-        this.requestSubType == SchoolRequestSubType.ผู้บริหารสถานศึกษา
-      ) {
+      } else if (this.careerType == SchoolRequestSubType.ผู้บริหารสถานศึกษา) {
         this.requestLabel =
           SchoolRequestSubType[SchoolRequestSubType.ผู้บริหารสถานศึกษา];
-      } else if (this.requestSubType == SchoolRequestSubType.อื่นๆ) {
+      } else if (this.careerType == SchoolRequestSubType.อื่นๆ) {
         this.requestLabel = SchoolRequestSubType[SchoolRequestSubType.อื่นๆ];
       }
     });
@@ -212,7 +210,7 @@ export class SchoolRequestComponent implements OnInit {
 
     userInfo.systemtype = `${this.systemType}`;
     userInfo.requesttype = `${this.requestType}`;
-    userInfo.careertype = `${this.requestSubType}`;
+    userInfo.careertype = `${this.careerType}`;
 
     const teaching: any = this.form.controls.teachinginfo.value;
     let teachingInfo = {};
@@ -264,19 +262,20 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   updateRequest(type: string) {
-    const baseForm = this.fb.group(new SchoolRequest());
+    const baseForm = this.fb.group(new KspRequest());
     const formData: any = this.form.getRawValue();
-    const userInfo = formData.userInfo;
-    userInfo.currentprocess = `1`;
+    const userInfo: UserInfoForm = formData.userInfo;
+
+    /* userInfo.currentprocess = `1`;
     userInfo.requeststatus = `1`;
     userInfo.systemtype = `${this.systemType}`;
     userInfo.requesttype = `${this.requestType}`;
-    userInfo.subtype = `${this.requestSubType}`;
+    userInfo.subtype = `${this.requestSubType}`; */
 
-    if (this.requestSubType === SchoolRequestSubType.อื่นๆ) {
+    /*     if (this.careerType === SchoolRequestSubType.อื่นๆ) {
       userInfo.passportenddate = formatDate(userInfo.passportenddate);
       userInfo.passportstartdate = formatDate(userInfo.passportstartdate);
-    }
+    } */
 
     const teaching: any = this.form.controls.teachinginfo.value;
     let teachingInfo = {};
@@ -294,11 +293,11 @@ export class SchoolRequestComponent implements OnInit {
       };
     }
 
-    const visaInfo = {
+    /*     const visaInfo = {
       visaclass: userInfo.visaclass,
       visatype: userInfo.visatype,
       visaenddate: userInfo.visaenddate,
-    };
+    }; */
 
     const tab3 = mapMultiFileInfo(this.eduFiles);
     const tab4 = mapMultiFileInfo(this.teachingFiles);
@@ -311,7 +310,7 @@ export class SchoolRequestComponent implements OnInit {
       ...{ eduinfo: JSON.stringify([formData.edu1, formData.edu2]) },
       ...{ teachinginfo: JSON.stringify(teachingInfo) },
       ...{ hiringinfo: JSON.stringify(formData.hiringinfo) },
-      ...{ visainfo: JSON.stringify(visaInfo) },
+      //...{ visainfo: JSON.stringify(visaInfo) },
       ...{ schooladdrinfo: JSON.stringify(formData.schoolAddr) },
       ...{ reasoninfo: JSON.stringify(formData.reasoninfo) },
       ...{ fileinfo: JSON.stringify({ tab3, tab4, tab5, tab6 }) },
@@ -319,27 +318,19 @@ export class SchoolRequestComponent implements OnInit {
 
     baseForm.patchValue(payload);
 
-    const {
-      ref1,
-      ref2,
-      ref3,
-      uniquetimestamp,
-      requestdate,
-      updatedate,
-      requestno,
-      ...temp
-    } = baseForm.value;
+    const { ref1, ref2, ref3, uniqueno, requestdate, requestno, ...temp } =
+      baseForm.value;
 
     const res = replaceEmptyWithNull(temp);
 
     res.id = `${this.requestId}`;
     res.schoolid = this.schoolId;
     if (type === 'submit') {
-      res.currentprocess = `2`;
-      res.requeststatus = '1';
+      res.process = `2`;
+      res.status = '1';
     } else {
-      res.currentprocess = `1`;
-      res.requeststatus = '1';
+      res.process = `1`;
+      res.status = '1';
     }
 
     //console.log('update payload = ', res);
@@ -381,13 +372,13 @@ export class SchoolRequestComponent implements OnInit {
       }
 
       // formValid + สถานะเป็นสร้างใบคำขอ, บันทึกชั่วคราวได้ ส่งใบคำขอได้
-      else if (this.form.valid && this.currentProcess === 1) {
+      else if (this.form.valid && this.requestProcess === 1) {
         this.disableTempSave = false;
         this.disableSave = false;
       }
 
       // formValid + สถานะเป็นสร้างและส่งใบคำขอ, บันทึกชั่วคราวไม่ได้ ส่งใบคำขอไม่ได้
-      else if (this.form.valid && this.currentProcess === 2) {
+      else if (this.form.valid && this.requestProcess === 2) {
         this.disableTempSave = true;
         this.disableSave = true;
       }
@@ -399,7 +390,7 @@ export class SchoolRequestComponent implements OnInit {
 
       // มีหมายเลขใบคำขอแล้ว enable ปุ่มยกเลิก
       if (this.requestId) {
-        if (this.currentProcess === 0) {
+        if (this.requestProcess === 0) {
           this.disableCancel = true;
         } else {
           this.disableCancel = false;
@@ -422,7 +413,7 @@ export class SchoolRequestComponent implements OnInit {
       //this.requestData = res;
       this.requestDate = thaiDate(new Date(`${res.requestdate}`));
       this.requestNo = res.requestno;
-      this.currentProcess = Number(res.process);
+      this.requestProcess = Number(res.process);
       this.requestStatus = Number(res.status);
       //console.log('current process = ', this.currentProcess);
       this.pathUserInfo(res);
@@ -539,7 +530,7 @@ export class SchoolRequestComponent implements OnInit {
   pathUserInfo(data: any) {
     data.birthdate = data?.birthdate?.split('T')[0];
 
-    if (this.requestSubType === SchoolRequestSubType.อื่นๆ) {
+    if (this.careerType === SchoolRequestSubType.อื่นๆ) {
       data.passportstartdate = data.passportstartdate.split('T')[0];
       data.passportenddate = data.passportenddate.split('T')[0];
       //console.log('data = ', data);
@@ -601,7 +592,7 @@ export class SchoolRequestComponent implements OnInit {
     const dialogRef = this.dialog.open(ForbiddenPropertyFormComponent, {
       width: '850px',
       data: {
-        uniqueTimeStamp: this.uniqueTimestamp,
+        uniqueTimeStamp: this.uniqueNo,
       },
     });
 
@@ -614,9 +605,8 @@ export class SchoolRequestComponent implements OnInit {
       });
   }
 
-  tempSaveConfirmDialog() {
+  confirmDialog() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
         //subTitle: ``,
@@ -639,7 +629,6 @@ export class SchoolRequestComponent implements OnInit {
 
   submitConfirmDialog() {
     const dialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
         subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
@@ -666,7 +655,6 @@ export class SchoolRequestComponent implements OnInit {
 
   submitCompleteDialog() {
     const dialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
       data: {
         header: `ระบบทำการบันทึกเรียบร้อยแล้ว
         สามารถตรวจสอบสถานะภายใน
@@ -686,7 +674,6 @@ export class SchoolRequestComponent implements OnInit {
 
   cancelConfirmDialog() {
     const dialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `คุณต้องการยกเลิกรายการใบคำขอ
         ใช่หรือไม่? `,
@@ -704,7 +691,6 @@ export class SchoolRequestComponent implements OnInit {
 
   cancelDoneDialog() {
     const dialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
       data: {
         header: `ยกเลิกใบคำขอสำเร็จ`,
         buttonLabel: 'กลับสู่หน้าหลัก',
@@ -722,7 +708,6 @@ export class SchoolRequestComponent implements OnInit {
 
   tempSaveComplete() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
       data: {
         header: `บันทึกใบคำขอชั่วคราวสำเร็จ`,
         buttonLabel: 'กลับสู่หน้าหลัก',

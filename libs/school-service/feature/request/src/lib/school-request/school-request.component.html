@@ -27,7 +27,7 @@
         </div>
 
         <!--
-        <div class="row mb-2" *ngIf="!requestId && requestSubType !== 5">
+        <div class="row mb-2" *ngIf="!requestId && careerType !== 5">
           <div class="col-5">
             <label class="form-label">หมายเลขบัตรประชาชน</label>
             <input
@@ -49,7 +49,7 @@
           </div>
         </div> -->
 
-        <!-- <div class="row mb-2" *ngIf="!requestId && requestSubType === 5">
+        <!-- <div class="row mb-2" *ngIf="!requestId && careerType === 5">
           <div class="col-5">
             <label class="form-label"
               >หมายเลขหนังสือเดินทาง (Passport Number)</label
@@ -133,7 +133,7 @@
         </mat-tab>
 
         <mat-tab label="ข้อมูลทางการศึกษา">
-          <ng-container *ngIf="requestSubType === 1">
+          <ng-container *ngIf="careerType === 1">
             <ksp-form-education-info
               [showCheckbox]="false"
               formControlName="edu1"
@@ -162,7 +162,7 @@
             ><br
           /></ng-container>
 
-          <ng-container *ngIf="requestSubType === 2">
+          <ng-container *ngIf="careerType === 2">
             <div class="d-flex align-items-center">
               <input type="checkbox" class="me-2" [formControl]="option1" />
               <label class="fs-5">วุฒิการศึกษาปริญญาตรี</label>
@@ -180,7 +180,7 @@
               </ksp-form-education-info></ng-container
           ></ng-container>
 
-          <ng-container *ngIf="requestSubType === 5">
+          <ng-container *ngIf="careerType === 5">
             <div class="d-flex align-items-center">
               <input type="checkbox" class="me-2" [formControl]="option1" />
               <label class="fs-5">วุฒิการศึกษาปริญญาตรี</label>
@@ -199,7 +199,7 @@
               </ksp-form-education-info></ng-container
           ></ng-container>
 
-          <ng-container *ngIf="requestSubType === 2 || requestSubType === 5">
+          <ng-container *ngIf="careerType === 2 || careerType === 5">
             <div class="d-flex align-items-center mt-3">
               <input type="checkbox" class="me-2" [formControl]="option2" />
               <label class="fs-5">วุฒิประกาศนียบัตรระดับบัณฑิตศึกษา</label>
@@ -217,7 +217,7 @@
               </ksp-form-education-info></ng-container
           ></ng-container>
 
-          <ng-container *ngIf="requestSubType === 2 || requestSubType === 5">
+          <ng-container *ngIf="careerType === 2 || careerType === 5">
             <div class="d-flex align-items-center mt-3">
               <input type="checkbox" class="me-2" [formControl]="option3" />
               <label class="fs-5">วุฒิปริญญาโท</label>
@@ -236,7 +236,7 @@
               </ksp-form-education-info></ng-container
           ></ng-container>
 
-          <ng-container *ngIf="requestSubType === 2 || requestSubType === 5">
+          <ng-container *ngIf="careerType === 2 || careerType === 5">
             <div class="d-flex align-items-center mt-3">
               <input type="checkbox" class="me-2" [formControl]="option4" />
               <label class="fs-5">วุฒิปริญญาเอก</label>
@@ -255,7 +255,7 @@
               </ksp-form-education-info></ng-container
           ></ng-container>
 
-          <ng-container *ngIf="requestSubType === 2 || requestSubType === 5">
+          <ng-container *ngIf="careerType === 2 || careerType === 5">
             <div class="d-flex align-items-center mt-3">
               <input type="checkbox" class="me-2" [formControl]="option5" />
               <label class="fs-5">วุฒิการศึกษาอื่นๆ</label>
@@ -274,7 +274,7 @@
               </ksp-form-education-info> </ng-container
           ></ng-container>
 
-          <ng-container *ngIf="requestSubType === 2">
+          <ng-container *ngIf="careerType === 2">
             <div class="d-flex align-items-center mt-3">
               <input type="checkbox" class="me-2" [formControl]="option6" />
               <label class="fs-5"
@@ -294,7 +294,7 @@
             ><br
           /></ng-container>
 
-          <ng-container *ngIf="requestSubType === 5">
+          <ng-container *ngIf="careerType === 5">
             <div class="d-flex align-items-center mt-3">
               <input type="checkbox" class="me-2" [formControl]="option6" />
               <label class="fs-5">ใบอนุญาตประกอบวิชาชีพครูจากต่างประเทศ </label>
@@ -312,14 +312,14 @@
         </mat-tab>
 
         <mat-tab label="ข้อมูลการสอนและการจ้าง">
-          <ng-container *ngIf="requestSubType === 1 || requestSubType === 5">
+          <ng-container *ngIf="careerType === 1 || careerType === 5">
             <ksp-form-teaching-info
               formControlName="teachinginfo"
             ></ksp-form-teaching-info
             ><br />
           </ng-container>
 
-          <ng-container *ngIf="requestSubType === 2">
+          <ng-container *ngIf="careerType === 2">
             <ksp-form-teaching-info-manager></ksp-form-teaching-info-manager
             ><br
           /></ng-container>
@@ -342,13 +342,13 @@
         </mat-tab>
 
         <mat-tab label="ข้อมูลชี้แจงเหตุผล">
-          <ng-container *ngIf="requestSubType === 1 || requestSubType === 5">
+          <ng-container *ngIf="careerType === 1 || careerType === 5">
             <ksp-form-reason-info
               [requestType]="1"
               formControlName="reasoninfo"
             ></ksp-form-reason-info
           ></ng-container>
-          <ng-container *ngIf="requestSubType === 2">
+          <ng-container *ngIf="careerType === 2">
             <ksp-form-reason-info
               [requestType]="2"
               formControlName="reasoninfo"
@@ -378,7 +378,7 @@
   <ksp-bottom-nav
     (prevClicked)="backToListPage()"
     (cancelClicked)="cancelConfirmDialog()"
-    (tempSaveClicked)="tempSaveConfirmDialog()"
+    (tempSaveClicked)="confirmDialog()"
     (saveClicked)="permanentBtnClick()"
     [colorMode]="'green'"
     [isLastPage]="true"
