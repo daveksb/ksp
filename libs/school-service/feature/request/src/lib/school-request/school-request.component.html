@@ -327,8 +327,8 @@
   <ksp-bottom-nav
     (prevClicked)="backToListPage()"
     (cancelClicked)="cancelConfirmDialog()"
-    (tempSaveClicked)="confirmDialog()"
-    (saveClicked)="permanentBtnClick()"
+    (tempSaveClicked)="confirmDialog(1)"
+    (saveClicked)="forbiddenDialog()"
     [colorMode]="'green'"
     [isLastPage]="true"
     [showCenterButtons]="true"
