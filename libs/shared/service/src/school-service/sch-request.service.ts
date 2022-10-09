@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
-import { KspRequest, SchoolRequest } from '@ksp/shared/interface';
+import {
+  KspRequest,
+  SchoolRequest,
+  SchRequestSearchFilter,
+} from '@ksp/shared/interface';
 import { map, Observable, shareReplay } from 'rxjs';
 
 @Injectable({
@@ -11,7 +15,7 @@ export class RequestService {
   constructor(private http: HttpClient) {}
 
   // new table
-  schCreateRequest(payload: any): Observable<any> {
+  schCreateRequest(payload: Partial<KspRequest>): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspstaff/ksprequestinsert`,
       payload
@@ -30,7 +34,7 @@ export class RequestService {
   }
 
   // new table
-  schUpdateRequest(payload: any): Observable<any> {
+  schUpdateRequest(payload: KspRequest): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspstaff/ksprequestupdate`,
       payload
@@ -43,6 +47,16 @@ export class RequestService {
       `${environment.apiUrl}/kspstaff/ksprequestinsertstatus`,
       payload
     );
+  }
+
+  // new table
+  schSearchRequest(payload: SchRequestSearchFilter): Observable<KspRequest[]> {
+    return this.http
+      .post<KspRequest[]>(
+        `${environment.shortApiUrl}/ksprequestsearch_school.php`,
+        payload
+      )
+      .pipe(map((data: any) => data.datareturn));
   }
 
   createRequest(form: any): Observable<any> {
