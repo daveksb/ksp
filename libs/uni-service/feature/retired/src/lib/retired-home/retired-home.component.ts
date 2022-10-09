@@ -47,6 +47,7 @@ export class RetiredHomeComponent implements OnInit {
         unicode: form.searchType?.schoolid,
         uniname: form.searchType?.instituteName
       }
+      this.payload.row = 999;
       delete this.payload.searchType;
       this.search(this.payload);
     }
@@ -56,7 +57,12 @@ export class RetiredHomeComponent implements OnInit {
     this.uniRequestService.searchUniRequest(form).subscribe(res=>{
       console.log(res)
       if (res.returncode == "00" && res.datareturn) {
-        this.data = res.datareturn;
+        this.data = res.datareturn.map((data: any) => {
+          data.permissionname = data.permissionright == '1' 
+          ? 'เจ้าหน้าที่ประสานงาน (รับรองปริญญาและประกาศนียบัตรทางการศึกษา)' :
+          data.permissionright == '1' ? 'เจ้าหน้าที่ประสานงาน (นำส่งรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา​)' : '';
+          return data;
+        });
       } else {
         this.data = [];
       }
