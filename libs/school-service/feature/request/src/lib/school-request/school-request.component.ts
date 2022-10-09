@@ -65,8 +65,8 @@ export class SchoolRequestComponent implements OnInit {
   requestData!: SchoolRequest;
   requestDate: string = thaiDate(new Date());
 
-  systemType = '2'; // school service
-  requestType = '3';
+  //systemType = '2'; // school service
+  //requestType = '3';
   careerType = SchoolRequestSubType.ครู; // 1 ไทย 2 ผู้บริหาร 3 ต่างชาติ
   requestLabel = '';
   requestNo: string | null = '';
@@ -205,12 +205,12 @@ export class SchoolRequestComponent implements OnInit {
     userInfo.process = `${process}`;
     userInfo.status = `1`;
 
-    userInfo.ref1 = `${this.systemType}`;
+    userInfo.ref1 = '2';
     userInfo.ref2 = '03';
     userInfo.ref3 = '1';
 
-    userInfo.systemtype = `${this.systemType}`;
-    userInfo.requesttype = `${this.requestType}`;
+    userInfo.systemtype = '2';
+    userInfo.requesttype = '3';
     userInfo.careertype = `${this.careerType}`;
 
     const teaching: any = this.form.controls.teachinginfo.value;

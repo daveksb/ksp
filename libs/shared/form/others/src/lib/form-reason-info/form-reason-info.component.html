@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <ng-container *ngIf="requestType === 1">
+    <ng-container *ngIf="careerType === 1 || careerType === 5">
       <ng-container *ngFor="let item of schoolReason1">
         <div class="d-flex align-items-center mb-2">
           <input
@@ -29,7 +29,7 @@
         </div>
       </ng-container></ng-container
     >
-    <ng-container *ngIf="requestType === 2">
+    <ng-container *ngIf="careerType === 2">
       <ng-container *ngFor="let item of schoolReason2">
         <div class="d-flex align-items-center mb-2">
           <input

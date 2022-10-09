@@ -299,18 +299,10 @@
         </mat-tab>
 
         <mat-tab label="ข้อมูลชี้แจงเหตุผล">
-          <ng-container *ngIf="careerType === 1 || careerType === 5">
-            <ksp-form-reason-info
-              [requestType]="1"
-              formControlName="reasoninfo"
-            ></ksp-form-reason-info
-          ></ng-container>
-          <ng-container *ngIf="careerType === 2">
-            <ksp-form-reason-info
-              [requestType]="2"
-              formControlName="reasoninfo"
-            ></ksp-form-reason-info
-          ></ng-container>
+          <ksp-form-reason-info
+            [careerType]="careerType"
+            formControlName="reasoninfo"
+          ></ksp-form-reason-info>
 
           <ksp-form-multi-attachment
             [uniqueTimestamp]="uniqueNo"
