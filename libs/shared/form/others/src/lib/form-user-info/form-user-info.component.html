@@ -53,22 +53,38 @@
 
     <div class="col mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
       <label class="form-label required">วันที่ออก</label>
-      <input
-        class="form-control"
-        type="date"
-        [class.form-control-sp]="isDarkMode"
-        formControlName="passportstartdate"
-      />
+      <div class="d-flex align-items-baseline">
+        <input
+          matInput
+          [matDatepicker]="picker1"
+          autocomplete="off"
+          class="form-control me-2"
+          formControlName="passportstartdate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="picker1"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </div>
     </div>
 
     <div class="col mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
       <label class="form-label required">วันที่หมดอายุ</label>
-      <input
-        class="form-control"
-        type="date"
-        [class.form-control-sp]="isDarkMode"
-        formControlName="passportenddate"
-      />
+      <div class="d-flex align-items-baseline">
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          autocomplete="off"
+          class="form-control me-2"
+          formControlName="passportenddate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="picker2"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </div>
     </div>
   </div>
 
@@ -222,23 +238,20 @@
     </div>
     <div class="col-md mb-2">
       <label class="form-label required">วันเดือนปีเกิด</label>
-      <!-- <input
-        class="form-control"
-        [matDatepicker]="picker"
-        [class.form-control-sp]="isDarkMode"
-        formControlName="birthdate"
-        [max]="today"
-      /> -->
-      <input
-        class="form-control"
-        [class.form-control-sp]="isDarkMode"
-        formControlName="birthdate"
-        matInput
-        [max]="today"
-        [matDatepicker]="picker"
-      />
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+      <div class="d-flex align-items-baseline">
+        <input
+          matInput
+          [matDatepicker]="picker3"
+          autocomplete="off"
+          class="form-control me-2"
+          formControlName="birthdate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="picker3"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker3></mat-datepicker>
+      </div>
     </div>
 
     <div class="col mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
@@ -348,7 +361,20 @@
 
     <div class="col mb-2">
       <label class="form-label">อนุญาตถึงวันที่ </label>
-      <input formControlName="visaenddate" class="form-control" type="date" />
+      <div class="d-flex align-items-baseline">
+        <input
+          matInput
+          [matDatepicker]="picker4"
+          autocomplete="off"
+          class="form-control me-2"
+          formControlName="visaenddate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="picker4"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker4></mat-datepicker>
+      </div>
     </div>
   </div>
 

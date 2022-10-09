@@ -46,11 +46,37 @@
     <div class="row mb-3">
       <div class="col-6">
         <label class="form-label required">วันที่เริ่มปฏิบัติงาน</label>
-        <input class="form-control" type="date" formControlName="startDate" />
+        <div class="d-flex align-items-baseline">
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            autocomplete="off"
+            class="form-control me-2"
+            formControlName="startDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </div>
       </div>
       <div class="col-6">
         <label class="form-label required">วันที่สิ้นสุดการปฏิบัติงาน</label>
-        <input class="form-control" type="date" formControlName="endDate" />
+        <div class="d-flex align-items-baseline">
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            autocomplete="off"
+            class="form-control me-2"
+            formControlName="endDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </div>
       </div>
     </div>
 
@@ -89,11 +115,20 @@
             <label class="form-label text-secondary">{{ item.label }}</label>
           </div>
           <div class="col-3">
-            <input
-              class="form-control"
-              type="date"
-              formControlName="hiringStatusDate"
-            />
+            <div class="d-flex align-items-baseline">
+              <input
+                matInput
+                [matDatepicker]="picker3"
+                autocomplete="off"
+                class="form-control me-2"
+                formControlName="hiringStatusDate"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker3"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker3></mat-datepicker>
+            </div>
           </div>
         </div>
       </ng-container>

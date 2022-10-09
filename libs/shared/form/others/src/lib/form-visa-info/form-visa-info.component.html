@@ -22,7 +22,20 @@
   <div class="row mb-2">
     <div class="col-6">
       <label class="form-label">วันเดือนปีวีซ่าหมดอายุ</label>
-      <input class="form-control" type="date" formControlName="visaenddate" />
+      <div class="d-flex align-items-baseline">
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          autocomplete="off"
+          class="form-control me-2"
+          formControlName="visaenddate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="picker2"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </div>
     </div>
 
     <div class="col-6">
