@@ -3,10 +3,10 @@ import {
   SchoolRequestType,
   SelfRequestProcess,
 } from '@ksp/shared/constant';
-import { FileGroup, SchoolRequest } from '@ksp/shared/interface';
+import { FileGroup } from '@ksp/shared/interface';
 import moment from 'moment';
 
-// return Thai date format, Use in component
+// return Thai date format,
 export function stringToThaiDate(
   sDate: string,
   format = 'DD MMM YYYY'
@@ -17,7 +17,7 @@ export function stringToThaiDate(
     return '-';
   }
 }
-// return Thai date format, Use in component
+// return Thai date format
 export function thaiDate(date: Date): string {
   return date.toLocaleDateString('th-TH', {
     year: 'numeric',
@@ -63,10 +63,97 @@ export function toLowercaseProp(input: any) {
   }, {});
 }
 
-export function applyClientFilter(data: SchoolRequest[], searchParams: any) {
-  //
+export function checkProcess(processId: number) {
+  const process = SchoolRequestProcess.find((p) => {
+    return p.processId === processId && p.requestType === 3;
+  });
+  return process;
+}
+
+export function checkStatus(processId: number, statusId: number) {
+  const process = checkProcess(processId);
+  const status = process?.status.find((s) => {
+    return s.id == statusId;
+  });
+  return status;
+}
+
+export function SelfCheckProcess(processId: number) {
+  const process = SelfRequestProcess.find((p) => {
+    return p.processId === processId;
+  });
+  return process;
+}
+
+export function SelfcheckStatus(processId: number, statusId: number) {
+  //console.log('p = ', processId, ' s = ', statusId);
+  const process = SelfCheckProcess(processId);
+  const status = process?.status.find((s) => {
+    return s.id == statusId;
+  });
+  return status;
+}
+
+export function checkRequestType(RequestTypeId: number) {
+  return SchoolRequestType.find((s) => s.id === RequestTypeId)?.name;
+}
+
+// get file in base 64 format
+export function getBase64(
+  file: File
+): Promise<FileReader['result'] | ProgressEvent<FileReader>> {
+  return new Promise((res, rej) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => res(reader.result);
+    reader.onerror = (error) => rej(error);
+  });
+}
+
+/**
+ *
+ * @param input return correct format date to send to API
+ * @returns
+ */
+export function formatDate(input: string) {
+  return input.split('T')[0];
+}
+
+export function mapFileInfo(fileGroups: any[]) {
+  return fileGroups.map((file: any) => {
+    const object = {
+      fileid: file.fileid || null,
+      filename: file.filename || null,
+    };
+    return object;
+  });
+}
+
+export function mapMultiFileInfo(groups: FileGroup[]) {
+  return groups.map((group) => {
+    return group.files;
+  });
+}
+
+export function jsonParse(object: string): string | null {
+  try {
+    return JSON.parse(object);
+  } catch (e) {
+    return null;
+  }
+}
+
+export function jsonStringify(object: any): string {
+  try {
+    if (typeof object === 'string') return object;
+    return JSON.stringify(object);
+  } catch (e) {
+    return '';
+  }
+}
+
+/* export function applyClientFilter(data: SchoolRequest[], searchParams: any) {
   const { requesttype, ...param } = searchParams;
-  //console.log('param = ', param);
   return data.filter((d) => {
     const filter1 = param.requestno
       ? d.requestno?.includes(param.requestno)
@@ -100,94 +187,4 @@ export function applyClientFilter(data: SchoolRequest[], searchParams: any) {
     );
   });
 }
-
-export function checkProcess(processId: number) {
-  const process = SchoolRequestProcess.find((p) => {
-    return p.processId === processId && p.requestType === 3;
-  });
-  return process;
-}
-
-export function checkStatus(processId: number, statusId: number) {
-  const process = checkProcess(processId);
-  const status = process?.status.find((s) => {
-    return s.id == statusId;
-  });
-  return status;
-}
-
-export function SelfCheckProcess(processId: number) {
-  const process = SelfRequestProcess.find((p) => {
-    return p.processId === processId;
-  });
-  //console.log('process = ', process);
-  return process;
-}
-
-export function SelfcheckStatus(processId: number, statusId: number) {
-  //console.log('p = ', processId, ' s = ', statusId);
-  const process = SelfCheckProcess(processId);
-  const status = process?.status.find((s) => {
-    return s.id == statusId;
-  });
-  console.log(' s = ', status);
-  return status;
-}
-
-export function checkRequestType(RequestTypeId: number) {
-  return SchoolRequestType.find((s) => s.id === RequestTypeId)?.name;
-}
-
-// get file in base 64 format
-export function getBase64(
-  file: File
-): Promise<FileReader['result'] | ProgressEvent<FileReader>> {
-  return new Promise((res, rej) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => res(reader.result);
-    reader.onerror = (error) => rej(error);
-  });
-}
-
-/**
- *
- * @param input return correct format date to send to API
- * @returns
  */
-export function formatDate(input: string) {
-  return input.split('T')[0];
-}
-
-export function mapFileInfo(fileList: any[]) {
-  return fileList.map((file: any) => {
-    const object = {
-      fileid: file.fileid || null,
-      filename: file.filename || null,
-    };
-    return object;
-  });
-}
-
-export function mapMultiFileInfo(groups: FileGroup[]) {
-  return groups.map((group) => {
-    return group.files;
-  });
-}
-
-export function jsonParse(object: string): any {
-  try {
-    return JSON.parse(object);
-  } catch (e) {
-    return null;
-  }
-}
-
-export function jsonStringify(object: any): string {
-  try {
-    if (typeof object === 'string') return object;
-    return JSON.stringify(object);
-  } catch (e) {
-    return '';
-  }
-}
