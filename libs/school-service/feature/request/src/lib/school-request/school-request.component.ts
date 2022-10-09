@@ -174,16 +174,20 @@ export class SchoolRequestComponent implements OnInit {
   cancelRequest() {
     const payload = {
       id: `${this.requestId}`,
-      requeststatus: '0',
+      process: null,
+      status: '0',
+      detail: null,
+      userid: null,
+      paymentstatus: null,
     };
 
-    this.requestService.cancelRequest(payload).subscribe((res) => {
+    this.requestService.schCancelRequest(payload).subscribe(() => {
       //console.log('Cancel request  = ', res);
-      this.cancelDoneDialog();
+      this.completeDialog(`ยกเลิกใบคำขอสำเร็จ`);
     });
   }
 
-  createRequest(type: string) {
+  createRequest(process: number) {
     console.log('create request = ');
     const baseForm = this.fb.group(new KspRequest());
     const formData: any = this.form.getRawValue();
@@ -197,12 +201,7 @@ export class SchoolRequestComponent implements OnInit {
     const { id, ...userInfo } = formData.userInfo;
     userInfo.schoolid = this.schoolId;
     userInfo.status = `1`;
-
-    if (type == 'submit') {
-      userInfo.process = `2`;
-    } else {
-      userInfo.process = `1`;
-    }
+    userInfo.process = `${process}`;
 
     userInfo.ref1 = `${this.systemType}`;
     userInfo.ref2 = '03';
@@ -252,11 +251,15 @@ export class SchoolRequestComponent implements OnInit {
 
     baseForm.patchValue(payload);
     //console.log('current form = ', baseForm.value);
-    this.requestService.schCreateRequest(baseForm.value).subscribe((res) => {
-      if (type == 'submit') {
-        this.submitCompleteDialog();
-      } else {
-        this.backToListPage();
+    this.requestService.schCreateRequest(baseForm.value).subscribe(() => {
+      // บันทึกและยื่น
+      if (process === 2) {
+        this.completeDialog(`ระบบทำการบันทึกเรียบร้อยแล้ว
+        สามารถตรวจสอบสถานะภายใน
+        3 - 15 วันทำการ`);
+      } else if (process === 1) {
+        // บันทึกชั่วคราว
+        this.completeDialog(`ระบบทำการบันทึกชั่วคราวเรียบร้อยแล้ว`);
       }
     });
   }
@@ -550,7 +553,6 @@ export class SchoolRequestComponent implements OnInit {
     const checked = evt.target.checked;
     this.amphurs2$ = this.amphurs1$;
     this.tumbols2$ = this.tumbols1$;
-
     if (checked) {
       this.form.controls.addr2.patchValue(this.form.controls.addr1.value);
     }
@@ -621,7 +623,7 @@ export class SchoolRequestComponent implements OnInit {
           if (this.requestId) {
             this.updateRequest('temp');
           } else {
-            this.createRequest('temp');
+            this.createRequest(1);
           }
         }
       });
@@ -641,33 +643,13 @@ export class SchoolRequestComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         if (res) {
-          // this.confirmCompleted();
-          // ถ้ามี request id เปลี่ยนสถานะ
-          // ถ้ายังไม่มี request id insert new row
           if (this.requestId) {
+            // ถ้ามี request id เปลี่ยนสถานะ
             this.updateRequest('submit');
           } else {
-            this.createRequest('submit');
+            // ถ้ายังไม่มี request id insert new row
+            this.createRequest(2);
           }
-        }
-      });
-  }
-
-  submitCompleteDialog() {
-    const dialog = this.dialog.open(CompleteDialogComponent, {
-      data: {
-        header: `ระบบทำการบันทึกเรียบร้อยแล้ว
-        สามารถตรวจสอบสถานะภายใน
-        3 - 15 วันทำการ`,
-        buttonLabel: 'กลับสู่หน้าหลัก',
-      },
-    });
-
-    dialog.componentInstance.completed
-      .pipe(untilDestroyed(this))
-      .subscribe((res) => {
-        if (res) {
-          this.backToListPage();
         }
       });
   }
@@ -689,32 +671,15 @@ export class SchoolRequestComponent implements OnInit {
       });
   }
 
-  cancelDoneDialog() {
+  completeDialog(header: string) {
     const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
-        header: `ยกเลิกใบคำขอสำเร็จ`,
+        header,
         buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 
     dialog.componentInstance.completed
-      .pipe(untilDestroyed(this))
-      .subscribe((res) => {
-        if (res) {
-          this.backToListPage();
-        }
-      });
-  }
-
-  tempSaveComplete() {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      data: {
-        header: `บันทึกใบคำขอชั่วคราวสำเร็จ`,
-        buttonLabel: 'กลับสู่หน้าหลัก',
-      },
-    });
-
-    completeDialog.componentInstance.completed
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         if (res) {

@@ -20,11 +20,12 @@ export class RequestService {
 
   // new table
   schGetRequestById(id: number): Observable<KspRequest> {
+    const payload = {
+      id: `${id}`,
+    };
     return this.http.post<KspRequest>(
       `${environment.apiUrl}/kspstaff/ksprequestselectbyid`,
-      {
-        id: `${id}`,
-      }
+      payload
     );
   }
 
@@ -32,6 +33,14 @@ export class RequestService {
   schUpdateRequest(payload: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspstaff/ksprequestupdate`,
+      payload
+    );
+  }
+
+  // new table
+  schCancelRequest(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspstaff/ksprequestinsertstatus`,
       payload
     );
   }
