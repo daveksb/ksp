@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
-import { SchoolRequest } from '@ksp/shared/interface';
+import { KspRequest, SchoolRequest } from '@ksp/shared/interface';
 import { map, Observable, shareReplay } from 'rxjs';
 
 @Injectable({
@@ -9,6 +9,24 @@ import { map, Observable, shareReplay } from 'rxjs';
 })
 export class RequestService {
   constructor(private http: HttpClient) {}
+
+  // new table
+  schCreateRequest(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspstaff/ksprequestinsert`,
+      payload
+    );
+  }
+
+  // new table
+  schGetRequestById(id: number): Observable<KspRequest> {
+    return this.http.post<KspRequest>(
+      `${environment.apiUrl}/kspstaff/ksprequestselectbyid`,
+      {
+        id: `${id}`,
+      }
+    );
+  }
 
   createRequest(form: any): Observable<any> {
     return this.http.post(

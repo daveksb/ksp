@@ -18,7 +18,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
-import { SchoolRequest } from '@ksp/shared/interface';
+import { KspRequest, SchoolRequest } from '@ksp/shared/interface';
 
 import {
   AddressService,
@@ -187,7 +187,7 @@ export class SchoolRequestComponent implements OnInit {
 
   createRequest(type: string) {
     console.log('create request = ');
-    const baseForm = this.fb.group(new SchoolRequest());
+    const baseForm = this.fb.group(new KspRequest());
     const formData: any = this.form.getRawValue();
     const tab3 = mapMultiFileInfo(this.eduFiles);
     const tab4 = mapMultiFileInfo(this.teachingFiles);
@@ -198,12 +198,12 @@ export class SchoolRequestComponent implements OnInit {
 
     const { id, ...userInfo } = formData.userInfo;
     userInfo.schoolid = this.schoolId;
-    userInfo.requeststatus = `1`;
+    userInfo.status = `1`;
 
     if (type == 'submit') {
-      userInfo.currentprocess = `2`;
+      userInfo.process = `2`;
     } else {
-      userInfo.currentprocess = `1`;
+      userInfo.process = `1`;
     }
 
     userInfo.ref1 = `${this.systemType}`;
@@ -212,7 +212,7 @@ export class SchoolRequestComponent implements OnInit {
 
     userInfo.systemtype = `${this.systemType}`;
     userInfo.requesttype = `${this.requestType}`;
-    userInfo.subtype = `${this.requestSubType}`;
+    userInfo.careertype = `${this.requestSubType}`;
 
     const teaching: any = this.form.controls.teachinginfo.value;
     let teachingInfo = {};
@@ -230,12 +230,12 @@ export class SchoolRequestComponent implements OnInit {
       };
     }
 
-    const visaInfo = {
+    /*     const visaInfo = {
       visaclass: userInfo.visaclass,
       visatype: userInfo.visatype,
       visaenddate: userInfo.visaenddate,
     };
-
+ */
     //console.log('form data = ', formData);
 
     const payload = {
@@ -244,7 +244,7 @@ export class SchoolRequestComponent implements OnInit {
       ...{ eduinfo: JSON.stringify([formData.edu1, formData.edu2]) },
       ...{ teachinginfo: JSON.stringify(teachingInfo) },
       ...{ hiringinfo: JSON.stringify(formData.hiringinfo) },
-      ...{ visainfo: JSON.stringify(visaInfo) },
+      //...{ visainfo: JSON.stringify(visaInfo) },
       ...{ schooladdrinfo: JSON.stringify(formData.schoolAddr) },
       ...{ reasoninfo: JSON.stringify(formData.reasoninfo) },
       ...{ fileinfo: JSON.stringify({ tab3, tab4, tab5, tab6 }) },
@@ -254,7 +254,7 @@ export class SchoolRequestComponent implements OnInit {
 
     baseForm.patchValue(payload);
     //console.log('current form = ', baseForm.value);
-    this.requestService.createRequest(baseForm.value).subscribe((res) => {
+    this.requestService.schCreateRequest(baseForm.value).subscribe((res) => {
       if (type == 'submit') {
         this.submitCompleteDialog();
       } else {
@@ -418,12 +418,12 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   loadRequestFromId(id: number) {
-    this.requestService.getRequestById(id).subscribe((res) => {
-      this.requestData = res;
+    this.requestService.schGetRequestById(id).subscribe((res) => {
+      //this.requestData = res;
       this.requestDate = thaiDate(new Date(`${res.requestdate}`));
       this.requestNo = res.requestno;
-      this.currentProcess = Number(res.currentprocess);
-      this.requestStatus = Number(res.requeststatus);
+      this.currentProcess = Number(res.process);
+      this.requestStatus = Number(res.status);
       //console.log('current process = ', this.currentProcess);
       this.pathUserInfo(res);
       this.patchAddress(parseJson(res.addressinfo));
