@@ -9935,5 +9935,8 @@
       ]
     }
   },
-  "version": 1
+  "version": 1,
+  "cli": {
+    "analytics": false
+  }
 }

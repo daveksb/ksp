@@ -201,7 +201,6 @@ export class SchoolRequestComponent implements OnInit {
 
     const { id, ...userInfo } = formData.userInfo;
     userInfo.schoolid = this.schoolId;
-
     userInfo.process = `${process}`;
     userInfo.status = `1`;
 
@@ -465,6 +464,7 @@ export class SchoolRequestComponent implements OnInit {
   patchReasonInfo(res: any) {
     this.form.controls.reasoninfo.patchValue(res);
   }
+
   patchFileInfo(res: any) {
     if (res && res.tab3 && Array.isArray(res.tab3)) {
       this.eduFiles.forEach((group, index) => (group.files = res.tab3[index]));
@@ -540,7 +540,6 @@ export class SchoolRequestComponent implements OnInit {
       data.passportstartdate = data.passportstartdate.split('T')[0];
       data.passportenddate = data.passportenddate.split('T')[0];
       //console.log('data = ', data);
-
       if (data?.visainfo) {
         const visa = parseJson(data?.visainfo);
         data.visaclass = visa.visaclass;
@@ -548,7 +547,6 @@ export class SchoolRequestComponent implements OnInit {
         data.visaenddate = visa.visaenddate;
       }
     }
-
     this.form.controls.userInfo.patchValue(data);
   }
 
@@ -593,7 +591,7 @@ export class SchoolRequestComponent implements OnInit {
     this.router.navigate(['/temp-license', 'list']);
   }
 
-  permanentBtnClick() {
+  forbiddenDialog() {
     const dialogRef = this.dialog.open(ForbiddenPropertyFormComponent, {
       width: '850px',
       data: {
@@ -605,16 +603,28 @@ export class SchoolRequestComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         if (res) {
-          this.submitConfirmDialog();
+          // confirm เพื่อ บันทึกและยื่นใบคำขอ
+          this.confirmDialog(2);
         }
       });
   }
 
-  confirmDialog() {
+  /**
+   *
+   * @param
+   * process = 1 บันทึกชั่วคราว
+   * process = 2 บันทึกและยื่น
+   *
+   */
+  confirmDialog(process: number) {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
-        //subTitle: ``,
+        subTitle:
+          process === 2
+            ? `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
+        ใช่หรือไม่`
+            : '',
         btnLabel: 'บันทึก',
       },
     });
@@ -624,34 +634,9 @@ export class SchoolRequestComponent implements OnInit {
       .subscribe((res) => {
         if (res) {
           if (this.requestId) {
-            this.updateRequest(1);
+            this.updateRequest(process);
           } else {
-            this.createRequest(1);
-          }
-        }
-      });
-  }
-
-  submitConfirmDialog() {
-    const dialog = this.dialog.open(ConfirmDialogComponent, {
-      data: {
-        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
-        subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
-        ใช่หรือไม่`,
-        btnLabel: 'บันทึก',
-      },
-    });
-
-    dialog.componentInstance.confirmed
-      .pipe(untilDestroyed(this))
-      .subscribe((res) => {
-        if (res) {
-          if (this.requestId) {
-            // ถ้ามี request id เปลี่ยนสถานะ
-            this.updateRequest(2);
-          } else {
-            // ถ้ายังไม่มี request id insert new row
-            this.createRequest(2);
+            this.createRequest(process);
           }
         }
       });
