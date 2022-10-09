@@ -8,12 +8,6 @@
       <div class="col mb-2">
         <label class="form-label">สถานศึกษาชี้แจงเหตุผลความจำเป็น</label>
         <label class="text-danger ms-2">* เลือกได้มากกว่า 1 รายการ</label>
-
-        <!-- <input
-          class="form-control"
-          type="text"
-          formControlName="schoolReasonInfo"
-        /> -->
       </div>
     </div>
 
@@ -58,16 +52,10 @@
           ชี้แจงเหตุผลที่ไม่สามารถพัฒนาตนเองได้ตามระยะเวลาที่คุรุสภากำหนด</label
         >
         <label class="text-danger ms-2">* เลือกได้มากกว่า 1 รายการ</label>
-
-        <!-- <input
-          class="form-control"
-          type="text"
-          formControlName="teacherReasonInfo"
-        /> -->
       </div>
     </div>
 
-    <ng-container *ngFor="let item of teacherReason">
+    <ng-container *ngFor="let item of teacherReasons">
       <div class="d-flex align-items-center mb-2">
         <input class="me-2" formControlName="{{ item.name }}" type="checkbox" />
         <label class="form-label">{{ item.label }}</label>

@@ -245,7 +245,7 @@ export class SchoolRequestComponent implements OnInit {
       ...{ hiringinfo: JSON.stringify(formData.hiringinfo) },
       //...{ visainfo: JSON.stringify(visaInfo) },
       ...{ schooladdrinfo: JSON.stringify(formData.schoolAddr) },
-      ...{ reasoninfo: JSON.stringify(formData.reasoninfo) },
+      //...{ reasoninfo: JSON.stringify(formData.reasoninfo) },
       ...{ fileinfo: JSON.stringify({ tab3, tab4, tab5, tab6 }) },
     };
 
@@ -253,7 +253,7 @@ export class SchoolRequestComponent implements OnInit {
 
     baseForm.patchValue(payload);
     //console.log('current form = ', baseForm.value);
-    /*   this.requestService.schCreateRequest(baseForm.value).subscribe(() => {
+    this.requestService.schCreateRequest(baseForm.value).subscribe(() => {
       // บันทึกและยื่น
       if (process === 2) {
         this.completeDialog(`ระบบทำการบันทึกเรียบร้อยแล้ว
@@ -263,7 +263,7 @@ export class SchoolRequestComponent implements OnInit {
         // บันทึกชั่วคราว
         this.completeDialog(`ระบบทำการบันทึกชั่วคราวเรียบร้อยแล้ว`);
       }
-    }); */
+    });
   }
 
   updateRequest(process: number) {

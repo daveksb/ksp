@@ -12,24 +12,12 @@ import { providerFactory } from '@ksp/shared/utility';
 export class FormReasonInfoComponent extends KspFormBaseComponent {
   @Input() careerType = 0;
 
-  teacherReason = teacherReasons;
+  teacherReasons = teacherReasons;
   schoolReason1 = schoolReasons1;
   schoolReason2 = schoolReasons2;
 
   override form = this.fb.group({
-    schoolReasonInfo: [],
-    school1: [false],
-    school2: [false],
-    school3: [false],
-    school4: [false],
     schoolOtherDetail: [],
-    teacherReasonInfo: [],
-    teacher1: [false],
-    teacher2: [false],
-    teacher3: [false],
-    teacher4: [false],
-    teacher5: [false],
-    teacher6: [false],
     teacherOtherDetail: [],
   });
 
