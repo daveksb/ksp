@@ -177,10 +177,10 @@ export class LicenseEditComponent implements OnInit {
       currentProcess
     );
     const allowKey = Object.keys(self);
-    userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
-    userInfo.uniquetimestamp = this.uniqueTimestamp;
-    userInfo.staffid = getCookie('userId');
-    userInfo.birthdate = birthdate?.split('T')[0];
+    self.isforeign = `${SelfServiceRequestForType.ชาวไทย}`;
+    self.uniqueno = this.uniqueTimestamp;
+    self.userid = getCookie('userId');
+    self.birthdate = birthdate?.split('T')[0];
 
     const attachfiles = this.uploadFileList;
 

@@ -155,9 +155,6 @@ export class TransferKnowledgeRequestComponent
 
     const { id, ...rawUserInfo } = formData.userInfo;
     const userInfo = toLowercaseProp(rawUserInfo);
-    userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
-    userInfo.uniquetimestamp = this.uniqueTimestamp;
-    userInfo.staffid = getCookie('userId');
 
     const self = new SelfRequest(
       '1',
@@ -165,6 +162,9 @@ export class TransferKnowledgeRequestComponent
       `${SelfServiceRequestSubType.อื่นๆ}`,
       currentProcess
     );
+    self.isforeign = `${SelfServiceRequestForType.ชาวไทย}`;
+    self.uniqueno = this.uniqueTimestamp;
+    self.userid = getCookie('userId');
     const allowKey = Object.keys(self);
 
     const edufiles = this.eduFiles;

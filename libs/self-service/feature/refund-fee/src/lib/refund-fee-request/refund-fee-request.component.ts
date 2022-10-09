@@ -141,9 +141,9 @@ export class RefundFeeRequestComponent implements OnInit {
     );
     const allowKey = Object.keys(self);
     const userInfo = this.form.controls.userInfo.value as any;
-    userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
-    userInfo.uniquetimestamp = this.uniqueTimestamp;
-    userInfo.staffid = getCookie('userId');
+    self.isforeign = `${SelfServiceRequestForType.ชาวไทย}`;
+    self.uniqueno = this.uniqueTimestamp;
+    self.userid = getCookie('userId');
 
     const attachfiles = this.files;
 
