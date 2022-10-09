@@ -1,125 +1,129 @@
 <ksp-top-nav
-  ><span header>รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ</span></ksp-top-nav
+  ><span header>ยื่นใบคำขอ</span>
+  <span subHeader>ขอใบอนุญาตประกอบวิชาชีพ </span></ksp-top-nav
 >
 
-<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
-  <ksp-request-search
-    (clear)="clear()"
-    (search)="search()"
-  ></ksp-request-search>
-  <br />
-  <div class="bg-white p-3">
-    <div class="box-header">รายการใบคำขอ</div>
-    <div class="table-responsive" style="white-space: nowrap">
-      <table
-        [hidden]="!dataSource.data.length"
-        matSort
-        mat-table
-        [dataSource]="dataSource"
-      >
-        <ng-container matColumnDef="order">
-          <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-          <td mat-cell *matCellDef="let element; let i = index">
-            {{
-              paginator.pageIndex === 0
-                ? i + 1
-                : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
-            }}
-          </td>
-        </ng-container>
+<form [formGroup]="form">
+  <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
+    <div class="box-header">รายการใบคำขอใบอนุญาตประกอบวิชาชีพ</div>
+    <div class="bg-white px-3 py-3">
+      <div class="mb-3">
+        <ksp-e-service-license-search
+          formControlName="search"
+          (clear)="clear()"
+          (search)="search($event)"
+        ></ksp-e-service-license-search>
+      </div>
+      <div class="box-header">รายการยื่นใบคำขอ</div>
+      <div class="table__scroll">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              {{
+                paginator.pageIndex === 0
+                  ? i + 1
+                  : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+              }}
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="requestno">
-          <th mat-header-cell *matHeaderCellDef>เลขที่คำขอ</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.requestno }}
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef>ตรวจสอบ</th>
+            <td mat-cell *matCellDef="let element">
+              <i
+                role="button"
+                class="bi bi-file-earmark-check text-primary fs-5"
+                (click)="goToDetail(element)"
+              ></i>
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="requestdate">
-          <th mat-header-cell *matHeaderCellDef>วันที่ยื่นคำขอ</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.requestdate | date }}
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="requestno">
+            <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.requestno }}
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
-          <td mat-cell *matCellDef="let element">{{ element.firstnameth }}</td>
-        </ng-container>
+          <ng-container matColumnDef="idcardno">
+            <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
+            <td mat-cell *matCellDef="let element">{{ element.idcardno }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="paymentStatus">
-          <th mat-header-cell *matHeaderCellDef>สถานะการชำระเงิน</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.paymentStatus }}
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.firstnameth }} {{ element.lastnameth }}
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="listStatus">
-          <th mat-header-cell *matHeaderCellDef>สถานะรายการ</th>
-          <td mat-cell *matCellDef="let element">{{ element.listStatus }}</td>
-        </ng-container>
+          <ng-container matColumnDef="subtype">
+            <th mat-header-cell *matHeaderCellDef>ประเภทวิชาชีพ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ SchoolRequestSubType[+element.subtype] }}
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="process">
-          <th mat-header-cell *matHeaderCellDef>ขั้นตอน</th>
-          <td mat-cell *matCellDef="let element">{{ element.process }}</td>
-        </ng-container>
+          <ng-container matColumnDef="currentprocess">
+            <th mat-header-cell *matHeaderCellDef>ขั้นตอนการดำเนินการ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ checkProcess(+element.currentprocess)?.processName }}
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="edit">
-          <th mat-header-cell *matHeaderCellDef>แก้ไข</th>
-          <td mat-cell *matCellDef="let element">
-            <i
-              (click)="goToDetail(element.id)"
-              role="button"
-              class="bi bi-pencil-square text-primary fs-5"
-            ></i>
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="requeststatus">
+            <th mat-header-cell *matHeaderCellDef>สถานะ</th>
+            <td mat-cell *matCellDef="let element">
+              {{
+                checkStatus(+element.currentprocess, +element.requeststatus)
+                  ?.ename
+              }}
+            </td>
+          </ng-container>
 
-        <!--         <ng-container matColumnDef="print">
-          <th mat-header-cell *matHeaderCellDef>พิมพ์ใบคำขอ</th>
-          <td mat-cell *matCellDef="let element">
-            <i role="button" class="bi bi-printer-fill text-primary fs-5"></i>
-          </td>
-        </ng-container> -->
+          <ng-container matColumnDef="updatedate">
+            <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
+            <th></th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.updatedate | thaiDate }}
+            </td>
+          </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
-      <mat-paginator
-        [hidden]="!dataSource.data.length"
-        [length]="dataSource.data.length"
-        [pageSize]="25"
-        [showFirstLastButtons]="true"
-      >
-      </mat-paginator>
+          <ng-container matColumnDef="requestdate">
+            <th mat-header-cell *matHeaderCellDef>วันที่ยื่นใบคำขอ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.requestdate | thaiDate }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="reqDoc">
+            <th mat-header-cell *matHeaderCellDef>ใบคำขอ</th>
+            <td mat-cell *matCellDef="let element">
+              <i
+                role="button"
+                class="bi bi-file-earmark-text-fill text-primary fs-5"
+              ></i>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="approveDoc">
+            <th mat-header-cell *matHeaderCellDef>ใบอนุญาต</th>
+            <td mat-cell *matCellDef="let element">
+              <i
+                role="button"
+                class="bi bi-file-earmark-text-fill text-primary fs-5"
+              ></i>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[25]" showFirstLastButtons>
+        </mat-paginator>
+      </div>
     </div>
-    <!--     <div class="box-header">รายการใบคำขอ</div>
-
-    <table mat-table [dataSource]="dataSource">
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="view">
-        <th mat-header-cell *matHeaderCellDef>ดู</th>
-        <td mat-cell *matCellDef="let element">
-          <i
-            role="button"
-            class="bi bi-pencil-square text-primary fs-5"
-            (click)="view()"
-          ></i>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>ใบคำขอ</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
-  </div> -->
   </div>
-</div>
+</form>

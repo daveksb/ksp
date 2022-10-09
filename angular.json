@@ -327,6 +327,34 @@
         }
       ]
     },
+    "e-service-e-license-certificate-knowledge": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/certificate-knowledge",
+      "sourceRoot": "libs/e-service/e-license/certificate-knowledge/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/e-service/e-license/certificate-knowledge"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/e-license/certificate-knowledge/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/certificate-knowledge/**/*.ts",
+              "libs/e-service/e-license/certificate-knowledge/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-e-license-document-delivery": {
       "projectType": "library",
       "root": "libs/e-service/e-license/document-delivery",
@@ -347,6 +375,32 @@
             "lintFilePatterns": [
               "libs/e-service/e-license/document-delivery/**/*.ts",
               "libs/e-service/e-license/document-delivery/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-e-license-edit-license": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/edit-license",
+      "sourceRoot": "libs/e-service/e-license/edit-license/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-service/e-license/edit-license"],
+          "options": {
+            "jestConfig": "libs/e-service/e-license/edit-license/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/edit-license/**/*.ts",
+              "libs/e-service/e-license/edit-license/**/*.html"
             ]
           }
         }
@@ -669,6 +723,60 @@
             "lintFilePatterns": [
               "libs/e-service/e-license/self-user/**/*.ts",
               "libs/e-service/e-license/self-user/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-e-license-substitute-license": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/substitute-license",
+      "sourceRoot": "libs/e-service/e-license/substitute-license/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-service/e-license/substitute-license"],
+          "options": {
+            "jestConfig": "libs/e-service/e-license/substitute-license/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/substitute-license/**/*.ts",
+              "libs/e-service/e-license/substitute-license/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-e-license-substitute-license-approve": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/substitute-license-approve",
+      "sourceRoot": "libs/e-service/e-license/substitute-license-approve/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/e-service/e-license/substitute-license-approve"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/e-license/substitute-license-approve/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/substitute-license-approve/**/*.ts",
+              "libs/e-service/e-license/substitute-license-approve/**/*.html"
             ]
           }
         }

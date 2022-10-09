@@ -1,0 +1,97 @@
+<form [formGroup]="form">
+  <div class="bg-light px-4 py-2 default-width">
+    <div class="text-primary box-header">ค้นหารายการ</div>
+
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">เลขที่ใบคำขอ </label>
+        <input class="form-control" type="text" formControlName="requestno" />
+      </div>
+
+      <div class="col">
+        <label class="form-label">หมายเลขบัตรประชาชน </label>
+        <input
+          class="form-control"
+          type="text"
+          maxlength="13"
+          formControlName="idcardno"
+        />
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">ประเภทวิชาชีพ</label>
+        <select class="form-select" formControlName="subtype">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option *ngFor="let e of eduOccupyList" [value]="e?.id">
+            {{ e?.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="col-6">
+        <label class="form-label">ขั้นตอนการดำเนินการ</label>
+        <select class="form-select" formControlName="currentprocess">
+          <option value="null" disabled hidden>กรุณาเลือก</option>
+          <option *ngFor="let p of processList" [value]="p?.processId">
+            {{ p.processName }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-6">
+        <label class="form-label">สถานะการดำเนินการ</label>
+        <select class="form-select" formControlName="requeststatus">
+          <option value="null" disabled hidden>กรุณาเลือก</option>
+          <option *ngFor="let s of statusList" [value]="s.id">
+            {{ s.sname }}
+          </option>
+        </select>
+      </div>
+
+      <div class="col pe-1">
+        <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ</label>
+        <input
+          class="form-control"
+          type="date"
+          formControlName="requestdatefrom"
+        />
+      </div>
+
+      <div class="col-auto px-1">
+        <br />
+        <span class="fs-4">-</span>
+      </div>
+
+      <div class="col ps-1">
+        <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ</label>
+        <input
+          class="form-control"
+          type="date"
+          formControlName="requestdateto"
+        />
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end mb-2 mt-4">
+      <button
+        (click)="clear.emit(true)"
+        type="button"
+        class="btn border-primary text-primary bg-white"
+      >
+        ล้างข้อมูล
+      </button>
+
+      <button
+        (click)="search.emit(form.value)"
+        type="button"
+        class="btn btn-primary ms-2"
+      >
+        ค้นหา
+      </button>
+    </div>
+  </div>
+</form>

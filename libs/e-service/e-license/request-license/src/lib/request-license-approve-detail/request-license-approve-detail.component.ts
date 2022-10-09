@@ -17,7 +17,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./request-license-approve-detail.component.scss'],
 })
 export class RequestLicenseApproveDetailComponent implements OnInit {
-  approveTitles = ['ผลการตรวจสอบ', 'สถานะการใช้งาน'];
+  approveTitles = 'ผลการตรวจสอบ';
 
   approveChoices = choices;
 
@@ -121,24 +121,12 @@ export class RequestLicenseApproveDetailComponent implements OnInit {
 }
 
 const choices = [
-  [
-    {
-      name: 'อนุมัติ',
-      value: 2,
-    },
-    {
-      name: 'ไม่อนุมัติ',
-      value: 3,
-    },
-  ],
-  [
-    {
-      name: 'ใช้งาน',
-      value: 1,
-    },
-    {
-      name: 'ไม่ใช้งาน',
-      value: 2,
-    },
-  ],
+  {
+    name: 'ครบถ้วน และถูกต้อง',
+    value: 2,
+  },
+  {
+    name: 'ไม่ครบถ้วน และถูกต้อง',
+    value: 3,
+  },
 ];

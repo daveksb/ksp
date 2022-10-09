@@ -1,66 +1,92 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
+import { EsSearchPayload, SchoolRequest } from '@ksp/shared/interface';
+import { ERequestService } from '@ksp/shared/service';
+import {
+  applyClientFilter,
+  checkProcess,
+  checkStatus,
+} from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-qualification-approve-list',
   templateUrl: './qualification-approve-list.component.html',
   styleUrls: ['./qualification-approve-list.component.scss'],
 })
-export class QualificationApproveListComponent implements OnInit {
+export class QualificationApproveListComponent implements AfterViewInit {
+  requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
+  checkProcess = checkProcess;
+  checkStatus = checkStatus;
+  SchoolRequestSubType = SchoolRequestSubType;
+
   form = this.fb.group({
-    foreignSearch: [],
+    search: [{ requesttype: '6' }],
   });
 
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<any>();
 
-  constructor(private router: Router, private fb: FormBuilder) {}
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
-  ngOnInit(): void {}
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private eRequestService: ERequestService
+  ) {}
 
-  search() {
-    this.dataSource.data = data;
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  search(params: any) {
+    //console.log('params = ', params);
+    const payload: EsSearchPayload = {
+      systemtype: '2',
+      requesttype: '6',
+      offset: '0',
+      row: '500',
+    };
+
+    this.eRequestService.EsSearchRequest(payload).subscribe((res) => {
+      if (res) {
+        const result = applyClientFilter(res, params);
+        this.dataSource.data = result;
+      } else {
+        this.clear();
+      }
+    });
   }
 
   clear() {
     this.dataSource.data = [];
+    this.form.reset();
+    this.form.controls.search.patchValue({ requesttype: '3' });
   }
 
-  next() {
-    this.router.navigate(['/qualification', 'detail']);
+  goToDetail(item: SchoolRequest) {
+    this.router.navigate(['/qualification', 'detail', item.id], {
+      queryParams: { subtype: item.subtype },
+    });
   }
 }
 
-export const data = [
-  {
-    id: 1,
-    view: 'xxx',
-    requestno: 'xxx',
-    idcardno: 'xxx',
-    name: 'xxx',
-    profession: 'xxx',
-    artification: 'xxx',
-    schoolname: 'xxx',
-    requeststatus: 'xxx',
-    status: 'xxx',
-    updatedate: 'xxx',
-    requestdate: 'xxx',
-  },
-];
-
 export const column = [
   'id',
-  'view',
+  'edit',
   'requestno',
   'idcardno',
   'name',
-  'profession',
-  'artification',
-  'schoolname',
+  'subtype',
+  'currentprocess',
   'requeststatus',
-  'status',
   'updatedate',
   'requestdate',
+  'reqDoc',
+  'approveDoc',
 ];

@@ -13,9 +13,15 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { RenewLicenseListComponent } from './renew-license-list/renew-license-list.component';
-import { EServiceRequestSearchComponent } from '@ksp/shared/search';
+import {
+  EServiceLicenseSearchComponent,
+  EServiceRequestSearchComponent,
+  RequestSearchComponent,
+} from '@ksp/shared/search';
 import { MatTableModule } from '@angular/material/table';
 import { RenewLicenseDetailComponent } from './renew-license-detail/renew-license-detail.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
 
 export const routes: Route[] = [
   {
@@ -33,6 +39,10 @@ export const routes: Route[] = [
       },
       {
         path: 'approve-detail',
+        component: RenewLicenseDetailComponent,
+      },
+      {
+        path: 'approve-detail/:id',
         component: RenewLicenseDetailComponent,
       },
     ],
@@ -54,6 +64,10 @@ export const routes: Route[] = [
     RequestHeaderInfoComponent,
     EServiceRequestSearchComponent,
     MatTableModule,
+    RequestSearchComponent,
+    MatPaginatorModule,
+    ThaiDatePipe,
+    EServiceLicenseSearchComponent,
   ],
   declarations: [RenewLicenseDetailComponent, RenewLicenseListComponent],
   exports: [RenewLicenseDetailComponent, RenewLicenseListComponent],

@@ -16,6 +16,8 @@ import {
 } from '@ksp/shared/search';
 import { MatTableModule } from '@angular/material/table';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
 
 export const routes: Route[] = [
   {
@@ -33,6 +35,10 @@ export const routes: Route[] = [
       },
       {
         path: 'detail',
+        component: QualificationApproveDetailComponent,
+      },
+      {
+        path: 'detail/:id',
         component: QualificationApproveDetailComponent,
       },
     ],
@@ -53,6 +59,9 @@ export const routes: Route[] = [
     EServiceRequestSearchComponent,
     LicenseCheckComponent,
     BottomNavComponent,
+    RequestSearchComponent,
+    MatPaginatorModule,
+    ThaiDatePipe,
   ],
   declarations: [
     QualificationApproveListComponent,
