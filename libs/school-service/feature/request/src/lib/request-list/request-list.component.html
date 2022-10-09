@@ -80,7 +80,11 @@
               mat-cell
               *matCellDef="let element; let i = index"
               (click)="
-                viewRequest(+element.requesttype, element.subtype, element.id)
+                viewRequest(
+                  +element.requesttype,
+                  element.careertype,
+                  element.id
+                )
               "
             >
               {{
@@ -95,7 +99,11 @@
             <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
             <td
               (click)="
-                viewRequest(+element.requesttype, element.subtype, element.id)
+                viewRequest(
+                  +element.requesttype,
+                  element.careertype,
+                  element.id
+                )
               "
               mat-cell
               *matCellDef="let element"
@@ -110,7 +118,11 @@
             </th>
             <td
               (click)="
-                viewRequest(+element.requesttype, element.subtype, element.id)
+                viewRequest(
+                  +element.requesttype,
+                  element.careertype,
+                  element.id
+                )
               "
               mat-cell
               *matCellDef="let element"
@@ -121,14 +133,8 @@
 
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
-            <td
-              (click)="
-                viewRequest(+element.requesttype, element.subtype, element.id)
-              "
-              mat-cell
-              *matCellDef="let element"
-            >
-              {{ element.firstnameth }} {{ element.lastnameth }}
+            <td mat-cell *matCellDef="let element">
+              {{ element.id }} {{ element.lastnameth }}
             </td>
           </ng-container>
 
@@ -139,34 +145,31 @@
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="subtype">
+          <ng-container matColumnDef="careertype">
             <th mat-header-cell *matHeaderCellDef>ประเภทวิชาชีพ</th>
             <td mat-cell *matCellDef="let element">
-              {{ SchoolRequestSubType[+element.subtype] }}
+              {{ SchoolRequestSubType[+element.careertype] }}
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="currentprocess">
+          <ng-container matColumnDef="process">
             <th mat-header-cell *matHeaderCellDef>ขั้นตอนการดำเนินการ</th>
             <td mat-cell *matCellDef="let element">
-              {{ checkProcess(+element.currentprocess)?.processName }}
+              {{ checkProcess(+element.process)?.processName }}
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="requeststatus">
+          <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef class="text-center">สถานะ</th>
             <td mat-cell *matCellDef="let element">
               <span
                 class="rounded-pill border w-full d-flex justify-content-center px-1"
                 [ngClass]="{
-                  'border-success text-success ': +element.requeststatus > 0,
-                  'border-danger text-danger ': +element.requeststatus === 0
+                  'border-success text-success ': +element.status > 0,
+                  'border-danger text-danger ': +element.status === 0
                 }"
               >
-                {{
-                  checkStatus(+element.currentprocess, +element.requeststatus)
-                    ?.sname
-                }}
+                {{ checkStatus(+element.process, +element.status)?.sname }}
               </span>
             </td>
           </ng-container>

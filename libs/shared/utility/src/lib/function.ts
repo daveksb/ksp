@@ -3,7 +3,7 @@ import {
   SchoolRequestType,
   SelfRequestProcess,
 } from '@ksp/shared/constant';
-import { SchoolRequest } from '@ksp/shared/interface';
+import { FileGroup, SchoolRequest } from '@ksp/shared/interface';
 import moment from 'moment';
 
 // return Thai date format, Use in component
@@ -169,8 +169,8 @@ export function mapFileInfo(fileList: any[]) {
   });
 }
 
-export function mapMultiFileInfo(group: any[]) {
-  return group.map((group: any) => {
+export function mapMultiFileInfo(groups: FileGroup[]) {
+  return groups.map((group) => {
     return group.files;
   });
 }

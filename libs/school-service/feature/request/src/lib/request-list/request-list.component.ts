@@ -67,8 +67,8 @@ export class SchoolRequestListComponent implements AfterViewInit {
     //this.searchParams = payload;
 
     this.requestService.schSearchRequest(payload).subscribe((res) => {
-      //console.log('res = ', res);
       if (res && res.length) {
+        console.log('res = ', res);
         this.searchNotFound = false;
         this.dataSource.data = res;
         this.dataSource.sort = this.sort;
@@ -139,8 +139,8 @@ export interface TempLicenseInfo {
   requestno: string;
   idcardno: string;
   requesttype: string;
-  currentprocess: string;
-  requeststatus: string;
+  process: string;
+  status: string;
   updatedate: string;
   requestdate: string;
 }
@@ -151,9 +151,9 @@ export const displayedColumns = [
   'idcardno',
   'name',
   'requesttype',
-  'subtype',
-  'currentprocess',
-  'requeststatus',
+  'careertype',
+  'process',
+  'status',
   'updatedate',
   'requestdate',
   'requestdoc',
