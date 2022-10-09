@@ -3,14 +3,17 @@ import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { SchoolServiceUserPageType } from '@ksp/shared/interface';
+import {
+  EsSearchPayload,
+  SchoolServiceUserPageType,
+} from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 
 @Component({
-  templateUrl: './manage-current-user-list.component.html',
-  styleUrls: ['./manage-current-user-list.component.scss'],
+  templateUrl: './self-user-list.component.html',
+  styleUrls: ['./self-user-list.component.scss'],
 })
-export class ManageCurrentUserListComponent implements AfterViewInit {
+export class SelfUserListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   form = this.fb.group({
@@ -19,7 +22,6 @@ export class ManageCurrentUserListComponent implements AfterViewInit {
 
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<any>();
-
   selectedUniversity = '';
 
   constructor(
@@ -40,15 +42,14 @@ export class ManageCurrentUserListComponent implements AfterViewInit {
   search(params: any) {
     console.log('params = ', params);
 
-    const payload = {
+    const payload: EsSearchPayload = {
       systemtype: '2',
       requesttype: '1',
-      schoolid: '0010201056',
-      // params.institution?.schoolid,
-      bureauid: null,
+      offset: '0',
+      row: '500',
     };
 
-    this.eRequestService.searchRequest(payload).subscribe((res: any) => {
+    this.eRequestService.EsSearchRequest(payload).subscribe((res: any) => {
       this.dataSource.data = res;
     });
   }
@@ -58,7 +59,7 @@ export class ManageCurrentUserListComponent implements AfterViewInit {
   }
 
   goToDetail(id: number) {
-    this.router.navigate(['/school', 'user-detail', id], {
+    this.router.navigate(['/self', 'user-detail', id], {
       queryParams: { type: SchoolServiceUserPageType.ManageCurrentUser },
     });
   }
@@ -69,7 +70,7 @@ export const column = [
   'view',
   'idcardno',
   'name',
-  'schoolname',
+  //schoolname',
   //'province',
   'requeststatus',
   'requestdate',

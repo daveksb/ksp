@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -36,19 +36,15 @@ export class PraiseTeacherRewardInfoComponent
   override set value(value: any) {
     Object.keys(value).forEach((key) => {
       if (key === 'receivedReward') {
-        const control = this.form.get(key);
-        control?.patchValue(value[key]);
+        this.form.controls.receivedReward.patchValue(value[key]);
       } else {
         const control = this.form.get(key) as FormArray;
         if (value[key].length) {
           control.removeAt(0);
-          value[key].forEach((item: any) =>
-            control.push(
-              this.fb.group({
-                ...item,
-              })
-            )
-          );
+          value[key].forEach((item: any, index: number) => {
+            this.addFormArray(control);
+            control.at(index).patchValue(item);
+          });
         }
       }
     });
@@ -63,9 +59,9 @@ export class PraiseTeacherRewardInfoComponent
 
   addFormArray(form: FormArray<any>) {
     const data = this.fb.group({
-      rewardReceiveYear: [],
-      rewardName: [],
-      rewardDetail: [],
+      rewardReceiveYear: [null, Validators.required],
+      rewardName: [null, Validators.required],
+      rewardDetail: [null, Validators.required],
     });
     form.push(data);
   }

@@ -7,8 +7,8 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { FormMode } from '@ksp/shared/interface';
-import { GeneralInfoService, RequestService } from '@ksp/shared/service';
+import { FileGroup, FormMode } from '@ksp/shared/interface';
+import { GeneralInfoService } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 import localForage from 'localforage';
 import { thaiDate } from '@ksp/shared/utility';
@@ -22,14 +22,14 @@ export class CoordinatorInfoComponent implements OnInit {
     coordinator: [],
   });
   savingData: any;
-  uploadFileList = [
+  uploadFileList: FileGroup[] = [
     {
       name: 'หนังสือแต่งตั้งผู้ประสานงาน',
-      fileId: '',
+      files: [],
     },
     {
       name: 'สำเนาบัตรประชาชน',
-      fileId: '',
+      files: [],
     },
   ];
   requestDate = thaiDate(new Date());

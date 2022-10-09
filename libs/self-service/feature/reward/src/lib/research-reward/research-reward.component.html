@@ -4,15 +4,14 @@
     [formGroup]="form"
     class="tab-group"
     animationDuration="0ms"
-    [selectedIndex]="0"
-  >
+    [selectedIndex]="0">
     <mat-tab label="ข้อมูลส่วนตัว">
       <ksp-form-user-info
         [displayMode]="[userInfoType]"
         [isSelfService]="true"
         [prefixList]="prefixList"
-        formControlName="userInfo"
-      ></ksp-form-user-info>
+        [requiredIdCardNo]="false"
+        formControlName="userInfo"></ksp-form-user-info>
     </mat-tab>
 
     <mat-tab label="ที่อยู่" class="tab-content">
@@ -24,8 +23,7 @@
         [tumbols]="tumbols$ | async"
         [bureaus]="bureaus"
         (provinceChanged)="provinceChanged(1, $event)"
-        (amphurChanged)="amphurChanged(1, $event)"
-      >
+        (amphurChanged)="amphurChanged(1, $event)">
       </self-service-form-user-workplace>
       <div class="row">
         <div class="col-md-6 mb-2">
@@ -53,28 +51,24 @@
 
     <mat-tab label="ข้อมูลผู้วิจัย">
       <ksp-research-researcher
-        formControlName="rewardResearcherInfo"
-      ></ksp-research-researcher>
+        formControlName="rewardResearcherInfo"></ksp-research-researcher>
     </mat-tab>
 
     <mat-tab label="ข้อมูลผลงานวิจัย">
       <ksp-research-info
-        formControlName="rewardResearchInfo"
-      ></ksp-research-info>
+        formControlName="rewardResearchInfo"></ksp-research-info>
     </mat-tab>
 
     <mat-tab label="ประวัติการส่งผลงานวิจัย">
       <ksp-research-submit
-        formControlName="rewardResearchHistory"
-      ></ksp-research-submit>
+        formControlName="rewardResearchHistory"></ksp-research-submit>
     </mat-tab>
 
     <mat-tab label="เอกสารประกอบ">
       <ksp-form-attachment
         [groups]="rewardFiles"
         [uniqueTimestamp]="uniqueTimestamp"
-        [titleClass]="'text-primary'"
-      ></ksp-form-attachment>
+        [titleClass]="'text-primary'"></ksp-form-attachment>
     </mat-tab>
   </mat-tab-group>
 </form>

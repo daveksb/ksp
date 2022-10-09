@@ -130,6 +130,14 @@
             "siteId": "e816803c-b91a-46f9-baf7-679701a9d5c7",
             "noBuild": true
           }
+        },
+        "deploy-dev": {
+          "builder": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/apps/e-service",
+            "siteId": "e569cc56-85e0-479c-be25-aae1a7c8d294",
+            "noBuild": true
+          }
         }
       },
       "tags": [],
@@ -319,6 +327,34 @@
         }
       ]
     },
+    "e-service-e-license-certificate-knowledge": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/certificate-knowledge",
+      "sourceRoot": "libs/e-service/e-license/certificate-knowledge/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/e-service/e-license/certificate-knowledge"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/e-license/certificate-knowledge/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/certificate-knowledge/**/*.ts",
+              "libs/e-service/e-license/certificate-knowledge/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-e-license-document-delivery": {
       "projectType": "library",
       "root": "libs/e-service/e-license/document-delivery",
@@ -339,6 +375,32 @@
             "lintFilePatterns": [
               "libs/e-service/e-license/document-delivery/**/*.ts",
               "libs/e-service/e-license/document-delivery/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-e-license-edit-license": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/edit-license",
+      "sourceRoot": "libs/e-service/e-license/edit-license/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-service/e-license/edit-license"],
+          "options": {
+            "jestConfig": "libs/e-service/e-license/edit-license/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/edit-license/**/*.ts",
+              "libs/e-service/e-license/edit-license/**/*.html"
             ]
           }
         }
@@ -463,6 +525,34 @@
             "lintFilePatterns": [
               "libs/e-service/e-license/license-approve/**/*.ts",
               "libs/e-service/e-license/license-approve/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-e-license-qualification-approve": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/qualification-approve",
+      "sourceRoot": "libs/e-service/e-license/qualification-approve/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/e-service/e-license/qualification-approve"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/e-license/qualification-approve/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/qualification-approve/**/*.ts",
+              "libs/e-service/e-license/qualification-approve/**/*.html"
             ]
           }
         }
@@ -633,6 +723,60 @@
             "lintFilePatterns": [
               "libs/e-service/e-license/self-user/**/*.ts",
               "libs/e-service/e-license/self-user/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-e-license-substitute-license": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/substitute-license",
+      "sourceRoot": "libs/e-service/e-license/substitute-license/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-service/e-license/substitute-license"],
+          "options": {
+            "jestConfig": "libs/e-service/e-license/substitute-license/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/substitute-license/**/*.ts",
+              "libs/e-service/e-license/substitute-license/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-e-license-substitute-license-approve": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/substitute-license-approve",
+      "sourceRoot": "libs/e-service/e-license/substitute-license-approve/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/e-service/e-license/substitute-license-approve"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/e-license/substitute-license-approve/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/substitute-license-approve/**/*.ts",
+              "libs/e-service/e-license/substitute-license-approve/**/*.html"
             ]
           }
         }
@@ -2347,6 +2491,14 @@
           "options": {
             "outputPath": "dist/apps/school-service",
             "siteId": "b3164b84-b992-4605-bc6e-3ec8dd992fe0",
+            "noBuild": true
+          }
+        },
+        "deploy-dev": {
+          "builder": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/apps/school-service",
+            "siteId": "aeb4f082-082b-418b-b3bb-0400f7d6aaa4",
             "noBuild": true
           }
         }
@@ -4168,6 +4320,14 @@
           "options": {
             "outputPath": "dist/apps/self-service",
             "siteId": "dad36791-c9ee-4b6a-8909-b0519e2f562e",
+            "noBuild": true
+          }
+        },
+        "deploy-dev": {
+          "builder": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/apps/self-service",
+            "siteId": "8df413ac-5d19-4e60-9165-93ba45e13d27",
             "noBuild": true
           }
         }
@@ -8612,6 +8772,14 @@
           "options": {
             "outputPath": "dist/apps/uni-service",
             "siteId": "d1dc849e-2e37-4508-8323-ce8980880a6c",
+            "noBuild": true
+          }
+        },
+        "deploy-dev": {
+          "builder": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/apps/uni-service",
+            "siteId": "ba462199-aad5-4f7b-89d1-bbf4079cc71c",
             "noBuild": true
           }
         }

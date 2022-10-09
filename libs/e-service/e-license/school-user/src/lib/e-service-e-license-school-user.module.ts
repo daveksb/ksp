@@ -22,6 +22,8 @@ import {
 } from '@ksp/shared/form/school/register';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import { AllUserListComponent } from './all-user-list/all-user-list.component';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
 
 export const routes: Routes = [
   {
@@ -35,6 +37,14 @@ export const routes: Routes = [
       {
         path: 'new-user',
         component: ApproveNewUserListComponent,
+      },
+      {
+        path: 'all-user',
+        component: AllUserListComponent,
+      },
+      {
+        path: 'user-detail',
+        component: UserDetailComponent,
       },
       {
         path: 'user-detail/:id',
@@ -67,11 +77,14 @@ export const routes: Routes = [
     FormCoordinatorInfoComponent,
     SharedFormOthersModule,
     RequestHeaderInfoComponent,
+    ThaiDatePipe,
   ],
   declarations: [
     ManageCurrentUserListComponent,
     ApproveNewUserListComponent,
     UserDetailComponent,
+    AllUserListComponent,
   ],
+  exports: [AllUserListComponent],
 })
 export class EServiceELicenseSchoolUserModule {}

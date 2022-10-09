@@ -160,7 +160,6 @@ export class EditLicenseComponent
           }
           this.form.controls.distributeData.updateValueAndValidity();
         }
-        console.log(this.form.valid);
       });
   }
 

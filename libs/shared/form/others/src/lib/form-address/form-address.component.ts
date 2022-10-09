@@ -31,7 +31,7 @@ export class FormAddressComponent extends KspFormBaseComponent {
     houseNo: [null, Validators.required],
     moo: [''],
     alley: [''],
-    road: [null, Validators.required],
+    road: [''],
     postcode: [null, Validators.required],
     province: [null, Validators.required],
     amphur: [null, Validators.required],

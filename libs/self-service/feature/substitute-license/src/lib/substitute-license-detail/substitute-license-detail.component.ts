@@ -27,11 +27,11 @@ import { SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
 
 const OBJECTIVE_FILES = [
-  { name: '1.ใบอนุญาตประกอบวิชาชีพที่ชํารุด', fileId: '', fileName: '' },
+  { name: '1.ใบอนุญาตประกอบวิชาชีพที่ชํารุด', fileid: '', filename: '' },
   {
     name: '2.หลักฐานการรับแจงความของพนักงานสอบสวน หรือบันทึกถอยคํา กรณีใบอนุญาตสูญหาย',
-    fileId: '',
-    fileName: '',
+    fileid: '',
+    filename: '',
   },
 ];
 

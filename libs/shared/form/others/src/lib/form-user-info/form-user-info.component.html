@@ -22,7 +22,7 @@
         *ngIf="idCardNo.invalid && (idCardNo.dirty || idCardNo.touched)"
       >
         <span class="text-danger" *ngIf="idCardNo.errors?.['pattern']">
-          {{ validatorMessages.ssn }}
+          {{ validatorMessages.idCardNo }}
         </span>
       </ng-container>
     </div>
@@ -222,13 +222,23 @@
     </div>
     <div class="col-md mb-2">
       <label class="form-label required">วันเดือนปีเกิด</label>
-      <input
+      <!-- <input
         class="form-control"
-        type="date"
+        [matDatepicker]="picker"
         [class.form-control-sp]="isDarkMode"
         formControlName="birthdate"
         [max]="today"
+      /> -->
+      <input
+        class="form-control"
+        [class.form-control-sp]="isDarkMode"
+        formControlName="birthdate"
+        matInput
+        [max]="today"
+        [matDatepicker]="picker"
       />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </div>
 
     <div class="col mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">

@@ -1,7 +1,7 @@
 <form [formGroup]="form">
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label"
+      <label class="form-label required"
         ><span *ngIf="!isForeignForm">หลักสูตร</span>
         <span *ngIf="isForeignForm">Course Title</span></label
       >
@@ -11,7 +11,7 @@
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label"
+      <label class="form-label required"
         ><span *ngIf="!isForeignForm">สถานที่อบรม</span>
         <span *ngIf="isForeignForm">Place</span></label
       >
@@ -19,7 +19,7 @@
     </div>
 
     <div class="col-md-6 mb-2">
-      <label class="form-label"
+      <label class="form-label required"
         ><span *ngIf="!isForeignForm">วันเดือนปี ที่จัดอบรม</span>
         <span *ngIf="isForeignForm">Training Date</span></label
       >

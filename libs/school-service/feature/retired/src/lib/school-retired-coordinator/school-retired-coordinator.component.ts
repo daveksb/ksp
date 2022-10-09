@@ -7,6 +7,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { FileGroup } from '@ksp/shared/interface';
 import { GeneralInfoService, RequestService } from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
 import localForage from 'localforage';
@@ -33,7 +34,9 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
     private requestService: RequestService
   ) {}
   userInfoFormType: number = UserInfoFormType.thai;
-  retiredFiles = [{ name: 'หนังสือแต่งตั้งผู้ประสานงาน', fileId: '' }];
+  retiredFiles: FileGroup[] = [
+    { name: 'หนังสือแต่งตั้งผู้ประสานงาน', files: [] },
+  ];
   prefixList$!: Observable<any>;
   uniqueTimestamp: any;
 

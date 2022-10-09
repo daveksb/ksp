@@ -19,9 +19,9 @@ export class ForeignStepTwoTabThreeFormComponent extends KspFormBaseComponent {
     degreeName: [null, Validators.required],
     major: [null, Validators.required],
     institution: [null, Validators.required],
-    admissionDate: [],
-    graduateDate: [],
-    country: [],
+    admissionDate: [null, Validators.required],
+    graduateDate: [null, Validators.required],
+    country: [null, Validators.required],
   });
 
   constructor(private fb: FormBuilder) {

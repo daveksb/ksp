@@ -1,7 +1,7 @@
 <form [formGroup]="form">
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">สังกัด</label>
+      <label class="form-label required">สังกัด</label>
       <select class="form-select" formControlName="bureauid">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let bureau of bureaus" [value]="bureau?.bureauId">
@@ -11,7 +11,7 @@
     </div>
 
     <div class="col-md-6 mb-2">
-      <label class="form-label">ชื่อหน่วยงาน/สถานศึกษา</label>
+      <label class="form-label required">ชื่อหน่วยงาน/สถานศึกษา</label>
       <input class="form-control" type="text" formControlName="schoolname" />
       <!-- <select class="form-select" formControlName="schoolname">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
@@ -21,7 +21,7 @@
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">ที่อยู่/เลขที่</label>
+      <label class="form-label required">ที่อยู่/เลขที่</label>
       <input class="form-control" type="text" formControlName="houseno" />
     </div>
 
@@ -54,13 +54,11 @@
       <select
         class="search__content form-select"
         formControlName="province"
-        (change)="provinceChanged.emit($event)"
-      >
+        (change)="provinceChanged.emit($event)">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option
           *ngFor="let province of provinces"
-          [value]="province?.province_id"
-        >
+          [value]="province?.province_id">
           {{ province?.province_name }}
         </option>
       </select>
@@ -73,8 +71,7 @@
       <select
         class="search__content form-select"
         formControlName="tumbol"
-        (change)="updatePostcode($event)"
-      >
+        (change)="updatePostcode($event)">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let t of tumbols" [value]="t?.tambolCode">
           {{ t?.tambolName }}
@@ -87,8 +84,7 @@
       <select
         class="search__content form-select"
         formControlName="amphur"
-        (change)="amphurChanged.emit($event)"
-      >
+        (change)="amphurChanged.emit($event)">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let a of amphurs" [value]="a?.amphurCode">
           {{ a?.amphurName }}

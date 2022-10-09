@@ -9,6 +9,7 @@
         </div>
 
         <ksp-login-form
+          [loginFail]="loginFail"
           [showRetired]="true"
           (login)="login()"
           (register)="register()"

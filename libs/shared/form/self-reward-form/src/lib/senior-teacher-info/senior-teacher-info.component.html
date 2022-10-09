@@ -2,7 +2,7 @@
   <div class="box-header text-primary">ข้อมูลครูอาวุโส</div>
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">ตำแหน่งทางวิชาการ</label>
+      <label class="form-label required">ตำแหน่งทางวิชาการ</label>
       <select class="form-select" formControlName="position">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">นักวิชาการ</option>
@@ -13,7 +13,7 @@
       </select>
     </div>
     <div class="col-md-6 mb-2">
-      <label class="form-label">ประเภทวิชาชีพ</label>
+      <label class="form-label required">ประเภทวิชาชีพ</label>
       <select class="form-select" formControlName="professionalType">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">ครู</option>
@@ -26,15 +26,15 @@
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">ข้อมูลการลาออกจากการปฏิบัติงาน</label>
+      <label class="form-label required">ข้อมูลการลาออกจากการปฏิบัติงาน</label>
       <input class="form-control" type="text" formControlName="resignationDetail" />
     </div>
     <div class="col-md-6 mb-2">
-      <label class="form-label">ข้อมูลออกก่อนอายุครบ 60 ปี</label>
+      <label class="form-label required">ข้อมูลออกก่อนอายุครบ 60 ปี</label>
       <input class="form-control" type="text" formControlName="earlyRetireDetail" />
     </div>
   </div>
   <br />
-  <div class="box-header text-primary">ประวัติการถูกลงโทษทางวินัย</div>
+  <div class="box-header text-primary required">ประวัติการถูกลงโทษทางวินัย</div>
   <ksp-praise-teacher-punished formControlName="disciplineDetail"></ksp-praise-teacher-punished>
 </form>

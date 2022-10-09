@@ -10,10 +10,8 @@
     ></ksp-e-service-user-search>
     <br />
     <div class="bg-white p-3">
-      <div class="box-header">
-        รายชื่อผู้ใช้งานระบบบริการด้วยตนเอง (Self Service)
-      </div>
-
+      <div class="box-header">รายชื่อผู้เข้าใช้งานระบบ Self Service</div>
+      <hr />
       <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
@@ -32,7 +30,9 @@
         </ng-container>
 
         <ng-container matColumnDef="idcardno">
-          <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
+          <th mat-header-cell *matHeaderCellDef>
+            หมายเลขบัตรประชาชน/หมายเลขหนังสือเดินทาง
+          </th>
           <td mat-cell *matCellDef="let element">{{ element.idcardno }}</td>
         </ng-container>
 
@@ -43,32 +43,32 @@
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="schoolname">
+        <!-- <ng-container matColumnDef="schoolname">
           <th mat-header-cell *matHeaderCellDef>โรงเรียน/หน่วยงาน</th>
           <td mat-cell *matCellDef="let element">{{ element.schoolname }}</td>
-        </ng-container>
+        </ng-container> -->
 
-        <ng-container matColumnDef="province">
+        <!-- <ng-container matColumnDef="province">
           <th mat-header-cell *matHeaderCellDef>จังหวัด</th>
           <td mat-cell *matCellDef="let element">{{ element.province }}</td>
-        </ng-container>
+        </ng-container> -->
 
         <ng-container matColumnDef="requeststatus">
-          <th mat-header-cell *matHeaderCellDef>สถานะ</th>
+          <th mat-header-cell *matHeaderCellDef>สถานะการใช้งาน</th>
           <td mat-cell *matCellDef="let element">
             {{ element.requeststatus }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="requestdate">
-          <th mat-header-cell *matHeaderCellDef>วันที่อนุมัติ</th>
+          <th mat-header-cell *matHeaderCellDef>วันที่เริ่มใช้งาน</th>
           <td mat-cell *matCellDef="let element">
             {{ element.requestdate | date }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="updatedate">
-          <th mat-header-cell *matHeaderCellDef>วันที่แก้ไข</th>
+          <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
           <td mat-cell *matCellDef="let element">
             {{ element.updatedate | date }}
           </td>

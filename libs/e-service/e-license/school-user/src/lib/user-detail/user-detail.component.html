@@ -4,7 +4,7 @@
 </ksp-top-nav>
 
 <div [formGroup]="form" class="bg-secondary bg-opacity-10 px-4 py-2">
-  <div class="box-header">รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ</div>
+  <div class="box-header">รายละเอียดใบคำขอ</div>
 
   <div class="bg-white p-3">
     <ksp-request-header-info
@@ -14,41 +14,41 @@
     <hr />
     <div class="px-4 py-2">
       <div class="row">
-        <div class="col mb-3">
+        <div class="col mb-2">
           <label class="form-label">สังกัด</label>
-          <select class="form-select">
-            <option value="null" selected hidden disabled>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
+          <input class="form-control" type="text" disabled />
         </div>
 
-        <div class="col mb-3">
-          <label class="form-label">หน่วยงาน/สถานศึกษา</label>
-          <select class="form-select">
-            <option value="null" selected hidden disabled>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
+        <div class="col mb-2">
+          <label class="form-label">หน่วยงาน / สถานศึกษา</label>
+          <input class="form-control" type="text" disabled />
         </div>
       </div>
 
-      <div class="mb-3">
-        <label class="form-label">ที่อยู่</label>
-        <select class="form-select">
-          <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
+      <div class="row">
+        <div class="col mb-2">
+          <label class="form-label">ที่อยู่</label>
+          <input class="form-control" type="text" disabled />
+        </div>
+      </div>
+
+      <div class="row" *ngIf="pageType === 0">
+        <div class="col-6 mb-2">
+          <label class="form-label">ประเภทใบคำขอ</label>
+          <input
+            class="form-control"
+            type="text"
+            disabled
+            value="ลงทะเบียนเข้าใช้งาน"
+          />
+        </div>
       </div>
 
       <div class="d-flex justify-content-end" *ngIf="pageType === 0">
         <label
           class="text-primary form-label text-decoration-underline"
           role="button"
+          (click)="viewUser()"
           >ดูรายชื่อผู้เข้าใช้งานระบบของหน่วยงาน/สถานศึกษานี้</label
         >
       </div>
@@ -58,13 +58,12 @@
       <div class="box-header">
         ข้อมูลผู้ขอเข้ารหัสสำหรับเข้าใช้งานระบบ (ผู้ประสานงาน)
       </div>
-      <ksp-form-user-info
-        [isDarkMode]="false"
+      <ksp-form-coordinator-info
         [mode]="'view'"
         [displayMode]="[0]"
         [prefixList]="prefixList$ | async"
         formControlName="userInfo"
-      ></ksp-form-user-info>
+      ></ksp-form-coordinator-info>
       <!--
         [nationalitys]="nationalitys$ | async" -->
       <!-- <ksp-form-requester-info [mode]="'view'"></ksp-form-requester-info> -->
@@ -74,26 +73,26 @@
       <div class="box-header">
         ข้อมูลผู้มีอำนาจแต่งตั้ง (ที่ระบุไว้ในเอกสารแนบ)
       </div>
-      <ksp-form-user-info
-        [isDarkMode]="false"
+      <ksp-form-coordinator-info
+        [positionLabel]="'ตำแหน่งาน'"
         [mode]="'view'"
         [displayMode]="[0]"
         [prefixList]="prefixList$ | async"
         formControlName="coordinatorInfo"
-      ></ksp-form-user-info>
+      ></ksp-form-coordinator-info>
       <!-- <ksp-form-coordinator-info [mode]="'view'"></ksp-form-coordinator-info> -->
     </div>
     <br />
     <ksp-form-attachment
       [title]="'หลักฐานเพื่อพิจารณา'"
       mode="view"
-      [groups]="[{ name: 'หนังสือแต่งตั้ง', fileId: '' }]"
+      [groups]="[{ name: 'หนังสือแต่งตั้ง', fileid: '' }]"
     ></ksp-form-attachment>
   </div>
   <br />
-  <div [formGroup]="form2" class="bg-white p-4">
+  <div [formGroup]="verifyForm" class="bg-white p-4">
     <e-service-license-check
-      formControlName="verifyResult"
+      formControlName="result"
       [headerTitle]="approveTitles[pageType]"
       [choices]="approveChoices[pageType]"
     ></e-service-license-check>
@@ -108,7 +107,7 @@
     [showSaveButton]="true"
     (cancelClicked)="cancel()"
     (saveClicked)="confirm()"
-    [disableSaveButton]="!form2.valid"
+    [disableSaveButton]="verifyForm.invalid"
   >
   </ksp-bottom-nav>
 </div>

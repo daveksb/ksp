@@ -29,7 +29,7 @@ export class ResearchRewardComponent
     setTimeout(() => {
       if (value) {
         this.amphurs$ = this.addressService.getAmphurs(value.province);
-        this.tumbols$ = this.addressService.getTumbols(value.district);
+        this.tumbols$ = this.addressService.getTumbols(value.amphur);
         const { phone, fax, email, website } = value || {
           phone: '',
           fax: '',

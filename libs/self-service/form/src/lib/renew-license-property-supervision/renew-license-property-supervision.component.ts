@@ -28,8 +28,8 @@ export class RenewLicensePropertySupervisionComponent
   /* const WORKING_INFO_FILES = [
   {
     name: '1.รางวัลอื่นและประกาศเกียรติคุณ',
-    fileId: '',
-    fileName: '',
+    fileid: '',
+    filename: '',
   },
 ]; */
 
@@ -53,6 +53,15 @@ export class RenewLicensePropertySupervisionComponent
         this.selectedstandardKnowledgeType = Number(res);
         //this.form.controls.educationLevelForm.reset();
       });
+  }
+
+  override set value(value: any) {
+    if (value.standardKnowledgeType) {
+      this.selectedstandardKnowledgeType = Number(value.standardKnowledgeType);
+    }
+    this.form.patchValue(value);
+    this.onChange(value);
+    this.onTouched();
   }
 }
 

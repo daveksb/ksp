@@ -2,101 +2,127 @@
   ><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span><span subHeader></span
 ></ksp-top-nav>
 
-<div class="main__container px-4 py-2">
+<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
+  <div class="box-header">รายละเอียดใบคำขอใบอนุญาตประกอบวิชาชีพ</div>
   <form [formGroup]="form">
-    <div class="row mx-0 border shadow-sm rounded-4 px-2 py-4 bg-white my-4">
-      <div class="col-lg-3">
-        <self-service-form-upload-image></self-service-form-upload-image>
+    <div class="bg-white px-4 py-2">
+      <ksp-request-header-info
+        [requestDate]="'requestDate'"
+        [requestNumber]="'requestNo'"
+      ></ksp-request-header-info>
+      <hr />
+      <div class="row align-items-center bg-light py-2 mx-0 mb-3">
+        <div class="col-3">
+          <self-service-form-upload-image
+            [isEditMode]="false"
+          ></self-service-form-upload-image>
+        </div>
+        <div class="col-9">
+          <ksp-form-user-info
+            [isSelfService]="true"
+            formControlName="userInfo"
+            [mode]="'view'"
+            [isDarkMode]="false"
+            [prefixList]="prefixList$ | async"
+            [displayMode]="[userInfoType]"
+            [nationList]="nationalitys$ | async"
+          ></ksp-form-user-info>
+        </div>
       </div>
-      <div class="col-md">
-        <ksp-form-user-info
-          formControlName="userInfo"
-          [isDarkMode]="true"
-          [prefixList]="prefixList$ | async"
-          [displayMode]="[userInfoType]"
-          [nationList]="nationalitys$ | async"
-        ></ksp-form-user-info>
-      </div>
+
+      <mat-tab-group
+        class="tab-group mb-3"
+        animationDuration="0ms"
+        [selectedIndex]="0"
+      >
+        <mat-tab label="ที่อยู่" class="tab-content">
+          <ksp-form-address
+            formControlName="address1"
+            [mode]="'view'"
+            [isDarkMode]="false"
+            [provinces]="provinces$ | async"
+            [amphurs]="amphurs1$ | async"
+            [tumbols]="tumbols1$ | async"
+          >
+            <span>ที่อยู่ทะเบียนบ้าน</span>
+          </ksp-form-address>
+          <hr />
+          <ksp-form-address
+            formControlName="address2"
+            [mode]="'view'"
+            [isDarkMode]="false"
+            [provinces]="provinces$ | async"
+            [amphurs]="amphurs2$ | async"
+            [tumbols]="tumbols2$ | async"
+          >
+            <span class="me-1">ที่อยู่ที่ติดต่อได้สะดวก</span>
+            <span class="text-danger fs-6">*กรุณากรอกข้อมูลตำบล,อำเภอ</span>
+            <div class="d-flex align-items-center">
+              <input type="checkbox" class="me-2" />
+              <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
+            </div>
+          </ksp-form-address>
+        </mat-tab>
+
+        <mat-tab label="สถานที่ทำงาน">
+          <self-service-form-user-workplace
+            formControlName="workplace"
+            [mode]="'view'"
+            [provinces]="provinces$ | async"
+            [amphurs]="amphurs3$ | async"
+            [tumbols]="tumbols3$ | async"
+          >
+          </self-service-form-user-workplace>
+        </mat-tab>
+
+        <mat-tab label="ข้อมูลทางการศึกษา">
+          <self-service-form-user-education
+            [mode]="'view'"
+            [countries]="countries$ | async"
+            formControlName="education"
+          ></self-service-form-user-education>
+          <hr />
+          <ksp-form-attachment
+            [mode]="'view'"
+            [title]="'กรุณาแนบหลักฐานประกอบวุฒิทางการศึกษา'"
+            [groups]="eduFiles"
+          ></ksp-form-attachment>
+        </mat-tab>
+
+        <mat-tab label="ข้อมูลประสบการณ์วิชาชีพ">
+          <self-service-form-user-experience
+            [mode]="'view'"
+            [countries]="countries2$ | async"
+            [licenses]="licenses$ | async"
+            formControlName="experience"
+          ></self-service-form-user-experience>
+          <hr />
+          <ksp-form-attachment
+            [mode]="'view'"
+            [title]="'กรุณาแนบหลักฐานประกอบการฝึกประสบการณ์วิชาชีพ'"
+            [groups]="experienceFiles"
+          ></ksp-form-attachment>
+        </mat-tab>
+
+        <mat-tab label="ข้อมูลผลการประเมินสมรรถนะ">
+          <self-service-form-user-performance></self-service-form-user-performance>
+        </mat-tab>
+      </mat-tab-group>
     </div>
-
-    <mat-tab-group
-      class="tab-group"
-      animationDuration="0ms"
-      [selectedIndex]="0"
-    >
-      <mat-tab label="ที่อยู่" class="tab-content">
-        <ksp-form-address
-          formControlName="address1"
-          [isDarkMode]="true"
-          [provinces]="provinces$ | async"
-          [amphurs]="amphurs1$ | async"
-          [tumbols]="tumbols1$ | async"
-        >
-          <span>ที่อยู่ทะเบียนบ้าน</span>
-        </ksp-form-address>
-        <hr />
-        <ksp-form-address
-          formControlName="address2"
-          [isDarkMode]="true"
-          [provinces]="provinces$ | async"
-          [amphurs]="amphurs2$ | async"
-          [tumbols]="tumbols2$ | async"
-        >
-          <span class="me-1">ที่อยู่ที่ติดต่อได้สะดวก</span>
-          <span class="text-danger fs-6">*กรุณากรอกข้อมูลตำบล,อำเภอ</span>
-          <div class="d-flex align-items-center">
-            <input type="checkbox" class="me-2" />
-            <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
-          </div>
-        </ksp-form-address>
-      </mat-tab>
-
-      <mat-tab label="สถานที่ทำงาน">
-        <self-service-form-user-workplace
-          formControlName="workplace"
-          [provinces]="provinces$ | async"
-          [amphurs]="amphurs3$ | async"
-          [tumbols]="tumbols3$ | async"
-        >
-        </self-service-form-user-workplace>
-      </mat-tab>
-
-      <mat-tab label="ข้อมูลทางการศึกษา">
-        <self-service-form-user-education
-          [countries]="countries$ | async"
-          formControlName="education"
-        ></self-service-form-user-education>
-        <hr />
-        <ksp-form-attachment
-          [title]="'กรุณาแนบหลักฐานประกอบวุฒิทางการศึกษา'"
-          [groups]="eduFiles"
-        ></ksp-form-attachment>
-      </mat-tab>
-
-      <mat-tab label="ข้อมูลประสบการณ์วิชาชีพ">
-        <self-service-form-user-experience
-          [countries]="countries2$ | async"
-          [licenses]="licenses$ | async"
-          formControlName="experience"
-        ></self-service-form-user-experience>
-        <hr />
-        <ksp-form-attachment
-          [title]="'กรุณาแนบหลักฐานประกอบการฝึกประสบการณ์วิชาชีพ'"
-          [groups]="experienceFiles"
-        ></ksp-form-attachment>
-      </mat-tab>
-
-      <mat-tab label="ข้อมูลผลการประเมินสมรรถนะ">
-        <self-service-form-user-performance></self-service-form-user-performance>
-      </mat-tab>
-    </mat-tab-group>
   </form>
 
-  <div [formGroup]="form2" class="bg-white p-4">
+  <div [formGroup]="form2" class="bg-white px-4 py-3 mt-3">
     <e-service-license-check
       formControlName="verifyResult"
-      [headerTitle]="approveTitles[0]"
-      [choices]="approveChoices[0]"
+      [headerTitle]="approveTitles"
+      [choices]="approveChoices"
     ></e-service-license-check>
   </div>
+</div>
+
+<div class="sticky-bottom border px-2">
+  <ksp-bottom-nav
+    [showCenterButtons]="true"
+    [isFirstPage]="true"
+  ></ksp-bottom-nav>
 </div>

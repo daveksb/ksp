@@ -7,19 +7,18 @@
       >
       <select
         class="form-select"
-        formControlName="organization"
+        formControlName="bureauid"
         *ngIf="searchType === 'uni'"
       >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
-        <option
-              *ngFor="let uni of universityType" [value]="uni?.id">
-              {{ uni?.name }}
-            </option>
+        <option *ngFor="let uni of universityType" [value]="uni?.id">
+          {{ uni?.name }}
+        </option>
       </select>
 
       <select
         class="form-select"
-        formControlName="organization"
+        formControlName="bureauid"
         *ngIf="searchType !== 'uni'"
       >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
@@ -46,7 +45,7 @@
         }}
         <span class="text-danger">*</span></label
       >
-      <input class="form-control" type="text" formControlName="instituteName" />
+      <input class="form-control" type="text" formControlName="schoolname" />
     </div>
   </div>
 </form>

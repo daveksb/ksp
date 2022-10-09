@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'ksp-thai-teacher-teaching',
@@ -27,24 +27,24 @@ export class ThaiTeacherTeachingComponent
   @Output() sameAddress = new EventEmitter<any>();
 
   override form = this.fb.group({
-    affiliation: [''],
-    teachingPlace: [''],
-    province: [''],
-    subDistrict: [''],
-    district: [''],
-    teachingLevel: [''],
-    startDate: [''],
-    endDate: [''],
-    currentAffiliation: [''],
-    currentTeachingPlace: [''],
-    currentProvince: [''],
-    currentSubDistrict: [''],
-    currentDistrict: [''],
-    currentTeachingLevel: [''],
-    phone: [''],
-    fax: [''],
-    continuousTeachingYear: [''],
-    workTitle: [''],
+    affiliation: ['', Validators.required],
+    teachingPlace: ['', Validators.required],
+    province: ['', Validators.required],
+    subDistrict: ['', Validators.required],
+    district: ['', Validators.required],
+    teachingLevel: ['', Validators.required],
+    startDate: ['', Validators.required],
+    endDate: ['', Validators.required],
+    currentAffiliation: ['', Validators.required],
+    currentTeachingPlace: ['', Validators.required],
+    currentProvince: ['', Validators.required],
+    currentSubDistrict: ['', Validators.required],
+    currentDistrict: ['', Validators.required],
+    currentTeachingLevel: ['', Validators.required],
+    phone: ['', Validators.required],
+    fax: ['', Validators.required],
+    continuousTeachingYear: ['', Validators.required],
+    workTitle: ['', Validators.required],
   });
 
   constructor(private fb: FormBuilder) {

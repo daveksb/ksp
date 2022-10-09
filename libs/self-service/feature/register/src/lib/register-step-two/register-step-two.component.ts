@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { VerifyPhoneDialogComponent } from '@ksp/self-service/dialog';
-import { idCardPattern, validatorMessages } from '@ksp/shared/utility';
+import {
+  idCardBackPattern,
+  idCardPattern,
+  validatorMessages,
+} from '@ksp/shared/utility';
 import localForage from 'localforage';
 import { RegisterTooltipComponent } from '../register-tooltip/register-tooltip.component';
 import { v4 as uuidv4 } from 'uuid';
@@ -21,7 +25,10 @@ export class RegisterStepTwoComponent {
 
   form = this.fb.group({
     idcardno: [null, [Validators.required, Validators.pattern(idCardPattern)]],
-    idcardbackno: [null, [Validators.required]],
+    idcardbackno: [
+      null,
+      [Validators.required, Validators.pattern(idCardBackPattern)],
+    ],
     idcardimage: [],
   });
 
@@ -36,7 +43,7 @@ export class RegisterStepTwoComponent {
   onUploadComplete(evt: any) {
     //console.log('evt = ', evt);
     this.imgSrc = evt.file;
-    this.imgId = evt.fileId;
+    this.imgId = evt.fileid;
   }
 
   openDialog() {
@@ -86,5 +93,9 @@ export class RegisterStepTwoComponent {
 
   get idCardNo() {
     return this.form.controls.idcardno;
+  }
+
+  get idCardBack() {
+    return this.form.controls.idcardbackno;
   }
 }

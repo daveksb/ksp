@@ -1,7 +1,7 @@
 <form [formGroup]="form">
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label"
+      <label class="form-label required"
         ><span *ngIf="!isForeignForm">สถาบันการศึกษา</span>
         <span *ngIf="isForeignForm">Institution</span>
       </label>
@@ -13,7 +13,7 @@
     </div>
 
     <div class="col-md-6 mb-2">
-      <label class="form-label">
+      <label class="form-label required">
         <span *ngIf="!isForeignForm">วุฒิปริญญาที่จบ</span>
         <span *ngIf="isForeignForm">degree</span></label
       >
@@ -27,7 +27,7 @@
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label"
+      <label class="form-label required"
         ><span *ngIf="!isForeignForm">สาขา/วิชาเอก</span>
         <span *ngIf="isForeignForm">Subject/Major</span></label
       >
@@ -35,7 +35,7 @@
     </div>
 
     <div class="col-md-3 mb-2">
-      <label class="form-label"
+      <label class="form-label required"
         ><span *ngIf="!isForeignForm">วัน/เดือน/ปี ที่เข้าศึกษา</span>
         <span *ngIf="isForeignForm">Start of Graduated Date</span></label
       >
@@ -43,7 +43,7 @@
     </div>
 
     <div class="col-md-3 mb-2">
-      <label class="form-label"
+      <label class="form-label required"
         ><span *ngIf="!isForeignForm">วัน/เดือน/ปี ที่สำเร็จการศึกษา</span>
         <span *ngIf="isForeignForm">End of Graduated Date</span></label
       >

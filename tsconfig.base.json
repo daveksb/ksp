@@ -19,14 +19,26 @@
       "@ksp/e-service/dialog/accusation-search": [
         "libs/e-service/dialog/accusation-search/src/index.ts"
       ],
+      "@ksp/e-service/dialog/school-user-detail": [
+        "libs/e-service/dialog/school-user-detail/src/index.ts"
+      ],
+      "@ksp/e-service/e-license/certificate-knowledge": [
+        "libs/e-service/e-license/certificate-knowledge/src/index.ts"
+      ],
       "@ksp/e-service/e-license/document-delivery": [
         "libs/e-service/e-license/document-delivery/src/index.ts"
+      ],
+      "@ksp/e-service/e-license/edit-license": [
+        "libs/e-service/e-license/edit-license/src/index.ts"
       ],
       "@ksp/e-service/e-license/foreign-license": [
         "libs/e-service/e-license/foreign-license/src/index.ts"
       ],
       "@ksp/e-service/e-license/license-approve": [
         "libs/e-service/e-license/license-approve/src/index.ts"
+      ],
+      "@ksp/e-service/e-license/qualification-approve": [
+        "libs/e-service/e-license/qualification-approve/src/index.ts"
       ],
       "@ksp/e-service/e-license/renew-license": [
         "libs/e-service/e-license/renew-license/src/index.ts"
@@ -39,6 +51,12 @@
       ],
       "@ksp/e-service/e-license/self-user": [
         "libs/e-service/e-license/self-user/src/index.ts"
+      ],
+      "@ksp/e-service/e-license/substitute-license": [
+        "libs/e-service/e-license/substitute-license/src/index.ts"
+      ],
+      "@ksp/e-service/e-license/substitute-license-approve": [
+        "libs/e-service/e-license/substitute-license-approve/src/index.ts"
       ],
       "@ksp/e-service/e-license/temp-license": [
         "libs/e-service/e-license/temp-license/src/index.ts"

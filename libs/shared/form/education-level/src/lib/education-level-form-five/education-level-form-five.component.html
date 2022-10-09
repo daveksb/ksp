@@ -1,7 +1,6 @@
 <form [formGroup]="form">
   <ksp-education-level-form-one
-    formControlName="levelOneForm"
-  ></ksp-education-level-form-one>
+    formControlName="levelOneForm"></ksp-education-level-form-one>
 
   <div class="row my-2">
     <div class="col-md-auto" style="white-space: nowrap">
@@ -15,10 +14,9 @@
           <span class="form-label me-2">จำนวนมาตรฐาน</span>
           <input
             type="number"
-            max="0"
+            min="0"
             class="form-control"
-            formControlName="transferCount"
-          />
+            formControlName="transferCount" />
         </div>
       </div>
     </div>
@@ -35,8 +33,7 @@
             type="number"
             min="0"
             class="form-control"
-            formControlName="testCount"
-          />
+            formControlName="testCount" />
         </div>
       </div>
     </div>
@@ -48,8 +45,7 @@
           type="text"
           class="form-control"
           disabled
-          placeholder="{{ totalStandard }}"
-        />
+          placeholder="{{ totalStandard }}" />
       </div>
     </div>
   </div>

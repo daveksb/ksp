@@ -1,8 +1,7 @@
 <form [formGroup]="form">
-  <div class="box-header">มาตราฐานความรู้ที่ต้องการเทียบโอน</div>
+  <div class="box-header required">มาตราฐานความรู้ที่ต้องการเทียบโอน</div>
   <div
-    class="d-flex flex-column flex-md-row align-items-end align-items-md-center justify-content-end justify-content-md-between"
-  >
+    class="d-flex flex-column flex-md-row align-items-end align-items-md-center justify-content-end justify-content-md-between">
     <select class="form-select" formControlName="standardInfo">
       <option value="null" selected hidden disabled>กรุณาเลือก</option>
       <option value="1">One</option>
@@ -12,15 +11,12 @@
 
     <ksp-add-row-button
       [classList]="'text-primary w-md-25 w-md-50 ms-md-3'"
-      (addRowClick)="addStandard()"
-      >เพิ่มมาตรฐานและหลักฐาน</ksp-add-row-button
-    >
+      (addRowClick)="addStandard()">เพิ่มมาตรฐานและหลักฐาน</ksp-add-row-button>
   </div>
 
   <ng-container formArrayName="standards">
     <ng-container
-      *ngFor="let transferForm of standards.controls; let i = index"
-    >
+      *ngFor="let transferForm of standards.controls; let i = index">
       <ng-container [formGroupName]="i">
         <div class="bg-light py-2 px-3 mt-3">
           <div class="d-flex justify-content-between">
@@ -28,57 +24,50 @@
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
-              (click)="deleteStandard(i)"
-            ></i>
+              (click)="deleteStandard(i)"></i>
           </div>
           <ng-container formArrayName="subjects">
             <ng-container
-              *ngFor="let subject of getSubjects(i).controls; let j = index"
-            >
+              *ngFor="let subject of getSubjects(i).controls; let j = index">
               <ng-container [formGroupName]="j">
                 <div class="py-2 px-3 border bg-white mb-3">
                   <div class="d-flex justify-content-end" *ngIf="j > 0">
                     <i
                       class="bi bi-x-circle-fill text-danger"
                       role="button"
-                      (click)="deleteSubject(i, j)"
-                    ></i>
+                      (click)="deleteSubject(i, j)"></i>
                   </div>
                   <div class="row">
                     <div class="col-md-8">
-                      <label class="form-label">ชื่อวิชาเทียบโอน</label>
+                      <label class="form-label required">ชื่อวิชาเทียบโอน</label>
                       <input
                         class="form-control"
                         type="text"
-                        formControlName="subjectName"
-                      />
+                        formControlName="subjectName" />
                     </div>
                     <div class="col-md">
-                      <label class="form-label">รหัสวิชา</label>
+                      <label class="form-label required">รหัสวิชา</label>
                       <input
                         class="form-control"
                         type="text"
-                        formControlName="subjectCode"
-                      />
+                        formControlName="subjectCode" />
                     </div>
                     <div class="col-md">
-                      <label class="form-label">ผลการเรียน</label>
+                      <label class="form-label required">ผลการเรียน</label>
                       <input
                         class="form-control"
                         type="text"
-                        formControlName="grade"
-                      />
+                        formControlName="grade" />
                     </div>
                   </div>
 
                   <div class="row mb-2">
                     <div class="col-md">
-                      <label class="form-label">คำอธิบาย</label>
+                      <label class="form-label required">คำอธิบาย</label>
                       <textarea
                         rows="3"
                         class="form-control"
-                        formControlName="detail"
-                      ></textarea>
+                        formControlName="detail"></textarea>
                     </div>
                   </div>
                 </div>
@@ -88,9 +77,7 @@
           <div class="d-flex justify-content-end mt-3">
             <ksp-add-row-button
               [classList]="'text-primary'"
-              (addRowClick)="addSubject(i)"
-              >เพิ่มวิชาเพื่อเทียบโอน</ksp-add-row-button
-            >
+              (addRowClick)="addSubject(i)">เพิ่มวิชาเพื่อเทียบโอน</ksp-add-row-button>
           </div>
         </div>
       </ng-container>

@@ -35,4 +35,11 @@ export class RenewLicensePropertyOneComponent
     this.onChange(null);
     this.onTouched();
   }
+
+  override set value(value: any) {
+    console.log(value);
+    this.form.patchValue(value);
+    this.onChange(value);
+    this.onTouched();
+  }
 }

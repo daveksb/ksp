@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -31,6 +31,22 @@ export class BestTeacherInnovationComponent
     );
   }
 
+  override set value(value: any) {
+    Object.keys(value).forEach((key) => {
+      const control = this.form.get(key) as FormArray;
+      if (value[key].length) {
+        control.removeAt(0);
+        value[key].forEach((item: any, index: number) => {
+          this.addFormArray(control);
+          control.at(index).patchValue(item);
+        });
+      }
+    });
+
+    this.onChange(value);
+    this.onTouched();
+  }
+
   ngOnInit(): void {
     this.addFormArray(this.innovationInfo);
   }
@@ -41,10 +57,10 @@ export class BestTeacherInnovationComponent
 
   addFormArray(form: FormArray<any>) {
     const data = this.fb.group({
-      rewardType: [],
-      innovationName: [],
-      subjectGroup: [],
-      year: [],
+      rewardType: [null, Validators.required],
+      innovationName: [null, Validators.required],
+      subjectGroup: [null, Validators.required],
+      year: [null, Validators.required],
     });
     form.push(data);
   }

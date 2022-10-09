@@ -20,9 +20,9 @@ export class ForeignLicenseStepFourComponent extends KspFormBaseComponent {
   override form = this.fb.group({
     qualified: [],
     noSection44: [],
-    immoral: [],
-    incompetent: [],
-    prison: [],
+    immoral: [null, Validators.required],
+    incompetent: [null, Validators.required],
+    prison: [null, Validators.required],
     everythingIsTrue: [],
     provideFurthurDocuments: [],
   });

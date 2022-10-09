@@ -1,7 +1,9 @@
 <form [formGroup]="form">
-  <div class="row mb-3">
+  <div class="row mb-3" *ngIf="showContent && userFormType === 'req'">
     <div class="col-4">
-      <label class="form-label required">หมายเลขบัตรประชาชน</label>
+      <label class="form-label" [ngClass]="{ required: mode === 'edit' }"
+        >หมายเลขบัตรประชาชน</label
+      >
       <input
         maxlength="13"
         formControlName="idcardno"
@@ -12,7 +14,7 @@
         *ngIf="idCardNo.invalid && (idCardNo.dirty || idCardNo.touched)"
       >
         <span class="text-danger" *ngIf="idCardNo.errors?.['pattern']">
-          {{ validatorMessages.ssn }}
+          {{ validatorMessages.idCardNo }}
         </span>
       </ng-container>
     </div>
@@ -23,7 +25,6 @@
         >คำนำหน้าชื่อไทย</label
       >
       <select
-        [class.bg-white]="!isDarkMode && mode === 'edit'"
         class="form-select"
         formControlName="prefixth"
         (change)="prefixChanged($event)"
@@ -39,7 +40,6 @@
         >ชื่อภาษาไทย</label
       >
       <input
-        [class.bg-light]="isDarkMode"
         class="form-control"
         type="text"
         formControlName="firstnameth"
@@ -56,11 +56,12 @@
       </ng-container>
     </div>
     <div class="col-5">
-      <label class="form-label" [ngClass]="{ required: mode === 'edit' }"
+      <label
+        class="form-label required"
+        [ngClass]="{ required: mode === 'edit' }"
         >นามสกุลภาษาไทย</label
       >
       <input
-        [class.bg-light]="isDarkMode"
         class="form-control"
         type="text"
         formControlName="lastnameth"
@@ -76,12 +77,16 @@
     </div>
   </div>
 
-  <div class="row mb-3">
+  <div class="row mb-3" *ngIf="showContent">
     <div class="col-2">
-      <label class="form-label required">คำนำหน้าชื่ออังกฤษ</label>
+      <label
+        class="form-label required"
+        [ngClass]="{ required: mode === 'edit' }"
+        >คำนำหน้าชื่ออังกฤษ</label
+      >
       <select
-        [class.bg-white]="!isDarkMode && mode === 'edit'"
         class="form-select"
+        [ngClass]="{ required: mode === 'edit' }"
         formControlName="prefixen"
         (change)="prefixChanged($event)"
       >
@@ -92,11 +97,15 @@
       </select>
     </div>
     <div class="col-5">
-      <label class="form-label required">ชื่อภาษาอังกฤษ</label>
+      <label
+        class="form-label required"
+        [ngClass]="{ required: mode === 'edit' }"
+        >ชื่อภาษาอังกฤษ</label
+      >
       <input
         class="form-control"
+        [ngClass]="{ required: mode === 'edit' }"
         type="text"
-        [class.bg-light]="isDarkMode"
         placeholder="กรุณากรอกชื่อภาษาอังกฤษ"
         formControlName="firstnameen"
       />
@@ -111,11 +120,15 @@
       </ng-container>
     </div>
     <div class="col-5">
-      <label class="form-label required">นามสกุลภาษาอังกฤษ</label>
+      <label
+        class="form-label required"
+        [ngClass]="{ required: mode === 'edit' }"
+        >นามสกุลภาษาอังกฤษ</label
+      >
       <input
         class="form-control"
+        [ngClass]="{ required: mode === 'edit' }"
         type="text"
-        [class.bg-light]="isDarkMode"
         placeholder="กรุณากรอกนามสกุลภาษาอังกฤษ"
         formControlName="lastnameen"
       />
@@ -130,42 +143,21 @@
   </div>
 
   <div class="row mb-3">
-    <div class="col">
-      <label class="form-label required">{{ positionLabel }}</label>
-      <input
-        class="form-control"
-        type="text"
-        formControlName="position"
-        [class.bg-light]="isDarkMode"
-      />
-    </div>
-
-    <div class="col">
-      <label class="form-label required">เบอร์โทรศัพท์ (ที่ทำงาน)</label>
-      <input
-        class="form-control"
-        type="tel"
-        [class.bg-light]="isDarkMode"
-        formControlName="workphone"
-      />
-      <ng-container
-        *ngIf="workPhone.invalid && (workPhone.dirty || workPhone.touched)"
+    <div class="col-6">
+      <label
+        class="form-label required"
+        [ngClass]="{ required: mode === 'edit' }"
+        >{{ positionLabel }}</label
       >
-        <span class="text-danger" *ngIf="workPhone.errors?.['pattern']"
-          >{{ validatorMessages.phone }}
-        </span>
-      </ng-container>
+      <input class="form-control" type="text" formControlName="position" />
     </div>
-  </div>
-  <div class="row mb-3">
-    <div class="col">
-      <label class="form-label required">เบอร์โทรศัพท์มือถือ</label>
-      <input
-        class="form-control"
-        type="tel"
-        [class.bg-light]="isDarkMode"
-        formControlName="contactphone"
-      />
+    <div class="col-6">
+      <label
+        class="form-label required"
+        [ngClass]="{ required: mode === 'edit' }"
+        >เบอร์โทรศัพท์ (ที่ติดต่อได้)</label
+      >
+      <input class="form-control" type="tel" formControlName="contactphone" />
       <ng-container
         *ngIf="
           contactPhone.invalid && (contactPhone.dirty || contactPhone.touched)
@@ -176,18 +168,34 @@
         </span>
       </ng-container>
     </div>
-    <div class="col">
-      <label class="form-label required">อีเมล</label>
-      <input
-        class="form-control"
-        type="email"
-        [class.bg-light]="isDarkMode"
-        formControlName="email"
-      />
+  </div>
+  <div class="row mb-3">
+    <div class="col-6" *ngIf="showContent && userFormType === 'req'">
+      <label
+        class="form-label required"
+        [ngClass]="{ required: mode === 'edit' }"
+        >อีเมล</label
+      >
+      <input class="form-control" type="email" formControlName="email" />
       <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
         <span class="text-danger" *ngIf="email.errors?.['email']">{{
           validatorMessages.email
         }}</span>
+      </ng-container>
+    </div>
+    <div class="col-6" *ngIf="showContent">
+      <label
+        class="form-label required"
+        [ngClass]="{ required: mode === 'edit' }"
+        >เบอร์โทรศัพท์ (ที่ทำงาน)</label
+      >
+      <input class="form-control" type="tel" formControlName="workphone" />
+      <ng-container
+        *ngIf="workPhone.invalid && (workPhone.dirty || workPhone.touched)"
+      >
+        <span class="text-danger" *ngIf="workPhone.errors?.['pattern']"
+          >{{ validatorMessages.phone }}
+        </span>
       </ng-container>
     </div>
   </div>

@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   SchoolRequest,
   SchoolServiceUserPageType,
+  SchoolUser,
 } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
@@ -20,59 +21,24 @@ import { parseJson, thaiDate } from '@ksp/shared/utility';
 })
 export class UserDetailComponent implements OnInit {
   approveTitles = ['ผลการตรวจสอบ', 'สถานะการใช้งาน'];
-
-  approveChoices = [
-    [
-      {
-        name: 'อนุมัติ',
-        value: 2,
-      },
-      {
-        name: 'ไม่อนุมัติ',
-        value: 3,
-      },
-    ],
-    [
-      {
-        name: 'ใช้งาน',
-        value: 1,
-      },
-      {
-        name: 'ไม่ใช้งาน',
-        value: 2,
-      },
-    ],
-  ];
-
-  headers = [
-    [
-      'ใบคำขอรหัสเข้าใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service) ',
-      'ตรวจสอบและอนุมัติใบคำขอรหัสเข้าใช้งาน',
-    ],
-    [
-      'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
-      'ข้อมูลผู้เข้าใช้งานระบบ School Service',
-    ],
-  ];
+  approveChoices = approveChoices;
+  headers = headers;
 
   requestId!: number | null;
   requestDate!: string | null;
   requestData!: SchoolRequest;
   prefixList$!: Observable<any>;
-
   requestNo: string | null = '';
+  pageType = 0;
 
   form = this.fb.group({
     userInfo: [],
     coordinatorInfo: [],
   });
 
-  form2 = this.fb.group({
-    verifyResult: [null, Validators.required],
+  verifyForm = this.fb.group({
+    result: [null, Validators.required],
   });
-
-  verifySelected = 1;
-  pageType = 0;
 
   constructor(
     private router: Router,
@@ -85,11 +51,6 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkRequestId();
-
-    this.form2.controls.verifyResult.valueChanges.subscribe((res: any) => {
-      this.verifySelected = Number(res['result']);
-      console.log(' //this.form.valid;', this.verifySelected);
-    });
 
     this.route.queryParams.subscribe((res) => {
       this.pageType = Number(res['type']);
@@ -126,25 +87,54 @@ export class UserDetailComponent implements OnInit {
     });
   }
 
-  approveRequest() {
-    const payload = {
-      id: `${this.requestId}`,
-      checksubresult: null,
-      checkfinalresult: null,
-      approveresult: null,
-      currentprocess: 1,
-      requeststatus: this.verifySelected,
-    };
+  /* {
+      idcardno: '1',
+      firstnameth: '2',
+      lastnameth: '3',
+      schemail: '4',
+      schmobile: '5',
+      schbirthdate: '2022-09-06T00:20:13',
+      schusername: '6',
+      schpassword: '7',
+      schuseractive: this.verifySelected,
+      schuserenddate: '2022-09-06T00:20:13',
+      schlastlogintime: '2022-09-06T00:20:13',
+      schlastlogouttime: '2022-09-06T00:20:13',
+      schoolid: '9',
+      position: '10',
+      prefixth: '11',
+      prefixen: '12',
+      firstnameen: '13',
+      lastnameen: '144',
+      permissionright: { field1: 'data1', field2: 'data2', field3: 'data3' },
+      coordinatorinfo: { field1: 'data1', field2: 'data2', field3: 'data3' },
+    }; */
 
-    this.eRequestService.approveUserRequest(payload).subscribe((res) => {
-      //console.log('Cancel request  = ', res);
-      //create new user in sch_user
+  approveUser() {
+    // change process and status of SCH_REQUEST
+
+    const newUser = new SchoolUser();
+
+    newUser.idcardno = this.requestData.idcardno;
+    newUser.firstnameth = this.requestData.firstnameth;
+    newUser.lastnameth = this.requestData.lastnameth;
+    newUser.schusername = this.requestData.schoolid;
+    newUser.schpassword = '1234';
+    newUser.schuseractive = '1';
+
+    this.eRequestService.createSchUser(newUser).subscribe((res) => {
+      console.log('new user result = ', res.returnmessage);
+      this.completeDialog();
     });
+  }
+
+  viewUser() {
+    this.router.navigate(['school', 'all-user']);
   }
 
   cancel() {
     if (this.pageType === SchoolServiceUserPageType.ApproveNewUser) {
-      this.router.navigate(['/approve-new-user']);
+      this.router.navigate(['/school', 'new-user']);
     } else if (this.pageType === SchoolServiceUserPageType.ManageCurrentUser) {
       this.router.navigate(['/manage-current-user']);
     }
@@ -159,16 +149,24 @@ export class UserDetailComponent implements OnInit {
       },
     });
 
-    confirmDialog.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        this.approveRequest();
-        this.onCompleted();
+    confirmDialog.componentInstance.confirmed.subscribe(() => {
+      const form: any = this.verifyForm.controls.result.value;
+      const result = +form.result;
+      if (result) {
+        this.approveUser();
+      } else {
+        this.unApproveUser();
       }
     });
   }
 
-  onCompleted() {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+  unApproveUser() {
+    console.log('un approve = ');
+    // change process and status of SCH_REQUEST
+  }
+
+  completeDialog() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
       data: {
         header: `บันทึกข้อมูลสำเร็จ`,
@@ -176,16 +174,50 @@ export class UserDetailComponent implements OnInit {
       },
     });
 
-    completeDialog.componentInstance.completed.subscribe((res) => {
+    dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
         if (this.pageType === SchoolServiceUserPageType.ApproveNewUser) {
-          this.router.navigate(['/approve-new-user', 'list']);
+          this.router.navigate(['/school', 'new-user']);
         } else if (
           this.pageType === SchoolServiceUserPageType.ManageCurrentUser
         ) {
-          this.router.navigate(['/manage-current-user', 'list']);
+          //this.router.navigate(['/manage-current-user', 'list']);
         }
       }
     });
   }
 }
+
+const approveChoices = [
+  [
+    {
+      name: 'อนุมัติ',
+      value: 1,
+    },
+    {
+      name: 'ไม่อนุมัติ',
+      value: 0,
+    },
+  ],
+  [
+    {
+      name: 'ใช้งาน',
+      value: 1,
+    },
+    {
+      name: 'ไม่ใช้งาน',
+      value: 2,
+    },
+  ],
+];
+
+const headers = [
+  [
+    'ใบคำขอรหัสเข้าใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service) ',
+    'ตรวจสอบและอนุมัติใบคำขอรหัสเข้าใช้งาน',
+  ],
+  [
+    'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
+    'ข้อมูลผู้เข้าใช้งานระบบ School Service',
+  ],
+];

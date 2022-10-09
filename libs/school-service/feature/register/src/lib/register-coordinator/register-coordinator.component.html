@@ -46,7 +46,6 @@
 
         <ksp-form-coordinator-info
           formControlName="coordinator"
-          [isDarkMode]="false"
           [mode]="mode"
           [prefixList]="prefixList$ | async"
           [nationList]="nationalitys$ | async"
@@ -56,13 +55,13 @@
       </div>
 
       <div class="my-4">
-        <ksp-form-attachment
+        <ksp-form-multi-attachment
           [classList]="'text-primary'"
           [title]="'กรุณาแนบหลักฐานเพื่อการพิจารณา'"
           [requestType]="1"
           [groups]="uploadFileList"
           [uniqueTimestamp]="uniqueTimestamp"
-        ></ksp-form-attachment>
+        ></ksp-form-multi-attachment>
       </div>
 
       <ksp-bottom-nav

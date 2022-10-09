@@ -18,10 +18,10 @@
         [uploadType]="'link'"
         [systemFileName]="file.name"
         [uniqueTimestamp]="uniqueTimestamp"
-        [fileName]="file.fileName"
+        [filename]="file.filename"
+        [fileid]="file.fileid"
         [showDeleteFile]="true"
-        (uploadComplete)="updateComplete($event, file)"
-      ></ksp-file-upload>
+        (uploadComplete)="updateComplete($event, file)"></ksp-file-upload>
     </div>
   </ng-container>
 </div>

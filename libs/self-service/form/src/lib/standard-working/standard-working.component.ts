@@ -27,7 +27,7 @@ export class StandardWorkingComponent
 
   override form = this.fb.group({
     educationType: [null, Validators.required],
-    educationLevelForm: [],
+    educationLevelForm: [null, Validators.required],
   });
 
   educationTypes1: ListData[] = [];

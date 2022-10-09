@@ -18,7 +18,12 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
-import { SchoolRequest } from '@ksp/shared/interface';
+import {
+  FileGroup,
+  KspRequest,
+  SchoolRequest,
+  UserInfoForm,
+} from '@ksp/shared/interface';
 
 import {
   AddressService,
@@ -29,8 +34,7 @@ import {
 } from '@ksp/shared/service';
 import {
   formatCheckboxData,
-  formatDate,
-  mapFileInfo,
+  mapMultiFileInfo,
   parseJson,
   replaceEmptyWithNull,
   thaiDate,
@@ -45,7 +49,7 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./school-request.component.scss'],
 })
 export class SchoolRequestComponent implements OnInit {
-  uniqueTimestamp!: string; // use for file upload reference, gen only first time component loaded
+  uniqueNo!: string; // use for file upload reference, gen only first time component loaded
   pageType = RequestPageType;
 
   countries$!: Observable<any>;
@@ -65,18 +69,16 @@ export class SchoolRequestComponent implements OnInit {
   requestData!: SchoolRequest;
   requestDate: string = thaiDate(new Date());
 
-  systemType = '2'; // school service
-  requestType = '3';
-  requestSubType = SchoolRequestSubType.ครู; // 1 ไทย 2 ผู้บริหาร 3 ต่างชาติ
+  //systemType = '2'; // school service
+  //requestType = '3';
+  careerType = SchoolRequestSubType.ครู; // 1 ไทย 2 ผู้บริหาร 3 ต่างชาติ
   requestLabel = '';
   requestNo: string | null = '';
-  currentProcess!: number;
+  requestProcess!: number;
   requestStatus!: number;
-
   disableTempSave = true;
   disableSave = true;
   disableCancel = true;
-
   icCardNo = '';
   schoolAddressLabel = `ที่อยู่ของสถานศึกษา
   ที่ขออนุญาต`;
@@ -84,11 +86,12 @@ export class SchoolRequestComponent implements OnInit {
   schoolId = '0010201056';
   userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form
 
-  eduFiles: any[] = [];
-  teachingFiles: any[] = [];
-  reasonFiles: any[] = [];
-  attachFiles: any[] = [];
+  eduFiles: FileGroup[] = [];
+  teachingFiles: FileGroup[] = [];
+  reasonFiles: FileGroup[] = [];
+  attachFiles: FileGroup[] = [];
   prefixList$!: Observable<any>;
+
   option1 = this.fb.control(false);
   option2 = this.fb.control(false);
   option3 = this.fb.control(false);
@@ -140,7 +143,7 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.uniqueTimestamp = uuidv4();
+    this.uniqueNo = uuidv4();
     this.getList();
     this.checkRequestId();
     this.checkRequestSubType();
@@ -151,23 +154,21 @@ export class SchoolRequestComponent implements OnInit {
     this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
       this.form.reset();
       if (Number(params['subtype'])) {
-        this.requestSubType = Number(params['subtype']);
+        this.careerType = Number(params['subtype']);
       }
 
-      if (this.requestSubType === SchoolRequestSubType.อื่นๆ) {
+      if (this.careerType === SchoolRequestSubType.อื่นๆ) {
         this.userInfoFormType = UserInfoFormType.foreign;
       } else {
         this.userInfoFormType = UserInfoFormType.thai;
       }
 
-      if (this.requestSubType == SchoolRequestSubType.ครู) {
+      if (this.careerType == SchoolRequestSubType.ครู) {
         this.requestLabel = SchoolRequestSubType[SchoolRequestSubType.ครู];
-      } else if (
-        this.requestSubType == SchoolRequestSubType.ผู้บริหารสถานศึกษา
-      ) {
+      } else if (this.careerType == SchoolRequestSubType.ผู้บริหารสถานศึกษา) {
         this.requestLabel =
           SchoolRequestSubType[SchoolRequestSubType.ผู้บริหารสถานศึกษา];
-      } else if (this.requestSubType == SchoolRequestSubType.อื่นๆ) {
+      } else if (this.careerType == SchoolRequestSubType.อื่นๆ) {
         this.requestLabel = SchoolRequestSubType[SchoolRequestSubType.อื่นๆ];
       }
     });
@@ -176,43 +177,43 @@ export class SchoolRequestComponent implements OnInit {
   cancelRequest() {
     const payload = {
       id: `${this.requestId}`,
-      requeststatus: '0',
+      process: null,
+      status: '0',
+      detail: null,
+      userid: null,
+      paymentstatus: null,
     };
 
-    this.requestService.cancelRequest(payload).subscribe((res) => {
+    this.requestService.schCancelRequest(payload).subscribe(() => {
       //console.log('Cancel request  = ', res);
-      this.cancelDoneDialog();
+      this.completeDialog(`ยกเลิกใบคำขอสำเร็จ`);
     });
   }
 
-  createRequest(type: string) {
+  createRequest(process: number) {
     console.log('create request = ');
-    const baseForm = this.fb.group(new SchoolRequest());
+    const baseForm = this.fb.group(new KspRequest());
     const formData: any = this.form.getRawValue();
-    const tab3 = mapFileInfo(this.eduFiles);
-    const tab4 = mapFileInfo(this.teachingFiles);
-    const tab5 = mapFileInfo(this.reasonFiles);
-    const tab6 = mapFileInfo(this.attachFiles);
+    console.log('formdata = ', formData);
+    const tab3 = mapMultiFileInfo(this.eduFiles);
+    const tab4 = mapMultiFileInfo(this.teachingFiles);
+    const tab5 = mapMultiFileInfo(this.reasonFiles);
+    const tab6 = mapMultiFileInfo(this.attachFiles);
     formData.addr1.addresstype = 1;
     formData.addr2.addresstype = 2;
 
     const { id, ...userInfo } = formData.userInfo;
     userInfo.schoolid = this.schoolId;
-    userInfo.requeststatus = `1`;
+    userInfo.process = `${process}`;
+    userInfo.status = `1`;
 
-    if (type == 'submit') {
-      userInfo.currentprocess = `2`;
-    } else {
-      userInfo.currentprocess = `1`;
-    }
-
-    userInfo.ref1 = `${this.systemType}`;
+    userInfo.ref1 = '2';
     userInfo.ref2 = '03';
     userInfo.ref3 = '1';
 
-    userInfo.systemtype = `${this.systemType}`;
-    userInfo.requesttype = `${this.requestType}`;
-    userInfo.subtype = `${this.requestSubType}`;
+    userInfo.systemtype = '2';
+    userInfo.requesttype = '3';
+    userInfo.careertype = `${this.careerType}`;
 
     const teaching: any = this.form.controls.teachinginfo.value;
     let teachingInfo = {};
@@ -230,12 +231,12 @@ export class SchoolRequestComponent implements OnInit {
       };
     }
 
-    const visaInfo = {
+    /*     const visaInfo = {
       visaclass: userInfo.visaclass,
       visatype: userInfo.visatype,
       visaenddate: userInfo.visaenddate,
     };
-
+ */
     //console.log('form data = ', formData);
 
     const payload = {
@@ -244,9 +245,9 @@ export class SchoolRequestComponent implements OnInit {
       ...{ eduinfo: JSON.stringify([formData.edu1, formData.edu2]) },
       ...{ teachinginfo: JSON.stringify(teachingInfo) },
       ...{ hiringinfo: JSON.stringify(formData.hiringinfo) },
-      ...{ visainfo: JSON.stringify(visaInfo) },
+      //...{ visainfo: JSON.stringify(visaInfo) },
       ...{ schooladdrinfo: JSON.stringify(formData.schoolAddr) },
-      ...{ reasoninfo: JSON.stringify(formData.reasoninfo) },
+      //...{ reasoninfo: JSON.stringify(formData.reasoninfo) },
       ...{ fileinfo: JSON.stringify({ tab3, tab4, tab5, tab6 }) },
     };
 
@@ -254,29 +255,34 @@ export class SchoolRequestComponent implements OnInit {
 
     baseForm.patchValue(payload);
     //console.log('current form = ', baseForm.value);
-    this.requestService.createRequest(baseForm.value).subscribe((res) => {
-      if (type == 'submit') {
-        this.submitCompleteDialog();
-      } else {
-        this.backToListPage();
+    this.requestService.schCreateRequest(baseForm.value).subscribe(() => {
+      // บันทึกและยื่น
+      if (process === 2) {
+        this.completeDialog(`ระบบทำการบันทึกเรียบร้อยแล้ว
+        สามารถตรวจสอบสถานะภายใน
+        3 - 15 วันทำการ`);
+      } else if (process === 1) {
+        // บันทึกชั่วคราว
+        this.completeDialog(`ระบบทำการบันทึกชั่วคราวเรียบร้อยแล้ว`);
       }
     });
   }
 
-  updateRequest(type: string) {
-    const baseForm = this.fb.group(new SchoolRequest());
+  updateRequest(process: number) {
+    const baseForm = this.fb.group(new KspRequest());
     const formData: any = this.form.getRawValue();
-    const userInfo = formData.userInfo;
-    userInfo.currentprocess = `1`;
+    const userInfo: UserInfoForm = formData.userInfo;
+
+    /* userInfo.currentprocess = `1`;
     userInfo.requeststatus = `1`;
     userInfo.systemtype = `${this.systemType}`;
     userInfo.requesttype = `${this.requestType}`;
-    userInfo.subtype = `${this.requestSubType}`;
+    userInfo.subtype = `${this.requestSubType}`; */
 
-    if (this.requestSubType === SchoolRequestSubType.อื่นๆ) {
+    /*     if (this.careerType === SchoolRequestSubType.อื่นๆ) {
       userInfo.passportenddate = formatDate(userInfo.passportenddate);
       userInfo.passportstartdate = formatDate(userInfo.passportstartdate);
-    }
+    } */
 
     const teaching: any = this.form.controls.teachinginfo.value;
     let teachingInfo = {};
@@ -294,16 +300,16 @@ export class SchoolRequestComponent implements OnInit {
       };
     }
 
-    const visaInfo = {
+    /*     const visaInfo = {
       visaclass: userInfo.visaclass,
       visatype: userInfo.visatype,
       visaenddate: userInfo.visaenddate,
-    };
+    }; */
 
-    const tab3 = mapFileInfo(this.eduFiles);
-    const tab4 = mapFileInfo(this.teachingFiles);
-    const tab5 = mapFileInfo(this.reasonFiles);
-    const tab6 = mapFileInfo(this.attachFiles);
+    const tab3 = mapMultiFileInfo(this.eduFiles);
+    const tab4 = mapMultiFileInfo(this.teachingFiles);
+    const tab5 = mapMultiFileInfo(this.reasonFiles);
+    const tab6 = mapMultiFileInfo(this.attachFiles);
 
     const payload = {
       ...replaceEmptyWithNull(userInfo),
@@ -311,7 +317,7 @@ export class SchoolRequestComponent implements OnInit {
       ...{ eduinfo: JSON.stringify([formData.edu1, formData.edu2]) },
       ...{ teachinginfo: JSON.stringify(teachingInfo) },
       ...{ hiringinfo: JSON.stringify(formData.hiringinfo) },
-      ...{ visainfo: JSON.stringify(visaInfo) },
+      //...{ visainfo: JSON.stringify(visaInfo) },
       ...{ schooladdrinfo: JSON.stringify(formData.schoolAddr) },
       ...{ reasoninfo: JSON.stringify(formData.reasoninfo) },
       ...{ fileinfo: JSON.stringify({ tab3, tab4, tab5, tab6 }) },
@@ -319,32 +325,25 @@ export class SchoolRequestComponent implements OnInit {
 
     baseForm.patchValue(payload);
 
-    const {
-      ref1,
-      ref2,
-      ref3,
-      uniquetimestamp,
-      requestdate,
-      updatedate,
-      requestno,
-      ...temp
-    } = baseForm.value;
+    const { ref1, ref2, ref3, uniqueno, requestdate, requestno, ...temp } =
+      baseForm.value;
 
     const res = replaceEmptyWithNull(temp);
 
     res.id = `${this.requestId}`;
     res.schoolid = this.schoolId;
-    if (type === 'submit') {
-      res.currentprocess = `2`;
-      res.requeststatus = '1';
+
+    /* if (process === 'submit') {
+      res.process = `2`;
+      res.status = '1';
     } else {
-      res.currentprocess = `1`;
-      res.requeststatus = '1';
-    }
+      res.process = `1`;
+      res.status = '1';
+    } */
 
     //console.log('update payload = ', res);
     this.requestService.updateRequest(res).subscribe((res) => {
-      this.backToListPage();
+      //this.backToListPage();
     });
   }
 
@@ -365,8 +364,8 @@ export class SchoolRequestComponent implements OnInit {
   checkButtonsDisableStatus() {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
       //console.log('userInfo valid = ', this.form.controls.userInfo.valid);
-      //console.log('form valid = ', this.form.valid);
-      //console.log('this.currentProcess = ', this.currentProcess);
+      // console.log('form valid = ', this.form.valid);
+      // console.log('this.currentProcess = ', this.currentProcess);
       // สถานะ ยกเลิก disable ทุกอย่าง
       if (this.requestStatus === 0) {
         this.disableTempSave = true;
@@ -381,13 +380,13 @@ export class SchoolRequestComponent implements OnInit {
       }
 
       // formValid + สถานะเป็นสร้างใบคำขอ, บันทึกชั่วคราวได้ ส่งใบคำขอได้
-      else if (this.form.valid && this.currentProcess === 1) {
+      else if (this.form.valid && this.requestProcess === 1) {
         this.disableTempSave = false;
         this.disableSave = false;
       }
 
       // formValid + สถานะเป็นสร้างและส่งใบคำขอ, บันทึกชั่วคราวไม่ได้ ส่งใบคำขอไม่ได้
-      else if (this.form.valid && this.currentProcess === 2) {
+      else if (this.form.valid && this.requestProcess === 2) {
         this.disableTempSave = true;
         this.disableSave = true;
       }
@@ -399,7 +398,7 @@ export class SchoolRequestComponent implements OnInit {
 
       // มีหมายเลขใบคำขอแล้ว enable ปุ่มยกเลิก
       if (this.requestId) {
-        if (this.currentProcess === 0) {
+        if (this.requestProcess === 0) {
           this.disableCancel = true;
         } else {
           this.disableCancel = false;
@@ -418,12 +417,12 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   loadRequestFromId(id: number) {
-    this.requestService.getRequestById(id).subscribe((res) => {
-      this.requestData = res;
+    this.requestService.schGetRequestById(id).subscribe((res) => {
+      //this.requestData = res;
       this.requestDate = thaiDate(new Date(`${res.requestdate}`));
       this.requestNo = res.requestno;
-      this.currentProcess = Number(res.currentprocess);
-      this.requestStatus = Number(res.requeststatus);
+      this.requestProcess = Number(res.process);
+      this.requestStatus = Number(res.status);
       //console.log('current process = ', this.currentProcess);
       this.pathUserInfo(res);
       this.patchAddress(parseJson(res.addressinfo));
@@ -441,8 +440,9 @@ export class SchoolRequestComponent implements OnInit {
   patchTeachingInfo(res: any) {
     //console.log('teaching response= ', res);
     //if (!res.teachingLevel) return;
+    if (!res) return;
     const teachingLevel = levels.map((level) => {
-      if (res.teachingLevel?.includes(level.value)) {
+      if (res?.teachingLevel?.includes(level.value)) {
         return level.value;
       } else {
         return false;
@@ -467,26 +467,26 @@ export class SchoolRequestComponent implements OnInit {
   patchReasonInfo(res: any) {
     this.form.controls.reasoninfo.patchValue(res);
   }
+
   patchFileInfo(res: any) {
-    if (res && res.tab3) {
-      this.patchFileId(this.eduFiles, res.tab3);
+    if (res && res.tab3 && Array.isArray(res.tab3)) {
+      this.eduFiles.forEach((group, index) => (group.files = res.tab3[index]));
     }
-    if (res && res.tab4) {
-      this.patchFileId(this.teachingFiles, res.tab4);
+    if (res && res.tab4 && Array.isArray(res.tab4)) {
+      this.teachingFiles.forEach(
+        (group, index) => (group.files = res.tab4[index])
+      );
     }
-    if (res && res.tab5) {
-      this.patchFileId(this.reasonFiles, res.tab5);
+    if (res && res.tab5 && Array.isArray(res.tab5)) {
+      this.reasonFiles.forEach(
+        (group, index) => (group.files = res.tab5[index])
+      );
     }
-    if (res && res.tab5) {
-      this.patchFileId(this.attachFiles, res.tab6);
+    if (res && res.tab6 && Array.isArray(res.tab6)) {
+      this.attachFiles.forEach(
+        (group, index) => (group.files = res.tab6[index])
+      );
     }
-  }
-  patchFileId(fileList: any, tab: any) {
-    for (let i = 0; i < fileList.length; i++) {
-      fileList[i].fileId = tab[i]?.fileid;
-      fileList[i].fileName = tab[i]?.filename;
-    }
-    return fileList;
   }
   patchHiringInfo(data: any) {
     this.form.controls.hiringinfo.patchValue(data);
@@ -529,9 +529,9 @@ export class SchoolRequestComponent implements OnInit {
           this.patchHiringInfo(parseJson(res.hiringinfo));
         } else {
           // search not found reset form and set idcard again
-          this.form.reset();
-          const temp: any = { idcardno: idCard };
-          this.form.controls.userInfo.patchValue(temp);
+          // this.form.reset();
+          // const temp: any = { idcardno: idCard };
+          // this.form.controls.userInfo.patchValue(temp);
         }
       });
   }
@@ -539,11 +539,10 @@ export class SchoolRequestComponent implements OnInit {
   pathUserInfo(data: any) {
     data.birthdate = data?.birthdate?.split('T')[0];
 
-    if (this.requestSubType === SchoolRequestSubType.อื่นๆ) {
+    if (this.careerType === SchoolRequestSubType.อื่นๆ) {
       data.passportstartdate = data.passportstartdate.split('T')[0];
       data.passportenddate = data.passportenddate.split('T')[0];
       //console.log('data = ', data);
-
       if (data?.visainfo) {
         const visa = parseJson(data?.visainfo);
         data.visaclass = visa.visaclass;
@@ -551,7 +550,6 @@ export class SchoolRequestComponent implements OnInit {
         data.visaenddate = visa.visaenddate;
       }
     }
-
     this.form.controls.userInfo.patchValue(data);
   }
 
@@ -559,7 +557,6 @@ export class SchoolRequestComponent implements OnInit {
     const checked = evt.target.checked;
     this.amphurs2$ = this.amphurs1$;
     this.tumbols2$ = this.tumbols1$;
-
     if (checked) {
       this.form.controls.addr2.patchValue(this.form.controls.addr1.value);
     }
@@ -597,11 +594,11 @@ export class SchoolRequestComponent implements OnInit {
     this.router.navigate(['/temp-license', 'list']);
   }
 
-  permanentBtnClick() {
+  forbiddenDialog() {
     const dialogRef = this.dialog.open(ForbiddenPropertyFormComponent, {
       width: '850px',
       data: {
-        uniqueTimeStamp: this.uniqueTimestamp,
+        uniqueTimeStamp: this.uniqueNo,
       },
     });
 
@@ -609,17 +606,28 @@ export class SchoolRequestComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         if (res) {
-          this.submitConfirmDialog();
+          // confirm เพื่อ บันทึกและยื่นใบคำขอ
+          this.confirmDialog(2);
         }
       });
   }
 
-  tempSaveConfirmDialog() {
+  /**
+   *
+   * @param
+   * process = 1 บันทึกชั่วคราว
+   * process = 2 บันทึกและยื่น
+   *
+   */
+  confirmDialog(process: number) {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
-        //subTitle: ``,
+        subTitle:
+          process === 2
+            ? `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
+        ใช่หรือไม่`
+            : '',
         btnLabel: 'บันทึก',
       },
     });
@@ -629,64 +637,16 @@ export class SchoolRequestComponent implements OnInit {
       .subscribe((res) => {
         if (res) {
           if (this.requestId) {
-            this.updateRequest('temp');
+            this.updateRequest(process);
           } else {
-            this.createRequest('temp');
+            this.createRequest(process);
           }
-        }
-      });
-  }
-
-  submitConfirmDialog() {
-    const dialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
-      data: {
-        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
-        subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
-        ใช่หรือไม่`,
-        btnLabel: 'บันทึก',
-      },
-    });
-
-    dialog.componentInstance.confirmed
-      .pipe(untilDestroyed(this))
-      .subscribe((res) => {
-        if (res) {
-          // this.confirmCompleted();
-          // ถ้ามี request id เปลี่ยนสถานะ
-          // ถ้ายังไม่มี request id insert new row
-          if (this.requestId) {
-            this.updateRequest('submit');
-          } else {
-            this.createRequest('submit');
-          }
-        }
-      });
-  }
-
-  submitCompleteDialog() {
-    const dialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
-      data: {
-        header: `ระบบทำการบันทึกเรียบร้อยแล้ว
-        สามารถตรวจสอบสถานะภายใน
-        3 - 15 วันทำการ`,
-        buttonLabel: 'กลับสู่หน้าหลัก',
-      },
-    });
-
-    dialog.componentInstance.completed
-      .pipe(untilDestroyed(this))
-      .subscribe((res) => {
-        if (res) {
-          this.backToListPage();
         }
       });
   }
 
   cancelConfirmDialog() {
     const dialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `คุณต้องการยกเลิกรายการใบคำขอ
         ใช่หรือไม่? `,
@@ -702,34 +662,15 @@ export class SchoolRequestComponent implements OnInit {
       });
   }
 
-  cancelDoneDialog() {
+  completeDialog(header: string) {
     const dialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
       data: {
-        header: `ยกเลิกใบคำขอสำเร็จ`,
+        header,
         buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 
     dialog.componentInstance.completed
-      .pipe(untilDestroyed(this))
-      .subscribe((res) => {
-        if (res) {
-          this.backToListPage();
-        }
-      });
-  }
-
-  tempSaveComplete() {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
-      data: {
-        header: `บันทึกใบคำขอชั่วคราวสำเร็จ`,
-        buttonLabel: 'กลับสู่หน้าหลัก',
-      },
-    });
-
-    completeDialog.componentInstance.completed
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         if (res) {

@@ -1,0 +1,16 @@
+#btn-upload {
+  font-size: 14px;
+  width: 100px;
+}
+
+.view__label {
+  color: #f68b33;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+@media only screen and (max-width: 768px) {
+  .table {
+    white-space: nowrap;
+  }
+}
