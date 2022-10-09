@@ -234,6 +234,7 @@
         [class.form-control-sp]="isDarkMode"
         formControlName="birthdate"
         matInput
+        [max]="today"
         [matDatepicker]="picker"
       />
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>

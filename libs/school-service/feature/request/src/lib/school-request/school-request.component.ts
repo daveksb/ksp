@@ -18,7 +18,12 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
-import { KspRequest, SchoolRequest, UserInfoForm } from '@ksp/shared/interface';
+import {
+  FileGroup,
+  KspRequest,
+  SchoolRequest,
+  UserInfoForm,
+} from '@ksp/shared/interface';
 
 import {
   AddressService,
@@ -29,7 +34,6 @@ import {
 } from '@ksp/shared/service';
 import {
   formatCheckboxData,
-  formatDate,
   mapMultiFileInfo,
   parseJson,
   replaceEmptyWithNull,
@@ -72,11 +76,9 @@ export class SchoolRequestComponent implements OnInit {
   requestNo: string | null = '';
   requestProcess!: number;
   requestStatus!: number;
-
   disableTempSave = true;
   disableSave = true;
   disableCancel = true;
-
   icCardNo = '';
   schoolAddressLabel = `ที่อยู่ของสถานศึกษา
   ที่ขออนุญาต`;
@@ -84,11 +86,12 @@ export class SchoolRequestComponent implements OnInit {
   schoolId = '0010201056';
   userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form
 
-  eduFiles: any[] = [];
-  teachingFiles: any[] = [];
-  reasonFiles: any[] = [];
-  attachFiles: any[] = [];
+  eduFiles: FileGroup[] = [];
+  teachingFiles: FileGroup[] = [];
+  reasonFiles: FileGroup[] = [];
+  attachFiles: FileGroup[] = [];
   prefixList$!: Observable<any>;
+
   option1 = this.fb.control(false);
   option2 = this.fb.control(false);
   option3 = this.fb.control(false);
