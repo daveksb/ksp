@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { FileGroup, UserInfoFormType } from '@ksp/shared/constant';
+import { UserInfoFormType } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { FileGroup } from '@ksp/shared/interface';
 import { GeneralInfoService, RequestService } from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
 import localForage from 'localforage';
@@ -33,9 +34,9 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
     private requestService: RequestService
   ) {}
   userInfoFormType: number = UserInfoFormType.thai;
-  retiredFiles = [
+  retiredFiles: FileGroup[] = [
     { name: 'หนังสือแต่งตั้งผู้ประสานงาน', files: [] },
-  ] as FileGroup[];
+  ];
   prefixList$!: Observable<any>;
   uniqueTimestamp: any;
 

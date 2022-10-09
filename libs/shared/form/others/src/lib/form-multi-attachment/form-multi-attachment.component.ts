@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { FormMode } from '@ksp/shared/interface';
+import { FileGroup, FormMode, KspFile } from '@ksp/shared/interface';
 import { FilesPreviewComponent } from '@ksp/shared/dialog';
 import { FileService } from '@ksp/shared/form/file-upload';
-import { FileGroup, KspFile } from '@ksp/shared/constant';
 
 @Component({
   selector: 'ksp-form-multi-attachment',

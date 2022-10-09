@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -9,48 +9,26 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./form-reason-info.component.scss'],
   providers: providerFactory(FormReasonInfoComponent),
 })
-export class FormReasonInfoComponent
-  extends KspFormBaseComponent
-  implements OnInit
-{
-  @Input() requestType: any;
+export class FormReasonInfoComponent extends KspFormBaseComponent {
+  @Input() careerType = 0;
 
-  teacherReason = teacherReasons;
+  teacherReasons = teacherReasons;
   schoolReason1 = schoolReasons1;
   schoolReason2 = schoolReasons2;
 
   override form = this.fb.group({
-    schoolReasonInfo: [],
-    school1: [false],
-    school2: [false],
-    school3: [false],
-    school4: [false],
     schoolOtherDetail: [],
-    teacherReasonInfo: [],
-    teacher1: [false],
-    teacher2: [false],
-    teacher3: [false],
-    teacher4: [false],
-    teacher5: [false],
-    teacher6: [false],
     teacherOtherDetail: [],
   });
 
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
         this.onChange(value);
         this.onTouched();
       })
     );
-  }
-
-  ngOnInit(): void {
-    this.form.valueChanges.subscribe((res) => {
-      //console.log('res = ', res);
-    });
   }
 }
 

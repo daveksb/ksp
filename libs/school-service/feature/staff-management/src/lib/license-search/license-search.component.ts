@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SelfLicense, staffLicenseTypes } from '@ksp/shared/constant';
-import { ListData } from '@ksp/shared/interface';
+import { staffLicenseTypes } from '@ksp/shared/constant';
+import { ListData, SelfLicense } from '@ksp/shared/interface';
 import { SchoolLicenseService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import localForage from 'localforage';

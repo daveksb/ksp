@@ -1,4 +1,4 @@
-import { FileGroup } from './ksp-constant';
+import { FileGroup } from '@ksp/shared/interface';
 
 export const RequestEduFiles: FileGroup[] = [
   {

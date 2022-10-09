@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormMode } from '@ksp/shared/interface';
+import { FileGroup, FormMode } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -17,7 +17,6 @@ import {
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { mapMultiFileInfo, thaiDate } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
-import { FileGroup } from '@ksp/shared/constant';
 
 @UntilDestroy()
 @Component({
