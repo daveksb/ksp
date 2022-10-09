@@ -18,3 +18,5 @@ export * from './lib/school-user';
 export * from './lib/ksp-response';
 export * from './lib/ksp-request';
 export * from './lib/ksp-request-process';
+export * from './lib/ksp-file';
+export * from './lib/self-license';

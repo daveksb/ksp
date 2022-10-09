@@ -191,6 +191,7 @@ export class SchoolRequestComponent implements OnInit {
     console.log('create request = ');
     const baseForm = this.fb.group(new KspRequest());
     const formData: any = this.form.getRawValue();
+    console.log('formdata = ', formData);
     const tab3 = mapMultiFileInfo(this.eduFiles);
     const tab4 = mapMultiFileInfo(this.teachingFiles);
     const tab5 = mapMultiFileInfo(this.reasonFiles);
@@ -200,8 +201,9 @@ export class SchoolRequestComponent implements OnInit {
 
     const { id, ...userInfo } = formData.userInfo;
     userInfo.schoolid = this.schoolId;
-    userInfo.status = `1`;
+
     userInfo.process = `${process}`;
+    userInfo.status = `1`;
 
     userInfo.ref1 = `${this.systemType}`;
     userInfo.ref2 = '03';
@@ -251,7 +253,7 @@ export class SchoolRequestComponent implements OnInit {
 
     baseForm.patchValue(payload);
     //console.log('current form = ', baseForm.value);
-    this.requestService.schCreateRequest(baseForm.value).subscribe(() => {
+    /*   this.requestService.schCreateRequest(baseForm.value).subscribe(() => {
       // บันทึกและยื่น
       if (process === 2) {
         this.completeDialog(`ระบบทำการบันทึกเรียบร้อยแล้ว
@@ -261,10 +263,10 @@ export class SchoolRequestComponent implements OnInit {
         // บันทึกชั่วคราว
         this.completeDialog(`ระบบทำการบันทึกชั่วคราวเรียบร้อยแล้ว`);
       }
-    });
+    }); */
   }
 
-  updateRequest(type: string) {
+  updateRequest(process: number) {
     const baseForm = this.fb.group(new KspRequest());
     const formData: any = this.form.getRawValue();
     const userInfo: UserInfoForm = formData.userInfo;
@@ -328,17 +330,18 @@ export class SchoolRequestComponent implements OnInit {
 
     res.id = `${this.requestId}`;
     res.schoolid = this.schoolId;
-    if (type === 'submit') {
+
+    /* if (process === 'submit') {
       res.process = `2`;
       res.status = '1';
     } else {
       res.process = `1`;
       res.status = '1';
-    }
+    } */
 
     //console.log('update payload = ', res);
     this.requestService.updateRequest(res).subscribe((res) => {
-      this.backToListPage();
+      //this.backToListPage();
     });
   }
 
@@ -621,7 +624,7 @@ export class SchoolRequestComponent implements OnInit {
       .subscribe((res) => {
         if (res) {
           if (this.requestId) {
-            this.updateRequest('temp');
+            this.updateRequest(1);
           } else {
             this.createRequest(1);
           }
@@ -645,7 +648,7 @@ export class SchoolRequestComponent implements OnInit {
         if (res) {
           if (this.requestId) {
             // ถ้ามี request id เปลี่ยนสถานะ
-            this.updateRequest('submit');
+            this.updateRequest(2);
           } else {
             // ถ้ายังไม่มี request id insert new row
             this.createRequest(2);

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { SelfLicense } from '@ksp/shared/constant';
+import { SelfLicense } from '@ksp/shared/interface';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
 
 @Component({
