@@ -1,17 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import {
-  GeneralInfoService,
-  AddressService,
-  MyInfoService,
-} from '@ksp/shared/service';
+import { GeneralInfoService, AddressService } from '@ksp/shared/service';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { nameEnPattern, passportPattern } from '@ksp/shared/utility';
-import { parseJson } from '@ksp/shared/utility';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+import moment from 'moment';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'self-service-foreign-license-step-two',
   templateUrl: './foreign-license-step-two.component.html',
@@ -78,13 +76,11 @@ export class ForeignLicenseStepTwoComponent
   nationalitys$!: Observable<any>;
   countries$!: Observable<any>;
   countries2$!: Observable<any>;
+  age = '';
 
   override form = this.fb.group({
     id: [],
-    passportno: [
-      null,
-      [Validators.required, Validators.pattern(passportPattern)],
-    ],
+    passportno: [null, [Validators.required]],
     prefixen: [null, Validators.required],
     firstnameen: [
       null,
@@ -95,13 +91,13 @@ export class ForeignLicenseStepTwoComponent
       null,
       [Validators.required, Validators.pattern(nameEnPattern)],
     ],
-    sex: [null, Validators.required],
     birthdate: [null, Validators.required],
-    nationality: [null],
+    nationality: [null, Validators.required],
     addressForm: [],
     workplaceForm: [],
     academicForm: [],
     grantionLicenseForm: [],
+    licensureInfoForm: [],
   });
 
   constructor(
@@ -122,6 +118,16 @@ export class ForeignLicenseStepTwoComponent
   ngOnInit(): void {
     this.getListData();
     // this.getMyInfo();
+    this.form.controls.birthdate.valueChanges
+      .pipe(untilDestroyed(this))
+      .subscribe((value) => {
+        if (value) {
+          const birthDate = moment(value);
+          const currentDate = moment(new Date());
+          const age = Math.abs(birthDate.diff(currentDate, 'years'));
+          this.age = `${age}`;
+        }
+      });
   }
 
   getListData() {

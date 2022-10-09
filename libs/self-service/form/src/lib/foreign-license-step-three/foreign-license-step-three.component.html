@@ -19,9 +19,9 @@
         [systemFileName]="file.name"
         [uniqueTimestamp]="uniqueTimestamp"
         [filename]="file.filename"
+        [fileid]="file.fileid"
         [showDeleteFile]="true"
-        (uploadComplete)="updateComplete($event, file)"
-      ></ksp-file-upload>
+        (uploadComplete)="updateComplete($event, file)"></ksp-file-upload>
     </div>
   </ng-container>
 </div>

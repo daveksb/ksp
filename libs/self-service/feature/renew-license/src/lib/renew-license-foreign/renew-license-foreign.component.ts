@@ -35,6 +35,7 @@ export class RenewLicenseForeignComponent implements OnInit {
   form = this.fb.group({
     personalDetail: [],
     personalDeclaration: [],
+    renewalRequirements: [],
   });
 
   uniqueTimestamp!: string;

@@ -4,41 +4,38 @@
     performance since issued date of license until present.
   </div>
   <div class="d-flex mt-2">
-    <input type="checkbox" class="me-2 mt-1" [formControl]="option1" />
-    <label class="form-label"
-      >Having taken a training course in knowledge of professional standard and
+    <input type="checkbox" class="me-2 mt-1" formControlName="activity13" />
+    <label class="form-label">Having taken a training course in knowledge of professional standard and
       code of ethics as stipulated by the Teachers' Council of Thailand Board
     </label>
   </div>
 
-  <ng-container *ngIf="Option1$ | async">
+  <ng-container *ngIf="activity1">
     <div class="bg-light px-3 py-2 my-2">
       <ksp-standard-train-pass
         [isForeignForm]="true"
-        formControlName="activity1"
-      ></ksp-standard-train-pass></div
-  ></ng-container>
+        formControlName="trainInfo"></ksp-standard-train-pass>
+    </div>
+  </ng-container>
 
   <div class="d-flex mt-2">
-    <input type="checkbox" class="me-2 mt-1" [formControl]="option2" />
-    <label class="form-label"
-      >Having passed the test of knowledge on professional standard and code of
+    <input type="checkbox" class="me-2 mt-1" formControlName="activity14" />
+    <label class="form-label">Having passed the test of knowledge on professional standard and code of
       ethics as stipulated by the Teachers' Council of Thailand Board
     </label>
   </div>
 
-  <ng-container *ngIf="Option2$ | async">
+  <ng-container *ngIf="activity2">
     <div class="bg-light px-3 py-2 my-2">
       <ksp-standard-test-pass
         [isForeignForm]="true"
-        formControlName="activity2"
-      ></ksp-standard-test-pass></div
-  ></ng-container>
+        formControlName="testInfo"></ksp-standard-test-pass>
+    </div>
+  </ng-container>
 
   <div class="d-flex mt-2">
-    <input type="checkbox" class="me-2 mt-1" [formControl]="option3" />
-    <label class="form-label"
-      >Being in the process of training or testing knowledge of professional
+    <input type="checkbox" class="me-2 mt-1" formControlName="activity15" />
+    <label class="form-label">Being in the process of training or testing knowledge of professional
       standard and code of ethics as stipulated by the Teachers' Council of
       Thailand Board (must be finished within six months)
     </label>
