@@ -42,6 +42,7 @@ import { RequestSearchComponent } from '@ksp/shared/search';
     MatPaginatorModule,
     ThaiDatePipe,
     RequestSearchComponent,
+    SharedFormOthersModule,
   ],
   declarations: [
     ETempLicenseListComponent,

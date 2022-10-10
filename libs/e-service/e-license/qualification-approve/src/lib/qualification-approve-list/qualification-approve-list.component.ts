@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -7,11 +7,7 @@ import { Router } from '@angular/router';
 import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
 import { EsSearchPayload, SchoolRequest } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
-import {
-  applyClientFilter,
-  checkProcess,
-  checkStatus,
-} from '@ksp/shared/utility';
+import { checkProcess, checkStatus } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-qualification-approve-list',
@@ -55,8 +51,7 @@ export class QualificationApproveListComponent implements AfterViewInit {
 
     this.eRequestService.EsSearchRequest(payload).subscribe((res) => {
       if (res) {
-        const result = applyClientFilter(res, params);
-        this.dataSource.data = result;
+        this.dataSource.data = res;
       } else {
         this.clear();
       }

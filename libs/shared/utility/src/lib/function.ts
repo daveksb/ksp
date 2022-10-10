@@ -3,7 +3,7 @@ import {
   SchoolRequestType,
   SelfRequestProcess,
 } from '@ksp/shared/constant';
-import { FileGroup } from '@ksp/shared/interface';
+import { FileGroup, SchoolRequest } from '@ksp/shared/interface';
 import moment from 'moment';
 
 // return Thai date format,
@@ -152,7 +152,7 @@ export function jsonStringify(object: any): string {
   }
 }
 
-/* export function applyClientFilter(data: SchoolRequest[], searchParams: any) {
+export function applyClientFilter(data: SchoolRequest[], searchParams: any) {
   const { requesttype, ...param } = searchParams;
   return data.filter((d) => {
     const filter1 = param.requestno
@@ -187,4 +187,3 @@ export function jsonStringify(object: any): string {
     );
   });
 }
- */

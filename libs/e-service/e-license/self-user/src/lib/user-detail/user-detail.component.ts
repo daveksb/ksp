@@ -57,7 +57,7 @@ export class UserDetailComponent implements OnInit {
 
   requestId!: number | null;
   requestDate!: string | null;
-  requestData!: SchoolRequest;
+  requestData!: any;
   prefixList$!: Observable<any>;
 
   requestNo: string | null = '';
