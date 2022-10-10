@@ -329,6 +329,7 @@
                   style="width: 175px"
                   pInputText
                   #idcard
+                  maxlength="13"
                   type="text"
                   formControlName="idcardno"
                   (blur)="searchByIdcard(
@@ -465,6 +466,7 @@
                   style="width: 150px"
                   pInputText
                   type="text"
+                  maxlength="10"
                   formControlName="phone"
                   [readonly]="pageType === 'graduateList'"
                 />
@@ -519,7 +521,7 @@
             <tr [formGroupName]="ii">
               <td></td>
               <td colspan="8">
-                <form [formGroup]="getForm(ii)">
+                <form [formGroup]="control.controls.address">
                   <ksp-form-address-table formControlName="addressInfo"></ksp-form-address-table>
                 </form>
               </td>

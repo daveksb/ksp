@@ -132,24 +132,24 @@
     </div>
 
     <div class="row mb-3">
-      <div class="col-6">
-        <label class="form-label required">ตำแหน่งทางการบริหาร</label>
-        <select
-          class="form-select"
+      <div class="col-sm-6">
+        <label class="form-label required">ตำแหน่ง</label>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="กรุณากรอกตำแหน่ง"
           formControlName="position"
-          (change)="chageposition($event)"
+        />
+        <ng-container
+          *ngIf="position.invalid && (position.dirty || position.touched)"
         >
-          <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option
-            *ngFor="let occupy of occupyList"
-            [value]="occupy.eduoccupytype"
-          >
-            {{ occupy.eduoccupyname }}
-          </option>
-        </select>
+          <span class="text-danger" *ngIf="position.errors?.['pattern']">
+            {{ validatorMessages.en }}
+          </span>
+        </ng-container>
       </div>
       <div
-        class="col-6"
+        class="col-sm-6"
         *ngIf="form.value.position && form.value.position === '0'"
       >
         <label class="form-label"><br /></label>
@@ -163,16 +163,7 @@
     </div>
 
     <div class="row mb-3">
-      <div class="col-6">
-        <label class="form-label required">สังกัด</label>
-        <select class="form-select" formControlName="unitype">
-          <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option *ngFor="let unitype of uniType" [value]="unitype.id">
-            {{ unitype.name }}
-          </option>
-        </select>
-      </div>
-      <div class="col">
+      <div class="col-sm-6">
         <label class="form-label">เบอร์โทรศัพท์ (ที่ทำงาน)</label>
         <input class="form-control" type="text" formControlName="workphone" />
         <ng-container
@@ -183,10 +174,7 @@
           </span>
         </ng-container>
       </div>
-    </div>
-
-    <div class="row mb-3">
-      <div class="col">
+      <div class="col-sm-6">
         <label class="form-label required">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
         <input
           class="form-control"
@@ -203,7 +191,10 @@
           </span>
         </ng-container>
       </div>
-      <div class="col">
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-sm-6">
         <label class="form-label required">อีเมล</label>
         <input class="form-control" type="text" formControlName="email" />
         <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">

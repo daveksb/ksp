@@ -32,6 +32,7 @@ export class RetiredSearchComponent
   bureaus$!: Observable<any>;
   uniType$!: Observable<any>;
   @Input() searchType = '';
+  @Input() subsearchType = 'all';
   @Output() clear = new EventEmitter();
   @Output() search = new EventEmitter();
   permissionList: Array<any> = uniPermissionList;

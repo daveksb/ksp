@@ -77,7 +77,6 @@ export class ImportStudentComponent implements OnInit {
       }
     })
     this.route.paramMap.subscribe((res) => {
-      console.log(res.get('type'))
       this.pageType = res.get('type') || 'studentList';
     });
     const userId = Number(getCookie('userId'));
@@ -205,7 +204,7 @@ export class ImportStudentComponent implements OnInit {
                             provinceid: [userAddress?.provinceid || null],
                             districtid: [userAddress?.districtid || null],
                             subdistrictid: [userAddress?.subdistrictid || null],
-                            remark: []
+                            remark: [userAddress?.remark || null]
                           }]
                         })
                       })
@@ -237,7 +236,7 @@ export class ImportStudentComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['./', 'home']);
+    this.router.navigate(['/student-list', 'degree-list']);
   }
 
   get user(): FormArray {
@@ -262,7 +261,7 @@ export class ImportStudentComponent implements OnInit {
       lastnameen: ['', [Validators.required, Validators.pattern(nameEnPattern)]],
       phone: ['', [Validators.required, Validators.pattern(phonePattern)]],
       birthdate: ['', Validators.required],
-      address: this.fb.group({ addressInfo: [{}] }),
+      address: this.fb.group({ addressInfo: [] }),
       approveno: ['',
       this.pageType == 'graduateList' ? Validators.required : undefined],
       graduationdate: ['',
@@ -503,25 +502,6 @@ export class ImportStudentComponent implements OnInit {
     });
   }
 
-  selectedNationality(event: any, index: number) {
-    const find = this.nationality.find(s=>{return s.nationId == event.target.value});
-    this.users[index-1].nationality = find.nationName;
-  }
-
-  selectedPrefixTh(event: any, index: number) {
-    const find = this.ThPrefixes.find(s=>{return s.id == event.target.value});
-    this.users[index-1].prefixth = find.name_th;
-  }
-
-  selectedPrefixEn(event: any, index: number) {
-    const find = this.EngPrefixes.find(s=>{return s.id == event.target.value});
-    this.users[index-1].prefixen = find.name_en;
-  }
-
-  tempSave() {
-    localForage.setItem('userlist', this.users);
-  }
-
   async onFileSelected(event: any) {
     this.exceltoJson = {};
     const target: DataTransfer = <DataTransfer>(event.target);
@@ -544,18 +524,6 @@ export class ImportStudentComponent implements OnInit {
 
   downloadfile() {
     window.open('/assets/file/admission_example.xlsx', '_blank');
-  }
-
-  filterList(object: string, value: string) {
-    if (value) {
-      const filtervalue = this.userBackup.filter((user: any)=>{
-        return user[object].includes(value);
-      })
-     this.user.setValue(filtervalue);
-     this.user.updateValueAndValidity();
-    } else {
-      this.user.setValue(this.userBackup);
-    }
   }
 
   searchByIdcard(params: any, index: any) {
@@ -617,14 +585,5 @@ export class ImportStudentComponent implements OnInit {
       });
       return invalidform || empytychecked;
     }
-  }
-
-  getForm(index: any) {
-    const addressControl = this.user.controls[index].get('address') as FormGroup;
-    return addressControl;
-  }
-
-  testcontrol(control:any){
-    console.log(control)
   }
 }
