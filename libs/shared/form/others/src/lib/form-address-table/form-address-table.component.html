@@ -57,7 +57,7 @@
       </div>
       <div class="col-sm-6 col-md-3 mb-1">
         <label class="form-label">ตำบล<span class="text-danger"> *</span></label>
-        <select class="form-select" formControlName="subdistrictid">
+        <select class="form-select" formControlName="subdistrictid" (change)="selectSubdistrict($event)">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let subDistrict of subDistrictList" [value]="subDistrict.tambolCode">{{subDistrict.tambolName}}</option>
         </select>
