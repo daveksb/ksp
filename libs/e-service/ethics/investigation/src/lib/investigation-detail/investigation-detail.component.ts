@@ -38,7 +38,7 @@ export class InvestigationDetailComponent implements OnInit {
   }
   cancel() {
     //this.form.valueChanges.subscribe((res) => console.log(' res = ', res));
-    this.router.navigate(['/', 'accusation']);
+    this.router.navigate(['/accusation']);
   }
 
   save() {
@@ -89,7 +89,7 @@ export class InvestigationDetailComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'investigation']);
+        this.router.navigate(['/investigation']);
       }
     });
   }
@@ -102,7 +102,7 @@ export class InvestigationDetailComponent implements OnInit {
           .subscribe((res: any) => {
             this.accusation.accusationFiles.forEach((element, index) => {
               if (res.accusationfile) {
-                const json = jsonParse(res?.accusationfile);
+                const json: any = jsonParse(res?.accusationfile);
                 element.fileid = json[index]?.fileid;
                 element.filename = json[index]?.filename;
               }
@@ -110,7 +110,7 @@ export class InvestigationDetailComponent implements OnInit {
             if (res?.accuserinfo) {
               const json = jsonParse(res?.accuserinfo);
 
-              if (json.length) {
+              if (json && json.length) {
                 for (let i = 0; i < json.length; i++) {
                   this.accusation.addRow();
                 }

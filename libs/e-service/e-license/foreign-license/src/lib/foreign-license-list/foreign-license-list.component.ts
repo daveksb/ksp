@@ -7,7 +7,6 @@ import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
 import { EsSearchPayload, SchoolRequest } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import {
-  applyClientFilter,
   checkProcess,
   checkRequestType,
   checkStatus,
@@ -26,7 +25,7 @@ export class ForeignLicenseListComponent implements AfterViewInit {
   });
 
   displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<SchoolRequest>();
+  dataSource = new MatTableDataSource<any>();
   checkProcess = checkProcess;
   checkRequestType = checkRequestType;
   checkStatus = checkStatus;
@@ -54,8 +53,7 @@ export class ForeignLicenseListComponent implements AfterViewInit {
 
     this.eRequestService.EsSearchRequest(payload).subscribe((res) => {
       if (res) {
-        const result = applyClientFilter(res, params);
-        this.dataSource.data = result;
+        this.dataSource.data = res;
       } else {
         this.clear();
       }
