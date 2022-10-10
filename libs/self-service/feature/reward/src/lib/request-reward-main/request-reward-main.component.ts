@@ -95,8 +95,8 @@ export class RequestRewardMainComponent implements OnInit {
             console.log(res);
             this.requestData = res;
             this.requestNo = res.requestno;
-            this.currentProcess = Number(res.currentprocess);
-            this.uniqueTimestamp = res.uniquetimestamp || '';
+            this.currentProcess = Number(res.process);
+            this.uniqueTimestamp = res.uniqueno || '';
             console.log(this.uniqueTimestamp);
 
             this.patchData(res);
@@ -387,9 +387,9 @@ export class RequestRewardMainComponent implements OnInit {
     const form: any = this.form.value.rewardDetail;
     //console.log(form);
     const userInfo = toLowercaseProp(form.userInfo);
-    userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
-    userInfo.uniquetimestamp = this.uniqueTimestamp;
-    userInfo.staffid = getCookie('userId');
+    self.isforeign = `${SelfServiceRequestForType.ชาวไทย}`;
+    self.uniqueno = this.uniqueTimestamp;
+    self.userid = getCookie('userId');
     userInfo.addressinfo = null;
     const selectData = _.pick(userInfo, allowKey);
     const rewardfiles = this.rewardFiles;

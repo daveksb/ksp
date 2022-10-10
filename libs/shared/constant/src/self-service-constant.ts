@@ -23,8 +23,8 @@ export enum SelfServiceRequestType {
 }
 
 export enum SelfServiceRequestForType {
-  'ชาวไทย' = 1,
-  'ชาวต่างชาติ' = 2,
+  'ชาวไทย' = 0,
+  'ชาวต่างชาติ' = 1,
 }
 
 export const SelfServiceSelfDevelopActivityTiess = [

@@ -62,6 +62,12 @@ export class ForeignLicenseStepTwoComponent
       this.form.controls.grantionLicenseForm.patchValue(value);
     }, 0);
   }
+  @Input()
+  set licensureInfo(value: any) {
+    setTimeout(() => {
+      this.form.controls.licensureInfoForm.patchValue(value);
+    }, 0);
+  }
   @Input() academicFiles: any[] = [];
   @Input() uniqueTimestamp!: string;
   @Input() isRenewLicense = false;
@@ -93,6 +99,7 @@ export class ForeignLicenseStepTwoComponent
     ],
     birthdate: [null, Validators.required],
     nationality: [null, Validators.required],
+    foreignpassporttype: [null, Validators.required],
     addressForm: [],
     workplaceForm: [],
     academicForm: [],

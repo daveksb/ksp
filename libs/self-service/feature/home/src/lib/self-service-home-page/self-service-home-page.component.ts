@@ -85,8 +85,8 @@ export class SelfServiceHomePageComponent implements AfterViewInit {
   goToDetail(input: SelfRequest) {
     console.log('self request = ', input);
     const requestType = Number(input.requesttype);
-    const subType = Number(input.subtype);
-    const isForeign = Number(input.requestfor);
+    const subType = Number(input.careertype);
+    const isForeign = Number(input.isforeign);
     const id = Number(input.id);
     console.log('subType ', subType);
 
