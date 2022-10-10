@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  SchoolRequest,
-  SchoolServiceUserPageType,
-} from '@ksp/shared/interface';
+import { SchoolServiceUserPageType } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,

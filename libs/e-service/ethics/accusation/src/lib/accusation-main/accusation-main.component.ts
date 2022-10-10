@@ -49,9 +49,11 @@ export class AccusationMainComponent implements OnInit {
           this.accusation.accusationFiles.forEach(
             (element: any, index: any) => {
               if (res.accusationfile) {
-                const json = jsonParse(res?.accusationfile);
-                element.fileid = json[index]?.fileid;
-                element.filename = json[index]?.filename;
+                const json: any = jsonParse(res?.accusationfile);
+                if (json) {
+                  element.fileid = json[index]?.fileid;
+                  element.filename = json[index]?.filename;
+                }
               }
             }
           );
