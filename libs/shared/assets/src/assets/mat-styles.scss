@@ -169,3 +169,35 @@ button.mat-menu-item {
 .mat-tab-label.mat-tab-label-active {
   color: #0056ff;
 }
+
+:host ::ng-deep .mat-input-element {
+  font-family: 'ksp regular' !important;
+  font-size: 18px !important;
+  border: 1px solid #ced4da;
+  background-color: #fff;
+}
+
+:host ::ng-deep .mat-input-element:disabled {
+  background-color: #e9ecef;
+}
+
+.mat-icon-button {
+  width: fit-content !important;
+  height: fit-content !important;
+}
+
+.mat-datepicker-content .mat-calendar {
+  height: auto !important;
+}
+
+.mat-calendar-table-header th {
+  padding: 0 !important;
+}
+
+.mat-calendar-table-header th {
+  font-size: 14px !important;
+}
+
+.mat-calendar-body-selected {
+  background-color: #0056ff !important;
+}

@@ -62,13 +62,6 @@ add asterisk for required feild
   font-family: 'ksp regular';
 }
 
-.form-search {
-  display: block;
-  background: white url(/assets/images/search-icon.svg) no-repeat right 10px
-    center;
-  padding-right: 2.5rem !important;
-}
-
 .sticky-bottom {
   position: sticky;
   background-color: white;
@@ -105,7 +98,7 @@ add asterisk for required feild
   max-width: var(--ksp-content-width);
 }
 
-thead {
+thead tr {
   background-color: #edf6ff;
 }
 
@@ -163,3 +156,4 @@ input[type='radio']:checked {
   overflow-x: auto;
   overflow-y: hidden;
 }
+

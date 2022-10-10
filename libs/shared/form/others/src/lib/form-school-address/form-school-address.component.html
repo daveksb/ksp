@@ -12,11 +12,20 @@
       </div>
       <div class="col-6 mb-3">
         <label class="form-label">วันที่ออกหนังสือนำส่ง</label>
-        <input
-          class="form-control"
-          type="date"
-          formControlName="letterrelease"
-        />
+        <div class="d-flex align-items-baseline">
+          <input
+            matInput
+            [matDatepicker]="picker"
+            autocomplete="off"
+            class="form-control me-2"
+            formControlName="letterrelease"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </div>
       </div>
     </div>
 

@@ -16,12 +16,21 @@ import {
   SchoolRequestType,
 } from '@ksp/shared/constant';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @UntilDestroy()
 @Component({
   selector: 'ksp-school-request-search',
   standalone: true,
-  imports: [CommonModule, MatIconModule, ReactiveFormsModule, MatTooltipModule],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    MatTooltipModule,
+    MatInputModule,
+    MatDatepickerModule,
+  ],
   templateUrl: './request-search.component.html',
   styleUrls: ['./request-search.component.scss'],
   providers: providerFactory(RequestSearchComponent),

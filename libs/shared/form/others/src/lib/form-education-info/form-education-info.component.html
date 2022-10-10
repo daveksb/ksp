@@ -57,19 +57,37 @@
     <div class="row">
       <div class="col mb-3">
         <label class="form-label">วันเดือนปี เข้าศึกษา</label>
-        <input
-          class="form-control"
-          type="date"
-          formControlName="admissionDate"
-        />
+        <div class="d-flex align-items-baseline">
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            autocomplete="off"
+            class="form-control me-2"
+            fformControlName="admissionDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </div>
       </div>
       <div class="col mb-3">
         <label class="form-label">วันเดือนปี สำเร็จการศึกษา</label>
-        <input
-          class="form-control"
-          type="date"
-          formControlName="graduateDate"
-        />
+        <div class="d-flex align-items-baseline">
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            autocomplete="off"
+            class="form-control me-2"
+            formControlName="graduateDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </div>
       </div>
     </div>
 
