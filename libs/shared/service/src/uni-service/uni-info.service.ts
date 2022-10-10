@@ -13,7 +13,7 @@ export class UniInfoService {
   univerSitySelectById(id: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/kspuni/universityselectbyid`, {
       id,
-      tokenkey:  getCookie('userToken'),
+      tokenkey: getCookie('userToken'),
     });
   }
   searchTypeidUniUniversity(id: any): Observable<any> {
@@ -28,7 +28,7 @@ export class UniInfoService {
     return this.http
       .post(`${environment.shortApiUrl}/unirequestdegreecertsearch.php`, {
         ...params,
-        tokenkey:  getCookie('userToken'),
+        tokenkey: getCookie('userToken'),
       })
       .pipe(
         map((res: any) => {
@@ -43,7 +43,7 @@ export class UniInfoService {
   uniRequestDegreeCertSelectById(id: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspuni/unirequestdegreecertselectbyid`,
-      { id, tokenkey:  getCookie('userToken') }
+      { id, tokenkey: getCookie('userToken') }
     );
   }
   getUniversity(typeId: any): Observable<any> {
@@ -131,7 +131,7 @@ export class UniInfoService {
     return this.http
       .post(`${environment.shortApiUrl}/unidegreecertsearch.php`, {
         ...params,
-        tokenkey:  getCookie('userToken'),
+        tokenkey: getCookie('userToken'),
       })
       .pipe(
         map((res: any) => {
@@ -169,7 +169,7 @@ export class UniInfoService {
       `${environment.apiUrl}/kspuni/unidegreecertselectbyid`,
       {
         id,
-        tokenkey:  getCookie('userToken'),
+        tokenkey: getCookie('userToken'),
       }
     );
   }
@@ -179,7 +179,7 @@ export class UniInfoService {
       `${environment.shortApiUrl}/selfmyinfosearch_uni.php`,
       {
         ...params,
-        tokenkey:  getCookie('userToken'),
+        tokenkey: getCookie('userToken'),
       }
     );
   }
@@ -189,7 +189,7 @@ export class UniInfoService {
       `${environment.shortApiUrl}/unidegreeadmissionsearch.php`,
       {
         ...params,
-        tokenkey:  getCookie('userToken'),
+        tokenkey: getCookie('userToken'),
       }
     );
   }
@@ -199,7 +199,7 @@ export class UniInfoService {
       `${environment.shortApiUrl}/unidegreeadmissionsearch_2.php`,
       {
         ...params,
-        tokenkey:  getCookie('userToken'),
+        tokenkey: getCookie('userToken'),
       }
     );
   }
@@ -211,7 +211,7 @@ export class UniInfoService {
       `${environment.apiUrl}/kspuni/unirequestdegreecertselectunidegreecertid`,
       {
         unidegreecertid,
-        tokenkey:  getCookie('userToken'),
+        tokenkey: getCookie('userToken'),
       }
     );
   }
@@ -221,17 +221,17 @@ export class UniInfoService {
       `${environment.apiUrl}/kspuni/unirequestadmissionselectadid`,
       {
         ...params,
-        tokenkey:  getCookie('userToken'),
+        tokenkey: getCookie('userToken'),
       }
     );
   }
-  
+
   uniRequestEditHistory(params: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspuni/unirequestadmissionjoinksprequestprocessselect`,
       {
         ...params,
-        tokenkey: this.tokenKey,
+        tokenkey: getCookie('userToken'),
       }
     );
   }
