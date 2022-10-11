@@ -115,8 +115,12 @@ export function getBase64(
  * @param input return correct format date to send to API
  * @returns
  */
-export function formatDate(input: string) {
-  return input.split('T')[0];
+export function formatDate(input: string | null | undefined) {
+  if (input && input.length) {
+    return input.split('T')[0];
+  } else {
+    return null;
+  }
 }
 
 export function mapFileInfo(fileGroups: any[]) {
