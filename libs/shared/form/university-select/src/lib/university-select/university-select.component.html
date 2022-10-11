@@ -1,7 +1,7 @@
 <form [formGroup]="form">
   <div class="bg-light px-4 py-3">
     <div class="text-primary box-header">{{ title }}</div>
-    <div class="row" *ngIf="searchType !== 'uni'">
+    <div class="row mb-2" *ngIf="searchType !== 'uni'">
       <div class="col">
         <label class="form-label">{{ label1 }}</label>
         <select
@@ -53,6 +53,17 @@
           class="form-control form-search"
           type="text"
           [placeholder]="bureauName"
+        />
+      </div>
+    </div>
+    <div class="row" *ngIf="showAddress">
+      <div class="col mb-1">
+        <label class="form-label">ที่อยู่</label>
+        <input
+          class="form-control"
+          type="text"
+          disabled
+          [placeholder]="address"
         />
       </div>
     </div>

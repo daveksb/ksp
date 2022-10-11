@@ -80,8 +80,7 @@ export class SchoolRequestComponent implements OnInit {
   disableSave = true;
   disableCancel = true;
   icCardNo = '';
-  schoolAddressLabel = `ที่อยู่ของสถานศึกษา
-  ที่ขออนุญาต`;
+  schoolAddressLabel = `ที่อยู่ของสถานศึกษาที่ขออนุญาต`;
 
   schoolId = '0010201056';
   userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form

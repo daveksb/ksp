@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SchoolInfoService } from '@ksp/shared/service';
+import localForage from 'localforage';
+
 
 @Component({
   selector: 'ksp-school-retired-search',
@@ -9,6 +11,8 @@ import { SchoolInfoService } from '@ksp/shared/service';
   styleUrls: ['./school-retired-search.component.scss'],
 })
 export class SchoolRetiredSearchComponent {
+  school!: any;
+
   form = this.fb.group({
     userSearch: [],
     userSelect: [],
@@ -38,7 +42,20 @@ export class SchoolRetiredSearchComponent {
     });
   }
 
-  confirm() {
+  selectedUniversity(school: any) {
+    this.school = school;
+    localForage.setItem('registerSelectedSchool', school);
+
+    this.schoolInfoService
+      .searchUserLogin({ schoolid: school.schoolid })
+      .subscribe((res) => {
+        if (res == undefined) {
+          this.next();
+        }
+      });
+  }
+
+  next() {
     this.router.navigate(['/retired-user', 'requester']);
   }
 

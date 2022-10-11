@@ -46,7 +46,7 @@
       />
     </div>
     <div class="col">
-      <label class="form-label">หมายเลขหนังสือเดินทาง (Passport Nmuber) </label>
+      <label class="form-label">หมายเลขหนังสือเดินทาง (Passport Number) </label>
       <input class="form-control" type="text" formControlName="passportno" />
     </div>
   </div>
@@ -76,7 +76,7 @@
   <div class="row mb-2">
     <div class="col">
       <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ : จาก</label>
-      <!-- <div class="d-flex align-items-baseline">
+      <div class="d-flex align-items-baseline">
         <input
           matInput
           [matDatepicker]="picker1"
@@ -89,12 +89,7 @@
           [for]="picker1"
         ></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
-      </div> -->
-      <mat-form-field appearance="outline">
-        <input matInput [matDatepicker]="picker" placeholder="วว/ดด/ปปปป" />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
+      </div>
     </div>
 
     <!-- <div class="col-auto px-1">

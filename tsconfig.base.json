@@ -140,6 +140,9 @@
       "@ksp/school-service/feature/retired": [
         "libs/school-service/feature/retired/src/index.ts"
       ],
+      "@ksp/school-service/feature/school-info": [
+        "libs/school-service/feature/school-info/src/index.ts"
+      ],
       "@ksp/school-service/feature/staff-management": [
         "libs/school-service/feature/staff-management/src/index.ts"
       ],

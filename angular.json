@@ -3721,6 +3721,32 @@
         }
       ]
     },
+    "school-service-feature-school-info": {
+      "projectType": "library",
+      "root": "libs/school-service/feature/school-info",
+      "sourceRoot": "libs/school-service/feature/school-info/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/school-service/feature/school-info"],
+          "options": {
+            "jestConfig": "libs/school-service/feature/school-info/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/school-service/feature/school-info/**/*.ts",
+              "libs/school-service/feature/school-info/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "school-service-feature-staff-management": {
       "root": "libs/school-service/feature/staff-management",
       "projectType": "library",
@@ -9935,8 +9961,5 @@
       ]
     }
   },
-  "version": 1,
-  "cli": {
-    "analytics": false
-  }
+  "version": 1
 }
