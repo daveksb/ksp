@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -29,6 +29,9 @@ export class FormSchoolAddressComponent extends KspFormBaseComponent {
     telphone: [],
     web: [],
   });
+
+  @Input() showLicenseInfo = true;
+  @Input() title = 'ที่อยู่ของสถานศึกษาที่ขออนุญาต';
 
   constructor(private fb: FormBuilder) {
     super();

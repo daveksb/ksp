@@ -23,6 +23,7 @@ export class RegisterRequesterComponent implements OnInit {
   mode: FormMode = 'edit';
   userInfoFormdisplayMode: number = UserInfoFormType.thai;
   school!: any;
+  address!: any;
   private _form = this.fb.group({
     grant1: [false],
     grant2: [false],
@@ -49,6 +50,15 @@ export class RegisterRequesterComponent implements OnInit {
     localForage.getItem('registerUserInfoFormValue').then((res: any) => {
       if (res) this.form.controls.requester.patchValue(res);
     });
+
+    localForage.getItem('registerSelectedSchool').then((res: any) => {
+      this.address = `บ้านเลขที่ ${res.address} ซอย ${res?.street ?? ''} หมู่ ${
+        res?.moo ?? ''
+      } ถนน ${res?.road ?? ''} ตำบล ${res.tumbon} อำเภอ ${
+        res.amphurName
+      } จังหวัด ${res.provinceName}`;
+    });
+
     this.getListData();
   }
   getListData() {

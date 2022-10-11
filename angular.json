@@ -505,6 +505,32 @@
         }
       ]
     },
+    "e-service-e-license-knowledge-cert": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/knowledge-cert",
+      "sourceRoot": "libs/e-service/e-license/knowledge-cert/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-service/e-license/knowledge-cert"],
+          "options": {
+            "jestConfig": "libs/e-service/e-license/knowledge-cert/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/knowledge-cert/**/*.ts",
+              "libs/e-service/e-license/knowledge-cert/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-e-license-license-approve": {
       "projectType": "library",
       "root": "libs/e-service/e-license/license-approve",
@@ -525,6 +551,32 @@
             "lintFilePatterns": [
               "libs/e-service/e-license/license-approve/**/*.ts",
               "libs/e-service/e-license/license-approve/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-e-license-license-editing": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/license-editing",
+      "sourceRoot": "libs/e-service/e-license/license-editing/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-service/e-license/license-editing"],
+          "options": {
+            "jestConfig": "libs/e-service/e-license/license-editing/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/license-editing/**/*.ts",
+              "libs/e-service/e-license/license-editing/**/*.html"
             ]
           }
         }
@@ -3725,6 +3777,32 @@
           "hash": "d1f5c8852d652eac23b0378b6c259ea88d5a88d1"
         }
       ]
+    },
+    "school-service-feature-school-info": {
+      "projectType": "library",
+      "root": "libs/school-service/feature/school-info",
+      "sourceRoot": "libs/school-service/feature/school-info/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/school-service/feature/school-info"],
+          "options": {
+            "jestConfig": "libs/school-service/feature/school-info/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/school-service/feature/school-info/**/*.ts",
+              "libs/school-service/feature/school-info/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
     },
     "school-service-feature-staff-management": {
       "root": "libs/school-service/feature/staff-management",
@@ -9940,8 +10018,5 @@
       ]
     }
   },
-  "version": 1,
-  "cli": {
-    "analytics": false
-  }
+  "version": 1
 }

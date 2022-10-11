@@ -1,0 +1,66 @@
+<ksp-top-nav
+  ><span header>ยื่นใบคำขอ</span
+  ><span subHeader
+    >ขอรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One Innovation: OSOI)</span
+  ></ksp-top-nav
+>
+
+<form [formGroup]="form">
+  <div class="bg-secondary bg-opacity-10 px-4 py-2 full-width-2">
+    <div class="box-header">รายละเอียดโรงเรียน</div>
+    <div class="bg-white py-3 px-4 mb-3">
+      <ksp-form-school-address
+        [title]="'ข้อมูลเบื้องต้น'"
+        [showLicenseInfo]="false"
+        formControlName="schoolAddrTh"
+      ></ksp-form-school-address>
+    </div>
+    <div class="bg-white py-3 px-4 mb-3">
+      <ksp-form-school-address
+        [title]="'ข้อมูลภาษาอังกฤษ'"
+        [showLicenseInfo]="false"
+        formControlName="schoolAddrEn"
+      ></ksp-form-school-address>
+    </div>
+    <div class="bg-white py-3 px-4 mb-3">
+      <div class="bg-light px-3 py-2">
+        <div class="box-header">
+          ข้อมูลผู้บริหารสถานศึกษา / ผู้อำนวยการโรงเรียน
+        </div>
+        <ksp-form-coordinator-info
+          [prefixList]="prefixList$ | async"
+          [nationList]="[]"
+          [countryList]="[]"
+          [visaClassList]="[]"
+          [visaTypeList]="[]"
+          [displayMode]="[userInfoFormType]"
+          formControlName="schManager"
+        ></ksp-form-coordinator-info>
+      </div>
+    </div>
+    <div class="bg-white py-3 px-4">
+      <div class="bg-light px-3 py-2">
+        <div class="box-header">ข้อมูลผู้ประสานงาน</div>
+        <ksp-form-coordinator-info
+          [prefixList]="prefixList$ | async"
+          [nationList]="[]"
+          [countryList]="[]"
+          [visaClassList]="[]"
+          [visaTypeList]="[]"
+          [mode]="'view'"
+          [displayMode]="[userInfoFormType]"
+          formControlName="coordinator"
+        ></ksp-form-coordinator-info>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="sticky-bottom border px-2">
+  <ksp-bottom-nav
+    [isLastPage]="true"
+    [isFirstPage]="true"
+    [showCenterButtons]="true"
+    [showSaveButton]="true"
+  ></ksp-bottom-nav>
+</div>

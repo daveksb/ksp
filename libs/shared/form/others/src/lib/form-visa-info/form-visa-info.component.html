@@ -40,7 +40,12 @@
 
     <div class="col-6">
       <label class="form-label">เลขประจำตัวคุรุสภา</label>
-      <input class="form-control" type="text" formControlName="licenseid" />
+      <input
+        class="form-control"
+        type="text"
+        disabled
+        [value]="form.controls.licenseid"
+      />
     </div>
   </div>
 </form>

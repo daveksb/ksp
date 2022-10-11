@@ -14,6 +14,6 @@ export class VerifyOtpDialogComponent {
   constructor(private router: Router) {}
 
   nextStep() {
-    this.router.navigate(['/register', 'th-step-3']);
+    this.router.navigate(['/register', 'th-step-2']);
   }
 }

@@ -6,6 +6,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { validatorMessages } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy()
@@ -14,9 +15,13 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   styleUrls: ['./set-new-password.component.scss'],
 })
 export class SetNewPasswordComponent implements OnInit {
+  eyeIconClicked = false;
+  eyeIconClickedSecond = false;
+  validatorMessages = validatorMessages;
+
   form = this.fb.group({
-    password: ['', Validators.required],
-    rePassword: ['', Validators.required],
+    password: [null, [Validators.required, Validators.minLength(8)]],
+    rePassword: [null, [Validators.required, Validators.minLength(8)]],
   });
 
   constructor(
@@ -24,6 +29,12 @@ export class SetNewPasswordComponent implements OnInit {
     public dialog: MatDialog,
     private fb: FormBuilder
   ) {}
+
+  get disableBtn() {
+    const { password, rePassword } = this.form.getRawValue();
+    this.validatorMessages.passwordNotMatching;
+    return password !== rePassword || !password || !rePassword;
+  }
 
   ngOnInit(): void {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {

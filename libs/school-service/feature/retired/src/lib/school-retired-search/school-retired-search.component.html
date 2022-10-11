@@ -2,62 +2,26 @@
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 py-4 full-height">
-    <div class="container-xl bg-white pb-3">
-      <div class="box-header pt-2">ค้นหาหน่วยงาน/สถานศึกษา</div>
-      <hr />
+    <div class="container-xl p-0">
+      <div class="box-header">รายละเอียดใบคำขอถอดถอน</div>
+    </div>
+    <div class="container-xl bg-white py-3">
+      <ksp-university-select
+        [title]="'กรุณาเลือกหน่วยงาน/สถานศึกษาที่ท่านสังกัด'"
+        [label1]="'สังกัด'"
+        [label2]="'โรงเรียน / สถานศึกษา'"
+        (selectedUniversity)="selectedUniversity($event)"
+      ></ksp-university-select>
 
-      <ksp-retired-search
-        (clear)="data = []"
-        (search)="search($event)"
-        formControlName="userSearch"
-      ></ksp-retired-search>
-
-      <ng-container *ngIf="data.length">
-        <hr />
-        <div class="text-primary box-header">ผลการค้นหา</div>
-        <table class="table">
-          <thead style="background-color: #edf6ff">
-            <tr>
-              <th>เลือก</th>
-              <th>ชื่อ-นามสกุล</th>
-              <th>เบอร์โทรศัพท์</th>
-            </tr>
-          </thead>
-          <tbody class="body__table">
-            <tr class="text-secondary" *ngFor="let item of data">
-              <td>
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  value="{{ item.schmemberid }}"
-                  formControlName="userSelect"
-                  (change)="onItemChange('1')"
-                />
-              </td>
-              <td>{{ item.firstnameth }} {{ item.lastnameth }}</td>
-              <td>{{ item.schmobile }}</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div class="py-2 d-flex justify-content-center">
-          <button
-            type="button"
-            (click)="cancel()"
-            class="btn border-primary text-primary me-2"
-          >
-            ยกเลิก
-          </button>
-          <button
-            class="btn btn-primary"
-            type="button"
-            (click)="confirm()"
-            [disabled]="!selectUser"
-          >
-            ยืนยัน
-          </button>
-        </div>
-      </ng-container>
+      <div class="mt-3">
+        <ksp-bottom-nav
+          (prevClicked)="cancel()"
+          (nextClicked)="next()"
+          [showCenterButtons]="false"
+          [disableNext]="!school"
+          disableNextMessage="กรุณาเลือกโรงเรียน/ สถานศึกษาก่อน"
+        ></ksp-bottom-nav>
+      </div>
     </div>
   </div>
 </form>
