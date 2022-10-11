@@ -7,7 +7,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { SchoolRequest } from '@ksp/shared/interface';
+import { FileGroup, SchoolRequest } from '@ksp/shared/interface';
 import {
   GeneralInfoService,
   RequestService,
@@ -35,8 +35,8 @@ export class RequestRewardComponent implements OnInit {
   personTypes$!: Observable<any>;
   prefixList$!: Observable<any>;
   requestId = 0;
-  requestDate: string | null = thaiDate(new Date());
-  requestNo!: string | null;
+  requestDate = '';
+  requestNo = '';
   currentProcess!: string | null;
   requestStatus!: string | null;
   memberData!: any;
@@ -123,7 +123,7 @@ export class RequestRewardComponent implements OnInit {
       id: `${this.requestId}`,
       requeststatus: '0',
     };
-    this.requestService.cancelRequest(payload).subscribe((res) => {
+    this.requestService.cancelRequest(payload).subscribe(() => {
       //
     });
   }
@@ -132,8 +132,8 @@ export class RequestRewardComponent implements OnInit {
     this.requestService.getRequestById(id).subscribe((res) => {
       //console.log('res = ', res);
       this.uniqueTimeStamp = res.uniquetimestamp || 'default-unique-timestamp';
-      this.requestNo = res.requestno;
-      this.requestDate = thaiDate(new Date(`${res.requestdate}`));
+      this.requestNo = `${res.requestno}`;
+      this.requestDate = `${res.requestdate}`;
       this.requestStatus = res.requeststatus;
       this.currentProcess = res.currentprocess;
       this.showCancelButton = res.requeststatus !== '0';
@@ -161,11 +161,11 @@ export class RequestRewardComponent implements OnInit {
     form.requeststatus = requestStatus;
     form.osoimember = JSON.stringify(form.osoimember);
 
-    const rewardFiles = [
-      { name: 'แบบ นร. 1', fileid: '' },
-      { name: 'แบบ นร.2', fileid: '' },
-      { name: 'เอกสารอื่นๆ', fileid: '' },
-      { name: 'บันทึกนำส่งจากสถานศึกษา', fileid: '' },
+    const rewardFiles: FileGroup[] = [
+      { name: 'แบบ นร. 1', files: [] },
+      { name: 'แบบ นร.2', files: [] },
+      { name: 'เอกสารอื่นๆ', files: [] },
+      { name: 'บันทึกนำส่งจากสถานศึกษา', files: [] },
     ];
 
     const file = structuredClone(rewardFiles);
@@ -186,7 +186,7 @@ export class RequestRewardComponent implements OnInit {
 
     const { ref1, ref2, ref3, ...payload } = baseForm.value;
     //console.log('payload = ', payload);
-    this.requestService.updateRequest(payload).subscribe((res) => {
+    this.requestService.updateRequest(payload).subscribe(() => {
       //console.log('request result = ', res);
       this.completeDialog();
     });
