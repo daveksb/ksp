@@ -16,7 +16,8 @@
         <label class="form-label me-3" [class.required]="form.controls.hasTeachingExperience.value">จำนวนปี</label>
         <input
           type="number"
-          class="form-control w-auto"
+          class="form-control -auto"
+          [class.form-control-danger]="teachingYear.invalid && (teachingYear.dirty || teachingYear.touched)"
           formControlName="teachingExperienceYear" />
       </div>
     </div>
@@ -39,6 +40,7 @@
         <input
           type="number"
           class="form-control w-auto"
+          [class.form-control-danger]="managingYear.invalid && (managingYear.dirty || managingYear.touched)"
           formControlName="managingExperienceYear" />
       </div>
     </div>

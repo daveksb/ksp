@@ -47,9 +47,10 @@ export class EducationManagerExperienceComponent
       .subscribe(([prev, next]) => {
         if (prev.hasTeachingExperience !== next.hasTeachingExperience) {
           if (next.hasTeachingExperience) {
-            this.form.controls.teachingExperienceYear.addValidators(
-              Validators.required
-            );
+            this.form.controls.teachingExperienceYear.addValidators([
+              Validators.required,
+              Validators.min(8),
+            ]);
           } else {
             this.form.controls.teachingExperienceYear.clearValidators();
           }
@@ -58,9 +59,10 @@ export class EducationManagerExperienceComponent
 
         if (prev.hasManagingExperience !== next.hasManagingExperience) {
           if (next.hasManagingExperience) {
-            this.form.controls.managingExperienceYear.addValidators(
-              Validators.required
-            );
+            this.form.controls.managingExperienceYear.addValidators([
+              Validators.required,
+              Validators.min(3),
+            ]);
           } else {
             this.form.controls.managingExperienceYear.clearValidators();
           }
@@ -69,9 +71,10 @@ export class EducationManagerExperienceComponent
 
         if (prev.hasEducationExperience !== next.hasEducationExperience) {
           if (next.hasEducationExperience) {
-            this.form.controls.educationExperienceYear.addValidators(
-              Validators.required
-            );
+            this.form.controls.educationExperienceYear.addValidators([
+              Validators.required,
+              Validators.min(3),
+            ]);
           } else {
             this.form.controls.educationExperienceYear.clearValidators();
           }
@@ -83,9 +86,10 @@ export class EducationManagerExperienceComponent
           next.hasEducationManagingExperience
         ) {
           if (next.hasEducationManagingExperience) {
-            this.form.controls.educationManagingExperienceYear.addValidators(
-              Validators.required
-            );
+            this.form.controls.educationManagingExperienceYear.addValidators([
+              Validators.required,
+              Validators.min(5),
+            ]);
           } else {
             this.form.controls.educationManagingExperienceYear.clearValidators();
           }
@@ -94,14 +98,35 @@ export class EducationManagerExperienceComponent
 
         if (prev.hasLongManagingExperience !== next.hasLongManagingExperience) {
           if (next.hasLongManagingExperience) {
-            this.form.controls.longManagingExperienceYear.addValidators(
-              Validators.required
-            );
+            this.form.controls.longManagingExperienceYear.addValidators([
+              Validators.required,
+              Validators.min(8),
+            ]);
           } else {
             this.form.controls.longManagingExperienceYear.clearValidators();
           }
           this.form.controls.longManagingExperienceYear.updateValueAndValidity();
         }
       });
+  }
+
+  get teachingYear() {
+    return this.form.controls.teachingExperienceYear;
+  }
+
+  get managingYear() {
+    return this.form.controls.managingExperienceYear;
+  }
+
+  get educationYear() {
+    return this.form.controls.educationExperienceYear;
+  }
+
+  get educationManagingYear() {
+    return this.form.controls.educationManagingExperienceYear;
+  }
+
+  get longManagingYear() {
+    return this.form.controls.longManagingExperienceYear;
   }
 }

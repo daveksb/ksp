@@ -33,6 +33,7 @@ export class EditStudentDetailComponent implements OnInit {
     editStudent: [],
   });
   uniqueTimestamp: any = '';
+  isNotFound = false;
 
   studentDetail = this.fb.group({
     prefixth: [],
@@ -104,6 +105,11 @@ export class EditStudentDetailComponent implements OnInit {
             this.data = true;
             this.oldValue = response.datareturn[0];
             this.studentDetail.patchValue(response.datareturn[0]);
+          } else {
+            this.data = false;
+            this.isNotFound = true;
+            this.oldValue = [];
+            this.studentDetail.reset();
           }
         });
     }
@@ -111,6 +117,7 @@ export class EditStudentDetailComponent implements OnInit {
 
   clearData() {
     this.data = false;
+    this.isNotFound = false;
     this.formSearch.reset();
   }
 
