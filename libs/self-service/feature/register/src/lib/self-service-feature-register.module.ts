@@ -20,6 +20,7 @@ import { RegisterForeignStepTwoComponent } from './register-foreign-step-two/reg
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 export const routes: Routes = [
   {
@@ -30,11 +31,11 @@ export const routes: Routes = [
   { path: 'policy', component: PrivacyPolicyComponent },
   {
     path: 'th-step-1',
-    component: RegisterStepOneComponent,
+    component: RegisterStepTwoComponent,
   },
   {
     path: 'th-step-2',
-    component: RegisterStepTwoComponent,
+    component: RegisterStepOneComponent,
   },
   {
     path: 'th-step-3',
@@ -69,6 +70,7 @@ export const routes: Routes = [
     SharedFormOthersModule,
     MatTooltipModule,
     FileUploadComponent,
+    MatDatepickerModule,
   ],
   declarations: [
     RegisterStepOneComponent,

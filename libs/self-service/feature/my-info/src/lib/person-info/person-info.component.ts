@@ -38,8 +38,8 @@ export class PersonInfoComponent implements OnInit {
     nationality: [''],
     religion: [''],
     idcardno: [''],
-    province: [''],
-    email: ['', [Validators.required, Validators.email]],
+    sex: [''],
+    email: [''],
     personimage: [''],
   });
 
@@ -60,7 +60,7 @@ export class PersonInfoComponent implements OnInit {
   ngOnInit(): void {
     this.uniqueTimestamp = uuidv4();
     this.prefixList$ = this.generalInfoService.getPrefix();
-    this.provinces$ = this.addressService.getProvinces();
+    //this.provinces$ = this.addressService.getProvinces();
     this.nationalitys$ = this.generalInfoService.getNationality();
     this.myInfoService.getMyInfo().subscribe((res) => {
       res = this.myInfoService.formatMyInfo(res);

@@ -240,6 +240,7 @@
       <label class="form-label required">วันเดือนปีเกิด</label>
       <div class="d-flex align-items-baseline">
         <input
+          [class.form-control-sp]="isDarkMode"
           matInput
           [matDatepicker]="picker3"
           autocomplete="off"

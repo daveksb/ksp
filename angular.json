@@ -505,6 +505,32 @@
         }
       ]
     },
+    "e-service-e-license-knowledge-cert": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/knowledge-cert",
+      "sourceRoot": "libs/e-service/e-license/knowledge-cert/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-service/e-license/knowledge-cert"],
+          "options": {
+            "jestConfig": "libs/e-service/e-license/knowledge-cert/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/knowledge-cert/**/*.ts",
+              "libs/e-service/e-license/knowledge-cert/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-e-license-license-approve": {
       "projectType": "library",
       "root": "libs/e-service/e-license/license-approve",
@@ -525,6 +551,32 @@
             "lintFilePatterns": [
               "libs/e-service/e-license/license-approve/**/*.ts",
               "libs/e-service/e-license/license-approve/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-e-license-license-editing": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/license-editing",
+      "sourceRoot": "libs/e-service/e-license/license-editing/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-service/e-license/license-editing"],
+          "options": {
+            "jestConfig": "libs/e-service/e-license/license-editing/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/license-editing/**/*.ts",
+              "libs/e-service/e-license/license-editing/**/*.html"
             ]
           }
         }

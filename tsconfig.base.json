@@ -34,8 +34,14 @@
       "@ksp/e-service/e-license/foreign-license": [
         "libs/e-service/e-license/foreign-license/src/index.ts"
       ],
+      "@ksp/e-service/e-license/knowledge-cert": [
+        "libs/e-service/e-license/knowledge-cert/src/index.ts"
+      ],
       "@ksp/e-service/e-license/license-approve": [
         "libs/e-service/e-license/license-approve/src/index.ts"
+      ],
+      "@ksp/e-service/e-license/license-editing": [
+        "libs/e-service/e-license/license-editing/src/index.ts"
       ],
       "@ksp/e-service/e-license/qualification-approve": [
         "libs/e-service/e-license/qualification-approve/src/index.ts"
