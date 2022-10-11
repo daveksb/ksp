@@ -6,6 +6,7 @@ export const nameEnPattern = '^[a-zA-Z]+$';
 export const idCardPattern = '^[0-9]{13}';
 export const passportPattern = '^^[A-Z]{1}[0-9]{6}';
 export const idCardBackPattern = '^([A-Z]{2})+([0-9]{10})+$';
+export const bankAccountPattern = '^[0-9]+$';
 
 export const validatorMessages = {
   phone: 'กรุณากรอกข้อมูลในรูปแบบเบอร์โทรศัพท์',
@@ -18,4 +19,5 @@ export const validatorMessages = {
   passwordNotMatching: 'กรุณากรอกรหัสผ่านให้ตรงกัน',
   email: 'กรุณากรอกข้อมูลในรูปแบบอีเมลเท่านั้น',
   loginFail: 'คุณกรอกรหัสเข้าใช้งาน หรือรหัสผ่านไม่ถูกต้อง',
+  bankAccount: 'กรุณากรอกเลขที่บัญชีให้ถูกต้อง',
 };
