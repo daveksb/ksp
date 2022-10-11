@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { requestStatus } from '@ksp/shared/constant';
 import { UniInfoService, UniRequestService } from '@ksp/shared/service';
-import { stringToThaiDate } from '@ksp/shared/utility';
+import { stringToThaiDate, thaiDate } from '@ksp/shared/utility';
 import { HistoryRequestDialogComponent, PrintRequestDialogComponent } from '@ksp/uni-service/dialog';
 import { KspPaginationComponent, ListData } from '@ksp/shared/interface';
 import _ from 'lodash';
@@ -107,8 +107,8 @@ export class EditStudentListComponent extends KspPaginationComponent implements 
           data.studentdetail = parsedata[0];
           data.nameshow = `${data.studentdetail.firstnameth ? data.studentdetail.firstnameth : ''}`+
                           ` ${data.studentdetail.lastnameth ? data.studentdetail.lastnameth : ''}`;
-          data.requestdate = stringToThaiDate(data?.requestdate);
-          if (data.updatedate) data.updatedate = stringToThaiDate(data?.updatedate);
+          data.requestdate = thaiDate(new Date(data?.requestdate));
+          if (data.updatedate) data.updatedate = thaiDate(new Date(data?.updatedate));
           const finddegreelevel = this.degreeLevelOptions.find((level=>{
             return data.degreelevel == level.value;
           }))

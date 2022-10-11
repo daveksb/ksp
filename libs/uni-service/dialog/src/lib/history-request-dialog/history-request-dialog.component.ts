@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { stringToThaiDate } from '@ksp/shared/utility';
+import { stringToThaiDate, thaiDate } from '@ksp/shared/utility';
 @Component({
   selector: 'uni-service-history-request-dialog',
   standalone: true,
@@ -17,7 +17,7 @@ export class HistoryRequestDialogComponent implements OnInit {
   }
   toDateTh(date: any) {
     try {
-      return stringToThaiDate(date);
+      return thaiDate(new Date(date));
     } catch (error) {
       return "-"
     }

@@ -73,7 +73,7 @@ export class SchoolRequestComponent implements OnInit {
   //requestType = '3';
   careerType = SchoolRequestSubType.ครู; // 1 ไทย 2 ผู้บริหาร 3 ต่างชาติ
   requestLabel = '';
-  requestNo: string | null = '';
+  requestNo = '';
   requestProcess!: number;
   requestStatus!: number;
   disableTempSave = true;
@@ -417,22 +417,23 @@ export class SchoolRequestComponent implements OnInit {
 
   loadRequestFromId(id: number) {
     this.requestService.schGetRequestById(id).subscribe((res) => {
-      //this.requestData = res;
-      this.requestDate = thaiDate(new Date(`${res.requestdate}`));
-      this.requestNo = res.requestno;
-      this.requestProcess = Number(res.process);
-      this.requestStatus = Number(res.status);
-      //console.log('current process = ', this.currentProcess);
-      this.pathUserInfo(res);
-      this.patchAddress(parseJson(res.addressinfo));
-      this.patchEdu(parseJson(res.eduinfo));
-      this.patchHiringInfo(parseJson(res.hiringinfo));
-      this.patchTeachingInfo(parseJson(res.teachinginfo));
-      this.patchReasonInfo(parseJson(res.reasoninfo));
-      this.patchFileInfo(parseJson(res.fileinfo));
+      if (res) {
+        this.requestDate = thaiDate(new Date(`${res.requestdate}`));
+        this.requestNo = `${res.requestno}`;
+        this.requestProcess = Number(res.process);
+        this.requestStatus = Number(res.status);
+        //console.log('current process = ', this.currentProcess);
+        this.pathUserInfo(res);
+        this.patchAddress(parseJson(res.addressinfo));
+        this.patchEdu(parseJson(res.eduinfo));
+        this.patchHiringInfo(parseJson(res.hiringinfo));
+        this.patchTeachingInfo(parseJson(res.teachinginfo));
+        this.patchReasonInfo(parseJson(res.reasoninfo));
+        this.patchFileInfo(parseJson(res.fileinfo));
 
-      const schoolAddr = parseJson(res.schooladdrinfo);
-      this.form.controls.schoolAddr.patchValue(schoolAddr);
+        const schoolAddr = parseJson(res.schooladdrinfo);
+        this.form.controls.schoolAddr.patchValue(schoolAddr);
+      }
     });
   }
 
