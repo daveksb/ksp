@@ -13,6 +13,8 @@ import {
 } from '@ksp/shared/interceptor';
 import { MatMenuModule } from '@angular/material/menu';
 import { FileUploadUrls, File_UPLOAD_URLS } from '@ksp/shared/form/file-upload';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 const fileUrls: FileUploadUrls = {
   uploadFile: '/e-service/kspfileinsert',
@@ -32,6 +34,8 @@ const fileUrls: FileUploadUrls = {
     ReactiveFormsModule,
     HttpClientModule,
     MatMenuModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
   ],
   providers: [
     {
