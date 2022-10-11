@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UniInfoService, UniRequestService } from '@ksp/shared/service';
-import { getCookie, stringToThaiDate } from '@ksp/shared/utility';
+import { getCookie, stringToThaiDate, thaiDate } from '@ksp/shared/utility';
 import { UniserviceImportType, KspPaginationComponent, ListData } from '@ksp/shared/interface';
 
 import {
@@ -111,13 +111,13 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
               key: item?.id,
               order: this.pageEvent.pageIndex * this.pageEvent.pageSize + ++index,
               degreeCode: item?.degreeapprovecode,
-              sendDate: stringToThaiDate(item?.requestdate),
+              sendDate: thaiDate(new Date(item?.requestdate)),
               major: item?.coursename,
               branch: item?.coursefieldofstudy,
               degreeName: item?.fulldegreenameth,
               approveStatus: 'พิจารณา',
               approveDate: '30 ส.ค. 2564',
-              editDate: item?.updatedate ? stringToThaiDate(item?.updatedate) : '',
+              editDate: item?.updatedate ? thaiDate(new Date(item?.updatedate)) : '',
               verify: 'แก้ไข',
               consider: 'แก้ไข',
               admissionstatus: admissionstatus.status == '1' ? 'สร้าง' :

@@ -36,6 +36,7 @@ export class RenewLicenseForeignComponent implements OnInit {
     personalDetail: [],
     personalDeclaration: [],
     renewalRequirements: [],
+    foreignSelectUpload: [],
   });
 
   uniqueTimestamp!: string;
@@ -48,7 +49,7 @@ export class RenewLicenseForeignComponent implements OnInit {
   workplaceInfo: any;
   eduInfo: any;
   academicFiles: any[] = [];
-  grantionTeachingInfo: any;
+  licensureInfo: any;
   personalDeclaration: any;
   documentFiles: any[] = [];
 
@@ -74,8 +75,8 @@ export class RenewLicenseForeignComponent implements OnInit {
             console.log(res);
             this.requestData = res;
             this.requestNo = res.requestno;
-            this.currentProcess = Number(res.currentprocess);
-            this.uniqueTimestamp = res.uniquetimestamp || '';
+            this.currentProcess = Number(res.process);
+            this.uniqueTimestamp = res.uniqueno || '';
             console.log(this.uniqueTimestamp);
 
             this.patchData(res);
@@ -115,14 +116,26 @@ export class RenewLicenseForeignComponent implements OnInit {
       this.academicFiles = academicfiles;
     }
 
-    if (data.grantionteachinglicenseinfo) {
-      const grantionTeachingInfo = parseJson(data.grantionteachinglicenseinfo);
-      this.grantionTeachingInfo = grantionTeachingInfo;
+    if (data.foreignlicensureinfo) {
+      const licensureInfo = parseJson(data.foreignlicensureinfo);
+      this.licensureInfo = licensureInfo;
     }
 
     if (data.checkprohibitproperty) {
       const personalDeclaration = parseJson(data.checkprohibitproperty);
       this.personalDeclaration = personalDeclaration;
+    }
+
+    if (data.foreignperformanceresult) {
+      const foreignPerformanceResult = parseJson(data.foreignperformanceresult);
+      this.form.controls.renewalRequirements.patchValue({
+        ...foreignPerformanceResult,
+      });
+    }
+
+    if (data.foreignselectupload) {
+      const foreignSelectUpload = parseJson(data.foreignselectupload);
+      this.form.controls.foreignSelectUpload.patchValue(foreignSelectUpload);
     }
   }
 
@@ -146,7 +159,8 @@ export class RenewLicenseForeignComponent implements OnInit {
       middlenameen,
       passportno,
       nationality,
-    } = data;
+      foreignpassporttype,
+    } = data || { foreignpassporttype: '' };
     const patchData = {
       birthdate: birthdate.split('T')[0],
       firstnameen,
@@ -156,6 +170,7 @@ export class RenewLicenseForeignComponent implements OnInit {
       middlenameen,
       passportno,
       nationality,
+      foreignpassporttype,
     } as any;
     this.userInfo = patchData;
   }
@@ -248,15 +263,16 @@ export class RenewLicenseForeignComponent implements OnInit {
       addressForm,
       workplaceForm,
       academicForm,
-      grantionLicenseForm,
+      // grantionLicenseForm,
+      licensureInfoForm,
       ...userInfoForm
     } = formData.personalDetail;
 
     const { id, ...rawUserInfo } = userInfoForm;
     const userInfo = toLowercaseProp(rawUserInfo);
-    userInfo.requestfor = `${SelfServiceRequestForType.ชาวต่างชาติ}`;
-    userInfo.uniquetimestamp = this.uniqueTimestamp;
-    userInfo.staffid = getCookie('userId');
+    self.isforeign = `${SelfServiceRequestForType.ชาวต่างชาติ}`;
+    self.uniqueno = this.uniqueTimestamp;
+    self.userid = getCookie('userId');
 
     const selectData = _.pick(userInfo, allowKey);
 
@@ -277,8 +293,17 @@ export class RenewLicenseForeignComponent implements OnInit {
         }),
       },
       ...{ eduinfo: JSON.stringify(academicForm) },
+      // ...{
+      //   grantionteachinglicenseinfo: JSON.stringify(grantionLicenseForm),
+      // },
       ...{
-        grantionteachinglicenseinfo: JSON.stringify(grantionLicenseForm),
+        foreignlicensureinfo: JSON.stringify(licensureInfoForm),
+      },
+      ...{
+        foreignperformanceresult: JSON.stringify(formData.renewalRequirements),
+      },
+      ...{
+        foreignselectupload: JSON.stringify(formData.foreignSelectUpload),
       },
       ...{
         checkprohibitproperty: JSON.stringify(formData.personalDeclaration),

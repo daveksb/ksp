@@ -21,7 +21,7 @@
       ></ksp-basic-institute-search>
 
       <div class="row mb-2">
-        <div class="col">
+        <div class="col-sm-6" *ngIf="subsearchType === 'all'">
           <label class="form-label">เลขที่ใบคำขอ</label>
           <input
             class="form-control"
@@ -29,14 +29,14 @@
             formControlName="requestno"
           />
         </div>
-        <div class="col">
+        <div class="col-sm-6">
           <label class="form-label">ชื่อ-นามสกุล</label>
           <input class="form-control" type="text" formControlName="name" />
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-6">
+      <div class="row" *ngIf="subsearchType === 'all'">
+        <div class="col-sm-6">
           <label class="form-label">เบอร์โทรศัพท์</label>
           <input class="form-control" type="text" formControlName="phone" />
         </div>

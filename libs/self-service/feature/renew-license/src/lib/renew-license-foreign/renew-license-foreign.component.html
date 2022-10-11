@@ -24,7 +24,7 @@
           [userInfo]="userInfo"
           [addressInfo]="addressInfo"
           [workplaceInfo]="workplaceInfo"
-          [grantionTeachingInfo]="grantionTeachingInfo"
+          [licensureInfo]="licensureInfo"
           [academicFiles]="academicFiles"
           [uniqueTimestamp]="uniqueTimestamp"
           [eduInfo]="eduInfo"></self-service-foreign-license-step-two>
@@ -39,6 +39,7 @@
       <mat-step [completed]="false">
         <ng-template matStepLabel>Documents and evidence required</ng-template>
         <self-service-foreign-license-step-three
+          formControlName="foreignSelectUpload"
           [documentTypes]="'renew'"
           [attachFiles]="documentFiles"
           [uniqueTimestamp]="uniqueTimestamp"></self-service-foreign-license-step-three>

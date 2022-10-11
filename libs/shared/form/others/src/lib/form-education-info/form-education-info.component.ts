@@ -23,6 +23,7 @@ export class FormEducationInfoComponent
   @Input() option = false;
   @Input() userEducationType: any;
   FormTypeEnum = UserInfoFormType;
+  today = new Date().toISOString().split('T')[0];
 
   override form = this.fb.group({
     degreeLevel: [],

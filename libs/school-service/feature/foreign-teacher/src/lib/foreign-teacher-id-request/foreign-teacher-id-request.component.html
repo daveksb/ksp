@@ -11,8 +11,8 @@
     </div>
     <div class="bg-white py-3 px-4">
       <ksp-request-header-info
-        [requestDate]="requestDate"
-        [requestNumber]="requestNumber"
+        [requestDate]="request.requestdate || ''"
+        [requestNumber]="request.requestno || ''"
       ></ksp-request-header-info>
       <hr />
       <div class="px-3">
@@ -78,7 +78,7 @@
 
       <div class="mb-2 mt-3">
         <ksp-form-multi-attachment
-          [uniqueTimestamp]="uniqueTimestamp"
+          [uniqueTimestamp]="uniqueNo"
           [title]="'กรุณาแนบหลักฐานประกอบการปฏิบัติงาน '"
           [groups]="foreignFiles"
           [mode]="mode"
@@ -95,9 +95,9 @@
     [showCenterButtons]="true"
     [showCancelButton]="showCancelButton"
     [showSaveButton]="mode !== 'view'"
-    [disableSaveButton]="formValid"
+    [disableSaveButton]="false"
     (cancelClicked)="cancel()"
-    (saveClicked)="onConfirmed()"
+    (saveClicked)="confirmDialog()"
     [saveButtonLabel]="'บันทึกและยื่นอนุมัติ'"
     (prevClicked)="onClickPrev()"
   ></ksp-bottom-nav>

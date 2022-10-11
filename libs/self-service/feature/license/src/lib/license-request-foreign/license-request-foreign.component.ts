@@ -37,6 +37,8 @@ export class LicenseRequestForeignComponent implements OnInit {
   form = this.fb.group({
     personalDetail: [],
     personalDeclaration: [],
+    foreignCheckDocument: [],
+    foreignSelectUpload: [],
   });
 
   uniqueTimestamp!: string;
@@ -77,9 +79,8 @@ export class LicenseRequestForeignComponent implements OnInit {
             console.log(res);
             this.requestData = res;
             this.requestNo = res.requestno;
-            this.currentProcess = Number(res.currentprocess);
-            this.uniqueTimestamp = res.uniquetimestamp || '';
-            console.log(this.uniqueTimestamp);
+            this.currentProcess = Number(res.process);
+            this.uniqueTimestamp = res.uniqueno || '';
 
             this.patchData(res);
           }
@@ -107,13 +108,11 @@ export class LicenseRequestForeignComponent implements OnInit {
 
     if (data.eduinfo) {
       const eduInfo = parseJson(data.eduinfo);
-      console.log(eduInfo);
       this.eduInfo = eduInfo;
     }
 
     if (data.fileinfo) {
       const fileInfo = parseJson(data.fileinfo);
-      console.log(fileInfo);
       const { documentfiles, academicfiles } = fileInfo;
       this.documentFiles = documentfiles;
       this.academicFiles = academicfiles;
@@ -127,6 +126,16 @@ export class LicenseRequestForeignComponent implements OnInit {
     if (data.checkprohibitproperty) {
       const personalDeclaration = parseJson(data.checkprohibitproperty);
       this.personalDeclaration = personalDeclaration;
+    }
+
+    if (data.foreigncheckdocument) {
+      const foreignCheckDocument = parseJson(data.foreigncheckdocument);
+      this.form.controls.foreignCheckDocument.patchValue(foreignCheckDocument);
+    }
+
+    if (data.foreignselectupload) {
+      const foreignSelectUpload = parseJson(data.foreignselectupload);
+      this.form.controls.foreignSelectUpload.patchValue(foreignSelectUpload);
     }
   }
 
@@ -151,7 +160,8 @@ export class LicenseRequestForeignComponent implements OnInit {
       middlenameen,
       passportno,
       nationality,
-    } = data;
+      foreignpassporttype,
+    } = data || { foreignpassporttype: '' };
     const patchData = {
       birthdate: birthdate.split('T')[0],
       firstnameen,
@@ -161,6 +171,7 @@ export class LicenseRequestForeignComponent implements OnInit {
       middlenameen,
       passportno,
       nationality,
+      foreignpassporttype,
     } as any;
     this.userInfo = patchData;
   }
@@ -260,9 +271,9 @@ export class LicenseRequestForeignComponent implements OnInit {
 
     const { id, ...rawUserInfo } = userInfoForm;
     const userInfo = toLowercaseProp(rawUserInfo);
-    userInfo.requestfor = `${SelfServiceRequestForType.ชาวต่างชาติ}`;
-    userInfo.uniquetimestamp = this.uniqueTimestamp;
-    userInfo.staffid = getCookie('userId');
+    self.isforeign = `${SelfServiceRequestForType.ชาวต่างชาติ}`;
+    self.uniqueno = this.uniqueTimestamp;
+    self.userid = getCookie('userId');
 
     const selectData = _.pick(userInfo, allowKey);
 
@@ -270,7 +281,7 @@ export class LicenseRequestForeignComponent implements OnInit {
     const documentfiles = this.documentFiles;
     const academicfiles = this.academicFiles;
 
-    const payload = {
+    const payload: SelfRequest = {
       ...self,
       ...replaceEmptyWithNull(selectData),
       ...(this.requestId && { id: `${this.requestId}` }),
@@ -286,6 +297,12 @@ export class LicenseRequestForeignComponent implements OnInit {
       ...{ eduinfo: JSON.stringify(academicForm) },
       ...{
         grantionteachinglicenseinfo: JSON.stringify(grantionLicenseForm),
+      },
+      ...{
+        foreigncheckdocument: JSON.stringify(formData.foreignCheckDocument),
+      },
+      ...{
+        foreignselectupload: JSON.stringify(formData.foreignSelectUpload),
       },
       ...{
         checkprohibitproperty: JSON.stringify(formData.personalDeclaration),

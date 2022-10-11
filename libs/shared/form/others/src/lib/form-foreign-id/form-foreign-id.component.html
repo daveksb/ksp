@@ -125,7 +125,20 @@
       </div>
       <div class="col">
         <label class="form-label required">วันเดือนปีเกิด</label>
-        <input class="form-control" type="date" formControlName="birthdate" />
+        <div class="d-flex align-items-baseline">
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            autocomplete="off"
+            class="form-control me-2"
+            formControlName="birthdate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </div>
       </div>
     </div>
 
@@ -182,19 +195,37 @@
     <div class="row mb-2">
       <div class="col-6">
         <label class="form-label">วันเดือนปีที่ออกหนังสือเดินทาง</label>
-        <input
-          class="form-control"
-          type="date"
-          formControlName="passportstartdate"
-        />
+        <div class="d-flex align-items-baseline">
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            autocomplete="off"
+            class="form-control me-2"
+            formControlName="passportstartdate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </div>
       </div>
       <div class="col-6">
         <label class="form-label">วันเดือนปีที่หนังสือเดินทางหมดอายุ</label>
-        <input
-          class="form-control"
-          type="date"
-          formControlName="passportenddate"
-        />
+        <div class="d-flex align-items-baseline">
+          <input
+            matInput
+            [matDatepicker]="picker3"
+            autocomplete="off"
+            class="form-control me-2"
+            formControlName="passportenddate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker3"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker3></mat-datepicker>
+        </div>
       </div>
     </div>
     <ng-content></ng-content>

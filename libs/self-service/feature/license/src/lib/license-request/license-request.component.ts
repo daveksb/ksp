@@ -215,9 +215,9 @@ export class LicenseRequestComponent
     console.log('id ', id);
     console.log('requestId ', this.requestId);
     const userInfo = toLowercaseProp(rawUserInfo);
-    userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
-    userInfo.uniquetimestamp = this.uniqueTimestamp;
-    userInfo.staffid = getCookie('userId');
+    self.isforeign = `${SelfServiceRequestForType.ชาวไทย}`;
+    self.uniqueno = this.uniqueTimestamp;
+    self.userid = getCookie('userId');
 
     const selectData = _.pick(userInfo, allowKey);
 
@@ -230,7 +230,7 @@ export class LicenseRequestComponent
     const experiencefiles = this.experienceFiles; //this.mapFileInfo(this.experienceFiles);
     const performancefiles = this.performanceFiles;
 
-    const payload = {
+    const payload: SelfRequest = {
       ...self,
       ...replaceEmptyWithNull(selectData),
       ...(this.requestId && { id: `${this.requestId}` }),

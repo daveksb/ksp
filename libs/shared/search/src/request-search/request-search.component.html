@@ -21,7 +21,7 @@
   <div class="row mb-2">
     <div class="col">
       <label class="form-label">ประเภทวิชาชีพ</label>
-      <select class="form-select" formControlName="subtype">
+      <select class="form-select" formControlName="careertype">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let e of eduOccupyList" [value]="e?.id">
           {{ e?.name }}
@@ -31,7 +31,7 @@
 
     <div class="col">
       <label class="form-label">ชื่อ-นามสกุล </label>
-      <input class="form-control" type="text" formControlName="firstnameth" />
+      <input class="form-control" type="text" formControlName="name" />
     </div>
   </div>
 
@@ -54,7 +54,7 @@
   <div class="row mb-2">
     <div class="col-6">
       <label class="form-label">ขั้นตอนการดำเนินการ</label>
-      <select class="form-select" formControlName="currentprocess">
+      <select class="form-select" formControlName="process">
         <option value="null" disabled hidden>กรุณาเลือก</option>
         <option *ngFor="let p of processList" [value]="p?.processId">
           {{ p.processName }}
@@ -64,7 +64,7 @@
 
     <div class="col-6">
       <label class="form-label">สถานะการดำเนินการ</label>
-      <select class="form-select" formControlName="requeststatus">
+      <select class="form-select" formControlName="status">
         <option value="null" disabled hidden>กรุณาเลือก</option>
         <option *ngFor="let s of statusList" [value]="s.id">
           {{ s.sname }}
@@ -74,23 +74,50 @@
   </div>
 
   <div class="row mb-2">
-    <div class="col pe-1">
-      <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ</label>
-      <input
-        class="form-control"
-        type="date"
-        formControlName="requestdatefrom"
-      />
+    <div class="col">
+      <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ : จาก</label>
+      <!-- <div class="d-flex align-items-baseline">
+        <input
+          matInput
+          [matDatepicker]="picker1"
+          autocomplete="off"
+          class="form-control me-2"
+          formControlName="requestdatefrom"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="picker1"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </div> -->
+      <mat-form-field appearance="outline">
+        <input matInput [matDatepicker]="picker" placeholder="วว/ดด/ปปปป" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
     </div>
 
-    <div class="col-auto px-1">
+    <!-- <div class="col-auto px-1">
       <br />
       <span class="fs-4">-</span>
-    </div>
+    </div> -->
 
-    <div class="col ps-1">
-      <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ</label>
-      <input class="form-control" type="date" formControlName="requestdateto" />
+    <div class="col">
+      <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ : ถึง</label>
+      <div class="d-flex align-items-baseline">
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          autocomplete="off"
+          class="form-control me-2"
+          formControlName="requestdateto"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="picker2"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </div>
     </div>
   </div>
 

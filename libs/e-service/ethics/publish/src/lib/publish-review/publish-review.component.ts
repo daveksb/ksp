@@ -104,7 +104,7 @@ export class PublishReviewComponent implements OnInit {
           .subscribe((res: any) => {
             this.accusation.accusationFiles.forEach((element, index) => {
               if (res.accusationfile) {
-                const json = jsonParse(res?.accusationfile);
+                const json: any = jsonParse(res?.accusationfile);
                 element.fileid = json[index]?.fileid;
                 element.filename = json[index]?.filename;
               }
@@ -112,7 +112,7 @@ export class PublishReviewComponent implements OnInit {
             if (res?.accuserinfo) {
               const json = jsonParse(res?.accuserinfo);
 
-              if (json.length) {
+              if (json && json.length) {
                 for (let i = 0; i < json.length; i++) {
                   this.accusation.addRow();
                 }

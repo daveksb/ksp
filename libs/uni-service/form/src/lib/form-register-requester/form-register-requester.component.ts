@@ -105,4 +105,8 @@ export class FormRegisterRequesterInfoComponent
   get email() {
     return this.form.controls.email;
   }
+
+  get position() {
+    return this.form.controls.position;
+  }
 }

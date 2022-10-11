@@ -8,13 +8,12 @@ import _ from 'lodash';
   providedIn: 'root',
 })
 export class UniInfoService {
-  tokenKey = getCookie('userToken');
   constructor(private http: HttpClient) {}
 
   univerSitySelectById(id: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/kspuni/universityselectbyid`, {
       id,
-      tokenkey: this.tokenKey,
+      tokenkey: getCookie('userToken'),
     });
   }
   searchTypeidUniUniversity(id: any): Observable<any> {
@@ -29,7 +28,7 @@ export class UniInfoService {
     return this.http
       .post(`${environment.shortApiUrl}/unirequestdegreecertsearch.php`, {
         ...params,
-        tokenkey: this.tokenKey,
+        tokenkey: getCookie('userToken'),
       })
       .pipe(
         map((res: any) => {
@@ -44,7 +43,7 @@ export class UniInfoService {
   uniRequestDegreeCertSelectById(id: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspuni/unirequestdegreecertselectbyid`,
-      { id, tokenkey: this.tokenKey }
+      { id, tokenkey: getCookie('userToken') }
     );
   }
   getUniversity(typeId: any): Observable<any> {
@@ -132,7 +131,7 @@ export class UniInfoService {
     return this.http
       .post(`${environment.shortApiUrl}/unidegreecertsearch.php`, {
         ...params,
-        tokenkey: this.tokenKey,
+        tokenkey: getCookie('userToken'),
       })
       .pipe(
         map((res: any) => {
@@ -170,7 +169,7 @@ export class UniInfoService {
       `${environment.apiUrl}/kspuni/unidegreecertselectbyid`,
       {
         id,
-        tokenkey: this.tokenKey,
+        tokenkey: getCookie('userToken'),
       }
     );
   }
@@ -180,7 +179,7 @@ export class UniInfoService {
       `${environment.shortApiUrl}/selfmyinfosearch_uni.php`,
       {
         ...params,
-        tokenkey: this.tokenKey,
+        tokenkey: getCookie('userToken'),
       }
     );
   }
@@ -190,7 +189,7 @@ export class UniInfoService {
       `${environment.shortApiUrl}/unidegreeadmissionsearch.php`,
       {
         ...params,
-        tokenkey: this.tokenKey,
+        tokenkey: getCookie('userToken'),
       }
     );
   }
@@ -200,7 +199,7 @@ export class UniInfoService {
       `${environment.shortApiUrl}/unidegreeadmissionsearch_2.php`,
       {
         ...params,
-        tokenkey: this.tokenKey,
+        tokenkey: getCookie('userToken'),
       }
     );
   }
@@ -212,7 +211,7 @@ export class UniInfoService {
       `${environment.apiUrl}/kspuni/unirequestdegreecertselectunidegreecertid`,
       {
         unidegreecertid,
-        tokenkey: this.tokenKey,
+        tokenkey: getCookie('userToken'),
       }
     );
   }
@@ -222,17 +221,17 @@ export class UniInfoService {
       `${environment.apiUrl}/kspuni/unirequestadmissionselectadid`,
       {
         ...params,
-        tokenkey: this.tokenKey,
+        tokenkey: getCookie('userToken'),
       }
     );
   }
-  
+
   uniRequestEditHistory(params: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspuni/unirequestadmissionjoinksprequestprocessselect`,
       {
         ...params,
-        tokenkey: this.tokenKey,
+        tokenkey: getCookie('userToken'),
       }
     );
   }

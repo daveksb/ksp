@@ -1,7 +1,7 @@
 import { Component, Inject, Input, OnInit, Optional } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AddressService } from '@ksp/shared/service';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -21,14 +21,14 @@ export class FormAddressTableComponent
   implements OnInit {
   override form = this.fb.group({
     location: [],
-    housenumber: [],
+    housenumber: ['', Validators.required],
     villagenumber: [],
     lane: [],
     road: [],
-    zipcode: [],
-    provinceid: [null],
-    districtid: [null],
-    subdistrictid: [null],
+    zipcode: ['', Validators.required],
+    provinceid: [null, Validators.required],
+    districtid: [null, Validators.required],
+    subdistrictid: [null, Validators.required],
     remark: []
   });
   provinceList: Array<any> = [];
@@ -72,18 +72,15 @@ export class FormAddressTableComponent
 
   getAll() {
     this.getProvince();
-    if (this.form.value.provinceid || (this.data && this.data.address.provinceid)) {
-      this.getDistrict(this.form.value.provinceid || this.data.address.provinceid);
-    }
-    if (this.form.value.districtid || (this.data && this.data.address.districtid)) {
-      this.getSubdistrict(this.form.value.districtid || this.data.address.districtid);
-    }
   }
 
   getProvince() {
     this.addressService.getProvinces().subscribe(response=>{
       if (response) {
         this.provinceList = response;
+        if (this.form.value.provinceid || (this.data && this.data.address.provinceid)) {
+          this.getDistrict(this.form.value.provinceid || this.data.address.provinceid);
+        }
       }
     })
   }
@@ -92,6 +89,9 @@ export class FormAddressTableComponent
     this.addressService.getAmphurs(provinceId).subscribe(response=>{
       if (response) {
         this.districtList = response;
+        if (this.form.value.districtid || (this.data && this.data.address.districtid)) {
+          this.getSubdistrict(this.form.value.districtid || this.data.address.districtid);
+        }
       }
     })
   }
@@ -102,5 +102,16 @@ export class FormAddressTableComponent
         this.subDistrictList = response;
       }
     })
+  }
+
+  selectSubdistrict(event: any) {
+    const findPostcode = this.subDistrictList.find(((data: any)=>{
+      return data.tambolCode == event.target.value;
+    }))
+    if (findPostcode) {
+      this.form.patchValue({
+        zipcode: findPostcode.tambolPostcode
+      })
+    }
   }
 }

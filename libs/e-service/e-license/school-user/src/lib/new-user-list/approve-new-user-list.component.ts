@@ -16,7 +16,7 @@ import { ERequestService } from '@ksp/shared/service';
 })
 export class ApproveNewUserListComponent implements AfterViewInit {
   displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<SchoolRequest>();
+  dataSource = new MatTableDataSource<any>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 

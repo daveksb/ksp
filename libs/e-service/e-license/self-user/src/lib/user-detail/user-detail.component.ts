@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  SchoolRequest,
-  SchoolServiceUserPageType,
-} from '@ksp/shared/interface';
+import { SchoolServiceUserPageType } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -57,7 +54,7 @@ export class UserDetailComponent implements OnInit {
 
   requestId!: number | null;
   requestDate!: string | null;
-  requestData!: SchoolRequest;
+  requestData!: any;
   prefixList$!: Observable<any>;
 
   requestNo: string | null = '';

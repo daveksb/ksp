@@ -1,7 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import {
+  KspFormBaseComponent,
+  SchRequestSearchFilter,
+} from '@ksp/shared/interface';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -13,12 +16,21 @@ import {
   SchoolRequestType,
 } from '@ksp/shared/constant';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @UntilDestroy()
 @Component({
   selector: 'ksp-school-request-search',
   standalone: true,
-  imports: [CommonModule, MatIconModule, ReactiveFormsModule, MatTooltipModule],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    MatTooltipModule,
+    MatInputModule,
+    MatDatepickerModule,
+  ],
   templateUrl: './request-search.component.html',
   styleUrls: ['./request-search.component.scss'],
   providers: providerFactory(RequestSearchComponent),
@@ -29,22 +41,24 @@ export class RequestSearchComponent
 {
   override form = this.fb.group({
     requesttype: ['3', Validators.required],
-    requestno: [null],
-    subtype: [null],
-    firstnameth: [''],
+    requestno: [''],
+    careertype: [''],
+    name: [''],
     idcardno: [''],
-    passportno: [null],
-    currentprocess: [null],
-    requeststatus: [null],
-    requestdatefrom: [null],
-    requestdateto: [null],
+    passportno: [''],
+    process: [''],
+    status: [''],
+    requestdatefrom: [''],
+    requestdateto: [''],
+    schoolid: [''],
+    offset: [''],
+    row: [''],
   });
 
   @Output() clear = new EventEmitter<boolean>(false);
-  @Output() search = new EventEmitter<any>();
+  @Output() search = new EventEmitter<Partial<SchRequestSearchFilter>>();
   @Input() disableRequestType = false;
   @Input() requestTypeList = SchoolRequestType;
-  //@Input() processTypeList: RequestProcess[] = [];
 
   eduOccupyList = EduOccupyList;
   processList: RequestProcess[] = [];
@@ -64,9 +78,9 @@ export class RequestSearchComponent
       .subscribe((requestType) => {
         // update subtype list
         if (requestType !== '3') {
-          this.form.controls.subtype.disable();
+          this.form.controls.careertype.disable();
         } else {
-          this.form.controls.subtype.enable();
+          this.form.controls.careertype.enable();
         }
 
         // update process list
@@ -75,14 +89,12 @@ export class RequestSearchComponent
         });
       });
 
-    this.form.controls.currentprocess.valueChanges.subscribe(
-      (currentProcess) => {
-        this.statusList = this.processList.find(
-          (p) => `${p.processId}` === currentProcess
-        )?.status;
-        //console.log('status list = ', this.statusList);
-      }
-    );
+    this.form.controls.process.valueChanges.subscribe((currentProcess) => {
+      this.statusList = this.processList.find(
+        (p) => `${p.processId}` === currentProcess
+      )?.status;
+      //console.log('status list = ', this.statusList);
+    });
   }
 
   ngOnInit(): void {

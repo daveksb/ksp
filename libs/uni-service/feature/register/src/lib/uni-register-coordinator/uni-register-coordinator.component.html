@@ -57,13 +57,14 @@
 
         <ksp-bottom-nav
           [isFirstPage]="false"
-          [isLastPage]="true"
+          [isLastPage]="false"
+          [showCancelButton]="false"
           [showCenterButtons]="true"
-          [showSaveButton]="true"
-          [disableSaveButton]="form.controls.coordinator.invalid"
+          [showSaveButton]="false"
+          (nextClicked)="next()"
+          [disableNext]="form.controls.coordinator.invalid"
           (prevClicked)="prevPage()"
           (cancelClicked)="cancel()"
-          (saveClicked)="next()"
         >
         </ksp-bottom-nav>
       </div>

@@ -46,6 +46,8 @@ export class UniRegisterPasswordComponent implements OnInit {
   requesttype = 1;
   systemtype = 3;
   currentprocess = 1;
+  eyeIconClicked = false;
+  eyeIconClickedRe = false;
 
   constructor(
     private router: Router,

@@ -6,8 +6,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
-import { PdfViewerComponent } from '@ksp/shared/dialog';
-import { SchoolRequest } from '@ksp/shared/interface';
+import { KspRequest, SchRequestSearchFilter } from '@ksp/shared/interface';
 import { RequestService } from '@ksp/shared/service';
 import {
   checkProcess,
@@ -22,11 +21,10 @@ import {
 export class SchoolRequestListComponent implements AfterViewInit {
   schoolId = '0010201056';
   displayedColumns: string[] = displayedColumns;
-  dataSource = new MatTableDataSource<SchoolRequest>();
+  dataSource = new MatTableDataSource<KspRequest>();
   SchoolRequestSubType = SchoolRequestSubType;
   searchNotFound = false;
 
-  searchParams: any;
   checkProcess = checkProcess;
   checkRequestType = checkRequestType;
   checkStatus = checkStatus;
@@ -50,29 +48,29 @@ export class SchoolRequestListComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  search(filters: any) {
+  search(filters: Partial<SchRequestSearchFilter>) {
     //console.log('filters = ', filters);
-    const payload = {
+    const payload: SchRequestSearchFilter = {
       schoolid: `${this.schoolId}`,
       requesttype: `${filters.requesttype}`,
       requestno: filters.requestno,
-      subtype: filters.subtype,
-      name: filters.firstnameth,
+      careertype: filters.careertype,
+      name: filters.name,
       idcardno: filters.idcardno,
       passportno: filters.passportno,
-      currentprocess: filters.currentprocess,
-      requeststatus: filters.requeststatus,
-      createdatefrom: filters.requestdatefrom,
-      createdateto: filters.requestdateto,
+      process: filters.process,
+      status: filters.status,
+      requestdatefrom: filters.requestdatefrom,
+      requestdateto: filters.requestdateto,
       offset: '0',
       row: '500',
     };
 
-    this.searchParams = payload;
+    //this.searchParams = payload;
 
-    this.requestService.searchRequest(payload).subscribe((res) => {
-      //console.log('res = ', res);
+    this.requestService.schSearchRequest(payload).subscribe((res) => {
       if (res && res.length) {
+        console.log('res = ', res);
         this.searchNotFound = false;
         this.dataSource.data = res;
         this.dataSource.sort = this.sort;
@@ -143,8 +141,8 @@ export interface TempLicenseInfo {
   requestno: string;
   idcardno: string;
   requesttype: string;
-  currentprocess: string;
-  requeststatus: string;
+  process: string;
+  status: string;
   updatedate: string;
   requestdate: string;
 }
@@ -155,9 +153,9 @@ export const displayedColumns = [
   'idcardno',
   'name',
   'requesttype',
-  'subtype',
-  'currentprocess',
-  'requeststatus',
+  'careertype',
+  'process',
+  'status',
   'updatedate',
   'requestdate',
   'requestdoc',
