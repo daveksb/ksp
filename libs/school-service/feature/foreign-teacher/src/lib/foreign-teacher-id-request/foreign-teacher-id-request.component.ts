@@ -15,7 +15,7 @@ import {
   SchoolInfoService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { mapMultiFileInfo, thaiDate } from '@ksp/shared/utility';
+import { formatDate, mapMultiFileInfo, thaiDate } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
 
 @UntilDestroy()
@@ -25,12 +25,6 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class ForeignTeacherIdRequestComponent implements OnInit {
   uniqueNo!: string;
-
-  form = this.fb.group({
-    foreignTeacher: [],
-    visainfo: [],
-  });
-
   bureauName = '';
   schoolId = '0010201056';
   schoolName = '';
@@ -41,22 +35,29 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   prefixList$!: Observable<any>;
   countries$!: Observable<any>;
   visaTypeList$!: Observable<any>;
+  requestNo = '';
+  requestId!: number;
+
+  form = this.fb.group({
+    foreignTeacher: [],
+    visainfo: [],
+  });
+
   foreignFiles: FileGroup[] = [
     { name: '1.สำเนาหนังสือเดินทาง', files: [] },
   ] as FileGroup[];
-  requestNumber = '';
-  requestId!: number;
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     public dialog: MatDialog,
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
     private requestService: RequestService,
-    private schoolInfoService: SchoolInfoService,
-    private route: ActivatedRoute
+    private schoolInfoService: SchoolInfoService
   ) {}
+
   get formValid() {
     return (
       !this.form.get('foreignTeacher')?.valid ||
@@ -141,7 +142,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       data: {
         header: 'ระบบทำการยกเลิกเรียบร้อย',
         content: `วันที่ : ${thaiDate(new Date())}
-        เลขที่คำขอ : ${this.requestNumber}`,
+        เลขที่คำขอ : ${this.requestNo}`,
       },
     });
 
@@ -158,12 +159,12 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     }
   }
 
-  onConfirmed() {
-    if (
+  confirmDialog() {
+    /*  if (
       !this.form.get('foreignTeacher')?.valid ||
       !this.form.get('visainfo')?.valid
     )
-      return;
+      return; */
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -188,10 +189,15 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             userInfo.schoolid = this.schoolId;
             userInfo.process = `1`;
             userInfo.status = `1`;
+            userInfo.birthdate = formatDate(userInfo.birthdate);
+            userInfo.passportstartdate = formatDate(userInfo.passportstartdate);
+            userInfo.passportenddate = formatDate(userInfo.passportenddate);
+            userInfo.visaexpiredate = formatDate(userInfo.visaexpiredate);
             //userInfo.visainfo = JSON.stringify(this.form.value.visainfo);
-            userInfo.fileinfo = JSON.stringify(
+            /* userInfo.fileinfo = JSON.stringify(
               mapMultiFileInfo(this.foreignFiles)
-            );
+            ); */
+            console.log('userInfo = ', userInfo);
             return this.requestService.schCreateRequest(userInfo);
           }
           return EMPTY;

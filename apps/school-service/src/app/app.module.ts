@@ -18,8 +18,7 @@ import {
 import { File_UPLOAD_URLS, FileUploadUrls } from '@ksp/shared/form/file-upload';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 
 const fileUrls: FileUploadUrls = {
   uploadFile: '/kspstaff/schrequestfileinsert',
@@ -28,6 +27,17 @@ const fileUrls: FileUploadUrls = {
   download: '/kspstaff/schrequestfileselectbyid',
 };
 
+/* class PickDateAdapter extends NativeDateAdapter {
+  override format(date: Date, displayFormat: any): string {
+     if (displayFormat === 'input') {
+      return formatDate(date, 'dd-M-yyyy', this.locale);
+    } else {
+      return date.toDateString();
+    }
+    return date.toDateString();
+  }
+}
+ */
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -40,7 +50,8 @@ const fileUrls: FileUploadUrls = {
     ReactiveFormsModule,
     HttpClientModule,
     MatDatepickerModule,
-    MatMomentDateModule,
+    MatNativeDateModule,
+    //MatMomentDateModule,
   ],
   providers: [
     {
@@ -58,20 +69,8 @@ const fileUrls: FileUploadUrls = {
       useValue: fileUrls,
     },
     { provide: MAT_DATE_LOCALE, useValue: 'th-TH' },
-    {
-      provide: MAT_DATE_FORMATS,
-      useValue: {
-        parse: {
-          dateInput: ['l', 'LL'],
-        },
-        display: {
-          dateInput: 'L',
-          monthYearLabel: 'MMM YYYY',
-          dateA11yLabel: 'LL',
-          monthYearA11yLabel: 'MMMM YYYY',
-        },
-      },
-    },
+
+    //{ provide: DateAdapter, useClass: PickDateAdapter },
     {
       provide: MAT_DIALOG_DEFAULT_OPTIONS,
       useValue: {

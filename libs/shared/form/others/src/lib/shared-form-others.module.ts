@@ -17,7 +17,6 @@ import { FormVisaInfoComponent } from './form-visa-info/form-visa-info.component
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 import { FormMultiAttachmentComponent } from './form-multi-attachment/form-multi-attachment.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   imports: [
@@ -26,7 +25,6 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatDatepickerModule,
     MatIconModule,
     MatCheckboxModule,
-    MatNativeDateModule,
     RequestHeaderInfoComponent,
     FileUploadComponent,
   ],
