@@ -1,10 +1,12 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
+import { PdfViewerComponent } from '@ksp/shared/dialog';
 import { SchoolRequest } from '@ksp/shared/interface';
 import { RequestService } from '@ksp/shared/service';
 import {
@@ -40,7 +42,8 @@ export class SchoolRequestListComponent implements AfterViewInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private requestService: RequestService
+    private requestService: RequestService,
+    public dialog: MatDialog
   ) {}
 
   ngAfterViewInit() {
