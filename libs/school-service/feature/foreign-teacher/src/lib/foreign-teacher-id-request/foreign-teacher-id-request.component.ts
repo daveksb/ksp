@@ -29,14 +29,15 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   schoolId = '0010201056';
   schoolName = '';
   address = '';
-  requestDate = thaiDate(new Date());
   showCancelButton!: boolean;
   mode: FormMode = 'edit';
   prefixList$!: Observable<any>;
   countries$!: Observable<any>;
   visaTypeList$!: Observable<any>;
-  requestNo = '';
+  //requestNo = '';
+  //requestDate = thaiDate(new Date());
   requestId!: number;
+  request: KspRequest = new KspRequest();
 
   form = this.fb.group({
     foreignTeacher: [],
@@ -85,7 +86,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       if (res) {
         this.mode = 'view';
         this.showCancelButton = Boolean(res.status);
-        this.requestDate = thaiDate(new Date(`${res.requestdate}`));
+        //this.requestDate = res.requestdate ?? '';
 
         /* res.birthdate = res.birthdate?.split('T')[0];
         res.passportstartdate = res.passportstartdate?.split('T')[0];
@@ -142,7 +143,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       data: {
         header: 'ระบบทำการยกเลิกเรียบร้อย',
         content: `วันที่ : ${thaiDate(new Date())}
-        เลขที่คำขอ : ${this.requestNo}`,
+        เลขที่คำขอ : ${this.request.requestno}`,
       },
     });
 
