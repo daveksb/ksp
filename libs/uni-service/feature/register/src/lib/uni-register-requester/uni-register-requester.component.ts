@@ -22,7 +22,7 @@ export class UniRegisterRequesterComponent implements OnInit {
   uniType$!: Observable<any>;
   occupyList$!: Observable<any>;
   userInfoFormdisplayMode: number = UserInfoFormType.thai;
-  uniData: any;
+  uniData!: any;
   form = this.fb.group({
     requester: []
   });
