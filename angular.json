@@ -2406,6 +2406,11 @@
             "assets": [
               "apps/school-service/src/favicon.ico",
               {
+                "glob": "**/*",
+                "input": "node_modules/ngx-extended-pdf-viewer/assets/",
+                "output": "assets"
+              },
+              {
                 "input": "libs/shared/assets/src/assets",
                 "glob": "**/*",
                 "output": "./assets"
