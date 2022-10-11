@@ -14,11 +14,15 @@
       <div class="bg-light p-3">
         <div class="box-header text-primary">ค้นหาข้อมูล</div>
         <div class="row mb-2 w-75 ms-5">
-          <div class="col-6">
-            <label class="form-label"
-              >หมายเลขบัตรประชาชน / เลขประจำตัวคุรุสภา / หมายเลขหนังสือเดินทาง</label
-            >
-            <input type="text" class="form-control" formControlName="idcardno" />
+          <div class="col-12">
+            <div class="row">
+              <label class="form-label">
+                หมายเลขบัตรประชาชน / เลขประจำตัวคุรุสภา / หมายเลขหนังสือเดินทาง
+              </label>
+              <div class="col-6">
+                <input type="text" class="form-control" formControlName="idcardno" />
+              </div>
+            </div>
           </div>
         </div>
 
@@ -147,10 +151,12 @@
         <label class="text-red">กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง โปรดตรวจสอบอีกครั้งก่อนบันทึกลงระบบ</label>
       </ng-container>
     </form>
+    <div class="bg-light p-4 text-center" *ngIf="!data && isNotFound">
+      <span>ไม่พบข้อมูล</span>
+    </div>
   </div>
 </div>
-
-<div class="sticky-bottom border">
+<div class="sticky-bottom border" *ngIf="data">
   <ksp-bottom-nav
     (cancelClicked)="cancel()"
     [isLastPage]="true"

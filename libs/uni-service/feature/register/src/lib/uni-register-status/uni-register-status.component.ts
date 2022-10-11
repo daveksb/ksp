@@ -81,4 +81,7 @@ export class UniRegisterStatusComponent implements OnInit {
     })
   }
 
+  goLogin() {
+    this.router.navigate(['/login']);
+  }
 }
