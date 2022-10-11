@@ -18,7 +18,8 @@ import {
 import { File_UPLOAD_URLS, FileUploadUrls } from '@ksp/shared/form/file-upload';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 const fileUrls: FileUploadUrls = {
   uploadFile: '/kspstaff/schrequestfileinsert',
@@ -39,6 +40,7 @@ const fileUrls: FileUploadUrls = {
     ReactiveFormsModule,
     HttpClientModule,
     MatDatepickerModule,
+    MatMomentDateModule,
   ],
   providers: [
     {
@@ -56,6 +58,20 @@ const fileUrls: FileUploadUrls = {
       useValue: fileUrls,
     },
     { provide: MAT_DATE_LOCALE, useValue: 'th-TH' },
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: {
+        parse: {
+          dateInput: ['l', 'LL'],
+        },
+        display: {
+          dateInput: 'L',
+          monthYearLabel: 'MMM YYYY',
+          dateA11yLabel: 'LL',
+          monthYearA11yLabel: 'MMMM YYYY',
+        },
+      },
+    },
     {
       provide: MAT_DIALOG_DEFAULT_OPTIONS,
       useValue: {
