@@ -73,6 +73,11 @@
     </span>
     <span class="col-md-3">
       <input class="form-control" type="text" formControlName="smsDetail" />
+      <ng-container
+        *ngIf="smsPhone.invalid && (smsPhone.dirty || smsPhone.touched)">
+        <span class="text-danger" *ngIf="smsPhone.errors?.['pattern']">{{ validatorMessages.phone }}
+        </span>
+      </ng-container>
     </span>
   </div>
 
@@ -83,6 +88,11 @@
     </span>
     <span class="col-md-3">
       <input class="form-control" type="text" formControlName="emailDetail" />
+      <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
+        <span class="text-danger" *ngIf="email.errors?.['email']">{{
+          validatorMessages.email
+          }}</span>
+      </ng-container>
     </span>
   </div>
 
@@ -119,6 +129,11 @@
     <div class="col-md-6 mb-2">
       <label class="form-label required">เลขที่บัญชี</label>
       <input class="form-control" type="text" formControlName="bankAccount" />
+      <ng-container
+        *ngIf="bankAccount.invalid && (bankAccount.dirty || bankAccount.touched)">
+        <span class="text-danger" *ngIf="bankAccount.errors?.['pattern']">{{ validatorMessages.bankAccount }}
+        </span>
+      </ng-container>
     </div>
   </div>
 </div>
