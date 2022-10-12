@@ -143,7 +143,7 @@ export const eLicenseMenu: MenuConfig[] = [
     subMenuName: 'edit-thai',
     subMenu: [
       {
-        path: '/xxx',
+        path: '/edit-license/list',
         label: 'รายการใบคำขอแก้ไข/เปลี่ยนแปลงใบอนุญาต',
       },
       {
@@ -160,7 +160,7 @@ export const eLicenseMenu: MenuConfig[] = [
     subMenuName: 'edit-foreign',
     subMenu: [
       {
-        path: '/xxx',
+        path: '/edit-license/list',
         label: 'รายการใบคำขอแก้ไข/เปลี่ยนแปลงใบอนุญาต',
       },
       {

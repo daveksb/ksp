@@ -13,10 +13,16 @@
   <div class="bg-white p-3">
     <div class="box-header">ผลการค้นหา</div>
     <hr />
-    <table mat-table [dataSource]="dataSource">
+    <table mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        <td mat-cell *matCellDef="let element; let i = index">
+          {{
+            paginator.pageIndex === 0
+              ? i + 1
+              : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+          }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="view">
@@ -81,7 +87,7 @@
     </table>
 
     <mat-paginator
-      [pageSizeOptions]="[10]"
+      [pageSizeOptions]="[25]"
       showFirstLastButtons
       aria-label="Select page of periodic elements"
     >
