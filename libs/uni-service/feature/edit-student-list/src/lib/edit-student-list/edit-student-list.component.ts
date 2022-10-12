@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { requestStatus } from '@ksp/shared/constant';
 import { UniInfoService, UniRequestService } from '@ksp/shared/service';
-import { stringToThaiDate, thaiDate } from '@ksp/shared/utility';
+import { providerFactory, thaiDate } from '@ksp/shared/utility';
 import { HistoryRequestDialogComponent, PrintRequestDialogComponent } from '@ksp/uni-service/dialog';
 import { KspPaginationComponent, ListData } from '@ksp/shared/interface';
 import _ from 'lodash';
@@ -23,6 +23,7 @@ const mapOption = () =>
   selector: 'ksp-edit-student-list',
   templateUrl: './edit-student-list.component.html',
   styleUrls: ['./edit-student-list.component.scss'],
+  providers: providerFactory(EditStudentListComponent),
 })
 export class EditStudentListComponent extends KspPaginationComponent implements OnInit {
   displayedColumns: string[] = column;
@@ -73,6 +74,10 @@ export class EditStudentListComponent extends KspPaginationComponent implements 
         });
       }
     }));
+  }
+
+  private _findOptions(dataSource: any, key: any) {
+    return _.find(dataSource, { value: key })?.label || '-';
   }
 
   history(row: any) {

@@ -7,7 +7,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { thaiDate } from '@ksp/shared/utility';
+import { mapMultiFileInfo, thaiDate } from '@ksp/shared/utility';
 import {
   GeneralInfoService,
   UniInfoService,
@@ -16,6 +16,7 @@ import {
 import { EMPTY, Observable, switchMap } from 'rxjs';
 import localForage from 'localforage';
 import { v4 as uuidv4 } from 'uuid';
+import { FileGroup } from '@ksp/shared/interface';
 
 @Component({
   selector: 'uni-service-retired-attachment',
@@ -44,10 +45,10 @@ export class RetiredAttachmentComponent implements OnInit {
     private uniinfoService: UniInfoService
   ) {}
 
-  retiredFiles = [
-    { name: 'หนังสือแต่งตั้งผู้ประสานงาน', fileid: '', filename: '' },
-    { name: 'สำเนาบัตรประชาชน', fileid: '', filename: '' },
-  ];
+  retiredFiles: FileGroup[] = [
+    { name: 'หนังสือแต่งตั้งผู้ประสานงาน', files: [] },
+    { name: 'สำเนาบัตรประชาชน', files: [] },
+  ] as FileGroup[];
 
   ngOnInit() {
     this.uniqueTimestamp = uuidv4();
@@ -95,10 +96,8 @@ export class RetiredAttachmentComponent implements OnInit {
       .pipe(
         switchMap((res) => {
           if (res) {
-            const fileUpload = this.retiredFiles.map(
-              (file) => file.fileid || null
-            );
-            let payload = {
+            const fileUpload = mapMultiFileInfo(this.retiredFiles);
+            const payload = {
               ...this.userInfo,
               coordinatorinfo: JSON.stringify(this.form.value.coordinator),
               fileinfo: JSON.stringify({ fileUpload }),
