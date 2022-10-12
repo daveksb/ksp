@@ -1,0 +1,176 @@
+<ksp-top-nav
+  ><span header>ยื่นใบคำขอรางวัล</span
+  ><span subHeader>ขอรางวัลครูภาษาไทยดีเด่น</span></ksp-top-nav
+>
+
+<div class="bg-secondary full-height bg-opacity-10 px-4 py-2">
+  <div class="box-header">รายการขอรางวัลครูภาษาไทยดีเด่น</div>
+  <div class="bg-white p-3">
+    <div class="box-header">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
+    <hr />
+
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">เลขที่คำขอ</label>
+        <input type="text" class="form-control" />
+      </div>
+      <div class="col">
+        <label class="form-label">หมายเลขบัตรประชาชน</label>
+        <input type="text" class="form-control" />
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">ชื่อ-นามสกุล</label>
+        <input type="text" class="form-control" />
+      </div>
+      <div class="col">
+        <label class="form-label">ประเภท/กลุ่มสาระการเรียนรู้</label>
+        <input type="text" class="form-control" />
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">สถานะการดำเนินการ</label>
+        <select class="form-select">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div class="col">
+        <label class="form-label">ผลการพิจารณา</label>
+        <select class="form-select">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">จาก : วันเดือนปีที่ยื่นใบคำขอ</label>
+        <input type="date" class="form-control" />
+      </div>
+      <!-- <div class="col-auto p-0 my-2">
+        <br />
+        <i class="bi bi-dash"></i>
+      </div> -->
+      <div class="col">
+        <label class="form-label">ถึง : วันเดือนปีที่ยื่นใบคำขอ</label>
+        <input type="date" class="form-control" />
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end mt-3">
+      <button
+        class="btn border-primary text-primary"
+        type="button"
+        (click)="clear()"
+      >
+        ล้างข้อมูล</button
+      ><button class="btn btn-primary ms-2" type="button" (click)="search()">
+        ค้นหา
+      </button>
+    </div>
+  </div>
+  <br />
+  <div class="bg-white p-3">
+    <div class="box-header mb-3">ผลการค้นหา</div>
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="order">
+          <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.order }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="licenseNumber">
+          <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.licenseNumber }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="schoolCode">
+          <th mat-header-cell *matHeaderCellDef>รหัสโรงเรียน</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.schoolCode }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="schoolName">
+          <th mat-header-cell *matHeaderCellDef>ชื่อหน่วยงาน/สถานศึกษา</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.schoolName }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="workName">
+          <th mat-header-cell *matHeaderCellDef>ชื่อผลงาน</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.workName }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="consider">
+          <th mat-header-cell *matHeaderCellDef>ผลการพิจารณา</th>
+          <td mat-cell *matCellDef="let element">{{ element.consider }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastEditDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
+          <td mat-cell *matCellDef="let element">{{ element.lastEditDate }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="submitDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่ยื่นใบคำขอ</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.submitDate }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="objection">
+          <th mat-header-cell *matHeaderCellDef>คัดค้าน/เพิกถอน</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.objection }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="verify">
+          <th mat-header-cell *matHeaderCellDef>ตรวจสอบ</th>
+          <td mat-cell *matCellDef="let element">
+            <i
+              role="button"
+              class="bi bi-file-text fs-5 text-primary"
+              (click)="view()"
+            ></i>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="request">
+          <th mat-header-cell *matHeaderCellDef>ใบคำขอ</th>
+          <td mat-cell *matCellDef="let row">
+            <i role="button" class="bi bi-file-text fs-5 text-primary"></i>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef>คัดค้าน/เพิกถอน</th>
+          <td mat-cell *matCellDef="let row">
+            <i role="button" class="bi bi-pencil-square fs-5 text-primary"></i>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  </div>
+</div>

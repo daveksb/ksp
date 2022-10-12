@@ -107,6 +107,9 @@
       "@ksp/e-service/professional/professional": [
         "libs/e-service/professional/professional/src/index.ts"
       ],
+      "@ksp/e-service/professional/research-reward": [
+        "libs/e-service/professional/research-reward/src/index.ts"
+      ],
       "@ksp/e-service/professional/senior-teacher-reward": [
         "libs/e-service/professional/senior-teacher-reward/src/index.ts"
       ],

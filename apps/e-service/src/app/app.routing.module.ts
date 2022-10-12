@@ -197,7 +197,7 @@ const routes: EthicsCustomRoute[] = [
   },
   {
     path: 'import-test',
-    data: { menuConfig: standardMenu, headerLabel: 'ขอคืนเงินค่าธรรมเนียม' },
+    data: { menuConfig: standardMenu, headerLabel: 'นำเข้าผลการทดสอบ' },
     loadChildren: () =>
       import('@ksp/e-service/standard/test-result').then(
         (m) => m.EServiceStandardTestResultModule
@@ -206,7 +206,10 @@ const routes: EthicsCustomRoute[] = [
   },
   {
     path: 'import-performance',
-    data: { menuConfig: standardMenu, headerLabel: 'ขอคืนเงินค่าธรรมเนียม' },
+    data: {
+      menuConfig: standardMenu,
+      headerLabel: 'นำเข้าผลการประเมินสมรรถนะ',
+    },
     loadChildren: () =>
       import('@ksp/e-service/standard/performance-result').then(
         (m) => m.EServiceStandardPerformanceResultModule
@@ -217,11 +220,83 @@ const routes: EthicsCustomRoute[] = [
     path: 'enable-reward',
     data: {
       menuConfig: professionalMenu,
-      headerLabel: 'ขอคืนเงินค่าธรรมเนียม',
+      headerLabel: 'ตั้งค่าเปิด-ปิดการยื่นรางวัล',
     },
     loadChildren: () =>
       import('@ksp/e-service/professional/enable-reward-request').then(
         (m) => m.EServiceProfessionalEnableRewardRequestModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'teacher-council',
+    data: {
+      menuConfig: professionalMenu,
+      headerLabel: 'ขอคืนเงินค่าธรรมเนียม',
+    },
+    loadChildren: () =>
+      import('@ksp/e-service/professional/teacher-council-reward').then(
+        (m) => m.EServiceProfessionalTeacherCouncilRewardModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'thai-teacher',
+    data: {
+      menuConfig: professionalMenu,
+      headerLabel: 'ขอคืนเงินค่าธรรมเนียม',
+    },
+    loadChildren: () =>
+      import('@ksp/e-service/professional/thai-teacher-reward').then(
+        (m) => m.EServiceProfessionalThaiTeacherRewardModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'best-teacher',
+    data: {
+      menuConfig: professionalMenu,
+      headerLabel: 'ขอคืนเงินค่าธรรมเนียม',
+    },
+    loadChildren: () =>
+      import('@ksp/e-service/professional/best-teacher-reward').then(
+        (m) => m.EServiceProfessionalBestTeacherRewardModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'research-reward',
+    data: {
+      menuConfig: professionalMenu,
+      headerLabel: 'ขอคืนเงินค่าธรรมเนียม',
+    },
+    loadChildren: () =>
+      import('@ksp/e-service/professional/research-reward').then(
+        (m) => m.EServiceProfessionalResearchRewardModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'praise-teacher',
+    data: {
+      menuConfig: professionalMenu,
+      headerLabel: 'ขอคืนเงินค่าธรรมเนียม',
+    },
+    loadChildren: () =>
+      import('@ksp/e-service/professional/praise-teacher-reward').then(
+        (m) => m.EServiceProfessionalPraiseTeacherRewardModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'senior-teacher',
+    data: {
+      menuConfig: professionalMenu,
+      headerLabel: 'ขอคืนเงินค่าธรรมเนียม',
+    },
+    loadChildren: () =>
+      import('@ksp/e-service/professional/senior-teacher-reward').then(
+        (m) => m.EServiceProfessionalSeniorTeacherRewardModule
       ),
     canActivate: [AuthGuard],
   },

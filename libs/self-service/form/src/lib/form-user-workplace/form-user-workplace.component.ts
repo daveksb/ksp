@@ -12,6 +12,7 @@ import { providerFactory } from '@ksp/shared/utility';
   providers: providerFactory(FormUserWorkplaceComponent),
 })
 export class FormUserWorkplaceComponent extends KspFormBaseComponent {
+  @Input() isDarkMode = false;
   @Input() provinces: any[] = [];
   @Input() amphurs: any[] = [];
   @Input() tumbols: any[] = [];
