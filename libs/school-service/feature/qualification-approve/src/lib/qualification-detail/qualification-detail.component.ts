@@ -17,7 +17,7 @@ import {
   GeneralInfoService,
   RequestService,
 } from '@ksp/shared/service';
-import { thaiDate } from '@ksp/shared/utility';
+import { formatDate, parseJson, thaiDate } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { EMPTY, Observable, switchMap } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
@@ -29,8 +29,6 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./qualification-detail.component.scss'],
 })
 export class QualificationDetailComponent implements OnInit {
-  uniqueTimestamp!: string;
-
   form = this.fb.group({
     userInfo: [],
     addr1: [],
@@ -41,6 +39,7 @@ export class QualificationDetailComponent implements OnInit {
     edu4: [],
   });
 
+  uniqueNo!: string;
   userInfoFormdisplayMode: number = UserInfoFormType.thai;
   prefixList$!: Observable<any>;
   provinces1$!: Observable<any>;
@@ -53,7 +52,7 @@ export class QualificationDetailComponent implements OnInit {
   nationalitys$!: Observable<any>;
   schoolId = '0010201056';
 
-  requestSubType!: number;
+  careerType!: number;
   requestId!: number;
   requestData = new KspRequest();
   requestStatus!: number;
@@ -77,7 +76,7 @@ export class QualificationDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.uniqueTimestamp = uuidv4();
+    this.uniqueNo = uuidv4();
     this.getListData();
     this.checkRequestId();
     this.checkRequestSubType();
@@ -95,37 +94,39 @@ export class QualificationDetailComponent implements OnInit {
   checkRequestSubType() {
     this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
       if (Number(params['subtype'])) {
-        this.requestSubType = Number(params['subtype']);
+        this.careerType = Number(params['subtype']);
       }
     });
   }
 
   loadRequestData(id: number) {
-    this.requestService.getRequestById(id).subscribe((res: any) => {
+    this.requestService.schGetRequestById(id).subscribe((res) => {
       if (res) {
-        //this.requestNumber = res.requestno;
-        this.requestStatus = +res.requeststatus;
-        this.currentProcess = +res.currentprocess;
-        //this.requestDate = thaiDate(new Date(`${res.requestdate}`));
-        res.birthdate = res.birthdate?.split('T')[0];
-        this.form.get('userInfo')?.patchValue(res);
+        this.requestStatus = Number(res.status);
+        this.currentProcess = Number(res.process);
+        res.birthdate = formatDate(res.birthdate);
 
-        const edus = JSON.parse(atob(res.eduinfo));
+        this.form.controls.userInfo.patchValue(<any>res);
+
+        const edus = parseJson(res.eduinfo);
         this.patchEdu(edus);
 
-        res.addressinfo = JSON.parse(atob(res.addressinfo));
-        for (let i = 0; i < res.addressinfo.length; i++) {
-          const form = this.form.get(`addr${i + 1}`) as AbstractControl<
-            any,
-            any
-          >;
-          this.getAmphurChanged(i + 1, res?.addressinfo[i].province);
-          this.getTumbon(i + 1, res?.addressinfo[i].amphur);
-          form?.patchValue(res?.addressinfo[i]);
+        const addressinfo: any = parseJson(res.addressinfo);
+
+        if (addressinfo) {
+          for (let i = 0; i < addressinfo.length; i++) {
+            const form = this.form.get(`addr${i + 1}`) as AbstractControl<
+              any,
+              any
+            >;
+            this.getAmphurChanged(i + 1, addressinfo[i].province);
+            this.getTumbon(i + 1, addressinfo[i].amphur);
+            form?.patchValue(addressinfo[i]);
+          }
         }
 
-        res.refperson = JSON.parse(atob(res.refperson));
-        res.otherreason = JSON.parse(atob(res.otherreason));
+        res.refperson = parseJson(res.refperson);
+        res.otherreason = parseJson(res.otherreason);
         this.refperson = res.refperson;
         this.otherreason = res.otherreason;
         this.mode = 'view';
@@ -177,7 +178,6 @@ export class QualificationDetailComponent implements OnInit {
   cancel() {
     if (this.mode == 'view') {
       const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-        width: '350px',
         data: {
           title: `คุณต้องการยกเลิกการยื่นคำขอ
           ใช่หรือไม่? `,
@@ -197,7 +197,7 @@ export class QualificationDetailComponent implements OnInit {
             return EMPTY;
           })
         )
-        .subscribe((res) => {
+        .subscribe(() => {
           this.onCancelCompleted();
         });
     } else {
@@ -217,7 +217,7 @@ export class QualificationDetailComponent implements OnInit {
         },
       }
     );
-    confirmDialog.afterClosed().subscribe((res: any) => {
+    confirmDialog.afterClosed().subscribe((res) => {
       if (res) {
         this.saved(res);
       }
@@ -242,7 +242,6 @@ export class QualificationDetailComponent implements OnInit {
 
   onConfirmed(reasonForm: any, refPersonForm: any) {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
       },
@@ -265,7 +264,7 @@ export class QualificationDetailComponent implements OnInit {
             userInfo.ref3 = '1';
             userInfo.systemtype = '2';
             userInfo.requesttype = '6';
-            userInfo.subtype = `${this.requestSubType}`;
+            userInfo.subtype = `${this.careerType}`;
             userInfo.schoolid = this.schoolId;
             userInfo.currentprocess = '1';
             userInfo.requeststatus = '1';
@@ -319,7 +318,6 @@ export class QualificationDetailComponent implements OnInit {
 
   onCancelCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
       data: {
         header: 'ระบบทำการยกเลิกเรียบร้อย',
         content: `วันที่ : ${thaiDate(new Date())}
@@ -336,7 +334,6 @@ export class QualificationDetailComponent implements OnInit {
 
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
       data: {
         header: `ระบบทำการบันทึกเรียบร้อยแล้ว
         สามารถตรวจสอบสถานะภายใน
