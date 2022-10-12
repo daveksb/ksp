@@ -56,11 +56,19 @@
 
       <div class="col-md-6">
         <label class="form-label">วันที่ยื่นใบคำขอ</label>
-        <input
-          class="form-control"
-          type="date"
-          formControlName="requestsubmitDate"
-        />
+        <div class="d-flex align-items-baseline">
+          <input
+            [matDatepicker]="picker1"
+            autocomplete="off"
+            class="form-control me-2"
+            formControlName="requestsubmitDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </div>
       </div>
     </div>
 
