@@ -1,7 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+
+function checkAllValidator(): any {
+  return (form: FormArray) => {
+    const checkAll = form.controls.every((item) => !!item.value);
+
+    if (!checkAll) {
+      return { checkall: true };
+    }
+
+    return null;
+  };
+}
 
 @Component({
   selector: 'self-service-foreign-license-step-one',
@@ -53,7 +65,7 @@ export class ForeignLicenseStepOneComponent
   ];
 
   override form = this.fb.group({
-    checkDocuments: this.fb.array([]),
+    checkDocuments: this.fb.array([], checkAllValidator()),
   });
 
   override set value(value: any) {
