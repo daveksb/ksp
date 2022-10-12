@@ -64,10 +64,20 @@
           <div class="col-6">
             <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ</label>
             <input class="form-control" type="date" formControlName="requestdate" />
+            <!-- <mat-form-field appearance="outline">
+              <input matInput [matDatepicker]="pickerfrom" placeholder="วว/ดด/ปปปป" formControlName="requestdatefrom" />
+              <mat-datepicker-toggle matSuffix [for]="pickerfrom"></mat-datepicker-toggle>
+              <mat-datepicker #pickerfrom></mat-datepicker>
+            </mat-form-field> -->
           </div>
           <div class="col-6">
             <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ</label>
-            <input class="form-control" type="date" formControlName="requestdate" />
+            <input class="form-control" type="date" formControlName="requestdateto" />
+            <!-- <mat-form-field appearance="outline">
+              <input matInput [matDatepicker]="pickerto" placeholder="วว/ดด/ปปปป" formControlName="requestdateto" />
+              <mat-datepicker-toggle matSuffix [for]="pickerto"></mat-datepicker-toggle>
+              <mat-datepicker #pickerto></mat-datepicker>
+            </mat-form-field> -->
           </div>
         </div>
   

@@ -40,7 +40,8 @@ export class EditStudentListComponent extends KspPaginationComponent implements 
     requeststatus: [],
     cardno: [],
     name: [],
-    requestdate: [],
+    requestdatefrom: [],
+    requestdateto: [],
     requestprocess: [],
     offset: [0],
     row: [10]
@@ -81,8 +82,11 @@ export class EditStudentListComponent extends KspPaginationComponent implements 
     this.uniInfoService.uniRequestEditHistory(payload).subscribe((response => {
       if (response) {
         this.dialog.open(HistoryRequestDialogComponent, {
-          width: '400px',
-          data: response.datareturn
+          width: '600px',
+          data: response.datareturn.map((data: any) => {
+            data.requestprocess = data.process;
+            return data;
+          })
         });
       }
     }));
