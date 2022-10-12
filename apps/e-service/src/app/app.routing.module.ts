@@ -213,7 +213,18 @@ const routes: EthicsCustomRoute[] = [
       ),
     canActivate: [AuthGuard],
   },
-
+  {
+    path: 'enable-reward',
+    data: {
+      menuConfig: professionalMenu,
+      headerLabel: 'ขอคืนเงินค่าธรรมเนียม',
+    },
+    loadChildren: () =>
+      import('@ksp/e-service/professional/enable-reward-request').then(
+        (m) => m.EServiceProfessionalEnableRewardRequestModule
+      ),
+    canActivate: [AuthGuard],
+  },
   { path: '', component: EServiceLoginComponent },
 ];
 

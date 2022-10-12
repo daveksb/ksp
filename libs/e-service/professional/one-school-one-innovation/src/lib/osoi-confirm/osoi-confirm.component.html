@@ -24,7 +24,7 @@
     <div class="box-header">ประวัติผลการตรวจสอบคุณสมบัติและเอกสาร</div>
 
     <div class="table-responsive">
-      <table class="table">
+      <table class="table w-75">
         <thead>
           <tr>
             <th scope="col">ครั้งที่</th>
@@ -53,78 +53,80 @@
         <div class="text-danger">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
       </div>
 
-      <div class="d-flex align-items-center mb-3">
-        <div class="form-control" style="width: 12rem">
-          <div class="d-flex align-items-center">
-            <input
-              class="radio"
-              type="radio"
-              value="1"
-              formControlName="verify"
-            />
-            <label class="form-label ms-2"> ครบถ้วน และถูกต้อง </label>
+      <div class="row mb-3">
+        <div class="col-2 d-flex align-items-center">
+          <div class="form-control">
+            <div class="d-flex align-items-center">
+              <input
+                class="radio"
+                type="radio"
+                value="1"
+                formControlName="verify"
+              />
+              <label class="form-label ms-2"> ครบถ้วน และถูกต้อง </label>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="d-flex align-items-center mb-3">
-        <div class="form-control" style="width: 12rem">
-          <div class="d-flex align-items-center">
-            <input
-              class="radio"
-              type="radio"
-              value="2"
-              formControlName="verify"
-            />
-            <label class="form-label ms-2"> ขอแก้ไข / เพิ่มเติม </label>
+      <div class="row mb-3">
+        <div class="col-2 d-flex align-items-center">
+          <div class="form-control">
+            <div class="d-flex align-items-center">
+              <input
+                class="radio"
+                type="radio"
+                value="2"
+                formControlName="verify"
+              />
+              <label class="form-label ms-2"> ขอแก้ไข / เพิ่มเติม </label>
+            </div>
           </div>
         </div>
-        <div class="row w-50 ms-2">
-          <div class="col-4 form-label text-center">
+
+        <div class="col-4 d-flex align-items-center">
+          <div class="form-label text-center w-100">
             วันที่ต้องการใบคำขอส่งกลับ
           </div>
-          <div class="col-4">
-            <input
-              class="form-control"
-              type="date"
-              id="flexCheckDefault"
-              formControlName="returnDate"
-            />
-          </div>
+          <input
+            class="form-control"
+            type="date"
+            formControlName="returnDate"
+          />
         </div>
       </div>
 
-      <div class="mb-3" style="margin-left: 14rem">
+      <div class="mb-3 col-8">
         <textarea class="form-control" rows="3"></textarea>
       </div>
 
-      <div class="d-flex align-items-center mb-3">
-        <div class="form-control" style="width: 12rem">
-          <div class="d-flex align-items-center">
-            <input
-              class="radio"
-              type="radio"
-              value="3"
-              formControlName="verify"
-            />
-            <label class="form-label ms-2"> ขาดคุณสมบัติ </label>
+      <div class="row mb-3">
+        <div class="col-2 d-flex align-items-center">
+          <div class="form-control">
+            <div class="d-flex align-items-center">
+              <input
+                class="radio"
+                type="radio"
+                value="3"
+                formControlName="verify"
+              />
+              <label class="form-label ms-2"> ขาดคุณสมบัติ </label>
+            </div>
           </div>
         </div>
 
-        <div class="row w-50 ms-2">
-          <div class="col-4 form-label text-center">หมายเหตุ / เหตุผล</div>
-          <div class="col-8">
-            <select class="form-select w-100" formControlName="reason">
-              <option value="null" selected hidden disabled>กรุณาเลือก</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
+        <div class="col-4 d-flex align-items-center">
+          <div class="form-label text-center w-100">หมายเหตุ / เหตุผล</div>
+          <select class="form-select" formControlName="reason">
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
         </div>
       </div>
 
-      <div class="mb-3" style="margin-left: 14rem">
+      <div class="mb-3 col-8">
         <textarea class="form-control" rows="3"></textarea>
       </div>
 
@@ -137,8 +139,8 @@
         <div class="text-danger">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
       </div>
 
-      <div class="d-flex align-items-center mb-3">
-        <div class="form-control" style="width: 24rem">
+      <div class="d-flex align-items-center col-4 mb-3">
+        <div class="form-control">
           <div class="d-flex align-items-center">
             <input
               class="radio"
@@ -151,8 +153,8 @@
         </div>
       </div>
 
-      <div class="d-flex align-items-center mb-3">
-        <div class="form-control" style="width: 24rem">
+      <div class="d-flex align-items-center col-4 mb-3">
+        <div class="form-control">
           <div class="d-flex align-items-center">
             <input
               class="radio"
@@ -167,8 +169,8 @@
         </div>
       </div>
 
-      <div class="d-flex align-items-center mb-3">
-        <div class="form-control" style="width: 24rem">
+      <div class="d-flex align-items-center col-4 mb-3">
+        <div class="form-control">
           <div class="d-flex align-items-center">
             <input
               class="radio"
@@ -181,8 +183,8 @@
         </div>
       </div>
 
-      <div class="d-flex align-items-center mb-3">
-        <div class="form-control" style="width: 24rem">
+      <div class="d-flex align-items-center col-4 mb-3">
+        <div class="form-control">
           <div class="d-flex align-items-center">
             <input
               class="radio"

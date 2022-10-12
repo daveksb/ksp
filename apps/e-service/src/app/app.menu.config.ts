@@ -635,7 +635,7 @@ export const professionalMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ตั้งค่า',
-    path: '',
+    path: '/enable-reward/list',
   },
 ];
 

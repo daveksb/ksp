@@ -92,11 +92,29 @@
         "libs/e-service/fee/refund-fee/src/index.ts"
       ],
       "@ksp/e-service/form": ["libs/e-service/form/src/index.ts"],
+      "@ksp/e-service/professional/best-teacher-reward": [
+        "libs/e-service/professional/best-teacher-reward/src/index.ts"
+      ],
+      "@ksp/e-service/professional/enable-reward-request": [
+        "libs/e-service/professional/enable-reward-request/src/index.ts"
+      ],
       "@ksp/e-service/professional/one-school-one-innovation": [
         "libs/e-service/professional/one-school-one-innovation/src/index.ts"
       ],
+      "@ksp/e-service/professional/praise-teacher-reward": [
+        "libs/e-service/professional/praise-teacher-reward/src/index.ts"
+      ],
       "@ksp/e-service/professional/professional": [
         "libs/e-service/professional/professional/src/index.ts"
+      ],
+      "@ksp/e-service/professional/senior-teacher-reward": [
+        "libs/e-service/professional/senior-teacher-reward/src/index.ts"
+      ],
+      "@ksp/e-service/professional/teacher-council-reward": [
+        "libs/e-service/professional/teacher-council-reward/src/index.ts"
+      ],
+      "@ksp/e-service/professional/thai-teacher-reward": [
+        "libs/e-service/professional/thai-teacher-reward/src/index.ts"
       ],
       "@ksp/e-service/standard/degree-cert": [
         "libs/e-service/standard/degree-cert/src/index.ts"
