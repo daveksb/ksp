@@ -6,7 +6,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { FormBuilder } from '@angular/forms';
-import { SelfRequest } from '@ksp/shared/interface';
+import { SelfGetRequest, SelfRequest } from '@ksp/shared/interface';
 import {
   parseJson,
   replaceEmptyWithNull,
@@ -54,6 +54,7 @@ export class LicenseRequestForeignComponent implements OnInit {
   grantionTeachingInfo: any;
   personalDeclaration: any;
   documentFiles: any[] = [];
+  myImage = '';
 
   constructor(
     private router: Router,
@@ -95,7 +96,7 @@ export class LicenseRequestForeignComponent implements OnInit {
     });
   }
 
-  patchData(data: SelfRequest) {
+  patchData(data: SelfGetRequest) {
     const address = parseJson(data.addressinfo);
     this.patchUserInfo(data);
     this.patchAddress(address, address?.[0].phone, address?.[0].email);
@@ -137,6 +138,10 @@ export class LicenseRequestForeignComponent implements OnInit {
       const foreignSelectUpload = parseJson(data.foreignselectupload);
       this.form.controls.foreignSelectUpload.patchValue(foreignSelectUpload);
     }
+
+    if (data.filedata) {
+      this.myImage = atob(data.filedata);
+    }
   }
 
   getMyInfo() {
@@ -146,6 +151,10 @@ export class LicenseRequestForeignComponent implements OnInit {
       this.patchAddress(parseJson(res.addressinfo), res.phone, res.email);
       if (res.schooladdrinfo) {
         this.patchWorkplace(parseJson(res.schooladdrinfo));
+      }
+
+      if (res && res.filedata) {
+        this.myImage = atob(res.filedata);
       }
     });
   }

@@ -4,7 +4,10 @@
       <div class="col-md-3">
         <self-service-form-upload-image
           [btnLabel]="'Upload Image'"
-          [isForeignForm]="true"></self-service-form-upload-image>
+          [imgSrc]="myImage"
+          [uniqueTimestamp]="uniqueTimestamp"
+          [isForeignForm]="true"
+          (uploadImageComplete)="uploadImageComplete($event)"></self-service-form-upload-image>
       </div>
 
       <div class="col-md">

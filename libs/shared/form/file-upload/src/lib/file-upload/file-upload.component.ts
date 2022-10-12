@@ -30,6 +30,7 @@ export class FileUploadComponent {
   @Input() filename = '';
   @Input() fileid = '';
   @Input() showDeleteFile = false;
+  @Input() maxSize: number | null = null;
   @Output() uploadComplete = new EventEmitter<any>();
 
   file: any;
@@ -40,6 +41,11 @@ export class FileUploadComponent {
     const file: File = event.target.files[0];
     const base64 = (await getBase64(file)) as string;
     //console.log(this.pageType);
+
+    if (this.maxSize && file.size > this.maxSize) {
+      alert('File Size Exceeded the Maximum Size');
+      return;
+    }
 
     if (this.isImage) {
       const payload: ImageUpload = {
