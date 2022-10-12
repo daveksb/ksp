@@ -9,7 +9,7 @@ import {
 import { FormMode } from '@ksp/shared/interface';
 import { EMPTY, switchMap } from 'rxjs';
 import localForage from 'localforage';
-import { encrypt, thaiDate } from '@ksp/shared/utility';
+import { encrypt, mapMultiFileInfo, thaiDate } from '@ksp/shared/utility';
 import { UniRequestService } from '@ksp/shared/service';
 
 @Component({
@@ -138,9 +138,7 @@ export class UniRegisterPasswordComponent implements OnInit {
               other: this.savingData.other,
               ...this.uniData,
             };
-            const fileUpload = this.uploadFileList.map(
-              (file) => file.fileid || null
-            );
+            const fileUpload = mapMultiFileInfo(this.uploadFileList);
             const payload = {
               ...this.savingData,
               educationoccupy: JSON.stringify(educationoccupy),

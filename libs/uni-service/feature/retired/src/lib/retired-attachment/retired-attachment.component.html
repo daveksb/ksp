@@ -24,14 +24,14 @@
       </uni-form-register-coordinator>
 
       <div class="mt-3">
-        <ksp-form-attachment
+        <ksp-form-multi-attachment
           [uniqueTimestamp]="uniqueTimestamp"
           [title]="'กรุณาแนบหลักฐานเพื่อพิจารณา'"
           [titleClass]="'box-header text-primary'"
           [pageType]="pageType.fileAttachTab"
           [requestType]="requesttype"
           [groups]="retiredFiles"
-        ></ksp-form-attachment>
+        ></ksp-form-multi-attachment>
       </div>
       <br />
       <ksp-bottom-nav
