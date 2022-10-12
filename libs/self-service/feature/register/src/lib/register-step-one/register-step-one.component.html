@@ -14,8 +14,8 @@
                 <div class="progress" style="height: 1px">
                   <div
                     class="progress-bar"
-                    role="progressbar"
-                    style="width: 50%"
+                    role="progressbar;"
+                    style="width: 100%"
                     aria-valuenow="50"
                     aria-valuemin="0"
                     aria-valuemax="100"
@@ -23,20 +23,20 @@
                 </div>
                 <button
                   type="button"
-                  class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-outline-primary text-primary rounded-pill"
+                  class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill"
+                  style="width: 3rem; height: 3rem; pointer-events: none"
+                >
+                  <i class="bi bi-check fs-3"></i>
+                </button>
+                <button
+                  type="button"
+                  class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-outline-primary text-primary rounded-pill"
                   style="
                     width: 3rem;
                     height: 3rem;
                     pointer-events: none;
                     background: #fff;
                   "
-                >
-                  1
-                </button>
-                <button
-                  type="button"
-                  class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-secondary rounded-pill"
-                  style="width: 3rem; height: 3rem; pointer-events: none"
                 >
                   2
                 </button>
@@ -180,25 +180,31 @@
               <div class="row">
                 <div class="col-md mb-2">
                   <label class="form-label required">วันเดือนปีเกิด</label>
-                  <input
-                    type="date"
-                    class="form-control"
-                    placeholder=""
-                    formControlName="birthdate"
-                  />
+                  <div class="d-flex align-items-center">
+                    <input
+                      matInput
+                      [matDatepicker]="picker"
+                      autocomplete="off"
+                      class="form-control me-2"
+                      placeholder="วว/ดด/ปปปป"
+                      formControlName="birthdate"
+                    />
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="picker"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </div>
                 </div>
                 <div class="col-md mb-2">
-                  <label class="form-label required">สัญชาติ</label>
-                  <select class="form-select" formControlName="nationality">
+                  <label class="form-label required">เพศ</label>
+                  <select class="form-select" formControlName="sex">
                     <option value="null" selected hidden disabled>
                       กรุณาเลือก
                     </option>
-                    <option
-                      *ngFor="let n of nationalitys$ | async"
-                      [value]="n.nationId"
-                    >
-                      {{ n.nationName }}
-                    </option>
+                    <option value="1">ชาย</option>
+                    <option value="2">หญิง</option>
+                    <option value="3">อื่นๆ</option>
                   </select>
                 </div>
               </div>
@@ -223,6 +229,23 @@
                   </ng-container>
                 </div>
                 <div class="col-md mb-2">
+                  <label class="form-label required">สัญชาติ</label>
+                  <select class="form-select" formControlName="nationality">
+                    <option value="null" selected hidden disabled>
+                      กรุณาเลือก
+                    </option>
+                    <option
+                      *ngFor="let n of nationalitys$ | async"
+                      [value]="n.nationId"
+                    >
+                      {{ n.nationName }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-2">
                   <label class="form-label required">อีเมล</label>
                   <input
                     type="email"
@@ -257,7 +280,7 @@
                     (amphurChanged)="amphurChanged($event)"
                     formControlName="addressinfo"
                     ><span class="form-label"
-                      >ที่อยู่ปัจจุบัน
+                      >ที่อยู่ตามทะเบียนบ้าน
                     </span></ksp-form-address
                   >
                 </div>

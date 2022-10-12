@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FileGroup, FormMode } from '@ksp/shared/interface';
+import { FileGroup, FormMode, KspRequest } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -15,7 +15,7 @@ import {
   SchoolInfoService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { mapMultiFileInfo, thaiDate } from '@ksp/shared/utility';
+import { formatDate, mapMultiFileInfo, thaiDate } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
 
 @UntilDestroy()
@@ -24,35 +24,41 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./foreign-teacher-id-request.component.scss'],
 })
 export class ForeignTeacherIdRequestComponent implements OnInit {
-  uniqueTimestamp!: string;
-
-  form = this.fb.group({
-    foreignTeacher: [],
-    visainfo: [],
-  });
+  uniqueNo!: string;
   bureauName = '';
   schoolId = '0010201056';
   schoolName = '';
   address = '';
-  requestDate = thaiDate(new Date());
   showCancelButton!: boolean;
   mode: FormMode = 'edit';
   prefixList$!: Observable<any>;
   countries$!: Observable<any>;
   visaTypeList$!: Observable<any>;
-  foreignFiles = [{ name: '1.สำเนาหนังสือเดินทาง', files: [] }] as FileGroup[];
-  requestNumber = '';
+  //requestNo = '';
+  //requestDate = thaiDate(new Date());
   requestId!: number;
+  request: KspRequest = new KspRequest();
+
+  form = this.fb.group({
+    foreignTeacher: [],
+    visainfo: [],
+  });
+
+  foreignFiles: FileGroup[] = [
+    { name: '1.สำเนาหนังสือเดินทาง', files: [] },
+  ] as FileGroup[];
+
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     public dialog: MatDialog,
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
     private requestService: RequestService,
-    private schoolInfoService: SchoolInfoService,
-    private route: ActivatedRoute //private ref: ChangeDetectorRef
+    private schoolInfoService: SchoolInfoService
   ) {}
+
   get formValid() {
     return (
       !this.form.get('foreignTeacher')?.valid ||
@@ -61,7 +67,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.uniqueTimestamp = uuidv4();
+    this.uniqueNo = uuidv4();
     this.getList();
     this.checkRequestId();
   }
@@ -76,26 +82,27 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   }
 
   loadRequestData(id: number) {
-    this.requestService.getRequestById(id).subscribe((res: any) => {
+    this.requestService.schGetRequestById(id).subscribe((res) => {
       if (res) {
         this.mode = 'view';
-        this.showCancelButton = Boolean(+res.requeststatus);
-        this.requestDate = thaiDate(new Date(`${res.requestdate}`));
-        this.requestNumber = res.requestno;
-        res.birthdate = res.birthdate?.split('T')[0];
-        res.passportstartdate = res.passportstartdate?.split('T')[0];
-        res.passportenddate = res.passportenddate?.split('T')[0];
-        const visainfo = JSON.parse(atob(res.visainfo));
-        visainfo.passportenddate = visainfo.passportenddate?.split('T')[0];
-        res.fileinfo = JSON.parse(atob(res.fileinfo));
+        this.showCancelButton = Boolean(res.status);
+        //this.requestDate = res.requestdate ?? '';
 
-        if (res && res.fileinfo) {
+        /* res.birthdate = res.birthdate?.split('T')[0];
+        res.passportstartdate = res.passportstartdate?.split('T')[0];
+        res.passportenddate = res.passportenddate?.split('T')[0]; */
+
+        //const visainfo = JSON.parse(atob(res.visainfo));
+        //visainfo.passportenddate = visainfo.passportenddate?.split('T')[0];
+        //res.fileinfo = JSON.parse(atob(res.fileinfo));
+
+        /* if (res && res.fileinfo) {
           this.foreignFiles.forEach(
             (group, index) => (group.files = res.fileinfo[index])
           );
         }
-        this.form.get('foreignTeacher')?.patchValue(res);
-        this.form.controls['visainfo'].patchValue(visainfo);
+        this.form.get('foreignTeacher')?.patchValue(res); */
+        //this.form.controls['visainfo'].patchValue(visainfo);
       }
     });
   }
@@ -103,7 +110,6 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   cancel() {
     if (this.mode == 'view') {
       const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-        width: '350px',
         data: {
           title: `คุณต้องการยกเลิกการยื่นคำขอ
           ใช่หรือไม่? `,
@@ -124,7 +130,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             return EMPTY;
           })
         )
-        .subscribe((res) => {
+        .subscribe(() => {
           this.onCancelCompleted();
         });
     } else {
@@ -134,11 +140,10 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
 
   onCancelCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
       data: {
         header: 'ระบบทำการยกเลิกเรียบร้อย',
         content: `วันที่ : ${thaiDate(new Date())}
-        เลขที่คำขอ : ${this.requestNumber}`,
+        เลขที่คำขอ : ${this.request.requestno}`,
       },
     });
 
@@ -155,12 +160,12 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     }
   }
 
-  onConfirmed() {
-    if (
+  confirmDialog() {
+    /*  if (
       !this.form.get('foreignTeacher')?.valid ||
       !this.form.get('visainfo')?.valid
     )
-      return;
+      return; */
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -172,36 +177,41 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     confirmDialog.componentInstance.confirmed
       .pipe(
         switchMap((res) => {
-          if (res) {
-            // call API
-            const userInfo = this.form.value.foreignTeacher as any;
+          if (res && this.form.value.foreignTeacher) {
+            const userInfo: Partial<KspRequest> =
+              this.form.value.foreignTeacher;
+
             userInfo.ref1 = '2';
             userInfo.ref2 = '04';
             userInfo.ref3 = '5';
             userInfo.systemtype = '2';
             userInfo.requesttype = '4';
-            userInfo.subtype = '5';
+            userInfo.careertype = '5';
             userInfo.schoolid = this.schoolId;
-            userInfo.currentprocess = `1`;
-            userInfo.requeststatus = `1`;
-            userInfo.visainfo = JSON.stringify(this.form.value.visainfo);
-            userInfo.fileinfo = JSON.stringify(
+            userInfo.process = `1`;
+            userInfo.status = `1`;
+            userInfo.birthdate = formatDate(userInfo.birthdate);
+            userInfo.passportstartdate = formatDate(userInfo.passportstartdate);
+            userInfo.passportenddate = formatDate(userInfo.passportenddate);
+            userInfo.visaexpiredate = formatDate(userInfo.visaexpiredate);
+            //userInfo.visainfo = JSON.stringify(this.form.value.visainfo);
+            /* userInfo.fileinfo = JSON.stringify(
               mapMultiFileInfo(this.foreignFiles)
-            );
-            return this.requestService.createRequest(userInfo);
+            ); */
+            console.log('userInfo = ', userInfo);
+            return this.requestService.schCreateRequest(userInfo);
           }
           return EMPTY;
         })
       )
-      .subscribe((res) => {
+      .subscribe(() => {
         this.onCompleted();
-        console.log(res);
+        //console.log(res);
       });
   }
 
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '375px',
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
         buttonLabel: 'กลับสู่หน้าหลัก',
@@ -219,7 +229,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     this.schoolInfoService
       .getSchoolInfo(this.schoolId)
       .pipe(untilDestroyed(this))
-      .subscribe((res: any) => {
+      .subscribe((res) => {
         this.schoolName = res.schoolName;
         this.bureauName = res.bureauName;
         this.address = `บ้านเลขที่ ${res.address} ซอย ${

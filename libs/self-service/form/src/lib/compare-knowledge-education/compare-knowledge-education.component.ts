@@ -1,7 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+
+function atLeastOneFormValidator(): any {
+  return (form: FormGroup) => {
+    const degreeInfo1: any[] = form.get('degreeInfo1')?.value;
+    const degreeInfo2: any[] = form.get('degreeInfo2')?.value;
+    const degreeInfo3: any[] = form.get('degreeInfo3')?.value;
+    const degreeInfo4: any[] = form.get('degreeInfo4')?.value;
+    const degreeInfo5: any[] = form.get('degreeInfo5')?.value;
+
+    if (
+      !(
+        degreeInfo1.length ||
+        degreeInfo2.length ||
+        degreeInfo3.length ||
+        degreeInfo4.length ||
+        degreeInfo5.length
+      )
+    ) {
+      return { oneform: true };
+    }
+
+    return null;
+  };
+}
 
 @Component({
   selector: 'self-service-compare-knowledge-education',
@@ -37,14 +61,11 @@ export class CompareKnowledgeEducationComponent
     Object.keys(value).forEach((key) => {
       const control = this.form.get(key) as FormArray;
       if (value[key].length) {
-        control.removeAt(0);
-        value[key].forEach((item: any) =>
-          control.push(
-            this.fb.group({
-              ...item,
-            })
-          )
-        );
+        // control.removeAt(0);
+        value[key].forEach((item: any, index: number) => {
+          this.addFormArray(control);
+          control.at(index).patchValue(item);
+        });
       }
     });
 
@@ -53,10 +74,11 @@ export class CompareKnowledgeEducationComponent
   }
 
   ngOnInit(): void {
+    this.form.setValidators(atLeastOneFormValidator());
     this.form.valueChanges.subscribe((res) => {
       //console.log('form value = ', res);
     });
-    this.setDefaulFormValue();
+    // this.setDefaulFormValue();
   }
 
   setDefaulFormValue() {

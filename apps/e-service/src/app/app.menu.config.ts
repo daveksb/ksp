@@ -191,10 +191,10 @@ export const eLicenseMenu: MenuConfig[] = [
     label: 'ใบคำขอหนังสือรับรองความรู้',
     path: '',
     isExpanded: false,
-    subMenuName: 'verify',
+    subMenuName: 'knowledge',
     subMenu: [
       {
-        path: '/xxx',
+        path: '/knowledge-cert/list',
         label: 'รายการใบคำขอหนังสือรับรองความรู้',
       },
       {
@@ -274,7 +274,7 @@ export const eLicenseMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ทะเบียนข้อมูล',
-    path: '',
+    path: '/xxx',
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
@@ -296,7 +296,7 @@ export const eLicenseMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'รายงาน',
-    path: '',
+    path: '/xxx',
   },
   {
     icon: 'assets/images/icon-sidenav/people.svg',

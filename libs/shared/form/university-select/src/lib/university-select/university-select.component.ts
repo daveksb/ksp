@@ -27,14 +27,17 @@ export class UniversitySelectComponent
   @Input() label2 = 'โรงเรียน / สถานศึกษา';
   @Input() schoolName = '';
   @Input() bureauName = '';
+  @Input() address = '';
   @Input() searchType = '';
   @Input() readonly = false;
+  @Input() showAddress = false;
   bureaus$!: Observable<any>;
   @Output() selectedUniversity = new EventEmitter<string>();
 
   override form = this.fb.group({
     institution: [],
     affiliation: [],
+    address: [],
   });
 
   constructor(

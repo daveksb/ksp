@@ -332,6 +332,7 @@ export const column = [
   'paymentStatus',
   'listStatus',
   'process',
+  'editDate',
   'edit',
   'print',
 ];

@@ -62,6 +62,7 @@ export class LicenseRequestComponent
   implements OnInit
 {
   userInfoType = UserInfoFormType.thai;
+
   override form = this.fb.group({
     userInfo: [],
     address1: [],

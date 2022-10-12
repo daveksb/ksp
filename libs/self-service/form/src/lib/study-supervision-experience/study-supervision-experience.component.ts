@@ -40,9 +40,10 @@ export class StudySupervisionExperienceComponent
       .subscribe(([prev, next]) => {
         if (prev.hasTeachingExperience !== next.hasTeachingExperience) {
           if (next.hasTeachingExperience) {
-            this.form.controls.teachingExperienceYear.addValidators(
-              Validators.required
-            );
+            this.form.controls.teachingExperienceYear.addValidators([
+              Validators.required,
+              Validators.min(5),
+            ]);
           } else {
             this.form.controls.teachingExperienceYear.clearValidators();
           }
@@ -51,9 +52,10 @@ export class StudySupervisionExperienceComponent
 
         if (prev.hasManagingExperience !== next.hasManagingExperience) {
           if (next.hasManagingExperience) {
-            this.form.controls.managingExperienceYear.addValidators(
-              Validators.required
-            );
+            this.form.controls.managingExperienceYear.addValidators([
+              Validators.required,
+              Validators.min(5),
+            ]);
           } else {
             this.form.controls.managingExperienceYear.clearValidators();
           }
@@ -61,5 +63,13 @@ export class StudySupervisionExperienceComponent
         }
         //console.log('exp form = ', res);
       });
+  }
+
+  get teachingYear() {
+    return this.form.controls.teachingExperienceYear;
+  }
+
+  get managingYear() {
+    return this.form.controls.managingExperienceYear;
   }
 }

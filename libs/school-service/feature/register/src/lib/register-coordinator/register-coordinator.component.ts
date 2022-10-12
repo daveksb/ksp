@@ -40,6 +40,7 @@ export class CoordinatorInfoComponent implements OnInit {
   mode: FormMode = 'edit';
   userInfoFormdisplayMode: number = UserInfoFormType.thai;
   school: any;
+  address: any;
   uniqueTimestamp: any;
   constructor(
     private router: Router,
@@ -58,6 +59,14 @@ export class CoordinatorInfoComponent implements OnInit {
 
     localForage.getItem('registerUserInfoFormValue').then((res) => {
       this.savingData = res;
+    });
+
+    localForage.getItem('registerSelectedSchool').then((res: any) => {
+      this.address = `บ้านเลขที่ ${res.address} ซอย ${res?.street ?? ''} หมู่ ${
+        res?.moo ?? ''
+      } ถนน ${res?.road ?? ''} ตำบล ${res.tumbon} อำเภอ ${
+        res.amphurName
+      } จังหวัด ${res.provinceName}`;
     });
 
     this.uniqueTimestamp = uuidv4();

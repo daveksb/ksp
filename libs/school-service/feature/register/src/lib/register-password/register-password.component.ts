@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -17,24 +17,29 @@ import { RequestService } from '@ksp/shared/service';
   styleUrls: ['./register-password.component.scss'],
 })
 export class RegisterPasswordComponent implements OnInit {
-  form = this.fb.group({
-    password: [],
-    repassword: [],
-  });
+  eyeIconClicked = false;
+  eyeIconClickedSecond = false;
+
+  mode: FormMode = 'edit';
+  school: any;
+  address: any;
+  coordinator: any;
   savingData: any;
   requestDate = thaiDate(new Date());
   requestNumber = '';
 
-  mode: FormMode = 'edit';
-  school: any;
-  coordinator: any;
+  form = this.fb.group({
+    password: [null, [Validators.required, Validators.minLength(8)]],
+    repassword: [null, [Validators.required, Validators.minLength(8)]],
+  });
+
   constructor(
     private router: Router,
     public dialog: MatDialog,
     private fb: FormBuilder,
     private requestService: RequestService
   ) {}
-  get disable() {
+  get disableBtn() {
     const { password, repassword } = this.form.getRawValue();
     return password !== repassword || !password || !repassword;
   }
@@ -49,6 +54,14 @@ export class RegisterPasswordComponent implements OnInit {
 
     localForage.getItem('registerCoordinatorInfoFormValue').then((res) => {
       this.coordinator = res;
+    });
+
+    localForage.getItem('registerSelectedSchool').then((res: any) => {
+      this.address = `บ้านเลขที่ ${res.address} ซอย ${res?.street ?? ''} หมู่ ${
+        res?.moo ?? ''
+      } ถนน ${res?.road ?? ''} ตำบล ${res.tumbon} อำเภอ ${
+        res.amphurName
+      } จังหวัด ${res.provinceName}`;
     });
   }
 
