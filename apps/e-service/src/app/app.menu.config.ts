@@ -186,7 +186,7 @@ export const eLicenseMenu: MenuConfig[] = [
       },
     ],
   },
-  {
+  /* {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอหนังสือรับรองความรู้',
     path: '',
@@ -202,7 +202,7 @@ export const eLicenseMenu: MenuConfig[] = [
         label: 'พิจารณาหนังสือรับรองความรู้',
       },
     ],
-  },
+  }, */
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
@@ -220,7 +220,7 @@ export const eLicenseMenu: MenuConfig[] = [
       },
     ],
   },
-  {
+ /*  {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอหนังสือรับรองคุณวุฒิ',
     path: '',
@@ -236,7 +236,7 @@ export const eLicenseMenu: MenuConfig[] = [
         label: 'พิจารณาหนังสือรับรองคุณวุฒิ',
       },
     ],
-  },
+  }, */
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'กิจกรรมพัฒนาตนเอง',
