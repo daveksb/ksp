@@ -11,7 +11,7 @@ import {
   QualificationApproveDetailComponent,
   QualificationApprovePersonComponent,
 } from '@ksp/shared/form/others';
-import { FormMode } from '@ksp/shared/interface';
+import { FileGroup, FormMode, KspRequest } from '@ksp/shared/interface';
 import {
   AddressService,
   GeneralInfoService,
@@ -41,7 +41,6 @@ export class QualificationDetailComponent implements OnInit {
     edu4: [],
   });
 
-  requestNumber = '';
   userInfoFormdisplayMode: number = UserInfoFormType.thai;
   prefixList$!: Observable<any>;
   provinces1$!: Observable<any>;
@@ -54,9 +53,9 @@ export class QualificationDetailComponent implements OnInit {
   nationalitys$!: Observable<any>;
   schoolId = '0010201056';
 
-  requestDate = thaiDate(new Date());
   requestSubType!: number;
   requestId!: number;
+  requestData = new KspRequest();
   requestStatus!: number;
   currentProcess!: number;
   otherreason: any;
@@ -104,10 +103,10 @@ export class QualificationDetailComponent implements OnInit {
   loadRequestData(id: number) {
     this.requestService.getRequestById(id).subscribe((res: any) => {
       if (res) {
-        this.requestNumber = res.requestno;
+        //this.requestNumber = res.requestno;
         this.requestStatus = +res.requeststatus;
         this.currentProcess = +res.currentprocess;
-        this.requestDate = thaiDate(new Date(`${res.requestdate}`));
+        //this.requestDate = thaiDate(new Date(`${res.requestdate}`));
         res.birthdate = res.birthdate?.split('T')[0];
         this.form.get('userInfo')?.patchValue(res);
 
@@ -309,9 +308,8 @@ export class QualificationDetailComponent implements OnInit {
       )
       .subscribe((res) => {
         if (res) {
-          this.requestNumber = res.id;
+          this.onCompleted();
         }
-        this.onCompleted();
       });
   }
 
@@ -324,8 +322,8 @@ export class QualificationDetailComponent implements OnInit {
       width: '350px',
       data: {
         header: 'ระบบทำการยกเลิกเรียบร้อย',
-        content: `วันที่ : ${this.requestDate}
-        เลขที่คำขอ : ${this.requestNumber}`,
+        content: `วันที่ : ${thaiDate(new Date())}
+        เลขที่คำขอ : ${this.requestData.requestno}`,
       },
     });
 
@@ -406,41 +404,34 @@ export class QualificationDetailComponent implements OnInit {
   }
 }
 
-const files = [
+const files: FileGroup[] = [
   {
     name: 'หนังสือนำส่งจากหน่วยงานผู้ใช้',
-    fileid: '',
-    filename: '',
+    files: [],
   },
   {
     name: 'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
-    fileid: '',
-    filename: '',
+    files: [],
   },
   {
     name: 'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
-    fileid: '',
-    filename: '',
+    files: [],
   },
   {
     name: 'สำเนาทะเบียนบ้าน',
-    fileid: '',
-    filename: '',
+    files: [],
   },
   {
     name: 'สำเนาหนังสือแจ้งการเทียบคุณวุฒิ (กรณีจบการศึกษาจากต่างประเทศ)',
-    fileid: '',
-    filename: '',
+    files: [],
   },
   {
     name: 'สำเนา กพ.7 / สมุดประจำตัว',
-    fileid: '',
-    filename: '',
+    files: [],
   },
   {
     name: 'สำเนาหลักฐานการเปลี่ยนชื่อ นามสกุล',
-    fileid: '',
-    filename: '',
+    files: [],
   },
-  { name: 'เอกสารอื่นๆ', fileid: '', filename: '' },
+  { name: 'เอกสารอื่นๆ', files: [] },
 ];
