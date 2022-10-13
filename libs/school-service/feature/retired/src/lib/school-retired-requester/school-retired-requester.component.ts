@@ -16,7 +16,7 @@ export class SchoolRetiredRequesterComponent {
   });
   SchoolRetireReason = SchoolRetireReason;
   requestNo = '';
-  today = thaiDate(new Date());
+  today = new Date();
   constructor(private router: Router, private fb: FormBuilder) {}
 
   userInfo = {

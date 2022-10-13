@@ -7,7 +7,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { FileGroup } from '@ksp/shared/interface';
+import { FileGroup, KspRequest } from '@ksp/shared/interface';
 import { GeneralInfoService, RequestService } from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
 import localForage from 'localforage';
@@ -24,7 +24,7 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
   });
   reasoninfo: any;
   requestNo = '';
-  today = thaiDate(new Date());
+  today = new Date();
   schoolId = '0010201056';
   constructor(
     private router: Router,
@@ -103,18 +103,19 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
       .pipe(
         switchMap((res) => {
           if (res) {
-            const { retiredTnfo } = this.form.value as any;
+            const form = this.form.value as any;
+            const retiredTnfo: KspRequest = form.retiredTnfo;
             retiredTnfo.ref1 = '2';
             retiredTnfo.ref2 = '02';
             retiredTnfo.ref3 = '5';
             retiredTnfo.systemtype = '2';
             retiredTnfo.requesttype = '2';
-            retiredTnfo.subtype = '5';
-            retiredTnfo.currentprocess = `1`;
-            retiredTnfo.requeststatus = `1`;
+            retiredTnfo.careertype = '5';
+            retiredTnfo.process = `1`;
+            retiredTnfo.status = `1`;
             retiredTnfo.schoolid = this.schoolId;
             retiredTnfo.reasoninfo = JSON.stringify(this.reasoninfo);
-            return this.requestService.createRequest(retiredTnfo);
+            return this.requestService.schCreateRequest(retiredTnfo);
           }
           return EMPTY;
         })
@@ -131,7 +132,7 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
       width: '350px',
       data: {
         header: 'ยืนยันข้อมูลสำเร็จ',
-        content: `วันที่ : ${this.today}
+        content: `วันที่ : ${thaiDate(this.today)}
         เลขที่ใบคำขอ : ${requestno} `,
         subContent: `กรุณาตรวจสอบสถานะใบคำขอหรือรหัสเข้าใช้งาน
         ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
