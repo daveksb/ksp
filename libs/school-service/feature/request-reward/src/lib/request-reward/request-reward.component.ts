@@ -7,13 +7,13 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { FileGroup, SchoolRequest } from '@ksp/shared/interface';
+import { FileGroup, KspRequest, SchoolRequest } from '@ksp/shared/interface';
 import {
   GeneralInfoService,
   RequestService,
   SchoolInfoService,
 } from '@ksp/shared/service';
-import { mapFileInfo, parseJson, thaiDate } from '@ksp/shared/utility';
+import { mapFileInfo, parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -23,21 +23,21 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./request-reward.component.scss'],
 })
 export class RequestRewardComponent implements OnInit {
-  uniqueTimestamp!: string;
-
   form = this.fb.group({
     reward: [],
   });
 
+  uniqueNo = '';
+  requestData = new KspRequest();
   rewards = rewards;
   schoolId = '0010201056';
   osoiTypes$!: Observable<any>;
   personTypes$!: Observable<any>;
   prefixList$!: Observable<any>;
   requestId = 0;
-  requestDate = '';
-  requestNo = '';
-  currentProcess!: string | null;
+  //requestDate = '';
+  //requestNo = '';
+  requestProcess!: string | null;
   requestStatus!: string | null;
   memberData!: any;
   disableTempSave = true;
@@ -57,12 +57,12 @@ export class RequestRewardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.uniqueTimestamp = uuidv4();
+    this.uniqueNo = uuidv4();
     this.getListData();
     this.checkRequestId();
     this.checkButtonDisableStatus();
 
-    this.form.valueChanges.subscribe((res) => {
+    this.form.valueChanges.subscribe(() => {
       this.checkButtonDisableStatus();
     });
   }
@@ -73,13 +73,13 @@ export class RequestRewardComponent implements OnInit {
       this.disableTempSave = true;
       this.disablePermanentSave = true;
       return;
-    } else if (this.currentProcess === '2') {
+    } else if (this.requestProcess === '2') {
       this.disableTempSave = true;
       this.disablePermanentSave = true;
-    } else if (this.currentProcess === '1') {
+    } else if (this.requestProcess === '1') {
       this.disableTempSave = false;
       this.disablePermanentSave = false;
-    } else if (this.currentProcess === '0') {
+    } else if (this.requestProcess === '0') {
       this.disableTempSave = true;
       this.disablePermanentSave = true;
       this.disableCancel = true;
@@ -129,14 +129,15 @@ export class RequestRewardComponent implements OnInit {
   }
 
   loadRequestFromId(id: number) {
-    this.requestService.getRequestById(id).subscribe((res) => {
+    this.requestService.schGetRequestById(id).subscribe((res) => {
       //console.log('res = ', res);
-      this.uniqueTimeStamp = res.uniquetimestamp || 'default-unique-timestamp';
-      this.requestNo = `${res.requestno}`;
-      this.requestDate = `${res.requestdate}`;
-      this.requestStatus = res.requeststatus;
-      this.currentProcess = res.currentprocess;
-      this.showCancelButton = res.requeststatus !== '0';
+      this.requestData = res;
+      this.uniqueTimeStamp = res.uniqueno || 'default-unique-timestamp';
+      //this.requestNo = `${res.requestno}`;
+      //this.requestDate = `${res.requestdate}`;
+      this.requestStatus = res.status;
+      this.requestProcess = res.process;
+      this.showCancelButton = res.status !== '0';
 
       const osoiInfo = parseJson(res.osoiinfo);
       const osoiMember = parseJson(res.osoimember);
@@ -235,7 +236,6 @@ export class RequestRewardComponent implements OnInit {
 
   confirmDialog(type: number) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
       },
@@ -254,7 +254,6 @@ export class RequestRewardComponent implements OnInit {
 
   completeDialog() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
       data: {
         header: `ระบบทำการบันทึก
         เรียบร้อยแล้ว`,

@@ -13,9 +13,8 @@ export class RequestHeaderInfoComponent {
   @Input() requestLabel1 = 'วันที่ทำรายการ';
   @Input() requestLabel2 = 'เลขใบคำขอ';
 
-  //@Input() requestDate!: string;
-  @Input() requestNumber!: any;
-  @Input() set requestDate(value: any) {
-    console.log('request date = ', value);
-  }
+  @Input() requestNumber: string | null = '';
+  @Input() requestDate: string | null = '';
+
+  today = `${new Date()}`;
 }
