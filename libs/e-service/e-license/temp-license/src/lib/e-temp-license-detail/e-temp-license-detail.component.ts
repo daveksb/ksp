@@ -10,11 +10,12 @@ import {
   GeneralInfoService,
   StaffService,
 } from '@ksp/shared/service';
-import { parseJson, thaiDate } from '@ksp/shared/utility';
+import { parseJson } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 import { TempLicenseDetailService } from './e-temp-license-detail.service';
 import localForage from 'localforage';
+import { FileGroup, KspRequest } from '@ksp/shared/interface';
 @UntilDestroy()
 @Component({
   selector: 'e-service-temp-license-detail',
@@ -24,7 +25,7 @@ import localForage from 'localforage';
 export class ETempLicenseDetailComponent implements OnInit {
   verifyChoice: any[] = [];
   selectedTabIndex = 0;
-  evidenceFiles: any[] = [];
+  evidenceFiles: FileGroup[] = [];
 
   amphurs1$!: Observable<any>;
   tumbols1$!: Observable<any>;
@@ -36,9 +37,7 @@ export class ETempLicenseDetailComponent implements OnInit {
   selectedTab: MatTabChangeEvent = new MatTabChangeEvent();
 
   requestId!: number;
-  //requestData!: SchoolRequest;
-  requestDate: string | null = '';
-  requestNo!: string | null;
+  requestData = new KspRequest();
   userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form
 
   form = this.fb.group({
@@ -105,10 +104,8 @@ export class ETempLicenseDetailComponent implements OnInit {
       checkfinalresult: null,
       checkhistory: null,
       approveresult: null,
-      requestNo: this.requestNo,
-      requestDate: this.requestDate,
+      requestData: this.requestData,
     };
-
     localForage.setItem('checkRequestData', payload);
   }
 
@@ -122,10 +119,8 @@ export class ETempLicenseDetailComponent implements OnInit {
   }
 
   loadRequestFromId(requestId: number) {
-    this.eRequestService.getRequestById(requestId).subscribe((res) => {
-      //this.requestData = res;
-      this.requestDate = thaiDate(new Date(`${res.requestdate}`));
-      this.requestNo = res.requestno;
+    this.eRequestService.getKspRequestById(requestId).subscribe((res) => {
+      this.requestData = res;
       this.pathUserInfo(res);
       this.patchAddress(parseJson(res.addressinfo));
       this.patchEdu(parseJson(res.eduinfo));
@@ -207,19 +202,10 @@ export class ETempLicenseDetailComponent implements OnInit {
     this.form.controls.hiringinfo.patchValue(data);
   }
 
-  /* getSchoolAddress() {
-    this.tempLicenseService
-      .getSchoolInfo(this.schoolId)
-      .subscribe((res: any) => {
-        this.form.controls.schoolAddr.patchValue(res);
-      });
-  } */
-
   getList() {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.provinces$ = this.addressService.getProvinces();
     this.positionTypes$ = this.staffService.getPositionTypes();
-    //this.getSchoolAddress();
   }
 
   cancel() {

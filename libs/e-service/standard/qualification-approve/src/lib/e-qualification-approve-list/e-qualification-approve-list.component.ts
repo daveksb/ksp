@@ -45,6 +45,18 @@ export class EQualificationApproveListComponent implements AfterViewInit {
     const payload: EsSearchPayload = {
       systemtype: '2',
       requesttype: '6',
+      requestno: null,
+      careertype: null,
+      name: null,
+      idcardno: null,
+      passportno: null,
+      process: null,
+      status: null,
+      schoolid: null,
+      schoolname: null,
+      bureauid: null,
+      requestdatefrom: null,
+      requestdateto: null,
       offset: '0',
       row: '500',
     };
