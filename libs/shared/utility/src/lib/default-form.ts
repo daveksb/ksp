@@ -11,7 +11,7 @@ export function createDefaultVisaInfo(fb: FormBuilder) {
   return fb.group({
     visatype: [],
     visaclass: [],
-    visaenddate: [],
+    visaexpiredate: [],
     licenseid: [],
   });
 }

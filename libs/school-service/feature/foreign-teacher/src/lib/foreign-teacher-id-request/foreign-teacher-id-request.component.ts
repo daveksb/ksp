@@ -15,7 +15,12 @@ import {
   SchoolInfoService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { formatDate, mapMultiFileInfo, thaiDate } from '@ksp/shared/utility';
+import {
+  changeDate,
+  formatDate,
+  mapMultiFileInfo,
+  thaiDate,
+} from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
 
 @UntilDestroy()
@@ -40,8 +45,8 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   request: KspRequest = new KspRequest();
 
   form = this.fb.group({
-    foreignTeacher: [],
-    visainfo: [],
+    foreignTeacher: [] as any,
+    visainfo: [] as any,
   });
 
   foreignFiles: FileGroup[] = [
@@ -86,23 +91,22 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       if (res) {
         this.mode = 'view';
         this.showCancelButton = Boolean(res.status);
-        //this.requestDate = res.requestdate ?? '';
+        this.request.requestdate = res.requestdate ?? '';
+        this.request.requestno = res.requestno ?? '';
+        res.birthdate = formatDate(res.birthdate);
+        res.passportstartdate = formatDate(res.passportstartdate);
+        res.passportenddate = formatDate(res.passportenddate);
+        res.visaexpiredate = formatDate(res.visaexpiredate);
 
-        /* res.birthdate = res.birthdate?.split('T')[0];
-        res.passportstartdate = res.passportstartdate?.split('T')[0];
-        res.passportenddate = res.passportenddate?.split('T')[0]; */
+        const fileinfo = JSON.parse(atob(res?.fileinfo || ''));
 
-        //const visainfo = JSON.parse(atob(res.visainfo));
-        //visainfo.passportenddate = visainfo.passportenddate?.split('T')[0];
-        //res.fileinfo = JSON.parse(atob(res.fileinfo));
-
-        /* if (res && res.fileinfo) {
+        if (fileinfo) {
           this.foreignFiles.forEach(
-            (group, index) => (group.files = res.fileinfo[index])
+            (group, index) => (group.files = fileinfo[index])
           );
         }
-        this.form.get('foreignTeacher')?.patchValue(res); */
-        //this.form.controls['visainfo'].patchValue(visainfo);
+        this.form.get('foreignTeacher')?.patchValue(res);
+        this.form.get('visainfo')?.patchValue(res);
       }
     });
   }
@@ -178,26 +182,29 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       .pipe(
         switchMap((res) => {
           if (res && this.form.value.foreignTeacher) {
-            const userInfo: Partial<KspRequest> =
-              this.form.value.foreignTeacher;
+            const userInfo: Partial<KspRequest> = this.form.value
+              .foreignTeacher as any;
 
             userInfo.ref1 = '2';
             userInfo.ref2 = '04';
             userInfo.ref3 = '5';
+            userInfo.isforeign = '1';
             userInfo.systemtype = '2';
             userInfo.requesttype = '4';
             userInfo.careertype = '5';
             userInfo.schoolid = this.schoolId;
             userInfo.process = `1`;
             userInfo.status = `1`;
-            userInfo.birthdate = formatDate(userInfo.birthdate);
-            userInfo.passportstartdate = formatDate(userInfo.passportstartdate);
-            userInfo.passportenddate = formatDate(userInfo.passportenddate);
-            userInfo.visaexpiredate = formatDate(userInfo.visaexpiredate);
-            //userInfo.visainfo = JSON.stringify(this.form.value.visainfo);
-            /* userInfo.fileinfo = JSON.stringify(
+            userInfo.birthdate = changeDate(userInfo.birthdate);
+            userInfo.passportstartdate = changeDate(userInfo.passportstartdate);
+            userInfo.passportenddate = changeDate(userInfo.passportenddate);
+            const visaform = this.form.value.visainfo as any;
+            userInfo.visaclass = visaform?.visaclass;
+            userInfo.visatype = visaform?.visatype;
+            userInfo.visaexpiredate = changeDate(visaform?.visaexpiredate);
+            userInfo.fileinfo = JSON.stringify(
               mapMultiFileInfo(this.foreignFiles)
-            ); */
+            );
             console.log('userInfo = ', userInfo);
             return this.requestService.schCreateRequest(userInfo);
           }

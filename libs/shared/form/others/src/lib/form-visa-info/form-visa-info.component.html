@@ -28,7 +28,7 @@
           [matDatepicker]="picker2"
           autocomplete="off"
           class="form-control me-2"
-          formControlName="visaenddate"
+          formControlName="visaexpiredate"
         />
         <mat-datepicker-toggle
           matSuffix
@@ -44,7 +44,7 @@
         class="form-control"
         type="text"
         disabled
-        [value]="form.controls.licenseid"
+        [value]="form.controls.licenseid.value"
       />
     </div>
   </div>

@@ -10,12 +10,16 @@ import { ThaiDatePipe } from '@ksp/shared/pipe';
   imports: [CommonModule, ThaiDatePipe],
 })
 export class RequestHeaderInfoComponent {
+  date: any;
+  no: any;
   @Input() requestLabel1 = 'วันที่ทำรายการ';
   @Input() requestLabel2 = 'เลขใบคำขอ';
 
   //@Input() requestDate!: string;
-  @Input() requestNumber!: any;
+  @Input() set requestNumber(value: any) {
+    this.no = value;
+  }
   @Input() set requestDate(value: any) {
-    console.log('request date = ', value);
+    this.date = value;
   }
 }
