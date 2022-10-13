@@ -389,7 +389,7 @@ export const standardMenu: MenuConfig[] = [
     label: 'ใบคำขอเทียบโอนความรู้',
     path: '',
     isExpanded: false,
-    subMenuName: 'request-knowledge',
+    subMenuName: 'transfer-knowledge',
     subMenu: [
       {
         path: '/aa',
@@ -410,7 +410,7 @@ export const standardMenu: MenuConfig[] = [
     label: 'ใบคำขอรับรองคุณวุฒิทางการศึกษา',
     path: '',
     isExpanded: false,
-    subMenuName: 'request-degree',
+    subMenuName: 'qualification',
     subMenu: [
       {
         path: '/qualification-approve/list',
@@ -426,23 +426,48 @@ export const standardMenu: MenuConfig[] = [
       },
     ],
   },
-  /* {
+  {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอหนังสือรับรองคุณวุฒิ',
+    label: 'ใบคำขอเทียบเคียงความรู้',
     path: '',
     isExpanded: false,
-    subMenuName: 'qualification',
+    subMenuName: 'compare',
     subMenu: [
       {
-        path: '/qualification/list',
-        label: 'รายการใบคำขอหนังสือขอรับรองคุณวุฒิ',
+        path: '/compare-knowledge/list',
+        label: 'รายการใบคำขอเทียบเคียงความรู้',
       },
       {
         path: '/xxx',
-        label: 'พิจารณาหนังสือรับรองคุณวุฒิ',
+        label: 'บัญชีรายชื่อและพิมพ์หนังสือเทียบเคียงความรู้',
+      },
+      {
+        path: '/xxx',
+        label: 'พิจารณารับรองเทียบเคียงความรู้',
       },
     ],
-  }, */
+  },
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'ใบคำขอรับรองความรู้',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'knowledge',
+    subMenu: [
+      {
+        path: '/knowledge-cert/list',
+        label: 'รายการใบคำขอรับรองความรู้',
+      },
+      {
+        path: '/xxx',
+        label: 'บัญชีรายชื่อและพิมพ์หนังสือรับรองความรู้',
+      },
+      {
+        path: '/xxx',
+        label: 'พิจารณารับรองรับรองความรู้',
+      },
+    ],
+  },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'นำเข้าและบันทึกผลการทดสอบ',
@@ -503,11 +528,11 @@ export const standardMenu: MenuConfig[] = [
     subMenuName: 'user-management',
     subMenu: [
       {
-        path: '/xx',
+        path: '/aa',
         label: 'ใบคำขอรหัสเข้าใช้งานระบบบริการสถาบันผลิตครู (Uni Service)',
       },
       {
-        path: '/aa',
+        path: '/bb',
         label: 'ผู้ใช้งานระบบบริการสถาบันผลิตครู (Uni Service)',
       },
     ],
