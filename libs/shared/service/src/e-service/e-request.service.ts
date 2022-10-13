@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
 import {
   EsSearchPayload,
+  KspApprovePayload,
   KspRequest,
   KspResponse,
   SchoolRequest,
@@ -25,7 +26,7 @@ export class ERequestService {
   }
 
   // new API
-  KspApproveRequest(payload: any): Observable<any> {
+  KspApproveRequest(payload: KspApprovePayload): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/e-service/ksprequestprocessinsert`,
       payload

@@ -12,8 +12,8 @@
     <div class="bg-white p-3">
       <div class="d-flex justify-content-between">
         <ksp-request-header-info
-          [requestDate]="this.requestDate"
-          [requestNumber]="this.requestNo"
+          [requestDate]="''"
+          [requestNumber]="saveData.requestData.requestdate"
         ></ksp-request-header-info>
       </div>
 
@@ -172,7 +172,7 @@
   <ksp-bottom-nav
     (cancelClicked)="cancel()"
     (prevClicked)="prevPage()"
-    (saveClicked)="submit()"
+    (saveClicked)="confirmDialog()"
     [showCenterButtons]="true"
     [isLastPage]="true"
     [showSaveButton]="true"
