@@ -20,7 +20,7 @@ export class ERequestService {
   // new API
   KspSearchRequest(payload: EsSearchPayload): Observable<KspRequest[]> {
     return this.http
-      .post(`${environment.shortApiUrl}/schrequestsearch_e.php`, payload)
+      .post(`${environment.shortApiUrl}/ksprequestsearch_es.php`, payload)
       .pipe(map((data: any) => data.datareturn));
   }
 
@@ -57,18 +57,6 @@ export class ERequestService {
         id: requestId,
       }
     );
-  }
-
-  checkRequest(payload: any): Observable<any> {
-    return this.http
-      .post(
-        `${environment.apiUrl}/kspstaff/schrequestupdatechecksubresult`,
-        payload
-      )
-      .pipe(
-        shareReplay(),
-        map((data: any) => data.datareturn)
-      );
   }
 
   createSchUser(payload: SchoolUser): Observable<KspResponse> {

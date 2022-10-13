@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
 import {
   EsSearchPayload,
+  KspRequest,
   SchoolRequest,
   SchRequestSearchFilter,
 } from '@ksp/shared/interface';
@@ -28,7 +29,7 @@ export class ETempLicenseListComponent implements AfterViewInit {
   });
 
   displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<any>();
+  dataSource = new MatTableDataSource<KspRequest>();
   SchoolRequestSubType = SchoolRequestSubType;
   checkProcess = checkProcess;
   checkRequestType = checkRequestType;
@@ -52,25 +53,25 @@ export class ETempLicenseListComponent implements AfterViewInit {
     console.log('params = ', params);
     const payload: EsSearchPayload = {
       systemtype: '2',
-      requesttype: '3',
-      requestno: null,
-      careertype: null,
-      name: null,
-      idcardno: null,
-      passportno: null,
-      process: null,
-      status: null,
+      requesttype: '4',
+      requestno: params.requestno,
+      careertype: params.careertype,
+      name: params.name,
+      idcardno: params.idcardno,
+      passportno: params.passportno,
+      process: params.process,
+      status: params.status,
       schoolid: null,
       schoolname: null,
       bureauid: null,
-      requestdatefrom: null,
-      requestdateto: null,
+      requestdatefrom: params.requestdatefrom,
+      requestdateto: params.requestdateto,
       offset: '0',
       row: '500',
     };
 
     this.eRequestService.KspSearchRequest(payload).subscribe((res) => {
-      if (res) {
+      if (res && res.length) {
         this.dataSource.data = res;
       } else {
         this.clearData();
