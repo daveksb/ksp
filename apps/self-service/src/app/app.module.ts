@@ -13,7 +13,7 @@ import {
   TokenHandleInterceptor,
 } from '@ksp/shared/interceptor';
 import { FileUploadUrls, File_UPLOAD_URLS } from '@ksp/shared/form/file-upload';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
 const fileUrls: FileUploadUrls = {
@@ -51,6 +51,7 @@ const fileUrls: FileUploadUrls = {
       provide: File_UPLOAD_URLS,
       useValue: fileUrls,
     },
+    { provide: MAT_DATE_LOCALE, useValue: 'th-TH' },
   ],
   bootstrap: [AppComponent],
 })

@@ -4,7 +4,6 @@ import { EResearchRewardListComponent } from './e-research-reward-list/e-researc
 import { EResearchRewardDetailComponent } from './e-research-reward-detail/e-research-reward-detail.component';
 import { RouterModule, Routes } from '@angular/router';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
-import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
@@ -13,6 +12,7 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { SharedFormSelfRewardFormModule } from '@ksp/shared/form/self-reward-form';
 import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import { SelfServiceFormModule } from '@ksp/self-service/form';
 
 const routes: Routes = [
   {

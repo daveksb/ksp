@@ -12,6 +12,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
 import { EServiceLicenseSearchComponent } from '@ksp/shared/search';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
+import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { MatDialogModule } from '@angular/material/dialog';
 
 export const routes: Routes = [
   {
@@ -52,6 +54,8 @@ export const routes: Routes = [
     EServiceLicenseSearchComponent,
     BottomNavComponent,
     LicenseCheckComponent,
+    SharedFormOthersModule,
+    MatDialogModule,
   ],
   declarations: [
     EditLicenseApproveListComponent,

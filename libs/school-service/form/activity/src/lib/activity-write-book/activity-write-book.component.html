@@ -1,81 +1,134 @@
 <form [formGroup]="form">
   <div class="d-flex align-items-center mb-2">
     <input type="checkbox" class="me-2" formControlName="isBookChecked" />
-    <label class="form-label"><span *ngIf="!isForeignForm">ตำรา</span>
-      <span *ngIf="isForeignForm">Text Book</span></label>
+    <label class="form-label"
+      ><span *ngIf="!isForeignForm">ตำรา</span>
+      <span *ngIf="isForeignForm">Text Book</span></label
+    >
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label" [class.required]="form.controls.isBookChecked.value"><span
-          *ngIf="!isForeignForm">ชื่อ</span>
-        <span *ngIf="isForeignForm">Name of Textbook</span></label>
+      <label
+        class="form-label"
+        [class.required]="form.controls.isBookChecked.value"
+        ><span *ngIf="!isForeignForm">ชื่อ</span>
+        <span *ngIf="isForeignForm">Name of Textbook</span></label
+      >
       <input class="form-control" type="text" formControlName="bookName" />
     </div>
     <div class="col-md-6 mb-2">
-      <label class="form-label" [class.required]="form.controls.isBookChecked.value"><span
-          *ngIf="!isForeignForm">สำนักพิมพ์</span>
-        <span *ngIf="isForeignForm">Publisher</span></label>
+      <label
+        class="form-label"
+        [class.required]="form.controls.isBookChecked.value"
+        ><span *ngIf="!isForeignForm">สำนักพิมพ์</span>
+        <span *ngIf="isForeignForm">Publisher</span></label
+      >
       <input class="form-control" type="text" formControlName="bookPublisher" />
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label" [class.required]="form.controls.isBookChecked.value"><span
-          *ngIf="!isForeignForm">พิมพ์เมื่อ</span>
-        <span *ngIf="isForeignForm">Published Date</span></label>
-      <input
-        class="form-control"
-        type="date"
-        formControlName="bookPublishDate" />
+      <label
+        class="form-label"
+        [class.required]="form.controls.isBookChecked.value"
+        ><span *ngIf="!isForeignForm">พิมพ์เมื่อ</span>
+        <span *ngIf="isForeignForm">Published Date</span></label
+      >
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker1"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="bookPublishDate"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker1"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </div>
     </div>
   </div>
   <hr />
 
   <div class="d-flex align-items-center mb-2">
     <input type="checkbox" class="me-2" formControlName="isArticleChecked" />
-    <label class="form-label"><span *ngIf="!isForeignForm">บทความ</span>
-      <span *ngIf="isForeignForm">Article</span></label>
+    <label class="form-label"
+      ><span *ngIf="!isForeignForm">บทความ</span>
+      <span *ngIf="isForeignForm">Article</span></label
+    >
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label" [class.required]="form.controls.isArticleChecked.value"><span
-          *ngIf="!isForeignForm">เรื่อง</span>
-        <span *ngIf="isForeignForm">Name of Articles</span></label>
+      <label
+        class="form-label"
+        [class.required]="form.controls.isArticleChecked.value"
+        ><span *ngIf="!isForeignForm">เรื่อง</span>
+        <span *ngIf="isForeignForm">Name of Articles</span></label
+      >
       <input class="form-control" type="text" formControlName="articleName" />
     </div>
 
     <div class="col-md-6 mb-2">
-      <label class="form-label" [class.required]="form.controls.isArticleChecked.value"><span
-          *ngIf="!isForeignForm">เผยแพร่ในวารสาร / หนังสือ / เว็บไซต์</span>
-        <span *ngIf="isForeignForm">Published in Journal / Book/ Website</span></label>
+      <label
+        class="form-label"
+        [class.required]="form.controls.isArticleChecked.value"
+        ><span *ngIf="!isForeignForm"
+          >เผยแพร่ในวารสาร / หนังสือ / เว็บไซต์</span
+        >
+        <span *ngIf="isForeignForm"
+          >Published in Journal / Book/ Website</span
+        ></label
+      >
       <input
         class="form-control"
         type="text"
-        formControlName="articlePublishing" />
+        formControlName="articlePublishing"
+      />
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label" [class.required]="form.controls.isArticleChecked.value"><span
-          *ngIf="!isForeignForm">สำนักพิมพ์</span>
-        <span *ngIf="isForeignForm">Publisher</span></label>
+      <label
+        class="form-label"
+        [class.required]="form.controls.isArticleChecked.value"
+        ><span *ngIf="!isForeignForm">สำนักพิมพ์</span>
+        <span *ngIf="isForeignForm">Publisher</span></label
+      >
       <input
         class="form-control"
         type="text"
-        formControlName="articlePublisher" />
+        formControlName="articlePublisher"
+      />
     </div>
     <div class="col-md-6 mb-2">
-      <label class="form-label" [class.required]="form.controls.isArticleChecked.value"><span
-          *ngIf="!isForeignForm">พิมพ์เมื่อ</span>
-        <span *ngIf="isForeignForm">Published Date</span></label>
-      <input
-        class="form-control"
-        type="date"
-        formControlName="articlePublishDate" />
+      <label
+        class="form-label"
+        [class.required]="form.controls.isArticleChecked.value"
+        ><span *ngIf="!isForeignForm">พิมพ์เมื่อ</span>
+        <span *ngIf="isForeignForm">Published Date</span></label
+      >
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="articlePublishDate"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker2"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </div>
     </div>
   </div>
   <hr />
@@ -84,29 +137,50 @@
     <input
       type="checkbox"
       class="me-2"
-      formControlName="isAchievementChecked" />
-    <label class="form-label"><span *ngIf="!isForeignForm">ผลงานวิชาการ</span>
-      <span *ngIf="isForeignForm">Publications</span></label>
+      formControlName="isAchievementChecked"
+    />
+    <label class="form-label"
+      ><span *ngIf="!isForeignForm">ผลงานวิชาการ</span>
+      <span *ngIf="isForeignForm">Publications</span></label
+    >
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label" [class.required]="form.controls.isAchievementChecked.value"><span
-          *ngIf="!isForeignForm">เรื่อง</span>
-        <span *ngIf="isForeignForm">Name of Academic Proposal</span></label>
+      <label
+        class="form-label"
+        [class.required]="form.controls.isAchievementChecked.value"
+        ><span *ngIf="!isForeignForm">เรื่อง</span>
+        <span *ngIf="isForeignForm">Name of Academic Proposal</span></label
+      >
       <input
         class="form-control"
         type="text"
-        formControlName="achievementName" />
+        formControlName="achievementName"
+      />
     </div>
     <div class="col-md-6 mb-2">
-      <label class="form-label" [class.required]="form.controls.isAchievementChecked.value"><span
-          *ngIf="!isForeignForm">วันเดือนปีที่ใช้</span>
-        <span *ngIf="isForeignForm">Applied Date</span></label>
-      <input
-        class="form-control"
-        type="date"
-        formControlName="achievementDate" />
+      <label
+        class="form-label"
+        [class.required]="form.controls.isAchievementChecked.value"
+        ><span *ngIf="!isForeignForm">วันเดือนปีที่ใช้</span>
+        <span *ngIf="isForeignForm">Applied Date</span></label
+      >
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker3"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="achievementDate"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker3"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker3></mat-datepicker>
+      </div>
     </div>
   </div>
 </form>

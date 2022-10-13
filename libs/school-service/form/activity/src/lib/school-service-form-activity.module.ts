@@ -15,9 +15,10 @@ import { ActivityLectureRegisterComponent } from './activity-lecture-register/ac
 import { ReactiveFormsModule } from '@angular/forms';
 import { StandardTestPassComponent } from './standard-test-pass/standard-test-pass.component';
 import { StandardTrainPassComponent } from './standard-train-pass/standard-train-pass.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MatDatepickerModule],
   declarations: [
     ActivityAddDegreeComponent,
     ActivitySeminarComponent,

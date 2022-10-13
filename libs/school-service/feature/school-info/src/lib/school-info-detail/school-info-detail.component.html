@@ -29,10 +29,6 @@
         </div>
         <ksp-form-coordinator-info
           [prefixList]="prefixList$ | async"
-          [nationList]="[]"
-          [countryList]="[]"
-          [visaClassList]="[]"
-          [visaTypeList]="[]"
           [displayMode]="[userInfoFormType]"
           formControlName="schManager"
         ></ksp-form-coordinator-info>
@@ -42,11 +38,8 @@
       <div class="bg-light px-3 py-2">
         <div class="box-header">ข้อมูลผู้ประสานงาน</div>
         <ksp-form-coordinator-info
+          
           [prefixList]="prefixList$ | async"
-          [nationList]="[]"
-          [countryList]="[]"
-          [visaClassList]="[]"
-          [visaTypeList]="[]"
           [mode]="'view'"
           [displayMode]="[userInfoFormType]"
           formControlName="coordinator"

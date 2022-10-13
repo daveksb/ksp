@@ -47,7 +47,20 @@
       <div class="row mb-2">
         <div class="col">
           <label class="form-label">วันที่จัดส่ง</label>
-          <input type="date" class="form-control" />
+          <div class="d-flex align-items-center">
+            <input
+              matInput
+              [matDatepicker]="picker1"
+              autocomplete="off"
+              class="form-control form-date"
+            />
+            <mat-datepicker-toggle
+              class="button-date"
+              matSuffix
+              [for]="picker1"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </div>
         </div>
         <div class="col">
           <label class="form-label">จำนวนรายการที่บันทึกข้อมูล</label>
