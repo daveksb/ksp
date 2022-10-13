@@ -7,13 +7,11 @@ import { Router } from '@angular/router';
   templateUrl: './book-receive-list.component.html',
   styleUrls: ['./book-receive-list.component.scss'],
 })
-export class BookReceiveListComponent implements OnInit {
+export class BookReceiveListComponent {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<bookList>();
 
   constructor(private router: Router) {}
-
-  ngOnInit(): void {}
 
   search() {
     this.dataSource.data = data;

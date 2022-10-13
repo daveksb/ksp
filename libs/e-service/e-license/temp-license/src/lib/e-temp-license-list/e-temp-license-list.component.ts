@@ -5,7 +5,12 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
-import { EsSearchPayload, SchoolRequest } from '@ksp/shared/interface';
+import {
+  EsSearchPayload,
+  KspRequest,
+  SchoolRequest,
+  SchRequestSearchFilter,
+} from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import {
   checkProcess,
@@ -24,7 +29,7 @@ export class ETempLicenseListComponent implements AfterViewInit {
   });
 
   displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<any>();
+  dataSource = new MatTableDataSource<KspRequest>();
   SchoolRequestSubType = SchoolRequestSubType;
   checkProcess = checkProcess;
   checkRequestType = checkRequestType;
@@ -44,17 +49,29 @@ export class ETempLicenseListComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  search(params: any) {
-    //console.log('params = ', params);
+  search(params: Partial<SchRequestSearchFilter>) {
+    console.log('params = ', params);
     const payload: EsSearchPayload = {
       systemtype: '2',
       requesttype: '3',
+      requestno: params.requestno,
+      careertype: params.careertype,
+      name: params.name,
+      idcardno: params.idcardno,
+      passportno: params.passportno,
+      process: params.process,
+      status: params.status,
+      schoolid: null,
+      schoolname: null,
+      bureauid: null,
+      requestdatefrom: params.requestdatefrom,
+      requestdateto: params.requestdateto,
       offset: '0',
       row: '500',
     };
 
-    this.eRequestService.EsSearchRequest(payload).subscribe((res) => {
-      if (res) {
+    this.eRequestService.KspSearchRequest(payload).subscribe((res) => {
+      if (res && res.length) {
         this.dataSource.data = res;
       } else {
         this.clearData();

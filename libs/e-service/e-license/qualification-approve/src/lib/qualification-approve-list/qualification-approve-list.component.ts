@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort, Sort } from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
@@ -45,6 +45,18 @@ export class QualificationApproveListComponent implements AfterViewInit {
     const payload: EsSearchPayload = {
       systemtype: '2',
       requesttype: '6',
+      requestno: null,
+      careertype: null,
+      name: null,
+      idcardno: null,
+      passportno: null,
+      process: null,
+      status: null,
+      schoolid: null,
+      schoolname: null,
+      bureauid: null,
+      requestdatefrom: null,
+      requestdateto: null,
       offset: '0',
       row: '500',
     };

@@ -87,7 +87,7 @@ export const SchoolRequestProcess: RequestProcess[] = [
     processId: 1,
     processName: 'สร้างใบคำขอ',
     status: [
-      { id: 0, sname: 'ยกเลิก', ename: '' },
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: '' },
     ],
   },
@@ -96,7 +96,7 @@ export const SchoolRequestProcess: RequestProcess[] = [
     processId: 2,
     processName: 'สร้างและส่งใบคำขอ',
     status: [
-      { id: 0, sname: 'ยกเลิก', ename: '' },
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
     ],
   },
@@ -119,8 +119,12 @@ export const SchoolRequestProcess: RequestProcess[] = [
     processName: 'ตรวจสอบเอกสาร ลำดับที่ 2',
     status: [
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
-      { id: 2, sname: 'ผ่านการรับรอง/พิจารณา', ename: '' },
-      { id: 3, sname: 'ไม่ผ่านการรับรอง/พิจารณา', ename: '' },
+      { id: 2, sname: 'ผ่านการรับรอง/พิจารณา', ename: 'ผ่านการรับรอง/พิจารณา' },
+      {
+        id: 3,
+        sname: 'ไม่ผ่านการรับรอง/พิจารณา',
+        ename: 'ไม่ผ่านการรับรอง/พิจารณา',
+      },
     ],
   },
 
@@ -130,8 +134,8 @@ export const SchoolRequestProcess: RequestProcess[] = [
     processId: 1,
     processName: 'สร้างและส่งใบคำขอ',
     status: [
-      { id: 0, sname: 'ยกเลิก', ename: '' },
-      { id: 1, sname: 'กำลังดำเนินการ', ename: '' },
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
     ],
   },
   {
@@ -139,10 +143,10 @@ export const SchoolRequestProcess: RequestProcess[] = [
     processId: 2,
     processName: 'ตรวจสอบเอกสาร',
     status: [
-      { id: 0, sname: 'ยกเลิก', ename: '' },
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
-      { id: 2, sname: 'ผ่านการตรวจสอบ', ename: '' },
-      { id: 3, sname: 'ไม่ผ่านการตรวจสอบ', ename: '' },
+      { id: 2, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+      { id: 3, sname: 'ไม่ผ่านการตรวจสอบ', ename: 'ไม่ผ่านการตรวจสอบ' },
     ],
   },
 
@@ -152,8 +156,8 @@ export const SchoolRequestProcess: RequestProcess[] = [
     processId: 1,
     processName: 'สร้างและส่งใบคำขอ',
     status: [
-      { id: 0, sname: 'ยกเลิก', ename: '' },
-      { id: 1, sname: 'กำลังดำเนินการ', ename: '' },
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
     ],
   },
   {
@@ -161,12 +165,12 @@ export const SchoolRequestProcess: RequestProcess[] = [
     processId: 2,
     processName: 'ตรวจสอบเอกสาร',
     status: [
-      { id: 0, sname: 'ยกเลิก', ename: '' },
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
-      { id: 2, sname: 'ปรับแก้ไข/เพิ่มเติม', ename: '' },
-      { id: 3, sname: 'ผ่านการตรวจสอบ', ename: '' },
-      { id: 4, sname: 'ไม่ผ่านการตรวจสอบ', ename: '' },
-      { id: 5, sname: 'ส่งคืนและยกเลิก', ename: '' },
+      { id: 2, sname: 'ปรับแก้ไข/เพิ่มเติม', ename: 'ปรับแก้ไข/เพิ่มเติม' },
+      { id: 3, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+      { id: 4, sname: 'ไม่ผ่านการตรวจสอบ', ename: 'ไม่ผ่านการตรวจสอบ' },
+      { id: 5, sname: 'ส่งคืนและยกเลิก', ename: 'ส่งคืนและยกเลิก' },
     ],
   },
   {
@@ -175,11 +179,11 @@ export const SchoolRequestProcess: RequestProcess[] = [
     processName: 'พิจาณาและรับรอง',
     status: [
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
-      { id: 2, sname: 'รับรอง', ename: '' },
-      { id: 3, sname: 'ไม่รับรอง', ename: '' },
-      { id: 4, sname: 'ไม่พิจารณา', ename: '' },
-      { id: 5, sname: '', ename: 'ยืนยันผลการตรวจสอบ' },
-      { id: 6, sname: '', ename: 'ไม่ยืนยันผลการตรวจสอบ' },
+      { id: 2, sname: 'รับรอง', ename: 'รับรอง' },
+      { id: 3, sname: 'ไม่รับรอง', ename: 'ไม่รับรอง' },
+      { id: 4, sname: 'ไม่พิจารณา', ename: 'ไม่พิจารณา' },
+      { id: 5, sname: 'ยืนยันผลการตรวจสอบ', ename: 'ยืนยันผลการตรวจสอบ' },
+      { id: 6, sname: 'ไม่ยืนยันผลการตรวจสอบ', ename: 'ไม่ยืนยันผลการตรวจสอบ' },
     ],
   },
 
@@ -189,8 +193,8 @@ export const SchoolRequestProcess: RequestProcess[] = [
     processId: 1,
     processName: 'สร้างใบคำขอ',
     status: [
-      { id: 0, sname: 'ยกเลิก', ename: '' },
-      { id: 1, sname: 'กำลังดำเนินการ', ename: '' },
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
     ],
   },
   {
@@ -198,8 +202,8 @@ export const SchoolRequestProcess: RequestProcess[] = [
     processId: 2,
     processName: 'สร้างและส่งใบคำขอ',
     status: [
-      { id: 0, sname: 'ยกเลิก', ename: '' },
-      { id: 1, sname: 'กำลังดำเนินการ', ename: '' },
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
     ],
   },
   {
@@ -209,11 +213,11 @@ export const SchoolRequestProcess: RequestProcess[] = [
     status: [
       { id: 0, sname: 'ยกเลิก', ename: '' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
-      { id: 2, sname: 'ปรับแก้ไข/เพิ่มเติม', ename: '' },
-      { id: 3, sname: 'ผ่านการตรวจสอบ', ename: '' },
-      { id: 4, sname: 'ไม่ผ่านการตรวจสอบ', ename: '' },
-      { id: 5, sname: 'ส่งคืนและยกเลิก', ename: '' },
-      { id: 6, sname: 'คัดค้าน/เพิกถอน', ename: '' },
+      { id: 2, sname: 'ปรับแก้ไข/เพิ่มเติม', ename: 'ปรับแก้ไข/เพิ่มเติม' },
+      { id: 3, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+      { id: 4, sname: 'ไม่ผ่านการตรวจสอบ', ename: 'ไม่ผ่านการตรวจสอบ' },
+      { id: 5, sname: 'ส่งคืนและยกเลิก', ename: 'ส่งคืนและยกเลิก' },
+      { id: 6, sname: 'คัดค้าน/เพิกถอน', ename: 'คัดค้าน/เพิกถอน' },
     ],
   },
   {
@@ -222,9 +226,9 @@ export const SchoolRequestProcess: RequestProcess[] = [
     processName: 'พิจาณาและรับรอง',
     status: [
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
-      { id: 2, sname: 'ผ่านการพิจารณา', ename: '' },
-      { id: 3, sname: 'ไม่ผ่านการพิจารณา', ename: '' },
-      { id: 4, sname: 'คัดค้าน/เพิกถอน', ename: '' },
+      { id: 2, sname: 'ผ่านการพิจารณา', ename: 'ผ่านการพิจารณา' },
+      { id: 3, sname: 'ไม่ผ่านการพิจารณา', ename: 'ไม่ผ่านการพิจารณา' },
+      { id: 4, sname: 'คัดค้าน/เพิกถอน', ename: 'คัดค้าน/เพิกถอน' },
     ],
   },
 ];
