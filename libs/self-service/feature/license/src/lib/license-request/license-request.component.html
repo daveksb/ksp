@@ -60,10 +60,10 @@
       </mat-tab>
 
       <mat-tab label="สถานที่ทำงาน">
-        <div class="d-flex align-items-center">
+        <!-- <div class="d-flex align-items-center">
           <input type="checkbox" class="me-2" />
           <label class="form-label mb-2">เป็นผู้ประสงค์ประกอบวิชาชีพทางการศึกษา</label>
-        </div>
+        </div> -->
         <!--  <div
           role="button"
           class="form-label text-primary text-decoration-underline"
@@ -72,6 +72,7 @@
         </div> -->
         <self-service-form-user-workplace
           formControlName="workplace"
+          [showNotRequire]="true"
           [provinces]="provinces3$ | async"
           [amphurs]="amphurs3$ | async"
           [tumbols]="tumbols3$ | async"
