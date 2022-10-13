@@ -1,7 +1,9 @@
 <div class="d-flex">
   <div class="form-label text-secondary">
     {{ requestLabel1 }} :
-    <span class="text-orange">{{ requestDate | thaiDate }}</span>
+    <span class="text-orange">{{
+      (requestDate | thaiDate) || (today | thaiDate)
+    }}</span>
   </div>
   <div *ngIf="requestNumber" class="form-label text-secondary ms-4">
     {{ requestLabel2 }} :

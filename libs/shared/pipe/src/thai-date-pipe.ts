@@ -14,7 +14,7 @@ export class ThaiDatePipe implements PipeTransform {
         day: 'numeric',
       });
     } else {
-      return '-';
+      return null;
     }
   }
 }
