@@ -11,6 +11,10 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const routes: Routes = [
   {
@@ -45,6 +49,10 @@ const routes: Routes = [
     BottomNavComponent,
     ReactiveFormsModule,
     MatPaginatorModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatIconModule,
+    MatTooltipModule,
     RouterModule.forChild(routes),
   ],
   declarations: [EditStudentListComponent, EditStudentDetailComponent],

@@ -143,7 +143,7 @@ export const eLicenseMenu: MenuConfig[] = [
     subMenuName: 'edit-thai',
     subMenu: [
       {
-        path: '/xxx',
+        path: '/edit-license/list',
         label: 'รายการใบคำขอแก้ไข/เปลี่ยนแปลงใบอนุญาต',
       },
       {
@@ -160,7 +160,7 @@ export const eLicenseMenu: MenuConfig[] = [
     subMenuName: 'edit-foreign',
     subMenu: [
       {
-        path: '/xxx',
+        path: '/edit-license/list',
         label: 'รายการใบคำขอแก้ไข/เปลี่ยนแปลงใบอนุญาต',
       },
       {
@@ -186,7 +186,7 @@ export const eLicenseMenu: MenuConfig[] = [
       },
     ],
   },
-  {
+  /* {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอหนังสือรับรองความรู้',
     path: '',
@@ -202,7 +202,7 @@ export const eLicenseMenu: MenuConfig[] = [
         label: 'พิจารณาหนังสือรับรองความรู้',
       },
     ],
-  },
+  }, */
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
@@ -220,7 +220,7 @@ export const eLicenseMenu: MenuConfig[] = [
       },
     ],
   },
-  {
+ /*  {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอหนังสือรับรองคุณวุฒิ',
     path: '',
@@ -236,7 +236,7 @@ export const eLicenseMenu: MenuConfig[] = [
         label: 'พิจารณาหนังสือรับรองคุณวุฒิ',
       },
     ],
-  },
+  }, */
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'กิจกรรมพัฒนาตนเอง',
@@ -521,7 +521,7 @@ export const professionalMenu: MenuConfig[] = [
     subMenuName: 'reward1',
     subMenu: [
       {
-        path: '/xxx',
+        path: '/teacher-council/list',
         label: 'รายการใบคำขอรับรางวัลคุรุสภา',
       },
       {
@@ -537,7 +537,7 @@ export const professionalMenu: MenuConfig[] = [
     subMenuName: 'reward2',
     subMenu: [
       {
-        path: '/xxx',
+        path: '/thai-teacher/list',
         label: 'รายการใบคำขอรับรางวัลครูภาษาไทยดีเด่น',
       },
       {
@@ -553,7 +553,7 @@ export const professionalMenu: MenuConfig[] = [
     subMenuName: 'reward3',
     subMenu: [
       {
-        path: '/xxx',
+        path: '/best-teacher/list',
         label: 'รายการใบคำขอรับรางวัลครูผู้สอนดีเด่น',
       },
       {
@@ -569,7 +569,7 @@ export const professionalMenu: MenuConfig[] = [
     subMenuName: 'reward4',
     subMenu: [
       {
-        path: '/xxx',
+        path: '/praise-teacher/list',
         label: 'รายการใบคำขอรับรางวัลคุรุสดุดี',
       },
       {
@@ -585,7 +585,7 @@ export const professionalMenu: MenuConfig[] = [
     subMenuName: 'reward5',
     subMenu: [
       {
-        path: '/xxx',
+        path: '/research-reward/list',
         label: 'รายการใบคำขอรับรางวัลผลงานวิจัยของคุรุสภา',
       },
       {
@@ -601,7 +601,7 @@ export const professionalMenu: MenuConfig[] = [
     subMenuName: 'reward6',
     subMenu: [
       {
-        path: '/xxx',
+        path: '/senior-teacher/list',
         label: 'รายการใบคำขอรับรางวัลครูอาวุโส',
       },
       {
@@ -622,7 +622,7 @@ export const professionalMenu: MenuConfig[] = [
         label: 'รายการใบคำขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม',
       },
       {
-        path: '/one-school-one-innovation/approve',
+        path: '/one-school-one-innovation/ranking',
         label: 'พิจารณารางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม',
       },
     ],
@@ -630,12 +630,12 @@ export const professionalMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'รายงาน',
-    path: '',
+    path: '/xxx',
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ตั้งค่า',
-    path: '',
+    path: '/enable-reward/list',
   },
 ];
 

@@ -18,7 +18,7 @@ import {
   toLowercaseProp,
 } from '@ksp/shared/utility';
 import { SelfRequestService, MyInfoService } from '@ksp/shared/service';
-import { SelfRequest } from '@ksp/shared/interface';
+import { SelfGetRequest, SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -52,6 +52,7 @@ export class RenewLicenseForeignComponent implements OnInit {
   licensureInfo: any;
   personalDeclaration: any;
   documentFiles: any[] = [];
+  myImage = '';
 
   constructor(
     private router: Router,
@@ -92,7 +93,7 @@ export class RenewLicenseForeignComponent implements OnInit {
     });
   }
 
-  patchData(data: SelfRequest) {
+  patchData(data: SelfGetRequest) {
     const address = parseJson(data.addressinfo);
     this.patchUserInfo(data);
     this.patchAddress(address, address?.[0].phone, address?.[0].email);
@@ -137,6 +138,10 @@ export class RenewLicenseForeignComponent implements OnInit {
       const foreignSelectUpload = parseJson(data.foreignselectupload);
       this.form.controls.foreignSelectUpload.patchValue(foreignSelectUpload);
     }
+
+    if (data.filedata) {
+      this.myImage = atob(data.filedata);
+    }
   }
 
   getMyInfo() {
@@ -145,6 +150,10 @@ export class RenewLicenseForeignComponent implements OnInit {
       this.patchAddress(parseJson(res.addressinfo), res.phone, res.email);
       if (res.schooladdrinfo) {
         this.patchWorkplace(parseJson(res.schooladdrinfo));
+      }
+
+      if (res && res.filedata) {
+        this.myImage = atob(res.filedata);
       }
     });
   }

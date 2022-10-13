@@ -1,0 +1,124 @@
+<ksp-top-nav
+  ><span header>ยื่นใบคำขอ</span
+  ><span subHeader>ขอรางวัลครูภาษาไทยดีเด่น</span></ksp-top-nav
+>
+<div class="bg-secondary bg-opacity-10 full-height-2 px-4 py-2">
+  <div class="bg-white p-3">
+    <ksp-request-header-info></ksp-request-header-info>
+    <hr />
+    <div class="box-header">รายละเอียดรางวัลครูภาษาไทยดีเด่น</div>
+    <mat-tab-group
+      class="tab-group"
+      [selectedIndex]="0"
+      animationDuration="0ms"
+    >
+      <mat-tab label="ข้อมูลส่วนตัว">
+        <ksp-form-user-info
+          [mode]="'view'"
+          [displayMode]="[userInfoType]"
+          [isSelfService]="true"
+          [prefixList]="prefixList$ | async"
+          [requiredIdCardNo]="false"
+          formControlName="userInfo"
+        ></ksp-form-user-info>
+      </mat-tab>
+
+      <mat-tab label="ที่อยู่" class="tab-content">
+        <ksp-form-address
+          [mode]="'view'"
+          formControlName="addressInfo"
+          [isDarkMode]="false"
+          [provinces]="provinces1$ | async"
+          [amphurs]="amphurs1$ | async"
+          [tumbols]="tumbols1$ | async"
+        >
+          <span class="text-primary">ที่อยู่ที่สามารถติดต่อได้</span>
+        </ksp-form-address>
+        <hr />
+        <div class="box-header text-primary">สถานที่ทำงาน</div>
+        <self-service-form-user-workplace
+          [mode]="'view'"
+          [isDarkMode]="false"
+          formControlName="workplace"
+          [provinces]="provinces2$ | async"
+          [amphurs]="amphurs2$ | async"
+          [tumbols]="tumbols2$ | async"
+          [bureaus]="bureau$ | async"
+        >
+        </self-service-form-user-workplace>
+        <div class="row">
+          <div class="col-md-6 mb-2">
+            <label class="form-label">โทรศัพท์</label>
+            <input class="form-control" type="text" formControlName="phone" />
+          </div>
+
+          <div class="col-md-6 mb-2">
+            <label class="form-label">โทรสาร</label>
+            <input class="form-control" type="text" formControlName="fax" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-2">
+            <label class="form-label">อีเมล</label>
+            <input class="form-control" type="text" formControlName="email" />
+          </div>
+
+          <div class="col-md-6 mb-2">
+            <label class="form-label">เว็บไซต์</label>
+            <input class="form-control" type="text" formControlName="website" />
+          </div>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="ข้อมูลครูภาษาไทยดีเด่น">
+        <ksp-thai-teacher-info
+          [mode]="'view'"
+          formControlName="rewardTeacherInfo"
+        ></ksp-thai-teacher-info>
+      </mat-tab>
+
+      <mat-tab label="ข้อมูลการศึกษา">
+        <ksp-council-education
+          [mode]="'view'"
+          formControlName="eduInfo"
+        ></ksp-council-education>
+      </mat-tab>
+
+      <mat-tab label="ข้อมูลการทำงาน">
+        <ksp-council-working
+          formControlName="hiringInfo"
+          [mode]="'view'"
+        ></ksp-council-working>
+      </mat-tab>
+
+      <mat-tab label="ข้อมูลการสอน">
+        <ksp-thai-teacher-teaching
+          [mode]="'view'"
+          formControlName="teachingInfo"
+          [bureaus]="bureau$ | async"
+          [provinces]="provinces3$ | async"
+          [amphurs]="amphurs3$ | async"
+          [tumbols]="tumbols3$ | async"
+          [provinces2]="provinces4$ | async"
+          [amphurs2]="amphurs4$ | async"
+          [tumbols2]="tumbols4$ | async"
+        ></ksp-thai-teacher-teaching>
+        <br />
+        <ksp-form-attachment
+          [mode]="'view'"
+          [titleClass]="'text-primary'"
+        ></ksp-form-attachment>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
+
+<div class="sticky-bottom border px-2">
+  <ksp-bottom-nav
+    [isFirstPage]="true"
+    [colorMode]="'blue'"
+    [showCenterButtons]="true"
+    [showCancelButton]="true"
+    [showSaveButton]="true"
+  ></ksp-bottom-nav>
+</div>

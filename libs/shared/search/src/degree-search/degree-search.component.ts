@@ -4,14 +4,20 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { GeneralInfoService } from 'libs/shared/service/src/school-service/general-info.service';
 import { UniInfoService } from '@ksp/shared/service';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
 
 @UntilDestroy()
 @Component({
   selector: 'ksp-degree-search',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [
+    CommonModule, 
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatInputModule,
+  ],
   templateUrl: './degree-search.component.html',
   styleUrls: ['./degree-search.component.scss'],
   providers: providerFactory(DegreeSearchComponent),

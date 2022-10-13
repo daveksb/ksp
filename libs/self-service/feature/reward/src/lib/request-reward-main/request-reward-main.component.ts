@@ -26,7 +26,7 @@ import {
   SelfServiceRequestForType,
   SelfServiceRequestSubType,
 } from '@ksp/shared/constant';
-import { parse, v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { RequestRewardMainService } from './request-reward-main.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 

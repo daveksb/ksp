@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { RequestPageType } from '@ksp/shared/constant';
+import { FileGroup } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -12,7 +13,7 @@ import {
   UniInfoService,
   UniRequestService,
 } from '@ksp/shared/service';
-import { getCookie, thaiDate } from '@ksp/shared/utility';
+import { getCookie, mapMultiFileInfo, thaiDate } from '@ksp/shared/utility';
 import { EMPTY, Observable, switchMap } from 'rxjs';
 
 @Component({
@@ -51,23 +52,20 @@ export class EditStudentDetailComponent implements OnInit {
   prefixList$!: Observable<any>;
   nationalityList$!: Observable<any>;
 
-  uploadFileList = [
+  uploadFileList: FileGroup[] = [
     {
       name: 'สำเนาหนังสือสำคัญการเปลี่ยนชื่อ / ชื่อสกุล / เปลี่ยนหรือเพิ่มคำนำหน้าชื่อ',
-      fileid: '',
-      filename: '',
+      files: []
     },
     {
       name: 'สำเนาหลักฐานการสมรส หรือการสิ้นสุดการสมรส (ถ้ามี)',
-      fileid: '',
-      filename: '',
+      files: []
     },
     {
       name: 'สำเนาหนังสือรับรองการใช้คำหน้านามหญิง (ถ้ามี)',
-      fileid: '',
-      filename: '',
+      files: []
     },
-  ];
+  ] as FileGroup[];
   data = false;
   pageType = RequestPageType;
   requesttype = 8;
@@ -141,10 +139,8 @@ export class EditStudentDetailComponent implements OnInit {
         switchMap((res) => {
           if (res) {
             const userId = Number(getCookie('userId'));
-            const fileUpload = this.uploadFileList.map(
-              (file) => file.fileid || null
-            );
-            let payload = {
+            const file = mapMultiFileInfo(this.uploadFileList);
+            const payload = {
               id: null,
               requestprocess: '2',
               requeststatus: '1',
@@ -164,9 +160,9 @@ export class EditStudentDetailComponent implements OnInit {
               ref2: '08',
               ref3: '5',
               admissionlist: '',
-              fileinfo: JSON.stringify({ fileUpload }),
+              fileinfo: JSON.stringify({ file }),
             };
-            let admissionlist = [];
+            const admissionlist = [];
             let formsave = {};
             const editStudent = this.formData.value.editStudent as any;
             const studentform = this.studentDetail.value as object;

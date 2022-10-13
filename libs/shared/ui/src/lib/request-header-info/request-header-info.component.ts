@@ -16,8 +16,5 @@ export class RequestHeaderInfoComponent {
   @Input() requestNumber: string | null = '';
   @Input() requestDate: string | null = '';
 
-  /* @Input() set requestDate(value: string) {
-  } */
-
   today = `${new Date()}`;
 }

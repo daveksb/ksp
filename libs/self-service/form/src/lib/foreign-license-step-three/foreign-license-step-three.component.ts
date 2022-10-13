@@ -3,6 +3,18 @@ import { FormArray, FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
+function checkAllValidator(): any {
+  return (form: FormArray) => {
+    const checkAll = form.controls.every((item) => !!item.value);
+
+    if (!checkAll) {
+      return { checkall: true };
+    }
+
+    return null;
+  };
+}
+
 @Component({
   selector: 'self-service-foreign-license-step-three',
   templateUrl: './foreign-license-step-three.component.html',
@@ -18,7 +30,7 @@ export class ForeignLicenseStepThreeComponent
   @Input() attachFiles: any[] = [];
 
   override form = this.fb.group({
-    checkFiles: this.fb.array([]),
+    checkFiles: this.fb.array([], checkAllValidator()),
   });
 
   override set value(value: any) {

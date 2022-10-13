@@ -50,15 +50,15 @@ export class RequestRewardFormComponent extends KspFormBaseComponent {
     rewardname: [null, Validators.required],
     rewardtype: [null, Validators.required],
     submitbefore: [null, Validators.required],
-    vdolink: [],
+    vdolink: [''],
     osoimember: this.fb.array([]),
-    /*     personId: [''],
-    prefix: [null],
+    personId: [''],
+    prefix: [''],
     firstName: [''],
     lastName: [''],
     phone: [''],
     email: [''],
-    academicStanding: [''], */
+    academicStanding: [''],
   });
 
   rewardFiles = [

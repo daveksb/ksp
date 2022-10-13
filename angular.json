@@ -1895,6 +1895,62 @@
         }
       ]
     },
+    "e-service-professional-best-teacher-reward": {
+      "projectType": "library",
+      "root": "libs/e-service/professional/best-teacher-reward",
+      "sourceRoot": "libs/e-service/professional/best-teacher-reward/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/e-service/professional/best-teacher-reward"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/professional/best-teacher-reward/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/professional/best-teacher-reward/**/*.ts",
+              "libs/e-service/professional/best-teacher-reward/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-professional-enable-reward-request": {
+      "projectType": "library",
+      "root": "libs/e-service/professional/enable-reward-request",
+      "sourceRoot": "libs/e-service/professional/enable-reward-request/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/e-service/professional/enable-reward-request"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/professional/enable-reward-request/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/professional/enable-reward-request/**/*.ts",
+              "libs/e-service/professional/enable-reward-request/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-professional-one-school-one-innovation": {
       "projectType": "library",
       "root": "libs/e-service/professional/one-school-one-innovation",
@@ -1923,6 +1979,34 @@
       },
       "tags": []
     },
+    "e-service-professional-praise-teacher-reward": {
+      "projectType": "library",
+      "root": "libs/e-service/professional/praise-teacher-reward",
+      "sourceRoot": "libs/e-service/professional/praise-teacher-reward/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/e-service/professional/praise-teacher-reward"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/professional/praise-teacher-reward/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/professional/praise-teacher-reward/**/*.ts",
+              "libs/e-service/professional/praise-teacher-reward/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-professional-professional": {
       "projectType": "library",
       "root": "libs/e-service/professional/professional",
@@ -1943,6 +2027,116 @@
             "lintFilePatterns": [
               "libs/e-service/professional/professional/**/*.ts",
               "libs/e-service/professional/professional/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-professional-research-reward": {
+      "projectType": "library",
+      "root": "libs/e-service/professional/research-reward",
+      "sourceRoot": "libs/e-service/professional/research-reward/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-service/professional/research-reward"],
+          "options": {
+            "jestConfig": "libs/e-service/professional/research-reward/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/professional/research-reward/**/*.ts",
+              "libs/e-service/professional/research-reward/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-professional-senior-teacher-reward": {
+      "projectType": "library",
+      "root": "libs/e-service/professional/senior-teacher-reward",
+      "sourceRoot": "libs/e-service/professional/senior-teacher-reward/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/e-service/professional/senior-teacher-reward"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/professional/senior-teacher-reward/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/professional/senior-teacher-reward/**/*.ts",
+              "libs/e-service/professional/senior-teacher-reward/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-professional-teacher-council-reward": {
+      "projectType": "library",
+      "root": "libs/e-service/professional/teacher-council-reward",
+      "sourceRoot": "libs/e-service/professional/teacher-council-reward/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/e-service/professional/teacher-council-reward"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/professional/teacher-council-reward/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/professional/teacher-council-reward/**/*.ts",
+              "libs/e-service/professional/teacher-council-reward/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-professional-thai-teacher-reward": {
+      "projectType": "library",
+      "root": "libs/e-service/professional/thai-teacher-reward",
+      "sourceRoot": "libs/e-service/professional/thai-teacher-reward/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/e-service/professional/thai-teacher-reward"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/professional/thai-teacher-reward/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/professional/thai-teacher-reward/**/*.ts",
+              "libs/e-service/professional/thai-teacher-reward/**/*.html"
             ]
           }
         }

@@ -59,6 +59,7 @@
           [matDatepicker]="picker1"
           autocomplete="off"
           class="form-control me-2"
+          [class.form-control-sp]="isDarkMode"
           formControlName="passportstartdate"
         />
         <mat-datepicker-toggle
@@ -77,6 +78,7 @@
           [matDatepicker]="picker2"
           autocomplete="off"
           class="form-control me-2"
+          [class.form-control-sp]="isDarkMode"
           formControlName="passportenddate"
         />
         <mat-datepicker-toggle

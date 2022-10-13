@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import {
   EsSearchPayload,
   RequestSearchFilter,
-  SchoolRequest,
   SchoolServiceUserPageType,
 } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
