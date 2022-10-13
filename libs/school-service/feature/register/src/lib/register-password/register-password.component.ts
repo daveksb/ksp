@@ -6,7 +6,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { FormMode } from '@ksp/shared/interface';
+import { FormMode, KspRequest } from '@ksp/shared/interface';
 import { EMPTY, switchMap } from 'rxjs';
 import localForage from 'localforage';
 import { encrypt, thaiDate } from '@ksp/shared/utility';
@@ -60,8 +60,8 @@ export class RegisterPasswordComponent implements OnInit {
       this.address = `บ้านเลขที่ ${res.address} ซอย ${res?.street ?? ''} หมู่ ${
         res?.moo ?? ''
       } ถนน ${res?.road ?? ''} ตำบล ${res.tumbon} อำเภอ ${
-        res.amphurName
-      } จังหวัด ${res.provinceName}`;
+        res.amphurname
+      } จังหวัด ${res.provincename}`;
     });
   }
 
@@ -117,8 +117,7 @@ export class RegisterPasswordComponent implements OnInit {
       .pipe(
         switchMap((res) => {
           if (res) {
-            console.log(password);
-            const payload = {
+            const payload: KspRequest = {
               ...this.savingData,
               coordinatorinfo: JSON.stringify({
                 ...this.coordinator,
@@ -130,10 +129,10 @@ export class RegisterPasswordComponent implements OnInit {
             payload.ref3 = '5';
             payload.systemtype = '2';
             payload.requesttype = '1';
-            payload.subtype = '5';
-            payload.currentprocess = '1';
-            payload.requestStatus = '1';
-            return this.requestService.createRequest(payload);
+            payload.careertype = '5';
+            payload.process = '1';
+            payload.status = '1';
+            return this.requestService.schCreateRequest(payload);
           }
           return EMPTY;
         })
