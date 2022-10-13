@@ -11,13 +11,13 @@ import {
   QualificationApproveDetailComponent,
   QualificationApprovePersonComponent,
 } from '@ksp/shared/form/others';
-import { FormMode } from '@ksp/shared/interface';
+import { FileGroup, FormMode, KspRequest } from '@ksp/shared/interface';
 import {
   AddressService,
   GeneralInfoService,
   RequestService,
 } from '@ksp/shared/service';
-import { thaiDate } from '@ksp/shared/utility';
+import { changeDate, mapMultiFileInfo, parseJson } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { EMPTY, Observable, switchMap } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
@@ -41,7 +41,6 @@ export class QualificationDetailComponent implements OnInit {
     edu4: [],
   });
 
-  requestNumber = '';
   userInfoFormdisplayMode: number = UserInfoFormType.thai;
   prefixList$!: Observable<any>;
   provinces1$!: Observable<any>;
@@ -53,8 +52,10 @@ export class QualificationDetailComponent implements OnInit {
   countries$!: Observable<any>;
   nationalitys$!: Observable<any>;
   schoolId = '0010201056';
-
-  requestDate = thaiDate(new Date());
+  subtype: any;
+  // requestNumber = '';
+  // requestDate = thaiDate(new Date());
+  request: KspRequest = new KspRequest();
   requestSubType!: number;
   requestId!: number;
   requestStatus!: number;
@@ -102,12 +103,12 @@ export class QualificationDetailComponent implements OnInit {
   }
 
   loadRequestData(id: number) {
-    this.requestService.getRequestById(id).subscribe((res: any) => {
+    this.requestService.schGetRequestById(id).subscribe((res: any) => {
       if (res) {
-        this.requestNumber = res.requestno;
+        this.request.requestno = res.requestno;
         this.requestStatus = +res.requeststatus;
         this.currentProcess = +res.currentprocess;
-        this.requestDate = thaiDate(new Date(`${res.requestdate}`));
+        this.request.requestdate = res.requestdate;
         res.birthdate = res.birthdate?.split('T')[0];
         this.form.get('userInfo')?.patchValue(res);
 
@@ -124,7 +125,12 @@ export class QualificationDetailComponent implements OnInit {
           this.getTumbon(i + 1, res?.addressinfo[i].amphur);
           form?.patchValue(res?.addressinfo[i]);
         }
-
+        const json = parseJson(res.fileinfo);
+        if (json && json.file && Array.isArray(json.file)) {
+          this.evidenceFiles.forEach(
+            (group, index) => (group.files = json.file[index])
+          );
+        }
         res.refperson = JSON.parse(atob(res.refperson));
         res.otherreason = JSON.parse(atob(res.otherreason));
         this.refperson = res.refperson;
@@ -260,17 +266,17 @@ export class QualificationDetailComponent implements OnInit {
             if (formData?.addr2?.addressType) formData.addr2.addressType = 2;
             const { refperson } = refPersonForm;
             const { otherreason } = reasonForm;
-            const userInfo = formData.userInfo;
+            const userInfo: Partial<KspRequest> = formData.userInfo;
             userInfo.ref1 = '2';
             userInfo.ref2 = '06';
-            userInfo.ref3 = '1';
+            userInfo.ref3 = `${this.requestSubType}`;
             userInfo.systemtype = '2';
             userInfo.requesttype = '6';
-            userInfo.subtype = `${this.requestSubType}`;
+            userInfo.careertype = `${this.requestSubType}`;
             userInfo.schoolid = this.schoolId;
-            userInfo.currentprocess = '1';
-            userInfo.requeststatus = '1';
-
+            userInfo.process = '1';
+            userInfo.status = '1';
+            userInfo.birthdate = changeDate(userInfo.birthdate);
             let eduForm = [{ ...formData.edu1, ...{ degreeLevel: 1 } }];
             formData?.edu2
               ? (eduForm = [
@@ -293,6 +299,7 @@ export class QualificationDetailComponent implements OnInit {
                 ])
               : null;
 
+            const file = mapMultiFileInfo(this.evidenceFiles);
             const payload = {
               ...userInfo,
               ...{
@@ -301,15 +308,16 @@ export class QualificationDetailComponent implements OnInit {
               ...{ eduinfo: JSON.stringify(eduForm) },
               ...{ refperson: JSON.stringify(refperson) },
               ...{ otherreason: JSON.stringify(otherreason) },
+              fileinfo: JSON.stringify({ file }),
             };
-            return this.requestService.createRequest(payload);
+            return this.requestService.schCreateRequest(payload);
           }
           return EMPTY;
         })
       )
       .subscribe((res) => {
         if (res) {
-          this.requestNumber = res.id;
+          this.request.requestno = res.id;
         }
         this.onCompleted();
       });
@@ -324,8 +332,8 @@ export class QualificationDetailComponent implements OnInit {
       width: '350px',
       data: {
         header: 'ระบบทำการยกเลิกเรียบร้อย',
-        content: `วันที่ : ${this.requestDate}
-        เลขที่คำขอ : ${this.requestNumber}`,
+        content: `วันที่ : ${this.request.requestdate}
+        เลขที่คำขอ : ${this.request.requestno}`,
       },
     });
 
@@ -406,41 +414,34 @@ export class QualificationDetailComponent implements OnInit {
   }
 }
 
-const files = [
+const files: FileGroup[] = [
   {
     name: 'หนังสือนำส่งจากหน่วยงานผู้ใช้',
-    fileid: '',
-    filename: '',
+    files: [],
   },
   {
     name: 'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
-    fileid: '',
-    filename: '',
+    files: [],
   },
   {
     name: 'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
-    fileid: '',
-    filename: '',
+    files: [],
   },
   {
     name: 'สำเนาทะเบียนบ้าน',
-    fileid: '',
-    filename: '',
+    files: [],
   },
   {
     name: 'สำเนาหนังสือแจ้งการเทียบคุณวุฒิ (กรณีจบการศึกษาจากต่างประเทศ)',
-    fileid: '',
-    filename: '',
+    files: [],
   },
   {
     name: 'สำเนา กพ.7 / สมุดประจำตัว',
-    fileid: '',
-    filename: '',
+    files: [],
   },
   {
     name: 'สำเนาหลักฐานการเปลี่ยนชื่อ นามสกุล',
-    fileid: '',
-    filename: '',
+    files: [],
   },
-  { name: 'เอกสารอื่นๆ', fileid: '', filename: '' },
+  { name: 'เอกสารอื่นๆ', files: [] },
 ];
