@@ -18,8 +18,7 @@ import localForage from 'localforage';
 import { FileGroup, KspRequest } from '@ksp/shared/interface';
 
 export interface KspApprovePersistData {
-  id: number;
-  detail: any;
+  checkDetail: any;
   requestData: KspRequest;
 }
 @UntilDestroy()
@@ -99,14 +98,9 @@ export class ETempLicenseDetailComponent implements OnInit {
 
   // save data to indexed db
   persistData() {
-    const checkResult = {
-      checkdate: new Date().toISOString().split('.')[0],
-      checkResult: this.form.controls.checkResult.value,
-    };
     //console.log('check sub result = ', checkSubResult);
     const saveData: KspApprovePersistData = {
-      id: this.requestId,
-      detail: checkResult,
+      checkDetail: this.form.controls.checkResult.value,
       requestData: this.requestData,
     };
     localForage.setItem('checkRequestData', saveData);

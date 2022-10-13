@@ -28,11 +28,7 @@
         <div class="d-flex align-items-center mb-3">
           <div class="form-control" style="width: 25rem">
             <div class="d-flex align-items-center">
-              <input
-                type="radio"
-                value="complete"
-                formControlName="approveResult"
-              />
+              <input type="radio" value="3" formControlName="approveResult" />
               <label class="form-label ms-2"> ครบถ้วน และถูกต้อง </label>
             </div>
           </div>
@@ -41,11 +37,7 @@
         <div class="form-control mb-3" style="width: 25rem">
           <div class="d-flex align-items-center">
             <div class="d-flex align-items-center">
-              <input
-                type="radio"
-                value="needfix"
-                formControlName="approveResult"
-              />
+              <input type="radio" value="2" formControlName="approveResult" />
               <label class="form-label ms-2"> ขอแก้ไข / เพิ่มเติม </label>
             </div>
           </div>
@@ -66,11 +58,7 @@
         <div class="form-control mb-3" style="width: 25rem">
           <div class="d-flex align-items-center">
             <div class="d-flex align-items-center">
-              <input
-                type="radio"
-                value="reject"
-                formControlName="approveResult"
-              />
+              <input type="radio" value="4" formControlName="approveResult" />
               <label class="form-label ms-2"> ขาดคุณสมบัติ </label>
             </div>
           </div>
@@ -173,6 +161,7 @@
     (cancelClicked)="cancel()"
     (prevClicked)="prevPage()"
     (saveClicked)="confirmDialog()"
+    [disableSaveButton]="form.invalid"
     [showCenterButtons]="true"
     [isLastPage]="true"
     [showSaveButton]="true"

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -20,11 +20,10 @@ import { KspApprovePersistData } from '../e-temp-license-detail/e-temp-license-d
 })
 export class TempLicenseCheckConfirmComponent implements OnInit {
   requestId!: number;
-
   saveData!: KspApprovePersistData;
 
   form = this.fb.group({
-    approveResult: [],
+    approveResult: [null, Validators.required],
     returnDate: [],
     rejectReason: [],
   });
@@ -44,33 +43,22 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
     this.checkRequestId();
   }
 
-  /*     const payload = {
-      ...res,
-      ...{
-        checksubresult: JSON.stringify({
-          ...res.checksubresult,
-          ...{ approveResult: this.form.value },
-        }),
-      },
-    };
- */
-
   save() {
-    //console.log('payload = ', this.form.value);
     console.log('save data = ', this.saveData);
+    console.log('form = ', this.form.value);
     const payload: KspApprovePayload = {
       id: this.saveData.requestData.id,
-      process: null,
-      status: null,
-      detail: "{'field1':'data1','field2':'data2','field3':'data3'}",
+      process: '3',
+      status: this.form.controls.approveResult.value,
+      detail: JSON.stringify(this.saveData.checkDetail),
       systemtype: '2', // school
       userid: null,
       paymentstatus: null,
     };
 
-    /*     this.eRequestService.KspApproveRequest(payload).subscribe((res) => {
-      console.log('check result = ', res);
-    }); */
+    this.eRequestService.KspApproveRequest(payload).subscribe((res) => {
+      console.log('result = ', res);
+    });
   }
 
   checkRequestId() {
