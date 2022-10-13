@@ -32,6 +32,16 @@ export class ERequestService {
     );
   }
 
+  // new API
+  getKspRequestById(requestId: number): Observable<KspRequest> {
+    return this.http.post<KspRequest>(
+      `${environment.apiUrl}/e-service/ksprequestselectbyid`,
+      {
+        id: requestId,
+      }
+    );
+  }
+
   EsSearchRequest(payload: EsSearchPayload): Observable<SelfRequest[]> {
     return this.http
       .post(`${environment.shortApiUrl}/schrequestsearch_e.php`, payload)

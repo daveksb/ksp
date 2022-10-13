@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './refund-list.component.html',
   styleUrls: ['./refund-list.component.scss'],
 })
-export class RefundListComponent implements OnInit {
+export class RefundListComponent {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<refundInfo>();
 
@@ -22,14 +22,12 @@ export class RefundListComponent implements OnInit {
   }
 
   approve() {
-    this.router.navigate(['/', 'refund', 'confirm']);
+    this.router.navigate(['/refund', 'confirm']);
   }
 
   verify() {
-    this.router.navigate(['/', 'refund', 'detail']);
+    this.router.navigate(['/refund', 'detail']);
   }
-
-  ngOnInit(): void {}
 }
 
 export interface refundInfo {

@@ -7,13 +7,11 @@ import { Router } from '@angular/router';
   templateUrl: './status-check-list.component.html',
   styleUrls: ['./status-check-list.component.scss'],
 })
-export class StatusCheckListComponent implements OnInit {
+export class StatusCheckListComponent {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<bookList>();
 
   constructor(private router: Router) {}
-
-  ngOnInit(): void {}
 
   search() {
     this.dataSource.data = data;
