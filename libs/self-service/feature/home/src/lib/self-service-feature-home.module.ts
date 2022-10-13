@@ -16,6 +16,7 @@ import { UniFormBadgeComponent } from '@ksp/shared/ui';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 export const routes: Routes = [
   {
@@ -44,6 +45,7 @@ export const routes: Routes = [
     MatSortModule,
     MatPaginatorModule,
     RouterModule.forChild(routes),
+    MatDatepickerModule,
   ],
   declarations: [SelfServiceHomeComponent, SelfServiceHomePageComponent],
   exports: [SelfServiceHomePageComponent],

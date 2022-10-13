@@ -23,11 +23,22 @@
         ><span *ngIf="!isForeignForm">วันเดือนปี ที่จัดอบรม</span>
         <span *ngIf="isForeignForm">Training Date</span></label
       >
-      <input
-        class="form-control"
-        type="date"
-        formControlName="trainingAddress"
-      />
+
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="trainingAddress"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="picker"
+          class="button-date"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </div>
     </div>
   </div>
 </form>

@@ -53,16 +53,17 @@
 
     <div class="col mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
       <label class="form-label required">วันที่ออก</label>
-      <div class="d-flex align-items-baseline">
+      <div class="d-flex align-items-center">
         <input
           matInput
           [matDatepicker]="picker1"
           autocomplete="off"
-          class="form-control me-2"
+          class="form-control form-date"
           [class.form-control-sp]="isDarkMode"
           formControlName="passportstartdate"
         />
         <mat-datepicker-toggle
+          class="button-date"
           matSuffix
           [for]="picker1"
         ></mat-datepicker-toggle>
@@ -72,16 +73,17 @@
 
     <div class="col mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
       <label class="form-label required">วันที่หมดอายุ</label>
-      <div class="d-flex align-items-baseline">
+      <div class="d-flex align-items-center">
         <input
           matInput
           [matDatepicker]="picker2"
           autocomplete="off"
-          class="form-control me-2"
+          class="form-control form-date"
           [class.form-control-sp]="isDarkMode"
           formControlName="passportenddate"
         />
         <mat-datepicker-toggle
+          class="button-date"
           matSuffix
           [for]="picker2"
         ></mat-datepicker-toggle>
@@ -240,16 +242,17 @@
     </div>
     <div class="col-md mb-2">
       <label class="form-label required">วันเดือนปีเกิด</label>
-      <div class="d-flex align-items-baseline">
+      <div class="d-flex align-items-center">
         <input
           [class.form-control-sp]="isDarkMode"
           matInput
           [matDatepicker]="picker3"
           autocomplete="off"
-          class="form-control me-2"
+          class="form-control form-date"
           formControlName="birthdate"
         />
         <mat-datepicker-toggle
+          class="button-date"
           matSuffix
           [for]="picker3"
         ></mat-datepicker-toggle>
@@ -364,15 +367,16 @@
 
     <div class="col mb-2">
       <label class="form-label">อนุญาตถึงวันที่ </label>
-      <div class="d-flex align-items-baseline">
+      <div class="d-flex align-items-center">
         <input
           matInput
           [matDatepicker]="picker4"
           autocomplete="off"
-          class="form-control me-2"
+          class="form-control form-date"
           formControlName="visaenddate"
         />
         <mat-datepicker-toggle
+          class="button-date"
           matSuffix
           [for]="picker4"
         ></mat-datepicker-toggle>

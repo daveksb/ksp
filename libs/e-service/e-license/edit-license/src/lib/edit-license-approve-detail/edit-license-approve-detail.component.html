@@ -9,8 +9,12 @@
       [mode]="'view'"
       formControlName="licenseInfo"
     ></ksp-edit-license>
-  </div>
 
+    <div class="mt-3">
+      <ksp-form-attachment></ksp-form-attachment>
+    </div>
+  </div>
+  
   <div [formGroup]="form2" class="bg-white px-4 py-3 mt-3">
     <e-service-license-check
       formControlName="verifyResult"

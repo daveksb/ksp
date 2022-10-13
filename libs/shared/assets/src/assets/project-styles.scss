@@ -62,6 +62,21 @@ add asterisk for required feild
   font-family: 'ksp regular';
 }
 
+.form-date {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  z-index: 0;
+}
+
+.button-date {
+  height: 36px;
+  padding: 4px 8px;
+  background: #f5f5f5;
+  border: 1px solid #ced4da;
+  border-radius: 0 0.375rem 0.375rem 0;
+  border-left: 0;
+}
+
 .form-select {
   background-image: url(/assets/images/drop-down-second.png);
   background-size: 12px;
