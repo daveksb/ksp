@@ -1,11 +1,11 @@
 <ksp-top-nav
   ><span header>ยื่นใบคำขอ</span>
-  <span subHeader>ขอหนังสือรับรองความรู้</span></ksp-top-nav
+  <span subHeader>ขอรับรองความรู้</span></ksp-top-nav
 >
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
-    <div class="box-header">รายการใบคำขอขอหนังสือรับรองความรู้</div>
+    <div class="box-header">รายการใบคำขอรับรองความรู้</div>
     <div class="bg-white px-3 py-3">
       <div class="mb-3">
         <ksp-e-service-license-search
@@ -34,7 +34,7 @@
               <i
                 role="button"
                 class="bi bi-file-earmark-check text-primary fs-5"
-                (click)="goToDetail(element)"
+                (click)="goToDetail(element.id)"
               ></i>
             </td>
           </ng-container>

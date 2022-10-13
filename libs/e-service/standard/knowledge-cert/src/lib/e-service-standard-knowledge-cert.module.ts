@@ -7,10 +7,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { Routes, RouterModule } from '@angular/router';
-import {
-  KnowledgeCertListComponent,
-  KnowledgeCertDetailComponent,
-} from '@ksp/e-service/e-license/knowledge-cert';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import {

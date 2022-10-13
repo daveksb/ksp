@@ -1,7 +1,7 @@
-<ksp-top-nav
-  ><span header>ใบอนุญาตประกอบวิชาชีพ</span
-  ><span subHeader>ขอขึ้นใบอนุญาตประกอบวิชาชีพ</span></ksp-top-nav
->
+<ksp-top-nav [isSelfService]="true">
+  <span header>ยื่นใบคำขอ</span>
+  <span subHeader>ขอเทียบเคียงผลการทดสอบและประเมิน</span>
+</ksp-top-nav>
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
@@ -12,90 +12,96 @@
         [requestNumber]="'requestNo'"
       ></ksp-request-header-info>
       <hr />
-      <div class="row align-items-center bg-light py-2 mx-0 mb-3">
+      <div class="row mx-0 border shadow-sm rounded-4 px-2 py-4 bg-white my-4">
         <div class="col-lg-3">
-          <self-service-form-upload-image></self-service-form-upload-image>
+          <self-service-form-upload-image
+            [isEditMode]="false"
+          ></self-service-form-upload-image>
         </div>
         <div class="col-md">
           <ksp-form-user-info
             formControlName="userInfo"
-            [isDarkMode]="true"
+            [mode]="'view'"
             [prefixList]="prefixList$ | async"
             [displayMode]="[userInfoType]"
             [nationList]="nationalitys$ | async"
             [isSelfService]="true"
-          >
-          </ksp-form-user-info>
+          ></ksp-form-user-info>
         </div>
       </div>
 
       <mat-tab-group
-        class="tab-group mb-3"
+        class="tab-group"
         animationDuration="0ms"
         [selectedIndex]="0"
       >
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address
             formControlName="address1"
-            [isDarkMode]="true"
-            [provinces]="provinces$ | async"
+            [mode]="'view'"
+            [provinces]="provinces1$ | async"
             [amphurs]="amphurs1$ | async"
             [tumbols]="tumbols1$ | async"
           >
             <span>ที่อยู่ทะเบียนบ้าน</span>
           </ksp-form-address>
+
           <hr />
           <ksp-form-address
             formControlName="address2"
-            [isDarkMode]="true"
-            [provinces]="provinces$ | async"
+            [mode]="'view'"
+            [provinces]="provinces2$ | async"
             [amphurs]="amphurs2$ | async"
             [tumbols]="tumbols2$ | async"
           >
             <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
+            <span class="text-danger ms-1 fs-6"
+              >*กรุณากรอกข้อมูลตำบล, อำเภอ</span
+            >
+            <div class="d-flex align-items-center">
+              <input type="checkbox" class="me-1" />
+              <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
+            </div>
           </ksp-form-address>
         </mat-tab>
 
         <mat-tab label="สถานที่ทำงาน">
-          <div class="d-flex align-items-center">
-            <input type="checkbox" class="me-2" />
-            <label class="form-label mb-2"
-              >เป็นผู้ประสงค์ประกอบวิชาชีพทางการศึกษา</label
-            >
-          </div>
           <self-service-form-user-workplace
+            [mode]="'view'"
             formControlName="workplace"
-            [provinces]="provinces$ | async"
+            [provinces]="provinces3$ | async"
             [amphurs]="amphurs3$ | async"
             [tumbols]="tumbols3$ | async"
+            [bureaus]="bureau$ | async"
           >
           </self-service-form-user-workplace>
         </mat-tab>
 
         <mat-tab label="ข้อมูลทางการศึกษา">
-          <self-service-transfer-knowledge-education
-            formControlName="education"
-            [countries]="countries$ | async"
+          <self-service-compare-knowledge-education
+            [mode]="'view'"
+            formControlName="educationInfo"
           >
-          </self-service-transfer-knowledge-education>
-          <br />
-          <ksp-form-attachment
-            [title]="'กรุณาแนบหลักฐานประกอบ'"
-            [groups]="eduFiles"
-          ></ksp-form-attachment>
+          </self-service-compare-knowledge-education>
         </mat-tab>
 
-        <mat-tab label="ข้อมูลขอเทียบโอนความรู้วิชาชีพครู">
-          <self-service-transfer-knowledge-info formControlName="tranferData">
-          </self-service-transfer-knowledge-info>
-          <br />
+        <mat-tab label="ข้อมูลเทียบเคียงผลการทดสอบ">
+          <self-service-compare-knowledge-info
+            [mode]="'view'"
+            formControlName="testResultCompareInfo"
+          >
+          </self-service-compare-knowledge-info>
+        </mat-tab>
+
+        <mat-tab label="เอกสารประกอบ">
           <ksp-form-attachment
+            [mode]="'view'"
             [title]="'กรุณาแนบหลักฐานประกอบ'"
-            [groups]="workingInfoFiles"
           ></ksp-form-attachment>
         </mat-tab>
       </mat-tab-group>
     </div>
+
     <div [formGroup]="form2" class="bg-white px-4 py-3 mt-3">
       <e-service-license-check
         formControlName="verifyResult"

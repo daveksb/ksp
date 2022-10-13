@@ -10,11 +10,11 @@ import { ERequestService } from '@ksp/shared/service';
 import { checkProcess, checkStatus } from '@ksp/shared/utility';
 
 @Component({
-  selector: 'ksp-knowledge-cert-list',
-  templateUrl: './knowledge-cert-list.component.html',
-  styleUrls: ['./knowledge-cert-list.component.scss'],
+  selector: 'ksp-e-compare-knowledge-list',
+  templateUrl: './e-compare-knowledge-list.component.html',
+  styleUrls: ['./e-compare-knowledge-list.component.scss'],
 })
-export class KnowledgeCertListComponent implements AfterViewInit {
+export class ECompareKnowledgeListComponent implements AfterViewInit {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
   SchoolRequestSubType = SchoolRequestSubType;
@@ -42,7 +42,7 @@ export class KnowledgeCertListComponent implements AfterViewInit {
   search(params: any) {
     const payload = {
       systemtype: 1, // self service
-      requesttype: 5, // ใบคำขอต่อใบอนุญาต
+      requesttype: 6, // ใบคำขอต่อใบอนุญาต
       requestno: '',
       firstnameth: '',
       idcardno: '',
@@ -63,7 +63,7 @@ export class KnowledgeCertListComponent implements AfterViewInit {
   }
 
   goToDetail(id: number) {
-    this.router.navigate(['/knowledge-cert', 'detail', id]);
+    this.router.navigate(['/compare-knowledge', 'detail', id]);
   }
 
   clear() {
