@@ -47,6 +47,7 @@ import { RenewLicenseForeignNonTeacherComponent } from './renew-license-foreign-
 import { TestResultTableComponent } from '@ksp/self-service/ui';
 import { FormUserTrainingWorkplaceComponent } from './form-user-training-workplace/form-user-training-workplace.component';
 import { ForeignStepTwoTabFourRenewComponent } from './foreign-step-two-tab-four-renew/foreign-step-two-tab-four-renew.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   imports: [
@@ -73,6 +74,7 @@ import { ForeignStepTwoTabFourRenewComponent } from './foreign-step-two-tab-four
     SchoolServiceFormActivityModule,
     SharedFormSelfRenewLicensePropertyFormModule,
     TestResultTableComponent,
+    MatDatepickerModule,
   ],
   declarations: [
     FormUserEducationComponent,

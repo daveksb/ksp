@@ -39,15 +39,6 @@
     overflow: initial !important;
     font-size: 14px !important;
   }
-
-  /* .mat-step-text-label {
-    text-overflow: clip;
-    overflow: initial;
-  } */
-
-  /* .mat-horizontal-content-container {
-    padding: 0 !important;
-  } */
 }
 
 .mat-tab-label-active {
@@ -71,7 +62,6 @@
   visibility: hidden !important;
 }
 
-/*  Mat stepper */
 .mat-stepper-label-position-bottom .mat-horizontal-stepper-header-container {
   width: auto;
   align-self: center;
@@ -156,7 +146,6 @@ button.mat-menu-item {
   width: 17.5rem;
 }
 
-//mat-list
 .mat-list-text {
   padding-right: 0 !important;
 }
@@ -165,7 +154,6 @@ button.mat-menu-item {
   padding-top: 0 !important;
 }
 
-/* Styles for the active tab label */
 .mat-tab-label.mat-tab-label-active {
   color: #0056ff;
 }
@@ -198,10 +186,6 @@ button.mat-menu-item {
 
 .mat-calendar-table-header th {
   font-size: 14px !important;
-}
-
-.mat-calendar-body-selected {
-  background-color: #0056ff !important;
 }
 
 .mat-button,

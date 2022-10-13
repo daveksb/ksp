@@ -4,17 +4,39 @@
     <div class="row">
       <div class="col-md-6 mb-2">
         <label class="form-label required">ผลคะแนนการทดสอบของหน่วยงาน</label>
-        <input class="form-control" type="text" formControlName="thaiTestScore" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="thaiTestScore"
+        />
       </div>
       <div class="col-md-6 mb-2">
         <label class="form-label required">ระดับผลคะแนน</label>
-        <input class="form-control" type="text" formControlName="thaiScoreLevel" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="thaiScoreLevel"
+        />
       </div>
     </div>
     <div class="row">
       <div class="col-md-6 mb-2">
         <label class="form-label required">ใช้ผลคะแนนได้ถึงวันที่</label>
-        <input class="form-control" type="date" formControlName="thaiScoreValidDate" />
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            autocomplete="off"
+            class="form-control form-date"
+            formControlName="thaiScoreValidDate"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </div>
       </div>
     </div>
   </div>
@@ -24,17 +46,39 @@
     <div class="row">
       <div class="col-md-6 mb-2">
         <label class="form-label required">ผลคะแนนการทดสอบของหน่วยงาน</label>
-        <input class="form-control" type="text" formControlName="englishTestScore" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="englishTestScore"
+        />
       </div>
       <div class="col-md-6 mb-2">
         <label class="form-label required">ระดับผลคะแนน</label>
-        <input class="form-control" type="text" formControlName="englishScoreLevel" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="englishScoreLevel"
+        />
       </div>
     </div>
     <div class="row">
       <div class="col-md-6 mb-2">
         <label class="form-label required">ใช้ผลคะแนนได้ถึงวันที่</label>
-        <input class="form-control" type="date" formControlName="englishScoreValidDate" />
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            autocomplete="off"
+            class="form-control form-date"
+            formControlName="englishScoreValidDate"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </div>
       </div>
     </div>
   </div>
@@ -44,17 +88,39 @@
     <div class="row">
       <div class="col-md-6 mb-2">
         <label class="form-label required">ผลคะแนนการทดสอบของหน่วยงาน</label>
-        <input class="form-control" type="text" formControlName="techTestScore" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="techTestScore"
+        />
       </div>
       <div class="col-md-6 mb-2">
         <label class="form-label required">ระดับผลคะแนน</label>
-        <input class="form-control" type="text" formControlName="techScoreLevel" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="techScoreLevel"
+        />
       </div>
     </div>
     <div class="row">
       <div class="col-md-6 mb-2">
         <label class="form-label required">ใช้ผลคะแนนได้ถึงวันที่</label>
-        <input class="form-control" type="date" formControlName="techScoreValidDate" />
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker3"
+            autocomplete="off"
+            class="form-control form-date"
+            formControlName="techScoreValidDate"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker3"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker3></mat-datepicker>
+        </div>
       </div>
     </div>
   </div>
@@ -64,41 +130,70 @@
     <div class="text-primary fs-5" role="button">
       <ksp-add-row-button
         class="text-primary fs-6"
-        (addRowClick)="addFormArray(degreeInfo)">
+        (addRowClick)="addFormArray(degreeInfo)"
+      >
         เพิ่มข้อมูลประวัติการศึกษา
       </ksp-add-row-button>
     </div>
   </div>
 
   <ng-container formArrayName="degreeInfo">
-    <ng-container
-      *ngFor="let DegreeForm of degreeInfo.controls; let i = index">
+    <ng-container *ngFor="let DegreeForm of degreeInfo.controls; let i = index">
       <ng-container [formGroupName]="i">
         <div class="border rounded p-3 mb-3">
           <div class="d-flex justify-content-end" *ngIf="i > 0">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
-              (click)="deleteFormArray(degreeInfo, i)"></i>
+              (click)="deleteFormArray(degreeInfo, i)"
+            ></i>
           </div>
           <div class="row">
             <div class="col-md-6 mb-2">
               <label class="form-label required">วิชา</label>
-              <input class="form-control" type="text" formControlName="subject" />
+              <input
+                class="form-control"
+                type="text"
+                formControlName="subject"
+              />
             </div>
             <div class="col-md-6 mb-2">
-              <label class="form-label required">ผลคะแนนการทดสอบของหน่วยงาน</label>
-              <input class="form-control" type="text" formControlName="testResult" />
+              <label class="form-label required"
+                >ผลคะแนนการทดสอบของหน่วยงาน</label
+              >
+              <input
+                class="form-control"
+                type="text"
+                formControlName="testResult"
+              />
             </div>
           </div>
           <div class="row">
             <div class="col-md-6 mb-2">
               <label class="form-label required">ระดับผลคะแนน</label>
-              <input class="form-control" type="text" formControlName="scoreLevel" />
+              <input
+                class="form-control"
+                type="text"
+                formControlName="scoreLevel"
+              />
             </div>
             <div class="col-md-6 mb-2">
               <label class="form-label required">ใช้ผลคะแนนได้ถึงวันที่</label>
-              <input class="form-control" type="date" formControlName="scoreValidDate" />
+              <div class="d-flex align-items-center">
+                <input
+                  matInput
+                  [matDatepicker]="picker4"
+                  autocomplete="off"
+                  class="form-control form-date"
+                  formControlName="scoreValidDate"
+                />
+                <mat-datepicker-toggle
+                  class="button-date"
+                  matSuffix
+                  [for]="picker4"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker4></mat-datepicker>
+              </div>
             </div>
           </div>
         </div>

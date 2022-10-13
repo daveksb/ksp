@@ -2,17 +2,39 @@
   <div class="row">
     <div class="col-md-6 mb-2">
       <label class="form-label required">มติครั้งที่</label>
-      <input
-        class="form-control"
-        type="date"
-        formControlName="resolutionTimes" />
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker1"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="resolutionTimes"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker1"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </div>
     </div>
     <div class="col-md-6 mb-2">
       <label class="form-label required">วันเดือนปี ที่ลงมติ</label>
-      <input
-        class="form-control"
-        type="date"
-        formControlName="resolutionDate" />
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="resolutionDate"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker2"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </div>
     </div>
   </div>
 
@@ -31,14 +53,16 @@
       <input
         class="form-control"
         type="text"
-        formControlName="educationInstitution" />
+        formControlName="educationInstitution"
+      />
     </div>
 
     <div class="col-md-6 mb-2">
       <label class="form-label required">วุฒิปริญญาที่จบ</label>
       <select
         class="search__content form-select"
-        formControlName="graduateDegree">
+        formControlName="graduateDegree"
+      >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">ปริญญาตรี</option>
         <option value="2">ปริญญาโท</option>
@@ -70,11 +94,39 @@
   <div class="row">
     <div class="col-md-6 mb-2">
       <label class="form-label required">วันเดือนปี เข้าศึกษา</label>
-      <input class="form-control" type="date" formControlName="admissionDate" />
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker3"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="admissionDate"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker3"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker3></mat-datepicker>
+      </div>
     </div>
     <div class="col-md-6 mb-2">
       <label class="form-label required">วันเดือนปี สำเร็จการศึกษา</label>
-      <input class="form-control" type="date" formControlName="graduateDate" />
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker4"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="graduateDate"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker4"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker4></mat-datepicker>
+      </div>
     </div>
   </div>
 </form>
