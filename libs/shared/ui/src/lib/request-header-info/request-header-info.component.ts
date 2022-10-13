@@ -14,9 +14,8 @@ export class RequestHeaderInfoComponent {
   @Input() requestLabel2 = 'เลขใบคำขอ';
 
   //@Input() requestDate!: string;
-  @Input() requestNumber!: string;
-
-  @Input() set requestDate(value: string) {
+  @Input() requestNumber!: any;
+  @Input() set requestDate(value: any) {
     console.log('request date = ', value);
   }
 }

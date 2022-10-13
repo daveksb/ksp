@@ -23,7 +23,11 @@ export class OsoiListComponent implements OnInit {
     this.dataSource.data = [];
   }
 
-  gotoNextPage() {
+  cancelRequest() {
+    this.router.navigate(['one-school-one-innovation', 'objection']);
+  }
+
+  verifyRequest() {
     this.router.navigate(['one-school-one-innovation', 'approve']);
   }
 }

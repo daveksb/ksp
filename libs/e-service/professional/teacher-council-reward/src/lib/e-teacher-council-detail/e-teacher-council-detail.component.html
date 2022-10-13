@@ -1,0 +1,87 @@
+<ksp-top-nav
+  ><span header>ยื่นใบคำขอ</span
+  ><span subHeader>ขอรางวัลคุรุสภา</span></ksp-top-nav
+>
+<div class="bg-secondary bg-opacity-10 full-height-2 px-4 py-2">
+  <div class="box-header">รายละเอียดใบคำขอรางวัลคุรุสภา</div>
+  <div class="bg-white p-3">
+    <ksp-request-header-info></ksp-request-header-info>
+    <hr />
+    <div class="box-header mb-2">ข้อมูลรางวัลคุรุสภา</div>
+    <mat-tab-group
+      [formGroup]="form"
+      class="tab-group"
+      animationDuration="0ms"
+      [selectedIndex]="0"
+    >
+      <mat-tab label="ข้อมูลส่วนตัว">
+        <ksp-form-user-info
+          [mode]="'view'"
+          [displayMode]="[userInfoType]"
+          [isSelfService]="true"
+          [prefixList]="prefixList$ | async"
+          [requiredIdCardNo]="false"
+          formControlName="userInfo"
+        ></ksp-form-user-info>
+      </mat-tab>
+
+      <mat-tab label="ที่อยู่" class="tab-content">
+        <ksp-form-address
+          [mode]="'view'"
+          formControlName="address1"
+          [isDarkMode]="true"
+          [provinces]="provinces1$ | async"
+          [amphurs]="amphurs1$ | async"
+          [tumbols]="tumbols1$ | async"
+        >
+          <span class="text-primary">ที่อยู่ทะเบียนบ้าน</span>
+        </ksp-form-address>
+        <hr />
+        <ksp-form-address
+          [mode]="'view'"
+          formControlName="address2"
+          [isDarkMode]="true"
+          [provinces]="provinces2$ | async"
+          [amphurs]="amphurs2$ | async"
+          [tumbols]="tumbols2$ | async"
+        >
+          <span class="text-primary">ที่อยู่ที่ติดต่อได้สะดวก</span>
+          <div class="d-flex align-items-center">
+            <input type="checkbox" class="me-2" />
+            <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
+          </div>
+        </ksp-form-address>
+      </mat-tab>
+
+      <mat-tab label="ข้อมูลการศึกษา">
+        <ksp-council-education [mode]="'view'"></ksp-council-education>
+      </mat-tab>
+
+      <mat-tab label="ข้อมูลการทำงาน">
+        <ksp-council-working [mode]="'view'"></ksp-council-working>
+      </mat-tab>
+
+      <mat-tab label="ข้อมูลการปฏิบัติตนตามจรรยาบรรณ">
+        <ksp-council-ethic [mode]="'view'"></ksp-council-ethic>
+      </mat-tab>
+
+      <mat-tab label="รายงานผลสำเร็จจากการปฏิบัติงาน">
+        <ksp-council-success [mode]="'view'"></ksp-council-success>
+      </mat-tab>
+
+      <mat-tab label="ข้อมูลรางวัลและหลักฐานประกอบ">
+        <ksp-council-evidence [mode]="'view'"></ksp-council-evidence>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
+
+<div class="sticky-bottom border px-2">
+  <ksp-bottom-nav
+    [isFirstPage]="true"
+    [colorMode]="'blue'"
+    [showCenterButtons]="true"
+    [showCancelButton]="true"
+    [showSaveButton]="true"
+  ></ksp-bottom-nav>
+</div>
