@@ -1,15 +1,18 @@
 export interface EsSearchPayload {
-  systemtype: string;
-  requesttype?: string;
-  requestno?: string;
-  subtype?: string;
-  name?: string;
-  idcardno?: string;
-  passportno?: string;
-  currentprocess?: string;
-  requeststatus?: string;
-  requestdatefrom?: string;
-  requestdateto?: string;
-  offset: string;
-  row: string;
+  systemtype: string | null;
+  requesttype: string | null;
+  requestno: string | null;
+  careertype: string | null;
+  name: string | null;
+  idcardno: string | null;
+  passportno: string | null;
+  process: string | null;
+  status: string | null;
+  schoolid: string | null;
+  schoolname: string | null;
+  bureauid: string | null;
+  requestdatefrom: string | null;
+  requestdateto: string | null;
+  offset: string | null;
+  row: string | null;
 }

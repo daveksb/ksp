@@ -5,7 +5,11 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
-import { EsSearchPayload, SchoolRequest } from '@ksp/shared/interface';
+import {
+  EsSearchPayload,
+  SchoolRequest,
+  SchRequestSearchFilter,
+} from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import {
   checkProcess,
@@ -44,16 +48,28 @@ export class ETempLicenseListComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  search(params: any) {
-    //console.log('params = ', params);
+  search(params: Partial<SchRequestSearchFilter>) {
+    console.log('params = ', params);
     const payload: EsSearchPayload = {
       systemtype: '2',
       requesttype: '3',
+      requestno: null,
+      careertype: null,
+      name: null,
+      idcardno: null,
+      passportno: null,
+      process: null,
+      status: null,
+      schoolid: null,
+      schoolname: null,
+      bureauid: null,
+      requestdatefrom: null,
+      requestdateto: null,
       offset: '0',
       row: '500',
     };
 
-    this.eRequestService.EsSearchRequest(payload).subscribe((res) => {
+    this.eRequestService.KspSearchRequest(payload).subscribe((res) => {
       if (res) {
         this.dataSource.data = res;
       } else {

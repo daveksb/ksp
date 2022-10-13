@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
 import {
   EsSearchPayload,
+  KspRequest,
   KspResponse,
   SchoolRequest,
   SchoolUser,
@@ -15,6 +16,21 @@ import { map, Observable, shareReplay } from 'rxjs';
 })
 export class ERequestService {
   constructor(private http: HttpClient) {}
+
+  // new API
+  KspSearchRequest(payload: EsSearchPayload): Observable<KspRequest[]> {
+    return this.http
+      .post(`${environment.shortApiUrl}/schrequestsearch_e.php`, payload)
+      .pipe(map((data: any) => data.datareturn));
+  }
+
+  // new API
+  KspApproveRequest(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/ksprequestprocessinsert`,
+      payload
+    );
+  }
 
   EsSearchRequest(payload: EsSearchPayload): Observable<SelfRequest[]> {
     return this.http
