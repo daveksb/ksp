@@ -481,44 +481,12 @@ export const standardMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ทะเบียนข้อมูล',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'data',
-    subMenu: [
-      {
-        path: '/aa',
-        label: 'ทะเบียนรหัสรับรองปริญญาและประกาศนียบัตร',
-      },
-      {
-        path: '/bb',
-        label: 'ทะเบียนรายชื่อนักศึกษาเข้าเรียนและจบการศึกษา',
-      },
-      {
-        path: '/cc',
-        label: 'ทะเบียนผู้ผ่านการทดสอบ',
-      },
-      {
-        path: '/cc',
-        label: 'ทะเบียนผู้ผ่านการประเมินสมรรถนะทางวิชาชีพครู',
-      },
-    ],
+    path: '/xxx',
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'รายงาน',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'report',
-    subMenu: [
-      {
-        path: '/aa',
-        label: 'รายงานยื่นใบคำขอ(แยกตามประเภท)',
-      },
-      {
-        path: '/bb',
-        label: ' รายงานรายชื่อปริญญาและประกาศนียบัตรที่ได้รับการรับรอง',
-      },
-    ],
+    path: '/xxx',
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
@@ -661,7 +629,15 @@ export const professionalMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ตั้งค่า',
-    path: '/enable-reward/list',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'enable-reward',
+    subMenu: [
+      {
+        path: '/enable-reward/list',
+        label: 'ตั้งค่าเปิด-ปิดยื่นขอรับรางวัล',
+      },
+    ],
   },
 ];
 
