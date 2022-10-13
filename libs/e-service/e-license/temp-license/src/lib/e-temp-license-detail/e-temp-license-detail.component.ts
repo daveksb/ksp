@@ -109,6 +109,7 @@ export class ETempLicenseDetailComponent implements OnInit {
   checkRequestId() {
     this.route.paramMap.pipe(untilDestroyed(this)).subscribe((params) => {
       this.requestId = Number(params.get('id'));
+      console.log('req id = ', this.requestId);
       if (this.requestId) {
         this.loadRequestFromId(this.requestId);
       }
