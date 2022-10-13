@@ -119,11 +119,20 @@
       "@ksp/e-service/professional/thai-teacher-reward": [
         "libs/e-service/professional/thai-teacher-reward/src/index.ts"
       ],
+      "@ksp/e-service/standard/compare-knowledge": [
+        "libs/e-service/standard/compare-knowledge/src/index.ts"
+      ],
       "@ksp/e-service/standard/degree-cert": [
         "libs/e-service/standard/degree-cert/src/index.ts"
       ],
+      "@ksp/e-service/standard/knowledge-cert": [
+        "libs/e-service/standard/knowledge-cert/src/index.ts"
+      ],
       "@ksp/e-service/standard/performance-result": [
         "libs/e-service/standard/performance-result/src/index.ts"
+      ],
+      "@ksp/e-service/standard/qualification-approve": [
+        "libs/e-service/standard/qualification-approve/src/index.ts"
       ],
       "@ksp/e-service/standard/test-result": [
         "libs/e-service/standard/test-result/src/index.ts"

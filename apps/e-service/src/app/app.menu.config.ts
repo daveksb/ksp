@@ -220,23 +220,7 @@ export const eLicenseMenu: MenuConfig[] = [
       },
     ],
   },
- /*  {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอหนังสือรับรองคุณวุฒิ',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'qualification',
-    subMenu: [
-      {
-        path: '/qualification/list',
-        label: 'รายการใบคำขอหนังสือขอรับรองคุณวุฒิ',
-      },
-      {
-        path: '/xxx',
-        label: 'พิจารณาหนังสือรับรองคุณวุฒิ',
-      },
-    ],
-  }, */
+
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'กิจกรรมพัฒนาตนเอง',
@@ -429,28 +413,45 @@ export const standardMenu: MenuConfig[] = [
     subMenuName: 'request-degree',
     subMenu: [
       {
-        path: '/aa',
+        path: '/qualification-approve/list',
         label: 'รายการใบคำรับรองคุณวุฒิทางการศึกษา',
-      },
-      {
-        path: '/bb',
-        label: 'พิจารณารับรองคุณวุฒิทางการศึกษา',
       },
       {
         path: '/cc',
         label: 'บัญชีรายชื่อและพิมพ์หนังสือคุณวุฒิทางการศึกษา',
       },
+      {
+        path: '/bb',
+        label: 'พิจารณารับรองคุณวุฒิทางการศึกษา',
+      },
     ],
   },
+  /* {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'ใบคำขอหนังสือรับรองคุณวุฒิ',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'qualification',
+    subMenu: [
+      {
+        path: '/qualification/list',
+        label: 'รายการใบคำขอหนังสือขอรับรองคุณวุฒิ',
+      },
+      {
+        path: '/xxx',
+        label: 'พิจารณาหนังสือรับรองคุณวุฒิ',
+      },
+    ],
+  }, */
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'นำเข้าและบันทึกผลการทดสอบ',
-    path: '/import-test',
+    path: '/import-test/list',
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'นำเข้าและบันทึกผลการประเมินสมรรถนะทางวิชาชีพครู',
-    path: '/import-performance',
+    path: '/import-performance/list',
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',

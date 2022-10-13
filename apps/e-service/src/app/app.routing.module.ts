@@ -65,14 +65,14 @@ const routes: EthicsCustomRoute[] = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'qualification',
+    path: 'qualification-approve',
     data: {
       menuConfig: eLicenseMenu,
       headerLabel: 'ระบบใบอนุญาตประกอบวิชาชีพทางการศึกษา',
     },
     loadChildren: () =>
-      import('@ksp/e-service/e-license/qualification-approve').then(
-        (m) => m.EServiceELicenseQualificationApproveModule
+      import('@ksp/e-service/standard/qualification-approve').then(
+        (m) => m.EServiceStandardQualificationApproveModule
       ),
     canActivate: [AuthGuard],
   },
