@@ -1,12 +1,15 @@
 <form [formGroup]="form">
+  <div class="d-flex align-items-center" *ngIf="showNotRequire">
+    <input type="checkbox" class="me-2" formControlName="notRequired" />
+    <label class=" form-label mb-2">เป็นผู้ประสงค์ประกอบวิชาชีพทางการศึกษา</label>
+  </div>
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label required">สังกัด</label>
+      <label class="form-label" [class.required]="!form.controls.notRequired.value">สังกัด</label>
       <select
         class="form-select"
         [class.form-select-sp]="isDarkMode"
-        formControlName="bureauid"
-      >
+        formControlName="bureauid">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let bureau of bureaus" [value]="bureau?.bureauId">
           {{ bureau?.bureauName }}
@@ -15,13 +18,12 @@
     </div>
 
     <div class="col-md-6 mb-2">
-      <label class="form-label required">ชื่อหน่วยงาน/สถานศึกษา</label>
+      <label class="form-label" [class.required]="!form.controls.notRequired.value">ชื่อหน่วยงาน/สถานศึกษา</label>
       <input
         class="form-control"
         [class.form-control-sp]="isDarkMode"
         type="text"
-        formControlName="schoolname"
-      />
+        formControlName="schoolname" />
       <!-- <select class="form-select" formControlName="schoolname">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
       </select> -->
@@ -30,13 +32,12 @@
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label required">ที่อยู่/เลขที่</label>
+      <label class="form-label" [class.required]="!form.controls.notRequired.value">ที่อยู่/เลขที่</label>
       <input
         class="form-control"
         [class.form-control-sp]="isDarkMode"
         type="text"
-        formControlName="houseno"
-      />
+        formControlName="houseno" />
     </div>
 
     <div class="col-md-6 mb-2">
@@ -45,8 +46,7 @@
         class="form-control"
         [class.form-control-sp]="isDarkMode"
         type="text"
-        formControlName="moo"
-      />
+        formControlName="moo" />
     </div>
   </div>
 
@@ -57,8 +57,7 @@
         class="form-control"
         [class.form-control-sp]="isDarkMode"
         type="text"
-        formControlName="alley"
-      />
+        formControlName="alley" />
     </div>
 
     <div class="col-md-6 mb-2">
@@ -67,35 +66,31 @@
         class="form-control"
         [class.form-control-sp]="isDarkMode"
         type="text"
-        formControlName="road"
-      />
+        formControlName="road" />
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label required">รหัสไปรษณีย์ </label>
+      <label class="form-label" [class.required]="!form.controls.notRequired.value">รหัสไปรษณีย์ </label>
       <input
         class="form-control"
         [class.form-control-sp]="isDarkMode"
         type="text"
-        formControlName="postcode"
-      />
+        formControlName="postcode" />
     </div>
 
     <div class="col-md-6 mb-2">
-      <label class="form-label required">จังหวัด</label>
+      <label class="form-label" [class.required]="!form.controls.notRequired.value">จังหวัด</label>
       <select
         class="form-select"
         [class.form-select-sp]="isDarkMode"
         formControlName="province"
-        (change)="provinceChanged.emit($event)"
-      >
+        (change)="provinceChanged.emit($event)">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option
           *ngFor="let province of provinces"
-          [value]="province?.province_id"
-        >
+          [value]="province?.province_id">
           {{ province?.province_name }}
         </option>
       </select>
@@ -104,13 +99,12 @@
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label required">ตำบล</label>
+      <label class="form-label" [class.required]="!form.controls.notRequired.value">ตำบล</label>
       <select
         class="form-select"
         [class.form-select-sp]="isDarkMode"
         formControlName="tumbol"
-        (change)="updatePostcode($event)"
-      >
+        (change)="updatePostcode($event)">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let t of tumbols" [value]="t?.tambolCode">
           {{ t?.tambolName }}
@@ -119,13 +113,12 @@
     </div>
 
     <div class="col-md-6 mb-2">
-      <label class="form-label required">อำเภอ</label>
+      <label class="form-label" [class.required]="!form.controls.notRequired.value">อำเภอ</label>
       <select
         class="form-select"
         [class.form-select-sp]="isDarkMode"
         formControlName="amphur"
-        (change)="amphurChanged.emit($event)"
-      >
+        (change)="amphurChanged.emit($event)">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let a of amphurs" [value]="a?.amphurCode">
           {{ a?.amphurName }}
