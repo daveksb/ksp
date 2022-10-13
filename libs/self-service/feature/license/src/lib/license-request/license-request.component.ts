@@ -227,14 +227,15 @@ export class LicenseRequestComponent
       educationLevelForm: null,
     };
 
-    const edufiles = this.eduFiles; //this.mapFileInfo(this.eduFiles);
-    const experiencefiles = this.experienceFiles; //this.mapFileInfo(this.experienceFiles);
+    const edufiles = this.eduFiles;
+    const experiencefiles = this.experienceFiles;
     const performancefiles = this.performanceFiles;
 
     const payload: SelfRequest = {
       ...self,
       ...replaceEmptyWithNull(selectData),
       ...(this.requestId && { id: `${this.requestId}` }),
+      ...(this.imageId && { imagefileid: `${this.imageId}` }),
       ...{
         addressinfo: JSON.stringify([formData.address1, formData.address2]),
       },

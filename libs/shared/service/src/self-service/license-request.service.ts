@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
-import { SelfRequest } from '@ksp/shared/interface';
+import { SelfGetRequest, SelfRequest } from '@ksp/shared/interface';
 import { map, Observable } from 'rxjs';
 
 @Injectable({
@@ -40,8 +40,8 @@ export class SelfRequestService {
       .pipe(map((data: any) => data.datareturn));
   }
 
-  getRequestById(id: number): Observable<SelfRequest> {
-    return this.http.post<SelfRequest>(
+  getRequestById(id: number): Observable<SelfGetRequest> {
+    return this.http.post<SelfGetRequest>(
       `${environment.apiUrl}/kspself/ksprequestselectbyid`,
       {
         id: `${id}`,

@@ -182,6 +182,7 @@ export class RenewLicenseRequestComponent
       ...self,
       ...replaceEmptyWithNull(selectData),
       ...(this.requestId && { id: `${this.requestId}` }),
+      ...(this.imageId && { imagefileid: `${this.imageId}` }),
       ...{
         addressinfo: JSON.stringify([formData.address1, formData.address2]),
       },

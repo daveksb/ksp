@@ -71,6 +71,7 @@ export class ForeignLicenseStepTwoComponent
   @Input() academicFiles: any[] = [];
   @Input() uniqueTimestamp!: string;
   @Input() isRenewLicense = false;
+  @Input() myImage = '';
 
   prefixList$!: Observable<any>;
   provinces1$!: Observable<any>;
@@ -100,6 +101,7 @@ export class ForeignLicenseStepTwoComponent
     birthdate: [null, Validators.required],
     nationality: [null, Validators.required],
     foreignpassporttype: [null, Validators.required],
+    imagefileid: [''],
     addressForm: [],
     workplaceForm: [],
     academicForm: [],
@@ -166,5 +168,9 @@ export class ForeignLicenseStepTwoComponent
         this.subDistrict2$ = this.addressService.getTumbols(amphur);
       }
     }
+  }
+
+  uploadImageComplete(imageId: string) {
+    this.form.patchValue({ imagefileid: imageId });
   }
 }

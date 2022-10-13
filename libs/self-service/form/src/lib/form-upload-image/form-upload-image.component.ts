@@ -17,6 +17,7 @@ export class FormUploadImageComponent {
   @Input() requestType: any;
   @Input() uniqueTimestamp!: string;
   @Input() isForeignForm = false;
+  @Input() maxSize = 2097152; // 2MB
   @Input()
   set imageId(id: string) {
     if (id) {
