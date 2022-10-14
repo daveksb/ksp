@@ -13,6 +13,7 @@ import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SharedFormSelfRewardFormModule } from '@ksp/shared/form/self-reward-form';
 import { SelfServiceFormModule } from '@ksp/self-service/form';
+import { EServiceRewardSearchComponent } from '@ksp/shared/search';
 
 const routes: Routes = [
   {
@@ -50,6 +51,7 @@ const routes: Routes = [
     BottomNavComponent,
     RequestHeaderInfoComponent,
     SelfServiceFormModule,
+    EServiceRewardSearchComponent,
   ],
   declarations: [EPraiseTeacherListComponent, EPraiseTeacherDetailComponent],
   exports: [EPraiseTeacherListComponent, EPraiseTeacherDetailComponent],

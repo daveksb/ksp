@@ -13,6 +13,7 @@ import { SharedFormSelfRewardFormModule } from '@ksp/shared/form/self-reward-for
 import { MatDialogModule } from '@angular/material/dialog';
 import { SelfServiceFeatureRewardModule } from '@ksp/self-service/feature/reward';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import { EServiceRewardSearchComponent } from '@ksp/shared/search';
 
 const routes: Routes = [
   {
@@ -49,6 +50,7 @@ const routes: Routes = [
     MatDialogModule,
     BottomNavComponent,
     RequestHeaderInfoComponent,
+    EServiceRewardSearchComponent,
   ],
   declarations: [ETeacherCouncilListComponent, ETeacherCouncilDetailComponent],
   exports: [ETeacherCouncilListComponent, ETeacherCouncilDetailComponent],

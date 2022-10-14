@@ -8,76 +8,10 @@
   <div class="bg-white p-3">
     <div class="box-header">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
     <hr />
-
-    <div class="row mb-2">
-      <div class="col">
-        <label class="form-label">เลขที่คำขอ</label>
-        <input type="text" class="form-control" />
-      </div>
-      <div class="col">
-        <label class="form-label">หมายเลขบัตรประชาชน</label>
-        <input type="text" class="form-control" />
-      </div>
-    </div>
-
-    <div class="row mb-2">
-      <div class="col">
-        <label class="form-label">ชื่อ-นามสกุล</label>
-        <input type="text" class="form-control" />
-      </div>
-      <div class="col">
-        <label class="form-label">ประเภท/กลุ่มสาระการเรียนรู้</label>
-        <input type="text" class="form-control" />
-      </div>
-    </div>
-
-    <div class="row mb-2">
-      <div class="col">
-        <label class="form-label">สถานะการดำเนินการ</label>
-        <select class="form-select">
-          <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-      </div>
-      <div class="col">
-        <label class="form-label">ผลการพิจารณา</label>
-        <select class="form-select">
-          <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="row mb-2">
-      <div class="col">
-        <label class="form-label">จาก : วันเดือนปีที่ยื่นใบคำขอ</label>
-        <input type="date" class="form-control" />
-      </div>
-      <!-- <div class="col-auto p-0 my-2">
-        <br />
-        <i class="bi bi-dash"></i>
-      </div> -->
-      <div class="col">
-        <label class="form-label">ถึง : วันเดือนปีที่ยื่นใบคำขอ</label>
-        <input type="date" class="form-control" />
-      </div>
-    </div>
-
-    <div class="d-flex justify-content-end mt-3">
-      <button
-        class="btn border-primary text-primary"
-        type="button"
-        (click)="clear()"
-      >
-        ล้างข้อมูล</button
-      ><button class="btn btn-primary ms-2" type="button" (click)="search()">
-        ค้นหา
-      </button>
-    </div>
+    <ksp-e-service-reward-search
+      (search)="search()"
+      (clear)="clear()"
+    ></ksp-e-service-reward-search>
   </div>
   <br />
   <div class="bg-white p-3">

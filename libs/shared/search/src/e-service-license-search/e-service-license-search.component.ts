@@ -8,11 +8,12 @@ import {
   RequestStatus,
   selfOccupyList,
 } from '@ksp/shared/constant';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'ksp-e-service-license-search',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MatDatepickerModule],
   templateUrl: './e-service-license-search.component.html',
   styleUrls: ['./e-service-license-search.component.scss'],
   providers: providerFactory(EServiceLicenseSearchComponent),

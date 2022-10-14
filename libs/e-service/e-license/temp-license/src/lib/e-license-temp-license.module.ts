@@ -23,6 +23,7 @@ import { TempLicenseApproveListComponent } from './temp-license-approve-list/tem
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
 import { RequestSearchComponent } from '@ksp/shared/search';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   imports: [
@@ -43,6 +44,7 @@ import { RequestSearchComponent } from '@ksp/shared/search';
     ThaiDatePipe,
     RequestSearchComponent,
     SharedFormOthersModule,
+    MatDatepickerModule,
   ],
   declarations: [
     ETempLicenseListComponent,

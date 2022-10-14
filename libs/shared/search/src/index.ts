@@ -11,3 +11,5 @@ export * from './retired-search/retired-search.component';
 export * from './degree-home-search/degree-home-search.component';
 
 export * from './e-service-license-search/e-service-license-search.component';
+
+export * from './e-service-reward-search/e-service-reward-search.component';

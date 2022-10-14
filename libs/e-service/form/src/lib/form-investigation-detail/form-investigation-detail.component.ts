@@ -25,6 +25,7 @@ import {
   EhicsSubcommittee,
   KspFormBaseComponent,
 } from '@ksp/shared/interface';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'e-service-form-investigation-detail',
@@ -43,6 +44,7 @@ import {
     LicenseInfoComponent,
     FileUploadComponent,
     ReactiveFormsModule,
+    MatDatepickerModule,
   ],
   providers: providerFactory(FormInvestigationDetailComponent),
 })
