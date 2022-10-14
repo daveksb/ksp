@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SchoolRetireReason } from '@ksp/shared/constant';
-import { thaiDate } from '@ksp/shared/utility';
 import localForage from 'localforage';
 @Component({
   selector: 'ksp-school-retired-requester',
@@ -14,9 +13,9 @@ export class SchoolRetiredRequesterComponent {
     retiredReason: [null, Validators.required],
     retiredDetail: [null],
   });
+
   SchoolRetireReason = SchoolRetireReason;
   requestNo = '';
-  today = new Date();
   constructor(private router: Router, private fb: FormBuilder) {}
 
   userInfo = {
