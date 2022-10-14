@@ -63,9 +63,9 @@ export const SchoolRequestProcess: RequestProcess[] = [
     processId: 1,
     processName: 'ตรวจสอบเอกสาร',
     status: [
-      { id: 1, sname: '', ename: 'รอการตรวจสอบ' },
-      { id: 2, sname: '', ename: 'ผ่านการตรวจสอบ' },
-      { id: 3, sname: '', ename: 'ไม่ผ่านการตรวจสอบ' },
+      { id: 1, sname: 'รอการตรวจสอบ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'รอการตรวจสอบ', ename: 'รอการตรวจสอบ' },
+      { id: 3, sname: 'รอการตรวจสอบ', ename: 'รอการตรวจสอบ' },
     ],
   },
 
@@ -75,9 +75,9 @@ export const SchoolRequestProcess: RequestProcess[] = [
     processId: 1,
     processName: 'ตรวจสอบเอกสาร',
     status: [
-      { id: 1, sname: '', ename: 'รอการตรวจสอบ' },
-      { id: 2, sname: '', ename: 'ผ่านการตรวจสอบ' },
-      { id: 3, sname: '', ename: 'ไม่ผ่านการตรวจสอบ' },
+      { id: 1, sname: 'รอการตรวจสอบ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'รอการตรวจสอบ', ename: 'รอการตรวจสอบ' },
+      { id: 3, sname: 'รอการตรวจสอบ', ename: 'รอการตรวจสอบ' },
     ],
   },
 
@@ -88,7 +88,7 @@ export const SchoolRequestProcess: RequestProcess[] = [
     processName: 'สร้างใบคำขอ',
     status: [
       { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
-      { id: 1, sname: 'กำลังดำเนินการ', ename: '' },
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
     ],
   },
   {

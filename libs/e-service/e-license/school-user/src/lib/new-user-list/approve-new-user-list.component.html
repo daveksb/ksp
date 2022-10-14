@@ -71,7 +71,7 @@
       <ng-container matColumnDef="requeststatus">
         <th mat-header-cell *matHeaderCellDef>สถานะ</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.requeststatus }}
+          {{ checkStatus(+element.process, +element.status)?.ename }}
         </td>
       </ng-container>
 

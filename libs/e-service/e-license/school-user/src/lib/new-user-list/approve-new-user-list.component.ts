@@ -5,10 +5,12 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
   EsSearchPayload,
+  KspRequest,
   RequestSearchFilter,
   SchoolServiceUserPageType,
 } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
+import { checkStatus } from '@ksp/shared/utility';
 
 @Component({
   templateUrl: './approve-new-user-list.component.html',
@@ -16,7 +18,8 @@ import { ERequestService } from '@ksp/shared/service';
 })
 export class ApproveNewUserListComponent implements AfterViewInit {
   displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<any>();
+  dataSource = new MatTableDataSource<KspRequest>();
+  checkStatus = checkStatus;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -53,15 +56,19 @@ export class ApproveNewUserListComponent implements AfterViewInit {
       row: '500',
     };
 
-    this.eRequestService.EsSearchRequest(payload).subscribe((res) => {
+    this.eRequestService.KspSearchRequest(payload).subscribe((res) => {
       //console.log('res = ', res);
-      this.dataSource.data = res;
-      this.dataSource.sort = this.sort;
+      if (res) {
+        this.dataSource.data = res;
+        this.dataSource.sort = this.sort;
 
-      const sortState: Sort = { active: 'id', direction: 'desc' };
-      this.sort.active = sortState.active;
-      this.sort.direction = sortState.direction;
-      this.sort.sortChange.emit(sortState);
+        const sortState: Sort = { active: 'id', direction: 'desc' };
+        this.sort.active = sortState.active;
+        this.sort.direction = sortState.direction;
+        this.sort.sortChange.emit(sortState);
+      } else {
+        this.clear();
+      }
     });
   }
 

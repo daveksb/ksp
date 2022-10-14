@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
+  KspRequest,
   SchoolRequest,
   SchoolServiceUserPageType,
   SchoolUser,
@@ -25,10 +26,8 @@ export class UserDetailComponent implements OnInit {
   headers = headers;
 
   requestId!: number | null;
-  requestDate!: string | null;
-  requestData!: any;
+  requestData = new KspRequest();
   prefixList$!: Observable<any>;
-  requestNo: string | null = '';
   pageType = 0;
 
   form = this.fb.group({
@@ -69,17 +68,13 @@ export class UserDetailComponent implements OnInit {
   }
 
   loadRequestFromId(id: number) {
-    this.eRequestService.getRequestById(id).subscribe((res) => {
+    this.eRequestService.getKspRequestById(id).subscribe((res) => {
       this.requestData = res;
-      this.requestNo = res.requestno;
-      this.requestDate = thaiDate(new Date(`${res.requestdate}`));
-
       if (res.birthdate) {
         res.birthdate = res.birthdate.split('T')[0];
       }
 
-      const data: any = res;
-      this.form.controls.userInfo.patchValue(data);
+      this.form.controls.userInfo.patchValue(<any>res);
 
       const coordinator = parseJson(res.coordinatorinfo);
       //console.log('coordinator = ', res);
