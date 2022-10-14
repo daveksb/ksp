@@ -87,9 +87,13 @@ export class UserDetailComponent implements OnInit {
     const newUser = new SchoolUser();
 
     newUser.idcardno = this.requestData.idcardno;
+    newUser.prefixth = this.requestData.prefixth;
+    newUser.schemail = this.requestData.email;
+    newUser.position = this.requestData.position;
     newUser.firstnameth = this.requestData.firstnameth;
     newUser.lastnameth = this.requestData.lastnameth;
     newUser.schusername = this.requestData.schoolid;
+    newUser.schoolid = this.requestData.schoolid;
     newUser.schpassword = this.setPassword;
     newUser.schuseractive = '1';
 
