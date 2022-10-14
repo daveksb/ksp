@@ -10,7 +10,7 @@
 
     <div class="bg-white container-xl py-2 px-4">
       <ksp-request-header-info></ksp-request-header-info>
-
+      <hr />
       <ksp-stepper-nav
         [buttonColor]="'#f68b33'"
         [LabelSecond]="'ข้อมูลผู้มีอำนาจแต่งตั้ง'"
@@ -42,6 +42,7 @@
         </div>
 
         <ksp-form-coordinator-info
+          [positionLabel]="'ตำแหน่งทางการบริหาร'"
           formControlName="coordinator"
           [mode]="mode"
           [prefixList]="prefixList$ | async"
