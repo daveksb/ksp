@@ -9,8 +9,9 @@ import {
 import { FormMode } from '@ksp/shared/interface';
 import { EMPTY, switchMap } from 'rxjs';
 import localForage from 'localforage';
-import { encrypt, mapMultiFileInfo, thaiDate } from '@ksp/shared/utility';
+import { mapMultiFileInfo, thaiDate } from '@ksp/shared/utility';
 import { UniRequestService } from '@ksp/shared/service';
+import * as CryptoJs from 'crypto-js';
 
 @Component({
   templateUrl: './uni-register-password.component.html',
@@ -117,7 +118,7 @@ export class UniRegisterPasswordComponent implements OnInit {
     this.router.navigate(['register', 'coordinator']);
   }
 
-  async save() {
+  save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -128,7 +129,11 @@ export class UniRegisterPasswordComponent implements OnInit {
         btnLabel: 'บันทึก',
       },
     });
-    const password = await encrypt(this.form?.value?.password);
+
+    const password = CryptoJs.SHA256(
+      `${this.form?.value?.password}`
+    ).toString();
+
     confirmDialog.componentInstance.confirmed
       .pipe(
         switchMap((res) => {
