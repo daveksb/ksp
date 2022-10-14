@@ -4,6 +4,26 @@
   <div class="row">
     <div
       class="col-6 mb-2"
+      *ngIf="displayMode.includes(FormTypeEnum.foreign) && !isSelfService"
+    >
+      <label
+        class="form-label required"
+        [ngClass]="{ required: mode === 'edit' }"
+        >หมายเลขคุรุสภาสำหรับชาวต่างชาติ
+      </label>
+      <input
+        maxlength="13"
+        class="form-control"
+        type="text"
+        formControlName="idcardno"
+        placeholder="หมายเลข 13 หลัก"
+      />
+    </div>
+  </div>
+
+  <div class="row">
+    <div
+      class="col-6 mb-2"
       *ngIf="displayMode.includes(FormTypeEnum.thai) && !isSelfService"
     >
       <label
@@ -40,7 +60,11 @@
       class="col mb-2"
       *ngIf="displayMode.includes(FormTypeEnum.foreign) || isAddStaff === true"
     >
-      <label class="form-label">หมายเลขหนังสือเดินทาง (Passport Number) </label>
+      <label
+        class="form-label"
+        [ngClass]="{ required: displayMode.includes(FormTypeEnum.foreign) }"
+        >หมายเลขหนังสือเดินทาง (Passport Number)
+      </label>
       <input class="form-control" type="text" formControlName="passportno" />
       <ng-container
         *ngIf="passportNo.invalid && (passportNo.dirty || passportNo.touched)"

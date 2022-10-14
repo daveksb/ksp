@@ -66,14 +66,10 @@ export class SchoolRequestComponent implements OnInit {
   visaClassList!: Observable<any>;
 
   requestId!: number;
-  requestData!: SchoolRequest;
-  requestDate: string = thaiDate(new Date());
+  requestData = new KspRequest();
 
-  //systemType = '2'; // school service
-  //requestType = '3';
   careerType = SchoolRequestSubType.ครู; // 1 ไทย 2 ผู้บริหาร 3 ต่างชาติ
   requestLabel = '';
-  requestNo = '';
   requestProcess!: number;
   requestStatus!: number;
   disableTempSave = true;
@@ -418,8 +414,6 @@ export class SchoolRequestComponent implements OnInit {
   loadRequestFromId(id: number) {
     this.requestService.schGetRequestById(id).subscribe((res) => {
       if (res) {
-        this.requestDate = thaiDate(new Date(`${res.requestdate}`));
-        this.requestNo = `${res.requestno}`;
         this.requestProcess = Number(res.process);
         this.requestStatus = Number(res.status);
         //console.log('current process = ', this.currentProcess);
