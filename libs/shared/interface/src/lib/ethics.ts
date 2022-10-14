@@ -1,5 +1,7 @@
 import { Route } from '@angular/router';
-import { MenuConfig } from './ksp-shared';
+import { ListData } from './input-type';
+import { FileGroup } from './ksp-file';
+import { MenuConfig } from './ksp-menu-config';
 export type EthicsMode = 'accusation' | 'investigation' | 'inquiry' | 'publish';
 
 export interface EthicsCustomRouteData {
@@ -112,10 +114,12 @@ export interface EhicsSubcommittee {
   position: string | null;
   bureau: string | null;
 }
-export const ACCUSATION_FILES = [
-  { name: '1. เอกสารกล่าวหา/กล่าวโทษ', fileid: '', filename: '' },
-  { name: '2. สำเนาบัตรประชาชน	', fileid: '', filename: '' },
+
+export const ACCUSATION_FILES: FileGroup[] = [
+  { name: '1. เอกสารกล่าวหา/กล่าวโทษ', files: [] },
+  { name: '2. สำเนาบัตรประชาชน	', files: [] },
 ];
+
 export const columns = [
   'order',
   'id',
@@ -144,7 +148,7 @@ export interface AccusationList {
   edit: string;
   view: string;
 }
-export const decisions = [
+export const decisions: ListData[] = [
   {
     label: 'มีมูลความผิด วินิจฉัยชี้ขาดความผิดเล็กน้อย',
     name: 'decisions',
