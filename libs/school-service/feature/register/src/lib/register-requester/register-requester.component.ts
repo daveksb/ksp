@@ -24,6 +24,7 @@ export class RegisterRequesterComponent implements OnInit {
   userInfoFormdisplayMode: number = UserInfoFormType.thai;
   school!: any;
   address!: any;
+
   private _form = this.fb.group({
     grant1: [false],
     grant2: [false],
@@ -32,26 +33,29 @@ export class RegisterRequesterComponent implements OnInit {
     grant5: [false],
     requester: [],
   });
+
   public get form() {
     return this._form;
   }
   public set form(value) {
     this._form = value;
   }
+
   constructor(
     private fb: FormBuilder,
     public router: Router,
     private generalInfoService: GeneralInfoService
   ) {}
-  ngOnInit(): void {
-    localForage.getItem('registerSelectedSchool').then((res) => {
-      this.school = res;
-    });
-    localForage.getItem('registerUserInfoFormValue').then((res: any) => {
-      if (res) this.form.controls.requester.patchValue(res);
-    });
 
+  ngOnInit(): void {
+    this.getListData();
+    this.getStoredData();
+  }
+
+  getStoredData() {
     localForage.getItem('registerSelectedSchool').then((res: any) => {
+      console.log('school data = ', res);
+      this.school = res;
       this.address = `บ้านเลขที่ ${res.address} ซอย ${res?.street ?? ''} หมู่ ${
         res?.moo ?? ''
       } ถนน ${res?.road ?? ''} ตำบล ${res.tumbon} อำเภอ ${
@@ -59,8 +63,11 @@ export class RegisterRequesterComponent implements OnInit {
       } จังหวัด ${res.provincename}`;
     });
 
-    this.getListData();
+    localForage.getItem('registerUserInfoFormValue').then((res: any) => {
+      if (res) this.form.controls.requester.patchValue(res);
+    });
   }
+
   getListData() {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.nationalitys$ = this.generalInfoService.getNationality();

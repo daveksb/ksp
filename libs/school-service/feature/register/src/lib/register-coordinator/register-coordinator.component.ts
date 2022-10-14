@@ -11,7 +11,6 @@ import { FileGroup, FormMode } from '@ksp/shared/interface';
 import { GeneralInfoService } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 import localForage from 'localforage';
-import { thaiDate } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
 @Component({
   templateUrl: './register-coordinator.component.html',
@@ -22,6 +21,13 @@ export class CoordinatorInfoComponent implements OnInit {
     coordinator: [],
   });
   savingData: any;
+  prefixList$!: Observable<any>;
+  nationalitys$!: Observable<any>;
+  mode: FormMode = 'edit';
+  userInfoFormdisplayMode: number = UserInfoFormType.thai;
+  school: any;
+  address: any;
+  uniqueNo!: string;
   uploadFileList: FileGroup[] = [
     {
       name: 'หนังสือแต่งตั้งผู้ประสานงาน',
@@ -32,16 +38,7 @@ export class CoordinatorInfoComponent implements OnInit {
       files: [],
     },
   ];
-  requestDate = thaiDate(new Date());
-  requestNumber = '';
 
-  prefixList$!: Observable<any>;
-  nationalitys$!: Observable<any>;
-  mode: FormMode = 'edit';
-  userInfoFormdisplayMode: number = UserInfoFormType.thai;
-  school: any;
-  address: any;
-  uniqueTimestamp: any;
   constructor(
     private router: Router,
     public dialog: MatDialog,
@@ -69,8 +66,9 @@ export class CoordinatorInfoComponent implements OnInit {
       } จังหวัด ${res.provincename}`;
     });
 
-    this.uniqueTimestamp = uuidv4();
+    this.uniqueNo = uuidv4();
   }
+
   getListData() {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.nationalitys$ = this.generalInfoService.getNationality();
@@ -78,7 +76,6 @@ export class CoordinatorInfoComponent implements OnInit {
 
   cancel() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `คุณต้องการยกเลิกรายการใบคำขอ
         ใช่หรือไม่?`,
@@ -95,7 +92,6 @@ export class CoordinatorInfoComponent implements OnInit {
 
   onConfirmed() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
       data: {
         header: 'ยกเลิกรายการสำเร็จ',
       },
@@ -103,7 +99,7 @@ export class CoordinatorInfoComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'login']);
+        this.router.navigate(['/login']);
       }
     });
   }
