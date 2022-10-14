@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
+  FormMode,
   KspApprovePayload,
   KspRequest,
   SchoolServiceUserPageType,
@@ -30,6 +31,8 @@ export class UserDetailComponent implements OnInit {
   prefixList$!: Observable<any>;
   pageType = 0;
   setPassword = '';
+
+  mode: FormMode = 'view';
 
   form = this.fb.group({
     userInfo: [],
@@ -71,6 +74,9 @@ export class UserDetailComponent implements OnInit {
   loadRequestFromId(id: number) {
     this.eRequestService.getKspRequestById(id).subscribe((res) => {
       this.requestData = res;
+      res.status === '1' ? (this.mode = 'edit') : (this.mode = 'view');
+      console.log('status = ', res.status);
+      console.log('mode = ', this.mode);
       if (res.birthdate) {
         res.birthdate = res.birthdate.split('T')[0];
       }

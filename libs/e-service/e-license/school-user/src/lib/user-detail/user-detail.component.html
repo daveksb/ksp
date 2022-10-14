@@ -90,18 +90,18 @@
         [prefixList]="prefixList$ | async"
         formControlName="coordinatorInfo"
       ></ksp-form-coordinator-info>
-      <!-- <ksp-form-coordinator-info [mode]="'view'"></ksp-form-coordinator-info> -->
     </div>
     <br />
     <ksp-form-attachment
       [title]="'หลักฐานเพื่อพิจารณา'"
       mode="view"
-      [groups]="[{ name: 'หนังสือแต่งตั้ง', fileid: '' }]"
+      [groups]="[{ name: 'หนังสือแต่งตั้ง', files: [] }]"
     ></ksp-form-attachment>
   </div>
   <br />
   <div [formGroup]="verifyForm" class="bg-white p-4">
     <e-service-license-check
+      [mode]="mode"
       formControlName="result"
       [headerTitle]="approveTitles[pageType]"
       [choices]="approveChoices[pageType]"

@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { SchoolRequestProcess } from '@ksp/shared/constant';
 import {
   EsSearchPayload,
   KspRequest,
@@ -20,6 +21,7 @@ export class ApproveNewUserListComponent implements AfterViewInit {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<KspRequest>();
   checkStatus = checkStatus;
+  statusList = SchoolRequestProcess.find((i) => i.requestType === 1)?.status;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -46,11 +48,11 @@ export class ApproveNewUserListComponent implements AfterViewInit {
       idcardno: null,
       passportno: null,
       process: null,
-      status: null,
-      schoolid: null,
-      schoolname: null,
-      bureauid: null,
-      requestdatefrom: null,
+      status: params.requeststatus,
+      schoolid: params.schoolinfo?.schoolid,
+      schoolname: params.schoolinfo?.schoolname,
+      bureauid: params.schoolinfo?.bureauid,
+      requestdatefrom: params.requestdatefrom,
       requestdateto: null,
       offset: '0',
       row: '500',
