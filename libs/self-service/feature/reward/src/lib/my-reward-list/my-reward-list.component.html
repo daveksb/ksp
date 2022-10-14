@@ -37,11 +37,37 @@
     <div class="row">
       <div class="col-md mb-2">
         <label class="form-label">วันที่ยื่นขอรางวัล</label>
-        <input type="date" class="form-control" />
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            autocomplete="off"
+            class="form-control form-date"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </div>
       </div>
       <div class="col-md mb-2">
         <label class="form-label">วันที่ประกาศผลรางวัล</label>
-        <input type="date" class="form-control" />
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            autocomplete="off"
+            class="form-control form-date"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </div>
       </div>
     </div>
 

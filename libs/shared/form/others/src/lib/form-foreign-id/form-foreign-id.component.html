@@ -125,15 +125,16 @@
       </div>
       <div class="col">
         <label class="form-label required">วันเดือนปีเกิด</label>
-        <div class="d-flex align-items-baseline">
+        <div class="d-flex align-items-center">
           <input
             matInput
             [matDatepicker]="picker1"
             autocomplete="off"
-            class="form-control me-2"
+            class="form-control form-date"
             formControlName="birthdate"
           />
           <mat-datepicker-toggle
+            class="button-date"
             matSuffix
             [for]="picker1"
           ></mat-datepicker-toggle>
@@ -195,15 +196,16 @@
     <div class="row mb-2">
       <div class="col-6">
         <label class="form-label">วันเดือนปีที่ออกหนังสือเดินทาง</label>
-        <div class="d-flex align-items-baseline">
+        <div class="d-flex align-items-center">
           <input
             matInput
             [matDatepicker]="picker2"
             autocomplete="off"
-            class="form-control me-2"
+            class="form-control form-date"
             formControlName="passportstartdate"
           />
           <mat-datepicker-toggle
+            class="button-date"
             matSuffix
             [for]="picker2"
           ></mat-datepicker-toggle>
@@ -212,15 +214,16 @@
       </div>
       <div class="col-6">
         <label class="form-label">วันเดือนปีที่หนังสือเดินทางหมดอายุ</label>
-        <div class="d-flex align-items-baseline">
+        <div class="d-flex align-items-center">
           <input
             matInput
             [matDatepicker]="picker3"
             autocomplete="off"
-            class="form-control me-2"
+            class="form-control form-date"
             formControlName="passportenddate"
           />
           <mat-datepicker-toggle
+            class="button-date"
             matSuffix
             [for]="picker3"
           ></mat-datepicker-toggle>

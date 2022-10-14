@@ -62,9 +62,9 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
 
     console.log('payload = ', payload);
 
-    this.eRequestService.checkRequest(payload).subscribe((res) => {
+    /* this.eRequestService.checkRequest(payload).subscribe((res) => {
       console.log('check result = ', res);
-    });
+    }); */
   }
 
   checkRequestId() {

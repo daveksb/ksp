@@ -6,8 +6,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import {
-  SelfServiceFormModule,
   FormUploadImageComponent,
+  SelfServiceFormModule,
 } from '@ksp/self-service/form';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';

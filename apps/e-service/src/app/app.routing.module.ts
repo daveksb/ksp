@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ɵɵclassMapInterpolate3 } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LandingPageComponent } from '@ksp/e-service/feature/landing-page';
 import { EServiceLoginComponent } from '@ksp/e-service/feature/login';
@@ -65,30 +65,6 @@ const routes: EthicsCustomRoute[] = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'qualification',
-    data: {
-      menuConfig: eLicenseMenu,
-      headerLabel: 'ระบบใบอนุญาตประกอบวิชาชีพทางการศึกษา',
-    },
-    loadChildren: () =>
-      import('@ksp/e-service/e-license/qualification-approve').then(
-        (m) => m.EServiceELicenseQualificationApproveModule
-      ),
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'knowledge-cert',
-    data: {
-      menuConfig: eLicenseMenu,
-      headerLabel: 'ระบบใบอนุญาตประกอบวิชาชีพทางการศึกษา',
-    },
-    loadChildren: () =>
-      import('@ksp/e-service/e-license/knowledge-cert').then(
-        (m) => m.EServiceELicenseKnowledgeCertModule
-      ),
-    canActivate: [AuthGuard],
-  },
-  {
     path: 'sub-license',
     data: {
       menuConfig: eLicenseMenu,
@@ -97,15 +73,6 @@ const routes: EthicsCustomRoute[] = [
     loadChildren: () =>
       import('@ksp/e-service/e-license/substitute-license').then(
         (m) => m.EServiceELicenseSubstituteLicenseModule
-      ),
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'degree-cert',
-    data: { menuConfig: standardMenu, headerLabel: 'ระบบงานมาตรฐานวิชาชีพ' },
-    loadChildren: () =>
-      import('@ksp/e-service/standard/degree-cert').then(
-        (m) => m.EServiceStandardDegreeCertModule
       ),
     canActivate: [AuthGuard],
   },
@@ -130,6 +97,96 @@ const routes: EthicsCustomRoute[] = [
     loadChildren: () =>
       import('@ksp/e-service/e-license/foreign-license').then(
         (m) => m.EServiceELicenseForeignLicenseModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'school',
+    data: {
+      menuConfig: eLicenseMenu,
+      headerLabel: 'ระบบใบอนุญาตประกอบวิชาชีพทางการศึกษา',
+    },
+    loadChildren: () =>
+      import('@ksp/e-service/e-license/school-user').then(
+        (m) => m.EServiceELicenseSchoolUserModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'self',
+    data: {
+      menuConfig: eLicenseMenu,
+      headerLabel: 'ระบบใบอนุญาตประกอบวิชาชีพทางการศึกษา',
+    },
+    loadChildren: () =>
+      import('@ksp/e-service/e-license/self-user').then(
+        (m) => m.EServiceELicenseSelfUserModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'import-test',
+    data: { menuConfig: standardMenu, headerLabel: 'ระบบงานมาตรฐานวิชาชีพ' },
+    loadChildren: () =>
+      import('@ksp/e-service/standard/test-result').then(
+        (m) => m.EServiceStandardTestResultModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'import-performance',
+    data: {
+      menuConfig: standardMenu,
+      headerLabel: 'ระบบงานมาตรฐานวิชาชีพ',
+    },
+    loadChildren: () =>
+      import('@ksp/e-service/standard/performance-result').then(
+        (m) => m.EServiceStandardPerformanceResultModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'degree-cert',
+    data: { menuConfig: standardMenu, headerLabel: 'ระบบงานมาตรฐานวิชาชีพ' },
+    loadChildren: () =>
+      import('@ksp/e-service/standard/degree-cert').then(
+        (m) => m.EServiceStandardDegreeCertModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'qualification-approve',
+    data: {
+      menuConfig: standardMenu,
+      headerLabel: 'ระบบงานมาตรฐานวิชาชีพ',
+    },
+    loadChildren: () =>
+      import('@ksp/e-service/standard/qualification-approve').then(
+        (m) => m.EServiceStandardQualificationApproveModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'compare-knowledge',
+    data: {
+      menuConfig: standardMenu,
+      headerLabel: 'ระบบงานมาตรฐานวิชาชีพ',
+    },
+    loadChildren: () =>
+      import('@ksp/e-service/standard/compare-knowledge').then(
+        (m) => m.EServiceStandardCompareKnowledgeModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'knowledge-cert',
+    data: {
+      menuConfig: standardMenu,
+      headerLabel: 'ระบบงานมาตรฐานวิชาชีพ',
+    },
+    loadChildren: () =>
+      import('@ksp/e-service/standard/knowledge-cert').then(
+        (m) => m.EServiceStandardKnowledgeCertModule
       ),
     canActivate: [AuthGuard],
   },
@@ -185,30 +242,7 @@ const routes: EthicsCustomRoute[] = [
       ),
     canActivate: [AuthGuard],
   },
-  {
-    path: 'school',
-    data: {
-      menuConfig: eLicenseMenu,
-      headerLabel: 'ระบบใบอนุญาตประกอบวิชาชีพทางการศึกษา',
-    },
-    loadChildren: () =>
-      import('@ksp/e-service/e-license/school-user').then(
-        (m) => m.EServiceELicenseSchoolUserModule
-      ),
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'self',
-    data: {
-      menuConfig: eLicenseMenu,
-      headerLabel: 'ระบบใบอนุญาตประกอบวิชาชีพทางการศึกษา',
-    },
-    loadChildren: () =>
-      import('@ksp/e-service/e-license/self-user').then(
-        (m) => m.EServiceELicenseSelfUserModule
-      ),
-    canActivate: [AuthGuard],
-  },
+
   {
     path: 'one-school-one-innovation',
     data: {
@@ -218,36 +252,6 @@ const routes: EthicsCustomRoute[] = [
     loadChildren: () =>
       import('@ksp/e-service/professional/one-school-one-innovation').then(
         (m) => m.EServiceProfessionalOneSchoolOneInnovationModule
-      ),
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'refund',
-    data: { menuConfig: refundFeeMenu, headerLabel: 'ระบบงานค่าธรรมเนียม' },
-    loadChildren: () =>
-      import('@ksp/e-service/fee/refund-fee').then(
-        (m) => m.EServiceFeeRefundFeeModule
-      ),
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'import-test',
-    data: { menuConfig: standardMenu, headerLabel: 'ระบบงานมาตรฐาน' },
-    loadChildren: () =>
-      import('@ksp/e-service/standard/test-result').then(
-        (m) => m.EServiceStandardTestResultModule
-      ),
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'import-performance',
-    data: {
-      menuConfig: standardMenu,
-      headerLabel: 'ระบบงานมาตรฐาน',
-    },
-    loadChildren: () =>
-      import('@ksp/e-service/standard/performance-result').then(
-        (m) => m.EServiceStandardPerformanceResultModule
       ),
     canActivate: [AuthGuard],
   },
@@ -332,6 +336,15 @@ const routes: EthicsCustomRoute[] = [
     loadChildren: () =>
       import('@ksp/e-service/professional/senior-teacher-reward').then(
         (m) => m.EServiceProfessionalSeniorTeacherRewardModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'refund',
+    data: { menuConfig: refundFeeMenu, headerLabel: 'ระบบงานค่าธรรมเนียม' },
+    loadChildren: () =>
+      import('@ksp/e-service/fee/refund-fee').then(
+        (m) => m.EServiceFeeRefundFeeModule
       ),
     canActivate: [AuthGuard],
   },

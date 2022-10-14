@@ -46,15 +46,16 @@
     <div class="row mb-3">
       <div class="col-6">
         <label class="form-label required">วันที่เริ่มปฏิบัติงาน</label>
-        <div class="d-flex align-items-baseline">
+        <div class="d-flex align-items-center">
           <input
             matInput
             [matDatepicker]="picker1"
             autocomplete="off"
-            class="form-control me-2"
+            class="form-control form-date"
             formControlName="startDate"
           />
           <mat-datepicker-toggle
+            class="button-date"
             matSuffix
             [for]="picker1"
           ></mat-datepicker-toggle>
@@ -63,15 +64,16 @@
       </div>
       <div class="col-6">
         <label class="form-label required">วันที่สิ้นสุดการปฏิบัติงาน</label>
-        <div class="d-flex align-items-baseline">
+        <div class="d-flex align-items-center">
           <input
             matInput
             [matDatepicker]="picker2"
             autocomplete="off"
-            class="form-control me-2"
+            class="form-control form-date"
             formControlName="endDate"
           />
           <mat-datepicker-toggle
+            class="button-date"
             matSuffix
             [for]="picker2"
           ></mat-datepicker-toggle>
@@ -115,15 +117,16 @@
             <label class="form-label text-secondary">{{ item.label }}</label>
           </div>
           <div class="col-3">
-            <div class="d-flex align-items-baseline">
+            <div class="d-flex align-items-center">
               <input
                 matInput
                 [matDatepicker]="picker3"
                 autocomplete="off"
-                class="form-control me-2"
+                class="form-control form-date"
                 formControlName="hiringStatusDate"
               />
               <mat-datepicker-toggle
+                class="button-date"
                 matSuffix
                 [for]="picker3"
               ></mat-datepicker-toggle>

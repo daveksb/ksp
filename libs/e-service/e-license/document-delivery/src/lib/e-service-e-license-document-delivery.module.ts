@@ -20,6 +20,7 @@ import {
   RequestHeaderInfoComponent,
 } from '@ksp/shared/ui';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 export const routes: Routes = [
   {
@@ -80,6 +81,7 @@ export const routes: Routes = [
     RequestHeaderInfoComponent,
     MatDialogModule,
     AddRowButtonComponent,
+    MatDatepickerModule,
   ],
   declarations: [
     BookReceiveListComponent,

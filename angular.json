@@ -60,7 +60,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "2mb",
-                  "maximumError": "2mb"
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -2143,6 +2143,32 @@
       },
       "tags": []
     },
+    "e-service-standard-compare-knowledge": {
+      "projectType": "library",
+      "root": "libs/e-service/standard/compare-knowledge",
+      "sourceRoot": "libs/e-service/standard/compare-knowledge/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-service/standard/compare-knowledge"],
+          "options": {
+            "jestConfig": "libs/e-service/standard/compare-knowledge/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/standard/compare-knowledge/**/*.ts",
+              "libs/e-service/standard/compare-knowledge/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-standard-degree-cert": {
       "root": "libs/e-service/standard/degree-cert",
       "projectType": "library",
@@ -2329,6 +2355,32 @@
         }
       ]
     },
+    "e-service-standard-knowledge-cert": {
+      "projectType": "library",
+      "root": "libs/e-service/standard/knowledge-cert",
+      "sourceRoot": "libs/e-service/standard/knowledge-cert/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-service/standard/knowledge-cert"],
+          "options": {
+            "jestConfig": "libs/e-service/standard/knowledge-cert/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/standard/knowledge-cert/**/*.ts",
+              "libs/e-service/standard/knowledge-cert/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-standard-performance-result": {
       "projectType": "library",
       "root": "libs/e-service/standard/performance-result",
@@ -2349,6 +2401,32 @@
             "lintFilePatterns": [
               "libs/e-service/standard/performance-result/**/*.ts",
               "libs/e-service/standard/performance-result/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-standard-qualification-approve": {
+      "projectType": "library",
+      "root": "libs/e-service/standard/qualification-approve",
+      "sourceRoot": "libs/e-service/standard/qualification-approve/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-service/standard/qualification-approve"],
+          "options": {
+            "jestConfig": "libs/e-service/standard/qualification-approve/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/standard/qualification-approve/**/*.ts",
+              "libs/e-service/standard/qualification-approve/**/*.html"
             ]
           }
         }
@@ -2674,7 +2752,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "2mb"
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -4529,12 +4607,12 @@
                 {
                   "type": "initial",
                   "maximumWarning": "2mb",
-                  "maximumError": "2mb"
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "500kb",
-                  "maximumError": "2mb"
+                  "maximumError": "5mb"
                 }
               ],
               "fileReplacements": [

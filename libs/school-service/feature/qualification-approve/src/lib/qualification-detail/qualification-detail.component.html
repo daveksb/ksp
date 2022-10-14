@@ -13,8 +13,8 @@
     <div class="bg-white py-3 px-4">
       <div>
         <ksp-request-header-info
-          [requestDate]="request.requestdate || ''"
-          [requestNumber]="request.requestno || ''"
+          [requestDate]="requestData.requestdate"
+          [requestNumber]="requestData.requestno"
         ></ksp-request-header-info>
         <hr />
 
@@ -157,7 +157,7 @@
           <mat-tab label="เอกสารหลักฐานประกอบ">
             <ksp-form-multi-attachment
               [groups]="evidenceFiles"
-              [uniqueTimestamp]="uniqueTimestamp"
+              [uniqueTimestamp]="uniqueNo"
             ></ksp-form-multi-attachment>
           </mat-tab>
         </mat-tab-group>
