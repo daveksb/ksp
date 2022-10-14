@@ -9,7 +9,6 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import {
-  EduOccupyList,
   RequestProcess,
   RequestStatus,
   SchoolRequestProcess,
@@ -40,7 +39,7 @@ export class RequestSearchComponent
   implements OnInit
 {
   override form = this.fb.group({
-    requesttype: ['3', Validators.required],
+    requesttype: ['', Validators.required],
     requestno: [''],
     careertype: [''],
     name: [''],
@@ -59,8 +58,8 @@ export class RequestSearchComponent
   @Output() search = new EventEmitter<Partial<SchRequestSearchFilter>>();
   @Input() disableRequestType = false;
   @Input() requestTypeList = SchoolRequestType;
+  @Input() careerTypeList: any[] = [];
 
-  eduOccupyList = EduOccupyList;
   processList: RequestProcess[] = [];
   statusList?: RequestStatus[] = [];
 

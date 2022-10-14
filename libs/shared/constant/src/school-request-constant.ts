@@ -38,7 +38,7 @@ export enum UserInfoFormType {
   'foreign',
 }
 
-export const EduOccupyList = [
+export const careerTypeList = [
   {
     systemId: 2,
     id: 1,
@@ -52,7 +52,7 @@ export const EduOccupyList = [
   {
     systemId: 2,
     id: 5,
-    name: 'อื่นๆ',
+    name: 'ชาวต่างชาติ',
   },
 ];
 
