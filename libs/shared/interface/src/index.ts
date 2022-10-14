@@ -1,5 +1,4 @@
 export * from './lib/input-type';
-export * from './lib/dynamic-component';
 export * from './lib/form-mode';
 export * from './lib/ethics';
 export * from './lib/school-user-page-type';
@@ -10,7 +9,6 @@ export * from './lib/self-request';
 export * from './lib/user-info-form';
 export * from './lib/self-myinfo';
 export * from './lib/self-develop';
-export * from './lib/ksp-shared';
 export * from './lib/ksp-pagination.component';
 export * from './lib/e-search-request';
 export * from './lib/ksp-search';
@@ -23,3 +21,4 @@ export * from './lib/self-license';
 export * from './lib/ksp-approve';
 export * from './lib/university-select';
 export * from './lib/school-info';
+export * from './lib/ksp-menu-config';

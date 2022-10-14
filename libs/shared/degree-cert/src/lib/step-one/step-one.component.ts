@@ -6,17 +6,13 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
-import {
-  DynamicComponent,
-  KspFormBaseComponent,
-  ListData,
-} from '@ksp/shared/interface';
+import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import _ from 'lodash';
-import { debounceTime, lastValueFrom, skip } from 'rxjs';
+import { debounceTime, lastValueFrom } from 'rxjs';
 import { DegreeCertStepOneService } from './step-one.service';
 
 @UntilDestroy()
