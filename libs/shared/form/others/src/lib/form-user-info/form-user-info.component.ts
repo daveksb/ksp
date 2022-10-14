@@ -39,7 +39,8 @@ export class FormUserInfoComponent
   @Input() isAddStaff = false;
   @Input() requiredIdCardNo = true;
 
-  @Output() idCardChange = new EventEmitter<any>();
+  @Output() idCardChange = new EventEmitter<string>();
+  @Output() kuruspaNoChange = new EventEmitter<string>();
 
   RequestTypeEnum = SchoolRequestType;
   validatorMessages = validatorMessages;
@@ -67,10 +68,10 @@ export class FormUserInfoComponent
   }
   ngOnInit(): void {
     // ถ้าเป็น form คนไทยไม่ต้อง validate field เหล่านี้
-    //console.log('display mode = ', this.displayMode);
     if (this.displayMode.includes(UserInfoFormType.thai)) {
       console.log('aaa = ');
       this.form.controls.passportno.clearValidators();
+      this.form.controls.kurupanno.clearValidators();
       this.form.controls.passportstartdate.clearValidators();
       this.form.controls.passportenddate.clearValidators();
       this.form.controls.position.clearValidators();
@@ -91,6 +92,14 @@ export class FormUserInfoComponent
       .subscribe((res) => {
         if (res && res.length === 13) {
           this.idCardChange.emit(res);
+        }
+      });
+
+    this.form.controls.kurupanno.valueChanges
+      .pipe(debounceTime(200), distinctUntilChanged())
+      .subscribe((res) => {
+        if (res && res.length === 13) {
+          this.kuruspaNoChange.emit(res);
         }
       });
   }

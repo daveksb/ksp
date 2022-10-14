@@ -11,7 +11,6 @@ import {
   formatCheckboxData,
   parseJson,
   replaceEmptyWithNull,
-  thaiDate,
 } from '@ksp/shared/utility';
 import {
   CompleteDialogComponent,
@@ -41,7 +40,6 @@ export class AddStaffComponent implements OnInit {
   positionTypes$!: Observable<any>;
   academicTypes$!: Observable<any>;
   schoolId = '0010201056';
-  today = thaiDate(new Date());
   mode: FormMode = 'edit';
   userInfoType = UserInfoFormType.thai;
   searchStaffDone = false;
@@ -310,7 +308,6 @@ export class AddStaffComponent implements OnInit {
 
   onConfirmed() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
         btnLabel: 'บันทึก',
@@ -326,7 +323,6 @@ export class AddStaffComponent implements OnInit {
 
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
       },

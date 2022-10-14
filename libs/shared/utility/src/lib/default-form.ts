@@ -20,6 +20,7 @@ export function createUserInfoForm(fb: FormBuilder) {
   return fb.group({
     id: [],
     idcardno: ['', [Validators.required, Validators.pattern(idCardPattern)]],
+    kurupanno: ['', [Validators.required, Validators.pattern(idCardPattern)]],
     isforeign: [null],
     passportno: [
       null,

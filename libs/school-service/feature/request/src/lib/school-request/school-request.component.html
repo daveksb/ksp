@@ -16,8 +16,8 @@
   <div [formGroup]="form" class="bg-white py-3 px-4">
     <div>
       <ksp-request-header-info
-        [requestDate]="requestDate"
-        [requestNumber]="requestNo"
+        [requestDate]="requestData.requestdate"
+        [requestNumber]="requestData.requestno"
       ></ksp-request-header-info>
       <hr />
 
@@ -28,6 +28,7 @@
 
         <ksp-form-user-info
           (idCardChange)="searchStaffFromIdCard($event)"
+          (kuruspaNoChange)="searchStaffFromIdCard($event)"
           [isDarkMode]="false"
           [prefixList]="prefixList$ | async"
           [nationList]="nationList$ | async"
