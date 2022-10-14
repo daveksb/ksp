@@ -84,6 +84,8 @@ export class ForeignStudentListComponent
   }
   clear() {
     this.form.reset();
+    this.dataSource = [];
+    this.clearPageEvent();
   }
 }
 
