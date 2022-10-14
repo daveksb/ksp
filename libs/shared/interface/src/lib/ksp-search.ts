@@ -1,12 +1,12 @@
 export interface RequestSearchFilter {
-  schoolinfo: SchoolInfo | undefined;
+  schoolinfo: RequestSchoolInfo | undefined;
   requestno: string | undefined;
   name: string | undefined;
   requestdatefrom: string | undefined;
   requeststatus: string | undefined;
 }
 
-export interface SchoolInfo {
+export interface RequestSchoolInfo {
   bureauid: string;
   schoolid: string;
   schoolname: string;

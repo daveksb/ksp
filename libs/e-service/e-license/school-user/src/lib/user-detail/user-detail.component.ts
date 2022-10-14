@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
+  FormMode,
+  KspApprovePayload,
   KspRequest,
   SchoolServiceUserPageType,
   SchoolUser,
@@ -29,6 +31,8 @@ export class UserDetailComponent implements OnInit {
   prefixList$!: Observable<any>;
   pageType = 0;
   setPassword = '';
+
+  mode: FormMode = 'view';
 
   form = this.fb.group({
     userInfo: [],
@@ -70,6 +74,9 @@ export class UserDetailComponent implements OnInit {
   loadRequestFromId(id: number) {
     this.eRequestService.getKspRequestById(id).subscribe((res) => {
       this.requestData = res;
+      res.status === '1' ? (this.mode = 'edit') : (this.mode = 'view');
+      console.log('status = ', res.status);
+      console.log('mode = ', this.mode);
       if (res.birthdate) {
         res.birthdate = res.birthdate.split('T')[0];
       }
@@ -85,7 +92,6 @@ export class UserDetailComponent implements OnInit {
   approveUser() {
     // change process and status of SCH_REQUEST
     const newUser = new SchoolUser();
-
     newUser.idcardno = this.requestData.idcardno;
     newUser.prefixth = this.requestData.prefixth;
     newUser.schemail = this.requestData.email;
@@ -97,8 +103,39 @@ export class UserDetailComponent implements OnInit {
     newUser.schpassword = this.setPassword;
     newUser.schuseractive = '1';
 
-    this.eRequestService.createSchUser(newUser).subscribe((res) => {
+    const approvePayload: KspApprovePayload = {
+      id: `${this.requestId}`,
+      process: '1',
+      status: '2',
+      detail: null,
+      systemtype: '2', // school
+      userid: null,
+      paymentstatus: null,
+    };
+
+    this.eRequestService.KspApproveRequest(approvePayload).subscribe((res) => {
+      console.log('approve result = ', res);
+    });
+
+    this.eRequestService.createSchUser(newUser).subscribe(() => {
       this.completeDialog();
+    });
+  }
+
+  unApproveUser() {
+    console.log('un approve = ');
+    const payload: KspApprovePayload = {
+      id: `${this.requestId}`,
+      process: '1',
+      status: '3',
+      detail: null,
+      systemtype: '2', // school
+      userid: null,
+      paymentstatus: null,
+    };
+
+    this.eRequestService.KspApproveRequest(payload).subscribe((res) => {
+      console.log('un approve result = ', res);
     });
   }
 
@@ -131,11 +168,6 @@ export class UserDetailComponent implements OnInit {
         this.unApproveUser();
       }
     });
-  }
-
-  unApproveUser() {
-    console.log('un approve = ');
-    // change process and status of SCH_REQUEST
   }
 
   completeDialog() {

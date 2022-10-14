@@ -21,3 +21,5 @@ export * from './lib/ksp-request-process';
 export * from './lib/ksp-file';
 export * from './lib/self-license';
 export * from './lib/ksp-approve';
+export * from './lib/university-select';
+export * from './lib/school-info';

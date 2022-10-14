@@ -31,6 +31,7 @@ export class EServiceRequestSearchComponent extends KspFormBaseComponent {
   });
 
   @Input() searchType = '';
+  @Input() statusList: any[] | undefined = [];
   @Output() search = new EventEmitter<any>();
   @Output() clear = new EventEmitter<boolean>();
 

@@ -6,7 +6,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { FormMode, KspRequest } from '@ksp/shared/interface';
+import { FormMode, KspRequest, SchoolInfo } from '@ksp/shared/interface';
 import { EMPTY, switchMap } from 'rxjs';
 import localForage from 'localforage';
 import { thaiDate } from '@ksp/shared/utility';
@@ -22,7 +22,7 @@ export class RegisterPasswordComponent implements OnInit {
   eyeIconClickedSecond = false;
 
   mode: FormMode = 'edit';
-  school: any;
+  school!: SchoolInfo;
   address: any;
   coordinator: any;
   savingData: any;
@@ -147,6 +147,7 @@ export class RegisterPasswordComponent implements OnInit {
             payload.schoolid = this.school.schoolid;
             payload.schoolname = this.school.schoolname;
             payload.bureauid = this.school.bureauid;
+            payload.bureauname = this.school.bureauname;
             payload.schooladdress = this.address;
             //console.log('payload = ', payload);
             return this.requestService.schCreateRequest(payload);

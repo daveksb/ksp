@@ -42,9 +42,9 @@
           <label class="form-label">สถานะ</label>
           <select class="form-select" formControlName="requeststatus">
             <option value="null" selected hidden disabled>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option *ngFor="let s of statusList" [value]="s?.id">
+              {{ s?.ename }}
+            </option>
           </select>
         </div>
       </div>

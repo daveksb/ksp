@@ -77,12 +77,10 @@ export class ERequestService {
     );
   }
 
-  retiredUser(payload: any): Observable<SchoolRequest[]> {
-    return this.http
-      .post(`${environment.apiUrl}/e-service/useractiveupdate`, payload)
-      .pipe(
-        shareReplay(),
-        map((data: any) => data.datareturn)
-      );
+  retiredUser(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/useractiveupdate`,
+      payload
+    );
   }
 }

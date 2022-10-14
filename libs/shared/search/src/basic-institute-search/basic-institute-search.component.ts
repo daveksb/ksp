@@ -20,6 +20,7 @@ export class BasicInstituteSearchComponent extends KspFormBaseComponent {
     schoolid: [],
     schoolname: [],
   });
+
   @Input() bureaus: any;
   @Input() universityType: any;
   @Input() searchType = '';

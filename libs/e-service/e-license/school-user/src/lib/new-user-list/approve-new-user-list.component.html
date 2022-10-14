@@ -8,6 +8,7 @@
   <ksp-request-search
     (clear)="clear()"
     (search)="search($event)"
+    [statusList]="statusList"
   ></ksp-request-search>
   <br />
   <div class="bg-white p-3">
@@ -71,7 +72,10 @@
       <ng-container matColumnDef="requeststatus">
         <th mat-header-cell *matHeaderCellDef>สถานะ</th>
         <td mat-cell *matCellDef="let element">
-          {{ checkStatus(+element.process, +element.status)?.ename }}
+          {{
+            checkStatus(+element.process, +element.status, +element.requesttype)
+              ?.ename
+          }}
         </td>
       </ng-container>
 

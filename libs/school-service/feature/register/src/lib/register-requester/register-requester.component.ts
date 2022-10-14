@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import { FormMode } from '@ksp/shared/interface';
 import { GeneralInfoService } from '@ksp/shared/service';
-import { thaiDate } from '@ksp/shared/utility';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 import localForage from 'localforage';
@@ -17,7 +16,7 @@ import localForage from 'localforage';
 export class RegisterRequesterComponent implements OnInit {
   grant = grants;
   requestNumber = '';
-  requestDate = thaiDate(new Date());
+
   prefixList$!: Observable<any>;
   nationalitys$!: Observable<any>;
   mode: FormMode = 'edit';

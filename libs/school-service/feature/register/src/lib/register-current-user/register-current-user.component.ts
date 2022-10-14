@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { SchoolInfoService } from '@ksp/shared/service';
+import { SchoolInfo } from '@ksp/shared/interface';
+import { GeneralInfoService, SchoolInfoService } from '@ksp/shared/service';
 import localForage from 'localforage';
+import { Observable } from 'rxjs';
 
 @Component({
   templateUrl: './register-current-user.component.html',
@@ -9,11 +11,16 @@ import localForage from 'localforage';
 })
 export class RegisterCurrentUserComponent {
   activeUser = '';
-  school!: any;
+  school!: SchoolInfo;
+  bureausList$!: Observable<any>;
+
   constructor(
     public router: Router,
-    private schoolInfoService: SchoolInfoService
-  ) {}
+    private schoolInfoService: SchoolInfoService,
+    private generalInfoService: GeneralInfoService
+  ) {
+    this.bureausList$ = this.generalInfoService.getBureau();
+  }
 
   next() {
     this.router.navigate(['/register', 'requester']);
@@ -23,7 +30,7 @@ export class RegisterCurrentUserComponent {
     this.router.navigate(['/login']);
   }
 
-  selectedUniversity(school: any) {
+  selectedUniversity(school: SchoolInfo) {
     this.school = school;
     localForage.setItem('registerSelectedSchool', school);
 
