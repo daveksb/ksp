@@ -43,12 +43,11 @@
             <th scope="row" class="fs-5 text-end">รวมทั้งหมด</th>
             <td>
               <div>
-                <div
-                  class="form-control text-center p-2 bg-secondary bg-opacity-25"
+                <input
+                  class="form-control text-center p-2"
                   disabled
-                >
-                  {{ totalCredit | number }}
-                </div>
+                  value="{{ totalCredit | number }}"
+                />
               </div>
             </td>
           </tr>
@@ -106,12 +105,11 @@
             <th scope="row"></th>
             <td class="fs-5 text-end">รวมทั้งหมด</td>
             <td>
-              <div
-                class="form-control text-center bg-secondary bg-opacity-25 p-2"
+              <input
+                class="form-control text-center p-2"
                 disabled
-              >
-                {{ totalStudent | number }}
-              </div>
+                value="{{ totalStudent | number }}"
+              />
             </td>
           </tr>
         </tbody>
