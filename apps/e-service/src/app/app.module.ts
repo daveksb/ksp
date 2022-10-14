@@ -13,8 +13,12 @@ import {
 } from '@ksp/shared/interceptor';
 import { MatMenuModule } from '@angular/material/menu';
 import { FileUploadUrls, File_UPLOAD_URLS } from '@ksp/shared/form/file-upload';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import {
+  MatDialogConfig,
+  MAT_DIALOG_DEFAULT_OPTIONS,
+} from '@angular/material/dialog';
 
 const fileUrls: FileUploadUrls = {
   uploadFile: '/e-service/kspfileinsert',
@@ -51,6 +55,14 @@ const fileUrls: FileUploadUrls = {
     {
       provide: File_UPLOAD_URLS,
       useValue: fileUrls,
+    },
+    { provide: MAT_DATE_LOCALE, useValue: 'th-TH' },
+    {
+      provide: MAT_DIALOG_DEFAULT_OPTIONS,
+      useValue: {
+        ...new MatDialogConfig(),
+        width: '350px',
+      } as MatDialogConfig,
     },
   ],
   bootstrap: [AppComponent],

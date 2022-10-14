@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
@@ -18,6 +19,7 @@ export class ApproveNewUserListComponent implements AfterViewInit {
   dataSource = new MatTableDataSource<any>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   selectedUniversity = '';
 
@@ -31,7 +33,7 @@ export class ApproveNewUserListComponent implements AfterViewInit {
   }
 
   search(params: RequestSearchFilter) {
-    console.log('params  = ', params);
+    //console.log('params  = ', params);
     const payload: EsSearchPayload = {
       systemtype: '2',
       requesttype: '1',
@@ -54,6 +56,12 @@ export class ApproveNewUserListComponent implements AfterViewInit {
     this.eRequestService.EsSearchRequest(payload).subscribe((res) => {
       //console.log('res = ', res);
       this.dataSource.data = res;
+      this.dataSource.sort = this.sort;
+
+      const sortState: Sort = { active: 'id', direction: 'desc' };
+      this.sort.active = sortState.active;
+      this.sort.direction = sortState.direction;
+      this.sort.sortChange.emit(sortState);
     });
   }
 
