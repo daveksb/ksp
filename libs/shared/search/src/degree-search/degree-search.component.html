@@ -7,14 +7,28 @@
         <label class="form-label">สถาบัน / มหาวิทยาลัย</label>
         <select class="form-select" formControlName="institution">
           <option value="null" selected disabled hidden>กรุณาเลือก</option>
-          <option *ngFor="let university of uniUniversityOption" [value]="university.id">{{university.name}}</option>
+          <option
+            *ngFor="let university of uniUniversityOption"
+            [value]="university.id"
+          >
+            {{ university.name }}
+          </option>
         </select>
       </div>
       <div class="col-md-6">
         <label class="form-label">สังกัด / คณะหน่วยงาน </label>
-        <select class="form-select" formControlName="affiliation" (change)="getUniversity.emit()">
+        <select
+          class="form-select"
+          formControlName="affiliation"
+          (change)="getUniversity.emit()"
+        >
           <option value="null" selected disabled hidden>กรุณาเลือก</option>
-          <option *ngFor="let universityType of uniUniversityTypeOption" [value]="universityType.id">{{universityType.name}}</option>
+          <option
+            *ngFor="let universityType of uniUniversityTypeOption"
+            [value]="universityType.id"
+          >
+            {{ universityType.name }}
+          </option>
         </select>
       </div>
     </div>
@@ -35,7 +49,12 @@
         <label class="form-label">ระดับปริญญาทางการศึกษา</label>
         <select class="form-select" formControlName="degreeLevel">
           <option value="null" selected disabled hidden>กรุณาเลือก</option>
-          <option *ngFor="let degreeLevel of degreeLevelList" [value]="degreeLevel.id">{{degreeLevel.name}}</option>
+          <option
+            *ngFor="let degreeLevel of degreeLevelList"
+            [value]="degreeLevel.id"
+          >
+            {{ degreeLevel.name }}
+          </option>
         </select>
       </div>
       <div class="col-md-6">
@@ -56,18 +75,19 @@
 
       <div class="col-md-6">
         <label class="form-label">วันที่ยื่นใบคำขอ</label>
-        <div class="d-flex align-items-baseline">
+        <div class="d-flex align-items-center">
           <input
-            [matDatepicker]="picker1"
+            [matDatepicker]="picker"
             autocomplete="off"
-            class="form-control me-2"
+            class="form-control form-date"
             formControlName="requestsubmitDate"
           />
           <mat-datepicker-toggle
+            class="button-date"
             matSuffix
-            [for]="picker1"
+            [for]="picker"
           ></mat-datepicker-toggle>
-          <mat-datepicker #picker1></mat-datepicker>
+          <mat-datepicker #picker></mat-datepicker>
         </div>
       </div>
     </div>

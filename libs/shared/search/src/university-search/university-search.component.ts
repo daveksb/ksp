@@ -99,7 +99,7 @@ export class UniversitySearchComponent implements OnInit {
         offset,
         row,
       };
-      this.schoolInfoService.seachSchool(payload).subscribe((res: any) => {
+      this.schoolInfoService.searchSchool(payload).subscribe((res: any) => {
         this.Data = this.generateAddressShow(res);
         this.payload = payload;
       });
@@ -160,7 +160,7 @@ export class UniversitySearchComponent implements OnInit {
     payload.offset = parseInt(offset) - parseInt(payload.row);
     payload.offset = payload.offset.toString();
     if (this.data.searchType != 'uni') {
-      this.schoolInfoService.seachSchool(payload).subscribe((res) => {
+      this.schoolInfoService.searchSchool(payload).subscribe((res) => {
         this.currentPage -= 1;
         this.Data = this.generateAddressShow(res);
         this.payload = payload;
@@ -179,7 +179,7 @@ export class UniversitySearchComponent implements OnInit {
     payload.offset = parseInt(offset) + parseInt(payload.row);
     payload.offset = payload.offset.toString();
     if (this.data.searchType != 'uni') {
-      this.schoolInfoService.seachSchool(payload).subscribe((res) => {
+      this.schoolInfoService.searchSchool(payload).subscribe((res) => {
         this.currentPage += 1;
         this.Data = this.generateAddressShow(res);
         this.payload = payload;

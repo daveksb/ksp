@@ -65,8 +65,8 @@ export class CoordinatorInfoComponent implements OnInit {
       this.address = `บ้านเลขที่ ${res.address} ซอย ${res?.street ?? ''} หมู่ ${
         res?.moo ?? ''
       } ถนน ${res?.road ?? ''} ตำบล ${res.tumbon} อำเภอ ${
-        res.amphurName
-      } จังหวัด ${res.provinceName}`;
+        res.amphurname
+      } จังหวัด ${res.provincename}`;
     });
 
     this.uniqueTimestamp = uuidv4();

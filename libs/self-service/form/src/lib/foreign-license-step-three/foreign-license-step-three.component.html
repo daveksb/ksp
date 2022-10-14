@@ -8,7 +8,7 @@
       <ng-container *ngFor="let file of attachFiles; index as i">
         <div class="d-flex">
           <div class="d-flex">
-            <input class="me-2 mt-1" type="checkbox" name="xxx" [formControlName]="i" />
+            <input class="me-2 mt-1" type="checkbox" [formControlName]="i" />
           </div>
 
           <label class="form-label me-3">
@@ -23,7 +23,8 @@
             [filename]="file.filename"
             [fileid]="file.fileid"
             [showDeleteFile]="true"
-            (uploadComplete)="updateComplete($event, file)"></ksp-file-upload>
+            (uploadComplete)="updateComplete($event, file)"
+          ></ksp-file-upload>
         </div>
       </ng-container>
     </ng-container>

@@ -28,7 +28,7 @@
           [title]="'กรุณาแนบหลักฐานเพื่อพิจารณา'"
           [titleClass]="'text-primary'"
           [requestType]="1"
-          [uniqueTimestamp]="uniqueTimestamp"
+          [uniqueTimestamp]="uniqueNo"
           [groups]="retiredFiles"
         ></ksp-form-multi-attachment>
       </div>
@@ -40,8 +40,8 @@
         [showSaveButton]="true"
         [disableSaveButton]="!this.form.valid"
         (prevClicked)="prevPage()"
-        (cancelClicked)="cancel()"
-        (saveClicked)="save()"
+        (cancelClicked)="confirmCancelDialog()"
+        (saveClicked)="confirmSubmitDialog()"
       >
       </ksp-bottom-nav>
     </div>

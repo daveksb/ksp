@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { SchoolInfoService } from '@ksp/shared/service';
 import localForage from 'localforage';
 
-
 @Component({
   selector: 'ksp-school-retired-search',
   templateUrl: './school-retired-search.component.html',
@@ -37,7 +36,6 @@ export class SchoolRetiredSearchComponent {
       schoolid: '0010201056',
     };
     this.schoolInfoService.searchUserLogin(payload).subscribe((res) => {
-      console.log('res = ', res);
       this.data = res;
     });
   }

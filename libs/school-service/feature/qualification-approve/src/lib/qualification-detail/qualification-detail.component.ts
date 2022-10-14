@@ -17,7 +17,13 @@ import {
   GeneralInfoService,
   RequestService,
 } from '@ksp/shared/service';
-import { formatDate, parseJson, thaiDate } from '@ksp/shared/utility';
+import {
+  changeDate,
+  formatDate,
+  mapMultiFileInfo,
+  parseJson,
+  thaiDate,
+} from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { EMPTY, Observable, switchMap } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
@@ -51,15 +57,17 @@ export class QualificationDetailComponent implements OnInit {
   countries$!: Observable<any>;
   nationalitys$!: Observable<any>;
   schoolId = '0010201056';
-
   careerType!: number;
+
+  request: KspRequest = new KspRequest();
+  requestSubType!: number;
   requestId!: number;
   requestData = new KspRequest();
   requestStatus!: number;
   currentProcess!: number;
   otherreason: any;
   refperson: any;
-  evidenceFiles = files;
+  evidenceFiles: FileGroup[] = files;
   mode!: FormMode;
   showEdu2 = false;
   showEdu3 = false;
@@ -124,9 +132,21 @@ export class QualificationDetailComponent implements OnInit {
             form?.patchValue(addressinfo[i]);
           }
         }
+        const json = parseJson(res.fileinfo);
+        if (json && json.file && Array.isArray(json.file)) {
+          this.evidenceFiles.forEach(
+            (group, index) => (group.files = json.file[index])
+          );
+        }
 
-        res.refperson = parseJson(res.refperson);
-        res.otherreason = parseJson(res.otherreason);
+        res.refperson
+          ? (res.refperson = JSON.parse(atob(res.refperson)))
+          : null;
+
+        res.otherreason
+          ? (res.otherreason = JSON.parse(atob(res.otherreason)))
+          : null;
+
         this.refperson = res.refperson;
         this.otherreason = res.otherreason;
         this.mode = 'view';
@@ -258,17 +278,17 @@ export class QualificationDetailComponent implements OnInit {
             if (formData?.addr2?.addressType) formData.addr2.addressType = 2;
             const { refperson } = refPersonForm;
             const { otherreason } = reasonForm;
-            const userInfo = formData.userInfo;
+            const userInfo: Partial<KspRequest> = formData.userInfo;
             userInfo.ref1 = '2';
             userInfo.ref2 = '06';
-            userInfo.ref3 = '1';
+            userInfo.ref3 = `${this.requestSubType}`;
             userInfo.systemtype = '2';
             userInfo.requesttype = '6';
-            userInfo.subtype = `${this.careerType}`;
+            userInfo.careertype = `${this.requestSubType}`;
             userInfo.schoolid = this.schoolId;
-            userInfo.currentprocess = '1';
-            userInfo.requeststatus = '1';
-
+            userInfo.process = '1';
+            userInfo.status = '1';
+            userInfo.birthdate = changeDate(userInfo.birthdate);
             let eduForm = [{ ...formData.edu1, ...{ degreeLevel: 1 } }];
             formData?.edu2
               ? (eduForm = [
@@ -291,6 +311,7 @@ export class QualificationDetailComponent implements OnInit {
                 ])
               : null;
 
+            const file = mapMultiFileInfo(this.evidenceFiles);
             const payload = {
               ...userInfo,
               ...{
@@ -299,8 +320,9 @@ export class QualificationDetailComponent implements OnInit {
               ...{ eduinfo: JSON.stringify(eduForm) },
               ...{ refperson: JSON.stringify(refperson) },
               ...{ otherreason: JSON.stringify(otherreason) },
+              fileinfo: JSON.stringify({ file }),
             };
-            return this.requestService.createRequest(payload);
+            return this.requestService.schCreateRequest(payload);
           }
           return EMPTY;
         })

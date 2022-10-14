@@ -44,7 +44,7 @@ export class SchoolInfoService {
       );
   }
 
-  seachSchool(payload: any): Observable<any> {
+  searchSchool(payload: any): Observable<any> {
     return this.http
       .post(`https://kspapi.oceanicnetwork.net/schschoolsearch.php`, payload)
       .pipe(
