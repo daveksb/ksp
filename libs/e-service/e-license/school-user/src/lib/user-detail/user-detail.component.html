@@ -16,19 +16,34 @@
       <div class="row">
         <div class="col mb-2">
           <label class="form-label">สังกัด</label>
-          <input class="form-control" type="text" disabled />
+          <input
+            class="form-control"
+            [value]="requestData.bureauid"
+            type="text"
+            disabled
+          />
         </div>
 
         <div class="col mb-2">
           <label class="form-label">หน่วยงาน / สถานศึกษา</label>
-          <input class="form-control" type="text" disabled />
+          <input
+            [value]="requestData.schoolname"
+            class="form-control"
+            type="text"
+            disabled
+          />
         </div>
       </div>
 
       <div class="row">
         <div class="col mb-2">
           <label class="form-label">ที่อยู่</label>
-          <input class="form-control" type="text" disabled />
+          <input
+            class="form-control"
+            [value]="requestData.schooladdress"
+            type="text"
+            disabled
+          />
         </div>
       </div>
 

@@ -54,7 +54,7 @@ export class RegisterRequesterComponent implements OnInit {
 
   getStoredData() {
     localForage.getItem('registerSelectedSchool').then((res: any) => {
-      console.log('school data = ', res);
+      //console.log('school data = ', res);
       this.school = res;
       this.address = `บ้านเลขที่ ${res.address} ซอย ${res?.street ?? ''} หมู่ ${
         res?.moo ?? ''
