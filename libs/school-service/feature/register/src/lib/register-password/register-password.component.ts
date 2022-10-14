@@ -9,8 +9,9 @@ import {
 import { FormMode, KspRequest } from '@ksp/shared/interface';
 import { EMPTY, switchMap } from 'rxjs';
 import localForage from 'localforage';
-import { encrypt, thaiDate } from '@ksp/shared/utility';
+import { thaiDate } from '@ksp/shared/utility';
 import { RequestService } from '@ksp/shared/service';
+import * as CryptoJs from 'crypto-js';
 
 @Component({
   templateUrl: './register-password.component.html',
@@ -106,8 +107,8 @@ export class RegisterPasswordComponent implements OnInit {
     this.router.navigate(['register', 'requester']);
   }
 
-  async save() {
-    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+  save() {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
         subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
@@ -116,18 +117,27 @@ export class RegisterPasswordComponent implements OnInit {
         btnLabel: 'บันทึก',
       },
     });
-    const password = await encrypt(this.form?.value?.password);
-    confirmDialog.componentInstance.confirmed
+    //const password = await encrypt(this.form?.value?.password);
+
+    const password = CryptoJs.SHA256(
+      `${this.form.controls.password.value}`
+    ).toString();
+
+    dialog.componentInstance.confirmed
       .pipe(
         switchMap((res) => {
+          console.log('open confirm = ');
           if (res) {
+            const coordinatorinfo = JSON.stringify({
+              ...this.coordinator,
+              password,
+            });
+
             const payload: KspRequest = {
               ...this.savingData,
-              coordinatorinfo: JSON.stringify({
-                ...this.coordinator,
-                password,
-              }),
             };
+
+            payload.coordinatorinfo = coordinatorinfo;
             payload.ref1 = '2';
             payload.ref2 = '01';
             payload.ref3 = '5';
