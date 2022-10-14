@@ -40,8 +40,15 @@
       class="col mb-2"
       *ngIf="displayMode.includes(FormTypeEnum.foreign) || isAddStaff === true"
     >
-      <label class="form-label">หมายเลขหนังสือเดินทาง (Passport Number) </label>
-      <input class="form-control" type="text" formControlName="passportno" />
+      <label class="form-label required"
+        >หมายเลขหนังสือเดินทาง (Passport Number)
+      </label>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="passportno"
+        maxlength="7"
+      />
       <ng-container
         *ngIf="passportNo.invalid && (passportNo.dirty || passportNo.touched)"
       >
