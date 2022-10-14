@@ -20,8 +20,8 @@ export class UniversitySelectComponent extends KspFormBaseComponent {
   @Input() title = 'กรุณาเลือกสถาบันที่ท่านสังกัด';
   @Input() label1 = 'สังกัด';
   @Input() label2 = 'โรงเรียน / สถานศึกษา';
-  @Input() schoolName = '';
-  @Input() bureauName = '';
+  @Input() schoolName: string | null = '';
+  @Input() bureauName: string | null = '';
   @Input() address = '';
   @Input() searchType = '';
   @Input() readonly = false;
@@ -56,8 +56,10 @@ export class UniversitySelectComponent extends KspFormBaseComponent {
       data: {
         searchType: this.searchType,
         subHeader: 'กรุณาเลือกหน่วยงาน/สถานศึกษาที่ท่านสังกัด',
+        bureauList: this.bureauList,
       },
     });
+
     dialog.afterClosed().subscribe((res: SchoolInfo) => {
       if (res) {
         this.selectedUniversity.emit(res);

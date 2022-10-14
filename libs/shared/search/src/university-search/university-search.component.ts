@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import {
   MatDialogModule,
@@ -29,9 +36,9 @@ import { BasicInstituteSearchComponent } from '../basic-institute-search/basic-i
 })
 export class UniversitySearchComponent implements OnInit {
   @Output() confirmed = new EventEmitter<string>();
+
   provinces$!: Observable<any>;
   amphurs$!: Observable<any>;
-  bureaus$!: Observable<any>;
   universityType$!: Observable<any>;
   selectedUniversity = '';
 
@@ -40,7 +47,7 @@ export class UniversitySearchComponent implements OnInit {
     provinceid: null,
     amphurid: null,
     offset: '0',
-    row: '200',
+    row: '25',
   });
 
   schoolInfos!: any;
@@ -53,11 +60,11 @@ export class UniversitySearchComponent implements OnInit {
     public data: {
       searchType: string;
       subHeader: string;
+      bureauList: any[];
     },
     private fb: FormBuilder,
     private addressService: AddressService,
     private schoolInfoService: SchoolInfoService,
-    private generalInfoService: GeneralInfoService,
     private uniinfoService: UniInfoService,
     public dialogRef: MatDialogRef<UniversitySearchComponent>
   ) {}
@@ -69,7 +76,7 @@ export class UniversitySearchComponent implements OnInit {
   getList() {
     this.provinces$ = this.addressService.getProvinces();
     if (this.data.searchType != 'uni') {
-      this.bureaus$ = this.generalInfoService.getBureau();
+      //this.bureaus$ = this.generalInfoService.getBureau();
     } else {
       this.universityType$ = this.uniinfoService.getUniversityType();
     }

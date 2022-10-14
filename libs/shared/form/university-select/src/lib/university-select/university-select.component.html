@@ -5,7 +5,7 @@
       <div class="col">
         <label class="form-label">{{ label1 }}</label>
         <select
-          [ngClass]="{ 'select-disable': bureauName && bureauName.length > 0 }"
+          [ngClass]="{ 'select-disable': bureauName && bureauName.length }"
           class="form-select"
           formControlName="institution"
         >
