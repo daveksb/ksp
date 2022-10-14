@@ -57,9 +57,9 @@ export class RegisterPasswordComponent implements OnInit {
   loadStoredData() {
     localForage.getItem('registerSelectedSchool').then((res: any) => {
       this.school = res;
-      this.address = `${res.address} ซอย ${res?.street ?? ''} หมู่ ${
-        res?.moo ?? ''
-      } ถนน ${res?.road ?? ''} ตำบล ${res.tumbon} อำเภอ ${
+      this.address = `บ้านเลขที่ ${res.address} ซอย ${res?.street ?? '-'} หมู่ ${
+        res?.moo ?? '-'
+      } ถนน ${res?.road ?? '-'} ตำบล ${res.tumbon} อำเภอ ${
         res.amphurname
       } จังหวัด ${res.provincename}`;
     });
@@ -104,7 +104,7 @@ export class RegisterPasswordComponent implements OnInit {
   }
 
   back() {
-    this.router.navigate(['register', 'requester']);
+    this.router.navigate(['register', 'coordinator']);
   }
 
   save() {

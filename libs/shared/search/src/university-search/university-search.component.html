@@ -69,14 +69,18 @@
           <thead class="header__table">
             <tr>
               <th scope="col">เลือก</th>
-              <th scope="col">
+              <th scope="col" style="white-space: nowrap">
                 {{
-                  data.searchType === 'uni' ? 'รหัสมหาวิทยาลัย' : 'รหัสโรงเรียน'
+                  data.searchType === 'uni'
+                    ? 'รหัสมหาวิทยาลัย'
+                    : 'รหัสโรงเรียน/สถานศึกษา'
                 }}
               </th>
               <th scope="col">
                 {{
-                  data.searchType === 'uni' ? 'ชื่อมหาวิทยาลัย' : 'ชื่อโรงเรียน'
+                  data.searchType === 'uni'
+                    ? 'ชื่อมหาวิทยาลัย'
+                    : 'ชื่อโรงเรียน/สถานศึกษา'
                 }}
               </th>
               <th scope="col">ที่อยู่</th>

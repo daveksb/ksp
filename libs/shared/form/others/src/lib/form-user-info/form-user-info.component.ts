@@ -69,6 +69,7 @@ export class FormUserInfoComponent
   ngOnInit(): void {
     // ถ้าเป็น form คนไทยไม่ต้อง validate field เหล่านี้
     if (this.displayMode.includes(UserInfoFormType.thai)) {
+      console.log('aaa = ');
       this.form.controls.passportno.clearValidators();
       this.form.controls.kurupanno.clearValidators();
       this.form.controls.passportstartdate.clearValidators();
@@ -77,6 +78,7 @@ export class FormUserInfoComponent
     }
 
     if (this.displayMode.includes(UserInfoFormType.foreign)) {
+      console.log('bbb = ');
       this.form.controls.idcardno.clearValidators();
       this.form.controls.workphone.clearValidators();
       this.form.controls.contactphone.clearValidators();

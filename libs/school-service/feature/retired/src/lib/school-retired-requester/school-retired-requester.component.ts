@@ -9,6 +9,8 @@ import localForage from 'localforage';
   styleUrls: ['./school-retired-requester.component.scss'],
 })
 export class SchoolRetiredRequesterComponent {
+  school: any;
+  
   form = this.fb.group({
     retiredReason: [null, Validators.required],
     retiredDetail: [null],

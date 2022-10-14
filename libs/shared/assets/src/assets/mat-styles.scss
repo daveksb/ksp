@@ -170,14 +170,7 @@ button.mat-menu-item {
 }
 
 .mat-icon-button {
-  width: fit-content !important;
-  height: fit-content !important;
-  line-height: 0 !important;
   color: #0056ff;
-}
-
-.mat-datepicker-content .mat-calendar {
-  height: auto !important;
 }
 
 .mat-calendar-table-header th {
@@ -186,13 +179,6 @@ button.mat-menu-item {
 
 .mat-calendar-table-header th {
   font-size: 14px !important;
-}
-
-.mat-button,
-.mat-icon-button,
-.mat-stroked-button,
-.mat-flat-button {
-  line-height: 0 !important;
 }
 
 input.mat-input-element {

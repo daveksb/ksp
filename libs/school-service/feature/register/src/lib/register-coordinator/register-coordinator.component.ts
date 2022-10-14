@@ -59,11 +59,11 @@ export class CoordinatorInfoComponent implements OnInit {
     });
 
     localForage.getItem('registerSelectedSchool').then((res: any) => {
-      this.address = `บ้านเลขที่ ${res.address} ซอย ${res?.street ?? ''} หมู่ ${
-        res?.moo ?? ''
-      } ถนน ${res?.road ?? ''} ตำบล ${res.tumbon} อำเภอ ${
-        res.amphurname
-      } จังหวัด ${res.provincename}`;
+      this.address = `บ้านเลขที่ ${res.address} ซอย ${
+        res?.street ?? '-'
+      } หมู่ ${res?.moo ?? '-'} ถนน ${res?.road ?? '-'} ตำบล ${
+        res.tumbon
+      } อำเภอ ${res.amphurname} จังหวัด ${res.provincename}`;
     });
 
     this.uniqueNo = uuidv4();

@@ -14,7 +14,7 @@ import localForage from 'localforage';
   styleUrls: ['./register-requester.component.scss'],
 })
 export class RegisterRequesterComponent implements OnInit {
-  grant = grants;
+  //grant = grants;
   requestNumber = '';
 
   prefixList$!: Observable<any>;
@@ -55,9 +55,9 @@ export class RegisterRequesterComponent implements OnInit {
     localForage.getItem('registerSelectedSchool').then((res: any) => {
       //console.log('school data = ', res);
       this.school = res;
-      this.address = `บ้านเลขที่ ${res.address} ซอย ${res?.street ?? ''} หมู่ ${
-        res?.moo ?? ''
-      } ถนน ${res?.road ?? ''} ตำบล ${res.tumbon} อำเภอ ${
+      this.address = `บ้านเลขที่ ${res.address} ซอย ${res?.street ?? '-'} หมู่ ${
+        res?.moo ?? '-'
+      } ถนน ${res?.road ?? '-'} ตำบล ${res.tumbon} อำเภอ ${
         res.amphurname
       } จังหวัด ${res.provincename}`;
     });
@@ -90,7 +90,8 @@ export class RegisterRequesterComponent implements OnInit {
     this.router.navigate(['/register', 'current-user']);
   }
 }
-export const grants = [
+
+/* export const grants = [
   {
     label: 'ยื่นแบบคำขออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
     name: 'grant1',
@@ -113,4 +114,4 @@ export const grants = [
     name: 'grant5',
     value: false,
   },
-];
+]; */

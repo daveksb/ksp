@@ -66,15 +66,16 @@ add asterisk for required feild
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   z-index: 0;
+  border-right: 0;
 }
 
 .button-date {
   height: 36px;
-  padding: 4px 8px;
-  background: #e9ecef;
+  background: #fff;
   border: 1px solid #ced4da;
   border-radius: 0 0.375rem 0.375rem 0;
-  border-left: 0;
+  display: flex;
+  align-items: center;
 }
 
 .form-select {
