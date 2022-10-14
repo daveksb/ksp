@@ -51,13 +51,10 @@ const routes: Routes = [
   },
   {
     path: 'foreign-student-id',
-    component: UniContainerPageComponent,
-    children: [
-      {
-        path: '',
-        component: ForeignStudentIdComponent,
-      },
-    ],
+    loadChildren: () =>
+    import('@ksp/uni-service/feature/foreign-student-id').then(
+      (m) => m.UniServiceFeatureForeignStudentIdModule
+    ),
   },
   {
     path: 'edit-degree-cert',

@@ -24,7 +24,6 @@ export class SchoolRequestListComponent implements AfterViewInit {
   dataSource = new MatTableDataSource<KspRequest>();
   SchoolRequestSubType = SchoolRequestSubType;
   searchNotFound = false;
-
   checkProcess = checkProcess;
   checkRequestType = checkRequestType;
   checkStatus = checkStatus;

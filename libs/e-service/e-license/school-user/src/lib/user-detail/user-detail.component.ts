@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
-  SchoolRequest,
+  KspRequest,
   SchoolServiceUserPageType,
   SchoolUser,
 } from '@ksp/shared/interface';
@@ -13,7 +13,7 @@ import {
 import { ERequestService, GeneralInfoService } from '@ksp/shared/service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { parseJson, thaiDate } from '@ksp/shared/utility';
+import { parseJson } from '@ksp/shared/utility';
 
 @Component({
   templateUrl: './user-detail.component.html',
@@ -25,11 +25,10 @@ export class UserDetailComponent implements OnInit {
   headers = headers;
 
   requestId!: number | null;
-  requestDate!: string | null;
-  requestData!: any;
+  requestData = new KspRequest();
   prefixList$!: Observable<any>;
-  requestNo: string | null = '';
   pageType = 0;
+  setPassword = '';
 
   form = this.fb.group({
     userInfo: [],
@@ -69,61 +68,32 @@ export class UserDetailComponent implements OnInit {
   }
 
   loadRequestFromId(id: number) {
-    this.eRequestService.getRequestById(id).subscribe((res) => {
+    this.eRequestService.getKspRequestById(id).subscribe((res) => {
       this.requestData = res;
-      this.requestNo = res.requestno;
-      this.requestDate = thaiDate(new Date(`${res.requestdate}`));
-
       if (res.birthdate) {
         res.birthdate = res.birthdate.split('T')[0];
       }
 
-      const data: any = res;
-      this.form.controls.userInfo.patchValue(data);
-
+      this.form.controls.userInfo.patchValue(<any>res);
       const coordinator = parseJson(res.coordinatorinfo);
-      //console.log('coordinator = ', res);
+      //console.log('coordinator = ', coordinator);
+      this.setPassword = coordinator.password;
       this.form.controls.coordinatorInfo.patchValue(coordinator.coordinator);
     });
   }
 
-  /* {
-      idcardno: '1',
-      firstnameth: '2',
-      lastnameth: '3',
-      schemail: '4',
-      schmobile: '5',
-      schbirthdate: '2022-09-06T00:20:13',
-      schusername: '6',
-      schpassword: '7',
-      schuseractive: this.verifySelected,
-      schuserenddate: '2022-09-06T00:20:13',
-      schlastlogintime: '2022-09-06T00:20:13',
-      schlastlogouttime: '2022-09-06T00:20:13',
-      schoolid: '9',
-      position: '10',
-      prefixth: '11',
-      prefixen: '12',
-      firstnameen: '13',
-      lastnameen: '144',
-      permissionright: { field1: 'data1', field2: 'data2', field3: 'data3' },
-      coordinatorinfo: { field1: 'data1', field2: 'data2', field3: 'data3' },
-    }; */
-
   approveUser() {
     // change process and status of SCH_REQUEST
-
     const newUser = new SchoolUser();
 
     newUser.idcardno = this.requestData.idcardno;
     newUser.firstnameth = this.requestData.firstnameth;
     newUser.lastnameth = this.requestData.lastnameth;
     newUser.schusername = this.requestData.schoolid;
-    newUser.schpassword = '1234';
+    newUser.schpassword = this.setPassword;
     newUser.schuseractive = '1';
 
     this.eRequestService.createSchUser(newUser).subscribe((res) => {
-      console.log('new user result = ', res.returnmessage);
       this.completeDialog();
     });
   }
@@ -142,7 +112,6 @@ export class UserDetailComponent implements OnInit {
 
   confirm() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `คุณต้องการบันทึกข้อมูล
         ใช่หรือไม่? `,
@@ -167,7 +136,6 @@ export class UserDetailComponent implements OnInit {
 
   completeDialog() {
     const dialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
       data: {
         header: `บันทึกข้อมูลสำเร็จ`,
         buttonLabel: 'กลับสู่หน้าหลัก',

@@ -108,7 +108,7 @@ export class ForeignStudentIdComponent {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'home']);
+        this.router.navigate(['/foreign-student-id', 'list']);
       }
     });
   }

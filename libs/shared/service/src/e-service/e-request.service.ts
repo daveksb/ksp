@@ -34,11 +34,11 @@ export class ERequestService {
   }
 
   // new API
-  getKspRequestById(requestId: number): Observable<KspRequest> {
+  getKspRequestById(id: number): Observable<KspRequest> {
     return this.http.post<KspRequest>(
       `${environment.apiUrl}/e-service/ksprequestselectbyid`,
       {
-        id: requestId,
+        id,
       }
     );
   }

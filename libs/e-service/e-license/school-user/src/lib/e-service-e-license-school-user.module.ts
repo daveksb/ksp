@@ -24,6 +24,7 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { AllUserListComponent } from './all-user-list/all-user-list.component';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { MatSortModule } from '@angular/material/sort';
 
 export const routes: Routes = [
   {
@@ -64,6 +65,7 @@ export const routes: Routes = [
     CommonModule,
     MatDialogModule,
     MatTableModule,
+    MatSortModule,
     MatIconModule,
     TopNavComponent,
     RouterModule.forChild(routes),

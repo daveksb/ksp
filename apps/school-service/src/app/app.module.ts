@@ -51,7 +51,6 @@ const fileUrls: FileUploadUrls = {
     HttpClientModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    //MatMomentDateModule,
   ],
   providers: [
     {
@@ -69,7 +68,6 @@ const fileUrls: FileUploadUrls = {
       useValue: fileUrls,
     },
     { provide: MAT_DATE_LOCALE, useValue: 'th-TH' },
-
     //{ provide: DateAdapter, useClass: PickDateAdapter },
     {
       provide: MAT_DIALOG_DEFAULT_OPTIONS,
