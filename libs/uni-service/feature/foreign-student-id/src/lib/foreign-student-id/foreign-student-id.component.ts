@@ -33,6 +33,8 @@ export class ForeignStudentIdComponent {
   universityCode = '-';
   uniAddress = '-';
   uniName = '-';
+  uniid=""
+  unitype=""
   constructor(
     public dialog: MatDialog,
     private router: Router,
@@ -48,6 +50,9 @@ export class ForeignStudentIdComponent {
     return !this.form.get('foreignStudent')?.valid;
   }
   getAll() {
+    this.uniid = getCookie('uniId') || '';
+    this.unitype = getCookie('uniType') || '';
+
     this.countries$ = this.addressService.getCountry();
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.uniInfoService
@@ -88,6 +93,8 @@ export class ForeignStudentIdComponent {
             studentInfo.subtype = '5';
             studentInfo.currentprocess = `1`;
             studentInfo.requestStatus = `1`;
+            studentInfo.uniid = this.uniid;
+            studentInfo.unitype = this.unitype;
             studentInfo.fileInfo = JSON.stringify(this.foreignInfo);
             return this.uniRequestService.saveRequestInsert(studentInfo);
           }

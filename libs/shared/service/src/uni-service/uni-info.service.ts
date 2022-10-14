@@ -245,4 +245,7 @@ export class UniInfoService {
       }
     );
   }
+  getUniuniversity(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/kspmasterdata/uniuniversity`);
+  }
 }
