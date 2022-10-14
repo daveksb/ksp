@@ -57,7 +57,7 @@ export class RegisterRequesterComponent implements OnInit {
       //console.log('school data = ', res);
       this.school = res;
       this.address = `บ้านเลขที่ ${res.address} ซอย ${res?.street ?? '-'} หมู่ ${
-        res?.moo ?? ''
+        res?.moo ?? '-'
       } ถนน ${res?.road ?? '-'} ตำบล ${res.tumbon} อำเภอ ${
         res.amphurname
       } จังหวัด ${res.provincename}`;
