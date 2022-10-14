@@ -15,7 +15,7 @@ import localForage from 'localforage';
   styleUrls: ['./register-requester.component.scss'],
 })
 export class RegisterRequesterComponent implements OnInit {
-  grant = grants;
+  //grant = grants;
   requestNumber = '';
   requestDate = thaiDate(new Date());
   prefixList$!: Observable<any>;
@@ -91,7 +91,8 @@ export class RegisterRequesterComponent implements OnInit {
     this.router.navigate(['/register', 'current-user']);
   }
 }
-export const grants = [
+
+/* export const grants = [
   {
     label: 'ยื่นแบบคำขออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
     name: 'grant1',
@@ -114,4 +115,4 @@ export const grants = [
     name: 'grant5',
     value: false,
   },
-];
+]; */

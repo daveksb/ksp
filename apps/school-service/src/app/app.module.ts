@@ -30,7 +30,7 @@ const fileUrls: FileUploadUrls = {
 /* class PickDateAdapter extends NativeDateAdapter {
   override format(date: Date, displayFormat: any): string {
      if (displayFormat === 'input') {
-      return formatDate(date, 'dd-M-yyyy', this.locale);
+      return formatDate(date, 'dd-mm-yyyy', this.locale);
     } else {
       return date.toDateString();
     }
