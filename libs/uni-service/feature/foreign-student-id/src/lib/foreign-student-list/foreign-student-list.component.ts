@@ -6,6 +6,7 @@ import { FormBuilder } from '@angular/forms';
 import { KspPaginationComponent } from '@ksp/shared/interface';
 import { UniInfoService } from '@ksp/shared/service';
 import { stringToThaiDate, thaiDate } from '@ksp/shared/utility';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'ksp-foreign-student-list',
@@ -17,6 +18,7 @@ export class ForeignStudentListComponent
   implements OnInit
 {
   dataSource = [];
+  uniUniversityOption: any[] = [];
   displayedColumns = displayedColumns;
   form = this.fb.group({
     search: [{}],
@@ -25,10 +27,27 @@ export class ForeignStudentListComponent
     super();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.uniInfoService
+      .getUniuniversity()
+      .pipe(
+        map((res) => {
+          return res?.datareturn?.map(({ id, name }: any) => ({ id, name }));
+        })
+      )
+      .subscribe((data) => {
+        this.uniUniversityOption = data;
+      });
+  }
   override search() {
-    const { requestdatefrom, requestdateto, name, requestno, passportno } = this
-      .form.value.search as any;
+    const {
+      requestdatefrom,
+      requestdateto,
+      name,
+      requestno,
+      passportno,
+      uniid,
+    } = this.form.value.search as any;
     this.uniInfoService
       .kspRequestSearchUni({
         requestdatefrom: requestdatefrom || '',
@@ -36,6 +55,7 @@ export class ForeignStudentListComponent
         name: name || '',
         requestno: requestno || '',
         passportno: passportno || '',
+        uniid: uniid || '',
         ...this.tableRecord,
       })
       .subscribe((res) => {
@@ -46,12 +66,18 @@ export class ForeignStudentListComponent
             key: item?.id,
             order: this.pageEvent.pageIndex * this.pageEvent.pageSize + ++index,
             requestNo: item?.requestno,
-            passportNo:  item?.passportno,
-            accountName: [item?.firstnameth,item?.lastnameth].filter((d)=>d).join(" "),
+            passportNo: item?.passportno,
+            accountName: [item?.firstnameth, item?.lastnameth]
+              .filter((d) => d)
+              .join(' '),
             process: '',
             status: '',
-            updateData: item?.updatedata ? thaiDate(new Date(item?.updatedata)):"",
-            requestDate: item?.requestdate ? thaiDate(new Date(item?.requestdate)):"",
+            updateData: item?.updatedata
+              ? thaiDate(new Date(item?.updatedata))
+              : '',
+            requestDate: item?.requestdate
+              ? thaiDate(new Date(item?.requestdate))
+              : '',
           };
         });
       });
