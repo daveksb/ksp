@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
@@ -18,7 +19,12 @@ import localForage from 'localforage';
   styleUrls: ['./accusation-search.component.scss'],
   providers: providerFactory(AccusationSearchComponent),
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatTableModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatTableModule,
+    MatDatepickerModule,
+  ],
 })
 export class AccusationSearchComponent extends KspFormBaseComponent {
   override form = this.fb.group({

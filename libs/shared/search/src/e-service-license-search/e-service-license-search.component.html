@@ -54,11 +54,21 @@
 
       <div class="col pe-1">
         <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ</label>
-        <input
-          class="form-control"
-          type="date"
-          formControlName="requestdatefrom"
-        />
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            autocomplete="off"
+            class="form-control form-date"
+            formControlName="requestdatefrom"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </div>
       </div>
 
       <div class="col-auto px-1">
@@ -68,11 +78,21 @@
 
       <div class="col ps-1">
         <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ</label>
-        <input
-          class="form-control"
-          type="date"
-          formControlName="requestdateto"
-        />
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            autocomplete="off"
+            class="form-control form-date"
+            formControlName="requestdateto"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </div>
       </div>
     </div>
 

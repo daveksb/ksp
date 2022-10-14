@@ -6,6 +6,7 @@ import {
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { Router } from '@angular/router';
@@ -42,6 +43,7 @@ import { providerFactory, thaiDate } from '@ksp/shared/utility';
     LicenseInfoComponent,
     FileUploadComponent,
     ReactiveFormsModule,
+    MatDatepickerModule,
   ],
   providers: providerFactory(InquiryDetailComponent),
 })

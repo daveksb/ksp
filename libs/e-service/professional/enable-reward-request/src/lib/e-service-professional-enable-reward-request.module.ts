@@ -6,6 +6,7 @@ import { EnableRewardRequestListComponent } from './enable-reward-request-list/e
 import { TopNavComponent } from '@ksp/shared/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 const routes: Routes = [
   {
@@ -32,6 +33,7 @@ const routes: Routes = [
     TopNavComponent,
     MatTableModule,
     MatDialogModule,
+    MatDatepickerModule,
   ],
   declarations: [EnableRewardRequestListComponent],
   exports: [EnableRewardRequestListComponent],

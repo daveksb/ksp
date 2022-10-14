@@ -25,11 +25,21 @@
     </div>
     <div class="col-3 mb-3">
       <label class="form-label">วันที่ </label>
-      <input
-        class="form-control"
-        type="date"
-        formControlName="resultcomitteedate"
-      />
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker1"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="resultcomitteedate"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker1"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </div>
     </div>
 
     <div class="col mb-3">
@@ -44,11 +54,21 @@
   <div class="row">
     <div class="col-3 mb-3">
       <label class="form-label">วันที่ </label>
-      <input
-        class="form-control"
-        type="date"
-        formControlName="resulttoaccuserdate"
-      />
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="resulttoaccuserdate"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker2"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </div>
     </div>
 
     <div class="col mb-3">
@@ -63,11 +83,21 @@
   <div class="row">
     <div class="col-3 mb-3">
       <label class="form-label">วันที่ </label>
-      <input
-        class="form-control"
-        type="date"
-        formControlName="resulttoschooldate"
-      />
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker3"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="resulttoschooldate"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker3"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker3></mat-datepicker>
+      </div>
     </div>
     <div class="col mb-3">
       <label class="form-label"><br /> </label>
@@ -81,11 +111,21 @@
   <div class="row">
     <div class="col-3 mb-3">
       <label class="form-label">วันที่ </label>
-      <input
-        class="form-control"
-        type="date"
-        formControlName="resulttoaccuseddate"
-      />
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker4"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="resulttoaccuseddate"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker4"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker4></mat-datepicker>
+      </div>
     </div>
 
     <div class="col mb-3">

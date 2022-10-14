@@ -13,6 +13,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import { MatTableModule } from '@angular/material/table';
 import { RefundConfirmComponent } from './refund-confirm/refund-confirm.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 const routes: Routes = [
   {
@@ -57,6 +58,7 @@ const routes: Routes = [
     BottomNavComponent,
     MatTableModule,
     RouterModule.forChild(routes),
+    MatDatepickerModule,
   ],
   declarations: [
     RefundListComponent,
