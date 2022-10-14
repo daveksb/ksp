@@ -60,22 +60,14 @@ export class FormCoordinatorInfoComponent
     // ถ้าเป็น form คนไทยไม่ต้อง validate field เหล่านี้
     //console.log('display mode = ', this.displayMode);
     this.form.controls.sex.clearValidators();
-    //this.form.controls.idcardno.clearValidators();
     this.form.controls.birthdate.clearValidators();
+
     if (this.displayMode.includes(UserInfoFormType.thai)) {
       this.form.controls.passportno.clearValidators();
       this.form.controls.passportstartdate.clearValidators();
       this.form.controls.passportenddate.clearValidators();
       this.form.controls.position.clearValidators();
-    }
-
-    if (this.displayMode.includes(UserInfoFormType.foreign)) {
-      this.form.controls.idcardno.clearValidators();
-      this.form.controls.workphone.clearValidators();
-      this.form.controls.contactphone.clearValidators();
-      this.form.controls.position.clearValidators();
-      this.form.controls.sex.clearValidators();
-      this.form.controls.email.clearValidators();
+      this.form.controls.kurupanno.clearValidators();
     }
   }
   prefixChanged(evt: any) {

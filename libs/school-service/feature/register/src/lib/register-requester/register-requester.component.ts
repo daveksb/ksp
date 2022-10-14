@@ -5,7 +5,7 @@ import { UserInfoFormType } from '@ksp/shared/constant';
 import { FormMode } from '@ksp/shared/interface';
 import { GeneralInfoService } from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 import localForage from 'localforage';
 

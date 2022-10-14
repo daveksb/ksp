@@ -40,10 +40,14 @@ export class SchoolServiceLoginComponent implements OnInit {
           this.loginFail = true;
           return;
         }
+
+        console.log('red = ', res);
+
         this.schoolServiceFeatureLoginService.config = res;
         setCookie('userToken', res.schUserToken, 1);
         setCookie('firstNameTh', res.firstNameTh, 1);
         setCookie('lastNameTh', res.lastNameTh, 1);
+        setCookie('schoolId', res.schoolId, 1);
         this.router.navigate(['/temp-license', 'list']);
       });
   }
