@@ -31,7 +31,6 @@ export class TempLicenseApproveComponent {
 
   save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูล
         ใช่หรือไม่? `,

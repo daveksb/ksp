@@ -85,9 +85,10 @@ export class ETempLicenseListComponent implements AfterViewInit {
     this.form.controls.search.patchValue({ requesttype: '3' });
   }
 
-  goToDetail(item: SchoolRequest) {
+  goToDetail(item: KspRequest) {
+    //console.log('item = ', item);
     this.router.navigate(['/temp-license', 'detail', item.id], {
-      queryParams: { subtype: item.subtype },
+      queryParams: { subtype: item.careertype },
     });
   }
 }

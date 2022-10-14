@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { KspApprovePayload } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import localForage from 'localforage';
+import { KspApprovePersistData } from '../e-temp-license-detail/e-temp-license-detail.component';
 
 @UntilDestroy()
 @Component({
@@ -18,12 +20,10 @@ import localForage from 'localforage';
 })
 export class TempLicenseCheckConfirmComponent implements OnInit {
   requestId!: number;
-  requestDate!: string | null;
-  requestNo!: string | null;
-  previousForm: any;
+  saveData!: KspApprovePersistData;
 
   form = this.fb.group({
-    approveResult: [],
+    approveResult: [null, Validators.required],
     returnDate: [],
     rejectReason: [],
   });
@@ -38,33 +38,27 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
 
   ngOnInit(): void {
     localForage.getItem('checkRequestData').then((res: any) => {
-      this.requestDate = res.requestDate;
-      this.requestNo = res.requestNo;
-      this.previousForm = res;
+      this.saveData = res;
     });
     this.checkRequestId();
   }
 
   save() {
-    //console.log('payload = ', this.form.value);
-
-    const { requestNo, requestDate, ...res } = this.previousForm;
-
-    const payload = {
-      ...res,
-      ...{
-        checksubresult: JSON.stringify({
-          ...res.checksubresult,
-          ...{ approveResult: this.form.value },
-        }),
-      },
+    console.log('save data = ', this.saveData);
+    console.log('form = ', this.form.value);
+    const payload: KspApprovePayload = {
+      id: this.saveData.requestData.id,
+      process: '3',
+      status: this.form.controls.approveResult.value,
+      detail: JSON.stringify(this.saveData.checkDetail),
+      systemtype: '2', // school
+      userid: null,
+      paymentstatus: null,
     };
 
-    console.log('payload = ', payload);
-
-    /* this.eRequestService.checkRequest(payload).subscribe((res) => {
-      console.log('check result = ', res);
-    }); */
+    this.eRequestService.KspApproveRequest(payload).subscribe((res) => {
+      console.log('result = ', res);
+    });
   }
 
   checkRequestId() {
@@ -81,32 +75,29 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
     this.router.navigate(['/temp-license', 'detail', this.requestId]);
   }
 
-  submit() {
-    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
+  confirmDialog() {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยืนยันข้อมูล
         ใช่หรือไม่? `,
       },
     });
 
-    confirmDialog.componentInstance.confirmed.subscribe((res) => {
+    dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        //this.onCompleted();
         this.save();
       }
     });
   }
 
-  onCompleted() {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '375px',
+  completeDialog() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: `บันทึกข้อมูลสำเร็จ`,
       },
     });
 
-    completeDialog.componentInstance.completed.subscribe((res) => {
+    dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
         this.router.navigate(['/temp-license', 'list']);
       }

@@ -16,6 +16,11 @@ import { Observable } from 'rxjs';
 import { TempLicenseDetailService } from './e-temp-license-detail.service';
 import localForage from 'localforage';
 import { FileGroup, KspRequest } from '@ksp/shared/interface';
+
+export interface KspApprovePersistData {
+  checkDetail: any;
+  requestData: KspRequest;
+}
 @UntilDestroy()
 @Component({
   selector: 'e-service-temp-license-detail',
@@ -93,25 +98,18 @@ export class ETempLicenseDetailComponent implements OnInit {
 
   // save data to indexed db
   persistData() {
-    const checkSubResult = {
-      checkdate: new Date().toISOString().split('.')[0],
-      checkResult: this.form.controls.checkResult.value,
-    };
     //console.log('check sub result = ', checkSubResult);
-    const payload = {
-      id: `${this.requestId}`,
-      checksubresult: checkSubResult,
-      checkfinalresult: null,
-      checkhistory: null,
-      approveresult: null,
+    const saveData: KspApprovePersistData = {
+      checkDetail: this.form.controls.checkResult.value,
       requestData: this.requestData,
     };
-    localForage.setItem('checkRequestData', payload);
+    localForage.setItem('checkRequestData', saveData);
   }
 
   checkRequestId() {
     this.route.paramMap.pipe(untilDestroyed(this)).subscribe((params) => {
       this.requestId = Number(params.get('id'));
+      console.log('req id = ', this.requestId);
       if (this.requestId) {
         this.loadRequestFromId(this.requestId);
       }
