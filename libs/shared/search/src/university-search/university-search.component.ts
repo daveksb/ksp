@@ -6,6 +6,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { SchoolInfo } from '@ksp/shared/interface';
 import {
   AddressService,
   GeneralInfoService,
@@ -14,8 +15,6 @@ import {
 } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 import { BasicInstituteSearchComponent } from '../basic-institute-search/basic-institute-search.component';
-
-/* export type SearchType = 'uni' | 'school'; */
 
 @Component({
   templateUrl: './university-search.component.html',
@@ -29,8 +28,6 @@ import { BasicInstituteSearchComponent } from '../basic-institute-search/basic-i
   ],
 })
 export class UniversitySearchComponent implements OnInit {
-  /* @Input() searchType = ''; */
-  /* @Input() subHeader = ''; */
   @Output() confirmed = new EventEmitter<string>();
   provinces$!: Observable<any>;
   amphurs$!: Observable<any>;
@@ -43,10 +40,10 @@ export class UniversitySearchComponent implements OnInit {
     provinceid: null,
     amphurid: null,
     offset: '0',
-    row: '20',
+    row: '200',
   });
 
-  Data: any[] = [];
+  schoolInfos!: any;
   currentPage!: number;
   lastPage!: number;
   payload: any;
@@ -66,10 +63,9 @@ export class UniversitySearchComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.Data = [];
     this.getList();
-    this.form.valueChanges.subscribe((res) => console.log(res));
   }
+
   getList() {
     this.provinces$ = this.addressService.getProvinces();
     if (this.data.searchType != 'uni') {
@@ -99,8 +95,9 @@ export class UniversitySearchComponent implements OnInit {
         offset,
         row,
       };
-      this.schoolInfoService.searchSchool(payload).subscribe((res: any) => {
-        this.Data = this.generateAddressShow(res);
+
+      this.schoolInfoService.searchSchool(payload).subscribe((res) => {
+        this.schoolInfos = this.generateAddressShow(res);
         this.payload = payload;
       });
     } else {
@@ -114,13 +111,13 @@ export class UniversitySearchComponent implements OnInit {
         row,
       };
       this.uniinfoService.searchUniversity(payload).subscribe((res: any) => {
-        this.Data = this.generateAddressShow(res);
+        this.schoolInfos = this.generateAddressShow(res);
         this.payload = payload;
       });
     }
   }
-  generateAddressShow(res: any[]) {
-    res.forEach((item: any) => {
+  generateAddressShow(schoolInfos: SchoolInfo[]) {
+    schoolInfos.forEach((item: any) => {
       const address = this.haveValue(item.address) ? item.address : '';
       const moo = this.haveValue(item.moo) ? 'หมู่ ' + item.moo : '';
       const street = this.haveValue(item.street) ? 'ซอย ' + item.street : '';
@@ -134,7 +131,7 @@ export class UniversitySearchComponent implements OnInit {
         : '';
       item.addressShow = `${address} ${moo} ${street} ${road} ${tumbon} ${amphur}  ${province}`;
     });
-    return res;
+    return schoolInfos;
   }
   haveValue(value: any) {
     if (value && value !== '-') return true;
@@ -142,7 +139,7 @@ export class UniversitySearchComponent implements OnInit {
   }
 
   clear() {
-    this.Data = [];
+    this.schoolInfos = [];
     this.form.reset();
     this.form.patchValue({
       offset: '0',
@@ -162,13 +159,13 @@ export class UniversitySearchComponent implements OnInit {
     if (this.data.searchType != 'uni') {
       this.schoolInfoService.searchSchool(payload).subscribe((res) => {
         this.currentPage -= 1;
-        this.Data = this.generateAddressShow(res);
+        this.schoolInfos = this.generateAddressShow(res);
         this.payload = payload;
       });
     } else {
       this.uniinfoService.searchUniversity(payload).subscribe((res: any) => {
         this.currentPage -= 1;
-        this.Data = this.generateAddressShow(res);
+        this.schoolInfos = this.generateAddressShow(res);
         this.payload = payload;
       });
     }
@@ -178,16 +175,17 @@ export class UniversitySearchComponent implements OnInit {
     const { offset, ...payload } = this.payload;
     payload.offset = parseInt(offset) + parseInt(payload.row);
     payload.offset = payload.offset.toString();
+
     if (this.data.searchType != 'uni') {
       this.schoolInfoService.searchSchool(payload).subscribe((res) => {
         this.currentPage += 1;
-        this.Data = this.generateAddressShow(res);
+        this.schoolInfos = this.generateAddressShow(res);
         this.payload = payload;
       });
     } else {
       this.uniinfoService.searchUniversity(payload).subscribe((res: any) => {
         this.currentPage += 1;
-        this.Data = this.generateAddressShow(res);
+        this.schoolInfos = this.generateAddressShow(res);
         this.payload = payload;
       });
     }

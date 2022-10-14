@@ -15,7 +15,7 @@
           <ng-container *ngIf="!bureauName">
             <option value="null" selected disabled hidden>กรุณาเลือก</option>
             <option
-              *ngFor="let bureau of bureaus$ | async"
+              *ngFor="let bureau of bureauList"
               [value]="bureau?.bureauId"
             >
               {{ bureau?.bureauName }}

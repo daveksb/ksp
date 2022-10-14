@@ -63,16 +63,19 @@ export function toLowercaseProp(input: any) {
   }, {});
 }
 
-export function checkProcess(processId: number) {
+export function checkProcess(processId: number, requestType = 3) {
   const process = SchoolRequestProcess.find((p) => {
-    //return p.processId === processId && p.requestType === 3;
-    return p.processId === processId;
+    return p.processId === processId && p.requestType === requestType;
   });
   return process;
 }
 
-export function checkStatus(processId: number, statusId: number) {
-  const process = checkProcess(processId);
+export function checkStatus(
+  processId: number,
+  statusId: number,
+  requestType = 3
+) {
+  const process = checkProcess(processId, requestType);
   const status = process?.status.find((s) => {
     return s.id == statusId;
   });

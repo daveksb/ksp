@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { SchoolInfo } from '@ksp/shared/interface';
 import { SchoolInfoService } from '@ksp/shared/service';
 import localForage from 'localforage';
 
@@ -9,7 +10,7 @@ import localForage from 'localforage';
 })
 export class RegisterCurrentUserComponent {
   activeUser = '';
-  school!: any;
+  school!: SchoolInfo;
   constructor(
     public router: Router,
     private schoolInfoService: SchoolInfoService
@@ -23,7 +24,7 @@ export class RegisterCurrentUserComponent {
     this.router.navigate(['/login']);
   }
 
-  selectedUniversity(school: any) {
+  selectedUniversity(school: SchoolInfo) {
     this.school = school;
     localForage.setItem('registerSelectedSchool', school);
 
