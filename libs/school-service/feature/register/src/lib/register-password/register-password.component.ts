@@ -9,8 +9,9 @@ import {
 import { FormMode, KspRequest } from '@ksp/shared/interface';
 import { EMPTY, switchMap } from 'rxjs';
 import localForage from 'localforage';
-import { encrypt, thaiDate } from '@ksp/shared/utility';
+import { thaiDate } from '@ksp/shared/utility';
 import { RequestService } from '@ksp/shared/service';
+import * as CryptoJs from 'crypto-js';
 
 @Component({
   templateUrl: './register-password.component.html',
@@ -25,8 +26,6 @@ export class RegisterPasswordComponent implements OnInit {
   address: any;
   coordinator: any;
   savingData: any;
-  requestDate = thaiDate(new Date());
-  requestNumber = '';
 
   form = this.fb.group({
     password: [null, [Validators.required, Validators.minLength(8)]],
@@ -39,13 +38,30 @@ export class RegisterPasswordComponent implements OnInit {
     private fb: FormBuilder,
     private requestService: RequestService
   ) {}
+
   get disableBtn() {
     const { password, repassword } = this.form.getRawValue();
     return password !== repassword || !password || !repassword;
   }
+
   ngOnInit(): void {
-    localForage.getItem('registerSelectedSchool').then((res) => {
+    this.loadStoredData();
+  }
+
+  clearStoredData() {
+    localForage.removeItem('registerSelectedSchool');
+    localForage.removeItem('registerUserInfoFormValue');
+    localForage.removeItem('registerCoordinatorInfoFormValue');
+  }
+
+  loadStoredData() {
+    localForage.getItem('registerSelectedSchool').then((res: any) => {
       this.school = res;
+      this.address = `${res.address} ซอย ${res?.street ?? ''} หมู่ ${
+        res?.moo ?? ''
+      } ถนน ${res?.road ?? ''} ตำบล ${res.tumbon} อำเภอ ${
+        res.amphurname
+      } จังหวัด ${res.provincename}`;
     });
 
     localForage.getItem('registerUserInfoFormValue').then((res) => {
@@ -55,19 +71,10 @@ export class RegisterPasswordComponent implements OnInit {
     localForage.getItem('registerCoordinatorInfoFormValue').then((res) => {
       this.coordinator = res;
     });
-
-    localForage.getItem('registerSelectedSchool').then((res: any) => {
-      this.address = `บ้านเลขที่ ${res.address} ซอย ${res?.street ?? ''} หมู่ ${
-        res?.moo ?? ''
-      } ถนน ${res?.road ?? ''} ตำบล ${res.tumbon} อำเภอ ${
-        res.amphurname
-      } จังหวัด ${res.provincename}`;
-    });
   }
 
-  cancel() {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
+  confirmCancelDialog() {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยกเลิกรายการใบคำขอ
         ใช่หรือไม่?`,
@@ -75,22 +82,21 @@ export class RegisterPasswordComponent implements OnInit {
       },
     });
 
-    dialogRef.componentInstance.confirmed.subscribe((res) => {
+    dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.onConfirmed();
+        this.cancelCompleteDialog();
       }
     });
   }
 
-  onConfirmed() {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
+  cancelCompleteDialog() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: 'ยกเลิกรายการสำเร็จ',
       },
     });
 
-    completeDialog.componentInstance.completed.subscribe((res) => {
+    dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
         this.router.navigate(['/login']);
       }
@@ -101,9 +107,8 @@ export class RegisterPasswordComponent implements OnInit {
     this.router.navigate(['register', 'requester']);
   }
 
-  async save() {
-    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
+  save() {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
         subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
@@ -112,18 +117,25 @@ export class RegisterPasswordComponent implements OnInit {
         btnLabel: 'บันทึก',
       },
     });
-    const password = await encrypt(this.form?.value?.password);
-    confirmDialog.componentInstance.confirmed
+
+    const password = CryptoJs.SHA256(
+      `${this.form.controls.password.value}`
+    ).toString();
+
+    dialog.componentInstance.confirmed
       .pipe(
         switchMap((res) => {
           if (res) {
+            const coordinatorinfo = JSON.stringify({
+              ...this.coordinator,
+              password,
+            });
+
             const payload: KspRequest = {
               ...this.savingData,
-              coordinatorinfo: JSON.stringify({
-                ...this.coordinator,
-                password,
-              }),
             };
+
+            payload.coordinatorinfo = coordinatorinfo;
             payload.ref1 = '2';
             payload.ref2 = '01';
             payload.ref3 = '5';
@@ -132,36 +144,38 @@ export class RegisterPasswordComponent implements OnInit {
             payload.careertype = '5';
             payload.process = '1';
             payload.status = '1';
+            payload.schoolid = this.school.schoolid;
+            payload.schoolname = this.school.schoolname;
+            payload.bureauid = this.school.bureauid;
+            payload.schooladdress = this.address;
+            //console.log('payload = ', payload);
             return this.requestService.schCreateRequest(payload);
           }
           return EMPTY;
         })
       )
-      .subscribe((res) => {
+      .subscribe((res: any) => {
         if (res) {
           const requestNo = res?.requestno;
-          this.showCompleteDialog(requestNo);
+          this.submitCompleteDialog(requestNo);
         }
       });
   }
 
-  showCompleteDialog(requestNo: string) {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '375px',
+  submitCompleteDialog(requestNo: string) {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
-        content: `วันที่ : ${this.requestDate}
+        content: `วันที่ : ${thaiDate(new Date())}
         เลขที่ใบคำขอ : ${requestNo}`,
         subContent: `กรุณาตรวจสอบสถานะใบคำขอผ่านทางอีเมล
         ผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },
     });
 
-    completeDialog.componentInstance.completed.subscribe((res) => {
+    dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        localForage.removeItem('registerSelectedSchool');
-        localForage.removeItem('registerUserInfoFormValue');
-        localForage.removeItem('registerCoordinatorInfoFormValue');
+        this.clearStoredData();
         this.router.navigate(['/login']);
       }
     });

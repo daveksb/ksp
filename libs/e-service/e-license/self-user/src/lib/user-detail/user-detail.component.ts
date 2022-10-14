@@ -85,7 +85,7 @@ export class UserDetailComponent implements OnInit {
 
     this.form2.controls.verifyResult.valueChanges.subscribe((res: any) => {
       this.verifySelected = Number(res['result']);
-      console.log(' //this.form.valid;', this.verifySelected);
+      //console.log(' //this.form.valid;', this.verifySelected);
     });
 
     this.route.queryParams.subscribe((res) => {

@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { setCookie } from '@ksp/shared/utility';
 import { SchoolServiceFeatureLoginService } from '../school-service-feature-login.service';
+import * as CryptoJs from 'crypto-js';
 
 @Component({
   selector: 'school-service-login',
@@ -13,7 +14,7 @@ export class SchoolServiceLoginComponent implements OnInit {
   loginFail = false;
 
   form = this.fb.group({
-    user: [],
+    login: [],
   });
 
   constructor(
@@ -29,8 +30,11 @@ export class SchoolServiceLoginComponent implements OnInit {
   }
 
   login() {
+    const payload: any = this.form.controls.login.value;
+    payload.password = CryptoJs.SHA256(`${payload.password}`).toString();
+
     this.schoolServiceFeatureLoginService
-      .validateLogin(this.form.value.user)
+      .validateLogin(payload)
       .subscribe((res) => {
         if (res.returnCode == 99) {
           this.loginFail = true;

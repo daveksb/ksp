@@ -8,8 +8,8 @@
 
   <div class="bg-white p-3">
     <ksp-request-header-info
-      [requestDate]="requestDate"
-      [requestNumber]="requestNo"
+      [requestDate]="requestData.requestdate"
+      [requestNumber]="requestData.requestno"
     ></ksp-request-header-info>
     <hr />
     <div class="px-4 py-2">
@@ -21,14 +21,24 @@
 
         <div class="col mb-2">
           <label class="form-label">หน่วยงาน / สถานศึกษา</label>
-          <input class="form-control" type="text" disabled />
+          <input
+            [value]="requestData.schoolname"
+            class="form-control"
+            type="text"
+            disabled
+          />
         </div>
       </div>
 
       <div class="row">
         <div class="col mb-2">
           <label class="form-label">ที่อยู่</label>
-          <input class="form-control" type="text" disabled />
+          <input
+            class="form-control"
+            [value]="requestData.schooladdress"
+            type="text"
+            disabled
+          />
         </div>
       </div>
 

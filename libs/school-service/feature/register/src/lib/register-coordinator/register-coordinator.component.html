@@ -9,12 +9,7 @@
     </div>
 
     <div class="bg-white container-xl py-2 px-4">
-      <ksp-request-header-info
-        [requestDate]="requestDate"
-        [requestNumber]="requestNumber"
-      ></ksp-request-header-info>
-
-      <hr />
+      <ksp-request-header-info></ksp-request-header-info>
 
       <ksp-stepper-nav
         [buttonColor]="'#f68b33'"
@@ -62,7 +57,7 @@
           [title]="'กรุณาแนบหลักฐานเพื่อการพิจารณา'"
           [requestType]="1"
           [groups]="uploadFileList"
-          [uniqueTimestamp]="uniqueTimestamp"
+          [uniqueTimestamp]="uniqueNo"
         ></ksp-form-multi-attachment>
       </div>
 
