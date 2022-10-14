@@ -207,7 +207,7 @@
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
         <td mat-cell *matCellDef="let element">
-          <div *ngIf="element.requestfor === '2'; else thaiPeople">
+          <div *ngIf="element.isforeign === '1'; else thaiPeople">
             {{ element.firstnameen }} {{ element.lastnameen }}
           </div>
           <ng-template #thaiPeople>

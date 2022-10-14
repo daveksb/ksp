@@ -122,6 +122,18 @@ export function formatDate(input: string | null | undefined) {
     return null;
   }
 }
+export function changeDate(
+  input: Date | string | null | undefined
+): string | null {
+  if (input instanceof Date) {
+    input = input.toISOString();
+  }
+  if (input && input.length) {
+    return input.split('T')[0];
+  } else {
+    return input ?? null;
+  }
+}
 
 export function mapFileInfo(fileGroups: any[]) {
   return fileGroups.map((file: any) => {

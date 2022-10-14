@@ -11,7 +11,7 @@ export function createDefaultVisaInfo(fb: FormBuilder) {
   return fb.group({
     visatype: [],
     visaclass: [],
-    visaenddate: [],
+    visaexpiredate: [],
     licenseid: [],
   });
 }
@@ -20,7 +20,7 @@ export function createUserInfoForm(fb: FormBuilder) {
   return fb.group({
     id: [],
     idcardno: ['', [Validators.required, Validators.pattern(idCardPattern)]],
-    requestfor: [null],
+    isforeign: [null],
     passportno: [
       null,
       [Validators.required, Validators.pattern(passportPattern)],
