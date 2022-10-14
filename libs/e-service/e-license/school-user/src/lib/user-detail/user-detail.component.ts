@@ -70,6 +70,7 @@ export class UserDetailComponent implements OnInit {
   loadRequestFromId(id: number) {
     this.eRequestService.getKspRequestById(id).subscribe((res) => {
       this.requestData = res;
+      console.log('request data = ', res);
       if (res.birthdate) {
         res.birthdate = res.birthdate.split('T')[0];
       }
