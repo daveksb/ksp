@@ -17,16 +17,14 @@
       </div>
       <ksp-basic-institute-search
         formControlName="institution"
-        [bureaus]="bureaus$! | async"
+        [bureaus]="data.bureauList"
         [universityType]="universityType$! | async"
         [searchType]="data.searchType"
       ></ksp-basic-institute-search>
 
       <div class="row mb-2">
         <div class="col">
-          <label class="form-label"
-            >จังหวัด <span class="text-danger">*</span>
-          </label>
+          <label class="form-label required">จังหวัด </label>
           <select
             formControlName="provinceid"
             (change)="provinceChange($event)"
@@ -42,9 +40,7 @@
           </select>
         </div>
         <div class="col">
-          <label class="form-label"
-            >อำเภอ <span class="text-danger">*</span></label
-          >
+          <label class="form-label required">อำเภอ </label>
           <select formControlName="amphurid" class="form-select">
             <option value="null" selected hidden disabled>กรุณาเลือก</option>
             <option *ngFor="let a of amphurs$ | async" [value]="a?.amphurCode">
@@ -92,7 +88,7 @@
             </tr>
           </thead>
           <tbody class="body__table" *ngIf="data.searchType !== 'uni'">
-            <tr *ngFor="let item of Data">
+            <tr *ngFor="let item of schoolInfos">
               <th scope="row" class="body__detail">
                 <div>
                   <input
@@ -110,7 +106,7 @@
             </tr>
           </tbody>
           <tbody class="body__table" *ngIf="data.searchType === 'uni'">
-            <tr *ngFor="let item of Data">
+            <tr *ngFor="let item of schoolInfos">
               <th scope="row" class="body__detail">
                 <div>
                   <input
@@ -130,7 +126,7 @@
         </table>
       </div>
 
-      <nav *ngIf="Data.length > 0" style="padding-top: 20px">
+      <nav *ngIf="schoolInfos && schoolInfos.length" style="padding-top: 20px">
         <ul class="pagination">
           <li role="button" (click)="goPrevious()" class="page-item">
             <a class="page-link"><i class="bi bi-chevron-left"></i></a>
