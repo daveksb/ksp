@@ -117,7 +117,6 @@ export class RegisterPasswordComponent implements OnInit {
         btnLabel: 'บันทึก',
       },
     });
-    //const password = await encrypt(this.form?.value?.password);
 
     const password = CryptoJs.SHA256(
       `${this.form.controls.password.value}`
@@ -126,7 +125,6 @@ export class RegisterPasswordComponent implements OnInit {
     dialog.componentInstance.confirmed
       .pipe(
         switchMap((res) => {
-          console.log('open confirm = ');
           if (res) {
             const coordinatorinfo = JSON.stringify({
               ...this.coordinator,
