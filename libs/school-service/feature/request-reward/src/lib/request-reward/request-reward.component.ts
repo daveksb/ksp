@@ -7,7 +7,13 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { FileGroup, KspRequest, SchoolRequest } from '@ksp/shared/interface';
+import {
+  FileGroup,
+  KspRequest,
+  PersonType,
+  Prefix,
+  SchoolRequest,
+} from '@ksp/shared/interface';
 import {
   GeneralInfoService,
   RequestService,
@@ -32,11 +38,9 @@ export class RequestRewardComponent implements OnInit {
   rewards = rewards;
   schoolId = '0010201056';
   osoiTypes$!: Observable<any>;
-  personTypes$!: Observable<any>;
-  prefixList$!: Observable<any>;
+  personTypes$!: Observable<PersonType[]>;
+  prefixList$!: Observable<Prefix[]>;
   requestId = 0;
-  //requestDate = '';
-  //requestNo = '';
   requestProcess!: string | null;
   requestStatus!: string | null;
   memberData!: any;
@@ -123,7 +127,7 @@ export class RequestRewardComponent implements OnInit {
       id: `${this.requestId}`,
       requeststatus: '0',
     };
-    this.requestService.cancelRequest(payload).subscribe(() => {
+    this.requestService.schCancelRequest(payload).subscribe(() => {
       //
     });
   }
@@ -187,10 +191,10 @@ export class RequestRewardComponent implements OnInit {
 
     const { ref1, ref2, ref3, ...payload } = baseForm.value;
     //console.log('payload = ', payload);
-    this.requestService.updateRequest(payload).subscribe(() => {
+    /*     this.requestService.schUpdateRequest(payload).subscribe(() => {
       //console.log('request result = ', res);
       this.completeDialog();
-    });
+    }); */
   }
 
   createRequest(currentProcess: string, requestStatus: string, form: any) {
@@ -218,7 +222,7 @@ export class RequestRewardComponent implements OnInit {
 
     baseForm.patchValue(form);
     //console.log('current form = ', baseForm.value);
-    this.requestService.createRequest(baseForm.value).subscribe((res) => {
+    this.requestService.schCreateRequest(baseForm.value).subscribe((res) => {
       //console.log('request result = ', res);
       this.completeDialog();
     });

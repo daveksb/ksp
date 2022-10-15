@@ -212,7 +212,7 @@ export class QualificationDetailComponent implements OnInit {
                 id: `${this.requestId}`,
                 requeststatus: '0',
               };
-              return this.requestService.cancelRequest(payload);
+              return this.requestService.schCancelRequest(payload);
             }
             return EMPTY;
           })

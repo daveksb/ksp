@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FileGroup, FormMode, KspRequest } from '@ksp/shared/interface';
+import {
+  Country,
+  FileGroup,
+  FormMode,
+  KspRequest,
+  Prefix,
+  VisaType,
+} from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -36,22 +43,18 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   address = '';
   showCancelButton!: boolean;
   mode: FormMode = 'edit';
-  prefixList$!: Observable<any>;
-  countries$!: Observable<any>;
-  visaTypeList$!: Observable<any>;
-  //requestNo = '';
-  //requestDate = thaiDate(new Date());
+  prefixList$!: Observable<Prefix[]>;
+  countries$!: Observable<Country[]>;
+  visaTypeList$!: Observable<VisaType[]>;
   requestId!: number;
   request: KspRequest = new KspRequest();
 
   form = this.fb.group({
-    foreignTeacher: [] as any,
-    visainfo: [] as any,
+    foreignTeacher: [],
+    visainfo: [],
   });
 
-  foreignFiles: FileGroup[] = [
-    { name: '1.สำเนาหนังสือเดินทาง', files: [] },
-  ] as FileGroup[];
+  foreignFiles: FileGroup[] = [{ name: '1.สำเนาหนังสือเดินทาง', files: [] }];
 
   constructor(
     private router: Router,
@@ -105,8 +108,8 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             (group, index) => (group.files = fileinfo[index])
           );
         }
-        this.form.get('foreignTeacher')?.patchValue(res);
-        this.form.get('visainfo')?.patchValue(res);
+        this.form.controls.foreignTeacher.patchValue(<any>res);
+        //this.form.get('visainfo')?.patchValue(res);
       }
     });
   }
@@ -129,7 +132,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
                 id: `${this.requestId}`,
                 requeststatus: '0',
               };
-              return this.requestService.cancelRequest(payload);
+              return this.requestService.schCancelRequest(payload);
             }
             return EMPTY;
           })
@@ -143,7 +146,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   }
 
   onCancelCompleted() {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: 'ระบบทำการยกเลิกเรียบร้อย',
         content: `วันที่ : ${thaiDate(new Date())}
@@ -151,7 +154,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       },
     });
 
-    completeDialog.componentInstance.completed.subscribe((res) => {
+    dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
         this.router.navigate(['/temp-license', 'list']);
       }
@@ -170,15 +173,14 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       !this.form.get('visainfo')?.valid
     )
       return; */
-    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยืนยันข้อมูล
         และส่งใบคำขอ ใช่หรือไม่? `,
         btnLabel: 'ยืนยัน',
       },
     });
-    confirmDialog.componentInstance.confirmed
+    dialog.componentInstance.confirmed
       .pipe(
         switchMap((res) => {
           if (res && this.form.value.foreignTeacher) {

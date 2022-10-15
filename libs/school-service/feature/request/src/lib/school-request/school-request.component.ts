@@ -26,6 +26,7 @@ import {
   KspRequest,
   Nationality,
   PositionType,
+  Prefix,
   Province,
   StaffType,
   Tambol,
@@ -68,16 +69,15 @@ export class SchoolRequestComponent implements OnInit {
   amphurs2$!: Observable<Amphur[]>;
   tumbols2$!: Observable<Tambol[]>;
   nationList$!: Observable<Nationality[]>;
-
   staffTypes$!: Observable<StaffType[]>;
   positionTypes$!: Observable<PositionType[]>;
   academicTypes$!: Observable<AcademicStanding[]>;
   visaTypeList!: Observable<VisaType[]>;
   visaClassList!: Observable<VisaClass[]>;
+  prefixList$!: Observable<Prefix[]>;
 
   requestId!: number;
   requestData = new KspRequest();
-
   careerType = SchoolRequestSubType.ครู; // 1 ไทย 2 ผู้บริหาร 3 ต่างชาติ
   requestLabel = '';
   requestProcess!: number;
@@ -85,8 +85,6 @@ export class SchoolRequestComponent implements OnInit {
   disableTempSave = true;
   disableSave = true;
   disableCancel = true;
-  icCardNo = '';
-  schoolAddressLabel = `ที่อยู่ของสถานศึกษาที่ขออนุญาต`;
 
   schoolId = '0010201056';
   userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form
@@ -95,7 +93,6 @@ export class SchoolRequestComponent implements OnInit {
   teachingFiles: FileGroup[] = [];
   reasonFiles: FileGroup[] = [];
   attachFiles: FileGroup[] = [];
-  prefixList$!: Observable<any>;
 
   option1 = this.fb.control(false);
   option2 = this.fb.control(false);
@@ -348,7 +345,7 @@ export class SchoolRequestComponent implements OnInit {
     } */
 
     //console.log('update payload = ', res);
-    this.requestService.updateRequest(res).subscribe((res) => {
+    this.requestService.schUpdateRequest(res).subscribe(() => {
       //this.backToListPage();
     });
   }
