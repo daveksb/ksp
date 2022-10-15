@@ -19,9 +19,11 @@ import {
 } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
 import {
+  Amphur,
   FileGroup,
   KspRequest,
-  SchoolRequest,
+  Province,
+  Tambol,
   UserInfoForm,
 } from '@ksp/shared/interface';
 
@@ -38,7 +40,6 @@ import {
   mapMultiFileInfo,
   parseJson,
   replaceEmptyWithNull,
-  thaiDate,
 } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
@@ -54,11 +55,11 @@ export class SchoolRequestComponent implements OnInit {
   pageType = RequestPageType;
 
   countries$!: Observable<any>;
-  provinces$!: Observable<any>;
-  amphurs1$!: Observable<any>;
-  tumbols1$!: Observable<any>;
-  amphurs2$!: Observable<any>;
-  tumbols2$!: Observable<any>;
+  provinces$!: Observable<Province[]>;
+  amphurs1$!: Observable<Amphur[]>;
+  tumbols1$!: Observable<Tambol[]>;
+  amphurs2$!: Observable<Amphur[]>;
+  tumbols2$!: Observable<Tambol[]>;
   staffTypes$!: Observable<any>;
   positionTypes$!: Observable<any>;
   academicTypes$!: Observable<any>;

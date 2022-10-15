@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SchoolContainerPageComponent } from '@ksp/school-service/feature/container-page';
 import { PageNotFoundComponent } from '@ksp/shared/ui';
-import { SchoolRequestListComponent } from './request-list/request-list.component';
+import { SchoolRequestListComponent } from './school-request-list/school-request-list.component';
 import { SchoolRequestComponent } from './school-request/school-request.component';
 
 const routes: Routes = [

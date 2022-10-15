@@ -15,8 +15,8 @@ import {
 } from '@ksp/shared/utility';
 
 @Component({
-  templateUrl: './request-list.component.html',
-  styleUrls: ['./request-list.component.scss'],
+  templateUrl: './school-request-list.component.html',
+  styleUrls: ['./school-request-list.component.scss'],
 })
 export class SchoolRequestListComponent implements AfterViewInit {
   schoolId = '0010201056';

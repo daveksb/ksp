@@ -73,12 +73,12 @@ const routes: Routes = [
     OsoiRankingComponent,
     OsoiObjectionComponent,
   ],
-  exports: [
+  /*   exports: [
     OsoiListComponent,
     OsoiDetailComponent,
     OsoiConfirmComponent,
     OsoiRankingComponent,
     OsoiObjectionComponent,
-  ],
+  ], */
 })
 export class EServiceProfessionalOneSchoolOneInnovationModule {}

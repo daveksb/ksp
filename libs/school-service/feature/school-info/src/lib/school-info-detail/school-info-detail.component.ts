@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { UserInfoFormType } from '@ksp/shared/constant';
+import { Prefix } from '@ksp/shared/interface';
 import { SchoolInfoService } from '@ksp/shared/service';
-import { untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 
+@UntilDestroy()
 @Component({
   selector: 'ksp-school-info-detail',
   templateUrl: './school-info-detail.component.html',
@@ -13,7 +15,7 @@ import { Observable } from 'rxjs';
 export class SchoolInfoDetailComponent implements OnInit {
   userInfoFormType: number = UserInfoFormType.thai;
   schoolId = '0010201056';
-  prefixList$!: Observable<any>;
+  prefixList$!: Observable<Prefix[]>;
 
   form = this.fb.group({
     schoolAddrTh: [],
@@ -34,7 +36,8 @@ export class SchoolInfoDetailComponent implements OnInit {
   getSchoolAddress() {
     this.schoolInfoService
       .getSchoolInfo(this.schoolId)
-      .subscribe((res: any) => {
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
         this.form.controls.schoolAddrTh.patchValue(res);
       });
   }
