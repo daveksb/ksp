@@ -63,10 +63,8 @@ export function formatDatePayload(input: any) {
  */
 export function formatDate(input: string | null | undefined) {
   if (input && input.length) {
-    console.log('aa = ');
     return input.split('T')[0];
   } else {
-    console.log('bb = ');
     return null;
   }
 }

@@ -104,13 +104,13 @@ export class AddStaffComponent implements OnInit {
 
         if (idcardno) {
           this.searchStaffDone = true;
-          const temp: any = { idcardno };
+          const temp: any = { idcardno: `${idcardno}` };
           this.form.controls.userInfo.patchValue(temp);
         }
 
         if (kuruspanno) {
           this.searchStaffDone = true;
-          const temp: any = { kuruspanno };
+          const temp: any = { kuruspanno: `${kuruspanno}` };
           this.form.controls.userInfo.patchValue(temp);
         }
       });
@@ -279,7 +279,6 @@ export class AddStaffComponent implements OnInit {
 
     const { id, ...userInfo } = formData.userInfo;
     userInfo.schoolid = this.schoolId;
-    //console.log('user info = ', userInfo);
 
     const payload = {
       ...replaceEmptyWithNull(userInfo),
@@ -327,7 +326,7 @@ export class AddStaffComponent implements OnInit {
 
     payload = replaceEmptyWithNull(payload);
 
-    this.staffService.updateStaff(payload).subscribe((res) => {
+    this.staffService.updateStaff(payload).subscribe(() => {
       //console.log('update result = ', res);
     });
   }

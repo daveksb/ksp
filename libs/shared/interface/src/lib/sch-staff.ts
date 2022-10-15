@@ -1,4 +1,5 @@
 export class SchStaff {
+  id?: string | null | undefined = null;
   schoolid: string | null | undefined = null;
   idcardno: string | null | undefined = null;
   passportno: string | null | undefined = null;
