@@ -46,12 +46,21 @@ export class FormUserInfoComponent
   @Input() nationList: Nationality[] | null = [];
   @Input() visaClassList: VisaClass[] | null = [];
   @Input() visaTypeList: VisaType[] | null = [];
-  @Input() displayMode!: number[];
   @Input() isqualification = false;
   @Input() isDarkMode = false;
   @Input() isSelfService = false;
   @Input() isAddStaff = false;
   @Input() requiredIdCardNo = true;
+
+  public _displayMode = UserInfoFormType.thai;
+  @Input()
+  set displayMode(mode: number) {
+    this._displayMode = mode;
+    this.checkValidators(mode);
+  }
+  get displayMode(): number {
+    return this._displayMode;
+  }
 
   @Output() idCardChange = new EventEmitter<string>();
   @Output() kuruspaNoChange = new EventEmitter<string>();
@@ -71,9 +80,12 @@ export class FormUserInfoComponent
       })
     );
   }
-  ngOnInit(): void {
+
+  checkValidators(mode: number) {
+    console.log('mode = ', mode);
     // คนไทยไม่ต้อง validate field เหล่านี้
-    if (this.displayMode.includes(UserInfoFormType.thai)) {
+    if (mode === UserInfoFormType.thai) {
+      //console.log('aa = ');
       this.form.controls.passportno.clearValidators();
       this.form.controls.kuruspanno.clearValidators();
       this.form.controls.passportstartdate.clearValidators();
@@ -82,7 +94,8 @@ export class FormUserInfoComponent
     }
 
     // ต่างชาติ ไม่ต้อง validate field เหล่านี้
-    if (this.displayMode.includes(UserInfoFormType.foreign)) {
+    if ((mode = UserInfoFormType.foreign)) {
+      //console.log('bb = ');
       this.form.controls.idcardno.clearValidators();
       this.form.controls.workphone.clearValidators();
       this.form.controls.contactphone.clearValidators();
@@ -90,7 +103,9 @@ export class FormUserInfoComponent
       this.form.controls.sex.clearValidators();
       this.form.controls.email.clearValidators();
     }
+  }
 
+  ngOnInit(): void {
     this.form.controls.idcardno.valueChanges
       .pipe(debounceTime(200), distinctUntilChanged())
       .subscribe((res) => {
@@ -137,6 +152,10 @@ export class FormUserInfoComponent
 
   get idCardNo() {
     return this.form.controls.idcardno;
+  }
+
+  get kuruspaNo() {
+    return this.form.controls.kuruspanno;
   }
 
   get passportNo() {

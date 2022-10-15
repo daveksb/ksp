@@ -29,7 +29,7 @@
         formControlName="userInfo"
         [isDarkMode]="false"
         [prefixList]="prefixList$ | async"
-        [displayMode]="[userInfoType]"
+        [displayMode]="userInfoType"
         [mode]="mode"
         (idCardChange)="searchIdCard($event)"
       ></ksp-form-user-info>
