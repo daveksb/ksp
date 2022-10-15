@@ -73,4 +73,4 @@ const routes: Routes = [
     RefundConfirmComponent,
   ],
 })
-export class EServiceFeeRefundFeeModule {}
+export class EServiceFeeRefundModule {}

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserInfoFormType } from '@ksp/shared/constant';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { Country, KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
 @Component({
@@ -18,12 +18,11 @@ export class FormEducationInfoComponent
   @Input() showPropertyInput = false;
   @Input() showSelectDegree = false;
   @Input() showGraduateYearInput = false;
-  @Input() countries: any[] = [];
+  @Input() countries: Country[] | null = [];
   @Input() showCheckbox = true;
   @Input() option = false;
   @Input() userEducationType: any;
   FormTypeEnum = UserInfoFormType;
-  today = new Date().toISOString().split('T')[0];
 
   override form = this.fb.group({
     degreeLevel: [],

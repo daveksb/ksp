@@ -343,8 +343,8 @@ const routes: EthicsCustomRoute[] = [
     path: 'refund',
     data: { menuConfig: refundFeeMenu, headerLabel: 'ระบบงานค่าธรรมเนียม' },
     loadChildren: () =>
-      import('@ksp/e-service/fee/refund-fee').then(
-        (m) => m.EServiceFeeRefundFeeModule
+      import('@ksp/e-service/fee-refund').then(
+        (m) => m.EServiceFeeRefundModule
       ),
     canActivate: [AuthGuard],
   },

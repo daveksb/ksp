@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccusationRecordComponent } from '@ksp/e-service/ethics/accusation';
 import { InquiryDetailComponent } from '@ksp/e-service/ethics/inquiry';
-import { FormInvestigationDetailComponent } from '@ksp/e-service/form';
+import { FormInvestigationDetailComponent } from '@ksp/e-service/ethics/form';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,

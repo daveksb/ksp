@@ -1187,6 +1187,100 @@
         }
       ]
     },
+    "e-service-ethics-form": {
+      "root": "libs/e-service/ethics/form",
+      "projectType": "library",
+      "sourceRoot": "libs/e-service/ethics/form/src",
+      "prefix": "ksp",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/ethics/form/**/*.ts",
+              "libs/e-service/ethics/form/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": [],
+      "files": [
+        {
+          "file": "libs/e-service/ethics/form/.eslintrc.json",
+          "hash": "27c5e47e999848beed2882877542e9a23959ec86"
+        },
+        {
+          "file": "libs/e-service/ethics/form/project.json",
+          "hash": "ae412021f5addde6ace8327a5406d8debcd261cd"
+        },
+        {
+          "file": "libs/e-service/ethics/form/README.md",
+          "hash": "f9cadbbf4b978af369d7ebe0c7692efd45ac479b"
+        },
+        {
+          "file": "libs/e-service/ethics/form/src/index.ts",
+          "hash": "540727d3ce449097db1c168295879d1e1da8a5fa"
+        },
+        {
+          "file": "libs/e-service/ethics/form/src/lib/e-service-form.module.ts",
+          "hash": "4405ea1dd1b2928fa5d93cc97d33a1d868102297",
+          "deps": ["npm:@angular/core"]
+        },
+        {
+          "file": "libs/e-service/ethics/form/src/lib/form-investigation-detail/form-investigation-detail.component.html",
+          "hash": "ccaaf577a50e56c9486e8973bea611a2c88af577"
+        },
+        {
+          "file": "libs/e-service/ethics/form/src/lib/form-investigation-detail/form-investigation-detail.component.scss",
+          "hash": "f6a77d03751a3304f0a98c9b3cd1f6a023433420"
+        },
+        {
+          "file": "libs/e-service/ethics/form/src/lib/form-investigation-detail/form-investigation-detail.component.ts",
+          "hash": "b6d0b40edc761ae56a8c3e8b1c2e03c1ce405bab",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:@angular/router",
+            "e-service-ui-accusation-info",
+            "shared-form-others",
+            "shared-menu",
+            "shared-dialog",
+            "shared-ui",
+            "shared-form-file-upload",
+            "shared-utility",
+            "npm:@angular/forms",
+            "shared-interface"
+          ]
+        },
+        {
+          "file": "libs/e-service/ethics/form/src/lib/form-meeting-record/form-meeting-record.component.html",
+          "hash": "0b4c009aa29609e5120206aa04d880e069b91952"
+        },
+        {
+          "file": "libs/e-service/ethics/form/src/lib/form-meeting-record/form-meeting-record.component.scss",
+          "hash": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+        },
+        {
+          "file": "libs/e-service/ethics/form/src/lib/form-meeting-record/form-meeting-record.component.ts",
+          "hash": "1b63182df9cdf434d0d63ea6fba1035325acbc41",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "shared-form-file-upload",
+            "npm:@angular/forms"
+          ]
+        },
+        {
+          "file": "libs/e-service/ethics/form/tsconfig.json",
+          "hash": "d91a40079b4230f99a815486387cf3d3ad9ca621"
+        },
+        {
+          "file": "libs/e-service/ethics/form/tsconfig.lib.json",
+          "hash": "095e7f31b37e81c0a51c926290157de0d8e90960"
+        }
+      ]
+    },
     "e-service-ethics-inquiry": {
       "root": "libs/e-service/ethics/inquiry",
       "projectType": "library",
@@ -1775,17 +1869,17 @@
         }
       ]
     },
-    "e-service-fee-refund-fee": {
+    "e-service-fee-refund": {
       "projectType": "library",
-      "root": "libs/e-service/fee/refund-fee",
-      "sourceRoot": "libs/e-service/fee/refund-fee/src",
+      "root": "libs/e-service/fee-refund",
+      "sourceRoot": "libs/e-service/fee-refund/src",
       "prefix": "ksp",
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/fee/refund-fee"],
+          "outputs": ["coverage/libs/e-service/fee-refund"],
           "options": {
-            "jestConfig": "libs/e-service/fee/refund-fee/jest.config.ts",
+            "jestConfig": "libs/e-service/fee-refund/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -1793,107 +1887,13 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/e-service/fee/refund-fee/**/*.ts",
-              "libs/e-service/fee/refund-fee/**/*.html"
+              "libs/e-service/fee-refund/**/*.ts",
+              "libs/e-service/fee-refund/**/*.html"
             ]
           }
         }
       },
       "tags": []
-    },
-    "e-service-form": {
-      "root": "libs/e-service/form",
-      "projectType": "library",
-      "sourceRoot": "libs/e-service/form/src",
-      "prefix": "ksp",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/e-service/form/**/*.ts",
-              "libs/e-service/form/**/*.html"
-            ]
-          }
-        }
-      },
-      "tags": [],
-      "files": [
-        {
-          "file": "libs/e-service/form/.eslintrc.json",
-          "hash": "27c5e47e999848beed2882877542e9a23959ec86"
-        },
-        {
-          "file": "libs/e-service/form/project.json",
-          "hash": "ae412021f5addde6ace8327a5406d8debcd261cd"
-        },
-        {
-          "file": "libs/e-service/form/README.md",
-          "hash": "f9cadbbf4b978af369d7ebe0c7692efd45ac479b"
-        },
-        {
-          "file": "libs/e-service/form/src/index.ts",
-          "hash": "540727d3ce449097db1c168295879d1e1da8a5fa"
-        },
-        {
-          "file": "libs/e-service/form/src/lib/e-service-form.module.ts",
-          "hash": "4405ea1dd1b2928fa5d93cc97d33a1d868102297",
-          "deps": ["npm:@angular/core"]
-        },
-        {
-          "file": "libs/e-service/form/src/lib/form-investigation-detail/form-investigation-detail.component.html",
-          "hash": "ccaaf577a50e56c9486e8973bea611a2c88af577"
-        },
-        {
-          "file": "libs/e-service/form/src/lib/form-investigation-detail/form-investigation-detail.component.scss",
-          "hash": "f6a77d03751a3304f0a98c9b3cd1f6a023433420"
-        },
-        {
-          "file": "libs/e-service/form/src/lib/form-investigation-detail/form-investigation-detail.component.ts",
-          "hash": "b6d0b40edc761ae56a8c3e8b1c2e03c1ce405bab",
-          "deps": [
-            "npm:@angular/common",
-            "npm:@angular/core",
-            "npm:@angular/material",
-            "npm:@angular/router",
-            "e-service-ui-accusation-info",
-            "shared-form-others",
-            "shared-menu",
-            "shared-dialog",
-            "shared-ui",
-            "shared-form-file-upload",
-            "shared-utility",
-            "npm:@angular/forms",
-            "shared-interface"
-          ]
-        },
-        {
-          "file": "libs/e-service/form/src/lib/form-meeting-record/form-meeting-record.component.html",
-          "hash": "0b4c009aa29609e5120206aa04d880e069b91952"
-        },
-        {
-          "file": "libs/e-service/form/src/lib/form-meeting-record/form-meeting-record.component.scss",
-          "hash": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
-        },
-        {
-          "file": "libs/e-service/form/src/lib/form-meeting-record/form-meeting-record.component.ts",
-          "hash": "1b63182df9cdf434d0d63ea6fba1035325acbc41",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "shared-form-file-upload",
-            "npm:@angular/forms"
-          ]
-        },
-        {
-          "file": "libs/e-service/form/tsconfig.json",
-          "hash": "d91a40079b4230f99a815486387cf3d3ad9ca621"
-        },
-        {
-          "file": "libs/e-service/form/tsconfig.lib.json",
-          "hash": "095e7f31b37e81c0a51c926290157de0d8e90960"
-        }
-      ]
     },
     "e-service-professional-best-teacher-reward": {
       "projectType": "library",
@@ -10290,8 +10290,5 @@
       ]
     }
   },
-  "version": 1,
-  "cli": {
-    "analytics": false
-  }
+  "version": 1
 }

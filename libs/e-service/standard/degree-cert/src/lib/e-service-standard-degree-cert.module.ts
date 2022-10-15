@@ -27,7 +27,7 @@ import {
 import { ReactiveFormsModule } from '@angular/forms';
 import { DegreeCertSearchComponent } from '@ksp/shared/search';
 import { RouterModule } from '@angular/router';
-import { FormMeetingRecordComponent } from '@ksp/e-service/form';
+import { FormMeetingRecordComponent } from '@ksp/e-service/ethics/form';
 
 @NgModule({
   imports: [

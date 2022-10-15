@@ -9,7 +9,14 @@ import {
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { SchoolRequestType, UserInfoFormType } from '@ksp/shared/constant';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import {
+  Country,
+  KspFormBaseComponent,
+  Nationality,
+  Prefix,
+  VisaClass,
+  VisaType,
+} from '@ksp/shared/interface';
 import {
   createUserInfoForm,
   providerFactory,
@@ -17,6 +24,13 @@ import {
 } from '@ksp/shared/utility';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 
+/**
+ * Dark Mode : all inputs will have gray background and form container will have white background
+ * Use in Self-Service
+ *
+ * Normal Mode : all inputs will have white background and form container will have gray background
+ * Use in E-service, School-Service
+ */
 @Component({
   selector: 'ksp-form-user-info',
   templateUrl: './form-user-info.component.html',
@@ -27,17 +41,26 @@ export class FormUserInfoComponent
   extends KspFormBaseComponent
   implements OnInit, OnChanges
 {
-  @Input() prefixList: any[] = [];
-  @Input() countryList: any[] = [];
-  @Input() nationList: any[] = [];
-  @Input() visaClassList: any[] = [];
-  @Input() visaTypeList: any[] = [];
-  @Input() displayMode!: number[];
+  @Input() prefixList: Prefix[] | null = [];
+  @Input() countryList: Country[] | null = [];
+  @Input() nationList: Nationality[] | null = [];
+  @Input() visaClassList: VisaClass[] | null = [];
+  @Input() visaTypeList: VisaType[] | null = [];
   @Input() isqualification = false;
   @Input() isDarkMode = false;
   @Input() isSelfService = false;
   @Input() isAddStaff = false;
   @Input() requiredIdCardNo = true;
+
+  public _displayMode = UserInfoFormType.thai;
+  @Input()
+  set displayMode(mode: number) {
+    this._displayMode = mode;
+    this.checkValidators(mode);
+  }
+  get displayMode(): number {
+    return this._displayMode;
+  }
 
   @Output() idCardChange = new EventEmitter<string>();
   @Output() kuruspaNoChange = new EventEmitter<string>();
@@ -45,15 +68,6 @@ export class FormUserInfoComponent
   RequestTypeEnum = SchoolRequestType;
   validatorMessages = validatorMessages;
   FormTypeEnum = UserInfoFormType;
-  today = new Date().toISOString().split('T')[0];
-
-  /**
-   * Dark Mode : all inputs will have gray background and form container will have white background
-   * Use in Self-Service
-   *
-   * Normal Mode : all inputs will have white background and form container will have gray background
-   * Use in E-service, School-Service
-   */
 
   override form = createUserInfoForm(this.fb);
 
@@ -66,19 +80,21 @@ export class FormUserInfoComponent
       })
     );
   }
-  ngOnInit(): void {
-    // ถ้าเป็น form คนไทยไม่ต้อง validate field เหล่านี้
-    if (this.displayMode.includes(UserInfoFormType.thai)) {
-      console.log('aaa = ');
+
+  checkValidators(mode: number) {
+    // คนไทยไม่ต้อง validate field เหล่านี้
+    if (mode === UserInfoFormType.thai) {
+      //console.log('aa = ');
       this.form.controls.passportno.clearValidators();
-      this.form.controls.kurupanno.clearValidators();
+      this.form.controls.kuruspanno.clearValidators();
       this.form.controls.passportstartdate.clearValidators();
       this.form.controls.passportenddate.clearValidators();
       this.form.controls.position.clearValidators();
     }
 
-    if (this.displayMode.includes(UserInfoFormType.foreign)) {
-      console.log('bbb = ');
+    // ต่างชาติ ไม่ต้อง validate field เหล่านี้
+    if ((mode = UserInfoFormType.foreign)) {
+      console.log('bb = ');
       this.form.controls.idcardno.clearValidators();
       this.form.controls.workphone.clearValidators();
       this.form.controls.contactphone.clearValidators();
@@ -86,7 +102,9 @@ export class FormUserInfoComponent
       this.form.controls.sex.clearValidators();
       this.form.controls.email.clearValidators();
     }
+  }
 
+  ngOnInit(): void {
     this.form.controls.idcardno.valueChanges
       .pipe(debounceTime(200), distinctUntilChanged())
       .subscribe((res) => {
@@ -95,7 +113,7 @@ export class FormUserInfoComponent
         }
       });
 
-    this.form.controls.kurupanno.valueChanges
+    this.form.controls.kuruspanno.valueChanges
       .pipe(debounceTime(200), distinctUntilChanged())
       .subscribe((res) => {
         if (res && res.length === 13) {
@@ -115,7 +133,6 @@ export class FormUserInfoComponent
 
   prefixChanged(evt: any) {
     const prefix = evt.target?.value;
-
     if (prefix === '1') {
       const temp: any = { sex: '1' };
       this.form.patchValue(temp);
@@ -126,7 +143,6 @@ export class FormUserInfoComponent
       const temp: any = { sex: '3' };
       this.form.patchValue(temp);
     }
-
     const en = { prefixen: prefix };
     const th = { prefixth: prefix };
     this.form.patchValue(th);
@@ -135,6 +151,10 @@ export class FormUserInfoComponent
 
   get idCardNo() {
     return this.form.controls.idcardno;
+  }
+
+  get kuruspaNo() {
+    return this.form.controls.kuruspanno;
   }
 
   get passportNo() {

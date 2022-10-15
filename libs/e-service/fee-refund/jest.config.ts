@@ -1,7 +1,7 @@
 /* eslint-disable */
 export default {
-  displayName: 'e-service-fee-refund-fee',
-  preset: '../../../../jest.preset.js',
+  displayName: 'e-service-fee-refund',
+  preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
     'ts-jest': {
@@ -9,7 +9,7 @@ export default {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../../coverage/libs/e-service/fee/refund-fee',
+  coverageDirectory: '../../../coverage/libs/e-service/fee-refund',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

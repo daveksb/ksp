@@ -19,7 +19,17 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { levels, subjects, UserInfoFormType } from '@ksp/shared/constant';
-import { FormMode } from '@ksp/shared/interface';
+import {
+  AcademicStanding,
+  Amphur,
+  Country,
+  FormMode,
+  PositionType,
+  Prefix,
+  Province,
+  StaffType,
+  Tambol,
+} from '@ksp/shared/interface';
 import localForage from 'localforage';
 
 @UntilDestroy()
@@ -29,18 +39,18 @@ import localForage from 'localforage';
 })
 export class AddStaffComponent implements OnInit {
   staffId!: number;
-  countries$!: Observable<any>;
-  provinces$!: Observable<any>;
-  amphurs1$!: Observable<any>;
-  tumbols1$!: Observable<any>;
-  amphurs2$!: Observable<any>;
-  tumbols2$!: Observable<any>;
-  prefixList$!: Observable<any>;
-  staffTypes$!: Observable<any>;
-  positionTypes$!: Observable<any>;
-  academicTypes$!: Observable<any>;
+  countries$!: Observable<Country[]>;
+  provinces$!: Observable<Province[]>;
+  amphurs1$!: Observable<Amphur[]>;
+  tumbols1$!: Observable<Tambol[]>;
+  amphurs2$!: Observable<Amphur[]>;
+  tumbols2$!: Observable<Tambol[]>;
+  prefixList$!: Observable<Prefix[]>;
+  staffTypes$!: Observable<StaffType[]>;
+  positionTypes$!: Observable<PositionType[]>;
+  academicTypes$!: Observable<AcademicStanding[]>;
   schoolId = '0010201056';
-  mode: FormMode = 'edit';
+  mode: FormMode = 'add';
   userInfoType = UserInfoFormType.thai;
   searchStaffDone = false;
   kuruspaNo = '';
@@ -69,7 +79,10 @@ export class AddStaffComponent implements OnInit {
     this.form.reset();
     this.checkMode();
     this.getListData();
+    this.checkStaffId();
+  }
 
+  checkStaffId() {
     this.activatedroute.paramMap
       .pipe(untilDestroyed(this))
       .subscribe((params) => {
@@ -99,13 +112,41 @@ export class AddStaffComponent implements OnInit {
       .searchStaffFromIdCard(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
-        //console.log('res = ', res);
         if (res && res.returncode !== '98') {
           // found staff
           this.router.navigate(['/staff-management', 'edit-staff', res.id]);
         } else {
           // not found then reset form and set idcard again
-          this.router.navigate(['/staff-management', 'add-staff', idcardno]);
+          this.router.navigate([
+            '/staff-management',
+            'add-staff-thai',
+            idcardno,
+          ]);
+        }
+        this.searchStaffDone = true;
+      });
+  }
+
+  searchKuruspaNo(kuruspaNo: string) {
+    const payload = {
+      idcardno: kuruspaNo,
+      schoolid: this.schoolId,
+    };
+
+    this.staffService
+      .searchStaffFromIdCard(payload)
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res && res.returncode !== '98') {
+          // found staff
+          this.router.navigate(['/staff-management', 'edit-staff', res.id]);
+        } else {
+          // not found then reset form and set idcard again
+          this.router.navigate([
+            '/staff-management',
+            'add-staff-foreign',
+            kuruspaNo,
+          ]);
         }
         this.searchStaffDone = true;
       });
@@ -153,10 +194,16 @@ export class AddStaffComponent implements OnInit {
       this.searchStaffDone = true;
       this.mode = 'view';
       this.form.disable();
-    } else {
-      // add staff
+    } else if (this.router.url.includes('add-staff-thai')) {
+      this.mode = 'add';
+      this.userInfoType = UserInfoFormType.thai;
+    } else if (this.router.url.includes('add-staff-foreign')) {
+      this.mode = 'add';
+      this.userInfoType = UserInfoFormType.foreign;
+    } else if (this.router.url.includes('edit-staff')) {
       this.mode = 'edit';
     }
+    //this.userInfoType = UserInfoFormType.foreign;
   }
 
   /**
@@ -177,6 +224,16 @@ export class AddStaffComponent implements OnInit {
       .subscribe((res) => {
         this.patchAll(res);
       });
+  }
+
+  isForeignSelect(evt: any) {
+    this.form.reset();
+    const checked = evt.target.checked;
+    if (checked) {
+      this.userInfoType = UserInfoFormType.foreign;
+    } else {
+      this.userInfoType = UserInfoFormType.thai;
+    }
   }
 
   patchAll(res: any) {
@@ -307,14 +364,14 @@ export class AddStaffComponent implements OnInit {
   }
 
   onConfirmed() {
-    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
         btnLabel: 'บันทึก',
       },
     });
 
-    confirmDialog.componentInstance.confirmed.subscribe((res) => {
+    dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         this.save();
       }
@@ -322,13 +379,13 @@ export class AddStaffComponent implements OnInit {
   }
 
   onCompleted() {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
       },
     });
 
-    completeDialog.componentInstance.completed.subscribe((res) => {
+    dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
         this.cancel();
       }

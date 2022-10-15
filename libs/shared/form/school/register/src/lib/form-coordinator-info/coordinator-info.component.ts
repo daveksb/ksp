@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { SchoolRequestType, UserInfoFormType } from '@ksp/shared/constant';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { KspFormBaseComponent, Prefix } from '@ksp/shared/interface';
 import {
   createUserInfoForm,
   providerFactory,
@@ -27,7 +27,7 @@ export class FormCoordinatorInfoComponent
   @Input() isSchoolService = true;
   @Input() displayMode!: number[];
 
-  @Input() prefixList: any[] = [];
+  @Input() prefixList: Prefix[] | null = [];
   @Input() countryList: any[] = [];
   @Input() nationList: any[] = [];
   @Input() visaClassList: any[] = [];
@@ -67,7 +67,7 @@ export class FormCoordinatorInfoComponent
       this.form.controls.passportstartdate.clearValidators();
       this.form.controls.passportenddate.clearValidators();
       this.form.controls.position.clearValidators();
-      this.form.controls.kurupanno.clearValidators();
+      this.form.controls.kuruspanno.clearValidators();
     }
   }
   prefixChanged(evt: any) {

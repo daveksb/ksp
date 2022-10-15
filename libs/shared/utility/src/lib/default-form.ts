@@ -20,7 +20,8 @@ export function createUserInfoForm(fb: FormBuilder) {
   return fb.group({
     id: [],
     idcardno: ['', [Validators.required, Validators.pattern(idCardPattern)]],
-    kurupanno: ['', [Validators.required, Validators.pattern(idCardPattern)]],
+    kuruspanno: ['', [Validators.required, Validators.pattern(idCardPattern)]],
+
     isforeign: [null],
     passportno: [
       null,
@@ -28,6 +29,7 @@ export function createUserInfoForm(fb: FormBuilder) {
     ],
     passportstartdate: [],
     passportenddate: [],
+
     prefixth: [null, Validators.required],
     firstnameth: [
       null,
@@ -38,13 +40,15 @@ export function createUserInfoForm(fb: FormBuilder) {
       null,
       [Validators.required, Validators.pattern(nameThPattern)],
     ],
+
     prefixen: [null],
     firstnameen: [null, [Validators.pattern(nameEnPattern)]],
     middlenameen: [null],
     lastnameen: [null, [Validators.pattern(nameEnPattern)]],
+
     sex: [null, Validators.required],
     birthdate: [null, Validators.required],
-    position: [null, Validators.required],
+    position: [null],
     email: [null, [Validators.required, Validators.email]],
     contactphone: [
       null,
