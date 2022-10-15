@@ -15,7 +15,7 @@
         maxlength="13"
         class="form-control"
         type="text"
-        formControlName="idcardno"
+        formControlName="kuruspanno"
         placeholder="หมายเลข 13 หลัก"
       />
     </div>
@@ -76,7 +76,7 @@
     </div>
 
     <div class="col mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
-      <label class="form-label required">วันที่ออก</label>
+      <label class="form-label">วันที่ออก</label>
       <div class="d-flex align-items-center">
         <input
           matInput
@@ -96,7 +96,7 @@
     </div>
 
     <div class="col mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
-      <label class="form-label required">วันที่หมดอายุ</label>
+      <label class="form-label">วันที่หมดอายุ</label>
       <div class="d-flex align-items-center">
         <input
           matInput
@@ -285,7 +285,7 @@
     </div>
 
     <div class="col mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
-      <label class="form-label required">ประเทศ</label>
+      <label class="form-label">ประเทศ</label>
       <select class="form-select" formControlName="country">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let c of countryList" [value]="c.countryNo">

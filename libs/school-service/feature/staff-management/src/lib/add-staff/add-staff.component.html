@@ -10,7 +10,18 @@
   <div class="box-header">รายละเอียดเพิ่มบุคลากรภายในหน่วยงาน</div>
 
   <div class="bg-white p-3">
-    <ksp-request-header-info></ksp-request-header-info>
+    <div class="d-flex justify-content-between">
+      <ksp-request-header-info></ksp-request-header-info>
+      <div>
+        <input
+          (change)="isForeignSelect($event)"
+          type="checkbox"
+          class="me-2"
+        />
+        <label class="form-label">ชาวต่างชาติ</label>
+      </div>
+    </div>
+
     <hr />
     <div class="bg-light p-3 default-width">
       <ksp-form-user-info

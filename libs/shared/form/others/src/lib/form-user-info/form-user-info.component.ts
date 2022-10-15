@@ -72,15 +72,16 @@ export class FormUserInfoComponent
     );
   }
   ngOnInit(): void {
-    // ถ้าเป็น form คนไทยไม่ต้อง validate field เหล่านี้
+    // คนไทยไม่ต้อง validate field เหล่านี้
     if (this.displayMode.includes(UserInfoFormType.thai)) {
       this.form.controls.passportno.clearValidators();
-      this.form.controls.kurupanno.clearValidators();
+      this.form.controls.kuruspanno.clearValidators();
       this.form.controls.passportstartdate.clearValidators();
       this.form.controls.passportenddate.clearValidators();
       this.form.controls.position.clearValidators();
     }
 
+    // ต่างชาติ ไม่ต้อง validate field เหล่านี้
     if (this.displayMode.includes(UserInfoFormType.foreign)) {
       this.form.controls.idcardno.clearValidators();
       this.form.controls.workphone.clearValidators();
@@ -98,7 +99,7 @@ export class FormUserInfoComponent
         }
       });
 
-    this.form.controls.kurupanno.valueChanges
+    this.form.controls.kuruspanno.valueChanges
       .pipe(debounceTime(200), distinctUntilChanged())
       .subscribe((res) => {
         if (res && res.length === 13) {

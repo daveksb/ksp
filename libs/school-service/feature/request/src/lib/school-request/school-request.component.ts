@@ -187,20 +187,21 @@ export class SchoolRequestComponent implements OnInit {
     };
 
     this.requestService.schCancelRequest(payload).subscribe(() => {
-      //console.log('Cancel request  = ', res);
       this.completeDialog(`ยกเลิกใบคำขอสำเร็จ`);
     });
   }
 
   createRequest(process: number) {
-    console.log('create request = ');
     const baseForm = this.fb.group(new KspRequest());
+
     const formData: any = this.form.getRawValue();
     console.log('formdata = ', formData);
+
     const tab3 = mapMultiFileInfo(this.eduFiles);
     const tab4 = mapMultiFileInfo(this.teachingFiles);
     const tab5 = mapMultiFileInfo(this.reasonFiles);
     const tab6 = mapMultiFileInfo(this.attachFiles);
+
     formData.addr1.addresstype = 1;
     formData.addr2.addresstype = 2;
 
@@ -208,7 +209,6 @@ export class SchoolRequestComponent implements OnInit {
     userInfo.schoolid = this.schoolId;
     userInfo.process = `${process}`;
     userInfo.status = `1`;
-
     userInfo.ref1 = '2';
     userInfo.ref2 = '03';
     userInfo.ref3 = '1';
@@ -250,7 +250,7 @@ export class SchoolRequestComponent implements OnInit {
       ...{ hiringinfo: JSON.stringify(formData.hiringinfo) },
       //...{ visainfo: JSON.stringify(visaInfo) },
       ...{ schooladdrinfo: JSON.stringify(formData.schoolAddr) },
-      //...{ reasoninfo: JSON.stringify(formData.reasoninfo) },
+      ...{ reasoninfo: JSON.stringify(formData.reasoninfo) },
       ...{ fileinfo: JSON.stringify({ tab3, tab4, tab5, tab6 }) },
     };
 
@@ -275,9 +275,9 @@ export class SchoolRequestComponent implements OnInit {
     const baseForm = this.fb.group(new KspRequest());
     const formData: any = this.form.getRawValue();
     const userInfo: UserInfoForm = formData.userInfo;
-
-    /* userInfo.currentprocess = `1`;
-    userInfo.requeststatus = `1`;
+    /*
+    userInfo.process = '1';
+    userInfo.status = '1';
     userInfo.systemtype = `${this.systemType}`;
     userInfo.requesttype = `${this.requestType}`;
     userInfo.subtype = `${this.requestSubType}`; */
@@ -367,7 +367,7 @@ export class SchoolRequestComponent implements OnInit {
   checkButtonsDisableStatus() {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
       console.log('userInfo valid = ', this.form.controls.userInfo.valid);
-      console.log('form valid = ', this.form.valid);
+      //console.log('form valid = ', this.form.valid);
       // console.log('this.currentProcess = ', this.currentProcess);
       // สถานะ ยกเลิก disable ทุกอย่าง
       if (this.requestStatus === 0) {
@@ -522,7 +522,7 @@ export class SchoolRequestComponent implements OnInit {
       .searchStaffFromIdCard(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
-        //console.log('req = ', res);
+        console.log('req = ', res);
         if (res && res.returncode !== '98') {
           this.pathUserInfo(res);
           this.patchAddress(parseJson(res.addresses));

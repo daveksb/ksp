@@ -199,7 +199,7 @@ export class RequestRewardComponent implements OnInit {
 
   createRequest(currentProcess: string, requestStatus: string, form: any) {
     //console.log('form  = ', form);
-    const baseForm = this.fb.group(new SchoolRequest());
+    const baseForm = this.fb.group(new KspRequest());
     form.schoolid = this.schoolId;
     form.ref1 = `2`;
     form.ref2 = '40';
@@ -222,7 +222,7 @@ export class RequestRewardComponent implements OnInit {
 
     baseForm.patchValue(form);
     //console.log('current form = ', baseForm.value);
-    this.requestService.schCreateRequest(baseForm.value).subscribe((res) => {
+    this.requestService.schCreateRequest(baseForm.value).subscribe(() => {
       //console.log('request result = ', res);
       this.completeDialog();
     });
@@ -239,13 +239,13 @@ export class RequestRewardComponent implements OnInit {
   }
 
   confirmDialog(type: number) {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
       },
     });
 
-    dialogRef.componentInstance.confirmed.subscribe((res) => {
+    dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         if (type === 1) {
           this.onTempSave();
@@ -257,14 +257,14 @@ export class RequestRewardComponent implements OnInit {
   }
 
   completeDialog() {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: `ระบบทำการบันทึก
         เรียบร้อยแล้ว`,
       },
     });
 
-    completeDialog.componentInstance.completed.subscribe((res) => {
+    dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
         this.previousPage();
       }
