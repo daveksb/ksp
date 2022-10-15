@@ -1,4 +1,4 @@
 import { NgModule } from '@angular/core';
 
 @NgModule({})
-export class EServiceFormModule {}
+export class EServiceEthicsFormModule {}

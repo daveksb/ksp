@@ -11,7 +11,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { OsoiRankingComponent } from './osoi-ranking/osoi-ranking.component';
 import { OsoiObjectionComponent } from './osoi-objection/osoi-objection.component';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
-import { FormMeetingRecordComponent } from '@ksp/e-service/form';
+import { FormMeetingRecordComponent } from '@ksp/e-service/ethics/form';
 import { MatTableModule } from '@angular/material/table';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 import { EServiceRewardSearchComponent } from '@ksp/shared/search';
