@@ -27,14 +27,25 @@
   <div class="row">
     <div class="col-md-6 mb-2">
       <label class="form-label required">ข้อมูลการลาออกจากการปฏิบัติงาน</label>
-      <input class="form-control" type="text" formControlName="resignationDetail" />
+      <input
+        class="form-control"
+        type="text"
+        formControlName="resignationDetail"
+      />
     </div>
     <div class="col-md-6 mb-2">
       <label class="form-label required">ข้อมูลออกก่อนอายุครบ 60 ปี</label>
-      <input class="form-control" type="text" formControlName="earlyRetireDetail" />
+      <input
+        class="form-control"
+        type="text"
+        formControlName="earlyRetireDetail"
+      />
     </div>
   </div>
   <br />
   <div class="box-header text-primary required">ประวัติการถูกลงโทษทางวินัย</div>
-  <ksp-praise-teacher-punished formControlName="disciplineDetail"></ksp-praise-teacher-punished>
+  <ksp-praise-teacher-punished
+    formControlName="disciplineDetail"
+    [mode]="mode"
+  ></ksp-praise-teacher-punished>
 </form>

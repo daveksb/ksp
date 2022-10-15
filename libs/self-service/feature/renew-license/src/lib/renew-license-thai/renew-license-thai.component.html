@@ -8,7 +8,6 @@
         formControlName="userInfo"
         [isDarkMode]="true"
         [prefixList]="prefixList$ | async"
-        [displayMode]="[userInfoType]"
         [nationList]="nationalitys$ | async"
         [isSelfService]="true"
       >
@@ -52,6 +51,7 @@
       </div>
       <self-service-form-user-workplace
         formControlName="workplace"
+        [showContactForm]="true"
         [provinces]="provinces3$ | async"
         [amphurs]="amphurs3$ | async"
         [tumbols]="tumbols3$ | async"
@@ -60,7 +60,7 @@
         (amphurChanged)="amphurChanged(3, $event)"
       >
       </self-service-form-user-workplace>
-      <div class="row">
+    <!--   <div class="row">
         <div class="col-md-6 mb-3">
           <label class="form-label">โทรศัพท์</label>
           <input class="form-control" type="text" formControlName="workPhone" />
@@ -81,7 +81,7 @@
           <label class="form-label">เว็บไซต์</label>
           <input class="form-control" type="text" formControlName="website" />
         </div>
-      </div>
+      </div> -->
     </mat-tab>
 
     <mat-tab label="ผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน">

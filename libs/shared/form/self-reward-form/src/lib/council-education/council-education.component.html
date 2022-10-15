@@ -3,14 +3,13 @@
     <div class="d-flex justify-content-between align-items-center">
       <div class="box-header">ปริญญาตรี</div>
 
-      <div class="text-primary fs-5" role="button">
-        <ksp-add-row-button
-          class="text-primary fs-6"
-          (addRowClick)="addFormArray(licenseInfo1, 1)"
-        >
-          เพิ่ม
-        </ksp-add-row-button>
-      </div>
+      <ksp-add-row-button
+        *ngIf="mode === 'edit'"
+        class="text-primary"
+        (addRowClick)="addFormArray(licenseInfo1, 1)"
+      >
+        เพิ่ม
+      </ksp-add-row-button>
     </div>
 
     <ng-container formArrayName="licenseInfo1">
@@ -40,14 +39,13 @@
     <div class="d-flex justify-content-between align-items-center">
       <div class="box-header">ปริญญาโท</div>
 
-      <div class="text-primary fs-5" role="button">
-        <ksp-add-row-button
-          class="text-primary"
-          (addRowClick)="addFormArray(licenseInfo2, 2)"
-        >
-          เพิ่ม
-        </ksp-add-row-button>
-      </div>
+      <ksp-add-row-button
+        *ngIf="mode === 'edit'"
+        class="text-primary"
+        (addRowClick)="addFormArray(licenseInfo2, 2)"
+      >
+        เพิ่ม
+      </ksp-add-row-button>
     </div>
 
     <ng-container formArrayName="licenseInfo2">
@@ -77,14 +75,13 @@
     <div class="d-flex justify-content-between align-items-center">
       <div class="box-header">ปริญญาเอก</div>
 
-      <div class="text-primary fs-5" role="button">
-        <ksp-add-row-button
-          class="text-primary"
-          (addRowClick)="addFormArray(licenseInfo3, 3)"
-        >
-          เพิ่ม
-        </ksp-add-row-button>
-      </div>
+      <ksp-add-row-button
+        *ngIf="mode === 'edit'"
+        class="text-primary"
+        (addRowClick)="addFormArray(licenseInfo3, 3)"
+      >
+        เพิ่ม
+      </ksp-add-row-button>
     </div>
 
     <ng-container formArrayName="licenseInfo3">
@@ -114,14 +111,13 @@
     <div class="d-flex justify-content-between align-items-center">
       <div class="box-header">ปริญญาอื่นๆ</div>
 
-      <div class="text-primary fs-5" role="button">
-        <ksp-add-row-button
-          class="text-primary"
-          (addRowClick)="addFormArray(licenseInfo4, 4)"
-        >
-          เพิ่ม
-        </ksp-add-row-button>
-      </div>
+      <ksp-add-row-button
+        *ngIf="mode === 'edit'"
+        class="text-primary"
+        (addRowClick)="addFormArray(licenseInfo4, 4)"
+      >
+        เพิ่ม
+      </ksp-add-row-button>
     </div>
 
     <ng-container formArrayName="licenseInfo4">
@@ -151,14 +147,13 @@
     <div class="d-flex justify-content-between align-items-center">
       <div class="box-header">ใบรับรองฝึกอาชีพ</div>
 
-      <div class="text-primary fs-5" role="button">
-        <ksp-add-row-button
-          class="text-primary"
-          (addRowClick)="addFormArray(licenseInfo5, 5)"
-        >
-          เพิ่ม
-        </ksp-add-row-button>
-      </div>
+      <ksp-add-row-button
+        *ngIf="mode === 'edit'"
+        class="text-primary"
+        (addRowClick)="addFormArray(licenseInfo5, 5)"
+      >
+        เพิ่ม
+      </ksp-add-row-button>
     </div>
 
     <ng-container formArrayName="licenseInfo5">

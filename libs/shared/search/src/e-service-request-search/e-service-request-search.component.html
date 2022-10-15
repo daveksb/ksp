@@ -21,6 +21,26 @@
 
       <div class="row mb-2">
         <div class="col">
+          <label class="form-label">ประเภทใบคำขอ</label>
+          <select class="form-select">
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
+            <option value="1">ลงทะเบียนเข้าใช้งาน</option>
+            <option value="2">ถอดถอนผู้ใช้งาน</option>
+          </select>
+        </div>
+
+        <div class="col">
+          <label class="form-label">สถานะใบคำขอ</label>
+          <select class="form-select" formControlName="requeststatus">
+            <option selected hidden disabled value="null">กรุณาเลือก</option>
+            <option *ngFor="let s of statusList" [value]="s?.id">
+              {{ s?.ename }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-6">
           <label class="form-label">วันที่ยื่นใบคำขอ</label>
           <div class="d-flex align-items-center">
             <input
@@ -37,15 +57,6 @@
             ></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </div>
-        </div>
-        <div class="col">
-          <label class="form-label">สถานะ</label>
-          <select class="form-select" formControlName="requeststatus">
-            <option value="null" selected hidden disabled>กรุณาเลือก</option>
-            <option *ngFor="let s of statusList" [value]="s?.id">
-              {{ s?.ename }}
-            </option>
-          </select>
         </div>
       </div>
     </div>

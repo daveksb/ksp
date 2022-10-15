@@ -4,14 +4,15 @@
     [formGroup]="form"
     class="tab-group"
     animationDuration="0ms"
-    [selectedIndex]="0">
+    [selectedIndex]="0"
+  >
     <mat-tab label="ข้อมูลส่วนตัว">
       <ksp-form-user-info
-        [displayMode]="[userInfoType]"
         [isSelfService]="true"
         [prefixList]="prefixList"
         [requiredIdCardNo]="false"
-        formControlName="userInfo"></ksp-form-user-info>
+        formControlName="userInfo"
+      ></ksp-form-user-info>
     </mat-tab>
 
     <mat-tab label="ที่อยู่" class="tab-content">
@@ -22,21 +23,24 @@
         [amphurs]="amphurs1$ | async"
         [tumbols]="tumbols1$ | async"
         (provinceChanged)="provinceChanged(1, $event)"
-        (amphurChanged)="amphurChanged(1, $event)">
+        (amphurChanged)="amphurChanged(1, $event)"
+      >
         <span class="text-primary">ที่อยู่ที่สามารถติดต่อได้</span>
       </ksp-form-address>
       <hr />
       <div class="box-header text-primary">สถานที่ทำงาน</div>
       <self-service-form-user-workplace
         formControlName="workplace"
+        [showContactForm]="true"
         [provinces]="provinces2$ | async"
         [amphurs]="amphurs2$ | async"
         [tumbols]="tumbols2$ | async"
         [bureaus]="bureaus"
         (provinceChanged)="provinceChanged(2, $event)"
-        (amphurChanged)="amphurChanged(2, $event)">
+        (amphurChanged)="amphurChanged(2, $event)"
+      >
       </self-service-form-user-workplace>
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-md-6 mb-2">
           <label class="form-label">โทรศัพท์</label>
           <input class="form-control" type="text" formControlName="phone" />
@@ -57,7 +61,7 @@
           <label class="form-label">เว็บไซต์</label>
           <input class="form-control" type="text" formControlName="website" />
         </div>
-      </div>
+      </div> -->
     </mat-tab>
 
     <mat-tab label="ข้อมูลการศึกษา">
@@ -66,24 +70,28 @@
 
     <mat-tab label="ข้อมูลการทำงาน">
       <ksp-praise-teacher-working
-        formControlName="hiringInfo"></ksp-praise-teacher-working>
+        formControlName="hiringInfo"
+      ></ksp-praise-teacher-working>
     </mat-tab>
 
     <mat-tab label="ข้อมูลรางวัล">
       <ksp-praise-teacher-reward-info
-        formControlName="rewardDetailInfo"></ksp-praise-teacher-reward-info>
+        formControlName="rewardDetailInfo"
+      ></ksp-praise-teacher-reward-info>
     </mat-tab>
 
     <mat-tab label="ข้อมูลการถูกลงโทษทางวินัย">
       <ksp-praise-teacher-punished
-        formControlName="rewardPunishmentInfo"></ksp-praise-teacher-punished>
+        formControlName="rewardPunishmentInfo"
+      ></ksp-praise-teacher-punished>
     </mat-tab>
 
     <mat-tab label="เอกสารประกอบ">
       <ksp-form-attachment
         [groups]="rewardFiles"
         [uniqueTimestamp]="uniqueTimestamp"
-        [titleClass]="'text-primary'"></ksp-form-attachment>
+        [titleClass]="'text-primary'"
+      ></ksp-form-attachment>
     </mat-tab>
   </mat-tab-group>
 </form>

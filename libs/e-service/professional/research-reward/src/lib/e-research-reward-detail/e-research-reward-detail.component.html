@@ -17,7 +17,6 @@
         <mat-tab label="ข้อมูลส่วนตัว">
           <ksp-form-user-info
             [mode]="'view'"
-            [displayMode]="[userInfoType]"
             [isSelfService]="true"
             [prefixList]="prefixList$ | async"
             [requiredIdCardNo]="false"
@@ -30,13 +29,14 @@
           <self-service-form-user-workplace
             [mode]="'view'"
             formControlName="workplace"
+            [showContactForm]="true"
             [provinces]="provinces$ | async"
             [amphurs]="amphurs$ | async"
             [tumbols]="tumbols$ | async"
             [bureaus]="bureaus$ | async"
           >
           </self-service-form-user-workplace>
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-md-6 mb-2">
               <label class="form-label">โทรศัพท์</label>
               <input class="form-control" type="text" formControlName="phone" />
@@ -61,7 +61,7 @@
                 formControlName="website"
               />
             </div>
-          </div>
+          </div> -->
         </mat-tab>
 
         <mat-tab label="ข้อมูลผู้วิจัย">
