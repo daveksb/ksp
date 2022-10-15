@@ -19,12 +19,19 @@ import {
 } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
 import {
+  AcademicStanding,
   Amphur,
+  Country,
   FileGroup,
   KspRequest,
+  Nationality,
+  PositionType,
   Province,
+  StaffType,
   Tambol,
   UserInfoForm,
+  VisaClass,
+  VisaType,
 } from '@ksp/shared/interface';
 
 import {
@@ -54,18 +61,19 @@ export class SchoolRequestComponent implements OnInit {
   uniqueNo!: string; // use for file upload reference, gen only first time component loaded
   pageType = RequestPageType;
 
-  countries$!: Observable<any>;
+  countries$!: Observable<Country[]>;
   provinces$!: Observable<Province[]>;
   amphurs1$!: Observable<Amphur[]>;
   tumbols1$!: Observable<Tambol[]>;
   amphurs2$!: Observable<Amphur[]>;
   tumbols2$!: Observable<Tambol[]>;
-  staffTypes$!: Observable<any>;
-  positionTypes$!: Observable<any>;
-  academicTypes$!: Observable<any>;
-  nationList$!: Observable<any>;
-  visaTypeList!: Observable<any>;
-  visaClassList!: Observable<any>;
+  nationList$!: Observable<Nationality[]>;
+
+  staffTypes$!: Observable<StaffType[]>;
+  positionTypes$!: Observable<PositionType[]>;
+  academicTypes$!: Observable<AcademicStanding[]>;
+  visaTypeList!: Observable<VisaType[]>;
+  visaClassList!: Observable<VisaClass[]>;
 
   requestId!: number;
   requestData = new KspRequest();

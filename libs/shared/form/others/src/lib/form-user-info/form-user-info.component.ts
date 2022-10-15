@@ -9,7 +9,14 @@ import {
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { SchoolRequestType, UserInfoFormType } from '@ksp/shared/constant';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import {
+  Country,
+  KspFormBaseComponent,
+  Nationality,
+  Prefix,
+  VisaClass,
+  VisaType,
+} from '@ksp/shared/interface';
 import {
   createUserInfoForm,
   providerFactory,
@@ -17,6 +24,13 @@ import {
 } from '@ksp/shared/utility';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 
+/**
+ * Dark Mode : all inputs will have gray background and form container will have white background
+ * Use in Self-Service
+ *
+ * Normal Mode : all inputs will have white background and form container will have gray background
+ * Use in E-service, School-Service
+ */
 @Component({
   selector: 'ksp-form-user-info',
   templateUrl: './form-user-info.component.html',
@@ -27,11 +41,11 @@ export class FormUserInfoComponent
   extends KspFormBaseComponent
   implements OnInit, OnChanges
 {
-  @Input() prefixList: any[] = [];
-  @Input() countryList: any[] = [];
-  @Input() nationList: any[] = [];
-  @Input() visaClassList: any[] = [];
-  @Input() visaTypeList: any[] = [];
+  @Input() prefixList: Prefix[] | null = [];
+  @Input() countryList: Country[] | null = [];
+  @Input() nationList: Nationality[] | null = [];
+  @Input() visaClassList: VisaClass[] | null = [];
+  @Input() visaTypeList: VisaType[] | null = [];
   @Input() displayMode!: number[];
   @Input() isqualification = false;
   @Input() isDarkMode = false;
@@ -45,15 +59,6 @@ export class FormUserInfoComponent
   RequestTypeEnum = SchoolRequestType;
   validatorMessages = validatorMessages;
   FormTypeEnum = UserInfoFormType;
-  today = new Date().toISOString().split('T')[0];
-
-  /**
-   * Dark Mode : all inputs will have gray background and form container will have white background
-   * Use in Self-Service
-   *
-   * Normal Mode : all inputs will have white background and form container will have gray background
-   * Use in E-service, School-Service
-   */
 
   override form = createUserInfoForm(this.fb);
 
@@ -69,7 +74,6 @@ export class FormUserInfoComponent
   ngOnInit(): void {
     // ถ้าเป็น form คนไทยไม่ต้อง validate field เหล่านี้
     if (this.displayMode.includes(UserInfoFormType.thai)) {
-      console.log('aaa = ');
       this.form.controls.passportno.clearValidators();
       this.form.controls.kurupanno.clearValidators();
       this.form.controls.passportstartdate.clearValidators();
@@ -78,7 +82,6 @@ export class FormUserInfoComponent
     }
 
     if (this.displayMode.includes(UserInfoFormType.foreign)) {
-      console.log('bbb = ');
       this.form.controls.idcardno.clearValidators();
       this.form.controls.workphone.clearValidators();
       this.form.controls.contactphone.clearValidators();
@@ -115,7 +118,6 @@ export class FormUserInfoComponent
 
   prefixChanged(evt: any) {
     const prefix = evt.target?.value;
-
     if (prefix === '1') {
       const temp: any = { sex: '1' };
       this.form.patchValue(temp);
@@ -126,7 +128,6 @@ export class FormUserInfoComponent
       const temp: any = { sex: '3' };
       this.form.patchValue(temp);
     }
-
     const en = { prefixen: prefix };
     const th = { prefixth: prefix };
     this.form.patchValue(th);

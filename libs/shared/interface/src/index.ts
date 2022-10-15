@@ -23,3 +23,4 @@ export * from './lib/university-select';
 export * from './lib/school-info';
 export * from './lib/ksp-menu-config';
 export * from './lib/ksp-general';
+export * from './lib/school-general';

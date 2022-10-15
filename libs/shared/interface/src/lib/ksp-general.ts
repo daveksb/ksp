@@ -31,3 +31,9 @@ export interface Country {
   countryN: string;
   countryNo: string;
 }
+
+export interface Nationality {
+  nationId: string;
+  nationName: string;
+  nationNameEn: string;
+}

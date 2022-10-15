@@ -19,10 +19,4 @@ export class SchoolUser {
   lastnameen: string | null = null;
   permissionright: string | null = null;
   coordinatorinfo: string | null = null;
-
-  /*   constructor(
-    status = 1 // สถานะ
-  ) {
-    super();
-  } */
 }
