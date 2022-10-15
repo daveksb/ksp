@@ -47,6 +47,40 @@ export function replaceEmptyWithNull(input: any) {
   return input;
 }
 
+export function formatDatePayload(input: any) {
+  for (const [key, value] of Object.entries(input)) {
+    if (key.includes('date') && input[key]) {
+      input[key] = formatDate(new Date(input[key]).toISOString());
+    }
+  }
+  return input;
+}
+
+/**
+ *
+ * @param input return correct format date to send to API
+ * @returns
+ */
+export function formatDate(input: string | null | undefined) {
+  if (input && input.length) {
+    console.log('aa = ');
+    return input.split('T')[0];
+  } else {
+    console.log('bb = ');
+    return null;
+  }
+}
+
+// replace object value from Undefined --> null
+export function replaceUndefinedWithNull(input: any) {
+  for (const [key, value] of Object.entries(input)) {
+    if (value === undefined) {
+      input[key] = null;
+    }
+  }
+  return input;
+}
+
 // parse json with Thai characters support
 export function parseJson(input: any) {
   if (input) {
@@ -114,18 +148,6 @@ export function getBase64(
   });
 }
 
-/**
- *
- * @param input return correct format date to send to API
- * @returns
- */
-export function formatDate(input: string | null | undefined) {
-  if (input && input.length) {
-    return input.split('T')[0];
-  } else {
-    return null;
-  }
-}
 export function changeDate(
   input: Date | string | null | undefined
 ): string | null {

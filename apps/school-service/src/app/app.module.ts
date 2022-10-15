@@ -18,7 +18,13 @@ import {
 import { File_UPLOAD_URLS, FileUploadUrls } from '@ksp/shared/form/file-upload';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import {
+  DateAdapter,
+  MatNativeDateModule,
+  MAT_DATE_LOCALE,
+  NativeDateAdapter,
+} from '@angular/material/core';
+import { formatDate } from '@angular/common';
 
 const fileUrls: FileUploadUrls = {
   uploadFile: '/kspstaff/schrequestfileinsert',
@@ -29,15 +35,15 @@ const fileUrls: FileUploadUrls = {
 
 /* class PickDateAdapter extends NativeDateAdapter {
   override format(date: Date, displayFormat: any): string {
-     if (displayFormat === 'input') {
+    if (displayFormat === 'input') {
       return formatDate(date, 'dd-mm-yyyy', this.locale);
     } else {
       return date.toDateString();
     }
     return date.toDateString();
   }
-}
- */
+} */
+
 @NgModule({
   declarations: [AppComponent],
   imports: [

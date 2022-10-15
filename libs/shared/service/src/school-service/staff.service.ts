@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
+import { KspResponse, SchStaff } from '@ksp/shared/interface';
 import { map, Observable, shareReplay } from 'rxjs';
 
 @Injectable({
@@ -9,10 +10,13 @@ import { map, Observable, shareReplay } from 'rxjs';
 export class StaffService {
   constructor(private http: HttpClient) {}
 
-  addStaff(payload: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/kspstaff/schstaff2insert`, {
-      ...payload,
-    });
+  addStaff(payload: Partial<SchStaff>): Observable<KspResponse> {
+    return this.http.post<KspResponse>(
+      `${environment.apiUrl}/kspstaff/schstaff2insert`,
+      {
+        ...payload,
+      }
+    );
   }
 
   searchStaffFromId(staffId: number): Observable<any> {
