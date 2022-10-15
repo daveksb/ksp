@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { levels } from '@ksp/shared/constant';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { KspFormBaseComponent, PositionType } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
@@ -26,9 +26,8 @@ export class StaffSearchComponent extends KspFormBaseComponent {
 
   @Output() clear = new EventEmitter<boolean>();
   @Output() search = new EventEmitter<any>();
-  @Input() positions: any[] = [];
+  @Input() positions: PositionType[] | null = [];
   @Input() licenseTypes: any[] = [];
-
 
   constructor(private fb: FormBuilder) {
     super();

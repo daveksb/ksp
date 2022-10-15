@@ -134,10 +134,10 @@
   <ksp-bottom-nav
     [isLastPage]="true"
     [isFirstPage]="true"
-    [showSaveButton]="mode === 'edit'"
-    [disableSaveButton]="form.invalid"
+    [showSaveButton]="mode !== 'view'"
+    [disableSaveButton]="false"
     [showCenterButtons]="true"
     (saveClicked)="onConfirmed()"
-    (cancelClicked)="cancel()"
+    (cancelClicked)="navigateBack()"
   ></ksp-bottom-nav>
 </div>

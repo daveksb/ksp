@@ -9,8 +9,10 @@ import {
 import { Observable } from 'rxjs';
 import {
   formatCheckboxData,
+  formatDatePayload,
   parseJson,
   replaceEmptyWithNull,
+  replaceUndefinedWithNull,
 } from '@ksp/shared/utility';
 import {
   CompleteDialogComponent,
@@ -27,6 +29,7 @@ import {
   PositionType,
   Prefix,
   Province,
+  SchStaff,
   StaffType,
   Tambol,
 } from '@ksp/shared/interface';
@@ -80,6 +83,9 @@ export class AddStaffComponent implements OnInit {
     this.checkMode();
     this.getListData();
     this.checkStaffId();
+    /*     this.form.valueChanges.subscribe((res) =>
+      console.log(this.form.controls.userInfo.value)
+    ); */
   }
 
   checkStaffId() {
@@ -94,9 +100,17 @@ export class AddStaffComponent implements OnInit {
 
         // redirect from search idcard page
         const idcardno = Number(params.get('idcardno'));
+        const kuruspanno = Number(params.get('kuruspano'));
+
         if (idcardno) {
           this.searchStaffDone = true;
-          const temp: any = { idcardno };
+          const temp: any = { idcardno: `${idcardno}` };
+          this.form.controls.userInfo.patchValue(temp);
+        }
+
+        if (kuruspanno) {
+          this.searchStaffDone = true;
+          const temp: any = { kuruspanno: `${kuruspanno}` };
           this.form.controls.userInfo.patchValue(temp);
         }
       });
@@ -127,9 +141,9 @@ export class AddStaffComponent implements OnInit {
       });
   }
 
-  searchKuruspaNo(kuruspaNo: string) {
+  searchKuruspaNo(kuruspano: string) {
     const payload = {
-      idcardno: kuruspaNo,
+      kuruspano,
       schoolid: this.schoolId,
     };
 
@@ -145,7 +159,7 @@ export class AddStaffComponent implements OnInit {
           this.router.navigate([
             '/staff-management',
             'add-staff-foreign',
-            kuruspaNo,
+            kuruspano,
           ]);
         }
         this.searchStaffDone = true;
@@ -245,13 +259,11 @@ export class AddStaffComponent implements OnInit {
   }
 
   insertStaff() {
+    const baseForm = this.fb.group(new SchStaff());
     const formData: any = this.form.getRawValue();
+
     formData.addr1.addressType = 1;
     formData.addr2.addressType = 2;
-
-    const { id, ...userInfo } = formData.userInfo;
-    userInfo.schoolid = this.schoolId;
-    userInfo.createdate = new Date().toISOString().split('.')[0];
 
     const teaching: any = this.form.controls.teachingInfo.value;
     const teachingLevel = formatCheckboxData(teaching.teachingLevel, levels);
@@ -265,18 +277,23 @@ export class AddStaffComponent implements OnInit {
       teachingSubjectOther: teaching.teachingSubjectOther || null,
     };
 
+    const { id, ...userInfo } = formData.userInfo;
+    userInfo.schoolid = this.schoolId;
+
     const payload = {
-      ...userInfo,
+      ...replaceEmptyWithNull(userInfo),
       ...{ addresses: JSON.stringify([formData.addr1, formData.addr2]) },
       ...{ educations: JSON.stringify([formData.edu1, formData.edu2]) },
       ...{ teachinginfo: JSON.stringify(teachingInfo) },
       ...{ hiringinfo: JSON.stringify(formData.hiringInfo) },
     };
-    //console.log('insert payload = ', payload);
-    this.staffService.addStaff(payload).subscribe((res) => {
-      //console.log('add staff result = ', res);
+
+    baseForm.patchValue(payload);
+    let staff = replaceUndefinedWithNull(baseForm.value);
+    staff = formatDatePayload(staff);
+
+    this.staffService.addStaff(staff).subscribe(() => {
       this.onCompleted();
-      this.form.reset();
     });
   }
 
@@ -309,7 +326,7 @@ export class AddStaffComponent implements OnInit {
 
     payload = replaceEmptyWithNull(payload);
 
-    this.staffService.updateStaff(payload).subscribe((res) => {
+    this.staffService.updateStaff(payload).subscribe(() => {
       //console.log('update result = ', res);
     });
   }
@@ -359,7 +376,7 @@ export class AddStaffComponent implements OnInit {
     this.academicTypes$ = this.staffService.getAcademicStandingTypes();
   }
 
-  cancel() {
+  navigateBack() {
     this.router.navigate(['/staff-management', 'list']);
   }
 
@@ -387,7 +404,8 @@ export class AddStaffComponent implements OnInit {
 
     dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.cancel();
+        this.form.reset();
+        this.navigateBack();
       }
     });
   }

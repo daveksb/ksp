@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { staffLicenseTypes } from '@ksp/shared/constant';
-import { ListData } from '@ksp/shared/interface';
+import { ListData, PositionType, SchStaff } from '@ksp/shared/interface';
 import { StaffService } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 
@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
 })
 export class ActivityListComponent implements AfterViewInit {
   activityPageMode = activityPageMode;
-  positions$!: Observable<any>;
+  positions$!: Observable<PositionType[]>;
   licenseTypes: ListData[] = staffLicenseTypes;
   searchNotFound = false;
 
@@ -39,7 +39,7 @@ export class ActivityListComponent implements AfterViewInit {
     'view',
   ];
 
-  dataSource = new MatTableDataSource<staffInfo>();
+  dataSource = new MatTableDataSource<SchStaff>();
 
   constructor(
     public router: Router,
@@ -91,11 +91,11 @@ export class ActivityListComponent implements AfterViewInit {
   }
 
   edit(pageType: any, staffId: number) {
-    this.router.navigate(['/', 'activity', 'detail', pageType, staffId]);
+    this.router.navigate(['/activity', 'detail', pageType, staffId]);
   }
 
   view(pageType: any, staffId: number) {
-    this.router.navigate(['/', 'activity', 'detail', pageType, staffId]);
+    this.router.navigate(['/activity', 'detail', pageType, staffId]);
   }
 }
 
