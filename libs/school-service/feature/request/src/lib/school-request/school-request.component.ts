@@ -531,9 +531,9 @@ export class SchoolRequestComponent implements OnInit {
           this.patchHiringInfo(parseJson(res.hiringinfo));
         } else {
           // search not found reset form and set idcard again
-          // this.form.reset();
-          // const temp: any = { idcardno: idCard };
-          // this.form.controls.userInfo.patchValue(temp);
+          this.form.reset();
+          const temp: any = { idcardno: idCard };
+          this.form.controls.userInfo.patchValue(temp);
         }
       });
   }
@@ -549,7 +549,7 @@ export class SchoolRequestComponent implements OnInit {
       .searchStaffFromKuruspaNo(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
-        console.log('res = ', res);
+        //console.log('res = ', res);
         if (res && res.returncode !== '98') {
           this.pathUserInfo(res);
           this.patchAddress(parseJson(res.addresses));

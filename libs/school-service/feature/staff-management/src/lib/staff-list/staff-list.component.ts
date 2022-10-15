@@ -5,7 +5,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { staffLicenseTypes } from '@ksp/shared/constant';
-import { ListData } from '@ksp/shared/interface';
+import { ListData, PositionType, SchStaff } from '@ksp/shared/interface';
 import { StaffService } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 
@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./staff-list.component.scss'],
 })
 export class StaffListComponent implements AfterViewInit {
-  positions$!: Observable<any>;
+  positions$!: Observable<PositionType[]>;
   licenseTypes: ListData[] = staffLicenseTypes;
   searchNotFound = false;
 
@@ -39,7 +39,7 @@ export class StaffListComponent implements AfterViewInit {
     'edit',
     'view',
   ];
-  dataSource = new MatTableDataSource<staffInfo>();
+  dataSource = new MatTableDataSource<SchStaff>();
 
   constructor(
     private router: Router,

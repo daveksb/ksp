@@ -55,7 +55,7 @@ export class StaffService {
     );
   }
 
-  searchStaffs(payload: any): Observable<any> {
+  searchStaffs(payload: any): Observable<SchStaff[]> {
     return this.http
       .post(`${environment.shortApiUrl}/schstaff2search.php`, {
         ...payload,
