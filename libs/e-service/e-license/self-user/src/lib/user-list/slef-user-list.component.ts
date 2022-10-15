@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -23,6 +23,7 @@ export class SelfUserListComponent implements AfterViewInit {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<any>();
   selectedUniversity = '';
+  @Input() statusList: any[] | undefined = [];
 
   constructor(
     private router: Router,
@@ -40,10 +41,10 @@ export class SelfUserListComponent implements AfterViewInit {
   }
 
   search(params: any) {
-    console.log('params = ', params);
+    //console.log('params = ', params);
 
     const payload: EsSearchPayload = {
-      systemtype: '2',
+      systemtype: '1',
       requesttype: '1',
       requestno: null,
       careertype: null,
