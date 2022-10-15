@@ -82,7 +82,6 @@ export class FormUserInfoComponent
   }
 
   checkValidators(mode: number) {
-    console.log('mode = ', mode);
     // คนไทยไม่ต้อง validate field เหล่านี้
     if (mode === UserInfoFormType.thai) {
       //console.log('aa = ');
@@ -95,7 +94,7 @@ export class FormUserInfoComponent
 
     // ต่างชาติ ไม่ต้อง validate field เหล่านี้
     if ((mode = UserInfoFormType.foreign)) {
-      //console.log('bb = ');
+      console.log('bb = ');
       this.form.controls.idcardno.clearValidators();
       this.form.controls.workphone.clearValidators();
       this.form.controls.contactphone.clearValidators();

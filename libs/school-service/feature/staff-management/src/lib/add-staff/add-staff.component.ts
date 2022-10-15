@@ -50,7 +50,7 @@ export class AddStaffComponent implements OnInit {
   positionTypes$!: Observable<PositionType[]>;
   academicTypes$!: Observable<AcademicStanding[]>;
   schoolId = '0010201056';
-  mode: FormMode = 'edit';
+  mode: FormMode = 'add';
   userInfoType = UserInfoFormType.thai;
   searchStaffDone = false;
   kuruspaNo = '';
@@ -112,13 +112,41 @@ export class AddStaffComponent implements OnInit {
       .searchStaffFromIdCard(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
-        //console.log('res = ', res);
         if (res && res.returncode !== '98') {
           // found staff
           this.router.navigate(['/staff-management', 'edit-staff', res.id]);
         } else {
           // not found then reset form and set idcard again
-          this.router.navigate(['/staff-management', 'add-staff', idcardno]);
+          this.router.navigate([
+            '/staff-management',
+            'add-staff-thai',
+            idcardno,
+          ]);
+        }
+        this.searchStaffDone = true;
+      });
+  }
+
+  searchKuruspaNo(kuruspaNo: string) {
+    const payload = {
+      idcardno: kuruspaNo,
+      schoolid: this.schoolId,
+    };
+
+    this.staffService
+      .searchStaffFromIdCard(payload)
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res && res.returncode !== '98') {
+          // found staff
+          this.router.navigate(['/staff-management', 'edit-staff', res.id]);
+        } else {
+          // not found then reset form and set idcard again
+          this.router.navigate([
+            '/staff-management',
+            'add-staff-foreign',
+            kuruspaNo,
+          ]);
         }
         this.searchStaffDone = true;
       });
@@ -166,10 +194,16 @@ export class AddStaffComponent implements OnInit {
       this.searchStaffDone = true;
       this.mode = 'view';
       this.form.disable();
-    } else {
-      // add staff
+    } else if (this.router.url.includes('add-staff-thai')) {
+      this.mode = 'add';
+      this.userInfoType = UserInfoFormType.thai;
+    } else if (this.router.url.includes('add-staff-foreign')) {
+      this.mode = 'add';
+      this.userInfoType = UserInfoFormType.foreign;
+    } else if (this.router.url.includes('edit-staff')) {
       this.mode = 'edit';
     }
+    //this.userInfoType = UserInfoFormType.foreign;
   }
 
   /**
@@ -193,6 +227,7 @@ export class AddStaffComponent implements OnInit {
   }
 
   isForeignSelect(evt: any) {
+    this.form.reset();
     const checked = evt.target.checked;
     if (checked) {
       this.userInfoType = UserInfoFormType.foreign;
