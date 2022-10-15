@@ -49,7 +49,7 @@
           </select>
         </div>
       </div>
-      <div class="d-flex justify-content-end">
+      <div class="d-flex justify-content-end my-3">
         <button
           (click)="clear()"
           type="button"
@@ -63,8 +63,13 @@
       </div>
       <hr />
 
-      <div class="box-header text-primary">ผลการค้นหา</div>
-      <div class="table-responsive">
+      <div
+        class="box-header text-primary mb-2"
+        *ngIf="schoolInfos && schoolInfos.length"
+      >
+        ผลการค้นหา
+      </div>
+      <div class="table-responsive" *ngIf="schoolInfos && schoolInfos.length">
         <table class="table">
           <thead class="header__table">
             <tr>
@@ -140,7 +145,10 @@
         </ul>
       </nav>
 
-      <div class="d-flex justify-content-center mt-2">
+      <div
+        class="d-flex justify-content-center"
+        *ngIf="schoolInfos && schoolInfos.length"
+      >
         <button
           matDialogClose
           type="button"

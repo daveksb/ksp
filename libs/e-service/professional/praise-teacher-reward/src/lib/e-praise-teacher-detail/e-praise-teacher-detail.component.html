@@ -17,7 +17,6 @@
       <mat-tab label="ข้อมูลส่วนตัว">
         <ksp-form-user-info
           [mode]="'view'"
-          [displayMode]="[userInfoType]"
           [isSelfService]="true"
           [prefixList]="prefixList$ | async"
           [requiredIdCardNo]="false"
@@ -40,7 +39,7 @@
         <div class="box-header text-primary">สถานที่ทำงาน</div>
         <self-service-form-user-workplace
           [mode]="'view'"
-          [isDarkMode]="false"
+          [showContactForm]="true"
           formControlName="workplace"
           [provinces]="provinces2$ | async"
           [amphurs]="amphurs2$ | async"
@@ -48,7 +47,7 @@
           [bureaus]="bureaus$ | async"
         >
         </self-service-form-user-workplace>
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-md-6 mb-2">
             <label class="form-label">โทรศัพท์</label>
             <input class="form-control" type="text" formControlName="phone" />
@@ -69,7 +68,7 @@
             <label class="form-label">เว็บไซต์</label>
             <input class="form-control" type="text" formControlName="website" />
           </div>
-        </div>
+        </div> -->
       </mat-tab>
 
       <mat-tab label="ข้อมูลการศึกษา">

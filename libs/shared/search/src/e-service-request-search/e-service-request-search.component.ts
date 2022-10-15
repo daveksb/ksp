@@ -27,7 +27,7 @@ export class EServiceRequestSearchComponent extends KspFormBaseComponent {
     requestno: [''],
     name: [''],
     requestdatefrom: [''],
-    requeststatus: [''],
+    requeststatus: [null],
   });
 
   @Input() searchType = '';

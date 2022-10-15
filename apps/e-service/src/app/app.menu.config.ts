@@ -256,6 +256,11 @@ export const eLicenseMenu: MenuConfig[] = [
     ],
   },
   {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'ใบคำขอผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
+    path: '/school/new-user',
+  },
+  {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ทะเบียนข้อมูล',
     path: '/xxx',
@@ -289,11 +294,10 @@ export const eLicenseMenu: MenuConfig[] = [
     isExpanded: false,
     subMenuName: 'user-management',
     subMenu: [
-      {
+      /* {
         path: '/school/new-user',
-        label:
-          'ใบคำขอรหัสเข้าใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
-      },
+        label: 'ใบคำขอผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
+      }, */
       {
         path: '/self/current-user',
         label: 'ผู้ใช้งานระบบบริการด้วยตนเอง (self Service)',
@@ -675,11 +679,11 @@ export const refundFeeMenu: MenuConfig[] = [
         label: 'รายการใบขอคืนค่าธรรมเนียม',
       },
       {
-        path: '/refund/detail',
+        path: '/xxx',
         label: 'บัญชีรายชื่อและอนุมัติการคืนค่าธรรมเนียม',
       },
       {
-        path: '/refund/approve',
+        path: '/xxx',
         label: 'ตรวจสอบและบันทึกสถานะการคืนค่าธรรมเนียม',
       },
     ],

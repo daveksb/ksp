@@ -11,6 +11,9 @@ const formList = [
   'bureauid',
   'schoolname',
   'houseno',
+  'moo',
+  'alley',
+  'road',
   'postcode',
   'province',
   'tumbol',
@@ -28,6 +31,7 @@ export class FormUserWorkplaceComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+  @Input() showContactForm = false;
   @Input() isDarkMode = false;
   @Input() provinces: any[] = [];
   @Input() amphurs: any[] = [];
@@ -49,6 +53,11 @@ export class FormUserWorkplaceComponent
     tumbol: [null, Validators.required],
     amphur: [null, Validators.required],
     notRequired: [false],
+
+    phone: [],
+    fax: [],
+    email: [],
+    website: [],
   });
 
   constructor(private dialog: MatDialog, private fb: FormBuilder) {
@@ -71,8 +80,11 @@ export class FormUserWorkplaceComponent
           formList.forEach((form) => {
             if (!next.notRequired) {
               this.form.get(form)?.addValidators(Validators.required);
+              this.form.get(form)?.enable();
             } else {
               this.form.get(form)?.clearValidators();
+              this.form.get(form)?.disable();
+              this.form.get(form)?.reset();
             }
             this.form.get(form)?.updateValueAndValidity();
           });
@@ -82,8 +94,18 @@ export class FormUserWorkplaceComponent
 
   openSearchDialog() {
     this.dialog.open(UniversitySearchComponent, {
-      height: '900px',
-      width: '1200px',
+      height: '100vh',
+      width: '75vw',
+      position: {
+        top: '0px',
+        right: '0px',
+      },
+
+      data: {
+        searchType: 'string',
+        subHeader: 'กรุณาเลือกหน่วยงาน/สถานศึกษาที่ท่านสังกัด',
+        bureauList: 'string',
+      },
     });
   }
 

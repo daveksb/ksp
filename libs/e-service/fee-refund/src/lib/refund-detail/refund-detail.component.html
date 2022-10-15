@@ -13,11 +13,14 @@
     <hr />
     <div class="bg-light p-3">
       <div class="box-header">ข้อมูลผู้ยื่นใบคำขอ</div>
-      <ksp-form-user-info></ksp-form-user-info>
+      <ksp-form-user-info
+        [isSelfService]="true"
+        [mode]="'view'"
+      ></ksp-form-user-info>
     </div>
     <br />
     <div class="bg-light p-3">
-      <ksp-form-refund-fee-detail></ksp-form-refund-fee-detail>
+      <ksp-form-refund-fee-detail [mode]="'view'"></ksp-form-refund-fee-detail>
     </div>
     <br />
     <ksp-form-attachment

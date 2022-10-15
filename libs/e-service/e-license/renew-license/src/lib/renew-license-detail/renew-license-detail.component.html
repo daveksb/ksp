@@ -21,7 +21,6 @@
             formControlName="userInfo"
             [isDarkMode]="true"
             [prefixList]="prefixList$ | async"
-            [displayMode]="[userInfoType]"
             [nationList]="nationalitys$ | async"
             [isSelfService]="true"
           >
@@ -64,6 +63,7 @@
             >
           </div>
           <self-service-form-user-workplace
+            [showContactForm]="true"
             formControlName="workplace"
             [provinces]="provinces$ | async"
             [amphurs]="amphurs3$ | async"

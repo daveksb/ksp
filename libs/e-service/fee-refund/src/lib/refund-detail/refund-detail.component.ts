@@ -8,7 +8,16 @@ import { Router } from '@angular/router';
 })
 export class RefundDetailComponent implements OnInit {
   refundInfo = ['1.สำเนาวุฒิการศึกษา'];
-  choices = ['ครบถ้วน และถูกต้อง', 'ไม่ครบถ้วน และไม่ถูกต้อง'];
+  choices = [
+    {
+      name: 'ครบถ้วน และถูกต้อง',
+      value: 2,
+    },
+    {
+      name: 'ไม่ครบถ้วน และถูกต้อง',
+      value: 3,
+    },
+  ];
 
   constructor(private router: Router) {}
 
