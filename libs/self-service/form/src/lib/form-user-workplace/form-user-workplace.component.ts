@@ -28,6 +28,7 @@ export class FormUserWorkplaceComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+  @Input() showContactForm = false;
   @Input() isDarkMode = false;
   @Input() provinces: any[] = [];
   @Input() amphurs: any[] = [];
@@ -49,6 +50,11 @@ export class FormUserWorkplaceComponent
     tumbol: [null, Validators.required],
     amphur: [null, Validators.required],
     notRequired: [false],
+
+    phone: [],
+    fax: [],
+    email: [],
+    website: [],
   });
 
   constructor(private dialog: MatDialog, private fb: FormBuilder) {

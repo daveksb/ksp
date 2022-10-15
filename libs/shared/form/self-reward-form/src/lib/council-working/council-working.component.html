@@ -8,7 +8,8 @@
             <i
               class="bi bi-x-circle-fill text-danger"
               (click)="deleteFormArray(workInfo, i)"
-              role="button"></i>
+              role="button"
+            ></i>
           </div>
           <div class="row">
             <div class="col-md-6 mb-2">
@@ -16,14 +17,16 @@
               <input
                 class="form-control"
                 type="text"
-                formControlName="position" />
+                formControlName="position"
+              />
             </div>
             <div class="col-md-6 mb-2">
               <label class="form-label required">วิทยฐานะ</label>
               <input
                 class="form-control"
                 type="text"
-                formControlName="academicStanding" />
+                formControlName="academicStanding"
+              />
             </div>
           </div>
           <div class="row">
@@ -32,14 +35,16 @@
               <input
                 class="form-control"
                 type="text"
-                formControlName="status" />
+                formControlName="status"
+              />
             </div>
             <div class="col-md-6 mb-2">
               <label class="form-label required">ปีที่เริ่มเข้า</label>
               <input
                 class="form-control"
                 type="text"
-                formControlName="startYear" />
+                formControlName="startYear"
+              />
             </div>
           </div>
           <div class="row">
@@ -48,19 +53,23 @@
               <input
                 class="form-control"
                 type="text"
-                formControlName="salary" />
+                formControlName="salary"
+              />
             </div>
             <div class="col-md-6 mb-2">
               <label class="form-label required">งานที่ได้รับมอบหมาย </label>
               <input
                 class="form-control"
                 type="text"
-                formControlName="assignment" />
+                formControlName="assignment"
+              />
             </div>
           </div>
           <div class="row">
             <div class="col-md-6 mb-2">
-              <label class="form-label required">การศึกษา / ฝึกอบรม / ประชุมสัมนา</label>
+              <label class="form-label required"
+                >การศึกษา / ฝึกอบรม / ประชุมสัมนา</label
+              >
               <input class="form-control" type="text" formControlName="study" />
             </div>
             <div class="col-md-6 mb-2">
@@ -68,23 +77,30 @@
               <input
                 class="form-control"
                 type="text"
-                formControlName="qualification" />
+                formControlName="qualification"
+              />
             </div>
           </div>
           <div class="row">
             <div class="col-md-6 mb-2">
-              <label class="form-label required">ความคิดริเริ่มสร้างสรรค์ในการปฏิบัติวิชาชีพ</label>
+              <label class="form-label required"
+                >ความคิดริเริ่มสร้างสรรค์ในการปฏิบัติวิชาชีพ</label
+              >
               <input
                 class="form-control"
                 type="text"
-                formControlName="creativity" />
+                formControlName="creativity"
+              />
             </div>
             <div class="col-md-6 mb-2">
-              <label class="form-label required">ความสำเร็จหรือการยกย่องที่ได้รับ</label>
+              <label class="form-label required"
+                >ความสำเร็จหรือการยกย่องที่ได้รับ</label
+              >
               <input
                 class="form-control"
                 type="text"
-                formControlName="achievement" />
+                formControlName="achievement"
+              />
             </div>
           </div>
         </div>
@@ -92,9 +108,11 @@
       </ng-container>
     </ng-container>
   </ng-container>
-  <div class="d-flex justify-content-end">
+  <div class="d-flex justify-content-end" *ngIf="mode === 'edit'">
     <ksp-add-row-button
       class="text-primary"
-      (addRowClick)="addFormArray(workInfo)">เพิ่มข้อมูลการทำงาน</ksp-add-row-button>
+      (addRowClick)="addFormArray(workInfo)"
+      >เพิ่มข้อมูลการทำงาน</ksp-add-row-button
+    >
   </div>
 </form>

@@ -675,11 +675,11 @@ export const refundFeeMenu: MenuConfig[] = [
         label: 'รายการใบขอคืนค่าธรรมเนียม',
       },
       {
-        path: '/refund/detail',
+        path: '/xxx',
         label: 'บัญชีรายชื่อและอนุมัติการคืนค่าธรรมเนียม',
       },
       {
-        path: '/refund/approve',
+        path: '/xxx',
         label: 'ตรวจสอบและบันทึกสถานะการคืนค่าธรรมเนียม',
       },
     ],
