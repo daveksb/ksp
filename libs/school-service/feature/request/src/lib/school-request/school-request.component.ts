@@ -24,6 +24,7 @@ import {
   Country,
   FileGroup,
   KspRequest,
+  KspRequestProcess,
   Nationality,
   PositionType,
   Prefix,
@@ -44,7 +45,6 @@ import {
 } from '@ksp/shared/service';
 import {
   formatCheckboxData,
-  formatDate,
   formatDatePayload,
   mapMultiFileInfo,
   parseJson,
@@ -64,17 +64,19 @@ export class SchoolRequestComponent implements OnInit {
   pageType = RequestPageType;
 
   countries$!: Observable<Country[]>;
+  nationList$!: Observable<Nationality[]>;
+  visaTypeList!: Observable<VisaType[]>;
+  visaClassList!: Observable<VisaClass[]>;
+
   provinces$!: Observable<Province[]>;
   amphurs1$!: Observable<Amphur[]>;
   tumbols1$!: Observable<Tambol[]>;
   amphurs2$!: Observable<Amphur[]>;
   tumbols2$!: Observable<Tambol[]>;
-  nationList$!: Observable<Nationality[]>;
+
   staffTypes$!: Observable<StaffType[]>;
   positionTypes$!: Observable<PositionType[]>;
   academicTypes$!: Observable<AcademicStanding[]>;
-  visaTypeList!: Observable<VisaType[]>;
-  visaClassList!: Observable<VisaClass[]>;
   prefixList$!: Observable<Prefix[]>;
 
   requestId!: number;
@@ -178,9 +180,10 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   cancelRequest() {
-    const payload = {
+    console.log('req data = ', this.requestData);
+    const payload: KspRequestProcess = {
       id: `${this.requestId}`,
-      process: null,
+      process: this.requestData.process,
       status: '0',
       detail: null,
       userid: null,
@@ -369,7 +372,7 @@ export class SchoolRequestComponent implements OnInit {
 
   checkButtonsDisableStatus() {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      console.log('userInfo valid = ', this.form.controls.userInfo.valid);
+      //console.log('userInfo valid = ', this.form.controls.userInfo.valid);
       //console.log('form valid = ', this.form.valid);
       // console.log('this.currentProcess = ', this.currentProcess);
       // สถานะ ยกเลิก disable ทุกอย่าง
@@ -425,6 +428,7 @@ export class SchoolRequestComponent implements OnInit {
   loadRequestFromId(id: number) {
     this.requestService.schGetRequestById(id).subscribe((res) => {
       if (res) {
+        this.requestData = res;
         this.requestProcess = Number(res.process);
         this.requestStatus = Number(res.status);
         //console.log('current process = ', this.currentProcess);

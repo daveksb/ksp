@@ -80,6 +80,7 @@ export const routes: Routes = [
     SharedFormOthersModule,
     RequestHeaderInfoComponent,
     ThaiDatePipe,
+    MatSortModule,
   ],
   declarations: [
     ManageCurrentUserListComponent,

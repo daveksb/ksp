@@ -24,7 +24,7 @@ export class SchoolServiceLoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.form.valueChanges.subscribe((res) => {
+    this.form.valueChanges.subscribe(() => {
       this.loginFail = false;
     });
   }
@@ -40,8 +40,6 @@ export class SchoolServiceLoginComponent implements OnInit {
           this.loginFail = true;
           return;
         }
-
-        console.log('red = ', res);
 
         this.schoolServiceFeatureLoginService.config = res;
         setCookie('userToken', res.schUserToken, 1);

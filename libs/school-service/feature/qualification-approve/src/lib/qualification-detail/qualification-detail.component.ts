@@ -11,7 +11,12 @@ import {
   QualificationApproveDetailComponent,
   QualificationApprovePersonComponent,
 } from '@ksp/shared/form/others';
-import { FileGroup, FormMode, KspRequest } from '@ksp/shared/interface';
+import {
+  FileGroup,
+  FormMode,
+  KspRequest,
+  KspRequestProcess,
+} from '@ksp/shared/interface';
 import {
   AddressService,
   GeneralInfoService,
@@ -208,10 +213,15 @@ export class QualificationDetailComponent implements OnInit {
         .pipe(
           switchMap((res) => {
             if (res) {
-              const payload = {
+              const payload: KspRequestProcess = {
                 id: `${this.requestId}`,
-                requeststatus: '0',
+                process: `${this.requestData.process}`,
+                status: '0',
+                detail: null,
+                userid: null,
+                paymentstatus: null,
               };
+
               return this.requestService.schCancelRequest(payload);
             }
             return EMPTY;

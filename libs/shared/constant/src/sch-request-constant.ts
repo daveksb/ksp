@@ -1,4 +1,4 @@
-import { RequestProcess } from './ksp-constant';
+import { SchRequestProcess } from '@ksp/shared/interface';
 
 // ใช้ อ้างอิง tab ในหน้าใบคำขอเพื่อระบุรายการไฟล์ ที่เกี่ยวข้อง
 export enum RequestPageType {
@@ -56,7 +56,7 @@ export const careerTypeList = [
   },
 ];
 
-export const SchoolRequestProcess: RequestProcess[] = [
+export const SchoolRequestProcess: SchRequestProcess[] = [
   //ลงทะเบียนผู้ประสานงาน
   {
     requestType: 1,

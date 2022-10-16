@@ -1,22 +1,14 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  EventEmitter,
-  Inject,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import {
   MatDialogModule,
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-import { SchoolInfo } from '@ksp/shared/interface';
+import { Amphur, Province, SchInfo } from '@ksp/shared/interface';
 import {
   AddressService,
-  GeneralInfoService,
   SchoolInfoService,
   UniInfoService,
 } from '@ksp/shared/service';
@@ -37,8 +29,8 @@ import { BasicInstituteSearchComponent } from '../basic-institute-search/basic-i
 export class UniversitySearchComponent implements OnInit {
   @Output() confirmed = new EventEmitter<string>();
 
-  provinces$!: Observable<any>;
-  amphurs$!: Observable<any>;
+  provinces$!: Observable<Province[]>;
+  amphurs$!: Observable<Amphur[]>;
   universityType$!: Observable<any>;
   selectedUniversity = '';
 
@@ -75,11 +67,7 @@ export class UniversitySearchComponent implements OnInit {
 
   getList() {
     this.provinces$ = this.addressService.getProvinces();
-    if (this.data.searchType != 'uni') {
-      //this.bureaus$ = this.generalInfoService.getBureau();
-    } else {
-      this.universityType$ = this.uniinfoService.getUniversityType();
-    }
+    this.universityType$ = this.uniinfoService.getUniversityType();
   }
 
   onItemChange(university: any) {
@@ -94,18 +82,25 @@ export class UniversitySearchComponent implements OnInit {
     this.currentPage = 1;
     if (this.data.searchType != 'uni') {
       payload = {
-        bureauid: data?.institution?.organization,
-        schoolid: data?.institution?.instituteId,
-        schoolname: data?.institution?.instituteName,
+        bureauid: data?.institution?.bureauid,
+        schoolid: data?.institution?.schoolid,
+        schoolname: data?.institution?.schoolname,
         provinceid,
         amphurid,
         offset,
         row,
       };
 
+      /* console.log('search form  = ', data);
+      console.log('search payload = ', payload); */
+
       this.schoolInfoService.searchSchool(payload).subscribe((res) => {
-        this.schoolInfos = this.generateAddressShow(res);
-        this.payload = payload;
+        if (res && res.length) {
+          this.schoolInfos = this.generateAddressShow(res);
+          this.payload = payload;
+        } else {
+          this.schoolInfos = [];
+        }
       });
     } else {
       payload = {
@@ -123,7 +118,7 @@ export class UniversitySearchComponent implements OnInit {
       });
     }
   }
-  generateAddressShow(schoolInfos: SchoolInfo[]) {
+  generateAddressShow(schoolInfos: SchInfo[]) {
     schoolInfos.forEach((item: any) => {
       const address = this.haveValue(item.address) ? item.address : '';
       const moo = this.haveValue(item.moo) ? 'หมู่ ' + item.moo : '';
@@ -153,6 +148,7 @@ export class UniversitySearchComponent implements OnInit {
       row: '20',
     });
   }
+
   provinceChange(evt: any) {
     const province = evt.target?.value;
     this.amphurs$ = this.addressService.getAmphurs(province);

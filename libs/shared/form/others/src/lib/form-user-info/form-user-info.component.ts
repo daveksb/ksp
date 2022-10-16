@@ -86,7 +86,7 @@ export class FormUserInfoComponent
     // คนไทยไม่ต้อง validate field เหล่านี้
     if (mode === UserInfoFormType.thai) {
       //console.log('aa = ');
-      this.form.controls.passportno.clearValidators();
+      //this.form.controls.passportno.clearValidators();
       this.form.controls.kuruspano.clearValidators();
       this.form.controls.passportstartdate.clearValidators();
       this.form.controls.passportenddate.clearValidators();
