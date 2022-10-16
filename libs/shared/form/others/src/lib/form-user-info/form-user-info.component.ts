@@ -22,7 +22,7 @@ import {
   providerFactory,
   validatorMessages,
 } from '@ksp/shared/utility';
-import { debounceTime, distinctUntilChanged, skip } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 /**
  * Dark Mode : all inputs will have gray background and form container will have white background
@@ -85,7 +85,7 @@ export class FormUserInfoComponent
     // คนไทยไม่ต้อง validate field เหล่านี้
     if (mode === UserInfoFormType.thai) {
       //console.log('aa = ');
-      this.form.controls.passportno.clearValidators();
+      //this.form.controls.passportno.clearValidators();
       this.form.controls.kuruspano.clearValidators();
       this.form.controls.passportstartdate.clearValidators();
       this.form.controls.passportenddate.clearValidators();

@@ -26,12 +26,15 @@ import {
   Amphur,
   Country,
   FormMode,
+  Nationality,
   PositionType,
   Prefix,
   Province,
   SchStaff,
   StaffType,
   Tambol,
+  VisaClass,
+  VisaType,
 } from '@ksp/shared/interface';
 import localForage from 'localforage';
 
@@ -43,6 +46,10 @@ import localForage from 'localforage';
 export class AddStaffComponent implements OnInit {
   staffId!: number;
   countries$!: Observable<Country[]>;
+  nationList$!: Observable<Nationality[]>;
+  visaTypeList!: Observable<VisaType[]>;
+  visaClassList!: Observable<VisaClass[]>;
+
   provinces$!: Observable<Province[]>;
   amphurs1$!: Observable<Amphur[]>;
   tumbols1$!: Observable<Tambol[]>;
@@ -81,7 +88,7 @@ export class AddStaffComponent implements OnInit {
   ngOnInit(): void {
     this.form.reset();
     this.checkMode();
-    this.getListData();
+    this.getList();
     this.checkStaffId();
     /*     this.form.valueChanges.subscribe((res) =>
       console.log(this.form.controls.userInfo.value)
@@ -309,7 +316,6 @@ export class AddStaffComponent implements OnInit {
 
   updateStaff() {
     const formData: any = this.form.getRawValue();
-    //const { ...userInfo } = replaceEmptyWithNull(formData.userInfo);
     formData.userInfo.schoolid = this.schoolId;
 
     const teaching: any = this.form.controls.teachingInfo.value;
@@ -335,6 +341,7 @@ export class AddStaffComponent implements OnInit {
     };
 
     payload = replaceEmptyWithNull(payload);
+    payload = formatDatePayload(payload);
 
     this.staffService.updateStaff(payload).subscribe(() => {
       //console.log('update result = ', res);
@@ -377,10 +384,15 @@ export class AddStaffComponent implements OnInit {
     }
   }
 
-  getListData() {
-    this.prefixList$ = this.generalInfoService.getPrefix();
+  getList() {
     this.provinces$ = this.addressService.getProvinces();
     this.countries$ = this.addressService.getCountry();
+
+    this.prefixList$ = this.generalInfoService.getPrefix();
+    this.nationList$ = this.generalInfoService.getNationality();
+    this.visaClassList = this.generalInfoService.getVisaClass();
+    this.visaTypeList = this.generalInfoService.getVisaType();
+
     this.staffTypes$ = this.staffService.getStaffTypes();
     this.positionTypes$ = this.staffService.getPositionTypes();
     this.academicTypes$ = this.staffService.getAcademicStandingTypes();

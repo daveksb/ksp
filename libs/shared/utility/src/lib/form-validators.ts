@@ -4,7 +4,7 @@ export const selfPasswordPattern = '^{6}+$';
 export const numberPattern = '^[0-9]';
 export const nameEnPattern = '^[a-zA-Z]+$';
 export const idCardPattern = '^[0-9]{13}';
-export const passportPattern = '^^[A-Z]{1}[0-9]{6}';
+export const passportPattern = '^^[A-Z]{1}[0-9]{7,9}';
 export const idCardBackPattern = '^([A-Z]{2})+([0-9]{10})+$';
 export const bankAccountPattern = '^[0-9]+$';
 

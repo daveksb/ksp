@@ -64,17 +64,19 @@ export class SchoolRequestComponent implements OnInit {
   pageType = RequestPageType;
 
   countries$!: Observable<Country[]>;
+  nationList$!: Observable<Nationality[]>;
+  visaTypeList!: Observable<VisaType[]>;
+  visaClassList!: Observable<VisaClass[]>;
+
   provinces$!: Observable<Province[]>;
   amphurs1$!: Observable<Amphur[]>;
   tumbols1$!: Observable<Tambol[]>;
   amphurs2$!: Observable<Amphur[]>;
   tumbols2$!: Observable<Tambol[]>;
-  nationList$!: Observable<Nationality[]>;
+
   staffTypes$!: Observable<StaffType[]>;
   positionTypes$!: Observable<PositionType[]>;
   academicTypes$!: Observable<AcademicStanding[]>;
-  visaTypeList!: Observable<VisaType[]>;
-  visaClassList!: Observable<VisaClass[]>;
   prefixList$!: Observable<Prefix[]>;
 
   requestId!: number;

@@ -25,11 +25,15 @@
     <hr />
     <div class="bg-light p-3 default-width">
       <ksp-form-user-info
-        [isAddStaff]="true"
         formControlName="userInfo"
+        [isAddStaff]="true"
         [isDarkMode]="false"
         [prefixList]="prefixList$ | async"
         [displayMode]="userInfoType"
+        [nationList]="nationList$ | async"
+        [countryList]="countries$ | async"
+        [visaClassList]="visaClassList | async"
+        [visaTypeList]="visaTypeList | async"
         [mode]="mode"
         (idCardChange)="searchIdCard($event)"
         (kuruspaNoChange)="searchKuruspaNo($event)"
@@ -135,7 +139,7 @@
     [isLastPage]="true"
     [isFirstPage]="true"
     [showSaveButton]="mode !== 'view'"
-    [disableSaveButton]="false"
+    [disableSaveButton]="form.invalid"
     [showCenterButtons]="true"
     (saveClicked)="onConfirmed()"
     (cancelClicked)="navigateBack()"
