@@ -135,6 +135,7 @@
         <label class="form-label required">วันเดือนปีเกิด</label>
         <div class="d-flex align-items-center">
           <input
+            [max]="today"
             matInput
             [matDatepicker]="picker1"
             autocomplete="off"

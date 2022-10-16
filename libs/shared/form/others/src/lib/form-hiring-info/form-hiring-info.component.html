@@ -2,7 +2,7 @@
   <div class="bg-light px-3 py-3">
     <div class="box-header">ข้อมูลการจ้าง</div>
 
-    <div class="row mb-3" [ngClass]="{ hide: displayMode === 'request' }">
+    <div class="row mb-3" *ngIf="displayMode === 'staff'">
       <div class="col-6">
         <label class="form-label required">ประเภทบุคลากร</label>
         <select class="form-select" formControlName="psersonType">
@@ -16,7 +16,7 @@
 
     <div class="row mb-3">
       <div class="col">
-        <label class="form-label required">ตำแหน่งงาน</label>
+        <label class="form-label required">ตำแหน่ง</label>
         <select class="form-select" formControlName="position">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let p of positionTypes" [value]="p?.id">
