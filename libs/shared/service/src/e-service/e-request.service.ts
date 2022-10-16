@@ -6,7 +6,6 @@ import {
   KspApprovePayload,
   KspRequest,
   KspResponse,
-  SchoolRequest,
   SchoolUser,
   SelfRequest,
 } from '@ksp/shared/interface';

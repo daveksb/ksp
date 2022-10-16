@@ -1,4 +1,4 @@
-import { RequestProcess } from './ksp-constant';
+import { SchRequestProcess } from '@ksp/shared/interface';
 
 export const selfOccupyList = [
   {
@@ -28,7 +28,7 @@ export const selfOccupyList = [
   },
 ];
 
-export const SelfRequestProcess: RequestProcess[] = [
+export const SelfRequestProcess: SchRequestProcess[] = [
   //ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ
   {
     requestType: 1,

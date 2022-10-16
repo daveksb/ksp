@@ -24,7 +24,7 @@ export class SchoolRetiredSearchComponent {
     private fb: FormBuilder,
     private schoolInfoService: SchoolInfoService
   ) {}
-  data: SchUser[] = [];
+  data: RetiredSchUser[] = [];
 
   onItemChange(userName: string) {
     this.selectUser = userName;
@@ -62,7 +62,7 @@ export class SchoolRetiredSearchComponent {
   }
 }
 
-export interface SchUser {
+export interface RetiredSchUser {
   position: string;
   firstnameth: string;
   lastnameth: string;

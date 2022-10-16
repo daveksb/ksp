@@ -3,6 +3,7 @@ export * from './lib/form-mode';
 export * from './lib/e-search-request';
 export * from './lib/ethics';
 export * from './lib/user-info-form';
+export * from './lib/e-sch-user-search';
 
 export * from './lib/self-license';
 export * from './lib/self-request';
@@ -15,6 +16,7 @@ export * from './lib/sch-user';
 export * from './lib/sch-info';
 export * from './lib/sch-general';
 export * from './lib/sch-staff';
+export * from './lib/sch-request-process';
 
 export * from './lib/ksp-form-base.component';
 export * from './lib/ksp-pagination.component';
