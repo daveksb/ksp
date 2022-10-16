@@ -225,7 +225,6 @@ export class AddStaffComponent implements OnInit {
     } else if (this.router.url.includes('edit-staff')) {
       this.mode = 'edit';
     }
-    //this.userInfoType = UserInfoFormType.foreign;
   }
 
   /**
@@ -241,9 +240,12 @@ export class AddStaffComponent implements OnInit {
 
   loadStaffData(staffId: number) {
     this.staffService
-      .searchStaffFromId(staffId)
+      .loadStaffFromId(staffId)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
+        if (res && res.kuruspano) {
+          this.userInfoType = UserInfoFormType.foreign;
+        }
         this.patchAll(res);
       });
   }
