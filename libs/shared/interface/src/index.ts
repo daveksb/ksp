@@ -3,6 +3,7 @@ export * from './lib/form-mode';
 export * from './lib/e-search-request';
 export * from './lib/ethics';
 export * from './lib/user-info-form';
+export * from './lib/e-sch-user-search';
 
 export * from './lib/self-license';
 export * from './lib/self-request';

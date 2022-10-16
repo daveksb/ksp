@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
-  EsSearchPayload,
+  ESchUserSearch,
   SchoolServiceUserPageType,
+  SchoolUser,
 } from '@ksp/shared/interface';
-import { ERequestService } from '@ksp/shared/service';
+import { ESchStaffService } from '@ksp/shared/service';
 
 @Component({
   templateUrl: './manage-current-user-list.component.html',
@@ -15,20 +15,13 @@ import { ERequestService } from '@ksp/shared/service';
 })
 export class ManageCurrentUserListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-
-  form = this.fb.group({
-    manageSearch: [],
-  });
-
-  displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<any>();
-
+  displayedColumns: string[] = columns;
+  dataSource = new MatTableDataSource<SchoolUser>();
   selectedUniversity = '';
 
   constructor(
     private router: Router,
-    private fb: FormBuilder,
-    private eRequestService: ERequestService
+    private schStaffService: ESchStaffService
   ) {}
 
   ngAfterViewInit(): void {
@@ -40,29 +33,22 @@ export class ManageCurrentUserListComponent implements AfterViewInit {
     //console.log('universityCode = ', universityCode);
   }
 
-  search(params: any) {
-    console.log('params = ', params);
-    const payload: EsSearchPayload = {
-      systemtype: '2',
-      requesttype: '1',
-      requestno: null,
-      careertype: null,
-      name: null,
-      idcardno: null,
-      passportno: null,
-      process: null,
-      status: null,
-      schoolid: null,
-      schoolname: null,
-      bureauid: null,
-      requestdatefrom: null,
-      requestdateto: null,
+  search(param: ESchUserSearch) {
+    //console.log('params = ', param);
+    const payload = {
+      schoolid: param.institution ? param.institution.schoolid : null, //'0010201056',
+      schoolname: param.institution ? param.institution.schoolname : null,
+      name: param.name,
       offset: '0',
       row: '500',
     };
 
-    this.eRequestService.EsSearchRequest(payload).subscribe((res: any) => {
-      this.dataSource.data = res;
+    this.schStaffService.SearchSchStaffs(payload).subscribe((res) => {
+      if (res && res.length) {
+        this.dataSource.data = res;
+      } else {
+        this.clear();
+      }
     });
   }
 
@@ -77,7 +63,7 @@ export class ManageCurrentUserListComponent implements AfterViewInit {
   }
 }
 
-export const column = [
+export const columns = [
   'id',
   'view',
   'idcardno',
