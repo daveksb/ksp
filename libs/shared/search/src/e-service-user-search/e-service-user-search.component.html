@@ -35,9 +35,9 @@
           <label class="form-label">สถานะการใช้งาน </label>
           <select class="form-select" formControlName="status">
             <option value="null" selected hidden disabled>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option *ngFor="let s of activeStatusList" [value]="s.value">
+              {{ s.label }}
+            </option>
           </select>
         </div>
       </div>
@@ -47,7 +47,7 @@
       <button
         type="button"
         class="btn border-primary text-primary"
-        (click)="clear.emit(true)"
+        (click)="form.reset(); clear.emit(true)"
       >
         ล้างข้อมูล
       </button>

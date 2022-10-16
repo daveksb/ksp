@@ -3,3 +3,10 @@ export interface KspResponse {
   returncode: string;
   returnmessage: string;
 }
+
+export interface KspListResponse {
+  returncode: string;
+  returnmessage: string;
+  countrow: number;
+  datareturn: any[];
+}

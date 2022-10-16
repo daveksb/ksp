@@ -19,6 +19,7 @@ export class EServiceUserSearchComponent {
   });
 
   @Input() showInstitution = true;
+  @Input() activeStatusList: any[] = [];
   @Output() search = new EventEmitter<any>();
   @Output() clear = new EventEmitter<boolean>();
 

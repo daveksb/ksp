@@ -1,18 +1,15 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable @angular-eslint/no-empty-lifecycle-method */
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import {
+  KspFormBaseComponent,
+  SchRequestProcess,
+  SchRequestStatus,
+} from '@ksp/shared/interface';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import {
-  careerTypeList,
-  RequestProcess,
-  RequestStatus,
-  SchoolRequestType,
-} from '@ksp/shared/constant';
+import { careerTypeList, SchoolRequestType } from '@ksp/shared/constant';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -33,10 +30,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
   styleUrls: ['./foreign-id-search.component.scss'],
   providers: providerFactory(ForeignIdSearchComponent),
 })
-export class ForeignIdSearchComponent
-  extends KspFormBaseComponent
-  implements OnInit
-{
+export class ForeignIdSearchComponent extends KspFormBaseComponent {
   override form = this.fb.group({
     requestno: [''],
     uniid: [''],
@@ -54,8 +48,8 @@ export class ForeignIdSearchComponent
   @Input() requestTypeList = SchoolRequestType;
 
   eduOccupyList = careerTypeList;
-  processList: RequestProcess[] = [];
-  statusList?: RequestStatus[] = [];
+  processList: SchRequestProcess[] = [];
+  statusList?: SchRequestStatus[] = [];
 
   constructor(private fb: FormBuilder) {
     super();
@@ -66,6 +60,4 @@ export class ForeignIdSearchComponent
       })
     );
   }
-
-  ngOnInit(): void {}
 }

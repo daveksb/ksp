@@ -16,6 +16,7 @@ export * from './lib/sch-user';
 export * from './lib/sch-info';
 export * from './lib/sch-general';
 export * from './lib/sch-staff';
+export * from './lib/sch-request-process';
 
 export * from './lib/ksp-form-base.component';
 export * from './lib/ksp-pagination.component';
