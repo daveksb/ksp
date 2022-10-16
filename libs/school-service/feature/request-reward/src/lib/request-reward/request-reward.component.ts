@@ -10,6 +10,7 @@ import {
 import {
   FileGroup,
   KspRequest,
+  KspRequestProcess,
   PersonType,
   Prefix,
   SchoolRequest,
@@ -122,10 +123,13 @@ export class RequestRewardComponent implements OnInit {
   }
 
   cancelRequest() {
-    // may need to update status also
-    const payload = {
+    const payload: KspRequestProcess = {
       id: `${this.requestId}`,
-      requeststatus: '0',
+      process: `${this.requestData.process}`,
+      status: '0',
+      detail: null,
+      userid: null,
+      paymentstatus: null,
     };
     this.requestService.schCancelRequest(payload).subscribe(() => {
       //
@@ -165,13 +169,6 @@ export class RequestRewardComponent implements OnInit {
     form.currentprocess = currentProcess;
     form.requeststatus = requestStatus;
     form.osoimember = JSON.stringify(form.osoimember);
-
-    const rewardFiles: FileGroup[] = [
-      { name: 'แบบ นร. 1', files: [] },
-      { name: 'แบบ นร.2', files: [] },
-      { name: 'เอกสารอื่นๆ', files: [] },
-      { name: 'บันทึกนำส่งจากสถานศึกษา', files: [] },
-    ];
 
     const file = structuredClone(rewardFiles);
     //console.log('file = ', file);
@@ -282,4 +279,11 @@ export const rewards = [
     label: 'ได้รับรางวัลของคุรุสภา แต่มีการพัฒนาต่อยอดนวัตกรรม',
     value: 3,
   },
+];
+
+const rewardFiles: FileGroup[] = [
+  { name: 'แบบ นร. 1', files: [] },
+  { name: 'แบบ นร.2', files: [] },
+  { name: 'เอกสารอื่นๆ', files: [] },
+  { name: 'บันทึกนำส่งจากสถานศึกษา', files: [] },
 ];

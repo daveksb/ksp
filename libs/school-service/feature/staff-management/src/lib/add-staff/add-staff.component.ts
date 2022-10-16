@@ -107,7 +107,7 @@ export class AddStaffComponent implements OnInit {
 
         // redirect from search idcard page
         const idcardno = Number(params.get('idcardno'));
-        const kuruspanno = Number(params.get('kuruspano'));
+        const kuruspano = Number(params.get('kuruspano'));
 
         if (idcardno) {
           this.searchStaffDone = true;
@@ -115,9 +115,9 @@ export class AddStaffComponent implements OnInit {
           this.form.controls.userInfo.patchValue(temp);
         }
 
-        if (kuruspanno) {
+        if (kuruspano) {
           this.searchStaffDone = true;
-          const temp: any = { kuruspanno: `${kuruspanno}` };
+          const temp: any = { kuruspano: `${kuruspano}` };
           this.form.controls.userInfo.patchValue(temp);
         }
       });
@@ -170,7 +170,7 @@ export class AddStaffComponent implements OnInit {
           // found staff
           this.router.navigate(['/staff-management', 'edit-staff', res.id]);
         } else {
-          // not found then reset form and set idcard again
+          // not found then reset form and set kuruspano again
           this.router.navigate([
             '/staff-management',
             'add-staff-foreign',

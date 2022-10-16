@@ -24,6 +24,7 @@ import {
   Country,
   FileGroup,
   KspRequest,
+  KspRequestProcess,
   Nationality,
   PositionType,
   Prefix,
@@ -180,9 +181,10 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   cancelRequest() {
-    const payload = {
+    console.log('req data = ', this.requestData);
+    const payload: KspRequestProcess = {
       id: `${this.requestId}`,
-      process: null,
+      process: this.requestData.process,
       status: '0',
       detail: null,
       userid: null,
@@ -371,7 +373,7 @@ export class SchoolRequestComponent implements OnInit {
 
   checkButtonsDisableStatus() {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      console.log('userInfo valid = ', this.form.controls.userInfo.valid);
+      //console.log('userInfo valid = ', this.form.controls.userInfo.valid);
       //console.log('form valid = ', this.form.valid);
       // console.log('this.currentProcess = ', this.currentProcess);
       // สถานะ ยกเลิก disable ทุกอย่าง
@@ -427,6 +429,7 @@ export class SchoolRequestComponent implements OnInit {
   loadRequestFromId(id: number) {
     this.requestService.schGetRequestById(id).subscribe((res) => {
       if (res) {
+        this.requestData = res;
         this.requestProcess = Number(res.process);
         this.requestStatus = Number(res.status);
         //console.log('current process = ', this.currentProcess);
