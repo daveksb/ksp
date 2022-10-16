@@ -45,6 +45,7 @@ import {
 import {
   formatCheckboxData,
   formatDate,
+  formatDatePayload,
   mapMultiFileInfo,
   parseJson,
   replaceEmptyWithNull,
@@ -205,7 +206,7 @@ export class SchoolRequestComponent implements OnInit {
     formData.addr1.addresstype = 1;
     formData.addr2.addresstype = 2;
 
-    const { id, ...userInfo } = formData.userInfo;
+    let { id, ...userInfo } = formData.userInfo;
     userInfo.schoolid = this.schoolId;
     userInfo.process = `${process}`;
     userInfo.status = `1`;
@@ -216,7 +217,9 @@ export class SchoolRequestComponent implements OnInit {
     userInfo.systemtype = '2';
     userInfo.requesttype = '3';
     userInfo.careertype = `${this.careerType}`;
-    userInfo.birthdate = formatDate(userInfo.birthdate);
+    //userInfo.birthdate = formatDate(userInfo.birthdate);
+
+    userInfo = formatDatePayload(userInfo);
 
     const teaching: any = this.form.controls.teachinginfo.value;
     let teachingInfo = {};

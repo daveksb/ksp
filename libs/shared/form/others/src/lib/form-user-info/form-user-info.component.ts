@@ -86,7 +86,7 @@ export class FormUserInfoComponent
     if (mode === UserInfoFormType.thai) {
       //console.log('aa = ');
       this.form.controls.passportno.clearValidators();
-      this.form.controls.kuruspanno.clearValidators();
+      this.form.controls.kuruspano.clearValidators();
       this.form.controls.passportstartdate.clearValidators();
       this.form.controls.passportenddate.clearValidators();
       this.form.controls.position.clearValidators();
@@ -112,7 +112,7 @@ export class FormUserInfoComponent
         }
       });
 
-    this.form.controls.kuruspanno.valueChanges
+    this.form.controls.kuruspano.valueChanges
       .pipe(debounceTime(200), distinctUntilChanged())
       .subscribe((res) => {
         if (res && res.length === 13) {
@@ -153,7 +153,7 @@ export class FormUserInfoComponent
   }
 
   get kuruspaNo() {
-    return this.form.controls.kuruspanno;
+    return this.form.controls.kuruspano;
   }
 
   get passportNo() {
