@@ -22,6 +22,7 @@ export class FormForeignIdComponent
   override form = createUserInfoForm(this.fb);
   validatorMessages = validatorMessages;
 
+  today = new Date();
   @Input() formHeader = 'ข้อมูลครูชาวต่างชาติ';
   @Input() prefixList: any;
   @Input() countries: any;

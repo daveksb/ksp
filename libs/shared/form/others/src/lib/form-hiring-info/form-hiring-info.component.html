@@ -2,7 +2,7 @@
   <div class="bg-light px-3 py-3">
     <div class="box-header">ข้อมูลการจ้าง</div>
 
-    <div class="row mb-3" [ngClass]="{ hide: displayMode === 'request' }">
+    <div class="row mb-3" *ngIf="displayMode === 'staff'">
       <div class="col-6">
         <label class="form-label required">ประเภทบุคลากร</label>
         <select class="form-select" formControlName="psersonType">
@@ -24,7 +24,7 @@
           </option>
         </select>
       </div>
-      <div class="col" [ngClass]="{ hide: displayMode === 'request' }">
+      <div class="col" *ngIf="displayMode === 'staff'">
         <label class="form-label required">วิทยฐานะ</label>
         <select class="form-select" formControlName="academicStanding">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
@@ -33,7 +33,7 @@
           </option>
         </select>
       </div>
-      <div class="col" [ngClass]="{ hide: displayMode === 'staff' }">
+      <div class="col" *ngIf="displayMode === 'request'">
         <label class="form-label">สัญญาจ้างเลขที่</label>
         <input
           class="form-control"
@@ -82,7 +82,7 @@
       </div>
     </div>
 
-    <div class="row" [ngClass]="{ hide: displayMode === 'staff' }">
+    <div class="row" *ngIf="displayMode === 'request'">
       <div class="col-6">
         <label class="form-label">ระยะเวลาที่จ้าง (ปี)</label>
         <input
@@ -101,7 +101,7 @@
       </div>
     </div>
 
-    <div [ngClass]="{ hide: displayMode === 'request' }">
+    <div *ngIf="displayMode === 'staff'">
       <div class="form-label text-secondary">สถานะบุคลากร</div>
 
       <ng-container *ngFor="let item of status">

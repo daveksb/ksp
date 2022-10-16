@@ -22,6 +22,7 @@ export class RegisterStepOneComponent implements OnInit {
   amphurs$!: Observable<any>;
   tumbols$!: Observable<any>;
   validatorMessages = validatorMessages;
+  today = new Date();
 
   form = this.fb.group({
     prefixth: [null, Validators.required],
