@@ -67,7 +67,7 @@ export class FormCoordinatorInfoComponent
       this.form.controls.passportstartdate.clearValidators();
       this.form.controls.passportenddate.clearValidators();
       this.form.controls.position.clearValidators();
-      this.form.controls.kuruspanno.clearValidators();
+      this.form.controls.kuruspano.clearValidators();
     }
   }
   prefixChanged(evt: any) {

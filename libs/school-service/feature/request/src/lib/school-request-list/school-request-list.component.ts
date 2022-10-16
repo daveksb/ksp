@@ -5,7 +5,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
+import {
+  careerTypeList,
+  SchoolRequestSubType,
+  SchoolRequestType,
+} from '@ksp/shared/constant';
 import { KspRequest, SchRequestSearchFilter } from '@ksp/shared/interface';
 import { RequestService } from '@ksp/shared/service';
 import {
@@ -28,6 +32,7 @@ export class SchoolRequestListComponent implements AfterViewInit {
   checkRequestType = checkRequestType;
   checkStatus = checkStatus;
   requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
+  careerTypeList = careerTypeList;
 
   form = this.fb.group({
     licenseSearch: [],

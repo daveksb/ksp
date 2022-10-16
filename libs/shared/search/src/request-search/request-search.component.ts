@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import {
+  CareerType,
   KspFormBaseComponent,
   SchRequestSearchFilter,
 } from '@ksp/shared/interface';

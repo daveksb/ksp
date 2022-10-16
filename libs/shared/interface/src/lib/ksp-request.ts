@@ -33,7 +33,7 @@ export class KspRequest {
   idcardno: string | null = null;
   imagefileid: string | null = null;
   isforeign: string | null = null;
-  kuruspanno: string | null = null;
+  kuruspano: string | null = null;
   lastnameen: string | null = null;
   lastnameth: string | null = null;
   licenseid: string | null = null;
