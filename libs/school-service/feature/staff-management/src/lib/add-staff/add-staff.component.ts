@@ -26,12 +26,15 @@ import {
   Amphur,
   Country,
   FormMode,
+  Nationality,
   PositionType,
   Prefix,
   Province,
   SchStaff,
   StaffType,
   Tambol,
+  VisaClass,
+  VisaType,
 } from '@ksp/shared/interface';
 import localForage from 'localforage';
 
@@ -43,6 +46,10 @@ import localForage from 'localforage';
 export class AddStaffComponent implements OnInit {
   staffId!: number;
   countries$!: Observable<Country[]>;
+  nationList$!: Observable<Nationality[]>;
+  visaTypeList!: Observable<VisaType[]>;
+  visaClassList!: Observable<VisaClass[]>;
+
   provinces$!: Observable<Province[]>;
   amphurs1$!: Observable<Amphur[]>;
   tumbols1$!: Observable<Tambol[]>;
@@ -81,7 +88,7 @@ export class AddStaffComponent implements OnInit {
   ngOnInit(): void {
     this.form.reset();
     this.checkMode();
-    this.getListData();
+    this.getList();
     this.checkStaffId();
     /*     this.form.valueChanges.subscribe((res) =>
       console.log(this.form.controls.userInfo.value)
@@ -100,7 +107,7 @@ export class AddStaffComponent implements OnInit {
 
         // redirect from search idcard page
         const idcardno = Number(params.get('idcardno'));
-        const kuruspanno = Number(params.get('kuruspano'));
+        const kuruspano = Number(params.get('kuruspano'));
 
         if (idcardno) {
           this.searchStaffDone = true;
@@ -108,15 +115,19 @@ export class AddStaffComponent implements OnInit {
           this.form.controls.userInfo.patchValue(temp);
         }
 
-        if (kuruspanno) {
+        if (kuruspano) {
           this.searchStaffDone = true;
-          const temp: any = { kuruspanno: `${kuruspanno}` };
+          const temp: any = { kuruspano: `${kuruspano}` };
           this.form.controls.userInfo.patchValue(temp);
         }
       });
   }
 
   searchIdCard(idcardno: string) {
+    if (this.mode === 'view') {
+      return;
+    }
+
     const payload = {
       idcardno,
       schoolid: this.schoolId,
@@ -142,20 +153,24 @@ export class AddStaffComponent implements OnInit {
   }
 
   searchKuruspaNo(kuruspano: string) {
+    if (this.mode === 'view') {
+      return;
+    }
+
     const payload = {
       kuruspano,
       schoolid: this.schoolId,
     };
 
     this.staffService
-      .searchStaffFromIdCard(payload)
+      .searchStaffFromKuruspaNo(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         if (res && res.returncode !== '98') {
           // found staff
           this.router.navigate(['/staff-management', 'edit-staff', res.id]);
         } else {
-          // not found then reset form and set idcard again
+          // not found then reset form and set kuruspano again
           this.router.navigate([
             '/staff-management',
             'add-staff-foreign',
@@ -217,7 +232,6 @@ export class AddStaffComponent implements OnInit {
     } else if (this.router.url.includes('edit-staff')) {
       this.mode = 'edit';
     }
-    //this.userInfoType = UserInfoFormType.foreign;
   }
 
   /**
@@ -233,9 +247,12 @@ export class AddStaffComponent implements OnInit {
 
   loadStaffData(staffId: number) {
     this.staffService
-      .searchStaffFromId(staffId)
+      .loadStaffFromId(staffId)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
+        if (res && res.kuruspano) {
+          this.userInfoType = UserInfoFormType.foreign;
+        }
         this.patchAll(res);
       });
   }
@@ -299,7 +316,6 @@ export class AddStaffComponent implements OnInit {
 
   updateStaff() {
     const formData: any = this.form.getRawValue();
-    //const { ...userInfo } = replaceEmptyWithNull(formData.userInfo);
     formData.userInfo.schoolid = this.schoolId;
 
     const teaching: any = this.form.controls.teachingInfo.value;
@@ -325,6 +341,7 @@ export class AddStaffComponent implements OnInit {
     };
 
     payload = replaceEmptyWithNull(payload);
+    payload = formatDatePayload(payload);
 
     this.staffService.updateStaff(payload).subscribe(() => {
       //console.log('update result = ', res);
@@ -367,10 +384,15 @@ export class AddStaffComponent implements OnInit {
     }
   }
 
-  getListData() {
-    this.prefixList$ = this.generalInfoService.getPrefix();
+  getList() {
     this.provinces$ = this.addressService.getProvinces();
     this.countries$ = this.addressService.getCountry();
+
+    this.prefixList$ = this.generalInfoService.getPrefix();
+    this.nationList$ = this.generalInfoService.getNationality();
+    this.visaClassList = this.generalInfoService.getVisaClass();
+    this.visaTypeList = this.generalInfoService.getVisaType();
+
     this.staffTypes$ = this.staffService.getStaffTypes();
     this.positionTypes$ = this.staffService.getPositionTypes();
     this.academicTypes$ = this.staffService.getAcademicStandingTypes();

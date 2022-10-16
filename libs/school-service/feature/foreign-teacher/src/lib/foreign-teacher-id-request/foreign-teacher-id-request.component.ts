@@ -6,6 +6,7 @@ import {
   FileGroup,
   FormMode,
   KspRequest,
+  KspRequestProcess,
   Prefix,
   VisaType,
 } from '@ksp/shared/interface';
@@ -47,7 +48,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   countries$!: Observable<Country[]>;
   visaTypeList$!: Observable<VisaType[]>;
   requestId!: number;
-  request: KspRequest = new KspRequest();
+  requestData: KspRequest = new KspRequest();
 
   form = this.fb.group({
     foreignTeacher: [],
@@ -94,8 +95,8 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       if (res) {
         this.mode = 'view';
         this.showCancelButton = Boolean(res.status);
-        this.request.requestdate = res.requestdate ?? '';
-        this.request.requestno = res.requestno ?? '';
+        this.requestData.requestdate = res.requestdate ?? '';
+        this.requestData.requestno = res.requestno ?? '';
         res.birthdate = formatDate(res.birthdate);
         res.passportstartdate = formatDate(res.passportstartdate);
         res.passportenddate = formatDate(res.passportenddate);
@@ -128,10 +129,15 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
         .pipe(
           switchMap((res) => {
             if (res) {
-              const payload = {
+              const payload: KspRequestProcess = {
                 id: `${this.requestId}`,
-                requeststatus: '0',
+                process: `${this.requestData.process}`,
+                status: '0',
+                detail: null,
+                userid: null,
+                paymentstatus: null,
               };
+
               return this.requestService.schCancelRequest(payload);
             }
             return EMPTY;
@@ -150,7 +156,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       data: {
         header: 'ระบบทำการยกเลิกเรียบร้อย',
         content: `วันที่ : ${thaiDate(new Date())}
-        เลขที่คำขอ : ${this.request.requestno}`,
+        เลขที่คำขอ : ${this.requestData.requestno}`,
       },
     });
 

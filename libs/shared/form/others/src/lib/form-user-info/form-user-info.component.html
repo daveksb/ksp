@@ -72,7 +72,12 @@
         [ngClass]="{ required: _displayMode === FormTypeEnum.foreign }"
         >หมายเลขหนังสือเดินทาง (Passport Number)
       </label>
-      <input class="form-control" type="text" formControlName="passportno" />
+      <input
+        class="form-control"
+        type="text"
+        maxlength="10"
+        formControlName="passportno"
+      />
       <ng-container
         *ngIf="passportNo.invalid && (passportNo.dirty || passportNo.touched)"
       >

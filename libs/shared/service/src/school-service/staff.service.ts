@@ -28,13 +28,16 @@ export class StaffService {
     );
   }
 
-  searchStaffFromId(staffId: number): Observable<any> {
+  loadStaffFromId(staffId: number): Observable<SchStaff> {
     const payload = {
       id: `${staffId}`,
     };
-    return this.http.post(`${environment.apiUrl}/kspstaff/schstaff2select`, {
-      ...payload,
-    });
+    return this.http.post<SchStaff>(
+      `${environment.apiUrl}/kspstaff/schstaff2select`,
+      {
+        ...payload,
+      }
+    );
   }
 
   searchStaffFromIdCard(payload: any): Observable<any> {

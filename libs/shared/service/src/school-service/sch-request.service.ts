@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
-import { KspRequest, SchRequestSearchFilter } from '@ksp/shared/interface';
+import {
+  KspRequest,
+  KspRequestProcess,
+  SchRequestSearchFilter,
+} from '@ksp/shared/interface';
 import { map, Observable, shareReplay } from 'rxjs';
 
 @Injectable({
@@ -34,7 +38,7 @@ export class RequestService {
     );
   }
 
-  schCancelRequest(payload: any): Observable<any> {
+  schCancelRequest(payload: KspRequestProcess): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspstaff/ksprequestinsertstatus`,
       payload
