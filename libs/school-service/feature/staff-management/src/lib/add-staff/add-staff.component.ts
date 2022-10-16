@@ -117,6 +117,10 @@ export class AddStaffComponent implements OnInit {
   }
 
   searchIdCard(idcardno: string) {
+    if (this.mode === 'view') {
+      return;
+    }
+
     const payload = {
       idcardno,
       schoolid: this.schoolId,
@@ -142,13 +146,17 @@ export class AddStaffComponent implements OnInit {
   }
 
   searchKuruspaNo(kuruspano: string) {
+    if (this.mode === 'view') {
+      return;
+    }
+
     const payload = {
       kuruspano,
       schoolid: this.schoolId,
     };
 
     this.staffService
-      .searchStaffFromIdCard(payload)
+      .searchStaffFromKuruspaNo(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         if (res && res.returncode !== '98') {
