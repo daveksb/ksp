@@ -13,17 +13,17 @@
 
         <div class="d-flex">
           <div class="fs-5 text-secondary">โรงเรียน/สถานศึกษา :</div>
-          <div class="fs-5 ms-3">{{ userInfo.university }}</div>
+          <div class="fs-5 ms-3">{{ school.schoolname }}</div>
         </div>
 
         <div class="d-flex">
           <div class="fs-5 text-secondary">สังกัด :</div>
-          <div class="fs-5 ms-3">{{ userInfo.organisation }}</div>
+          <div class="fs-5 ms-3">{{ school.bureauname }}</div>
         </div>
 
         <div class="d-flex">
           <div class="fs-5 text-secondary">ที่อยู่ :</div>
-          <div class="fs-5 ms-3">{{ userInfo.address }}</div>
+          <div class="fs-5 ms-3">{{ school.addressShow }}</div>
         </div>
 
         <div class="box-header text-primary mt-3">
@@ -32,7 +32,9 @@
 
         <div class="d-flex mb-1">
           <div class="fs-5 text-secondary">ชื่อ-นามสกุลภาษาไทย :</div>
-          <div class="fs-5 ms-3">{{ userInfo.nameTh }}</div>
+          <div class="fs-5 ms-3">
+            {{ user.firstnameth }} {{ user.lastnameth }}
+          </div>
         </div>
       </div>
 

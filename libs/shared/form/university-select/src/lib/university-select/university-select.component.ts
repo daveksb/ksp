@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { KspFormBaseComponent, SchoolInfo } from '@ksp/shared/interface';
+import { Bureau, KspFormBaseComponent, SchInfo } from '@ksp/shared/interface';
 import { UniversitySearchComponent } from '@ksp/shared/search';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -26,8 +26,8 @@ export class UniversitySelectComponent extends KspFormBaseComponent {
   @Input() searchType = '';
   @Input() readonly = false;
   @Input() showAddress = false;
-  @Input() bureauList: any[] = [];
-  @Output() selectedUniversity = new EventEmitter<SchoolInfo>();
+  @Input() bureauList: Bureau[] | null = [];
+  @Output() selectedUniversity = new EventEmitter<SchInfo>();
 
   override form = this.fb.group({
     institution: [],
@@ -60,7 +60,7 @@ export class UniversitySelectComponent extends KspFormBaseComponent {
       },
     });
 
-    dialog.afterClosed().subscribe((res: SchoolInfo) => {
+    dialog.afterClosed().subscribe((res: SchInfo) => {
       if (res) {
         this.selectedUniversity.emit(res);
       }
