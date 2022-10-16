@@ -16,7 +16,9 @@ export class SchUser {
   schmemberid: string | null = null;
   schmobile: string | null = null;
   schoolid: string | null = null;
+  schpassword?: string | null = null;
   schuseractive: string | null = null;
   schuserenddate: string | null = null;
+  schusername?: string | null = null;
   schuserstartdate: string | null = null;
 }

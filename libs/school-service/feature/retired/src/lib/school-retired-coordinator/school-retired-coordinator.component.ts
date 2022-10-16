@@ -7,7 +7,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { FileGroup, KspRequest } from '@ksp/shared/interface';
+import { FileGroup, KspRequest, Prefix } from '@ksp/shared/interface';
 import { GeneralInfoService, RequestService } from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
 import localForage from 'localforage';
@@ -23,11 +23,9 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
     retiredTnfo: [],
   });
   reasoninfo: any;
-  requestNo = '';
-  today = `${new Date()}`;
   schoolId = '0010201056';
   userInfoFormType: number = UserInfoFormType.thai;
-  prefixList$!: Observable<any>;
+  prefixList$!: Observable<Prefix[]>;
   uniqueNo!: string;
   retiredFiles: FileGroup[] = [
     { name: 'หนังสือแต่งตั้งผู้ประสานงาน', files: [] },
@@ -87,7 +85,7 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
       .pipe(
         switchMap((res) => {
           if (res) {
-            const form = this.form.value as any;
+            const form: any = this.form.value;
             const retiredInfo: KspRequest = form.retiredTnfo;
             retiredInfo.ref1 = '2';
             retiredInfo.ref2 = '02';
@@ -125,7 +123,7 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
     });
   }
 
-  completeDialog(requestno: any) {
+  completeDialog(requestno: string) {
     const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: 'ยืนยันข้อมูลสำเร็จ',
