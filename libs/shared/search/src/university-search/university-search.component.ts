@@ -51,7 +51,7 @@ export class UniversitySearchComponent implements OnInit {
   });
 
   schoolInfos!: any;
-  currentPage!: number;
+  currentPage!: any;
   lastPage!: number;
   payload: any;
 

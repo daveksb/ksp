@@ -62,6 +62,7 @@ export class FormUserInfoComponent
     return this._displayMode;
   }
 
+  today = new Date();
   @Output() idCardChange = new EventEmitter<string>();
   @Output() kuruspaNoChange = new EventEmitter<string>();
 

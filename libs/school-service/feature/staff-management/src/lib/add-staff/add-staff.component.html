@@ -12,13 +12,13 @@
   <div class="bg-white p-3">
     <div class="d-flex justify-content-between">
       <ksp-request-header-info></ksp-request-header-info>
-      <div *ngIf="mode === 'add'">
+      <div class="d-flex align-items-center" *ngIf="mode === 'add'">
         <input
           (change)="isForeignSelect($event)"
           type="checkbox"
           class="me-2"
         />
-        <label class="form-label">ชาวต่างชาติ</label>
+        <label class="form-label">บุคลากรชาวต่างชาติ</label>
       </div>
     </div>
 
