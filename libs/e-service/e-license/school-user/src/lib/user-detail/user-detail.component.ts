@@ -6,7 +6,7 @@ import {
   KspApprovePayload,
   KspRequest,
   SchoolServiceUserPageType,
-  SchoolUser,
+  SchUser,
 } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
@@ -91,7 +91,7 @@ export class UserDetailComponent implements OnInit {
 
   approveUser() {
     // change process and status of SCH_REQUEST
-    const newUser = new SchoolUser();
+    const newUser = new SchUser();
     newUser.idcardno = this.requestData.idcardno;
     newUser.prefixth = this.requestData.prefixth;
     newUser.schemail = this.requestData.email;

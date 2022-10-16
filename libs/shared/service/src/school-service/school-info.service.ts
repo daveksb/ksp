@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
-import { SchoolInfo } from '@ksp/shared/interface';
+import { SchoolInfo, SchUser } from '@ksp/shared/interface';
 import { map, Observable, shareReplay } from 'rxjs';
 
 @Injectable({
@@ -54,7 +54,7 @@ export class SchoolInfoService {
       );
   }
 
-  searchUserLogin(payload: any): Observable<any> {
+  searchSchUsers(payload: any): Observable<SchUser[]> {
     return this.http
       .post(`${environment.apiUrl}/ksppublic/schuserselect`, payload)
       .pipe(

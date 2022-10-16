@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import {
   ESchUserSearch,
   SchoolServiceUserPageType,
-  SchoolUser,
+  SchUser,
 } from '@ksp/shared/interface';
 import { ESchStaffService } from '@ksp/shared/service';
 import { mapSchUserStatus } from '@ksp/shared/utility';
@@ -20,7 +20,7 @@ export class ManageCurrentUserListComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   displayedColumns: string[] = columns;
-  dataSource = new MatTableDataSource<SchoolUser>();
+  dataSource = new MatTableDataSource<SchUser>();
   selectedUniversity = '';
   mapSchUserStatus = mapSchUserStatus;
 

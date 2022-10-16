@@ -6,7 +6,7 @@ import {
   KspApprovePayload,
   KspRequest,
   KspResponse,
-  SchoolUser,
+  SchUser,
   SelfRequest,
 } from '@ksp/shared/interface';
 import { map, Observable, shareReplay } from 'rxjs';
@@ -69,7 +69,7 @@ export class ERequestService {
     );
   }
 
-  createSchUser(payload: SchoolUser): Observable<KspResponse> {
+  createSchUser(payload: SchUser): Observable<KspResponse> {
     return this.http.post<KspResponse>(
       `${environment.apiUrl}/e-service/schuserinsert`,
       payload
