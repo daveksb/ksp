@@ -6,7 +6,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { FormMode, KspRequest, SchoolInfo } from '@ksp/shared/interface';
+import { FormMode, KspRequest, SchInfo } from '@ksp/shared/interface';
 import { EMPTY, switchMap } from 'rxjs';
 import localForage from 'localforage';
 import { thaiDate } from '@ksp/shared/utility';
@@ -22,7 +22,7 @@ export class RegisterPasswordComponent implements OnInit {
   eyeIconClickedSecond = false;
 
   mode: FormMode = 'edit';
-  school!: SchoolInfo;
+  school!: SchInfo;
   address: any;
   coordinator: any;
   savingData: any;
@@ -57,11 +57,11 @@ export class RegisterPasswordComponent implements OnInit {
   loadStoredData() {
     localForage.getItem('registerSelectedSchool').then((res: any) => {
       this.school = res;
-      this.address = `บ้านเลขที่ ${res.address} ซอย ${res?.street ?? '-'} หมู่ ${
-        res?.moo ?? '-'
-      } ถนน ${res?.road ?? '-'} ตำบล ${res.tumbon} อำเภอ ${
-        res.amphurname
-      } จังหวัด ${res.provincename}`;
+      this.address = `บ้านเลขที่ ${res.address} ซอย ${
+        res?.street ?? '-'
+      } หมู่ ${res?.moo ?? '-'} ถนน ${res?.road ?? '-'} ตำบล ${
+        res.tumbon
+      } อำเภอ ${res.amphurname} จังหวัด ${res.provincename}`;
     });
 
     localForage.getItem('registerUserInfoFormValue').then((res) => {

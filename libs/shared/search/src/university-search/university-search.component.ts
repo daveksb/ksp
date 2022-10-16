@@ -6,7 +6,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-import { Amphur, Province, SchoolInfo } from '@ksp/shared/interface';
+import { Amphur, Province, SchInfo } from '@ksp/shared/interface';
 import {
   AddressService,
   SchoolInfoService,
@@ -118,7 +118,7 @@ export class UniversitySearchComponent implements OnInit {
       });
     }
   }
-  generateAddressShow(schoolInfos: SchoolInfo[]) {
+  generateAddressShow(schoolInfos: SchInfo[]) {
     schoolInfos.forEach((item: any) => {
       const address = this.haveValue(item.address) ? item.address : '';
       const moo = this.haveValue(item.moo) ? 'หมู่ ' + item.moo : '';

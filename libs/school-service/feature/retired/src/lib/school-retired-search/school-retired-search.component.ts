@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Bureau, SchoolInfo, SchUser } from '@ksp/shared/interface';
+import { Bureau, SchInfo, SchUser } from '@ksp/shared/interface';
 import { GeneralInfoService, SchoolInfoService } from '@ksp/shared/service';
 import localForage from 'localforage';
 import { Observable } from 'rxjs';
@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./school-retired-search.component.scss'],
 })
 export class SchoolRetiredSearchComponent implements OnInit {
-  school!: SchoolInfo;
+  school!: SchInfo;
   schoolUsers: SchUser[] = [];
   selectUser!: SchUser;
   bureauList$!: Observable<Bureau[]>;
@@ -36,10 +36,11 @@ export class SchoolRetiredSearchComponent implements OnInit {
   onItemChange(selectUser: SchUser | null) {
     if (selectUser) {
       this.selectUser = selectUser;
+      localForage.setItem('retiredSelectedUser', selectUser);
     }
   }
 
-  schoolSelected(school: SchoolInfo) {
+  schoolSelected(school: SchInfo) {
     this.school = school;
     localForage.setItem('retiredSelectedSchool', school);
 
