@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
@@ -8,6 +9,7 @@ import {
   SchoolUser,
 } from '@ksp/shared/interface';
 import { ESchStaffService } from '@ksp/shared/service';
+import { mapSchUserStatus } from '@ksp/shared/utility';
 
 @Component({
   templateUrl: './manage-current-user-list.component.html',
@@ -15,9 +17,12 @@ import { ESchStaffService } from '@ksp/shared/service';
 })
 export class ManageCurrentUserListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
   displayedColumns: string[] = columns;
   dataSource = new MatTableDataSource<SchoolUser>();
   selectedUniversity = '';
+  mapSchUserStatus = mapSchUserStatus;
 
   constructor(
     private router: Router,
@@ -46,6 +51,11 @@ export class ManageCurrentUserListComponent implements AfterViewInit {
     this.schStaffService.SearchSchStaffs(payload).subscribe((res) => {
       if (res && res.length) {
         this.dataSource.data = res;
+        this.dataSource.sort = this.sort;
+        const sortState: Sort = { active: 'schmemberid', direction: 'desc' };
+        this.sort.active = sortState.active;
+        this.sort.direction = sortState.direction;
+        this.sort.sortChange.emit(sortState);
       } else {
         this.clear();
       }

@@ -45,7 +45,6 @@ import {
 } from '@ksp/shared/service';
 import {
   formatCheckboxData,
-  formatDate,
   formatDatePayload,
   mapMultiFileInfo,
   parseJson,
