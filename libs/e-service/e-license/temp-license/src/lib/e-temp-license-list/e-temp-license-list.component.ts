@@ -12,7 +12,6 @@ import {
 import {
   EsSearchPayload,
   KspRequest,
-  SchoolRequest,
   SchRequestSearchFilter,
 } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';

@@ -19,6 +19,7 @@ import {
 } from '@ksp/shared/search';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { MatSortModule } from '@angular/material/sort';
 
 export const routes: Routes = [
   {
@@ -64,6 +65,7 @@ export const routes: Routes = [
     MatPaginatorModule,
     ThaiDatePipe,
     RequestSearchComponent,
+    MatSortModule,
   ],
   declarations: [ForeignLicenseDetailComponent, ForeignLicenseListComponent],
 })
