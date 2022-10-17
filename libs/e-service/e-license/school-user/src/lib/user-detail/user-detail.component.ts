@@ -75,8 +75,8 @@ export class UserDetailComponent implements OnInit {
     this.eRequestService.getKspRequestById(id).subscribe((res) => {
       this.requestData = res;
       res.status === '1' ? (this.mode = 'edit') : (this.mode = 'view');
-      console.log('status = ', res.status);
-      console.log('mode = ', this.mode);
+      //console.log('status = ', res.status);
+      //console.log('mode = ', this.mode);
       if (res.birthdate) {
         res.birthdate = res.birthdate.split('T')[0];
       }

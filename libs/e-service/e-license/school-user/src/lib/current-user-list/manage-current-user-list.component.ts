@@ -83,5 +83,5 @@ export const columns = [
   //'province',
   'requeststatus',
   'requestdate',
-  'updatedate',
+  //'updatedate',
 ];
