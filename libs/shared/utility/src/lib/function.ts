@@ -2,6 +2,7 @@ import {
   SchoolRequestProcess,
   SchoolRequestType,
   SelfRequestProcess,
+  SelfRequestType,
 } from '@ksp/shared/constant';
 import { FileGroup, SchoolRequest } from '@ksp/shared/interface';
 import moment from 'moment';
@@ -130,8 +131,12 @@ export function SelfcheckStatus(processId: number, statusId: number) {
   return status;
 }
 
-export function checkRequestType(RequestTypeId: number) {
-  return SchoolRequestType.find((s) => s.id === RequestTypeId)?.name;
+export function schoolMapRequestType(typeId: number) {
+  return SchoolRequestType.find((s) => s.id === typeId)?.name;
+}
+
+export function selfMapRequestType(typeId: string) {
+  return SelfRequestType.find((s) => s.id.toString() === typeId)?.name;
 }
 
 // get file in base 64 format

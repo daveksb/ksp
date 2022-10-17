@@ -22,10 +22,6 @@
         <ksp-form-user-info
           [mode]="'view'"
           [prefixList]="prefixList$ | async"
-          [nationList]="[]"
-          [countryList]="[]"
-          [visaClassList]="[]"
-          [visaTypeList]="[]"
           formControlName="userInfo"
         ></ksp-form-user-info>
       </div>
@@ -117,8 +113,8 @@
 
         <mat-tab label="ข้อมูลชี้แจงเหตุผล">
           <ksp-form-reason-info
-            [mode]="'view'"
             [careerType]="1"
+            [mode]="'view'"
           ></ksp-form-reason-info>
         </mat-tab>
 

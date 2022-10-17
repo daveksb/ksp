@@ -1,15 +1,14 @@
 <ksp-top-nav-2>ลงทะเบียนขอรับรหัสเข้าใช้งาน</ksp-top-nav-2>
 
 <form [formGroup]="form">
-  <div class="bg-secondary bg-opacity-10 pt-1 pb-3">
-    <div class="container-xl p-0 fs-4">
+  <div class="bg-secondary bg-opacity-10 pt-2 pb-3">
+    <div class="container-xl p-0 box-header">
       รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ (ผู้ประสานงาน / ผู้รับผิดชอบ)
     </div>
 
     <div class="bg-white container-xl">
       <div class="pt-2">
         <ksp-request-header-info
-          [requestDate]="requestDate"
           [requestNumber]="requestNo"
         ></ksp-request-header-info>
       </div>
@@ -23,13 +22,13 @@
 
         <div class="my-3">
           <ksp-university-select
-          [label1]="'สถาบัน / มหาวิทยาลัย'"
-          [label2]="'กลุ่มสถาบัน'"
-          [searchType]="'uni'"
-          [schoolName]="uniData?.institution"
-          [bureauName]="uniData?.affiliation"
-          mode="view"
-        ></ksp-university-select>
+            [label1]="'สถาบัน / มหาวิทยาลัย'"
+            [label2]="'กลุ่มสถาบัน'"
+            [searchType]="'uni'"
+            [schoolName]="uniData?.institution"
+            [bureauName]="uniData?.affiliation"
+            mode="view"
+          ></ksp-university-select>
         </div>
 
         <div class="my-3">
@@ -48,7 +47,7 @@
           <ksp-form-multi-attachment
             [uniqueTimestamp]="uniqueTimestamp"
             [title]="'กรุณาแนบหลักฐานเพื่อพิจารณา'"
-            [titleClass]="'text-primary fs-4'"
+            [titleClass]="'text-primary'"
             [pageType]="pageType.fileAttachTab"
             [requestType]="requesttype"
             [groups]="uploadFileList"

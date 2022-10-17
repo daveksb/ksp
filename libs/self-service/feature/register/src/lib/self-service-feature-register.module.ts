@@ -31,11 +31,11 @@ export const routes: Routes = [
   { path: 'policy', component: PrivacyPolicyComponent },
   {
     path: 'th-step-1',
-    component: RegisterStepTwoComponent,
+    component: RegisterStepOneComponent,
   },
   {
     path: 'th-step-2',
-    component: RegisterStepOneComponent,
+    component: RegisterStepTwoComponent,
   },
   {
     path: 'th-step-3',

@@ -135,6 +135,7 @@
         <label class="form-label required">วันเดือนปีเกิด</label>
         <div class="d-flex align-items-center">
           <input
+            [max]="today"
             matInput
             [matDatepicker]="picker1"
             autocomplete="off"
@@ -178,9 +179,7 @@
 
     <div class="row mb-2">
       <div class="col">
-        <label class="form-label required"
-          >หมายเลขหนังสือเดินทาง (Passport Number)</label
-        >
+        <label class="form-label required">{{ passportLabel }}</label>
         <input class="form-control" type="text" formControlName="passportno" />
         <ng-container
           *ngIf="passportNo.invalid && (passportNo.dirty || passportNo.touched)"

@@ -10,8 +10,8 @@ import { FormMode, KspRequest, SchInfo } from '@ksp/shared/interface';
 import { EMPTY, switchMap } from 'rxjs';
 import localForage from 'localforage';
 import { thaiDate } from '@ksp/shared/utility';
-import { RequestService } from '@ksp/shared/service';
 import * as CryptoJs from 'crypto-js';
+import { SchoolRequestService } from '@ksp/shared/service';
 
 @Component({
   templateUrl: './register-password.component.html',
@@ -36,7 +36,7 @@ export class RegisterPasswordComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private requestService: RequestService
+    private requestService: SchoolRequestService
   ) {}
 
   get disableBtn() {

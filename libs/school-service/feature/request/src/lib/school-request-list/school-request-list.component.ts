@@ -11,10 +11,10 @@ import {
   SchoolRequestType,
 } from '@ksp/shared/constant';
 import { KspRequest, SchRequestSearchFilter } from '@ksp/shared/interface';
-import { RequestService } from '@ksp/shared/service';
+import { SchoolRequestService } from '@ksp/shared/service';
 import {
   checkProcess,
-  checkRequestType,
+  schoolMapRequestType,
   checkStatus,
 } from '@ksp/shared/utility';
 
@@ -29,7 +29,7 @@ export class SchoolRequestListComponent implements AfterViewInit {
   SchoolRequestSubType = SchoolRequestSubType;
   searchNotFound = false;
   checkProcess = checkProcess;
-  checkRequestType = checkRequestType;
+  checkRequestType = schoolMapRequestType;
   checkStatus = checkStatus;
   requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
   careerTypeList = careerTypeList;
@@ -44,7 +44,7 @@ export class SchoolRequestListComponent implements AfterViewInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private requestService: RequestService,
+    private requestService: SchoolRequestService,
     public dialog: MatDialog
   ) {}
 

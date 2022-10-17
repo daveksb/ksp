@@ -12,7 +12,7 @@ import {
   MyInfoService,
   SelfRequestService,
 } from '@ksp/shared/service';
-import { SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, SelfRequest } from '@ksp/shared/interface';
 import {
   getCookie,
   parseJson,
@@ -74,9 +74,9 @@ export class LicenseRequestComponent
   countries$!: Observable<any>;
   countries2$!: Observable<any>;
   licenses$!: Observable<any>;
-  eduFiles: any[] = [];
-  experienceFiles: any[] = [];
-  performanceFiles: any[] = [];
+  eduFiles: FileGroup[] = [];
+  experienceFiles: FileGroup[] = [];
+  performanceFiles: FileGroup[] = [];
 
   constructor(
     router: Router,
@@ -106,6 +106,13 @@ export class LicenseRequestComponent
   ngOnInit(): void {
     this.getListData();
     this.checkRequestId();
+    /*     this.form.valueChanges.subscribe((res) => {
+      console.log('valid = ', this.form.valid);
+    }); */
+  }
+
+  get userInfoForm() {
+    return this.form.controls.userInfo;
   }
 
   override resetForm() {

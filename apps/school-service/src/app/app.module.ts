@@ -18,13 +18,7 @@ import {
 import { File_UPLOAD_URLS, FileUploadUrls } from '@ksp/shared/form/file-upload';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {
-  DateAdapter,
-  MatNativeDateModule,
-  MAT_DATE_LOCALE,
-  NativeDateAdapter,
-} from '@angular/material/core';
-import { formatDate } from '@angular/common';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 
 const fileUrls: FileUploadUrls = {
   uploadFile: '/kspstaff/schrequestfileinsert',

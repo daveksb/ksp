@@ -22,7 +22,9 @@ export class FormForeignIdComponent
   override form = createUserInfoForm(this.fb);
   validatorMessages = validatorMessages;
 
+  today = new Date();
   @Input() formHeader = 'ข้อมูลครูชาวต่างชาติ';
+  @Input() passportLabel = 'หมายเลขหนังสือเดินทาง (Passport Number)';
   @Input() prefixList: any;
   @Input() countries: any;
 

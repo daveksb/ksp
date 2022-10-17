@@ -1,10 +1,11 @@
 export { AddressService } from './school-service/address.service';
 export { GeneralInfoService } from './school-service/general-info.service';
 export { StaffService } from './school-service/staff.service';
-export { RequestService } from './school-service/sch-request.service';
+export { SchoolRequestService } from './school-service/school-request.service';
 export { SchoolInfoService } from './school-service/school-info.service';
 export { SelfDevelopService } from './school-service/self-develop.service';
 export { SchoolLicenseService } from './school-service/license.service';
+export { SchoolUserService } from './school-service/school-user.service';
 
 export { EducationDetailService } from './self-service/education-detail.service';
 export { MyInfoService } from './self-service/my-info.service';

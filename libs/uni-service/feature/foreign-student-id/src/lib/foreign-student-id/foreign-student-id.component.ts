@@ -35,6 +35,7 @@ export class ForeignStudentIdComponent {
   uniName = '-';
   uniid=""
   unitype=""
+  requestNumber=""
   constructor(
     public dialog: MatDialog,
     private router: Router,

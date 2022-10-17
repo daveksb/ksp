@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { EmailValidator, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import {
+  Amphur,
+  Nationality,
+  Prefix,
+  Province,
+  Tambol,
+} from '@ksp/shared/interface';
 import { AddressService, GeneralInfoService } from '@ksp/shared/service';
 import {
   nameEnPattern,
@@ -16,12 +23,13 @@ import { Observable } from 'rxjs';
   styleUrls: ['./register-step-one.component.scss'],
 })
 export class RegisterStepOneComponent implements OnInit {
-  prefixList$!: Observable<any>;
-  nationalitys$!: Observable<any>;
-  provinces$!: Observable<any>;
-  amphurs$!: Observable<any>;
-  tumbols$!: Observable<any>;
+  prefixList$!: Observable<Prefix[]>;
+  nationalitys$!: Observable<Nationality[]>;
+  provinces$!: Observable<Province[]>;
+  amphurs$!: Observable<Amphur[]>;
+  tumbols$!: Observable<Tambol[]>;
   validatorMessages = validatorMessages;
+  today = new Date();
 
   form = this.fb.group({
     prefixth: [null, Validators.required],
@@ -44,7 +52,7 @@ export class RegisterStepOneComponent implements OnInit {
     ],
     birthdate: [null, Validators.required],
     nationality: ['TH', Validators.required],
-    phone: [null, [Validators.required, Validators.pattern(phonePattern)]],
+    phone: [null, [Validators.required]],
     email: [null, [Validators.required, Validators.email]],
     addressinfo: [],
     sex: [null, Validators.required],
@@ -69,7 +77,7 @@ export class RegisterStepOneComponent implements OnInit {
 
   nextPage() {
     localForage.setItem('th-register', this.form.value);
-    this.router.navigate(['/register', 'th-step-3']);
+    this.router.navigate(['/register', 'th-step-2']);
   }
 
   provinceChanged(evt: any) {

@@ -23,6 +23,7 @@ import { TopNavComponent } from '@ksp/shared/menu';
 import { DegreeCertSearchComponent } from '@ksp/shared/search';
 import { RouterModule } from '@angular/router';
 import { SharedFormUniCourseFormModule } from '@ksp/shared/form/uni-course-form';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   imports: [
@@ -44,6 +45,7 @@ import { SharedFormUniCourseFormModule } from '@ksp/shared/form/uni-course-form'
     UniWarnIncorrectComponent,
     FormsModule,
     SharedFormUniCourseFormModule,
+    MatDatepickerModule,
   ],
   declarations: [
     DegreeCertStepOneComponent,

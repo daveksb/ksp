@@ -51,7 +51,6 @@ export class FormUserInfoComponent
   @Input() isSelfService = false;
   @Input() isAddStaff = false;
   @Input() requiredIdCardNo = true;
-
   public _displayMode = UserInfoFormType.thai;
   @Input()
   set displayMode(mode: number) {
@@ -62,6 +61,7 @@ export class FormUserInfoComponent
     return this._displayMode;
   }
 
+  today = new Date();
   @Output() idCardChange = new EventEmitter<string>();
   @Output() kuruspaNoChange = new EventEmitter<string>();
 
@@ -85,7 +85,7 @@ export class FormUserInfoComponent
     // คนไทยไม่ต้อง validate field เหล่านี้
     if (mode === UserInfoFormType.thai) {
       //console.log('aa = ');
-      //this.form.controls.passportno.clearValidators();
+      this.form.controls.passportno.clearValidators();
       this.form.controls.kuruspano.clearValidators();
       this.form.controls.passportstartdate.clearValidators();
       this.form.controls.passportenddate.clearValidators();
@@ -104,6 +104,8 @@ export class FormUserInfoComponent
   }
 
   ngOnInit(): void {
+    this.checkValidators(this._displayMode);
+
     this.form.controls.idcardno.valueChanges
       .pipe(debounceTime(200), distinctUntilChanged())
       .subscribe((res) => {

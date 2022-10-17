@@ -7,8 +7,14 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { FileGroup, KspRequest, Prefix } from '@ksp/shared/interface';
-import { GeneralInfoService, RequestService } from '@ksp/shared/service';
+import {
+  FileGroup,
+  KspRequest,
+  Prefix,
+  SchInfo,
+  SchUser,
+} from '@ksp/shared/interface';
+import { GeneralInfoService, SchoolRequestService } from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
 import localForage from 'localforage';
 import { EMPTY, Observable, switchMap } from 'rxjs';
@@ -20,10 +26,12 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class SchoolRetiredCoordinatorComponent implements OnInit {
   form = this.fb.group({
-    retiredTnfo: [],
+    coordinatorTnfo: [],
   });
   reasoninfo: any;
   schoolId = '0010201056';
+  school = new SchInfo();
+  selectUser!: SchUser;
   userInfoFormType: number = UserInfoFormType.thai;
   prefixList$!: Observable<Prefix[]>;
   uniqueNo!: string;
@@ -36,13 +44,22 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
     public dialog: MatDialog,
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService,
-    private requestService: RequestService
+    private requestService: SchoolRequestService
   ) {}
 
   ngOnInit() {
-    localForage.getItem('registerUserInfoFormValue').then((res) => {
+    localForage.getItem('retireReasonInfoFormValue').then((res) => {
       this.reasoninfo = res;
     });
+
+    localForage.getItem('retiredSelectedSchool').then((res: any) => {
+      this.school = res;
+    });
+
+    localForage.getItem('retiredSelectedUser').then((res: any) => {
+      this.selectUser = res;
+    });
+
     this.uniqueNo = uuidv4();
     this.getList();
   }
@@ -86,18 +103,23 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
         switchMap((res) => {
           if (res) {
             const form: any = this.form.value;
-            const retiredInfo: KspRequest = form.retiredTnfo;
-            retiredInfo.ref1 = '2';
-            retiredInfo.ref2 = '02';
-            retiredInfo.ref3 = '5';
-            retiredInfo.systemtype = '2';
-            retiredInfo.requesttype = '2';
-            retiredInfo.careertype = '5';
-            retiredInfo.process = `1`;
-            retiredInfo.status = `1`;
-            retiredInfo.schoolid = this.schoolId;
-            retiredInfo.reasoninfo = JSON.stringify(this.reasoninfo);
-            return this.requestService.schCreateRequest(retiredInfo);
+            const request: KspRequest = new KspRequest(); //form.retiredTnfo;
+            request.ref1 = '2';
+            request.ref2 = '02';
+            request.ref3 = '5';
+            request.systemtype = '2';
+            request.requesttype = '2';
+            request.careertype = '5';
+            request.process = `1`;
+            request.status = `1`;
+            request.firstnameth = this.selectUser.firstnameth;
+            request.lastnameth = this.selectUser.lastnameth;
+            request.contactphone = this.selectUser.schmobile;
+            request.schoolid = this.schoolId;
+            request.schoolname = this.school.schoolname;
+            request.reasoninfo = JSON.stringify(this.reasoninfo);
+            request.coordinatorinfo = JSON.stringify(form);
+            return this.requestService.schCreateRequest(request);
           }
           return EMPTY;
         })

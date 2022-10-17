@@ -11,7 +11,7 @@
 
             <div class="d-flex justify-content-center mb-3">
               <img
-                src="/assets/images/register-2.png"
+                src="/assets/images/register-1.png"
                 width="200px"
                 height="40px"
               />
@@ -149,6 +149,7 @@
                   <label class="form-label required">วันเดือนปีเกิด</label>
                   <div class="d-flex align-items-center">
                     <input
+                      [max]="today"
                       matInput
                       [matDatepicker]="picker"
                       autocomplete="off"

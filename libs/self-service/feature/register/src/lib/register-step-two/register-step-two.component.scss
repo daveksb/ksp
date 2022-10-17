@@ -10,11 +10,11 @@
   background-repeat: no-repeat;
 }
 
-.image-box {
+/* .image-box {
   border: 2px dashed #e2e2e2;
   border-radius: 8px;
   background-color: #f6f6f6;
-}
+} */
 
 ::ng-deep .mat-tooltip {
   background-color: white;
@@ -23,6 +23,24 @@
   color: black !important;
   white-space: pre-line;
   text-align: center;
+}
+
+.file__image {
+  display: inline;
+  margin: 0 auto 8px auto;
+  width: auto;
+  height: auto;
+  max-width: 275px;
+  max-height: 550px;
+}
+
+.box__container {
+  width: 100%;
+  padding: 2rem 1rem;
+  text-align: center;
+  border-radius: 8px;
+  border: 2px dashed #e2e2e2;
+  background: #f6f6f6;
 }
 
 /* mobile */

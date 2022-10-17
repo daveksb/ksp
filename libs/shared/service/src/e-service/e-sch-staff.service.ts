@@ -10,7 +10,7 @@ import { map, Observable } from 'rxjs';
 export class ESchStaffService {
   constructor(private http: HttpClient) {}
 
-  SearchSchStaffs(payload: any): Observable<SchUser[]> {
+  searchSchStaffs(payload: any): Observable<SchUser[]> {
     return this.http
       .post<KspListResponse>(
         `${environment.shortApiUrl}/schusersearch.php`,

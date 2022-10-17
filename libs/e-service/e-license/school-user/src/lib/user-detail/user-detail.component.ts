@@ -5,6 +5,7 @@ import {
   FormMode,
   KspApprovePayload,
   KspRequest,
+  Prefix,
   SchoolServiceUserPageType,
   SchUser,
 } from '@ksp/shared/interface';
@@ -25,13 +26,11 @@ export class UserDetailComponent implements OnInit {
   approveTitles = ['ผลการตรวจสอบ', 'สถานะการใช้งาน'];
   approveChoices = approveChoices;
   headers = headers;
-
   requestId!: number | null;
   requestData = new KspRequest();
-  prefixList$!: Observable<any>;
+  prefixList$!: Observable<Prefix[]>;
   pageType = 0;
   setPassword = '';
-
   mode: FormMode = 'view';
 
   form = this.fb.group({
@@ -104,7 +103,7 @@ export class UserDetailComponent implements OnInit {
     newUser.schuseractive = '1';
 
     const approvePayload: KspApprovePayload = {
-      id: `${this.requestId}`,
+      requestid: `${this.requestId}`,
       process: '1',
       status: '2',
       detail: null,
@@ -123,9 +122,8 @@ export class UserDetailComponent implements OnInit {
   }
 
   unApproveUser() {
-    console.log('un approve = ');
     const payload: KspApprovePayload = {
-      id: `${this.requestId}`,
+      requestid: `${this.requestId}`,
       process: '1',
       status: '3',
       detail: null,
@@ -135,7 +133,7 @@ export class UserDetailComponent implements OnInit {
     };
 
     this.eRequestService.KspApproveRequest(payload).subscribe((res) => {
-      console.log('un approve result = ', res);
+      //console.log('un approve result = ', res);
     });
   }
 
