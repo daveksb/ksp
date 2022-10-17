@@ -48,7 +48,6 @@ export class SetNewPasswordComponent implements OnInit {
 
   accept() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
         subTitle: `คุณยืนยันข้อมูลใช่หรือไม่? `,
@@ -66,7 +65,6 @@ export class SetNewPasswordComponent implements OnInit {
 
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
       data: {
         header: `ทำรายการสำเร็จ`,
         subContent: `ระบบได้ทำการเปลี่ยนรหัสผ่านให้ท่านเรียบร้อยแล้ว

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
-import { SchInfo, SchUser } from '@ksp/shared/interface';
+import { SchForgetPassword, SchInfo, SchUser } from '@ksp/shared/interface';
 import { map, Observable, shareReplay } from 'rxjs';
 
 @Injectable({
@@ -61,5 +61,19 @@ export class SchoolInfoService {
         shareReplay(),
         map((data: any) => data.datareturn)
       );
+  }
+
+  checkForgetPassword(payload: SchForgetPassword): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/ksppublic/schuserupdatepass`,
+      payload
+    );
+  }
+
+  setForgetPassword(payload: SchForgetPassword): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/ksppublic/schuserupdatepass`,
+      payload
+    );
   }
 }
