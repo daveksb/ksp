@@ -42,7 +42,7 @@ export class ApproveNewUserListComponent implements AfterViewInit {
     //console.log('params  = ', params);
     const payload: EsSearchPayload = {
       systemtype: '2',
-      requesttype: '1',
+      requesttype: params.requesttype,
       requestno: null,
       careertype: null,
       name: null,
