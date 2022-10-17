@@ -13,18 +13,20 @@
       </div>
       <div class="col-4">
         <label class="form-label">ช่วงวันที่ </label>
-        <div class="d-flex align-items-baseline">
+        <div class="d-flex align-items-center">
           <input
-            [matDatepicker]="picker1"
+            matInput
+            [matDatepicker]="picker2"
             autocomplete="off"
-            class="form-control me-2"
+            class="form-control form-date"
             formControlName="date"
           />
           <mat-datepicker-toggle
+            class="button-date"
             matSuffix
-            [for]="picker1"
+            [for]="picker2"
           ></mat-datepicker-toggle>
-          <mat-datepicker #picker1></mat-datepicker>
+          <mat-datepicker #picker2></mat-datepicker>
         </div>
       </div>
     </div>
