@@ -9,7 +9,7 @@ import {
   SchUser,
 } from '@ksp/shared/interface';
 import { ESchStaffService } from '@ksp/shared/service';
-import { mapSchUserStatus } from '@ksp/shared/utility';
+import { mapSchUserStatus, mapRequestType } from '@ksp/shared/utility';
 
 @Component({
   templateUrl: './manage-current-user-list.component.html',
@@ -23,6 +23,7 @@ export class ManageCurrentUserListComponent implements AfterViewInit {
   dataSource = new MatTableDataSource<SchUser>();
   selectedUniversity = '';
   mapSchUserStatus = mapSchUserStatus;
+  mapRequestType = mapRequestType;
 
   constructor(
     private router: Router,
@@ -48,7 +49,7 @@ export class ManageCurrentUserListComponent implements AfterViewInit {
       row: '500',
     };
 
-    this.schStaffService.SearchSchStaffs(payload).subscribe((res) => {
+    this.schStaffService.searchSchStaffs(payload).subscribe((res) => {
       if (res && res.length) {
         this.dataSource.data = res;
         this.dataSource.sort = this.sort;

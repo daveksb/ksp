@@ -4,6 +4,7 @@ export interface RequestSearchFilter {
   name: string | undefined;
   requestdatefrom: string | undefined;
   requeststatus: string | undefined;
+  requesttype: string | undefined;
 }
 
 export interface RequestSchoolInfo {

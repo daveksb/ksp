@@ -1,77 +1,67 @@
 import { Injectable } from '@angular/core';
+import { FileGroup } from '@ksp/shared/interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LicenseRequestService {
-  educationFiles = [
+  educationFiles: FileGroup[] = [
     {
       name: 'สำเนาใบรายงานผลการศึกษา (Transcript)',
-      fileid: '',
-      filename: '',
+      files: [],
     },
     {
       name: 'สำเนาปริญญาบัตร หรือสำเนาหนังสือรับรองคุณวุฒิ',
-      fileid: '',
-      filename: '',
+      files: [],
     },
   ];
 
-  experienceFiles = [
+  experienceFiles: FileGroup[] = [
     {
       name: 'สำเนาหนังสือนำส่งแบบประเมินฉบับจริง',
-      fileid: '',
-      filename: '',
+      files: [],
     },
     {
       name: 'สำเนาคำสั่งแต่งตั้งคณะผู้ประเมินการปฏิบัติการสอน',
-      fileid: '',
-      filename: '',
+      files: [],
     },
     {
       name: 'สำเนาตารางสอนรายสัปดาห์',
-      fileid: '',
-      filename: '',
+      files: [],
     },
     {
       name: 'สำเนาคำสั่งแต่งตั้งปฏิบติหน้าที่',
-      fileid: '',
-      filename: '',
+      files: [],
     },
     {
       name: 'สำเนาสัญญาจ้างหรือทะเบียนประวัติหรือหลักฐานการขอปฏิบัติการสอน',
-      fileid: '',
-      filename: '',
+      files: [],
     },
   ];
 
-  performanceFiles = [
+  performanceFiles: FileGroup[][] = [
     [
       {
         name: 'สำเนาผลการทดสอบ',
-        fileid: '',
-        filename: '',
+        files: [],
       },
     ],
     [
       {
         name: 'สำเนาผลการทดสอบ',
-        fileid: '',
-        filename: '',
+        files: [],
       },
     ],
     [
       {
         name: 'สำเนาผลการทดสอบ',
-        fileid: '',
-        filename: '',
+        files: [],
       },
     ],
     [
       {
         name: 'สำเนาผลการทดสอบ',
-        fileid: '',
-        filename: '',
+        files: [],
       },
     ],
   ];
