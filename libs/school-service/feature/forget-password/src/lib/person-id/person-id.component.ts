@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { SchForgetPassword } from '@ksp/shared/interface';
-import { SchoolInfoService } from '@ksp/shared/service';
+import { SchoolUserService } from '@ksp/shared/service';
 import { idCardPattern } from '@ksp/shared/utility';
 
 @Component({
@@ -21,7 +21,7 @@ export class PersonIdComponent {
     private router: Router,
     private fb: FormBuilder,
     public dialog: MatDialog,
-    private service: SchoolInfoService
+    private userService: SchoolUserService
   ) {}
 
   cancel() {
@@ -34,12 +34,12 @@ export class PersonIdComponent {
     const payload: SchForgetPassword = {
       idcardno: form.idcardno,
       schoolid: form.schoolid,
-      schpassword: null,
+      schpassword: form,
     };
 
-    this.service.checkForgetPassword(payload).subscribe((res) => {
+    this.userService.checkForgetPassword(payload).subscribe((res) => {
       console.log('res = ', res);
-      if (res) {
+      if (res.returncode === '1') {
         this.router.navigate(['/forget-password', 'set-new-password']);
       } else {
         this.notFoundDialog();
