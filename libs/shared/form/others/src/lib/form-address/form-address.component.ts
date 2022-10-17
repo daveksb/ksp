@@ -1,8 +1,19 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import {
+  Amphur,
+  KspFormBaseComponent,
+  Province,
+  Tambol,
+} from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
+/**
+ * Dark Mode : all inputs will have gray background and form container will have white background
+ * Use in Self-Service
+ * Normal Mode : all inputs will have white background and form container will have gray background
+ * Use in E-service, School-Service
+ */
 @Component({
   selector: 'ksp-form-address',
   templateUrl: './form-address.component.html',
@@ -11,18 +22,11 @@ import { providerFactory } from '@ksp/shared/utility';
 })
 export class FormAddressComponent extends KspFormBaseComponent {
   @Input() isDarkMode = false;
-  @Input() provinces: any[] = [];
-  @Input() amphurs: any[] = [];
-  @Input() tumbols: any[] = [];
+  @Input() provinces: Province[] | null = [];
+  @Input() amphurs: Amphur[] | null = [];
+  @Input() tumbols: Tambol[] | null = [];
   @Output() provinceChanged = new EventEmitter<any>();
   @Output() amphurChanged = new EventEmitter<any>();
-
-  /**
-   * Dark Mode : all inputs will have gray background and form container will have white background
-   * Use in Self-Service
-   * Normal Mode : all inputs will have white background and form container will have gray background
-   * Use in E-service, School-Service
-   */
 
   override form = this.fb.group({
     id: [null],
@@ -51,7 +55,11 @@ export class FormAddressComponent extends KspFormBaseComponent {
   // change postcode corespond to Tumbol changed
   updatePostcode(evt: any) {
     const tumbolCode = evt.target?.value;
-    const postCode = this.tumbols.find((t) => t.tambolCode === tumbolCode);
-    this.form.controls.postcode.patchValue(postCode.tambolPostcode);
+    if (this.tumbols) {
+      const postCode = this.tumbols.find((t) => t.tambolCode === tumbolCode);
+      if (postCode && postCode.tambolPostcode) {
+        this.form.controls.postcode.patchValue(<any>postCode.tambolPostcode);
+      }
+    }
   }
 }

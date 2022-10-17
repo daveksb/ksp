@@ -6,26 +6,33 @@
         <label class="form-label required">สังกัด</label>
         <select class="form-select" formControlName="affiliation">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option
-            *ngFor="let bureau of bureaus"
-            [value]="bureau?.bureauId">
+          <option *ngFor="let bureau of bureaus" [value]="bureau?.bureauId">
             {{ bureau?.bureauName }}
           </option>
         </select>
       </div>
       <div class="col-md-6 mb-2">
         <label class="form-label required">สถานที่สอน</label>
-        <input class="form-control form-search" type="text" formControlName="teachingPlace" />
+        <input
+          class="form-control form-search"
+          type="text"
+          formControlName="teachingPlace"
+        />
       </div>
     </div>
     <div class="row">
       <div class="col-md-6 mb-2">
         <label class="form-label required">จังหวัด</label>
-        <select class="form-select" formControlName="province" (change)="provinceChanged.emit($event)">
+        <select
+          class="form-select"
+          formControlName="province"
+          (change)="provinceChanged.emit($event)"
+        >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option
             *ngFor="let province of provinces"
-            [value]="province?.province_id">
+            [value]="province?.province_id"
+          >
             {{ province?.province_name }}
           </option>
         </select>
@@ -43,7 +50,11 @@
     <div class="row">
       <div class="col-md-6 mb-2">
         <label class="form-label required">อำเภอ</label>
-        <select class="form-select" formControlName="district" (change)="amphurChanged.emit($event)">
+        <select
+          class="form-select"
+          formControlName="district"
+          (change)="amphurChanged.emit($event)"
+        >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let a of amphurs" [value]="a?.amphurCode">
             {{ a?.amphurName }}
@@ -52,17 +63,49 @@
       </div>
       <div class="col-md-6 mb-2">
         <label class="form-label required">สอนระดับชั้น</label>
-        <input class="form-control" type="text" formControlName="teachingLevel" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="teachingLevel"
+        />
       </div>
     </div>
     <div class="row">
       <div class="col-md-6 mb-2">
         <label class="form-label required">วันที่เริ่ม</label>
-        <input class="form-control" type="date" formControlName="startDate" />
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            autocomplete="off"
+            class="form-control form-date"
+            formControlName="startDate"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </div>
       </div>
       <div class="col-md-6 mb-2">
         <label class="form-label required">วันที่สิ้นสุด</label>
-        <input class="form-control" type="date" formControlName="endDate" />
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            autocomplete="off"
+            class="form-control form-date"
+            formControlName="endDate"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </div>
       </div>
     </div>
   </div>
@@ -78,26 +121,33 @@
         <label class="form-label required">สังกัด</label>
         <select class="form-select" formControlName="currentAffiliation">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option
-            *ngFor="let bureau of bureaus"
-            [value]="bureau?.bureauId">
+          <option *ngFor="let bureau of bureaus" [value]="bureau?.bureauId">
             {{ bureau?.bureauName }}
           </option>
         </select>
       </div>
       <div class="col-md-6 mb-2">
         <label class="form-label required">สถานที่สอน</label>
-        <input class="form-control form-search" type="text" formControlName="currentTeachingPlace" />
+        <input
+          class="form-control form-search"
+          type="text"
+          formControlName="currentTeachingPlace"
+        />
       </div>
     </div>
     <div class="row">
       <div class="col-md-6 mb-2">
         <label class="form-label required">จังหวัด</label>
-        <select class="form-select" formControlName="currentProvince" (change)="province2Changed.emit($event)">
+        <select
+          class="form-select"
+          formControlName="currentProvince"
+          (change)="province2Changed.emit($event)"
+        >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option
             *ngFor="let province of provinces2"
-            [value]="province?.province_id">
+            [value]="province?.province_id"
+          >
             {{ province?.province_name }}
           </option>
         </select>
@@ -115,7 +165,11 @@
     <div class="row">
       <div class="col-md-6 mb-2">
         <label class="form-label required">อำเภอ</label>
-        <select class="form-select" formControlName="currentDistrict" (change)="amphur2Changed.emit($event)">
+        <select
+          class="form-select"
+          formControlName="currentDistrict"
+          (change)="amphur2Changed.emit($event)"
+        >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let a of amphurs2" [value]="a?.amphurCode">
             {{ a?.amphurName }}
@@ -124,7 +178,11 @@
       </div>
       <div class="col-md-6 mb-2">
         <label class="form-label required">สอนระดับชั้น</label>
-        <input class="form-control" type="text" formControlName="currentTeachingLevel" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="currentTeachingLevel"
+        />
       </div>
     </div>
     <div class="row">
@@ -139,8 +197,14 @@
     </div>
     <div class="row">
       <div class="col-md-6 mb-2">
-        <label class="form-label required">สอนภาษาไทยต่อเนื่องกันเป็นเวลา (ปี)</label>
-        <input class="form-control" type="text" formControlName="continuousTeachingYear" />
+        <label class="form-label required"
+          >สอนภาษาไทยต่อเนื่องกันเป็นเวลา (ปี)</label
+        >
+        <input
+          class="form-control"
+          type="text"
+          formControlName="continuousTeachingYear"
+        />
       </div>
       <div class="col-md-6 mb-2">
         <label class="form-label required">ชื่อผลงาน</label>

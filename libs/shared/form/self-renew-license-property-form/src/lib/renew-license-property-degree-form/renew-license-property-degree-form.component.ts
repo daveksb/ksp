@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'ksp-renew-license-property-degree-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MatDatepickerModule],
   templateUrl: './renew-license-property-degree-form.component.html',
   styleUrls: ['./renew-license-property-degree-form.component.scss'],
   providers: providerFactory(RenewLicensePropertyDegreeFormComponent),

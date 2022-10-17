@@ -4,7 +4,7 @@ export const selfPasswordPattern = '^{6}+$';
 export const numberPattern = '^[0-9]';
 export const nameEnPattern = '^[a-zA-Z]+$';
 export const idCardPattern = '^[0-9]{13}';
-export const passportPattern = '^^[A-Z]{1}[0-9]{6}';
+export const passportPattern = '^^[A-Z]{1}[0-9]{7,9}';
 export const idCardBackPattern = '^([A-Z]{2})+([0-9]{10})+$';
 export const bankAccountPattern = '^[0-9]+$';
 
@@ -13,6 +13,7 @@ export const validatorMessages = {
   th: 'กรุณากรอกข้อมูลเป็นภาษาไทยเท่านั้น ',
   en: 'กรุณากรอกข้อมูลเป็นภาษาอังกฤษเท่านั้น ',
   idCardNo: 'กรุณากรอกข้อมูลเลขบัตรประชาชน 13 หลักเท่านั้น',
+  KuruspaNo: 'กรุณากรอกข้อมูลเลขคุรุสภา 13 หลักเท่านั้น',
   idCardBack: 'กรุณากรอก 2 หลักแรกเป็นภาษาอังกฤษและ 10 หลักหลังเป็นตัวเลข',
   passport: 'กรุณากรอกหมายเลขหนังสือเดินทางให้ถูกต้อง',
   selfPassword: 'ความยาวรหัสผ่านต้องไม่น้อยกว่า 6 ตัวอักษร',

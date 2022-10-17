@@ -72,7 +72,7 @@ export class ActivityDetailComponent implements OnInit {
 
   loadStaffFromId(id: number) {
     this.staffService
-      .searchStaffFromId(id)
+      .loadStaffFromId(id)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         this.staff = res;

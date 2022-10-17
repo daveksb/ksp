@@ -4,11 +4,17 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { SharedFormOthersModule } from '../shared-form-others.module';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'ksp-form-education-info-manager',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, SharedFormOthersModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    SharedFormOthersModule,
+    MatDatepickerModule,
+  ],
   templateUrl: './form-education-info-manager.component.html',
   styleUrls: ['./form-education-info-manager.component.scss'],
   providers: providerFactory(FormEducationInfoManagerComponent),

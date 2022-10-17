@@ -5,12 +5,18 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { BasicInstituteSearchComponent } from '../basic-institute-search/basic-institute-search.component';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @UntilDestroy()
 @Component({
   selector: 'ksp-request-search',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, BasicInstituteSearchComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    BasicInstituteSearchComponent,
+    MatDatepickerModule,
+  ],
   templateUrl: './e-service-request-search.component.html',
   styleUrls: ['./e-service-request-search.component.scss'],
   providers: providerFactory(EServiceRequestSearchComponent),
@@ -18,13 +24,15 @@ import { providerFactory } from '@ksp/shared/utility';
 export class EServiceRequestSearchComponent extends KspFormBaseComponent {
   override form = this.fb.group({
     schoolinfo: [null],
+    requesttype: [''],
     requestno: [''],
     name: [''],
     requestdatefrom: [''],
-    requeststatus: [''],
+    requeststatus: [null],
   });
 
   @Input() searchType = '';
+  @Input() statusList: any[] | undefined = [];
   @Output() search = new EventEmitter<any>();
   @Output() clear = new EventEmitter<boolean>();
 

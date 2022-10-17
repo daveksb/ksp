@@ -1,7 +1,7 @@
 <ksp-top-nav [isSelfService]="true"
   ><span header>ยื่นใบคำขอ</span>
-  <span subHeader>ใบคำขอหนังสือรับรองความรู้</span></ksp-top-nav
->
+  <span subHeader>ใบคำขอหนังสือรับรองความรู้</span>
+</ksp-top-nav>
 
 <form [formGroup]="form">
   <div class="main__container px-4 py-2">
@@ -9,14 +9,17 @@
 
     <div class="row mx-0 border shadow-sm rounded-4 px-2 py-4 bg-white my-4">
       <div class="col-lg-3">
-        <self-service-form-upload-image></self-service-form-upload-image>
+        <self-service-form-upload-image
+          [imgSrc]="myImage"
+          [uniqueTimestamp]="uniqueTimestamp"
+          (uploadImageComplete)="uploadImageComplete($event)"
+        ></self-service-form-upload-image>
       </div>
       <div class="col-md">
         <ksp-form-user-info
           formControlName="userInfo"
           [isDarkMode]="true"
           [prefixList]="prefixList$ | async"
-          [displayMode]="[userInfoType]"
           [nationList]="nationalitys$ | async"
           [isSelfService]="true"
         ></ksp-form-user-info>

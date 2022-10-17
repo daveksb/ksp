@@ -17,7 +17,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { parseJson } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
-import { SelfRequest } from '@ksp/shared/interface';
+import { SelfGetRequest, SelfRequest } from '@ksp/shared/interface';
 
 @Component({
   template: ``,
@@ -83,7 +83,7 @@ export abstract class LicenseFormBaseComponent {
     });
   }
 
-  patchData(data: SelfRequest) {
+  patchData(data: SelfGetRequest) {
     this.patchUserInfo(data);
     this.patchAddress(parseJson(data.addressinfo));
     if (data.schooladdrinfo) {
@@ -91,6 +91,9 @@ export abstract class LicenseFormBaseComponent {
     }
     if (data.prohibitproperty) {
       this.prohibitProperty = parseJson(data.prohibitproperty);
+    }
+    if (data.filedata) {
+      this.myImage = atob(data.filedata);
     }
   }
 

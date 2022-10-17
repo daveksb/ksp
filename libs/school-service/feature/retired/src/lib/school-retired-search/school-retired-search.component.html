@@ -10,7 +10,8 @@
         [title]="'กรุณาเลือกหน่วยงาน/สถานศึกษาที่ท่านสังกัด'"
         [label1]="'สังกัด'"
         [label2]="'โรงเรียน / สถานศึกษา'"
-        (selectedUniversity)="selectedUniversity($event)"
+        [bureauList]="bureauList$ | async"
+        (selectedUniversity)="schoolSelected($event)"
       ></ksp-university-select>
 
       <div class="mt-3">
@@ -22,6 +23,46 @@
           disableNextMessage="กรุณาเลือกโรงเรียน/ สถานศึกษาก่อน"
         ></ksp-bottom-nav>
       </div>
+
+      <ng-container *ngIf="schoolUsers && schoolUsers.length">
+        <hr />
+        <div class="text-primary box-header">ผลการค้นหา</div>
+        <table class="table">
+          <thead style="background-color: #edf6ff">
+            <tr>
+              <th>เลือก</th>
+              <th>ชื่อ-นามสกุล</th>
+              <th>เบอร์โทรศัพท์</th>
+            </tr>
+          </thead>
+          <tbody class="body__table">
+            <tr class="text-secondary" *ngFor="let user of schoolUsers">
+              <td>
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  formControlName="userSelect"
+                  value="{{ user.schmemberid }}"
+                  (change)="onItemChange(user)"
+                />
+              </td>
+              <td>{{ user.firstnameth }} {{ user.lastnameth }}</td>
+              <td>{{ user.schmobile }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="py-2 d-flex justify-content-center">
+          <button
+            class="btn btn-primary"
+            type="button"
+            (click)="next()"
+            [disabled]="!selectUser"
+          >
+            ยืนยัน
+          </button>
+        </div>
+      </ng-container>
     </div>
   </div>
 </form>

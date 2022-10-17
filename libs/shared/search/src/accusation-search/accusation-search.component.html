@@ -7,13 +7,45 @@
         <label class="form-label">เลขที่รายการ </label>
         <input class="form-control" type="text" formControlName="listNumber" />
       </div>
-      <div class="col-2">
+      <!-- <div class="col-2">
         <label class="form-label">ปี พ.ศ. </label>
         <input class="form-control" type="text" formControlName="eraBe" />
+      </div> -->
+      <div class="col-3">
+        <label class="form-label">จาก: วันเดือนปีที่รับเรื่อง </label>
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            autocomplete="off"
+            class="form-control form-date"
+            formControlName="eraBe"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </div>
       </div>
-      <div class="col-4">
-        <label class="form-label">จาก-ถึง: วันเดือนปีที่รับเรื่อง </label>
-        <input class="form-control" type="date" formControlName="fromToDate" />
+      <div class="col-3">
+        <label class="form-label">ถึง: วันเดือนปีที่รับเรื่อง </label>
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            autocomplete="off"
+            class="form-control form-date"
+            formControlName="fromToDate"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </div>
       </div>
     </div>
 

@@ -19,10 +19,21 @@ import {
 } from '@ksp/shared/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
 import {
+  AcademicStanding,
+  Amphur,
+  Country,
   FileGroup,
   KspRequest,
-  SchoolRequest,
+  KspRequestProcess,
+  Nationality,
+  PositionType,
+  Prefix,
+  Province,
+  StaffType,
+  Tambol,
   UserInfoForm,
+  VisaClass,
+  VisaType,
 } from '@ksp/shared/interface';
 
 import {
@@ -34,10 +45,10 @@ import {
 } from '@ksp/shared/service';
 import {
   formatCheckboxData,
+  formatDatePayload,
   mapMultiFileInfo,
   parseJson,
   replaceEmptyWithNull,
-  thaiDate,
 } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
@@ -52,35 +63,31 @@ export class SchoolRequestComponent implements OnInit {
   uniqueNo!: string; // use for file upload reference, gen only first time component loaded
   pageType = RequestPageType;
 
-  countries$!: Observable<any>;
-  provinces$!: Observable<any>;
-  amphurs1$!: Observable<any>;
-  tumbols1$!: Observable<any>;
-  amphurs2$!: Observable<any>;
-  tumbols2$!: Observable<any>;
-  staffTypes$!: Observable<any>;
-  positionTypes$!: Observable<any>;
-  academicTypes$!: Observable<any>;
-  nationList$!: Observable<any>;
-  visaTypeList!: Observable<any>;
-  visaClassList!: Observable<any>;
+  countries$!: Observable<Country[]>;
+  nationList$!: Observable<Nationality[]>;
+  visaTypeList!: Observable<VisaType[]>;
+  visaClassList!: Observable<VisaClass[]>;
+
+  provinces$!: Observable<Province[]>;
+  amphurs1$!: Observable<Amphur[]>;
+  tumbols1$!: Observable<Tambol[]>;
+  amphurs2$!: Observable<Amphur[]>;
+  tumbols2$!: Observable<Tambol[]>;
+
+  staffTypes$!: Observable<StaffType[]>;
+  positionTypes$!: Observable<PositionType[]>;
+  academicTypes$!: Observable<AcademicStanding[]>;
+  prefixList$!: Observable<Prefix[]>;
 
   requestId!: number;
-  requestData!: SchoolRequest;
-  requestDate: string = thaiDate(new Date());
-
-  //systemType = '2'; // school service
-  //requestType = '3';
+  requestData = new KspRequest();
   careerType = SchoolRequestSubType.ครู; // 1 ไทย 2 ผู้บริหาร 3 ต่างชาติ
   requestLabel = '';
-  requestNo = '';
   requestProcess!: number;
   requestStatus!: number;
   disableTempSave = true;
   disableSave = true;
   disableCancel = true;
-  icCardNo = '';
-  schoolAddressLabel = `ที่อยู่ของสถานศึกษาที่ขออนุญาต`;
 
   schoolId = '0010201056';
   userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form
@@ -89,7 +96,6 @@ export class SchoolRequestComponent implements OnInit {
   teachingFiles: FileGroup[] = [];
   reasonFiles: FileGroup[] = [];
   attachFiles: FileGroup[] = [];
-  prefixList$!: Observable<any>;
 
   option1 = this.fb.control(false);
   option2 = this.fb.control(false);
@@ -174,9 +180,10 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   cancelRequest() {
-    const payload = {
+    console.log('req data = ', this.requestData);
+    const payload: KspRequestProcess = {
       id: `${this.requestId}`,
-      process: null,
+      process: this.requestData.process,
       status: '0',
       detail: null,
       userid: null,
@@ -184,28 +191,28 @@ export class SchoolRequestComponent implements OnInit {
     };
 
     this.requestService.schCancelRequest(payload).subscribe(() => {
-      //console.log('Cancel request  = ', res);
       this.completeDialog(`ยกเลิกใบคำขอสำเร็จ`);
     });
   }
 
   createRequest(process: number) {
-    console.log('create request = ');
     const baseForm = this.fb.group(new KspRequest());
+
     const formData: any = this.form.getRawValue();
     console.log('formdata = ', formData);
+
     const tab3 = mapMultiFileInfo(this.eduFiles);
     const tab4 = mapMultiFileInfo(this.teachingFiles);
     const tab5 = mapMultiFileInfo(this.reasonFiles);
     const tab6 = mapMultiFileInfo(this.attachFiles);
+
     formData.addr1.addresstype = 1;
     formData.addr2.addresstype = 2;
 
-    const { id, ...userInfo } = formData.userInfo;
+    let { id, ...userInfo } = formData.userInfo;
     userInfo.schoolid = this.schoolId;
     userInfo.process = `${process}`;
     userInfo.status = `1`;
-
     userInfo.ref1 = '2';
     userInfo.ref2 = '03';
     userInfo.ref3 = '1';
@@ -213,6 +220,9 @@ export class SchoolRequestComponent implements OnInit {
     userInfo.systemtype = '2';
     userInfo.requesttype = '3';
     userInfo.careertype = `${this.careerType}`;
+    //userInfo.birthdate = formatDate(userInfo.birthdate);
+
+    userInfo = formatDatePayload(userInfo);
 
     const teaching: any = this.form.controls.teachinginfo.value;
     let teachingInfo = {};
@@ -246,7 +256,7 @@ export class SchoolRequestComponent implements OnInit {
       ...{ hiringinfo: JSON.stringify(formData.hiringinfo) },
       //...{ visainfo: JSON.stringify(visaInfo) },
       ...{ schooladdrinfo: JSON.stringify(formData.schoolAddr) },
-      //...{ reasoninfo: JSON.stringify(formData.reasoninfo) },
+      ...{ reasoninfo: JSON.stringify(formData.reasoninfo) },
       ...{ fileinfo: JSON.stringify({ tab3, tab4, tab5, tab6 }) },
     };
 
@@ -271,9 +281,9 @@ export class SchoolRequestComponent implements OnInit {
     const baseForm = this.fb.group(new KspRequest());
     const formData: any = this.form.getRawValue();
     const userInfo: UserInfoForm = formData.userInfo;
-
-    /* userInfo.currentprocess = `1`;
-    userInfo.requeststatus = `1`;
+    /*
+    userInfo.process = '1';
+    userInfo.status = '1';
     userInfo.systemtype = `${this.systemType}`;
     userInfo.requesttype = `${this.requestType}`;
     userInfo.subtype = `${this.requestSubType}`; */
@@ -341,7 +351,7 @@ export class SchoolRequestComponent implements OnInit {
     } */
 
     //console.log('update payload = ', res);
-    this.requestService.updateRequest(res).subscribe((res) => {
+    this.requestService.schUpdateRequest(res).subscribe(() => {
       //this.backToListPage();
     });
   }
@@ -363,7 +373,7 @@ export class SchoolRequestComponent implements OnInit {
   checkButtonsDisableStatus() {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
       //console.log('userInfo valid = ', this.form.controls.userInfo.valid);
-      // console.log('form valid = ', this.form.valid);
+      //console.log('form valid = ', this.form.valid);
       // console.log('this.currentProcess = ', this.currentProcess);
       // สถานะ ยกเลิก disable ทุกอย่าง
       if (this.requestStatus === 0) {
@@ -418,8 +428,7 @@ export class SchoolRequestComponent implements OnInit {
   loadRequestFromId(id: number) {
     this.requestService.schGetRequestById(id).subscribe((res) => {
       if (res) {
-        this.requestDate = thaiDate(new Date(`${res.requestdate}`));
-        this.requestNo = `${res.requestno}`;
+        this.requestData = res;
         this.requestProcess = Number(res.process);
         this.requestStatus = Number(res.status);
         //console.log('current process = ', this.currentProcess);
@@ -520,7 +529,34 @@ export class SchoolRequestComponent implements OnInit {
       .searchStaffFromIdCard(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
-        //console.log('req = ', res);
+        console.log('req = ', res);
+        if (res && res.returncode !== '98') {
+          this.pathUserInfo(res);
+          this.patchAddress(parseJson(res.addresses));
+          this.patchEdu(parseJson(res.educations));
+          this.patchTeachingInfo(parseJson(res.teachinginfo));
+          this.patchHiringInfo(parseJson(res.hiringinfo));
+        } else {
+          // search not found reset form and set idcard again
+          this.form.reset();
+          const temp: any = { idcardno: idCard };
+          this.form.controls.userInfo.patchValue(temp);
+        }
+      });
+  }
+
+  searchStaffFromKuruspaNo(kuruspano: string) {
+    if (!kuruspano) return;
+    const payload = {
+      kuruspano,
+      schoolid: this.schoolId,
+    };
+
+    this.staffService
+      .searchStaffFromKuruspaNo(payload)
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        //console.log('res = ', res);
         if (res && res.returncode !== '98') {
           this.pathUserInfo(res);
           this.patchAddress(parseJson(res.addresses));

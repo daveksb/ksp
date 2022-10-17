@@ -10,6 +10,7 @@
       [title]="'กรุณาเลือกหน่วยงาน/สถานศึกษาที่ท่านสังกัด'"
       [label1]="'สังกัด'"
       [label2]="'โรงเรียน / สถานศึกษา'"
+      [bureauList]="bureausList$ | async"
       (selectedUniversity)="selectedUniversity($event)"
     ></ksp-university-select>
 

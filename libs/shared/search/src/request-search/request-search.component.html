@@ -23,7 +23,7 @@
       <label class="form-label">ประเภทวิชาชีพ</label>
       <select class="form-select" formControlName="careertype">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
-        <option *ngFor="let e of eduOccupyList" [value]="e?.id">
+        <option *ngFor="let e of careerTypeList" [value]="e?.id">
           {{ e?.name }}
         </option>
       </select>
@@ -76,15 +76,16 @@
   <div class="row mb-2">
     <div class="col">
       <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ : จาก</label>
-      <div class="d-flex align-items-baseline">
+      <div class="d-flex align-items-center">
         <input
           matInput
           [matDatepicker]="picker1"
           autocomplete="off"
-          class="form-control me-2"
+          class="form-control form-date"
           formControlName="requestdatefrom"
         />
         <mat-datepicker-toggle
+          class="button-date"
           matSuffix
           [for]="picker1"
         ></mat-datepicker-toggle>
@@ -92,22 +93,23 @@
       </div>
     </div>
 
-    <!-- <div class="col-auto px-1">
+    <!-- <div class="col-auto px-0">
       <br />
-      <span class="fs-4">-</span>
+      <span class="fs-6">-</span>
     </div> -->
 
     <div class="col">
       <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ : ถึง</label>
-      <div class="d-flex align-items-baseline">
+      <div class="d-flex align-items-center">
         <input
           matInput
           [matDatepicker]="picker2"
           autocomplete="off"
-          class="form-control me-2"
+          class="form-control form-date"
           formControlName="requestdateto"
         />
         <mat-datepicker-toggle
+          class="button-date"
           matSuffix
           [for]="picker2"
         ></mat-datepicker-toggle>

@@ -1,1 +1,1 @@
-export type FormMode = 'view' | 'edit';
+export type FormMode = 'view' | 'edit' | 'add';

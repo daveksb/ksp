@@ -18,10 +18,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RequestSearchComponent } from '@ksp/shared/search';
 import { SchoolTempLicenseRoutingModule } from './temp-license-routing.module';
 import { SchoolRequestComponent } from './school-request/school-request.component';
-import { SchoolRequestListComponent } from './request-list/request-list.component';
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { SchoolRequestListComponent } from './school-request-list/school-request-list.component';
 
 @NgModule({
   imports: [

@@ -13,6 +13,7 @@ export { SelfDevelopmentService } from './self-service/self-develop.service';
 
 export { ERequestService } from './e-service/e-request.service';
 export { EthicsService } from './e-service/e-ethics.service';
+export { ESchStaffService } from './e-service/e-sch-staff.service';
 
 export { UniRequestService } from './uni-service/uni-request.service';
 export { UniInfoService } from './uni-service/uni-info.service';

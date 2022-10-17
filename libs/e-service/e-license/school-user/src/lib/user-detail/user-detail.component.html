@@ -8,27 +8,42 @@
 
   <div class="bg-white p-3">
     <ksp-request-header-info
-      [requestDate]="requestDate"
-      [requestNumber]="requestNo"
+      [requestDate]="requestData.requestdate"
+      [requestNumber]="requestData.requestno"
     ></ksp-request-header-info>
     <hr />
     <div class="px-4 py-2">
       <div class="row">
         <div class="col mb-2">
           <label class="form-label">สังกัด</label>
-          <input class="form-control" type="text" disabled />
+          <input
+            [value]="requestData.bureauname"
+            class="form-control"
+            type="text"
+            disabled
+          />
         </div>
 
         <div class="col mb-2">
           <label class="form-label">หน่วยงาน / สถานศึกษา</label>
-          <input class="form-control" type="text" disabled />
+          <input
+            [value]="requestData.schoolname"
+            class="form-control"
+            type="text"
+            disabled
+          />
         </div>
       </div>
 
       <div class="row">
         <div class="col mb-2">
           <label class="form-label">ที่อยู่</label>
-          <input class="form-control" type="text" disabled />
+          <input
+            class="form-control"
+            [value]="requestData.schooladdress"
+            type="text"
+            disabled
+          />
         </div>
       </div>
 
@@ -74,24 +89,24 @@
         ข้อมูลผู้มีอำนาจแต่งตั้ง (ที่ระบุไว้ในเอกสารแนบ)
       </div>
       <ksp-form-coordinator-info
-        [positionLabel]="'ตำแหน่งาน'"
+        [positionLabel]="'ตำแหน่งทางการบริหาร'"
         [mode]="'view'"
         [displayMode]="[0]"
         [prefixList]="prefixList$ | async"
         formControlName="coordinatorInfo"
       ></ksp-form-coordinator-info>
-      <!-- <ksp-form-coordinator-info [mode]="'view'"></ksp-form-coordinator-info> -->
     </div>
     <br />
     <ksp-form-attachment
       [title]="'หลักฐานเพื่อพิจารณา'"
       mode="view"
-      [groups]="[{ name: 'หนังสือแต่งตั้ง', fileid: '' }]"
+      [groups]="[{ name: 'หนังสือแต่งตั้ง', files: [] }]"
     ></ksp-form-attachment>
   </div>
   <br />
   <div [formGroup]="verifyForm" class="bg-white p-4">
     <e-service-license-check
+      [mode]="mode"
       formControlName="result"
       [headerTitle]="approveTitles[pageType]"
       [choices]="approveChoices[pageType]"

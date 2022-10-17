@@ -1,4 +1,4 @@
-.table {
+/* .table {
   margin-top: 16px;
   background-color: #fff;
   border: 1px solid #eceef2;
@@ -6,9 +6,9 @@
 
 .table > :not(:first-child) {
   border-top: 0;
-}
+} */
 
-.header__table {
+/* .header__table {
   background-color: #edf6ff;
   color: #000000;
 }
@@ -16,5 +16,8 @@
 .body__table {
   color: #656565;
 }
+ */
 
-
+table #item {
+  background-color: red;
+}

@@ -1,9 +1,11 @@
-<ksp-top-nav [isSelfService]="true"><span header>TEACHING LICENSE APPLICATION FORM</span>
+<ksp-top-nav [isSelfService]="true"
+  ><span header>TEACHING LICENSE APPLICATION FORM</span>
 </ksp-top-nav>
 
 <div class="main__container full-height px-4 py-2">
   <self-service-request-status
-    [title]="'TEACHING LICENSE APPLICATION FORM'"></self-service-request-status>
+    [title]="'TEACHING LICENSE APPLICATION FORM'"
+  ></self-service-request-status>
 
   <br />
   <div class="box-header text-center">
@@ -15,7 +17,8 @@
       labelPosition="bottom"
       [animationDuration]="'0'"
       [selectedIndex]="0"
-      #stepper>
+      #stepper
+    >
       <mat-step [completed]="false">
         <ng-template matStepLabel>Personal Details</ng-template>
         <self-service-foreign-license-step-two
@@ -26,13 +29,17 @@
           [workplaceInfo]="workplaceInfo"
           [licensureInfo]="licensureInfo"
           [academicFiles]="academicFiles"
-          [uniqueTimestamp]="uniqueTimestamp"
-          [eduInfo]="eduInfo"></self-service-foreign-license-step-two>
+          [uniqueTimestamp]="uniqueNo"
+          [eduInfo]="eduInfo"
+          [myImage]="myImage"
+        ></self-service-foreign-license-step-two>
       </mat-step>
 
       <mat-step [completed]="false">
         <ng-template matStepLabel>Renewal Requirements</ng-template>
-        <self-service-renew-license-foreign-step-two formControlName="renewalRequirements">
+        <self-service-renew-license-foreign-step-two
+          formControlName="renewalRequirements"
+        >
         </self-service-renew-license-foreign-step-two>
       </mat-step>
 
@@ -42,14 +49,16 @@
           formControlName="foreignSelectUpload"
           [documentTypes]="'renew'"
           [attachFiles]="documentFiles"
-          [uniqueTimestamp]="uniqueTimestamp"></self-service-foreign-license-step-three>
+          [uniqueTimestamp]="uniqueNo"
+        ></self-service-foreign-license-step-three>
       </mat-step>
 
       <mat-step [completed]="false">
         <ng-template matStepLabel>Personal Declaration</ng-template>
         <self-service-foreign-license-step-four
           [personalDeclaration]="personalDeclaration"
-          formControlName="personalDeclaration">
+          formControlName="personalDeclaration"
+        >
         </self-service-foreign-license-step-four>
       </mat-step>
     </mat-stepper>
@@ -63,10 +72,16 @@
       type="button"
       *ngIf="requestId"
       (click)="onCancelRequest()"
-      class="ms-3 btn border-primary text-primary">
+      class="ms-3 btn border-primary text-primary"
+    >
       Cancel Request
     </button>
-    <button type="button" class="ms-3 btn btn-primary" (click)="save()" [disabled]="!form.valid">
+    <button
+      type="button"
+      class="ms-3 btn btn-primary"
+      (click)="save()"
+      [disabled]="!form.valid"
+    >
       Save (Draft)
     </button>
   </div>

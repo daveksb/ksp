@@ -1,15 +1,23 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
-import { EsSearchPayload, SchoolRequest } from '@ksp/shared/interface';
+import {
+  careerTypeList,
+  SchoolRequestSubType,
+  SchoolRequestType,
+} from '@ksp/shared/constant';
+import {
+  EsSearchPayload,
+  KspRequest,
+  SchRequestSearchFilter,
+} from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import {
   checkProcess,
-  checkRequestType,
+  schoolMapRequestType,
   checkStatus,
 } from '@ksp/shared/utility';
 
@@ -24,12 +32,13 @@ export class ETempLicenseListComponent implements AfterViewInit {
   });
 
   displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<any>();
+  dataSource = new MatTableDataSource<KspRequest>();
   SchoolRequestSubType = SchoolRequestSubType;
   checkProcess = checkProcess;
-  checkRequestType = checkRequestType;
+  checkRequestType = schoolMapRequestType;
   checkStatus = checkStatus;
   requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
+  careerTypeList = careerTypeList.filter((i) => i.id < 3);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -44,18 +53,35 @@ export class ETempLicenseListComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  search(params: any) {
-    //console.log('params = ', params);
+  search(params: Partial<SchRequestSearchFilter>) {
+    console.log('params = ', params);
     const payload: EsSearchPayload = {
       systemtype: '2',
       requesttype: '3',
+      requestno: params.requestno,
+      careertype: params.careertype,
+      name: params.name,
+      idcardno: params.idcardno,
+      passportno: params.passportno,
+      process: params.process,
+      status: params.status,
+      schoolid: null,
+      schoolname: null,
+      bureauid: null,
+      requestdatefrom: params.requestdatefrom,
+      requestdateto: params.requestdateto,
       offset: '0',
       row: '500',
     };
 
-    this.eRequestService.EsSearchRequest(payload).subscribe((res) => {
-      if (res) {
+    this.eRequestService.KspSearchRequest(payload).subscribe((res) => {
+      if (res && res.length) {
         this.dataSource.data = res;
+        this.dataSource.sort = this.sort;
+        const sortState: Sort = { active: 'id', direction: 'desc' };
+        this.sort.active = sortState.active;
+        this.sort.direction = sortState.direction;
+        this.sort.sortChange.emit(sortState);
       } else {
         this.clearData();
       }
@@ -68,9 +94,10 @@ export class ETempLicenseListComponent implements AfterViewInit {
     this.form.controls.search.patchValue({ requesttype: '3' });
   }
 
-  goToDetail(item: SchoolRequest) {
+  goToDetail(item: KspRequest) {
+    //console.log('item = ', item);
     this.router.navigate(['/temp-license', 'detail', item.id], {
-      queryParams: { subtype: item.subtype },
+      queryParams: { subtype: item.careertype },
     });
   }
 }
@@ -87,5 +114,5 @@ export const column = [
   'updatedate',
   'requestdate',
   'reqDoc',
-  'approveDoc',
+  //'approveDoc',
 ];

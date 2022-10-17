@@ -10,7 +10,7 @@
     <div class="row mx-0 border shadow rounded-4 px-2 py-4 bg-white my-4">
       <div class="col-lg-3">
         <self-service-form-upload-image
-          [imageId]="imageId"
+          [imgSrc]="myImage"
           [uniqueTimestamp]="uniqueTimestamp"
           (uploadImageComplete)="uploadImageComplete($event)"
         ></self-service-form-upload-image>
@@ -20,7 +20,6 @@
           formControlName="userInfo"
           [isDarkMode]="true"
           [prefixList]="prefixList$ | async"
-          [displayMode]="[userInfoType]"
           [nationList]="nationalitys$ | async"
           [isSelfService]="true"
         >
@@ -69,14 +68,13 @@
       </mat-tab>
 
       <mat-tab label="สถานที่ทำงาน">
-        <div class="d-flex align-items-center">
+        <!-- <div class="d-flex align-items-center">
           <input type="checkbox" class="me-2" />
-          <label class="form-label mb-2"
-            >เป็นผู้ประสงค์ประกอบวิชาชีพทางการศึกษา</label
-          >
-        </div>
+          <label class="form-label mb-2">เป็นผู้ประสงค์ประกอบวิชาชีพทางการศึกษา</label>
+        </div> -->
         <self-service-form-user-workplace
           formControlName="workplace"
+          [showNotRequire]="true"
           [provinces]="provinces3$ | async"
           [amphurs]="amphurs3$ | async"
           [tumbols]="tumbols3$ | async"

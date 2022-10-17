@@ -13,7 +13,8 @@
       <input
         class="form-control"
         type="text"
-        formControlName="educationInstitution" />
+        formControlName="educationInstitution"
+      />
     </div>
 
     <div class="col-md-6 mb-2">
@@ -49,11 +50,39 @@
   <div class="row">
     <div class="col-md-6 mb-2">
       <label class="form-label required">วันเดือนปี เข้าศึกษา</label>
-      <input class="form-control" type="date" formControlName="admissionDate" />
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker1"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="admissionDate"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker1"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </div>
     </div>
     <div class="col-md-6 mb-2">
       <label class="form-label required">วันเดือนปี สำเร็จการศึกษา</label>
-      <input class="form-control" type="date" formControlName="graduateDate" />
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="graduateDate"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker2"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </div>
     </div>
   </div>
 </form>

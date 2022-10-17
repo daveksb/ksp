@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FileGroup, FormMode, KspRequest } from '@ksp/shared/interface';
+import {
+  Country,
+  FileGroup,
+  FormMode,
+  KspRequest,
+  KspRequestProcess,
+  Prefix,
+  VisaType,
+} from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -15,7 +23,12 @@ import {
   SchoolInfoService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { formatDate, mapMultiFileInfo, thaiDate } from '@ksp/shared/utility';
+import {
+  changeDate,
+  formatDate,
+  mapMultiFileInfo,
+  thaiDate,
+} from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
 
 @UntilDestroy()
@@ -31,22 +44,18 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   address = '';
   showCancelButton!: boolean;
   mode: FormMode = 'edit';
-  prefixList$!: Observable<any>;
-  countries$!: Observable<any>;
-  visaTypeList$!: Observable<any>;
-  //requestNo = '';
-  //requestDate = thaiDate(new Date());
+  prefixList$!: Observable<Prefix[]>;
+  countries$!: Observable<Country[]>;
+  visaTypeList$!: Observable<VisaType[]>;
   requestId!: number;
-  request: KspRequest = new KspRequest();
+  requestData: KspRequest = new KspRequest();
 
   form = this.fb.group({
     foreignTeacher: [],
     visainfo: [],
   });
 
-  foreignFiles: FileGroup[] = [
-    { name: '1.สำเนาหนังสือเดินทาง', files: [] },
-  ] as FileGroup[];
+  foreignFiles: FileGroup[] = [{ name: '1.สำเนาหนังสือเดินทาง', files: [] }];
 
   constructor(
     private router: Router,
@@ -86,23 +95,22 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       if (res) {
         this.mode = 'view';
         this.showCancelButton = Boolean(res.status);
-        //this.requestDate = res.requestdate ?? '';
+        this.requestData.requestdate = res.requestdate ?? '';
+        this.requestData.requestno = res.requestno ?? '';
+        res.birthdate = formatDate(res.birthdate);
+        res.passportstartdate = formatDate(res.passportstartdate);
+        res.passportenddate = formatDate(res.passportenddate);
+        res.visaexpiredate = formatDate(res.visaexpiredate);
 
-        /* res.birthdate = res.birthdate?.split('T')[0];
-        res.passportstartdate = res.passportstartdate?.split('T')[0];
-        res.passportenddate = res.passportenddate?.split('T')[0]; */
+        const fileinfo = JSON.parse(atob(res?.fileinfo || ''));
 
-        //const visainfo = JSON.parse(atob(res.visainfo));
-        //visainfo.passportenddate = visainfo.passportenddate?.split('T')[0];
-        //res.fileinfo = JSON.parse(atob(res.fileinfo));
-
-        /* if (res && res.fileinfo) {
+        if (fileinfo) {
           this.foreignFiles.forEach(
-            (group, index) => (group.files = res.fileinfo[index])
+            (group, index) => (group.files = fileinfo[index])
           );
         }
-        this.form.get('foreignTeacher')?.patchValue(res); */
-        //this.form.controls['visainfo'].patchValue(visainfo);
+        this.form.controls.foreignTeacher.patchValue(<any>res);
+        //this.form.get('visainfo')?.patchValue(res);
       }
     });
   }
@@ -121,11 +129,16 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
         .pipe(
           switchMap((res) => {
             if (res) {
-              const payload = {
+              const payload: KspRequestProcess = {
                 id: `${this.requestId}`,
-                requeststatus: '0',
+                process: `${this.requestData.process}`,
+                status: '0',
+                detail: null,
+                userid: null,
+                paymentstatus: null,
               };
-              return this.requestService.cancelRequest(payload);
+
+              return this.requestService.schCancelRequest(payload);
             }
             return EMPTY;
           })
@@ -139,15 +152,15 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   }
 
   onCancelCompleted() {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: 'ระบบทำการยกเลิกเรียบร้อย',
         content: `วันที่ : ${thaiDate(new Date())}
-        เลขที่คำขอ : ${this.request.requestno}`,
+        เลขที่คำขอ : ${this.requestData.requestno}`,
       },
     });
 
-    completeDialog.componentInstance.completed.subscribe((res) => {
+    dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
         this.router.navigate(['/temp-license', 'list']);
       }
@@ -166,38 +179,40 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       !this.form.get('visainfo')?.valid
     )
       return; */
-    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยืนยันข้อมูล
         และส่งใบคำขอ ใช่หรือไม่? `,
         btnLabel: 'ยืนยัน',
       },
     });
-    confirmDialog.componentInstance.confirmed
+    dialog.componentInstance.confirmed
       .pipe(
         switchMap((res) => {
           if (res && this.form.value.foreignTeacher) {
-            const userInfo: Partial<KspRequest> =
-              this.form.value.foreignTeacher;
+            const userInfo: Partial<KspRequest> = this.form.value
+              .foreignTeacher as any;
 
             userInfo.ref1 = '2';
             userInfo.ref2 = '04';
             userInfo.ref3 = '5';
+            userInfo.isforeign = '1';
             userInfo.systemtype = '2';
             userInfo.requesttype = '4';
             userInfo.careertype = '5';
             userInfo.schoolid = this.schoolId;
             userInfo.process = `1`;
             userInfo.status = `1`;
-            userInfo.birthdate = formatDate(userInfo.birthdate);
-            userInfo.passportstartdate = formatDate(userInfo.passportstartdate);
-            userInfo.passportenddate = formatDate(userInfo.passportenddate);
-            userInfo.visaexpiredate = formatDate(userInfo.visaexpiredate);
-            //userInfo.visainfo = JSON.stringify(this.form.value.visainfo);
-            /* userInfo.fileinfo = JSON.stringify(
+            userInfo.birthdate = changeDate(userInfo.birthdate);
+            userInfo.passportstartdate = changeDate(userInfo.passportstartdate);
+            userInfo.passportenddate = changeDate(userInfo.passportenddate);
+            const visaform = this.form.value.visainfo as any;
+            userInfo.visaclass = visaform?.visaclass;
+            userInfo.visatype = visaform?.visatype;
+            userInfo.visaexpiredate = changeDate(visaform?.visaexpiredate);
+            userInfo.fileinfo = JSON.stringify(
               mapMultiFileInfo(this.foreignFiles)
-            ); */
+            );
             console.log('userInfo = ', userInfo);
             return this.requestService.schCreateRequest(userInfo);
           }

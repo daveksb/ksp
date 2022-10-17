@@ -16,8 +16,8 @@
   <div [formGroup]="form" class="bg-white py-3 px-4">
     <div>
       <ksp-request-header-info
-        [requestDate]="requestDate"
-        [requestNumber]="requestNo"
+        [requestDate]="requestData.requestdate"
+        [requestNumber]="requestData.requestno"
       ></ksp-request-header-info>
       <hr />
 
@@ -28,13 +28,14 @@
 
         <ksp-form-user-info
           (idCardChange)="searchStaffFromIdCard($event)"
+          (kuruspaNoChange)="searchStaffFromKuruspaNo($event)"
           [isDarkMode]="false"
           [prefixList]="prefixList$ | async"
           [nationList]="nationList$ | async"
           [countryList]="countries$ | async"
           [visaClassList]="visaClassList | async"
           [visaTypeList]="visaTypeList | async"
-          [displayMode]="[userInfoFormType]"
+          [displayMode]="userInfoFormType"
           formControlName="userInfo"
         ></ksp-form-user-info>
       </div>
@@ -81,7 +82,7 @@
           </div>
         </mat-tab>
 
-        <mat-tab label="{{ schoolAddressLabel }}">
+        <mat-tab label="ที่อยู่ของสถานศึกษาที่ขออนุญาต">
           <ng-template matTabContent>
             <ksp-form-school-address
               formControlName="schoolAddr"
@@ -303,7 +304,7 @@
             [careerType]="careerType"
             formControlName="reasoninfo"
           ></ksp-form-reason-info>
-
+          <br />
           <ksp-form-multi-attachment
             [uniqueTimestamp]="uniqueNo"
             [pageType]="pageType.reasonTab"
@@ -338,7 +339,7 @@
     [disableTempSaveButton]="disableTempSave"
     [showSaveButton]="true"
     [saveButtonLabel]="'บันทึกและยื่น'"
-    [disableSaveButton]="disableSave"
+    [disableSaveButton]="false"
     [disableCancelButton]="disableCancel"
   ></ksp-bottom-nav>
 </div>

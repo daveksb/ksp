@@ -1,21 +1,43 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { UniversitySearchComponent } from '@ksp/shared/search';
 import { providerFactory } from '@ksp/shared/utility';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { pairwise } from 'rxjs/operators';
 
+const formList = [
+  'bureauid',
+  'schoolname',
+  'houseno',
+  'moo',
+  'alley',
+  'road',
+  'postcode',
+  'province',
+  'tumbol',
+  'amphur',
+];
+
+@UntilDestroy()
 @Component({
   selector: 'self-service-form-user-workplace',
   templateUrl: './form-user-workplace.component.html',
   styleUrls: ['./form-user-workplace.component.css'],
   providers: providerFactory(FormUserWorkplaceComponent),
 })
-export class FormUserWorkplaceComponent extends KspFormBaseComponent {
+export class FormUserWorkplaceComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
+  @Input() showContactForm = false;
+  @Input() isDarkMode = false;
   @Input() provinces: any[] = [];
   @Input() amphurs: any[] = [];
   @Input() tumbols: any[] = [];
   @Input() bureaus: any[] = [];
+  @Input() showNotRequire = false;
   @Output() provinceChanged = new EventEmitter<any>();
   @Output() amphurChanged = new EventEmitter<any>();
 
@@ -30,6 +52,12 @@ export class FormUserWorkplaceComponent extends KspFormBaseComponent {
     province: [null, Validators.required],
     tumbol: [null, Validators.required],
     amphur: [null, Validators.required],
+    notRequired: [false],
+
+    phone: [],
+    fax: [],
+    email: [],
+    website: [],
   });
 
   constructor(private dialog: MatDialog, private fb: FormBuilder) {
@@ -44,10 +72,40 @@ export class FormUserWorkplaceComponent extends KspFormBaseComponent {
     );
   }
 
+  ngOnInit(): void {
+    this.form.valueChanges
+      .pipe(untilDestroyed(this), pairwise())
+      .subscribe(([prev, next]) => {
+        if (prev.notRequired !== next.notRequired) {
+          formList.forEach((form) => {
+            if (!next.notRequired) {
+              this.form.get(form)?.addValidators(Validators.required);
+              this.form.get(form)?.enable();
+            } else {
+              this.form.get(form)?.clearValidators();
+              this.form.get(form)?.disable();
+              this.form.get(form)?.reset();
+            }
+            this.form.get(form)?.updateValueAndValidity();
+          });
+        }
+      });
+  }
+
   openSearchDialog() {
     this.dialog.open(UniversitySearchComponent, {
-      height: '900px',
-      width: '1200px',
+      height: '100vh',
+      width: '75vw',
+      position: {
+        top: '0px',
+        right: '0px',
+      },
+
+      data: {
+        searchType: 'string',
+        subHeader: 'กรุณาเลือกหน่วยงาน/สถานศึกษาที่ท่านสังกัด',
+        bureauList: 'string',
+      },
     });
   }
 

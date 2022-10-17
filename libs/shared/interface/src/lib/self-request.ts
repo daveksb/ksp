@@ -21,3 +21,7 @@ export class SelfRequest extends KspRequest {
     super.status = `${status}`;
   }
 }
+
+export interface SelfGetRequest extends SelfRequest {
+  filedata?: string | null;
+}

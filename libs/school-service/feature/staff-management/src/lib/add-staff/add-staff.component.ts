@@ -9,9 +9,10 @@ import {
 import { Observable } from 'rxjs';
 import {
   formatCheckboxData,
+  formatDatePayload,
   parseJson,
   replaceEmptyWithNull,
-  thaiDate,
+  replaceUndefinedWithNull,
 } from '@ksp/shared/utility';
 import {
   CompleteDialogComponent,
@@ -20,7 +21,21 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { levels, subjects, UserInfoFormType } from '@ksp/shared/constant';
-import { FormMode } from '@ksp/shared/interface';
+import {
+  AcademicStanding,
+  Amphur,
+  Country,
+  FormMode,
+  Nationality,
+  PositionType,
+  Prefix,
+  Province,
+  SchStaff,
+  StaffType,
+  Tambol,
+  VisaClass,
+  VisaType,
+} from '@ksp/shared/interface';
 import localForage from 'localforage';
 
 @UntilDestroy()
@@ -30,19 +45,22 @@ import localForage from 'localforage';
 })
 export class AddStaffComponent implements OnInit {
   staffId!: number;
-  countries$!: Observable<any>;
-  provinces$!: Observable<any>;
-  amphurs1$!: Observable<any>;
-  tumbols1$!: Observable<any>;
-  amphurs2$!: Observable<any>;
-  tumbols2$!: Observable<any>;
-  prefixList$!: Observable<any>;
-  staffTypes$!: Observable<any>;
-  positionTypes$!: Observable<any>;
-  academicTypes$!: Observable<any>;
+  countries$!: Observable<Country[]>;
+  nationList$!: Observable<Nationality[]>;
+  visaTypeList!: Observable<VisaType[]>;
+  visaClassList!: Observable<VisaClass[]>;
+
+  provinces$!: Observable<Province[]>;
+  amphurs1$!: Observable<Amphur[]>;
+  tumbols1$!: Observable<Tambol[]>;
+  amphurs2$!: Observable<Amphur[]>;
+  tumbols2$!: Observable<Tambol[]>;
+  prefixList$!: Observable<Prefix[]>;
+  staffTypes$!: Observable<StaffType[]>;
+  positionTypes$!: Observable<PositionType[]>;
+  academicTypes$!: Observable<AcademicStanding[]>;
   schoolId = '0010201056';
-  today = thaiDate(new Date());
-  mode: FormMode = 'edit';
+  mode: FormMode = 'add';
   userInfoType = UserInfoFormType.thai;
   searchStaffDone = false;
   kuruspaNo = '';
@@ -70,8 +88,14 @@ export class AddStaffComponent implements OnInit {
   ngOnInit(): void {
     this.form.reset();
     this.checkMode();
-    this.getListData();
+    this.getList();
+    this.checkStaffId();
+    /*     this.form.valueChanges.subscribe((res) =>
+      console.log(this.form.controls.userInfo.value)
+    ); */
+  }
 
+  checkStaffId() {
     this.activatedroute.paramMap
       .pipe(untilDestroyed(this))
       .subscribe((params) => {
@@ -83,15 +107,27 @@ export class AddStaffComponent implements OnInit {
 
         // redirect from search idcard page
         const idcardno = Number(params.get('idcardno'));
+        const kuruspano = Number(params.get('kuruspano'));
+
         if (idcardno) {
           this.searchStaffDone = true;
-          const temp: any = { idcardno };
+          const temp: any = { idcardno: `${idcardno}` };
+          this.form.controls.userInfo.patchValue(temp);
+        }
+
+        if (kuruspano) {
+          this.searchStaffDone = true;
+          const temp: any = { kuruspano: `${kuruspano}` };
           this.form.controls.userInfo.patchValue(temp);
         }
       });
   }
 
   searchIdCard(idcardno: string) {
+    if (this.mode === 'view') {
+      return;
+    }
+
     const payload = {
       idcardno,
       schoolid: this.schoolId,
@@ -101,13 +137,45 @@ export class AddStaffComponent implements OnInit {
       .searchStaffFromIdCard(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
-        //console.log('res = ', res);
         if (res && res.returncode !== '98') {
           // found staff
           this.router.navigate(['/staff-management', 'edit-staff', res.id]);
         } else {
           // not found then reset form and set idcard again
-          this.router.navigate(['/staff-management', 'add-staff', idcardno]);
+          this.router.navigate([
+            '/staff-management',
+            'add-staff-thai',
+            idcardno,
+          ]);
+        }
+        this.searchStaffDone = true;
+      });
+  }
+
+  searchKuruspaNo(kuruspano: string) {
+    if (this.mode === 'view') {
+      return;
+    }
+
+    const payload = {
+      kuruspano,
+      schoolid: this.schoolId,
+    };
+
+    this.staffService
+      .searchStaffFromKuruspaNo(payload)
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res && res.returncode !== '98') {
+          // found staff
+          this.router.navigate(['/staff-management', 'edit-staff', res.id]);
+        } else {
+          // not found then reset form and set kuruspano again
+          this.router.navigate([
+            '/staff-management',
+            'add-staff-foreign',
+            kuruspano,
+          ]);
         }
         this.searchStaffDone = true;
       });
@@ -155,8 +223,13 @@ export class AddStaffComponent implements OnInit {
       this.searchStaffDone = true;
       this.mode = 'view';
       this.form.disable();
-    } else {
-      // add staff
+    } else if (this.router.url.includes('add-staff-thai')) {
+      this.mode = 'add';
+      this.userInfoType = UserInfoFormType.thai;
+    } else if (this.router.url.includes('add-staff-foreign')) {
+      this.mode = 'add';
+      this.userInfoType = UserInfoFormType.foreign;
+    } else if (this.router.url.includes('edit-staff')) {
       this.mode = 'edit';
     }
   }
@@ -174,11 +247,24 @@ export class AddStaffComponent implements OnInit {
 
   loadStaffData(staffId: number) {
     this.staffService
-      .searchStaffFromId(staffId)
+      .loadStaffFromId(staffId)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
+        if (res && res.kuruspano) {
+          this.userInfoType = UserInfoFormType.foreign;
+        }
         this.patchAll(res);
       });
+  }
+
+  isForeignSelect(evt: any) {
+    this.form.reset();
+    const checked = evt.target.checked;
+    if (checked) {
+      this.userInfoType = UserInfoFormType.foreign;
+    } else {
+      this.userInfoType = UserInfoFormType.thai;
+    }
   }
 
   patchAll(res: any) {
@@ -190,13 +276,11 @@ export class AddStaffComponent implements OnInit {
   }
 
   insertStaff() {
+    const baseForm = this.fb.group(new SchStaff());
     const formData: any = this.form.getRawValue();
+
     formData.addr1.addressType = 1;
     formData.addr2.addressType = 2;
-
-    const { id, ...userInfo } = formData.userInfo;
-    userInfo.schoolid = this.schoolId;
-    userInfo.createdate = new Date().toISOString().split('.')[0];
 
     const teaching: any = this.form.controls.teachingInfo.value;
     const teachingLevel = formatCheckboxData(teaching.teachingLevel, levels);
@@ -210,24 +294,28 @@ export class AddStaffComponent implements OnInit {
       teachingSubjectOther: teaching.teachingSubjectOther || null,
     };
 
+    const { id, ...userInfo } = formData.userInfo;
+    userInfo.schoolid = this.schoolId;
+
     const payload = {
-      ...userInfo,
+      ...replaceEmptyWithNull(userInfo),
       ...{ addresses: JSON.stringify([formData.addr1, formData.addr2]) },
       ...{ educations: JSON.stringify([formData.edu1, formData.edu2]) },
       ...{ teachinginfo: JSON.stringify(teachingInfo) },
       ...{ hiringinfo: JSON.stringify(formData.hiringInfo) },
     };
-    //console.log('insert payload = ', payload);
-    this.staffService.addStaff(payload).subscribe((res) => {
-      //console.log('add staff result = ', res);
+
+    baseForm.patchValue(payload);
+    let staff = replaceUndefinedWithNull(baseForm.value);
+    staff = formatDatePayload(staff);
+
+    this.staffService.addStaff(staff).subscribe(() => {
       this.onCompleted();
-      this.form.reset();
     });
   }
 
   updateStaff() {
     const formData: any = this.form.getRawValue();
-    //const { ...userInfo } = replaceEmptyWithNull(formData.userInfo);
     formData.userInfo.schoolid = this.schoolId;
 
     const teaching: any = this.form.controls.teachingInfo.value;
@@ -253,8 +341,9 @@ export class AddStaffComponent implements OnInit {
     };
 
     payload = replaceEmptyWithNull(payload);
+    payload = formatDatePayload(payload);
 
-    this.staffService.updateStaff(payload).subscribe((res) => {
+    this.staffService.updateStaff(payload).subscribe(() => {
       //console.log('update result = ', res);
     });
   }
@@ -295,29 +384,33 @@ export class AddStaffComponent implements OnInit {
     }
   }
 
-  getListData() {
-    this.prefixList$ = this.generalInfoService.getPrefix();
+  getList() {
     this.provinces$ = this.addressService.getProvinces();
     this.countries$ = this.addressService.getCountry();
+
+    this.prefixList$ = this.generalInfoService.getPrefix();
+    this.nationList$ = this.generalInfoService.getNationality();
+    this.visaClassList = this.generalInfoService.getVisaClass();
+    this.visaTypeList = this.generalInfoService.getVisaType();
+
     this.staffTypes$ = this.staffService.getStaffTypes();
     this.positionTypes$ = this.staffService.getPositionTypes();
     this.academicTypes$ = this.staffService.getAcademicStandingTypes();
   }
 
-  cancel() {
+  navigateBack() {
     this.router.navigate(['/staff-management', 'list']);
   }
 
   onConfirmed() {
-    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
         btnLabel: 'บันทึก',
       },
     });
 
-    confirmDialog.componentInstance.confirmed.subscribe((res) => {
+    dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         this.save();
       }
@@ -325,16 +418,16 @@ export class AddStaffComponent implements OnInit {
   }
 
   onCompleted() {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
+    const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
       },
     });
 
-    completeDialog.componentInstance.completed.subscribe((res) => {
+    dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.cancel();
+        this.form.reset();
+        this.navigateBack();
       }
     });
   }

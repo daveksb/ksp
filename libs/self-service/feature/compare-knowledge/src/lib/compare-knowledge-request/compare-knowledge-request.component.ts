@@ -85,9 +85,11 @@ export class CompareKnowledgeRequestComponent
 
   ngOnInit(): void {
     this.getListData();
-    // this.getMyInfo();
-    // this.checkButtonsDisableStatus();
     this.checkRequestId();
+  }
+
+  get userInfoForm() {
+    return this.form.controls.userInfo;
   }
 
   override resetForm() {
@@ -168,6 +170,7 @@ export class CompareKnowledgeRequestComponent
     const initialPayload = {
       ...replaceEmptyWithNull(userInfo),
       ...(this.requestId && { id: `${this.requestId}` }),
+      ...(this.imageId && { imagefileid: `${this.imageId}` }),
       ...{
         addressinfo: JSON.stringify([formData.address1, formData.address2]),
       },

@@ -1,15 +1,17 @@
 <form [formGroup]="form">
   <div class="bg-white border rounded-4 shadow-sm p-3">
     <div class="box-header mb-3">
-      Applicants check each documentation item and arrange in the following order.
+      Applicants check each documentation item and arrange in the following
+      order.
     </div>
     <ng-container formArrayName="checkDocuments">
       <ng-container *ngFor="let rule of rules; index as i">
         <div class="d-flex mb-3">
           <div class="d-flex">
-            <input class="me-2 mt-1" type="checkbox" name="xxx" [formControlName]="i" />
+            <input class="me-2 mt-1" type="checkbox" [formControlName]="i" />
           </div>
-          <label class="form-label break__line"><span class="form-label">{{ i + 1 }}.</span> {{ rule }}
+          <label class="form-label break__line"
+            ><span class="form-label">{{ i + 1 }}.</span> {{ rule }}
           </label>
         </div>
       </ng-container>

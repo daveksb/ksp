@@ -18,7 +18,7 @@ import {
   toLowercaseProp,
 } from '@ksp/shared/utility';
 import { SelfRequestService, MyInfoService } from '@ksp/shared/service';
-import { SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, SelfGetRequest, SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -39,7 +39,7 @@ export class RenewLicenseForeignComponent implements OnInit {
     foreignSelectUpload: [],
   });
 
-  uniqueTimestamp!: string;
+  uniqueNo!: string;
   requestId!: number;
   requestData!: SelfRequest;
   requestNo: string | null = '';
@@ -48,10 +48,11 @@ export class RenewLicenseForeignComponent implements OnInit {
   addressInfo: any;
   workplaceInfo: any;
   eduInfo: any;
-  academicFiles: any[] = [];
+  academicFiles: FileGroup[] = [];
   licensureInfo: any;
   personalDeclaration: any;
-  documentFiles: any[] = [];
+  documentFiles: FileGroup[] = [];
+  myImage = '';
 
   constructor(
     private router: Router,
@@ -76,15 +77,15 @@ export class RenewLicenseForeignComponent implements OnInit {
             this.requestData = res;
             this.requestNo = res.requestno;
             this.currentProcess = Number(res.process);
-            this.uniqueTimestamp = res.uniqueno || '';
-            console.log(this.uniqueTimestamp);
+            this.uniqueNo = res.uniqueno || '';
+            console.log(this.uniqueNo);
 
             this.patchData(res);
           }
         });
       } else {
         // this.initializeFiles();
-        this.uniqueTimestamp = uuidv4();
+        this.uniqueNo = uuidv4();
         this.academicFiles = structuredClone(ACADEMIC_FILES);
         this.documentFiles = structuredClone(RENEW_DOCUMENT_FILES);
         this.getMyInfo();
@@ -92,7 +93,7 @@ export class RenewLicenseForeignComponent implements OnInit {
     });
   }
 
-  patchData(data: SelfRequest) {
+  patchData(data: SelfGetRequest) {
     const address = parseJson(data.addressinfo);
     this.patchUserInfo(data);
     this.patchAddress(address, address?.[0].phone, address?.[0].email);
@@ -137,6 +138,10 @@ export class RenewLicenseForeignComponent implements OnInit {
       const foreignSelectUpload = parseJson(data.foreignselectupload);
       this.form.controls.foreignSelectUpload.patchValue(foreignSelectUpload);
     }
+
+    if (data.filedata) {
+      this.myImage = atob(data.filedata);
+    }
   }
 
   getMyInfo() {
@@ -145,6 +150,10 @@ export class RenewLicenseForeignComponent implements OnInit {
       this.patchAddress(parseJson(res.addressinfo), res.phone, res.email);
       if (res.schooladdrinfo) {
         this.patchWorkplace(parseJson(res.schooladdrinfo));
+      }
+
+      if (res && res.filedata) {
+        this.myImage = atob(res.filedata);
       }
     });
   }
@@ -271,7 +280,7 @@ export class RenewLicenseForeignComponent implements OnInit {
     const { id, ...rawUserInfo } = userInfoForm;
     const userInfo = toLowercaseProp(rawUserInfo);
     self.isforeign = `${SelfServiceRequestForType.ชาวต่างชาติ}`;
-    self.uniqueno = this.uniqueTimestamp;
+    self.uniqueno = this.uniqueNo;
     self.userid = getCookie('userId');
 
     const selectData = _.pick(userInfo, allowKey);

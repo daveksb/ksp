@@ -7,7 +7,11 @@
     <div class="col-md-6 mb-2" *ngIf="hasExperience">
       <label class="form-label">ประสบการณ์ในบริหารสถานศึกษา</label>
       <div class="d-flex align-items-center">
-        <input class="form-control" type="text" formControlName="managingExperienceYear" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="managingExperienceYear"
+        />
         <span class="form-label ms-3">ปี</span>
       </div>
     </div>
@@ -28,12 +32,40 @@
   <div class="row">
     <div class="col-md-6 mb-2">
       <label class="form-label required">วัน/เดือน/ปี ที่เข้าศึกษา</label>
-      <input class="form-control" type="date" formControlName="entryDate" />
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker1"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="entryDate"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker1"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </div>
     </div>
 
     <div class="col-md-6 mb-2" *ngIf="hasGraduateDate">
       <label class="form-label">วัน/เดือน/ปี ที่สำเร็จการศึกษา</label>
-      <input class="form-control" type="date" formControlName="graduationDate" />
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="graduationDate"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker2"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </div>
     </div>
   </div>
 </form>

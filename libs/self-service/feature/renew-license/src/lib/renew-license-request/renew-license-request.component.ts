@@ -17,7 +17,7 @@ import {
   SelfRequestService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
 import {
   getCookie,
   parseJson,
@@ -28,11 +28,10 @@ import {
 import { Observable } from 'rxjs';
 import * as _ from 'lodash';
 
-const WORKING_INFO_FILES = [
+const WORKING_INFO_FILES: FileGroup[] = [
   {
     name: '1.รางวัลอื่นและประกาศเกียรติคุณ',
-    fileid: '',
-    filename: '',
+    files: [],
   },
 ];
 
@@ -95,6 +94,10 @@ export class RenewLicenseRequestComponent
     this.getListData();
     this.checkButtonsDisableStatus();
     this.checkRequestId();
+  }
+
+  get userInfoForm() {
+    return this.form.controls.userInfo;
   }
 
   override initializeFiles() {
@@ -182,6 +185,7 @@ export class RenewLicenseRequestComponent
       ...self,
       ...replaceEmptyWithNull(selectData),
       ...(this.requestId && { id: `${this.requestId}` }),
+      ...(this.imageId && { imagefileid: `${this.imageId}` }),
       ...{
         addressinfo: JSON.stringify([formData.address1, formData.address2]),
       },

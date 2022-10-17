@@ -235,4 +235,17 @@ export class UniInfoService {
       }
     );
   }
+
+  kspRequestSearchUni(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/ksprequestsearch_uni.php`,
+      {
+        ...params,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
+  getUniuniversity(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/kspmasterdata/uniuniversity`);
+  }
 }

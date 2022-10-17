@@ -4,7 +4,34 @@
   <div class="row">
     <div
       class="col-6 mb-2"
-      *ngIf="displayMode.includes(FormTypeEnum.thai) && !isSelfService"
+      *ngIf="_displayMode === FormTypeEnum.foreign && !isSelfService"
+    >
+      <label
+        class="form-label required"
+        [ngClass]="{ required: mode === 'edit' }"
+        >หมายเลขคุรุสภาสำหรับชาวต่างชาติ
+      </label>
+      <input
+        maxlength="13"
+        class="form-control"
+        type="text"
+        formControlName="kuruspano"
+        placeholder="หมายเลข 13 หลัก"
+      />
+      <ng-container
+        *ngIf="kuruspaNo.invalid && (kuruspaNo.dirty || kuruspaNo.touched)"
+      >
+        <span class="text-danger">
+          {{ validatorMessages.KuruspaNo }}
+        </span>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="row">
+    <div
+      class="col-6 mb-2"
+      *ngIf="_displayMode === FormTypeEnum.thai && !isSelfService"
     >
       <label
         class="form-label required"
@@ -28,20 +55,29 @@
     </div>
 
     <div class="col mb-2" *ngIf="isqualification">
-      <label class="form-label">ประเภทการยื่น</label>
-      <select formControlName="requestfor" class="form-select">
+      <label class="form-label required">ประเภทการยื่น</label>
+      <select formControlName="isforeign" class="form-select">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
-        <option value="1">ชาวไทย</option>
-        <option value="2">ชาวต่างชาติ</option>
+        <option value="0">ชาวไทย</option>
+        <option value="1">ชาวต่างชาติ</option>
       </select>
     </div>
 
     <div
       class="col mb-2"
-      *ngIf="displayMode.includes(FormTypeEnum.foreign) || isAddStaff === true"
+      *ngIf="_displayMode === FormTypeEnum.foreign || isAddStaff === true"
     >
-      <label class="form-label">หมายเลขหนังสือเดินทาง (Passport Number) </label>
-      <input class="form-control" type="text" formControlName="passportno" />
+      <label
+        class="form-label required"
+        [ngClass]="{ required: _displayMode === FormTypeEnum.foreign }"
+        >หมายเลขหนังสือเดินทาง (Passport Number)
+      </label>
+      <input
+        class="form-control"
+        type="text"
+        maxlength="10"
+        formControlName="passportno"
+      />
       <ng-container
         *ngIf="passportNo.invalid && (passportNo.dirty || passportNo.touched)"
       >
@@ -51,17 +87,19 @@
       </ng-container>
     </div>
 
-    <div class="col mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
-      <label class="form-label required">วันที่ออก</label>
-      <div class="d-flex align-items-baseline">
+    <div class="col mb-2" *ngIf="_displayMode === FormTypeEnum.foreign">
+      <label class="form-label">วันที่ออก</label>
+      <div class="d-flex align-items-center">
         <input
           matInput
           [matDatepicker]="picker1"
           autocomplete="off"
-          class="form-control me-2"
+          class="form-control form-date"
+          [class.form-control-sp]="isDarkMode"
           formControlName="passportstartdate"
         />
         <mat-datepicker-toggle
+          class="button-date"
           matSuffix
           [for]="picker1"
         ></mat-datepicker-toggle>
@@ -69,17 +107,19 @@
       </div>
     </div>
 
-    <div class="col mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
-      <label class="form-label required">วันที่หมดอายุ</label>
-      <div class="d-flex align-items-baseline">
+    <div class="col mb-2" *ngIf="_displayMode === FormTypeEnum.foreign">
+      <label class="form-label">วันที่หมดอายุ</label>
+      <div class="d-flex align-items-center">
         <input
           matInput
           [matDatepicker]="picker2"
           autocomplete="off"
-          class="form-control me-2"
+          class="form-control form-date"
+          [class.form-control-sp]="isDarkMode"
           formControlName="passportenddate"
         />
         <mat-datepicker-toggle
+          class="button-date"
           matSuffix
           [for]="picker2"
         ></mat-datepicker-toggle>
@@ -127,7 +167,7 @@
       </ng-container>
     </div>
 
-    <div class="col-md mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
+    <div class="col-md mb-2" *ngIf="_displayMode === FormTypeEnum.foreign">
       <label class="form-label">ชื่อกลาง</label>
       <input
         [class.form-control-sp]="isDarkMode"
@@ -193,7 +233,7 @@
         </span>
       </ng-container>
     </div>
-    <div class="col-md mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
+    <div class="col-md mb-2" *ngIf="_displayMode === FormTypeEnum.foreign">
       <label class="form-label">ชื่อกลาง</label>
       <input
         [class.form-control-sp]="isDarkMode"
@@ -223,7 +263,7 @@
   </div>
 
   <div class="row">
-    <div class="col-md mb-2" *ngIf="displayMode.includes(FormTypeEnum.thai)">
+    <div class="col-md mb-2" *ngIf="_displayMode === FormTypeEnum.thai">
       <label class="form-label required">เพศ</label>
       <select
         [class.form-select-sp]="isDarkMode"
@@ -238,16 +278,18 @@
     </div>
     <div class="col-md mb-2">
       <label class="form-label required">วันเดือนปีเกิด</label>
-      <div class="d-flex align-items-baseline">
+      <div class="d-flex align-items-center">
         <input
+          [max]="today"
           [class.form-control-sp]="isDarkMode"
           matInput
           [matDatepicker]="picker3"
           autocomplete="off"
-          class="form-control me-2"
+          class="form-control form-date"
           formControlName="birthdate"
         />
         <mat-datepicker-toggle
+          class="button-date"
           matSuffix
           [for]="picker3"
         ></mat-datepicker-toggle>
@@ -255,8 +297,8 @@
       </div>
     </div>
 
-    <div class="col mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
-      <label class="form-label required">ประเทศ</label>
+    <div class="col mb-2" *ngIf="_displayMode === FormTypeEnum.foreign">
+      <label class="form-label">ประเทศ</label>
       <select class="form-select" formControlName="country">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let c of countryList" [value]="c.countryNo">
@@ -265,7 +307,7 @@
       </select>
     </div>
 
-    <div class="col mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
+    <div class="col mb-2" *ngIf="_displayMode === FormTypeEnum.foreign">
       <label class="form-label">สัญชาติ</label>
       <select class="form-select" formControlName="nationality">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
@@ -276,7 +318,7 @@
     </div>
   </div>
 
-  <div class="row" *ngIf="displayMode.includes(FormTypeEnum.thai)">
+  <div class="row" *ngIf="_displayMode === FormTypeEnum.thai">
     <div class="col-md-6 mb-2">
       <label class="form-label required">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
       <input
@@ -314,7 +356,7 @@
   </div>
 
   <div class="row">
-    <div class="col-md-6 mb-2" *ngIf="displayMode.includes(FormTypeEnum.thai)">
+    <div class="col-md-6 mb-2" *ngIf="_displayMode === FormTypeEnum.thai">
       <label class="form-label required">อีเมล</label>
       <input
         class="form-control"
@@ -339,7 +381,7 @@
     </div>
   </div>
 
-  <div class="row" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
+  <div class="row" *ngIf="_displayMode === FormTypeEnum.foreign">
     <div class="col mb-2">
       <label class="form-label">Visa Class </label>
       <select class="form-select" formControlName="visaclass">
@@ -362,15 +404,16 @@
 
     <div class="col mb-2">
       <label class="form-label">อนุญาตถึงวันที่ </label>
-      <div class="d-flex align-items-baseline">
+      <div class="d-flex align-items-center">
         <input
           matInput
           [matDatepicker]="picker4"
           autocomplete="off"
-          class="form-control me-2"
+          class="form-control form-date"
           formControlName="visaenddate"
         />
         <mat-datepicker-toggle
+          class="button-date"
           matSuffix
           [for]="picker4"
         ></mat-datepicker-toggle>
@@ -386,7 +429,7 @@
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option
           *ngFor="let nationality of nationList"
-          [value]="nationality.nationid"
+          [value]="nationality.nationId"
         >
           {{ nationality.nationName }}
         </option>

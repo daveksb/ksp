@@ -19,7 +19,7 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class RegisterStepTwoComponent {
   validatorMessages = validatorMessages;
-  uniqueTimeStamp = '';
+  uniqueNo = '';
   imgSrc = '';
   imgId!: number;
 
@@ -37,7 +37,7 @@ export class RegisterStepTwoComponent {
     private router: Router,
     private fb: FormBuilder
   ) {
-    this.uniqueTimeStamp = uuidv4();
+    this.uniqueNo = uuidv4();
   }
 
   onUploadComplete(evt: any) {
@@ -56,7 +56,7 @@ export class RegisterStepTwoComponent {
         const data = {
           ...res,
           ...this.form.value,
-          ...{ uniquetimestamp: this.uniqueTimeStamp },
+          ...{ uniquetimestamp: this.uniqueNo },
         };
         localForage.setItem('th-register', data);
       });

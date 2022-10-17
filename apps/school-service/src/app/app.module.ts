@@ -29,15 +29,15 @@ const fileUrls: FileUploadUrls = {
 
 /* class PickDateAdapter extends NativeDateAdapter {
   override format(date: Date, displayFormat: any): string {
-     if (displayFormat === 'input') {
-      return formatDate(date, 'dd-M-yyyy', this.locale);
+    if (displayFormat === 'input') {
+      return formatDate(date, 'dd-mm-yyyy', this.locale);
     } else {
       return date.toDateString();
     }
     return date.toDateString();
   }
-}
- */
+} */
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -51,7 +51,6 @@ const fileUrls: FileUploadUrls = {
     HttpClientModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    //MatMomentDateModule,
   ],
   providers: [
     {
@@ -69,7 +68,6 @@ const fileUrls: FileUploadUrls = {
       useValue: fileUrls,
     },
     { provide: MAT_DATE_LOCALE, useValue: 'th-TH' },
-
     //{ provide: DateAdapter, useClass: PickDateAdapter },
     {
       provide: MAT_DIALOG_DEFAULT_OPTIONS,

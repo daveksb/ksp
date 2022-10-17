@@ -17,7 +17,7 @@ import {
   SelfRequestService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, SelfRequest } from '@ksp/shared/interface';
 import {
   getCookie,
   parseJson,
@@ -26,11 +26,10 @@ import {
 } from '@ksp/shared/utility';
 import * as _ from 'lodash';
 
-const WORKING_INFO_FILES = [
+const WORKING_INFO_FILES: FileGroup[] = [
   {
     name: '1.รางวัลอื่นและประกาศเกียรติคุณ',
-    fileid: '',
-    filename: '',
+    files: [],
   },
 ];
 
@@ -69,9 +68,8 @@ export class RenewLicenseSchoolManagerComponent
   });
 
   disableNextButton = false;
-
-  workingInfoFiles: any[] = [];
-  licenseFiles: any[] = [];
+  workingInfoFiles: FileGroup[] = [];
+  licenseFiles: FileGroup[] = [];
 
   constructor(
     router: Router,
@@ -101,6 +99,10 @@ export class RenewLicenseSchoolManagerComponent
     this.getListData();
     this.checkButtonsDisableStatus();
     this.checkRequestId();
+  }
+
+  get userInfoForm() {
+    return this.form.controls.userInfo;
   }
 
   override initializeFiles() {
@@ -205,6 +207,7 @@ export class RenewLicenseSchoolManagerComponent
       ...self,
       ...replaceEmptyWithNull(selectData),
       ...(this.requestId && { id: `${this.requestId}` }),
+      ...(this.imageId && { imagefileid: `${this.imageId}` }),
       ...{
         addressinfo: JSON.stringify([formData.address1, formData.address2]),
       },

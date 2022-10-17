@@ -1,0 +1,168 @@
+<ksp-top-nav><span header>ระบบงานทะเบียนและใบอนุญาต</span></ksp-top-nav>
+
+<div class="bg-secondary bg-opacity-10 px-4 py-3 full-height-2">
+  <div class="bg-white px-3 py-3">
+    <div class="box-header">
+      บัญชีรายชื่อผู้ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพทางการศึกษา
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col">
+        <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ</label>
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            autocomplete="off"
+            class="form-control form-date"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </div>
+      </div>
+      <div class="col">
+        <label class="form-label">ถึง</label>
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            autocomplete="off"
+            class="form-control form-date"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </div>
+      </div>
+      <div class="col">
+        <label class="form-label">สถานะ</label>
+        <select class="form-select">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+    </div>
+    <div class="d-flex justify-content-end mt-3">
+      <button
+        type="button"
+        (click)="clear()"
+        class="btn border-primary text-primary"
+      >
+        ล้างข้อมูล
+      </button>
+      <button type="button" (click)="search()" class="ms-3 btn btn-primary">
+        ค้นหา
+      </button>
+    </div>
+  </div>
+  <br />
+  <div class="bg-white px-3 py-3">
+    <div class="d-flex align-items-center">
+      <div class="form-label me-3">เลขที่ฎีกา</div>
+      <input type="text" class="form-control w-25" />
+    </div>
+    <br />
+    <div class="d-flex justify-content-between">
+      <div class="box-header">รายชื่อผู้ขอคืนค่าธรรมเนียม (ผ่านการตรวจสอบ)</div>
+      <div class="form-label">จำนวน 345 รายการ</div>
+    </div>
+    <div class="bottom-content">
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="no">
+          <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+          <td mat-cell *matCellDef="let element">{{ element.no }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>เลือก</th>
+          <td mat-cell *matCellDef="let element">
+            <input type="checkbox" />
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="order">
+          <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
+          <td mat-cell *matCellDef="let element">{{ element.order }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="ssn">
+          <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
+          <td mat-cell *matCellDef="let element">{{ element.ssn }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="feeType">
+          <th mat-header-cell *matHeaderCellDef>ประเภทค่าธรรมเนียม</th>
+          <td mat-cell *matCellDef="let element">{{ element.feeType }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="profession">
+          <th mat-header-cell *matHeaderCellDef>ประเภทวิชาชีพ</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.profession }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="reason">
+          <th mat-header-cell *matHeaderCellDef>เหตุผลในการคืนเงิน</th>
+          <td mat-cell *matCellDef="let element">{{ element.reason }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="process">
+          <th mat-header-cell *matHeaderCellDef>ขั้นตอน</th>
+          <td mat-cell *matCellDef="let element">{{ element.process }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>สถานะดำเนินการ</th>
+          <th></th>
+          <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="submitDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่ยื่นใบคำขอ</th>
+          <td mat-cell *matCellDef="let element">{{ element.submitDate }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="approveDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่อนุมัติ</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.approveDate }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="refundDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่คืนเงิน</th>
+          <td mat-cell *matCellDef="let element">{{ element.refundDate }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="sticky-bottom border">
+  <ksp-bottom-nav
+    [showCenterButtons]="true"
+    [isFirstPage]="true"
+    [isLastPage]="true"
+    [showSaveButton]="true"
+    [showCancelButton]="true"
+    (cancelClicked)="cancel()"
+  ></ksp-bottom-nav>
+</div>

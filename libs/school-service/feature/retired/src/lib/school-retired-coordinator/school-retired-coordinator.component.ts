@@ -7,7 +7,13 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { FileGroup } from '@ksp/shared/interface';
+import {
+  FileGroup,
+  KspRequest,
+  Prefix,
+  SchInfo,
+  SchUser,
+} from '@ksp/shared/interface';
 import { GeneralInfoService, RequestService } from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
 import localForage from 'localforage';
@@ -20,12 +26,19 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class SchoolRetiredCoordinatorComponent implements OnInit {
   form = this.fb.group({
-    retiredTnfo: [],
+    coordinatorTnfo: [],
   });
   reasoninfo: any;
-  requestNo = '';
-  today = thaiDate(new Date());
   schoolId = '0010201056';
+  school = new SchInfo();
+  selectUser!: SchUser;
+  userInfoFormType: number = UserInfoFormType.thai;
+  prefixList$!: Observable<Prefix[]>;
+  uniqueNo!: string;
+  retiredFiles: FileGroup[] = [
+    { name: 'หนังสือแต่งตั้งผู้ประสานงาน', files: [] },
+  ];
+
   constructor(
     private router: Router,
     public dialog: MatDialog,
@@ -33,32 +46,34 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
     private generalInfoService: GeneralInfoService,
     private requestService: RequestService
   ) {}
-  userInfoFormType: number = UserInfoFormType.thai;
-  retiredFiles: FileGroup[] = [
-    { name: 'หนังสือแต่งตั้งผู้ประสานงาน', files: [] },
-  ];
-  prefixList$!: Observable<any>;
-  uniqueTimestamp: any;
 
   ngOnInit() {
-    localForage.getItem('registerUserInfoFormValue').then((res) => {
+    localForage.getItem('retireReasonInfoFormValue').then((res) => {
       this.reasoninfo = res;
     });
-    this.uniqueTimestamp = uuidv4();
+
+    localForage.getItem('retiredSelectedSchool').then((res: any) => {
+      this.school = res;
+    });
+
+    localForage.getItem('retiredSelectedUser').then((res: any) => {
+      this.selectUser = res;
+    });
+
+    this.uniqueNo = uuidv4();
     this.getList();
   }
 
   prevPage() {
     this.router.navigate(['/retired-user', 'requester']);
   }
+
   getList() {
-    this.form.valueChanges.subscribe((res) => console.log(res));
     this.prefixList$ = this.generalInfoService.getPrefix();
   }
 
-  cancel() {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
+  confirmCancelDialog() {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยกเลิกรายการใบคำขอ
         ใช่หรือไม่?`,
@@ -66,31 +81,15 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
       },
     });
 
-    dialogRef.componentInstance.confirmed.subscribe((res) => {
+    dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.onConfirmed1();
+        this.cancelDialog();
       }
     });
   }
 
-  onConfirmed1() {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
-      data: {
-        header: 'ยกเลิกรายการสำเร็จ',
-      },
-    });
-
-    completeDialog.componentInstance.completed.subscribe((res) => {
-      if (res) {
-        this.router.navigate(['/login']);
-      }
-    });
-  }
-
-  save() {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
+  confirmSubmitDialog() {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
         subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
@@ -99,46 +98,65 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
       },
     });
 
-    dialogRef.componentInstance.confirmed
+    dialog.componentInstance.confirmed
       .pipe(
         switchMap((res) => {
           if (res) {
-            const { retiredTnfo } = this.form.value as any;
-            retiredTnfo.ref1 = '2';
-            retiredTnfo.ref2 = '02';
-            retiredTnfo.ref3 = '5';
-            retiredTnfo.systemtype = '2';
-            retiredTnfo.requesttype = '2';
-            retiredTnfo.subtype = '5';
-            retiredTnfo.currentprocess = `1`;
-            retiredTnfo.requeststatus = `1`;
-            retiredTnfo.schoolid = this.schoolId;
-            retiredTnfo.reasoninfo = JSON.stringify(this.reasoninfo);
-            return this.requestService.createRequest(retiredTnfo);
+            const form: any = this.form.value;
+            const request: KspRequest = new KspRequest(); //form.retiredTnfo;
+            request.ref1 = '2';
+            request.ref2 = '02';
+            request.ref3 = '5';
+            request.systemtype = '2';
+            request.requesttype = '2';
+            request.careertype = '5';
+            request.process = `1`;
+            request.status = `1`;
+            request.firstnameth = this.selectUser.firstnameth;
+            request.lastnameth = this.selectUser.lastnameth;
+            request.contactphone = this.selectUser.schmobile;
+            request.schoolid = this.schoolId;
+            request.schoolname = this.school.schoolname;
+            request.reasoninfo = JSON.stringify(this.reasoninfo);
+            request.coordinatorinfo = JSON.stringify(form);
+            return this.requestService.schCreateRequest(request);
           }
           return EMPTY;
         })
       )
       .subscribe((res) => {
         if (res) {
-          this.onConfirmed2(res?.requestno);
+          this.completeDialog(res?.requestno);
         }
       });
   }
 
-  onConfirmed2(requestno: any) {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
+  cancelDialog() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: 'ยกเลิกรายการสำเร็จ',
+      },
+    });
+
+    dialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/login']);
+      }
+    });
+  }
+
+  completeDialog(requestno: string) {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: 'ยืนยันข้อมูลสำเร็จ',
-        content: `วันที่ : ${this.today}
+        content: `วันที่ : ${thaiDate(new Date())}
         เลขที่ใบคำขอ : ${requestno} `,
         subContent: `กรุณาตรวจสอบสถานะใบคำขอหรือรหัสเข้าใช้งาน
         ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },
     });
 
-    completeDialog.componentInstance.completed.subscribe((res) => {
+    dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
         this.router.navigate(['/login']);
       }

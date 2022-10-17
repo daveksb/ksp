@@ -26,24 +26,27 @@ export class MyInfoService {
     return EMPTY;
   }
 
-  insertMyInfo(payload: any): Observable<any> {
+  insertMyInfo(payload: SelfMyInfo): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspself/selfmyinfoinsert`,
       payload
     );
   }
+
   updateMyInfo(payload: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspself/selfmyinfoupdate`,
       payload
     );
   }
+
   resetPassword(payload: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspself/selfmyinfoupdatepass`,
       payload
     );
   }
+
   formatMyInfo(info: SelfMyInfo) {
     const dateColumn = [
       'lastlogintime',

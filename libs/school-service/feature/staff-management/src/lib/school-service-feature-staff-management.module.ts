@@ -26,6 +26,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 export const routes: Routes = [
   {
@@ -36,7 +37,8 @@ export const routes: Routes = [
       { path: 'list', component: StaffListComponent },
       { path: 'license-search', component: LicenseSearchComponent },
       { path: 'add-staff', component: AddStaffComponent },
-      { path: 'add-staff/:idcardno', component: AddStaffComponent },
+      { path: 'add-staff-thai/:idcardno', component: AddStaffComponent },
+      { path: 'add-staff-foreign/:kuruspano', component: AddStaffComponent },
       { path: 'add-staff-has-license', component: AddStaffComponent },
       { path: 'edit-staff/:id', component: AddStaffComponent },
       { path: 'view-staff/:id', component: AddStaffComponent },
@@ -69,6 +71,7 @@ export const routes: Routes = [
     MatPaginatorModule,
     MatSortModule,
     ThaiDatePipe,
+    MatDatepickerModule,
   ],
   declarations: [
     StaffListComponent,

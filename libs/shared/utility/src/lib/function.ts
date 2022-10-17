@@ -2,6 +2,7 @@ import {
   SchoolRequestProcess,
   SchoolRequestType,
   SelfRequestProcess,
+  SelfRequestType,
 } from '@ksp/shared/constant';
 import { FileGroup, SchoolRequest } from '@ksp/shared/interface';
 import moment from 'moment';
@@ -47,6 +48,38 @@ export function replaceEmptyWithNull(input: any) {
   return input;
 }
 
+export function formatDatePayload(input: any) {
+  for (const [key, value] of Object.entries(input)) {
+    if (key.includes('date') && input[key]) {
+      input[key] = formatDate(new Date(input[key]).toISOString());
+    }
+  }
+  return input;
+}
+
+/**
+ *
+ * @param input return correct format date to send to API
+ * @returns
+ */
+export function formatDate(input: string | null | undefined) {
+  if (input && input.length) {
+    return input.split('T')[0];
+  } else {
+    return null;
+  }
+}
+
+// replace object value from Undefined --> null
+export function replaceUndefinedWithNull(input: any) {
+  for (const [key, value] of Object.entries(input)) {
+    if (value === undefined) {
+      input[key] = null;
+    }
+  }
+  return input;
+}
+
 // parse json with Thai characters support
 export function parseJson(input: any) {
   if (input) {
@@ -63,15 +96,19 @@ export function toLowercaseProp(input: any) {
   }, {});
 }
 
-export function checkProcess(processId: number) {
+export function checkProcess(processId: number, requestType = 3) {
   const process = SchoolRequestProcess.find((p) => {
-    return p.processId === processId && p.requestType === 3;
+    return p.processId === processId && p.requestType === requestType;
   });
   return process;
 }
 
-export function checkStatus(processId: number, statusId: number) {
-  const process = checkProcess(processId);
+export function checkStatus(
+  processId: number,
+  statusId: number,
+  requestType = 3
+) {
+  const process = checkProcess(processId, requestType);
   const status = process?.status.find((s) => {
     return s.id == statusId;
   });
@@ -94,8 +131,12 @@ export function SelfcheckStatus(processId: number, statusId: number) {
   return status;
 }
 
-export function checkRequestType(RequestTypeId: number) {
-  return SchoolRequestType.find((s) => s.id === RequestTypeId)?.name;
+export function schoolMapRequestType(typeId: number) {
+  return SchoolRequestType.find((s) => s.id === typeId)?.name;
+}
+
+export function selfMapRequestType(typeId: string) {
+  return SelfRequestType.find((s) => s.id.toString() === typeId)?.name;
 }
 
 // get file in base 64 format
@@ -110,16 +151,16 @@ export function getBase64(
   });
 }
 
-/**
- *
- * @param input return correct format date to send to API
- * @returns
- */
-export function formatDate(input: string | null | undefined) {
+export function changeDate(
+  input: Date | string | null | undefined
+): string | null {
+  if (input instanceof Date) {
+    input = input.toISOString();
+  }
   if (input && input.length) {
     return input.split('T')[0];
   } else {
-    return null;
+    return input ?? null;
   }
 }
 

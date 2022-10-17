@@ -1,94 +1,27 @@
 <ksp-top-nav
-  ><span header>ย่ืนใบคำขอรางวัล</span
+  ><span header>ยื่นใบคำขอรางวัล</span
   ><span subHeader
     >ขอรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One Innovation: OSOI)</span
   ></ksp-top-nav
 >
 
-<div class="bg-secondary bg-opacity-10 px-4 py-2">
+<div class="bg-secondary full-height bg-opacity-10 px-4 py-2">
   <div class="box-header">
     รายการขอรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One Innovation: OSOI)
   </div>
   <div class="bg-white p-3">
     <div class="box-header">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
     <hr />
-
-    <div class="row">
-      <div class="col">
-        <label class="form-label">เลขที่คำขอ</label>
-        <input type="text" class="form-control" />
-      </div>
-      <div class="col">
-        <label class="form-label">หมายเลขบัตรประชาชน</label>
-        <input type="text" class="form-control" />
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col">
-        <label class="form-label">ชื่อ-นามสกุล</label>
-        <input type="text" class="form-control" />
-      </div>
-      <div class="col">
-        <label class="form-label">ประเภท/กลุ่มสาระการเรียนรู้</label>
-        <input type="text" class="form-control" />
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col">
-        <label class="form-label">สถานะการดำเนินการ</label>
-        <select class="form-select">
-          <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-      </div>
-      <div class="col">
-        <label class="form-label">ผลการพิจารณา</label>
-        <select class="form-select">
-          <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-3">
-        <label class="form-label">จาก : วันเดือนปีที่ยื่นใบคำขอ</label>
-        <input type="date" class="form-control" />
-      </div>
-      <div class="col-auto p-0 my-2">
-        <br />
-        <i class="bi bi-dash"></i>
-      </div>
-      <div class="col-3">
-        <label class="form-label">ถึง : วันเดือนปีที่ยื่นใบคำขอ</label>
-        <input type="date" class="form-control" />
-      </div>
-    </div>
-
-    <div class="d-flex justify-content-end">
-      <button
-        class="btn border-primary text-primary"
-        type="button"
-        (click)="clear()"
-      >
-        ล้างข้อมูล</button
-      ><button class="btn btn-primary ms-2" type="button" (click)="search()">
-        ค้นหา
-      </button>
-    </div>
+    <ksp-e-service-reward-search
+      (search)="search()"
+      (clear)="clear()"
+    ></ksp-e-service-reward-search>
   </div>
   <br />
   <div class="bg-white p-3">
-    <div class="box-header">
+    <div class="box-header mb-3">
       รายการขอรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One Innovation: OSOI)
     </div>
-    <hr />
     <div class="table-responsive">
       <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="order">
@@ -137,7 +70,7 @@
         </ng-container>
 
         <ng-container matColumnDef="submitDate">
-          <th mat-header-cell *matHeaderCellDef>คัดค้าน/เพิกถอน</th>
+          <th mat-header-cell *matHeaderCellDef>วันที่ยื่นใบคำขอ</th>
           <td mat-cell *matCellDef="let element">
             {{ element.submitDate }}
           </td>
@@ -153,7 +86,11 @@
         <ng-container matColumnDef="verify">
           <th mat-header-cell *matHeaderCellDef>ตรวจสอบ</th>
           <td mat-cell *matCellDef="let element">
-            <i role="button" class="bi bi-file-text fs-5 text-primary"></i>
+            <i
+              role="button"
+              class="bi bi-file-text fs-5 text-primary"
+              (click)="verifyRequest()"
+            ></i>
           </td>
         </ng-container>
 
@@ -169,7 +106,7 @@
           <td mat-cell *matCellDef="let row">
             <i
               role="button"
-              (click)="gotoNextPage()"
+              (click)="cancelRequest()"
               class="bi bi-pencil-square fs-5 text-primary"
             ></i>
           </td>

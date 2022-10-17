@@ -8,7 +8,8 @@
             <i
               class="bi bi-x-circle-fill text-danger"
               (click)="deleteFormArray(ethicInfo, i)"
-              role="button"></i>
+              role="button"
+            ></i>
           </div>
           <div class="row">
             <div class="col-md-6 mb-2">
@@ -16,14 +17,18 @@
               <input
                 class="form-control"
                 type="text"
-                formControlName="startYear" />
+                formControlName="startYear"
+              />
             </div>
             <div class="col-md-6 mb-2">
-              <label class="form-label required">การมีวินัยและการพัฒนาตนเอง</label>
+              <label class="form-label required"
+                >การมีวินัยและการพัฒนาตนเอง</label
+              >
               <input
                 class="form-control"
                 type="text"
-                formControlName="discipline" />
+                formControlName="discipline"
+              />
             </div>
           </div>
           <div class="row">
@@ -32,14 +37,16 @@
               <input
                 class="form-control"
                 type="text"
-                formControlName="careerResponsibility" />
+                formControlName="careerResponsibility"
+              />
             </div>
             <div class="col-md-6 mb-2">
               <label class="form-label required">การแสดงความเอื้ออาทร</label>
               <input
                 class="form-control"
                 type="text"
-                formControlName="showingGenerosity" />
+                formControlName="showingGenerosity"
+              />
             </div>
           </div>
           <div class="row">
@@ -48,14 +55,16 @@
               <input
                 class="form-control"
                 type="text"
-                formControlName="promotingLearning" />
+                formControlName="promotingLearning"
+              />
             </div>
             <div class="col-md-6 mb-2">
               <label class="form-label required">การเป็นแบบอย่าง</label>
               <input
                 class="form-control"
                 type="text"
-                formControlName="roleModel" />
+                formControlName="roleModel"
+              />
             </div>
           </div>
           <div class="row">
@@ -64,40 +73,51 @@
               <input
                 class="form-control"
                 type="text"
-                formControlName="support" />
+                formControlName="support"
+              />
             </div>
             <div class="col-md-6 mb-2">
               <label class="form-label required">การให้ความเสมอภาค</label>
               <input
                 class="form-control"
                 type="text"
-                formControlName="equality" />
+                formControlName="equality"
+              />
             </div>
           </div>
           <div class="row">
             <div class="col-md-6 mb-2">
-              <label class="form-label required">ความเป็นผู้นำในการอนุรักษ์</label>
+              <label class="form-label required"
+                >ความเป็นผู้นำในการอนุรักษ์</label
+              >
               <input
                 class="form-control"
                 type="text"
-                formControlName="conservationLeadership" />
+                formControlName="conservationLeadership"
+              />
             </div>
             <div class="col-md-6 mb-2">
-              <label class="form-label required">การเกื้อกูลและยึดมั่นในระบบคุณธรรม</label>
+              <label class="form-label required"
+                >การเกื้อกูลและยึดมั่นในระบบคุณธรรม</label
+              >
               <input
                 class="form-control"
                 type="text"
-                formControlName="supportMoralSystem" />
+                formControlName="supportMoralSystem"
+              />
             </div>
           </div>
 
           <div class="row">
             <div class="col-md-6 mb-2">
-              <label class="form-label required">การมีภาวะผู้นำและหรือการเป็นผู้นำการเปลี่ยนแปลง</label>
+              <label class="form-label required"
+                >การมีภาวะผู้นำและหรือการเป็นผู้นำการเปลี่ยนแปลง</label
+              >
               <input
                 class="form-control"
                 type="text"
-                formControlName="transformationalLeadership" />
+                formControlName="transformationalLeadership"
+              />
             </div>
           </div>
         </div>
@@ -105,9 +125,11 @@
       </ng-container>
     </ng-container>
   </ng-container>
-  <div class="d-flex justify-content-end">
+  <div class="d-flex justify-content-end" *ngIf="mode === 'edit'">
     <ksp-add-row-button
       class="text-primary"
-      (addRowClick)="addFormArray(ethicInfo)">เพิ่มข้อมูลการปฏิบัติตนตามจรรยาบรรณ</ksp-add-row-button>
+      (addRowClick)="addFormArray(ethicInfo)"
+      >เพิ่มข้อมูลการปฏิบัติตนตามจรรยาบรรณ</ksp-add-row-button
+    >
   </div>
 </form>

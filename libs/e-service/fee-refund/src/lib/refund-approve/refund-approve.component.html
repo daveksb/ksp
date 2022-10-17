@@ -1,0 +1,150 @@
+<ksp-top-nav
+  ><span header>ตรวจสอบใบคำขอ</span
+  ><span subHeader>ขอคืนค่าธรรมเนียม </span></ksp-top-nav
+>
+
+<div class="bg-secondary bg-opacity-10 py-2 px-4 full-height-2">
+  <div class="box-header">รายละเอียดใบคำขอ</div>
+  <div class="bg-white p-3">
+    <div class="d-flex justify-content-between">
+      <ksp-request-header-info
+        [requestDate]="'10 ตุลาคม 2565'"
+        [requestNumber]="'112234467876543'"
+      ></ksp-request-header-info>
+      <div class="form-label">
+        วันที่ตรวจสอบ :
+        <span class="text-orange">10 ตุลาคม 2565</span>
+      </div>
+    </div>
+    <hr />
+    <div class="box-header">ผลการตรวจสอบข้อมูลและเอกสาร</div>
+
+    <div class="table-responsive d-flex justify-content-center mt-3">
+      <table class="table w-75">
+        <thead>
+          <tr>
+            <th scope="col">ครั้งที่</th>
+            <th scope="col">วันที่เริ่มตรวจสอบ</th>
+            <th scope="col">วันที่ตรวจสอบเสร็จ</th>
+            <th scope="col">ชื่อ-นามสกุล เจ้าหน้าที่</th>
+            <th scope="col">ผลการตรวจสอบ</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>x</td>
+            <td>x</td>
+            <td>x</td>
+            <td>x</td>
+            <td>x</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br />
+    <div class="bg-white border py-3 px-4">
+      <div class="d-flex align-items-center mb-3">
+        <div class="box-header text-primary me-1">ยืนยันผลการตรวจสอบ</div>
+        <div class="text-danger">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
+      </div>
+
+      <div class="d-flex align-items-center mb-3">
+        <div class="form-control" style="width: 12rem">
+          <div class="d-flex align-items-center">
+            <input class="radio" type="radio" value="1" />
+            <label class="form-label ms-2"> ครบถ้วน และถูกต้อง </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center mb-3">
+        <div class="form-control" style="width: 12rem">
+          <div class="d-flex align-items-center">
+            <input class="radio" type="radio" value="2" />
+            <label class="form-label ms-2"> ขอแก้ไข / เพิ่มเติม </label>
+          </div>
+        </div>
+        <div class="row w-50 ms-2">
+          <div class="col-4 form-label text-center">
+            วันที่ต้องการใบคำขอส่งกลับ
+          </div>
+          <div class="col-4">
+            <div class="d-flex align-items-center">
+              <input
+                matInput
+                [matDatepicker]="picker"
+                autocomplete="off"
+                class="form-control form-date"
+              />
+              <mat-datepicker-toggle
+                class="button-date"
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="d-flex align-items-center mb-3">
+        <div class="box-header text-primary me-1">
+          ต้องการส่งตรวจสอบลำดับต่อไป หรือส่งเพื่อพิจารณา
+        </div>
+        <div class="text-danger">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
+      </div>
+
+      <div class="d-flex align-items-center mb-3">
+        <div class="form-control" style="width: 24rem">
+          <div class="d-flex align-items-center">
+            <input class="radio" type="radio" value="1" />
+            <label class="form-label ms-2"> ส่งตรวจสอบลำดับต่อไป </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center mb-3">
+        <div class="form-control" style="width: 24rem">
+          <div class="d-flex align-items-center">
+            <input class="radio" type="radio" value="2" />
+            <label class="form-label ms-2">
+              ไม่ผ่านการตรวจสอบ เนื่องจากไม่ครบถ้วน / ไม่ถูกต้อง
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center mb-3">
+        <div class="form-control" style="width: 24rem">
+          <div class="d-flex align-items-center">
+            <input class="radio" type="radio" value="3" />
+            <label class="form-label ms-2"> ส่งเรื่องพิจารณา </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center mb-3">
+        <div class="form-control" style="width: 24rem">
+          <div class="d-flex align-items-center">
+            <input class="radio" type="radio" value="4" />
+            <label class="form-label ms-2"> ยกเลิก </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sticky-bottom border">
+  <ksp-bottom-nav
+    [showCenterButtons]="true"
+    [isLastPage]="true"
+    [showSaveButton]="true"
+    [showCancelButton]="true"
+    (prevClicked)="back()"
+    (cancelClicked)="cancel()"
+  ></ksp-bottom-nav>
+</div>

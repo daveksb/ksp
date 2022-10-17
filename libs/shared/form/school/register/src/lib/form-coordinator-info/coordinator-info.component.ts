@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { SchoolRequestType, UserInfoFormType } from '@ksp/shared/constant';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { KspFormBaseComponent, Prefix } from '@ksp/shared/interface';
 import {
   createUserInfoForm,
   providerFactory,
@@ -27,7 +27,7 @@ export class FormCoordinatorInfoComponent
   @Input() isSchoolService = true;
   @Input() displayMode!: number[];
 
-  @Input() prefixList: any[] = [];
+  @Input() prefixList: Prefix[] | null = [];
   @Input() countryList: any[] = [];
   @Input() nationList: any[] = [];
   @Input() visaClassList: any[] = [];
@@ -60,22 +60,14 @@ export class FormCoordinatorInfoComponent
     // ถ้าเป็น form คนไทยไม่ต้อง validate field เหล่านี้
     //console.log('display mode = ', this.displayMode);
     this.form.controls.sex.clearValidators();
-    //this.form.controls.idcardno.clearValidators();
     this.form.controls.birthdate.clearValidators();
+
     if (this.displayMode.includes(UserInfoFormType.thai)) {
       this.form.controls.passportno.clearValidators();
       this.form.controls.passportstartdate.clearValidators();
       this.form.controls.passportenddate.clearValidators();
       this.form.controls.position.clearValidators();
-    }
-
-    if (this.displayMode.includes(UserInfoFormType.foreign)) {
-      this.form.controls.idcardno.clearValidators();
-      this.form.controls.workphone.clearValidators();
-      this.form.controls.contactphone.clearValidators();
-      this.form.controls.position.clearValidators();
-      this.form.controls.sex.clearValidators();
-      this.form.controls.email.clearValidators();
+      this.form.controls.kuruspano.clearValidators();
     }
   }
   prefixChanged(evt: any) {

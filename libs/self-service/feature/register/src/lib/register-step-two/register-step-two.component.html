@@ -10,44 +10,11 @@
             <h3 class="mb-3 pb-2 pb-md-0 mb-md-4 text-center">สมัครสมาชิก</h3>
 
             <div class="d-flex justify-content-center mb-3">
-              <div class="position-relative m-4 w-md-25 w-50">
-                <div class="progress" style="height: 1px">
-                  <div
-                    class="progress-bar"
-                    role="progressbar"
-                    style="width: 50%"
-                    aria-valuenow="50"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  ></div>
-                </div>
-                <button
-                  type="button"
-                  class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-outline-primary text-primary rounded-pill"
-                  style="
-                    width: 3rem;
-                    height: 3rem;
-                    pointer-events: none;
-                    background: #fff;
-                  "
-                >
-                  1
-                </button>
-                <button
-                  type="button"
-                  class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-secondary rounded-pill"
-                  style="width: 3rem; height: 3rem; pointer-events: none"
-                >
-                  2
-                </button>
-                <button
-                  type="button"
-                  class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill"
-                  style="width: 3rem; height: 3rem; pointer-events: none"
-                >
-                  3
-                </button>
-              </div>
+              <img
+                src="/assets/images/register-2.png"
+                width="200px"
+                height="40px"
+              />
             </div>
 
             <form [formGroup]="form">
@@ -122,32 +89,31 @@
                     class="bi bi-question-circle fs-6 ms-1"
                     (click)="tooltip2()"
                   ></i>
-                  <div class="image-box d-flex align-items-center flex-column">
-                    <img style="max-height: 225px" [src]="imgSrc" />
 
-                    <ng-container *ngIf="!imgSrc">
-                      <div class="p-5 d-flex flex-column align-items-center">
-                        <ksp-file-upload
-                          [buttonLabel]="'อัพโหลดรูปภาพ'"
-                          [requestType]="1"
-                          [isImage]="true"
-                          [uniqueTimestamp]="uniqueTimeStamp"
-                          [showUploadedFileName]="false"
-                          (uploadComplete)="onUploadComplete($event)"
-                        ></ksp-file-upload>
-                        <diV class="form-label"
-                          >Choose image . jpg only, max size 1 MB</diV
-                        >
+                  <div class="box__container">
+                    <img class="file__image" [src]="imgSrc" *ngIf="imgSrc" />
+                    <div class="d-flex flex-column">
+                      <ksp-file-upload
+                        [buttonLabel]="'อัพโหลดรูปภาพ'"
+                        [requestType]="1"
+                        [isImage]="true"
+                        [uniqueTimestamp]="uniqueNo"
+                        [showUploadedFileName]="false"
+                        (uploadComplete)="onUploadComplete($event)"
+                      ></ksp-file-upload>
+                      <div class="fs-6 text-secondary" *ngIf="!imgSrc">
+                        Choose image . jpg only, max size 1 MB
                       </div>
-                    </ng-container>
+                    </div>
                   </div>
                 </div>
               </div>
 
+              <!-- [disabled]="form.invalid || !imgId" -->
               <div class="gap-2 col-md-6 d-flex mx-auto my-2">
                 <button
                   (click)="openDialog()"
-                  [disabled]="form.invalid || !imgId"
+                  [disabled]="false"
                   type="submit"
                   class="btn btn-primary w-100"
                 >

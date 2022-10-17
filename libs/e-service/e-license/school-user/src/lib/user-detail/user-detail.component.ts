@@ -2,9 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
-  SchoolRequest,
+  FormMode,
+  KspApprovePayload,
+  KspRequest,
+  Prefix,
   SchoolServiceUserPageType,
-  SchoolUser,
+  SchUser,
 } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
@@ -13,7 +16,7 @@ import {
 import { ERequestService, GeneralInfoService } from '@ksp/shared/service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { parseJson, thaiDate } from '@ksp/shared/utility';
+import { parseJson } from '@ksp/shared/utility';
 
 @Component({
   templateUrl: './user-detail.component.html',
@@ -23,13 +26,12 @@ export class UserDetailComponent implements OnInit {
   approveTitles = ['ผลการตรวจสอบ', 'สถานะการใช้งาน'];
   approveChoices = approveChoices;
   headers = headers;
-
   requestId!: number | null;
-  requestDate!: string | null;
-  requestData!: any;
-  prefixList$!: Observable<any>;
-  requestNo: string | null = '';
+  requestData = new KspRequest();
+  prefixList$!: Observable<Prefix[]>;
   pageType = 0;
+  setPassword = '';
+  mode: FormMode = 'view';
 
   form = this.fb.group({
     userInfo: [],
@@ -69,62 +71,69 @@ export class UserDetailComponent implements OnInit {
   }
 
   loadRequestFromId(id: number) {
-    this.eRequestService.getRequestById(id).subscribe((res) => {
+    this.eRequestService.getKspRequestById(id).subscribe((res) => {
       this.requestData = res;
-      this.requestNo = res.requestno;
-      this.requestDate = thaiDate(new Date(`${res.requestdate}`));
-
+      res.status === '1' ? (this.mode = 'edit') : (this.mode = 'view');
+      console.log('status = ', res.status);
+      console.log('mode = ', this.mode);
       if (res.birthdate) {
         res.birthdate = res.birthdate.split('T')[0];
       }
 
-      const data: any = res;
-      this.form.controls.userInfo.patchValue(data);
-
+      this.form.controls.userInfo.patchValue(<any>res);
       const coordinator = parseJson(res.coordinatorinfo);
-      //console.log('coordinator = ', res);
+      //console.log('coordinator = ', coordinator);
+      this.setPassword = coordinator.password;
       this.form.controls.coordinatorInfo.patchValue(coordinator.coordinator);
     });
   }
 
-  /* {
-      idcardno: '1',
-      firstnameth: '2',
-      lastnameth: '3',
-      schemail: '4',
-      schmobile: '5',
-      schbirthdate: '2022-09-06T00:20:13',
-      schusername: '6',
-      schpassword: '7',
-      schuseractive: this.verifySelected,
-      schuserenddate: '2022-09-06T00:20:13',
-      schlastlogintime: '2022-09-06T00:20:13',
-      schlastlogouttime: '2022-09-06T00:20:13',
-      schoolid: '9',
-      position: '10',
-      prefixth: '11',
-      prefixen: '12',
-      firstnameen: '13',
-      lastnameen: '144',
-      permissionright: { field1: 'data1', field2: 'data2', field3: 'data3' },
-      coordinatorinfo: { field1: 'data1', field2: 'data2', field3: 'data3' },
-    }; */
-
   approveUser() {
     // change process and status of SCH_REQUEST
-
-    const newUser = new SchoolUser();
-
+    const newUser = new SchUser();
     newUser.idcardno = this.requestData.idcardno;
+    newUser.prefixth = this.requestData.prefixth;
+    newUser.schemail = this.requestData.email;
+    newUser.position = this.requestData.position;
     newUser.firstnameth = this.requestData.firstnameth;
     newUser.lastnameth = this.requestData.lastnameth;
     newUser.schusername = this.requestData.schoolid;
-    newUser.schpassword = '1234';
+    newUser.schoolid = this.requestData.schoolid;
+    newUser.schpassword = this.setPassword;
     newUser.schuseractive = '1';
 
-    this.eRequestService.createSchUser(newUser).subscribe((res) => {
-      console.log('new user result = ', res.returnmessage);
+    const approvePayload: KspApprovePayload = {
+      requestid: `${this.requestId}`,
+      process: '1',
+      status: '2',
+      detail: null,
+      systemtype: '2', // school
+      userid: null,
+      paymentstatus: null,
+    };
+
+    this.eRequestService.KspApproveRequest(approvePayload).subscribe((res) => {
+      console.log('approve result = ', res);
+    });
+
+    this.eRequestService.createSchUser(newUser).subscribe(() => {
       this.completeDialog();
+    });
+  }
+
+  unApproveUser() {
+    const payload: KspApprovePayload = {
+      requestid: `${this.requestId}`,
+      process: '1',
+      status: '3',
+      detail: null,
+      systemtype: '2', // school
+      userid: null,
+      paymentstatus: null,
+    };
+
+    this.eRequestService.KspApproveRequest(payload).subscribe((res) => {
+      //console.log('un approve result = ', res);
     });
   }
 
@@ -142,7 +151,6 @@ export class UserDetailComponent implements OnInit {
 
   confirm() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `คุณต้องการบันทึกข้อมูล
         ใช่หรือไม่? `,
@@ -160,14 +168,8 @@ export class UserDetailComponent implements OnInit {
     });
   }
 
-  unApproveUser() {
-    console.log('un approve = ');
-    // change process and status of SCH_REQUEST
-  }
-
   completeDialog() {
     const dialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
       data: {
         header: `บันทึกข้อมูลสำเร็จ`,
         buttonLabel: 'กลับสู่หน้าหลัก',
@@ -178,10 +180,6 @@ export class UserDetailComponent implements OnInit {
       if (res) {
         if (this.pageType === SchoolServiceUserPageType.ApproveNewUser) {
           this.router.navigate(['/school', 'new-user']);
-        } else if (
-          this.pageType === SchoolServiceUserPageType.ManageCurrentUser
-        ) {
-          //this.router.navigate(['/manage-current-user', 'list']);
         }
       }
     });
@@ -213,7 +211,7 @@ const approveChoices = [
 
 const headers = [
   [
-    'ใบคำขอรหัสเข้าใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service) ',
+    'ใบคำขอผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service) ',
     'ตรวจสอบและอนุมัติใบคำขอรหัสเข้าใช้งาน',
   ],
   [

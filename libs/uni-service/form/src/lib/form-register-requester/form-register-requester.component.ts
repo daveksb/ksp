@@ -1,15 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { uniPermissionList, UserInfoFormType } from '@ksp/shared/constant';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
-import { GeneralInfoService } from '@ksp/shared/service';
 import {
   createUniUserInfoForm,
   providerFactory,
   validatorMessages,
 } from '@ksp/shared/utility';
-import { uniPermissionList, UserInfoFormType } from 'libs/shared/constant/src/school-request-constant';
-import { Observable } from 'rxjs';
-
 
 @Component({
   selector: 'uni-form-register-requester',
@@ -17,9 +14,9 @@ import { Observable } from 'rxjs';
   styleUrls: ['./form-register-requester.component.scss'],
   providers: providerFactory(FormRegisterRequesterInfoComponent),
 })
-export class FormRegisterRequesterInfoComponent 
-  extends KspFormBaseComponent 
-  implements OnInit 
+export class FormRegisterRequesterInfoComponent
+  extends KspFormBaseComponent
+  implements OnInit
 {
   @Input() uniType: Array<any> = [];
   @Input() prefixName: Array<any> = [];
@@ -29,7 +26,7 @@ export class FormRegisterRequesterInfoComponent
   educationOccupy: any = {
     permission: '',
     other: '',
-    affiliation: ''
+    affiliation: '',
   };
   permissionList: Array<any> = uniPermissionList;
 
@@ -68,8 +65,8 @@ export class FormRegisterRequesterInfoComponent
     } else {
       this.form.controls['other'].clearValidators();
       this.form.patchValue({
-        other: null
-      })
+        other: null,
+      });
     }
     this.form.controls['other'].updateValueAndValidity();
   }

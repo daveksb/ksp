@@ -14,10 +14,7 @@
 
     <div class="bg-white py-3 px-4">
       <div>
-        <ksp-request-header-info
-          [requestDate]="requestDate"
-          [requestNumber]="requestNo"
-        ></ksp-request-header-info>
+        <ksp-request-header-info></ksp-request-header-info>
         <hr />
         <ksp-request-reward-form
           [mode]="'edit'"
@@ -50,5 +47,7 @@
     (tempSaveClicked)="confirmDialog(1)"
     (saveClicked)="confirmDialog(2)"
     [saveButtonLabel]="'บันทึกและตรวจสอบ'"
+    [disableSaveButton]="form.invalid"
+    [disableTempSaveButton]="form.invalid"
   ></ksp-bottom-nav>
 </div>

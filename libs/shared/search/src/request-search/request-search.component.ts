@@ -3,18 +3,14 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import {
   KspFormBaseComponent,
+  SchRequestProcess,
   SchRequestSearchFilter,
+  SchRequestStatus,
 } from '@ksp/shared/interface';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import {
-  EduOccupyList,
-  RequestProcess,
-  RequestStatus,
-  SchoolRequestProcess,
-  SchoolRequestType,
-} from '@ksp/shared/constant';
+import { SchoolRequestProcess, SchoolRequestType } from '@ksp/shared/constant';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -40,7 +36,7 @@ export class RequestSearchComponent
   implements OnInit
 {
   override form = this.fb.group({
-    requesttype: ['3', Validators.required],
+    requesttype: ['', Validators.required],
     requestno: [''],
     careertype: [''],
     name: [''],
@@ -59,10 +55,10 @@ export class RequestSearchComponent
   @Output() search = new EventEmitter<Partial<SchRequestSearchFilter>>();
   @Input() disableRequestType = false;
   @Input() requestTypeList = SchoolRequestType;
+  @Input() careerTypeList: any[] = [];
 
-  eduOccupyList = EduOccupyList;
-  processList: RequestProcess[] = [];
-  statusList?: RequestStatus[] = [];
+  processList: SchRequestProcess[] = [];
+  statusList?: SchRequestStatus[] = [];
 
   constructor(private fb: FormBuilder) {
     super();

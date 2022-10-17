@@ -1,0 +1,119 @@
+<ksp-top-nav [isSelfService]="true">
+  <span header>ยื่นใบคำขอ</span>
+  <span subHeader>ขอเทียบเคียงผลการทดสอบและประเมิน</span>
+</ksp-top-nav>
+
+<form [formGroup]="form">
+  <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
+    <div class="box-header">รายละเอียดใบคำขอใบอนุญาตประกอบวิชาชีพ</div>
+    <div class="bg-white px-4 py-2">
+      <ksp-request-header-info
+        [requestDate]="'requestDate'"
+        [requestNumber]="'requestNo'"
+      ></ksp-request-header-info>
+      <hr />
+      <div class="row mx-0 border shadow-sm rounded-4 px-2 py-4 bg-white my-4">
+        <div class="col-lg-3">
+          <self-service-form-upload-image
+            [isEditMode]="false"
+          ></self-service-form-upload-image>
+        </div>
+        <div class="col-md">
+          <ksp-form-user-info
+            formControlName="userInfo"
+            [mode]="'view'"
+            [prefixList]="prefixList$ | async"
+            [nationList]="nationalitys$ | async"
+            [isSelfService]="true"
+          ></ksp-form-user-info>
+        </div>
+      </div>
+
+      <mat-tab-group
+        class="tab-group"
+        animationDuration="0ms"
+        [selectedIndex]="0"
+      >
+        <mat-tab label="ที่อยู่" class="tab-content">
+          <ksp-form-address
+            formControlName="address1"
+            [mode]="'view'"
+            [provinces]="provinces1$ | async"
+            [amphurs]="amphurs1$ | async"
+            [tumbols]="tumbols1$ | async"
+          >
+            <span>ที่อยู่ทะเบียนบ้าน</span>
+          </ksp-form-address>
+
+          <hr />
+          <ksp-form-address
+            formControlName="address2"
+            [mode]="'view'"
+            [provinces]="provinces2$ | async"
+            [amphurs]="amphurs2$ | async"
+            [tumbols]="tumbols2$ | async"
+          >
+            <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
+            <span class="text-danger ms-1 fs-6"
+              >*กรุณากรอกข้อมูลตำบล, อำเภอ</span
+            >
+            <div class="d-flex align-items-center">
+              <input type="checkbox" class="me-1" />
+              <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
+            </div>
+          </ksp-form-address>
+        </mat-tab>
+
+        <mat-tab label="สถานที่ทำงาน">
+          <self-service-form-user-workplace
+            [mode]="'view'"
+            formControlName="workplace"
+            [provinces]="provinces3$ | async"
+            [amphurs]="amphurs3$ | async"
+            [tumbols]="tumbols3$ | async"
+            [bureaus]="bureau$ | async"
+          >
+          </self-service-form-user-workplace>
+        </mat-tab>
+
+        <mat-tab label="ข้อมูลทางการศึกษา">
+          <self-service-compare-knowledge-education
+            [mode]="'view'"
+            formControlName="educationInfo"
+          >
+          </self-service-compare-knowledge-education>
+        </mat-tab>
+
+        <mat-tab label="ข้อมูลเทียบเคียงผลการทดสอบ">
+          <self-service-compare-knowledge-info
+            [mode]="'view'"
+            formControlName="testResultCompareInfo"
+          >
+          </self-service-compare-knowledge-info>
+        </mat-tab>
+
+        <mat-tab label="เอกสารประกอบ">
+          <ksp-form-attachment
+            [mode]="'view'"
+            [title]="'กรุณาแนบหลักฐานประกอบ'"
+          ></ksp-form-attachment>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+
+    <div [formGroup]="form2" class="bg-white px-4 py-3 mt-3">
+      <e-service-license-check
+        formControlName="verifyResult"
+        [headerTitle]="'ผลการตรวจสอบ'"
+        [choices]="choices"
+      ></e-service-license-check>
+    </div>
+  </div>
+</form>
+
+<div class="sticky-bottom border px-2">
+  <ksp-bottom-nav
+    [showCenterButtons]="true"
+    [isFirstPage]="true"
+  ></ksp-bottom-nav>
+</div>

@@ -11,7 +11,7 @@ export function createDefaultVisaInfo(fb: FormBuilder) {
   return fb.group({
     visatype: [],
     visaclass: [],
-    visaenddate: [],
+    visaexpiredate: [],
     licenseid: [],
   });
 }
@@ -20,13 +20,17 @@ export function createUserInfoForm(fb: FormBuilder) {
   return fb.group({
     id: [],
     idcardno: ['', [Validators.required, Validators.pattern(idCardPattern)]],
-    requestfor: [null],
+    kuruspano: ['', [Validators.required, Validators.pattern(idCardPattern)]],
+
+    isforeign: [null],
     passportno: [
       null,
-      [Validators.required, Validators.pattern(passportPattern)],
+      //[Validators.required, Validators.pattern(passportPattern)],
+      [Validators.pattern(passportPattern)],
     ],
     passportstartdate: [],
     passportenddate: [],
+
     prefixth: [null, Validators.required],
     firstnameth: [
       null,
@@ -37,13 +41,15 @@ export function createUserInfoForm(fb: FormBuilder) {
       null,
       [Validators.required, Validators.pattern(nameThPattern)],
     ],
+
     prefixen: [null],
     firstnameen: [null, [Validators.pattern(nameEnPattern)]],
     middlenameen: [null],
     lastnameen: [null, [Validators.pattern(nameEnPattern)]],
+
     sex: [null, Validators.required],
     birthdate: [null, Validators.required],
-    position: [null, Validators.required],
+    position: [null],
     email: [null, [Validators.required, Validators.email]],
     contactphone: [
       null,

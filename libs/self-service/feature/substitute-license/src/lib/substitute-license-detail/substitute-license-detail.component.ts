@@ -23,15 +23,14 @@ import {
   replaceEmptyWithNull,
   toLowercaseProp,
 } from '@ksp/shared/utility';
-import { SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
 
-const OBJECTIVE_FILES = [
-  { name: '1.ใบอนุญาตประกอบวิชาชีพที่ชํารุด', fileid: '', filename: '' },
+const OBJECTIVE_FILES: FileGroup[] = [
+  { name: '1.ใบอนุญาตประกอบวิชาชีพที่ชํารุด', files: [] },
   {
     name: '2.หลักฐานการรับแจงความของพนักงานสอบสวน หรือบันทึกถอยคํา กรณีใบอนุญาตสูญหาย',
-    fileid: '',
-    filename: '',
+    files: [],
   },
 ];
 
@@ -45,7 +44,7 @@ export class SubstituteLicenseDetailComponent
   implements OnInit
 {
   userInfoType = UserInfoFormType.thai;
-  objectiveFiles: any[] = [];
+  objectiveFiles: FileGroup[] = [];
 
   override form = this.fb.group({
     userInfo: [],
@@ -81,9 +80,6 @@ export class SubstituteLicenseDetailComponent
 
   ngOnInit(): void {
     this.getListData();
-    // this.getMyInfo();
-    // this.checkButtonsDisableStatus();
-    // this.initializeFiles();
     this.checkRequestId();
   }
 
@@ -153,6 +149,7 @@ export class SubstituteLicenseDetailComponent
     const initialPayload = {
       ...replaceEmptyWithNull(userInfo),
       ...(this.requestId && { id: `${this.requestId}` }),
+      ...(this.imageId && { imagefileid: `${this.imageId}` }),
       ...{
         addressinfo: JSON.stringify([formData.address1, formData.address2]),
       },
@@ -171,9 +168,8 @@ export class SubstituteLicenseDetailComponent
   }
 
   next() {
-    console.log(this.form.value);
+    //console.log(this.form.value);
     const completeDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `คุณต้องการบันทึกข้อมูล
         ใช่หรือไม่?`,

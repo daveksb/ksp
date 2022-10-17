@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
+import { KspResponse, SchStaff } from '@ksp/shared/interface';
 import { map, Observable, shareReplay } from 'rxjs';
 
 @Injectable({
@@ -9,23 +10,38 @@ import { map, Observable, shareReplay } from 'rxjs';
 export class StaffService {
   constructor(private http: HttpClient) {}
 
-  addStaff(payload: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/kspstaff/schstaff2insert`, {
-      ...payload,
-    });
+  addStaff(payload: Partial<SchStaff>): Observable<KspResponse> {
+    return this.http.post<KspResponse>(
+      `${environment.apiUrl}/kspstaff/schstaff2insert`,
+      {
+        ...payload,
+      }
+    );
   }
 
-  searchStaffFromId(staffId: number): Observable<any> {
+  updateStaff(payload: Partial<SchStaff>): Observable<KspResponse> {
+    return this.http.post<KspResponse>(
+      `${environment.apiUrl}/kspstaff/schstaff2update`,
+      {
+        ...payload,
+      }
+    );
+  }
+
+  loadStaffFromId(staffId: number): Observable<SchStaff> {
     const payload = {
       id: `${staffId}`,
     };
-    return this.http.post(`${environment.apiUrl}/kspstaff/schstaff2select`, {
-      ...payload,
-    });
+    return this.http.post<SchStaff>(
+      `${environment.apiUrl}/kspstaff/schstaff2select`,
+      {
+        ...payload,
+      }
+    );
   }
 
   searchStaffFromIdCard(payload: any): Observable<any> {
-    return this.http.post(
+    return this.http.post<SchStaff>(
       `${environment.apiUrl}/kspstaff/schstaff2selectidcardno`,
       {
         ...payload,
@@ -33,18 +49,21 @@ export class StaffService {
     );
   }
 
-  searchStaffs(payload: any): Observable<any> {
+  searchStaffFromKuruspaNo(payload: any): Observable<any> {
+    return this.http.post<SchStaff>(
+      `${environment.apiUrl}/kspstaff/schstaff2search`,
+      {
+        ...payload,
+      }
+    );
+  }
+
+  searchStaffs(payload: any): Observable<SchStaff[]> {
     return this.http
       .post(`${environment.shortApiUrl}/schstaff2search.php`, {
         ...payload,
       })
       .pipe(map((data: any) => data.datareturn));
-  }
-
-  updateStaff(payload: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/kspstaff/schstaff2update`, {
-      ...payload,
-    });
   }
 
   getStaffTypes(): Observable<any> {

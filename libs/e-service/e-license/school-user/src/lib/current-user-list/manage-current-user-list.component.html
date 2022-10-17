@@ -4,86 +4,94 @@
   ></ksp-top-nav
 >
 
-<form [formGroup]="form">
-  <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
-    <ksp-e-service-user-search
-      (clear)="clear()"
-      (search)="search($event)"
-    ></ksp-e-service-user-search>
-    <br />
-    <div class="bg-white p-3">
-      <div class="box-header">รายชื่อผู้เข้าใช้งานระบบ school service</div>
-      <hr />
-      <table mat-table [dataSource]="dataSource">
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-        </ng-container>
+<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
+  <ksp-e-service-user-search
+    (clear)="clear()"
+    (search)="search($event)"
+    [activeStatusList]="[
+      { id: 0, label: 'ไม่ใช้งาน' },
+      { id: 1, label: 'ใช้งาน' }
+    ]"
+  ></ksp-e-service-user-search>
 
-        <ng-container matColumnDef="view">
-          <th mat-header-cell *matHeaderCellDef>ดู/แก้ไข</th>
-          <td mat-cell *matCellDef="let element">
-            <i
-              role="button"
-              (click)="goToDetail(element.id)"
-              class="bi bi-pencil-square text-primary fs-5"
-            ></i>
-          </td>
-        </ng-container>
+  <div class="bg-white p-3">
+    <div class="box-header">รายชื่อผู้เข้าใช้งานระบบ school service</div>
+    <hr />
+    <table mat-table matSort [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+        <td mat-cell *matCellDef="let element; let i = index">
+          {{
+            paginator.pageIndex === 0
+              ? i + 1
+              : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+          }}
+        </td>
+      </ng-container>
 
-        <ng-container matColumnDef="idcardno">
-          <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
-          <td mat-cell *matCellDef="let element">{{ element.idcardno }}</td>
-        </ng-container>
+      <ng-container matColumnDef="view">
+        <th mat-header-cell *matHeaderCellDef>ดู/แก้ไข</th>
+        <td mat-cell *matCellDef="let element">
+          <i
+            role="button"
+            (click)="goToDetail(element.schmemberid)"
+            class="bi bi-pencil-square text-primary fs-5"
+          ></i>
+        </td>
+      </ng-container>
 
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.firstnameth }} {{ element.lastnameth }}
-          </td>
-        </ng-container>
+      <ng-container matColumnDef="idcardno">
+        <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
+        <td mat-cell *matCellDef="let element">{{ element.idcardno }}</td>
+      </ng-container>
 
-        <ng-container matColumnDef="schoolname">
-          <th mat-header-cell *matHeaderCellDef>โรงเรียน/หน่วยงาน</th>
-          <td mat-cell *matCellDef="let element">{{ element.schoolname }}</td>
-        </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.firstnameth }} {{ element.lastnameth }}
+        </td>
+      </ng-container>
 
-        <ng-container matColumnDef="province">
-          <th mat-header-cell *matHeaderCellDef>จังหวัด</th>
-          <td mat-cell *matCellDef="let element">{{ element.province }}</td>
-        </ng-container>
+      <ng-container matColumnDef="schoolname">
+        <th mat-header-cell *matHeaderCellDef>โรงเรียน/หน่วยงาน</th>
+        <td mat-cell *matCellDef="let element">{{ element.schoolname }}</td>
+      </ng-container>
 
-        <ng-container matColumnDef="requeststatus">
-          <th mat-header-cell *matHeaderCellDef>สถานะ</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.requeststatus }}
-          </td>
-        </ng-container>
+      <ng-container matColumnDef="province">
+        <th mat-header-cell *matHeaderCellDef>จังหวัด</th>
+        <td mat-cell *matCellDef="let element">{{ element.province }}</td>
+      </ng-container>
 
-        <ng-container matColumnDef="requestdate">
-          <th mat-header-cell *matHeaderCellDef>วันที่อนุมัติ</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.requestdate | date }}
-          </td>
-        </ng-container>
+      <ng-container matColumnDef="requeststatus">
+        <th mat-header-cell *matHeaderCellDef>สถานะ</th>
+        <td mat-cell *matCellDef="let element">
+          {{ mapSchUserStatus(element.schuseractive) }}
+        </td>
+      </ng-container>
 
-        <ng-container matColumnDef="updatedate">
-          <th mat-header-cell *matHeaderCellDef>วันที่แก้ไข</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.updatedate | date }}
-          </td>
-        </ng-container>
+      <ng-container matColumnDef="requestdate">
+        <th mat-header-cell *matHeaderCellDef>วันที่อนุมัติ</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.schuserstartdate | thaiDate }}
+        </td>
+      </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
+      <ng-container matColumnDef="updatedate">
+        <th mat-header-cell *matHeaderCellDef>วันที่แก้ไข</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.updatedate | thaiDate }}
+        </td>
+      </ng-container>
 
-      <mat-paginator
-        [pageSizeOptions]="[10]"
-        showFirstLastButtons
-        aria-label="Select page of periodic elements"
-      >
-      </mat-paginator>
-    </div>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[25]"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements"
+    >
+    </mat-paginator>
   </div>
-</form>
+</div>

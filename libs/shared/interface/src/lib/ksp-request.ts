@@ -6,6 +6,7 @@ export class KspRequest {
   addressinfo: string | null = null;
   birthdate: string | null = null;
   bureauid: string | null = null;
+  bureauname: string | null = null;
   careertype: string | null = null;
   checkprohibitproperty: string | null = null;
   competencyinfo: string | null = null;
@@ -32,7 +33,7 @@ export class KspRequest {
   idcardno: string | null = null;
   imagefileid: string | null = null;
   isforeign: string | null = null;
-  kuruspanno: string | null = null;
+  kuruspano: string | null = null;
   lastnameen: string | null = null;
   lastnameth: string | null = null;
   licenseid: string | null = null;
@@ -89,7 +90,9 @@ export class KspRequest {
   teachinginfo: string | null = null;
   testresultcompareinfo: string | null = null;
   transferknowledgeinfo: string | null = null;
+  uniid: string | null = null;
   uniqueno: string | null = null;
+  unitype: string | null = null;
   userid: string | null = null;
   userpermission: string | null = null;
   visaclass: string | null = null;

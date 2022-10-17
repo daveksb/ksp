@@ -60,7 +60,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "2mb",
-                  "maximumError": "2mb"
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -1187,6 +1187,100 @@
         }
       ]
     },
+    "e-service-ethics-form": {
+      "root": "libs/e-service/ethics/form",
+      "projectType": "library",
+      "sourceRoot": "libs/e-service/ethics/form/src",
+      "prefix": "ksp",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/ethics/form/**/*.ts",
+              "libs/e-service/ethics/form/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": [],
+      "files": [
+        {
+          "file": "libs/e-service/ethics/form/.eslintrc.json",
+          "hash": "27c5e47e999848beed2882877542e9a23959ec86"
+        },
+        {
+          "file": "libs/e-service/ethics/form/project.json",
+          "hash": "ae412021f5addde6ace8327a5406d8debcd261cd"
+        },
+        {
+          "file": "libs/e-service/ethics/form/README.md",
+          "hash": "f9cadbbf4b978af369d7ebe0c7692efd45ac479b"
+        },
+        {
+          "file": "libs/e-service/ethics/form/src/index.ts",
+          "hash": "540727d3ce449097db1c168295879d1e1da8a5fa"
+        },
+        {
+          "file": "libs/e-service/ethics/form/src/lib/e-service-form.module.ts",
+          "hash": "4405ea1dd1b2928fa5d93cc97d33a1d868102297",
+          "deps": ["npm:@angular/core"]
+        },
+        {
+          "file": "libs/e-service/ethics/form/src/lib/form-investigation-detail/form-investigation-detail.component.html",
+          "hash": "ccaaf577a50e56c9486e8973bea611a2c88af577"
+        },
+        {
+          "file": "libs/e-service/ethics/form/src/lib/form-investigation-detail/form-investigation-detail.component.scss",
+          "hash": "f6a77d03751a3304f0a98c9b3cd1f6a023433420"
+        },
+        {
+          "file": "libs/e-service/ethics/form/src/lib/form-investigation-detail/form-investigation-detail.component.ts",
+          "hash": "b6d0b40edc761ae56a8c3e8b1c2e03c1ce405bab",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:@angular/router",
+            "e-service-ui-accusation-info",
+            "shared-form-others",
+            "shared-menu",
+            "shared-dialog",
+            "shared-ui",
+            "shared-form-file-upload",
+            "shared-utility",
+            "npm:@angular/forms",
+            "shared-interface"
+          ]
+        },
+        {
+          "file": "libs/e-service/ethics/form/src/lib/form-meeting-record/form-meeting-record.component.html",
+          "hash": "0b4c009aa29609e5120206aa04d880e069b91952"
+        },
+        {
+          "file": "libs/e-service/ethics/form/src/lib/form-meeting-record/form-meeting-record.component.scss",
+          "hash": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+        },
+        {
+          "file": "libs/e-service/ethics/form/src/lib/form-meeting-record/form-meeting-record.component.ts",
+          "hash": "1b63182df9cdf434d0d63ea6fba1035325acbc41",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "shared-form-file-upload",
+            "npm:@angular/forms"
+          ]
+        },
+        {
+          "file": "libs/e-service/ethics/form/tsconfig.json",
+          "hash": "d91a40079b4230f99a815486387cf3d3ad9ca621"
+        },
+        {
+          "file": "libs/e-service/ethics/form/tsconfig.lib.json",
+          "hash": "095e7f31b37e81c0a51c926290157de0d8e90960"
+        }
+      ]
+    },
     "e-service-ethics-inquiry": {
       "root": "libs/e-service/ethics/inquiry",
       "projectType": "library",
@@ -1775,17 +1869,17 @@
         }
       ]
     },
-    "e-service-fee-refund-fee": {
+    "e-service-fee-refund": {
       "projectType": "library",
-      "root": "libs/e-service/fee/refund-fee",
-      "sourceRoot": "libs/e-service/fee/refund-fee/src",
+      "root": "libs/e-service/fee-refund",
+      "sourceRoot": "libs/e-service/fee-refund/src",
       "prefix": "ksp",
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/fee/refund-fee"],
+          "outputs": ["coverage/libs/e-service/fee-refund"],
           "options": {
-            "jestConfig": "libs/e-service/fee/refund-fee/jest.config.ts",
+            "jestConfig": "libs/e-service/fee-refund/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -1793,107 +1887,69 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/e-service/fee/refund-fee/**/*.ts",
-              "libs/e-service/fee/refund-fee/**/*.html"
+              "libs/e-service/fee-refund/**/*.ts",
+              "libs/e-service/fee-refund/**/*.html"
             ]
           }
         }
       },
       "tags": []
     },
-    "e-service-form": {
-      "root": "libs/e-service/form",
+    "e-service-professional-best-teacher-reward": {
       "projectType": "library",
-      "sourceRoot": "libs/e-service/form/src",
+      "root": "libs/e-service/professional/best-teacher-reward",
+      "sourceRoot": "libs/e-service/professional/best-teacher-reward/src",
       "prefix": "ksp",
       "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/e-service/professional/best-teacher-reward"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/professional/best-teacher-reward/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/e-service/form/**/*.ts",
-              "libs/e-service/form/**/*.html"
+              "libs/e-service/professional/best-teacher-reward/**/*.ts",
+              "libs/e-service/professional/best-teacher-reward/**/*.html"
             ]
           }
         }
       },
-      "tags": [],
-      "files": [
-        {
-          "file": "libs/e-service/form/.eslintrc.json",
-          "hash": "27c5e47e999848beed2882877542e9a23959ec86"
+      "tags": []
+    },
+    "e-service-professional-enable-reward-request": {
+      "projectType": "library",
+      "root": "libs/e-service/professional/enable-reward-request",
+      "sourceRoot": "libs/e-service/professional/enable-reward-request/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/e-service/professional/enable-reward-request"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/professional/enable-reward-request/jest.config.ts",
+            "passWithNoTests": true
+          }
         },
-        {
-          "file": "libs/e-service/form/project.json",
-          "hash": "ae412021f5addde6ace8327a5406d8debcd261cd"
-        },
-        {
-          "file": "libs/e-service/form/README.md",
-          "hash": "f9cadbbf4b978af369d7ebe0c7692efd45ac479b"
-        },
-        {
-          "file": "libs/e-service/form/src/index.ts",
-          "hash": "540727d3ce449097db1c168295879d1e1da8a5fa"
-        },
-        {
-          "file": "libs/e-service/form/src/lib/e-service-form.module.ts",
-          "hash": "4405ea1dd1b2928fa5d93cc97d33a1d868102297",
-          "deps": ["npm:@angular/core"]
-        },
-        {
-          "file": "libs/e-service/form/src/lib/form-investigation-detail/form-investigation-detail.component.html",
-          "hash": "ccaaf577a50e56c9486e8973bea611a2c88af577"
-        },
-        {
-          "file": "libs/e-service/form/src/lib/form-investigation-detail/form-investigation-detail.component.scss",
-          "hash": "f6a77d03751a3304f0a98c9b3cd1f6a023433420"
-        },
-        {
-          "file": "libs/e-service/form/src/lib/form-investigation-detail/form-investigation-detail.component.ts",
-          "hash": "b6d0b40edc761ae56a8c3e8b1c2e03c1ce405bab",
-          "deps": [
-            "npm:@angular/common",
-            "npm:@angular/core",
-            "npm:@angular/material",
-            "npm:@angular/router",
-            "e-service-ui-accusation-info",
-            "shared-form-others",
-            "shared-menu",
-            "shared-dialog",
-            "shared-ui",
-            "shared-form-file-upload",
-            "shared-utility",
-            "npm:@angular/forms",
-            "shared-interface"
-          ]
-        },
-        {
-          "file": "libs/e-service/form/src/lib/form-meeting-record/form-meeting-record.component.html",
-          "hash": "0b4c009aa29609e5120206aa04d880e069b91952"
-        },
-        {
-          "file": "libs/e-service/form/src/lib/form-meeting-record/form-meeting-record.component.scss",
-          "hash": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
-        },
-        {
-          "file": "libs/e-service/form/src/lib/form-meeting-record/form-meeting-record.component.ts",
-          "hash": "1b63182df9cdf434d0d63ea6fba1035325acbc41",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "shared-form-file-upload",
-            "npm:@angular/forms"
-          ]
-        },
-        {
-          "file": "libs/e-service/form/tsconfig.json",
-          "hash": "d91a40079b4230f99a815486387cf3d3ad9ca621"
-        },
-        {
-          "file": "libs/e-service/form/tsconfig.lib.json",
-          "hash": "095e7f31b37e81c0a51c926290157de0d8e90960"
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/professional/enable-reward-request/**/*.ts",
+              "libs/e-service/professional/enable-reward-request/**/*.html"
+            ]
+          }
         }
-      ]
+      },
+      "tags": []
     },
     "e-service-professional-one-school-one-innovation": {
       "projectType": "library",
@@ -1923,6 +1979,34 @@
       },
       "tags": []
     },
+    "e-service-professional-praise-teacher-reward": {
+      "projectType": "library",
+      "root": "libs/e-service/professional/praise-teacher-reward",
+      "sourceRoot": "libs/e-service/professional/praise-teacher-reward/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/e-service/professional/praise-teacher-reward"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/professional/praise-teacher-reward/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/professional/praise-teacher-reward/**/*.ts",
+              "libs/e-service/professional/praise-teacher-reward/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-professional-professional": {
       "projectType": "library",
       "root": "libs/e-service/professional/professional",
@@ -1943,6 +2027,142 @@
             "lintFilePatterns": [
               "libs/e-service/professional/professional/**/*.ts",
               "libs/e-service/professional/professional/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-professional-research-reward": {
+      "projectType": "library",
+      "root": "libs/e-service/professional/research-reward",
+      "sourceRoot": "libs/e-service/professional/research-reward/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-service/professional/research-reward"],
+          "options": {
+            "jestConfig": "libs/e-service/professional/research-reward/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/professional/research-reward/**/*.ts",
+              "libs/e-service/professional/research-reward/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-professional-senior-teacher-reward": {
+      "projectType": "library",
+      "root": "libs/e-service/professional/senior-teacher-reward",
+      "sourceRoot": "libs/e-service/professional/senior-teacher-reward/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/e-service/professional/senior-teacher-reward"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/professional/senior-teacher-reward/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/professional/senior-teacher-reward/**/*.ts",
+              "libs/e-service/professional/senior-teacher-reward/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-professional-teacher-council-reward": {
+      "projectType": "library",
+      "root": "libs/e-service/professional/teacher-council-reward",
+      "sourceRoot": "libs/e-service/professional/teacher-council-reward/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/e-service/professional/teacher-council-reward"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/professional/teacher-council-reward/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/professional/teacher-council-reward/**/*.ts",
+              "libs/e-service/professional/teacher-council-reward/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-professional-thai-teacher-reward": {
+      "projectType": "library",
+      "root": "libs/e-service/professional/thai-teacher-reward",
+      "sourceRoot": "libs/e-service/professional/thai-teacher-reward/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/e-service/professional/thai-teacher-reward"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/professional/thai-teacher-reward/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/professional/thai-teacher-reward/**/*.ts",
+              "libs/e-service/professional/thai-teacher-reward/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-standard-compare-knowledge": {
+      "projectType": "library",
+      "root": "libs/e-service/standard/compare-knowledge",
+      "sourceRoot": "libs/e-service/standard/compare-knowledge/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-service/standard/compare-knowledge"],
+          "options": {
+            "jestConfig": "libs/e-service/standard/compare-knowledge/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/standard/compare-knowledge/**/*.ts",
+              "libs/e-service/standard/compare-knowledge/**/*.html"
             ]
           }
         }
@@ -2135,6 +2355,32 @@
         }
       ]
     },
+    "e-service-standard-knowledge-cert": {
+      "projectType": "library",
+      "root": "libs/e-service/standard/knowledge-cert",
+      "sourceRoot": "libs/e-service/standard/knowledge-cert/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-service/standard/knowledge-cert"],
+          "options": {
+            "jestConfig": "libs/e-service/standard/knowledge-cert/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/standard/knowledge-cert/**/*.ts",
+              "libs/e-service/standard/knowledge-cert/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-standard-performance-result": {
       "projectType": "library",
       "root": "libs/e-service/standard/performance-result",
@@ -2155,6 +2401,32 @@
             "lintFilePatterns": [
               "libs/e-service/standard/performance-result/**/*.ts",
               "libs/e-service/standard/performance-result/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-standard-qualification-approve": {
+      "projectType": "library",
+      "root": "libs/e-service/standard/qualification-approve",
+      "sourceRoot": "libs/e-service/standard/qualification-approve/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-service/standard/qualification-approve"],
+          "options": {
+            "jestConfig": "libs/e-service/standard/qualification-approve/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/standard/qualification-approve/**/*.ts",
+              "libs/e-service/standard/qualification-approve/**/*.html"
             ]
           }
         }
@@ -2480,7 +2752,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "2mb"
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -4335,12 +4607,12 @@
                 {
                   "type": "initial",
                   "maximumWarning": "2mb",
-                  "maximumError": "2mb"
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "500kb",
-                  "maximumError": "2mb"
+                  "maximumError": "5mb"
                 }
               ],
               "fileReplacements": [

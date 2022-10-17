@@ -14,6 +14,7 @@ import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { providerFactory, thaiDate } from '@ksp/shared/utility';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'e-service-inquiry-result',
@@ -31,6 +32,7 @@ import { KspFormBaseComponent } from '@ksp/shared/interface';
     LicenseInfoComponent,
     FileUploadComponent,
     ReactiveFormsModule,
+    MatDatepickerModule,
   ],
   providers: providerFactory(InquiryResultComponent),
 })

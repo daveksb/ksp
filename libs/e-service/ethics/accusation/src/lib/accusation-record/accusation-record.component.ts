@@ -31,6 +31,7 @@ import { providerFactory, thaiDate } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
 import { Observable } from 'rxjs';
 import { GeneralInfoService } from '@ksp/shared/service';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'e-service-ethic-accusation-record',
@@ -50,6 +51,7 @@ import { GeneralInfoService } from '@ksp/shared/service';
     LicenseInfoComponent,
     ReactiveFormsModule,
     StepperNavComponent,
+    MatDatepickerModule,
   ],
   providers: providerFactory(AccusationRecordComponent),
 })

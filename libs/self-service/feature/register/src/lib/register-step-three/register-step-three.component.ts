@@ -11,7 +11,7 @@ import { RegisterCompletedComponent } from '../register-completed/register-compl
 import localForage from 'localforage';
 import { MyInfoService } from '@ksp/shared/service';
 import { SelfMyInfo } from '@ksp/shared/interface';
-import { validatorMessages } from '@ksp/shared/utility';
+import { formatDatePayload, validatorMessages } from '@ksp/shared/utility';
 
 @Component({
   selector: 'self-service-register-step-three',
@@ -30,7 +30,7 @@ export class RegisterStepThreeComponent implements OnInit {
   );
 
   idCardNo = '';
-  payload!: SelfMyInfo;
+  myInfo = new SelfMyInfo();
   passwordEqual = false;
   validatorMessages = validatorMessages;
 
@@ -51,23 +51,28 @@ export class RegisterStepThreeComponent implements OnInit {
     });
 
     localForage.getItem('th-register').then((res: any) => {
+      console.log('res = ', res);
       this.idCardNo = res.idcardno;
-      this.payload = { ...res, ...this.form.value };
-      this.payload.username = res.idcardno;
-      this.payload.isactive = '1';
-      this.payload.uniquetimestamp = res.uniquetimestamp;
-      this.payload.usertype = '1'; // ชาวไทย
+      this.myInfo = { ...res, ...this.form.value };
+      this.myInfo.username = res.idcardno;
+      this.myInfo.isactive = '1';
+      this.myInfo.uniquetimestamp = res.uniquetimestamp;
+      this.myInfo.usertype = '1'; // ชาวไทย
+      this.myInfo.prefixth = res.prefixth;
+      this.myInfo.prefixen = res.prefixen;
     });
   }
 
   submit() {
-    this.payload = {
-      ...this.payload,
+    this.myInfo = {
+      ...this.myInfo,
       ...{ password: this.form.controls.password.value },
-      ...{ addressinfo: JSON.stringify([this.payload.addressinfo]) },
+      ...{ addressinfo: JSON.stringify([this.myInfo.addressinfo]) },
     };
 
-    this.myInfoService.insertMyInfo(this.payload).subscribe((res) => {
+    const payload = formatDatePayload(this.myInfo);
+
+    this.myInfoService.insertMyInfo(payload).subscribe(() => {
       this.dialog.open(RegisterCompletedComponent, {
         width: '600px',
         data: {

@@ -10,14 +10,17 @@
   <form [formGroup]="form">
     <div class="row mx-0 border shadow rounded-4 px-2 py-4 bg-white my-4">
       <div class="col-lg-3">
-        <self-service-form-upload-image></self-service-form-upload-image>
+        <self-service-form-upload-image
+          [imgSrc]="myImage"
+          [uniqueTimestamp]="uniqueTimestamp"
+          (uploadImageComplete)="uploadImageComplete($event)"
+        ></self-service-form-upload-image>
       </div>
       <div class="col-md">
         <ksp-form-user-info
           formControlName="userInfo"
           [isDarkMode]="true"
           [prefixList]="prefixList$ | async"
-          [displayMode]="[userInfoType]"
           [nationList]="nationalitys$ | async"
           [isSelfService]="true"
         >
@@ -65,14 +68,14 @@
       </mat-tab>
 
       <mat-tab label="สถานที่ทำงาน">
-        <div class="d-flex align-items-center">
+        <!-- <div class="d-flex align-items-center">
           <input type="checkbox" class="me-2" />
-          <label class="form-label mb-2"
-            >เป็นผู้ประสงค์ประกอบวิชาชีพทางการศึกษา</label
-          >
-        </div>
+          <label class="form-label mb-2">เป็นผู้ประสงค์ประกอบวิชาชีพทางการศึกษา</label>
+        </div> -->
         <self-service-form-user-workplace
           formControlName="workplace"
+          [showContactForm]="true"
+          [showNotRequire]="true"
           [provinces]="provinces3$ | async"
           [amphurs]="amphurs3$ | async"
           [tumbols]="tumbols3$ | async"
@@ -81,7 +84,7 @@
           (amphurChanged)="amphurChanged(3, $event)"
         >
         </self-service-form-user-workplace>
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-md-6 mb-3">
             <label class="form-label">โทรศัพท์</label>
             <input
@@ -110,7 +113,7 @@
             <label class="form-label">เว็บไซต์</label>
             <input class="form-control" type="text" formControlName="website" />
           </div>
-        </div>
+        </div> -->
       </mat-tab>
 
       <mat-tab label="ข้อมูลคุณสมบัติของผู้ขอต่ออายุใบอนุญาต">
@@ -150,7 +153,7 @@
     <button
       type="button"
       class="ms-3 btn border-primary text-primary bg-white"
-      [disabled]="!form.valid"
+      [disabled]="userInfoForm.invalid"
       (click)="onSave(1)"
     >
       บันทึกชั่วคราว
@@ -158,7 +161,7 @@
     <button
       type="button"
       class="ms-3 btn btn-primary"
-      [disabled]="!form.valid"
+      [disabled]="userInfoForm.invalid"
       (click)="onSave(2)"
     >
       บันทึกและยื่น
