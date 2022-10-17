@@ -5,20 +5,23 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @UntilDestroy()
 @Component({
   selector: 'ksp-form-address-table',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MatDialogModule],
   templateUrl: './form-address-table.component.html',
   styleUrls: ['./form-address-table.component.scss'],
   providers: providerFactory(FormAddressTableComponent),
 })
 export class FormAddressTableComponent
   extends KspFormBaseComponent
-  implements OnInit {
+  implements OnInit
+{
+  isDialog = false;
+
   override form = this.fb.group({
     location: [],
     housenumber: ['', Validators.required],
@@ -29,18 +32,19 @@ export class FormAddressTableComponent
     provinceid: [null, Validators.required],
     districtid: [null, Validators.required],
     subdistrictid: [null, Validators.required],
-    remark: []
+    remark: [],
   });
   provinceList: Array<any> = [];
-  districtList: Array<any>  = [];
+  districtList: Array<any> = [];
   subDistrictList: Array<any> = [];
 
   @Input() addressData: any = {};
 
   constructor(
-    private fb: FormBuilder, 
-    private addressService:AddressService,
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
+    private fb: FormBuilder,
+    private addressService: AddressService,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
     super();
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
@@ -63,7 +67,7 @@ export class FormAddressTableComponent
         provinceid: this.data.address.provinceid || null,
         districtid: this.data.address.districtid || null,
         subdistrictid: this.data.address.subdistrictid || null,
-        remark: this.data.address.remark || null
+        remark: this.data.address.remark || null,
       });
       this.form.disable();
     }
@@ -75,43 +79,53 @@ export class FormAddressTableComponent
   }
 
   getProvince() {
-    this.addressService.getProvinces().subscribe(response=>{
+    this.addressService.getProvinces().subscribe((response) => {
       if (response) {
         this.provinceList = response;
-        if (this.form.value.provinceid || (this.data && this.data.address.provinceid)) {
-          this.getDistrict(this.form.value.provinceid || this.data.address.provinceid);
+        if (
+          this.form.value.provinceid ||
+          (this.data && this.data.address.provinceid)
+        ) {
+          this.getDistrict(
+            this.form.value.provinceid || this.data.address.provinceid
+          );
         }
       }
-    })
+    });
   }
 
   getDistrict(provinceId: any) {
-    this.addressService.getAmphurs(provinceId).subscribe(response=>{
+    this.addressService.getAmphurs(provinceId).subscribe((response) => {
       if (response) {
         this.districtList = response;
-        if (this.form.value.districtid || (this.data && this.data.address.districtid)) {
-          this.getSubdistrict(this.form.value.districtid || this.data.address.districtid);
+        if (
+          this.form.value.districtid ||
+          (this.data && this.data.address.districtid)
+        ) {
+          this.getSubdistrict(
+            this.form.value.districtid || this.data.address.districtid
+          );
         }
       }
-    })
+    });
   }
 
   getSubdistrict(districtId: any) {
-    this.addressService.getTumbols(districtId).subscribe(response=>{
+    this.addressService.getTumbols(districtId).subscribe((response) => {
       if (response) {
         this.subDistrictList = response;
       }
-    })
+    });
   }
 
   selectSubdistrict(event: any) {
-    const findPostcode = this.subDistrictList.find(((data: any)=>{
+    const findPostcode = this.subDistrictList.find((data: any) => {
       return data.tambolCode == event.target.value;
-    }))
+    });
     if (findPostcode) {
       this.form.patchValue({
-        zipcode: findPostcode.tambolPostcode
-      })
+        zipcode: findPostcode.tambolPostcode,
+      });
     }
   }
 }

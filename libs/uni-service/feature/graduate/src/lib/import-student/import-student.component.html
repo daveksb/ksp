@@ -1,7 +1,16 @@
 <ksp-top-nav>
-  <span header>{{ pageType === 'studentList' ? headerStudent.h1 : headerGraduate.h1 }}</span>
-  <span subHeader>{{ pageType === 'studentList' ? headerStudent.h2 : headerGraduate.h2 }}</span>
-  <span detail> > {{ pageType === 'studentList' ? headerStudent.h3 : headerGraduate.h3 }}</span>
+  <span header>{{
+    pageType === 'studentList' ? headerStudent.h1 : headerGraduate.h1
+  }}</span>
+  <span subHeader>{{
+    pageType === 'studentList' ? headerStudent.h2 : headerGraduate.h2
+  }}</span>
+  <span detail>
+    >
+    {{
+      pageType === 'studentList' ? headerStudent.h3 : headerGraduate.h3
+    }}</span
+  >
 </ksp-top-nav>
 
 <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height full-width-2">
@@ -15,12 +24,14 @@
     <hr />
 
     <div class="d-flex justify-content-between mb-1">
-      <div class="box-header">{{ pageType === 'studentList' ? headerStudent.h3 : headerGraduate.h3 }}</div>
+      <div class="box-header">
+        {{ pageType === 'studentList' ? headerStudent.h3 : headerGraduate.h3 }}
+      </div>
       <div *ngIf="pageType === 'studentList'">
         <button
           type="button"
           (click)="downloadfile()"
-          class="btn border-success text-success w-auto me-2"
+          class="btn border-success text-success w-auto me-2 btn-sm"
         >
           <img src="/assets/images/img-uni/microsoft excel.png" />
           ดาวน์โหลดแบบฟอร์ม
@@ -97,39 +108,44 @@
               >
                 วันที่รับเข้า
               </th>
-              <th
-                class="p-2 text-nowrap"
-                *ngIf="pageType === 'graduateList'"
-              >
+              <th class="p-2 text-nowrap" *ngIf="pageType === 'graduateList'">
                 <div>
                   <label>วันที่เข้ารับการศึกษา</label>
                   <input
                     pInputText
                     type="date"
                     class="form-control form-search"
-                    (input)="dt.filter($any($event.target).value, 'admissiondate', 'contains')" />
+                    (input)="
+                      dt.filter(
+                        $any($event.target).value,
+                        'admissiondate',
+                        'contains'
+                      )
+                    "
+                  />
                 </div>
               </th>
 
-              <th
-                class="p-2 text-nowrap"
-                *ngIf="pageType === 'studentList'"
-              >
+              <th class="p-2 text-nowrap" *ngIf="pageType === 'studentList'">
                 เลขบัตรประจำตัวประชาชน /<br />
                 เลขประจำตัวคุรุสภา
               </th>
 
-              <th
-                class="p-2 text-nowrap"
-                *ngIf="pageType === 'graduateList'"
-              >
+              <th class="p-2 text-nowrap" *ngIf="pageType === 'graduateList'">
                 <div>
                   เลขบัตรประจำตัวประชาชน
                   <input
                     pInputText
                     type="text"
                     class="form-control form-search"
-                    (input)="dt.filter($any($event.target).value, 'idcardno', 'contains')" />
+                    (input)="
+                      dt.filter(
+                        $any($event.target).value,
+                        'idcardno',
+                        'contains'
+                      )
+                    "
+                  />
                 </div>
               </th>
 
@@ -140,7 +156,14 @@
                   type="text"
                   class="form-control form-search"
                   *ngIf="pageType === 'graduateList'"
-                  (input)="dt.filter($any($event.target).value, 'passportno', 'contains')" />
+                  (input)="
+                    dt.filter(
+                      $any($event.target).value,
+                      'passportno',
+                      'contains'
+                    )
+                  "
+                />
               </th>
               <th
                 class="p-2 text-nowrap align-text-top"
@@ -150,7 +173,7 @@
               </th>
 
               <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
-                คำนำหน้าชื่อ
+                คำนำหน้าชื่อ (ภาษาไทย)
               </th>
 
               <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
@@ -161,7 +184,14 @@
                     type="text"
                     class="form-control form-search"
                     *ngIf="pageType === 'graduateList'"
-                    (input)="dt.filter($any($event.target).value, 'firstnameth', 'contains')" />
+                    (input)="
+                      dt.filter(
+                        $any($event.target).value,
+                        'firstnameth',
+                        'contains'
+                      )
+                    "
+                  />
                 </div>
               </th>
 
@@ -173,12 +203,19 @@
                     type="text"
                     class="form-control form-search"
                     *ngIf="pageType === 'graduateList'"
-                    (input)="dt.filter($any($event.target).value, 'lastnameth', 'contains')" />
+                    (input)="
+                      dt.filter(
+                        $any($event.target).value,
+                        'lastnameth',
+                        'contains'
+                      )
+                    "
+                  />
                 </div>
               </th>
 
               <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
-                คำนำหน้าชื่อ
+                คำนำหน้าชื่อ (ภาษาอังกฤษ)
               </th>
 
               <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
@@ -189,7 +226,14 @@
                     type="text"
                     class="form-control form-search"
                     *ngIf="pageType === 'graduateList'"
-                    (input)="dt.filter($any($event.target).value, 'firstnameen', 'contains')" />
+                    (input)="
+                      dt.filter(
+                        $any($event.target).value,
+                        'firstnameen',
+                        'contains'
+                      )
+                    "
+                  />
                 </div>
               </th>
 
@@ -201,7 +245,14 @@
                     type="text"
                     class="form-control form-search"
                     *ngIf="pageType === 'graduateList'"
-                    (input)="dt.filter($any($event.target).value, 'middlenameen', 'contains')" />
+                    (input)="
+                      dt.filter(
+                        $any($event.target).value,
+                        'middlenameen',
+                        'contains'
+                      )
+                    "
+                  />
                 </div>
               </th>
 
@@ -213,7 +264,14 @@
                     type="text"
                     class="form-control form-search"
                     *ngIf="pageType === 'graduateList'"
-                    (input)="dt.filter($any($event.target).value, 'lastnameen', 'contains')" />
+                    (input)="
+                      dt.filter(
+                        $any($event.target).value,
+                        'lastnameen',
+                        'contains'
+                      )
+                    "
+                  />
                 </div>
               </th>
 
@@ -224,7 +282,10 @@
                   type="text"
                   class="form-control form-search"
                   *ngIf="pageType === 'graduateList'"
-                  (input)="dt.filter($any($event.target).value, 'phone', 'contains')" />
+                  (input)="
+                    dt.filter($any($event.target).value, 'phone', 'contains')
+                  "
+                />
               </th>
               <th class="p-2 text-nowrap align-text-top">
                 วัน/เดือน/ปีเกิด(พ.ศ.)
@@ -247,26 +308,19 @@
             let-expanded="expanded"
           >
             <tr [formGroupName]="ri">
-              <td
-                class="p-2 text-nowrap"
-                *ngIf="pageType === 'studentList'"
-              >
-              {{ control.value.no }}
+              <td class="p-2 text-nowrap" *ngIf="pageType === 'studentList'">
+                {{ control.value.no }}
               </td>
 
-              <td
-                class="text-center"
-                *ngIf="pageType === 'graduateList'"
-              >
-                <input type="checkbox"
+              <td class="text-center" *ngIf="pageType === 'graduateList'">
+                <input
+                  type="checkbox"
                   formControlName="checked"
-                  class="form-check-input" />
+                  class="form-check-input"
+                />
               </td>
 
-              <td
-                class="p-2 text-nowrap"
-                *ngIf="pageType === 'graduateList'"
-              >
+              <td class="p-2 text-nowrap" *ngIf="pageType === 'graduateList'">
                 <input
                   class="form-control text-center"
                   style="width: 75px"
@@ -275,10 +329,7 @@
                   formControlName="approveno"
                 />
               </td>
-              <td
-                class="p-2 text-nowrap"
-                *ngIf="pageType === 'graduateList'"
-              >
+              <td class="p-2 text-nowrap" *ngIf="pageType === 'graduateList'">
                 <input
                   class="form-control"
                   style="width: 150px"
@@ -287,10 +338,7 @@
                   formControlName="approvedate"
                 />
               </td>
-              <td
-                class="p-2 text-nowrap"
-                *ngIf="pageType === 'graduateList'"
-              >
+              <td class="p-2 text-nowrap" *ngIf="pageType === 'graduateList'">
                 <input
                   class="form-control"
                   style="width: 150px"
@@ -300,10 +348,7 @@
                 />
               </td>
 
-              <td
-                class="p-2 text-nowrap"
-                *ngIf="pageType === 'graduateList'"
-              >
+              <td class="p-2 text-nowrap" *ngIf="pageType === 'graduateList'">
                 <div
                   (click)="searchAddress(control.value.index)"
                   class="text-orange text-decoration-underline whitespace-nowrap"
@@ -315,13 +360,13 @@
 
               <td class="p-2 text-nowrap">
                 <input
-                class="form-control"
-                style="width: 150px"
-                pInputText
-                type="date"
-                formControlName="admissiondate"
-                [readonly]="pageType === 'graduateList'"
-              />
+                  class="form-control"
+                  style="width: 150px"
+                  pInputText
+                  type="date"
+                  formControlName="admissiondate"
+                  [readonly]="pageType === 'graduateList'"
+                />
               </td>
               <td class="p-2 text-nowrap">
                 <input
@@ -332,10 +377,16 @@
                   maxlength="13"
                   type="text"
                   formControlName="idcardno"
-                  (blur)="searchByIdcard(
-                    {idcardno: idcard.value, passportno: control.value.passportno}, control.value.index
-                  )"
-                  (keyup.enter)="idcard.blur();"
+                  (blur)="
+                    searchByIdcard(
+                      {
+                        idcardno: idcard.value,
+                        passportno: control.value.passportno
+                      },
+                      control.value.index
+                    )
+                  "
+                  (keyup.enter)="idcard.blur()"
                   [readonly]="pageType === 'graduateList'"
                 />
               </td>
@@ -347,23 +398,29 @@
                   #passport
                   type="text"
                   formControlName="passportno"
-                  (blur)="searchByIdcard(
-                    {idcardno: control.value.idcardno, passportno: passport.value}, control.value.index
-                  )"
-                  (keyup.enter)="passport.blur();"
+                  (blur)="
+                    searchByIdcard(
+                      {
+                        idcardno: control.value.idcardno,
+                        passportno: passport.value
+                      },
+                      control.value.index
+                    )
+                  "
+                  (keyup.enter)="passport.blur()"
                   [readonly]="pageType === 'graduateList'"
                 />
               </td>
 
-              <td
-                class="p-2 text-nowrap"
-                *ngIf="pageType === 'studentList'"
-              >
+              <td class="p-2 text-nowrap" *ngIf="pageType === 'studentList'">
                 <select
                   class="form-select"
                   style="width: 150px"
-                  formControlName="nationality">
-                  <option value="null" selected hidden disabled>กรุณาเลือก</option>
+                  formControlName="nationality"
+                >
+                  <option value="null" selected hidden disabled>
+                    กรุณาเลือก
+                  </option>
                   <option
                     *ngFor="let nation of nationality"
                     [value]="nation.nationId"
@@ -376,11 +433,12 @@
               <td class="p-2 text-nowrap">
                 <select
                   class="form-select"
-                  style="width: 100px"
-                  [attr.disabled]="pageType === 'graduateList' ? '':null"
+                  [attr.disabled]="pageType === 'graduateList' ? '' : null"
                   formControlName="prefixth"
                 >
-                  <option value="null" selected hidden disabled>กรุณาเลือก</option>
+                  <option value="null" selected hidden disabled>
+                    กรุณาเลือก
+                  </option>
                   <option
                     *ngFor="let ThPrefix of ThPrefixes"
                     [value]="ThPrefix.id"
@@ -413,11 +471,12 @@
               <td class="p-2 text-nowrap">
                 <select
                   class="form-select"
-                  style="width: 100px"
-                  [attr.disabled]="pageType === 'graduateList' ? '':null"
+                  [attr.disabled]="pageType === 'graduateList' ? '' : null"
                   formControlName="prefixen"
                 >
-                  <option value="null" selected hidden disabled>กรุณาเลือก</option>
+                  <option value="null" selected hidden disabled>
+                    กรุณาเลือก
+                  </option>
                   <option
                     *ngFor="let EngPrefix of EngPrefixes"
                     [value]="EngPrefix.id"
@@ -502,10 +561,7 @@
                 </div>
               </td>
 
-              <td
-                class="p-2 text-nowrap"
-                *ngIf="pageType === 'studentList'"
-              >
+              <td class="p-2 text-nowrap" *ngIf="pageType === 'studentList'">
                 <div
                   class="text-orange text-decoration-underline whitespace-nowrap"
                   role="button"
@@ -520,9 +576,11 @@
           <ng-template pTemplate="rowexpansion" let-control let-ii="rowIndex">
             <tr [formGroupName]="ii">
               <td></td>
-              <td colspan="8">
+              <td colspan="4">
                 <form [formGroup]="control.controls.address">
-                  <ksp-form-address-table formControlName="addressInfo"></ksp-form-address-table>
+                  <ksp-form-address-table
+                    formControlName="addressInfo"
+                  ></ksp-form-address-table>
                 </form>
               </td>
             </tr>
@@ -530,8 +588,16 @@
         </p-table>
       </div>
     </form>
-    <div class="mt-2" *ngIf="pageType === 'studentList' && users.length < courseData?.courseSelected.student">
-      <ksp-add-row-button class="blue" (click)="addStudent()">เพิ่มรายชื่อ</ksp-add-row-button>
+    <div
+      class="mt-2"
+      *ngIf="
+        pageType === 'studentList' &&
+        users.length < courseData?.courseSelected.student
+      "
+    >
+      <ksp-add-row-button class="blue" (click)="addStudent()"
+        >เพิ่มรายชื่อ</ksp-add-row-button
+      >
     </div>
   </div>
 </div>

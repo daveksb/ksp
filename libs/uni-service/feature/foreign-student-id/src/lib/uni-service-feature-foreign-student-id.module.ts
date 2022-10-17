@@ -13,6 +13,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ForeignIdSearchComponent } from '@ksp/shared/search';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
+
 const routes: Routes = [
   {
     path: '',
@@ -47,7 +48,11 @@ const routes: Routes = [
     MatTableModule,
     RouterModule.forChild(routes),
   ],
-  declarations: [ForeignStudentIdComponent, ForeignStudentListComponent,ForeignStudentListComponent],
-  exports: [ForeignStudentIdComponent,ForeignStudentListComponent],
+  declarations: [
+    ForeignStudentIdComponent,
+    ForeignStudentListComponent,
+    ForeignStudentListComponent,
+  ],
+  exports: [ForeignStudentIdComponent, ForeignStudentListComponent],
 })
 export class UniServiceFeatureForeignStudentIdModule {}
