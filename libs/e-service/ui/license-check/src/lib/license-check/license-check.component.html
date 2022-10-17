@@ -1,9 +1,9 @@
 <form [formGroup]="form">
   <div class="box-header text-primary">{{ headerTitle }}</div>
 
-  <div class="d-flex justify-content-start mb-2">
+  <div class="d-flex flex-row mb-3">
     <ng-container *ngFor="let choice of choices">
-      <div class="border rounded ps-2 pe-5 py-1 me-3 bg-white w-25">
+      <!-- <div class="w-25">
         <div class="d-flex align-items-center">
           <input
             class="align-middle"
@@ -13,8 +13,20 @@
           />
           <label class="ms-1"> {{ choice.name }} </label>
         </div>
-      </div>
-    </ng-container>
+      </div> -->
+
+      <div class="w-25 d-flex flex-row align-items-center me-3">
+        <input
+          class="radio"
+          type="radio"
+          value="{{ choice.value }}"
+          formControlName="result"
+        />
+        <div class="form-control">
+          <label class="ms-4"> {{ choice.name }} </label>
+        </div>
+      </div></ng-container
+    >
   </div>
 
   <div class="form-label mb-2" *ngIf="reasons.length">หมายเหตุ/เหตุผล</div>

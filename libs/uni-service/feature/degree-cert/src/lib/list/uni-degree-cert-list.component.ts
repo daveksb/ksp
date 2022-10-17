@@ -9,7 +9,7 @@ import { TopNavComponent } from '@ksp/shared/menu';
 import { DegreeCertSearchComponent } from '@ksp/shared/search';
 import { UniInfoService } from '@ksp/shared/service';
 import { UniFormBadgeComponent } from '@ksp/shared/ui';
-import { getCookie, stringToThaiDate } from '@ksp/shared/utility';
+import { getCookie, stringToThaiDate, thaiDate } from '@ksp/shared/utility';
 import { lastValueFrom, map } from 'rxjs';
 
 @Component({
@@ -84,15 +84,13 @@ export class UniDegreeCertListComponent
               key: item?.id,
               order: this.pageEvent.pageIndex * this.pageEvent.pageSize + ++index,
               degreeId: item?.requestno,
-              data: item?.requestdate,
+              date: item?.requestdate? thaiDate(new Date(item?.requestdate)):"",
               uni: item?.uniname,
               major: item?.fulldegreenameth,
               verifyStatus: 'รับข้อมูล',
               considerStatus: 'พิจารณา',
               approveStatus: 'พิจารณา',
-              approveDate: item?.requestdate
-                ? stringToThaiDate(item?.requestdate)
-                : '',
+              approveDate: "",
               editDate: item?.updatedate
                 ? stringToThaiDate(item?.updatedate)
                 : '',

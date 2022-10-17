@@ -184,3 +184,9 @@ button.mat-menu-item {
 input.mat-input-element {
   margin: 0 !important;
 }
+
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+  padding: 0 8px !important;
+}
