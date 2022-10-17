@@ -36,10 +36,14 @@
           <hr />
 
           <div class="d-flex align-items-center">
-            <input type="checkbox" class="me-2" formControlName="hasMoreCourses" />
+            <input
+              type="checkbox"
+              class="me-2"
+              formControlName="hasMoreCourses"
+            />
             <label class="form-label text-black"
               >ทำเครื่องหมาย (<i class="bi bi-check"></i>)
-              กรณีประจำหลักสูตรมากกว่า ๑ หลักสูตร
+              กรณีประจำหลักสูตรมากกว่า 1 หลักสูตร
             </label>
           </div>
 
@@ -59,13 +63,13 @@
                         formControlName="courseName"
                       />
                     </div>
-                    <div class="col-auto">
+                    <div class="col-auto d-flex ps-0">
                       <br />
                       <i
                         role="button"
                         *ngIf="j > 0"
                         (click)="deleteCourse(i, j)"
-                        class="bi bi-trash text-danger fs-5"
+                        class="bi bi-trash text-danger fs-6"
                       ></i>
                     </div>
                   </div>
@@ -76,13 +80,11 @@
                 </ng-container>
               </ng-container>
             </ng-container>
-            <div class="mb-3">
-              <ksp-add-row-button
-                *ngIf="getCourses(i).length < 5 && mode === 'edit'"
-                (addRowClick)="addCourse(i)"
-                >เพิ่มหลักสูตร</ksp-add-row-button
-              >
-            </div>
+            <ksp-add-row-button
+              *ngIf="getCourses(i).length < 5 && mode === 'edit'"
+              (addRowClick)="addCourse(i)"
+              >เพิ่มหลักสูตร</ksp-add-row-button
+            >
           </ng-container>
         </div>
       </ng-container>
