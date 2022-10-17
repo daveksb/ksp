@@ -4,132 +4,148 @@
 </ksp-top-nav>
 
 <div class="bg-secondary bg-opacity-10 px-4 py-3 full-height full-width-2">
-  <div class="search-container bg-white p-3">
+  <div class="bg-white p-3">
     <form [formGroup]="form">
-      <ksp-degree-search 
-        (clear)="clear()" 
-        (search)="getDegreeCertList()"
-        [uniUniversityOption]="uniUniversityOption"
-        [uniUniversityTypeOption]="uniUniversityTypeOption"
-        (getUniversity)="getUniversity()"
-        formControlName="search">
-        <span class="box-header">ค้นหา</span>
-      </ksp-degree-search>
+      <div class="default-width">
+        <ksp-degree-search
+          (clear)="clear()"
+          (search)="getDegreeCertList()"
+          [uniUniversityOption]="uniUniversityOption"
+          [uniUniversityTypeOption]="uniUniversityTypeOption"
+          (getUniversity)="getUniversity()"
+          formControlName="search"
+        >
+          <span class="box-header">ค้นหา</span>
+        </ksp-degree-search>
+      </div>
     </form>
   </div>
   <br />
   <div class="box-header">รายการขอยื่นรายชื่อ</div>
 
-  <div class="bg-white p-3 table-responsive">
-    <table mat-table [dataSource]="dataSource">
-      <ng-container matColumnDef="order">
-        <th style="min-width: 40px;" mat-header-cell *matHeaderCellDef>ลำดับ</th>
-        <td mat-cell *matCellDef="let element">{{ element.order }}</td>
-      </ng-container>
+  <div class="bg-white p-3">
+    <div class="table__scroll">
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="order">
+          <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+          <td mat-cell *matCellDef="let element">{{ element.order }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="edit">
-        <th class="text-center" style="min-width: 80px;" mat-header-cell *matHeaderCellDef>ยื่น/แก้ไข</th>
-        <td class="text-center" mat-cell *matCellDef="let element">
-          <i
-            (click)="nextPage(element.key)"
-            role="button"
-            class="bi bi-pencil-square text-primary fs-5 ms-1"
-          ></i>
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="edit">
+          <th class="text-center" mat-header-cell *matHeaderCellDef>
+            ยื่น/แก้ไข
+          </th>
+          <td class="text-center" mat-cell *matCellDef="let element">
+            <i
+              (click)="nextPage(element.key)"
+              role="button"
+              class="bi bi-pencil-square text-primary fs-5 ms-1"
+            ></i>
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="sendDate">
-        <th style="min-width: 100px;" mat-header-cell *matHeaderCellDef>วันที่ยื่นใบคำขอ</th>
-        1
-        <td mat-cell *matCellDef="let element">{{ element.sendDate }}</td>
-      </ng-container>
+        <ng-container matColumnDef="sendDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่ยื่นใบคำขอ</th>
+          1
+          <td mat-cell *matCellDef="let element">{{ element.sendDate }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="degreeCode">
-        <th style="min-width: 80px;" mat-header-cell *matHeaderCellDef>รหัสปริญญา</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.degreeCode }}
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="degreeCode">
+          <th mat-header-cell *matHeaderCellDef>รหัสปริญญา</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.degreeCode }}
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="major">
-        <th style="min-width: 350px;" mat-header-cell *matHeaderCellDef>ชื่อหลักสูตร</th>
-        <td mat-cell *matCellDef="let element">{{ element.major }}</td>
-      </ng-container>
+        <ng-container matColumnDef="major">
+          <th mat-header-cell *matHeaderCellDef>ชื่อหลักสูตร</th>
+          <td mat-cell *matCellDef="let element">{{ element.major }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="branch">
-        <th style="min-width: 100px;" mat-header-cell *matHeaderCellDef>สาขาวิชา</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.branch }}
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="branch">
+          <th mat-header-cell *matHeaderCellDef>สาขาวิชา</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.branch }}
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="degreeName">
-        <th style="min-width: 120px;" mat-header-cell *matHeaderCellDef>ชื่อปริญญา</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.degreeName }}
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="degreeName">
+          <th mat-header-cell *matHeaderCellDef>ชื่อปริญญา</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.degreeName }}
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="studentStatus">
-        <th style="min-width: 120px;" mat-header-cell *matHeaderCellDef>สถานะรายชื่อผู้เข้า</th>
-        <td mat-cell *matCellDef="let element">
-          <span
-            class="rounded-pill d-flex justify-content-center"
-            [ngClass]="{
-              edit__status:
-                element.studentStatus === 'สร้าง' || 'ยื่นเรียบร้อย',
-              verify__status: element.studentStatus === 'รับข้อมูล'
-            }"
-          >
-            {{ element.studentstatus || '-' }}</span
-          >
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="studentStatus">
+          <th mat-header-cell *matHeaderCellDef>สถานะรายชื่อผู้เข้า</th>
+          <td mat-cell *matCellDef="let element">
+            <span
+              class="rounded-pill d-flex justify-content-center"
+              [ngClass]="{
+                edit__status:
+                  element.studentStatus === 'สร้าง' || 'ยื่นเรียบร้อย',
+                verify__status: element.studentStatus === 'รับข้อมูล'
+              }"
+            >
+              {{ element.studentstatus || '-' }}</span
+            >
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="graduateStatus">
-        <th style="min-width: 120px;" mat-header-cell *matHeaderCellDef>สถานะรายชื่อผู้สำเร็จ</th>
-        <td mat-cell *matCellDef="let element">
-          <span
-            class="rounded-pill d-flex justify-content-center"
-            [ngClass]="{
-              edit__status:
-                element.graduateStatus === 'สร้าง' || 'ยื่นเรียบร้อย',
-              verify__status: element.graduateStatus === 'รับข้อมูล'
-            }"
-          >
-            {{ element.graduatestatus || '-' }}</span
-          >
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="graduateStatus">
+          <th mat-header-cell *matHeaderCellDef>สถานะรายชื่อผู้สำเร็จ</th>
+          <td mat-cell *matCellDef="let element">
+            <span
+              class="rounded-pill d-flex justify-content-center"
+              [ngClass]="{
+                edit__status:
+                  element.graduateStatus === 'สร้าง' || 'ยื่นเรียบร้อย',
+                verify__status: element.graduateStatus === 'รับข้อมูล'
+              }"
+            >
+              {{ element.graduatestatus || '-' }}</span
+            >
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="editDate">
-        <th style="min-width: 100px;" mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
-        <td mat-cell *matCellDef="let element">{{ element.editDate }}</td>
-      </ng-container>
+        <ng-container matColumnDef="editDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
+          <td mat-cell *matCellDef="let element">{{ element.editDate }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="print">
-        <th style="min-width: 80px;" mat-header-cell *matHeaderCellDef>พิมพ์ใบคำขอ</th>
-        <td mat-cell *matCellDef="let element">
-          <i
-            role="button"
-            (click)="print(element)"
-            class="bi bi-printer-fill text-primary fs-5 ms-3"
-          ></i>
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="print">
+          <th mat-header-cell *matHeaderCellDef>พิมพ์ใบคำขอ</th>
+          <td mat-cell *matCellDef="let element">
+            <i
+              role="button"
+              (click)="print(element)"
+              class="bi bi-printer-fill text-primary fs-5 ms-3"
+            ></i>
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="history">
-        <th style="min-width: 60px;" mat-header-cell *matHeaderCellDef>ประวัติ</th>
-        <td mat-cell *matCellDef="let element">
-          <i role="button" (click)="history(element)" class="bi bi-eye text-success fs-5 ms-3"></i>
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="history">
+          <th mat-header-cell *matHeaderCellDef>ประวัติ</th>
+          <td mat-cell *matCellDef="let element">
+            <i
+              role="button"
+              (click)="history(element)"
+              class="bi bi-eye text-success fs-5 ms-3"
+            ></i>
+          </td>
+        </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+    <mat-paginator
+      [length]="pageEvent.length"
+      [pageSize]="pageEvent.pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="onPaginatorEvent($event)"
+      [pageIndex]="pageEvent.pageIndex"
+    >
+    </mat-paginator>
   </div>
-  <mat-paginator [length]="pageEvent.length" [pageSize]="pageEvent.pageSize" [pageSizeOptions]="pageSizeOptions"
-    (page)="onPaginatorEvent($event)" [pageIndex]="pageEvent.pageIndex">
-  </mat-paginator>
 </div>
