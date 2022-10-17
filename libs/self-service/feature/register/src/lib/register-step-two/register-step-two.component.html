@@ -11,7 +11,7 @@
 
             <div class="d-flex justify-content-center mb-3">
               <img
-                src="/assets/images/register-1.png"
+                src="/assets/images/register-2.png"
                 width="200px"
                 height="40px"
               />
@@ -97,7 +97,7 @@
                         [buttonLabel]="'อัพโหลดรูปภาพ'"
                         [requestType]="1"
                         [isImage]="true"
-                        [uniqueTimestamp]="uniqueTimeStamp"
+                        [uniqueTimestamp]="uniqueNo"
                         [showUploadedFileName]="false"
                         (uploadComplete)="onUploadComplete($event)"
                       ></ksp-file-upload>
@@ -109,10 +109,11 @@
                 </div>
               </div>
 
+              <!-- [disabled]="form.invalid || !imgId" -->
               <div class="gap-2 col-md-6 d-flex mx-auto my-2">
                 <button
                   (click)="openDialog()"
-                  [disabled]="form.invalid || !imgId"
+                  [disabled]="false"
                   type="submit"
                   class="btn btn-primary w-100"
                 >

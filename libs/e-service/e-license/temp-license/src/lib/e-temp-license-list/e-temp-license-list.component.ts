@@ -12,13 +12,12 @@ import {
 import {
   EsSearchPayload,
   KspRequest,
-  SchoolRequest,
   SchRequestSearchFilter,
 } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import {
   checkProcess,
-  checkRequestType,
+  schoolMapRequestType,
   checkStatus,
 } from '@ksp/shared/utility';
 
@@ -36,7 +35,7 @@ export class ETempLicenseListComponent implements AfterViewInit {
   dataSource = new MatTableDataSource<KspRequest>();
   SchoolRequestSubType = SchoolRequestSubType;
   checkProcess = checkProcess;
-  checkRequestType = checkRequestType;
+  checkRequestType = schoolMapRequestType;
   checkStatus = checkStatus;
   requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
   careerTypeList = careerTypeList.filter((i) => i.id < 3);

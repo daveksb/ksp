@@ -161,7 +161,7 @@ export class UniRegisterPasswordComponent implements OnInit {
             payload.requeststatus = `1`;
             payload.requestprocess = '2';
             payload.currentprocess = this.currentprocess;
-            return this.requestService.createRequest(payload);
+            return this.requestService.createRequestKsp(payload);
           }
           return EMPTY;
         })

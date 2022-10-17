@@ -14,6 +14,10 @@ export class UniRequestService {
     return this.http.post(`${environment.apiUrl}/kspuni/requestinsert`, form);
   }
 
+  createRequestKsp(form: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/kspuni/ksprequestinsert`, form);
+  }
+
   saveRequestInsert(form: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/kspuni/requestinsert`, {
       ...form,

@@ -39,8 +39,8 @@ import {
 import {
   AddressService,
   GeneralInfoService,
-  RequestService,
   SchoolInfoService,
+  SchoolRequestService,
   StaffService,
 } from '@ksp/shared/service';
 import {
@@ -125,7 +125,7 @@ export class SchoolRequestComponent implements OnInit {
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
     private staffService: StaffService,
-    private requestService: RequestService
+    private requestService: SchoolRequestService
   ) {}
 
   get Option1$() {
