@@ -8,7 +8,7 @@ import { EsSearchPayload, SchoolRequest } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import {
   checkProcess,
-  checkRequestType,
+  schoolMapRequestType,
   checkStatus,
 } from '@ksp/shared/utility';
 
@@ -27,7 +27,7 @@ export class ForeignLicenseListComponent implements AfterViewInit {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<any>();
   checkProcess = checkProcess;
-  checkRequestType = checkRequestType;
+  checkRequestType = schoolMapRequestType;
   checkStatus = checkStatus;
   requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
   SchoolRequestSubType = SchoolRequestSubType;

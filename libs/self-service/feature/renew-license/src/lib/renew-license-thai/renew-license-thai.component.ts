@@ -17,7 +17,7 @@ import {
   SelfRequestService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { SchoolRequest, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
 import {
   replaceEmptyWithNull,
   thaiDate,
@@ -54,11 +54,10 @@ export class RenewLicenseThaiComponent
   myInfo$!: Observable<SelfMyInfo>;
   today = thaiDate(new Date());
 
-  workingInfoFiles = [
+  workingInfoFiles: FileGroup[] = [
     {
       name: '1.รางวัลอื่นและประกาศเกียรติคุณ',
-      fileid: '',
-      filename: '',
+      files: [],
     },
   ];
 
@@ -92,6 +91,10 @@ export class RenewLicenseThaiComponent
     this.checkButtonsDisableStatus();
     this.myInfo$ = this.myInfoService.getMyInfo();
     this.initializeFiles();
+  }
+
+  get userInfoForm() {
+    return this.form.controls.userInfo;
   }
 
   patchUserInfoForm(data: any): void {
