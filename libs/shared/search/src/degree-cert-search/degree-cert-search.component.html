@@ -1,6 +1,6 @@
 <form [formGroup]="form">
   <div class="bg-light px-3 pt-1 pb-2 default-width">
-    <div class="fs-5">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
+    <div class="box-header">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
 
     <div class="row">
       <div class="col-4">
@@ -13,7 +13,21 @@
       </div>
       <div class="col-4">
         <label class="form-label">ช่วงวันที่ </label>
-        <input class="form-control" type="date" formControlName="date" />
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            autocomplete="off"
+            class="form-control form-date"
+            formControlName="date"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </div>
       </div>
     </div>
 
@@ -36,8 +50,10 @@
       <div class="col">
         <label class="form-label">สถาบัน / มหาวิทยาลัย </label>
         <select class="form-select" formControlName="institutionName">
-          <option value="null"disabled selected hidden>กรุณาเลือก</option>
-          <option *ngFor="let item of uniUniversityOption" [value]="item.value">{{item.label}}</option>
+          <option value="null" disabled selected hidden>กรุณาเลือก</option>
+          <option *ngFor="let item of uniUniversityOption" [value]="item.value">
+            {{ item.label }}
+          </option>
         </select>
       </div>
     </div>

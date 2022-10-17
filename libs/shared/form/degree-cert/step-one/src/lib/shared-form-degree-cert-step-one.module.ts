@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { DegreeCertCoordinatorComponent } from './coordinator/coordinator.component';
 import { DegreeInfoComponent } from './degree-info/degree-info.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MatDatepickerModule],
   declarations: [DegreeCertCoordinatorComponent, DegreeInfoComponent],
   exports: [DegreeCertCoordinatorComponent, DegreeInfoComponent],
 })

@@ -192,7 +192,7 @@
                   formControlName="title"
                 />
               </div>
-              <div class="col-auto d-flex ps-0">
+              <div class="col-auto d-flex ps-0" *ngIf="mode === 'edit'">
                 <i
                   role="button"
                   *ngIf="i > 0"

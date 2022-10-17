@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy } from '@ngneat/until-destroy';
@@ -11,7 +12,7 @@ import { UntilDestroy } from '@ngneat/until-destroy';
   templateUrl: './degree-cert-search.component.html',
   styleUrls: ['./degree-cert-search.component.scss'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MatDatepickerModule],
   providers: providerFactory(DegreeCertSearchComponent),
 })
 export class DegreeCertSearchComponent extends KspFormBaseComponent {
