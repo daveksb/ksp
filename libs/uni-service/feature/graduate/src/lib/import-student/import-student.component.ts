@@ -19,7 +19,7 @@ import localForage from 'localforage';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { EMPTY, switchMap } from 'rxjs';
 import * as XLSX from 'xlsx';
-import { getCookie, nameEnPattern, nameThPattern, parseJson, phonePattern, thaiDate } from '@ksp/shared/utility';
+import { getCookie, idCardPattern, nameEnPattern, nameThPattern, parseJson, phonePattern, thaiDate } from '@ksp/shared/utility';
 import moment from 'moment';
 
 @Component({
@@ -249,7 +249,7 @@ export class ImportStudentComponent implements OnInit {
       index: [index],
       no: [index+1],
       admissiondate: [moment().format('YYYY-MM-DD'), Validators.required],
-      idcardno: ['', [Validators.required, Validators.maxLength(13)]],
+      idcardno: ['', [Validators.required, Validators.pattern(idCardPattern)]],
       passportno: ['', Validators.required],
       nationality: [null, Validators.required],
       prefixth: [null, Validators.required],
@@ -286,7 +286,7 @@ export class ImportStudentComponent implements OnInit {
       no: [data.index+1],
       admissiondate: [moment(data.admissiondate).format('YYYY-MM-DD')],
       idcardno: [data.idcardno,
-        this.pageType == 'studentList' ? [Validators.required, Validators.maxLength(13)] : undefined],
+        this.pageType == 'studentList' ? [Validators.required, Validators.pattern(idCardPattern)] : undefined],
       passportno: [data.passportno,
         this.pageType == 'studentList' ? Validators.required : undefined],
       nationality: [data.nationality,
@@ -343,7 +343,7 @@ export class ImportStudentComponent implements OnInit {
       index: [this.user.value.length],
       no: [this.user.value.length+1],
       admissiondate: [moment(data.admissiondate).format('YYYY-MM-DD')],
-      idcardno: [data.idcardno, [Validators.required, Validators.maxLength(13)]],
+      idcardno: [data.idcardno, [Validators.required, Validators.pattern(idCardPattern)]],
       passportno: [data.passportno, Validators.required],
       nationality: [data.nationality, Validators.required],
       prefixth: [data.prefixth, Validators.required],
