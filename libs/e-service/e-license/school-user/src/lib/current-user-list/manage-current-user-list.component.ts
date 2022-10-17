@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
   ESchUserSearch,
-  SchoolServiceUserPageType,
+  SchoolUserPageType,
   SchUser,
 } from '@ksp/shared/interface';
 import { ESchStaffService } from '@ksp/shared/service';
@@ -69,7 +69,7 @@ export class ManageCurrentUserListComponent implements AfterViewInit {
 
   goToDetail(id: number) {
     this.router.navigate(['/school', 'user-detail', id], {
-      queryParams: { type: SchoolServiceUserPageType.ManageCurrentUser },
+      queryParams: { type: SchoolUserPageType.CurrentUser },
     });
   }
 }

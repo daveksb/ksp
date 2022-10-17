@@ -6,7 +6,7 @@ import {
   KspApprovePayload,
   KspRequest,
   Prefix,
-  SchoolServiceUserPageType,
+  SchoolUserPageType,
   SchUser,
 } from '@ksp/shared/interface';
 import {
@@ -29,7 +29,8 @@ export class UserDetailComponent implements OnInit {
   requestId!: number | null;
   requestData = new KspRequest();
   prefixList$!: Observable<Prefix[]>;
-  pageType = 0;
+  pageType: SchoolUserPageType = SchoolUserPageType.CurrentUser;
+  pageTypeEnum = SchoolUserPageType;
   setPassword = '';
   mode: FormMode = 'view';
 
@@ -142,9 +143,9 @@ export class UserDetailComponent implements OnInit {
   }
 
   cancel() {
-    if (this.pageType === SchoolServiceUserPageType.ApproveNewUser) {
+    if (this.pageType === SchoolUserPageType.NewUser) {
       this.router.navigate(['/school', 'new-user']);
-    } else if (this.pageType === SchoolServiceUserPageType.ManageCurrentUser) {
+    } else if (this.pageType === SchoolUserPageType.CurrentUser) {
       this.router.navigate(['/manage-current-user']);
     }
   }
@@ -178,7 +179,7 @@ export class UserDetailComponent implements OnInit {
 
     dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        if (this.pageType === SchoolServiceUserPageType.ApproveNewUser) {
+        if (this.pageType === SchoolUserPageType.NewUser) {
           this.router.navigate(['/school', 'new-user']);
         }
       }

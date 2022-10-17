@@ -3,10 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import {
-  EsSearchPayload,
-  SchoolServiceUserPageType,
-} from '@ksp/shared/interface';
+import { EsSearchPayload, SchoolUserPageType } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 
 @Component({
@@ -73,7 +70,7 @@ export class SelfUserListComponent implements AfterViewInit {
 
   goToDetail(id: number) {
     this.router.navigate(['/self', 'user-detail', id], {
-      queryParams: { type: SchoolServiceUserPageType.ManageCurrentUser },
+      queryParams: { type: SchoolUserPageType.CurrentUser },
     });
   }
 }
