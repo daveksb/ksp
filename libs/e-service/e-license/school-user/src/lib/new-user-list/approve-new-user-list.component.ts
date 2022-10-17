@@ -11,7 +11,7 @@ import {
   SchoolServiceUserPageType,
 } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
-import { checkStatus } from '@ksp/shared/utility';
+import { checkStatus, mapRequestType } from '@ksp/shared/utility';
 
 @Component({
   templateUrl: './approve-new-user-list.component.html',
@@ -22,6 +22,7 @@ export class ApproveNewUserListComponent implements AfterViewInit {
   dataSource = new MatTableDataSource<KspRequest>();
   checkStatus = checkStatus;
   statusList = SchoolRequestProcess.find((i) => i.requestType === 1)?.status;
+  mapRequestType = mapRequestType;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

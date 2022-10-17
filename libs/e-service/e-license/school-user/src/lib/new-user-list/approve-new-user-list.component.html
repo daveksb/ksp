@@ -71,7 +71,9 @@
 
       <ng-container matColumnDef="requestType">
         <th mat-header-cell *matHeaderCellDef>ประเภทใบคำขอ</th>
-        <td mat-cell *matCellDef="let element"></td>
+        <td mat-cell *matCellDef="let element">
+          {{ mapRequestType(element.requesttype) }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="requeststatus">

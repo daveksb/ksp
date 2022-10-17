@@ -26,13 +26,11 @@ export class UserDetailComponent implements OnInit {
   approveTitles = ['ผลการตรวจสอบ', 'สถานะการใช้งาน'];
   approveChoices = approveChoices;
   headers = headers;
-
   requestId!: number | null;
   requestData = new KspRequest();
   prefixList$!: Observable<Prefix[]>;
   pageType = 0;
   setPassword = '';
-
   mode: FormMode = 'view';
 
   form = this.fb.group({
@@ -124,7 +122,6 @@ export class UserDetailComponent implements OnInit {
   }
 
   unApproveUser() {
-    console.log('un approve = ');
     const payload: KspApprovePayload = {
       requestid: `${this.requestId}`,
       process: '1',
@@ -136,7 +133,7 @@ export class UserDetailComponent implements OnInit {
     };
 
     this.eRequestService.KspApproveRequest(payload).subscribe((res) => {
-      console.log('un approve result = ', res);
+      //console.log('un approve result = ', res);
     });
   }
 
