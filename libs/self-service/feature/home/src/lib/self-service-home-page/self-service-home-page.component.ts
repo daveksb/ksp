@@ -14,6 +14,7 @@ import {
   getCookie,
   SelfCheckProcess,
   SelfcheckStatus,
+  selfMapRequestType,
   thaiDate,
 } from '@ksp/shared/utility';
 
@@ -30,6 +31,7 @@ export class SelfServiceHomePageComponent implements AfterViewInit {
 
   checkStatus = SelfcheckStatus;
   checkProcess = SelfCheckProcess;
+  selfMapRequestType = selfMapRequestType;
 
   dataSource = new MatTableDataSource<SelfRequest>();
   @ViewChild(MatSort) sort!: MatSort;
@@ -54,7 +56,7 @@ export class SelfServiceHomePageComponent implements AfterViewInit {
   }
   search() {
     const payload = {
-      staffid: getCookie('userId'),
+      userid: getCookie('userId'),
       requesttype: this.form.controls.requesttype.value,
       requestno: this.form.controls.requestno.value,
       requestdate: this.form.controls.requestdate.value,
@@ -83,7 +85,7 @@ export class SelfServiceHomePageComponent implements AfterViewInit {
   }
 
   goToDetail(input: SelfRequest) {
-    console.log('self request = ', input);
+    //console.log('self request = ', input);
     const requestType = Number(input.requesttype);
     const subType = Number(input.careertype);
     const isForeign = Number(input.isforeign);

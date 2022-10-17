@@ -85,9 +85,11 @@ export class CompareKnowledgeRequestComponent
 
   ngOnInit(): void {
     this.getListData();
-    // this.getMyInfo();
-    // this.checkButtonsDisableStatus();
     this.checkRequestId();
+  }
+
+  get userInfoForm() {
+    return this.form.controls.userInfo;
   }
 
   override resetForm() {
