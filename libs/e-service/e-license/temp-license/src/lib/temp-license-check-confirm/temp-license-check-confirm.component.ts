@@ -47,7 +47,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
     console.log('save data = ', this.saveData);
     console.log('form = ', this.form.value);
     const payload: KspApprovePayload = {
-      id: this.saveData.requestData.id,
+      requestid: this.saveData.requestData.id,
       process: '3',
       status: this.form.controls.approveResult.value,
       detail: JSON.stringify(this.saveData.checkDetail),
