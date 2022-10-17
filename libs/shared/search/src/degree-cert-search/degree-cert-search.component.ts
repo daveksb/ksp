@@ -5,14 +5,19 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy } from '@ngneat/until-destroy';
-
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 @UntilDestroy()
 @Component({
   selector: 'ksp-degree-cert-search',
   templateUrl: './degree-cert-search.component.html',
   styleUrls: ['./degree-cert-search.component.scss'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatDatepickerModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+  ],
   providers: providerFactory(DegreeCertSearchComponent),
 })
 export class DegreeCertSearchComponent extends KspFormBaseComponent {
