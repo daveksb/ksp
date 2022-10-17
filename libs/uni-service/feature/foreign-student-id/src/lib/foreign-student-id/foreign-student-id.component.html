@@ -52,13 +52,12 @@
       <ksp-form-foreign-id
         formControlName="foreignStudent"
         [formHeader]="'ข้อมูลนักศึกษาชาวต่างชาติ'"
+        [passportLabel]="'หมายเลขหนังสือเดินทาง (Passport Number) / G-Code'"
         [prefixList]="prefixList$ | async"
         [countries]="countries$ | async"
       ></ksp-form-foreign-id>
 
-      <div class="mt-3 mb-3"><hr /></div>
-
-      <div class="form__upload">
+      <div class="form__upload mt-3">
         <ksp-form-attachment
           [title]="'กรุณาแนบหลักฐานประกอบการปฏิบัติงาน '"
           [groups]="foreignInfo"

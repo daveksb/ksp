@@ -16,31 +16,40 @@
           </option>
         </select>
       </div>
-    </div>
-    <div class="row mb-3">
-      <div class="col-sm-3 col-md-2">
+      <div class="col-sm-3 col-md-4">
         <label class="form-label">ปีของหลักสูตร</label>
         <input formControlName="courseYear" class="form-control" type="text" />
       </div>
-      <div class="col-sm-9 col-md-6">
+    </div>
+    <div class="row mb-3">
+      <div class="col-sm-8 col-md-8">
         <label class="form-label"
           >ชื่อหลักสูตรที่เสนอขอรับรอง<span class="fs-6 text-danger">
             *กรุณาระบุชื่อหลักสูตรตามที่ปรากฏบนหน้าปก มคอ.2
           </span></label
         >
-        <input
+        <!-- <input
           formControlName="courseName"
           class="form-control"
           type="text"
           placeholder="กรุณากรอก"
-        />
+        /> -->
+        <textarea
+          rows="3"
+          class="form-control"
+          placeholder="กรุณากรอก"
+          formControlName="courseName"
+        ></textarea>
       </div>
     </div>
 
     <div class="row mb-3">
       <div class="col-sm-8">
         <label class="form-label">ประเภทของหลักสูตร</label>
-        <select formControlName="courseType" class="search__content form-select">
+        <select
+          formControlName="courseType"
+          class="search__content form-select"
+        >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">ภาษาไทย</option>
           <option value="2">ภาษาอังกฤษ</option>
@@ -49,7 +58,10 @@
       </div>
       <div class="col-sm-4">
         <label class="form-label">สถานะของหลักสูตร</label>
-        <select formControlName="courseStatus" class="search__content form-select">
+        <select
+          formControlName="courseStatus"
+          class="search__content form-select"
+        >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">ใหม่</option>
           <option value="2">ปรับปรุง</option>
@@ -106,19 +118,23 @@
     </div>
 
     <div class="box-header">สถานะภาพหลักสูตร</div>
-    <div class="row">
+    <div class="row mb-3">
       <div class="col-sm-3">
         <label class="form-label"
           >การอนุมัติหลักสูตรของสภามหาวิทยาลัย ครั้งที่
         </label>
-        <input class="form-control" formControlName="courseApproveTime" type="text" />
+        <input
+          class="form-control"
+          formControlName="courseApproveTime"
+          type="text"
+        />
       </div>
       <div class="col-sm-3">
         <label class="form-label">วันที่</label>
         <div class="d-flex align-items-center">
           <input
             matInput
-            [matDatepicker]="courseApproveDatePicker"
+            [matDatepicker]="picker1"
             autocomplete="off"
             class="form-control form-date"
             formControlName="courseApproveDate"
@@ -126,20 +142,20 @@
           <mat-datepicker-toggle
             class="button-date"
             matSuffix
-            [for]="courseApproveDatePicker"
+            [for]="picker1"
           ></mat-datepicker-toggle>
-          <mat-datepicker #courseApproveDatePicker></mat-datepicker>
+          <mat-datepicker #picker1></mat-datepicker>
         </div>
       </div>
     </div>
 
-    <div class="row">
+    <div class="row mb-3">
       <div class="col-sm-3">
         <label class="form-label">การพิจารณารับทราบของ อว. วันที่</label>
         <div class="d-flex align-items-center">
           <input
             matInput
-            [matDatepicker]="courseAcceptDatePicker"
+            [matDatepicker]="picker2"
             autocomplete="off"
             class="form-control form-date"
             formControlName="courseAcceptDate"
@@ -147,9 +163,9 @@
           <mat-datepicker-toggle
             class="button-date"
             matSuffix
-            [for]="courseAcceptDatePicker"
+            [for]="picker2"
           ></mat-datepicker-toggle>
-          <mat-datepicker #courseAcceptDatePicker></mat-datepicker>
+          <mat-datepicker #picker2></mat-datepicker>
         </div>
       </div>
     </div>
