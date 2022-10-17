@@ -11,7 +11,11 @@ import {
   SchoolServiceUserPageType,
 } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
-import { checkStatus, mapRequestType } from '@ksp/shared/utility';
+import {
+  checkStatus,
+  mapRequestType,
+  replaceEmptyWithNull,
+} from '@ksp/shared/utility';
 
 @Component({
   templateUrl: './approve-new-user-list.component.html',
@@ -40,12 +44,12 @@ export class ApproveNewUserListComponent implements AfterViewInit {
 
   search(params: RequestSearchFilter) {
     //console.log('params  = ', params);
-    const payload: EsSearchPayload = {
+    let payload: EsSearchPayload = {
       systemtype: '2',
       requesttype: params.requesttype,
-      requestno: null,
+      requestno: params.requestno,
       careertype: null,
-      name: null,
+      name: params.name,
       idcardno: null,
       passportno: null,
       process: null,
@@ -58,6 +62,8 @@ export class ApproveNewUserListComponent implements AfterViewInit {
       offset: '0',
       row: '500',
     };
+
+    payload = replaceEmptyWithNull(payload);
 
     this.eRequestService.KspSearchRequest(payload).subscribe((res) => {
       //console.log('res = ', res);
