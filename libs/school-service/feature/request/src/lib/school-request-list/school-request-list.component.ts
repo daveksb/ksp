@@ -11,7 +11,7 @@ import {
   SchoolRequestType,
 } from '@ksp/shared/constant';
 import { KspRequest, SchRequestSearchFilter } from '@ksp/shared/interface';
-import { RequestService } from '@ksp/shared/service';
+import { SchoolRequestService } from '@ksp/shared/service';
 import {
   checkProcess,
   schoolMapRequestType,
@@ -44,7 +44,7 @@ export class SchoolRequestListComponent implements AfterViewInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private requestService: RequestService,
+    private requestService: SchoolRequestService,
     public dialog: MatDialog
   ) {}
 

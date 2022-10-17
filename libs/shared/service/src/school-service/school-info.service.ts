@@ -62,18 +62,4 @@ export class SchoolInfoService {
         map((data: any) => data.datareturn)
       );
   }
-
-  checkForgetPassword(payload: SchForgetPassword): Observable<any> {
-    return this.http.post(
-      `${environment.apiUrl}/ksppublic/schuserupdatepass`,
-      payload
-    );
-  }
-
-  setForgetPassword(payload: SchForgetPassword): Observable<any> {
-    return this.http.post(
-      `${environment.apiUrl}/ksppublic/schuserupdatepass`,
-      payload
-    );
-  }
 }
