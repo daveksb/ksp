@@ -11,7 +11,7 @@ import { map, Observable, shareReplay } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class RequestService {
+export class SchoolRequestService {
   constructor(private http: HttpClient) {}
 
   schCreateRequest(payload: Partial<KspRequest>): Observable<any> {

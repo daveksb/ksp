@@ -20,7 +20,7 @@ import {
 import {
   AddressService,
   GeneralInfoService,
-  RequestService,
+  SchoolRequestService,
 } from '@ksp/shared/service';
 import {
   changeDate,
@@ -84,7 +84,7 @@ export class QualificationDetailComponent implements OnInit {
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
-    private requestService: RequestService,
+    private requestService: SchoolRequestService,
     private route: ActivatedRoute
   ) {}
 
