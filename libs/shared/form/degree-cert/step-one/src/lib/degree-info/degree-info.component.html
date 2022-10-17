@@ -115,14 +115,38 @@
       </div>
       <div class="col-sm-3">
         <label class="form-label">วันที่</label>
-        <input class="form-control" formControlName="courseApproveDate" type="date" />
+        <div class="d-flex align-items-baseline">
+          <input
+            [matDatepicker]="courseApproveDatePicker"
+            autocomplete="off"
+            class="form-control me-2"
+            formControlName="courseApproveDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="courseApproveDatePicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #courseApproveDatePicker></mat-datepicker>
+        </div>
       </div>
     </div>
 
     <div class="row">
       <div class="col-sm-3">
         <label class="form-label">การพิจารณารับทราบของ อว. วันที่</label>
-        <input class="form-control" formControlName="courseAcceptDate" type="date" />
+        <div class="d-flex align-items-baseline">
+          <input
+            [matDatepicker]="courseAcceptDatePicker"
+            autocomplete="off"
+            class="form-control me-2"
+            formControlName="courseAcceptDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="courseAcceptDatePicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #courseAcceptDatePicker></mat-datepicker>
+        </div>
       </div>
     </div>
   </div>
