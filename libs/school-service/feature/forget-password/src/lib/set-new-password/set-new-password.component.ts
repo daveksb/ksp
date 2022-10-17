@@ -6,8 +6,12 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { SchForgetPassword } from '@ksp/shared/interface';
+import { SchoolUserService } from '@ksp/shared/service';
 import { validatorMessages } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import localForage from 'localforage';
+import * as CryptoJs from 'crypto-js';
 
 @UntilDestroy()
 @Component({
@@ -18,6 +22,7 @@ export class SetNewPasswordComponent implements OnInit {
   eyeIconClicked = false;
   eyeIconClickedSecond = false;
   validatorMessages = validatorMessages;
+  payload!: SchForgetPassword;
 
   form = this.fb.group({
     password: [null, [Validators.required, Validators.minLength(8)]],
@@ -27,7 +32,8 @@ export class SetNewPasswordComponent implements OnInit {
   constructor(
     private router: Router,
     public dialog: MatDialog,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private userService: SchoolUserService
   ) {}
 
   get disableBtn() {
@@ -37,8 +43,8 @@ export class SetNewPasswordComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      //console.log('form value = ', res);
+    localForage.getItem('schSetNewPassword').then((res: any) => {
+      this.payload = res;
     });
   }
 
@@ -58,8 +64,17 @@ export class SetNewPasswordComponent implements OnInit {
 
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.onCompleted();
+        this.setNewPassword();
       }
+    });
+  }
+
+  setNewPassword() {
+    const form = this.form.value;
+    const password = CryptoJs.SHA256(`${form.password}`).toString();
+    this.payload = { ...this.payload, ...{ schpassword: password } };
+    this.userService.setForgetPassword(this.payload).subscribe(() => {
+      this.onCompleted();
     });
   }
 
@@ -75,6 +90,7 @@ export class SetNewPasswordComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
+        localForage.removeItem('schSetNewPassword');
         this.navigateBack();
       }
     });

@@ -6,6 +6,7 @@ import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { SchForgetPassword } from '@ksp/shared/interface';
 import { SchoolUserService } from '@ksp/shared/service';
 import { idCardPattern } from '@ksp/shared/utility';
+import localForage from 'localforage';
 
 @Component({
   templateUrl: './person-id.component.html',
@@ -34,11 +35,11 @@ export class PersonIdComponent {
     const payload: SchForgetPassword = {
       idcardno: form.idcardno,
       schoolid: form.schoolid,
-      schpassword: form,
     };
 
+    localForage.setItem('schSetNewPassword', payload);
+
     this.userService.checkForgetPassword(payload).subscribe((res) => {
-      console.log('res = ', res);
       if (res.returncode === '1') {
         this.router.navigate(['/forget-password', 'set-new-password']);
       } else {
