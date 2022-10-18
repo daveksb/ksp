@@ -66,6 +66,10 @@ export class RenewLicenseForeignComponent implements OnInit {
     this.checkRequestId();
   }
 
+  get personalDetail() {
+    return this.form.controls.personalDetail;
+  }
+
   checkRequestId() {
     this.route.paramMap.subscribe((params) => {
       this.requestId = Number(params.get('id'));
