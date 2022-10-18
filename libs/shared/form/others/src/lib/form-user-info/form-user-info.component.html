@@ -95,7 +95,6 @@
           [matDatepicker]="picker1"
           autocomplete="off"
           class="form-control form-date"
-          [class.form-control-sp]="isDarkMode"
           formControlName="passportstartdate"
         />
         <mat-datepicker-toggle
@@ -115,7 +114,6 @@
           [matDatepicker]="picker2"
           autocomplete="off"
           class="form-control form-date"
-          [class.form-control-sp]="isDarkMode"
           formControlName="passportenddate"
         />
         <mat-datepicker-toggle
@@ -134,7 +132,6 @@
         >คำนำหน้าชื่อภาษาไทย</label
       >
       <select
-        [class.form-select-sp]="isDarkMode"
         class="form-select"
         formControlName="prefixth"
         (change)="prefixChanged($event)"
@@ -150,7 +147,6 @@
         >ชื่อภาษาไทย</label
       >
       <input
-        [class.form-control-sp]="isDarkMode"
         class="form-control"
         type="text"
         placeholder="กรุณากรอกชื่อภาษาไทย"
@@ -170,7 +166,6 @@
     <div class="col-md mb-2" *ngIf="_displayMode === FormTypeEnum.foreign">
       <label class="form-label">ชื่อกลาง</label>
       <input
-        [class.form-control-sp]="isDarkMode"
         class="form-control"
         type="text"
         placeholder="กรุณากรอกชื่อภาษาไทย"
@@ -183,7 +178,6 @@
         >นามสกุลภาษาไทย</label
       >
       <input
-        [class.form-control-sp]="isDarkMode"
         class="form-control"
         type="text"
         placeholder="กรุณากรอกนามสกุลภาษาไทย"
@@ -203,7 +197,6 @@
     <div class="col-md-3 mb-2">
       <label class="form-label required">คำนำหน้าชื่อภาษาอังกฤษ</label>
       <select
-        [class.form-select-sp]="isDarkMode"
         class="form-select"
         formControlName="prefixen"
         (change)="prefixChanged($event)"
@@ -219,7 +212,6 @@
       <input
         class="form-control"
         type="text"
-        [class.form-control-sp]="isDarkMode"
         placeholder="กรุณากรอกชื่อภาษาอังกฤษ"
         formControlName="firstnameen"
       />
@@ -236,7 +228,6 @@
     <div class="col-md mb-2" *ngIf="_displayMode === FormTypeEnum.foreign">
       <label class="form-label">ชื่อกลาง</label>
       <input
-        [class.form-control-sp]="isDarkMode"
         class="form-control"
         type="text"
         placeholder="กรุณากรอกชื่อกลางภาษาอังกฤษ"
@@ -248,7 +239,6 @@
       <input
         class="form-control"
         type="text"
-        [class.form-control-sp]="isDarkMode"
         placeholder="กรุณากรอกนามสกุลภาษาอังกฤษ"
         formControlName="lastnameen"
       />
@@ -265,11 +255,7 @@
   <div class="row">
     <div class="col-md mb-2" *ngIf="_displayMode === FormTypeEnum.thai">
       <label class="form-label required">เพศ</label>
-      <select
-        [class.form-select-sp]="isDarkMode"
-        class="form-select"
-        formControlName="sex"
-      >
+      <select class="form-select" formControlName="sex">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">ชาย</option>
         <option value="2">หญิง</option>
@@ -281,7 +267,6 @@
       <div class="d-flex align-items-center">
         <input
           [max]="today"
-          [class.form-control-sp]="isDarkMode"
           matInput
           [matDatepicker]="picker3"
           autocomplete="off"
@@ -301,7 +286,6 @@
       <label class="form-label required">วันเดือนปี อายุครบ 60 ปี</label>
       <div class="d-flex align-items-center">
         <input
-          [class.form-control-sp]="isDarkMode"
           matInput
           [matDatepicker]="picker4"
           autocomplete="off"
@@ -341,12 +325,7 @@
   <div class="row" *ngIf="_displayMode === FormTypeEnum.thai">
     <div class="col-md-6 mb-2">
       <label class="form-label required">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
-      <input
-        class="form-control"
-        type="tel"
-        [class.form-control-sp]="isDarkMode"
-        formControlName="contactphone"
-      />
+      <input class="form-control" type="tel" formControlName="contactphone" />
       <ng-container
         *ngIf="
           contactPhone.invalid && (contactPhone.dirty || contactPhone.touched)
@@ -359,12 +338,7 @@
     </div>
     <div class="col-md-6 mb-2">
       <label class="form-label required">เบอร์โทรศัพท์ (ที่ทำงาน)</label>
-      <input
-        class="form-control"
-        type="tel"
-        [class.form-control-sp]="isDarkMode"
-        formControlName="workphone"
-      />
+      <input class="form-control" type="tel" formControlName="workphone" />
       <ng-container
         *ngIf="workPhone.invalid && (workPhone.dirty || workPhone.touched)"
       >
@@ -378,12 +352,7 @@
   <div class="row">
     <div class="col-md-6 mb-2" *ngIf="_displayMode === FormTypeEnum.thai">
       <label class="form-label required">อีเมล</label>
-      <input
-        class="form-control"
-        type="email"
-        [class.form-control-sp]="isDarkMode"
-        formControlName="email"
-      />
+      <input class="form-control" type="email" formControlName="email" />
       <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
         <span class="text-danger" *ngIf="email.errors?.['email']">{{
           validatorMessages.email
@@ -392,12 +361,7 @@
     </div>
     <div class="col-md-6 mb-2" *ngIf="isqualification">
       <label class="form-label required">ตำแหน่ง</label>
-      <input
-        class="form-control"
-        type="text"
-        formControlName="position"
-        [class.form-control-sp]="isDarkMode"
-      />
+      <input class="form-control" type="text" formControlName="position" />
     </div>
   </div>
 

@@ -125,17 +125,7 @@
     </div>
   </div>
   <hr />
-  <div class="d-flex justify-content-between">
-    <div class="box-header">วิชาเอก</div>
-    <div class="text-primary fs-5" role="button">
-      <ksp-add-row-button
-        class="text-primary fs-6"
-        (addRowClick)="addFormArray(degreeInfo)"
-      >
-        เพิ่มข้อมูลประวัติการศึกษา
-      </ksp-add-row-button>
-    </div>
-  </div>
+  <div class="box-header">วิชาเอก</div>
 
   <ng-container formArrayName="degreeInfo">
     <ng-container *ngFor="let DegreeForm of degreeInfo.controls; let i = index">
@@ -200,4 +190,12 @@
       </ng-container>
     </ng-container>
   </ng-container>
+  <div class="d-flex justify-content-end">
+    <ksp-add-row-button
+      class="text-primary fs-6"
+      (addRowClick)="addFormArray(degreeInfo)"
+    >
+      เพิ่มข้อมูลวิชาเอก
+    </ksp-add-row-button>
+  </div>
 </form>

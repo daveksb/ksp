@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -45,6 +45,7 @@ export class CompareKnowledgeEducationComponent
     degreeInfo5: this.fb.array([]),
   });
 
+  @Input() countries: any[] = [];
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(

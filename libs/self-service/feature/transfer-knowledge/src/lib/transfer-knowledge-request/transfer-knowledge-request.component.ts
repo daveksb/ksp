@@ -27,9 +27,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { Observable } from 'rxjs';
 
+const EDU_FILES = [
+  {
+    name: 'สำเนาใบรายงานผลการศึกษา (transcript)',
+    fileid: '',
+    filename: '',
+  },
+];
+
 const OBJECTIVE_FILES = [
   {
-    name: 'สำเนาคำอธิบายรายวิชาที่ขอเทียบโอนความรู้ฯตามหลักสูตรที่สำเร็จการศึกษษที่มีตราประทับของทางสถาบันที่สำเร็จการศึกษาและมีเจ้าหน้าที่ของสถาบันลงนามรับรองสำเนาถูกต้อง',
+    name: 'สำเนาคำอธิบายรายวิชาที่ขอเทียบโอนความรู้ฯตามหลักสูตรที่สำเร็จการศึกษาที่มีตราประทับของทางสถาบันที่สำเร็จการศึกษาและมีเจ้าหน้าที่ของสถาบันลงนามรับรองสำเนาถูกต้อง',
     fileid: '',
     filename: '',
   },
@@ -94,7 +102,7 @@ export class TransferKnowledgeRequestComponent
 
   override initializeFiles(): void {
     super.initializeFiles();
-    this.eduFiles = structuredClone(OBJECTIVE_FILES);
+    this.eduFiles = structuredClone(EDU_FILES);
     this.transferFiles = structuredClone(OBJECTIVE_FILES);
   }
 

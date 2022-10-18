@@ -13,6 +13,8 @@ export class TransferKnowledgeInfoComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+  selectedStandardName: any;
+
   transferForm = this.fb.group({
     subjects: this.fb.array([
       this.fb.group({
@@ -42,7 +44,6 @@ export class TransferKnowledgeInfoComponent
 
   ngOnInit(): void {
     this.deleteStandard(0);
-
     /* this.form.controls.standards.valueChanges.subscribe((res) => {
         console.log('std = ', res);
       }); */
@@ -86,7 +87,6 @@ export class TransferKnowledgeInfoComponent
         }),
       ]),
     });
-
     this.standards.push(transferForm);
   }
 
