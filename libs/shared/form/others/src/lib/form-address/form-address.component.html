@@ -1,123 +1,125 @@
 <form [formGroup]="form">
   <div [ngClass]="{ 'px-3 py-3 bg-light': !isDarkMode }">
-    <div class="box-header">
-      <ng-content></ng-content>
-    </div>
-
-    <input type="hidden" formControlName="id" />
-    <input type="hidden" formControlName="addressType" />
-
-    <div class="row">
-      <div class="col-md-6 mb-2">
-        <label class="form-label">อาคาร/สถานที่</label>
-        <input
-          [class.form-control-sp]="isDarkMode"
-          class="form-control"
-          type="text"
-          formControlName="location"
-        />
+    <div [ngClass]="{ 'px-3 py-3 border rounded-4': isDarkMode }">
+      <div class="box-header">
+        <ng-content></ng-content>
       </div>
-      <div class="col-md-6 mb-2">
-        <label class="form-label required">บ้านเลขที่ </label>
-        <input
-          [class.form-control-sp]="isDarkMode"
-          class="form-control"
-          type="text"
-          formControlName="houseNo"
-        />
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col-md-6 mb-2">
-        <label class="form-label">หมู่ที่</label>
-        <input
-          [class.form-control-sp]="isDarkMode"
-          class="form-control"
-          type="text"
-          formControlName="moo"
-        />
-      </div>
-      <div class="col-md-6 mb-2">
-        <label class="form-label">ซอย</label>
-        <input
-          [class.form-control-sp]="isDarkMode"
-          class="form-control"
-          type="text"
-          formControlName="alley"
-        />
-      </div>
-    </div>
+      <input type="hidden" formControlName="id" />
+      <input type="hidden" formControlName="addressType" />
 
-    <div class="row">
-      <div class="col-md-6 mb-2">
-        <label class="form-label">ถนน</label>
-        <input
-          [class.form-control-sp]="isDarkMode"
-          class="form-control"
-          type="text"
-          formControlName="road"
-        />
+      <div class="row">
+        <div class="col-md-6 mb-2">
+          <label class="form-label">อาคาร/สถานที่</label>
+          <input
+            [class.form-control-sp]="isDarkMode"
+            class="form-control"
+            type="text"
+            formControlName="location"
+          />
+        </div>
+        <div class="col-md-6 mb-2">
+          <label class="form-label required">บ้านเลขที่ </label>
+          <input
+            [class.form-control-sp]="isDarkMode"
+            class="form-control"
+            type="text"
+            formControlName="houseNo"
+          />
+        </div>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col-md-6 mb-2">
-        <label class="form-label required">จังหวัด</label>
-        <select
-          [class.form-select-sp]="isDarkMode"
-          class="form-select"
-          formControlName="province"
-          (change)="provinceChanged.emit($event)"
-        >
-          <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option
-            *ngFor="let province of provinces"
-            [value]="province?.province_id"
+      <div class="row">
+        <div class="col-md-6 mb-2">
+          <label class="form-label">หมู่ที่</label>
+          <input
+            [class.form-control-sp]="isDarkMode"
+            class="form-control"
+            type="text"
+            formControlName="moo"
+          />
+        </div>
+        <div class="col-md-6 mb-2">
+          <label class="form-label">ซอย</label>
+          <input
+            [class.form-control-sp]="isDarkMode"
+            class="form-control"
+            type="text"
+            formControlName="alley"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-2">
+          <label class="form-label">ถนน</label>
+          <input
+            [class.form-control-sp]="isDarkMode"
+            class="form-control"
+            type="text"
+            formControlName="road"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-2">
+          <label class="form-label required">จังหวัด</label>
+          <select
+            [class.form-select-sp]="isDarkMode"
+            class="form-select"
+            formControlName="province"
+            (change)="provinceChanged.emit($event)"
           >
-            {{ province?.province_name }}
-          </option>
-        </select>
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
+            <option
+              *ngFor="let province of provinces"
+              [value]="province?.province_id"
+            >
+              {{ province?.province_name }}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-6 mb-2">
+          <label class="form-label required">อำเภอ</label>
+          <select
+            [class.form-select-sp]="isDarkMode"
+            class="form-select"
+            formControlName="amphur"
+            (change)="amphurChanged.emit($event)"
+          >
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
+            <option *ngFor="let a of amphurs" [value]="a?.amphurCode">
+              {{ a?.amphurName }}
+            </option>
+          </select>
+        </div>
       </div>
-      <div class="col-md-6 mb-2">
-        <label class="form-label required">อำเภอ</label>
-        <select
-          [class.form-select-sp]="isDarkMode"
-          class="form-select"
-          formControlName="amphur"
-          (change)="amphurChanged.emit($event)"
-        >
-          <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option *ngFor="let a of amphurs" [value]="a?.amphurCode">
-            {{ a?.amphurName }}
-          </option>
-        </select>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col-md-6 mb-2">
-        <label class="form-label required">ตำบล</label>
-        <select
-          [class.form-select-sp]="isDarkMode"
-          class="form-select"
-          formControlName="tumbol"
-          (change)="updatePostcode($event)"
-        >
-          <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option *ngFor="let t of tumbols" [value]="t?.tambolCode">
-            {{ t?.tambolName }}
-          </option>
-        </select>
-      </div>
-      <div class="col-md-6 mb-2">
-        <label class="form-label required">รหัสไปรษณีย์</label>
-        <input
-          [class.form-control-sp]="isDarkMode"
-          class="form-control"
-          type="text"
-          formControlName="postcode"
-        />
+      <div class="row">
+        <div class="col-md-6 mb-2">
+          <label class="form-label required">ตำบล</label>
+          <select
+            [class.form-select-sp]="isDarkMode"
+            class="form-select"
+            formControlName="tumbol"
+            (change)="updatePostcode($event)"
+          >
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
+            <option *ngFor="let t of tumbols" [value]="t?.tambolCode">
+              {{ t?.tambolName }}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-6 mb-2">
+          <label class="form-label required">รหัสไปรษณีย์</label>
+          <input
+            [class.form-control-sp]="isDarkMode"
+            class="form-control"
+            type="text"
+            formControlName="postcode"
+          />
+        </div>
       </div>
     </div>
   </div>
