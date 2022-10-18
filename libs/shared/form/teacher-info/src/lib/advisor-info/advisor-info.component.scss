@@ -6,3 +6,7 @@
 .radio:checked ~ .form-control {
   border-color: #0056ff;
 }
+
+.radio:checked:disabled ~ .form-control {
+  border-color: #ced4da;
+}

@@ -26,16 +26,18 @@ export class ForeignStudentIdComponent {
 
   form = this.fb.group({
     foreignStudent: [],
+    visainfo: [],
   });
+
   prefixList$!: Observable<any>;
   countries$!: Observable<any>;
   visaTypeList$!: Observable<any>;
   universityCode = '-';
   uniAddress = '-';
   uniName = '-';
-  uniid=""
-  unitype=""
-  requestNumber=""
+  uniid = '';
+  unitype = '';
+  requestNumber = '';
   constructor(
     public dialog: MatDialog,
     private router: Router,
@@ -56,6 +58,7 @@ export class ForeignStudentIdComponent {
 
     this.countries$ = this.addressService.getCountry();
     this.prefixList$ = this.generalInfoService.getPrefix();
+    this.visaTypeList$ = this.generalInfoService.getVisaType();
     this.uniInfoService
       .univerSitySelectById(getCookie('uniType'))
       .subscribe((res) => {

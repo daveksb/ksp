@@ -4,15 +4,17 @@
   <div class="py-2">
     <ksp-uni-form-badge [mainTitle]="badgeTitle"></ksp-uni-form-badge>
   </div>
-  <div class="row flex-column flex-lg-row gap-2" style="overflow-x: auto">
-    <div class="col p-0 mb-3 mb-md-0">
+  <div
+    class="d-flex flex-column flex-lg-row gap-0 gap-md-4 mb-3"
+    style="overflow-x: auto"
+  >
+    <div class="col mb-3 mb-md-0">
       <self-service-slideshow></self-service-slideshow>
     </div>
-    <div class="col p-0 mb-3 mb-md-0">
+    <div class="col mb-3 mb-md-0">
       <self-service-slideshow-second></self-service-slideshow-second>
     </div>
   </div>
-  <br />
 
   <div class="box-header">ค้นหาใบคำขอ</div>
   <div [formGroup]="form" class="box__container px-4 py-3">
@@ -89,10 +91,9 @@
       <button class="btn btn-primary ms-2" (click)="search()">ค้นหา</button>
     </div>
   </div>
-  <br />
-  <div class="d-flex justify-content-between align-items-center my-2">
+  <div class="d-flex justify-content-between align-items-center mt-3">
     <div class="box-header">
-      สรุปผลลัพธ์การค้นหา {{ dataSource.data.length }} รายการ
+      ผลลัพธ์การค้นหา {{ dataSource.data.length }} รายการ
     </div>
     <button
       mat-button
@@ -170,8 +171,14 @@
     </mat-menu>
   </div>
 
-  <div class="table-responsive" style="white-space: nowrap">
-    <table matSort mat-table [dataSource]="dataSource">
+  <div class="table__scroll">
+    <table
+      matSort
+      mat-table
+      [dataSource]="dataSource"
+      [hidden]="!dataSource.data.length"
+      class="mt-2"
+    >
       <ng-container matColumnDef="order">
         <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
         <td mat-cell *matCellDef="let element; let i = index">
@@ -266,6 +273,13 @@
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <table>
+      <tr *ngIf="searchNotFound">
+        <td class="text-center fs-5" [attr.colspan]="displayedColumns.length">
+          ไม่พบข้อมูล
+        </td>
+      </tr>
     </table>
   </div>
   <mat-paginator

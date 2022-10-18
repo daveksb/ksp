@@ -70,21 +70,23 @@
       >
         <ksp-form-visa-info
           [mode]="'view'"
+          [visaTypeList]="visaTypeList$ | async"
           formControlName="foreignVisaInfo"
         ></ksp-form-visa-info>
       </ksp-form-foreign-id>
       <br />
 
-      <ksp-form-attachment
+      <ksp-form-multi-attachment
         [groups]="evidenceFile"
         [mode]="mode"
-      ></ksp-form-attachment>
+      ></ksp-form-multi-attachment>
     </div>
     <br />
 
     <div class="bg-white px-3 py-2">
       <e-service-license-check
         [choices]="verifyChoice"
+        formControlName="verifydetail"
       ></e-service-license-check>
     </div>
   </div>
