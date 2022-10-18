@@ -16,6 +16,7 @@
 
   <ng-container *ngIf="selectedstandardKnowledgeType === 0">
     <ksp-renew-license-property-one
+      [isSupervision]="true"
       formControlName="educationDetails"
     ></ksp-renew-license-property-one>
   </ng-container>
@@ -31,6 +32,7 @@
   </ng-container>
   <ng-container *ngIf="selectedstandardKnowledgeType === 3">
     <ksp-renew-license-property-three
+      [formType]="'sup'"
       formControlName="educationDetails"
     ></ksp-renew-license-property-three>
   </ng-container>

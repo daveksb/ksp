@@ -3,6 +3,7 @@
   <mat-tab-group class="tab-group" [selectedIndex]="0" animationDuration="0ms">
     <mat-tab label="ข้อมูลส่วนตัว">
       <ksp-form-user-info
+        [isHasSixtiesDate]="true"
         [isSelfService]="true"
         [prefixList]="prefixList"
         [requiredIdCardNo]="false"

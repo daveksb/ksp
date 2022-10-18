@@ -51,6 +51,7 @@ export class FormUserInfoComponent
   @Input() isSelfService = false;
   @Input() isAddStaff = false;
   @Input() requiredIdCardNo = true;
+  @Input() isHasSixtiesDate = false;
   public _displayMode = UserInfoFormType.thai;
   @Input()
   set displayMode(mode: number) {
