@@ -67,9 +67,9 @@ export class LicenseRequestForeignComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkRequestId();
-    this.personalDetail.valueChanges.subscribe((res) => {
+    /*     this.personalDetail.valueChanges.subscribe((res) => {
       console.log('valid = ', this.personalDetail.valid);
-    });
+    }); */
   }
 
   get personalDetail() {
@@ -221,9 +221,9 @@ export class LicenseRequestForeignComponent implements OnInit {
   }
 
   save() {
-    console.log(this.form.getRawValue());
-    console.log(this.documentFiles);
-    const completeDialog = this.dialog.open(ConfirmDialogComponent, {
+    //console.log(this.form.getRawValue());
+    //console.log(this.documentFiles);
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `Do you want to save and proceed?`,
         btnLabel: 'Save & Proceed',
@@ -231,7 +231,7 @@ export class LicenseRequestForeignComponent implements OnInit {
       },
     });
 
-    completeDialog.componentInstance.saved.subscribe((res) => {
+    dialog.componentInstance.saved.subscribe((res) => {
       if (res) {
         const payload = this.createRequest(1);
         const request = this.requestId
@@ -246,7 +246,7 @@ export class LicenseRequestForeignComponent implements OnInit {
       }
     });
 
-    completeDialog.componentInstance.confirmed.subscribe((res) => {
+    dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         const payload = this.createRequest(2);
         const request = this.requestId
@@ -327,14 +327,14 @@ export class LicenseRequestForeignComponent implements OnInit {
   }
 
   onCancelRequest() {
-    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยกเลิกรายการใบคำขอ
         ใช่หรือไม่? `,
       },
     });
 
-    confirmDialog.componentInstance.confirmed.subscribe((res) => {
+    dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         this.cancelRequest();
       }
@@ -354,14 +354,14 @@ export class LicenseRequestForeignComponent implements OnInit {
   }
 
   cancelCompleted() {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: `ยกเลิกใบคำขอสำเร็จ`,
         buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 
-    completeDialog.componentInstance.completed.subscribe((res) => {
+    dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
         this.router.navigate(['/home']);
       }

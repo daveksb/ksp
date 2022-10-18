@@ -27,8 +27,9 @@ import {
   styleUrls: ['./e-temp-license-list.component.scss'],
 })
 export class ETempLicenseListComponent implements AfterViewInit {
+  defaultForm = { requesttype: '3', careertype: '1' };
   form = this.fb.group({
-    search: [{ requesttype: '3' }],
+    search: [this.defaultForm],
   });
 
   displayedColumns: string[] = column;
@@ -91,7 +92,7 @@ export class ETempLicenseListComponent implements AfterViewInit {
   clearData() {
     this.dataSource.data = [];
     this.form.reset();
-    this.form.controls.search.patchValue({ requesttype: '3' });
+    this.form.controls.search.patchValue(this.defaultForm);
   }
 
   goToDetail(item: KspRequest) {
