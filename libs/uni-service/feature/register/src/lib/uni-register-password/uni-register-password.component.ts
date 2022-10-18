@@ -49,6 +49,8 @@ export class UniRegisterPasswordComponent implements OnInit {
   currentprocess = 1;
   eyeIconClicked = false;
   eyeIconClickedRe = false;
+  wrongpass = false;
+  submit = false;
 
   constructor(
     private router: Router,
@@ -119,6 +121,7 @@ export class UniRegisterPasswordComponent implements OnInit {
   }
 
   save() {
+    this.submit = true;
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -168,6 +171,7 @@ export class UniRegisterPasswordComponent implements OnInit {
       )
       .subscribe((res) => {
         if (res) {
+          this.submit = false;
           const requestNo = res?.requestno;
           this.showCompleteDialog(requestNo);
         }
