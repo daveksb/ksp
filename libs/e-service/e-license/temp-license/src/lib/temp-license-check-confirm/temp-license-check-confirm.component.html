@@ -6,171 +6,30 @@
   </span></ksp-top-nav
 >
 
-<form [formGroup]="form">
-  <div class="bg-secondary bg-opacity-10 py-2 px-4 full-height-2">
-    <div class="box-header">รายละเอียดใบคำขอหนังสืออนุญาตประกอบวิชาชีพ</div>
-    <div class="bg-white p-3">
-      <div class="d-flex justify-content-between">
-        <ksp-request-header-info
-          [requestDate]="saveData.requestData.requestdate"
-          [requestNumber]="saveData.requestData.requestno"
-        ></ksp-request-header-info>
-      </div>
-
-      <div class="bg-white border py-3 px-4">
-        <div class="box-header text-primary me-1">
-          ยืนยันผลการตรวจสอบ
-          <span class="text-danger fs-6"
-            >* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</span
-          >
-        </div>
-
-        <div class="d-flex align-items-center mb-3">
-          <div class="form-control" style="width: 25rem">
-            <div class="d-flex align-items-center">
-              <input type="radio" value="3" formControlName="approveResult" />
-              <label class="form-label ms-2"> ครบถ้วน และถูกต้อง </label>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-control mb-3" style="width: 25rem">
-          <div class="d-flex align-items-center">
-            <div class="d-flex align-items-center">
-              <input type="radio" value="2" formControlName="approveResult" />
-              <label class="form-label ms-2"> ขอแก้ไข / เพิ่มเติม </label>
-            </div>
-          </div>
-
-          <div class="d-flex align-items-center mb-2">
-            <label class="form-label w-100 ms-4"
-              >วันที่ต้องการใบคำขอส่งกลับ</label
-            >
-            <div class="d-flex align-items-center">
-              <input
-                matInput
-                [matDatepicker]="picker"
-                autocomplete="off"
-                class="form-control form-date"
-                formControlName="returnDate"
-              />
-              <mat-datepicker-toggle
-                class="button-date"
-                matSuffix
-                [for]="picker"
-              ></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-control mb-3" style="width: 25rem">
-          <div class="d-flex align-items-center">
-            <div class="d-flex align-items-center">
-              <input type="radio" value="4" formControlName="approveResult" />
-              <label class="form-label ms-2"> ขาดคุณสมบัติ </label>
-            </div>
-          </div>
-
-          <div class="d-flex align-items-center mb-2">
-            <label class="form-label ms-4 w-25">สาเหตุ</label>
-            <select class="form-select w-100" formControlName="rejectReason">
-              <option value="null" selected disabled hidden>กรุณาเลือก</option>
-              <option value="1">เหตุผล 1</option>
-              <option value="2">เหตุผล 2</option>
-              <option value="3">เหตุผล 3</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- <div class="row ms-2">
-          <div class="col-6">
-            <textarea
-              class="form-control"
-              rows="3"
-              placeholder="โปรดระบุ"
-            ></textarea>
-          </div>div
-        </div> -->
-
-        <!--    <div class="d-flex align-items-center mb-3">
-          <div class="box-header text-primary me-1">
-            ต้องการส่งตรวจสอบลำดับต่อไป หรือส่งเพื่อพิจารณา
-          </div>
-          <div class="text-danger">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
-        </div>
-
-        <div class="d-flex align-items-center mb-3">
-          <div class="form-control" style="width: 25rem">
-            <div class="d-flex align-items-center">
-              <input class="radio" type="radio" value="1" />
-              <label class="form-label ms-2"> ส่งตรวจสอบลำดับต่อไป </label>
-            </div>
-          </div>
-        </div>
-
-        <div class="d-flex align-items-center mb-3">
-          <div class="form-control" style="width: 25rem">
-            <div class="d-flex align-items-center">
-              <input class="radio" type="radio" value="2" />
-              <label class="form-label ms-2">
-                ไม่ผ่านการตรวจสอบ เนื่องจากไม่ครบถ้วน / ไม่ถูกต้อง
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <div class="d-flex align-items-center mb-3">
-          <div class="form-control" style="width: 25rem">
-            <div class="d-flex align-items-center">
-              <input class="radio" type="radio" value="3" />
-              <label class="form-label ms-2"> ส่งเรื่องพิจารณา </label>
-            </div>
-          </div>
-        </div>
-
-        <div class="d-flex align-items-center mb-3">
-          <div class="form-control" style="width: 25rem">
-            <div class="d-flex align-items-center">
-              <input class="radio" type="radio" value="4" />
-              <label class="form-label ms-2"> ยกเลิก </label>
-            </div>
-          </div>
-        </div> -->
-
-        <div class="box-header text-primary">
-          ประวัติการตรวจสอบคุณสมบัติและเอกสาร
-        </div>
-        <table class="table w-75">
-          <thead>
-            <tr>
-              <th scope="col">ครั้งที่</th>
-              <th scope="col">ชื่อ-นามสกุล เจ้าหน้าที่ที่ตรวจสอบ</th>
-              <th scope="col">วันที่ตรวจสอบ</th>
-              <th scope="col">สถานะ</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <!-- <tr>
-              <td>1</td>
-              <td>x</td>
-              <td>x</td>
-              <td>x</td>
-            </tr> -->
-          </tbody>
-        </table>
-      </div>
+<div class="bg-secondary bg-opacity-10 py-2 px-4 full-height-2">
+  <div class="box-header">รายละเอียดใบคำขอหนังสืออนุญาตประกอบวิชาชีพ</div>
+  <div class="bg-white p-3">
+    <div class="d-flex justify-content-between">
+      <ksp-request-header-info></ksp-request-header-info>
+      <!-- <ksp-request-header-info
+      [requestDate]="saveData.requestData.requestdate"
+      [requestNumber]="saveData.requestData.requestno"
+    ></ksp-request-header-info> -->
     </div>
+
+    <ksp-approve-ksp-request
+      [requestType]="3"
+      [process]="3"
+    ></ksp-approve-ksp-request>
   </div>
-</form>
+</div>
 
 <div class="sticky-bottom border">
   <ksp-bottom-nav
     (cancelClicked)="cancel()"
     (prevClicked)="prevPage()"
     (saveClicked)="confirmDialog()"
-    [disableSaveButton]="form.invalid"
+    [disableSaveButton]="false"
     [showCenterButtons]="true"
     [isLastPage]="true"
     [showSaveButton]="true"

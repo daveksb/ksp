@@ -327,6 +327,24 @@
         }
       ]
     },
+    "e-service-e-license-approve-ksp-request": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/approve-ksp-request",
+      "sourceRoot": "libs/e-service/e-license/approve-ksp-request/src",
+      "prefix": "ksp",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/approve-ksp-request/**/*.ts",
+              "libs/e-service/e-license/approve-ksp-request/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-e-license-certificate-knowledge": {
       "projectType": "library",
       "root": "libs/e-service/e-license/certificate-knowledge",

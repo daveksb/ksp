@@ -22,17 +22,10 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   requestId!: number;
   saveData!: KspApprovePersistData;
 
-  form = this.fb.group({
-    approveResult: [null, Validators.required],
-    returnDate: [],
-    rejectReason: [],
-  });
-
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     public dialog: MatDialog,
-    private fb: FormBuilder,
     private eRequestService: ERequestService
   ) {}
 
@@ -44,11 +37,12 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   }
 
   save() {
+    //console.log('save data = ', this.saveData);
+    /*     console.log('form = ', this.form.value);
     console.log('save data = ', this.saveData);
-    console.log('form = ', this.form.value);
     const payload: KspApprovePayload = {
       requestid: this.saveData.requestData.id,
-      process: '3',
+      process: `${Number(this.saveData.requestData.process) + 1}`,
       status: this.form.controls.approveResult.value,
       detail: JSON.stringify(this.saveData.checkDetail),
       systemtype: '2', // school
@@ -58,7 +52,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
 
     this.eRequestService.KspApproveRequest(payload).subscribe((res) => {
       console.log('result = ', res);
-    });
+    }); */
   }
 
   checkRequestId() {
