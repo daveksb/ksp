@@ -50,6 +50,7 @@ export class SelfMyInfo {
   visatype: string | null = null;
   uniquetimestamp: string | null = null;
   returncode: string | null = null;
+  //sex: string | null = null;
 }
 
 export type SelfMyInfoKey = keyof SelfMyInfo;
