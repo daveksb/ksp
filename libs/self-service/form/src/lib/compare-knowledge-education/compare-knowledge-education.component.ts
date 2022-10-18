@@ -105,7 +105,7 @@ export class CompareKnowledgeEducationComponent
 
   addFormArray2(form: FormArray<any>) {
     const data = this.fb.group({
-      degreeInfo: [],
+      degreeInfo: [null, Validators.required],
     });
     form.push(data);
   }
