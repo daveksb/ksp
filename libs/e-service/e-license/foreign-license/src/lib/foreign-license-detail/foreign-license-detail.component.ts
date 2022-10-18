@@ -135,7 +135,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
           if (res) {
             const data = this.form.controls.verifydetail.value as any;
             const payload: KspApprovePayload = {
-              id: this.requestNo,
+              requestid: this.requestNo,
               process: '3',
               status: data.value,
               detail: data.detail,

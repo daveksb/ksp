@@ -55,7 +55,13 @@
         [passportLabel]="'หมายเลขหนังสือเดินทาง (Passport Number) / G-Code'"
         [prefixList]="prefixList$ | async"
         [countries]="countries$ | async"
-      ></ksp-form-foreign-id>
+      >
+        <ksp-form-visa-info
+          [mode]="mode"
+          [visaTypeList]="visaTypeList$ | async"
+          formControlName="visainfo"
+        ></ksp-form-visa-info>
+      </ksp-form-foreign-id>
 
       <div class="form__upload mt-3">
         <ksp-form-attachment

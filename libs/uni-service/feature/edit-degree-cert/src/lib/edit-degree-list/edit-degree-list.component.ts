@@ -26,7 +26,10 @@ const mapOption = () =>
   templateUrl: './edit-degree-list.component.html',
   styleUrls: ['./edit-degree-list.component.scss'],
 })
-export class EditDegreeListComponent extends KspPaginationComponent implements OnInit {
+export class EditDegreeListComponent
+  extends KspPaginationComponent
+  implements OnInit
+{
   form = this.fb.group({
     homeSearch: [],
   });
@@ -47,11 +50,11 @@ export class EditDegreeListComponent extends KspPaginationComponent implements O
     private addressService: AddressService,
     private router: Router
   ) {
-    super()
+    super();
     this.getAll();
   }
   clear() {
-    this.form.reset()
+    this.form.reset();
     this.clearPageEvent();
     this.dataSource.data = [];
   }
@@ -123,7 +126,7 @@ export class EditDegreeListComponent extends KspPaginationComponent implements O
         this.provinces = res;
       });
   }
- override search() {
+  override search() {
     const value: any = this.form.value?.homeSearch;
     const payload = {
       uniid: value?.university || '',
@@ -136,11 +139,11 @@ export class EditDegreeListComponent extends KspPaginationComponent implements O
       coursemajor: value?.major || '',
       coursesubjects: value?.subject || '',
       uniprovince: value?.province || '',
-      ...this.tableRecord
+      ...this.tableRecord,
     };
     this.uniInfoService.uniDegreeSearch(payload).subscribe(async (res) => {
       const newData: any = [];
-      this.pageEvent.length = res.countrow
+      this.pageEvent.length = res.countrow;
       for (const row of res?.datareturn || []) {
         const degreeCode = this._findOptions(
           this.degreeLevelOptions,
@@ -184,6 +187,7 @@ export class EditDegreeListComponent extends KspPaginationComponent implements O
 }
 
 const displayedColumns: string[] = [
+  'order',
   'requestId',
   'submitDate',
   'approveCode',

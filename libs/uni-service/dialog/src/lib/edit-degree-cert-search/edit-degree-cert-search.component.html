@@ -7,20 +7,21 @@
       <i class="bi bi-x-lg text-primary" role="button" matDialogClose></i>
     </div>
     <hr />
-    <div class="row">
+    <div class="row mb-2">
       <div class="col">
-        <label class="form-label">รหัสรับรองปริญญา</label><input class="form-control" formControlName="degreeCode"
-          type="text" />
+        <label class="form-label">รหัสรับรองปริญญา</label
+        ><input class="form-control" formControlName="degreeCode" type="text" />
       </div>
       <div class="col">
-        <label class="form-label">ชื่อปริญญา และประกาศนียบัตรทางการศึกษา</label><input class="form-control"
-          formControlName="degreeName" type="text" />
+        <label class="form-label">ชื่อปริญญา และประกาศนียบัตรทางการศึกษา</label
+        ><input class="form-control" formControlName="degreeName" type="text" />
       </div>
     </div>
-  
-    <div class="row">
+
+    <div class="row mb-2">
       <div class="col">
-        <label class="form-label">ระดับปริญญาทางการศึกษา</label><select class="form-select" formControlName="degreeLevel">
+        <label class="form-label">ระดับปริญญาทางการศึกษา</label
+        ><select class="form-select" formControlName="degreeLevel">
           <option value="null" disabled selected hidden>กรุณาเลือก</option>
           <option *ngFor="let item of degreeLevelOptions" [value]="item?.value">
             {{ item.label }}
@@ -28,20 +29,31 @@
         </select>
       </div>
       <div class="col">
-        <label class="form-label">สาขาวิชา</label><select class="form-select" formControlName="fieldOfStudy"
-          (change)="onSelectChange($event, 'fieldOfStudy')">
+        <label class="form-label">สาขาวิชา</label
+        ><select
+          class="form-select"
+          formControlName="fieldOfStudy"
+          (change)="onSelectChange($event, 'fieldOfStudy')"
+        >
           <option value="null" disabled selected hidden>กรุณาเลือก</option>
-          <option *ngFor="let item of fieldOfStudyOptions" [value]="item?.value">
+          <option
+            *ngFor="let item of fieldOfStudyOptions"
+            [value]="item?.value"
+          >
             {{ item.label }}
           </option>
         </select>
       </div>
     </div>
-  
-    <div class="row">
+
+    <div class="row mb-2">
       <div class="col">
-        <label class="form-label">วิชาเอก</label><select class="form-select" formControlName="major"
-          (change)="onSelectChange($event, 'major')">
+        <label class="form-label">วิชาเอก</label
+        ><select
+          class="form-select"
+          formControlName="major"
+          (change)="onSelectChange($event, 'major')"
+        >
           <option value="null" disabled selected hidden>กรุณาเลือก</option>
           <option *ngFor="let item of majorOptions" [value]="item.value">
             {{ item.label }}
@@ -49,7 +61,8 @@
         </select>
       </div>
       <div class="col">
-        <label class="form-label">แขนงวิชา</label><select class="form-select" formControlName="subject">
+        <label class="form-label">แขนงวิชา</label
+        ><select class="form-select" formControlName="subject">
           <option value="null" disabled selected hidden>กรุณาเลือก</option>
           <option *ngFor="let item of subjectOptions" [value]="item.value">
             {{ item.label }}
@@ -57,10 +70,11 @@
         </select>
       </div>
     </div>
-  
-    <div class="row">
+
+    <div class="row mb-2">
       <div class="col">
-        <label class="form-label">ปีการศึกษา</label><select class="form-select" formControlName="year">
+        <label class="form-label">ปีการศึกษา</label
+        ><select class="form-select" formControlName="year">
           <option value="null" disabled selected hidden>กรุณาเลือก</option>
           <option *ngFor="let item of academicYearOptions" [value]="item.value">
             {{ item.label }}
@@ -68,8 +82,8 @@
         </select>
       </div>
       <div class="col">
-        <label class="form-label">จังหวัดที่จัดการเรียนการสอน</label><select class="form-select"
-          formControlName="province">
+        <label class="form-label">จังหวัดที่จัดการเรียนการสอน</label
+        ><select class="form-select" formControlName="province">
           <option value="null" disabled selected hidden>กรุณาเลือก</option>
           <option *ngFor="let item of provinces" [value]="item.value">
             {{ item.label }}
@@ -77,9 +91,12 @@
         </select>
       </div>
     </div>
-  
+
     <div class="d-flex justify-content-end mt-2">
-      <button class="btn border-primary text-primary bg-white" (click)="clear()">
+      <button
+        class="btn border-primary text-primary bg-white"
+        (click)="clear()"
+      >
         ล้างข้อมูล
       </button>
       <button class="btn btn-primary ms-2" (click)="search()">ค้นหา</button>
@@ -102,9 +119,13 @@
       <tbody>
         <tr *ngFor="let item of dataSource">
           <th scope="col" hidden>key</th>
-          <th scope="row" class="body__detail">
+          <th scope="row mb-2" class="body__detail">
             <div>
-              <input type="radio" (change)="onItemChange(item.key)" name="university" />
+              <input
+                type="radio"
+                (change)="onItemChange(item.key)"
+                name="university"
+              />
             </div>
           </th>
           <td class="detail__table">{{ item.approveCode }}</td>
@@ -116,12 +137,22 @@
         </tr>
       </tbody>
     </table>
-    <mat-paginator [length]="pageEvent.length" [pageSize]="pageEvent.pageSize" [pageSizeOptions]="pageSizeOptions"
-      (page)="onPaginatorEvent($event)" [pageIndex]="pageEvent.pageIndex">
+    <mat-paginator
+      [length]="pageEvent.length"
+      [pageSize]="pageEvent.pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="onPaginatorEvent($event)"
+      [pageIndex]="pageEvent.pageIndex"
+    >
     </mat-paginator>
     <br />
     <div class="d-flex justify-content-center">
-      <button matDialogClose class="btn btn-primary" [disabled]="!selectedUniversity" (click)="confirm()">
+      <button
+        matDialogClose
+        class="btn btn-primary"
+        [disabled]="!selectedUniversity"
+        (click)="confirm()"
+      >
         ยืนยัน
       </button>
     </div>
