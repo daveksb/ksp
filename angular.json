@@ -117,7 +117,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/e-service"],
+          "outputs": ["{workspaceRoot}/coverage/apps/e-service"],
           "options": {
             "jestConfig": "apps/e-service/jest.config.ts",
             "passWithNoTests": true
@@ -327,6 +327,24 @@
         }
       ]
     },
+    "e-service-e-license-approve-ksp-request": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/approve-ksp-request",
+      "sourceRoot": "libs/e-service/e-license/approve-ksp-request/src",
+      "prefix": "ksp",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/approve-ksp-request/**/*.ts",
+              "libs/e-service/e-license/approve-ksp-request/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-e-license-certificate-knowledge": {
       "projectType": "library",
       "root": "libs/e-service/e-license/certificate-knowledge",
@@ -336,7 +354,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "outputs": [
-            "coverage/libs/e-service/e-license/certificate-knowledge"
+            "{workspaceRoot}/coverage/libs/e-service/e-license/certificate-knowledge"
           ],
           "options": {
             "jestConfig": "libs/e-service/e-license/certificate-knowledge/jest.config.ts",
@@ -363,7 +381,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/e-license/document-delivery"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/e-license/document-delivery"
+          ],
           "options": {
             "jestConfig": "libs/e-service/e-license/document-delivery/jest.config.ts",
             "passWithNoTests": true
@@ -389,7 +409,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/e-license/edit-license"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/e-license/edit-license"
+          ],
           "options": {
             "jestConfig": "libs/e-service/e-license/edit-license/jest.config.ts",
             "passWithNoTests": true
@@ -513,7 +535,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/e-license/knowledge-cert"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/e-license/knowledge-cert"
+          ],
           "options": {
             "jestConfig": "libs/e-service/e-license/knowledge-cert/jest.config.ts",
             "passWithNoTests": true
@@ -539,7 +563,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/e-license/license-approve"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/e-license/license-approve"
+          ],
           "options": {
             "jestConfig": "libs/e-service/e-license/license-approve/jest.config.ts",
             "passWithNoTests": true
@@ -565,7 +591,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/e-license/license-editing"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/e-license/license-editing"
+          ],
           "options": {
             "jestConfig": "libs/e-service/e-license/license-editing/jest.config.ts",
             "passWithNoTests": true
@@ -592,7 +620,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "outputs": [
-            "coverage/libs/e-service/e-license/qualification-approve"
+            "{workspaceRoot}/coverage/libs/e-service/e-license/qualification-approve"
           ],
           "options": {
             "jestConfig": "libs/e-service/e-license/qualification-approve/jest.config.ts",
@@ -619,7 +647,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/e-license/renew-license"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/e-license/renew-license"
+          ],
           "options": {
             "jestConfig": "libs/e-service/e-license/renew-license/jest.config.ts",
             "passWithNoTests": true
@@ -645,7 +675,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/e-license/request-license"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/e-license/request-license"
+          ],
           "options": {
             "jestConfig": "libs/e-service/e-license/request-license/jest.config.ts",
             "passWithNoTests": true
@@ -672,7 +704,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/e-license/school-user"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/e-license/school-user"
+          ],
           "options": {
             "jestConfig": "libs/e-service/e-license/school-user/jest.config.ts",
             "passWithNoTests": true
@@ -789,7 +823,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/e-license/substitute-license"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/e-license/substitute-license"
+          ],
           "options": {
             "jestConfig": "libs/e-service/e-license/substitute-license/jest.config.ts",
             "passWithNoTests": true
@@ -816,7 +852,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "outputs": [
-            "coverage/libs/e-service/e-license/substitute-license-approve"
+            "{workspaceRoot}/coverage/libs/e-service/e-license/substitute-license-approve"
           ],
           "options": {
             "jestConfig": "libs/e-service/e-license/substitute-license-approve/jest.config.ts",
@@ -1020,7 +1056,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/ethics/accusation"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/ethics/accusation"
+          ],
           "options": {
             "jestConfig": "libs/e-service/ethics/accusation/jest.config.ts",
             "passWithNoTests": true
@@ -1640,7 +1678,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/feature/container-page"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/feature/container-page"
+          ],
           "options": {
             "jestConfig": "libs/e-service/feature/container-page/jest.config.ts",
             "passWithNoTests": true
@@ -1790,7 +1830,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/feature/login"],
+          "outputs": ["{workspaceRoot}/coverage/libs/e-service/feature/login"],
           "options": {
             "jestConfig": "libs/e-service/feature/login/jest.config.ts",
             "passWithNoTests": true
@@ -1877,7 +1917,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/fee-refund"],
+          "outputs": ["{workspaceRoot}/coverage/libs/e-service/fee-refund"],
           "options": {
             "jestConfig": "libs/e-service/fee-refund/jest.config.ts",
             "passWithNoTests": true
@@ -1904,7 +1944,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "outputs": [
-            "coverage/libs/e-service/professional/best-teacher-reward"
+            "{workspaceRoot}/coverage/libs/e-service/professional/best-teacher-reward"
           ],
           "options": {
             "jestConfig": "libs/e-service/professional/best-teacher-reward/jest.config.ts",
@@ -1932,7 +1972,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "outputs": [
-            "coverage/libs/e-service/professional/enable-reward-request"
+            "{workspaceRoot}/coverage/libs/e-service/professional/enable-reward-request"
           ],
           "options": {
             "jestConfig": "libs/e-service/professional/enable-reward-request/jest.config.ts",
@@ -1960,7 +2000,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "outputs": [
-            "coverage/libs/e-service/professional/one-school-one-innovation"
+            "{workspaceRoot}/coverage/libs/e-service/professional/one-school-one-innovation"
           ],
           "options": {
             "jestConfig": "libs/e-service/professional/one-school-one-innovation/jest.config.ts",
@@ -1988,7 +2028,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "outputs": [
-            "coverage/libs/e-service/professional/praise-teacher-reward"
+            "{workspaceRoot}/coverage/libs/e-service/professional/praise-teacher-reward"
           ],
           "options": {
             "jestConfig": "libs/e-service/professional/praise-teacher-reward/jest.config.ts",
@@ -2015,7 +2055,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/professional/professional"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/professional/professional"
+          ],
           "options": {
             "jestConfig": "libs/e-service/professional/professional/jest.config.ts",
             "passWithNoTests": true
@@ -2041,7 +2083,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/professional/research-reward"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/professional/research-reward"
+          ],
           "options": {
             "jestConfig": "libs/e-service/professional/research-reward/jest.config.ts",
             "passWithNoTests": true
@@ -2068,7 +2112,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "outputs": [
-            "coverage/libs/e-service/professional/senior-teacher-reward"
+            "{workspaceRoot}/coverage/libs/e-service/professional/senior-teacher-reward"
           ],
           "options": {
             "jestConfig": "libs/e-service/professional/senior-teacher-reward/jest.config.ts",
@@ -2096,7 +2140,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "outputs": [
-            "coverage/libs/e-service/professional/teacher-council-reward"
+            "{workspaceRoot}/coverage/libs/e-service/professional/teacher-council-reward"
           ],
           "options": {
             "jestConfig": "libs/e-service/professional/teacher-council-reward/jest.config.ts",
@@ -2124,7 +2168,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "outputs": [
-            "coverage/libs/e-service/professional/thai-teacher-reward"
+            "{workspaceRoot}/coverage/libs/e-service/professional/thai-teacher-reward"
           ],
           "options": {
             "jestConfig": "libs/e-service/professional/thai-teacher-reward/jest.config.ts",
@@ -2151,7 +2195,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/standard/compare-knowledge"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/standard/compare-knowledge"
+          ],
           "options": {
             "jestConfig": "libs/e-service/standard/compare-knowledge/jest.config.ts",
             "passWithNoTests": true
@@ -2363,7 +2409,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/standard/knowledge-cert"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/standard/knowledge-cert"
+          ],
           "options": {
             "jestConfig": "libs/e-service/standard/knowledge-cert/jest.config.ts",
             "passWithNoTests": true
@@ -2389,7 +2437,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/standard/performance-result"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/standard/performance-result"
+          ],
           "options": {
             "jestConfig": "libs/e-service/standard/performance-result/jest.config.ts",
             "passWithNoTests": true
@@ -2415,7 +2465,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/standard/qualification-approve"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/standard/qualification-approve"
+          ],
           "options": {
             "jestConfig": "libs/e-service/standard/qualification-approve/jest.config.ts",
             "passWithNoTests": true
@@ -2441,7 +2493,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/standard/test-result"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/standard/test-result"
+          ],
           "options": {
             "jestConfig": "libs/e-service/standard/test-result/jest.config.ts",
             "passWithNoTests": true
@@ -2809,7 +2863,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/school-service"],
+          "outputs": ["{workspaceRoot}/coverage/apps/school-service"],
           "options": {
             "jestConfig": "apps/school-service/jest.config.ts",
             "passWithNoTests": true
@@ -2956,7 +3010,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/school-service/feature/activity"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/school-service/feature/activity"
+          ],
           "options": {
             "jestConfig": "libs/school-service/feature/activity/jest.config.ts",
             "passWithNoTests": true
@@ -3079,7 +3135,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/school-service/feature/container-page"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/school-service/feature/container-page"
+          ],
           "options": {
             "jestConfig": "libs/school-service/feature/container-page/jest.config.ts",
             "passWithNoTests": true
@@ -3246,7 +3304,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/school-service/feature/forget-password"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/school-service/feature/forget-password"
+          ],
           "options": {
             "jestConfig": "libs/school-service/feature/forget-password/jest.config.ts",
             "passWithNoTests": true
@@ -3361,7 +3421,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/school-service/feature/login"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/school-service/feature/login"
+          ],
           "options": {
             "jestConfig": "libs/school-service/feature/login/jest.config.ts",
             "passWithNoTests": true
@@ -3455,7 +3517,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "outputs": [
-            "coverage/libs/school-service/feature/qualification-approve"
+            "{workspaceRoot}/coverage/libs/school-service/feature/qualification-approve"
           ],
           "options": {
             "jestConfig": "libs/school-service/feature/qualification-approve/jest.config.ts",
@@ -3556,7 +3618,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/school-service/feature/register"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/school-service/feature/register"
+          ],
           "options": {
             "jestConfig": "libs/school-service/feature/register/jest.config.ts",
             "passWithNoTests": true
@@ -3692,7 +3756,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/school-service/feature/request"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/school-service/feature/request"
+          ],
           "options": {
             "jestConfig": "libs/school-service/feature/request/jest.config.ts",
             "passWithNoTests": true
@@ -3826,7 +3892,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/school-service/feature/request-reward"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/school-service/feature/request-reward"
+          ],
           "options": {
             "jestConfig": "libs/school-service/feature/request-reward/jest.config.ts",
             "passWithNoTests": true
@@ -3924,7 +3992,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/school-service/feature/retired"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/school-service/feature/retired"
+          ],
           "options": {
             "jestConfig": "libs/school-service/feature/retired/jest.config.ts",
             "passWithNoTests": true
@@ -4058,7 +4128,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/school-service/feature/school-info"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/school-service/feature/school-info"
+          ],
           "options": {
             "jestConfig": "libs/school-service/feature/school-info/jest.config.ts",
             "passWithNoTests": true
@@ -4485,7 +4557,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/school-service/ui/staff-search"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/school-service/ui/staff-search"
+          ],
           "options": {
             "jestConfig": "libs/school-service/ui/staff-search/jest.config.ts",
             "passWithNoTests": true
@@ -4664,7 +4738,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/self-service"],
+          "outputs": ["{workspaceRoot}/coverage/apps/self-service"],
           "options": {
             "jestConfig": "apps/self-service/jest.config.ts",
             "passWithNoTests": true
@@ -4808,7 +4882,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/dialog"],
+          "outputs": ["{workspaceRoot}/coverage/libs/self-service/dialog"],
           "options": {
             "jestConfig": "libs/self-service/dialog/jest.config.ts",
             "passWithNoTests": true
@@ -4834,7 +4908,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/feature/compare-knowledge"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/self-service/feature/compare-knowledge"
+          ],
           "options": {
             "jestConfig": "libs/self-service/feature/compare-knowledge/jest.config.ts",
             "passWithNoTests": true
@@ -4860,7 +4936,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/feature/home"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/self-service/feature/home"
+          ],
           "options": {
             "jestConfig": "libs/self-service/feature/home/jest.config.ts",
             "passWithNoTests": true
@@ -4943,7 +5021,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/feature/license"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/self-service/feature/license"
+          ],
           "options": {
             "jestConfig": "libs/self-service/feature/license/jest.config.ts",
             "passWithNoTests": true
@@ -5073,7 +5153,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/feature/login"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/self-service/feature/login"
+          ],
           "options": {
             "jestConfig": "libs/self-service/feature/login/jest.config.ts",
             "passWithNoTests": true
@@ -5164,7 +5246,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/feature/master-page"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/self-service/feature/master-page"
+          ],
           "options": {
             "jestConfig": "libs/self-service/feature/master-page/jest.config.ts",
             "passWithNoTests": true
@@ -5338,7 +5422,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/feature/payment"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/self-service/feature/payment"
+          ],
           "options": {
             "jestConfig": "libs/self-service/feature/payment/jest.config.ts",
             "passWithNoTests": true
@@ -5445,7 +5531,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/feature/refund-fee"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/self-service/feature/refund-fee"
+          ],
           "options": {
             "jestConfig": "libs/self-service/feature/refund-fee/jest.config.ts",
             "passWithNoTests": true
@@ -5471,7 +5559,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/feature/register"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/self-service/feature/register"
+          ],
           "options": {
             "jestConfig": "libs/self-service/feature/register/jest.config.ts",
             "passWithNoTests": true
@@ -5628,7 +5718,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/feature/renew-license"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/self-service/feature/renew-license"
+          ],
           "options": {
             "jestConfig": "libs/self-service/feature/renew-license/jest.config.ts",
             "passWithNoTests": true
@@ -5654,7 +5746,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/feature/reward"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/self-service/feature/reward"
+          ],
           "options": {
             "jestConfig": "libs/self-service/feature/reward/jest.config.ts",
             "passWithNoTests": true
@@ -5681,7 +5775,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "outputs": [
-            "coverage/libs/self-service/feature/self-improve-activity"
+            "{workspaceRoot}/coverage/libs/self-service/feature/self-improve-activity"
           ],
           "options": {
             "jestConfig": "libs/self-service/feature/self-improve-activity/jest.config.ts",
@@ -5708,7 +5802,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/feature/substitute-license"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/self-service/feature/substitute-license"
+          ],
           "options": {
             "jestConfig": "libs/self-service/feature/substitute-license/jest.config.ts",
             "passWithNoTests": true
@@ -5734,7 +5830,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/feature/transfer-knowledge"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/self-service/feature/transfer-knowledge"
+          ],
           "options": {
             "jestConfig": "libs/self-service/feature/transfer-knowledge/jest.config.ts",
             "passWithNoTests": true
@@ -5761,7 +5859,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/form"],
+          "outputs": ["{workspaceRoot}/coverage/libs/self-service/form"],
           "options": {
             "jestConfig": "libs/self-service/form/jest.config.ts",
             "passWithNoTests": true
@@ -5952,7 +6050,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/ui"],
+          "outputs": ["{workspaceRoot}/coverage/libs/self-service/ui"],
           "options": {
             "jestConfig": "libs/self-service/ui/jest.config.ts",
             "passWithNoTests": true
@@ -6065,7 +6163,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/assets"],
+          "outputs": ["{workspaceRoot}/coverage/libs/shared/assets"],
           "options": {
             "jestConfig": "libs/shared/assets/jest.config.ts",
             "passWithNoTests": true
@@ -6486,7 +6584,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/degree-cert"],
+          "outputs": ["{workspaceRoot}/coverage/libs/shared/degree-cert"],
           "options": {
             "jestConfig": "libs/shared/degree-cert/jest.config.ts",
             "passWithNoTests": true
@@ -6676,7 +6774,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/dialog"],
+          "outputs": ["{workspaceRoot}/coverage/libs/shared/dialog"],
           "options": {
             "jestConfig": "libs/shared/dialog/jest.config.ts",
             "passWithNoTests": true
@@ -7426,7 +7524,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/form/license"],
+          "outputs": ["{workspaceRoot}/coverage/libs/shared/form/license"],
           "options": {
             "jestConfig": "libs/shared/form/license/jest.config.ts",
             "passWithNoTests": true
@@ -7519,7 +7617,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/form/others"],
+          "outputs": ["{workspaceRoot}/coverage/libs/shared/form/others"],
           "options": {
             "jestConfig": "libs/shared/form/others/jest.config.ts",
             "passWithNoTests": true
@@ -7881,7 +7979,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/form/school/request-reward"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/shared/form/school/request-reward"
+          ],
           "options": {
             "jestConfig": "libs/shared/form/school/request-reward/jest.config.ts",
             "passWithNoTests": true
@@ -7907,7 +8007,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/form/self-activity-form"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/shared/form/self-activity-form"
+          ],
           "options": {
             "jestConfig": "libs/shared/form/self-activity-form/jest.config.ts",
             "passWithNoTests": true
@@ -7934,7 +8036,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "outputs": [
-            "coverage/libs/shared/form/self-renew-license-property-form"
+            "{workspaceRoot}/coverage/libs/shared/form/self-renew-license-property-form"
           ],
           "options": {
             "jestConfig": "libs/shared/form/self-renew-license-property-form/jest.config.ts",
@@ -7961,7 +8063,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/form/self-reward-form"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/shared/form/self-reward-form"
+          ],
           "options": {
             "jestConfig": "libs/shared/form/self-reward-form/jest.config.ts",
             "passWithNoTests": true
@@ -8098,7 +8202,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/form/uni-course-form"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/shared/form/uni-course-form"
+          ],
           "options": {
             "jestConfig": "libs/shared/form/uni-course-form/jest.config.ts",
             "passWithNoTests": true
@@ -8244,7 +8350,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/form/university-select"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/shared/form/university-select"
+          ],
           "options": {
             "jestConfig": "libs/shared/form/university-select/jest.config.ts",
             "passWithNoTests": true
@@ -8441,7 +8549,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/menu"],
+          "outputs": ["{workspaceRoot}/coverage/libs/shared/menu"],
           "options": {
             "jestConfig": "libs/shared/menu/jest.config.ts",
             "passWithNoTests": true
@@ -9116,7 +9224,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/uni-service"],
+          "outputs": ["{workspaceRoot}/coverage/apps/uni-service"],
           "options": {
             "jestConfig": "apps/uni-service/jest.config.ts",
             "passWithNoTests": true
@@ -9263,7 +9371,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/uni-service/dialog"],
+          "outputs": ["{workspaceRoot}/coverage/libs/uni-service/dialog"],
           "options": {
             "jestConfig": "libs/uni-service/dialog/jest.config.ts",
             "passWithNoTests": true
@@ -9396,7 +9504,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/uni-service/feature/degree-cert"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/uni-service/feature/degree-cert"
+          ],
           "options": {
             "jestConfig": "libs/uni-service/feature/degree-cert/jest.config.ts",
             "passWithNoTests": true
@@ -9517,7 +9627,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/uni-service/feature/edit-degree-cert"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/uni-service/feature/edit-degree-cert"
+          ],
           "options": {
             "jestConfig": "libs/uni-service/feature/edit-degree-cert/jest.config.ts",
             "passWithNoTests": true
@@ -9543,7 +9655,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/uni-service/feature/edit-student-list"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/uni-service/feature/edit-student-list"
+          ],
           "options": {
             "jestConfig": "libs/uni-service/feature/edit-student-list/jest.config.ts",
             "passWithNoTests": true
@@ -9570,7 +9684,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/uni-service/feature/foreign-student-id"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/uni-service/feature/foreign-student-id"
+          ],
           "options": {
             "jestConfig": "libs/uni-service/feature/foreign-student-id/jest.config.ts",
             "passWithNoTests": true
@@ -9668,7 +9784,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/uni-service/feature/graduate"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/uni-service/feature/graduate"
+          ],
           "options": {
             "jestConfig": "libs/uni-service/feature/graduate/jest.config.ts",
             "passWithNoTests": true
@@ -9824,7 +9942,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/uni-service/feature/register"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/uni-service/feature/register"
+          ],
           "options": {
             "jestConfig": "libs/uni-service/feature/register/jest.config.ts",
             "passWithNoTests": true
@@ -9949,7 +10069,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/uni-service/feature/retired"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/uni-service/feature/retired"
+          ],
           "options": {
             "jestConfig": "libs/uni-service/feature/retired/jest.config.ts",
             "passWithNoTests": true
@@ -10083,7 +10205,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/uni-service/form"],
+          "outputs": ["{workspaceRoot}/coverage/libs/uni-service/form"],
           "options": {
             "jestConfig": "libs/uni-service/form/jest.config.ts",
             "passWithNoTests": true

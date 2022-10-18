@@ -1,16 +1,14 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { FileGroup, KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
 function checkAllValidator(): any {
   return (form: FormArray) => {
     const checkAll = form.controls.every((item) => !!item.value);
-
     if (!checkAll) {
       return { checkall: true };
     }
-
     return null;
   };
 }
@@ -27,7 +25,7 @@ export class ForeignLicenseStepThreeComponent
 {
   @Input() documentTypes: 'request' | 'renew' = 'request';
   @Input() uniqueTimestamp = '';
-  @Input() attachFiles: any[] = [];
+  @Input() attachFiles: FileGroup[] = [];
 
   override form = this.fb.group({
     checkFiles: this.fb.array([], checkAllValidator()),
@@ -57,7 +55,6 @@ export class ForeignLicenseStepThreeComponent
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
         this.onChange(value);
         this.onTouched();

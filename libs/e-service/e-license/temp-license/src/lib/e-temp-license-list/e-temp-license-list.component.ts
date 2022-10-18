@@ -19,6 +19,8 @@ import {
   checkProcess,
   schoolMapRequestType,
   checkStatus,
+  applyClientFilter,
+  processFilter,
 } from '@ksp/shared/utility';
 
 @Component({
@@ -27,8 +29,9 @@ import {
   styleUrls: ['./e-temp-license-list.component.scss'],
 })
 export class ETempLicenseListComponent implements AfterViewInit {
+  defaultForm = { requesttype: '3', careertype: '1' };
   form = this.fb.group({
-    search: [{ requesttype: '3' }],
+    search: [this.defaultForm],
   });
 
   displayedColumns: string[] = column;
@@ -77,6 +80,9 @@ export class ETempLicenseListComponent implements AfterViewInit {
     this.eRequestService.KspSearchRequest(payload).subscribe((res) => {
       if (res && res.length) {
         this.dataSource.data = res;
+
+        this.dataSource.data = processFilter(res);
+
         this.dataSource.sort = this.sort;
         const sortState: Sort = { active: 'id', direction: 'desc' };
         this.sort.active = sortState.active;
@@ -91,7 +97,7 @@ export class ETempLicenseListComponent implements AfterViewInit {
   clearData() {
     this.dataSource.data = [];
     this.form.reset();
-    this.form.controls.search.patchValue({ requesttype: '3' });
+    this.form.controls.search.patchValue(this.defaultForm);
   }
 
   goToDetail(item: KspRequest) {
