@@ -32,7 +32,13 @@
               />
               <label class="form-label">ระดับวุฒิปริญญา</label>
             </div>
-            <select class="form-select" formControlName="level">
+
+            <!-- manager -->
+            <select
+              class="form-select"
+              formControlName="level"
+              *ngIf="!isSupervision"
+            >
               <option value="null" selected hidden disabled>กรุณาเลือก</option>
               <option value="1">ปริญญาตรี</option>
               <option value="2">ปริญญาโท</option>
@@ -40,6 +46,17 @@
               <option value="4">
                 วุฒิการศึกษาปริญญาอื่นๆที่เทียบเท่าปริญญาตรี / ปริญญาทางการศึกษา
               </option>
+            </select>
+
+            <!-- supervision -->
+            <select
+              class="form-select"
+              formControlName="level"
+              *ngIf="isSupervision"
+            >
+              <option value="null" selected hidden disabled>กรุณาเลือก</option>
+              <option value="1">ปริญญาโท</option>
+              <option value="2">ปริญญาเอก</option>
             </select>
           </div>
         </div>

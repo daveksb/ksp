@@ -1,14 +1,33 @@
 <form [formGroup]="form">
   <div class="box-header">วุฒิปริญญา</div>
   <div class="border rounded px-3 py-2 mb-3">
-    <ksp-renew-license-property-degree-form formControlName="degree"></ksp-renew-license-property-degree-form>
+    <ksp-renew-license-property-degree-form
+      formControlName="degree"
+    ></ksp-renew-license-property-degree-form>
   </div>
 
-  <div class="box-header">วุฒิ ป.บัณฑิตทางการบริหารการศึกษา</div>
+  <div class="box-header" *ngIf="formType === 'sch' && eduType === 'other'">
+    วุฒิ ป.บัณฑิตทางการบริหารสถานศึกษา
+  </div>
+  <div class="box-header" *ngIf="formType === 'edu' && eduType === 'other'">
+    วุฒิ ป.บัณฑิตทางการบริหารการศึกษา
+  </div>
+  <div class="box-header" *ngIf="formType === 'sup'">
+    วุฒิ ป.บัณฑิตทางการศึกษา
+  </div>
+
+  <div class="box-header" *ngIf="formType === 'sch' && eduType === 'bachelor'">
+    วุฒิไม่ต่ำกว่าปริญญาตรีทางการบริหารสถานศึกษา
+  </div>
+  <div class="box-header" *ngIf="formType === 'edu' && eduType === 'bachelor'">
+    วุฒิไม่ต่ำกว่าปริญญาตรีทางการบริหารการศึกษา
+  </div>
+
   <div class="border rounded px-3 py-2">
     <ksp-renew-license-property-degree-form
       [hasGraduateDate]="false"
       [degreeLabel]="'วุฒิการศึกษาที่จบ'"
-      formControlName="managingDegree"></ksp-renew-license-property-degree-form>
+      formControlName="managingDegree"
+    ></ksp-renew-license-property-degree-form>
   </div>
 </form>
