@@ -36,6 +36,7 @@ export class SelfServiceHomePageComponent implements AfterViewInit {
   dataSource = new MatTableDataSource<SelfRequest>();
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  searchNotFound = false;
 
   constructor(
     private router: Router,
@@ -67,6 +68,7 @@ export class SelfServiceHomePageComponent implements AfterViewInit {
     };
     this.requestService.searchMyRequests(payload).subscribe((res) => {
       if (res && res.length) {
+        this.searchNotFound = false;
         this.dataSource.data = res;
         this.dataSource.sort = this.sort;
 
@@ -76,6 +78,7 @@ export class SelfServiceHomePageComponent implements AfterViewInit {
         this.sort.sortChange.emit(sortState);
       } else {
         this.dataSource.data = [];
+        this.searchNotFound = true;
       }
     });
   }
@@ -179,6 +182,7 @@ export class SelfServiceHomePageComponent implements AfterViewInit {
   clear() {
     this.form.reset();
     this.dataSource.data = [];
+    this.searchNotFound = false;
   }
 
   // requestLicense(type: SelfServiceRequestSubType) {

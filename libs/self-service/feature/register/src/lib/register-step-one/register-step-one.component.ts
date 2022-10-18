@@ -77,7 +77,7 @@ export class RegisterStepOneComponent implements OnInit {
 
   nextPage() {
     localForage.setItem('th-register', this.form.value);
-    this.router.navigate(['/register', 'th-step-2']);
+    this.router.navigate(['/register', 'th-step-3']);
   }
 
   provinceChanged(evt: any) {

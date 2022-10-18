@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -11,9 +11,12 @@ import { providerFactory } from '@ksp/shared/utility';
 })
 export class ForeignStepTwoTabFourRenewComponent extends KspFormBaseComponent {
   override form = this.fb.group({
-    licenseNo: ['', Validators.required],
+    /* licenseNo: ['', Validators.required],
     dateOfAdmission: ['', Validators.required],
-    dateOfGraduation: ['', Validators.required],
+    dateOfGraduation: ['', Validators.required], */
+    licenseNo: [''],
+    dateOfAdmission: [''],
+    dateOfGraduation: [''],
   });
 
   constructor(private fb: FormBuilder) {
@@ -26,6 +29,4 @@ export class ForeignStepTwoTabFourRenewComponent extends KspFormBaseComponent {
       })
     );
   }
-
-  ngOnInit(): void {}
 }

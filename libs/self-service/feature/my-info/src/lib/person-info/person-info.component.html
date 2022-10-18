@@ -164,12 +164,16 @@
         </div>
 
         <div class="col-md mb-3">
-          <label class="form-label">เพศ</label>
-          <select class="form-select" formControlName="sex">
+          <label class="form-label">ภูมิลำเนา</label>
+          <select class="form-select" formControlName="province">
             <option value="null" selected hidden disabled>กรุณาเลือก</option>
-            <option value="1">ชาย</option>
-            <option value="2">หญิง</option>
-            <option value="3">อื่นๆ</option>
+
+            <option
+              *ngFor="let province of provinces$ | async"
+              [value]="province?.province_id"
+            >
+              {{ province.province_name }}
+            </option>
           </select>
         </div>
 

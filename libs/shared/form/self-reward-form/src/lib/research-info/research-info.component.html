@@ -55,64 +55,110 @@
   <div class="row">
     <div class="col-md-6 mb-2">
       <label class="form-label required">ชื่อผลงานวิจัย (ภาษาไทย)</label>
-      <input class="form-control" type="text" formControlName="researchNameTh" />
+      <input
+        class="form-control"
+        type="text"
+        formControlName="researchNameTh"
+      />
     </div>
     <div class="col-md-6 mb-2">
       <label class="form-label required">ชื่อผลงานวิจัย (อังกฤษ)</label>
-      <input class="form-control" type="text" formControlName="researchNameEn" />
+      <input
+        class="form-control"
+        type="text"
+        formControlName="researchNameEn"
+      />
     </div>
   </div>
   <div class="row">
     <div class="col-md-6 mb-2-6">
       <label class="form-label required">ปีที่วิจัยเสร็จแล้ว</label>
-      <input class="form-control" type="text" formControlName="researchCompleteYear" />
+      <input
+        class="form-control"
+        type="text"
+        formControlName="researchCompleteYear"
+      />
     </div>
   </div>
   <br />
-  <div class="box-header text-primary">การส่งผลงานวิจัยกับคุรุสภา</div>
+  <div class="box-header text-primary">ประวัติการส่งผลงานวิจัยกับคุรุสภา</div>
   <div class="row">
     <div class="col-md-6 mb-2">
       <label class="form-label required">การส่งผลงานวิจัยกับคุรุสภา</label>
       <select class="form-select" formControlName="researchSubmissionCouncil">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
-        <option value="1">งานวิจัยนี้เป็นผลงานวิจัยที่ไม่เคยส่งเข้ารับการคัดสรรกับคุรุสภา</option>
-        <option value="2">งานวิจัยนี้เป็นผลงานวิจัยที่เคยส่งเข้ารับการคัดสรรกับคุรุสภาซึ่งยังไม่ได้รับรางวัล
-          แต่มีการพัฒนาต่อยอดงานวิจัย</option>
-        <option value="3">งานวิจัยนี้เป็นผลงานวิจัยที่เคยได้รับรางวัลกับคุรุสภา แต่มีการพัฒนาต่อยอดผลงานวิจัย</option>
+        <option value="1">
+          งานวิจัยนี้เป็นผลงานวิจัยที่ไม่เคยส่งเข้ารับการคัดสรรกับคุรุสภา
+        </option>
+        <option value="2">
+          งานวิจัยนี้เป็นผลงานวิจัยที่เคยส่งเข้ารับการคัดสรรกับคุรุสภาซึ่งยังไม่ได้รับรางวัล
+          แต่มีการพัฒนาต่อยอดงานวิจัย
+        </option>
+        <option value="3">
+          งานวิจัยนี้เป็นผลงานวิจัยที่เคยได้รับรางวัลกับคุรุสภา
+          แต่มีการพัฒนาต่อยอดผลงานวิจัย
+        </option>
       </select>
     </div>
     <div class="col-md-6 mb-2">
       <label class="form-label required">ปี พ.ศ.</label>
-      <input class="form-control" type="text" formControlName="researchSubmissionCouncilYear" />
+      <input
+        class="form-control"
+        type="text"
+        formControlName="researchSubmissionCouncilYear"
+      />
     </div>
   </div>
   <br />
   <div class="box-header text-primary required">การส่งผลงานวิจัยกับคุรุสภา</div>
   <div class="d-flex mb-2">
     <div class="d-flex">
-      <input type="radio" class="me-1 mt-1" value="1" formControlName="researchSubmissionCouncil2" />
+      <input
+        type="radio"
+        class="me-1 mt-1"
+        value="1"
+        formControlName="researchSubmissionCouncil2"
+      />
     </div>
-    <label class="form-label">งานวิจัยนี้เป็นผลงานวิจัยที่ไม่เคยส่งเข้ารับการคัดสรรกับคุรุสภา</label>
+    <label class="form-label"
+      >งานวิจัยนี้เป็นผลงานวิจัยที่ไม่เคยส่งเข้ารับการคัดสรรกับคุรุสภา</label
+    >
   </div>
   <div class="d-flex mb-2">
     <div class="d-flex">
-      <input type="radio" class="me-1 mt-1" value="2" formControlName="researchSubmissionCouncil2" />
+      <input
+        type="radio"
+        class="me-1 mt-1"
+        value="2"
+        formControlName="researchSubmissionCouncil2"
+      />
     </div>
-    <label class="form-label">งานวิจัยนี้เป็นผลงานวิจัยที่เคยส่งเข้ารับการคัดสรรกับคุรุสภา
-      ซึ่งยังไม่ได้รับรางวัล แต่มีการพัฒนาต่อยอดงานวิจัย</label>
+    <label class="form-label"
+      >งานวิจัยนี้เป็นผลงานวิจัยที่เคยส่งเข้ารับการคัดสรรกับคุรุสภา
+      ซึ่งยังไม่ได้รับรางวัล แต่มีการพัฒนาต่อยอดงานวิจัย</label
+    >
   </div>
   <div class="d-flex mb-2">
     <div class="d-flex">
-      <input type="radio" class="me-1 mt-1" value="3" formControlName="researchSubmissionCouncil2" />
+      <input
+        type="radio"
+        class="me-1 mt-1"
+        value="3"
+        formControlName="researchSubmissionCouncil2"
+      />
     </div>
-    <label class="form-label">งานวิจัยนี้เป็นผลงานวิจัยที่เคยได้รับรางวัลกับคุรุสภา
-      แต่มีการพัฒนาต่อยอดผลงานวิจัย</label>
+    <label class="form-label"
+      >งานวิจัยนี้เป็นผลงานวิจัยที่เคยได้รับรางวัลกับคุรุสภา
+      แต่มีการพัฒนาต่อยอดผลงานวิจัย</label
+    >
   </div>
   <br />
   <div class="box-header text-primary">การส่งผลงานวิจัยกับหน่วยงานอื่น</div>
   <div class="row">
     <div class="col-md-4 mb-2">
-      <label class="form-label required">ผลงานวิจัยนี้เคยได้รับรางวัลจากหน่วยงานอื่่น</label>
+      <label class="form-label required"
+        >ผลงานวิจัยนี้เคยได้รับรางวัลจากหน่วยงานอื่่น</label
+      >
       <select class="form-select" formControlName="awardFromOthers">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">เคย</option>
@@ -121,18 +167,31 @@
     </div>
     <div class="col-md-4 mb-2">
       <label class="form-label">หน่วยงาน</label>
-      <input class="form-control" type="text" formControlName="awardFromOthersName" />
+      <input
+        class="form-control"
+        type="text"
+        formControlName="awardFromOthersName"
+      />
     </div>
     <div class="col-md-4 mb-2">
       <label class="form-label">ปี พ.ศ.</label>
-      <input class="form-control" type="text" formControlName="awardFromOthersYear" />
+      <input
+        class="form-control"
+        type="text"
+        formControlName="awardFromOthersYear"
+      />
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-4 mb-2">
-      <label class="form-label required">ผลงานวิจัยนอยู่ระหว่างการขอมีหรือขอเลื่อนวิทยฐานะ</label>
-      <select class="form-select" formControlName="inProcessForAcademicStanding">
+      <label class="form-label required"
+        >ผลงานวิจัยนอยู่ระหว่างการขอมีหรือขอเลื่อนวิทยฐานะ</label
+      >
+      <select
+        class="form-select"
+        formControlName="inProcessForAcademicStanding"
+      >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">เคย</option>
         <option value="2">ไม่เคย</option>
@@ -140,17 +199,27 @@
     </div>
     <div class="col-md-4 mb-2">
       <label class="form-label">เสนอขอวิทยฐานะระดับ</label>
-      <input class="form-control" type="text" formControlName="academicStandingLevel" />
+      <input
+        class="form-control"
+        type="text"
+        formControlName="academicStandingLevel"
+      />
     </div>
     <div class="col-md-4 mb-2">
       <label class="form-label">ปี พ.ศ.</label>
-      <input class="form-control" type="text" formControlName="academicStandingYear" />
+      <input
+        class="form-control"
+        type="text"
+        formControlName="academicStandingYear"
+      />
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-4 mb-2">
-      <label class="form-label required">ผลงานวิจัยนได้รับทุนอุดหนุนการวิจัยจากคุรุสภาหรือหน่วยงานอื่น</label>
+      <label class="form-label required"
+        >ผลงานวิจัยนได้รับทุนอุดหนุนการวิจัยจากคุรุสภาหรือหน่วยงานอื่น</label
+      >
       <select class="form-select" formControlName="grantResearchFund">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">เคย</option>
@@ -159,11 +228,19 @@
     </div>
     <div class="col-md-4 mb-2">
       <label class="form-label">หน่วยงาน</label>
-      <input class="form-control" type="text" formControlName="grantResearchFundFrom" />
+      <input
+        class="form-control"
+        type="text"
+        formControlName="grantResearchFundFrom"
+      />
     </div>
     <div class="col-md-4 mb-2">
       <label class="form-label">ปี พ.ศ.</label>
-      <input class="form-control" type="text" formControlName="grantResearchFundYear" />
+      <input
+        class="form-control"
+        type="text"
+        formControlName="grantResearchFundYear"
+      />
     </div>
   </div>
 </form>
