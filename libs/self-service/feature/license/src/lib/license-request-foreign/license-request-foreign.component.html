@@ -1,11 +1,13 @@
-<ksp-top-nav [isSelfService]="true"><span header>TEACHING LICENSE APPLICATION FORM</span>
+<ksp-top-nav [isSelfService]="true"
+  ><span header>TEACHING LICENSE APPLICATION FORM</span>
 </ksp-top-nav>
 
 <div class="main__container py-2 px-4">
   <self-service-request-status
     [headerLabel1]="'Issue Date'"
     [headerLabel2]="'Form ID'"
-    [title]="'TEACHING LICENSE APPLICATION FORM'"></self-service-request-status>
+    [title]="'TEACHING LICENSE APPLICATION FORM'"
+  ></self-service-request-status>
 
   <br />
   <div class="box-header text-center">
@@ -17,10 +19,13 @@
       labelPosition="bottom"
       [animationDuration]="'0'"
       [selectedIndex]="0"
-      #stepper>
+      #stepper
+    >
       <mat-step [completed]="false">
         <ng-template matStepLabel>Check Documentation </ng-template>
-        <self-service-foreign-license-step-one formControlName="foreignCheckDocument">
+        <self-service-foreign-license-step-one
+          formControlName="foreignCheckDocument"
+        >
         </self-service-foreign-license-step-one>
       </mat-step>
 
@@ -35,7 +40,8 @@
           [academicFiles]="academicFiles"
           [uniqueTimestamp]="uniqueTimestamp"
           [eduInfo]="eduInfo"
-          [myImage]="myImage"></self-service-foreign-license-step-two>
+          [myImage]="myImage"
+        ></self-service-foreign-license-step-two>
       </mat-step>
 
       <mat-step [completed]="false">
@@ -43,7 +49,8 @@
         <self-service-foreign-license-step-three
           formControlName="foreignSelectUpload"
           [uniqueTimestamp]="uniqueTimestamp"
-          [attachFiles]="documentFiles">
+          [attachFiles]="documentFiles"
+        >
         </self-service-foreign-license-step-three>
       </mat-step>
 
@@ -51,7 +58,8 @@
         <ng-template matStepLabel>Personal Declaration</ng-template>
         <self-service-foreign-license-step-four
           [personalDeclaration]="personalDeclaration"
-          formControlName="personalDeclaration">
+          formControlName="personalDeclaration"
+        >
         </self-service-foreign-license-step-four>
       </mat-step>
     </mat-stepper>
@@ -64,10 +72,16 @@
         type="button"
         *ngIf="requestId"
         (click)="onCancelRequest()"
-        class="ms-3 btn border-primary text-primary bg-white">
+        class="ms-3 btn border-primary text-primary bg-white"
+      >
         Cancel Request
       </button>
-      <button type="button" (click)="save()" class="ms-3 btn btn-primary" [disabled]="!form.valid">
+      <button
+        type="button"
+        (click)="save()"
+        class="ms-3 btn btn-primary"
+        [disabled]="personalDetail.invalid"
+      >
         Save (Draft)
       </button>
     </div>

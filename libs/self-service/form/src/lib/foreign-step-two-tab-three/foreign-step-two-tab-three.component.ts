@@ -7,7 +7,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { Country, KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { AddRowButtonComponent } from '@ksp/shared/ui';
 
@@ -28,7 +28,7 @@ export class ForeignStepTwoTabThreeComponent
   extends KspFormBaseComponent
   implements OnInit
 {
-  @Input() countries: any[] = [];
+  @Input() countries: Country[] | null = [];
 
   override form = this.fb.group({
     licenseInfo1: this.fb.array([]),

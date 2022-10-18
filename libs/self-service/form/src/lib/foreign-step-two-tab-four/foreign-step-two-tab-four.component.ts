@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { Country, KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -19,7 +19,7 @@ export class ForeignStepTwoTabFourComponent
   extends KspFormBaseComponent
   implements OnInit
 {
-  @Input() countryList: any[] = [];
+  @Input() countryList: Country[] | null = [];
 
   override form = this.fb.group({
     hasLicense: ['', Validators.required],

@@ -5,6 +5,7 @@ import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { nameEnPattern } from '@ksp/shared/utility';
 import {
+  Country,
   FileGroup,
   KspFormBaseComponent,
   Prefix,
@@ -86,8 +87,8 @@ export class ForeignLicenseStepTwoComponent
   district2$!: Observable<any>;
   subDistrict2$!: Observable<any>;
   nationalitys$!: Observable<any>;
-  countries$!: Observable<any>;
-  countries2$!: Observable<any>;
+  countries$!: Observable<Country[]>;
+  countries2$!: Observable<Country[]>;
   age = '';
 
   override form = this.fb.group({

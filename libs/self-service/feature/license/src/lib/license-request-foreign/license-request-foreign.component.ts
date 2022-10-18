@@ -67,6 +67,13 @@ export class LicenseRequestForeignComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkRequestId();
+    this.personalDetail.valueChanges.subscribe((res) => {
+      console.log('valid = ', this.personalDetail.valid);
+    });
+  }
+
+  get personalDetail() {
+    return this.form.controls.personalDetail;
   }
 
   checkRequestId() {
