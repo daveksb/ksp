@@ -47,6 +47,7 @@ export class FormForeignIdComponent
     this.form.controls['workphone'].clearValidators();
     this.form.controls['position'].clearValidators();
     this.form.controls['nationality'].clearValidators();
+    this.form.controls['kuruspano'].clearValidators();
   }
 
   prefixChanged(evt: any) {

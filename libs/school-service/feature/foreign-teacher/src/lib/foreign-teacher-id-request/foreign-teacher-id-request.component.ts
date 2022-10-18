@@ -201,7 +201,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             userInfo.requesttype = '4';
             userInfo.careertype = '5';
             userInfo.schoolid = this.schoolId;
-            userInfo.process = `1`;
+            userInfo.process = `2`;
             userInfo.status = `1`;
             userInfo.birthdate = changeDate(userInfo.birthdate);
             userInfo.passportstartdate = changeDate(userInfo.passportstartdate);
@@ -210,6 +210,10 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             userInfo.visaclass = visaform?.visaclass;
             userInfo.visatype = visaform?.visatype;
             userInfo.visaexpiredate = changeDate(visaform?.visaexpiredate);
+            userInfo.bureauname = this.bureauName;
+            userInfo.schoolid = this.schoolId;
+            userInfo.schoolname = this.schoolName;
+            userInfo.schooladdress = this.address;
             userInfo.fileinfo = JSON.stringify(
               mapMultiFileInfo(this.foreignFiles)
             );

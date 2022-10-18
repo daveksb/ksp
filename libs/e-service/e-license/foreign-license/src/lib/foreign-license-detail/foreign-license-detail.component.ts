@@ -36,6 +36,10 @@ export class ForeignLicenseDetailComponent implements OnInit {
   requestData: any;
   requestId!: number;
   requestSubType = SchoolRequestSubType.อื่นๆ;
+  bureauName = '';
+  schoolId = '';
+  schoolName = '';
+  address = '';
 
   form = this.fb.group({
     foreignTeacherInfo: [],
@@ -71,6 +75,10 @@ export class ForeignLicenseDetailComponent implements OnInit {
     this.eRequestService.getKspRequestById(id).subscribe((res: any) => {
       this.requestData = res;
       this.requestNo = res.requestno;
+      this.bureauName = res?.bureauname ?? '';
+      this.schoolId = res?.schoolid ?? '';
+      this.schoolName = res?.schoolname ?? '';
+      this.address = res?.schooladdress ?? '';
       //this.currentProcess = +res.currentprocess;
       //console.log('current process = ', this.currentProcess);
       this.pathUserInfo(res);
@@ -135,7 +143,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
             const data = this.form.controls.verifydetail.value as any;
             const payload: KspApprovePayload = {
               requestid: String(this.requestId),
-              process: '3',
+              process: '2',
               status: data.result,
               detail: data.detail,
               systemtype: '2', // school

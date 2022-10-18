@@ -95,7 +95,7 @@
     [showCenterButtons]="true"
     [showCancelButton]="showCancelButton"
     [showSaveButton]="mode !== 'view'"
-    [disableSaveButton]="false"
+    [disableSaveButton]="formValid"
     (cancelClicked)="cancel()"
     (saveClicked)="confirmDialog()"
     [saveButtonLabel]="'บันทึกและยื่นอนุมัติ'"
