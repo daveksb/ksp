@@ -1,64 +1,64 @@
 <form [formGroup]="form">
   <div class="row">
-    <div class="col-5 mb-3">
+    <div class="col-5 mb-3 border-end">
       <label class="form-label"
         >สถานะของอาจารย์ที่ปรึกษาวิทยานิพนธ์ (กรุณาเลือก)
       </label>
       <div class="row">
         <div class="col">
-          <div class="form-control">
-            <div class="d-flex align-items-center">
-              <input
-                type="radio"
-                class="me-2"
-                [value]="1"
-                formControlName="advisorStatus"
-              />
-              <label class="fs-5"> ที่ปรึกษาหลัก </label>
+          <div class="d-flex align-items-center">
+            <input
+              type="radio"
+              class="radio"
+              [value]="1"
+              formControlName="advisorStatus"
+            />
+            <div class="form-control">
+              <label class="ms-4"> ที่ปรึกษาหลัก </label>
             </div>
           </div>
         </div>
         <div class="col">
-          <div class="form-control">
-            <div class="d-flex align-items-center">
-              <input
-                type="radio"
-                class="me-2"
-                [value]="2"
-                formControlName="advisorStatus"
-              />
-              <label class="fs-5"> ที่ปรึกษาร่วม </label>
+          <div class="d-flex align-items-center">
+            <input
+              type="radio"
+              class="radio"
+              [value]="2"
+              formControlName="advisorStatus"
+            />
+            <div class="form-control">
+              <label class="ms-4"> ที่ปรึกษาร่วม </label>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-5 mb-3">
+    <div class="col-5 mb-3 border-start">
       <label class="form-label">ประเภทที่ปรึกษา (กรุณาเลือก) </label>
       <div class="row">
         <div class="col">
-          <div class="form-control">
-            <div class="d-flex align-items-center">
-              <input
-                type="radio"
-                class="me-2"
-                [value]="1"
-                formControlName="advisorType"
-              />
-              <label class="fs-5"> เป็นที่ปรึกษาวิทยานิพนธ์ </label>
+          <div class="d-flex align-items-center">
+            <input
+              type="radio"
+              class="radio"
+              [value]="1"
+              formControlName="advisorType"
+            />
+            <div class="form-control">
+              <label class="ms-4"> เป็นที่ปรึกษาวิทยานิพนธ์ </label>
             </div>
           </div>
         </div>
         <div class="col">
-          <div class="form-control">
-            <div class="d-flex align-items-center">
-              <input
-                type="radio"
-                class="me-2"
-                [value]="2"
-                formControlName="advisorType"
-              />
-              <label class="fs-5"> เป็นที่ปรึกษาค้นคว้าอิสระ </label>
+          <div class="d-flex align-items-center">
+            <input
+              type="radio"
+              class="radio"
+              [value]="2"
+              formControlName="advisorType"
+            />
+            <div class="form-control">
+              <label class="ms-4"> เป็นที่ปรึกษาค้นคว้าอิสระ </label>
             </div>
           </div>
         </div>
@@ -66,14 +66,18 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-2 mb-3">
-      <label class="form-label">จำนวนนักศึกษาที่ดูแล (คน) </label>
-      <input
-        formControlName="studentNumber"
-        placeholder="กรอกเฉพาะตัวเลข"
-        class="form-control"
-        type="text"
-      />
+    <div class="col-5 mb-3">
+      <div class="row">
+        <div class="col-6">
+          <label class="form-label">จำนวนนักศึกษาที่ดูแล (คน) </label>
+          <input
+            formControlName="studentNumber"
+            placeholder="กรอกเฉพาะตัวเลข"
+            class="form-control"
+            type="text"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </form>

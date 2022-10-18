@@ -1,4 +1,4 @@
-import { getCookie } from '@ksp/shared/utility';
+import { getCookie, stringToThaiDate, thaiDate } from '@ksp/shared/utility';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
@@ -113,8 +113,8 @@ export class UniHomeComponent extends KspPaginationComponent implements OnInit {
         );
 
         const approveDate = row?.createdate
-          ? moment(row?.createdate).format('DD/MM/YYYY')
-          : '-';
+          ? thaiDate(new Date(row?.createdate))
+          : '';
         const { major, branch } = await this.uniInfoService.getMajorAndBranch(
           row
         );
@@ -146,13 +146,13 @@ export class UniHomeComponent extends KspPaginationComponent implements OnInit {
     });
   }
   getAll() {
-    if(getCookie('uniType')){
+    if (getCookie('uniType')) {
       this.uniInfoService
-      .getUniversity(getCookie('uniType'))
-      .pipe(mapOption())
-      .subscribe((res) => {
-        this.universities = res;
-      });
+        .getUniversity(getCookie('uniType'))
+        .pipe(mapOption())
+        .subscribe((res) => {
+          this.universities = res;
+        });
     }
     this.uniInfoService
       .getUniversityType()

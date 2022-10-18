@@ -19,8 +19,8 @@ import { EMPTY, Observable, switchMap } from 'rxjs';
 import {
   AddressService,
   GeneralInfoService,
-  RequestService,
   SchoolInfoService,
+  SchoolRequestService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import {
@@ -64,7 +64,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
-    private requestService: RequestService,
+    private requestService: SchoolRequestService,
     private schoolInfoService: SchoolInfoService
   ) {}
 

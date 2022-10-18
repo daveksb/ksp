@@ -24,6 +24,7 @@ export class FormForeignIdComponent
 
   today = new Date();
   @Input() formHeader = 'ข้อมูลครูชาวต่างชาติ';
+  @Input() passportLabel = 'หมายเลขหนังสือเดินทาง (Passport Number)';
   @Input() prefixList: any;
   @Input() countries: any;
 

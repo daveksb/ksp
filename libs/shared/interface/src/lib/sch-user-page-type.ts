@@ -1,4 +1,4 @@
-export enum SchoolServiceUserPageType {
-  ApproveNewUser,
-  ManageCurrentUser,
+export enum SchoolUserPageType {
+  NewUser,
+  CurrentUser,
 }

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -10,7 +11,12 @@ import { providerFactory } from '@ksp/shared/utility';
   templateUrl: './final-result-info.component.html',
   styleUrls: ['./final-result-info.component.scss'],
   standalone: true,
-  imports: [CommonModule, MatIconModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+  ],
   providers: providerFactory(FinalResultInfoComponent),
 })
 export class FinalResultInfoComponent extends KspFormBaseComponent {

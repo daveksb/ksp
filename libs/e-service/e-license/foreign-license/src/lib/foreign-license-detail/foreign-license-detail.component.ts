@@ -1,20 +1,20 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormMode } from '@ksp/shared/interface';
+import { FormMode, KspApprovePayload } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { FormBuilder } from '@angular/forms';
-import { parseJson, thaiDate } from '@ksp/shared/utility';
+import { formatDate, thaiDate } from '@ksp/shared/utility';
 import { SchoolRequestSubType } from '@ksp/shared/constant';
 import {
   AddressService,
   ERequestService,
   GeneralInfoService,
 } from '@ksp/shared/service';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable, switchMap } from 'rxjs';
 
 @Component({
   selector: 'ksp-foreign-license-detail',
@@ -29,7 +29,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
   today = thaiDate(new Date());
   prefixList$!: Observable<any>;
   countries$!: Observable<any>;
-
+  visaTypeList$!: Observable<any>;
   verifyChoice = verifyChoices;
   evidenceFile = evidenceFiles;
   requestNo = '';
@@ -40,6 +40,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
   form = this.fb.group({
     foreignTeacherInfo: [],
     foreignVisaInfo: [],
+    verifydetail: [],
   });
 
   constructor(
@@ -67,7 +68,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
   }
 
   loadRequestFromId(id: number) {
-    this.eRequestService.getRequestById(id).subscribe((res: any) => {
+    this.eRequestService.getKspRequestById(id).subscribe((res: any) => {
       this.requestData = res;
       this.requestNo = res.requestno;
       //this.currentProcess = +res.currentprocess;
@@ -80,25 +81,38 @@ export class ForeignLicenseDetailComponent implements OnInit {
     data.birthdate = data.birthdate.split('T')[0];
 
     if (this.requestSubType === SchoolRequestSubType.อื่นๆ) {
-      data.passportstartdate = data.passportstartdate.split('T')[0];
-      data.passportenddate = data.passportenddate.split('T')[0];
-      //console.log('data = ', data);
-      if (data?.visainfo) {
-        const visa = parseJson(data?.visainfo);
-        data.visaclass = visa.visaclass;
-        data.visatype = visa.visatype;
-        data.visaenddate = visa.visaenddate;
-      }
-      //console.log('data = ', data);
+      data.birthdate = formatDate(data.birthdate);
+      data.passportstartdate = formatDate(data.passportstartdate);
+      data.passportenddate = formatDate(data.passportenddate);
+      data.visaexpiredate = formatDate(data.visaexpiredate);
     }
-
+    const fileinfo = JSON.parse(atob(data?.fileinfo || ''));
+    if (fileinfo) {
+      this.evidenceFile.forEach(
+        (group, index) => (group.files = fileinfo[index])
+      );
+    }
     this.form.controls.foreignTeacherInfo.patchValue(data);
     this.form.controls.foreignVisaInfo.patchValue(data);
   }
 
   getList() {
+    // this.schoolInfoService
+    //   .getSchoolInfo(this.schoolId)
+    //   .pipe(untilDestroyed(this))
+    //   .subscribe((res) => {
+    //     this.schoolName = res.schoolName;
+    //     this.bureauName = res.bureauName;
+    //     this.address = `บ้านเลขที่ ${res.address} ซอย ${
+    //       res?.street ?? ''
+    //     } หมู่ ${res?.moo ?? ''} ถนน ${res?.road ?? ''} ตำบล ${
+    //       res.tumbon
+    //     } อำเภอ ${res.amphurName} จังหวัด ${res.provinceName}`;
+    //   });
+
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.countries$ = this.addressService.getCountry();
+    this.visaTypeList$ = this.generalInfoService.getVisaType();
   }
 
   cancel() {
@@ -114,11 +128,32 @@ export class ForeignLicenseDetailComponent implements OnInit {
       },
     });
 
-    confirmDialog.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        this.onCompleted();
-      }
-    });
+    confirmDialog.componentInstance.confirmed
+      .pipe(
+        switchMap((res) => {
+          console.log(res);
+          if (res) {
+            const data = this.form.controls.verifydetail.value as any;
+            const payload: KspApprovePayload = {
+              requestid: this.requestNo,
+              process: '3',
+              status: data.value,
+              detail: data.detail,
+              systemtype: '2', // school
+              userid: null,
+              paymentstatus: null,
+            };
+
+            return this.eRequestService.KspApproveRequest(payload);
+          }
+          return EMPTY;
+        })
+      )
+      .subscribe((res) => {
+        if (res) {
+          this.onCompleted();
+        }
+      });
   }
 
   onCompleted() {
@@ -140,7 +175,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
 const evidenceFiles = [
   {
     name: '1.สำเนาสัญญาจ้าง',
-    fileid: '',
+    files: [],
   },
 ];
 

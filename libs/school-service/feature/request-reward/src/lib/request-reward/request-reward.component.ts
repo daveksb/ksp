@@ -17,8 +17,8 @@ import {
 } from '@ksp/shared/interface';
 import {
   GeneralInfoService,
-  RequestService,
   SchoolInfoService,
+  SchoolRequestService,
 } from '@ksp/shared/service';
 import { mapFileInfo, parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
@@ -56,7 +56,7 @@ export class RequestRewardComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private requestService: RequestService,
+    private requestService: SchoolRequestService,
     private schoolInfoService: SchoolInfoService,
     private generalInfoService: GeneralInfoService
   ) {}

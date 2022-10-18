@@ -21,4 +21,7 @@ export class SchUser {
   schuserenddate: string | null = null;
   schusername?: string | null = null;
   schuserstartdate: string | null = null;
+
+  updatedate?: string | null = null;
+  requestid?: string | null = null;
 }

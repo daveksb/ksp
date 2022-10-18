@@ -13,7 +13,7 @@
       <div class="mb-3">
         <ksp-school-request-search
           formControlName="search"
-          [disableRequestType]="false"
+          [disableRequestType]="true"
           [requestTypeList]="requestTypeList"
           (clear)="clear()"
           (search)="search($event)"
@@ -142,17 +142,14 @@
           <ng-container matColumnDef="currentprocess">
             <th mat-header-cell *matHeaderCellDef>ขั้นตอนการดำเนินการ</th>
             <td mat-cell *matCellDef="let element">
-              {{ checkProcess(+element.currentprocess)?.processName }}
+              {{ checkProcess(+element.process)?.processName }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="requeststatus">
             <th mat-header-cell *matHeaderCellDef>สถานะ</th>
             <td mat-cell *matCellDef="let element">
-              {{
-                checkStatus(+element.currentprocess, +element.requeststatus)
-                  ?.ename
-              }}
+              {{ checkStatus(+element.process, +element.status)?.ename }}
             </td>
           </ng-container>
 

@@ -12,8 +12,7 @@
     </div>
     <div class="bg-white py-3 px-4">
       <ksp-request-header-info
-        [requestDate]="'10 ตุลาคม 2565'"
-        [requestNumber]="'112234467876543'"
+        [requestNumber]="requestNumber"
       ></ksp-request-header-info>
       <hr />
       <div class="px-3">
@@ -53,13 +52,18 @@
       <ksp-form-foreign-id
         formControlName="foreignStudent"
         [formHeader]="'ข้อมูลนักศึกษาชาวต่างชาติ'"
+        [passportLabel]="'หมายเลขหนังสือเดินทาง (Passport Number) / G-Code'"
         [prefixList]="prefixList$ | async"
         [countries]="countries$ | async"
-      ></ksp-form-foreign-id>
+      >
+        <ksp-form-visa-info
+          [mode]="mode"
+          [visaTypeList]="visaTypeList$ | async"
+          formControlName="visainfo"
+        ></ksp-form-visa-info>
+      </ksp-form-foreign-id>
 
-      <div class="mt-3 mb-3"><hr /></div>
-
-      <div class="form__upload">
+      <div class="form__upload mt-3">
         <ksp-form-attachment
           [title]="'กรุณาแนบหลักฐานประกอบการปฏิบัติงาน '"
           [groups]="foreignInfo"

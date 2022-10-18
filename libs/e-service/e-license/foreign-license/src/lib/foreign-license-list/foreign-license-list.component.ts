@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
@@ -19,7 +20,7 @@ import {
 })
 export class ForeignLicenseListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-
+  @ViewChild(MatSort) sort!: MatSort;
   form = this.fb.group({
     search: [{ requesttype: '4' }],
   });
@@ -43,6 +44,7 @@ export class ForeignLicenseListComponent implements AfterViewInit {
   }
 
   search(params: any) {
+    console.log(params);
     //console.log('params = ', params);
     const payload: EsSearchPayload = {
       systemtype: '2',
@@ -60,12 +62,17 @@ export class ForeignLicenseListComponent implements AfterViewInit {
       requestdatefrom: null,
       requestdateto: null,
       offset: '0',
-      row: '500',
+      row: '25',
     };
 
-    this.eRequestService.EsSearchRequest(payload).subscribe((res) => {
-      if (res) {
+    this.eRequestService.KspSearchRequest(payload).subscribe((res) => {
+      if (res && res.length) {
         this.dataSource.data = res;
+        this.dataSource.sort = this.sort;
+        const sortState: Sort = { active: 'id', direction: 'desc' };
+        this.sort.active = sortState.active;
+        this.sort.direction = sortState.direction;
+        this.sort.sortChange.emit(sortState);
       } else {
         this.clear();
       }

@@ -14,7 +14,7 @@ import {
   SchInfo,
   SchUser,
 } from '@ksp/shared/interface';
-import { GeneralInfoService, RequestService } from '@ksp/shared/service';
+import { GeneralInfoService, SchoolRequestService } from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
 import localForage from 'localforage';
 import { EMPTY, Observable, switchMap } from 'rxjs';
@@ -44,7 +44,7 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
     public dialog: MatDialog,
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService,
-    private requestService: RequestService
+    private requestService: SchoolRequestService
   ) {}
 
   ngOnInit() {

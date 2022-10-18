@@ -8,7 +8,7 @@ import {
   EsSearchPayload,
   KspRequest,
   RequestSearchFilter,
-  SchoolServiceUserPageType,
+  SchoolUserPageType,
 } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import {
@@ -91,7 +91,7 @@ export class ApproveNewUserListComponent implements AfterViewInit {
 
   goToDetail(id: number) {
     this.router.navigate(['school', 'user-detail', id], {
-      queryParams: { type: SchoolServiceUserPageType.ApproveNewUser },
+      queryParams: { type: SchoolUserPageType.NewUser },
     });
   }
 }

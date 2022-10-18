@@ -4,14 +4,22 @@
 </ksp-top-nav>
 
 <div [formGroup]="form" class="bg-secondary bg-opacity-10 px-4 py-2">
-  <div class="box-header">รายละเอียดใบคำขอ</div>
+  <div *ngIf="pageType === pageTypeEnum.NewUser" class="box-header">
+    รายละเอียดใบคำขอ
+  </div>
+  <div *ngIf="pageType === pageTypeEnum.CurrentUser" class="box-header">
+    ข้อมูลผู้ใช้งานระบบ
+  </div>
 
   <div class="bg-white p-3">
-    <ksp-request-header-info
-      [requestDate]="requestData.requestdate"
-      [requestNumber]="requestData.requestno"
-    ></ksp-request-header-info>
-    <hr />
+    <ng-container *ngIf="pageType === pageTypeEnum.NewUser">
+      <ksp-request-header-info
+        [requestDate]="requestData.requestdate"
+        [requestNumber]="requestData.requestno"
+      ></ksp-request-header-info>
+      <hr />
+    </ng-container>
+
     <div class="px-4 py-2">
       <div class="row">
         <div class="col mb-2">
@@ -47,7 +55,7 @@
         </div>
       </div>
 
-      <div class="row" *ngIf="pageType === 0">
+      <div class="row" *ngIf="pageType === pageTypeEnum.NewUser">
         <div class="col-6 mb-2">
           <label class="form-label">ประเภทใบคำขอ</label>
           <input
@@ -59,7 +67,10 @@
         </div>
       </div>
 
-      <div class="d-flex justify-content-end" *ngIf="pageType === 0">
+      <div
+        class="d-flex justify-content-end"
+        *ngIf="pageType === pageTypeEnum.NewUser"
+      >
         <label
           class="text-primary form-label text-decoration-underline"
           role="button"
