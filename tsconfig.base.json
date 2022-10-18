@@ -16,8 +16,6 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ksp/e-service/ethics/form": ["libs/e-service/ethics/form/src/index.ts"],
-      "@ksp/e-service/fee-refund": ["libs/e-service/fee-refund/src/index.ts"],
       "@ksp/e-service/dialog/accusation-search": [
         "libs/e-service/dialog/accusation-search/src/index.ts"
       ],
@@ -72,6 +70,7 @@
       "@ksp/e-service/ethics/accusation": [
         "libs/e-service/ethics/accusation/src/index.ts"
       ],
+      "@ksp/e-service/ethics/form": ["libs/e-service/ethics/form/src/index.ts"],
       "@ksp/e-service/ethics/inquiry": [
         "libs/e-service/ethics/inquiry/src/index.ts"
       ],
@@ -90,6 +89,7 @@
       "@ksp/e-service/feature/login": [
         "libs/e-service/feature/login/src/index.ts"
       ],
+      "@ksp/e-service/fee-refund": ["libs/e-service/fee-refund/src/index.ts"],
       "@ksp/e-service/professional/best-teacher-reward": [
         "libs/e-service/professional/best-teacher-reward/src/index.ts"
       ],
