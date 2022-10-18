@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SchoolServiceUserPageType } from '@ksp/shared/interface';
+import { SchoolUserPageType } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -140,9 +140,9 @@ export class UserDetailComponent implements OnInit {
   }
 
   cancel() {
-    if (this.pageType === SchoolServiceUserPageType.ApproveNewUser) {
+    if (this.pageType === SchoolUserPageType.NewUser) {
       this.router.navigate(['/approve-new-user']);
-    } else if (this.pageType === SchoolServiceUserPageType.ManageCurrentUser) {
+    } else if (this.pageType === SchoolUserPageType.CurrentUser) {
       this.router.navigate(['/manage-current-user']);
     }
   }
@@ -175,11 +175,9 @@ export class UserDetailComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        if (this.pageType === SchoolServiceUserPageType.ApproveNewUser) {
+        if (this.pageType === SchoolUserPageType.NewUser) {
           this.router.navigate(['/approve-new-user', 'list']);
-        } else if (
-          this.pageType === SchoolServiceUserPageType.ManageCurrentUser
-        ) {
+        } else if (this.pageType === SchoolUserPageType.CurrentUser) {
           this.router.navigate(['/manage-current-user', 'list']);
         }
       }
