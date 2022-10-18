@@ -10,16 +10,16 @@
   <div class="box-header">รายละเอียดใบคำขอหนังสืออนุญาตประกอบวิชาชีพ</div>
   <div class="bg-white p-3">
     <div class="d-flex justify-content-between">
-      <ksp-request-header-info></ksp-request-header-info>
-      <!-- <ksp-request-header-info
-      [requestDate]="saveData.requestData.requestdate"
-      [requestNumber]="saveData.requestData.requestno"
-    ></ksp-request-header-info> -->
+      <ksp-request-header-info
+        [requestDate]="saveData.requestData.requestdate"
+        [requestNumber]="saveData.requestData.requestno"
+      ></ksp-request-header-info>
     </div>
 
     <ksp-approve-ksp-request
-      [requestType]="3"
-      [process]="3"
+      [requestType]="saveData.requestData.requesttype"
+      [process]="saveData.requestData.process"
+      (selectResult)="selectResult = $event"
     ></ksp-approve-ksp-request>
   </div>
 </div>

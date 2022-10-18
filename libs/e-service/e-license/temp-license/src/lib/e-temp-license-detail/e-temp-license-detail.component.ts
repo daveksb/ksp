@@ -25,9 +25,9 @@ import {
   Tambol,
 } from '@ksp/shared/interface';
 
-export interface KspApprovePersistData {
-  checkDetail: any;
-  requestData: KspRequest;
+export class KspApprovePersistData {
+  checkDetail: any = null;
+  requestData: KspRequest = new KspRequest();
 }
 @UntilDestroy()
 @Component({
