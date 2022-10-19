@@ -1,11 +1,6 @@
 <form [formGroup]="form">
   <div class="d-flex align-items-center mb-2">
-    <input
-      type="radio"
-      value="1"
-      class="me-2"
-      formControlName="isAcademicChecked"
-    />
+    <input type="checkbox" class="me-2" formControlName="isAcademicChecked" />
     <label class="form-label"
       ><span *ngIf="!isForeignForm">เลื่อนวิทยฐานะ</span>
       <span *ngIf="isForeignForm"
@@ -90,10 +85,9 @@
   <div class="d-flex mb-2">
     <div class="d-flex">
       <input
-        type="radio"
-        value="2"
+        type="checkbox"
         class="me-2 mt-1"
-        formControlName="isAcademicChecked"
+        formControlName="isPendingAcademicChecked"
       />
     </div>
     <label class="form-label"
