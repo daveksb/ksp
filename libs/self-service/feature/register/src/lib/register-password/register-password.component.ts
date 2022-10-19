@@ -15,10 +15,10 @@ import { formatDatePayload, validatorMessages } from '@ksp/shared/utility';
 
 @Component({
   selector: 'self-service-register-step-three',
-  templateUrl: './register-step-three.component.html',
-  styleUrls: ['./register-step-three.component.scss'],
+  templateUrl: './register-password.component.html',
+  styleUrls: ['./register-password.component.scss'],
 })
-export class RegisterStepThreeComponent implements OnInit {
+export class RegisterPasswordComponent implements OnInit {
   form = this.fb.group(
     {
       password: [null, [Validators.required, Validators.minLength(6)]],
@@ -42,24 +42,35 @@ export class RegisterStepThreeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.validatePassword();
+    this.loadStorage();
+  }
+
+  loadStorage() {
+    localForage.getItem('th-register').then((res: any) => {
+      console.log('res = ', res);
+      this.idCardNo = res.idcardno;
+      this.myInfo = { ...res, ...this.form.value };
+      //this.myInfo.username = res.idcardno;
+      this.myInfo.idcardno = res.idcardno;
+      this.myInfo.username = res.idcardno;
+
+      this.myInfo.isactive = '1';
+      this.myInfo.uniquetimestamp = res.uniquetimestamp;
+      this.myInfo.usertype = '1'; // ชาวไทย
+      this.myInfo.prefixth = res.prefixth;
+      this.myInfo.prefixen = res.prefixen;
+      this.myInfo.sex = res.sex;
+    });
+  }
+
+  validatePassword() {
     this.form.controls.confirmPassword.valueChanges.subscribe((res) => {
       if (res === this.form.controls.password.value) {
         this.passwordEqual = true;
       } else {
         this.passwordEqual = false;
       }
-    });
-
-    localForage.getItem('th-register').then((res: any) => {
-      console.log('res = ', res);
-      this.idCardNo = res.idcardno;
-      this.myInfo = { ...res, ...this.form.value };
-      this.myInfo.username = res.idcardno;
-      this.myInfo.isactive = '1';
-      this.myInfo.uniquetimestamp = res.uniquetimestamp;
-      this.myInfo.usertype = '1'; // ชาวไทย
-      this.myInfo.prefixth = res.prefixth;
-      this.myInfo.prefixen = res.prefixen;
     });
   }
 

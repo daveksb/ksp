@@ -12,17 +12,16 @@ import { AddressService, GeneralInfoService } from '@ksp/shared/service';
 import {
   nameEnPattern,
   nameThPattern,
-  phonePattern,
   validatorMessages,
 } from '@ksp/shared/utility';
 import localForage from 'localforage';
 import { Observable } from 'rxjs';
 @Component({
   selector: 'self-service-register-step-one',
-  templateUrl: './register-step-one.component.html',
-  styleUrls: ['./register-step-one.component.scss'],
+  templateUrl: './register-user-info.component.html',
+  styleUrls: ['./register-user-info.component.scss'],
 })
-export class RegisterStepOneComponent implements OnInit {
+export class RegisterUserInfoComponent implements OnInit {
   prefixList$!: Observable<Prefix[]>;
   nationalitys$!: Observable<Nationality[]>;
   provinces$!: Observable<Province[]>;
@@ -76,8 +75,15 @@ export class RegisterStepOneComponent implements OnInit {
   }
 
   nextPage() {
-    localForage.setItem('th-register', this.form.value);
-    this.router.navigate(['/register', 'th-step-3']);
+    //localForage.setItem('th-register-userinfo', this.form.value);
+    localForage.getItem('th-register').then((res: any) => {
+      const data = {
+        ...res,
+        ...this.form.value,
+      };
+      localForage.setItem('th-register', data);
+      this.router.navigate(['/register', 'th-step-3']);
+    });
   }
 
   provinceChanged(evt: any) {
