@@ -28,16 +28,17 @@ export class ApproveKspRequestComponent implements OnChanges, OnInit {
   processTable!: SchRequestProcess | undefined;
 
   form = this.fb.group({
-    result: [null, Validators.required],
-    //returnDate: [],
-    //rejectReason: [],
+    status: [null, Validators.required],
+    shouldForward: [null, Validators.required],
+    returnDate: [],
+    reason: [],
   });
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.form.valueChanges.subscribe((res) => {
-      this.selectResult.emit(res.result);
+      //this.selectResult.emit(res.result);
     });
   }
 
