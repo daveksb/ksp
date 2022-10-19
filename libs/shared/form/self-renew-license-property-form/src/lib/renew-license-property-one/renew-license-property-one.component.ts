@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -11,13 +11,12 @@ import { providerFactory } from '@ksp/shared/utility';
 })
 export class RenewLicensePropertyOneComponent
   extends KspFormBaseComponent
-  implements OnDestroy
+  implements OnDestroy, OnInit
 {
+  @Input() isSupervision = false;
+
   override form = this.fb.group({
-    hasEducationCertificate: [],
-    hasDegreeLevel: [],
-    level: [null, Validators.required],
-    degree: [null, Validators.required],
+    degreeInfo: this.fb.array([]),
   });
 
   constructor(private fb: FormBuilder) {
@@ -29,6 +28,28 @@ export class RenewLicensePropertyOneComponent
         this.onTouched();
       })
     );
+  }
+
+  ngOnInit(): void {
+    this.addFormArray(this.degreeInfo);
+  }
+
+  deleteFormArray(form: FormArray<any>, index: number) {
+    form.removeAt(index);
+  }
+
+  addFormArray(form: FormArray<any>) {
+    const data = this.fb.group({
+      hasEducationCertificate: [],
+      hasDegreeLevel: [],
+      level: [null, Validators.required],
+      degree: [null, Validators.required],
+    });
+    form.push(data);
+  }
+
+  get degreeInfo() {
+    return this.form.controls['degreeInfo'] as FormArray;
   }
 
   override ngOnDestroy(): void {

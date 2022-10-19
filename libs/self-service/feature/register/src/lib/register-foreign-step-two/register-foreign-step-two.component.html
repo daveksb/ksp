@@ -64,7 +64,7 @@
                     class="form-select"
                     id="nationalityFormControlSelect"
                   >
-                    <option value="null" selected disabled>กรุณาเลือก</option>
+                    <option value="null" selected disabled hidden>กรุณาเลือก</option>
                     <option
                       *ngFor="let v of visaClassList$ | async"
                       [value]="v.id"

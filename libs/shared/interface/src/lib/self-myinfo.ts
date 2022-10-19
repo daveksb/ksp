@@ -40,6 +40,7 @@ export class SelfMyInfo {
   requestinfo: string | null = null;
   schooladdrinfo: string | null = null;
   selfdevelopmentinfo: string | null = null;
+  sex: string | null = null;
   teachercouncilidno: string | null = null;
   updatedate?: string | null = null;
   username: string | null = null;

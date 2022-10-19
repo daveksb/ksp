@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -13,6 +13,8 @@ export class RenewLicensePropertyTwoComponent
   extends KspFormBaseComponent
   implements OnDestroy
 {
+  @Input() formMode: 'sch' | 'edu' = 'sch';
+
   override form = this.fb.group({
     degree: [null, Validators.required],
     managingDegree: [null, Validators.required],

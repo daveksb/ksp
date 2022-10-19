@@ -16,6 +16,7 @@ import { replaceEmptyWithNull } from '@ksp/shared/utility';
 })
 export class WorkplaceInfoComponent implements OnInit {
   label = 'แก้ไขข้อมูล';
+  mode: FormMode = 'view';
 
   form = this.fb.group({
     workplace: [],
@@ -27,15 +28,14 @@ export class WorkplaceInfoComponent implements OnInit {
     private educationDetailService: EducationDetailService,
     private myInfoService: MyInfoService
   ) {}
+
   provinces1$!: Observable<any>;
   amphurs1$!: Observable<any>;
   tumbols1$!: Observable<any>;
   bureau$!: Observable<any>;
 
-  mode: FormMode = 'view';
   baseForm = this.fb.group(new SelfMyInfo());
   ngOnInit(): void {
-    this.mode = 'view';
     this.bureau$ = this.educationDetailService.getBureau();
     this.provinces1$ = this.addressService.getProvinces();
     this.myInfoService.getMyInfo().subscribe((res) => {

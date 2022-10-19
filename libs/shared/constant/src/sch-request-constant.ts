@@ -129,15 +129,15 @@ export const SchoolRequestProcess: SchRequestProcess[] = [
   },
 
   //ขอสร้างเลขคุรุสภาสำหรับครูชาวต่างชาติ
-  {
-    requestType: 4,
-    processId: 1,
-    processName: 'สร้างและส่งใบคำขอ',
-    status: [
-      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
-      { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
-    ],
-  },
+  // {
+  //   requestType: 4,
+  //   processId: 1,
+  //   processName: 'สร้างและส่งใบคำขอ',
+  //   status: [
+  //     { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
+  //     { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
+  //   ],
+  // },
   {
     requestType: 4,
     processId: 2,

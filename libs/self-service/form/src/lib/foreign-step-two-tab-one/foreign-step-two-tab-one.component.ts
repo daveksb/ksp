@@ -1,6 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import {
+  Amphur,
+  KspFormBaseComponent,
+  Province,
+  Tambol,
+} from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -13,9 +18,9 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
   providers: providerFactory(ForeignStepTwoTabOneComponent),
 })
 export class ForeignStepTwoTabOneComponent extends KspFormBaseComponent {
-  @Input() provinces: any[] = [];
-  @Input() districts: any[] = [];
-  @Input() subDistricts: any[] = [];
+  @Input() provinces: Province[] | null = [];
+  @Input() districts: Amphur[] | null = [];
+  @Input() subDistricts: Tambol[] | null = [];
   @Output() provinceChanged = new EventEmitter<any>();
   @Output() districtChanged = new EventEmitter<any>();
 
@@ -43,7 +48,12 @@ export class ForeignStepTwoTabOneComponent extends KspFormBaseComponent {
 
   updatePostcode(evt: any) {
     const tumbolCode = evt.target?.value;
-    const postCode = this.subDistricts.find((t) => t.tambolCode === tumbolCode);
-    this.form.controls.postcode.patchValue(postCode.tambolPostcode);
+    if (this.subDistricts) {
+      const postCode = this.subDistricts.find(
+        (t) => t.tambolCode === tumbolCode
+      );
+      if (postCode)
+        this.form.controls.postcode.patchValue(postCode.tambolPostcode);
+    }
   }
 }

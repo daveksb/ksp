@@ -18,11 +18,9 @@
         <div class="mb-3 ms-4">
           <ksp-file-upload
             [uploadType]="'link'"
+            [showDeleteFile]="true"
             [systemFileName]="file.name"
             [uniqueTimestamp]="uniqueTimestamp"
-            [filename]="file.filename"
-            [fileid]="file.fileid"
-            [showDeleteFile]="true"
             (uploadComplete)="updateComplete($event, file)"
           ></ksp-file-upload>
         </div>

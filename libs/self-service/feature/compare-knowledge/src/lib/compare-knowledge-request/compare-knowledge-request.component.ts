@@ -28,6 +28,7 @@ import {
 } from '@ksp/shared/utility';
 import { SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
+import { Observable } from 'rxjs';
 
 const OBJECTIVE_FILES = [
   { name: '1. สำเนาหลักฐานแสดงวุฒิการศึกษา', fileid: '', filename: '' },
@@ -49,6 +50,7 @@ export class CompareKnowledgeRequestComponent
 {
   objectiveFiles: any[] = [];
   userInfoType = UserInfoFormType.thai;
+  countries$!: Observable<any>;
 
   override form = this.fb.group({
     userInfo: [],
@@ -86,6 +88,7 @@ export class CompareKnowledgeRequestComponent
   ngOnInit(): void {
     this.getListData();
     this.checkRequestId();
+    this.countries$ = this.addressService.getCountry();
   }
 
   get userInfoForm() {
