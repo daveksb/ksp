@@ -38,12 +38,12 @@ export class EditStudentListComponent extends KspPaginationComponent implements 
     coursemajor: [],
     plancalendaryear: [],
     courseacademicyear: [],
-    requeststatus: [],
+    status: [],
     cardno: [],
     name: [],
     requestdatefrom: [],
     requestdateto: [],
-    requestprocess: [],
+    process: [],
     offset: [0],
     row: [10]
   })
@@ -122,9 +122,9 @@ export class EditStudentListComponent extends KspPaginationComponent implements 
             return data.degreelevel == level.value;
           }))
           data.degreelevelname = finddegreelevel?.label || '';
-          data.requeststatusname = data.requeststatus == '1' ? 'สร้าง' :
-                               data.requeststatus == '2' ? 'ยื่นเรียบร้อย' :
-                               data.requeststatus == '3' ? 'รับข้อมูล' : '';
+          data.requeststatusname = data.status == '1' ? 'สร้าง' :
+                               data.status == '2' ? 'ยื่นเรียบร้อย' :
+                               data.status == '3' ? 'รับข้อมูล' : '';
           return data;
         }));
       } else {
