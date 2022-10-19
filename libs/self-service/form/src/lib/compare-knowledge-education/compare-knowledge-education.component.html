@@ -1,23 +1,24 @@
 <form [formGroup]="form">
-  <div class="d-flex justify-content-between align-items-center">
-    <div class="box-header">ระดับอนุปริญญา</div>
+  <div class="border rounded px-3 py-2 mb-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="box-header">ระดับอนุปริญญา</div>
 
-    <div class="text-primary fs-5" role="button">
-      <ksp-add-row-button
-        class="text-primary"
-        (addRowClick)="addFormArray1(degreeInfo1)"
-      >
-        เพิ่มข้อมูลประวัติการศึกษา
-      </ksp-add-row-button>
+      <div class="text-primary fs-5" role="button">
+        <ksp-add-row-button
+          class="text-primary"
+          (addRowClick)="addFormArray1(degreeInfo1)"
+        >
+          เพิ่มข้อมูลประวัติการศึกษา
+        </ksp-add-row-button>
+      </div>
     </div>
-  </div>
 
-  <ng-container formArrayName="degreeInfo1">
-    <ng-container
-      *ngFor="let DegreeForm of degreeInfo1.controls; let i = index"
-    >
-      <ng-container [formGroupName]="i">
-        <div class="border rounded p-3 mb-3">
+    <ng-container formArrayName="degreeInfo1">
+      <ng-container
+        *ngFor="let DegreeForm of degreeInfo1.controls; let i = index"
+      >
+        <ng-container [formGroupName]="i">
+          <hr />
           <div class="d-flex justify-content-end">
             <i
               class="bi bi-x-circle-fill text-danger"
@@ -49,31 +50,30 @@
               />
             </div>
           </div>
-        </div>
+        </ng-container>
       </ng-container>
     </ng-container>
-  </ng-container>
-  <hr />
-
-  <div class="d-flex justify-content-between align-items-center">
-    <div class="box-header">ปริญญาตรี</div>
-
-    <div class="text-primary fs-5" role="button">
-      <ksp-add-row-button
-        class="text-primary"
-        (addRowClick)="addFormArray2(degreeInfo2)"
-      >
-        เพิ่มข้อมูลประวัติการศึกษา
-      </ksp-add-row-button>
-    </div>
   </div>
+  <div class="border rounded px-3 py-2 mb-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="box-header">ปริญญาตรี</div>
 
-  <ng-container formArrayName="degreeInfo2">
-    <ng-container
-      *ngFor="let DegreeForm of degreeInfo2.controls; let i = index"
-    >
-      <ng-container [formGroupName]="i">
-        <div class="border rounded p-3 mb-3">
+      <div class="text-primary fs-5" role="button">
+        <ksp-add-row-button
+          class="text-primary"
+          (addRowClick)="addFormArray2(degreeInfo2)"
+        >
+          เพิ่มข้อมูลประวัติการศึกษา
+        </ksp-add-row-button>
+      </div>
+    </div>
+
+    <ng-container formArrayName="degreeInfo2">
+      <ng-container
+        *ngFor="let DegreeForm of degreeInfo2.controls; let i = index"
+      >
+        <ng-container [formGroupName]="i">
+          <hr />
           <div class="d-flex justify-content-end">
             <i
               class="bi bi-x-circle-fill text-danger"
@@ -85,31 +85,31 @@
             formControlName="degreeInfo"
             [countries]="countries"
           ></ksp-activity-add-degree>
-        </div>
+        </ng-container>
       </ng-container>
     </ng-container>
-  </ng-container>
-  <hr />
-
-  <div class="d-flex justify-content-between align-items-center">
-    <div class="box-header">ปริญญาโท</div>
-
-    <div class="text-primary fs-5" role="button">
-      <ksp-add-row-button
-        class="text-primary"
-        (addRowClick)="addFormArray2(degreeInfo3)"
-      >
-        เพิ่มข้อมูลประวัติการศึกษา
-      </ksp-add-row-button>
-    </div>
   </div>
 
-  <ng-container formArrayName="degreeInfo3">
-    <ng-container
-      *ngFor="let DegreeForm of degreeInfo3.controls; let i = index"
-    >
-      <ng-container [formGroupName]="i">
-        <div class="border rounded p-3 mb-3">
+  <div class="border rounded px-3 py-2 mb-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="box-header">ปริญญาโท</div>
+
+      <div class="text-primary fs-5" role="button">
+        <ksp-add-row-button
+          class="text-primary"
+          (addRowClick)="addFormArray2(degreeInfo3)"
+        >
+          เพิ่มข้อมูลประวัติการศึกษา
+        </ksp-add-row-button>
+      </div>
+    </div>
+
+    <ng-container formArrayName="degreeInfo3">
+      <ng-container
+        *ngFor="let DegreeForm of degreeInfo3.controls; let i = index"
+      >
+        <ng-container [formGroupName]="i">
+          <hr />
           <div class="d-flex justify-content-end">
             <i
               class="bi bi-x-circle-fill text-danger"
@@ -121,31 +121,31 @@
             formControlName="degreeInfo"
             [countries]="countries"
           ></ksp-activity-add-degree>
-        </div>
+        </ng-container>
       </ng-container>
     </ng-container>
-  </ng-container>
-  <hr />
-
-  <div class="d-flex justify-content-between align-items-center">
-    <div class="box-header">ปริญญาเอก</div>
-
-    <div class="text-primary fs-5" role="button">
-      <ksp-add-row-button
-        class="text-primary"
-        (addRowClick)="addFormArray2(degreeInfo4)"
-      >
-        เพิ่มข้อมูลประวัติการศึกษา
-      </ksp-add-row-button>
-    </div>
   </div>
 
-  <ng-container formArrayName="degreeInfo4">
-    <ng-container
-      *ngFor="let DegreeForm of degreeInfo4.controls; let i = index"
-    >
-      <ng-container [formGroupName]="i">
-        <div class="border rounded p-3 mb-3">
+  <div class="border rounded px-3 py-2 mb-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="box-header">ปริญญาเอก</div>
+
+      <div class="text-primary fs-5" role="button">
+        <ksp-add-row-button
+          class="text-primary"
+          (addRowClick)="addFormArray2(degreeInfo4)"
+        >
+          เพิ่มข้อมูลประวัติการศึกษา
+        </ksp-add-row-button>
+      </div>
+    </div>
+
+    <ng-container formArrayName="degreeInfo4">
+      <ng-container
+        *ngFor="let DegreeForm of degreeInfo4.controls; let i = index"
+      >
+        <ng-container [formGroupName]="i">
+          <hr />
           <div class="d-flex justify-content-end">
             <i
               class="bi bi-x-circle-fill text-danger"
@@ -157,31 +157,31 @@
             formControlName="degreeInfo"
             [countries]="countries"
           ></ksp-activity-add-degree>
-        </div>
+        </ng-container>
       </ng-container>
     </ng-container>
-  </ng-container>
-  <hr />
-
-  <div class="d-flex justify-content-between align-items-center">
-    <div class="box-header">ปริญญาอื่นๆ</div>
-
-    <div class="text-primary fs-5" role="button">
-      <ksp-add-row-button
-        class="text-primary"
-        (addRowClick)="addFormArray2(degreeInfo5)"
-      >
-        เพิ่มข้อมูลประวัติการศึกษา
-      </ksp-add-row-button>
-    </div>
   </div>
 
-  <ng-container formArrayName="degreeInfo5">
-    <ng-container
-      *ngFor="let DegreeForm of degreeInfo5.controls; let i = index"
-    >
-      <ng-container [formGroupName]="i">
-        <div class="border rounded p-3 mb-3">
+  <div class="border rounded px-3 py-2 mb-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="box-header">ปริญญาอื่นๆ</div>
+
+      <div class="text-primary fs-5" role="button">
+        <ksp-add-row-button
+          class="text-primary"
+          (addRowClick)="addFormArray2(degreeInfo5)"
+        >
+          เพิ่มข้อมูลประวัติการศึกษา
+        </ksp-add-row-button>
+      </div>
+    </div>
+
+    <ng-container formArrayName="degreeInfo5">
+      <ng-container
+        *ngFor="let DegreeForm of degreeInfo5.controls; let i = index"
+      >
+        <ng-container [formGroupName]="i">
+          <hr />
           <div class="d-flex justify-content-end">
             <i
               class="bi bi-x-circle-fill text-danger"
@@ -193,8 +193,8 @@
             formControlName="degreeInfo"
             [countries]="countries"
           ></ksp-activity-add-degree>
-        </div>
+        </ng-container>
       </ng-container>
     </ng-container>
-  </ng-container>
+  </div>
 </form>
