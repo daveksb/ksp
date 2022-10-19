@@ -3,8 +3,14 @@ import { Observable } from 'rxjs';
 import { GeneralInfoService, AddressService } from '@ksp/shared/service';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { nameEnPattern, passportPattern } from '@ksp/shared/utility';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { nameEnPattern } from '@ksp/shared/utility';
+import {
+  Country,
+  FileGroup,
+  KspFormBaseComponent,
+  Prefix,
+  Province,
+} from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import moment from 'moment';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -68,21 +74,21 @@ export class ForeignLicenseStepTwoComponent
       this.form.controls.licensureInfoForm.patchValue(value);
     }, 0);
   }
-  @Input() academicFiles: any[] = [];
+  @Input() academicFiles: FileGroup[] = [];
   @Input() uniqueTimestamp!: string;
   @Input() isRenewLicense = false;
   @Input() myImage = '';
 
-  prefixList$!: Observable<any>;
-  provinces1$!: Observable<any>;
+  prefixList$!: Observable<Prefix[]>;
+  provinces1$!: Observable<Province[]>;
   district1$!: Observable<any>;
   subDistrict1$!: Observable<any>;
   provinces2$!: Observable<any>;
   district2$!: Observable<any>;
   subDistrict2$!: Observable<any>;
   nationalitys$!: Observable<any>;
-  countries$!: Observable<any>;
-  countries2$!: Observable<any>;
+  countries$!: Observable<Country[]>;
+  countries2$!: Observable<Country[]>;
   age = '';
 
   override form = this.fb.group({

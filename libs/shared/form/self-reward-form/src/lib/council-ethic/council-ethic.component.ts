@@ -54,6 +54,7 @@ export class CouncilEthicComponent
 
   addFormArray(form: FormArray<any>) {
     const data = this.fb.group({
+      sumWorking: [null, Validators.required],
       startYear: [null, Validators.required],
       discipline: [null, Validators.required],
       careerResponsibility: [null, Validators.required],

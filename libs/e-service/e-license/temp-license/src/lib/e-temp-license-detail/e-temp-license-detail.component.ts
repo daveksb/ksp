@@ -15,11 +15,19 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 import { TempLicenseDetailService } from './e-temp-license-detail.service';
 import localForage from 'localforage';
-import { FileGroup, KspRequest } from '@ksp/shared/interface';
+import {
+  Amphur,
+  FileGroup,
+  KspRequest,
+  PositionType,
+  Prefix,
+  Province,
+  Tambol,
+} from '@ksp/shared/interface';
 
-export interface KspApprovePersistData {
-  checkDetail: any;
-  requestData: KspRequest;
+export class KspApprovePersistData {
+  checkDetail: any = null;
+  requestData: KspRequest = new KspRequest();
 }
 @UntilDestroy()
 @Component({
@@ -32,13 +40,13 @@ export class ETempLicenseDetailComponent implements OnInit {
   selectedTabIndex = 0;
   evidenceFiles: FileGroup[] = [];
 
-  amphurs1$!: Observable<any>;
-  tumbols1$!: Observable<any>;
-  amphurs2$!: Observable<any>;
-  tumbols2$!: Observable<any>;
-  provinces$!: Observable<any>;
-  prefixList$!: Observable<any>;
-  positionTypes$!: Observable<any>;
+  amphurs1$!: Observable<Amphur[]>;
+  tumbols1$!: Observable<Tambol[]>;
+  amphurs2$!: Observable<Amphur[]>;
+  tumbols2$!: Observable<Tambol[]>;
+  provinces$!: Observable<Province[]>;
+  prefixList$!: Observable<Prefix[]>;
+  positionTypes$!: Observable<PositionType[]>;
   selectedTab: MatTabChangeEvent = new MatTabChangeEvent();
 
   requestId!: number;
@@ -109,7 +117,7 @@ export class ETempLicenseDetailComponent implements OnInit {
   checkRequestId() {
     this.route.paramMap.pipe(untilDestroyed(this)).subscribe((params) => {
       this.requestId = Number(params.get('id'));
-      console.log('req id = ', this.requestId);
+      //console.log('req id = ', this.requestId);
       if (this.requestId) {
         this.loadRequestFromId(this.requestId);
       }

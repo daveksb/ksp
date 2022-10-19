@@ -25,6 +25,7 @@ import { ThaiDatePipe } from '@ksp/shared/pipe';
 import { RequestSearchComponent } from '@ksp/shared/search';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSortModule } from '@angular/material/sort';
+import { ApproveKspRequestComponent } from '@ksp/e-service/e-license/approve-ksp-request';
 
 @NgModule({
   imports: [
@@ -47,6 +48,7 @@ import { MatSortModule } from '@angular/material/sort';
     SharedFormOthersModule,
     MatDatepickerModule,
     MatSortModule,
+    ApproveKspRequestComponent,
   ],
   declarations: [
     ETempLicenseListComponent,

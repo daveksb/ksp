@@ -1,71 +1,61 @@
-export const ACADEMIC_FILES = [
+import { FileGroup } from '@ksp/shared/interface';
+
+export const ACADEMIC_FILES: FileGroup[] = [
   {
     name: `1. Achelor's degree`,
-    fileid: '',
-    filename: '',
+    files: [],
   },
 ];
 
-export const REQUEST_DOCUMENT_FILES = [
+export const REQUEST_DOCUMENT_FILES: FileGroup[] = [
   {
     name: `Copy of educational certificate along with official transcripts`,
-    fileid: '',
-    filename: '',
+    files: [],
   },
   {
     name: `Copy of teaching license/ certificate from abroad (If any)`,
-    fileid: '',
-    filename: '',
+    files: [],
   },
   {
     name: `Original official degree confirmation letter for graduates of institution or an original official Transcript or
   original of statement of professional standing (as the case may be)`,
-    fileid: '',
-    filename: '',
+    files: [],
   },
   {
     name: `Copy of Translation of non-English or Thai documents`,
-    fileid: '',
-    filename: '',
+    files: [],
   },
   {
     name: `Copy of documentary evidence related to your professional certification (if any)`,
-    fileid: '',
-    filename: '',
+    files: [],
   },
   {
     name: `Original of Professional Experience Evaluation Form (this form must be completed and signed by all evaluators
     and enclosed with a copy of their current professional licenses)`,
-    fileid: '',
-    filename: '',
+    files: [],
   },
   {
     name: `Copy of all the used pages of the teacher's passport; preferably the photo page and present Non-B Visa page`,
-    fileid: '',
-    filename: '',
+    files: [],
   },
   {
     name: `Copy of all the used pages of the teacher's work permit`,
-    fileid: '',
-    filename: '',
+    files: [],
   },
   {
     name: `Other relevant documents (if any)
     e.g. Certificate of Name/Surname Change, Certificate of Marriage/Divorce, or related document, in case of name, or
     surname discrepancy between that appears on the degree certificate and that appears on the passport`,
-    fileid: '',
-    filename: '',
+    files: [],
   },
   {
     name: `Two 1 x 1.25 inch half-length, full face photograph; wearing formal clothing without hat and sunglasses; taken
     within 6 months before application submission (Do not wear a t-shirt or tank top, no smile; taken against plain,
     blue or white background)`,
-    fileid: '',
-    filename: '',
+    files: [],
   },
   {
     name: `Payment receipt for registration fee: 500 Baht`,
-    fileid: '',
-    filename: '',
+    files: [],
   },
 ];

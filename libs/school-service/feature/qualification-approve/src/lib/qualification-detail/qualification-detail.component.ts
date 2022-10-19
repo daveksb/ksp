@@ -296,7 +296,7 @@ export class QualificationDetailComponent implements OnInit {
             userInfo.requesttype = '6';
             userInfo.careertype = `${this.requestSubType}`;
             userInfo.schoolid = this.schoolId;
-            userInfo.process = '1';
+            userInfo.process = '2';
             userInfo.status = '1';
             userInfo.birthdate = changeDate(userInfo.birthdate);
             let eduForm = [{ ...formData.edu1, ...{ degreeLevel: 1 } }];

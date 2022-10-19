@@ -66,11 +66,14 @@ export class RenewLicenseForeignComponent implements OnInit {
     this.checkRequestId();
   }
 
+  get personalDetail() {
+    return this.form.controls.personalDetail;
+  }
+
   checkRequestId() {
     this.route.paramMap.subscribe((params) => {
       this.requestId = Number(params.get('id'));
       if (this.requestId) {
-        // this.loadRequestFromId(this.requestId);
         this.requestService.getRequestById(this.requestId).subscribe((res) => {
           if (res) {
             console.log(res);
@@ -78,13 +81,11 @@ export class RenewLicenseForeignComponent implements OnInit {
             this.requestNo = res.requestno;
             this.currentProcess = Number(res.process);
             this.uniqueNo = res.uniqueno || '';
-            console.log(this.uniqueNo);
-
+            //console.log(this.uniqueNo);
             this.patchData(res);
           }
         });
       } else {
-        // this.initializeFiles();
         this.uniqueNo = uuidv4();
         this.academicFiles = structuredClone(ACADEMIC_FILES);
         this.documentFiles = structuredClone(RENEW_DOCUMENT_FILES);
@@ -97,7 +98,7 @@ export class RenewLicenseForeignComponent implements OnInit {
     const address = parseJson(data.addressinfo);
     this.patchUserInfo(data);
     this.patchAddress(address, address?.[0].phone, address?.[0].email);
-    console.log('data ', data);
+    //console.log('data ', data);
 
     if (data.schooladdrinfo) {
       const workplace = parseJson(data.schooladdrinfo);

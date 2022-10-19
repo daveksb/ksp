@@ -20,36 +20,32 @@ import { KspApprovePersistData } from '../e-temp-license-detail/e-temp-license-d
 })
 export class TempLicenseCheckConfirmComponent implements OnInit {
   requestId!: number;
-  saveData!: KspApprovePersistData;
-
-  form = this.fb.group({
-    approveResult: [null, Validators.required],
-    returnDate: [],
-    rejectReason: [],
-  });
+  saveData = new KspApprovePersistData();
+  selectResult: any;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     public dialog: MatDialog,
-    private fb: FormBuilder,
     private eRequestService: ERequestService
   ) {}
 
   ngOnInit(): void {
     localForage.getItem('checkRequestData').then((res: any) => {
       this.saveData = res;
+      console.log('save data = ', this.saveData);
     });
     this.checkRequestId();
   }
 
   save() {
+    //console.log('save data = ', this.saveData);
+    console.log('form = ', this.selectResult);
     console.log('save data = ', this.saveData);
-    console.log('form = ', this.form.value);
     const payload: KspApprovePayload = {
       requestid: this.saveData.requestData.id,
-      process: '3',
-      status: this.form.controls.approveResult.value,
+      process: `${Number(this.saveData.requestData.process) + 1}`,
+      status: `${this.selectResult}`,
       detail: JSON.stringify(this.saveData.checkDetail),
       systemtype: '2', // school
       userid: null,
@@ -58,6 +54,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
 
     this.eRequestService.KspApproveRequest(payload).subscribe((res) => {
       console.log('result = ', res);
+      this.cancel();
     });
   }
 

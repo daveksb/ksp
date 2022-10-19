@@ -1,9 +1,9 @@
 <form [formGroup]="form">
-  <div class="row mx-0 border shadow rounded-4 px-2 py-4 bg-white my-4">
-    <div class="col-lg-3">
+  <div class="row mx-0 border shadow-sm rounded-4 px-2 py-4 bg-white my-4">
+    <div class="col-lg-3 my-auto">
       <self-service-form-upload-image></self-service-form-upload-image>
     </div>
-    <div class="col-md">
+    <div class="col-md mt-md-0 mt-2">
       <ksp-form-user-info
         formControlName="userInfo"
         [isDarkMode]="true"
@@ -60,7 +60,7 @@
         (amphurChanged)="amphurChanged(3, $event)"
       >
       </self-service-form-user-workplace>
-    <!--   <div class="row">
+      <!--   <div class="row">
         <div class="col-md-6 mb-3">
           <label class="form-label">โทรศัพท์</label>
           <input class="form-control" type="text" formControlName="workPhone" />

@@ -36,6 +36,10 @@ export class ForeignLicenseDetailComponent implements OnInit {
   requestData: any;
   requestId!: number;
   requestSubType = SchoolRequestSubType.อื่นๆ;
+  bureauName = '';
+  schoolId = '';
+  schoolName = '';
+  address = '';
 
   form = this.fb.group({
     foreignTeacherInfo: [],
@@ -71,6 +75,10 @@ export class ForeignLicenseDetailComponent implements OnInit {
     this.eRequestService.getKspRequestById(id).subscribe((res: any) => {
       this.requestData = res;
       this.requestNo = res.requestno;
+      this.bureauName = res?.bureauname ?? '';
+      this.schoolId = res?.schoolid ?? '';
+      this.schoolName = res?.schoolname ?? '';
+      this.address = res?.schooladdress ?? '';
       //this.currentProcess = +res.currentprocess;
       //console.log('current process = ', this.currentProcess);
       this.pathUserInfo(res);
@@ -131,19 +139,17 @@ export class ForeignLicenseDetailComponent implements OnInit {
     confirmDialog.componentInstance.confirmed
       .pipe(
         switchMap((res) => {
-          console.log(res);
           if (res) {
             const data = this.form.controls.verifydetail.value as any;
             const payload: KspApprovePayload = {
-              requestid: this.requestNo,
-              process: '3',
-              status: data.value,
+              requestid: String(this.requestId),
+              process: '2',
+              status: data.result,
               detail: data.detail,
               systemtype: '2', // school
               userid: null,
               paymentstatus: null,
             };
-
             return this.eRequestService.KspApproveRequest(payload);
           }
           return EMPTY;
@@ -158,7 +164,6 @@ export class ForeignLicenseDetailComponent implements OnInit {
 
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
       },
@@ -182,10 +187,10 @@ const evidenceFiles = [
 const verifyChoices = [
   {
     name: 'อนุมัติ',
-    value: 1,
+    value: 2,
   },
   {
     name: 'ไม่อนุมัติ',
-    value: 2,
+    value: 3,
   },
 ];

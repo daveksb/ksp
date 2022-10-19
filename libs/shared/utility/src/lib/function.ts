@@ -4,7 +4,7 @@ import {
   SelfRequestProcess,
   SelfRequestType,
 } from '@ksp/shared/constant';
-import { FileGroup, SchoolRequest } from '@ksp/shared/interface';
+import { FileGroup, KspRequest, SchoolRequest } from '@ksp/shared/interface';
 import moment from 'moment';
 
 // return Thai date format,
@@ -197,38 +197,15 @@ export function jsonStringify(object: any): string {
   }
 }
 
-export function applyClientFilter(data: SchoolRequest[], searchParams: any) {
-  const { requesttype, ...param } = searchParams;
+export function applyClientFilter(data: KspRequest[], param: any) {
+  //const { requesttype, ...param } = searchParams;
   return data.filter((d) => {
-    const filter1 = param.requestno
-      ? d.requestno?.includes(param.requestno)
-      : true;
-
-    const filter2 = param.subtype ? `${d.subtype}` === param.subtype : true;
-
-    const filter3 = param.firstnameth
-      ? d.firstnameth?.includes(param.firstnameth) ||
-        d.lastnameth?.includes(param.firstnameth)
-      : true;
-
-    const filter4 = param.idcardno
-      ? d.idcardno?.includes(param.idcardno)
-      : true;
-
-    const filter5 = param.passportno
-      ? d.passportno?.includes(param.passportno)
-      : true;
-
-    const filter6 = param.currentprocess
-      ? `${d.currentprocess}` === param.currentprocess
-      : true;
-
-    const filter7 = param.requeststatus
-      ? `${d.requeststatus}` === param.requeststatus
-      : true;
-
-    return (
-      filter1 && filter2 && filter3 && filter4 && filter5 && filter6 && filter7
-    );
+    const filter1 = param.process ? `${d.process}` === param.process : true;
+    const filter2 = param.status ? `${d.status}` === param.status : true;
+    return filter1 && filter2;
   });
+}
+
+export function processFilter(data: KspRequest[], process = 1) {
+  return data.filter((d) => Number(d.process) > process);
 }

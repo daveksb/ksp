@@ -38,7 +38,7 @@ export class RequestSearchComponent
   override form = this.fb.group({
     requesttype: ['', Validators.required],
     requestno: [''],
-    careertype: [''],
+    careertype: [],
     name: [''],
     idcardno: [''],
     passportno: [''],
