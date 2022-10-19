@@ -5,6 +5,12 @@ import { KspFormBaseComponent, SchRequestProcess } from '@ksp/shared/interface';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { providerFactory } from '@ksp/shared/utility';
 
+export interface approveResult {
+  result: string;
+  shouldForward: string;
+  returnDate: string;
+  reason: string;
+}
 @Component({
   selector: 'ksp-approve-ksp-request',
   standalone: true,
@@ -23,7 +29,7 @@ export class ApproveKspRequestComponent
   processTable!: SchRequestProcess | undefined;
 
   override form = this.fb.group({
-    status: [null, Validators.required],
+    result: [null, Validators.required],
     shouldForward: [null, Validators.required],
     returnDate: [],
     reason: [],
@@ -39,8 +45,8 @@ export class ApproveKspRequestComponent
     );
   }
 
-  get status() {
-    return this.form.controls.status.value;
+  get result() {
+    return this.form.controls.result.value;
   }
 
   get shouldForward() {
@@ -48,9 +54,8 @@ export class ApproveKspRequestComponent
   }
 
   ngOnInit(): void {
-    this.form.controls.status.valueChanges.subscribe(() => {
-      if (this.status === '2') {
-        //console.log('status = ', this.status);
+    this.form.controls.result.valueChanges.subscribe(() => {
+      if (this.result === '2') {
         this.shouldForward.clearValidators();
       } else {
         this.shouldForward.addValidators(Validators.required);

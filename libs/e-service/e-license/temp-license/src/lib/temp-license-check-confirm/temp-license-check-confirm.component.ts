@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { approveResult } from '@ksp/e-service/e-license/approve-ksp-request';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -21,6 +22,8 @@ import { KspApprovePersistData } from '../e-temp-license-detail/e-temp-license-d
 export class TempLicenseCheckConfirmComponent implements OnInit {
   requestId!: number;
   saveData = new KspApprovePersistData();
+  targetProcess!: number | null;
+  targetStatus!: number | null;
 
   form = this.fb.group({
     approvement: [],
@@ -37,6 +40,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   ngOnInit(): void {
     this.form.valueChanges.subscribe((res) => {
       console.log(res.approvement);
+
       //this.selectResult.emit(res.result);
     });
 
@@ -49,28 +53,54 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
     this.checkRequestId();
   }
 
-  getApproveHistory(requestid: string) {
-    this.eRequestService.getApproveHistory(requestid).subscribe((res) => {
-      console.log('list = ', res);
-    });
+  checkApproveResult(input: approveResult) {
+    if (input.result === '1') {
+      this.targetStatus = 3;
+      if (input.shouldForward === '1') {
+        this.targetProcess = Number(this.saveData.requestData.process);
+      } else if (input.shouldForward === '2') {
+        this.targetProcess = Number(this.saveData.requestData.process) + 1;
+      } else if (input.shouldForward === '4') {
+        this.targetProcess = 4;
+      }
+    } else if (input.result === '2') {
+      this.targetProcess = 1;
+      this.targetStatus = 2;
+    } else if (input.result === '3') {
+      this.targetProcess = Number(this.saveData.requestData.process);
+      if (input.shouldForward === '3') {
+        this.targetStatus = 3;
+      } else if (input.shouldForward === '5') {
+        this.targetStatus = 5;
+      }
+    }
   }
 
   save() {
+    this.checkApproveResult(<any>this.form.value.approvement);
     //console.log('save data = ', this.saveData);
     //console.log('form = ', this.selectResult);
     const payload: KspApprovePayload = {
       requestid: this.saveData.requestData.id,
-      process: `${Number(this.saveData.requestData.process) + 1}`,
-      status: '',
+      process: `${this.targetProcess}`,
+      status: `${this.targetStatus}`,
       detail: JSON.stringify(this.saveData.checkDetail),
       systemtype: '2', // school
       userid: null,
       paymentstatus: null,
     };
 
+    console.log('payload = ', payload);
+
     this.eRequestService.KspApproveRequest(payload).subscribe((res) => {
       console.log('result = ', res.app);
       this.cancel();
+    });
+  }
+
+  getApproveHistory(requestid: string) {
+    this.eRequestService.getApproveHistory(requestid).subscribe((res) => {
+      console.log('list = ', res);
     });
   }
 
