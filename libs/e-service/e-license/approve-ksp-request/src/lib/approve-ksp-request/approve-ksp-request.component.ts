@@ -43,10 +43,20 @@ export class ApproveKspRequestComponent
     return this.form.controls.status.value;
   }
 
+  get shouldForward() {
+    return this.form.controls.shouldForward;
+  }
+
   ngOnInit(): void {
-    this.form.controls.status.valueChanges.subscribe(() =>
-      this.form.controls.shouldForward.reset()
-    );
+    this.form.controls.status.valueChanges.subscribe(() => {
+      if (this.status === '2') {
+        //console.log('status = ', this.status);
+        this.shouldForward.clearValidators();
+      } else {
+        this.shouldForward.addValidators(Validators.required);
+      }
+      this.shouldForward.reset();
+    });
   }
 
   /*   ngOnChanges(changes: SimpleChanges): void {

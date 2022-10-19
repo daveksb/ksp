@@ -111,6 +111,21 @@
             value="1"
             formControlName="shouldForward"
           />
+          <label class="form-label ms-2"> ไม่ส่งตรวจสอบลำดับต่อไป </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex align-items-center col-4 mb-3">
+      <div class="form-control">
+        <div class="d-flex align-items-center">
+          <input
+            class="radio"
+            type="radio"
+            [attr.disabled]="status !== '1' ? true : null"
+            value="2"
+            formControlName="shouldForward"
+          />
           <label class="form-label ms-2"> ส่งตรวจสอบลำดับต่อไป </label>
         </div>
       </div>
@@ -122,8 +137,8 @@
           <input
             class="radio"
             type="radio"
-            [attr.disabled]="status === '1' ? true : null"
-            value="2"
+            [attr.disabled]="status === '1' || status === '2' ? true : null"
+            value="3"
             formControlName="shouldForward"
           />
           <label class="form-label ms-2">
@@ -140,7 +155,7 @@
             class="radio"
             type="radio"
             [attr.disabled]="status !== '1' ? true : null"
-            value="3"
+            value="4"
             formControlName="shouldForward"
           />
           <label class="form-label ms-2"> ส่งเรื่องพิจารณา </label>
@@ -154,8 +169,8 @@
           <input
             class="radio"
             type="radio"
-            [attr.disabled]="status === '1' ? true : null"
-            value="4"
+            [attr.disabled]="status === '1' || status === '2' ? true : null"
+            value="5"
             formControlName="shouldForward"
           />
           <label class="form-label ms-2"> ยกเลิก </label>

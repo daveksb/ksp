@@ -36,15 +36,23 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
 
   ngOnInit(): void {
     this.form.valueChanges.subscribe((res) => {
-      console.log('form value = ', res);
+      console.log(res.approvement);
       //this.selectResult.emit(res.result);
     });
 
     localForage.getItem('checkRequestData').then((res: any) => {
       this.saveData = res;
+      if (this.saveData.requestData.id)
+        this.getApproveHistory(this.saveData.requestData.id);
       //console.log('save data = ', this.saveData);
     });
     this.checkRequestId();
+  }
+
+  getApproveHistory(requestid: string) {
+    this.eRequestService.getApproveHistory(requestid).subscribe((res) => {
+      console.log('list = ', res);
+    });
   }
 
   save() {
@@ -61,7 +69,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
     };
 
     this.eRequestService.KspApproveRequest(payload).subscribe((res) => {
-      console.log('result = ', res);
+      console.log('result = ', res.app);
       this.cancel();
     });
   }

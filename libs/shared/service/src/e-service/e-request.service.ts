@@ -42,6 +42,16 @@ export class ERequestService {
     );
   }
 
+  // new API
+  getApproveHistory(requestid: string): Observable<SelfRequest[]> {
+    return this.http
+      .post(
+        `${environment.apiUrl}/e-service/ksprequestprocessselectbyrequestid`,
+        { requestid }
+      )
+      .pipe(map((data: any) => data.datareturn));
+  }
+
   EsSearchRequest(payload: EsSearchPayload): Observable<SelfRequest[]> {
     return this.http
       .post(`${environment.shortApiUrl}/schrequestsearch_e.php`, payload)
