@@ -10,8 +10,8 @@
     </div>
     <div class="bg-white p-3">
       <ksp-request-header-info
-        [requestDate]="today"
-        [requestNumber]="requestNo"
+        [requestDate]="requestData.requestdate"
+        [requestNumber]="requestData.requestno"
       ></ksp-request-header-info>
       <hr />
 
@@ -23,7 +23,7 @@
               class="form-control"
               type="text"
               disabled
-              [value]="bureauName"
+              [value]="requestData.bureauname"
             />
           </div>
         </div>
@@ -35,7 +35,7 @@
               class="form-control"
               type="text"
               disabled
-              [value]="schoolId"
+              [value]="requestData.schoolid"
             />
           </div>
           <div class="col">
@@ -44,7 +44,7 @@
               class="form-control"
               type="text"
               disabled
-              [value]="schoolName"
+              [value]="requestData.schoolname"
             />
           </div>
         </div>
@@ -56,7 +56,7 @@
               class="form-control"
               type="text"
               disabled
-              [value]="address"
+              [value]="requestData.schooladdress"
             />
           </div>
         </div>
