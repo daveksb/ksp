@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { KspFormBaseComponent, SchRequestProcess } from '@ksp/shared/interface';
@@ -13,7 +13,10 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./approve-ksp-request.component.scss'],
   providers: providerFactory(ApproveKspRequestComponent),
 })
-export class ApproveKspRequestComponent extends KspFormBaseComponent {
+export class ApproveKspRequestComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
   @Input() requestType: string | null = '0';
   @Input() process: string | null = '0';
 
@@ -40,7 +43,11 @@ export class ApproveKspRequestComponent extends KspFormBaseComponent {
     return this.form.controls.status.value;
   }
 
-  //ngOnInit(): void {}
+  ngOnInit(): void {
+    this.form.controls.status.valueChanges.subscribe(() =>
+      this.form.controls.shouldForward.reset()
+    );
+  }
 
   /*   ngOnChanges(changes: SimpleChanges): void {
     //console.log('change = ', changes);

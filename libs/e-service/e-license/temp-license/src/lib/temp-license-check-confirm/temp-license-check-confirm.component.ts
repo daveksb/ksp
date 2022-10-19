@@ -21,7 +21,6 @@ import { KspApprovePersistData } from '../e-temp-license-detail/e-temp-license-d
 export class TempLicenseCheckConfirmComponent implements OnInit {
   requestId!: number;
   saveData = new KspApprovePersistData();
-  selectResult: any;
 
   form = this.fb.group({
     approvement: [],
@@ -51,11 +50,10 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   save() {
     //console.log('save data = ', this.saveData);
     //console.log('form = ', this.selectResult);
-    //console.log('save data = ', this.saveData);
     const payload: KspApprovePayload = {
       requestid: this.saveData.requestData.id,
       process: `${Number(this.saveData.requestData.process) + 1}`,
-      status: `${this.selectResult}`,
+      status: '',
       detail: JSON.stringify(this.saveData.checkDetail),
       systemtype: '2', // school
       userid: null,
