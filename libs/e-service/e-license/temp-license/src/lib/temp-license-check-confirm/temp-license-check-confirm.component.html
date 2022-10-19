@@ -30,11 +30,14 @@
       </thead>
     </table>
 
-    <ksp-approve-ksp-request
-      [requestType]="saveData.requestData.requesttype"
-      [process]="saveData.requestData.process"
-      (selectResult)="selectResult = $event"
-    ></ksp-approve-ksp-request>
+    <div [formGroup]="form">
+      <ksp-approve-ksp-request
+        [requestType]="saveData.requestData.requesttype"
+        [process]="saveData.requestData.process"
+        (selectResult)="selectResult = $event"
+        formControlName="approvement"
+      ></ksp-approve-ksp-request>
+    </div>
   </div>
 </div>
 
@@ -43,7 +46,7 @@
     (cancelClicked)="cancel()"
     (prevClicked)="prevPage()"
     (saveClicked)="confirmDialog()"
-    [disableSaveButton]="false"
+    [disableSaveButton]="form.invalid"
     [showCenterButtons]="true"
     [isLastPage]="true"
     [showSaveButton]="true"

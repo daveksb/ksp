@@ -1,17 +1,9 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { SchoolRequestProcess } from '@ksp/shared/constant';
-import { SchRequestProcess } from '@ksp/shared/interface';
+import { KspFormBaseComponent, SchRequestProcess } from '@ksp/shared/interface';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { providerFactory } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-approve-ksp-request',
@@ -19,30 +11,38 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
   imports: [CommonModule, MatDatepickerModule, ReactiveFormsModule],
   templateUrl: './approve-ksp-request.component.html',
   styleUrls: ['./approve-ksp-request.component.scss'],
+  providers: providerFactory(ApproveKspRequestComponent),
 })
-export class ApproveKspRequestComponent implements OnChanges, OnInit {
+export class ApproveKspRequestComponent extends KspFormBaseComponent {
   @Input() requestType: string | null = '0';
   @Input() process: string | null = '0';
-  @Output() selectResult = new EventEmitter<any>();
 
   processTable!: SchRequestProcess | undefined;
 
-  form = this.fb.group({
+  override form = this.fb.group({
     status: [null, Validators.required],
     shouldForward: [null, Validators.required],
     returnDate: [],
     reason: [],
   });
 
-  constructor(private fb: FormBuilder) {}
-
-  ngOnInit(): void {
-    this.form.valueChanges.subscribe((res) => {
-      //this.selectResult.emit(res.result);
-    });
+  constructor(private fb: FormBuilder) {
+    super();
+    this.subscriptions.push(
+      this.form?.valueChanges.subscribe((value: any) => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  get status() {
+    return this.form.controls.status.value;
+  }
+
+  //ngOnInit(): void {}
+
+  /*   ngOnChanges(changes: SimpleChanges): void {
     //console.log('change = ', changes);
     this.processTable = SchoolRequestProcess.find(
       (p) =>
@@ -50,5 +50,5 @@ export class ApproveKspRequestComponent implements OnChanges, OnInit {
         p.requestType === +changes['requestType'].currentValue
     );
     //console.log('process table = ', this.processTable);
-  }
+  } */
 }

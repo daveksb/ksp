@@ -23,7 +23,12 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   saveData = new KspApprovePersistData();
   selectResult: any;
 
+  form = this.fb.group({
+    approvement: [],
+  });
+
   constructor(
+    private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     public dialog: MatDialog,
@@ -31,17 +36,22 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.form.valueChanges.subscribe((res) => {
+      console.log('form value = ', res);
+      //this.selectResult.emit(res.result);
+    });
+
     localForage.getItem('checkRequestData').then((res: any) => {
       this.saveData = res;
-      console.log('save data = ', this.saveData);
+      //console.log('save data = ', this.saveData);
     });
     this.checkRequestId();
   }
 
   save() {
     //console.log('save data = ', this.saveData);
-    console.log('form = ', this.selectResult);
-    console.log('save data = ', this.saveData);
+    //console.log('form = ', this.selectResult);
+    //console.log('save data = ', this.saveData);
     const payload: KspApprovePayload = {
       requestid: this.saveData.requestData.id,
       process: `${Number(this.saveData.requestData.process) + 1}`,

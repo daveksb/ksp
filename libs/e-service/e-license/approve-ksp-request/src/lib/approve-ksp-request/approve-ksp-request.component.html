@@ -107,6 +107,7 @@
           <input
             class="radio"
             type="radio"
+            [attr.disabled]="status !== '1' ? true : null"
             value="1"
             formControlName="shouldForward"
           />
@@ -121,6 +122,7 @@
           <input
             class="radio"
             type="radio"
+            [attr.disabled]="status === '1' ? true : null"
             value="2"
             formControlName="shouldForward"
           />
@@ -137,6 +139,7 @@
           <input
             class="radio"
             type="radio"
+            [attr.disabled]="status !== '1' ? true : null"
             value="3"
             formControlName="shouldForward"
           />
@@ -151,6 +154,7 @@
           <input
             class="radio"
             type="radio"
+            [attr.disabled]="status === '1' ? true : null"
             value="4"
             formControlName="shouldForward"
           />
