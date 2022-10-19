@@ -26,11 +26,7 @@
         [class.required]="!form.controls.notRequired.value"
         >สังกัด</label
       >
-      <select
-        class="form-select"
-        [class.form-select-sp]="isDarkMode"
-        formControlName="bureauid"
-      >
+      <select class="form-select" formControlName="bureauid">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let bureau of bureaus" [value]="bureau?.bureauId">
           {{ bureau?.bureauName }}
@@ -44,12 +40,7 @@
         [class.required]="!form.controls.notRequired.value"
         >ชื่อหน่วยงาน/สถานศึกษา</label
       >
-      <input
-        class="form-control"
-        [class.form-control-sp]="isDarkMode"
-        type="text"
-        formControlName="schoolname"
-      />
+      <input class="form-control" type="text" formControlName="schoolname" />
       <!-- <select class="form-select" formControlName="schoolname">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
       </select> -->
@@ -63,44 +54,24 @@
         [class.required]="!form.controls.notRequired.value"
         >ที่อยู่/เลขที่</label
       >
-      <input
-        class="form-control"
-        [class.form-control-sp]="isDarkMode"
-        type="text"
-        formControlName="houseno"
-      />
+      <input class="form-control" type="text" formControlName="houseno" />
     </div>
 
     <div class="col-md-6 mb-2">
       <label class="form-label">หมู่ที่</label>
-      <input
-        class="form-control"
-        [class.form-control-sp]="isDarkMode"
-        type="text"
-        formControlName="moo"
-      />
+      <input class="form-control" type="text" formControlName="moo" />
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
       <label class="form-label">ซอย</label>
-      <input
-        class="form-control"
-        [class.form-control-sp]="isDarkMode"
-        type="text"
-        formControlName="alley"
-      />
+      <input class="form-control" type="text" formControlName="alley" />
     </div>
 
     <div class="col-md-6 mb-2">
       <label class="form-label">ถนน</label>
-      <input
-        class="form-control"
-        [class.form-control-sp]="isDarkMode"
-        type="text"
-        formControlName="road"
-      />
+      <input class="form-control" type="text" formControlName="road" />
     </div>
   </div>
 
@@ -111,12 +82,7 @@
         [class.required]="!form.controls.notRequired.value"
         >รหัสไปรษณีย์
       </label>
-      <input
-        class="form-control"
-        [class.form-control-sp]="isDarkMode"
-        type="text"
-        formControlName="postcode"
-      />
+      <input class="form-control" type="text" formControlName="postcode" />
     </div>
 
     <div class="col-md-6 mb-2">
@@ -127,7 +93,6 @@
       >
       <select
         class="form-select"
-        [class.form-select-sp]="isDarkMode"
         formControlName="province"
         (change)="provinceChanged.emit($event)"
       >
@@ -151,7 +116,6 @@
       >
       <select
         class="form-select"
-        [class.form-select-sp]="isDarkMode"
         formControlName="tumbol"
         (change)="updatePostcode($event)"
       >
@@ -170,7 +134,6 @@
       >
       <select
         class="form-select"
-        [class.form-select-sp]="isDarkMode"
         formControlName="amphur"
         (change)="amphurChanged.emit($event)"
       >

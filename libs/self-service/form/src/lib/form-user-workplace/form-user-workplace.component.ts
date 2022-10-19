@@ -18,6 +18,11 @@ const formList = [
   'province',
   'tumbol',
   'amphur',
+
+  'phone',
+  'fax',
+  'email',
+  'website',
 ];
 
 @UntilDestroy()
