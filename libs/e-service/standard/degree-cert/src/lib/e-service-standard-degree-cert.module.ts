@@ -28,6 +28,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DegreeCertSearchComponent } from '@ksp/shared/search';
 import { RouterModule } from '@angular/router';
 import { FormMeetingRecordComponent } from '@ksp/e-service/ethics/form';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   imports: [
@@ -53,6 +54,7 @@ import { FormMeetingRecordComponent } from '@ksp/e-service/ethics/form';
     ReactiveFormsModule,
     FormMeetingRecordComponent,
     DegreeCertSearchComponent,
+    MatPaginatorModule,
   ],
   declarations: [
     EServiceDegreeCertListComponent,

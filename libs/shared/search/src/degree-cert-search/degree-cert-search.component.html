@@ -61,38 +61,41 @@
     <div class="row mb-2">
       <div class="col">
         <label class="form-label">ระดับปริญญาที่เสนอขอรับรอง </label>
-        <input
-          class="form-control"
-          type="text"
-          formControlName="submitDegreeLevel"
-        />
+        <select class="form-select" formControlName="submitDegreeLevel">
+          <option value="null" disabled selected hidden>กรุณาเลือก</option>
+          <option *ngFor="let item of degreeLevelOption" [value]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
       </div>
       <div class="col">
         <label class="form-label">สถานะหลักสูตร </label>
-        <input
-          class="form-control"
-          type="text"
-          formControlName="courseStatus"
-        />
+        <select class="form-select" formControlName="courseStatus">
+          <option value="null" disabled selected hidden>กรุณาเลือก</option>
+          <option value="1">ใหม่</option>
+          <option value="2">ปรับปรุง</option>
+        </select>
       </div>
     </div>
 
     <div class="row mb-3">
       <div class="col">
         <label class="form-label">สถานะตรวจสอบ </label>
-        <input
-          class="form-control"
-          type="text"
-          formControlName="verifyStatus"
-        />
+        <select class="form-select" formControlName="verifyStatus">
+          <option value="null" disabled selected hidden>กรุณาเลือก</option>
+          <option *ngFor="let item of verifyStatusOption" [value]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
       </div>
       <div class="col">
         <label class="form-label">สถานะรับรอง </label>
-        <input
-          class="form-control"
-          type="text"
-          formControlName="approveStatus"
-        />
+        <select class="form-select" formControlName="approveStatus">
+          <option value="null" disabled selected hidden>กรุณาเลือก</option>
+          <option *ngFor="let item of approveStatusOption" [value]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
       </div>
     </div>
 

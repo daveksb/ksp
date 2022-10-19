@@ -25,19 +25,13 @@ export class UniInfoService {
   }
 
   uniRequestDegreeSearch(params: any): Observable<any> {
-    return this.http
-      .post(`${environment.shortApiUrl}/unirequestdegreecertsearch.php`, {
+    return this.http.post(
+      `${environment.shortApiUrl}/unirequestdegreecertsearch.php`,
+      {
         ...params,
         tokenkey: getCookie('userToken'),
-      })
-      .pipe(
-        map((res: any) => {
-          return {
-            ...res,
-            datareturn: _.orderBy(res?.datareturn, ['requestdate'], 'desc'),
-          };
-        })
-      );
+      }
+    );
   }
 
   uniRequestDegreeCertSelectById(id: any): Observable<any> {
@@ -128,19 +122,13 @@ export class UniInfoService {
   }
 
   uniDegreeSearch(params: any): Observable<any> {
-    return this.http
-      .post(`${environment.shortApiUrl}/unidegreecertsearch.php`, {
+    return this.http.post(
+      `${environment.shortApiUrl}/unidegreecertsearch.php`,
+      {
         ...params,
         tokenkey: getCookie('userToken'),
-      })
-      .pipe(
-        map((res: any) => {
-          return {
-            ...res,
-            datareturn: _.orderBy(res?.datareturn, ['requestdate'], 'desc'),
-          };
-        })
-      );
+      }
+    );
   }
   async getMajorAndBranch(row: any) {
     let major: any;
@@ -247,5 +235,8 @@ export class UniInfoService {
   }
   getUniuniversity(): Observable<any> {
     return this.http.get(`${environment.apiUrl}/kspmasterdata/uniuniversity`);
+  }
+  getUniDegreelevel(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/kspmasterdata/unidegreelevel`);
   }
 }

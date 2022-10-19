@@ -1,23 +1,73 @@
+import { EUniService } from '@ksp/shared/service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
+import { KspPaginationComponent, ListData } from '@ksp/shared/interface';
+import { UniInfoService } from '@ksp/shared/service';
+import { map } from 'rxjs';
+import { FormBuilder } from '@angular/forms';
+import { thaiDate } from '@ksp/shared/utility';
 
 @Component({
   selector: 'e-service-degree-cert-list',
   templateUrl: './e-service-degree-cert-list.component.html',
   styleUrls: ['./e-service-degree-cert-list.component.scss'],
 })
-export class EServiceDegreeCertListComponent implements OnInit {
+export class EServiceDegreeCertListComponent
+  extends KspPaginationComponent
+  implements OnInit
+{
   showActionButtons = false;
   data: DegreeCertInfo[] = [data];
   dataSource = new MatTableDataSource<DegreeCertInfo>();
   selection = new SelectionModel<DegreeCertInfo>(true, []);
   displayedColumns: string[] = displayedColumns;
   pageType = 0;
+  uniUniversityOption: ListData[] = [];
+  degreeLevelOption: ListData[] = [];
+  form = this.fb.group({
+    search: [{}],
+  });
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute,
+    private uniInfoService: UniInfoService,
+    private eUiService: EUniService
+  ) {
+    super();
+    this.getOptions();
+  }
+  getOptions() {
+    this.uniInfoService
+      .getUniuniversity()
+      .pipe(
+        map((res) => {
+          return res?.datareturn?.map(({ id, name }: any) => ({
+            value: id,
+            label: name,
+          }));
+        })
+      )
+      .subscribe((data) => {
+        this.uniUniversityOption = data;
+      });
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
-
+    this.uniInfoService
+      .getUniDegreelevel()
+      .pipe(
+        map((res) => {
+          return res?.datareturn?.map(({ id, name }: any) => ({
+            value: id,
+            label: name,
+          }));
+        })
+      )
+      .subscribe((data) => {
+        this.degreeLevelOption = data;
+      });
+  }
   ngOnInit() {
     this.route.paramMap.subscribe((res) => {
       if (res) {
@@ -48,12 +98,60 @@ export class EServiceDegreeCertListComponent implements OnInit {
 
     this.selection.select(...this.dataSource.data);
   }
-
-  onSearch() {
-    for (let index = 0; index < 10; index++) {
-      this.data = [...this.data, data];
-    }
-    this.dataSource.data = this.data;
+  getRequest() {
+    const {
+      institutionNumber,
+      licenseNumber,
+      degreeName,
+      date,
+      submitDegreeLevel,
+      courseStatus,
+      verifyStatus,
+      approveStatus,
+    } = this.form.controls.search.value as any;
+    return {
+      uniid: institutionNumber || '',
+      fulldegreenameth: degreeName || '',
+      requestno: licenseNumber || '',
+      requestdate: date || '',
+      coursestatus: courseStatus || '',
+      degreelevel: submitDegreeLevel || '',
+      requeststatus: approveStatus || '',
+      requestprocess: verifyStatus || '',
+      ...this.tableRecord,
+    };
+  }
+  override search() {
+    this.eUiService
+      .uniRequestDegreeCertSearchEsUni(this.getRequest())
+      .subscribe((res) => {
+        if (!res?.datareturn) return;
+        this.pageEvent.length = res.countrow;
+        this.dataSource.data = res?.datareturn?.map(
+          (item: any, index: number) => {
+            return {
+              key: item?.id,
+              order:
+                this.pageEvent.pageIndex * this.pageEvent.pageSize + ++index,
+              degreeId: item?.requestno,
+              date: item?.requestdate
+                ? thaiDate(new Date(item?.requestdate))
+                : '',
+              uni: item?.uniname,
+              major: item?.fulldegreenameth,
+              verifyStatus: 'รับข้อมูล',
+              considerStatus: 'พิจารณา',
+              approveStatus: 'พิจารณา',
+              approveDate: '',
+              editDate: item?.updatedate
+                ? thaiDate(new Date(item?.requestdate))
+                : '',
+              verify: 'แก้ไข',
+              consider: 'แก้ไข',
+            };
+          }
+        );
+      });
   }
 
   onClear() {
