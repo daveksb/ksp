@@ -65,7 +65,7 @@
           </div>
           <div class="col">
             <label class="form-label">สถานะตรวจสอบ</label>
-            <select class="form-select" formControlName="requeststatus">
+            <select class="form-select" formControlName="status">
               <option value="null" selected disabled>กรุณาเลือก</option>
               <option
                 *ngFor="let option of requestStatusOptions"
@@ -229,8 +229,8 @@
             <span
               class="rounded-pill d-flex justify-content-center"
               [ngClass]="{
-                edit__status: element.requeststatus === 1 || 2,
-                verify__status: element.requeststatus === 3
+                edit__status: element.status === 1 || 2,
+                verify__status: element.status === 3
               }"
             >
               {{ element.requeststatusname }}
