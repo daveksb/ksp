@@ -15,10 +15,10 @@ import { formatDatePayload, validatorMessages } from '@ksp/shared/utility';
 
 @Component({
   selector: 'self-service-register-step-three',
-  templateUrl: './register-step-three.component.html',
-  styleUrls: ['./register-step-three.component.scss'],
+  templateUrl: './register-password.component.html',
+  styleUrls: ['./register-password.component.scss'],
 })
-export class RegisterStepThreeComponent implements OnInit {
+export class RegisterPasswordComponent implements OnInit {
   form = this.fb.group(
     {
       password: [null, [Validators.required, Validators.minLength(6)]],
@@ -46,11 +46,11 @@ export class RegisterStepThreeComponent implements OnInit {
   }
 
   loadStorage() {
-    localForage.getItem('th-register').then((res: any) => {
+    localForage.getItem('th-register-idcard').then((res: any) => {
       console.log('res = ', res);
     });
 
-    localForage.getItem('th-register-form').then((res: any) => {
+    localForage.getItem('th-register-userinfo').then((res: any) => {
       console.log('res = ', res);
       //this.idCardNo = res.idcardno;
       this.myInfo = { ...res, ...this.form.value };

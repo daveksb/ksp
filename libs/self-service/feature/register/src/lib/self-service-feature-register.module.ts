@@ -1,12 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RegisterStepOneComponent } from './register-step-one/register-step-one.component';
-import { RegisterStepTwoComponent } from './register-step-two/register-step-two.component';
-import { RegisterStepThreeComponent } from './register-step-three/register-step-three.component';
-import {
-  FormUploadImageComponent,
-  SelfServiceFormModule,
-} from '@ksp/self-service/form';
+import { RegisterUserInfoComponent } from './register-user-info/register-user-info.component';
+import { RegisterIdCardComponent } from './register-id-card/register-id-card.component';
+import { RegisterPasswordComponent } from './register-password/register-password.component';
+import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule, Routes } from '@angular/router';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
@@ -31,15 +28,15 @@ export const routes: Routes = [
   { path: 'policy', component: PrivacyPolicyComponent },
   {
     path: 'th-step-1',
-    component: RegisterStepTwoComponent,
+    component: RegisterIdCardComponent,
   },
   {
     path: 'th-step-2',
-    component: RegisterStepOneComponent,
+    component: RegisterUserInfoComponent,
   },
   {
     path: 'th-step-3',
-    component: RegisterStepThreeComponent,
+    component: RegisterPasswordComponent,
   },
   {
     path: 'en-step-0',
@@ -73,9 +70,9 @@ export const routes: Routes = [
     MatDatepickerModule,
   ],
   declarations: [
-    RegisterStepOneComponent,
-    RegisterStepTwoComponent,
-    RegisterStepThreeComponent,
+    RegisterUserInfoComponent,
+    RegisterIdCardComponent,
+    RegisterPasswordComponent,
     PrivacyPolicyComponent,
     RegisterCompletedComponent,
     RegisterForeignComponent,

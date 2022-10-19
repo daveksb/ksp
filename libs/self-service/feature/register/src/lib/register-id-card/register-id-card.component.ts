@@ -14,10 +14,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'self-service-register-step-two',
-  templateUrl: './register-step-two.component.html',
-  styleUrls: ['./register-step-two.component.scss'],
+  templateUrl: './register-id-card.component.html',
+  styleUrls: ['./register-id-card.component.scss'],
 })
-export class RegisterStepTwoComponent {
+export class RegisterIdCardComponent {
   validatorMessages = validatorMessages;
   uniqueNo = '';
   imgSrc = '';
@@ -52,7 +52,7 @@ export class RegisterStepTwoComponent {
     });
 
     dialogRef.afterClosed().subscribe(() => {
-      localForage.getItem('th-register').then((res: any) => {
+      localForage.getItem('th-register-idcard').then((res: any) => {
         const data = {
           ...res,
           ...this.form.value,

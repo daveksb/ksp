@@ -18,10 +18,10 @@ import localForage from 'localforage';
 import { Observable } from 'rxjs';
 @Component({
   selector: 'self-service-register-step-one',
-  templateUrl: './register-step-one.component.html',
-  styleUrls: ['./register-step-one.component.scss'],
+  templateUrl: './register-user-info.component.html',
+  styleUrls: ['./register-user-info.component.scss'],
 })
-export class RegisterStepOneComponent implements OnInit {
+export class RegisterUserInfoComponent implements OnInit {
   prefixList$!: Observable<Prefix[]>;
   nationalitys$!: Observable<Nationality[]>;
   provinces$!: Observable<Province[]>;
@@ -75,7 +75,7 @@ export class RegisterStepOneComponent implements OnInit {
   }
 
   nextPage() {
-    localForage.setItem('th-register-form', this.form.value);
+    localForage.setItem('th-register-userinfo', this.form.value);
     this.router.navigate(['/register', 'th-step-3']);
   }
 
