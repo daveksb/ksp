@@ -80,7 +80,6 @@ export class ETempLicenseListComponent implements AfterViewInit {
     this.eRequestService.KspSearchRequest(payload).subscribe((res) => {
       if (res && res.length) {
         this.dataSource.data = res;
-
         this.dataSource.data = processFilter(res);
 
         this.dataSource.sort = this.sort;

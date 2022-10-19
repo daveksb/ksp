@@ -29,7 +29,6 @@ export class RegisterStepThreeComponent implements OnInit {
     }
   );
 
-  idCardNo = '';
   myInfo = new SelfMyInfo();
   passwordEqual = false;
   validatorMessages = validatorMessages;
@@ -42,24 +41,39 @@ export class RegisterStepThreeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.validatePassword();
+    this.loadStorage();
+  }
+
+  loadStorage() {
+    localForage.getItem('th-register').then((res: any) => {
+      console.log('res = ', res);
+    });
+
+    localForage.getItem('th-register-form').then((res: any) => {
+      console.log('res = ', res);
+      //this.idCardNo = res.idcardno;
+      this.myInfo = { ...res, ...this.form.value };
+      //this.myInfo.username = res.idcardno;
+      this.myInfo.idcardno = '1';
+      this.myInfo.username = '1';
+
+      this.myInfo.isactive = '1';
+      this.myInfo.uniquetimestamp = res.uniquetimestamp;
+      this.myInfo.usertype = '1'; // ชาวไทย
+      this.myInfo.prefixth = res.prefixth;
+      this.myInfo.prefixen = res.prefixen;
+      this.myInfo.sex = res.sex;
+    });
+  }
+
+  validatePassword() {
     this.form.controls.confirmPassword.valueChanges.subscribe((res) => {
       if (res === this.form.controls.password.value) {
         this.passwordEqual = true;
       } else {
         this.passwordEqual = false;
       }
-    });
-
-    localForage.getItem('th-register').then((res: any) => {
-      console.log('res = ', res);
-      this.idCardNo = res.idcardno;
-      this.myInfo = { ...res, ...this.form.value };
-      this.myInfo.username = res.idcardno;
-      this.myInfo.isactive = '1';
-      this.myInfo.uniquetimestamp = res.uniquetimestamp;
-      this.myInfo.usertype = '1'; // ชาวไทย
-      this.myInfo.prefixth = res.prefixth;
-      this.myInfo.prefixen = res.prefixen;
     });
   }
 

@@ -12,7 +12,6 @@ import { AddressService, GeneralInfoService } from '@ksp/shared/service';
 import {
   nameEnPattern,
   nameThPattern,
-  phonePattern,
   validatorMessages,
 } from '@ksp/shared/utility';
 import localForage from 'localforage';
@@ -76,7 +75,7 @@ export class RegisterStepOneComponent implements OnInit {
   }
 
   nextPage() {
-    localForage.setItem('th-register', this.form.value);
+    localForage.setItem('th-register-form', this.form.value);
     this.router.navigate(['/register', 'th-step-3']);
   }
 
