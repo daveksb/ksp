@@ -21,9 +21,13 @@ import { KspApprovePersistData } from '../e-temp-license-detail/e-temp-license-d
 export class TempLicenseCheckConfirmComponent implements OnInit {
   requestId!: number;
   saveData = new KspApprovePersistData();
-  selectResult: any;
+
+  form = this.fb.group({
+    approvement: [],
+  });
 
   constructor(
+    private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     public dialog: MatDialog,
@@ -31,21 +35,33 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.form.valueChanges.subscribe((res) => {
+      console.log(res.approvement);
+      //this.selectResult.emit(res.result);
+    });
+
     localForage.getItem('checkRequestData').then((res: any) => {
       this.saveData = res;
-      console.log('save data = ', this.saveData);
+      if (this.saveData.requestData.id)
+        this.getApproveHistory(this.saveData.requestData.id);
+      //console.log('save data = ', this.saveData);
     });
     this.checkRequestId();
   }
 
+  getApproveHistory(requestid: string) {
+    this.eRequestService.getApproveHistory(requestid).subscribe((res) => {
+      console.log('list = ', res);
+    });
+  }
+
   save() {
     //console.log('save data = ', this.saveData);
-    console.log('form = ', this.selectResult);
-    console.log('save data = ', this.saveData);
+    //console.log('form = ', this.selectResult);
     const payload: KspApprovePayload = {
       requestid: this.saveData.requestData.id,
       process: `${Number(this.saveData.requestData.process) + 1}`,
-      status: `${this.selectResult}`,
+      status: '',
       detail: JSON.stringify(this.saveData.checkDetail),
       systemtype: '2', // school
       userid: null,
@@ -53,7 +69,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
     };
 
     this.eRequestService.KspApproveRequest(payload).subscribe((res) => {
-      console.log('result = ', res);
+      console.log('result = ', res.app);
       this.cancel();
     });
   }

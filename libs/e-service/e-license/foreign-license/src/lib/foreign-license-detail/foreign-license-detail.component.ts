@@ -1,7 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormMode, KspApprovePayload } from '@ksp/shared/interface';
+import {
+  Country,
+  FileGroup,
+  FormMode,
+  KspApprovePayload,
+  KspRequest,
+  Prefix,
+  VisaType,
+} from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -27,19 +35,13 @@ export class ForeignLicenseDetailComponent implements OnInit {
   foreignInfo = ['1.สำเนาหนังสือเดินทาง'];
 
   today = thaiDate(new Date());
-  prefixList$!: Observable<any>;
-  countries$!: Observable<any>;
-  visaTypeList$!: Observable<any>;
+  prefixList$!: Observable<Prefix[]>;
+  countries$!: Observable<Country[]>;
+  visaTypeList$!: Observable<VisaType[]>;
   verifyChoice = verifyChoices;
   evidenceFile = evidenceFiles;
-  requestNo = '';
-  requestData: any;
-  requestId!: number;
+  requestData = new KspRequest();
   requestSubType = SchoolRequestSubType.อื่นๆ;
-  bureauName = '';
-  schoolId = '';
-  schoolName = '';
-  address = '';
 
   form = this.fb.group({
     foreignTeacherInfo: [],
@@ -64,23 +66,16 @@ export class ForeignLicenseDetailComponent implements OnInit {
 
   checkRequestId() {
     this.route.paramMap.subscribe((params) => {
-      this.requestId = Number(params.get('id'));
-      if (this.requestId) {
-        this.loadRequestFromId(this.requestId);
+      const requestId = Number(params.get('id'));
+      if (requestId) {
+        this.loadRequestFromId(requestId);
       }
     });
   }
 
   loadRequestFromId(id: number) {
-    this.eRequestService.getKspRequestById(id).subscribe((res: any) => {
+    this.eRequestService.getKspRequestById(id).subscribe((res) => {
       this.requestData = res;
-      this.requestNo = res.requestno;
-      this.bureauName = res?.bureauname ?? '';
-      this.schoolId = res?.schoolid ?? '';
-      this.schoolName = res?.schoolname ?? '';
-      this.address = res?.schooladdress ?? '';
-      //this.currentProcess = +res.currentprocess;
-      //console.log('current process = ', this.currentProcess);
       this.pathUserInfo(res);
     });
   }
@@ -105,19 +100,6 @@ export class ForeignLicenseDetailComponent implements OnInit {
   }
 
   getList() {
-    // this.schoolInfoService
-    //   .getSchoolInfo(this.schoolId)
-    //   .pipe(untilDestroyed(this))
-    //   .subscribe((res) => {
-    //     this.schoolName = res.schoolName;
-    //     this.bureauName = res.bureauName;
-    //     this.address = `บ้านเลขที่ ${res.address} ซอย ${
-    //       res?.street ?? ''
-    //     } หมู่ ${res?.moo ?? ''} ถนน ${res?.road ?? ''} ตำบล ${
-    //       res.tumbon
-    //     } อำเภอ ${res.amphurName} จังหวัด ${res.provinceName}`;
-    //   });
-
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.countries$ = this.addressService.getCountry();
     this.visaTypeList$ = this.generalInfoService.getVisaType();
@@ -129,7 +111,6 @@ export class ForeignLicenseDetailComponent implements OnInit {
 
   onConfirmed() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูล
         และส่งใบคำขอ ใช่หรือไม่? `,
@@ -142,7 +123,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
           if (res) {
             const data = this.form.controls.verifydetail.value as any;
             const payload: KspApprovePayload = {
-              requestid: String(this.requestId),
+              requestid: this.requestData.requestid,
               process: '2',
               status: data.result,
               detail: data.detail,
@@ -177,7 +158,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
   }
 }
 
-const evidenceFiles = [
+const evidenceFiles: FileGroup[] = [
   {
     name: '1.สำเนาสัญญาจ้าง',
     files: [],
