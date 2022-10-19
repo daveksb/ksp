@@ -52,14 +52,11 @@ export class RegisterIdCardComponent {
     });
 
     dialogRef.afterClosed().subscribe(() => {
-      localForage.getItem('th-register-idcard').then((res: any) => {
-        const data = {
-          ...res,
-          ...this.form.value,
-          ...{ uniquetimestamp: this.uniqueNo },
-        };
-        localForage.setItem('th-register', data);
-      });
+      const data = {
+        ...this.form.value,
+        ...{ uniquetimestamp: this.uniqueNo },
+      };
+      localForage.setItem('th-register', data);
     });
   }
 

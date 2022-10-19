@@ -75,8 +75,15 @@ export class RegisterUserInfoComponent implements OnInit {
   }
 
   nextPage() {
-    localForage.setItem('th-register-userinfo', this.form.value);
-    this.router.navigate(['/register', 'th-step-3']);
+    //localForage.setItem('th-register-userinfo', this.form.value);
+    localForage.getItem('th-register').then((res: any) => {
+      const data = {
+        ...res,
+        ...this.form.value,
+      };
+      localForage.setItem('th-register', data);
+      this.router.navigate(['/register', 'th-step-3']);
+    });
   }
 
   provinceChanged(evt: any) {

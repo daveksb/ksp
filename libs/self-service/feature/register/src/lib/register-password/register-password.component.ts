@@ -29,6 +29,7 @@ export class RegisterPasswordComponent implements OnInit {
     }
   );
 
+  idCardNo = '';
   myInfo = new SelfMyInfo();
   passwordEqual = false;
   validatorMessages = validatorMessages;
@@ -46,17 +47,13 @@ export class RegisterPasswordComponent implements OnInit {
   }
 
   loadStorage() {
-    localForage.getItem('th-register-idcard').then((res: any) => {
+    localForage.getItem('th-register').then((res: any) => {
       console.log('res = ', res);
-    });
-
-    localForage.getItem('th-register-userinfo').then((res: any) => {
-      console.log('res = ', res);
-      //this.idCardNo = res.idcardno;
+      this.idCardNo = res.idcardno;
       this.myInfo = { ...res, ...this.form.value };
       //this.myInfo.username = res.idcardno;
-      this.myInfo.idcardno = '1';
-      this.myInfo.username = '1';
+      this.myInfo.idcardno = res.idcardno;
+      this.myInfo.username = res.idcardno;
 
       this.myInfo.isactive = '1';
       this.myInfo.uniquetimestamp = res.uniquetimestamp;
