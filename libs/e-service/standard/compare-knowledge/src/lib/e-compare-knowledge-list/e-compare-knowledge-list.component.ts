@@ -4,7 +4,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { SchoolRequestSubType } from '@ksp/shared/constant';
+import {
+  SchoolRequestSubType,
+  SelfServiceRequestType,
+} from '@ksp/shared/constant';
 import { SelfRequest } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import { checkProcess, checkStatus } from '@ksp/shared/utility';
@@ -42,7 +45,7 @@ export class ECompareKnowledgeListComponent implements AfterViewInit {
   search(params: any) {
     const payload = {
       systemtype: 1, // self service
-      requesttype: 6, // ใบคำขอต่อใบอนุญาต
+      requesttype: +SelfServiceRequestType.ขอยื่นเทียบเคียงความรู้, // ใบคำขอต่อใบอนุญาต
       requestno: '',
       firstnameth: '',
       idcardno: '',

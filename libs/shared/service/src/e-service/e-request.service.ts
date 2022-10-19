@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
 import {
+  ESelfSearchPayload,
   EsSearchPayload,
   KspApprovePayload,
   KspRequest,
@@ -61,7 +62,7 @@ export class ERequestService {
       );
   }
 
-  searchSelfRequest(payload: any): Observable<SelfRequest[]> {
+  searchSelfRequest(payload: ESelfSearchPayload): Observable<SelfRequest[]> {
     return this.http
       .post(
         `${environment.shortApiUrl}/schrequestsearch_e-service.php`,
