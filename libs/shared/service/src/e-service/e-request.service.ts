@@ -27,7 +27,7 @@ export class ERequestService {
   }
 
   // new API
-  KspApproveRequest(payload: KspApprovePayload): Observable<any> {
+  KspUpdateRequestProcess(payload: KspApprovePayload): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/e-service/ksprequestprocessinsert`,
       payload
@@ -94,6 +94,7 @@ export class ERequestService {
       payload
     );
   }
+
   createSchKuruspaNumber(payload: Partial<SchKuruspaNumber>): Observable<any> {
     return this.http
       .post(`${environment.apiUrl}/e-service/schkuruspanoinsertupdate`, payload)

@@ -137,7 +137,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
               userid: null,
               paymentstatus: null,
             };
-            return this.eRequestService.KspApproveRequest(payload);
+            return this.eRequestService.KspUpdateRequestProcess(payload);
           }
           return EMPTY;
         }),

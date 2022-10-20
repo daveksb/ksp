@@ -94,7 +94,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
 
     console.log('payload = ', payload);
 
-    this.eRequestService.KspApproveRequest(payload).subscribe((res) => {
+    this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
       console.log('result = ', res.app);
       this.cancel();
     });
