@@ -621,8 +621,8 @@ export class SchoolRequestComponent implements OnInit {
     this.schoolInfoService
       .getSchoolInfo(this.schoolId)
       .pipe(untilDestroyed(this))
-      .subscribe((res: any) => {
-        this.form.controls.schoolAddr.patchValue(res);
+      .subscribe((res) => {
+        this.form.controls.schoolAddr.patchValue(<any>res);
       });
   }
 
