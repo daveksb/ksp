@@ -113,9 +113,11 @@ export class UserDetailComponent implements OnInit {
       paymentstatus: null,
     };
 
-    /* this.eRequestService.KspApproveRequest(approvePayload).subscribe((res) => {
-      console.log('approve result = ', res);
-    }); */
+    this.eRequestService
+      .KspUpdateRequestProcess(approvePayload)
+      .subscribe((res) => {
+        console.log('approve result = ', res);
+      });
 
     this.eRequestService.createSchUser(newUser).subscribe(() => {
       this.completeDialog();
@@ -133,9 +135,9 @@ export class UserDetailComponent implements OnInit {
       paymentstatus: null,
     };
 
-    /* this.eRequestService.KspApproveRequest(payload).subscribe((res) => {
+    this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
       //console.log('un approve result = ', res);
-    }); */
+    });
   }
 
   viewUser() {
@@ -212,11 +214,11 @@ const approveChoices = [
 
 const headers = [
   [
-    'ผู้ใช้งานระบบบริการสถาบันผลิตครู (Uni Service)',
+    'ใบคำขอรหัสเข้าใช้งานระบบบริการสถาบันผลิตครู (Uni Service)',
     'ตรวจสอบและอนุมัติใบคำขอรหัสเข้าใช้งาน',
   ],
   [
-    'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (Uni Service)',
+    'ใบคำขอรหัสเข้าใช้งานระบบบริการสถาบันผลิตครู (Uni Service)',
     'ข้อมูลผู้เข้าใช้งานระบบ Uni Service',
   ],
 ];
