@@ -89,8 +89,47 @@ export class UserDetailComponent implements OnInit {
     });
   }
 
+  retireUser() {
+    const payload: KspApprovePayload = {
+      requestid: `${this.requestId}`,
+      process: '1',
+      status: '2',
+      detail: null,
+      systemtype: '2', // school
+      userid: null,
+      paymentstatus: null,
+    };
+
+    this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
+      console.log('update result = ', res);
+      this.completeDialog();
+    });
+
+    const retirePayload = {
+      schmemberid: this.requestData.userid,
+      schuseractive: '0',
+    };
+
+    this.eRequestService.retiredUser(retirePayload).subscribe((res) => {
+      console.log('retired result = ', res);
+    });
+  }
+
   approveUser() {
-    // change process and status of SCH_REQUEST
+    const payload: KspApprovePayload = {
+      requestid: `${this.requestId}`,
+      process: '1',
+      status: '2',
+      detail: null,
+      systemtype: '2', // school
+      userid: null,
+      paymentstatus: null,
+    };
+
+    this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
+      console.log('approve result = ', res);
+    });
+
     const newUser = new SchUser();
     newUser.idcardno = this.requestData.idcardno;
     newUser.prefixth = this.requestData.prefixth;
@@ -102,21 +141,6 @@ export class UserDetailComponent implements OnInit {
     newUser.schoolid = this.requestData.schoolid;
     newUser.schpassword = this.setPassword;
     newUser.schuseractive = '1';
-
-    const approvePayload: KspApprovePayload = {
-      requestid: `${this.requestId}`,
-      process: '1',
-      status: '2',
-      detail: null,
-      systemtype: '2', // school
-      userid: null,
-      paymentstatus: null,
-    };
-
-    this.eRequestService.KspApproveRequest(approvePayload).subscribe((res) => {
-      console.log('approve result = ', res);
-    });
-
     this.eRequestService.createSchUser(newUser).subscribe(() => {
       this.completeDialog();
     });
@@ -133,7 +157,7 @@ export class UserDetailComponent implements OnInit {
       paymentstatus: null,
     };
 
-    this.eRequestService.KspApproveRequest(payload).subscribe((res) => {
+    this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
       //console.log('un approve result = ', res);
     });
   }
@@ -160,9 +184,13 @@ export class UserDetailComponent implements OnInit {
 
     confirmDialog.componentInstance.confirmed.subscribe(() => {
       const form: any = this.verifyForm.controls.result.value;
-      const result = +form.result;
-      if (result) {
-        this.approveUser();
+      const resultOk = +form.result;
+      if (resultOk) {
+        if (this.requestData.requesttype === '1') {
+          this.approveUser();
+        } else if (this.requestData.requesttype === '2') {
+          this.retireUser();
+        }
       } else {
         this.unApproveUser();
       }
