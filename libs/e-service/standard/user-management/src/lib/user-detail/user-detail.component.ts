@@ -113,9 +113,11 @@ export class UserDetailComponent implements OnInit {
       paymentstatus: null,
     };
 
-    this.eRequestService.KspUpdateRequestProcess(approvePayload).subscribe((res) => {
-      console.log('approve result = ', res);
-    });
+    this.eRequestService
+      .KspUpdateRequestProcess(approvePayload)
+      .subscribe((res) => {
+        console.log('approve result = ', res);
+      });
 
     this.eRequestService.createSchUser(newUser).subscribe(() => {
       this.completeDialog();
