@@ -113,9 +113,9 @@ export class UserDetailComponent implements OnInit {
       paymentstatus: null,
     };
 
-    this.eRequestService.KspApproveRequest(approvePayload).subscribe((res) => {
+    /* this.eRequestService.KspApproveRequest(approvePayload).subscribe((res) => {
       console.log('approve result = ', res);
-    });
+    }); */
 
     this.eRequestService.createSchUser(newUser).subscribe(() => {
       this.completeDialog();
@@ -133,9 +133,9 @@ export class UserDetailComponent implements OnInit {
       paymentstatus: null,
     };
 
-    this.eRequestService.KspApproveRequest(payload).subscribe((res) => {
+    /* this.eRequestService.KspApproveRequest(payload).subscribe((res) => {
       //console.log('un approve result = ', res);
-    });
+    }); */
   }
 
   viewUser() {

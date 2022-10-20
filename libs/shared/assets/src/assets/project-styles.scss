@@ -155,10 +155,12 @@ input[type='radio'] {
 } */
 
 .form-check-input:checked[type='radio'] {
-  background-color: #f68b33;
-  border: #f68b33;
+  /* background-color: #f68b33;
+  border: #f68b33; */
   background-image: url(/assets/images/check-lg.svg);
   border-radius: 0.25rem;
+  border: none;
+  background-size: contain;
 }
 
 .form-check-input[type='radio'] {
