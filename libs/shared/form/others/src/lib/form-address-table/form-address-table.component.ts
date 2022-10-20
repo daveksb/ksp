@@ -46,6 +46,9 @@ export class FormAddressTableComponent
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     super();
+    if (this.data && this.data.isDialog) {
+      this.isDialog = true;
+    }
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
       this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
