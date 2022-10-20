@@ -79,19 +79,14 @@
     <div class="row mb-3">
       <div class="col-sm-6">
         <label class="form-label required">ตำแหน่งทางการบริหาร</label>
-        <select class="form-select" formControlName="position" (change)="chageposition($event)">
-          <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option *ngFor="let occupy of occupyList" [value]="occupy.eduoccupytype">{{occupy.eduoccupyname}}</option>
-        </select>
-      </div>
-      <div class="col-sm-6" *ngIf="form.value.position && form.value.position === '0'">
-        <label class="form-label"><br /></label>
-        <input
-          class="form-control"
-          type="text"
-          placeholder="อื่นๆ โปรดระบุ"
-          formControlName="other"
-        />
+        <input class="form-control" type="text" formControlName="position" />
+        <ng-container
+          *ngIf="position.invalid && (position.dirty || position.touched)"
+        >
+          <span class="text-danger" *ngIf="position.errors?.['pattern']">
+            {{ validatorMessages.en }}
+          </span>
+        </ng-container>
       </div>
     </div>
 
