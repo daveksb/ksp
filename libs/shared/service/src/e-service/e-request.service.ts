@@ -6,6 +6,7 @@ import {
   KspApprovePayload,
   KspRequest,
   KspResponse,
+  SchKuruspaNumber,
   SchUser,
   SelfRequest,
 } from '@ksp/shared/interface';
@@ -91,5 +92,10 @@ export class ERequestService {
       `${environment.apiUrl}/e-service/useractiveupdate`,
       payload
     );
+  }
+  createSchKuruspaNumber(payload: Partial<SchKuruspaNumber>): Observable<any> {
+    return this.http
+      .post(`${environment.apiUrl}/e-service/schkuruspanoinsertupdate`, payload)
+      .pipe(map((data: any) => data.datareturn));
   }
 }
