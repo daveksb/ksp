@@ -13,7 +13,7 @@
               class="radio"
               type="radio"
               value="1"
-              formControlName="status"
+              formControlName="result"
             />
             <label class="form-label ms-2"> ครบถ้วน และถูกต้อง </label>
           </div>
@@ -29,7 +29,7 @@
               class="radio"
               type="radio"
               value="2"
-              formControlName="status"
+              formControlName="result"
             />
             <label class="form-label ms-2"> ขอแก้ไข / เพิ่มเติม </label>
           </div>
@@ -73,7 +73,7 @@
               class="radio"
               type="radio"
               value="3"
-              formControlName="status"
+              formControlName="result"
             />
             <label class="form-label ms-2"> ขาดคุณสมบัติ </label>
           </div>
@@ -114,7 +114,7 @@
           <input
             class="radio"
             type="radio"
-            [attr.disabled]="status !== '1' ? true : null"
+            [attr.disabled]="result !== '1' ? true : null"
             value="1"
             formControlName="shouldForward"
           />
@@ -129,7 +129,7 @@
           <input
             class="radio"
             type="radio"
-            [attr.disabled]="status !== '1' ? true : null"
+            [attr.disabled]="result !== '1' ? true : null"
             value="2"
             formControlName="shouldForward"
           />
@@ -144,7 +144,7 @@
           <input
             class="radio"
             type="radio"
-            [attr.disabled]="status === '1' || status === '2' ? true : null"
+            [attr.disabled]="result === '1' || result === '2' ? true : null"
             value="3"
             formControlName="shouldForward"
           />
@@ -161,7 +161,7 @@
           <input
             class="radio"
             type="radio"
-            [attr.disabled]="status !== '1' ? true : null"
+            [attr.disabled]="result !== '1' ? true : null"
             value="4"
             formControlName="shouldForward"
           />
@@ -176,7 +176,7 @@
           <input
             class="radio"
             type="radio"
-            [attr.disabled]="status === '1' || status === '2' ? true : null"
+            [attr.disabled]="result === '1' || result === '2' ? true : null"
             value="5"
             formControlName="shouldForward"
           />
