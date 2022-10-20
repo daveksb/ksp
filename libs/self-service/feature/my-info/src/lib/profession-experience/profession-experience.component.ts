@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
-import { KspFormBaseComponent, SelfMyInfo } from '@ksp/shared/interface';
+import { FormMode, SelfMyInfo } from '@ksp/shared/interface';
 import {
   AddressService,
   EducationDetailService,
   MyInfoService,
 } from '@ksp/shared/service';
-import { providerFactory } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 import { replaceEmptyWithNull } from '@ksp/shared/utility';
 
@@ -14,12 +13,11 @@ import { replaceEmptyWithNull } from '@ksp/shared/utility';
   selector: 'self-service-profession-experience',
   templateUrl: './profession-experience.component.html',
   styleUrls: ['./profession-experience.component.scss'],
-  providers: providerFactory(ProfessionExperienceComponent),
 })
-export class ProfessionExperienceComponent
-  extends KspFormBaseComponent
-  implements OnInit
-{
+export class ProfessionExperienceComponent implements OnInit {
+  label = 'แก้ไขข้อมูล';
+  mode: FormMode = 'view';
+
   info = [
     { name: 'สำเนาใบรายงานผลการศึกษา (transcript)', fileid: '', filename: '' },
     {
@@ -41,7 +39,7 @@ export class ProfessionExperienceComponent
       filename: '',
     },
   ];
-  override form = this.fb.group({
+  form = this.fb.group({
     licenseInfo1: this.fb.array([]),
     licenseInfo2: this.fb.array([]),
     licenseInfo3: this.fb.array([]),
@@ -63,16 +61,7 @@ export class ProfessionExperienceComponent
     private addressService: AddressService,
     private educationDetailService: EducationDetailService,
     private myInfoService: MyInfoService
-  ) {
-    super();
-    this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
-      this.form?.valueChanges.subscribe((value) => {
-        this.onChange(value);
-        this.onTouched();
-      })
-    );
-  }
+  ) {}
 
   ngOnInit(): void {
     this.countries$ = this.addressService.getCountry();
@@ -127,17 +116,25 @@ export class ProfessionExperienceComponent
     return this.form.controls['licenseInfo3'] as FormArray;
   }
   onSave() {
-    const formData = this.form.value;
-    const fileList = this.mapFileInfo(this.info);
-    console.log(fileList);
-    this.baseForm.patchValue({
-      experienceinfo: JSON.stringify({ ...formData, fileList: fileList }),
-    });
-    const payload: SelfMyInfo = replaceEmptyWithNull(this.baseForm.value);
-    this.myInfoService
-      .updateMyInfo(payload)
-      .subscribe((res) => console.log(res));
+    if (this.mode === 'view') {
+      this.mode = 'edit';
+      this.label = 'บันทึกข้อมูล';
+    } else {
+      this.mode = 'view';
+      this.label = 'แก้ไขข้อมูล';
+      const formData = this.form.value;
+      const fileList = this.mapFileInfo(this.info);
+      console.log(fileList);
+      this.baseForm.patchValue({
+        experienceinfo: JSON.stringify({ ...formData, fileList: fileList }),
+      });
+      const payload: SelfMyInfo = replaceEmptyWithNull(this.baseForm.value);
+      this.myInfoService
+        .updateMyInfo(payload)
+        .subscribe((res) => console.log(res));
+    }
   }
+
   public provinceChanged(addrType: number, evt: any) {
     const province = evt.target?.value;
     if (province) {

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { SelfServiceRequestType } from '@ksp/shared/constant';
+import { ESelfSearchPayload, SelfRequest } from '@ksp/shared/interface';
+import { ERequestService } from '@ksp/shared/service';
 
 @Component({
   selector: 'ksp-refund-list',
@@ -9,12 +12,37 @@ import { Router } from '@angular/router';
 })
 export class RefundListComponent {
   displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<refundInfo>();
+  dataSource = new MatTableDataSource<SelfRequest>();
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private requestService: ERequestService
+  ) {}
 
   search() {
-    this.dataSource.data = data;
+    // this.dataSource.data = data;
+    const payload: ESelfSearchPayload = {
+      systemtype: 1, // self service
+      requesttype: +SelfServiceRequestType.ขอคืนเงินค่าธรรมเนียม, // ใบคำขอต่อใบอนุญาต
+      requestno: '',
+      firstnameth: '',
+      idcardno: '',
+      currentprocess: '',
+      requestdate: '',
+      offset: '0',
+      row: '1000',
+    };
+    this.requestService.searchSelfRequest(payload).subscribe((res) => {
+      console.log(res);
+      this.dataSource.data = res;
+      // this.dataSource.data = res;
+      // this.dataSource.sort = this.sort;
+
+      // const sortState: Sort = { active: 'id', direction: 'desc' };
+      // this.sort.active = sortState.active;
+      // this.sort.direction = sortState.direction;
+      // this.sort.sortChange.emit(sortState);
+    });
   }
 
   clear() {

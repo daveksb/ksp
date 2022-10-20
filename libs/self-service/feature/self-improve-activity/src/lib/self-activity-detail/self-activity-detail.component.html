@@ -38,8 +38,13 @@
           formControlName="detail"
         ></ksp-activity-add-degree>
 
-        <ksp-activity-seminar
+        <ksp-activity-diploma-receive
           *ngIf="selector.value === '1'"
+          formControlName="detail"
+        ></ksp-activity-diploma-receive>
+
+        <ksp-activity-seminar
+          *ngIf="selector.value === '2'"
           formControlName="detail"
         ></ksp-activity-seminar>
 

@@ -14,6 +14,7 @@ import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import { MatTableModule } from '@angular/material/table';
 import { RefundConfirmComponent } from './refund-confirm/refund-confirm.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
 
 const routes: Routes = [
   {
@@ -59,6 +60,7 @@ const routes: Routes = [
     MatTableModule,
     RouterModule.forChild(routes),
     MatDatepickerModule,
+    ThaiDatePipe,
   ],
   declarations: [
     RefundListComponent,

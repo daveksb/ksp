@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'shared-form-self-activity-form',
+  displayName: 'e-service-standard-user-management',
   preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -9,7 +9,8 @@ export default {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../../coverage/libs/shared/form/self-activity-form',
+  coverageDirectory:
+    '../../../../coverage/libs/e-service/standard/user-management',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

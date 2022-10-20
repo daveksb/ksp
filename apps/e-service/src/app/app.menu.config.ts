@@ -504,7 +504,7 @@ export const standardMenu: MenuConfig[] = [
         label: 'ใบคำขอรหัสเข้าใช้งานระบบบริการสถาบันผลิตครู (Uni Service)',
       },
       {
-        path: '/bb',
+        path: '/uni/new-user',
         label: 'ผู้ใช้งานระบบบริการสถาบันผลิตครู (Uni Service)',
       },
     ],

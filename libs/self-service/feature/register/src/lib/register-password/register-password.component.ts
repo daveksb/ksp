@@ -48,13 +48,11 @@ export class RegisterPasswordComponent implements OnInit {
 
   loadStorage() {
     localForage.getItem('th-register').then((res: any) => {
-      console.log('res = ', res);
+      //console.log('res = ', res);
       this.idCardNo = res.idcardno;
       this.myInfo = { ...res, ...this.form.value };
-      //this.myInfo.username = res.idcardno;
       this.myInfo.idcardno = res.idcardno;
       this.myInfo.username = res.idcardno;
-
       this.myInfo.isactive = '1';
       this.myInfo.uniquetimestamp = res.uniquetimestamp;
       this.myInfo.usertype = '1'; // ชาวไทย

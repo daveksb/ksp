@@ -15,12 +15,29 @@
         [requestNumber]="saveData.requestData.requestno"
       ></ksp-request-header-info>
     </div>
+    <hr />
+    <div class="box-header text-primary">
+      ประวัติการตรวจสอบคุณสมบัติและเอกสาร
+    </div>
 
-    <ksp-approve-ksp-request
-      [requestType]="saveData.requestData.requesttype"
-      [process]="saveData.requestData.process"
-      (selectResult)="selectResult = $event"
-    ></ksp-approve-ksp-request>
+    <table class="table w-75 mb-5">
+      <thead>
+        <tr>
+          <th scope="col">ครั้งที่</th>
+          <th scope="col">ชื่อ-นามสกุล เจ้าหน้าที่</th>
+          <th scope="col">วันที่ตรวจสอบ</th>
+          <th scope="col">ผลการตรวจสอบ</th>
+        </tr>
+      </thead>
+    </table>
+
+    <div [formGroup]="form">
+      <ksp-approve-ksp-request
+        [requestType]="saveData.requestData.requesttype"
+        [process]="saveData.requestData.process"
+        formControlName="approvement"
+      ></ksp-approve-ksp-request>
+    </div>
   </div>
 </div>
 
@@ -29,7 +46,7 @@
     (cancelClicked)="cancel()"
     (prevClicked)="prevPage()"
     (saveClicked)="confirmDialog()"
-    [disableSaveButton]="false"
+    [disableSaveButton]="form.invalid"
     [showCenterButtons]="true"
     [isLastPage]="true"
     [showSaveButton]="true"

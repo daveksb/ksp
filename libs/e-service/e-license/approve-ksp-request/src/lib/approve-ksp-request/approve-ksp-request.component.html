@@ -1,56 +1,48 @@
 <form [formGroup]="form">
   <div class="bg-white border py-3 px-4">
-    <div class="box-header text-primary me-1">
-      ยืนยันผลการตรวจสอบ
-      <span class="text-danger fs-6"
-        >* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</span
-      >
+    <div class="d-flex align-items-center mb-3">
+      <div class="box-header text-primary me-1">ยืนยันผลการตรวจสอบ</div>
+      <div class="text-danger">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
     </div>
 
-    <ng-container *ngFor="let s of processTable?.status; index as i">
-      <div class="d-flex align-items-center mb-3">
-        <div class="form-control" style="width: 25rem; height: 2.5rem">
+    <div class="row mb-3">
+      <div class="col-auto d-flex align-items-center">
+        <div class="form-control" style="width: 200px">
           <div class="d-flex align-items-center">
-            <input type="radio" [value]="s.id" formControlName="result" />
-            <label class="form-label ms-2"> {{ s.ename }} </label>
+            <input
+              class="radio"
+              type="radio"
+              value="1"
+              formControlName="result"
+            />
+            <label class="form-label ms-2"> ครบถ้วน และถูกต้อง </label>
           </div>
         </div>
       </div>
-    </ng-container>
-
-    <div class="box-header text-primary">
-      ประวัติการตรวจสอบคุณสมบัติและเอกสาร
-    </div>
-    <table class="table w-75">
-      <thead>
-        <tr>
-          <th scope="col">ครั้งที่</th>
-          <th scope="col">ชื่อ-นามสกุล เจ้าหน้าที่ที่ตรวจสอบ</th>
-          <th scope="col">วันที่ตรวจสอบ</th>
-          <th scope="col">สถานะ</th>
-        </tr>
-      </thead>
-    </table>
-
-    <!--  <div class="d-flex align-items-center mb-3">
-      <div class="form-control" style="width: 25rem">
-        <div class="d-flex align-items-center">
-          <input type="radio" value="3" formControlName="approveResult" />
-          <label class="form-label ms-2"> ครบถ้วน และถูกต้อง </label>
-        </div>
-      </div>
     </div>
 
-    <div class="form-control mb-3" style="width: 25rem">
-      <div class="d-flex align-items-center">
-        <div class="d-flex align-items-center">
-          <input type="radio" value="2" formControlName="approveResult" />
-          <label class="form-label ms-2"> ขอแก้ไข / เพิ่มเติม </label>
+    <div class="row mb-3">
+      <div class="col-auto d-flex align-items-center">
+        <div class="form-control" style="width: 200px">
+          <div class="d-flex align-items-center">
+            <input
+              class="radio"
+              type="radio"
+              value="2"
+              formControlName="result"
+            />
+            <label class="form-label ms-2"> ขอแก้ไข / เพิ่มเติม </label>
+          </div>
         </div>
       </div>
 
-      <div class="d-flex align-items-center mb-2">
-        <label class="form-label w-100 ms-4">วันที่ต้องการใบคำขอส่งกลับ</label>
+      <div class="col-2 d-flex">
+        <div class="form-label" style="white-space: nowrap">
+          วันที่ต้องการใบคำขอส่งกลับ
+        </div>
+      </div>
+
+      <div class="col-2">
         <div class="d-flex align-items-center">
           <input
             matInput
@@ -69,23 +61,138 @@
       </div>
     </div>
 
-    <div class="form-control mb-3" style="width: 25rem">
-      <div class="d-flex align-items-center">
-        <div class="d-flex align-items-center">
-          <input type="radio" value="4" formControlName="approveResult" />
-          <label class="form-label ms-2"> ขาดคุณสมบัติ </label>
+    <!-- <div class="mb-3 col-8">
+      <textarea class="form-control" rows="3"></textarea>
+    </div> -->
+
+    <div class="row mb-3">
+      <div class="col-auto d-flex align-items-center">
+        <div class="form-control" style="width: 200px">
+          <div class="d-flex align-items-center">
+            <input
+              class="radio"
+              type="radio"
+              value="3"
+              formControlName="result"
+            />
+            <label class="form-label ms-2"> ขาดคุณสมบัติ </label>
+          </div>
         </div>
       </div>
 
-      <div class="d-flex align-items-center mb-2">
-        <label class="form-label ms-4 w-25">สาเหตุ</label>
-        <select class="form-select w-100" formControlName="rejectReason">
-          <option value="null" selected disabled hidden>กรุณาเลือก</option>
-          <option value="1">เหตุผล 1</option>
-          <option value="2">เหตุผล 2</option>
-          <option value="3">เหตุผล 3</option>
+      <div class="col-2 d-flex">
+        <div class="form-label" style="white-space: nowrap">
+          หมายเหตุ / เหตุผล
+        </div>
+      </div>
+      <div class="col-4">
+        <select class="form-select" formControlName="reason">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
         </select>
       </div>
+    </div>
+
+    <!--     <div class="mb-3 col-8">
+      <textarea class="form-control" rows="3"></textarea>
     </div> -->
+
+    <hr />
+
+    <div class="d-flex align-items-center mb-3">
+      <div class="box-header text-primary me-1">
+        ต้องการส่งตรวจสอบลำดับต่อไป หรือส่งเพื่อพิจารณา
+      </div>
+      <div class="text-danger">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
+    </div>
+
+    <div class="d-flex align-items-center col-auto mb-3">
+      <div class="form-control" style="width: 400px">
+        <div class="d-flex align-items-center">
+          <input
+            class="radio"
+            type="radio"
+            [attr.disabled]="result !== '1' ? true : null"
+            value="1"
+            formControlName="shouldForward"
+          />
+          <label class="form-label ms-2"> ไม่ส่งตรวจสอบลำดับต่อไป </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex align-items-center col-auto mb-3">
+      <div class="form-control" style="width: 400px">
+        <div class="d-flex align-items-center">
+          <input
+            class="radio"
+            type="radio"
+            [attr.disabled]="result !== '1' ? true : null"
+            value="2"
+            formControlName="shouldForward"
+          />
+          <label class="form-label ms-2"> ส่งตรวจสอบลำดับต่อไป </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex align-items-center col-auto mb-3">
+      <div class="form-control" style="width: 400px">
+        <div class="d-flex align-items-center">
+          <input
+            class="radio"
+            type="radio"
+            [attr.disabled]="result === '1' || result === '2' ? true : null"
+            value="3"
+            formControlName="shouldForward"
+          />
+          <label class="form-label ms-2">
+            ไม่ผ่านการตรวจสอบ เนื่องจากไม่ครบถ้วน / ไม่ถูกต้อง
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex align-items-center col-auto mb-3">
+      <div class="form-control" style="width: 400px">
+        <div class="d-flex align-items-center">
+          <input
+            class="radio"
+            type="radio"
+            [attr.disabled]="result !== '1' ? true : null"
+            value="4"
+            formControlName="shouldForward"
+          />
+          <label class="form-label ms-2"> ส่งเรื่องพิจารณา </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex align-items-center col-auto mb-3">
+      <div class="form-control" style="width: 400px">
+        <div class="d-flex align-items-center">
+          <input
+            class="radio"
+            type="radio"
+            [attr.disabled]="result === '1' || result === '2' ? true : null"
+            value="5"
+            formControlName="shouldForward"
+          />
+          <label class="form-label ms-2"> ยกเลิก </label>
+        </div>
+      </div>
+    </div>
   </div>
 </form>
+<!--     <ng-container *ngFor="let s of processTable?.status; index as i">
+      <div class="d-flex align-items-center mb-3">
+        <div class="form-control" style="width: 25rem; height: 2.5rem">
+          <div class="d-flex align-items-center">
+            <input type="radio" [value]="s.id" formControlName="result" />
+            <label class="form-label ms-2"> {{ s.ename }} </label>
+          </div>
+        </div>
+      </div>
+    </ng-container> -->

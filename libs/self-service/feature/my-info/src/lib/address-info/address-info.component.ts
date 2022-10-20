@@ -94,7 +94,7 @@ export class AddressInfoComponent implements OnInit {
   }
 
   onClickChangeMode() {
-    if (this.mode == 'view') {
+    if (this.mode === 'view') {
       this.mode = 'edit';
       this.label = 'บันทึกข้อมูล';
     } else {

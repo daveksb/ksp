@@ -1,47 +1,70 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { SchoolRequestProcess } from '@ksp/shared/constant';
-import { SchRequestProcess } from '@ksp/shared/interface';
+import { KspFormBaseComponent, SchRequestProcess } from '@ksp/shared/interface';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { providerFactory } from '@ksp/shared/utility';
 
+export interface approveResult {
+  result: string;
+  shouldForward: string;
+  returnDate: string;
+  reason: string;
+}
 @Component({
   selector: 'ksp-approve-ksp-request',
   standalone: true,
   imports: [CommonModule, MatDatepickerModule, ReactiveFormsModule],
   templateUrl: './approve-ksp-request.component.html',
   styleUrls: ['./approve-ksp-request.component.scss'],
+  providers: providerFactory(ApproveKspRequestComponent),
 })
-export class ApproveKspRequestComponent implements OnChanges, OnInit {
+export class ApproveKspRequestComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
   @Input() requestType: string | null = '0';
   @Input() process: string | null = '0';
-  @Output() selectResult = new EventEmitter<any>();
 
   processTable!: SchRequestProcess | undefined;
 
-  form = this.fb.group({
+  override form = this.fb.group({
     result: [null, Validators.required],
-    //returnDate: [],
-    //rejectReason: [],
+    shouldForward: [null, Validators.required],
+    returnDate: [],
+    reason: [],
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    super();
+    this.subscriptions.push(
+      this.form?.valueChanges.subscribe((value: any) => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
+  }
+
+  get result() {
+    return this.form.controls.result.value;
+  }
+
+  get shouldForward() {
+    return this.form.controls.shouldForward;
+  }
 
   ngOnInit(): void {
-    this.form.valueChanges.subscribe((res) => {
-      this.selectResult.emit(res.result);
+    this.form.controls.result.valueChanges.subscribe(() => {
+      if (this.result === '2') {
+        this.shouldForward.clearValidators();
+      } else {
+        this.shouldForward.addValidators(Validators.required);
+      }
+      this.shouldForward.reset();
     });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  /*   ngOnChanges(changes: SimpleChanges): void {
     //console.log('change = ', changes);
     this.processTable = SchoolRequestProcess.find(
       (p) =>
@@ -49,5 +72,5 @@ export class ApproveKspRequestComponent implements OnChanges, OnInit {
         p.requestType === +changes['requestType'].currentValue
     );
     //console.log('process table = ', this.processTable);
-  }
+  } */
 }

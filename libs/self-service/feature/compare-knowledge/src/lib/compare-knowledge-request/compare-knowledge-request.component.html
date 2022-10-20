@@ -114,20 +114,20 @@
     </mat-tab-group>
 
     <div class="d-flex justify-content-center my-3">
-      <button type="button" class="btn btn-secondary" (click)="resetForm()">
+      <!-- <button type="button" class="btn btn-secondary" (click)="resetForm()">
         ล้างข้อมูล
-      </button>
+      </button> -->
       <button
         type="button"
-        *ngIf="requestId"
+        [disabled]="!requestId"
         (click)="cancel()"
-        class="ms-3 btn border-primary text-primary"
+        class="btn border-secondary text-secondary bg-light"
       >
         ยกเลิกใบคำขอ
       </button>
       <button
         type="button"
-        class="btn btn-warning mx-3"
+        class="btn border-primary text-primary bg-white mx-3"
         (click)="submit(1)"
         [disabled]="userInfoForm.invalid"
       >

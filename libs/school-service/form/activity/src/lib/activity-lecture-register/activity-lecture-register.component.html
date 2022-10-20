@@ -50,7 +50,7 @@
       </div>
     </div>
 
-    <div class="col-md-6 mb-2">
+    <div class="col-md-6 mb-2" *ngIf="showDateTo">
       <label class="form-label required"
         ><span *ngIf="!isForeignForm">ถึงวันที่</span>
         <span *ngIf="isForeignForm">Attended Date Form</span></label
