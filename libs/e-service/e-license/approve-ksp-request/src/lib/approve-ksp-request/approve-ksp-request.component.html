@@ -6,57 +6,47 @@
     </div>
 
     <div class="row mb-3">
-      <div class="col-auto d-flex align-items-center">
+      <div class="d-flex align-items-center">
+        <input class="radio" type="radio" value="1" formControlName="result" />
         <div class="form-control" style="width: 200px">
-          <div class="d-flex align-items-center">
-            <input
-              class="radio"
-              type="radio"
-              value="1"
-              formControlName="result"
-            />
-            <label class="form-label ms-2"> ครบถ้วน และถูกต้อง </label>
-          </div>
+          <label class="ms-4"> ครบถ้วน และถูกต้อง </label>
         </div>
       </div>
     </div>
 
-    <div class="row mb-3">
-      <div class="col-auto d-flex align-items-center">
-        <div class="form-control" style="width: 200px">
+    <div class="d-flex align-items-center mb-3">
+      <input
+        class="radio"
+        type="radio"
+        value="2"
+        formControlName="result"
+        #xxx
+      />
+      <div class="form-control" style="width: 200px">
+        <label class="ms-4"> ขอแก้ไข / เพิ่มเติม </label>
+      </div>
+
+      <div class="d-flex align-items-center w-50">
+        <div class="col-4" style="white-space: nowrap">
+          <div class="form-label text-center">วันที่ต้องการใบคำขอส่งกลับ</div>
+        </div>
+
+        <div class="col-4">
           <div class="d-flex align-items-center">
             <input
-              class="radio"
-              type="radio"
-              value="2"
-              formControlName="result"
+              matInput
+              [matDatepicker]="picker"
+              autocomplete="off"
+              class="form-control form-date"
+              formControlName="returnDate"
             />
-            <label class="form-label ms-2"> ขอแก้ไข / เพิ่มเติม </label>
+            <mat-datepicker-toggle
+              class="button-date"
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
           </div>
-        </div>
-      </div>
-
-      <div class="col-2 d-flex">
-        <div class="form-label" style="white-space: nowrap">
-          วันที่ต้องการใบคำขอส่งกลับ
-        </div>
-      </div>
-
-      <div class="col-2">
-        <div class="d-flex align-items-center">
-          <input
-            matInput
-            [matDatepicker]="picker"
-            autocomplete="off"
-            class="form-control form-date"
-            formControlName="returnDate"
-          />
-          <mat-datepicker-toggle
-            class="button-date"
-            matSuffix
-            [for]="picker"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
         </div>
       </div>
     </div>
@@ -65,34 +55,43 @@
       <textarea class="form-control" rows="3"></textarea>
     </div> -->
 
-    <div class="row mb-3">
-      <div class="col-auto d-flex align-items-center">
-        <div class="form-control" style="width: 200px">
+    <div class="d-flex align-items-center mb-3">
+      <input class="radio" type="radio" value="3" formControlName="result" />
+      <div class="form-control" style="width: 200px">
+        <label class="ms-4"> ขาดคุณสมบัติ </label>
+      </div>
+
+      <div class="d-flex align-items-center w-50">
+        <div class="col-4" style="white-space: nowrap">
+          <div class="form-label text-center">หมายเหตุ / เหตุผล</div>
+        </div>
+
+        <div class="col-8">
           <div class="d-flex align-items-center">
-            <input
-              class="radio"
-              type="radio"
-              value="3"
-              formControlName="result"
-            />
-            <label class="form-label ms-2"> ขาดคุณสมบัติ </label>
+            <select class="form-select" formControlName="reason">
+              <option value="null" selected hidden disabled>กรุณาเลือก</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
           </div>
         </div>
       </div>
 
-      <div class="col-2 d-flex">
-        <div class="form-label" style="white-space: nowrap">
-          หมายเหตุ / เหตุผล
+      <!-- <div class="row align-items-center ms-5">
+        <div class="col">
+          <div class="form-label">หมายเหตุ / เหตุผล</div>
         </div>
-      </div>
-      <div class="col-4">
-        <select class="form-select" formControlName="reason">
-          <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-      </div>
+
+        <div class="col">
+          <select class="form-select" formControlName="reason">
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+      </div> -->
     </div>
 
     <!--     <div class="mb-3 col-8">
@@ -109,79 +108,69 @@
     </div>
 
     <div class="d-flex align-items-center col-auto mb-3">
+      <input
+        class="radio"
+        type="radio"
+        [attr.disabled]="result !== '1' ? true : null"
+        value="1"
+        formControlName="shouldForward"
+      />
       <div class="form-control" style="width: 400px">
-        <div class="d-flex align-items-center">
-          <input
-            class="radio"
-            type="radio"
-            [attr.disabled]="result !== '1' ? true : null"
-            value="1"
-            formControlName="shouldForward"
-          />
-          <label class="form-label ms-2"> ไม่ส่งตรวจสอบลำดับต่อไป </label>
-        </div>
+        <label class="ms-4"> ไม่ส่งตรวจสอบลำดับต่อไป </label>
       </div>
     </div>
 
     <div class="d-flex align-items-center col-auto mb-3">
+      <input
+        class="radio"
+        type="radio"
+        [attr.disabled]="result !== '1' ? true : null"
+        value="2"
+        formControlName="shouldForward"
+      />
       <div class="form-control" style="width: 400px">
-        <div class="d-flex align-items-center">
-          <input
-            class="radio"
-            type="radio"
-            [attr.disabled]="result !== '1' ? true : null"
-            value="2"
-            formControlName="shouldForward"
-          />
-          <label class="form-label ms-2"> ส่งตรวจสอบลำดับต่อไป </label>
-        </div>
+        <label class="ms-4"> ส่งตรวจสอบลำดับต่อไป </label>
       </div>
     </div>
 
     <div class="d-flex align-items-center col-auto mb-3">
+      <input
+        class="radio"
+        type="radio"
+        [attr.disabled]="result === '1' || result === '2' ? true : null"
+        value="3"
+        formControlName="shouldForward"
+      />
       <div class="form-control" style="width: 400px">
-        <div class="d-flex align-items-center">
-          <input
-            class="radio"
-            type="radio"
-            [attr.disabled]="result === '1' || result === '2' ? true : null"
-            value="3"
-            formControlName="shouldForward"
-          />
-          <label class="form-label ms-2">
-            ไม่ผ่านการตรวจสอบ เนื่องจากไม่ครบถ้วน / ไม่ถูกต้อง
-          </label>
-        </div>
+        <label class="ms-4">
+          ไม่ผ่านการตรวจสอบ เนื่องจากไม่ครบถ้วน / ไม่ถูกต้อง
+        </label>
       </div>
     </div>
 
     <div class="d-flex align-items-center col-auto mb-3">
+      <input
+        class="radio"
+        type="radio"
+        [attr.disabled]="result !== '1' ? true : null"
+        value="4"
+        formControlName="shouldForward"
+      />
       <div class="form-control" style="width: 400px">
-        <div class="d-flex align-items-center">
-          <input
-            class="radio"
-            type="radio"
-            [attr.disabled]="result !== '1' ? true : null"
-            value="4"
-            formControlName="shouldForward"
-          />
-          <label class="form-label ms-2"> ส่งเรื่องพิจารณา </label>
-        </div>
+        <label class="ms-4"> ส่งเรื่องพิจารณา </label>
       </div>
     </div>
 
     <div class="d-flex align-items-center col-auto mb-3">
+      <input
+        class="radio"
+        type="radio"
+        [attr.disabled]="result === '1' || result === '2' ? true : null"
+        value="5"
+        formControlName="shouldForward"
+      />
       <div class="form-control" style="width: 400px">
-        <div class="d-flex align-items-center">
-          <input
-            class="radio"
-            type="radio"
-            [attr.disabled]="result === '1' || result === '2' ? true : null"
-            value="5"
-            formControlName="shouldForward"
-          />
-          <label class="form-label ms-2"> ยกเลิก </label>
-        </div>
+        <label class="ms-4"> ยกเลิก </label>
       </div>
     </div>
   </div>
