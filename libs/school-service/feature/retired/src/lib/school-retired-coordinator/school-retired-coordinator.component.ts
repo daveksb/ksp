@@ -101,6 +101,7 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
     dialog.componentInstance.confirmed
       .pipe(
         switchMap((res) => {
+          console.log('user = ', this.selectUser);
           if (res) {
             const form: any = this.form.value;
             const request: KspRequest = new KspRequest(); //form.retiredTnfo;
@@ -115,10 +116,13 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
             request.firstnameth = this.selectUser.firstnameth;
             request.lastnameth = this.selectUser.lastnameth;
             request.contactphone = this.selectUser.schmobile;
+            request.userid = this.selectUser.schmemberid;
             request.schoolid = this.schoolId;
             request.schoolname = this.school.schoolname;
             request.reasoninfo = JSON.stringify(this.reasoninfo);
             request.coordinatorinfo = JSON.stringify(form);
+            //console.log('request = ', request);
+            //return EMPTY;
             return this.requestService.schCreateRequest(request);
           }
           return EMPTY;
@@ -126,7 +130,7 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
       )
       .subscribe((res) => {
         if (res) {
-          this.completeDialog(res?.requestno);
+          //this.completeDialog(res?.requestno);
         }
       });
   }
