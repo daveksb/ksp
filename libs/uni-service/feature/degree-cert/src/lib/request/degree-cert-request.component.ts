@@ -60,7 +60,23 @@ export class DegreeCertRequestComponent {
       uniRequestDegree = await lastValueFrom(
         this.uniInfoService.uniRequestDegreeCertSelectById(this.id)
       );
-      this._mappingResponseWithForm(uniRequestDegree, uniData);
+      const { requestNo, step1, step2, step3, step4 } =
+        this.uniInfoService.mappingUniverSitySelectByIdWithForm(
+          uniRequestDegree);
+      this.requestNo = requestNo;
+      this.step1Form.setValue({
+        step1,
+      });
+      this.step2Form.setValue({
+        step2,
+      });
+      this.step3Form.setValue({
+        step3,
+      });
+      if (step4)
+        this.step4Form.setValue({
+          step4,
+        });
     } else {
       this.step1Form.setValue({
         step1: {
@@ -103,86 +119,6 @@ export class DegreeCertRequestComponent {
         this.showConfirmDialog(res?.requestno);
       }
     });
-  }
-  private toDate(sDate: any) {
-    return sDate ? moment(sDate).format('yyyy-MM-DD') : '';
-  }
-  private _mappingResponseWithForm(res: any, uniData: any): any {
-    this.requestNo = res?.requestno ?? '';
-    this.step1Form.setValue({
-      step1: {
-        institutionsCode: uniData?.universitycode || '',
-        institutionsGroup: getCookie('uniType') || '',
-        institutionsName: uniData?.name || '',
-        provience: uniData?.provinceid || '',
-        courseDetailType: res?.coursedetailtype,
-        courseDetail: res?.coursedetailinfo
-          ? parseJson(res?.coursedetailinfo)
-          : null,
-        degreeTypeForm: {
-          degreeType: res?.degreelevel,
-          courseYear: res?.courseacademicyear,
-          courseName: res?.coursename,
-          courseType: res?.coursetype,
-          courseStatus: res?.coursestatus,
-          degreeNameThFull: res?.fulldegreenameth,
-          degreeNameThShort: res?.shortdegreenameth,
-          degreeNameEnFull: res?.fulldegreenameen,
-          degreeNameEnShort: res?.shortdegreenameen,
-          courseApproveTime: res?.courseapprovetime,
-          courseApproveDate: this.toDate(res?.courseapprovedate),
-          courseAcceptDate: this.toDate(res?.courseacceptdate),
-        },
-        //type json
-        locations: res?.teachinglocation
-          ? parseJson(res?.teachinglocation)
-          : null,
-        institutions: res?.responsibleunit
-          ? parseJson(res?.responsibleunit)
-          : null,
-        locations2: res?.evaluatelocation
-          ? parseJson(res?.evaluatelocation)
-          : null,
-        coordinator: res?.coordinatorinfo
-          ? parseJson(res?.coordinatorinfo)
-          : null,
-      },
-    });
-    this.step2Form.setValue({
-      step2: {
-        plan1: {
-          plans: res.coursestructure ? parseJson(res.coursestructure) : [],
-          subjects: res.courseplan ? parseJson(res.courseplan) : [],
-        },
-        teacher: {
-          teachers: res.courseteacher ? parseJson(res.courseteacher) : [],
-        },
-
-        nitet: {
-          nitets: res.courseinstructor ? parseJson(res.courseinstructor) : [],
-        },
-        advisor: {
-          advisors: res.courseadvisor ? parseJson(res.courseadvisor) : [],
-        },
-      },
-    });
-
-    this.step3Form.setValue({
-      step3: {
-        training: {
-          rows: res.processtrainning ? parseJson(res.processtrainning) : [],
-        },
-        teaching: {
-          rows: res.processteaching ? parseJson(res.processteaching) : [],
-        },
-      },
-    });
-    if (res?.attachfiles)
-      this.step4Form.setValue({
-        step4: {
-          files: parseJson(res?.attachfiles),
-        },
-      });
   }
   private _getRequest(): any {
     const step1: any = this.step1Form.value.step1;

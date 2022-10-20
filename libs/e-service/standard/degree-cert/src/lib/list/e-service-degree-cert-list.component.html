@@ -47,10 +47,11 @@
         <ng-container matColumnDef="degreeId">
           <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
           <td
-            (click)="goToDetailPage()"
             class="text-primary link"
             mat-cell
             *matCellDef="let element"
+            (click)="goToDetailPage(element)"
+
           >
             {{ element.degreeId }}
           </td>

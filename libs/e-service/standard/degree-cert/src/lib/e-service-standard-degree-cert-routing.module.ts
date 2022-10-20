@@ -27,7 +27,7 @@ export const routes: Routes = [
         component: EServiceDegreeCertListComponent,
       },
       {
-        path: 'check', //ตรวจสอบ
+        path: 'check/:key', //ตรวจสอบ
         component: CheckComponent,
       },
       {
