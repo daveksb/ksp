@@ -55,16 +55,18 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
 
   checkApproveResult(input: approveResult) {
     if (input.result === '1') {
-      this.targetStatus = 3;
       if (input.shouldForward === '1') {
         this.targetProcess = Number(this.saveData.requestData.process);
+        this.targetStatus = 3;
       } else if (input.shouldForward === '2') {
+        this.targetStatus = 1;
         this.targetProcess = Number(this.saveData.requestData.process) + 1;
       } else if (input.shouldForward === '4') {
         this.targetProcess = 4;
+        this.targetStatus = 1;
       }
     } else if (input.result === '2') {
-      this.targetProcess = 1;
+      this.targetProcess = Number(this.saveData.requestData.process) + 1;
       this.targetStatus = 2;
     } else if (input.result === '3') {
       this.targetProcess = Number(this.saveData.requestData.process);
