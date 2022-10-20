@@ -109,9 +109,10 @@ export class RetiredAttachmentComponent implements OnInit {
             payload.systemtype = '3';
             payload.requesttype = '2';
             payload.subtype = '5';
+            payload.careertype = '5';
             payload.currentprocess = `1`;
-            payload.requeststatus = `1`;
-            payload.requestprocess = '2';
+            payload.status = `1`;
+            payload.process = '2';
             payload.schoolid = this.userInfo.uniid;
             payload.uniquetimestamp = this.uniqueTimestamp;
             return this.requestService.createRequestKsp(payload);
