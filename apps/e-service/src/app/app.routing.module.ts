@@ -191,6 +191,18 @@ const routes: EthicsCustomRoute[] = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'uni',
+    data: {
+      menuConfig: standardMenu,
+      headerLabel: 'ระบบงานมาตรฐานวิชาชีพ',
+    },
+    loadChildren: () =>
+      import('@ksp/e-service/standard/user-management').then(
+        (m) => m.EServiceStandardUserManagementModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'investigation',
     data: {
       ethicsMode: 'investigation',
