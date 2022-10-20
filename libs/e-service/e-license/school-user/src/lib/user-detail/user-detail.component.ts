@@ -130,18 +130,20 @@ export class UserDetailComponent implements OnInit {
       console.log('approve result = ', res);
     });
 
-    const newUser = new SchUser();
-    newUser.idcardno = this.requestData.idcardno;
-    newUser.prefixth = this.requestData.prefixth;
-    newUser.schemail = this.requestData.email;
-    newUser.position = this.requestData.position;
-    newUser.firstnameth = this.requestData.firstnameth;
-    newUser.lastnameth = this.requestData.lastnameth;
-    newUser.schusername = this.requestData.schoolid;
-    newUser.schoolid = this.requestData.schoolid;
-    newUser.schpassword = this.setPassword;
-    newUser.schuseractive = '1';
-    this.eRequestService.createSchUser(newUser).subscribe(() => {
+    const user = new SchUser();
+    user.idcardno = this.requestData.idcardno;
+    user.prefixth = this.requestData.prefixth;
+    user.schemail = this.requestData.email;
+    user.position = this.requestData.position;
+    user.firstnameth = this.requestData.firstnameth;
+    user.lastnameth = this.requestData.lastnameth;
+    user.schusername = this.requestData.schoolid;
+    user.schoolid = this.requestData.schoolid;
+    user.schpassword = this.setPassword;
+    user.requestid = this.requestData.id;
+    user.schuseractive = '1';
+
+    this.eRequestService.createSchUser(user).subscribe(() => {
       this.completeDialog();
     });
   }
