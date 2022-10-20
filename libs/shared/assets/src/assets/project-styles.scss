@@ -143,14 +143,27 @@ input[type='radio'] {
   width: 1rem;
 }
 
-input[type='checkbox']:checked {
+/* input[type='checkbox']:checked {
   background-color: #f68b33;
   border: #f68b33;
+} */
+
+/* input[type='radio']:checked {
+  background-color: #f68b33;
+  border: #f68b33;
+  border-radius: 0;
+} */
+
+.form-check-input:checked[type='radio'] {
+  background-color: #f68b33;
+  border: #f68b33;
+  background-image: url(/assets/images/check-lg.svg);
+  border-radius: 0.25rem;
 }
 
-input[type='radio']:checked {
-  background-color: #f68b33;
-  border: #f68b33;
+.form-check-input[type='radio'] {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 0.25rem;
 }
 
 .edit__status {

@@ -1,13 +1,13 @@
 <div class="d-flex justify-content-center align-items-center">
   <button
     (click)="addRowClick.emit(true)"
-    class="d-flex justify-content-center align-items-center"
+    class="d-flex justify-content-center align-items-baseline"
     style="all: unset"
     [disabled]="disabled"
   >
-    <i role="button" class="bi bi-plus-circle"></i>
+    <i role="button" class="bi bi-plus-circle fs-6"></i>
 
-    <span role="button" class="ms-2" style="white-space: nowrap">
+    <span role="button" class="ms-1" style="white-space: nowrap">
       <ng-content></ng-content>
     </span>
   </button>

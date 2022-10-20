@@ -15,11 +15,13 @@ export class ActivityDiplomaReceiveComponent
 {
   @Input() data: any;
   @Input() isForeignForm = false;
+  @Input() showDateTo = false;
 
   override form = this.fb.group({
     course: [null, Validators.required],
     trainingDate: [null, Validators.required],
     trainingAddress: [null, Validators.required],
+    dateTo: [null, Validators.required],
   });
 
   constructor(private fb: FormBuilder) {

@@ -8,6 +8,7 @@ import {
   KspApprovePayload,
   KspRequest,
   Prefix,
+  SchKuruspaNumber,
   VisaType,
 } from '@ksp/shared/interface';
 import {
@@ -15,7 +16,11 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { FormBuilder } from '@angular/forms';
-import { formatDate, thaiDate } from '@ksp/shared/utility';
+import {
+  formatDate,
+  replaceEmptyWithNull,
+  thaiDate,
+} from '@ksp/shared/utility';
 import { SchoolRequestSubType } from '@ksp/shared/constant';
 import {
   AddressService,
@@ -23,6 +28,7 @@ import {
   GeneralInfoService,
 } from '@ksp/shared/service';
 import { EMPTY, Observable, switchMap } from 'rxjs';
+import _ from 'lodash';
 
 @Component({
   selector: 'ksp-foreign-license-detail',
@@ -81,7 +87,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
   }
 
   pathUserInfo(data: any) {
-    data.birthdate = data.birthdate.split('T')[0];
+    data.birthdate = formatDate(data.birthdate);
 
     if (this.requestSubType === SchoolRequestSubType.อื่นๆ) {
       data.birthdate = formatDate(data.birthdate);
@@ -132,6 +138,22 @@ export class ForeignLicenseDetailComponent implements OnInit {
               paymentstatus: null,
             };
             return this.eRequestService.KspApproveRequest(payload);
+          }
+          return EMPTY;
+        }),
+        switchMap((res) => {
+          const data = this.form.controls.verifydetail.value as any;
+          if (res && data.result === '2') {
+            const allowKey = Object.keys(new SchKuruspaNumber());
+            let payload = _.pick(
+              this.requestData,
+              allowKey
+            ) as Partial<SchKuruspaNumber>;
+            payload.id = null;
+            payload = replaceEmptyWithNull(payload);
+            payload.createdate = formatDate(payload.createdate);
+            payload.fileinfo = atob(payload?.fileinfo || '');
+            return this.eRequestService.createSchKuruspaNumber(payload);
           }
           return EMPTY;
         })
