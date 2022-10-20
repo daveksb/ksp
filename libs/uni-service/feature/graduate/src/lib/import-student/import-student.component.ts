@@ -69,7 +69,7 @@ export class ImportStudentComponent implements OnInit {
   };
   requestNo = '';
   userBackup: any;
-  requestDate = thaiDate(new Date());
+  requestDate:any = undefined;
   formStudent = this.fb.group({
     user: this.fb.array([]),
   });
@@ -103,6 +103,8 @@ export class ImportStudentComponent implements OnInit {
           id: null,
           requestprocess: '1',
           requeststatus: '1',
+          process: '1',
+          status: '1',
           requesttype: this.pageType == 'studentList' ? '05' : '06',
           uniuserid: userId,
           systemtype: '3',
@@ -152,7 +154,7 @@ export class ImportStudentComponent implements OnInit {
               data.admissionlist
             );
           });
-          if (findResponse && findResponse.requestprocess == '1') {
+          if (findResponse && findResponse.process == '1') {
             const parseuser = JSON.parse(findResponse.admissionlist);
             parseuser.forEach((user: any, index: any) => {
               user.index = index;
@@ -200,7 +202,7 @@ export class ImportStudentComponent implements OnInit {
               if (res.datareturn.length) {
                 const findRequestGraduate = res.datareturn.find((data: any) => {
                   return (
-                    data.graduatelist != null && data.requestprocess == '1'
+                    data.graduatelist != null && data.process == '1'
                   );
                 });
                 if (findRequestGraduate) {
@@ -613,8 +615,10 @@ export class ImportStudentComponent implements OnInit {
           if (res) {
             if (typeSave == 'temp') {
               this.payload.requestprocess = '1';
+              this.payload.process = '1';
             } else {
               this.payload.requestprocess = '2';
+              this.payload.process = '2';
             }
             if (this.pageType == 'studentList') {
               const datasave = this.user.value;
