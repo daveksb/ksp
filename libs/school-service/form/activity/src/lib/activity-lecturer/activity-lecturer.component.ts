@@ -15,6 +15,7 @@ export class ActivityLecturerComponent
 {
   @Input() data: any;
   @Input() isForeignForm = false;
+  @Input() showDateTo = false;
 
   override form = this.fb.group({
     subject: [null, Validators.required],
@@ -22,6 +23,7 @@ export class ActivityLecturerComponent
     agency: [null, Validators.required],
     hour: [null, Validators.required],
     date: [null, Validators.required],
+    dateTo: [null, Validators.required],
   });
 
   constructor(private fb: FormBuilder) {

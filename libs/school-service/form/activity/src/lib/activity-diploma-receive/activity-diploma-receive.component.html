@@ -7,17 +7,20 @@
       >
       <input class="form-control" type="text" formControlName="course" />
     </div>
-  </div>
-
-  <div class="row">
     <div class="col-md-6 mb-2">
       <label class="form-label required"
         ><span *ngIf="!isForeignForm">สถานที่อบรม</span>
         <span *ngIf="isForeignForm">Place</span></label
       >
-      <input class="form-control" type="text" formControlName="trainingDate" />
+      <input
+        class="form-control"
+        type="text"
+        formControlName="trainingAddress"
+      />
     </div>
+  </div>
 
+  <div class="row">
     <div class="col-md-6 mb-2">
       <label class="form-label required"
         ><span *ngIf="!isForeignForm">วันเดือนปี ที่จัดอบรม</span>
@@ -27,17 +30,39 @@
       <div class="d-flex align-items-center">
         <input
           matInput
-          [matDatepicker]="picker"
+          [matDatepicker]="picker1"
           autocomplete="off"
           class="form-control form-date"
-          formControlName="trainingAddress"
+          formControlName="trainingDate"
         />
         <mat-datepicker-toggle
           matSuffix
-          [for]="picker"
+          [for]="picker1"
           class="button-date"
         ></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <mat-datepicker #picker1></mat-datepicker>
+      </div>
+    </div>
+    <div class="col-md-6 mb-2" *ngIf="showDateTo">
+      <label class="form-label required"
+        ><span *ngIf="!isForeignForm">ถึงวันที่</span>
+        <span *ngIf="isForeignForm">Training Date</span></label
+      >
+
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="dateTo"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="picker2"
+          class="button-date"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
       </div>
     </div>
   </div>
