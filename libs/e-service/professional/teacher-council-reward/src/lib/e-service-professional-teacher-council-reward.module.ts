@@ -14,6 +14,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { SelfServiceFeatureRewardModule } from '@ksp/self-service/feature/reward';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { EServiceRewardSearchComponent } from '@ksp/shared/search';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
 
 const routes: Routes = [
   {
@@ -51,6 +52,7 @@ const routes: Routes = [
     BottomNavComponent,
     RequestHeaderInfoComponent,
     EServiceRewardSearchComponent,
+    ThaiDatePipe,
   ],
   declarations: [ETeacherCouncilListComponent, ETeacherCouncilDetailComponent],
   exports: [ETeacherCouncilListComponent, ETeacherCouncilDetailComponent],

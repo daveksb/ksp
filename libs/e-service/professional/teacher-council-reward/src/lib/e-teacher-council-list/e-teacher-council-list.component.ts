@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SelfServiceRequestType } from '@ksp/shared/constant';
-import { ESelfSearchPayload, EsSearchPayload } from '@ksp/shared/interface';
+import {
+  ESelfSearchPayload,
+  EsSearchPayload,
+  SelfRequest,
+} from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import { replaceEmptyWithNull } from '@ksp/shared/utility';
 
@@ -13,7 +17,7 @@ import { replaceEmptyWithNull } from '@ksp/shared/utility';
 })
 export class ETeacherCouncilListComponent implements OnInit {
   displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<userList>();
+  dataSource = new MatTableDataSource<SelfRequest>();
 
   constructor(
     private router: Router,
@@ -46,8 +50,7 @@ export class ETeacherCouncilListComponent implements OnInit {
 
     this.requestService.KspSearchRequest(payload).subscribe((res) => {
       console.log(res);
-      // this.dataSource.data = res;
-      this.dataSource.data = data;
+      this.dataSource.data = res;
       // this.dataSource.sort = this.sort;
 
       // const sortState: Sort = { active: 'id', direction: 'desc' };
