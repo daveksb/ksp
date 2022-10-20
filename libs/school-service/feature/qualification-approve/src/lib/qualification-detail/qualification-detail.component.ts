@@ -25,6 +25,7 @@ import {
 import {
   changeDate,
   formatDate,
+  getCookie,
   mapMultiFileInfo,
   parseJson,
   thaiDate,
@@ -61,7 +62,7 @@ export class QualificationDetailComponent implements OnInit {
   tumbols2$!: Observable<any>;
   countries$!: Observable<any>;
   nationalitys$!: Observable<any>;
-  schoolId = '0010201056';
+  schoolId = getCookie('schoolId');
   careerType!: number;
 
   request: KspRequest = new KspRequest();

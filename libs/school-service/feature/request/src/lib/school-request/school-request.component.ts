@@ -46,6 +46,7 @@ import {
 import {
   formatCheckboxData,
   formatDatePayload,
+  getCookie,
   mapMultiFileInfo,
   parseJson,
   replaceEmptyWithNull,
@@ -89,7 +90,7 @@ export class SchoolRequestComponent implements OnInit {
   disableSave = true;
   disableCancel = true;
 
-  schoolId = '0010201056';
+  schoolId = getCookie('schoolId');
   userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form
 
   eduFiles: FileGroup[] = [];
