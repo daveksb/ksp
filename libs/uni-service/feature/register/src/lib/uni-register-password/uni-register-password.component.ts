@@ -132,10 +132,14 @@ export class UniRegisterPasswordComponent implements OnInit {
         btnLabel: 'บันทึก',
       },
     });
+    
+    // waiting api for encoding password
+    // const password = CryptoJs.SHA256(
+    //   `${this.form?.value?.password}`
+    // ).toString();
 
-    const password = CryptoJs.SHA256(
-      `${this.form?.value?.password}`
-    ).toString();
+    // save raw password
+    const password = this.form?.value?.password;
 
     confirmDialog.componentInstance.confirmed
       .pipe(
