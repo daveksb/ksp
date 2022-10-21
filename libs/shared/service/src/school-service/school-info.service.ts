@@ -10,12 +10,10 @@ import { map, Observable, shareReplay } from 'rxjs';
 export class SchoolInfoService {
   constructor(private http: HttpClient) {}
 
-  getSchoolInfo(schoolId: string): Observable<any> {
-    return this.http
-      .get(
-        `${environment.apiUrl}/kspstaff/schschoolsearchschoolid?schoolId=${schoolId}`
-      )
-      .pipe(shareReplay());
+  getSchoolInfo(schoolId: string): Observable<SchInfo> {
+    return this.http.get<SchInfo>(
+      `${environment.apiUrl}/kspstaff/schschoolsearchschoolid?schoolId=${schoolId}`
+    );
   }
 
   getSchoolEduOccupy(): Observable<any> {

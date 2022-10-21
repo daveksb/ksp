@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { staffLicenseTypes } from '@ksp/shared/constant';
 import { ListData, PositionType, SchStaff } from '@ksp/shared/interface';
 import { StaffService } from '@ksp/shared/service';
+import { getCookie } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -25,7 +26,7 @@ export class ActivityListComponent implements AfterViewInit {
     activitySearch: [],
   });
 
-  schoolId = '0010201056';
+  schoolId = getCookie('schoolId');
   displayedColumns: string[] = [
     'id',
     'licenseID',

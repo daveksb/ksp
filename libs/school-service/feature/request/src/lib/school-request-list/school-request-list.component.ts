@@ -16,6 +16,7 @@ import {
   checkProcess,
   schoolMapRequestType,
   checkStatus,
+  getCookie,
 } from '@ksp/shared/utility';
 
 @Component({
@@ -23,7 +24,7 @@ import {
   styleUrls: ['./school-request-list.component.scss'],
 })
 export class SchoolRequestListComponent implements AfterViewInit {
-  schoolId = '0010201056';
+  schoolId = getCookie('schoolId');
   displayedColumns: string[] = displayedColumns;
   dataSource = new MatTableDataSource<KspRequest>();
   SchoolRequestSubType = SchoolRequestSubType;

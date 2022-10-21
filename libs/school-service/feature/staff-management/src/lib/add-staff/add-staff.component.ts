@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import {
   formatCheckboxData,
   formatDatePayload,
+  getCookie,
   parseJson,
   replaceEmptyWithNull,
   replaceUndefinedWithNull,
@@ -59,7 +60,7 @@ export class AddStaffComponent implements OnInit {
   staffTypes$!: Observable<StaffType[]>;
   positionTypes$!: Observable<PositionType[]>;
   academicTypes$!: Observable<AcademicStanding[]>;
-  schoolId = '0010201056';
+  schoolId = getCookie('schoolId');
   mode: FormMode = 'add';
   userInfoType = UserInfoFormType.thai;
   searchStaffDone = false;
