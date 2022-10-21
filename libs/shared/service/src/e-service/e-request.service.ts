@@ -10,7 +10,9 @@ import {
   SchKuruspaNumber,
   SchUser,
   SelfRequest,
+  UniUser,
 } from '@ksp/shared/interface';
+import { getCookie } from '@ksp/shared/utility';
 import { map, Observable, shareReplay } from 'rxjs';
 
 @Injectable({
@@ -52,6 +54,13 @@ export class ERequestService {
         { requestid }
       )
       .pipe(map((data: any) => data.datareturn));
+  }
+
+  createUniUser(payload: UniUser): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/e-service/uniuserinsert`, {
+      ...payload,
+      tokenkey: getCookie('userToken'),
+    });
   }
 
   EsSearchRequest(payload: EsSearchPayload): Observable<SelfRequest[]> {
