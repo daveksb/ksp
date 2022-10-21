@@ -12,7 +12,6 @@
     </div>
     <div class="bg-white p-3">
       <ksp-request-header-info
-        [requestDate]="'10 ตุลาคม 2565'"
         [requestNumber]="'112234467876543'"
       ></ksp-request-header-info>
 
@@ -25,7 +24,7 @@
         <button class="btn btn-success">ดูใบคำขอ</button>
       </div>
 
-      <div class="table-responsive">
+      <div class="table-responsive w-75">
         <table class="table">
           <thead>
             <tr>
@@ -54,66 +53,22 @@
       <div class="box-header">ผลการยืนยันการตรวจสอบ</div>
       <hr />
 
-      <div class="border bg-white h-auto w-50 p-2 my-2 mx-5">
-        <div class="d-flex align-items-center">
-          <input type="radio" value="2" formControlName="result" />
-          <label class="form-label ms-1" for="flexCheckDefault">
-            ยืนยันผลการตรวจสอบ และออกหนังสือรับรอง
-          </label>
-        </div>
-
-        <div class="row mx-3">
-          <div class="col mb-3">
-            <label class="form-label">เลขที่หนังสือรับรอง</label>
-            <input
-              class="form-control"
-              type="text"
-              formControlName="licenseNumber"
-            />
-          </div>
-          <div class="col mb-3">
-            <label class="form-label">วันเดือนปีที่ออกหนังสือรับรอง</label>
-            <div class="d-flex align-items-center">
-              <input
-                matInput
-                [matDatepicker]="picker"
-                autocomplete="off"
-                class="form-control form-date"
-                formControlName="licenseDate"
-              />
-              <mat-datepicker-toggle
-                class="button-date"
-                matSuffix
-                [for]="picker"
-              ></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="border bg-white h-auto w-50 p-2 my-2 mx-5">
-        <div class="d-flex align-items-center">
-          <input type="radio" value="2" formControlName="result" />
-          <label class="form-label ms-2" for="flexCheckDefault">
-            ไม่ยืนยันผลการตรวจสอบ
-          </label>
-        </div>
-      </div>
+      <ksp-consider-ksp-request></ksp-consider-ksp-request>
     </div>
+
     <br />
     <div class="bg-white p-3">
       <div class="d-flex justify-content-between">
         <div class="box-header">
           หนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาต
         </div>
-        <button class="btn btn-success">พิมพ์</button>
+        <button class="btn btn-success">พิมพ์เอกสาร</button>
       </div>
 
       <hr />
-      <div class="d-flex justify-content-center">
-        <div class="h-100 w-75 border bg-light" style="padding: 15rem 0">
-          <div class="text-danger text-center box-header p-5">
+      <div class="d-flex justify-content-center bg-light border mx-auto w-75">
+        <div class="h-100 w-50 bg-white" style="padding: 20rem 0">
+          <div class="text-danger text-center box-header">
             หนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาต
           </div>
         </div>

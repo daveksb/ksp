@@ -14,6 +14,7 @@ import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { EServiceRewardSearchComponent } from '@ksp/shared/search';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
 
 const routes: Routes = [
   {
@@ -52,6 +53,7 @@ const routes: Routes = [
     RequestHeaderInfoComponent,
     SelfServiceFormModule,
     EServiceRewardSearchComponent,
+    ThaiDatePipe,
   ],
   declarations: [EThaiTeacherListComponent, EThaiTeacherDetailComponent],
   exports: [EThaiTeacherListComponent, EThaiTeacherDetailComponent],

@@ -20,7 +20,7 @@ import {
   SchoolInfoService,
   SchoolRequestService,
 } from '@ksp/shared/service';
-import { mapFileInfo, parseJson } from '@ksp/shared/utility';
+import { getCookie, mapFileInfo, parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -37,7 +37,7 @@ export class RequestRewardComponent implements OnInit {
   uniqueNo = '';
   requestData = new KspRequest();
   rewards = rewards;
-  schoolId = '0010201056';
+  schoolId = getCookie('schoolId');
   osoiTypes$!: Observable<any>;
   personTypes$!: Observable<PersonType[]>;
   prefixList$!: Observable<Prefix[]>;

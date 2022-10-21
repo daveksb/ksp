@@ -8,9 +8,13 @@ import {
   SchoolRequestSubType,
   SelfServiceRequestType,
 } from '@ksp/shared/constant';
-import { SelfRequest } from '@ksp/shared/interface';
+import { EsSearchPayload, SelfRequest } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
-import { checkProcess, checkStatus } from '@ksp/shared/utility';
+import {
+  checkProcess,
+  checkStatus,
+  replaceEmptyWithNull,
+} from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-edit-license-approve-list',
@@ -43,19 +47,29 @@ export class EditLicenseApproveListComponent implements AfterViewInit {
   }
 
   search(params: any) {
-    const payload = {
-      systemtype: 1, // self service
+    let payload: EsSearchPayload = {
+      systemtype: '1',
       requesttype:
-        +SelfServiceRequestType['ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ'], // ใบคำขอต่อใบอนุญาต
-      requestno: '',
-      firstnameth: '',
-      idcardno: '',
-      currentprocess: '',
-      requestdate: '',
+        SelfServiceRequestType['ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ'],
+      requestno: null,
+      careertype: null,
+      name: null,
+      idcardno: null,
+      passportno: null,
+      process: null,
+      status: null,
+      schoolid: null,
+      schoolname: null,
+      bureauid: null,
+      requestdatefrom: null,
+      requestdateto: null,
       offset: '0',
       row: '1000',
     };
-    this.requestService.searchSelfRequest(payload).subscribe((res) => {
+
+    payload = replaceEmptyWithNull(payload);
+
+    this.requestService.KspSearchRequest(payload).subscribe((res) => {
       this.dataSource.data = res;
       this.dataSource.sort = this.sort;
 

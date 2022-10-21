@@ -1,7 +1,4 @@
-<ksp-top-nav
-  ><span header>ยื่นใบคำขอรางวัล</span
-  ><span subHeader>ขอรางวัลครูภาษาไทยดีเด่น</span></ksp-top-nav
->
+<ksp-top-nav><span header>ยื่นใบคำขอรางวัล</span><span subHeader>ขอรางวัลครูภาษาไทยดีเด่น</span></ksp-top-nav>
 
 <div class="bg-secondary full-height bg-opacity-10 px-4 py-2">
   <div class="box-header">รายการขอรางวัลครูภาษาไทยดีเด่น</div>
@@ -10,8 +7,7 @@
     <hr />
     <ksp-e-service-reward-search
       (search)="search()"
-      (clear)="clear()"
-    ></ksp-e-service-reward-search>
+      (clear)="clear()"></ksp-e-service-reward-search>
   </div>
   <br />
   <div class="bg-white p-3">
@@ -28,7 +24,7 @@
         <ng-container matColumnDef="licenseNumber">
           <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.licenseNumber }}
+            {{ element.requestno }}
           </td>
         </ng-container>
 
@@ -60,13 +56,13 @@
 
         <ng-container matColumnDef="lastEditDate">
           <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
-          <td mat-cell *matCellDef="let element">{{ element.lastEditDate }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.updatedate | thaiDate }}</td>
         </ng-container>
 
         <ng-container matColumnDef="submitDate">
           <th mat-header-cell *matHeaderCellDef>วันที่ยื่นใบคำขอ</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.submitDate }}
+            {{ element.requestdate | thaiDate }}
           </td>
         </ng-container>
 
@@ -83,8 +79,7 @@
             <i
               role="button"
               class="bi bi-file-text fs-5 text-primary"
-              (click)="view()"
-            ></i>
+              (click)="view()"></i>
           </td>
         </ng-container>
 

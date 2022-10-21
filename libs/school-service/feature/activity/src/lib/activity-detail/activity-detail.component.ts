@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ListData } from '@ksp/shared/interface';
+import { FileGroup, ListData } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { thaiDate } from '@ksp/shared/utility';
+import { getCookie, thaiDate } from '@ksp/shared/utility';
 import { SchoolSelfDevelopActivityTies } from '@ksp/shared/constant';
 import { SelfDevelopService, StaffService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -21,7 +21,7 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class ActivityDetailComponent implements OnInit {
   today = thaiDate(new Date());
-  schoolId = '0010201056';
+  schoolId = getCookie('schoolId');
   staffId!: number;
   staff: any;
   pageType!: number;
@@ -35,10 +35,10 @@ export class ActivityDetailComponent implements OnInit {
 
   activityTypes: ListData[] = SchoolSelfDevelopActivityTies;
 
-  attachFiles = [
+  attachFiles: FileGroup[] = [
     {
       name: '1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน',
-      fileid: '',
+      files: [],
     },
   ];
 
@@ -117,7 +117,6 @@ export class ActivityDetailComponent implements OnInit {
 
   submit() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
         btnLabel: 'ตกลง',
@@ -134,7 +133,6 @@ export class ActivityDetailComponent implements OnInit {
 
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
         buttonLabel: 'กลับสู่หน้าหลัก',
