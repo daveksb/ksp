@@ -33,3 +33,4 @@ export * from './lib/ksp-search';
 
 export * from './lib/uni-service-import-type';
 export * from './lib/university-select';
+export * from './lib/uni-user';
