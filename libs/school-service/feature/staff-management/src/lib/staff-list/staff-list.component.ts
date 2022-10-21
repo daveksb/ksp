@@ -28,6 +28,7 @@ export class StaffListComponent implements AfterViewInit {
   });
 
   schoolId = getCookie('schoolId');
+
   displayedColumns: string[] = [
     'id',
     'idcardno',
@@ -56,6 +57,7 @@ export class StaffListComponent implements AfterViewInit {
 
   search(filter: any) {
     //console.log('filter = ', filter);
+    console.log('school id = ', this.schoolId);
     const payload = {
       licenseno: filter.licenseno,
       name: filter.name,
