@@ -118,6 +118,19 @@ export const SchoolRequestProcess: SchRequestProcess[] = [
     processId: 4,
     processName: 'ตรวจสอบเอกสาร ลำดับที่ 2',
     status: [
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'ปรับแก้ไข/เพิ่มเติม', ename: 'ปรับแก้ไข/เพิ่มเติม' },
+      { id: 3, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+      { id: 4, sname: 'ไม่ผ่านการตรวจสอบ', ename: 'ไม่ผ่านการตรวจสอบ' },
+      { id: 5, sname: 'ส่งคืนและยกเลิก', ename: 'ส่งคืนและยกเลิก' },
+    ],
+  },
+  {
+    requestType: 3,
+    processId: 5,
+    processName: 'พิจาณาและรับรอง',
+    status: [
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
       { id: 2, sname: 'ผ่านการรับรอง/พิจารณา', ename: 'ผ่านการรับรอง/พิจารณา' },
       {

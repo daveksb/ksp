@@ -2,10 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
 import {
+  ESelfSearchPayload,
   EsSearchPayload,
   KspApprovePayload,
   KspRequest,
   KspResponse,
+  SchKuruspaNumber,
   SchUser,
   SelfRequest,
 } from '@ksp/shared/interface';
@@ -26,7 +28,7 @@ export class ERequestService {
   }
 
   // new API
-  KspApproveRequest(payload: KspApprovePayload): Observable<any> {
+  KspUpdateRequestProcess(payload: KspApprovePayload): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/e-service/ksprequestprocessinsert`,
       payload
@@ -43,6 +45,16 @@ export class ERequestService {
     );
   }
 
+  // new API
+  getApproveHistory(requestid: string): Observable<SelfRequest[]> {
+    return this.http
+      .post(
+        `${environment.apiUrl}/e-service/ksprequestprocessselectbyrequestid`,
+        { requestid }
+      )
+      .pipe(map((data: any) => data.datareturn));
+  }
+
   EsSearchRequest(payload: EsSearchPayload): Observable<SelfRequest[]> {
     return this.http
       .post(`${environment.shortApiUrl}/schrequestsearch_e.php`, payload)
@@ -52,7 +64,7 @@ export class ERequestService {
       );
   }
 
-  searchSelfRequest(payload: any): Observable<SelfRequest[]> {
+  searchSelfRequest(payload: ESelfSearchPayload): Observable<SelfRequest[]> {
     return this.http
       .post(
         `${environment.shortApiUrl}/schrequestsearch_e-service.php`,
@@ -88,5 +100,10 @@ export class ERequestService {
       `${environment.apiUrl}/e-service/ksprequestprocessselectbyrequestid`,
       { requestid, tokenkey: getCookie('userToken') }
     );
+    }
+  createSchKuruspaNumber(payload: Partial<SchKuruspaNumber>): Observable<any> {
+    return this.http
+      .post(`${environment.apiUrl}/e-service/schkuruspanoinsertupdate`, payload)
+      .pipe(map((data: any) => data.datareturn));
   }
 }

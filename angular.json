@@ -2513,6 +2513,32 @@
       },
       "tags": []
     },
+    "e-service-standard-user-management": {
+      "projectType": "library",
+      "root": "libs/e-service/standard/user-management",
+      "sourceRoot": "libs/e-service/standard/user-management/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+          "options": {
+            "jestConfig": "libs/e-service/standard/user-management/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/standard/user-management/**/*.ts",
+              "libs/e-service/standard/user-management/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-ui-accusation-info": {
       "root": "libs/e-service/ui/accusation-info",
       "projectType": "library",
@@ -10412,8 +10438,5 @@
       ]
     }
   },
-  "version": 1,
-  "cli": {
-    "analytics": false
-  }
+  "version": 1
 }

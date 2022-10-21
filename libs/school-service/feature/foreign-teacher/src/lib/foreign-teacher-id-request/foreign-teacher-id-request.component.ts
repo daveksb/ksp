@@ -26,6 +26,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import {
   changeDate,
   formatDate,
+  getCookie,
   mapMultiFileInfo,
   thaiDate,
 } from '@ksp/shared/utility';
@@ -39,7 +40,7 @@ import { v4 as uuidv4 } from 'uuid';
 export class ForeignTeacherIdRequestComponent implements OnInit {
   uniqueNo!: string;
   bureauName = '';
-  schoolId = '0010201056';
+  schoolId = getCookie('schoolId');
   schoolName = '';
   address = '';
   showCancelButton!: boolean;
@@ -248,7 +249,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     this.schoolInfoService
       .getSchoolInfo(this.schoolId)
       .pipe(untilDestroyed(this))
-      .subscribe((res) => {
+      .subscribe((res: any) => {
         this.schoolName = res.schoolName;
         this.bureauName = res.bureauName;
         this.address = `บ้านเลขที่ ${res.address} ซอย ${

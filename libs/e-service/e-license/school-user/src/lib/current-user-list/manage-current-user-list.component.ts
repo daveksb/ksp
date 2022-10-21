@@ -42,7 +42,7 @@ export class ManageCurrentUserListComponent implements AfterViewInit {
   search(param: ESchUserSearch) {
     //console.log('params = ', param);
     const payload = {
-      schoolid: param.institution ? param.institution.schoolid : null, //'0010201056',
+      schoolid: param.institution ? param.institution.schoolid : null,
       schoolname: param.institution ? param.institution.schoolname : null,
       name: param.name,
       offset: '0',

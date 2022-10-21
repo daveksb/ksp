@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import { Prefix } from '@ksp/shared/interface';
 import { SchoolInfoService } from '@ksp/shared/service';
+import { getCookie } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 
@@ -14,7 +15,7 @@ import { Observable } from 'rxjs';
 })
 export class SchoolInfoDetailComponent implements OnInit {
   userInfoFormType: number = UserInfoFormType.thai;
-  schoolId = '0010201056';
+  schoolId = getCookie('schoolId');
   prefixList$!: Observable<Prefix[]>;
 
   form = this.fb.group({
@@ -38,7 +39,7 @@ export class SchoolInfoDetailComponent implements OnInit {
       .getSchoolInfo(this.schoolId)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
-        this.form.controls.schoolAddrTh.patchValue(res);
+        this.form.controls.schoolAddrTh.patchValue(<any>res);
       });
   }
 }

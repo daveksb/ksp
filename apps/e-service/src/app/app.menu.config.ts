@@ -500,7 +500,7 @@ export const standardMenu: MenuConfig[] = [
     subMenuName: 'user-management',
     subMenu: [
       {
-        path: '/aa',
+        path: '/uni/new-user',
         label: 'ใบคำขอรหัสเข้าใช้งานระบบบริการสถาบันผลิตครู (Uni Service)',
       },
       {

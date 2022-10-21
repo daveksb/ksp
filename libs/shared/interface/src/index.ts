@@ -1,6 +1,7 @@
 export * from './lib/input-type';
 export * from './lib/form-mode';
 export * from './lib/e-search-request';
+export * from './lib/e-self-search-request';
 export * from './lib/ethics';
 export * from './lib/user-info-form';
 export * from './lib/e-sch-user-search';

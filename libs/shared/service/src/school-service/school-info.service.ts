@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
-import { SchForgetPassword, SchInfo, SchUser } from '@ksp/shared/interface';
+import { SchInfo, SchUser } from '@ksp/shared/interface';
 import { map, Observable, shareReplay } from 'rxjs';
 
 @Injectable({
@@ -10,12 +10,10 @@ import { map, Observable, shareReplay } from 'rxjs';
 export class SchoolInfoService {
   constructor(private http: HttpClient) {}
 
-  getSchoolInfo(schoolId: string): Observable<any> {
-    return this.http
-      .get(
-        `${environment.apiUrl}/kspschoolregister/schschoolsearchschoolid?schoolId=${schoolId}`
-      )
-      .pipe(shareReplay());
+  getSchoolInfo(schoolId: string): Observable<SchInfo> {
+    return this.http.get<SchInfo>(
+      `${environment.apiUrl}/kspstaff/schschoolsearchschoolid?schoolId=${schoolId}`
+    );
   }
 
   getSchoolEduOccupy(): Observable<any> {

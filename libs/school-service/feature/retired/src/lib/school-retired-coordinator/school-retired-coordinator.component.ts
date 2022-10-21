@@ -15,7 +15,7 @@ import {
   SchUser,
 } from '@ksp/shared/interface';
 import { GeneralInfoService, SchoolRequestService } from '@ksp/shared/service';
-import { thaiDate } from '@ksp/shared/utility';
+import { getCookie, thaiDate } from '@ksp/shared/utility';
 import localForage from 'localforage';
 import { EMPTY, Observable, switchMap } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
@@ -29,7 +29,7 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
     coordinatorTnfo: [],
   });
   reasoninfo: any;
-  schoolId = '0010201056';
+  schoolId = getCookie('schoolId');
   school = new SchInfo();
   selectUser!: SchUser;
   userInfoFormType: number = UserInfoFormType.thai;
@@ -101,6 +101,7 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
     dialog.componentInstance.confirmed
       .pipe(
         switchMap((res) => {
+          console.log('user = ', this.selectUser);
           if (res) {
             const form: any = this.form.value;
             const request: KspRequest = new KspRequest(); //form.retiredTnfo;
@@ -115,10 +116,13 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
             request.firstnameth = this.selectUser.firstnameth;
             request.lastnameth = this.selectUser.lastnameth;
             request.contactphone = this.selectUser.schmobile;
+            request.userid = this.selectUser.schmemberid;
             request.schoolid = this.schoolId;
             request.schoolname = this.school.schoolname;
             request.reasoninfo = JSON.stringify(this.reasoninfo);
             request.coordinatorinfo = JSON.stringify(form);
+            //console.log('request = ', request);
+            //return EMPTY;
             return this.requestService.schCreateRequest(request);
           }
           return EMPTY;
@@ -126,7 +130,7 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
       )
       .subscribe((res) => {
         if (res) {
-          this.completeDialog(res?.requestno);
+          //this.completeDialog(res?.requestno);
         }
       });
   }

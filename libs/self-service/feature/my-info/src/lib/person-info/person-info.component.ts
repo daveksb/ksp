@@ -39,14 +39,14 @@ export class PersonInfoComponent implements OnInit {
     nationality: [''],
     religion: [''],
     idcardno: [''],
-    province: [''],
+    sex: [''],
     email: [''],
     personimage: [''],
   });
 
   baseForm = this.fb.group(new SelfMyInfo());
   prefixList$!: Observable<any>;
-  provinces$!: Observable<any>;
+  //provinces$!: Observable<any>;
   nationalitys$!: Observable<any>;
   uniqueTimestamp!: string;
   validatorMessages = validatorMessages;
@@ -61,7 +61,7 @@ export class PersonInfoComponent implements OnInit {
   ngOnInit(): void {
     this.uniqueTimestamp = uuidv4();
     this.prefixList$ = this.generalInfoService.getPrefix();
-    this.provinces$ = this.addressService.getProvinces();
+    //this.provinces$ = this.addressService.getProvinces();
     this.nationalitys$ = this.generalInfoService.getNationality();
     this.myInfoService.getMyInfo().subscribe((res) => {
       res = this.myInfoService.formatMyInfo(res);
@@ -96,7 +96,7 @@ export class PersonInfoComponent implements OnInit {
     return this.form.controls.email;
   }
   onClick() {
-    if (this.status == 'view') {
+    if (this.status === 'view') {
       this.status = 'edit';
       this.label = 'บันทึกข้อมูล';
       this.form.enable();

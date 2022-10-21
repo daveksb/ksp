@@ -138,6 +138,9 @@
       "@ksp/e-service/standard/test-result": [
         "libs/e-service/standard/test-result/src/index.ts"
       ],
+      "@ksp/e-service/standard/user-management": [
+        "libs/e-service/standard/user-management/src/index.ts"
+      ],
       "@ksp/e-service/ui/accusation-info": [
         "libs/e-service/ui/accusation-info/src/index.ts"
       ],

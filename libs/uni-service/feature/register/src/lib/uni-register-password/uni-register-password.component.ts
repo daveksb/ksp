@@ -9,7 +9,7 @@ import {
 import { FormMode } from '@ksp/shared/interface';
 import { EMPTY, switchMap } from 'rxjs';
 import localForage from 'localforage';
-import { mapMultiFileInfo, thaiDate } from '@ksp/shared/utility';
+import { getCookie, mapMultiFileInfo, thaiDate } from '@ksp/shared/utility';
 import { UniRequestService } from '@ksp/shared/service';
 import * as CryptoJs from 'crypto-js';
 
@@ -44,9 +44,9 @@ export class UniRegisterPasswordComponent implements OnInit {
   uniData: any;
   coordinator: any;
   uploadFileList: Array<any> = [];
-  requesttype = 1;
-  systemtype = 3;
-  currentprocess = 1;
+  requesttype = '1';
+  systemtype = '3';
+  currentprocess = '1';
   eyeIconClicked = false;
   eyeIconClickedRe = false;
   wrongpass = false;
@@ -161,8 +161,11 @@ export class UniRegisterPasswordComponent implements OnInit {
             payload.ref3 = '5';
             payload.systemtype = this.systemtype;
             payload.requesttype = this.requesttype;
-            payload.requeststatus = `1`;
-            payload.requestprocess = '2';
+            payload.careertype = '5';
+            payload.status = '1';
+            payload.process = '1';
+            // payload.userpermission = this.savingData.permission;
+            payload.userid = getCookie('userId');
             payload.currentprocess = this.currentprocess;
             return this.requestService.createRequestKsp(payload);
           }

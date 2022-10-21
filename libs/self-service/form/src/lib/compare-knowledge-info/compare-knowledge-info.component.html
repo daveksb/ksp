@@ -1,6 +1,7 @@
 <form [formGroup]="form">
-  <div class="box-header">วิชาการใช้ภาษาไทยเพื่อการสื่อสาร</div>
-  <div class="border rounded p-3 mb-3">
+  <div class="border rounded px-3 py-2 mb-3">
+    <div class="box-header">วิชาการใช้ภาษาไทยเพื่อการสื่อสาร</div>
+    <hr />
     <div class="row">
       <div class="col-md-6 mb-2">
         <label class="form-label required">ผลคะแนนการทดสอบของหน่วยงาน</label>
@@ -40,9 +41,9 @@
       </div>
     </div>
   </div>
-  <hr />
-  <div class="box-header">วิชาการใช้ภาษาอังกฤษเพื่อการสื่อสาร</div>
-  <div class="border rounded p-3 mb-3">
+  <div class="border rounded px-3 py-2 mb-3">
+    <div class="box-header">วิชาการใช้ภาษาอังกฤษเพื่อการสื่อสาร</div>
+    <hr />
     <div class="row">
       <div class="col-md-6 mb-2">
         <label class="form-label required">ผลคะแนนการทดสอบของหน่วยงาน</label>
@@ -82,9 +83,9 @@
       </div>
     </div>
   </div>
-  <hr />
-  <div class="box-header">วิชาการใช้เทคโนโลยีดิจิทัลเพื่อการศึกษา</div>
-  <div class="border rounded p-3 mb-3">
+  <div class="border rounded px-3 py-2 mb-3">
+    <div class="box-header">วิชาการใช้เทคโนโลยีดิจิทัลเพื่อการศึกษา</div>
+    <hr />
     <div class="row">
       <div class="col-md-6 mb-2">
         <label class="form-label required">ผลคะแนนการทดสอบของหน่วยงาน</label>
@@ -124,13 +125,15 @@
       </div>
     </div>
   </div>
-  <hr />
-  <div class="box-header">วิชาเอก</div>
 
-  <ng-container formArrayName="degreeInfo">
-    <ng-container *ngFor="let DegreeForm of degreeInfo.controls; let i = index">
-      <ng-container [formGroupName]="i">
-        <div class="border rounded p-3 mb-3">
+  <div class="border rounded px-3 py-2 mb-3">
+    <div class="box-header">วิชาเอก</div>
+    <ng-container formArrayName="degreeInfo">
+      <ng-container
+        *ngFor="let DegreeForm of degreeInfo.controls; let i = index"
+      >
+        <ng-container [formGroupName]="i">
+          <hr />
           <div class="d-flex justify-content-end" *ngIf="i > 0">
             <i
               class="bi bi-x-circle-fill text-danger"
@@ -186,16 +189,16 @@
               </div>
             </div>
           </div>
-        </div>
+        </ng-container>
       </ng-container>
     </ng-container>
-  </ng-container>
-  <div class="d-flex justify-content-end">
-    <ksp-add-row-button
-      class="text-primary fs-6"
-      (addRowClick)="addFormArray(degreeInfo)"
-    >
-      เพิ่มข้อมูลวิชาเอก
-    </ksp-add-row-button>
+    <div class="d-flex justify-content-end">
+      <ksp-add-row-button
+        class="text-primary fs-6"
+        (addRowClick)="addFormArray(degreeInfo)"
+      >
+        เพิ่มข้อมูลวิชาเอก
+      </ksp-add-row-button>
+    </div>
   </div>
 </form>

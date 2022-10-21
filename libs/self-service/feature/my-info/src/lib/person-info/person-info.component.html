@@ -7,6 +7,7 @@
   <div class="main__container full-height px-4 py-2">
     <br />
     <self-service-form-upload-image
+      [isEditMode]="status === 'view' ? false : true"
       [imgSrc]="imgSrc"
       [uniqueTimestamp]="uniqueTimestamp"
       [requestType]="2"
@@ -117,7 +118,12 @@
       <div class="row">
         <div class="col-md mb-3">
           <label class="form-label">หมายเลขบัตรประชาชน</label>
-          <input class="form-control" type="text" formControlName="idcardno" />
+          <input
+            class="form-control"
+            type="text"
+            formControlName="idcardno"
+            maxlength="13"
+          />
         </div>
         <div class="col-md mb-3">
           <label class="form-label">รหัสผ่าน</label>
@@ -128,8 +134,13 @@
           />
         </div>
         <div class="col-md mb-3">
-          <label class="form-label">เบอร์โทร</label>
-          <input class="form-control" type="text" formControlName="phone" />
+          <label class="form-label">เบอร์โทรศัพท์มือถือ</label>
+          <input
+            class="form-control"
+            type="text"
+            formControlName="phone"
+            maxlength="10"
+          />
         </div>
         <div class="col-md mb-3">
           <label class="form-label">อีเมล</label>
@@ -164,16 +175,12 @@
         </div>
 
         <div class="col-md mb-3">
-          <label class="form-label">ภูมิลำเนา</label>
-          <select class="form-select" formControlName="province">
+          <label class="form-label">เพศ</label>
+          <select class="form-select" formControlName="sex">
             <option value="null" selected hidden disabled>กรุณาเลือก</option>
-
-            <option
-              *ngFor="let province of provinces$ | async"
-              [value]="province?.province_id"
-            >
-              {{ province.province_name }}
-            </option>
+            <option value="1">ชาย</option>
+            <option value="2">หญิง</option>
+            <option value="3">อื่นๆ</option>
           </select>
         </div>
 

@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -27,14 +28,19 @@ export class ApproveNewUserListComponent implements AfterViewInit {
   checkStatus = checkStatus;
   statusList = SchoolRequestProcess.find((i) => i.requestType === 1)?.status;
   mapRequestType = schoolMapRequestType;
+  selectedUniversity = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  selectedUniversity = '';
+  defaultForm = { requesttype: '1' };
+  form = this.fb.group({
+    search: [this.defaultForm],
+  });
 
   constructor(
     private router: Router,
+    private fb: FormBuilder,
     private eRequestService: ERequestService
   ) {}
 
@@ -102,7 +108,7 @@ export const column: string[] = [
   'requestno',
   'name',
   'contactphone',
-  'coordinatorname',
+  //'coordinatorname',
   'schoolname',
   //'provience',
   'requestType',
