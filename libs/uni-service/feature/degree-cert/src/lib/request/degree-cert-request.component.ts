@@ -9,7 +9,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { UniInfoService, UniRequestService } from '@ksp/shared/service';
-import { getCookie, thaiDate, parseJson } from '@ksp/shared/utility';
+import { getCookie, thaiDate, parseJson, formatDate } from '@ksp/shared/utility';
 import moment from 'moment';
 import { lastValueFrom } from 'rxjs';
 @Component({
@@ -62,7 +62,8 @@ export class DegreeCertRequestComponent {
       );
       const { requestNo, step1, step2, step3, step4 } =
         this.uniInfoService.mappingUniverSitySelectByIdWithForm(
-          uniRequestDegree);
+          uniRequestDegree
+        );
       this.requestNo = requestNo;
       this.step1Form.setValue({
         step1,
@@ -152,8 +153,12 @@ export class DegreeCertRequestComponent {
       fulldegreenameen: step1?.degreeTypeForm?.degreeNameEnFull || null,
       shortdegreenameen: step1?.degreeTypeForm?.degreeNameEnShort || null,
       courseapprovetime: step1?.degreeTypeForm?.courseApproveTime || null,
-      courseapprovedate: step1?.degreeTypeForm?.courseApproveDate || null,
-      courseacceptdate: step1?.degreeTypeForm?.courseAcceptDate || null,
+      courseapprovedate: step1?.degreeTypeForm?.courseApproveDate
+        ? formatDate(new Date(step1?.degreeTypeForm?.courseApproveDate).toISOString())
+        : null,
+      courseacceptdate: step1?.degreeTypeForm?.courseAcceptDate
+        ? formatDate(new Date(step1?.degreeTypeForm?.courseAcceptDate).toISOString())
+        : null,
       coursedetailtype: step1?.courseDetailType || null,
       coursedetailinfo: step1?.courseDetail
         ? JSON.stringify(step1?.courseDetail)

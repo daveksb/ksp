@@ -6,7 +6,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { getCookie, parseJson, thaiDate } from '@ksp/shared/utility';
+import { formatDate, getCookie, parseJson, thaiDate } from '@ksp/shared/utility';
 import moment from 'moment';
 import { lastValueFrom, switchMap } from 'rxjs';
 import { UniInfoService, UniRequestService } from '@ksp/shared/service';
@@ -206,9 +206,9 @@ export class EditDegreeDetailComponent implements OnInit {
     const returnData: any = {};
     returnData['step1Section1'] = {
       courseacademicyear: step1?.degreeTypeForm?.courseYear || null,
-      courseacceptdate: step1?.degreeTypeForm?.courseAcceptDate || null,
-      courseapprovedate: step1?.degreeTypeForm?.courseApproveDate || null,
-      courseapprovetime: step1?.degreeTypeForm?.courseApproveTime || null,
+      courseacceptdate: step1?.degreeTypeForm?.courseAcceptDate ? formatDate(new Date(step1?.degreeTypeForm?.courseAcceptDate).toISOString()) : null,
+      courseapprovedate: step1?.degreeTypeForm?.courseApproveDate ? formatDate( new Date(step1?.degreeTypeForm?.courseApproveDate).toISOString()): null,
+      courseapprovetime:  step1?.degreeTypeForm?.courseApproveTime || null,
       coursename: step1?.degreeTypeForm?.courseName || null,
       coursetype: step1?.degreeTypeForm?.courseType || null,
       degreelevel: step1?.degreeTypeForm?.degreeType || null,
