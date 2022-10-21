@@ -22,8 +22,8 @@ export class FormCoordinatorInfoComponent
   implements OnInit
 {
   @Input() positionLabel = 'ตำแหน่ง';
-  @Input() showContent = true;
-  @Input() userFormType: 'req' | 'coord' = 'req';
+  @Input() hideyyy = false;
+  @Input() hidexxx = false;
   @Input() isSchoolService = true;
   @Input() displayMode!: number[];
 
