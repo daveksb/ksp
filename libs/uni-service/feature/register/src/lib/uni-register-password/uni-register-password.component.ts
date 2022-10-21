@@ -165,7 +165,6 @@ export class UniRegisterPasswordComponent implements OnInit {
             payload.status = '1';
             payload.process = '1';
             // payload.userpermission = this.savingData.permission;
-            payload.userid = getCookie('userId');
             payload.currentprocess = this.currentprocess;
             return this.requestService.createRequestKsp(payload);
           }
