@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
+import { ESelfFormBaseComponent } from '@ksp/shared/form/others';
 import {
   AddressService,
   GeneralInfoService,
   EducationDetailService,
   ERequestService,
 } from '@ksp/shared/service';
-import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -16,28 +16,21 @@ import { Observable } from 'rxjs';
   templateUrl: './e-knowledge-cert-detail.component.html',
   styleUrls: ['./e-knowledge-cert-detail.component.scss'],
 })
-export class EKnowledgeCertDetailComponent implements OnInit {
+export class EKnowledgeCertDetailComponent
+  extends ESelfFormBaseComponent
+  implements OnInit
+{
   countries$!: Observable<any>;
   countries2$!: Observable<any>;
   licenses$!: Observable<any>;
   disableNextButton = false;
   eduFiles: any[] = [];
   experienceFiles: any[] = [];
-  prefixList$!: Observable<any>;
-  nationalitys$!: Observable<any>;
   provinces$!: Observable<any>;
 
-  tumbols1$!: Observable<any>;
-  tumbols2$!: Observable<any>;
-  tumbols3$!: Observable<any>;
-  amphurs1$!: Observable<any>;
-  amphurs2$!: Observable<any>;
-  amphurs3$!: Observable<any>;
-
   userInfoType = UserInfoFormType.thai;
-  requestId!: number;
 
-  form = this.fb.group({
+  override form = this.fb.group({
     userInfo: [],
     address1: [],
     address2: [],
@@ -70,67 +63,41 @@ export class EKnowledgeCertDetailComponent implements OnInit {
   ];
 
   constructor(
-    private fb: FormBuilder,
-    private addressService: AddressService,
-    private generalInfoService: GeneralInfoService,
-    private educationDetailService: EducationDetailService,
-    private route: ActivatedRoute,
-    private requestService: ERequestService
-  ) {}
+    generalInfoService: GeneralInfoService,
+    addressService: AddressService,
+    educationDetailService: EducationDetailService,
+    fb: FormBuilder,
+    requestService: ERequestService,
+    route: ActivatedRoute
+  ) {
+    super(
+      generalInfoService,
+      addressService,
+      educationDetailService,
+      fb,
+      requestService,
+      route
+    );
+  }
 
   ngOnInit(): void {
     this.getListData();
     this.checkRequestId();
   }
 
-  checkRequestId() {
-    this.route.paramMap.subscribe((params) => {
-      this.requestId = Number(params.get('id'));
-      if (this.requestId) {
-        this.requestService.getRequestById(this.requestId).subscribe((res) => {
-          if (res) {
-            this.patchData(res);
-          }
-        });
-      }
-    });
-  }
-
-  patchData(data: any) {
+  patchUserInfoForm(data: any): void {
     this.form.controls.userInfo.patchValue(data);
-    this.patchAddress(parseJson(data.addressinfo));
-    if (data.schooladdrinfo) {
-      this.patchWorkplace(parseJson(data.schooladdrinfo));
-    }
   }
 
-  patchWorkplace(data: any) {
-    this.amphurs3$ = this.addressService.getAmphurs(data.province);
-    this.tumbols3$ = this.addressService.getTumbols(data.district);
+  patchAddress1Form(data: any): void {
+    this.form.controls.address1.patchValue(data);
+  }
+
+  patchAddress2Form(data: any): void {
+    this.form.controls.address2.patchValue(data);
+  }
+
+  patchWorkPlaceForm(data: any): void {
     this.form.controls.workplace.patchValue(data);
-  }
-
-  patchAddress(addrs: any[]) {
-    if (addrs && addrs.length) {
-      addrs.map((addr: any, i: number) => {
-        if (i === 0) {
-          this.amphurs1$ = this.addressService.getAmphurs(addr.province);
-          this.tumbols1$ = this.addressService.getTumbols(addr.amphur);
-        }
-        if (i === 1) {
-          this.amphurs2$ = this.addressService.getAmphurs(addr.province);
-          this.tumbols2$ = this.addressService.getTumbols(addr.amphur);
-        }
-      });
-    }
-  }
-
-  getListData() {
-    this.countries$ = this.addressService.getCountry();
-    this.countries2$ = this.countries$;
-    this.licenses$ = this.educationDetailService.getLicenseType();
-    this.prefixList$ = this.generalInfoService.getPrefix();
-    this.nationalitys$ = this.generalInfoService.getNationality();
-    this.provinces$ = this.addressService.getProvinces();
   }
 }

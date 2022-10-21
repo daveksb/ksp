@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
+import { ESelfFormBaseComponent } from '@ksp/shared/form/others';
+import {
+  AddressService,
+  EducationDetailService,
+  ERequestService,
+  GeneralInfoService,
+} from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -8,27 +16,17 @@ import { Observable } from 'rxjs';
   templateUrl: './e-compare-knowledge-detail.component.html',
   styleUrls: ['./e-compare-knowledge-detail.component.scss'],
 })
-export class ECompareKnowledgeDetailComponent implements OnInit {
+export class ECompareKnowledgeDetailComponent
+  extends ESelfFormBaseComponent
+  implements OnInit
+{
   userInfoType = UserInfoFormType.thai;
 
   countries$!: Observable<any>;
   countries2$!: Observable<any>;
   licenses$!: Observable<any>;
-  prefixList$!: Observable<any>;
-  nationalitys$!: Observable<any>;
-  provinces1$!: Observable<any>;
-  provinces2$!: Observable<any>;
-  provinces3$!: Observable<any>;
-  bureau$!: Observable<any>;
 
-  tumbols1$!: Observable<any>;
-  tumbols2$!: Observable<any>;
-  tumbols3$!: Observable<any>;
-  amphurs1$!: Observable<any>;
-  amphurs2$!: Observable<any>;
-  amphurs3$!: Observable<any>;
-
-  form = this.fb.group({
+  override form = this.fb.group({
     userInfo: [],
     address1: [],
     address2: [],
@@ -52,7 +50,42 @@ export class ECompareKnowledgeDetailComponent implements OnInit {
     },
   ];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    generalInfoService: GeneralInfoService,
+    addressService: AddressService,
+    educationDetailService: EducationDetailService,
+    fb: FormBuilder,
+    requestService: ERequestService,
+    route: ActivatedRoute
+  ) {
+    super(
+      generalInfoService,
+      addressService,
+      educationDetailService,
+      fb,
+      requestService,
+      route
+    );
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getListData();
+    this.checkRequestId();
+  }
+
+  patchUserInfoForm(data: any): void {
+    this.form.controls.userInfo.patchValue(data);
+  }
+
+  patchAddress1Form(data: any): void {
+    this.form.controls.address1.patchValue(data);
+  }
+
+  patchAddress2Form(data: any): void {
+    this.form.controls.address2.patchValue(data);
+  }
+
+  patchWorkPlaceForm(data: any): void {
+    this.form.controls.workplace.patchValue(data);
+  }
 }
