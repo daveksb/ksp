@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { SelfServiceRequestType } from '@ksp/shared/constant';
+import { EsSearchPayload, SelfRequest } from '@ksp/shared/interface';
+import { ERequestService } from '@ksp/shared/service';
+import { replaceEmptyWithNull } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-e-best-teacher-list',
@@ -9,14 +13,47 @@ import { Router } from '@angular/router';
 })
 export class EBestTeacherListComponent implements OnInit {
   displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<userList>();
+  dataSource = new MatTableDataSource<SelfRequest>();
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private requestService: ERequestService
+  ) {}
 
   ngOnInit(): void {}
 
   search() {
-    this.dataSource.data = data;
+    let payload: EsSearchPayload = {
+      systemtype: '1',
+      requesttype:
+        SelfServiceRequestType.ขอรับรางวัลครูผู้สอนดีเด่นตามกลุ่มสาระการเรียนรู้,
+      requestno: null,
+      careertype: null,
+      name: null,
+      idcardno: null,
+      passportno: null,
+      process: null,
+      status: null,
+      schoolid: null,
+      schoolname: null,
+      bureauid: null,
+      requestdatefrom: null,
+      requestdateto: null,
+      offset: '0',
+      row: '1000',
+    };
+
+    payload = replaceEmptyWithNull(payload);
+
+    this.requestService.KspSearchRequest(payload).subscribe((res) => {
+      this.dataSource.data = res;
+      // this.dataSource.sort = this.sort;
+
+      // const sortState: Sort = { active: 'id', direction: 'desc' };
+      // this.sort.active = sortState.active;
+      // this.sort.direction = sortState.direction;
+      // this.sort.sortChange.emit(sortState);
+    });
   }
 
   clear() {

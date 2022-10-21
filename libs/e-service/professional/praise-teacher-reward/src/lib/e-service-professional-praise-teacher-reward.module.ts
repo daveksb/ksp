@@ -14,6 +14,7 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SharedFormSelfRewardFormModule } from '@ksp/shared/form/self-reward-form';
 import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { EServiceRewardSearchComponent } from '@ksp/shared/search';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
 
 const routes: Routes = [
   {
@@ -52,6 +53,7 @@ const routes: Routes = [
     RequestHeaderInfoComponent,
     SelfServiceFormModule,
     EServiceRewardSearchComponent,
+    ThaiDatePipe,
   ],
   declarations: [EPraiseTeacherListComponent, EPraiseTeacherDetailComponent],
   exports: [EPraiseTeacherListComponent, EPraiseTeacherDetailComponent],

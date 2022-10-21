@@ -2,8 +2,13 @@ import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SelfServiceRequestType } from '@ksp/shared/constant';
-import { ESelfSearchPayload, SelfRequest } from '@ksp/shared/interface';
+import {
+  ESelfSearchPayload,
+  EsSearchPayload,
+  SelfRequest,
+} from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
+import { replaceEmptyWithNull } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-refund-list',
@@ -20,19 +25,28 @@ export class RefundListComponent {
   ) {}
 
   search() {
-    // this.dataSource.data = data;
-    const payload: ESelfSearchPayload = {
-      systemtype: 1, // self service
-      requesttype: +SelfServiceRequestType.ขอคืนเงินค่าธรรมเนียม, // ใบคำขอต่อใบอนุญาต
-      requestno: '',
-      firstnameth: '',
-      idcardno: '',
-      currentprocess: '',
-      requestdate: '',
+    let payload: EsSearchPayload = {
+      systemtype: '1',
+      requesttype: SelfServiceRequestType.ขอคืนเงินค่าธรรมเนียม,
+      requestno: null,
+      careertype: null,
+      name: null,
+      idcardno: null,
+      passportno: null,
+      process: null,
+      status: null,
+      schoolid: null,
+      schoolname: null,
+      bureauid: null,
+      requestdatefrom: null,
+      requestdateto: null,
       offset: '0',
       row: '1000',
     };
-    this.requestService.searchSelfRequest(payload).subscribe((res) => {
+
+    payload = replaceEmptyWithNull(payload);
+
+    this.requestService.KspSearchRequest(payload).subscribe((res) => {
       console.log(res);
       this.dataSource.data = res;
       // this.dataSource.data = res;
