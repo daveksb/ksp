@@ -26,7 +26,7 @@ import { RequestSearchComponent } from '@ksp/shared/search';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSortModule } from '@angular/material/sort';
 import {
-  ApproveKspRequestComponent,
+  ValidateKspRequestComponent,
   ConsiderKspRequestComponent,
 } from '@ksp/e-service/e-license/approve-ksp-request';
 
@@ -51,7 +51,7 @@ import {
     SharedFormOthersModule,
     MatDatepickerModule,
     MatSortModule,
-    ApproveKspRequestComponent,
+    ValidateKspRequestComponent,
     ConsiderKspRequestComponent,
   ],
   declarations: [
