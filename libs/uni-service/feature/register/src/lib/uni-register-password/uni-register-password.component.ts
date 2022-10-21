@@ -163,7 +163,7 @@ export class UniRegisterPasswordComponent implements OnInit {
             payload.requesttype = this.requesttype;
             payload.careertype = '5';
             payload.status = '1';
-            payload.process = '2';
+            payload.process = '1';
             // payload.userpermission = this.savingData.permission;
             payload.userid = getCookie('userId');
             payload.currentprocess = this.currentprocess;

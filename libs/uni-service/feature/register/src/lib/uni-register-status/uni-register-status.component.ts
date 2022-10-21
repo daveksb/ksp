@@ -61,7 +61,6 @@ export class UniRegisterStatusComponent implements OnInit {
 
   search(form: any) {
     this.uniRequestService.uniRequestRegisterSearch(form).subscribe(res=>{
-      console.log(res)
       if (res.returncode == "00" && res.datareturn) {
         this.data = res.datareturn.map((data: any) => {
           if (data.educationoccupy) {
@@ -69,9 +68,9 @@ export class UniRegisterStatusComponent implements OnInit {
             data.educationoccupy.permissionname = data.educationoccupy.permission == '1' 
               ? 'เจ้าหน้าที่ประสานงาน (รับรองปริญญาและประกาศนียบัตรทางการศึกษา)' :
               data.educationoccupy.permission == '1' ? 'เจ้าหน้าที่ประสานงาน (นำส่งรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา​)' : '';
-            data.requeststatusname = data.requeststatus == '1' ? 'กำลังดำเนินการ' :
-              data.requeststatus == '1' ? 'อนุมัติเข้าใช้งาน' : 
-              data.requeststatus == '1' ? 'ไม่อนุมัติเข้าใช้งาน' : '-';
+            data.requeststatusname = data.status == '1' ? 'กำลังดำเนินการ' :
+              data.status == '2' ? 'อนุมัติเข้าใช้งาน' : 
+              data.status == '3' ? 'ไม่อนุมัติเข้าใช้งาน' : '-';
           }
           return data;
         });

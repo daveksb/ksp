@@ -109,7 +109,7 @@ export class UniRequestService {
   }
 
   uniRequestRegisterSearch(form: any): Observable<any> {
-    return this.http.post(`${environment.shortApiUrl}/schrequestsearch_uni.php`, {
+    return this.http.post(`${environment.shortApiUrl}/ksprequestsearch_other.php`, {
       ...form,
       tokenkey: getCookie('userToken'),
     });
