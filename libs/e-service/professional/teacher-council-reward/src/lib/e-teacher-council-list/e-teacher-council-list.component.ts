@@ -64,8 +64,8 @@ export class ETeacherCouncilListComponent implements OnInit {
     this.dataSource.data = [];
   }
 
-  view() {
-    this.router.navigate(['/teacher-council', 'detail']);
+  view(id: number) {
+    this.router.navigate(['/teacher-council', 'detail', id]);
   }
 }
 

@@ -1,7 +1,4 @@
-<ksp-top-nav
-  ><span header>ยื่นใบคำขอ</span
-  ><span subHeader>ขอรางวัลคุรุสภา</span></ksp-top-nav
->
+<ksp-top-nav><span header>ยื่นใบคำขอ</span><span subHeader>ขอรางวัลคุรุสภา</span></ksp-top-nav>
 <div class="bg-secondary bg-opacity-10 full-height-2 px-4 py-2">
   <div class="box-header">รายละเอียดใบคำขอรางวัลคุรุสภา</div>
   <div class="bg-white p-3">
@@ -12,16 +9,14 @@
       [formGroup]="form"
       class="tab-group"
       animationDuration="0ms"
-      [selectedIndex]="0"
-    >
+      [selectedIndex]="0">
       <mat-tab label="ข้อมูลส่วนตัว">
         <ksp-form-user-info
           [mode]="'view'"
           [isSelfService]="true"
           [prefixList]="prefixList$ | async"
           [requiredIdCardNo]="false"
-          formControlName="userInfo"
-        ></ksp-form-user-info>
+          formControlName="userInfo"></ksp-form-user-info>
       </mat-tab>
 
       <mat-tab label="ที่อยู่" class="tab-content">
@@ -30,8 +25,7 @@
           formControlName="address1"
           [provinces]="provinces1$ | async"
           [amphurs]="amphurs1$ | async"
-          [tumbols]="tumbols1$ | async"
-        >
+          [tumbols]="tumbols1$ | async">
           <span class="text-primary">ที่อยู่ทะเบียนบ้าน</span>
         </ksp-form-address>
         <hr />
@@ -40,8 +34,7 @@
           formControlName="address2"
           [provinces]="provinces2$ | async"
           [amphurs]="amphurs2$ | async"
-          [tumbols]="tumbols2$ | async"
-        >
+          [tumbols]="tumbols2$ | async">
           <span class="text-primary">ที่อยู่ที่ติดต่อได้สะดวก</span>
           <!-- <div class="d-flex align-items-center">
             <input type="checkbox" class="me-2" />
@@ -51,23 +44,23 @@
       </mat-tab>
 
       <mat-tab label="ข้อมูลการศึกษา">
-        <ksp-council-education [mode]="'view'"></ksp-council-education>
+        <ksp-council-education [mode]="'view'" formControlName="eduInfo"></ksp-council-education>
       </mat-tab>
 
       <mat-tab label="ข้อมูลการทำงาน">
-        <ksp-council-working [mode]="'view'"></ksp-council-working>
+        <ksp-council-working [mode]="'view'" formControlName="hiringInfo"></ksp-council-working>
       </mat-tab>
 
       <mat-tab label="ข้อมูลการปฏิบัติตนตามจรรยาบรรณ">
-        <ksp-council-ethic [mode]="'view'"></ksp-council-ethic>
+        <ksp-council-ethic [mode]="'view'" formControlName="rewardEthicInfo"></ksp-council-ethic>
       </mat-tab>
 
       <mat-tab label="รายงานผลสำเร็จจากการปฏิบัติงาน">
-        <ksp-council-success [mode]="'view'"></ksp-council-success>
+        <ksp-council-success [mode]="'view'" formControlName="rewardSuccessInfo"></ksp-council-success>
       </mat-tab>
 
       <mat-tab label="ข้อมูลรางวัลและหลักฐานประกอบ">
-        <ksp-council-evidence [mode]="'view'"></ksp-council-evidence>
+        <ksp-council-evidence [mode]="'view'" formControlName="rewardDetailInfo"></ksp-council-evidence>
       </mat-tab>
     </mat-tab-group>
   </div>
@@ -79,6 +72,5 @@
     [colorMode]="'blue'"
     [showCenterButtons]="true"
     [showCancelButton]="true"
-    [showSaveButton]="true"
-  ></ksp-bottom-nav>
+    [showSaveButton]="true"></ksp-bottom-nav>
 </div>
