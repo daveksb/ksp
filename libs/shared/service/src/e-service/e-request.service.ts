@@ -9,6 +9,7 @@ import {
   SchUser,
   SelfRequest,
 } from '@ksp/shared/interface';
+import { getCookie } from '@ksp/shared/utility';
 import { map, Observable, shareReplay } from 'rxjs';
 
 @Injectable({
@@ -80,6 +81,12 @@ export class ERequestService {
     return this.http.post(
       `${environment.apiUrl}/e-service/useractiveupdate`,
       payload
+    );
+  }
+  kspRequestProcessSelectByRequestId(requestid: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/ksprequestprocessselectbyrequestid`,
+      { requestid, tokenkey: getCookie('userToken') }
     );
   }
 }

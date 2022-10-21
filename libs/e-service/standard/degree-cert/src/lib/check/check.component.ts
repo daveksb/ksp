@@ -1,4 +1,4 @@
-import { jsonStringify, parseJson } from '@ksp/shared/utility';
+import { jsonStringify, parseJson, getCookie } from '@ksp/shared/utility';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -14,7 +14,20 @@ import {
 } from '@ksp/shared/service';
 import { map, switchMap, lastValueFrom } from 'rxjs';
 import _ from 'lodash';
-
+const detailToState = (res: any) => {
+  let newRes = res?.datareturn.map((data: any) => {
+    return parseJson(data?.detail);
+  });
+  newRes = newRes?.map((data: any) => {
+    const verifyObject: any = {};
+    verifyObject.isBasicValid = _.get(data, 'verifyStep1.result') ==="1"
+    verifyObject.isCourseValid =  _.get(data, 'verifyStep2.result')==="1"
+    verifyObject.isAttachmentValid = _.get(data, 'verifyStep3.result')==="1"
+    verifyObject.isProcessValid =  _.get(data, 'verifyStep4.result')==="1"
+    return verifyObject;
+  });
+  return newRes || [];
+};
 @Component({
   selector: 'e-service-check',
   templateUrl: './check.component.html',
@@ -36,27 +49,25 @@ export class CheckComponent implements OnInit {
     verifyStep3: [],
     verifyStep4: [],
   });
+  verifyResult: {
+    isBasicValid: boolean;
+    isCourseValid: boolean;
+    isAttachmentValid: boolean;
+    isProcessValid: boolean;
+  }[] = [];
   requestNumber = '';
   degreeType = '';
   choices = [
     {
-      name: 'เห็นควรพิจารณาให้การรับรอง',
+      name: 'เครบถ้วน และถูกต้อง',
       value: 1,
     },
     {
-      name: 'เห็นควรพิจารณาไม่ให้การรับรอง',
+      name: 'ไม่ครบถ้วน และไม่ถูกต้อง',
       value: 2,
     },
-    {
-      name: 'ให้สถาบันแก้ไข / เพิ่มเติม',
-      value: 3,
-    },
-    {
-      name: 'ส่งคืนหลักสูตร',
-      value: 4,
-    },
   ];
-  dartRequest: any;
+  daftRequest: any;
   constructor(
     public dialog: MatDialog,
     private router: Router,
@@ -66,34 +77,44 @@ export class CheckComponent implements OnInit {
     private eUniService: EUniService,
     private eRequestService: ERequestService
   ) {}
+  getHistory() {
+    this.eRequestService
+      .kspRequestProcessSelectByRequestId(this.route.snapshot.params['key'])
+      .pipe(map(detailToState))
+      .subscribe((res) => {
+        this.verifyResult = res;
+      });
+  }
   getDegreeCert() {
     if (this.route.snapshot.params['key']) {
       this.eUniService
         .uniRequestDegreeCertSelectById(this.route.snapshot.params['key'])
         .pipe(
           map((res) => {
-            this.dartRequest = res;
+            this.daftRequest = res;
             return this.uniInfoService.mappingUniverSitySelectByIdWithForm(res);
           })
         )
         .subscribe((res) => {
-          this.requestNumber = res?.requestNo;
-          console.log(res.step1);
-          this.form.patchValue({
-            step1: res.step1,
-            step2: res.step2,
-            step3: res.step3,
-            step4: res.step4,
-          });
+          if (res?.returncode !== 98) {
+            this.requestNumber = res?.requestNo;
+            this.form.patchValue({
+              step1: res.step1,
+              step2: res.step2,
+              step3: res.step3,
+              step4: res.step4,
+            });
+          }
         });
     }
   }
   ngOnInit(): void {
+    this.getHistory();
     this.getDegreeCert();
   }
 
   private _getRequest(): any {
-    const payload: any = _.pick(this.dartRequest, [
+    const payload: any = _.pick(this.daftRequest, [
       'requestid',
       'requestno',
       'degreeapprovecode',
@@ -182,37 +203,45 @@ export class CheckComponent implements OnInit {
     this.router.navigate(['/', 'degree-cert', 'list', 0]);
   }
   onSubmitKSP() {
-    const payload: any = _.pick(this.form.value, [
+    const detail: any = _.pick(this.form.value, [
       'verifyStep1',
       'verifyStep2',
       'verifyStep3',
       'verifyStep4',
     ]);
-    console.log(this.form.value);
-    // this.eRequestService.KspApproveRequest
+    const payload: any = {
+      systemtype: '3',
+      requestid: this.daftRequest?.requestid,
+      userid: getCookie('userId'),
+    };
+    detail.returnDate = _.get(this.form, 'value.step5.returnDate', '');
+    payload.status = _.get(this.form, 'value.step5.verify', '');
+    payload.process = _.get(this.form, 'value.step5.forward', '');
+    payload.detail = jsonStringify(detail);
+    this.eRequestService.KspApproveRequest(payload).subscribe(() => {
+      // this.onSubmitDeGreeCert();
+    });
   }
-  async onSubmitDeGreeCert() {
-    await lastValueFrom(
-      this.eUniService.uniDegreeCertInsert(this._getRequest())
-    );
+  onSubmitDeGreeCert() {
+    this.eUniService.uniDegreeCertInsert(this._getRequest()).subscribe(() => {
+      this.onConfirmed();
+    });
   }
   save() {
-    // this.onSubmitAll();
-    this.onSubmitKSP();
-    // const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-    //   width: '350px',
-    //   data: {
-    //     title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
-    //     subTitle: `คุณยืนยันข้อมูลผลการตรวจสอบ
-    //     ใช่หรือไม่`,
-    //   },
-    // });
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
+        subTitle: `คุณยืนยันข้อมูลผลการตรวจสอบ
+        ใช่หรือไม่`,
+      },
+    });
 
-    // dialogRef.componentInstance.confirmed.subscribe((res) => {
-    //   if (res) {
-    //     this.onConfirmed();
-    //   }
-    // });
+    dialogRef.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.onSubmitKSP();
+      }
+    });
   }
 
   onConfirmed() {

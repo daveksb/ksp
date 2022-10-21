@@ -27,7 +27,7 @@ export class EUniService {
   }
   uniDegreeCertInsert(payload: any): Observable<any> {
     return this.http.post(
-      `${environment.apiUrl}e-service/unidegreecertinsert`,
+      `${environment.apiUrl}/e-service/unidegreecertinsert`,
       { ...payload, tokenkey: getCookie('userToken') }
     );
   }

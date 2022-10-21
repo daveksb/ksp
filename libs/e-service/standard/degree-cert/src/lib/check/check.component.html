@@ -53,7 +53,10 @@
 
         <mat-step [completed]="false">
           <ng-template matStepLabel>ด้านกระบวนการผลิต</ng-template>
-          <ksp-degree-cert-step-3 [mode]="'view'"  formControlName="step3"></ksp-degree-cert-step-3>
+          <ksp-degree-cert-step-3
+            [mode]="'view'"
+            formControlName="step3"
+          ></ksp-degree-cert-step-3>
           <br />
           <hr />
           <br />
@@ -67,7 +70,10 @@
 
         <mat-step [completed]="false">
           <ng-template matStepLabel>เอกสารแนบ</ng-template>
-          <ksp-degree-cert-step-four mode="view"  formControlName="step4"></ksp-degree-cert-step-four>
+          <ksp-degree-cert-step-four
+            mode="view"
+            formControlName="step4"
+          ></ksp-degree-cert-step-four>
           <br />
           <hr />
           <br />
@@ -82,17 +88,16 @@
         <mat-step [completed]="false">
           <ng-template matStepLabel>ตรวจสอบและยื่นคำขอ</ng-template>
           <div class="d-flex">
-            <e-service-verify-result
-              [isBasicValid]="true"
-            ></e-service-verify-result>
-            <e-service-verify-result
-              [number]="2"
-              [isBasicValid]="true"
-              [isCourseValid]="true"
-              [isProcessValid]="true"
-            ></e-service-verify-result>
+            <ng-container *ngFor="let item of verifyResult; let index = index">
+              <e-service-verify-result
+                [number]="index+1"
+                [isBasicValid]="item.isBasicValid"
+                [isCourseValid]="item.isCourseValid"
+                [isAttachmentValid]="item.isAttachmentValid"
+                [isProcessValid]="item.isProcessValid"
+              ></e-service-verify-result>
+            </ng-container>
           </div>
-
           <ksp-degree-cert-step-five
             formControlName="step5"
           ></ksp-degree-cert-step-five>
