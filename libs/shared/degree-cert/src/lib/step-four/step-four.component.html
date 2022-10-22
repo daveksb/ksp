@@ -10,16 +10,33 @@
     >
   </div>
   <div class="form-label text-black px-3">
-    ปริญญาตรีทางการศึกษา (หลักสูตร 5 ปี)
+    <ng-container *ngIf="formType === 'a'">
+      ปริญญาตรีทางการศึกษา (หลักสูตร 4 ปี)</ng-container
+    >
+    <ng-container *ngIf="formType === 'b'">
+      ปริญญาตรีทางการศึกษา (หลักสูตร 5 ปี)</ng-container
+    >
+    <ng-container *ngIf="formType === 'c'">
+      ประกาศนียบัตรบัณฑิตทางการศึกษา (วิชาชีพครู) /
+      ประกาศนียบัตรบัณฑิตทางการศึกษา (วิชาชีพบริหาร)</ng-container
+    >
+    <ng-container *ngIf="formType === 'd'">
+      ปริญญาโททางการศึกษา (วิชาชีพครู) / ปริญญาโททางการศึกษา
+      (วิชาชีพบริหาร)</ng-container
+    >
+    <ng-container *ngIf="formType === 'e'">
+      ปริญญาเอกทางการศึกษา (วิชาชีพครู) / ปริญญาเอกทางการศึกษา
+      (วิชาชีพบริหาร)</ng-container
+    >
   </div>
 
   <div [ngSwitch]="formType">
-      <ksp-form-attachment
-        [mode]="mode"
-        [title]="''"
-        [groups]="value?.files"
-        [requestType]="1"
-        (uploadComplete)="uploadComplete($event)"
-      ></ksp-form-attachment>
+    <ksp-form-attachment
+      [mode]="mode"
+      [title]="''"
+      [groups]="value?.files"
+      [requestType]="1"
+      (uploadComplete)="uploadComplete($event)"
+    ></ksp-form-attachment>
   </div>
 </div>

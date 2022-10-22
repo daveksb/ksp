@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
@@ -11,7 +11,7 @@ import {
 import { LoginFormComponent } from '@ksp/shared/form/login';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UniLoginService } from './uni-login.service';
-import {lastValueFrom} from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 import { setCookie } from '@ksp/shared/utility';
 
 @Component({
@@ -21,17 +21,27 @@ import { setCookie } from '@ksp/shared/utility';
   standalone: true,
   imports: [CommonModule, LoginFormComponent, ReactiveFormsModule],
 })
-export class UniLoginComponent {
+export class UniLoginComponent implements OnInit {
+  loginFail = false;
+
   form = this.fb.group({
     user: {},
   });
+
   constructor(
     private router: Router,
     public dialog: MatDialog,
     private fb: FormBuilder,
     private uniLoginService: UniLoginService
   ) {}
-  showWarningDialog(title: string) {
+
+  ngOnInit(): void {
+    this.form.valueChanges.subscribe(() => {
+      this.loginFail = false;
+    });
+  }
+
+  /* showWarningDialog(title: string) {
     this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -39,16 +49,16 @@ export class UniLoginComponent {
         isDanger: true,
       },
     });
-  }
+  } */
   async login() {
     try {
       const res = await lastValueFrom<any>(
         this.uniLoginService.validateLogin(this.form?.value?.user)
       );
-      if (res?.returncode == 99)
-        return this.showWarningDialog(
-          res?.returnmessage || 'เข้าสู่ระบบไม่สำเร็จ'
-        );
+      if (res?.returncode == 99) {
+        this.loginFail = true;
+        return;
+      }
       setCookie('userToken', res?.usertoken || '', 1);
       setCookie('firstNameTh', res?.firstnameth || '', 1);
       setCookie('lastNameTh', res?.lastnameth || '', 1);
@@ -58,7 +68,7 @@ export class UniLoginComponent {
 
       this.router.navigate(['/home']);
     } catch (error: any) {
-      this.showWarningDialog(error?.message);
+      this.loginFail = true;
     }
   }
 

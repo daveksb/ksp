@@ -30,7 +30,7 @@ export class DegreeInfoComponent
     courseStatus: [],
     courseApproveTime: [],
     courseApproveDate: [],
-    courseAcceptDate:[],
+    courseAcceptDate: [],
   });
 
   @Input()
@@ -59,19 +59,20 @@ export class DegreeInfoComponent
     this.form.controls['degreeType'].valueChanges
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
+        console.log('res = ', res);
         // it has 8 degree types and target with 2 form types
         /* const degreeType = Number(res) < 4 ? 'a' : 'b';
         this.degreeTypeChanged.emit(degreeType); */
 
-        if (Number(res) === 0) {
+        if (Number(res) === 1) {
           this.degree = 'a';
-        } else if (Number(res) === 1) {
+        } else if (Number(res) === 2) {
           this.degree = 'b';
-        } else if (Number(res) === 2 || Number(res) === 3) {
+        } else if (Number(res) === 3 || Number(res) === 4) {
           this.degree = 'c';
-        } else if (Number(res) === 4 || Number(res) === 5) {
+        } else if (Number(res) === 5 || Number(res) === 6) {
           this.degree = 'd';
-        } else if (Number(res) === 6 || Number(res) === 7) {
+        } else if (Number(res) === 7 || Number(res) === 8) {
           this.degree = 'e';
         }
 

@@ -48,6 +48,8 @@ export class ForeignStepTwoTabFourComponent
       .subscribe(([prev, next]) => {
         if (prev.hasLicense !== next.hasLicense) {
           if (next.hasLicense === '1') {
+            this.enableform();
+
             this.form.controls.country.addValidators(Validators.required);
             this.form.controls.issuedBy.addValidators(Validators.required);
             this.form.controls.licenseType.addValidators(Validators.required);
@@ -55,6 +57,9 @@ export class ForeignStepTwoTabFourComponent
             this.form.controls.issuedDate.addValidators(Validators.required);
             this.form.controls.validUntil.addValidators(Validators.required);
           } else {
+            this.resetform();
+            this.disableform();
+
             this.form.controls.country.clearValidators();
             this.form.controls.issuedBy.clearValidators();
             this.form.controls.licenseType.clearValidators();
@@ -70,5 +75,32 @@ export class ForeignStepTwoTabFourComponent
           this.form.controls.validUntil.updateValueAndValidity();
         }
       });
+  }
+
+  resetform() {
+    this.form.controls.country.reset();
+    this.form.controls.issuedBy.reset();
+    this.form.controls.licenseType.reset();
+    this.form.controls.licenseNo.reset();
+    this.form.controls.issuedDate.reset();
+    this.form.controls.validUntil.reset();
+  }
+
+  disableform() {
+    this.form.controls.country.disable();
+    this.form.controls.issuedBy.disable();
+    this.form.controls.licenseType.disable();
+    this.form.controls.licenseNo.disable();
+    this.form.controls.issuedDate.disable();
+    this.form.controls.validUntil.disable();
+  }
+
+  enableform() {
+    this.form.controls.country.enable();
+    this.form.controls.issuedBy.enable();
+    this.form.controls.licenseType.enable();
+    this.form.controls.licenseNo.enable();
+    this.form.controls.issuedDate.enable();
+    this.form.controls.validUntil.enable();
   }
 }
