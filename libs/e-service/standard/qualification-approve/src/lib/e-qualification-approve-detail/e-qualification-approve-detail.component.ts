@@ -37,6 +37,8 @@ export class EQualificationApproveDetailComponent implements OnInit {
   showEdu2 = false;
   showEdu3 = false;
   showEdu4 = false;
+  bureauname = '';
+  schoolname = '';
 
   form = this.fb.group({
     userInfo: [],
@@ -74,10 +76,11 @@ export class EQualificationApproveDetailComponent implements OnInit {
     this.eRequestService.getKspRequestById(id).subscribe((res) => {
       if (res) {
         this.requestData = res;
+        this.bureauname = res.bureauname || '';
+        this.schoolname = res.schoolname || '';
         res.birthdate = formatDate(res.birthdate);
 
         this.form.controls.userInfo.patchValue(<any>res);
-        console.log(res);
         const edus = parseJson(res.eduinfo);
         this.patchEdu(edus);
 

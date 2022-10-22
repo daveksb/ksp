@@ -23,11 +23,21 @@
           <div class="row">
             <div class="col-6">
               <label class="form-label">สังกัด</label>
-              <input class="form-control" type="text" disabled />
+              <input
+                class="form-control"
+                type="text"
+                [value]="bureauname"
+                disabled
+              />
             </div>
             <div class="col-6">
               <label class="form-label">สถานศึกษา</label>
-              <input class="form-control" type="text" disabled />
+              <input
+                class="form-control"
+                type="text"
+                [value]="schoolname"
+                disabled
+              />
             </div>
           </div>
           <ksp-form-user-info
@@ -139,10 +149,10 @@
           </mat-tab>
 
           <mat-tab label="เอกสารหลักฐานประกอบ">
-            <ksp-form-attachment
+            <ksp-form-multi-attachment
               [mode]="'view'"
               [groups]="file"
-            ></ksp-form-attachment>
+            ></ksp-form-multi-attachment>
           </mat-tab>
         </mat-tab-group>
       </div>
