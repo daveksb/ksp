@@ -6,6 +6,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Router, RouterModule } from '@angular/router';
 import { KspPaginationComponent, ListData } from '@ksp/shared/interface';
 import { TopNavComponent } from '@ksp/shared/menu';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
 import { DegreeCertSearchComponent } from '@ksp/shared/search';
 import { UniInfoService } from '@ksp/shared/service';
 import { UniFormBadgeComponent } from '@ksp/shared/ui';
@@ -25,6 +26,7 @@ import { lastValueFrom, map } from 'rxjs';
     UniFormBadgeComponent,
     ReactiveFormsModule,
     MatPaginatorModule,
+    ThaiDatePipe,
   ],
 })
 export class UniDegreeCertListComponent
@@ -82,15 +84,18 @@ export class UniDegreeCertListComponent
           (item: any, index: number) => {
             return {
               key: item?.id,
-              order: this.pageEvent.pageIndex * this.pageEvent.pageSize + ++index,
+              order:
+                this.pageEvent.pageIndex * this.pageEvent.pageSize + ++index,
               degreeId: item?.requestno,
-              date: item?.requestdate? thaiDate(new Date(item?.requestdate)):"",
+              date: item?.requestdate
+                ? thaiDate(new Date(item?.requestdate))
+                : '',
               uni: item?.uniname,
               major: item?.fulldegreenameth,
               verifyStatus: 'รับข้อมูล',
               considerStatus: 'พิจารณา',
               approveStatus: 'พิจารณา',
-              approveDate: "",
+              approveDate: '',
               editDate: item?.updatedate
                 ? stringToThaiDate(item?.updatedate)
                 : '',
@@ -112,7 +117,7 @@ export class UniDegreeCertListComponent
     console.log(rowData);
   }
   clear() {
-    this.form.reset()
+    this.form.reset();
     this.clearPageEvent();
     this.dataSource.data = [];
   }
@@ -169,7 +174,7 @@ export interface DegreeCertInfo {
   consider: string;
 }
 
-export const data: DegreeCertInfo[] = [
+/* export const data: DegreeCertInfo[] = [
   {
     order: 1,
     degreeId: 'UNI_VC_64120009',
@@ -212,4 +217,4 @@ export const data: DegreeCertInfo[] = [
     verify: 'ปรับแก้ไข/เพิ่มเติม',
     consider: 'ตรวจสอบแล้ว',
   },
-];
+]; */

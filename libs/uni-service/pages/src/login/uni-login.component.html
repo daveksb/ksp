@@ -1,12 +1,13 @@
 <div class="container">
   <div class="d-flex flex-column align-items-center">
     <div class="text-center mb-3">
-      <img src="/assets/images/k-logo-2.png" class="img__header" />
-      <div class="fs-1 mt-1">ระบบบริการสถาบันผลิตครู (Uni Service)</div>
+      <img src="/assets/images/k-logo-2.png" style="width: 334px" />
+      <div class="fs-1">ระบบบริการสถาบันผลิตครู (Uni Service)</div>
       <div class="fs-2 mt-3 text-orange">เข้าสู่ระบบใช้งาน</div>
     </div>
     <form [formGroup]="form">
       <ksp-login-form
+        [loginFail]="loginFail"
         (login)="login()"
         (register)="register()"
         (forgetPassword)="forgetPassword()"
@@ -14,7 +15,7 @@
       ></ksp-login-form>
     </form>
 
-    <div class="grid gap-3 mt-4" style="min-width: 350px">
+    <div class="grid gap-3 mt-3" style="min-width: 350px">
       <div class="g-col-6">
         <button
           type="button"
