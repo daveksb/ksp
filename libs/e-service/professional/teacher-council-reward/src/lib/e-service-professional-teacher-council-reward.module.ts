@@ -31,7 +31,7 @@ const routes: Routes = [
         component: ETeacherCouncilListComponent,
       },
       {
-        path: 'detail',
+        path: 'detail/:id',
         component: ETeacherCouncilDetailComponent,
       },
     ],

@@ -12,6 +12,7 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SharedDegreeCertModule } from '@ksp/shared/degree-cert';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
 
 const routes: Routes = [
   {
@@ -48,6 +49,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatPaginatorModule,
     RouterModule.forChild(routes),
+    ThaiDatePipe,
   ],
   declarations: [EditDegreeListComponent, EditDegreeDetailComponent],
   exports: [EditDegreeListComponent, EditDegreeDetailComponent],

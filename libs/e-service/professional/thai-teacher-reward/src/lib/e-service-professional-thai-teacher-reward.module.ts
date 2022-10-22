@@ -31,7 +31,7 @@ const routes: Routes = [
         component: EThaiTeacherListComponent,
       },
       {
-        path: 'detail',
+        path: 'detail/:id',
         component: EThaiTeacherDetailComponent,
       },
     ],

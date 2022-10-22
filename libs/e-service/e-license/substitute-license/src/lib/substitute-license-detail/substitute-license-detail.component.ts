@@ -70,11 +70,13 @@ export class SubstituteLicenseDetailComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.requestId = Number(params.get('id'));
       if (this.requestId) {
-        this.requestService.getRequestById(this.requestId).subscribe((res) => {
-          if (res) {
-            this.patchData(res);
-          }
-        });
+        this.requestService
+          .getKspRequestById(this.requestId)
+          .subscribe((res) => {
+            if (res) {
+              this.patchData(res);
+            }
+          });
       }
     });
   }

@@ -1,5 +1,5 @@
 <form [formGroup]="form">
-  <div class="row mb-2" *ngIf="showContent && userFormType === 'req'">
+  <div class="row mb-2" *ngIf="hidexxx === false">
     <div class="col-4">
       <label class="form-label" [ngClass]="{ required: mode === 'edit' }"
         >หมายเลขบัตรประชาชน</label
@@ -77,7 +77,7 @@
     </div>
   </div>
 
-  <div class="row mb-2" *ngIf="showContent">
+  <div class="row mb-2" *ngIf="hidexxx === false && hideyyy === false">
     <div class="col-2">
       <label class="form-label">คำนำหน้าชื่ออังกฤษ</label>
       <select
@@ -136,29 +136,6 @@
       >
       <input class="form-control" type="text" formControlName="position" />
     </div>
-    <div class="col-6" *ngIf="showContent">
-      <label
-        class="form-label required"
-        [ngClass]="{ required: mode === 'edit' }"
-        >เบอร์โทรศัพท์ (ที่ทำงาน)</label
-      >
-      <input
-        class="form-control"
-        type="tel"
-        formControlName="workphone"
-        maxlength="10"
-      />
-      <ng-container
-        *ngIf="workPhone.invalid && (workPhone.dirty || workPhone.touched)"
-      >
-        <span class="text-danger" *ngIf="workPhone.errors?.['pattern']"
-          >{{ validatorMessages.phone }}
-        </span>
-      </ng-container>
-    </div>
-  </div>
-
-  <div class="row mb-2">
     <div class="col-6">
       <label
         class="form-label required"
@@ -181,7 +158,30 @@
         </span>
       </ng-container>
     </div>
-    <div class="col-6" *ngIf="showContent && userFormType === 'req'">
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-6" *ngIf="hidexxx === false && hideyyy === false">
+      <label
+        class="form-label required"
+        [ngClass]="{ required: mode === 'edit' }"
+        >เบอร์โทรศัพท์ (ที่ทำงาน)</label
+      >
+      <input
+        class="form-control"
+        type="tel"
+        formControlName="workphone"
+        maxlength="10"
+      />
+      <ng-container
+        *ngIf="workPhone.invalid && (workPhone.dirty || workPhone.touched)"
+      >
+        <span class="text-danger" *ngIf="workPhone.errors?.['pattern']"
+          >{{ validatorMessages.phone }}
+        </span>
+      </ng-container>
+    </div>
+    <div class="col-6" *ngIf="hidexxx === false">
       <label
         class="form-label required"
         [ngClass]="{ required: mode === 'edit' }"

@@ -18,6 +18,7 @@ import { Route, RouterModule } from '@angular/router';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { EQualificationApproveListComponent } from './e-qualification-approve-list/e-qualification-approve-list.component';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { MatSortModule } from '@angular/material/sort';
 
 export const routes: Route[] = [
   {
@@ -62,6 +63,7 @@ export const routes: Route[] = [
     RequestSearchComponent,
     MatPaginatorModule,
     ThaiDatePipe,
+    MatSortModule,
   ],
   declarations: [
     EQualificationApproveListComponent,

@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { AbstractControl, FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
-import { thaiDate } from '@ksp/shared/utility';
+import { KspRequest } from '@ksp/shared/interface';
+import {
+  AddressService,
+  ERequestService,
+  GeneralInfoService,
+} from '@ksp/shared/service';
+import { formatDate, parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -13,8 +20,9 @@ export class EQualificationApproveDetailComponent implements OnInit {
   file = files;
   choice = verifyChoices;
 
-  requestDate = thaiDate(new Date());
+  requestDate = '';
   requestNumber = '';
+  requestData = new KspRequest();
   userInfoFormdisplayMode: number = UserInfoFormType.thai;
 
   prefixList$!: Observable<any>;
@@ -26,6 +34,11 @@ export class EQualificationApproveDetailComponent implements OnInit {
   tumbols2$!: Observable<any>;
   countries$!: Observable<any>;
   nationalitys$!: Observable<any>;
+  showEdu2 = false;
+  showEdu3 = false;
+  showEdu4 = false;
+  bureauname = '';
+  schoolname = '';
 
   form = this.fb.group({
     userInfo: [],
@@ -38,57 +51,169 @@ export class EQualificationApproveDetailComponent implements OnInit {
     checkResult: this.fb.array([]),
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private eRequestService: ERequestService,
+    private generalInfoService: GeneralInfoService,
+    private addressService: AddressService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.checkRequestId();
+    this.getListData();
+  }
+  checkRequestId() {
+    this.route.paramMap.subscribe((params) => {
+      const requestId = Number(params.get('id'));
+      if (requestId) {
+        this.loadRequestData(requestId);
+      }
+    });
+  }
+  saveClicked() {
+    console.log('test');
+  }
+  loadRequestData(id: number) {
+    this.eRequestService.getKspRequestById(id).subscribe((res) => {
+      if (res) {
+        this.requestData = res;
+        this.bureauname = res.bureauname || '';
+        this.schoolname = res.schoolname || '';
+        res.birthdate = formatDate(res.birthdate);
+
+        this.form.controls.userInfo.patchValue(<any>res);
+        const edus = parseJson(res.eduinfo);
+        this.patchEdu(edus);
+
+        const addressinfo: any = parseJson(res.addressinfo);
+
+        if (addressinfo) {
+          for (let i = 0; i < addressinfo.length; i++) {
+            const form = this.form.get(`addr${i + 1}`) as AbstractControl<
+              any,
+              any
+            >;
+            this.getAmphurChanged(i + 1, addressinfo[i].province);
+            this.getTumbon(i + 1, addressinfo[i].amphur);
+            form?.patchValue(addressinfo[i]);
+          }
+        }
+        const json = parseJson(res.fileinfo);
+        if (json && json.file && Array.isArray(json.file)) {
+          files.forEach((group, index) => (group.files = json.file[index]));
+        }
+
+        res.refperson
+          ? (res.refperson = JSON.parse(atob(res.refperson)))
+          : null;
+
+        res.otherreason
+          ? (res.otherreason = JSON.parse(atob(res.otherreason)))
+          : null;
+      }
+    });
+  }
+
+  patchEdu(edus: any[]) {
+    //console.log('edus = ', edus);
+    if (edus && edus.length) {
+      edus.map((edu, i) => {
+        if (edu.degreeLevel === 2) {
+          this.showEdu2 = true;
+        }
+        if (edu.degreeLevel === 3) {
+          this.showEdu3 = true;
+        }
+        if (edu.degreeLevel === 4) {
+          this.showEdu4 = true;
+        }
+        (this.form.get(`edu${i + 1}`) as AbstractControl<any, any>).patchValue(
+          edu
+        );
+      });
+    }
+  }
+
+  eduSelected(type: number, evt: any) {
+    const checked = evt.target.checked;
+    if (type === 2) {
+      this.showEdu2 = checked;
+    }
+    if (type === 3) {
+      this.showEdu3 = checked;
+    }
+    if (type === 4) {
+      this.showEdu4 = checked;
+    }
+  }
+
+  getListData() {
+    this.prefixList$ = this.generalInfoService.getPrefix();
+    this.provinces1$ = this.addressService.getProvinces();
+    this.provinces2$ = this.provinces1$;
+    this.countries$ = this.addressService.getCountry();
+    this.nationalitys$ = this.generalInfoService.getNationality();
+  }
+  getAmphurChanged(addrType: number, province: any) {
+    if (province) {
+      if (addrType === 1) {
+        this.amphurs1$ = this.addressService.getAmphurs(province);
+      } else if (addrType === 2) {
+        this.amphurs2$ = this.addressService.getAmphurs(province);
+      }
+    }
+  }
+  getTumbon(addrType: number, amphur: any) {
+    if (amphur) {
+      if (addrType === 1) {
+        this.tumbols1$ = this.addressService.getTumbols(amphur);
+      } else if (addrType === 2) {
+        this.tumbols2$ = this.addressService.getTumbols(amphur);
+      }
+    }
+  }
 }
 
 const verifyChoices = [
   {
     name: 'ครบถ้วน และถูกต้อง',
-    value: 1,
+    value: 2,
   },
   {
     name: 'ไม่ครบถ้วน และไม่ถูกต้อง',
-    value: 2,
+    value: 3,
   },
 ];
 
 const files = [
   {
     name: 'หนังสือนำส่งจากหน่วยงานผู้ใช้',
-    fileId: '',
-    fileName: '',
+    files: [],
   },
   {
     name: 'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
-    fileId: '',
-    fileName: '',
+    files: [],
   },
   {
     name: 'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
-    fileId: '',
-    fileName: '',
+    files: [],
   },
   {
     name: 'สำเนาทะเบียนบ้าน',
-    fileId: '',
-    fileName: '',
+    files: [],
   },
   {
     name: 'สำเนาหนังสือแจ้งการเทียบคุณวุฒิ (กรณีจบการศึกษาจากต่างประเทศ)',
-    fileId: '',
-    fileName: '',
+    files: [],
   },
   {
     name: 'สำเนา กพ.7 / สมุดประจำตัว',
-    fileId: '',
-    fileName: '',
+    files: [],
   },
   {
     name: 'สำเนาหลักฐานการเปลี่ยนชื่อ นามสกุล',
-    fileId: '',
-    fileName: '',
+    files: [],
   },
-  { name: 'เอกสารอื่นๆ', fileId: '', fileName: '' },
+  { name: 'เอกสารอื่นๆ', files: [] },
 ];

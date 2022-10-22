@@ -1,7 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { Country, KspFormBaseComponent } from '@ksp/shared/interface';
+import { AddressService } from '@ksp/shared/service';
 import { providerFactory } from '@ksp/shared/utility';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ksp-education-level-form-one',
@@ -11,6 +13,9 @@ import { providerFactory } from '@ksp/shared/utility';
 })
 export class EducationLevelFormOneComponent extends KspFormBaseComponent {
   @Input() isHasCountry = false;
+  @Input() isSupervision = false;
+
+  countries$!: Observable<Country[]>;
 
   override form = this.fb.group({
     educationInstitution: [null, Validators.required],
@@ -20,7 +25,7 @@ export class EducationLevelFormOneComponent extends KspFormBaseComponent {
     graduateDate: [null, Validators.required],
   });
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private addressService: AddressService) {
     super();
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
@@ -29,5 +34,9 @@ export class EducationLevelFormOneComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+
+  getList() {
+    this.countries$ = this.addressService.getCountry();
   }
 }
