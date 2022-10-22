@@ -60,8 +60,8 @@ export class EThaiTeacherListComponent implements OnInit {
     this.dataSource.data = [];
   }
 
-  view() {
-    this.router.navigate(['/thai-teacher', 'detail']);
+  view(id: number) {
+    this.router.navigate(['/thai-teacher', 'detail', id]);
   }
 }
 
