@@ -52,7 +52,7 @@
 
 <div class="sticky-bottom border">
   <ksp-bottom-nav
-    (cancelClicked)="cancel()"
+    (cancelClicked)="navigateBack()"
     (prevClicked)="prevPage()"
     (saveClicked)="confirmDialog()"
     [disableSaveButton]="form.invalid"

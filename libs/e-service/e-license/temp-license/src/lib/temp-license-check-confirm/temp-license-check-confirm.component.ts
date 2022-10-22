@@ -40,8 +40,6 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   ngOnInit(): void {
     this.form.valueChanges.subscribe((res) => {
       console.log(res.approvement);
-
-      //this.selectResult.emit(res.result);
     });
 
     localForage.getItem('checkRequestData').then((res: any) => {
@@ -78,7 +76,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
     }
   }
 
-  save() {
+  checkRequest() {
     this.checkApproveResult(<any>this.form.value.approvement);
     //console.log('save data = ', this.saveData);
     //console.log('form = ', this.selectResult);
@@ -96,7 +94,26 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
 
     this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
       console.log('result = ', res.app);
-      this.cancel();
+      this.navigateBack();
+    });
+  }
+
+  considerRequest() {
+    const payload: KspApprovePayload = {
+      requestid: this.saveData.requestData.id,
+      process: this.saveData.requestData.process,
+      status: `${this.form.value.approvement}`,
+      detail: JSON.stringify(this.saveData.checkDetail),
+      systemtype: '2',
+      userid: null,
+      paymentstatus: null,
+    };
+
+    console.log('payload = ', payload);
+
+    this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
+      //console.log('result = ', res.app);
+      this.navigateBack();
     });
   }
 
@@ -112,7 +129,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
     });
   }
 
-  cancel() {
+  navigateBack() {
     this.router.navigate(['/temp-license', 'list']);
   }
 
@@ -130,7 +147,11 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
 
     dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.save();
+        if (this.saveData.requestData.process === '4') {
+          this.considerRequest();
+        } else {
+          this.checkRequest();
+        }
       }
     });
   }
