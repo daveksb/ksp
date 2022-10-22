@@ -107,9 +107,9 @@ export class FormUserWorkplaceComponent
       },
 
       data: {
-        searchType: 'string',
+        searchType: '',
         subHeader: 'กรุณาเลือกหน่วยงาน/สถานศึกษาที่ท่านสังกัด',
-        bureauList: 'string',
+        bureauList: this.bureaus,
       },
     });
   }
