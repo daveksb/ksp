@@ -12,14 +12,14 @@ export interface approveResult {
   reason: string;
 }
 @Component({
-  selector: 'ksp-approve-ksp-request',
+  selector: 'ksp-validate-ksp-request',
   standalone: true,
   imports: [CommonModule, MatDatepickerModule, ReactiveFormsModule],
-  templateUrl: './approve-ksp-request.component.html',
-  styleUrls: ['./approve-ksp-request.component.scss'],
-  providers: providerFactory(ApproveKspRequestComponent),
+  templateUrl: './validate-ksp-request.component.html',
+  styleUrls: ['./validate-ksp-request.component.scss'],
+  providers: providerFactory(ValidateKspRequestComponent),
 })
-export class ApproveKspRequestComponent
+export class ValidateKspRequestComponent
   extends KspFormBaseComponent
   implements OnInit
 {

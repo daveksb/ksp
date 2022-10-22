@@ -64,7 +64,7 @@ export class StaffListComponent implements AfterViewInit {
       cardno: filter.cardno,
       teachinglevel: filter.teachinglevel,
       position: filter.position,
-      schoolId: `${this.schoolId}`,
+      schoolid: `${this.schoolId}`,
       offset: '0',
       row: '100',
     };

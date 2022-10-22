@@ -34,18 +34,25 @@
     </table>
 
     <div [formGroup]="form">
-      <ksp-approve-ksp-request
-        [requestType]="saveData.requestData.requesttype"
-        [process]="saveData.requestData.process"
-        formControlName="approvement"
-      ></ksp-approve-ksp-request>
+      <ng-container *ngIf="saveData.requestData.process === '4'; else approve">
+        <ksp-consider-ksp-request
+          formControlName="approvement"
+        ></ksp-consider-ksp-request>
+      </ng-container>
+      <ng-template #approve>
+        <ksp-validate-ksp-request
+          [requestType]="saveData.requestData.requesttype"
+          [process]="saveData.requestData.process"
+          formControlName="approvement"
+        ></ksp-validate-ksp-request>
+      </ng-template>
     </div>
   </div>
 </div>
 
 <div class="sticky-bottom border">
   <ksp-bottom-nav
-    (cancelClicked)="cancel()"
+    (cancelClicked)="navigateBack()"
     (prevClicked)="prevPage()"
     (saveClicked)="confirmDialog()"
     [disableSaveButton]="form.invalid"
