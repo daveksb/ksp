@@ -66,7 +66,6 @@ export class QualificationDetailComponent implements OnInit {
   careerType!: number;
 
   request: KspRequest = new KspRequest();
-  requestSubType!: number;
   requestId!: number;
   requestData = new KspRequest();
   requestStatus!: number;
@@ -292,10 +291,10 @@ export class QualificationDetailComponent implements OnInit {
             const userInfo: Partial<KspRequest> = formData.userInfo;
             userInfo.ref1 = '2';
             userInfo.ref2 = '06';
-            userInfo.ref3 = `${this.requestSubType}`;
+            userInfo.ref3 = `${this.careerType}`;
             userInfo.systemtype = '2';
             userInfo.requesttype = '6';
-            userInfo.careertype = `${this.requestSubType}`;
+            userInfo.careertype = `${this.careerType}`;
             userInfo.schoolid = this.schoolId;
             userInfo.process = '2';
             userInfo.status = '1';

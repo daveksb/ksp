@@ -61,7 +61,7 @@ export class EQualificationApproveListComponent implements AfterViewInit {
       row: '500',
     };
 
-    this.eRequestService.EsSearchRequest(payload).subscribe((res) => {
+    this.eRequestService.KspSearchRequest(payload).subscribe((res) => {
       if (res) {
         this.dataSource.data = res;
       } else {
