@@ -54,7 +54,6 @@ export class ETeacherCouncilDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.prefixList$ = this.generalInfoService.getPrefix();
     this.getListData();
     this.checkRequestId();
   }
