@@ -71,7 +71,9 @@ export class EQualificationApproveDetailComponent implements OnInit {
       }
     });
   }
-
+  saveClicked() {
+    console.log('test');
+  }
   loadRequestData(id: number) {
     this.eRequestService.getKspRequestById(id).subscribe((res) => {
       if (res) {
@@ -176,11 +178,11 @@ export class EQualificationApproveDetailComponent implements OnInit {
 const verifyChoices = [
   {
     name: 'ครบถ้วน และถูกต้อง',
-    value: 1,
+    value: 2,
   },
   {
     name: 'ไม่ครบถ้วน และไม่ถูกต้อง',
-    value: 2,
+    value: 3,
   },
 ];
 
