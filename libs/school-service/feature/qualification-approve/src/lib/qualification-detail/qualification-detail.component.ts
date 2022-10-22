@@ -20,6 +20,7 @@ import {
 import {
   AddressService,
   GeneralInfoService,
+  SchoolInfoService,
   SchoolRequestService,
 } from '@ksp/shared/service';
 import {
@@ -66,7 +67,6 @@ export class QualificationDetailComponent implements OnInit {
   careerType!: number;
 
   request: KspRequest = new KspRequest();
-  requestSubType!: number;
   requestId!: number;
   requestData = new KspRequest();
   requestStatus!: number;
@@ -78,6 +78,9 @@ export class QualificationDetailComponent implements OnInit {
   showEdu2 = false;
   showEdu3 = false;
   showEdu4 = false;
+  bureauName!: any;
+  schoolName!: any;
+  address!: any;
 
   constructor(
     public dialog: MatDialog,
@@ -86,7 +89,8 @@ export class QualificationDetailComponent implements OnInit {
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
     private requestService: SchoolRequestService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private schoolInfoService: SchoolInfoService
   ) {}
 
   ngOnInit(): void {
@@ -199,6 +203,18 @@ export class QualificationDetailComponent implements OnInit {
     this.provinces2$ = this.provinces1$;
     this.countries$ = this.addressService.getCountry();
     this.nationalitys$ = this.generalInfoService.getNationality();
+    this.schoolInfoService
+      .getSchoolInfo(this.schoolId)
+      .pipe(untilDestroyed(this))
+      .subscribe((res: any) => {
+        this.schoolName = res.schoolName;
+        this.bureauName = res.bureauName;
+        this.address = `บ้านเลขที่ ${res.address} ซอย ${
+          res?.street ?? ''
+        } หมู่ ${res?.moo ?? ''} ถนน ${res?.road ?? ''} ตำบล ${
+          res.tumbon
+        } อำเภอ ${res.amphurName} จังหวัด ${res.provinceName}`;
+      });
   }
 
   cancel() {
@@ -282,7 +298,6 @@ export class QualificationDetailComponent implements OnInit {
       .pipe(
         switchMap((res) => {
           if (res) {
-            //eduInfo otherreason addressinfo refperson
             const formData: any = this.form.getRawValue();
             //console.log('formData', formData);
             if (formData?.addr1?.addressType) formData.addr1.addressType = 1;
@@ -292,11 +307,14 @@ export class QualificationDetailComponent implements OnInit {
             const userInfo: Partial<KspRequest> = formData.userInfo;
             userInfo.ref1 = '2';
             userInfo.ref2 = '06';
-            userInfo.ref3 = `${this.requestSubType}`;
+            userInfo.ref3 = `${this.careerType}`;
             userInfo.systemtype = '2';
             userInfo.requesttype = '6';
-            userInfo.careertype = `${this.requestSubType}`;
+            userInfo.careertype = `${this.careerType}`;
             userInfo.schoolid = this.schoolId;
+            userInfo.bureauname = this.bureauName;
+            userInfo.schoolname = this.schoolName;
+            userInfo.schooladdress = this.address;
             userInfo.process = '2';
             userInfo.status = '1';
             userInfo.birthdate = changeDate(userInfo.birthdate);

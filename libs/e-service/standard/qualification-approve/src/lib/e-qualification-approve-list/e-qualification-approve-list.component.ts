@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
@@ -61,9 +61,14 @@ export class EQualificationApproveListComponent implements AfterViewInit {
       row: '500',
     };
 
-    this.eRequestService.EsSearchRequest(payload).subscribe((res) => {
+    this.eRequestService.KspSearchRequest(payload).subscribe((res) => {
       if (res) {
         this.dataSource.data = res;
+        this.dataSource.sort = this.sort;
+        const sortState: Sort = { active: 'id', direction: 'desc' };
+        this.sort.active = sortState.active;
+        this.sort.direction = sortState.direction;
+        this.sort.sortChange.emit(sortState);
       } else {
         this.clear();
       }
