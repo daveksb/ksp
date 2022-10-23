@@ -14,6 +14,7 @@ import {
 } from '@ksp/shared/service';
 import { map, switchMap, lastValueFrom } from 'rxjs';
 import _ from 'lodash';
+import { ApproveStepStatusOption } from '@ksp/shared/constant';
 const detailToState = (res: any) => {
   let newRes = res?.datareturn.map((data: any) => {
     return parseJson(data?.detail);
@@ -57,16 +58,7 @@ export class CheckComponent implements OnInit {
   }[] = [];
   requestNumber = '';
   degreeType = '';
-  choices = [
-    {
-      name: 'เครบถ้วน และถูกต้อง',
-      value: 1,
-    },
-    {
-      name: 'ไม่ครบถ้วน และไม่ถูกต้อง',
-      value: 2,
-    },
-  ];
+  choices = ApproveStepStatusOption;
   daftRequest: any;
   constructor(
     public dialog: MatDialog,
@@ -218,7 +210,7 @@ export class CheckComponent implements OnInit {
     payload.status = _.get(this.form, 'value.step5.verify', '');
     payload.process = _.get(this.form, 'value.step5.forward', '');
     payload.detail = jsonStringify(detail);
-    this.eRequestService.KspApproveRequest(payload).subscribe(() => {
+    this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
       // this.onSubmitDeGreeCert();
     });
   }
