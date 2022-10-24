@@ -59,8 +59,8 @@ export class EResearchRewardListComponent implements OnInit {
     this.dataSource.data = [];
   }
 
-  view() {
-    this.router.navigate(['/research-reward', 'detail']);
+  view(id: number) {
+    this.router.navigate(['/research-reward', 'detail', id]);
   }
 }
 

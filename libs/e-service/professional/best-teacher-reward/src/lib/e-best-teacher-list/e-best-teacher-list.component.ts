@@ -60,8 +60,8 @@ export class EBestTeacherListComponent implements OnInit {
     this.dataSource.data = [];
   }
 
-  view() {
-    this.router.navigate(['/best-teacher', 'detail']);
+  view(id: number) {
+    this.router.navigate(['/best-teacher', 'detail', id]);
   }
 }
 

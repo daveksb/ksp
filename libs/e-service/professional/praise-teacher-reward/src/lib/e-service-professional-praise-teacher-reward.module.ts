@@ -31,7 +31,7 @@ const routes: Routes = [
         component: EPraiseTeacherListComponent,
       },
       {
-        path: 'detail',
+        path: 'detail/:id',
         component: EPraiseTeacherDetailComponent,
       },
     ],
