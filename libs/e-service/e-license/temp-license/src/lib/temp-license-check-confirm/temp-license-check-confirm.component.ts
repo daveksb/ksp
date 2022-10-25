@@ -52,25 +52,41 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   }
 
   checkApproveResult(input: approveResult) {
+    const req = this.saveData.requestData;
     if (input.result === '1') {
+      //ครบถ้วน และถูกต้อง
       if (input.shouldForward === '1') {
-        this.targetProcess = Number(this.saveData.requestData.process);
+        //ไม่ส่งตรวจสอบลำดับต่อไป
+        if (req.process === '2') {
+          this.targetProcess = Number(req.process) + 1;
+        } else {
+          this.targetProcess = Number(req.process);
+        }
         this.targetStatus = 3;
       } else if (input.shouldForward === '2') {
+        //ส่งตรวจสอบลำดับต่อไป
+        this.targetProcess = Number(req.process) + 1;
         this.targetStatus = 1;
-        this.targetProcess = Number(this.saveData.requestData.process) + 1;
       } else if (input.shouldForward === '4') {
-        this.targetProcess = 4;
+        //ส่งเรื่องพิจารณา
+        this.targetProcess = 5;
         this.targetStatus = 1;
       }
     } else if (input.result === '2') {
-      this.targetProcess = Number(this.saveData.requestData.process) + 1;
+      //ขอแก้ไข / เพิ่มเติม
+      this.targetProcess = Number(req.process) + 1;
       this.targetStatus = 2;
     } else if (input.result === '3') {
-      this.targetProcess = Number(this.saveData.requestData.process);
+      if (req.process === '2') {
+        this.targetProcess = Number(req.process) + 1;
+      } else {
+        this.targetProcess = Number(req.process);
+      }
       if (input.shouldForward === '3') {
-        this.targetStatus = 3;
+        //ไม่ผ่านการตรวจสอบ เนื่องจากไม่ครบถ้วน / ไม่ถูกต้อง
+        this.targetStatus = 4;
       } else if (input.shouldForward === '5') {
+        //ยกเลิก
         this.targetStatus = 5;
       }
     }
@@ -99,10 +115,13 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   }
 
   considerRequest() {
+    console.log('consider request  = ');
+
+    const form: any = this.form.value.approvement;
     const payload: KspApprovePayload = {
       requestid: this.saveData.requestData.id,
-      process: this.saveData.requestData.process,
-      status: `${this.form.value.approvement}`,
+      process: '5',
+      status: `${form.result}`,
       detail: JSON.stringify(this.saveData.checkDetail),
       systemtype: '2',
       userid: null,
@@ -147,7 +166,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
 
     dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        if (this.saveData.requestData.process === '4') {
+        if (this.saveData.requestData.process === '5') {
           this.considerRequest();
         } else {
           this.checkRequest();
