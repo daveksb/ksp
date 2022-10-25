@@ -283,7 +283,7 @@ export class SchoolRequestComponent implements OnInit {
     const baseForm = this.fb.group(new KspRequest());
     const formData: any = this.form.getRawValue();
     //const userInfo: UserInfoForm = formData.userInfo;
-    //console.log('update request user info = ', userInfo);
+    console.log('xx form data = ', formData);
 
     const { id, ...userInfo } = formData.userInfo;
 
@@ -473,10 +473,12 @@ export class SchoolRequestComponent implements OnInit {
       teachingLevel,
       teachingSubjects,
     };
+    //console.log('datax = ', data);
     this.form.controls.teachinginfo.patchValue(data);
   }
 
   patchReasonInfo(res: any) {
+    //console.log('path reason = ', res);
     this.form.controls.reasoninfo.patchValue(res);
   }
 

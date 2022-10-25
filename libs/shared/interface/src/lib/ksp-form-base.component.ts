@@ -53,11 +53,16 @@ export abstract class KspFormBaseComponent
   }
 
   set value(value: any) {
+    this.form.patchValue(value);
+    this.onChange(value);
+    this.onTouched();
+  }
+  /*   set value(value: any) {
     for (const key in this.form.controls) {
       if (this.form.controls[key] instanceof FormControl) {
         // normal formControl
         this.form.controls[key].patchValue(value[key]);
-      } else if (this.form.controls[key] instanceof FormArray) {
+      }  else if (this.form.controls[key] instanceof FormArray) {
         // loop into fromArray to patch value
         const formArray = this.form.controls[key] as FormArray;
         for (let i = 0; i < formArray.controls.length; i++) {
@@ -69,7 +74,7 @@ export abstract class KspFormBaseComponent
           }
           if (this.mode == 'view') formGroup.disable();
         }
-      } else if (this.form.controls[key] instanceof FormGroup) {
+      }  else if (this.form.controls[key] instanceof FormGroup) {
         const formGroup = this.form.controls[key] as FormGroup;
         for (const subkey in formGroup.controls) {
           if (value[key] && value[key] && value[key][subkey]) {
@@ -80,7 +85,7 @@ export abstract class KspFormBaseComponent
     }
     // this.onChange(value);
     // this.onTouched();
-  }
+  } */
 
   public onChange = (value?: any) => {};
   public onTouched = () => {};
