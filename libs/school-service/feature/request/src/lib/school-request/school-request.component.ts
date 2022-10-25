@@ -197,6 +197,7 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   createRequest(process: number) {
+    console.log('create request = ');
     const baseForm = this.fb.group(new KspRequest());
 
     const formData: any = this.form.getRawValue();
@@ -281,18 +282,22 @@ export class SchoolRequestComponent implements OnInit {
   updateRequest(process: number) {
     const baseForm = this.fb.group(new KspRequest());
     const formData: any = this.form.getRawValue();
-    const userInfo: UserInfoForm = formData.userInfo;
-    /*
-    userInfo.process = '1';
-    userInfo.status = '1';
-    userInfo.systemtype = `${this.systemType}`;
-    userInfo.requesttype = `${this.requestType}`;
-    userInfo.subtype = `${this.requestSubType}`; */
+    //const userInfo: UserInfoForm = formData.userInfo;
+    //console.log('update request user info = ', userInfo);
 
-    /*     if (this.careerType === SchoolRequestSubType.อื่นๆ) {
-      userInfo.passportenddate = formatDate(userInfo.passportenddate);
-      userInfo.passportstartdate = formatDate(userInfo.passportstartdate);
-    } */
+    const { id, ...userInfo } = formData.userInfo;
+
+    userInfo.id = `${this.requestId}`;
+    userInfo.schoolid = this.schoolId;
+    userInfo.process = `${process}`;
+    userInfo.status = `1`;
+    userInfo.ref1 = '2';
+    userInfo.ref2 = '03';
+    userInfo.ref3 = '1';
+
+    userInfo.systemtype = '2';
+    userInfo.requesttype = '3';
+    userInfo.careertype = `${this.careerType}`;
 
     const teaching: any = this.form.controls.teachinginfo.value;
     let teachingInfo = {};
@@ -339,9 +344,6 @@ export class SchoolRequestComponent implements OnInit {
       baseForm.value;
 
     const res = replaceEmptyWithNull(temp);
-
-    res.id = `${this.requestId}`;
-    res.schoolid = this.schoolId;
 
     /* if (process === 'submit') {
       res.process = `2`;
