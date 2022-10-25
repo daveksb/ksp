@@ -116,7 +116,7 @@ export const column = [
   'subtype',
   'currentprocess',
   'requeststatus',
-  'updatedate',
+  //'updatedate',
   'requestdate',
   'reqDoc',
   //'approveDoc',

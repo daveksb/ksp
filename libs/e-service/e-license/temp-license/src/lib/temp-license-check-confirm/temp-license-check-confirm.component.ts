@@ -52,30 +52,39 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   }
 
   checkApproveResult(input: approveResult) {
+    const req = this.saveData.requestData;
     if (input.result === '1') {
       //ครบถ้วน และถูกต้อง
       if (input.shouldForward === '1') {
         //ไม่ส่งตรวจสอบลำดับต่อไป
-        this.targetProcess = Number(this.saveData.requestData.process);
+        if (req.process === '2') {
+          this.targetProcess = Number(req.process) + 1;
+        } else {
+          this.targetProcess = Number(req.process);
+        }
         this.targetStatus = 3;
       } else if (input.shouldForward === '2') {
         //ส่งตรวจสอบลำดับต่อไป
-        this.targetProcess = Number(this.saveData.requestData.process) + 1;
+        this.targetProcess = Number(req.process) + 1;
         this.targetStatus = 1;
       } else if (input.shouldForward === '4') {
         //ส่งเรื่องพิจารณา
-        this.targetProcess = 4;
+        this.targetProcess = 5;
         this.targetStatus = 1;
       }
     } else if (input.result === '2') {
       //ขอแก้ไข / เพิ่มเติม
-      this.targetProcess = Number(this.saveData.requestData.process) + 1;
+      this.targetProcess = Number(req.process) + 1;
       this.targetStatus = 2;
     } else if (input.result === '3') {
-      this.targetProcess = Number(this.saveData.requestData.process);
+      if (req.process === '2') {
+        this.targetProcess = Number(req.process) + 1;
+      } else {
+        this.targetProcess = Number(req.process);
+      }
       if (input.shouldForward === '3') {
         //ไม่ผ่านการตรวจสอบ เนื่องจากไม่ครบถ้วน / ไม่ถูกต้อง
-        this.targetStatus = 3;
+        this.targetStatus = 4;
       } else if (input.shouldForward === '5') {
         //ยกเลิก
         this.targetStatus = 5;
