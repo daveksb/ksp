@@ -27,6 +27,7 @@ export class ApproveNewUserListComponent implements AfterViewInit {
   checkStatus = checkStatus;
   statusList = SchoolRequestProcess.find((i) => i.requestType === 1)?.status;
   mapRequestType = schoolMapRequestType;
+  searchType = "uni"
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
