@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormArray, FormBuilder } from '@angular/forms';
+import { MatTabChangeEvent } from '@angular/material/tabs';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
-import { SelfRequest } from '@ksp/shared/interface';
+import { KspRequest, SelfRequest } from '@ksp/shared/interface';
 import {
   AddressService,
   ERequestService,
@@ -11,6 +12,19 @@ import {
 import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
+const FORM_TAB_COUNT = 6;
+
+const VERIFY_CHOICES = [
+  {
+    name: 'ครบถ้วน และถูกต้อง',
+    value: 'complete',
+  },
+  {
+    name: 'ไม่ครบถ้วน และไม่ถูกต้อง',
+    value: 'incomplete',
+  },
+];
+
 @Component({
   selector: 'ksp-e-thai-teacher-detail',
   templateUrl: './e-thai-teacher-detail.component.html',
@@ -18,6 +32,7 @@ import { Observable } from 'rxjs';
 })
 export class EThaiTeacherDetailComponent implements OnInit {
   userInfoType = UserInfoFormType.thai;
+  verifyChoice: any[] = [];
 
   provinces1$!: Observable<any>;
   amphurs1$!: Observable<any>;
@@ -36,6 +51,8 @@ export class EThaiTeacherDetailComponent implements OnInit {
   uniqueTimestamp!: string;
   rewardFiles: any[] = [];
   requestId!: number;
+  selectedTab: MatTabChangeEvent = new MatTabChangeEvent();
+  requestData = new KspRequest();
 
   form = this.fb.group({
     userInfo: [],
@@ -49,19 +66,33 @@ export class EThaiTeacherDetailComponent implements OnInit {
     fax: [],
     email: [],
     website: [],
+    checkResult: this.fb.array([]),
   });
+
+  get checkResultFormArray() {
+    return this.form.controls.checkResult as FormArray;
+  }
 
   constructor(
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService,
     private route: ActivatedRoute,
     private requestService: ERequestService,
-    private addressService: AddressService
+    private addressService: AddressService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    this.verifyChoice = VERIFY_CHOICES;
     this.getListData();
     this.checkRequestId();
+    this.addCheckResultArray();
+  }
+
+  addCheckResultArray() {
+    for (let i = 0; i < FORM_TAB_COUNT; i++) {
+      this.checkResultFormArray.push(this.fb.control([]));
+    }
   }
 
   getListData() {
@@ -85,6 +116,11 @@ export class EThaiTeacherDetailComponent implements OnInit {
           });
       }
     });
+  }
+
+  tabChanged(e: MatTabChangeEvent) {
+    console.log('tab event = ', e);
+    this.selectedTab = e;
   }
 
   patchData(data: SelfRequest) {
@@ -177,5 +213,21 @@ export class EThaiTeacherDetailComponent implements OnInit {
         website,
       });
     }
+  }
+
+  next() {
+    console.log('next');
+    this.persistData();
+    this.router.navigate(['/thai-teacher', 'confirm', this.requestId]);
+  }
+
+  // save data to indexed db
+  persistData() {
+    //console.log('check sub result = ', checkSubResult);
+    // const saveData: KspApprovePersistData = {
+    //   checkDetail: this.form.controls.checkResult.value,
+    //   requestData: this.requestData,
+    // };
+    // localForage.setItem('checkRequestData', saveData);
   }
 }
