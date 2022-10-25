@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormArray, FormBuilder } from '@angular/forms';
+import { MatTabChangeEvent } from '@angular/material/tabs';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
-import { SelfRequest } from '@ksp/shared/interface';
+import { KspRequest, SelfRequest } from '@ksp/shared/interface';
 import {
   AddressService,
   EducationDetailService,
@@ -11,6 +12,21 @@ import {
 } from '@ksp/shared/service';
 import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
+import { KspApprovePersistData } from '../e-teacher-council-confirm/e-teacher-council-confirm.component';
+import localForage from 'localforage';
+
+const FORM_TAB_COUNT = 7;
+
+const VERIFY_CHOICES = [
+  {
+    name: 'ครบถ้วน และถูกต้อง',
+    value: 'complete',
+  },
+  {
+    name: 'ไม่ครบถ้วน และไม่ถูกต้อง',
+    value: 'incomplete',
+  },
+];
 
 @Component({
   selector: 'ksp-e-teacher-council-detail',
@@ -19,6 +35,7 @@ import { Observable } from 'rxjs';
 })
 export class ETeacherCouncilDetailComponent implements OnInit {
   userInfoType = UserInfoFormType.thai;
+  verifyChoice: any[] = [];
 
   provinces1$!: Observable<any>;
   amphurs1$!: Observable<any>;
@@ -31,6 +48,8 @@ export class ETeacherCouncilDetailComponent implements OnInit {
   uniqueTimestamp!: string;
   rewardFiles: any[] = [];
   requestId!: number;
+  selectedTab: MatTabChangeEvent = new MatTabChangeEvent();
+  requestData = new KspRequest();
 
   form = this.fb.group({
     userInfo: [],
@@ -42,7 +61,12 @@ export class ETeacherCouncilDetailComponent implements OnInit {
     rewardEthicInfo: [],
     rewardSuccessInfo: [],
     rewardDetailInfo: [],
+    checkResult: this.fb.array([]),
   });
+
+  get checkResultFormArray() {
+    return this.form.controls.checkResult as FormArray;
+  }
 
   constructor(
     private fb: FormBuilder,
@@ -50,12 +74,21 @@ export class ETeacherCouncilDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private requestService: ERequestService,
     private addressService: AddressService,
-    private educationDetailService: EducationDetailService
+    private educationDetailService: EducationDetailService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    this.verifyChoice = VERIFY_CHOICES;
     this.getListData();
     this.checkRequestId();
+    this.addCheckResultArray();
+  }
+
+  addCheckResultArray() {
+    for (let i = 0; i < FORM_TAB_COUNT; i++) {
+      this.checkResultFormArray.push(this.fb.control([]));
+    }
   }
 
   getListData() {
@@ -73,11 +106,17 @@ export class ETeacherCouncilDetailComponent implements OnInit {
           .getKspRequestById(this.requestId)
           .subscribe((res) => {
             if (res) {
+              this.requestData = res;
               this.patchData(res);
             }
           });
       }
     });
+  }
+
+  tabChanged(e: MatTabChangeEvent) {
+    console.log('tab event = ', e);
+    this.selectedTab = e;
   }
 
   patchData(data: SelfRequest) {
@@ -145,5 +184,21 @@ export class ETeacherCouncilDetailComponent implements OnInit {
         }
       });
     }
+  }
+
+  next() {
+    console.log('next');
+    this.persistData();
+    this.router.navigate(['/teacher-council', 'confirm', this.requestId]);
+  }
+
+  // save data to indexed db
+  persistData() {
+    //console.log('check sub result = ', checkSubResult);
+    const saveData: KspApprovePersistData = {
+      checkDetail: this.form.controls.checkResult.value,
+      requestData: this.requestData,
+    };
+    localForage.setItem('checkRequestData', saveData);
   }
 }
