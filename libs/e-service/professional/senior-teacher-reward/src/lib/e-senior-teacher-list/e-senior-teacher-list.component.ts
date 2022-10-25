@@ -59,8 +59,8 @@ export class ESeniorTeacherListComponent implements OnInit {
     this.dataSource.data = [];
   }
 
-  view() {
-    this.router.navigate(['/senior-teacher', 'detail']);
+  view(id: number) {
+    this.router.navigate(['/senior-teacher', 'detail', id]);
   }
 }
 
