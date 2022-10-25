@@ -15,6 +15,12 @@ import { SelfServiceFeatureRewardModule } from '@ksp/self-service/feature/reward
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { EServiceRewardSearchComponent } from '@ksp/shared/search';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
+import { ETeacherCouncilConfirmComponent } from './e-teacher-council-confirm/e-teacher-council-confirm.component';
+import {
+  ValidateKspRequestComponent,
+  ConsiderKspRequestComponent,
+} from '@ksp/e-service/e-license/approve-ksp-request';
 
 const routes: Routes = [
   {
@@ -33,6 +39,10 @@ const routes: Routes = [
       {
         path: 'detail/:id',
         component: ETeacherCouncilDetailComponent,
+      },
+      {
+        path: 'confirm/:id',
+        component: ETeacherCouncilConfirmComponent,
       },
     ],
   },
@@ -53,8 +63,14 @@ const routes: Routes = [
     RequestHeaderInfoComponent,
     EServiceRewardSearchComponent,
     ThaiDatePipe,
+    LicenseCheckComponent,
+    ValidateKspRequestComponent,
   ],
-  declarations: [ETeacherCouncilListComponent, ETeacherCouncilDetailComponent],
+  declarations: [
+    ETeacherCouncilListComponent,
+    ETeacherCouncilDetailComponent,
+    ETeacherCouncilConfirmComponent,
+  ],
   exports: [ETeacherCouncilListComponent, ETeacherCouncilDetailComponent],
 })
 export class EServiceProfessionalTeacherCouncilRewardModule {}
