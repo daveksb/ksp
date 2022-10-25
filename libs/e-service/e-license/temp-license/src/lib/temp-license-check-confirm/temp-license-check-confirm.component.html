@@ -34,10 +34,12 @@
     </table>
 
     <div [formGroup]="form">
-      <ng-container *ngIf="saveData.requestData.process === '4'; else approve">
-        <ksp-consider-ksp-request
-          formControlName="approvement"
-        ></ksp-consider-ksp-request>
+      <ng-container *ngIf="saveData.requestData.process === '5'; else approve">
+        <ng-container *ngIf="saveData.requestData.status === '1'">
+          <ksp-consider-ksp-request
+            formControlName="approvement"
+          ></ksp-consider-ksp-request>
+        </ng-container>
       </ng-container>
       <ng-template #approve>
         <ksp-validate-ksp-request
