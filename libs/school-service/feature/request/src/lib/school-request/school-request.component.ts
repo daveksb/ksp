@@ -31,7 +31,6 @@ import {
   Province,
   StaffType,
   Tambol,
-  UserInfoForm,
   VisaClass,
   VisaType,
 } from '@ksp/shared/interface';
