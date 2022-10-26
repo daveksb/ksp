@@ -13,7 +13,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { FileGroup, KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
 @Component({
@@ -61,11 +61,11 @@ export class RequestRewardFormComponent extends KspFormBaseComponent {
     academicStanding: [''],
   });
 
-  rewardFiles = [
-    { name: 'แบบ นร. 1', fileid: '' },
-    { name: 'แบบ นร.2', fileid: '' },
-    { name: 'เอกสารอื่นๆ', fileid: '' },
-    { name: 'บันทึกนำส่งจากสถานศึกษา', fileid: '' },
+  rewardFiles: FileGroup[] = [
+    { name: 'แบบ นร. 1', files: [] },
+    { name: 'แบบ นร.2', files: [] },
+    { name: 'เอกสารอื่นๆ', files: [] },
+    { name: 'บันทึกนำส่งจากสถานศึกษา', files: [] },
   ];
 
   rewards = rewards;
