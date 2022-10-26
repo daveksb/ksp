@@ -15,7 +15,7 @@ import {
 } from '@ksp/shared/dialog';
 import { ERequestService, GeneralInfoService } from '@ksp/shared/service';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { concatMap, Observable } from 'rxjs';
 import { parseJson } from '@ksp/shared/utility';
 
 @Component({
@@ -54,7 +54,6 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkRequestId();
-
     this.route.queryParams.subscribe((res) => {
       this.pageType = Number(res['type']);
     });
@@ -116,6 +115,10 @@ export class UserDetailComponent implements OnInit {
   }
 
   approveUser() {
+    const deActivateAllUser = this.eRequestService.deActivateAllUser(
+      this.requestData.schoolid ?? ''
+    );
+
     const payload: KspApprovePayload = {
       requestid: `${this.requestId}`,
       process: '1',
@@ -126,9 +129,11 @@ export class UserDetailComponent implements OnInit {
       paymentstatus: null,
     };
 
-    this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
+    /* this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
       console.log('approve result = ', res);
-    });
+    }); */
+
+    const updateRequest = this.eRequestService.KspUpdateRequestProcess(payload);
 
     const user = new SchUser();
     user.idcardno = this.requestData.idcardno;
@@ -143,8 +148,13 @@ export class UserDetailComponent implements OnInit {
     user.requestid = this.requestData.id;
     user.schuseractive = '1';
 
-    this.eRequestService.createSchUser(user).subscribe(() => {
+    const createUser = this.eRequestService.createSchUser(user);
+    /* this.eRequestService.createSchUser(user).subscribe(() => {
       this.completeDialog();
+    }); */
+
+    deActivateAllUser.pipe(concatMap(() => createUser)).subscribe((res) => {
+      console.log('res = ', res);
     });
   }
 

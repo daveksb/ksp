@@ -7,7 +7,12 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { FileGroup, FormMode } from '@ksp/shared/interface';
+import {
+  FileGroup,
+  FormMode,
+  Nationality,
+  Prefix,
+} from '@ksp/shared/interface';
 import { GeneralInfoService } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 import localForage from 'localforage';
@@ -21,14 +26,14 @@ export class CoordinatorInfoComponent implements OnInit {
     coordinator: [],
   });
   savingData: any;
-  prefixList$!: Observable<any>;
-  nationalitys$!: Observable<any>;
+  prefixList$!: Observable<Prefix[]>;
+  nationList$!: Observable<Nationality[]>;
   mode: FormMode = 'edit';
   userInfoFormdisplayMode: number = UserInfoFormType.thai;
   school: any;
   address: any;
   uniqueNo!: string;
-  uploadFileList: FileGroup[] = [
+  uploadFiles: FileGroup[] = [
     {
       name: 'หนังสือแต่งตั้งผู้ประสานงาน',
       files: [],
@@ -51,7 +56,7 @@ export class CoordinatorInfoComponent implements OnInit {
 
     localForage.getItem('registerSelectedSchool').then((res) => {
       this.school = res;
-      console.log('school = ', res);
+      //console.log('school = ', res);
     });
 
     localForage.getItem('registerUserInfoFormValue').then((res) => {
@@ -71,11 +76,11 @@ export class CoordinatorInfoComponent implements OnInit {
 
   getListData() {
     this.prefixList$ = this.generalInfoService.getPrefix();
-    this.nationalitys$ = this.generalInfoService.getNationality();
+    this.nationList$ = this.generalInfoService.getNationality();
   }
 
-  cancel() {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+  cancelConfirmDialog() {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยกเลิกรายการใบคำขอ
         ใช่หรือไม่?`,
@@ -83,21 +88,21 @@ export class CoordinatorInfoComponent implements OnInit {
       },
     });
 
-    dialogRef.componentInstance.confirmed.subscribe((res) => {
+    dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.onConfirmed();
+        this.cancelCompleteDialog();
       }
     });
   }
 
-  onConfirmed() {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+  cancelCompleteDialog() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: 'ยกเลิกรายการสำเร็จ',
       },
     });
 
-    completeDialog.componentInstance.completed.subscribe((res) => {
+    dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
         this.router.navigate(['/login']);
       }

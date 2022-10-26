@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { SchInfo } from '@ksp/shared/interface';
+import { SchInfo, SchUser } from '@ksp/shared/interface';
 import { GeneralInfoService, SchoolInfoService } from '@ksp/shared/service';
 import localForage from 'localforage';
 import { Observable } from 'rxjs';
@@ -10,8 +10,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./register-current-user.component.scss'],
 })
 export class RegisterCurrentUserComponent {
-  activeUser = '';
-  school!: SchInfo;
+  activeUsers!: SchUser[];
+  schoolInfo = new SchInfo();
   bureausList$!: Observable<any>;
 
   constructor(
@@ -31,15 +31,14 @@ export class RegisterCurrentUserComponent {
   }
 
   selectedUniversity(school: SchInfo) {
-    this.school = school;
+    this.schoolInfo = school;
     localForage.setItem('registerSelectedSchool', school);
 
     this.schoolInfoService
       .searchSchUsers({ schoolid: school.schoolid })
       .subscribe((res) => {
-        if (res == undefined) {
-          this.next();
-        }
+        this.activeUsers = res;
+        console.log('activeUsers = ', this.activeUsers);
       });
   }
 }
