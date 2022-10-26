@@ -26,13 +26,12 @@ export class ActivityDetailComponent implements OnInit {
   pageType!: number;
   activityPageMode = activityPageMode;
   uniqueTimestamp!: string;
+  activityTypes: ListData[] = SchoolSelfDevelopActivityTies;
 
   form = this.fb.group({
     type: [null, Validators.required],
     detail: [],
   });
-
-  activityTypes: ListData[] = SchoolSelfDevelopActivityTies;
 
   attachFiles: FileGroup[] = [
     {

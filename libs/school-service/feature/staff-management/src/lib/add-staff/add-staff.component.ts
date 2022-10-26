@@ -273,6 +273,9 @@ export class AddStaffComponent implements OnInit {
     this.patchAddress(parseJson(res.addresses));
     this.patchEdu(parseJson(res.educations));
     this.pathTeachingInfo(parseJson(res.teachinginfo));
+
+    console.log('hiring = ', parseJson(res.hiringinfo));
+
     this.form.controls.hiringInfo.patchValue(parseJson(res.hiringinfo));
   }
 
@@ -317,6 +320,7 @@ export class AddStaffComponent implements OnInit {
 
   updateStaff() {
     const formData: any = this.form.getRawValue();
+    console.log('form data = ', formData);
     formData.userInfo.schoolid = this.schoolId;
 
     const teaching: any = this.form.controls.teachingInfo.value;

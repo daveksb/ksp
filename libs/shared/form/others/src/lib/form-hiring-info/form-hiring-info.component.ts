@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+import { skip } from 'rxjs';
 
 @Component({
   selector: 'ksp-form-hiring-info',
@@ -30,7 +31,9 @@ export class FormHiringInfoComponent
     hiringPeriodMonth: [],
 
     hiringStatus: [], //radio
-    hiringStatusDate: [],
+    hiringStartDate: [],
+    hiringEndDate: [],
+    hiringCancelDate: [],
     hiringStatusReason: [],
   });
 
@@ -48,11 +51,17 @@ export class FormHiringInfoComponent
       this.form.controls.psersonType.clearValidators();
       this.form.controls.academicStanding.clearValidators();
     }
+
+    this.form.controls.hiringStatus.valueChanges.pipe(skip(3)).subscribe(() => {
+      this.form.controls.hiringStartDate.reset();
+      this.form.controls.hiringEndDate.reset();
+      this.form.controls.hiringCancelDate.reset();
+    });
   }
 }
 
 export const status = [
-  { label: 'แจ้งเข้า', value: '1' },
-  { label: 'แจ้งออก', value: '2' },
-  { label: 'ยกเลิกข้อมูล', value: '3' },
+  { label: 'แจ้งเข้า', value: '1', formDataName: 'hiringStartDate' },
+  { label: 'แจ้งออก', value: '2', formDataName: 'hiringEndDate' },
+  { label: 'ยกเลิกข้อมูล', value: '3', formDataName: 'hiringCancelDate' },
 ];
