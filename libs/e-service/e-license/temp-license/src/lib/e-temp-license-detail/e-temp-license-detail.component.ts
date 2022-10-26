@@ -62,6 +62,7 @@ export class ETempLicenseDetailComponent implements OnInit {
     edu2: [],
     teachinginfo: [],
     hiringinfo: [],
+    reasoninfo: [],
     checkResult: this.fb.array([]),
   });
 
@@ -132,8 +133,13 @@ export class ETempLicenseDetailComponent implements OnInit {
       this.patchEdu(parseJson(res.eduinfo));
       this.patchHiringInfo(parseJson(res.hiringinfo));
       this.patchTeachingInfo(parseJson(res.teachinginfo));
+      this.patchReasonInfo(parseJson(res.reasoninfo));
       this.patchSchoolAddrress(parseJson(res.schooladdrinfo));
     });
+  }
+
+  patchReasonInfo(res: any) {
+    this.form.controls.reasoninfo.patchValue(res);
   }
 
   patchSchoolAddrress(payload: any) {

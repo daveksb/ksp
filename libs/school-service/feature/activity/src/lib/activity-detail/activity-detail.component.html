@@ -14,7 +14,7 @@
   </div>
 
   <div class="bg-white p-3">
-    <ksp-request-header-info [requestDate]="today"></ksp-request-header-info>
+    <ksp-request-header-info></ksp-request-header-info>
     <hr />
 
     <div class="bg-light p-4 mb-3">
@@ -211,7 +211,7 @@
       [showCancelButton]="true"
       [showSaveButton]="true"
       [disableSaveButton]="form.invalid"
-      (saveClicked)="submit()"
+      (saveClicked)="confirmDialog()"
       (cancelClicked)="cancel()"
     ></ksp-bottom-nav></div
 ></ng-container>

@@ -7,13 +7,13 @@ import { Router } from '@angular/router';
   templateUrl: './osoi-list.component.html',
   styleUrls: ['./osoi-list.component.scss'],
 })
-export class OsoiListComponent implements OnInit {
+export class OsoiListComponent {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<userList>();
 
   constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  //ngOnInit(): void {}
 
   search() {
     this.dataSource.data = data;

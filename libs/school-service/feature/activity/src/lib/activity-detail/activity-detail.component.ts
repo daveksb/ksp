@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FileGroup, ListData } from '@ksp/shared/interface';
+import { FileGroup, ListData, SchStaff } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { getCookie, thaiDate } from '@ksp/shared/utility';
+import { getCookie } from '@ksp/shared/utility';
 import { SchoolSelfDevelopActivityTies } from '@ksp/shared/constant';
 import { SelfDevelopService, StaffService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -20,20 +20,18 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./activity-detail.component.scss'],
 })
 export class ActivityDetailComponent implements OnInit {
-  today = thaiDate(new Date());
   schoolId = getCookie('schoolId');
   staffId!: number;
-  staff: any;
+  staff = new SchStaff();
   pageType!: number;
   activityPageMode = activityPageMode;
   uniqueTimestamp!: string;
+  activityTypes: ListData[] = SchoolSelfDevelopActivityTies;
 
   form = this.fb.group({
     type: [null, Validators.required],
     detail: [],
   });
-
-  activityTypes: ListData[] = SchoolSelfDevelopActivityTies;
 
   attachFiles: FileGroup[] = [
     {
@@ -79,7 +77,7 @@ export class ActivityDetailComponent implements OnInit {
       });
   }
 
-  save() {
+  addSelfDevelop() {
     const formValue = this.form.value;
     //console.log('formValue.detail = ', formValue.detail);
 
@@ -96,10 +94,10 @@ export class ActivityDetailComponent implements OnInit {
       staffid: `${this.staffId}`,
       schoolid: `${this.schoolId}`,
     };
-    console.log('payload = ', payload);
+    //console.log('payload = ', payload);
 
-    this.service.addSelfDevelopy(payload).subscribe((res) => {
-      //console.log('res = ', res);
+    this.service.addSelfDevelop(payload).subscribe((res) => {
+      this.completeDialog();
     });
   }
 
@@ -115,31 +113,30 @@ export class ActivityDetailComponent implements OnInit {
     this.router.navigate(['/activity', 'list']);
   }
 
-  submit() {
-    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+  confirmDialog() {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
         btnLabel: 'ตกลง',
       },
     });
 
-    confirmDialog.componentInstance.confirmed.subscribe((res) => {
+    dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        //this.onCompleted();
-        this.save();
+        this.addSelfDevelop();
       }
     });
   }
 
-  onCompleted() {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+  completeDialog() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
         buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 
-    completeDialog.componentInstance.completed.subscribe((res) => {
+    dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
         this.router.navigate(['/activity']);
       }

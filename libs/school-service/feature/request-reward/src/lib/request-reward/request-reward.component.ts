@@ -42,8 +42,6 @@ export class RequestRewardComponent implements OnInit {
   personTypes$!: Observable<PersonType[]>;
   prefixList$!: Observable<Prefix[]>;
   requestId = 0;
-  requestProcess!: string | null;
-  requestStatus!: string | null;
   memberData!: any;
   disableTempSave = true;
   disablePermanentSave = true;
@@ -78,13 +76,13 @@ export class RequestRewardComponent implements OnInit {
       this.disableTempSave = true;
       this.disablePermanentSave = true;
       return;
-    } else if (this.requestProcess === '2') {
+    } else if (this.requestData.process === '2') {
       this.disableTempSave = true;
       this.disablePermanentSave = true;
-    } else if (this.requestProcess === '1') {
+    } else if (this.requestData.process === '1') {
       this.disableTempSave = false;
       this.disablePermanentSave = false;
-    } else if (this.requestProcess === '0') {
+    } else if (this.requestData.process === '0') {
       this.disableTempSave = true;
       this.disablePermanentSave = true;
       this.disableCancel = true;
@@ -141,15 +139,11 @@ export class RequestRewardComponent implements OnInit {
       //console.log('res = ', res);
       this.requestData = res;
       this.uniqueTimeStamp = res.uniqueno || 'default-unique-timestamp';
-      //this.requestNo = `${res.requestno}`;
-      //this.requestDate = `${res.requestdate}`;
-      this.requestStatus = res.status;
-      this.requestProcess = res.process;
       this.showCancelButton = res.status !== '0';
 
       const osoiInfo = parseJson(res.osoiinfo);
       const osoiMember = parseJson(res.osoimember);
-      //console.log('osoi info = ', osoiInfo);
+      console.log('osoi member   = ', osoiMember);
       this.form.controls.reward.patchValue(osoiInfo);
       this.memberData = osoiMember;
       //console.log('current process = ', this.currentProcess);
@@ -158,22 +152,22 @@ export class RequestRewardComponent implements OnInit {
     });
   }
 
-  updateRequest(currentProcess: string, requestStatus: string, form: any) {
-    //console.log('form  = ', form);
-    const baseForm = this.fb.group(new SchoolRequest());
-    form.id = this.requestId;
+  updateRequest(process: string, status: string, form: any) {
+    console.log('form osoimember = ', form.osoimember);
+    const baseForm = this.fb.group(new KspRequest());
+
+    form.id = `${this.requestId}`;
     form.schoolid = this.schoolId;
     form.systemtype = `2`;
     form.requesttype = `40`;
-    form.subtype = `5`;
-    form.currentprocess = currentProcess;
-    form.requeststatus = requestStatus;
+    form.careertype = `5`;
+    form.process = process;
+    form.status = status;
     form.osoimember = JSON.stringify(form.osoimember);
 
     const file = structuredClone(rewardFiles);
     //console.log('file = ', file);
     const files = mapFileInfo(file);
-    //console.log('map file = ', files);
     form.fileinfo = JSON.stringify({ files });
 
     const osoiInfo = {
@@ -188,24 +182,25 @@ export class RequestRewardComponent implements OnInit {
 
     const { ref1, ref2, ref3, ...payload } = baseForm.value;
     //console.log('payload = ', payload);
-    /*     this.requestService.schUpdateRequest(payload).subscribe(() => {
+    this.requestService.schUpdateRequest(<any>payload).subscribe(() => {
       //console.log('request result = ', res);
       this.completeDialog();
-    }); */
+    });
   }
 
   createRequest(currentProcess: string, requestStatus: string, form: any) {
     //console.log('form  = ', form);
     const baseForm = this.fb.group(new KspRequest());
     form.schoolid = this.schoolId;
-    form.ref1 = `2`;
+    form.ref1 = '2';
     form.ref2 = '40';
     form.ref3 = '5';
-    form.systemtype = `2`;
+    form.systemtype = '2';
     form.requesttype = `40`;
     form.subtype = `5`;
-    form.currentprocess = currentProcess;
-    form.requeststatus = requestStatus;
+    form.process = currentProcess;
+    form.status = requestStatus;
+    form.careertype = '5';
     form.uniquetimestamp = this.uniqueTimeStamp;
     form.osoimember = JSON.stringify(form.osoimember);
 
@@ -218,8 +213,10 @@ export class RequestRewardComponent implements OnInit {
     form.osoiinfo = JSON.stringify(osoiInfo);
 
     baseForm.patchValue(form);
+
+    const { id, ...payload } = baseForm.value;
     //console.log('current form = ', baseForm.value);
-    this.requestService.schCreateRequest(baseForm.value).subscribe(() => {
+    this.requestService.schCreateRequest(payload).subscribe(() => {
       //console.log('request result = ', res);
       this.completeDialog();
     });

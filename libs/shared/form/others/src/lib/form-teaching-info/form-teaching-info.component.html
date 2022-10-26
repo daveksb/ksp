@@ -1,6 +1,5 @@
 <form [formGroup]="form">
   <div class="bg-white">
-    <!-- <div class="box-header">ข้อมูลการสอน</div> -->
     <div class="bg-light p-3 mb-3">
       <div class="box-header">ระดับช่วงชั้นที่สอน</div>
 
@@ -8,7 +7,7 @@
         <label
           class="d-flex flex-row align-items-center my-1 p-0"
           formArrayName="teachingLevel"
-          *ngFor="let order of teachingLevelFormArray.controls; let i = index"
+          *ngFor="let order of teachingLevels.controls; let i = index"
         >
           <input type="checkbox" class="me-2" [formControlName]="i" />
           <label class="text-secondary">{{ levels[i].label }} </label>
@@ -23,10 +22,7 @@
         <label
           class="d-flex flex-row align-items-center my-1 p-0"
           formArrayName="teachingSubjects"
-          *ngFor="
-            let order of teachingSubjectsFormArray.controls;
-            let i = index
-          "
+          *ngFor="let order of teachingSubjects.controls; let i = index"
         >
           <input type="checkbox" class="me-2" [formControlName]="i" />
           <label class="text-secondary">{{ subjects[i].label }} </label>

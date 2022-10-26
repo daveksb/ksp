@@ -23,7 +23,7 @@ export class ActivityLecturerComponent
     agency: [null, Validators.required],
     hour: [null, Validators.required],
     date: [null, Validators.required],
-    dateTo: [null, Validators.required],
+    //dateTo: [null, Validators.required],
   });
 
   constructor(private fb: FormBuilder) {
