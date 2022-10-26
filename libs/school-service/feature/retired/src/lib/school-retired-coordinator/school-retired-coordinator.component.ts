@@ -15,7 +15,7 @@ import {
   SchUser,
 } from '@ksp/shared/interface';
 import { GeneralInfoService, SchoolRequestService } from '@ksp/shared/service';
-import { getCookie, thaiDate } from '@ksp/shared/utility';
+import { getCookie, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
 import localForage from 'localforage';
 import { EMPTY, Observable, switchMap } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
@@ -121,9 +121,10 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
             request.schoolname = this.school.schoolname;
             request.reasoninfo = JSON.stringify(this.reasoninfo);
             request.coordinatorinfo = JSON.stringify(form);
+
+            const payload = replaceEmptyWithNull(request);
             //console.log('request = ', request);
-            //return EMPTY;
-            return this.requestService.schCreateRequest(request);
+            return this.requestService.schCreateRequest(payload);
           }
           return EMPTY;
         })
