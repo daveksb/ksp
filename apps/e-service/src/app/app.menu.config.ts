@@ -121,7 +121,7 @@ export const eLicenseMenu: MenuConfig[] = [
     subMenuName: 'tempForeign',
     subMenu: [
       {
-        path: '/temp-license/list',
+        path: '/temp-license/list/5',
         label: 'รายการใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
       },
       /* {
