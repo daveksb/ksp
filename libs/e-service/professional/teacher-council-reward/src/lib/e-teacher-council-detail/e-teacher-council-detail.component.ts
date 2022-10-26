@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
-import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
-import { KspRequest, SelfRequest } from '@ksp/shared/interface';
+import { SelfRequest } from '@ksp/shared/interface';
 import {
   AddressService,
   EducationDetailService,
@@ -12,30 +11,20 @@ import {
 } from '@ksp/shared/service';
 import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
-import { KspApprovePersistData } from '../e-teacher-council-confirm/e-teacher-council-confirm.component';
-import localForage from 'localforage';
+import { ERewardFormBaseComponent } from '@ksp/self-service/form';
 
 const FORM_TAB_COUNT = 7;
-
-const VERIFY_CHOICES = [
-  {
-    name: 'ครบถ้วน และถูกต้อง',
-    value: 'complete',
-  },
-  {
-    name: 'ไม่ครบถ้วน และไม่ถูกต้อง',
-    value: 'incomplete',
-  },
-];
 
 @Component({
   selector: 'ksp-e-teacher-council-detail',
   templateUrl: './e-teacher-council-detail.component.html',
   styleUrls: ['./e-teacher-council-detail.component.scss'],
 })
-export class ETeacherCouncilDetailComponent implements OnInit {
+export class ETeacherCouncilDetailComponent
+  extends ERewardFormBaseComponent
+  implements OnInit
+{
   userInfoType = UserInfoFormType.thai;
-  verifyChoice: any[] = [];
 
   provinces1$!: Observable<any>;
   amphurs1$!: Observable<any>;
@@ -47,9 +36,6 @@ export class ETeacherCouncilDetailComponent implements OnInit {
   bureau$!: Observable<any>;
   uniqueTimestamp!: string;
   rewardFiles: any[] = [];
-  requestId!: number;
-  selectedTab: MatTabChangeEvent = new MatTabChangeEvent();
-  requestData = new KspRequest();
 
   form = this.fb.group({
     userInfo: [],
@@ -76,10 +62,12 @@ export class ETeacherCouncilDetailComponent implements OnInit {
     private addressService: AddressService,
     private educationDetailService: EducationDetailService,
     private router: Router
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
-    this.verifyChoice = VERIFY_CHOICES;
+    this.verifyChoice = this.VERIFY_CHOICES;
     this.getListData();
     this.checkRequestId();
     this.addCheckResultArray();
@@ -112,11 +100,6 @@ export class ETeacherCouncilDetailComponent implements OnInit {
           });
       }
     });
-  }
-
-  tabChanged(e: MatTabChangeEvent) {
-    console.log('tab event = ', e);
-    this.selectedTab = e;
   }
 
   patchData(data: SelfRequest) {
@@ -187,18 +170,7 @@ export class ETeacherCouncilDetailComponent implements OnInit {
   }
 
   next() {
-    console.log('next');
-    this.persistData();
+    this.persistData(this.form.controls.checkResult.value);
     this.router.navigate(['/teacher-council', 'confirm', this.requestId]);
-  }
-
-  // save data to indexed db
-  persistData() {
-    //console.log('check sub result = ', checkSubResult);
-    const saveData: KspApprovePersistData = {
-      checkDetail: this.form.controls.checkResult.value,
-      requestData: this.requestData,
-    };
-    localForage.setItem('checkRequestData', saveData);
   }
 }
