@@ -7,11 +7,11 @@ import { ERewardConfirmFormBaseComponent } from '@ksp/self-service/form';
 import { ERequestService } from '@ksp/shared/service';
 
 @Component({
-  selector: 'ksp-e-teacher-council-confirm',
-  templateUrl: './e-teacher-council-confirm.component.html',
-  styleUrls: ['./e-teacher-council-confirm.component.scss'],
+  selector: 'ksp-e-best-teacher-confirm',
+  templateUrl: './e-best-teacher-confirm.component.html',
+  styleUrls: ['./e-best-teacher-confirm.component.scss'],
 })
-export class ETeacherCouncilConfirmComponent extends ERewardConfirmFormBaseComponent {
+export class EBestTeacherConfirmComponent extends ERewardConfirmFormBaseComponent {
   constructor(
     fb: FormBuilder,
     route: ActivatedRoute,
@@ -23,10 +23,10 @@ export class ETeacherCouncilConfirmComponent extends ERewardConfirmFormBaseCompo
   }
 
   navigateBack() {
-    this.router.navigate(['/teacher-council', 'list']);
+    this.router.navigate(['/best-teacher', 'list']);
   }
 
   prevPage() {
-    this.router.navigate(['/teacher-council', 'detail', this.requestId]);
+    this.router.navigate(['/best-teacher', 'detail', this.requestId]);
   }
 }

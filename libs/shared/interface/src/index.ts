@@ -30,6 +30,7 @@ export * from './lib/ksp-approve';
 export * from './lib/ksp-menu-config';
 export * from './lib/ksp-general';
 export * from './lib/ksp-search';
+export * from './lib/ksp-approve-persist-data';
 
 export * from './lib/uni-service-import-type';
 export * from './lib/university-select';
