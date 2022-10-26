@@ -61,7 +61,7 @@ export class ETempLicenseListComponent implements AfterViewInit {
 
   checkCareerType() {
     this.route.paramMap.subscribe((params) => {
-      if (params.get('careertype')) {
+      if (params.get('careertype') === '5') {
         this.careerType = Number(params.get('careertype'));
         this.careerTypeList = careerTypeList.filter((i) => i.id === 5);
         //console.log('career type = ', this.careerType);
