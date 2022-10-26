@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
+import { Location } from '@angular/common';
+import _ from 'lodash';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'e-service-verify',
@@ -13,24 +16,33 @@ export class VerifyComponent implements OnInit {
 
   choices = [
     [],
-    ['ผ่านการพิจารณา', 'ไม่ผ่านการพิจารณา'],
     [
-      'รับรอง',
-      'ไม่รับรอง',
-      'ให้สถาบันแก้ไข / เพิ่มเติม',
-      'ส่งคืน',
-      'ยกเลิกการรับรอง',
+      { name: 'ผ่านการพิจารณา', value: 1 },
+      { name: 'ไม่ผ่านการพิจารณา', value: 2 },
+    ],
+    [
+      { name: "รับรอง", value: 1 },
+      { name: "ไม่รับรอง", value: 2 },
+      { name: "ให้สถาบันแก้ไข / เพิ่มเติม", value: 3 },
+      { name: "ส่งคืน", value: 4 },
+      { name: "ยกเลิกการรับรอง", value: 5 },
     ],
   ];
-
+  dataSource: any[] = [];
   processType!: number;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private location: Location,
+    private fb: FormBuilder,
   ) {}
-
+  form = this.fb.group({
+    verifyForm: [{}],
+    considerationResult:[{}]
+  });
   ngOnInit() {
+    this.dataSource = _.get(this.location.getState(), 'dataSource', []);
     this.route.paramMap.subscribe((res) => {
       this.processType = Number(res.get('type'));
       //console.log('process type = ', this.processType);
@@ -46,19 +58,20 @@ export class VerifyComponent implements OnInit {
   }
 
   save() {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
-      data: {
-        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
-        subTitle: `คุณยืนยันข้อมูลผลการพิจารณาหลักสูตร
-        ใช่หรือไม่`,
-      },
-    });
+    console.log(this.form.value)
+    // const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+    //   width: '350px',
+    //   data: {
+    //     title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
+    //     subTitle: `คุณยืนยันข้อมูลผลการพิจารณาหลักสูตร
+    //     ใช่หรือไม่`,
+    //   },
+    // });
 
-    dialogRef.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        this.router.navigate(['/degree-cert', 'list', this.processType]);
-      }
-    });
+    // dialogRef.componentInstance.confirmed.subscribe((res) => {
+    //   if (res) {
+    //     this.router.navigate(['/degree-cert', 'list', this.processType]);
+    //   }
+    // });
   }
 }

@@ -81,7 +81,13 @@
         ไฟล์ต่อรายการ
       </div>
     </div>
-
-    <ksp-file-upload></ksp-file-upload>
+    <ksp-file-upload
+      [buttonLabel]="'อัพโหลดไฟล์'"
+      [requestType]="1"
+      [uniqueTimestamp]="uniqueNo"
+      [showDeleteFile]="true"
+      (uploadComplete)="onUploadComplete($event)"
+    ></ksp-file-upload>
+    <!-- <ksp-file-upload></ksp-file-upload> -->
   </div>
 </form>

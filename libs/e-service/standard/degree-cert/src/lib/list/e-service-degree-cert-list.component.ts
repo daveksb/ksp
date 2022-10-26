@@ -24,6 +24,7 @@ export class EServiceDegreeCertListComponent
   selection = new SelectionModel<DegreeCertInfo>(true, []);
   displayedColumns: string[] = displayedColumns;
   pageType = 0;
+  showColumnSelect =false
   uniUniversityOption: ListData[] = [];
   degreeLevelOption: ListData[] = [];
   form = this.fb.group({
@@ -74,7 +75,8 @@ export class EServiceDegreeCertListComponent
         /**
          * show action buttons if process = consider || approve
          */
-        this.showActionButtons = [1, 2].includes(Number(res.get('type')));
+        this.showActionButtons = [3,4,5].includes(Number(res.get('type')));
+        this.showColumnSelect = Number(res.get('type')) == 1 ||  !res.get('type');
       }
       this.pageType = Number(res.get('processId'));
 
@@ -133,7 +135,8 @@ export class EServiceDegreeCertListComponent
               key: item?.id,
               order:
                 this.pageEvent.pageIndex * this.pageEvent.pageSize + ++index,
-              degreeId: item?.requestno,
+              // degreeId: item?.requestno,
+              requestno: item?.requestno,
               date: item?.requestdate
                 ? thaiDate(new Date(item?.requestdate))
                 : '',
@@ -159,11 +162,19 @@ export class EServiceDegreeCertListComponent
   }
 
   consider() {
-    this.router.navigate(['/degree-cert', 'verify', 1]);
+    this.router.navigate(['/degree-cert', 'verify', 1],{
+      state:{
+        dataSource:this.selection.selected
+      }
+    });
   }
 
   approve() {
-    this.router.navigate(['/degree-cert', 'verify', 2]);
+    this.router.navigate(['/degree-cert', 'verify', 2],{
+      state:{
+        dataSource:this.selection.selected
+      }
+    });
   }
 
   goToDetailPage(row:any) {
@@ -183,7 +194,8 @@ export class EServiceDegreeCertListComponent
 
 const displayedColumns: string[] = [
   'select',
-  'degreeId',
+  // 'degreeId',
+  'requestno',
   'date',
   'uni',
   'major',
@@ -196,7 +208,8 @@ const displayedColumns: string[] = [
   'print',
 ];
 export interface DegreeCertInfo {
-  degreeId: string;
+  // degreeId: string;
+  requestno?:any;
   date: string;
   uni: string;
   major: string;
@@ -210,7 +223,7 @@ export interface DegreeCertInfo {
 }
 
 export const data: DegreeCertInfo = {
-  degreeId: 'UNI_VC_64120009',
+  // degreeId: 'UNI_VC_64120009',
   date: '10 ธ.ค. 2564',
   uni: 'มหาวิทยาลัยภูเก็ต',
   major: 'คุรุศาสตร์',

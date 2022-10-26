@@ -22,7 +22,7 @@
     <div class="table__scroll">
       <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="select">
-          <th mat-header-cell *matHeaderCellDef>
+          <th  [hidden]="showColumnSelect" mat-header-cell *matHeaderCellDef>
             <!-- <mat-checkbox
               *ngIf="showActionButtons"
               (change)="$event ? masterToggle() : null"
@@ -32,19 +32,18 @@
             </mat-checkbox> -->
             เลือก
           </th>
-          <td mat-cell *matCellDef="let row">
-            <!-- <mat-checkbox
+          <td mat-cell [hidden]="showColumnSelect" *matCellDef="let row">
+            <mat-checkbox
               *ngIf="showActionButtons"
               (click)="$event.stopPropagation()"
               (change)="$event ? selection.toggle(row) : null"
               [checked]="selection.isSelected(row)"
             >
-            </mat-checkbox> -->
-            <input type="checkbox" />
+            </mat-checkbox>
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="degreeId">
+        <ng-container matColumnDef="requestno">
           <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
           <td
             class="text-primary link"
@@ -53,7 +52,7 @@
             (click)="goToDetailPage(element)"
 
           >
-            {{ element.degreeId }}
+            {{ element.requestno }}
           </td>
         </ng-container>
 
