@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   careerTypeList,
   SchoolRequestSubType,
@@ -19,7 +19,6 @@ import {
   checkProcess,
   schoolMapRequestType,
   checkStatus,
-  applyClientFilter,
   processFilter,
 } from '@ksp/shared/utility';
 
@@ -41,19 +40,36 @@ export class ETempLicenseListComponent implements AfterViewInit {
   checkRequestType = schoolMapRequestType;
   checkStatus = checkStatus;
   requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
-  careerTypeList = careerTypeList.filter((i) => i.id < 3);
+  careerType = 1;
+  careerTypeList: any[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private fb: FormBuilder,
     private eRequestService: ERequestService
-  ) {}
+  ) {
+    this.checkCareerType();
+  }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+  }
+
+  checkCareerType() {
+    this.route.paramMap.subscribe((params) => {
+      if (params.get('careertype') === '5') {
+        this.careerType = Number(params.get('careertype'));
+        this.careerTypeList = careerTypeList.filter((i) => i.id === 5);
+        //console.log('career type = ', this.careerType);
+      } else {
+        this.careerTypeList = careerTypeList.filter((i) => i.id < 3);
+        //console.log('no career type ');
+      }
+    });
   }
 
   search(params: Partial<SchRequestSearchFilter>) {

@@ -56,11 +56,13 @@ export class ERequestService {
       .pipe(map((data: any) => data.datareturn));
   }
 
-  createUniUser(payload: UniUser): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/e-service/uniuserinsert`, {
-      ...payload,
-      tokenkey: getCookie('userToken'),
-    });
+  deActivateAllUser(schoolid: string): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/schuseractiveupdate`,
+      {
+        schoolid,
+      }
+    );
   }
 
   EsSearchRequest(payload: EsSearchPayload): Observable<SelfRequest[]> {
@@ -108,5 +110,12 @@ export class ERequestService {
     return this.http
       .post(`${environment.apiUrl}/e-service/schkuruspanoinsertupdate`, payload)
       .pipe(map((data: any) => data.datareturn));
+  }
+
+  createUniUser(payload: UniUser): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/e-service/uniuserinsert`, {
+      ...payload,
+      tokenkey: getCookie('userToken'),
+    });
   }
 }

@@ -2,7 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { SchoolRequestType, UserInfoFormType } from '@ksp/shared/constant';
-import { KspFormBaseComponent, Prefix } from '@ksp/shared/interface';
+import {
+  Country,
+  KspFormBaseComponent,
+  Nationality,
+  Prefix,
+  VisaClass,
+  VisaType,
+} from '@ksp/shared/interface';
 import {
   createUserInfoForm,
   providerFactory,
@@ -28,10 +35,10 @@ export class FormCoordinatorInfoComponent
   @Input() displayMode!: number[];
 
   @Input() prefixList: Prefix[] | null = [];
-  @Input() countryList: any[] = [];
-  @Input() nationList: any[] = [];
-  @Input() visaClassList: any[] = [];
-  @Input() visaTypeList: any[] = [];
+  @Input() countryList: Country[] | null = [];
+  @Input() nationList: Nationality[] | null = [];
+  @Input() visaClassList: VisaClass[] | null = [];
+  @Input() visaTypeList: VisaType[] | null = [];
 
   RequestTypeEnum = SchoolRequestType;
   validatorMessages = validatorMessages;
