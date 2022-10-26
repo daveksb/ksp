@@ -33,20 +33,24 @@
             <tr>
               <th scope="col">ลำดับ</th>
               <th scope="col">ชื่อ-นามสกุล</th>
-              <th scope="col">เบอร์โทรศัพท์</th>
-              <th scope="col">ชื่อ-นามสกุล ผู้แต่งตั้ง</th>
+              <!-- <th scope="col">เบอร์โทรศัพท์</th> -->
+              <!-- <th scope="col">ชื่อ-นามสกุล ผู้แต่งตั้ง</th> -->
               <th scope="col">สถานะ</th>
             </tr>
           </thead>
 
           <tbody class="bg-white">
-            <tr>
-              <td>1</td>
-              <td>นายพิชัย ชาญชัย</td>
-              <td>091-9872678</td>
-              <td>นายกมล อัศวหาญ</td>
-              <td>ใช้งาน</td>
-            </tr>
+            <ng-container *ngFor="let user of activeUsers; index as i">
+              <tr>
+                <td>{{ i + 1 }}</td>
+                <td>{{ user.firstnameth }} {{ user.lastnameth }}</td>
+                <!-- <td>{{ user.schmobile }}</td> -->
+                <!-- <td>นายกมล อัศวหาญ</td> -->
+                <td>
+                  {{ user.schuseractive === '1' ? 'ใช้งาน' : 'ไม่ใช้งาน' }}
+                </td>
+              </tr>
+            </ng-container>
           </tbody>
         </table>
       </div>
