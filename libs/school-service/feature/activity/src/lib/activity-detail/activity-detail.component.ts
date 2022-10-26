@@ -7,7 +7,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { getCookie, thaiDate } from '@ksp/shared/utility';
+import { getCookie } from '@ksp/shared/utility';
 import { SchoolSelfDevelopActivityTies } from '@ksp/shared/constant';
 import { SelfDevelopService, StaffService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -20,7 +20,6 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./activity-detail.component.scss'],
 })
 export class ActivityDetailComponent implements OnInit {
-  today = thaiDate(new Date());
   schoolId = getCookie('schoolId');
   staffId!: number;
   staff = new SchStaff();
