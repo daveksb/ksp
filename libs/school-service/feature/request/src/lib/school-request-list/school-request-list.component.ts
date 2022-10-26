@@ -10,13 +10,15 @@ import {
   SchoolRequestSubType,
   SchoolRequestType,
 } from '@ksp/shared/constant';
+import { PdfViewerComponent } from '@ksp/shared/dialog';
 import { KspRequest, SchRequestSearchFilter } from '@ksp/shared/interface';
-import { SchoolRequestService } from '@ksp/shared/service';
+import { SchoolInfoService, SchoolRequestService } from '@ksp/shared/service';
 import {
   checkProcess,
   schoolMapRequestType,
   checkStatus,
   getCookie,
+  thaiDate,
 } from '@ksp/shared/utility';
 
 @Component({
@@ -46,7 +48,8 @@ export class SchoolRequestListComponent implements AfterViewInit {
     private router: Router,
     private fb: FormBuilder,
     private requestService: SchoolRequestService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private schoolInfoService: SchoolInfoService
   ) {}
 
   ngAfterViewInit() {
@@ -138,6 +141,86 @@ export class SchoolRequestListComponent implements AfterViewInit {
 
   rewardPage(id = '') {
     this.router.navigate(['/request-reward', 'detail', id]);
+  }
+  renderPdf(element: any) {
+    const date = new Date(element.requestdate);
+    const thai = thaiDate(date);
+    const [day, mouth, year] = thai.split(' ');
+    const name = element.firstnameth + ' ' + element.lastnameth;
+    const phone = element.contactphone;
+    const [
+      id1,
+      id2,
+      id3,
+      id4,
+      id5,
+      id6,
+      id7,
+      id8,
+      id9,
+      id10,
+      id11,
+      id12,
+      id13,
+    ] = element.idcardno.split('');
+    const eduinfo = JSON.parse(element.eduinfo);
+    const edu1 = eduinfo.find((item: any) => (item.degreeLevel = '1'));
+    const degreename1 = edu1.degreeName;
+    const institution1 = edu1.institution;
+    const major1 = edu1.major;
+    this.schoolInfoService
+      .getSchoolInfo(this.schoolId)
+      .subscribe((res: any) => {
+        const schoolname = res.schoolName;
+        const bureauname = res.bureauName;
+        const { address, moo, street, road, tumbon, fax } = res;
+        const amphurname = res.amphurName;
+        const provincename = res.provinceName;
+        const zipcode = res.zipCode;
+        const telphone = res.telphone;
+        this.dialog.open(PdfViewerComponent, {
+          width: '1200px',
+          height: '100vh',
+          data: {
+            pdfType: 1,
+            input: {
+              day,
+              mouth,
+              year,
+              schoolname,
+              bureauname,
+              address,
+              moo,
+              street,
+              road,
+              tumbon,
+              amphurname,
+              provincename,
+              zipcode,
+              fax,
+              name,
+              phone,
+              telphone,
+              id1,
+              id2,
+              id3,
+              id4,
+              id5,
+              id6,
+              id7,
+              id8,
+              id9,
+              id10,
+              id11,
+              id12,
+              id13,
+              degreename1,
+              institution1,
+              major1,
+            },
+          },
+        });
+      });
   }
 }
 
