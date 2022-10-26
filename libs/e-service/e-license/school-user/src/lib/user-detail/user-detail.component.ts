@@ -15,7 +15,7 @@ import {
 } from '@ksp/shared/dialog';
 import { ERequestService, GeneralInfoService } from '@ksp/shared/service';
 import { FormBuilder, Validators } from '@angular/forms';
-import { concatMap, Observable } from 'rxjs';
+import { concatMap, forkJoin, Observable } from 'rxjs';
 import { parseJson } from '@ksp/shared/utility';
 
 @Component({
@@ -119,7 +119,7 @@ export class UserDetailComponent implements OnInit {
       this.requestData.schoolid ?? ''
     );
 
-    const payload: KspApprovePayload = {
+    const updatePayload: KspApprovePayload = {
       requestid: `${this.requestId}`,
       process: '1',
       status: '2',
@@ -128,12 +128,8 @@ export class UserDetailComponent implements OnInit {
       userid: null,
       paymentstatus: null,
     };
-
-    /* this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
-      console.log('approve result = ', res);
-    }); */
-
-    const updateRequest = this.eRequestService.KspUpdateRequestProcess(payload);
+    const updateRequest =
+      this.eRequestService.KspUpdateRequestProcess(updatePayload);
 
     const user = new SchUser();
     user.idcardno = this.requestData.idcardno;
@@ -147,14 +143,13 @@ export class UserDetailComponent implements OnInit {
     user.schpassword = this.setPassword;
     user.requestid = this.requestData.id;
     user.schuseractive = '1';
-
     const createUser = this.eRequestService.createSchUser(user);
-    /* this.eRequestService.createSchUser(user).subscribe(() => {
-      this.completeDialog();
-    }); */
 
-    deActivateAllUser.pipe(concatMap(() => createUser)).subscribe((res) => {
-      console.log('res = ', res);
+    const forkRequest = forkJoin([updateRequest, createUser]);
+
+    deActivateAllUser.pipe(concatMap(() => forkRequest)).subscribe((res) => {
+      //console.log('res = ', res);
+      this.completeDialog();
     });
   }
 
@@ -169,8 +164,9 @@ export class UserDetailComponent implements OnInit {
       paymentstatus: null,
     };
 
-    this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
+    this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
       //console.log('un approve result = ', res);
+      this.completeDialog();
     });
   }
 

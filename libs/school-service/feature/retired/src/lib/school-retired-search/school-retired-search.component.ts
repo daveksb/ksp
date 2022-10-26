@@ -16,6 +16,7 @@ export class SchoolRetiredSearchComponent implements OnInit {
   schoolUsers: SchUser[] = [];
   selectUser!: SchUser;
   bureauList$!: Observable<Bureau[]>;
+  searchEnd = false;
 
   form = this.fb.group({
     userSearch: [],
@@ -47,7 +48,8 @@ export class SchoolRetiredSearchComponent implements OnInit {
     this.schoolInfoService
       .searchSchUsers({ schoolid: school.schoolid })
       .subscribe((res) => {
-        this.schoolUsers = res;
+        this.searchEnd = true;
+        this.schoolUsers = res.filter((user) => user.schuseractive === '1');
       });
   }
 

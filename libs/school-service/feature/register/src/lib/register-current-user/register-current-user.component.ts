@@ -38,7 +38,7 @@ export class RegisterCurrentUserComponent {
       .searchSchUsers({ schoolid: school.schoolid })
       .subscribe((res) => {
         this.activeUsers = res;
-        console.log('activeUsers = ', this.activeUsers);
+        //console.log('activeUsers = ', this.activeUsers);
       });
   }
 }
