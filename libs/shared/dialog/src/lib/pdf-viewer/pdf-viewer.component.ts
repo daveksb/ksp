@@ -4,7 +4,8 @@ import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PDFDocument } from 'pdf-lib';
 
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
-import { FileGroup } from '@ksp/shared/interface';
+import { KspFile } from '@ksp/shared/interface';
+import { FileService } from '@ksp/shared/form/file-upload';
 
 @Component({
   templateUrl: './pdf-viewer.component.html',
@@ -14,40 +15,33 @@ import { FileGroup } from '@ksp/shared/interface';
 })
 export class PdfViewerComponent implements OnInit {
   pdfBytes: any;
+  src = '';
+  type = '';
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {
-      pdfType: number;
-      group: FileGroup;
-    }
+      title: string;
+      file: KspFile;
+    },
+    private fileService: FileService
   ) {}
 
   ngOnInit(): void {
-    this.modifyPdf();
+    const id = this.data.file.fileid;
+    this.fileService.downloadSchoolFile({ id }).subscribe((res: any) => {
+      const extension = this.data.file.filename.split('.')[1];
+      const src = atob(res?.filedata ?? '');
+      this.type = extension;
+      if (extension == 'pdf') {
+        this.modifyPdf(src);
+      } else {
+        this.src = src;
+      }
+    });
   }
 
-  async modifyPdf() {
-    const existingPdfBytes = await fetch(
-      'assets/pdf/school-temp-license.pdf'
-    ).then((res) => res.arrayBuffer());
-
-    const pdfDoc = await PDFDocument.load(existingPdfBytes);
+  async modifyPdf(src: string) {
+    const pdfDoc = await PDFDocument.load(src);
     this.pdfBytes = await pdfDoc.save();
-
-    /*  const fontBytes = await fetch(
-      this.data.fontSrc || 'assets/font/ksp/ksp-regular.ttf'
-    ).then((res) => res.arrayBuffer());
-    pdfDoc.registerFontkit(fontkit);
-    const customFont = await pdfDoc.embedFont(fontBytes, { subset: false });
-
-    const pages = pdfDoc.getPages();
-    this.createPdf(pdf.input, pages, customFont);
-    this.pdfBytes = await pdfDoc.save(); */
   }
-
-  /*   createPdf(input: IKspInput[][], pages: PDFPage[], customFont: PDFFont) {
-    for (const index in pages) {
-      if (!input[index]) return;
-    }
-  } */
 }

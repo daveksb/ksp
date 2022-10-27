@@ -43,6 +43,11 @@
             "assets": [
               "apps/e-service/src/favicon.ico",
               {
+                "glob": "**/*",
+                "input": "node_modules/ngx-extended-pdf-viewer/assets/",
+                "output": "assets"
+              },
+              {
                 "input": "libs/shared/assets/src/assets",
                 "glob": "**/*",
                 "output": "./assets"
@@ -4688,6 +4693,11 @@
             "assets": [
               "apps/self-service/src/favicon.ico",
               {
+                "glob": "**/*",
+                "input": "node_modules/ngx-extended-pdf-viewer/assets/",
+                "output": "assets"
+              },
+              {
                 "input": "libs/shared/assets/src/assets",
                 "glob": "**/*",
                 "output": "./assets"
@@ -9175,6 +9185,11 @@
             "tsConfig": "apps/uni-service/tsconfig.app.json",
             "assets": [
               "apps/uni-service/src/favicon.ico",
+              {
+                "glob": "**/*",
+                "input": "node_modules/ngx-extended-pdf-viewer/assets/",
+                "output": "assets"
+              },
               {
                 "input": "libs/shared/assets/src/assets",
                 "glob": "**/*",

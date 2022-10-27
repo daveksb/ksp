@@ -28,8 +28,8 @@ export class FormMultiAttachmentComponent {
       width: '1200px',
       height: '100vh',
       data: {
-        pdfType: 1,
         title: group.name,
+        file: group.files[0],
       },
     });
   }
