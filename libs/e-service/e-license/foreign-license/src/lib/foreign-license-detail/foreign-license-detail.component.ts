@@ -8,7 +8,7 @@ import {
   KspApprovePayload,
   KspRequest,
   Prefix,
-  SchKuruspaNumber,
+  KspKuruspa,
   VisaType,
 } from '@ksp/shared/interface';
 import {
@@ -144,16 +144,16 @@ export class ForeignLicenseDetailComponent implements OnInit {
         switchMap((res) => {
           const data = this.form.controls.verifydetail.value as any;
           if (res && data.result === '2') {
-            const allowKey = Object.keys(new SchKuruspaNumber());
+            const allowKey = Object.keys(new KspKuruspa());
             let payload = _.pick(
               this.requestData,
               allowKey
-            ) as Partial<SchKuruspaNumber>;
+            ) as Partial<KspKuruspa>;
             payload.id = null;
             payload = replaceEmptyWithNull(payload);
             payload.createdate = formatDate(payload.createdate);
             payload.fileinfo = atob(payload?.fileinfo || '');
-            return this.eRequestService.createSchKuruspaNumber(payload);
+            return this.eRequestService.createKuruspaNumber(payload);
           }
           return EMPTY;
         })

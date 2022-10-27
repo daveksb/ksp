@@ -209,3 +209,41 @@ export function applyClientFilter(data: KspRequest[], param: any) {
 export function processFilter(data: KspRequest[], process = 1) {
   return data.filter((d) => Number(d.process) > process);
 }
+
+export function genKuruspaNo() {
+  const d1 = 6;
+  const d2 = 5;
+  const d3 = Math.floor(Math.random() * 10);
+  const d4 = Math.floor(Math.random() * 10);
+  const d5 = Math.floor(Math.random() * 10);
+  const d6 = Math.floor(Math.random() * 10);
+  const d7 = Math.floor(Math.random() * 10);
+  const d8 = Math.floor(Math.random() * 10);
+  const d9 = Math.floor(Math.random() * 10);
+  const d10 = Math.floor(Math.random() * 10);
+  const d11 = Math.floor(Math.random() * 10);
+  const d12 = Math.floor(Math.random() * 10);
+  let d13;
+  const n13 =
+    11 -
+    ((d1 * 13 +
+      d2 * 12 +
+      d3 * 11 +
+      d4 * 10 +
+      d5 * 9 +
+      d6 * 8 +
+      d7 * 7 +
+      d8 * 6 +
+      d9 * 5 +
+      d10 * 4 +
+      d11 * 3 +
+      d12 * 2) %
+      11);
+  if (n13 >= 10) {
+    d13 = n13 - 10;
+  } else {
+    d13 = n13;
+  }
+  const cid = `${d1}${d2}${d3}${d4}${d5}${d6}${d7}${d8}${d9}${d10}${d11}${d12}${d13}`;
+  return cid;
+}

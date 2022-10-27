@@ -7,7 +7,7 @@ import {
   KspApprovePayload,
   KspRequest,
   KspResponse,
-  SchKuruspaNumber,
+  KspKuruspa,
   SchUser,
   SelfRequest,
   UniUser,
@@ -106,7 +106,7 @@ export class ERequestService {
     );
   }
 
-  createSchKuruspaNumber(payload: Partial<SchKuruspaNumber>): Observable<any> {
+  createKuruspaNumber(payload: Partial<KspKuruspa>): Observable<any> {
     return this.http
       .post(`${environment.apiUrl}/e-service/schkuruspanoinsertupdate`, payload)
       .pipe(map((data: any) => data.datareturn));
