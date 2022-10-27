@@ -120,11 +120,11 @@
         </mat-tab>
 
         <mat-tab label="เอกสารหลักฐานประกอบ">
-          <ksp-form-attachment
-            [title]="'หลักฐานประกอบ'"
-            [groups]="evidenceFiles"
+          <ksp-form-multi-attachment
+            [groups]="attachFiles"
+            [pageType]="pageType.fileAttachTab"
             [mode]="'view'"
-          ></ksp-form-attachment>
+          ></ksp-form-multi-attachment>
         </mat-tab>
       </mat-tab-group>
     </div>

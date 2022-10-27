@@ -17,7 +17,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           },
         },
         {
-          key: 'mouth',
+          key: 'month',
           options: {
             x: 420,
             y: 595,

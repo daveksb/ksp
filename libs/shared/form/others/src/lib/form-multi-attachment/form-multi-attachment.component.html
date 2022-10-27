@@ -42,7 +42,9 @@
             </th>
             <td class="text-center">-</td>
             <td *ngIf="mode === 'view'" class="text-center">
-              <label class="view__label" (click)="view()">ดูเอกสารแนบ</label>
+              <label class="view__label" (click)="view(group.name)"
+                >ดูเอกสารแนบ</label
+              >
             </td>
             <td *ngIf="mode === 'edit'" class="text-center">
               <ksp-file-upload

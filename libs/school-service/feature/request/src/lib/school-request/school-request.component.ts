@@ -501,6 +501,7 @@ export class SchoolRequestComponent implements OnInit {
       );
     }
   }
+
   patchHiringInfo(data: any) {
     this.form.controls.hiringinfo.patchValue(data);
   }

@@ -23,12 +23,15 @@ export class FormMultiAttachmentComponent {
 
   constructor(public dialog: MatDialog, private fileService: FileService) {}
 
-  view() {
-    const dialogRef = this.dialog.open(FilesPreviewComponent, {
+  view(title: string) {
+    const dialog = this.dialog.open(FilesPreviewComponent, {
       width: '800px',
+      data: {
+        title,
+      },
     });
 
-    dialogRef.componentInstance.confirmed.subscribe((res) => {
+    dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         this.dialog.closeAll();
       }
@@ -51,6 +54,9 @@ export class FormMultiAttachmentComponent {
   }
 
   downloadFile(file: KspFile) {
+    if (this.mode === 'view') {
+      return;
+    }
     const id = file.fileid;
     //console.log(group);
     this.fileService.downloadFile({ id }).subscribe((res: any) => {

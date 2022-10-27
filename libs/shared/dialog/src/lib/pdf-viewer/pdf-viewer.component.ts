@@ -30,6 +30,7 @@ export class PdfViewerComponent implements OnInit {
       input: any;
     }
   ) {}
+
   ngOnInit(): void {
     if (this.data.pdfType) this.modifyPdf();
   }
@@ -52,6 +53,7 @@ export class PdfViewerComponent implements OnInit {
     this.createPdf(pdf.input, pages, customFont);
     this.pdfBytes = await pdfDoc.save();
   }
+
   createPdf(input: IKspInput[][], pages: PDFPage[], customFont: PDFFont) {
     for (const index in pages) {
       if (!input[index]) return;
