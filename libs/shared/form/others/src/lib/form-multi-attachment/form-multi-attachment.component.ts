@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FileGroup, FormMode, KspFile } from '@ksp/shared/interface';
-import { FilesPreviewComponent, PdfRenderComponent } from '@ksp/shared/dialog';
+import { FilesPreviewComponent, PdfViewerComponent } from '@ksp/shared/dialog';
 import { FileService } from '@ksp/shared/form/file-upload';
 
 @Component({
@@ -10,12 +10,12 @@ import { FileService } from '@ksp/shared/form/file-upload';
   styleUrls: ['./form-multi-attachment.component.scss'],
 })
 export class FormMultiAttachmentComponent {
-  @Input() title = `กรุณาแนบหลักฐานประกอบ`;
   @Input() titleClass = ``;
   @Input() titleNote = '';
   @Input() pageType!: string; // ใช้ อ้างอิง tab ในหน้าใบคำขอเพื่อระบุรายการไฟล์ ที่เกี่ยวข้อง enum RequestPageType
   @Input() groups: FileGroup[] = [];
   @Input() mode: FormMode = 'edit';
+  @Input() title = 'กรุณาแนบหลักฐานประกอบ';
   @Input() uniqueTimestamp = '';
   @Input() requestType: number | null = null;
   @Output() downloadClick = new EventEmitter<any>();
@@ -24,7 +24,7 @@ export class FormMultiAttachmentComponent {
   constructor(public dialog: MatDialog, private fileService: FileService) {}
 
   view(title: string) {
-    this.dialog.open(PdfRenderComponent, {
+    this.dialog.open(PdfViewerComponent, {
       width: '1200px',
       height: '100vh',
       data: {

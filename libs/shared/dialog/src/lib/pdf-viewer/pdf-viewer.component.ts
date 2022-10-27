@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import { PDFDocument, PDFFont, PDFPage } from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
@@ -9,16 +8,10 @@ import { IKspInput, kspPdfMapping } from '@ksp/shared/interface';
 import _ from 'lodash';
 
 @Component({
-  //selector: 'ksp-pdf-viewer-preview',
   templateUrl: './pdf-viewer.component.html',
   styleUrls: ['./pdf-viewer.component.scss'],
   standalone: true,
-  imports: [
-    CommonModule,
-    LicenseCheckComponent,
-    MatDialogModule,
-    NgxExtendedPdfViewerModule,
-  ],
+  imports: [CommonModule, MatDialogModule, NgxExtendedPdfViewerModule],
 })
 export class PdfViewerComponent implements OnInit {
   pdfBytes: any;

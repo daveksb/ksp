@@ -109,6 +109,13 @@
           </div>
 
           <ksp-form-temp-license-number></ksp-form-temp-license-number>
+
+          <ksp-form-multi-attachment
+            [pageType]="pageType.teachingTab"
+            [groups]="teachingFiles"
+            title="หลักฐานประกอบ"
+            [mode]="'view'"
+          ></ksp-form-multi-attachment>
         </mat-tab>
 
         <mat-tab label="ข้อมูลชี้แจงเหตุผล">
@@ -117,12 +124,19 @@
             formControlName="reasoninfo"
             [mode]="'view'"
           ></ksp-form-reason-info>
+          <ksp-form-multi-attachment
+            [pageType]="pageType.reasonTab"
+            [groups]="reasonFiles"
+            title="หลักฐานประกอบ"
+            [mode]="'view'"
+          ></ksp-form-multi-attachment>
         </mat-tab>
 
         <mat-tab label="เอกสารหลักฐานประกอบ">
           <ksp-form-multi-attachment
             [groups]="attachFiles"
             [pageType]="pageType.fileAttachTab"
+            title="หลักฐานประกอบ"
             [mode]="'view'"
           ></ksp-form-multi-attachment>
         </mat-tab>

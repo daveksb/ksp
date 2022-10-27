@@ -5,7 +5,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   levels,
   RequestAttachFiles,
+  RequestEduFiles,
   RequestPageType,
+  RequestReasonFiles,
+  RequestTeachingFiles,
   subjects,
   UserInfoFormType,
 } from '@ksp/shared/constant';
@@ -44,7 +47,12 @@ export class KspApprovePersistData {
 export class ETempLicenseDetailComponent implements OnInit {
   verifyChoice: any[] = [];
   selectedTabIndex = 0;
+
+  eduFiles: FileGroup[] = RequestEduFiles;
+  teachingFiles: FileGroup[] = RequestTeachingFiles;
+  reasonFiles: FileGroup[] = RequestReasonFiles;
   attachFiles: FileGroup[] = RequestAttachFiles;
+
   amphurs1$!: Observable<Amphur[]>;
   tumbols1$!: Observable<Tambol[]>;
   amphurs2$!: Observable<Amphur[]>;
@@ -154,16 +162,18 @@ export class ETempLicenseDetailComponent implements OnInit {
         (group, index) => (group.files = res.tab4[index])
       );
     }
+    */
     if (res && res.tab5 && Array.isArray(res.tab5)) {
       this.reasonFiles.forEach(
         (group, index) => (group.files = res.tab5[index])
       );
-    } */
+    }
     if (res && res.tab6 && Array.isArray(res.tab6)) {
       this.attachFiles.forEach(
         (group, index) => (group.files = res.tab6[index])
       );
     }
+    console.log('attach files = ', this.attachFiles);
   }
 
   patchReasonInfo(res: any) {
