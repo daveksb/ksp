@@ -31,7 +31,7 @@ const routes: Routes = [
         component: EBestTeacherListComponent,
       },
       {
-        path: 'detail',
+        path: 'detail/:id',
         component: EBestTeacherDetailComponent,
       },
     ],

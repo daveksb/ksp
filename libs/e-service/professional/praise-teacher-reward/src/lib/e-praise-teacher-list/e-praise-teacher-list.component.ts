@@ -59,8 +59,8 @@ export class EPraiseTeacherListComponent implements OnInit {
     this.dataSource.data = [];
   }
 
-  view() {
-    this.router.navigate(['/praise-teacher', 'detail']);
+  view(id: number) {
+    this.router.navigate(['/praise-teacher', 'detail', id]);
   }
 }
 

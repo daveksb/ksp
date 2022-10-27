@@ -31,7 +31,7 @@ const routes: Routes = [
         component: EResearchRewardListComponent,
       },
       {
-        path: 'detail',
+        path: 'detail/:id',
         component: EResearchRewardDetailComponent,
       },
     ],

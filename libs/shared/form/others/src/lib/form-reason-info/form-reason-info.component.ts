@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -12,17 +12,19 @@ import { providerFactory } from '@ksp/shared/utility';
 export class FormReasonInfoComponent extends KspFormBaseComponent {
   @Input() careerType = 0;
 
-  teacherReasons = teacherReasons;
-  schoolReason1 = schoolReasons1;
-  schoolReason2 = schoolReasons2;
+  teacherReasonList = teacherReasonList;
+  schoolReasonList = schoolReasonsList;
 
   override form = this.fb.group({
+    schoolReasons: this.fb.array([]),
+    teacherReasons: this.fb.array([]),
     schoolOtherDetail: [],
     teacherOtherDetail: [],
   });
 
   constructor(private fb: FormBuilder) {
     super();
+    this.addCheckboxes();
     this.subscriptions.push(
       this.form?.valueChanges.subscribe((value) => {
         this.onChange(value);
@@ -30,9 +32,27 @@ export class FormReasonInfoComponent extends KspFormBaseComponent {
       })
     );
   }
+
+  private addCheckboxes() {
+    this.schoolReasonList.forEach(() =>
+      this.schoolReasons.push(this.fb.control([null]))
+    );
+
+    this.teacherReasonList.forEach(() =>
+      this.teacherReasons.push(this.fb.control([null]))
+    );
+  }
+
+  get schoolReasons() {
+    return this.form.controls.schoolReasons as FormArray;
+  }
+
+  get teacherReasons() {
+    return this.form.controls.teacherReasons as FormArray;
+  }
 }
 
-export const teacherReasons = [
+export const teacherReasonList = [
   {
     label:
       'สถาบันการศึกษาที่เปิดสอนในหลักสูตรที่ คุรุสภารับรองอยู่ห่างไกลที่พักไม่สะดวกต่อการเดินทาง',
@@ -66,7 +86,7 @@ export const teacherReasons = [
   { label: 'อื่นๆ', name: 'teacher6', value: false },
 ];
 
-export const schoolReasons1 = [
+export const schoolReasonsList = [
   {
     label: 'ผู้ขอประกอบวิชาชีพครูเป็นผู้มีความรู้ ความสามารถในการสอน',
     name: 'school1',

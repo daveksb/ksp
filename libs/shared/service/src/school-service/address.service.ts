@@ -37,7 +37,7 @@ export class AddressService {
       .get(`${environment.apiUrl}/kspmasterdata/tambol?amphurCode=${aid}`)
       .pipe(
         shareReplay(),
-        map((data: any) => data.datareturn)
+        map((data: any) => data?.datareturn)
       );
   }
 }

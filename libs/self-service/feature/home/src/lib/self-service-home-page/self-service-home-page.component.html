@@ -68,24 +68,26 @@
         <label class="form-label">สถานะการชำระเงิน</label>
         <select class="form-select">
           <option selected hidden disabled value="null">กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option value="1">ชำระเงินแล้ว</option>
+          <option value="2">รอชำระ</option>
         </select>
       </div>
       <div class="col-md mb-2">
         <label class="form-label">สถานะรายการ</label>
         <select class="form-select">
           <option selected hidden disabled value="null">กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option value="1">ผ่าน</option>
+          <option value="2">ขอเอกสารเพิ่มเติม</option>
+          <option value="3">ไม่ผ่าน</option>
         </select>
       </div>
     </div>
 
     <div class="d-flex justify-content-center mt-2">
-      <button class="btn btn-secondary me-2" (click)="clear()">
+      <button
+        class="btn border-secondary bg-light text-secondary me-2"
+        (click)="clear()"
+      >
         ล้างข้อมูล
       </button>
       <button class="btn btn-primary ms-2" (click)="search()">ค้นหา</button>
@@ -276,7 +278,10 @@
     </table>
     <table>
       <tr *ngIf="searchNotFound">
-        <td class="text-center fs-5" [attr.colspan]="displayedColumns.length">
+        <td
+          class="text-center text-danger fs-5"
+          [attr.colspan]="displayedColumns.length"
+        >
           ไม่พบข้อมูล
         </td>
       </tr>

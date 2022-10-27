@@ -7,7 +7,7 @@ import {
   KspRequest,
   Prefix,
   SchoolUserPageType,
-  SchUser,
+  UniUser
 } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
@@ -75,40 +75,44 @@ export class UserDetailComponent implements OnInit {
     this.eRequestService.getKspRequestById(id).subscribe((res) => {
       this.requestData = res;
       res.status === '1' ? (this.mode = 'edit') : (this.mode = 'view');
-      //console.log('status = ', res.status);
-      //console.log('mode = ', this.mode);
       if (res.birthdate) {
         res.birthdate = res.birthdate.split('T')[0];
       }
 
       this.form.controls.userInfo.patchValue(<any>res);
       const coordinator = parseJson(res.coordinatorinfo);
-      //console.log('coordinator = ', coordinator);
       this.setPassword = coordinator.password;
-      this.form.controls.coordinatorInfo.patchValue(coordinator.coordinator);
+      this.form.controls.coordinatorInfo.patchValue(coordinator);
     });
   }
 
   approveUser() {
     // change process and status of SCH_REQUEST
-    const newUser = new SchUser();
+    const newUser = new UniUser();
     newUser.idcardno = this.requestData.idcardno;
-    newUser.prefixth = this.requestData.prefixth;
-    newUser.schemail = this.requestData.email;
-    newUser.position = this.requestData.position;
     newUser.firstnameth = this.requestData.firstnameth;
     newUser.lastnameth = this.requestData.lastnameth;
-    newUser.schusername = this.requestData.schoolid;
-    newUser.schoolid = this.requestData.schoolid;
-    newUser.schpassword = this.setPassword;
-    newUser.schuseractive = '1';
+    newUser.email = this.requestData.email;
+    newUser.phone = this.requestData.contactphone;
+    newUser.birthdate = this.requestData.birthdate === "" ? null : this.requestData.birthdate;
+    newUser.username = this.requestData.idcardno;
+    newUser.password = this.setPassword;
+    newUser.isuseractive = "1"
+    newUser.position = this.requestData.position;
+    newUser.prefixth = this.requestData.prefixth;
+    newUser.prefixen = this.requestData.prefixen;
+    newUser.firstnameen = this.requestData.firstnameen;
+    newUser.lastnameen = this.requestData.lastnameen;
+    // newUser.coordinatorinfo = this.requestData.coordinatorinfo;
+    newUser.unitype = this.requestData.unitype;
+    newUser.requestno = this.requestData.requestno;
 
     const approvePayload: KspApprovePayload = {
       requestid: `${this.requestId}`,
       process: '1',
       status: '2',
       detail: null,
-      systemtype: '3', // school
+      systemtype: '3', // uni
       userid: null,
       paymentstatus: null,
     };
@@ -119,7 +123,7 @@ export class UserDetailComponent implements OnInit {
         console.log('approve result = ', res);
       });
 
-    this.eRequestService.createSchUser(newUser).subscribe(() => {
+    this.eRequestService.createUniUser(newUser).subscribe(() => {
       this.completeDialog();
     });
   }
@@ -130,7 +134,7 @@ export class UserDetailComponent implements OnInit {
       process: '1',
       status: '3',
       detail: null,
-      systemtype: '3', // school
+      systemtype: '3', // uni
       userid: null,
       paymentstatus: null,
     };

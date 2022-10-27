@@ -132,10 +132,14 @@ export class UniRegisterPasswordComponent implements OnInit {
         btnLabel: 'บันทึก',
       },
     });
+    
+    // waiting api for encoding password
+    // const password = CryptoJs.SHA256(
+    //   `${this.form?.value?.password}`
+    // ).toString();
 
-    const password = CryptoJs.SHA256(
-      `${this.form?.value?.password}`
-    ).toString();
+    // save raw password
+    const password = this.form?.value?.password;
 
     confirmDialog.componentInstance.confirmed
       .pipe(
@@ -165,7 +169,6 @@ export class UniRegisterPasswordComponent implements OnInit {
             payload.status = '1';
             payload.process = '1';
             // payload.userpermission = this.savingData.permission;
-            payload.userid = getCookie('userId');
             payload.currentprocess = this.currentprocess;
             return this.requestService.createRequestKsp(payload);
           }

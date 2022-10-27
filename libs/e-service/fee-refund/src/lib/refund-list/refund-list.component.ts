@@ -67,8 +67,8 @@ export class RefundListComponent {
     this.router.navigate(['/refund', 'confirm']);
   }
 
-  verify() {
-    this.router.navigate(['/refund', 'detail']);
+  verify(id: number) {
+    this.router.navigate(['/refund', 'detail', id]);
   }
 }
 

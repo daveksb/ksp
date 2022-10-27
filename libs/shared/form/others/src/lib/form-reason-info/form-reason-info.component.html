@@ -11,8 +11,17 @@
       </div>
     </div>
 
-    <ng-container *ngIf="careerType === 1 || careerType === 5">
-      <ng-container *ngFor="let item of schoolReason1">
+    <ng-container
+      formArrayName="schoolReasons"
+      *ngFor="let item of schoolReasons.controls; let i = index"
+    >
+      <div class="d-flex align-items-center mb-2">
+        <input class="me-2" [formControlName]="i" type="checkbox" />
+        <label class="form-label">{{ schoolReasonList[i].label }}</label>
+      </div>
+    </ng-container>
+    <!--     <ng-container *ngIf="careerType === 1 || careerType === 5">
+      <ng-container *ngFor="let item of schoolReasons.controls">
         <div class="d-flex align-items-center mb-2">
           <input
             class="me-2"
@@ -24,7 +33,7 @@
       </ng-container></ng-container
     >
     <ng-container *ngIf="careerType === 2">
-      <ng-container *ngFor="let item of schoolReason2">
+      <ng-container *ngFor="let item of schoolReasons.controls; let i = index">
         <div class="d-flex align-items-center mb-2">
           <input
             class="me-2"
@@ -34,7 +43,7 @@
           <label class="form-label">{{ item.label }}</label>
         </div>
       </ng-container></ng-container
-    >
+    > -->
 
     <div class="mx-4">
       <textarea
@@ -55,10 +64,13 @@
       </div>
     </div>
 
-    <ng-container *ngFor="let item of teacherReasons">
+    <ng-container
+      formArrayName="teacherReasons"
+      *ngFor="let item of teacherReasons.controls; let i = index"
+    >
       <div class="d-flex align-items-center mb-2">
-        <input class="me-2" formControlName="{{ item.name }}" type="checkbox" />
-        <label class="form-label">{{ item.label }}</label>
+        <input class="me-2" [formControlName]="i" type="checkbox" />
+        <label class="form-label">{{ teacherReasonList[i].label }}</label>
       </div>
     </ng-container>
 

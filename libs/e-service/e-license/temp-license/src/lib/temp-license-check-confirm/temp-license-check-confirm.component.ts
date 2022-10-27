@@ -40,8 +40,6 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   ngOnInit(): void {
     this.form.valueChanges.subscribe((res) => {
       console.log(res.approvement);
-
-      //this.selectResult.emit(res.result);
     });
 
     localForage.getItem('checkRequestData').then((res: any) => {
@@ -54,31 +52,47 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   }
 
   checkApproveResult(input: approveResult) {
+    const req = this.saveData.requestData;
     if (input.result === '1') {
+      //ครบถ้วน และถูกต้อง
       if (input.shouldForward === '1') {
-        this.targetProcess = Number(this.saveData.requestData.process);
+        //ไม่ส่งตรวจสอบลำดับต่อไป
+        if (req.process === '2') {
+          this.targetProcess = Number(req.process) + 1;
+        } else {
+          this.targetProcess = Number(req.process);
+        }
         this.targetStatus = 3;
       } else if (input.shouldForward === '2') {
+        //ส่งตรวจสอบลำดับต่อไป
+        this.targetProcess = Number(req.process) + 1;
         this.targetStatus = 1;
-        this.targetProcess = Number(this.saveData.requestData.process) + 1;
       } else if (input.shouldForward === '4') {
-        this.targetProcess = 4;
+        //ส่งเรื่องพิจารณา
+        this.targetProcess = 5;
         this.targetStatus = 1;
       }
     } else if (input.result === '2') {
-      this.targetProcess = Number(this.saveData.requestData.process) + 1;
+      //ขอแก้ไข / เพิ่มเติม
+      this.targetProcess = Number(req.process) + 1;
       this.targetStatus = 2;
     } else if (input.result === '3') {
-      this.targetProcess = Number(this.saveData.requestData.process);
+      if (req.process === '2') {
+        this.targetProcess = Number(req.process) + 1;
+      } else {
+        this.targetProcess = Number(req.process);
+      }
       if (input.shouldForward === '3') {
-        this.targetStatus = 3;
+        //ไม่ผ่านการตรวจสอบ เนื่องจากไม่ครบถ้วน / ไม่ถูกต้อง
+        this.targetStatus = 4;
       } else if (input.shouldForward === '5') {
+        //ยกเลิก
         this.targetStatus = 5;
       }
     }
   }
 
-  save() {
+  checkRequest() {
     this.checkApproveResult(<any>this.form.value.approvement);
     //console.log('save data = ', this.saveData);
     //console.log('form = ', this.selectResult);
@@ -96,7 +110,29 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
 
     this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
       console.log('result = ', res.app);
-      this.cancel();
+      this.navigateBack();
+    });
+  }
+
+  considerRequest() {
+    console.log('consider request  = ');
+
+    const form: any = this.form.value.approvement;
+    const payload: KspApprovePayload = {
+      requestid: this.saveData.requestData.id,
+      process: '5',
+      status: `${form.result}`,
+      detail: JSON.stringify(this.saveData.checkDetail),
+      systemtype: '2',
+      userid: null,
+      paymentstatus: null,
+    };
+
+    console.log('payload = ', payload);
+
+    this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
+      //console.log('result = ', res.app);
+      this.navigateBack();
     });
   }
 
@@ -112,7 +148,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
     });
   }
 
-  cancel() {
+  navigateBack() {
     this.router.navigate(['/temp-license', 'list']);
   }
 
@@ -130,7 +166,11 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
 
     dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.save();
+        if (this.saveData.requestData.process === '5') {
+          this.considerRequest();
+        } else {
+          this.checkRequest();
+        }
       }
     });
   }

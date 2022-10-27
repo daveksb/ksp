@@ -1,4 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
+import {
+  AfterContentChecked,
+  ChangeDetectorRef,
+  Component,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
@@ -16,13 +21,13 @@ import { lastValueFrom } from 'rxjs';
   templateUrl: './degree-cert-request.component.html',
   styleUrls: ['./degree-cert-request.component.scss'],
 })
-export class DegreeCertRequestComponent {
+export class DegreeCertRequestComponent implements AfterContentChecked {
   @ViewChild('stepper') private stepper?: MatStepper;
   id?: string;
   requestNo = '';
   date = thaiDate(new Date());
 
-  step1DegreeType = '';
+  step1DegreeType!: string;
 
   step1Form: any = this.fb.group({
     step1: [],
@@ -46,10 +51,16 @@ export class DegreeCertRequestComponent {
     private fb: FormBuilder,
     private uniInfoService: UniInfoService,
     private uniRequestService: UniRequestService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private cdref: ChangeDetectorRef
   ) {
     this.initForm();
   }
+
+  ngAfterContentChecked() {
+    this.cdref.detectChanges();
+  }
+
   async initForm() {
     this.id = this.activatedRoute.snapshot.queryParams['id'];
     let uniRequestDegree;

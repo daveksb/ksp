@@ -107,6 +107,7 @@
 
     <ng-container *ngIf="educationTypes === 'supervision'">
       <ksp-education-level-form-one
+        [isSupervision]="true"
         *ngIf="selectedEducationType === 0"
         formControlName="educationLevelForm"></ksp-education-level-form-one>
       <ksp-education-level-form-six

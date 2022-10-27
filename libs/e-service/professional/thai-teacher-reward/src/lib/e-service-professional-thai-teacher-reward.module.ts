@@ -15,6 +15,12 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { EServiceRewardSearchComponent } from '@ksp/shared/search';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
+import {
+  ValidateKspRequestComponent,
+  ConsiderKspRequestComponent,
+} from '@ksp/e-service/e-license/approve-ksp-request';
+import { EThaiTeacherConfirmComponent } from './e-thai-teacher-confirm/e-thai-teacher-confirm.component';
 
 const routes: Routes = [
   {
@@ -31,8 +37,12 @@ const routes: Routes = [
         component: EThaiTeacherListComponent,
       },
       {
-        path: 'detail',
+        path: 'detail/:id',
         component: EThaiTeacherDetailComponent,
+      },
+      {
+        path: 'confirm/:id',
+        component: EThaiTeacherConfirmComponent,
       },
     ],
   },
@@ -54,8 +64,14 @@ const routes: Routes = [
     SelfServiceFormModule,
     EServiceRewardSearchComponent,
     ThaiDatePipe,
+    LicenseCheckComponent,
+    ValidateKspRequestComponent,
   ],
-  declarations: [EThaiTeacherListComponent, EThaiTeacherDetailComponent],
+  declarations: [
+    EThaiTeacherListComponent,
+    EThaiTeacherDetailComponent,
+    EThaiTeacherConfirmComponent,
+  ],
   exports: [EThaiTeacherListComponent, EThaiTeacherDetailComponent],
 })
 export class EServiceProfessionalThaiTeacherRewardModule {}
