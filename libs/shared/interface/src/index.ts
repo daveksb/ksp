@@ -31,8 +31,9 @@ export * from './lib/ksp-menu-config';
 export * from './lib/ksp-general';
 export * from './lib/ksp-search';
 export * from './lib/ksp-approve-persist-data';
+export * from './lib/ksp-pdf-mapping';
+export * from './lib/ksp-kuruspa';
 
 export * from './lib/uni-service-import-type';
 export * from './lib/university-select';
 export * from './lib/uni-user';
-export * from './lib/ksp-pdf-mapping';

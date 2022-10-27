@@ -8,7 +8,7 @@ import {
   KspApprovePayload,
   KspRequest,
   Prefix,
-  SchKuruspaNumber,
+  KspKuruspa,
   VisaType,
 } from '@ksp/shared/interface';
 import {
@@ -18,6 +18,7 @@ import {
 import { FormBuilder } from '@angular/forms';
 import {
   formatDate,
+  genKuruspaNo,
   replaceEmptyWithNull,
   thaiDate,
 } from '@ksp/shared/utility';
@@ -115,15 +116,17 @@ export class ForeignLicenseDetailComponent implements OnInit {
     this.router.navigate(['/foreign-license', 'list']);
   }
 
-  onConfirmed() {
-    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+  confirm() {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยืนยันข้อมูล
         และส่งใบคำขอ ใช่หรือไม่? `,
       },
     });
 
-    confirmDialog.componentInstance.confirmed
+    const kuruspaNo = genKuruspaNo();
+
+    dialog.componentInstance.confirmed
       .pipe(
         switchMap((res) => {
           if (res) {
@@ -142,40 +145,46 @@ export class ForeignLicenseDetailComponent implements OnInit {
           return EMPTY;
         }),
         switchMap((res) => {
-          const data = this.form.controls.verifydetail.value as any;
+          const data: any = this.form.controls.verifydetail.value;
           if (res && data.result === '2') {
-            const allowKey = Object.keys(new SchKuruspaNumber());
+            const allowKey = Object.keys(new KspKuruspa());
             let payload = _.pick(
               this.requestData,
               allowKey
-            ) as Partial<SchKuruspaNumber>;
+            ) as Partial<KspKuruspa>;
             payload.id = null;
             payload = replaceEmptyWithNull(payload);
             payload.createdate = formatDate(payload.createdate);
             payload.fileinfo = atob(payload?.fileinfo || '');
-            return this.eRequestService.createSchKuruspaNumber(payload);
+            payload.kuruspano = kuruspaNo;
+            return this.eRequestService.createKuruspaNumber(payload);
+          }
+          return EMPTY;
+        }),
+        switchMap((res) => {
+          if (res) {
+            return this.eRequestService.updateRequestKuruspaNo(
+              Number(this.requestData.requestid),
+              kuruspaNo
+            );
           }
           return EMPTY;
         })
       )
-      .subscribe((res) => {
-        if (res) {
-          this.onCompleted();
-        }
+      .subscribe(() => {
+        this.onCompleted();
       });
   }
 
   onCompleted() {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
       },
     });
 
-    completeDialog.componentInstance.completed.subscribe((res) => {
-      if (res) {
-        this.router.navigate(['/foreign-license', 'list']);
-      }
+    dialog.componentInstance.completed.subscribe(() => {
+      this.router.navigate(['/foreign-license', 'list']);
     });
   }
 }
