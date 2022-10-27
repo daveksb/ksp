@@ -107,9 +107,20 @@ export class ERequestService {
   }
 
   createKuruspaNumber(payload: Partial<KspKuruspa>): Observable<any> {
-    return this.http
-      .post(`${environment.apiUrl}/e-service/schkuruspanoinsertupdate`, payload)
-      .pipe(map((data: any) => data.datareturn));
+    return this.http.post(
+      `${environment.apiUrl}/e-service/schkuruspanoinsertupdate`,
+      payload
+    );
+  }
+
+  updateRequestKuruspaNo(
+    requestid: number,
+    kuruspano: string
+  ): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/e-service/xxxx`, {
+      requestid,
+      kuruspano,
+    });
   }
 
   createUniUser(payload: UniUser): Observable<any> {
