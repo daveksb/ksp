@@ -2,7 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { levels, subjects, UserInfoFormType } from '@ksp/shared/constant';
+import {
+  levels,
+  RequestAttachFiles,
+  RequestEduFiles,
+  RequestPageType,
+  RequestReasonFiles,
+  RequestTeachingFiles,
+  subjects,
+  UserInfoFormType,
+} from '@ksp/shared/constant';
 
 import {
   AddressService,
@@ -38,7 +47,11 @@ export class KspApprovePersistData {
 export class ETempLicenseDetailComponent implements OnInit {
   verifyChoice: any[] = [];
   selectedTabIndex = 0;
-  evidenceFiles: FileGroup[] = [];
+
+  eduFiles: FileGroup[] = RequestEduFiles;
+  teachingFiles: FileGroup[] = RequestTeachingFiles;
+  reasonFiles: FileGroup[] = RequestReasonFiles;
+  attachFiles: FileGroup[] = RequestAttachFiles;
 
   amphurs1$!: Observable<Amphur[]>;
   tumbols1$!: Observable<Tambol[]>;
@@ -52,6 +65,7 @@ export class ETempLicenseDetailComponent implements OnInit {
   requestId!: number;
   requestData = new KspRequest();
   userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form
+  pageType = RequestPageType;
 
   form = this.fb.group({
     userInfo: [],
@@ -79,7 +93,6 @@ export class ETempLicenseDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.verifyChoice = this.service.verifyChoice;
-    this.evidenceFiles = this.service.evidenceFiles;
     this.getList();
     this.checkRequestId();
     this.addCheckResultArray();
@@ -135,7 +148,31 @@ export class ETempLicenseDetailComponent implements OnInit {
       this.patchTeachingInfo(parseJson(res.teachinginfo));
       this.patchReasonInfo(parseJson(res.reasoninfo));
       this.patchSchoolAddrress(parseJson(res.schooladdrinfo));
+      this.patchFileInfo(parseJson(res.fileinfo));
     });
+  }
+
+  patchFileInfo(res: any) {
+    /*  if (res && res.tab3 && Array.isArray(res.tab3)) {
+      this.eduFiles.forEach((group, index) => (group.files = res.tab3[index]));
+    }
+    if (res && res.tab4 && Array.isArray(res.tab4)) {
+      this.teachingFiles.forEach(
+        (group, index) => (group.files = res.tab4[index])
+      );
+    }
+    */
+    if (res && res.tab5 && Array.isArray(res.tab5)) {
+      this.reasonFiles.forEach(
+        (group, index) => (group.files = res.tab5[index])
+      );
+    }
+    if (res && res.tab6 && Array.isArray(res.tab6)) {
+      this.attachFiles.forEach(
+        (group, index) => (group.files = res.tab6[index])
+      );
+    }
+    console.log('attach files = ', this.attachFiles);
   }
 
   patchReasonInfo(res: any) {

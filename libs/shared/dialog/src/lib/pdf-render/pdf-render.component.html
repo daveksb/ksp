@@ -2,8 +2,9 @@
   [src]="this.pdfBytes"
   [height]="'90vh'"
   [useBrowserLocale]="true"
+  [customToolbar]="additionalButtons"
 ></ngx-extended-pdf-viewer>
-<!-- <ng-template #additionalButtons>
+<ng-template #additionalButtons>
   <div id="toolbarViewer">
     <div id="toolbarViewerLeft">
       <pdf-toggle-sidebar></pdf-toggle-sidebar>
@@ -19,4 +20,4 @@
       <pdf-download></pdf-download>
     </div>
   </div>
-</ng-template> -->
+</ng-template>

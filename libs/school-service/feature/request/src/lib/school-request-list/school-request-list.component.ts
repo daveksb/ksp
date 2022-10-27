@@ -10,7 +10,7 @@ import {
   SchoolRequestSubType,
   SchoolRequestType,
 } from '@ksp/shared/constant';
-import { PdfViewerComponent } from '@ksp/shared/dialog';
+import { PdfRenderComponent } from '@ksp/shared/dialog';
 import { KspRequest, SchRequestSearchFilter } from '@ksp/shared/interface';
 import { SchoolInfoService, SchoolRequestService } from '@ksp/shared/service';
 import {
@@ -74,11 +74,9 @@ export class SchoolRequestListComponent implements AfterViewInit {
       row: '500',
     };
 
-    //this.searchParams = payload;
-
     this.requestService.schSearchRequest(payload).subscribe((res) => {
       if (res && res.length) {
-        console.log('res = ', res);
+        //console.log('res = ', res);
         this.searchNotFound = false;
         this.dataSource.data = res;
         this.dataSource.sort = this.sort;
@@ -142,10 +140,11 @@ export class SchoolRequestListComponent implements AfterViewInit {
   rewardPage(id = '') {
     this.router.navigate(['/request-reward', 'detail', id]);
   }
+
   renderPdf(element: any) {
     const date = new Date(element.requestdate);
     const thai = thaiDate(date);
-    const [day, mouth, year] = thai.split(' ');
+    const [day, month, year] = thai.split(' ');
     const name = element.firstnameth + ' ' + element.lastnameth;
     const phone = element.contactphone;
     const [
@@ -171,6 +170,7 @@ export class SchoolRequestListComponent implements AfterViewInit {
     this.schoolInfoService
       .getSchoolInfo(this.schoolId)
       .subscribe((res: any) => {
+        //console.log('res xx = ', res);
         const schoolname = res.schoolName;
         const bureauname = res.bureauName;
         const { address, moo, street, road, tumbon, fax } = res;
@@ -178,14 +178,14 @@ export class SchoolRequestListComponent implements AfterViewInit {
         const provincename = res.provinceName;
         const zipcode = res.zipCode;
         const telphone = res.telphone;
-        this.dialog.open(PdfViewerComponent, {
+        this.dialog.open(PdfRenderComponent, {
           width: '1200px',
           height: '100vh',
           data: {
             pdfType: 1,
             input: {
               day,
-              mouth,
+              month,
               year,
               schoolname,
               bureauname,
