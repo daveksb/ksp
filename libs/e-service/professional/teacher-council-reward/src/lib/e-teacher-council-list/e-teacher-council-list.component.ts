@@ -5,6 +5,7 @@ import { SelfServiceRequestType } from '@ksp/shared/constant';
 import {
   ESelfSearchPayload,
   EsSearchPayload,
+  SchRequestSearchFilter,
   SelfRequest,
 } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
@@ -26,22 +27,22 @@ export class ETeacherCouncilListComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  search() {
+  search(params: Partial<SchRequestSearchFilter>) {
     let payload: EsSearchPayload = {
       systemtype: '1',
       requesttype: SelfServiceRequestType.ขอรับรางวัลคุรุสภา,
-      requestno: null,
+      requestno: params.requestno,
       careertype: null,
-      name: null,
-      idcardno: null,
+      name: params.name,
+      idcardno: params.idcardno,
       passportno: null,
       process: null,
       status: null,
       schoolid: null,
       schoolname: null,
       bureauid: null,
-      requestdatefrom: null,
-      requestdateto: null,
+      requestdatefrom: params.requestdatefrom,
+      requestdateto: params.requestdateto,
       offset: '0',
       row: '1000',
     };
