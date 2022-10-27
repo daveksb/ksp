@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormArray, FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ERewardFormBaseComponent } from '@ksp/self-service/form';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import { SelfRequest } from '@ksp/shared/interface';
 import {
@@ -11,12 +12,17 @@ import {
 import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
+const FORM_TAB_COUNT = 7;
+
 @Component({
   selector: 'ksp-e-praise-teacher-detail',
   templateUrl: './e-praise-teacher-detail.component.html',
   styleUrls: ['./e-praise-teacher-detail.component.scss'],
 })
-export class EPraiseTeacherDetailComponent implements OnInit {
+export class EPraiseTeacherDetailComponent
+  extends ERewardFormBaseComponent
+  implements OnInit
+{
   userInfoType = UserInfoFormType.thai;
 
   provinces1$!: Observable<any>;
@@ -27,7 +33,6 @@ export class EPraiseTeacherDetailComponent implements OnInit {
   tumbols2$!: Observable<any>;
   bureaus$!: Observable<any>;
   prefixList$!: Observable<any>;
-  requestId!: number;
 
   form = this.fb.group({
     userInfo: [],
@@ -42,19 +47,35 @@ export class EPraiseTeacherDetailComponent implements OnInit {
     fax: [],
     email: [],
     website: [],
+    checkResult: this.fb.array([]),
   });
+
+  get checkResultFormArray() {
+    return this.form.controls.checkResult as FormArray;
+  }
 
   constructor(
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService,
     private route: ActivatedRoute,
     private requestService: ERequestService,
-    private addressService: AddressService
-  ) {}
+    private addressService: AddressService,
+    private router: Router
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
+    this.verifyChoice = this.VERIFY_CHOICES;
     this.getListData();
     this.checkRequestId();
+    this.addCheckResultArray();
+  }
+
+  addCheckResultArray() {
+    for (let i = 0; i < FORM_TAB_COUNT; i++) {
+      this.checkResultFormArray.push(this.fb.control([]));
+    }
   }
 
   getListData() {
@@ -157,5 +178,10 @@ export class EPraiseTeacherDetailComponent implements OnInit {
         website,
       });
     }
+  }
+
+  next() {
+    this.persistData(this.form.controls.checkResult.value);
+    this.router.navigate(['/praise-teacher', 'confirm', this.requestId]);
   }
 }
