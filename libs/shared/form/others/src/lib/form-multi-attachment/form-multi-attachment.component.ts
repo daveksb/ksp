@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FileGroup, FormMode, KspFile } from '@ksp/shared/interface';
-import { FilesPreviewComponent } from '@ksp/shared/dialog';
+import { FilesPreviewComponent, PdfRenderComponent } from '@ksp/shared/dialog';
 import { FileService } from '@ksp/shared/form/file-upload';
 
 @Component({
@@ -24,6 +24,17 @@ export class FormMultiAttachmentComponent {
   constructor(public dialog: MatDialog, private fileService: FileService) {}
 
   view(title: string) {
+    this.dialog.open(PdfRenderComponent, {
+      width: '1200px',
+      height: '100vh',
+      data: {
+        pdfType: 1,
+        title,
+      },
+    });
+  }
+
+  /*   view(title: string) {
     const dialog = this.dialog.open(FilesPreviewComponent, {
       width: '800px',
       data: {
@@ -36,7 +47,7 @@ export class FormMultiAttachmentComponent {
         this.dialog.closeAll();
       }
     });
-  }
+  } */
 
   deleteFile(file: KspFile) {
     const payload = {

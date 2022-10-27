@@ -10,7 +10,7 @@ import {
   SchoolRequestSubType,
   SchoolRequestType,
 } from '@ksp/shared/constant';
-import { PdfViewerComponent } from '@ksp/shared/dialog';
+import { PdfRenderComponent } from '@ksp/shared/dialog';
 import { KspRequest, SchRequestSearchFilter } from '@ksp/shared/interface';
 import { SchoolInfoService, SchoolRequestService } from '@ksp/shared/service';
 import {
@@ -178,7 +178,7 @@ export class SchoolRequestListComponent implements AfterViewInit {
         const provincename = res.provinceName;
         const zipcode = res.zipCode;
         const telphone = res.telphone;
-        this.dialog.open(PdfViewerComponent, {
+        this.dialog.open(PdfRenderComponent, {
           width: '1200px',
           height: '100vh',
           data: {

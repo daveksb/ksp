@@ -9,9 +9,9 @@ import { IKspInput, kspPdfMapping } from '@ksp/shared/interface';
 import _ from 'lodash';
 
 @Component({
-  //selector: 'ksp-pdf-viewer-preview',
-  templateUrl: './pdf-viewer.component.html',
-  styleUrls: ['./pdf-viewer.component.scss'],
+  selector: 'ksp-pdf-viewer-preview',
+  templateUrl: './pdf-render.component.html',
+  styleUrls: ['./pdf-render.component.scss'],
   standalone: true,
   imports: [
     CommonModule,
@@ -20,7 +20,7 @@ import _ from 'lodash';
     NgxExtendedPdfViewerModule,
   ],
 })
-export class PdfViewerComponent implements OnInit {
+export class PdfRenderComponent implements OnInit {
   pdfBytes: any;
   constructor(
     @Inject(MAT_DIALOG_DATA)
