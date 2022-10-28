@@ -154,7 +154,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
             ) as Partial<KspKuruspa>;
             payload.id = null;
             payload = replaceEmptyWithNull(payload);
-            //payload.createdate = formatDate(payload.createdate);
+            payload.createdate = formatDate(payload.createdate);
             payload.fileinfo = atob(payload?.fileinfo || '');
             payload.kuruspano = kuruspaNo;
             payload.requestid = this.requestData.requestid;
