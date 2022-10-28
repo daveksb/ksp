@@ -21,6 +21,7 @@ import {
   ValidateKspRequestComponent,
   ConsiderKspRequestComponent,
 } from '@ksp/e-service/e-license/approve-ksp-request';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const routes: Routes = [
   {
@@ -65,6 +66,7 @@ const routes: Routes = [
     ThaiDatePipe,
     LicenseCheckComponent,
     ValidateKspRequestComponent,
+    MatPaginatorModule,
   ],
   declarations: [
     ETeacherCouncilListComponent,

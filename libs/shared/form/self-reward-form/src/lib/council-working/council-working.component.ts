@@ -44,6 +44,10 @@ export class CouncilWorkingComponent
       }
     });
 
+    if (this.mode === 'view') {
+      this.form.disable();
+    }
+
     this.onChange(value);
     this.onTouched();
   }
