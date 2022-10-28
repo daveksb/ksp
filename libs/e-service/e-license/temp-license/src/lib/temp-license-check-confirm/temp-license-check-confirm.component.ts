@@ -13,6 +13,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import localForage from 'localforage';
 import { KspApprovePersistData } from '../e-temp-license-detail/e-temp-license-detail.component';
 import { Location } from '@angular/common';
+import { getCookie } from '@ksp/shared/utility';
 
 @UntilDestroy()
 @Component({
@@ -25,6 +26,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   saveData = new KspApprovePersistData();
   targetProcess!: number | null;
   targetStatus!: number | null;
+  userId = `${getCookie('userId')}`;
 
   form = this.fb.group({
     approvement: [],
@@ -104,7 +106,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
       status: `${this.targetStatus}`,
       detail: JSON.stringify(this.saveData.checkDetail),
       systemtype: '2', // school
-      userid: null,
+      userid: this.userId,
       paymentstatus: null,
     };
 
@@ -126,7 +128,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
       status: `${form.result}`,
       detail: JSON.stringify(this.saveData.checkDetail),
       systemtype: '2',
-      userid: null,
+      userid: this.userId,
       paymentstatus: null,
     };
 

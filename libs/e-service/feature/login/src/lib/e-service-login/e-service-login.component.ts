@@ -23,7 +23,7 @@ export class EServiceLoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.form.valueChanges.subscribe((res) => {
+    this.form.valueChanges.subscribe(() => {
       this.loginFail = false;
     });
   }
@@ -35,10 +35,11 @@ export class EServiceLoginComponent implements OnInit {
         return;
       }
       this.loginService.config = res;
-
+      //console.log('res hh = ', res);
       setCookie('userToken', res.usertoken, 1);
       setCookie('firstNameTh', res.firstnameth, 1);
       setCookie('lastNameTh', res.lastnameth, 1);
+      setCookie('userId', res.id, 1);
 
       this.router.navigate(['/landing']);
     });
