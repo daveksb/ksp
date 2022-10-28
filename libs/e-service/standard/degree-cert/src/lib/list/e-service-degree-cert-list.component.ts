@@ -176,7 +176,13 @@ export class EServiceDegreeCertListComponent
       }
     });
   }
+  isSelectConsider(){
+    return this.selection.selected.length > 0
+  }
 
+  isSelectApprove(){
+    return this.selection.selected.length > 0
+  }
   goToDetailPage(row:any) {
     if (this.pageType === 0) {
       this.router.navigate(['/degree-cert', 'check',row?.key]);

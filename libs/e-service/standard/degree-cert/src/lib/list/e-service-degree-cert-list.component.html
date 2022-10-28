@@ -2,7 +2,7 @@
   <span header>รายการขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา</span>
 </ksp-top-nav>
 
-<div class="bg-secondary bg-opacity-10 py-2 px-4  full-height full-width-2">
+<div class="bg-secondary bg-opacity-10 py-2 px-4 full-height full-width-2">
   <div class="fs-5">รายการขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา</div>
   <div class="bg-white p-3">
     <form [formGroup]="form">
@@ -22,7 +22,7 @@
     <div class="table__scroll">
       <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="select">
-          <th  [hidden]="showColumnSelect" mat-header-cell *matHeaderCellDef>
+          <th [hidden]="showColumnSelect" mat-header-cell *matHeaderCellDef>
             <!-- <mat-checkbox
               *ngIf="showActionButtons"
               (change)="$event ? masterToggle() : null"
@@ -50,7 +50,6 @@
             mat-cell
             *matCellDef="let element"
             (click)="goToDetailPage(element)"
-
           >
             {{ element.requestno }}
           </td>
@@ -157,6 +156,7 @@
         (click)="consider()"
         class="fs-6 btn btn-sm bg-orange"
         style="width: 300px"
+        [disabled]="!isSelectConsider()"
       >
         พิจารณาประเมินหลักสูตร (หลายรายการ)
       </button>
@@ -166,6 +166,7 @@
         (click)="approve()"
         class="fs-6 ms-3 btn btn-sm btn-primary"
         style="width: 300px"
+        [disabled]="!isSelectApprove()"
       >
         พิจารณารับรอง (หลายรายการ)
       </button>
