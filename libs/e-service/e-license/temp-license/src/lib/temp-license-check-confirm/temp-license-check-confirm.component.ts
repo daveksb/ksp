@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { approveResult } from '@ksp/e-service/e-license/approve-ksp-request';
@@ -12,6 +12,8 @@ import { ERequestService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import localForage from 'localforage';
 import { KspApprovePersistData } from '../e-temp-license-detail/e-temp-license-detail.component';
+import { Location } from '@angular/common';
+import { getCookie } from '@ksp/shared/utility';
 
 @UntilDestroy()
 @Component({
@@ -24,6 +26,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   saveData = new KspApprovePersistData();
   targetProcess!: number | null;
   targetStatus!: number | null;
+  userId = `${getCookie('userId')}`;
 
   form = this.fb.group({
     approvement: [],
@@ -33,6 +36,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
+    private location: Location,
     public dialog: MatDialog,
     private eRequestService: ERequestService
   ) {}
@@ -102,7 +106,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
       status: `${this.targetStatus}`,
       detail: JSON.stringify(this.saveData.checkDetail),
       systemtype: '2', // school
-      userid: null,
+      userid: this.userId,
       paymentstatus: null,
     };
 
@@ -115,7 +119,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   }
 
   considerRequest() {
-    console.log('consider request  = ');
+    //console.log('consider request  = ');
 
     const form: any = this.form.value.approvement;
     const payload: KspApprovePayload = {
@@ -124,7 +128,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
       status: `${form.result}`,
       detail: JSON.stringify(this.saveData.checkDetail),
       systemtype: '2',
-      userid: null,
+      userid: this.userId,
       paymentstatus: null,
     };
 
@@ -149,11 +153,16 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   }
 
   navigateBack() {
-    this.router.navigate(['/temp-license', 'list']);
+    if (this.saveData.requestData.requesttype === '6') {
+      this.router.navigate(['/qualification-approve', 'list']);
+    } else {
+      this.router.navigate(['/temp-license', 'list']);
+    }
   }
 
   prevPage() {
-    this.router.navigate(['/temp-license', 'detail', this.requestId]);
+    //this.router.navigate(['/temp-license', 'detail', this.requestId]);
+    this.location.back();
   }
 
   confirmDialog() {

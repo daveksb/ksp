@@ -169,7 +169,8 @@
     [isFirstPage]="true"
     [showCenterButtons]="true"
     [showSaveButton]="true"
-    (saveClicked)="saveClicked()"
-    (nextClicked)="saveClicked()"
+    (cancelClicked)="navigateBack()"
+    (saveClicked)="next()"
+    (nextClicked)="next()"
   ></ksp-bottom-nav>
 </div>

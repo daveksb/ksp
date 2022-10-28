@@ -1,6 +1,7 @@
 export class KspKuruspa {
   id: string | null = null;
   requestno: string | null = null;
+  requestid: string | null = null;
   createdate: string | null = null;
   expireddate: string | null = null;
   kuruspano: string | null = null;

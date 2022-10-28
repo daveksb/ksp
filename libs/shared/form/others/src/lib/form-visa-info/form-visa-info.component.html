@@ -4,8 +4,8 @@
       <label class="form-label">Visa Class</label>
       <select class="form-select" formControlName="visaclass">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
-        <option *ngFor="let c of visaTypeList" [value]="+c?.id">
-          {{ c?.nameEn }}
+        <option *ngFor="let c of visaTypeList" [value]="+c.id">
+          {{ c.nameEn }}
         </option>
       </select>
     </div>
@@ -13,8 +13,8 @@
       <label class="form-label">ประเภทวีซ่า</label>
       <select class="form-select" formControlName="visatype">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
-        <option *ngFor="let c of visaTypeList" [value]="+c?.id">
-          {{ c?.nameTh }}
+        <option *ngFor="let c of visaTypeList" [value]="+c.id">
+          {{ c.nameTh }}
         </option>
       </select>
     </div>
@@ -45,7 +45,7 @@
         class="form-control"
         type="text"
         disabled
-        [value]="form.controls.licenseid.value"
+        [value]="form.controls.kuruspano.value"
       />
     </div>
   </div>

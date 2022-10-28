@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
-import { KspRequest } from '@ksp/shared/interface';
+import {
+  FileGroup,
+  KspApprovePersistData,
+  KspRequest,
+} from '@ksp/shared/interface';
 import {
   AddressService,
   ERequestService,
@@ -10,7 +14,7 @@ import {
 } from '@ksp/shared/service';
 import { formatDate, parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
-
+import localForage from 'localforage';
 @Component({
   selector: 'ksp-e-qualification-approve-detail',
   templateUrl: './e-qualification-approve-detail.component.html',
@@ -20,8 +24,8 @@ export class EQualificationApproveDetailComponent implements OnInit {
   file = files;
   choice = verifyChoices;
 
-  requestDate = '';
-  requestNumber = '';
+  //requestDate = '';
+  //requestNumber = '';
   requestData = new KspRequest();
   userInfoFormdisplayMode: number = UserInfoFormType.thai;
 
@@ -53,6 +57,7 @@ export class EQualificationApproveDetailComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private router: Router,
     private route: ActivatedRoute,
     private eRequestService: ERequestService,
     private generalInfoService: GeneralInfoService,
@@ -63,6 +68,7 @@ export class EQualificationApproveDetailComponent implements OnInit {
     this.checkRequestId();
     this.getListData();
   }
+
   checkRequestId() {
     this.route.paramMap.subscribe((params) => {
       const requestId = Number(params.get('id'));
@@ -71,9 +77,26 @@ export class EQualificationApproveDetailComponent implements OnInit {
       }
     });
   }
-  saveClicked() {
-    console.log('test');
+
+  next() {
+    this.persistData();
+    this.router.navigate(['/temp-license', 'confirm', this.requestData.id]);
   }
+
+  navigateBack() {
+    this.router.navigate(['/qualification-approve', 'list']);
+  }
+
+  // save data to indexed db
+  persistData() {
+    //console.log('check sub result = ', checkSubResult);
+    const saveData: KspApprovePersistData = {
+      checkDetail: this.form.controls.checkResult.value,
+      requestData: this.requestData,
+    };
+    localForage.setItem('qualification-check-request-data', saveData);
+  }
+
   loadRequestData(id: number) {
     this.eRequestService.getKspRequestById(id).subscribe((res) => {
       if (res) {
@@ -155,6 +178,7 @@ export class EQualificationApproveDetailComponent implements OnInit {
     this.countries$ = this.addressService.getCountry();
     this.nationalitys$ = this.generalInfoService.getNationality();
   }
+
   getAmphurChanged(addrType: number, province: any) {
     if (province) {
       if (addrType === 1) {
@@ -164,6 +188,7 @@ export class EQualificationApproveDetailComponent implements OnInit {
       }
     }
   }
+
   getTumbon(addrType: number, amphur: any) {
     if (amphur) {
       if (addrType === 1) {
@@ -186,7 +211,7 @@ const verifyChoices = [
   },
 ];
 
-const files = [
+const files: FileGroup[] = [
   {
     name: 'หนังสือนำส่งจากหน่วยงานผู้ใช้',
     files: [],

@@ -96,17 +96,18 @@ export function toLowercaseProp(input: any) {
   }, {});
 }
 
-export function checkProcess(processId: number, requestType = 3) {
+export function checkProcess(processId: number, requestType: number) {
   const process = SchoolRequestProcess.find((p) => {
     return p.processId === processId && p.requestType === requestType;
   });
+  //console.log('process = ', process);
   return process;
 }
 
 export function checkStatus(
   processId: number,
   statusId: number,
-  requestType = 3
+  requestType: number
 ) {
   const process = checkProcess(processId, requestType);
   const status = process?.status.find((s) => {
