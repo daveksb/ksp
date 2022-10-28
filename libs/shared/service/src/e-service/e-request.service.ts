@@ -114,11 +114,11 @@ export class ERequestService {
   }
 
   updateRequestKuruspaNo(
-    requestid: number,
+    id: string | null,
     kuruspano: string
   ): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/e-service/xxxx`, {
-      requestid,
+    return this.http.post(`${environment.apiUrl}/e-service/updatekuruspano`, {
+      id,
       kuruspano,
     });
   }

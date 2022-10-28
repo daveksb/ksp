@@ -12,7 +12,8 @@ export function createDefaultVisaInfo(fb: FormBuilder) {
     visatype: [],
     visaclass: [],
     visaexpiredate: [],
-    licenseid: [],
+    kuruspano: [],
+    //licenseid: [],
   });
 }
 
