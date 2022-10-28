@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SelfServiceRequestType } from '@ksp/shared/constant';
@@ -15,9 +16,11 @@ import { replaceEmptyWithNull } from '@ksp/shared/utility';
   templateUrl: './e-research-reward-list.component.html',
   styleUrls: ['./e-research-reward-list.component.scss'],
 })
-export class EResearchRewardListComponent implements OnInit {
+export class EResearchRewardListComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private router: Router,
@@ -25,6 +28,10 @@ export class EResearchRewardListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+  }
 
   search(params: Partial<SchRequestSearchFilter>) {
     let payload: EsSearchPayload = {

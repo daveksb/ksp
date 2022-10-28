@@ -162,4 +162,8 @@ export class EResearchRewardDetailComponent
     this.persistData(this.form.controls.checkResult.value);
     this.router.navigate(['/research-reward', 'confirm', this.requestId]);
   }
+
+  cancel() {
+    this.router.navigate(['/research-reward']);
+  }
 }
