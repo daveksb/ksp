@@ -202,4 +202,8 @@ export class EBestTeacherDetailComponent
     this.persistData(this.form.controls.checkResult.value);
     this.router.navigate(['/best-teacher', 'confirm', this.requestId]);
   }
+
+  cancel() {
+    this.router.navigate(['/thai-teacher']);
+  }
 }
