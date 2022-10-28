@@ -205,4 +205,8 @@ export class EThaiTeacherDetailComponent
     this.persistData(this.form.controls.checkResult.value);
     this.router.navigate(['/thai-teacher', 'confirm', this.requestId]);
   }
+
+  cancel() {
+    this.router.navigate(['/thai-teacher']);
+  }
 }
