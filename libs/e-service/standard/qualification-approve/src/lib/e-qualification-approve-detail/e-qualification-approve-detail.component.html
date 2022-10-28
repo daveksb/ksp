@@ -169,6 +169,7 @@
     [isFirstPage]="true"
     [showCenterButtons]="true"
     [showSaveButton]="true"
+    (cancelClicked)="navigateBack()"
     (saveClicked)="next()"
     (nextClicked)="next()"
   ></ksp-bottom-nav>
