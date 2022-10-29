@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -28,10 +28,8 @@ import {
   styleUrls: ['./e-temp-license-list.component.scss'],
 })
 export class ETempLicenseListComponent implements AfterViewInit {
-  defaultForm = { requesttype: '3', careertype: '1' };
-  form = this.fb.group({
-    search: [this.defaultForm],
-  });
+  form!: any;
+  defaultForm: any;
 
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<KspRequest>();
@@ -61,6 +59,14 @@ export class ETempLicenseListComponent implements AfterViewInit {
 
   checkCareerType() {
     this.route.paramMap.subscribe((params) => {
+      this.defaultForm = {
+        requesttype: '3',
+        careertype: params.get('careertype'),
+      };
+      this.form = this.fb.group({
+        search: [this.defaultForm],
+      });
+
       if (params.get('careertype') === '5') {
         this.careerType = Number(params.get('careertype'));
         this.careerTypeList = careerTypeList.filter((i) => i.id === 5);
