@@ -26,6 +26,7 @@ export class PdfRenderComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA)
     public data: {
       pdfType: number;
+      pdfSubType: number;
       fontSrc: string;
       input: any;
     }
@@ -36,8 +37,9 @@ export class PdfRenderComponent implements OnInit {
   }
 
   async modifyPdf() {
+    const subType = this.data.pdfSubType ?? '1';
     const pdf = kspPdfMapping.find(
-      (item) => (item.pdfType = this.data.pdfType)
+      (item) => item.pdfType == this.data.pdfType && item.pdfSubType == subType
     );
     if (!pdf) return;
     const existingPdfBytes = await fetch(pdf?.pdfSrc).then((res) =>
@@ -55,16 +57,23 @@ export class PdfRenderComponent implements OnInit {
     this.pdfBytes = await pdfDoc.save();
   }
 
-  createPdf(input: IKspInput[][], pages: PDFPage[], customFont: PDFFont) {
+  createPdf(input: IKspInput[], pages: PDFPage[], customFont: PDFFont) {
     for (const index in pages) {
       if (!input[index]) return;
-      for (const param of input[index]) {
+      for (const param of input[index].text) {
         const dataRender = this.data.input[param.key] || '';
         pages[index].drawText(dataRender, {
           ...param.options,
           font: customFont,
         });
-        pages[index].drawSvgPath('M18 7L9.42857 17L6 13', { x: 45, y: 328 });
+      }
+      for (const param of input[index].svg) {
+        if (this.data.input[param.key]) {
+          console.log(param.options);
+          pages[index].drawSvgPath(param.svgPath, {
+            ...param.options,
+          });
+        }
       }
     }
   }

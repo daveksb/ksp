@@ -143,6 +143,8 @@ export class SchoolRequestListComponent implements AfterViewInit {
 
   renderPdf(element: any) {
     const date = new Date(element.requestdate);
+    const pdfType = element.requesttype;
+    const pdfSubType = +element.careertype;
     const thai = thaiDate(date);
     const [day, month, year] = thai.split(' ');
     const name = element.firstnameth + ' ' + element.lastnameth;
@@ -161,12 +163,22 @@ export class SchoolRequestListComponent implements AfterViewInit {
       id11,
       id12,
       id13,
-    ] = element.idcardno.split('');
+    ] = element?.idcardno?.split('') ?? [];
     const eduinfo = JSON.parse(element.eduinfo);
-    const edu1 = eduinfo.find((item: any) => (item.degreeLevel = '1'));
-    const degreename1 = edu1.degreeName;
-    const institution1 = edu1.institution;
-    const major1 = edu1.major;
+    const edu1 = eduinfo.find((item: any) => {
+      if (item?.degreeLevel) {
+        return item.degreeLevel === '1';
+      }
+      return false;
+    });
+    const degreename1 = edu1?.degreeName ?? '';
+    const institution1 = edu1?.institution ?? '';
+    const major1 = edu1?.major ?? '';
+    const nameen = element.firstnameen + ' ' + element.lastnameen;
+    let checkbox1 = false;
+    if (degreename1) {
+      checkbox1 = true;
+    }
     this.schoolInfoService
       .getSchoolInfo(this.schoolId)
       .subscribe((res: any) => {
@@ -182,7 +194,8 @@ export class SchoolRequestListComponent implements AfterViewInit {
           width: '1200px',
           height: '100vh',
           data: {
-            pdfType: 1,
+            pdfType,
+            pdfSubType,
             input: {
               day,
               month,
@@ -217,6 +230,8 @@ export class SchoolRequestListComponent implements AfterViewInit {
               degreename1,
               institution1,
               major1,
+              checkbox1,
+              nameen,
             },
           },
         });
