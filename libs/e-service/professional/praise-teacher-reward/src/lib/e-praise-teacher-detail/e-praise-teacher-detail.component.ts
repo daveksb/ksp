@@ -92,6 +92,7 @@ export class EPraiseTeacherDetailComponent
           .getKspRequestById(this.requestId)
           .subscribe((res) => {
             if (res) {
+              this.requestData = res;
               this.patchData(res);
             }
           });
@@ -183,5 +184,9 @@ export class EPraiseTeacherDetailComponent
   next() {
     this.persistData(this.form.controls.checkResult.value);
     this.router.navigate(['/praise-teacher', 'confirm', this.requestId]);
+  }
+
+  cancel() {
+    this.router.navigate(['/praise-teacher']);
   }
 }

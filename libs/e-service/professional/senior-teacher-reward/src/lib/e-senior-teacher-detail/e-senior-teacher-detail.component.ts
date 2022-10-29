@@ -183,4 +183,8 @@ export class ESeniorTeacherDetailComponent
     this.persistData(this.form.controls.checkResult.value);
     this.router.navigate(['/senior-teacher', 'confirm', this.requestId]);
   }
+
+  cancel() {
+    this.router.navigate(['/senior-teacher']);
+  }
 }

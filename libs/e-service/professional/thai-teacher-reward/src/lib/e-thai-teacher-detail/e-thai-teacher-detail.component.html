@@ -8,6 +8,7 @@
       <mat-tab-group
         class="tab-group"
         [selectedIndex]="0"
+        (selectedTabChange)="tabChanged($event)"
         animationDuration="0ms">
         <mat-tab label="ข้อมูลส่วนตัว">
           <ksp-form-user-info
@@ -119,6 +120,6 @@
     [colorMode]="'blue'"
     [showCenterButtons]="true"
     [showCancelButton]="true"
-    [showSaveButton]="true"
-    (nextClicked)="next()"></ksp-bottom-nav>
+    (nextClicked)="next()"
+    (cancelClicked)="cancel()"></ksp-bottom-nav>
 </div>

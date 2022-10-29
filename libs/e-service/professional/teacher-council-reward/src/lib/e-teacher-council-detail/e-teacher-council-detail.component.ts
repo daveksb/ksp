@@ -173,4 +173,8 @@ export class ETeacherCouncilDetailComponent
     this.persistData(this.form.controls.checkResult.value);
     this.router.navigate(['/teacher-council', 'confirm', this.requestId]);
   }
+
+  cancel() {
+    this.router.navigate(['/teacher-council']);
+  }
 }
