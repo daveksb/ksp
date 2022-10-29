@@ -39,7 +39,6 @@ export class PdfViewerComponent implements OnInit {
       }
     });
   }
-
   async modifyPdf(src: string) {
     const pdfDoc = await PDFDocument.load(src);
     this.pdfBytes = await pdfDoc.save();
