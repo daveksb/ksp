@@ -141,10 +141,10 @@ export class SchoolRequestListComponent implements AfterViewInit {
     this.router.navigate(['/request-reward', 'detail', id]);
   }
 
-  renderPdf(element: any) {
-    const date = new Date(element.requestdate);
+  renderPdf(element: KspRequest) {
+    const date = new Date(element.requestdate || '');
     const pdfType = element.requesttype;
-    const pdfSubType = +element.careertype;
+    const pdfSubType = element.careertype;
     const thai = thaiDate(date);
     const [day, month, year] = thai.split(' ');
     const name = element.firstnameth + ' ' + element.lastnameth;
@@ -164,7 +164,7 @@ export class SchoolRequestListComponent implements AfterViewInit {
       id12,
       id13,
     ] = element?.idcardno?.split('') ?? [];
-    const eduinfo = JSON.parse(element.eduinfo);
+    const eduinfo = JSON.parse(element.eduinfo || '');
     const edu1 = eduinfo.find((item: any) => {
       if (item?.degreeLevel) {
         return item.degreeLevel === '1';

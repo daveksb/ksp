@@ -1,6 +1,6 @@
 import { PDFPageDrawTextOptions, rgb } from 'pdf-lib';
 const black = rgb(0, 0, 0);
-const defaultSize = 14;
+const defaultSize = 13;
 export const kspPdfMapping: IKspPdfMapping[] = [
   {
     pdfType: 3,
@@ -9,6 +9,15 @@ export const kspPdfMapping: IKspPdfMapping[] = [
     input: [
       {
         text: [
+          {
+            key: 'schoolname',
+            options: {
+              x: 349,
+              y: 620,
+              size: defaultSize,
+              color: black,
+            },
+          },
           {
             key: 'day',
             options: {
@@ -48,7 +57,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'bureauname',
             options: {
-              x: 430,
+              x: 415,
               y: 535,
               size: defaultSize,
               color: black,
@@ -324,6 +333,15 @@ export const kspPdfMapping: IKspPdfMapping[] = [
     input: [
       {
         text: [
+          {
+            key: 'schoolname',
+            options: {
+              x: 349,
+              y: 620,
+              size: defaultSize,
+              color: black,
+            },
+          },
           {
             key: 'day',
             options: {
@@ -672,9 +690,9 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'schoolname',
             options: {
-              x: 210,
+              x: 185,
               y: 563,
-              size: defaultSize,
+              size: defaultSize - 3,
               color: black,
             },
           },
@@ -683,7 +701,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             options: {
               x: 410,
               y: 563,
-              size: defaultSize,
+              size: defaultSize - 3,
               color: black,
             },
           },
