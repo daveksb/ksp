@@ -13,7 +13,10 @@
       <ng-container
         *ngIf="idCardNo.invalid && (idCardNo.dirty || idCardNo.touched)"
       >
-        <span class="text-danger" *ngIf="idCardNo.errors?.['pattern']">
+        <span
+          class="text-danger"
+          *ngIf="idCardNo.errors?.['pattern'] || idCardNo.errors?.['idCardInvalid']"
+        >
           {{ validatorMessages.idCardNo }}
         </span>
       </ng-container>

@@ -9,7 +9,11 @@ import {
 import { FormMode, KspRequest, SchInfo } from '@ksp/shared/interface';
 import { EMPTY, switchMap } from 'rxjs';
 import localForage from 'localforage';
-import { thaiDate } from '@ksp/shared/utility';
+import {
+  thaiDate,
+  validatePassword,
+  validatorMessages,
+} from '@ksp/shared/utility';
 import * as CryptoJs from 'crypto-js';
 import { SchoolRequestService } from '@ksp/shared/service';
 
@@ -26,9 +30,13 @@ export class RegisterPasswordComponent implements OnInit {
   address: any;
   coordinator: any;
   savingData: any;
+  validatorMessages = validatorMessages;
 
   form = this.fb.group({
-    password: [null, [Validators.required, Validators.minLength(8)]],
+    password: [
+      null,
+      [Validators.required, Validators.minLength(8), validatePassword],
+    ],
     repassword: [null, [Validators.required, Validators.minLength(8)]],
   });
 
@@ -38,6 +46,14 @@ export class RegisterPasswordComponent implements OnInit {
     private fb: FormBuilder,
     private requestService: SchoolRequestService
   ) {}
+
+  get password() {
+    return this.form.controls.password;
+  }
+
+  get repassword() {
+    return this.form.controls.repassword;
+  }
 
   get disableBtn() {
     const { password, repassword } = this.form.getRawValue();
