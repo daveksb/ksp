@@ -13,6 +13,7 @@ export class RegisterCurrentUserComponent {
   activeUsers!: SchUser[];
   schoolInfo = new SchInfo();
   bureausList$!: Observable<any>;
+  searchEnd = false;
 
   constructor(
     public router: Router,
@@ -38,6 +39,7 @@ export class RegisterCurrentUserComponent {
       .searchSchUsers({ schoolid: school.schoolid })
       .subscribe((res) => {
         this.activeUsers = res;
+        this.searchEnd = true;
         //console.log('activeUsers = ', this.activeUsers);
       });
   }

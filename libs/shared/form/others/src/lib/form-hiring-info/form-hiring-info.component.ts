@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { skip } from 'rxjs';
+import moment from 'moment';
 
 @Component({
   selector: 'ksp-form-hiring-info',
@@ -27,8 +28,6 @@ export class FormHiringInfoComponent
     hiringContractNo: [],
     startDate: [null, Validators.required],
     endDate: [null, Validators.required],
-    hiringPeriodYear: [],
-    hiringPeriodMonth: [],
 
     hiringStatus: [], //radio
     hiringStartDate: [],
@@ -57,6 +56,30 @@ export class FormHiringInfoComponent
       this.form.controls.hiringEndDate.reset();
       this.form.controls.hiringCancelDate.reset();
     });
+
+    this.startDate.valueChanges.subscribe(() => {
+      this.calculateHiringPeriod();
+    });
+
+    this.endDate.valueChanges.subscribe(() => {
+      this.calculateHiringPeriod();
+    });
+  }
+
+  calculateHiringPeriod() {
+    const sDate = moment(this.startDate.value);
+    const eDate = moment(this.endDate.value);
+    console.log('start date = ', sDate);
+    const result = Math.abs(sDate.diff(eDate, 'years'));
+    console.log('period = ', result);
+  }
+
+  get startDate() {
+    return this.form.controls.startDate;
+  }
+
+  get endDate() {
+    return this.form.controls.endDate;
   }
 }
 

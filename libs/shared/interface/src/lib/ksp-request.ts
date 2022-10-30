@@ -56,6 +56,7 @@ export class KspRequest {
   prefixen: string | null = null;
   prefixth: string | null = null;
   process: string | null = null;
+  processupdatedate?: string | null = null;
   prohibitproperty: string | null = null;
   prohibitpropertyfile: string | null = null;
   reasoninfo: string | null = null;
