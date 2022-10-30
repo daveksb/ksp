@@ -69,7 +69,6 @@ export class PdfRenderComponent implements OnInit {
       }
       for (const param of input[index].svg) {
         if (this.data.input[param.key]) {
-          console.log(param.options);
           pages[index].drawSvgPath(param.svgPath, {
             ...param.options,
           });
