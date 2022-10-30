@@ -9,6 +9,6 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./uni-form-badge.component.scss'],
 })
 export class UniFormBadgeComponent {
-  @Input() mainTitle = '';
+  @Input() mainTitle!: any;
   @Input() subTitle = '';
 }
