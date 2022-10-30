@@ -22,15 +22,11 @@ export function createUserInfoForm(fb: FormBuilder) {
     id: [],
     idcardno: [
       '',
-      [Validators.required, Validators.pattern(idCardPattern), validateIdCard],
+      [validateIdCard, Validators.required, Validators.pattern(idCardPattern)],
     ],
     kuruspano: ['', [Validators.required, Validators.pattern(idCardPattern)]],
     isforeign: [null],
-    passportno: [
-      null,
-      //[Validators.required, Validators.pattern(passportPattern)],
-      [Validators.pattern(passportPattern)],
-    ],
+    passportno: [null, [Validators.pattern(passportPattern)]],
     passportstartdate: [],
     passportenddate: [],
 
