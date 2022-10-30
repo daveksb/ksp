@@ -73,6 +73,21 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
+  genAlertMessage(req: KspRequest) {
+    return `แจ้งเตือน เลขที่คำขอ: ${
+      req.requestno
+    } ถูกส่งคืน "ปรับแก้ไข/เพิ่มเติม"
+    กรุณาส่งกลับภายในวันที่ ${thaiDate(
+      new Date(req.processupdatedate || '')
+    )} มิฉะนั้นใบคำขอจะถูกยกเลิก `;
+
+    /*     this.viewRequest(
+      Number(req.requesttype),
+      Number(req.careertype),
+      Number(req.id)
+    ); */
+  }
+
   search(filters: Partial<SchRequestSearchFilter>) {
     //console.log('filters = ', filters);
     const payload: SchRequestSearchFilter = {
@@ -154,15 +169,19 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     });
   }
 
-  viewRequest(requestType: number, subType: number, requestId: number) {
+  viewRequest(
+    requestType: string | null,
+    subType: string | null,
+    requestId: string | null
+  ) {
     switch (requestType) {
-      case 4:
+      case '4':
         return this.foreignPage(`${requestId}`);
 
-      case 6:
-        return this.qualificationPage(requestId, subType);
+      case '6':
+        return this.qualificationPage(Number(requestId), Number(subType));
 
-      case 40:
+      case '40':
         return this.rewardPage(`${requestId}`);
     }
 
