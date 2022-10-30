@@ -86,8 +86,7 @@ export class SchoolRequestComponent implements OnInit {
   staffData = new SchStaff();
   careerType = SchoolRequestSubType.ครู; // 1 ไทย 2 ผู้บริหาร 3 ต่างชาติ
   requestLabel = '';
-  //requestProcess!: number;
-  //requestStatus!: number;
+
   disableTempSave = true;
   disableSave = true;
   disableCancel = true;
@@ -183,7 +182,7 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   cancelRequest() {
-    console.log('req data = ', this.requestData);
+    //console.log('req data = ', this.requestData);
     const payload: KspRequestProcess = {
       id: `${this.requestId}`,
       process: this.requestData.process,
@@ -294,7 +293,6 @@ export class SchoolRequestComponent implements OnInit {
     userInfo.ref1 = '2';
     userInfo.ref2 = '03';
     userInfo.ref3 = '1';
-
     userInfo.systemtype = '2';
     userInfo.requesttype = '3';
     userInfo.careertype = `${this.careerType}`;
@@ -385,6 +383,16 @@ export class SchoolRequestComponent implements OnInit {
       //console.log('userInfo valid = ', this.form.controls.userInfo.valid);
       //console.log('form valid = ', this.form.valid);
       //console.log('process = ', this.requestData.process);
+      const condition1 =
+        this.requestData.requesttype === '3' &&
+        this.requestData.process === '3' &&
+        this.requestData.status === '2';
+
+      const condition2 =
+        this.requestData.requesttype === '3' &&
+        this.requestData.process === '4' &&
+        this.requestData.status === '2';
+
       // สถานะ ยกเลิก disable ทุกอย่าง
       if (this.requestData.status === '0') {
         this.disableTempSave = true;
@@ -410,6 +418,11 @@ export class SchoolRequestComponent implements OnInit {
         //console.log('สถานะเป็นสร้างและส่งใบคำขอ ');
         this.disableTempSave = true;
         this.disableSave = true;
+      }
+      // formValid + สถานะเป็นส่งกลับเพื่อแก้ไข, บันทึกชั่วคราวได้ ส่งใบคำขอได้
+      else if (condition1 || condition2) {
+        this.disableTempSave = false;
+        this.disableSave = false;
       }
       // form invalid
       else {

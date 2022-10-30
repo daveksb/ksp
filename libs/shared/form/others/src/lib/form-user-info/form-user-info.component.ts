@@ -133,6 +133,11 @@ export class FormUserInfoComponent
         this.form.controls.idcardno.updateValueAndValidity();
       }
     }
+
+    if (this.mode === 'view') {
+      //console.log('xx clear validator = ');
+      this.form.clearValidators();
+    }
   }
 
   prefixChanged(evt: any) {

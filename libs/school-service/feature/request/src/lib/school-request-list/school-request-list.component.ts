@@ -74,18 +74,14 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
   }
 
   genAlertMessage(req: KspRequest) {
+    const detail: any = JSON.parse(req.detail || '');
+    //console.log('return date = ', detail.returndate);
     return `แจ้งเตือน เลขที่คำขอ: ${
       req.requestno
     } ถูกส่งคืน "ปรับแก้ไข/เพิ่มเติม"
     กรุณาส่งกลับภายในวันที่ ${thaiDate(
-      new Date(req.processupdatedate || '')
+      new Date(detail.returndate)
     )} มิฉะนั้นใบคำขอจะถูกยกเลิก `;
-
-    /*     this.viewRequest(
-      Number(req.requesttype),
-      Number(req.careertype),
-      Number(req.id)
-    ); */
   }
 
   search(filters: Partial<SchRequestSearchFilter>) {
