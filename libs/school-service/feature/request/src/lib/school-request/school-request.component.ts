@@ -551,6 +551,7 @@ export class SchoolRequestComponent implements OnInit {
           this.patchHiringInfo(parseJson(res.hiringinfo));
         } else {
           // search not found reset form and set idcard again
+          this.completeDialog('ไม่พบบุคคลากรที่ระบุ');
           this.form.reset();
           const temp: any = { idcardno: idCard };
           this.form.controls.userInfo.patchValue(temp);
@@ -644,8 +645,7 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   checkStaffAnotherRequest(saveType: 'tempSave' | 'submitSave') {
-    //this.isStaffHasRequest(saveType);
-    console.log('staff data = ', this.staffData);
+    //console.log('staff data = ', this.staffData);
     const payload: SchRequestSearchFilter = {
       schoolid: `${this.schoolId}`,
       requesttype: '3',
@@ -662,7 +662,7 @@ export class SchoolRequestComponent implements OnInit {
       row: '100',
     };
 
-    // work in edit mode
+    // update mode
     if (this.requestId) {
       if (saveType === 'submitSave') {
         this.forbiddenDialog();
@@ -672,8 +672,14 @@ export class SchoolRequestComponent implements OnInit {
       return;
     }
 
+    // create mode
     this.requestService.schSearchRequest(payload).subscribe((res) => {
-      if (res && res.length) {
+      if (saveType === 'submitSave') {
+        this.forbiddenDialog();
+      } else if (saveType === 'tempSave') {
+        this.confirmDialog(1);
+      }
+      /*       if (res && res.length) {
         //console.log('found request for this staff = ', res);
         this.completeDialog(`บุคคลากรมีใบคำขอที่กำลังดำเนินการในระบบ
         ไม่สามารถสร้างใบคำขอใหม่ได้ `);
@@ -684,7 +690,7 @@ export class SchoolRequestComponent implements OnInit {
         } else if (saveType === 'tempSave') {
           this.confirmDialog(1);
         }
-      }
+      } */
     });
   }
 
