@@ -37,8 +37,13 @@ export class SchoolRequestListComponent implements AfterViewInit {
   requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
   careerTypeList = careerTypeList;
 
+  defaultForm = {
+    requesttype: '3',
+    careertype: '5',
+  };
+
   form = this.fb.group({
-    licenseSearch: [],
+    licenseSearch: [this.defaultForm],
   });
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
