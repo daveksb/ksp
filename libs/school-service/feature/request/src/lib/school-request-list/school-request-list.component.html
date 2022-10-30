@@ -4,6 +4,9 @@
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height full-width-2">
+    <ng-container *ngFor="let row of rejectedRequests; let i = index">
+      <ksp-uni-form-badge [mainTitle]="alertMessage"></ksp-uni-form-badge>
+    </ng-container>
     <div class="box-header">
       รายการใบคำขอที่ยื่นผ่านระบบบริการหน่วยงานทางการศึกษา
     </div>
