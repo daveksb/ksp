@@ -31,7 +31,7 @@ export class ValidateKspRequestComponent
   override form = this.fb.group({
     result: [null, Validators.required],
     shouldForward: [null, Validators.required],
-    returnDate: [],
+    returndate: [null],
     reason: [],
   });
 

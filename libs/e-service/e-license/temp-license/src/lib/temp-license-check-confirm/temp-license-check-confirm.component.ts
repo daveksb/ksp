@@ -99,12 +99,19 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   checkRequest() {
     this.checkApproveResult(<any>this.form.value.approvement);
     //console.log('save data = ', this.saveData);
-    //console.log('form = ', this.selectResult);
+    const form: any = this.form.controls.approvement.value;
+    //console.log('form = ', form);
+    const detail = {
+      returndate: form.returndate,
+      reason: form.reason,
+      checkresult: this.saveData.checkDetail,
+    };
+
     const payload: KspApprovePayload = {
       requestid: this.saveData.requestData.id,
       process: `${this.targetProcess}`,
       status: `${this.targetStatus}`,
-      detail: JSON.stringify(this.saveData.checkDetail),
+      detail: JSON.stringify(detail),
       systemtype: '2', // school
       userid: this.userId,
       paymentstatus: null,
@@ -113,14 +120,12 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
     console.log('payload = ', payload);
 
     this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
-      console.log('result = ', res.app);
-      this.navigateBack();
+      this.completeDialog();
     });
   }
 
   considerRequest() {
     //console.log('consider request  = ');
-
     const form: any = this.form.value.approvement;
     const payload: KspApprovePayload = {
       requestid: this.saveData.requestData.id,
@@ -135,8 +140,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
     console.log('payload = ', payload);
 
     this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
-      //console.log('result = ', res.app);
-      this.navigateBack();
+      this.completeDialog();
     });
   }
 
