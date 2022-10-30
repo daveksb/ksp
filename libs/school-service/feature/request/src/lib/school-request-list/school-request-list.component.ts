@@ -61,6 +61,18 @@ export class SchoolRequestListComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
+  licensePdf(element: KspRequest) {
+    this.dialog.open(PdfRenderComponent, {
+      width: '1200px',
+      height: '100vh',
+      data: {
+        pdfType: '99',
+        pdfSubType: '1',
+        input: {},
+      },
+    });
+  }
+
   search(filters: Partial<SchRequestSearchFilter>) {
     //console.log('filters = ', filters);
     const payload: SchRequestSearchFilter = {
@@ -146,7 +158,7 @@ export class SchoolRequestListComponent implements AfterViewInit {
     this.router.navigate(['/request-reward', 'detail', id]);
   }
 
-  renderPdf(element: KspRequest) {
+  requestPdf(element: KspRequest) {
     const date = new Date(element.requestdate || '');
     const pdfType = element.requesttype;
     const pdfSubType = element.careertype;
@@ -266,6 +278,6 @@ export const displayedColumns = [
   'status',
   'updatedate',
   'requestdate',
-  'requestdoc',
-  'approvedoc',
+  'requestpdf',
+  'licensepdf',
 ];

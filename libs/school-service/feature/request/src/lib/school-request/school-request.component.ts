@@ -379,9 +379,9 @@ export class SchoolRequestComponent implements OnInit {
 
   checkButtonsDisableStatus() {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      console.log('userInfo valid = ', this.form.controls.userInfo.valid);
-      console.log('form valid = ', this.form.valid);
-      console.log('process = ', this.requestData.process);
+      //console.log('userInfo valid = ', this.form.controls.userInfo.valid);
+      //console.log('form valid = ', this.form.valid);
+      //console.log('process = ', this.requestData.process);
       // สถานะ ยกเลิก disable ทุกอย่าง
       if (this.requestData.status === '0') {
         this.disableTempSave = true;

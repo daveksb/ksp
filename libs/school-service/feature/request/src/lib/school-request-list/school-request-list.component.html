@@ -198,24 +198,25 @@
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="requestdoc">
+          <ng-container matColumnDef="requestpdf">
             <th mat-header-cell *matHeaderCellDef>ใบคำขอ</th>
             <td mat-cell *matCellDef="let element" class="text-center">
               <i
-                (click)="renderPdf(element)"
+                (click)="requestPdf(element)"
                 role="button"
                 class="bi bi-file-earmark-text text-primary fs-5"
               ></i>
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="approvedoc">
+          <ng-container matColumnDef="licensepdf">
             <th mat-header-cell *matHeaderCellDef>ใบอนุญาต</th>
             <td mat-cell *matCellDef="let element" class="text-center">
-              <!-- <i
+              <i
+                (click)="licensePdf(element)"
                 role="button"
                 class="bi bi-file-earmark-text text-primary fs-5"
-              ></i> -->
+              ></i>
             </td>
           </ng-container>
 
