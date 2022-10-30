@@ -5,159 +5,42 @@ export const kspPdfMapping: IKspPdfMapping[] = [
   {
     pdfType: 99,
     pdfSubType: 1,
-    pdfSrc: 'assets/pdf/temp-license.pdf',
+    pdfSrc: 'assets/pdf/school-approve-license.pdf',
     input: [
       {
         text: [
           {
-            key: 'schoolname',
+            key: 'requestno',
             options: {
-              x: 342,
-              y: 620,
-              size: defaultSize - 2,
-              color: black,
-            },
-          },
-          {
-            key: 'day',
-            options: {
-              x: 345,
-              y: 595,
+              x: 130,
+              y: 688,
               size: defaultSize,
               color: black,
             },
           },
           {
-            key: 'month',
+            key: 'careertype',
             options: {
-              x: 420,
-              y: 595,
+              x: 200,
+              y: 557,
               size: defaultSize,
               color: black,
             },
           },
           {
-            key: 'year',
+            key: 'startth',
             options: {
-              x: 515,
-              y: 595,
+              x: 200,
+              y: 538,
               size: defaultSize,
               color: black,
             },
           },
           {
-            key: 'schoolname',
+            key: 'endth',
             options: {
-              x: 176,
-              y: 535,
-              size: defaultSize - 2,
-              color: black,
-            },
-          },
-          {
-            key: 'bureauname',
-            options: {
-              x: 415,
-              y: 535,
-              size: defaultSize - 2,
-              color: black,
-            },
-          },
-          {
-            key: 'address',
-            options: {
-              x: 105,
-              y: 513,
-              size: defaultSize,
-              color: black,
-            },
-          },
-          {
-            key: 'moo',
-            options: {
-              x: 190,
-              y: 513,
-              size: defaultSize,
-              color: black,
-            },
-          },
-          {
-            key: 'street',
-            options: {
-              x: 300,
-              y: 513,
-              size: defaultSize,
-              color: black,
-            },
-          },
-          {
-            key: 'road',
-            options: {
-              x: 440,
-              y: 513,
-              size: defaultSize,
-              color: black,
-            },
-          },
-          {
-            key: 'tumbon',
-            options: {
-              x: 140,
-              y: 490,
-              size: defaultSize,
-              color: black,
-            },
-          },
-          {
-            key: 'amphurname',
-            options: {
-              x: 300,
-              y: 490,
-              size: defaultSize,
-              color: black,
-            },
-          },
-          {
-            key: 'provincename',
-            options: {
-              x: 440,
-              y: 490,
-              size: defaultSize,
-              color: black,
-            },
-          },
-          {
-            key: 'zipcode',
-            options: {
-              x: 120,
-              y: 467,
-              size: defaultSize,
-              color: black,
-            },
-          },
-          {
-            key: 'telphone',
-            options: {
-              x: 300,
-              y: 467,
-              size: defaultSize,
-              color: black,
-            },
-          },
-          {
-            key: 'fax',
-            options: {
-              x: 445,
-              y: 467,
-              size: defaultSize,
-              color: black,
-            },
-          },
-          {
-            key: 'phone',
-            options: {
-              x: 140,
-              y: 444,
+              x: 400,
+              y: 538,
               size: defaultSize,
               color: black,
             },
@@ -165,164 +48,41 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'name',
             options: {
-              x: 250,
-              y: 422,
+              x: 330,
+              y: 575,
               size: defaultSize,
               color: black,
             },
           },
           {
-            key: 'id1',
+            key: 'schoolname',
             options: {
-              x: 190,
-              y: 390,
+              x: 200,
+              y: 519,
               size: defaultSize,
               color: black,
             },
           },
           {
-            key: 'id2',
+            key: 'schoolapprovename',
             options: {
-              x: 218,
-              y: 390,
+              x: 170,
+              y: 500,
               size: defaultSize,
               color: black,
             },
           },
           {
-            key: 'id3',
-            options: {
-              x: 233,
-              y: 390,
-              size: defaultSize,
-              color: black,
-            },
-          },
-          {
-            key: 'id4',
-            options: {
-              x: 248,
-              y: 390,
-              size: defaultSize,
-              color: black,
-            },
-          },
-          {
-            key: 'id5',
-            options: {
-              x: 263,
-              y: 390,
-              size: defaultSize,
-              color: black,
-            },
-          },
-          {
-            key: 'id6',
-            options: {
-              x: 292,
-              y: 390,
-              size: defaultSize,
-              color: black,
-            },
-          },
-          {
-            key: 'id7',
-            options: {
-              x: 307,
-              y: 390,
-              size: defaultSize,
-              color: black,
-            },
-          },
-          {
-            key: 'id8',
-            options: {
-              x: 322,
-              y: 390,
-              size: defaultSize,
-              color: black,
-            },
-          },
-          {
-            key: 'id9',
-            options: {
-              x: 337,
-              y: 390,
-              size: defaultSize,
-              color: black,
-            },
-          },
-          {
-            key: 'id10',
-            options: {
-              x: 352,
-              y: 390,
-              size: defaultSize,
-              color: black,
-            },
-          },
-          {
-            key: 'id11',
+            key: 'startth',
             options: {
               x: 380,
-              y: 390,
-              size: defaultSize,
-              color: black,
-            },
-          },
-          {
-            key: 'id12',
-            options: {
-              x: 395,
-              y: 390,
-              size: defaultSize,
-              color: black,
-            },
-          },
-          {
-            key: 'id13',
-            options: {
-              x: 425,
-              y: 390,
-              size: defaultSize,
-              color: black,
-            },
-          },
-          {
-            key: 'degreename1',
-            options: {
-              x: 200,
               y: 287,
               size: defaultSize,
               color: black,
             },
           },
-          {
-            key: 'major1',
-            options: {
-              x: 420,
-              y: 287,
-              size: defaultSize,
-              color: black,
-            },
-          },
-          {
-            key: 'institution1',
-            options: {
-              x: 200,
-              y: 265,
-              size: defaultSize,
-              color: black,
-            },
-          },
         ],
-        svg: [
-          {
-            key: 'checkbox1',
-            options: { x: 45, y: 328 },
-            svgPath: 'M18 7L9.42857 17L6 13',
-          },
-        ],
+        svg: [],
       },
     ],
   },

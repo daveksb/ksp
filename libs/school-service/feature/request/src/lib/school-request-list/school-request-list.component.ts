@@ -20,6 +20,7 @@ import {
   getCookie,
   thaiDate,
   hasRejectedRequest,
+  addDate,
 } from '@ksp/shared/utility';
 
 @Component({
@@ -141,16 +142,47 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     }
   }
 
-  licensePdf(req: KspRequest) {
-    this.dialog.open(PdfRenderComponent, {
-      width: '1200px',
-      height: '100vh',
-      data: {
-        pdfType: '99',
-        pdfSubType: '1',
-        input: {},
-      },
-    });
+  licensePdf(element: KspRequest) {
+    const startDate = new Date(element.processupdatedate || '');
+    const endDate = addDate(
+      new Date(element?.processupdatedate || '') ?? new Date(),
+      0,
+      0,
+      2
+    );
+    let name = '';
+    if (+(element?.careertype ?? '1') !== 5) {
+      name = element.firstnameth + ' ' + element.lastnameth;
+    } else {
+      name = element.firstnameen + ' ' + element.lastnameen;
+    }
+    const startth = thaiDate(startDate);
+    const endth = thaiDate(endDate);
+    const careertype = SchoolRequestSubType[+(element?.careertype ?? '1')];
+    const requestno = element.requestno ?? '';
+    this.schoolInfoService
+      .getSchoolInfo(this.schoolId)
+      .subscribe((res: any) => {
+        const schoolname = res.schoolName;
+        const schoolapprovename = ' ผู้อำนวยการ ' + schoolname;
+        this.dialog.open(PdfRenderComponent, {
+          width: '1200px',
+          height: '100vh',
+          data: {
+            pdfType: 99,
+            pdfSubType: 1,
+            input: {
+              schoolapprovename,
+              requestno,
+              careertype,
+              startth,
+              name,
+              endth,
+              schoolname,
+            },
+          },
+        });
+      });
   }
 
   clear() {

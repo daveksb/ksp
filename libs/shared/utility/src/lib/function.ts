@@ -297,3 +297,16 @@ export function validatePassword(
     return { passwordInvalid: true };
   }
 }
+
+export function addDate(
+  date: Date,
+  d: number = 0,
+  m: number = 0,
+  y: number = 0
+): Date {
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const day = date.getDate();
+  const c = new Date(year + y, month + m, day + d - 1);
+  return c;
+}
