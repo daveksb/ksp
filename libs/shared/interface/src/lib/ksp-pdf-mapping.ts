@@ -337,7 +337,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'schoolname',
             options: {
               x: 349,
-              y: 620,
+              y: 605,
               size: defaultSize,
               color: black,
             },
