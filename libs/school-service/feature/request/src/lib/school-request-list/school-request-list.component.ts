@@ -61,7 +61,24 @@ export class SchoolRequestListComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  licensePdf(element: KspRequest) {
+  isLicenseApproved(req: KspRequest) {
+    const tempRequestApproved =
+      req.requesttype === '3' && req.process === '5' && req.status === '2';
+
+    const kuruNoApproved =
+      req.requesttype === '4' && req.process === '2' && req.status === '2';
+
+    const qualificationApproved =
+      req.requesttype === '6' && req.process === '3' && req.status === '2';
+
+    if (tempRequestApproved || kuruNoApproved || qualificationApproved) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  licensePdf(req: KspRequest) {
     this.dialog.open(PdfRenderComponent, {
       width: '1200px',
       height: '100vh',
