@@ -20,7 +20,10 @@ export class FormHiringInfoComponent
   @Input() staffTypes: any = [];
   @Input() academicStandingList: any = [];
 
-  status = status;
+  status = statusList;
+  hiringYears = 0;
+  hiringMonths = 0;
+
   override form = this.fb.group({
     psersonType: [null, Validators.required],
     position: [null, Validators.required],
@@ -67,11 +70,12 @@ export class FormHiringInfoComponent
   }
 
   calculateHiringPeriod() {
-    const sDate = moment(this.startDate.value);
     const eDate = moment(this.endDate.value);
-    console.log('start date = ', sDate);
-    const result = Math.abs(sDate.diff(eDate, 'years'));
-    console.log('period = ', result);
+    const sDate = moment(this.startDate.value);
+
+    this.hiringYears = eDate.diff(sDate, 'years');
+    sDate.add(this.hiringYears, 'years');
+    this.hiringMonths = eDate.diff(sDate, 'months');
   }
 
   get startDate() {
@@ -83,7 +87,7 @@ export class FormHiringInfoComponent
   }
 }
 
-export const status = [
+export const statusList = [
   { label: 'แจ้งเข้า', value: '1', formDataName: 'hiringStartDate' },
   { label: 'แจ้งออก', value: '2', formDataName: 'hiringEndDate' },
   { label: 'ยกเลิกข้อมูล', value: '3', formDataName: 'hiringCancelDate' },

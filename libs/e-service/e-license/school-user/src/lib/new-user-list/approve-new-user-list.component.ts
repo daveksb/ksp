@@ -76,7 +76,6 @@ export class ApproveNewUserListComponent implements AfterViewInit {
       if (res) {
         this.dataSource.data = res;
         this.dataSource.sort = this.sort;
-
         const sortState: Sort = { active: 'id', direction: 'desc' };
         this.sort.active = sortState.active;
         this.sort.direction = sortState.direction;

@@ -85,11 +85,21 @@
     <div class="row" *ngIf="displayMode === 'request'">
       <div class="col-6">
         <label class="form-label">ระยะเวลาที่จ้าง (ปี)</label>
-        <input class="form-control" type="text" disabled [value]="" />
+        <input
+          class="form-control"
+          type="text"
+          disabled
+          [value]="hiringYears || 0"
+        />
       </div>
       <div class="col-6">
         <label class="form-label">ระยะเวลาที่จ้าง (เดือน)</label>
-        <input class="form-control" type="text" disabled [value]="" />
+        <input
+          class="form-control"
+          type="text"
+          disabled
+          [value]="hiringMonths || 0"
+        />
       </div>
     </div>
 

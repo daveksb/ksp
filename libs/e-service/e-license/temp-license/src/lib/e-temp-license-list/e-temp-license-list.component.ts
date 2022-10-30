@@ -157,9 +157,9 @@ export class ETempLicenseListComponent implements AfterViewInit {
     if (degreename1) {
       checkbox1 = true;
     }
-    console.log('request.schooladdrinfo = ', request.schooladdrinfo);
+    //console.log('request.schooladdrinfo = ', request.schooladdrinfo);
     const school = JSON.parse(request.schooladdrinfo || '');
-    console.log('school = ', school);
+    //console.log('school = ', school);
     const { address, moo, street, road, tumbon, fax } = school;
     const schoolname = school.schoolName;
     const bureauname = school.bureauName;
@@ -238,7 +238,7 @@ export const column = [
   'subtype',
   'currentprocess',
   'requeststatus',
-  //'updatedate',
+  'updatedate',
   'requestdate',
   'reqDoc',
   //'approveDoc',
