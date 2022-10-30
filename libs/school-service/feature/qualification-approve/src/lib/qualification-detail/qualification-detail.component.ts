@@ -22,6 +22,7 @@ import {
   GeneralInfoService,
   SchoolInfoService,
   SchoolRequestService,
+  StaffService,
 } from '@ksp/shared/service';
 import {
   changeDate,
@@ -29,6 +30,7 @@ import {
   getCookie,
   mapMultiFileInfo,
   parseJson,
+  replaceEmptyWithNull,
   thaiDate,
 } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -90,7 +92,8 @@ export class QualificationDetailComponent implements OnInit {
     private addressService: AddressService,
     private requestService: SchoolRequestService,
     private route: ActivatedRoute,
-    private schoolInfoService: SchoolInfoService
+    private schoolInfoService: SchoolInfoService,
+    private staffService: StaffService
   ) {}
 
   ngOnInit(): void {
@@ -115,6 +118,50 @@ export class QualificationDetailComponent implements OnInit {
         this.careerType = Number(params['subtype']);
       }
     });
+  }
+
+  pathUserInfo(data: any) {
+    data.birthdate = data?.birthdate?.split('T')[0];
+
+    data.passportstartdate = data.passportstartdate.split('T')[0];
+    data.passportenddate = data.passportenddate.split('T')[0];
+    //console.log('data = ', data);
+    if (data?.visainfo) {
+      const visa = parseJson(data?.visainfo);
+      data.visaclass = visa.visaclass;
+      data.visatype = visa.visatype;
+      data.visaenddate = visa.visaenddate;
+    }
+
+    this.form.controls.userInfo.patchValue(data);
+  }
+
+  searchStaffFromIdCard(idCard: string) {
+    if (!idCard) return;
+    const payload = {
+      idcardno: idCard,
+      schoolid: this.schoolId,
+    };
+    this.staffService
+      .searchStaffFromIdCard(payload)
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        //console.log('req = ', res);
+        if (res && res.returncode !== '98') {
+          //this.staffData = res;
+          this.pathUserInfo(res);
+          /*  this.patchAddress(parseJson(res.addresses));
+          this.patchEdu(parseJson(res.educations));
+          this.patchTeachingInfo(parseJson(res.teachinginfo));
+          this.patchHiringInfo(parseJson(res.hiringinfo)); */
+        } else {
+          // search not found reset form and set idcard again
+          //this.completeDialog('ไม่พบบุคคลากรที่ระบุ');
+          this.form.reset();
+          const temp: any = { idcardno: idCard };
+          this.form.controls.userInfo.patchValue(temp);
+        }
+      });
   }
 
   loadRequestData(id: number) {
@@ -351,7 +398,9 @@ export class QualificationDetailComponent implements OnInit {
               ...{ otherreason: JSON.stringify(otherreason) },
               fileinfo: JSON.stringify({ file }),
             };
-            return this.requestService.schCreateRequest(payload);
+
+            const temp = replaceEmptyWithNull(payload);
+            return this.requestService.schCreateRequest(temp);
           }
           return EMPTY;
         })

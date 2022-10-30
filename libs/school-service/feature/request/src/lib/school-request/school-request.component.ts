@@ -383,8 +383,6 @@ export class SchoolRequestComponent implements OnInit {
       //console.log('userInfo valid = ', this.form.controls.userInfo.valid);
       //console.log('form valid = ', this.form.valid);
       //console.log('process = ', this.requestData.process);
-      console.log('check button = ');
-
       const condition1 =
         this.requestData.requesttype === '3' &&
         this.requestData.process === '3' &&
