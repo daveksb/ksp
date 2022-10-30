@@ -45,7 +45,7 @@
     <div class="full-width pb-2">
       <mat-tab-group
         class="tab-group mt-3"
-        selectedIndex="0"
+        selectedIndex="3"
         animationDuration="0ms"
       >
         <mat-tab label="ที่อยู่" class="tab-content">
@@ -273,14 +273,12 @@
           <ng-container *ngIf="careerType === 1 || careerType === 5">
             <ksp-form-teaching-info
               formControlName="teachinginfo"
-            ></ksp-form-teaching-info
-            ><br />
+            ></ksp-form-teaching-info>
           </ng-container>
 
           <ng-container *ngIf="careerType === 2">
             <ksp-form-teaching-info-manager></ksp-form-teaching-info-manager
-            ><br
-          /></ng-container>
+          ></ng-container>
 
           <ksp-form-hiring-info
             [displayMode]="'request'"
@@ -289,9 +287,9 @@
             [positionTypes]="positionTypes$ | async"
             [academicStandingList]="academicTypes$ | async"
           ></ksp-form-hiring-info>
-          <br />
+
           <ksp-form-temp-license-number></ksp-form-temp-license-number>
-          <br />
+
           <ksp-form-multi-attachment
             [uniqueTimestamp]="uniqueNo"
             [pageType]="pageType.teachingTab"
