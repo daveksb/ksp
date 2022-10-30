@@ -172,7 +172,7 @@ export class ETempLicenseDetailComponent implements OnInit {
         (group, index) => (group.files = res.tab6[index])
       );
     }
-    console.log('attach files = ', this.attachFiles);
+    //console.log('attach files = ', this.attachFiles);
   }
 
   patchReasonInfo(res: any) {

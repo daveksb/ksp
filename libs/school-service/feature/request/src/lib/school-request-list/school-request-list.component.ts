@@ -37,8 +37,13 @@ export class SchoolRequestListComponent implements AfterViewInit {
   requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
   careerTypeList = careerTypeList;
 
+  defaultForm = {
+    requesttype: '3',
+    careertype: '1',
+  };
+
   form = this.fb.group({
-    licenseSearch: [],
+    licenseSearch: [this.defaultForm],
   });
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -54,6 +59,35 @@ export class SchoolRequestListComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+  }
+
+  isLicenseApproved(req: KspRequest) {
+    const tempRequestApproved =
+      req.requesttype === '3' && req.process === '5' && req.status === '2';
+
+    const kuruNoApproved =
+      req.requesttype === '4' && req.process === '2' && req.status === '2';
+
+    const qualificationApproved =
+      req.requesttype === '6' && req.process === '3' && req.status === '2';
+
+    if (tempRequestApproved || kuruNoApproved || qualificationApproved) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  licensePdf(req: KspRequest) {
+    this.dialog.open(PdfRenderComponent, {
+      width: '1200px',
+      height: '100vh',
+      data: {
+        pdfType: '99',
+        pdfSubType: '1',
+        input: {},
+      },
+    });
   }
 
   search(filters: Partial<SchRequestSearchFilter>) {
@@ -141,10 +175,10 @@ export class SchoolRequestListComponent implements AfterViewInit {
     this.router.navigate(['/request-reward', 'detail', id]);
   }
 
-  renderPdf(element: any) {
-    const date = new Date(element.requestdate);
+  requestPdf(element: KspRequest) {
+    const date = new Date(element.requestdate || '');
     const pdfType = element.requesttype;
-    const pdfSubType = +element.careertype;
+    const pdfSubType = element.careertype;
     const thai = thaiDate(date);
     const [day, month, year] = thai.split(' ');
     const name = element.firstnameth + ' ' + element.lastnameth;
@@ -164,7 +198,7 @@ export class SchoolRequestListComponent implements AfterViewInit {
       id12,
       id13,
     ] = element?.idcardno?.split('') ?? [];
-    const eduinfo = JSON.parse(element.eduinfo);
+    const eduinfo = JSON.parse(element.eduinfo || '');
     const edu1 = eduinfo.find((item: any) => {
       if (item?.degreeLevel) {
         return item.degreeLevel === '1';
@@ -261,6 +295,6 @@ export const displayedColumns = [
   'status',
   'updatedate',
   'requestdate',
-  'requestdoc',
-  'approvedoc',
+  'requestpdf',
+  'licensepdf',
 ];

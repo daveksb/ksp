@@ -29,6 +29,8 @@ import {
   PositionType,
   Prefix,
   Province,
+  SchRequestSearchFilter,
+  SchStaff,
   StaffType,
   Tambol,
   VisaClass,
@@ -81,10 +83,11 @@ export class SchoolRequestComponent implements OnInit {
 
   requestId!: number;
   requestData = new KspRequest();
+  staffData = new SchStaff();
   careerType = SchoolRequestSubType.ครู; // 1 ไทย 2 ผู้บริหาร 3 ต่างชาติ
   requestLabel = '';
-  requestProcess!: number;
-  requestStatus!: number;
+  //requestProcess!: number;
+  //requestStatus!: number;
   disableTempSave = true;
   disableSave = true;
   disableCancel = true;
@@ -151,11 +154,11 @@ export class SchoolRequestComponent implements OnInit {
     this.uniqueNo = uuidv4();
     this.getList();
     this.checkRequestId();
-    this.checkRequestSubType();
+    this.checkCareerType();
     this.checkButtonsDisableStatus();
   }
 
-  checkRequestSubType() {
+  checkCareerType() {
     this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
       this.form.reset();
       if (Number(params['subtype'])) {
@@ -196,11 +199,10 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   createRequest(process: number) {
-    console.log('create request = ');
+    //console.log('create request = ');
     const baseForm = this.fb.group(new KspRequest());
-
     const formData: any = this.form.getRawValue();
-    console.log('formdata = ', formData);
+    //console.log('formdata = ', formData);
 
     const tab3 = mapMultiFileInfo(this.eduFiles);
     const tab4 = mapMultiFileInfo(this.teachingFiles);
@@ -282,7 +284,6 @@ export class SchoolRequestComponent implements OnInit {
     const baseForm = this.fb.group(new KspRequest());
     const formData: any = this.form.getRawValue();
     //const userInfo: UserInfoForm = formData.userInfo;
-    console.log('xx form data = ', formData);
 
     const { id, ...userInfo } = formData.userInfo;
 
@@ -354,7 +355,14 @@ export class SchoolRequestComponent implements OnInit {
 
     //console.log('update payload = ', res);
     this.requestService.schUpdateRequest(res).subscribe(() => {
-      //this.backToListPage();
+      if (process === 2) {
+        this.completeDialog(`ระบบทำการบันทึกเรียบร้อยแล้ว
+        สามารถตรวจสอบสถานะภายใน
+        3 - 15 วันทำการ`);
+      } else if (process === 1) {
+        // บันทึกชั่วคราว
+        this.completeDialog(`ระบบทำการบันทึกชั่วคราวเรียบร้อยแล้ว`);
+      }
     });
   }
 
@@ -376,9 +384,9 @@ export class SchoolRequestComponent implements OnInit {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
       //console.log('userInfo valid = ', this.form.controls.userInfo.valid);
       //console.log('form valid = ', this.form.valid);
-      // console.log('this.currentProcess = ', this.currentProcess);
+      //console.log('process = ', this.requestData.process);
       // สถานะ ยกเลิก disable ทุกอย่าง
-      if (this.requestStatus === 0) {
+      if (this.requestData.status === '0') {
         this.disableTempSave = true;
         this.disableSave = true;
         this.disableCancel = true;
@@ -391,13 +399,15 @@ export class SchoolRequestComponent implements OnInit {
       }
 
       // formValid + สถานะเป็นสร้างใบคำขอ, บันทึกชั่วคราวได้ ส่งใบคำขอได้
-      else if (this.form.valid && this.requestProcess === 1) {
+      else if (this.form.valid && this.requestData.process === '1') {
+        //console.log('สถานะเป็นสร้างใบคำขอ ');
         this.disableTempSave = false;
         this.disableSave = false;
       }
 
       // formValid + สถานะเป็นสร้างและส่งใบคำขอ, บันทึกชั่วคราวไม่ได้ ส่งใบคำขอไม่ได้
-      else if (this.form.valid && this.requestProcess === 2) {
+      else if (this.form.valid && this.requestData.process === '2') {
+        //console.log('สถานะเป็นสร้างและส่งใบคำขอ ');
         this.disableTempSave = true;
         this.disableSave = true;
       }
@@ -409,7 +419,7 @@ export class SchoolRequestComponent implements OnInit {
 
       // มีหมายเลขใบคำขอแล้ว enable ปุ่มยกเลิก
       if (this.requestId) {
-        if (this.requestProcess === 0) {
+        if (this.requestData.process === '0') {
           this.disableCancel = true;
         } else {
           this.disableCancel = false;
@@ -431,9 +441,6 @@ export class SchoolRequestComponent implements OnInit {
     this.requestService.schGetRequestById(id).subscribe((res) => {
       if (res) {
         this.requestData = res;
-        this.requestProcess = Number(res.process);
-        this.requestStatus = Number(res.status);
-        //console.log('current process = ', this.currentProcess);
         this.pathUserInfo(res);
         this.patchAddress(parseJson(res.addressinfo));
         this.patchEdu(parseJson(res.eduinfo));
@@ -534,8 +541,9 @@ export class SchoolRequestComponent implements OnInit {
       .searchStaffFromIdCard(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
-        console.log('req = ', res);
+        //console.log('req = ', res);
         if (res && res.returncode !== '98') {
+          this.staffData = res;
           this.pathUserInfo(res);
           this.patchAddress(parseJson(res.addresses));
           this.patchEdu(parseJson(res.educations));
@@ -543,6 +551,7 @@ export class SchoolRequestComponent implements OnInit {
           this.patchHiringInfo(parseJson(res.hiringinfo));
         } else {
           // search not found reset form and set idcard again
+          this.completeDialog('ไม่พบบุคคลากรที่ระบุ');
           this.form.reset();
           const temp: any = { idcardno: idCard };
           this.form.controls.userInfo.patchValue(temp);
@@ -633,6 +642,56 @@ export class SchoolRequestComponent implements OnInit {
 
   backToListPage() {
     this.router.navigate(['/temp-license', 'list']);
+  }
+
+  checkStaffAnotherRequest(saveType: 'tempSave' | 'submitSave') {
+    //console.log('staff data = ', this.staffData);
+    const payload: SchRequestSearchFilter = {
+      schoolid: `${this.schoolId}`,
+      requesttype: '3',
+      requestno: null,
+      careertype: null,
+      name: null,
+      idcardno: this.staffData.idcardno,
+      passportno: null,
+      process: null,
+      status: null,
+      requestdatefrom: null,
+      requestdateto: null,
+      offset: '0',
+      row: '100',
+    };
+
+    // update mode
+    if (this.requestId) {
+      if (saveType === 'submitSave') {
+        this.forbiddenDialog();
+      } else if (saveType === 'tempSave') {
+        this.confirmDialog(1);
+      }
+      return;
+    }
+
+    // create mode
+    this.requestService.schSearchRequest(payload).subscribe((res) => {
+      if (saveType === 'submitSave') {
+        this.forbiddenDialog();
+      } else if (saveType === 'tempSave') {
+        this.confirmDialog(1);
+      }
+      /*       if (res && res.length) {
+        //console.log('found request for this staff = ', res);
+        this.completeDialog(`บุคคลากรมีใบคำขอที่กำลังดำเนินการในระบบ
+        ไม่สามารถสร้างใบคำขอใหม่ได้ `);
+      } else {
+        //console.log('no request for this staff = ');
+        if (saveType === 'submitSave') {
+          this.forbiddenDialog();
+        } else if (saveType === 'tempSave') {
+          this.confirmDialog(1);
+        }
+      } */
+    });
   }
 
   forbiddenDialog() {

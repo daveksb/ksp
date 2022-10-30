@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,6 +10,7 @@ import {
   SchoolRequestSubType,
   SchoolRequestType,
 } from '@ksp/shared/constant';
+import { PdfRenderComponent } from '@ksp/shared/dialog';
 import {
   EsSearchPayload,
   KspRequest,
@@ -20,6 +22,7 @@ import {
   schoolMapRequestType,
   checkStatus,
   processFilter,
+  thaiDate,
 } from '@ksp/shared/utility';
 
 @Component({
@@ -28,10 +31,8 @@ import {
   styleUrls: ['./e-temp-license-list.component.scss'],
 })
 export class ETempLicenseListComponent implements AfterViewInit {
-  defaultForm = { requesttype: '3', careertype: '1' };
-  form = this.fb.group({
-    search: [this.defaultForm],
-  });
+  form!: any;
+  defaultForm: any;
 
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<KspRequest>();
@@ -50,6 +51,7 @@ export class ETempLicenseListComponent implements AfterViewInit {
     private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder,
+    public dialog: MatDialog,
     private eRequestService: ERequestService
   ) {
     this.checkCareerType();
@@ -61,6 +63,14 @@ export class ETempLicenseListComponent implements AfterViewInit {
 
   checkCareerType() {
     this.route.paramMap.subscribe((params) => {
+      this.defaultForm = {
+        requesttype: '3',
+        careertype: params.get('careertype'),
+      };
+      this.form = this.fb.group({
+        search: [this.defaultForm],
+      });
+
       if (params.get('careertype') === '5') {
         this.careerType = Number(params.get('careertype'));
         this.careerTypeList = careerTypeList.filter((i) => i.id === 5);
@@ -73,7 +83,7 @@ export class ETempLicenseListComponent implements AfterViewInit {
   }
 
   search(params: Partial<SchRequestSearchFilter>) {
-    console.log('params = ', params);
+    //console.log('params = ', params);
     const payload: EsSearchPayload = {
       systemtype: '2',
       requesttype: '3',
@@ -106,6 +116,102 @@ export class ETempLicenseListComponent implements AfterViewInit {
       } else {
         this.clearData();
       }
+    });
+  }
+
+  renderPdf(request: KspRequest) {
+    const date = new Date(request.requestdate || '');
+    const pdfType = request.requesttype;
+    const pdfSubType = request.careertype;
+    const thai = thaiDate(date);
+    const [day, month, year] = thai.split(' ');
+    const name = request.firstnameth + ' ' + request.lastnameth;
+    const phone = request.contactphone;
+    const [
+      id1,
+      id2,
+      id3,
+      id4,
+      id5,
+      id6,
+      id7,
+      id8,
+      id9,
+      id10,
+      id11,
+      id12,
+      id13,
+    ] = request?.idcardno?.split('') ?? [];
+    const eduinfo = JSON.parse(request.eduinfo || '');
+    const edu1 = eduinfo.find((item: any) => {
+      if (item?.degreeLevel) {
+        return item.degreeLevel === '1';
+      }
+      return false;
+    });
+    const degreename1 = edu1?.degreeName ?? '';
+    const institution1 = edu1?.institution ?? '';
+    const major1 = edu1?.major ?? '';
+    const nameen = request.firstnameen + ' ' + request.lastnameen;
+    let checkbox1 = false;
+    if (degreename1) {
+      checkbox1 = true;
+    }
+    console.log('request.schooladdrinfo = ', request.schooladdrinfo);
+    const school = JSON.parse(request.schooladdrinfo || '');
+    console.log('school = ', school);
+    const { address, moo, street, road, tumbon, fax } = school;
+    const schoolname = school.schoolName;
+    const bureauname = school.bureauName;
+    const amphurname = school.amphurName;
+    const provincename = school.provinceName;
+    const zipcode = school.zipCode;
+    const telphone = school.telphone;
+
+    this.dialog.open(PdfRenderComponent, {
+      width: '1200px',
+      height: '100vh',
+      data: {
+        pdfType,
+        pdfSubType,
+        input: {
+          day,
+          month,
+          year,
+          schoolname,
+          bureauname,
+          address,
+          moo,
+          street,
+          road,
+          tumbon,
+          amphurname,
+          provincename,
+          zipcode,
+          fax,
+          name,
+          phone,
+          telphone,
+          id1,
+          id2,
+          id3,
+          id4,
+          id5,
+          id6,
+          id7,
+          id8,
+          id9,
+          id10,
+          id11,
+          id12,
+          id13,
+          degreename1,
+          institution1,
+          major1,
+          checkbox1,
+          nameen,
+        },
+      },
     });
   }
 
