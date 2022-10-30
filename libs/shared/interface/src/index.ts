@@ -12,7 +12,6 @@ export * from './lib/self-myinfo';
 export * from './lib/self-develop';
 
 export * from './lib/sch-user-page-type';
-export * from './lib/sch-request';
 export * from './lib/sch-user';
 export * from './lib/sch-info';
 export * from './lib/sch-general';

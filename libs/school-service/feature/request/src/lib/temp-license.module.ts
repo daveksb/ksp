@@ -12,7 +12,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { BottomNavComponent } from '@ksp/shared/menu';
-import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import {
+  RequestHeaderInfoComponent,
+  UniFormBadgeComponent,
+} from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RequestSearchComponent } from '@ksp/shared/search';
@@ -44,6 +47,7 @@ import { SchoolRequestListComponent } from './school-request-list/school-request
     MatPaginatorModule,
     MatSortModule,
     ThaiDatePipe,
+    UniFormBadgeComponent,
   ],
   declarations: [SchoolRequestListComponent, SchoolRequestComponent],
 })

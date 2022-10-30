@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -19,13 +19,14 @@ import {
   checkStatus,
   getCookie,
   thaiDate,
+  hasRejectedRequest,
 } from '@ksp/shared/utility';
 
 @Component({
   templateUrl: './school-request-list.component.html',
   styleUrls: ['./school-request-list.component.scss'],
 })
-export class SchoolRequestListComponent implements AfterViewInit {
+export class SchoolRequestListComponent implements AfterViewInit, OnInit {
   schoolId = getCookie('schoolId');
   displayedColumns: string[] = displayedColumns;
   dataSource = new MatTableDataSource<KspRequest>();
@@ -36,6 +37,10 @@ export class SchoolRequestListComponent implements AfterViewInit {
   checkStatus = checkStatus;
   requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
   careerTypeList = careerTypeList;
+  alertMessage = `แจ้งเตือน เลขที่คำขอ: xxxx ถูกส่งคืน "ปรับแก้ไข/เพิ่มเติม
+  กรุณาส่งกลับภายในวันที่ xxx มิฉะนั้นใบคำขอจะถูกยกเลิก`;
+  initialSearch = true;
+  rejectedRequests: KspRequest[] = [];
 
   defaultForm = {
     requesttype: '3',
@@ -57,37 +62,30 @@ export class SchoolRequestListComponent implements AfterViewInit {
     private schoolInfoService: SchoolInfoService
   ) {}
 
+  ngOnInit(): void {
+    const filters: Partial<SchRequestSearchFilter> = {
+      requesttype: '3',
+    };
+    this.search(filters);
+  }
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
 
-  isLicenseApproved(req: KspRequest) {
-    const tempRequestApproved =
-      req.requesttype === '3' && req.process === '5' && req.status === '2';
+  genAlertMessage(req: KspRequest) {
+    return `แจ้งเตือน เลขที่คำขอ: ${
+      req.requestno
+    } ถูกส่งคืน "ปรับแก้ไข/เพิ่มเติม"
+    กรุณาส่งกลับภายในวันที่ ${thaiDate(
+      new Date(req.processupdatedate || '')
+    )} มิฉะนั้นใบคำขอจะถูกยกเลิก `;
 
-    const kuruNoApproved =
-      req.requesttype === '4' && req.process === '2' && req.status === '2';
-
-    const qualificationApproved =
-      req.requesttype === '6' && req.process === '3' && req.status === '2';
-
-    if (tempRequestApproved || kuruNoApproved || qualificationApproved) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  licensePdf(req: KspRequest) {
-    this.dialog.open(PdfRenderComponent, {
-      width: '1200px',
-      height: '100vh',
-      data: {
-        pdfType: '99',
-        pdfSubType: '1',
-        input: {},
-      },
-    });
+    /*     this.viewRequest(
+      Number(req.requesttype),
+      Number(req.careertype),
+      Number(req.id)
+    ); */
   }
 
   search(filters: Partial<SchRequestSearchFilter>) {
@@ -109,20 +107,53 @@ export class SchoolRequestListComponent implements AfterViewInit {
     };
 
     this.requestService.schSearchRequest(payload).subscribe((res) => {
-      if (res && res.length) {
+      // search without showing result do automatically after load
+      if (this.initialSearch) {
+        this.rejectedRequests = hasRejectedRequest(res);
+        //console.log('has reject = ', hasReject);
+      }
+
+      if (res && res.length && !this.initialSearch) {
         //console.log('res = ', res);
         this.searchNotFound = false;
         this.dataSource.data = res;
         this.dataSource.sort = this.sort;
-
         const sortState: Sort = { active: 'id', direction: 'desc' };
         this.sort.active = sortState.active;
         this.sort.direction = sortState.direction;
         this.sort.sortChange.emit(sortState);
+        this.initialSearch = false;
       } else {
         this.dataSource.data = [];
         this.searchNotFound = true;
+        this.initialSearch = false;
       }
+    });
+  }
+
+  isLicenseApproved(req: KspRequest) {
+    const tempRequestApproved =
+      req.requesttype === '3' && req.process === '5' && req.status === '2';
+    const kuruNoApproved =
+      req.requesttype === '4' && req.process === '2' && req.status === '2';
+    const qualificationApproved =
+      req.requesttype === '6' && req.process === '3' && req.status === '2';
+    if (tempRequestApproved || kuruNoApproved || qualificationApproved) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  licensePdf(req: KspRequest) {
+    this.dialog.open(PdfRenderComponent, {
+      width: '1200px',
+      height: '100vh',
+      data: {
+        pdfType: '99',
+        pdfSubType: '1',
+        input: {},
+      },
     });
   }
 
@@ -138,15 +169,19 @@ export class SchoolRequestListComponent implements AfterViewInit {
     });
   }
 
-  viewRequest(requestType: number, subType: number, requestId: number) {
+  viewRequest(
+    requestType: string | null,
+    subType: string | null,
+    requestId: string | null
+  ) {
     switch (requestType) {
-      case 4:
+      case '4':
         return this.foreignPage(`${requestId}`);
 
-      case 6:
-        return this.qualificationPage(requestId, subType);
+      case '6':
+        return this.qualificationPage(Number(requestId), Number(subType));
 
-      case 40:
+      case '40':
         return this.rewardPage(`${requestId}`);
     }
 

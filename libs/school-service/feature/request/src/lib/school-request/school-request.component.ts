@@ -448,9 +448,9 @@ export class SchoolRequestComponent implements OnInit {
         this.patchTeachingInfo(parseJson(res.teachinginfo));
         this.patchReasonInfo(parseJson(res.reasoninfo));
         this.patchFileInfo(parseJson(res.fileinfo));
-
         const schoolAddr = parseJson(res.schooladdrinfo);
         this.form.controls.schoolAddr.patchValue(schoolAddr);
+        console.log('approve detail = ', parseJson(res.detail));
       }
     });
   }
@@ -640,10 +640,6 @@ export class SchoolRequestComponent implements OnInit {
       });
   }
 
-  backToListPage() {
-    this.router.navigate(['/temp-license', 'list']);
-  }
-
   checkStaffAnotherRequest(saveType: 'tempSave' | 'submitSave') {
     //console.log('staff data = ', this.staffData);
     const payload: SchRequestSearchFilter = {
@@ -777,6 +773,10 @@ export class SchoolRequestComponent implements OnInit {
           this.backToListPage();
         }
       });
+  }
+
+  backToListPage() {
+    this.router.navigate(['/temp-license', 'list']);
   }
 
   provinceChanged(type: number, evt: any) {

@@ -4,6 +4,16 @@
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height full-width-2">
+    <ng-container *ngFor="let req of rejectedRequests; let i = index">
+      <div
+        role="button"
+        (click)="viewRequest(req.requesttype, req.careertype, req.id)"
+      >
+        <ksp-uni-form-badge
+          [mainTitle]="genAlertMessage(req)"
+        ></ksp-uni-form-badge>
+      </div>
+    </ng-container>
     <div class="box-header">
       รายการใบคำขอที่ยื่นผ่านระบบบริการหน่วยงานทางการศึกษา
     </div>
@@ -81,11 +91,7 @@
               mat-cell
               *matCellDef="let element; let i = index"
               (click)="
-                viewRequest(
-                  +element.requesttype,
-                  element.careertype,
-                  element.id
-                )
+                viewRequest(element.requesttype, element.careertype, element.id)
               "
             >
               {{
@@ -100,11 +106,7 @@
             <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
             <td
               (click)="
-                viewRequest(
-                  +element.requesttype,
-                  element.careertype,
-                  element.id
-                )
+                viewRequest(element.requesttype, element.careertype, element.id)
               "
               mat-cell
               *matCellDef="let element"
@@ -119,11 +121,7 @@
             </th>
             <td
               (click)="
-                viewRequest(
-                  +element.requesttype,
-                  element.careertype,
-                  element.id
-                )
+                viewRequest(element.requesttype, element.careertype, element.id)
               "
               mat-cell
               *matCellDef="let element"

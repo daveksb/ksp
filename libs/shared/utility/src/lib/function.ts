@@ -5,8 +5,19 @@ import {
   SelfRequestProcess,
   SelfRequestType,
 } from '@ksp/shared/constant';
-import { FileGroup, KspRequest, SchoolRequest } from '@ksp/shared/interface';
+import { FileGroup, KspRequest } from '@ksp/shared/interface';
 import moment from 'moment';
+
+export function hasRejectedRequest(requests: KspRequest[]): KspRequest[] {
+  return requests.filter((req) => {
+    const condition1 =
+      req.requesttype === '3' && req.process === '3' && req.status === '2';
+
+    const condition2 =
+      req.requesttype === '3' && req.process === '4' && req.status === '2';
+    return condition1 || condition2;
+  });
+}
 
 // return Thai date format,
 export function stringToThaiDate(

@@ -5,7 +5,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
-import { EsSearchPayload, SchoolRequest } from '@ksp/shared/interface';
+import { EsSearchPayload, KspRequest } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import {
   checkProcess,
@@ -85,7 +85,7 @@ export class ForeignLicenseListComponent implements AfterViewInit {
     this.form.controls.search.patchValue({ requesttype: '3' });
   }
 
-  goToDetail(item: SchoolRequest) {
+  goToDetail(item: KspRequest) {
     this.router.navigate(['/foreign-license', 'detail', item.id], {
       queryParams: { type: 0 },
     });
