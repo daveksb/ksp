@@ -39,7 +39,7 @@ export class SchoolRequestListComponent implements AfterViewInit {
 
   defaultForm = {
     requesttype: '3',
-    careertype: '5',
+    careertype: '1',
   };
 
   form = this.fb.group({

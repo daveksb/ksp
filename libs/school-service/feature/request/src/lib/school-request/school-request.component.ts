@@ -29,6 +29,8 @@ import {
   PositionType,
   Prefix,
   Province,
+  SchRequestSearchFilter,
+  SchStaff,
   StaffType,
   Tambol,
   VisaClass,
@@ -81,6 +83,7 @@ export class SchoolRequestComponent implements OnInit {
 
   requestId!: number;
   requestData = new KspRequest();
+  staffData = new SchStaff();
   careerType = SchoolRequestSubType.ครู; // 1 ไทย 2 ผู้บริหาร 3 ต่างชาติ
   requestLabel = '';
   //requestProcess!: number;
@@ -397,14 +400,14 @@ export class SchoolRequestComponent implements OnInit {
 
       // formValid + สถานะเป็นสร้างใบคำขอ, บันทึกชั่วคราวได้ ส่งใบคำขอได้
       else if (this.form.valid && this.requestData.process === '1') {
-        console.log('สถานะเป็นสร้างใบคำขอ ');
+        //console.log('สถานะเป็นสร้างใบคำขอ ');
         this.disableTempSave = false;
         this.disableSave = false;
       }
 
       // formValid + สถานะเป็นสร้างและส่งใบคำขอ, บันทึกชั่วคราวไม่ได้ ส่งใบคำขอไม่ได้
       else if (this.form.valid && this.requestData.process === '2') {
-        console.log('สถานะเป็นสร้างและส่งใบคำขอ ');
+        //console.log('สถานะเป็นสร้างและส่งใบคำขอ ');
         this.disableTempSave = true;
         this.disableSave = true;
       }
@@ -538,8 +541,9 @@ export class SchoolRequestComponent implements OnInit {
       .searchStaffFromIdCard(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
-        console.log('req = ', res);
+        //console.log('req = ', res);
         if (res && res.returncode !== '98') {
+          this.staffData = res;
           this.pathUserInfo(res);
           this.patchAddress(parseJson(res.addresses));
           this.patchEdu(parseJson(res.educations));
@@ -637,6 +641,51 @@ export class SchoolRequestComponent implements OnInit {
 
   backToListPage() {
     this.router.navigate(['/temp-license', 'list']);
+  }
+
+  checkStaffAnotherRequest(saveType: 'tempSave' | 'submitSave') {
+    //this.isStaffHasRequest(saveType);
+    console.log('staff data = ', this.staffData);
+    const payload: SchRequestSearchFilter = {
+      schoolid: `${this.schoolId}`,
+      requesttype: '3',
+      requestno: null,
+      careertype: null,
+      name: null,
+      idcardno: this.staffData.idcardno,
+      passportno: null,
+      process: null,
+      status: null,
+      requestdatefrom: null,
+      requestdateto: null,
+      offset: '0',
+      row: '100',
+    };
+
+    // work in edit mode
+    if (this.requestId) {
+      if (saveType === 'submitSave') {
+        this.forbiddenDialog();
+      } else if (saveType === 'tempSave') {
+        this.confirmDialog(1);
+      }
+      return;
+    }
+
+    this.requestService.schSearchRequest(payload).subscribe((res) => {
+      if (res && res.length) {
+        //console.log('found request for this staff = ', res);
+        this.completeDialog(`บุคคลากรมีใบคำขอที่กำลังดำเนินการในระบบ
+        ไม่สามารถสร้างใบคำขอใหม่ได้ `);
+      } else {
+        //console.log('no request for this staff = ');
+        if (saveType === 'submitSave') {
+          this.forbiddenDialog();
+        } else if (saveType === 'tempSave') {
+          this.confirmDialog(1);
+        }
+      }
+    });
   }
 
   forbiddenDialog() {

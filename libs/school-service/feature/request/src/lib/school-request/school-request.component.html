@@ -324,12 +324,13 @@
   </div>
 </div>
 
+<!-- (tempSaveClicked)="confirmDialog(1)" -->
 <div class="sticky-bottom border px-2">
   <ksp-bottom-nav
     (prevClicked)="backToListPage()"
     (cancelClicked)="cancelConfirmDialog()"
-    (tempSaveClicked)="confirmDialog(1)"
-    (saveClicked)="forbiddenDialog()"
+    (tempSaveClicked)="checkStaffAnotherRequest('tempSave')"
+    (saveClicked)="checkStaffAnotherRequest('submitSave')"
     [colorMode]="'green'"
     [isLastPage]="true"
     [showCenterButtons]="true"
