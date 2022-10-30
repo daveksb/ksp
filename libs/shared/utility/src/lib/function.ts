@@ -253,7 +253,6 @@ export function genKuruspaNo() {
 export function validateIdCard(
   control: AbstractControl
 ): { [key: string]: any } | null {
-  //console.log('validate id card = ');
   let sum = 0;
   for (let i = 0; i < 12; i++) {
     sum += parseFloat(control.value.charAt(i)) * (13 - i);
@@ -263,4 +262,20 @@ export function validateIdCard(
     return { idCardInvalid: true };
 
   return null;
+}
+
+export function validatePassword(
+  control: AbstractControl
+): { [key: string]: any } | null {
+  if (
+    /[A-Z]/.test(control.value) &&
+    /[a-z]/.test(control.value) &&
+    /[0-9]/.test(control.value) &&
+    ///[^A-Za-z0-9]/.test(control.value) &&
+    control.value.length > 7
+  ) {
+    return null;
+  } else {
+    return { passwordInvalid: true };
+  }
 }

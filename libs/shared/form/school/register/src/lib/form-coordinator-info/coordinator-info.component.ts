@@ -66,9 +66,6 @@ export class FormCoordinatorInfoComponent
   ngOnInit(): void {
     // ถ้าเป็น form คนไทยไม่ต้อง validate field เหล่านี้
     //console.log('display mode = ', this.displayMode);
-    this.idCardNo.valueChanges.subscribe(() => {
-      console.log('this.idCardNo valid = ', this.idCardNo.valid);
-    });
 
     this.form.controls.sex.clearValidators();
     this.form.controls.birthdate.clearValidators();
