@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
-import { MatDialogModule } from '@angular/material/dialog';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
+import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 
 @Component({
@@ -21,6 +21,14 @@ export class FilesPreviewComponent {
       value: 2,
     },
   ];
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA)
+    public data: {
+      title: string;
+      //path: string;
+    }
+  ) {}
 
   @Output() confirmed = new EventEmitter<boolean>();
   confirm() {

@@ -94,7 +94,8 @@ export class FormUserInfoComponent
     }
 
     // ต่างชาติ ไม่ต้อง validate field เหล่านี้
-    if ((mode = UserInfoFormType.foreign)) {
+    if (mode === UserInfoFormType.foreign) {
+      //console.log('bb = ');
       this.form.controls.idcardno.clearValidators();
       this.form.controls.workphone.clearValidators();
       this.form.controls.contactphone.clearValidators();
@@ -110,7 +111,8 @@ export class FormUserInfoComponent
     this.form.controls.idcardno.valueChanges
       .pipe(debounceTime(200), distinctUntilChanged())
       .subscribe((res) => {
-        if (res && res.length === 13) {
+        //console.log('id = ', this.form.controls.idcardno.valid);
+        if (res && res.length === 13 && this.idCardNo.valid) {
           this.idCardChange.emit(res);
         }
       });
@@ -130,6 +132,11 @@ export class FormUserInfoComponent
         this.form.controls.idcardno.clearValidators();
         this.form.controls.idcardno.updateValueAndValidity();
       }
+    }
+
+    if (this.mode === 'view') {
+      //console.log('xx clear validator = ');
+      this.form.clearValidators();
     }
   }
 

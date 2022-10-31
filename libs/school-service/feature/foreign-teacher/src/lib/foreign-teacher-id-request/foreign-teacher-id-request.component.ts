@@ -111,7 +111,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
           );
         }
         this.form.controls.foreignTeacher.patchValue(<any>res);
-        //this.form.get('visainfo')?.patchValue(res);
+        this.form.controls.visainfo.patchValue(<any>res);
       }
     });
   }

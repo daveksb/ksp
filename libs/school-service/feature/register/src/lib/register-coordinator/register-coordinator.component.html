@@ -46,7 +46,7 @@
           formControlName="coordinator"
           [mode]="mode"
           [prefixList]="prefixList$ | async"
-          [nationList]="nationalitys$ | async"
+          [nationList]="nationList$ | async"
           [displayMode]="[userInfoFormdisplayMode]"
           [isSchoolService]="false"
         ></ksp-form-coordinator-info>
@@ -57,7 +57,7 @@
           [classList]="'text-primary'"
           [title]="'กรุณาแนบหลักฐานเพื่อการพิจารณา'"
           [requestType]="1"
-          [groups]="uploadFileList"
+          [groups]="uploadFiles"
           [uniqueTimestamp]="uniqueNo"
         ></ksp-form-multi-attachment>
       </div>

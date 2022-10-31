@@ -123,7 +123,6 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
             request.coordinatorinfo = JSON.stringify(form);
 
             const payload = replaceEmptyWithNull(request);
-            //console.log('request = ', request);
             return this.requestService.schCreateRequest(payload);
           }
           return EMPTY;
@@ -131,7 +130,7 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
       )
       .subscribe((res) => {
         if (res) {
-          //this.completeDialog(res?.requestno);
+          this.completeDialog(res?.requestno);
         }
       });
   }

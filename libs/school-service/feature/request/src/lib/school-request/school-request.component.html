@@ -273,14 +273,12 @@
           <ng-container *ngIf="careerType === 1 || careerType === 5">
             <ksp-form-teaching-info
               formControlName="teachinginfo"
-            ></ksp-form-teaching-info
-            ><br />
+            ></ksp-form-teaching-info>
           </ng-container>
 
           <ng-container *ngIf="careerType === 2">
             <ksp-form-teaching-info-manager></ksp-form-teaching-info-manager
-            ><br
-          /></ng-container>
+          ></ng-container>
 
           <ksp-form-hiring-info
             [displayMode]="'request'"
@@ -289,9 +287,9 @@
             [positionTypes]="positionTypes$ | async"
             [academicStandingList]="academicTypes$ | async"
           ></ksp-form-hiring-info>
-          <br />
+
           <ksp-form-temp-license-number></ksp-form-temp-license-number>
-          <br />
+
           <ksp-form-multi-attachment
             [uniqueTimestamp]="uniqueNo"
             [pageType]="pageType.teachingTab"
@@ -324,12 +322,13 @@
   </div>
 </div>
 
+<!-- (tempSaveClicked)="confirmDialog(1)" -->
 <div class="sticky-bottom border px-2">
   <ksp-bottom-nav
     (prevClicked)="backToListPage()"
     (cancelClicked)="cancelConfirmDialog()"
-    (tempSaveClicked)="confirmDialog(1)"
-    (saveClicked)="forbiddenDialog()"
+    (tempSaveClicked)="checkStaffAnotherRequest('tempSave')"
+    (saveClicked)="checkStaffAnotherRequest('submitSave')"
     [colorMode]="'green'"
     [isLastPage]="true"
     [showCenterButtons]="true"
@@ -339,7 +338,7 @@
     [disableTempSaveButton]="disableTempSave"
     [showSaveButton]="true"
     [saveButtonLabel]="'บันทึกและยื่น'"
-    [disableSaveButton]="false"
+    [disableSaveButton]="disableSave"
     [disableCancelButton]="disableCancel"
   ></ksp-bottom-nav>
 </div>

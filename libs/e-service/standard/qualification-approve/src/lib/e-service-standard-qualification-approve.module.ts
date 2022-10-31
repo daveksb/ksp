@@ -34,10 +34,10 @@ export const routes: Route[] = [
         path: 'list',
         component: EQualificationApproveListComponent,
       },
-      {
+      /*       {
         path: 'detail',
         component: EQualificationApproveDetailComponent,
-      },
+      }, */
       {
         path: 'detail/:id',
         component: EQualificationApproveDetailComponent,
@@ -69,9 +69,9 @@ export const routes: Route[] = [
     EQualificationApproveListComponent,
     EQualificationApproveDetailComponent,
   ],
-  exports: [
+  /*   exports: [
     EQualificationApproveListComponent,
     EQualificationApproveDetailComponent,
-  ],
+  ], */
 })
 export class EServiceStandardQualificationApproveModule {}

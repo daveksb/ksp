@@ -73,10 +73,10 @@ export class RequestSearchComponent
       .pipe(untilDestroyed(this))
       .subscribe((requestType) => {
         // update subtype list
-        if (requestType !== '3') {
-          this.form.controls.careertype.disable();
-        } else {
+        if (requestType === '3' || requestType === '6') {
           this.form.controls.careertype.enable();
+        } else {
+          this.form.controls.careertype.disable();
         }
 
         // update process list

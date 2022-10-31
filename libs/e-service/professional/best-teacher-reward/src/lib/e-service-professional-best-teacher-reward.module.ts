@@ -15,6 +15,13 @@ import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { SharedFormSelfRewardFormModule } from '@ksp/shared/form/self-reward-form';
 import { EServiceRewardSearchComponent } from '@ksp/shared/search';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
+import {
+  ValidateKspRequestComponent,
+  ConsiderKspRequestComponent,
+} from '@ksp/e-service/e-license/approve-ksp-request';
+import { EBestTeacherConfirmComponent } from './e-best-teacher-confirm/e-best-teacher-confirm.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const routes: Routes = [
   {
@@ -33,6 +40,10 @@ const routes: Routes = [
       {
         path: 'detail/:id',
         component: EBestTeacherDetailComponent,
+      },
+      {
+        path: 'confirm/:id',
+        component: EBestTeacherConfirmComponent,
       },
     ],
   },
@@ -54,8 +65,15 @@ const routes: Routes = [
     SelfServiceFormModule,
     EServiceRewardSearchComponent,
     ThaiDatePipe,
+    LicenseCheckComponent,
+    ValidateKspRequestComponent,
+    MatPaginatorModule,
   ],
-  declarations: [EBestTeacherListComponent, EBestTeacherDetailComponent],
+  declarations: [
+    EBestTeacherListComponent,
+    EBestTeacherDetailComponent,
+    EBestTeacherConfirmComponent,
+  ],
   exports: [EBestTeacherListComponent, EBestTeacherDetailComponent],
 })
 export class EServiceProfessionalBestTeacherRewardModule {}

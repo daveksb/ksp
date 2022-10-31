@@ -87,6 +87,11 @@
       <e-service-license-check
         [choices]="verifyChoice"
         formControlName="verifydetail"
+        [mode]="
+          requestData.status === '2' || requestData.status === '3'
+            ? 'view'
+            : 'edit'
+        "
       ></e-service-license-check>
     </div>
   </div>
@@ -98,6 +103,9 @@
     [isFirstPage]="true"
     [showCenterButtons]="true"
     [showSaveButton]="true"
-    (saveClicked)="onConfirmed()"
+    (saveClicked)="confirm()"
+    [disableSaveButton]="
+      requestData.status === '2' || requestData.status === '3'
+    "
   ></ksp-bottom-nav>
 </div>

@@ -15,6 +15,13 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { EServiceRewardSearchComponent } from '@ksp/shared/search';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
+import {
+  ValidateKspRequestComponent,
+  ConsiderKspRequestComponent,
+} from '@ksp/e-service/e-license/approve-ksp-request';
+import { EResearchRewardConfirmComponent } from './e-research-reward-confirm/e-research-reward-confirm.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const routes: Routes = [
   {
@@ -33,6 +40,10 @@ const routes: Routes = [
       {
         path: 'detail/:id',
         component: EResearchRewardDetailComponent,
+      },
+      {
+        path: 'confirm/:id',
+        component: EResearchRewardConfirmComponent,
       },
     ],
   },
@@ -54,8 +65,15 @@ const routes: Routes = [
     SelfServiceFormModule,
     EServiceRewardSearchComponent,
     ThaiDatePipe,
+    LicenseCheckComponent,
+    ValidateKspRequestComponent,
+    MatPaginatorModule,
   ],
-  declarations: [EResearchRewardListComponent, EResearchRewardDetailComponent],
+  declarations: [
+    EResearchRewardListComponent,
+    EResearchRewardDetailComponent,
+    EResearchRewardConfirmComponent,
+  ],
   exports: [EResearchRewardListComponent, EResearchRewardDetailComponent],
 })
 export class EServiceProfessionalResearchRewardModule {}

@@ -1,11 +1,23 @@
+import { AbstractControl } from '@angular/forms';
 import {
   SchoolRequestProcess,
   SchoolRequestType,
   SelfRequestProcess,
   SelfRequestType,
 } from '@ksp/shared/constant';
-import { FileGroup, KspRequest, SchoolRequest } from '@ksp/shared/interface';
+import { FileGroup, KspRequest } from '@ksp/shared/interface';
 import moment from 'moment';
+
+export function hasRejectedRequest(requests: KspRequest[]): KspRequest[] {
+  return requests.filter((req) => {
+    const condition1 =
+      req.requesttype === '3' && req.process === '3' && req.status === '2';
+
+    const condition2 =
+      req.requesttype === '3' && req.process === '4' && req.status === '2';
+    return condition1 || condition2;
+  });
+}
 
 // return Thai date format,
 export function stringToThaiDate(
@@ -96,17 +108,18 @@ export function toLowercaseProp(input: any) {
   }, {});
 }
 
-export function checkProcess(processId: number, requestType = 3) {
+export function checkProcess(processId: number, requestType: number) {
   const process = SchoolRequestProcess.find((p) => {
     return p.processId === processId && p.requestType === requestType;
   });
+  //console.log('process = ', process);
   return process;
 }
 
 export function checkStatus(
   processId: number,
   statusId: number,
-  requestType = 3
+  requestType: number
 ) {
   const process = checkProcess(processId, requestType);
   const status = process?.status.find((s) => {
@@ -208,4 +221,92 @@ export function applyClientFilter(data: KspRequest[], param: any) {
 
 export function processFilter(data: KspRequest[], process = 1) {
   return data.filter((d) => Number(d.process) > process);
+}
+
+export function genKuruspaNo() {
+  const d1 = 6;
+  const d2 = 5;
+  const d3 = Math.floor(Math.random() * 10);
+  const d4 = Math.floor(Math.random() * 10);
+  const d5 = Math.floor(Math.random() * 10);
+  const d6 = Math.floor(Math.random() * 10);
+  const d7 = Math.floor(Math.random() * 10);
+  const d8 = Math.floor(Math.random() * 10);
+  const d9 = Math.floor(Math.random() * 10);
+  const d10 = Math.floor(Math.random() * 10);
+  const d11 = Math.floor(Math.random() * 10);
+  const d12 = Math.floor(Math.random() * 10);
+  let d13;
+  const n13 =
+    11 -
+    ((d1 * 13 +
+      d2 * 12 +
+      d3 * 11 +
+      d4 * 10 +
+      d5 * 9 +
+      d6 * 8 +
+      d7 * 7 +
+      d8 * 6 +
+      d9 * 5 +
+      d10 * 4 +
+      d11 * 3 +
+      d12 * 2) %
+      11);
+  if (n13 >= 10) {
+    d13 = n13 - 10;
+  } else {
+    d13 = n13;
+  }
+  const cid = `${d1}${d2}${d3}${d4}${d5}${d6}${d7}${d8}${d9}${d10}${d11}${d12}${d13}`;
+  return cid;
+}
+
+export function validateIdCard(
+  control: AbstractControl
+): { [key: string]: any } | null {
+  //console.log('validate id card = ');
+  let sum = 0;
+  for (let i = 0; i < 12; i++) {
+    if (control.value) {
+      sum += parseFloat(control.value.charAt(i)) * (13 - i);
+    }
+  }
+
+  if (
+    control.value &&
+    (11 - (sum % 11)) % 10 != parseFloat(control.value.charAt(12))
+  ) {
+    return { idCardInvalid: true };
+  } else {
+    return null;
+  }
+}
+
+export function validatePassword(
+  control: AbstractControl
+): { [key: string]: any } | null {
+  if (
+    /[A-Z]/.test(control.value) &&
+    /[a-z]/.test(control.value) &&
+    /[0-9]/.test(control.value) &&
+    ///[^A-Za-z0-9]/.test(control.value) &&
+    control.value.length > 7
+  ) {
+    return null;
+  } else {
+    return { passwordInvalid: true };
+  }
+}
+
+export function addDate(
+  date: Date,
+  d: number = 0,
+  m: number = 0,
+  y: number = 0
+): Date {
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const day = date.getDate();
+  const c = new Date(year + y, month + m, day + d - 1);
+  return c;
 }

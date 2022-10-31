@@ -55,9 +55,6 @@ export class SchoolInfoService {
   searchSchUsers(payload: any): Observable<SchUser[]> {
     return this.http
       .post(`${environment.apiUrl}/ksppublic/schuserselect`, payload)
-      .pipe(
-        shareReplay(),
-        map((data: any) => data.datareturn)
-      );
+      .pipe(map((data: any) => data.datareturn));
   }
 }

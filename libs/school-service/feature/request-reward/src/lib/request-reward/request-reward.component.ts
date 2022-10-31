@@ -13,7 +13,6 @@ import {
   KspRequestProcess,
   PersonType,
   Prefix,
-  SchoolRequest,
 } from '@ksp/shared/interface';
 import {
   GeneralInfoService,

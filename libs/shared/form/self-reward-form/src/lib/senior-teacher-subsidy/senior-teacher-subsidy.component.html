@@ -39,26 +39,31 @@
         <ng-container
           *ngIf="cost.selectedOptions.selected[0]?.value === 'สถานภาพ'">
           <ksp-senior-teacher-subsidy-one
+            [mode]="mode"
             formControlName="status"></ksp-senior-teacher-subsidy-one>
         </ng-container>
         <ng-container
           *ngIf="cost.selectedOptions.selected[0]?.value === 'คู่สมรส'">
           <ksp-senior-teacher-subsidy-two
+            [mode]="mode"
             formControlName="spouse"></ksp-senior-teacher-subsidy-two>
         </ng-container>
         <ng-container
           *ngIf="cost.selectedOptions.selected[0]?.value === 'บุตร'">
           <ksp-senior-teacher-subsidy-three
+            [mode]="mode"
             formControlName="children"></ksp-senior-teacher-subsidy-three>
         </ng-container>
         <ng-container
           *ngIf="cost.selectedOptions.selected[0]?.value === 'ค่าใช้จ่าย'">
           <ksp-senior-teacher-subsidy-four
+            [mode]="mode"
             formControlName="expense"></ksp-senior-teacher-subsidy-four>
         </ng-container>
         <ng-container
           *ngIf="cost.selectedOptions.selected[0]?.value === 'รายได้ก่อนเกษียณ'">
           <ksp-senior-teacher-subsidy-five
+            [mode]="mode"
             formControlName="income"></ksp-senior-teacher-subsidy-five>
         </ng-container>
         <ng-container
@@ -67,6 +72,7 @@
             'ทรัพย์สินของตนเองและคู่สมรส'
           ">
           <ksp-senior-teacher-subsidy-six
+            [mode]="mode"
             formControlName="property"></ksp-senior-teacher-subsidy-six>
         </ng-container>
       </div>

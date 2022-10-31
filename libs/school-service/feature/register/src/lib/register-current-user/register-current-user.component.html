@@ -14,7 +14,7 @@
       (selectedUniversity)="selectedUniversity($event)"
     ></ksp-university-select>
 
-    <div *ngIf="activeUser" class="bg-white p-3 mt-2">
+    <div *ngIf="activeUsers && activeUsers.length" class="bg-white p-3 mt-2">
       <div class="fs-5 text-danger">
         โรงเรียน/หน่วยงานของท่านได้สมัครสมาชิกแล้ว
         ท่านต้องการสมัครสมาชิกใหม่หรือไม่
@@ -25,7 +25,10 @@
       </div>
     </div>
 
-    <div *ngIf="activeUser" class="bg-light p-3 mt-1">
+    <div
+      *ngIf="activeUsers && activeUsers.length; else notFound"
+      class="bg-light p-3 mt-1"
+    >
       <div class="text-primary fs-5 mb-1">ผลการค้นหา</div>
       <div class="table-responsive">
         <table class="table">
@@ -33,30 +36,42 @@
             <tr>
               <th scope="col">ลำดับ</th>
               <th scope="col">ชื่อ-นามสกุล</th>
-              <th scope="col">เบอร์โทรศัพท์</th>
-              <th scope="col">ชื่อ-นามสกุล ผู้แต่งตั้ง</th>
+              <!-- <th scope="col">เบอร์โทรศัพท์</th> -->
+              <!-- <th scope="col">ชื่อ-นามสกุล ผู้แต่งตั้ง</th> -->
               <th scope="col">สถานะ</th>
             </tr>
           </thead>
 
           <tbody class="bg-white">
-            <tr>
-              <td>1</td>
-              <td>นายพิชัย ชาญชัย</td>
-              <td>091-9872678</td>
-              <td>นายกมล อัศวหาญ</td>
-              <td>ใช้งาน</td>
-            </tr>
+            <ng-container *ngFor="let user of activeUsers; index as i">
+              <tr>
+                <td>{{ i + 1 }}</td>
+                <td>{{ user.firstnameth }} {{ user.lastnameth }}</td>
+                <!-- <td>{{ user.schmobile }}</td> -->
+                <!-- <td>นายกมล อัศวหาญ</td> -->
+                <td>
+                  {{ user.schuseractive === '1' ? 'ใช้งาน' : 'ไม่ใช้งาน' }}
+                </td>
+              </tr>
+            </ng-container>
           </tbody>
         </table>
       </div>
     </div>
+
+    <ng-template #notFound>
+      <ng-container *ngIf="searchEnd">
+        <hr />
+        <div class="text-primary box-header">ไม่พบผู้ใช้งาน</div>
+      </ng-container></ng-template
+    >
+
     <div class="mt-3">
       <ksp-bottom-nav
         (prevClicked)="back()"
         (nextClicked)="next()"
         [showCenterButtons]="false"
-        [disableNext]="!school"
+        [disableNext]="false"
         disableNextMessage="กรุณาเลือกโรงเรียน/ สถานศึกษาก่อน"
       ></ksp-bottom-nav>
     </div>
