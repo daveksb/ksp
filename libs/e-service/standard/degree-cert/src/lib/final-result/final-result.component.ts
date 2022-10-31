@@ -12,7 +12,7 @@ export class FinalResultComponent {
   form = this.fb.group({
     finalResult: [],
   });
-
+  requestNumber = ""
   constructor(
     public dialog: MatDialog,
     private router: Router,
