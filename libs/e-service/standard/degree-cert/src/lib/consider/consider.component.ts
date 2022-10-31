@@ -105,7 +105,6 @@ export class ConsiderComponent implements OnInit {
   requestdate = '';
   considerCourses: any = [];
   considerCert: any = [];
-  daftRequest: any;
 
   choices = [
     { name: 'เห็นควรพิจารณาให้การรับรอง', value: 1 },
@@ -162,7 +161,6 @@ export class ConsiderComponent implements OnInit {
         .uniRequestDegreeCertSelectById(this.route.snapshot.params['key'])
         .pipe(
           map((res) => {
-            this.daftRequest = res;
             this.dataSource.data = [{
               key: res?.id,
               requestno: res?.requestno,
@@ -221,12 +219,6 @@ export class ConsiderComponent implements OnInit {
     this.router.navigate(['./', 'degree-cert', 'verify', '1']);
   }
 
-  onSubmitDeGreeCert() {
-    this.eUniService.uniDegreeCertInsert(this._getRequest()).subscribe(() => {
-      this.onConfirmed();
-    });
-  }
-
   save() {
     const payload: any = {
       systemtype: '3',
@@ -249,8 +241,7 @@ export class ConsiderComponent implements OnInit {
     dialogRef.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
-          this.onSubmitDeGreeCert();
-          // this.router.navigate(['/', 'degree-cert', 'list', '1']);
+          this.router.navigate(['/', 'degree-cert', 'list', '1']);
         });
       }
     });
@@ -272,117 +263,6 @@ export class ConsiderComponent implements OnInit {
     dialogRef.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         this.dialog.closeAll();
-      }
-    });
-  }
-
-  private _getRequest(): any {
-    let final: any = {};
-    const payload: any = _.pick(this.daftRequest, [
-      'requestid',
-      'requestno',
-      'degreeapprovecode',
-      'uniid',
-      'unitype',
-      'uniname',
-      'unicode',
-      'uniprovince',
-      'degreelevel',
-      'courseacademicyear',
-      'coursename',
-      'coursetype',
-      'coursestatus',
-      'coursemajor',
-      'coursefieldofstudy',
-      'coursesubjects',
-      'fulldegreenameth',
-      'fulldegreenameen',
-      'shortdegreenameth',
-      'shortdegreenameen',
-      'courseapprovetime',
-      'courseapprovedate',
-      'courseacceptdate',
-      'coursedetailtype',
-      'coursedetailinfo',
-      'teachinglocation',
-      'responsibleunit',
-      'evaluatelocation',
-      'coordinatorinfo',
-      'coursestructure',
-      'courseplan',
-      'courseteacher',
-      'courseinstructor',
-      'courseadvisor',
-      'processtrainning',
-      'processteaching',
-      'attachfiles',
-      'requestdate',
-      'tokenkey',
-    ]);
-    if (payload?.coursedetailinfo)
-      payload.coursedetailinfo = jsonStringify(
-        parseJson(payload.coursedetailinfo)
-      );
-    if (payload?.teachinglocation)
-      payload.teachinglocation = jsonStringify(
-        parseJson(payload.teachinglocation)
-      );
-    if (payload?.responsibleunit)
-      payload.responsibleunit = jsonStringify(
-        parseJson(payload.responsibleunit)
-      );
-    if (payload?.evaluatelocation)
-      payload.evaluatelocation = jsonStringify(
-        parseJson(payload.evaluatelocation)
-      );
-    if (payload?.coordinatorinfo)
-      payload.coordinatorinfo = jsonStringify(
-        parseJson(payload.coordinatorinfo)
-      );
-    if (payload?.courseteacher)
-      payload.courseteacher = jsonStringify(parseJson(payload.courseteacher));
-    if (payload?.courseinstructor)
-      payload.courseinstructor = jsonStringify(
-        parseJson(payload.courseinstructor)
-      );
-    if (payload?.courseadvisor)
-      payload.courseadvisor = jsonStringify(parseJson(payload.courseadvisor));
-    if (payload?.processtrainning)
-      payload.processtrainning = jsonStringify(
-        parseJson(payload.processtrainning)
-      );
-    if (payload?.processteaching)
-      payload.processteaching = jsonStringify(
-        parseJson(payload.processteaching)
-      );
-    if (payload?.coursestructure)
-      payload.coursestructure = jsonStringify(
-        parseJson(payload.coursestructure)
-      );
-    if (payload?.courseplan)
-      payload.courseplan = jsonStringify(parseJson(payload.courseplan));
-    
-    Object.keys(payload).map((key: string) => {
-      final[key] = payload[key] === "" ? null : payload[key]; 
-    })
-    return final;
-  }
-
-  onConfirmed() {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
-      data: {
-        header: 'ยืนยันข้อมูลสำเร็จ',
-        subContent: `ระบบส่งใบคำขอเพื่อพิจารณาประเมินหลักสูตร
-        เรียบร้อย`,
-        buttonLabel: 'กลับสู่หน้าหลัก',
-        showPrintButton: true,
-      },
-    });
-
-    completeDialog.componentInstance.completed.subscribe((res) => {
-      if (res) {
-        this.router.navigate(['/', 'degree-cert', 'list', 0]);
       }
     });
   }
