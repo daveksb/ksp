@@ -35,7 +35,7 @@ export const routes: Routes = [
         component: VerifyComponent,
       },
       {
-        path: 'consider', //พิจารณา
+        path: 'consider/:key', //พิจารณา
         component: ConsiderComponent,
       },
       {

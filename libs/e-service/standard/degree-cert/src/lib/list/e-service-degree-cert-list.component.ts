@@ -190,6 +190,8 @@ export class EServiceDegreeCertListComponent
       this.router.navigate(['/degree-cert', 'consider']);
     } else if (this.pageType === 2) {
       this.router.navigate(['/degree-cert', 'approve']);
+    } else if (this.pageType === 3) {
+      this.router.navigate(['/degree-cert', 'consider', row?.key]);
     }
   }
 
@@ -215,6 +217,7 @@ const displayedColumns: string[] = [
 ];
 export interface DegreeCertInfo {
   // degreeId: string;
+  key?:any;
   requestno?:any;
   date: string;
   uni: string;
