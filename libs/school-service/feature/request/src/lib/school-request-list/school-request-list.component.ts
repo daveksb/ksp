@@ -38,8 +38,6 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
   checkStatus = checkStatus;
   requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
   careerTypeList = careerTypeList;
-  alertMessage = `แจ้งเตือน เลขที่คำขอ: xxxx ถูกส่งคืน "ปรับแก้ไข/เพิ่มเติม
-  กรุณาส่งกลับภายในวันที่ xxx มิฉะนั้นใบคำขอจะถูกยกเลิก`;
   initialSearch = true;
   rejectedRequests: KspRequest[] = [];
 

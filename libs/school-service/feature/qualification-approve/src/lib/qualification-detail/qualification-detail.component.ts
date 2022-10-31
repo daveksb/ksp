@@ -12,10 +12,16 @@ import {
   QualificationApprovePersonComponent,
 } from '@ksp/shared/form/others';
 import {
+  Amphur,
+  Country,
   FileGroup,
   FormMode,
   KspRequest,
   KspRequestProcess,
+  Nationality,
+  Prefix,
+  Province,
+  Tambol,
 } from '@ksp/shared/interface';
 import {
   AddressService,
@@ -56,27 +62,24 @@ export class QualificationDetailComponent implements OnInit {
 
   uniqueNo!: string;
   userInfoFormdisplayMode: number = UserInfoFormType.thai;
-  prefixList$!: Observable<any>;
-  provinces1$!: Observable<any>;
-  provinces2$!: Observable<any>;
-  amphurs1$!: Observable<any>;
-  tumbols1$!: Observable<any>;
-  amphurs2$!: Observable<any>;
-  tumbols2$!: Observable<any>;
-  countries$!: Observable<any>;
-  nationalitys$!: Observable<any>;
+  prefixList$!: Observable<Prefix[]>;
+  provinces1$!: Observable<Province[]>;
+  provinces2$!: Observable<Province[]>;
+  amphurs1$!: Observable<Amphur[]>;
+  tumbols1$!: Observable<Tambol[]>;
+  amphurs2$!: Observable<Amphur[]>;
+  tumbols2$!: Observable<Tambol[]>;
+  countries$!: Observable<Country[]>;
+  nationalitys$!: Observable<Nationality[]>;
   schoolId = getCookie('schoolId');
-  careerType!: number;
-
-  request: KspRequest = new KspRequest();
+  careerType = '';
   requestId!: number;
   requestData = new KspRequest();
-  requestStatus!: number;
-  currentProcess!: number;
+
   otherreason: any;
   refperson: any;
   evidenceFiles: FileGroup[] = files;
-  mode!: FormMode;
+  mode: FormMode = 'edit';
   showEdu2 = false;
   showEdu3 = false;
   showEdu4 = false;
@@ -115,14 +118,13 @@ export class QualificationDetailComponent implements OnInit {
   checkRequestSubType() {
     this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
       if (Number(params['subtype'])) {
-        this.careerType = Number(params['subtype']);
+        this.careerType = params['subtype'];
       }
     });
   }
 
   pathUserInfo(data: any) {
     data.birthdate = data?.birthdate?.split('T')[0];
-
     data.passportstartdate = data.passportstartdate.split('T')[0];
     data.passportenddate = data.passportenddate.split('T')[0];
     //console.log('data = ', data);
@@ -174,34 +176,36 @@ export class QualificationDetailComponent implements OnInit {
   }
 
   loadRequestData(id: number) {
-    this.requestService.schGetRequestById(id).subscribe((res) => {
-      if (res) {
-        this.requestStatus = Number(res.status);
-        this.currentProcess = Number(res.process);
-        res.birthdate = formatDate(res.birthdate);
-        this.form.controls.userInfo.patchValue(<any>res);
+    this.requestService.schGetRequestById(id).subscribe((req) => {
+      if (req) {
+        req.birthdate = formatDate(req.birthdate);
+        this.form.controls.userInfo.patchValue(<any>req);
 
-        this.patchAddress(parseJson(res.addressinfo));
-        this.patchEdu(parseJson(res.eduinfo));
+        this.patchAddress(parseJson(req.addressinfo));
+        this.patchEdu(parseJson(req.eduinfo));
 
-        const json = parseJson(res.fileinfo);
+        const json = parseJson(req.fileinfo);
         if (json && json.file && Array.isArray(json.file)) {
           this.evidenceFiles.forEach(
             (group, index) => (group.files = json.file[index])
           );
         }
 
-        res.refperson
-          ? (res.refperson = JSON.parse(atob(res.refperson)))
+        req.refperson
+          ? (req.refperson = JSON.parse(atob(req.refperson)))
           : null;
 
-        res.otherreason
-          ? (res.otherreason = JSON.parse(atob(res.otherreason)))
+        req.otherreason
+          ? (req.otherreason = JSON.parse(atob(req.otherreason)))
           : null;
 
-        this.refperson = res.refperson;
-        this.otherreason = res.otherreason;
-        this.mode = 'view';
+        this.refperson = req.refperson;
+        this.otherreason = req.otherreason;
+        if (req.process === '3') {
+          this.mode = 'view';
+        } else if (req.process === '2' && req.status === '2') {
+          this.mode = 'edit';
+        }
       }
     });
   }
@@ -349,10 +353,10 @@ export class QualificationDetailComponent implements OnInit {
             const userInfo: Partial<KspRequest> = formData.userInfo;
             userInfo.ref1 = '2';
             userInfo.ref2 = '06';
-            userInfo.ref3 = `${this.careerType}`;
+            userInfo.ref3 = this.careerType;
             userInfo.systemtype = '2';
             userInfo.requesttype = '6';
-            userInfo.careertype = `${this.careerType}`;
+            userInfo.careertype = this.careerType;
             userInfo.schoolid = this.schoolId;
             userInfo.bureauname = this.bureauName;
             userInfo.schoolname = this.schoolName;
