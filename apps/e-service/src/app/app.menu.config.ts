@@ -362,7 +362,7 @@ export const standardMenu: MenuConfig[] = [
         label: 'ประเมินหลักสูตรและโครงสร้างหลักสูตร',
       },
       {
-        path: `/degree-cert/list/4`,
+        path: `/degree-cert/list/1/2`,
         label: 'พิจารณาและออกใบรับรองปริญญาและประกาศนียบัตร',
       },
     ],
