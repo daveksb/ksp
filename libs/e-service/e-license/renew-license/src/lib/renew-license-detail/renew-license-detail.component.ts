@@ -26,6 +26,7 @@ export class RenewLicenseDetailComponent implements OnInit {
     workplace: [],
     education: [],
     experience: [],
+    educationForm: [],
     standardWorking: [],
   });
 
@@ -51,6 +52,8 @@ export class RenewLicenseDetailComponent implements OnInit {
   amphurs3$!: Observable<any>;
 
   requestId!: number;
+  educationType: 'teacher' | 'schManager' | 'eduManager' | 'supervision' =
+    'teacher';
 
   workingInfoFiles = [
     {
@@ -93,6 +96,24 @@ export class RenewLicenseDetailComponent implements OnInit {
           .getKspRequestById(this.requestId)
           .subscribe((res) => {
             if (res) {
+              console.log(res);
+              switch (res.careertype) {
+                case '1':
+                  this.educationType = 'teacher';
+                  break;
+                case '2':
+                  this.educationType = 'schManager';
+                  console.log(this.educationType);
+                  break;
+                case '3':
+                  this.educationType = 'eduManager';
+                  break;
+                case '4':
+                  this.educationType = 'supervision';
+                  break;
+                default:
+                  this.educationType = 'teacher';
+              }
               this.patchData(res);
             }
           });
@@ -107,13 +128,34 @@ export class RenewLicenseDetailComponent implements OnInit {
       this.patchWorkplace(parseJson(data.schooladdrinfo));
     }
 
-    if (data.performanceinfo) {
-      const performanceInfo = parseJson(data.performanceinfo);
-      const { educationType, ...educationLevelForm } = performanceInfo;
-      this.form.controls.standardWorking.patchValue({
+    if (data.eduinfo) {
+      const eduInfo = parseJson(data.eduinfo);
+      console.log(eduInfo);
+      const { educationType, ...educationLevelForm } = eduInfo;
+      this.form.controls.educationForm.patchValue({
         educationType,
         educationLevelForm,
       } as any);
+    }
+
+    if (data.performanceinfo) {
+      const performanceInfo = parseJson(data.performanceinfo);
+      console.log(performanceInfo);
+      console.log(this.educationType);
+      if (this.educationType === 'teacher') {
+        const { educationType, ...educationLevelForm } = performanceInfo;
+        this.form.controls.standardWorking.patchValue({
+          educationType,
+          educationLevelForm,
+        } as any);
+      } else {
+        const { standardType, ...standardLevelForm } = performanceInfo;
+        console.log(standardType);
+        this.form.controls.standardWorking.patchValue({
+          educationType: standardType,
+          educationLevelForm: standardLevelForm,
+        } as any);
+      }
     }
   }
 

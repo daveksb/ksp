@@ -53,6 +53,8 @@ export class RequestLicenseApproveDetailComponent implements OnInit {
   amphurs3$!: Observable<any>;
 
   requestId!: number;
+  educationTypes: 'teacher' | 'schManager' | 'eduManager' | 'supervision' =
+    'teacher';
 
   constructor(
     private fb: FormBuilder,
@@ -76,7 +78,24 @@ export class RequestLicenseApproveDetailComponent implements OnInit {
           .getKspRequestById(this.requestId)
           .subscribe((res) => {
             if (res) {
+              console.log(res);
               this.patchData(res);
+              switch (res.careertype) {
+                case '1':
+                  this.educationTypes = 'teacher';
+                  break;
+                case '2':
+                  this.educationTypes = 'schManager';
+                  break;
+                case '3':
+                  this.educationTypes = 'eduManager';
+                  break;
+                case '4':
+                  this.educationTypes = 'supervision';
+                  break;
+                default:
+                  this.educationTypes = 'teacher';
+              }
             }
           });
       }

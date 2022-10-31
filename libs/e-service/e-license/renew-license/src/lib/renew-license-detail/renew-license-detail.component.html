@@ -99,11 +99,20 @@
           </div> -->
         </mat-tab>
 
+        <mat-tab label="ข้อมูลคุณสมบัติของผู้ขอต่ออายุใบอนุญาต" *ngIf="educationType !== 'teacher'">
+          <self-service-renew-license-property
+            formControlName="educationForm"
+            [mode]="'view'"
+            [renewLicenseTypes]="educationType"></self-service-renew-license-property>
+          <!-- [workingInfo]="licenseFiles" -->
+          <!-- [uniqueTimestamp]="uniqueTimestamp" -->
+        </mat-tab>
+
         <mat-tab label="ผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน">
           <self-service-standard-working
             formControlName="standardWorking"
             [mode]="'view'"
-            [educationType]="'teacher'"
+            [educationType]="educationType"
             [uniqueTimestamp]="'uniqueTimestamp'"
             [workingInfo]="workingInfoFiles"></self-service-standard-working>
         </mat-tab>
