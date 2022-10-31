@@ -58,18 +58,24 @@ export class CompareKnowledgeEducationComponent
   }
 
   override set value(value: any) {
-    console.log(value);
     Object.keys(value).forEach((key) => {
       const control = this.form.get(key) as FormArray;
       if (value[key].length) {
         // control.removeAt(0);
         value[key].forEach((item: any, index: number) => {
-          this.addFormArray1(control);
-          this.addFormArray2(control);
+          if (index === 0) {
+            this.addFormArray1(control);
+          } else {
+            this.addFormArray2(control);
+          }
           control.at(index).patchValue(item);
         });
       }
     });
+
+    if (this.mode === 'view') {
+      this.form.disable();
+    }
 
     this.onChange(value);
     this.onTouched();
