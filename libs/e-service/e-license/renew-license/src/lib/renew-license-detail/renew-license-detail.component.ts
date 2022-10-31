@@ -26,7 +26,7 @@ export class RenewLicenseDetailComponent implements OnInit {
     workplace: [],
     education: [],
     experience: [],
-    standardworking: [],
+    standardWorking: [],
   });
 
   form2 = this.fb.group({
@@ -106,6 +106,15 @@ export class RenewLicenseDetailComponent implements OnInit {
     if (data.schooladdrinfo) {
       this.patchWorkplace(parseJson(data.schooladdrinfo));
     }
+
+    if (data.performanceinfo) {
+      const performanceInfo = parseJson(data.performanceinfo);
+      const { educationType, ...educationLevelForm } = performanceInfo;
+      this.form.controls.standardWorking.patchValue({
+        educationType,
+        educationLevelForm,
+      } as any);
+    }
   }
 
   patchWorkplace(data: any) {
@@ -120,10 +129,12 @@ export class RenewLicenseDetailComponent implements OnInit {
         if (i === 0) {
           this.amphurs1$ = this.addressService.getAmphurs(addr.province);
           this.tumbols1$ = this.addressService.getTumbols(addr.amphur);
+          this.form.controls.address1.patchValue(addr);
         }
         if (i === 1) {
           this.amphurs2$ = this.addressService.getAmphurs(addr.province);
           this.tumbols2$ = this.addressService.getTumbols(addr.amphur);
+          this.form.controls.address2.patchValue(addr);
         }
       });
     }

@@ -1,7 +1,4 @@
-<ksp-top-nav
-  ><span header>ใบอนุญาตประกอบวิชาชีพ</span
-  ><span subHeader>ขอขึ้นใบอนุญาตประกอบวิชาชีพ</span></ksp-top-nav
->
+<ksp-top-nav><span header>ใบอนุญาตประกอบวิชาชีพ</span><span subHeader>ขอขึ้นใบอนุญาตประกอบวิชาชีพ</span></ksp-top-nav>
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
@@ -9,8 +6,7 @@
     <div class="bg-white px-4 py-2">
       <ksp-request-header-info
         [requestDate]="'requestDate'"
-        [requestNumber]="'requestNo'"
-      ></ksp-request-header-info>
+        [requestNumber]="'requestNo'"></ksp-request-header-info>
       <hr />
       <div class="row align-items-center bg-light py-2 mx-0 mb-3">
         <div class="col-lg-3 my-auto">
@@ -19,11 +15,11 @@
         <div class="col-md mt-md-0 mt-2">
           <ksp-form-user-info
             formControlName="userInfo"
+            [mode]="'view'"
             [isDarkMode]="true"
             [prefixList]="prefixList$ | async"
             [nationList]="nationalitys$ | async"
-            [isSelfService]="true"
-          >
+            [isSelfService]="true">
           </ksp-form-user-info>
         </div>
       </div>
@@ -31,26 +27,25 @@
       <mat-tab-group
         class="tab-group"
         animationDuration="0ms"
-        [selectedIndex]="0"
-      >
+        [selectedIndex]="0">
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address
             formControlName="address1"
+            [mode]="'view'"
             [isDarkMode]="true"
             [provinces]="provinces$ | async"
             [amphurs]="amphurs1$ | async"
-            [tumbols]="tumbols1$ | async"
-          >
+            [tumbols]="tumbols1$ | async">
             <span>ที่อยู่ทะเบียนบ้าน</span>
           </ksp-form-address>
           <hr />
           <ksp-form-address
             formControlName="address2"
+            [mode]="'view'"
             [isDarkMode]="true"
             [provinces]="provinces$ | async"
             [amphurs]="amphurs2$ | async"
-            [tumbols]="tumbols2$ | async"
-          >
+            [tumbols]="tumbols2$ | async">
             <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
           </ksp-form-address>
         </mat-tab>
@@ -58,17 +53,15 @@
         <mat-tab label="สถานที่ทำงาน">
           <div class="d-flex align-items-center">
             <input type="checkbox" class="me-2" />
-            <label class="form-label mb-2"
-              >เป็นผู้ประสงค์ประกอบวิชาชีพทางการศึกษา</label
-            >
+            <label class="form-label mb-2">เป็นผู้ประสงค์ประกอบวิชาชีพทางการศึกษา</label>
           </div>
           <self-service-form-user-workplace
             [showContactForm]="true"
             formControlName="workplace"
+            [mode]="'view'"
             [provinces]="provinces$ | async"
             [amphurs]="amphurs3$ | async"
-            [tumbols]="tumbols3$ | async"
-          >
+            [tumbols]="tumbols3$ | async">
           </self-service-form-user-workplace>
           <!-- <div class="row">
             <div class="col-md-6 mb-3">
@@ -108,11 +101,11 @@
 
         <mat-tab label="ผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน">
           <self-service-standard-working
-            formControlName="standardworking"
+            formControlName="standardWorking"
+            [mode]="'view'"
             [educationType]="'teacher'"
             [uniqueTimestamp]="'uniqueTimestamp'"
-            [workingInfo]="workingInfoFiles"
-          ></self-service-standard-working>
+            [workingInfo]="workingInfoFiles"></self-service-standard-working>
         </mat-tab>
       </mat-tab-group>
     </div>
@@ -120,8 +113,7 @@
       <e-service-license-check
         formControlName="verifyResult"
         [headerTitle]="'ผลการตรวจสอบ'"
-        [choices]="choices"
-      ></e-service-license-check>
+        [choices]="choices"></e-service-license-check>
     </div>
   </div>
 </form>
@@ -129,6 +121,5 @@
 <div class="sticky-bottom border px-2">
   <ksp-bottom-nav
     [showCenterButtons]="true"
-    [isFirstPage]="true"
-  ></ksp-bottom-nav>
+    [isFirstPage]="true"></ksp-bottom-nav>
 </div>

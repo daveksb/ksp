@@ -13,7 +13,7 @@
   </div>
   <div class="bg-light px-3 py-2 my-2" *ngIf="activity1">
     <ksp-standard-train-pass
-      formControlName="trainInfo"></ksp-standard-train-pass>
+      formControlName="trainInfo" [mode]="mode"></ksp-standard-train-pass>
   </div>
 
   <div class="d-flex mb-2">
@@ -24,7 +24,7 @@
       class="text-secondary">ผ่านการทดสอบความรู้มาตรฐานวิชาชีพและจรรยาบรรณของวิชาชีพที่คณะกรรมการคุรุสภากำหนด</label>
   </div>
   <div class="bg-light px-3 py-2 my-2" *ngIf="activity2">
-    <ksp-standard-test-pass formControlName="testInfo"></ksp-standard-test-pass>
+    <ksp-standard-test-pass formControlName="testInfo" [mode]="mode"></ksp-standard-test-pass>
   </div>
 
   <div class="d-flex mb-2">

@@ -42,7 +42,9 @@
     </div>
 
     <ng-container *ngIf="selectedEducationType === 0">
-      <self-service-standard-working-teacher formControlName="educationLevelForm">
+      <self-service-standard-working-teacher
+        formControlName="educationLevelForm"
+        [mode]="mode">
       </self-service-standard-working-teacher>
       <div class="mt-3">
         <ksp-form-attachment
@@ -54,7 +56,9 @@
   </div>
 
   <ng-container *ngIf="selectedEducationType === 1">
-    <self-service-standard-working-non-teacher formControlName="educationLevelForm">
+    <self-service-standard-working-non-teacher
+      formControlName="educationLevelForm"
+      [mode]="mode">
     </self-service-standard-working-non-teacher>
   </ng-container>
 </form>
