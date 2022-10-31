@@ -78,13 +78,13 @@ export class EQualificationApproveDetailComponent implements OnInit {
     });
   }
 
+  navigateBack() {
+    this.router.navigate(['/qualification-approve', 'list']);
+  }
+
   next() {
     this.persistData();
     this.router.navigate(['/temp-license', 'confirm', this.requestData.id]);
-  }
-
-  navigateBack() {
-    this.router.navigate(['/qualification-approve', 'list']);
   }
 
   // save data to indexed db
@@ -94,7 +94,8 @@ export class EQualificationApproveDetailComponent implements OnInit {
       checkDetail: this.form.controls.checkResult.value,
       requestData: this.requestData,
     };
-    localForage.setItem('qualification-check-request-data', saveData);
+    localForage.setItem('checkRequestData', saveData);
+    //localForage.setItem('qualification-check-request-data', saveData);
   }
 
   loadRequestData(id: number) {

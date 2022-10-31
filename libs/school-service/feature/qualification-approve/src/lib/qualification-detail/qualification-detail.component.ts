@@ -150,10 +150,8 @@ export class QualificationDetailComponent implements OnInit {
         if (res && res.returncode !== '98') {
           //this.staffData = res;
           this.pathUserInfo(res);
-          /*  this.patchAddress(parseJson(res.addresses));
+          this.patchAddress(parseJson(res.addresses));
           this.patchEdu(parseJson(res.educations));
-          this.patchTeachingInfo(parseJson(res.teachinginfo));
-          this.patchHiringInfo(parseJson(res.hiringinfo)); */
         } else {
           // search not found reset form and set idcard again
           //this.completeDialog('ไม่พบบุคคลากรที่ระบุ');
@@ -164,31 +162,28 @@ export class QualificationDetailComponent implements OnInit {
       });
   }
 
+  patchAddress(addressinfo: any[]) {
+    if (addressinfo) {
+      for (let i = 0; i < addressinfo.length; i++) {
+        const form = this.form.get(`addr${i + 1}`) as AbstractControl<any, any>;
+        this.getAmphurChanged(i + 1, addressinfo[i].province);
+        this.getTumbon(i + 1, addressinfo[i].amphur);
+        form?.patchValue(addressinfo[i]);
+      }
+    }
+  }
+
   loadRequestData(id: number) {
     this.requestService.schGetRequestById(id).subscribe((res) => {
       if (res) {
         this.requestStatus = Number(res.status);
         this.currentProcess = Number(res.process);
         res.birthdate = formatDate(res.birthdate);
-
         this.form.controls.userInfo.patchValue(<any>res);
 
-        const edus = parseJson(res.eduinfo);
-        this.patchEdu(edus);
+        this.patchAddress(parseJson(res.addressinfo));
+        this.patchEdu(parseJson(res.eduinfo));
 
-        const addressinfo: any = parseJson(res.addressinfo);
-
-        if (addressinfo) {
-          for (let i = 0; i < addressinfo.length; i++) {
-            const form = this.form.get(`addr${i + 1}`) as AbstractControl<
-              any,
-              any
-            >;
-            this.getAmphurChanged(i + 1, addressinfo[i].province);
-            this.getTumbon(i + 1, addressinfo[i].amphur);
-            form?.patchValue(addressinfo[i]);
-          }
-        }
         const json = parseJson(res.fileinfo);
         if (json && json.file && Array.isArray(json.file)) {
           this.evidenceFiles.forEach(

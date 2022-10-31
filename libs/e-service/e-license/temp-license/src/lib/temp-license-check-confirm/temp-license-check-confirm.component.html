@@ -34,7 +34,15 @@
     </table>
 
     <div [formGroup]="form">
-      <ng-container *ngIf="saveData.requestData.process === '5'; else approve">
+      <ng-container
+        *ngIf="
+          (saveData.requestData.requesttype === '3' &&
+            saveData.requestData.process === '5') ||
+            (saveData.requestData.requesttype === '6' &&
+              saveData.requestData.process === '3');
+          else approve
+        "
+      >
         <ng-container *ngIf="saveData.requestData.status === '1'">
           <ksp-consider-ksp-request
             formControlName="approvement"
