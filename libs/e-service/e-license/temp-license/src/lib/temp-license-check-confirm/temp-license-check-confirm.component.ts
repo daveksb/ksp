@@ -14,6 +14,7 @@ import localForage from 'localforage';
 import { KspApprovePersistData } from '../e-temp-license-detail/e-temp-license-detail.component';
 import { Location } from '@angular/common';
 import { getCookie } from '@ksp/shared/utility';
+import { IfStmt } from '@angular/compiler';
 
 @UntilDestroy()
 @Component({
@@ -56,10 +57,27 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
     this.checkRequestId();
   }
 
+  getLabel() {
+    const req = this.saveData.requestData;
+    if (req.requesttype === '6') {
+      return `ขอรับรองคุณวุฒิการศึกษาเพื่อใช้ในการขอรับใบอนุญาตประกอบวิชาชีพ`;
+    } else {
+      const message = `ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ`;
+      if (req.careertype === '1') {
+        return message + 'ครู';
+      } else if (req.careertype === '2') {
+        return message + 'ผู้บริหารสถานศึกษา';
+      } else if (req.careertype === '5') {
+        return message + 'ชาวต่างชาติ';
+      } else {
+        return message;
+      }
+    }
+  }
+
   checkApproveResult(input: approveResult) {
     const req = this.saveData.requestData;
-    console.log('check approve = ');
-
+    //console.log('check approve = ');
     if (req.requesttype === '3') {
       if (input.result === '1') {
         //ครบถ้วน และถูกต้อง
@@ -162,10 +180,18 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
 
   considerRequest() {
     //console.log('consider request  = ');
+    const req = this.saveData.requestData;
+    let considerProcess = '';
+    if (req.requesttype === '3') {
+      considerProcess = '5';
+    } else if (req.requesttype === '6') {
+      considerProcess = '3';
+    }
+
     const form: any = this.form.value.approvement;
     const payload: KspApprovePayload = {
-      requestid: this.saveData.requestData.id,
-      process: '5',
+      requestid: req.id,
+      process: considerProcess,
       status: `${form.result}`,
       detail: JSON.stringify(this.saveData.checkDetail),
       systemtype: '2',
