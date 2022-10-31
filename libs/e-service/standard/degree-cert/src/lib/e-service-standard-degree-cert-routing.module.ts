@@ -4,7 +4,11 @@ import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container
 import { ApproveComponent } from './approve/approve.component';
 import { CheckComponent } from './check/check.component';
 import { ConsiderComponent } from './consider/consider.component';
+import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { FinalResultComponent } from './final-result/final-result.component';
+import { ConsiderStudentComponent } from './import-student/consider-student/consider-student.component';
+import { ImportStudentComponent } from './import-student/import-student.component';
+import { EServiceDegreeCertApprovedListComponent } from './list-approved/e-service-degree-cert-list-approved.component';
 import { EServiceDegreeCertListComponent } from './list/e-service-degree-cert-list.component';
 import { VerifyComponent } from './verify/verify.component';
 
@@ -27,6 +31,10 @@ export const routes: Routes = [
         component: EServiceDegreeCertListComponent,
       },
       {
+        path: 'list-approved',
+        component: EServiceDegreeCertApprovedListComponent
+      },
+      {
         path: 'check', //ตรวจสอบ
         component: CheckComponent,
       },
@@ -46,6 +54,18 @@ export const routes: Routes = [
         path: 'final-result', //ขั้นตอนสุดท้าย
         component: FinalResultComponent,
       },
+      {
+        path: 'course-detail/:id',
+        component: CourseDetailComponent
+      },
+      {
+        path: 'student-list/:type',
+        component: ImportStudentComponent
+      },
+      {
+        path: 'consider-student',
+        component: ConsiderStudentComponent
+      }
     ],
   },
 ];

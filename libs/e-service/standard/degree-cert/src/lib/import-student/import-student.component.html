@@ -27,32 +27,6 @@
       <div class="box-header">
         {{ pageType === 'admissionList' ? headerStudent.h3 : headerGraduate.h3 }}
       </div>
-      <div *ngIf="pageType === 'admissionList'">
-        <button
-          type="button"
-          (click)="downloadfile()"
-          class="btn border-success text-success w-auto me-2 btn-sm"
-        >
-          <img src="/assets/images/img-uni/microsoft excel.png" />
-          ดาวน์โหลดแบบฟอร์ม
-        </button>
-
-        <ng-container>
-          <button
-            (click)="fileUpload.click()"
-            type="button"
-            class="btn btn-sm btn-primary w-auto"
-          >
-            <img src="/assets/images/img-uni/Upload.svg" /> อัปโหลดไฟล์
-          </button></ng-container
-        >
-        <input
-          hidden="true"
-          type="file"
-          (change)="onFileSelected($event)"
-          #fileUpload
-        />
-      </div>
     </div>
 
     <form [formGroup]="formStudent">
@@ -68,7 +42,6 @@
             <tr>
               <th
                 class="p-2 text-nowrap align-text-top"
-                *ngIf="pageType === 'graduateList'"
               >
                 เลือก
               </th>
@@ -329,16 +302,17 @@
             let-expanded="expanded"
           >
             <tr [formGroupName]="ri">
-              <td class="p-2 text-nowrap" *ngIf="pageType === 'admissionList'">
-                {{ control.value.no }}
-              </td>
 
-              <td class="text-center" *ngIf="pageType === 'graduateList'">
+              <td class="text-center">
                 <input
                   type="checkbox"
                   formControlName="checked"
                   class="form-check-input"
                 />
+              </td>
+
+              <td class="p-2 text-nowrap" *ngIf="pageType === 'admissionList'">
+                {{ control.value.no }}
               </td>
 
               <td class="p-2 text-nowrap" *ngIf="pageType === 'graduateList'">
@@ -444,16 +418,6 @@
                   maxlength="13"
                   type="text"
                   formControlName="idcardno"
-                  (blur)="
-                    searchByIdcard(
-                      {
-                        idcardno: idcard.value,
-                        passportno: control.value.passportno
-                      },
-                      control.value.index
-                    )
-                  "
-                  (keyup.enter)="idcard.blur()"
                   [readonly]="pageType === 'graduateList'"
                 />
               </td>
@@ -465,16 +429,6 @@
                   #passport
                   type="text"
                   formControlName="passportno"
-                  (blur)="
-                    searchByIdcard(
-                      {
-                        idcardno: control.value.idcardno,
-                        passportno: passport.value
-                      },
-                      control.value.index
-                    )
-                  "
-                  (keyup.enter)="passport.blur()"
                   [readonly]="pageType === 'graduateList'"
                 />
               </td>
@@ -678,24 +632,20 @@
         users.length < courseData?.courseSelected.student
       "
     >
-      <ksp-add-row-button class="blue" (click)="addStudent()"
-        >เพิ่มรายชื่อ</ksp-add-row-button
-      >
     </div>
   </div>
 </div>
 
 <div class="sticky-bottom border">
   <ksp-bottom-nav
-    [isLastPage]="true"
-    [isFirstPage]="true"
-    [showCenterButtons]="true"
-    [showSaveButton]="true"
-    [showTempSaveButton]="true"
+    [isLastPage]="false"
+    [isFirstPage]="false"
+    [showCenterButtons]="false"
+    [showSaveButton]="false"
+    [showTempSaveButton]="false"
     [disableTempSaveButton]="checkdisableSave()"
-    (saveClicked)="save('send')"
     (cancelClicked)="cancel()"
-    (tempSaveClicked)="save('temp')"
+    (nextClicked)="next()"
     [disableSaveButton]="checkdisableSave()"
     [saveButtonLabel]="'บันทึกและยื่นใบคำขอ'"
   ></ksp-bottom-nav>

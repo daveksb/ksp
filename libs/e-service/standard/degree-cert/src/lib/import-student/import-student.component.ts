@@ -10,11 +10,10 @@ import {
   StudentListSubjectComponent,
   TrainingAddressComponent,
 } from '@ksp/uni-service/dialog';
-import { SelectItem } from 'primeng/api';
-import { User } from './user';
 import { UserService } from './user.service';
 import { FormAddressTableComponent } from '@ksp/shared/form/others';
 import {
+  EUniService,
   GeneralInfoService,
   UniInfoService,
   UniRequestService,
@@ -23,8 +22,6 @@ import localForage from 'localforage';
 import {
   FormArray,
   FormBuilder,
-  FormControl,
-  FormGroup,
   Validators,
 } from '@angular/forms';
 import { EMPTY, switchMap } from 'rxjs';
@@ -34,14 +31,13 @@ import {
   idCardPattern,
   nameEnPattern,
   nameThPattern,
-  parseJson,
   phonePattern,
   thaiDate,
 } from '@ksp/shared/utility';
 import moment from 'moment';
 
 @Component({
-  selector: 'uni-service-import-student',
+  selector: 'e-service-import-student',
   templateUrl: './import-student.component.html',
   styleUrls: ['./import-student.component.scss'],
 })
@@ -82,7 +78,7 @@ export class ImportStudentComponent implements OnInit {
     private route: ActivatedRoute,
     private generalInfoService: GeneralInfoService,
     private fb: FormBuilder,
-    private requestService: UniRequestService,
+    private requestService: EUniService,
     private uniInfoService: UniInfoService
   ) {}
 
@@ -124,11 +120,12 @@ export class ImportStudentComponent implements OnInit {
           admissionlist: [],
           graduatelist: [],
         };
-        if (this.pageType == 'admissionList') {
-          this.getAdmissionList();
-        } else {
-          this.getGraduateList();
-        }
+        this.getAdmissionList();
+        // if (this.pageType == 'admissionList') {
+        //   this.getAdmissionList();
+        // } else {
+        //   this.getGraduateList();
+        // }
       }
     });
     this.getNationality();
@@ -151,11 +148,18 @@ export class ImportStudentComponent implements OnInit {
               data.unidegreecertid == this.courseData?.courseDetail.id &&
               data.planyear == this.payload.planyear &&
               data.plancalendaryear == this.payload.plancalendaryear &&
-              data.admissionlist
+              (this.pageType == 'admissionList' ? data.requesttype == '05' : data.requesttype == '06')
             );
           });
-          if (findResponse && findResponse.process == '1') {
-            const parseuser = JSON.parse(findResponse.admissionlist);
+          console.log(findResponse)
+          if (findResponse && findResponse.process == '2') {
+            let parseuser:any;
+            if (this.pageType == 'admissionList') {
+              parseuser = JSON.parse(findResponse.admissionlist);
+            } else {
+              parseuser = JSON.parse(findResponse.graduatelist);
+            }
+            console.log(parseuser)
             parseuser.forEach((user: any, index: any) => {
               user.index = index;
               user.subjects = JSON.parse(user.subjects);
@@ -165,99 +169,6 @@ export class ImportStudentComponent implements OnInit {
             this.requestDate = findResponse.requestdate;
             this.payload.id = findResponse.id;
           }
-        }
-      });
-  }
-
-  getGraduateList() {
-    this.requestService
-      .getGraduateListById({
-        unidegreecertid: this.courseData?.courseDetail.id,
-        planyear: this.payload.planyear,
-        plancalendaryear: this.payload.plancalendaryear,
-        offset: 0,
-        row: 999,
-      })
-      .subscribe((response: any) => {
-        if (response.datareturn) {
-          response.datareturn.forEach((user: any, index: any) => {
-            user.index = index;
-            user.teachingpracticeschool = [];
-            user.admissiondate = moment(user.admissiondate).format(
-              'YYYY-MM-DD'
-            );
-            user.birthdate = moment(user.birthdate).format('YYYY-MM-DD');
-            user.subjects = JSON.parse(user.subjects);
-            this.user.push(this.edituser(user));
-          });
-          this.requestService
-            .getAdmissionListById({
-              unidegreecertid: this.courseData?.courseDetail.id,
-              planyear: this.payload.planyear,
-              plancalendaryear: this.payload.plancalendaryear,
-              offset: 0,
-              row: 999,
-            })
-            .subscribe((res: any) => {
-              if (res.datareturn.length) {
-                const findRequestGraduate = res.datareturn.find((data: any) => {
-                  return (
-                    data.graduatelist != null && data.process == '1'
-                  );
-                });
-                if (findRequestGraduate) {
-                  this.requestNo = findRequestGraduate.requestno;
-                  this.requestDate = findRequestGraduate.requestdate
-                  this.payload.id = findRequestGraduate.id;
-                  const convertGraduateList = JSON.parse(
-                    findRequestGraduate.graduatelist
-                  );
-                  convertGraduateList.map((data: any) => {
-                    const findindex = this.user.value.findIndex((user: any) => {
-                      return data.idcardno == user.idcardno;
-                    });
-                    if (findindex != -1) {
-                      const userAddress = JSON.parse(data.address);
-                      console.log(data)
-                      this.user.at(findindex).patchValue({
-                        approveno: data.approveno,
-                        approvedate: moment(data.approvedate).format(
-                          'YYYY-MM-DD'
-                        ),
-                        graduationdate: moment(data.graduationdate).format(
-                          'YYYY-MM-DD'
-                        ),
-                        checked: true,
-                        teachingpracticeschool: JSON.parse(
-                          data.teachingpracticeschool
-                        ),
-                        address: this.fb.group({
-                          addressInfo: [
-                            {
-                              location: [userAddress?.location || null],
-                              housenumber: [userAddress?.housenumber || null],
-                              villagenumber: [
-                                userAddress?.villagenumber || null,
-                              ],
-                              lane: [userAddress?.lane || null],
-                              road: [userAddress?.road || null],
-                              zipcode: [userAddress?.zipcode || null],
-                              provinceid: [userAddress?.provinceid || null],
-                              districtid: [userAddress?.districtid || null],
-                              subdistrictid: [
-                                userAddress?.subdistrictid || null,
-                              ],
-                              remark: [userAddress?.remark || null],
-                            },
-                          ],
-                        }),
-                      });
-                    }
-                  });
-                }
-              }
-            });
-          this.userBackup = [...this.user.value];
         }
       });
   }
@@ -343,7 +254,7 @@ export class ImportStudentComponent implements OnInit {
     if (this.pageType == 'admissionList') {
       userAddress = JSON.parse(data.address);
     } else {
-      userAddress = JSON.parse(data.addressinfo);
+      userAddress = JSON.parse(data.address);
     }
     return this.fb.group({
       checked: [false],
@@ -572,7 +483,7 @@ export class ImportStudentComponent implements OnInit {
       },
       data: {
         teachingpracticeschool:
-          this.user.at(index).value.teachingpracticeschool,
+        JSON.parse(this.user.at(index).value.teachingpracticeschool)
       },
     });
     dialogRef.afterClosed().subscribe((response: any) => {
@@ -585,6 +496,7 @@ export class ImportStudentComponent implements OnInit {
   }
 
   viewAdress(address: any) {
+    console.log(this.user.value)
     this.dialog.open(FormAddressTableComponent, {
       width: '75vw',
       height: '100vw',
@@ -598,59 +510,6 @@ export class ImportStudentComponent implements OnInit {
         isDialog: true,
       },
     });
-  }
-
-  save(typeSave: string) {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
-      data: {
-        title: `คุณต้องการยืนยันข้อมูล
-        และส่งใบคำขอ ใช่หรือไม่? `,
-      },
-    });
-
-    dialogRef.componentInstance.confirmed
-      .pipe(
-        switchMap((res) => {
-          if (res) {
-            if (typeSave == 'temp') {
-              this.payload.requestprocess = '1';
-              this.payload.process = '1';
-            } else {
-              this.payload.requestprocess = '2';
-              this.payload.process = '2';
-            }
-            if (this.pageType == 'admissionList') {
-              const datasave = this.user.value;
-              datasave.map((data: any) => {
-                delete data.index;
-                data.address = JSON.stringify(data.address.addressInfo);
-                data.subjects = JSON.stringify(data.subjects);
-              });
-              this.payload.admissionlist = JSON.stringify(datasave);
-              this.payload.graduatelist = null;
-            } else {
-              const graduatelist = this.getCheckedValue();
-              graduatelist.map((data: any) => {
-                data.address = JSON.stringify(data.address.addressInfo);
-                data.subjects = JSON.stringify(data.subjects);
-                data.teachingpracticeschool = JSON.stringify(
-                  data.teachingpracticeschool
-                );
-              });
-              this.payload.graduatelist = JSON.stringify(graduatelist);
-              this.payload.admissionlist = null;
-            }
-            return this.requestService.createRequestAdmission(this.payload);
-          }
-          return EMPTY;
-        })
-      )
-      .subscribe((res) => {
-        if (res) {
-          this.onConfirmed(res?.requestno);
-        }
-      });
   }
 
   getCheckedValue() {
@@ -675,76 +534,19 @@ export class ImportStudentComponent implements OnInit {
     });
   }
 
-  async onFileSelected(event: any) {
-    this.exceltoJson = {};
-    const target: DataTransfer = <DataTransfer>event.target;
-    const reader: FileReader = new FileReader();
-    reader.readAsBinaryString(target.files[0]);
-    this.exceltoJson['filename'] = target.files[0].name;
-    reader.onload = (e: any) => {
-      const binarystr: string = e.target.result;
-      const wb: XLSX.WorkBook = XLSX.read(binarystr, { type: 'binary' });
-      for (let i = 0; i < wb.SheetNames.length; ++i) {
-        const wsname: string = wb.SheetNames[i];
-        const ws: XLSX.WorkSheet = wb.Sheets[wsname];
-        const data = XLSX.utils.sheet_to_json(ws) || {};
-        data.forEach((newdata: any) => {
-          this.user.push(this.addDatafromFile(newdata));
-        });
-      }
+  next() {
+    const checkeddata = this.getCheckedValue();
+    const datainfo = {
+      studentlist: checkeddata,
+      requestno: this.requestNo,
+      requestid: this.payload.id,
+      pagetype: this.pageType,
+      total: this.user.value.length,
+      requestdate: this.requestDate
     };
-  }
-
-  downloadfile() {
-    window.open('/assets/file/admission_example.xlsx', '_blank');
-  }
-
-  searchByIdcard(params: any, index: any) {
-    if (params.idcardno || params.passportno) {
-      const payload = {
-        idcardno: params.idcardno,
-        passportno: params.passportno,
-        offset: 0,
-        row: 10,
-      };
-      this.uniInfoService.searchSelfStudent(payload).subscribe((response) => {
-        if (response.datareturn) {
-          response.datareturn.forEach((data:any) => {
-            data.addressinfo = JSON.parse(data.addressinfo);
-          });
-          this.user.at(index).patchValue({
-            admissiondate: moment().format('YYYY-MM-DD') || null,
-            idcardno: response.datareturn[0].idcardno || null,
-            passportno: response.datareturn[0].passportno || null,
-            nationality: response.datareturn[0].nationality || null,
-            prefixth: response.datareturn[0].prefixth || null,
-            firstnameth: response.datareturn[0].firstnameth || null,
-            lastnameth: response.datareturn[0].lastnameth || null,
-            prefixen: response.datareturn[0].prefixen || null,
-            firstnameen: response.datareturn[0].firstnameen || null,
-            middlenameen: response.datareturn[0].middlenameen || null,
-            lastnameen: response.datareturn[0].lastnameen || null,
-            phone: response.datareturn[0].phone || null,
-            birthdate: response.datareturn[0].birthdate || null,
-          });
-          this.user.at(index).get('address')?.patchValue({
-            addressInfo: {
-              location: [response.datareturn[0].addressinfo ? response.datareturn[0].addressinfo[0].location : null],
-              housenumber: [response.datareturn[0].addressinfo ? response.datareturn[0].addressinfo[0].houseNo : null],
-              villagenumber: [response.datareturn[0].addressinfo ? response.datareturn[0].addressinfo[0].moo : null],
-              lane: [response.datareturn[0].addressinfo ? response.datareturn[0].addressinfo[0].alley : null],
-              road: [response.datareturn[0].addressinfo ? response.datareturn[0].addressinfo[0].houseNo : null],
-              zipcode: [response.datareturn[0].addressinfo ? response.datareturn[0].addressinfo[0].postcode : null],
-              provinceid: [response.datareturn[0].addressinfo ? response.datareturn[0].addressinfo[0].province : null],
-              districtid: [response.datareturn[0].addressinfo ? response.datareturn[0].addressinfo[0].amphur : null],
-              subdistrictid: [response.datareturn[0].addressinfo ? response.datareturn[0].addressinfo[0].tumbol : null],
-              remark: [response.datareturn[0].addressinfo ? response.datareturn[0].addressinfo[0].remark : null],
-            },
-          })
-          this.user.at(index).updateValueAndValidity();
-        }
-      });
-    }
+    
+    localForage.setItem('studentform', datainfo);
+    this.router.navigate(['/degree-cert', 'consider-student']);
   }
 
   checkdisableSave() {

@@ -375,7 +375,7 @@ export const standardMenu: MenuConfig[] = [
     subMenuName: 'gradute-list',
     subMenu: [
       {
-        path: '/aa',
+        path: '/degree-cert/list-approved',
         label: 'รายการใบคำขอส่งรายชื่อผู้เข้าศึกษา',
       },
       {

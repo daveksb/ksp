@@ -28,6 +28,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DegreeCertSearchComponent } from '@ksp/shared/search';
 import { RouterModule } from '@angular/router';
 import { FormMeetingRecordComponent } from '@ksp/e-service/ethics/form';
+import { EServiceDegreeCertApprovedListComponent } from './list-approved/e-service-degree-cert-list-approved.component';
+import { ImportStudentComponent } from './import-student/import-student.component';
+import { CourseDetailComponent } from './course-detail/course-detail.component';
+import { TableModule } from 'primeng/table';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { FormAddressTableComponent } from '@ksp/shared/form/others';
+import { ConsiderStudentComponent } from './import-student/consider-student/consider-student.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   imports: [
@@ -45,6 +53,7 @@ import { FormMeetingRecordComponent } from '@ksp/e-service/ethics/form';
     MatStepperModule,
     MatTabsModule,
     MatIconModule,
+    TableModule,
     SharedFormDegreeCertStepTwoModule,
     RequestHeaderInfoComponent,
     TopNavComponent,
@@ -53,14 +62,21 @@ import { FormMeetingRecordComponent } from '@ksp/e-service/ethics/form';
     ReactiveFormsModule,
     FormMeetingRecordComponent,
     DegreeCertSearchComponent,
+    MatDatepickerModule,
+    FormAddressTableComponent,
+    MatPaginatorModule
   ],
   declarations: [
     EServiceDegreeCertListComponent,
+    EServiceDegreeCertApprovedListComponent,
     VerifyComponent,
     ConsiderComponent,
     ApproveComponent,
     CheckComponent,
     FinalResultComponent,
+    ImportStudentComponent,
+    CourseDetailComponent,
+    ConsiderStudentComponent
   ],
 })
 export class EServiceStandardDegreeCertModule {}
