@@ -89,6 +89,21 @@ export class RequestLicenseApproveDetailComponent implements OnInit {
     if (data.schooladdrinfo) {
       this.patchWorkplace(parseJson(data.schooladdrinfo));
     }
+
+    if (data.eduinfo) {
+      const eduInfo = parseJson(data.eduinfo);
+      const { educationType, ...educationLevelForm } = eduInfo;
+      this.form.controls.education.patchValue({
+        educationType,
+        educationLevelForm,
+      } as any);
+    }
+
+    if (data.experienceinfo) {
+      const experienceInfo = parseJson(data.experienceinfo);
+      console.log(experienceInfo);
+      this.form.controls.experience.patchValue({ ...experienceInfo });
+    }
   }
 
   patchWorkplace(data: any) {
@@ -103,10 +118,12 @@ export class RequestLicenseApproveDetailComponent implements OnInit {
         if (i === 0) {
           this.amphurs1$ = this.addressService.getAmphurs(addr.province);
           this.tumbols1$ = this.addressService.getTumbols(addr.amphur);
+          this.form.controls.address1.patchValue(addr);
         }
         if (i === 1) {
           this.amphurs2$ = this.addressService.getAmphurs(addr.province);
           this.tumbols2$ = this.addressService.getTumbols(addr.amphur);
+          this.form.controls.address2.patchValue(addr);
         }
       });
     }

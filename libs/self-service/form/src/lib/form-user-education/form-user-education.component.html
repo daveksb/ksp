@@ -39,37 +39,46 @@
     <ng-container *ngIf="educationTypes === 'teacher'">
       <ksp-education-level-form-one
         *ngIf="selectedEducationType === 0"
+        [mode]="mode"
         formControlName="educationLevelForm"></ksp-education-level-form-one>
       <ksp-education-level-form-two
         *ngIf="selectedEducationType === 1"
+        [mode]="mode"
         formControlName="educationLevelForm"></ksp-education-level-form-two>
       <ksp-education-level-form-one
         *ngIf="selectedEducationType === 2"
+        [mode]="mode"
         formControlName="educationLevelForm"></ksp-education-level-form-one>
       <ksp-education-level-form-one
         *ngIf="selectedEducationType === 3"
+        [mode]="mode"
         formControlName="educationLevelForm"></ksp-education-level-form-one>
       <ksp-education-level-form-three
         *ngIf="selectedEducationType === 4"
+        [mode]="mode"
         formControlName="educationLevelForm"
         [countries]="countries"></ksp-education-level-form-three>
       <ksp-education-level-form-four
         *ngIf="selectedEducationType === 5"
+        [mode]="mode"
         formControlName="educationLevelForm"></ksp-education-level-form-four>
     </ng-container>
 
     <ng-container *ngIf="educationTypes === 'schManager'">
       <ksp-education-level-form-one
         *ngIf="selectedEducationType <= 1"
+        [mode]="mode"
         formControlName="educationLevelForm">
       </ksp-education-level-form-one>
       <ksp-education-level-form-five
         *ngIf="selectedEducationType === 2"
+        [mode]="mode"
         formControlName="educationLevelForm">
       </ksp-education-level-form-five>
       <ksp-education-level-form-six
         [isHasCountry]="true"
         *ngIf="selectedEducationType === 3"
+        [mode]="mode"
         formControlName="educationLevelForm">
       </ksp-education-level-form-six>
       <ng-container *ngIf="selectedEducationType >= 0">
@@ -85,14 +94,17 @@
     <ng-container *ngIf="educationTypes === 'eduManager'">
       <ksp-education-level-form-one
         *ngIf="selectedEducationType <= 1"
+        [mode]="mode"
         formControlName="educationLevelForm">
       </ksp-education-level-form-one>
       <ksp-education-level-form-five
         *ngIf="selectedEducationType === 2"
+        [mode]="mode"
         formControlName="educationLevelForm">
       </ksp-education-level-form-five>
       <ksp-education-level-form-six
         *ngIf="selectedEducationType === 3"
+        [mode]="mode"
         formControlName="educationLevelForm">
       </ksp-education-level-form-six>
       <ng-container *ngIf="selectedEducationType >= 0">
@@ -109,9 +121,11 @@
       <ksp-education-level-form-one
         [isSupervision]="true"
         *ngIf="selectedEducationType === 0"
+        [mode]="mode"
         formControlName="educationLevelForm"></ksp-education-level-form-one>
       <ksp-education-level-form-six
         *ngIf="selectedEducationType === 1"
+        [mode]="mode"
         formControlName="educationLevelForm"></ksp-education-level-form-six>
       <ng-container *ngIf="selectedEducationType >= 0">
         <div class="mt-3">
