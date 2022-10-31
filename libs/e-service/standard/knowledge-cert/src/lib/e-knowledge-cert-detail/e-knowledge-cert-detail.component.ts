@@ -3,12 +3,14 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import { ESelfFormBaseComponent } from '@ksp/shared/form/others';
+import { SelfGetRequest } from '@ksp/shared/interface';
 import {
   AddressService,
   GeneralInfoService,
   EducationDetailService,
   ERequestService,
 } from '@ksp/shared/service';
+import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -35,8 +37,8 @@ export class EKnowledgeCertDetailComponent
     address1: [],
     address2: [],
     workplace: [],
-    education: [],
-    tranferData: [],
+    educationInfo: [],
+    transferKnowledgeInfo: [],
   });
 
   form2 = this.fb.group({
@@ -83,6 +85,24 @@ export class EKnowledgeCertDetailComponent
   ngOnInit(): void {
     this.getListData();
     this.checkRequestId();
+  }
+
+  override patchData(data: SelfGetRequest): void {
+    super.patchData(data);
+    if (data.eduinfo) {
+      const eduInfo = parseJson(data.eduinfo);
+      this.form.controls.educationInfo.patchValue({
+        ...eduInfo,
+      } as any);
+    }
+
+    if (data.transferknowledgeinfo) {
+      const transferKnowledgeInfo = parseJson(data.transferknowledgeinfo);
+      console.log(transferKnowledgeInfo);
+      this.form.controls.transferKnowledgeInfo.patchValue({
+        ...transferKnowledgeInfo,
+      });
+    }
   }
 
   patchUserInfoForm(data: any): void {
