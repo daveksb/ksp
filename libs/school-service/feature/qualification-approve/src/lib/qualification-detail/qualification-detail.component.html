@@ -166,15 +166,19 @@
     </div>
   </div>
 </form>
-
+<!--     [showSaveButton]="
+      !requestId ||
+      requestData.process === '1' ||
+      (requestData.process === '2' && requestData.status === '2')
+    " -->
 <div class="sticky-bottom border px-2">
   <ksp-bottom-nav
     [isFirstPage]="mode !== 'view'"
     [colorMode]="'blue'"
     [isLastPage]="true"
     [showCenterButtons]="true"
-    [showCancelButton]="requestStatus !== 0"
-    [showSaveButton]="!requestId || currentProcess === 1"
+    [showCancelButton]="requestData.status !== '0'"
+    [showSaveButton]="mode === 'edit'"
     (saveClicked)="onSave()"
     (cancelClicked)="cancel()"
     (prevClicked)="onClickPrev()"
