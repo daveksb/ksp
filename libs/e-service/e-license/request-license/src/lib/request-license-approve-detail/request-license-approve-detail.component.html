@@ -130,5 +130,7 @@
 <div class="sticky-bottom border px-2">
   <ksp-bottom-nav
     [showCenterButtons]="true"
-    [isFirstPage]="true"></ksp-bottom-nav>
+    [isFirstPage]="true"
+    (nextClicked)="next()"
+    (cancelClicked)="cancel()"></ksp-bottom-nav>
 </div>

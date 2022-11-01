@@ -70,6 +70,7 @@ export abstract class ESelfFormBaseComponent {
 
   // save data to indexed db
   persistData(checkDetail: any) {
+    console.log(this.requestData);
     const saveData: KspApprovePersistData = {
       checkDetail,
       requestData: this.requestData,
@@ -85,6 +86,7 @@ export abstract class ESelfFormBaseComponent {
           .getKspRequestById(this.requestId)
           .subscribe((res) => {
             if (res) {
+              this.requestData = res;
               this.patchData(res);
             }
           });

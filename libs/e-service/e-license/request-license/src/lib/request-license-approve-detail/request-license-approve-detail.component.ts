@@ -95,6 +95,7 @@ export class RequestLicenseApproveDetailComponent
           .subscribe((res) => {
             if (res) {
               console.log(res);
+              this.requestData = res;
               this.patchData(res);
               switch (res.careertype) {
                 case '1':
@@ -161,7 +162,11 @@ export class RequestLicenseApproveDetailComponent
 
   next() {
     this.persistData(this.form.controls.checkResult.value);
-    this.router.navigate(['/request-license', 'confirm', this.requestId]);
+    this.router.navigate([
+      '/request-license',
+      'approve-confirm',
+      this.requestId,
+    ]);
   }
 
   cancel() {
