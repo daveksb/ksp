@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import { ESelfFormBaseComponent } from '@ksp/shared/form/others';
 import {
@@ -11,6 +11,8 @@ import {
 } from '@ksp/shared/service';
 import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
+
+const FORM_TAB_COUNT = 5;
 
 @Component({
   selector: 'ksp-request-license-approve-detail',
@@ -23,8 +25,6 @@ export class RequestLicenseApproveDetailComponent
 {
   approveTitles = 'ผลการตรวจสอบ';
 
-  approveChoices = choices;
-
   userInfoType = UserInfoFormType.thai;
   override form = this.fb.group({
     userInfo: [],
@@ -33,7 +33,12 @@ export class RequestLicenseApproveDetailComponent
     workplace: [],
     education: [],
     experience: [],
+    checkResult: this.fb.array([]),
   });
+
+  get checkResultFormArray() {
+    return this.form.controls.checkResult as FormArray;
+  }
 
   form2 = this.fb.group({
     verifyResult: [null, Validators.required],
@@ -56,7 +61,8 @@ export class RequestLicenseApproveDetailComponent
     generalInfoService: GeneralInfoService,
     educationDetailService: EducationDetailService,
     route: ActivatedRoute,
-    requestService: ERequestService
+    requestService: ERequestService,
+    private router: Router
   ) {
     super(
       generalInfoService,
@@ -71,6 +77,13 @@ export class RequestLicenseApproveDetailComponent
   ngOnInit(): void {
     this.getListData();
     this.checkRequestId();
+    this.addCheckResultArray();
+  }
+
+  addCheckResultArray() {
+    for (let i = 0; i < FORM_TAB_COUNT; i++) {
+      this.checkResultFormArray.push(this.fb.control([]));
+    }
   }
 
   override checkRequestId() {
@@ -145,15 +158,13 @@ export class RequestLicenseApproveDetailComponent
   patchWorkPlaceForm(data: any): void {
     this.form.controls.workplace.patchValue(data);
   }
-}
 
-const choices = [
-  {
-    name: 'ครบถ้วน และถูกต้อง',
-    value: 2,
-  },
-  {
-    name: 'ไม่ครบถ้วน และถูกต้อง',
-    value: 3,
-  },
-];
+  next() {
+    this.persistData(this.form.controls.checkResult.value);
+    this.router.navigate(['/request-license', 'confirm', this.requestId]);
+  }
+
+  cancel() {
+    this.router.navigate(['/request-license']);
+  }
+}
