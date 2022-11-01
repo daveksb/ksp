@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   AddressService,
@@ -65,13 +65,15 @@ export class AddStaffComponent implements OnInit {
   userInfoType = UserInfoFormType.thai;
   searchStaffDone = false;
   kuruspaNo = '';
+  eduSelected: number[] = [];
 
   form = this.fb.group({
     userInfo: [],
     addr1: [],
     addr2: [],
-    edu1: [],
-    edu2: [],
+    edu: this.fb.array([]),
+    /*     edu1: [],
+    edu2: [], */
     teachingInfo: [],
     hiringInfo: [],
   });
@@ -91,9 +93,38 @@ export class AddStaffComponent implements OnInit {
     this.checkMode();
     this.getList();
     this.checkStaffId();
-    /*     this.form.valueChanges.subscribe((res) =>
-      console.log(this.form.controls.userInfo.value)
-    ); */
+    this.addEdu();
+    this.form.valueChanges.subscribe((res) => console.log(this.form.value));
+  }
+
+  get edu() {
+    return this.form.controls.edu as FormArray;
+  }
+
+  addEdu(degreeLevel: number = 1) {
+    const eduForm = this.fb.group({
+      degreeLevel: [degreeLevel],
+      degreeName: [null],
+      isEducationDegree: [],
+      major: [null],
+      institution: [null],
+      country: [],
+      admissionDate: [],
+      graduateDate: [],
+      grade: [],
+      otherProperty: [],
+      academicYear: [],
+    });
+    this.edu.push(eduForm);
+  }
+
+  eduSelect(index: number, evt: any) {
+    const checked = evt.target.checked;
+    if (checked) {
+      this.addEdu(2);
+    } else {
+      this.form.controls.edu.removeAt(1);
+    }
   }
 
   checkStaffId() {
@@ -442,10 +473,10 @@ export class AddStaffComponent implements OnInit {
     if (edus && edus.length) {
       edus.map((edu, i) => {
         if (i === 0) {
-          this.form.controls.edu1.patchValue(edu);
+          //this.form.controls.edu1.patchValue(edu);
         }
         if (i === 1) {
-          this.form.controls.edu2.patchValue(edu);
+          //this.form.controls.edu2.patchValue(edu);
         }
       });
     }

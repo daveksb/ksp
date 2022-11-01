@@ -60,7 +60,7 @@
           class="tab-group"
           animationDuration="0ms"
           dynamicHeight="true"
-          selectedIndex="0"
+          selectedIndex="1"
         >
           <mat-tab label="ที่อยู่" class="tab-content">
             <ksp-form-address
@@ -97,21 +97,42 @@
           </mat-tab>
 
           <mat-tab label="วุฒิทางการศึกษา">
+            <!--             <div class="d-flex align-items-center">
+              <label class="fs-5">วุฒิการศึกษาปริญญาตรี</label>
+            </div>
+
             <ksp-form-education-info
-              [mode]="mode"
-              [showGradeInput]="true"
+              [showCheckbox]="false"
+              [showSelectDegree]="false"
               formControlName="edu1"
-              [showSelectDegree]="true"
-              [countries]="countries$ | async"
-            ></ksp-form-education-info
-            ><br />
-            <ksp-form-education-info
-              [mode]="mode"
               [showGradeInput]="true"
-              formControlName="edu2"
-              [showSelectDegree]="true"
+              [showPropertyInput]="false"
               [countries]="countries$ | async"
-            ></ksp-form-education-info>
+              [option]="true"
+            >
+            </ksp-form-education-info> -->
+
+            <ng-container
+              formArrayName="edu"
+              *ngFor="let row of edu.controls; let i = index"
+            >
+              <ksp-form-education-info
+                [mode]="mode"
+                [showGradeInput]="true"
+                [formControlName]="i"
+                [showSelectDegree]="true"
+                [countries]="countries$ | async"
+              ></ksp-form-education-info>
+
+              <div *ngIf="!i" class="d-flex align-items-center">
+                <input
+                  (change)="eduSelect(i + 1, $event)"
+                  type="checkbox"
+                  class="me-2"
+                />
+                <label class="fs-5">วุฒิการศึกษาอื่นๆ</label>
+              </div>
+            </ng-container>
           </mat-tab>
 
           <mat-tab label="ข้อมูลการสอนและการจ้าง">
