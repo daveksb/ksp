@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   AddressService,
@@ -51,7 +51,6 @@ export class AddStaffComponent implements OnInit {
   nationList$!: Observable<Nationality[]>;
   visaTypeList!: Observable<VisaType[]>;
   visaClassList!: Observable<VisaClass[]>;
-
   provinces$!: Observable<Province[]>;
   amphurs1$!: Observable<Amphur[]>;
   tumbols1$!: Observable<Tambol[]>;
@@ -73,8 +72,6 @@ export class AddStaffComponent implements OnInit {
     addr1: [],
     addr2: [],
     edu: this.fb.array([]),
-    /*     edu1: [],
-    edu2: [], */
     teachingInfo: [],
     hiringInfo: [],
   });
@@ -94,7 +91,6 @@ export class AddStaffComponent implements OnInit {
     this.checkMode();
     this.getList();
     this.checkStaffId();
-    //this.addEdu({ degreeLevel: '1' });
     //this.form.valueChanges.subscribe((res) => console.log(this.form.value));
   }
 
@@ -103,23 +99,11 @@ export class AddStaffComponent implements OnInit {
   }
 
   patchEdu(edus: formEdu[]) {
-    //console.log('edus = ', edus);
     if (edus && edus.length) {
       edus.map((edu, i) => {
-        console.log('edu = ', i, ' = ', edu);
         this.addEdu(edu);
       });
     }
-    /* if (edus && edus.length) {
-      edus.map((edu, i) => {
-        if (i === 0) {
-          this.form.controls.edu1.patchValue(edu);
-        }
-        if (i === 1) {
-          this.form.controls.edu2.patchValue(edu);
-        }
-      });
-    } */
   }
 
   addEdu(payload: Partial<formEdu>) {
@@ -156,6 +140,8 @@ export class AddStaffComponent implements OnInit {
         this.staffId = Number(params.get('id'));
         if (this.staffId) {
           this.loadStaffData(this.staffId);
+        } else {
+          this.addEdu({ degreeLevel: '1' });
         }
 
         // redirect from search idcard page
@@ -354,7 +340,7 @@ export class AddStaffComponent implements OnInit {
     const payload = {
       ...replaceEmptyWithNull(userInfo),
       ...{ addresses: JSON.stringify([formData.addr1, formData.addr2]) },
-      ...{ educations: JSON.stringify([formData.edu1, formData.edu2]) },
+      ...{ educations: JSON.stringify(formData.edu) },
       ...{ teachinginfo: JSON.stringify(teachingInfo) },
       ...{ hiringinfo: JSON.stringify(formData.hiringInfo) },
     };
@@ -370,7 +356,7 @@ export class AddStaffComponent implements OnInit {
 
   updateStaff() {
     const formData: any = this.form.getRawValue();
-    console.log('form data = ', formData);
+    //console.log('form data = ', formData);
     formData.userInfo.schoolid = this.schoolId;
 
     const teaching: any = this.form.controls.teachingInfo.value;
@@ -388,7 +374,6 @@ export class AddStaffComponent implements OnInit {
     let payload = {
       ...formData.userInfo,
       ...{ addresses: JSON.stringify([formData.addr1, formData.addr2]) },
-      //...{ educations: JSON.stringify([formData.edu1, formData.edu2]) },
       ...{ educations: JSON.stringify(formData.edu) },
       ...{
         teachinginfo: JSON.stringify(teachingInfo),
@@ -400,7 +385,7 @@ export class AddStaffComponent implements OnInit {
     payload = formatDatePayload(payload);
 
     this.staffService.updateStaff(payload).subscribe(() => {
-      //console.log('update result = ', res);
+      this.onCompleted();
     });
   }
 
@@ -443,12 +428,10 @@ export class AddStaffComponent implements OnInit {
   getList() {
     this.provinces$ = this.addressService.getProvinces();
     this.countries$ = this.addressService.getCountry();
-
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.nationList$ = this.generalInfoService.getNationality();
     this.visaClassList = this.generalInfoService.getVisaClass();
     this.visaTypeList = this.generalInfoService.getVisaType();
-
     this.staffTypes$ = this.staffService.getStaffTypes();
     this.positionTypes$ = this.staffService.getPositionTypes();
     this.academicTypes$ = this.staffService.getAcademicStandingTypes();
