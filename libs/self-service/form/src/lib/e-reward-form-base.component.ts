@@ -27,7 +27,6 @@ export abstract class ERewardFormBaseComponent {
   constructor() {}
 
   tabChanged(e: MatTabChangeEvent) {
-    console.log('tab event = ', e);
     this.selectedTab = e;
   }
 
