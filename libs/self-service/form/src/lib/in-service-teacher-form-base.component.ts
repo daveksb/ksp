@@ -69,7 +69,6 @@ export abstract class InserviceTeacherFormBaseComponent
   ngOnInit(): void {
     this.form.setValidators(this.atLeastThreeFormValidator());
     this.form.updateValueAndValidity();
-    console.log(this.form.valid);
     this.form.valueChanges
       .pipe(untilDestroyed(this), pairwise())
       .subscribe(([prev, next]: [prev: any, next: any]) => {

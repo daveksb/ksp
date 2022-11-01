@@ -42,6 +42,7 @@ export class EducationManagerExperienceComponent
 
   ngOnInit(): void {
     // this.form.setValidators(checkboxValidator());
+
     this.form.valueChanges
       .pipe(untilDestroyed(this), pairwise())
       .subscribe(([prev, next]) => {

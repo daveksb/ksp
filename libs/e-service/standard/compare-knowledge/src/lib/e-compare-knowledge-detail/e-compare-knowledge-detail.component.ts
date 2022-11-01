@@ -3,12 +3,14 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import { ESelfFormBaseComponent } from '@ksp/shared/form/others';
+import { SelfGetRequest } from '@ksp/shared/interface';
 import {
   AddressService,
   EducationDetailService,
   ERequestService,
   GeneralInfoService,
 } from '@ksp/shared/service';
+import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -71,6 +73,24 @@ export class ECompareKnowledgeDetailComponent
   ngOnInit(): void {
     this.getListData();
     this.checkRequestId();
+  }
+
+  override patchData(data: SelfGetRequest): void {
+    super.patchData(data);
+    if (data.eduinfo) {
+      const eduInfo = parseJson(data.eduinfo);
+      this.form.controls.educationInfo.patchValue({
+        ...eduInfo,
+      } as any);
+    }
+
+    if (data.testresultcompareinfo) {
+      const testResultCompareInfo = parseJson(data.testresultcompareinfo);
+      console.log(testResultCompareInfo);
+      this.form.controls.testResultCompareInfo.patchValue({
+        ...testResultCompareInfo,
+      });
+    }
   }
 
   patchUserInfoForm(data: any): void {

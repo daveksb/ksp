@@ -53,6 +53,8 @@ export class RequestLicenseApproveDetailComponent implements OnInit {
   amphurs3$!: Observable<any>;
 
   requestId!: number;
+  educationTypes: 'teacher' | 'schManager' | 'eduManager' | 'supervision' =
+    'teacher';
 
   constructor(
     private fb: FormBuilder,
@@ -76,7 +78,24 @@ export class RequestLicenseApproveDetailComponent implements OnInit {
           .getKspRequestById(this.requestId)
           .subscribe((res) => {
             if (res) {
+              console.log(res);
               this.patchData(res);
+              switch (res.careertype) {
+                case '1':
+                  this.educationTypes = 'teacher';
+                  break;
+                case '2':
+                  this.educationTypes = 'schManager';
+                  break;
+                case '3':
+                  this.educationTypes = 'eduManager';
+                  break;
+                case '4':
+                  this.educationTypes = 'supervision';
+                  break;
+                default:
+                  this.educationTypes = 'teacher';
+              }
             }
           });
       }
@@ -88,6 +107,21 @@ export class RequestLicenseApproveDetailComponent implements OnInit {
     this.patchAddress(parseJson(data.addressinfo));
     if (data.schooladdrinfo) {
       this.patchWorkplace(parseJson(data.schooladdrinfo));
+    }
+
+    if (data.eduinfo) {
+      const eduInfo = parseJson(data.eduinfo);
+      const { educationType, ...educationLevelForm } = eduInfo;
+      this.form.controls.education.patchValue({
+        educationType,
+        educationLevelForm,
+      } as any);
+    }
+
+    if (data.experienceinfo) {
+      const experienceInfo = parseJson(data.experienceinfo);
+      console.log(experienceInfo);
+      this.form.controls.experience.patchValue({ ...experienceInfo });
     }
   }
 
@@ -103,10 +137,12 @@ export class RequestLicenseApproveDetailComponent implements OnInit {
         if (i === 0) {
           this.amphurs1$ = this.addressService.getAmphurs(addr.province);
           this.tumbols1$ = this.addressService.getTumbols(addr.amphur);
+          this.form.controls.address1.patchValue(addr);
         }
         if (i === 1) {
           this.amphurs2$ = this.addressService.getAmphurs(addr.province);
           this.tumbols2$ = this.addressService.getTumbols(addr.amphur);
+          this.form.controls.address2.patchValue(addr);
         }
       });
     }
