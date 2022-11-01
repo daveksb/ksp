@@ -97,20 +97,9 @@
           </mat-tab>
 
           <mat-tab label="วุฒิทางการศึกษา">
-            <!--             <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center">
               <label class="fs-5">วุฒิการศึกษาปริญญาตรี</label>
             </div>
-
-            <ksp-form-education-info
-              [showCheckbox]="false"
-              [showSelectDegree]="false"
-              formControlName="edu1"
-              [showGradeInput]="true"
-              [showPropertyInput]="false"
-              [countries]="countries$ | async"
-              [option]="true"
-            >
-            </ksp-form-education-info> -->
 
             <ng-container
               formArrayName="edu"
@@ -124,7 +113,7 @@
                 [countries]="countries$ | async"
               ></ksp-form-education-info>
 
-              <div *ngIf="!i" class="d-flex align-items-center">
+              <div *ngIf="!i" class="d-flex align-items-center mt-1">
                 <input
                   (change)="eduSelect(i + 1, $event)"
                   type="checkbox"

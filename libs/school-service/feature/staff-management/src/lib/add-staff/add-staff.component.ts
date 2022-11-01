@@ -26,6 +26,7 @@ import {
   AcademicStanding,
   Amphur,
   Country,
+  formEdu,
   FormMode,
   Nationality,
   PositionType,
@@ -93,27 +94,47 @@ export class AddStaffComponent implements OnInit {
     this.checkMode();
     this.getList();
     this.checkStaffId();
-    this.addEdu();
-    this.form.valueChanges.subscribe((res) => console.log(this.form.value));
+    //this.addEdu({ degreeLevel: '1' });
+    //this.form.valueChanges.subscribe((res) => console.log(this.form.value));
   }
 
   get edu() {
     return this.form.controls.edu as FormArray;
   }
 
-  addEdu(degreeLevel: number = 1) {
+  patchEdu(edus: formEdu[]) {
+    //console.log('edus = ', edus);
+    if (edus && edus.length) {
+      edus.map((edu, i) => {
+        console.log('edu = ', i, ' = ', edu);
+        this.addEdu(edu);
+      });
+    }
+    /* if (edus && edus.length) {
+      edus.map((edu, i) => {
+        if (i === 0) {
+          this.form.controls.edu1.patchValue(edu);
+        }
+        if (i === 1) {
+          this.form.controls.edu2.patchValue(edu);
+        }
+      });
+    } */
+  }
+
+  addEdu(payload: Partial<formEdu>) {
     const eduForm = this.fb.group({
-      degreeLevel: [degreeLevel],
-      degreeName: [null],
-      isEducationDegree: [],
-      major: [null],
-      institution: [null],
-      country: [],
-      admissionDate: [],
-      graduateDate: [],
-      grade: [],
-      otherProperty: [],
-      academicYear: [],
+      degreeLevel: [payload.degreeLevel],
+      degreeName: [payload.degreeName],
+      isEducationDegree: [payload.isEducationDegree],
+      major: [payload.major],
+      institution: [payload.institution],
+      country: [payload.country],
+      admissionDate: [payload.admissionDate],
+      graduateDate: [payload.graduateDate],
+      grade: [payload.grade],
+      otherProperty: [payload.otherProperty],
+      academicYear: [payload.vacademicYear],
     });
     this.edu.push(eduForm);
   }
@@ -121,7 +142,7 @@ export class AddStaffComponent implements OnInit {
   eduSelect(index: number, evt: any) {
     const checked = evt.target.checked;
     if (checked) {
-      this.addEdu(2);
+      this.addEdu({ degreeLevel: '2' });
     } else {
       this.form.controls.edu.removeAt(1);
     }
@@ -304,9 +325,7 @@ export class AddStaffComponent implements OnInit {
     this.patchAddress(parseJson(res.addresses));
     this.patchEdu(parseJson(res.educations));
     this.pathTeachingInfo(parseJson(res.teachinginfo));
-
-    console.log('hiring = ', parseJson(res.hiringinfo));
-
+    //console.log('hiring = ', parseJson(res.hiringinfo));
     this.form.controls.hiringInfo.patchValue(parseJson(res.hiringinfo));
   }
 
@@ -369,7 +388,8 @@ export class AddStaffComponent implements OnInit {
     let payload = {
       ...formData.userInfo,
       ...{ addresses: JSON.stringify([formData.addr1, formData.addr2]) },
-      ...{ educations: JSON.stringify([formData.edu1, formData.edu2]) },
+      //...{ educations: JSON.stringify([formData.edu1, formData.edu2]) },
+      ...{ educations: JSON.stringify(formData.edu) },
       ...{
         teachinginfo: JSON.stringify(teachingInfo),
       },
@@ -466,20 +486,6 @@ export class AddStaffComponent implements OnInit {
         this.navigateBack();
       }
     });
-  }
-
-  patchEdu(edus: any[]) {
-    //console.log('edus = ', edus);
-    if (edus && edus.length) {
-      edus.map((edu, i) => {
-        if (i === 0) {
-          //this.form.controls.edu1.patchValue(edu);
-        }
-        if (i === 1) {
-          //this.form.controls.edu2.patchValue(edu);
-        }
-      });
-    }
   }
 
   patchAddress(addrs: any[]) {
