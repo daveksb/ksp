@@ -66,7 +66,7 @@
 
         <mat-tab label="ข้อมูลทางการศึกษา">
           <self-service-transfer-knowledge-education
-            formControlName="education"
+            formControlName="educationInfo"
             [mode]="'view'"
             [countries]="countries$ | async">
           </self-service-transfer-knowledge-education>
@@ -76,8 +76,8 @@
             [groups]="eduFiles"></ksp-form-attachment>
         </mat-tab>
 
-        <mat-tab label="ข้อมูลขอเทียบโอนความรู้วิชาชีพครู">
-          <self-service-transfer-knowledge-info formControlName="tranferData" [mode]="'view'">
+        <mat-tab label="ข้อมูลขอรับรองความรู้วิชาชีพครู">
+          <self-service-transfer-knowledge-info formControlName="transferKnowledgeInfo" [mode]="'view'">
           </self-service-transfer-knowledge-info>
           <br />
           <ksp-form-attachment
