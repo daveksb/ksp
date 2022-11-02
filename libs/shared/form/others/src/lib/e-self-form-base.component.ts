@@ -106,6 +106,9 @@ export abstract class ESelfFormBaseComponent {
     // if (data.filedata) {
     //   this.myImage = atob(data.filedata);
     // }
+    if (data.filedata) {
+      this.myImage = atob(data.filedata);
+    }
   }
 
   public getListData() {

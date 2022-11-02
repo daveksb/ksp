@@ -170,6 +170,6 @@ export class RequestLicenseApproveDetailComponent
   }
 
   cancel() {
-    this.router.navigate(['/request-license']);
+    this.router.navigate(['/request-license', 'approve-list']);
   }
 }
