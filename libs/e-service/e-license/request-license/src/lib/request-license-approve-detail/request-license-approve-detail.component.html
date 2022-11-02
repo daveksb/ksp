@@ -27,6 +27,7 @@
       <mat-tab-group
         class="tab-group mb-3"
         animationDuration="0ms"
+        (selectedTabChange)="tabChanged($event)"
         [selectedIndex]="0">
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address
@@ -48,10 +49,10 @@
             [tumbols]="tumbols2$ | async">
             <span class="me-1">ที่อยู่ที่ติดต่อได้สะดวก</span>
             <span class="text-danger fs-6">*กรุณากรอกข้อมูลตำบล,อำเภอ</span>
-            <div class="d-flex align-items-center">
+            <!-- <div class="d-flex align-items-center">
               <input type="checkbox" class="me-2" />
               <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
-            </div>
+            </div> -->
           </ksp-form-address>
         </mat-tab>
 
@@ -111,18 +112,25 @@
         </mat-tab>
       </mat-tab-group>
     </div>
-  </form>
 
-  <div [formGroup]="form2" class="bg-white px-4 py-3 mt-3">
-    <e-service-license-check
-      formControlName="verifyResult"
-      [headerTitle]="approveTitles"
-      [choices]="approveChoices"></e-service-license-check>
-  </div>
+    <ng-container
+      formArrayName="checkResult"
+      *ngFor="let c of checkResultFormArray.controls; let i = index">
+      <div
+        class="bg-white px-3 py-2 mt-3"
+        [ngClass]="{ hide: (selectedTab.index || 0) !== i }">
+        <e-service-license-check
+          [choices]="verifyChoice"
+          [formControlName]="i"></e-service-license-check>
+      </div>
+    </ng-container>
+  </form>
 </div>
 
 <div class="sticky-bottom border px-2">
   <ksp-bottom-nav
     [showCenterButtons]="true"
-    [isFirstPage]="true"></ksp-bottom-nav>
+    [isFirstPage]="true"
+    (nextClicked)="next()"
+    (cancelClicked)="cancel()"></ksp-bottom-nav>
 </div>

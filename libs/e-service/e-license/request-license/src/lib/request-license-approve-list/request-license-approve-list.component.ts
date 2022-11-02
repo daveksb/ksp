@@ -7,15 +7,28 @@ import { Router } from '@angular/router';
 import {
   SchoolRequestSubType,
   SchoolRequestType,
+  SelfRequestProcess,
   SelfServiceRequestType,
 } from '@ksp/shared/constant';
 import { EsSearchPayload, SelfRequest } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
-import {
-  checkProcess,
-  checkStatus,
-  replaceEmptyWithNull,
-} from '@ksp/shared/utility';
+import { replaceEmptyWithNull } from '@ksp/shared/utility';
+
+function checkProcess(processId: number, requestType: number) {
+  const process = SelfRequestProcess.find((p) => {
+    return p.processId === processId && p.requestType === requestType;
+  });
+  //console.log('process = ', process);
+  return process;
+}
+
+function checkStatus(processId: number, statusId: number, requestType: number) {
+  const process = checkProcess(processId, requestType);
+  const status = process?.status.find((s) => {
+    return s.id == statusId;
+  });
+  return status;
+}
 
 @Component({
   selector: 'ksp-request-license-approve-list',
@@ -49,21 +62,22 @@ export class RequestLicenseApproveListComponent implements AfterViewInit {
   }
 
   search(params: any) {
+    console.log(params);
     let payload: EsSearchPayload = {
       systemtype: '1',
       requesttype: SelfServiceRequestType.ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ,
-      requestno: null,
-      careertype: null,
+      requestno: params.requestno,
+      careertype: params.subtype,
       name: null,
-      idcardno: null,
+      idcardno: params.idcardno,
       passportno: null,
-      process: null,
-      status: null,
+      process: params.currentprocess,
+      status: params.requeststatus,
       schoolid: null,
       schoolname: null,
       bureauid: null,
-      requestdatefrom: null,
-      requestdateto: null,
+      requestdatefrom: params.requestdatefrom,
+      requestdateto: params.requestdateto,
       offset: '0',
       row: '1000',
     };

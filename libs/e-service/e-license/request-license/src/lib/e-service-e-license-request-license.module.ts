@@ -23,6 +23,11 @@ import { RequestLicenseApproveDetailComponent } from './request-license-approve-
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { RequestLicenseApproveConfirmComponent } from './request-license-approve-confirm/request-license-approve-confirm.component';
+import {
+  ValidateKspRequestComponent,
+  ConsiderKspRequestComponent,
+} from '@ksp/e-service/e-license/approve-ksp-request';
 
 export const routes: Route[] = [
   {
@@ -45,6 +50,10 @@ export const routes: Route[] = [
       {
         path: 'approve-detail/:id',
         component: RequestLicenseApproveDetailComponent,
+      },
+      {
+        path: 'approve-confirm/:id',
+        component: RequestLicenseApproveConfirmComponent,
       },
     ],
   },
@@ -70,10 +79,12 @@ export const routes: Route[] = [
     RequestSearchComponent,
     ThaiDatePipe,
     EServiceLicenseSearchComponent,
+    ValidateKspRequestComponent,
   ],
   declarations: [
     RequestLicenseApproveListComponent,
     RequestLicenseApproveDetailComponent,
+    RequestLicenseApproveConfirmComponent,
   ],
 })
 export class EServiceELicenseRequestLicenseModule {}

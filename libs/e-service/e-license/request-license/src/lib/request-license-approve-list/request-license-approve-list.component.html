@@ -1,7 +1,6 @@
-<ksp-top-nav
-  ><span header>ยื่นใบคำขอ</span>
-  <span subHeader>ขอใบอนุญาตประกอบวิชาชีพ </span></ksp-top-nav
->
+<ksp-top-nav><span header>ยื่นใบคำขอ</span>
+  <span subHeader>ขอใบอนุญาตประกอบวิชาชีพ </span>
+</ksp-top-nav>
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
@@ -11,8 +10,7 @@
         <ksp-e-service-license-search
           formControlName="search"
           (clear)="clear()"
-          (search)="search($event)"
-        ></ksp-e-service-license-search>
+          (search)="search($event)"></ksp-e-service-license-search>
       </div>
       <div class="box-header">รายการยื่นใบคำขอ</div>
       <div class="table__scroll">
@@ -21,9 +19,9 @@
             <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
             <td mat-cell *matCellDef="let element; let i = index">
               {{
-                paginator.pageIndex === 0
-                  ? i + 1
-                  : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+              paginator.pageIndex === 0
+              ? i + 1
+              : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
               }}
             </td>
           </ng-container>
@@ -34,8 +32,7 @@
               <i
                 role="button"
                 class="bi bi-file-earmark-check text-primary fs-5"
-                (click)="goToDetail(element)"
-              ></i>
+                (click)="goToDetail(element)"></i>
             </td>
           </ng-container>
 
@@ -69,8 +66,8 @@
             <th mat-header-cell *matHeaderCellDef>ขั้นตอนการดำเนินการ</th>
             <td mat-cell *matCellDef="let element">
               {{
-                checkProcess(+element.process, +element.requesttype)
-                  ?.processName
+              checkProcess(+element.process, +element.requesttype)
+              ?.processName
               }}
             </td>
           </ng-container>
@@ -79,11 +76,11 @@
             <th mat-header-cell *matHeaderCellDef>สถานะ</th>
             <td mat-cell *matCellDef="let element">
               {{
-                checkStatus(
-                  +element.process,
-                  +element.status,
-                  +element.requesttype
-                )?.ename
+              checkStatus(
+              +element.process,
+              +element.status,
+              +element.requesttype
+              )?.sname
               }}
             </td>
           </ng-container>
@@ -108,8 +105,7 @@
             <td mat-cell *matCellDef="let element">
               <i
                 role="button"
-                class="bi bi-file-earmark-text-fill text-primary fs-5"
-              ></i>
+                class="bi bi-file-earmark-text-fill text-primary fs-5"></i>
             </td>
           </ng-container>
 

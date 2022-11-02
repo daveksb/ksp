@@ -78,23 +78,26 @@ export class FormUserWorkplaceComponent
   }
 
   ngOnInit(): void {
-    this.form.valueChanges
-      .pipe(untilDestroyed(this), pairwise())
-      .subscribe(([prev, next]) => {
-        if (prev.notRequired !== next.notRequired) {
-          formList.forEach((form) => {
-            if (!next.notRequired) {
-              this.form.get(form)?.addValidators(Validators.required);
-              this.form.get(form)?.enable();
-            } else {
-              this.form.get(form)?.clearValidators();
-              this.form.get(form)?.disable();
-              this.form.get(form)?.reset();
-            }
-            this.form.get(form)?.updateValueAndValidity();
-          });
-        }
-      });
+    console.log(this.mode);
+    if (this.mode !== 'view') {
+      this.form.valueChanges
+        .pipe(untilDestroyed(this), pairwise())
+        .subscribe(([prev, next]) => {
+          if (prev.notRequired !== next.notRequired) {
+            formList.forEach((form) => {
+              if (!next.notRequired) {
+                this.form.get(form)?.addValidators(Validators.required);
+                this.form.get(form)?.enable();
+              } else {
+                this.form.get(form)?.clearValidators();
+                this.form.get(form)?.disable();
+                this.form.get(form)?.reset();
+              }
+              this.form.get(form)?.updateValueAndValidity();
+            });
+          }
+        });
+    }
   }
 
   openSearchDialog() {

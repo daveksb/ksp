@@ -9,8 +9,24 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { parseJson } from '@ksp/shared/utility';
-import { SelfGetRequest, SelfRequest } from '@ksp/shared/interface';
+import {
+  KspApprovePersistData,
+  KspRequest,
+  SelfGetRequest,
+} from '@ksp/shared/interface';
+import { MatTabChangeEvent } from '@angular/material/tabs';
+import localForage from 'localforage';
 
+const VERIFY_CHOICES = [
+  {
+    name: 'ครบถ้วน และถูกต้อง',
+    value: 'complete',
+  },
+  {
+    name: 'ไม่ครบถ้วน และไม่ถูกต้อง',
+    value: 'incomplete',
+  },
+];
 @Component({
   template: ``,
   standalone: true,
@@ -30,12 +46,14 @@ export abstract class ESelfFormBaseComponent {
   bureau$!: Observable<any>;
   form!: FormGroup;
   requestId!: number;
-  requestData!: SelfRequest;
   requestNo: string | null = '';
   currentProcess!: number;
   prohibitProperty: any;
   myImage = '';
   imageId = '';
+  verifyChoice: any[] = VERIFY_CHOICES;
+  selectedTab: MatTabChangeEvent = new MatTabChangeEvent();
+  requestData = new KspRequest();
 
   constructor(
     protected generalInfoService: GeneralInfoService,
@@ -46,6 +64,20 @@ export abstract class ESelfFormBaseComponent {
     protected route: ActivatedRoute
   ) {}
 
+  tabChanged(e: MatTabChangeEvent) {
+    this.selectedTab = e;
+  }
+
+  // save data to indexed db
+  persistData(checkDetail: any) {
+    console.log(this.requestData);
+    const saveData: KspApprovePersistData = {
+      checkDetail,
+      requestData: this.requestData,
+    };
+    localForage.setItem('checkRequestData', saveData);
+  }
+
   checkRequestId() {
     this.route.paramMap.subscribe((params) => {
       this.requestId = Number(params.get('id'));
@@ -54,6 +86,7 @@ export abstract class ESelfFormBaseComponent {
           .getKspRequestById(this.requestId)
           .subscribe((res) => {
             if (res) {
+              this.requestData = res;
               this.patchData(res);
             }
           });
