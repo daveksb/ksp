@@ -145,6 +145,7 @@ export class RequestLicenseApproveDetailComponent
     this.countries2$ = this.countries$;
     this.licenses$ = this.educationDetailService.getLicenseType();
     this.provinces$ = this.addressService.getProvinces();
+    this.bureau$ = this.educationDetailService.getBureau();
   }
 
   patchUserInfoForm(data: any): void {
