@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
+  FileGroup,
   FormMode,
   KspApprovePayload,
   KspRequest,
@@ -33,6 +34,16 @@ export class UserDetailComponent implements OnInit {
   pageTypeEnum = SchoolUserPageType;
   setPassword = '';
   mode: FormMode = 'view';
+  files: FileGroup[] = [
+    {
+      name: 'หนังสือแต่งตั้งผู้ประสานงาน',
+      files: [],
+    },
+    {
+      name: 'สำเนาบัตรประชาชน',
+      files: [],
+    },
+  ];
 
   form = this.fb.group({
     userInfo: [],
@@ -74,7 +85,19 @@ export class UserDetailComponent implements OnInit {
     this.eRequestService.getKspRequestById(id).subscribe((res) => {
       this.requestData = res;
       res.status === '1' ? (this.mode = 'edit') : (this.mode = 'view');
-      //console.log('status = ', res.status);
+      //console.log('file = ', parseJson(res.fileinfo));
+
+      const files = parseJson(res.fileinfo);
+      console.log('files = ', files);
+
+      if (files && Array.isArray(files)) {
+        this.files.forEach((group, index) => {
+          console.log('group = ', group);
+          return (group.files = files[index]);
+        });
+      }
+      console.log('files = ', this.files);
+
       //console.log('mode = ', this.mode);
       if (res.birthdate) {
         res.birthdate = res.birthdate.split('T')[0];
