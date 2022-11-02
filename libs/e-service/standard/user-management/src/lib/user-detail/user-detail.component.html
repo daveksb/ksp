@@ -108,11 +108,16 @@
       ></ksp-form-coordinator-info>
     </div>
     <br />
-    <ksp-form-attachment
+    <!-- <ksp-form-attachment
       [title]="'หลักฐานเพื่อพิจารณา'"
       [mode]="'view'"
       [groups]="uploadFileList"
-    ></ksp-form-attachment>
+    ></ksp-form-attachment> -->
+    <ksp-form-multi-attachment
+        [groups]="uploadFileList"
+        title="หลักฐานเพื่อพิจารณา"
+        [mode]="'view'"
+    ></ksp-form-multi-attachment>
   </div>
   <br />
   <div [formGroup]="verifyForm" class="bg-white p-4">

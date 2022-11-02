@@ -95,9 +95,9 @@ export class UserDetailComponent implements OnInit {
     this.eRequestService.getKspRequestById(id).subscribe((res) => {
       this.requestData = res;
       const fileInfo = parseJson(res.fileinfo);
-      if (fileInfo && fileInfo.file && Array.isArray(fileInfo.file)) {
+      if (fileInfo && fileInfo.fileUpload && Array.isArray(fileInfo.fileUpload)) {
         this.uploadFileList.forEach(
-          (group, index) => (group.files = fileInfo.file[index])
+          (group, index) => (group.files = fileInfo.fileUpload[index])
         );
       }
       const education = parseJson(res.educationoccupy);
