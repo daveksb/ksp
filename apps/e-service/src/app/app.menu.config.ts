@@ -358,7 +358,7 @@ export const standardMenu: MenuConfig[] = [
         label: 'รายการใบคำขอรับรองปริญญาและประกาศนียบัตร',
       },
       {
-        path: `/degree-cert/list/3`,
+        path: `/degree-cert/list/3/1`,
         label: 'ประเมินหลักสูตรและโครงสร้างหลักสูตร',
       },
       {

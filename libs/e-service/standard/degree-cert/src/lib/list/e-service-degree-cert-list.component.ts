@@ -187,11 +187,9 @@ export class EServiceDegreeCertListComponent
     if (this.pageType === 0) {
       this.router.navigate(['/degree-cert', 'check',row?.key]);
     } else if (this.pageType === 1) {
-      this.router.navigate(['/degree-cert', 'consider']);
+      this.router.navigate(['/degree-cert', 'consider', row?.key]);
     } else if (this.pageType === 2) {
       this.router.navigate(['/degree-cert', 'approve',row?.key]);
-    } else if (this.pageType === 3) {
-      this.router.navigate(['/degree-cert', 'consider', row?.key]);
     }
   }
 
