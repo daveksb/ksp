@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
+  FileGroup,
   FormMode,
   KspApprovePayload,
   KspRequest,
@@ -33,6 +34,8 @@ export class UserDetailComponent implements OnInit {
   pageTypeEnum = SchoolUserPageType;
   setPassword = '';
   mode: FormMode = 'view';
+  permissionRight = null;
+  requestType = 0;
 
   form = this.fb.group({
     userInfo: [],
@@ -42,6 +45,23 @@ export class UserDetailComponent implements OnInit {
   verifyForm = this.fb.group({
     result: [null, Validators.required],
   });
+
+  uploadFileList: FileGroup[] = [
+    {
+      name: 'หนังสือแต่งตั้งผู้ประสานงาน',
+      files: []
+    },
+    {
+      name: 'สำเนาบัตรประชาชน',
+      files: []
+    },
+  ] as FileGroup[];
+
+  requestTypeList = [
+    "",
+    "ยื่นผู้ประสานงาน",
+    "ยื่นถอดถอนผู้ประสานงาน"
+  ]
 
   constructor(
     private router: Router,
@@ -74,6 +94,19 @@ export class UserDetailComponent implements OnInit {
   loadRequestFromId(id: number) {
     this.eRequestService.getKspRequestById(id).subscribe((res) => {
       this.requestData = res;
+      const fileInfo = parseJson(res.fileinfo);
+      if (fileInfo && fileInfo.fileUpload && Array.isArray(fileInfo.fileUpload)) {
+        this.uploadFileList.forEach(
+          (group, index) => (group.files = fileInfo.fileUpload[index])
+        );
+      }
+      const education = parseJson(res.educationoccupy);
+      this.requestData.bureauname = education.affiliation || '';
+      this.requestData.schoolname = education.uniname || '';
+      // this.requestData.schooladdress = education;
+      this.permissionRight = education.permission || null;
+      this.requestType = this.requestData.requesttype ? parseInt(this.requestData.requesttype) : 0;
+
       res.status === '1' ? (this.mode = 'edit') : (this.mode = 'view');
       if (res.birthdate) {
         res.birthdate = res.birthdate.split('T')[0];
@@ -106,6 +139,7 @@ export class UserDetailComponent implements OnInit {
     // newUser.coordinatorinfo = this.requestData.coordinatorinfo;
     newUser.unitype = this.requestData.unitype;
     newUser.requestno = this.requestData.requestno;
+    newUser.permissionright = this.permissionRight;
 
     const approvePayload: KspApprovePayload = {
       requestid: `${this.requestId}`,
