@@ -101,6 +101,7 @@ export class UserDetailComponent implements OnInit {
         );
       }
       const education = parseJson(res.educationoccupy);
+      this.requestData.uniid = education.uniid || null;
       this.requestData.bureauname = education.affiliation || '';
       this.requestData.schoolname = education.uniname || '';
       // this.requestData.schooladdress = education;
@@ -122,6 +123,7 @@ export class UserDetailComponent implements OnInit {
   approveUser() {
     // change process and status of SCH_REQUEST
     const newUser = new UniUser();
+    newUser.uniid = this.requestData.uniid;
     newUser.idcardno = this.requestData.idcardno;
     newUser.firstnameth = this.requestData.firstnameth;
     newUser.lastnameth = this.requestData.lastnameth;
