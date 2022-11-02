@@ -85,7 +85,19 @@ export class UserDetailComponent implements OnInit {
     this.eRequestService.getKspRequestById(id).subscribe((res) => {
       this.requestData = res;
       res.status === '1' ? (this.mode = 'edit') : (this.mode = 'view');
-      console.log('file = ', parseJson(res.fileinfo));
+      //console.log('file = ', parseJson(res.fileinfo));
+
+      const files = parseJson(res.fileinfo);
+      console.log('files = ', files);
+
+      if (files && Array.isArray(files)) {
+        this.files.forEach((group, index) => {
+          console.log('group = ', group);
+          return (group.files = files[index]);
+        });
+      }
+      console.log('files = ', this.files);
+
       //console.log('mode = ', this.mode);
       if (res.birthdate) {
         res.birthdate = res.birthdate.split('T')[0];

@@ -206,8 +206,6 @@ export class SchoolRequestComponent implements OnInit {
     userInfo.systemtype = '2';
     userInfo.requesttype = '3';
     userInfo.careertype = `${this.careerType}`;
-    //userInfo.birthdate = formatDate(userInfo.birthdate);
-
     userInfo = formatDatePayload(userInfo);
 
     const teaching: any = this.form.controls.teachinginfo.value;
@@ -266,8 +264,6 @@ export class SchoolRequestComponent implements OnInit {
   updateRequest(process: number) {
     const baseForm = this.fb.group(new KspRequest());
     const formData: any = this.form.getRawValue();
-    //const userInfo: UserInfoForm = formData.userInfo;
-
     const { id, ...userInfo } = formData.userInfo;
 
     userInfo.id = `${this.requestId}`;
