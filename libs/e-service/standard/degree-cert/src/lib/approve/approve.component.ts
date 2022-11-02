@@ -135,4 +135,8 @@ export class ApproveComponent implements OnInit {
     this.location.back();
     });
   }
+  toVerifyPage(type: number) {
+    this.router.navigate(['./', 'degree-cert', 'verify', type]);
+  }
+
 }
