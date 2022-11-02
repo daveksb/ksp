@@ -62,7 +62,7 @@
             class="form-control"
             type="text"
             disabled
-            value="ลงทะเบียนเข้าใช้งาน"
+            [value]="requestTypeList[requestType]"
           />
         </div>
       </div>
@@ -110,8 +110,8 @@
     <br />
     <ksp-form-attachment
       [title]="'หลักฐานเพื่อพิจารณา'"
-      mode="view"
-      [groups]="[{ name: 'หนังสือแต่งตั้ง', files: [] }]"
+      [mode]="'view'"
+      [groups]="uploadFileList"
     ></ksp-form-attachment>
   </div>
   <br />
