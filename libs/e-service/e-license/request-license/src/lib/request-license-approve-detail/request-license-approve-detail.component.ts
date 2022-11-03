@@ -13,6 +13,13 @@ import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
 const FORM_TAB_COUNT = 5;
+function allFilledValidator(): any {
+  return (form: FormArray) => {
+    const value: any[] = form.value;
+
+    return value.every((v) => v !== null) ? null : { allFilled: true };
+  };
+}
 
 @Component({
   selector: 'ksp-request-license-approve-detail',
@@ -82,8 +89,9 @@ export class RequestLicenseApproveDetailComponent
 
   addCheckResultArray() {
     for (let i = 0; i < FORM_TAB_COUNT; i++) {
-      this.checkResultFormArray.push(this.fb.control([]));
+      this.checkResultFormArray.push(this.fb.control(null));
     }
+    this.checkResultFormArray.setValidators(allFilledValidator());
   }
 
   override checkRequestId() {
@@ -145,6 +153,7 @@ export class RequestLicenseApproveDetailComponent
     this.countries2$ = this.countries$;
     this.licenses$ = this.educationDetailService.getLicenseType();
     this.provinces$ = this.addressService.getProvinces();
+    this.bureau$ = this.educationDetailService.getBureau();
   }
 
   patchUserInfoForm(data: any): void {
@@ -170,6 +179,6 @@ export class RequestLicenseApproveDetailComponent
   }
 
   cancel() {
-    this.router.navigate(['/request-license']);
+    this.router.navigate(['/request-license', 'approve-list']);
   }
 }

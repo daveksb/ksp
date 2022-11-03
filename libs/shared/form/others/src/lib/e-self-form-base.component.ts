@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import {
   AddressService,
   GeneralInfoService,
@@ -106,6 +106,9 @@ export abstract class ESelfFormBaseComponent {
     // if (data.filedata) {
     //   this.myImage = atob(data.filedata);
     // }
+    if (data.filedata) {
+      this.myImage = atob(data.filedata);
+    }
   }
 
   public getListData() {

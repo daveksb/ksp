@@ -11,6 +11,7 @@
       <div class="row align-items-center bg-light py-2 mx-0 mb-3">
         <div class="col-3">
           <self-service-form-upload-image
+            [imgSrc]="myImage"
             [isEditMode]="false"></self-service-form-upload-image>
         </div>
         <div class="col-9">
@@ -62,7 +63,8 @@
             [mode]="'view'"
             [provinces]="provinces$ | async"
             [amphurs]="amphurs3$ | async"
-            [tumbols]="tumbols3$ | async">
+            [tumbols]="tumbols3$ | async"
+            [bureaus]="bureau$ | async">
           </self-service-form-user-workplace>
         </mat-tab>
 
@@ -131,6 +133,7 @@
   <ksp-bottom-nav
     [showCenterButtons]="true"
     [isFirstPage]="true"
+    [disableNext]="!checkResultFormArray.valid"
     (nextClicked)="next()"
     (cancelClicked)="cancel()"></ksp-bottom-nav>
 </div>

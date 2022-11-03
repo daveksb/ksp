@@ -37,7 +37,7 @@ export class ExperienceFormComponent
   }
 
   ngOnInit() {
-    // console.log(this.form.valid);
+    console.log(this.mode);
   }
 
   override ngOnDestroy(): void {
