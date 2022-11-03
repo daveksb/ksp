@@ -29,6 +29,18 @@
           <th scope="col">ผลการตรวจสอบ</th>
         </tr>
       </thead>
+      <tbody>
+        <ng-container *ngFor="let row of approveHistory; let i = index">
+          <tr>
+            <td scope="col">{{ i + 1 }}</td>
+            <td scope="col">{{ row.firstnameth }} {{ row.lastnameth }}</td>
+            <td scope="col">{{ row.createdate | thaiDate }}</td>
+            <td scope="col">
+              {{ checkStatus(+row.process, +row.status, 3)?.ename }}
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
     </table>
 
     <div [formGroup]="form">

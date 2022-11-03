@@ -141,6 +141,7 @@ export class ETempLicenseDetailComponent implements OnInit {
   loadRequestFromId(requestId: number) {
     this.eRequestService.getKspRequestById(requestId).subscribe((res) => {
       this.requestData = res;
+      //console.log('details = ', parseJson(res.detail));
       this.pathUserInfo(res);
       this.patchAddress(parseJson(res.addressinfo));
       this.patchEdu(parseJson(res.eduinfo));
