@@ -28,6 +28,7 @@ import {
   ConsiderKspRequestComponent,
   ValidateKspRequestComponent,
 } from '@ksp/e-service/e-license/approve-ksp-request';
+import { RequestLicenseApproveCreateGroupComponent } from './request-license-approve-create-group/request-license-approve-create-group.component';
 
 export const routes: Route[] = [
   {
@@ -54,6 +55,10 @@ export const routes: Route[] = [
       {
         path: 'approve-confirm/:id',
         component: RequestLicenseApproveConfirmComponent,
+      },
+      {
+        path: 'create-group',
+        component: RequestLicenseApproveCreateGroupComponent,
       },
     ],
   },
@@ -86,6 +91,7 @@ export const routes: Route[] = [
     RequestLicenseApproveListComponent,
     RequestLicenseApproveDetailComponent,
     RequestLicenseApproveConfirmComponent,
+    RequestLicenseApproveCreateGroupComponent,
   ],
 })
 export class EServiceELicenseRequestLicenseModule {}
