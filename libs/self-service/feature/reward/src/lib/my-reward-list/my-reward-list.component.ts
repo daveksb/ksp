@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './my-reward-list.component.html',
   styleUrls: ['./my-reward-list.component.scss'],
 })
-export class MyRewardListComponent implements OnInit {
+export class MyRewardListComponent {
   badgeTitle = [
     `กรุณาลงทะเบียนรายงานตัวเพื่อยืนยันเข้าเฝ้ารับเข็มเชิดชูเกียรติภายในวันที่ 24/มิ.ย./2564  กดเพื่อตรวจสอบ`,
   ];
@@ -16,8 +16,6 @@ export class MyRewardListComponent implements OnInit {
 
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<PersonLicense>();
-
-  ngOnInit(): void {}
 
   search() {
     this.dataSource.data = data;
@@ -28,11 +26,11 @@ export class MyRewardListComponent implements OnInit {
   }
 
   viewDetail(id: number) {
-    this.router.navigate(['/', 'reward', 'detail', id]);
+    this.router.navigate(['/reward', 'detail', id]);
   }
 
   honorPage() {
-    this.router.navigate(['/', 'reward', 'honor-request']);
+    this.router.navigate(['/reward', 'honor-request']);
   }
 }
 

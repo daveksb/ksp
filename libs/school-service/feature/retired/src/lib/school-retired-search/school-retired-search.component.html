@@ -17,14 +17,14 @@
       <div class="mt-3">
         <ksp-bottom-nav
           (prevClicked)="cancel()"
-          (nextClicked)="next()"
+          [isLastPage]="true"
           [showCenterButtons]="false"
-          [disableNext]="!school"
+          [disableNext]="form.valid"
           disableNextMessage="กรุณาเลือกโรงเรียน/ สถานศึกษาก่อน"
         ></ksp-bottom-nav>
       </div>
 
-      <ng-container *ngIf="schoolUsers && schoolUsers.length">
+      <ng-container *ngIf="schoolUsers && schoolUsers.length; else notFound">
         <hr />
         <div class="text-primary box-header">ผลการค้นหา</div>
         <table class="table">
@@ -63,6 +63,13 @@
           </button>
         </div>
       </ng-container>
+
+      <ng-template #notFound>
+        <ng-container *ngIf="searchEnd">
+          <hr />
+          <div class="text-primary box-header">ไม่พบผู้ใช้งาน</div>
+        </ng-container></ng-template
+      >
     </div>
   </div>
 </form>

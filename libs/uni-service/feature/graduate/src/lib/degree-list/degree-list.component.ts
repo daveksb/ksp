@@ -100,6 +100,8 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
         return;
       };
       this.pageEvent.length = res.countnumunidegree;
+      res.datareturnadmission = res.datareturnadmission.sort((data1:any,data2:any) => data1.unirequestadmissionid - data2.unirequestadmissionid);
+      res.datareturngraduation = res.datareturngraduation.sort((data1:any,data2:any) => data1.unirequestadmissionid - data2.unirequestadmissionid);
       this.dataSource.data = res?.datareturn.map(
         (item: any, index: number) => {
           const admissionstatus = res.datareturnadmission.filter((data: any) => {

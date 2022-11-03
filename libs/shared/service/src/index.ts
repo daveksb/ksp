@@ -17,6 +17,5 @@ export { EthicsService } from './e-service/e-ethics.service';
 export { ESchStaffService } from './e-service/e-sch-staff.service';
 export { EUniService } from './e-service/e-uni.service';
 
-
 export { UniRequestService } from './uni-service/uni-request.service';
 export { UniInfoService } from './uni-service/uni-info.service';

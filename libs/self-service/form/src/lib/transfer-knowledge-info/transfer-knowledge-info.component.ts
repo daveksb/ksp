@@ -72,6 +72,10 @@ export class TransferKnowledgeInfoComponent
       });
     }
 
+    if (this.mode === 'view') {
+      this.form.disable();
+    }
+
     this.onChange(value);
     this.onTouched();
   }

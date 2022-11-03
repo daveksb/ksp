@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FileGroup, FormMode, KspFile } from '@ksp/shared/interface';
-import { FilesPreviewComponent } from '@ksp/shared/dialog';
+import { PdfViewerComponent } from '@ksp/shared/dialog';
 import { FileService } from '@ksp/shared/form/file-upload';
 
 @Component({
@@ -10,12 +10,12 @@ import { FileService } from '@ksp/shared/form/file-upload';
   styleUrls: ['./form-multi-attachment.component.scss'],
 })
 export class FormMultiAttachmentComponent {
-  @Input() title = `กรุณาแนบหลักฐานประกอบ`;
   @Input() titleClass = ``;
   @Input() titleNote = '';
   @Input() pageType!: string; // ใช้ อ้างอิง tab ในหน้าใบคำขอเพื่อระบุรายการไฟล์ ที่เกี่ยวข้อง enum RequestPageType
   @Input() groups: FileGroup[] = [];
   @Input() mode: FormMode = 'edit';
+  @Input() title = 'กรุณาแนบหลักฐานประกอบ';
   @Input() uniqueTimestamp = '';
   @Input() requestType: number | null = null;
   @Output() downloadClick = new EventEmitter<any>();
@@ -23,17 +23,31 @@ export class FormMultiAttachmentComponent {
 
   constructor(public dialog: MatDialog, private fileService: FileService) {}
 
-  view() {
-    const dialogRef = this.dialog.open(FilesPreviewComponent, {
+  view(group: FileGroup) {
+    this.dialog.open(PdfViewerComponent, {
+      width: '1200px',
+      height: '100vh',
+      data: {
+        title: group.name,
+        file: group.files[0],
+      },
+    });
+  }
+
+  /*   view(title: string) {
+    const dialog = this.dialog.open(FilesPreviewComponent, {
       width: '800px',
+      data: {
+        title,
+      },
     });
 
-    dialogRef.componentInstance.confirmed.subscribe((res) => {
+    dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         this.dialog.closeAll();
       }
     });
-  }
+  } */
 
   deleteFile(file: KspFile) {
     const payload = {
@@ -51,6 +65,9 @@ export class FormMultiAttachmentComponent {
   }
 
   downloadFile(file: KspFile) {
+    if (this.mode === 'view') {
+      return;
+    }
     const id = file.fileid;
     //console.log(group);
     this.fileService.downloadFile({ id }).subscribe((res: any) => {

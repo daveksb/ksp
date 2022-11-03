@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormArray, FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ERewardFormBaseComponent } from '@ksp/self-service/form';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import { SelfRequest } from '@ksp/shared/interface';
 import {
@@ -11,12 +12,17 @@ import {
 import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
+const FORM_TAB_COUNT = 6;
+
 @Component({
   selector: 'ksp-e-best-teacher-detail',
   templateUrl: './e-best-teacher-detail.component.html',
   styleUrls: ['./e-best-teacher-detail.component.scss'],
 })
-export class EBestTeacherDetailComponent implements OnInit {
+export class EBestTeacherDetailComponent
+  extends ERewardFormBaseComponent
+  implements OnInit
+{
   userInfoType = UserInfoFormType.thai;
 
   prefixList$!: Observable<any>;
@@ -33,7 +39,6 @@ export class EBestTeacherDetailComponent implements OnInit {
   provinces4$!: Observable<any>;
   amphurs4$!: Observable<any>;
   tumbols4$!: Observable<any>;
-  requestId!: number;
 
   form = this.fb.group({
     userInfo: [],
@@ -47,19 +52,35 @@ export class EBestTeacherDetailComponent implements OnInit {
     fax: [],
     email: [],
     website: [],
+    checkResult: this.fb.array([]),
   });
+
+  get checkResultFormArray() {
+    return this.form.controls.checkResult as FormArray;
+  }
 
   constructor(
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
     private route: ActivatedRoute,
-    private requestService: ERequestService
-  ) {}
+    private requestService: ERequestService,
+    private router: Router
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
+    this.verifyChoice = this.VERIFY_CHOICES;
     this.getListData();
     this.checkRequestId();
+    this.addCheckResultArray();
+  }
+
+  addCheckResultArray() {
+    for (let i = 0; i < FORM_TAB_COUNT; i++) {
+      this.checkResultFormArray.push(this.fb.control([]));
+    }
   }
 
   getListData() {
@@ -175,5 +196,14 @@ export class EBestTeacherDetailComponent implements OnInit {
         website,
       });
     }
+  }
+
+  next() {
+    this.persistData(this.form.controls.checkResult.value);
+    this.router.navigate(['/best-teacher', 'confirm', this.requestId]);
+  }
+
+  cancel() {
+    this.router.navigate(['/thai-teacher']);
   }
 }

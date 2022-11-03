@@ -23,7 +23,7 @@ const routes: Routes = [
         component: ETempLicenseListComponent,
       },
       {
-        path: 'list/:id',
+        path: 'list/:careertype',
         component: ETempLicenseListComponent,
       },
       {

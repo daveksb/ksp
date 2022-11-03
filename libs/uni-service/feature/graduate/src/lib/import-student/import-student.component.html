@@ -1,14 +1,14 @@
 <ksp-top-nav>
   <span header>{{
-    pageType === 'studentList' ? headerStudent.h1 : headerGraduate.h1
+    pageType === 'admissionList' ? headerStudent.h1 : headerGraduate.h1
   }}</span>
   <span subHeader>{{
-    pageType === 'studentList' ? headerStudent.h2 : headerGraduate.h2
+    pageType === 'admissionList' ? headerStudent.h2 : headerGraduate.h2
   }}</span>
   <span detail>
     >
     {{
-      pageType === 'studentList' ? headerStudent.h3 : headerGraduate.h3
+      pageType === 'admissionList' ? headerStudent.h3 : headerGraduate.h3
     }}</span
   >
 </ksp-top-nav>
@@ -25,9 +25,9 @@
 
     <div class="d-flex justify-content-between mb-1">
       <div class="box-header">
-        {{ pageType === 'studentList' ? headerStudent.h3 : headerGraduate.h3 }}
+        {{ pageType === 'admissionList' ? headerStudent.h3 : headerGraduate.h3 }}
       </div>
-      <div *ngIf="pageType === 'studentList'">
+      <div *ngIf="pageType === 'admissionList'">
         <button
           type="button"
           (click)="downloadfile()"
@@ -74,7 +74,7 @@
               </th>
               <th
                 class="p-2 text-nowrap align-text-top"
-                *ngIf="pageType === 'studentList'"
+                *ngIf="pageType === 'admissionList'"
               >
                 ลำดับ
               </th>
@@ -104,14 +104,14 @@
               </th>
               <th
                 class="p-2 text-nowrap align-text-top"
-                *ngIf="pageType === 'studentList'"
+                *ngIf="pageType === 'admissionList'"
               >
                 วันที่รับเข้า
               </th>
               <th class="p-2 text-nowrap" *ngIf="pageType === 'graduateList'">
                 <div>
                   <label>วันที่เข้ารับการศึกษา</label>
-                  <input
+                  <!-- <input
                     pInputText
                     type="date"
                     class="form-control form-search"
@@ -122,11 +122,32 @@
                         'contains'
                       )
                     "
-                  />
+                  /> -->
+                  <div class="d-flex align-items-center">
+                    <input
+                      [matDatepicker]="picker_searchadmissiondate"
+                      style="width: 150px"
+                      autocomplete="off"
+                      class="form-control form-date"
+                      (change)="
+                        dt.filter(
+                          $any($event.target).value,
+                          'controls.admissiondate.value',
+                          'contains'
+                        )
+                      "
+                    />
+                    <mat-datepicker-toggle
+                      class="button-date"
+                      matSuffix
+                      [for]="picker_searchadmissiondate"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #picker_searchadmissiondate></mat-datepicker>
+                  </div>
                 </div>
               </th>
 
-              <th class="p-2 text-nowrap" *ngIf="pageType === 'studentList'">
+              <th class="p-2 text-nowrap" *ngIf="pageType === 'admissionList'">
                 เลขบัตรประจำตัวประชาชน /<br />
                 เลขประจำตัวคุรุสภา
               </th>
@@ -141,7 +162,7 @@
                     (input)="
                       dt.filter(
                         $any($event.target).value,
-                        'idcardno',
+                        'controls.idcardno.value',
                         'contains'
                       )
                     "
@@ -159,7 +180,7 @@
                   (input)="
                     dt.filter(
                       $any($event.target).value,
-                      'passportno',
+                      'controls.passportno.value',
                       'contains'
                     )
                   "
@@ -167,7 +188,7 @@
               </th>
               <th
                 class="p-2 text-nowrap align-text-top"
-                *ngIf="pageType === 'studentList'"
+                *ngIf="pageType === 'admissionList'"
               >
                 สัญชาติ
               </th>
@@ -187,7 +208,7 @@
                     (input)="
                       dt.filter(
                         $any($event.target).value,
-                        'firstnameth',
+                        'controls.firstnameth.value',
                         'contains'
                       )
                     "
@@ -206,7 +227,7 @@
                     (input)="
                       dt.filter(
                         $any($event.target).value,
-                        'lastnameth',
+                        'controls.lastnameth.value',
                         'contains'
                       )
                     "
@@ -229,7 +250,7 @@
                     (input)="
                       dt.filter(
                         $any($event.target).value,
-                        'firstnameen',
+                        'controls.firstnameen.value',
                         'contains'
                       )
                     "
@@ -248,7 +269,7 @@
                     (input)="
                       dt.filter(
                         $any($event.target).value,
-                        'middlenameen',
+                        'controls.middlenameen.value',
                         'contains'
                       )
                     "
@@ -267,7 +288,7 @@
                     (input)="
                       dt.filter(
                         $any($event.target).value,
-                        'lastnameen',
+                        'controls.lastnameen.value',
                         'contains'
                       )
                     "
@@ -293,7 +314,7 @@
               <th class="p-2 text-nowrap align-text-top">ที่อยู่</th>
               <th
                 class="p-2 text-nowrap align-text-top"
-                *ngIf="pageType === 'studentList'"
+                *ngIf="pageType === 'admissionList'"
               >
                 รายวิชา
               </th>
@@ -308,7 +329,7 @@
             let-expanded="expanded"
           >
             <tr [formGroupName]="ri">
-              <td class="p-2 text-nowrap" *ngIf="pageType === 'studentList'">
+              <td class="p-2 text-nowrap" *ngIf="pageType === 'admissionList'">
                 {{ control.value.no }}
               </td>
 
@@ -330,22 +351,52 @@
                 />
               </td>
               <td class="p-2 text-nowrap" *ngIf="pageType === 'graduateList'">
-                <input
+                <div class="d-flex align-items-center">
+                  <input
+                    [matDatepicker]="pickerapprovedate"
+                    style="width: 150px"
+                    autocomplete="off"
+                    class="form-control form-date"
+                    formControlName="approvedate"
+                  />
+                  <mat-datepicker-toggle
+                    class="button-date"
+                    matSuffix
+                    [for]="pickerapprovedate"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #pickerapprovedate></mat-datepicker>
+                </div>
+                <!-- <input
                   class="form-control"
                   style="width: 150px"
                   pInputText
                   type="date"
                   formControlName="approvedate"
-                />
+                /> -->
               </td>
               <td class="p-2 text-nowrap" *ngIf="pageType === 'graduateList'">
-                <input
+                <div class="d-flex align-items-center">
+                  <input
+                    [matDatepicker]="pickergraduatedate"
+                    style="width: 150px"
+                    autocomplete="off"
+                    class="form-control form-date"
+                    formControlName="graduationdate"
+                  />
+                  <mat-datepicker-toggle
+                    class="button-date"
+                    matSuffix
+                    [for]="pickergraduatedate"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #pickergraduatedate></mat-datepicker>
+                </div>
+                <!-- <input
                   class="form-control"
                   style="width: 150px"
                   pInputText
                   type="date"
                   formControlName="graduationdate"
-                />
+                /> -->
               </td>
 
               <td class="p-2 text-nowrap" *ngIf="pageType === 'graduateList'">
@@ -359,14 +410,30 @@
               </td>
 
               <td class="p-2 text-nowrap">
-                <input
+                <div class="d-flex align-items-center">
+                  <input
+                    [matDatepicker]="picker"
+                    style="width: 150px"
+                    autocomplete="off"
+                    class="form-control form-date"
+                    formControlName="admissiondate"
+                    [readonly]="pageType === 'graduateList'"
+                  />
+                  <mat-datepicker-toggle
+                    class="button-date"
+                    matSuffix
+                    [for]="picker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </div>
+                <!-- <input
                   class="form-control"
                   style="width: 150px"
                   pInputText
                   type="date"
                   formControlName="admissiondate"
                   [readonly]="pageType === 'graduateList'"
-                />
+                /> -->
               </td>
               <td class="p-2 text-nowrap">
                 <input
@@ -412,7 +479,7 @@
                 />
               </td>
 
-              <td class="p-2 text-nowrap" *ngIf="pageType === 'studentList'">
+              <td class="p-2 text-nowrap" *ngIf="pageType === 'admissionList'">
                 <select
                   class="form-select"
                   style="width: 150px"
@@ -531,19 +598,35 @@
                 />
               </td>
               <td class="p-2 text-nowrap">
-                <input
+                <div class="d-flex align-items-center">
+                  <input
+                    [matDatepicker]="pickerbirthdate"
+                    style="width: 150px"
+                    autocomplete="off"
+                    class="form-control form-date"
+                    formControlName="birthdate"
+                    [readonly]="pageType === 'graduateList'"
+                  />
+                  <mat-datepicker-toggle
+                    class="button-date"
+                    matSuffix
+                    [for]="pickerbirthdate"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #pickerbirthdate></mat-datepicker>
+                </div>
+                <!-- <input
                   class="form-control"
                   style="width: 150px"
                   pInputText
                   type="date"
                   formControlName="birthdate"
                   [readonly]="pageType === 'graduateList'"
-                />
+                /> -->
               </td>
 
               <td class="p-2 text-nowrap">
                 <div
-                  *ngIf="pageType === 'studentList'"
+                  *ngIf="pageType === 'admissionList'"
                   role="button"
                   class="text-orange text-decoration-underline whitespace-nowrap"
                   [pRowToggler]="control"
@@ -561,7 +644,7 @@
                 </div>
               </td>
 
-              <td class="p-2 text-nowrap" *ngIf="pageType === 'studentList'">
+              <td class="p-2 text-nowrap" *ngIf="pageType === 'admissionList'">
                 <div
                   class="text-orange text-decoration-underline whitespace-nowrap"
                   role="button"
@@ -591,7 +674,7 @@
     <div
       class="mt-2"
       *ngIf="
-        pageType === 'studentList' &&
+        pageType === 'admissionList' &&
         users.length < courseData?.courseSelected.student
       "
     >

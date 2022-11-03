@@ -6,28 +6,27 @@ import {
   passportPattern,
   phonePattern,
 } from './form-validators';
+import { validateIdCard } from './function';
 
 export function createDefaultVisaInfo(fb: FormBuilder) {
   return fb.group({
     visatype: [],
     visaclass: [],
     visaexpiredate: [],
-    licenseid: [],
+    kuruspano: [],
   });
 }
 
 export function createUserInfoForm(fb: FormBuilder) {
   return fb.group({
     id: [],
-    idcardno: ['', [Validators.required, Validators.pattern(idCardPattern)]],
-    kuruspano: ['', [Validators.required, Validators.pattern(idCardPattern)]],
-
-    isforeign: [null],
-    passportno: [
-      null,
-      //[Validators.required, Validators.pattern(passportPattern)],
-      [Validators.pattern(passportPattern)],
+    idcardno: [
+      '',
+      [validateIdCard, Validators.required, Validators.pattern(idCardPattern)],
     ],
+    kuruspano: ['', [Validators.required, Validators.pattern(idCardPattern)]],
+    isforeign: [null],
+    passportno: [null, [Validators.pattern(passportPattern)]],
     passportstartdate: [],
     passportenddate: [],
 

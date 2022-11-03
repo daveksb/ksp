@@ -7,28 +7,31 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { FileGroup, FormMode } from '@ksp/shared/interface';
+import {
+  FileGroup,
+  FormMode,
+  Nationality,
+  Prefix,
+} from '@ksp/shared/interface';
 import { GeneralInfoService } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 import localForage from 'localforage';
 import { v4 as uuidv4 } from 'uuid';
+import { mapMultiFileInfo } from '@ksp/shared/utility';
 @Component({
   templateUrl: './register-coordinator.component.html',
   styleUrls: ['./register-coordinator.component.scss'],
 })
 export class CoordinatorInfoComponent implements OnInit {
-  form = this.fb.group({
-    coordinator: [],
-  });
-  savingData: any;
-  prefixList$!: Observable<any>;
-  nationalitys$!: Observable<any>;
+  //savingData: any;
+  prefixList$!: Observable<Prefix[]>;
+  nationList$!: Observable<Nationality[]>;
   mode: FormMode = 'edit';
   userInfoFormdisplayMode: number = UserInfoFormType.thai;
   school: any;
   address: any;
   uniqueNo!: string;
-  uploadFileList: FileGroup[] = [
+  uploadFiles: FileGroup[] = [
     {
       name: 'หนังสือแต่งตั้งผู้ประสานงาน',
       files: [],
@@ -38,6 +41,9 @@ export class CoordinatorInfoComponent implements OnInit {
       files: [],
     },
   ];
+  form = this.fb.group({
+    coordinator: [],
+  });
 
   constructor(
     private router: Router,
@@ -47,35 +53,36 @@ export class CoordinatorInfoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.uniqueNo = uuidv4();
     this.getListData();
+    this.getStoredData();
+  }
 
-    localForage.getItem('registerSelectedSchool').then((res) => {
-      this.school = res;
-      console.log('school = ', res);
-    });
+  save() {
+    localForage.setItem('registerCoordinator', this.form.value);
+    localForage.setItem('registerFile', mapMultiFileInfo(this.uploadFiles));
+    this.router.navigate(['/register', 'password']);
+  }
 
-    localForage.getItem('registerUserInfoFormValue').then((res) => {
-      this.savingData = res;
-    });
-
+  getStoredData() {
     localForage.getItem('registerSelectedSchool').then((res: any) => {
+      this.school = res;
       this.address = `บ้านเลขที่ ${res.address} ซอย ${
         res?.street ?? '-'
       } หมู่ ${res?.moo ?? '-'} ถนน ${res?.road ?? '-'} ตำบล ${
         res.tumbon
       } อำเภอ ${res.amphurname} จังหวัด ${res.provincename}`;
+      //console.log('school = ', res);
     });
-
-    this.uniqueNo = uuidv4();
   }
 
   getListData() {
     this.prefixList$ = this.generalInfoService.getPrefix();
-    this.nationalitys$ = this.generalInfoService.getNationality();
+    this.nationList$ = this.generalInfoService.getNationality();
   }
 
-  cancel() {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+  cancelConfirmDialog() {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยกเลิกรายการใบคำขอ
         ใช่หรือไม่?`,
@@ -83,21 +90,21 @@ export class CoordinatorInfoComponent implements OnInit {
       },
     });
 
-    dialogRef.componentInstance.confirmed.subscribe((res) => {
+    dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.onConfirmed();
+        this.cancelCompleteDialog();
       }
     });
   }
 
-  onConfirmed() {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+  cancelCompleteDialog() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: 'ยกเลิกรายการสำเร็จ',
       },
     });
 
-    completeDialog.componentInstance.completed.subscribe((res) => {
+    dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
         this.router.navigate(['/login']);
       }
@@ -106,10 +113,5 @@ export class CoordinatorInfoComponent implements OnInit {
 
   back() {
     this.router.navigate(['register', 'requester']);
-  }
-
-  save() {
-    localForage.setItem('registerCoordinatorInfoFormValue', this.form.value);
-    this.router.navigate(['/register', 'password']);
   }
 }

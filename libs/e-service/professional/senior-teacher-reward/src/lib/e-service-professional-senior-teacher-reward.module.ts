@@ -15,6 +15,13 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { EServiceRewardSearchComponent } from '@ksp/shared/search';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
+import {
+  ValidateKspRequestComponent,
+  ConsiderKspRequestComponent,
+} from '@ksp/e-service/e-license/approve-ksp-request';
+import { ESeniorTeacherConfirmComponent } from './e-senior-teacher-confirm/e-senior-teacher-confirm.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const routes: Routes = [
   {
@@ -33,6 +40,10 @@ const routes: Routes = [
       {
         path: 'detail/:id',
         component: ESeniorTeacherDetailComponent,
+      },
+      {
+        path: 'confirm/:id',
+        component: ESeniorTeacherConfirmComponent,
       },
     ],
   },
@@ -54,8 +65,15 @@ const routes: Routes = [
     SelfServiceFormModule,
     EServiceRewardSearchComponent,
     ThaiDatePipe,
+    LicenseCheckComponent,
+    ValidateKspRequestComponent,
+    MatPaginatorModule,
   ],
-  declarations: [ESeniorTeacherListComponent, ESeniorTeacherDetailComponent],
+  declarations: [
+    ESeniorTeacherListComponent,
+    ESeniorTeacherDetailComponent,
+    ESeniorTeacherConfirmComponent,
+  ],
   exports: [ESeniorTeacherListComponent, ESeniorTeacherDetailComponent],
 })
 export class EServiceProfessionalSeniorTeacherRewardModule {}

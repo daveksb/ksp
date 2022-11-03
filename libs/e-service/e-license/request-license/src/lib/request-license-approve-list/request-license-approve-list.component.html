@@ -1,7 +1,7 @@
 <ksp-top-nav
   ><span header>ยื่นใบคำขอ</span>
-  <span subHeader>ขอใบอนุญาตประกอบวิชาชีพ </span></ksp-top-nav
->
+  <span subHeader>ขอใบอนุญาตประกอบวิชาชีพ </span>
+</ksp-top-nav>
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
@@ -68,7 +68,10 @@
           <ng-container matColumnDef="currentprocess">
             <th mat-header-cell *matHeaderCellDef>ขั้นตอนการดำเนินการ</th>
             <td mat-cell *matCellDef="let element">
-              {{ checkProcess(+element.currentprocess)?.processName }}
+              {{
+                checkProcess(+element.process, +element.requesttype)
+                  ?.processName
+              }}
             </td>
           </ng-container>
 
@@ -76,8 +79,11 @@
             <th mat-header-cell *matHeaderCellDef>สถานะ</th>
             <td mat-cell *matCellDef="let element">
               {{
-                checkStatus(+element.currentprocess, +element.requeststatus)
-                  ?.ename
+                checkStatus(
+                  +element.process,
+                  +element.status,
+                  +element.requesttype
+                )?.ename
               }}
             </td>
           </ng-container>
@@ -86,7 +92,7 @@
             <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
             <th></th>
             <td mat-cell *matCellDef="let element">
-              {{ element.updatedate | thaiDate }}
+              {{ element.processupdatedate | thaiDate }}
             </td>
           </ng-container>
 

@@ -1,5 +1,6 @@
 export * from './lib/input-type';
 export * from './lib/form-mode';
+export * from './lib/form-edu';
 export * from './lib/e-search-request';
 export * from './lib/e-self-search-request';
 export * from './lib/ethics';
@@ -12,7 +13,6 @@ export * from './lib/self-myinfo';
 export * from './lib/self-develop';
 
 export * from './lib/sch-user-page-type';
-export * from './lib/sch-request';
 export * from './lib/sch-user';
 export * from './lib/sch-info';
 export * from './lib/sch-general';
@@ -30,6 +30,9 @@ export * from './lib/ksp-approve';
 export * from './lib/ksp-menu-config';
 export * from './lib/ksp-general';
 export * from './lib/ksp-search';
+export * from './lib/ksp-approve-persist-data';
+export * from './lib/ksp-pdf-mapping';
+export * from './lib/ksp-kuruspa';
 
 export * from './lib/uni-service-import-type';
 export * from './lib/university-select';

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { FileGroup } from '@ksp/shared/interface';
 
 @Injectable({
   providedIn: 'root',
@@ -34,13 +33,6 @@ export class TempLicenseDetailService {
   reasonInfo = [
     '1.หนังสือบันทึกชี้แจงเหตุผลคว่มจำเป็น (ถ้ามี)',
     '2.หลักฐานการพัฒนาตนเอง',
-  ];
-
-  evidenceFiles: FileGroup[] = [
-    {
-      name: '1.สำเนาสัญญาจ้าง',
-      files: [],
-    },
   ];
 
   /* reason = [

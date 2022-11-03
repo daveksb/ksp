@@ -7,7 +7,7 @@ import {
   KspApprovePayload,
   KspRequest,
   KspResponse,
-  SchKuruspaNumber,
+  KspKuruspa,
   SchUser,
   SelfRequest,
   UniUser,
@@ -49,18 +49,19 @@ export class ERequestService {
   // new API
   getApproveHistory(requestid: string): Observable<SelfRequest[]> {
     return this.http
-      .post(
-        `${environment.apiUrl}/e-service/ksprequestprocessselectbyrequestid`,
-        { requestid }
-      )
+      .post(`${environment.shortApiUrl}/ksprequestprocess_systemtype.php`, {
+        requestid,
+      })
       .pipe(map((data: any) => data.datareturn));
   }
 
-  createUniUser(payload: UniUser): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/e-service/uniuserinsert`, {
-      ...payload,
-      tokenkey: getCookie('userToken'),
-    });
+  deActivateAllUser(schoolid: string): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/schuseractiveupdate`,
+      {
+        schoolid,
+      }
+    );
   }
 
   EsSearchRequest(payload: EsSearchPayload): Observable<SelfRequest[]> {
@@ -103,15 +104,34 @@ export class ERequestService {
       payload
     );
   }
+
+  createKuruspaNumber(payload: Partial<KspKuruspa>): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/schkuruspanoinsertupdate`,
+      payload
+    );
+  }
+
+  updateRequestKuruspaNo(
+    id: string | null,
+    kuruspano: string
+  ): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/e-service/updatekuruspano`, {
+      id,
+      kuruspano,
+    });
+  }
+
+  createUniUser(payload: UniUser): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/e-service/uniuserinsert`, {
+      ...payload,
+      tokenkey: getCookie('userToken'),
+    });
+  }
   kspRequestProcessSelectByRequestId(requestid: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/e-service/ksprequestprocessselectbyrequestid`,
       { requestid, tokenkey: getCookie('userToken') }
     );
     }
-  createSchKuruspaNumber(payload: Partial<SchKuruspaNumber>): Observable<any> {
-    return this.http
-      .post(`${environment.apiUrl}/e-service/schkuruspanoinsertupdate`, payload)
-      .pipe(map((data: any) => data.datareturn));
-  }
 }

@@ -5,7 +5,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
-import { EsSearchPayload, SchoolRequest } from '@ksp/shared/interface';
+import { EsSearchPayload, KspRequest } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import { checkProcess, checkStatus } from '@ksp/shared/utility';
 
@@ -81,9 +81,9 @@ export class EQualificationApproveListComponent implements AfterViewInit {
     this.form.controls.search.patchValue({ requesttype: '3' });
   }
 
-  goToDetail(item: SchoolRequest) {
+  goToDetail(item: KspRequest) {
     this.router.navigate(['/qualification-approve', 'detail', item.id], {
-      queryParams: { subtype: item.subtype },
+      queryParams: { subtype: item.careertype },
     });
   }
 }
@@ -94,11 +94,11 @@ export const column = [
   'requestno',
   'idcardno',
   'name',
-  'subtype',
-  'currentprocess',
-  'requeststatus',
+  'careertype',
+  'process',
+  'status',
   'updatedate',
   'requestdate',
   'reqDoc',
-  'approveDoc',
+  //'approveDoc',
 ];

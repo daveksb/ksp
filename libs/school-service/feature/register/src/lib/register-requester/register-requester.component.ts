@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
-import { FormMode } from '@ksp/shared/interface';
+import { FormMode, Nationality, Prefix } from '@ksp/shared/interface';
 import { GeneralInfoService } from '@ksp/shared/service';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
@@ -14,11 +14,9 @@ import localForage from 'localforage';
   styleUrls: ['./register-requester.component.scss'],
 })
 export class RegisterRequesterComponent implements OnInit {
-  //grant = grants;
   requestNumber = '';
-
-  prefixList$!: Observable<any>;
-  nationalitys$!: Observable<any>;
+  prefixList$!: Observable<Prefix[]>;
+  nationalitys$!: Observable<Nationality[]>;
   mode: FormMode = 'edit';
   userInfoFormdisplayMode: number = UserInfoFormType.thai;
   school!: any;
@@ -55,14 +53,14 @@ export class RegisterRequesterComponent implements OnInit {
     localForage.getItem('registerSelectedSchool').then((res: any) => {
       //console.log('school data = ', res);
       this.school = res;
-      this.address = `บ้านเลขที่ ${res.address} ซอย ${res?.street ?? '-'} หมู่ ${
-        res?.moo ?? '-'
-      } ถนน ${res?.road ?? '-'} ตำบล ${res.tumbon} อำเภอ ${
-        res.amphurname
-      } จังหวัด ${res.provincename}`;
+      this.address = `บ้านเลขที่ ${res.address} ซอย ${
+        res?.street ?? '-'
+      } หมู่ ${res?.moo ?? '-'} ถนน ${res?.road ?? '-'} ตำบล ${
+        res.tumbon
+      } อำเภอ ${res.amphurname} จังหวัด ${res.provincename}`;
     });
 
-    localForage.getItem('registerUserInfoFormValue').then((res: any) => {
+    localForage.getItem('registerUserInfo').then((res: any) => {
       if (res) this.form.controls.requester.patchValue(res);
     });
   }
@@ -73,8 +71,8 @@ export class RegisterRequesterComponent implements OnInit {
   }
 
   next() {
-    const data = this.form.getRawValue();
-    const { requester, ...all } = data as any;
+    const data: any = this.form.getRawValue();
+    const { requester, ...all } = data;
     const userpermission = JSON.stringify(all);
     const userInfo = {
       ...requester,
@@ -82,7 +80,7 @@ export class RegisterRequesterComponent implements OnInit {
       schoolid: this.school.schoolId,
     };
 
-    localForage.setItem('registerUserInfoFormValue', userInfo);
+    localForage.setItem('registerUserInfo', userInfo);
     this.router.navigate(['/register', 'coordinator']);
   }
 

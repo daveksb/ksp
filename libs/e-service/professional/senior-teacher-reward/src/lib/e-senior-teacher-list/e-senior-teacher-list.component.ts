@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SelfServiceRequestType } from '@ksp/shared/constant';
-import { EsSearchPayload, SelfRequest } from '@ksp/shared/interface';
+import {
+  EsSearchPayload,
+  SchRequestSearchFilter,
+  SelfRequest,
+} from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import { replaceEmptyWithNull } from '@ksp/shared/utility';
 
@@ -11,9 +16,11 @@ import { replaceEmptyWithNull } from '@ksp/shared/utility';
   templateUrl: './e-senior-teacher-list.component.html',
   styleUrls: ['./e-senior-teacher-list.component.scss'],
 })
-export class ESeniorTeacherListComponent implements OnInit {
+export class ESeniorTeacherListComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private router: Router,
@@ -22,22 +29,26 @@ export class ESeniorTeacherListComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  search() {
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  search(params: Partial<SchRequestSearchFilter>) {
     let payload: EsSearchPayload = {
       systemtype: '1',
       requesttype: SelfServiceRequestType.ขอรับรางวัลครูอาวุโส,
-      requestno: null,
+      requestno: params.requestno,
       careertype: null,
-      name: null,
-      idcardno: null,
+      name: params.name,
+      idcardno: params.idcardno,
       passportno: null,
       process: null,
       status: null,
       schoolid: null,
       schoolname: null,
       bureauid: null,
-      requestdatefrom: null,
-      requestdateto: null,
+      requestdatefrom: params.requestdatefrom,
+      requestdateto: params.requestdateto,
       offset: '0',
       row: '1000',
     };

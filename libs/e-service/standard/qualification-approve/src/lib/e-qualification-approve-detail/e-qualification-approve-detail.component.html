@@ -56,6 +56,7 @@
           class="tab-group mt-3"
           selectedIndex="0"
           animationDuration="0ms"
+          (selectedTabChange)="tabChanged($event)"
         >
           <mat-tab label="ที่อยู่" class="tab-content">
             <ksp-form-address
@@ -159,9 +160,28 @@
     </div>
     <br />
 
-    <div class="bg-white px-3 py-2">
+    <ng-container
+      *ngIf="!(requestData.process === '3' && requestData.status !== '1')"
+    >
+      <ng-container
+        formArrayName="checkResult"
+        *ngFor="let c of checkResultFormArray.controls; let i = index"
+      >
+        <div
+          class="bg-white px-3 py-2 mt-3"
+          [ngClass]="{ hide: (selectedTab.index || 0) !== i }"
+        >
+          <e-service-license-check
+            [choices]="choice"
+            [formControlName]="i"
+          ></e-service-license-check>
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <!--     <div class="bg-white px-3 py-2">
       <e-service-license-check [choices]="choice"></e-service-license-check>
-    </div>
+    </div> -->
   </div>
 </form>
 <div class="sticky-bottom border">
@@ -169,7 +189,8 @@
     [isFirstPage]="true"
     [showCenterButtons]="true"
     [showSaveButton]="true"
-    (saveClicked)="saveClicked()"
-    (nextClicked)="saveClicked()"
+    (cancelClicked)="navigateBack()"
+    (saveClicked)="next()"
+    (nextClicked)="next()"
   ></ksp-bottom-nav>
 </div>

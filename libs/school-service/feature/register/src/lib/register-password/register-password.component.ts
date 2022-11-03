@@ -9,7 +9,11 @@ import {
 import { FormMode, KspRequest, SchInfo } from '@ksp/shared/interface';
 import { EMPTY, switchMap } from 'rxjs';
 import localForage from 'localforage';
-import { thaiDate } from '@ksp/shared/utility';
+import {
+  thaiDate,
+  validatePassword,
+  validatorMessages,
+} from '@ksp/shared/utility';
 import * as CryptoJs from 'crypto-js';
 import { SchoolRequestService } from '@ksp/shared/service';
 
@@ -20,15 +24,18 @@ import { SchoolRequestService } from '@ksp/shared/service';
 export class RegisterPasswordComponent implements OnInit {
   eyeIconClicked = false;
   eyeIconClickedSecond = false;
-
   mode: FormMode = 'edit';
   school!: SchInfo;
   address: any;
   coordinator: any;
   savingData: any;
-
+  fileInfo: any;
+  validatorMessages = validatorMessages;
   form = this.fb.group({
-    password: [null, [Validators.required, Validators.minLength(8)]],
+    password: [
+      null,
+      [Validators.required, Validators.minLength(8), validatePassword],
+    ],
     repassword: [null, [Validators.required, Validators.minLength(8)]],
   });
 
@@ -39,19 +46,14 @@ export class RegisterPasswordComponent implements OnInit {
     private requestService: SchoolRequestService
   ) {}
 
-  get disableBtn() {
-    const { password, repassword } = this.form.getRawValue();
-    return password !== repassword || !password || !repassword;
-  }
-
   ngOnInit(): void {
     this.loadStoredData();
   }
 
   clearStoredData() {
     localForage.removeItem('registerSelectedSchool');
-    localForage.removeItem('registerUserInfoFormValue');
-    localForage.removeItem('registerCoordinatorInfoFormValue');
+    localForage.removeItem('registerUserInfo');
+    localForage.removeItem('registerCoordinator');
   }
 
   loadStoredData() {
@@ -64,12 +66,16 @@ export class RegisterPasswordComponent implements OnInit {
       } อำเภอ ${res.amphurname} จังหวัด ${res.provincename}`;
     });
 
-    localForage.getItem('registerUserInfoFormValue').then((res) => {
+    localForage.getItem('registerUserInfo').then((res) => {
       this.savingData = res;
     });
 
-    localForage.getItem('registerCoordinatorInfoFormValue').then((res) => {
+    localForage.getItem('registerCoordinator').then((res) => {
       this.coordinator = res;
+    });
+
+    localForage.getItem('registerFile').then((res) => {
+      this.fileInfo = JSON.stringify(res);
     });
   }
 
@@ -130,11 +136,9 @@ export class RegisterPasswordComponent implements OnInit {
               ...this.coordinator,
               password,
             });
-
             const payload: KspRequest = {
               ...this.savingData,
             };
-
             payload.coordinatorinfo = coordinatorinfo;
             payload.ref1 = '2';
             payload.ref2 = '01';
@@ -149,6 +153,7 @@ export class RegisterPasswordComponent implements OnInit {
             payload.bureauid = this.school.bureauid;
             payload.bureauname = this.school.bureauname;
             payload.schooladdress = this.address;
+            payload.fileinfo = this.fileInfo;
             //console.log('payload = ', payload);
             return this.requestService.schCreateRequest(payload);
           }
@@ -180,5 +185,18 @@ export class RegisterPasswordComponent implements OnInit {
         this.router.navigate(['/login']);
       }
     });
+  }
+
+  get password() {
+    return this.form.controls.password;
+  }
+
+  get repassword() {
+    return this.form.controls.repassword;
+  }
+
+  get disableBtn() {
+    const { password, repassword } = this.form.getRawValue();
+    return password !== repassword || !password || !repassword;
   }
 }

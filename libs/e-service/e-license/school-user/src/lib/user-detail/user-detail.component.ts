@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
+  FileGroup,
   FormMode,
   KspApprovePayload,
   KspRequest,
@@ -15,7 +16,7 @@ import {
 } from '@ksp/shared/dialog';
 import { ERequestService, GeneralInfoService } from '@ksp/shared/service';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { concatMap, forkJoin, Observable } from 'rxjs';
 import { parseJson } from '@ksp/shared/utility';
 
 @Component({
@@ -33,6 +34,16 @@ export class UserDetailComponent implements OnInit {
   pageTypeEnum = SchoolUserPageType;
   setPassword = '';
   mode: FormMode = 'view';
+  files: FileGroup[] = [
+    {
+      name: 'หนังสือแต่งตั้งผู้ประสานงาน',
+      files: [],
+    },
+    {
+      name: 'สำเนาบัตรประชาชน',
+      files: [],
+    },
+  ];
 
   form = this.fb.group({
     userInfo: [],
@@ -54,7 +65,6 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkRequestId();
-
     this.route.queryParams.subscribe((res) => {
       this.pageType = Number(res['type']);
     });
@@ -75,7 +85,19 @@ export class UserDetailComponent implements OnInit {
     this.eRequestService.getKspRequestById(id).subscribe((res) => {
       this.requestData = res;
       res.status === '1' ? (this.mode = 'edit') : (this.mode = 'view');
-      //console.log('status = ', res.status);
+      //console.log('file = ', parseJson(res.fileinfo));
+
+      const files = parseJson(res.fileinfo);
+      console.log('files = ', files);
+
+      if (files && Array.isArray(files)) {
+        this.files.forEach((group, index) => {
+          console.log('group = ', group);
+          return (group.files = files[index]);
+        });
+      }
+      console.log('files = ', this.files);
+
       //console.log('mode = ', this.mode);
       if (res.birthdate) {
         res.birthdate = res.birthdate.split('T')[0];
@@ -116,7 +138,11 @@ export class UserDetailComponent implements OnInit {
   }
 
   approveUser() {
-    const payload: KspApprovePayload = {
+    const deActivateAllUser = this.eRequestService.deActivateAllUser(
+      this.requestData.schoolid ?? ''
+    );
+
+    const updatePayload: KspApprovePayload = {
       requestid: `${this.requestId}`,
       process: '1',
       status: '2',
@@ -125,10 +151,8 @@ export class UserDetailComponent implements OnInit {
       userid: null,
       paymentstatus: null,
     };
-
-    this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
-      console.log('approve result = ', res);
-    });
+    const updateRequest =
+      this.eRequestService.KspUpdateRequestProcess(updatePayload);
 
     const user = new SchUser();
     user.idcardno = this.requestData.idcardno;
@@ -142,8 +166,12 @@ export class UserDetailComponent implements OnInit {
     user.schpassword = this.setPassword;
     user.requestid = this.requestData.id;
     user.schuseractive = '1';
+    const createUser = this.eRequestService.createSchUser(user);
 
-    this.eRequestService.createSchUser(user).subscribe(() => {
+    const forkRequest = forkJoin([updateRequest, createUser]);
+
+    deActivateAllUser.pipe(concatMap(() => forkRequest)).subscribe((res) => {
+      //console.log('res = ', res);
       this.completeDialog();
     });
   }
@@ -159,8 +187,9 @@ export class UserDetailComponent implements OnInit {
       paymentstatus: null,
     };
 
-    this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
+    this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
       //console.log('un approve result = ', res);
+      this.completeDialog();
     });
   }
 

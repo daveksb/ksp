@@ -43,6 +43,10 @@ export class ResearchSubmitComponent
       }
     });
 
+    if (this.mode === 'view') {
+      this.form.disable();
+    }
+
     this.onChange(value);
     this.onTouched();
   }

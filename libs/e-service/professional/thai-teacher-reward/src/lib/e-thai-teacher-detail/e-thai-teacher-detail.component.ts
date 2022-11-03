@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ERewardFormBaseComponent } from '@ksp/self-service/form';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import { KspRequest, SelfRequest } from '@ksp/shared/interface';
 import {
@@ -14,25 +15,16 @@ import { Observable } from 'rxjs';
 
 const FORM_TAB_COUNT = 6;
 
-const VERIFY_CHOICES = [
-  {
-    name: 'ครบถ้วน และถูกต้อง',
-    value: 'complete',
-  },
-  {
-    name: 'ไม่ครบถ้วน และไม่ถูกต้อง',
-    value: 'incomplete',
-  },
-];
-
 @Component({
   selector: 'ksp-e-thai-teacher-detail',
   templateUrl: './e-thai-teacher-detail.component.html',
   styleUrls: ['./e-thai-teacher-detail.component.scss'],
 })
-export class EThaiTeacherDetailComponent implements OnInit {
+export class EThaiTeacherDetailComponent
+  extends ERewardFormBaseComponent
+  implements OnInit
+{
   userInfoType = UserInfoFormType.thai;
-  verifyChoice: any[] = [];
 
   provinces1$!: Observable<any>;
   amphurs1$!: Observable<any>;
@@ -50,9 +42,6 @@ export class EThaiTeacherDetailComponent implements OnInit {
   bureau$!: Observable<any>;
   uniqueTimestamp!: string;
   rewardFiles: any[] = [];
-  requestId!: number;
-  selectedTab: MatTabChangeEvent = new MatTabChangeEvent();
-  requestData = new KspRequest();
 
   form = this.fb.group({
     userInfo: [],
@@ -80,10 +69,12 @@ export class EThaiTeacherDetailComponent implements OnInit {
     private requestService: ERequestService,
     private addressService: AddressService,
     private router: Router
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
-    this.verifyChoice = VERIFY_CHOICES;
+    this.verifyChoice = this.VERIFY_CHOICES;
     this.getListData();
     this.checkRequestId();
     this.addCheckResultArray();
@@ -116,11 +107,6 @@ export class EThaiTeacherDetailComponent implements OnInit {
           });
       }
     });
-  }
-
-  tabChanged(e: MatTabChangeEvent) {
-    console.log('tab event = ', e);
-    this.selectedTab = e;
   }
 
   patchData(data: SelfRequest) {
@@ -216,18 +202,11 @@ export class EThaiTeacherDetailComponent implements OnInit {
   }
 
   next() {
-    console.log('next');
-    this.persistData();
+    this.persistData(this.form.controls.checkResult.value);
     this.router.navigate(['/thai-teacher', 'confirm', this.requestId]);
   }
 
-  // save data to indexed db
-  persistData() {
-    //console.log('check sub result = ', checkSubResult);
-    // const saveData: KspApprovePersistData = {
-    //   checkDetail: this.form.controls.checkResult.value,
-    //   requestData: this.requestData,
-    // };
-    // localForage.setItem('checkRequestData', saveData);
+  cancel() {
+    this.router.navigate(['/thai-teacher']);
   }
 }

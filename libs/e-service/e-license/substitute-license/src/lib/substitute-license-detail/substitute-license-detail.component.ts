@@ -44,8 +44,7 @@ export class SubstituteLicenseDetailComponent implements OnInit {
     address1: [],
     address2: [],
     workplace: [],
-    education: [],
-    experience: [],
+    replaceReasonInfo: [],
   });
 
   form2 = this.fb.group({
@@ -87,11 +86,16 @@ export class SubstituteLicenseDetailComponent implements OnInit {
     if (data.schooladdrinfo) {
       this.patchWorkplace(parseJson(data.schooladdrinfo));
     }
+
+    if (data.replacereasoninfo) {
+      const replaceReasonInfo = parseJson(data.replacereasoninfo);
+      this.form.controls.replaceReasonInfo.patchValue(replaceReasonInfo);
+    }
   }
 
   patchWorkplace(data: any) {
     this.amphurs3$ = this.addressService.getAmphurs(data.province);
-    this.tumbols3$ = this.addressService.getTumbols(data.district);
+    this.tumbols3$ = this.addressService.getTumbols(data.amphur);
     this.form.controls.workplace.patchValue(data);
   }
 
@@ -101,10 +105,12 @@ export class SubstituteLicenseDetailComponent implements OnInit {
         if (i === 0) {
           this.amphurs1$ = this.addressService.getAmphurs(addr.province);
           this.tumbols1$ = this.addressService.getTumbols(addr.amphur);
+          this.form.controls.address1.patchValue(addr);
         }
         if (i === 1) {
           this.amphurs2$ = this.addressService.getAmphurs(addr.province);
           this.tumbols2$ = this.addressService.getTumbols(addr.amphur);
+          this.form.controls.address2.patchValue(addr);
         }
       });
     }

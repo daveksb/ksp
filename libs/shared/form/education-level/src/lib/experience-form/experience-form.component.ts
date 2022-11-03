@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { Country, KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
 @Component({
@@ -13,7 +13,7 @@ export class ExperienceFormComponent
   extends KspFormBaseComponent
   implements OnInit, OnDestroy
 {
-  @Input() countries: any[] = [];
+  @Input() countries: Country[] | null = [];
   @Input() licenses: any[] = [];
 
   override form = this.fb.group({
@@ -37,7 +37,7 @@ export class ExperienceFormComponent
   }
 
   ngOnInit() {
-    // console.log(this.form.valid);
+    console.log(this.mode);
   }
 
   override ngOnDestroy(): void {

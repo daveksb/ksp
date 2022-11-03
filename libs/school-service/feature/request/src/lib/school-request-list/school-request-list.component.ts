@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -10,20 +10,24 @@ import {
   SchoolRequestSubType,
   SchoolRequestType,
 } from '@ksp/shared/constant';
+import { PdfRenderComponent } from '@ksp/shared/dialog';
 import { KspRequest, SchRequestSearchFilter } from '@ksp/shared/interface';
-import { SchoolRequestService } from '@ksp/shared/service';
+import { SchoolInfoService, SchoolRequestService } from '@ksp/shared/service';
 import {
   checkProcess,
   schoolMapRequestType,
   checkStatus,
   getCookie,
+  thaiDate,
+  hasRejectedRequest,
+  addDate,
 } from '@ksp/shared/utility';
 
 @Component({
   templateUrl: './school-request-list.component.html',
   styleUrls: ['./school-request-list.component.scss'],
 })
-export class SchoolRequestListComponent implements AfterViewInit {
+export class SchoolRequestListComponent implements AfterViewInit, OnInit {
   schoolId = getCookie('schoolId');
   displayedColumns: string[] = displayedColumns;
   dataSource = new MatTableDataSource<KspRequest>();
@@ -34,9 +38,16 @@ export class SchoolRequestListComponent implements AfterViewInit {
   checkStatus = checkStatus;
   requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
   careerTypeList = careerTypeList;
+  initialSearch = true;
+  rejectedRequests: KspRequest[] = [];
+
+  defaultForm = {
+    requesttype: '3',
+    careertype: '1',
+  };
 
   form = this.fb.group({
-    licenseSearch: [],
+    licenseSearch: [this.defaultForm],
   });
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -46,11 +57,30 @@ export class SchoolRequestListComponent implements AfterViewInit {
     private router: Router,
     private fb: FormBuilder,
     private requestService: SchoolRequestService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private schoolInfoService: SchoolInfoService
   ) {}
+
+  ngOnInit(): void {
+    const filters: Partial<SchRequestSearchFilter> = {
+      requesttype: '3',
+    };
+    this.search(filters);
+  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+  }
+
+  genAlertMessage(req: KspRequest) {
+    const detail: any = JSON.parse(req.detail || '');
+    //console.log('return date = ', detail.returndate);
+    return `แจ้งเตือน เลขที่คำขอ: ${
+      req.requestno
+    } ถูกส่งคืน "ปรับแก้ไข/เพิ่มเติม"
+    กรุณาส่งกลับภายในวันที่ ${thaiDate(
+      new Date(detail.returndate)
+    )} มิฉะนั้นใบคำขอจะถูกยกเลิก `;
   }
 
   search(filters: Partial<SchRequestSearchFilter>) {
@@ -71,24 +101,86 @@ export class SchoolRequestListComponent implements AfterViewInit {
       row: '500',
     };
 
-    //this.searchParams = payload;
-
     this.requestService.schSearchRequest(payload).subscribe((res) => {
-      if (res && res.length) {
-        console.log('res = ', res);
+      // search without showing result do automatically after load
+      if (this.initialSearch) {
+        this.rejectedRequests = hasRejectedRequest(res);
+        //console.log('has reject = ', hasReject);
+      }
+
+      if (res && res.length && !this.initialSearch) {
+        //console.log('res = ', res);
         this.searchNotFound = false;
         this.dataSource.data = res;
         this.dataSource.sort = this.sort;
-
         const sortState: Sort = { active: 'id', direction: 'desc' };
         this.sort.active = sortState.active;
         this.sort.direction = sortState.direction;
         this.sort.sortChange.emit(sortState);
+        this.initialSearch = false;
       } else {
         this.dataSource.data = [];
         this.searchNotFound = true;
+        this.initialSearch = false;
       }
     });
+  }
+
+  isLicenseApproved(req: KspRequest) {
+    const tempRequestApproved =
+      req.requesttype === '3' && req.process === '5' && req.status === '2';
+    const kuruNoApproved =
+      req.requesttype === '4' && req.process === '2' && req.status === '2';
+    const qualificationApproved =
+      req.requesttype === '6' && req.process === '3' && req.status === '2';
+    if (tempRequestApproved || kuruNoApproved || qualificationApproved) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  licensePdf(element: KspRequest) {
+    const startDate = new Date(element.processupdatedate || '');
+    const endDate = addDate(
+      new Date(element?.processupdatedate || '') ?? new Date(),
+      0,
+      0,
+      2
+    );
+    let name = '';
+    if (+(element?.careertype ?? '1') !== 5) {
+      name = element.firstnameth + ' ' + element.lastnameth;
+    } else {
+      name = element.firstnameen + ' ' + element.lastnameen;
+    }
+    const startth = thaiDate(startDate);
+    const endth = thaiDate(endDate);
+    const careertype = SchoolRequestSubType[+(element?.careertype ?? '1')];
+    const requestno = element.requestno ?? '';
+    this.schoolInfoService
+      .getSchoolInfo(this.schoolId)
+      .subscribe((res: any) => {
+        const schoolname = res.schoolName;
+        const schoolapprovename = ' ผู้อำนวยการ ' + schoolname;
+        this.dialog.open(PdfRenderComponent, {
+          width: '1200px',
+          height: '100vh',
+          data: {
+            pdfType: 99,
+            pdfSubType: 1,
+            input: {
+              schoolapprovename,
+              requestno,
+              careertype,
+              startth,
+              name,
+              endth,
+              schoolname,
+            },
+          },
+        });
+      });
   }
 
   clear() {
@@ -103,15 +195,19 @@ export class SchoolRequestListComponent implements AfterViewInit {
     });
   }
 
-  viewRequest(requestType: number, subType: number, requestId: number) {
+  viewRequest(
+    requestType: string | null,
+    subType: string | null,
+    requestId: string | null
+  ) {
     switch (requestType) {
-      case 4:
+      case '4':
         return this.foreignPage(`${requestId}`);
 
-      case 6:
-        return this.qualificationPage(requestId, subType);
+      case '6':
+        return this.qualificationPage(Number(requestId), Number(subType));
 
-      case 40:
+      case '40':
         return this.rewardPage(`${requestId}`);
     }
 
@@ -139,6 +235,103 @@ export class SchoolRequestListComponent implements AfterViewInit {
   rewardPage(id = '') {
     this.router.navigate(['/request-reward', 'detail', id]);
   }
+
+  requestPdf(element: KspRequest) {
+    const date = new Date(element.requestdate || '');
+    const pdfType = element.requesttype;
+    const pdfSubType = element.careertype;
+    const thai = thaiDate(date);
+    const [day, month, year] = thai.split(' ');
+    const name = element.firstnameth + ' ' + element.lastnameth;
+    const phone = element.contactphone;
+    const [
+      id1,
+      id2,
+      id3,
+      id4,
+      id5,
+      id6,
+      id7,
+      id8,
+      id9,
+      id10,
+      id11,
+      id12,
+      id13,
+    ] = element?.idcardno?.split('') ?? [];
+    const eduinfo = JSON.parse(element.eduinfo || '');
+    const edu1 = eduinfo.find((item: any) => {
+      if (item?.degreeLevel) {
+        return item.degreeLevel === '1';
+      }
+      return false;
+    });
+    const degreename1 = edu1?.degreeName ?? '';
+    const institution1 = edu1?.institution ?? '';
+    const major1 = edu1?.major ?? '';
+    const nameen = element.firstnameen + ' ' + element.lastnameen;
+    let checkbox1 = false;
+    if (degreename1) {
+      checkbox1 = true;
+    }
+    this.schoolInfoService
+      .getSchoolInfo(this.schoolId)
+      .subscribe((res: any) => {
+        //console.log('res xx = ', res);
+        const schoolname = res.schoolName;
+        const bureauname = res.bureauName;
+        const { address, moo, street, road, tumbon, fax } = res;
+        const amphurname = res.amphurName;
+        const provincename = res.provinceName;
+        const zipcode = res.zipCode;
+        const telphone = res.telphone;
+        this.dialog.open(PdfRenderComponent, {
+          width: '1200px',
+          height: '100vh',
+          data: {
+            pdfType,
+            pdfSubType,
+            input: {
+              day,
+              month,
+              year,
+              schoolname,
+              bureauname,
+              address,
+              moo,
+              street,
+              road,
+              tumbon,
+              amphurname,
+              provincename,
+              zipcode,
+              fax,
+              name,
+              phone,
+              telphone,
+              id1,
+              id2,
+              id3,
+              id4,
+              id5,
+              id6,
+              id7,
+              id8,
+              id9,
+              id10,
+              id11,
+              id12,
+              id13,
+              degreename1,
+              institution1,
+              major1,
+              checkbox1,
+              nameen,
+            },
+          },
+        });
+      });
+  }
 }
 
 export interface TempLicenseInfo {
@@ -163,6 +356,6 @@ export const displayedColumns = [
   'status',
   'updatedate',
   'requestdate',
-  'requestdoc',
-  'approvedoc',
+  'requestpdf',
+  'licensepdf',
 ];

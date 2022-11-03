@@ -26,7 +26,8 @@ export class RenewLicenseDetailComponent implements OnInit {
     workplace: [],
     education: [],
     experience: [],
-    standardworking: [],
+    educationForm: [],
+    standardWorking: [],
   });
 
   form2 = this.fb.group({
@@ -51,6 +52,8 @@ export class RenewLicenseDetailComponent implements OnInit {
   amphurs3$!: Observable<any>;
 
   requestId!: number;
+  educationType: 'teacher' | 'schManager' | 'eduManager' | 'supervision' =
+    'teacher';
 
   workingInfoFiles = [
     {
@@ -93,6 +96,24 @@ export class RenewLicenseDetailComponent implements OnInit {
           .getKspRequestById(this.requestId)
           .subscribe((res) => {
             if (res) {
+              console.log(res);
+              switch (res.careertype) {
+                case '1':
+                  this.educationType = 'teacher';
+                  break;
+                case '2':
+                  this.educationType = 'schManager';
+                  console.log(this.educationType);
+                  break;
+                case '3':
+                  this.educationType = 'eduManager';
+                  break;
+                case '4':
+                  this.educationType = 'supervision';
+                  break;
+                default:
+                  this.educationType = 'teacher';
+              }
               this.patchData(res);
             }
           });
@@ -105,6 +126,36 @@ export class RenewLicenseDetailComponent implements OnInit {
     this.patchAddress(parseJson(data.addressinfo));
     if (data.schooladdrinfo) {
       this.patchWorkplace(parseJson(data.schooladdrinfo));
+    }
+
+    if (data.eduinfo) {
+      const eduInfo = parseJson(data.eduinfo);
+      console.log(eduInfo);
+      const { educationType, ...educationLevelForm } = eduInfo;
+      this.form.controls.educationForm.patchValue({
+        educationType,
+        educationLevelForm,
+      } as any);
+    }
+
+    if (data.performanceinfo) {
+      const performanceInfo = parseJson(data.performanceinfo);
+      console.log(performanceInfo);
+      console.log(this.educationType);
+      if (this.educationType === 'teacher') {
+        const { educationType, ...educationLevelForm } = performanceInfo;
+        this.form.controls.standardWorking.patchValue({
+          educationType,
+          educationLevelForm,
+        } as any);
+      } else {
+        const { standardType, ...standardLevelForm } = performanceInfo;
+        console.log(standardType);
+        this.form.controls.standardWorking.patchValue({
+          educationType: standardType,
+          educationLevelForm: standardLevelForm,
+        } as any);
+      }
     }
   }
 
@@ -120,10 +171,12 @@ export class RenewLicenseDetailComponent implements OnInit {
         if (i === 0) {
           this.amphurs1$ = this.addressService.getAmphurs(addr.province);
           this.tumbols1$ = this.addressService.getTumbols(addr.amphur);
+          this.form.controls.address1.patchValue(addr);
         }
         if (i === 1) {
           this.amphurs2$ = this.addressService.getAmphurs(addr.province);
           this.tumbols2$ = this.addressService.getTumbols(addr.amphur);
+          this.form.controls.address2.patchValue(addr);
         }
       });
     }

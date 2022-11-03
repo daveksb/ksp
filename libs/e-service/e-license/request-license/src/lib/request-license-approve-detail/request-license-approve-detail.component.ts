@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
+import { ESelfFormBaseComponent } from '@ksp/shared/form/others';
+import { Country, FileGroup, Province } from '@ksp/shared/interface';
 import {
   AddressService,
   EducationDetailService,
@@ -11,64 +13,87 @@ import {
 import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
+const FORM_TAB_COUNT = 5;
+function allFilledValidator(): any {
+  return (form: FormArray) => {
+    const value: any[] = form.value;
+    return value.every((v) => v !== null) ? null : { allFilled: true };
+  };
+}
+
 @Component({
   selector: 'ksp-request-license-approve-detail',
   templateUrl: './request-license-approve-detail.component.html',
   styleUrls: ['./request-license-approve-detail.component.scss'],
 })
-export class RequestLicenseApproveDetailComponent implements OnInit {
+export class RequestLicenseApproveDetailComponent
+  extends ESelfFormBaseComponent
+  implements OnInit
+{
   approveTitles = 'ผลการตรวจสอบ';
-
-  approveChoices = choices;
-
   userInfoType = UserInfoFormType.thai;
-  form = this.fb.group({
+  override form = this.fb.group({
     userInfo: [],
     address1: [],
     address2: [],
     workplace: [],
     education: [],
     experience: [],
+    checkResult: this.fb.array([]),
   });
+
+  get checkResultFormArray() {
+    return this.form.controls.checkResult as FormArray;
+  }
 
   form2 = this.fb.group({
     verifyResult: [null, Validators.required],
   });
 
-  countries$!: Observable<any>;
-  countries2$!: Observable<any>;
+  countries$!: Observable<Country[]>;
+  countries2$!: Observable<Country[]>;
   licenses$!: Observable<any>;
   disableNextButton = false;
-  eduFiles: any[] = [];
-  experienceFiles: any[] = [];
-  prefixList$!: Observable<any>;
-  nationalitys$!: Observable<any>;
-  provinces$!: Observable<any>;
+  eduFiles: FileGroup[] = [];
+  experienceFiles: FileGroup[] = [];
+  provinces$!: Observable<Province[]>;
 
-  tumbols1$!: Observable<any>;
-  tumbols2$!: Observable<any>;
-  tumbols3$!: Observable<any>;
-  amphurs1$!: Observable<any>;
-  amphurs2$!: Observable<any>;
-  amphurs3$!: Observable<any>;
-
-  requestId!: number;
+  educationTypes: 'teacher' | 'schManager' | 'eduManager' | 'supervision' =
+    'teacher';
 
   constructor(
-    private fb: FormBuilder,
-    private addressService: AddressService,
-    private generalInfoService: GeneralInfoService,
-    private educationDetailService: EducationDetailService,
-    private route: ActivatedRoute,
-    private requestService: ERequestService
-  ) {}
+    fb: FormBuilder,
+    addressService: AddressService,
+    generalInfoService: GeneralInfoService,
+    educationDetailService: EducationDetailService,
+    route: ActivatedRoute,
+    requestService: ERequestService,
+    private router: Router
+  ) {
+    super(
+      generalInfoService,
+      addressService,
+      educationDetailService,
+      fb,
+      requestService,
+      route
+    );
+  }
 
   ngOnInit(): void {
     this.getListData();
     this.checkRequestId();
+    this.addCheckResultArray();
   }
 
-  checkRequestId() {
+  addCheckResultArray() {
+    for (let i = 0; i < FORM_TAB_COUNT; i++) {
+      this.checkResultFormArray.push(this.fb.control(null));
+    }
+    this.checkResultFormArray.setValidators(allFilledValidator());
+  }
+
+  override checkRequestId() {
     this.route.paramMap.subscribe((params) => {
       this.requestId = Number(params.get('id'));
       if (this.requestId) {
@@ -76,59 +101,83 @@ export class RequestLicenseApproveDetailComponent implements OnInit {
           .getKspRequestById(this.requestId)
           .subscribe((res) => {
             if (res) {
+              console.log(res);
+              this.requestData = res;
               this.patchData(res);
+              switch (res.careertype) {
+                case '1':
+                  this.educationTypes = 'teacher';
+                  break;
+                case '2':
+                  this.educationTypes = 'schManager';
+                  break;
+                case '3':
+                  this.educationTypes = 'eduManager';
+                  break;
+                case '4':
+                  this.educationTypes = 'supervision';
+                  break;
+                default:
+                  this.educationTypes = 'teacher';
+              }
             }
           });
       }
     });
   }
 
-  patchData(data: any) {
-    this.form.controls.userInfo.patchValue(data);
-    this.patchAddress(parseJson(data.addressinfo));
-    if (data.schooladdrinfo) {
-      this.patchWorkplace(parseJson(data.schooladdrinfo));
+  override patchData(data: any) {
+    super.patchData(data);
+
+    if (data.eduinfo) {
+      const eduInfo = parseJson(data.eduinfo);
+      const { educationType, ...educationLevelForm } = eduInfo;
+      this.form.controls.education.patchValue({
+        educationType,
+        educationLevelForm,
+      } as any);
+    }
+
+    if (data.experienceinfo) {
+      const experienceInfo = parseJson(data.experienceinfo);
+      console.log(experienceInfo);
+      this.form.controls.experience.patchValue({ ...experienceInfo });
     }
   }
 
-  patchWorkplace(data: any) {
-    this.amphurs3$ = this.addressService.getAmphurs(data.province);
-    this.tumbols3$ = this.addressService.getTumbols(data.district);
-    this.form.controls.workplace.patchValue(data);
-  }
-
-  patchAddress(addrs: any[]) {
-    if (addrs && addrs.length) {
-      addrs.map((addr: any, i: number) => {
-        if (i === 0) {
-          this.amphurs1$ = this.addressService.getAmphurs(addr.province);
-          this.tumbols1$ = this.addressService.getTumbols(addr.amphur);
-        }
-        if (i === 1) {
-          this.amphurs2$ = this.addressService.getAmphurs(addr.province);
-          this.tumbols2$ = this.addressService.getTumbols(addr.amphur);
-        }
-      });
-    }
-  }
-
-  getListData() {
+  override getListData() {
+    this.prefixList$ = this.generalInfoService.getPrefix();
+    this.nationalitys$ = this.generalInfoService.getNationality();
     this.countries$ = this.addressService.getCountry();
     this.countries2$ = this.countries$;
     this.licenses$ = this.educationDetailService.getLicenseType();
-    this.prefixList$ = this.generalInfoService.getPrefix();
-    this.nationalitys$ = this.generalInfoService.getNationality();
     this.provinces$ = this.addressService.getProvinces();
+    this.bureau$ = this.educationDetailService.getBureau();
+  }
+
+  patchUserInfoForm(data: any): void {
+    this.form.controls.userInfo.patchValue(data);
+  }
+  patchAddress1Form(data: any): void {
+    this.form.controls.address1.patchValue(data);
+  }
+  patchAddress2Form(data: any): void {
+    this.form.controls.address2.patchValue(data);
+  }
+  patchWorkPlaceForm(data: any): void {
+    this.form.controls.workplace.patchValue(data);
+  }
+
+  next() {
+    this.persistData(this.form.controls.checkResult.value);
+    this.router.navigate([
+      '/request-license',
+      'approve-confirm',
+      this.requestId,
+    ]);
+  }
+
+  cancel() {
+    this.router.navigate(['/request-license', 'approve-list']);
   }
 }
-
-const choices = [
-  {
-    name: 'ครบถ้วน และถูกต้อง',
-    value: 2,
-  },
-  {
-    name: 'ไม่ครบถ้วน และถูกต้อง',
-    value: 3,
-  },
-];

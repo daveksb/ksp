@@ -99,7 +99,7 @@ export const eLicenseMenu: MenuConfig[] = [
     subMenuName: 'tempThai',
     subMenu: [
       {
-        path: '/temp-license/list',
+        path: '/temp-license/list/1',
         label: 'รายการใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
       },
       /* {
@@ -121,7 +121,7 @@ export const eLicenseMenu: MenuConfig[] = [
     subMenuName: 'tempForeign',
     subMenu: [
       {
-        path: '/temp-license/list',
+        path: '/temp-license/list/5',
         label: 'รายการใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
       },
       /* {
@@ -375,12 +375,8 @@ export const standardMenu: MenuConfig[] = [
     subMenuName: 'gradute-list',
     subMenu: [
       {
-        path: '/aa',
-        label: 'รายการใบคำขอส่งรายชื่อผู้เข้าศึกษา',
-      },
-      {
-        path: '/bb',
-        label: 'รายการใบคำขอส่งรายชื่อผู้สำเร็จการศึกษา',
+        path: '/degree-cert/list-approved',
+        label: 'รายการใบคำขอส่งรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
       },
       {
         path: '/cc',
