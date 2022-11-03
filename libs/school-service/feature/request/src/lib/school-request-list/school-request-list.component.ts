@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
   careerTypeList,
+  SchoolLangMapping,
   SchoolRequestSubType,
   SchoolRequestType,
 } from '@ksp/shared/constant';
@@ -21,6 +22,8 @@ import {
   thaiDate,
   hasRejectedRequest,
   addDate,
+  changeToThaiNumber,
+  changeToEnglishMonth,
 } from '@ksp/shared/utility';
 
 @Component({
@@ -141,6 +144,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
   }
 
   licensePdf(element: KspRequest) {
+    const position = element?.position;
     const startDate = new Date(element.processupdatedate || '');
     const endDate = addDate(
       new Date(element?.processupdatedate || '') ?? new Date(),
@@ -148,41 +152,63 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       0,
       2
     );
-    let name = '';
-    if (+(element?.careertype ?? '1') !== 5) {
-      name = element.firstnameth + ' ' + element.lastnameth;
-    } else {
-      name = element.firstnameen + ' ' + element.lastnameen;
-    }
-    const startth = thaiDate(startDate);
-    const endth = thaiDate(endDate);
+    const date = new Date(element.requestdate || '');
+    const thai = thaiDate(date);
+    const [day, month, year] = thai.split(' ');
+    const fulldateth = `${changeToThaiNumber(day)} เดือน ${month} พ.ศ. ${year}`;
+    const fulldateen = `${day} Day of ${changeToEnglishMonth(month)} B.E. ${
+      parseInt(year) - 543
+    }`;
+    const name = element.firstnameth + ' ' + element.lastnameth;
+    const nameen = element.firstnameen + ' ' + element.lastnameen;
+    const start = thaiDate(startDate);
+    const end = thaiDate(endDate);
+    const startth = changeToThaiNumber(start);
+    const endth = changeToThaiNumber(end);
+    const starten = changeToEnglishMonth(start);
+    const enden = changeToEnglishMonth(end);
     const careertype = SchoolRequestSubType[+(element?.careertype ?? '1')];
+    const careertypeen = SchoolLangMapping[careertype ?? 'ครู'] ?? '';
     const requestno = element.requestno ?? '';
     this.schoolInfoService
       .getSchoolInfo(this.schoolId)
       .subscribe((res: any) => {
         const schoolname = res.schoolName;
-        const schoolapprovename = ' ผู้อำนวยการ ' + schoolname;
+        const bureauname = res.bureauName;
+
+        const schoolapprovename = 'ผู้อํานวยการสถานศึกษา';
+        const schoolapprovenameen = 'director of the educational institution';
         this.dialog.open(PdfRenderComponent, {
           width: '1200px',
           height: '100vh',
           data: {
             pdfType: 99,
-            pdfSubType: 1,
+            pdfSubType: element.requesttype,
             input: {
               schoolapprovename,
+              schoolapprovenameen,
               requestno,
               careertype,
-              startth,
+              careertypeen,
               name,
+              nameen,
+              startth,
               endth,
+              starten,
+              enden,
               schoolname,
+              bureauname,
+              day,
+              month,
+              year,
+              position,
+              fulldateth,
+              fulldateen,
             },
           },
         });
       });
   }
-
   clear() {
     this.form.reset();
     this.searchNotFound = false;
@@ -237,9 +263,9 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
   }
 
   requestPdf(element: KspRequest) {
-    const date = new Date(element.requestdate || '');
     const pdfType = element.requesttype;
     const pdfSubType = element.careertype;
+    const date = new Date(element.requestdate || '');
     const thai = thaiDate(date);
     const [day, month, year] = thai.split(' ');
     const name = element.firstnameth + ' ' + element.lastnameth;

@@ -1,9 +1,11 @@
 import { AbstractControl } from '@angular/forms';
 import {
+  EnglishMonthMapping,
   SchoolRequestProcess,
   SchoolRequestType,
   SelfRequestProcess,
   SelfRequestType,
+  ThaiNumberMapping,
 } from '@ksp/shared/constant';
 import { FileGroup, KspRequest } from '@ksp/shared/interface';
 import moment from 'moment';
@@ -39,6 +41,27 @@ export function thaiDate(date: Date): string {
   });
 }
 
+export function englishDate(date: Date): string {
+  return date.toLocaleDateString('th-EN', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+export function changeToThaiNumber(text: string): string {
+  for (const key in ThaiNumberMapping) {
+    const regExp = new RegExp(key, 'g');
+    text = text.replace(regExp, ThaiNumberMapping[+key]);
+  }
+  return text;
+}
+export function changeToEnglishMonth(text: string): string {
+  for (const key in EnglishMonthMapping) {
+    const regExp = new RegExp(key, 'g');
+    text = text.replace(regExp, EnglishMonthMapping[key]);
+  }
+  return text;
+}
 // format json data
 // from [null,'true',null,'true',null,null] ===> ['s2','s4']
 export function formatCheckboxData(input: any[], source: any[]) {

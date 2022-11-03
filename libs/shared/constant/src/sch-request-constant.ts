@@ -33,6 +33,11 @@ export enum SchoolRequestSubType {
   'อื่นๆ' = 5,
 }
 
+export const SchoolLangMapping: { [key: string]: string } = {
+  ครู: 'teacher',
+  ผู้บริหารสถานศึกษา: 'school administrators',
+  อื่นๆ: 'other',
+};
 export enum UserInfoFormType {
   'thai',
   'foreign',
@@ -383,3 +388,31 @@ export const staffLicenseTypes = [
     label: 'ใบปฏิบัติการสอน',
   },
 ];
+
+export const ThaiNumberMapping: { [key: number]: string } = {
+  1: '๑',
+  2: '๒',
+  3: '๓',
+  4: '๔',
+  5: '๕',
+  6: '๖',
+  7: '๗',
+  8: '๘',
+  9: '๙',
+  0: '๐',
+};
+
+export const EnglishMonthMapping: { [key: string]: string } = {
+  มกราคม: 'January',
+  กุมภาพันธ์: 'February',
+  มีนาคม: 'March',
+  เมษายน: 'April',
+  พฤษภาคม: 'May',
+  มิถุนายน: 'June',
+  กรกฎาคม: 'July',
+  สิงหาคม: 'August',
+  กันยายน: 'September',
+  ตุลาคม: 'October',
+  พฤศจิกายน: 'November',
+  ธันวาคม: 'December',
+};
