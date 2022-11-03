@@ -49,10 +49,9 @@ export class ERequestService {
   // new API
   getApproveHistory(requestid: string): Observable<SelfRequest[]> {
     return this.http
-      .post(
-        `${environment.apiUrl}/e-service/ksprequestprocessselectbyrequestid`,
-        { requestid }
-      )
+      .post(`${environment.shortApiUrl}/ksprequestprocess_systemtype.php`, {
+        requestid,
+      })
       .pipe(map((data: any) => data.datareturn));
   }
 
