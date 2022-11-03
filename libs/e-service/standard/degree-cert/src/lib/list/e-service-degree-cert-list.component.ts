@@ -193,8 +193,8 @@ export class EServiceDegreeCertListComponent
     }
   }
 
-  lastStep() {
-    this.router.navigate(['/degree-cert', 'final-result']);
+  lastStep(row:any) {
+    this.router.navigate(['/degree-cert', 'final-result',row?.key]);
   }
 }
 

@@ -39,6 +39,10 @@ export const routes: Routes = [
         component: VerifyComponent,
       },
       {
+        path: 'verify/:type/:process/:requestId',
+        component: VerifyComponent,
+      },
+      {
         path: 'consider/:key', //พิจารณา
         component: ConsiderComponent,
       },
@@ -47,7 +51,7 @@ export const routes: Routes = [
         component: ApproveComponent,
       },
       {
-        path: 'final-result', //ขั้นตอนสุดท้าย
+        path: 'final-result/:key', //ขั้นตอนสุดท้าย
         component: FinalResultComponent,
       },
     ],

@@ -3,15 +3,21 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
-import { Location } from '@angular/common'
+import { Location } from '@angular/common';
 import {
   ERequestService,
   EUniService,
   UniInfoService,
 } from '@ksp/shared/service';
-import { getCookie, jsonStringify, parseJson } from '@ksp/shared/utility';
+import {
+  getCookie,
+  jsonStringify,
+  parseJson,
+  thaiDate,
+} from '@ksp/shared/utility';
 import _ from 'lodash';
 import { map } from 'rxjs';
+import moment from 'moment';
 const detailToState = (res: any) => {
   let newRes = _.filter(res?.datareturn, { process: '6' }).map((data: any) => {
     return parseJson(data?.detail);
@@ -38,9 +44,9 @@ export class ApproveComponent implements OnInit {
     chairmanName: [],
     step1: '',
     verify: [],
-    approveData:[]
+    approveData: [],
   });
-  daftRequest:any;
+  daftRequest: any;
   verifyResult: any;
   requestNumber = '';
   choices = [
@@ -50,7 +56,9 @@ export class ApproveComponent implements OnInit {
     { name: 'ส่งคืนหลักสูตร', value: 4 },
     { name: 'ยกเลิกการรับรอง', value: 5 },
   ];
-
+  considerCourses: any = [];
+  considerCert: any = [];
+  result: any = { '1': 'ผ่านการพิจารณา', '2': 'ไม่ผ่านการพิจารณา' };
   constructor(
     public dialog: MatDialog,
     private router: Router,
@@ -64,6 +72,12 @@ export class ApproveComponent implements OnInit {
   ngOnInit(): void {
     this.getDegreeCert();
     this.getHistory();
+    this.considerCert = _.get(this.location.getState(), 'considerCert', []);
+    this.considerCourses = _.get(
+      this.location.getState(),
+      'considerCourses',
+      []
+    );
   }
   getDegreeCert() {
     if (this.route.snapshot.params['key']) {
@@ -97,11 +111,11 @@ export class ApproveComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['./', 'degree-cert', 'list', '2']);
+    this.router.navigate(['/degree-cert', 'list', 1, 2]);
   }
 
   prevPage() {
-    this.router.navigate(['./', 'degree-cert', 'verify', '2']);
+    this.router.navigate(['/degree-cert', 'list', 1, 2]);
   }
 
   save() {
@@ -116,13 +130,13 @@ export class ApproveComponent implements OnInit {
 
     dialogRef.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.onSubmitKSP()
+        this.onSubmitKSP();
       }
     });
   }
 
   onSubmitKSP() {
-    const detail: any = _.pick(this.form.value, ['verify',"approveData"]);
+    const detail: any = _.pick(this.form.value, ['verify', 'approveData']);
     const payload: any = {
       systemtype: '3',
       requestid: this.daftRequest?.requestid,
@@ -130,13 +144,30 @@ export class ApproveComponent implements OnInit {
       process: '6',
     };
     payload.status = _.get(this.form, 'value.verify', '');
-    payload.detail = jsonStringify(detail);
+    payload.detail = jsonStringify({
+      ...detail,
+      considerCourses: this.considerCourses,
+      considerCert: this.considerCert,
+    });
     this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
-    this.location.back();
+      this.router.navigate(['/degree-cert', 'list', 1, 2]);
     });
   }
   toVerifyPage(type: number) {
-    this.router.navigate(['./', 'degree-cert', 'verify', type]);
+    const state: any = {};
+    state['considerCourses'] = this.considerCourses;
+    state['considerCert'] = this.considerCert;
+    this.router.navigate(
+      ['/degree-cert', 'verify', type, 6, this.route.snapshot.params['key']],
+      {
+        state,
+      }
+    );
   }
-
+  toDate(date: any) {
+    return thaiDate(moment(date).toDate());
+  }
+  get isApprove() {
+    return _.get(this.form.controls.verify.value, 'result') == 1;
+  }
 }

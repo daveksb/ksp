@@ -14,7 +14,13 @@ import { jsonStringify } from '@ksp/shared/utility';
   styleUrls: ['./verify.component.scss'],
 })
 export class VerifyComponent implements OnInit {
-  titles = ['', 'พิจารณาประเมินหลักสูตร', 'พิจารณารับรองหลักสูตร', 'พิจารณารับรอง', 'บันทึกการประเมินสภาพจริง'];
+  titles = [
+    '',
+    'พิจารณาประเมินหลักสูตร',
+    'พิจารณารับรองหลักสูตร',
+    'พิจารณารับรอง',
+    'บันทึกการประเมินสภาพจริง',
+  ];
 
   choices = [
     [],
@@ -23,11 +29,11 @@ export class VerifyComponent implements OnInit {
       { name: 'ไม่ผ่านการพิจารณา', value: 2 },
     ],
     [
-      { name: "รับรอง", value: 1 },
-      { name: "ไม่รับรอง", value: 2 },
-      { name: "ให้สถาบันแก้ไข / เพิ่มเติม", value: 3 },
-      { name: "ส่งคืน", value: 4 },
-      { name: "ยกเลิกการรับรอง", value: 5 },
+      { name: 'รับรอง', value: 1 },
+      { name: 'ไม่รับรอง', value: 2 },
+      { name: 'ให้สถาบันแก้ไข / เพิ่มเติม', value: 3 },
+      { name: 'ส่งคืน', value: 4 },
+      { name: 'ยกเลิกการรับรอง', value: 5 },
     ],
     [
       { name: 'ผ่านการพิจารณา', value: 1 },
@@ -39,6 +45,8 @@ export class VerifyComponent implements OnInit {
     ],
   ];
   dataSource: any[] = [];
+  requestId: any;
+  process: any;
   processType!: number;
   constructor(
     private router: Router,
@@ -50,16 +58,20 @@ export class VerifyComponent implements OnInit {
   ) {}
   form = this.fb.group({
     verifyForm: [{}],
-    considerationResult:[{
-      detail: null,
-      reason: null,
-      result: null
-    }]
+    considerationResult: [
+      {
+        detail: null,
+        reason: null,
+        result: null,
+      },
+    ],
   });
   ngOnInit() {
     this.dataSource = _.get(this.location.getState(), 'dataSource', []);
     this.route.paramMap.subscribe((res) => {
       this.processType = Number(res.get('type'));
+      this.requestId = res.get('requestId');
+      this.process = res.get('process');
       //console.log('process type = ', this.processType);
     });
   }
@@ -75,16 +87,33 @@ export class VerifyComponent implements OnInit {
   next() {
     this.router.navigate(['./degree-cert']);
   }
-
+  saveState() {
+    const state: any = {};
+    state.considerCourses = _.get(
+      this.location.getState(),
+      'considerCourses',
+      []
+    );
+    state.considerCert = _.get(this.location.getState(), 'considerCert', []);
+    if (this.processType === 3)
+      state.considerCert = [...state.considerCert, this.form.value];
+    if (this.processType === 4)
+      state.considerCourses = [...state.considerCourses, this.form.value];
+    this.router.navigate(['./degree-cert', 'approve', this.requestId], {
+      state,
+    });
+  }
   save() {
-    let detail: any = {};
+    console.log(this.process);
+    if (this.process === '6') return this.saveState();
+    const detail: any = {};
     let process = '';
     if (this.processType === 1 || this.processType === 3) {
       process = '4';
-      detail["considerCourses"] = this.form.value;
+      detail['considerCourses'] = this.form.value;
     } else {
       process = '3';
-      detail["considerCert"] = this.form.value;
+      detail['considerCert'] = this.form.value;
     }
 
     const payload: any = {
@@ -92,7 +121,7 @@ export class VerifyComponent implements OnInit {
       process: process,
       status: this.form.value.considerationResult?.result,
       detail: jsonStringify(detail),
-      userid: null // getCookie('userId'),
+      userid: null, // getCookie('userId'),
     };
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -108,9 +137,11 @@ export class VerifyComponent implements OnInit {
       if (res) {
         this.dataSource.map((data: any) => {
           payload.requestid = data?.key;
-          this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
+          this.eRequestService
+            .KspUpdateRequestProcess(payload)
+            .subscribe(() => {
               // this.onSubmitDeGreeCert();
-          });
+            });
         });
 
         if (this.processType != 1 && this.processType != 2) {

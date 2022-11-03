@@ -15,6 +15,7 @@ import {
   UniRequestService,
 } from '@ksp/shared/service';
 import { getCookie } from '@ksp/shared/utility';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   templateUrl: './foreign-student-id.component.html',
@@ -22,13 +23,12 @@ import { getCookie } from '@ksp/shared/utility';
 })
 export class ForeignStudentIdComponent {
   @Input() mode: FormMode = 'edit';
-  foreignInfo = [{ name: '1.สำเนาหนังสือเดินทาง' }];
-
+  foreignInfo = [{ name: '1.สำเนาหนังสือเดินทาง',filename: ""  }];
   form = this.fb.group({
     foreignStudent: [],
     visainfo: [],
   });
-
+  uniqueTimestamp: any;
   prefixList$!: Observable<any>;
   countries$!: Observable<any>;
   visaTypeList$!: Observable<any>;
@@ -47,6 +47,8 @@ export class ForeignStudentIdComponent {
     private generalInfoService: GeneralInfoService,
     private uniInfoService: UniInfoService
   ) {
+    this.uniqueTimestamp = uuidv4();
+
     this.getAll();
   }
   get formValid() {

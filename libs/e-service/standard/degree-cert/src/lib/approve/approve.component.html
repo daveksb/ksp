@@ -28,8 +28,9 @@
         </div>
 
         <div class="d-flex my-3">
-          <ng-container *ngFor="let item of this.verifyResult">
+          <ng-container *ngFor="let item of this.verifyResult; let index = index">
             <e-service-consider-result
+              [number]="index+1"
               [isBasicValid]="item.isBasicValid"
               [name]="
                 item.isBasicValid ? 'ครบถ้วนถูกต้อง' : 'ขอแก้ไข / เพิ่มเติม'
@@ -61,7 +62,6 @@
           <table class="table">
             <thead>
               <tr>
-                <th></th>
                 <th scope="col">มติครั้งที่</th>
                 <th scope="col">วันที่ส่งคำขอ</th>
                 <th scope="col">ประธาน</th>
@@ -71,14 +71,26 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">ดูเอกสาร</td>
+              <tr></tr>
+              <tr *ngFor="let item of considerCert; let i = index">
+                <td class="detail__table">
+                  {{ item?.verifyForm?.reasonTimes || '' }}
+                </td>
+                <td class="detail__table">
+                  {{ toDate(item?.verifyForm?.date) || '' }}
+                </td>
+                <td class="detail__table">
+                  {{ item?.verifyForm?.chairmanName || '' }}
+                </td>
+                <td class="detail__table">
+                  {{ item?.verifyForm?.boardName || '' }}
+                </td>
+                <td class="detail__table">
+                  {{ result[item?.considerationResult?.result || ''] }}
+                </td>
+                <td class="detail__table">
+                  <label class="view__label">ดูเอกสารแนบ</label>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -98,7 +110,6 @@
           <table class="table">
             <thead>
               <tr>
-                <th></th>
                 <th scope="col">วันที่ประเมิน</th>
                 <th scope="col">ชื่อคณะกรรมการ</th>
                 <th scope="col">รายละเอียด</th>
@@ -106,12 +117,19 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">ดูเอกสาร</td>
+              <tr *ngFor="let item of considerCourses; let i = index">
+                <td class="detail__table">
+                  {{ toDate(item?.verifyForm?.date) || '' }}
+                </td>
+                <td class="detail__table">
+                  {{ item?.verifyForm?.boardName || '' }}
+                </td>
+                <td class="detail__table">
+                  {{ item?.considerationResult?.detail || '' }}
+                </td>
+                <td class="detail__table">
+                  <label class="view__label">ดูเอกสารแนบ</label>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -121,10 +139,14 @@
     <br />
 
     <div class="bg-white p-3 default-width">
-      <e-service-license-check formControlName="verify" [choices]="choices"> </e-service-license-check>
-      <div>ถ้าเลือก "รับรอง" ด้านบนจะขึ้นกล่องข้างล่าง</div>
+      <e-service-license-check formControlName="verify" [choices]="choices">
+      </e-service-license-check>
       <!-- <ksp-form-meeting-record></ksp-form-meeting-record> -->
-      <e-service-form-meeting-record formControlName="approveData"></e-service-form-meeting-record>
+      <ng-container *ngIf="isApprove">
+        <e-service-form-approve-meeting-record
+          formControlName="approveData"
+        ></e-service-form-approve-meeting-record>
+      </ng-container>
     </div>
   </div>
 </form>
