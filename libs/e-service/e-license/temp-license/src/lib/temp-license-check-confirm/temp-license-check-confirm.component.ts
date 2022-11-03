@@ -28,7 +28,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   targetProcess!: number | null;
   targetStatus!: number | null;
   userId = `${getCookie('userId')}`;
-  approveHistory: any = [];
+  approveHistory: any[] = [];
 
   form = this.fb.group({
     approvement: [],
@@ -155,7 +155,6 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   }
 
   mapCheckResult(result: string) {
-    console.log('result xx = ', result);
     if (result === '1') return 'ครบถ้วน และถูกต้อง';
     if (result === '2') return 'ขอแก้ไข / เพิ่มเติม';
     if (result === '3') return 'ขาดคุณสมบัติ';

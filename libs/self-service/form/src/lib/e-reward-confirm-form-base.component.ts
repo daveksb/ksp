@@ -14,6 +14,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { approveResult } from '@ksp/e-service/e-license/approve-ksp-request';
+import { getCookie } from '@ksp/shared/utility';
 
 @UntilDestroy()
 @Component({
@@ -25,7 +26,8 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
   saveData = new KspApprovePersistData();
   targetProcess!: number | null;
   targetStatus!: number | null;
-
+  approveHistory: any[] = [];
+  userId = `${getCookie('userId')}`;
   form = this.fb.group({
     approvement: [],
   });
@@ -101,8 +103,8 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
       process: `${this.targetProcess}`,
       status: `${this.targetStatus}`,
       detail: JSON.stringify(this.saveData.checkDetail),
-      systemtype: '2', // school
-      userid: null,
+      systemtype: '4', // approve by e-service staff
+      userid: this.userId,
       paymentstatus: null,
     };
 
@@ -116,21 +118,20 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
 
   considerRequest() {
     console.log('consider request  = ');
-
     const form: any = this.form.value.approvement;
     const payload: KspApprovePayload = {
       requestid: this.saveData.requestData.id,
       process: '5',
       status: `${form.result}`,
       detail: JSON.stringify(this.saveData.checkDetail),
-      systemtype: '2',
-      userid: null,
+      systemtype: '4', // approve by e-service staff
+      userid: this.userId,
       paymentstatus: null,
     };
 
     console.log('payload = ', payload);
 
-    this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
+    this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
       //console.log('result = ', res.app);
       this.navigateBack();
     });
@@ -138,8 +139,16 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
 
   getApproveHistory(requestid: string) {
     this.eRequestService.getApproveHistory(requestid).subscribe((res) => {
-      console.log('list = ', res);
+      console.log('approve history = ', res);
+      this.approveHistory = res;
     });
+  }
+
+  mapCheckResult(result: string) {
+    if (result === '1') return 'ครบถ้วน และถูกต้อง';
+    if (result === '2') return 'ขอแก้ไข / เพิ่มเติม';
+    if (result === '3') return 'ขาดคุณสมบัติ';
+    else return '';
   }
 
   checkRequestId() {
