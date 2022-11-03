@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import { ESelfFormBaseComponent } from '@ksp/shared/form/others';
+import { Country, FileGroup, Province } from '@ksp/shared/interface';
 import {
   AddressService,
   EducationDetailService,
@@ -16,7 +17,6 @@ const FORM_TAB_COUNT = 5;
 function allFilledValidator(): any {
   return (form: FormArray) => {
     const value: any[] = form.value;
-
     return value.every((v) => v !== null) ? null : { allFilled: true };
   };
 }
@@ -31,7 +31,6 @@ export class RequestLicenseApproveDetailComponent
   implements OnInit
 {
   approveTitles = 'ผลการตรวจสอบ';
-
   userInfoType = UserInfoFormType.thai;
   override form = this.fb.group({
     userInfo: [],
@@ -51,13 +50,13 @@ export class RequestLicenseApproveDetailComponent
     verifyResult: [null, Validators.required],
   });
 
-  countries$!: Observable<any>;
-  countries2$!: Observable<any>;
+  countries$!: Observable<Country[]>;
+  countries2$!: Observable<Country[]>;
   licenses$!: Observable<any>;
   disableNextButton = false;
-  eduFiles: any[] = [];
-  experienceFiles: any[] = [];
-  provinces$!: Observable<any>;
+  eduFiles: FileGroup[] = [];
+  experienceFiles: FileGroup[] = [];
+  provinces$!: Observable<Province[]>;
 
   educationTypes: 'teacher' | 'schManager' | 'eduManager' | 'supervision' =
     'teacher';
