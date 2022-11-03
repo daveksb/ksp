@@ -59,10 +59,21 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
     });
   }
 
+  mapCheckResult(result: string) {
+    if (result === '1') return 'ครบถ้วน และถูกต้อง';
+    if (result === '2') return 'ขอแก้ไข / เพิ่มเติม';
+    if (result === '3') return 'ขาดคุณสมบัติ';
+    else return '';
+  }
+
   getApproveHistory(requestid: string) {
     this.eRequestService.getApproveHistory(requestid).subscribe((res) => {
       //console.log('approve history = ', res);
       this.approveHistory = res;
+      this.approveHistory = this.approveHistory.map((h: any) => {
+        return { ...h, ...{ detail: JSON.parse(h.detail) } };
+      });
+      console.log('approve history after= ', this.approveHistory);
     });
   }
 

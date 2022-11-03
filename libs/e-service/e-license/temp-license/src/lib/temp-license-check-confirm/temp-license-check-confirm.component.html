@@ -36,7 +36,7 @@
             <td scope="col">{{ row.firstnameth }} {{ row.lastnameth }}</td>
             <td scope="col">{{ row.createdate | thaiDate }}</td>
             <td scope="col">
-              {{ checkStatus(+row.process, +row.status, 3)?.ename }}
+              {{ mapCheckResult(row.detail.checkresult) }}
             </td>
           </tr>
         </ng-container>
