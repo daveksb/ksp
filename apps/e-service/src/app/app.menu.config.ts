@@ -376,11 +376,7 @@ export const standardMenu: MenuConfig[] = [
     subMenu: [
       {
         path: '/degree-cert/list-approved',
-        label: 'รายการใบคำขอส่งรายชื่อผู้เข้าศึกษา',
-      },
-      {
-        path: '/bb',
-        label: 'รายการใบคำขอส่งรายชื่อผู้สำเร็จการศึกษา',
+        label: 'รายการใบคำขอส่งรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
       },
       {
         path: '/cc',

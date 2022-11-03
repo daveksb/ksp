@@ -143,6 +143,7 @@ export class ImportStudentComponent implements OnInit {
       })
       .subscribe((response: any) => {
         if (response.datareturn) {
+          response.datareturn = response.datareturn.sort((data1:any,data2:any) => data1.id - data2.id);
           const findResponse = response.datareturn.find((data: any) => {
             return (
               data.unidegreecertid == this.courseData?.courseDetail.id &&
@@ -168,6 +169,7 @@ export class ImportStudentComponent implements OnInit {
             this.requestNo = findResponse.requestno;
             this.requestDate = findResponse.requestdate;
             this.payload.id = findResponse.id;
+            this.payload.requestid = findResponse.requestid;
           }
         }
       });
@@ -256,6 +258,7 @@ export class ImportStudentComponent implements OnInit {
     } else {
       userAddress = JSON.parse(data.address);
     }
+    console.log(userAddress)
     return this.fb.group({
       checked: [false],
       index: [data.index],
@@ -324,20 +327,18 @@ export class ImportStudentComponent implements OnInit {
         this.pageType == 'admissionList' ? Validators.required : undefined,
       ],
       address: this.fb.group({
-        addressInfo: [
-          {
-            location: [userAddress?.location || null],
-            housenumber: [userAddress?.housenumber || null],
-            villagenumber: [userAddress?.villagenumber || null],
-            lane: [userAddress?.lane || null],
-            road: [userAddress?.road || null],
-            zipcode: [userAddress?.zipcode || null],
-            provinceid: [userAddress?.provinceid || null],
-            districtid: [userAddress?.districtid || null],
-            subdistrictid: [userAddress?.subdistrictid || null],
-            remark: [userAddress?.remark || null],
-          },
-        ],
+        addressInfo: {
+          location: userAddress?.location || null,
+          housenumber: userAddress?.housenumber || null,
+          villagenumber: userAddress?.villagenumber || null,
+          lane: userAddress?.lane || null,
+          road: userAddress?.road || null,
+          zipcode: userAddress?.zipcode || null,
+          provinceid: userAddress?.provinceid || null,
+          districtid: userAddress?.districtid || null,
+          subdistrictid: userAddress?.subdistrictid || null,
+          remark: userAddress?.remark || null,
+        },
       }),
       approveno: [
         data.approveno,
@@ -462,6 +463,7 @@ export class ImportStudentComponent implements OnInit {
       width: '600px',
       data: {
         ...subjectInfo,
+        disabledAll: true
       },
     });
     dialogRef.afterClosed().subscribe((res) => {
@@ -536,13 +538,15 @@ export class ImportStudentComponent implements OnInit {
 
   next() {
     const checkeddata = this.getCheckedValue();
+    console.log(checkeddata)
     const datainfo = {
       studentlist: checkeddata,
       requestno: this.requestNo,
-      requestid: this.payload.id,
+      requestid: this.payload.requestid,
       pagetype: this.pageType,
       total: this.user.value.length,
-      requestdate: this.requestDate
+      requestdate: this.requestDate,
+      payload: {...this.payload}
     };
     
     localForage.setItem('studentform', datainfo);

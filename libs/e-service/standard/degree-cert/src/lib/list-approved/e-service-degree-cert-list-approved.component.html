@@ -2,19 +2,24 @@
   <span header>รายการใบรับรองปริญญาและประกาศนียบัตรทางการศึกษา</span>
 </ksp-top-nav>
 
-<div class="bg-secondary bg-opacity-10 py-2 px-4 full-height">
+<div class="bg-secondary bg-opacity-10 py-2 px-4 full-height full-width-2">
   <div class="fs-5">รายการใบรับรองปริญญาและประกาศนียบัตรทางการศึกษา</div>
   <div class="bg-white p-3">
-    <ksp-degree-cert-search
+    <ksp-degree-cert-approved-search
       (cleared)="onClear()"
       (searched)="onSearch()"
-    ></ksp-degree-cert-search>
+      [uniUniversityOption]="uniUniversityOption"
+      [degreeLevelOption]="degreeLevelOptions"
+    ></ksp-degree-cert-approved-search>
 
     <br />
 
     <div class="table-responsive">
       <table mat-table [dataSource]="dataSource">
-
+        <ng-container matColumnDef="order">
+          <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+          <td mat-cell *matCellDef="let element">{{ element.order }}</td>
+        </ng-container>
         <ng-container matColumnDef="requestno">
           <th mat-header-cell *matHeaderCellDef style="min-width: 200px;">เลขที่ใบคำขอ</th>
           <td
@@ -38,17 +43,17 @@
         </ng-container>
 
         <ng-container matColumnDef="uniname">
-          <th mat-header-cell *matHeaderCellDef style="min-width: 200px;">สถาบัน / มหาวิทยาลัย</th>
+          <th mat-header-cell *matHeaderCellDef style="min-width: 300px;">สถาบัน / มหาวิทยาลัย</th>
           <td mat-cell *matCellDef="let element">{{ element.uniname }}</td>
         </ng-container>
 
         <ng-container matColumnDef="degreelevel">
-          <th mat-header-cell *matHeaderCellDef style="min-width: 150px;">ระดับปริญญา</th>
-          <td mat-cell *matCellDef="let element">{{ element.degreelevel }}</td>
+          <th mat-header-cell *matHeaderCellDef style="min-width: 250px;">ระดับปริญญา</th>
+          <td mat-cell *matCellDef="let element">{{ element.degreelevelname }}</td>
         </ng-container>
 
         <ng-container matColumnDef="degreename">
-          <th mat-header-cell *matHeaderCellDef style="min-width: 200px;">ชื่อปริญญาและประกาศนียบัตรทางการศึกษา</th>
+          <th mat-header-cell *matHeaderCellDef style="min-width: 250px;">ชื่อปริญญาและประกาศนียบัตรทางการศึกษา</th>
           <td mat-cell *matCellDef="let element">
             {{ element.fulldegreenameth }}
           </td>
@@ -83,9 +88,13 @@
         </ng-container>
 
         <ng-container matColumnDef="history">
-          <th mat-header-cell *matHeaderCellDef style="min-width: 120px;">ประวัติคำขอ</th>
+          <th mat-header-cell *matHeaderCellDef style="min-width: 100px;">ประวัติคำขอ</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.verify }}
+            <i
+              role="button"
+              (click)="viewhistory(element)"
+              class="bi bi-eye text-success fs-5 ms-3"
+            ></i>
           </td>
         </ng-container>
 

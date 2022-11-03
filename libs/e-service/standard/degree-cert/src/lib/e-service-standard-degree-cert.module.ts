@@ -25,7 +25,7 @@ import {
   LicenseCheckComponent,
 } from '@ksp/e-service/ui/license-check';
 import { ReactiveFormsModule } from '@angular/forms';
-import { DegreeCertSearchComponent } from '@ksp/shared/search';
+import { DegreeCertApprovedSearchComponent, DegreeCertSearchComponent } from '@ksp/shared/search';
 import { RouterModule } from '@angular/router';
 import { FormMeetingRecordComponent } from '@ksp/e-service/ethics/form';
 import { EServiceDegreeCertApprovedListComponent } from './list-approved/e-service-degree-cert-list-approved.component';
@@ -62,6 +62,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ReactiveFormsModule,
     FormMeetingRecordComponent,
     DegreeCertSearchComponent,
+    DegreeCertApprovedSearchComponent,
     MatDatepickerModule,
     FormAddressTableComponent,
     MatPaginatorModule

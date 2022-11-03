@@ -39,6 +39,7 @@ export class FormAddressTableComponent
   subDistrictList: Array<any> = [];
 
   @Input() addressData: any = {};
+  @Input() disabledAll = false;
 
   constructor(
     private fb: FormBuilder,

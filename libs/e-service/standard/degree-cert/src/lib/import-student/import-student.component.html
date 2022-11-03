@@ -391,23 +391,16 @@
                     autocomplete="off"
                     class="form-control form-date"
                     formControlName="admissiondate"
-                    [readonly]="pageType === 'graduateList'"
+                    readonly
                   />
                   <mat-datepicker-toggle
                     class="button-date"
                     matSuffix
                     [for]="picker"
+                    disabled
                   ></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
                 </div>
-                <!-- <input
-                  class="form-control"
-                  style="width: 150px"
-                  pInputText
-                  type="date"
-                  formControlName="admissiondate"
-                  [readonly]="pageType === 'graduateList'"
-                /> -->
               </td>
               <td class="p-2 text-nowrap">
                 <input
@@ -418,7 +411,7 @@
                   maxlength="13"
                   type="text"
                   formControlName="idcardno"
-                  [readonly]="pageType === 'graduateList'"
+                  readonly
                 />
               </td>
               <td class="p-2 text-nowrap">
@@ -429,7 +422,7 @@
                   #passport
                   type="text"
                   formControlName="passportno"
-                  [readonly]="pageType === 'graduateList'"
+                  readonly
                 />
               </td>
 
@@ -438,6 +431,7 @@
                   class="form-select"
                   style="width: 150px"
                   formControlName="nationality"
+                  [attr.disabled]="true"
                 >
                   <option value="null" selected hidden disabled>
                     กรุณาเลือก
@@ -454,7 +448,7 @@
               <td class="p-2 text-nowrap">
                 <select
                   class="form-select"
-                  [attr.disabled]="pageType === 'graduateList' ? '' : null"
+                  [attr.disabled]="true"
                   formControlName="prefixth"
                 >
                   <option value="null" selected hidden disabled>
@@ -476,7 +470,7 @@
                   pInputText
                   type="text"
                   formControlName="firstnameth"
-                  [readonly]="pageType === 'graduateList'"
+                  readonly
                 />
               </td>
               <td class="p-2 text-nowrap">
@@ -486,13 +480,13 @@
                   pInputText
                   type="text"
                   formControlName="lastnameth"
-                  [readonly]="pageType === 'graduateList'"
+                  readonly
                 />
               </td>
               <td class="p-2 text-nowrap">
                 <select
                   class="form-select"
-                  [attr.disabled]="pageType === 'graduateList' ? '' : null"
+                  [attr.disabled]="true"
                   formControlName="prefixen"
                 >
                   <option value="null" selected hidden disabled>
@@ -514,7 +508,7 @@
                   pInputText
                   type="text"
                   formControlName="firstnameen"
-                  [readonly]="pageType === 'graduateList'"
+                  readonly
                 />
               </td>
 
@@ -525,7 +519,7 @@
                   pInputText
                   type="text"
                   formControlName="middlenameen"
-                  [readonly]="pageType === 'graduateList'"
+                  readonly
                 />
               </td>
 
@@ -536,7 +530,7 @@
                   pInputText
                   type="text"
                   formControlName="lastnameen"
-                  [readonly]="pageType === 'graduateList'"
+                  readonly
                 />
               </td>
 
@@ -548,7 +542,7 @@
                   type="text"
                   maxlength="10"
                   formControlName="phone"
-                  [readonly]="pageType === 'graduateList'"
+                  readonly
                 />
               </td>
               <td class="p-2 text-nowrap">
@@ -559,12 +553,13 @@
                     autocomplete="off"
                     class="form-control form-date"
                     formControlName="birthdate"
-                    [readonly]="pageType === 'graduateList'"
+                    readonly
                   />
                   <mat-datepicker-toggle
                     class="button-date"
                     matSuffix
                     [for]="pickerbirthdate"
+                    disabled
                   ></mat-datepicker-toggle>
                   <mat-datepicker #pickerbirthdate></mat-datepicker>
                 </div>
@@ -617,6 +612,7 @@
                 <form [formGroup]="control.controls.address">
                   <ksp-form-address-table
                     formControlName="addressInfo"
+                    [disabledAll]="true"
                   ></ksp-form-address-table>
                 </form>
               </td>
