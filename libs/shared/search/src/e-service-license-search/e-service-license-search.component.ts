@@ -7,7 +7,7 @@ import {
   SchRequestStatus,
 } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
-import { selfOccupyList } from '@ksp/shared/constant';
+import { selfOccupyList, SelfRequestProcess } from '@ksp/shared/constant';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
@@ -43,6 +43,19 @@ export class EServiceLicenseSearchComponent extends KspFormBaseComponent {
         this.onChange(value);
         this.onTouched();
       })
+    );
+
+    this.processList = SelfRequestProcess.filter((i) => {
+      return `${i.requestType}` === '1';
+    });
+
+    this.form.controls.currentprocess.valueChanges.subscribe(
+      (currentProcess) => {
+        this.statusList = this.processList.find(
+          (p) => `${p.processId}` === currentProcess
+        )?.status;
+        //console.log('status list = ', this.statusList);
+      }
     );
   }
 }

@@ -13,8 +13,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import localForage from 'localforage';
 import { KspApprovePersistData } from '../e-temp-license-detail/e-temp-license-detail.component';
 import { Location } from '@angular/common';
-import { getCookie } from '@ksp/shared/utility';
-import { IfStmt } from '@angular/compiler';
+import { checkStatus, getCookie } from '@ksp/shared/utility';
 
 @UntilDestroy()
 @Component({
@@ -24,10 +23,12 @@ import { IfStmt } from '@angular/compiler';
 })
 export class TempLicenseCheckConfirmComponent implements OnInit {
   requestId!: number;
+  checkStatus = checkStatus;
   saveData = new KspApprovePersistData();
   targetProcess!: number | null;
   targetStatus!: number | null;
   userId = `${getCookie('userId')}`;
+  approveHistory: any[] = [];
 
   form = this.fb.group({
     approvement: [],
@@ -47,32 +48,26 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
     /* this.form.valueChanges.subscribe((res) => {
       console.log(res.approvement);
     }); */
+    this.checkRequestId();
 
     localForage.getItem('checkRequestData').then((res: any) => {
       this.saveData = res;
+      //console.log('save data = ', this.saveData);
       if (this.saveData.requestData.id)
         this.getApproveHistory(this.saveData.requestData.id);
       //console.log('save data = ', this.saveData);
     });
-    this.checkRequestId();
   }
 
-  getLabel() {
-    const req = this.saveData.requestData;
-    if (req.requesttype === '6') {
-      return `ขอรับรองคุณวุฒิการศึกษาเพื่อใช้ในการขอรับใบอนุญาตประกอบวิชาชีพ`;
-    } else {
-      const message = `ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ`;
-      if (req.careertype === '1') {
-        return message + 'ครู';
-      } else if (req.careertype === '2') {
-        return message + 'ผู้บริหารสถานศึกษา';
-      } else if (req.careertype === '5') {
-        return message + 'ชาวต่างชาติ';
-      } else {
-        return message;
-      }
-    }
+  getApproveHistory(requestid: string) {
+    this.eRequestService.getApproveHistory(requestid).subscribe((res) => {
+      //console.log('approve history = ', res);
+      this.approveHistory = res;
+      this.approveHistory = this.approveHistory.map((h: any) => {
+        return { ...h, ...{ detail: JSON.parse(h.detail) } };
+      });
+      console.log('approve history after= ', this.approveHistory);
+    });
   }
 
   checkApproveResult(input: approveResult) {
@@ -91,8 +86,13 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
           this.targetStatus = 3;
         } else if (input.shouldForward === '2') {
           //ส่งตรวจสอบลำดับต่อไป
-          this.targetProcess = Number(req.process) + 1;
-          this.targetStatus = 1;
+          if (req.process === '2') {
+            this.targetProcess = 4;
+            this.targetStatus = 1;
+          } else {
+            this.targetProcess = Number(req.process) + 1;
+            this.targetStatus = 1;
+          }
         } else if (input.shouldForward === '4') {
           //ส่งเรื่องพิจารณา
           this.targetProcess = 5;
@@ -100,12 +100,15 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
         }
       } else if (input.result === '2') {
         //ขอแก้ไข / เพิ่มเติม
+        console.log('ขอแก้ไข / เพิ่มเติม  req.process =', req.process);
         this.targetProcess = Number(req.process) + 1;
         this.targetStatus = 2;
       } else if (input.result === '3') {
         if (req.process === '2') {
+          console.log('a process = ', req.process);
           this.targetProcess = Number(req.process) + 1;
         } else {
+          console.log('b process = ', req.process);
           this.targetProcess = Number(req.process);
         }
         if (input.shouldForward === '3') {
@@ -151,15 +154,23 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
     }
   }
 
+  mapCheckResult(result: string) {
+    if (result === '1') return 'ครบถ้วน และถูกต้อง';
+    if (result === '2') return 'ขอแก้ไข / เพิ่มเติม';
+    if (result === '3') return 'ขาดคุณสมบัติ';
+    else return '';
+  }
+
   checkRequest() {
     this.checkApproveResult(<any>this.form.value.approvement);
     //console.log('save data = ', this.saveData);
     const form: any = this.form.controls.approvement.value;
-    //console.log('form = ', form);
+    console.log('form  check= ', form);
     const detail = {
       returndate: form.returndate,
       reason: form.reason,
-      checkresult: this.saveData.checkDetail,
+      checkresult: form.result,
+      checkdetail: this.saveData.checkDetail,
     };
 
     const payload: KspApprovePayload = {
@@ -167,7 +178,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
       process: `${this.targetProcess}`,
       status: `${this.targetStatus}`,
       detail: JSON.stringify(detail),
-      systemtype: '2', // school
+      systemtype: '4', // e-service
       userid: this.userId,
       paymentstatus: null,
     };
@@ -194,20 +205,14 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
       process: considerProcess,
       status: `${form.result}`,
       detail: JSON.stringify(this.saveData.checkDetail),
-      systemtype: '2',
+      systemtype: '4', // e-service
       userid: this.userId,
       paymentstatus: null,
     };
-    console.log('payload = ', payload);
+    //console.log('payload = ', payload);
 
-    this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
+    this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
       this.completeDialog();
-    });
-  }
-
-  getApproveHistory(requestid: string) {
-    this.eRequestService.getApproveHistory(requestid).subscribe((res) => {
-      //console.log('list = ', res);
     });
   }
 
@@ -215,6 +220,24 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
     this.route.paramMap.pipe(untilDestroyed(this)).subscribe((params) => {
       this.requestId = Number(params.get('id'));
     });
+  }
+
+  getLabel() {
+    const req = this.saveData.requestData;
+    if (req.requesttype === '6') {
+      return `ขอรับรองคุณวุฒิการศึกษาเพื่อใช้ในการขอรับใบอนุญาตประกอบวิชาชีพ`;
+    } else {
+      const message = `ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ`;
+      if (req.careertype === '1') {
+        return message + 'ครู';
+      } else if (req.careertype === '2') {
+        return message + 'ผู้บริหารสถานศึกษา';
+      } else if (req.careertype === '5') {
+        return message + 'ชาวต่างชาติ';
+      } else {
+        return message;
+      }
+    }
   }
 
   navigateBack() {
@@ -231,7 +254,6 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   }
 
   confirmDialog() {
-    console.log('confirm 1 ');
     const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยืนยันข้อมูล
@@ -242,7 +264,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
     dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         if (this.saveData.requestData.requesttype === '3') {
-          console.log('ใบคำขอชั่วคราว = ');
+          //console.log('ใบคำขอชั่วคราว = ');
           if (this.saveData.requestData.process === '5') {
             this.considerRequest();
           } else {
@@ -250,12 +272,10 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
           }
         }
         if (this.saveData.requestData.requesttype === '6') {
-          console.log('ใบคำขอรับรองคุณวุฒิ = ');
+          //console.log('ใบคำขอรับรองคุณวุฒิ = ');
           if (this.saveData.requestData.process === '3') {
-            console.log('พิจารณา xx = ');
             this.considerRequest();
           } else {
-            console.log('ตวรจสอบ xx = ');
             this.checkRequest();
           }
         }

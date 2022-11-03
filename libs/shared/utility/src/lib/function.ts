@@ -125,6 +125,7 @@ export function checkStatus(
   const status = process?.status.find((s) => {
     return s.id == statusId;
   });
+  //console.log('status = ', status);
   return status;
 }
 

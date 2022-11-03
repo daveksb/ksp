@@ -1,17 +1,22 @@
-<ksp-top-nav><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span><span subHeader></span></ksp-top-nav>
+<ksp-top-nav
+  ><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span><span subHeader></span
+></ksp-top-nav>
 
 <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
   <div class="box-header">รายละเอียดใบคำขอใบอนุญาตประกอบวิชาชีพ</div>
   <form [formGroup]="form">
     <div class="bg-white px-4 py-2">
       <ksp-request-header-info
-        [requestDate]="'requestDate'"
-        [requestNumber]="'requestNo'"></ksp-request-header-info>
+        [requestDate]="requestData.createdate"
+        [requestNumber]="requestData.requestno"
+      ></ksp-request-header-info>
       <hr />
       <div class="row align-items-center bg-light py-2 mx-0 mb-3">
         <div class="col-3">
           <self-service-form-upload-image
-            [isEditMode]="false"></self-service-form-upload-image>
+            [imgSrc]="myImage"
+            [isEditMode]="false"
+          ></self-service-form-upload-image>
         </div>
         <div class="col-9">
           <ksp-form-user-info
@@ -20,14 +25,17 @@
             [mode]="'view'"
             [isDarkMode]="false"
             [prefixList]="prefixList$ | async"
-            [nationList]="nationalitys$ | async"></ksp-form-user-info>
+            [nationList]="nationalitys$ | async"
+          ></ksp-form-user-info>
         </div>
       </div>
 
       <mat-tab-group
         class="tab-group mb-3"
         animationDuration="0ms"
-        [selectedIndex]="0">
+        (selectedTabChange)="tabChanged($event)"
+        [selectedIndex]="0"
+      >
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address
             formControlName="address1"
@@ -35,7 +43,8 @@
             [isDarkMode]="false"
             [provinces]="provinces$ | async"
             [amphurs]="amphurs1$ | async"
-            [tumbols]="tumbols1$ | async">
+            [tumbols]="tumbols1$ | async"
+          >
             <span>ที่อยู่ทะเบียนบ้าน</span>
           </ksp-form-address>
           <hr />
@@ -45,13 +54,14 @@
             [isDarkMode]="false"
             [provinces]="provinces$ | async"
             [amphurs]="amphurs2$ | async"
-            [tumbols]="tumbols2$ | async">
+            [tumbols]="tumbols2$ | async"
+          >
             <span class="me-1">ที่อยู่ที่ติดต่อได้สะดวก</span>
             <span class="text-danger fs-6">*กรุณากรอกข้อมูลตำบล,อำเภอ</span>
-            <div class="d-flex align-items-center">
+            <!-- <div class="d-flex align-items-center">
               <input type="checkbox" class="me-2" />
               <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
-            </div>
+            </div> -->
           </ksp-form-address>
         </mat-tab>
 
@@ -61,7 +71,9 @@
             [mode]="'view'"
             [provinces]="provinces$ | async"
             [amphurs]="amphurs3$ | async"
-            [tumbols]="tumbols3$ | async">
+            [tumbols]="tumbols3$ | async"
+            [bureaus]="bureau$ | async"
+          >
           </self-service-form-user-workplace>
         </mat-tab>
 
@@ -70,12 +82,14 @@
             [mode]="'view'"
             [countries]="countries$ | async"
             formControlName="education"
-            [educationTypes]="educationTypes"></self-service-form-user-education>
+            [educationTypes]="educationTypes"
+          ></self-service-form-user-education>
           <hr />
           <ksp-form-attachment
             [mode]="'view'"
             [title]="'กรุณาแนบหลักฐานประกอบวุฒิทางการศึกษา'"
-            [groups]="eduFiles"></ksp-form-attachment>
+            [groups]="eduFiles"
+          ></ksp-form-attachment>
         </mat-tab>
 
         <mat-tab label="ข้อมูลประสบการณ์วิชาชีพ">
@@ -84,26 +98,31 @@
             [mode]="'view'"
             [countries]="countries2$ | async"
             [licenses]="licenses$ | async"
-            formControlName="experience"></self-service-form-user-experience>
+            formControlName="experience"
+          ></self-service-form-user-experience>
           <self-service-school-manager-experience
             *ngIf="educationTypes === 'schManager'"
             [mode]="'view'"
-            formControlName="experience"></self-service-school-manager-experience>
+            formControlName="experience"
+          ></self-service-school-manager-experience>
           <self-service-education-manager-experience
             *ngIf="educationTypes === 'eduManager'"
             [mode]="'view'"
-            formControlName="experience">
+            formControlName="experience"
+          >
           </self-service-education-manager-experience>
           <self-service-study-supervision-experience
             *ngIf="educationTypes === 'supervision'"
             [mode]="'view'"
-            formControlName="experience">
+            formControlName="experience"
+          >
           </self-service-study-supervision-experience>
           <hr />
           <ksp-form-attachment
             [mode]="'view'"
             [title]="'กรุณาแนบหลักฐานประกอบการฝึกประสบการณ์วิชาชีพ'"
-            [groups]="experienceFiles"></ksp-form-attachment>
+            [groups]="experienceFiles"
+          ></ksp-form-attachment>
         </mat-tab>
 
         <mat-tab label="ข้อมูลผลการประเมินสมรรถนะ">
@@ -111,18 +130,32 @@
         </mat-tab>
       </mat-tab-group>
     </div>
-  </form>
 
-  <div [formGroup]="form2" class="bg-white px-4 py-3 mt-3">
-    <e-service-license-check
-      formControlName="verifyResult"
-      [headerTitle]="approveTitles"
-      [choices]="approveChoices"></e-service-license-check>
-  </div>
+    <ng-container
+      formArrayName="checkResult"
+      *ngFor="let c of checkResultFormArray.controls; let i = index"
+    >
+      <div
+        class="bg-white px-3 py-2 mt-3"
+        [ngClass]="{ hide: (selectedTab.index || 0) !== i }"
+      >
+        <e-service-license-check
+          [choices]="verifyChoice"
+          [formControlName]="i"
+        ></e-service-license-check>
+      </div>
+    </ng-container>
+  </form>
 </div>
 
 <div class="sticky-bottom border px-2">
   <ksp-bottom-nav
     [showCenterButtons]="true"
-    [isFirstPage]="true"></ksp-bottom-nav>
+    [isFirstPage]="true"
+    [disableNext]="false"
+    (nextClicked)="next()"
+    (cancelClicked)="cancel()"
+  ></ksp-bottom-nav>
 </div>
+
+[disableNext]="!checkResultFormArray.valid"

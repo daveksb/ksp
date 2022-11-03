@@ -7,7 +7,6 @@ import { GeneralInfoService } from '@ksp/shared/service';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 import localForage from 'localforage';
-import { validatorMessages } from '@ksp/shared/utility';
 
 @UntilDestroy()
 @Component({
@@ -61,7 +60,7 @@ export class RegisterRequesterComponent implements OnInit {
       } อำเภอ ${res.amphurname} จังหวัด ${res.provincename}`;
     });
 
-    localForage.getItem('registerUserInfoFormValue').then((res: any) => {
+    localForage.getItem('registerUserInfo').then((res: any) => {
       if (res) this.form.controls.requester.patchValue(res);
     });
   }
@@ -81,7 +80,7 @@ export class RegisterRequesterComponent implements OnInit {
       schoolid: this.school.schoolId,
     };
 
-    localForage.setItem('registerUserInfoFormValue', userInfo);
+    localForage.setItem('registerUserInfo', userInfo);
     this.router.navigate(['/register', 'coordinator']);
   }
 
