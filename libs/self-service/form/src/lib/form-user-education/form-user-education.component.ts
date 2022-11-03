@@ -1,7 +1,6 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { DynamicComponentDirective } from '@ksp/shared/directive';
-import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
+import { Country, KspFormBaseComponent, ListData } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { skip } from 'rxjs';
 
@@ -21,7 +20,7 @@ export class FormUserEducationComponent
     | 'eduManager'
     | 'supervision' = 'teacher';
 
-  @Input() countries: any[] = [];
+  @Input() countries: Country[] | null = [];
   @Input() attachFiles!: any[];
   @Input() uniqueTimestamp = '';
 

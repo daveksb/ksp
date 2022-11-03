@@ -1,7 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import {
+  Amphur,
+  KspFormBaseComponent,
+  Province,
+  Tambol,
+} from '@ksp/shared/interface';
 import { UniversitySearchComponent } from '@ksp/shared/search';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -38,9 +43,9 @@ export class FormUserWorkplaceComponent
 {
   @Input() showContactForm = false;
   @Input() isDarkMode = false;
-  @Input() provinces: any[] = [];
-  @Input() amphurs: any[] = [];
-  @Input() tumbols: any[] = [];
+  @Input() provinces: Province[] | null = [];
+  @Input() amphurs: Amphur[] | null = [];
+  @Input() tumbols: Tambol[] | null = [];
   @Input() bureaus: any[] = [];
   @Input() showNotRequire = false;
   @Output() provinceChanged = new EventEmitter<any>();
@@ -119,7 +124,12 @@ export class FormUserWorkplaceComponent
 
   updatePostcode(evt: any) {
     const tumbolCode = evt.target?.value;
-    const postCode = this.tumbols.find((t) => t.tambolCode === tumbolCode);
-    this.form.controls.postcode.patchValue(postCode.tambolPostcode);
+    if (this.tumbols && this.tumbols.length) {
+      const postCode: any = this.tumbols.find(
+        (t) => t.tambolCode === tumbolCode
+      );
+
+      this.form.controls.postcode.patchValue(postCode.tambolPostcode);
+    }
   }
 }
