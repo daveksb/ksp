@@ -14,7 +14,7 @@
   <div class="row">
     <div class="col-sm-12 mb-1">
       <label class="form-label">อาคาร/สถานที่</label>
-      <input class="form-control" type="text" formControlName="location" />
+      <input class="form-control" type="text" formControlName="location" [readonly]="disabledAll" />
     </div>
   </div>
 
@@ -23,19 +23,19 @@
       <label class="form-label"
         >บ้านเลขที่ <span class="text-danger"> *</span>
       </label>
-      <input class="form-control" type="text" formControlName="housenumber" />
+      <input class="form-control" type="text" formControlName="housenumber" [readonly]="disabledAll" />
     </div>
     <div class="col-sm-4 col-md-2 mb-1">
       <label class="form-label">หมู่ที่</label>
-      <input class="form-control" type="text" formControlName="villagenumber" />
+      <input class="form-control" type="text" formControlName="villagenumber" [readonly]="disabledAll" />
     </div>
     <div class="col-sm-6 col-md-4 mb-1">
       <label class="form-label">ซอย</label>
-      <input class="form-control" type="text" formControlName="lane" />
+      <input class="form-control" type="text" formControlName="lane" [readonly]="disabledAll" />
     </div>
     <div class="col-sm-6 col-md-4 mb-1">
       <label class="form-label">ถนน</label>
-      <input class="form-control" type="text" formControlName="road" />
+      <input class="form-control" type="text" formControlName="road" [readonly]="disabledAll" />
     </div>
   </div>
 
@@ -44,7 +44,7 @@
       <label class="form-label"
         >รหัสไปรษณีย์<span class="text-danger"> *</span>
       </label>
-      <input class="form-control" type="text" formControlName="zipcode" />
+      <input class="form-control" type="text" formControlName="zipcode" [readonly]="disabledAll" />
     </div>
     <div class="col-sm-4 col-md-4 mb-1">
       <label class="form-label"
@@ -54,6 +54,7 @@
         class="form-select"
         formControlName="provinceid"
         (change)="getDistrict(form.value.provinceid)"
+        [attr.disabled]="disabledAll"
       >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option
@@ -72,6 +73,7 @@
         class="form-select"
         formControlName="districtid"
         (change)="getSubdistrict(form.value.districtid)"
+        [attr.disabled]="disabledAll"
       >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option
@@ -90,6 +92,7 @@
         class="form-select"
         formControlName="subdistrictid"
         (change)="selectSubdistrict($event)"
+        [attr.disabled]="disabledAll"
       >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option
@@ -108,7 +111,8 @@
       <textarea
         rows="3"
         class="form-control"
-        formControlName="remark"
+        formControlName="remark" 
+        [readonly]="disabledAll"
       ></textarea>
     </div>
   </div>

@@ -21,6 +21,7 @@ import {
 })
 export class StudentListSubjectComponent {
   subjectData: any;
+  disabledField = false;
   constructor(
     private fb: FormBuilder,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
@@ -28,6 +29,9 @@ export class StudentListSubjectComponent {
   ) {
     if (this.data) {
       this.subjectData = this.data;
+      if (this.data.disabledAll) {
+        this.disabledField = true;
+      }
     }
     console.log(this.subjectData);
     this.dialogRef.backdropClick().subscribe(() => {

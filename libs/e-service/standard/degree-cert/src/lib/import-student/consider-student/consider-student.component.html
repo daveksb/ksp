@@ -52,8 +52,9 @@
                 <input
                   class="form-check-input my-2 radio"
                   type="radio"
-                  value="3"
+                  value="1"
                   formControlName="result"
+                  (change)="changeprocess($event)"
                 />
                 <label class="ms-4"> ครบถ้วนและถูกต้อง </label>
               </div>
@@ -66,6 +67,7 @@
                     type="radio"
                     value="2"
                     formControlName="result"
+                    (change)="changeprocess($event)"
                   />
                   <label class="ms-4"> ขอแก้ไข / เพิ่มเติม </label>
                 </div>
@@ -97,7 +99,7 @@
                 <input
                   class="form-check-input my-2 radio"
                   type="radio"
-                  value="2"
+                  value="1"
                   formControlName="nextprocess"
                 />
                 <label class="ms-4"> พิจารณา </label>
@@ -109,7 +111,7 @@
                   <input
                     class="form-check-input my-2 radio"
                     type="radio"
-                    value="6"
+                    value="2"
                     formControlName="nextprocess"
                   />
                   <label class="ms-4"> ยกเลิก </label>

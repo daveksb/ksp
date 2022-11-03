@@ -59,6 +59,7 @@ export class RetiredAttachmentComponent implements OnInit {
     });
     localForage.getItem('userSelectedData').then((res: any) => {
       if (res) {
+        console.log(res)
         this.userInfo = res;
       }
     });
@@ -99,6 +100,17 @@ export class RetiredAttachmentComponent implements OnInit {
             const fileUpload = mapMultiFileInfo(this.retiredFiles);
             const payload = {
               ...this.userInfo,
+              educationoccupy: JSON.stringify({
+                schoolid: this.userInfo.uniid,
+                uniid: this.userInfo.uniid,
+                unitype: this.userInfo.unitype,
+                institution: this.userInfo.name,
+                affiliation: this.userInfo.unitypename,
+                unicode: this.userInfo.this.unicode,
+                uniname: this.userInfo.name,
+                unitypename: this.userInfo.unitypename,
+                permission: this.userInfo.permissionright
+              }),
               coordinatorinfo: JSON.stringify(this.form.value.coordinator),
               fileinfo: JSON.stringify({ fileUpload }),
               reasoninfo: JSON.stringify(this.reasoninfo),

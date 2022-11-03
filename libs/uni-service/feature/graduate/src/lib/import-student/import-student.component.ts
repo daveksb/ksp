@@ -151,7 +151,7 @@ export class ImportStudentComponent implements OnInit {
               data.unidegreecertid == this.courseData?.courseDetail.id &&
               data.planyear == this.payload.planyear &&
               data.plancalendaryear == this.payload.plancalendaryear &&
-              data.admissionlist
+              data.admissionlist && data.process == '1'
             );
           });
           if (findResponse && findResponse.process == '1') {
@@ -312,7 +312,7 @@ export class ImportStudentComponent implements OnInit {
       ],
       middlenameen: [
         '',
-        [Validators.required, Validators.pattern(nameEnPattern)],
+        [Validators.pattern(nameEnPattern)],
       ],
       lastnameen: [
         '',
@@ -393,7 +393,7 @@ export class ImportStudentComponent implements OnInit {
       middlenameen: [
         data.middlenameen,
         this.pageType == 'admissionList'
-          ? [Validators.required, Validators.pattern(nameEnPattern)]
+          ? [Validators.pattern(nameEnPattern)]
           : undefined,
       ],
       lastnameen: [
@@ -484,7 +484,7 @@ export class ImportStudentComponent implements OnInit {
       ],
       middlenameen: [
         data.middlenameen,
-        [Validators.required, Validators.pattern(nameEnPattern)],
+        [Validators.pattern(nameEnPattern)],
       ],
       lastnameen: [
         data.lastnameen,
