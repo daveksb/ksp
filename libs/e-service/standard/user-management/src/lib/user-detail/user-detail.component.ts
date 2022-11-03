@@ -101,11 +101,11 @@ export class UserDetailComponent implements OnInit {
         );
       }
       const education = parseJson(res.educationoccupy);
-      this.requestData.uniid = education.uniid || null;
-      this.requestData.bureauname = education.affiliation || '';
-      this.requestData.schoolname = education.uniname || '';
+      this.requestData.uniid = education?.uniid || null;
+      this.requestData.bureauname = education?.affiliation || '';
+      this.requestData.schoolname = education?.uniname || '';
       // this.requestData.schooladdress = education;
-      this.permissionRight = education.permission || null;
+      this.permissionRight = education?.permission || null;
       this.requestType = this.requestData.requesttype ? parseInt(this.requestData.requesttype) : 0;
 
       res.status === '1' ? (this.mode = 'edit') : (this.mode = 'view');
