@@ -14,7 +14,7 @@ import {
   UniInfoService,
   UniRequestService,
 } from '@ksp/shared/service';
-import { getCookie } from '@ksp/shared/utility';
+import { formatDate, getCookie } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
@@ -72,7 +72,14 @@ export class ForeignStudentIdComponent {
   cancel() {
     this.router.navigate(['/', 'home']);
   }
-
+  getDefaultReq(value:any):any{
+    const payload = {...value};
+    payload.birthdate = value?.birthdate ? formatDate(new Date(value?.birthdate).toISOString()) : null
+    payload.passportenddate = value?.passportenddate ? formatDate(new Date(value?.passportenddate).toISOString()) : null
+    payload.passportstartdate = value?.passportstartdate ? formatDate(new Date(value?.passportstartdate).toISOString()) : null
+    payload.careertype = "5"
+    return payload;
+  }
   save() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
@@ -90,7 +97,7 @@ export class ForeignStudentIdComponent {
       .pipe(
         switchMap((res) => {
           if (res) {
-            const studentInfo = this.form.value.foreignStudent as any;
+            const studentInfo = this.getDefaultReq(this.form.value.foreignStudent)
             studentInfo.ref1 = '3';
             studentInfo.ref2 = '04';
             studentInfo.ref3 = '5';
