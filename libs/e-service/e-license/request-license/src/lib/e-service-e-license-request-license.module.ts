@@ -14,6 +14,7 @@ import {
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
 import {
+  EServiceLicenseCreateGroupSearchComponent,
   EServiceLicenseGroupSearchComponent,
   EServiceLicenseSearchComponent,
   EServiceRequestSearchComponent,
@@ -98,6 +99,7 @@ export const routes: Route[] = [
     ValidateKspRequestComponent,
     ConsiderKspRequestComponent,
     EServiceLicenseGroupSearchComponent,
+    EServiceLicenseCreateGroupSearchComponent,
   ],
   declarations: [
     RequestLicenseApproveListComponent,
