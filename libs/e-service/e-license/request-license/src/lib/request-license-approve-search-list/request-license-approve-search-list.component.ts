@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ksp-request-license-approve-search-list',
@@ -22,7 +23,7 @@ export class RequestLicenseApproveSearchListComponent implements OnInit {
   ];
   dataSource = new MatTableDataSource<any>();
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.dataSource.data = [
@@ -55,5 +56,9 @@ export class RequestLicenseApproveSearchListComponent implements OnInit {
         guaranteeDate: '01 มิ.ย. 2564',
       },
     ];
+  }
+
+  createGroup() {
+    this.router.navigate(['/request-license', 'create-group-list']);
   }
 }

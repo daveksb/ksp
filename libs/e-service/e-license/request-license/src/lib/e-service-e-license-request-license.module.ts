@@ -31,6 +31,7 @@ import {
 } from '@ksp/e-service/e-license/approve-ksp-request';
 import { RequestLicenseApproveCreateGroupComponent } from './request-license-approve-create-group/request-license-approve-create-group.component';
 import { RequestLicenseApproveSearchListComponent } from './request-license-approve-search-list/request-license-approve-search-list.component';
+import { RequestLicenseApproveCreateGroupListComponent } from './request-license-approve-create-group-list/request-license-approve-create-group-list.component';
 
 export const routes: Route[] = [
   {
@@ -66,6 +67,10 @@ export const routes: Route[] = [
         path: 'search-list',
         component: RequestLicenseApproveSearchListComponent,
       },
+      {
+        path: 'create-group-list',
+        component: RequestLicenseApproveCreateGroupListComponent,
+      },
     ],
   },
 ];
@@ -100,6 +105,7 @@ export const routes: Route[] = [
     RequestLicenseApproveConfirmComponent,
     RequestLicenseApproveCreateGroupComponent,
     RequestLicenseApproveSearchListComponent,
+    RequestLicenseApproveCreateGroupListComponent,
   ],
 })
 export class EServiceELicenseRequestLicenseModule {}
