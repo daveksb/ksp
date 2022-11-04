@@ -33,6 +33,7 @@ import {
 import { RequestLicenseApproveCreateGroupComponent } from './request-license-approve-create-group/request-license-approve-create-group.component';
 import { RequestLicenseApproveSearchListComponent } from './request-license-approve-search-list/request-license-approve-search-list.component';
 import { RequestLicenseApproveCreateGroupListComponent } from './request-license-approve-create-group-list/request-license-approve-create-group-list.component';
+import { RequestLicenseApproveGuarunteeComponent } from './request-license-approve-guaruntee/request-license-approve-guaruntee.component';
 
 export const routes: Route[] = [
   {
@@ -72,6 +73,14 @@ export const routes: Route[] = [
         path: 'create-group-list',
         component: RequestLicenseApproveCreateGroupListComponent,
       },
+      {
+        path: 'guarantee',
+        component: RequestLicenseApproveSearchListComponent,
+      },
+      {
+        path: 'guarantee-confirm',
+        component: RequestLicenseApproveGuarunteeComponent,
+      },
     ],
   },
 ];
@@ -108,6 +117,7 @@ export const routes: Route[] = [
     RequestLicenseApproveCreateGroupComponent,
     RequestLicenseApproveSearchListComponent,
     RequestLicenseApproveCreateGroupListComponent,
+    RequestLicenseApproveGuarunteeComponent,
   ],
 })
 export class EServiceELicenseRequestLicenseModule {}

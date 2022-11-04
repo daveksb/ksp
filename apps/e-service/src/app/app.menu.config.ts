@@ -26,6 +26,10 @@ export const eLicenseMenu: MenuConfig[] = [
         path: '/request-license/search-list',
         label: 'จัดทำบัญชีรายชื่อและนำเสนอขอใบอนุญาตประกอบวิชาชีพ',
       },
+      {
+        path: '/request-license/guarantee',
+        label: 'รับรองใบอนุญาตประกอบวิชาขีพ',
+      },
     ],
   },
   {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'ksp-request-license-approve-search-list',
@@ -22,8 +22,9 @@ export class RequestLicenseApproveSearchListComponent implements OnInit {
     'guaranteeDate',
   ];
   dataSource = new MatTableDataSource<any>();
+  mode: 'create' | 'guarantee' = 'create';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.dataSource.data = [
@@ -56,9 +57,19 @@ export class RequestLicenseApproveSearchListComponent implements OnInit {
         guaranteeDate: '01 มิ.ย. 2564',
       },
     ];
+
+    this.route.url.subscribe((url) => {
+      if (url[0].path === 'guarantee') {
+        this.mode = 'guarantee';
+      }
+    });
   }
 
   createGroup() {
     this.router.navigate(['/request-license', 'create-group-list']);
+  }
+
+  guarantee() {
+    this.router.navigate(['/request-license', 'guarantee-confirm']);
   }
 }
